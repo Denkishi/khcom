@@ -55,13 +55,19 @@ u8 gUnk_02034ADA[6];
 void func_0809D124(PremiumCardEffectWork* w);
 void func_0809D1B0(PremiumCardEffectWork* w);
 void func_0809D160(PremiumCardEffectWork* w);
+
 #ifdef VERSION_JP
-extern u8 gUnkJp_09009748[];
-extern u8 gUnkJp_0900974C[];
+const u8 gUnkJp_09009748[] = "__";
+
+const u8 gUnkJp_0900974C[] = "________________";
+#elif defined(VERSION_EU)
+const u8 gUnkEu_090CF648[5] = { '_', '_', '_', '_', 0 };
+
+const u8 gUnkEu_090CF64D[2] = { 0, 0 };
+#else
+const u16 gUnk_090362A4[23] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
 #endif
-#ifdef VERSION_EU
-extern u8 gUnkEu_090CF64D[];
-#endif
+
 void CardName_0(CardNameWork* w) {
     UnkStruct_0809C534* q = gCardListWork->selectedCard;
     UnkStruct_080038C8* pal;
@@ -85,7 +91,7 @@ void CardName_0(CardNameWork* w) {
     w->textSlotCount3 = LoadTextSlots((u16*)gUnkJp_09009748, w->textSlots3);
     w->textSlotCount2 = LoadTextSlots((u16*)gUnkJp_0900974C, w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots((u16*)&gUnk_09036278[22], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots((u16*)gUnk_090362A4, w->textSlots2);
 #endif
 #endif
 #ifndef VERSION_JP
@@ -105,7 +111,7 @@ void CardName_0(CardNameWork* w) {
         w->unk_222 = v;
         break;
     case 1:
-        w->textSlotCount3 = LoadTextSlots((u16*)&gUnk_09036278[22], w->textSlots3);
+        w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, w->textSlots3);
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
         w->unk_220 = v;
         t = (u16)w->unk_220 + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
@@ -507,7 +513,7 @@ TaskDesc gUnk_09EE784C = {
     (TaskUpdateFunc)func_0809D040,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0x54,
+    0,
 };
 
 TaskDesc gTaskDescPremireEFFECT2 = {
@@ -516,7 +522,7 @@ TaskDesc gTaskDescPremireEFFECT2 = {
     (TaskUpdateFunc)Premire_EFFECT2_1,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0x54,
+    0,
 };
 
 TaskDesc gUnk_09EE787C = {
@@ -525,5 +531,5 @@ TaskDesc gUnk_09EE787C = {
     (TaskUpdateFunc)func_0809D09C,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0x54,
+    0,
 };

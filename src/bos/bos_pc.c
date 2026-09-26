@@ -121,12 +121,6 @@ PcAnimStep* gUnk_09EF9DB4[14] = {
     gUnk_09A4C860,
 };
 
-const u16 gUnk_09A3DE9C[3][16] = {
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-    { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-};
-
 const EmyKind gUnk_09A3DEFC = { 36, 256, 16, 8, 0, 128, 0 };
 
 const BattleBackgroundDef gUnk_09A3DF0C = {

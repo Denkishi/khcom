@@ -4,6 +4,7 @@
 #include "types.h"
 
 #include "text_types.h"
+#include "msg_types.h"
 
 extern void* gUnk_09EE4724[4];
 
@@ -15,6 +16,7 @@ u16 func_08064D04(s32 a);
 u8 func_080653D4(s32 a, s32 b, u8* c);
 #endif
 s32 func_08064DD4(TextChar* a);
+u8 func_08065170(s32 x, s32 y, MsgLatinChar* s);
 void func_080658B8(u8 n);
 void func_08065940(void);
 #ifdef VERSION_EU

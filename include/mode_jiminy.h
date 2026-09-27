@@ -35,7 +35,7 @@ extern u8 gUnk_09A3CDDC[];
 
 extern JiminyWork* gJiminyWork;
 
-extern u8 gUnk_08159FE0[];
+extern TextChar gUnk_08159FE0[];
 extern u8 gTalk0600Tiles[];
 extern u8 gTalk2700Tiles[];
 extern u8 gCard00Palette[];
@@ -45,11 +45,10 @@ extern u8 gTalk2700Palette[];
 void func_0805A484(void);
 u8 func_0805AA9C(void);
 void func_0805A8D0(void);
-s32 func_08065170(s32 a, s32 b, void* c);
 void func_0805A95C(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
 
 void func_0805BAE4(void);
-void func_0805B9D0(s16 a, s16 b, s32 c, s16 d, s16 e, s16 f);
+void func_0805B9D0(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
 #ifdef VERSION_EU

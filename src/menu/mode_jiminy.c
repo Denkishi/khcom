@@ -1239,7 +1239,7 @@ void func_0805A484(void) {
 
     for (i = 0; i < 8; i++) {
         gJiminyWork->unk_C68[i] = 0;
-        FreeTextSlots(&gJiminyWork->lines[i], 48);
+        FreeTextSlots(gJiminyWork->lines[i].textSlots, 48);
 
         for (j = 0; j < 48; j++) {
             if (gJiminyWork->lines[i].textSlots[j].tiles != 0) {
@@ -1369,7 +1369,7 @@ void func_0805A638(s32 a, u16** b) {
     if (t > 12) {
         t = 12;
     }
-    gJiminyWork->textSlotCounts[a] = LoadTextSlots(gUnk_09EDE3FC[t], &gJiminyWork->lines[a]);
+    gJiminyWork->textSlotCounts[a] = LoadTextSlots(gUnk_09EDE3FC[t], gJiminyWork->lines[a].textSlots);
 }
 
 void func_0805A698(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
@@ -1386,18 +1386,18 @@ void func_0805A698(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16
                     func_0805A638(i, d);
                 } else {
                     gJiminyWork->textSlotCounts[i] =
-                        LoadTextSlots(d[i], &gJiminyWork->lines[i]);
+                        LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
                 }
             } else {
                 gJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], &gJiminyWork->lines[i]);
+                    LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
             }
         }
     } else {
         for (i = 0; i < n; i++) {
             if (func_0800FF00(c[i])) {
                 gJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], &gJiminyWork->lines[i]);
+                    LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
 
                 if (func_0800FF70(c[i])) {
                     gJiminyWork->unk_C68[i] = 1;
@@ -1645,7 +1645,7 @@ void mode_jiminy_0(void) {
     FadeStartIn(0, 0x10);
 
     for (i = 0; i < 8; i++) {
-        InitTextSlots(&gJiminyWork->lines[i], 0x30);
+        InitTextSlots(gJiminyWork->lines[i].textSlots, 0x30);
     }
 
     func_08064B80(0);
@@ -1883,7 +1883,7 @@ void mode_jiminy_1(void) {
             break;
         }
         DrawTextSlots(gJiminyWork->unk_CAE, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i,
-            &gJiminyWork->lines[i], gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
+            gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
 
         if (gJiminyWork->unk_000 == 7) {
             switch (gJiminyWork->unk_C68[i]) {
@@ -2054,7 +2054,7 @@ void mode_jiminy_1(void) {
     gJiminyWork->unk_D3E++;
 }
 
-void func_0805B9D0(s16 a, s16 b, s32 c, s16 d, s16 e, s16 f) {
+void func_0805B9D0(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f) {
     gJiminyWork->unk_CAE = d;
     gJiminyWork->unk_CB0 = e;
     gJiminyWork->unk_CB2 = f;
@@ -2258,12 +2258,12 @@ void func_0805BAE4(void) {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), (s32)eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            func_0805B9D0(7, gJiminyWork->detail->lineCount, (s32)gJiminyWork->detail->text, 8, 0x2A, 16);
+            func_0805B9D0(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            func_0805B9D0(4, gJiminyWork->detail->lineCount, (s32)gJiminyWork->detail->text, 8, 0x3A, 16);
+            func_0805B9D0(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2281,12 +2281,12 @@ void func_0805BAE4(void) {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), (s32)eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            func_0805B9D0(7, gJiminyWork->detail->lineCount, (s32)gJiminyWork->detail->text, 8, 0x2A, 16);
+            func_0805B9D0(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            func_0805B9D0(4, gJiminyWork->detail->lineCount, (s32)gJiminyWork->detail->text, 8, 0x3A, 16);
+            func_0805B9D0(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2305,7 +2305,7 @@ void func_0805BAE4(void) {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), (s32)eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
             func_0805B9D0(
 #ifdef VERSION_JP
@@ -2313,7 +2313,7 @@ void func_0805BAE4(void) {
 #else
                 4,
 #endif
-                gJiminyWork->detail->lineCount, (s32)gJiminyWork->detail->text, 8, 0x3A, 16);
+                gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
             break;
         }
@@ -2556,7 +2556,7 @@ void func_0805BAE4(void) {
     func_080658B8(gJiminyWork->unk_C71);
     for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0 && i < gJiminyWork->unk_C78; i++) {
         DrawTextSlots(gJiminyWork->unk_CAE, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i,
-            &gJiminyWork->lines[i], gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
+            gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
     }
     if (gJiminyWork->flags & 8) {
         DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->unk_D3E >> 3) & 3) + 4,

@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "game.h"
+#include "save_types.h"
 
 typedef struct JfShadowWork {
     void* tiles;
@@ -17,7 +18,7 @@ void task_bos_jf_shadow_2(JfShadowWork* work);
 void task_bos_jf_shadow_3(JfShadowWork* work);
 
 void func_080C6FF8(void);
-void func_080C700C(u16* out);
-void func_080C7024(u16* in);
+void func_080C700C(SaveSliceE6C* out);
+void func_080C7024(SaveSliceE6C* in);
 
 #endif /* GUARD_BOS3_H */

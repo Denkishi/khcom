@@ -70,14 +70,14 @@ void func_080C6FF8(void) {
     gUnk_0203C3BC = 0;
 }
 
-void func_080C700C(u16* out) {
-    out[0] = gUnk_0203C3C0;
-    out[1] = gUnk_0203C3BC;
+void func_080C700C(SaveSliceE6C* out) {
+    out->unk_00 = gUnk_0203C3C0;
+    out->unk_02 = gUnk_0203C3BC;
 }
 
-void func_080C7024(u16* in) {
-    gUnk_0203C3C0 = in[0];
-    gUnk_0203C3BC = in[1];
+void func_080C7024(SaveSliceE6C* in) {
+    gUnk_0203C3C0 = in->unk_00;
+    gUnk_0203C3BC = in->unk_02;
 }
 
 TaskDesc gTaskDescBosJfShadow = {
@@ -86,5 +86,5 @@ TaskDesc gTaskDescBosJfShadow = {
     (TaskUpdateFunc)task_bos_jf_shadow_1,
     (TaskFunc)task_bos_jf_shadow_2,
     (TaskFunc)task_bos_jf_shadow_3,
-    0x10,
+    sizeof(JfShadowWork),
 };

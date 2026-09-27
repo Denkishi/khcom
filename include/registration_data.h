@@ -258,6 +258,13 @@ extern Mode gModeMsTop;
 extern Mode gModeMsShop;
 extern Mode gModeMsCharge;
 extern Mode gModeMapinspect;
+extern Mode gModePremire;
+extern Mode gUnk_09EE2704;
+#ifdef VERSION_EU
+extern Mode gUnkEu_09F74600;
+#else
+extern Mode gUnk_09EE8F20;
+#endif
 extern TaskDesc gTaskDescMsShopHosi;
 extern Mode gModeBackupstat;
 extern TaskDesc gTaskDescBosPc;

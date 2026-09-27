@@ -30,7 +30,42 @@ void (*gUnk_030074A4)(void);
 #ifdef VERSION_EU
 u32 gUnkEu_030074AC;
 #endif
-extern Mode* gDebugModes[];
+
+Mode* gDebugModes[] = {
+    &gModeDebug,
+    &gModeJiminy,
+#ifndef VERSION_EU
+    &gUnk_09EE8F20,
+#endif
+    &gModePremire,
+    &gModeWORLDSELECT,
+    &gUnk_09EE2704,
+    &gModeRikuBtlTutorial,
+    &gModeRikuDeckTutorial,
+#ifdef VERSION_EU
+    &gUnkEu_09F74600,
+#endif
+    &gModeWLogo,
+    &gModeSioBattle,
+    &gModeSioBtlConnect,
+    &gModeSioBtlOption,
+    &gModeSioBtlCardget,
+    &gModeSioError,
+#ifndef VERSION_EU
+    &gModeSioChgConnect,
+    &gModeSioChgCard,
+#endif
+    &gModeSioDbgFlg,
+    &gModeTitle,
+    &gModeCopyright1,
+    &gModeCopyright2,
+    &gModeMapChk,
+    &gModeWorldselect,
+    &gModeWorldinspect,
+    &gModeWorldwarp,
+    &gModeMsTop,
+    &gModeMapinspect,
+};
 
 void ModeBlankDisplay(void);
 void ModeStart(Mode* mode, s32 arg);

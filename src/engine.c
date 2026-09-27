@@ -54,6 +54,8 @@ u32 gBg3Y IWRAM_DATA(4);
 u16 gBldAlpha IWRAM_DATA(4);
 struct FadeWork* gFadeWork IWRAM_DATA(4);
 
+vu16* gBgControl[4] = { &gBg0Cnt, &gBg1Cnt, &gBg2Cnt, &gBg3Cnt };
+
 const s16 gSineTable[320] = {
         0,     6,    12,    18,    25,    31,    37,    43,    49,    56,    62,    68,
        74,    80,    86,    92,    97,   103,   109,   115,   120,   126,   131,   136,

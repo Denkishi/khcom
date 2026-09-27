@@ -43,8 +43,6 @@ IntrFunc gVBlankHandlerOverride;
 
 extern u8 IrqHandler[];
 
-extern const IntrFunc gIntrTableTemplate[14];
-
 void SaveInitSram(void);
 
 void* GetEwramHeapStart(void) {
@@ -260,6 +258,11 @@ void VCountIntrDummy(void) {
 
 void SerialIntrDummy(void) {
 }
+
+IntrFunc gIntrTableTemplate[14] = {
+    SerialIntrDummy, VBlankIntr, HBlankIntrDummy, VCountIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
+    SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
+};
 
 void InitIntrTable(void) {
     s32 i;

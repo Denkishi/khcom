@@ -22,7 +22,7 @@ s32 gUnk_0203C580 EWRAM_COMMON(4);
 u8 gUnk_0203C584 EWRAM_COMMON(4);
 UnkStruct_0203C590 gUnk_0203C590 EWRAM_COMMON(16);
 
-const UnkStruct_096FDFC4 gUnk_096FDF54 = { 39, 0, 16, 16, 0, 0, 1 };
+const EmyKind gUnk_096FDF54 = { 39, 0, 16, 16, 0, 0, 1 };
 
 const char gTaskNameBosBoogieDice[] = "task_bos_boogie_dice";
 
@@ -51,7 +51,7 @@ void* const gUnk_096FDF7C[6][3] = {
 #endif
 };
 
-const UnkStruct_096FDFC4 gUnk_096FDFC4 = { 39, 0, 16, 16, 0, 0, 0 };
+const EmyKind gUnk_096FDFC4 = { 39, 0, 16, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieDice = {
     gTaskNameBosBoogieDice,
@@ -59,7 +59,7 @@ TaskDesc gTaskDescBosBoogieDice = {
     (TaskUpdateFunc)task_bos_boogie_dice_1,
     (TaskFunc)task_bos_boogie_dice_2,
     (TaskFunc)task_bos_boogie_dice_3,
-    0x174,
+    sizeof(BoogieDiceWork),
 };
 
 TaskDesc gTaskDescBosBoogieExplosiondice = {
@@ -68,7 +68,7 @@ TaskDesc gTaskDescBosBoogieExplosiondice = {
     (TaskUpdateFunc)task_bos_boogie_explosiondice_1,
     (TaskFunc)task_bos_boogie_explosiondice_2,
     (TaskFunc)task_bos_boogie_explosiondice_3,
-    0x160,
+    sizeof(BoogieExplosiondiceWork),
 };
 
 TaskDesc gTaskDescBosBoogieSaku = {
@@ -77,7 +77,7 @@ TaskDesc gTaskDescBosBoogieSaku = {
     (TaskUpdateFunc)task_bos_boogie_saku_1,
     (TaskFunc)task_bos_boogie_saku_2,
     (TaskFunc)task_bos_boogie_saku_3,
-    0x44,
+    sizeof(BoogieSakuWork),
 };
 
 const char gTaskNameBosBoogieMap[] = "task_bos_boogie_map";
@@ -109,12 +109,12 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     (TaskUpdateFunc)task_bos_boogie_mapanime_1,
     (TaskFunc)task_bos_boogie_mapanime_2,
     (TaskFunc)task_bos_boogie_mapanime_3,
-    0x24,
+    sizeof(BoogieMapanimeWork),
 };
 
 const char gTaskNameBosBoogieDisk[] = "task_bos_boogie_disk";
 
-const UnkStruct_096FDFC4 gUnk_096FE0C0 = { 39, 0, 192, 16, 0, 0, 0 };
+const EmyKind gUnk_096FE0C0 = { 39, 0, 192, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieDisk = {
     gTaskNameBosBoogieDisk,
@@ -122,7 +122,7 @@ TaskDesc gTaskDescBosBoogieDisk = {
     (TaskUpdateFunc)task_bos_boogie_disk_1,
     (TaskFunc)task_bos_boogie_disk_2,
     (TaskFunc)task_bos_boogie_disk_3,
-    0x160,
+    sizeof(BoogieDiskWork),
 };
 
 const char gTaskNameBosBoogieKnife[] = "task_bos_boogie_knife";
@@ -135,7 +135,7 @@ TaskDesc gTaskDescBosBoogieKnife = {
     (TaskUpdateFunc)task_bos_boogie_knife_1,
     (TaskFunc)task_bos_boogie_knife_2,
     (TaskFunc)task_bos_boogie_knife_3,
-    0x158,
+    sizeof(BoogieKnifeWork),
 };
 
 const char gTaskNameBosBoogieKnifereader[] = "task_bos_boogie_knifereader";
@@ -148,7 +148,7 @@ TaskDesc gTaskDescBosBoogieKnifereader = {
     (TaskUpdateFunc)task_bos_boogie_knifereader_1,
     (TaskFunc)task_bos_boogie_knifereader_2,
     (TaskFunc)task_bos_boogie_knifereader_3,
-    0x140,
+    sizeof(BoogieKnifereaderWork),
 };
 
 const char gTaskNameBosBoogieKaihuku[] = "task_bos_boogie_kaihuku";
@@ -165,7 +165,7 @@ TaskDesc gTaskDescBosBoogieKaihuku = {
     (TaskUpdateFunc)task_bos_boogie_kaihuku_1,
     (TaskFunc)task_bos_boogie_kaihuku_2,
     (TaskFunc)task_bos_boogie_kaihuku_3,
-    0x158,
+    sizeof(BoogieKaihukuWork),
 };
 
 const u16* gUnk_09EF5100[12] = {
@@ -474,15 +474,15 @@ void func_080D9B6C(BoogieDiceWork* work) {
     }
 }
 
-void task_bos_boogie_dice_0(BoogieDiceWork* work, u8* arg) {
-    BtlObjPos* p = (BtlObjPos*)(arg + 0x40);
+void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
+    BtlObj* p = &arg->actor;
     s32 c;
     s32 d;
     s32 e;
     u16 r;
 
-    work->unk_170 = arg[0x175];
-    work->parent = (BoogieWork*)arg;
+    work->unk_170 = arg->unk_175;
+    work->parent = arg;
     work->state = 10;
     work->timer = 0;
     work->unk_150 = -0x4CC;
@@ -496,30 +496,30 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, u8* arg) {
     c = p->x;
     d = 0x24000;
     e = p->z - 0x3800;
-    func_0801B37C(&work->unk_040, &gUnk_096FDF54, c, d, e);
-    ColliderInit(&work->collider, 3, gUnk_096FDF54.unk_08, gUnk_096FDF54.unk_06);
-    work->unk_074 |= 0x400;
+    func_0801B37C(&work->obj, &gUnk_096FDF54, c, d, e);
+    ColliderInit(&work->obj.collider, 3, gUnk_096FDF54.unk_08, gUnk_096FDF54.unk_06);
+    work->obj.flags |= 0x400;
 #ifdef VERSION_EU
-    work->unk_074 |= 0x100;
+    work->obj.flags |= 0x100;
 #else
-    work->unk_074 |= 0x80;
+    work->obj.flags |= 0x80;
 #endif
-    work->tiles = (u32)AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6788, 4), gUnk_09796EAA);
-    work->palette = (u32)LoadObjPalette(gUnk_0984AF98, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6788, 4), gUnk_09796EAA);
+    work->palette = LoadObjPalette(gUnk_0984AF98, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF6798, gUnk_09EF6788);
     AnimStart(&work->anim, 0, 1);
     r = GetRandom();
     AnimSetFrame(&work->anim, r & 3);
     TaskPoolInit(&work->tasks, 1);
-    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->unk_040);
+    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
 
     if (work->unk_170 == 0) {
-        func_0801BCD4(&work->unk_040);
+        func_0801BCD4(&work->obj);
     }
 }
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
 
     if (work->unk_170 == 0) {
         switch (func_0801ADAC(p)) {
@@ -597,9 +597,9 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         }
 
 #ifdef VERSION_EU
-        ((BtlObj*)p)->flags &= ~0x100;
+        p->flags &= ~0x100;
 #else
-        ((BtlObj*)p)->flags &= ~0x80;
+        p->flags &= ~0x80;
 #endif
         func_080D9B6C(work);
         work->unk_150 += 51;
@@ -607,10 +607,10 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->x += gSineTable[work->angle] * work->unk_154 >> 8;
         p->y += -gSineTable[work->angle + 0x40] * work->unk_154 >> 8;
 
-        if (*((u8*)p + 0x6C) != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
+        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
             work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += *(s32*)((u8*)p + 0x78);
-            p->y += *(s32*)((u8*)p + 0x7C);
+            p->x += p->collider.unk_38;
+            p->y += p->collider.unk_3C;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -626,7 +626,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             if (work->unk_150 >= -25) {
                 func_080DA42C(work);
                 work->state = 4;
-                ((BtlObj*)p)->flags |= 0x100;
+                p->flags |= 0x100;
 
                 if (work->unk_170 == 0) {
                     func_0801AF08(p);
@@ -637,9 +637,9 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         break;
     case 0:
 #ifdef VERSION_EU
-        ((BtlObj*)p)->flags &= ~0x100;
+        p->flags &= ~0x100;
 #else
-        ((BtlObj*)p)->flags &= ~0x80;
+        p->flags &= ~0x80;
 #endif
 
         if ((s16)work->timer == 0 && work->unk_170 == 0) {
@@ -651,10 +651,10 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         work->timer++;
         func_080D9B6C(work);
 
-        if (*((u8*)p + 0x6C) != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
+        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
             work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += *(s32*)((u8*)p + 0x78);
-            p->y += *(s32*)((u8*)p + 0x7C);
+            p->x += p->collider.unk_38;
+            p->y += p->collider.unk_3C;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -680,10 +680,10 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->x += gSineTable[work->angle] * work->unk_154 >> 8;
         p->y += -gSineTable[work->angle + 0x40] * work->unk_154 >> 8;
 
-        if (*((u8*)p + 0x6C) != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
+        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
             work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += *(s32*)((u8*)p + 0x78);
-            p->y += *(s32*)((u8*)p + 0x7C);
+            p->x += p->collider.unk_38;
+            p->y += p->collider.unk_3C;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -779,14 +779,14 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         AnimUpdate(&work->anim);
     }
 
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
     TaskPoolUpdate(&work->tasks);
 
     return 1;
 }
 
 void task_bos_boogie_dice_2(BoogieDiceWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
     s16 x;
     s16 y;
     u16 c;
@@ -802,9 +802,9 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
     c = GetBattleSpritePriorityFlags(p->y);
 
     if (func_0801CA00(p) != 0) {
-        pal = (void*)work->palette2;
+        pal = work->palette2;
     } else {
-        pal = (void*)work->palette;
+        pal = work->palette;
     }
 
     a = work->unk_15C;
@@ -821,7 +821,7 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
 
     aff = AllocObjAffine(0, a, b, 0);
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, (work->y >> 8) + y, AnimGetGfx(&work->anim), (void*)work->tiles, pal,
+    DrawSprite(x, (work->y >> 8) + y, AnimGetGfx(&work->anim), work->tiles, pal,
         aff, c, -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
@@ -831,11 +831,11 @@ void task_bos_boogie_dice_3(BoogieDiceWork* work) {
         gUnk_0203C564 = 1;
     }
 
-    ColliderUnregister(&work->collider);
-    func_0801B7D8(&work->unk_040);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ColliderUnregister(&work->obj.collider);
+    func_0801B7D8(&work->obj);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 
@@ -875,46 +875,46 @@ void func_080DA42C(BoogieDiceWork* work) {
     }
 
     AnimChangeWithTables(&work->anim, 0, 0, tbl[n][0], tbl[n][1]);
-    SetObjTileSource((void*)work->tiles, tbl[n][2]);
+    SetObjTileSource(work->tiles, tbl[n][2]);
 }
 
-u8 func_080DA4DC(u8* p) {
-    u8* q = *(u8**)(p + 0x15C);
+u8 func_080DA4DC(BoogieExplosiondiceWork* work) {
+    BoogieWork* boogie = work->boogie;
 
-    if (*(u32*)(q + 0x15C) == 3 && AnimGetFrame(q + 20) <= 2) {
+    if (boogie->animationIndex == 3 && AnimGetFrame(&boogie->anim) <= 2) {
         return 1;
     }
 
     return 0;
 }
 
-void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, void* arg) {
-    u8* p;
+void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* arg) {
+    BtlObj* p;
 
-    work->unk_15C = (u32)arg;
+    work->boogie = arg;
     work->unk_000 = 0;
     work->unk_004 = 0;
     work->unk_150 = 0;
     work->unk_154 = GetRandom() % 437 + 76;
     work->unk_158 = GetRandom() % 128 + 0x40;
-    p = (u8*)gBtlWork->actor;
-    work->unk_044 = ((BtlObj*)p)->x;
-    work->unk_048 = ((BtlObj*)p)->y;
-    work->unk_04C = -0xA000;
-    ColliderInit(&work->collider, 8, gUnk_096FDFC4.unk_08, gUnk_096FDFC4.unk_06);
-    work->tiles = (u32)AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6774, 4), gUnk_0979666A);
-    work->palette = (u32)LoadObjPalette(gUnk_0984AF98, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
+    p = gBtlWork->actor;
+    work->obj.x = p->x;
+    work->obj.y = p->y;
+    work->obj.z = -0xA000;
+    ColliderInit(&work->obj.collider, 8, gUnk_096FDFC4.unk_08, gUnk_096FDFC4.unk_06);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6774, 4), gUnk_0979666A);
+    work->palette = LoadObjPalette(gUnk_0984AF98, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF6784, gUnk_09EF6774);
     AnimStart(&work->anim, 0, 1);
     TaskPoolInit(&work->tasks, 1);
-    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->unk_040);
+    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
 }
 
 u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
 
-    if (func_080DA4DC((u8*)work) != 0) {
+    if (func_080DA4DC(work) != 0) {
         return 1;
     }
 
@@ -938,15 +938,15 @@ u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
     TaskPoolUpdate(&work->tasks);
 
     return 1;
 }
 
 void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
-    u8 f = func_080DA4DC((u8*)work);
+    BtlObj* p = &work->obj;
+    u8 f = func_080DA4DC(work);
     s16 x;
     s16 y;
     u16 c;
@@ -957,18 +957,18 @@ void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
     }
 
     c = GetBattleSpritePriorityFlags(p->y);
-    pal = (void*)work->palette;
+    pal = work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, pal, f, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, f, c,
         -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work) {
-    ColliderUnregister(&work->collider);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ColliderUnregister(&work->obj.collider);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 
@@ -980,10 +980,10 @@ u8 func_080DA73C(void) {
     return 0;
 }
 
-void task_bos_boogie_saku_0(BoogieSakuWork* work, void* arg) {
-    work->unk_024 = (u32)arg;
-    work->tiles = (u32)LoadObjTiles(gSakuTiles, 0x2E0);
-    work->palette = (u32)LoadObjPalette(gBoss02objPalette, 32);
+void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
+    work->boogie = arg;
+    work->tiles = LoadObjTiles(gSakuTiles, 0x2E0);
+    work->palette = LoadObjPalette(gBoss02objPalette, 32);
     AnimInit(&work->anim, gSakuAnims, gSakuFrames);
     AnimStart(&work->anim, 0, 0);
     work->unk_020 = 0;
@@ -1005,24 +1005,24 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
 
             if (func_080DA73C() != 0) {
-                func_0801C2DC((u8*)work->unk_024 + 0x40, 0);
+                func_0801C2DC(&work->boogie->actor, 0);
             } else {
-                func_0801C2DC((u8*)work->unk_024 + 0x40, 1);
+                func_0801C2DC(&work->boogie->actor, 1);
             }
-        } else if (*(u32*)work->unk_024 != 4) {
+        } else if (work->boogie->unk_000 != 4) {
             work->unk_040 = 1;
             gUnk_0203C560 = 0;
             work->unk_020 = 0;
             gUnk_0203C554 = 0;
-            func_0801C2DC((u8*)work->unk_024 + 0x40, 1);
+            func_0801C2DC(&work->boogie->actor, 1);
 
             if (func_080DA73C() != 0) {
-                work->task = (u32)TaskCreate(&work->tasks, &gTaskDescBosBoogieExplosiondice, (void*)work->unk_024);
+                work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieExplosiondice, work->boogie);
             }
         }
     }
 
-    if (gUnk_0203C560 <= 2 && IsTaskActive((void*)work->task) == 0) {
+    if (gUnk_0203C560 <= 2 && IsTaskActive(work->task) == 0) {
         SetBattleBounds(0x80, 0x170, 0x240, 0x278);
 
         if (gUnk_0203C560 != 0) {
@@ -1037,7 +1037,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
 
     if (gUnk_0203C560 > 2
             || (gUnk_0203C560 == 0 && AnimGetId(&work->anim) == 3
-                && IsTaskActive((void*)work->task) == 0)) {
+                && IsTaskActive(work->task) == 0)) {
         AnimUpdate(&work->anim);
     }
 
@@ -1059,7 +1059,7 @@ void func_080DA954(BoogieSakuWork* work, s32 a, u16 b) {
     s16 y;
 
     WorldToScreen(&x, &y, a, 0x23F00, -0x2000);
-    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), (void*)work->tiles, (void*)work->palette, 0, b, 0xE700);
+    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, b, 0xE700);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -1072,8 +1072,8 @@ void task_bos_boogie_saku_2(BoogieSakuWork* work) {
 }
 
 void task_bos_boogie_saku_3(BoogieSakuWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
@@ -1215,20 +1215,20 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
 
     d = gBtlWork->actor->y;
     e = -0x1000;
-    func_0801B37C(&work->unk_040, &gBosBoogieDiskEmyKind, x, d, e);
-    work->unk_074 |= 0x400;
-    work->tiles = (u32)AllocObjTiles(GetMaxSpriteTileBytes(gNokogiriFrames, 8), gNokogiriTiles);
-    work->palette = (u32)LoadObjPalette(gKaifukuPalette, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
+    func_0801B37C(&work->obj, &gBosBoogieDiskEmyKind, x, d, e);
+    work->obj.flags |= 0x400;
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gNokogiriFrames, 8), gNokogiriTiles);
+    work->palette = LoadObjPalette(gKaifukuPalette, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gNokogiriAnims, gNokogiriFrames);
     AnimStart(&work->anim, 0, 1);
     TaskPoolInit(&work->tasks, 1);
-    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->unk_040);
-    func_0801BCD4(&work->unk_040);
+    TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
+    func_0801BCD4(&work->obj);
     m4aSongNumStart(SONG_BTL_BU_KAITEN);
 }
 u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
 
     switch (func_0801ADAC(p)) {
     case 5:
@@ -1308,35 +1308,35 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
     TaskPoolUpdate(&work->tasks);
 
     return 1;
 }
 void task_bos_boogie_disk_2(BoogieDiskWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
     s16 x;
     s16 y;
     u16 c = GetBattleSpritePriorityFlags(p->y);
-    void* pal = (void*)work->palette;
+    void* pal = work->palette;
     u8* obj = AllocObjAffineAngle(work->unk_15C, 1);
 
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, pal, (s32)obj, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, (s32)obj, c,
         -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_boogie_disk_3(BoogieDiskWork* work) {
-    func_0801B7D8(&work->unk_040);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    func_0801B7D8(&work->obj);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 
 void func_080DB04C(BoogieKnifeWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_02C;
+    BtlObj* p = &work->obj;
     s32 dy;
 
     if (gUnk_0203C578 != 0) {
@@ -1354,7 +1354,7 @@ void func_080DB04C(BoogieKnifeWork* work) {
         m4aSongNumStart(SONG_EF_KU_ATT04);
     }
 }
-void task_bos_boogie_knife_0(BoogieKnifeWork* work, u32* arg) {
+void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     BtlObj* p;
     s32 v;
 
@@ -1381,18 +1381,18 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, u32* arg) {
         work->unk_154 = -0x780;
     }
 
-    work->unk_034 = 0x25C00;
-    work->unk_038 = -0xC000;
-    work->unk_030 = *arg;
-    ColliderInit(&work->collider, 8, gUnk_096FE0C0.unk_08, gUnk_096FE0C0.unk_06);
-    work->tiles = (u32)LoadObjTiles(gKnifeTiles, 0xC40);
-    work->palette = (u32)LoadObjPalette(gKnifePalette, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
+    work->obj.y = 0x25C00;
+    work->obj.z = -0xC000;
+    work->obj.x = *arg;
+    ColliderInit(&work->obj.collider, 8, gUnk_096FE0C0.unk_08, gUnk_096FE0C0.unk_06);
+    work->tiles = LoadObjTiles(gKnifeTiles, 0xC40);
+    work->palette = LoadObjPalette(gKnifePalette, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gKnifeAnims, gKnifeFrames);
     AnimStart(&work->anim, 0, 1);
 }
 u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_02C;
+    BtlObj* p = &work->obj;
 
     if (gUnk_0203C574 != 0) {
         work->state = 2;
@@ -1443,12 +1443,12 @@ u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
 
     return 1;
 }
 void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_02C;
+    BtlObj* p = &work->obj;
     s16 x;
     s16 y;
     u16 c;
@@ -1464,25 +1464,25 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
     c = GetBattleSpritePriorityFlags(p->y);
 
     if (gUnk_0203C574 != 0 && (gFrameCounter & 1) != 0 && gBtlWork->unk_070 == 0) {
-        pal = (void*)work->palette2;
+        pal = work->palette2;
     } else {
-        pal = (void*)work->palette;
+        pal = work->palette;
     }
 
     aff = AllocObjAffine(0, work->scaleX, 0x100, 0);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, pal, aff, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, aff, c,
         -0x1004 - (p->y >> 8) * 4);
 }
 
 void task_bos_boogie_knife_3(BoogieKnifeWork* work) {
-    ColliderUnregister(&work->collider);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ColliderUnregister(&work->obj.collider);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
 }
 
-u8 func_080DB428(u8* p) {
-    if ((s32)((BoogieKnifeWork*)p)->unk_038 >= 0) {
+u8 func_080DB428(BoogieKnifeWork* work) {
+    if (work->obj.z >= 0) {
         return 1;
     }
 
@@ -1493,7 +1493,7 @@ u8 func_080DB438(BoogieKnifereaderWork* work) {
     s32 i;
 
     for (i = 0; i <= 4; i++) {
-        if (IsTaskActive(work->unk_12C[i]) != 0) {
+        if (IsTaskActive(work->knives[i]) != 0) {
             return 1;
         }
     }
@@ -1510,7 +1510,7 @@ void func_080DB468(BoogieKnifereaderWork* work) {
         v = -0x4000;
 
         for (i = 0; i <= 4; i++) {
-            work->unk_12C[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
+            work->knives[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
             v += 0x6800;
         }
     } else {
@@ -1518,7 +1518,7 @@ void func_080DB468(BoogieKnifereaderWork* work) {
         v = 0x23000;
 
         for (i = 0; i <= 4; i++) {
-            work->unk_12C[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
+            work->knives[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
             v += -0x6800;
         }
     }
@@ -1533,17 +1533,17 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
     TaskPoolInit(&work->tasks, 5);
 
     for (i = 0; i < 5; i++) {
-        work->unk_12C[i] = 0;
+        work->knives[i] = 0;
     }
 
-    func_0801B37C(&work->unk_01C, &gBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
-    func_0801C2DC(&work->unk_01C, 1);
-    func_0801BCD4(&work->unk_01C);
+    func_0801B37C(&work->obj, &gBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
+    func_0801C2DC(&work->obj, 1);
+    func_0801BCD4(&work->obj);
 }
 
 u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
     s32 i;
-    void* e = &work->unk_01C;
+    BtlObj* e = &work->obj;
     void* pool;
     s32 checkKnives;
 
@@ -1613,8 +1613,8 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
     for (i = 0; i <= 4; i++) {
         pool = &work->tasks;
 
-        if (IsTaskActive(work->unk_12C[i]) != 0) {
-            if (func_080DB428(((u8**)work->unk_12C[i])[1]) != 0) {
+        if (IsTaskActive(work->knives[i]) != 0) {
+            if (func_080DB428(work->knives[i]->work) != 0) {
                 m4aSongNumStart(SONG_BTL_BU_TRAP);
             }
 
@@ -1632,35 +1632,35 @@ void task_bos_boogie_knifereader_2(BoogieKnifereaderWork* work) {
 }
 
 void task_bos_boogie_knifereader_3(BoogieKnifereaderWork* work) {
-    func_0801B7D8(&work->unk_01C);
+    func_0801B7D8(&work->obj);
     TaskPoolDestroy(&work->tasks);
 }
 
-void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieDiceWork* arg) {
+void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     s32 c;
     s32 d;
     s32 e;
 
     work->state = 2;
     work->timer = 0;
-    work->unk_154 = (u32)arg;
+    work->boogie = arg;
     work->unk_150 = 0;
-    c = arg->unk_044;
-    d = arg->unk_048 + 0x100;
-    e = arg->unk_04C - 0x7C00;
-    func_0801B37C(&work->unk_040, &gBosBoogieKaihukuEmyKind, c, d, e);
-    work->unk_074 |= 0x400;
-    work->tiles = (u32)LoadObjTiles(gKaifukuTiles, 0x400);
-    work->palette = (u32)LoadObjPalette(gKaifukuPalette, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
+    c = arg->actor.x;
+    d = arg->actor.y + 0x100;
+    e = arg->actor.z - 0x7C00;
+    func_0801B37C(&work->obj, &gBosBoogieKaihukuEmyKind, c, d, e);
+    work->obj.flags |= 0x400;
+    work->tiles = LoadObjTiles(gKaifukuTiles, 0x400);
+    work->palette = LoadObjPalette(gKaifukuPalette, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gKaifukuAnims, gKaifukuFrames);
     AnimStart(&work->anim, 0, 1);
-    func_0801BCD4(&work->unk_040);
+    func_0801BCD4(&work->obj);
 }
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
-    BoogieDiceWork* arg = (BoogieDiceWork*)work->unk_154;
-    void* q = &arg->unk_040;
+    BtlObj* p = &work->obj;
+    BoogieWork* arg = work->boogie;
+    BtlObj* q = &arg->actor;
 
     switch (func_0801ADAC(p)) {
     case 5:
@@ -1704,12 +1704,12 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
         }
 
         func_08019190(q, 10);
-        arg = (BoogieDiceWork*)work->unk_154;
-        arg->unk_06C += arg->unk_06E / 16;
-        arg = (BoogieDiceWork*)work->unk_154;
+        arg = work->boogie;
+        arg->actor.unk_02C += arg->actor.unk_02E / 16;
+        arg = work->boogie;
 
-        if ((s16)arg->unk_06C > arg->unk_06E) {
-            arg->unk_06C = arg->unk_06E;
+        if (arg->actor.unk_02C > arg->actor.unk_02E) {
+            arg->actor.unk_02C = arg->actor.unk_02E;
         }
 
         return 0;
@@ -1740,13 +1740,13 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
 
     return 1;
 }
 
 void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_040;
+    BtlObj* p = &work->obj;
     void* d;
     u16 v;
     s16 x;
@@ -1754,17 +1754,17 @@ void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work) {
 
     if (work->state != 2) {
         v = GetBattleSpritePriorityFlags(p->y);
-        d = (void*)work->palette;
+        d = work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
-        DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, d, 0, v, -0x1004 - (p->y >> 8) * 4);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, d, 0, v, -0x1004 - (p->y >> 8) * 4);
     }
 }
 
 void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work) {
-    func_0801B7D8(&work->unk_040);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    func_0801B7D8(&work->obj);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
 }
 
 void func_080DB978(UrsulaWork* work) {

@@ -13,6 +13,7 @@
 #include "engine.h"
 #include "m4a.h"
 #include "battle_bg_types.h"
+#include "prize_types.h"
 #include "boss_map_block_assets.h"
 #include "copyright_screens.h"
 #include "sprites_evt.h"
@@ -218,10 +219,10 @@ void task_bos_boogie_0(BoogieWork* work) {
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->actor);
     TaskCreate(&work->tasks, &gTaskDescBosBoogieMapanime, 0);
     TaskCreate(&work->tasks, &gTaskDescBosBoogieSaku, work);
-    work->unk_160 = 0;
+    work->dice = 0;
     work->task = 0;
-    work->unk_168 = 0;
-    work->dialog = 0;
+    work->dice2 = 0;
+    work->dice3 = 0;
     gBtlWork->unk_0CC = work->actor.x;
     gBtlWork->unk_0D0 = work->actor.y;
     gBtlWork->unk_0D4 = work->actor.z;
@@ -229,7 +230,7 @@ void task_bos_boogie_0(BoogieWork* work) {
 
 u8 task_bos_boogie_1(BoogieWork* work) {
     BtlObj* a = &work->actor;
-    BoogieFx fx;
+    PrizeCardArg fx;
     u16 random;
 
     switch (func_0801ADAC(a)) {
@@ -295,8 +296,8 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             break;
         case 2:
             if (FadeIsActive() == 0) {
-                func_08014AAC(a->x, a->y + a->z - (((BoogieResource*)&gUnk_096FDF14)->unk_0A << 8));
-                func_0801C298(((BoogiePalette*)work->palette)->unk_06 + 16, 0);
+                func_08014AAC(a->x, a->y + a->z - ((s16)gUnk_096FDF14.unk_0A << 8));
+                func_0801C298(work->palette->index + 16, 0);
                 FadeToAmount(0, gBtlWork->fadeAmount, 8);
                 work->unk_170 = 3;
                 work->timer = 0;
@@ -343,9 +344,9 @@ u8 task_bos_boogie_1(BoogieWork* work) {
     case 11:
         SetBoogieAnimation(work, 1, 1);
         work->timer++;
-        if (gUnk_0203C560 <= 2 && !IsTaskActive((Task*)work->unk_160) &&
-            !IsTaskActive((Task*)work->unk_168) && !IsTaskActive((Task*)work->dialog) &&
-            !IsTaskActive((Task*)work->task) && gBtlWork->unk_0EC <= 0 && work->unk_174 == 0) {
+        if (gUnk_0203C560 <= 2 && !IsTaskActive(work->dice) &&
+            !IsTaskActive(work->dice2) && !IsTaskActive(work->dice3) &&
+            !IsTaskActive(work->task) && gBtlWork->unk_0EC <= 0 && work->unk_174 == 0) {
             random = GetRandom() % 100;
             if (random == 0) {
                 func_08083900(8);
@@ -364,10 +365,10 @@ u8 task_bos_boogie_1(BoogieWork* work) {
                 func_08083914();
                 work->unk_174 = 0;
                 work->unk_175 = 0;
-                work->unk_160 = (s32)TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
+                work->dice = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
                 work->unk_175 = 1;
-                work->unk_168 = (s32)TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
-                work->dialog = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
+                work->dice2 = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
+                work->dice3 = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
                 SetBoogieAnimation(work, 2, 1);
                 m4aSongNumStart(SONG_VO_BO_ATTACK00);
                 work->unk_000 = 9;
@@ -426,7 +427,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         } else if (gUnk_0203C570 != 0) {
             work->unk_000 = 0;
             work->timer = 0;
-        } else if (!IsTaskActive((Task*)work->task)) {
+        } else if (!IsTaskActive(work->task)) {
             work->unk_000 = 7;
             work->timer = 0;
         }
@@ -559,8 +560,8 @@ void func_080D9A58(void) {
 }
 
 u32 GetBoogieDiceState(void) {
-    if (IsTaskActive((Task*)gBoogieWork->unk_160) != 0) {
-        return *(s32*)((Task*)gBoogieWork->unk_160)->work;
+    if (IsTaskActive(gBoogieWork->dice) != 0) {
+        return ((BoogieDiceWork*)gBoogieWork->dice->work)->state;
     }
     return 11;
 }
@@ -571,5 +572,5 @@ TaskDesc gTaskDescBosBoogie = {
     (TaskUpdateFunc)task_bos_boogie_1,
     (TaskFunc)task_bos_boogie_2,
     (TaskFunc)task_bos_boogie_3,
-    0x178,
+    sizeof(BoogieWork),
 };

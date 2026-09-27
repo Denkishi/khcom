@@ -14,7 +14,7 @@ u16 gUnk_02034F2C;
 u16 gUnk_02034F2E;
 void* gUnk_02034F30;
 UnkStruct_09EF70D0* gUnk_02034F34;
-u8* gUnk_02034F38;
+MapCell* gUnk_02034F38;
 #ifndef VERSION_EU
 u8 gUnk_02034F3C[4];
 #endif
@@ -2665,7 +2665,7 @@ void func_080E49DC(u16 a, u16 b) {
     *p = EwramAlloc(0x1800);
 
     if (gGameState.unk_000 == 0) {
-        gMapCells = EwramAlloc(0x18000);
+        gMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
         gUnk_02034F20 = EwramAlloc(0x120);
         gUnk_02034F24 = EwramAlloc(0x20);
         n = gUnk_02034F28 * gUnk_02034F2A;
@@ -3069,11 +3069,11 @@ UnkStruct_02034F24* func_080E5590(u8 a) {
     return &gUnk_02034F24[a];
 }
 
-s32 func_080E55A4(s16 x, s16 y) {
+MapCell* func_080E55A4(s16 x, s16 y) {
     if (y < 0 || y >= gUnk_0203C7AC->unk_06 || x < 0 || x >= gUnk_0203C7AC->unk_04) {
         return 0;
     }
-    return (s32)(gUnk_02034F38 + (gUnk_0203C7AC->unk_04 * y + x) * 32);
+    return &gUnk_02034F38[gUnk_0203C7AC->unk_04 * y + x];
 }
 
 void func_080E55E4(const u8* src) {
@@ -3082,7 +3082,7 @@ void func_080E55E4(const u8* src) {
 
     for (y = 0; y < gUnk_0203C7AC->unk_06; y++) {
         for (x = 0; x < gUnk_0203C7AC->unk_04; x++) {
-            MapCell* e = (MapCell*)func_080E55A4(x, y);
+            MapCell* e = func_080E55A4(x, y);
 
             e->unk_02 = src[gUnk_0203C7AC->unk_04 * y + x];
             e->unk_10 = func_080E8668(e->unk_02);
@@ -3198,18 +3198,18 @@ void func_080E5868(UnkStruct_09EF8370* p) {
     s32 i;
     s32 n;
 
-    gUnk_02034F38 = EwramAlloc(0x18000);
+    gUnk_02034F38 = EwramAlloc(sizeof(MapCell) * 0xC00);
     n = gUnk_0203C7AC->unk_04 * gUnk_0203C7AC->unk_06;
 
     for (i = 0; i < n; i++) {
-        ((MapCell*)gUnk_02034F38)[i].unk_00 = 0;
-        ((MapCell*)gUnk_02034F38)[i].unk_02 = 11;
-        ((MapCell*)gUnk_02034F38)[i].unk_03 = 7;
-        ((MapCell*)gUnk_02034F38)[i].unk_04 = 0;
-        ((MapCell*)gUnk_02034F38)[i].unk_05 = 0;
-        ((MapCell*)gUnk_02034F38)[i].unk_14 = 0;
-        ((MapCell*)gUnk_02034F38)[i].unk_18 = 0;
-        ((MapCell*)gUnk_02034F38)[i].unk_1C = 0;
+        gUnk_02034F38[i].unk_00 = 0;
+        gUnk_02034F38[i].unk_02 = 11;
+        gUnk_02034F38[i].unk_03 = 7;
+        gUnk_02034F38[i].unk_04 = 0;
+        gUnk_02034F38[i].unk_05 = 0;
+        gUnk_02034F38[i].unk_14 = 0;
+        gUnk_02034F38[i].unk_18 = 0;
+        gUnk_02034F38[i].unk_1C = 0;
     }
     func_080E55E4(p->unk_28);
 }
@@ -3219,5 +3219,5 @@ void func_080E58E4(void) {
 }
 
 MapCell* func_080E58F8(s16 a, s16 b) {
-    return (MapCell*)func_080E55A4(a, b);
+    return func_080E55A4(a, b);
 }

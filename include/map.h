@@ -1145,7 +1145,7 @@ void func_080E507C(u16* a, u16* b, u16* c, s16 d, s16 e);
 u8 func_080E524C(FldPos* a, s32* b);
 u8 func_080E5354(FldPos* a, s32* b);
 void func_080E56B4(void* a);
-s32 func_080E55A4(s16 x, s16 y);
+MapCell* func_080E55A4(s16 x, s16 y);
 void func_080E5B90(UnkStruct_080E5B90* p, const UnkStruct_0984BC9C* q);
 u8 func_080E59D8(UnkStruct_080E5B90* w);
 u8 func_080E5AC8(UnkStruct_080E5B90* w);

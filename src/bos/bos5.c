@@ -429,7 +429,7 @@ TaskDesc gTaskDescBosMdMap = {
     (TaskUpdateFunc)task_bos_md_map_1,
     0,
     0,
-    0x4,
+    sizeof(MdMapWork),
 };
 
 TaskDesc gTaskDescBosMdFire = {

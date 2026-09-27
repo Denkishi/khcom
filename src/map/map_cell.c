@@ -370,7 +370,7 @@ void func_080E0558(void) {
     gUnk_0203C7AC->unk_18 = 0;
     gUnk_0203C7AC->unk_1C = 0;
     gUnk_0203C7AC->unk_20 = 0;
-    TaskPoolInit(gUnk_0203C7AC->tasks, 1);
+    TaskPoolInit(&gUnk_0203C7AC->tasks, 1);
 }
 
 void func_080E05E4(void) {
@@ -467,7 +467,7 @@ void func_080E0878(void) {
     TaskPoolDestroy(&gFieldState->tasks3);
     TaskPoolDestroy(&gFieldState->tasks5);
     TaskPoolDestroy(&gFieldState->tasks4);
-    TaskPoolDestroy(gUnk_0203C7AC->tasks);
+    TaskPoolDestroy(&gUnk_0203C7AC->tasks);
 }
 
 MapCell* func_080E08BC(s16 x, s16 y) {

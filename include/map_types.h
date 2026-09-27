@@ -46,7 +46,7 @@ typedef struct UnkStruct_0203C7AC {
     s32 unk_24;
     s32 unk_28;
     s32 unk_2C;
-    u8 tasks[0x14];
+    TaskPool tasks;
 } UnkStruct_0203C7AC;
 
 typedef struct MapCell {

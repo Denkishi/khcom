@@ -1647,7 +1647,7 @@ void func_080E84DC(FldPos* p) {
 
 void func_080E853C(void) {
     if (gGameState.unk_000 == 0) {
-        gUnk_0203C7B8 = EwramAlloc(384);
+        gUnk_0203C7B8 = EwramAlloc(sizeof(UnkStruct_0203C7B8) * 16);
         gUnk_02034F78 = 0;
         gUnk_02034F79 = 0;
         gUnk_02034F7A = 0;
@@ -2506,8 +2506,8 @@ void func_080E963C(void) {
 void Mode_MapDbg_0(void) {
     UnkStruct_09EF70D0* p;
 
-    gFieldState = EwramAlloc(0xE8);
-    gUnk_0203C7AC = EwramAlloc(0x44);
+    gFieldState = EwramAlloc(sizeof(FieldState));
+    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
     func_080DEF20();
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
@@ -2577,40 +2577,40 @@ void func_080E9898(ModeFunc a) {
 void func_080E98B0(void) {
     switch (gUnk_0203C590.unk_04) {
     case 2:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)2);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)2);
         break;
     case 6:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)6);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)6);
         break;
     case 5:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)5);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)5);
         break;
     case 7:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)7);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)7);
         break;
     case 3:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)3);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)3);
         break;
     case 8:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)8);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)8);
         break;
     case 9:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)9);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)9);
         break;
     case 1:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)1);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)1);
         break;
     case 10:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)10);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)10);
         break;
     case 11:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)11);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)11);
         break;
     case 12:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)12);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)12);
         break;
     default:
-        gUnk_02034FB4 = TaskCreate(gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)4);
+        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)4);
         break;
     }
 }
@@ -2655,8 +2655,8 @@ void func_080E9AF0(void) {
     u8 r = IsTaskActive(gUnk_02034FB4);
 
     if (r != 0) {
-        TaskPoolUpdate(gUnk_0203C7AC->tasks);
-        TaskPoolDraw(gUnk_0203C7AC->tasks);
+        TaskPoolUpdate(&gUnk_0203C7AC->tasks);
+        TaskPoolDraw(&gUnk_0203C7AC->tasks);
         TaskPoolUpdate(&gFieldState->tasks);
         func_080E0820();
     } else {
@@ -2859,8 +2859,8 @@ void Mode_MapFld_0(void) {
         func_080104F4();
     }
 
-    gFieldState = EwramAlloc(0xE8);
-    gUnk_0203C7AC = EwramAlloc(0x44);
+    gFieldState = EwramAlloc(sizeof(FieldState));
+    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
     gUnk_02034FB4 = 0;
     gUnk_02034FB8 = 0;
     func_080DEF20();
@@ -3225,9 +3225,9 @@ void Mode_MapFix_0(void) {
     UnkStruct_09EF8370* p;
     u16 t;
 
-    gFieldState = EwramAlloc(0xE8);
-    gUnk_0203C7AC = EwramAlloc(0x44);
-    gUnk_0203C7B8 = EwramAlloc(0x180);
+    gFieldState = EwramAlloc(sizeof(FieldState));
+    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
+    gUnk_0203C7B8 = EwramAlloc(sizeof(UnkStruct_0203C7B8) * 16);
     func_080DEF20();
     SetBgMode0();
 

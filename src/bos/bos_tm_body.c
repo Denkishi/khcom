@@ -559,9 +559,9 @@ void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
     work->gfx3 = gUnk_09EF397C[0];
     work->gfx4 = gUnk_09EF3960[0];
     work->tm = arg;
-    work->tm->unk_40 = ((u16*)work->tiles)[3];
-    work->tm->unk_42 += ((u16*)work->tiles)[4];
-    work->tm->unk_44 = ((u16*)work->palette)[3];
+    work->tm->unk_40 = work->tiles->index;
+    work->tm->unk_42 += work->tiles->count;
+    work->tm->unk_44 = work->palette->index;
     work->unk_480 = 0;
     work->unk_482 = 0;
     work->unk_484 = 0;

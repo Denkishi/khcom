@@ -5,6 +5,7 @@
 #include "battle_actor_types.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "obj.h"
 
 typedef struct TmWork {
     u16 x;
@@ -45,9 +46,9 @@ typedef struct TmWork {
 
 typedef struct TmBodyWork {
     TmWork* tm;
-    void* tiles;
-    void* palette;
-    void* palette2;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     BtlObj body;
     u8 unk_120[0x4];
     void* gfx;
@@ -111,27 +112,27 @@ typedef struct TmTblWork {
     u32 unk_068;
 } TmTblWork;
 
-typedef struct TmClbSrc {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
+typedef struct TmArmPos {
+    s32 x;
+    s32 y;
+    s32 z;
     u16 unk_0C;
     u16 unk_0E;
-} TmClbSrc;
+} TmArmPos;
 
 typedef struct TmClbArg {
     u32 unk_00;
     u32 unk_04;
-    TmClbSrc* src;
+    TmArmPos* src;
     s32 unk_0C;
-    void* unk_10;
-    void* unk_14;
+    ObjTiles* tiles;
+    void* gfx;
 } TmClbArg;
 
 typedef struct TmClbWork {
     TmClbArg* arg;
-    void* tiles;
-    void* palette;
+    ObjTiles* tiles;
+    ObjPalette* palette;
     u16 unk_00C;
     u8 unk_00E[0x2];
     s32 x;
@@ -186,29 +187,15 @@ typedef struct TmArmJoint {
     s32 x;
     s32 y;
     u16 unk_14;
-    u8 unk_16[0x10];
-    u16 unk_26;
-    u8 unk_28[0x8];
+    u8 unk_16[0x2];
+    AnimState anim;
     void* gfx;
 } TmArmJoint;
 
-typedef struct TmArmPos {
-    s32 x;
-    s32 y;
-    s32 z;
-    u16 unk_0C;
-    u16 unk_0E;
-} TmArmPos;
-
-typedef struct TmArmTileHeader {
-    u16 unk_00[4];
-    u16 tileCount;
-} TmArmTileHeader;
-
 typedef struct TmArmWork {
-    u32 tiles;
-    u16* palette;
-    u32 palette2;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     TmArmSrc* src;
     union {
         TmArmJoint all[8];
@@ -217,24 +204,15 @@ typedef struct TmArmWork {
     u16 unk_1B0;
     u16 unk_1B2;
     TaskPool tasks;
-    u32 unk_1C8;
-    u8 unk_1CC[0xC];
-    u32 unk_1D8;
-    u32 unk_1DC;
-    u32 unk_1E0;
-    u8 unk_1E4[0xC];
-    u32 unk_1F0;
-    u32 unk_1F4;
+    TmClbArg unk_1C8;
+    TmClbArg unk_1E0;
     TmArmPos unk_1F8[2];
-    u32 unk_218;
-    u8 unk_21C[0x4];
-    u32 unk_220;
-    u8 unk_224[0x8];
-    u32 unk_22C;
+    TmAnim unk_218;
+    TmAnim unk_224;
     u8 unk_230;
     u8 unk_231[0x3];
     u32 unk_234;
-    u32 tiles2;
+    ObjTiles* tiles2;
     AnimState anim;
     u8 unk_254;
     u8 unk_255[0x3];
@@ -246,11 +224,11 @@ typedef struct TmFootWork {
     u8 unk_003;
     u8 unk_004;
     u8 unk_005[0x3];
-    u32 tiles;
-    u32 tiles2;
-    u32 tiles3;
-    u32 palette;
-    u32 palette2;
+    ObjTiles* tiles;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     BtlObj body;
     void* gfx;
     u8 unk_130;
@@ -260,7 +238,7 @@ typedef struct TmFootWork {
     u8 unk_248;
     u8 unk_249[0x3];
     BtlObj body3;
-    u32 gfx3;
+    void* gfx3;
     u8 unk_360;
     u8 unk_361[0x3];
     BtlObj body4;
@@ -345,7 +323,7 @@ u8 task_bos_tm_clb_1(TmClbWork* work);
 u8 task_bos_tm_arm_1(TmArmWork* work);
 void task_bos_tm_arm_3(TmArmWork* work);
 void task_bos_tm_foot_3(TmFootWork* work);
-void task_bos_tm_clb_0(TmClbWork* work, void* arg);
+void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg);
 void task_bos_tm_clb_2(TmClbWork* work);
 void task_bos_tm_tbl_0(TmTblWork* work, void* arg);
 void task_bos_tm_tbl_3(TmTblWork* work);
@@ -353,12 +331,12 @@ void task_bos_tm_clb_3(TmClbWork* work);
 void func_080BA0E4(BtlObj* p, s32 a, s32 b, s32 c);
 void func_080BA0F8(BtlObj* work);
 void task_bos_tm_body_3(TmBodyWork* work);
-void CreateBosTmClbTask(void* pool, TmClbArg* p, TmClbSrc* a);
-void func_080BB1D8(TmClbArg* p, TmClbSrc* a, s32 b);
-void func_080BB1E8(TmClbArg* p, TmClbSrc* a);
-void func_080BB1F4(TmClbArg* p, TmClbSrc* a, u8 mode);
-void func_080BB428(u8* dst, const u8* src);
-void func_080BB43C(u8* work, const TmAnimFrame* src, u16 a, u8* dst);
+void CreateBosTmClbTask(TaskPool* pool, TmClbArg* p, TmArmPos* a);
+void func_080BB1D8(TmClbArg* p, TmArmPos* a, s32 b);
+void func_080BB1E8(TmClbArg* p, TmArmPos* a);
+void func_080BB1F4(TmClbArg* p, TmArmPos* a, u8 mode);
+void func_080BB428(TmArmJoint* joints, const u8* src);
+void func_080BB43C(TmAnim* anim, const TmAnimFrame* src, u16 a, TmArmJoint* joints);
 void func_080BB464(TmArmWork* work);
 void func_080BB4C0(TmArmWork* work);
 void func_080BA104(BtlObj* sub, TmFootWork* work);
@@ -366,7 +344,7 @@ void func_080BA43C(TmFootWork* work, s16 a);
 void func_080BA62C(TmFootWork* work);
 void func_080BA8C8(TmFootWork* work, s16 a);
 void func_080BB588(TmArmJoint* joints, u16 a);
-void func_080BB5E8(u8* joints, TmAnim* a);
+void func_080BB5E8(TmArmJoint* joints, TmAnim* a);
 
 extern s16 gUnk_0203AB3C;
 extern s16 gUnk_0203AB40;

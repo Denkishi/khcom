@@ -443,7 +443,7 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->gfx3 = gUnk_09EF39BC;
     work->gfx4 = gUnk_09EF39C4;
     work->tm = arg;
-    work->tm->unk_42 += ((u16*)work->tiles2)[4] + ((u16*)work->tiles3)[4];
+    work->tm->unk_42 += work->tiles2->count + work->tiles3->count;
     work->unk_003 = 0;
     work->unk_004 = 0;
     work->unk_000 = 0;
@@ -683,12 +683,12 @@ void task_bos_tm_foot_3(TmFootWork* work) {
         func_080BA0F8(&work->body4);
     }
 
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
 }
 
-void CreateBosTmClbTask(void* pool, TmClbArg* p, TmClbSrc* a) {
+void CreateBosTmClbTask(TaskPool* pool, TmClbArg* p, TmArmPos* a) {
     p->src = a;
     p->unk_00 = 0;
     p->unk_04 = 1;
@@ -696,21 +696,21 @@ void CreateBosTmClbTask(void* pool, TmClbArg* p, TmClbSrc* a) {
     TaskCreate(pool, &gTaskDescBosTmClb, p);
 }
 
-void func_080BB1D8(TmClbArg* p, TmClbSrc* a, s32 b) {
+void func_080BB1D8(TmClbArg* p, TmArmPos* a, s32 b) {
     p->src = a;
     p->unk_0C = b;
     p->unk_00 = 4;
     p->unk_04 = 0;
 }
 
-void func_080BB1E8(TmClbArg* p, TmClbSrc* a) {
+void func_080BB1E8(TmClbArg* p, TmArmPos* a) {
     p->src = a;
     p->unk_0C = 0;
     p->unk_00 = 0;
     p->unk_04 = 0;
 }
 
-void func_080BB1F4(TmClbArg* p, TmClbSrc* a, u8 mode) {
+void func_080BB1F4(TmClbArg* p, TmArmPos* a, u8 mode) {
     p->src = a;
     p->unk_0C = 0;
     p->unk_04 = 2;
@@ -731,17 +731,17 @@ void func_080BB1F4(TmClbArg* p, TmClbSrc* a, u8 mode) {
     }
 }
 
-void task_bos_tm_clb_0(TmClbWork* work, void* arg) {
-    void* p;
+void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg) {
+    TmArmPos* p;
 
     work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->arg = arg;
-    p = ((void**)arg)[2];
-    work->unk_00C = *(u16*)((u8*)p + 12);
-    work->x = *(s32*)p;
-    work->y = *(s32*)((u8*)p + 4);
-    work->z = *(s32*)((u8*)p + 8);
+    p = arg->src;
+    work->unk_00C = p->unk_0C;
+    work->x = p->x;
+    work->y = p->y;
+    work->z = p->z;
 }
 
 u8 task_bos_tm_clb_1(TmClbWork* work) {
@@ -749,37 +749,37 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
 
     switch (a->unk_00) {
     case 4:
-        work->x += (a->src->unk_00 - work->x) >> 4;
-        work->y = a->src->unk_04;
+        work->x += (a->src->x - work->x) >> 4;
+        work->y = a->src->y;
         work->z += a->unk_0C;
         a->unk_0C += 51;
 
-        if (a->unk_0C > 0 && work->z >= a->src->unk_08) {
-            work->z = a->src->unk_08;
+        if (a->unk_0C > 0 && work->z >= a->src->z) {
+            work->z = a->src->z;
             a->unk_00 = 0;
             a->unk_04 = 1;
         }
 
         break;
     case 0:
-        work->x = a->src->unk_00;
-        work->y = a->src->unk_04;
-        work->z = a->src->unk_08;
+        work->x = a->src->x;
+        work->y = a->src->y;
+        work->z = a->src->z;
         break;
     case 1:
-        work->x = a->src->unk_00;
-        work->y = a->src->unk_04;
-        work->z = a->src->unk_08;
+        work->x = a->src->x;
+        work->y = a->src->y;
+        work->z = a->src->z;
         break;
     case 2:
-        work->x = a->src->unk_00 - 0x600;
-        work->y = a->src->unk_04;
-        work->z = a->src->unk_08;
+        work->x = a->src->x - 0x600;
+        work->y = a->src->y;
+        work->z = a->src->z;
         break;
     case 3:
-        work->x = a->src->unk_00 + 0x600;
-        work->y = a->src->unk_04;
-        work->z = a->src->unk_08 - 0x500;
+        work->x = a->src->x + 0x600;
+        work->y = a->src->y;
+        work->z = a->src->z - 0x500;
         break;
     }
 
@@ -807,7 +807,7 @@ void task_bos_tm_clb_2(TmClbWork* work) {
     DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, (s32)p, 0x800,
                (u16)(-0x1002 - (work->y >> 8) * 4));
     p[0x0A] = 1;
-    DrawSprite(x, y, work->arg->unk_14, work->arg->unk_10, work->palette, (s32)p, 0x800,
+    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, (s32)p, 0x800,
                (u16)(-0x1003 - (work->y >> 8) * 4));
 }
 
@@ -816,25 +816,25 @@ void task_bos_tm_clb_3(TmClbWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void func_080BB428(u8* dst, const u8* src) {
+void func_080BB428(TmArmJoint* joints, const u8* src) {
     s32 i;
 
     i = 3;
 
     do {
-        *(u16*)(dst + 20) = *src;
+        joints->unk_14 = *src;
         src += 4;
-        dst += 0x34;
+        joints++;
     } while (--i >= 0);
 }
 
-void func_080BB43C(u8* work, const TmAnimFrame* src, u16 a, u8* dst) {
-    if (*(const TmAnimFrame**)(work + 8) != src) {
-        *(const TmAnimFrame**)(work + 8) = src;
-        *(u16*)(work + 0) = 0;
-        *(u16*)(work + 2) = 0;
-        *(u16*)(work + 4) = a;
-        func_080BB428(dst, src->unk_04);
+void func_080BB43C(TmAnim* anim, const TmAnimFrame* src, u16 a, TmArmJoint* joints) {
+    if (anim->frames != src) {
+        anim->frames = src;
+        anim->unk_00 = 0;
+        anim->unk_02 = 0;
+        anim->unk_04 = a;
+        func_080BB428(joints, src->unk_04);
     }
 }
 
@@ -869,8 +869,8 @@ void func_080BB518(TmArmJoint* joints) {
         p = &joints[i];
         p->x = x;
         p->y = y;
-        x += gSineTable[p->angle] * gUnk_0961A63C[n = p->unk_26];
-        y += -gSineTable[p->angle + 0x40] * gUnk_0961A63C[n = p->unk_26];
+        x += gSineTable[p->angle] * gUnk_0961A63C[n = p->anim.frame];
+        y += -gSineTable[p->angle + 0x40] * gUnk_0961A63C[n = p->anim.frame];
     }
 
     p = &joints[n = 3];
@@ -899,7 +899,7 @@ void func_080BB588(TmArmJoint* joints, u16 a) {
     }
 }
 
-void func_080BB5E8(u8* joints, TmAnim* a) {
+void func_080BB5E8(TmArmJoint* joints, TmAnim* a) {
     if (a->unk_00 >= a->frames[a->unk_02].unk_00) {
         a->unk_00 = 0;
         a->unk_02++;
@@ -931,10 +931,10 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->unk_1B2 = 0;
     work->unk_230 = 1;
     work->unk_234 = 0;
-    work->unk_22C = 0;
-    work->unk_220 = 0;
-    func_080BB43C(work->unk_224, gUnk_09619CDC, 3, (u8*)work->joints.arms[0]);
-    func_080BB43C((u8*)&work->unk_218, gUnk_09619D18, 3, (u8*)&work->joints.arms[1][0]);
+    work->unk_224.frames = 0;
+    work->unk_218.frames = 0;
+    func_080BB43C(&work->unk_224, gUnk_09619CDC, 3, work->joints.arms[0]);
+    func_080BB43C(&work->unk_218, gUnk_09619D18, 3, &work->joints.arms[1][0]);
 
     for (i = 0; i < 4; i++) {
         p = &work->joints.arms[0][i];
@@ -961,31 +961,31 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->unk_1F8[1].unk_0C = 240;
 
     for (i = 0; i < 3; i++) {
-        AnimInit((AnimState*)&work->joints.arms[0][i].unk_16[2], gUnk_09EF39B4, gUnk_09EF39A0);
-        AnimStart((AnimState*)&work->joints.arms[0][i].unk_16[2], 0, 1);
-        work->joints.arms[0][i].unk_26 = i * 2;
-        work->joints.arms[0][i].gfx = AnimGetGfx((AnimState*)&work->joints.arms[0][i].unk_16[2]);
-        AnimInit((AnimState*)&work->joints.arms[1][i].unk_16[2], gUnk_09EF39B4, gUnk_09EF39A0);
-        AnimStart((AnimState*)&work->joints.arms[1][i].unk_16[2], 0, 1);
-        work->joints.arms[1][i].unk_26 = i * 2;
-        work->joints.arms[1][i].gfx = AnimGetGfx((AnimState*)&work->joints.arms[1][i].unk_16[2]);
+        AnimInit(&work->joints.arms[0][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
+        AnimStart(&work->joints.arms[0][i].anim, 0, 1);
+        work->joints.arms[0][i].anim.frame = i * 2;
+        work->joints.arms[0][i].gfx = AnimGetGfx(&work->joints.arms[0][i].anim);
+        AnimInit(&work->joints.arms[1][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
+        AnimStart(&work->joints.arms[1][i].anim, 0, 1);
+        work->joints.arms[1][i].anim.frame = i * 2;
+        work->joints.arms[1][i].gfx = AnimGetGfx(&work->joints.arms[1][i].anim);
     }
 
     work->joints.arms[0][3].gfx = gUnk_0962E7A0;
     work->joints.arms[1][3].gfx = gUnk_0962E7A0;
     work->tiles2 = AllocObjTiles(0x140, gUnk_09657C04);
-    work->src->state->tileCount += ((TmArmTileHeader*)work->tiles2)->tileCount;
+    work->src->state->tileCount += work->tiles2->count;
     AnimInit(&work->anim, gUnk_09EF3A18, gUnk_09EF39F8);
     AnimStart(&work->anim, 0, 1);
-    work->unk_1D8 = work->tiles2;
-    work->unk_1F0 = work->tiles2;
+    work->unk_1C8.tiles = work->tiles2;
+    work->unk_1E0.tiles = work->tiles2;
     gfx = AnimGetGfx(&work->anim);
-    work->unk_1DC = (u32)gfx;
-    work->unk_1F4 = (u32)gfx;
+    work->unk_1C8.gfx = gfx;
+    work->unk_1E0.gfx = gfx;
     work->unk_254 = 0;
     TaskPoolInit(&work->tasks, 2);
-    CreateBosTmClbTask(&work->tasks, (TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0]);
-    CreateBosTmClbTask(&work->tasks, (TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1]);
+    CreateBosTmClbTask(&work->tasks, &work->unk_1C8, &work->unk_1F8[0]);
+    CreateBosTmClbTask(&work->tasks, &work->unk_1E0, &work->unk_1F8[1]);
     gUnk_0203AC74 = 0;
     gUnk_0203AC64 = 0;
     gUnk_0203AC78 = 0;
@@ -998,9 +998,6 @@ void func_080BB924(TmArmWork* work) {
     TmArmJoint* j;
     TmArmJoint* j2;
     s32 i;
-    s32 offset;
-    void* gfx;
-    void** dst;
     s32 r;
     s32 x;
     s32 y;
@@ -1017,9 +1014,9 @@ void func_080BB924(TmArmWork* work) {
             work->unk_1F8[0].unk_0C = 0x110;
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619D18, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619D18, 3, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619D90, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619D90, 3, &work->joints.all[4]);
             }
         }
 
@@ -1035,9 +1032,9 @@ void func_080BB924(TmArmWork* work) {
             break;
         case 22:
             if (work->unk_230 != 0) {
-                func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -0x380);
+                func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -0x380);
             } else {
-                func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[0], -0x380);
+                func_080BB1D8(&work->unk_1E0, &work->unk_1F8[0], -0x380);
             }
             break;
         }
@@ -1050,12 +1047,12 @@ void func_080BB924(TmArmWork* work) {
     case 7:
         if (work->unk_1B0 == 0) {
             work->unk_1F8[0].unk_0C = 0x110;
-            func_080BB1E8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0]);
+            func_080BB1E8(&work->unk_1C8, &work->unk_1F8[0]);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A2CC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A2CC, 6, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A3BC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A3BC, 6, &work->joints.all[4]);
             }
         }
 
@@ -1065,12 +1062,12 @@ void func_080BB924(TmArmWork* work) {
     case 14:
         if (work->unk_1B0 == 0) {
             work->unk_1F8[0].unk_0C = 90;
-            func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -128);
+            func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -128);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619DE0, 1, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E08, 1, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E08, 1, &work->joints.all[4]);
             }
         }
 
@@ -1079,12 +1076,12 @@ void func_080BB924(TmArmWork* work) {
     case 13:
         if (work->unk_1B0 == 0) {
             work->unk_1F8[0].unk_0C = 90;
-            func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -128);
+            func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -128);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619DE0, 1, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E08, 1, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E08, 1, &work->joints.all[4]);
             }
         }
 
@@ -1093,13 +1090,13 @@ void func_080BB924(TmArmWork* work) {
     case 1:
         if (work->unk_1B0 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E1C, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E1C, 3, &work->joints.all[4]);
                 work->unk_1F8[0].unk_0C = 0xE8;
-                func_080BB1F4((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], 0);
+                func_080BB1F4(&work->unk_1C8, &work->unk_1F8[0], 0);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E94, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E94, 3, &work->joints.all[4]);
                 work->unk_1F8[0].unk_0C = 0xF4;
-                func_080BB1F4((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], 2);
+                func_080BB1F4(&work->unk_1C8, &work->unk_1F8[0], 2);
             }
         }
 
@@ -1127,13 +1124,13 @@ void func_080BB924(TmArmWork* work) {
     case 10:
         if (work->unk_1B0 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E1C, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E1C, 3, &work->joints.all[4]);
                 work->unk_1F8[0].unk_0C = 0xE8;
-                func_080BB1F4((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], 0);
+                func_080BB1F4(&work->unk_1C8, &work->unk_1F8[0], 0);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619E94, 3, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619E94, 3, &work->joints.all[4]);
                 work->unk_1F8[0].unk_0C = 0xF4;
-                func_080BB1F4((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], 2);
+                func_080BB1F4(&work->unk_1C8, &work->unk_1F8[0], 2);
             }
         }
 
@@ -1176,12 +1173,12 @@ void func_080BB924(TmArmWork* work) {
     case 2:
         if (work->unk_1B0 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619F0C, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619FFC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619FFC, 6, &work->joints.all[4]);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -0xB00);
+            func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -0xB00);
             work->unk_1F8[0].unk_0C = 0xE8;
         }
 
@@ -1213,12 +1210,12 @@ void func_080BB924(TmArmWork* work) {
     case 3:
         if (work->unk_1B0 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619F0C, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_09619FFC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_09619FFC, 6, &work->joints.all[4]);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -0xB00);
+            func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -0xB00);
             work->unk_1F8[0].unk_0C = 0xE8;
         }
 
@@ -1256,12 +1253,12 @@ void func_080BB924(TmArmWork* work) {
     case 11:
         if (work->unk_1B0 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A0EC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A0EC, 6, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A1DC, 6, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A1DC, 6, &work->joints.all[4]);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0], -0xB00);
+            func_080BB1D8(&work->unk_1C8, &work->unk_1F8[0], -0xB00);
             work->unk_1F8[0].unk_0C = 0xE8;
         }
 
@@ -1299,12 +1296,12 @@ void func_080BB924(TmArmWork* work) {
     case 9:
         if (work->unk_1B0 == 0) {
             work->unk_1F8[0].unk_0C = 0x10C;
-            func_080BB1E8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[0]);
+            func_080BB1E8(&work->unk_1C8, &work->unk_1F8[0]);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A4AC, 5, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A4AC, 5, &work->joints.all[4]);
             } else {
-                func_080BB43C((u8*)&work->unk_218, gUnk_0961A574, 5, (u8*)&work->joints.all[4]);
+                func_080BB43C(&work->unk_218, gUnk_0961A574, 5, &work->joints.all[4]);
             }
         }
 
@@ -1327,14 +1324,11 @@ void func_080BB924(TmArmWork* work) {
         return;
     }
 
-    func_080BB5E8((u8*)&work->joints.all[4], (TmAnim*)&work->unk_218);
+    func_080BB5E8(&work->joints.all[4], &work->unk_218);
     func_080BB464(work);
 
     for (i = 0; i < 3; i++) {
-        offset = i * sizeof(TmArmJoint);
-        gfx = AnimUpdate((AnimState*)((u8*)work->joints.all + offset + 0xE8));
-        dst = &work->joints.all[4].gfx;
-        *(void**)((u8*)dst + offset) = gfx;
+        work->joints.arms[1][i].gfx = AnimUpdate(&work->joints.arms[1][i].anim);
     }
 }
 
@@ -1348,17 +1342,17 @@ void func_080BC304(TmArmWork* work) {
             work->unk_1F8[1].unk_0C = 0x110;
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619CDC, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619CDC, 3, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_09619D54, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619D54, 3, work->joints.all);
             }
         }
 
         if (work->unk_1B2 % 30 == 12) {
             if (work->unk_230 != 0) {
-                func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -0x600);
+                func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -0x600);
             } else {
-                func_080BB1D8((TmClbArg*)&work->unk_1C8, (TmClbSrc*)&work->unk_1F8[1], -0x600);
+                func_080BB1D8(&work->unk_1C8, &work->unk_1F8[1], -0x600);
             }
         }
 
@@ -1370,12 +1364,12 @@ void func_080BC304(TmArmWork* work) {
     case 7:
         if (work->unk_1B2 == 0) {
             work->unk_1F8[1].unk_0C = 0x110;
-            func_080BB1E8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1]);
+            func_080BB1E8(&work->unk_1E0, &work->unk_1F8[1]);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_0961A344, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A344, 6, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_0961A434, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A434, 6, work->joints.all);
             }
         }
 
@@ -1385,12 +1379,12 @@ void func_080BC304(TmArmWork* work) {
     case 14:
         if (work->unk_1B2 == 0) {
             work->unk_1F8[1].unk_0C = 185;
-            func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -128);
+            func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -128);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619DCC, 1, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619DCC, 1, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_09619DF4, 1, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619DF4, 1, work->joints.all);
             }
         }
 
@@ -1399,12 +1393,12 @@ void func_080BC304(TmArmWork* work) {
     case 13:
         if (work->unk_1B2 == 0) {
             work->unk_1F8[1].unk_0C = 185;
-            func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -128);
+            func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -128);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619DCC, 1, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619DCC, 1, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_09619DF4, 1, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619DF4, 1, work->joints.all);
             }
         }
 
@@ -1413,13 +1407,13 @@ void func_080BC304(TmArmWork* work) {
     case 1:
         if (work->unk_1B2 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619E58, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619E58, 3, work->joints.all);
                 work->unk_1F8[1].unk_0C = 0x10C;
-                func_080BB1F4((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], 1);
+                func_080BB1F4(&work->unk_1E0, &work->unk_1F8[1], 1);
             } else {
-                func_080BB43C(work->unk_224, gUnk_09619ED0, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619ED0, 3, work->joints.all);
                 work->unk_1F8[1].unk_0C = 0x118;
-                func_080BB1F4((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], 3);
+                func_080BB1F4(&work->unk_1E0, &work->unk_1F8[1], 3);
             }
         }
 
@@ -1434,13 +1428,13 @@ void func_080BC304(TmArmWork* work) {
     case 10:
         if (work->unk_1B2 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619E58, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619E58, 3, work->joints.all);
                 work->unk_1F8[1].unk_0C = 0x10C;
-                func_080BB1F4((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], 1);
+                func_080BB1F4(&work->unk_1E0, &work->unk_1F8[1], 1);
             } else {
-                func_080BB43C(work->unk_224, gUnk_09619ED0, 3, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619ED0, 3, work->joints.all);
                 work->unk_1F8[1].unk_0C = 0x118;
-                func_080BB1F4((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], 3);
+                func_080BB1F4(&work->unk_1E0, &work->unk_1F8[1], 3);
             }
         }
 
@@ -1455,12 +1449,12 @@ void func_080BC304(TmArmWork* work) {
     case 2:
         if (work->unk_1B2 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619F84, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619F84, 6, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_0961A074, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A074, 6, work->joints.all);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -0xB00);
+            func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -0xB00);
             work->unk_1F8[1].unk_0C = 0x10C;
         }
 
@@ -1473,12 +1467,12 @@ void func_080BC304(TmArmWork* work) {
     case 3:
         if (work->unk_1B2 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_09619F84, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_09619F84, 6, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_0961A074, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A074, 6, work->joints.all);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -0xB00);
+            func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -0xB00);
             work->unk_1F8[1].unk_0C = 0x10C;
         }
 
@@ -1491,12 +1485,12 @@ void func_080BC304(TmArmWork* work) {
     case 11:
         if (work->unk_1B2 == 0) {
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_0961A164, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A164, 6, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_0961A254, 6, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A254, 6, work->joints.all);
             }
 
-            func_080BB1D8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1], -0xB00);
+            func_080BB1D8(&work->unk_1E0, &work->unk_1F8[1], -0xB00);
             work->unk_1F8[1].unk_0C = 0x10C;
         }
 
@@ -1509,12 +1503,12 @@ void func_080BC304(TmArmWork* work) {
     case 9:
         if (work->unk_1B2 == 0) {
             work->unk_1F8[1].unk_0C = 0x110;
-            func_080BB1E8((TmClbArg*)&work->unk_1E0, (TmClbSrc*)&work->unk_1F8[1]);
+            func_080BB1E8(&work->unk_1E0, &work->unk_1F8[1]);
 
             if (work->src->state->flags & 0x20) {
-                func_080BB43C(work->unk_224, gUnk_0961A510, 5, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A510, 5, work->joints.all);
             } else {
-                func_080BB43C(work->unk_224, gUnk_0961A5D8, 5, (u8*)work->joints.all);
+                func_080BB43C(&work->unk_224, gUnk_0961A5D8, 5, work->joints.all);
             }
         }
 
@@ -1524,11 +1518,11 @@ void func_080BC304(TmArmWork* work) {
         return;
     }
 
-    func_080BB5E8((u8*)work->joints.all, (TmAnim*)work->unk_224);
+    func_080BB5E8(work->joints.all, &work->unk_224);
     func_080BB4C0(work);
 
     for (i = 0; i < 3; i++) {
-        work->joints.all[i].gfx = AnimUpdate((AnimState*)((u8*)&work->joints.all[i] + 0x18));
+        work->joints.all[i].gfx = AnimUpdate(&work->joints.all[i].anim);
     }
 }
 
@@ -1549,11 +1543,11 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
 
     if (work->src->state->unk_2C != 13) {
         gfx = AnimUpdate(&work->anim);
-        work->unk_1DC = (u32)gfx;
-        work->unk_1F4 = (u32)gfx;
+        work->unk_1C8.gfx = gfx;
+        work->unk_1E0.gfx = gfx;
 
         if (gFrameCounter % 5 == 0) {
-            LoadObjPaletteBank(work->palette[3] + 1, gUnk_096FB304 + work->unk_254 * 32);
+            LoadObjPaletteBank(work->palette->index + 1, gUnk_096FB304 + work->unk_254 * 32);
             work->unk_254 = (work->unk_254 + 1) & 7;
         }
     }
@@ -1577,7 +1571,7 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     if (gBtlWork->unk_070 != 0) {
         pal = work->palette;
     } else if ((work->src->state->flags & 1) && (gFrameCounter & 1)) {
-        pal = (void*)work->palette2;
+        pal = work->palette2;
     } else {
         pal = work->palette;
     }
@@ -1588,14 +1582,14 @@ void task_bos_tm_arm_2(TmArmWork* work) {
         WorldToScreen(&x, &y, work->src->unk_00 + j->unk_00, work->src->unk_04,
                       work->src->unk_08 + j->unk_04);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, (void*)work->tiles, pal, affine, 0x800,
+        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
                    (depth -= (work->src->unk_04 >> 8) * 4, (u16)depth));
         j = &work->joints.all[i];
         affine = AllocObjAffine(j->angle, 256, 256, 0);
         WorldToScreen(&x, &y, work->src->unk_0C + j->unk_00, work->src->unk_10,
                       work->src->unk_14 + j->unk_04);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, (void*)work->tiles, pal, affine, 0x800,
+        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
                    (depth -= (work->src->unk_10 >> 8) * 4, (u16)depth));
     }
 
@@ -1609,22 +1603,22 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     affine = AllocObjAffine(j->angle, mode, 256, 0);
     WorldToScreen(&x, &y, work->src->unk_00 + j->unk_00, work->src->unk_04,
                   work->src->unk_08 + j->unk_04);
-    DrawSprite(x, y, j->gfx, (void*)work->tiles, pal, affine, 0x800,
+    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
                (endDepth = -4100 - (work->src->unk_04 >> 8) * 4, (u16)endDepth));
     j = &work->joints.all[3];
     affine = AllocObjAffine(j->angle, mode, 256, 0);
     WorldToScreen(&x, &y, work->src->unk_0C + j->unk_00, work->src->unk_10,
                   work->src->unk_14 + j->unk_04);
-    DrawSprite(x, y, j->gfx, (void*)work->tiles, pal, affine, 0x800,
+    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
                (endDepth = -4100 - (work->src->unk_10 >> 8) * 4, (u16)endDepth));
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_tm_arm_3(TmArmWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjTiles((void*)work->tiles2);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles2);
     ReleaseObjPalette(work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 

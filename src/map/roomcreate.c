@@ -4,7 +4,7 @@
 #include "roomcreate.h"
 
 void task_roomcreate_0(RoomCreateWork* work) {
-    FldActor* act;
+    FldObj* obj;
 
     func_08093C04();
     gFieldState->flags |= 0x40000;
@@ -19,11 +19,11 @@ void task_roomcreate_0(RoomCreateWork* work) {
     work->x = gFieldState->actor.fieldPosition.x;
     work->y = gFieldState->actor.fieldPosition.y;
     work->z = gFieldState->actor.fieldPosition.z;
-    act = gFieldState->unk_68;
-    work->x2 = act->fieldPosition.x;
-    work->y2 = act->fieldPosition.y;
-    work->z2 = act->fieldPosition.z;
-    work->angle = act->angle;
+    obj = gFieldState->unk_68;
+    work->x2 = obj->fieldPosition.x;
+    work->y2 = obj->fieldPosition.y;
+    work->z2 = obj->fieldPosition.z;
+    work->angle = obj->angle;
     work->unk_18 = work->x2 + gSineTable[work->angle] * 50;
     work->unk_1C = work->y2 + -gSineTable[work->angle + 0x40] * 50;
     work->unk_20 = work->z2;
@@ -183,4 +183,4 @@ void task_roomcreate_3(RoomCreateWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-TaskDesc gTaskDescRoomcreate = { "task_roomcreate", task_roomcreate_0, task_roomcreate_1, task_roomcreate_2, task_roomcreate_3, 0x44 };
+TaskDesc gTaskDescRoomcreate = { "task_roomcreate", (TaskInitFunc)task_roomcreate_0, (TaskUpdateFunc)task_roomcreate_1, (TaskFunc)task_roomcreate_2, (TaskFunc)task_roomcreate_3, sizeof(RoomCreateWork) };

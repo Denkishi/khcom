@@ -14,62 +14,53 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_fld_1.c
-    start: 0x09EDECFC
-    end: 0x09EDF1C0
-  - name: sprites_fld_2.c
-    start: 0x09EDF308
-    end: 0x09EDF3E8
-  - name: sprites_fld_3.c
-    start: 0x09EDF5F4
-    end: 0x09EDF764
   - name: sprites_fld_frames_1.s
     start: 0x088D9B40
     end: 0x08908BFC
+    data_start: 0x09EDECFC
+    data_end: 0x09EDF1C0
   - name: sprites_fld_frames_2.s
     start: 0x0891A0DC
     end: 0x08925AB4
+    data_start: 0x09EDF308
+    data_end: 0x09EDF3E8
   - name: sprites_fld_frames_3.s
     start: 0x0893DBC8
     end: 0x0895085C
+    data_start: 0x09EDF5F4
+    data_end: 0x09EDF764
   jp:
-  - name: sprites_fld_1.c
-    start: 0x09EB6778
-    end: 0x09EB6C3C
-  - name: sprites_fld_2.c
-    start: 0x09EB6D84
-    end: 0x09EB6E64
-  - name: sprites_fld_3.c
-    start: 0x09EB7070
-    end: 0x09EB71E0
   - name: sprites_fld_frames_1.s
     start: 0x088CD128
     end: 0x088FC1E4
+    data_start: 0x09EB6778
+    data_end: 0x09EB6C3C
   - name: sprites_fld_frames_2.s
     start: 0x0890D6C4
     end: 0x0891909C
+    data_start: 0x09EB6D84
+    data_end: 0x09EB6E64
   - name: sprites_fld_frames_3.s
     start: 0x089311B0
     end: 0x08943E44
+    data_start: 0x09EB7070
+    data_end: 0x09EB71E0
   eu:
-  - name: sprites_fld_1.c
-    start: 0x09F59954
-    end: 0x09F59E18
-  - name: sprites_fld_2.c
-    start: 0x09F59F60
-    end: 0x09F5A040
-  - name: sprites_fld_3.c
-    start: 0x09F5A24C
-    end: 0x09F5A3BC
   - name: sprites_fld_frames_1.s
     start: 0x08905464
     end: 0x08934520
+    data_start: 0x09F59954
+    data_end: 0x09F59E18
   - name: sprites_fld_frames_2.s
     start: 0x08945A00
     end: 0x089513D8
+    data_start: 0x09F59F60
+    data_end: 0x09F5A040
   - name: sprites_fld_frames_3.s
     start: 0x089694EC
     end: 0x0897C180
+    data_start: 0x09F5A24C
+    data_end: 0x09F5A3BC
 entries:
 - name: gSor1bb11Frames
   record: SpriteTable

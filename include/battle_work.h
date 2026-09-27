@@ -65,7 +65,7 @@ typedef struct BtlWork {
     s16 unk_0EC;
     u8 unk_0EE;
     u8 unk_0EF;
-    s32 unk_0F0;
+    Collider* unk_0F0;
     s32 unk_0F4;
     u16 unk_0F8;
     u8 unk_0FA;

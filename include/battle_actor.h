@@ -37,7 +37,7 @@ struct HumWork;
 struct HumSub;
 
 void BtlWorkInit(void);
-u8 func_0801BCA8(s32 a);
+u8 func_0801BCA8(Collider* a);
 void SetBattleActorPosition(s32 a, s32 b, s32 c);
 u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z);
 void func_0801C068(void);

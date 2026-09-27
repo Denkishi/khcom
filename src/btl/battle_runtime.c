@@ -1744,7 +1744,7 @@ void func_0801BBF0(BtlObj* p) {
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &a);
 }
 
-u8 func_0801BCA8(s32 a) {
+u8 func_0801BCA8(Collider* a) {
     if (a == gBtlWork->unk_0F0) {
         return 1;
     } else {

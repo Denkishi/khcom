@@ -140,7 +140,7 @@ void func_080C427C(DsdItaWork* work) {
     s32 v;
     s16 k;
 
-    if (gBtlWork->unk_0F0 == (u32)&work->collider) {
+    if (gBtlWork->unk_0F0 == &work->collider) {
         v = work->dsd->flags & 32;
 
         if (v == 0) {

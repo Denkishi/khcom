@@ -6067,7 +6067,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (work->unk_15A & 0x20) {
-        if (gBtlWork->unk_0F0 == (s32)p->collider.other) {
+        if (gBtlWork->unk_0F0 == p->collider.other) {
             p->x += p->collider.unk_44 - work->unk_178;
             p->y += p->collider.unk_48 - work->unk_17C;
             p->z += p->collider.unk_40 - work->unk_180;
@@ -6080,7 +6080,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_178 = p->collider.unk_44;
             work->unk_17C = p->collider.unk_48;
             work->unk_180 = p->collider.unk_40;
-            gBtlWork->unk_0F0 = (s32)p->collider.other;
+            gBtlWork->unk_0F0 = p->collider.other;
         } else {
             work->unk_15A &= ~0x20;
             gBtlWork->unk_0F0 = 0;
@@ -7058,7 +7058,6 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     u16 pressed;
     u16 uv;
     s16 n;
-    u8* gs;
     s32 t;
     s32 t2;
     s32 tx;
@@ -8973,8 +8972,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             LoadObjPaletteBank(work->palette->index, gUnk_08F6DD04);
             gBtlWork->flags |= 0x800000000000LL;
             gBtlWork->flags |= 0x80000000000000LL;
-            gs = (u8*)&gGameState;
-            gBtlWork->unk_1C8 = *(u16*)(gs + 0xFC);
+            gBtlWork->unk_1C8 = gGameState.progression.dp;
             func_0807630C();
             work->unk_1A0 = 5;
             work->unk_15A = 6;
@@ -10594,7 +10592,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->unk_010 = p->unk_0D4;
     }
 
-    if ((work->unk_15E & 0x20) && *(s32*)&gBtlWork->unk_0F0 == (s32)p->collider.other) {
+    if ((work->unk_15E & 0x20) && gBtlWork->unk_0F0 == p->collider.other) {
         p->x += p->collider.unk_44 - work->unk_17C;
         p->y += p->collider.unk_48 - work->unk_180;
         p->z += p->collider.unk_40 - work->unk_184;
@@ -10606,10 +10604,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->unk_17C = p->collider.unk_44;
             work->unk_180 = p->collider.unk_48;
             work->unk_184 = p->collider.unk_40;
-            *(s32*)&gBtlWork->unk_0F0 = (s32)p->collider.other;
+            gBtlWork->unk_0F0 = p->collider.other;
         } else {
             work->unk_15E &= 0xFFDF;
-            *(s32*)&gBtlWork->unk_0F0 = 0;
+            gBtlWork->unk_0F0 = 0;
         }
 
         work->unk_154 = 0;
@@ -10642,7 +10640,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        *(s32*)&gBtlWork->unk_0F0 = 0;
+        gBtlWork->unk_0F0 = 0;
     }
 
     t = p->vx;

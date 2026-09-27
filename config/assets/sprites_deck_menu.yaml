@@ -423,92 +423,22 @@ entries:
     address: 0x09F7711C
 - name: gUnk_09EEB008
   record: SpriteTable
-  items: [gUnk_090A44E4, gUnk_090A44FA, gUnk_090A4510, gUnk_090A4526, gUnk_090A453C, gUnk_090A4552, gUnk_090A4568, gUnk_090A457E]
+  items: [gUnk_090A44E4, gUnk_090A44FA, gUnk_090A4510, gUnk_090A4526, gUnk_090A453C, gUnk_090A4552, gUnk_090A4568, gUnk_090A457E, gUnk_090A4594, gUnk_090A45AA, gUnk_090A45C0, gUnk_090A45D6, gUnk_090A45EC]
   us:
     address: 0x09EEB008
   jp:
     address: 0x09EC23F4
   eu:
     address: 0x09F77128
-- name: gUnk_09EEB028
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A4594]
-  us:
-    address: 0x09EEB028
-  jp:
-    address: 0x09EC2414
-  eu:
-    address: 0x09F77148
-- name: gUnk_09EEB02C
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A45AA]
-  us:
-    address: 0x09EEB02C
-  jp:
-    address: 0x09EC2418
-  eu:
-    address: 0x09F7714C
-- name: gUnk_09EEB030
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A45C0]
-  us:
-    address: 0x09EEB030
-  jp:
-    address: 0x09EC241C
-  eu:
-    address: 0x09F77150
-- name: gUnk_09EEB034
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A45D6]
-  us:
-    address: 0x09EEB034
-  jp:
-    address: 0x09EC2420
-  eu:
-    address: 0x09F77154
-- name: gUnk_09EEB038
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A45EC]
-  us:
-    address: 0x09EEB038
-  jp:
-    address: 0x09EC2424
-  eu:
-    address: 0x09F77158
 - name: gUnk_09EEB03C
   record: AnimTable
-  items: [gUnk_090A45F6, gUnk_090A4614, gUnk_090A461E]
+  items: [gUnk_090A45F6, gUnk_090A4614, gUnk_090A461E, gUnk_090A463C, gUnk_090A4646]
   us:
     address: 0x09EEB03C
   jp:
     address: 0x09EC2428
   eu:
     address: 0x09F7715C
-- name: gUnk_09EEB048
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090A463C]
-  us:
-    address: 0x09EEB048
-  jp:
-    address: 0x09EC2434
-  eu:
-    address: 0x09F77168
-- name: gUnk_09EEB04C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090A4646]
-  us:
-    address: 0x09EEB04C
-  jp:
-    address: 0x09EC2438
-  eu:
-    address: 0x09F7716C
 - name: gUnk_09EEB050
   record: SpriteTable
   items: [gUnk_090A4984, gUnk_090A49A0, gUnk_090A49BC, gUnk_090A49D2, gUnk_090A49E2]

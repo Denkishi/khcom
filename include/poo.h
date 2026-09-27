@@ -39,7 +39,7 @@
 #include "btl_api.h"
 #include "gba/io_reg.h"
 typedef struct PooHit {
-    void* unk_00;
+    Collider* unk_00;
     u16 unk_04;
     u8 unk_06;
     u8 unk_07;
@@ -235,7 +235,7 @@ typedef struct PooPileWork {
     u16 unk_B0;
     u16 unk_B2;
     TaskPool tasks;
-    s32 task;
+    Task* task;
     u8 unk_CC;
     u8 unk_CD[0x03];
 } PooPileWork;
@@ -348,7 +348,7 @@ typedef struct PooBalloonWork {
     PooNode node;
     TaskPool tasks;
     Task* task;
-    s32 unk_C8;
+    Task* unk_C8;
     u16 unk_CC;
     u16 angle;
 } PooBalloonWork;
@@ -1280,10 +1280,10 @@ void CreatePooShadowscaleTask(void* pool, void* a, s32 b);
 s32 func_080CD1DC(u32 a);
 s32 func_080CD1F8(u32 a);
 void func_080C89B4(PoohWork* w, const PooSpot* b, u16 c);
-u16 func_080CCB80(u16* p);
-void func_080CCB84(u16* p, u16 v);
-u16 func_080CCB88(u16* p);
-void func_080CCB8C(u16* p, u16 v);
+u16 func_080CCB80(PooNode* n);
+void func_080CCB84(PooNode* n, u16 v);
+u16 func_080CCB88(PooNode* n);
+void func_080CCB8C(PooNode* n, u16 v);
 u8 task_poo_balloon_1(void* w);
 void task_poo_mapanime_2(void* w);
 void task_poo_mapanime_3(void* w);
@@ -1318,7 +1318,7 @@ void func_080D2CF4(u16* a, u16* b);
 void GetPooStatePos2(PooPos* p);
 void func_080D2D3C(s32 a);
 void func_080D2D80(s32 a);
-u16 func_080D2E28(void* a, u16 b);
+u16 func_080D2E28(Collider* a, u16 b);
 void func_080D2E70(u16 a, u8 b);
 u16 func_080D2EB8(void);
 void func_080D2F10(u8 a);

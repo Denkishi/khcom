@@ -25,7 +25,7 @@ u16 gUnk_0203C40C EWRAM_COMMON(4);
 struct PooNode* gUnk_0203C410 EWRAM_COMMON(4);
 void* gUnk_0203C414 EWRAM_COMMON(4);
 PooActor gPooActor EWRAM_COMMON(16);
-u8* gStockMesDispWork EWRAM_COMMON(4);
+void* gStockMesDispWork EWRAM_COMMON(4);
 PooState gPooState EWRAM_COMMON(16);
 void* gUnk_0203C4B4 EWRAM_COMMON(4);
 
@@ -636,13 +636,13 @@ void func_080C8C40(PoohWork* w, PooNode* n) {
         if (w->unk_D0 == 0) {
             break;
         }
-        c = func_080CCB80(&w->unk_D0->unk_00);
+        c = func_080CCB80(w->unk_D0);
 
         if (c <= 1) {
             break;
         }
         c >>= 1;
-        func_080CCB84(&w->unk_D0->unk_00, c);
+        func_080CCB84(w->unk_D0, c);
         break;
     case 29:
         if (AnimIsFinished(&w->anim) == 0) {
@@ -2678,7 +2678,7 @@ u8 task_poo_pitAndButterfly_1(PooTrapWork* w) {
 
     if (w->unk_8C != 0) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
-            func_080CCB84(&w->node.unk_00, 0);
+            func_080CCB84(&w->node, 0);
         }
     }
     return 1;
@@ -3032,11 +3032,11 @@ u8 task_poo_trapballoon_1(PooBalloonWork* w) {
         return 1;
     }
 
-    if (IsTaskActive((Task*)w->unk_C8) != 0) {
+    if (IsTaskActive(w->unk_C8) != 0) {
         return 1;
     }
 
-    if (IsTaskActive(w->task) == 0 && IsTaskActive((Task*)w->unk_C8) == 0) {
+    if (IsTaskActive(w->task) == 0 && IsTaskActive(w->unk_C8) == 0) {
         return 0;
     }
 
@@ -3069,7 +3069,7 @@ u8 task_poo_trapballoon_1(PooBalloonWork* w) {
     func_08000DE8(&w->tasks, w->task);
     w->pos.x -= 0x800;
     w->pos.y += 0x1000;
-    w->unk_C8 = (s32)TaskCreate(&w->tasks, &gTaskDescPooFreeballoon, &w->pos);
+    w->unk_C8 = TaskCreate(&w->tasks, &gTaskDescPooFreeballoon, &w->pos);
     m4aSongNumStart(SONG_SYS_PO_BLOON);
     return 1;
 }
@@ -3079,7 +3079,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
     s16 x;
     s16 y;
 
-    if (IsTaskActive((Task*)w->unk_C8) != 0) {
+    if (IsTaskActive(w->unk_C8) != 0) {
         TaskPoolUpdate(&w->tasks);
         TaskPoolDraw(&w->tasks);
     } else {
@@ -3142,7 +3142,7 @@ u8 task_poo_owlballoon_1(PooOwlBalloonWork* w) {
         gUnk_0203C3DC = w->pos.x;
         gUnk_0203C3E8 = w->pos.y;
         gUnk_0203C3F0 = 7;
-        func_080CCB84(&w->node.unk_00, 0);
+        func_080CCB84(&w->node, 0);
         m4aSongNumStart(SONG_SND_385);
         return 0;
     }
@@ -3185,25 +3185,25 @@ void task_poo_owlballoon_3(PooOwlBalloonWork* w) {
     func_080CCBD4(&w->node);
 }
 
-u16 func_080CCB80(u16* p) {
-    return *p;
+u16 func_080CCB80(PooNode* n) {
+    return n->unk_00;
 }
 
-void func_080CCB84(u16* p, u16 v) {
-    *p = v;
+void func_080CCB84(PooNode* n, u16 v) {
+    n->unk_00 = v;
 }
 
-u16 func_080CCB88(u16* p) {
-    return p[1];
+u16 func_080CCB88(PooNode* n) {
+    return n->unk_02;
 }
 
-void func_080CCB8C(u16* p, u16 v) {
-    p[1] = v;
+void func_080CCB8C(PooNode* n, u16 v) {
+    n->unk_02 = v;
 }
 
 void func_080CCB90(PooNode* n, u16 v, void* p) {
-    func_080CCB84(&n->unk_00, v);
-    func_080CCB8C(&n->unk_00, v);
+    func_080CCB84(n, v);
+    func_080CCB8C(n, v);
     n->unk_08 = p;
     n->unk_04 = 0;
     ListNodeInit(&n->node, &gUnk_02034DF8, n);
@@ -3230,7 +3230,7 @@ s32 func_080CCBF8(PooNode* n) {
     p = n->unk_08;
     dx = (q->x - p->x) >> 8;
     dy = (q->y - p->y) >> 8;
-    r = func_080CCB80(&n->unk_00);
+    r = func_080CCB80(n);
 
     if ((s16)dx * (s16)dx > 0x3840 && (s16)dy * (s16)dy > 0x1900) {
         return 0;
@@ -3299,7 +3299,7 @@ u8 task_poo_honey_1(PooHoneyWork* w) {
     case 0:
         if (w->minPos.x <= gUnk_0203C3EC->x && gUnk_0203C3EC->x <= w->maxPos.x && w->minPos.y <= gUnk_0203C3EC->y && gUnk_0203C3EC->y <= w->maxPos.y) {
             gUnk_0203C3F0 = 3;
-            func_080CCB84(&w->node.unk_00, 0);
+            func_080CCB84(&w->node, 0);
             w->state++;
         }
         break;
@@ -3530,10 +3530,10 @@ u8 task_poo_pile_1(PooPileWork* w) {
     t = *(PooPos*)&w->x;
     t.z -= (u16)func_080CD1F8(w->unk_B0) * 256;
 
-    if (IsTaskActive((Task*)w->task) != 0) {
-        func_08000DE8(&w->tasks, (Task*)w->task);
+    if (IsTaskActive(w->task) != 0) {
+        func_08000DE8(&w->tasks, w->task);
     }
-    w->task = (s32)TaskCreate(&w->tasks, &gTaskDescPooSpark, &t);
+    w->task = TaskCreate(&w->tasks, &gTaskDescPooSpark, &t);
     w->unk_B0 = func_080CD1DC(w->unk_B0);
     AnimStart(&w->anim, w->unk_B0, 0);
     m4aSongNumStart(SONG_SYS_PO_WOOD);
@@ -4719,11 +4719,11 @@ void task_poo_roo_3(PooRooWork* w) {
 }
 
 u8 func_080CF114(void) {
-    return AnimIsFrameEnding((u8*)gStockMesDispWork + 0x0C);
+    return AnimIsFrameEnding(&((PooRooWork*)gStockMesDispWork)->anim);
 }
 
 u8 func_080CF12C(void) {
-    return AnimIsFinished((u8*)gStockMesDispWork + 0x0C);
+    return AnimIsFinished(&((PooRooWork*)gStockMesDispWork)->anim);
 }
 
 void task_poo_roo_footmark_0(PooFootmarkWork* w) {
@@ -4763,7 +4763,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* w) {
             n = &w->node;
             func_080CCB90(n, 0x240, &w->unk_0C);
             if (func_080D2D50(5) != 0) {
-                func_080CCB84(&n->unk_00, 0);
+                func_080CCB84(n, 0);
             }
         }
         DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, 0x800, 0xFFF1);
@@ -7141,7 +7141,7 @@ u8 func_080D2DD8(void) {
     return 1;
 }
 
-u16 func_080D2E28(void* a, u16 b) {
+u16 func_080D2E28(Collider* a, u16 b) {
     if (((PoohInteractionRegistry*)gUnk_0203C4B4)->unk_30 > 5) {
         return 0xFFFF;
     }
@@ -7162,7 +7162,7 @@ void func_080D2E84(void) {
 void func_080D2E98(void) {
     void** state = &gUnk_0203C4B4;
 
-    *state = EwramAlloc(0x34);
+    *state = EwramAlloc(sizeof(PoohInteractionRegistry));
     ((PoohInteractionRegistry*)*state)->unk_30 = 0;
     func_080D2F10(0);
 }

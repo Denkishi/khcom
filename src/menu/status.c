@@ -1029,7 +1029,7 @@ u16 func_080D8B84(void** a, void** b, void** c) {
 }
 
 void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
-    gStockMesDispWork = (u8*)work;
+    gStockMesDispWork = work;
     *(StatusMesParam*)&work->x = *arg;
     work->textCount = GetCardHelpTextCount(work->helpIndex);
 

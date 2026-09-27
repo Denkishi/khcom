@@ -52,7 +52,7 @@ extern u16 gUnk_0203C40C;
 extern struct PooNode* gUnk_0203C410;
 extern void* gUnk_0203C414;
 extern PooActor gPooActor;
-extern u8* gStockMesDispWork;
+extern void* gStockMesDispWork;
 extern PooState gPooState;
 extern void* gUnk_0203C4B4;
 

@@ -1467,21 +1467,17 @@ typedef struct UnkStruct_080A5D3C {
 
 typedef char UnkStruct_080A5D3C_sizechk[(sizeof(struct UnkStruct_080A5D3C) == 0x50C) ? 1 : -1];
 
+struct BtlObj;
+
 typedef struct LevelUpEffectArgs {
     s32 x;
     s32 y;
     u8 unk_08;
     u8 unk_09[3];
-    void* unk_0C;
-    void* unk_10;
-    u8* unk_14;
+    struct BtlObj* target;
+    void* tiles;
+    ObjPalette* palette;
 } LevelUpEffectArgs;
-
-typedef struct UnkStruct_080A1B4C {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-} UnkStruct_080A1B4C;
 
 typedef struct CardEffectArgs {
     s32 unk_00;
@@ -1495,7 +1491,7 @@ typedef struct LevelUpEffectWork {
     void* tiles;
     void* palette;
     void* unk_08;
-    void* unk_0C;
+    struct BtlObj* target;
     s32 unk_10[4];
     s32 unk_20[4];
     s32 unk_30;
@@ -1511,7 +1507,7 @@ typedef struct LevelUpEffectWork {
     u8 unk_95;
     u8 unk_96;
     u8 unk_97;
-    u8 tasks[0x14];
+    TaskPool tasks;
 } LevelUpEffectWork;
 
 typedef struct UnkStruct_0809FBCC {

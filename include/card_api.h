@@ -8,7 +8,8 @@
 struct UnkStruct_02039DD4;
 struct CardBattleWork;
 struct UnkStruct_08098670;
-struct UnkStruct_080A1B4C;
+struct BtlObj;
+struct TaskPool;
 struct UnkStruct_080ABA80;
 struct MapcardWork;
 
@@ -61,7 +62,7 @@ void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d);
 void func_0809B644(void* pool, s16 x, s16 y, s16 z, u8 idx);
 void func_0809D2B0(u8 a, u8 b, u8 c, u8* s);
 void func_0809D458(u16 x, u16 y, u16 color, s32 value);
-u8 func_080A1B4C(struct UnkStruct_080A1B4C* p, void* pool);
+u8 func_080A1B4C(struct BtlObj* p, struct TaskPool* pool);
 void func_080A32DC(u8* p);
 void CreateCardMessageTask(void* pool, u32 a, u16 b);
 void CreateSysmsgwinTask(void* pool, u16 b);

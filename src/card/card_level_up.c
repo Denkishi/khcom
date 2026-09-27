@@ -862,7 +862,7 @@ u8 func_0809F730(LevelUpWork* w, void* a) {
         args.x = 192;
         args.y = 60;
         args.unk_08 = 0;
-        args.unk_0C = 0;
+        args.target = 0;
         TaskCreate(&w->pool, &gTaskDescLVUPEFFECT, &args);
         m4aSongNumStart(SONG_SYS_LVUP);
 #endif
@@ -1816,29 +1816,29 @@ s32 func_080A151C(void) {
     return 0;
 }
 
-void func_080A1554(u8* work) {
+void func_080A1554(LevelUpEffectWork* w) {
     s16 x;
     s16 y;
-    s32* t;
+    BtlObj* t;
 
-    t = *(s32**)&work[0x0C];
+    t = w->target;
 
     if (t != 0) {
-        WorldToScreen(&x, &y, t[1], t[2], t[3]);
-        *(s32*)&work[0x64] = x;
-        *(s32*)&work[0x68] = y - 16;
+        WorldToScreen(&x, &y, t->x, t->y, t->z);
+        w->unk_64 = x;
+        w->unk_68 = y - 16;
     }
 }
 void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     s32 i;
     LevelUpEffectArgs args;
 
-    w->unk_0C = a->unk_0C;
+    w->target = a->target;
     w->unk_64 = a->x;
     w->unk_68 = a->y;
     w->unk_30 = 30;
     w->unk_97 = a->unk_08;
-    func_080A1554((u8*)w);
+    func_080A1554(w);
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
@@ -1877,22 +1877,22 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->unk_94 = 0;
     w->unk_95 = 0;
     w->unk_96 = 24;
-    TaskPoolInit(w->tasks, 4);
+    TaskPoolInit(&w->tasks, 4);
 
-    if (w->unk_0C != 0 && gUnk_02034AF8 == 0) {
+    if (w->target != 0 && gUnk_02034AF8 == 0) {
         args.x = w->x[0];
         args.y = w->y[0];
-        args.unk_0C = w->unk_0C;
-        args.unk_10 = w->tiles;
-        args.unk_14 = w->palette;
-        TaskCreate(w->tasks, &gTaskDescLvupLogo, &args);
+        args.target = w->target;
+        args.tiles = w->tiles;
+        args.palette = w->palette;
+        TaskCreate(&w->tasks, &gTaskDescLvupLogo, &args);
         gUnk_02034AF8 = 1;
     }
 }
 u8 LVUP_EFFECT_1(LevelUpEffectWork* w, void* a) {
     s32 i;
 
-    func_080A1554((u8*)w);
+    func_080A1554(w);
 
     if ((s8)w->unk_96 > 0) {
         for (i = 0; i < 4; i++) {
@@ -1990,13 +1990,13 @@ void LVUP_EFFECT_2(LevelUpEffectWork* w) {
         }
     }
 
-    TaskPoolDraw(w->tasks);
+    TaskPoolDraw(&w->tasks);
 }
 
-void LVUP_EFFECT_3(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x00]);
-    ReleaseObjPalette(*(void**)&work[0x04]);
-    TaskPoolDestroy(&work[0x98]);
+void LVUP_EFFECT_3(LevelUpEffectWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
+    TaskPoolDestroy(&w->tasks);
 
     if (gBtlWork->flags & 0x20000) {
         gBtlWork->flags &= ~0x20000;
@@ -2078,7 +2078,7 @@ TaskDesc gTaskDescLVUPEFFECT = {
     (TaskUpdateFunc)LVUP_EFFECT_1,
     (TaskFunc)LVUP_EFFECT_2,
     (TaskFunc)LVUP_EFFECT_3,
-    0xAC,
+    sizeof(LevelUpEffectWork),
 };
 
 const s32 gUnk_09037FFC[4] = { -0xF000, 0xF000, 0, 0 };

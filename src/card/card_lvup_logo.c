@@ -47,14 +47,14 @@ extern u8 gUnkEu_09170202[];
 extern u8 gUnkEu_0916FDCA[];
 #endif
 extern u8* gEventState;
-void func_080A1554(u8* work);
+void func_080A1554(LevelUpEffectWork* w);
 
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->x[0] = a->x;
     w->unk_64 = a->x;
     w->y[0] = a->y;
     w->unk_68 = a->y;
-    w->unk_0C = a->unk_0C;
+    w->target = a->target;
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
@@ -80,40 +80,38 @@ void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
     LoadObjPalette(gCard00Palette, 32);
-    w->tiles = a->unk_10;
-    w->palette = a->unk_14;
-    FadeSetPaletteExcluded(*(u16*)(a->unk_14 + 6) + 16, 1);
+    w->tiles = a->tiles;
+    w->palette = a->palette;
+    FadeSetPaletteExcluded(a->palette->index + 16, 1);
     w->unk_94 = 0;
     w->unk_95 = 0;
     w->unk_6C[0] = -0x280;
     m4aSongNumStart(SONG_BTL_LVUP);
 }
 
-s32 Lvup_Logo_1(u8* work) {
-    *(s32*)&work[0x44] += *(s32*)&work[0x6C];
-    *(s32*)&work[0x6C] += 25;
-    func_080A1554(work);
-    *(s32*)&work[0x34] = *(s32*)&work[0x64] << 8;
-    ((s8*)work)[0x95]++;
+s32 Lvup_Logo_1(LevelUpEffectWork* w) {
+    w->y[0] += w->unk_6C[0];
+    w->unk_6C[0] += 25;
+    func_080A1554(w);
+    w->x[0] = w->unk_64 << 8;
+    w->unk_95++;
 
-    if (((s8*)work)[0x95] == 60) {
+    if ((s8)w->unk_95 == 60) {
         return 0;
     }
 
     return 1;
 }
-void Lvup_Logo_2(u8* work) {
-    DrawSprite(*(s32*)&work[0x34] >> 8, *(s32*)&work[0x44] >> 8,
-               gUnk_09EEA19C[((s8*)work)[0x94]], *(void**)&work[0x00],
-               *(void**)&work[0x04], 0, 0, 10);
+void Lvup_Logo_2(LevelUpEffectWork* w) {
+    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->unk_94], w->tiles, w->palette, 0, 0, 10);
 }
-void Lvup_Logo_3(void** p) {
-    ReleaseObjTiles(p[0]);
-    ReleaseObjPalette(p[1]);
+void Lvup_Logo_3(LevelUpEffectWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
     gUnk_02034AF8 = 0;
 }
 
-u8 func_080A1B4C(UnkStruct_080A1B4C* p, void* pool) {
+u8 func_080A1B4C(BtlObj* p, TaskPool* pool) {
     LevelUpEffectArgs args;
 
     gUnk_02034AF8 = 0;
@@ -122,10 +120,10 @@ u8 func_080A1B4C(UnkStruct_080A1B4C* p, void* pool) {
         return 0;
     }
 
-    args.x = p->unk_04;
-    args.y = p->unk_08;
+    args.x = p->x;
+    args.y = p->y;
     args.unk_08 = 0;
-    args.unk_0C = p;
+    args.target = p;
     TaskCreate(pool, &gTaskDescLVUPEFFECT, &args);
     gBtlWork->flags |= 0x20000;
     return 1;
@@ -219,7 +217,7 @@ TaskDesc gTaskDescLvupLogo = {
     (TaskUpdateFunc)Lvup_Logo_1,
     (TaskFunc)Lvup_Logo_2,
     (TaskFunc)Lvup_Logo_3,
-    0xAC,
+    sizeof(LevelUpEffectWork),
 };
 
 TaskDesc gTaskDescEvMapObj = {

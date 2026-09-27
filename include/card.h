@@ -1400,39 +1400,55 @@ typedef struct EventMapObjectDef {
     u16 placementCount;
 } EventMapObjectDef;
 
+typedef struct SelmapEventKeyArgs {
+    ObjPalette* palette;
+    void* unk_04;
+    s32 unk_08;
+} SelmapEventKeyArgs;
+
 typedef struct MapSelectWork {
     TaskPool tasks;
     ListPool cards;
     u8 unk_024[8];
-    UnkStruct_080038C8* tiles4;
+    ObjTiles* tiles4;
     ObjPalette* palette;
     void* tiles2;
     void* tiles3;
     void* tiles;
-    u8 unk_040[0x1AC];
+    ObjPalette* palette2;
+    void* tiles5;
+    ObjPalette* palette3;
+    TextSlot textSlots[48];
+    ObjPalette* palette4;
+    u8 unk_1D0[0x10];
+    void* tiles6;
+    void* unk_1E4;
+    void* tiles7;
     MapcardWork* card;
-    u8 unk_1F0[0x04];
+    MapcardWork* prevCard;
     MapcardWork* card2;
-    u8 unk_1F8[0x40];
-    void* unk_238;
+    AnimState anim;
+    AnimState anim2;
+    u8 unk_228[0x10];
+    struct SelmapEventKeyWork* eventKey;
     s32 unk_23C;
     s32 unk_240;
     s32 unk_244;
     s32 x3;
-    u8 unk_24C[0x04];
+    s32 unk_24C;
     s32 x;
     s32 y;
     s32 x2;
     s32 y2;
-    u8 unk_260[0x04];
+    s32 unk_260;
     s32 unk_264;
-    u8 unk_268[0x04];
+    s32 unk_268;
     s32 y3;
     s32 y4;
     void* gfx;
-    u8 unk_278[0x04];
+    void* gfx2;
     u16 unk_27C;
-    u8 unk_27E[0x02];
+    u16 unk_27E;
     s16 unk_280;
     s16 unk_282;
     u8 unk_284;
@@ -1459,14 +1475,12 @@ typedef struct MapSelectWork {
     u8 unk_2C1;
     u8 unk_2C2;
     u8 unk_2C3;
-    void* unk_2C4;
-    u8 unk_2C8[0x04];
-    s32 unk_2CC;
+    SelmapEventKeyArgs eventKeyArgs;
     u8 unk_2D0[0x0A];
     u8 unk_2DA;
     u8 unk_2DB;
     void* unk_2DC;
-    void* unk_2E0;
+    UnkStruct_080933D8* unk_2E0;
 } MapSelectWork;
 
 typedef char MapSelectWork_size[(sizeof(struct MapSelectWork) == 0x2E4) ? 1 : -1];
@@ -2430,7 +2444,7 @@ extern u8 gUnk_02034AB6[2];
 #ifdef VERSION_EU
 extern u8 gUnkEu_02034AD4[4];
 #endif
-extern u8 gUnk_02034AB8[20];
+extern TaskPool gUnk_02034AB8;
 extern u8 gUnk_02034ACC;
 extern u32 gUnk_02034AD0;
 extern UnkStruct_02034AD4* gUnk_02034AD4;

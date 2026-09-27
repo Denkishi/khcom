@@ -46,7 +46,7 @@
 #include "sprites_card.h"
 #include "sprites_deck_menu.h"
 
-u8 gUnk_02034AB8[20];
+TaskPool gUnk_02034AB8;
 
 u8 gUnk_02034ACC;
 
@@ -64,9 +64,6 @@ extern void** gUnk_09EE75B8[];
 extern AnimHeader** gUnk_09EE75C8[];
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09618D18[];
-#ifdef VERSION_EU
-extern u8 gUnkEu_09F72C10[];
-#endif
 u16 func_08093B08(u16 a);
 u8 Reload_Gage_1(ReloadGageWork* w, void* a);
 u8 func_080954C4(ReloadGageWork* w, void* a);
@@ -88,7 +85,11 @@ s32 RemoveMapCard(u16 a);
 u8 func_0809254C(MapSelectWork* w, void* a);
 u8 func_080928E4(MapSelectWork* w, void* a);
 u8 func_08092E2C(MapSelectWork* w);
+void func_08093434(MapSelectWork* w);
+void func_08093708(MapSelectWork* w);
 s32 func_08093838(MapSelectWork* w);
+void func_08093D28(u16 a, MapSelectWork* w);
+void func_08093F5C(MapSelectWork* w);
 void func_08094DEC(MapcardWork* w);
 void func_08094E90(MapcardWork* w);
 s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w);
@@ -109,19 +110,15 @@ void WORLDSELECT_0(void) {
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
-    TaskPoolInit(gUnk_02034AB8, 1);
-#ifdef VERSION_EU
-    TaskCreate(gUnk_02034AB8, gUnkEu_09F72C10, 0);
-#else
-    TaskCreate(gUnk_02034AB8, &gUnk_09EE7804, 0);
-#endif
+    TaskPoolInit(&gUnk_02034AB8, 1);
+    TaskCreate(&gUnk_02034AB8, &gUnk_09EE7804, 0);
 }
 void WORLDSELECT_1(void) {
-    TaskPoolUpdate(gUnk_02034AB8);
-    TaskPoolDraw(gUnk_02034AB8);
+    TaskPoolUpdate(&gUnk_02034AB8);
+    TaskPoolDraw(&gUnk_02034AB8);
 }
 void WORLDSELECT_2(void) {
-    TaskPoolDestroy(gUnk_02034AB8);
+    TaskPoolDestroy(&gUnk_02034AB8);
 }
 void func_0809332C(MapSelectWork* w);
 void MapSelect_0(MapSelectWork* w, u8* a) {
@@ -130,7 +127,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
 
     func_080A42B4();
     zero = 0;
-    CpuSet(&zero, w, 0x050000B9);
+    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(MapSelectWork) / 4);
     w->unk_294 = a;
     *a = 0;
     w->unk_286 = 0;
@@ -143,19 +140,19 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->unk_2C0 = 0;
     w->unk_2BE = func_080DF500();
     n = (u8)func_080E0378() + 1;
-    *(u16*)w->unk_27E = n;
+    w->unk_27E = n;
     if (n == 10) {
-        *(u16*)w->unk_27E = 0;
+        w->unk_27E = 0;
     }
     w->tiles3 = 0;
     if (w->unk_2BE == 0) {
-        if (*(u16*)w->unk_27E == 0) {
+        if (w->unk_27E == 0) {
             w->tiles4 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[0], gUnk_0950C478);
         } else {
             w->tiles4 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[1], gUnk_0950C478);
-            RequestDma3Copy((u8*)w->tiles4->src + (*(u16*)w->unk_27E << 7),
+            RequestDma3Copy((u8*)w->tiles4->src + (w->unk_27E << 7),
                            (void*)(0x06010000 + ((w->tiles4->index + 4) << 5)), 0x80);
             RequestDma3Copy((u8*)w->tiles4->src + 0x500,
                            (void*)(0x06010000 + (w->tiles4->index << 5)), 0x80);
@@ -175,18 +172,18 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     AnimStart(&gMapCardUiResources.anim, 0, 1);
     gMapCardUiResources.gfx = AnimGetGfx(&gMapCardUiResources.anim);
     w->tiles = AllocObjTiles(0x3C0, 0);
-    *(void**)w->unk_040 = LoadObjPalette(gUnk_09618D18, 32);
+    w->palette2 = LoadObjPalette(gUnk_09618D18, 32);
     SetObjTileSource(w->tiles, gUnk_093F47E4);
-    AnimInit((AnimState*)w->unk_1F8, gUnk_09EF1194, gUnk_09EF1180);
-    AnimStart((AnimState*)w->unk_1F8, 0, 1);
-    w->gfx = AnimGetGfx((AnimState*)w->unk_1F8);
-    *(void**)&w->unk_040[4] = AllocObjTiles(0x120, 0);
-    *(void**)&w->unk_040[8] = LoadObjPalette(gUnk_09618CD8, 32);
-    SetObjTileSource(*(void**)&w->unk_040[4], gUnk_093F4578);
-    AnimInit((AnimState*)&w->unk_1F8[0x18], gUnk_09EF1170, gUnk_09EF1150);
-    AnimStart((AnimState*)&w->unk_1F8[0x18], 0, 1);
-    *(void**)w->unk_278 = AnimGetGfx((AnimState*)&w->unk_1F8[0x18]);
-    *(void**)&w->unk_040[0x1A8] = LoadObjTiles(gUnk_093F5422, 0xC0);
+    AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
+    AnimStart(&w->anim, 0, 1);
+    w->gfx = AnimGetGfx(&w->anim);
+    w->tiles5 = AllocObjTiles(0x120, 0);
+    w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
+    SetObjTileSource(w->tiles5, gUnk_093F4578);
+    AnimInit(&w->anim2, gUnk_09EF1170, gUnk_09EF1150);
+    AnimStart(&w->anim2, 0, 1);
+    w->gfx2 = AnimGetGfx(&w->anim2);
+    w->tiles7 = LoadObjTiles(gUnk_093F5422, 0xC0);
     w->y3 = -0x800;
     w->y4 = 0xA000;
     w->unk_290 = 16;
@@ -194,7 +191,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->unk_27C = func_08093384();
     TaskPoolInit(&w->tasks, w->unk_27C + 10);
     ListPoolInit(&w->cards);
-    w->unk_2E0 = EwramAlloc(w->unk_27C * 4);
+    w->unk_2E0 = EwramAlloc(w->unk_27C * sizeof(UnkStruct_080933D8));
     func_080933D8(w->unk_2E0);
     func_0809332C(w);
 #ifdef VERSION_EU
@@ -202,25 +199,25 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
 #else
     gMapCardUiResources.extraTiles = LoadObjTiles(gUnk_093F6734, 0x360);
 #endif
-    gMapCardUiResources.palette = *(void**)&w->unk_040[8];
+    gMapCardUiResources.palette = w->palette3;
 #ifdef VERSION_EU
     gMapCardUiResources.sprites = gUnkEu_09F6FF44[gLanguage];
 #else
     gMapCardUiResources.sprites = gUnk_09EF11F8;
 #endif
-    *(void**)&w->unk_040[0x1A0] = LoadObjTiles(gUnk_093F5C40, 32);
+    w->tiles6 = LoadObjTiles(gUnk_093F5C40, 32);
     w->unk_284 = 0;
     w->unk_285 = 0;
     w->card = ListPoolFirst(&w->cards);
-    *(MapcardWork**)w->unk_1F0 = 0;
+    w->prevCard = 0;
     m4aSongNumStart(SONG_SYS_CLICKI02);
     gUnk_02034AD0 = 0;
     w->x2 = 0x1600;
     w->y2 = 0x16400;
     w->unk_28D[0] = 0;
-    *(s32*)w->unk_260 = 0;
+    w->unk_260 = 0;
     w->unk_264 = 0x1600;
-    *(s32*)w->unk_268 = 0x6400;
+    w->unk_268 = 0x6400;
     w->unk_28D[1] = 0;
     w->unk_28B = 0;
     if (w->card != 0) {
@@ -232,22 +229,22 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
         w->y = -0x6400;
     }
     w->x3 = -0xA000;
-    *(s32*)w->unk_24C = 0;
-    *(void**)&w->unk_040[0x18C] = _08066468(1);
+    w->unk_24C = 0;
+    w->palette4 = _08066468(1);
     w->unk_287[0] = 0;
     w->unk_287[1] = 0;
     w->unk_287[2] = 0;
-    InitTextSlots(&w->unk_040[12], 48);
+    InitTextSlots(w->textSlots, 48);
     if (w->card != 0) {
-        *(MapcardWork**)w->unk_1F0 = w->card;
-        w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), &w->unk_040[12]);
+        w->prevCard = w->card;
+        w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), w->textSlots);
     }
     w->unk_244 = 0x19100;
-    FadeSetPaletteExcluded((u16)((*(ObjPalette**)&w->unk_040[8])->index + 16), 1);
-    FadeSetPaletteExcluded((u16)((*(ObjPalette**)w->unk_040)->index + 16), 1);
+    FadeSetPaletteExcluded((u16)(w->palette3->index + 16), 1);
+    FadeSetPaletteExcluded((u16)(w->palette2->index + 16), 1);
     FadeSetPaletteExcluded(15, 1);
-    FadeSetPaletteExcluded((u16)((*(ObjPalette**)&w->unk_040[0x18C])->index + 16), 1);
-    *(void**)&w->unk_040[0x1A4] = 0;
+    FadeSetPaletteExcluded((u16)(w->palette4->index + 16), 1);
+    w->unk_1E4 = 0;
     w->unk_299 = 9;
     w->unk_29A = 9;
     w->unk_29B = 0;
@@ -309,13 +306,13 @@ u8 func_0809217C(MapSelectWork* w, void* a) {
             n--;
         }
 
-        w->unk_2C4 = *(void**)&w->unk_040[0x08];
-        w->unk_2CC = 0;
-        w->unk_238 =
-            ((void**)TaskCreate(w, &gTaskDescSELMAPEVKEY, &w->unk_2C4))[1];
+        w->eventKeyArgs.palette = w->palette3;
+        w->eventKeyArgs.unk_08 = 0;
+        w->eventKey =
+            TaskCreate(&w->tasks, &gTaskDescSELMAPEVKEY, &w->eventKeyArgs)->work;
     }
 
-    func_08093C44(((u8*)w->card)[32], w);
+    func_08093C44(w->card->unk_20, w);
     SetTaskUpdate(a, (TaskUpdateFunc)func_08092234);
     return 1;
 }
@@ -409,9 +406,9 @@ u8 func_080923E0(MapSelectWork* w, void* a) {
         ReleaseObjTiles(w->tiles);
         w->tiles = AllocObjTiles(0x1E0, 0);
         SetObjTileSource(w->tiles, &gUnk_093F47E4[0xD88]);
-        AnimInit(w->unk_1F8, gUnk_09EF11CC, gUnk_09EF11B8);
-        AnimStart(w->unk_1F8, 0, 1);
-        w->gfx = AnimGetGfx(w->unk_1F8);
+        AnimInit(&w->anim, gUnk_09EF11CC, gUnk_09EF11B8);
+        AnimStart(&w->anim, 0, 1);
+        w->gfx = AnimGetGfx(&w->anim);
         w->unk_280 = w->x2 >> 8;
         w->unk_282 = w->y2 >> 8;
 
@@ -511,8 +508,8 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
                     if ((u8)func_080E8E24((u32)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel] + 0x20) == 1) {
                         w->unk_2DA = func_080E8D00();
-                        ((u8*)w->unk_238)[0x122]++;
-                        ((u8*)w->unk_238)[0x11A] = 8;
+                        w->eventKey->unk_122++;
+                        w->eventKey->unk_11A = 8;
 
                         if (w->unk_2DA == 0) {
                             w->card->unk_74 = sel;
@@ -522,7 +519,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
                             w->unk_290 = 16;
                             w->unk_285 = 0;
                             w->unk_284 = 0;
-                            w->unk_2CC = n;
+                            w->eventKeyArgs.unk_08 = n;
                             SetTaskUpdate(a, (TaskUpdateFunc)func_08092E2C);
                             return 1;
                         }
@@ -574,7 +571,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
                 m4aSongNumStart(SONG_SYS_KETEI2);
                 w->unk_285 = 0;
                 w->unk_284 = 0;
-                w->unk_2CC = n;
+                w->eventKeyArgs.unk_08 = n;
                 return 1;
             }
         }
@@ -582,11 +579,11 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
         break;
     }
 
-    *(void**)&w->unk_278 = AnimUpdate((AnimState*)&w->unk_1F8[0x18]);
-    w->gfx = AnimUpdate((AnimState*)w->unk_1F8);
+    w->gfx2 = AnimUpdate(&w->anim2);
+    w->gfx = AnimUpdate(&w->anim);
     gMapCardUiResources.gfx = AnimUpdate(&gMapCardUiResources.anim);
     TaskPoolUpdate(&w->tasks);
-    func_08093F5C((u8*)w);
+    func_08093F5C(w);
     SetObjMosaicSize(w->unk_299, w->unk_29A);
 
     if (w->unk_29B == 2) {
@@ -627,9 +624,9 @@ u8 func_080928E4(MapSelectWork* w, void* a) {
         ReleaseObjTiles(w->tiles);
         w->tiles = AllocObjTiles(0x3C0, 0);
         SetObjTileSource(w->tiles, gUnk_093F47E4);
-        AnimInit(w->unk_1F8, gUnk_09EF1194, gUnk_09EF1180);
-        AnimStart(w->unk_1F8, 0, 1);
-        w->gfx = AnimGetGfx(w->unk_1F8);
+        AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
+        AnimStart(&w->anim, 0, 1);
+        w->gfx = AnimGetGfx(&w->anim);
         w->x2 = w->unk_280 << 8;
         w->y2 = w->unk_282 << 8;
         w->x = w->card->x;
@@ -681,8 +678,8 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
                         RemoveMapCard(w->card->unk_20 + 1);
                         if ((u8)func_080E8E24((u32)&gUnk_09EE4C80[w->card->unk_20] + 0x48) == 1) {
                             w->unk_2DA = func_080E8D00();
-                            ((u8*)w->unk_238)[0x122]++;
-                            ((u8*)w->unk_238)[0x11A] = 8;
+                            w->eventKey->unk_122++;
+                            w->eventKey->unk_11A = 8;
                             if (w->unk_2DA == 0) {
                                 w->card->unk_74 = 1;
                                 w->card->unk_6C |= 0x40;
@@ -696,7 +693,7 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
                                 w->unk_290 = 16;
                                 w->unk_285 = 0;
                                 w->unk_284 = 0;
-                                w->unk_2CC = 1;
+                                w->eventKeyArgs.unk_08 = 1;
                                 SetTaskUpdate(a, (TaskUpdateFunc)func_08092E2C);
                                 return 1;
                             }
@@ -736,24 +733,24 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
             gUnk_02034AD0 = 0;
             w->unk_285 = 0;
             w->unk_284 = 0;
-            w->unk_2CC = 2;
+            w->eventKeyArgs.unk_08 = 2;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
         break;
     }
-    func_08093434((u8*)w);
+    func_08093434(w);
     if (w->unk_298 == 0) {
-        if (w->card != *(MapcardWork**)w->unk_1F0) {
+        if (w->card != w->prevCard) {
             if (w->card != 0) {
-                w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), &w->unk_040[12]);
+                w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), w->textSlots);
                 func_08093C44(w->card->unk_20, w);
             } else {
                 w->unk_287[0] = 0;
                 w->unk_287[1] = 0;
                 w->unk_287[2] = 0;
             }
-            *(MapcardWork**)w->unk_1F0 = w->card;
+            w->prevCard = w->card;
             w->unk_28B = 4;
         } else if (w->card != 0) {
             ApproachValue(&w->x, w->card->x, w->unk_28B);
@@ -763,8 +760,8 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
             }
         }
     }
-    *(void**)w->unk_278 = AnimUpdate((AnimState*)&w->unk_1F8[0x18]);
-    w->gfx = AnimUpdate((AnimState*)w->unk_1F8);
+    w->gfx2 = AnimUpdate(&w->anim2);
+    w->gfx = AnimUpdate(&w->anim);
     gMapCardUiResources.gfx = AnimUpdate(&gMapCardUiResources.anim);
     TaskPoolUpdate(&w->tasks);
     return 1;
@@ -804,14 +801,14 @@ u8 func_08092E2C(MapSelectWork* w) {
     return 1;
 }
 void MapSelect_2(MapSelectWork* w) {
-    if (w->tiles3 != 0 && *(void**)&w->unk_040[8] != 0) {
-        DrawSprite((s16)(w->x3 >> 8), (s16)(*(s32*)w->unk_24C >> 8),
+    if (w->tiles3 != 0 && w->palette3 != 0) {
+        DrawSprite((s16)(w->x3 >> 8), (s16)(w->unk_24C >> 8),
 #ifdef VERSION_EU
                    gUnkEu_09F6FF70[gLanguage][0],
 #else
                    gUnk_09EF1228[0],
 #endif
-                   w->tiles3, *(void**)&w->unk_040[8], 0, 0, 80);
+                   w->tiles3, w->palette3, 0, 0, 80);
     }
     if (w->unk_2BE == 1) {
         switch (gUnk_09EE4C80[w->card->unk_20].backIndex) {
@@ -831,8 +828,8 @@ void MapSelect_2(MapSelectWork* w) {
         }
     }
     if ((u8)func_080A42C8() == 0) {
-        DrawSprite((s16)((w->x >> 8) - 23), (s16)((w->y >> 8) - 27), w->gfx, w->tiles, *(void**)&w->unk_040[0], 0, 0, 41);
-        DrawSprite((s16)((w->x2 >> 8) - 16), (s16)((w->y2 >> 8) - 12), *(void**)w->unk_278, *(void**)&w->unk_040[4], *(void**)&w->unk_040[8], 0, 0, 40);
+        DrawSprite((s16)((w->x >> 8) - 23), (s16)((w->y >> 8) - 27), w->gfx, w->tiles, w->palette2, 0, 0, 41);
+        DrawSprite((s16)((w->x2 >> 8) - 16), (s16)((w->y2 >> 8) - 12), w->gfx2, w->tiles5, w->palette3, 0, 0, 40);
     }
     if (w->unk_2C0 != 0) {
         DrawSprite(224,
@@ -841,15 +838,15 @@ void MapSelect_2(MapSelectWork* w) {
 #else
                    (s16)((17 / w->unk_285) * w->unk_284 + 108),
 #endif
-                   gUnk_09EEB000, *(void**)&w->unk_040[0x1A0], w->palette, 0, 0, 40);
+                   gUnk_09EEB000, w->tiles6, w->palette, 0, 0, 40);
     }
     if (w->unk_2BE == 0 && w->unk_299 != 9 && w->unk_29A != 9) {
         DrawSprite(120, 56, 0, w->tiles4, w->palette, 0, 8, 60);
         DrawSprite(120, 56, gUnk_08F709B0[4].gfx2, w->tiles2, w->palette, 0, 8, 60);
     }
-    DrawSprite(128, (s16)(w->y3 >> 8), gUnk_09EF11AC[0], *(void**)&w->unk_040[0x1A8], *(void**)&w->unk_040[8], 0, 0x800, 80);
-    DrawSprite(128, (s16)(w->y4 >> 8), gUnk_09EF11AC[1], *(void**)&w->unk_040[0x1A8], *(void**)&w->unk_040[8], 0, 0x800, 80);
-    DrawTextSlots(16, (s16)(w->unk_244 >> 8), &w->unk_040[12], *(void**)&w->unk_040[0x18C], 50, w->unk_287[0]);
+    DrawSprite(128, (s16)(w->y3 >> 8), gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, 0x800, 80);
+    DrawSprite(128, (s16)(w->y4 >> 8), gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, 0x800, 80);
+    DrawTextSlots(16, (s16)(w->unk_244 >> 8), w->textSlots, w->palette4, 50, w->unk_287[0]);
     TaskPoolDraw(&w->tasks);
 }
 void MapSelect_3(MapSelectWork* w) {
@@ -859,14 +856,14 @@ void MapSelect_3(MapSelectWork* w) {
         EwramFree(w->unk_2E0);
     }
 
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&w->unk_040[0x08])->index + 16, 0);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&w->unk_040[0x00])->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette3->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
     FadeSetPaletteExcluded(15, 0);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&w->unk_040[0x18C])->index + 16, 0);
-    ReleaseObjTiles(*(void**)&w->unk_040[0x04]);
-    ReleaseObjPalette(*(void**)&w->unk_040[0x08]);
+    FadeSetPaletteExcluded(w->palette4->index + 16, 0);
+    ReleaseObjTiles(w->tiles5);
+    ReleaseObjPalette(w->palette3);
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(*(void**)&w->unk_040[0x00]);
+    ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles3);
 
     if (w->tiles4 != 0) {
@@ -881,28 +878,28 @@ void MapSelect_3(MapSelectWork* w) {
         ReleaseObjPalette(w->palette);
     }
 
-    ReleaseObjTiles(*(void**)&w->unk_040[0x1A8]);
-    FreeTextSlots(&w->unk_040[0x0C], 48);
-    ReleaseObjPalette(*(void**)&w->unk_040[0x18C]);
+    ReleaseObjTiles(w->tiles7);
+    FreeTextSlots(w->textSlots, 48);
+    ReleaseObjPalette(w->palette4);
     *w->unk_294 = 1;
-    ReleaseObjTiles(*(void**)&w->unk_040[0x1A0]);
+    ReleaseObjTiles(w->tiles6);
     ReleaseObjTiles(gMapCardUiResources.tiles);
     ReleaseObjTiles(gMapCardUiResources.extraTiles);
 }
 void func_0809332C(MapSelectWork* w) {
     MapcardArgs args;
-    u16* q;
+    UnkStruct_080933D8* q;
     u16 i;
 
     for (i = 0; i < w->unk_27C; i++) {
-        q = (u16*)w->unk_2E0;
-        args.unk_00 = q[i * 2];
+        q = w->unk_2E0;
+        args.unk_00 = q[i].unk_00;
         args.unk_01 = i;
         args.unk_02 = w->unk_27C;
-        args.unk_03 = q[i * 2 + 1];
+        args.unk_03 = q[i].unk_02;
         args.unk_08 = &w->cards;
         args.unk_04 = w;
-        CreateMapCard(&args, (u8*)w);
+        CreateMapCard(&args, &w->tasks);
     }
 }
 
@@ -1147,7 +1144,7 @@ s32 func_08093838(MapSelectWork* w) {
     s32 d;
     u16 r;
     void* z;
-    u8* q;
+    void* q;
 
     node = (MapcardWork*)ListPoolFirst(&w->cards);
     best = 0x100;
@@ -1168,14 +1165,14 @@ s32 func_08093838(MapSelectWork* w) {
         node = (MapcardWork*)ListPoolNext(&node->node);
     }
 
-    q = (u8*)w->card;
+    q = w->card;
 
     if (q != 0) {
-        q += 0x6C;
+        q = &((MapcardWork*)q)->unk_6C;
         r = *(u16*)q | 0x100;
         *(u16*)q = r;
 
-        return (((MapcardWork*)w->card)->x - w->x2) >> 8;
+        return (w->card->x - w->x2) >> 8;
     }
 
     return 0;
@@ -1714,7 +1711,7 @@ u8 func_0809423C(MapSelectWork* w, void* a) {
             w->unk_286 = 0;
 
             if (w->unk_2C2 <= 98) {
-                CreateSysmsgwinTask((u8*)w, w->unk_2C2);
+                CreateSysmsgwinTask(&w->tasks, w->unk_2C2);
                 w->unk_2C2++;
             } else {
                 n = (MapcardWork*)ListPoolFirst(&w->cards);
@@ -1758,7 +1755,7 @@ u8 func_0809438C(MapSelectWork* w, void* a) {
             w->unk_286 = 0;
 
             if (w->unk_2C2 <= 0x66) {
-                CreateSysmsgwinTask((u8*)w, w->unk_2C2);
+                CreateSysmsgwinTask(&w->tasks, w->unk_2C2);
                 w->unk_2C2++;
             } else {
                 gGameState.progression.unk_82 |= 8;
@@ -1793,7 +1790,7 @@ u8 func_08094404(MapSelectWork* w, void* a) {
         if (w->unk_286 == 8) {
             w->unk_286 = 0;
             if (w->unk_2C2 <= 0x71) {
-                CreateSysmsgwinTask((u8*)w, w->unk_2C2);
+                CreateSysmsgwinTask(&w->tasks, w->unk_2C2);
                 w->unk_2C2++;
             } else {
                 node = ListPoolFirst(&w->cards);
@@ -2776,7 +2773,7 @@ TaskDesc gTaskDescMapSelect = {
     (TaskUpdateFunc)MapSelect_1,
     (TaskFunc)MapSelect_2,
     (TaskFunc)MapSelect_3,
-    0x2E4,
+    sizeof(MapSelectWork),
 };
 
 u16 gUnk_09EE4BE0[10] = {

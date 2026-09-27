@@ -181,9 +181,9 @@ static struct ObjTiles* gUnk_02035A34;
 static struct ObjPalette* gUnk_02035A38;
 static struct ObjTiles* gUnk_02035A3C;
 static struct ObjPalette* gUnk_02035A40;
-static void* gUnk_02035A44;
+static TextSlot* gUnk_02035A44;
 static u8 gUnk_02035A48;
-static void* gUnk_02035A4C;
+static TextSlot* gUnk_02035A4C;
 static u8 gUnk_02035A50;
 static struct ObjTiles* gUnk_02035A54;
 static AnimState gUnk_02035A58;
@@ -416,7 +416,7 @@ s32 MoogleShopReadMenuKeys(void) {
 void func_08102AB4(s16 x, s16 y) {
     s16 i;
     u16 id;
-    void** p;
+    TextSlot** p;
 
     for (i = 0; i < 5; i++) {
         id = gUnk_02035B58[i];
@@ -461,10 +461,10 @@ void func_08102AB4(s16 x, s16 y) {
     gUnk_02035A40 = LoadObjPalette(gUnk_09A3DB7C, 0x20);
     FadeSetPaletteExcluded(((FldRes*)gUnk_02035A40)->index + 0x10, 1);
     p = &gUnk_02035A44;
-    *p = EwramAlloc(0x120);
+    *p = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(gUnk_02035A44, 0x24);
     p = &gUnk_02035A4C;
-    *p = EwramAlloc(0x2D0);
+    *p = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(gUnk_02035A4C, 0x5A);
     gUnk_02035A54 = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
     AnimInit(&gUnk_02035A58, gUnk_09EEA164, gUnk_09EEA148);
@@ -968,7 +968,7 @@ void func_08103F94(s16 a, s16 b) {
         cnt += gMooglePackCardTables[j].count;
     }
 
-    list = EwramAlloc(cnt * 4);
+    list = EwramAlloc(cnt * sizeof(*list));
     k = 0;
 
     for (j = lo; j < hi; j++) {

@@ -96,7 +96,7 @@ typedef struct MooglePackCardWork {
     void* gfx;
     FldRes* palette2;
     void* tiles2;
-    s32 backSprite;
+    void* backSprite;
     AnimState anim;
     u16 flipAngle;
     u16 unk_32;

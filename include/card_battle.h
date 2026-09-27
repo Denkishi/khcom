@@ -87,6 +87,8 @@ typedef struct UnkStruct_02039DD4 {
     u8 unk_108[0x04];
 } UnkStruct_02039DD4;
 
+typedef char UnkStruct_02039DD4_size[(sizeof(UnkStruct_02039DD4) == 0x10C) ? 1 : -1];
+
 extern struct CardDisplayWork* gUnk_02034A98;
 extern UnkStruct_02039DD4* gUnk_02039DD4;
 

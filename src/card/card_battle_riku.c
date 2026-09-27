@@ -508,7 +508,7 @@ void func_0807E724(CardBattleWork* w, s8 idx) {
             slots = EwramAlloc((n + 15) * sizeof(CardSlot));
             w->slots[idx] = slots;
             zero = 0;
-            CpuSet((void*)&zero, slots, ((n + 15) * 3) | 0x05000000);
+            CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
@@ -535,7 +535,7 @@ void func_0807E724(CardBattleWork* w, s8 idx) {
             slots = EwramAlloc(n * sizeof(CardSlot));
             w->slots[idx] = slots;
             zero = 0;
-            CpuSet((void*)&zero, slots, (n * 3) | 0x05000000);
+            CpuSet((void*)&zero, slots, n * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
@@ -558,7 +558,7 @@ void func_0807E724(CardBattleWork* w, s8 idx) {
         slot = EwramAlloc(sizeof(CardSlot));
         w->slots[idx] = slot;
         zero = 0;
-        CpuSet((void*)&zero, slot, 3 | 0x05000000);
+        CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
         w->slots[idx]->cardId = (idx << 12) | 0xFF;
         w->slots[idx]->unk_09 = 0;
         q = w->unk_94;

@@ -216,7 +216,7 @@ void func_080784BC(CardBattleWork* w, s32 mode) {
         slots = EwramAlloc((n + 15) * sizeof(CardSlot));
         w->slots[0] = slots;
         zero = 0;
-        CpuSet((void*)&zero, slots, ((n + 15) * 3) | 0x05000000);
+        CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
 
         for (i = 0; i < n + 1; i++) {
             w->slots[0][i].unk_06 = 0;
@@ -245,7 +245,7 @@ void func_080784BC(CardBattleWork* w, s32 mode) {
         slot = EwramAlloc(sizeof(CardSlot));
         w->slots[3] = slot;
         zero = 0;
-        CpuSet((void*)&zero, slot, 3 | 0x05000000);
+        CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
         w->slots[3]->cardId = 0x30FF;
         q = &w->unk_94[3];
         k = 0xFFFF;
@@ -268,7 +268,7 @@ void func_080785B8(CardBattleWork* w, s32 mode) {
             slots = EwramAlloc((n + 15) * sizeof(CardSlot));
             w->slots[0] = slots;
             zero = 0;
-            CpuSet((void*)&zero, slots, ((n + 15) * 3) | 0x05000000);
+            CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
 
             for (i = 0; i < n + 1; i++) {
                 w->slots[0][i].unk_06 = 0;
@@ -297,7 +297,7 @@ void func_080785B8(CardBattleWork* w, s32 mode) {
             slot = EwramAlloc(sizeof(CardSlot));
             w->slots[0] = slot;
             zero = 0;
-            CpuSet((void*)&zero, slot, 3 | 0x05000000);
+            CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
             w->slots[0]->cardId = 0xFF;
             q = &w->unk_94[0];
             k = 0xFFFF;
@@ -331,7 +331,7 @@ void func_080785B8(CardBattleWork* w, s32 mode) {
             slot = EwramAlloc(sizeof(CardSlot));
             w->slots[3] = slot;
             zero = 0;
-            CpuSet((void*)&zero, slot, 3 | 0x05000000);
+            CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
             w->slots[3]->cardId = 0x30FF;
             q = &w->unk_94[3];
             k = 0xFFFF;

@@ -78,6 +78,8 @@ typedef struct CardSlot {
     u8 unk_0B;
 } CardSlot;
 
+typedef char CardSlot_size[(sizeof(CardSlot) == 0xC) ? 1 : -1];
+
 typedef struct CardDisplayArgs {
     ListPool* pool;
     CardSlot* slot;

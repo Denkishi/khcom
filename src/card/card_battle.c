@@ -202,7 +202,7 @@ void func_08076458(void) {
 
     gUnk_02039DD4 = EwramAlloc(sizeof(UnkStruct_02039DD4));
     zero = 0;
-    CpuSet(&zero, gUnk_02039DD4, 0x05000043);
+    CpuSet(&zero, gUnk_02039DD4, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_02039DD4) / 4);
     gUnk_02039DD4->unk_000[0] = 0;
     gUnk_02039DD4->unk_000[1] = 0;
     gUnk_02039DD4->unk_000[2] = 0;

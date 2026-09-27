@@ -764,7 +764,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
     UnkStruct_080ABA80 arr2;
     u8 buf[6];
     s32 hold;
-    EventReloadArgs args;
+    ReloadArgs args;
     s32 done;
     u32 kind;
     u32 flags;

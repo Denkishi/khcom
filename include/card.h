@@ -1563,21 +1563,20 @@ typedef struct EventBgEffectWork {
 extern const EventBgEffectDef* gUnk_09EE79B4[];
 
 typedef struct ReloadArgs {
-    u32 unk_00;
-    u8* unk_04;
+    u8 slot;
+    u8 mode;
+    u8 unk_02[0x02];
+    u8* state;
 } ReloadArgs;
 
 typedef struct ReloadWork {
     void* tiles;
     void* palette;
     void* gfx;
-    u8 anim[0x18];
-    s32 unk_24;
-    s32 unk_28;
-    u8 unk_2C;
-    u8 unk_2D;
-    u8 unk_2E[0x02];
-    u8* unk_30;
+    AnimState anim;
+    s32 x;
+    s32 y;
+    ReloadArgs args;
     u8 unk_34;
 } ReloadWork;
 
@@ -1830,7 +1829,7 @@ u8 func_08097600(UnkStruct_08096F94* w);
 u8 func_0809CBF8(UnkStruct_0809C534* w, void* a);
 u8 func_080A6474(u8* work, void* a);
 void RecalculateInactiveDeckCpCosts(void);
-u8 RELOAD_1(u8* work, void* a);
+u8 RELOAD_1(ReloadWork* w, void* a);
 u8 func_08099C4C(BossPrizeWork* w);
 void func_080A1BB8(EventMapObjectWork* w, EventBackgroundDef* t);
 void Mode_riku_deckTutorial_1(void);

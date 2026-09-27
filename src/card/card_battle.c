@@ -616,7 +616,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
     s32 position;
     u16 result;
     s32 kind;
-    EventReloadArgs args;
+    ReloadArgs args;
     BtlObj* actor;
 
     if (gBtlWork->unk_0A0 == 4) {

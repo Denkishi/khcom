@@ -116,11 +116,4 @@ struct CardSlot* func_08076674(struct CardBattleWork* w, u8 slot, u16* n);
 struct CardSlot* func_08076750(struct CardBattleWork* w, u8 slot, u16* n);
 void func_0807682C(struct CardBattleWork* w, u8 slot);
 
-typedef struct {
-    u32 slot : 8;
-    u32 mode : 8;
-    u32 unk_02 : 16;
-    u8* state;
-} EventReloadArgs;
-
 #endif

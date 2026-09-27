@@ -50,7 +50,7 @@ extern AnimHeader** gUnk_09EE7714[];
 extern void** gUnk_09EE7720[];
 void CreateCardNameDisplay(void* a, void* b);
 s32 func_08098BA4(ReloadChildWork* w);
-u8 func_08099330(u8* work);
+u8 func_08099330(ReloadWork* w);
 s16 func_08084458(u16 cardId);
 void _08085D04(u8 a);
 void CreateCardNameDisplay(void* a, void* b);
@@ -468,83 +468,81 @@ void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d) {
 void RELOAD_0(ReloadWork* w, ReloadArgs* a) {
     w->tiles = AllocObjTiles(0xA0, 0);
     w->palette = LoadObjPalette(gCard00Palette, 32);
-    *(ReloadArgs*)&w->unk_2C = *a;
-    SetObjTileSource(w->tiles, gUnk_09EE7708[w->unk_2C]);
-    AnimInit(&w->anim, gUnk_09EE7714[w->unk_2C], gUnk_09EE7720[w->unk_2C]);
+    w->args = *a;
+    SetObjTileSource(w->tiles, gUnk_09EE7708[w->args.slot]);
+    AnimInit(&w->anim, gUnk_09EE7714[w->args.slot], gUnk_09EE7720[w->args.slot]);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
 
-    switch (w->unk_2D) {
+    switch (w->args.mode) {
     case 1:
-        w->unk_24 = -0x3000;
-        w->unk_28 = 0x7E00;
+        w->x = -0x3000;
+        w->y = 0x7E00;
         break;
     case 2:
-        w->unk_24 = 0xB4800;
-        w->unk_28 = 0x7E00;
+        w->x = 0xB4800;
+        w->y = 0x7E00;
         break;
     }
 
     w->unk_34 = 6;
 }
 
-u8 RELOAD_1(u8* work, void* a) {
-    *(void**)&work[8] = AnimUpdate(&work[0x0C]);
+u8 RELOAD_1(ReloadWork* w, void* a) {
+    w->gfx = AnimUpdate(&w->anim);
 
-    switch (work[0x2D]) {
+    switch (w->args.mode) {
     case 1:
-        ApproachValue(&work[0x24], 0x1800, work[0x34]);
+        ApproachValue(&w->x, 0x1800, w->unk_34);
         break;
     case 2:
-        ApproachValue(&work[0x24], 0xD800, work[0x34]);
+        ApproachValue(&w->x, 0xD800, w->unk_34);
         break;
     }
 
-    if (work[0x34] != 0) {
-        work[0x34]--;
+    if (w->unk_34 != 0) {
+        w->unk_34--;
     }
 
-    if (**(u8**)&work[0x30] == 0) {
-        work[0x34] = 8;
+    if (*w->args.state == 0) {
+        w->unk_34 = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08099330);
     }
 
     if (gBtlWork->unk_0A0 == 4) {
-        work[0x34] = 8;
+        w->unk_34 = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08099330);
     }
 
     return 1;
 }
 
-u8 func_08099330(u8* work) {
-    *(void**)&work[8] = AnimUpdate(&work[0x0C]);
+u8 func_08099330(ReloadWork* w) {
+    w->gfx = AnimUpdate(&w->anim);
 
-    switch (work[0x2D]) {
+    switch (w->args.mode) {
     case 1:
-        ApproachValue(&work[0x24], -0x3000, work[0x34]);
+        ApproachValue(&w->x, -0x3000, w->unk_34);
         break;
     case 2:
-        ApproachValue(&work[0x24], 0x12000, work[0x34]);
+        ApproachValue(&w->x, 0x12000, w->unk_34);
         break;
     }
 
-    if (work[0x34] != 0) {
-        work[0x34]--;
+    if (w->unk_34 != 0) {
+        w->unk_34--;
         return 1;
     }
 
     return 0;
 }
 
-void RELOAD_2(u8* work) {
-    DrawSprite(*(s32*)&work[0x24] >> 8, *(s32*)&work[0x28] >> 8,
-               *(void**)&work[0x08], *(void**)&work[0x00], *(void**)&work[0x04], 0,
-               0, 10);
+void RELOAD_2(ReloadWork* w) {
+    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 10);
 }
-void RELOAD_3(void** p) {
-    ReleaseObjTiles(p[0]);
-    ReleaseObjPalette(p[1]);
+void RELOAD_3(ReloadWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
 }
 void PrizeBoss_0(BossPrizeWork* w, s32* args) {
     CardDef* def;
@@ -1082,7 +1080,7 @@ TaskDesc gTaskDescRELOAD = {
     (TaskUpdateFunc)RELOAD_1,
     (TaskFunc)RELOAD_2,
     (TaskFunc)RELOAD_3,
-    0x38,
+    sizeof(ReloadWork),
 };
 
 TaskDesc gTaskDescPrizeBoss = {

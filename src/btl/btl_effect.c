@@ -345,7 +345,7 @@ void func_08012728(s16 a) {
 
 void BgFxInit(u16 a, u16 bg) {
     s32 i;
-    gBgFx = EwramAlloc(0x50);
+    gBgFx = EwramAlloc(sizeof(BgFx));
 
     for (i = 10; i < 16; i++) {
         FadeSetPaletteExcluded(i, 1);

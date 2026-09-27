@@ -60,9 +60,9 @@
 typedef struct SpriteTextLine {
     s32 x;
     s32 y;
-    u32 glyphTiles[16];
-    u32 palette;
-    u32 unk_4C;
+    ObjTiles* glyphTiles[16];
+    ObjPalette* palette;
+    ObjPalette* alternatePalette;
     u8 length;
     u8 font;
     u8 unk_52;
@@ -237,7 +237,7 @@ extern u8 gUnk_090CBFB2[];
 extern const EventCharaParams gUnk_0903380C[];
 
 void _08065994(void);
-u16 func_080659BC(u8 v, TextSlot* out);
+u16 func_080659BC(u8 v, void** out);
 void InitTextTileArray(void** p, u8 n);
 void FreeTextTileArray(void** p, u8 n);
 u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out);
@@ -249,6 +249,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b);
 s32 LoadJapaneseTextSlots(u16* a, TextSlot* b);
 void func_08002488(s16 x, s16 y, void* a, void* b, void* c, u16 d);
 void func_080643D4(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f);
+void func_08063F60(s32 x, s32 y, u8* s, u8 slot, u8 a);
 void func_08064624(void);
 u8 QueueVTransCallback(void* a);
 u8 func_0809D280(u8* s);

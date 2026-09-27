@@ -604,13 +604,12 @@ void func_0807B6F4(CardBattleWork* w);
 void func_080789E4(CardBattleWork* w);
 void func_08078BB4(CardBattleWork* w);
 u8 func_080782AC(CardDisplayWork** cards, u8 count);
-s32 func_080AE28C(void* cards, void* output, u8 count);
 
 s32 func_08076F80(CardBattleWork* w, Task* task) {
     UnkStruct_080ABA80 data;
     u8 flag[4];
     UnkStruct_080ABA80 cards;
-    u16 output[3];
+    u8 output[6];
     u8 i;
     u8 found;
     s32 position;

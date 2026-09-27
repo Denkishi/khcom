@@ -12,6 +12,7 @@ struct BtlObj;
 struct LevelUpWork;
 struct TaskPool;
 struct UnkStruct_080ABA80;
+struct CardDisplayWork;
 struct MapcardWork;
 
 void Mapcard_2(struct MapcardWork* w);
@@ -72,8 +73,9 @@ u8 func_080A42C8(void);
 u8 func_080A42D4(void);
 u8 func_080A42E0(void);
 s32 func_080ABA80(s32* out);
-s32 func_080AC5E8(struct UnkStruct_02039DD4* g, u8 count, u8 kind, struct UnkStruct_080ABA80* arr, u8* flag);
-s32 func_080AD144(struct UnkStruct_02039DD4* g, u8 count, u8 kind, struct UnkStruct_080ABA80* arr, u8* flag, void* b);
+s32 func_080AC5E8(struct CardDisplayWork** cards, u8 count, u8 kind, struct UnkStruct_080ABA80* arr, u8* flag);
+s32 func_080AD144(struct CardDisplayWork** cards, u8 count, u8 kind, struct UnkStruct_080ABA80* arr, u8* flag, s32 b);
+s32 func_080AE28C(struct UnkStruct_080ABA80* cards, u8* output, u8 count);
 
 void func_080AEB94(void);
 

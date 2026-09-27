@@ -39,9 +39,9 @@
 #include "game.h"
 #include "bos4_api.h"
 
-u8 gUnk_02034B20[20];
+TaskPool gUnk_02034B20;
 
-void* gUnk_02034B34;
+s32 gUnk_02034B34;
 #ifdef VERSION_EU
 TaskPool gUnkEu_02034B38;
 
@@ -50,15 +50,34 @@ u32 gUnkEu_02034B4C;
 
 u8 gUnk_0203A9E0 EWRAM_COMMON(4);
 
-u8 func_080ABEF8(u32* a, u8* b);
+u8 func_080ABEF8(s32* a, u8* b);
 s32 func_080AC140(s32 a);
+s32 func_080ADD04(CardDisplayWork** p, u8 b);
+s32 func_080ADD58(CardDisplayWork** p, u8 b);
+s32 func_080ADDA8(CardDisplayWork** p, u8 b);
+s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e);
+s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d);
+s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b);
+s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b);
+s32 func_080ADF60(CardDisplayWork** p, u8 b);
+s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c);
+s32 func_080ADFD4(CardDisplayWork** p, u8 b);
+s32 func_080AE014(CardDisplayWork** p, u8 b);
+s32 func_080AE080(CardDisplayWork** p, u8 b);
+s32 func_080AE0B4(CardDisplayWork** p, u8 b);
+s32 func_080AE0F4(CardDisplayWork** p, u8 b);
+s32 func_080AE134(CardDisplayWork** p, u8 b);
+s32 func_080AE168(CardDisplayWork** p, u8 b);
+s32 func_080AE1A8(CardDisplayWork** p, u8 b);
+s32 func_080AE1E8(CardDisplayWork** p, u8 b);
+u8 func_080AE274(s32 a, s32 b);
 void CreateSysmsgwinTask(void* pool, u16 b);
 u8 func_080A42C8(void);
 
-void func_080AB96C(void* a) {
+void func_080AB96C(s32 a) {
     FadeStartIn(0, 16);
     gUnk_02034B34 = a;
-    TaskPoolInit(gUnk_02034B20, 1);
+    TaskPoolInit(&gUnk_02034B20, 1);
     gUnk_0203A9E0 = 0;
 }
 void Mode_riku_btlTutorial_1(void) {
@@ -66,9 +85,9 @@ void Mode_riku_btlTutorial_1(void) {
 
     t = gGameState.progression.unk_82 | 0x1000;
     gGameState.progression.unk_82 = t;
-    ModeRequest(&gModeBattle, (s32)gUnk_02034B34);
-    TaskPoolUpdate(gUnk_02034B20);
-    TaskPoolDraw(gUnk_02034B20);
+    ModeRequest(&gModeBattle, gUnk_02034B34);
+    TaskPoolUpdate(&gUnk_02034B20);
+    TaskPoolDraw(&gUnk_02034B20);
 }
 
 void Mode_riku_deckTutorial_1(void) {
@@ -76,25 +95,25 @@ void Mode_riku_deckTutorial_1(void) {
         switch (gUnk_0203A9E0) {
         case 0:
             if (!func_080A42C8() && gUnk_0203A9E0 == 0) {
-                CreateSysmsgwinTask(gUnk_02034B20, 0xB1);
+                CreateSysmsgwinTask(&gUnk_02034B20, 0xB1);
                 gUnk_0203A9E0 = 1;
             }
             break;
         case 1:
             if (!func_080A42C8()) {
                 gGameState.progression.unk_82 |= 0x800;
-                ModeRequest(&gUnk_09EE2704, (s32)gUnk_02034B34);
+                ModeRequest(&gUnk_09EE2704, gUnk_02034B34);
             }
             break;
         }
     }
 
-    TaskPoolUpdate(gUnk_02034B20);
-    TaskPoolDraw(gUnk_02034B20);
+    TaskPoolUpdate(&gUnk_02034B20);
+    TaskPoolDraw(&gUnk_02034B20);
 }
 
 void func_080ABA70(void) {
-    TaskPoolDestroy(gUnk_02034B20);
+    TaskPoolDestroy(&gUnk_02034B20);
 }
 
 s32 func_080ABA80(s32* out) {
@@ -163,7 +182,7 @@ s32 func_080ABA80(s32* out) {
         gUnk_02039DD4->unk_0DD = 0;
         return -1;
     } else {
-        r = func_080AC5E8(gUnk_02039DD4, gUnk_02039DD4->unk_0D0, gUnk_02039DD4->unk_0C2, &arr, &flag);
+        r = func_080AC5E8(gUnk_02039DD4->unk_000, gUnk_02039DD4->unk_0D0, gUnk_02039DD4->unk_0C2, &arr, &flag);
 
         switch (r) {
         case 108:
@@ -193,7 +212,7 @@ s32 func_080ABA80(s32* out) {
 #ifndef VERSION_EU
             if (out != 0) {
 #endif
-                func_080ABEF8(&arr, buf);
+                func_080ABEF8(arr.unk_00, buf);
 
                 if (buf[0] == 1) {
                     out[0] = arr.unk_00[0];
@@ -252,7 +271,7 @@ s32 func_080ABA80(s32* out) {
     }
 }
 
-s32 func_080ABCA4(s32* out, void* b) {
+s32 func_080ABCA4(s32* out, s32 b) {
     UnkStruct_080ABA80 arr;
     u8 buf[6];
     u8 flag;
@@ -264,7 +283,7 @@ s32 func_080ABCA4(s32* out, void* b) {
     s32 t;
 #endif
 
-    memset(&arr, 0, 24);
+    memset(&arr, 0, sizeof(arr));
     flag = 0;
     memset(buf, 0, 6);
 #ifdef VERSION_EU
@@ -291,7 +310,7 @@ s32 func_080ABCA4(s32* out, void* b) {
 
     if (gUnk_02039DD4->unk_0D0 == 1) {
 #ifdef VERSION_EU
-        switch ((s32)b) {
+        switch (b) {
         case 0:
             f = gUnk_02039DD4->unk_0E1;
             break;
@@ -337,7 +356,7 @@ s32 func_080ABCA4(s32* out, void* b) {
         gUnk_02039DD4->unk_0DD = 0;
         return -1;
     } else {
-        r = func_080AD144(gUnk_02039DD4, gUnk_02039DD4->unk_0D0, gUnk_02039DD4->unk_0C2, &arr, &flag, b);
+        r = func_080AD144(gUnk_02039DD4->unk_000, gUnk_02039DD4->unk_0D0, gUnk_02039DD4->unk_0C2, &arr, &flag, b);
 
         switch (r) {
         case 108:
@@ -365,7 +384,7 @@ s32 func_080ABCA4(s32* out, void* b) {
 #ifndef VERSION_EU
             if (out != 0) {
 #endif
-                func_080ABEF8(&arr, buf);
+                func_080ABEF8(arr.unk_00, buf);
 
                 if (buf[0] == 1) {
                     out[0] = arr.unk_00[0];
@@ -426,7 +445,7 @@ s32 func_080ABCA4(s32* out, void* b) {
 }
 
 u8 func_080ABED0(void) {
-    if ((*(u32*)&gUnk_02039DD4->unk_0E0 & 0x00FFFF00) != 0) {
+    if (gUnk_02039DD4->unk_0E1 || gUnk_02039DD4->unk_0E2) {
         return gUnk_02039DD4->unk_0DD;
     }
 
@@ -439,7 +458,7 @@ u8 func_080ABED0(void) {
         b[i] = 1; \
         break;
 
-u8 func_080ABEF8(u32* a, u8* b) {
+u8 func_080ABEF8(s32* a, u8* b) {
     u32 v[6];
     u32 key;
     s32 i = 0;
@@ -748,7 +767,7 @@ u8 func_080AC5BC(CardDisplayWork** p, u8 a) {
     return 1;
 }
 
-s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag) {
+s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -758,7 +777,7 @@ s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
     ret = 0;
 
     for (i = 0; i < count; i++) {
-        v[i] = (*(i + g->unk_000))->cardDef->unk_28;
+        v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
     if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
@@ -970,97 +989,97 @@ s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         return 105;
     }
 
-    if ((u8)func_080ADF94(g, count, 43) != 0 || (u8)func_080ADFD4(g, count) != 0) {
+    if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
         if ((u8)func_0800FBCC(42) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(g, count) != 0 && (u8)func_0800FBCC(41) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && (u8)func_0800FBCC(41) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(g, 23, count) != 0 && (u8)func_0800FBCC(27) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)func_0800FBCC(27) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(g, 24, count) != 0 && (u8)func_0800FBCC(28) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)func_0800FBCC(28) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(g, 31, count) != 0 && (u8)func_0800FBCC(29) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)func_0800FBCC(29) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(g, 18, count) != 0 && (u8)func_0800FBCC(23) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)func_0800FBCC(23) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(g, 19, count) != 0 && (u8)func_0800FBCC(24) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)func_0800FBCC(24) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(g, 20, count) != 0 && (u8)func_0800FBCC(25) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)func_0800FBCC(25) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(g, 22, count) != 0 && (u8)func_0800FBCC(26) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)func_0800FBCC(26) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(g, count) != 0 && (u8)func_0800FBCC(46) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)func_0800FBCC(46) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(g, count) != 0 && (u8)func_0800FBCC(58) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)func_0800FBCC(58) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(g, count) != 0 && (u8)func_0800FBCC(44) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && (u8)func_0800FBCC(44) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(g, count) != 0 && (u8)func_0800FBCC(31) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && (u8)func_0800FBCC(31) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(g, 25, 0, count) != 0 && (u8)func_0800FBCC(35) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)func_0800FBCC(35) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(g, 27, 0, count) != 0 && (u8)func_0800FBCC(50) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)func_0800FBCC(50) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(g, count) != 0 && (u8)func_0800FBCC(56) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && (u8)func_0800FBCC(56) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(g, count) != 0 && (u8)func_0800FBCC(30) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && (u8)func_0800FBCC(30) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(g, count) != 0 && (u8)func_0800FBCC(33) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)func_0800FBCC(33) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(g, count, 22, 23, 1) != 0 && (u8)func_0800FBCC(40) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)func_0800FBCC(40) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(g, count, 24, 22) != 0 && (u8)func_0800FBCC(36) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)func_0800FBCC(36) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(g, count, 22, 25, 1) != 0 && (u8)func_0800FBCC(37) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)func_0800FBCC(37) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(g, count) != 0 && (u8)func_0800FBCC(45) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)func_0800FBCC(45) != 0) {
         return 81;
     }
 
-    if ((u8)func_080ADD04(g, count) != 0) {
+    if ((u8)func_080ADD04(cards, count) != 0) {
         if ((u16)(kind - 10) <= 5 && (u8)func_0800FBCC(1) != 0) {
             arr->unk_00[0] = 46;
             return 46;
@@ -1072,7 +1091,7 @@ s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         }
     }
 
-    if ((u8)func_080ADD58(g, count) != 0) {
+    if ((u8)func_080ADD58(cards, count) != 0) {
         if ((u16)(kind - 1) <= 5 && (u8)func_0800FBCC(6) != 0) {
             arr->unk_00[0] = 47;
             return 47;
@@ -1096,7 +1115,7 @@ s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         }
     }
 
-    if ((u8)func_080ADDA8(g, count) != 0 && (u8)func_0800FBCC(8) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)func_0800FBCC(8) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }
@@ -1114,7 +1133,7 @@ s32 func_080AC5E8(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
     return 107;
 }
 
-s32 func_080AD144(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag, void* b) {
+s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag, s32 b) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -1124,7 +1143,7 @@ s32 func_080AD144(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
     ret = 0;
 
     for (i = 0; i < count; i++) {
-        v[i] = (*(i + g->unk_000))->cardDef->unk_28;
+        v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
     if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
@@ -1336,97 +1355,97 @@ s32 func_080AD144(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         return 105;
     }
 
-    if ((u8)func_080ADF94(g, count, 43) != 0 || (u8)func_080ADFD4(g, count) != 0) {
+    if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
         if ((u8)func_080AE274(42, b) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(g, count) != 0 && (u8)func_080AE274(41, b) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && (u8)func_080AE274(41, b) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(g, 23, count) != 0 && (u8)func_080AE274(27, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)func_080AE274(27, b) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(g, 24, count) != 0 && (u8)func_080AE274(28, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)func_080AE274(28, b) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(g, 31, count) != 0 && (u8)func_080AE274(29, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)func_080AE274(29, b) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(g, 18, count) != 0 && (u8)func_080AE274(23, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)func_080AE274(23, b) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(g, 19, count) != 0 && (u8)func_080AE274(24, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)func_080AE274(24, b) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(g, 20, count) != 0 && (u8)func_080AE274(25, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)func_080AE274(25, b) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(g, 22, count) != 0 && (u8)func_080AE274(26, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)func_080AE274(26, b) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(g, count) != 0 && (u8)func_080AE274(46, b) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)func_080AE274(46, b) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(g, count) != 0 && (u8)func_080AE274(58, b) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)func_080AE274(58, b) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(g, count) != 0 && (u8)func_080AE274(44, b) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && (u8)func_080AE274(44, b) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(g, count) != 0 && (u8)func_080AE274(31, b) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && (u8)func_080AE274(31, b) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(g, 25, 0, count) != 0 && (u8)func_080AE274(35, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)func_080AE274(35, b) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(g, 27, 0, count) != 0 && (u8)func_080AE274(50, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)func_080AE274(50, b) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(g, count) != 0 && (u8)func_080AE274(56, b) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && (u8)func_080AE274(56, b) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(g, count) != 0 && (u8)func_080AE274(30, b) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && (u8)func_080AE274(30, b) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(g, count) != 0 && (u8)func_080AE274(33, b) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)func_080AE274(33, b) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(g, count, 22, 23, 1) != 0 && (u8)func_080AE274(40, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)func_080AE274(40, b) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(g, count, 24, 22) != 0 && (u8)func_080AE274(36, b) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)func_080AE274(36, b) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(g, count, 22, 25, 1) != 0 && (u8)func_080AE274(37, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)func_080AE274(37, b) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(g, count) != 0 && (u8)func_080AE274(45, b) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)func_080AE274(45, b) != 0) {
         return 81;
     }
 
-    if ((u8)func_080ADD04(g, count) != 0) {
+    if ((u8)func_080ADD04(cards, count) != 0) {
         if ((u16)(kind - 10) <= 5 && (u8)func_080AE274(1, b) != 0) {
             arr->unk_00[0] = 46;
             return 46;
@@ -1438,7 +1457,7 @@ s32 func_080AD144(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         }
     }
 
-    if ((u8)func_080ADD58(g, count) != 0) {
+    if ((u8)func_080ADD58(cards, count) != 0) {
         if ((u16)(kind - 1) <= 5 && (u8)func_080AE274(6, b) != 0) {
             arr->unk_00[0] = 47;
             return 47;
@@ -1462,7 +1481,7 @@ s32 func_080AD144(UnkStruct_02039DD4* g, u8 count, u8 kind, UnkStruct_080ABA80* 
         }
     }
 
-    if ((u8)func_080ADDA8(g, count) != 0 && (u8)func_080AE274(8, b) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)func_080AE274(8, b) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }
@@ -1899,12 +1918,12 @@ u8 func_080AE274(s32 a, s32 b) {
 
     return r;
 }
-s32 func_080AE28C(u32* p) {
+s32 func_080AE28C(UnkStruct_080ABA80* cards, u8* output, u8 count) {
     u32 v[6];
 
-    v[0] = p[0];
-    v[1] = p[1];
-    v[2] = p[2];
+    v[0] = cards->unk_00[0];
+    v[1] = cards->unk_00[1];
+    v[2] = cards->unk_00[2];
 
     switch ((v[1] << 10) | v[0] | 0x80000000) {
     case 0x8002ACAB:
@@ -2031,14 +2050,14 @@ void eu_080ABA7C(void) {
 
 Mode gModeRikuBtlTutorial = {
     "Mode_riku_btlTutorial",
-    (ModeInitFunc)func_080AB96C,
+    func_080AB96C,
     Mode_riku_btlTutorial_1,
     func_080ABA70,
 };
 
 Mode gModeRikuDeckTutorial = {
     "Mode_riku_deckTutorial",
-    (ModeInitFunc)func_080AB96C,
+    func_080AB96C,
     Mode_riku_deckTutorial_1,
     func_080ABA70,
 };

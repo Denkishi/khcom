@@ -2229,9 +2229,9 @@ void func_08080EB4(CardBattleWork* w) {
         func_08080268(w);
 #ifndef VERSION_EU
         if (!(gBtlWork->flags & 0x4000)) {
-            result = func_080AC5E8((UnkStruct_02039DD4*)w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag);
+            result = func_080AC5E8(w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag);
         } else {
-            result = func_080AD144((UnkStruct_02039DD4*)w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag, (void*)1);
+            result = func_080AD144(w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag, 1);
         }
         if (result == 52) {
             for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
@@ -2267,9 +2267,9 @@ void func_08080EB4(CardBattleWork* w) {
         m4aSongNumStart(SONG_BTL_GARD);
 #ifdef VERSION_EU
         if (!(gBtlWork->flags & 0x4000)) {
-            result = func_080AC5E8((UnkStruct_02039DD4*)w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag);
+            result = func_080AC5E8(w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag);
         } else {
-            result = func_080AD144((UnkStruct_02039DD4*)w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag, (void*)1);
+            result = func_080AD144(w->unk_28, w->unk_B9, w->unk_BA, &arr, &flag, 1);
         }
         if (result == 52) {
             for (i = 0; i < previousCount; i++) {

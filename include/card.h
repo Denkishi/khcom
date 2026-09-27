@@ -2614,8 +2614,8 @@ extern u8 gUnk_02034B08[20];
 extern u8 gUnk_02034B1C;
 extern u8 gUnk_02034B1D[3];
 #endif
-extern u8 gUnk_02034B20[20];
-extern void* gUnk_02034B34;
+extern TaskPool gUnk_02034B20;
+extern s32 gUnk_02034B34;
 #ifdef VERSION_EU
 extern TaskPool gUnkEu_02034B38;
 extern u32 gUnkEu_02034B4C;

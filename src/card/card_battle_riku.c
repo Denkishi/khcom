@@ -2791,7 +2791,7 @@ static void card_2(CardDisplayWork* p) {
 
         aff = AllocObjAffine(p->unk_5E, p->unk_54, p->unk_58, 0);
         flags = 0x410;
-        DrawSprite(p->x >> 8, y, gUnk_08F709B0[p->cardDef->unk_2A].gfx, ((UnkStruct_0809B200*)gUnk_02039DD4)->unk_030[p->cardDef->unk_2A], gUnk_02039DD4->palette, aff, flags, (u16)(p->unk_A0 - 1));
+        DrawSprite(p->x >> 8, y, gUnk_08F709B0[p->cardDef->unk_2A].gfx, gUnk_02039DD4->tiles[p->cardDef->unk_2A], gUnk_02039DD4->palette, aff, flags, (u16)(p->unk_A0 - 1));
         DrawSprite(p->x >> 8, y, gfx, p->tiles, p->palette, aff, flags, p->unk_A0);
         j = p->unk_A5;
 

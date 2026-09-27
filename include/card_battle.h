@@ -13,10 +13,7 @@ typedef struct UnkStruct_02039DD4 {
     struct CardDisplayWork* unk_000[6];
     struct CardDisplayWork* unk_018[3];
     struct CardDisplayWork* unk_024[3];
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* tiles4;
+    void* tiles[4];
     void* unk_040;
     void* tiles5;
     void* tiles6;

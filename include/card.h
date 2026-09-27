@@ -2436,16 +2436,6 @@ typedef struct StatIncreaseDisplayArgs {
     u32 amount : 16;
 } StatIncreaseDisplayArgs;
 
-struct UnkStruct_0807BEC0 {
-    u8 unk_00[0x30];
-    void* tiles[4];
-};
-
-struct UnkStruct_08090374 {
-    u8 unk_00[0x30];
-    void* tiles[4];
-};
-
 struct UnkStruct_080A23A0_Packed {
     u8* unk_00;
     u32 unk_04 : 16;

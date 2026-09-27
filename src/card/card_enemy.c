@@ -164,7 +164,7 @@ void func_08090374(CardDisplayWork* p) {
 
                 flags = 0x410;
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                           gUnk_08F70A28[0].gfx, ((struct UnkStruct_08090374*)gUnk_02039DD4)->tiles[p->cardDef->unk_2A],
+                           gUnk_08F70A28[0].gfx, gUnk_02039DD4->tiles[p->cardDef->unk_2A],
                            gUnk_02039DD4->palette, affine, flags, (u16)(p->unk_A0 - 1));
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
                            gfx, p->tiles, p->palette, affine, flags, p->unk_A0);

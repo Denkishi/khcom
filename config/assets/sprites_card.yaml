@@ -14,54 +14,48 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_card_1.c
-    start: 0x09EEA180
-    end: 0x09EEA19C
-  - name: sprites_card_2.c
-    start: 0x09EEA2F4
-    end: 0x09EEAFD4
   - name: sprites_card_frames_1.s
     start: 0x0908C374
     end: 0x0908C630
+    data_start: 0x09EEA180
+    data_end: 0x09EEA19C
   - name: sprites_card_frames_2.s
     start: 0x09098808
     end: 0x090A1F88
+    data_start: 0x09EEA2F4
+    data_end: 0x09EEAFD4
   - name: sprites_card_frames_3.s
     start: 0x093F4478
     end: 0x093FD438
     data_start: 0x09EF1150
     data_end: 0x09EF12F8
   jp:
-  - name: sprites_card_1.c
-    start: 0x09EC1574
-    end: 0x09EC1590
-  - name: sprites_card_2.c
-    start: 0x09EC16E8
-    end: 0x09EC23C8
   - name: sprites_card_frames_1.s
     start: 0x09047BE4
     end: 0x09047EA0
+    data_start: 0x09EC1574
+    data_end: 0x09EC1590
   - name: sprites_card_frames_2.s
     start: 0x09054078
     end: 0x0905D7F8
+    data_start: 0x09EC16E8
+    data_end: 0x09EC23C8
   - name: sprites_card_frames_3.s
     start: 0x093AF9A0
     end: 0x093B8B54
     data_start: 0x09EC853C
     data_end: 0x09EC86E4
   eu:
-  - name: sprites_card_1.c
-    start: 0x09F75F98
-    end: 0x09F75FD4
-  - name: sprites_card_2.c
-    start: 0x09F76364
-    end: 0x09F77044
   - name: sprites_card_frames_1.s
     start: 0x09162648
     end: 0x09163764
+    data_start: 0x09F75F98
+    data_end: 0x09F75FD4
   - name: sprites_card_frames_2.s
     start: 0x0917E264
     end: 0x091879E4
+    data_start: 0x09F76364
+    data_end: 0x09F77044
   - name: sprites_card_frames_3.s
     start: 0x094C3B00
     end: 0x094D0304

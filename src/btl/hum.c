@@ -1695,7 +1695,7 @@ void task_hum_hook_moon_0(HookMoonWork* work) {
     PushPaletteEffect(0);
     work->palette = LoadObjPalette(gUnk_08F6DC64, 0x20);
     PopPaletteEffect();
-    func_0801C298(work->palette[6] + 16, 0);
+    func_0801C298(work->palette->index + 16, 0);
     work->unk_0A = 0;
     work->angle = 0;
 }
@@ -1931,21 +1931,21 @@ void func_0804D060(AnsemWork* work) {
     BtlObj* act = &work->base.actor;
 
     if (act->flags & 4) {
-        *(s32*)&work->unk_1C8 += (0x1800 - *(s32*)&work->unk_1C8) >> 3;
+        work->unk_1C8 += (0x1800 - work->unk_1C8) >> 3;
     } else {
-        *(s32*)&work->unk_1C8 += (-0x1800 - *(s32*)&work->unk_1C8) >> 3;
+        work->unk_1C8 += (-0x1800 - work->unk_1C8) >> 3;
     }
-    *(s32*)&work->unk_1CC += (-0x1200 - *(s32*)&work->unk_1CC) >> 3;
-    work->sub.x = act->x + *(s32*)&work->unk_1C8;
+    work->unk_1CC += (-0x1200 - work->unk_1CC) >> 3;
+    work->sub.x = act->x + work->unk_1C8;
     work->sub.y = act->y;
-    work->sub.z = act->z + *(s32*)&work->unk_1CC;
+    work->sub.z = act->z + work->unk_1CC;
 }
 
 void task_hum_ansem_0(AnsemWork* work) {
     HumInit(&work->base, &gHumAnsemDef);
     HumSubInit(&work->base, &work->sub, &gHumAnsemSubDef);
     work->unk_1C4 = -0xC00;
-    *(s32*)&work->unk_1C8 = 0;
+    work->unk_1C8 = 0;
     work->base.unk_174 = -50;
     work->base.unk_184 = gUnk_0813F0B8;
 }
@@ -2310,11 +2310,11 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 s32 d = act->x + 0x1000;
                 act->x = act->x + ((act->unk_014 - d) >> 2);
             }
-            *(s32*)&w->unk_1C8 += (0 - *(s32*)&w->unk_1C8) >> 2;
-            *(s32*)&w->unk_1CC += (0 - *(s32*)&w->unk_1CC) >> 2;
-            w->sub.x = act->x + *(s32*)&w->unk_1C8;
+            w->unk_1C8 += (0 - w->unk_1C8) >> 2;
+            w->unk_1CC += (0 - w->unk_1CC) >> 2;
+            w->sub.x = act->x + w->unk_1C8;
             w->sub.y = act->y;
-            w->sub.z = act->z + *(s32*)&w->unk_1CC;
+            w->sub.z = act->z + w->unk_1CC;
         }
 
         if ((s16)work->base.unk_150 == 25) {
@@ -2378,14 +2378,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             w->sub.flags |= 1;
 
             if (act->flags & 4) {
-                *(s32*)&w->unk_1C8 += (-0x2200 - *(s32*)&w->unk_1C8) >> 3;
+                w->unk_1C8 += (-0x2200 - w->unk_1C8) >> 3;
             } else {
-                *(s32*)&w->unk_1C8 += (0x2200 - *(s32*)&w->unk_1C8) >> 3;
+                w->unk_1C8 += (0x2200 - w->unk_1C8) >> 3;
             }
-            *(s32*)&w->unk_1CC += (0 - *(s32*)&w->unk_1CC) >> 3;
-            w->sub.x = act->x + *(s32*)&w->unk_1C8;
+            w->unk_1CC += (0 - w->unk_1CC) >> 3;
+            w->sub.x = act->x + w->unk_1C8;
             w->sub.y = act->y;
-            w->sub.z = act->z + *(s32*)&w->unk_1CC;
+            w->sub.z = act->z + w->unk_1CC;
         } else {
             func_0804D060(w);
         }
@@ -2521,11 +2521,11 @@ void func_0804E3BC(HumWork* work, s32 a) {
     }
 }
 
-void func_0804E404(AnsemWork* work) {
+void func_0804E404(HadesWork* work) {
     BtlObj* act = &work->base.actor;
 
     if (work->unk_1CC > 2) {
-        LoadObjPaletteBank(((u16*)work->base.palette)[3], gHadesPalette);
+        LoadObjPaletteBank(work->base.palette->index, gHadesPalette);
         work->base.unk_178 = gHadesPalette;
         work->unk_1CA &= 0xFFFE;
         work->base.unk_184 = gUnk_0813F214;
@@ -2678,7 +2678,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (AnimGetFrame(&work->base.anim) == 5 && work->base.anim.timer == 0) {
-            LoadObjPaletteBank(((u16*)work->base.palette)[3], gHadesAngryPalette);
+            LoadObjPaletteBank(work->base.palette->index, gHadesAngryPalette);
             work->base.unk_178 = gHadesAngryPalette;
             w->unk_1CA |= 1;
             work->base.unk_184 = gUnk_0813F220;
@@ -2748,7 +2748,7 @@ u8 task_hum_hades_1(HadesWork* work) {
 
         if (w->sub.x < (gBtlWork->unk_0DA - 32) << 8 || w->sub.x > (gBtlWork->unk_0DC + 32) << 8) {
             w->sub.flags |= 2;
-            func_0804E404((AnsemWork*)w);
+            func_0804E404(w);
             work->base.unk_170 = 0;
             work->base.unk_150 = 0;
         } else {
@@ -3200,7 +3200,7 @@ void func_0804FA70(MahluxiaWork* work, RikuSpawn* dst) {
         dst->flags &= 0xFFFE;
     }
     dst->anim = work->base.anim;
-    dst->unk_28 = *(u32*)work->base.tiles;
+    dst->unk_28 = work->base.tiles->src;
     dst->unk_2C = gBtlWork->scale;
 }
 
@@ -5819,7 +5819,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             }
             work->unk_19C = act->y;
             m4aSongNumStart(SONG_VO_VIC_ATTACK01);
-            InitObjTilesAtSlot(&work->unk_1E8, *(u16*)((u8*)gBtlWork->tiles2 + 6), gVixenE1Tiles, 0x7E0);
+            InitObjTilesAtSlot(&work->unk_1E8, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenE1Tiles, 0x7E0);
         }
 
         if (AnimGetFrame(&w->base.anim) > 2) {
@@ -5863,7 +5863,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if ((s16)w->base.unk_150 == 0) {
             AnimChangeWithDef(gHumVixenAnimDefs, &work->base.anim, 8, 0, work->base.tiles);
             work->unk_188 = 0;
-            FadeToAmount(0, *((u8*)gBtlWork + 0xB3), 8);
+            FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
 
         if (AnimGetFrame(&w->base.anim) > 4 && func_080128EC() == 0) {
@@ -6426,8 +6426,8 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
     s32 a;
     s32 b;
 
-    InitObjTilesAtSlot(work, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, 0x4C0);
-    work->tiles = work;
+    InitObjTilesAtSlot(&work->unk_00, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, 0x4C0);
+    work->tiles = &work->unk_00;
     work->palette = LoadObjPalette(gVixEPalette, 0x20);
     work->unk_38 = 0;
     work->unk_21C = 0;
@@ -7538,7 +7538,7 @@ void func_08057E2C(RikuWork* work, RikuSpawn* dst) {
         dst->flags &= 0xFFFE;
     }
     dst->anim = work->base.anim;
-    dst->unk_28 = *(u32*)work->base.tiles;
+    dst->unk_28 = work->base.tiles->src;
     dst->unk_2C = gBtlWork->scale;
 }
 

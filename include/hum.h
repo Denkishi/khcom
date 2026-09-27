@@ -77,7 +77,7 @@ typedef struct HookWork {
 
 typedef struct HookMoonWork {
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u16 angle;
     u8 unk_0A;
     u8 unk_0B;
@@ -128,7 +128,7 @@ typedef struct VixenIceWork {
     void* palette;
     AnimState anim;
     VixenSub* sub;
-    u8 collider[0x5C];
+    Collider collider;
     s16 unk_84;
     u16 unk_86;
     u16 unk_88;
@@ -179,7 +179,7 @@ typedef struct RikuSpawn {
     u16 flags;
     u16 unk_0E;
     AnimState anim;
-    u32 unk_28;
+    void* unk_28;
     s32 unk_2C;
 } RikuSpawn;
 
@@ -254,7 +254,7 @@ typedef struct VixenWork {
     u8 unk_1BD[0x03];
     s32 unk_1C0;
     VixenSub sub[3];
-    u8 unk_1E8[0x30];
+    ObjTiles unk_1E8;
 } VixenWork;
 
 typedef struct LexceusWork {
@@ -324,10 +324,8 @@ typedef struct AnsemWork {
     HumWork base;
     HumSub sub;
     s32 unk_1C4;
-    u16 unk_1C8;
-    u16 unk_1CA;
-    s16 unk_1CC;
-    u8 unk_1CE[0x02];
+    s32 unk_1C8;
+    s32 unk_1CC;
     s32 unk_1D0;
     u8 unk_1D4[0x02];
     s16 unk_1D6;
@@ -355,7 +353,7 @@ typedef struct VixenFrgSub {
 } VixenFrgSub;
 
 typedef struct VixenFrgWork {
-    u8 unk_00[0x30];
+    ObjTiles unk_00;
     void* tiles;
     void* palette;
     s16 unk_38;

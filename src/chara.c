@@ -549,12 +549,7 @@ void func_080C5A3C(void (*a)(void), void (*b)(void), u8 c) {
 s32 func_080C5AA4(void) {
     u16* param;
     u16* send;
-    s32 firstAddress;
-    s32 address;
-    s32 value;
-    s32 clearValue;
-    u16* words;
-    s32 clearAddress;
+    s32 i;
 
     if (gUnk_0203C3A8 == 0) {
         if (gUnk_0203C3A0 == 0) {
@@ -569,26 +564,19 @@ s32 func_080C5AA4(void) {
             } else {
                 send = gUnk_02039B68;
                 param = &gUnk_0203C3B0;
-                firstAddress = (s32)send;
-                value = 0;
-                address = (s32)(send + 3);
-                do {
-                    *(u16*)address = value;
-                    address -= sizeof(u16);
-                } while (address >= firstAddress);
+
+                for (i = 0; i < 4; i++) {
+                    gUnk_02039B68[i] = 0;
+                }
             }
             send[1] = *param;
         } else {
             gUnk_02039B68[0] = 0xECEC;
         }
     } else {
-        words = gUnk_02039B68;
-        clearValue = 0;
-        clearAddress = (s32)(words + 3);
-        do {
-            *(u16*)clearAddress = clearValue;
-            clearAddress -= sizeof(u16);
-        } while (clearAddress >= (s32)words);
+        for (i = 0; i < 4; i++) {
+            gUnk_02039B68[i] = 0;
+        }
     }
     return 0;
 }
@@ -631,9 +619,7 @@ s32 func_080C5B50(void) {
 }
 
 s32 func_080C5C24(void) {
-    u16* base;
-    u16* p;
-    u16 v;
+    s32 i;
 
     if (gUnk_0203C3A8 == 0) {
         if (gUnk_0203C3A0 == 0) {
@@ -642,13 +628,9 @@ s32 func_080C5C24(void) {
             gUnk_02039B68[0] = 0xECEC;
         }
     } else {
-        base = gUnk_02039B68;
-        v = 0;
-        p = base + 3;
-        do {
-            *p = v;
-            p--;
-        } while ((s32)p >= (s32)base);
+        for (i = 0; i < 4; i++) {
+            gUnk_02039B68[i] = 0;
+        }
     }
     return 0;
 }
@@ -681,35 +663,22 @@ void func_080C5D00(void) {
 }
 
 void func_080C5D10(void) {
-    u16* base;
-    u16* p;
-    u16 v;
+    s32 i;
 
-    base = gUnk_02039B58;
-    v = 0;
-    p = base + 3;
-    do {
-        *p = v;
-        p--;
-    } while ((s32)p >= (s32)base);
+    for (i = 0; i < 4; i++) {
+        gUnk_02039B58[i] = 0;
+    }
 }
 
 void func_080C5D24(void) {
     s32 i;
     s32 j;
-    s32 k;
-    s32 off;
 
-    i = 0;
-    do {
-        off = i * 4;
-        k = i + 1;
-
-        for (j = 1; j >= 0; j--) {
-            *(u16*)((u8*)gUnk_02039810 + off + j * 2) = 0;
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 2; j++) {
+            gUnk_02039810[i][j] = 0;
         }
-        i = k;
-    } while (i <= 3);
+    }
 }
 
 
@@ -741,13 +710,8 @@ s32 func_080C5D80(void) {
 }
 
 void func_080C5DC0(s32 (*a)(void), s32 (*b)(void)) {
-    u16* base;
-    u16* p;
-    u16 v;
     s32 i;
     s32 j;
-    s32 k;
-    s32 off;
     s32 (**pb)(void);
     u16* p1;
     u16* p2;
@@ -760,23 +724,17 @@ void func_080C5DC0(s32 (*a)(void), s32 (*b)(void)) {
     pb = &gUnk_020397F8;
     p1 = &gUnk_0203C3B4;
     p2 = &gUnk_0203C388;
-    base = gUnk_02039B68;
-    v = 0;
-    p = base + 3;
-    do {
-        *p = v;
-        p--;
-    } while ((s32)p >= (s32)base);
-    i = 0;
-    do {
-        off = i * 2;
-        k = i + 1;
 
-        for (j = 3; j >= 0; j--) {
-            *(u16*)((u8*)gUnk_020397E0 + off + j * 4) = 0;
+    for (i = 0; i < 4; i++) {
+        gUnk_02039B68[i] = 0;
+    }
+
+    for (i = 0; i < 2; i++) {
+        for (j = 0; j < 4; j++) {
+            gUnk_020397E0[j][i] = 0;
         }
-        i = k;
-    } while (i <= 1);
+    }
+
     *pa = a;
     *pb = b;
     *p1 = 0;

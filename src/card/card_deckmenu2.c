@@ -4503,7 +4503,7 @@ void func_0808CDE8(DeckMenuWork* w, u8 b) {
 void func_0808D0A4(u8 deck) {
     u8 d[2];
     u8 e[2];
-    u32 base;
+    u8* base;
     u16 n;
 
     base = 0;
@@ -4516,31 +4516,31 @@ void func_0808D0A4(u8 deck) {
     switch (deck) {
     case 0:
 #ifdef VERSION_EU
-        base = GetBgCharBase(0) + 0x2BE0;
+        base = (u8*)GetBgCharBase(0) + 0x2BE0;
 #else
-        base = GetBgCharBase(0);
+        base = (u8*)GetBgCharBase(0);
 #endif
         break;
     case 1:
 #ifdef VERSION_EU
-        base = GetBgCharBase(1) + 0x2F40;
+        base = (u8*)GetBgCharBase(1) + 0x2F40;
 #else
-        base = GetBgCharBase(1);
+        base = (u8*)GetBgCharBase(1);
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
-        base = GetBgCharBase(2) + 0x32A0;
+        base = (u8*)GetBgCharBase(2) + 0x32A0;
 #else
-        base = GetBgCharBase(2);
+        base = (u8*)GetBgCharBase(2);
 #endif
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], (u8*)base + 0x20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], (u8*)base + 0x40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], (u8*)base + 0x60, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], (u8*)base + 0x80, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
 }
 
 void func_0808D16C(u8 mode) {
@@ -4573,29 +4573,29 @@ void func_0808D16C(u8 mode) {
         break;
     }
 #else
-    u32 bg0;
-    u32 bg1;
-    u32 bg2;
+    u8* bg0;
+    u8* bg1;
+    u8* bg2;
 
-    bg0 = GetBgCharBase(0);
-    bg1 = GetBgCharBase(1);
-    bg2 = GetBgCharBase(2);
+    bg0 = (u8*)GetBgCharBase(0);
+    bg1 = (u8*)GetBgCharBase(1);
+    bg2 = (u8*)GetBgCharBase(2);
 
     switch (mode) {
     case 0:
-        RequestDma3Copy(gUnk_0940FC58, (u8*)bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, (u8*)bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, (u8*)bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_0940FC58, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg2 + 0x1A0, 0x1E0);
         break;
     case 1:
-        RequestDma3Copy(gUnk_09410058, (u8*)bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, (u8*)bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, (u8*)bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058 - 0x400, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058, bg2 + 0x1A0, 0x1E0);
         break;
     case 2:
-        RequestDma3Copy(gUnk_09410058, (u8*)bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, (u8*)bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, (u8*)bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gUnk_09410058 - 0x400, bg2 + 0x1A0, 0x1E0);
         break;
     }
 #endif
@@ -4606,7 +4606,7 @@ void func_0808D258(u8 mode) {
     u8 d2[4];
     u16 v;
 
-    u32 base;
+    u8* base;
 
     base = 0;
     v = GetDeckCpCost(mode);
@@ -4623,35 +4623,35 @@ void func_0808D258(u8 mode) {
     switch (mode) {
     case 0:
 #ifdef VERSION_EU
-        base = GetBgCharBase(0) + 0x2BE0;
+        base = (u8*)GetBgCharBase(0) + 0x2BE0;
 #else
-        base = GetBgCharBase(0);
+        base = (u8*)GetBgCharBase(0);
 #endif
         break;
     case 1:
 #ifdef VERSION_EU
-        base = GetBgCharBase(1) + 0x2F40;
+        base = (u8*)GetBgCharBase(1) + 0x2F40;
 #else
-        base = GetBgCharBase(1);
+        base = (u8*)GetBgCharBase(1);
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
-        base = GetBgCharBase(2) + 0x32A0;
+        base = (u8*)GetBgCharBase(2) + 0x32A0;
 #else
-        base = GetBgCharBase(2);
+        base = (u8*)GetBgCharBase(2);
 #endif
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], (void*)(base + 0xA0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], (void*)(base + 0xC0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], (void*)(base + 0xE0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[3] + 1) * 32], (void*)(base + 0x100), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], (void*)(base + 0x120), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], (void*)(base + 0x140), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], (void*)(base + 0x160), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[3] + 1) * 32], (void*)(base + 0x180), 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0xA0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0xC0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0xE0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[3] + 1) * 32], base + 0x100, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], base + 0x120, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], base + 0x140, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x160, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[3] + 1) * 32], base + 0x180, 32);
 }
 #ifdef VERSION_EU
 #define CARD_SLOT_OFFSET(slot, fixed) ((fixed) * 256)
@@ -4722,7 +4722,7 @@ void func_0808D594(void) {
     u16 a;
     u16 b;
 
-    u32 base;
+    u8* base;
 
     a = CountCardsInDecks();
     b = CountCollectionCards();
@@ -4733,13 +4733,13 @@ void func_0808D594(void) {
     d2[0] = b / 100;
     d2[1] = b / 10 - d2[0] * 10;
     d2[2] = b - d2[0] * 100 - d2[1] * 10;
-    base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], (void*)(base + 0x2A0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], (void*)(base + 0x2C0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], (void*)(base + 0x2E0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], (void*)(base + 0x300), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], (void*)(base + 0x320), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], (void*)(base + 0x340), 32);
+    base = (u8*)GetBgCharBase(3);
+    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x340, 32);
 }
 
 void func_0808D6C4(DeckMenuWork* w) {
@@ -5021,18 +5021,18 @@ void func_0808DDD0(DeckMenuWork* w) {
 
 void func_0808DE28(u8 a) {
     u8 d[2];
-    u32 base;
+    u8* base;
 
-    base = GetBgCharBase(3);
+    base = (u8*)GetBgCharBase(3);
 
     if (a != 0) {
         d[0] = a / 10;
         d[1] = a - d[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(d[0] + 3) * 32], (void*)(base + 0xCE0), 32);
-        RequestDma3Copy(&gUnk_0940FA98[(d[1] + 3) * 32], (void*)(base + 0xD00), 32);
+        RequestDma3Copy(&gUnk_0940FA98[(d[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gUnk_0940FA98[(d[1] + 3) * 32], base + 0xD00, 32);
     } else {
-        RequestDma3Copy(gUnk_0940FAD8, (void*)(base + 0xCE0), 32);
-        RequestDma3Copy(gUnk_0940FAD8, (void*)(base + 0xD00), 32);
+        RequestDma3Copy(gUnk_0940FAD8, base + 0xCE0, 32);
+        RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
     }
 }
 
@@ -6122,10 +6122,10 @@ u8 func_eu_0808E94C(DeckMenuWork* w, u16 keys) {
 }
 #endif
 void func_0808F258(u8 a) {
-    u32 base;
+    u8* base;
 
-    base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_09417378[a * 64], (void*)(base + 32), 64);
+    base = (u8*)GetBgCharBase(3);
+    RequestDma3Copy(&gUnk_09417378[a * 64], base + 32, 64);
 }
 void func_0808F284(DeckMenuWork* w) {
     u8* s;

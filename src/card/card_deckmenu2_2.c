@@ -787,7 +787,7 @@ void func_080A6BB4(RikuDeckMenuWork* w) {
 void func_080A6C50(u8 deck) {
     u8 d[2];
     u8 e[2];
-    u32 base;
+    u8* base;
     u16 n;
 
     base = 0;
@@ -799,26 +799,26 @@ void func_080A6C50(u8 deck) {
 
     switch (deck) {
     case 0:
-        base = GetBgCharBase(1);
+        base = (u8*)GetBgCharBase(1);
         break;
     case 1:
-        base = GetBgCharBase(1);
+        base = (u8*)GetBgCharBase(1);
         break;
     case 2:
-        base = GetBgCharBase(1);
+        base = (u8*)GetBgCharBase(1);
         break;
     }
 
 #ifdef VERSION_EU
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], (u8*)base + 0x2C00, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], (u8*)base + 0x2C20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], (u8*)base + 0x2C40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], (u8*)base + 0x2C60, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x2C00, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x2C20, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x2C40, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x2C60, 32);
 #else
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], (u8*)base + 0x20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], (u8*)base + 0x40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], (u8*)base + 0x60, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], (u8*)base + 0x80, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
 #endif
 }
 
@@ -827,7 +827,7 @@ void func_080A6D0C(void) {
     u8 e[3];
     u16 a;
     u16 b;
-    u32 base;
+    u8* base;
 
     a = CountCardsInDecks();
     b = CountCollectionCards();
@@ -837,13 +837,13 @@ void func_080A6D0C(void) {
     e[0] = b / 100;
     e[1] = b / 10 - e[0] * 10;
     e[2] = b - e[0] * 100 - e[1] * 10;
-    base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], (void*)(base + 0x2A0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], (void*)(base + 0x2C0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[2] + 1) * 32], (void*)(base + 0x2E0), 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], (void*)(base + 0x300), 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], (void*)(base + 0x320), 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], (void*)(base + 0x340), 32);
+    base = (u8*)GetBgCharBase(3);
+    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(d[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], base + 0x340, 32);
 }
 
 void func_080A6E3C(RikuDeckMenuWork* w) {
@@ -975,18 +975,18 @@ void func_080A6FAC(RikuDeckMenuWork* w) {
 
 void func_080A7180(u8 a) {
     u8 v[2];
-    u32 base;
+    u8* base;
 
-    base = GetBgCharBase(3);
+    base = (u8*)GetBgCharBase(3);
 
     if (a != 0) {
         v[0] = a / 10;
         v[1] = a - v[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(v[0] + 3) * 32], (void*)(base + 0xCE0), 32);
-        RequestDma3Copy(&gUnk_0940FA98[(v[1] + 3) * 32], (void*)(base + 0xD00), 32);
+        RequestDma3Copy(&gUnk_0940FA98[(v[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gUnk_0940FA98[(v[1] + 3) * 32], base + 0xD00, 32);
     } else {
-        RequestDma3Copy(gUnk_0940FAD8, (void*)(base + 0xCE0), 32);
-        RequestDma3Copy(gUnk_0940FAD8, (void*)(base + 0xD00), 32);
+        RequestDma3Copy(gUnk_0940FAD8, base + 0xCE0, 32);
+        RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
     }
 }
 void func_080A7210(RikuDeckMenuWork* w) {

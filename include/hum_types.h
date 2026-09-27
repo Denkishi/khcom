@@ -4,6 +4,7 @@
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "obj.h"
 #include "battle_actor_types.h"
 
 typedef struct HumSub {
@@ -37,7 +38,7 @@ typedef struct HumSubDef {
 typedef struct HumWork {
     const void* unk_000;
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     HumSub* sub;
     HumSub* sub2;
     AnimState anim;

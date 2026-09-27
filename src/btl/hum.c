@@ -451,10 +451,10 @@ u8 task_hum_cloud_1(CloudWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, &z);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
         case 38:
             if (act->z < 0) {
@@ -523,7 +523,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.unk_150 = 0;
             break;
         }
-        if (func_0800F4C8(work, 40)) {
+        if (func_0800F4C8(&work->base, 40)) {
             func_08049F24((struct PcCharaWork*)w, 0x10000,
                 (gBtlWork->unk_0DE + gBtlWork->unk_0E0) << 7);
             break;
@@ -533,7 +533,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 30);
+            func_0800F368(&work->base, 30);
         }
         work->base.unk_150++;
         break;
@@ -557,7 +557,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 30);
+            func_0800F368(&work->base, 30);
         }
         work->base.unk_150++;
         break;
@@ -644,7 +644,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.unk_150 = 0;
             work->base.unk_170 = 27;
         } else {
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
             work->base.unk_150++;
         }
         break;
@@ -813,7 +813,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.unk_150 = 0;
             break;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         if (work->base.anim.timer == 0) {
             if ((s16)w->unk_18E == 0) {
                 switch (AnimGetFrame(&work->base.anim)) {
@@ -1067,9 +1067,9 @@ u8 func_0804B4F4(CloudWork* work) {
 
     c = gBtlWork->actor;
     func_0801C700(&work->base.actor, &x, &y, 0);
-    func_0800F368(work, 1);
+    func_0800F368(&work->base, 1);
 
-    if (func_0800F504(work, 0x100, 0x100, 0x100)) {
+    if (func_0800F504(&work->base, 0x100, 0x100, 0x100)) {
         if (gBtlWork->flags & 0x8000) {
             func_0804B44C(work, -99, 0x280);
         } else if (GetRandom() & 1) {
@@ -1122,10 +1122,10 @@ u8 task_hum_hook_1(HookWork* work) {
     c = gBtlWork->actor;
     func_0801C700(act, &x, &y, &z);
 
-    if (_0800E434(work) == 5) {
+    if (_0800E434(&work->base) == 5) {
         work->base.unk_150 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
             work->base.unk_170 = 20;
             break;
@@ -1148,7 +1148,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
     }
 
-    if (func_0800F5A4(work, 13, 40, 40, 24)) {
+    if (func_0800F5A4(&work->base, 13, 40, 40, 24)) {
         if (GetRandom() % 2) {
             w->base.unk_184 = gUnk_0813EF54;
         } else {
@@ -1197,7 +1197,7 @@ u8 task_hum_hook_1(HookWork* work) {
             break;
         }
 
-        if (func_0800F4C8(work, 40)) {
+        if (func_0800F4C8(&work->base, 40)) {
             func_0804B4BC((CloudWork*)w, 0x10000,
                 (gBtlWork->unk_0DE + gBtlWork->unk_0E0) << 7);
             break;
@@ -1208,7 +1208,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 8);
+            func_0800F368(&work->base, 8);
         }
         work->base.unk_150++;
         break;
@@ -1217,7 +1217,7 @@ u8 task_hum_hook_1(HookWork* work) {
         work->base.targetX = x;
         work->base.targetY = y;
 
-        if (func_0800F3BC(work, work->base.targetX, y, 358)) {
+        if (func_0800F3BC(&work->base, work->base.targetX, y, 358)) {
             work->base.unk_170 = 0;
             work->base.unk_150 = 0;
             break;
@@ -1228,7 +1228,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 8);
+            func_0800F368(&work->base, 8);
         }
         work->base.unk_150++;
         break;
@@ -1266,7 +1266,7 @@ u8 task_hum_hook_1(HookWork* work) {
             AnimChangeWithDef(gHumHookAnimDefs, &w->base.anim, 11, 1, w->base.tiles);
         }
         func_0802F284(act->x, act->y, act->z);
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
         if (act->flags & 4) {
             s32 d = act->x - 0x1000;
@@ -1306,7 +1306,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if ((s16)work->base.unk_150 == 0) {
             AnimChangeWithDef(gHumHookAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
         if (act->flags & 4) {
             s32 d = act->x - 0x1000;
@@ -1442,7 +1442,7 @@ u8 task_hum_hook_1(HookWork* work) {
             w->flags &= 0xFFFE;
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
         if ((w->flags & 1) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
@@ -1551,7 +1551,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if ((s16)work->base.unk_150 == 0) {
             AnimChangeWithDef(gHumHookAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         f = AnimGetFrame(&work->base.anim);
 
         switch (f) {
@@ -1623,7 +1623,7 @@ u8 task_hum_hook_1(HookWork* work) {
             work->base.unk_150 = 0;
             work->base.unk_170 = 24;
         } else {
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
             work->base.unk_150++;
         }
         break;
@@ -1676,7 +1676,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
     }
     TaskPoolUpdate(&w->tasks);
-    return func_0800E5F0(work);
+    return func_0800E5F0(&work->base);
 }
 
 void task_hum_hook_2(HookWork* work) {
@@ -1964,13 +1964,13 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, 0);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
         act->flags &= ~0x100008000;
         func_08019A30();
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
         case 38:
             work->base.unk_170 = 20;
@@ -2040,7 +2040,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.unk_150 = 0;
             break;
         }
-        func_0800F368(work, 3);
+        func_0800F368(&work->base, 3);
         work->base.unk_150++;
         break;
     case 8:
@@ -2072,7 +2072,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.unk_150 = 0;
             break;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         work->base.unk_150++;
         break;
     case 1:
@@ -2298,7 +2298,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             act->unk_014 = act->x;
             act->flags |= 0x200;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
         if (AnimGetFrame(&w->sub.anim) != 0) {
             act->flags |= 0x100008000;
@@ -2574,11 +2574,11 @@ u8 task_hum_hades_1(HadesWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, &z);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
         case 38:
             if (w->unk_1CA & 1) {
@@ -3168,9 +3168,9 @@ u8 func_0804F9C8(MahluxiaWork* work) {
 
     c = gBtlWork->actor;
     func_0801C700(&work->base.actor, &v, 0, 0);
-    func_0800F368(work, 1);
+    func_0800F368(&work->base, 1);
 
-    if (func_0800F504(work, 0x100, 0x100, 0x100)) {
+    if (func_0800F504(&work->base, 0x100, 0x100, 0x100)) {
         if (gBtlWork->flags & 0x8000) {
             func_0804F8F0(work, -128);
         } else if (GetRandom() & 1) {
@@ -3317,12 +3317,12 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     func_0801C700(act, &x, &y, &z);
     work->flags &= ~2;
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
         w->unk_1C4 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
             work->base.unk_170 = 21;
             break;
@@ -3392,7 +3392,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             }
         }
 
-        if (func_0800F4C8(work, 40)) {
+        if (func_0800F4C8(&work->base, 40)) {
             func_0804F9A0(w, 0x10000, 48);
             break;
         }
@@ -3402,7 +3402,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 8);
+            func_0800F368(&work->base, 8);
         }
         work->base.unk_150++;
         break;
@@ -3422,7 +3422,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 30);
+            func_0800F368(&work->base, 30);
         }
         work->base.unk_150++;
         break;
@@ -3447,7 +3447,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.unk_170 = 0;
             break;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         func_0804FD7C(w);
         w->flags |= 2;
         work->base.unk_150++;
@@ -3484,7 +3484,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.unk_170 = 0;
             break;
         }
-        func_0800F368(work, 3);
+        func_0800F368(&work->base, 3);
         w->flags |= 2;
         work->base.unk_150++;
         break;
@@ -3538,7 +3538,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
             if (work->base.anim.timer == 0) {
-                func_0800F368(work, 1);
+                func_0800F368(&work->base, 1);
                 func_0801836C(act->x, act->y, act->z, x - act->x, 316);
             }
             break;
@@ -3878,12 +3878,12 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, &z);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
         work->base.unk_152 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
             work->base.unk_170 = 21;
             break;
@@ -3937,7 +3937,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case 0:
         AnimChangeWithDef(gHumLaxeneAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
-        func_0800F368(work, 5);
+        func_0800F368(&work->base, 5);
 
         if (func_08081828() == 0) {
             if (GetRandom() % 30 == 0) {
@@ -4029,7 +4029,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if ((s16)work->base.unk_150 == 0) {
             AnimChangeWithDef(gHumLaxeneAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.unk_150 = 0;
@@ -4722,10 +4722,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     sub2 = &work->sub2;
     act = &work->base.actor;
     func_0801C700(act, &x, &y, 0);
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
         case 38:
             work->base.unk_170 = 20;
@@ -4787,11 +4787,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.unk_150 = 0;
             break;
         }
-        if (func_0800F4C8(work, 40)) {
+        if (func_0800F4C8(&work->base, 40)) {
             func_080526A8(&w->base, 0x10000, act->y);
             break;
         }
-        func_0800F368(work, 8);
+        func_0800F368(&work->base, 8);
         work->base.unk_150++;
         break;
     case 8:
@@ -4839,7 +4839,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
         ApproachValueHalfSteps(&act->x, work->base.targetX, (u16)work->base.unk_152);
         work->base.unk_152--;
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         if ((s16)work->base.unk_152 <= 0) {
             work->base.unk_170 = 23;
             work->base.unk_150 = 0;
@@ -4854,7 +4854,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.targetX = x * 2 - act->x;
             work->base.targetY = y * 2 - act->y;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         func_0802F284(act->x, act->y, act->z);
         if (AnimIsFinished(&work->base.anim)) {
             work->base.unk_170 = 24;
@@ -4878,7 +4878,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             }
             sub->y = act->y;
             sub->z = act->z - 0x2000;
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
             w->unk_204 = 30;
         }
         ApproachValue(&sub->x, work->base.targetX, w->unk_204);
@@ -4933,7 +4933,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub2->flags &= ~1;
             w->unk_200 = 0;
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         work->base.unk_158 = 0;
         if (work->base.anim.timer == 0) {
             switch (AnimGetFrame(&work->base.anim)) {
@@ -5067,7 +5067,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         u16 angle;
         s32 dx;
         s32 dy;
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         if ((s16)work->base.unk_150 == 0) {
             AnimChangeWithDef(gUnk_0813F5E0, &w->base.anim, 9, 1, w->base.tiles);
             AnimChangeWithDef(gUnk_0813F6C0, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
@@ -5141,7 +5141,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
         break;
     case 31:
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         if ((s16)work->base.unk_150 == 0) {
             AnimChangeWithDef(gUnk_0813F5E0, &w->base.anim, 9, 1, w->base.tiles);
             AnimChangeWithDef(gUnk_0813F6C0, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
@@ -5288,7 +5288,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->unk_200 = 0;
             m4aSongNumStart(SONG_SND_289);
         }
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         if (AnimIsFinished(&work->base.anim)) {
             work->base.unk_170 = 33;
             work->base.unk_150 = 0;
@@ -5540,11 +5540,11 @@ u8 task_hum_vixen_1(VixenWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, &z);
 
-    switch ((u32)_0800E434(work)) {
+    switch ((u32)_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
         case 38:
             w->base.unk_170 = 22;
@@ -5581,12 +5581,12 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
     switch ((u32)gBtlWork->unk_10C) {
     case 164:
-        if (func_0800F5A4(w, 30, 40, 40, 24)) {
+        if (func_0800F5A4(&w->base, 30, 40, 40, 24)) {
             w->base.unk_184 = gUnk_0813F7A8;
         }
         break;
     case 175:
-        if (func_0800F5A4(w, 5, 40, 40, 24)) {
+        if (func_0800F5A4(&w->base, 5, 40, 40, 24)) {
             switch (GetRandom() % 3) {
             case 0:
                 w->base.unk_184 = gUnk_0813F7A8;
@@ -5602,7 +5602,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case 176:
     default:
-        if (func_0800F5A4(w, 30, 40, 40, 24)) {
+        if (func_0800F5A4(&w->base, 30, 40, 40, 24)) {
             switch (GetRandom() % 3) {
             case 0:
                 w->base.unk_184 = gUnk_0813F7A8;
@@ -5626,14 +5626,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
     case 17:
         AnimChangeWithDef(gHumVixenAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
         work->unk_188 = -0x4000;
-        func_0800F368(w, 20);
+        func_0800F368(&w->base, 20);
         break;
     case 0:
         AnimChangeWithDef(gHumVixenAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
         work->unk_188 = 0;
 
         if (func_08081828() == 0) {
-            func_0800F368(w, 80);
+            func_0800F368(&w->base, 80);
 
             if (AnimIsFinished(&w->base.anim) && GetRandom() % 80 == 0) {
                 w->base.unk_170 = 8;
@@ -5830,7 +5830,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             work->unk_198 += (gSineTable[(u8)work->angle] * s) >> 8;
             work->unk_19C += (-gSineTable[(u8)work->angle + 64] * s) >> 8;
             ClampBattlePosition(&work->unk_198, &work->unk_19C, 0, 0);
-            func_0800F368(w, 1);
+            func_0800F368(&w->base, 1);
 
             if ((s16)w->base.unk_150 % 9 == 0) {
                 args.x = work->unk_198;
@@ -6551,12 +6551,12 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     p = gBtlWork->actor;
     func_0801C700(act, &x, &y, &z);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
         work->base.unk_152 = 0;
 
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
             work->base.unk_170 = 21;
             break;
@@ -6608,7 +6608,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 break;
             }
         }
-        func_0800F368(work, 10);
+        func_0800F368(&work->base, 10);
         work->base.unk_150++;
         break;
     case 8:
@@ -6624,7 +6624,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 break;
             }
         }
-        func_0800F368(work, 10);
+        func_0800F368(&work->base, 10);
         work->base.unk_150++;
         break;
     case 1:
@@ -6906,7 +6906,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         case 2:
         case 3:
         case 4:
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
             break;
         case 5:
             if (work->base.anim.timer == 0) {
@@ -7505,9 +7505,9 @@ u8 func_08057D68(RikuWork* work) {
 
     if (GetRandom() % 30 == 0) {
         func_0801C700(&work->base.actor, &v, &w, 0);
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
-        if (func_0800F504(work, 0x100, 0x100, 0x100)) {
+        if (func_0800F504(&work->base, 0x100, 0x100, 0x100)) {
             if (gBtlWork->flags & 0x8000) {
                 func_08057CBC(work, -99, 0x280);
             } else if (GetRandom() & 1) {
@@ -7624,10 +7624,10 @@ u8 task_hum_riku_1(RikuWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &x, &y, &z);
     work->flags &= ~4;
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 5:
         work->base.unk_150 = 0;
-        switch ((u32)_0800F84C(work)) {
+        switch ((u32)_0800F84C(&work->base)) {
         case 36:
             work->base.unk_170 = 24;
             break;
@@ -7716,7 +7716,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 60);
+            func_0800F368(&work->base, 60);
         }
         work->base.unk_150++;
         break;
@@ -7738,7 +7738,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             }
         } else {
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
         }
         work->base.unk_150++;
         break;
@@ -7980,7 +7980,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             AnimChangeWithDef(gHumRikuAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
             w->flags &= ~2;
-            func_0800F368(work, 1);
+            func_0800F368(&work->base, 1);
         }
         if (w->flags & 2) {
             BtlObj* p = gBtlWork->actor;
@@ -8373,7 +8373,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     act = &work->base.actor;
     func_0801C700(act, &a, &b, &c);
 
-    switch (_0800E434(work)) {
+    switch (_0800E434(&work->base)) {
     case 4:
         break;
     case 5:
@@ -8381,7 +8381,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         work->base.unk_150 = 0;
         break;
     }
-    func_0800F368(work, 1);
+    func_0800F368(&work->base, 1);
 
     switch (work->base.unk_170) {
     case 12:
@@ -8446,7 +8446,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         break;
     default:
         AnimChangeWithDef(gHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
         break;
     }
 
@@ -8459,7 +8459,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     x = act->x;
     y = act->y;
     z = act->z;
-    r = func_0800E5F0(work);
+    r = func_0800E5F0(&work->base);
     act->x = x;
     act->y = y;
     act->z = z;
@@ -8489,7 +8489,7 @@ u8 task_hum_robe_1(RobeWork* work) {
     s32 z;
     u8 r;
 
-    if (_0800E434(work) == 1) {
+    if (_0800E434(&work->base) == 1) {
         work->base.unk_150 = 1;
     }
 
@@ -8502,11 +8502,11 @@ u8 task_hum_robe_1(RobeWork* work) {
         AnimChangeWithDef(gHumRobeAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
         work->unk_188 = 1;
     }
-    func_0800F368(work, 1);
+    func_0800F368(&work->base, 1);
     x = act->x;
     y = act->y;
     z = act->z;
-    r = func_0800E5F0(work);
+    r = func_0800E5F0(&work->base);
     act->x = x;
     act->y = y;
     act->z = z;

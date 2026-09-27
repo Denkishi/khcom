@@ -119,48 +119,6 @@ typedef struct HitData {
     u8 unk_32[0x02];
 } HitData;
 
-typedef struct SprObj {
-    void* unk_00;
-    void* tiles;
-    void* unk_08;
-    void* palette;
-    u8 anim[0x18];
-    s32 x;
-    s32 y;
-    s32 z;
-    u16 flags;
-    u16 unk_36;
-    void* gfx;
-} SprObj;
-
-typedef struct Actor {
-    void* unk_00;
-    void* tiles;
-    ObjPalette* palette;
-    SprObj* spr;
-    SprObj* spr2;
-    u8 unk_14[0x18];
-    TaskPool tasks;
-    s32 unk_40;
-    s32 unk_44;
-    u8 unk_48[0x2C];
-    u64 unk_74;
-    u8 unk_7C[0xD4];
-    u16 unk_150;
-    u16 unk_152;
-    u32 flags;
-    u8 unk_158[0x10];
-    s32 unk_168;
-    s32 unk_16C;
-    s32 unk_170;
-    u8 unk_174[0x04];
-    void* unk_178;
-    u16 unk_17C;
-    u16 unk_17E;
-    void* gfx;
-    const u32* unk_184;
-} Actor;
-
 typedef struct EnemyBaseStats {
     s16 hp;
     s16 attack;
@@ -225,9 +183,9 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b);
 s64 __ashldi3(s64 v, s32 n);
 u8 func_080ABED0(void);
 
-void func_0800EEBC(Actor* p, SprObj* s);
+void func_0800EEBC(struct HumWork* p, struct HumSub* s);
 void func_0800F230(void);
-u8 func_0800F440(Actor* p, s16 a, u16 b, u16 r);
+u8 func_0800F440(struct HumWork* p, s16 a, u16 b, u16 r);
 void func_0801CA88(void);
 
 const EnemyBaseStats* GetEnemyBaseStats(u16 i);

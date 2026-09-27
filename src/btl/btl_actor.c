@@ -1,6 +1,7 @@
 #include "macros.h"
 #include "battle.h"
 #include "battle_actor.h"
+#include "hum_types.h"
 #include "romcri_backgrounds.h"
 
 BtlWork* gUnk_02039B9C EWRAM_COMMON(4);
@@ -8,10 +9,10 @@ FieldState* gFieldState EWRAM_COMMON(4);
 
 const u8 gUnk_08133E54[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 
-void func_0800EEBC(Actor* p, SprObj* s) {
+void func_0800EEBC(HumWork* p, HumSub* s) {
     s16 x;
     s16 y;
-    Collider* c;
+    BtlObj* c;
     u16 attr;
     s32 affine;
     u16 prio;
@@ -25,10 +26,10 @@ void func_0800EEBC(Actor* p, SprObj* s) {
     if (s->flags & 2) {
         return;
     }
-    c = (Collider*)&p->unk_40;
+    c = &p->actor;
     attr = GetBattleSpritePriorityFlags(s->y);
 
-    if (*(u64*)&c->unk_34 & 4) {
+    if (c->flags & 4) {
         sy = gBtlWork->scale;
         sx = sy;
     } else {
@@ -58,13 +59,13 @@ void func_0800EEBC(Actor* p, SprObj* s) {
         prio = ((-0x1004 - (c->y >> 8) * 4) | 3) + 1;
     }
     WorldToScreen(&x, &y, s->x, s->y, s->z);
-    DrawSprite(x, y, s->gfx, s->tiles, s->palette, affine, attr, prio);
+    DrawSprite(x, y, s->gfx, s->tiles, s->palette2, affine, attr, prio);
 }
 
-void func_0800EFE8(Actor* work) {
+void func_0800EFE8(HumWork* work) {
     s16 x;
     s16 y;
-    BtlObj* c = (BtlObj*)&work->unk_40;
+    BtlObj* c = &work->actor;
     u16 attr;
     s32 affine;
     s32 sx;
@@ -131,8 +132,8 @@ void func_0800EFE8(Actor* work) {
         LoadObjPaletteBank(work->palette->index, work->unk_178);
     }
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, (-0x1004 - (c->y >> 8) * 4) | 3);
-    func_0800EEBC(work, work->spr);
-    func_0800EEBC(work, work->spr2);
+    func_0800EEBC(work, work->sub);
+    func_0800EEBC(work, work->sub2);
     TaskPoolDraw(&work->tasks);
 }
 void func_0800F230(void) {
@@ -233,39 +234,39 @@ void eu_08013190(void) {
 }
 #endif
 
-void func_0800F368(Actor* p, u16 n) {
+void func_0800F368(HumWork* p, u16 n) {
     s32 v;
-    func_0801C700(&p->unk_40, &v, 0, 0);
+    func_0801C700(&p->actor, &v, 0, 0);
 
     if (GetRandom() % n == 0) {
-        if (p->unk_44 > v) {
-            p->unk_74 |= 4;
+        if (p->actor.x > v) {
+            p->actor.flags |= 4;
         } else {
-            p->unk_74 &= ~4;
+            p->actor.flags &= ~4;
         }
     }
 }
 
-u8 func_0800F3BC(Collider* c, s32 x, s32 y, s32 spd) {
-    u8 ang = GetAngle(c->unk_44, c->unk_48, x, y);
+u8 func_0800F3BC(HumWork* p, s32 x, s32 y, s32 spd) {
+    u8 ang = GetAngle(p->actor.x, p->actor.y, x, y);
 
-    c->unk_44 += gSineTable[ang] * spd >> 8;
-    c->unk_48 += -gSineTable[ang + 64] * spd >> 8;
+    p->actor.x += gSineTable[ang] * spd >> 8;
+    p->actor.y += -gSineTable[ang + 64] * spd >> 8;
 
-    if (c->unk_44 - x >= 0 ? c->unk_44 - x > 0x1E00 : x - c->unk_44 > 0x1E00) {
+    if (p->actor.x - x >= 0 ? p->actor.x - x > 0x1E00 : x - p->actor.x > 0x1E00) {
         return 0;
     }
 
-    if (c->unk_48 - y >= 0 ? c->unk_48 - y > 0x1000 : y - c->unk_48 > 0x1000) {
+    if (p->actor.y - y >= 0 ? p->actor.y - y > 0x1000 : y - p->actor.y > 0x1000) {
         return 0;
     }
     return 1;
 }
 
-u8 func_0800F440(Actor* p, s16 a, u16 b, u16 r) {
+u8 func_0800F440(HumWork* p, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
-    Collider* c = (Collider*)&p->unk_40;
+    BtlObj* c = &p->actor;
     s32 d;
     s32 t;
     s32 bb;
@@ -279,7 +280,7 @@ u8 func_0800F440(Actor* p, s16 a, u16 b, u16 r) {
         return 0;
     }
 
-    if (*(u64*)&c->unk_34 & 4) {
+    if (c->flags & 4) {
         t = c->x - (a << 8);
         bb = b << 8;
 
@@ -305,21 +306,21 @@ u8 func_0800F440(Actor* p, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 func_0800F4C8(BtlObj* p, u16 b) {
-    if (p->collider.x < (gBtlWork->unk_0DA + b) << 8) {
+u8 func_0800F4C8(HumWork* p, u16 b) {
+    if (p->actor.x < (gBtlWork->unk_0DA + b) << 8) {
         return 1;
     }
 
-    if (p->collider.x > (gBtlWork->unk_0DC - b) << 8) {
+    if (p->actor.x > (gBtlWork->unk_0DC - b) << 8) {
         return 1;
     }
     return 0;
 }
 
-u8 func_0800F504(Actor* p, s16 a, u16 b, u16 r) {
+u8 func_0800F504(HumWork* p, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
-    Collider* c = (Collider*)&p->unk_40;
+    BtlObj* c = &p->actor;
     BtlObj* o = gBtlWork->actor;
     s32 d;
     s32 t;
@@ -360,7 +361,7 @@ u8 func_0800F504(Actor* p, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 func_0800F5A4(Actor* work, u16 interval, u16 offset, u16 width, u16 depth) {
+u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) {
     u32 value;
     u32 cards;
     u32 id;
@@ -456,7 +457,7 @@ u8 func_0800F5A4(Actor* work, u16 interval, u16 offset, u16 width, u16 depth) {
     }
     return 0;
 }
-s32 _0800F84C(Actor* work) {
+s32 _0800F84C(HumWork* work) {
     s32 buf[6];
     s32 id = func_080ABA80(buf);
 

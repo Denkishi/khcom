@@ -33,7 +33,8 @@ u8 func_0801C6D4(s32* a, s32* b, s32* c, s32* d);
 void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d);
 u8 func_0801CA00(BtlObj* p);
 
-struct Actor;
+struct HumWork;
+struct HumSub;
 struct HitData;
 
 void BtlWorkInit(void);
@@ -50,12 +51,12 @@ void func_0801C830(BtlObj* p);
 void func_0801CB00(void);
 void func_0801CB0C(void);
 void func_0801CB44(void);
-void func_0800EFE8(struct Actor* work);
-void func_0800F368(struct Actor* p, u16 n);
-u8 func_0800F3BC(Collider* c, s32 x, s32 y, s32 spd);
-u8 func_0800F4C8(BtlObj* p, u16 b);
-u8 func_0800F504(struct Actor* p, s16 a, u16 b, u16 r);
-u8 func_0800F5A4(struct Actor* work, u16 interval, u16 offset, u16 width, u16 depth);
-s32 _0800F84C(struct Actor* work);
+void func_0800EFE8(struct HumWork* work);
+void func_0800F368(struct HumWork* p, u16 n);
+u8 func_0800F3BC(struct HumWork* p, s32 x, s32 y, s32 spd);
+u8 func_0800F4C8(struct HumWork* p, u16 b);
+u8 func_0800F504(struct HumWork* p, s16 a, u16 b, u16 r);
+u8 func_0800F5A4(struct HumWork* work, u16 interval, u16 offset, u16 width, u16 depth);
+s32 _0800F84C(struct HumWork* work);
 
 #endif

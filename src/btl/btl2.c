@@ -1235,10 +1235,10 @@ void task_btl_pop_3(BtlPopWork* work) {
 }
 
 void task_btl_escape_0(BtlEscapeWork* work) {
-#ifdef VERSION_EU
     void** p;
 
     work->unk_18 = 0x5A00;
+#ifdef VERSION_EU
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 
     switch (gLanguage) {
@@ -1264,17 +1264,14 @@ void task_btl_escape_0(BtlEscapeWork* work) {
         p = gUnkEu_09F5C23C;
         break;
     }
+#else
+    work->tiles = LoadObjTiles(gUnk_08B1EB1C, 0x240);
+    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    p = gUnk_09EE11A4;
+#endif
     work->gfx = p[0];
     work->gfx2 = p[2];
     work->gfx3 = p[1];
-#else
-    work->unk_18 = 0x5A00;
-    work->tiles = LoadObjTiles(gUnk_08B1EB1C, 0x240);
-    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->gfx = gUnk_09EE11A4[0];
-    work->gfx2 = gUnk_09EE11A4[2];
-    work->gfx3 = gUnk_09EE11A4[1];
-#endif
     work->unk_14 = 0;
     work->unk_1C = 0;
     work->unk_22 = 0;

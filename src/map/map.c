@@ -73,7 +73,7 @@ UnkStruct_02034F80 gUnk_02034F80;
 UnkStruct_02034F84* gUnk_02034F84;
 ModeFunc gUnk_02034F88;
 u32 gUnk_02034F8C;
-u8 gUnk_02034F90[0x14];
+TaskPool gUnk_02034F90;
 u8 gUnk_02034FA4;
 void* gUnk_02034FA8;
 u32 gUnk_02034FAC;
@@ -2544,15 +2544,15 @@ void Mode_MapDbg_0(void) {
     func_0801CB00();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
-    TaskPoolInit(gUnk_02034F90, 1);
-    TaskCreate(gUnk_02034F90, &gTaskDescMapDbg, &gUnk_02034FA4);
+    TaskPoolInit(&gUnk_02034F90, 1);
+    TaskCreate(&gUnk_02034F90, &gTaskDescMapDbg, &gUnk_02034FA4);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapDmg, 0);
     FadeStartIn(0, 16);
 }
 
 void Mode_MapDbg_1(void) {
-    TaskPoolUpdate(gUnk_02034F90);
-    TaskPoolDraw(gUnk_02034F90);
+    TaskPoolUpdate(&gUnk_02034F90);
+    TaskPoolDraw(&gUnk_02034F90);
     gUnk_02034F88();
     UpdatePlayTime();
 }
@@ -2562,7 +2562,7 @@ void Mode_MapDbg_2(void) {
     func_080E8624();
     EwramFree(gFieldState);
     EwramFree(gUnk_0203C7AC);
-    TaskPoolDestroy(gUnk_02034F90);
+    TaskPoolDestroy(&gUnk_02034F90);
 }
 
 void func_080E988C(ModeFunc a) {

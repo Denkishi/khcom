@@ -392,7 +392,7 @@ TaskDesc gTaskDescBosGa = {
     (TaskUpdateFunc)task_bos_ga_1,
     (TaskFunc)task_bos_ga_2,
     (TaskFunc)task_bos_ga_3,
-    0xA54,
+    sizeof(GaWork),
 };
 
 TaskDesc gTaskDescBosMd = {

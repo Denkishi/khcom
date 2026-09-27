@@ -71,18 +71,18 @@ u16 gUnk_02034F7A;
 UnkStruct_02034F7C* gUnk_02034F7C;
 UnkStruct_02034F80 gUnk_02034F80;
 UnkStruct_02034F84* gUnk_02034F84;
-s32 gUnk_02034F88;
+ModeFunc gUnk_02034F88;
 u32 gUnk_02034F8C;
 u8 gUnk_02034F90[0x14];
 u8 gUnk_02034FA4;
 void* gUnk_02034FA8;
 u32 gUnk_02034FAC;
-s32 gUnk_02034FB0;
+ModeFunc gUnk_02034FB0;
 Task* gUnk_02034FB4;
 void* gUnk_02034FB8;
 u8 gUnk_02034FBC;
 u8 gUnk_02034FBD[0x17];
-s32 gUnk_02034FD4;
+ModeFunc gUnk_02034FD4;
 u8 gUnk_02034FD8;
 NewGameSlotMenuWork* gNewGameSlotMenuWork;
 LoadGameMenuWork* gLoadGameMenuWork;
@@ -2359,13 +2359,13 @@ void func_080E92F8(UnkStruct_080E92B8* p) {
     }
 }
 
-void func_080E9338(s32 a) {
+void func_080E9338(ModeFunc a) {
     gUnk_02034F88 = a;
 }
 
-void func_080E9344(s32 a) {
+void func_080E9344(ModeFunc a) {
     func_080E9338(a);
-    ((void (*)(void))gUnk_02034F88)();
+    gUnk_02034F88();
 }
 
 void func_080E935C(void) {
@@ -2403,23 +2403,23 @@ void func_080E93FC(void) {
     }
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080E9344((s32)func_080E9508);
+        func_080E9344(func_080E9508);
         return;
     }
     if (gUnk_0203C7AC->flags & 0x2000) {
         func_08000DE8(&gFieldState->tasks, gUnk_02034FA8);
         gUnk_02034FA8 = 0;
-        func_080E9344((s32)func_080E95E8);
+        func_080E9344(func_080E95E8);
         return;
     }
     if (gFieldState->flags & 0x40000) {
         func_08000DE8(&gFieldState->tasks, gUnk_02034FA8);
         gUnk_02034FA8 = 0;
-        func_080E9344((s32)func_080E963C);
+        func_080E9344(func_080E963C);
         return;
     }
     if (gUnk_02034FA4 != 0) {
-        func_080E9344((s32)func_080E95C4);
+        func_080E9344(func_080E95C4);
         return;
     }
     func_080E0780();
@@ -2430,7 +2430,7 @@ void func_080E93FC(void) {
         return;
     }
     if (GetKeysPressed() & START_BUTTON) {
-        func_080E9338((s32)func_080E9550);
+        func_080E9338(func_080E9550);
     }
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
@@ -2451,7 +2451,7 @@ void func_080E9508(void) {
 
 void func_080E9550(void) {
     if (gUnk_02034FA4 != 0) {
-        func_080E9344((s32)func_080E95C4);
+        func_080E9344(func_080E95C4);
         return;
     }
     func_080E935C();
@@ -2461,7 +2461,7 @@ void func_080E9550(void) {
         return;
     }
     if (GetKeysPressed() & START_BUTTON) {
-        func_080E9338((s32)func_080E93FC);
+        func_080E9338(func_080E93FC);
     }
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
@@ -2479,7 +2479,7 @@ void func_080E95E8(void) {
     if ((gFieldState->flags & 0x2000) == 0 && (gUnk_0203C7AC->flags & 0x2000) == 0) {
         gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
         func_080E8594();
-        func_080E9344((s32)func_080E93FC);
+        func_080E9344(func_080E93FC);
     } else {
         func_080E0780();
         func_080E0820();
@@ -2489,14 +2489,14 @@ void func_080E95E8(void) {
 void func_080E963C(void) {
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080E9344((s32)func_080E9508);
+        func_080E9344(func_080E9508);
     } else if ((gFieldState->flags & 0x40000) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
         gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
         func_080E8594();
         func_080E607C();
-        func_080E9344((s32)func_080E93FC);
+        func_080E9344(func_080E93FC);
     } else {
         func_080E0780();
         func_080E0820();
@@ -2532,7 +2532,7 @@ void Mode_MapDbg_0(void) {
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, 0);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->unk_2C);
     gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
-    func_080E9338((s32)func_080E93FC);
+    func_080E9338(func_080E93FC);
 
     if (gGameState.unk_000 != 0) {
         func_080E0298(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
@@ -2553,7 +2553,7 @@ void Mode_MapDbg_0(void) {
 void Mode_MapDbg_1(void) {
     TaskPoolUpdate(gUnk_02034F90);
     TaskPoolDraw(gUnk_02034F90);
-    ((void (*)(void))gUnk_02034F88)();
+    gUnk_02034F88();
     UpdatePlayTime();
 }
 
@@ -2565,13 +2565,13 @@ void Mode_MapDbg_2(void) {
     TaskPoolDestroy(gUnk_02034F90);
 }
 
-void func_080E988C(s32 a) {
+void func_080E988C(ModeFunc a) {
     gUnk_02034FB0 = a;
 }
 
-void func_080E9898(s32 a) {
+void func_080E9898(ModeFunc a) {
     func_080E988C(a);
-    ((void (*)(void))gUnk_02034FB0)();
+    gUnk_02034FB0();
 }
 
 void func_080E98B0(void) {
@@ -2666,7 +2666,7 @@ void func_080E9AF0(void) {
         gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
         gFieldState->flags &= ~0x200;
         gFieldState->flags &= ~1;
-        func_080E9898((s32)func_080E9B7C);
+        func_080E9898(func_080E9B7C);
     }
 }
 
@@ -2674,13 +2674,13 @@ void func_080E9B7C(void) {
     if (gUnk_0203C7AC->flags & 2) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898((s32)func_080E9D94);
+        func_080E9898(func_080E9D94);
         return;
     }
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898((s32)func_080E9CBC);
+        func_080E9898(func_080E9CBC);
         return;
     }
     if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
@@ -2689,24 +2689,24 @@ void func_080E9B7C(void) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             FadeStartOut(0, 16);
             FadeLock();
-            func_080E9898((s32)func_080E9E04);
+            func_080E9898(func_080E9E04);
             return;
         }
         if (GetKeysPressed() & START_BUTTON) {
             func_080E9A00();
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080E9898((s32)func_080E9E28);
+            func_080E9898(func_080E9E28);
             return;
         }
     }
     if (gUnk_0203C7AC->flags & 0x2000) {
         func_080E9A00();
-        func_080E9898((s32)func_080E9E28);
+        func_080E9898(func_080E9E28);
         return;
     }
     if (gFieldState->flags & 0x40000) {
         func_080E9A00();
-        func_080E9898((s32)func_080E9E94);
+        func_080E9898(func_080E9E94);
         return;
     }
     func_080E0780();
@@ -2799,7 +2799,7 @@ void func_080E9E28(void) {
         SetBgPriority(0, 0);
         func_080E8594();
         gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E9898((s32)func_080E9B7C);
+        func_080E9898(func_080E9B7C);
     } else {
         func_080E0780();
         func_080E0820();
@@ -2812,7 +2812,7 @@ void func_080E9E94(void) {
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898((s32)func_080E9CBC);
+        func_080E9898(func_080E9CBC);
         if ((gGameState.progression.unk_82 & 0x200) == 0) {
             t = gGameState.progression.unk_82 | 0x200;
             gGameState.progression.unk_82 = t;
@@ -2823,7 +2823,7 @@ void func_080E9E94(void) {
         func_080E8594();
         func_080E607C();
         gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E9898((s32)func_080E9B7C);
+        func_080E9898(func_080E9B7C);
     } else {
         func_080E0780();
         func_080E0820();
@@ -2891,7 +2891,7 @@ void Mode_MapFld_0(void) {
     }
 
     if ((gUnk_0203C590.unk_02 & 0x10) == 0) {
-        func_080E988C((s32)func_080E9AF0);
+        func_080E988C(func_080E9AF0);
         gFieldState->flags |= 0x200;
         gFieldState->flags |= 1;
         func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
@@ -2902,15 +2902,15 @@ void Mode_MapFld_0(void) {
             t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
             (*(volatile u16*)&gDispCnt) = t;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080E988C((s32)func_080E9E28);
+            func_080E988C(func_080E9E28);
         } else {
             gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-            func_080E988C((s32)func_080E9B7C);
+            func_080E988C(func_080E9B7C);
         }
     } else {
         gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
         func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
-        func_080E988C((s32)func_080E9B7C);
+        func_080E988C(func_080E9B7C);
     }
 
     func_080E0078();
@@ -2921,7 +2921,7 @@ void Mode_MapFld_0(void) {
 }
 
 void Mode_MapFld_1(void) {
-    ((void (*)(void))gUnk_02034FB0)();
+    gUnk_02034FB0();
     UpdatePlayTime();
 }
 
@@ -2932,13 +2932,13 @@ void Mode_MapFld_2(void) {
     EwramFree(gUnk_0203C7AC);
 }
 
-void func_080EA1E8(s32 a) {
+void func_080EA1E8(ModeFunc a) {
     gUnk_02034FD4 = a;
 }
 
-void func_080EA1F4(s32 a) {
+void func_080EA1F4(ModeFunc a) {
     func_080EA1E8(a);
-    ((void (*)(void))gUnk_02034FD4)();
+    gUnk_02034FD4();
 }
 
 UnkStruct_09EF8370* func_080EA20C(void) {
@@ -3064,33 +3064,33 @@ u8 func_080EA45C(void) {
 
 void func_080EA498(void) {
     if (gUnk_0203C7AC->flags & 0x100) {
-        func_080EA1F4((s32)func_080EA78C);
+        func_080EA1F4(func_080EA78C);
         return;
     }
     if (gUnk_0203C7AC->flags & 0xE00) {
         FadeStartOut(0, 16);
         if (gUnk_0203C590.unk_06 == 0xFE) {
-            func_080EA1F4((s32)func_080EA5CC);
+            func_080EA1F4(func_080EA5CC);
             return;
         }
         if (gUnk_0203C590.unk_06 == 0xFD) {
-            func_080EA1F4((s32)func_080EA694);
+            func_080EA1F4(func_080EA694);
             return;
         }
-        func_080EA1F4((s32)func_080EA5A8);
+        func_080EA1F4(func_080EA5A8);
         return;
     }
     if (gFieldState->flags & 0x40000) {
-        func_080EA1F4((s32)func_080EA7FC);
+        func_080EA1F4(func_080EA7FC);
         return;
     }
     if (gUnk_0203C7AC->flags & 0x2000) {
-        func_080EA1F4((s32)func_080EA730);
+        func_080EA1F4(func_080EA730);
     } else if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
                (gFieldState->flags & 0x41000) == 0 && (gUnk_0203C7AC->flags & 4) == 0 &&
                (GetKeysPressed() & START_BUTTON) != 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-        func_080EA1F4((s32)func_080EA730);
+        func_080EA1F4(func_080EA730);
     } else {
         func_080E0780();
         func_080E0820();
@@ -3127,7 +3127,7 @@ void func_080EA5CC(void) {
 #endif
         } else if (func_080EA400() != 0xFF) {
             gUnk_02034FD8 = 60;
-            func_080EA1F4((s32)func_080EA7D8);
+            func_080EA1F4(func_080EA7D8);
         } else {
             func_080DFA3C();
             func_080E04EC();
@@ -3178,7 +3178,7 @@ void func_080EA730(void) {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
         func_080E56B4(func_080EA20C()->unk_2C);
-        func_080EA1F4((s32)func_080EA498);
+        func_080EA1F4(func_080EA498);
     } else {
         func_080E0780();
         func_080E0820();
@@ -3190,7 +3190,7 @@ void func_080EA78C(void) {
         FadeStartOut(2, 60);
         FadeLock();
         gUnk_0203C7AC->flags |= 0x200;
-        func_080EA1F4((s32)func_080EA5CC);
+        func_080EA1F4(func_080EA5CC);
     } else {
         func_080E0780();
         func_080E0820();
@@ -3208,12 +3208,12 @@ void func_080EA7D8(void) {
 void func_080EA7FC(void) {
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080EA1F4((s32)func_080EA5A8);
+        func_080EA1F4(func_080EA5A8);
     } else if ((gFieldState->flags & 0x40000) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
         func_080E56B4(func_080EA20C()->unk_2C);
-        func_080EA1F4((s32)func_080EA498);
+        func_080EA1F4(func_080EA498);
     } else {
         func_080E0780();
         func_080E0820();
@@ -3284,13 +3284,13 @@ void Mode_MapFix_0(void) {
             t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
             (*(volatile u16*)&gDispCnt) = t;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080EA1E8((s32)func_080EA730);
+            func_080EA1E8(func_080EA730);
         } else {
-            func_080EA1E8((s32)func_080EA498);
+            func_080EA1E8(func_080EA498);
         }
     } else {
         func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
-        func_080EA1E8((s32)func_080EA498);
+        func_080EA1E8(func_080EA498);
     }
 
     func_080E5800();
@@ -3309,7 +3309,7 @@ void Mode_MapFix_0(void) {
 }
 
 void Mode_MapFix_1(void) {
-    ((void (*)(void))gUnk_02034FD4)();
+    gUnk_02034FD4();
     UpdatePlayTime();
 }
 

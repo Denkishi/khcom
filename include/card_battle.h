@@ -7,8 +7,7 @@
 
 struct CardDisplayWork;
 struct CardSlot;
-struct UnkStruct_08078754;
-struct UnkStruct_08080268;
+struct CardBattleWork;
 
 typedef struct UnkStruct_02039DD4 {
     struct CardDisplayWork* unk_000[6];
@@ -25,8 +24,8 @@ typedef struct UnkStruct_02039DD4 {
     void* unk_050;
     void* palette;
     void* palette2;
-    u32 unk_05C;
-    u32 unk_060;
+    struct CardBattleWork* unk_05C;
+    struct CardBattleWork* unk_060;
     AnimState anim;
     AnimState anim2;
     void* gfx;
@@ -113,26 +112,10 @@ void func_08076284(void);
 void func_08076290(void);
 void func_0807629C(void);
 void func_0807630C(void);
-s32 func_08076F80(struct UnkStruct_08080268* w, u8* task);
-struct CardSlot* func_08076674(struct UnkStruct_08078754* w, u8 slot, u16* n);
-struct CardSlot* func_08076750(struct UnkStruct_08078754* w, u8 slot, u16* n);
-void func_0807682C(struct UnkStruct_08080268* w, u8 slot);
-
-typedef struct CardBattleWork {
-    TaskPool tasks;
-    void* tiles;
-    void* palette;
-    u8 unk_1C[0x28];
-    void* unk_44[4];
-    u8 unk_54[0x50];
-    s16 x;
-    u8 unk_A6[0x0A];
-    s16 unk_B0;
-    u8 unk_B2[0x07];
-    u8 unk_B9;
-    u8 unk_BA;
-    u8 unk_BB[0x11];
-} CardBattleWork;
+s32 func_08076F80(struct CardBattleWork* w, Task* task);
+struct CardSlot* func_08076674(struct CardBattleWork* w, u8 slot, u16* n);
+struct CardSlot* func_08076750(struct CardBattleWork* w, u8 slot, u16* n);
+void func_0807682C(struct CardBattleWork* w, u8 slot);
 
 typedef struct {
     u32 slot : 8;

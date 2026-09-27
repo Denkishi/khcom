@@ -2707,10 +2707,10 @@ void func_08095C00(UnkStruct_08095A5C* p) {
 void func_08095C20(u8* p) {
     p[13] = 2;
 }
-void* func_08095C28(u8* w, u16 b, void* pool, u8 mode) {
+void* func_08095C28(CardBattleWork* w, u16 b, void* pool, u8 mode) {
     ReloadGageArgs args;
 
-    args.unk_00 = &w[(s8)w[0xB8] * 16 + 0x54];
+    args.unk_00 = &w->unk_54[w->unk_B8];
     args.unk_04 = 0;
 
     switch (mode) {
@@ -2731,7 +2731,7 @@ void* func_08095C28(u8* w, u16 b, void* pool, u8 mode) {
     }
 
     args.unk_08 = mode;
-    args.unk_0E = w[0xB8];
+    args.unk_0E = w->unk_B8;
     return ((void**)TaskCreate(pool, &gTaskDescReloadGage, &args))[1];
 }
 

@@ -822,12 +822,20 @@ typedef struct MapSparkWork {
 } MapSparkWork;
 
 typedef struct MapFaintWork {
-    void* unk_00;
+    FldObj* obj;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8 unk_24[0x04];
 } MapFaintWork;
+
+typedef struct MapDmgWork {
+    ObjPalette* palette;
+    void* tiles;
+    u8 unk_08;
+    u8 unk_09;
+    u16 unk_0A;
+} MapDmgWork;
 
 typedef struct MapTalkWork {
     s32* unk_00;
@@ -899,22 +907,11 @@ typedef struct MapMickeyWork {
 } MapMickeyWork;
 
 typedef struct MapTutorialWork {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_00C;
-    s32 vz;
-    u8 unk_014[0x2C];
-    u8 unk_040[0x2C];
-    u8 unk_06C;
-    u8 unk_06D[0x07];
-    s32 unk_074;
-    s32 unk_078;
-    s32 unk_07C;
-    u8 unk_080[0x1C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u8 unk_0C0;
     u8 unk_0C1;
@@ -963,20 +960,13 @@ typedef struct MapMsgWork {
 } MapMsgWork;
 
 typedef struct MapStairWork {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10[0x04];
-    u8 unk_14;
-    u8 unk_15[0x2B];
-    u8* palette;
+    FldObj obj;
+    ObjPalette* palette;
     void* tiles;
     u8 unk_48;
     u8 unk_49[0x03];
     void (*update)(struct MapStairWork*);
     TaskPool tasks;
-    u8 unk_60[0x04];
 } MapStairWork;
 
 typedef struct UnkStruct_080F023C {

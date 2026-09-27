@@ -611,7 +611,7 @@ void func_080F6EBC(MapTutorialWork* w) {
 void func_080F6F1C(MapTutorialWork* w) {
     if (func_080E02E0((FldPos*)w, 8, 8)) {
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, w);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, w);
         gUnk_0203C7AC->flags &= ~0x20;
         func_080E8FB8(0, w->x, w->y, w->z);
         AnimStart(&w->anim, 1, 0);
@@ -698,7 +698,7 @@ void func_080F71AC(MapTutorialWork* w) {
     if (func_080E02E0((FldPos*)w, 8, 16)) {
         gUnk_0203C7AC->flags |= 0x80;
         gUnk_0203C7AC->flags |= 4;
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, w);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, w);
         m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         AnimChangeWithTables(a, 0, 1, gEmy00L09Anims, gEmy00L09Frames);
         SetObjTileSource(w->tiles, gEmy00L09Tiles);

@@ -360,12 +360,12 @@ void func_080E0558(void) {
     gFieldState->unk_6C = 60;
     gFieldState->flags = 0;
     gFieldState->unk_74 = 0;
-    TaskPoolInit(gFieldState->tasks, 50);
-    TaskPoolInit(gFieldState->tasks2, 1);
+    TaskPoolInit(&gFieldState->tasks, 50);
+    TaskPoolInit(&gFieldState->tasks2, 1);
     ListPoolInit(&gFieldState->actor.pool);
-    TaskPoolInit(gFieldState->tasks3, 25);
-    TaskPoolInit(gFieldState->tasks5, 1);
-    TaskPoolInit(gFieldState->tasks4, 8);
+    TaskPoolInit(&gFieldState->tasks3, 25);
+    TaskPoolInit(&gFieldState->tasks5, 1);
+    TaskPoolInit(&gFieldState->tasks4, 8);
     gUnk_0203C7AC->flags = 0;
     gUnk_0203C7AC->unk_18 = 0;
     gUnk_0203C7AC->unk_1C = 0;
@@ -379,7 +379,7 @@ void func_080E05E4(void) {
     if (gUnk_0203C7AC->unk_0D == 5) {
         gFieldState->flags |= 0x200;
     }
-    TaskCreate(gFieldState->tasks, &gTaskDescMapRnd, 0);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapRnd, 0);
 }
 
 void func_080E062C(void) {
@@ -420,9 +420,9 @@ void func_080E062C(void) {
     }
 
     if (gGameState.flags & 8) {
-        TaskCreate(gFieldState->tasks2, &gTaskDescFldRiku, 0);
+        TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, 0);
     } else {
-        TaskCreate(gFieldState->tasks2, &gTaskDescFldSora, 0);
+        TaskCreate(&gFieldState->tasks2, &gTaskDescFldSora, 0);
     }
 }
 
@@ -434,39 +434,39 @@ void func_080E0780(void) {
         gFieldState->flags &= ~1;
     }
     gUnk_0203C7AC->unk_1C = 0;
-    TaskPoolUpdate(gFieldState->tasks);
+    TaskPoolUpdate(&gFieldState->tasks);
     gUnk_0203C7AC->unk_20 = 0;
 
     if ((gFieldState->flags & 0x1000) == 0 && (gUnk_0203C7AC->flags & 4) == 0) {
-        TaskPoolUpdate(gFieldState->tasks2);
+        TaskPoolUpdate(&gFieldState->tasks2);
     }
     if ((gFieldState->flags & 0x80) == 0) {
-        TaskPoolUpdate(gFieldState->tasks4);
+        TaskPoolUpdate(&gFieldState->tasks4);
     }
-    TaskPoolUpdate(gFieldState->tasks3);
-    TaskPoolUpdate(gFieldState->tasks5);
+    TaskPoolUpdate(&gFieldState->tasks3);
+    TaskPoolUpdate(&gFieldState->tasks5);
 }
 
 void func_080E0820(void) {
-    TaskPoolDraw(gFieldState->tasks);
+    TaskPoolDraw(&gFieldState->tasks);
 
     if ((gUnk_0203C7AC->flags & 0x1000) == 0) {
-        TaskPoolDraw(gFieldState->tasks2);
+        TaskPoolDraw(&gFieldState->tasks2);
     }
 
     if ((gFieldState->flags & 0x100) == 0) {
-        TaskPoolDraw(gFieldState->tasks4);
+        TaskPoolDraw(&gFieldState->tasks4);
     }
-    TaskPoolDraw(gFieldState->tasks3);
-    TaskPoolDraw(gFieldState->tasks5);
+    TaskPoolDraw(&gFieldState->tasks3);
+    TaskPoolDraw(&gFieldState->tasks5);
 }
 
 void func_080E0878(void) {
-    TaskPoolDestroy(gFieldState->tasks);
-    TaskPoolDestroy(gFieldState->tasks2);
-    TaskPoolDestroy(gFieldState->tasks3);
-    TaskPoolDestroy(gFieldState->tasks5);
-    TaskPoolDestroy(gFieldState->tasks4);
+    TaskPoolDestroy(&gFieldState->tasks);
+    TaskPoolDestroy(&gFieldState->tasks2);
+    TaskPoolDestroy(&gFieldState->tasks3);
+    TaskPoolDestroy(&gFieldState->tasks5);
+    TaskPoolDestroy(&gFieldState->tasks4);
     TaskPoolDestroy(gUnk_0203C7AC->tasks);
 }
 
@@ -3134,7 +3134,7 @@ void func_080E56B4(void* a) {
         n = q->unk_00;
         e->unk_14 = &gUnk_09856FB4[n];
         e->unk_04 = v;
-        TaskCreate(gFieldState->tasks, &gTaskDescMapGmk00, e);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapGmk00, e);
         q++;
         e++;
     }
@@ -3158,7 +3158,7 @@ void func_080E56B4(void* a) {
     e->unk_00 = n;
     e->unk_14 = &gUnk_0984C1CC;
     e->unk_04 = v;
-    TaskCreate(gFieldState->tasks, gUnk_0984C1CC.desc, e);
+    TaskCreate(&gFieldState->tasks, gUnk_0984C1CC.desc, e);
     e++;
 
     if (func_080DF750() != 0) {
@@ -3177,7 +3177,7 @@ void func_080E56B4(void* a) {
         e->unk_00 = n;
         e->unk_14 = &gUnk_0984C23C;
         e->unk_04 = v;
-        TaskCreate(gFieldState->tasks, gUnk_0984C23C.desc, e);
+        TaskCreate(&gFieldState->tasks, gUnk_0984C23C.desc, e);
     }
 }
 

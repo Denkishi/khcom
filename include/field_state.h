@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "fld_types.h"
+#include "taskpool.h"
 
 typedef struct FieldState {
     s32 x;
@@ -19,11 +20,11 @@ typedef struct FieldState {
     u32 flags;
     u16 unk_74;
     u16 unk_76;
-    u8 tasks[0x14];
-    u8 tasks2[0x14];
-    u8 tasks3[0x14];
-    u8 tasks4[0x14];
-    u8 tasks5[0x14];
+    TaskPool tasks;
+    TaskPool tasks2;
+    TaskPool tasks3;
+    TaskPool tasks4;
+    TaskPool tasks5;
     s32 unk_DC;
     s32 unk_E0;
     u8 unk_E4;

@@ -2101,7 +2101,7 @@ s32 func_080F1E28(MapGmkGpWork* w) {
 
     if (func_080E02E0(p, 8, 8)) {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, p);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, p);
 
         if (!(w->cell->unk_00 & 2)) {
             w->cell->unk_00 |= 2;
@@ -2196,7 +2196,7 @@ u8 func_080F207C(MapGmkGp1Work* w) {
         w->gfx = AnimUpdate(&w->anim);
     } else {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, p);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, p);
         func_080E84DC(&w->unk_004);
         gUnk_0203C7AC->flags |= 0x80;
         w->cell->unk_00 |= 1;
@@ -2284,7 +2284,7 @@ u8 func_080F230C(MapGmkGpWork* w) {
         MapCell* e;
 
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
         e = w->cell;
 
         if ((e->unk_00 & 2) == 0) {
@@ -2377,7 +2377,7 @@ u8 func_080F2594(MapGmkGpWork* w) {
 
     if (func_080E02E0(q, 8, 8)) {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
         gUnk_0203C7AC->flags |= 0x80;
         AnimStart(&w->anim, 1, 0);
         w->update = func_080F25FC;
@@ -2484,7 +2484,7 @@ u8 func_080F285C(MapGmkGpWork* w) {
 
     if ((w->cell->unk_00 & 2) == 0 && func_080E02E0(q, 8, 8)) {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
         func_080E84DC(q);
         w->cell->unk_00 |= 2;
         gUnk_0203C7AC->flags |= 0x80;
@@ -2576,7 +2576,7 @@ s32 func_080F2AF4(MapGmkGpWork* w) {
 
     if (!(w->cell->unk_00 & 2) && func_080E02E0(q, 8, 8)) {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
         func_080E84DC(q);
         w->cell->unk_00 |= 2;
         gUnk_0203C7AC->flags |= 0x80;
@@ -2672,7 +2672,7 @@ u8 func_080F2D90(MapGmkGpWork* w) {
 
     if (func_080E02E0(q, 8, 8)) {
         m4aSongNumStart(w->unk_0C4);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
 
         if ((w->cell->unk_00 & 2) == 0) {
             w->cell->unk_00 |= 2;
@@ -2876,7 +2876,7 @@ s32 func_080F32F4(MapGmkGp8Work* w) {
 
     if (func_080E02E0(q, 8, 8)) {
         m4aSongNumStart(*(u16*)&w->unk_0C8);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, q);
 
         if (!(w->cell->unk_00 & 2)) {
             w->cell->unk_00 |= 2;
@@ -3168,7 +3168,7 @@ u8 func_080F3ADC(MapGmk01Work* w) {
     if (w->unk_000->unk_00 & 8) {
         gUnk_0203C7AC->flags |= 4;
         w->unk_000->unk_00 |= 2;
-        TaskCreate(gFieldState->tasks, &gTaskDescMapGmkEnm, q);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkEnm, q);
         w->update = 0;
     } else {
         gUnk_0203C7AC->flags &= ~0x20;
@@ -3285,16 +3285,16 @@ u8 func_080F3E24(MapGmkBarrelWork* w) {
 
         if (r <= 1499) {
             m4aSongNumStart(SONG_SYS_OBJ_BREAK);
-            TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, p);
+            TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, p);
             gUnk_0203C7AC->flags |= 0x80;
             gUnk_0203C7AC->flags |= 4;
             w->unk_000->unk_00 |= 1;
-            TaskCreate(gFieldState->tasks, &gTaskDescMapGmkSpider, w->unk_000);
+            TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkSpider, w->unk_000);
             return 0;
         }
 
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSpark, p);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, p);
 
         if (r <= 5999) {
             if ((u8)func_080E8FB8(0, p->x, p->y, p->z) != 1) {
@@ -3393,7 +3393,7 @@ void func_080F4140(MapGmk04Work* w) {
     if ((gUnk_0203C7AC->flags & 0x4000) == 0 && (u8)func_080E03C0((s32)&w->unk_004) != 0 && (GetKeysPressed() & A_BUTTON)) {
         m4aSongNumStart(SONG_SYS_KETTEI);
         gFieldState->flags |= 0x1000;
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSave, 0);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSave, 0);
         w->update = 0;
     }
 }
@@ -3415,7 +3415,7 @@ void func_080F41A4(MapGmk04Work* w) {
 
 void func_080F4224(MapGmk04Work* w) {
     if (func_080A42C8() == 0) {
-        TaskCreate(gFieldState->tasks, &gTaskDescMapSave, 0);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSave, 0);
         w->update = 0;
     }
 }

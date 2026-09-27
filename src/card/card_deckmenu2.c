@@ -123,6 +123,25 @@ void InitCardCollection(void);
 s16 func_08084458(u16 cardId);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
+void func_08087B98(DeckMenuWork* w, u8 mode);
+s32 func_0808C60C(DeckMenuWork* w, u8 kind, u8 c);
+void func_0808C9CC(DeckMenuWork* w);
+DeckCard2Work* func_0808CB60(DeckMenuWork* w);
+void func_0808D16C(u8 mode);
+void func_0808D258(u8 mode);
+void func_0808D594(void);
+void func_0808DDD0(DeckMenuWork* w);
+s32 func_0808DED0(DeckMenuWork* w, u16 keys);
+s32 func_0808E19C(DeckMenuWork* w);
+u8 func_0808E58C(DeckMenuWork* w);
+s32 func_0808E750(DeckMenuWork* w);
+s32 func_0808E79C(DeckMenuWork* w);
+s32 func_0808E890(DeckMenuWork* w);
+u8 func_0808E8E8(DeckMenuWork* w, s16 a, s16 b);
+u8 func_0808EDA4(DeckMenuWork* w);
+void func_0808FA8C(DeckMenuWork* w);
+void func_080AB880(void);
+void func_080AB8E4(void);
 
 void func_08084D78(UnkStruct_08084D78* out, u8 deck, u8 mode, u16 n, void* p) {
     u16 mask;
@@ -2998,7 +3017,7 @@ u8 func_080897CC(DeckMenuWork* w, void* a) {
                 w->unk_8B6 = w->unk_886;
                 w->unk_884 = 0;
                 w->unk_886 = 0;
-                if ((u8)func_0808DED0(w) != 0) {
+                if ((u8)func_0808DED0(w, 0) != 0) {
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     func_0808DDD0(w);
                     func_0808E364(w, 1);
@@ -5561,13 +5580,13 @@ s32 func_0808E890(DeckMenuWork* w) {
     return 0;
 }
 
-u8 func_0808E8E8(DeckMenuWork* w, u16 a, u16 b) {
+u8 func_0808E8E8(DeckMenuWork* w, s16 a, s16 b) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        if (node->args.col == (s16)a && node->args.row == (s16)b) {
+        if (node->args.col == a && node->args.row == b) {
             return 1;
         }
 

@@ -65,6 +65,8 @@ u8 func_080A5D3C(RikuDeckMenuWork* w, void* a);
 void func_080A6968(RikuDeckMenuWork* w);
 void func_080A7264(RikuDeckMenuWork* w);
 void func_080A7210(RikuDeckMenuWork* w);
+void func_080A6838(RikuDeckMenuWork* w, u8 kind);
+void func_080A7284(RikuDeckMenuWork* w, u8 mode);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
 Deck* GetDeck(u8 index);

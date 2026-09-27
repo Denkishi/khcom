@@ -1526,7 +1526,7 @@ s32 func_08093E34(u16 a, MapSelectWork* w) {
     u16 j;
     u8 count;
     u8* src;
-    u32 base;
+    u8* base;
 
     for (i = a, j = 0; i < a + 10; i++, j++) {
         if (gUnk_0203A8C0[i] != 0) {
@@ -1540,12 +1540,12 @@ s32 func_08093E34(u16 a, MapSelectWork* w) {
             src = &gUnk_09507F38[(count + 1) * 32];
             base = GetBgCharBase(1);
             base += gUnk_09EE4BE0[i - a] * 32;
-            RequestDma3Copy(src, (void*)base, 32);
+            RequestDma3Copy(src, base, 32);
             w->unk_2D0[j] = count;
         } else {
             base = GetBgCharBase(1);
             base += gUnk_09EE4BE0[i - a] * 32;
-            RequestDma3Copy(gUnk_09507F58, (void*)base, 32);
+            RequestDma3Copy(gUnk_09507F58, base, 32);
             w->unk_2D0[j] = 0;
         }
     }

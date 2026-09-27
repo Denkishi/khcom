@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_worldselect.c
-    start: 0x09EF1060
-    end: 0x09EF1138
   - name: sprites_worldselect_frames.s
     start: 0x093F2020
     end: 0x093F3E3C
+    data_start: 0x09EF1060
+    data_end: 0x09EF1138
   - name: sprites_worldselect_tiles.s
     start: 0x09507F38
     end: 0x0950E2F8
@@ -27,12 +26,11 @@ objects:
     start: 0x096102B8
     end: 0x096112B8
   jp:
-  - name: sprites_worldselect.c
-    start: 0x09EC844C
-    end: 0x09EC8524
   - name: sprites_worldselect_frames.s
     start: 0x093AD548
     end: 0x093AF364
+    data_start: 0x09EC844C
+    data_end: 0x09EC8524
   - name: sprites_worldselect_tiles.s
     start: 0x094C0214
     end: 0x094C65D4
@@ -40,12 +38,11 @@ objects:
     start: 0x095C8D94
     end: 0x095C9D94
   eu:
-  - name: sprites_worldselect.c
-    start: 0x09F7C244
-    end: 0x09F7C31C
   - name: sprites_worldselect_frames.s
     start: 0x094C16A8
     end: 0x094C34C4
+    data_start: 0x09F7C244
+    data_end: 0x09F7C31C
   - name: sprites_worldselect_tiles.s
     start: 0x095298A4
     end: 0x09530064

@@ -87,7 +87,7 @@ typedef struct CardDisplayWork {
     void* palette;
     void* unk_18;
     u8 unk_1C[0x04];
-    void* unk_20;
+    struct UnkStruct_08095A5C* unk_20;
     u8 unk_24[0x14];
     ListPool* pool;
     CardSlot* slot;
@@ -939,12 +939,13 @@ typedef struct MapcardWork {
 typedef struct UnkStruct_08095A5C {
     s16 unk_00;
     u16 angle;
-    u8 unk_04[0x09];
+    s32 unk_04;
+    u8 unk_08[0x05];
     u8 unk_0D;
     u8 unk_0E[0x02];
-    u8 anim[0x18];
-    u8 anim2[0x18];
-    u8 anim3[0x18];
+    AnimState anim;
+    AnimState anim2;
+    AnimState anim3;
     void* gfx;
     void* gfx2;
     void* gfx3;
@@ -952,6 +953,8 @@ typedef struct UnkStruct_08095A5C {
     u8 unk_65;
     u8 unk_66[0x02];
 } UnkStruct_08095A5C;
+
+typedef char UnkStruct_08095A5C_size[(sizeof(UnkStruct_08095A5C) == 0x68) ? 1 : -1];
 
 typedef struct MapcardArgs {
     u8 unk_00;
@@ -1259,24 +1262,6 @@ typedef struct CardEffectWork {
     u8 unk_45[0x03];
     u8* unk_48;
 } CardEffectWork;
-
-typedef struct UnkStruct_08083B20 {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* tiles4;
-    u8 unk_10[0x04];
-    s32 unk_14;
-    s32 unk_18;
-    u8 unk_1C[0x04];
-    UnkStruct_08095A5C* unk_20;
-    u8 unk_24[0x08];
-    s16 unk_2C;
-    u8 unk_2E[0x04];
-    u8 unk_32;
-    u8 unk_33[0x13];
-    u8 unk_46;
-} UnkStruct_08083B20;
 
 typedef struct BossPrizeWork {
     UnkStruct_080038C8* tiles;
@@ -2039,7 +2024,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a);
 u8 Bosscard_1(BossCardWork* w, void* a);
 void func_08094548(MapSelectWork* w);
 u8 func_08099B60(BossPrizeWork* w, void* a);
-void func_08083714(UnkStruct_08083B20* w);
+void func_08083714(CardDisplayWork* w);
 void func_080836C4(UnkStruct_08095A5C* p, void* a, u8 b, s8 c);
 u8 func_08082A64(CardDisplayWork* p, void* a);
 void func_0808E3E0(u8* work);

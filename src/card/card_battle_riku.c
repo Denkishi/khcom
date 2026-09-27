@@ -3501,11 +3501,11 @@ void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->unk_18 = 0;
     p->palette = 0;
     *(void**)p->unk_1C = 0;
-    p->unk_20 = EwramAlloc(0x68);
+    p->unk_20 = EwramAlloc(sizeof(UnkStruct_08095A5C));
     zero2 = 0;
-    CpuSet((void*)&zero2, p->unk_20, 0x0500001A);
+    CpuSet((void*)&zero2, p->unk_20, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_08095A5C) / 4);
     *(CardDisplayArgs*)&p->pool = *a;
-    ((u8*)p->unk_20)[0x65] = 0;
+    p->unk_20->unk_65 = 0;
     p->unk_78 = 0x01100024;
     p->cardDef = 0;
     p->unk_54 = 0;
@@ -3530,7 +3530,7 @@ void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->y = gUnk_0903401C[4][1];
     p->unk_78 &= ~0x40;
     gUnk_02039DD4->unk_0E8 = 0;
-    func_08083714((UnkStruct_08083B20*)p);
+    func_08083714(p);
     p->unk_78 |= 0x80;
 }
 u8 Reload_Card_1(CardDisplayWork* p, void* a) {
@@ -3588,36 +3588,36 @@ void Reload_Card_3(CardDisplayWork* p) {
         gUnk_02039B9C->flags &= ~0x1000000;
     }
 }
-void func_08083278(u8* p, void* a) {
+void func_08083278(UnkStruct_08095A5C* p, CardDisplayWork* w) {
     if (gUnk_02039DD4->unk_106 <= 7) {
         gUnk_02039DD4->unk_106++;
     }
 
-    AnimStart(&p[0x40], (u16)gUnk_02039DD4->unk_106, 5);
+    AnimStart(&p->anim3, (u16)gUnk_02039DD4->unk_106, 5);
 }
-void func_080832B0(u8* p) {
+void func_080832B0(UnkStruct_08095A5C* p) {
     gUnk_02039DD4->unk_106 = 2;
-    AnimStart(&p[0x40], 2, 5);
+    AnimStart(&p->anim3, 2, 5);
 }
-void func_080832D0(u8* p, void* a) {
-    *(void**)&p[0x58] = gRiCardF0RedFrames[3];
-    *(void**)&p[0x5C] = gRiCardF0RedFrames[gUnk_02039DD4->unk_102 + 2];
+void func_080832D0(UnkStruct_08095A5C* p, CardDisplayWork* w) {
+    p->gfx = gRiCardF0RedFrames[3];
+    p->gfx2 = gRiCardF0RedFrames[gUnk_02039DD4->unk_102 + 2];
 }
-void func_080832F8(u8* p, void* a) {
-    *(void**)&p[0x58] = AnimUpdate(&p[0x28]);
-    *(void**)&p[0x5C] = AnimUpdate(&p[0x40]);
+void func_080832F8(UnkStruct_08095A5C* p, CardDisplayWork* w) {
+    p->gfx = AnimUpdate(&p->anim2);
+    p->gfx2 = AnimUpdate(&p->anim3);
 }
-void func_08083314(u8* p, s16 a) {
+void func_08083314(UnkStruct_08095A5C* p, s16 a) {
     void* gfx;
 
     if ((u16)a <= 18) {
-        AnimStart(&p[0x10], a, 0);
-        gfx = AnimGetGfx(&p[0x10]);
+        AnimStart(&p->anim, a, 0);
+        gfx = AnimGetGfx(&p->anim);
     } else {
         gfx = 0;
     }
 
-    *(void**)&p[0x60] = gfx;
+    p->gfx3 = gfx;
 }
 void func_08083340(CardDisplayWork* p) {
     UnkStruct_08095A5C* w = p->unk_20;
@@ -3707,7 +3707,7 @@ void func_08083340(CardDisplayWork* p) {
 void Reload_Card_2(CardDisplayWork* p) {
     s32 affine;
     s32 affine2;
-    u8* w;
+    UnkStruct_08095A5C* w;
     s16 y;
     u16 attr;
 
@@ -3727,8 +3727,8 @@ void Reload_Card_2(CardDisplayWork* p) {
             DrawSprite(p->x >> 8, y, gUnk_08F709B0[3].gfx2, p->tiles2,
                        gUnk_02039DD4->palette, affine, attr, p->unk_A0);
 
-            if (*(void**)&w[0x60] != 0) {
-                DrawSprite(p->x >> 8, y, *(void**)&w[0x60], p->tiles,
+            if (w->gfx3 != 0) {
+                DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
                            gUnk_02039DD4->palette, affine, attr,
                            (u16)(p->unk_A0 - 2));
             }
@@ -3736,14 +3736,14 @@ void Reload_Card_2(CardDisplayWork* p) {
             if ((s32)gUnk_02039DD4->unk_0F8 > 0) {
                 affine2 = AllocObjAffine(0, p->unk_54, gUnk_02039DD4->unk_0F8, 0);
 
-                if (*(void**)&w[0x58] != 0) {
-                    DrawSprite(p->x >> 8, y + 17, *(void**)&w[0x58],
+                if (w->gfx != 0) {
+                    DrawSprite(p->x >> 8, y + 17, w->gfx,
                                p->tiles3, gUnk_02039DD4->palette, affine2, 0x400,
                                (u16)(p->unk_A0 - 1));
                 }
 
-                if (gUnk_02039DD4->unk_108[1] == 1 && *(void**)&w[0x5C] != 0) {
-                    DrawSprite(p->x >> 8, y, *(void**)&w[0x5C], p->tiles4,
+                if (gUnk_02039DD4->unk_108[1] == 1 && w->gfx2 != 0) {
+                    DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
                                gUnk_02039DD4->palette, affine, 0x400,
                                (u16)(p->unk_A0 - 1));
                 }
@@ -3764,25 +3764,25 @@ void func_080836C4(UnkStruct_08095A5C* p, void* a, u8 b, s8 c) {
     p->gfx3 = AnimGetGfx(&p->anim);
 }
 
-void func_08083714(UnkStruct_08083B20* w) {
+void func_08083714(CardDisplayWork* w) {
     UnkStruct_08095A5C* q;
 
     q = w->unk_20;
     w->tiles = AllocObjTiles(128, 0);
     SetObjTileSource(w->tiles, gUnk_0909A4E0);
     func_080836C4(w->unk_20, w->tiles, w->unk_46, gUnk_02039DD4->unk_0FE);
-    w->unk_14 = 0;
+    w->palette = 0;
     w->tiles2 = LoadObjTiles(gUnk_0909FDCA, 0x280);
     w->unk_18 = 0;
     w->tiles3 = AllocObjTiles(0x200, 0);
     SetObjTileSource(w->tiles3, gRiCardF0RedTiles);
     w->tiles4 = AllocObjTiles(128, 0);
     SetObjTileSource(w->tiles4, gRiCardF0RedTiles);
-    AnimInit(q->anim2, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(q->anim2, 1, 1);
+    AnimInit(&q->anim2, gRiCardF0RedAnims, gRiCardF0RedFrames);
+    AnimStart(&q->anim2, 1, 1);
     q->gfx = gRiCardF0RedFrames[3];
-    AnimInit(q->anim3, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(q->anim3, gUnk_02039DD4->unk_106, 1);
+    AnimInit(&q->anim3, gRiCardF0RedAnims, gRiCardF0RedFrames);
+    AnimStart(&q->anim3, gUnk_02039DD4->unk_106, 1);
     q->gfx2 = gRiCardF0RedFrames[gUnk_02039DD4->unk_102 + 2];
 }
 

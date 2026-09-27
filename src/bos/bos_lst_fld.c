@@ -377,7 +377,7 @@ TaskDesc gTaskDescBosLstFld = {
     (TaskUpdateFunc)task_bos_lst_fld_1,
     (TaskFunc)task_bos_lst_fld_2,
     (TaskFunc)task_bos_lst_fld_3,
-    0x1304,
+    sizeof(LstFldWork),
 };
 
 u8 gUnk_02036014;

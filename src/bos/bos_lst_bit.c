@@ -26,7 +26,7 @@ TaskDesc gTaskDescBosLstBit = {
     (TaskUpdateFunc)task_bos_lst_bit_1,
     (TaskFunc)task_bos_lst_bit_2,
     (TaskFunc)task_bos_lst_bit_3,
-    0x1D0,
+    sizeof(LstState),
 };
 
 s32 func_0811089C(s32 x) {
@@ -67,26 +67,26 @@ u8 func_081108AC(LstState* work, s32 kind) {
     return result;
 }
 
-u8 func_08110918(LstWork* work) {
+u8 func_08110918(Task* task) {
     LstState* s;
     u8 result;
 
-    s = work->state;
+    s = task->work;
     result = 1;
 
-    if (s->unk_0A0.unk_2C <= 0 || s->unk_002 == 6) {
+    if (s->obj.unk_02C <= 0 || s->unk_002 == 6) {
         result = 0;
     }
 
     return result;
 }
 
-u8 func_08110938(LstWork* work) {
+u8 func_08110938(Task* task) {
     LstState* s;
     u8 result;
 
-    s = work->state;
-    result = func_08110918(work);
+    s = task->work;
+    result = func_08110918(task);
 
     if (result == 1 && s->unk_012 <= 0) {
         result = 0;
@@ -96,12 +96,12 @@ u8 func_08110938(LstWork* work) {
 }
 
 #ifdef VERSION_EU
-u8 eu_0810F08C(LstWork* work) {
+u8 eu_0810F08C(Task* task) {
     LstState* s;
     u8 result;
 
-    s = work->state;
-    result = func_08110918(work);
+    s = task->work;
+    result = func_08110918(task);
 
     if (result == 1 && (s->scaleX == 0x100 || s->scaleY == 0x100)) {
         result = 0;
@@ -111,12 +111,12 @@ u8 eu_0810F08C(LstWork* work) {
 }
 #endif
 
-s16 func_0811095C(LstWork* work, s16 a) {
+s16 func_0811095C(Task* task, s16 a) {
     LstState* s;
 
-    s = work->state;
+    s = task->work;
 
-    if (func_08110918(work) == 1 && a == 0) {
+    if (func_08110918(task) == 1 && a == 0) {
         s->unk_010 = a;
         a = 1;
     }
@@ -124,11 +124,11 @@ s16 func_0811095C(LstWork* work, s16 a) {
     return a;
 }
 
-void func_08110984(LstWork* work) {
+void func_08110984(Task* task) {
     LstState* s;
     u16 zero;
 
-    s = work->state;
+    s = task->work;
     zero = 0;
     s->unk_002 = 1;
     s->unk_004 = zero;
@@ -136,11 +136,11 @@ void func_08110984(LstWork* work) {
     s->unk_008 = zero;
 }
 
-void func_08110994(LstWork* work, s16 a) {
+void func_08110994(Task* task, s16 a) {
     LstState* s;
     u16 zero;
 
-    s = work->state;
+    s = task->work;
     zero = 0;
     s->unk_002 = 2;
     s->unk_004 = zero;
@@ -149,11 +149,11 @@ void func_08110994(LstWork* work, s16 a) {
     s->unk_012 = a;
 }
 
-void func_081109A8(LstWork* work) {
+void func_081109A8(Task* task) {
     LstState* s;
     u16 zero;
 
-    s = work->state;
+    s = task->work;
 #ifdef VERSION_EU
     if ((u16)(s->unk_002 - 5) > 1) {
 #endif
@@ -167,11 +167,11 @@ void func_081109A8(LstWork* work) {
 #endif
 }
 
-u8 func_081109B8(LstWork* work, u8 a) {
+u8 func_081109B8(Task* task, u8 a) {
     LstState* s;
     u8 result;
 
-    s = work->state;
+    s = task->work;
     result = 0;
     func_08111660(s->unk_1C4);
     func_08111660(s->unk_1C8);
@@ -183,8 +183,8 @@ u8 func_081109B8(LstWork* work, u8 a) {
     }
 
     if (a == 1 && s->unk_010 == 0) {
-        s->unk_0A0.unk_2C = 0;
-        func_0801C2DC(&s->unk_0A0, 1);
+        s->obj.unk_02C = 0;
+        func_0801C2DC(&s->obj, 1);
         func_081108AC(s, 0);
         func_081108AC(s, 0);
         result = 1;
@@ -296,9 +296,9 @@ s32 func_08110B10(u8 a, u8 b) {
 }
 
 void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
-    LstBitSubArg sub;
+    LstLsrArg sub;
     BtlObj* p;
-    void* pool;
+    TaskPool* pool;
 
     work->unk_000 = 0;
     work->unk_002 = 0;
@@ -314,15 +314,15 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->unk_01C = arg->unk_08;
     work->unk_020 = arg->unk_0C;
     work->unk_024 = arg->unk_10;
-    work->unk_028 = arg->unk_14;
-    work->unk_02C = arg->unk_18;
-    work->unk_030 = arg->unk_1C;
-    work->unk_044 = arg->unk_14;
-    work->unk_048 = arg->unk_18;
-    work->unk_04C = arg->unk_1C;
+    work->unk_028 = arg->x;
+    work->unk_02C = arg->y;
+    work->unk_030 = arg->z;
+    work->unk_044 = arg->x;
+    work->unk_048 = arg->y;
+    work->unk_04C = arg->z;
     work->unk_040 = 0;
     work->unk_050 = arg->unk_20;
-    work->unk_054 = arg->unk_24;
+    work->unk_054 = arg->y2;
     work->unk_058 = arg->unk_28;
     p = gBtlWork->actor;
     work->unk_068 = p->x;
@@ -331,12 +331,12 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->angle = arg->unk_04 << 7;
     work->scaleX = 2;
     work->scaleY = 2;
-    work->tiles = (u32)LoadObjTiles(gUnk_09CD0334, 0x900);
-    work->palette = (u32)LoadObjPalette(gUnk_09D69594, 0x60);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 0x20);
+    work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
+    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
     AnimStart(&work->anim, gLstAnimSets[work->unk_000].unk_00, 1);
-    func_0801B37C(&work->unk_0A0, &gBosLstBitEmyKind, work->unk_028, work->unk_02C, work->unk_030);
+    func_0801B37C(&work->obj, &gBosLstBitEmyKind, work->unk_028, work->unk_02C, work->unk_030);
     pool = &work->tasks;
     TaskPoolInit(pool, 4);
     sub.unk_00 = work->unk_00E;
@@ -348,29 +348,29 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
 }
 
 void func_08110C9C(LstState* work) {
-    void* anim;
+    BtlObj* obj;
 
-    anim = &work->unk_0A0;
+    obj = &work->obj;
 
-    switch (func_0801ADAC(anim)) {
+    switch (func_0801ADAC(obj)) {
     case 1:
     case 6:
     case 7:
         work->unk_00A = 20;
         func_081108AC(work, 0);
-        func_0801AF08(anim);
+        func_0801AF08(obj);
         break;
     case 3:
-        func_0801C2DC(&work->unk_0A0, 1);
+        func_0801C2DC(&work->obj, 1);
         func_081108AC(work, 0);
         func_081108AC(work, 0);
-        func_0801AF08(anim);
+        func_0801AF08(obj);
         break;
     case 5:
-        func_0801AF08(anim);
+        func_0801AF08(obj);
         break;
     case 4:
-        func_0801AF08(anim);
+        func_0801AF08(obj);
         break;
     case 2:
         break;
@@ -387,11 +387,11 @@ u8 task_bos_lst_bit_1(LstState* work) {
     BtlObj* p;
     s32 d;
     u8 dir;
-    LstObj* obj;
+    BtlObj* obj;
 
-    obj = &work->unk_0A0;
+    obj = &work->obj;
 
-    if (obj->unk_2C <= 0) {
+    if (obj->unk_02C <= 0) {
         func_0801C2DC(obj, 1);
         return 1;
     }
@@ -642,9 +642,9 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->unk_01B += d / 2;
     }
 
-    obj->unk_04 = work->unk_028 + work->unk_034;
-    obj->unk_08 = work->unk_02C + work->unk_038;
-    obj->unk_0C = work->unk_030 + work->unk_03C + work->unk_040;
+    obj->x = work->unk_028 + work->unk_034;
+    obj->y = work->unk_02C + work->unk_038;
+    obj->z = work->unk_030 + work->unk_03C + work->unk_040;
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     work->unk_014++;
@@ -662,13 +662,13 @@ void task_bos_lst_bit_2(LstState* work) {
     u16 z;
     void* gfx;
 
-    if (work->unk_0A0.unk_2C <= 0) {
+    if (work->obj.unk_02C <= 0) {
         return;
     }
 
-    pal = (void*)work->palette;
+    pal = work->palette;
     if ((work->unk_00A & 1) != 0) {
-        pal = (void*)work->palette2;
+        pal = work->palette2;
     }
 
     if (work->unk_00A > 0) {
@@ -681,14 +681,14 @@ void task_bos_lst_bit_2(LstState* work) {
     z = -0x1004 - (work->unk_02C >> 8) * 4;
     affine = AllocObjAffine(work->unk_01B, work->scaleX, work->scaleY, 0);
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, (void*)work->tiles, pal, affine, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, pal, affine, prio, z);
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_lst_bit_3(LstBitWork* work) {
-    func_0801B7D8(&work->unk_0A0);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    func_0801B7D8(&work->obj);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }

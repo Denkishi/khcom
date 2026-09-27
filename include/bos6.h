@@ -209,20 +209,6 @@ extern const s16 gUnk_09A4CAC4[];
 #include "bos7_api.h"
 #include "btl_api.h"
 
-typedef struct PcPos {
-    s16 unk_00;
-    u8 unk_02;
-    u8 unk_03;
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 unk_10[0x24];
-    u64 unk_34;
-    u8 unk_3C[0x4];
-    u8 collider[0x5C];
-    u16 unk_9C;
-} PcPos;
-
 typedef struct PcShared {
     s16 unk_00;
     u8 unk_02;
@@ -338,11 +324,6 @@ typedef struct PcFldWork {
     Collider collider;
 } PcFldWork;
 
-typedef struct LstTask {
-    void* unk_00;
-    void* unk_04;
-} LstTask;
-
 typedef struct LstSub {
     u8 unk_000;
     u8 unk_001;
@@ -354,15 +335,9 @@ typedef struct LstSub {
     s16 unk_00A;
     s16 unk_00C;
     u8 unk_00E[0x2];
-    u32 tiles;
+    ObjTiles* tiles;
     u8 unk_014[0x4];
-    u8 unk_018[0x4];
-    s32 unk_01C;
-    s32 unk_020;
-    s32 unk_024;
-    u8 unk_028[0x24];
-    u64 unk_04C;
-    u8 unk_054[0xD4];
+    BtlObj body;
     AnimState anim;
 } LstSub;
 
@@ -381,8 +356,7 @@ typedef struct BosLstWork {
     s16 unk_012;
     u16 unk_014;
     u16 unk_016;
-    s16 unk_018;
-    s16 unk_01A;
+    s32 unk_018;
     u8 unk_01C;
     u8 unk_01D;
     s16 unk_01E;
@@ -390,7 +364,7 @@ typedef struct BosLstWork {
     u16 unk_022;
     u16 unk_024;
     s16 unk_026;
-    u32 tiles;
+    ObjTiles* tiles;
     AnimState anim;
     s32 x;
     s32 y;
@@ -442,29 +416,15 @@ typedef struct BosLstWork {
     s16 unk_0D6;
     u8 unk_0D8[0x4];
     s32 unk_0DC;
-    u32 palette;
-    u16 unk_0E4;
-    u16 unk_0E6;
-    u32 unk_0E8;
-    u32 unk_0EC;
-    u32 unk_0F0;
-    u8 unk_0F4[0x1C];
-    s16 unk_110;
-    s16 unk_112;
-    u32 unk_114;
-    u64 unk_118;
-    u32 unk_120;
-    u32 unk_124;
-    u8 unk_128[0xCC];
+    ObjPalette* palette;
+    BtlObj body;
     LstSub sub[2];
-    u8 collider[0x5C];
-    u32 unk_4D0;
-    u8 unk_4D4[0x58];
-    u8 unk_52C[8][0x5C];
-    void* task;
-    LstTask* lstTasks[0x20];
-    u32 tasks;
-    u8 unk_894[0x10];
+    Collider collider;
+    Collider collider2;
+    Collider colliders[8];
+    Task* task;
+    Task* lstTasks[0x20];
+    TaskPool tasks;
     u8 unk_8A4[0x280];
     u8 unk_B24[0x24];
     u8 unk_B48[0x55C];
@@ -589,7 +549,7 @@ extern const EmyKind gBosLstEmyKind;
 extern u8 gUnk_09C53724[];
 extern u8 gUnk_09C58590[];
 
-void task_bos_lst_0(BosLstWork* work, void* pool);
+void task_bos_lst_0(BosLstWork* work, TaskPool* pool);
 u8 task_bos_lst_1(BosLstWork* work);
 
 typedef struct LstAnimDef {
@@ -672,31 +632,10 @@ u8 func_0810C32C(BosLstWork* work, s32 a);
 
 u8 func_0810AF44(PcWork* work, Task* task);
 
-typedef struct LstSpawn {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10;
-    u8 unk_11;
-    s16 unk_12;
-    void* unk_14;
-} LstSpawn;
-
 u8 func_0810ACB8(PcWork* work, Task* task);
 
 extern const s16 gUnk_09A4CCDC[256];
 extern const s16 gUnk_09A4CADC[256];
-
-typedef struct LstSpawn2 {
-    void* unk_00;
-    u16 unk_04;
-    u16 unk_06;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s32 unk_14;
-} LstSpawn2;
 
 typedef struct LstSpawn3 {
     s32 unk_00;
@@ -706,28 +645,6 @@ typedef struct LstSpawn3 {
     s16 unk_12;
     u8 unk_14[0xC];
 } LstSpawn3;
-
-typedef struct LstSpawn4 {
-    s32 unk_00;
-    s32 unk_04;
-    void* unk_08;
-    void* unk_0C;
-    void* unk_10;
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_20;
-    s32 y2;
-    s32 unk_28;
-} LstSpawn4;
-
-typedef struct LstSpawn5 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s16 unk_0C;
-    u8 unk_0E[0x2];
-} LstSpawn5;
 
 void func_0810F064(BosLstWork* work, LstSub* p);
 

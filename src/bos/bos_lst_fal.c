@@ -12,7 +12,7 @@ TaskDesc gTaskDescBosLstFal = {
     (TaskUpdateFunc)task_bos_lst_fal_1,
     (TaskFunc)task_bos_lst_fal_2,
     (TaskFunc)task_bos_lst_fal_3,
-    0x40,
+    sizeof(LstFalWork),
 };
 
 s32 func_08111BF4(s32 x) {
@@ -70,8 +70,8 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
 
     work->unk_01C = arg->unk_14;
     (*work->unk_01C)++;
-    work->tiles = (u32)LoadObjTiles(gUnk_09CD1074, 0x700);
-    work->palette = (u32)LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = LoadObjTiles(gUnk_09CD1074, 0x700);
+    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBFC4, gUnk_09EFBF64);
     AnimStart(&work->anim, anim, 1);
 }
@@ -119,16 +119,16 @@ void task_bos_lst_fal_2(LstFalWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     gfx = AnimGetGfx(&work->anim);
     prio = GetBattleSpritePriorityFlags(work->y) | 4;
-    DrawSprite(x, y, gfx, (void*)work->tiles, (void*)work->palette, 0, prio,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, prio,
                -0x1004 - (work->y >> 8) * 4);
 }
 
 void task_bos_lst_fal_3(LstFalWork* work) {
     if (work->tiles != 0) {
-        ReleaseObjTiles((void*)work->tiles);
+        ReleaseObjTiles(work->tiles);
     }
     if (work->palette != 0) {
-        ReleaseObjPalette((void*)work->palette);
+        ReleaseObjPalette(work->palette);
     }
     (*work->unk_01C)--;
 }

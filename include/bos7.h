@@ -33,16 +33,6 @@
 #include "btl_api.h"
 #include "evt_api.h"
 
-typedef struct LstObj {
-    u8 unk_00[0x4];
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10[0x1C];
-    s16 unk_2C;
-    u8 unk_2E[0xE2];
-} LstObj;
-
 typedef struct LstState {
     s16 unk_000;
     s16 unk_002;
@@ -59,9 +49,9 @@ typedef struct LstState {
     u16 unk_018;
     u8 unk_01A;
     u8 unk_01B;
-    u16* unk_01C;
+    s16* unk_01C;
     u16* unk_020;
-    s32 unk_024;
+    s16* unk_024;
     s32 unk_028;
     s32 unk_02C;
     s32 unk_030;
@@ -83,28 +73,16 @@ typedef struct LstState {
     u32 unk_070;
     u32 scaleX;
     u32 scaleY;
-    u32 anim;
-    u8 unk_080[0x14];
-    u32 tiles;
-    u32 palette;
-    u32 palette2;
-    LstObj unk_0A0;
-    u32 tasks;
-    u8 unk_1B4[0x10];
-    void* unk_1C4;
-    void* unk_1C8;
-    void* unk_1CC;
+    AnimState anim;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjPalette* palette2;
+    BtlObj obj;
+    TaskPool tasks;
+    Task* unk_1C4;
+    Task* unk_1C8;
+    Task* unk_1CC;
 } LstState;
-
-typedef struct LstWork {
-    void* unk_00;
-    LstState* state;
-} LstWork;
-
-typedef struct LstLsrTask {
-    void* unk_00;
-    struct LstLsrWork* work;
-} LstLsrTask;
 
 typedef struct LstEdgWork {
     s16 state;
@@ -120,14 +98,13 @@ typedef struct LstEdgWork {
     s32 unk_020;
     s32 unk_024;
     s32 unk_028;
-    u32 anim;
-    u8 unk_030[0x14];
-    u32 tiles;
-    u32 palette;
+    AnimState anim;
+    ObjTiles* tiles;
+    ObjPalette* palette;
 } LstEdgWork;
 
 typedef struct LstCtrWork {
-    s32 unk_000;
+    s16* unk_000;
     s16 unk_004;
     s16 unk_006;
     s16 state;
@@ -149,10 +126,9 @@ typedef struct LstCtrWork {
     s32 x2;
     s32 y2;
     s32 z2;
-    u32 anim;
-    u8 unk_048[0x14];
-    u32 tiles;
-    u32 palette;
+    AnimState anim;
+    ObjTiles* tiles;
+    ObjPalette* palette;
     u8 unk_064[0x124];
 } LstCtrWork;
 
@@ -175,27 +151,28 @@ typedef struct LstFldWork {
 
 typedef LstState LstBitWork;
 
+typedef struct Vec3 {
+    s32 x;
+    s32 y;
+    s32 z;
+} Vec3;
+
 typedef struct LstLsrWork {
     s16 state;
     u8 angle;
     u8 unk_003;
     s32 unk_004;
-    u16* unk_008;
+    s16* unk_008;
     u16* unk_00C;
     s16 unk_010;
     s16 unk_012;
     s16 unk_014;
     u8 unk_016[0x0E];
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 x2;
-    s32 y2;
-    s32 z2;
-    u32 tiles;
-    u32 palette;
-    u32 anim;
-    u8 unk_048[0x14];
+    Vec3 pos;
+    Vec3 pos2;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    AnimState anim;
 } LstLsrWork;
 
 typedef struct LstPtlWork {
@@ -207,10 +184,9 @@ typedef struct LstPtlWork {
     s32 unk_00C;
     s32 unk_010;
     s32 unk_014;
-    u32 anim;
-    u8 unk_01C[0x14];
-    u32 tiles;
-    u32 palette;
+    AnimState anim;
+    ObjTiles* tiles;
+    ObjPalette* palette;
 } LstPtlWork;
 
 typedef struct LstFalWork {
@@ -222,10 +198,9 @@ typedef struct LstFalWork {
     s32 vz;
     s32 unk_018;
     u16* unk_01C;
-    u32 tiles;
-    u32 palette;
-    u32 anim;
-    u8 unk_02C[0x14];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    AnimState anim;
 } LstFalWork;
 
 typedef struct LstSnpWork {
@@ -236,10 +211,9 @@ typedef struct LstSnpWork {
     s32 z;
     s32 vx;
     s32 vz;
-    u32 tiles;
-    u32 palette;
-    u32 anim;
-    u8 unk_024[0x14];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    AnimState anim;
 } LstSnpWork;
 
 typedef struct LstFldArg {
@@ -249,36 +223,6 @@ typedef struct LstFldArg {
     u16 paletteSize;
 } LstFldArg;
 
-typedef struct LstBitArg {
-    s32 unk_00;
-    s32 unk_04;
-    u16* unk_08;
-    u16* unk_0C;
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
-    s32 unk_24;
-    s32 unk_28;
-} LstBitArg;
-
-typedef struct LstBitSubArg {
-    s32 unk_00;
-    u16* unk_04;
-    u16* unk_08;
-} LstBitSubArg;
-
-typedef struct LstCtrArg {
-    s32 unk_00;
-    u16 unk_04;
-    u16 unk_06;
-    s32 unk_08;
-    s32 x;
-    s32 y;
-    s32 z;
-} LstCtrArg;
-
 typedef struct LstEdgArg {
     s32 unk_00;
     s32 x;
@@ -286,15 +230,9 @@ typedef struct LstEdgArg {
     s32 z;
 } LstEdgArg;
 
-typedef struct Vec3 {
-    s32 x;
-    s32 y;
-    s32 z;
-} Vec3;
-
 typedef struct LstLsrArg {
     s32 unk_00;
-    u16* unk_04;
+    s16* unk_04;
     u16* unk_08;
 } LstLsrArg;
 
@@ -303,29 +241,11 @@ typedef struct LstFalAnim {
     u16 unk_02;
 } LstFalAnim;
 
-typedef struct LstFalArg {
-    s32 unk_00;
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 angle;
-    u8 unk_11;
-    s16 unk_12;
-    u16* unk_14;
-} LstFalArg;
-
 typedef struct LstPtlArg {
     u16 unk_00;
     s32 unk_04;
     s32 unk_08;
 } LstPtlArg;
-
-typedef struct LstSnpArg {
-    s32 x;
-    s32 y;
-    s32 z;
-    s16 unk_0C;
-} LstSnpArg;
 
 extern const LstFalAnim gBosLstFalAnims[8];
 extern const u16 gUnk_09A4D234[];
@@ -393,9 +313,9 @@ s32 func_08111BF4(s32 x);
 s32 func_08111BFC(s32 x);
 s32 func_08111F3C(s32 x);
 s32 func_08111F44(s32 x);
-u8 func_08110668(LstWork* work);
-u8 func_08111A08(LstWork* work);
-u8 func_081115B4(LstWork* work);
+u8 func_08110668(Task* task);
+u8 func_08111A08(Task* task);
+u8 func_081115B4(Task* task);
 s32 func_0811157C(s32 n);
 s32 func_08111F60(s32 n);
 u8 func_081108AC(LstState* work, s32 kind);
@@ -407,7 +327,7 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg);
 u8 task_bos_lst_bit_1(LstState* work);
 void task_bos_lst_bit_2(LstState* work);
 void func_08110C9C(LstState* work);
-void func_081115CC(LstWork* work, Vec3* a, Vec3* b, s32 c, u16 d);
-void func_08111660(LstLsrTask* t);
+void func_081115CC(Task* task, Vec3* a, Vec3* b, s32 c, u16 d);
+void func_08111660(Task* task);
 
 #endif /* GUARD_BOS7_H */

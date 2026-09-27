@@ -8,7 +8,7 @@ TaskDesc gTaskDescBosLstLsr = {
     (TaskUpdateFunc)task_bos_lst_lsr_1,
     (TaskFunc)task_bos_lst_lsr_2,
     (TaskFunc)task_bos_lst_lsr_3,
-    0x5C,
+    sizeof(LstLsrWork),
 };
 
 s32 func_0811156C(s32 x) {
@@ -42,14 +42,14 @@ s32 func_0811157C(s32 n) {
     return g;
 }
 
-u8 func_081115B4(LstWork* work) {
-    LstState* s;
+u8 func_081115B4(Task* task) {
+    LstLsrWork* s;
     u8 result;
 
-    s = work->state;
+    s = task->work;
     result = 0;
 
-    switch (s->unk_000) {
+    switch (s->state) {
     case 2:
     case 3:
         result = 1;
@@ -59,21 +59,21 @@ u8 func_081115B4(LstWork* work) {
     return result;
 }
 
-void func_081115CC(LstWork* work, Vec3* a, Vec3* b, s32 c, u16 d) {
-    LstState* s;
+void func_081115CC(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
+    LstLsrWork* s;
     s16 x1;
     s16 y1;
     s16 x2;
     s16 y2;
 
-    s = work->state;
-    s->unk_000 = 1;
-    *(u8*)&s->unk_002 = c;
+    s = task->work;
+    s->state = 1;
+    s->angle = c;
     s->unk_012 = d;
-    *(Vec3*)&s->unk_024 = *a;
-    *(Vec3*)&s->unk_030 = *b;
-    WorldToScreen(&x1, &y1, s->unk_024, s->unk_028, s->unk_02C);
-    WorldToScreen(&x2, &y2, s->unk_030, s->unk_034, s->unk_038);
+    s->pos = *a;
+    s->pos2 = *b;
+    WorldToScreen(&x1, &y1, s->pos.x, s->pos.y, s->pos.z);
+    WorldToScreen(&x2, &y2, s->pos2.x, s->pos2.y, s->pos2.z);
     s->unk_014 = (s16)func_0811157C((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;
 
     if (s->unk_014 <= 1) {
@@ -83,10 +83,10 @@ void func_081115CC(LstWork* work, Vec3* a, Vec3* b, s32 c, u16 d) {
     s->unk_010 = 0;
 }
 
-void func_08111660(LstLsrTask* t) {
+void func_08111660(Task* task) {
     LstLsrWork* w;
 
-    w = t->work;
+    w = task->work;
     w->state = 0;
     w->unk_010 = 0;
     AnimStart(&w->anim, 4, 0);
@@ -104,9 +104,9 @@ u8 func_08111678(LstLsrWork* work) {
 
     if ((s16)*work->unk_00C <= 31) {
         arg.unk_00 = 0;
-        arg.x = work->x2;
-        arg.y = work->y2;
-        arg.z = work->z2;
+        arg.x = work->pos2.x;
+        arg.y = work->pos2.y;
+        arg.z = work->pos2.z;
         arg.unk_12 = *work->unk_008;
         arg.unk_14 = work->unk_00C;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
@@ -121,8 +121,8 @@ void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
     work->unk_008 = arg->unk_04;
     work->unk_00C = arg->unk_08;
     work->state = 0;
-    work->tiles = (u32)LoadObjTiles(gUnk_09CD0334, 0x900);
-    work->palette = (u32)LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
+    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
     AnimStart(&work->anim, 4, 0);
 }
@@ -153,23 +153,23 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             work->unk_010 = 0;
             AnimChange(&work->anim, 4, 0);
         } else {
-            func_08011F78(0x10D, work->x2, work->y2, work->z2, 8, 8, 8);
+            func_08011F78(0x10D, work->pos2.x, work->pos2.y, work->pos2.z, 8, 8, 8);
             if ((work->unk_010 & 3) == 0) {
                 func_08111678(work);
             }
-            if (abs(work->x2 - gBtlWork->actor->x) < 384) {
-                work->x2 = gBtlWork->actor->x;
-            } else if (work->x2 > gBtlWork->actor->x) {
-                work->x2 = work->x2 - 384;
-            } else if (work->x2 < gBtlWork->actor->x) {
-                work->x2 = work->x2 + 384;
+            if (abs(work->pos2.x - gBtlWork->actor->x) < 384) {
+                work->pos2.x = gBtlWork->actor->x;
+            } else if (work->pos2.x > gBtlWork->actor->x) {
+                work->pos2.x = work->pos2.x - 384;
+            } else if (work->pos2.x < gBtlWork->actor->x) {
+                work->pos2.x = work->pos2.x + 384;
             }
-            if (abs(work->y2 - gBtlWork->actor->y) < 384) {
-                work->y2 = gBtlWork->actor->y;
-            } else if (work->y2 > gBtlWork->actor->y) {
-                work->y2 = work->y2 - 384;
-            } else if (work->y2 < gBtlWork->actor->y) {
-                work->y2 = work->y2 + 384;
+            if (abs(work->pos2.y - gBtlWork->actor->y) < 384) {
+                work->pos2.y = gBtlWork->actor->y;
+            } else if (work->pos2.y > gBtlWork->actor->y) {
+                work->pos2.y = work->pos2.y - 384;
+            } else if (work->pos2.y < gBtlWork->actor->y) {
+                work->pos2.y = work->pos2.y + 384;
             }
             work->unk_010++;
         }
@@ -195,29 +195,29 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
 
     switch (work->state) {
     case 2:
-        WorldToScreen(&x1, &y1, work->x2, work->y2, work->z2);
-        prio = GetBattleSpritePriorityFlags(work->y2);
-        z = -0x1004 - (work->y2 >> 8) * 4;
-        WorldToScreen(&x2, &y2, work->x, work->y, work->z);
+        WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
+        prio = GetBattleSpritePriorityFlags(work->pos2.y);
+        z = -0x1004 - (work->pos2.y >> 8) * 4;
+        WorldToScreen(&x2, &y2, work->pos.x, work->pos.y, work->pos.z);
         oam = AllocObjAffineAngle(work->angle, 1);
         x = x2 + (x1 - x2) * work->unk_010 / work->unk_014;
         y = y2 + (y1 - y2) * work->unk_010 / work->unk_014;
-        DrawSprite(x, y, gUnk_09EFBEC4[13], (void*)work->tiles, (void*)work->palette,
+        DrawSprite(x, y, gUnk_09EFBEC4[13], work->tiles, work->palette,
                    oam, prio, z);
         break;
     case 3:
-        WorldToScreen(&x1, &y1, work->x2, work->y2, work->z2);
-        prio = GetBattleSpritePriorityFlags(work->y2);
-        z = -0x1004 - (work->y2 >> 8) * 4;
+        WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
+        prio = GetBattleSpritePriorityFlags(work->pos2.y);
+        z = -0x1004 - (work->pos2.y >> 8) * 4;
         oam = AllocObjAffine(0, 0x100 - work->unk_010 * 8, work->unk_010 * 16 + 0x100, 1);
         gfx = AnimGetGfx(&work->anim);
-        DrawSprite(x1, y1, gfx, (void*)work->tiles, (void*)work->palette,
+        DrawSprite(x1, y1, gfx, work->tiles, work->palette,
                    oam, prio | 4, z);
         break;
     }
 }
 
 void task_bos_lst_lsr_3(LstLsrWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }

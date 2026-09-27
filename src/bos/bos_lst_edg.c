@@ -10,7 +10,7 @@ TaskDesc gTaskDescBosLstEdg = {
     (TaskUpdateFunc)task_bos_lst_edg_1,
     (TaskFunc)task_bos_lst_edg_2,
     (TaskFunc)task_bos_lst_edg_3,
-    0x4C,
+    sizeof(LstEdgWork),
 };
 
 s32 func_08110658(s32 x) {
@@ -21,11 +21,11 @@ s32 func_08110660(s32 x) {
     return x * x;
 }
 
-u8 func_08110668(LstWork* work) {
-    LstState* s;
+u8 func_08110668(Task* task) {
+    LstEdgWork* s;
 
-    s = work->state;
-    return s->unk_000 != 4;
+    s = task->work;
+    return s->state != 4;
 }
 
 void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
@@ -39,8 +39,8 @@ void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
     work->unk_014 = arg->x;
     work->unk_018 = arg->y;
     work->unk_01C = arg->z;
-    work->tiles = (u32)AllocObjTiles(0x80, gUnk_09C5C4E2);
-    work->palette = (u32)LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = AllocObjTiles(0x80, gUnk_09C5C4E2);
+    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFAF1C, gUnk_09EFAEF8);
     AnimStart(&work->anim, 0, 1);
 }
@@ -116,10 +116,10 @@ void task_bos_lst_edg_2(LstEdgWork* work) {
     prio = GetBattleSpritePriorityFlags(work->y);
     z = -0x1004 - (work->y >> 8) * 4;
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, (void*)work->tiles, (void*)work->palette, 0, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, prio, z);
 }
 
 void task_bos_lst_edg_3(LstEdgWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }

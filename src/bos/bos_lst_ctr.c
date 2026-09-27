@@ -19,7 +19,7 @@ TaskDesc gTaskDescBosLstCtr = {
     (TaskUpdateFunc)task_bos_lst_ctr_1,
     (TaskFunc)task_bos_lst_ctr_2,
     (TaskFunc)task_bos_lst_ctr_3,
-    0x188,
+    sizeof(LstCtrWork),
 };
 
 s32 func_08111F3C(s32 x) {
@@ -30,11 +30,11 @@ s32 func_08111F44(s32 x) {
     return x * x;
 }
 
-u8 func_08111F4C(LstWork* work) {
-    LstState* s;
+u8 func_08111F4C(Task* task) {
+    LstCtrWork* s;
 
-    s = work->state;
-    return s->unk_008 != 4;
+    s = task->work;
+    return s->state != 4;
 }
 
 s32 func_08111F60(s32 n) {
@@ -77,8 +77,8 @@ void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
-    work->tiles = (u32)LoadObjTiles(gUnk_09C5C704, 0x500);
-    work->palette = (u32)LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = LoadObjTiles(gUnk_09C5C704, 0x500);
+    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFAF50, gUnk_09EFAF24);
     AnimStart(&work->anim, 3, 1);
 }
@@ -225,10 +225,10 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     }
 
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, (void*)work->tiles, (void*)work->palette, affine, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, affine, prio, z);
 }
 
 void task_bos_lst_ctr_3(LstCtrWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }

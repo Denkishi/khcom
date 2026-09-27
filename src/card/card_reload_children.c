@@ -437,15 +437,17 @@ u8 func_080990CC(RevCountWork* w, void* a) {
         return 1;
     } while (0);
 }
-void REV_COUNT_2(RevCountWork* w) {
+
 #ifdef VERSION_EU
-    DrawSprite(w->x >> 8, w->y >> 8, 0,
-               w->tiles, w->palette, 0, 1040, 15);
+#define REV_COUNT_SPRITE_FLAGS 0x410
 #else
-    DrawSprite(w->x >> 8, w->y >> 8, 0,
-               w->tiles, w->palette, 0, 1024, 15);
+#define REV_COUNT_SPRITE_FLAGS 0x400
 #endif
+
+void REV_COUNT_2(RevCountWork* w) {
+    DrawSprite(w->x >> 8, w->y >> 8, 0, w->tiles, w->palette, 0, REV_COUNT_SPRITE_FLAGS, 15);
 }
+
 void REV_COUNT_3(RevCountWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);

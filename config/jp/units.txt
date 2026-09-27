@@ -74,14 +74,13 @@ sprites_fld_1.c
 sprites_btl_1.c
 sprites_fld_2.c
 sprites_btl_2.c
-sprites_riku.c
-sprites_fld_3.c
 sprites_evt_frames_1.s
 sprites_fld_frames_1.s
 sprites_btl_frames_1.s
 sprites_fld_frames_2.s
 sprites_btl_frames_2.s
 sprites_riku_frames.s
+sprites_fld_3.c
 sprites_fld_frames_3.s
 sprites_mode_debug_frames.s
 sprites_emy_frames_1.s

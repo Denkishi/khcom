@@ -172,8 +172,8 @@ void func_0800FB2C(u32 a) {
 
     if (a == 72) {
         z = (u8*)&gGameState;
-        *(u64*)(z + 0x10C) = -1;
-        *(u64*)(z + 0x114) = -1;
+        *(u64*)(z + offsetof(GameState, progression.unk_14)) = -1;
+        *(u64*)(z + offsetof(GameState, progression.unk_1C)) = -1;
         return;
     }
 
@@ -183,13 +183,13 @@ void func_0800FB2C(u32 a) {
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        *(u64*)(q + 0x10C) |= 1LL << a;
-        *(u64*)(q + 0x11C) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.unk_14)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.unk_24)) |= 1LL << a;
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        *(u64*)(q + 0x114) |= 1LL << a;
-        *(u64*)(q + 0x124) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.unk_1C)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.unk_2C)) |= 1LL << a;
     }
 }
 
@@ -199,11 +199,11 @@ u8 func_0800FBCC(u32 a) {
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += 0x10C;
+        q += offsetof(GameState, progression.unk_14);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += 0x114;
+        q += offsetof(GameState, progression.unk_1C);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -233,11 +233,11 @@ u8 func_0800FC90(u32 a) {
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += 0x1E8;
+        q += offsetof(GameState, unk_1E8);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += 0x1F0;
+        q += offsetof(GameState, unk_1F0);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -252,11 +252,11 @@ u8 func_0800FCD8(u32 a) {
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += 0x200;
+        q += offsetof(GameState, unk_200);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += 0x208;
+        q += offsetof(GameState, unk_208);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -271,11 +271,11 @@ u8 func_0800FD20(u32 a) {
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += 0x11C;
+        q += offsetof(GameState, progression.unk_24);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += 0x124;
+        q += offsetof(GameState, progression.unk_2C);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -295,11 +295,11 @@ void func_0800FD68(u32 a) {
     } else {
         if (a <= 0x1E) {
             q = (u8*)&gGameState;
-            q += 0x11C;
+            q += offsetof(GameState, progression.unk_24);
         } else {
             a -= 0x1F;
             q = (u8*)&gGameState;
-            q += 0x124;
+            q += offsetof(GameState, progression.unk_2C);
         }
         p = (u64*)q;
         *p &= ~(1LL << a);
@@ -352,19 +352,19 @@ u8 func_0800FF00(u32 a) {
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += 0x134;
+        q += offsetof(GameState, progression.unk_3C[0]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += 0x13C;
+        q += offsetof(GameState, progression.unk_3C[1]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += 0x144;
+        q += offsetof(GameState, progression.unk_3C[2]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += 0x14C;
+        q += offsetof(GameState, progression.unk_3C[3]);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -379,19 +379,19 @@ u8 func_0800FF70(u32 a) {
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += 0x154;
+        q += offsetof(GameState, progression.unk_3C[4]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += 0x15C;
+        q += offsetof(GameState, progression.unk_3C[5]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += 0x164;
+        q += offsetof(GameState, progression.unk_3C[6]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += 0x16C;
+        q += offsetof(GameState, progression.unk_3C[7]);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -407,28 +407,28 @@ void func_0800FFE0(u32 a) {
 
     if (a == 250) {
         z = (u8*)&gGameState;
-        *(u64*)(z + 0x154) = 0;
-        *(u64*)(z + 0x15C) = 0;
-        *(u64*)(z + 0x164) = 0;
-        *(u64*)(z + 0x16C) = 0;
+        *(u64*)(z + offsetof(GameState, progression.unk_3C[4])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.unk_3C[5])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.unk_3C[6])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.unk_3C[7])) = 0;
         return;
     }
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += 0x154;
+        q += offsetof(GameState, progression.unk_3C[4]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += 0x15C;
+        q += offsetof(GameState, progression.unk_3C[5]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += 0x164;
+        q += offsetof(GameState, progression.unk_3C[6]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += 0x16C;
+        q += offsetof(GameState, progression.unk_3C[7]);
     }
     p = (u64*)q;
     *p &= ~(1LL << a);

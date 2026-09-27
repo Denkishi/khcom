@@ -113,7 +113,7 @@ void BtlWorkInit(void) {
     gBtlWork->fadeAmount = 10;
     d = gBtlWork->unk_13C;
     p = (u8*)&gGameState;
-    p += 0xF8;
+    p += offsetof(GameState, progression);
     memcpy(d, p, 0x88);
     ListPoolInit(&gBtlWork->pool);
     ListPoolInit(&gBtlWork->pool2);
@@ -2460,7 +2460,7 @@ u8 func_0801CA48(BtlObj* p) {
 
 void func_0801CA88(void) {
     s32 zero = 0;
-    CpuSet(&zero, &gGameState, 0x05000084);
+    CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
 
     if (gUnk_03006C10 & 0x800) {
         gGameState.flags |= 8;

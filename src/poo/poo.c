@@ -5968,7 +5968,7 @@ u8 task_poo_cabbage_1(PooCabbageWork* w) {
     s16 sy;
     s32 v;
 
-    memcpy(t, gUnk_096FD850, 30);
+    memcpy(t, gUnk_096FD850, sizeof(t));
     w->unk_CE++;
 
     switch (w->state) {

@@ -54,7 +54,7 @@ TaskDesc gTaskDescTitleLogo = {
     (TaskUpdateFunc)task_title_logo_1,
     (TaskFunc)task_title_logo_2,
     (TaskFunc)task_title_logo_3,
-    0x54,
+    sizeof(TitleLogoWork),
 };
 
 TaskDesc gTaskDescTitleObj = {
@@ -63,7 +63,7 @@ TaskDesc gTaskDescTitleObj = {
     (TaskUpdateFunc)task_title_obj_1,
     (TaskFunc)task_title_obj_2,
     (TaskFunc)task_title_obj_3,
-    0x64,
+    sizeof(TitleObjWork),
 };
 
 const s32 gUnk_096FDCC8[4] = {4, 5, 1, 2};
@@ -84,7 +84,7 @@ TaskDesc gTaskDescTitleMenu = {
     (TaskUpdateFunc)task_title_menu_1,
     (TaskFunc)task_title_menu_2,
     (TaskFunc)task_title_menu_3,
-    0x64,
+    sizeof(TitleMenuWork),
 };
 
 const s16 gUnk_096FDCE8[3] = {-7, 0, 3};
@@ -857,5 +857,5 @@ TaskDesc gTaskDescTitleLumichange = {
     (TaskUpdateFunc)task_title_lumichange_1,
     (TaskFunc)task_title_lumichange_2,
     (TaskFunc)task_title_lumichange_3,
-    0xC,
+    sizeof(TitleLumiChangeWork),
 };

@@ -2233,7 +2233,7 @@ TaskDesc gTaskDescWlogoMons = {
     (TaskUpdateFunc)task_wlogo_mons_1,
     (TaskFunc)task_wlogo_mons_2,
     (TaskFunc)task_wlogo_mons_3,
-    0x30,
+    sizeof(WlogoMonsWork),
 };
 
 TaskDesc gTaskDescWlogoHwt = {
@@ -2242,7 +2242,7 @@ TaskDesc gTaskDescWlogoHwt = {
     (TaskUpdateFunc)task_wlogo_hwt_1,
     (TaskFunc)task_wlogo_hwt_2,
     (TaskFunc)task_wlogo_hwt_3,
-    0x8,
+    sizeof(WlogoHwtWork),
 };
 
 TaskDesc gTaskDescWlogoHwtObj = {
@@ -2251,7 +2251,7 @@ TaskDesc gTaskDescWlogoHwtObj = {
     (TaskUpdateFunc)task_wlogo_hwt_obj_1,
     (TaskFunc)task_wlogo_hwt_obj_2,
     (TaskFunc)task_wlogo_hwt_obj_3,
-    0x4C,
+    sizeof(WlogoHwtObjWork),
 };
 
 WlogoWonEntry gUnk_09EF167C[10] = {
@@ -2309,7 +2309,7 @@ TaskDesc gTaskDescWlogoWon = {
     (TaskUpdateFunc)task_wlogo_won_1,
     (TaskFunc)task_wlogo_won_2,
     (TaskFunc)task_wlogo_won_3,
-    0x108,
+    sizeof(WlogoWonWork),
 };
 
 TaskDesc gTaskDescWlogoAtl = {
@@ -2318,7 +2318,7 @@ TaskDesc gTaskDescWlogoAtl = {
     (TaskUpdateFunc)task_wlogo_atl_1,
     (TaskFunc)task_wlogo_atl_2,
     (TaskFunc)task_wlogo_atl_3,
-    0xC,
+    sizeof(WlogoAtlWork),
 };
 
 TaskDesc gTaskDescWlogoNvl = {
@@ -2327,7 +2327,7 @@ TaskDesc gTaskDescWlogoNvl = {
     (TaskUpdateFunc)task_wlogo_nvl_1,
     (TaskFunc)task_wlogo_nvl_2,
     (TaskFunc)task_wlogo_nvl_3,
-    0xC,
+    sizeof(WlogoNvlWork),
 };
 
 TaskDesc gTaskDescWlogoNvlMov = {
@@ -2336,7 +2336,7 @@ TaskDesc gTaskDescWlogoNvlMov = {
     (TaskUpdateFunc)task_wlogo_nvl_mov_1,
     (TaskFunc)task_wlogo_nvl_mov_2,
     (TaskFunc)task_wlogo_nvl_mov_3,
-    0x4C,
+    sizeof(WlogoNvlMovWork),
 };
 
 TaskDesc gTaskDescWlogoNvlObj = {
@@ -2345,7 +2345,7 @@ TaskDesc gTaskDescWlogoNvlObj = {
     (TaskUpdateFunc)task_wlogo_nvl_obj_1,
     (TaskFunc)task_wlogo_nvl_obj_2,
     (TaskFunc)task_wlogo_nvl_obj_3,
-    0x30,
+    sizeof(WlogoNvlObjWork),
 };
 
 TaskDesc gTaskDescWlogoCol = {
@@ -2354,7 +2354,7 @@ TaskDesc gTaskDescWlogoCol = {
     (TaskUpdateFunc)task_wlogo_col_1,
     (TaskFunc)task_wlogo_col_2,
     (TaskFunc)task_wlogo_col_3,
-    0x34,
+    sizeof(WlogoColWork),
 };
 
 TaskDesc gTaskDescWlogoHlw = {
@@ -2363,7 +2363,7 @@ TaskDesc gTaskDescWlogoHlw = {
     (TaskUpdateFunc)task_wlogo_hlw_1,
     (TaskFunc)task_wlogo_hlw_2,
     (TaskFunc)task_wlogo_hlw_3,
-    0x8,
+    sizeof(WlogoHlwWork),
 };
 
 TaskDesc gTaskDescWlogoDil = {
@@ -2372,7 +2372,7 @@ TaskDesc gTaskDescWlogoDil = {
     (TaskUpdateFunc)task_wlogo_dil_1,
     (TaskFunc)task_wlogo_dil_2,
     (TaskFunc)task_wlogo_dil_3,
-    0x18,
+    sizeof(WlogoDilWork),
 };
 
 WlogoAgrEntry gWlogoAgrEntries[20] = {
@@ -2404,7 +2404,7 @@ TaskDesc gTaskDescWlogoAgr = {
     (TaskUpdateFunc)task_wlogo_agr_1,
     (TaskFunc)task_wlogo_agr_2,
     (TaskFunc)task_wlogo_agr_3,
-    0x18,
+    sizeof(WlogoAgrWork),
 };
 
 TaskDesc gTaskDescWlogoAgrSmoke = {
@@ -2413,7 +2413,7 @@ TaskDesc gTaskDescWlogoAgrSmoke = {
     (TaskUpdateFunc)task_wlogo_agr_smoke_1,
     (TaskFunc)task_wlogo_agr_smoke_2,
     (TaskFunc)task_wlogo_agr_smoke_3,
-    0x38,
+    sizeof(WlogoAgrSmokeWork),
 };
 
 TaskDesc gTaskDescWlogoAgrFlash0 = {
@@ -2422,7 +2422,7 @@ TaskDesc gTaskDescWlogoAgrFlash0 = {
     (TaskUpdateFunc)task_wlogo_agr_flash0_1,
     (TaskFunc)task_wlogo_agr_flash0_2,
     (TaskFunc)task_wlogo_agr_flash0_3,
-    0x2C,
+    sizeof(WlogoAgrFlashWork),
 };
 
 TaskDesc gTaskDescWlogoAgrFlash1 = {
@@ -2431,7 +2431,7 @@ TaskDesc gTaskDescWlogoAgrFlash1 = {
     (TaskUpdateFunc)task_wlogo_agr_flash1_1,
     (TaskFunc)task_wlogo_agr_flash1_2,
     (TaskFunc)task_wlogo_agr_flash1_3,
-    0x2C,
+    sizeof(WlogoAgrFlashWork),
 };
 
 TaskDesc gTaskDescWlogoTvt = {
@@ -2440,7 +2440,7 @@ TaskDesc gTaskDescWlogoTvt = {
     (TaskUpdateFunc)task_wlogo_tvt_1,
     (TaskFunc)task_wlogo_tvt_2,
     (TaskFunc)task_wlogo_tvt_3,
-    0x34,
+    sizeof(WlogoTvtWork),
 };
 
 TaskDesc gTaskDescWlogoPoo = {
@@ -2449,7 +2449,7 @@ TaskDesc gTaskDescWlogoPoo = {
     (TaskUpdateFunc)task_wlogo_poo_1,
     (TaskFunc)task_wlogo_poo_2,
     (TaskFunc)task_wlogo_poo_3,
-    0xC,
+    sizeof(WlogoPooWork),
 };
 
 u8 gUnk_09EF1AEC[4] = { 0, 0, 2, 2 };
@@ -2460,7 +2460,7 @@ TaskDesc gTaskDescWlogoPooObj = {
     (TaskUpdateFunc)task_wlogo_poo_obj_1,
     (TaskFunc)task_wlogo_poo_obj_2,
     (TaskFunc)task_wlogo_poo_obj_3,
-    0x44,
+    sizeof(WlogoPooObjWork),
 };
 
 WlogoTtMotion gWlogoTtMotion =
@@ -2473,7 +2473,7 @@ TaskDesc gTaskDescWlogoTt = {
     (TaskUpdateFunc)task_wlogo_tt_1,
     (TaskFunc)task_wlogo_tt_2,
     (TaskFunc)task_wlogo_tt_3,
-    0x128,
+    sizeof(WlogoTtWork),
 };
 
 TaskDesc gTaskDescWlogoTtObj = {
@@ -2482,7 +2482,7 @@ TaskDesc gTaskDescWlogoTtObj = {
     (TaskUpdateFunc)task_wlogo_tt_obj_1,
     (TaskFunc)task_wlogo_tt_obj_2,
     (TaskFunc)task_wlogo_tt_obj_3,
-    0x30,
+    sizeof(WlogoTtObjWork),
 };
 
 s16 gUnk_09EF1B68[33][3] = {
@@ -2527,7 +2527,7 @@ TaskDesc gTaskDescWlogoTtLine = {
     (TaskUpdateFunc)task_wlogo_tt_line_1,
     (TaskFunc)task_wlogo_tt_line_2,
     (TaskFunc)task_wlogo_tt_line_3,
-    0x1C,
+    sizeof(WlogoTtLineWork),
 };
 
 s8 gUnk_09EF1C48[8] = {
@@ -2556,7 +2556,7 @@ TaskDesc gTaskDescWlogoBks = {
     (TaskUpdateFunc)task_wlogo_bks_1,
     (TaskFunc)task_wlogo_bks_2,
     (TaskFunc)task_wlogo_bks_3,
-    0x50,
+    sizeof(WlogoBksWork),
 };
 
 u8 gUnk_09EF1C70[14] = {
@@ -2650,5 +2650,5 @@ TaskDesc gTaskDescWlogoBksObj = {
     (TaskUpdateFunc)task_wlogo_bks_obj_1,
     (TaskFunc)task_wlogo_bks_obj_2,
     (TaskFunc)task_wlogo_bks_obj_3,
-    0x4C,
+    sizeof(WlogoBksObjWork),
 };

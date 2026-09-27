@@ -444,5 +444,5 @@ TaskDesc gTaskDescWLogo = {
     (TaskUpdateFunc)task_wLogo_1,
     (TaskFunc)task_wLogo_2,
     (TaskFunc)task_wLogo_3,
-    0xC,
+    sizeof(WLogoTaskWork),
 };

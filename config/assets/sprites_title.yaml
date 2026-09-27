@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_title.c
-    start: 0x09EF659C
-    end: 0x09EF66A8
   - name: sprites_title_frames.s
     start: 0x0976E9D4
     end: 0x0977A438
+    data_start: 0x09EF659C
+    data_end: 0x09EF66A8
   - name: sprites_title_tiles.s
     start: 0x097C77B8
     end: 0x097DB5F8
@@ -30,12 +29,11 @@ objects:
     start: 0x0984A418
     end: 0x0984AA38
   jp:
-  - name: sprites_title.c
-    start: 0x09ECD988
-    end: 0x09ECDA94
   - name: sprites_title_frames.s
     start: 0x097271B0
     end: 0x097348CC
+    data_start: 0x09ECD988
+    data_end: 0x09ECDA94
   - name: sprites_title_tiles.s
     start: 0x09781C4C
     end: 0x09795A8C
@@ -46,12 +44,11 @@ objects:
     start: 0x097FF0EC
     end: 0x097FF70C
   eu:
-  - name: sprites_title.c
-    start: 0x09F819A4
-    end: 0x09F81D00
   - name: sprites_title_frames.s
     start: 0x0973C884
     end: 0x09766650
+    data_start: 0x09F819A4
+    data_end: 0x09F81D00
   - name: sprites_title_tiles_1.s
     start: 0x097ADE00
     end: 0x097B1D00

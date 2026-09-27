@@ -5,6 +5,8 @@
 
 #include "pc_sprite_types.h"
 
+#include "evt_object_types.h"
+
 #include "obj.h"
 
 #include "anim.h"
@@ -17,6 +19,8 @@
 #include "types.h"
 #include "taskpool.h"
 #include "sroll_api.h"
+
+struct EvtObjParam;
 
 typedef struct DmaStream {
     u8 unk_00;
@@ -75,50 +79,10 @@ typedef struct SrollANameArg {
     s32 targetY;
 } SrollANameArg;
 
-typedef struct SrollBCharGfx {
-    void* gfxTable;
-    void* anims;
-    void* tiles;
-} SrollBCharGfx;
-
-typedef struct SrollBCharDef {
-    SrollBCharGfx* gfx;
-    u8 unk_04[0x8];
-    u16 animId;
-    u16 unk_0E;
-} SrollBCharDef;
-
-typedef struct SrollBCharSub {
-    SrollBCharDef* def;
-    s32 x;
-    s32 y;
-    s32 unk_0C;
-    u8 unk_10[0x4];
-    u16 flags;
-    u16 unk_16;
-    AnimState* anim;
-    u16 unk_1C;
-    u8 unk_1E[0x2];
-    s32 scaleX;
-    s32 scaleY;
-    u8 angle;
-} SrollBCharSub;
-
-typedef struct SrollBCharSet {
-    u16 unk_00;
-    u8 unk_02[0x6];
-    void* unk_08;
-} SrollBCharSet;
-
-typedef struct SrollBCharArg {
-    SrollBCharSet* set;
-    SrollBCharSub* sub;
-} SrollBCharArg;
-
 typedef struct SrollBCharWork {
     s32 unk_00;
     s32 unk_04;
-    SrollBCharSub* sub;
+    EvtObj* obj;
     void* tiles;
     ObjPalette* palette;
     AnimState anim;
@@ -309,7 +273,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a);
 u8 task_sroll_b_crtn_1(SrollBCrtnWork* w);
 void task_sroll_b_crtn_2(SrollBCrtnWork* w);
 void task_sroll_b_logo_3(SrollBLogoWork* w);
-void task_sroll_b_char_0(SrollBCharWork* w, SrollBCharArg* a);
+void task_sroll_b_char_0(SrollBCharWork* w, struct EvtObjParam* a);
 s32 task_sroll_b_char_1(SrollBCharWork* w);
 void task_sroll_b_char_2(SrollBCharWork* w);
 void task_sroll_b_logo_0(SrollBLogoWork* w, SrollBLogoArg* a);

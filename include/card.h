@@ -1261,6 +1261,26 @@ typedef struct SpotlightWork {
     u8 unk_14;
 } SpotlightWork;
 
+typedef struct DispCardnameWork {
+    TextSlot textSlots[32];
+    void* tiles;
+    ObjPalette* unk_104;
+    ObjPalette* palette;
+    s16 x;
+    u8 textSlotCount;
+} DispCardnameWork;
+
+typedef char DispCardnameWork_size[(sizeof(DispCardnameWork) == 0x110) ? 1 : -1];
+
+typedef struct VersionWork {
+    void* tiles;
+    void* palette;
+    u16 text[16];
+    u8 textLength;
+} VersionWork;
+
+typedef char VersionWork_size[(sizeof(VersionWork) == 0x2C) ? 1 : -1];
+
 typedef struct CardEffectArgs {
     s32 unk_00;
     s32 unk_04;

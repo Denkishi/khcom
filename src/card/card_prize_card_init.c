@@ -1015,63 +1015,63 @@ void CreatePrizeCardTask(void* a, void* b) {
 void CreateBossPrizeCardTask(void* a, void* b) {
     TaskCreate(a, &gTaskDescPrizeCardInitBoss, b);
 }
-void DispCardname_0(u8* work, u16* a) {
-    UnkStruct_080038C8* p;
+void DispCardname_0(DispCardnameWork* work, u16* a) {
+    ObjPalette* p;
     s32 v;
 
-    InitTextSlots((TextSlot*)work, 32);
+    InitTextSlots(work->textSlots, 32);
     p = _08066468(1);
-    *(void**)&work[0x104] = p;
+    work->unk_104 = p;
     FadeSetPaletteExcluded(p->index + 16, 1);
-    work[0x10E] = LoadTextSlots(a, (TextSlot*)work);
-    *(void**)&work[0x100] = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
-    *(void**)&work[0x108] = LoadObjPalette(gCard00Palette, 32);
+    work->textSlotCount = LoadTextSlots(a, work->textSlots);
+    work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+    work->palette = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
-    v = (240 - work[0x10E] * 10) / 2;
+    v = (240 - work->textSlotCount * 10) / 2;
 #else
-    v = (240 - GetTextSlotsWidth((TextSlot*)work, work[0x10E])) / 2;
+    v = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 #endif
-    *(s16*)&work[0x10C] = v;
+    work->x = v;
 }
 s32 DispCardname_1(void) {
     return 1;
 }
 
-void DispCardname_2(u8* work) {
-    DrawTextSlots(*(s16*)&work[0x10C], 120, work, *(void**)&work[0x104], 50,
-                  work[0x10E]);
-    DrawSprite(120, 125, gUnk_09EF126C[0], *(void**)&work[0x100],
-               *(void**)&work[0x108], 0, 0, 55);
+void DispCardname_2(DispCardnameWork* work) {
+    DrawTextSlots(work->x, 120, work->textSlots, work->unk_104, 50,
+                  work->textSlotCount);
+    DrawSprite(120, 125, gUnk_09EF126C[0], work->tiles,
+               work->palette, 0, 0, 55);
 }
 
-void DispCardname_3(u8* work) {
-    FreeTextSlots(work, 32);
-    ReleaseObjTiles(*(void**)&work[0x100]);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x104])->index + 16, 0);
-    ReleaseObjPalette(*(void**)&work[0x104]);
-    ReleaseObjPalette(*(void**)&work[0x108]);
+void DispCardname_3(DispCardnameWork* work) {
+    FreeTextSlots(work->textSlots, 32);
+    ReleaseObjTiles(work->tiles);
+    FadeSetPaletteExcluded(work->unk_104->index + 16, 0);
+    ReleaseObjPalette(work->unk_104);
+    ReleaseObjPalette(work->palette);
 }
 
 void CreateCardNameDisplay(void* a, void* b) {
     TaskCreate(a, &gTaskDescDispCardname, b);
 }
-void Version_0(u8* work) {
-    *(void**)&work[0x00] = LoadSmallFontTiles();
-    *(void**)&work[0x04] = LoadSmallFontPalette();
-    work[0x28] = EncodeSmallFontString(gUnk_081283C0, &work[0x08]);
+void Version_0(VersionWork* work) {
+    work->tiles = LoadSmallFontTiles();
+    work->palette = LoadSmallFontPalette();
+    work->textLength = EncodeSmallFontString(gUnk_081283C0, work->text);
 }
 s32 Version_1(void) {
     return 1;
 }
-void Version_2(u8* work) {
-    DrawSmallFontString(0, 152, &work[0x08], *(s32*)&work[0x00], *(s32*)&work[0x04], 0,
-                  work[0x28]);
+void Version_2(VersionWork* work) {
+    DrawSmallFontString(0, 152, work->text, work->tiles, work->palette, 0,
+                  work->textLength);
 }
-void Version_3(s32* p) {
-    FreeSmallFontResources(p[0], p[1]);
+void Version_3(VersionWork* work) {
+    FreeSmallFontResources(work->tiles, work->palette);
 }
-s32 CreateVersionDisplay(void* a) {
-    return (s32)TaskCreate(a, &gTaskDescVersion, 0);
+Task* CreateVersionDisplay(TaskPool* pool) {
+    return TaskCreate(pool, &gTaskDescVersion, 0);
 }
 static void PrizeCard_0(UnkStruct_08096F94* w, s32* args) {
     Collider* p;
@@ -2060,7 +2060,7 @@ TaskDesc gTaskDescDispCardname = {
     (TaskUpdateFunc)DispCardname_1,
     (TaskFunc)DispCardname_2,
     (TaskFunc)DispCardname_3,
-    0x110,
+    sizeof(DispCardnameWork),
 };
 
 TaskDesc gTaskDescVersion = {
@@ -2069,7 +2069,7 @@ TaskDesc gTaskDescVersion = {
     (TaskUpdateFunc)Version_1,
     (TaskFunc)Version_2,
     (TaskFunc)Version_3,
-    0x2C,
+    sizeof(VersionWork),
 };
 
 TaskDesc gUnk_09EE7650 = {

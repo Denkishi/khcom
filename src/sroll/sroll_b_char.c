@@ -106,7 +106,7 @@ void task_sroll_b_char_2(SrollBCharWork* w) {
 
 void task_sroll_b_char_3(SrollBCharWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
     TaskPoolDestroy(&w->tasks);
 }
 
@@ -120,5 +120,5 @@ TaskDesc gTaskDescSrollBChar = {
     (TaskUpdateFunc)task_sroll_b_char_1,
     (TaskFunc)task_sroll_b_char_2,
     (TaskFunc)task_sroll_b_char_3,
-    0x40,
+    sizeof(SrollBCharWork),
 };

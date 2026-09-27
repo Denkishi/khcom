@@ -160,7 +160,7 @@ void task_sroll_c_char_2(SrollCCharWork* w) {
 
 void task_sroll_c_char_3(SrollCCharWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 TaskDesc gTaskDescSrollCChar = {
@@ -169,5 +169,5 @@ TaskDesc gTaskDescSrollCChar = {
     (TaskUpdateFunc)task_sroll_c_char_1,
     (TaskFunc)task_sroll_c_char_2,
     (TaskFunc)task_sroll_c_char_3,
-    0x98,
+    sizeof(SrollCCharWork),
 };

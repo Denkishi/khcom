@@ -75,7 +75,7 @@ void task_sroll_b_secn_2(SrollBSecnWork* w) {
 
 void task_sroll_b_secn_3(SrollBSecnWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 void* const gUnk_09A54374[][4] = {
@@ -156,5 +156,5 @@ TaskDesc gTaskDescSrollBSecn = {
     (TaskUpdateFunc)task_sroll_b_secn_1,
     (TaskFunc)task_sroll_b_secn_2,
     (TaskFunc)task_sroll_b_secn_3,
-    0x4C,
+    sizeof(SrollBSecnWork),
 };

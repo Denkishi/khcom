@@ -67,7 +67,7 @@ void task_sroll_tmr_2(SrollTmrWork* w) {
 }
 void task_sroll_tmr_3(SrollTmrWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 void func_0811549C(void) {
@@ -562,7 +562,7 @@ s32 SrollTextMeasureWidth(SrollWork* w, u8* s) {
     return total;
 }
 
-u32 SrollTextGetGlyphAddress(u16 c, u8* font, u32 base, u16 a, u16 b) {
+u8* SrollTextGetGlyphAddress(u16 c, u8* font, u8* base, u16 a, u16 b) {
     return base + SrollTextGetGlyphIndex(c, font) * (a << 3) * b;
 }
 
@@ -720,7 +720,7 @@ void SrollTextClearWindow(SrollWork* w, u8 flush) {
     u16* p;
     u16 i;
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
 
     for (i = 0; i < w->unk_16; i++) {
         fill[0] = w->unk_2C;
@@ -742,7 +742,7 @@ void func_081162E8(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
     t = w->unk_2E + 1;
     q = &a;
     a = t + 2;
@@ -773,7 +773,7 @@ void func_081163CC(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
     t = w->unk_2E + 1;
     q = &a;
     a = t + 2;
@@ -813,7 +813,7 @@ void func_08116500(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
     t = w->unk_2E + 1;
     q = &a;
     a = t + 2;
@@ -848,7 +848,7 @@ void SrollTextClearTextArea(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + w->unk_1A * w->unk_0A * 2 + w->unk_18 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->unk_1A * w->unk_0A * 2 + w->unk_18 * 2);
     t = w->unk_2E + 1;
 
     for (i = 0; i < w->unk_1E; i++) {
@@ -906,7 +906,7 @@ void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
         ch = w->unk_1E - y;
     }
 
-    p = (u16*)((u8*)SrollTextGetTilemap(w) + (w->unk_1A + y) * w->unk_0A * 2 + (w->unk_18 + x) * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + (w->unk_1A + y) * w->unk_0A * 2 + (w->unk_18 + x) * 2);
     v = w->unk_2E + 1;
     i = 0;
 
@@ -959,7 +959,7 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
     u16 v[2];
     u16* p;
     u32 off;
-    u32 g;
+    u8* g;
     u32 n;
     u16 c;
     u16 t;
@@ -977,9 +977,9 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
         off = (w->y * w->unk_1C + (w->x >> 3)) * 32;
         g = SrollTextGetGlyphAddress(c, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
         wd = SrollTextGetGlyphWidth(c, w->unk_34, w->unk_3C, w->unk_40);
-        n = SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), (u8*)g, wd);
+        n = SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, wd);
         t = w->y * w->unk_1C + (w->x >> 3) + w->unk_30;
-        p = (u16*)((u8*)SrollTextGetTilemap(w) +
+        p = (u16*)(SrollTextGetTilemap(w) +
                    ((w->unk_1A + w->y) * w->unk_0A + ((w->x >> 3) + w->unk_18)) * 2);
 
         for (i = 0; i < w->unk_24; i++) {
@@ -1056,8 +1056,8 @@ void SrollTextDrawQueued(SrollWork* w, u8 flush) {
     }
 }
 
-u32 SrollTextGetTilemap(SrollWork* w) {
-    u32 v;
+u8* SrollTextGetTilemap(SrollWork* w) {
+    u8* v;
 
     v = w->unk_4C;
     if (v == 0) {
@@ -1071,7 +1071,7 @@ void SrollTextFlushTilemap(SrollWork* w) {
 
     if (w->unk_4C != 0) {
         off = w->unk_12 * w->unk_0A * 2;
-        RequestDma3Copy((u8*)w->unk_4C + off, (u8*)w->unk_54 + off, w->unk_16 * w->unk_0A * 2);
+        RequestDma3Copy(w->unk_4C + off, w->unk_54 + off, w->unk_16 * w->unk_0A * 2);
     }
     w->unk_00 &= 0xFFFE;
 }
@@ -1099,7 +1099,7 @@ void SrollTextDrawStringAtTile(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
 
 void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     u32 off;
-    u32 g;
+    u8* g;
     s32 n;
 
     SrollTextDrawQueued(w, 0);
@@ -1108,7 +1108,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     if (n != 0) {
         off = (w->y * w->unk_1C + (x >> 3)) * 32;
         g = SrollTextGetGlyphAddress(0x8140, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
-        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), (u8*)g, n);
+        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, n);
     }
     SrollTextSetCursorPixelX(w, x);
     SrollTextEnqueueString(w, s);
@@ -1117,7 +1117,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     if ((w->x & 7) != 0) {
         off = (w->y * w->unk_1C + (w->x >> 3)) * 32;
         g = SrollTextGetGlyphAddress(0x8140, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
-        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), (u8*)g, 8 - (w->x & 7));
+        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, 8 - (w->x & 7));
     }
 
     if (flush == 1 && (w->unk_00 & 1)) {
@@ -1341,5 +1341,5 @@ TaskDesc gTaskDescSrollTmr = {
     (TaskUpdateFunc)task_sroll_tmr_1,
     (TaskFunc)task_sroll_tmr_2,
     (TaskFunc)task_sroll_tmr_3,
-    0x10,
+    sizeof(SrollTmrWork),
 };

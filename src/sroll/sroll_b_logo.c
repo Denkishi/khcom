@@ -50,7 +50,7 @@ void task_sroll_b_logo_2(SrollBLogoWork* w) {
 
 void task_sroll_b_logo_3(SrollBLogoWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 TaskDesc gTaskDescSrollBLogo = {
@@ -59,5 +59,5 @@ TaskDesc gTaskDescSrollBLogo = {
     (TaskUpdateFunc)task_sroll_b_logo_1,
     (TaskFunc)task_sroll_b_logo_2,
     (TaskFunc)task_sroll_b_logo_3,
-    0x30,
+    sizeof(SrollBLogoWork),
 };

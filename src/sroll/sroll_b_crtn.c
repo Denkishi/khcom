@@ -93,7 +93,7 @@ void task_sroll_b_crtn_2(SrollBCrtnWork* w) {
 
 void task_sroll_b_crtn_3(SrollBCrtnWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 TaskDesc gTaskDescSrollBCrtn = {
@@ -102,5 +102,5 @@ TaskDesc gTaskDescSrollBCrtn = {
     (TaskUpdateFunc)task_sroll_b_crtn_1,
     (TaskFunc)task_sroll_b_crtn_2,
     (TaskFunc)task_sroll_b_crtn_3,
-    0x30,
+    sizeof(SrollBCrtnWork),
 };

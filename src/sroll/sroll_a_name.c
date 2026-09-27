@@ -102,7 +102,7 @@ void task_sroll_a_name_2(SrollANameWork* w) {
 
 void task_sroll_a_name_3(SrollANameWork* w) {
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
 }
 
 TaskDesc gTaskDescSrollAName = {
@@ -111,5 +111,5 @@ TaskDesc gTaskDescSrollAName = {
     (TaskUpdateFunc)task_sroll_a_name_1,
     (TaskFunc)task_sroll_a_name_2,
     (TaskFunc)task_sroll_a_name_3,
-    0x38,
+    sizeof(SrollANameWork),
 };

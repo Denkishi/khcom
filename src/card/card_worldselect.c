@@ -1367,8 +1367,8 @@ u16 func_08093B58(void) {
     return sum;
 }
 
-void CreateMapCardSelection(void* a, void* b) {
-    TaskCreate(a, &gTaskDescMapSelect, b);
+void CreateMapCardSelection(TaskPool* pool, u8* p) {
+    TaskCreate(pool, &gTaskDescMapSelect, p);
 }
 
 void ClearMapCardInventory(void) {

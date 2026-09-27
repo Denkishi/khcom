@@ -440,7 +440,7 @@ void func_0805FA8C(u8 bg, u16 b, u16 c) {
     fillB = 0;
     CpuSet(&fillB, screenBase, (c >> 2) | CPU_SET_32BIT | CPU_SET_SRC_FIXED);
 
-    gUnk_02034A1C = EwramAlloc(0xA50);
+    gUnk_02034A1C = EwramAlloc(sizeof(UnkStruct_02034A1C) * 20);
     gUnk_02034A20 = 0;
 
     for (i = 0; i <= 19; i++) {
@@ -842,7 +842,7 @@ TaskDesc gTaskDescLockon = {
     (TaskUpdateFunc)task_lockon_1,
     (TaskFunc)task_lockon_2,
     (TaskFunc)task_lockon_3,
-    0x50,
+    sizeof(LockonWork),
 };
 
 u8* gUnk_09EE26EC[2] = { gUnk_08F6E190, gUnk_08F6F190 };

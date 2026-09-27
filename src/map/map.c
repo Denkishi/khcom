@@ -4493,12 +4493,12 @@ s32 Task_MapRnd_1(MapRndWork* w) {
     return 1;
 }
 
-void Task_MapRnd_2(TaskPool* pool) {
-    TaskPoolDraw(pool);
+void Task_MapRnd_2(MapRndWork* w) {
+    TaskPoolDraw(&w->tasks);
 }
 
-void Task_MapRnd_3(TaskPool* pool) {
-    TaskPoolDestroy(pool);
+void Task_MapRnd_3(MapRndWork* w) {
+    TaskPoolDestroy(&w->tasks);
     func_080E4B34();
 }
 
@@ -6618,7 +6618,7 @@ TaskDesc gTaskDescMapRnd = {
     (TaskUpdateFunc)Task_MapRnd_1,
     (TaskFunc)Task_MapRnd_2,
     (TaskFunc)Task_MapRnd_3,
-    0x14,
+    sizeof(MapRndWork),
 };
 
 TaskDesc gTaskDescMapFix = {
@@ -6663,5 +6663,5 @@ TaskDesc gTaskDescMapAnm = {
     (TaskUpdateFunc)Task_MapAnm_1,
     (TaskFunc)Task_MapAnm_2,
     (TaskFunc)Task_MapAnm_3,
-    0xE0,
+    sizeof(MapAnmWork),
 };

@@ -297,7 +297,6 @@ typedef struct NewGameSlotMenuWork {
 
 typedef struct MapRndWork {
     TaskPool tasks;
-    u8 unk_10[0x04];
 } MapRndWork;
 
 typedef struct MapMenuWork {

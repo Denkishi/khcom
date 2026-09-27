@@ -274,6 +274,6 @@ u16 func_0803FDC8(const BtlFormEntry* list) {
     return total;
 }
 
-TaskDesc gTaskDescRomcriEff = { "task_romcri_eff", task_romcri_eff_0, task_romcri_eff_1, 0, task_romcri_eff_3, 0x4 };
+TaskDesc gTaskDescRomcriEff = { "task_romcri_eff", (TaskInitFunc)task_romcri_eff_0, (TaskUpdateFunc)task_romcri_eff_1, 0, (TaskFunc)task_romcri_eff_3, sizeof(RomcriEffWork) };
 
-TaskDesc gTaskDescRomcriEff2 = { "task_romcri_eff2", task_romcri_eff2_0, task_romcri_eff2_1, 0, task_romcri_eff2_3, 0x4 };
+TaskDesc gTaskDescRomcriEff2 = { "task_romcri_eff2", (TaskInitFunc)task_romcri_eff2_0, (TaskUpdateFunc)task_romcri_eff2_1, 0, (TaskFunc)task_romcri_eff2_3, sizeof(RomcriEff2Work) };

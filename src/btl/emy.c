@@ -184,9 +184,9 @@ const EmyDef gEmy16Def = { gEmy16Palette, gUnk_0813D97C, 307, 130, 20, 20, 99, 3
 
 TaskDesc gTaskDescEmy16 = { "task_emy_16", task_emy_16_0, task_emy_16_1, task_emy_16_2, task_emy_16_3, 0x1A4 };
 
-TaskDesc gTaskDescEmy16B = { "task_emy_16_b", task_emy_16_b_0, task_emy_16_b_1, task_emy_16_b_2, task_emy_16_b_3, 0xA0 };
+TaskDesc gTaskDescEmy16B = { "task_emy_16_b", task_emy_16_b_0, task_emy_16_b_1, task_emy_16_b_2, task_emy_16_b_3, sizeof(Emy16bWork) };
 
-TaskDesc gTaskDescEmy16P = { "task_emy_16_p", task_emy_16_p_0, task_emy_16_p_1, task_emy_16_p_2, task_emy_16_p_3, 0x34 };
+TaskDesc gTaskDescEmy16P = { "task_emy_16_p", task_emy_16_p_0, task_emy_16_p_1, task_emy_16_p_2, task_emy_16_p_3, sizeof(Emy16pWork) };
 
 const AnimDef gUnk_0813DA24[3] = {
     { gEmy1800Frames, gEmy1800Anims, gEmy1800Tiles, 0, { 0, 0, 0 } },
@@ -522,7 +522,7 @@ const EmyDef gEmy83Def = { gEmy83Palette, gUnk_0813E63C, 192, 130, 20, 20, 50, 5
 
 TaskDesc gTaskDescEmy83 = { "task_emy_83", task_emy_83_0, task_emy_83_1, task_emy_83_2, task_emy_83_3, 0x1A8 };
 
-TaskDesc gTaskDescEmy83B = { "task_emy_83_b", task_emy_83_b_0, task_emy_83_b_1, task_emy_83_b_2, task_emy_83_b_3, 0x90 };
+TaskDesc gTaskDescEmy83B = { "task_emy_83_b", task_emy_83_b_0, task_emy_83_b_1, task_emy_83_b_2, task_emy_83_b_3, sizeof(Emy83bWork) };
 
 TaskDesc gTaskDescEmy83S = { "task_emy_83_s", task_emy_83_s_0, task_emy_83_s_1, task_emy_83_s_2, task_emy_83_s_3, 0x24 };
 
@@ -1939,8 +1939,8 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
 
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy1611bTiles);
-    AnimInit(work->anim, gEmy1611bAnims, gEmy1611bFrames);
-    AnimStart(work->anim, 0, 1);
+    AnimInit(&work->anim, gEmy1611bAnims, gEmy1611bFrames);
+    AnimStart(&work->anim, 0, 1);
     work->state = 0;
     work->x = spawn->x;
     work->y = spawn->y;
@@ -1981,10 +1981,10 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
     case 1:
         if (work->unk_03C == 0) {
             ColliderSetDisabled(&work->collider, 0);
-            AnimStart(work->anim, 1, 1);
+            AnimStart(&work->anim, 1, 1);
         }
 
-        if (work->unk_06C != 0) {
+        if (work->collider.unk_2C != 0) {
             work->unk_03C = 0;
             work->state = 2;
             ColliderSetDisabled(&work->collider, 1);
@@ -2003,7 +2003,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
                 break;
             }
         } else {
-            AnimStart(work->anim, 2, 1);
+            AnimStart(&work->anim, 2, 1);
             work->vz = -0x3CC;
         }
 
@@ -2014,7 +2014,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             work->unk_09C = work->unk_09C == 0;
         }
 
-        if (work->unk_06C != 0) {
+        if (work->collider.unk_2C != 0) {
             work->unk_03C = 0;
             work->state = 2;
             ColliderSetDisabled(&work->collider, 1);
@@ -2036,7 +2036,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
     }
 
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    AnimUpdate(work->anim);
+    AnimUpdate(&work->anim);
     return 1;
 }
 
@@ -2048,7 +2048,7 @@ void task_emy_16_b_2(Emy16bWork* work) {
     s16 x;
     s16 y;
 
-    gfx = AnimGetGfx(work->anim);
+    gfx = AnimGetGfx(&work->anim);
 
     if (work->unk_09C != 0) {
         pri = GetBattleSpritePriorityFlags(work->y);
@@ -2087,8 +2087,8 @@ void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
 
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy1610bTiles);
-    AnimInit(work->anim, gEmy1610bAnims, gEmy1610bFrames);
-    AnimStart(work->anim, 0, 1);
+    AnimInit(&work->anim, gEmy1610bAnims, gEmy1610bFrames);
+    AnimStart(&work->anim, 0, 1);
     work->x = spawn->x;
     work->y = spawn->y;
     work->z = spawn->z;
@@ -2122,7 +2122,7 @@ u8 task_emy_16_p_1(Emy16pWork* work) {
         work->z = 0;
     }
 
-    AnimUpdate(work->anim);
+    AnimUpdate(&work->anim);
     return 1;
 }
 
@@ -2132,7 +2132,7 @@ void task_emy_16_p_2(Emy16pWork* work) {
     s16 x;
     s16 y;
 
-    gfx = AnimGetGfx(work->anim);
+    gfx = AnimGetGfx(&work->anim);
     pri = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, pri,
@@ -5408,8 +5408,8 @@ void task_emy_83_b_0(Emy83bWork* work, EmySpawn* spawn) {
     work->state = 0;
     work->palette = LoadObjPalette(gEmy83Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy8310bTiles);
-    AnimInit(work->unk_008, gEmy8310bAnims, gEmy8310bFrames);
-    AnimStart(work->unk_008, 0, 0);
+    AnimInit(&work->anim, gEmy8310bAnims, gEmy8310bFrames);
+    AnimStart(&work->anim, 0, 0);
     work->x = spawn->x;
     work->y = spawn->y;
     work->z = spawn->z;
@@ -5433,10 +5433,10 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
         break;
     case 1:
         if (work->timer == 0) {
-            AnimStart(work->unk_008, 1, 0);
+            AnimStart(&work->anim, 1, 0);
         }
 
-        if (AnimGetFrame(work->unk_008) == 1 && work->unk_012 == 0) {
+        if (AnimGetFrame(&work->anim) == 1 && work->anim.timer == 0) {
             if (func_08011F78(0xE0, work->x, work->y, work->z, 4, 4, 0x10)) {
                 m4aSongNumStart(SONG_BTL_HANE_HIT);
             }
@@ -5452,10 +5452,10 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
     case 2:
     default:
         if (work->timer == 0) {
-            AnimStart(work->unk_008, 2, 0);
+            AnimStart(&work->anim, 2, 0);
         }
 
-        if (AnimIsFinished(work->unk_008)) {
+        if (AnimIsFinished(&work->anim)) {
             return 0;
         }
 
@@ -5464,7 +5464,7 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
     }
 
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    AnimUpdate(work->unk_008);
+    AnimUpdate(&work->anim);
     return 1;
 }
 
@@ -5474,7 +5474,7 @@ void task_emy_83_b_2(Emy83bWork* work) {
     s16 x;
     s16 y;
 
-    gfx = AnimGetGfx(work->unk_008);
+    gfx = AnimGetGfx(&work->anim);
     pri = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, pri,

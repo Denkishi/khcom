@@ -79,7 +79,7 @@ typedef struct Emy16Work {
 typedef struct Emy16bWork {
     void* tiles;
     void* palette;
-    u8 anim[0x18];
+    AnimState anim;
     s32 x;
     s32 y;
     s32 z;
@@ -90,10 +90,7 @@ typedef struct Emy16bWork {
     u32 state;
     s16 unk_03C;
     u8 unk_03E[0x02];
-    u32 collider;
-    u8 unk_044[0x28];
-    u8 unk_06C;
-    u8 unk_06D[0x2F];
+    Collider collider;
     u8 unk_09C;
     u8 unk_09D;
     u8 unk_09E[0x02];
@@ -102,7 +99,7 @@ typedef struct Emy16bWork {
 typedef struct Emy16pWork {
     void* tiles;
     void* palette;
-    u8 anim[0x18];
+    AnimState anim;
     s32 x;
     s32 y;
     s32 z;
@@ -200,17 +197,14 @@ typedef struct Emy83Work {
 typedef struct Emy83bWork {
     void* tiles;
     void* palette;
-    u8 unk_008[0x0A];
-    u16 unk_012;
-    u8 unk_014[0x0C];
+    AnimState anim;
     s32 x;
     s32 y;
     s32 z;
     u32 state;
     s16 timer;
     u8 unk_032[0x02];
-    u32 collider;
-    u8 unk_038[0x58];
+    Collider collider;
 } Emy83bWork;
 
 typedef struct Emy83sWork {

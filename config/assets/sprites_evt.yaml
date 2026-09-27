@@ -14,48 +14,41 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_evt_1.c
-    start: 0x09EDECC0
-    end: 0x09EDECFC
-  - name: sprites_evt_2.c
-    start: 0x09EEDFA8
-    end: 0x09EF04FC
-  - name: sprites_evt_3.c
-    start: 0x09EF06A8
-    end: 0x09EF0820
-  - name: sprites_evt_4.c
-    start: 0x09EF090C
-    end: 0x09EF0F64
-  - name: sprites_evt_5.c
-    start: 0x09EF5B54
-    end: 0x09EF5C6C
-  - name: sprites_evt_6.c
-    start: 0x09EF5CAC
-    end: 0x09EF5D04
-  - name: sprites_evt_7.c
-    start: 0x09EF66A8
-    end: 0x09EF6774
   - name: sprites_evt_frames_1.s
     start: 0x088D8110
     end: 0x088D9B40
+    data_start: 0x09EDECC0
+    data_end: 0x09EDECFC
   - name: sprites_evt_frames_2.s
     start: 0x0919752C
     end: 0x093803D8
+    data_start: 0x09EEDFA8
+    data_end: 0x09EF04FC
   - name: sprites_evt_frames_3.s
     start: 0x09393218
     end: 0x093A5DF0
+    data_start: 0x09EF06A8
+    data_end: 0x09EF0820
   - name: sprites_evt_frames_4.s
     start: 0x093AE9BC
     end: 0x093EDD44
+    data_start: 0x09EF090C
+    data_end: 0x09EF0F64
   - name: sprites_evt_frames_5.s
     start: 0x09736FF4
     end: 0x09742B98
+    data_start: 0x09EF5B54
+    data_end: 0x09EF5C6C
   - name: sprites_evt_frames_6.s
     start: 0x09742FC4
     end: 0x097442DC
+    data_start: 0x09EF5CAC
+    data_end: 0x09EF5D04
   - name: sprites_evt_frames_7.s
     start: 0x0977A438
     end: 0x0979662C
+    data_start: 0x09EF66A8
+    data_end: 0x09EF6774
   - name: sprites_evt_palettes.s
     start: 0x09615F78
     end: 0x09615F98
@@ -63,48 +56,41 @@ objects:
     start: 0x099918C4
     end: 0x09991924
   jp:
-  - name: sprites_evt_1.c
-    start: 0x09EB673C
-    end: 0x09EB6778
-  - name: sprites_evt_2.c
-    start: 0x09EC5394
-    end: 0x09EC78E8
-  - name: sprites_evt_3.c
-    start: 0x09EC7A94
-    end: 0x09EC7C0C
-  - name: sprites_evt_4.c
-    start: 0x09EC7CF8
-    end: 0x09EC8350
-  - name: sprites_evt_5.c
-    start: 0x09ECCF40
-    end: 0x09ECD058
-  - name: sprites_evt_6.c
-    start: 0x09ECD098
-    end: 0x09ECD0F0
-  - name: sprites_evt_7.c
-    start: 0x09ECDA94
-    end: 0x09ECDB60
   - name: sprites_evt_frames_1.s
     start: 0x088CB6F8
     end: 0x088CD128
+    data_start: 0x09EB673C
+    data_end: 0x09EB6778
   - name: sprites_evt_frames_2.s
     start: 0x09152A54
     end: 0x0933B900
+    data_start: 0x09EC5394
+    data_end: 0x09EC78E8
   - name: sprites_evt_frames_3.s
     start: 0x0934E740
     end: 0x09361318
+    data_start: 0x09EC7A94
+    data_end: 0x09EC7C0C
   - name: sprites_evt_frames_4.s
     start: 0x09369EE4
     end: 0x093A926C
+    data_start: 0x09EC7CF8
+    data_end: 0x09EC8350
   - name: sprites_evt_frames_5.s
     start: 0x096EF7D0
     end: 0x096FB374
+    data_start: 0x09ECCF40
+    data_end: 0x09ECD058
   - name: sprites_evt_frames_6.s
     start: 0x096FB7A0
     end: 0x096FCAB8
+    data_start: 0x09ECD098
+    data_end: 0x09ECD0F0
   - name: sprites_evt_frames_7.s
     start: 0x097348CC
     end: 0x09750AC0
+    data_start: 0x09ECDA94
+    data_end: 0x09ECDB60
   - name: sprites_evt_palettes.s
     start: 0x095CEA54
     end: 0x095CEA74
@@ -112,48 +98,41 @@ objects:
     start: 0x099463D8
     end: 0x09946438
   eu:
-  - name: sprites_evt_1.c
-    start: 0x09F59918
-    end: 0x09F59954
-  - name: sprites_evt_2.c
-    start: 0x09F7918C
-    end: 0x09F7B6E0
-  - name: sprites_evt_3.c
-    start: 0x09F7B88C
-    end: 0x09F7BA04
-  - name: sprites_evt_4.c
-    start: 0x09F7BAF0
-    end: 0x09F7C148
-  - name: sprites_evt_5.c
-    start: 0x09F80F4C
-    end: 0x09F81064
-  - name: sprites_evt_6.c
-    start: 0x09F810A4
-    end: 0x09F810FC
-  - name: sprites_evt_7.c
-    start: 0x09F81D00
-    end: 0x09F81D5C
   - name: sprites_evt_frames_1.s
     start: 0x08903A34
     end: 0x08905464
+    data_start: 0x09F59918
+    data_end: 0x09F59954
   - name: sprites_evt_frames_2.s
     start: 0x09266BB4
     end: 0x0944FA60
+    data_start: 0x09F7918C
+    data_end: 0x09F7B6E0
   - name: sprites_evt_frames_3.s
     start: 0x094628A0
     end: 0x09475478
+    data_start: 0x09F7B88C
+    data_end: 0x09F7BA04
   - name: sprites_evt_frames_4.s
     start: 0x0947E044
     end: 0x094BD3CC
+    data_start: 0x09F7BAF0
+    data_end: 0x09F7C148
   - name: sprites_evt_frames_5.s
     start: 0x09704354
     end: 0x0970FEF8
+    data_start: 0x09F80F4C
+    data_end: 0x09F81064
   - name: sprites_evt_frames_6.s
     start: 0x09710324
     end: 0x0971163C
+    data_start: 0x09F810A4
+    data_end: 0x09F810FC
   - name: sprites_evt_frames_7.s
     start: 0x09766650
     end: 0x09772840
+    data_start: 0x09F81D00
+    data_end: 0x09F81D5C
   - name: sprites_evt_palettes.s
     start: 0x09548E64
     end: 0x09548E84

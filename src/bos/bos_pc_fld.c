@@ -31,22 +31,24 @@ TaskDesc gTaskDescBosPcFld = {
     (TaskUpdateFunc)task_bos_pc_fld_1,
     (TaskFunc)task_bos_pc_fld_2,
     (TaskFunc)task_bos_pc_fld_3,
-    0x6C,
+    sizeof(PcFldWork),
 };
 
 static s32 Square(s32 x) {
     return x * x;
 }
 
-void func_0810B370(u8** p, u8 v) {
-    p[1][0] = v;
+void func_0810B370(Task* task, u8 v) {
+    PcFldWork* work = task->work;
+
+    work->unk_000 = v;
 }
 
-void func_0810B378(void** p, u8 a) {
+void func_0810B378(Task* task, u8 a) {
     PcFldWork* work;
-    UnkStruct_080038C8* pal;
+    ObjPalette* pal;
 
-    work = (PcFldWork*)p[1];
+    work = task->work;
     if (a == 1) {
         a = 0;
     } else {
@@ -55,11 +57,11 @@ void func_0810B378(void** p, u8 a) {
     ColliderSetDisabled(&work->collider, a);
     if (a == 0) {
         if (work->tiles == 0) {
-            work->tiles = (u32)LoadObjTiles(gUnk_09CC4E54, 0x200);
+            work->tiles = LoadObjTiles(gUnk_09CC4E54, 0x200);
         }
         if (work->palette == 0) {
-            pal = (UnkStruct_080038C8*)LoadObjPalette(gUnk_09D693D4, 0x60);
-            work->palette = (u32)pal;
+            pal = LoadObjPalette(gUnk_09D693D4, 0x60);
+            work->palette = pal;
             LoadPalette(gUnk_09D69434, gUnk_05000220 + pal->index * 32, 32);
         }
     }
@@ -97,42 +99,42 @@ s32 func_0810B49C(void) {
     return gUnk_02036010;
 }
 
-void func_0810B4A8(u8* p) {
+void func_0810B4A8(PcFldWork* work) {
     u16 zero;
 
     zero = 0;
-    *(u8*)(p + 0) = zero;
-    *(u16*)(p + 2) = zero;
-    *(u16*)(p + 4) = zero;
+    work->unk_000 = zero;
+    work->unk_002 = zero;
+    work->unk_004 = zero;
 }
 
-void func_0810B4B4(u8* p) {
+void func_0810B4B4(PcFldWork* work) {
     u16 t;
     u16 zero;
 
-    if (p[0] != 0) {
-        if (*(s16*)(p + 4) > gUnk_09A4CAC4[*(s16*)(p + 2)]) {
-            t = gUnk_09A4CABE[*(s16*)(p + 2)];
+    if (work->unk_000 != 0) {
+        if (work->unk_004 > gUnk_09A4CAC4[work->unk_002]) {
+            t = gUnk_09A4CABE[work->unk_002];
             zero = 0;
-            *(u16*)(p + 2) = t;
-            *(u16*)(p + 4) = zero;
+            work->unk_002 = t;
+            work->unk_004 = zero;
         }
-        *(u16*)(p + 4) += 1;
+        work->unk_004 += 1;
     }
 }
 
-void func_0810B4F4(u8* p) {
-    if (p[0] != 0) {
-        LoadPalette(gUnk_09D69374 + *(s16*)(p + 2) * 32, gUnk_05000080, 32);
+void func_0810B4F4(PcFldWork* work) {
+    if (work->unk_000 != 0) {
+        LoadPalette(gUnk_09D69374 + work->unk_002 * 32, gUnk_05000080, 32);
     }
 }
 
-void func_0810B51C(u8* p) {
-    *p = 0;
+void func_0810B51C(PcFldWork* work) {
+    work->unk_000 = 0;
 }
 
 void task_bos_pc_fld_0(PcFldWork* work, BattleBackgroundDef* arg) {
-    void* p;
+    Collider* p;
 
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
@@ -152,8 +154,8 @@ void task_bos_pc_fld_0(PcFldWork* work, BattleBackgroundDef* arg) {
     func_0802F1C8();
     func_0810B3E4();
     ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
-    func_0810B4A8((u8*)work);
-    func_0810B4B4((u8*)work);
+    func_0810B4A8(work);
+    func_0810B4B4(work);
     work->tiles = 0;
     work->palette = 0;
     p = &work->collider;
@@ -202,7 +204,7 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     gBtlWork->unk_004 += func_0802F268();
     gBtlWork->unk_004 += func_0810B49C();
     ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (gBtlWork->unk_004 >> 8) + 40);
-    func_0810B4B4((u8*)work);
+    func_0810B4B4(work);
     return 1;
 }
 
@@ -214,7 +216,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
     u32 y;
     s32 z;
 
-    func_0810B4F4((u8*)work);
+    func_0810B4F4(work);
     pos = gBtlWork->actor;
     if (pos->z >= -0x100) {
         if ((pos->flags & 0x80) == 0) {
@@ -224,8 +226,8 @@ void task_bos_pc_fld_2(PcFldWork* work) {
                     y = 0x14800;
                     z = -0x800;
                     WorldToScreen(&sx, &sy, x, y, z);
-                    DrawSprite(sx, sy, gUnk_09EFBEB8, (void*)work->tiles,
-                        (void*)work->palette, 0, GetBattleSpritePriorityFlags(y),
+                    DrawSprite(sx, sy, gUnk_09EFBEB8, work->tiles,
+                        work->palette, 0, GetBattleSpritePriorityFlags(y),
                         (u16)(-0x1004 - (s32)(y >> 6)));
                 }
             }
@@ -234,14 +236,14 @@ void task_bos_pc_fld_2(PcFldWork* work) {
 }
 
 void task_bos_pc_fld_3(PcFldWork* work) {
-    func_0810B51C((u8*)work);
+    func_0810B51C(work);
     ColliderUnregister(&work->collider);
 
     if (work->tiles != 0) {
-        ReleaseObjTiles((void*)work->tiles);
+        ReleaseObjTiles(work->tiles);
     }
 
     if (work->palette != 0) {
-        ReleaseObjPalette((void*)work->palette);
+        ReleaseObjPalette(work->palette);
     }
 }

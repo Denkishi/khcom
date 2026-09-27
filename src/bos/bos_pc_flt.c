@@ -60,7 +60,7 @@ TaskDesc gTaskDescBosPcFlt = {
     (TaskUpdateFunc)task_bos_pc_flt_1,
     (TaskFunc)task_bos_pc_flt_2,
     (TaskFunc)task_bos_pc_flt_3,
-    0xB4,
+    sizeof(PcFltWork),
 };
 
 s32 func_0810B7D8(s32 x) {
@@ -71,30 +71,30 @@ s32 func_0810B7E0(s32 x) {
     return x * x;
 }
 
-void func_0810B7E8(void** p, s32* a, s32* b, s32* c) {
+void func_0810B7E8(Task* task, s32* a, s32* b, s32* c) {
     PcFltWork* work;
 
-    work = (PcFltWork*)p[1];
+    work = task->work;
     *a = work->x;
     *b = work->y;
     *c = work->z;
 }
 
-u8 func_0810B800(void** p) {
+u8 func_0810B800(Task* task) {
     PcFltWork* work;
 
-    work = (PcFltWork*)p[1];
+    work = task->work;
     if (work->unk_005 == 8 && AnimGetGfxIndex(&work->anim) == 0) {
         return 1;
     }
     return 0;
 }
 
-u8 func_0810B824(void** p) {
+u8 func_0810B824(Task* task) {
     PcFltWork* work;
     u8 r;
 
-    work = (PcFltWork*)p[1];
+    work = task->work;
     r = 0;
     if (func_0801BCA8(&work->collider) == 1) {
         r = 1;
@@ -106,7 +106,7 @@ void func_0810B844(PcFltWork* work) {
     AnimState* anim;
 
     work->z = work->unk_024;
-    if (work->pos->unk_02 == 0) {
+    if (work->shared->unk_02 == 0) {
         if (func_0801BCA8(&work->collider) == 1) {
             work->z += 0x200;
             if (work->unk_000 != 1) {
@@ -167,7 +167,7 @@ void func_0810B95C(PcFltWork* work) {
     work->z = work->unk_024 + 0x1000;
     work->timer -= 1;
     if (work->timer < 0) {
-        if (work->pos->unk_02 == 0) {
+        if (work->shared->unk_02 == 0) {
             work->unk_005 = 4;
             work->timer = 0;
             AnimChange(&work->anim, 4, 0);
@@ -206,7 +206,7 @@ void func_0810B9DC(PcFltWork* work) {
 
 void func_0810BA14(PcFltWork* work) {
     work->z = work->unk_024;
-    if (work->pos->unk_02 == 0) {
+    if (work->shared->unk_02 == 0) {
         work->unk_005 = 7;
         work->timer = 0;
         AnimChange(&work->anim, 6, 0);
@@ -244,7 +244,7 @@ void func_0810BA74(PcFltWork* work) {
                 work->timer = 1;
             }
         }
-    } else if (work->pos->z <= 119) {
+    } else if (work->shared->unk_0C <= 119) {
         work->unk_005 = 3;
         work->unk_000 = 0;
         work->timer = work->unk_004 * 30;
@@ -255,18 +255,18 @@ void func_0810BAE4(PcFltWork* work) {
     s32 f;
 
     if ((gBtlWork->flags & 0x20000000) || (gBtlWork->flags & 0x40) ||
-        work->pos->y > 0) {
+        work->shared->unk_08 > 0) {
         f = -1;
     } else {
         f = work->unk_007;
     }
-    if (work->unk_005 != 8 && work->pos->z > 0x257) {
+    if (work->unk_005 != 8 && work->shared->unk_0C > 0x257) {
         work->unk_005 = 8;
         work->unk_000 = 0;
         work->timer = 0;
         work->unk_018 = 360;
     }
-    if (work->pos->unk_02 == 0) {
+    if (work->shared->unk_02 == 0) {
         if (work->unk_00C > 0xF400) {
             work->unk_00C -= 32;
         }
@@ -296,7 +296,7 @@ void func_0810BAE4(PcFltWork* work) {
     if (f >= 0) {
         work->x = (((gUnk_09A4CCDC[work->unk_008 >> 8] * (work->unk_014 >> 8)) >> 8) + (work->unk_00C >> 8)) << 8;
         work->y = (((gUnk_09A4CADC[work->unk_008 >> 8] * (work->unk_016 >> 8)) >> 8) + (work->unk_010 >> 8)) << 8;
-        work->unk_008 = work->unk_008 - (((work->pos->unk_00 * 3) << 4) / 256 - 112);
+        work->unk_008 = work->unk_008 - (((work->shared->unk_00 * 3) << 4) / 256 - 112);
     }
     switch (work->unk_005) {
     case 0:
@@ -333,7 +333,7 @@ void func_0810BAE4(PcFltWork* work) {
 }
 
 void func_0810BCD4(PcFltWork* work) {
-    void* p;
+    Collider* p;
 
     p = &work->collider;
     ColliderSetPosition(p, work->x, work->y + 0x200, 0);
@@ -348,8 +348,8 @@ void func_0810BCD4(PcFltWork* work) {
 void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     AnimState* anim;
 
-    work->tiles = (u32)LoadObjTiles(gUnk_09CB8F54, 0xDC0);
-    work->palette = (u32)LoadObjPalette(gUnk_09D693D4, 0x60);
+    work->tiles = LoadObjTiles(gUnk_09CB8F54, 0xDC0);
+    work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     anim = &work->anim;
     AnimInit(anim, gUnk_09EFBBEC, gUnk_09EFBBBC);
     AnimStart(anim, 1, 0);
@@ -369,7 +369,7 @@ void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     work->unk_01C = arg->unk_04;
     work->unk_020 = arg->unk_08;
     work->unk_024 = arg->unk_0C;
-    work->pos = arg->unk_10;
+    work->shared = arg->shared;
     func_0810BAE4(work);
     func_0810BCD4(work);
 }
@@ -389,7 +389,7 @@ u8 task_bos_pc_flt_1(PcFltWork* work) {
         ColliderSetRadius(&work->collider, gUnk_09A4CEDC[id].unk_04);
     }
     func_0810BCD4(work);
-    work->unk_007 = work->pos->unk_00 & 1;
+    work->unk_007 = work->shared->unk_00 & 1;
     return 1;
 }
 
@@ -411,13 +411,13 @@ void task_bos_pc_flt_2(PcFltWork* work) {
             g = GetBattleSpritePriorityFlags(work->y);
             h = -0x1004 - ((work->y >> 8) << 2);
         }
-        DrawSprite(sx, sy, AnimGetGfx(&work->anim), (void*)work->tiles,
-                   (void*)work->palette, 0, g, h);
+        DrawSprite(sx, sy, AnimGetGfx(&work->anim), work->tiles,
+                   work->palette, 0, g, h);
     }
 }
 
 void task_bos_pc_flt_3(PcFltWork* work) {
     ColliderUnregister(&work->collider);
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }

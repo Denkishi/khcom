@@ -7,7 +7,7 @@ TaskDesc gTaskDescBosPcAcd = {
     (TaskUpdateFunc)task_bos_pc_acd_1,
     (TaskFunc)task_bos_pc_acd_2,
     (TaskFunc)task_bos_pc_acd_3,
-    0x38,
+    sizeof(PcAcdWork),
 };
 
 s32 func_0810BF14(s32 x) {
@@ -18,23 +18,25 @@ s32 func_0810BF1C(s32 x) {
     return x * x;
 }
 
-void func_0810BF24(u8** p, u8 v) {
-    p[1][24] = v;
+void func_0810BF24(Task* task, u8 v) {
+    PcAcdWork* work = task->work;
+
+    work->unk_018 = v;
 }
 
-void task_bos_pc_acd_0(PcAcdWork* work, void* arg) {
+void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     AnimState* anim;
 
     work->unk_000 = 0;
-    work->tiles = (u32)AllocObjTiles(0x300, gUnk_09C489E4);
-    work->palette = (u32)LoadObjPalette(gUnk_09D693D4, 0x60);
+    work->tiles = AllocObjTiles(0x300, gUnk_09C489E4);
+    work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     work->x = -1;
     work->y = -1;
     work->unk_014 = -1;
-    work->flt = arg;
+    work->shared = arg;
     anim = &work->anim;
     AnimInit(anim, gUnk_09EFABA4, gUnk_09EFAB68);
-    if (work->flt->unk_005 == 1) {
+    if (work->shared->unk_05 == 1) {
         work->unk_018 = 1;
         AnimStart(anim, 1, 0);
     } else {
@@ -47,8 +49,8 @@ u8 task_bos_pc_acd_1(PcAcdWork* work) {
     AnimState* anim;
     s32 v;
 
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)work->palette)->index + 17, 0);
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)work->palette)->index + 18, 0);
+    FadeSetPaletteExcluded(work->palette->index + 17, 0);
+    FadeSetPaletteExcluded(work->palette->index + 18, 0);
     anim = &work->anim;
     AnimUpdate(anim);
     if (gBtlWork->actor->z >= 0) {
@@ -72,9 +74,9 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     s16 sy;
     BtlWork** gp;
     BtlObj* pos;
-    PcFltWork* flt;
+    PcShared* shared;
     AnimState* anim;
-    u8* tbl;
+    void** tbl;
     s32 ofs;
     void* gfx;
     s32 ox;
@@ -85,24 +87,24 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     pos->flags &= ~0x2000000;
     ox = 0;
     oy = 0;
-    flt = work->flt;
-    if (flt->unk_005 == 1) {
+    shared = work->shared;
+    if (shared->unk_05 == 1) {
         ox = gEventState->unk_68 << 8;
         oy = gEventState->unk_6A << 8;
     }
     work->x = pos->x;
     work->y = pos->y - 0x400;
     work->unk_014 = 0;
-    if (flt->unk_004 == 1) {
-        tbl = (u8*)gUnk_09EFAB68;
-        ofs = (AnimGetGfxIndex(&work->anim) + 5) * 4;
-        gfx = *(void**)((u32)tbl + ofs);
+    if (shared->unk_04 == 1) {
+        tbl = gUnk_09EFAB68;
+        ofs = AnimGetGfxIndex(&work->anim) + 5;
+        gfx = tbl[ofs];
         if ((*gp)->actor->flags & 4) {
             WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
         } else {
             WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
         }
-        DrawSprite(sx, sy, gfx, (void*)work->tiles, (void*)work->palette, 0, GetBattleSpritePriorityFlags(work->y),
+        DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
                    (u16)((-0x1004 - ((work->y >> 8) << 2)) | 3));
     } else if (pos->z >= 0) {
         if (((*gp)->flags & 0x20000000) && ((*gp)->flags & 0x200000)) {
@@ -114,25 +116,25 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
             if ((*gp)->actor->flags & 0x80) {
                 return;
             }
-            tbl = (u8*)gUnk_09EFAB68;
-            ofs = (AnimGetGfxIndex(anim) + 5) * 4;
-            gfx = *(void**)((u32)tbl + ofs);
+            tbl = gUnk_09EFAB68;
+            ofs = AnimGetGfxIndex(anim) + 5;
+            gfx = tbl[ofs];
             if ((*gp)->actor->flags & 4) {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
             } else {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
             }
-            DrawSprite(sx, sy, gfx, (void*)work->tiles, (void*)work->palette, 0, GetBattleSpritePriorityFlags(work->y),
+            DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
                        (u16)((-0x1004 - ((work->y >> 8) << 2)) | 3));
         } else {
             WorldToScreen(&sx, &sy, work->x - ox, work->y - oy, 0);
-            DrawSprite(sx, sy, AnimGetGfx(anim), (void*)work->tiles, (void*)work->palette, 0, GetBattleSpritePriorityFlags((*gp)->actor->y),
+            DrawSprite(sx, sy, AnimGetGfx(anim), work->tiles, work->palette, 0, GetBattleSpritePriorityFlags((*gp)->actor->y),
                        (u16)(-0x1004 - (((*gp)->actor->y >> 8) << 2)));
         }
     }
 }
 
 void task_bos_pc_acd_3(PcAcdWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }

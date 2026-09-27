@@ -5163,7 +5163,7 @@ void func_08109F20(PcWork* work) {
     step = &work->animSteps[work->unk_032];
     if (step->unk_00 == 0) {
         if (work->unk_034 == 0) {
-            v = work->unk_2E8;
+            v = work->shared.unk_00;
             if (v < 0x20) {
                 work->unk_034 += step->unk_22 / 2;
             } else if (v < 0x40) {
@@ -5221,14 +5221,14 @@ void func_0810A018(PcWork* work) {
     ox = 0;
     oy = 0;
 
-    if (work->unk_2ED == 1) {
+    if (work->shared.unk_05 == 1) {
         ox = gEventState->unk_68;
         oy = gEventState->unk_6A;
     }
     gfx = work->palette;
 
     if (work->unk_018 == 0) {
-        if (func_0801CA00(&work->unk_054)) {
+        if (func_0801CA00(&work->body)) {
             gfx = work->palette2;
             work->unk_00A = 1;
         } else {
@@ -5353,8 +5353,8 @@ void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e) {
     arg.unk_04 = b;
     arg.unk_08 = c;
     arg.unk_0C = d;
-    arg.unk_10 = &work->unk_2E8;
-    work->unk_2D4[e] = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcFlt, &arg);
+    arg.shared = &work->shared;
+    work->flt[e] = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcFlt, &arg);
 }
 
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool) {
@@ -5362,22 +5362,22 @@ void CreateBosPcAcdTask(PcWork* work, TaskPool* pool) {
         gBtlWork->actor->x = 0xFE00;
         gBtlWork->actor->y = 0x15D00;
         gBtlWork->actor->z = 0;
-        work->unk_2E4 = TaskCreate(pool, &gTaskDescBosPcAcd, &work->unk_2E8);
+        work->acd = TaskCreate(pool, &gTaskDescBosPcAcd, &work->shared);
     } else {
-        work->unk_2E4 = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcAcd, &work->unk_2E8);
+        work->acd = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcAcd, &work->shared);
     }
 }
 
-void task_bos_pc_0(PcWork* work, s32 arg) {
+void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     s32 x;
     s32 y;
     s32 z;
-    void* p;
-    void* q;
+    BtlObj* p;
+    BtlObj* q;
     BtlWork* g;
     u16 zero;
 
-    work->unk_2D0 = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gUnk_09A3DF0C);
+    work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gUnk_09A3DF0C);
     work->state = 0;
     work->unk_002 = 0;
     work->unk_004 = 600;
@@ -5391,25 +5391,25 @@ void task_bos_pc_0(PcWork* work, s32 arg) {
     work->animSteps = 0;
     work->unk_030 = 0;
     work->unk_034 = 0;
-    work->unk_2E8 = 0;
-    work->unk_2EA = 0;
-    work->unk_2EB = 0;
-    work->unk_2EC = 0;
-    work->unk_2F0 = 0;
-    work->unk_2F4 = 0;
+    work->shared.unk_00 = 0;
+    work->shared.unk_02 = 0;
+    work->shared.unk_03 = 0;
+    work->shared.unk_04 = 0;
+    work->shared.unk_08 = 0;
+    work->shared.unk_0C = 0;
     work->unk_00A = 0;
     work->unk_00C = 0xFFFF;
     func_08109EF8(work, 0);
     func_08109F20(work);
     func_0810A444(work);
     func_0810A454(work);
-    p = &work->unk_054;
+    p = &work->body;
     func_0801B37C(p, &gUnk_09A3DEFC, work->unk_020, work->unk_024, work->unk_028);
-    work->unk_088 |= 0x400;
-    work->unk_088 |= 4;
-    q = &work->unk_164;
+    work->body.flags |= 0x400;
+    work->body.flags |= 4;
+    q = &work->body2;
     func_0801B37C(q, &gUnk_09A3DEFC, work->unk_020, work->unk_024, work->unk_028 - 0x1000);
-    work->unk_198 |= 4;
+    work->body2.flags |= 4;
     func_0801BDD4(q, p);
     ColliderInit(&work->collider, 8, 32, 56);
     LoadBgMap(1, gUnk_09D34A74, 0x1000);
@@ -5419,46 +5419,46 @@ void task_bos_pc_0(PcWork* work, s32 arg) {
     work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     func_0801C298(0, 1);
-    work->unk_2D4[0] = 0;
-    work->unk_2D4[1] = 0;
-    work->unk_2D4[2] = 0;
-    work->unk_2D4[3] = 0;
+    work->flt[0] = 0;
+    work->flt[1] = 0;
+    work->flt[2] = 0;
+    work->flt[3] = 0;
     zero = 0;
-    if (arg == 0) {
-        work->unk_2ED = 0;
+    if (pool == 0) {
+        work->shared.unk_05 = 0;
     } else {
         work->state = 7;
-        work->unk_2F4 = 0x34BC0;
-        work->unk_2EC = 1;
-        work->unk_2ED = 1;
+        work->shared.unk_0C = 0x34BC0;
+        work->shared.unk_04 = 1;
+        work->shared.unk_05 = 1;
         func_08109EF8(work, 12);
     }
-    if (arg < 0x2000000) {
+    if ((s32)pool < 0x2000000) {
         CreateBosPcFltTask(work, zero, 0xB800, 0x13800, -0x800, 0);
         CreateBosPcFltTask(work, zero, 0x11800, 0x13800, -0x800, 1);
         CreateBosPcFltTask(work, zero, 0xB000, 0x17000, -0x800, 2);
         CreateBosPcFltTask(work, zero, 0x11000, 0x17000, -0x800, 3);
     }
-    func_0810B7E8(work->unk_2D4[0], &x, &y, &z);
+    func_0810B7E8(work->flt[0], &x, &y, &z);
     SetBattleActorPosition(x, y, z - 0x400);
-    CreateBosPcAcdTask(work, (TaskPool*)arg);
+    CreateBosPcAcdTask(work, pool);
     g = gBtlWork;
-    g->unk_0CC = work->unk_058;
-    g->unk_0D0 = work->unk_05C;
-    g->unk_0D4 = work->unk_060;
+    g->unk_0CC = work->body.x;
+    g->unk_0D0 = work->body.y;
+    g->unk_0D4 = work->body.z;
     g->unk_0D8 = -10;
 }
 
 void func_0810A850(PcWork* work) {
     PcSpriteCmd* step;
     PcAnimStep* anim;
-    PcPos* p;
-    PcPos* q;
+    BtlObj* p;
+    BtlObj* q;
     s16 x;
     s16 y;
 
-    p = (PcPos*)&work->unk_054;
-    q = (PcPos*)&work->unk_164;
+    p = &work->body;
+    q = &work->body2;
     step = func_08109ECC(work);
     x = 0;
     y = 6;
@@ -5488,7 +5488,7 @@ void func_0810A850(PcWork* work) {
     }
 }
 
-u8 func_0810A914(PcWork* work, s32 arg) {
+u8 func_0810A914(PcWork* work, Task* task) {
     s32 u;
     s16 t;
 
@@ -5496,25 +5496,25 @@ u8 func_0810A914(PcWork* work, s32 arg) {
     work->unk_004 -= 1;
     if (work->unk_004 < 0) {
         if ((gBtlWork->flags & 0x20000000) == 0) {
-            func_0801BCD4(&work->unk_054);
-            u = work->unk_2E8;
+            func_0801BCD4(&work->body);
+            u = work->shared.unk_00;
             work->unk_004 = ((u >> 6) + 6) * 60;
         } else {
             work->unk_004 = 4;
         }
-    } else if (work->unk_004 % (work->unk_2E8 >> 4) == 0) {
+    } else if (work->unk_004 % (work->shared.unk_00 >> 4) == 0) {
         if (gBtlWork->flags & 0x20000000) {
-            t = (((s32)work->unk_2E8 * 5) >> 3) + 96;
+            t = (((s32)work->shared.unk_00 * 5) >> 3) + 96;
             if (GetRandom() >> 7 > t) {
-                func_0801BCD4(&work->unk_054);
+                func_0801BCD4(&work->body);
             }
         }
     }
     return 1;
 }
 
-u8 func_0810A9CC(PcWork* work, s32 arg) {
-    PcPos* p;
+u8 func_0810A9CC(PcWork* work, Task* task) {
+    BtlObj* p;
     PcAnimStep* anim;
     PcSpriteCmd* steps;
     s32 x;
@@ -5525,14 +5525,14 @@ u8 func_0810A9CC(PcWork* work, s32 arg) {
     s32 dx;
     s32 dy;
 
-    p = (PcPos*)&work->unk_054;
+    p = &work->body;
     if (work->unk_002 == 0) {
         x = gBtlWork->actor->x >> 8;
         y = gBtlWork->actor->y >> 8;
         if (x <= 0x109) {
             sel = (y >= 0x144 && y <= 0x162 && x > 175 && (GetRandom() & 0x300)) ? 8 : 7;
         } else {
-            if ((GetRandom() & 3) == 3 && work->unk_2EA == 0 && work->unk_2F4 <= 0) {
+            if ((GetRandom() & 3) == 3 && work->shared.unk_02 == 0 && work->shared.unk_0C <= 0) {
                 sel = 6;
             } else if (y > 0x161) {
                 sel = 10;
@@ -5546,7 +5546,7 @@ u8 func_0810A9CC(PcWork* work, s32 arg) {
         func_0801AF08(p);
         work->state = 0;
         work->unk_002 = 0;
-        func_0810A914(work, arg);
+        func_0810A914(work, task);
     } else {
         anim = func_08109EB0(work);
         if ((anim->unk_14 | anim->unk_16 | anim->unk_18) != 0) {
@@ -5578,8 +5578,8 @@ u8 func_0810A9CC(PcWork* work, s32 arg) {
             }
             break;
         case 3:
-            if (work->unk_2F4 <= 0) {
-                work->unk_2EA = 1;
+            if (work->shared.unk_0C <= 0) {
+                work->shared.unk_02 = 1;
             }
             break;
         case 4:
@@ -5607,7 +5607,7 @@ u8 func_0810A9CC(PcWork* work, s32 arg) {
             break;
         case 5:
             func_08109EB0(work);
-            if (func_08011F78(0xF8, work->unk_168 - 0x2000, work->unk_16C, work->unk_170, 20, 16, 24) != 0) {
+            if (func_08011F78(0xF8, work->body2.x - 0x2000, work->body2.y, work->body2.z, 20, 16, 24) != 0) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
             break;
@@ -5619,13 +5619,13 @@ u8 func_0810A9CC(PcWork* work, s32 arg) {
     return 1;
 }
 
-u8 func_0810ACB8(PcWork* work, s32 arg) {
-    void* p;
+u8 func_0810ACB8(PcWork* work, Task* task) {
+    BtlObj* p;
 
-    p = &work->unk_054;
+    p = &work->body;
     if (work->unk_002 == 0) {
-        work->unk_010 = *(s32*)((u8*)p + 40);
-        work->unk_014 = *(s32*)((u8*)p + 36);
+        work->unk_010 = p->unk_028;
+        work->unk_014 = p->unk_024;
     }
     work->unk_002 += 1;
     if (work->unk_002 > 15) {
@@ -5669,7 +5669,7 @@ u8 func_0810ACB8(PcWork* work, s32 arg) {
             case 59:
             case 62:
             case 65:
-                if (work->unk_2F4 <= 0) {
+                if (work->shared.unk_0C <= 0) {
                     if ((GetRandom() & 0x300) == 0x300) {
                         work->unk_008 = 1;
                         work->state = 5;
@@ -5688,10 +5688,10 @@ u8 func_0810ACB8(PcWork* work, s32 arg) {
     return 1;
 }
 
-u8 func_0810AE74(PcWork* work, s32 arg) {
-    void* p;
+u8 func_0810AE74(PcWork* work, Task* task) {
+    BtlObj* p;
 
-    p = &work->unk_054;
+    p = &work->body;
     func_08109EF8(work, work->unk_008);
     if (func_0810A424(work) != 0) {
         work->unk_004 = 180;
@@ -5712,13 +5712,13 @@ u8 func_0810AE74(PcWork* work, s32 arg) {
     return 1;
 }
 
-u8 func_0810AED4(PcWork* work, s32 arg) {
-    void* p;
+u8 func_0810AED4(PcWork* work, Task* task) {
+    BtlObj* p;
 
-    p = &work->unk_054;
-    work->unk_2F0 = 240;
+    p = &work->body;
+    work->shared.unk_08 = 240;
     if (gGameState.flags & 8) {
-        if (work->unk_2F4 <= 0) {
+        if (work->shared.unk_0C <= 0) {
             if (GetRandom() % 0xA01 > 0x800) {
                 _0801C1F8(0, work->unk_020, work->unk_024, work->unk_028);
             }
@@ -5731,14 +5731,14 @@ u8 func_0810AED4(PcWork* work, s32 arg) {
     return 1;
 }
 
-u8 func_0810AF44(PcWork* work, s32 arg) {
-    s32 args[8];
-    void* p;
+u8 func_0810AF44(PcWork* work, Task* task) {
+    PrizeCardArg args;
+    BtlObj* p;
     s16 s;
     s32 n;
     s32 i;
 
-    p = &work->unk_054;
+    p = &work->body;
     s = work->unk_002;
     switch (s) {
     case 0:
@@ -5746,10 +5746,10 @@ u8 func_0810AF44(PcWork* work, s32 arg) {
         ReleaseObjPalette(work->palette2);
         work->palette2 = 0;
         func_0801C2DC(p, 1);
-        func_0801C2DC(&work->unk_164, 1);
+        func_0801C2DC(&work->body2, 1);
         gBtlWork->flags |= 0x100000;
-        work->unk_2EB = 255;
-        work->unk_2F4 = 0x34BC0;
+        work->shared.unk_03 = 255;
+        work->shared.unk_0C = 0x34BC0;
         func_08109EF8(work, 11);
         m4aSongNumStart(SONG_EV_FLASH00);
         m4aSongNumStart(SONG_SND_717);
@@ -5758,20 +5758,20 @@ u8 func_0810AF44(PcWork* work, s32 arg) {
     case 1:
         n = 0;
         for (i = 0; i <= 3; i++) {
-            if (work->unk_2D4[i] == 0) {
+            if (work->flt[i] == 0) {
                 n++;
-            } else if (func_0810B800(work->unk_2D4[i]) == 1) {
-                func_08000DE8(&gBtlWork->taskPools[0], work->unk_2D4[i]);
-                work->unk_2D4[i] = 0;
+            } else if (func_0810B800(work->flt[i]) == 1) {
+                func_08000DE8(&gBtlWork->taskPools[0], work->flt[i]);
+                work->flt[i] = 0;
             }
         }
         if (n == 4) {
-            args[0] = 0x11400;
-            args[1] = 0x15300;
-            args[2] = -0x5C00;
-            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], args);
+            args.x = 0x11400;
+            args.y = 0x15300;
+            args.z = -0x5C00;
+            CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &args);
             func_0801B918(p);
-            func_0810B378(work->unk_2D0, 1);
+            func_0810B378(work->fld, 1);
             work->unk_002 += 1;
         }
         break;
@@ -5786,31 +5786,31 @@ u8 func_0810AF44(PcWork* work, s32 arg) {
     return 1;
 }
 
-u8 task_bos_pc_1(PcWork* work, s32 arg) {
-    PcPos* p;
+u8 task_bos_pc_1(PcWork* work, Task* task) {
+    BtlObj* p;
     BtlObj* pos;
     BtlWork* g;
     u8 r;
 
-    p = (PcPos*)&work->unk_054;
+    p = &work->body;
     r = 1;
     func_08109F20(work);
     func_0810A454(work);
     if (func_0801C1C0(0) == 1) {
-        work->unk_2EA = 0;
-        work->unk_2F4 = 0x259;
+        work->shared.unk_02 = 0;
+        work->shared.unk_0C = 0x259;
     }
-    if (work->unk_2F0 > 0) {
-        work->unk_2F0 -= 1;
+    if (work->shared.unk_08 > 0) {
+        work->shared.unk_08 -= 1;
     }
-    if (work->unk_2F4 > 0) {
-        func_0810BF24((u8**)work->unk_2E4, 1);
+    if (work->shared.unk_0C > 0) {
+        func_0810BF24(work->acd, 1);
         gBtlWork->flags |= 0x100000;
-        if (work->unk_2F4 < 0x34BBF) {
-            work->unk_2F4 -= 1;
+        if (work->shared.unk_0C < 0x34BBF) {
+            work->shared.unk_0C -= 1;
         }
     } else {
-        func_0810BF24((u8**)work->unk_2E4, 0);
+        func_0810BF24(work->acd, 0);
         gBtlWork->flags &= ~0x100000;
     }
     pos = gBtlWork->actor;
@@ -5829,7 +5829,7 @@ u8 task_bos_pc_1(PcWork* work, s32 arg) {
     case 7:
         if (work->state == 5) {
             work->unk_006 = 16;
-            if (work->unk_2F4 <= 0) {
+            if (work->shared.unk_0C <= 0) {
                 if (GetRandom() & 0x300) {
                     _0801C1F8(0, work->unk_020, work->unk_024, work->unk_028);
                 }
@@ -5850,22 +5850,22 @@ u8 task_bos_pc_1(PcWork* work, s32 arg) {
     }
     switch (work->state) {
     case 0:
-        r = func_0810A914(work, arg);
+        r = func_0810A914(work, task);
         break;
     case 1:
-        r = func_0810A9CC(work, arg);
+        r = func_0810A9CC(work, task);
         break;
     case 3:
-        r = func_0810ACB8(work, arg);
+        r = func_0810ACB8(work, task);
         break;
     case 5:
-        r = func_0810AE74(work, arg);
+        r = func_0810AE74(work, task);
         break;
     case 2:
-        r = func_0810AED4(work, arg);
+        r = func_0810AED4(work, task);
         break;
     case 4:
-        r = func_0810AF44(work, arg);
+        r = func_0810AF44(work, task);
         break;
     case 6:
     case 7:
@@ -5873,13 +5873,13 @@ u8 task_bos_pc_1(PcWork* work, s32 arg) {
         break;
     }
     func_0810A850(work);
-    ColliderSetPosition(p->collider, p->x, p->y, p->z);
-    ColliderSetPosition(&work->collider, work->unk_168, work->unk_16C, work->unk_028 + 0x800);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
+    ColliderSetPosition(&work->collider, work->body2.x, work->body2.y, work->unk_028 + 0x800);
     g = gBtlWork;
     g->unk_0CC = p->x;
     g->unk_0D0 = p->y;
     g->unk_0D4 = p->z;
-    work->unk_2E8 = (work->unk_080 << 8) / work->unk_082;
+    work->shared.unk_00 = (work->body.unk_02C << 8) / work->body.unk_02E;
     return r;
 }
 
@@ -5889,8 +5889,8 @@ void task_bos_pc_2(PcWork* work) {
 }
 
 void task_bos_pc_3(PcWork* work) {
-    func_0801B7D8(&work->unk_054);
-    func_0801B7D8(&work->unk_164);
+    func_0801B7D8(&work->body);
+    func_0801B7D8(&work->body2);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2[0]);

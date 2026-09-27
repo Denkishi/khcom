@@ -7,6 +7,8 @@
 
 #include "battle_actor_types.h"
 
+#include "prize_types.h"
+
 typedef struct PcAnimStep {
     u16 unk_00;
     u8 unk_02[0x2];
@@ -221,6 +223,17 @@ typedef struct PcPos {
     u16 unk_9C;
 } PcPos;
 
+typedef struct PcShared {
+    s16 unk_00;
+    u8 unk_02;
+    u8 unk_03;
+    u8 unk_04;
+    u8 unk_05;
+    u8 unk_06[0x2];
+    s32 unk_08;
+    s32 unk_0C;
+} PcShared;
+
 typedef struct PcOam {
     u16 count;
     u16 attr[0x95];
@@ -257,38 +270,13 @@ typedef struct PcWork {
     void* tiles2[2];
     void* palette;
     void* palette2;
-    u32 unk_054;
-    u32 unk_058;
-    u32 unk_05C;
-    u32 unk_060;
-    u8 unk_064[0x1C];
-    s16 unk_080;
-    s16 unk_082;
-    u8 unk_084[0x4];
-    u64 unk_088;
-    u8 unk_090[0x4];
-    u32 unk_094;
-    u8 unk_098[0xCC];
-    u32 unk_164;
-    u32 unk_168;
-    u32 unk_16C;
-    s32 unk_170;
-    u8 unk_174[0x24];
-    u64 unk_198;
-    u8 unk_1A0[0xD4];
-    u32 collider;
-    u8 unk_278[0x58];
-    void** unk_2D0;
-    void* unk_2D4[4];
-    void* unk_2E4;
-    s16 unk_2E8;
-    u8 unk_2EA;
-    u8 unk_2EB;
-    u8 unk_2EC;
-    u8 unk_2ED;
-    u8 unk_2EE[0x2];
-    s32 unk_2F0;
-    s32 unk_2F4;
+    BtlObj body;
+    BtlObj body2;
+    Collider collider;
+    Task* fld;
+    Task* flt[4];
+    Task* acd;
+    PcShared shared;
     u8 unk_2F8[0x4];
     PcOam oam[24];
 } PcWork;
@@ -300,14 +288,14 @@ u16 func_0810A000(PcWork* work, s32 a, s32 b);
 
 typedef struct PcAcdWork {
     u32 unk_000;
-    u32 tiles;
-    u32 palette;
+    ObjTiles* tiles;
+    ObjPalette* palette;
     s32 x;
     s32 y;
     s32 unk_014;
     u8 unk_018;
     u8 unk_019[0x3];
-    struct PcFltWork* flt;
+    PcShared* shared;
     AnimState anim;
 } PcAcdWork;
 
@@ -332,21 +320,22 @@ typedef struct PcFltWork {
     s32 x;
     s32 y;
     s32 z;
-    u32 tiles;
-    u32 palette;
-    PcPos* pos;
-    u32 collider;
-    u8 unk_044[0x58];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    PcShared* shared;
+    Collider collider;
     AnimState anim;
 } PcFltWork;
 
 typedef struct PcFldWork {
-    u32 unk_000;
-    u8 unk_004[0x4];
-    u32 tiles;
-    u32 palette;
-    u32 collider;
-    u8 unk_014[0x58];
+    u8 unk_000;
+    u8 unk_001;
+    s16 unk_002;
+    s16 unk_004;
+    u8 unk_006[0x2];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    Collider collider;
 } PcFldWork;
 
 typedef struct LstTask {
@@ -487,16 +476,16 @@ void func_0810A018(PcWork* work);
 void func_0810A498(PcWork* work);
 
 s32 func_0810B49C(void);
-void func_0810B4A8(u8* p);
-void func_0810B51C(u8* p);
-void func_0810BF24(u8** p, u8 v);
+void func_0810B4A8(PcFldWork* work);
+void func_0810B51C(PcFldWork* work);
+void func_0810BF24(Task* task, u8 v);
 void func_0810C2CC(BosLstWork* work, u16 a, u16 b);
 void func_0810C2E0(BosLstWork* work);
 void task_bos_pc_2(PcWork* work);
 void task_bos_pc_acd_3(PcAcdWork* work);
 void task_bos_pc_flt_3(PcFltWork* work);
 void task_bos_pc_fld_3(PcFldWork* work);
-void func_0810B4F4(u8* p);
+void func_0810B4F4(PcFldWork* work);
 s32 func_0810B7D8(s32 x);
 s32 func_0810B7E0(s32 x);
 s32 func_0810BF14(s32 x);
@@ -504,13 +493,13 @@ s32 func_0810BF1C(s32 x);
 s32 func_0810C2B4(s32 x);
 s32 func_0810C2BC(s32 x);
 
-void func_0810B370(u8** p, u8 v);
+void func_0810B370(Task* task, u8 v);
 
 void func_08109EF8(PcWork* work, s32 a);
 void func_08109F20(PcWork* work);
-u8 func_0810B800(void** p);
-u8 func_0810B824(void** p);
-void func_0810B7E8(void** p, s32* a, s32* b, s32* c);
+u8 func_0810B800(Task* task);
+u8 func_0810B824(Task* task);
+void func_0810B7E8(Task* task, s32* a, s32* b, s32* c);
 
 void func_0810C2F8(BosLstWork* work);
 s16 func_0810C630(BosLstWork* work);
@@ -521,7 +510,7 @@ void func_0810D478(BosLstWork* work);
 void func_0810B3E4(void);
 void func_0810B40C(s16 a);
 void func_0810B434(void);
-void func_0810B4B4(u8* p);
+void func_0810B4B4(PcFldWork* work);
 
 void func_0810B930(PcFltWork* work);
 void func_0810B9A8(PcFltWork* work);
@@ -548,7 +537,7 @@ extern u8 gUnk_05000220[];
 void func_0810A4C4(PcWork* work);
 void func_0810C494(BosLstWork* work, u16 a, u16 b, u8 c);
 
-void func_0810B378(void** p, u8 a);
+void func_0810B378(Task* task, u8 a);
 u8 func_0810E950(BosLstWork* work);
 u8 func_0810E984(BosLstWork* work);
 void func_0810D4B0(BosLstWork* work);
@@ -556,12 +545,12 @@ void func_0810D4B0(BosLstWork* work);
 u8 func_0810A424(PcWork* work);
 
 s32 func_0810CC14(s32 a, s32 b, s32 c, s32 d, s32 e);
-u8 func_0810AE74(PcWork* work, s32 arg);
+u8 func_0810AE74(PcWork* work, Task* task);
 u8 func_0810D304(BosLstWork* work, s32 idx);
 
 extern const s32 gUnk_09A4D154[16];
 
-u8 func_0810AED4(PcWork* work, s32 arg);
+u8 func_0810AED4(PcWork* work, Task* task);
 void func_0810C754(BosLstWork* work);
 void func_0810C7C4(BosLstWork* work);
 void func_0810CC68(BosLstWork* work);
@@ -585,9 +574,9 @@ extern u8 gUnk_09C489E4[];
 
 PcAnimStep* func_08109EB0(PcWork* work);
 void func_0810A454(PcWork* work);
-u8 func_0810A9CC(PcWork* work, s32 arg);
-u8 task_bos_pc_1(PcWork* work, s32 arg);
-void task_bos_pc_0(PcWork* work, s32 arg);
+u8 func_0810A9CC(PcWork* work, Task* task);
+u8 task_bos_pc_1(PcWork* work, Task* task);
+void task_bos_pc_0(PcWork* work, TaskPool* pool);
 void func_0810A444(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
@@ -639,7 +628,7 @@ extern const LstAnimDef gLstAnimDefs[8];
 PcSpriteCmd* func_08109ECC(PcWork* work);
 
 void func_0810A850(PcWork* work);
-void task_bos_pc_acd_0(PcAcdWork* work, void* arg);
+void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg);
 u8 task_bos_pc_acd_1(PcAcdWork* work);
 void task_bos_lst_3(BosLstWork* work);
 
@@ -650,7 +639,7 @@ typedef struct PcFltInit {
     u32 unk_04;
     u32 unk_08;
     u32 unk_0C;
-    void* unk_10;
+    PcShared* shared;
 } PcFltInit;
 
 void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg);
@@ -676,12 +665,12 @@ u8 func_0810E32C(BosLstWork* work);
 u8 func_0810E524(BosLstWork* work);
 u8 func_0810E73C(BosLstWork* work);
 
-u8 func_0810A914(PcWork* work, s32 arg);
+u8 func_0810A914(PcWork* work, Task* task);
 void func_0810B844(PcFltWork* work);
 
 u8 func_0810C32C(BosLstWork* work, s32 a);
 
-u8 func_0810AF44(PcWork* work, s32 arg);
+u8 func_0810AF44(PcWork* work, Task* task);
 
 typedef struct LstSpawn {
     s32 unk_00;
@@ -694,7 +683,7 @@ typedef struct LstSpawn {
     void* unk_14;
 } LstSpawn;
 
-u8 func_0810ACB8(PcWork* work, s32 arg);
+u8 func_0810ACB8(PcWork* work, Task* task);
 
 extern const s16 gUnk_09A4CCDC[256];
 extern const s16 gUnk_09A4CADC[256];

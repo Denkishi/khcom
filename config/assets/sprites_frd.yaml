@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_frd.c
-    start: 0x09EDE4F0
-    end: 0x09EDE688
   - name: sprites_frd_frames.s
     start: 0x0886AD30
     end: 0x08885B78
+    data_start: 0x09EDE4F0
+    data_end: 0x09EDE688
   jp:
-  - name: sprites_frd.c
-    start: 0x09EB5F6C
-    end: 0x09EB6104
   - name: sprites_frd_frames.s
     start: 0x0885E318
     end: 0x08879160
+    data_start: 0x09EB5F6C
+    data_end: 0x09EB6104
   eu:
-  - name: sprites_frd.c
-    start: 0x09F59148
-    end: 0x09F592E0
   - name: sprites_frd_frames.s
     start: 0x08896654
     end: 0x088B149C
+    data_start: 0x09F59148
+    data_end: 0x09F592E0
 entries:
 - name: gGoofy05Frames
   record: SpriteTable

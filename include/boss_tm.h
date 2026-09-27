@@ -7,6 +7,16 @@
 #include "taskpool.h"
 #include "obj.h"
 
+typedef struct TmArmSrc {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    s32 unk_0C;
+    s32 unk_10;
+    s32 unk_14;
+    struct TmWork* tm;
+} TmArmSrc;
+
 typedef struct TmWork {
     u16 x;
     u16 y;
@@ -35,13 +45,7 @@ typedef struct TmWork {
     u16 unk_42;
     u16 unk_44;
     u8 unk_46[0x2];
-    s32 unk_48;
-    s32 unk_4C;
-    s32 unk_50;
-    s32 unk_54;
-    s32 unk_58;
-    s32 unk_5C;
-    struct TmWork* unk_60;
+    TmArmSrc arm;
 } TmWork;
 
 typedef struct TmBodyWork {
@@ -140,21 +144,6 @@ typedef struct TmClbWork {
     s32 z;
 } TmClbWork;
 
-typedef struct TmArmState {
-    u8 unk_00[0x8];
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10[0x18];
-    u16 flags;
-    u8 unk_2A[0x2];
-    s32 unk_2C;
-    u8 unk_30[0xA];
-    u8 unk_3A;
-    u8 unk_3B;
-    u8 unk_3C[6];
-    u16 tileCount;
-} TmArmState;
-
 typedef struct TmAnimFrame {
     s16 unk_00;
     u8 unk_02[0x2];
@@ -168,16 +157,6 @@ typedef struct TmAnim {
     u8 unk_06[0x2];
     const TmAnimFrame* frames;
 } TmAnim;
-
-typedef struct TmArmSrc {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s32 unk_14;
-    TmArmState* state;
-} TmArmSrc;
 
 typedef struct TmArmJoint {
     s32 unk_00;

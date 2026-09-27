@@ -25,19 +25,19 @@ static TaskPool gBosTmTaskPool;
 
 void func_080B7E68(TmWork* w) {
     if (w->flags & 0x20) {
-        w->unk_48 = w->x2 + 0x1000;
-        w->unk_54 = w->x2 - 0x700;
-        w->unk_4C = w->y2 + 0x700;
-        w->unk_58 = w->y2 - 0x400;
-        w->unk_50 = w->z2 - 0x2200;
-        w->unk_5C = w->z2 - 0x1C00;
+        w->arm.unk_00 = w->x2 + 0x1000;
+        w->arm.unk_0C = w->x2 - 0x700;
+        w->arm.unk_04 = w->y2 + 0x700;
+        w->arm.unk_10 = w->y2 - 0x400;
+        w->arm.unk_08 = w->z2 - 0x2200;
+        w->arm.unk_14 = w->z2 - 0x1C00;
     } else {
-        w->unk_48 = w->x2 + 0x700;
-        w->unk_54 = w->x2 - 0xE00;
-        w->unk_4C = w->y2 - 0x400;
-        w->unk_58 = w->y2 + 0x700;
-        w->unk_50 = w->z2 - 0x1C00;
-        w->unk_5C = w->z2 - 0x2200;
+        w->arm.unk_00 = w->x2 + 0x700;
+        w->arm.unk_0C = w->x2 - 0xE00;
+        w->arm.unk_04 = w->y2 - 0x400;
+        w->arm.unk_10 = w->y2 + 0x700;
+        w->arm.unk_08 = w->z2 - 0x1C00;
+        w->arm.unk_14 = w->z2 - 0x2200;
     }
 }
 
@@ -81,21 +81,21 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     w->unk_40 = 0;
     w->unk_42 = 0;
     w->unk_44 = 0;
-    w->unk_60 = w;
+    w->arm.tm = w;
     func_080B7E68(w);
 
     if (w->flags & 8) {
         w->unk_2C = 15;
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->unk_48);
+        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
     } else {
         w->unk_2C = 0;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&gUnk_09619C68);
         gBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->unk_48);
+        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
         gBtlWork->unk_0D8 = 10;
     }
 }

@@ -55,24 +55,13 @@ objects:
 entries:
 - name: gUnk_09EEAFD4
   record: SpriteTable
-  scalar: true
-  items: [gUnk_090A1F88]
+  items: [gUnk_090A1F88, gUnk_090A1F98]
   us:
     address: 0x09EEAFD4
   jp:
     address: 0x09EC23C8
   eu:
     address: 0x09F77044
-- name: gUnk_09EEAFD8
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090A1F98]
-  us:
-    address: 0x09EEAFD8
-  jp:
-    address: 0x09EC23CC
-  eu:
-    address: 0x09F77048
 - name: gUnkUs_09EEAFDC
   record: AnimTable
   scalar: true
@@ -198,16 +187,9 @@ entries:
     symbol: gUnkEu_09F77124
 - name: gUnkEu_09F77070
   record: SpriteTable
-  scalar: true
-  items: [gUnk_090A44B0]
+  items: [gUnk_090A44B0, gUnkEu_09189F1C]
   eu:
     address: 0x09F77070
-- name: gUnkEu_09F77074
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_09189F1C]
-  eu:
-    address: 0x09F77074
 - name: gUnkEu_09F77078
   record: AnimTable
   scalar: true
@@ -216,16 +198,9 @@ entries:
     address: 0x09F77078
 - name: gUnkEu_09F7707C
   record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A1B8]
+  items: [gUnkEu_0918A1B8, gUnkEu_0918A1C8]
   eu:
     address: 0x09F7707C
-- name: gUnkEu_09F77080
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A1C8]
-  eu:
-    address: 0x09F77080
 - name: gUnkEu_09F77084
   record: AnimTable
   scalar: true
@@ -234,16 +209,9 @@ entries:
     address: 0x09F77084
 - name: gUnkEu_09F77088
   record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A464]
+  items: [gUnkEu_0918A464, gUnkEu_0918A474]
   eu:
     address: 0x09F77088
-- name: gUnkEu_09F7708C
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A474]
-  eu:
-    address: 0x09F7708C
 - name: gUnkEu_09F77090
   record: AnimTable
   scalar: true
@@ -252,16 +220,9 @@ entries:
     address: 0x09F77090
 - name: gUnkEu_09F77094
   record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A710]
+  items: [gUnkEu_0918A710, gUnkEu_0918A720]
   eu:
     address: 0x09F77094
-- name: gUnkEu_09F77098
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_0918A720]
-  eu:
-    address: 0x09F77098
 - name: gUnkEu_09F7709C
   record: AnimTable
   scalar: true

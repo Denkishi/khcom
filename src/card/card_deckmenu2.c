@@ -1088,8 +1088,8 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->gfx7 = gUnkEu_09F6FDA0[gLanguage][0];
     w->gfx8 = gUnkEu_09F6FDA0[gLanguage][1];
 #else
-    w->gfx7 = *(void**)&gUnk_09EEAFD4;
-    w->gfx8 = *((void**)&gUnk_09EEAFD4 + 1);
+    w->gfx7 = gUnk_09EEAFD4[0];
+    w->gfx8 = gUnk_09EEAFD4[1];
 #endif
     w->tiles2 = AllocObjTiles(0x280, 0);
     func_0808E364(w, 0);
@@ -7012,7 +7012,7 @@ u16 gUnk_09EE4AE4[7] = { '_', '_', '_', '_', '_', '_', 0 };
 #ifdef VERSION_EU
 void* gUnkEu_09F6FD8C[5] = { gUnk_090A1FB2, gUnkEu_09189F36, gUnkEu_0918A73A, gUnkEu_0918A48E, gUnkEu_0918A1E2 };
 
-void** gUnkEu_09F6FDA0[5] = { &gUnk_09EEAFD4, &gUnkEu_09F77070, &gUnkEu_09F77094, &gUnkEu_09F77088, &gUnkEu_09F7707C };
+void** gUnkEu_09F6FDA0[5] = { gUnk_09EEAFD4, gUnkEu_09F77070, gUnkEu_09F77094, gUnkEu_09F77088, gUnkEu_09F7707C };
 
 void* gUnkEu_09F6FDB4[5] = { gUnk_090A261E, gUnkEu_0918B8F2, gUnkEu_0919016A, gUnkEu_0918E942, gUnkEu_0918D11A };
 

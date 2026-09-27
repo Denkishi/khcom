@@ -315,7 +315,6 @@ sprites_pooh_3.c
 sprites_allmap.c
 sprites_title.c
 sprites_evt_7.c
-sprites_bos4.c
 sprites_pooh_frames_1.s
 sprites_evt_frames_5.s
 sprites_pooh_frames_2.s

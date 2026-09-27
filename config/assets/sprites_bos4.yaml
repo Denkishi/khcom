@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_bos4.c
-    start: 0x09EF6774
-    end: 0x09EF68E0
   - name: sprites_bos4_frames.s
     start: 0x0979662C
     end: 0x097A1864
+    data_start: 0x09EF6774
+    data_end: 0x09EF68E0
   - name: sprites_bos4_tiles.s
     start: 0x097ED478
     end: 0x097FFB98
@@ -27,12 +26,11 @@ objects:
     start: 0x09843798
     end: 0x09847798
   jp:
-  - name: sprites_bos4.c
-    start: 0x09ECDB60
-    end: 0x09ECDCCC
   - name: sprites_bos4_frames.s
     start: 0x09750AC0
     end: 0x0975BCF8
+    data_start: 0x09ECDB60
+    data_end: 0x09ECDCCC
   - name: sprites_bos4_tiles.s
     start: 0x097A790C
     end: 0x097BA02C
@@ -40,12 +38,11 @@ objects:
     start: 0x097F8C6C
     end: 0x097FCC6C
   eu:
-  - name: sprites_bos4.c
-    start: 0x09F81D5C
-    end: 0x09F81EC8
   - name: sprites_bos4_frames.s
     start: 0x09772840
     end: 0x0977DA78
+    data_start: 0x09F81D5C
+    data_end: 0x09F81EC8
   - name: sprites_bos4_tiles.s
     start: 0x097C3B80
     end: 0x097D62A0

@@ -39,10 +39,10 @@
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_msg.h"
+#include "evt.h"
 
-extern u8* gEventState;
-u8 func_080A2024(u8* work, void* a);
-void func_080A1E4C(u8* work);
+u8 func_080A2024(EventBgEffectWork* w, void* a);
+void func_080A1E4C(EventBgEffectWork* w);
 
 const EventBgEffectDef gUnk_0903803C = {
     &gUnk_09EE7998[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x20, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,
@@ -149,7 +149,7 @@ const EventBgEffectDef gUnk_090381CC = {
 };
 
 void func_080A1DAC(EventBgEffectWork* w) {
-    EventBgEffectEntry* e;
+    const EventBgEffectEntry* e;
     const EventBgEffectDef* d;
 
     e = &w->entries[w->unk_14];
@@ -158,30 +158,30 @@ void func_080A1DAC(EventBgEffectWork* w) {
     LoadBgTiles(0, d->tiles, d->tilesSize);
     LoadBgPalette(0, d->palette, d->paletteSize);
     LoadBgMap(0, d->maps[0], 0x800);
-    SetBgScroll(0, (u16)((*(s32*)&gEventState[0x58] >> 8) - (e->unk_04 >> 8)), (u16)((*(s32*)&gEventState[0x5C] >> 8) - (e->unk_08 >> 8)));
+    SetBgScroll(0, (u16)((gEventState->x >> 8) - (e->unk_04 >> 8)), (u16)((gEventState->y >> 8) - (e->unk_08 >> 8)));
 
     if (d->frames != 0) {
         w->unk_15 = 1;
     }
 
     SetBgBlend(0, 16, 16);
-    gEventState[0x80] = 1;
+    gEventState->unk_80 = 1;
     w->unk_0E = w->unk_0C = w->unk_16 = 0;
 }
 
-void func_080A1E4C(u8* work) {
+void func_080A1E4C(EventBgEffectWork* w) {
     LoadBgTiles(0, gUnk_094233B8, 1280);
     LoadBgPalette(0, gUnk_096148D8, 32);
     LoadBgMap(0, gUnk_08125E24, 2048);
 }
 
-void func_080A1E80(u8* work) {
-    u8* p;
+void func_080A1E80(EventBgEffectWork* w) {
+    const EventBgEffectEntry* p;
     u16 v;
     u8 i;
 
     v = 16;
-    p = *(u8**)&work[0] + work[0x14] * 16;
+    p = &w->entries[w->unk_14];
 
     for (i = 16; i <= 31; i++) {
         FadeSetPaletteExcluded(i, 1);
@@ -189,49 +189,49 @@ void func_080A1E80(u8* work) {
 
     FadeSetPaletteExcluded(14, 1);
 
-    if (*(s32*)&p[4] > 0) {
-        v = *(s32*)&p[4];
+    if (p->unk_04 > 0) {
+        v = p->unk_04;
     }
 
-    if (*(u16*)&p[0xC] & 0x10) {
+    if (*(u16*)p->flags & 0x10) {
         FadeStartOut(0, v);
     } else {
         FadeToAmount(0, 16, v);
     }
 }
 
-void func_080A1ED8(u8* work) {
-    u8* t;
+void func_080A1ED8(EventBgEffectWork* w) {
+    const EventBgEffectEntry* t;
     u16 v;
 
     v = 16;
-    t = *(u8**)&work[0x00] + work[0x14] * 16;
+    t = &w->entries[w->unk_14];
     FadeSetPaletteExcluded(14, 1);
 
-    if (*(s32*)&t[4] > 0) {
-        v = *(s32*)&t[4];
+    if (t->unk_04 > 0) {
+        v = t->unk_04;
     }
 
-    if (*(u16*)&t[12] & 0x10) {
+    if (*(u16*)t->flags & 0x10) {
         FadeStartIn(0, v);
     } else {
         FadeToOriginal(0, v);
     }
 }
-void EV_BG_EFFECT_0(u8* a, u8* b) {
+void EV_BG_EFFECT_0(EventBgEffectWork* w, u8* b) {
     u8 t;
     u8 z;
 
     t = b[0];
     z = 0;
-    a[19] = t;
-    a[20] = z;
-    a[21] = z;
-    *(void**)&a[0] = gUnk_09EE3FB4[a[19]]->bgEffects;
+    w->unk_13 = t;
+    w->unk_14 = z;
+    w->unk_15 = z;
+    w->entries = gUnk_09EE3FB4[w->unk_13]->bgEffects;
 }
 u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
-    EventBgEffectEntry* e;
-    EventBgEffectEntry* cur;
+    const EventBgEffectEntry* e;
+    const EventBgEffectEntry* cur;
     u8 i;
 
     e = w->entries;
@@ -240,7 +240,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
         return 0;
     }
 
-    if (*(u16*)e[w->unk_14].unk_00 <= *(u16*)&gEventState[0x6C] && !(*(u16*)e[w->unk_14].flags & 0x8000)) {
+    if (*(u16*)e[w->unk_14].unk_00 <= gEventState->unk_6C && !(*(u16*)e[w->unk_14].flags & 0x8000)) {
         w->unk_14++;
         cur = &e[w->unk_14];
 
@@ -253,19 +253,19 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
         }
 
         if (*(u16*)cur->flags & 4) {
-            func_080A1E80((u8*)w);
+            func_080A1E80(w);
         }
 
         if (*(u16*)cur->flags & 8) {
-            func_080A1ED8((u8*)w);
+            func_080A1ED8(w);
             w->unk_16 = 1;
         }
 
         if (*(u16*)cur->flags & 2) {
-            func_080A1E4C((u8*)w);
-            gEventState[0x80] = 0;
-            gBldCnt = *(u16*)&gEventState[0x6E];
-            gBldAlpha = *(u16*)&gEventState[0x70];
+            func_080A1E4C(w);
+            gEventState->unk_80 = 0;
+            gBldCnt = gEventState->unk_6E;
+            gBldAlpha = gEventState->unk_70;
         }
     }
 
@@ -282,14 +282,14 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
     return 1;
 }
 
-u8 func_080A2024(u8* work, void* a) {
-    u8* p;
+u8 func_080A2024(EventBgEffectWork* w, void* a) {
+    const EventBgEffectEntry* p;
 
-    p = *(u8**)&work[0] + work[0x14] * 16;
-    SetBgScroll(0, (u16)((*(s32*)&gEventState[0x58] >> 8) - (*(s32*)&p[4] >> 8)),
-                (u16)((*(s32*)&gEventState[0x5C] >> 8) - (*(s32*)&p[8] >> 8)));
+    p = &w->entries[w->unk_14];
+    SetBgScroll(0, (u16)((gEventState->x >> 8) - (p->unk_04 >> 8)),
+                (u16)((gEventState->y >> 8) - (p->unk_08 >> 8)));
 
-    if (func_080A207C(work) == 0) {
+    if (func_080A207C(w) == 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)EV_BG_EFFECT_1);
     }
 
@@ -354,5 +354,5 @@ TaskDesc gTaskDescEVBGEFFECT = {
     (TaskUpdateFunc)EV_BG_EFFECT_1,
     (TaskFunc)EV_BG_EFFECT_2,
     (TaskFunc)EV_BG_EFFECT_3,
-    0x18,
+    sizeof(EventBgEffectWork),
 };

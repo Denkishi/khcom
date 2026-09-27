@@ -1537,7 +1537,7 @@ typedef struct EventBgEffectDef {
 } EventBgEffectDef;
 
 typedef struct EventBgEffectWork {
-    EventBgEffectEntry* entries;
+    const EventBgEffectEntry* entries;
     u8 unk_04[0x08];
     u16 unk_0C;
     u16 unk_0E;

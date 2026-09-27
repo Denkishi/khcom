@@ -14,7 +14,6 @@
 #include "btl_api.h"
 
 extern u8 gUnk_0203C590[];
-extern void* gUrsulaWork;
 
 extern u16 gUnk_0203C3BC;
 extern u16 gUnk_0203C3C0;

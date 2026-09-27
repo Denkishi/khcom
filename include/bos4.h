@@ -11,6 +11,8 @@
 
 #include "map_types.h"
 
+#include "prize_types.h"
+
 #include "card_api.h"
 
 #include "map_api.h"
@@ -97,24 +99,11 @@ typedef struct UrsulaWork {
     u32 state;
     u16 unk_004;
     u8 unk_006[0x2];
-    u32 tasks;
-    u8 unk_00C[0x10];
-    u32 unk_01C;
-    u32 unk_020;
-    u32 unk_024;
-    s32 unk_028;
-    u32 unk_02C;
-    u32 unk_030;
-    u32 unk_034;
-    u8 unk_038[0x18];
-    s16 unk_050;
-    s16 unk_052;
-    u8 unk_054[0x4];
-    u64 unk_058;
-    u8 unk_060[0x4];
-    u32 unk_064;
-    u8 unk_068[0xCC];
-    u32 unk_134;
+    TaskPool tasks;
+    Task* tako;
+    Task* tako2;
+    BtlObj obj;
+    const u16** mapBlocks;
     s32 unk_138;
     s32 unk_13C;
     u16 unk_140;
@@ -131,13 +120,6 @@ typedef struct UrsulaWork {
     u8 unk_160;
     u8 unk_161[0x3];
 } UrsulaWork;
-
-typedef struct UrsulaPrizeArg {
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 unk_0C[0x14];
-} UrsulaPrizeArg;
 
 typedef struct BoogieMapanimeWork {
     UnkStruct_080DDDDC unk_000[3];
@@ -211,28 +193,16 @@ typedef struct UrsulaTakoWork {
     void* tiles;
     void* palette;
     void* palette2;
-    u32 anim;
-    u8 unk_010[0x14];
+    AnimState anim;
     u16 unk_024;
     u8 unk_026[0x2];
-    u32 unk_028;
-    u32 unk_02C;
-    u32 unk_030;
-    u32 unk_034;
-    u8 unk_038[0x24];
-    u64 unk_05C;
-    u8 unk_064[0xD4];
+    BtlObj obj;
     u32 state;
     u16 unk_13C;
     u8 unk_13E;
     u8 unk_13F[0x1];
-    u32 unk_140;
-    u32 unk_144;
-    u8 unk_148[0x26];
-    u16 unk_16E;
-    u8 unk_170[0x2C];
-    u32 unk_19C;
-    u8 unk_1A0[0x58];
+    Collider collider;
+    Collider collider2;
     s32 unk_1F8;
     s32 unk_1FC;
     s32 unk_200;
@@ -263,6 +233,8 @@ void task_bos_boogie_dice_3(BoogieDiceWork* work);
 extern const u8 gUnk_0984D134[][8];
 extern u8 gSakuTiles[];
 extern u8 gBoss02objPalette[];
+extern UrsulaWork* gUrsulaWork;
+
 void func_080DB978(UrsulaWork* work);
 void task_bos_ursula_2(UrsulaWork* work);
 u16 func_080DD7C4(UrsulaBubbleWork* work);
@@ -288,9 +260,8 @@ void func_080DD9B0(UrsulaBubbleWork* work);
 typedef struct UrsulaMapanimeWork {
     UnkStruct_080DDDDC unk_000;
     u32 unk_00C;
-    u32 tasks;
-    u8 unk_014[0x10];
-    void* task;
+    TaskPool tasks;
+    Task* task;
     u8 unk_028;
     u8 unk_029[0x3];
 } UrsulaMapanimeWork;
@@ -303,8 +274,8 @@ typedef struct UrsulaMapWork {
 } UrsulaMapWork;
 
 typedef struct UrsulaBorderWork {
-    void* tiles;
-    void* palette;
+    ObjTiles* tiles;
+    ObjPalette* palette;
 } UrsulaBorderWork;
 
 void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg);
@@ -342,13 +313,9 @@ typedef struct BoogieKnifeWork {
 } BoogieKnifeWork;
 
 typedef struct UrsulaBacktakoWork {
-    u32 tiles;
-    u32 palette;
-    u32 anim;
-    u32 unk_00C;
-    u8 unk_010[0x4];
-    u16 unk_014;
-    u8 unk_016[0xA];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    AnimState anim;
     u16 unk_020;
     u8 unk_022;
     u8 unk_023[0x1];

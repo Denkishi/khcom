@@ -346,7 +346,7 @@ TaskDesc gTaskDescBosUrsula = {
     (TaskUpdateFunc)task_bos_ursula_1,
     (TaskFunc)task_bos_ursula_2,
     (TaskFunc)task_bos_ursula_3,
-    0x164,
+    sizeof(UrsulaWork),
 };
 
 TaskDesc gTaskDescBosUrsulaMap = {
@@ -355,7 +355,7 @@ TaskDesc gTaskDescBosUrsulaMap = {
     (TaskUpdateFunc)task_bos_ursula_map_1,
     0,
     (TaskFunc)task_bos_ursula_map_3,
-    0xC,
+    sizeof(UrsulaMapWork),
 };
 
 const char gTaskNameBosUrsulaBorder[] = "task_bos_ursula_border";
@@ -368,7 +368,7 @@ TaskDesc gTaskDescBosUrsulaBorder = {
     (TaskUpdateFunc)task_bos_ursula_border_1,
     (TaskFunc)task_bos_ursula_border_2,
     (TaskFunc)task_bos_ursula_border_3,
-    0x8,
+    sizeof(UrsulaBorderWork),
 };
 
 TaskDesc gTaskDescBosUrsulaTako = {
@@ -377,7 +377,7 @@ TaskDesc gTaskDescBosUrsulaTako = {
     (TaskUpdateFunc)task_bos_ursula_tako_1,
     (TaskFunc)task_bos_ursula_tako_2,
     (TaskFunc)task_bos_ursula_tako_3,
-    0x204,
+    sizeof(UrsulaTakoWork),
 };
 
 const char gTaskNameBosUrsulaBacktako[] = "task_bos_ursula_backtako";
@@ -408,7 +408,7 @@ TaskDesc gTaskDescBosUrsulaBacktako = {
     (TaskUpdateFunc)task_bos_ursula_backtako_1,
     (TaskFunc)task_bos_ursula_backtako_2,
     (TaskFunc)task_bos_ursula_backtako_3,
-    0x44,
+    sizeof(UrsulaBacktakoWork),
 };
 
 TaskDesc gTaskDescBosUrsulaMapanime = {
@@ -417,10 +417,10 @@ TaskDesc gTaskDescBosUrsulaMapanime = {
     (TaskUpdateFunc)task_bos_ursula_mapanime_1,
     (TaskFunc)task_bos_ursula_mapanime_2,
     (TaskFunc)task_bos_ursula_mapanime_3,
-    0x2C,
+    sizeof(UrsulaMapanimeWork),
 };
 
-void* gUrsulaWork;
+UrsulaWork* gUrsulaWork;
 
 UrsulaMapanimeWork* gUrsulaMapanimeWork;
 
@@ -1769,36 +1769,36 @@ void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work) {
 
 void func_080DB978(UrsulaWork* work) {
     if (work->state >= 3 && work->state <= 4) {
-        if (work->unk_028 > gBtlWork->actor->x) {
-            if (work->unk_134 != (u32)gUnk_09EF5130) {
-                work->unk_134 = (u32)gUnk_09EF5130;
+        if (work->obj.x > gBtlWork->actor->x) {
+            if (work->mapBlocks != gUnk_09EF5130) {
+                work->mapBlocks = gUnk_09EF5130;
                 SetBgMapBlocks(0, gUnk_09EF5130, 4, 3);
             } else {
                 func_080DD69C(0);
             }
         } else {
-            if (work->unk_134 != (u32)gUnk_09EF5190) {
-                work->unk_134 = (u32)gUnk_09EF5190;
+            if (work->mapBlocks != gUnk_09EF5190) {
+                work->mapBlocks = gUnk_09EF5190;
                 SetBgMapBlocks(0, gUnk_09EF5190, 4, 3);
             } else {
                 func_080DD69C(0);
             }
         }
     } else if (func_080DC510() != 0) {
-        if (work->unk_134 != (u32)gUnk_09EF5100) {
-            work->unk_134 = (u32)gUnk_09EF5100;
+        if (work->mapBlocks != gUnk_09EF5100) {
+            work->mapBlocks = gUnk_09EF5100;
             SetBgMapBlocks(0, gUnk_09EF5100, 4, 3);
         }
     } else {
-        if (work->unk_134 != (u32)gUnk_09EF5160) {
-            work->unk_134 = (u32)gUnk_09EF5160;
+        if (work->mapBlocks != gUnk_09EF5160) {
+            work->mapBlocks = gUnk_09EF5160;
             SetBgMapBlocks(0, gUnk_09EF5160, 4, 3);
         }
     }
 }
 
 u8 func_080DBA14(UrsulaWork* work) {
-    if (work->unk_142 == 0 && func_080DD1FC(*(void**)(work->unk_01C + 4)) == 0 && func_080DD1FC(*(void**)(work->unk_020 + 4)) == 0) {
+    if (work->unk_142 == 0 && func_080DD1FC(work->tako->work) == 0 && func_080DD1FC(work->tako2->work) == 0) {
         return 1;
     }
 
@@ -1810,11 +1810,11 @@ void task_bos_ursula_0(UrsulaWork* work) {
 
     gUrsulaWork = work;
     gUnk_0203C57C = 1;
-    TaskCreate((u8*)gBtlWork + 0x40, &gTaskDescBosUrsulaMap, (void*)&gBosUrsulaBattleBackgroundDef);
-    TaskCreate((u8*)gBtlWork + 0x2C, &gTaskDescBosUrsulaBorder, 0);
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosUrsulaMap, (void*)&gBosUrsulaBattleBackgroundDef);
+    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsulaBorder, 0);
     work->state = 0;
     work->unk_004 = 0;
-    work->unk_134 = 0;
+    work->mapBlocks = 0;
     work->unk_160 = 0;
     work->unk_140 = 0;
     work->unk_13C = 0;
@@ -1824,23 +1824,23 @@ void task_bos_ursula_0(UrsulaWork* work) {
     SetBattleActorPosition(0x10000, 0x1A800, 0);
     gBtlWork->unk_0D8 = 0xFF00;
     gUnk_0203C580 = -0x5000;
-    func_0801B37C(&work->unk_024, &gBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
-    work->unk_034 = 0;
-    work->unk_058 |= 4;
-    func_0801C2DC(&work->unk_024, 1);
+    func_0801B37C(&work->obj, &gBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
+    work->obj.unk_010 = 0;
+    work->obj.flags |= 4;
+    func_0801C2DC(&work->obj, 1);
     func_080DB978(work);
-    RedrawBgMapAt(0, (gBtlWork->unk_000 - (work->unk_028 - 0x12000)) >> 8,
-        (gBtlWork->unk_004 - (work->unk_02C + work->unk_030 - 0x12000)) >> 8);
+    RedrawBgMapAt(0, (gBtlWork->unk_000 - (work->obj.x - 0x12000)) >> 8,
+        (gBtlWork->unk_004 - (work->obj.y + work->obj.z - 0x12000)) >> 8);
     func_0801C298(0, 1);
     func_0801C298(1, 1);
-    gBtlWork->unk_0CC = work->unk_028;
-    gBtlWork->unk_0D0 = work->unk_02C;
-    gBtlWork->unk_0D4 = work->unk_030;
+    gBtlWork->unk_0CC = work->obj.x;
+    gBtlWork->unk_0D0 = work->obj.y;
+    gBtlWork->unk_0D4 = work->obj.z;
     TaskPoolInit(&work->tasks, 5);
     v = 1;
-    work->unk_01C = (u32)TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
+    work->tako = TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
     v = 0;
-    work->unk_020 = (u32)TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
+    work->tako2 = TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
     TaskCreate(&work->tasks, &gTaskDescBosUrsulaMapanime, 0);
     v = 1;
     TaskCreate(&work->tasks, &gTaskDescBosUrsulaBacktako, &v);
@@ -1848,7 +1848,7 @@ void task_bos_ursula_0(UrsulaWork* work) {
 }
 
 void func_080DBC00(UrsulaWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_024;
+    BtlObj* p = &work->obj;
 
     if ((s16)work->unk_140 == 0) {
         work->unk_140 = 32;
@@ -1866,7 +1866,7 @@ void func_080DBC00(UrsulaWork* work) {
 }
 
 u8 func_080DBC68(UrsulaWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_024;
+    BtlObj* p = &work->obj;
 
     func_080DBC00(work);
 
@@ -1892,7 +1892,7 @@ u8 func_080DBC68(UrsulaWork* work) {
 s32 func_080DBCC0(UrsulaWork* work) {
     BtlObj* p = gBtlWork->actor;
 
-    if (p->x < work->unk_028 - 0x5000 || work->unk_028 + 0x5000 < p->x) {
+    if (p->x < work->obj.x - 0x5000 || work->obj.x + 0x5000 < p->x) {
         return 1;
     }
 
@@ -1900,11 +1900,11 @@ s32 func_080DBCC0(UrsulaWork* work) {
 }
 
 s32 func_080DBCEC(UrsulaWork* work) {
-    if (work->unk_028 - 0x3800 < gBtlWork->actor->x && gBtlWork->actor->x < work->unk_028 + 0x3800) {
+    if (work->obj.x - 0x3800 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x3800) {
         return 3;
     }
 
-    if (work->unk_028 - 0x6800 < gBtlWork->actor->x && gBtlWork->actor->x < work->unk_028 + 0x6800) {
+    if (work->obj.x - 0x6800 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x6800) {
         return 2;
     }
 
@@ -1915,14 +1915,14 @@ s32 func_080DBD44(UrsulaWork* work) {
     if (gBtlWork->actor->z <= -0x5000) {
         return 3;
     } else {
-        if (work->unk_028 - 0x3800 < gBtlWork->actor->x && gBtlWork->actor->x < work->unk_028 + 0x3800) {
+        if (work->obj.x - 0x3800 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x3800) {
             if ((u16)(GetRandom() % 100) < 50) {
                 return 3;
             }
             return 1;
         }
     }
-    if (work->unk_028 - 0x8000 < gBtlWork->actor->x && gBtlWork->actor->x < work->unk_028 + 0x8000) {
+    if (work->obj.x - 0x8000 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x8000) {
         return 2;
     }
     return 1;
@@ -1942,14 +1942,14 @@ s32 func_080DBDC0(UrsulaWork* work) {
 
 void func_080DBDEC(UrsulaWork* work) {
     if (work->unk_160 != 0) {
-        func_080DD210(*(void**)(work->unk_01C + 4));
-        func_080DD210(*(void**)(work->unk_020 + 4));
+        func_080DD210(work->tako->work);
+        func_080DD210(work->tako2->work);
         work->unk_160 = 0;
     }
 }
 
 void func_080DBE18(UrsulaWork* work) {
-    if (work->unk_142 == 0 && func_080DD230(*(void**)(work->unk_01C + 4)) == 0 && func_080DD230(*(void**)(work->unk_020 + 4)) == 0) {
+    if (work->unk_142 == 0 && func_080DD230(work->tako->work) == 0 && func_080DD230(work->tako2->work) == 0) {
         func_080DBDEC(work);
         work->unk_160 = 1;
     } else {
@@ -1970,8 +1970,8 @@ u16 func_080DBE64(void) {
 }
 
 u8 task_bos_ursula_1(UrsulaWork* work) {
-    BtlObj* p = (BtlObj*)&work->unk_024;
-    UrsulaPrizeArg pos;
+    BtlObj* p = &work->obj;
+    PrizeCardArg pos;
     s32 x;
     u16 chance;
 
@@ -2045,9 +2045,9 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     }
 
     if (func_080DBA14(work)) {
-        func_0801C2DC(&work->unk_024, 1);
+        func_0801C2DC(&work->obj, 1);
     } else {
-        func_0801C2DC(&work->unk_024, 0);
+        func_0801C2DC(&work->obj, 0);
     }
 
     switch (work->state) {
@@ -2127,7 +2127,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         }
         break;
     case 0:
-        if (work->unk_028 > gBtlWork->actor->x) {
+        if (work->obj.x > gBtlWork->actor->x) {
             p->flags |= 4;
         } else {
             p->flags &= ~4ULL;
@@ -2136,7 +2136,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             if (func_080DBA14(work)) {
                 chance = func_080DBE64();
                 if ((u16)(GetRandom() % chance) == 0) {
-                    func_0801BCD4(&work->unk_024);
+                    func_0801BCD4(&work->obj);
                 }
             }
             if ((u32)p->x > 0x20000) {
@@ -2159,7 +2159,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             }
             if (func_080DC5E8() == 2 && p->x > 0x6800 && p->x < 0x19800) {
                 if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && func_080DBA14(work)) {
-                    func_0801BCD4(&work->unk_024);
+                    func_0801BCD4(&work->obj);
                     work->state = 0;
                 }
             }
@@ -2185,12 +2185,12 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     return 1;
 }
 void task_bos_ursula_2(UrsulaWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_024;
+    BtlObj* p = &work->obj;
     s32 d = 0;
 
-    if (func_080DC510() != 0 && work->unk_134 == (u32)gUnk_09EF5190) {
+    if (func_080DC510() != 0 && work->mapBlocks == gUnk_09EF5190) {
         d = -0x1000;
-    } else if (func_080DC510() == 0 && work->unk_134 == (u32)gUnk_09EF5130) {
+    } else if (func_080DC510() == 0 && work->mapBlocks == gUnk_09EF5130) {
         d = 0x1000;
     }
 
@@ -2200,17 +2200,17 @@ void task_bos_ursula_2(UrsulaWork* work) {
 }
 
 void task_bos_ursula_3(UrsulaWork* work) {
-    func_0801B7D8(&work->unk_024);
+    func_0801B7D8(&work->obj);
     TaskPoolDestroy(&work->tasks);
     gDispCnt &= ~DISPCNT_WIN0_ON;
 }
 
 u8 func_080DC510(void) {
-    return ((UrsulaWork*)gUrsulaWork)->unk_058 & 4;
+    return gUrsulaWork->obj.flags & 4;
 }
 
 u8 func_080DC528(void) {
-    if (((UrsulaWork*)gUrsulaWork)->unk_142 == 0) {
+    if (gUrsulaWork->unk_142 == 0) {
         return 0;
     }
 
@@ -2232,7 +2232,7 @@ u8 func_080DC544(void) {
 }
 
 u8 func_080DC578(void) {
-    if (func_080DC544() != 0 || func_080DC528() == 0 || ((UrsulaWork*)gUrsulaWork)->unk_15E == 0) {
+    if (func_080DC544() != 0 || func_080DC528() == 0 || gUrsulaWork->unk_15E == 0) {
         return 0;
     }
 
@@ -2240,7 +2240,7 @@ u8 func_080DC578(void) {
 }
 
 u8 func_080DC5B0(void) {
-    if (func_080DC528() != 0 && (*(u32*)&((UrsulaWork*)gUrsulaWork)->unk_158 != 0 || ((UrsulaWork*)gUrsulaWork)->unk_15C != 0)) {
+    if (func_080DC528() != 0 && (*(u32*)&gUrsulaWork->unk_158 != 0 || gUrsulaWork->unk_15C != 0)) {
         return 1;
     }
 
@@ -2248,13 +2248,13 @@ u8 func_080DC5B0(void) {
 }
 
 u32 func_080DC5E8(void) {
-    UrsulaWork* work = (UrsulaWork*)gUrsulaWork;
+    UrsulaWork* work = gUrsulaWork;
 
-    if (work->unk_050 > (s16)(work->unk_052 / 3) * 2) {
+    if (work->obj.unk_02C > (s16)(work->obj.unk_02E / 3) * 2) {
         return 0;
     }
 
-    if (work->unk_050 > (s16)(work->unk_052 / 3)) {
+    if (work->obj.unk_02C > (s16)(work->obj.unk_02E / 3)) {
         return 1;
     }
 
@@ -2262,7 +2262,7 @@ u32 func_080DC5E8(void) {
 }
 
 u8 func_080DC628(void) {
-    if (((UrsulaWork*)gUrsulaWork)->state == 4) {
+    if (gUrsulaWork->state == 4) {
         return 1;
     }
 
@@ -2375,7 +2375,7 @@ void task_bos_ursula_map_3(void) {
 void task_bos_ursula_border_0(UrsulaBorderWork* work) {
     work->tiles = LoadObjTiles(gUnk_0979D0B6, 0x800);
     work->palette = LoadObjPalette(gUnk_0984B0D8, 0x20);
-    func_0801C298(((u8*)work->palette)[6] + 16, 0);
+    func_0801C298(work->palette->index + 16, 0);
 }
 
 s32 task_bos_ursula_border_1(void) {
@@ -2443,12 +2443,12 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->unk_1FC = 0;
     work->unk_200 = 0;
     func_080DC9DC(&x, &y, &z, work);
-    func_0801B37C(&work->unk_028, &gBosUrsulaTakoEmyKind, x, y, z);
-    ColliderInit(&work->unk_19C, 7, 0x28, 0x20);
+    func_0801B37C(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+    ColliderInit(&work->collider2, 7, 0x28, 0x20);
 
     if (work->unk_13E != 0) {
         work->unk_024 = 0xFFFC;
-        work->unk_05C |= 4;
+        work->obj.flags |= 4;
         work->unk_1F8 = -0x2800;
     } else {
         work->unk_024 = 0;
@@ -2461,12 +2461,12 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
     AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
     work->state = 0;
-    ColliderInit(&work->unk_140, 7, (u16)func_080DCA78(work->unk_13E), 1);
-    ColliderSetPosition(&work->unk_140, work->unk_02C, work->unk_030 + 0x1000, -0x3800);
-    func_0801C7FC(&work->unk_028, 35, 51);
+    ColliderInit(&work->collider, 7, (u16)func_080DCA78(work->unk_13E), 1);
+    ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
+    func_0801C7FC(&work->obj, 35, 51);
 }
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_028;
+    BtlObj* p = &work->obj;
     s32 x;
     s32 y;
     s32 z;
@@ -2509,36 +2509,36 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
 
     switch (work->state) {
     case 0:
-        AnimChange((AnimState*)&work->anim, (u16)(work->unk_024 + 4), 1);
+        AnimChange(&work->anim, (u16)(work->unk_024 + 4), 1);
         break;
     case 1:
         if (work->unk_13C == 0) {
-            AnimChange((AnimState*)&work->anim, (u16)(work->unk_024 + 7), 0);
+            AnimChange(&work->anim, (u16)(work->unk_024 + 7), 0);
         }
         work->unk_13C++;
-        if (AnimIsFinished((AnimState*)&work->anim)) {
+        if (AnimIsFinished(&work->anim)) {
             func_0801AF08(p);
             work->state = 0;
             work->unk_13C = 0;
         }
         break;
     case 2:
-        if (AnimGetId((AnimState*)&work->anim) == (s16)work->unk_024 + 4) {
-            if (AnimGetFrame((AnimState*)&work->anim) == 0 && AnimIsFrameEnding((AnimState*)&work->anim)) {
-                AnimStart((AnimState*)&work->anim, (u16)(work->unk_024 + 5), 1);
+        if (AnimGetId(&work->anim) == (s16)work->unk_024 + 4) {
+            if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
+                AnimStart(&work->anim, (u16)(work->unk_024 + 5), 1);
                 func_0801C2DC(p, 1);
                 if ((u16)(GetRandom() % 100) <= 19) {
                     _0801C1F8(0, p->x, p->y, p->z);
                 }
             }
-        } else if (AnimGetId((AnimState*)&work->anim) == (s16)work->unk_024 + 5) {
-            if (AnimIsFinished((AnimState*)&work->anim)) {
+        } else if (AnimGetId(&work->anim) == (s16)work->unk_024 + 5) {
+            if (AnimIsFinished(&work->anim)) {
                 func_0801AF08(p);
                 work->state = 3;
                 work->unk_13C = 0;
             }
         } else {
-            AnimStart((AnimState*)&work->anim, (u16)(work->unk_024 + 4), 1);
+            AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
         }
         break;
     case 3:
@@ -2551,7 +2551,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         break;
     case 4:
         if (work->unk_13C > 180) {
-            AnimStart((AnimState*)&work->anim, (u16)(work->unk_024 + 6), 0);
+            AnimStart(&work->anim, (u16)(work->unk_024 + 6), 0);
             work->state = 5;
             work->unk_200 = 0x800;
             if (work->unk_13E) {
@@ -2565,17 +2565,17 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         }
         break;
     case 5:
-        AnimReset((AnimState*)&work->anim);
+        AnimReset(&work->anim);
         if (work->unk_13C == 5) {
-            func_0801B7D8(&work->unk_028);
+            func_0801B7D8(&work->obj);
             func_080DC9DC(&x, &y, &z, work);
-            func_0801B37C(&work->unk_028, &gBosUrsulaTakoEmyKind, x, y, z);
-            work->unk_05C |= 0x400;
-            func_0801C7FC(&work->unk_028, 35, 25);
+            func_0801B37C(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+            work->obj.flags |= 0x400;
+            func_0801C7FC(&work->obj, 35, 25);
         }
         if (work->unk_13C == 0) {
             if (!func_080DC528()) {
-                func_0801BCD4(&work->unk_028);
+                func_0801BCD4(&work->obj);
             }
             work->state = 6;
             work->unk_13C = 0;
@@ -2593,19 +2593,19 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         }
         break;
     case 7:
-        AnimChange((AnimState*)&work->anim, (u16)(work->unk_024 + 6), 0);
-        if (AnimIsFinished((AnimState*)&work->anim) || func_080DC528()) {
+        AnimChange(&work->anim, (u16)(work->unk_024 + 6), 0);
+        if (AnimIsFinished(&work->anim) || func_080DC528()) {
             work->state = 0;
-            AnimStart((AnimState*)&work->anim, (u16)(work->unk_024 + 4), 1);
+            AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
             func_0801AF08(p);
         } else {
-            if (AnimGetFrame((AnimState*)&work->anim) == 1) {
+            if (AnimGetFrame(&work->anim) == 1) {
                 dx = 0x800;
                 if (work->unk_13E) {
                     dx = -0x800;
                 }
                 dz = -0x6000;
-            } else if (AnimGetFrame((AnimState*)&work->anim) == 0) {
+            } else if (AnimGetFrame(&work->anim) == 0) {
                 dx = -0x1800;
                 if (work->unk_13E) {
                     dx = 0x1800;
@@ -2625,25 +2625,25 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         break;
     }
 
-    AnimUpdate((AnimState*)&work->anim);
+    AnimUpdate(&work->anim);
     func_080DC9DC(&p->x, &p->y, &p->z, work);
     if (work->state - 3 <= 4 && gBtlWork->actor->z < -0x5000 && !func_080DC528()) {
-        ColliderSetDisabled(&work->unk_140, 0);
-        ColliderSetPosition(&work->unk_140, work->unk_02C, work->unk_030 + 0x1000, -0x5000);
+        ColliderSetDisabled(&work->collider, 0);
+        ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x5000);
     } else {
-        ColliderSetDisabled(&work->unk_140, 1);
+        ColliderSetDisabled(&work->collider, 1);
     }
     if (work->state == 3 && gBtlWork->actor->z <= -0x2000 && gBtlWork->actor->z > -0x3000) {
-        ColliderSetDisabled(&work->unk_19C, 0);
-        ColliderSetPosition(&work->unk_19C, work->unk_02C + work->unk_1F8, work->unk_030 + 0x1000, 0);
+        ColliderSetDisabled(&work->collider2, 0);
+        ColliderSetPosition(&work->collider2, work->obj.x + work->unk_1F8, work->obj.y + 0x1000, 0);
     } else {
-        ColliderSetDisabled(&work->unk_19C, 1);
+        ColliderSetDisabled(&work->collider2, 1);
     }
     return 1;
 }
 
 void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_028;
+    BtlObj* p = &work->obj;
     void* pal;
     s16 x;
     s16 y;
@@ -2656,9 +2656,9 @@ void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
 }
 
 void task_bos_ursula_tako_3(UrsulaTakoWork* work) {
-    func_0801B7D8(&work->unk_028);
-    ColliderUnregister(&work->unk_19C);
-    ColliderUnregister(&work->unk_140);
+    func_0801B7D8(&work->obj);
+    ColliderUnregister(&work->collider2);
+    ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
@@ -2680,7 +2680,7 @@ void func_080DD210(UrsulaTakoWork* work) {
 }
 
 u8 func_080DD230(UrsulaTakoWork* work) {
-    if (work->unk_16E & 2) {
+    if (work->collider.unk_2E & 2) {
         return 1;
     }
 
@@ -2726,11 +2726,11 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
         work->unk_020 = 0;
     }
 
-    work->tiles = (u32)AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 8), gUnk_0979E344);
-    work->palette = (u32)LoadObjPalette(gUnk_0984B0F8, 32);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 8), gUnk_0979E344);
+    work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
     AnimStart(&work->anim, (u16)(work->unk_020 + 4), 1);
-    AnimSetFrame(&work->anim, GetRandom() % work->unk_014 + 1);
+    AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);
 }
 
 u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work) {
@@ -2755,16 +2755,16 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, (void*)work->palette, f, 0xC00,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, f, 0xC00,
         0xFE00);
     WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), (void*)work->tiles, (void*)work->palette, f, 0xC01,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, f, 0xC01,
         0xFE00);
 }
 
 void task_bos_ursula_backtako_3(UrsulaBacktakoWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 void task_bos_ursula_mapanime_0(UrsulaMapanimeWork* work) {
@@ -2835,7 +2835,7 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work) {
 void func_080DD69C(s32 a) {
     if (IsTaskActive(gUrsulaMapanimeWork->task) != 0) {
         if (strcmp(GetTaskName(gUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
-            func_080DD9B0(((UrsulaBubbleWork**)gUrsulaMapanimeWork->task)[1]);
+            func_080DD9B0(gUrsulaMapanimeWork->task->work);
         } else {
             func_08000DE8(&gUrsulaMapanimeWork->tasks, gUrsulaMapanimeWork->task);
         }
@@ -2862,7 +2862,7 @@ u8 func_080DD754(void) {
         return 1;
     }
 
-    return IsTaskActive((void*)gUrsulaMapanimeWork->task);
+    return IsTaskActive(gUrsulaMapanimeWork->task);
 }
 
 u8 func_080DD794(void) {

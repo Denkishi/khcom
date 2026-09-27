@@ -14,18 +14,16 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_bos7_1.c
-    start: 0x09EFAEF8
-    end: 0x09EFAF60
-  - name: sprites_bos7_2.c
-    start: 0x09EFBEC4
-    end: 0x09EFBFDC
   - name: sprites_bos7_frames_1.s
     start: 0x09C5C460
     end: 0x09C5CC04
+    data_start: 0x09EFAEF8
+    data_end: 0x09EFAF60
   - name: sprites_bos7_frames_2.s
     start: 0x09C913F4
     end: 0x09C91E54
+    data_start: 0x09EFBEC4
+    data_end: 0x09EFBFDC
   - name: sprites_bos7_tiles.s
     start: 0x09CD0334
     end: 0x09CD1774
@@ -36,18 +34,16 @@ objects:
     start: 0x09D694F4
     end: 0x09D69594
   jp:
-  - name: sprites_bos7_1.c
-    start: 0x09ED2404
-    end: 0x09ED246C
-  - name: sprites_bos7_2.c
-    start: 0x09ED343C
-    end: 0x09ED3554
   - name: sprites_bos7_frames_1.s
     start: 0x09C34B84
     end: 0x09C35328
+    data_start: 0x09ED2404
+    data_end: 0x09ED246C
   - name: sprites_bos7_frames_2.s
     start: 0x09C6A900
     end: 0x09C6B360
+    data_start: 0x09ED343C
+    data_end: 0x09ED3554
   - name: sprites_bos7_tiles.s
     start: 0x09CA9840
     end: 0x09CAAC80
@@ -58,18 +54,16 @@ objects:
     start: 0x09D42A00
     end: 0x09D42AA0
   eu:
-  - name: sprites_bos7_1.c
-    start: 0x09F86C44
-    end: 0x09F86CAC
-  - name: sprites_bos7_2.c
-    start: 0x09F886D8
-    end: 0x09F887F0
   - name: sprites_bos7_frames_1.s
     start: 0x09CBA1A8
     end: 0x09CBA94C
+    data_start: 0x09F86C44
+    data_end: 0x09F86CAC
   - name: sprites_bos7_frames_2.s
     start: 0x09D01720
     end: 0x09D02180
+    data_start: 0x09F886D8
+    data_end: 0x09F887F0
   - name: sprites_bos7_tiles.s
     start: 0x09D40660
     end: 0x09D41AA0

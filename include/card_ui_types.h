@@ -65,7 +65,8 @@ typedef struct MapCardBackDef {
     void** sprites2;
     u16 tilesSize;
     u16 paletteSize;
-    u8 unk_18[0x4];
+    u16 tilesSize2;
+    u8 unk_1A[0x2];
 } MapCardBackDef;
 
 #endif

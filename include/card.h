@@ -896,12 +896,12 @@ typedef struct ReloadChildWork {
 typedef char UnkStruct_08098BE8_sizechk[(sizeof(struct ReloadChildWork) == 0x48) ? 1 : -1];
 
 typedef struct UnkStruct_08098670 {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* palette;
-    void* palette2;
-    void* palette3;
+    ObjTiles* tiles;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette;
+    ObjPalette* palette2;
+    ObjPalette* palette3;
     void* gfx;
     void* gfx2;
     void* gfx3;
@@ -1644,14 +1644,15 @@ typedef struct ReloadWork {
 } ReloadWork;
 
 typedef struct UnkStruct_080984E4 {
-    u8 unk_00[0x08];
-    UnkStruct_080038C8* tiles;
-    u8 unk_0C[0x14];
-    s32 unk_20;
-    u8 unk_24[0x0A];
+    UnkStruct_08098670 sprite;
+    u16 unk_2C;
     u16 unk_2E;
     u16 unk_30;
+    u8 unk_32;
+    u8 unk_33;
 } UnkStruct_080984E4;
+
+typedef char UnkStruct_080984E4_size[(sizeof(UnkStruct_080984E4) == 0x34) ? 1 : -1];
 
 typedef struct SysMsgWinWork {
     ObjTiles* tiles3;
@@ -1893,7 +1894,10 @@ u8 func_080A6A38(RikuDeckMenuWork* w);
 u8 func_080A9A38(DeckExchangeWork* w);
 void func_080AA148(u8 kind, u8 slot);
 void Ev_mapObj_2(EventMapObjectWork* w);
+void func_08098014(UnkStruct_080984E4* card, struct UnkStruct_02034F80* a);
 void func_080984E4(UnkStruct_080984E4* w);
+void func_08098598(s32 x, s32 y, UnkStruct_08098670* p);
+void func_08098778(UnkStruct_08098670* p);
 u8 card_reload_1(CardDisplayWork* p, void* a);
 void func_0808E7D8(DeckMenuWork* w);
 u8 func_080947B4(MapcardWork* w, void* a);
@@ -2027,9 +2031,9 @@ void func_080A9B84(DeckExchangeWork* w, u8 b);
 
 typedef struct SelmapEventKeyWork {
     void* tiles;
-    void* palette;
-    u8 unk_08[0xD0];
-    void** unk_D8;
+    ObjPalette* palette;
+    UnkStruct_080984E4 cards[4];
+    SelmapEventKeyArgs* args;
     AnimState anim;
     void* gfx;
     void* unk_F8;
@@ -2053,6 +2057,8 @@ typedef struct SelmapEventKeyWork {
     u8 unk_122;
     u8 unk_123;
 } SelmapEventKeyWork;
+
+typedef char SelmapEventKeyWork_size[(sizeof(SelmapEventKeyWork) == 0x124) ? 1 : -1];
 
 typedef struct UnkStruct_09035898 {
     const s16* unk_00;

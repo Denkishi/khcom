@@ -60,7 +60,7 @@ u16 func_08096D0C(u16 a, s32 b);
 u16 func_08096D48(u16 a, s32 b);
 void func_0809797C(TaskPool* pool, s32* args);
 s32 func_08097A80(SpotlightWork* w);
-s32 func_08097DE4(u8* work);
+s32 func_08097DE4(SelmapEventKeyWork* work);
 u8 func_0808510C(u16 id);
 s32 AddMapCard(u16 a);
 u16 func_08093B08(u16 a);
@@ -1474,37 +1474,29 @@ void SpotLight_2(void) {
 void SpotLight_3(void) {
     FadeSetPaletteExcluded(13, 0);
 }
-void SELMAP_EVKEY_0(SelmapEventKeyWork* work, void* a) {
+void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     s32 zero;
     s32 i;
-    s32 ofs;
-    u8* q1;
-    u8* q2;
-    u8* q3;
 
     zero = 0;
-    CpuSet(&zero, work, 0x05000049);
-    work->unk_D8 = a;
-    work->unk_F8 = ((void**)a)[1];
+    CpuSet(&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SelmapEventKeyWork) / 4);
+    work->args = a;
+    work->unk_F8 = a->unk_04;
     work->unk_121 = func_080E8D00();
 
     for (i = 0; i < work->unk_121; i++) {
-        ofs = i * 52;
-        func_08098014(&work->unk_08[ofs], func_080E8D1C((u8)i));
-        q1 = &work->unk_08[0xC];
+        func_08098014(&work->cards[i], func_080E8D1C((u8)i));
 
-        if (*(u8**)&q1[ofs] != 0) {
-            FadeSetPaletteExcluded(*(u16*)&(*(u8**)&q1[ofs])[6] + 16, 1);
+        if (work->cards[i].sprite.palette != 0) {
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, 1);
         }
-        q2 = &work->unk_08[0x10];
 
-        if (*(u8**)&q2[ofs] != 0) {
-            FadeSetPaletteExcluded(*(u16*)&(*(u8**)&q2[ofs])[6] + 16, 1);
+        if (work->cards[i].sprite.palette2 != 0) {
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette2->index + 16, 1);
         }
-        q3 = &work->unk_08[0x14];
 
-        if (*(u8**)&q3[ofs] != 0) {
-            FadeSetPaletteExcluded(*(u16*)&(*(u8**)&q3[ofs])[6] + 16, 1);
+        if (work->cards[i].sprite.palette3 != 0) {
+            FadeSetPaletteExcluded(work->cards[i].sprite.palette3->index + 16, 1);
         }
     }
 
@@ -1524,7 +1516,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, void* a) {
 #endif
     AnimStart(&work->anim, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    work->palette = *work->unk_D8;
+    work->palette = work->args->palette;
     work->unk_11C = 0;
     work->unk_11D = 0;
     work->unk_11E = 8;
@@ -1540,80 +1532,73 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, void* a) {
     work->unk_122 = 0;
     work->unk_11A = 8;
     work->unk_118 = 0;
-    func_08098598(0x10000, work->unk_100, (s32*)&work->unk_08[0]);
-    func_08098598(0x10000, work->unk_100, (s32*)&work->unk_08[0x34]);
-    func_08098598(0x10000, work->unk_100, (s32*)&work->unk_08[0x68]);
-    func_08098598(0x10000, work->unk_100, (s32*)&work->unk_08[0x9C]);
+    func_08098598(0x10000, work->unk_100, &work->cards[0].sprite);
+    func_08098598(0x10000, work->unk_100, &work->cards[1].sprite);
+    func_08098598(0x10000, work->unk_100, &work->cards[2].sprite);
+    func_08098598(0x10000, work->unk_100, &work->cards[3].sprite);
 }
-s32 SELMAP_EVKEY_1(u8* work, void* a) {
+s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     s32 i;
-    u8* q1;
-    u8* q2;
-    u8* q3;
-    u8* r;
+    UnkStruct_02034F80* r;
     u8 n;
 
-    *(void**)&work[0xF4] = AnimUpdate(&work[0xDC]);
-    *(s32*)&work[0x104] = ((240 - (work[0x121] - work[0x122]) * 32) << 7) + 0x1000;
-    ApproachValue(&work[0xFC], *(s32*)&work[0x104], work[0x11A]);
+    work->gfx = AnimUpdate(&work->anim);
+    work->unk_104 = ((240 - (work->unk_121 - work->unk_122) * 32) << 7) + 0x1000;
+    ApproachValue(&work->unk_FC, work->unk_104, work->unk_11A);
 
-    if (work[0x11A] != 0) {
-        work[0x11A]--;
+    if (work->unk_11A != 0) {
+        work->unk_11A--;
     }
 
-    for (i = work[0x122]; i < work[0x121]; i++) {
-        func_08098598(*(s32*)&work[0xFC] + ((i - work[0x122]) << 13), *(s32*)&work[0x100], (s32*)&work[i * 52 + 8]);
+    for (i = work->unk_122; i < work->unk_121; i++) {
+        func_08098598(work->unk_FC + ((i - work->unk_122) << 13), work->unk_100, &work->cards[i].sprite);
     }
 
-    SetObjMosaicSize(work[0x11E], work[0x11F]);
+    SetObjMosaicSize(work->unk_11E, work->unk_11F);
 
-    if (work[0x120] == 2) {
-        if (work[0x11E] != 0) {
-            work[0x11E]--;
+    if (work->unk_120 == 2) {
+        if (work->unk_11E != 0) {
+            work->unk_11E--;
         }
 
-        if (work[0x11F] != 0) {
-            work[0x11F]--;
+        if (work->unk_11F != 0) {
+            work->unk_11F--;
         }
 
-        work[0x120] = 0;
+        work->unk_120 = 0;
     }
 
-    work[0x120]++;
-    work[0x11D]++;
+    work->unk_120++;
+    work->unk_11D++;
 
-    if ((*(void***)&work[0xD8])[2] != 0) {
+    if (work->args->unk_08 != 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_08097DE4);
     }
 
-    q1 = &work[work[0x122] * 52];
-
-    if (*(u16*)&q1[0x36] != 0) {
+    if (work->cards[work->unk_122].unk_2E != 0) {
         r = func_080E8D1C(0);
-        q2 = &work[work[0x122] * 52];
-        *(u16*)&q2[0x36] = r[3];
-        n = work[0x122];
-        q3 = &work[n * 52];
+        work->cards[work->unk_122].unk_2E = r->unk_03;
+        n = work->unk_122;
 
-        if (*(u16*)&q3[0x38] != *(u16*)&q3[0x36]) {
-            func_080984E4((UnkStruct_080984E4*)&work[n * 52 + 8]);
+        if (work->cards[n].unk_30 != work->cards[n].unk_2E) {
+            func_080984E4(&work->cards[n]);
         }
     }
 
-    *(u16*)&work[0x118] += 8;
+    work->unk_118 += 8;
     return 1;
 }
-s32 func_08097DE4(u8* work) {
+s32 func_08097DE4(SelmapEventKeyWork* work) {
     u8* a;
     u8* b;
 
-    a = &work[0x11E];
+    a = &work->unk_11E;
 
     if (*a <= 14) {
         (*a)++;
     }
 
-    b = &work[0x11F];
+    b = &work->unk_11F;
 
     if (*b <= 14) {
         (*b)++;
@@ -1622,44 +1607,36 @@ s32 func_08097DE4(u8* work) {
     SetObjMosaicSize(*a, *b);
     return 1;
 }
-void SELMAP_EVKEY_2(u8* work) {
+void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
     s32 i;
-    s32 ofs;
-    u8* e;
-    u8* q1;
-    u8* q2;
 
-    switch ((*(s32**)&work[0xD8])[2]) {
+    switch (work->args->unk_08) {
     case 0:
     case 2:
-        if (work[0x11E] == 15) {
+        if (work->unk_11E == 15) {
             return;
         }
 
-        if (work[0x11F] == 15) {
+        if (work->unk_11F == 15) {
             break;
         }
 
-        for (i = work[0x122]; i < work[0x121]; i++) {
-            if (i == work[0x122]) {
-                func_080985A0((UnkStruct_08098670*)&work[i * 52 + 8], 0x808, 0,
-                              (gSineTable[work[0x118]] >> 8) * 8 + 256);
-                e = &work[i * 52];
+        for (i = work->unk_122; i < work->unk_121; i++) {
+            if (i == work->unk_122) {
+                func_080985A0(&work->cards[i].sprite, 0x808, 0,
+                              (gSineTable[(u8)work->unk_118] >> 8) * 8 + 256);
 
-                switch (e[58]) {
+                switch (work->cards[i].unk_32) {
                 case 2:
-                    ofs = i * 52;
-                    DrawSprite(*(s32*)&(q1 = &work[44])[ofs] >> 8, (*(s32*)&(q2 = &work[48])[ofs] >> 8) + 8,
+                    DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
                     break;
                 case 3:
-                    ofs = i * 52;
-                    DrawSprite(*(s32*)&(q1 = &work[44])[ofs] >> 8, (*(s32*)&(q2 = &work[48])[ofs] >> 8) + 8,
+                    DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
                     break;
                 case 1:
-                    ofs = i * 52;
-                    DrawSprite(*(s32*)&(q1 = &work[44])[ofs] >> 8, (*(s32*)&(q2 = &work[48])[ofs] >> 8) + 8,
+                    DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
                     break;
                 case 0:
@@ -1668,82 +1645,83 @@ void SELMAP_EVKEY_2(u8* work) {
                     break;
                 }
             } else {
-                func_08098670((UnkStruct_08098670*)&work[i * 52 + 8], 0x808);
+                func_08098670(&work->cards[i].sprite, 0x808);
             }
         }
         break;
     }
 
-    if (work[0x11E] == 15) {
+    if (work->unk_11E == 15) {
         return;
     }
 
-    if (work[0x11F] == 15) {
+    if (work->unk_11F == 15) {
         return;
     }
 
-    DrawSprite(120, 42, *(void**)&work[0xF4], *(void**)&work[0], *(void**)&work[4], 0, 8, 10);
+    DrawSprite(120, 42, work->gfx, work->tiles, work->palette, 0, 8, 10);
 }
-void SELMAP_EVKEY_3(u8* work) {
+void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     s32 i;
 
-    for (i = 0; i < work[0x121]; i++) {
-        func_08098778((void**)&work[i * 52 + 8]);
+    for (i = 0; i < work->unk_121; i++) {
+        func_08098778(&work->cards[i].sprite);
     }
 
-    ReleaseObjTiles(*(void**)&work[0x00]);
+    ReleaseObjTiles(work->tiles);
 }
 
-void func_08098014(u8* work, const u8* a) {
+void func_08098014(UnkStruct_080984E4* work, UnkStruct_02034F80* a) {
     s32 zero;
     MapCardDef* c;
     MapCardBackDef* b;
     MapCardBackDef* d;
     CardBack* cb;
     u8 n;
-    s32 z;
+    void* z;
     u8 t;
+    u8* q;
 
     zero = 0;
-    CpuSet((void*)&zero, work, 0x0500000D);
+    CpuSet((void*)&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_080984E4) / 4);
 
-    if (a[0] != 255) {
-        c = &gUnk_09EE4C80[a[0] * 10];
+    if (a->unk_00 != 255) {
+        c = &gUnk_09EE4C80[a->unk_00 * 10];
         b = &gUnk_09EE4BF4[c->backIndex];
-        *(void**)&work[0x00] = LoadObjTiles(c->tiles, c->tilesSize);
-        *(void**)&work[0x0C] = LoadObjPalette(c->palette, c->paletteSize);
-        *(void**)&work[0x18] = *c->sprites;
-        *(void**)&work[0x04] = LoadObjTiles(b->tiles, b->tilesSize);
-        *(void**)&work[0x10] = LoadObjPalette(b->palette, b->paletteSize);
-        *(void**)&work[0x1C] = *b->sprites;
-        *(s32*)&work[0x08] = 0;
-        *(s32*)&work[0x14] = 0;
+        work->sprite.tiles = LoadObjTiles(c->tiles, c->tilesSize);
+        work->sprite.palette = LoadObjPalette(c->palette, c->paletteSize);
+        work->sprite.gfx = *c->sprites;
+        work->sprite.tiles2 = LoadObjTiles(b->tiles, b->tilesSize);
+        work->sprite.palette2 = LoadObjPalette(b->palette, b->paletteSize);
+        work->sprite.gfx2 = *b->sprites;
+        work->sprite.tiles3 = 0;
+        work->sprite.palette3 = 0;
         return;
     }
 
-    *(s32*)&work[0x00] = 0;
-    *(s32*)&work[0x0C] = 0;
-    *(s32*)&work[0x18] = 0;
-    *(s32*)&work[0x08] = 0;
-    *(s32*)&work[0x14] = 0;
+    work->sprite.tiles = 0;
+    work->sprite.palette = 0;
+    work->sprite.gfx = 0;
+    work->sprite.tiles3 = 0;
+    work->sprite.palette3 = 0;
 
-    if (a[1] == 0) {
-        n = a[1];
-        *(s32*)&work[0x04] = 0;
-        *(s32*)&work[0x10] = 0;
-        *(s32*)&work[0x1C] = 0;
+    if (a->unk_01 == 0) {
+        n = a->unk_01;
+        work->sprite.tiles2 = 0;
+        work->sprite.palette2 = 0;
+        work->sprite.gfx2 = 0;
     } else {
-        d = &gUnk_09EE4BF4[a[1]];
-        *(void**)&work[0x04] = LoadObjTiles(d->tiles2, *(u16*)&d->unk_18[0]);
-        *(void**)&work[0x10] = LoadObjPalette(d->palette, d->paletteSize);
-        *(void**)&work[0x1C] = *d->sprites2;
-        *(s32*)&work[0x08] = 0;
-        *(s32*)&work[0x00] = 0;
-        *(s32*)&work[0x0C] = 0;
-        *(s32*)&work[0x18] = 0;
-        *(s32*)&work[0x14] = 0;
+        d = &gUnk_09EE4BF4[a->unk_01];
+        work->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
+        work->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
+        work->sprite.gfx2 = *d->sprites2;
+        work->sprite.tiles3 = 0;
+        work->sprite.tiles = 0;
+        work->sprite.palette = 0;
+        work->sprite.gfx = 0;
+        work->sprite.palette3 = 0;
 
-        switch (a[1]) {
+        switch (a->unk_01) {
         case 1:
             n = 1;
             break;
@@ -1754,121 +1732,122 @@ void func_08098014(u8* work, const u8* a) {
             n = 3;
             break;
         default:
-            n = a[1];
+            n = a->unk_01;
             break;
         }
     }
 
-    work[0x32] = (z = 0, n);
+    q = &work->unk_32;
+    *q = (z = 0, n);
 
-    if (a[2] == 0) {
+    if (a->unk_02 == 0) {
         return;
     }
 
-    switch (a[2]) {
+    switch (a->unk_02) {
     case 1:
-        if (a[3] <= 9) {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[1], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + a[3] * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x500, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+        if (a->unk_03 <= 9) {
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + a->unk_03 * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[3], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (u8)(a[3] / 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (a[3] - (u8)(a[3] / 10) * 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 8) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x500, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(a->unk_03 / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (a->unk_03 - (u8)(a->unk_03 / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
         break;
     case 2:
-        if (a[3] <= 9) {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[1], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + a[3] * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x580, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+        if (a->unk_03 <= 9) {
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + a->unk_03 * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[3], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (u8)(a[3] / 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (a[3] - (u8)(a[3] / 10) * 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 8) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x580, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(a->unk_03 / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (a->unk_03 - (u8)(a->unk_03 / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
         break;
     case 3:
-        if (a[3] <= 9) {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[1], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + a[3] * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x600, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+        if (a->unk_03 <= 9) {
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + a->unk_03 * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[3], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (u8)(a[3] / 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (a[3] - (u8)(a[3] / 10) * 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 8) * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + 0x600, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(a->unk_03 / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (a->unk_03 - (u8)(a->unk_03 / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
         break;
     case 4:
-        if (a[3] <= 9) {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x80);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[0], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + a[3] * 128, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
+        if (a->unk_03 <= 9) {
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + a->unk_03 * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
-            *(void**)&work[0x08] = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(*(void**)&work[0x08], gUnk_09EF1198[2], gUnk_0950C478);
-            *(s32*)&work[0x20] = z;
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (u8)(a[3] / 10) * 128, &gUnk_06010000[(*(UnkStruct_080038C8**)&work[0x08])->index * 32], 128);
-            RequestDma3Copy((*(UnkStruct_080038C8**)&work[0x08])->src + (a[3] - (u8)(a[3] / 10) * 10) * 128, &gUnk_06010000[((*(UnkStruct_080038C8**)&work[0x08])->index + 4) * 32], 128);
+            work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
+            work->sprite.gfx3 = z;
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(a->unk_03 / 10) * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy((u8*)work->sprite.tiles3->src + (a->unk_03 - (u8)(a->unk_03 / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
         }
 
-        t = a[3];
-        *(u16*)&work[0x2E] = t;
-        *(u16*)&work[0x30] = t;
+        t = a->unk_03;
+        work->unk_2E = t;
+        work->unk_30 = t;
         break;
     }
 
-    *(s32*)&work[0x00] = 0;
-    *(s32*)&work[0x0C] = 0;
-    *(s32*)&work[0x18] = 0;
-    *(void**)&work[0x14] = LoadObjPalette(gUnk_09618D38, 32);
+    work->sprite.tiles = 0;
+    work->sprite.palette = 0;
+    work->sprite.gfx = 0;
+    work->sprite.palette3 = LoadObjPalette(gUnk_09618D38, 32);
 
-    if (*(void**)&work[0x04] == 0) {
+    if (work->sprite.tiles2 == 0) {
         cb = &gUnk_08F709B0[4];
-        *(void**)&work[0x04] = LoadObjTiles(cb->tiles2, 0x300);
-        *(void**)&work[0x10] = LoadObjPalette(gUnk_09618D38, 32);
-        *(void**)&work[0x1C] = cb->gfx2;
+        work->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
+        work->sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
+        work->sprite.gfx2 = cb->gfx2;
     }
 }
 
 void func_080984E4(UnkStruct_080984E4* w) {
-    s32 z;
+    void* z;
 
     if (w->unk_2E <= 9) {
         z = 0;
-        UpdateSpriteFrameTiles(w->tiles, gUnk_09EF1198[0], gUnk_0950C478);
-        w->unk_20 = z;
-        RequestDma3Copy(w->tiles->src + w->unk_2E * 128, &gUnk_06010000[w->tiles->index * 32], 128);
+        UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
+        w->sprite.gfx3 = z;
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + w->unk_2E * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
     } else {
         z = 0;
-        UpdateSpriteFrameTiles(w->tiles, gUnk_09EF1198[2], gUnk_0950C478);
-        w->unk_20 = z;
-        RequestDma3Copy(w->tiles->src + (u16)(w->unk_2E / 10) * 128, &gUnk_06010000[w->tiles->index * 32], 128);
-        RequestDma3Copy(w->tiles->src + (w->unk_2E - (u16)(w->unk_2E / 10) * 10) * 128, &gUnk_06010000[(w->tiles->index + 4) * 32], 128);
+        UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
+        w->sprite.gfx3 = z;
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + (u16)(w->unk_2E / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + (w->unk_2E - (u16)(w->unk_2E / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
     }
 
     w->unk_30 = w->unk_2E;
 }
 
-void func_08098598(s32 a, s32 b, s32* c) {
-    c[9] = a;
-    c[10] = b;
+void func_08098598(s32 x, s32 y, UnkStruct_08098670* p) {
+    p->x = x;
+    p->y = y;
 }
 
 void func_080985A0(UnkStruct_08098670* w, u16 b, s16 c, s16 d) {
@@ -1903,14 +1882,14 @@ void func_08098670(UnkStruct_08098670* p, u16 a) {
     }
 }
 
-UnkStruct_080038C8* func_080986FC(u8 a) {
-    UnkStruct_080038C8* obj;
+ObjTiles* func_080986FC(u8 a) {
+    ObjTiles* obj;
 
     if (a != 0) {
         obj = AllocSpriteFrameTiles(256);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[1], gUnk_0950C478);
-        RequestDma3Copy(&obj->src[a * 128], (void*)(0x06010000 + (obj->index + 4) * 32), 128);
-        RequestDma3Copy(&obj->src[0x500], (void*)(0x06010000 + obj->index * 32), 128);
+        RequestDma3Copy(&((u8*)obj->src)[a * 128], (void*)(0x06010000 + (obj->index + 4) * 32), 128);
+        RequestDma3Copy(&((u8*)obj->src)[0x500], (void*)(0x06010000 + obj->index * 32), 128);
     } else {
         obj = AllocSpriteFrameTiles(128);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[0], gUnk_0950C478);
@@ -1919,29 +1898,29 @@ UnkStruct_080038C8* func_080986FC(u8 a) {
     return obj;
 }
 
-void func_08098778(void** p) {
-    if (p[0] != 0) {
-        ReleaseObjTiles(p[0]);
+void func_08098778(UnkStruct_08098670* p) {
+    if (p->tiles != 0) {
+        ReleaseObjTiles(p->tiles);
     }
 
-    if (p[1] != 0) {
-        ReleaseObjTiles(p[1]);
+    if (p->tiles2 != 0) {
+        ReleaseObjTiles(p->tiles2);
     }
 
-    if (p[2] != 0) {
-        ReleaseObjTiles(p[2]);
+    if (p->tiles3 != 0) {
+        ReleaseObjTiles(p->tiles3);
     }
 
-    if (p[3] != 0) {
-        ReleaseObjPalette(p[3]);
+    if (p->palette != 0) {
+        ReleaseObjPalette(p->palette);
     }
 
-    if (p[4] != 0) {
-        ReleaseObjPalette(p[4]);
+    if (p->palette2 != 0) {
+        ReleaseObjPalette(p->palette2);
     }
 
-    if (p[5] != 0) {
-        ReleaseObjPalette(p[5]);
+    if (p->palette3 != 0) {
+        ReleaseObjPalette(p->palette3);
     }
 }
 
@@ -2103,5 +2082,5 @@ TaskDesc gTaskDescSELMAPEVKEY = {
     (TaskUpdateFunc)SELMAP_EVKEY_1,
     (TaskFunc)SELMAP_EVKEY_2,
     (TaskFunc)SELMAP_EVKEY_3,
-    0x124,
+    sizeof(SelmapEventKeyWork),
 };

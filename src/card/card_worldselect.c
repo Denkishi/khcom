@@ -68,7 +68,6 @@ extern u8 gUnk_09618D18[];
 extern u8 gUnkEu_09F72C10[];
 #endif
 u16 func_08093B08(u16 a);
-s32* func_080E04E0(void);
 u8 Reload_Gage_1(ReloadGageWork* w, void* a);
 u8 func_080954C4(ReloadGageWork* w, void* a);
 u8 func_0809217C(MapSelectWork* w, void* a);
@@ -2021,10 +2020,10 @@ void func_080949A0(MapcardWork* w) {
     s32 v[2];
     s32 dx;
     s32 dy;
-    s32* p = func_080E04E0();
+    FldObj* p = func_080E04E0();
 
-    dx = (p[0] >> 8) - (gFieldState->x >> 8);
-    dy = (p[1] >> 8) + (p[2] >> 8) - (gFieldState->y >> 8) - 24;
+    dx = (p->fieldPosition.x >> 8) - (gFieldState->x >> 8);
+    dy = (p->fieldPosition.y >> 8) + (p->fieldPosition.z >> 8) - (gFieldState->y >> 8) - 24;
     v[0] = dx * 256 - w->x;
     v[1] = dy * 256 - w->y;
     w->unk_64 = NormalizeVector2D8(&v[0], &v[1]);
@@ -2037,7 +2036,7 @@ void func_080949A0(MapcardWork* w) {
 }
 
 u8 func_08094A18(MapcardWork* w, void* a) {
-    s32* p;
+    FldObj* p;
     s32 dx;
     s32 dy;
     s32 d;
@@ -2047,8 +2046,8 @@ u8 func_08094A18(MapcardWork* w, void* a) {
     u16 f;
 
     p = func_080E04E0();
-    dx = (p[0] >> 8) - (gFieldState->x >> 8);
-    dy = (p[1] >> 8) + (p[2] >> 8) - (gFieldState->y >> 8) - 24;
+    dx = (p->fieldPosition.x >> 8) - (gFieldState->x >> 8);
+    dy = (p->fieldPosition.y >> 8) + (p->fieldPosition.z >> 8) - (gFieldState->y >> 8) - 24;
 
     if (w->unk_60 < 0) {
         x = (dx << 8) - w->x;

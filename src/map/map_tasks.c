@@ -1929,7 +1929,7 @@ u8 func_080F1978(MapGmkTutorialWork* w) {
             m4aSongNumStart(SONG_SND_220);
             gUnk_0203C7AC->flags |= 0x80;
             gFieldState->unk_68 = &w->obj;
-            gUnk_0203C7AC->unk_14 = (s32)w;
+            gUnk_0203C7AC->unk_14 = &w->obj;
             w->update = func_080F1A10;
             gUnk_0203C7AC->unk_0F = 0;
             gUnk_0203C7AC->unk_10 = 0;

@@ -37,7 +37,7 @@ typedef struct UnkStruct_0203C7AC {
     u8 unk_0F;
     u8 unk_10;
     u8 unk_11[0x03];
-    s32 unk_14;
+    FldObj* unk_14;
     u8 unk_18;
     u8 unk_19[0x03];
     s32 unk_1C;

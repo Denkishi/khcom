@@ -320,7 +320,7 @@ void func_080E042C(void) {
     }
 }
 
-s32 func_080E04E0(void) {
+FldObj* func_080E04E0(void) {
     return gUnk_0203C7AC->unk_14;
 }
 

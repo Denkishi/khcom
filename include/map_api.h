@@ -16,6 +16,7 @@ void func_080E0298(s32 x, s32 y);
 void func_080E02A8(s32 dx, s32 dy);
 void func_080E02C0(s32 x, s32 y, s32 z);
 void func_080E0418(void);
+FldObj* func_080E04E0(void);
 void func_080E04EC(void);
 void func_080E052C(u8 a);
 struct MapCell* func_080E548C(s16 a, s16 b);

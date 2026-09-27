@@ -4700,13 +4700,13 @@ void func_080ECAA8(MapDoorWork* p) {
     UpdateSpriteFrameTiles(p->tiles2, p->unk_60, p->unk_68);
 }
 
-s32 func_080ECAC8(MapDoorWork* p) {
+u8 func_080ECAC8(MapDoorWork* p) {
     UnkStruct_080DFB7C* flags = p->unk_00;
-    FldPos* e = (FldPos*)&p->unk_04;
+    FldObj* e = &p->obj;
 
     if (!(gFieldState->flags & 0x2000) && !(gUnk_0203C7AC->flags & 0x4004) &&
         (u8)(flags->unk_07 + 3) > 1 && (flags->unk_00 & 0x12) != 0x12 &&
-        func_080E02E0(e, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
+        func_080E02E0(&e->fieldPosition, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
         gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
         TaskPool* pool;
 
@@ -4714,20 +4714,20 @@ s32 func_080ECAC8(MapDoorWork* p) {
         pool = &p->tasks;
         TaskCreate(pool, &gTaskDescMapSpark, e);
         gUnk_0203C7AC->flags |= 0x80;
-        gFieldState->unk_68 = (s32)e;
-        gUnk_0203C7AC->unk_14 = (s32)e;
+        gFieldState->unk_68 = e;
+        gUnk_0203C7AC->unk_14 = e;
         p->unk_71 = 1;
         p->update = func_080ECBC8;
         gUnk_0203C7AC->unk_0F = flags->unk_07;
         gUnk_0203C7AC->unk_10 = flags->unk_06;
-        FadeSetPaletteExcluded(*(u16*)&p->palette[6] + 16, 1);
-        FadeSetPaletteExcluded(*(u16*)&p->palette2[6] + 16, 1);
+        FadeSetPaletteExcluded(p->palette->index + 16, 1);
+        FadeSetPaletteExcluded(p->palette2->index + 16, 1);
         TaskCreate(pool, &gTaskDescRoomcreate, 0);
     }
     return 1;
 }
 
-s32 func_080ECBC8(MapDoorWork* p) {
+u8 func_080ECBC8(MapDoorWork* p) {
     UnkStruct_080DFB7C* flags = p->unk_00;
     void* t = func_08093BF8();
 
@@ -4742,14 +4742,14 @@ s32 func_080ECBC8(MapDoorWork* p) {
 
     if (!(gFieldState->flags & 0x40000)) {
         gUnk_0203C7AC->flags &= ~0x80;
-        FadeSetPaletteExcluded(*(u16*)&p->palette[6] + 16, 0);
-        FadeSetPaletteExcluded(*(u16*)&p->palette2[6] + 16, 0);
+        FadeSetPaletteExcluded(p->palette->index + 16, 0);
+        FadeSetPaletteExcluded(p->palette2->index + 16, 0);
         p->update = func_080ECAC8;
     }
     return 1;
 }
 
-s32 func_080ECC54(MapDoorWork* p) {
+u8 func_080ECC54(MapDoorWork* p) {
     UnkStruct_080DFB7C* flags = p->unk_00;
     u16 v;
 
@@ -4768,8 +4768,8 @@ u8 func_080ECC8C(MapDoorWork* p) {
 }
 
 void Task_MapDoor_0(MapDoorWork* w, UnkStruct_080DFB7C* p) {
-    UnkStruct_080E6394* e = (UnkStruct_080E6394*)&w->unk_04;
-    FldPos* v = &e->unk_00;
+    FldObj* e = &w->obj;
+    FldPos* v = &e->fieldPosition;
     const UnkStruct_0984B968* q = &gUnk_0984B968[gUnk_0203C590.unk_04];
 
     w->unk_00 = p;
@@ -4781,33 +4781,33 @@ void Task_MapDoor_0(MapDoorWork* w, UnkStruct_080DFB7C* p) {
         w->unk_4C = gMapUiSpriteUs_098A94A0;
         w->unk_54 = q->unk_08;
         w->unk_50 = q->unk_04;
-        e->unk_14 = 173;
-        w->unk_04 = (p->unk_02 << 5) + 16;
-        e->unk_00.y = (p->unk_04 << 4) + 10;
+        e->angle = 173;
+        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
+        e->fieldPosition.y = (p->unk_04 << 4) + 10;
         break;
     case 1:
         w->unk_4C = gMapUiSpriteUs_098A94B4;
         w->unk_54 = q->unk_20;
         w->unk_50 = q->unk_1C;
-        e->unk_14 = 45;
-        w->unk_04 = (p->unk_02 << 5) + 16;
-        e->unk_00.y = (p->unk_04 << 4) + 6;
+        e->angle = 45;
+        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
+        e->fieldPosition.y = (p->unk_04 << 4) + 6;
         break;
     case 2:
         w->unk_4C = gMapUiSpriteUs_098A94C8;
         w->unk_54 = q->unk_18;
         w->unk_50 = q->unk_14;
-        e->unk_14 = 211;
-        w->unk_04 = (p->unk_02 << 5) + 16;
-        e->unk_00.y = (p->unk_04 << 4) + 6;
+        e->angle = 211;
+        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
+        e->fieldPosition.y = (p->unk_04 << 4) + 6;
         break;
     case 3:
         w->unk_4C = gMapUiSpriteUs_098A948C;
         w->unk_54 = q->unk_10;
         w->unk_50 = q->unk_0C;
-        e->unk_14 = 83;
-        w->unk_04 = (p->unk_02 << 5) + 16;
-        e->unk_00.y = (p->unk_04 << 4) + 10;
+        e->angle = 83;
+        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
+        e->fieldPosition.y = (p->unk_04 << 4) + 10;
         break;
     }
 
@@ -4878,14 +4878,14 @@ void Task_MapDoor_2(MapDoorWork* p) {
     s32 k;
 
     if (p->unk_70 == 1) {
-        sx = (p->unk_04 >> 8) - (gFieldState->x >> 8);
-        k = p->unk_08 >> 8;
-        sy = k + (p->unk_0C >> 8) - (gFieldState->y >> 8);
+        sx = (p->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
+        k = p->obj.fieldPosition.y >> 8;
+        sy = k + (p->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
         switch (f->unk_06) {
         case 0:
         case 3:
-            v = -0xFE4 - (p->unk_08 >> 8) * 4;
+            v = -0xFE4 - (p->obj.fieldPosition.y >> 8) * 4;
             break;
         case 1:
         case 2:
@@ -6636,7 +6636,7 @@ TaskDesc gTaskDescMapDoor = {
     (TaskUpdateFunc)Task_MapDoor_1,
     (TaskFunc)Task_MapDoor_2,
     (TaskFunc)Task_MapDoor_3,
-    0x88,
+    sizeof(MapDoorWork),
 };
 
 TaskDesc gTaskDescMapMenu = {

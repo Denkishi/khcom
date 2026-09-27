@@ -188,18 +188,6 @@ typedef struct UnkStruct_080E5B90 {
     s32 unk_1C;
 } UnkStruct_080E5B90;
 
-typedef struct UnkStruct_080E6394 {
-    FldPos unk_00;
-    s32 unk_10;
-    u8 unk_14;
-    u8 unk_15[0x05];
-    u16 unk_1A;
-    u8 unk_1C[0x14];
-    u16 unk_30;
-    u16 unk_32;
-    u16 unk_34;
-} UnkStruct_080E6394;
-
 typedef struct MapEnmWork {
     const UnkStruct_0984BC9C* unk_00;
     u16 flags;
@@ -934,17 +922,14 @@ typedef struct UnkStruct_0984B968 {
 
 typedef struct MapDoorWork {
     UnkStruct_080DFB7C* unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10[0x34];
+    FldObj obj;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* unk_4C;
     void* unk_50;
     void* unk_54;
     void* tiles2;
-    u8* palette2;
+    ObjPalette* palette2;
     void* unk_60;
     void* unk_64;
     void* unk_68;
@@ -1131,9 +1116,9 @@ void func_080E4B34(void);
 void func_080E4B78(s16 x, s16 y);
 void RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, s32 e);
 void* func_08093BF8(void);
-s32 func_080ECAC8(MapDoorWork* p);
-s32 func_080ECBC8(MapDoorWork* p);
-s32 func_080ECC54(MapDoorWork* p);
+u8 func_080ECAC8(MapDoorWork* p);
+u8 func_080ECBC8(MapDoorWork* p);
+u8 func_080ECC54(MapDoorWork* p);
 void func_080E9078(s32 x, s32 y, s32 z);
 u8 IsCardCollectionFull(void);
 MapCell* func_080E08BC(s16 x, s16 y);

@@ -79,6 +79,20 @@ void func_0808CBB4(u8 a, u8 b);
 void func_0808CC58(u16 a, u8 b);
 void func_0808DD20(u8 a, u16 b);
 void func_08090170(DeckCard2Work* node);
+void func_080A968C(DeckExchangeWork* w, u8 kind);
+s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c);
+s32 func_080A993C(s32 a);
+void func_080AA450(DeckExchangeWork* w);
+void func_080AA634(DeckExchangeWork* w);
+void func_080AA680(DeckExchangeWork* w);
+s32 func_080AA77C(DeckExchangeWork* w, u16 key);
+void func_080AAA38(DeckExchangeWork* w);
+s32 func_080AAC40(DeckExchangeWork* w);
+u8 func_080AAC8C(DeckExchangeWork* w);
+void func_080AACC8(DeckExchangeWork* w);
+u8 func_080AAD2C(DeckExchangeWork* w);
+u8 func_080AAD84(DeckExchangeWork* w, s16 x, s16 y);
+void func_080AAF20(DeckExchangeWork* w);
 #ifndef VERSION_EU
 const s16 gUnk_09041F04[3] = { 116, 116, 116 };
 
@@ -1047,7 +1061,7 @@ void func_080A968C(DeckExchangeWork* w, u8 kind) {
     func_080AAEEC(w, y * 3 + x);
 }
 
-s32 func_080A97D4(DeckExchangeWork* w, u8 kind) {
+s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c) {
     DeckCard2Args args;
     u16 i;
     s8 x;
@@ -1931,13 +1945,13 @@ u8 func_080AAD2C(DeckExchangeWork* w) {
     return 0;
 }
 
-u8 func_080AAD84(DeckExchangeWork* w, u16 x, u16 y) {
+u8 func_080AAD84(DeckExchangeWork* w, s16 x, s16 y) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        if (node->args.col == (s16)x && node->args.row == (s16)y) {
+        if (node->args.col == x && node->args.row == y) {
             return 1;
         }
 

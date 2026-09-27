@@ -1537,49 +1537,49 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdGoofy;
+            work->unk_18C = &gTaskDescFrdGoofy;
             work->unk_162[0] = 0;
             break;
         case 0x8003ECFB:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdGoofy;
+            work->unk_18C = &gTaskDescFrdGoofy;
             work->unk_162[0] = 1;
             break;
         case 0xCFB3ECFB:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdGoofy;
+            work->unk_18C = &gTaskDescFrdGoofy;
             work->unk_162[0] = 2;
             break;
         case 28:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdDonald;
+            work->unk_18C = &gTaskDescFrdDonald;
             work->unk_162[0] = 0;
             break;
         case 0x8003C4F1:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdDonald;
+            work->unk_18C = &gTaskDescFrdDonald;
             work->unk_162[0] = 1;
             break;
         case 0xCF13C4F1:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdDonald;
+            work->unk_18C = &gTaskDescFrdDonald;
             work->unk_162[0] = 2;
             break;
         case 33:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnTink;
+            work->unk_18C = &gTaskDescSmnTink;
             work->unk_162[0] = 0;
             work->unk_191[0] = 1;
             break;
@@ -1587,7 +1587,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnTink;
+            work->unk_18C = &gTaskDescSmnTink;
             work->unk_162[0] = 1;
             work->unk_191[0] = 1;
             break;
@@ -1595,7 +1595,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnTink;
+            work->unk_18C = &gTaskDescSmnTink;
             work->unk_162[0] = 2;
             work->unk_191[0] = 1;
             break;
@@ -1603,231 +1603,231 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAriel;
+            work->unk_18C = &gTaskDescFrdAriel;
             work->unk_162[0] = 0;
             break;
         case 0x80055555:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAriel;
+            work->unk_18C = &gTaskDescFrdAriel;
             work->unk_162[0] = 1;
             break;
         case 0xD5555555:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAriel;
+            work->unk_18C = &gTaskDescFrdAriel;
             work->unk_162[0] = 2;
             break;
         case 34:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnMushu;
+            work->unk_18C = &gTaskDescSmnMushu;
             work->unk_162[0] = 0;
             break;
         case 0x8004DD37:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnMushu;
+            work->unk_18C = &gTaskDescSmnMushu;
             work->unk_162[0] = 1;
             break;
         case 0xD374DD37:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnMushu;
+            work->unk_18C = &gTaskDescSmnMushu;
             work->unk_162[0] = 2;
             break;
         case 29:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnSimba;
+            work->unk_18C = &gTaskDescSmnSimba;
             work->unk_162[0] = 0;
             break;
         case 0x80041505:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnSimba;
+            work->unk_18C = &gTaskDescSmnSimba;
             work->unk_162[0] = 1;
             break;
         case 0xD0541505:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnSimba;
+            work->unk_18C = &gTaskDescSmnSimba;
             work->unk_162[0] = 2;
             break;
         case 35:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnCloud;
+            work->unk_18C = &gTaskDescSmnCloud;
             work->unk_162[0] = 0;
             break;
         case 0x80050541:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnCloud;
+            work->unk_18C = &gTaskDescSmnCloud;
             work->unk_162[0] = 1;
             break;
         case 0xD4150541:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnCloud;
+            work->unk_18C = &gTaskDescSmnCloud;
             work->unk_162[0] = 2;
             break;
         case 31:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnBambi;
+            work->unk_18C = &gTaskDescSmnBambi;
             work->unk_162[0] = 0;
             break;
         case 0x80046519:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnBambi;
+            work->unk_18C = &gTaskDescSmnBambi;
             work->unk_162[0] = 1;
             break;
         case 0xD1946519:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnBambi;
+            work->unk_18C = &gTaskDescSmnBambi;
             work->unk_162[0] = 2;
             break;
         case 42:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdJack;
+            work->unk_18C = &gTaskDescFrdJack;
             work->unk_162[0] = 0;
             break;
         case 0x80057D5F:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdJack;
+            work->unk_18C = &gTaskDescFrdJack;
             work->unk_162[0] = 1;
             break;
         case 0xD5F57D5F:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdJack;
+            work->unk_18C = &gTaskDescFrdJack;
             work->unk_162[0] = 2;
             break;
         case 40:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAladdin;
+            work->unk_18C = &gTaskDescFrdAladdin;
             work->unk_162[0] = 0;
             break;
         case 0x80052D4B:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAladdin;
+            work->unk_18C = &gTaskDescFrdAladdin;
             work->unk_162[0] = 1;
             break;
         case 0xD4B52D4B:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdAladdin;
+            work->unk_18C = &gTaskDescFrdAladdin;
             work->unk_162[0] = 2;
             break;
         case 43:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdPan;
+            work->unk_18C = &gTaskDescFrdPan;
             work->unk_162[0] = 0;
             break;
         case 0x8005A569:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdPan;
+            work->unk_18C = &gTaskDescFrdPan;
             work->unk_162[0] = 1;
             break;
         case 0xD695A569:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdPan;
+            work->unk_18C = &gTaskDescFrdPan;
             work->unk_162[0] = 2;
             break;
         case 32:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnDumbo;
+            work->unk_18C = &gTaskDescSmnDumbo;
             work->unk_162[0] = 0;
             break;
         case 0x80048D23:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnDumbo;
+            work->unk_18C = &gTaskDescSmnDumbo;
             work->unk_162[0] = 1;
             break;
         case 0xD2348D23:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnDumbo;
+            work->unk_18C = &gTaskDescSmnDumbo;
             work->unk_162[0] = 2;
             break;
         case 30:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnGenie;
+            work->unk_18C = &gTaskDescSmnGenie;
             work->unk_162[0] = 0;
             break;
         case 0x80043D0F:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnGenie;
+            work->unk_18C = &gTaskDescSmnGenie;
             work->unk_162[0] = 1;
             break;
         case 0xD0F43D0F:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnGenie;
+            work->unk_18C = &gTaskDescSmnGenie;
             work->unk_162[0] = 2;
             break;
         case 44:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdBeast;
+            work->unk_18C = &gTaskDescFrdBeast;
             work->unk_162[0] = 0;
             break;
         case 0x8005CD73:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdBeast;
+            work->unk_18C = &gTaskDescFrdBeast;
             work->unk_162[0] = 1;
             break;
         case 0xD735CD73:
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdBeast;
+            work->unk_18C = &gTaskDescFrdBeast;
             work->unk_162[0] = 2;
             break;
         case 47:
@@ -2019,7 +2019,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescFrdDonald;
+            work->unk_18C = &gTaskDescFrdDonald;
             work->unk_162[0] = 3;
             break;
         case 135:
@@ -2031,14 +2031,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_038 = 17;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnBambi;
+            work->unk_18C = &gTaskDescSmnBambi;
             work->unk_162[0] = 3;
             break;
         case 129:
             work->unk_038 = 23;
             work->unk_156 = 0;
             work->unk_154 = 0;
-            *(TaskDesc**)&work->unk_18C = &gTaskDescSmnCloud;
+            work->unk_18C = &gTaskDescSmnCloud;
             work->unk_162[0] = 3;
             break;
         case 120:
@@ -2640,7 +2640,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->unk_154 == 0) {
             work->unk_15C = 0;
-            *(s32*)&work->unk_191[3] = 1664;
+            work->unk_194 = 1664;
             SetBtlSoraAnimation(work, 53, 0);
             work->unk_156 = 32;
 
@@ -2660,12 +2660,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_VO_SR_ATTACK09);
         } else if ((s16)work->unk_154 > 4 && (s16)work->unk_156 != 0) {
             if (p->flags & 4) {
-                p->x -= *(s32*)&work->unk_191[3];
+                p->x -= work->unk_194;
             } else {
-                p->x += *(s32*)&work->unk_191[3];
+                p->x += work->unk_194;
             }
 
-            ApproachValue((s32*)&work->unk_191[3], 0, work->unk_156);
+            ApproachValue(&work->unk_194, 0, work->unk_156);
             work->unk_156--;
 
             if (p->z < p->unk_010) {
@@ -3743,7 +3743,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             func_0801DD08(work);
             SetBtlSoraAnimation(work, 42, 0);
             m4aSongNumStart(SONG_VO_SR_BURIZAD00);
-            *(BtlObj**)&work->unk_1A4 = func_0801E6DC(work);
+            work->unk_1A4 = func_0801E6DC(work);
         }
 
         if ((s16)work->unk_154 == 27) {
@@ -3764,7 +3764,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 func_08013308(1, p->x + 18432, t2, t3, t, t2, t3, 0, t4);
             }
         } else if ((s16)work->unk_154 > 27) {
-            e = *(BtlObj**)&work->unk_1A4;
+            e = work->unk_1A4;
 
             if (e != 0) {
                 s32 d;
@@ -3816,7 +3816,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             func_0801DD08(work);
             SetBtlSoraAnimation(work, 42, 0);
             m4aSongNumStart(SONG_VO_SR_FIRE00);
-            *(BtlObj**)&work->unk_1A4 = func_0801E6DC(work);
+            work->unk_1A4 = func_0801E6DC(work);
         }
 
         if ((s16)work->unk_154 == 27) {
@@ -3837,7 +3837,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 func_08012E44(1, p->x + 18432, t2, t3, t, t2, t3, 0, t4);
             }
         } else if ((s16)work->unk_154 > 27) {
-            e = *(BtlObj**)&work->unk_1A4;
+            e = work->unk_1A4;
 
             if (e != 0) {
                 s32 d;
@@ -4146,9 +4146,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_15A &= ~0x80;
 
             if (p->btl->unk_0F4 == 42
-                && *(TaskDesc**)&work->unk_18C != &gTaskDescSmnBambi
-                && *(TaskDesc**)&work->unk_18C != &gTaskDescSmnTink
-                && *(TaskDesc**)&work->unk_18C != &gTaskDescSmnMushu) {
+                && work->unk_18C != &gTaskDescSmnBambi
+                && work->unk_18C != &gTaskDescSmnTink
+                && work->unk_18C != &gTaskDescSmnMushu) {
                 func_08019190(p, 10);
                 uv = (u16)p->unk_02E;
                 p->unk_02C = ((s16)uv >> 2) + p->unk_02C;
@@ -4169,7 +4169,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->unk_014 = p->x;
             p->unk_018 = p->y;
             p->unk_01C = p->z;
-            TaskCreate(&gBtlWork->taskPools[0], *(TaskDesc**)&work->unk_18C, &spawn2);
+            TaskCreate(&gBtlWork->taskPools[0], work->unk_18C, &spawn2);
             work->unk_038 = 18;
             work->unk_156 = 0;
             work->unk_154 = 0;
@@ -4251,7 +4251,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             func_0801DEF4(work);
             spawn.unk_02 = work->unk_172;
             spawn.unk_00 = work->unk_162[0];
-            TaskCreate(&gBtlWork->taskPools[0], *(TaskDesc**)&work->unk_18C, &spawn);
+            TaskCreate(&gBtlWork->taskPools[0], work->unk_18C, &spawn);
             p->x = p->unk_014;
             p->y = p->unk_018;
             p->z = -65536;
@@ -4804,7 +4804,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->unk_154 == 0) {
             SetBtlSoraAnimation(work, 71, 0);
             m4aSongNumStart(SONG_VO_SR_SUMMON05);
-            *(s32*)&work->unk_191[3] = 0;
+            work->unk_194 = 0;
         }
 
         if (work->anim.timer == 0) {
@@ -4834,12 +4834,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimGetFrame(&work->anim) > 4) {
-            *(s32*)&work->unk_191[3] += 128;
+            work->unk_194 += 128;
 
             if (p->flags & 4) {
-                p->x -= *(s32*)&work->unk_191[3];
+                p->x -= work->unk_194;
             } else {
-                p->x += *(s32*)&work->unk_191[3];
+                p->x += work->unk_194;
             }
 
             if ((p->flags & 4)
@@ -4874,9 +4874,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (p->flags & 4) {
-            p->x -= *(s32*)&work->unk_191[3];
+            p->x -= work->unk_194;
         } else {
-            p->x += *(s32*)&work->unk_191[3];
+            p->x += work->unk_194;
         }
 
         if (held & DPAD_UP) {
@@ -4910,16 +4910,16 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags &= ~0x10;
         }
 
-        *(s32*)&work->unk_191[3] -= 128;
+        work->unk_194 -= 128;
 
-        if (*(s32*)&work->unk_191[3] < 0) {
-            *(s32*)&work->unk_191[3] = 0;
+        if (work->unk_194 < 0) {
+            work->unk_194 = 0;
         }
 
         if (p->flags & 4) {
-            p->x -= *(s32*)&work->unk_191[3];
+            p->x -= work->unk_194;
         } else {
-            p->x += *(s32*)&work->unk_191[3];
+            p->x += work->unk_194;
         }
 
         if (AnimGetFrame(&work->anim) == 1) {
@@ -5097,11 +5097,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             e = func_0801E6DC(work);
 
             if (e != 0) {
-                *(s32*)&work->unk_191[3] = e->x;
-                *(s32*)&work->unk_191[7] = e->y;
+                work->unk_194 = e->x;
+                work->unk_198 = e->y;
             } else {
-                *(s32*)&work->unk_191[3] = p->x;
-                *(s32*)&work->unk_191[7] = p->y;
+                work->unk_194 = p->x;
+                work->unk_198 = p->y;
             }
 
             if (p->flags & 4) {
@@ -5110,20 +5110,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->angle = 64;
             }
 
-            if (p->x > *(s32*)&work->unk_191[3]) {
+            if (p->x > work->unk_194) {
                 p->flags |= 4;
-                *(s32*)&work->unk_191[3] += 5120;
+                work->unk_194 += 5120;
             } else {
                 p->flags &= ~4;
-                *(s32*)&work->unk_191[3] -= 5120;
+                work->unk_194 -= 5120;
             }
             break;
         case 2:
         case 3:
         case 4:
         case 5:
-            p->x += (*(s32*)&work->unk_191[3] - p->x) >> 3;
-            p->y += (*(s32*)&work->unk_191[7] - p->y) >> 3;
+            p->x += (work->unk_194 - p->x) >> 3;
+            p->y += (work->unk_198 - p->y) >> 3;
             break;
         case 6:
             if (work->anim.timer % 6 == 0) {
@@ -6068,18 +6068,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     if (work->unk_15A & 0x20) {
         if (gBtlWork->unk_0F0 == (s32)p->collider.other) {
-            p->x += p->collider.unk_44 - *(s32*)&work->unk_178;
-            p->y += p->collider.unk_48 - *(s32*)&work->unk_17A[2];
-            p->z += p->collider.unk_40 - *(s32*)&work->unk_17A[6];
+            p->x += p->collider.unk_44 - work->unk_178;
+            p->y += p->collider.unk_48 - work->unk_17C;
+            p->z += p->collider.unk_40 - work->unk_180;
         }
     }
 
     if (p->z >= p->unk_010) {
         if (p->collider.unk_2E & 1) {
             work->unk_15A |= 0x20;
-            *(s32*)&work->unk_178 = p->collider.unk_44;
-            *(s32*)&work->unk_17A[2] = p->collider.unk_48;
-            *(s32*)&work->unk_17A[6] = p->collider.unk_40;
+            work->unk_178 = p->collider.unk_44;
+            work->unk_17C = p->collider.unk_48;
+            work->unk_180 = p->collider.unk_40;
             gBtlWork->unk_0F0 = (s32)p->collider.other;
         } else {
             work->unk_15A &= ~0x20;
@@ -7387,21 +7387,21 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->unk_03C = 24;
                 work->unk_15A = 0;
                 work->unk_158 = 0;
-                *(TaskDesc**)&work->unk_190 = &gTaskDescSmnKing;
+                work->unk_190 = &gTaskDescSmnKing;
                 work->unk_166[0] = 0;
                 break;
             case 0x800A7E9F:
                 work->unk_03C = 24;
                 work->unk_15A = 0;
                 work->unk_158 = 0;
-                *(TaskDesc**)&work->unk_190 = &gTaskDescSmnKing;
+                work->unk_190 = &gTaskDescSmnKing;
                 work->unk_166[0] = 1;
                 break;
             case 0xE9FA7E9F:
                 work->unk_03C = 24;
                 work->unk_15A = 0;
                 work->unk_158 = 0;
-                *(TaskDesc**)&work->unk_190 = &gTaskDescSmnKing;
+                work->unk_190 = &gTaskDescSmnKing;
                 work->unk_166[0] = 2;
                 break;
             case 137:
@@ -7670,7 +7670,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (p->x < ((gBtlWork->unk_0DA - 48) << 8) || p->x > ((gBtlWork->unk_0DC + 48) << 8)) {
             work->unk_03C = 52;
             work->unk_158 = 0;
-            *(u16*)&work->unk_1B0[0] = 0;
+            work->unk_1B0 = 0;
             break;
         }
 
@@ -7703,9 +7703,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 SetBtlRikuAnimation(work, 29, 1);
 
                 if (p->flags & 4) {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 184;
+                    work->unk_194 = GetRandom() % 17 + 184;
                 } else {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 56;
+                    work->unk_194 = GetRandom() % 17 + 56;
                 }
 
                 p->y = ty - 4096 + (GetRandom() % 33 << 8);
@@ -7714,9 +7714,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 SetBtlRikuAnimation(work, 30, 1);
 
                 if (p->flags & 4) {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 203;
+                    work->unk_194 = GetRandom() % 17 + 203;
                 } else {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 37;
+                    work->unk_194 = GetRandom() % 17 + 37;
                 }
 
                 p->y = ty + 4096 + (GetRandom() % 17 << 8);
@@ -7725,9 +7725,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 SetBtlRikuAnimation(work, 31, 1);
 
                 if (p->flags & 4) {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 165;
+                    work->unk_194 = GetRandom() % 17 + 165;
                 } else {
-                    *(s32*)&work->unk_190[4] = GetRandom() % 17 + 75;
+                    work->unk_194 = GetRandom() % 17 + 75;
                 }
 
                 p->y = ty - 4096 - (GetRandom() % 17 << 8);
@@ -7769,8 +7769,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         work->unk_15E |= 0x800;
-        p->x += gSineTable[work->unk_190[4]] * 12;
-        p->y += -gSineTable[work->unk_190[4] + 64] * 12;
+        p->x += gSineTable[(u8)work->unk_194] * 12;
+        p->y += -gSineTable[(u8)work->unk_194 + 64] * 12;
 
         if (func_08011F78(9, p->x, p->y, p->z, 24, 16, 24) != 0) {
             m4aSongNumStart(SONG_BTL_RK_HIT03);
@@ -7778,7 +7778,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->unk_154 = 0;
 
-        if ((s16)work->unk_158 == 15 && (s16)*(u16*)&work->unk_1B0[0] > 4) {
+        if ((s16)work->unk_158 == 15 && (s16)work->unk_1B0 > 4) {
             work->unk_03C = 54;
             work->unk_158 = 0;
             break;
@@ -7793,7 +7793,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->unk_03C = 52;
         work->unk_158 = 0;
-        (*(u16*)&work->unk_1B0[0])++;
+        work->unk_1B0++;
         break;
     case 54:
         func_0802F284(p->x, p->y, p->z);
@@ -7921,12 +7921,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 25, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
             work->unk_15E &= ~0x400;
-            *(BtlObj**)&work->unk_1A4 = func_08028370(work);
+            work->unk_1A4 = func_08028370(work);
         }
 
         if (work->unk_15E & 0x400) {
             func_0802753C(work);
-            e = *(BtlObj**)&work->unk_1A4;
+            e = work->unk_1A4;
 
             if (e != 0) {
                 flag = 0;
@@ -8502,10 +8502,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         func_0802F284(p->x, p->y, p->z);
 
         if ((s16)work->unk_158 == 0) {
-            *(BtlObj**)&work->unk_1A4 = func_0802830C(work);
+            work->unk_1A4 = func_0802830C(work);
         }
 
-        e = *(BtlObj**)&work->unk_1A4;
+        e = work->unk_1A4;
 
         if (e != 0) {
             p->x += (e->x - p->x) >> 3;
@@ -8540,11 +8540,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->unk_15E |= 0x800;
 
-        if (*(BtlObj**)&work->unk_1A4 != 0) {
+        if (work->unk_1A4 != 0) {
             func_0802F284(p->x, p->y,
-                          (*(BtlObj**)&work->unk_1A4)->z - ((*(BtlObj**)&work->unk_1A4)->unk_0A2 << 8));
-            p->x += (((BtlObj*)*(u32*)&work->unk_1A4)->x - p->x) >> 3;
-            p->y += (((BtlObj*)*(u32*)&work->unk_1A4)->y - p->y) >> 3;
+                          work->unk_1A4->z - (work->unk_1A4->unk_0A2 << 8));
+            p->x += (work->unk_1A4->x - p->x) >> 3;
+            p->y += (work->unk_1A4->y - p->y) >> 3;
         } else {
             func_0802F284(p->x, p->y, p->unk_010);
         }
@@ -8575,13 +8575,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         BtlObj* e;
 
         if ((s16)work->unk_158 == 0) {
-            *(BtlObj**)&work->unk_1A4 = func_0802830C(work);
+            work->unk_1A4 = func_0802830C(work);
             SetBtlRikuAnimation(work, 24, 0);
             work->unk_154 = -2176;
         }
 
         work->unk_15E |= 0x800;
-        e = *(BtlObj**)&work->unk_1A4;
+        e = work->unk_1A4;
 
         if (e != 0) {
             p->x += (e->x - p->x) >> 3;
@@ -8605,14 +8605,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->unk_154 = -1536;
 
             if (p->flags & 4) {
-                *(s32*)&work->unk_1B0[4] = p->x + 12288;
+                work->unk_1B4 = p->x + 12288;
             } else {
-                *(s32*)&work->unk_1B0[4] = p->x - 12288;
+                work->unk_1B4 = p->x - 12288;
             }
         }
 
         work->unk_15E |= 0x800;
-        p->x += (*(s32*)&work->unk_1B0[4] - p->x) >> 3;
+        p->x += (work->unk_1B4 - p->x) >> 3;
 
         if (AnimIsFinished(&work->anim) != 0 && p->z >= p->unk_010) {
             FadeToOriginal(0, 8);
@@ -9458,28 +9458,28 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
 
                 if (p->flags & 4) {
-                    *(s32*)&work->unk_1B0[4] = e->x + 0x2D00;
+                    work->unk_1B4 = e->x + 0x2D00;
                 } else {
-                    *(s32*)&work->unk_1B0[4] = e->x - 0x2D00;
+                    work->unk_1B4 = e->x - 0x2D00;
                 }
 
-                *(s32*)&work->unk_1B0[8] = e->y;
+                work->unk_1B8 = e->y;
             } else {
                 if (p->flags & 4) {
-                    *(s32*)&work->unk_1B0[4] = p->x;
+                    work->unk_1B4 = p->x;
                 } else {
-                    *(s32*)&work->unk_1B0[4] = p->x;
+                    work->unk_1B4 = p->x;
                 }
 
                 p->flags ^= 4;
-                *(s32*)&work->unk_1B0[8] = p->y;
+                work->unk_1B8 = p->y;
             }
             work->unk_154 = -1152;
         }
 
         if (AnimGetFrame(&work->anim) != 0) {
-            p->x += (*(s32*)&work->unk_1B0[4] - p->x) >> 3;
-            p->y += (*(s32*)&work->unk_1B0[8] - p->y) >> 3;
+            p->x += (work->unk_1B4 - p->x) >> 3;
+            p->y += (work->unk_1B8 - p->y) >> 3;
             work->unk_15E |= 0x800;
         }
 
@@ -9498,7 +9498,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_158 == 0) {
             work->unk_160 = 0;
-            *(s32*)&work->unk_190[4] = 0x880;
+            work->unk_194 = 0x880;
             work->unk_15A = 20;
             p->flags |= 0x200;
             work->unk_154 = -819;
@@ -9535,12 +9535,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_15A != 0) {
             if (p->flags & 4) {
-                p->x += *(s32*)&work->unk_190[4];
+                p->x += work->unk_194;
             } else {
-                p->x -= *(s32*)&work->unk_190[4];
+                p->x -= work->unk_194;
             }
 
-            ApproachValue((s32*)&work->unk_190[4], 0, work->unk_15A);
+            ApproachValue(&work->unk_194, 0, work->unk_15A);
             work->unk_15A--;
 
             if (p->z < p->unk_010) {
@@ -9584,7 +9584,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_158 == 0) {
             work->unk_160 = 0;
-            *(s32*)&work->unk_190[4] = 0x1080;
+            work->unk_194 = 0x1080;
             work->unk_15A = 20;
             work->unk_154 = -819;
             m4aSongNumStart(GetRandom() % 2 + 259);
@@ -9610,12 +9610,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_15A != 0) {
             if (p->flags & 4) {
-                p->x += *(s32*)&work->unk_190[4];
+                p->x += work->unk_194;
             } else {
-                p->x -= *(s32*)&work->unk_190[4];
+                p->x -= work->unk_194;
             }
 
-            ApproachValue((s32*)&work->unk_190[4], 0, work->unk_15A);
+            ApproachValue(&work->unk_194, 0, work->unk_15A);
             work->unk_15A--;
 
             if (p->z < p->unk_010) {
@@ -9657,7 +9657,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_158 == 0) {
             work->unk_160 = 0;
-            *(s32*)&work->unk_190[4] = 0x580;
+            work->unk_194 = 0x580;
             work->unk_15A = 20;
             work->unk_154 = -819;
             m4aSongNumStart(GetRandom() % 2 + 259);
@@ -9683,12 +9683,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->unk_15A != 0) {
             if (work->unk_15E & 0x2000) {
-                p->y -= *(s32*)&work->unk_190[4];
+                p->y -= work->unk_194;
             } else {
-                p->y += *(s32*)&work->unk_190[4];
+                p->y += work->unk_194;
             }
 
-            ApproachValue((s32*)&work->unk_190[4], 0, work->unk_15A);
+            ApproachValue(&work->unk_194, 0, work->unk_15A);
             work->unk_15A--;
 
             if (p->z < p->unk_010) {
@@ -10115,7 +10115,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             func_080277E4(work);
             spawn.unk_02 = work->unk_178;
             spawn.unk_00 = work->unk_166[0];
-            TaskCreate((TaskPool*)((u8*)gBtlWork + 44), *(TaskDesc**)&work->unk_190[0], &spawn);
+            TaskCreate(&gBtlWork->taskPools[0], work->unk_190, &spawn);
             p->x = p->unk_014;
             p->y = p->unk_018;
             p->z = -65536;
@@ -10595,17 +10595,17 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     if ((work->unk_15E & 0x20) && *(s32*)&gBtlWork->unk_0F0 == (s32)p->collider.other) {
-        p->x += p->collider.unk_44 - *(s32*)&work->unk_17C;
-        p->y += p->collider.unk_48 - *(s32*)&work->unk_180[0];
-        p->z += p->collider.unk_40 - *(s32*)&work->unk_180[4];
+        p->x += p->collider.unk_44 - work->unk_17C;
+        p->y += p->collider.unk_48 - work->unk_180;
+        p->z += p->collider.unk_40 - work->unk_184;
     }
 
     if (p->z >= p->unk_010) {
         if (p->collider.unk_2E & 1) {
             work->unk_15E |= 0x20;
-            *(s32*)&work->unk_17C = p->collider.unk_44;
-            *(s32*)&work->unk_180[0] = p->collider.unk_48;
-            *(s32*)&work->unk_180[4] = p->collider.unk_40;
+            work->unk_17C = p->collider.unk_44;
+            work->unk_180 = p->collider.unk_48;
+            work->unk_184 = p->collider.unk_40;
             *(s32*)&gBtlWork->unk_0F0 = (s32)p->collider.other;
         } else {
             work->unk_15E &= 0xFFDF;

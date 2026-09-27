@@ -29,9 +29,7 @@ typedef struct TutorialWork {
     u8 unk_016[0x2];
     void* tiles;
     void* palette;
-    u8 unk_020[0x10];
-    u16 unk_030;
-    u8 unk_032[0x6];
+    AnimState anim;
 } TutorialWork;
 
 void task_tutorial_0(TutorialWork* work, s32 arg1);

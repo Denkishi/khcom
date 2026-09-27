@@ -22,8 +22,8 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     gBtlWork->flags |= 0x10000000000ULL;
     work->tiles = AllocObjTiles(0x100, gUnk_08B263D2);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    AnimInit(work->unk_020, gUnk_09EE15F0, gUnk_09EE15C0);
-    AnimStart(work->unk_020, 0, 1);
+    AnimInit(&work->anim, gUnk_09EE15F0, gUnk_09EE15C0);
+    AnimStart(&work->anim, 0, 1);
     SeedRandom(2);
 }
 
@@ -516,9 +516,9 @@ void task_tutorial_2(TutorialWork* work) {
     s32 s;
 
     if (work->flags & 4) {
-        spr = AnimUpdate(work->unk_020);
+        spr = AnimUpdate(&work->anim);
 
-        if (work->unk_030 == 0) {
+        if (work->anim.animId == 0) {
             x = work->unk_012;
             s = gSineTable[(gFrameCounter << 3) & 0xFF];
             y = (s >> 7) + work->unk_014;
@@ -543,5 +543,5 @@ TaskDesc gTaskDescTutorial = {
     (TaskUpdateFunc)task_tutorial_1,
     (TaskFunc)task_tutorial_2,
     (TaskFunc)task_tutorial_3,
-    0x38,
+    sizeof(TutorialWork),
 };

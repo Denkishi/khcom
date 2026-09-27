@@ -13,20 +13,6 @@
 #include "game_state.h"
 #include "anim.h"
 #include "btl4_api.h"
-typedef struct BtlEffect {
-    u16 unk_00;
-    u16 unk_02;
-    s32 unk_04;
-    void* unk_08;
-    s16 unk_0C;
-    s16 unk_0E;
-    u8 unk_10[0x02];
-    u16 unk_12;
-    u16 unk_14;
-    u8 unk_16[0x0A];
-    AnimState anim;
-} BtlEffect;
-
 typedef struct BtlPopSrc {
     s32 x;
     s32 y;

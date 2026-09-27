@@ -3,6 +3,7 @@
 #include "system_state.h"
 #include "btl4.h"
 #include "btl4_api.h"
+#include "tutorial.h"
 #include "sprites_btl.h"
 #include "sprites_btl_hud.h"
 #include "gba/io_reg.h"
@@ -1008,40 +1009,40 @@ void func_0805DAB4(void) {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
-void func_0805DACC(BtlEffect* p, u16 b, void* c) {
-    p->unk_0C = 0;
-    p->unk_04 = 1;
-    p->unk_08 = c;
-    p->unk_02 = b;
+void func_0805DACC(TutorialWork* p, u16 b, u32 c) {
+    p->unk_00C = 0;
+    p->unk_004 = 1;
+    p->unk_008 = c;
+    p->unk_002 = b;
 }
 
-void func_0805DADC(BtlEffect* p, u16 b, void* c) {
-    p->unk_0C = 0;
-    p->unk_04 = 3;
-    p->unk_08 = c;
-    p->unk_02 = b;
+void func_0805DADC(TutorialWork* p, u16 b, u32 c) {
+    p->unk_00C = 0;
+    p->unk_004 = 3;
+    p->unk_008 = c;
+    p->unk_002 = b;
 }
 
 void func_0805DAEC(void) {
     func_080A42E0();
 }
 
-void func_0805DAF8(BtlEffect* p, u16 b, void* c) {
-    p->unk_0C = 0;
-    p->unk_04 = 0;
-    p->unk_08 = c;
-    p->unk_0E = b;
+void func_0805DAF8(TutorialWork* p, u16 b, u32 c) {
+    p->unk_00C = 0;
+    p->unk_004 = 0;
+    p->unk_008 = c;
+    p->unk_00E = b;
 }
 
-void func_0805DB04(BtlEffect* p, u16 b, u16 c, u16 d) {
-    p->unk_00 |= 4;
-    p->unk_12 = b;
-    p->unk_14 = c;
+void func_0805DB04(TutorialWork* p, u16 b, u16 c, u16 d) {
+    p->flags |= 4;
+    p->unk_012 = b;
+    p->unk_014 = c;
     AnimStart(&p->anim, d, 1);
 }
 
-void func_0805DB28(BtlEffect* p) {
-    p->unk_00 &= ~4;
+void func_0805DB28(TutorialWork* p) {
+    p->flags &= ~4;
 }
 
 TaskDesc gTaskDescBtlPopCb = {

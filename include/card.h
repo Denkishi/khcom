@@ -101,7 +101,7 @@ typedef struct CardDisplayWork {
     void* unk_18;
     void* unk_1C;
     struct UnkStruct_08095A5C* unk_20;
-    u8 unk_24[0x14];
+    TaskPool tasks;
     CardDisplayArgs args;
     CardDef* cardDef;
     s32 x;

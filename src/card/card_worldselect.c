@@ -2562,10 +2562,10 @@ void Reload_Gage_2(CardDisplayWork* p) {
                    gUnk_02039DD4->palette, 0, 0x400, 48);
     }
 
-    TaskPoolDraw(&p->unk_24[0]);
+    TaskPoolDraw(&p->tasks);
 }
 void Reload_Gage_3(CardDisplayWork* p) {
-    TaskPoolDestroy(&p->unk_24[0]);
+    TaskPoolDestroy(&p->tasks);
     ReleaseObjPalette(p->palette);
     ReleaseObjTiles(p->tiles);
     ReleaseObjTiles(p->tiles2);

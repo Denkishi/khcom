@@ -104,20 +104,20 @@ static struct ObjTiles* gUnk_02035DB8;
 static u32 gUnk_02035DBC;
 static AnimState gUnk_02035DC0;
 static u8 gUnk_02035DD8;
-static void* gUnk_02035DDC;
+static TextSlot* gUnk_02035DDC;
 static u8 gUnk_02035DE0;
-static void* gUnk_02035DE4;
+static TextSlot* gUnk_02035DE4;
 static u8 gUnk_02035DE8;
-static void* gUnk_02035DEC;
+static TextSlot* gUnk_02035DEC;
 static u8 gUnk_02035DF0;
 static u16 gUnk_02035DF2;
-static void* gUnk_02035DF4;
+static TextSlot* gUnk_02035DF4;
 static u8 gUnk_02035DF8;
 static u16 gUnk_02035DFA;
-static void* gUnk_02035DFC;
+static TextSlot* gUnk_02035DFC;
 static u8 gUnk_02035E00;
 static u16 gUnk_02035E02;
-static void* gUnk_02035E04;
+static TextSlot* gUnk_02035E04;
 static u8 gUnk_02035E08;
 static u16 gUnk_02035E0A;
 static s16 gUnk_02035E0C;
@@ -1065,7 +1065,7 @@ void mode_ms_charge_0(void) {
 
     {
         MsCard** dst = &gMsCards;
-        *dst = EwramAlloc(0x3A18);
+        *dst = EwramAlloc(286 * sizeof(MsCard));
     }
     SpriteReset();
     FadeStartIn(0, 16);
@@ -1201,13 +1201,13 @@ void mode_ms_charge_0(void) {
     , 0xC00);
     AnimInit(&gUnk_02035CC8, gMoguFl00Anims, gMoguFl00Frames);
     {
-        void** dst = &gUnk_02035DDC;
-        *dst = EwramAlloc(0x120);
+        TextSlot** dst = &gUnk_02035DDC;
+        *dst = EwramAlloc(36 * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035DDC, 36);
     {
-        void** dst = &gUnk_02035DE4;
-        *dst = EwramAlloc(0x2D0);
+        TextSlot** dst = &gUnk_02035DE4;
+        *dst = EwramAlloc(90 * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035DE4, 90);
     length = GetTextLength(
@@ -1219,8 +1219,8 @@ void mode_ms_charge_0(void) {
     );
     gUnk_02035DF2 = length;
     {
-        void** dst = &gUnk_02035DEC;
-        *dst = EwramAlloc(gUnk_02035DF2 * 8);
+        TextSlot** dst = &gUnk_02035DEC;
+        *dst = EwramAlloc(gUnk_02035DF2 * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035DEC, gUnk_02035DF2);
     pb = &gUnk_02035DF0;
@@ -1240,8 +1240,8 @@ void mode_ms_charge_0(void) {
     );
     gUnk_02035DFA = length;
     {
-        void** dst = &gUnk_02035DF4;
-        *dst = EwramAlloc(gUnk_02035DFA * 8);
+        TextSlot** dst = &gUnk_02035DF4;
+        *dst = EwramAlloc(gUnk_02035DFA * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035DF4, gUnk_02035DFA);
     pb = &gUnk_02035DF8;
@@ -1261,8 +1261,8 @@ void mode_ms_charge_0(void) {
     );
     gUnk_02035E02 = length;
     {
-        void** dst = &gUnk_02035DFC;
-        *dst = EwramAlloc(gUnk_02035E02 * 8);
+        TextSlot** dst = &gUnk_02035DFC;
+        *dst = EwramAlloc(gUnk_02035E02 * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035DFC, gUnk_02035E02);
     pb = &gUnk_02035E00;
@@ -1282,8 +1282,8 @@ void mode_ms_charge_0(void) {
     );
     gUnk_02035E0A = length;
     {
-        void** dst = &gUnk_02035E04;
-        *dst = EwramAlloc(gUnk_02035E0A * 8);
+        TextSlot** dst = &gUnk_02035E04;
+        *dst = EwramAlloc(gUnk_02035E0A * sizeof(TextSlot));
     }
     InitTextSlots(gUnk_02035E04, gUnk_02035E0A);
     pb = &gUnk_02035E08;

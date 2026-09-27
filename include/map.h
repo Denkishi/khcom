@@ -375,7 +375,9 @@ typedef struct MapSaveWork {
     void* tiles;
     s32 x2;
     FldRes* palette4;
-    u8 unk_044[0x124];
+    TextSlot textSlots[0x24];
+    u8 textSlotCount;
+    u8 unk_165[0x03];
     FldRes* palette5;
     void* tiles4;
     s32 x3;
@@ -387,16 +389,17 @@ typedef struct MapSaveWork {
     FldRes* palette7;
     void* tiles6;
     FldRes* palette8;
-    u8 textSlots2[0xD8];
 #ifdef VERSION_EU
-    u8 unkEu_26C[0xD8];
+    TextSlot textSlots2[0x36];
+#else
+    TextSlot textSlots2[0x1B];
 #endif
     u8 textSlotCount2;
     u8 unk_26D[0x03];
-    u8 textSlots3[0x30];
+    TextSlot textSlots3[0x06];
     u8 textSlotCount3;
     u8 unk_2A1[0x03];
-    u8 textSlots4[0x48];
+    TextSlot textSlots4[0x09];
     u8 textSlotCount4;
     u8 unk_2ED[0x03];
     s32 (*update)(struct MapSaveWork*);
@@ -406,7 +409,6 @@ typedef struct MapSaveWork {
     u8 unk_2F8;
     u8 unk_2F9[0x03];
     TaskPool tasks;
-    u8 unk_30C[0x04];
 } MapSaveWork;
 
 typedef struct MapAnmEntry {
@@ -925,27 +927,6 @@ typedef struct MapDoorWork {
     TaskPool tasks;
 } MapDoorWork;
 
-typedef struct UnkStruct_080EE50C {
-    u8 unk_000[0x14];
-    FldRes* palette;
-    u8 unk_018[0x1C];
-    FldRes* palette2;
-    u8 unk_038[0x08];
-    FldRes* palette3;
-    u8 unk_044[0x14C];
-    FldRes* palette4;
-} UnkStruct_080EE50C;
-
-typedef struct UnkStruct_080EE580 {
-    FldRes* palette;
-    u8 unk_004[0x164];
-    FldRes* palette2;
-    u8 unk_16C[0x14];
-    FldRes* palette3;
-    u8 unk_184[0x04];
-    FldRes* palette4;
-} UnkStruct_080EE580;
-
 extern u8 gMickeyFl00Tiles[];
 extern u8 gMickeyPalette[];
 extern u8 gEmy01L00Tiles[];
@@ -1307,14 +1288,14 @@ void func_080ECA88(MapDoorWork* p);
 u8 func_080ECC8C(MapDoorWork* p);
 void func_080ECFE8(MapMenuWork* p, u8 a);
 void func_080ED06C(MapMenuWork* p, u8 a);
-void func_080EE50C(UnkStruct_080EE50C* p, u8 a);
-void func_080EE580(UnkStruct_080EE580* p, u8 a);
+void func_080EE50C(MapSaveWork* p, u8 a);
+void func_080EE580(MapSaveWork* p, u8 a);
 void func_080EE5E0(u8 a);
 
 void func_080E3CD4(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f);
 void func_080E64D4(MapEnmWork* p);
 void func_080EBA58(u8 a);
-void func_080EE760(u8* work, u8 i);
+void func_080EE760(MapSaveWork* w, u8 i);
 void func_080E00E4(s32 a, s32 b);
 void func_080EAF10(void);
 void func_080EBB24(void);

@@ -5810,22 +5810,22 @@ void Task_MapMenu_3(MapMenuWork* w) {
     gFieldState->flags &= ~0x2000;
 }
 
-void func_080EE50C(UnkStruct_080EE50C* p, u8 a) {
+void func_080EE50C(MapSaveWork* p, u8 a) {
     FadeSetPaletteExcluded(0x0B, a);
     FadeSetPaletteExcluded(0x0C, a);
     FadeSetPaletteExcluded(0x0D, a);
     FadeSetPaletteExcluded(0x0E, a);
-    FadeSetPaletteExcluded(p->palette->index + 0x10, a);
-    FadeSetPaletteExcluded(p->palette2->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette3->index + 0x10, a);
+    FadeSetPaletteExcluded(p->palette->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette4->index + 0x10, a);
+    FadeSetPaletteExcluded(p->palette8->index + 0x10, a);
 }
 
-void func_080EE580(UnkStruct_080EE580* p, u8 a) {
-    FadeSetPaletteExcluded(p->palette->index + 0x10, a);
+void func_080EE580(MapSaveWork* p, u8 a) {
     FadeSetPaletteExcluded(p->palette2->index + 0x10, a);
-    FadeSetPaletteExcluded(p->palette3->index + 0x10, a);
-    FadeSetPaletteExcluded(p->palette4->index + 0x10, a);
+    FadeSetPaletteExcluded(p->palette5->index + 0x10, a);
+    FadeSetPaletteExcluded(p->palette6->index + 0x10, a);
+    FadeSetPaletteExcluded(p->palette7->index + 0x10, a);
 }
 
 void func_080EE5E0(u8 a) {
@@ -5928,16 +5928,16 @@ void func_080EE6AC(u32 t) {
     }
 }
 
-void func_080EE760(u8* work, u8 i) {
+void func_080EE760(MapSaveWork* w, u8 i) {
     SaveFileSummary* e = &gGameState.fileSummaries[i];
 
     if (e->level == 0) {
-        work[0x164] = 0;
+        w->textSlotCount = 0;
     } else {
         func_080EE5E0(e->floor);
         func_080EE62C(e->level);
         func_080EE6AC(e->playTime);
-        work[0x164] = LoadTextSlots(func_080DF804(e->world), &work[0x44]);
+        w->textSlotCount = LoadTextSlots(func_080DF804(e->world), w->textSlots);
     }
 }
 
@@ -5956,9 +5956,9 @@ s32 func_080EE7B0(MapSaveWork* w) {
 }
 
 s32 func_080EE824(MapSaveWork* w) {
-    u8* p1;
-    u8* p2;
-    u8* p3;
+    TextSlot* p1;
+    TextSlot* p2;
+    TextSlot* p3;
 
     if (w->unk_2F6 != 0) {
         ApproachValue(&w->x, 0, w->unk_2F6);
@@ -5978,8 +5978,8 @@ s32 func_080EE824(MapSaveWork* w) {
             w->palette4 = LoadObjPalette(gUnk_09991C44, 32);
         }
 
-        w->unk_044[0x120] = 0;
-        InitTextSlots(w->unk_044, 36);
+        w->textSlotCount = 0;
+        InitTextSlots(w->textSlots, 36);
         SetupBg(0, 3, 31, 11);
         SetBgPriority(0, 0);
         LoadBgPalette(0, gUnk_09991C84, 128);
@@ -6007,13 +6007,13 @@ s32 func_080EE824(MapSaveWork* w) {
                 LoadBgMap(0, gUnk_0998C744, 0x800);
 
                 if (SaveRepairFileSmall(1) == 2) {
-                    func_080EE760((u8*)w, 3);
+                    func_080EE760(w, 3);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998BF44, 0x800);
 
                 if (SaveRepairFileSmall(0) == 2) {
-                    func_080EE760((u8*)w, 2);
+                    func_080EE760(w, 2);
                 }
             }
         } else {
@@ -6021,13 +6021,13 @@ s32 func_080EE824(MapSaveWork* w) {
                 LoadBgMap(0, gUnk_0998B744, 0x800);
 
                 if (SaveRepairFileLarge(1) == 2) {
-                    func_080EE760((u8*)w, 1);
+                    func_080EE760(w, 1);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998AF44, 0x800);
 
                 if (SaveRepairFileLarge(0) == 2) {
-                    func_080EE760((u8*)w, 0);
+                    func_080EE760(w, 0);
                 }
             }
         }
@@ -6061,7 +6061,7 @@ s32 func_080EE824(MapSaveWork* w) {
         w->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
         w->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
 #endif
-        func_080EE50C((UnkStruct_080EE50C*)w, 1);
+        func_080EE50C(w, 1);
         w->unk_2F8 = 1;
         w->unk_2F4 = 2;
         w->x2 = 0xB000;
@@ -6098,18 +6098,18 @@ s32 func_080EEB00(MapSaveWork* w) {
         if (gGameState.flags & 8) {
             if (gGameState.flags & 0x10) {
                 SaveWriteFileSmall(1);
-                func_080EE760((u8*)w, 3);
+                func_080EE760(w, 3);
             } else {
                 SaveWriteFileSmall(0);
-                func_080EE760((u8*)w, 2);
+                func_080EE760(w, 2);
             }
         } else {
             if (gGameState.flags & 0x10) {
                 SaveWriteFileLarge(1);
-                func_080EE760((u8*)w, 1);
+                func_080EE760(w, 1);
             } else {
                 SaveWriteFileLarge(0);
-                func_080EE760((u8*)w, 0);
+                func_080EE760(w, 0);
             }
         }
 
@@ -6147,7 +6147,7 @@ s32 func_080EEC9C(MapSaveWork* w) {
     } else {
         gUnk_0203C7AC->flags &= ~0x1000;
         gFieldState->flags &= ~0x100;
-        func_080EE50C((UnkStruct_080EE50C*)w, 0);
+        func_080EE50C(w, 0);
         FadeToOriginal(0, 16);
         w->unk_2F6 = 16;
         w->update = func_080EED44;
@@ -6219,7 +6219,7 @@ void Task_MapSave_0(MapSaveWork* w) {
     w->unk_2F6 = 16;
     w->update = func_080EE7B0;
     TaskPoolInit(&w->tasks, 1);
-    func_080EE580((UnkStruct_080EE580*)w, 1);
+    func_080EE580(w, 1);
     FadeToAmount(0, 16, 16);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
@@ -6293,7 +6293,7 @@ void Task_MapSave_2(MapSaveWork* w) {
         }
 
         DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, w->tiles3, w->palette3, 0, 0x400, 90);
-        DrawTextSlots(100, 59, w->unk_044, w->palette4, 50, w->unk_044[0x120]);
+        DrawTextSlots(100, 59, w->textSlots, w->palette4, 50, w->textSlotCount);
 
         if (w->unk_2F4 != 0) {
 #ifdef VERSION_EU
@@ -6333,22 +6333,22 @@ void Task_MapSave_2(MapSaveWork* w) {
 void Task_MapSave_3(MapSaveWork* w) {
     u32 f;
 
-    func_080EE580((UnkStruct_080EE580*)w, 0);
-    ReleaseObjPalette((u8*)w->palette2);
+    func_080EE580(w, 0);
+    ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles2);
-    ReleaseObjPalette((u8*)w->palette3);
+    ReleaseObjPalette(w->palette3);
     ReleaseObjTiles(w->tiles3);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette((u8*)w->palette5);
+    ReleaseObjPalette(w->palette5);
     ReleaseObjTiles(w->tiles4);
-    ReleaseObjPalette((u8*)w->palette6);
+    ReleaseObjPalette(w->palette6);
     ReleaseObjTiles(w->tiles5);
-    ReleaseObjPalette((u8*)w->palette7);
+    ReleaseObjPalette(w->palette7);
     ReleaseObjTiles(w->tiles6);
-    ReleaseObjPalette((u8*)w->palette4);
-    FreeTextSlots(w->unk_044, 36);
-    ReleaseObjPalette((u8*)w->palette8);
+    ReleaseObjPalette(w->palette4);
+    FreeTextSlots(w->textSlots, 36);
+    ReleaseObjPalette(w->palette8);
 #ifdef VERSION_EU
     FreeTextSlots(w->textSlots2, 54);
 #else
@@ -6654,11 +6654,7 @@ TaskDesc gTaskDescMapSave = {
     (TaskUpdateFunc)Task_MapSave_1,
     (TaskFunc)Task_MapSave_2,
     (TaskFunc)Task_MapSave_3,
-#ifdef VERSION_EU
-    0x3E8,
-#else
-    0x310,
-#endif
+    sizeof(MapSaveWork),
 };
 
 TaskDesc gTaskDescMapAnm = {

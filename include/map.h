@@ -301,7 +301,7 @@ typedef struct MapRndWork {
 } MapRndWork;
 
 typedef struct MapMenuWork {
-    u8* palette2;
+    ObjPalette* palette2;
     void* tiles2;
     s32 y;
     s32 y2;
@@ -309,39 +309,42 @@ typedef struct MapMenuWork {
     s32 x;
     void* tiles4;
     s32 x2;
-    u8* palette3;
+    ObjPalette* palette3;
     void* tiles5;
     s32 x3;
     s32 x4;
     s32 x5;
     u8 unk_034;
     u8 unk_035[0x03];
-    u8* palette4;
-    u8* palette5;
+    ObjPalette* palette4;
+    ObjPalette* palette5;
     void* tiles6;
     s32 x6;
     AnimState anim;
-    u8* palette;
+    ObjPalette* palette;
     void* tiles;
     s32 x7;
     s32 y3;
-    u8* palette8;
-    u8 unk_074[0xC4];
-    FldRes* palette6;
+    ObjPalette* palette8;
+    TextSlot textSlots[0x18];
+    u8 textSlotCount;
+    u8 unk_135[0x03];
+    ObjPalette* palette6;
     void* tiles8;
-    u8* palette7;
+    ObjPalette* palette7;
     void* tiles7;
     s32 x8;
     s32 y4;
     s32 unk_150;
     s32 unk_154;
-    u8* palette9[0x03];
+    ObjPalette* palette9[0x03];
     void* tiles9[0x03];
-    s32 gfx[0x03];
-    u8* unk_17C;
-    TextSlot textSlots2[0x21];
+    void* gfx[0x03];
+    ObjPalette* unk_17C;
 #ifdef VERSION_EU
-    u8 unkEu_288[0x108];
+    TextSlot textSlots2[0x42];
+#else
+    TextSlot textSlots2[0x21];
 #endif
     u8 textSlotCount2;
     u8 unk_289[0x03];
@@ -890,20 +893,6 @@ typedef struct MapFixWork {
 #endif
 } MapFixWork;
 
-typedef struct UnkStruct_080ECFE8 {
-    u8 unk_000[0x20];
-    FldRes* palette;
-    u8 unk_024[0x14];
-    FldRes* palette2;
-    FldRes* palette3;
-    u8 unk_040[0x20];
-    FldRes* palette4;
-    u8 unk_064[0x0C];
-    FldRes* palette5;
-    u8 unk_074[0xE4];
-    FldRes* palettes[3];
-} UnkStruct_080ECFE8;
-
 typedef struct UnkStruct_0984B968 {
     void* unk_00;
     void* unk_04;
@@ -935,14 +924,6 @@ typedef struct MapDoorWork {
     u8 unk_72[0x02];
     TaskPool tasks;
 } MapDoorWork;
-
-typedef struct UnkStruct_080ED06C {
-    FldRes* palette;
-    u8 unk_004[0x134];
-    FldRes* palette2;
-    u8 unk_13C[0x04];
-    FldRes* palette3;
-} UnkStruct_080ED06C;
 
 typedef struct UnkStruct_080EE50C {
     u8 unk_000[0x14];
@@ -1068,7 +1049,7 @@ extern u8 gUnk_09991224[];
 extern u8 gUnk_09991244[];
 extern u8 gUnk_09991264[];
 
-void func_080ED250(u8* work);
+void func_080ED250(MapMenuWork* w);
 void func_080EBE90(LoadGameMenuWork* work);
 void func_080EBD00(LoadGameMenuWork* work);
 void func_080EBEC8(LoadGameMenuWork* work);
@@ -1106,7 +1087,7 @@ void func_080EB1AC(NewGameSlotMenuWork* w);
 void func_080EB1F4(NewGameSlotMenuWork* w);
 void func_080EB27C(NewGameSlotMenuWork* w);
 void func_080EB2D0(NewGameSlotMenuWork* w);
-void func_080ED314(u8* work);
+void func_080ED314(MapMenuWork* w);
 s32 Task_MapSave_1(MapSaveWork* w);
 void func_080E4B34(void);
 void func_080E4B78(s16 x, s16 y);
@@ -1319,13 +1300,13 @@ s32 func_080EAD3C(u8 i);
 void func_080EB818(u8 a, u8 b, u8 c);
 void func_080EB898(u8 a, u16 b);
 void func_080EB93C(u8 a, u32 v);
-void func_080ED0B8(FldRes* p, u8 a, u16 v);
-void func_080ED14C(FldRes* p, u8 a, u32 v);
+void func_080ED0B8(ObjTiles* p, u8 a, u16 v);
+void func_080ED14C(ObjTiles* p, u8 a, u32 v);
 s32 Task_MapFix_1(MapFixWork* w);
 void func_080ECA88(MapDoorWork* p);
 u8 func_080ECC8C(MapDoorWork* p);
-void func_080ECFE8(UnkStruct_080ECFE8* p, u8 a);
-void func_080ED06C(UnkStruct_080ED06C* p, u8 a);
+void func_080ECFE8(MapMenuWork* p, u8 a);
+void func_080ED06C(MapMenuWork* p, u8 a);
 void func_080EE50C(UnkStruct_080EE50C* p, u8 a);
 void func_080EE580(UnkStruct_080EE580* p, u8 a);
 void func_080EE5E0(u8 a);

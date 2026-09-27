@@ -9,7 +9,7 @@
 #include "sprites_mode_test.h"
 #include "debug_font.h"
 
-u32 gUnk_02034A14;
+u8* gUnk_02034A14;
 u8 gUnk_02034A18;
 UnkStruct_02034A1C* gUnk_02034A1C;
 u8 gUnk_02034A20;
@@ -368,7 +368,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     u8 r;
     u8 k;
     u16 col;
-    u32 p;
+    u8* p;
     u32* dst;
     u32* src;
     u32 t;
@@ -378,7 +378,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     s32 n;
 
     j = 0;
-    gUnk_02034A14 = (u32)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
+    gUnk_02034A14 = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
     b = ((b + d) >> 3) + 1;
     n = (s8)d + b;
     d = n;
@@ -715,41 +715,41 @@ void func_080605A4(u8 bg) {
     void* charBase;
     u32 v;
     u32 mapRow;
-    u32 screen;
-    u32 font = 0;
+    u8* screen;
+    u8* font = 0;
     u8 n;
     u8 tileX;
     u8 tileY;
     u8 offsetX;
     u8 offsetY;
     s32 height = 0;
-    u32 destination;
+    u8* destination;
     u8 i;
     u8 row;
     u8 sourceRow;
 
     charBase = GetBgCharBase(bg);
-    gUnk_02034A14 = (u32)charBase;
-    screen = (u32)GetBgScreenBase(bg);
+    gUnk_02034A14 = charBase;
+    screen = GetBgScreenBase(bg);
     for (n = 0; n < gUnk_02034A20; n++) {
         tileX = gUnk_02034A1C[n].unk_7A >> 3;
         tileY = gUnk_02034A1C[n].unk_7B >> 3;
         offsetX = gUnk_02034A1C[n].unk_7A - tileX * 8;
         offsetY = gUnk_02034A1C[n].unk_7B - tileY * 8;
-        gUnk_02034A14 = (u32)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
+        gUnk_02034A14 = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
         for (i = 0; i < gUnk_02034A1C[n].unk_7D; i++) {
             destination = gUnk_02034A14 + i * 32;
             switch (gUnk_02034A1C[n].unk_80) {
             case 0:
-                font = (u32)gUnk_0941BEB8 + gUnk_02034A1C[n].unk_00[i] * 32;
+                font = gUnk_0941BEB8 + gUnk_02034A1C[n].unk_00[i] * 32;
                 height = 8;
                 break;
             case 1:
-                font = (u32)gUnk_0941DD38 + gUnk_02034A1C[n].unk_00[i] * 32;
+                font = gUnk_0941DD38 + gUnk_02034A1C[n].unk_00[i] * 32;
                 height = 10;
                 break;
             case 2:
-                font = (u32)gUnk_09EE26EC[gUnk_02034A1C[n].unk_00[i] >> 10];
+                font = gUnk_09EE26EC[gUnk_02034A1C[n].unk_00[i] >> 10];
                 height = 8;
                 break;
             }

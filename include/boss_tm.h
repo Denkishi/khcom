@@ -87,20 +87,6 @@ typedef struct TmBodyWork {
     s16 unk_492;
 } TmBodyWork;
 
-typedef struct WlogoObjParam {
-    u32 tiles;
-    u16 unk_04;
-    u8 unk_06[0x02];
-    u32 palette;
-    u16 unk_0C;
-    u8 unk_0E[0x02];
-    s32 x;
-    s32 y;
-    s32 z;
-    void (*unk_1C)(void);
-    void* unk_20;
-} WlogoObjParam;
-
 typedef struct TmTblWork {
     TmWork* tm;
     Collider collider;

@@ -3,6 +3,7 @@
 #include "boss_tm.h"
 #include "boss_tm_assets.h"
 #include "event_backgrounds.h"
+#include "chara_types.h"
 #include "chara_api.h"
 #include "acgtrans.h"
 
@@ -101,7 +102,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
 }
 
 u8 task_bos_tm_1(TmWork* w) {
-    WlogoObjParam param;
+    CharaObjParam2 param;
     u16 t;
 
     switch (w->unk_2C) {
@@ -148,13 +149,13 @@ u8 task_bos_tm_1(TmWork* w) {
                 return 0;
             }
         } else {
-            param.tiles = 0x06010000 + (w->unk_40 << 5);
+            param.unk_00 = 0x06010000 + (w->unk_40 << 5);
             param.unk_04 = w->unk_42;
-            param.palette = 0x05000200 + (w->unk_44 << 5);
+            param.unk_08 = 0x05000200 + (w->unk_44 << 5);
             param.unk_0C = 0x60;
-            param.x = w->x2;
-            param.y = w->y2;
-            param.z = w->z2;
+            param.unk_10 = w->x2;
+            param.unk_14 = w->y2;
+            param.unk_18 = w->z2;
             param.unk_1C = func_080B82D4;
             gUnk_0203AB50.x = w->x2;
             gUnk_0203AB50.y = w->y2;

@@ -432,10 +432,10 @@ void func_080DDEA4(void) {
     func_080D2C78();
 }
 
-void func_080DDEB0(s32 a) {
-    GetPooState(a);
+void func_080DDEB0(void* state) {
+    GetPooState(state);
 }
 
-void func_080DDEBC(s32 a) {
-    SetPooState(a);
+void func_080DDEBC(const void* state) {
+    SetPooState(state);
 }

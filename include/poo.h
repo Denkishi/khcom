@@ -137,11 +137,6 @@ typedef struct PooNode {
 
 typedef char PooNode_size[(sizeof(PooNode) == 0x20) ? 1 : -1];
 
-typedef struct PooAnim {
-    u8 unk_00[0x08];
-    void* unk_08;
-} PooAnim;
-
 typedef struct PooFrame {
     u16 unk_00;
     u16 unk_02;
@@ -771,7 +766,7 @@ typedef struct PooBeeAfterEventWork {
 } PooBeeAfterEventWork;
 
 typedef struct PooMapAnimeWork {
-    PooAnim unk_00[2];
+    UnkStruct_080DDDDC unk_00[2];
 } PooMapAnimeWork;
 
 typedef struct PooSparkWork {

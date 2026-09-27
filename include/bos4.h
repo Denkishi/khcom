@@ -48,14 +48,6 @@
 
 extern UnkStruct_0203C590 gUnk_0203C590;
 
-typedef struct UnkStruct_080DDDDC {
-    u16 unk_00;
-    u16 unk_02;
-    u8 unk_04;
-    u8 unk_05[0x03];
-    const UnkStruct_096FE034* unk_08;
-} UnkStruct_080DDDDC;
-
 extern const UnkStruct_096FE034Entry gUnk_096FE020[5];
 extern const UnkStruct_096FE034 gUnk_096FE034;
 extern const UnkStruct_096FE034 gUnk_096FE04C;

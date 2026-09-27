@@ -4,7 +4,6 @@
 #include "types.h"
 #include "map_runtime.h"
 
-struct UnkStruct_080DDDDC;
 typedef struct UnkStruct_096FE034Entry {
     u16 unk_00;
     u16 unk_02;
@@ -22,6 +21,13 @@ typedef struct UnkStruct_096FE034 {
     s32 bg;
 } UnkStruct_096FE034;
 
+typedef struct UnkStruct_080DDDDC {
+    u16 unk_00;
+    u16 unk_02;
+    u8 unk_04;
+    u8 unk_05[0x03];
+    const UnkStruct_096FE034* unk_08;
+} UnkStruct_080DDDDC;
 
 void func_080DDDDC(struct UnkStruct_080DDDDC* p, const struct UnkStruct_096FE034* q);
 u8 func_080DDDEC(struct UnkStruct_080DDDDC* p, const struct UnkStruct_096FE034* q, u8 a);

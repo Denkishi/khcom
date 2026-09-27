@@ -125,7 +125,7 @@ typedef struct MsgWinWork {
 typedef struct EventSeqWork {
     TaskPool tasks;
     TaskPool tasks2;
-    u32 task;
+    Task* task;
     u16 unk_2C;
     u8 unk_2E;
     u8 unk_2F;

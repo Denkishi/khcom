@@ -7425,11 +7425,7 @@ TaskDesc gTaskDescEventSeq = {
     (TaskUpdateFunc)event_seq_1,
     (TaskFunc)event_seq_2,
     (TaskFunc)event_seq_3,
-#ifdef VERSION_EU
-    0x40,
-#else
-    0x3C,
-#endif
+    sizeof(EventSeqWork),
 };
 
 TaskDesc gTaskDescEventChara = {
@@ -7438,7 +7434,7 @@ TaskDesc gTaskDescEventChara = {
     (TaskUpdateFunc)event_chara_1,
     (TaskFunc)event_chara_2,
     (TaskFunc)event_chara_3,
-    0x1BC,
+    sizeof(EventCharaWork),
 };
 
 const u16* gUnk_09EE4704[4][2] = {
@@ -7461,7 +7457,7 @@ TaskDesc gTaskDescMsgwin = {
     (TaskUpdateFunc)msgwin_1,
     (TaskFunc)msgwin_2,
     (TaskFunc)msgwin_3,
-    0x44,
+    sizeof(MsgWinWork),
 };
 
 TaskDesc gTaskDescMsgface[3] = {
@@ -7471,7 +7467,7 @@ TaskDesc gTaskDescMsgface[3] = {
         (TaskUpdateFunc)msgface_1,
         (TaskFunc)msgface_2,
         (TaskFunc)msgface_3,
-        0x3C,
+        sizeof(MsgFaceWork),
     },
     {
         gTaskNameMsgwait,
@@ -7479,7 +7475,7 @@ TaskDesc gTaskDescMsgface[3] = {
         (TaskUpdateFunc)msgwait_1,
         (TaskFunc)msgwait_2,
         (TaskFunc)msgwait_3,
-        0x108,
+        sizeof(MsgWaitWork),
     },
     {
         "msgwait_yesno",
@@ -7487,7 +7483,7 @@ TaskDesc gTaskDescMsgface[3] = {
         (TaskUpdateFunc)msgwait_yesno_1,
         (TaskFunc)msgwait_yesno_2,
         (TaskFunc)msgwait_yesno_3,
-        0x108,
+        sizeof(MsgWaitWork),
     },
 };
 
@@ -7497,5 +7493,5 @@ TaskDesc gTaskDescView = {
     (TaskUpdateFunc)view_1,
     (TaskFunc)view_2,
     (TaskFunc)view_3,
-    0x15C,
+    sizeof(EventCameraWork),
 };

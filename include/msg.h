@@ -135,10 +135,12 @@ typedef struct EventSeqWork {
     u8 unk_33;
     struct EventSequenceDef* seqDef;
     u16 timer;
+#ifdef VERSION_EU
     u8 unk_3A;
     u8 unk_3B;
     u8 unk_3C;
     u8 unk_3D;
+#endif
 } EventSeqWork;
 
 typedef struct EventScanlineScroll {

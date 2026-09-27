@@ -1118,7 +1118,7 @@ TaskDesc gTaskDescStatus = {
     (TaskUpdateFunc)task_status_1,
     (TaskFunc)task_status_2,
     (TaskFunc)task_status_3,
-    0x20,
+    sizeof(StatusWork),
 };
 
 #ifdef VERSION_EU
@@ -1145,7 +1145,7 @@ TaskDesc gTaskDescStatusBar = {
     (TaskUpdateFunc)task_status_bar_1,
     (TaskFunc)task_status_bar_2,
     (TaskFunc)task_status_bar_3,
-    0x2C,
+    sizeof(StatusBarWork),
 };
 
 #ifdef VERSION_EU
@@ -1172,7 +1172,7 @@ TaskDesc gTaskDescStatusTab = {
     (TaskUpdateFunc)task_status_tab_1,
     (TaskFunc)task_status_tab_2,
     (TaskFunc)task_status_tab_3,
-    0x1C,
+    sizeof(StatusTabWork),
 };
 
 TaskDesc gTaskDescStatusSora = {
@@ -1181,7 +1181,7 @@ TaskDesc gTaskDescStatusSora = {
     (TaskUpdateFunc)task_status_sora_1,
     (TaskFunc)task_status_sora_2,
     (TaskFunc)task_status_sora_3,
-    0x24,
+    sizeof(StatusSoraWork),
 };
 
 TaskDesc gTaskDescStatusDeckname = {
@@ -1190,7 +1190,7 @@ TaskDesc gTaskDescStatusDeckname = {
     (TaskUpdateFunc)task_status_deckname_1,
     (TaskFunc)task_status_deckname_2,
     (TaskFunc)task_status_deckname_3,
-    0x5C,
+    sizeof(StatusDecknameWork),
 };
 
 TaskDesc gTaskDescStatusCursor = {
@@ -1199,7 +1199,7 @@ TaskDesc gTaskDescStatusCursor = {
     (TaskUpdateFunc)task_status_cursor_1,
     (TaskFunc)task_status_cursor_2,
     (TaskFunc)task_status_cursor_3,
-    0x60,
+    sizeof(StatusCursorWork),
 };
 
 #ifdef VERSION_EU
@@ -1226,7 +1226,7 @@ TaskDesc gTaskDescStatusStocklist = {
     (TaskUpdateFunc)task_status_stocklist_1,
     (TaskFunc)task_status_stocklist_2,
     (TaskFunc)task_status_stocklist_3,
-    0x4CC,
+    sizeof(StatusStocklistWork),
 };
 
 TaskDesc gTaskDescStatusScrollcursor = {
@@ -1235,7 +1235,7 @@ TaskDesc gTaskDescStatusScrollcursor = {
     (TaskUpdateFunc)task_status_scrollcursor_1,
     (TaskFunc)task_status_scrollcursor_2,
     (TaskFunc)task_status_scrollcursor_3,
-    0x14,
+    sizeof(StatusScrollcursorWork),
 };
 
 TaskDesc gTaskDescStatusMeswindow = {
@@ -1244,7 +1244,7 @@ TaskDesc gTaskDescStatusMeswindow = {
     (TaskUpdateFunc)task_status_meswindow_1,
     (TaskFunc)task_status_meswindow_2,
     (TaskFunc)task_status_meswindow_3,
-    0x24,
+    sizeof(StatusMeswindowWork),
 };
 
 TaskDesc gTaskDescStatusMessage = {
@@ -1253,7 +1253,7 @@ TaskDesc gTaskDescStatusMessage = {
     (TaskUpdateFunc)task_status_message_1,
     (TaskFunc)task_status_message_2,
     (TaskFunc)task_status_message_3,
-    0x330,
+    sizeof(StatusMessageWork),
 };
 
 TaskDesc gTaskDescStatusFriend = {
@@ -1262,7 +1262,7 @@ TaskDesc gTaskDescStatusFriend = {
     (TaskUpdateFunc)task_status_friend_1,
     (TaskFunc)task_status_friend_2,
     (TaskFunc)task_status_friend_3,
-    0x28,
+    sizeof(StatusFriendWork),
 };
 
 TaskDesc gTaskDescStockMesDisp = {
@@ -1271,5 +1271,5 @@ TaskDesc gTaskDescStockMesDisp = {
     (TaskUpdateFunc)stock_mes_disp_1,
     (TaskFunc)stock_mes_disp_2,
     (TaskFunc)stock_mes_disp_3,
-    0x48,
+    sizeof(StockMesDispWork),
 };

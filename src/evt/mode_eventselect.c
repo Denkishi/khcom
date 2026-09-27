@@ -892,7 +892,7 @@ TaskDesc gTaskDescHanabira = {
     (TaskUpdateFunc)Hanabira_1,
     (TaskFunc)Hanabira_2,
     (TaskFunc)Hanabira_3,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescHanabiraC = {
@@ -901,7 +901,7 @@ TaskDesc gTaskDescHanabiraC = {
     (TaskUpdateFunc)Hanabira_c_1,
     (TaskFunc)Hanabira_c_2,
     (TaskFunc)Hanabira_c_3,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescSmoke = {
@@ -910,7 +910,7 @@ TaskDesc gTaskDescSmoke = {
     (TaskUpdateFunc)func_08075720,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescExclamation = {
@@ -919,7 +919,7 @@ TaskDesc gTaskDescExclamation = {
     (TaskUpdateFunc)Exclamation_1,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescBalloon = {
@@ -928,7 +928,7 @@ TaskDesc gTaskDescBalloon = {
     (TaskUpdateFunc)func_08075720,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescQuestion = {
@@ -937,7 +937,7 @@ TaskDesc gTaskDescQuestion = {
     (TaskUpdateFunc)Question_1,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gUnk_09EE484C = {
@@ -946,7 +946,7 @@ TaskDesc gUnk_09EE484C = {
     (TaskUpdateFunc)func_080759B0,
     (TaskFunc)func_080759E0,
     (TaskFunc)func_08075A54,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescGlowNose = {
@@ -955,7 +955,7 @@ TaskDesc gTaskDescGlowNose = {
     (TaskUpdateFunc)GlowNose_1,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescGlowNose2 = {
@@ -964,7 +964,7 @@ TaskDesc gTaskDescGlowNose2 = {
     (TaskUpdateFunc)GlowNose2_1,
     (TaskFunc)EffectDrawObj,
     (TaskFunc)EffectReleaseObj,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescDown = {
@@ -973,7 +973,7 @@ TaskDesc gTaskDescDown = {
     (TaskUpdateFunc)down_1,
     (TaskFunc)down_2,
     (TaskFunc)down_3,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescTinkerbell = {
@@ -982,7 +982,7 @@ TaskDesc gTaskDescTinkerbell = {
     (TaskUpdateFunc)Tinkerbell_1,
     (TaskFunc)Tinkerbell_2,
     (TaskFunc)Tinkerbell_3,
-    0x60,
+    sizeof(EffectWork),
 };
 
 TaskDesc gTaskDescEvSound = {
@@ -991,7 +991,7 @@ TaskDesc gTaskDescEvSound = {
     (TaskUpdateFunc)EV_SOUND_1,
     (TaskFunc)EV_SOUND_2,
     (TaskFunc)EV_SOUND_3,
-    0xC,
+    sizeof(EvSoundWork),
 };
 
 TaskDesc gTaskDescEventDebug = {
@@ -1000,5 +1000,5 @@ TaskDesc gTaskDescEventDebug = {
     (TaskUpdateFunc)Event_Debug_1,
     (TaskFunc)Event_Debug_2,
     (TaskFunc)Event_Debug_3,
-    0x2C,
+    sizeof(EventDebugWork),
 };

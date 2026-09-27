@@ -1964,7 +1964,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         work->unk_344 = 0x16800;
         work->unk_348 = -0x6400;
         w = work;
-        func_0801B37C(w, &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
+        func_0801B37C(&w->body[0], &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
         p1 = &w->body[1];
         func_0801B37C(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
         p2 = &w->body[2];
@@ -1975,7 +1975,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         work->unk_344 = 0x16800;
         work->unk_348 = -0x6400;
         w = work;
-        func_0801B37C(w, &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
+        func_0801B37C(&w->body[0], &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
         w->body[0].flags |= 0x1000000;
         w->body[0].flags |= 4;
         p1 = &w->body[1];
@@ -2107,7 +2107,7 @@ void task_bos_dsd_3(DsdWork* work) {
     b = &work->body[2];
     TaskPoolDestroy(&work->tasks);
     ColliderUnregister(&work->body[2].collider);
-    func_0801B7D8(work);
+    func_0801B7D8(&work->body[0]);
     func_0801B7D8(a);
     func_0801B7D8(b);
 }

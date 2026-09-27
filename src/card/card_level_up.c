@@ -814,8 +814,8 @@ u8 func_0809F390(LevelUpWork* w, void* a) {
         w->tiles = AllocObjTiles(128, 0);
         w->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
         FadeSetPaletteExcluded(((ObjPalette*)w->palette3)->index + 16, 1);
-        SetObjTileSource(w->tiles, &gUnk_0908C686[0x2B0A]);
-        AnimInit(&w->anim, &gUnk_09EEA1EC[0x25], &gUnk_09EEA19C[0x34]);
+        SetObjTileSource(w->tiles, gUnk_0908F190);
+        AnimInit(&w->anim, gUnk_09EEA280, gUnk_09EEA26C);
         AnimStart(&w->anim, 0, 1);
         w->gfx2 = AnimGetGfx(&w->anim);
         w->unk_7B6 = 16;

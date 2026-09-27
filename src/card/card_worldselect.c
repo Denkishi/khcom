@@ -92,6 +92,8 @@ u8 func_08092E2C(MapSelectWork* w);
 s32 func_08093838(MapSelectWork* w);
 void func_08094DEC(MapcardWork* w);
 void func_08094E90(MapcardWork* w);
+s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w);
+void func_08095C20(UnkStruct_08095A5C* p);
 
 void WORLDSELECT_0(void) {
     SetBgMode2();

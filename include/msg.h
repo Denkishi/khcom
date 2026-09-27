@@ -14,6 +14,7 @@
 #include "msg_types.h"
 
 #include "evt_types.h"
+#include "evt_object_types.h"
 #include "evt_data.h"
 
 #include "card_api.h"
@@ -64,17 +65,9 @@ typedef struct EventCharaWork {
     u16 unk_024;
     u8 unk_026;
     u8 unk_027;
-    u8 unk_028[4];
-    s32 unk_02C;
-    s32 unk_030;
-    s32 unk_034;
-    u8 unk_038[4];
-    u16 unk_03C;
-    u16 unk_03E;
-    AnimState* anim;
-    u16 unk_044;
-    u8 unk_046[0xE];
-    u8 unk_054[0x128];
+    EvtObj obj;
+    BtlObj actor;
+    u8 unk_164[0x18];
     s32 unk_17C;
     s32 unk_180;
     s32 unk_184;
@@ -211,15 +204,6 @@ typedef struct EventScanlineScroll {
     u8 unk_03;
     u16 scrollX[160];
 } EventScanlineScroll;
-
-typedef struct Actor0806180C {
-    u8 unk_00[0x24];
-    u16 unk_24;
-    u8 unk_26[6];
-    s32 unk_2C;
-    s32 unk_30;
-    s32 unk_34;
-} Actor0806180C;
 
 typedef struct EventCameraWork {
     s32 unk_00;
@@ -392,8 +376,9 @@ void func_0806E9BC(EventCharaWork* p);
 void func_0806F94C(EventCharaWork* p);
 void func_08073E34(MsgFaceControl* p, u8 a, u8 b, u8 c);
 void func_080746D8(void);
-void func_08072918(Actor0806180C* a, u8 kind, u8 flag);
-void func_08072A64(Actor0806180C* a, u8 kind, u8 flag);
+void func_08072918(EventCharaWork* p, u8 kind, u8 flag);
+void func_08072A64(EventCharaWork* p, u8 kind, u8 flag);
+void func_08072B4C(EventCharaWork* p, u8 kind, u8 flag);
 void func_08074D00(EventCameraWork* p);
 void func_08074D14(EventCameraWork* a);
 u8 func_08074E40(EventCameraWork* p);

@@ -3133,7 +3133,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
     p->unk_1B0 = 0;
     p->unk_1B6 = 1;
     p->unk_1B8 = 0;
-    gEventState->unk_00[p->unk_027] = (Ent08074EC8*)p->unk_028;
+    gEventState->unk_00[p->unk_027] = (Ent08074EC8*)&p->obj;
 
     switch (p->unk_026) {
     case 95:
@@ -3155,10 +3155,10 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gBtlWork->unk_01C = 0x10000;
         gBtlWork->unk_020 = 0x14000;
         gBtlWork->unk_01A = 15;
-        p->unk_02C = p->keyframes->unk_08;
-        p->unk_030 = p->keyframes->unk_0C;
-        p->unk_034 = p->keyframes->unk_10;
-        TaskCreate(&p->tasks, &gTaskDescBosTm, p->unk_028);
+        p->obj.x = p->keyframes->unk_08;
+        p->obj.y = p->keyframes->unk_0C;
+        p->obj.z = p->keyframes->unk_10;
+        TaskCreate(&p->tasks, &gTaskDescBosTm, &p->obj);
         break;
     case 96:
         gBtlWork = EwramAlloc(464);
@@ -3166,7 +3166,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3183,7 +3183,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3208,7 +3208,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(2, 0);
         gBtlWork = EwramAlloc(464);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3228,7 +3228,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(2, 0);
         gBtlWork = EwramAlloc(464);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3239,11 +3239,11 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gBtlWork->unk_004 = 0x12800;
         gBtlWork->x2 = 0x26600;
         gBtlWork->y2 = 0x12800;
-        p->unk_02C = 0x2A200;
-        p->unk_030 = 0x15E00;
-        p->unk_034 = -0x3800;
+        p->obj.x = 0x2A200;
+        p->obj.y = 0x15E00;
+        p->obj.z = -0x3800;
         SetBattleBounds(420, 612, 328, 384);
-        TaskCreate(&p->tasks, &gTaskDescBosJf, p->unk_028);
+        TaskCreate(&p->tasks, &gTaskDescBosJf, &p->obj);
         break;
     case 103:
         SetupBg(0, 0, 24, 0);
@@ -3270,11 +3270,11 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gEventState->unk_54 = gBtlWork->y;
         gEventState->unk_68 = 0;
         gEventState->unk_6A = 0;
-        p->unk_02C = p->keyframes->unk_08;
-        p->unk_030 = p->keyframes->unk_0C;
-        p->unk_034 = p->keyframes->unk_10;
+        p->obj.x = p->keyframes->unk_08;
+        p->obj.y = p->keyframes->unk_0C;
+        p->obj.z = p->keyframes->unk_10;
         SetBattleBounds(0, 256, 328, 424);
-        TaskCreate(&p->tasks, &gTaskDescBosDsd, p->unk_028);
+        TaskCreate(&p->tasks, &gTaskDescBosDsd, &p->obj);
         break;
     case 98:
         SetupBg(0, 0, 24, 0);
@@ -3285,7 +3285,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(464);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3302,7 +3302,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(464);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3319,7 +3319,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(464);
         BtlWorkInit();
-        gBtlWork->actor = (BtlObj*)p->unk_054;
+        gBtlWork->actor = &p->actor;
         gBtlWork->flags = 4;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
@@ -3329,7 +3329,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         break;
     default:
         if ((p->keyframes->unk_18 & 0x2000) == 0) {
-            CreateEvtObjTask(&p->tasks, p->unk_028, p->unk_026, p->keyframes->unk_00, p->keyframes->unk_08, p->keyframes->unk_0C, p->keyframes->unk_10);
+            CreateEvtObjTask(&p->tasks, &p->obj, p->unk_026, p->keyframes->unk_00, p->keyframes->unk_08, p->keyframes->unk_0C, p->keyframes->unk_10);
             p->unk_1B4 = 1;
         } else {
             p->unk_1B4 = 0;
@@ -3370,9 +3370,9 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
     }
 
     if (p->keyframes[p->unk_1A0].unk_18 & 0x100) {
-        p->unk_03C |= 4;
+        p->obj.flags |= 4;
     } else {
-        p->unk_03C &= ~4;
+        p->obj.flags &= ~4;
     }
 
     if (p->keyframes[p->unk_1A0].unk_18 & 0x200) {
@@ -3418,8 +3418,8 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
 
     if (p->unk_026 == 0) {
         if (gBtlWork != NULL) {
-            gBtlWork->actor->x = p->unk_02C - 0x7800;
-            gBtlWork->actor->y = p->unk_030 - 0x5000;
+            gBtlWork->actor->x = p->obj.x - 0x7800;
+            gBtlWork->actor->y = p->obj.y - 0x5000;
             gBtlWork->actor->z = 0;
         }
     }
@@ -3448,13 +3448,13 @@ void event_chara_2(EventCharaWork* p) {
     s32 y;
     u16 h;
 
-    save = p->unk_034;
+    save = p->obj.z;
     e = &p->keyframes[p->unk_1A0];
 
     if (e->unk_18 & 0x80) {
-        p->unk_034 = gSineTable[p->unk_1B0] * 2 + save;
+        p->obj.z = gSineTable[p->unk_1B0] * 2 + save;
     } else if (e->unk_18 & 0x40000) {
-        p->unk_034 = gSineTable[p->unk_1B0] * 3 + save;
+        p->obj.z = gSineTable[p->unk_1B0] * 3 + save;
     }
 
     if (p->unk_1B6 != 0) {
@@ -3466,7 +3466,7 @@ void event_chara_2(EventCharaWork* p) {
     }
 
     if (p->tiles != NULL) {
-        h = p->unk_03E;
+        h = p->obj.unk_16;
 
         if (p->unk_1B1 == 0) {
             h &= 0xFFFE;
@@ -3477,7 +3477,7 @@ void event_chara_2(EventCharaWork* p) {
         y = (p->unk_184 >> 8) + gUnk_0903380C[p->unk_026].spriteYOffset - (gEventState->y >> 8);
         DrawSprite(x, y, p->gfx, p->tiles, p->palette, 0, h, 50);
     }
-    p->unk_034 = save;
+    p->obj.z = save;
 }
 void event_chara_3(EventCharaWork* p) {
     TaskPoolDestroy(&p->tasks);
@@ -3505,7 +3505,7 @@ u8 func_0806E570(EventCharaWork* p) {
     p->unk_17C = p->keyframes[p->unk_1A0].unk_00;
 
     if ((p->keyframes[p->unk_1A0].unk_18 & 0x4000) != 0) {
-        CreateEvtObjTask(&p->tasks, p->unk_028, p->unk_026, p->keyframes[p->unk_1A0].unk_00,
+        CreateEvtObjTask(&p->tasks, &p->obj, p->unk_026, p->keyframes[p->unk_1A0].unk_00,
                       p->keyframes[p->unk_1A0].unk_08, p->keyframes[p->unk_1A0].unk_0C,
                       p->keyframes[p->unk_1A0].unk_10);
         p->unk_1B4 = 1;
@@ -3517,27 +3517,27 @@ u8 func_0806E570(EventCharaWork* p) {
     }
 
     if ((p->keyframes[p->unk_1A0].unk_18 & 0x800) != 0) {
-        LoadPalette(&gUnk_096148D8[0x100], (void*)(p->unk_044 * 32 + 0x05000200), 32);
+        LoadPalette(&gUnk_096148D8[0x100], (void*)(p->obj.unk_1C * 32 + 0x05000200), 32);
     } else if ((p->keyframes[p->unk_1A0 - 1].unk_18 & 0x800) != 0) {
-        LoadPalette(gUnk_0813B09C[p->unk_026].res.palette, (void*)(p->unk_044 * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_0813B09C[p->unk_026].res.palette, (void*)(p->obj.unk_1C * 32 + 0x05000200), 32);
     }
 
     if ((p->keyframes[p->unk_1A0].unk_18 & 0x100000) != 0) {
         gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-        v = p->unk_03E;
-        func_0801CE00(p->unk_028, v | 4);
+        v = p->obj.unk_16;
+        func_0801CE00(&p->obj, v | 4);
     } else {
-        v = p->unk_03E;
-        func_0801CE00(p->unk_028, p->unk_03E & 0xFFFB);
+        v = p->obj.unk_16;
+        func_0801CE00(&p->obj, p->obj.unk_16 & 0xFFFB);
         p->unk_1B8 = 0;
     }
 
     if (p->unk_1B4 != 0) {
         if ((p->keyframes[p->unk_1A0].unk_18 & 15) == 2) {
-            EvtObjSetPos(p->unk_028, p->keyframes[p->unk_1A0].unk_08, p->keyframes[p->unk_1A0].unk_0C, p->keyframes[p->unk_1A0].unk_10);
+            EvtObjSetPos(&p->obj, p->keyframes[p->unk_1A0].unk_08, p->keyframes[p->unk_1A0].unk_0C, p->keyframes[p->unk_1A0].unk_10);
         }
 
-        EvtObjSetAnim(p->unk_028, p->unk_17C);
+        EvtObjSetAnim(&p->obj, p->unk_17C);
         func_0806F94C(p);
         return 1;
     }
@@ -3566,12 +3566,12 @@ void func_0806E7A8(EventCharaWork* p) {
 
     switch (e->unk_18 & 15) {
     case 2:
-        EvtObjSetPos(p->unk_028, p->keyframes[p->unk_1A0].unk_08, p->keyframes[p->unk_1A0].unk_0C, p->keyframes[p->unk_1A0].unk_10);
+        EvtObjSetPos(&p->obj, p->keyframes[p->unk_1A0].unk_08, p->keyframes[p->unk_1A0].unk_0C, p->keyframes[p->unk_1A0].unk_10);
         break;
     case 3:
-        ApproachValue(&p->unk_02C, p->keyframes[p->unk_1A0].unk_08, p->unk_1A4);
-        ApproachValue(&p->unk_030, p->keyframes[p->unk_1A0].unk_0C, p->unk_1A4);
-        ApproachValue(&p->unk_034, p->keyframes[p->unk_1A0].unk_10, p->unk_1A4);
+        ApproachValue(&p->obj.x, p->keyframes[p->unk_1A0].unk_08, p->unk_1A4);
+        ApproachValue(&p->obj.y, p->keyframes[p->unk_1A0].unk_0C, p->unk_1A4);
+        ApproachValue(&p->obj.z, p->keyframes[p->unk_1A0].unk_10, p->unk_1A4);
         p->unk_1A4--;
 
         if (p->unk_1A4 == 0) {
@@ -3588,12 +3588,12 @@ void func_0806E7A8(EventCharaWork* p) {
         }
 
         if (e->unk_14 == 1) {
-            p->unk_034 -= p->unk_19C;
+            p->obj.z -= p->unk_19C;
         } else if (e->unk_14 == 2) {
-            p->unk_034 += p->unk_19C;
+            p->obj.z += p->unk_19C;
         } else {
-            p->unk_02C += (gSineTable[e->unk_14 & 0xFF] * p->unk_19C) >> 8;
-            p->unk_030 += (-gSineTable[(e->unk_14 & 0xFF) + 64] * p->unk_19C) >> 8;
+            p->obj.x += (gSineTable[e->unk_14 & 0xFF] * p->unk_19C) >> 8;
+            p->obj.y += (-gSineTable[(e->unk_14 & 0xFF) + 64] * p->unk_19C) >> 8;
         }
         break;
     }
@@ -3616,14 +3616,14 @@ void func_0806E7A8(EventCharaWork* p) {
 void func_0806E9BC(EventCharaWork* p) {
     const EventCharaKeyframe* e = &p->keyframes[p->unk_1A0];
 
-    EvtObjSetAnim(p->unk_028, e->unk_14);
+    EvtObjSetAnim(&p->obj, e->unk_14);
 }
 
 u8 _0806E9DC(EventCharaWork* p, void* a) {
     p->unk_188 = 0x800;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
-    p->unk_198 = p->unk_034;
+    p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EA28);
     return 1;
@@ -3633,14 +3633,14 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
     u16 y;
     u8 t;
 
-    x = (p->unk_02C >> 8) - (gEventState->x >> 8);
-    y = (p->unk_030 >> 8) + (p->unk_034 >> 8) - (gEventState->y >> 8);
+    x = (p->obj.x >> 8) - (gEventState->x >> 8);
+    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
     t = func_0806E570(p);
     func_0806E7A8(p);
     func_08070AD4(p);
 
     if (p->unk_1A8 == 0) {
-        p->unk_034 -= p->unk_188 / 4;
+        p->obj.z -= p->unk_188 / 4;
         p->unk_188 -= p->unk_18C / 4;
         p->unk_18C += 51;
     } else {
@@ -3653,15 +3653,15 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
         }
     }
 
-    if (p->unk_034 > p->unk_198) {
-        p->unk_034 = p->unk_198;
+    if (p->obj.z > p->unk_198) {
+        p->obj.z = p->unk_198;
         p->unk_188 = 0x800;
         p->unk_18C = 0;
         p->unk_1A8 = 17;
     }
 
     if (t != 0) {
-        p->unk_034 = p->unk_198;
+        p->obj.z = p->unk_198;
 
         if (p->keyframes[p->unk_1A0].unk_1C != NULL) {
             SetTaskUpdate(a, p->keyframes[p->unk_1A0].unk_1C);
@@ -3683,7 +3683,7 @@ u8 func_0806EB94(EventCharaWork* p, void* a) {
     p->unk_188 = 0xC00;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
-    p->unk_198 = p->unk_034;
+    p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EBE0);
     return 1;
@@ -3696,22 +3696,22 @@ u8 func_0806EBE0(EventCharaWork* p, void* a) {
     func_08070AD4(p);
 
     if (p->unk_1A8 == 0) {
-        p->unk_034 -= p->unk_188 / 4;
+        p->obj.z -= p->unk_188 / 4;
         p->unk_188 -= p->unk_18C / 4;
         p->unk_18C += 51;
     } else {
         p->unk_1A8--;
     }
 
-    if (p->unk_034 > p->unk_198) {
-        p->unk_034 = p->unk_198;
+    if (p->obj.z > p->unk_198) {
+        p->obj.z = p->unk_198;
         p->unk_188 = 0;
         p->unk_18C = 0;
         p->unk_1A8 = 17;
     }
 
     if (t != 0) {
-        p->unk_034 = p->unk_198;
+        p->obj.z = p->unk_198;
 
         if (p->keyframes[p->unk_1A0].unk_1C != NULL) {
             SetTaskUpdate(a, p->keyframes[p->unk_1A0].unk_1C);
@@ -3733,7 +3733,7 @@ u8 func_0806ECE0(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
-    p->unk_198 = p->unk_034;
+    p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806ED2C);
     return 1;
@@ -3746,22 +3746,22 @@ u8 func_0806ED2C(EventCharaWork* p, void* a) {
     func_0806E7A8(p);
 
     if (p->unk_1A8 == 0) {
-        p->unk_034 -= p->unk_188;
+        p->obj.z -= p->unk_188;
         p->unk_188 -= p->unk_18C;
         p->unk_18C += 51;
     } else {
         p->unk_1A8--;
     }
 
-    if (p->unk_034 > p->unk_198) {
-        p->unk_034 = p->unk_198;
+    if (p->obj.z > p->unk_198) {
+        p->obj.z = p->unk_198;
         p->unk_188 = 0x800;
         p->unk_18C = 0;
         p->unk_1A8 = 17;
     }
 
     if (t != 0) {
-        p->unk_034 = p->unk_198;
+        p->obj.z = p->unk_198;
 
         if (p->keyframes[p->unk_1A0].unk_1C != NULL) {
             SetTaskUpdate(a, p->keyframes[p->unk_1A0].unk_1C);
@@ -3783,7 +3783,7 @@ u8 func_0806EE20(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
-    p->unk_198 = p->unk_034;
+    p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EE6C);
     return 1;
@@ -3796,15 +3796,15 @@ u8 func_0806EE6C(EventCharaWork* p, void* a) {
     func_08070AD4(p);
 
     if (p->unk_1A8 == 0) {
-        p->unk_034 -= p->unk_188;
+        p->obj.z -= p->unk_188;
         p->unk_188 -= p->unk_18C;
         p->unk_18C += 51;
     } else {
         p->unk_1A8--;
     }
 
-    if (p->unk_034 > 0) {
-        p->unk_034 = 0;
+    if (p->obj.z > 0) {
+        p->obj.z = 0;
         p->unk_1A8 = 17;
     }
 
@@ -3845,9 +3845,9 @@ u8 func_0806EF40(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 16;
     p->unk_1AA = 0;
@@ -3890,10 +3890,10 @@ u8 func_0806F02C(EventCharaWork* p, void* a) {
             p->unk_1B2 = 0;
         }
         {
-            u16 z = p->unk_03E;
+            u16 z = p->obj.unk_16;
 
             z &= 0xFFFB;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
         }
     }
     TaskPoolUpdate(&p->tasks);
@@ -3919,9 +3919,9 @@ u8 func_0806F114(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 0x1000;
     p->unk_1AA = 0;
@@ -3964,10 +3964,10 @@ u8 func_0806F204(EventCharaWork* p, void* a) {
             p->unk_1B2 = 0;
         }
         {
-            u16 z = p->unk_03E;
+            u16 z = p->obj.unk_16;
 
             z &= 0xFFFB;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
         }
     }
     TaskPoolUpdate(&p->tasks);
@@ -3992,9 +3992,9 @@ u8 func_0806F2EC(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 16;
     p->unk_1AA = 0;
@@ -4052,9 +4052,9 @@ u8 func_0806F47C(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 0x1010;
     p->unk_1AA = 0;
@@ -4096,16 +4096,16 @@ u8 func_0806F53C(EventCharaWork* p, void* a) {
 u8 func_0806F610(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
-    p->unk_190 = p->unk_02C;
-    p->unk_194 = p->unk_034;
+    p->unk_190 = p->obj.x;
+    p->unk_194 = p->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F64C);
     return 1;
 }
 u8 func_0806F64C(EventCharaWork* p, void* a) {
     func_0806E7A8(p);
     func_08070AD4(p);
-    p->unk_02C += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
-    p->unk_030 += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
+    p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
+    p->obj.y += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
     p->unk_18C += 2;
 
     if (p->unk_198 < 0x200) {
@@ -4132,16 +4132,16 @@ u8 func_0806F64C(EventCharaWork* p, void* a) {
 u8 func_0806F734(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
-    p->unk_190 = p->unk_02C;
-    p->unk_194 = p->unk_034;
+    p->unk_190 = p->obj.x;
+    p->unk_194 = p->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F770);
     return 1;
 }
 u8 func_0806F770(EventCharaWork* p, void* a) {
     func_0806E7A8(p);
     func_08070AD4(p);
-    p->unk_02C += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
-    p->unk_030 += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
+    p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
+    p->obj.y += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
     p->unk_18C += 6;
 
     if (p->unk_198 < 0x200) {
@@ -4168,8 +4168,8 @@ u8 func_0806F770(EventCharaWork* p, void* a) {
 u8 func_0806F858(EventCharaWork* p, void* a) {
     p->unk_18C = 1;
     p->unk_198 = 0;
-    p->unk_190 = p->unk_02C;
-    p->unk_194 = p->unk_034;
+    p->unk_190 = p->obj.x;
+    p->unk_194 = p->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F898);
     return 1;
 }
@@ -4178,7 +4178,7 @@ u8 func_0806F898(EventCharaWork* p, void* a) {
     func_08070AD4(p);
 
     if (p->unk_198 == 2) {
-        p->unk_034 += p->unk_18C << 10;
+        p->obj.z += p->unk_18C << 10;
         p->unk_18C = -p->unk_18C;
         p->unk_198 = 0;
     } else {
@@ -4205,25 +4205,25 @@ u8 func_0806F898(EventCharaWork* p, void* a) {
 void func_0806F94C(EventCharaWork* p) {
     u16 z;
 
-    z = p->unk_03E;
+    z = p->obj.unk_16;
 
     if (p->keyframes[p->unk_1A0].unk_18 & 0x40) {
         if (p->keyframes[p->unk_1A0].unk_18 & 0x10) {
             z |= 0x401;
             z &= 0xF7FF;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
         } else {
             z |= 0x801;
             z &= 0xFBFF;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
 
             if ((p->keyframes[p->unk_1A0].unk_18 & 0x400) == 0) {
                 z |= 0x801;
-                func_0801CE00(p->unk_028, z);
+                func_0801CE00(&p->obj, z);
             } else {
                 z |= 1;
                 z &= 0xF7FF;
-                func_0801CE00(p->unk_028, z);
+                func_0801CE00(&p->obj, z);
             }
         }
     } else {
@@ -4231,21 +4231,21 @@ void func_0806F94C(EventCharaWork* p) {
             z |= 0x400;
             z &= 0xF7FF;
             z &= 0xFFFE;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
         } else {
             z |= 0x800;
             z &= 0xFBFF;
             z &= 0xFFFE;
-            func_0801CE00(p->unk_028, z);
+            func_0801CE00(&p->obj, z);
 
             if ((p->keyframes[p->unk_1A0].unk_18 & 0x400) == 0) {
                 z |= 0x800;
                 z &= 0xFFFE;
-                func_0801CE00(p->unk_028, z);
+                func_0801CE00(&p->obj, z);
             } else {
                 z &= 0xF7FF;
                 z &= 0xFFFE;
-                func_0801CE00(p->unk_028, z);
+                func_0801CE00(&p->obj, z);
             }
         }
     }
@@ -4261,7 +4261,7 @@ u8 func_0806FAB8(EventCharaWork* p, void* a) {
     u16 buf[2];
 
     memcpy(buf, gUnk_09033C8C, 4);
-    EvtObjSetAnim(p->unk_028, buf[p->unk_1A9]);
+    EvtObjSetAnim(&p->obj, buf[p->unk_1A9]);
     p->unk_1AA++;
     if (p->unk_1AA == 12) {
         p->unk_1AA = 0;
@@ -4307,9 +4307,9 @@ u8 func_0806FB6C(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 16;
     p->unk_1AA = 0;
@@ -4367,9 +4367,9 @@ u8 func_0806FCF4(void* work, void* a) {
             p->unk_1B2 = 0;
         }
     }
-    z = p->unk_03E;
+    z = p->obj.unk_16;
     z |= 4;
-    func_0801CE00(p->unk_028, z);
+    func_0801CE00(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     (*(volatile u16*)&gBldAlpha) = 0;
     p->unk_1AA = 0;
@@ -4481,7 +4481,7 @@ void func_08070008(EventCharaWork* p) {
 void func_08070058(EventCharaWork* p, s32 a) {
     u16 f;
 
-    f = p->unk_03E;
+    f = p->obj.unk_16;
 
     switch (p->unk_1AB) {
     case 0xD3:
@@ -4501,10 +4501,10 @@ void func_08070058(EventCharaWork* p, s32 a) {
     }
 
     if (a != p->unk_17C) {
-        EvtObjSetAnim(p->unk_028, a);
+        EvtObjSetAnim(&p->obj, a);
         p->unk_17C = a;
     }
-    func_0801CE00(p->unk_028, f);
+    func_0801CE00(&p->obj, f);
 }
 u8 func_080700D4(EventCharaWork* p, void* a) {
     u16 keys;
@@ -4645,14 +4645,14 @@ u8 func_080700D4(EventCharaWork* p, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_0807048C);
     }
 
-    v = p->unk_02C + (gSineTable[p->unk_1AB] * p->unk_19C >> 8);
-    p->unk_02C = v;
-    p->unk_030 += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
+    v = p->obj.x + (gSineTable[p->unk_1AB] * p->unk_19C >> 8);
+    p->obj.x = v;
+    p->obj.y += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
 
     if (p->unk_026 == 0) {
         if (gBtlWork != NULL) {
             gBtlWork->actor->x = v - 0x7800;
-            gBtlWork->actor->y = p->unk_030 - 0x5000;
+            gBtlWork->actor->y = p->obj.y - 0x5000;
             gBtlWork->actor->z = 0;
         }
     }
@@ -4698,13 +4698,13 @@ u8 func_0807048C(EventCharaWork* p, void* a) {
             break;
         }
 
-        p->unk_02C += gSineTable[p->unk_1AB] * (p->unk_19C >> 2) >> 8;
-        p->unk_030 += -gSineTable[p->unk_1AB + 64] * (p->unk_19C >> 2) >> 8;
+        p->obj.x += gSineTable[p->unk_1AB] * (p->unk_19C >> 2) >> 8;
+        p->obj.y += -gSineTable[p->unk_1AB + 64] * (p->unk_19C >> 2) >> 8;
 
         if (p->unk_1A8 > 3) {
             p->unk_1AF = 1;
             p->unk_18C = -0x540;
-            p->unk_198 = p->unk_034;
+            p->unk_198 = p->obj.z;
             p->unk_1A8 = 0;
         } else {
             p->unk_1A8++;
@@ -4740,10 +4740,10 @@ u8 func_0807048C(EventCharaWork* p, void* a) {
             break;
         }
 
-        p->unk_02C += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
-        p->unk_030 += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
+        p->obj.x += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
+        p->obj.y += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
         p->unk_18C += 51;
-        p->unk_034 += p->unk_18C;
+        p->obj.z += p->unk_18C;
 
         if ((GetKeysHeld() & B_BUTTON) == 0) {
             p->unk_18C += 64;
@@ -4784,10 +4784,10 @@ u8 func_0807048C(EventCharaWork* p, void* a) {
             break;
         }
 
-        p->unk_02C += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
-        p->unk_030 += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
+        p->obj.x += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
+        p->obj.y += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
         p->unk_18C += 51;
-        p->unk_034 += p->unk_18C;
+        p->obj.z += p->unk_18C;
 
         if ((GetKeysHeld() & B_BUTTON) == 0) {
             p->unk_18C += 64;
@@ -4828,9 +4828,9 @@ u8 func_0807048C(EventCharaWork* p, void* a) {
             break;
         }
 
-        p->unk_02C += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
-        p->unk_030 += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
-        p->unk_034 += p->unk_18C;
+        p->obj.x += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
+        p->obj.y += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
+        p->obj.z += p->unk_18C;
         p->unk_18C += 51;
 
         if (p->unk_18C > 0x1FF) {
@@ -4868,13 +4868,13 @@ u8 func_0807048C(EventCharaWork* p, void* a) {
             break;
         }
 
-        p->unk_02C += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
-        p->unk_030 += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
-        p->unk_034 += p->unk_18C;
+        p->obj.x += gSineTable[p->unk_1AB] * p->unk_19C >> 8;
+        p->obj.y += p->unk_19C * -gSineTable[p->unk_1AB + 64] >> 8;
+        p->obj.z += p->unk_18C;
         p->unk_18C += 51;
 
-        if (p->unk_034 > p->unk_198) {
-            p->unk_034 = p->unk_198;
+        if (p->obj.z > p->unk_198) {
+            p->obj.z = p->unk_198;
             p->unk_1AF = 5;
             p->unk_1A8 = 0;
         }
@@ -4936,20 +4936,20 @@ s32 func_08070AD4(EventCharaWork* p) {
     u16 x;
     u16 y;
 
-    x = (p->unk_02C >> 8) - (gEventState->x >> 8);
-    y = (p->unk_030 >> 8) + (p->unk_034 >> 8) - (gEventState->y >> 8);
+    x = (p->obj.x >> 8) - (gEventState->x >> 8);
+    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (p->keyframes[p->unk_1A0].unk_00) {
     case 0x2EB:
     case 0x2F1:
     case 0x2F2:
         if (p->unk_024 != MSG_SOUND_ID_9E) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 2) {
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 2) {
                     m4aSongNumStart(SONG_SND_958);
                     func_08076110(0x3BE, x, y);
                 }
-                if (p->anim->frame == 6) {
+                if (p->obj.anim->frame == 6) {
                     m4aSongNumStart(SONG_SND_959);
                     func_08076110(0x3BF, x, y);
                 }
@@ -4957,59 +4957,59 @@ s32 func_08070AD4(EventCharaWork* p) {
         }
         break;
     case 0x2E6:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 func_08076110(0x3AC, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 func_08076110(0x3AD, x, y);
             }
         }
         break;
     case 0x375:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
         }
         break;
     case 0x398:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_373);
                 func_08076110(0x175, x, y);
             }
         }
         break;
     case 0x399:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_374);
                 func_08076110(0x176, x, y);
             }
         }
         break;
     case 0x5E:
-        if (p->anim->timer == 9) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 9) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_EV01_01);
             }
         }
         break;
     case 0x1C2:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 func_08076110(0x3AC, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 func_08076110(0x3AD, x, y);
             }
@@ -5017,12 +5017,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x1C0:
     case 0x1C1:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 func_08076110(0x3AC, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 func_08076110(0x3AD, x, y);
             }
@@ -5030,24 +5030,24 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x34B:
     case 0x34C:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
         }
         break;
     case 0x2B2:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
@@ -5062,8 +5062,8 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x20B:
     case 0x2C7:
     case 0x2C8:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 if ((u16)(p->unk_024 - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     func_08076110(0x384, x, y);
@@ -5072,7 +5072,7 @@ s32 func_08070AD4(EventCharaWork* p) {
                     func_08076110(0x3B2, x, y);
                 }
             }
-            if (p->anim->frame == 7) {
+            if (p->obj.anim->frame == 7) {
                 if ((u16)(p->unk_024 - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     func_08076110(0x385, x, y);
@@ -5085,8 +5085,8 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x2C5:
     case 0x2C6:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 if ((u16)(p->unk_024 - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     func_08076110(0x384, x, y);
@@ -5095,7 +5095,7 @@ s32 func_08070AD4(EventCharaWork* p) {
                     func_08076110(0x3B2, x, y);
                 }
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 if ((u16)(p->unk_024 - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     func_08076110(0x385, x, y);
@@ -5108,12 +5108,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x371:
     case 0x372:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 7) {
+            if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
@@ -5121,48 +5121,48 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x1EE:
     case 0x1F6:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
         }
         break;
     case 0x345:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
         }
         break;
     case 0x344:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
         }
         break;
     case 0x341:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 9) {
+            if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
@@ -5173,12 +5173,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x30E:
     case 0x30F:
     case 0x310:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 9) {
+            if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
@@ -5186,84 +5186,84 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x275:
     case 0x276:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 func_08076110(0x3AE, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 func_08076110(0x3AF, x, y);
             }
         }
         break;
     case 0x277:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 func_08076110(0x3AE, x, y);
             }
-            if (p->anim->frame == 7) {
+            if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 func_08076110(0x3AF, x, y);
             }
         }
         break;
     case 0x2A5:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTL);
                 func_08076110(0x3AA, x, y);
             }
-            if (p->anim->frame == 7) {
+            if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTR);
                 func_08076110(0x3AB, x, y);
             }
         }
         break;
     case 0x2A8:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 func_08076110(0x3A0, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 func_08076110(0x3A1, x, y);
             }
         }
         break;
     case 0x271:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
         }
         break;
     case 0x241:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLEL);
                 func_08076110(0x3A8, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLER);
                 func_08076110(0x3A9, x, y);
             }
         }
         break;
     case 0x17A:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
@@ -5271,12 +5271,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x178:
     case 0x179:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
@@ -5284,12 +5284,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x19C:
     case 0x19D:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
@@ -5297,36 +5297,36 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x14A:
     case 0x14B:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTL);
                 func_08076110(0x3B6, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTR);
                 func_08076110(0x3B7, x, y);
             }
         }
         break;
     case 0x157:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_MAN_WOODL);
                 func_08076110(0x3A6, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_WOODR);
                 func_08076110(0x3A7, x, y);
             }
         }
         break;
     case 0x23E:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
                 func_08076110(0x3B2, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLER);
                 func_08076110(0x3B3, x, y);
             }
@@ -5334,12 +5334,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x16C:
     case 0x16E:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 func_08076110(0x3A0, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 func_08076110(0x3A1, x, y);
             }
@@ -5349,12 +5349,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x123:
     case 0x128:
     case 0x129:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
@@ -5364,8 +5364,8 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0xE0:
     case 0xE1:
     case 0xE2:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 if (p->unk_024 == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                     func_08076110(0x3AE, x, y);
@@ -5374,7 +5374,7 @@ s32 func_08070AD4(EventCharaWork* p) {
                     func_08076110(0x3B2, x, y);
                 }
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 if (p->unk_024 == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                     func_08076110(0x3AF, x, y);
@@ -5387,12 +5387,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0xD6:
     case 0xD9:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
@@ -5400,12 +5400,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0xCA:
     case 0xCB:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_954);
                 func_08076110(0x3BA, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_955);
                 func_08076110(0x3BB, x, y);
             }
@@ -5413,12 +5413,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0xD3:
     case 0xD4:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_956);
                 func_08076110(0x3BC, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_957);
                 func_08076110(0x3BD, x, y);
             }
@@ -5426,12 +5426,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x10A:
     case 0x10B:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
@@ -5439,8 +5439,8 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x83:
     case 0x88:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_EV01_03);
                 func_08076110(0x130, x, y);
             }
@@ -5449,8 +5449,8 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x12:
     case 0x13:
     case 0x66:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_EV01_01);
                 func_08076110(0x12E, x, y);
             }
@@ -5462,12 +5462,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x8:
     case 0x9:
         if (gUnk_09EE3CA0[p->unk_024] != 0) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 1) {
-                    func_08072918((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 1) {
+                    func_08072918(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
                 }
-                if (p->anim->frame == 5) {
-                    func_08072918((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
+                if (p->obj.anim->frame == 5) {
+                    func_08072918(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
                 }
             }
         }
@@ -5477,12 +5477,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x288:
     case 0x28C:
         if (gUnk_09EE3CA0[p->unk_024] != 0) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 2) {
-                    func_08072A64((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 2) {
+                    func_08072A64(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
                 }
-                if (p->anim->frame == 6) {
-                    func_08072A64((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
+                if (p->obj.anim->frame == 6) {
+                    func_08072A64(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
                 }
             }
         }
@@ -5492,12 +5492,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x289:
     case 0x28D:
         if (gUnk_09EE3CA0[p->unk_024] != 0) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 3) {
-                    func_08072A64((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 3) {
+                    func_08072A64(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
                 }
-                if (p->anim->frame == 7) {
-                    func_08072A64((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
+                if (p->obj.anim->frame == 7) {
+                    func_08072A64(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
                 }
             }
         }
@@ -5510,12 +5510,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0x266:
     case 0x267:
         if (gUnk_09EE3CA0[p->unk_024] != 0) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 3) {
-                    func_08072B4C((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 3) {
+                    func_08072B4C(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
                 }
-                if (p->anim->frame == 7) {
-                    func_08072B4C((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
+                if (p->obj.anim->frame == 7) {
+                    func_08072B4C(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
                 }
             }
         }
@@ -5526,40 +5526,40 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0xD:
     case 0xE:
         if (gUnk_09EE3CA0[p->unk_024] != 0) {
-            if (p->anim->timer == 0) {
-                if (p->anim->frame == 3) {
-                    func_08072918((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
+            if (p->obj.anim->timer == 0) {
+                if (p->obj.anim->frame == 3) {
+                    func_08072918(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 1);
                 }
-                if (p->anim->frame == 7) {
-                    func_08072918((Actor0806180C*)p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
+                if (p->obj.anim->frame == 7) {
+                    func_08072918(p, gUnk_09EE3CA0[p->unk_024]->unk_2C, 0);
                 }
             }
         }
         break;
     case 0xB8:
     case 0xBA:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 2) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 6) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
         }
         break;
     case 0xBB:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_EV34_00);
                 func_08076110(0x140, x, y);
             }
         }
         break;
     case 0xC1:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
                 func_08076110(0x14E, x, y);
             }
@@ -5567,8 +5567,8 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0xE9:
     case 0xEA:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(0x144);
                 func_08076110(0x144, x, y);
             }
@@ -5580,12 +5580,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0xF8:
     case 0xF9:
     case 0xFA:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 func_08076110(0x39D, x, y);
             }
-            if (p->anim->frame == 5) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 func_08076110(0x39C, x, y);
             }
@@ -5597,12 +5597,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     case 0xFB:
     case 0xFC:
     case 0xFD:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 func_08076110(0x39C, x, y);
             }
-            if (p->anim->frame == 4) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 func_08076110(0x39D, x, y);
             }
@@ -5610,12 +5610,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x280:
     case 0x281:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 7) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
@@ -5623,40 +5623,40 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x18D:
     case 0x18E:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
         }
         break;
     case 0x18F:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 4) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_BTL_GMIC_OK);
             }
         }
         break;
     case 0x159:
     case 0x15D:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 func_08076110(0x3B0, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 func_08076110(0x3B1, x, y);
             }
         }
         break;
     case 0x15E:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
                 func_08076110(0x14E, x, y);
             }
@@ -5664,24 +5664,24 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x185:
     case 0x186:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
         }
         break;
     case 0x187:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 7) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 func_08076110(0x3A2, x, y);
             }
-            if (p->anim->frame == 3) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 func_08076110(0x3A3, x, y);
             }
@@ -5689,8 +5689,8 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x2E7:
     case 0x2E8:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_GE_ENTRY);
                 func_08076110(0x155, x, y);
             }
@@ -5698,12 +5698,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x2AE:
     case 0x2AF:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 func_08076110(0x3AC, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 func_08076110(0x3AD, x, y);
             }
@@ -5711,12 +5711,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x1C5:
     case 0x1C6:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 func_08076110(0x3AC, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 func_08076110(0x3AD, x, y);
             }
@@ -5724,12 +5724,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x27A:
     case 0x27D:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 func_08076110(0x3B4, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 func_08076110(0x3B5, x, y);
             }
@@ -5737,12 +5737,12 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x10F:
     case 0x11B:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 6) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
@@ -5750,43 +5750,43 @@ s32 func_08070AD4(EventCharaWork* p) {
         break;
     case 0x110:
     case 0x11C:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 5) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 func_08076110(0x39E, x, y);
             }
-            if (p->anim->frame == 2) {
+            if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 func_08076110(0x39F, x, y);
             }
         }
         break;
     case 0x118:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_AL_LAND);
                 func_08076110(0x156, x, y);
             }
         }
         break;
     case 0x29E:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 3) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_VO_GE_ATTACK02);
                 func_08076110(0xC5, x, y);
             }
         }
         break;
     case 0x2A2:
-        if (p->anim->timer == 0) {
-            if (p->anim->frame == 1) {
+        if (p->obj.anim->timer == 0) {
+            if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_GE_FOOTUP);
             }
         }
         break;
     case 0x1DE:
-        if (p->anim->timer == 1) {
-            if (p->anim->frame == 0) {
+        if (p->obj.anim->timer == 1) {
+            if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
                 func_08076110(0x227, x, y);
             }
@@ -5795,12 +5795,12 @@ s32 func_08070AD4(EventCharaWork* p) {
     }
 }
 
-void func_08072918(Actor0806180C* a, u8 kind, u8 flag) {
+void func_08072918(EventCharaWork* p, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (a->unk_2C >> 8) - (gEventState->x >> 8);
-    y = (a->unk_30 >> 8) + (a->unk_34 >> 8) - (gEventState->y >> 8);
+    x = (p->obj.x >> 8) - (gEventState->x >> 8);
+    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -5822,7 +5822,7 @@ void func_08072918(Actor0806180C* a, u8 kind, u8 flag) {
         }
         break;
     case 2:
-        if ((a->unk_24 == 0x4B && gEventState->unk_6C > 0x2BC) || (a->unk_24 == 0x36 && gEventState->unk_6C <= 0x4F)) {
+        if ((p->unk_024 == 0x4B && gEventState->unk_6C > 0x2BC) || (p->unk_024 == 0x36 && gEventState->unk_6C <= 0x4F)) {
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
                 func_08076110(0x388, x, y);
@@ -5860,12 +5860,12 @@ void func_08072918(Actor0806180C* a, u8 kind, u8 flag) {
     }
 }
 
-void func_08072A64(Actor0806180C* a, u8 kind, u8 flag) {
+void func_08072A64(EventCharaWork* p, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (a->unk_2C >> 8) - (gEventState->x >> 8);
-    y = (a->unk_30 >> 8) + (a->unk_34 >> 8) - (gEventState->y >> 8);
+    x = (p->obj.x >> 8) - (gEventState->x >> 8);
+    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -5887,7 +5887,7 @@ void func_08072A64(Actor0806180C* a, u8 kind, u8 flag) {
         }
         break;
     case 2:
-        if (a->unk_24 == 0x4B && gEventState->unk_6C > 0x2BC) {
+        if (p->unk_024 == 0x4B && gEventState->unk_6C > 0x2BC) {
             if (flag == 0) {
                 m4aSongNumStart(SONG_EV_DL_STONE_R);
                 func_08076110(0x391, x, y);
@@ -5917,12 +5917,12 @@ void func_08072A64(Actor0806180C* a, u8 kind, u8 flag) {
     }
 }
 
-void func_08072B4C(Actor0806180C* a, u8 kind, u8 flag) {
+void func_08072B4C(EventCharaWork* p, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (a->unk_2C >> 8) - (gEventState->x >> 8);
-    y = (a->unk_30 >> 8) + (a->unk_34 >> 8) - (gEventState->y >> 8);
+    x = (p->obj.x >> 8) - (gEventState->x >> 8);
+    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -5944,7 +5944,7 @@ void func_08072B4C(Actor0806180C* a, u8 kind, u8 flag) {
         }
         break;
     case 2:
-        if (a->unk_24 == 0x4B && gEventState->unk_6C > 0x2BC) {
+        if (p->unk_024 == 0x4B && gEventState->unk_6C > 0x2BC) {
             if (flag == 0) {
                 m4aSongNumStart(SONG_EV_GF_STONE_R);
                 func_08076110(0x393, x, y);
@@ -5982,7 +5982,7 @@ void func_08072C34(EventCharaWork* p) {
     case 21:
     case 22:
     case 32:
-        p->unk_03C |= 8;
+        p->obj.flags |= 8;
         break;
     case 37:
         CreateTinkerbellTask(p);
@@ -5996,7 +5996,7 @@ void func_08072C34(EventCharaWork* p) {
     case 72:
     case 73:
     case 74:
-        p->unk_03C |= 0x10;
+        p->obj.flags |= 0x10;
         break;
     case 0:
         break;

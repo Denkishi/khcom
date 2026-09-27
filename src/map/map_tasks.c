@@ -1777,7 +1777,7 @@ s32 Task_MapGmk_Jump_1(MapGmkJumpWork* w) {
         return 0;
     }
 
-    if (func_080E8374((UnkStruct_080E8374*)w)) {
+    if (func_080E8374(&w->obj)) {
         ColliderSetDisabled(&w->collider, 1);
     } else {
         ColliderSetDisabled(&w->collider, 0);

@@ -139,14 +139,6 @@ typedef struct UnkStruct_0203C7B8 {
     const UnkStruct_080E7D80* unk_14;
 } UnkStruct_0203C7B8;
 
-typedef struct UnkStruct_080E8374 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u8 unk_0C[0x0E];
-    s16 unk_1A;
-} UnkStruct_080E8374;
-
 typedef struct UnkStruct_080E87EC {
     s16 unk_00;
     s16 unk_02;
@@ -156,13 +148,6 @@ typedef struct UnkStruct_080E87EC {
     u16 unk_08;
     u8 unk_0A[0x02];
 } UnkStruct_080E87EC;
-
-typedef struct UnkStruct_080E64D4 {
-    FldPos unk_00;
-    u8 unk_10[0x2A];
-    u16 unk_3A;
-    s32 unk_3C;
-} UnkStruct_080E64D4;
 
 typedef struct UnkStruct_080E8D64 {
     u16 unk_00;
@@ -193,17 +178,6 @@ typedef struct UnkStruct_080E8F50 {
     u16 unk_14;
     u8 unk_16[0x02];
 } UnkStruct_080E8F50;
-
-typedef struct UnkStruct_080EF4BC {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    u8 angle;
-    u8 unk_15[0x03];
-    u8 unk_18[0x28];
-} UnkStruct_080EF4BC;
 
 typedef struct UnkStruct_080E5B90 {
     const UnkStruct_0984BC9C* unk_00;
@@ -923,7 +897,7 @@ typedef struct MapStairWork {
 typedef struct MapFixWork {
     u8 unk_00;
     u8 unk_01[0x03];
-    u8 unk_04[5][0x5C];
+    Collider colliders[5];
     TaskPool tasks;
 #ifdef VERSION_EU
     u8 unk_1E4;
@@ -1365,7 +1339,7 @@ void func_080EB898(u8 a, u16 b);
 void func_080EB93C(u8 a, u32 v);
 void func_080ED0B8(FldRes* p, u8 a, u16 v);
 void func_080ED14C(FldRes* p, u8 a, u32 v);
-s32 Task_MapFix_1(u8* work);
+s32 Task_MapFix_1(MapFixWork* w);
 void func_080ECA88(MapDoorWork* p);
 u8 func_080ECC8C(MapDoorWork* p);
 void func_080ECFE8(UnkStruct_080ECFE8* p, u8 a);

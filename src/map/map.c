@@ -4512,8 +4512,8 @@ void func_080EC760(MapFixWork* p, UnkStruct_080EC760Entry* q) {
 
         do {
             if (q->unk_00 != 0) {
-                ColliderInit(p->unk_04[i], 6, q->unk_00, 0xA0);
-                ColliderSetPosition(p->unk_04[i], q->unk_04, q->unk_08, 0);
+                ColliderInit(&p->colliders[i], 6, q->unk_00, 0xA0);
+                ColliderSetPosition(&p->colliders[i], q->unk_04, q->unk_08, 0);
                 p->unk_00++;
             } else {
                 break;
@@ -4525,7 +4525,7 @@ void func_080EC760(MapFixWork* p, UnkStruct_080EC760Entry* q) {
 }
 
 void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
-    UnkStruct_080EF4BC v;
+    FldObj v;
 
     switch (gUnk_0203C590.unk_07) {
     case 0:
@@ -4614,14 +4614,14 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
     gUnk_0203C7AC->unk_06 = gFieldState->unk_12 / 2;
     func_080E5868(p);
     TaskPoolInit(&w->tasks, 2);
-    v.unk_00 = p->unk_38;
-    v.unk_04 = p->unk_3C;
+    v.fieldPosition.x = p->unk_38;
+    v.fieldPosition.y = p->unk_3C;
     v.angle = 45;
     TaskCreate(&w->tasks, &gTaskDescMapStair, &v);
 
     if (p->unk_40 != 0 || p->unk_44 != 0) {
-        v.unk_00 = p->unk_40;
-        v.unk_04 = p->unk_44;
+        v.fieldPosition.x = p->unk_40;
+        v.fieldPosition.y = p->unk_44;
         v.angle = 173;
         TaskCreate(&w->tasks, &gTaskDescMapStair, &v);
     }
@@ -4629,7 +4629,7 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
     func_080EC760(w, p->unk_30);
 }
 
-s32 Task_MapFix_1(u8* work) {
+s32 Task_MapFix_1(MapFixWork* w) {
     s32 tx = gFieldState->x2 - 0x7800;
     s32 ty = gFieldState->y2 - 0x6000;
 
@@ -4651,42 +4651,42 @@ s32 Task_MapFix_1(u8* work) {
     if (gFieldState->y + 0xA000 > gFieldState->unk_12 << 11) {
         gFieldState->y = (gFieldState->unk_12 << 11) - 0xA000;
     }
-    TaskPoolUpdate((TaskPool*)&work[0x1D0]);
+    TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-void Task_MapFix_2(u8* work) {
+void Task_MapFix_2(MapFixWork* w) {
     ScrollBgMapTo(3, gFieldState->x >> 8, gFieldState->y >> 8);
     ScrollBgMapTo(2, gFieldState->x >> 8, gFieldState->y >> 8);
 
     if ((gUnk_0203C7AC->flags & 1) == 0) {
         ScrollBgMapTo(1, gFieldState->x >> 8, gFieldState->y >> 8);
     }
-    TaskPoolDraw((TaskPool*)&work[0x1D0]);
+    TaskPoolDraw(&w->tasks);
 }
 
-void Task_MapFix_3(u8* work) {
+void Task_MapFix_3(MapFixWork* w) {
     s32 i;
 
-    for (i = 0; i < work[0]; i++) {
-        ColliderUnregister(&work[4 + i * 92]);
+    for (i = 0; i < w->unk_00; i++) {
+        ColliderUnregister(&w->colliders[i]);
     }
 
 #ifdef VERSION_EU
-    if (work[0x1E4] != 0) {
+    if (w->unk_1E4 != 0) {
         eu_08005ADC(3);
     }
 
-    if (work[0x1E5] != 0) {
+    if (w->unk_1E5 != 0) {
         eu_08005ADC(2);
     }
 
-    if (work[0x1E6] != 0) {
+    if (w->unk_1E6 != 0) {
         eu_08005ADC(1);
     }
 #endif
 
-    TaskPoolDestroy((TaskPool*)&work[0x1D0]);
+    TaskPoolDestroy(&w->tasks);
     func_080E58E4();
 }
 
@@ -6627,11 +6627,7 @@ TaskDesc gTaskDescMapFix = {
     (TaskUpdateFunc)Task_MapFix_1,
     (TaskFunc)Task_MapFix_2,
     (TaskFunc)Task_MapFix_3,
-#ifdef VERSION_EU
-    0x1E8,
-#else
-    0x1E4,
-#endif
+    sizeof(MapFixWork),
 };
 
 TaskDesc gTaskDescMapDoor = {

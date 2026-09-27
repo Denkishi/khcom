@@ -44,7 +44,7 @@
 #include "sprites_map.h"
 #include "sprites_card.h"
 
-UnkStruct_02034AFC* gUnk_02034B00;
+SysMsgWinWork* gUnk_02034B00;
 #ifndef VERSION_EU
 u8 gUnk_02034B04[4];
 #endif
@@ -57,25 +57,24 @@ extern void* gUnkEu_08890E44[];
 #else
 #define LANGSTR(x) (x)
 #endif
-u8 func_080A470C(UnkStruct_080A3F5C* w, void* a);
-s32 func_080A4910(UnkStruct_080A3F5C* w);
-u8 func_080A4958(UnkStruct_080A3F5C* w, void* a);
-u8 func_080A4CC8(UnkStruct_080A3F5C* w, void* a);
-s32 func_080A4D7C(u64* src);
-s32 func_080A5150(UnkStruct_080A3F5C* w);
-u8 func_0806BB44(s32 x, s32 y, s32 s, s32* d);
+u8 func_080A470C(SysMsgWinWork* w, void* a);
+s32 func_080A4910(SysMsgWinWork* w);
+u8 func_080A4958(SysMsgWinWork* w, void* a);
+u8 func_080A4CC8(SysMsgWinWork* w, void* a);
+s32 func_080A5150(SysMsgWinWork* w);
+u8 func_0806BB44(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
 #ifdef VERSION_JP
-u8 func_0806BDB8(s32 x, s32 y, s32 s, s32* d);
+u8 func_0806BDB8(s32 x, s32 y, u8* s, u8** d);
 #endif
 
 const s32 gUnk_09041E80[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 
-void func_080A430C(UnkStruct_080A4DCC* w, void* a) {
+void func_080A430C(SysMsgWinWork* w, CardMessageArgs* a) {
     vu32 zero = 0;
 
-    CpuSet((void*)&zero, w, 0x05000052);
-    *(u64*)&w->bg = *(u64*)a;
-    w->messageDef = &gCardMessageDefs[*(u16*)&w->unk_110];
+    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
+    w->args = *a;
+    w->messageDef = &gCardMessageDefs[w->args.messageId];
     if (w->messageDef->flags & 4) {
         w->unk_134 = func_0806BA74(1, 1);
     } else {
@@ -88,43 +87,33 @@ void func_080A430C(UnkStruct_080A4DCC* w, void* a) {
     w->unk_138[2] = 0;
     w->unk_138[3] = 0;
     w->unk_143 = 0;
-    w->unk_130 = 0;
-    w->tiles = 0;
+    w->nextText = 0;
+    w->tiles3 = 0;
     w->palette = 0;
-    w->unk_008 = 0;
-    w->unk_00C = 0;
-    w->unk_018 = 0;
-    w->unk_01C = 0;
-    w->unk_010 = 0;
-    w->unk_014 = 0;
+    w->tiles4 = 0;
+    w->palette2 = 0;
+    w->tiles2 = 0;
+    w->palette4 = 0;
+    w->tiles = 0;
+    w->palette3 = 0;
     w->unk_0C0 = 0;
     w->unk_142 = 1;
     w->unk_141 = 1;
     w->unk_144 = 0;
-    ((u8*)&w->unk_13E)[1] = 0;
+    w->unk_13F = 0;
     w->unk_140 = 0;
     w->unk_145 = 0;
     w->unk_146[0] = 1;
 #ifdef VERSION_JP
     w->unk_138[3] = func_0806BDB8(0x2E00, gUnk_09033CB8[w->messageDef->positionIndex],
-                                   (s32)w->messageDef->text, (s32*)&w->unk_130);
+                                   (TextChar*)w->messageDef->text, &w->nextText);
 #else
-    if (w->unk_130 != 0) {
-#ifdef VERSION_EU
+    if (w->nextText != 0) {
         w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                       (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
-#else
-        w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                       (s32)w->messageDef->text, (s32*)&w->unk_130);
-#endif
+                                       (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     } else {
-#ifdef VERSION_EU
         w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                       (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
-#else
-        w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                       (s32)w->messageDef->text, (s32*)&w->unk_130);
-#endif
+                                       (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     }
 #endif
     InitTextSlots(w->textSlots, 10);
@@ -132,55 +121,55 @@ void func_080A430C(UnkStruct_080A4DCC* w, void* a) {
     gUnk_0203A9D4 = 1;
     gUnk_0203A9D8 = 0;
     w->unk_138[1] = w->unk_138[3];
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 0:
-        w->tiles = AllocObjTiles(0x40, 0);
+        w->tiles3 = AllocObjTiles(0x40, 0);
         w->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette)->index + 16, 1);
-        SetObjTileSource(w->tiles, gFEventTiles);
-        AnimInit(w->anim, gFEventAnims, gFEventFrames);
-        AnimStart(w->anim, 2, 1);
-        w->gfx = (s32)AnimGetGfx(w->anim);
-        SetBgPriority(w->bg, 0);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
+        SetObjTileSource(w->tiles3, gFEventTiles);
+        AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
+        AnimStart(&w->anim2, 2, 1);
+        w->gfx4 = AnimGetGfx(&w->anim2);
+        SetBgPriority(w->args.bg, 0);
         break;
     case 1:
-        SetBgPriority(w->bg, 0);
+        SetBgPriority(w->args.bg, 0);
         break;
     case 2:
-        w->tiles = AllocObjTiles(0x40, 0);
+        w->tiles3 = AllocObjTiles(0x40, 0);
         w->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette)->index + 16, 1);
-        SetObjTileSource(w->tiles, gFEventTiles);
-        AnimInit(w->anim, gFEventAnims, gFEventFrames);
-        AnimStart(w->anim, 2, 1);
-        w->gfx = (s32)AnimGetGfx(w->anim);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
+        SetObjTileSource(w->tiles3, gFEventTiles);
+        AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
+        AnimStart(&w->anim2, 2, 1);
+        w->gfx4 = AnimGetGfx(&w->anim2);
         break;
     }
-    gUnk_02034B00 = (UnkStruct_02034AFC*)w;
+    gUnk_02034B00 = w;
 }
 
-u8 func_080A4578(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A4578(SysMsgWinWork* w, void* a) {
     void* pal;
 
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 0:
     case 1:
         pal = &gUnk_050001C0[0x20];
-        LoadBgTiles(w->bg, gUnk_0950E2F8, 0x140);
-        LoadBgMap(w->bg, gUnk_096112B8, 0x800);
+        LoadBgTiles(w->args.bg, gUnk_0950E2F8, 0x140);
+        LoadBgMap(w->args.bg, gUnk_096112B8, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
         switch ((u32)w->messageDef->positionIndex) {
         case 0:
         case 2:
-            SetBgScroll(w->bg, (u16)-24, 0);
+            SetBgScroll(w->args.bg, (u16)-24, 0);
             break;
         case 1:
         case 3:
-            SetBgScroll(w->bg, (u16)-24, (u16)-94);
+            SetBgScroll(w->args.bg, (u16)-24, (u16)-94);
             break;
         default:
-            SetBgScroll(w->bg, (u16)-24, (u16)-94);
+            SetBgScroll(w->args.bg, (u16)-24, (u16)-94);
             break;
         }
         break;
@@ -213,7 +202,7 @@ u8 func_080A4578(UnkStruct_080A3F5C* w, void* a) {
         break;
     }
 
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 0:
     case 2:
         SetTaskUpdate(a, (TaskUpdateFunc)func_080A470C);
@@ -227,32 +216,29 @@ u8 func_080A4578(UnkStruct_080A3F5C* w, void* a) {
     return 1;
 }
 
-u8 func_080A470C(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A470C(SysMsgWinWork* w, void* a) {
     u8* pal;
 
     if (w->tiles3 != 0) {
-        *(void**)&w->gfx4 = AnimUpdate(w->anim2);
+        w->gfx4 = AnimUpdate(&w->anim2);
     }
 
     if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_KETTEI);
-        if (w->gfx2 != 0) {
+        if (w->nextText != 0) {
 #ifdef VERSION_JP
             w->unk_138[3] = func_0806BDB8(0x2E00, gUnk_09033CB8[w->messageDef->positionIndex],
-                                           (s32)w->gfx2, (s32*)&w->gfx2);
-#elif defined(VERSION_EU)
-            w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                           (s32)w->gfx2, (s32*)&w->gfx2);
+                                           w->nextText, &w->nextText);
 #else
             w->unk_138[3] = func_0806BB44(0x2E00, gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                                           (s32)w->gfx2, (s32*)&w->gfx2);
+                                           w->nextText, &w->nextText);
 #endif
             w->unk_138[1] = w->unk_138[3];
         } else if (!(w->messageDef->flags & 1)) {
-            AnimStart(w->anim2, 3, 1);
+            AnimStart(&w->anim2, 3, 1);
             w->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)func_080A4910);
-            ((s16*)&w->gfx3)[1] = 0;
+            w->unk_136 = 0;
             w->unk_138[0] = 8;
         } else {
             ReleaseObjTiles(w->tiles3);
@@ -263,31 +249,31 @@ u8 func_080A470C(UnkStruct_080A3F5C* w, void* a) {
             pal = gUnk_09614418;
             w->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette2)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette2->index + 16, 1);
 #else
             FadeSetPaletteExcluded(w->palette4->index + 16, 1);
 #endif
-            LoadObjPaletteBank(((UnkStruct_080038C8*)w->palette2)->index, pal);
+            LoadObjPaletteBank(w->palette2->index, pal);
             SetObjTileSource(w->tiles4, gUnk_090A4664);
-            AnimInit(w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-            AnimStart(w->anim3, 2, 1);
-            w->gfx = AnimGetGfx(w->anim3);
+            AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+            AnimStart(&w->anim3, 2, 1);
+            w->gfx = AnimGetGfx(&w->anim3);
             w->unk_13D = 1;
             w->x = 0x5800;
             w->unk_11C = gUnk_09033D28[w->unk_13D] - 0x500;
 #ifdef VERSION_EU
-            ((u8*)&w->unk_13E)[1] = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
+            w->unk_13F = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
             w->unk_140 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots2);
 #else
-            ((u8*)&w->unk_13E)[1] = LoadTextSlots(gUnk_08159E10, w->textSlots);
+            w->unk_13F = LoadTextSlots(gUnk_08159E10, w->textSlots);
             w->unk_140 = LoadTextSlots(gUnk_08159E18, w->textSlots2);
 #endif
-            w->unk_0C0 = (s32)_08066468(1);
+            w->unk_0C0 = _08066468(1);
             w->unk_144 = 1;
             w->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
             w->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette3)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
 #else
             FadeSetPaletteExcluded(w->palette4->index + 16, 1);
 #endif
@@ -296,22 +282,22 @@ u8 func_080A470C(UnkStruct_080A3F5C* w, void* a) {
     }
     return 1;
 }
-s32 func_080A4910(UnkStruct_080A3F5C* w) {
+s32 func_080A4910(SysMsgWinWork* w) {
     if (w->tiles3 != 0) {
-        *(void**)&w->gfx4 = AnimUpdate(w->anim2);
+        w->gfx4 = AnimUpdate(&w->anim2);
     }
 
-    ((s16*)&w->gfx3)[1] += 1;
+    w->unk_136 += 1;
 
-    if (((s16*)&w->gfx3)[1] > 15) {
-        ((u8*)w)[0x141] = 0;
+    if (w->unk_136 > 15) {
+        w->unk_141 = 0;
         return 0;
     }
 
     return 1;
 }
-u8 func_080A4958(UnkStruct_080A3F5C* w, void* a) {
-    w->gfx = AnimUpdate(w->anim3);
+u8 func_080A4958(SysMsgWinWork* w, void* a) {
+    w->gfx = AnimUpdate(&w->anim3);
 
     switch (GetKeysPressed()) {
     case DPAD_UP:
@@ -320,7 +306,7 @@ u8 func_080A4958(UnkStruct_080A3F5C* w, void* a) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        ((u8*)&w->unk_13E)[0] = 4;
+        w->unk_13E = 4;
         break;
     case DPAD_DOWN:
         if (w->unk_13D == 0) {
@@ -328,7 +314,7 @@ u8 func_080A4958(UnkStruct_080A3F5C* w, void* a) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        ((u8*)&w->unk_13E)[0] = 4;
+        w->unk_13E = 4;
         break;
     case A_BUTTON:
     case START_BUTTON:
@@ -345,18 +331,18 @@ u8 func_080A4958(UnkStruct_080A3F5C* w, void* a) {
         break;
     }
 
-    if (((u8*)&w->unk_13E)[0] != 0) {
-        ApproachValue(&w->unk_11C, gUnk_09033D28[w->unk_13D] - 0x500, ((u8*)&w->unk_13E)[0]);
-        ((u8*)&w->unk_13E)[0]--;
+    if (w->unk_13E != 0) {
+        ApproachValue(&w->unk_11C, gUnk_09033D28[w->unk_13D] - 0x500, w->unk_13E);
+        w->unk_13E--;
     }
 
     return 1;
 }
 
-void func_080A4A50(UnkStruct_080A3F5C* w) {
+void func_080A4A50(SysMsgWinWork* w) {
     func_0806C2C0(w->unk_138[1]);
 
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 2:
     case 3:
         if (w->tiles2 != 0) {
@@ -373,7 +359,7 @@ void func_080A4A50(UnkStruct_080A3F5C* w) {
 
     if (w->tiles3 != 0) {
         if (w->unk_141 != 0) {
-            DrawSprite(120, gUnk_09033D08[w->messageDef->positionIndex][1] >> 8, *(void**)&w->gfx4,
+            DrawSprite(120, gUnk_09033D08[w->messageDef->positionIndex][1] >> 8, w->gfx4,
                        w->tiles3, w->palette, 0, 0, 5);
         }
     }
@@ -385,16 +371,16 @@ void func_080A4A50(UnkStruct_080A3F5C* w) {
 
     if (w->unk_144 != 0) {
         DrawSprite(120, 75, gUnk_09EF126C[1], w->tiles, w->palette3, 0, 0, 10);
-        DrawTextSlots((240 - GetTextSlotsWidth((TextSlot*)w->textSlots, ((u8*)&w->unk_13E)[1])) >> 1, 62, w->textSlots,
-                      (void*)w->unk_0C0, 0, ((u8*)&w->unk_13E)[1]);
-        DrawTextSlots((240 - GetTextSlotsWidth((TextSlot*)w->textSlots2, w->unk_140)) >> 1, 77, w->textSlots2,
-                      (void*)w->unk_0C0, 0, w->unk_140);
+        DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots, w->unk_13F)) >> 1, 62, w->textSlots,
+                      w->unk_0C0, 0, w->unk_13F);
+        DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots2, w->unk_140)) >> 1, 77, w->textSlots2,
+                      w->unk_0C0, 0, w->unk_140);
     }
 }
 
-void func_080A4C1C(UnkStruct_080A3F5C* w) {
-    if (w->unk_113 <= 1) {
-        DisableBg(w->bg);
+void func_080A4C1C(SysMsgWinWork* w) {
+    if (w->args.unk_07 <= 1) {
+        DisableBg(w->args.bg);
     }
 
     func_0806C34C();
@@ -432,17 +418,17 @@ void func_080A4C1C(UnkStruct_080A3F5C* w) {
     }
 
     if (w->unk_0C0 != 0) {
-        ReleaseObjPalette((u8*)w->unk_0C0);
+        ReleaseObjPalette(w->unk_0C0);
     }
 
-    FreeTextSlots((TextSlot*)w->textSlots, 10);
-    FreeTextSlots((TextSlot*)w->textSlots2, 10);
+    FreeTextSlots(w->textSlots, 10);
+    FreeTextSlots(w->textSlots2, 10);
     gUnk_0203A9D4 = 0;
     gUnk_02034B00 = 0;
 }
-u8 func_080A4CC8(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A4CC8(SysMsgWinWork* w, void* a) {
 #ifndef VERSION_JP
-    s32* p;
+    TextChar** p;
 #endif
 
     if (w->unk_146[0] == 0) {
@@ -451,15 +437,15 @@ u8 func_080A4CC8(UnkStruct_080A3F5C* w, void* a) {
 
     if (w->unk_145 == 1) {
         w->unk_145 = 0;
-        w->messageDef = &gCardMessageDefs[*(u16*)&w->unk_110];
+        w->messageDef = &gCardMessageDefs[w->args.messageId];
 #ifdef VERSION_JP
         w->unk_138[3] = func_0806BDB8(
             0x2E00,
             gUnk_09033CB8[w->messageDef->positionIndex],
-            (s32)(w->messageDef->text),
-            (s32*)&w->gfx2);
+            (TextChar*)(w->messageDef->text),
+            &w->nextText);
 #else
-        p = (s32*)&w->gfx2;
+        p = &w->nextText;
 
         if (*p != 0) {
             w->unk_138[3] = func_0806BB44(
@@ -470,7 +456,7 @@ u8 func_080A4CC8(UnkStruct_080A3F5C* w, void* a) {
             w->unk_138[3] = func_0806BB44(
                 0x2E00,
                 gUnk_09041E80[w->messageDef->positionIndex] - 0x200,
-                (s32)LANGSTR(w->messageDef->text),
+                (TextChar*)LANGSTR(w->messageDef->text),
                 p);
         }
 #endif
@@ -480,9 +466,9 @@ u8 func_080A4CC8(UnkStruct_080A3F5C* w, void* a) {
 
     return 1;
 }
-s32 func_080A4D7C(u64* src) {
+s32 func_080A4D7C(CardMessageArgs* src) {
     if (gUnk_02034B00 != 0) {
-        gUnk_02034B00->unk_10C = *src;
+        gUnk_02034B00->args = *src;
         gUnk_02034B00->unk_145 = 1;
 
         return 1;
@@ -499,12 +485,12 @@ s32 func_080A4DAC(void) {
 
     return 0;
 }
-void func_080A4DCC(UnkStruct_080A4DCC* w, void* a) {
+void func_080A4DCC(SysMsgWinWork* w, CardMessageArgs* a) {
     vu32 zero = 0;
 
-    CpuSet((void*)&zero, w, 0x05000052);
-    *(u64*)&w->bg = *(u64*)a;
-    w->messageDef = &gCardMessageDefs[*(u16*)&w->unk_110];
+    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
+    w->args = *a;
+    w->messageDef = &gCardMessageDefs[w->args.messageId];
     w->unk_134 = func_0806BA74(1, 0);
     FadeSetPaletteExcluded(w->unk_134 + 16, 1);
     w->unk_138[4] = 0;
@@ -513,71 +499,71 @@ void func_080A4DCC(UnkStruct_080A4DCC* w, void* a) {
     w->unk_138[2] = 0;
     w->unk_138[3] = 0;
     w->unk_143 = 0;
-    w->unk_130 = 0;
-    w->tiles = 0;
+    w->nextText = 0;
+    w->tiles3 = 0;
     w->palette = 0;
-    w->unk_008 = 0;
-    w->unk_00C = 0;
-    w->unk_018 = 0;
-    w->unk_01C = 0;
-    w->unk_010 = 0;
-    w->unk_014 = 0;
+    w->tiles4 = 0;
+    w->palette2 = 0;
+    w->tiles2 = 0;
+    w->palette4 = 0;
+    w->tiles = 0;
+    w->palette3 = 0;
     w->unk_0C0 = 0;
     w->unk_142 = 1;
     w->unk_141 = 1;
     w->unk_144 = 0;
-    ((u8*)&w->unk_13E)[1] = 0;
+    w->unk_13F = 0;
     w->unk_140 = 0;
     w->unk_145 = 0;
     w->unk_146[0] = 1;
 #ifdef VERSION_JP
-    w->unk_138[3] = func_0806BDB8(0x4000, 0x4000, (s32)w->messageDef->text, (s32*)&w->unk_130);
+    w->unk_138[3] = func_0806BDB8(0x4000, 0x4000, (TextChar*)w->messageDef->text, &w->nextText);
 #else
-    if (w->unk_130 != 0) {
+    if (w->nextText != 0) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
         case 1:
-            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 2:
-            w->unk_138[3] = func_0806BB44(0x4100, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 4:
-            w->unk_138[3] = func_0806BB44(0x4400, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 3:
-            w->unk_138[3] = func_0806BB44(0x4600, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         default:
-            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         }
 #else
-        w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+        w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
 #endif
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
         case 1:
-            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 2:
-            w->unk_138[3] = func_0806BB44(0x4100, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 4:
-            w->unk_138[3] = func_0806BB44(0x4400, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         case 3:
-            w->unk_138[3] = func_0806BB44(0x4600, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         default:
-            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+            w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         }
 #else
-        w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (s32)LANGSTR(w->messageDef->text), (s32*)&w->unk_130);
+        w->unk_138[3] = func_0806BB44(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
 #endif
     }
 #endif
@@ -586,29 +572,29 @@ void func_080A4DCC(UnkStruct_080A4DCC* w, void* a) {
     gUnk_0203A9D4 = 1;
     gUnk_0203A9D8 = 0;
     w->unk_138[1] = w->unk_138[3];
-    gUnk_02034B00 = (UnkStruct_02034AFC*)w;
+    gUnk_02034B00 = w;
 }
 
-u8 func_080A4F14(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A4F14(SysMsgWinWork* w, void* a) {
     void* pal;
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 0:
     case 1:
         pal = (void*)0x050001E0;
-        LoadBgTiles(w->bg, gUnk_099597E4, 0x140);
-        LoadBgMap(w->bg, gUnk_09985F44, 0x800);
+        LoadBgTiles(w->args.bg, gUnk_099597E4, 0x140);
+        LoadBgMap(w->args.bg, gUnk_09985F44, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
         switch ((u32)w->messageDef->positionIndex) {
         case 0:
         case 2:
-            SetBgScroll(w->bg, 0, 0);
+            SetBgScroll(w->args.bg, 0, 0);
             break;
         case 1:
         case 3:
-            SetBgScroll(w->bg, 0, 0);
+            SetBgScroll(w->args.bg, 0, 0);
             break;
         default:
-            SetBgScroll(w->bg, 0, 0);
+            SetBgScroll(w->args.bg, 0, 0);
             break;
         }
         break;
@@ -627,73 +613,73 @@ u8 func_080A4F14(UnkStruct_080A3F5C* w, void* a) {
             break;
         }
         w->tiles2 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
-        w->palette4 = (UnkStruct_080038C8*)LoadObjPalette(gCard00Palette, 32);
+        w->palette4 = LoadObjPalette(gCard00Palette, 32);
         FadeSetPaletteExcluded(w->palette4->index + 16, 1);
         break;
     }
-    if (w->unk_113 == 0 || w->unk_113 == 2) {
+    if (w->args.unk_07 == 0 || w->args.unk_07 == 2) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_080A5034);
     }
     return 1;
 }
 
-u8 func_080A5034(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A5034(SysMsgWinWork* w, void* a) {
     u8* pal;
 
     w->tiles4 = AllocObjTiles(0x120, 0);
     pal = gUnk_09614418;
     w->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette2)->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
 #else
     FadeSetPaletteExcluded(w->palette4->index + 16, 1);
 #endif
-    LoadObjPaletteBank(((UnkStruct_080038C8*)w->palette2)->index, pal);
+    LoadObjPaletteBank(w->palette2->index, pal);
     SetObjTileSource(w->tiles4, gUnk_090A4664);
-    AnimInit(w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(w->anim3, 2, 1);
-    w->gfx = AnimGetGfx(w->anim3);
+    AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+    AnimStart(&w->anim3, 2, 1);
+    w->gfx = AnimGetGfx(&w->anim3);
     w->unk_13D = 1;
     w->x = 0x8500;
     w->unk_11C = 0x5000;
 #ifdef VERSION_EU
-    ((u8*)&w->unk_13E)[1] = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
+    w->unk_13F = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
     w->unk_140 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots2);
 #else
-    ((u8*)&w->unk_13E)[1] = LoadTextSlots(gUnk_08159E10, w->textSlots);
+    w->unk_13F = LoadTextSlots(gUnk_08159E10, w->textSlots);
     w->unk_140 = LoadTextSlots(gUnk_08159E18, w->textSlots2);
 #endif
-    w->unk_0C0 = (s32)_08066468(1);
+    w->unk_0C0 = _08066468(1);
     w->unk_144 = 1;
     w->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
     w->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette3)->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette3->index + 16, 1);
 #else
     FadeSetPaletteExcluded(w->palette4->index + 16, 1);
 #endif
     SetTaskUpdate(a, (TaskUpdateFunc)func_080A5198);
     return 1;
 }
-s32 func_080A5150(UnkStruct_080A3F5C* w) {
+s32 func_080A5150(SysMsgWinWork* w) {
     if (w->tiles3 != 0) {
-        *(void**)&w->gfx4 = AnimUpdate(w->anim2);
+        w->gfx4 = AnimUpdate(&w->anim2);
     }
 
-    ((s16*)&w->gfx3)[1] += 1;
+    w->unk_136 += 1;
 
-    if (((s16*)&w->gfx3)[1] > 15) {
-        ((u8*)w)[0x141] = 0;
+    if (w->unk_136 > 15) {
+        w->unk_141 = 0;
         return 0;
     }
 
     return 1;
 }
-u8 func_080A5198(UnkStruct_080A3F5C* w, void* a) {
+u8 func_080A5198(SysMsgWinWork* w, void* a) {
     s32 tbl[2];
 
     *(u64*)tbl = *(u64*)gUnk_09041E9C;
-    w->gfx = AnimUpdate(w->anim3);
+    w->gfx = AnimUpdate(&w->anim3);
 
     switch (GetKeysPressed()) {
     case DPAD_LEFT:
@@ -702,7 +688,7 @@ u8 func_080A5198(UnkStruct_080A3F5C* w, void* a) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        ((u8*)&w->unk_13E)[0] = 1;
+        w->unk_13E = 1;
         break;
     case DPAD_RIGHT:
         if (w->unk_13D == 0) {
@@ -710,7 +696,7 @@ u8 func_080A5198(UnkStruct_080A3F5C* w, void* a) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        ((u8*)&w->unk_13E)[0] = 1;
+        w->unk_13E = 1;
         break;
     }
 
@@ -736,17 +722,17 @@ u8 func_080A5198(UnkStruct_080A3F5C* w, void* a) {
         break;
     }
 
-    if (((u8*)&w->unk_13E)[0] != 0) {
-        ApproachValue(&w->x, tbl[w->unk_13D], ((u8*)&w->unk_13E)[0]);
-        ((u8*)&w->unk_13E)[0]--;
+    if (w->unk_13E != 0) {
+        ApproachValue(&w->x, tbl[w->unk_13D], w->unk_13E);
+        w->unk_13E--;
     }
 
     return 1;
 }
-void func_080A52BC(UnkStruct_080A3F5C* w) {
+void func_080A52BC(SysMsgWinWork* w) {
     func_0806C2C0(w->unk_138[1]);
 
-    switch (w->unk_113) {
+    switch (w->args.unk_07) {
     case 2:
     case 3:
         if (w->tiles2 != 0) {
@@ -763,13 +749,13 @@ void func_080A52BC(UnkStruct_080A3F5C* w) {
         DrawSprite(w->x >> 8, w->unk_11C >> 8, w->gfx, w->tiles4, w->palette2, 0, 1, 10);
     }
 
-    DrawTextSlots(89, 86, w->textSlots, w->unk_0C0, 0, ((u8*)&w->unk_13E)[1]);
+    DrawTextSlots(89, 86, w->textSlots, w->unk_0C0, 0, w->unk_13F);
     DrawTextSlots(135, 86, w->textSlots2, w->unk_0C0, 0, w->unk_140);
 }
 
-void func_080A53E4(UnkStruct_080A3F5C* w) {
-    if (w->unk_113 <= 1) {
-        DisableBg(w->bg);
+void func_080A53E4(SysMsgWinWork* w) {
+    if (w->args.unk_07 <= 1) {
+        DisableBg(w->args.bg);
     }
 
     func_0806C34C();
@@ -807,11 +793,11 @@ void func_080A53E4(UnkStruct_080A3F5C* w) {
     }
 
     if (w->unk_0C0 != 0) {
-        ReleaseObjPalette((u8*)w->unk_0C0);
+        ReleaseObjPalette(w->unk_0C0);
     }
 
-    FreeTextSlots((TextSlot*)w->textSlots, 10);
-    FreeTextSlots((TextSlot*)w->textSlots2, 10);
+    FreeTextSlots(w->textSlots, 10);
+    FreeTextSlots(w->textSlots2, 10);
     gUnk_0203A9D4 = 0;
     gUnk_02034B00 = 0;
 }
@@ -822,7 +808,7 @@ TaskDesc gUnk_09EE8E30 = {
     (TaskUpdateFunc)func_080A4578,
     (TaskFunc)func_080A4A50,
     (TaskFunc)func_080A4C1C,
-    0x148,
+    sizeof(SysMsgWinWork),
 };
 
 TaskDesc gUnk_09EE8E48 = {
@@ -831,7 +817,7 @@ TaskDesc gUnk_09EE8E48 = {
     (TaskUpdateFunc)func_080A4F14,
     (TaskFunc)func_080A52BC,
     (TaskFunc)func_080A53E4,
-    0x148,
+    sizeof(SysMsgWinWork),
 };
 
 const s32 gUnk_09041E9C[2] = { 0x5000, 0x8000 };

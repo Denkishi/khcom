@@ -59,7 +59,6 @@ extern void* gUnkEu_08890E44[];
 #define LANGSTR(x) (x)
 #endif
 s32 func_080A40EC(u64* src);
-s32 func_080A4D7C(u64* src);
 u8 func_080A36B0(UnkStruct_080A3F5C* w, void* a);
 u8 func_080A3BB0(UnkStruct_080A3F5C* w, void* a);
 u8 func_080A3F5C(UnkStruct_080A3F5C* w, void* a);
@@ -593,7 +592,7 @@ void func_080A4234(void* pool, u32 a, u16 b) {
 
     if (func_080A42C8() != 0) {
         if ((u8)func_080A40EC((u64*)&args) == 0) {
-            func_080A4D7C((u64*)&args);
+            func_080A4D7C(&args);
         }
     } else if (gCardMessageDefs[b].portraitId == 62) {
         TaskCreate(pool, &gUnk_09EE8E30, &args);

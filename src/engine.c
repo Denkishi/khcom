@@ -15,7 +15,7 @@
 
 u16 gUnk_030074CC IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);
-struct BgEntry* gBgEntries IWRAM_DATA(4);
+struct BgWork* gBgWork IWRAM_DATA(4);
 u16 gBackdropColor IWRAM_DATA(4);
 u16 gBg2Cnt IWRAM_DATA(4);
 u16 gBg3PB IWRAM_DATA(4);
@@ -1827,18 +1827,18 @@ void FlushDma3QueueWithCpu(void) {
 }
 
 void BgInit(void) {
-    BgEntry** p;
+    BgWork** p;
     u32 zero;
 
     SetIwramHeapName(sBgHeapName);
-    p = &gBgEntries;
-    *p = IwramAlloc(BG_ENTRY_COUNT * sizeof(BgEntry));
+    p = &gBgWork;
+    *p = IwramAlloc(sizeof(BgWork));
     zero = 0;
-    CpuSet(&zero, *p, 0x05000000 | (BG_ENTRY_COUNT * sizeof(BgEntry) / 4));
+    CpuSet(&zero, *p, 0x05000000 | (sizeof(BgWork) / 4));
 }
 
 void BgFree(void) {
-    IwramFree(gBgEntries);
+    IwramFree(gBgWork);
 }
 
 void* GetBgMapBlock(BgEntry* e, u16 x, u16 y) {
@@ -1893,7 +1893,7 @@ void BgReset(void) {
     u32 zero;
 
     zero = 0;
-    CpuSet(&zero, gBgEntries, 0x05000000 | (BG_ENTRY_COUNT * sizeof(BgEntry) / 4));
+    CpuSet(&zero, gBgWork, 0x05000000 | (sizeof(BgWork) / 4));
 #endif
     gBackdropColor = 0;
     DisableBg(0);
@@ -1922,11 +1922,7 @@ void SetBgMode0(void) {
     SetBgScroll(3, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        u8* p = (u8*)gBgEntries;
-        s32 o = i * sizeof(BgEntry);
-        p += 4;
-        p += o;
-        *(void**)p = 0;
+        gBgWork->entries[i].map = 0;
     }
 }
 
@@ -1945,11 +1941,7 @@ void SetBgMode1(void) {
     SetBgAffine(2, 0, 0x100, 0x100, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        u8* p = (u8*)gBgEntries;
-        s32 o = i * sizeof(BgEntry);
-        p += 4;
-        p += o;
-        *(void**)p = 0;
+        gBgWork->entries[i].map = 0;
     }
 }
 
@@ -1965,11 +1957,7 @@ void SetBgMode2(void) {
     SetBgAffine(3, 0, 0x100, 0x100, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        u8* p = (u8*)gBgEntries;
-        s32 o = i * sizeof(BgEntry);
-        p += 4;
-        p += o;
-        *(void**)p = 0;
+        gBgWork->entries[i].map = 0;
     }
 }
 
@@ -2044,11 +2032,6 @@ void* GetBgScreenBase(s32 bg) {
 }
 
 void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
-    u8* p;
-    u8* q;
-    s32 ofs;
-    u32 z;
-
     if (gDispCnt & DISPCNT_MODE_MASK) {
         if (bg == 2 || bg == 3) {
             return;
@@ -2056,21 +2039,16 @@ void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
     }
 
     EnableBg(bg);
-    p = (u8*)gBgEntries;
-    ofs = bg * sizeof(BgEntry);
-    q = p + 4;
-    *(void**)(q + ofs) = src;
-    p += ofs;
-    z = 0;
-    ((BgEntry*)p)->width = w;
-    ((BgEntry*)((u8*)gBgEntries + ofs))->height = h;
-    ((BgEntry*)((u8*)gBgEntries + ofs))->x = z;
-    ((BgEntry*)((u8*)gBgEntries + ofs))->y = z;
-    ((BgEntry*)((u8*)gBgEntries + ofs))->dirty = 1;
+    gBgWork->entries[bg].map = src;
+    gBgWork->entries[bg].width = w;
+    gBgWork->entries[bg].height = h;
+    gBgWork->entries[bg].x = 0;
+    gBgWork->entries[bg].y = 0;
+    gBgWork->entries[bg].dirty = 1;
 }
 
 void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
-    BgEntry* e = &gBgEntries[bg];
+    BgEntry* e = &gBgWork->entries[bg];
 
     if (e->map == 0) {
         return;
@@ -2093,7 +2071,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
     u8 cy;
     void* dst;
 
-    e = &gBgEntries[bg];
+    e = &gBgWork->entries[bg];
     if (e->map == 0) {
         return;
     }
@@ -2156,7 +2134,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
 }
 
 u16 GetBgMapX(s32 bg) {
-    BgEntry* e = &gBgEntries[bg];
+    BgEntry* e = &gBgWork->entries[bg];
 
     if (e->map == 0) {
         return 0;
@@ -2165,7 +2143,7 @@ u16 GetBgMapX(s32 bg) {
 }
 
 u16 GetBgMapY(s32 bg) {
-    BgEntry* e = &gBgEntries[bg];
+    BgEntry* e = &gBgWork->entries[bg];
 
     if (e->map == 0) {
         return 0;
@@ -2384,7 +2362,7 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
     if ((gDispCnt & DISPCNT_MODE_MASK) != 0 && (bg == 2 || bg == 3)) {
         return 0;
     }
-    e = &gBgEntries[bg];
+    e = &gBgWork->entries[bg];
     if (e->unkEu_10 != 0) {
         return 0;
     }
@@ -2411,7 +2389,7 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
 }
 
 void eu_08005ADC(s32 bg) {
-    BgEntry* e = &gBgEntries[bg];
+    BgEntry* e = &gBgWork->entries[bg];
     s32 count;
     s32 i;
     if (e->unkEu_10 != 0) {

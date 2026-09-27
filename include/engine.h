@@ -40,6 +40,10 @@ typedef struct BgEntry {
 #endif
 } BgEntry;
 
+typedef struct BgWork {
+    BgEntry entries[BG_ENTRY_COUNT];
+} BgWork;
+
 typedef struct Dma3Pending {
     void* dst;
     u16 size;

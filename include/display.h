@@ -65,12 +65,12 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h);
 void eu_08005ADC(s32 bg);
 #endif
 
-struct BgEntry;
+struct BgWork;
 struct FadeWork;
 
 extern u16 gUnk_030074CC;
 extern u8 gBgPaletteBank[4];
-extern struct BgEntry* gBgEntries;
+extern struct BgWork* gBgWork;
 extern u16 gBackdropColor;
 extern u16 gBg2Cnt;
 extern u16 gBg3PB;

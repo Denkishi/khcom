@@ -39,8 +39,8 @@
 
 extern u8 gUnk_09A3DE7C[];
 
-s16 CountCollectionCards(void);
-s16 CountCardsInDecks(void);
+u16 CountCollectionCards(void);
+u16 CountCardsInDecks(void);
 void ClearCardCollectionSlot(u16* p);
 
 s16 func_08104A84(s16 a);

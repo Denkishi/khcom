@@ -119,9 +119,7 @@ typedef struct BtlSoraWork {
     u8 angle;
     u8 unk_161;
     u8 unk_162[0x2];
-    const void* unk_164;
-    const void* unk_168;
-    const void* unk_16C;
+    const SoraAttackDef* attacks[3];
     u8 unk_170[0x2];
     u8 unk_172;
     u8 unk_173;
@@ -160,9 +158,7 @@ typedef struct BtlRikuWork {
     u8 unk_164;
     u8 unk_165;
     u8 unk_166[0x2];
-    const void* unk_168;
-    const void* unk_16C;
-    const void* unk_170;
+    const RikuAttackDef* attacks[3];
     u8 unk_174[0x4];
     u8 unk_178;
     u8 unk_179;

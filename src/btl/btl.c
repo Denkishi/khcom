@@ -865,30 +865,30 @@ void func_0801E518(BtlSoraWork* work) {
     } else {
         switch (func_0801DC80(work)) {
         case 0:
-            work->unk_164 = &gUnk_0813C1D4;
-            work->unk_168 = &gUnk_0813C1EC;
-            work->unk_16C = &gUnk_0813C21C;
+            work->attacks[0] = &gUnk_0813C1D4;
+            work->attacks[1] = &gUnk_0813C1EC;
+            work->attacks[2] = &gUnk_0813C21C;
             break;
         case 1:
-            work->unk_164 = &gUnk_0813C1EC;
-            work->unk_168 = &gUnk_0813C1D4;
-            work->unk_16C = &gUnk_0813C21C;
+            work->attacks[0] = &gUnk_0813C1EC;
+            work->attacks[1] = &gUnk_0813C1D4;
+            work->attacks[2] = &gUnk_0813C21C;
             break;
         case 2:
-            work->unk_164 = &gUnk_0813C24C;
-            work->unk_168 = &gUnk_0813C264;
-            work->unk_16C = &gUnk_0813C27C;
+            work->attacks[0] = &gUnk_0813C24C;
+            work->attacks[1] = &gUnk_0813C264;
+            work->attacks[2] = &gUnk_0813C27C;
             break;
         case 3:
-            work->unk_164 = &gUnk_0813C234;
-            work->unk_168 = &gUnk_0813C24C;
-            work->unk_16C = &gUnk_0813C27C;
+            work->attacks[0] = &gUnk_0813C234;
+            work->attacks[1] = &gUnk_0813C24C;
+            work->attacks[2] = &gUnk_0813C27C;
             break;
         case 4:
         default:
-            work->unk_164 = &gUnk_0813C204;
-            work->unk_168 = &gUnk_0813C1EC;
-            work->unk_16C = &gUnk_0813C21C;
+            work->attacks[0] = &gUnk_0813C204;
+            work->attacks[1] = &gUnk_0813C1EC;
+            work->attacks[2] = &gUnk_0813C21C;
             break;
         }
         work->unk_038 = 16;
@@ -1002,7 +1002,6 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     s32 d;
     s32 t4;
     u32 id;
-    u8* base;
     const SoraAttackDef* a;
     s32 sel[6];
     u8 buf[5];
@@ -2946,7 +2945,6 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     case 16: {
         s32 t;
         s32 t2;
-        s32 ofs;
 
         d = 0;
         func_0801DD08(work);
@@ -2957,27 +2955,18 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 if (work->unk_161 == 2) {
                     work->unk_161 = 1;
                     work->unk_15A |= 0x40;
-                    a = *(void**)&work->unk_164;
+                    a = work->attacks[0];
                 } else {
-                    ofs = work->unk_161;
-                    ofs *= 4;
-                    base = (u8*)&work->unk_164;
-                    a = *(void**)(base + ofs);
+                    a = work->attacks[work->unk_161];
                 }
             } else {
-                ofs = work->unk_161;
-                ofs *= 4;
-                base = (u8*)&work->unk_164;
-                a = *(void**)(base + ofs);
+                a = work->attacks[work->unk_161];
             }
         } else if (p->btl->unk_0F4 == 5) {
             work->unk_161 = 2;
-            a = *(void**)&work->unk_16C;
+            a = work->attacks[2];
         } else {
-            ofs = work->unk_161;
-            ofs *= 4;
-            base = (u8*)&work->unk_164;
-            a = *(void**)(base + ofs);
+            a = work->attacks[work->unk_161];
         }
 
         if (work->unk_161 != 0) {
@@ -6899,30 +6888,30 @@ void func_080280E0(BtlRikuWork* work) {
     } else {
         switch (func_08027468(work)) {
         case 0:
-            work->unk_168 = &gUnk_0813C6E8;
-            work->unk_16C = &gUnk_0813C704;
-            work->unk_170 = &gUnk_0813C73C;
+            work->attacks[0] = &gUnk_0813C6E8;
+            work->attacks[1] = &gUnk_0813C704;
+            work->attacks[2] = &gUnk_0813C73C;
             break;
         case 1:
-            work->unk_168 = &gUnk_0813C704;
-            work->unk_16C = &gUnk_0813C6E8;
-            work->unk_170 = &gUnk_0813C73C;
+            work->attacks[0] = &gUnk_0813C704;
+            work->attacks[1] = &gUnk_0813C6E8;
+            work->attacks[2] = &gUnk_0813C73C;
             break;
         case 2:
-            work->unk_168 = &gUnk_0813C774;
-            work->unk_16C = &gUnk_0813C790;
-            work->unk_170 = &gUnk_0813C7AC;
+            work->attacks[0] = &gUnk_0813C774;
+            work->attacks[1] = &gUnk_0813C790;
+            work->attacks[2] = &gUnk_0813C7AC;
             break;
         case 3:
-            work->unk_168 = &gUnk_0813C758;
-            work->unk_16C = &gUnk_0813C774;
-            work->unk_170 = &gUnk_0813C7AC;
+            work->attacks[0] = &gUnk_0813C758;
+            work->attacks[1] = &gUnk_0813C774;
+            work->attacks[2] = &gUnk_0813C7AC;
             break;
         case 4:
         default:
-            work->unk_168 = &gUnk_0813C720;
-            work->unk_16C = &gUnk_0813C704;
-            work->unk_170 = &gUnk_0813C73C;
+            work->attacks[0] = &gUnk_0813C720;
+            work->attacks[1] = &gUnk_0813C704;
+            work->attacks[2] = &gUnk_0813C73C;
             break;
         }
         work->unk_03C = 9;
@@ -7084,7 +7073,6 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     u16 fr;
     s32 ex;
     s32 ey;
-    s32 ofs;
     s32 oa;
     s32 ob;
     s32 oc;
@@ -7093,12 +7081,6 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     s32 d;
     s32 t4;
     s32 t5;
-#ifdef VERSION_EU
-    const RikuAttackDef** q;
-#else
-    const void** q;
-#endif
-    u8* base;
     const RikuAttackDef* a;
     BtlSpawnArgs spawn;
     u32 id;
@@ -9830,7 +9812,6 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 9: {
         s32 t;
         s32 t2;
-        s32 ofs;
         d = 0;
         func_080274F0(work);
 
@@ -9839,30 +9820,19 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 if (work->unk_165 == 2) {
                     work->unk_165 = 1;
                     work->unk_15E |= 0x40;
-                    q = (void*)&work->unk_168;
+                    a = work->attacks[0];
                 } else {
-                    ofs = work->unk_165;
-                    ofs *= 4;
-                    base = (u8*)&work->unk_168;
-                    q = (void*)(base + ofs);
+                    a = work->attacks[work->unk_165];
                 }
             } else {
-                ofs = work->unk_165;
-                ofs *= 4;
-                base = (u8*)&work->unk_168;
-                q = (void*)(base + ofs);
+                a = work->attacks[work->unk_165];
             }
         } else if (p->btl->unk_0F4 == 5) {
             work->unk_165 = 2;
-            q = (void*)&work->unk_170;
+            a = work->attacks[2];
         } else {
-            ofs = work->unk_165;
-            ofs *= 4;
-            base = (u8*)&work->unk_168;
-            q = (void*)(base + ofs);
+            a = work->attacks[work->unk_165];
         }
-
-        a = *q;
 
         if (work->unk_165 != 0) {
             if (a->flags & 1) {

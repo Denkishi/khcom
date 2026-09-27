@@ -40,27 +40,27 @@
 #include "bos4_api.h"
 #include "sprites_card_pictures.h"
 
-s32 func_0809CBD0(u8* work);
-void func_0809CAC8(void* work);
-void func_0809C9A4(UnkStruct_0809C9A4* p);
-void func_0809CA1C(u8* work);
-u8 func_0809C9F4(UnkStruct_0809C9A4* p);
-u8 func_0809CB78(u8* work, void* a);
+s32 func_0809CBD0(UnkStruct_0809C534* w);
+void func_0809CAC8(UnkStruct_0809C534* w);
+void func_0809C9A4(UnkStruct_0809C534* w);
+void func_0809CA1C(UnkStruct_0809C534* w);
+u8 func_0809C9F4(UnkStruct_0809C534* w);
+u8 func_0809CB78(UnkStruct_0809C534* w, void* a);
 
 const s16 gUnk_09036278[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 
 const u8 gUnk_0903628A[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 };
 
-void func_0809C534(UnkStruct_0809C534* w, UnkStruct_0809C534_Args* a) {
+void func_0809C534(UnkStruct_0809C534* w, CardSlot* a) {
     CardDef* def;
 
     w->unk_54 = 0;
     w->tiles4 = 0;
 
     if (a->unk_06 <= 8) {
-        w->unk_4E = gUnk_09036278[a->unk_06];
+        w->angle = gUnk_09036278[a->unk_06];
     } else {
-        w->unk_4E = 0xFFE0;
+        w->angle = -0x20;
     }
 
     w->unk_52 = a->unk_06;
@@ -74,8 +74,8 @@ void func_0809C534(UnkStruct_0809C534* w, UnkStruct_0809C534_Args* a) {
         w->cardBack = &gUnk_08F709B0[def->unk_2A];
     }
 
-    w->unk_50 = 0;
-    func_0809C9A4((UnkStruct_0809C9A4*)w);
+    w->radius = 0;
+    func_0809C9A4(w);
     ListNodeInit(&w->node, &gCardListWork->cards, w);
     ListPoolAppend(&w->node, &gCardListWork->cards);
     w->unk_55 = 0;
@@ -86,46 +86,46 @@ void func_0809C534(UnkStruct_0809C534* w, UnkStruct_0809C534_Args* a) {
     w->unk_53 = 32;
     w->unk_74 = 0;
 }
-u8 func_0809C620(u8* work, void* a) {
+u8 func_0809C620(UnkStruct_0809C534* w, void* a) {
     s32 v;
-    u8 (*fn)(u8*, void*);
+    u8 (*fn)(UnkStruct_0809C534*, void*);
     u16 lim;
 
-    v = *(s16*)&work[0x4E] << 8;
+    v = w->angle << 8;
 
-    if (*(s8*)&work[0x52] <= 8) {
-        ApproachValue(&v, gUnk_09036278[*(s8*)&work[0x52]] << 8, work[0x53]);
-        *(s16*)&work[0x4E] = v >> 8;
+    if (w->unk_52 <= 8) {
+        ApproachValue(&v, gUnk_09036278[w->unk_52] << 8, w->unk_53);
+        w->angle = v >> 8;
     } else {
         lim = 0xFFE0;
-        *(u16*)&work[0x4E] = lim;
+        w->angle = lim;
     }
 
-    if (work[0x53] != 0) {
-        work[0x53]--;
+    if (w->unk_53 != 0) {
+        w->unk_53--;
     }
 
-    func_0809C9A4((UnkStruct_0809C9A4*)work);
+    func_0809C9A4(w);
 
-    if (func_0809C9F4((UnkStruct_0809C9A4*)work)) {
-        func_0809CA1C(work);
+    if (func_0809C9F4(w)) {
+        func_0809CA1C(w);
     } else {
-        func_0809CAC8(work);
+        func_0809CAC8(w);
     }
 
-    if ((s8)work[0x52] == 3) {
-        gCardListWork->selectedCard = (UnkStruct_0809C534*)work;
+    if (w->unk_52 == 3) {
+        gCardListWork->selectedCard = w;
     }
 
-    switch (work[0x55]) {
+    switch (w->unk_55) {
     case 2:
         gCardListWork->unk_29 = 0;
-        work[0x53] = 8;
+        w->unk_53 = 8;
         fn = func_0809CB0C;
         SetTaskUpdate(a, (TaskUpdateFunc)fn);
-        return fn(work, a);
+        return fn(w, a);
     case 3:
-        work[0x53] = 10;
+        w->unk_53 = 10;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809CBF8);
         break;
     }
@@ -133,23 +133,23 @@ u8 func_0809C620(u8* work, void* a) {
     return 1;
 }
 
-u8 func_0809C710(u8* work, void* a) {
+u8 func_0809C710(UnkStruct_0809C534* w, void* a) {
     s32 v;
 
-    v = *(s16*)&work[0x50] << 8;
-    ApproachValue(&v, 0x6800, work[0x53]);
-    *(s16*)&work[0x50] = v >> 8;
-    work[0x53]--;
-    func_0809C9A4((UnkStruct_0809C9A4*)work);
+    v = w->radius << 8;
+    ApproachValue(&v, 0x6800, w->unk_53);
+    w->radius = v >> 8;
+    w->unk_53--;
+    func_0809C9A4(w);
 
-    if ((s8)work[0x52] <= 8) {
-        func_0809CA1C(work);
+    if (w->unk_52 <= 8) {
+        func_0809CA1C(w);
     } else {
-        func_0809CAC8(work);
+        func_0809CAC8(w);
     }
 
-    if (work[0x53] == 0) {
-        work[0x55] = 1;
+    if (w->unk_53 == 0) {
+        w->unk_55 = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809C620);
     }
 
@@ -184,24 +184,24 @@ void func_0809C78C(UnkStruct_0809C534* w) {
                    gUnk_0903628A[w->unk_52] + 67);
     }
 }
-void func_0809C98C(void** work) {
-    func_0809CAC8(work);
+void func_0809C98C(UnkStruct_0809C534* w) {
+    func_0809CAC8(w);
 
-    if (work[6] != 0) {
-        ReleaseObjTiles(work[6]);
+    if (w->tiles4 != 0) {
+        ReleaseObjTiles(w->tiles4);
     }
 }
 
-void func_0809C9A4(UnkStruct_0809C9A4* p) {
-    p->unk_4A = (gSineTable[p->angle] * p->unk_50) >> 8;
-    p->unk_4C = ((-gSineTable[p->angle + 64] * p->unk_50) >> 8) + 160;
+void func_0809C9A4(UnkStruct_0809C534* w) {
+    w->x = (gSineTable[(u8)w->angle] * w->radius) >> 8;
+    w->y = ((-gSineTable[(u8)w->angle + 64] * w->radius) >> 8) + 160;
 }
 
-u8 func_0809C9F4(UnkStruct_0809C9A4* p) {
-    if (p->unk_4A >= 0) {
-        if (p->unk_4A <= 240) {
-            if (p->unk_4C >= 0) {
-                if (p->unk_4C <= 160) {
+u8 func_0809C9F4(UnkStruct_0809C534* w) {
+    if (w->x >= 0) {
+        if (w->x <= 240) {
+            if (w->y >= 0) {
+                if (w->y <= 160) {
                     return 1;
                 }
             }
@@ -211,103 +211,99 @@ u8 func_0809C9F4(UnkStruct_0809C9A4* p) {
     return 0;
 }
 
-void func_0809CA1C(u8* work) {
-    if (work[0x54] == 0) {
-        *(void**)&work[0x0C] = LoadObjTiles(((void**)*(void**)&work[4])[3], 0x280);
-        *(void**)&work[0x28] = LoadObjPalette(gCard00Palette, 32);
-        *(void**)&work[0x08] = LoadObjTiles(((void**)*(void**)&work[0])[1], 0x200);
-        *(void**)&work[0x24] = LoadObjPalette(((void**)*(void**)&work[0])[2], 32);
-        *(void**)&work[0x10] = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-        *(void**)&work[0x1C] = LoadObjTiles(gUnk_0905ED36, 0x140);
-        *(void**)&work[0x20] = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x20])->index + 16, 1);
-        FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x28])->index + 16, 1);
-        FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x24])->index + 16, 1);
-        work[0x54] = 1;
+void func_0809CA1C(UnkStruct_0809C534* w) {
+    if (w->unk_54 == 0) {
+        w->tiles2 = LoadObjTiles(w->cardBack->tiles, 0x280);
+        w->palette3 = LoadObjPalette(gCard00Palette, 32);
+        w->tiles = LoadObjTiles(w->cardDef->tiles, 0x200);
+        w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
+        w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+        w->tiles5 = LoadObjTiles(gUnk_0905ED36, 0x140);
+        w->palette = LoadObjPalette(gBStatesPalette, 32);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette3->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+        w->unk_54 = 1;
     }
 }
 
-void func_0809CAC8(void* p) {
-    u8* work;
-
-    work = (u8*)p;
-
-    if (work[0x54] != 0) {
-        ReleaseObjTiles(*(void**)&work[0x0C]);
-        ReleaseObjPalette(*(void**)&work[0x28]);
-        ReleaseObjTiles(*(void**)&work[0x08]);
-        ReleaseObjPalette(*(void**)&work[0x24]);
-        ReleaseObjTiles(*(void**)&work[0x10]);
-        ReleaseObjPalette(*(void**)&work[0x20]);
-        ReleaseObjTiles(*(void**)&work[0x1C]);
-        work[0x54] = 0;
+void func_0809CAC8(UnkStruct_0809C534* w) {
+    if (w->unk_54 != 0) {
+        ReleaseObjTiles(w->tiles2);
+        ReleaseObjPalette(w->palette3);
+        ReleaseObjTiles(w->tiles);
+        ReleaseObjPalette(w->palette2);
+        ReleaseObjTiles(w->tiles3);
+        ReleaseObjPalette(w->palette);
+        ReleaseObjTiles(w->tiles5);
+        w->unk_54 = 0;
     }
 }
 
-u8 func_0809CB0C(u8* work, void* a) {
+u8 func_0809CB0C(UnkStruct_0809C534* w, void* a) {
     s32 x;
     s32 y;
 
-    x = *(s16*)&work[0x4A] << 8;
-    y = *(s16*)&work[0x4C] << 8;
-    ApproachValue(&x, 0x7800, work[0x53]);
-    ApproachValue(&y, 0x4600, work[0x53]);
-    *(s16*)&work[0x4A] = x >> 8;
-    *(s16*)&work[0x4C] = y >> 8;
-    work[0x53]--;
+    x = w->x << 8;
+    y = w->y << 8;
+    ApproachValue(&x, 0x7800, w->unk_53);
+    ApproachValue(&y, 0x4600, w->unk_53);
+    w->x = x >> 8;
+    w->y = y >> 8;
+    w->unk_53--;
 
-    if (work[0x53] == 0) {
+    if (w->unk_53 == 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809CB78);
     }
 
     return 1;
 }
 
-u8 func_0809CB78(u8* work, void* a) {
-    *(void**)&work[0x18] = AllocObjTiles(640, 0);
-    SetObjTileSource(*(void**)&work[0x18], gUnk_0908B1B4);
-    AnimInit(&work[0x2C], gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&work[0x2C], 0, 1);
-    *(void**)&work[0x44] = AnimGetGfx(&work[0x2C]);
+u8 func_0809CB78(UnkStruct_0809C534* w, void* a) {
+    w->tiles4 = AllocObjTiles(640, 0);
+    SetObjTileSource(w->tiles4, gUnk_0908B1B4);
+    AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
+    AnimStart(&w->anim, 0, 1);
+    w->gfx = AnimGetGfx(&w->anim);
     SetTaskUpdate(a, (TaskUpdateFunc)func_0809CBD0);
     return 1;
 }
 
-s32 func_0809CBD0(u8* work) {
-    *(void**)&work[0x44] = AnimUpdate(&work[0x2C]);
+s32 func_0809CBD0(UnkStruct_0809C534* w) {
+    w->gfx = AnimUpdate(&w->anim);
 
-    if (*(u16*)&work[0x36] == 0 && *(u16*)&work[0x3A] == 4) {
-        work[0x74] = 1;
+    if (w->anim.timer == 0 && w->anim.frame == 4) {
+        w->unk_74 = 1;
     }
 
     return 1;
 }
 
-u8 func_0809CBF8(u8* work, void* a) {
+u8 func_0809CBF8(UnkStruct_0809C534* w, void* a) {
     s32 v;
 
-    v = *(s16*)&work[0x4E] << 8;
+    v = w->angle << 8;
 
-    if ((s8)work[0x52] <= 2) {
-        ApproachValue(&v, -0x2000, work[0x53]);
+    if (w->unk_52 <= 2) {
+        ApproachValue(&v, -0x2000, w->unk_53);
     }
 
-    if (work[0x52] >= 4 && work[0x52] <= 7) {
-        ApproachValue(&v, 0x4400, work[0x53]);
+    if ((u8)w->unk_52 >= 4 && (u8)w->unk_52 <= 7) {
+        ApproachValue(&v, 0x4400, w->unk_53);
     }
 
-    *(s16*)&work[0x4E] = v >> 8;
+    w->angle = v >> 8;
 
-    if (work[0x53] != 0) {
-        work[0x53]--;
+    if (w->unk_53 != 0) {
+        w->unk_53--;
     }
 
-    func_0809C9A4((UnkStruct_0809C9A4*)work);
+    func_0809C9A4(w);
 
-    if (func_0809C9F4((UnkStruct_0809C9A4*)work)) {
-        func_0809CA1C(work);
+    if (func_0809C9F4(w)) {
+        func_0809CA1C(w);
     } else {
-        func_0809CAC8(work);
+        func_0809CAC8(w);
     }
 
     return 1;
@@ -319,5 +315,5 @@ TaskDesc gUnk_09EE781C = {
     (TaskUpdateFunc)func_0809C710,
     (TaskFunc)func_0809C78C,
     (TaskFunc)func_0809C98C,
-    0x78,
+    sizeof(UnkStruct_0809C534),
 };

@@ -1196,17 +1196,17 @@ typedef struct CardEffectWork {
 } CardEffectWork;
 
 typedef struct BossPrizeWork {
-    UnkStruct_080038C8* tiles;
-    UnkStruct_080038C8* palette;
-    UnkStruct_080038C8* tiles2;
-    UnkStruct_080038C8* tiles3;
-    UnkStruct_080038C8* palette2;
-    UnkStruct_080038C8* tiles4;
-    UnkStruct_080038C8* tiles5;
-    UnkStruct_080038C8* palette3;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette2;
+    ObjTiles* tiles4;
+    ObjTiles* tiles5;
+    ObjPalette* palette3;
     TaskPool tasks;
     CardStat stat;
-    u8 collider[0x5C];
+    Collider collider;
     s32 unk_A8;
     s32 unk_AC;
     s32 unk_B0;
@@ -1219,9 +1219,9 @@ typedef struct BossPrizeWork {
     s32 unk_CC;
     s16 unk_D0;
     s16 unk_D2;
-    s16 unk_D4;
-    u16 x;
-    u16 y;
+    u16 priority;
+    s16 x;
+    s16 y;
     s16 x3;
     s16 y3;
     s16 x2;
@@ -1796,7 +1796,7 @@ void func_0808E364(u8* work, u8 kind);
 void func_08096638(PrizeCardWork* w);
 void func_080978B0(UnkStruct_08096F94* w);
 void func_08099928(BossPrizeWork* w);
-void PrizeBoss_0(BossPrizeWork* w, s32* args);
+void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args);
 u8 PrizeBoss_1(BossPrizeWork* w, void* a);
 void PrizeBoss_2(BossPrizeWork* w);
 void PrizeBoss_3(BossPrizeWork* w);

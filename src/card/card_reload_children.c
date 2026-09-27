@@ -544,13 +544,13 @@ void RELOAD_3(ReloadWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
-void PrizeBoss_0(BossPrizeWork* w, s32* args) {
+void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
     CardDef* def;
     CardBack* back;
-    u8* p;
+    Collider* p;
 
-    w->cardId = args[8];
-    def = &gCardDefs[args[8]];
+    w->cardId = args->cardId;
+    def = &gCardDefs[args->cardId];
     w->tiles = LoadObjTiles(def->tiles, 0x300);
     w->palette = LoadObjPalette(def->palette, 32);
     w->stat = *(CardStat*)&def->unk_1C;
@@ -561,9 +561,9 @@ void PrizeBoss_0(BossPrizeWork* w, s32* args) {
     w->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     w->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    w->unk_A8 = args[0];
-    w->unk_AC = args[1];
-    w->unk_B0 = args[2];
+    w->unk_A8 = args->x;
+    w->unk_AC = args->y;
+    w->unk_B0 = args->z;
     w->unk_B4 = 0;
     w->unk_E6 = 24;
     w->unk_BC = -(GetRandom() % 129 + 0x300);
@@ -574,7 +574,7 @@ void PrizeBoss_0(BossPrizeWork* w, s32* args) {
     w->unk_E2 = 0x80;
     w->unk_E8 = 0;
     w->unk_E9 = 0;
-    p = &w->collider[0];
+    p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetDisabled(p, 1);
     ColliderSetPosition(p, w->unk_A8, w->unk_AC, w->unk_B0);
@@ -596,23 +596,23 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
         func_08099CDC(w);
     }
     if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(&w->collider[0], 30);
+        ColliderSetRadius(&w->collider, 30);
     } else {
-        ColliderSetRadius(&w->collider[0], 10);
+        ColliderSetRadius(&w->collider, 10);
     }
-    ColliderSetPosition(&w->collider[0], w->unk_A8, w->unk_AC, w->unk_B0);
-    WorldToScreen((s16*)&w->x, (s16*)&w->y, w->unk_A8, w->unk_AC, w->unk_B0);
+    ColliderSetPosition(&w->collider, w->unk_A8, w->unk_AC, w->unk_B0);
+    WorldToScreen(&w->x, &w->y, w->unk_A8, w->unk_AC, w->unk_B0);
     WorldToScreen(&w->x2, &w->y2, w->unk_A8, w->unk_AC, w->unk_B4);
-    w->unk_D4 = -0x1004 - (w->unk_AC >> 8) * 4;
+    w->priority = -0x1004 - (w->unk_AC >> 8) * 4;
     func_08099928(w);
     w->unk_E9 += 2;
     if (w->unk_EA == 60) {
-        ColliderSetDisabled(&w->collider[0], 0);
+        ColliderSetDisabled(&w->collider, 0);
     }
     if (w->unk_EA <= 59) {
         w->unk_EA++;
     }
-    if (w->collider[0x2C] != 0) {
+    if (w->collider.unk_2C != 0) {
         w->unk_ED = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         func_08084458(*(u16*)&w->cardId);
@@ -623,9 +623,9 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
         WorldToScreen(&x, &y, w->unk_A8, w->unk_AC, w->unk_B0);
         w->unk_A8 = x << 8;
         w->unk_AC = y << 8;
-        ColliderSetDisabled(&w->collider[0], 1);
+        ColliderSetDisabled(&w->collider, 1);
         w->unk_EB = 16;
-        w->unk_D4 = 50;
+        w->priority = 50;
         func_080999A4(w);
     }
     TaskPoolUpdate(&w->tasks);
@@ -633,7 +633,6 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
 }
 
 void PrizeBoss_2(BossPrizeWork* w) {
-    u8* work = (u8*)w;
     u16 pal;
     s32 affine;
     void* gfx;
@@ -641,44 +640,39 @@ void PrizeBoss_2(BossPrizeWork* w) {
     CardDef* def;
     s16 v;
 
-    pal = work[0xED] == 0 ? GetBattleSpritePriorityFlags(*(s32*)&work[0xAC]) : 0;
-    affine = AllocObjAffine(work[0xE6], *(s16*)&work[0xD0], *(s16*)&work[0xD2], 1);
-    def = &gCardDefs[*(s32*)&work[0xB8]];
-    DrawSprite(*(s16*)&work[0xD6], *(u16*)&work[0xD8] - 8, def->gfx,
-               *(void**)&work[0x00], *(void**)&work[0x04], affine, pal,
-               (u16)(*(u16*)&work[0xD4] + 1));
-    back = &gUnk_08F709B0[work[0x42]];
-    DrawSprite(*(s16*)&work[0xD6], *(u16*)&work[0xD8] - 8,
-               back->gfx, *(void**)&work[0x08],
-               *(void**)&work[0x10], affine, pal, *(u16*)&work[0xD4]);
-    gfx = gUnk_09EE981C[work[0x38]];
+    pal = w->unk_ED == 0 ? GetBattleSpritePriorityFlags(w->unk_AC) : 0;
+    affine = AllocObjAffine(w->unk_E6, w->unk_D0, w->unk_D2, 1);
+    def = &gCardDefs[w->cardId];
+    DrawSprite(w->x, (u16)w->y - 8, def->gfx, w->tiles, w->palette, affine, pal,
+               (u16)(w->priority + 1));
+    back = &gUnk_08F709B0[w->stat.unk_0E];
+    DrawSprite(w->x, (u16)w->y - 8, back->gfx, w->tiles2, w->palette2, affine, pal,
+               w->priority);
+    gfx = gUnk_09EE981C[w->stat.unk_04];
 
     if (def->unk_2A != 3) {
-        DrawSprite(*(s16*)&work[0xD6], *(u16*)&work[0xD8] - 8, gfx,
-                   *(void**)&work[0x14], *(void**)&work[0x10], affine, pal,
-                   (u16)(*(u16*)&work[0xD4] - 1));
+        DrawSprite(w->x, (u16)w->y - 8, gfx, w->tiles4, w->palette2, affine, pal,
+                   (u16)(w->priority - 1));
     }
 
-    if (work[0xED] == 0) {
-        v = 204 - ((*(s32*)&work[0xB4] - *(s32*)&work[0xB0]) >> 7);
+    if (w->unk_ED == 0) {
+        v = 204 - ((w->unk_B4 - w->unk_B0) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        DrawSprite(*(s16*)&work[0xDE], *(s16*)&work[0xE0], gUnk_09EE1380[0],
-                   *(void**)&work[0x18], *(void**)&work[0x1C],
-                   AllocObjAffine(0, v, v, 0), pal,
-                   (u16)(*(u16*)&work[0xD4] + 2));
+        DrawSprite(w->x2, w->y2, gUnk_09EE1380[0], w->tiles5, w->palette3,
+                   AllocObjAffine(0, v, v, 0), pal, (u16)(w->priority + 2));
     }
 
-    TaskPoolDraw(&work[0x20]);
+    TaskPoolDraw(&w->tasks);
 }
 
 void PrizeBoss_3(BossPrizeWork* w) {
     FadeSetPaletteExcluded(w->palette2->index + 16, 0);
     FadeSetPaletteExcluded(w->palette->index + 16, 0);
-    ColliderUnregister(&w->collider[0]);
+    ColliderUnregister(&w->collider);
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles4);
@@ -769,10 +763,10 @@ u8 func_08099A18(BossPrizeWork* w, void* a) {
     }
 
     x = w->unk_A8 >> 8;
-    q1 = (s16*)&w->x;
+    q1 = &w->x;
     *q1 = x;
     y = w->unk_AC >> 8;
-    q2 = (s16*)&w->y;
+    q2 = &w->y;
     *q2 = y;
     func_08099928(w);
     TaskPoolUpdate(&w->tasks);
@@ -828,8 +822,8 @@ u8 func_08099B60(BossPrizeWork* w, void* a) {
 u8 func_08099C4C(BossPrizeWork* w) {
     w->unk_E6 += 32;
     WorldToScreen(&w->x3, &w->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    *(s16*)&w->x += (w->x3 - *(s16*)&w->x) >> 3;
-    *(s16*)&w->y += (w->y3 - *(s16*)&w->y) >> 3;
+    w->x += (w->x3 - w->x) >> 3;
+    w->y += (w->y3 - w->y) >> 3;
     w->unk_D0 -= 10;
     w->unk_D2 -= 10;
 
@@ -842,38 +836,37 @@ u8 func_08099C4C(BossPrizeWork* w) {
 }
 
 void func_08099CDC(BossPrizeWork* w) {
-    u8* work = (u8*)w;
     CardEffectArgs args;
 
-    if (work[0xED] == 0) {
-        if (work[0xEF] == 8) {
-            if (work[0xEE] <= 3) {
-                args.unk_00 = *(s32*)&work[0xA8];
-                args.unk_04 = *(s32*)&work[0xAC];
-                args.unk_08 = *(s32*)&work[0xB0];
-                args.unk_0C = work[0xED];
-                args.count = &work[0xEE];
-                TaskCreate(&work[0x20], &gTaskDescCardEFFECT, &args);
+    if (w->unk_ED == 0) {
+        if (w->unk_EF == 8) {
+            if (w->unk_EE <= 3) {
+                args.unk_00 = w->unk_A8;
+                args.unk_04 = w->unk_AC;
+                args.unk_08 = w->unk_B0;
+                args.unk_0C = w->unk_ED;
+                args.count = &w->unk_EE;
+                TaskCreate(&w->tasks, &gTaskDescCardEFFECT, &args);
             }
 
-            work[0xEF] = 0;
+            w->unk_EF = 0;
         } else {
-            work[0xEF]++;
+            w->unk_EF++;
         }
     } else {
-        if (work[0xEF] == 8) {
-            if (work[0xEE] <= 7) {
-                args.unk_00 = *(s32*)&work[0xA8];
-                args.unk_04 = *(s32*)&work[0xAC];
-                args.unk_08 = *(s32*)&work[0xB0];
-                args.unk_0C = work[0xED];
-                args.count = &work[0xEE];
-                TaskCreate(&work[0x20], &gTaskDescCardEFFECT, &args);
+        if (w->unk_EF == 8) {
+            if (w->unk_EE <= 7) {
+                args.unk_00 = w->unk_A8;
+                args.unk_04 = w->unk_AC;
+                args.unk_08 = w->unk_B0;
+                args.unk_0C = w->unk_ED;
+                args.count = &w->unk_EE;
+                TaskCreate(&w->tasks, &gTaskDescCardEFFECT, &args);
             }
 
-            work[0xEF] = 0;
+            w->unk_EF = 0;
         } else {
-            work[0xEF]++;
+            w->unk_EF++;
         }
     }
 }
@@ -1087,7 +1080,7 @@ TaskDesc gTaskDescPrizeBoss = {
     (TaskUpdateFunc)PrizeBoss_1,
     (TaskFunc)PrizeBoss_2,
     (TaskFunc)PrizeBoss_3,
-    0xF0,
+    sizeof(BossPrizeWork),
 };
 
 TaskDesc gTaskDescCardEFFECT = {

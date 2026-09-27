@@ -269,7 +269,7 @@ void func_080838CC(void);
 u8 func_08082AE4(CardDisplayWork* p);
 u8 func_08082FF0(u8* work);
 void func_08082F24(CardDisplayWork* p);
-s32 func_08083ADC(u8* work);
+s32 func_08083ADC(BossCardWork* w);
 void func_08082BF8(CardDisplayWork* p);
 u8 func_080782AC(CardDisplayWork** p, u8 n);
 void sub_0807842C(CardSlot* slots, u8 n);
@@ -3879,61 +3879,59 @@ void Bosscard_0(BossCardWork* w, u32* a) {
     gUnk_02039DD4->unk_0D7 = GetRandom() % m;
 }
 
-u8 Bosscard_1(u8* work, void* a) {
+u8 Bosscard_1(BossCardWork* w, void* a) {
     s32 v;
     u8 z;
-    s32 c;
 
-    work[0x2E] += 4;
+    w->unk_2E += 4;
 
     if (gUnk_02039DD4->unk_0E0 == 1) {
         z = 0;
-        c = 0x100;
-        *(u16*)&work[0x28] = c;
-        work[0x31] = 8;
+        w->unk_28 = 0x100;
+        w->unk_31 = 8;
         gUnk_02039DD4->unk_0E0 = z;
     }
 
-    if (work[0x31] != 0) {
-        v = *(s16*)&work[0x28] << 8;
-        ApproachValue(&v, 0xDC00, work[0x31]);
-        *(s16*)&work[0x28] = v >> 8;
-        work[0x31]--;
+    if (w->unk_31 != 0) {
+        v = w->unk_28 << 8;
+        ApproachValue(&v, 0xDC00, w->unk_31);
+        w->unk_28 = v >> 8;
+        w->unk_31--;
     }
 
     if (gUnk_02039DDC == 7) {
-        work[0x31] = 8;
+        w->unk_31 = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08083ADC);
     }
 
     if (gUnk_02039DDC == 1) {
-        if (func_08083B20((UnkStruct_08083B20*)work, 1) != 0) {
+        if (func_08083B20(w, 1) != 0) {
             gUnk_02039DDC = 0;
         }
     }
 
     if (gUnk_02039DDC == 2) {
-        if (work[0x33] == work[0x34]) {
-            if (func_08083B20((UnkStruct_08083B20*)work, 0) != 0) {
-                work[0x33] = 0;
-                work[0x34] = GetRandom() % 100;
+        if (w->unk_33 == w->unk_34) {
+            if (func_08083B20(w, 0) != 0) {
+                w->unk_33 = 0;
+                w->unk_34 = GetRandom() % 100;
             }
         } else {
-            work[0x33]++;
+            w->unk_33++;
         }
     }
 
     return 1;
 }
 
-s32 func_08083ADC(u8* work) {
+s32 func_08083ADC(BossCardWork* w) {
     s32 v;
 
-    if (work[0x31] != 0) {
-        v = *(s16*)&work[0x28] << 8;
-        ApproachValue(&v, 0x10000, work[0x31]);
-        *(s16*)&work[0x28] = v >> 8;
-        work[0x31]--;
+    if (w->unk_31 != 0) {
+        v = w->unk_28 << 8;
+        ApproachValue(&v, 0x10000, w->unk_31);
+        w->unk_28 = v >> 8;
+        w->unk_31--;
     }
 
     return 1;
@@ -3943,7 +3941,7 @@ void Bosscard_2(void) {
 void Bosscard_3(void) {
 }
 
-u8 func_08083B20(UnkStruct_08083B20* w, u8 b) {
+u8 func_08083B20(BossCardWork* w, u8 b) {
     if (w->unk_32 == 1) {
         w->unk_2C -= 51;
 

@@ -29,6 +29,7 @@ void func_0801BDD4(BtlObj* p, BtlObj* v);
 u8 func_0801C1C0(u8 a);
 void func_0801C298(u8 a, u8 b);
 void func_0801C2DC(BtlObj* p, u8 f);
+void func_0801C314(void);
 u8 func_0801C6D4(s32* a, s32* b, s32* c, s32* d);
 void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d);
 u8 func_0801CA00(BtlObj* p);

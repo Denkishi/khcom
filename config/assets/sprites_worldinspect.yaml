@@ -14,24 +14,21 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_worldinspect_1.c
-    start: 0x09EF9788
-    end: 0x09EF9928
-  - name: sprites_worldinspect_2.c
-    start: 0x09EF9AB8
-    end: 0x09EF9BB0
-  - name: sprites_worldinspect_3.c
-    start: 0x09EF9BC4
-    end: 0x09EF9C34
   - name: sprites_worldinspect_frames_1.s
     start: 0x0999C394
     end: 0x099A1F44
+    data_start: 0x09EF9788
+    data_end: 0x09EF9928
   - name: sprites_worldinspect_frames_2.s
     start: 0x099A7C98
     end: 0x099A8718
+    data_start: 0x09EF9AB8
+    data_end: 0x09EF9BB0
   - name: sprites_worldinspect_frames_3.s
     start: 0x099A8758
     end: 0x099A92DC
+    data_start: 0x09EF9BC4
+    data_end: 0x09EF9C34
   - name: sprites_worldinspect_tiles.s
     start: 0x099FB53C
     end: 0x09A10A3C
@@ -45,24 +42,21 @@ objects:
     start: 0x09A3D5DC
     end: 0x09A3D77C
   jp:
-  - name: sprites_worldinspect_1.c
-    start: 0x09ED0B74
-    end: 0x09ED0D14
-  - name: sprites_worldinspect_2.c
-    start: 0x09ED0EA4
-    end: 0x09ED0F9C
-  - name: sprites_worldinspect_3.c
-    start: 0x09ED0FB0
-    end: 0x09ED1020
   - name: sprites_worldinspect_frames_1.s
     start: 0x09950EA8
     end: 0x099569CC
+    data_start: 0x09ED0B74
+    data_end: 0x09ED0D14
   - name: sprites_worldinspect_frames_2.s
     start: 0x0995C720
     end: 0x0995D1A0
+    data_start: 0x09ED0EA4
+    data_end: 0x09ED0F9C
   - name: sprites_worldinspect_frames_3.s
     start: 0x0995D1E0
     end: 0x0995DD64
+    data_start: 0x09ED0FB0
+    data_end: 0x09ED1020
   - name: sprites_worldinspect_tiles.s
     start: 0x099AFFC4
     end: 0x099C54C4
@@ -76,24 +70,21 @@ objects:
     start: 0x099F2064
     end: 0x099F2204
   eu:
-  - name: sprites_worldinspect_1.c
-    start: 0x09F85204
-    end: 0x09F85554
-  - name: sprites_worldinspect_2.c
-    start: 0x09F85724
-    end: 0x09F8581C
-  - name: sprites_worldinspect_3.c
-    start: 0x09F85830
-    end: 0x09F858A0
   - name: sprites_worldinspect_frames_1.s
     start: 0x099A2650
     end: 0x099AEC48
+    data_start: 0x09F85204
+    data_end: 0x09F85554
   - name: sprites_worldinspect_frames_2.s
     start: 0x099B5C1C
     end: 0x099B669C
+    data_start: 0x09F85724
+    data_end: 0x09F8581C
   - name: sprites_worldinspect_frames_3.s
     start: 0x099B66DC
     end: 0x099B7260
+    data_start: 0x09F85830
+    data_end: 0x09F858A0
   - name: sprites_worldinspect_tiles.s
     start: 0x09A24480
     end: 0x09A60380

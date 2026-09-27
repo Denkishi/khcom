@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_smn.c
-    start: 0x09EDE790
-    end: 0x09EDE8CC
   - name: sprites_smn_frames.s
     start: 0x088A4A3C
     end: 0x088B629C
+    data_start: 0x09EDE790
+    data_end: 0x09EDE8CC
   jp:
-  - name: sprites_smn.c
-    start: 0x09EB620C
-    end: 0x09EB6348
   - name: sprites_smn_frames.s
     start: 0x08898024
     end: 0x088A9884
+    data_start: 0x09EB620C
+    data_end: 0x09EB6348
   eu:
-  - name: sprites_smn.c
-    start: 0x09F593E8
-    end: 0x09F59524
   - name: sprites_smn_frames.s
     start: 0x088D0360
     end: 0x088E1BC0
+    data_start: 0x09F593E8
+    data_end: 0x09F59524
 entries:
 - name: gBanb00Frames
   record: SpriteTable

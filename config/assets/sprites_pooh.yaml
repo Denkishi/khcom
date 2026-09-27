@@ -14,24 +14,21 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_pooh_1.c
-    start: 0x09EF5298
-    end: 0x09EF5B54
-  - name: sprites_pooh_2.c
-    start: 0x09EF5C6C
-    end: 0x09EF5CAC
-  - name: sprites_pooh_3.c
-    start: 0x09EF5D04
-    end: 0x09EF6424
   - name: sprites_pooh_frames_1.s
     start: 0x096FE36C
     end: 0x09736FF4
+    data_start: 0x09EF5298
+    data_end: 0x09EF5B54
   - name: sprites_pooh_frames_2.s
     start: 0x09742B98
     end: 0x09742FC4
+    data_start: 0x09EF5C6C
+    data_end: 0x09EF5CAC
   - name: sprites_pooh_frames_3.s
     start: 0x097442DC
     end: 0x0976B1D8
+    data_start: 0x09EF5D04
+    data_end: 0x09EF6424
   - name: sprites_pooh_tiles_1.s
     start: 0x097AED78
     end: 0x097B62B8
@@ -42,24 +39,21 @@ objects:
     start: 0x0983BC18
     end: 0x0983E398
   jp:
-  - name: sprites_pooh_1.c
-    start: 0x09ECC684
-    end: 0x09ECCF40
-  - name: sprites_pooh_2.c
-    start: 0x09ECD058
-    end: 0x09ECD098
-  - name: sprites_pooh_3.c
-    start: 0x09ECD0F0
-    end: 0x09ECD810
   - name: sprites_pooh_frames_1.s
     start: 0x096B6B48
     end: 0x096EF7D0
+    data_start: 0x09ECC684
+    data_end: 0x09ECCF40
   - name: sprites_pooh_frames_2.s
     start: 0x096FB374
     end: 0x096FB7A0
+    data_start: 0x09ECD058
+    data_end: 0x09ECD098
   - name: sprites_pooh_frames_3.s
     start: 0x096FCAB8
     end: 0x097239B4
+    data_start: 0x09ECD0F0
+    data_end: 0x09ECD810
   - name: sprites_pooh_tiles_1.s
     start: 0x0976920C
     end: 0x0977074C
@@ -70,24 +64,21 @@ objects:
     start: 0x097F10EC
     end: 0x097F386C
   eu:
-  - name: sprites_pooh_1.c
-    start: 0x09F80690
-    end: 0x09F80F4C
-  - name: sprites_pooh_2.c
-    start: 0x09F81064
-    end: 0x09F810A4
-  - name: sprites_pooh_3.c
-    start: 0x09F810FC
-    end: 0x09F8181C
   - name: sprites_pooh_frames_1.s
     start: 0x096CB6CC
     end: 0x09704354
+    data_start: 0x09F80690
+    data_end: 0x09F80F4C
   - name: sprites_pooh_frames_2.s
     start: 0x0970FEF8
     end: 0x09710324
+    data_start: 0x09F81064
+    data_end: 0x09F810A4
   - name: sprites_pooh_frames_3.s
     start: 0x0971163C
     end: 0x09738538
+    data_start: 0x09F810FC
+    data_end: 0x09F8181C
   - name: sprites_pooh_tiles_1.s
     start: 0x0978C6E0
     end: 0x09793C20

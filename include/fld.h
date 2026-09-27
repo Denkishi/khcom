@@ -33,7 +33,7 @@ typedef struct FldShadowWork {
     s32 y;
     void* tiles;
     void* palette;
-    FldActor* actor;
+    FldObj* actor;
     AnimState anim;
 } FldShadowWork;
 

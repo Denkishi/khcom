@@ -34,31 +34,31 @@ void func_080F6004(MapGoofyWork* w) {
 }
 
 void Task_MapGoofy_0(MapGoofyWork* w) {
-    UnkStruct_080E6394* e = (UnkStruct_080E6394*)w;
+    FldObj* e = &w->obj;
 
     if (gUnk_0203C590.unk_06 != 0xFE) {
         if ((s8)gGameState.floor == 12) {
-            w->unk_000 = 0x25000;
-            w->unk_004 = 0x10A00;
+            w->obj.fieldPosition.x = 0x25000;
+            w->obj.fieldPosition.y = 0x10A00;
         } else {
-            w->unk_000 = 0x20000;
-            w->unk_004 = 0xB000;
+            w->obj.fieldPosition.x = 0x20000;
+            w->obj.fieldPosition.y = 0xB000;
         }
     } else {
         if ((s8)gGameState.floor != 0) {
-            w->unk_000 = 0x1E800;
-            w->unk_004 = 0xD000;
+            w->obj.fieldPosition.x = 0x1E800;
+            w->obj.fieldPosition.y = 0xD000;
         } else {
-            w->unk_000 = 0x2C000;
-            w->unk_004 = 0xE000;
+            w->obj.fieldPosition.x = 0x2C000;
+            w->obj.fieldPosition.y = 0xE000;
         }
     }
 
-    e->unk_00.z = 0;
-    e->unk_00.unk_0C = func_080DFF30(&e->unk_00);
-    e->unk_00.z = e->unk_00.unk_0C;
-    e->unk_00.y -= e->unk_00.unk_0C;
-    e->unk_14 = 0x80;
+    e->fieldPosition.z = 0;
+    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
+    e->fieldPosition.z = e->fieldPosition.unk_0C;
+    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    e->angle = 0x80;
     e->unk_1A = 0x30;
     e->unk_30 = 2;
     w->unk_0C1 = 1;
@@ -68,13 +68,13 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
     AnimInit(&w->anim, gGoofyFl00Anims, gGoofyFl00Frames);
     AnimStart(&w->anim, 0, 1);
     ColliderInit(&w->collider, 4, 16, 48);
-    ColliderSetPosition(&w->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
+    ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);
     TaskPoolInit(&w->tasks, 2);
-    TaskCreate(&w->tasks, &gTaskDescFldShadow, w);
+    TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
     w->unk_0C0 = 0;
     TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, w);
+    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapGoofy_1(MapGoofyWork* w) {
@@ -82,7 +82,7 @@ s32 Task_MapGoofy_1(MapGoofyWork* w) {
         w->unk_0C1 = 0;
     } else {
         w->unk_0C1 = 1;
-        w->unk_0C0 = func_080E03C0((s32)w);
+        w->unk_0C0 = func_080E03C0(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -96,7 +96,7 @@ s32 Task_MapGoofy_1(MapGoofyWork* w) {
 }
 
 void Task_MapGoofy_2(MapGoofyWork* w) {
-    FldPos* p = (FldPos*)w;
+    FldPos* p = &w->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
@@ -108,8 +108,8 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
-        ((UnkStruct_080E64D4*)p)->unk_3C = p->unk_0C;
-        ((UnkStruct_080E64D4*)p)->unk_3A = v + 1;
+        w->obj.unk_3C = p->unk_0C;
+        w->obj.unk_3A = v + 1;
         TaskPoolDraw(&w->tasks);
 
         if (w->unk_0C0 != 0) {
@@ -118,11 +118,11 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
     }
 }
 
-void Task_MapGoofy_3(MapFrdWork* w) {
+void Task_MapGoofy_3(MapGoofyWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->unk_040);
-    FldObjUnregister(w);
+    ColliderUnregister(&w->collider);
+    FldObjUnregister(&w->obj);
     TaskPoolDestroy(&w->tasks);
     TaskPoolDestroy(&w->tasks2);
 }
@@ -148,33 +148,33 @@ void func_080F6314(MapNamineWork* w) {
 }
 
 void Task_MapNamine_0(MapNamineWork* w) {
-    UnkStruct_080E6394* p = (UnkStruct_080E6394*)w;
+    FldObj* p = &w->obj;
 
     switch (gUnk_0203C590.unk_00) {
     case 27:
-        w->unk_000 = 0x20D00;
-        w->unk_004 = 0xD500;
+        w->obj.fieldPosition.x = 0x20D00;
+        w->obj.fieldPosition.y = 0xD500;
         w->unk_0C4 = 0x800;
         break;
     case 23:
-        w->unk_000 = 0x27C00;
-        w->unk_004 = 0xD400;
+        w->obj.fieldPosition.x = 0x27C00;
+        w->obj.fieldPosition.y = 0xD400;
         w->unk_0C4 = 0x800;
         break;
     case 24:
     case 25:
     case 26:
     default:
-        p->unk_00.x = 0x15200;
-        p->unk_00.y = 0xF800;
+        p->fieldPosition.x = 0x15200;
+        p->fieldPosition.y = 0xF800;
         w->unk_0C4 = 0x801;
         break;
     }
 
-    p->unk_00.z = 0;
-    p->unk_00.z = p->unk_00.unk_0C = func_080DFF30(&p->unk_00);
-    p->unk_00.y -= p->unk_00.unk_0C;
-    p->unk_14 = 173;
+    p->fieldPosition.z = 0;
+    p->fieldPosition.z = p->fieldPosition.unk_0C = func_080DFF30(&p->fieldPosition);
+    p->fieldPosition.y -= p->fieldPosition.unk_0C;
+    p->angle = 173;
     p->unk_1A = 48;
     p->unk_30 = 2;
     w->unk_0C0 = gUnk_0203C590.unk_00 != 23;
@@ -184,18 +184,18 @@ void Task_MapNamine_0(MapNamineWork* w) {
     w->palette = LoadObjPalette(gNaminePalette, 32);
     AnimInit(&w->anim, gNamiF00Anims, gNamiF00Frames);
     AnimStart(&w->anim, 0, 1);
-    ColliderInit(w->collider, 4, 16, 48);
-    ColliderSetPosition(w->collider, p->unk_00.x, p->unk_00.y, p->unk_00.z);
+    ColliderInit(&w->collider, 4, 16, 48);
+    ColliderSetPosition(&w->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
 
     if (w->unk_0C0 != 0) {
         FldObjRegister(p);
     }
 
     TaskPoolInit(&w->tasks, 2);
-    TaskCreate(&w->tasks, &gTaskDescFldShadow, w);
+    TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
     w->unk_0C1 = 0;
     TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, w);
+    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapNamine_1(MapNamineWork* w) {
@@ -203,7 +203,7 @@ s32 Task_MapNamine_1(MapNamineWork* w) {
         w->unk_0C2 = 0;
     } else {
         w->unk_0C2 = 1;
-        w->unk_0C1 = func_080E03C0((s32)w);
+        w->unk_0C1 = func_080E03C0(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -217,7 +217,7 @@ s32 Task_MapNamine_1(MapNamineWork* w) {
 }
 
 void Task_MapNamine_2(MapNamineWork* w) {
-    FldPos* p = (FldPos*)w;
+    FldPos* p = &w->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
@@ -229,8 +229,8 @@ void Task_MapNamine_2(MapNamineWork* w) {
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->unk_0C4, v);
-        ((UnkStruct_080E64D4*)p)->unk_3C = p->unk_0C;
-        ((UnkStruct_080E64D4*)p)->unk_3A = v + 1;
+        w->obj.unk_3C = p->unk_0C;
+        w->obj.unk_3A = v + 1;
         TaskPoolDraw(&w->tasks);
 
         if (w->unk_0C1 != 0) {
@@ -242,45 +242,45 @@ void Task_MapNamine_2(MapNamineWork* w) {
 void Task_MapNamine_3(MapNamineWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->collider);
+    ColliderUnregister(&w->collider);
 
     if (w->unk_0C0 != 0) {
-        FldObjUnregister(w);
+        FldObjUnregister(&w->obj);
     }
 
     TaskPoolDestroy(&w->tasks);
     TaskPoolDestroy(&w->tasks2);
 }
 
-void func_080F65EC(MapNamineWork* w) {
+void func_080F65EC(MapNiserikuWork* w) {
     if (w->unk_0C1 != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
-        CreateCardMessageTask(&w->unk_0C4, 0, 0x34);
+        CreateCardMessageTask(&w->tasks, 0, 0x34);
         w->update = func_080F6634;
     }
 }
 
-void func_080F6634(MapNamineWork* w) {
+void func_080F6634(MapNiserikuWork* w) {
     if (func_080A42C8() == 0) {
         gFieldState->flags &= ~0x1000;
         w->update = func_080F65EC;
     }
 }
 
-void func_080F6668(MapNamineWork* w) {
+void func_080F6668(MapNiserikuWork* w) {
     s32 dx;
     s32 dy;
 
-    dx = w->unk_000 - gFieldState->actor.fieldPosition.x;
+    dx = w->obj.fieldPosition.x - gFieldState->actor.fieldPosition.x;
 
     if (dx < 0) {
-        dx = gFieldState->actor.fieldPosition.x - w->unk_000;
+        dx = gFieldState->actor.fieldPosition.x - w->obj.fieldPosition.x;
     }
 
-    dy = w->unk_004 - gFieldState->actor.fieldPosition.y;
+    dy = w->obj.fieldPosition.y - gFieldState->actor.fieldPosition.y;
 
     if (dy < 0) {
-        dy = gFieldState->actor.fieldPosition.y - w->unk_004;
+        dy = gFieldState->actor.fieldPosition.y - w->obj.fieldPosition.y;
     }
 
     if (dx <= 0x8000 && dy <= 0x8000) {
@@ -292,7 +292,7 @@ void func_080F6668(MapNamineWork* w) {
     }
 }
 
-void func_080F66E0(MapNamineWork* w) {
+void func_080F66E0(MapNiserikuWork* w) {
     if (FadeIsActive() == 0) {
         func_0806180C(0x3B);
         w->update = 0;
@@ -300,31 +300,31 @@ void func_080F66E0(MapNamineWork* w) {
 }
 
 void Task_MapNiseriku_0(MapNiserikuWork* w) {
-    UnkStruct_080E6394* e = (UnkStruct_080E6394*)w;
+    FldObj* e = &w->obj;
     s32 c;
 
     switch (gUnk_0203C590.unk_00) {
     case 27:
-        e->unk_00.x = 0x27C00;
-        e->unk_00.y = 0x10700;
+        e->fieldPosition.x = 0x27C00;
+        e->fieldPosition.y = 0x10700;
         break;
     case 23:
-        e->unk_00.x = 0x24900;
-        e->unk_00.y = 0xD500;
+        e->fieldPosition.x = 0x24900;
+        e->fieldPosition.y = 0xD500;
         break;
     case 24:
     case 25:
     case 26:
     default:
-        e->unk_00.x = 0x17A00;
-        e->unk_00.y = 0x11000;
+        e->fieldPosition.x = 0x17A00;
+        e->fieldPosition.y = 0x11000;
         break;
     }
 
-    e->unk_00.z = 0;
-    e->unk_00.z = e->unk_00.unk_0C = func_080DFF30(&e->unk_00);
-    e->unk_00.y -= e->unk_00.z;
-    e->unk_14 = 173;
+    e->fieldPosition.z = 0;
+    e->fieldPosition.z = e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
+    e->fieldPosition.y -= e->fieldPosition.z;
+    e->angle = 173;
     e->unk_1A = 48;
     e->unk_30 = 2;
 
@@ -339,7 +339,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
     w->unk_0C2 = 1;
     w->unk_0C1 = 0;
     TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, w);
+    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
     TaskPoolInit(&w->tasks, 2);
 
     switch (gUnk_0203C590.unk_00) {
@@ -350,8 +350,8 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         AnimInit(&w->anim, gNiseFl00Anims, gNiseFl00Frames);
         AnimStart(&w->anim, 0, 1);
         ColliderInit(&w->collider, 4, 16, 48);
-        ColliderSetPosition(&w->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
-        TaskCreate(&w->tasks, &gTaskDescFldShadow, w);
+        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
         break;
     case 23:
         w->update = func_080F6668;
@@ -360,8 +360,8 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         AnimInit(&w->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
         AnimStart(&w->anim, 0, 1);
         ColliderInit(&w->collider, 4, 16, 48);
-        ColliderSetPosition(&w->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
-        TaskCreate(&w->tasks, &gTaskDescFldShadow, w);
+        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
         break;
     case 24:
     case 25:
@@ -373,7 +373,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         AnimInit(&w->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
         AnimStart(&w->anim, 1, 1);
         ColliderInit(&w->collider, 4, 36, 48);
-        ColliderSetPosition(&w->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
+        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
         break;
     }
 
@@ -387,7 +387,7 @@ s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
         w->unk_0C2 = 0;
     } else {
         w->unk_0C2 = 1;
-        w->unk_0C1 = func_080E03C0((s32)w);
+        w->unk_0C1 = func_080E03C0(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -401,7 +401,7 @@ s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
 }
 
 void Task_MapNiseriku_2(MapNiserikuWork* w) {
-    FldPos* p = (FldPos*)w;
+    FldPos* p = &w->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
@@ -413,8 +413,8 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
-        ((UnkStruct_080E64D4*)p)->unk_3C = p->unk_0C;
-        ((UnkStruct_080E64D4*)p)->unk_3A = v + 1;
+        w->obj.unk_3C = p->unk_0C;
+        w->obj.unk_3A = v + 1;
         TaskPoolDraw(&w->tasks);
 
         if (w->unk_0C1 != 0) {
@@ -423,13 +423,13 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
     }
 }
 
-void Task_MapNiseriku_3(MapMickeyWork* w) {
+void Task_MapNiseriku_3(MapNiserikuWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->collider);
+    ColliderUnregister(&w->collider);
 
     if (w->unk_0C0 != 0) {
-        FldObjUnregister(w);
+        FldObjUnregister(&w->obj);
     }
 
     TaskPoolDestroy(&w->tasks);
@@ -465,16 +465,16 @@ void func_080F6AD8(MapMickeyWork* w) {
 }
 
 void Task_MapMickey_0(MapMickeyWork* w) {
-    UnkStruct_080E6394* e = (UnkStruct_080E6394*)w;
+    FldObj* e = &w->obj;
 
-    e->unk_00.x = 0x1C800;
-    e->unk_00.y = 0xE000;
+    e->fieldPosition.x = 0x1C800;
+    e->fieldPosition.y = 0xE000;
     w->unk_0C2 = 0x801;
-    e->unk_00.z = 0;
-    e->unk_00.unk_0C = func_080DFF30(&e->unk_00);
-    e->unk_00.z = e->unk_00.unk_0C;
-    e->unk_00.y -= e->unk_00.unk_0C;
-    e->unk_14 = 0xAD;
+    e->fieldPosition.z = 0;
+    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
+    e->fieldPosition.z = e->fieldPosition.unk_0C;
+    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    e->angle = 0xAD;
     e->unk_1A = 0x30;
     e->unk_30 = 2;
     w->unk_0C1 = 1;
@@ -484,13 +484,13 @@ void Task_MapMickey_0(MapMickeyWork* w) {
     AnimInit(&w->anim, gMickeyFl00Anims, gMickeyFl00Frames);
     AnimStart(&w->anim, 0, 1);
     ColliderInit(&w->collider, 4, 16, 48);
-    ColliderSetPosition(&w->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
+    ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);
     TaskPoolInit(&w->tasks, 2);
-    TaskCreate(&w->tasks, &gTaskDescFldShadow, w);
+    TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
     w->unk_0C0 = 0;
     TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, w);
+    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapMickey_1(MapMickeyWork* w) {
@@ -498,7 +498,7 @@ s32 Task_MapMickey_1(MapMickeyWork* w) {
         w->unk_0C1 = 0;
     } else {
         w->unk_0C1 = 1;
-        w->unk_0C0 = func_080E03C0((s32)w);
+        w->unk_0C0 = func_080E03C0(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -512,7 +512,7 @@ s32 Task_MapMickey_1(MapMickeyWork* w) {
 }
 
 void Task_MapMickey_2(MapMickeyWork* w) {
-    FldPos* p = (FldPos*)w;
+    FldPos* p = &w->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
@@ -524,8 +524,8 @@ void Task_MapMickey_2(MapMickeyWork* w) {
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->unk_0C2, v);
-        ((UnkStruct_080E64D4*)p)->unk_3C = p->unk_0C;
-        ((UnkStruct_080E64D4*)p)->unk_3A = v + 1;
+        w->obj.unk_3C = p->unk_0C;
+        w->obj.unk_3A = v + 1;
         TaskPoolDraw(&w->tasks);
 
         if (w->unk_0C0 != 0) {
@@ -534,11 +534,11 @@ void Task_MapMickey_2(MapMickeyWork* w) {
     }
 }
 
-void Task_MapMickey_3(MapFrdWork* w) {
+void Task_MapMickey_3(MapMickeyWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->unk_040);
-    FldObjUnregister(w);
+    ColliderUnregister(&w->collider);
+    FldObjUnregister(&w->obj);
     TaskPoolDestroy(&w->tasks);
     TaskPoolDestroy(&w->tasks2);
 }
@@ -1082,7 +1082,7 @@ TaskDesc gTaskDescMapGoofy = {
     (TaskUpdateFunc)Task_MapGoofy_1,
     (TaskFunc)Task_MapGoofy_2,
     (TaskFunc)Task_MapGoofy_3,
-    0xEC,
+    sizeof(MapGoofyWork),
 };
 
 TaskDesc gTaskDescMapNamine = {
@@ -1091,7 +1091,7 @@ TaskDesc gTaskDescMapNamine = {
     (TaskUpdateFunc)Task_MapNamine_1,
     (TaskFunc)Task_MapNamine_2,
     (TaskFunc)Task_MapNamine_3,
-    0xF0,
+    sizeof(MapNamineWork),
 };
 
 TaskDesc gTaskDescMapNiseriku = {
@@ -1100,7 +1100,7 @@ TaskDesc gTaskDescMapNiseriku = {
     (TaskUpdateFunc)Task_MapNiseriku_1,
     (TaskFunc)Task_MapNiseriku_2,
     (TaskFunc)Task_MapNiseriku_3,
-    0xEC,
+    sizeof(MapNiserikuWork),
 };
 
 TaskDesc gTaskDescMapMickey = {
@@ -1109,7 +1109,7 @@ TaskDesc gTaskDescMapMickey = {
     (TaskUpdateFunc)Task_MapMickey_1,
     (TaskFunc)Task_MapMickey_2,
     (TaskFunc)Task_MapMickey_3,
-    0xEC,
+    sizeof(MapMickeyWork),
 };
 
 TaskDesc gTaskDescMapTutorial = {

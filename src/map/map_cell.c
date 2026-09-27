@@ -273,7 +273,7 @@ s32 func_080E0390(void) {
     return 0;
 }
 
-s32 func_080E03C0(s32 a) {
+s32 func_080E03C0(FldObj* obj) {
     if (func_080A42C8()) {
         return 0;
     }
@@ -289,7 +289,7 @@ s32 func_080E03C0(s32 a) {
     if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.unk_0C) {
         return 0;
     }
-    return gFieldState->unk_68 == a;
+    return gFieldState->unk_68 == obj;
 }
 
 void func_080E0418(void) {

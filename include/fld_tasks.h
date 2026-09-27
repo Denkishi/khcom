@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-struct FldActor;
+struct FldObj;
 struct FldShadowWork;
 struct FldWork;
 
@@ -15,7 +15,7 @@ void task_fld_riku_0(struct FldWork* work);
 u8 task_fld_riku_1(struct FldWork* work, void* task);
 void task_fld_riku_2(struct FldWork* work);
 void task_fld_riku_3(struct FldWork* work);
-void task_fld_shadow_0(struct FldShadowWork* work, struct FldActor* obj);
+void task_fld_shadow_0(struct FldShadowWork* work, struct FldObj* obj);
 s32 task_fld_shadow_1(struct FldShadowWork* work);
 void task_fld_shadow_2(struct FldShadowWork* work);
 void task_fld_shadow_3(struct FldShadowWork* work);

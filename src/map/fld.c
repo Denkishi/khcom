@@ -3443,7 +3443,7 @@ void task_fld_riku_3(FldWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void task_fld_shadow_0(FldShadowWork* work, FldActor* obj) {
+void task_fld_shadow_0(FldShadowWork* work, FldObj* obj) {
     work->actor = obj;
     work->x = obj->fieldPosition.x;
     work->y = obj->fieldPosition.y;
@@ -3460,7 +3460,7 @@ s32 task_fld_shadow_1(FldShadowWork* work) {
 }
 
 void task_fld_shadow_2(FldShadowWork* work) {
-    FldActor* obj;
+    FldObj* obj;
     void* spr;
     s32 z;
     s32 size;

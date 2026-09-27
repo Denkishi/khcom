@@ -744,16 +744,6 @@ typedef struct MapGmk05Work {
     TaskPool tasks2;
 } MapGmk05Work;
 
-typedef struct MapFrdWork {
-    u8 unk_000[0x40];
-    u8 unk_040[0x74];
-    void* tiles;
-    u8* palette;
-    u8 unk_0BC[0x08];
-    TaskPool tasks;
-    TaskPool tasks2;
-} MapFrdWork;
-
 typedef struct MapGmk06Work {
     u8 unk_000[0x04];
     FldPos unk_004;
@@ -850,13 +840,11 @@ typedef struct MapTalkWork {
 } MapTalkWork;
 
 typedef struct MapDonaldWork {
-    s32 unk_000;
-    s32 unk_004;
-    u8 unk_008[0x38];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void (*update)(struct MapDonaldWork*);
     u8 unk_0C0;
     u8 unk_0C1;
@@ -866,13 +854,11 @@ typedef struct MapDonaldWork {
 } MapDonaldWork;
 
 typedef struct MapGoofyWork {
-    s32 unk_000;
-    s32 unk_004;
-    u8 unk_008[0x38];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void (*update)(struct MapGoofyWork*);
     u8 unk_0C0;
     u8 unk_0C1;
@@ -882,13 +868,11 @@ typedef struct MapGoofyWork {
 } MapGoofyWork;
 
 typedef struct MapNamineWork {
-    s32 unk_000;
-    s32 unk_004;
-    u8 unk_008[0x38];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void (*update)(struct MapNamineWork*);
     u8 unk_0C0;
     u8 unk_0C1;
@@ -901,11 +885,11 @@ typedef struct MapNamineWork {
 } MapNamineWork;
 
 typedef struct MapMickeyWork {
-    u8 unk_000[0x40];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void (*update)(struct MapMickeyWork*);
     u8 unk_0C0;
     u8 unk_0C1;
@@ -942,11 +926,11 @@ typedef struct MapTutorialWork {
 } MapTutorialWork;
 
 typedef struct MapNiserikuWork {
-    u8 unk_000[0x40];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void (*update)(struct MapNiserikuWork*);
     u8 unk_0C0;
     u8 unk_0C1;
@@ -1322,7 +1306,7 @@ void func_080E062C(void);
 u8 func_080E02E0(FldPos* p, s16 a, s16 b);
 u8 func_080E0378(void);
 s32 func_080E0390(void);
-s32 func_080E03C0(s32 a);
+s32 func_080E03C0(FldObj* obj);
 void func_080E05E4(void);
 void func_080E0780(void);
 void func_080E0820(void);

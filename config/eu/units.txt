@@ -196,14 +196,13 @@ sprites_card_frames_2.s
 sprites_deck_menu_frames.s
 sprites_continue_frames.s
 sprites_msg_frames_2.s
-sprites_mode_test.c
+sprites_mode_test_frames.s
 sprites_msg.c
 sprites_evt_2.c
 sprites_map_tasks_2.c
 sprites_evt_3.c
 sprites_map_tasks_3.c
 sprites_evt_4.c
-sprites_mode_test_frames.s
 sprites_msg_frames.s
 sprites_evt_frames_2.s
 sprites_map_tasks_frames_2.s

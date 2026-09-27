@@ -14,38 +14,33 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_mode_test_1.c
-    start: 0x09EE14D4
-    end: 0x09EE1520
-  - name: sprites_mode_test_2.c
-    start: 0x09EEC660
-    end: 0x09EEC670
   - name: sprites_mode_test_frames_1.s
     start: 0x08B24C98
     end: 0x08B2556C
+    data_start: 0x09EE14D4
+    data_end: 0x09EE1520
   - name: sprites_mode_test_frames_2.s
     start: 0x090D7C50
     end: 0x090D7E04
+    data_start: 0x09EEC660
+    data_end: 0x09EEC670
   jp:
-  - name: sprites_mode_test_1.c
-    start: 0x09EB8F50
-    end: 0x09EB8F9C
-  - name: sprites_mode_test_2.c
-    start: 0x09EC3A4C
-    end: 0x09EC3A5C
   - name: sprites_mode_test_frames_1.s
     start: 0x08B18280
     end: 0x08B18B54
+    data_start: 0x09EB8F50
+    data_end: 0x09EB8F9C
   - name: sprites_mode_test_frames_2.s
     start: 0x09093178
     end: 0x0909332C
+    data_start: 0x09EC3A4C
+    data_end: 0x09EC3A5C
   eu:
-  - name: sprites_mode_test.c
-    start: 0x09F77844
-    end: 0x09F77854
   - name: sprites_mode_test_frames.s
     start: 0x091A72D8
     end: 0x091A748C
+    data_start: 0x09F77844
+    data_end: 0x09F77854
 entries:
 - name: gBHpgagEFrames
   record: SpriteTable

@@ -1622,12 +1622,12 @@ void task_bos_tm_arm_3(TmArmWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void task_bos_tm_tbl_0(TmTblWork* work, void* arg) {
+void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg) {
     ColliderInit(&work->collider, 7, 0x1C, 0);
     ColliderSetPosition(&work->collider, 0x10000, 0x16000, 0);
     ColliderSetDisabled(&work->collider, 0);
     DisableBg(1);
-    work->unk_000 = arg;
+    work->tm = arg;
     work->unk_068 = 0;
     work->unk_062 = 1;
     work->unk_064 = 0;
@@ -1637,12 +1637,11 @@ void task_bos_tm_tbl_0(TmTblWork* work, void* arg) {
 }
 
 u8 task_bos_tm_tbl_1(TmTblWork* work) {
-    s32 z;
     u16 t;
 
     switch (work->unk_068) {
     case 1:
-        if ((s8)((u8*)work->unk_000)[58] == 1) {
+        if (work->tm->unk_3A == 1) {
             work->unk_066 = 0;
             work->unk_068 = 3;
         }
@@ -1654,8 +1653,8 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             }
         } else {
             work->unk_068 = 2;
-            ((u8*)work->unk_000)[58] = (z = 0, 1);
-            work->unk_067 = z;
+            work->tm->unk_3A = 1;
+            work->unk_067 = 0;
         }
         break;
     case 2:
@@ -1695,9 +1694,9 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         if (work->unk_066 > 15) {
             work->unk_066 = 0;
             work->unk_068 = 1;
-            ((u8*)work->unk_000)[58] = 2;
-            t = *(u16*)((u8*)work->unk_000 + 40) | 0x10;
-            *(u16*)((u8*)work->unk_000 + 40) = t;
+            work->tm->unk_3A = 2;
+            t = work->tm->flags | 0x10;
+            work->tm->flags = t;
         } else {
             ColliderSetHeight(&work->collider, work->unk_060);
             work->unk_060 += 3;
@@ -1740,7 +1739,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         if (work->unk_066 > 7) {
             work->unk_066 = 0;
             work->unk_068 = 0;
-            ((u8*)work->unk_000)[58] = 0;
+            work->tm->unk_3A = 0;
         } else {
             work->unk_066++;
         }

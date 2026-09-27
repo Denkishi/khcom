@@ -102,11 +102,8 @@ typedef struct WlogoObjParam {
 } WlogoObjParam;
 
 typedef struct TmTblWork {
-    u32 unk_000;
-    u32 collider;
-    u8 unk_008[0x32];
-    u8 unk_03A;
-    u8 unk_03B[0x25];
+    TmWork* tm;
+    Collider collider;
     u16 unk_060;
     u8 unk_062;
     u8 unk_063[0x1];
@@ -304,7 +301,7 @@ void task_bos_tm_arm_3(TmArmWork* work);
 void task_bos_tm_foot_3(TmFootWork* work);
 void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg);
 void task_bos_tm_clb_2(TmClbWork* work);
-void task_bos_tm_tbl_0(TmTblWork* work, void* arg);
+void task_bos_tm_tbl_0(TmTblWork* work, TmWork* arg);
 void task_bos_tm_tbl_3(TmTblWork* work);
 void task_bos_tm_clb_3(TmClbWork* work);
 void func_080BA0E4(BtlObj* p, s32 a, s32 b, s32 c);

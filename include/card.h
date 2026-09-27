@@ -1979,7 +1979,7 @@ void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a);
 void deckexchange_3(u8* work);
 void func_0807BB04(void);
 void func_080818E4(void);
-u8 func_0809DA64(s32 a, u16 n);
+u8 func_0809DA64(HcEffectNameWork* w, u16 n);
 void StockInfo_0(StockInfoWork* w, u8* active);
 u8 func_080A3754(UnkStruct_080A3F5C* w, void* a);
 u8 func_08082C98(CardDisplayWork* p, void* a);
@@ -2629,7 +2629,7 @@ extern UnkStruct_02034AD4* gUnk_02034AD4;
 extern u8 gUnk_02034AD8;
 extern u8 gUnk_02034AD9;
 extern u8 gUnk_02034ADA[6];
-extern u8 gUnk_02034AE0[20];
+extern TaskPool gUnk_02034AE0;
 #ifndef VERSION_EU
 extern u8 gUnk_02034AF4[4];
 #endif

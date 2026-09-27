@@ -43,7 +43,7 @@
 #include "sprites_btl_hud.h"
 #include "sprites_card.h"
 
-u8 gUnk_02034AE0[20];
+TaskPool gUnk_02034AE0;
 #ifndef VERSION_EU
 u8 gUnk_02034AF4[4];
 #endif
@@ -58,6 +58,7 @@ extern u8 gUnkEu_09F72D80[];
 #define LANGSTR(x) (x)
 #endif
 u8 HCEffectName_1(HcEffectNameWork* w, void* a);
+u8 func_0809DE18(HcEffectNameWork* w);
 u8 func_0809DE30(HcEffectNameWork* w, void* a);
 u16 func_080792D0(u16* p);
 void func_08085C3C(void);
@@ -80,22 +81,22 @@ void Mode_Premire_0(void) {
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
-    TaskPoolInit(gUnk_02034AE0, 1);
+    TaskPoolInit(&gUnk_02034AE0, 1);
 #ifdef VERSION_EU
-    TaskCreate(gUnk_02034AE0, gUnkEu_09F72D80, 0);
+    TaskCreate(&gUnk_02034AE0, gUnkEu_09F72D80, 0);
 #else
-    TaskCreate(gUnk_02034AE0, &gTaskDescLevelUp, 0);
+    TaskCreate(&gUnk_02034AE0, &gTaskDescLevelUp, 0);
 #endif
 }
 
 void Mode_Premire_1(void) {
-    TaskPoolUpdate(gUnk_02034AE0);
-    TaskPoolDraw(gUnk_02034AE0);
+    TaskPoolUpdate(&gUnk_02034AE0);
+    TaskPoolDraw(&gUnk_02034AE0);
 }
 void Mode_Premire_2(void) {
-    TaskPoolDestroy(gUnk_02034AE0);
+    TaskPoolDestroy(&gUnk_02034AE0);
 }
-u8 func_0809DA64(s32 a, u16 n) {
+u8 func_0809DA64(HcEffectNameWork* w, u16 n) {
     switch (n) {
     case 0:
     case 1:
@@ -168,14 +169,14 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
         w->x = 48;
         w->unk_1E = gUnk_02039DD4->unk_0CC;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CC);
+        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
 #endif
         tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_08);
         UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_0C], LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_00));
 #ifdef VERSION_EU
         UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CC);
+        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
         UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
 
@@ -187,14 +188,14 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
         w->x = 162;
         w->unk_1E = gUnk_02039DD4->unk_0CE;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CE);
+        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
 #endif
         tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_08);
         UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_0C], LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_00));
 #ifdef VERSION_EU
         UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CE);
+        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
         UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
 
@@ -215,7 +216,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
     s32 div;
     UnkStruct_02039DD4* d;
 
-    done = func_0809DE18((u8*)w);
+    done = func_0809DE18(w);
 
     if (done != 0) {
 #ifdef VERSION_EU
@@ -299,14 +300,14 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
 
     return 1;
 }
-u8 func_0809DE18(u8* p) {
-    if (p[25] != 1) {
-        if (p[25] != 2) {
+u8 func_0809DE18(HcEffectNameWork* w) {
+    if (w->unk_19 != 1) {
+        if (w->unk_19 != 2) {
             return 0;
         }
     }
 
-    if (*(u16*)&p[30] != 37) {
+    if (w->unk_1E != 37) {
         return 0;
     }
 
@@ -324,7 +325,7 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CC);
+            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
 #endif
             tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_08);
             UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_0C],
@@ -333,7 +334,7 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
             UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
                          gUnkEu_09F72CB0[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CC);
+            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
             UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
@@ -353,7 +354,7 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CE);
+            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
 #endif
             tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_08);
             UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_0C],
@@ -362,7 +363,7 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
             UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
                          gUnkEu_09F72CB0[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64((s32)w, gUnk_02039DD4->unk_0CE);
+            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
             UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
@@ -403,11 +404,11 @@ void HCEffectName_2(HcEffectNameWork* w) {
 #endif
 }
 
-void HCEffectName_3(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x08]);
-    ReleaseObjTiles(*(void**)&work[0x14]);
-    ReleaseObjTiles(*(void**)&work[0x0C]);
-    ReleaseObjPalette(*(void**)&work[0x10]);
+void HCEffectName_3(HcEffectNameWork* w) {
+    ReleaseObjTiles(w->tiles2);
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjTiles(w->tiles3);
+    ReleaseObjPalette(w->palette);
     gUnk_02039DD4->unk_0D8 = 0;
     gUnk_02039DD4->unk_0E5 = 0;
     gUnk_02039DD4->unk_0C8 = 256;
@@ -423,27 +424,26 @@ void NumberPlus_0(NumberPlusWork* w, NumberPlusArgs* args) {
     w->unk_29 = 0;
 }
 
-s32 NumberPlus_1(u8* work) {
+s32 NumberPlus_1(NumberPlusWork* w) {
     s32 v;
 
-    v = *(s16*)&work[0x26] << 8;
+    v = w->unk_26 << 8;
 
-    if (work[0x28] != 0) {
-        ApproachValue(&v, *(s32*)&work[0x10] - 0x2800, work[0x28]);
-        *(s16*)&work[0x26] = v >> 8;
-        work[0x28]--;
+    if (w->unk_28 != 0) {
+        ApproachValue(&v, w->args.unk_08 - 0x2800, w->unk_28);
+        w->unk_26 = v >> 8;
+        w->unk_28--;
         return 1;
     }
 
     return 0;
 }
-void NumberPlus_2(u8* work) {
-    DrawSprite(*(s16*)&work[0x24], *(s16*)&work[0x26], gUnk_09EE91A8[0],
-               *(void**)&work[0x00], *(void**)&work[0x04], 0, 16, 0);
+void NumberPlus_2(NumberPlusWork* w) {
+    DrawSprite(w->unk_24, w->unk_26, gUnk_09EE91A8[0], w->tiles, w->palette, 0, 16, 0);
 }
-void NumberPlus_3(void** p) {
-    ReleaseObjTiles(p[0]);
-    ReleaseObjPalette(p[1]);
+void NumberPlus_3(NumberPlusWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
 }
 
 Mode gModePremire = {
@@ -464,7 +464,7 @@ TaskDesc gTaskDescHCEffectName = {
     (TaskUpdateFunc)HCEffectName_1,
     (TaskFunc)HCEffectName_2,
     (TaskFunc)HCEffectName_3,
-    0x28,
+    sizeof(HcEffectNameWork),
 };
 
 TaskDesc gTaskDescNumberPlus = {
@@ -473,5 +473,5 @@ TaskDesc gTaskDescNumberPlus = {
     (TaskUpdateFunc)NumberPlus_1,
     (TaskFunc)NumberPlus_2,
     (TaskFunc)NumberPlus_3,
-    0x2C,
+    sizeof(NumberPlusWork),
 };

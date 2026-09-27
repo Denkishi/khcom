@@ -15,7 +15,7 @@ extern IntrFunc* gIntrTableVCount;
 extern IntrFunc* gIntrTableVBlank;
 extern IntrFunc* gIntrTableTimer3;
 extern IntrFunc gHBlankCallback;
-extern u32 gVBlankCounter;
+extern vu32 gVBlankCounter;
 extern IntrFunc gVCountCallback;
 extern IntrFunc gVBlankCallback;
 extern IntrFunc* gIntrTableHBlank;

@@ -728,29 +728,22 @@ typedef struct StockNameWork {
 } StockNameWork;
 
 typedef struct ReloadChildArgs {
-    void* unk_00;
+    ListPool* unk_00;
     s32* unk_04;
     s32* unk_08;
     u8 unk_0C;
     u8 unk_0D;
     u8 unk_0E;
     u8 unk_0F;
-    u8 unk_10[0x04];
+    u16 unk_10;
+    u8 unk_12[0x02];
 } ReloadChildArgs;
 
 typedef struct ReloadChildWork {
     void* tiles;
     void* palette;
     void* tiles2;
-    u8 unk_0C[0x04];
-    s32* unk_10;
-    s32* unk_14;
-    u8 unk_18;
-    u8 unk_19;
-    u8 unk_1A;
-    u8 unk_1B;
-    u16 unk_1C;
-    u8 unk_1E[0x02];
+    ReloadChildArgs args;
     s32 unk_20;
     s32 unk_24;
     s32 scale;

@@ -62,25 +62,25 @@ const s16 gUnk_090361B8[4] = { -16, -29, -42, -51 };
 const s16 gUnk_090361C0[4] = { 0, 0, 0, 24 };
 
 void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
-    *(ReloadChildArgs*)&w->unk_0C = *a;
-    w->tiles = LoadObjTiles(gUnk_09EE7698[w->unk_19], 128);
+    w->args = *a;
+    w->tiles = LoadObjTiles(gUnk_09EE7698[w->args.unk_0D], 128);
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->tiles2 = 0;
 
-    switch (w->unk_1A) {
+    switch (w->args.unk_0E) {
     case 1:
-        if ((s8)w->unk_18 <= 3) {
-            w->unk_20 = gUnk_090361B0[(s8)w->unk_18] << 8;
-            w->unk_24 = gUnk_090361C0[(s8)w->unk_18] << 8;
+        if ((s8)w->args.unk_0C <= 3) {
+            w->unk_20 = gUnk_090361B0[(s8)w->args.unk_0C] << 8;
+            w->unk_24 = gUnk_090361C0[(s8)w->args.unk_0C] << 8;
         } else {
             w->unk_20 = gUnk_090361B0[3] << 8;
             w->unk_24 = gUnk_090361C0[3] << 8;
         }
         break;
     case 2:
-        if ((s8)w->unk_18 <= 3) {
-            w->unk_20 = gUnk_090361B8[(s8)w->unk_18] << 8;
-            w->unk_24 = gUnk_090361C0[(s8)w->unk_18] << 8;
+        if ((s8)w->args.unk_0C <= 3) {
+            w->unk_20 = gUnk_090361B8[(s8)w->args.unk_0C] << 8;
+            w->unk_24 = gUnk_090361C0[(s8)w->args.unk_0C] << 8;
         } else {
             w->unk_20 = gUnk_090361B8[3] << 8;
             w->unk_24 = gUnk_090361C0[3] << 8;
@@ -88,15 +88,15 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
         break;
     }
 
-    ListNodeInit(&w->node, *(void**)w->unk_0C, w);
-    ListPoolAppend(&w->node, *(void**)w->unk_0C);
+    ListNodeInit(&w->node, w->args.unk_00, w);
+    ListPoolAppend(&w->node, w->args.unk_00);
     w->unk_46 = 0;
 }
 
 u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
     u8 (*fn)(ReloadChildWork*, void*);
 
-    if (w->unk_1C & 2) {
+    if (w->args.unk_10 & 2) {
         w->unk_46++;
 
         if (w->unk_46 == 30) {
@@ -107,25 +107,25 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
         }
     }
 
-    if (w->unk_1C & 1) {
+    if (w->args.unk_10 & 1) {
         w->unk_44 = 8;
-        w->unk_1C &= ~1;
+        w->args.unk_10 &= ~1;
     }
 
-    if (w->unk_18 <= 3) {
-        switch (w->unk_1A) {
+    if (w->args.unk_0C <= 3) {
+        switch (w->args.unk_0E) {
         case 1:
-            ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->unk_18] << 8, w->unk_44);
+            ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->args.unk_0C] << 8, w->unk_44);
             break;
         case 2:
-            ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->unk_18] << 8, w->unk_44);
+            ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->args.unk_0C] << 8, w->unk_44);
             break;
         }
 
-        ApproachValue(&w->unk_24, gUnk_090361C0[(s8)w->unk_18] << 8, w->unk_44);
-    } else if ((s8)w->unk_18 < 0) {
-        ListPoolRemove(&w->node, *(void**)w->unk_0C);
-        w->tiles2 = LoadObjTiles(gUnk_08F709B0[w->unk_19].tiles2, 0xD00);
+        ApproachValue(&w->unk_24, gUnk_090361C0[(s8)w->args.unk_0C] << 8, w->unk_44);
+    } else if ((s8)w->args.unk_0C < 0) {
+        ListPoolRemove(&w->node, w->args.unk_00);
+        w->tiles2 = LoadObjTiles(gUnk_08F709B0[w->args.unk_0D].tiles2, 0xD00);
         w->unk_44 = 8;
         w->scale = 0x66;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08098BA4);
@@ -144,7 +144,7 @@ u8 func_08098AE4(ReloadChildWork* w, void* a) {
     u8 (*f)(ReloadChildWork*, void*);
     u16 v;
 
-    v = w->unk_1C & 2;
+    v = w->args.unk_10 & 2;
 
     if (v == 0) {
         w->unk_44 = 8;
@@ -154,12 +154,12 @@ u8 func_08098AE4(ReloadChildWork* w, void* a) {
         return f(w, a);
     }
 
-    switch (w->unk_1A) {
+    switch (w->args.unk_0E) {
     case 1:
-        ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->unk_18] << 8, w->unk_44);
+        ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->args.unk_0C] << 8, w->unk_44);
         break;
     case 2:
-        ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->unk_18] << 8, w->unk_44);
+        ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->args.unk_0C] << 8, w->unk_44);
         break;
     }
 
@@ -190,26 +190,26 @@ void RELOAD_CHILDREN_2(ReloadChildWork* w) {
     s16 y;
     s32 aff;
 
-    if (w->unk_18 <= 3) {
-        x = (w->unk_20 + *w->unk_10) >> 8;
-        y = (w->unk_24 + *w->unk_14) >> 8;
+    if (w->args.unk_0C <= 3) {
+        x = (w->unk_20 + *w->args.unk_04) >> 8;
+        y = (w->unk_24 + *w->args.unk_08) >> 8;
         DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_09EEA344[0], w->tiles, w->palette, 0, 0, 50);
     }
 
-    if ((s8)w->unk_18 < 0) {
-        x = (w->unk_20 + *w->unk_10) >> 8;
-        y = (w->unk_24 + *w->unk_14) >> 8;
+    if ((s8)w->args.unk_0C < 0) {
+        x = (w->unk_20 + *w->args.unk_04) >> 8;
+        y = (w->unk_24 + *w->args.unk_08) >> 8;
         aff = AllocObjAffine(0, w->scale, w->scale, 0);
-        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_08F709B0[w->unk_19].gfx2, w->tiles2, w->palette, aff, 0, 49);
+        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_08F709B0[w->args.unk_0D].gfx2, w->tiles2, w->palette, aff, 0, 49);
     }
 }
 
-void RELOAD_CHILDREN_3(void** p) {
-    ReleaseObjTiles(p[0]);
-    ReleaseObjPalette(p[1]);
+void RELOAD_CHILDREN_3(ReloadChildWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
 
-    if (p[2] != 0) {
-        ReleaseObjTiles(p[2]);
+    if (w->tiles2 != 0) {
+        ReleaseObjTiles(w->tiles2);
     }
 }
 void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
@@ -1020,7 +1020,7 @@ TaskDesc gTaskDescReloadChildren = {
     (TaskUpdateFunc)RELOAD_CHILDREN_1,
     (TaskFunc)RELOAD_CHILDREN_2,
     (TaskFunc)RELOAD_CHILDREN_3,
-    0x48,
+    sizeof(ReloadChildWork),
 };
 
 void* gUnk_09EE76C0[4] = {

@@ -2305,7 +2305,7 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
             args.unk_0C = i;
             args.unk_04 = &w->unk_4C;
             args.unk_08 = &w->unk_50;
-            *(u16*)args.unk_10 = 0;
+            args.unk_10 = 0;
             args.unk_0D = w->unk_46;
             args.unk_0E = w->unk_40;
             TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args);
@@ -2362,7 +2362,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                 node = (ReloadChildWork*)ListPoolFirst(w->pool);
 
                 while (node != 0) {
-                    node->unk_1C &= 0xFFFD;
+                    node->args.unk_10 &= 0xFFFD;
                     node = (ReloadChildWork*)ListPoolNext(&node->node);
                 }
 
@@ -2384,8 +2384,8 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                         child = (ReloadChildWork*)ListPoolFirst(w->pool);
 
                         while (child != 0) {
-                            child->unk_1C |= 1;
-                            child->unk_18--;
+                            child->args.unk_10 |= 1;
+                            child->args.unk_0C--;
                             child = (ReloadChildWork*)ListPoolNext(&child->node);
                         }
 
@@ -2396,14 +2396,14 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                             args.unk_0C = 3;
                             args.unk_04 = &w->unk_4C;
                             args.unk_08 = &w->unk_50;
-                            *(u16*)args.unk_10 = 0;
+                            args.unk_10 = 0;
                             args.unk_0D = w->unk_46;
                             args.unk_0E = w->unk_40;
-                            child = ((ReloadChildWork**)TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args))[1];
-                            flags = child->unk_1C | 1;
+                            child = TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args)->work;
+                            flags = child->args.unk_10 | 1;
                             flags &= 0xFFFD;
-                            child->unk_1C = flags;
-                            child->unk_18--;
+                            child->args.unk_10 = flags;
+                            child->args.unk_0C--;
                         }
 
                         w->unk_9C = 8;
@@ -2455,7 +2455,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
             node = (ReloadChildWork*)ListPoolFirst(w->pool);
 
             while (node != 0) {
-                node->unk_1C |= 2;
+                node->args.unk_10 |= 2;
                 node = (ReloadChildWork*)ListPoolNext(&node->node);
             }
         }

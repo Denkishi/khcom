@@ -1,6 +1,7 @@
 #ifndef GUARD_GAME_STATE_H
 #define GUARD_GAME_STATE_H
 
+#include <stddef.h>
 #include "types.h"
 #include "save_types.h"
 #include "fld_types.h"
@@ -71,7 +72,7 @@ typedef struct GameState {
 } GameState;
 
 typedef char GameState_size[(sizeof(GameState) == 0x210) ? 1 : -1];
-typedef char GameState_progression_offset[((u32)&((GameState*)0)->progression == 0xF8) ? 1 : -1];
+typedef char GameState_progression_offset[(offsetof(GameState, progression) == 0xF8) ? 1 : -1];
 typedef char GameFloor_size[(sizeof(GameFloor) == 4) ? 1 : -1];
 typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
 

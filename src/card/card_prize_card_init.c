@@ -59,7 +59,7 @@ void CreateCardNameDisplay(void* a, void* b);
 u16 func_08096D0C(u16 a, s32 b);
 u16 func_08096D48(u16 a, s32 b);
 void func_0809797C(TaskPool* pool, s32* args);
-s32 func_08097A80(u8* work);
+s32 func_08097A80(SpotlightWork* w);
 s32 func_08097DE4(u8* work);
 u8 func_0808510C(u16 id);
 s32 AddMapCard(u16 a);
@@ -1455,17 +1455,17 @@ u8 SpotLight_1(SpotlightWork* w, void* a) {
     return 1;
 }
 
-s32 func_08097A80(u8* work) {
+s32 func_08097A80(SpotlightWork* w) {
     s32 v;
 
-    ApproachValue(&work[0x08], 0, work[0x00]);
+    ApproachValue(&w->unk_08, 0, w->unk_00);
 
-    if (work[0x00] != 0) {
-        work[0x00]--;
+    if (w->unk_00 != 0) {
+        w->unk_00--;
     }
 
-    v = ((*(s32*)&work[0x04] >> 8) << 8) | (*(s32*)&work[0x08] >> 8);
-    *(u16*)&work[0x0C] = v;
+    v = ((w->unk_04 >> 8) << 8) | (w->unk_08 >> 8);
+    w->unk_0C = v;
     gBldAlpha = v;
     return 1;
 }
@@ -2087,7 +2087,7 @@ TaskDesc gTaskDescSpotLight = {
     (TaskUpdateFunc)SpotLight_1,
     (TaskFunc)SpotLight_2,
     (TaskFunc)SpotLight_3,
-    0x18,
+    sizeof(SpotlightWork),
 };
 #ifdef VERSION_EU
 void* gUnkEu_09F72A3C[5] = { gUnk_09EF1224, gUnkEu_09F7C438, gUnkEu_09F7C450, gUnkEu_09F7C448, gUnkEu_09F7C440 };

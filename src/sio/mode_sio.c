@@ -2488,7 +2488,7 @@ void func_080B1E70(void) {
     InitTextSlots(gSioChgCardWork->textSlots2, 20);
     gSioChgCardWork->textSlotCount2 = LoadTextSlots(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].name, gSioChgCardWork->textSlots2);
     gSioChgCardWork->unk_360 = 0;
-    TaskPoolInit(gSioChgCardWork->tasks, 11);
+    TaskPoolInit(&gSioChgCardWork->tasks, 11);
     gUnk_02039B58[3] = ((gUnk_0203AB10 & 15) << 12) | ((gSioChgCardWork->unk_202 + 1) & 0x0FFF);
     gSioChgCardWork->state++;
 }
@@ -2728,7 +2728,7 @@ void func_080B29BC(void) {
 }
 
 void func_080B29D8(void) {
-    TaskPoolUpdate(gSioChgCardWork->tasks);
+    TaskPoolUpdate(&gSioChgCardWork->tasks);
 
     if (func_080C5930() == 0) {
         if (gUnk_0203A9E4 == 0) {
@@ -2747,7 +2747,7 @@ void func_080B29D8(void) {
 }
 
 void func_080B2A5C(void) {
-    TaskPoolUpdate(gSioChgCardWork->tasks);
+    TaskPoolUpdate(&gSioChgCardWork->tasks);
 
     if (gSioChgCardWork->unk_004 == 80) {
         gSioChgCardWork->unk_20C = 0;
@@ -2823,7 +2823,7 @@ void mode_sio_chg_card_2(void) {
     ReleaseObjTiles(gSioChgCardWork->tiles5);
     FreeTextSlots(gSioChgCardWork->textSlots, 42);
     FreeTextSlots(gSioChgCardWork->textSlots2, 20);
-    TaskPoolDestroy(gSioChgCardWork->tasks);
+    TaskPoolDestroy(&gSioChgCardWork->tasks);
     EwramFree(gSioChgCardWork);
 }
 
@@ -3189,7 +3189,7 @@ void func_080B397C(void) {
     LoadPalette(gUnk_096FBF84 + off, (void*)0x050000A0, 32);
     LoadObjPaletteBank(((ObjPalette*)gSioChgCardWork->palette)->index, gUnk_096FBF04 + off);
     nameId = def->unk_1C;
-    defs = (CardDef*)((u8*)defs + 12);
+    defs = (CardDef*)&defs->name;
     gSioChgCardWork->textSlotCount2 = LoadTextSlots(defs[n].gfx, gSioChgCardWork->textSlots2);
     gSioChgCardWork->textSlotCount = LoadTextSlots((void*)gUnk_09EE8F48[nameId], gSioChgCardWork->textSlots);
     EnableBg(0);
@@ -3243,7 +3243,7 @@ void func_080B3B5C(void) {
             arg.unk_18 = 0xA000;
             arg.unk_1C = 0x800;
             arg.unk_20 = (5 - i) * 20;
-            TaskCreate(gSioChgCardWork->tasks, &gTaskDescChgCardObj, &arg);
+            TaskCreate(&gSioChgCardWork->tasks, &gTaskDescChgCardObj, &arg);
         }
     }
 
@@ -3258,7 +3258,7 @@ void func_080B3B5C(void) {
             arg.unk_18 = 0x4000;
             arg.unk_1C = 0x800;
             arg.unk_20 = (10 - i) * 20 + 10;
-            TaskCreate(gSioChgCardWork->tasks, &gTaskDescChgCardObj, &arg);
+            TaskCreate(&gSioChgCardWork->tasks, &gTaskDescChgCardObj, &arg);
         }
     }
 }

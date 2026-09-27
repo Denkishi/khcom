@@ -18,24 +18,21 @@ types:
     header: pc_sprite_types.h
 objects:
   us:
-  - name: sprites_staff_roll_1.c
-    start: 0x09EFAEE4
-    end: 0x09EFAEF8
-  - name: sprites_staff_roll_2.c
-    start: 0x09EFAF60
-    end: 0x09EFBBBC
-  - name: sprites_staff_roll_3.c
-    start: 0x09EFBC40
-    end: 0x09EFBEC4
   - name: sprites_staff_roll_frames_1.s
     start: 0x09C5B8B0
     end: 0x09C5C460
+    data_start: 0x09EFAEE4
+    data_end: 0x09EFAEF8
   - name: sprites_staff_roll_frames_2.s
     start: 0x09C5CC04
     end: 0x09C907B0
+    data_start: 0x09EFAF60
+    data_end: 0x09EFBBBC
   - name: sprites_staff_roll_frames_3.s
     start: 0x09C90A30
     end: 0x09C913F4
+    data_start: 0x09EFBC40
+    data_end: 0x09EFBEC4
   - name: sprites_staff_roll_tiles_1.s
     start: 0x09A54217
     end: 0x09A542B8
@@ -54,24 +51,21 @@ objects:
     data_start: 0x09EFAB18
     data_end: 0x09EFAB68
   jp:
-  - name: sprites_staff_roll_1.c
-    start: 0x09ED23F0
-    end: 0x09ED2404
-  - name: sprites_staff_roll_2.c
-    start: 0x09ED246C
-    end: 0x09ED3134
-  - name: sprites_staff_roll_3.c
-    start: 0x09ED31B8
-    end: 0x09ED343C
   - name: sprites_staff_roll_frames_1.s
     start: 0x09C33FD4
     end: 0x09C34B84
+    data_start: 0x09ED23F0
+    data_end: 0x09ED2404
   - name: sprites_staff_roll_frames_2.s
     start: 0x09C35328
     end: 0x09C69CBC
+    data_start: 0x09ED246C
+    data_end: 0x09ED3134
   - name: sprites_staff_roll_frames_3.s
     start: 0x09C69F3C
     end: 0x09C6A900
+    data_start: 0x09ED31B8
+    data_end: 0x09ED343C
   - name: sprites_staff_roll_tiles_1.s
     start: 0x09A090A7
     end: 0x09A09148
@@ -90,24 +84,21 @@ objects:
     data_start: 0x09ED2024
     data_end: 0x09ED2074
   eu:
-  - name: sprites_staff_roll_1.c
-    start: 0x09F86C30
-    end: 0x09F86C44
-  - name: sprites_staff_roll_2.c
-    start: 0x09F86CAC
-    end: 0x09F883D0
-  - name: sprites_staff_roll_3.c
-    start: 0x09F88454
-    end: 0x09F886D8
   - name: sprites_staff_roll_frames_1.s
     start: 0x09CB95F8
     end: 0x09CBA1A8
+    data_start: 0x09F86C30
+    data_end: 0x09F86C44
   - name: sprites_staff_roll_frames_2.s
     start: 0x09CBA94C
     end: 0x09D00ADC
+    data_start: 0x09F86CAC
+    data_end: 0x09F883D0
   - name: sprites_staff_roll_frames_3.s
     start: 0x09D00D5C
     end: 0x09D01720
+    data_start: 0x09F88454
+    data_end: 0x09F886D8
   - name: sprites_staff_roll_tiles_1.s
     start: 0x09AB1F4F
     end: 0x09AB1FF0

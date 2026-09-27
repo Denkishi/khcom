@@ -398,10 +398,8 @@ sprites_staff_roll_frames_4.s
 sprites_bos6_frames_1.s
 sprites_staff_roll_frames_1.s
 sprites_bos7_frames_1.s
-sprites_staff_roll_frames_2.s
-sprites_staff_roll_1.c
 sprites_bos7_1.c
-sprites_staff_roll_2.c
+sprites_staff_roll_frames_2.s
 sprites_bos6_frames_2.s
 sprites_staff_roll_frames_3.s
 sprites_bos7_frames_2.s
@@ -419,7 +417,6 @@ sprites_bos7_palettes.s
 sprites_bos6_palettes_2.s
 sprites_staff_roll_palettes.s
 sprite_palettes_18.s
-sprites_staff_roll_3.c
 sprites_bos7_2.c
 libagbsyscall.s
 agb_sram.c -O1

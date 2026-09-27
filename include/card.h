@@ -280,11 +280,6 @@ typedef struct UnkStruct_02034B38 {
     u8 unk_6A[0x02];
 } UnkStruct_02034B38;
 
-typedef struct UnkStruct_0809B200 {
-    u8 unk_000[0x30];
-    void* unk_030[1];
-} UnkStruct_0809B200;
-
 typedef struct UnkStruct_0809A02C {
     void* tiles;
     void* palette;

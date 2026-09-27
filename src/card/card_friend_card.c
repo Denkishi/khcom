@@ -675,7 +675,7 @@ void func_0809B200(UnkStruct_0809A02C* w) {
                                 w->scaleY, 0);
         DrawSprite(x, (u16)y - 8,
                    gUnk_08F709B0[w->cardDef->unk_2A].gfx,
-                   ((UnkStruct_0809B200*)gUnk_02039DD4)->unk_030[w->cardDef->unk_2A],
+                   gUnk_02039DD4->tiles[w->cardDef->unk_2A],
                    w->palette, affine,
                    w->unk_1D0, w->unk_1C2);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,

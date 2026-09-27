@@ -944,7 +944,7 @@ void func_080DFB2C(void) {
     func_080DF990(0);
 }
 
-struct UnkStruct_02034F24* func_080DFB7C(u8 a) {
+UnkStruct_080DFB7C* func_080DFB7C(u8 a) {
     return func_080E5590(a);
 }
 
@@ -1042,7 +1042,7 @@ u8 func_080DFCDC(FldPos* p) {
     b = ((p->y + p->z) >> 8) / 16;
 
     for (i = 0; i <= 3; i++) {
-        e = (UnkStruct_080DFB7C*)func_080DFB7C(i);
+        e = func_080DFB7C(i);
 
         if ((e->unk_00 & 1) != 0 && (e->unk_00 & 0xA) == 2 && e->unk_02 == a && e->unk_04 == b) {
             gUnk_0203C7AC->unk_0F = e->unk_07;
@@ -1072,7 +1072,7 @@ u8 func_080DFD84(FldPos* p) {
     b = ((p->y + p->z) >> 8) / 16;
 
     for (i = 0; i <= 3; i++) {
-        e = (UnkStruct_080DFB7C*)func_080DFB7C(i);
+        e = func_080DFB7C(i);
 
         if ((e->unk_00 & 1) != 0 && (e->unk_00 & 0xA) == 2 && e->unk_02 == a && e->unk_04 == b
                 && e->unk_07 == gUnk_0203C7AC->unk_0F && e->unk_06 == gUnk_0203C7AC->unk_10) {

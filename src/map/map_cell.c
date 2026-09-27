@@ -7,7 +7,7 @@ struct UnkStruct_0203C7B8* gUnk_0203C7B8 EWRAM_COMMON(4);
 
 MapCell* gMapCells;
 UnkStruct_02034F20* gUnk_02034F20;
-UnkStruct_02034F24* gUnk_02034F24;
+UnkStruct_080DFB7C* gUnk_02034F24;
 u16 gUnk_02034F28;
 u16 gUnk_02034F2A;
 u16 gUnk_02034F2C;
@@ -388,7 +388,7 @@ void func_080E062C(void) {
     s32 y;
 
     if (gUnk_0203C590.unk_07 <= 3) {
-        e = (UnkStruct_080DFB7C*)func_080DFB7C(gUnk_0203C590.unk_07);
+        e = func_080DFB7C(gUnk_0203C590.unk_07);
         x = (e->unk_02 << 5) + 16;
         y = (e->unk_04 << 4) + 10;
 
@@ -1578,7 +1578,7 @@ void func_080E2668(UnkStruct_02034F20* p, s32 a) {
     MapCell* q;
 
     d = a;
-    e = (UnkStruct_080DFB7C*)func_080DFB7C(d);
+    e = func_080DFB7C(d);
 
     if (!(e->unk_00 & 1)) {
         return;
@@ -1772,15 +1772,15 @@ void func_080E2C50(void) {
 
 void func_080E2C98(void) {
     s32 i;
-    MapCell* e;
+    UnkStruct_080DFB7C* e;
 
     for (i = 0; i < 4; i++) {
         e = func_080DFB7C(i);
-        e->unk_06[1] = func_080DEE28(gUnk_0203C590.unk_06, i);
-        e->unk_06[0] = i;
+        e->unk_07 = func_080DEE28(gUnk_0203C590.unk_06, i);
+        e->unk_06 = i;
         e->unk_00 = func_080DEE44(gUnk_0203C590.unk_06, i);
 
-        if (e->unk_06[1] != 0xFF) {
+        if (e->unk_07 != 0xFF) {
             switch (i) {
             case 0:
                 gUnk_0203C7AC->flags |= 0x1000000;
@@ -2667,7 +2667,7 @@ void func_080E49DC(u16 a, u16 b) {
     if (gGameState.unk_000 == 0) {
         gMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
         gUnk_02034F20 = EwramAlloc(0x120);
-        gUnk_02034F24 = EwramAlloc(0x20);
+        gUnk_02034F24 = EwramAlloc(sizeof(UnkStruct_080DFB7C) * 4);
         n = gUnk_02034F28 * gUnk_02034F2A;
 
         for (i = 0; i < n; i++) {
@@ -3065,7 +3065,7 @@ u16 func_080E5564(void) {
     return gUnk_0203C7B0.unk_01 + GetRandom() % (gUnk_0203C7B0.unk_02 - gUnk_0203C7B0.unk_01 + 1);
 }
 
-UnkStruct_02034F24* func_080E5590(u8 a) {
+UnkStruct_080DFB7C* func_080E5590(u8 a) {
     return &gUnk_02034F24[a];
 }
 

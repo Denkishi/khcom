@@ -58,7 +58,7 @@ void func_080DFA3C(void);
 void func_080DFAA8(void);
 void func_080DFAF4(u8 a, u8 b);
 void func_080DFB2C(void);
-struct UnkStruct_02034F24* func_080DFB7C(u8 a);
+UnkStruct_080DFB7C* func_080DFB7C(u8 a);
 MapCell* func_080DFB8C(s32 x, s32 y);
 u8 func_080DFBDC(FldPos* p);
 u8 func_080DFC24(void);

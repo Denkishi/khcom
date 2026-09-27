@@ -71,10 +71,6 @@ typedef struct UnkStruct_02034F20 {
     s32 unk_14;
 } UnkStruct_02034F20;
 
-typedef struct UnkStruct_02034F24 {
-    u8 unk_00[0x08];
-} UnkStruct_02034F24;
-
 typedef struct UnkStruct_02034F84 {
     u8 unk_00;
     u8 unk_01;

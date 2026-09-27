@@ -4,7 +4,6 @@
 #include "types.h"
 #include "map_types.h"
 
-struct UnkStruct_02034F24;
 struct UnkStruct_02034F80;
 struct MapCell;
 struct UnkStruct_080E92B8;
@@ -22,7 +21,7 @@ void func_080E052C(u8 a);
 struct MapCell* func_080E548C(s16 a, s16 b);
 u8* func_080E54B8(u8 a);
 void func_080E5510(u8 a);
-struct UnkStruct_02034F24* func_080E5590(u8 a);
+UnkStruct_080DFB7C* func_080E5590(u8 a);
 struct MapCell* func_080E58F8(s16 a, s16 b);
 u8 func_080E86C8(struct MapCell* p, s32 x, s32 y);
 u8 func_080E8C84(u8 a, u8 b);

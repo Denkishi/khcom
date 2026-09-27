@@ -4477,7 +4477,7 @@ void Task_MapRnd_0(MapRndWork* w) {
     func_080E49DC(gUnk_0203C7AC->unk_04, gUnk_0203C7AC->unk_06);
 
     for (i = 0; i < 4; i++) {
-        MapCell* e = func_080DFB7C(i);
+        UnkStruct_080DFB7C* e = func_080DFB7C(i);
 
         if (e->unk_00 & 1) {
             if ((e->unk_00 & 8) == 0) {

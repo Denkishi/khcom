@@ -609,9 +609,9 @@ typedef struct MapPrizeWork {
     s32 y;
     s32 z;
     s32 unk_0C;
-    u8 collider[0x5C];
+    Collider collider;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8* gfx;
     u8* gfx2;
     void (*update)(struct MapPrizeWork*);
@@ -722,14 +722,14 @@ typedef struct MapPrzCardWork {
     s32 unk_004;
     s32 unk_008;
     s32 unk_00C;
-    u8 collider[0x5C];
+    Collider collider;
     FldRes* palette;
     void* tiles;
     FldRes* palette2;
     void* tiles2;
     void* tiles3;
     void* tiles4;
-    u8* palette3;
+    ObjPalette* palette3;
     u16 unk_088;
     u16 timer;
     void (*update)(struct MapPrzCardWork*);
@@ -762,14 +762,13 @@ typedef struct MapPrzStockWork {
     u16* unk_00;
     void (*update)(struct MapPrzStockWork*);
     TaskPool tasks;
-    u8 unk_18[0x04];
 } MapPrzStockWork;
 
 typedef struct MapSparkWork {
-    void* unk_00;
+    FldObj* obj;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8 unk_24[0x04];
 } MapSparkWork;
 
@@ -790,10 +789,10 @@ typedef struct MapDmgWork {
 } MapDmgWork;
 
 typedef struct MapTalkWork {
-    s32* unk_00;
+    FldObj* obj;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8 unk_24[0x04];
     u8 unk_28;
     u8 unk_29[0x03];

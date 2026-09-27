@@ -1556,8 +1556,8 @@ void Task_MapEnm06_3(MapEnmWork* p) {
     func_080E657C(p);
 }
 
-s32 func_080F10F0(u8* p) {
-    return ((s8)gGameState.floor << 28) + (p[9] << 20) + (p[10] << 16) + (gUnk_0203C590.unk_06 << 8) + (gUnk_0203C590.unk_05 << 4) + gUnk_0203C590.unk_04;
+s32 func_080F10F0(UnkStruct_080DEE18* p) {
+    return ((s8)gGameState.floor << 28) + (p->unk_09 << 20) + (p->unk_0A << 16) + (gUnk_0203C590.unk_06 << 8) + (gUnk_0203C590.unk_05 << 4) + gUnk_0203C590.unk_04;
 }
 
 void func_080F1124(MapDbgWork* w) {
@@ -1614,7 +1614,7 @@ void func_080F117C(MapDbgWork* w) {
             gUnk_0203C590.unk_04 = 0;
         }
 
-        w->unk_42 = FormatSmallFontHex(func_080F10F0((u8*)d), w->unk_2E);
+        w->unk_42 = FormatSmallFontHex(func_080F10F0(d), w->unk_2E);
     }
 
     if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
@@ -1636,7 +1636,7 @@ void func_080F1274(MapDbgWork* w) {
         gUnk_0203C590.unk_04 = gUnk_0203C590.unk_04 != 0 ? gUnk_0203C590.unk_04 - 1 : 12;
     }
 
-    w->unk_42 = FormatSmallFontHex(func_080F10F0((u8*)d), w->unk_2E);
+    w->unk_42 = FormatSmallFontHex(func_080F10F0(d), w->unk_2E);
 
     if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
         w->update = func_080F117C;
@@ -1666,13 +1666,13 @@ void Task_MapDbg_0(MapDbgWork* w, u8* p) {
     w->tiles = LoadSmallFontTiles();
     w->palette = LoadSmallFontPalette();
     w->unk_2C = FormatSmallFontHex(d->unk_04, w->unk_18);
-    w->unk_42 = FormatSmallFontHex(func_080F10F0((u8*)d), w->unk_2E);
+    w->unk_42 = FormatSmallFontHex(func_080F10F0(d), w->unk_2E);
     w->unk_46 = EncodeSmallFontString(gUnk_09EF6C38, &w->unk_44);
 #endif
 }
 
-s32 Task_MapDbg_1(u8* work) {
-    (*(void (**)(u8*))&work[8])(work);
+s32 Task_MapDbg_1(MapDbgWork* w) {
+    w->update(w);
     return 1;
 }
 
@@ -1693,9 +1693,9 @@ void Task_MapDbg_2(MapDbgWork* w) {
 #endif
 }
 
-void Task_MapDbg_3(u8* work) {
+void Task_MapDbg_3(MapDbgWork* w) {
 #ifndef VERSION_EU
-    FreeSmallFontResources(*(void**)&work[16], *(void**)&work[20]);
+    FreeSmallFontResources(w->tiles, w->palette);
 #endif
 }
 
@@ -3711,7 +3711,7 @@ void func_080F49D0(MapPrizeWork* w) {
         w->vz = -(GetRandom() % 0x181 + 0x180);
     }
 
-    if (w->collider[0x2C] != 0) {
+    if (w->collider.unk_2C != 0) {
         u16 t;
 
         switch (w->unk_80) {
@@ -3873,7 +3873,7 @@ void Task_MapPrize_2(MapPrizeWork* w) {
 void Task_MapPrize_3(MapPrizeWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->collider);
+    ColliderUnregister(&w->collider);
 }
 
 void func_080F4EE4(MapPrzCardWork* work) {
@@ -3930,7 +3930,7 @@ void func_080F4FB0(MapPrzCardWork* w) {
         }
     }
 
-    if (w->collider[0x2C] != 0) {
+    if (w->collider.unk_2C != 0) {
         w->unk_0D2 = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         func_08084458(w->cardId);
@@ -4167,7 +4167,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* w) {
 void Task_MapPrzCard_3(MapPrzCardWork* w) {
     FadeSetPaletteExcluded(w->palette2->index + 0x10, 0);
     FadeSetPaletteExcluded(w->palette->index + 0x10, 0);
-    ColliderUnregister(w->collider);
+    ColliderUnregister(&w->collider);
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles3);
@@ -4248,7 +4248,7 @@ void func_080F59A0(MapMsgWork* w) {
     }
 
     FadeSetPaletteExcluded(w->palette->index + 0x10, 0);
-    ReleaseObjPalette((u8*)w->palette);
+    ReleaseObjPalette(w->palette);
     FreeTextSlots(&w->textSlots, 0x30);
 }
 
@@ -4261,10 +4261,10 @@ s32 Task_MapMsg2_1(MapMsgWork* w) {
     return 1;
 }
 
-void Task_MapSpark_0(MapSparkWork* w, void* arg) {
+void Task_MapSpark_0(MapSparkWork* w, FldObj* obj) {
     AnimState* a;
 
-    w->unk_00 = arg;
+    w->obj = obj;
     w->tiles = AllocObjTiles(0x200, gUnk_098A4B68);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     a = &w->anim;
@@ -4287,7 +4287,7 @@ s32 Task_MapSpark_1(MapSparkWork* w) {
 }
 
 void Task_MapSpark_2(MapSparkWork* w) {
-    UnkStruct_080E8374* p = w->unk_00;
+    FldObj* p = w->obj;
     s32 h;
     u16 x;
     u16 y;
@@ -4298,18 +4298,18 @@ void Task_MapSpark_2(MapSparkWork* w) {
         h = 0x2000;
     }
 
-    x = (p->unk_00 >> 8) - (gFieldState->x >> 8);
-    y = (p->unk_04 >> 8) + ((p->unk_08 - h) >> 8) - (gFieldState->y >> 8);
+    x = (p->fieldPosition.x >> 8) - (gFieldState->x >> 8);
+    y = (p->fieldPosition.y >> 8) + ((p->fieldPosition.z - h) >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x400, 0x50);
 }
 
-void Task_MapSpark_3(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x1C]);
-    ReleaseObjPalette(*(u8**)&work[0x20]);
+void Task_MapSpark_3(MapSparkWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
 }
 
-void Task_MapTalk_0(MapTalkWork* w, s32* arg) {
-    w->unk_00 = arg;
+void Task_MapTalk_0(MapTalkWork* w, FldObj* obj) {
+    w->obj = obj;
     w->tiles = AllocObjTiles(0x200, &gUnk_098A4B68[0x1028]);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     AnimInit(&w->anim, gUnk_09EF8CD0, gUnk_09EF8CC8);
@@ -4318,12 +4318,12 @@ void Task_MapTalk_0(MapTalkWork* w, s32* arg) {
 }
 
 s32 Task_MapTalk_1(MapTalkWork* w) {
-    s32* p = w->unk_00;
+    FldObj* p = w->obj;
     AnimState* anim = &w->anim;
 
     AnimUpdate(anim);
 
-    if (gFieldState->actor.fieldPosition.x < *p) {
+    if (gFieldState->actor.fieldPosition.x < p->fieldPosition.x) {
         w->unk_28 = 0;
         AnimStart(anim, 0, 1);
     } else {
@@ -4334,16 +4334,16 @@ s32 Task_MapTalk_1(MapTalkWork* w) {
 }
 
 void Task_MapTalk_2(MapTalkWork* w) {
-    UnkStruct_080E8374* p = (UnkStruct_080E8374*)w->unk_00;
+    FldObj* p = w->obj;
     u16 x;
     u16 y;
 
     if (w->unk_28 != 0) {
-        x = (p->unk_00 >> 8) - (gFieldState->x >> 8) - 16;
+        x = (p->fieldPosition.x >> 8) - (gFieldState->x >> 8) - 16;
     } else {
-        x = (p->unk_00 >> 8) - (gFieldState->x >> 8) + 16;
+        x = (p->fieldPosition.x >> 8) - (gFieldState->x >> 8) + 16;
     }
-    y = (p->unk_04 >> 8) + ((p->unk_08 - (p->unk_1A << 8)) >> 8) - (gFieldState->y >> 8);
+    y = (p->fieldPosition.y >> 8) + ((p->fieldPosition.z - (p->unk_1A << 8)) >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x400, 0x50);
 }
 
@@ -4472,7 +4472,7 @@ TaskDesc gTaskDescMapDbg = {
     (TaskUpdateFunc)Task_MapDbg_1,
     (TaskFunc)Task_MapDbg_2,
     (TaskFunc)Task_MapDbg_3,
-    0x48,
+    sizeof(MapDbgWork),
 };
 
 TaskDesc gTaskDescMapGmkJump = {
@@ -4670,7 +4670,7 @@ TaskDesc gTaskDescMapPrize = {
     (TaskUpdateFunc)Task_MapPrize_1,
     (TaskFunc)Task_MapPrize_2,
     (TaskFunc)Task_MapPrize_3,
-    0x98,
+    sizeof(MapPrizeWork),
 };
 
 TaskDesc gTaskDescMapPrzCard = {
@@ -4679,7 +4679,7 @@ TaskDesc gTaskDescMapPrzCard = {
     (TaskUpdateFunc)Task_MapPrzCard_1,
     (TaskFunc)Task_MapPrzCard_2,
     (TaskFunc)Task_MapPrzCard_3,
-    0xE8,
+    sizeof(MapPrzCardWork),
 };
 
 TaskDesc gTaskDescMapPrzStock = {
@@ -4688,7 +4688,7 @@ TaskDesc gTaskDescMapPrzStock = {
     (TaskUpdateFunc)Task_MapPrzStock_1,
     (TaskFunc)Task_MapPrzStock_2,
     (TaskFunc)Task_MapPrzStock_3,
-    0x1C,
+    sizeof(MapPrzStockWork),
 };
 
 TaskDesc gTaskDescMapMsg = {
@@ -4715,7 +4715,7 @@ TaskDesc gTaskDescMapSpark = {
     (TaskUpdateFunc)Task_MapSpark_1,
     (TaskFunc)Task_MapSpark_2,
     (TaskFunc)Task_MapSpark_3,
-    0x28,
+    sizeof(MapSparkWork),
 };
 
 TaskDesc gTaskDescMapTalk = {
@@ -4724,5 +4724,5 @@ TaskDesc gTaskDescMapTalk = {
     (TaskUpdateFunc)Task_MapTalk_1,
     (TaskFunc)Task_MapTalk_2,
     (TaskFunc)Task_MapTalk_3,
-    0x2C,
+    sizeof(MapTalkWork),
 };

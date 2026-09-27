@@ -1179,23 +1179,27 @@ typedef struct SpotlightWork {
     u8 unk_14;
 } SpotlightWork;
 
+typedef struct CardEffectArgs {
+    s32 unk_00;
+    s32 unk_04;
+    s32 unk_08;
+    u8 unk_0C;
+    u8* count;
+} CardEffectArgs;
+
 typedef struct CardEffectWork {
     void* tiles;
     void* palette;
-    u8 anim[0x18];
+    AnimState anim;
     void* gfx;
     s32 unk_24;
     s32 unk_28;
     s32 unk_2C;
     s16 x;
     s16 y;
-    u8 unk_34[0x04];
-    s32 unk_38;
-    s32 unk_3C;
-    s32 unk_40;
-    u8 unk_44;
-    u8 unk_45[0x03];
-    u8* unk_48;
+    u16 priority;
+    u8 unk_36[0x02];
+    CardEffectArgs args;
 } CardEffectWork;
 
 typedef struct BossPrizeWork {
@@ -1437,14 +1441,6 @@ typedef struct LevelUpEffectArgs {
     void* tiles;
     ObjPalette* palette;
 } LevelUpEffectArgs;
-
-typedef struct CardEffectArgs {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u8 unk_0C;
-    u8* unk_10;
-} CardEffectArgs;
 
 typedef struct LevelUpEffectWork {
     void* tiles;

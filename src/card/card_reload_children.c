@@ -852,7 +852,7 @@ void func_08099CDC(BossPrizeWork* w) {
                 args.unk_04 = *(s32*)&work[0xAC];
                 args.unk_08 = *(s32*)&work[0xB0];
                 args.unk_0C = work[0xED];
-                args.unk_10 = &work[0xEE];
+                args.count = &work[0xEE];
                 TaskCreate(&work[0x20], &gTaskDescCardEFFECT, &args);
             }
 
@@ -867,7 +867,7 @@ void func_08099CDC(BossPrizeWork* w) {
                 args.unk_04 = *(s32*)&work[0xAC];
                 args.unk_08 = *(s32*)&work[0xB0];
                 args.unk_0C = work[0xED];
-                args.unk_10 = &work[0xEE];
+                args.count = &work[0xEE];
                 TaskCreate(&work[0x20], &gTaskDescCardEFFECT, &args);
             }
 
@@ -879,9 +879,9 @@ void func_08099CDC(BossPrizeWork* w) {
 }
 
 void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
-    *(CardEffectArgs*)&w->unk_38 = *a;
+    w->args = *a;
 
-    if (w->unk_44 == 0) {
+    if (w->args.unk_0C == 0) {
         w->unk_24 = a->unk_00 + ((GetRandom() % 9 - 4) << 8);
         w->unk_28 = a->unk_04;
         w->unk_2C = a->unk_08 - 0x800;
@@ -897,13 +897,13 @@ void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
     AnimStart(&w->anim, GetRandom() % 3, 0);
     w->gfx = AnimGetGfx(&w->anim);
-    (*w->unk_48)++;
+    (*w->args.count)++;
 }
 
 u8 Card_EFFECT_1(CardEffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->unk_44 == 0) {
+    if (w->args.unk_0C == 0) {
         WorldToScreen(&w->x, &w->y, w->unk_24, w->unk_28, w->unk_2C);
         w->unk_2C -= 0x100;
     } else {
@@ -919,22 +919,20 @@ u8 Card_EFFECT_1(CardEffectWork* w) {
     return 1;
 }
 
-void Card_EFFECT_2(u8* work) {
+void Card_EFFECT_2(CardEffectWork* w) {
     s16 t;
     s32 z;
 
-    t = -4100 - ((*(s16*)&work[0x32] >> 8) * 4);
+    t = -4100 - ((w->y >> 8) * 4);
     z = 0;
-    *(u16*)&work[0x34] = t;
-    DrawSprite(*(s16*)&work[0x30], *(s16*)&work[0x32], *(void**)&work[0x20],
-               *(void**)&work[0x00], *(void**)&work[0x04], z, z,
-               *(u16*)&work[0x34]);
+    w->priority = t;
+    DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, z, z, w->priority);
 }
 
-void Card_EFFECT_3(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x00]);
-    ReleaseObjPalette(*(void**)&work[0x04]);
-    (*(u8**)&work[0x48])[0]--;
+void Card_EFFECT_3(CardEffectWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
+    w->args.count[0]--;
 }
 
 void scrollbar_0(ScrollBarWork* w, u16* args) {
@@ -1098,7 +1096,7 @@ TaskDesc gTaskDescCardEFFECT = {
     (TaskUpdateFunc)Card_EFFECT_1,
     (TaskFunc)Card_EFFECT_2,
     (TaskFunc)Card_EFFECT_3,
-    0x4C,
+    sizeof(CardEffectWork),
 };
 
 TaskDesc gTaskDescScrollbar = {

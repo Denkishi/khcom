@@ -1653,28 +1653,28 @@ u8 func_080CA4E8(s16 x, s16 y, s16 h, s16 vy, s16 w, s16 vx, s32* ox, s32* oy) {
     return r;
 }
 
-u8 func_080CA560(PooPos* p, s32 x, s32 y) {
+u8 func_080CA560(PooActor* a, s32 x, s32 y) {
     s16 sx;
     s16 sy;
 
-    if (func_080CA3FC((PooActor*)p, x, y, &gUnk_02034DD8, &gUnk_02034DDC) != 0) {
-        p->x = x + gUnk_02034DD8;
-        p->y = y + gUnk_02034DDC;
+    if (func_080CA3FC(a, x, y, &gUnk_02034DD8, &gUnk_02034DDC) != 0) {
+        a->pos.x = x + gUnk_02034DD8;
+        a->pos.y = y + gUnk_02034DDC;
     }
     sx = (x >> 8) - gUnk_0203C40C;
     sy = (y >> 8) - gUnk_0203C3F8;
 
     if (func_080CA4E8(sx, sy, 48, 0, 18, 18, &gUnk_02034DD8, &gUnk_02034DDC) == 0) {
-        sx = (p->x >> 8) - gUnk_0203C40C;
-        sy = (p->y >> 8) - gUnk_0203C3F8;
+        sx = (a->pos.x >> 8) - gUnk_0203C40C;
+        sy = (a->pos.y >> 8) - gUnk_0203C3F8;
 
         if (func_080CA4E8(sx, sy, 48, 0, 18, 18, &gUnk_02034DD8, &gUnk_02034DDC) != 0) {
-            p->x -= gUnk_02034DD8;
-            p->y -= gUnk_02034DDC;
+            a->pos.x -= gUnk_02034DD8;
+            a->pos.y -= gUnk_02034DDC;
         }
     } else {
-        p->x = x;
-        p->y = y;
+        a->pos.x = x;
+        a->pos.y = y;
     }
     return 1;
 }
@@ -2112,7 +2112,7 @@ u8 func_080CAD08(PooSoraWork* w, Task* t) {
     if (func_080CA8D4(w, &a->pos) != 0) {
         a->unk_10 = a->unk_10 * 230 >> 8;
     }
-    func_080CA560(&a->pos, sx, sy);
+    func_080CA560(a, sx, sy);
 
     if ((u8)func_080CFE34(&a->pos) != 0) {
         if (a->pos.z > -0xA00) {
@@ -2309,7 +2309,7 @@ u8 func_080CB1BC(PooSoraWork* w, Task* t) {
         }
     }
     func_080CA8D4(w, &a->pos);
-    func_080CA560(&a->pos, sx, sy);
+    func_080CA560(a, sx, sy);
 
     if ((u8)func_080CFE34(&a->pos) != 0) {
         a->pos.x = sx;
@@ -2352,7 +2352,7 @@ u8 func_080CB5A8(PooSoraWork* w, Task* t) {
         }
     }
     func_080CA8D4(w, &a->pos);
-    func_080CA560(&a->pos, x, y);
+    func_080CA560(a, x, y);
 
     if ((u8)func_080CFE34(&a->pos) != 0) {
         a->pos.x = x;
@@ -2447,7 +2447,7 @@ u8 task_poo_sora_1(PooSoraWork* w, Task* t) {
     if (func_080CA8D4(w, &a->pos) != 0) {
         a->unk_10 = a->unk_10 * 230 >> 8;
     }
-    func_080CA560(&a->pos, sx, sy);
+    func_080CA560(a, sx, sy);
 
     if ((u8)func_080CFE34(&a->pos) != 0) {
         a->pos.x = sx;
@@ -2732,15 +2732,15 @@ void task_poo_balloon_2(PooBalloonObjWork* w) {
     }
 }
 
-void task_poo_balloon_3(PooObjWork* w) {
+void task_poo_balloon_3(PooBalloonObjWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
 
 void task_poo_shadow_0(TaskPool* w, void* arg) {
-    PooBalloonArgs args;
+    PooShadowArgs args;
 
-    args.unk_00 = arg;
+    args.pos = arg;
     args.unk_08 = 0xA6;
     TaskPoolInit(w, 1);
     TaskCreate(w, &gTaskDescPooShadowscale, &args);
@@ -2850,9 +2850,9 @@ void task_poo_shadowscale_3(PooScaleWork* w) {
 }
 
 void CreatePooShadowscaleTask(void* pool, void* a, s32 b) {
-    PooBalloonArgs args;
+    PooShadowArgs args;
 
-    args.unk_00 = a;
+    args.pos = a;
     args.unk_08 = b;
     TaskCreate(pool, &gTaskDescPooShadowscale, &args);
 }
@@ -3000,11 +3000,11 @@ u8 task_poo_gauge_1(PooGaugeWork* w) {
     return 1;
 }
 
-void task_poo_gauge_2(PooObjWork3* w) {
+void task_poo_gauge_2(PooGaugeWork* w) {
     DrawSprite(0xDC, 0x18, w->gfx, w->tiles, w->palette, 0, 0x400, 0);
 }
 
-void task_poo_gauge_3(PooObjWork* w) {
+void task_poo_gauge_3(PooGaugeWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
@@ -4779,9 +4779,9 @@ void task_poo_roo_footmark_3(PooFootmarkWork* w) {
     }
 }
 
-void task_poo_leaf_0(PooLeafWork* w, PooLeafArgs* a) {
-    w->x = a->unk_00;
-    w->y = a->unk_04;
+void task_poo_leaf_0(PooLeafWork* w, PooSpawnArgs* a) {
+    w->x = a->pos.x;
+    w->y = a->pos.y;
     w->z = 0;
     w->unk_94 = a->unk_10;
     w->unk_92 = GetMaxSpriteTileBytes(gUnk_09EF610C, 5);
@@ -4850,9 +4850,9 @@ void task_poo_leaf_3(PooLeafWork* w) {
     }
 }
 
-void task_poo_tanpopo_0(PooTanpopoWork* w, PooLeafArgs* a) {
-    w->x = a->unk_00;
-    w->y = a->unk_04;
+void task_poo_tanpopo_0(PooTanpopoWork* w, PooSpawnArgs* a) {
+    w->x = a->pos.x;
+    w->y = a->pos.y;
     w->z = 0;
     w->unk_B6 = a->unk_10;
     w->unk_B2 = GetMaxSpriteTileBytes(gUnk_09EF6130, 2);
@@ -5582,7 +5582,7 @@ void task_poo_wagon_2(PooCamera* w) {
     DrawSprite(x, y, w->gfx3, w->tiles3, w->palette, 0, 0x800, p);
 }
 
-void task_poo_wagon_3(PooWagonWork* w) {
+void task_poo_wagon_3(PooCamera* w) {
     if (w->palette != 0) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjTiles(w->tiles2);
@@ -5841,7 +5841,7 @@ void task_poo_bee_2(PooBeeWork* w) {
     }
 }
 
-void task_poo_bee_3(PooObjWork* w) {
+void task_poo_bee_3(PooBeeWork* w) {
     if (w->palette != 0) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
@@ -6159,12 +6159,12 @@ u8 task_poo_cabbageborn_1(PooCabbageBornWork* w) {
     return 1;
 }
 
-void task_poo_cabbageborn_2(TaskPool* w) {
-    TaskPoolDraw(w);
+void task_poo_cabbageborn_2(PooCabbageBornWork* w) {
+    TaskPoolDraw(&w->tasks);
 }
 
-void task_poo_cabbageborn_3(TaskPool* w) {
-    TaskPoolDestroy(w);
+void task_poo_cabbageborn_3(PooCabbageBornWork* w) {
+    TaskPoolDestroy(&w->tasks);
 }
 
 void func_080D16FC(void) {
@@ -6272,7 +6272,7 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* w) {
     }
 }
 
-void task_poo_mapobjhit_3(PooObjWork* w) {
+void task_poo_mapobjhit_3(PooMapObjHitWork* w) {
     if (w->palette != 0) {
         ReleaseObjPalette(w->palette);
         ReleaseObjTiles(w->tiles);
@@ -6726,7 +6726,7 @@ void task_poo_mapbee_2(PooMapBeeWork* w) {
     }
 }
 
-void task_poo_mapbee_3(PooObjWork* w) {
+void task_poo_mapbee_3(PooMapBeeWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 
@@ -6832,7 +6832,7 @@ void task_poo_mapbutterfly_2(PooMapButterflyWork* w) {
     }
 }
 
-void task_poo_mapbutterfly_3(PooObjWork* w) {
+void task_poo_mapbutterfly_3(PooMapButterflyWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
@@ -6995,7 +6995,7 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w) {
     }
 }
 
-void task_poo_cabbageAfterEvent_3(PooObjWork* w) {
+void task_poo_cabbageAfterEvent_3(PooCabbageAfterEventWork* w) {
     if (w->palette != 0) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);

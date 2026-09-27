@@ -180,13 +180,6 @@ typedef struct PooAnimDesc {
     u16 unk_0E;
 } PooAnimDesc;
 
-typedef struct PooStumpArgs {
-    void* unk_00;
-    void* unk_04;
-    u8 unk_08[0x08];
-    s32 unk_10;
-} PooStumpArgs;
-
 typedef struct PooHoneyWork {
     void* tiles;
     void* palette;
@@ -766,8 +759,8 @@ typedef struct PooZzzWork {
 } PooZzzWork;
 
 typedef struct PooStumpDesc {
-    void* unk_00;
-    void* unk_04;
+    s32 x;
+    s32 y;
     u16 unk_08;
     u16 unk_0A;
 } PooStumpDesc;
@@ -1116,7 +1109,7 @@ void task_poo_honey_3(PooHoneyWork* w);
 u8 task_poo_mapanime_1(PooMapAnimeWork* w);
 s32 func_080CD198(void);
 void task_poo_pile_3(PooPileWork* w);
-void CreatePooPileTask(void* pool, u16 b, void* c, void* d);
+void CreatePooPileTask(void* pool, u16 b, s32 x, s32 y);
 void task_poo_tigerstump_0(PooStumpWork* w, PooPos* p);
 u8 task_poo_tigerstump_1(PooStumpWork* w);
 void task_poo_poohstump_0(PooStumpWork* w, PooPos* p);

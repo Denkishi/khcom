@@ -1350,7 +1350,7 @@ void func_080C9E84(void* pool) {
     u32 i;
 
     for (i = 0; i < 12; i++) {
-        CreatePooPileTask(pool, gPooStumpDescs[i].unk_08, gPooStumpDescs[i].unk_00, gPooStumpDescs[i].unk_04);
+        CreatePooPileTask(pool, gPooStumpDescs[i].unk_08, gPooStumpDescs[i].x, gPooStumpDescs[i].y);
     }
 }
 
@@ -3607,13 +3607,13 @@ void task_poo_pile_3(PooPileWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-void CreatePooPileTask(void* pool, u16 b, void* c, void* d) {
+void CreatePooPileTask(void* pool, u16 b, s32 x, s32 y) {
     s32 t[6];
-    PooStumpArgs args;
+    PooPileArgs args;
 
     memcpy(t, gUnk_096FD43C, sizeof(t));
-    args.unk_00 = c;
-    args.unk_04 = d;
+    args.x = x;
+    args.y = y;
     args.unk_10 = t[b];
     TaskCreate(pool, &gTaskDescPooPile, &args);
 }

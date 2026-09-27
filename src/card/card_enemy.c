@@ -695,7 +695,7 @@ void func_08091234(u16 arg) {
     args.unk_08 = arg;
     args.index = gUnk_02034AB4;
     args.unk_0E = 0;
-    p = ((CardDisplayWork**)TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B58, &args))[1];
+    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B58, &args)->work;
     gBtlWork->flags |= 0x10000000;
     gUnk_02039DD4->unk_0E0 = 1;
 
@@ -939,7 +939,7 @@ void func_080917C8(u16 a, u8 b) {
     arg.unk_08 = a;
     arg.index = b;
     arg.unk_0E = 0;
-    p = ((CardDisplayWork**)TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B70, &arg))[1];
+    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B70, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {
@@ -984,7 +984,7 @@ void func_08091978(u16 a, u8 b) {
     arg.unk_08 = a;
     arg.index = b;
     arg.unk_0E = 0;
-    p = ((CardDisplayWork**)TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B88, &arg))[1];
+    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B88, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {

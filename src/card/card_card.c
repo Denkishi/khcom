@@ -465,9 +465,9 @@ void func_080789E4(CardBattleWork* w) {
             args.unk_0F = w->unk_9C[w->unk_B8];
 
             if (c->cardId == 0xFFFE) {
-                p = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                p = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                p = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                p = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             p->unk_80 = p->unk_7C = gUnk_09033FA8[1];
@@ -487,7 +487,7 @@ void func_080789E4(CardBattleWork* w) {
         args.index = 0xFFFF;
         args.slot = w->slots[w->unk_B8];
         args.unk_0E = w->unk_B8;
-        p = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args))[1];
+        p = TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args)->work;
         p->unk_80 = p->unk_7C = gUnk_09033FA8[1];
         p->unk_98 = p->unk_94 = gUnk_09033FB8[0];
         p->unk_A0 = 50;
@@ -631,9 +631,9 @@ void func_08078E34(CardBattleWork* w, u8 b, u8 c) {
             args.unk_0F = w->unk_9C[b];
 
             if (slot->cardId == 0xFFFE) {
-                q = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                q = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                q = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                q = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             q->unk_80 = q->unk_7C = gUnk_09033FA8[3];
@@ -706,9 +706,9 @@ void func_08078FFC(CardBattleWork* w, u8 b) {
             args.unk_0F = w->unk_9C[b];
 
             if (c->cardId == 0xFFFE) {
-                q = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                q = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                q = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                q = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             q->unk_80 = q->unk_7C = gUnk_09033FA8[3];
@@ -1079,9 +1079,9 @@ s32 func_08079600(CardBattleWork* w) {
             args.unk_0F = w->unk_9C[w->unk_B8];
 
             if (c->cardId == 0xFFFE) {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                e = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             e->unk_7C = gUnk_09033FA8[3];
@@ -1189,7 +1189,7 @@ s32 func_08079B3C(CardBattleWork* w) {
         args.index = 0xFFFF;
         args.slot = w->slots[w->unk_B8];
         args.unk_0E = w->unk_B8;
-        e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args))[1];
+        e = TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args)->work;
         e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
         e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
         e->unk_A0 = 50;
@@ -1223,9 +1223,9 @@ s32 func_08079B3C(CardBattleWork* w) {
             args.unk_0F = w->unk_9C[w->unk_B8];
 
             if (c->cardId == 0xFFFE) {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                e = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             e->unk_7C = gUnk_09033FA8[3];
@@ -1325,9 +1325,9 @@ s32 func_08079ECC(CardBattleWork* w) {
             args.unk_0F = w->unk_9C[w->unk_B8];
 
             if (c->cardId == 0xFFFE) {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                e = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             e->unk_7C = gUnk_09033FA8[3];
@@ -1481,9 +1481,9 @@ s32 func_0807A188(CardBattleWork* w) {
             args.unk_0F = w->unk_9C[w->unk_B8];
 
             if (c->cardId == 0xFFFE) {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gTaskDescCardReload, &args))[1];
+                e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
-                e = ((CardDisplayWork**)TaskCreate(&w->tasks, &gUnk_09EE496C, &args))[1];
+                e = TaskCreate(&w->tasks, &gUnk_09EE496C, &args)->work;
             }
 
             e->unk_7C = gUnk_09033FA8[3];

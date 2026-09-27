@@ -314,16 +314,12 @@ s32 func_080D3DCC(u8 a) {
 void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg) {
     u16 pal;
 
-#ifdef VERSION_EU
-    InitTextSlots(work, 36);
-#else
-    InitTextSlots(work, 24);
-#endif
-    work->textSlotCount = LoadTextSlots(GetRoomName(arg[0]), work);
+    InitTextSlots(work->textSlots, ALLMAP_ROOMNAME_TEXT_SLOTS);
+    work->textSlotCount = LoadTextSlots(GetRoomName(arg[0]), work->textSlots);
     pal = func_080D3DCC(arg[0]);
     work->palette = LoadObjPalette(gUnk_0984A1F8 + pal, 32);
     LoadPalette(gUnk_0984A078 + pal, gUnk_05000160, 32);
-    work->x = func_080D3D40(GetTextSlotsWidth(work, work->textSlotCount));
+    work->x = func_080D3D40(GetTextSlotsWidth(work->textSlots, work->textSlotCount));
 }
 
 s32 task_allmap_roomname_1(void) {
@@ -331,15 +327,11 @@ s32 task_allmap_roomname_1(void) {
 }
 
 void task_allmap_roomname_2(AllmapRoomnameWork* work) {
-    DrawTextSlots(work->x + 117, 3, work, work->palette, 50, work->textSlotCount);
+    DrawTextSlots(work->x + 117, 3, work->textSlots, work->palette, 50, work->textSlotCount);
 }
 
 void task_allmap_roomname_3(AllmapRoomnameWork* work) {
-#ifdef VERSION_EU
-    FreeTextSlots(work, 36);
-#else
-    FreeTextSlots(work, 24);
-#endif
+    FreeTextSlots(work->textSlots, ALLMAP_ROOMNAME_TEXT_SLOTS);
     ReleaseObjPalette(work->palette);
 }
 
@@ -350,7 +342,7 @@ void func_080D3ED0(void) {
 
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gUnk_08125E24;
+    p = (u8*)gUnk_08125E24;
     RequestDma3Copy(p, dst, 32);
     dst = base + 92;
     p += 64;
@@ -642,7 +634,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     for (i = 0; i < 32; i++) {
         FadeSetPaletteExcluded(i, 0);
     }
-    work->palette2 = EwramAlloc(40);
+    work->palette2 = EwramAlloc(sizeof(ObjPalette));
     work->pos = *arg;
     work->unk_004 = func_080D5494(*arg);
     work->unk_0FC = work->pos.x * 24 - gUnk_0203C540;
@@ -861,15 +853,15 @@ void func_080D4EBC(void) {
     AllmapRoomWork* c;
     void** state = &gUnk_0203C4B4;
 
-    *state = EwramAlloc(0xC4);
+    *state = EwramAlloc(sizeof(AllmapState));
     ((AllmapState*)gUnk_0203C4B4)->unk_C0 = 0xFF;
     ((AllmapState*)gUnk_0203C4B4)->unk_BC = 0x400;
     gUnk_0203C538 = gUnk_0203C590[6];
     TaskPoolInit(&((AllmapState*)gUnk_0203C4B4)->tasks, 35);
-    ((AllmapState*)gUnk_0203C4B4)->pushaTask = i = 0;
+    ((AllmapState*)gUnk_0203C4B4)->pushaTask = 0;
     ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;
 
-    for (; i < 32; i++) {
+    for (i = 0; i < 32; i++) {
         ((AllmapState*)gUnk_0203C4B4)->roomTasks[i] = 0;
     }
 
@@ -1051,7 +1043,7 @@ void func_080D54FC(void) {
 void func_080D55E4(void) {
     AllmapCursorWork* c;
     AllmapCursorPos p;
-    u8* d;
+    UnkStruct_080DEE18* d;
     u8 moved;
     u8 r;
 
@@ -1102,8 +1094,8 @@ void func_080D55E4(void) {
         func_08000DE8(gUnk_0203C4B4, ((AllmapState*)gUnk_0203C4B4)->roomnameTask);
     }
     d = func_080DEE18(r);
-    if (d[8] != 26 && (func_080D5944(r, 2) != 0 || func_080D5944(r, 8) != 0)) {
-        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapRoomname, d + 8);
+    if (d->unk_08 != 26 && (func_080D5944(r, 2) != 0 || func_080D5944(r, 8) != 0)) {
+        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapRoomname, &d->unk_08);
     } else {
         ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;
         func_080D3ED0();
@@ -1206,7 +1198,7 @@ TaskDesc gTaskDescAllmapRoom = {
     (TaskUpdateFunc)task_allmap_room_1,
     (TaskFunc)task_allmap_room_2,
     (TaskFunc)task_allmap_room_3,
-    0xA0,
+    sizeof(AllmapRoomWork),
 };
 
 TaskDesc gTaskDescAllmapCursor = {
@@ -1215,7 +1207,7 @@ TaskDesc gTaskDescAllmapCursor = {
     (TaskUpdateFunc)task_allmap_cursor_1,
     (TaskFunc)task_allmap_cursor_2,
     (TaskFunc)task_allmap_cursor_3,
-    0x48,
+    sizeof(AllmapCursorWork),
 };
 
 TaskDesc gTaskDescAllmapRoomname = {
@@ -1224,11 +1216,7 @@ TaskDesc gTaskDescAllmapRoomname = {
     (TaskUpdateFunc)task_allmap_roomname_1,
     (TaskFunc)task_allmap_roomname_2,
     (TaskFunc)task_allmap_roomname_3,
-#ifdef VERSION_EU
-    0x130,
-#else
-    0xD0,
-#endif
+    sizeof(AllmapRoomnameWork),
 };
 
 #ifdef VERSION_EU
@@ -1255,7 +1243,7 @@ TaskDesc gTaskDescAllmapBar = {
     (TaskUpdateFunc)task_allmap_bar_1,
     (TaskFunc)task_allmap_bar_2,
     (TaskFunc)task_allmap_bar_3,
-    0x830,
+    sizeof(AllmapBarWork),
 };
 
 TaskDesc gTaskDescAllmapDoorinfo = {
@@ -1264,7 +1252,7 @@ TaskDesc gTaskDescAllmapDoorinfo = {
     (TaskUpdateFunc)task_allmap_doorinfo_1,
     (TaskFunc)task_allmap_doorinfo_2,
     (TaskFunc)task_allmap_doorinfo_3,
-    0x118,
+    sizeof(AllmapDoorinfoWork),
 };
 
 TaskDesc gTaskDescAllmapPusha = {
@@ -1273,5 +1261,5 @@ TaskDesc gTaskDescAllmapPusha = {
     (TaskUpdateFunc)task_allmap_pusha_1,
     (TaskFunc)task_allmap_pusha_2,
     (TaskFunc)task_allmap_pusha_3,
-    0x30,
+    sizeof(AllmapPushaWork),
 };

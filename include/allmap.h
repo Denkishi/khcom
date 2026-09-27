@@ -40,11 +40,14 @@
 #include "allmap_api.h"
 #include "mode_battle_data.h"
 
-typedef struct AllmapRoomnameWork {
-    u8 textSlots[0xC8];
 #ifdef VERSION_EU
-    u8 unkEu_0C8[0x60];
+#define ALLMAP_ROOMNAME_TEXT_SLOTS 36
+#else
+#define ALLMAP_ROOMNAME_TEXT_SLOTS 24
 #endif
+
+typedef struct AllmapRoomnameWork {
+    TextSlot textSlots[ALLMAP_ROOMNAME_TEXT_SLOTS + 1];
     void* palette;
     u8 textSlotCount;
     u8 unk_0CD;
@@ -126,13 +129,20 @@ typedef struct AllmapState {
 typedef struct AllmapDoorEntry {
     void* tiles;
     void* tiles2;
-    u8 unk_08[0x04];
+    void* tiles3;
     ObjPalette* palette;
     ObjPalette* palette2;
     ObjPalette* palette3;
     void* gfx;
     void* gfx2;
-    u8 unk_20[0x14];
+    void* gfx3;
+    s32 x;
+    s32 y;
+    u16 unk_2C;
+    u16 unk_2E;
+    u16 unk_30;
+    u8 unk_32;
+    u8 unk_33;
 } AllmapDoorEntry;
 
 typedef struct AllmapDoorinfoWork {

@@ -45,7 +45,7 @@ typedef struct RoomNameWork {
     u8 textSlotCount;
     u8 unk_35[0x3];
     void* palette2;
-    u8 textSlots[0x120];
+    TextSlot textSlots[0x24];
 } RoomNameWork;
 
 extern u8 gUnk_099910C4[];

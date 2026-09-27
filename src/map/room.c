@@ -196,5 +196,5 @@ TaskDesc gTaskDescRoomName = {
     (TaskUpdateFunc)task_room_name_1,
     (TaskFunc)task_room_name_2,
     (TaskFunc)task_room_name_3,
-    0x15C,
+    sizeof(RoomNameWork),
 };

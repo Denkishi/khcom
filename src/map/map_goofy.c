@@ -1243,9 +1243,5 @@ TaskDesc gTaskDescMapFloor = {
     (TaskUpdateFunc)Task_MapFloor_1,
     (TaskFunc)Task_MapFloor_2,
     (TaskFunc)Task_MapFloor_3,
-#ifdef VERSION_EU
-    0x1F8,
-#else
-    0x158,
-#endif
+    sizeof(MapFloorWork),
 };

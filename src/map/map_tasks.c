@@ -4239,7 +4239,7 @@ s32 Task_MapMsg_1(MapMsgWork* w) {
 }
 
 void func_080F596C(MapMsgWork* w) {
-    DrawTextSlots(w->unk_186, 120, &w->textSlots, w->palette, 50, w->textSlotCount);
+    DrawTextSlots(w->unk_186, 120, w->textSlots, w->palette, 50, w->textSlotCount);
 }
 
 void func_080F59A0(MapMsgWork* w) {
@@ -4249,7 +4249,7 @@ void func_080F59A0(MapMsgWork* w) {
 
     FadeSetPaletteExcluded(w->palette->index + 0x10, 0);
     ReleaseObjPalette(w->palette);
-    FreeTextSlots(&w->textSlots, 0x30);
+    FreeTextSlots(w->textSlots, 0x30);
 }
 
 s32 Task_MapMsg2_1(MapMsgWork* w) {
@@ -4697,7 +4697,7 @@ TaskDesc gTaskDescMapMsg = {
     (TaskUpdateFunc)Task_MapMsg_1,
     (TaskFunc)func_080F596C,
     (TaskFunc)func_080F59A0,
-    0x18C,
+    sizeof(MapMsgWork),
 };
 
 TaskDesc gTaskDescMapMsg2 = {
@@ -4706,7 +4706,7 @@ TaskDesc gTaskDescMapMsg2 = {
     (TaskUpdateFunc)Task_MapMsg2_1,
     (TaskFunc)func_080F596C,
     (TaskFunc)func_080F59A0,
-    0x18C,
+    sizeof(MapMsgWork),
 };
 
 TaskDesc gTaskDescMapSpark = {

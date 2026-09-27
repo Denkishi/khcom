@@ -860,12 +860,16 @@ typedef struct MapFloorWork {
     u8 textSlotCount;
     u8 unk_11[0x03];
     void* palette2;
-    u8 textSlots[0x140];
+#ifdef VERSION_EU
+    TextSlot textSlots[0x3C];
+#else
+    TextSlot textSlots[0x28];
+#endif
 } MapFloorWork;
 
 typedef struct MapMsgWork {
     FldRes* palette;
-    u8 textSlots[0x180];
+    TextSlot textSlots[0x30];
     u8 textSlotCount;
     u8 unk_185;
     s16 unk_186;

@@ -199,7 +199,7 @@ s32 Task_MapGmk04_1(MapGmk04Work* w);
 void Task_MapGmk04_2(MapGmk04Work* w);
 void Task_MapGmk04_3(MapGmk04Work* w);
 void func_080F445C(MapGmk05Work* w);
-void func_080F44AC(MapGmk04Work* w);
+void func_080F44AC(MapGmk05Work* w);
 void Task_MapGmk05_0(MapGmk05Work* w, UnkStruct_0203C7B8* arg);
 s32 Task_MapGmk05_1(MapGmk05Work* w);
 void Task_MapGmk05_2(MapGmk05Work* w);

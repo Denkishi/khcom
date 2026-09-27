@@ -672,10 +672,9 @@ typedef struct MapGmkGp09Work {
 
 typedef struct MapGmk04Work {
     UnkStruct_0203C7B8* unk_000;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
-    u8* palette;
+    FldObj obj;
+    Collider collider;
+    ObjPalette* palette;
     void* tiles;
     AnimState anim;
     void* gfx;
@@ -685,12 +684,9 @@ typedef struct MapGmk04Work {
 
 typedef struct MapGmk05Work {
     u8 unk_000[0x04];
-    FldPos unk_004;
-    u8 unk_014[0x2A];
-    u16 unk_03E;
-    s32 unk_040;
-    u8 collider[0x5C];
-    u8* palette;
+    FldObj obj;
+    Collider collider;
+    ObjPalette* palette;
     void* tiles;
     AnimState anim;
     void* gfx;
@@ -703,11 +699,10 @@ typedef struct MapGmk05Work {
 
 typedef struct MapGmk06Work {
     u8 unk_000[0x04];
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
-    u8* palette;
+    ObjPalette* palette;
     void* tiles;
     void* gfx;
     void (*update)(struct MapGmk06Work*);

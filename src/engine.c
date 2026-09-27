@@ -1844,7 +1844,7 @@ void* GetBgMapBlock(BgEntry* e, u16 x, u16 y) {
     u8 col = (x >> 8) % e->width;
     u8 row = (y >> 8) % e->height;
 
-    return ((void**)e->map)[e->width * row + col];
+    return e->map[e->width * row + col];
 }
 
 void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h) {

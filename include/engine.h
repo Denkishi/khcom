@@ -29,7 +29,7 @@ typedef struct Dma3Request {
 typedef struct BgEntry {
     u8 dirty;
     u8 unk_01[3];
-    void* map;
+    void** map;
     u8 width;
     u8 height;
     u16 x;

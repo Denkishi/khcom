@@ -39,6 +39,7 @@
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_level_up.h"
+#include "evt_types.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_0916F992[];
@@ -46,7 +47,7 @@ extern u8 gUnkEu_0917063A[];
 extern u8 gUnkEu_09170202[];
 extern u8 gUnkEu_0916FDCA[];
 #endif
-extern u8* gEventState;
+extern EventState* gEventState;
 void func_080A1554(LevelUpEffectWork* w);
 
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
@@ -150,11 +151,8 @@ void func_080A1BB8(EventMapObjectWork* w, EventBackgroundDef* t) {
     }
 }
 
-void func_080A1C48(u8* work) {
-    EventMapObjectWork* w;
+void func_080A1C48(EventMapObjectWork* w) {
     u8 i;
-
-    w = (EventMapObjectWork*)work;
 
     for (i = 0; i <= 9; i++) {
         if (w->tiles[i] != 0) {
@@ -163,30 +161,28 @@ void func_080A1C48(u8* work) {
         }
     }
 }
-void Ev_mapObj_0(u8* work, u8* a) {
+void Ev_mapObj_0(EventMapObjectWork* w, u8* a) {
     EventBackgroundDef* t;
 
-    work[0] = a[0];
-    t = gUnk_09EE3CA0[work[0]];
+    w->background = a[0];
+    t = gUnk_09EE3CA0[w->background];
 
     if (t->mapObjects != 0) {
-        func_080A1BB8(work, t);
-        *(void**)&work[0x58] = t->mapObjects;
+        func_080A1BB8(w, t);
+        w->definition = t->mapObjects;
     }
 }
 
-u8 Ev_mapObj_1(u8* work) {
-    EventMapObjectWork* w;
-    u8* p;
-    u8* q;
+u8 Ev_mapObj_1(EventMapObjectWork* w) {
+    EventMapObjectDef* p;
+    EventMapObjectPlacement* q;
     u8 i;
 
-    w = (EventMapObjectWork*)work;
-    p = *(u8**)&work[0x58];
-    q = *(u8**)&p[0x0C];
+    p = w->definition;
+    q = p->placements;
 
-    for (i = 0; i < *(u16*)&p[0x10]; i++) {
-        FadeSetPaletteExcluded(*(u16*)((u8*)w->palettes[q[i * 12 + 8]] + 6) + 16, 0);
+    for (i = 0; i < p->placementCount; i++) {
+        FadeSetPaletteExcluded(w->palettes[q[i].spriteIndex]->index + 16, 0);
     }
 
     return 1;
@@ -203,12 +199,12 @@ void Ev_mapObj_2(EventMapObjectWork* w) {
 
     for (i = 0; i < q->placementCount; i++) {
         e = &entries[i];
-        DrawSprite(e->x - (*(s32*)&gEventState[0x58] >> 8), e->y - (*(s32*)&gEventState[0x5C] >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], 0, 0x800, (u16)(-0x1004 - e->y * 4));
+        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], 0, 0x800, (u16)(-0x1004 - e->y * 4));
     }
 }
 
-void Ev_mapObj_3(u8* work) {
-    func_080A1C48(work);
+void Ev_mapObj_3(EventMapObjectWork* w) {
+    func_080A1C48(w);
 }
 
 TaskDesc gTaskDescLvupLogo = {
@@ -226,7 +222,7 @@ TaskDesc gTaskDescEvMapObj = {
     (TaskUpdateFunc)Ev_mapObj_1,
     (TaskFunc)Ev_mapObj_2,
     (TaskFunc)Ev_mapObj_3,
-    0x5C,
+    sizeof(EventMapObjectWork),
 };
 
 void* gUnk_09EE7998[7] = { gUnk_0951F2B8, gUnk_0951FAB8, gUnk_095202B8, gUnk_095212B8, gUnk_09520AB8, gUnk_09521AB8, gUnk_095222B8 };

@@ -187,11 +187,12 @@ extern void* gUnk_09EE7938[];
 extern u8 gUnk_09613F78[];
 
 typedef struct EventMapObjectWork {
-    u8 unk_00[0x04];
+    u8 background;
+    u8 unk_01[0x03];
     void* tiles[0x0A];
-    void* palettes[0x0A];
+    ObjPalette* palettes[0x0A];
     u8 unk_54[0x04];
-    void* definition;
+    struct EventMapObjectDef* definition;
 } EventMapObjectWork;
 
 struct MapCardDef;

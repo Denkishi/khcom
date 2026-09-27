@@ -122,16 +122,12 @@ typedef struct MdHahenWork {
     s32 vx;
     s32 vy;
     s32 vz;
-    u32 palette;
-    u32 tiles;
+    ObjPalette* palette;
+    ObjTiles* tiles;
     void* gfx;
     u16 timer;
     u8 unk_026[0x2];
 } MdHahenWork;
-
-typedef struct MdDaiTarget {
-    u16 flags;
-} MdDaiTarget;
 
 typedef struct MdDaiWork {
     s32 x;
@@ -140,19 +136,14 @@ typedef struct MdDaiWork {
     s32 unk_00C;
     s16 unk_010;
     u8 unk_012[0x2];
-    u32 palette;
-    u32 tiles;
-    u32 collider;
-    u8 unk_020[0x58];
-    MdDaiTarget* target;
+    ObjPalette* palette;
+    ObjTiles* tiles;
+    Collider collider;
+    u16* flags;
     s16 unk_07C;
     u16 state;
-    void* pool;
+    TaskPool* pool;
 } MdDaiWork;
-
-typedef struct MdFireTarget {
-    u16 unk_00;
-} MdFireTarget;
 
 typedef struct MdFireWork {
     u32 unk_000;
@@ -160,14 +151,14 @@ typedef struct MdFireWork {
     s16 unk_006;
     s16 unk_008;
     u8 unk_00A[0x2];
-    u32 palette;
-    u32 palette2;
-    u32 tiles;
+    ObjPalette* palette;
+    ObjPalette* palette2;
+    ObjTiles* tiles;
     AnimState anim;
     u32 scale;
     s16 unk_034;
     u8 unk_036[0x2];
-    MdSub sub;
+    BtlObj sub;
     s32 x;
     s32 y;
     s32 z;
@@ -180,14 +171,14 @@ typedef struct MdFireWork {
     u8 unk_163;
     u32 unk_164;
     u32 unk_168;
-    MdFireTarget* target;
+    u16* flags;
 } MdFireWork;
 
 typedef struct MdFireArg {
-    void* pool;
+    TaskPool* pool;
     s16 unk_04;
     u16 unk_06;
-    s32 unk_08;
+    u16* flags;
 } MdFireArg;
 
 typedef struct MdFirePoint {
@@ -260,13 +251,13 @@ typedef struct MdWork {
     s16 unk_01A;
     u8 unk_01C;
     u8 unk_01D[0x3];
-    u8* palette;
-    u8* palette2;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     void* unk_028;
     TaskPool tasks;
     TaskPool tasks2;
     TaskPool tasks3;
-    MdSub sub[1];
+    BtlObj sub[1];
     u16 unk_178;
     u16 unk_17A;
     MdGfx gfx[2];
@@ -284,7 +275,7 @@ extern const GaEntry gGaEntries[41];
 
 s32 task_bos_md_hahen_1(MdHahenWork* work);
 void task_bos_md_hahen_2(MdHahenWork* work);
-void task_bos_md_dai_0(MdDaiWork* work, s32* src);
+void task_bos_md_dai_0(MdDaiWork* work, void** args);
 void task_bos_md_hahen_0(MdHahenWork* work, s32* src);
 u8 task_bos_md_fire_1(MdFireWork* work);
 void task_bos_md_fire_2(MdFireWork* work);

@@ -401,7 +401,7 @@ TaskDesc gTaskDescBosMd = {
     (TaskUpdateFunc)task_bos_md_1,
     (TaskFunc)task_bos_md_2,
     (TaskFunc)task_bos_md_3,
-    0x1B8,
+    sizeof(MdWork),
 };
 
 const char gTaskNameBosMdMap[] = "task_bos_md_map";
@@ -438,7 +438,7 @@ TaskDesc gTaskDescBosMdFire = {
     (TaskUpdateFunc)task_bos_md_fire_1,
     (TaskFunc)task_bos_md_fire_2,
     (TaskFunc)task_bos_md_fire_3,
-    0x170,
+    sizeof(MdFireWork),
 };
 
 TaskDesc gTaskDescBosMdDai = {
@@ -447,7 +447,7 @@ TaskDesc gTaskDescBosMdDai = {
     (TaskUpdateFunc)task_bos_md_dai_1,
     (TaskFunc)task_bos_md_dai_2,
     (TaskFunc)task_bos_md_dai_3,
-    0x84,
+    sizeof(MdDaiWork),
 };
 
 TaskDesc gTaskDescBosMdHahen = {
@@ -456,7 +456,7 @@ TaskDesc gTaskDescBosMdHahen = {
     (TaskUpdateFunc)task_bos_md_hahen_1,
     (TaskFunc)task_bos_md_hahen_2,
     (TaskFunc)task_bos_md_hahen_3,
-    0x28,
+    sizeof(MdHahenWork),
 };
 
 #ifdef VERSION_EU
@@ -3496,7 +3496,7 @@ u8 func_080FBFA8(MdWork* work) {
                         work->unk_1B4 &= 0xFFFD;
                         a.pool = &work->tasks;
                         a.unk_06 = 0;
-                        a.unk_08 = (s32)&work->unk_1B4;
+                        a.flags = &work->unk_1B4;
 
                         if (work->sub[0].unk_02C * 10 / work->sub[0].unk_02E > 4) {
                             switch (GetRandom() % 3) {
@@ -3675,7 +3675,7 @@ void func_080FC360(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
-        MdSub* e = &work->sub[i];
+        BtlObj* e = &work->sub[i];
 
         switch (func_0801ADAC(e)) {
         case 5:
@@ -3703,7 +3703,7 @@ void func_080FC3FC(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
-        MdSub* e = &work->sub[i];
+        BtlObj* e = &work->sub[i];
 
         if (work->unk_010[i] == 2 && work->unk_01A == 0) {
             work->unk_010[i] = 0;
@@ -3749,18 +3749,18 @@ void task_bos_md_0(MdWork* work, void* arg) {
         func_0801B37C(&work->sub[i], &gBosMdEmyKind, gBtlWork->unk_0CC,
                       gBtlWork->unk_0D0, gBtlWork->unk_0D4);
 #ifdef VERSION_EU
-        ColliderInit(work->sub[i].unk_040, 8, 16, 24);
+        ColliderInit(&work->sub[i].collider, 8, 16, 24);
 #else
-        ColliderInit(work->sub[i].unk_040, 8, 16, 16);
+        ColliderInit(&work->sub[i].collider, 8, 16, 16);
 #endif
 
         if (i == 0) {
-            work->sub[i].unk_034 |= 0x400;
+            work->sub[i].flags |= 0x400;
         } else {
-            work->sub[i].unk_034 |= 0x1000;
+            work->sub[i].flags |= 0x1000;
         }
 
-        work->sub[i].unk_034 |= 4;
+        work->sub[i].flags |= 4;
     }
 
     func_080FB930(work, 0);
@@ -3769,9 +3769,9 @@ void task_bos_md_0(MdWork* work, void* arg) {
     func_0801C298(0, 1);
     work->unk_028 = gUnk_09A3C97C;
     work->palette = LoadObjPalette(gUnk_09A3C97C, 32);
-    func_0801C298(work->palette[6] + 16, 1);
+    func_0801C298(work->palette->index + 16, 1);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    func_0801C298(work->palette2[6] + 16, 1);
+    func_0801C298(work->palette2->index + 16, 1);
     TaskPoolInit(&work->tasks, 6);
     TaskPoolInit(&work->tasks2, 1);
     TaskPoolInit(&work->tasks3, 8);
@@ -3829,7 +3829,7 @@ s32 task_bos_md_1(MdWork* work) {
         work->sub[i].z = gBtlWork->unk_0D4
             + gGaEntries[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].z * 256;
-        ColliderSetPosition(work->sub[i].unk_040, work->sub[i].x, work->sub[i].y,
+        ColliderSetPosition(&work->sub[i].collider, work->sub[i].x, work->sub[i].y,
                       work->sub[i].z);
     }
 
@@ -3902,7 +3902,7 @@ void task_bos_md_3(MdWork* work) {
     DisableBg(1);
 
     for (i = 0; i < 1; i++) {
-        ColliderUnregister(work->sub[i].unk_040);
+        ColliderUnregister(&work->sub[i].collider);
         func_0801B7D8(&work->sub[i]);
     }
 
@@ -3916,8 +3916,8 @@ void task_bos_md_3(MdWork* work) {
         }
     }
 
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(q);
     TaskPoolDestroy(r);
     TaskPoolDestroy(t);
@@ -3978,7 +3978,7 @@ s32 task_bos_md_map_1(MdMapWork* work) {
     return 1;
 }
 void func_080FCC14(MdFireWork* work) {
-    MdSub* e;
+    BtlObj* e;
 
     e = &work->sub;
 
@@ -4005,13 +4005,13 @@ void func_080FCC14(MdFireWork* work) {
 }
 u8 func_080FCCB4(MdFireWork* work) {
     u8 result;
-    MdSub* e;
+    BtlObj* e;
     u8 a;
 
     result = 1;
     e = &work->sub;
 
-    if ((work->target->unk_00 & 2) && work->unk_000 != 4) {
+    if ((*work->flags & 2) && work->unk_000 != 4) {
         func_0801C2DC(e, 1);
         work->unk_034 = 30;
         work->unk_000 = 4;
@@ -4084,7 +4084,7 @@ u8 func_080FCCB4(MdFireWork* work) {
 
             if (work->unk_008 > 0) {
                 work->unk_008--;
-            } else if (ColliderIsTouchingType(work->sub.unk_040, 1) != 0) {
+            } else if (ColliderIsTouchingType(&work->sub.collider, 1) != 0) {
                 m4aSongNumStart(SONG_SND_714);
                 gBtlWork->actor->flags |= 0x20000000;
                 work->unk_008 = 60;
@@ -4160,24 +4160,24 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->z = 0;
     work->unk_15E = arg->unk_04;
     work->unk_160 = arg->unk_06;
-    work->target = (MdFireTarget*)arg->unk_08;
+    work->flags = arg->flags;
     func_080FCF78(work);
     func_0801B37C(&work->sub, &gBosMdFireEmyKind, work->x, work->y, work->z);
-    ColliderInit(work->sub.unk_040, 3, 16, 16);
-    ColliderSetPosition(work->sub.unk_040, work->sub.x, work->sub.y,
+    ColliderInit(&work->sub.collider, 3, 16, 16);
+    ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
-    work->sub.unk_034 |= 0x1000;
+    work->sub.flags |= 0x1000;
     work->sub.unk_02C = 20;
     work->sub.unk_02E = 20;
     func_0801C2DC(&work->sub, 1);
-    work->palette = (u32)LoadObjPalette(gUnk_09A3C99C, 32);
-    work->palette2 = (u32)LoadObjPalette(gUnk_08F69BC4, 32);
-    work->tiles = (u32)LoadObjTiles(gUnk_099E367C, 0x800);
+    work->palette = LoadObjPalette(gUnk_09A3C99C, 32);
+    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->tiles = LoadObjTiles(gUnk_099E367C, 0x800);
     AnimInit(&work->anim, gUnk_09EF9BC0, gUnk_09EF9BB0);
     AnimStart(&work->anim, 0, 1);
     a.pool = 0;
     a.unk_04 = arg->unk_04;
-    a.unk_08 = arg->unk_08;
+    a.flags = arg->flags;
 
     if (arg->pool != 0) {
         if (work->unk_15E <= 2) {
@@ -4206,7 +4206,7 @@ u8 task_bos_md_fire_1(MdFireWork* work) {
     work->sub.x = work->x;
     work->sub.y = work->y;
     work->sub.z = work->z;
-    ColliderSetPosition(work->sub.unk_040, work->sub.x, work->sub.y,
+    ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
     return result;
 }
@@ -4219,9 +4219,9 @@ void task_bos_md_fire_2(MdFireWork* work) {
     u16 frame;
 
     if (work->unk_006 > 0 && (gFrameCounter & 1)) {
-        gfx = (void*)work->palette2;
+        gfx = work->palette2;
     } else {
-        gfx = (void*)work->palette;
+        gfx = work->palette;
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -4237,24 +4237,24 @@ void task_bos_md_fire_2(MdFireWork* work) {
         sprite = 0;
     }
 
-    DrawSprite(x, y, AnimUpdate(&work->anim), (void*)work->tiles, gfx,
+    DrawSprite(x, y, AnimUpdate(&work->anim), work->tiles, gfx,
                   sprite, frame, (u16)(-4100 - (work->y >> 8) * 4));
 }
 
 void task_bos_md_fire_3(MdFireWork* work) {
-    ColliderUnregister(work->sub.unk_040);
+    ColliderUnregister(&work->sub.collider);
     func_0801B7D8(&work->sub);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
-    ReleaseObjTiles((void*)work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjTiles(work->tiles);
 }
 
-void task_bos_md_dai_0(MdDaiWork* work, s32* src) {
-    u8* p;
+void task_bos_md_dai_0(MdDaiWork* work, void** args) {
+    Collider* p;
 
     gBtlWork->flags |= 0x100000;
-    work->target = (MdDaiTarget*)src[1];
-    work->pool = (void*)src[0];
+    work->flags = args[1];
+    work->pool = args[0];
     work->unk_07C = 0;
     work->state = 0;
     work->x = 0x8000;
@@ -4262,12 +4262,12 @@ void task_bos_md_dai_0(MdDaiWork* work, s32* src) {
     work->z = 0;
     work->unk_010 = 20;
     work->unk_00C = -40960;
-    p = (u8*)work + 0x1C;
+    p = &work->collider;
     ColliderInit(p, 7, 24, 24);
     ColliderSetPosition(p, work->x, work->y, work->z);
     ColliderSetDisabled(p, 1);
-    work->palette = (u32)LoadObjPalette(gUnk_09A3C9BC, 32);
-    work->tiles = (u32)LoadObjTiles(gUnk_09999ED0, 0x480);
+    work->palette = LoadObjPalette(gUnk_09A3C9BC, 32);
+    work->tiles = LoadObjTiles(gUnk_09999ED0, 0x480);
 }
 
 s32 task_bos_md_dai_1(MdDaiWork* work) {
@@ -4316,13 +4316,13 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             ColliderSetHeight(&work->collider, 24);
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
             work->unk_07C = 3;
-            work->target->flags &= 0xFFFE;
+            *work->flags &= 0xFFFE;
             work->state = 3;
         }
         break;
     case 3:
-        if (work->target->flags & 1) {
-            work->target->flags &= 0xFFFE;
+        if (*work->flags & 1) {
+            *work->flags &= 0xFFFE;
             args[0] = work->x;
             args[1] = work->y;
             args[2] = -((work->unk_07C - 1) * 7 << 9);
@@ -4355,11 +4355,11 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     frame = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state <= 2) {
-        DrawSprite(x, y + 24, gUnk_09999E0C, (void*)work->tiles, (void*)work->palette, 0,
+        DrawSprite(x, y + 24, gUnk_09999E0C, work->tiles, work->palette, 0,
                       frame, (u16)(-4100 - (work->y >> 8) * 4));
-        DrawSprite(x, y, gUnk_09999E1C, (void*)work->tiles, (void*)work->palette, 0, frame,
+        DrawSprite(x, y, gUnk_09999E1C, work->tiles, work->palette, 0, frame,
                       (u16)(-4100 - (work->y >> 8) * 4));
-        DrawSprite(x + 8, y - 16, gUnk_09999E0C, (void*)work->tiles, (void*)work->palette, 0,
+        DrawSprite(x + 8, y - 16, gUnk_09999E0C, work->tiles, work->palette, 0,
                       frame, (u16)(-4100 - (work->y >> 8) * 4));
     }
 
@@ -4367,16 +4367,16 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     frame = GetBattleSpritePriorityFlags(work->y);
 
     if (work->unk_07C > 0) {
-        DrawSprite(x, y, (void*)gUnk_09EF9740[work->unk_07C + 1], (void*)work->tiles,
-                      (void*)work->palette, 0, frame,
+        DrawSprite(x, y, gUnk_09EF9740[work->unk_07C + 1], work->tiles,
+                      work->palette, 0, frame,
                       (u16)(-4100 - (work->y >> 8) * 4));
     }
 }
 
 void task_bos_md_dai_3(MdDaiWork* work) {
     ColliderUnregister(&work->collider);
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjTiles((void*)work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles);
     gBtlWork->flags &= 0xFFFFFFFFFFEFFFFF;
 }
 
@@ -4393,8 +4393,8 @@ void task_bos_md_hahen_0(MdHahenWork* work, s32* src) {
     work->vy = gSineTable[angle] * speed >> 8;
     work->vz = -((GetRandom() & 0x1FF) + 0x100);
     work->timer = 3;
-    work->palette = (u32)LoadObjPalette(gUnk_09A3C9BC, 32);
-    work->tiles = (u32)LoadObjTiles(gUnk_09999ED0, 0x480);
+    work->palette = LoadObjPalette(gUnk_09A3C9BC, 32);
+    work->tiles = LoadObjTiles(gUnk_09999ED0, 0x480);
     work->gfx = gUnk_09EF9740[GetRandom() % 2];
 }
 
@@ -4443,13 +4443,13 @@ void task_bos_md_hahen_2(MdHahenWork* work) {
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
-    DrawSprite(x, y, (void*)work->gfx, (void*)work->tiles, (void*)work->palette,
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette,
                   flag, frame, (u16)(-4100 - (work->y >> 8) * 4));
 }
 
 void task_bos_md_hahen_3(MdHahenWork* work) {
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjTiles((void*)work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles);
 }
 
 void func_080FD9B8(s16 model, s16 slot) {

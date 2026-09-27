@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_room.c
-    start: 0x09EF9684
-    end: 0x09EF9740
   - name: sprites_room_frames.s
     start: 0x0999389C
     end: 0x09999E0C
+    data_start: 0x09EF9684
+    data_end: 0x09EF9740
   - name: sprites_room_maps.s
     start: 0x09A1E0DC
     end: 0x09A208DC
@@ -27,12 +26,11 @@ objects:
     start: 0x09A3C75C
     end: 0x09A3C89C
   jp:
-  - name: sprites_room.c
-    start: 0x09ED0A70
-    end: 0x09ED0B2C
   - name: sprites_room_frames.s
     start: 0x099483B0
     end: 0x0994E920
+    data_start: 0x09ED0A70
+    data_end: 0x09ED0B2C
   - name: sprites_room_maps.s
     start: 0x099D2B64
     end: 0x099D5364
@@ -40,12 +38,11 @@ objects:
     start: 0x099F11E4
     end: 0x099F1324
   eu:
-  - name: sprites_room.c
-    start: 0x09F85100
-    end: 0x09F851BC
   - name: sprites_room_frames.s
     start: 0x09999B58
     end: 0x099A00C8
+    data_start: 0x09F85100
+    data_end: 0x09F851BC
   - name: sprites_room_maps.s
     start: 0x09A6FCA0
     end: 0x09A724A0

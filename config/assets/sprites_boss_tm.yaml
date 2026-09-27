@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_boss_tm.c
-    start: 0x09EF3884
-    end: 0x09EF3A48
   - name: sprites_boss_tm_frames.s
     start: 0x0962ACE0
     end: 0x0962EC5C
+    data_start: 0x09EF3884
+    data_end: 0x09EF3A48
   - name: sprites_boss_tm_tiles.s
     start: 0x09652E84
     end: 0x0965DC04
@@ -27,12 +26,11 @@ objects:
     start: 0x096FB2C4
     end: 0x096FB404
   jp:
-  - name: sprites_boss_tm.c
-    start: 0x09ECAC70
-    end: 0x09ECAE34
   - name: sprites_boss_tm_frames.s
     start: 0x095E37BC
     end: 0x095E7438
+    data_start: 0x09ECAC70
+    data_end: 0x09ECAE34
   - name: sprites_boss_tm_tiles.s
     start: 0x0960B660
     end: 0x096163E0
@@ -40,12 +38,11 @@ objects:
     start: 0x096B3AA0
     end: 0x096B3BE0
   eu:
-  - name: sprites_boss_tm.c
-    start: 0x09F7EAD0
-    end: 0x09F7ED3C
   - name: sprites_boss_tm_frames.s
     start: 0x095EC1C0
     end: 0x095F8BE4
+    data_start: 0x09F7EAD0
+    data_end: 0x09F7ED3C
   - name: sprites_boss_tm_tiles.s
     start: 0x0961CE0C
     end: 0x09627B8C

@@ -482,15 +482,12 @@ typedef struct MapDbgWork {
 } MapDbgWork;
 
 typedef struct MapGmkEnmWork {
-    FldPos unk_000;
-    u8 unk_010[0x0A];
-    u16 unk_01A;
-    u8 unk_01C[0x24];
+    FldObj obj;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
-    s32 (*unk_064)(struct MapGmkEnmWork*);
+    u8 (*unk_064)(struct MapGmkEnmWork*);
     u8 unk_068;
     u8 unk_069[0x03];
     s32 unk_06C;
@@ -498,26 +495,16 @@ typedef struct MapGmkEnmWork {
     u8 unk_072[0x02];
 } MapGmkEnmWork;
 
+typedef struct MapGmkDmyWork {
+    void* tiles;
+} MapGmkDmyWork;
+
 typedef struct MapGmkJumpWork {
-    s32 unk_000;
-    s32 unk_004;
-    s32 unk_008;
-    s32 unk_00C;
-    u8 unk_010[0x04];
-    u8 unk_014;
-    u8 unk_015[0x2B];
-    AnimState collider;
-    u8 unk_058[0x08];
-    void* unk_060;
-    s32 unk_064;
-    u8 unk_068[0x04];
-    u16 unk_06C;
-    u16 unk_06E;
-    u16 unk_070;
-    u8 unk_072[0x2A];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8 unk_0BC[0x04];
     u8 unk_0C0;
     u8 unk_0C1[0x03];
@@ -526,28 +513,15 @@ typedef struct MapGmkJumpWork {
 } MapGmkJumpWork;
 
 typedef struct MapGmkTutorialWork {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_00C;
-    u8 unk_010[0x04];
-    u8 unk_014;
-    u8 unk_015[0x05];
-    u16 unk_01A;
-    u8 unk_01C[0x24];
-    u8 collider[0x2E];
-    u16 unk_06E;
-    u8 unk_070[0x04];
-    s32 unk_074;
-    u8 unk_078[0x24];
+    FldObj obj;
+    Collider collider;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     u8 unk_0A4[0x04];
     u8 unk_0A8;
     u8 unk_0A9[0x03];
     u8 (*update)(struct MapGmkTutorialWork*);
     TaskPool tasks;
-    u8 unk_0C0[0x04];
 } MapGmkTutorialWork;
 
 typedef struct MapGmk01Work {
@@ -565,15 +539,11 @@ typedef struct MapGmk01Work {
 } MapGmk01Work;
 
 typedef struct MapGmkSpiderWork {
-    s32 unk_000;
-    s32 unk_004;
-    s32 unk_008;
-    u8 unk_00C[0x0E];
-    u16 unk_01A;
-    u8 unk_01C[0x80];
+    FldObj obj;
+    u8 unk_040[0x5C];
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u8 (*update)(struct MapGmkSpiderWork*);
     u8 unk_0C4;

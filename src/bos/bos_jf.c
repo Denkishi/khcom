@@ -839,7 +839,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
 }
 
 void task_bos_jf_lamp_2(JfLampWork* work) {
-    BtlObj* sub = &((BtlObj*)work->jf)[1];
+    BtlObj* sub = &work->jf->sub;
     void* pal;
     u16 mode;
     s16 x;

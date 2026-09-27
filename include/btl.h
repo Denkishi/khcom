@@ -104,7 +104,7 @@ typedef struct RikuAttackDef {
 typedef struct BtlSoraWork {
     void* tiles;
     ObjPalette* palette;
-    u32 gfx;
+    void* gfx;
     AnimState anim;
     TaskPool tasks;
     u32 unk_038;
@@ -130,7 +130,7 @@ typedef struct BtlSoraWork {
     u16 unk_178;
     u8 unk_17A[0xA];
     const u16* unk_184;
-    u32 task;
+    Task* task;
     u8 unk_18C[0x4];
     u8 unk_190;
     u8 unk_191[0xB];
@@ -145,7 +145,7 @@ typedef struct BtlRikuWork {
     void* tiles2;
     void* tiles;
     ObjPalette* palette;
-    u32 gfx;
+    void* gfx;
     AnimState anim;
     TaskPool tasks;
     u32 unk_03C;

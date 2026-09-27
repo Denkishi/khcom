@@ -6219,7 +6219,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (p->unk_0E8 != 2) {
-        work->gfx = (u32)AnimUpdate(&work->anim);
+        work->gfx = AnimUpdate(&work->anim);
     }
 
     ColliderSetPosition(&p->collider, p->x, p->y, p->z);

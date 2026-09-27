@@ -6482,15 +6482,15 @@ void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl) {
     if (p->face->portraitId != 62) {
         SetObjTileSource(p->tiles, anim[p->face->expressionId].tiles);
         UpdateAllocatedObjPalette(p->palette, anim[p->face->expressionId].palette);
-        AnimInit(p->anim, anim[p->face->expressionId].anims, anim[p->face->expressionId].gfxTable);
-        AnimStart(p->anim, 0, anim[p->face->expressionId].unk_11);
-        p->gfx = AnimGetGfx(p->anim);
+        AnimInit(&p->anim, anim[p->face->expressionId].anims, anim[p->face->expressionId].gfxTable);
+        AnimStart(&p->anim, 0, anim[p->face->expressionId].unk_11);
+        p->gfx = AnimGetGfx(&p->anim);
     } else {
         SetObjTileSource(p->tiles, anim->tiles);
         UpdateAllocatedObjPalette(p->palette, anim->palette);
-        AnimInit(p->anim, anim->anims, anim->gfxTable);
-        AnimStart(p->anim, 0, anim->unk_11);
-        p->gfx = AnimGetGfx(p->anim);
+        AnimInit(&p->anim, anim->anims, anim->gfxTable);
+        AnimStart(&p->anim, 0, anim->unk_11);
+        p->gfx = AnimGetGfx(&p->anim);
     }
 }
 u8 msgface_1(MsgFaceWork* p, void* a) {
@@ -6547,7 +6547,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     if (gEventState->unk_7B == 1) {
         if (p->unk_32 == 0) {
             if (anim != NULL && anim[p->face->expressionId].unk_10 > 1) {
-                AnimStart(p->anim, 1, anim[p->face->expressionId].unk_11);
+                AnimStart(&p->anim, 1, anim[p->face->expressionId].unk_11);
             }
 
             p->unk_32 = 1;
@@ -6555,7 +6555,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     } else {
         if (p->unk_32 == 1) {
             if (anim != NULL) {
-                AnimStart(p->anim, 0, anim[p->face->expressionId].unk_11);
+                AnimStart(&p->anim, 0, anim[p->face->expressionId].unk_11);
             }
 
             p->unk_32 = 0;
@@ -6568,7 +6568,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
         FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
     }
 
-    p->gfx = AnimUpdate(p->anim);
+    p->gfx = AnimUpdate(&p->anim);
     return 1;
 }
 void msgface_2(MsgFaceWork* p) {
@@ -6634,9 +6634,9 @@ u8 func_08073B9C(MsgFaceWork* p, void* a) {
     if (t != NULL) {
         SetObjTileSource(p->tiles, t[p->face->expressionId].tiles);
         UpdateAllocatedObjPalette(p->palette, t[p->face->expressionId].palette);
-        AnimInit(p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
-        AnimStart(p->anim, 0, t[p->face->expressionId].unk_11);
-        p->gfx = AnimGetGfx(p->anim);
+        AnimInit(&p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
+        AnimStart(&p->anim, 0, t[p->face->expressionId].unk_11);
+        p->gfx = AnimGetGfx(&p->anim);
         p->unk_31 = 0;
         p->unk_30 = 8;
         p->face->command = 0;
@@ -6675,9 +6675,9 @@ u8 func_08073CA4(MsgFaceWork* p, void* a) {
         if (t != NULL) {
             SetObjTileSource(p->tiles, t[p->face->expressionId].tiles);
             UpdateAllocatedObjPalette(p->palette, t[p->face->expressionId].palette);
-            AnimInit(p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
-            AnimStart(p->anim, 0, t[p->face->expressionId].unk_11);
-            p->gfx = AnimGetGfx(p->anim);
+            AnimInit(&p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
+            AnimStart(&p->anim, 0, t[p->face->expressionId].unk_11);
+            p->gfx = AnimGetGfx(&p->anim);
             p->unk_31 = 0;
             p->unk_30 = 8;
         }
@@ -6740,16 +6740,16 @@ void msgwait_0(MsgWaitWork* p, u8* arg) {
     LoadObjPaletteBank(p->palette->index, gBStatesPalette);
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
     SetObjTileSource(p->tiles, gFEventTiles);
-    AnimInit(p->unk_DC, gFEventAnims, gFEventFrames);
-    AnimStart(p->unk_DC, 2, 1);
+    AnimInit(&p->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&p->anim, 2, 1);
     p->timer = 0;
     gEventState->unk_7D = 1;
 }
 u8 msgwait_1(MsgWaitWork* p, void* a) {
-    p->gfx = AnimUpdate(p->unk_DC);
+    p->gfx = AnimUpdate(&p->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(p->unk_DC, 3, 1);
+        AnimStart(&p->anim, 3, 1);
 
         if (p->unk_103 == 4) {
             gEventState->unk_7D = 0;
@@ -6765,7 +6765,7 @@ u8 msgwait_1(MsgWaitWork* p, void* a) {
 u8 func_08073F78(MsgWaitWork* p) {
     u8 r;
 
-    p->gfx = AnimUpdate(p->unk_DC);
+    p->gfx = AnimUpdate(&p->anim);
     p->timer++;
     if (p->timer <= 15) {
         r = 1;
@@ -6792,27 +6792,27 @@ void msgwait_3(MsgWaitWork* p) {
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
 }
-void msgwait_yesno_0(MsgWaitYesNoWork* p, u8* a) {
+void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     p->unk_103 = *a;
     p->tiles = AllocObjTiles(64, 0);
     p->palette = LoadObjPalette(gBStatesPalette, 32);
-    LoadObjPaletteBank(((ObjPalette*)p->palette)->index, gBStatesPalette);
-    FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
+    LoadObjPaletteBank(p->palette->index, gBStatesPalette);
+    FadeSetPaletteExcluded(p->palette->index + 16, 1);
     SetObjTileSource(p->tiles, gFEventTiles);
-    AnimInit((AnimState*)p->anim, gFEventAnims, gFEventFrames);
-    AnimStart((AnimState*)p->anim, 2, 1);
-    p->unk_102 = 0;
+    AnimInit(&p->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&p->anim, 2, 1);
+    p->timer = 0;
     p->tiles2 = AllocObjTiles(288, 0);
     p->palette2 = LoadObjPalette(gUnk_09614418, 32);
     LoadObjPaletteBank(((ObjPalette*)p->palette2)->index, gUnk_09614418);
     SetObjTileSource(p->tiles2, gUnk_090A4664);
-    AnimInit((AnimState*)p->anim2, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart((AnimState*)p->anim2, 2, 1);
-    p->gfx2 = AnimGetGfx((AnimState*)p->anim2);
+    AnimInit(&p->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    AnimStart(&p->anim2, 2, 1);
+    p->gfx2 = AnimGetGfx(&p->anim2);
     p->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
     p->palette3 = LoadObjPalette(gCard00Palette, 32);
     LoadObjPaletteBank(((ObjPalette*)p->palette3)->index, gCard00Palette);
-    FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
+    FadeSetPaletteExcluded(p->palette->index + 16, 1);
     InitTextSlots(p->textSlots, 10);
     InitTextSlots(p->textSlots2, 10);
     p->palette4 = _08066468(1);
@@ -6826,27 +6826,27 @@ void msgwait_yesno_0(MsgWaitYesNoWork* p, u8* a) {
     p->x = 0x5800;
     p->unk_100 = 1;
     p->y = gUnk_09033D28[1];
-    p->unk_102 = 0;
+    p->timer = 0;
     gEventState->unk_7D = 1;
     gEventState->unk_85 = 1;
     gEventState->unk_84 = 0;
     p->unk_104 = 0;
 }
-u8 func_0807420C(MsgWaitYesNoWork* p, void* a) {
+u8 func_0807420C(MsgWaitWork* p, void* a) {
     switch (GetKeysPressed()) {
     case DPAD_UP:
         if (p->unk_100 != 0) {
             p->unk_100--;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
-        p->unk_102 = 1;
+        p->timer = 1;
         break;
     case DPAD_DOWN:
         if (p->unk_100 == 0) {
             p->unk_100++;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
-        p->unk_102 = 1;
+        p->timer = 1;
         break;
     case A_BUTTON:
     case START_BUTTON:
@@ -6875,25 +6875,25 @@ u8 func_0807420C(MsgWaitYesNoWork* p, void* a) {
         return 0;
     }
 
-    if (p->unk_102 != 0) {
-        ApproachValue(&p->y, gUnk_09033D28[p->unk_100], p->unk_102);
-        p->unk_102--;
+    if (p->timer != 0) {
+        ApproachValue(&p->y, gUnk_09033D28[p->unk_100], p->timer);
+        p->timer--;
     }
-    p->gfx = AnimUpdate(p->anim);
+    p->gfx = AnimUpdate(&p->anim);
     return 1;
 }
-u8 msgwait_yesno_1(MsgWaitYesNoWork* p, void* a) {
-    p->gfx = AnimUpdate(p->anim);
+u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
+    p->gfx = AnimUpdate(&p->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(p->anim, 3, 1);
+        AnimStart(&p->anim, 3, 1);
         p->unk_104 = 1;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(a, (TaskUpdateFunc)func_0807420C);
     }
     return 1;
 }
-void msgwait_yesno_2(MsgWaitYesNoWork* p) {
+void msgwait_yesno_2(MsgWaitWork* p) {
     switch (p->unk_104) {
     case 0:
         if (gEventState->unk_8B != 0) {
@@ -6910,7 +6910,7 @@ void msgwait_yesno_2(MsgWaitYesNoWork* p) {
         break;
     }
 }
-void msgwait_yesno_3(MsgWaitYesNoWork* p) {
+void msgwait_yesno_3(MsgWaitWork* p) {
     ReleaseObjTiles(p->tiles2);
     ReleaseObjTiles(p->tiles3);
     ReleaseObjPalette(p->palette3);

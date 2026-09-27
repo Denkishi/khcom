@@ -86,7 +86,7 @@ typedef struct MsgFaceWork {
     void* tiles;
     void* palette;
     void* gfx;
-    u8 anim[0x18];
+    AnimState anim;
     s32 x;
     s32 y;
     s32 scaleX;
@@ -174,31 +174,18 @@ typedef struct EventCameraWork {
 
 typedef struct MsgWaitWork {
     void* tiles;
-    u8 unk_04[0x10];
-    ObjPalette* palette;
-    u8 unk_18[0xA4];
-    void* gfx;
-    u8 unk_C0[0x1C];
-    u8 unk_DC[0x26];
-    u8 timer;
-    u8 unk_103;
-    u8 unk_104[4];
-} MsgWaitWork;
-
-typedef struct MsgWaitYesNoWork {
-    void* tiles;
     void* tiles2;
     void* palette2;
     void* tiles3;
     void* palette3;
-    void* palette;
+    ObjPalette* palette;
     void* palette4;
     TextSlot textSlots[10];
     TextSlot textSlots2[10];
     void* gfx;
     void* gfx2;
-    u8 anim2[0x18];
-    u8 anim[0x18];
+    AnimState anim2;
+    AnimState anim;
     u8 textSlotCount;
     u8 textSlotCount2;
     u8 unk_F6[2];
@@ -206,11 +193,11 @@ typedef struct MsgWaitYesNoWork {
     s32 y;
     u8 unk_100;
     u8 unk_101;
-    u8 unk_102;
+    u8 timer;
     u8 unk_103;
     u8 unk_104;
     u8 unk_105[3];
-} MsgWaitYesNoWork;
+} MsgWaitWork;
 
 typedef struct TextGlyphSprite {
     s32 x;
@@ -285,7 +272,7 @@ u8 func_08073B04(MsgFaceWork* p, void* a);
 u8 func_08073B54(MsgFaceWork* p, void* a);
 u8 func_08073B9C(MsgFaceWork* p, void* a);
 u8 func_08073CA4(MsgFaceWork* p, void* a);
-u8 func_0807420C(MsgWaitYesNoWork* p, void* a);
+u8 func_0807420C(MsgWaitWork* p, void* a);
 void _0806C3A0(u8 a, void* b);
 void func_080635C4(void);
 
@@ -347,7 +334,7 @@ u8 eu_0806C848(EventSeqWork* work);
 u8 eu_0806C974(EventSeqWork* work);
 #endif
 
-void msgwait_yesno_0(MsgWaitYesNoWork* p, u8* a);
+void msgwait_yesno_0(MsgWaitWork* p, u8* a);
 u8 func_0806D830(EventSeqWork* p, void* a);
 void func_08070008(EventCharaWork* p);
 u8 func_080700D4(EventCharaWork* p, void* a);

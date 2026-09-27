@@ -25,6 +25,7 @@ s16 eu_0806629C(TextSlot* p, u8 n);
 s32 func_080660C0(TextChar* a, void** p);
 void FreeSmallFontResources(void* a, void* b);
 u16 EncodeSmallFontString(u8* s, u16* out);
+u16 FormatSmallFontDecimal(s32 v, u16* out);
 u16 FormatSmallFontHex(s32 v, u16* out);
 s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n);
 void func_0806BA0C(s16 v, u8* out);

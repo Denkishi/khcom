@@ -52,6 +52,13 @@ typedef struct EvSoundWork {
     s32 unk_08;
 } EvSoundWork;
 
+typedef struct EventDebugWork {
+    void* tiles;
+    void* palette;
+    u16 digits[16];
+    u8 digitCount;
+} EventDebugWork;
+
 typedef struct EffectWork {
     EventCharaWork* actor;
     void* tiles;
@@ -81,8 +88,6 @@ extern const char gUnk_08F70990[];
 #ifdef VERSION_EU
 extern Mode gUnkEu_09F5D6EC;
 #endif
-
-u8 FormatSmallFontDecimal(s32 a, void* b);
 
 void mode_eventselect_0(void);
 void mode_eventselect_1(void);
@@ -133,10 +138,10 @@ s32 EV_SOUND_1(EvSoundWork* w);
 void EV_SOUND_2(void);
 void EV_SOUND_3(void);
 void func_080760D8(EvSoundWork* w);
-void Event_Debug_0(u8* work);
-s32 Event_Debug_1(u8* work);
-void Event_Debug_2(u8* work);
-void Event_Debug_3(s32* p);
+void Event_Debug_0(EventDebugWork* work);
+s32 Event_Debug_1(EventDebugWork* work);
+void Event_Debug_2(EventDebugWork* work);
+void Event_Debug_3(EventDebugWork* work);
 
 s16 GetEventListLength(u8 a);
 

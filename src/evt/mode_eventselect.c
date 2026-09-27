@@ -861,23 +861,22 @@ void func_08076110(u16 song, s16 x, s16 y) {
     }
 }
 
-void Event_Debug_0(u8* work) {
-    *(void**)&work[0x00] = LoadSmallFontTiles();
-    *(void**)&work[0x04] = LoadSmallFontPalette();
+void Event_Debug_0(EventDebugWork* work) {
+    work->tiles = LoadSmallFontTiles();
+    work->palette = LoadSmallFontPalette();
 }
 
-s32 Event_Debug_1(u8* work) {
-    work[0x28] = FormatSmallFontDecimal(gEventState->unk_6C, &work[0x08]);
+s32 Event_Debug_1(EventDebugWork* work) {
+    work->digitCount = FormatSmallFontDecimal(gEventState->unk_6C, work->digits);
     return 1;
 }
 
-void Event_Debug_2(u8* work) {
-    DrawSmallFontString(0, 0, &work[0x08], *(s32*)&work[0x00], *(s32*)&work[0x04], 0,
-                  work[0x28]);
+void Event_Debug_2(EventDebugWork* work) {
+    DrawSmallFontString(0, 0, work->digits, work->tiles, work->palette, 0, work->digitCount);
 }
 
-void Event_Debug_3(s32* p) {
-    FreeSmallFontResources(p[0], p[1]);
+void Event_Debug_3(EventDebugWork* work) {
+    FreeSmallFontResources(work->tiles, work->palette);
 }
 
 Mode gModeEventselect = {

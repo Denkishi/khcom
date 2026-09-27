@@ -54,7 +54,7 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     w->unk_1D = 0;
     w->unk_A3 = 0;
     UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->unk_1C].unk_00 << 5]);
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette)->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette->index + 16, 1);
     FadeSetPaletteExcluded(w->palette2->index + 16, 1);
 
     for (i = 0; i < w->unk_A2; i++) {
@@ -110,23 +110,23 @@ void WorldSel_Before_2(WorldSelBeforeWork* w) {
                (u16)(-0x1004 - ((w->y - 512) >> 8) * 4));
 }
 
-void WorldSel_Before_3(void** p) {
-    ReleaseObjTiles(p[0]);
-    ReleaseObjTiles(p[2]);
-    ReleaseObjPalette(p[1]);
-    ReleaseObjPalette(p[3]);
+void WorldSel_Before_3(WorldSelBeforeWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjTiles(w->tiles2);
+    ReleaseObjPalette(w->palette);
+    ReleaseObjPalette(w->palette2);
 }
 void func_080A581C(u8* work) {
     TaskCreate(&work[0x10], &gTaskDescWorldSelBefore, work);
 }
 
-void CreateWorldSelBeforeTask(void* a, s32 b, s32 c, s32 d) {
-    s32 args[3];
+void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z) {
+    WorldSelBeforeArgs args;
 
-    args[0] = b;
-    args[1] = c;
-    args[2] = d;
-    TaskCreate(a, &gTaskDescWorldSelBefore, args);
+    args.unk_00 = x;
+    args.unk_04 = y;
+    args.unk_08 = z;
+    TaskCreate(a, &gTaskDescWorldSelBefore, &args);
 }
 
 WorldSelAnim gWorldSelAnims[30] = {
@@ -168,5 +168,5 @@ TaskDesc gTaskDescWorldSelBefore = {
     (TaskUpdateFunc)WorldSel_Before_1,
     (TaskFunc)WorldSel_Before_2,
     (TaskFunc)WorldSel_Before_3,
-    0xB8,
+    sizeof(WorldSelBeforeWork),
 };

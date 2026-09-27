@@ -1486,9 +1486,9 @@ typedef struct GimmickCardArgs {
 
 typedef struct WorldSelBeforeWork {
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     void* tiles2;
-    UnkStruct_080038C8* palette2;
+    ObjPalette* palette2;
     s32 x;
     s32 y;
     s32 z;
@@ -1501,6 +1501,7 @@ typedef struct WorldSelBeforeWork {
     u8 angle[10];
     u8 unk_A2;
     u8 unk_A3;
+    u8 unk_A4[0x14];
 } WorldSelBeforeWork;
 
 typedef struct WorldSelBeforeArgs {

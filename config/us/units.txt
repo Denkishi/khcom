@@ -72,12 +72,10 @@ sprites_smn_frames.s
 sprites_sora_frames.s
 sprites_evt_1.c
 sprites_fld_1.c
-sprites_btl_1.c
-sprites_fld_2.c
-sprites_btl_2.c
 sprites_evt_frames_1.s
 sprites_fld_frames_1.s
 sprites_btl_frames_1.s
+sprites_fld_2.c
 sprites_fld_frames_2.s
 sprites_btl_frames_2.s
 sprites_riku_frames.s
@@ -88,7 +86,6 @@ sprites_emy_frames_1.s
 sprites_map_tasks_1.c
 sprites_map_tasks_frames_1.s
 sprites_emy_frames_2.s
-sprites_btl_3.c
 sprites_btl_frames_3.s
 sprites_mode_test_frames_1.s
 sprites_btl_hud_frames.s

@@ -355,7 +355,7 @@ typedef struct JfMajinWork {
     s8 unk_6A;
     u8 unk_6B[0x1];
     TaskPool tasks;
-    u32 task;
+    Task* task;
 } JfMajinWork;
 
 typedef struct JfBorderlineWork {

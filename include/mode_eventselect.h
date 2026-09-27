@@ -25,6 +25,7 @@
 #include "malloc.h"
 #include "m4a.h"
 #include "evt_types.h"
+#include "event_chara_types.h"
 #include "game.h"
 #include "card.h"
 #include "mode.h"
@@ -51,31 +52,8 @@ typedef struct EvSoundWork {
     s32 unk_08;
 } EvSoundWork;
 
-typedef struct EventTaskHost {
-    u8 unk_00[0x10];
-    TaskPool tasks;
-} EventTaskHost;
-
-typedef struct EventBody {
-    s32 unk_00;
-    s32 x;
-    s32 y;
-    s32 z;
-} EventBody;
-
-typedef struct EventActor {
-    u8 unk_00[0x26];
-    u8 unk_26;
-    u8 unk_27;
-    EventBody body;
-    u8 unk_38[0x06];
-    u16 unk_3E;
-    u8 unk_40[0x172];
-    u8 unk_1B2;
-} EventActor;
-
 typedef struct EffectWork {
-    EventActor* actor;
+    EventCharaWork* actor;
     void* tiles;
     void* palette;
     void* gfx;
@@ -98,7 +76,7 @@ typedef struct EffectWork {
 extern EventState* gEventState;
 extern u8 gMaruxhaBtEffPalette[];
 extern u8 gMaruxhaBtEff2Tiles[];
-extern const s16 gUnk_0903380C[][6];
+extern const EventCharaParams gUnk_0903380C[];
 extern const char gUnk_08F70990[];
 #ifdef VERSION_EU
 extern Mode gUnkEu_09F5D6EC;
@@ -109,47 +87,47 @@ u8 FormatSmallFontDecimal(s32 a, void* b);
 void mode_eventselect_0(void);
 void mode_eventselect_1(void);
 void mode_eventselect_2(void);
-void Hanabira_0(EffectWork* w, void* arg);
+void Hanabira_0(EffectWork* w, EventCharaWork* arg);
 s32 Hanabira_1(EffectWork* w);
 void Hanabira_2(EffectWork* w);
 void Hanabira_3(EffectWork* w);
-void Hanabira_c_0(EffectWork* w, EventActor* arg);
+void Hanabira_c_0(EffectWork* w, EventCharaWork* arg);
 s32 Hanabira_c_1(EffectWork* w);
 void Hanabira_c_2(EffectWork* w);
 void Hanabira_c_3(EffectWork* w);
-void smoke_0(EffectWork* w, EventActor* arg);
-void Exclamation_0(EffectWork* w, EventActor* arg);
-void balloon_0(EffectWork* w, EventActor* arg);
+void smoke_0(EffectWork* w, EventCharaWork* arg);
+void Exclamation_0(EffectWork* w, EventCharaWork* arg);
+void balloon_0(EffectWork* w, EventCharaWork* arg);
 s32 func_08075720(EffectWork* w);
 s32 Exclamation_1(EffectWork* w);
 void EffectDrawObj(EffectWork* w);
 void EffectReleaseObj(EffectWork* w);
-void Question_0(EffectWork* w, EventActor* arg);
-void func_080758D0(EffectWork* w, EventActor* arg);
+void Question_0(EffectWork* w, EventCharaWork* arg);
+void func_080758D0(EffectWork* w, EventCharaWork* arg);
 s32 Question_1(EffectWork* w);
 s32 func_080759B0(EffectWork* w);
 void func_080759E0(EffectWork* w);
 void func_08075A54(EffectWork* w);
-void GlowNose_0(EffectWork* w, EventActor* arg);
+void GlowNose_0(EffectWork* w, EventCharaWork* arg);
 s32 GlowNose_1(EffectWork* w);
-void GlowNose2_0(EffectWork* w, EventActor* arg);
+void GlowNose2_0(EffectWork* w, EventCharaWork* arg);
 s32 GlowNose2_1(EffectWork* w);
-void down_0(EffectWork* w, EventActor* arg);
+void down_0(EffectWork* w, EventCharaWork* arg);
 s32 down_1(EffectWork* w);
 s32 down_2(EffectWork* w);
 void down_3(EffectWork* w);
-void Tinkerbell_0(EffectWork* w, void* arg);
+void Tinkerbell_0(EffectWork* w, EventCharaWork* arg);
 s32 Tinkerbell_1(EffectWork* w);
 void Tinkerbell_2(EffectWork* w);
 void Tinkerbell_3(EffectWork* w);
-void CreateDownTask(EventTaskHost* h);
-void CreateSmokeTask(EventTaskHost* h);
-void CreateExclamationTask(EventTaskHost* h);
-void CreateBalloonTask(EventTaskHost* h);
-void CreateQuestionTask(EventTaskHost* h);
-void CreateGlowNoseTask(EventTaskHost* h);
-void CreateGlowNose2Task(EventTaskHost* h);
-void CreateHanabiraTask(EventTaskHost* h);
+void CreateDownTask(EventCharaWork* p);
+void CreateSmokeTask(EventCharaWork* p);
+void CreateExclamationTask(EventCharaWork* p);
+void CreateBalloonTask(EventCharaWork* p);
+void CreateQuestionTask(EventCharaWork* p);
+void CreateGlowNoseTask(EventCharaWork* p);
+void CreateGlowNose2Task(EventCharaWork* p);
+void CreateHanabiraTask(EventCharaWork* p);
 void EV_SOUND_0(EvSoundWork* w, u8* arg);
 s32 EV_SOUND_1(EvSoundWork* w);
 void EV_SOUND_2(void);

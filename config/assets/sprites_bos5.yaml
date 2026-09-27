@@ -14,18 +14,16 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_bos5_1.c
-    start: 0x09EF9740
-    end: 0x09EF9788
-  - name: sprites_bos5_2.c
-    start: 0x09EF9BB0
-    end: 0x09EF9BC4
   - name: sprites_bos5_frames_1.s
     start: 0x09999E0C
     end: 0x0999C394
+    data_start: 0x09EF9740
+    data_end: 0x09EF9788
   - name: sprites_bos5_frames_2.s
     start: 0x099A8718
     end: 0x099A8758
+    data_start: 0x09EF9BB0
+    data_end: 0x09EF9BC4
   - name: sprites_bos5_tiles.s
     start: 0x099A92DC
     end: 0x099FB53C
@@ -33,18 +31,16 @@ objects:
     start: 0x09A208DC
     end: 0x09A324DC
   jp:
-  - name: sprites_bos5_1.c
-    start: 0x09ED0B2C
-    end: 0x09ED0B74
-  - name: sprites_bos5_2.c
-    start: 0x09ED0F9C
-    end: 0x09ED0FB0
   - name: sprites_bos5_frames_1.s
     start: 0x0994E920
     end: 0x09950EA8
+    data_start: 0x09ED0B2C
+    data_end: 0x09ED0B74
   - name: sprites_bos5_frames_2.s
     start: 0x0995D1A0
     end: 0x0995D1E0
+    data_start: 0x09ED0F9C
+    data_end: 0x09ED0FB0
   - name: sprites_bos5_tiles.s
     start: 0x0995DD64
     end: 0x099AFFC4
@@ -52,18 +48,16 @@ objects:
     start: 0x099D5364
     end: 0x099E6F64
   eu:
-  - name: sprites_bos5_1.c
-    start: 0x09F851BC
-    end: 0x09F85204
-  - name: sprites_bos5_2.c
-    start: 0x09F8581C
-    end: 0x09F85830
   - name: sprites_bos5_frames_1.s
     start: 0x099A00C8
     end: 0x099A2650
+    data_start: 0x09F851BC
+    data_end: 0x09F85204
   - name: sprites_bos5_frames_2.s
     start: 0x099B669C
     end: 0x099B66DC
+    data_start: 0x09F8581C
+    data_end: 0x09F85830
   - name: sprites_bos5_tiles.s
     start: 0x099B7260
     end: 0x09A24480

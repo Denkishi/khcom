@@ -26,8 +26,8 @@ struct ObjTiles* AllocSpriteFrameTiles(u16 size);
 u8 UpdateSpriteFrameTiles(struct ObjTiles* tiles, u16* sprite, void* src);
 
 void InitObjTilesAtSlot(struct ObjTiles* t, u16 slot, void* src, u16 size);
-void InitObjPaletteAtSlot(struct ObjTiles* t, u16 slot, void* src, u16 size);
-void UpdateAllocatedObjPalette(struct ObjTiles* t, void* src);
+void InitObjPaletteAtSlot(struct ObjPalette* palette, u16 slot, void* src, u16 size);
+void UpdateAllocatedObjPalette(struct ObjPalette* palette, void* src);
 u8 CanAllocObjPalette(u16 n);
 void func_08002F50(void);
 u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d);

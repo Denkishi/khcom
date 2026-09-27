@@ -120,8 +120,8 @@ u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h)
     p->entries[p->entryCount].priority = h;
     p->entries[p->entryCount].sprite = c;
 
-    if (((ObjTiles*)obj)->sprite != (u32)c) {
-        ((ObjTiles*)obj)->sprite = (u32)c;
+    if (((ObjTiles*)obj)->sprite != c) {
+        ((ObjTiles*)obj)->sprite = c;
         n = *(u16*)c;
         c = (u16*)c + 1;
         base = 0;
@@ -156,7 +156,7 @@ u8 func_080022D4(s16 x, s16 y, void* obj, void* e, s32 f, u16 g, u16 h) {
         p->entries[p->entryCount].affine = f;
         p->entries[p->entryCount].flags = g;
         p->entries[p->entryCount].priority = h;
-        p->entries[p->entryCount].sprite = (void*)((ObjTiles*)obj)->sprite;
+        p->entries[p->entryCount].sprite = ((ObjTiles*)obj)->sprite;
         p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
         p->entryCount += 1;
     }
@@ -426,7 +426,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     if (node == 0) {
         return 0;
     }
-    node->unk_20 = 0;
+    node->type = 0;
     node->count = size / 32;
     node->src = src;
     node->refCount = 0;
@@ -1009,9 +1009,9 @@ void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src) {
     }
 }
 
-void InitObjPaletteAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
+void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
     if (slot + (size >> 5) <= 0x10) {
-        t->sprite = 0;
+        t->type = 0;
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
@@ -1036,9 +1036,9 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
     u16 n;
 
     if (b != 0 && c != 0 && a->type == 2) {
-        if (a->sprite != (u32)b || a->src != c) {
+        if (a->sprite != b || a->src != c) {
             a->src = c;
-            a->sprite = (u32)b;
+            a->sprite = b;
             count = *b;
             b++;
             acc = 0;
@@ -1070,7 +1070,7 @@ ObjPalette* AllocObjPalette(u16 size) {
     if (node == 0) {
         return 0;
     }
-    node->unk_20 = 2;
+    node->type = 2;
     node->count = size / 32;
     node->src = 0;
     node->refCount = 0;
@@ -1113,8 +1113,8 @@ ObjPalette* AllocObjPalette(u16 size) {
     return 0;
 }
 
-void UpdateAllocatedObjPalette(ObjTiles* t, void* src) {
-    if (t->sprite == 2) {
+void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
+    if (t->type == 2) {
         LoadPalette(src, (void*)((t->index << 5) + 0x05000200), (u16)(t->count << 5));
     }
 }

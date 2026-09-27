@@ -21,7 +21,7 @@ typedef struct ObjTiles {
     u16 count;
     u16 unk_0A;
     ListNode node;
-    u32 sprite;
+    void* sprite;
     u8 allocated;
     u8 unk_25[0x03];
     u32 type;
@@ -35,7 +35,7 @@ typedef struct ObjPalette {
     u16 count;
     u16 unk_0A;
     ListNode node;
-    u32 unk_20;
+    u32 type;
     struct ObjPalette* self;
 } ObjPalette;
 

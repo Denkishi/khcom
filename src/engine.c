@@ -178,16 +178,14 @@ u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h) {
 
 void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
     SpriteWork* p;
-    u16* q5;
     u32 z;
 
     p = gSpriteWork;
     if (p->entryCount > 0x7F) {
         return;
     }
-    q5 = (u16*)((u32)p + p->entryCount * 24 + ((u32)&p->entries[0].x - (u32)p));
+    p->entries[p->entryCount].x = a;
     z = 0;
-    *q5 = a;
     p->entries[p->entryCount].y = b;
     p->entries[p->entryCount].tiles = d;
     p->entries[p->entryCount].palette = e;
@@ -202,16 +200,14 @@ void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
 
 void func_08002594(u16 a, u16 b, void* c, void* d, void* e, void* f, u16 g) {
     SpriteWork* p;
-    u16* q5;
     u32 z;
 
     p = gSpriteWork;
     if (p->entryCount > 0x7F) {
         return;
     }
-    q5 = (u16*)((u32)p + p->entryCount * 24 + ((u32)&p->entries[0].x - (u32)p));
+    p->entries[p->entryCount].x = a;
     z = 0;
-    *q5 = a;
     p->entries[p->entryCount].y = b;
     p->entries[p->entryCount].tiles = d;
     p->entries[p->entryCount].palette = e;

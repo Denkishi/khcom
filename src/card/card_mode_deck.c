@@ -42,7 +42,7 @@
 #include "card_ids.h"
 
 #ifndef VERSION_EU
-u8 gUnk_02034B08[20];
+TaskPool gUnk_02034B08;
 
 u8 gUnk_02034B1C;
 
@@ -63,8 +63,8 @@ u8 GetActiveDeckIndex(void);
 void func_080AAF78(void) {
     gUnk_02034B1C = 0;
     gUnk_0203A9DC = 2048;
-    TaskPoolInit(gUnk_02034B08, 1);
-    TaskCreate(gUnk_02034B08, &gTaskDescDeckexchange, &gUnk_02034B1C);
+    TaskPoolInit(&gUnk_02034B08, 1);
+    TaskCreate(&gUnk_02034B08, &gTaskDescDeckexchange, &gUnk_02034B1C);
 }
 void func_080AAFB4(void) {
     if (gSystemFlags & 1) {
@@ -73,15 +73,15 @@ void func_080AAFB4(void) {
         UpdatePlayTime();
     }
 
-    TaskPoolUpdate(gUnk_02034B08);
-    TaskPoolDraw(gUnk_02034B08);
+    TaskPoolUpdate(&gUnk_02034B08);
+    TaskPoolDraw(&gUnk_02034B08);
 
     if (gUnk_02034B1C == 6) {
         ModeRequest(&gModeSioChgCard, gUnk_0203A9DC);
     }
 }
 void func_080AB008(void) {
-    TaskPoolDestroy(gUnk_02034B08);
+    TaskPoolDestroy(&gUnk_02034B08);
 }
 #endif
 void DarkPoint_0(DarkPointWork* w) {
@@ -114,8 +114,8 @@ void DarkPoint_2(DarkPointWork* w) {
         DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
     }
 }
-void DarkPoint_3(void** p) {
-    ReleaseObjTiles(p[0]);
+void DarkPoint_3(DarkPointWork* w) {
+    ReleaseObjTiles(w->tiles);
 }
 
 void func_080AB1F8(u8 a, u16 b) {
@@ -408,7 +408,7 @@ TaskDesc gTaskDescDarkPoint = {
     (TaskUpdateFunc)DarkPoint_1,
     (TaskFunc)DarkPoint_2,
     (TaskFunc)DarkPoint_3,
-    0x10,
+    sizeof(DarkPointWork),
 };
 
 CardDescriptionText* gUnk_09EE8F48[98] = {

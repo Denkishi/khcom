@@ -2046,7 +2046,7 @@ void CardName_0(CardNameWork* w);
 void DarkPoint_0(DarkPointWork* w);
 s32 DarkPoint_1(DarkPointWork* w);
 void DarkPoint_2(DarkPointWork* w);
-void DarkPoint_3(void** p);
+void DarkPoint_3(DarkPointWork* w);
 #ifndef VERSION_EU
 void func_080A8C58(UnkStruct_0808C940* w, u8 b);
 #ifndef VERSION_EU
@@ -2462,7 +2462,7 @@ extern CardMsgWinWork* gUnk_02034AFC;
 extern SysMsgWinWork* gUnk_02034B00;
 #ifndef VERSION_EU
 extern u8 gUnk_02034B04[4];
-extern u8 gUnk_02034B08[20];
+extern TaskPool gUnk_02034B08;
 extern u8 gUnk_02034B1C;
 extern u8 gUnk_02034B1D[3];
 #endif

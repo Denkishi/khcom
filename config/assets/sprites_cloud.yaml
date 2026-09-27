@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_cloud.c
-    start: 0x09EDE688
-    end: 0x09EDE790
   - name: sprites_cloud_frames.s
     start: 0x08885B78
     end: 0x088A4A3C
+    data_start: 0x09EDE688
+    data_end: 0x09EDE790
   jp:
-  - name: sprites_cloud.c
-    start: 0x09EB6104
-    end: 0x09EB620C
   - name: sprites_cloud_frames.s
     start: 0x08879160
     end: 0x08898024
+    data_start: 0x09EB6104
+    data_end: 0x09EB620C
   eu:
-  - name: sprites_cloud.c
-    start: 0x09F592E0
-    end: 0x09F593E8
   - name: sprites_cloud_frames.s
     start: 0x088B149C
     end: 0x088D0360
+    data_start: 0x09F592E0
+    data_end: 0x09F593E8
 entries:
 - name: gCroud00Frames
   record: SpriteTable

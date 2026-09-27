@@ -67,7 +67,7 @@ movie_text.c
 mode_movie.c
 mode_test.c
 sprites_frd_frames.s
-sprites_cloud.c
+sprites_cloud_frames.s
 sprites_smn.c
 sprites_sora.c
 sprites_evt_1.c
@@ -83,7 +83,6 @@ sprites_map_tasks_1.c
 sprites_emy_2.c
 sprites_btl_3.c
 sprites_mode_test_1.c
-sprites_cloud_frames.s
 sprites_smn_frames.s
 sprites_sora_frames.s
 sprites_evt_frames_1.s

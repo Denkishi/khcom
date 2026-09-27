@@ -3,6 +3,10 @@
 
 #include "types.h"
 #include "staff_roll_types.h"
+#include "evt_object_types.h"
+#include "obj.h"
+#include "sroll.h"
+#include "taskpool.h"
 
 typedef struct StaffRollLabelArg {
     u16 unk_00;
@@ -83,12 +87,12 @@ typedef struct StaffRollWork {
     s32 unk_0EC;
     s32 unk_0F0;
     s32 unk_0F4;
-    u32 palette;
-    u8 tasks[0x14];
-    u8 tasks2[0x14];
-    s32 unk_124[6];
-    u8 unk_13C[0x84];
-    u8 unk_1C0[0x258];
+    ObjPalette* palette;
+    TaskPool tasks;
+    TaskPool tasks2;
+    Task* unk_124[6];
+    EvtObj objs[3];
+    SrollWork text;
 } StaffRollWork;
 
 #endif

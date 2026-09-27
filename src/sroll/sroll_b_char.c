@@ -4,8 +4,8 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void func_081149B0(SrollBCharWork* w, s32 v) {
-    *(s32*)w->unk_04 = v;
+void func_081149B0(Task* task, s32 v) {
+    ((SrollBCharWork*)task->work)->unk_00 = v;
 }
 
 void func_081149B8(SrollBCharWork* w) {

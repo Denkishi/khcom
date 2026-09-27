@@ -2933,8 +2933,8 @@ void func_08112720(StaffRollWork* w, u16 flags, s32 dur) {
     gBldAlpha = 16;
 }
 
-u8* func_08112748(StaffRollWork* w) {
-    return &w->unk_13C[w->unk_0CC[w->unk_0D0 + 3] * 0x2C];
+EvtObj* func_08112748(StaffRollWork* w) {
+    return &w->objs[w->unk_0CC[w->unk_0D0 + 3]];
 }
 
 void func_08112768(StaffRollWork* w) {
@@ -2964,7 +2964,7 @@ void func_08112768(StaffRollWork* w) {
                     w->unk_0D8 = -1;
                     w->unk_0E0 = 0;
                 }
-                e = (EvtObj*)&w->unk_13C[w->unk_0DC * 0x2C];
+                e = &w->objs[w->unk_0DC];
                 EvtObjSetPos(e, x, y, 0);
                 w->unk_0E0++;
                 break;
@@ -2991,19 +2991,19 @@ void func_08112768(StaffRollWork* w) {
             w->unk_0D4 = 0;
             continue;
         case 2:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             EvtObjSetAnim(e, w->unk_0CC[w->unk_0D0 + 4]);
             break;
         case 3:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             func_0801CE00(e, w->unk_0CC[w->unk_0D0 + 4] | 0x400);
             break;
         case 4:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             EvtObjSetPos(e, w->unk_0CC[w->unk_0D0 + 4] << 8, w->unk_0CC[w->unk_0D0 + 5] << 8, 0);
             break;
         case 5:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             w->unk_0D8 = 5;
             w->unk_0DC = w->unk_0CC[w->unk_0D0 + 3];
             w->unk_0E4 = e->x;
@@ -3014,11 +3014,11 @@ void func_08112768(StaffRollWork* w) {
             break;
         case 6:
             w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3] =
-                func_0801CE04(w->tasks2, &gTaskDescSrollBChar, (EvtObj*)func_08112748(w), w->unk_0CC[w->unk_0D0 + 4],
+                func_0801CE04(&w->tasks2, &gTaskDescSrollBChar, func_08112748(w), w->unk_0CC[w->unk_0D0 + 4],
                               w->unk_0CC[w->unk_0D0 + 5], 0x2800, 0xF000, 0);
             break;
         case 7:
-            func_08000DE8(w->tasks2, (void*)w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3]);
+            func_08000DE8(&w->tasks2, w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3]);
             break;
         case 8:
             w->unk_0D8 = 5;
@@ -3031,32 +3031,32 @@ void func_08112768(StaffRollWork* w) {
             FadeStartOut(0, (u16)w->unk_0CC[w->unk_0D0 + 4]);
             break;
         case 11:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             e->unk_16 |= 4;
             func_081126F8(w, 0x2000, w->unk_0CC[w->unk_0D0 + 4]);
             break;
         case 12:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             e->unk_16 |= 4;
             func_08112720(w, 0x2000, w->unk_0CC[w->unk_0D0 + 4]);
             break;
         case 13:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             e->unk_16 |= 4;
             break;
         case 14:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             e->unk_16 &= 0xFFFB;
             break;
         case 15:
-            e = (EvtObj*)func_08112748(w);
+            e = func_08112748(w);
             arg.unk_00 = w->unk_0CC[w->unk_0D0 + 4];
             arg.x = e->x;
             arg.y = e->y;
-            TaskCreate(w->tasks2, &gTaskDescSrollBCrtn, &arg);
+            TaskCreate(&w->tasks2, &gTaskDescSrollBCrtn, &arg);
             break;
         case 16:
-            func_081149B0((void*)w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3],
+            func_081149B0(w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3],
                           w->unk_0CC[w->unk_0D0 + 4]);
             break;
         default:
@@ -3074,11 +3074,11 @@ void mode_StaffRoll_0(void) {
     StaffRollWork** p;
 
     p = &gStaffRollWork;
-    w = EwramAlloc(0x418);
+    w = EwramAlloc(sizeof(StaffRollWork));
     *p = w;
     SetBackdropColor(0, 0, 0);
     SpriteReset();
-    w->palette = (u32)LoadObjPalette(gUnk_09D6BE74, 0x100);
+    w->palette = LoadObjPalette(gUnk_09D6BE74, 0x100);
     w->unk_000 = 1;
     w->unk_001 = 1;
     w->unk_008 = 0;
@@ -3107,14 +3107,14 @@ void mode_StaffRoll_0(void) {
     w->unk_0D4 = 0;
     w->unk_0D8 = -1;
     w->unk_0E0 = 0;
-    TaskPoolInit(w->tasks, 32);
-    TaskPoolInit(w->tasks2, 32);
+    TaskPoolInit(&w->tasks, 32);
+    TaskPoolInit(&w->tasks2, 32);
     w->unk_124[0] = 0;
     w->unk_124[1] = 0;
     w->unk_124[2] = 0;
     w->unk_124[4] = 0;
     w->unk_124[5] = 0;
-    *(s32*)w->unk_13C = 0;
+    w->objs[0].animEntry = 0;
 }
 
 u8 func_08112C24(StaffRollWork* w) {
@@ -3212,19 +3212,19 @@ u8 func_08112C38(StaffRollWork* w) {
             arg.y = w->scene[w->unk_090].targetY;
             arg.targetX = w->scene[w->unk_090].targetX;
             arg.targetY = w->scene[w->unk_090].targetY;
-            w->unk_124[0] = (s32)TaskCreate(w->tasks, &gTaskDescSrollAName, &arg);
+            w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
             arg.unk_00 = 1;
             arg.unk_02 = 1;
             arg.unk_04 = w->scene[w->unk_090].unk_32;
             arg.x = -0x5000;
             z = 0x7800;
             arg.targetX = z;
-            w->unk_124[1] = (s32)TaskCreate(w->tasks, &gTaskDescSrollAName, &arg);
+            w->unk_124[1] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
             arg.unk_00 = 2;
             arg.unk_02 = w->scene[w->unk_090].unk_30;
             arg.unk_04 = w->scene[w->unk_090].unk_32;
             arg.x = z;
-            w->unk_124[2] = (s32)TaskCreate(w->tasks, &gTaskDescSrollAName, &arg);
+            w->unk_124[2] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
             w->unk_084 = 2;
             w->unk_08C = t;
             break;
@@ -3246,9 +3246,9 @@ u8 func_08112C38(StaffRollWork* w) {
         if ((w->flags & 2) == 0) {
             break;
         }
-        func_08000DE8(w->tasks, (void*)w->unk_124[0]);
-        func_08000DE8(w->tasks, (void*)w->unk_124[1]);
-        func_08000DE8(w->tasks, (void*)w->unk_124[2]);
+        func_08000DE8(&w->tasks, w->unk_124[0]);
+        func_08000DE8(&w->tasks, w->unk_124[1]);
+        func_08000DE8(&w->tasks, w->unk_124[2]);
         w->unk_010 = 0x1518;
         w->unk_084 = 4;
         w->unk_08C = 0;
@@ -3277,9 +3277,9 @@ u8 func_08112C38(StaffRollWork* w) {
                 DisableBg(0);
             }
 
-            func_08000DE8(w->tasks, (void*)w->unk_124[0]);
-            func_08000DE8(w->tasks, (void*)w->unk_124[1]);
-            func_08000DE8(w->tasks, (void*)w->unk_124[2]);
+            func_08000DE8(&w->tasks, w->unk_124[0]);
+            func_08000DE8(&w->tasks, w->unk_124[1]);
+            func_08000DE8(&w->tasks, w->unk_124[2]);
             w->unk_094 = w->unk_090 + 1;
 
             if (w->unk_094 > 21) {
@@ -3398,7 +3398,7 @@ u8 func_08113180(StaffRollWork* w) {
             FadeSetPaletteExcluded(i, 1);
         }
 
-        SrollTextInit(w->unk_1C0, gUnk_09A541C8);
+        SrollTextInit(&w->text, gUnk_09A541C8);
         LoadBgPalette(0, gUnk_09D6BE14, 32);
         (*(volatile u16*)&gDispCnt) |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
@@ -3426,11 +3426,11 @@ u8 func_08113180(StaffRollWork* w) {
             }
 
             if (*s != '!') {
-                SrollTextClearRect(w->unk_1C0, 0, (row + 20) & 31, 30, 2, 1);
+                SrollTextClearRect(&w->text, 0, (row + 20) & 31, 30, 2, 1);
             }
 
             if (w->unk_0A0 == 0) {
-                SrollTextSetColors(w->unk_1C0, 15, 13, 0, 14);
+                SrollTextSetColors(&w->text, 15, 13, 0, 14);
                 loop = 1;
 
                 while (loop) {
@@ -3454,7 +3454,7 @@ u8 func_08113180(StaffRollWork* w) {
                         logo.unk_04 = ((w->unk_0B8 >> 8) + 168) << 8;
                         logo.unk_08 = &w->unk_0B8;
                         logo.unk_0C = &w->unk_0B4;
-                        TaskCreate(w->tasks2, &gTaskDescSrollBLogo, &logo);
+                        TaskCreate(&w->tasks2, &gTaskDescSrollBLogo, &logo);
                         loop = 0;
                         break;
                     case '<':
@@ -3463,7 +3463,7 @@ u8 func_08113180(StaffRollWork* w) {
                         secn.unk_08 = ((w->unk_0B8 >> 8) + 168) << 8;
                         secn.unk_0C = &w->unk_0B8;
                         secn.unk_10 = &w->unk_0B4;
-                        TaskCreate(w->tasks2, &gTaskDescSrollBSecn, &secn);
+                        TaskCreate(&w->tasks2, &gTaskDescSrollBSecn, &secn);
                         w->unk_014++;
                         loop = 0;
                         break;
@@ -3473,25 +3473,25 @@ u8 func_08113180(StaffRollWork* w) {
                         secn.unk_08 = ((w->unk_0B8 >> 8) + 168) << 8;
                         secn.unk_0C = &w->unk_0B8;
                         secn.unk_10 = &w->unk_0B4;
-                        TaskCreate(w->tasks2, &gTaskDescSrollBSecn, &secn);
+                        TaskCreate(&w->tasks2, &gTaskDescSrollBSecn, &secn);
                         loop = 0;
                         break;
                     case '#':
-                        SrollTextSelectFont(w->unk_1C0, s[1] - '0');
+                        SrollTextSelectFont(&w->text, s[1] - '0');
                         s += 2;
                         break;
                     case '@':
-                        SrollTextSetColors(w->unk_1C0, 7, 5, 0, 6);
+                        SrollTextSetColors(&w->text, 7, 5, 0, 6);
                         s++;
                         break;
                     case '~':
                         s++;
-                        wa = SrollTextMeasureWidth(w->unk_1C0, s);
-                        wb = SrollTextMeasureWidth(w->unk_1C0, gUnk_09EFA9C0);
-                        wc = SrollTextMeasureWidth(w->unk_1C0, gUnk_09EFA9BC);
+                        wa = SrollTextMeasureWidth(&w->text, s);
+                        wb = SrollTextMeasureWidth(&w->text, gUnk_09EFA9C0);
+                        wc = SrollTextMeasureWidth(&w->text, gUnk_09EFA9BC);
                         w1 = wa - wb + wc * 3;
                         x = (240 - w1) >> 1;
-                        SrollTextSetColors(w->unk_1C0, 7, 5, 0, 6);
+                        SrollTextSetColors(&w->text, 7, 5, 0, 6);
 
                         for (n = 0; s[n] != '~'; n++) {
                             buf[n] = s[n];
@@ -3501,8 +3501,8 @@ u8 func_08113180(StaffRollWork* w) {
                         buf[n + 1] = ' ';
                         buf[n + 2] = ' ';
                         buf[n + 3] = 0;
-                        w1 = SrollTextMeasureWidth(w->unk_1C0, buf);
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, x, (row + 20) & 31, buf, 1);
+                        w1 = SrollTextMeasureWidth(&w->text, buf);
+                        SrollTextDrawStringAtPixelX(&w->text, x, (row + 20) & 31, buf, 1);
                         s += n + 1;
 
                         for (n = 0; s[n] != 0; n++) {
@@ -3510,24 +3510,24 @@ u8 func_08113180(StaffRollWork* w) {
                         }
 
                         buf[n] = 0;
-                        SrollTextSetColors(w->unk_1C0, 15, 13, 0, 14);
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, x + w1, (row + 20) & 31, buf, 1);
+                        SrollTextSetColors(&w->text, 15, 13, 0, 14);
+                        SrollTextDrawStringAtPixelX(&w->text, x + w1, (row + 20) & 31, buf, 1);
                         loop = 0;
                         break;
                     case '=':
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, (240 - SrollTextMeasureWidth(w->unk_1C0, s + 1)) >> 1, (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&w->text, (240 - SrollTextMeasureWidth(&w->text, s + 1)) >> 1, (row + 20) & 31, s + 1, 1);
                         loop = 0;
                         break;
                     case '-':
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, 0, (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&w->text, 0, (row + 20) & 31, s + 1, 1);
                         loop = 0;
                         break;
                     case '+':
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, 240 - SrollTextMeasureWidth(w->unk_1C0, s + 1), (row + 20) & 31, s + 1, 1);
+                        SrollTextDrawStringAtPixelX(&w->text, 240 - SrollTextMeasureWidth(&w->text, s + 1), (row + 20) & 31, s + 1, 1);
                         loop = 0;
                         break;
                     default:
-                        SrollTextDrawStringAtPixelX(w->unk_1C0, (240 - SrollTextMeasureWidth(w->unk_1C0, s)) >> 1, (row + 20) & 31, s, 1);
+                        SrollTextDrawStringAtPixelX(&w->text, (240 - SrollTextMeasureWidth(&w->text, s)) >> 1, (row + 20) & 31, s, 1);
                         loop = 0;
                         break;
                     }
@@ -3586,8 +3586,8 @@ u8 func_08113180(StaffRollWork* w) {
     }
 
     func_08112768(w);
-    TaskPoolUpdate(w->tasks2);
-    TaskPoolDraw(w->tasks2);
+    TaskPoolUpdate(&w->tasks2);
+    TaskPoolDraw(&w->tasks2);
     func_08112600(w);
 
     return result;
@@ -3601,7 +3601,7 @@ u8 func_0811394C(StaffRollWork* w) {
 
     switch (w->unk_0A4) {
     case 0:
-        TaskPoolDestroy(w->tasks2);
+        TaskPoolDestroy(&w->tasks2);
         DisableBg(0);
         DisableBg(1);
         EnableBg(2);
@@ -3681,9 +3681,9 @@ u8 func_08113A94(StaffRollWork* w) {
         }
         if (FadeIsActive() == 0) {
             if ((gGameState.flags & 8) != 0) {
-                w->unk_124[0] = (s32)TaskCreate(w->tasks, &gTaskDescSrollCChar, (void*)1);
+                w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
             } else {
-                w->unk_124[0] = (s32)TaskCreate(w->tasks, &gTaskDescSrollCChar, (void*)0);
+                w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)0);
             }
             w->unk_0BC = 2;
             w->unk_0C0 = 0;
@@ -4493,8 +4493,8 @@ void mode_StaffRoll_1(void) {
         break;
     }
 
-    TaskPoolUpdate(w->tasks);
-    TaskPoolDraw(w->tasks);
+    TaskPoolUpdate(&w->tasks);
+    TaskPoolDraw(&w->tasks);
     BlockAudioUpdate();
     w->unk_010++;
 }
@@ -4503,8 +4503,8 @@ void mode_StaffRoll_2(void) {
     StaffRollWork* w;
 
     w = gStaffRollWork;
-    ReleaseObjPalette((void*)w->palette);
-    TaskPoolDestroy(w->tasks);
+    ReleaseObjPalette(w->palette);
+    TaskPoolDestroy(&w->tasks);
 
     if (gStaffRollWork != 0) {
         EwramFree(w);

@@ -41,7 +41,7 @@
 typedef struct MooglePackCardDef {
     u16 cardId;
     u8 unk_02[0x2];
-    void* unk_04;
+    s32 unlockFlag;
     u16 weights[4];
 } MooglePackCardDef;
 

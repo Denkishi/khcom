@@ -1433,17 +1433,11 @@ s32 func_08064DD4(TextChar* a) {
 }
 
 #ifdef VERSION_EU
-typedef u8 MsgLatinChar;
-#define MSG_LATIN_CHAR(p) (*(u8*)(p))
 #define MSG_LATIN_CODE(wide, byte) (byte)
-#define MSG_LATIN_STEP 1
 #else
-typedef u16 MsgLatinChar;
-#define MSG_LATIN_CHAR(p) (*(u16*)(p))
 #define MSG_LATIN_CODE(wide, byte) (wide)
-#define MSG_LATIN_STEP 2
 #endif
-u8 func_08064EF4(s32 x, s32 y, s32 s, s32* d) {
+u8 func_08064EF4(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -1458,36 +1452,36 @@ u8 func_08064EF4(s32 x, s32 y, s32 s, s32* d) {
 
     gUnk_02034A90 = 0;
 
-    while (MSG_LATIN_CHAR(s) != 0) {
+    while (*s != 0) {
         s32 v = 0;
 
         gUnk_02034A84[gUnk_02034A90].x = x + cx;
         gUnk_02034A84[gUnk_02034A90].y = y + cy;
         gUnk_02034A84[gUnk_02034A90].visible = 1;
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*s == MSG_LATIN_CODE(0x4079, 29)) {
             f = 1;
-            s += MSG_LATIN_STEP;
+            s++;
         }
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*s == MSG_LATIN_CODE(0x4000, 30)) {
             f = 0;
-            s += MSG_LATIN_STEP;
+            s++;
         }
 
         gUnk_02034A84[gUnk_02034A90].useAlternatePalette = f;
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(10, 31)) {
+        if (*s == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = MSG_LATIN_CHAR(s);
+            v = *s;
 #else
-            if ((u16)(MSG_LATIN_CHAR(s) - 32) <= 223) {
-                v = MSG_LATIN_CHAR(s);
+            if ((u16)(*s - 32) <= 223) {
+                v = *s;
             } else {
-                switch (MSG_LATIN_CHAR(s)) {
+                switch (*s) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -1561,7 +1555,7 @@ u8 func_08064EF4(s32 x, s32 y, s32 s, s32* d) {
                 cy += 0xC00;
             }
         }
-        s += MSG_LATIN_STEP;
+        s++;
 
         if (cy > 0x1800) {
             *d = s;
@@ -1569,7 +1563,7 @@ u8 func_08064EF4(s32 x, s32 y, s32 s, s32* d) {
         }
     }
 
-    *d = 0;
+    *d = NULL;
     return gUnk_02034A90;
 }
 
@@ -6169,7 +6163,7 @@ u16 func_0806BA74(s32 mode, s32 flag) {
     return gUnk_02034A88[0].palette->index;
 }
 
-u8 func_0806BB44(s32 x, s32 y, s32 s, s32* d) {
+u8 func_0806BB44(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -6184,34 +6178,34 @@ u8 func_0806BB44(s32 x, s32 y, s32 s, s32* d) {
 
     gUnk_02034A90 = 0;
 
-    while (MSG_LATIN_CHAR(s) != 0) {
+    while (*s != 0) {
         s32 v;
 
         gUnk_02034A88[gUnk_02034A90].x = x + cx;
         gUnk_02034A88[gUnk_02034A90].y = y + cy;
         gUnk_02034A88[gUnk_02034A90].visible = 1;
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*s == MSG_LATIN_CODE(0x4079, 29)) {
             f = 1;
-            s += MSG_LATIN_STEP;
+            s++;
         }
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*s == MSG_LATIN_CODE(0x4000, 30)) {
             f = 0;
-            s += MSG_LATIN_STEP;
+            s++;
         }
 
-        if (MSG_LATIN_CHAR(s) == MSG_LATIN_CODE(10, 31)) {
+        if (*s == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = MSG_LATIN_CHAR(s);
+            v = *s;
 #else
-            if ((u16)(MSG_LATIN_CHAR(s) - 32) <= 223) {
-                v = MSG_LATIN_CHAR(s);
+            if ((u16)(*s - 32) <= 223) {
+                v = *s;
             } else {
-                switch (MSG_LATIN_CHAR(s)) {
+                switch (*s) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -6290,7 +6284,7 @@ u8 func_0806BB44(s32 x, s32 y, s32 s, s32* d) {
                 cy += 0xC00;
             }
         }
-        s += MSG_LATIN_STEP;
+        s++;
 
         if (cy > 0x1800) {
             *d = s;
@@ -6298,7 +6292,7 @@ u8 func_0806BB44(s32 x, s32 y, s32 s, s32* d) {
         }
     }
 
-    *d = 0;
+    *d = NULL;
     return gUnk_02034A90;
 }
 #ifndef VERSION_EU

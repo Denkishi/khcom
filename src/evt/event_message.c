@@ -30,7 +30,7 @@ extern void* gUnkEu_08890E1C[];
 extern void* gUnkEu_08890E44[];
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
-#define LANGSTR(x) (x)
+#define LANGSTR(x) ((void*)(x))
 #endif
 
 const MsgFaceAnim gUnk_09032484[8] = {
@@ -6050,12 +6050,12 @@ static void msgwin_0(MsgWinWork* p, u8* arg) {
     p->script = t->script;
     p->unk_2B = 0;
     p->unk_18 = 0;
-    p->unk_40 = 0;
+    p->nextText = NULL;
     gEventState->unk_81 = 0;
     gEventState->unk_7D = 0;
     gEventState->unk_8B = 0;
-    TaskPoolInit(p, 2);
-    CreateMsgfaceTask(p, &p->face, p->script->portraitId, p->script->expressionId, p->script->positionIndex);
+    TaskPoolInit(&p->tasks, 2);
+    CreateMsgfaceTask(&p->tasks, &p->face, p->script->portraitId, p->script->expressionId, p->script->positionIndex);
 }
 
 static u8 msgwin_1(MsgWinWork* p, void* a) {
@@ -6190,7 +6190,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
         FadeSetPaletteExcluded(p->unk_1C + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
-    TaskPoolUpdate(p);
+    TaskPoolUpdate(&p->tasks);
     return 1;
 }
 u8 func_08073170(MsgWinWork* p, void* a) {
@@ -6227,7 +6227,7 @@ u8 func_08073170(MsgWinWork* p, void* a) {
         FadeSetPaletteExcluded(p->unk_1C + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
-    TaskPoolUpdate(p);
+    TaskPoolUpdate(&p->tasks);
     return 1;
 }
 static void msgwin_2(MsgWinWork* p) {
@@ -6238,14 +6238,14 @@ static void msgwin_2(MsgWinWork* p) {
     } else {
         _0806C3A0(p->unk_24, p->palette);
     }
-    TaskPoolDraw(p);
+    TaskPoolDraw(&p->tasks);
 }
 static void msgwin_3(MsgWinWork* p) {
     if (p->palette != NULL) {
         ReleaseObjPalette(p->palette);
     }
     func_08065940();
-    TaskPoolDestroy(p);
+    TaskPoolDestroy(&p->tasks);
 }
 u8 func_08073294(MsgWinWork* p, void* a) {
     const MessageScriptEntry* e = &p->script[p->unk_27];
@@ -6266,7 +6266,7 @@ u8 func_08073294(MsgWinWork* p, void* a) {
         }
         SetTaskUpdate(a, (TaskUpdateFunc)func_08073318);
     }
-    TaskPoolUpdate(p);
+    TaskPoolUpdate(&p->tasks);
     return 1;
 }
 u8 func_08073318(MsgWinWork* p, void* a) {
@@ -6283,8 +6283,9 @@ u8 func_08073318(MsgWinWork* p, void* a) {
     }
 
     if (p->unk_2B == 1 && gEventState->unk_7D == 0) {
-        s32 text = p->unk_40;
-        if (text != 0) {
+        MsgLatinChar* text = p->nextText;
+
+        if (text != NULL) {
             p->unk_1E = 0;
             p->unk_29 = 0;
             p->unk_2A = 1;
@@ -6298,12 +6299,12 @@ u8 func_08073318(MsgWinWork* p, void* a) {
                     p->unk_1E = 8;
                     func_08073E74(&p->face);
                     SetTaskUpdate(a, (TaskUpdateFunc)func_0807344C);
-                    gEventState->unk_81 = text;
-                    p->face.unk_08 = text;
+                    gEventState->unk_81 = 0;
+                    p->face.unk_08 = 0;
                 } else {
-                    p->unk_1E = text;
-                    p->unk_29 = text;
-                    p->unk_2A = text;
+                    p->unk_1E = 0;
+                    p->unk_29 = 0;
+                    p->unk_2A = 0;
                     p->unk_27++;
                     gEventState->flags &= ~1;
                     p->face.unk_08 = 1;
@@ -6313,13 +6314,13 @@ u8 func_08073318(MsgWinWork* p, void* a) {
                 p->unk_1E = 8;
                 func_08073E74(&p->face);
                 SetTaskUpdate(a, (TaskUpdateFunc)func_0807344C);
-                gEventState->unk_81 = text;
-                p->face.unk_08 = text;
+                gEventState->unk_81 = 0;
+                p->face.unk_08 = 0;
             }
         }
         p->unk_2B = 0;
     }
-    TaskPoolUpdate(p);
+    TaskPoolUpdate(&p->tasks);
     return 1;
 }
 u8 func_0807344C(MsgWinWork* p, void* a) {
@@ -6350,7 +6351,7 @@ u8 func_0807344C(MsgWinWork* p, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
         }
     }
-    TaskPoolUpdate(p);
+    TaskPoolUpdate(&p->tasks);
     return 1;
 }
 void func_08073508(MsgWinWork* p) {
@@ -6379,16 +6380,16 @@ void func_08073508(MsgWinWork* p) {
     }
 #else
     if (e->portraitId == 62) {
-        if (p->unk_40 != 0) {
-            p->unk_26 = func_08064EF4(0x2E00, gUnk_09033CB8[p->unk_20] - 0x200, p->unk_40, &p->unk_40);
+        if (p->nextText != NULL) {
+            p->unk_26 = func_08064EF4(0x2E00, gUnk_09033CB8[p->unk_20] - 0x200, p->nextText, &p->nextText);
         } else {
-            p->unk_26 = func_08064EF4(0x2E00, gUnk_09033CB8[p->unk_20] - 0x200, LANGSTR(e->unk_10), &p->unk_40);
+            p->unk_26 = func_08064EF4(0x2E00, gUnk_09033CB8[p->unk_20] - 0x200, LANGSTR(e->unk_10), &p->nextText);
         }
     } else {
-        if (p->unk_40 != 0) {
-            p->unk_26 = func_08064EF4(gUnk_09033CA8[p->unk_20], gUnk_09033CB8[p->unk_20] - 0x200, p->unk_40, &p->unk_40);
+        if (p->nextText != NULL) {
+            p->unk_26 = func_08064EF4(gUnk_09033CA8[p->unk_20], gUnk_09033CB8[p->unk_20] - 0x200, p->nextText, &p->nextText);
         } else {
-            p->unk_26 = func_08064EF4(gUnk_09033CA8[p->unk_20], gUnk_09033CB8[p->unk_20] - 0x200, LANGSTR(e->unk_10), &p->unk_40);
+            p->unk_26 = func_08064EF4(gUnk_09033CA8[p->unk_20], gUnk_09033CB8[p->unk_20] - 0x200, LANGSTR(e->unk_10), &p->nextText);
         }
     }
 #endif
@@ -6411,17 +6412,17 @@ void func_0807361C(MsgWinWork* p) {
             if (p->unk_2B == 0) {
                 if ((p->script[p->unk_27].flags & 0x8000) == 0) {
                     if ((p->script[p->unk_27].flags & 0x40) == 0) {
-                        TaskCreate(p, &gTaskDescMsgface[1], &p->script[p->unk_27 + 1].positionIndex);
+                        TaskCreate(&p->tasks, &gTaskDescMsgface[1], &p->script[p->unk_27 + 1].positionIndex);
                     } else {
-                        TaskCreate(p, &gTaskDescMsgface[2], &p->script[p->unk_27 + 1].positionIndex);
+                        TaskCreate(&p->tasks, &gTaskDescMsgface[2], &p->script[p->unk_27 + 1].positionIndex);
                     }
                 } else {
                     v = 0;
 
                     if ((p->script[p->unk_27].flags & 0x40) == 0) {
-                        TaskCreate(p, &gTaskDescMsgface[1], &v);
+                        TaskCreate(&p->tasks, &gTaskDescMsgface[1], &v);
                     } else {
-                        TaskCreate(p, &gTaskDescMsgface[2], &v);
+                        TaskCreate(&p->tasks, &gTaskDescMsgface[2], &v);
                     }
                 }
                 p->unk_2B = 1;

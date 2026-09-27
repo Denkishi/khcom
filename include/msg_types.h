@@ -3,6 +3,12 @@
 
 #include "types.h"
 
+#ifdef VERSION_EU
+typedef u8 MsgLatinChar;
+#else
+typedef u16 MsgLatinChar;
+#endif
+
 typedef struct EventCameraKeyframe {
     s32 unk_00;
     s32 unk_04;

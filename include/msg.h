@@ -100,7 +100,7 @@ typedef struct MsgFaceWork {
 } MsgFaceWork;
 
 typedef struct MsgWinWork {
-    u8 unk_00[0x14];
+    TaskPool tasks;
     void* palette;
     s32 unk_18;
     u16 unk_1C;
@@ -119,7 +119,7 @@ typedef struct MsgWinWork {
     u8 bg;
     u8 unk_39[3];
     const MessageScriptEntry* script;
-    s32 unk_40;
+    MsgLatinChar* nextText;
 } MsgWinWork;
 
 typedef struct EventSeqWork {
@@ -270,7 +270,7 @@ u8 QueueVTransCallback(void* a);
 u8 func_0809D280(u8* s);
 u8 _0806E9DC(EventCharaWork* p, void* a);
 void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c);
-u8 func_08064EF4(s32 a, s32 b, s32 c, s32* d);
+u8 func_08064EF4(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
 void HBlankIntrEventScanlineScroll(void);
 u8 func_08073DA4(MsgFaceWork* p, void* a);
 u8 func_08073294(MsgWinWork* p, void* a);

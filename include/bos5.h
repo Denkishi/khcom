@@ -101,20 +101,6 @@ typedef struct MdAnim {
     u16 unk_0E;
 } MdAnim;
 
-typedef struct MdSub {
-    u32 unk_000;
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 unk_010[0x1C];
-    s16 unk_02C;
-    s16 unk_02E;
-    u8 unk_030[0x4];
-    u64 unk_034;
-    u8 unk_03C[0x4];
-    u8 unk_040[0xD0];
-} MdSub;
-
 typedef struct MdHahenWork {
     s32 x;
     s32 y;

@@ -81,9 +81,9 @@ s32 func_08049F50(CloudWork* work) {
 
     if ((u16)GetRandom() % 60 == 0) {
         func_0801C700(&work->base.actor, &x, &y, 0);
-        func_0800F368(work, 1);
+        func_0800F368(&work->base, 1);
 
-        if (func_0800F504(work, 0x100, 0x100, 0x100)) {
+        if (func_0800F504(&work->base, 0x100, 0x100, 0x100)) {
             if (gBtlWork->flags & 0x8000) {
                 func_08049E70(work, -0x63, 0x280);
             } else if (GetRandom() & 1) {

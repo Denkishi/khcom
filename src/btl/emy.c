@@ -23,7 +23,7 @@ const AnimDef gUnk_0813D35C[7] = {
 
 const EmyDef gEmy00Def = { gEmy00Palette, gUnk_0813D32C, 384, 130, 10, 20, 64, 32, 16, 10, 3, { 0, 12, 32, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy00 = { "task_emy_00", task_emy_00_0, task_emy_00_1, task_emy_00_2, task_emy_00_3, 0x184 };
+TaskDesc gTaskDescEmy00 = { "task_emy_00", task_emy_00_0, task_emy_00_1, task_emy_00_2, task_emy_00_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813D404[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
@@ -38,7 +38,7 @@ const AnimDef gUnk_0813D434[2] = {
 
 const EmyDef gEmy01Def = { gEmy01Palette, gUnk_0813D404, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, 8 } };
 
-TaskDesc gTaskDescEmy01 = { "task_emy_01", task_emy_01_0, task_emy_01_1, task_emy_01_2, task_emy_01_3, 0x184 };
+TaskDesc gTaskDescEmy01 = { "task_emy_01", task_emy_01_0, task_emy_01_1, task_emy_01_2, task_emy_01_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813D48C[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
@@ -53,7 +53,7 @@ const AnimDef gUnk_0813D4BC[2] = {
 
 const EmyDef gEmy02Def = { gEmy02Palette, gUnk_0813D48C, 460, 130, 20, 20, 64, 32, 32, 10, 0, { 2, 34, 24, 12, 4, 100, 8 } };
 
-TaskDesc gTaskDescEmy02 = { "task_emy_02", task_emy_02_0, task_emy_02_1, task_emy_02_2, task_emy_02_3, 0x184 };
+TaskDesc gTaskDescEmy02 = { "task_emy_02", task_emy_02_0, task_emy_02_1, task_emy_02_2, task_emy_02_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813D514[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
@@ -68,7 +68,7 @@ const AnimDef gUnk_0813D544[2] = {
 
 const EmyDef gEmy03Def = { gEmy03Palette, gUnk_0813D514, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, 8 } };
 
-TaskDesc gTaskDescEmy03 = { "task_emy_03", task_emy_03_0, task_emy_03_1, task_emy_03_2, task_emy_03_3, 0x190 };
+TaskDesc gTaskDescEmy03 = { "task_emy_03", task_emy_03_0, task_emy_03_1, task_emy_03_2, task_emy_03_3, sizeof(Emy03Work) };
 
 const AnimDef gUnk_0813D59C[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
@@ -80,7 +80,7 @@ const AnimDef gUnk_0813D5CC = { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles,
 
 const EmyDef gEmy04Def = { gEmy04Palette, gUnk_0813D59C, 332, 130, 20, 20, 0, 0, 0, 200, 0, { 4, 27, 24, 12, 4, 100, 8 } };
 
-TaskDesc gTaskDescEmy04 = { "task_emy_04", task_emy_04_0, task_emy_04_1, task_emy_04_2, task_emy_04_3, 0x188 };
+TaskDesc gTaskDescEmy04 = { "task_emy_04", task_emy_04_0, task_emy_04_1, task_emy_04_2, task_emy_04_3, sizeof(Emy04Work) };
 
 const AnimDef gUnk_0813D614[3] = {
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
@@ -95,7 +95,7 @@ const AnimDef gUnk_0813D644[2] = {
 
 const EmyDef gEmy06Def = { gEmy06Palette, gUnk_0813D614, 230, 130, 20, 20, 70, 32, 48, 10, 0, { 5, 42, 32, 8, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy06 = { "task_emy_06", task_emy_06_0, task_emy_06_1, task_emy_06_2, task_emy_06_3, 0x188 };
+TaskDesc gTaskDescEmy06 = { "task_emy_06", task_emy_06_0, task_emy_06_1, task_emy_06_2, task_emy_06_3, sizeof(Emy06Work) };
 
 const AnimDef gUnk_0813D69C[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
@@ -115,7 +115,7 @@ const AnimDef gUnk_0813D6CC[7] = {
 
 const EmyDef gEmy07Def = { gEmy07Palette, gUnk_0813D69C, 0, 130, 20, 20, 0, 0, 0, 1, 0, { 6, 40, 32, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy07 = { "task_emy_07", task_emy_07_0, task_emy_07_1, task_emy_07_2, task_emy_07_3, 0x188 };
+TaskDesc gTaskDescEmy07 = { "task_emy_07", task_emy_07_0, task_emy_07_1, task_emy_07_2, task_emy_07_3, sizeof(Emy07Work) };
 
 const AnimDef gUnk_0813D774[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
@@ -134,7 +134,7 @@ const AnimDef gUnk_0813D7A4[6] = {
 
 const EmyDef gEmy08Def = { gEmy07bPalette, gUnk_0813D774, 179, 130, 20, 20, 24, 24, 16, 5, 0, { 7, 999, 32, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy08 = { "task_emy_08", task_emy_08_0, task_emy_08_1, task_emy_08_2, task_emy_08_3, 0x190 };
+TaskDesc gTaskDescEmy08 = { "task_emy_08", task_emy_08_0, task_emy_08_1, task_emy_08_2, task_emy_08_3, sizeof(Emy08Work) };
 
 const AnimDef gUnk_0813D83C[3] = {
     { gEmy14Ll00Frames, gEmy14Ll00Anims, gEmy14Ll00Tiles, 0, { 0, 0, 0 } },
@@ -149,7 +149,7 @@ const AnimDef gUnk_0813D86C[2] = {
 
 const EmyDef gEmy14Def = { gEmy14Palette, gUnk_0813D83C, 307, 130, 10, 20, 64, 32, 16, 10, 0, { 9, 32, 35, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy14 = { "task_emy_14", task_emy_14_0, task_emy_14_1, task_emy_14_2, task_emy_14_3, 0x184 };
+TaskDesc gTaskDescEmy14 = { "task_emy_14", task_emy_14_0, task_emy_14_1, task_emy_14_2, task_emy_14_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813D8C4[3] = {
     { gEmy1500Frames, gEmy1500Anims, gEmy1500Tiles, 0, { 0, 0, 0 } },
@@ -167,7 +167,7 @@ const AnimDef gUnk_0813D8F4[5] = {
 
 const EmyDef gEmy15Def = { gEmy15Palette, gUnk_0813D8C4, 192, 200, 2, 20, 64, 32, 32, 10, 0, { 10, 41, 35, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy15 = { "task_emy_15", task_emy_15_0, task_emy_15_1, task_emy_15_2, task_emy_15_3, 0x184 };
+TaskDesc gTaskDescEmy15 = { "task_emy_15", task_emy_15_0, task_emy_15_1, task_emy_15_2, task_emy_15_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813D97C[3] = {
     { gEmy1600Frames, gEmy1600Anims, gEmy1600Tiles, 0, { 0, 0, 0 } },
@@ -182,7 +182,7 @@ const AnimDef gUnk_0813D9AC[2] = {
 
 const EmyDef gEmy16Def = { gEmy16Palette, gUnk_0813D97C, 307, 130, 20, 20, 99, 32, 32, 10, 0, { 11, 29, 16, 8, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy16 = { "task_emy_16", task_emy_16_0, task_emy_16_1, task_emy_16_2, task_emy_16_3, 0x1A4 };
+TaskDesc gTaskDescEmy16 = { "task_emy_16", task_emy_16_0, task_emy_16_1, task_emy_16_2, task_emy_16_3, sizeof(Emy16Work) };
 
 TaskDesc gTaskDescEmy16B = { "task_emy_16_b", task_emy_16_b_0, task_emy_16_b_1, task_emy_16_b_2, task_emy_16_b_3, sizeof(Emy16bWork) };
 
@@ -203,7 +203,7 @@ const AnimDef gUnk_0813DA54[4] = {
 
 const EmyDef gEmy18Def = { gEmy18Palette, gUnk_0813DA24, 768, 150, 4, 20, 40, 24, 16, 10, 0, { 12, 45, 40, 8, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy18 = { "task_emy_18", task_emy_18_0, task_emy_18_1, task_emy_18_2, task_emy_18_3, 0x188 };
+TaskDesc gTaskDescEmy18 = { "task_emy_18", task_emy_18_0, task_emy_18_1, task_emy_18_2, task_emy_18_3, sizeof(Emy18Work) };
 
 const AnimDef gUnk_0813DACC[3] = {
     { gEmy1900Frames, gEmy1900Anims, gEmy1900Tiles, 0, { 0, 0, 0 } },
@@ -221,7 +221,7 @@ const AnimDef gUnk_0813DAFC[5] = {
 
 const EmyDef gEmy19Def = { gEmy19Palette, gUnk_0813DACC, 256, 130, 20, 20, 80, 80, 32, 10, 0, { 13, 53, 32, 13, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy19 = { "task_emy_19", task_emy_19_0, task_emy_19_1, task_emy_19_2, task_emy_19_3, 0x188 };
+TaskDesc gTaskDescEmy19 = { "task_emy_19", task_emy_19_0, task_emy_19_1, task_emy_19_2, task_emy_19_3, sizeof(Emy19Work) };
 
 const AnimDef gUnk_0813DB84[3] = {
     { gEmy2100Frames, gEmy2100Anims, gEmy2100Tiles, 0, { 0, 0, 0 } },
@@ -238,7 +238,7 @@ const AnimDef gUnk_0813DBB4[4] = {
 
 const EmyDef gEmy21Def = { gEmy21Palette, gUnk_0813DB84, 396, 130, 20, 20, 80, 80, 16, 5, 0, { 14, 40, 32, 16, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy21 = { "task_emy_21", task_emy_21_0, task_emy_21_1, task_emy_21_2, task_emy_21_3, 0x188 };
+TaskDesc gTaskDescEmy21 = { "task_emy_21", task_emy_21_0, task_emy_21_1, task_emy_21_2, task_emy_21_3, sizeof(Emy21Work) };
 
 const AnimDef gUnk_0813DC2C[3] = {
     { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0, { 0, 0, 0 } },
@@ -253,7 +253,7 @@ const AnimDef gUnk_0813DC5C[2] = {
 
 const EmyDef gEmy22Def = { gEmy22Palette, gUnk_0813DC2C, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, 8 } };
 
-TaskDesc gTaskDescEmy22 = { "task_emy_22", task_emy_22_0, task_emy_22_1, task_emy_22_2, task_emy_22_3, 0x188 };
+TaskDesc gTaskDescEmy22 = { "task_emy_22", task_emy_22_0, task_emy_22_1, task_emy_22_2, task_emy_22_3, sizeof(Emy22Work) };
 
 const AnimDef gUnk_0813DCB4[3] = {
     { gEmy2300Frames, gEmy2300Anims, gEmy2300Tiles, 0, { 0, 0, 0 } },
@@ -268,7 +268,7 @@ const AnimDef gUnk_0813DCE4[2] = {
 
 const EmyDef gEmy23Def = { gEmy23Palette, gUnk_0813DCB4, 192, 30, 2, 20, 64, 40, 32, 25, 0, { 16, 66, 36, 10, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy23 = { "task_emy_23", task_emy_23_0, task_emy_23_1, task_emy_23_2, task_emy_23_3, 0x188 };
+TaskDesc gTaskDescEmy23 = { "task_emy_23", task_emy_23_0, task_emy_23_1, task_emy_23_2, task_emy_23_3, sizeof(Emy23Work) };
 
 const AnimDef gUnk_0813DD3C[3] = {
     { gEmy2500Frames, gEmy2500Anims, gEmy2500Tiles, 0, { 0, 0, 0 } },
@@ -283,7 +283,7 @@ const AnimDef gUnk_0813DD6C[2] = {
 
 const EmyDef gEmy25Def = { gEmy25Palette, gUnk_0813DD3C, 253, 130, 20, 20, 24, 16, 16, 3, 0, { 17, 79, 40, 12, 32, 100, 0 } };
 
-TaskDesc gTaskDescEmy25 = { "task_emy_25", task_emy_25_0, task_emy_25_1, task_emy_25_2, task_emy_25_3, 0x184 };
+TaskDesc gTaskDescEmy25 = { "task_emy_25", task_emy_25_0, task_emy_25_1, task_emy_25_2, task_emy_25_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813DDC4[3] = {
     { gEmy2600Frames, gEmy2600Anims, gEmy2600Tiles, 0, { 0, 0, 0 } },
@@ -298,7 +298,7 @@ const AnimDef gUnk_0813DDF4[2] = {
 
 const EmyDef gEmy26Def = { gEmy26Palette, gUnk_0813DDC4, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, 4 } };
 
-TaskDesc gTaskDescEmy26 = { "task_emy_26", task_emy_26_0, task_emy_26_1, task_emy_26_2, task_emy_26_3, 0x184 };
+TaskDesc gTaskDescEmy26 = { "task_emy_26", task_emy_26_0, task_emy_26_1, task_emy_26_2, task_emy_26_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813DE4C[3] = {
     { gEmy2700Frames, gEmy2700Anims, gEmy2700Tiles, 0, { 0, 0, 0 } },
@@ -313,7 +313,7 @@ const AnimDef gUnk_0813DE7C[2] = {
 
 const EmyDef gEmy27Def = { gEmy27Palette, gUnk_0813DE4C, 192, 130, 20, 20, 64, 32, 64, 10, 0, { 19, 125, 32, 12, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy27 = { "task_emy_27", task_emy_27_0, task_emy_27_1, task_emy_27_2, task_emy_27_3, 0x184 };
+TaskDesc gTaskDescEmy27 = { "task_emy_27", task_emy_27_0, task_emy_27_1, task_emy_27_2, task_emy_27_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813DED4[3] = {
     { gEmy2800Frames, gEmy2800Anims, gEmy2800Tiles, 0, { 0, 0, 0 } },
@@ -330,7 +330,7 @@ const AnimDef gUnk_0813DF04[4] = {
 
 const EmyDef gEmy28Def = { gEmy28Palette, gUnk_0813DED4, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, 4 } };
 
-TaskDesc gTaskDescEmy28 = { "task_emy_28", task_emy_28_0, task_emy_28_1, task_emy_28_2, task_emy_28_3, 0x188 };
+TaskDesc gTaskDescEmy28 = { "task_emy_28", task_emy_28_0, task_emy_28_1, task_emy_28_2, task_emy_28_3, sizeof(Emy28Work) };
 
 const AnimDef gUnk_0813DF7C[3] = {
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
@@ -345,7 +345,7 @@ const AnimDef gUnk_0813DFAC[2] = {
 
 const EmyDef gEmy29Def = { gEmy29Palette, gUnk_0813DF7C, 192, 300, 20, 20, 64, 64, 32, 30, 0, { 21, 80, 56, 22, 32, 100, 4 } };
 
-TaskDesc gTaskDescEmy29 = { "task_emy_29", task_emy_29_0, task_emy_29_1, task_emy_29_2, task_emy_29_3, 0x188 };
+TaskDesc gTaskDescEmy29 = { "task_emy_29", task_emy_29_0, task_emy_29_1, task_emy_29_2, task_emy_29_3, sizeof(Emy29Work) };
 
 const AnimDef gUnk_0813E004[3] = {
     { gEmy3000Frames, gEmy3000Anims, gEmy3000Tiles, 0, { 0, 0, 0 } },
@@ -366,7 +366,7 @@ const AnimDef gUnk_0813E034[8] = {
 
 const EmyDef gEmy30Def = { gEmy30Palette, gUnk_0813E004, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, 4 } };
 
-TaskDesc gTaskDescEmy30 = { "task_emy_30", task_emy_30_0, task_emy_30_1, task_emy_30_2, task_emy_30_3, 0x184 };
+TaskDesc gTaskDescEmy30 = { "task_emy_30", task_emy_30_0, task_emy_30_1, task_emy_30_2, task_emy_30_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813E0EC[3] = {
     { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0, { 0, 0, 0 } },
@@ -382,7 +382,7 @@ const AnimDef gUnk_0813E11C[3] = {
 
 const EmyDef gEmy31Def = { gEmy31Palette, gUnk_0813E0EC, 256, 100, 10, 20, 64, 32, 32, 10, 0, { 23, 95, 32, 12, 24, 100, 0 } };
 
-TaskDesc gTaskDescEmy31 = { "task_emy_31", task_emy_31_0, task_emy_31_1, task_emy_31_2, task_emy_31_3, 0x194 };
+TaskDesc gTaskDescEmy31 = { "task_emy_31", task_emy_31_0, task_emy_31_1, task_emy_31_2, task_emy_31_3, sizeof(Emy31Work) };
 
 const AnimDef gUnk_0813E184[3] = {
     { gEmy3700Frames, gEmy3700Anims, gEmy3700Tiles, 0, { 0, 0, 0 } },
@@ -406,7 +406,7 @@ const AnimDef gUnk_0813E1B4[11] = {
 
 const EmyDef gEmy37Def = { gEmy37Palette, gUnk_0813E184, 409, 130, 20, 20, 64, 32, 32, 10, 3, { 24, 110, 38, 12, 20, 100, 0 } };
 
-TaskDesc gTaskDescEmy37 = { "task_emy_37", task_emy_37_0, task_emy_37_1, task_emy_37_2, task_emy_37_3, 0x190 };
+TaskDesc gTaskDescEmy37 = { "task_emy_37", task_emy_37_0, task_emy_37_1, task_emy_37_2, task_emy_37_3, sizeof(Emy37Work) };
 
 const AnimDef gUnk_0813E29C[3] = {
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
@@ -421,7 +421,7 @@ const AnimDef gUnk_0813E2CC[2] = {
 
 const EmyDef gEmy38Def = { gEmy38Palette, gUnk_0813E29C, 76, 130, 80, 22, 64, 32, 32, 10, 0, { 25, 112, 56, 25, 32, 100, 4 } };
 
-TaskDesc gTaskDescEmy38 = { "task_emy_38", task_emy_38_0, task_emy_38_1, task_emy_38_2, task_emy_38_3, 0x184 };
+TaskDesc gTaskDescEmy38 = { "task_emy_38", task_emy_38_0, task_emy_38_1, task_emy_38_2, task_emy_38_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813E324[3] = {
     { gEmy3900Frames, gEmy3900Anims, gEmy3900Tiles, 0, { 0, 0, 0 } },
@@ -436,7 +436,7 @@ const AnimDef gUnk_0813E354[2] = {
 
 const EmyDef gEmy39Def = { gEmy39Palette, gUnk_0813E324, 102, 130, 100, 22, 64, 32, 32, 10, 0, { 26, 134, 56, 25, 32, 100, 4 } };
 
-TaskDesc gTaskDescEmy39 = { "task_emy_39", task_emy_39_0, task_emy_39_1, task_emy_39_2, task_emy_39_3, 0x188 };
+TaskDesc gTaskDescEmy39 = { "task_emy_39", task_emy_39_0, task_emy_39_1, task_emy_39_2, task_emy_39_3, sizeof(Emy39Work) };
 
 const AnimDef gUnk_0813E3AC[3] = {
     { gEmy4100Frames, gEmy4100Anims, gEmy4100Tiles, 0, { 0, 0, 0 } },
@@ -451,7 +451,7 @@ const AnimDef gUnk_0813E3DC[2] = {
 
 const EmyDef gEmy41Def = { gEmy41Palette, gUnk_0813E3AC, 192, 400, 50, 20, 64, 32, 32, 10, 0, { 27, 108, 56, 32, 20, 100, 4 } };
 
-TaskDesc gTaskDescEmy41 = { "task_emy_41", task_emy_41_0, task_emy_41_1, task_emy_41_2, task_emy_41_3, 0x190 };
+TaskDesc gTaskDescEmy41 = { "task_emy_41", task_emy_41_0, task_emy_41_1, task_emy_41_2, task_emy_41_3, sizeof(Emy41Work) };
 
 const AnimDef gUnk_0813E434[3] = {
     { gEmy4400Frames, gEmy4400Anims, gEmy4400Tiles, 0, { 0, 0, 0 } },
@@ -466,7 +466,7 @@ const AnimDef gUnk_0813E464[2] = {
 
 const EmyDef gEmy44Def = { gEmy44Palette, gUnk_0813E434, 192, 130, 90, 20, 60, 60, 16, 10, 0, { 28, 260, 48, 25, 32, 100, 4 } };
 
-TaskDesc gTaskDescEmy44 = { "task_emy_44", task_emy_44_0, task_emy_44_1, task_emy_44_2, task_emy_44_3, 0x184 };
+TaskDesc gTaskDescEmy44 = { "task_emy_44", task_emy_44_0, task_emy_44_1, task_emy_44_2, task_emy_44_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813E4BC[3] = {
     { gEmy8100Frames, gEmy8100Anims, gEmy8100Tiles, 0, { 0, 0, 0 } },
@@ -484,7 +484,7 @@ const AnimDef gUnk_0813E4EC[5] = {
 
 const EmyDef gEmy81Def = { gEmy81Palette, gUnk_0813E4BC, 128, 130, 20, 15, 64, 32, 32, 10, 0, { 29, 66, 27, 13, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy81 = { "task_emy_81", task_emy_81_0, task_emy_81_1, task_emy_81_2, task_emy_81_3, 0x194 };
+TaskDesc gTaskDescEmy81 = { "task_emy_81", task_emy_81_0, task_emy_81_1, task_emy_81_2, task_emy_81_3, sizeof(Emy81Work) };
 
 const AnimDef gUnk_0813E574[3] = {
     { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0, { 0, 0, 0 } },
@@ -503,7 +503,7 @@ const AnimDef gUnk_0813E5A4[6] = {
 
 const EmyDef gEmy82Def = { gEmy82Palette, gUnk_0813E574, 204, 3, 20, 20, 48, 32, 32, 1, 0, { 30, 66, 32, 10, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmy82 = { "task_emy_82", task_emy_82_0, task_emy_82_1, task_emy_82_2, task_emy_82_3, 0x188 };
+TaskDesc gTaskDescEmy82 = { "task_emy_82", task_emy_82_0, task_emy_82_1, task_emy_82_2, task_emy_82_3, sizeof(Emy82Work) };
 
 const AnimDef gUnk_0813E63C[3] = {
     { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },
@@ -520,11 +520,11 @@ const AnimDef gUnk_0813E66C[4] = {
 
 const EmyDef gEmy83Def = { gEmy83Palette, gUnk_0813E63C, 192, 130, 20, 20, 50, 50, 50, 10, 0, { 31, 66, 35, 12, 24, 100, 0 } };
 
-TaskDesc gTaskDescEmy83 = { "task_emy_83", task_emy_83_0, task_emy_83_1, task_emy_83_2, task_emy_83_3, 0x1A8 };
+TaskDesc gTaskDescEmy83 = { "task_emy_83", task_emy_83_0, task_emy_83_1, task_emy_83_2, task_emy_83_3, sizeof(Emy83Work) };
 
 TaskDesc gTaskDescEmy83B = { "task_emy_83_b", task_emy_83_b_0, task_emy_83_b_1, task_emy_83_b_2, task_emy_83_b_3, sizeof(Emy83bWork) };
 
-TaskDesc gTaskDescEmy83S = { "task_emy_83_s", task_emy_83_s_0, task_emy_83_s_1, task_emy_83_s_2, task_emy_83_s_3, 0x24 };
+TaskDesc gTaskDescEmy83S = { "task_emy_83_s", task_emy_83_s_0, task_emy_83_s_1, task_emy_83_s_2, task_emy_83_s_3, sizeof(Emy83sWork) };
 
 const AnimDef gUnk_0813E704[3] = {
     { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0, { 0, 0, 0 } },
@@ -536,7 +536,7 @@ const AnimDef gUnk_0813E734 = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles,
 
 const EmyDef gEmyTrumpHDef = { gTrumpHPalette, gUnk_0813E704, 409, 130, 20, 20, 90, 32, 32, 10, 0, { 47, 200, 40, 16, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmyTrumpH = { "task_emy_trump_h", task_emy_trump_h_0, task_emy_trump_h_1, task_emy_trump_h_2, task_emy_trump_h_3, 0x184 };
+TaskDesc gTaskDescEmyTrumpH = { "task_emy_trump_h", task_emy_trump_h_0, task_emy_trump_h_1, task_emy_trump_h_2, task_emy_trump_h_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813E784[3] = {
     { gTrumpS00bFrames, gTrumpS00bAnims, gTrumpS00bTiles, 0, { 0, 0, 0 } },
@@ -548,7 +548,7 @@ const AnimDef gUnk_0813E7B4 = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles,
 
 const EmyDef gEmyTrumpSDef = { gTrumpSPalette, gUnk_0813E784, 307, 130, 20, 20, 64, 32, 32, 10, 0, { 46, 200, 40, 16, 16, 100, 0 } };
 
-TaskDesc gTaskDescEmyTrumpS = { "task_emy_trump_s", task_emy_trump_s_0, task_emy_trump_s_1, task_emy_trump_s_2, task_emy_trump_s_3, 0x184 };
+TaskDesc gTaskDescEmyTrumpS = { "task_emy_trump_s", task_emy_trump_s_0, task_emy_trump_s_1, task_emy_trump_s_2, task_emy_trump_s_3, sizeof(EmyWork) };
 
 const AnimDef gUnk_0813E804[3] = {
     { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0, { 0, 0, 0 } },
@@ -5678,4 +5678,4 @@ void task_emy_test_3(EmyWork* work) {
     func_0800E0D0(work);
 }
 
-TaskDesc gTaskDescEmyTest = { "task_emy_test", task_emy_test_0, task_emy_test_1, task_emy_test_2, task_emy_test_3, 0x184 };
+TaskDesc gTaskDescEmyTest = { "task_emy_test", task_emy_test_0, task_emy_test_1, task_emy_test_2, task_emy_test_3, sizeof(EmyWork) };

@@ -205,5 +205,5 @@ TaskDesc gTaskDescMonsgage = {
     (TaskUpdateFunc)task_monsgage_1,
     (TaskFunc)task_monsgage_2,
     (TaskFunc)task_monsgage_3,
-    0x28,
+    sizeof(MonsgageWork),
 };

@@ -20,11 +20,11 @@ const AnimDef gSmnCloudAnimDefs[8] = {
     { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 1, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescSmnCloud = { "task_smn_cloud", task_smn_cloud_0, task_smn_cloud_1, task_smn_cloud_2, task_smn_cloud_3, 0x180 };
+TaskDesc gTaskDescSmnCloud = { "task_smn_cloud", task_smn_cloud_0, task_smn_cloud_1, task_smn_cloud_2, task_smn_cloud_3, sizeof(SmnCloudWork) };
 
 const AnimDef gSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0, { 0, 0, 0 } };
 
-TaskDesc gTaskDescSmnBambi = { "task_smn_bambi", task_smn_bambi_0, task_smn_bambi_1, task_smn_bambi_2, task_smn_bambi_3, 0x178 };
+TaskDesc gTaskDescSmnBambi = { "task_smn_bambi", task_smn_bambi_0, task_smn_bambi_1, task_smn_bambi_2, task_smn_bambi_3, sizeof(SmnBambiWork) };
 
 const AnimDef gSmnTinkAnimDefs[3] = {
     { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 1, { 0, 0, 0 } },
@@ -32,13 +32,13 @@ const AnimDef gSmnTinkAnimDefs[3] = {
     { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 3, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescSmnTink = { "task_smn_tink", task_smn_tink_0, task_smn_tink_1, task_smn_tink_2, task_smn_tink_3, 0x180 };
+TaskDesc gTaskDescSmnTink = { "task_smn_tink", task_smn_tink_0, task_smn_tink_1, task_smn_tink_2, task_smn_tink_3, sizeof(SmnTinkWork) };
 
-TaskDesc gTaskDescSmnTinkeff = { "task_smn_tinkeff", task_smn_tinkeff_0, task_smn_tinkeff_1, task_smn_tinkeff_2, task_smn_tinkeff_3, 0x30 };
+TaskDesc gTaskDescSmnTinkeff = { "task_smn_tinkeff", task_smn_tinkeff_0, task_smn_tinkeff_1, task_smn_tinkeff_2, task_smn_tinkeff_3, sizeof(SmnTinkeffWork) };
 
 const AnimDef gSmnSimbaAnimDef = { gShinba10Frames, gShinba10Anims, gShinba10Tiles, 0, { 0, 0, 0 } };
 
-TaskDesc gTaskDescSmnSimba = { "task_smn_simba", task_smn_simba_0, task_smn_simba_1, task_smn_simba_2, task_smn_simba_3, 0x158 };
+TaskDesc gTaskDescSmnSimba = { "task_smn_simba", task_smn_simba_0, task_smn_simba_1, task_smn_simba_2, task_smn_simba_3, sizeof(SmnSimbaWork) };
 
 const AnimDef gSmnMushuAnimDefs[4] = {
     { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 0, { 0, 0, 0 } },
@@ -49,7 +49,7 @@ const AnimDef gSmnMushuAnimDefs[4] = {
 
 const AnimDef gUnk_0813EABC = { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 4, { 0, 0, 0 } };
 
-TaskDesc gTaskDescSmnMushu = { "task_smn_mushu", task_smn_mushu_0, task_smn_mushu_1, task_smn_mushu_2, task_smn_mushu_3, 0x15C };
+TaskDesc gTaskDescSmnMushu = { "task_smn_mushu", task_smn_mushu_0, task_smn_mushu_1, task_smn_mushu_2, task_smn_mushu_3, sizeof(SmnMushuWork) };
 
 const AnimDef gSmnDumboAnimDefs[3] = {
     { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 0, { 0, 0, 0 } },
@@ -57,14 +57,14 @@ const AnimDef gSmnDumboAnimDefs[3] = {
     { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 2, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescSmnDumbo = { "task_smn_dumbo", task_smn_dumbo_0, task_smn_dumbo_1, task_smn_dumbo_2, task_smn_dumbo_3, 0x158 };
+TaskDesc gTaskDescSmnDumbo = { "task_smn_dumbo", task_smn_dumbo_0, task_smn_dumbo_1, task_smn_dumbo_2, task_smn_dumbo_3, sizeof(SmnDumboWork) };
 
 const AnimDef gSmnGenieAnimDefs[2] = {
     { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 0, { 0, 0, 0 } },
     { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 1, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescSmnGenie = { "task_smn_genie", task_smn_genie_0, task_smn_genie_1, task_smn_genie_2, task_smn_genie_3, 0x168 };
+TaskDesc gTaskDescSmnGenie = { "task_smn_genie", task_smn_genie_0, task_smn_genie_1, task_smn_genie_2, task_smn_genie_3, sizeof(SmnGenieWork) };
 
 const AnimDef gSmnKingAnimDefs[3] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 0, { 0, 0, 0 } },
@@ -2623,4 +2623,4 @@ void func_08045494(BtlObj* body, u8 a, s16 b, s16 c) {
     }
 }
 
-TaskDesc gTaskDescSmnKing = { "task_smn_king", task_smn_king_0, task_smn_king_1, task_smn_king_2, task_smn_king_3, 0x168 };
+TaskDesc gTaskDescSmnKing = { "task_smn_king", task_smn_king_0, task_smn_king_1, task_smn_king_2, task_smn_king_3, sizeof(SmnKingWork) };

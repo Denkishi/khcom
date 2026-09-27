@@ -13,7 +13,7 @@ void Event_0(s32 arg) {
     EvtArg cfg;
     EventBackgroundDef* e;
 
-    gEventState = EwramAlloc(0x8C);
+    gEventState = EwramAlloc(sizeof(EventState));
     e = gUnk_09EE3CA0[arg & 0x7FFF];
     gBldCnt = 0;
     gBldAlpha = 0;

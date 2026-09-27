@@ -2805,7 +2805,7 @@ u8 eu_0806C974(EventSeqWork* work) {
         gEventState->unk_44 = u->unk_20;
     }
     for (i = 0; i < 16; i++) {
-        gEventState->unk_00[i] = NULL;
+        gEventState->charaObjs[i] = NULL;
     }
     return 1;
 }
@@ -2924,7 +2924,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     t = work->seqDef;
 
     while (i < 16) {
-        gEventState->unk_00[i] = NULL;
+        gEventState->charaObjs[i] = NULL;
         i++;
     }
 
@@ -3133,7 +3133,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
     p->unk_1B0 = 0;
     p->unk_1B6 = 1;
     p->unk_1B8 = 0;
-    gEventState->unk_00[p->unk_027] = (Ent08074EC8*)&p->obj;
+    gEventState->charaObjs[p->unk_027] = &p->obj;
 
     switch (p->unk_026) {
     case 95:
@@ -3175,7 +3175,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gBtlWork->scale = 0x100;
         gBtlWork->unk_018 = 0;
         SetBattleBounds(128, 424, 294, 384);
-        gEventState->unk_00[16] = TaskCreate(&p->tasks, &gTaskDescBosPc, NULL);
+        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosPc, NULL);
         break;
     case 97:
         gBtlWork = EwramAlloc(464);
@@ -3192,7 +3192,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gBtlWork->scale = 0x100;
         gBtlWork->unk_018 = 0;
         SetBattleBounds(128, 424, 294, 384);
-        gEventState->unk_00[16] = TaskCreate(&p->tasks, &gTaskDescBosPc, &p->tasks);
+        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosPc, &p->tasks);
         p->unk_1B4 = 0;
         gEventState->unk_48 = v0 = gBtlWork->unk_000;
         gEventState->unk_4C = v1 = gBtlWork->unk_004;
@@ -3217,7 +3217,7 @@ void event_chara_0(EventCharaWork* p, u32* a) {
         gBtlWork->scale = 0x100;
         gBtlWork->unk_018 = 0;
         SetBattleBounds(128, 368, 480, 512);
-        gEventState->unk_00[16] = TaskCreate(&p->tasks, &gTaskDescBosLst, &p->tasks);
+        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosLst, &p->tasks);
         break;
     case 101:
         SetupBg(0, 0, 24, 0);
@@ -3543,11 +3543,11 @@ u8 func_0806E570(EventCharaWork* p) {
     }
 
     if (p->keyframes[p->unk_1A0].unk_00 == 0x3AF) {
-        func_0810B350(gEventState->unk_00[16]);
+        func_0810B350(gEventState->bossTask);
     }
 
     if (p->keyframes[p->unk_1A0].unk_00 == 0x3AB) {
-        func_0810C2C4(gEventState->unk_00[16]);
+        func_0810C2C4(gEventState->bossTask);
     }
 
     return 0;
@@ -6939,6 +6939,7 @@ void view_0(EventCameraWork* p, u8* arg) {
     EventSequenceDef* t;
     EventBackgroundDef* u;
     const EventCameraKeyframe* q;
+    EvtObj* obj;
     u8 n;
 
     gEventScanlineScroll = (EventScanlineScroll*)p->unk_18;
@@ -6957,9 +6958,9 @@ void view_0(EventCameraWork* p, u8* arg) {
 
     if (q->unk_10 != 255) {
         n = func_08074E40(p);
-        q = (EventCameraKeyframe*)gEventState->unk_00[n];
-        p->unk_00 = q->unk_04;
-        p->unk_04 = q->unk_08;
+        obj = gEventState->charaObjs[n];
+        p->unk_00 = obj->x;
+        p->unk_04 = obj->y;
     } else {
         p->unk_00 = q->unk_04;
         p->unk_04 = q->unk_08;
@@ -7009,7 +7010,7 @@ void func_080746D8(void) {
 u8 view_1(EventCameraWork* p, u8* task) {
     EventBackgroundDef* u = gUnk_09EE3CA0[p->unk_08];
     const EventCameraKeyframe* e;
-    Ent08074EC8* q;
+    EvtObj* q;
     u8 n;
 
     if (gEventState->unk_60 == 98) {
@@ -7049,9 +7050,9 @@ u8 view_1(EventCameraWork* p, u8* task) {
                 p->unk_04 = e->unk_08;
             } else {
                 n = func_08074E40(p);
-                q = gEventState->unk_00[n];
-                p->unk_00 = q->unk_04;
-                p->unk_04 = q->unk_08 + q->unk_0C + e->unk_0C;
+                q = gEventState->charaObjs[n];
+                p->unk_00 = q->x;
+                p->unk_04 = q->y + q->z + e->unk_0C;
             }
         }
 
@@ -7220,16 +7221,16 @@ u8 view_1(EventCameraWork* p, u8* task) {
         }
     } else {
         n = func_08074E88(p, gEventState->unk_88);
-        p->unk_00 = gEventState->unk_00[n]->unk_04;
+        p->unk_00 = gEventState->charaObjs[n]->x;
 
         switch (gEventState->unk_87) {
         case 0:
         case 2:
-            p->unk_04 = gEventState->unk_00[n]->unk_08 + gEventState->unk_00[n]->unk_0C + gUnk_09033758[n];
+            p->unk_04 = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z + gUnk_09033758[n];
             break;
         case 1:
         case 3:
-            p->unk_04 = gEventState->unk_00[n]->unk_08 + gEventState->unk_00[n]->unk_0C;
+            p->unk_04 = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z;
             break;
         }
 
@@ -7365,14 +7366,14 @@ u8 func_08074E88(EventCameraWork* p, u8 v) {
 
 u8 _08074EC8(EventCameraWork* p) {
     EventBackgroundDef* t;
-    Ent08074EC8* q;
+    EvtObj* q;
     u8 n;
 
     n = func_08074E88(p, 0);
     t = gUnk_09EE3CA0[p->unk_08];
-    q = gEventState->unk_00[n];
-    p->unk_00 = q->unk_04;
-    p->unk_04 = q->unk_08 + q->unk_0C;
+    q = gEventState->charaObjs[n];
+    p->unk_00 = q->x;
+    p->unk_04 = q->y + q->z;
 
     if (t != NULL) {
         if (t->unk_24 != 0) {

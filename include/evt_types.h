@@ -32,15 +32,12 @@ typedef char EvtObjAnim_size[(sizeof(EvtObjAnim) == 16) ? 1 : -1];
 typedef char EvtObjResTable_size[(sizeof(EvtObjResTable) == 16) ? 1 : -1];
 
 
-typedef struct Ent08074EC8 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-} Ent08074EC8;
+struct EvtObj;
+struct Task;
 
 typedef struct EventState {
-    Ent08074EC8* unk_00[17];
+    struct EvtObj* charaObjs[16];
+    struct Task* bossTask;
     s32 unk_44;
     s32 unk_48;
     s32 unk_4C;

@@ -78,29 +78,35 @@ typedef struct CardSlot {
     u8 unk_0B;
 } CardSlot;
 
+typedef struct CardDisplayArgs {
+    ListPool* pool;
+    CardSlot* slot;
+    s32 unk_08;
+    u16 index;
+    u8 unk_0E;
+    u8 unk_0F;
+} CardDisplayArgs;
+
+typedef char CardDisplayArgs_size[(sizeof(CardDisplayArgs) == 0x10) ? 1 : -1];
+
 typedef struct CardDisplayWork {
     void* tiles;
     void* tiles2;
     void* tiles3;
     void* tiles4;
-    u8 unk_10[0x04];
+    void* tiles5;
     void* palette;
     void* unk_18;
-    u8 unk_1C[0x04];
+    void* unk_1C;
     struct UnkStruct_08095A5C* unk_20;
     u8 unk_24[0x14];
-    ListPool* pool;
-    CardSlot* slot;
-    u8 unk_40[4];
-    u16 unk_44;
-    u8 unk_46;
-    u8 unk_47;
+    CardDisplayArgs args;
     CardDef* cardDef;
     s32 x;
     s32 y;
     s32 unk_54;
     s32 unk_58;
-    u8 unk_5C[0x02];
+    u16 unk_5C;
     u8 unk_5E;
     u8 unk_5F;
     u8 unk_60[0x04];
@@ -126,6 +132,8 @@ typedef struct CardDisplayWork {
     u8 unk_A6;
     u8 unk_A7;
 } CardDisplayWork;
+
+typedef char CardDisplayWork_size[(sizeof(CardDisplayWork) == 0xA8) ? 1 : -1];
 extern const u16 gUnk_0903BFD4[];
 extern const u16 gUnk_0903BFBC[];
 extern u8 gUnk_096148D8[];
@@ -875,15 +883,6 @@ typedef struct DarkPointWork {
 
 typedef char DarkPointWork_sizechk[(sizeof(struct DarkPointWork) == 0x10) ? 1 : -1];
 
-typedef struct UnkStruct_0807FD10_Args {
-    void* unk_00;
-    CardSlot* slot;
-    u8 unk_08[0x04];
-    u16 unk_0C;
-    u8 unk_0E;
-    u8 unk_0F;
-} UnkStruct_0807FD10_Args;
-
 typedef struct UnkStruct_08078754 {
     u8 unk_00[0x44];
     CardSlot* slots[4];
@@ -1326,16 +1325,6 @@ typedef struct EventMapObjectDef {
     EventMapObjectPlacement* placements;
     u16 placementCount;
 } EventMapObjectDef;
-
-typedef struct CardDisplayArgs {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u8 unk_0C;
-    u8 unk_0D;
-    u8 unk_0E;
-    u8 unk_0F;
-} CardDisplayArgs;
 
 typedef struct MapSelectWork {
     TaskPool tasks;
@@ -2490,24 +2479,6 @@ struct UnkStruct_080A23A0_Packed {
     u32 unk_04 : 16;
     u32 unk_06 : 16;
 };
-
-typedef struct UnkStruct_080917C8_Args {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u16 unk_0C;
-    u8 unk_0E;
-    u8 unk_0F;
-} UnkStruct_080917C8_Args;
-
-typedef struct UnkStruct_08091978_Args {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u16 unk_0C;
-    u8 unk_0E;
-    u8 unk_0F;
-} UnkStruct_08091978_Args;
 
 extern s8 gUnk_0203C374;
 

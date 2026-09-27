@@ -359,21 +359,21 @@ CardSlot* func_08076750(UnkStruct_08078754* w, u8 slot, u16* n) {
     return 0;
 }
 void func_0807682C(UnkStruct_08080268* w, u8 slot) {
-    UnkStruct_0807FD10_Args arg;
+    CardDisplayArgs arg;
     u16 n;
     s16 count = 0;
     u16 old;
     CardSlot* c;
     CardDisplayWork* e;
-    EventCardLink* p;
+    CardDisplayWork* p;
     if (w->unk_94[slot] != 0xFFFF) {
         u32 index = w->unk_94[slot];
         n = index;
         old = index;
         c = func_08076674((UnkStruct_08078754*)w, slot, &n);
         if (c != 0) {
-            arg.unk_00 = &w->unk_54[slot];
-            arg.unk_0C = n;
+            arg.pool = &w->unk_54[slot];
+            arg.index = n;
             arg.unk_0E = slot;
             arg.slot = c;
             arg.unk_0F = w->unk_9C[slot];
@@ -392,8 +392,8 @@ void func_0807682C(UnkStruct_08080268* w, u8 slot) {
         }
         c = func_08076674((UnkStruct_08078754*)w, slot, &n);
         if (c != 0 && (s16)n != w->unk_94[slot]) {
-            arg.unk_00 = &w->unk_54[slot];
-            arg.unk_0C = n;
+            arg.pool = &w->unk_54[slot];
+            arg.index = n;
             arg.unk_0E = slot;
             arg.slot = c;
             arg.unk_0F = w->unk_9C[slot];
@@ -412,8 +412,8 @@ void func_0807682C(UnkStruct_08080268* w, u8 slot) {
         }
         c = func_08076750((UnkStruct_08078754*)w, slot, &n);
         if (c != 0 && (s16)n != w->unk_94[slot] && (s16)n != (s16)old) {
-            arg.unk_00 = &w->unk_54[slot];
-            arg.unk_0C = n;
+            arg.pool = &w->unk_54[slot];
+            arg.index = n;
             arg.unk_0E = slot;
             arg.slot = c;
             arg.unk_0F = w->unk_9C[slot];
@@ -428,8 +428,8 @@ void func_0807682C(UnkStruct_08080268* w, u8 slot) {
     }
     switch (count) {
         case 0:
-            arg.unk_00 = &w->unk_54[slot];
-            arg.unk_0C = 0xFFFF;
+            arg.pool = &w->unk_54[slot];
+            arg.index = 0xFFFF;
             arg.slot = (CardSlot*)w->unk_44[slot];
             arg.unk_0E = slot;
             TaskCreate((TaskPool*)w, &gTaskDescCardNotHave, &arg);
@@ -483,10 +483,10 @@ void func_0807682C(UnkStruct_08080268* w, u8 slot) {
             e->unk_78 |= 0x800;
             break;
     }
-    p = (EventCardLink*)ListPoolFirst(&w->unk_54[slot]);
+    p = (CardDisplayWork*)ListPoolFirst(&w->unk_54[slot]);
     while (p != 0) {
-        p->slot->unk_06 = 0;
-        p = (EventCardLink*)ListPoolNext(&p->node);
+        p->args.slot->unk_06 = 0;
+        p = (CardDisplayWork*)ListPoolNext(&p->node);
     }
     w->unk_34[slot] = ListPoolFirst(&w->unk_54[slot]);
     {
@@ -1263,7 +1263,7 @@ static void cardbattle_3(CardBattleWork* w) {
 }
 
 s32 func_08077F44(UnkStruct_08080268* w, u8* task) {
-    UnkStruct_0807FD10_Args arg;
+    CardDisplayArgs arg;
     CardDisplayWork* e;
     CardSlot* c;
     u16 n;
@@ -1297,12 +1297,12 @@ s32 func_08077F44(UnkStruct_08080268* w, u8* task) {
                 e = ListPoolNext(&e->node);
             }
 
-            n = gUnk_02034A98->unk_44 - 1;
+            n = gUnk_02034A98->args.index - 1;
             c = func_08076750((UnkStruct_08078754*)w, w->unk_B8, &n);
 
             if (c != 0) {
-                arg.unk_00 = &w->unk_54[w->unk_B8];
-                arg.unk_0C = n;
+                arg.pool = &w->unk_54[w->unk_B8];
+                arg.index = n;
                 arg.unk_0E = w->unk_B8;
                 arg.slot = c;
                 arg.unk_0F = w->unk_9C[w->unk_B8];
@@ -1330,11 +1330,11 @@ s32 func_08077F44(UnkStruct_08080268* w, u8* task) {
                 k = e->unk_A4;
 
                 if (k == 1) {
-                    a = *(u16*)((u8*)e + 0x44);
+                    a = e->args.index;
                 }
 
                 if (k == 2) {
-                    b = *(u16*)((u8*)e + 0x44);
+                    b = e->args.index;
                 }
 
                 e = ListPoolNext(&e->node);
@@ -1344,8 +1344,8 @@ s32 func_08077F44(UnkStruct_08080268* w, u8* task) {
             c = func_08076750((UnkStruct_08078754*)w, w->unk_B8, &n);
 
             if (c != 0 && (s16)n != a && (s16)n != b) {
-                arg.unk_00 = &w->unk_54[w->unk_B8];
-                arg.unk_0C = n;
+                arg.pool = &w->unk_54[w->unk_B8];
+                arg.index = n;
                 arg.unk_0E = w->unk_B8;
                 arg.slot = c;
                 arg.unk_0F = w->unk_9C[w->unk_B8];

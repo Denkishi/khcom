@@ -2528,37 +2528,37 @@ u8 func_080954C4(ReloadGageWork* w, void* a) {
     return 1;
 }
 void Reload_Gage_2(CardDisplayWork* p) {
-    u8* q;
+    UnkStruct_08095A5C* q;
     s32 affine;
     void* gfx;
     s32 t;
 
     q = p->unk_20;
-    gfx = gUnk_08F709B0[p->unk_46].gfx2;
-    DrawSprite((p->x >> 8) + (*(s32*)&q[4] >> 8),
+    gfx = gUnk_08F709B0[p->args.unk_0E].gfx2;
+    DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
                gfx, p->tiles2,
                gUnk_02039DD4->palette, 0, 0x400, 50);
 
     if (p->unk_58 > 0) {
         affine = AllocObjAffine(0, 0x100, p->unk_58, 0);
-        DrawSprite((p->x >> 8) + (*(s32*)&q[4] >> 8),
+        DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                    (p->y >> 8) + (t = (gSineTable[p->unk_5F] >> 8) + 17),
-                   *(void**)&q[0x58], p->tiles3, gUnk_02039DD4->palette, affine,
+                   q->gfx, p->tiles3, gUnk_02039DD4->palette, affine,
                    0x400, 49);
 
         if (p->unk_9F == 1) {
-            DrawSprite((p->x >> 8) + (*(s32*)&q[4] >> 8),
+            DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                        (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                       *(void**)&q[0x5C], p->tiles4, gUnk_02039DD4->palette, 0,
+                       q->gfx2, p->tiles4, gUnk_02039DD4->palette, 0,
                        0x400, 49);
         }
     }
 
-    if (*(void**)&q[0x60] != 0) {
-        DrawSprite((p->x >> 8) + (*(s32*)&q[4] >> 8),
+    if (q->gfx3 != 0) {
+        DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                    (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                   *(void**)&q[0x60], *(void**)&p->unk_10[0],
+                   q->gfx3, p->tiles5,
                    gUnk_02039DD4->palette, 0, 0x400, 48);
     }
 
@@ -2571,11 +2571,11 @@ void Reload_Gage_3(CardDisplayWork* p) {
     ReleaseObjTiles(p->tiles2);
     ReleaseObjTiles(p->tiles3);
     ReleaseObjTiles(p->tiles4);
-    ReleaseObjTiles(*(void**)&p->unk_10[0]);
-    EwramFree(*(void**)&p->unk_1C[0]);
+    ReleaseObjTiles(p->tiles5);
+    EwramFree(p->unk_1C);
     EwramFree(p->unk_20);
 
-    switch (*(s32*)&p->unk_40[0]) {
+    switch (p->args.unk_08) {
     case 1:
         gBtlWork->flags &= ~0x1000000;
 
@@ -2608,7 +2608,7 @@ void Reload_Gage_3(CardDisplayWork* p) {
         break;
     }
 
-    ListPoolRemove(&p->node, p->pool);
+    ListPoolRemove(&p->node, p->args.pool);
 }
 void func_080958E0(ReloadGageWork* w) {
     ApproachValue(&w->angle, w->targetAngle, w->unk_A3);

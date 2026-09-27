@@ -134,13 +134,6 @@ typedef struct CardBattleWork {
     u8 unk_BB[0x11];
 } CardBattleWork;
 
-typedef struct EventCardLink {
-    u8 unk_00[0x3C];
-    struct CardSlot* slot;
-    u8 unk_40[0x24];
-    u8 node[0x14];
-} EventCardLink;
-
 typedef struct {
     u32 slot : 8;
     u32 mode : 8;

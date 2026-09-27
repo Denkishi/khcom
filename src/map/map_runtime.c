@@ -766,11 +766,11 @@ u8 func_080DF750(void) {
     return 1;
 }
 
-u32 func_080DF804(u8 index) {
+void* func_080DF804(u8 index) {
 #ifdef VERSION_EU
-    return (u32)eu_0805E924(gUnk_09EF69FC[index]);
+    return eu_0805E924(gUnk_09EF69FC[index]);
 #else
-    return (u32)gUnk_09EF69FC[index];
+    return (void*)gUnk_09EF69FC[index];
 #endif
 }
 

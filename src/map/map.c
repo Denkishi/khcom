@@ -3491,7 +3491,7 @@ void func_080EAD84(u8 a) {
 
     if (e->level != 0) {
         func_080EAB20(i, 1, e->floor);
-        gNewGameSlotMenuWork->textSlotCount = LoadTextSlots((void*)func_080DF804(e->world), &gNewGameSlotMenuWork->textSlots);
+        gNewGameSlotMenuWork->textSlotCount = LoadTextSlots(func_080DF804(e->world), &gNewGameSlotMenuWork->textSlots);
 
         if (gNewGameSlotMenuWork->unk_33D == 0) {
             LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->paletteBank, &gUnk_099910C4[0xB40]);
@@ -3983,7 +3983,7 @@ void func_080EBA58(u8 a) {
 
     if (e->level != 0) {
         func_080EB818(a, 1, e->floor);
-        gLoadGameMenuWork->textSlotCount = LoadTextSlots((void*)func_080DF804(e->world), &gLoadGameMenuWork->textSlots);
+        gLoadGameMenuWork->textSlotCount = LoadTextSlots(func_080DF804(e->world), &gLoadGameMenuWork->textSlots);
 
         if (a <= 1) {
             LoadObjPaletteBank(gLoadGameMenuWork->palette7->paletteBank, &gUnk_099910C4[0xB40]);
@@ -5937,7 +5937,7 @@ void func_080EE760(u8* work, u8 i) {
         func_080EE5E0(e->floor);
         func_080EE62C(e->level);
         func_080EE6AC(e->playTime);
-        work[0x164] = LoadTextSlots((void*)func_080DF804(e->world), &work[0x44]);
+        work[0x164] = LoadTextSlots(func_080DF804(e->world), &work[0x44]);
     }
 }
 

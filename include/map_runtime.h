@@ -44,7 +44,7 @@ void func_080DF640(u8 a, UnkStruct_080DF640* p);
 void func_080DF6D0(UnkStruct_0203C7AC* p, u8 a);
 void func_080DF730(u8 a, u8 b);
 u8 func_080DF750(void);
-u32 func_080DF804(u8 index);
+void* func_080DF804(u8 index);
 void func_080DF814(void);
 void func_080DF828(void);
 void func_080DF8C0(u8 a, u8 b);

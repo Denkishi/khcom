@@ -32,7 +32,7 @@ s32 task_acgtrans_1(AcgTransWork* work) {
     return 0;
 }
 
-void CreateBgTileTransferTask(void* a, s32 bg, u16 tile, u16 count, u16 frames, u32 src) {
+void CreateBgTileTransferTask(TaskPool* pool, s32 bg, u16 tile, u16 count, u16 frames, const u8* src) {
     AcgTransConfig cfg;
 
     cfg.src = src;
@@ -44,7 +44,7 @@ void CreateBgTileTransferTask(void* a, s32 bg, u16 tile, u16 count, u16 frames, 
     if (cfg.frames == 0) {
         cfg.frames = 1;
     }
-    TaskCreate(a, &gTaskDescAcgtrans, &cfg);
+    TaskCreate(pool, &gTaskDescAcgtrans, &cfg);
 }
 
-TaskDesc gTaskDescAcgtrans = { "task_acgtrans", task_acgtrans_0, task_acgtrans_1, 0, 0, 0x14 };
+TaskDesc gTaskDescAcgtrans = { "task_acgtrans", (TaskInitFunc)task_acgtrans_0, (TaskUpdateFunc)task_acgtrans_1, 0, 0, sizeof(AcgTransWork) };

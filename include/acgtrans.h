@@ -10,8 +10,8 @@
 #include "game.h"
 
 typedef struct AcgTransWork {
-    u32 dst;
-    u32 src;
+    u8* dst;
+    const u8* src;
     u16 size;
     u16 chunkSize;
     u16 transferredBytes;
@@ -19,14 +19,14 @@ typedef struct AcgTransWork {
 } AcgTransWork;
 
 typedef struct AcgTransConfig {
-    u32 src;
-    u32 dst;
+    const u8* src;
+    u8* dst;
     u16 size;
     u16 frames;
     u32 bg;
 } AcgTransConfig;
 
 
-void CreateBgTileTransferTask(void* a, s32 bg, u16 tile, u16 count, u16 frames, u32 src);
+void CreateBgTileTransferTask(TaskPool* pool, s32 bg, u16 tile, u16 count, u16 frames, const u8* src);
 
 #endif /* GUARD_ACGTRANS_H */

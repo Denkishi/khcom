@@ -298,13 +298,13 @@ void func_080C2A2C(DsdMainWork* work) {
         switch (d->unk_338) {
         case 4:
         case 5:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, (u32)gUnk_09699684);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, gUnk_09699684);
             break;
         case 6:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x280, 8, (u32)gUnk_096A3F44);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x280, 8, gUnk_096A3F44);
             break;
         case 7:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x200, 8, (u32)gUnk_096A8BA4);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x200, 8, gUnk_096A8BA4);
             break;
         }
 
@@ -369,7 +369,7 @@ void func_080C2BB0(DsdMainWork* work) {
         }
         break;
     case 2:
-        CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, (u32)gUnk_096874E4);
+        CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, gUnk_096874E4);
         work->unk_006 = 0;
         work->dsd->unk_350++;
         break;

@@ -1544,11 +1544,7 @@ void mode_jiminy_0(void) {
     s32 j;
     JiminyEntry* e;
 
-#ifdef VERSION_EU
-    gJiminyWork = EwramAlloc(0xED0);
-#else
-    gJiminyWork = EwramAlloc(0xD40);
-#endif
+    gJiminyWork = EwramAlloc(sizeof(JiminyWork));
     SetBgMode0();
     SetupBg(0, 0, 0x1D, 0);
     SetupBg(1, 0, 0x1E, 0);

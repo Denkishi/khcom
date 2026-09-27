@@ -815,35 +815,35 @@ void CreateGimmickCardTask(void* pool, u16 a, u16 b, u16 c, u16 d) {
     }
 }
 
-void func_0809B76C(u8* work, void** src) {
+void func_0809B76C(StockNameWork* w, const s32* src) {
     u8 i;
-    void** dst;
-    void** q;
-    void** s;
+    s32* dst;
+    s32* q;
+    const s32* s;
     s32 z;
-    UnkStruct_080038C8* obj;
+    ObjTiles* obj;
 
     if (src != 0) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = (void**)&work[0x18];
+            dst = w->unk_18;
             q = &dst[i];
             *q = s[i];
         }
 
-        work[0x30] = 1;
+        w->unk_30 = 1;
     } else {
-        work[0x30] = 0;
+        w->unk_30 = 0;
     }
 
     z = 0;
-    work[0x11] = z;
-    *(u16*)&work[4] = z;
+    w->unk_11 = z;
+    w->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
-    *(UnkStruct_080038C8**)&work[8] = obj;
+    w->tiles = obj;
 
-    if (work[0x30] == 0) {
+    if (w->unk_30 == 0) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -859,17 +859,17 @@ void func_0809B76C(u8* work, void** src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[*(u32*)&work[0x18]].sprites);
-        u = LANGSTR(gUnk_08F7CF18[*(u32*)&work[0x18]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[*(u32*)&work[0x18]].spriteIndex], u);
+        t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[0]].sprites);
+        u = LANGSTR(gUnk_08F7CF18[w->unk_18[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[*(u32*)&work[0x18]].sprites[gUnk_08F7CF18[*(u32*)&work[0x18]].spriteIndex], gUnk_08F7CF18[*(u32*)&work[0x18]].tiles);
+        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[w->unk_18[0]].sprites[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], gUnk_08F7CF18[w->unk_18[0]].tiles);
 #endif
     }
 
-    *(void**)&work[0xC] = LoadObjPalette(gBStatesPalette, 32);
-    work[0x31] = 1;
-    *(u32*)&work[0x14] = gUnk_02039DD4->unk_0C4;
+    w->palette = LoadObjPalette(gBStatesPalette, 32);
+    w->unk_31 = 1;
+    w->unk_14 = gUnk_02039DD4->unk_0C4;
 }
 
 u8 func_0809B840(StockNameWork* w) {
@@ -905,9 +905,9 @@ u8 func_0809B840(StockNameWork* w) {
     return 1;
 }
 
-void func_0809B8F0(u8* work) {
-    if (work[0x31] != 0) {
-        DrawSprite(64, 14, 0, *(void**)&work[0x08], *(void**)&work[0x0C], 0,
+void func_0809B8F0(StockNameWork* w) {
+    if (w->unk_31 != 0) {
+        DrawSprite(64, 14, 0, w->tiles, w->palette, 0,
 #ifdef VERSION_EU
                    0x410,
 #else
@@ -916,35 +916,35 @@ void func_0809B8F0(u8* work) {
                    10);
     }
 }
-void func_0809B920(u8* work, void** src) {
+void func_0809B920(StockNameWork* w, const s32* src) {
     u8 i;
-    void** dst;
-    void** q;
-    void** s;
+    s32* dst;
+    s32* q;
+    const s32* s;
     s32 z;
-    UnkStruct_080038C8* obj;
+    ObjTiles* obj;
 
     if (src != 0) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = (void**)&work[0x18];
+            dst = w->unk_18;
             q = &dst[i];
             *q = s[i];
         }
 
-        work[0x30] = 1;
+        w->unk_30 = 1;
     } else {
-        work[0x30] = 0;
+        w->unk_30 = 0;
     }
 
     z = 0;
-    work[0x11] = z;
-    *(u16*)&work[4] = z;
+    w->unk_11 = z;
+    w->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
-    *(UnkStruct_080038C8**)&work[8] = obj;
+    w->tiles = obj;
 
-    if (work[0x30] == 0) {
+    if (w->unk_30 == 0) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -960,17 +960,17 @@ void func_0809B920(u8* work, void** src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[*(u32*)&work[0x18]].sprites);
-        u = LANGSTR(gUnk_08F7CF18[*(u32*)&work[0x18]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[*(u32*)&work[0x18]].spriteIndex], u);
+        t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[0]].sprites);
+        u = LANGSTR(gUnk_08F7CF18[w->unk_18[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[*(u32*)&work[0x18]].sprites[gUnk_08F7CF18[*(u32*)&work[0x18]].spriteIndex], gUnk_08F7CF18[*(u32*)&work[0x18]].tiles);
+        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[w->unk_18[0]].sprites[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], gUnk_08F7CF18[w->unk_18[0]].tiles);
 #endif
     }
 
-    *(void**)&work[0xC] = LoadObjPalette(gBStatesPalette, 32);
-    work[0x31] = 1;
-    *(u32*)&work[0x14] = gUnk_02039DD4->unk_0C6;
+    w->palette = LoadObjPalette(gBStatesPalette, 32);
+    w->unk_31 = 1;
+    w->unk_14 = gUnk_02039DD4->unk_0C6;
 }
 
 u8 func_0809B9F4(StockNameWork* w) {
@@ -1006,24 +1006,23 @@ u8 func_0809B9F4(StockNameWork* w) {
     return 1;
 }
 
-void func_0809BAA4(u8* work) {
-    if (gUnk_02039B9C->unk_0F4 != 28 && work[0x31] != 0) {
-        DrawSprite(120, 14, 0, *(void**)&work[0x08], *(void**)&work[0x0C], 0, 0,
-                   10);
+void func_0809BAA4(StockNameWork* w) {
+    if (gUnk_02039B9C->unk_0F4 != 28 && w->unk_31 != 0) {
+        DrawSprite(120, 14, 0, w->tiles, w->palette, 0, 0, 10);
     }
 }
-void func_0809BAE4(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x08]);
-    ReleaseObjPalette(*(void**)&work[0x0C]);
+void func_0809BAE4(StockNameWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
     gUnk_02039DD4->unk_0D9 = 0;
-    work[0x31] = 0;
+    w->unk_31 = 0;
     gUnk_02039DD4->unk_0CA = 256;
 }
-void func_0809BB18(u8* work) {
-    ReleaseObjTiles(*(void**)&work[0x08]);
-    ReleaseObjPalette(*(void**)&work[0x0C]);
+void func_0809BB18(StockNameWork* w) {
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
     gUnk_02039DD4->unk_0D8 = 0;
-    work[0x31] = 0;
+    w->unk_31 = 0;
     gUnk_02039DD4->unk_0C8 = 256;
 }
 
@@ -1467,7 +1466,7 @@ TaskDesc gUnk_09EE77D4 = {
     (TaskUpdateFunc)func_0809B840,
     (TaskFunc)func_0809B8F0,
     (TaskFunc)func_0809BB18,
-    0x34,
+    sizeof(StockNameWork),
 };
 
 TaskDesc gUnk_09EE77EC = {
@@ -1476,7 +1475,7 @@ TaskDesc gUnk_09EE77EC = {
     (TaskUpdateFunc)func_0809B9F4,
     (TaskFunc)func_0809BAA4,
     (TaskFunc)func_0809BAE4,
-    0x34,
+    sizeof(StockNameWork),
 };
 #ifdef VERSION_EU
 void** gUnkEu_09F72BFC[5] = { gUnk_09EEA16C, &gUnkEu_09F75FB4, &gUnkEu_09F75FCC, &gUnkEu_09F75FC4, &gUnkEu_09F75FBC };

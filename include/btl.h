@@ -143,7 +143,7 @@ typedef struct BtlSoraWork {
 } BtlSoraWork;
 
 typedef struct BtlRikuWork {
-    void* tiles2;
+    ObjTiles* tiles2;
     void* tiles;
     ObjPalette* palette;
     void* gfx;

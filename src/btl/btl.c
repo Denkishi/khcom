@@ -3206,7 +3206,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 e = ListPoolFirst(&gBtlWork->pool);
 
                 while (e != 0) {
-                    if (e->unk_0E8 != 2 && *(s32*)&e->unk_0D8 == 0) {
+                    if (e->unk_0E8 != 2 && e->unk_0D8 == 0) {
                         func_08019190(e, 10);
                         e->unk_02C += 50;
 
@@ -6433,7 +6433,7 @@ void func_08027570(BtlRikuWork* work, BtlDrawInfo* out) {
         out->flags &= 0xFFFE;
     }
     out->anim = work->anim;
-    out->unk_28 = *(void**)work->tiles2;
+    out->unk_28 = work->tiles2->src;
     out->unk_2C = gBtlWork->scale;
 }
 

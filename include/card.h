@@ -817,7 +817,7 @@ typedef char PremiumCardEffectWork_sizechk[(sizeof(struct PremiumCardEffectWork)
 
 typedef struct CardNameWork {
     void* tiles;
-    UnkStruct_080038C8* unk_04;
+    ObjPalette* unk_04;
     TextSlot textSlots[32];
     TextSlot textSlots2[32];
 #ifdef VERSION_EU
@@ -825,26 +825,20 @@ typedef struct CardNameWork {
 #else
     TextSlot textSlots3[2];
 #endif
-    void* unk_218;
-    void* palette;
+    ObjPalette* unk_218;
+    ObjPalette* palette;
     s16 unk_220;
     s16 unk_222;
     s16 unk_224;
     u8 textSlotCount;
     u8 textSlotCount2;
-#ifndef VERSION_US
     u8 textSlotCount3;
-#endif
 } CardNameWork;
 
 #ifdef VERSION_EU
 typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x31C) ? 1 : -1];
 #else
-#ifdef VERSION_JP
 typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x22C) ? 1 : -1];
-#else
-typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x228) ? 1 : -1];
-#endif
 #endif
 
 typedef struct DarkPointWork {
@@ -2631,7 +2625,7 @@ extern u8 gUnkEu_02034AD4[4];
 extern u8 gUnk_02034AB8[20];
 extern u8 gUnk_02034ACC;
 extern u32 gUnk_02034AD0;
-extern void* gUnk_02034AD4;
+extern UnkStruct_02034AD4* gUnk_02034AD4;
 extern u8 gUnk_02034AD8;
 extern u8 gUnk_02034AD9;
 extern u8 gUnk_02034ADA[6];

@@ -41,7 +41,7 @@
 #include "sprites_card.h"
 #include "premium_card_effect.h"
 
-void* gUnk_02034AD4;
+UnkStruct_02034AD4* gUnk_02034AD4;
 
 u8 gUnk_02034AD8;
 
@@ -67,7 +67,7 @@ const u16 gUnk_090362A4[23] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'
 
 void CardName_0(CardNameWork* w) {
     UnkStruct_0809C534* q = gCardListWork->selectedCard;
-    UnkStruct_080038C8* pal;
+    ObjPalette* pal;
     s32 v;
     s16 t;
 
@@ -140,47 +140,41 @@ void CardName_0(CardNameWork* w) {
     pal = LoadObjPalette(gCard00Palette, 32);
     w->unk_04 = pal;
     FadeSetPaletteExcluded(pal->index + 16, 1);
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->unk_218)->index + 16, 1);
+    FadeSetPaletteExcluded(w->unk_218->index + 16, 1);
 }
 s32 CardName_1(void) {
     return 1;
 }
-#ifdef VERSION_EU
-#define CARDNAME(off) ((off) + 0xF0)
-#else
-#define CARDNAME(off) (off)
-#endif
-#ifdef VERSION_JP
-#define CARDNAME_PAL0 0x218
-#else
-#define CARDNAME_PAL0 CARDNAME(0x21C)
-#endif
-void CardName_2(u8* work) {
+void CardName_2(CardNameWork* w) {
     void** p = &gUnk_09EF1278[2];
 
-    DrawSprite(120, 126, *p, *(void**)&work[0x00], *(void**)&work[0x04], 0, 0, 50);
-    DrawTextSlots(*(s16*)&work[CARDNAME(0x220)], 115, &work[0x08], *(void**)&work[CARDNAME_PAL0], 30, work[CARDNAME(0x226)]);
-#ifndef VERSION_US
-    DrawTextSlots(*(s16*)&work[CARDNAME(0x224)], 115, &work[0x208], *(void**)&work[CARDNAME(0x218)], 30, work[CARDNAME(0x228)]);
-#endif
-    DrawTextSlots(*(s16*)&work[CARDNAME(0x222)], 130, &work[0x108], *(void**)&work[CARDNAME(0x218)], 30, work[CARDNAME(0x227)]);
-}
-void CardName_3(u8* work) {
-    FreeTextSlots((TextSlot*)&work[0x08], 32);
-    FreeTextSlots((TextSlot*)&work[0x108], 32);
-#ifdef VERSION_EU
-    FreeTextSlots((TextSlot*)&work[0x208], 32);
-    ReleaseObjTiles(*(void**)&work[0x00]);
-    ReleaseObjPalette(*(void**)&work[0x308]);
-    ReleaseObjPalette(*(void**)&work[0x04]);
-    ReleaseObjPalette(*(void**)&work[0x30C]);
+    DrawSprite(120, 126, *p, w->tiles, w->unk_04, 0, 0, 50);
+#ifdef VERSION_JP
+    DrawTextSlots(w->unk_220, 115, w->textSlots, w->unk_218, 30, w->textSlotCount);
 #else
-    FreeTextSlots((TextSlot*)&work[0x208], 2);
-    ReleaseObjTiles(*(void**)&work[0x00]);
-    ReleaseObjPalette(*(void**)&work[0x218]);
-    ReleaseObjPalette(*(void**)&work[0x04]);
+    DrawTextSlots(w->unk_220, 115, w->textSlots, w->palette, 30, w->textSlotCount);
+#endif
+#ifndef VERSION_US
+    DrawTextSlots(w->unk_224, 115, w->textSlots3, w->unk_218, 30, w->textSlotCount3);
+#endif
+    DrawTextSlots(w->unk_222, 130, w->textSlots2, w->unk_218, 30, w->textSlotCount2);
+}
+void CardName_3(CardNameWork* w) {
+    FreeTextSlots(w->textSlots, 32);
+    FreeTextSlots(w->textSlots2, 32);
+#ifdef VERSION_EU
+    FreeTextSlots(w->textSlots3, 32);
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->unk_218);
+    ReleaseObjPalette(w->unk_04);
+    ReleaseObjPalette(w->palette);
+#else
+    FreeTextSlots(w->textSlots3, 2);
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->unk_218);
+    ReleaseObjPalette(w->unk_04);
 #ifndef VERSION_JP
-    ReleaseObjPalette(*(void**)&work[0x21C]);
+    ReleaseObjPalette(w->palette);
 #endif
 #endif
 }
@@ -300,7 +294,7 @@ void func_0809D1B0(PremiumCardEffectWork* w) {
 }
 
 void func_0809D1FC(u8 bg) {
-    void** p;
+    UnkStruct_02034AD4** p;
 
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
@@ -310,7 +304,7 @@ void func_0809D1FC(u8 bg) {
     EnableBg(bg);
     gUnk_02034AD9 = bg;
     p = &gUnk_02034AD4;
-    *p = EwramAlloc(0x880);
+    *p = EwramAlloc(sizeof(UnkStruct_02034AD4) * 32);
 }
 
 void func_0809D26C(void) {
@@ -347,18 +341,18 @@ void func_0809D2B0(u8 a, u8 b, u8 c, u8* s) {
         }
 
         for (i = 0; i < n; i++) {
-            ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_04[i] = s[i];
-            ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_04[i] |= c << 12;
+            gUnk_02034AD4[gUnk_02034AD8].unk_04[i] = s[i];
+            gUnk_02034AD4[gUnk_02034AD8].unk_04[i] |= c << 12;
         }
 
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_01 = a;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_02 = b;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_03 = c;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_00 = n;
-        RequestTilemapRectCopy(((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_04, (void*)GetBgScreenBase(gUnk_02034AD9), 0, 0,
-                      ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_01,
-                      ((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_02,
-                      (s8)((UnkStruct_02034AD4*)gUnk_02034AD4)[gUnk_02034AD8].unk_00, 1);
+        gUnk_02034AD4[gUnk_02034AD8].unk_01 = a;
+        gUnk_02034AD4[gUnk_02034AD8].unk_02 = b;
+        gUnk_02034AD4[gUnk_02034AD8].unk_03 = c;
+        gUnk_02034AD4[gUnk_02034AD8].unk_00 = n;
+        RequestTilemapRectCopy(gUnk_02034AD4[gUnk_02034AD8].unk_04, (void*)GetBgScreenBase(gUnk_02034AD9), 0, 0,
+                      gUnk_02034AD4[gUnk_02034AD8].unk_01,
+                      gUnk_02034AD4[gUnk_02034AD8].unk_02,
+                      (s8)gUnk_02034AD4[gUnk_02034AD8].unk_00, 1);
         gUnk_02034AD8++;
     }
 }
@@ -371,11 +365,11 @@ void func_0809D3FC(void) {
     s16 i;
 
     for (i = 0; i < gUnk_02034AD8; i++) {
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[i].unk_00 = 0;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[i].unk_01 = 0;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[i].unk_02 = 0;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[i].unk_03 = 0;
-        ((UnkStruct_02034AD4*)gUnk_02034AD4)[i].unk_04[0] = 0;
+        gUnk_02034AD4[i].unk_00 = 0;
+        gUnk_02034AD4[i].unk_01 = 0;
+        gUnk_02034AD4[i].unk_02 = 0;
+        gUnk_02034AD4[i].unk_03 = 0;
+        gUnk_02034AD4[i].unk_04[0] = 0;
     }
 
     gUnk_02034AD8 = 0;
@@ -497,11 +491,7 @@ TaskDesc gTaskDescCardName = {
     (TaskUpdateFunc)CardName_1,
     (TaskFunc)CardName_2,
     (TaskFunc)CardName_3,
-#ifdef VERSION_EU
-    0x31C,
-#else
-    0x22C,
-#endif
+    sizeof(CardNameWork),
 };
 
 TaskDesc gUnk_09EE784C = {
@@ -510,7 +500,7 @@ TaskDesc gUnk_09EE784C = {
     (TaskUpdateFunc)func_0809D040,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0,
+    sizeof(PremiumCardEffectWork),
 };
 
 TaskDesc gTaskDescPremireEFFECT2 = {
@@ -519,7 +509,7 @@ TaskDesc gTaskDescPremireEFFECT2 = {
     (TaskUpdateFunc)Premire_EFFECT2_1,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0,
+    sizeof(PremiumCardEffectWork),
 };
 
 TaskDesc gUnk_09EE787C = {
@@ -528,5 +518,5 @@ TaskDesc gUnk_09EE787C = {
     (TaskUpdateFunc)func_0809D09C,
     (TaskFunc)func_0809D0CC,
     (TaskFunc)func_0809D0FC,
-    0,
+    sizeof(PremiumCardEffectWork),
 };

@@ -367,10 +367,9 @@ mode_backupstat.c
 sprites_room_frames.s
 sprites_bos5_frames_1.s
 sprites_worldinspect_1.c
-sprites_moogle_shop.c
-sprites_worldinspect_2.c
 sprites_worldinspect_frames_1.s
 sprites_moogle_shop_frames.s
+sprites_worldinspect_2.c
 sprites_worldinspect_frames_2.s
 sprites_bos5_frames_2.s
 sprites_worldinspect_3.c

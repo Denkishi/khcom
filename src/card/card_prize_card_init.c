@@ -58,6 +58,7 @@ u16 func_08096CCC(void);
 void CreateCardNameDisplay(void* a, void* b);
 u16 func_08096D0C(u16 a, s32 b);
 u16 func_08096D48(u16 a, s32 b);
+void func_0809797C(TaskPool* pool, s32* args);
 s32 func_08097A80(u8* work);
 s32 func_08097DE4(u8* work);
 u8 func_0808510C(u16 id);
@@ -689,7 +690,7 @@ const u16 gUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16
 void func_08096714(PrizeCardInitWork* w, PrizeCardArgs* args) {
     w->unk_14 = 0;
     w->args = *args;
-    TaskPoolInit(w, 1);
+    TaskPoolInit(&w->tasks, 1);
 }
 
 s32 PrizeCardInit_1(PrizeCardInitWork* w) {
@@ -700,7 +701,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
         if ((gGameState.progression.unk_82 & 0x20) == 0) {
             *(PrizeCardArgs*)args = w->args;
             args[8] = 2;
-            func_0809797C(w, args);
+            func_0809797C(&w->tasks, args);
             gGameState.progression.unk_82 |= 0x20;
         } else if ((s8)gGameState.floor == 0) {
             if (func_08093B58() == 0) {
@@ -708,7 +709,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 args[8] = func_08096D0C(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(w, args);
+                    func_0809797C(&w->tasks, args);
                 } else {
                     return 0;
                 }
@@ -717,7 +718,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 args[8] = func_08096D48(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(w, args);
+                    func_0809797C(&w->tasks, args);
                 } else {
                     return 0;
                 }
@@ -744,7 +745,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                     }
 
                     if (args[8] != 0xFFFF) {
-                        func_0809797C(w, args);
+                        func_0809797C(&w->tasks, args);
                     } else {
                         return 0;
                     }
@@ -753,7 +754,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                     args[8] = func_08096D48(gGameState.world, 1);
 
                     if (args[8] != 0xFFFF) {
-                        func_0809797C(w, args);
+                        func_0809797C(&w->tasks, args);
                     } else {
                         return 0;
                     }
@@ -763,12 +764,12 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 if (func_08093B38() <= 98) {
                     *(PrizeCardArgs*)args = w->args;
                     args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                    func_0809797C(w, args);
+                    func_0809797C(&w->tasks, args);
                 }
 #else
                 *(PrizeCardArgs*)args = w->args;
                 args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                func_0809797C(w, args);
+                func_0809797C(&w->tasks, args);
 #endif
             } else {
                 *(PrizeCardArgs*)args = w->args;
@@ -796,7 +797,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 }
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(w, args);
+                    func_0809797C(&w->tasks, args);
                 } else {
                     return 0;
                 }
@@ -806,7 +807,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
         w->unk_14 = 1;
     }
 
-    TaskPoolUpdate(w);
+    TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
@@ -903,24 +904,24 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
 
         if (gBtlWork->unk_10C != 121) {
             if (func_0808510C(args.cardId) == 0) {
-                TaskCreate(w, &gTaskDescPrizeBoss, &args);
+                TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
             }
         } else {
-            TaskCreate(w, &gTaskDescPrizeBoss, &args);
+            TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
         }
 
         w->unk_14 = 1;
     }
 
-    TaskPoolUpdate(w);
+    TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-void func_08096C20(void* pool) {
-    TaskPoolDraw(pool);
+void func_08096C20(PrizeCardInitWork* w) {
+    TaskPoolDraw(&w->tasks);
 }
-void func_08096C2C(void* pool) {
-    TaskPoolDestroy(pool);
+void func_08096C2C(PrizeCardInitWork* w) {
+    TaskPoolDestroy(&w->tasks);
 }
 
 u16 func_08096C38(const UnkStruct_08096C38* tbl, u16 n) {
@@ -1073,7 +1074,7 @@ s32 CreateVersionDisplay(void* a) {
     return (s32)TaskCreate(a, &gTaskDescVersion, 0);
 }
 static void PrizeCard_0(UnkStruct_08096F94* w, s32* args) {
-    u8* p;
+    Collider* p;
 
     w->unk_B0 = args[8];
     w->cardDef = &gUnk_09EE4C80[args[8]];
@@ -1100,7 +1101,7 @@ static void PrizeCard_0(UnkStruct_08096F94* w, s32* args) {
     w->unk_DA = 0x80;
     w->unk_DF = 0;
     w->unk_E0 = 0;
-    p = w->unk_44;
+    p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetDisabled(p, 1);
     ColliderSetPosition(p, w->unk_A0, w->unk_A4, w->unk_A8);
@@ -1128,9 +1129,9 @@ static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
     }
 
     if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(w->unk_44, 50);
+        ColliderSetRadius(&w->collider, 50);
     } else {
-        ColliderSetRadius(w->unk_44, 10);
+        ColliderSetRadius(&w->collider, 10);
     }
 
     if (w->unk_A8 - 8 > w->unk_AC) {
@@ -1144,7 +1145,7 @@ static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
         }
     }
 
-    if (w->unk_70 != 0) {
+    if (w->collider.unk_2C != 0) {
         w->unk_E5 = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         AddMapCard(w->unk_B0);
@@ -1152,12 +1153,12 @@ static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
         WorldToScreen(&x, &y, w->unk_A0, w->unk_A4, w->unk_A8);
         w->unk_A0 = x << 8;
         w->unk_A4 = y << 8;
-        ColliderSetDisabled(w->unk_44, 1);
+        ColliderSetDisabled(&w->collider, 1);
         w->unk_CC = 50;
         func_08097390(w);
         return 1;
     } else {
-        ColliderSetPosition(w->unk_44, w->unk_A0, w->unk_A4, w->unk_A8);
+        ColliderSetPosition(&w->collider, w->unk_A0, w->unk_A4, w->unk_A8);
         WorldToScreen(&w->x, &w->y2, w->unk_A0, w->unk_A4, w->unk_A8);
         WorldToScreen(&w->x2, &w->y, w->unk_A0, w->unk_A4, w->unk_AC);
         w->unk_CC = -0x1004 - (w->unk_A4 >> 8) * 4;
@@ -1165,7 +1166,7 @@ static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
         w->unk_E0 += 2;
 
         if (w->unk_E1 == 20) {
-            ColliderSetDisabled(w->unk_44, 0);
+            ColliderSetDisabled(&w->collider, 0);
         }
 
         if (w->unk_E1 <= 59) {
@@ -1356,9 +1357,9 @@ static void PrizeCard_2(UnkStruct_08096F94* w) {
 }
 
 static void PrizeCard_3(UnkStruct_08096F94* w) {
-    FadeSetPaletteExcluded(((ObjPalette*)w->palette2)->index + 16, 0);
-    FadeSetPaletteExcluded(((ObjPalette*)w->palette)->index + 16, 0);
-    ColliderUnregister(w->unk_44);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette->index + 16, 0);
+    ColliderUnregister(&w->collider);
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles4);
@@ -1411,8 +1412,8 @@ void func_0809792C(UnkStruct_08096F94* w) {
     w->unk_E6++;
 }
 #endif
-void func_0809797C(void* a, void* b) {
-    TaskCreate(a, &gUnk_09EE7650, b);
+void func_0809797C(TaskPool* pool, s32* args) {
+    TaskCreate(pool, &gUnk_09EE7650, args);
 }
 
 void SpotLight_0(SpotlightWork* w, u8* src) {
@@ -2039,18 +2040,18 @@ TaskDesc gTaskDescPrizeCardInit = {
     "PrizeCardInit",
     (TaskInitFunc)func_08096714,
     (TaskUpdateFunc)PrizeCardInit_1,
-    func_08096C20,
-    func_08096C2C,
-    0x38,
+    (TaskFunc)func_08096C20,
+    (TaskFunc)func_08096C2C,
+    sizeof(PrizeCardInitWork),
 };
 
 TaskDesc gTaskDescPrizeCardInitBoss = {
     "PrizeCardInit_Boss",
     (TaskInitFunc)func_08096714,
     (TaskUpdateFunc)PrizeCardInit_Boss_1,
-    func_08096C20,
-    func_08096C2C,
-    0x38,
+    (TaskFunc)func_08096C20,
+    (TaskFunc)func_08096C2C,
+    sizeof(PrizeCardInitWork),
 };
 
 TaskDesc gTaskDescDispCardname = {
@@ -2077,7 +2078,7 @@ TaskDesc gUnk_09EE7650 = {
     (TaskUpdateFunc)PrizeCard_1,
     (TaskFunc)PrizeCard_2,
     (TaskFunc)PrizeCard_3,
-    0xEC,
+    sizeof(UnkStruct_08096F94),
 };
 
 TaskDesc gTaskDescSpotLight = {

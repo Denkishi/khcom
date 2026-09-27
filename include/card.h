@@ -195,22 +195,20 @@ struct MapCardBackDef;
 
 typedef struct UnkStruct_08096F94 {
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     void* tiles2;
     void* tiles3;
-    void* palette2;
+    ObjPalette* palette2;
     void* tiles4;
     void* tiles5;
-    void* palette3;
+    ObjPalette* palette3;
     struct MapCardDef* cardDef;
     struct MapCardBackDef* cardBack;
     TaskPool tasks;
     u16 unk_3C;
     u16 unk_3E;
     s32 unk_40;
-    u8 unk_44[0x2C];
-    u8 unk_70;
-    u8 unk_71[0x2F];
+    Collider collider;
     s32 unk_A0;
     s32 unk_A4;
     s32 unk_A8;

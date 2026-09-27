@@ -818,7 +818,7 @@ void SetSpriteOamUpdatesPaused(u8 a) {
     gSpriteWork->unk_2BAE = a;
 }
 
-u16 GetMaxSpriteTileBytes(u16** a, u16 n) {
+u16 GetMaxSpriteTileBytes(void** a, u16 n) {
     u16* p;
     u16 count;
     u16 sum;

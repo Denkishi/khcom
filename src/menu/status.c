@@ -346,7 +346,7 @@ u8 func_080D7B94(void) {
 void task_status_tab_0(StatusTabWork* work, s32* arg) {
     work->unk_18 = arg;
 #ifdef VERSION_EU
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes((u16**)gUnkEu_09F802DC[gLanguage], 4),
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnkEu_09F802DC[gLanguage], 4),
         gUnkEu_09F802C8[gLanguage]);
 #else
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6920, 4), gUnk_097A24A6);

@@ -20,7 +20,7 @@ u8* AllocObjAffineAngle(u8 angle, u8 flags);
 u8 CanAllocObjTiles(u16 size);
 void SpriteReset(void);
 void SetObjTileSource(void* tiles, void* src);
-u16 GetMaxSpriteTileBytes(u16** sprites, u16 count);
+u16 GetMaxSpriteTileBytes(void** sprites, u16 count);
 u16 GetSpriteTileBytes(u16* sprite);
 struct ObjTiles* AllocSpriteFrameTiles(u16 size);
 u8 UpdateSpriteFrameTiles(struct ObjTiles* tiles, u16* sprite, void* src);

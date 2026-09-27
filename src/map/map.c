@@ -1587,11 +1587,11 @@ void func_080E826C(void) {
     }
 }
 
-u8 func_080E8374(UnkStruct_080E8374* p) {
+u8 func_080E8374(FldObj* p) {
     s32 lim = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + 0x4000 + (p->unk_1A << 8);
 
-    if (p->unk_00 < gFieldState->x || p->unk_00 > gFieldState->x + 0xF000 ||
-        p->unk_04 + p->unk_08 < gFieldState->y || p->unk_04 + p->unk_08 > lim) {
+    if (p->fieldPosition.x < gFieldState->x || p->fieldPosition.x > gFieldState->x + 0xF000 ||
+        p->fieldPosition.y + p->fieldPosition.z < gFieldState->y || p->fieldPosition.y + p->fieldPosition.z > lim) {
         return 1;
     }
     return 0;

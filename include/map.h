@@ -526,12 +526,11 @@ typedef struct MapGmkTutorialWork {
 
 typedef struct MapGmk01Work {
     UnkStruct_0203C7B8* unk_000;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u16 timer;
     u16 unk_0C6;
@@ -551,13 +550,12 @@ typedef struct MapGmkSpiderWork {
 } MapGmkSpiderWork;
 
 typedef struct MapGmkGpWork {
-    MapCell* cell;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
+    UnkStruct_0203C7B8* unk_000;
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u16 unk_0C4;
     u16 timer;
@@ -565,13 +563,12 @@ typedef struct MapGmkGpWork {
 } MapGmkGpWork;
 
 typedef struct MapGmkGp1Work {
-    MapCell* cell;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
+    UnkStruct_0203C7B8* unk_000;
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u16 unk_0C4;
     u8 unk_0C6;
@@ -581,14 +578,11 @@ typedef struct MapGmkGp1Work {
 
 typedef struct MapGmk00Work {
     UnkStruct_0203C7B8* unk_000;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x2E];
-    u16 unk_072;
-    u8 unk_074[0x2C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u16 unk_0C4;
     u16 unk_0C6;
@@ -599,12 +593,11 @@ typedef struct MapGmk00Work {
 
 typedef struct MapGmkBarrelWork {
     UnkStruct_0203C7B8* unk_000;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x5C];
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
     u8 unk_0C4;
     u8 unk_0C5[0x03];
@@ -635,42 +628,47 @@ typedef struct MapPrizeWork {
     u8 unk_97;
 } MapPrizeWork;
 
-typedef struct MapGmkGp8Work {
-    MapCell* cell;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x2E];
-    u16 flags;
-    u8 unk_074[0x2C];
+typedef struct MapGmkGp07Work {
+    UnkStruct_0203C7B8* unk_000;
+    FldObj obj;
+    Collider collider;
     AnimState anim;
     void* tiles;
-    u8* palette;
+    ObjPalette* palette;
     void* gfx;
-    s32 (*unk_0C4)(struct MapGmkGp8Work*);
+    s32 (*update)(struct MapGmkGp07Work*);
+} MapGmkGp07Work;
+
+typedef struct MapGmkGp08Work {
+    UnkStruct_0203C7B8* unk_000;
+    FldObj obj;
+    Collider collider;
+    AnimState anim;
+    void* tiles;
+    ObjPalette* palette;
+    void* gfx;
+    void* gfx2;
+    u16 unk_0C8;
+    u8 unk_0CA;
+    u8 unk_0CB;
+    s32 (*update)(struct MapGmkGp08Work*);
+} MapGmkGp08Work;
+
+typedef struct MapGmkGp09Work {
+    UnkStruct_0203C7B8* unk_000;
+    FldObj obj;
+    Collider collider;
+    AnimState anim;
+    void* tiles;
+    ObjPalette* palette;
+    void* gfx;
+    void* gfx2;
     u8 unk_0C8;
     u8 unk_0C9;
     u8 unk_0CA;
     u8 unk_0CB;
-    s32 (*unk_0CC)(struct MapGmkGp8Work*);
-} MapGmkGp8Work;
-
-typedef struct MapGmkGp08Work {
-    MapCell* cell;
-    FldPos unk_004;
-    u8 unk_014[0x30];
-    u8 collider[0x2E];
-    u16 unk_072;
-    u8 unk_074[0x2C];
-    AnimState anim;
-    void* tiles;
-    u8* palette;
-    void* gfx;
-    void* unk_0C4;
-    u16 unk_0C8;
-    u8 unk_0CA;
-    u8 unk_0CB;
-    s32 (*unk_0CC)(struct MapGmkGp8Work*);
-} MapGmkGp08Work;
+    s32 (*update)(struct MapGmkGp09Work*);
+} MapGmkGp09Work;
 
 typedef struct MapGmk04Work {
     UnkStruct_0203C7B8* unk_000;
@@ -1187,7 +1185,7 @@ void func_080E5C00(UnkStruct_080E5B90* w, u8 a, u8 b);
 void func_080E5EAC(MapEnmWork* p);
 u8* func_080E8644(void* a, u16 b, u16 c);
 void* func_080E8668(u8 a);
-u8 func_080E8374(UnkStruct_080E8374* p);
+u8 func_080E8374(FldObj* p);
 u16 func_080E83C4(void);
 void func_080E83DC(s32 a, s32 b, s32 c);
 void func_080E55E4(const u8* src);

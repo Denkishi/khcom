@@ -31,7 +31,6 @@ typedef struct ChkEffWork {
 void mode_chkeff_0(void);
 void mode_chkeff_1(void);
 void mode_chkeff_2(void);
-extern u32 gFrameCounter;
 extern const char gUnk_081309E0[];
 extern const char gUnk_081309E8[];
 extern const char gUnk_081309F0[];

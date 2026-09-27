@@ -12,6 +12,7 @@
 #include "engine.h"
 #include "sprite.h"
 #include "types.h"
+#include "system_state.h"
 
 u16 gUnk_030074CC IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);
@@ -96,8 +97,6 @@ u32 gUnk_0203401C;
 u32 gUnk_02034020;
 u16 gUnk_02034024;
 u8 gMosaicActive;
-
-extern u16 gSystemFlags;
 
 u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;

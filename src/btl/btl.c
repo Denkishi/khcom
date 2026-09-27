@@ -16,6 +16,7 @@
 #include "sprites_sora.h"
 #include "gba/keys.h"
 #include "gba/io_reg.h"
+#include "system_state.h"
 
 TaskDesc gTaskDescBtlLockon = { "task_btl_lockon", (TaskInitFunc)task_btl_lockon_0, (TaskUpdateFunc)task_btl_lockon_1, (TaskFunc)task_btl_lockon_2, (TaskFunc)task_btl_lockon_3, sizeof(BtlLockonWork) };
 

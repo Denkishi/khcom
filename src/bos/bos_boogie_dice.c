@@ -3,6 +3,7 @@
 #include "bos4.h"
 #include "sprites_bos4.h"
 #include "gba/io_reg.h"
+#include "system_state.h"
 
 void task_bos_boogie_saku_2(BoogieSakuWork* work);
 u8 task_bos_ursula_1(UrsulaWork* work);

@@ -1,6 +1,7 @@
 #include "macros.h"
 #include "bos2.h"
 #include "sprites_bos2.h"
+#include "system_state.h"
 
 s16 gUnk_0203AC80 EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);

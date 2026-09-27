@@ -9,6 +9,7 @@
 #include "sprites_map_tasks.h"
 #include "battle_backgrounds.h"
 #include "sprites_card_pictures.h"
+#include "system_state.h"
 
 extern u8 gUnk_09EF6C38[2];
 

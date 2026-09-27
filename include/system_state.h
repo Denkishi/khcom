@@ -19,10 +19,10 @@ extern u32 gVBlankCounter;
 extern IntrFunc gVCountCallback;
 extern IntrFunc gVBlankCallback;
 extern IntrFunc* gIntrTableHBlank;
-extern u16 gSystemFlags;
+extern vu16 gSystemFlags;
 extern u8 gUnk_03006C7A[6];
 extern u8 gIntrHandler[0x800];
-extern u32 gFrameCounter;
+extern vu32 gFrameCounter;
 #ifdef VERSION_EU
 extern u32 gLanguage;
 #endif

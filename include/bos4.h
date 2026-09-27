@@ -214,7 +214,6 @@ extern u8 gUnk_0984B0D8[];
 extern UnkStruct_02034F7C gUnk_0984CECC[];
 
 extern const u8 gUnk_0984D0CC[][4];
-extern vu32 gFrameCounter;
 
 void task_bos_boogie_map_0(void* work, BattleBackgroundDef* arg);
 

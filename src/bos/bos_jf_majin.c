@@ -1,6 +1,7 @@
 #include "macros.h"
 #include "bos2.h"
 #include "sprites_bos2.h"
+#include "system_state.h"
 
 void* gUnk_0203B4F0[4] EWRAM_COMMON(16);
 void* gUnk_0203B500 EWRAM_COMMON(4);

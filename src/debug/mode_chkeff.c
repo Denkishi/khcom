@@ -3,6 +3,7 @@
 #include "mode_chkeff.h"
 #include "gba/keys.h"
 #include "sprites_mode_debug.h"
+#include "system_state.h"
 
 extern BgAnimationDef* gUnk_09ED9A1C[83];
 

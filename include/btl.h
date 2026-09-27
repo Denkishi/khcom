@@ -206,7 +206,6 @@ extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_096FAC64[];
 extern u8 gRikuPalette[];
 extern u8 gBStatesPalette[];
-extern u32 gFrameCounter;
 
 void func_0801DEB8(BtlSoraWork* work);
 void func_0801DC5C(BtlSoraWork* work);

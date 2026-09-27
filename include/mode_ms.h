@@ -146,6 +146,5 @@ extern u8 gSor1ll00Tiles[];
 extern u8 gBStatesPalette[];
 extern u8 gMoguPalette[];
 extern u8 gMoguFl00Tiles[];
-extern u32 gFrameCounter;
 extern u8 gCard00Palette[];
 #endif /* GUARD_MODE_MS_H */

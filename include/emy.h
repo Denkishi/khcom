@@ -229,7 +229,6 @@ extern u8 gEmy8310bTiles[];
 extern u8 gEmy07mPalette[];
 extern u8 gEmy16Palette[];
 extern u8 gEmy83Palette[];
-extern u32 gFrameCounter;
 
 void func_0803B468(Emy29Work* work, s16 anim, s16 dx, s16 dy, s16 dz);
 u8 func_0803DD44(EmyWork* work);

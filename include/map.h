@@ -945,7 +945,6 @@ extern u8 gUnk_08B1E992[];
 extern u8 gUnk_08B1E9A6[];
 extern u8 gUnk_0984C868[];
 extern UnkStruct_0203C7AC* gUnk_0203C7AC;
-extern vu32 gFrameCounter;
 
 extern UnkStruct_0203C590 gUnk_0203C590;
 extern u8 gRikuPalette[];

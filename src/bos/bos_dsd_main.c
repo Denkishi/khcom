@@ -2,6 +2,7 @@
 #include "boss_map_block_assets.h"
 #include "sprites_bos2.h"
 #include "sprites_btl.h"
+#include "system_state.h"
 
 extern const u16* gUnk_09EF2AA4[46][4];
 extern void* gUnk_09EF2D94[37];

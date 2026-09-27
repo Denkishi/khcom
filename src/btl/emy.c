@@ -4,6 +4,7 @@
 #include "task_animation_assets.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"
+#include "system_state.h"
 
 const AnimDef gUnk_0813D32C[3] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },

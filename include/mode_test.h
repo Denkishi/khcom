@@ -168,5 +168,4 @@ extern u8 gUnk_096148B8[];
 extern u8 gBStatesPalette[];
 extern u8 gUnk_08F69BE4[];
 
-extern vu16 gSystemFlags;
 #endif /* GUARD_MODE_TEST_H */

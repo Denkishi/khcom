@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "types.h"
 #include "engine.h"
+#include "system_state.h"
 
 const s32 gBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,
@@ -14,7 +15,6 @@ const s32 gBrightenSteps[32] = {
 
 const u8 sPalletHeapName[8] = "PALLET";
 
-extern u32 gFrameCounter;
 static PaletteBuffer* gPaletteBuffer;
 static s16 gPaletteEffect;
 static s16 gPaletteEffectSaved;

@@ -11,6 +11,7 @@
 #include "map_runtime.h"
 #include "map_text_data.h"
 #include "world_types.h"
+#include "system_state.h"
 
 extern UnkStruct_0984C868 gUnk_0984C868[];
 extern UnkStruct_0984C868 gUnk_0984CBD0[];

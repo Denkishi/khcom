@@ -16,8 +16,8 @@
 #include "gba/keys.h"
 #include "sroll_api.h"
 #include "gba/io_reg.h"
+#include "system_state.h"
 
-extern u16 gSystemFlags;
 Mode* gCurrentMode;
 void (*gCurrentModeUpdate)(void);
 u16 gDebugModeIndex;

@@ -2,6 +2,7 @@
 #include "mode_vsbattle.h"
 #include "enemy_common.h"
 #include "enemy_tile_counts.h"
+#include "system_state.h"
 
 u16 gUnk_09EDA4EC[54] = {
     32, 32, 32, 32, 32, 34, 28, 24, 32,

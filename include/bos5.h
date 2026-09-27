@@ -269,7 +269,6 @@ void task_bos_md_3(MdWork* work);
 void func_080FD9B8(s16 model, s16 slot);
 void func_080FDA28(s16 model, s16 slot);
 s16 func_080FDA98(s16 model, s16 slot);
-extern u32 gFrameCounter;
 
 extern GaWork* gGaWork;
 

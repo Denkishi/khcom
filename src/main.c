@@ -32,10 +32,10 @@ u32 gVBlankCounter;
 IntrFunc gVCountCallback;
 IntrFunc gVBlankCallback;
 IntrFunc* gIntrTableHBlank;
-u16 gSystemFlags;
+vu16 gSystemFlags;
 u8 gUnk_03006C7A[6];
 u8 gIntrHandler[0x800];
-u32 gFrameCounter;
+vu32 gFrameCounter;
 #ifdef VERSION_EU
 u32 gLanguage;
 #endif

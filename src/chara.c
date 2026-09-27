@@ -7,6 +7,7 @@
 #include "util.h"
 #include "chara.h"
 #include "gba/keys.h"
+#include "system_state.h"
 
 u32 gUnk_0203BD10[100] EWRAM_COMMON(16);
 u32 gUnk_0203BEA0 EWRAM_COMMON(4);

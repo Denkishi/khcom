@@ -383,7 +383,6 @@ extern const s16 gUnk_0961A89E[9];
 extern const s16 gUnk_0961A8B0[10];
 extern const s16 gUnk_0961A7D0[47];
 extern const s8 gUnk_0961A82E[10];
-extern u32 gFrameCounter;
 
 extern u8 gUnk_096FB8C4[];
 extern u8 gUnk_096FB8E4[];

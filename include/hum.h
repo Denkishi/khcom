@@ -478,7 +478,6 @@ extern u8 gRexeusTmhAxTiles[];
 extern u8 gHadesPalette[];
 extern u8 gHadesAngryPalette[];
 
-extern vu32 gFrameCounter;
 extern u8 gVixEPalette[];
 extern u8 gRexeusRock01Palette[];
 extern u8 gRexeusRock02Palette[];

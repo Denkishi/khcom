@@ -208,7 +208,6 @@ extern u8 gSor1fl01Tiles[];
 extern u8 gSor1ff01Tiles[];
 extern u8 gRikuPalette[];
 extern u8 gSoraPalette[];
-extern vu16 gSystemFlags;
 
 u8 func_0801AD68(BtlObj* p);
 void func_08010C70(void);

@@ -51,7 +51,6 @@ extern u8 gUnk_08F69BC4[];
 
 void func_08010CC8(void);
 void func_0801071C(void);
-extern vu32 gFrameCounter;
 
 void func_0807E2F4(void);
 

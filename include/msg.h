@@ -206,7 +206,6 @@ typedef struct TextGlyphSprite {
 extern EventState* gEventState;
 extern u8 gBStatesPalette[];
 extern u8 gFEventTiles[];
-extern u32 gFrameCounter;
 
 extern u8 gUnk_09614718[];
 extern u8 gUnk_09614738[];

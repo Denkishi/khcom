@@ -9,7 +9,6 @@
 static u16 gRawKeys;
 static u16 gRawKeysPrev;
 static u8 gSramErrorTilemapBuf[0x800];
-extern u16 gSystemFlags;
 
 void WaitSramErrorInput(void);
 void ReadKeysRaw(void);

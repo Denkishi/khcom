@@ -12,10 +12,19 @@ typedef struct GameFloor {
     u8 unk_03;
 } GameFloor;
 
-typedef struct UnkStruct_02039BF0 {
-    u8 unk_00[0x1C];
-    u8 unk_1C[0x1C];
-} UnkStruct_02039BF0;
+struct UnkStruct_0984BC9C;
+struct MapEnmWork;
+
+typedef struct MapEnmCache {
+    FldPos unk_00;
+    u8 unk_10;
+    u8 unk_11[0x03];
+    s32 unk_14;
+    u8 unk_18[0x04];
+    ListNode node;
+    const struct UnkStruct_0984BC9C* unk_30;
+    void (*unk_34)(struct MapEnmWork*);
+} MapEnmCache;
 
 typedef struct GameState {
     u8 unk_000;
@@ -38,8 +47,8 @@ typedef struct GameState {
     s32 unk_034;
     s32 unk_038;
     s32 unk_03C;
-    UnkStruct_02039BF0 unk_040[3];
-    u8 unk_0E8[0x10];
+    MapEnmCache enemyCache[3];
+    ListPool enemyCachePool;
     PlayerProgression progression;
     u16 unk_180;
     u8 unk_182[0x02];
@@ -64,6 +73,7 @@ typedef struct GameState {
 typedef char GameState_size[(sizeof(GameState) == 0x210) ? 1 : -1];
 typedef char GameState_progression_offset[((u32)&((GameState*)0)->progression == 0xF8) ? 1 : -1];
 typedef char GameFloor_size[(sizeof(GameFloor) == 4) ? 1 : -1];
+typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
 
 extern GameState gGameState;
 

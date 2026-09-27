@@ -100,17 +100,6 @@ typedef struct UnkStruct_0984BC9C {
     u16 unk_16;
 } UnkStruct_0984BC9C;
 
-typedef struct UnkStruct_080E6034 {
-    FldPos unk_00;
-    u8 unk_10;
-    u8 unk_11[0x03];
-    s32 unk_14;
-    u8 unk_18[0x04];
-    u8 node[0x14];
-    const UnkStruct_0984BC9C* unk_30;
-    void* unk_34;
-} UnkStruct_080E6034;
-
 typedef struct UnkStruct_080E7D80 {
     void* palette;
     void* tiles;
@@ -218,7 +207,7 @@ typedef struct UnkStruct_080EF4BC {
 
 typedef struct UnkStruct_080E5B90 {
     const UnkStruct_0984BC9C* unk_00;
-    void* unk_04;
+    void (*unk_04)(struct MapEnmWork*);
     FldPos unk_08;
     u8 unk_18;
     u8 unk_19[0x03];
@@ -241,22 +230,11 @@ typedef struct MapEnmWork {
     const UnkStruct_0984BC9C* unk_00;
     u16 flags;
     u16 paletteBank;
-    FldPos unk_08;
-    s32 unk_18;
-    u8 unk_1C;
-    u8 unk_1D[0x03];
-    u8 unk_20[0x22];
-    u16 unk_42;
-    s32 unk_44;
-    u8 collider[0x2C];
-    u8 unk_74;
-    u8 unk_75[0x0B];
-    s32 unk_80;
-    s32 unk_84;
-    u8 unk_88[0x1C];
-    u8 anim[0x18];
+    FldObj obj;
+    Collider collider;
+    AnimState anim;
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     void* gfx;
     s16 unk_C8;
     s16 unk_CA;
@@ -268,8 +246,19 @@ typedef struct MapEnmWork {
     s32 unk_DC;
     s16 unk_E0;
     u8 unk_E2[0x02];
-    u8 tasks[0x14];
+    TaskPool tasks;
 } MapEnmWork;
+
+typedef struct MapEnm01Work {
+    MapEnmWork enm;
+    u8 unk_F8;
+    u8 unk_F9[0x03];
+} MapEnm01Work;
+
+typedef struct MapEnm03Work {
+    MapEnmWork enm;
+    FldPos home;
+} MapEnm03Work;
 
 typedef struct LoadGameMenuWork {
     u8* palette2;
@@ -968,46 +957,6 @@ typedef struct MapStairWork {
     void (*update)(struct MapStairWork*);
     TaskPool tasks;
 } MapStairWork;
-
-typedef struct UnkStruct_080F023C {
-    u8 unk_00[0x04];
-    u16 flags;
-    u16 unk_06;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_18;
-    u8 unk_1C[0x2C];
-    u8 collider[0x5C];
-    AnimState anim;
-    u8 unk_BC[0x08];
-    void* gfx;
-    u8 unk_C8[0x04];
-    void (*update)(struct UnkStruct_080F023C*);
-    u16 timer;
-    u8 unk_D2[0x02];
-    s32 unk_D4;
-    s32 unk_D8;
-    s32 unk_DC;
-    u8 unk_E0[0x04];
-    TaskPool tasks;
-    s32 unk_F8;
-    s32 unk_FC;
-    s32 unk_100;
-    s32 unk_104;
-} UnkStruct_080F023C;
-
-typedef struct UnkStruct_080EFA30 {
-    u8 unk_00[0x08];
-    s32 unk_08;
-    u8 unk_0C[0xC0];
-    void* unk_CC;
-    u16 unk_D0;
-    u8 unk_D2[0x26];
-    u8 unk_F8;
-    u8 unk_F9[0x03];
-} UnkStruct_080EFA30;
 
 typedef struct MapFixWork {
     u8 unk_00;

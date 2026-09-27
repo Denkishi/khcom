@@ -299,7 +299,7 @@ void func_080E5CD4(MapEnmWork* p) {
 void func_080E5D6C(MapEnmWork* p, u8 n, u16 a) {
     const AnimDef* q = p->unk_00->animDef;
 
-    switch (p->unk_1C >> 6) {
+    switch (p->obj.angle >> 6) {
     case 0:
         q += n * 2;
         p->flags |= 1;
@@ -317,21 +317,21 @@ void func_080E5D6C(MapEnmWork* p, u8 n, u16 a) {
         p->flags &= ~1;
         break;
     }
-    AnimChangeWithTables(p->anim, q->animId, a, q->anims, q->gfxTable);
+    AnimChangeWithTables(&p->anim, q->animId, a, q->anims, q->gfxTable);
     SetObjTileSource(p->tiles, q->tiles);
 }
 
 void func_080E5DEC(MapEnmWork* p) {
     if (gFieldState->flags & 0x10000) {
-        if (AnimIsFrameEnding(p->anim)) {
+        if (AnimIsFrameEnding(&p->anim)) {
             return;
         }
     } else {
-        if (AnimIsFrameEnding(p->anim)) {
+        if (AnimIsFrameEnding(&p->anim)) {
             gFieldState->flags |= 0x10000;
         }
     }
-    p->gfx = AnimUpdate(p->anim);
+    p->gfx = AnimUpdate(&p->anim);
 }
 
 u8 func_080E5E44(void) {
@@ -346,7 +346,7 @@ u8 func_080E5E44(void) {
 
 void func_080E5EAC(MapEnmWork* p) {
     gGameState.flags |= 2;
-    ColliderSetDisabled(p->collider, 1);
+    ColliderSetDisabled(&p->collider, 1);
     gUnk_0203C7AC->flags |= 2;
     gFieldState->flags |= 0x80;
     p->flags |= 4;
@@ -363,24 +363,24 @@ void func_080E5EAC(MapEnmWork* p) {
 }
 
 void func_080E5F50(MapEnmWork* p) {
-    if (p->unk_74 != 0) {
-        if ((gUnk_0203C7AC->flags & 4) == 0 && ColliderIsTouchingType(p->collider, 1)) {
+    if (p->collider.unk_2C != 0) {
+        if ((gUnk_0203C7AC->flags & 4) == 0 && ColliderIsTouchingType(&p->collider, 1)) {
             func_080E5EAC(p);
             return;
         }
 
-        if (ColliderIsTouchingType(p->collider, 6)) {
-            p->unk_08.x += p->unk_80;
-            p->unk_08.y += p->unk_84;
+        if (ColliderIsTouchingType(&p->collider, 6)) {
+            p->obj.fieldPosition.x += p->collider.unk_38;
+            p->obj.fieldPosition.y += p->collider.unk_3C;
         }
     }
 }
 
 s32 func_080E5FB4(MapEnmWork* p) {
-    if (func_080E02E0(&p->unk_08, p->unk_C8 / 2, p->unk_CA / 2)) {
+    if (func_080E02E0(&p->obj.fieldPosition, p->unk_C8 / 2, p->unk_CA / 2)) {
         gUnk_0203C7AC->flags |= 0x80;
         gUnk_0203C7AC->flags |= 4;
-        TaskCreate(p->tasks, &gTaskDescMapSpark, &p->unk_08);
+        TaskCreate(&p->tasks, &gTaskDescMapSpark, &p->obj);
 
         if (gGameState.flags & 8) {
             m4aSongNumStart(SONG_SND_228);
@@ -393,25 +393,25 @@ s32 func_080E5FB4(MapEnmWork* p) {
 }
 
 void func_080E6034(MapEnmWork* p) {
-    UnkStruct_080E6034* q = ListPoolFirstFree(gGameState.unk_0E8);
+    MapEnmCache* q = ListPoolFirstFree(&gGameState.enemyCachePool);
 
     if (q != 0) {
         q->unk_30 = p->unk_00;
         q->unk_34 = p->update;
-        q->unk_00 = p->unk_08;
-        q->unk_10 = p->unk_1C;
-        q->unk_14 = p->unk_18;
-        ListPoolActivate(q->node, gGameState.unk_0E8);
+        q->unk_00 = p->obj.fieldPosition;
+        q->unk_10 = p->obj.angle;
+        q->unk_14 = p->obj.unk_10;
+        ListPoolActivate(&q->node, &gGameState.enemyCachePool);
     }
 }
 
 void func_080E607C(void) {
-    UnkStruct_080E6034* q;
+    MapEnmCache* q;
     UnkStruct_080E5B90 w;
     const UnkStruct_0984BC9C* d;
     s32 i;
 
-    q = ListPoolFirst(gGameState.unk_0E8);
+    q = ListPoolFirst(&gGameState.enemyCachePool);
     while (q != 0) {
         d = q->unk_30;
         w.unk_00 = d;
@@ -420,12 +420,12 @@ void func_080E607C(void) {
         w.unk_18 = q->unk_10;
         w.unk_1C = q->unk_14;
         TaskCreate(&gFieldState->tasks4, d->desc, &w);
-        q = ListPoolNext(q->node);
+        q = ListPoolNext(&q->node);
     }
-    ListPoolInit(gGameState.unk_0E8);
+    ListPoolInit(&gGameState.enemyCachePool);
 
     for (i = 0; i < 3; i++) {
-        ListPoolAddFree(gGameState.unk_040[i].unk_1C, gGameState.unk_0E8, gGameState.unk_040[i].unk_00);
+        ListPoolAddFree(&gGameState.enemyCache[i].node, &gGameState.enemyCachePool, &gGameState.enemyCache[i]);
     }
 }
 
@@ -453,7 +453,7 @@ void func_080E6100(void) {
 }
 
 void func_080E6178(void) {
-    UnkStruct_080E6034* q;
+    MapEnmCache* q;
     UnkStruct_080E5B90 w;
     const UnkStruct_0984BC9C* d;
     UnkStruct_080DEE18* e;
@@ -464,7 +464,7 @@ void func_080E6178(void) {
     gUnk_02034F42 = 46;
 
     if (gGameState.unk_000 != 0) {
-        q = ListPoolFirst(gGameState.unk_0E8);
+        q = ListPoolFirst(&gGameState.enemyCachePool);
         while (q != 0) {
             d = q->unk_30;
             w.unk_00 = d;
@@ -473,7 +473,7 @@ void func_080E6178(void) {
             w.unk_18 = q->unk_10;
             w.unk_1C = q->unk_14;
             TaskCreate(&gFieldState->tasks4, d->desc, &w);
-            q = ListPoolNext(q->node);
+            q = ListPoolNext(&q->node);
         }
         if (gGameState.flags & 2) {
             gGameState.flags &= ~2;
@@ -487,10 +487,10 @@ void func_080E6178(void) {
     } else {
         func_080E6100();
     }
-    ListPoolInit(gGameState.unk_0E8);
+    ListPoolInit(&gGameState.enemyCachePool);
 
     for (i = 0; i < 3; i++) {
-        ListPoolAddFree(gGameState.unk_040[i].unk_1C, gGameState.unk_0E8, gGameState.unk_040[i].unk_00);
+        ListPoolAddFree(&gGameState.enemyCache[i].node, &gGameState.enemyCachePool, &gGameState.enemyCache[i]);
     }
 }
 
@@ -547,15 +547,15 @@ void func_080E6264(void) {
 }
 
 void func_080E6394(MapEnmWork* p, UnkStruct_080E5B90* q) {
-    UnkStruct_080E6394* e = (UnkStruct_080E6394*)&p->unk_08;
+    FldObj* e = &p->obj;
     const UnkStruct_0984BC9C* d = q->unk_00;
 
     p->unk_00 = d;
     p->update = q->unk_04;
     p->flags = 0;
     p->unk_E0 = 30;
-    e->unk_00 = q->unk_08;
-    e->unk_14 = q->unk_18;
+    e->fieldPosition = q->unk_08;
+    e->angle = q->unk_18;
     e->unk_10 = q->unk_1C;
     e->unk_1A = d->unk_0A;
     e->unk_34 = 0;
@@ -564,16 +564,16 @@ void func_080E6394(MapEnmWork* p, UnkStruct_080E5B90* q) {
     p->unk_CA = d->unk_0A;
     p->unk_D0 = 0;
     p->unk_D2 = 0;
-    p->unk_D4 = e->unk_00.x;
-    p->unk_D8 = e->unk_00.y;
-    p->unk_DC = e->unk_00.z;
+    p->unk_D4 = e->fieldPosition.x;
+    p->unk_D8 = e->fieldPosition.y;
+    p->unk_DC = e->fieldPosition.z;
     gUnk_02034F40++;
     gUnk_02034F41 += d->unk_08;
     p->tiles = AllocObjTiles(d->unk_08 * 32, 0);
     p->palette = LoadObjPalette(d->palette, 32);
     p->gfx = 0;
-    AnimInit((AnimState*)&p->anim, 0, 0);
-    TaskPoolInit((TaskPool*)&p->tasks, 2);
+    AnimInit(&p->anim, 0, 0);
+    TaskPoolInit(&p->tasks, 2);
 
     if ((d->flags & 1) == 0) {
         TaskCreate(&p->tasks, &gTaskDescFldShadow, e);
@@ -585,13 +585,13 @@ void func_080E6394(MapEnmWork* p, UnkStruct_080E5B90* q) {
     } else {
         ColliderInit(&p->collider, 3, d->unk_0C, d->unk_0A);
     }
-    ColliderSetPosition(&p->collider, e->unk_00.x, e->unk_00.y, e->unk_00.z);
+    ColliderSetPosition(&p->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     ColliderSetDisabled(&p->collider, 1);
     func_080E5CD4(p);
 }
 
 void func_080E64D4(MapEnmWork* p) {
-    UnkStruct_080E64D4* q = (UnkStruct_080E64D4*)&p->unk_08;
+    FldObj* q = &p->obj;
     u16 flags;
     u16 v;
     s32 k;
@@ -611,39 +611,39 @@ void func_080E64D4(MapEnmWork* p) {
         flags = 0x801;
     }
 
-    k = q->unk_00.y >> 8;
+    k = q->fieldPosition.y >> 8;
     v = -0x1004 - k * 4;
-    q->unk_3C = q->unk_00.unk_0C;
+    q->unk_3C = q->fieldPosition.unk_0C;
     q->unk_3A = v + 1;
     z = 0;
-    x = (p->unk_08.x >> 8) - (gFieldState->x >> 8);
+    x = (p->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
     t = flags;
-    y = k + (q->unk_00.z >> 8) - (gFieldState->y >> 8);
+    y = k + (q->fieldPosition.z >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, p->gfx, p->tiles, p->palette, z, t, v);
-    TaskPoolDraw(p->tasks);
+    TaskPoolDraw(&p->tasks);
 }
 
 void func_080E657C(MapEnmWork* p) {
-    UnkStruct_080E6034* q;
+    MapEnmCache* q;
 
     if (gGameState.unk_000 != 0 && (p->flags & 4) == 0 &&
         ((gUnk_0203C7AC->flags & 2) == 0 || (p->flags & 2))) {
-        q = ListPoolFirstFree(gGameState.unk_0E8);
+        q = ListPoolFirstFree(&gGameState.enemyCachePool);
         if (q != 0) {
             q->unk_30 = p->unk_00;
             q->unk_34 = p->update;
-            q->unk_00 = p->unk_08;
-            q->unk_10 = p->unk_1C;
-            q->unk_14 = p->unk_18;
-            ListPoolActivate(q->node, gGameState.unk_0E8);
+            q->unk_00 = p->obj.fieldPosition;
+            q->unk_10 = p->obj.angle;
+            q->unk_14 = p->obj.unk_10;
+            ListPoolActivate(&q->node, &gGameState.enemyCachePool);
         }
     }
     gUnk_02034F40--;
     gUnk_02034F41 -= p->unk_00->unk_08;
-    ColliderUnregister(p->collider);
+    ColliderUnregister(&p->collider);
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
-    TaskPoolDestroy(p->tasks);
+    TaskPoolDestroy(&p->tasks);
 }
 
 u8 func_080E6634(u8 a) {

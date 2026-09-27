@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_allmap.c
-    start: 0x09EF6424
-    end: 0x09EF659C
   - name: sprites_allmap_frames.s
     start: 0x0976B1D8
     end: 0x0976E9D4
+    data_start: 0x09EF6424
+    data_end: 0x09EF659C
   - name: sprites_allmap_tiles.s
     start: 0x097B62B8
     end: 0x097B7218
@@ -30,12 +29,11 @@ objects:
     start: 0x0984A1F8
     end: 0x0984A418
   jp:
-  - name: sprites_allmap.c
-    start: 0x09ECD810
-    end: 0x09ECD988
   - name: sprites_allmap_frames.s
     start: 0x097239B4
     end: 0x097271B0
+    data_start: 0x09ECD810
+    data_end: 0x09ECD988
   - name: sprites_allmap_tiles.s
     start: 0x0977074C
     end: 0x097716AC
@@ -46,12 +44,11 @@ objects:
     start: 0x097FEECC
     end: 0x097FF0EC
   eu:
-  - name: sprites_allmap.c
-    start: 0x09F8181C
-    end: 0x09F819A4
   - name: sprites_allmap_frames.s
     start: 0x09738538
     end: 0x0973C884
+    data_start: 0x09F8181C
+    data_end: 0x09F819A4
   - name: sprites_allmap_tiles.s
     start: 0x09793C20
     end: 0x09795660

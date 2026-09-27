@@ -35,7 +35,6 @@ u8 func_0801CA00(BtlObj* p);
 
 struct HumWork;
 struct HumSub;
-struct HitData;
 
 void BtlWorkInit(void);
 u8 func_0801BCA8(s32 a);
@@ -46,7 +45,7 @@ void func_0801C104(void);
 void func_0801C1A0(u8 a);
 void _0801C1F8(u8 a, s32 x, s32 y, s32 z);
 void func_0801C274(s32 a, s32 b, s32 c);
-void func_0801C7FC(struct HitData* a, s32 b, s32 c);
+void func_0801C7FC(BtlObj* a, s32 b, s32 c);
 void func_0801C830(BtlObj* p);
 void func_0801CB00(void);
 void func_0801CB0C(void);

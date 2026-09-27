@@ -111,14 +111,6 @@ typedef struct FieldTransitionWork {
     u8 unk_23;
 } FieldTransitionWork;
 
-typedef struct HitData {
-    u8 unk_00[0x2C];
-    u16 unk_2C;
-    s16 unk_2E;
-    s16 unk_30;
-    u8 unk_32[0x02];
-} HitData;
-
 typedef struct EnemyBaseStats {
     s16 hp;
     s16 attack;

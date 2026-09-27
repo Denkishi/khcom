@@ -707,23 +707,23 @@ s32 func_080F7E0C(s32 x0, s32 y0, s32 x1, s32 y1) {
 
 void func_080F7E84(GaEntryWork* e) {
     e->vz += 0x4C;
-    e->z += e->vz;
-    if (e->z > 0) {
+    e->actor.z += e->vz;
+    if (e->actor.z > 0) {
         if (e->vz > 0x500) {
             m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
         }
-        e->z = 0;
+        e->actor.z = 0;
         e->vz = -e->vz / 2;
     }
 
     if (e->unk_164 > 0) {
-        e->x += e->unk_164;
+        e->actor.x += e->unk_164;
         e->unk_164 -= 0x11;
         if (e->unk_164 < 0) {
             e->unk_164 = 0;
         }
     } else if (e->unk_164 < 0) {
-        e->x += e->unk_164;
+        e->actor.x += e->unk_164;
         e->unk_164 += 0x11;
         if (e->unk_164 > 0) {
             e->unk_164 = 0;
@@ -731,19 +731,19 @@ void func_080F7E84(GaEntryWork* e) {
     }
 
     if (e->unk_168 > 0) {
-        e->y += e->unk_168 / 2;
+        e->actor.y += e->unk_168 / 2;
         e->unk_168 -= 0x11;
         if (e->unk_168 < 0) {
             e->unk_168 = 0;
         }
     } else if (e->unk_168 < 0) {
-        e->y += e->unk_168 / 2;
+        e->actor.y += e->unk_168 / 2;
         e->unk_168 += 0x11;
         if (e->unk_168 > 0) {
             e->unk_168 = 0;
         }
     }
-    ClampBattlePosition(&e->x, &e->y, -0x18, -0x0C);
+    ClampBattlePosition(&e->actor.x, &e->actor.y, -0x18, -0x0C);
 }
 
 void func_080F7F54(GaWork* work, s32 state) {
@@ -787,9 +787,9 @@ void func_080F800C(GaWork* work, s32 i) {
     e = &work->entries[i];
 
     if (work->unk_018 == 0) {
-        e->unk_034 |= 4;
+        e->actor.flags |= 4;
     } else {
-        e->unk_034 &= ~4;
+        e->actor.flags &= ~4;
     }
     e->unk_140 = func_080F7F70(work, i);
     e->unk_144 = func_080F7F94(work, i);
@@ -851,16 +851,16 @@ void func_080F80FC(GaWork* work, u32 i, s32 c) {
         }
         e->unk_12C -= 0xA000;
     }
-    func_0801B37C(e, &gUnk_09991F44, e->unk_124, e->unk_128, e->unk_12C);
-    func_0801C7FC(e, gUnk_09991F44.unk_00, gRoomTableEntries[i].unk_00);
-    e->unk_0A0 = 0x10;
+    func_0801B37C(&e->actor, &gUnk_09991F44, e->unk_124, e->unk_128, e->unk_12C);
+    func_0801C7FC(&e->actor, gUnk_09991F44.unk_00, gRoomTableEntries[i].unk_00);
+    e->actor.unk_0A0 = 0x10;
 
     if (i == 0) {
-        e->unk_034 |= 0x400;
+        e->actor.flags |= 0x400;
     } else {
-        e->unk_034 |= 0x1000;
+        e->actor.flags |= 0x1000;
     }
-    e->unk_034 |= 4;
+    e->actor.flags |= 4;
 
     switch (i) {
     case 4:
@@ -869,7 +869,7 @@ void func_080F80FC(GaWork* work, u32 i, s32 c) {
         break;
     }
     TaskPoolInit(&e->tasks, 1);
-    TaskCreate(&e->tasks, &gTaskDescBtlShadow, e);
+    TaskCreate(&e->tasks, &gTaskDescBtlShadow, &e->actor);
     p = gRoomTableEntries[i].gfxTable;
     e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, gRoomTableEntries[i].spriteCount), gRoomTableEntries[i].owner);
     AnimInit(&e->anim, gRoomTableEntries[i].anims, p);
@@ -882,14 +882,14 @@ void func_080F80FC(GaWork* work, u32 i, s32 c) {
         AnimStart(&work->anim, 0, 1);
         work->gfx = AnimGetGfx(&work->anim);
     }
-    ColliderInit(&e->collider, 8, 8, 0x10);
+    ColliderInit(&e->actor.collider, 8, 8, 0x10);
 }
 
 void func_080F8374(GaEntryWork* e) {
     if (!(e->unk_15A & 0x10)) {
-        ColliderUnregister(&e->collider);
+        ColliderUnregister(&e->actor.collider);
         ReleaseObjTiles(e->tiles);
-        func_0801B7D8(e);
+        func_0801B7D8(&e->actor);
         TaskPoolDestroy(&e->tasks);
         e->unk_15A |= 0x10;
     }
@@ -913,24 +913,24 @@ void func_080F83E0(GaWork* work, GaEntryWork* e) {
     }
     f = AllocObjAffineAngle(e->unk_112, 1);
     q = e;
-    g = GetBattleSpritePriorityFlags(e->y);
+    g = GetBattleSpritePriorityFlags(e->actor.y);
 
     if (work->unk_018 == 1) {
         g |= 1;
     }
 
-    if (func_0801CA00(e)) {
+    if (func_0801CA00(&e->actor)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
     }
-    WorldToScreen(&sx, &sy, q->x, q->y, q->z);
+    WorldToScreen(&sx, &sy, q->actor.x, q->actor.y, q->actor.z);
     DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), e->gfx, e->tiles, pal, f, g,
-               0xEFFC - ((q->y >> 8) << 2));
+               0xEFFC - ((q->actor.y >> 8) << 2));
 
     if (e->unk_1A0 == 0 && work->unk_000 != 7 && work->unk_000 != 8 && work->unk_000 != 9) {
         DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), work->gfx, work->tiles, pal, f, g,
-                   0xEFFC - ((q->y >> 8) << 2));
+                   0xEFFC - ((q->actor.y >> 8) << 2));
     }
     TaskPoolDraw(&e->tasks);
 }
@@ -1110,7 +1110,7 @@ u8 func_080F8958(GaWork* work) {
             if (work->unk_A4C == 0) {
                 if (GetRandom() % 3 != 0) {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 } else {
                     func_080F7F54(work, 2);
                 }
@@ -1119,14 +1119,14 @@ u8 func_080F8958(GaWork* work) {
                     func_080F7F54(work, 2);
                 } else {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 }
             }
         } else if (d <= 0x270F) {
             if (work->unk_A4C == 0) {
                 if (GetRandom() & 1) {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 } else {
                     func_080F7F54(work, 2);
                 }
@@ -1135,7 +1135,7 @@ u8 func_080F8958(GaWork* work) {
                     func_080F7F54(work, 2);
                 } else {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 }
             }
         } else {
@@ -1144,12 +1144,12 @@ u8 func_080F8958(GaWork* work) {
                     func_080F7F54(work, 2);
                 } else {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 }
             } else {
                 if (GetRandom() % 3 != 0) {
                     func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0]);
+                    func_0801BCD4(&work->entries[0].actor);
                 } else {
                     func_080F7F54(work, 2);
                 }
@@ -1492,7 +1492,7 @@ u8 func_080F8F9C(GaWork* work) {
                     work->unk_010--;
                     if (work->unk_010 <= 0) {
                         if (!(e->unk_15A & 4)) {
-                            if (func_08011F78(226, e->x, e->y, e->z, 16, 16, 16)) {
+                            if (func_08011F78(226, e->actor.x, e->actor.y, e->actor.z, 16, 16, 16)) {
                                 m4aSongNumStart(SONG_BTL_IRON_HIT00);
                             } else if (e->unk_1A0 == 4) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTL);
@@ -1605,7 +1605,7 @@ u8 func_080F8F9C(GaWork* work) {
             e = &work->entries[i];
             switch (e->unk_1A0) {
             case 0:
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
                 break;
             case 4:
             case 5:
@@ -1671,7 +1671,7 @@ u8 func_080F9744(GaWork* work) {
                     e->unk_128 += 0x133;
 
                     if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE3, e->x, e->y, e->z, 0x10, 0x10, 0x20)) {
+                        if (func_08011F78(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
@@ -1702,7 +1702,7 @@ u8 func_080F9744(GaWork* work) {
                     e->unk_128 -= 0x133;
 
                     if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE3, e->x, e->y, e->z, 0x10, 0x10, 0x20)) {
+                        if (func_08011F78(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
@@ -1719,7 +1719,7 @@ u8 func_080F9744(GaWork* work) {
         case 2:
             switch (e->unk_1A0) {
             case 0:
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
                 break;
             case 2:
             case 3:
@@ -1815,7 +1815,7 @@ u8 func_080F99C0(GaWork* work) {
                     e->unk_1A4 = e->unk_1A4 + 4;
 
                     if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE4, e->x, e->y, e->z, 0x10, 0x10, 0x20)) {
+                        if (func_08011F78(0xE4, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
@@ -1832,7 +1832,7 @@ u8 func_080F99C0(GaWork* work) {
         case 2:
             switch (e->unk_1A0) {
             case 0:
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
                 break;
             case 2:
             case 3:
@@ -1950,7 +1950,7 @@ u8 func_080F9C2C(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
             default:
                 e->unk_15A &= 0xFFFE;
                 break;
@@ -2071,7 +2071,7 @@ u8 func_080F9EDC(GaWork* work) {
                 }
             }
 
-            if (func_08011F78(0xE6, work->entries[0].x, work->entries[0].y, work->entries[0].z, 0x10, 0x10, 0x18)) {
+            if (func_08011F78(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
                 work->unk_00C = 3;
             }
@@ -2124,7 +2124,7 @@ u8 func_080F9EDC(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
             default:
                 e->unk_15A &= 0xFFFE;
                 break;
@@ -2231,7 +2231,7 @@ u8 func_080FA2B4(GaWork* work) {
                 }
             }
 
-            if (func_08011F78(0xE6, work->entries[0].x, work->entries[0].y, work->entries[0].z, 0x10, 0x10, 0x18)) {
+            if (func_08011F78(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
                 work->unk_00C = 3;
             }
@@ -2284,7 +2284,7 @@ u8 func_080FA2B4(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
             default:
                 e->unk_15A &= 0xFFFE;
                 break;
@@ -2451,7 +2451,7 @@ u8 func_080FA644(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(e);
+                func_0801AF08(&e->actor);
             default:
                 e->unk_15A &= 0xFFFE;
                 break;
@@ -2715,12 +2715,12 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
         return;
     }
 
-    switch (func_0801ADAC((MdSub*)e)) {
+    switch (func_0801ADAC(&e->actor)) {
     case 5:
         work->unk_A52 = 1;
 
         if (work->unk_000 == 10 || work->unk_004 == 10) {
-            func_0801AF08(e);
+            func_0801AF08(&e->actor);
         } else {
             d1 = gBtlWork->actor->x - e->unk_124;
             d1 = (d1 * d1) >> 8;
@@ -2889,11 +2889,11 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
         break;
     case 3:
     case 8:
-        func_0801C2DC(e, 1);
+        func_0801C2DC(&e->actor, 1);
         e->unk_15A |= 4;
 
         if (e->unk_1A0 == 0) {
-            func_0801AF4C((MdSub*)e);
+            func_0801AF4C(&e->actor);
             e->unk_11C = 0;
             e->unk_15C = 0;
             work->entries[1].unk_11C = 0;
@@ -2905,7 +2905,7 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
 
             if (work->unk_000 != 10 && work->unk_004 != 10) {
                 if (work->unk_A52 != 0) {
-                    func_0801AF08(&work->entries[0]);
+                    func_0801AF08(&work->entries[0].actor);
                 }
                 func_080F7F54(work, 1);
             }
@@ -2918,33 +2918,33 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
             }
             func_080F7F54(work, 1);
         }
-        func_0801AF08(e);
+        func_0801AF08(&e->actor);
         break;
     }
 
     switch ((u32)e->unk_11C) {
     case 0:
-        v = (e->unk_124 - e->x) >> 1;
+        v = (e->unk_124 - e->actor.x) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
-        e->x += v;
-        v = (e->unk_128 - e->y) >> 1;
+        e->actor.x += v;
+        v = (e->unk_128 - e->actor.y) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
-        e->y += v;
-        v = ((e->unk_12C + e->unk_13C) - e->z) >> 1;
+        e->actor.y += v;
+        v = ((e->unk_12C + e->unk_13C) - e->actor.z) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
-        e->z += v;
+        e->actor.z += v;
         t = e->unk_112;
         ApproachAngle(&t, 0, 3);
         e->unk_112 = t;
@@ -2964,14 +2964,14 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
             e->unk_1A6 = 0;
 
             if (!func_080128EC()) {
-                func_08013DB8(e->x, e->y + e->z, 0, 0x100);
+                func_08013DB8(e->actor.x, e->actor.y + e->actor.z, 0, 0x100);
                 e->unk_15C++;
             }
         } else if (e->unk_15C > 0) {
             if (work->entries[2].unk_15A & work->entries[3].unk_15A & work->entries[4].unk_15A & work->entries[5].unk_15A & 4) {
-                func_0801C2DC(&work->entries[0], 0);
+                func_0801C2DC(&work->entries[0].actor, 0);
             }
-            func_0801AF08(e);
+            func_0801AF08(&e->actor);
             func_080F8374(e);
             return;
         }
@@ -2982,7 +2982,7 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
     if (e->unk_15A & 2) {
         e->unk_1A6++;
         if (e->unk_1A6 > 30) {
-            func_0801AF08(e);
+            func_0801AF08(&e->actor);
             e->unk_15A &= 0xFFFD;
             e->unk_1A6 = 0;
         }
@@ -2993,11 +2993,11 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
         work->gfx = AnimUpdate(&work->anim);
     }
 
-    if (e->unk_06C != 0) {
-        e->x += e->unk_078;
-        e->y += e->unk_07C;
+    if (e->actor.collider.unk_2C != 0) {
+        e->actor.x += e->actor.collider.unk_38;
+        e->actor.y += e->actor.collider.unk_3C;
     }
-    ColliderSetPosition(&e->collider, e->x, e->y, e->z + e->unk_13C);
+    ColliderSetPosition(&e->actor.collider, e->actor.x, e->actor.y, e->actor.z + e->unk_13C);
     TaskPoolUpdate(&e->tasks);
 }
 
@@ -3034,8 +3034,8 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
         func_080F80FC(work, i, arg);
     }
 
-    func_0801C2DC(p, 1);
-    func_0801C2DC(&work->entries[1], 1);
+    func_0801C2DC(&p->actor, 1);
+    func_0801C2DC(&work->entries[1].actor, 1);
     work->palette = LoadObjPalette(gBoss01objPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     func_0801C298(work->palette[6] + 16, 1);

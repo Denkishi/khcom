@@ -2301,15 +2301,15 @@ void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d) {
     }
 }
 
-void func_0801C7FC(HitData* a, s32 id, s32 c) {
+void func_0801C7FC(BtlObj* a, s32 id, s32 c) {
     u16 b = id;
     const EnemyBaseStats* e = GetEnemyBaseStats(b);
     if (e != 0) {
-        a->unk_2E = (e->hp * c) >> 8;
-        if (a->unk_2E <= 0) {
-            a->unk_2E = 1;
+        a->unk_02E = (e->hp * c) >> 8;
+        if (a->unk_02E <= 0) {
+            a->unk_02E = 1;
         }
-        a->unk_2C = a->unk_2E;
+        a->unk_02C = a->unk_02E;
     }
 }
 

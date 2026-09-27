@@ -4,23 +4,11 @@
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "battle_actor_types.h"
 
 typedef struct GaEntryWork {
-    s32 unk_000;
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 unk_010[0x24];
-    u64 unk_034;
-    u8 unk_03C[0x04];
-    u8 collider[0x2C];
-    u8 unk_06C;
-    u8 unk_06D[0x0B];
-    s32 unk_078;
-    s32 unk_07C;
-    u8 unk_080[0x20];
-    u16 unk_0A0;
-    u8 unk_0A2[0x70];
+    BtlObj actor;
+    u8 unk_110[0x02];
     u8 unk_112;
     u8 unk_113;
     u16 unk_114;

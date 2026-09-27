@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_wlogo.c
-    start: 0x09EF351C
-    end: 0x09EF3884
   - name: sprites_wlogo_frames.s
     start: 0x0961AA00
     end: 0x0962ACE0
+    data_start: 0x09EF351C
+    data_end: 0x09EF3884
   - name: sprites_wlogo_tiles.s
     start: 0x096300C4
     end: 0x0964AE84
@@ -30,12 +29,11 @@ objects:
     start: 0x096FAC84
     end: 0x096FB164
   jp:
-  - name: sprites_wlogo.c
-    start: 0x09ECA908
-    end: 0x09ECAC70
   - name: sprites_wlogo_frames.s
     start: 0x095D34DC
     end: 0x095E37BC
+    data_start: 0x09ECA908
+    data_end: 0x09ECAC70
   - name: sprites_wlogo_tiles.s
     start: 0x095E88A0
     end: 0x09603660
@@ -46,12 +44,11 @@ objects:
     start: 0x096B3460
     end: 0x096B3940
   eu:
-  - name: sprites_wlogo.c
-    start: 0x09F7E768
-    end: 0x09F7EAD0
   - name: sprites_wlogo_frames.s
     start: 0x095DBEE0
     end: 0x095EC1C0
+    data_start: 0x09F7E768
+    data_end: 0x09F7EAD0
   - name: sprites_wlogo_tiles.s
     start: 0x095FA04C
     end: 0x09614E0C

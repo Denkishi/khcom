@@ -462,7 +462,7 @@ TaskDesc gTaskDescBosDsdCircle = {
     (TaskUpdateFunc)task_bos_dsd_circle_1,
     (TaskFunc)task_bos_dsd_circle_2,
     (TaskFunc)task_bos_dsd_circle_3,
-    0x20,
+    sizeof(DsdCircleWork),
 };
 
 TaskDesc gTaskDescBosDsdEnergy1 = {
@@ -471,7 +471,7 @@ TaskDesc gTaskDescBosDsdEnergy1 = {
     (TaskUpdateFunc)task_bos_dsd_energy1_1,
     (TaskFunc)task_bos_dsd_energy1_2,
     (TaskFunc)task_bos_dsd_energy1_3,
-    0x4C,
+    sizeof(DsdEnergy1Work),
 };
 
 TaskDesc gTaskDescBosDsdEnergy2 = {
@@ -480,5 +480,5 @@ TaskDesc gTaskDescBosDsdEnergy2 = {
     (TaskUpdateFunc)task_bos_dsd_energy2_1,
     (TaskFunc)task_bos_dsd_energy2_2,
     (TaskFunc)task_bos_dsd_energy2_3,
-    0x40,
+    sizeof(DsdEnergy2Work),
 };

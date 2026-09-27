@@ -1823,7 +1823,7 @@ TaskDesc gTaskDescBosTmFoot = {
     (TaskUpdateFunc)task_bos_tm_foot_1,
     (TaskFunc)task_bos_tm_foot_2,
     (TaskFunc)task_bos_tm_foot_3,
-    0x484,
+    sizeof(TmFootWork),
 };
 
 TaskDesc gTaskDescBosTmClb = {
@@ -1832,7 +1832,7 @@ TaskDesc gTaskDescBosTmClb = {
     (TaskUpdateFunc)task_bos_tm_clb_1,
     (TaskFunc)task_bos_tm_clb_2,
     (TaskFunc)task_bos_tm_clb_3,
-    0x1C,
+    sizeof(TmClbWork),
 };
 
 TaskDesc gTaskDescBosTmArm = {
@@ -1841,7 +1841,7 @@ TaskDesc gTaskDescBosTmArm = {
     (TaskUpdateFunc)task_bos_tm_arm_1,
     (TaskFunc)task_bos_tm_arm_2,
     (TaskFunc)task_bos_tm_arm_3,
-    0x258,
+    sizeof(TmArmWork),
 };
 
 TaskDesc gTaskDescBosTmTbl = {
@@ -1850,5 +1850,5 @@ TaskDesc gTaskDescBosTmTbl = {
     (TaskUpdateFunc)task_bos_tm_tbl_1,
     0,
     (TaskFunc)task_bos_tm_tbl_3,
-    0x6C,
+    sizeof(TmTblWork),
 };

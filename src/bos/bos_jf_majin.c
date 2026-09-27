@@ -2278,7 +2278,7 @@ TaskDesc gTaskDescBosJfMajin = {
     (TaskUpdateFunc)task_bos_jf_majin_1,
     (TaskFunc)task_bos_jf_majin_2,
     (TaskFunc)task_bos_jf_majin_3,
-    0x84,
+    sizeof(JfMajinWork),
 };
 
 s8 gUnk_09EF2A38[9] __attribute__((aligned(1))) = { 9, 10, 11, 12, 13, 14, 15, 26, 0 };
@@ -2295,7 +2295,7 @@ TaskDesc gTaskDescBosJfRock = {
     (TaskUpdateFunc)task_bos_jf_rock_1,
     (TaskFunc)task_bos_jf_rock_2,
     (TaskFunc)task_bos_jf_rock_3,
-    0x198,
+    sizeof(JfRockWork),
 };
 
 TaskDesc gTaskDescBosJfBorderline = {
@@ -2304,7 +2304,7 @@ TaskDesc gTaskDescBosJfBorderline = {
     (TaskUpdateFunc)task_bos_jf_borderline_1,
     (TaskFunc)task_bos_jf_borderline_2,
     (TaskFunc)task_bos_jf_borderline_3,
-    0xB8,
+    sizeof(JfBorderlineWork),
 };
 
 TaskDesc gTaskDescBosDsd = {
@@ -2313,5 +2313,5 @@ TaskDesc gTaskDescBosDsd = {
     (TaskUpdateFunc)task_bos_dsd_1,
     (TaskFunc)task_bos_dsd_2,
     (TaskFunc)task_bos_dsd_3,
-    0x394,
+    sizeof(DsdWork),
 };

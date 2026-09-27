@@ -301,7 +301,7 @@ TaskDesc gTaskDescBosDsdIta = {
     (TaskUpdateFunc)task_bos_dsd_ita_1,
     (TaskFunc)task_bos_dsd_ita_2,
     (TaskFunc)task_bos_dsd_ita_3,
-    0x90,
+    sizeof(DsdItaWork),
 };
 
 TaskDesc gTaskDescBosDsdRock = {
@@ -310,5 +310,5 @@ TaskDesc gTaskDescBosDsdRock = {
     (TaskUpdateFunc)task_bos_dsd_rock_1,
     (TaskFunc)task_bos_dsd_rock_2,
     (TaskFunc)task_bos_dsd_rock_3,
-    0x24,
+    sizeof(DsdRockWork),
 };

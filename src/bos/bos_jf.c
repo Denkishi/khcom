@@ -958,7 +958,7 @@ TaskDesc gTaskDescBosJf = {
     (TaskUpdateFunc)task_bos_jf_1,
     (TaskFunc)task_bos_jf_2,
     (TaskFunc)task_bos_jf_3,
-    0x26C,
+    sizeof(JfWork),
 };
 
 void* gUnk_09EF275C[2][15] = {
@@ -1004,7 +1004,7 @@ TaskDesc gTaskDescBosJfMap = {
     (TaskUpdateFunc)task_bos_jf_map_1,
     0,
     0,
-    0x4,
+    sizeof(JfMapWork),
 };
 
 u8 gUnk_09EF27EC[8] = { 0, 1, 1, 0, 0, 0, 0, 0 };
@@ -1017,5 +1017,5 @@ TaskDesc gTaskDescBosJfLamp = {
     (TaskUpdateFunc)task_bos_jf_lamp_1,
     (TaskFunc)task_bos_jf_lamp_2,
     (TaskFunc)task_bos_jf_lamp_3,
-    0x58,
+    sizeof(JfLampWork),
 };

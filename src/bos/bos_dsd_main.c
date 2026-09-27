@@ -1269,7 +1269,7 @@ TaskDesc gTaskDescBosDsdMain = {
     (TaskUpdateFunc)task_bos_dsd_main_1,
     (TaskFunc)task_bos_dsd_main_2,
     (TaskFunc)task_bos_dsd_main_3,
-    0x190,
+    sizeof(DsdMainWork),
 };
 
 const u16* gUnk_09EF2E68[4] = {

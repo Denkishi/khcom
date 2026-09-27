@@ -220,5 +220,5 @@ TaskDesc gTaskDescBosTm = {
     (TaskUpdateFunc)task_bos_tm_1,
     (TaskFunc)task_bos_tm_2,
     (TaskFunc)task_bos_tm_3,
-    0x64,
+    sizeof(TmWork),
 };

@@ -9,7 +9,7 @@ Mode gModePooh = {
     mode_pooh_2,
 };
 
-const PoohHit gUnk_096FC010 = { gPoohPalette, 36, 16, 6, 0 };
+const PooHitBox gUnk_096FC010 = { gPoohPalette, 36, 16, 6, 0 };
 
 const s8 gUnk_096FC01C[8][8] = {
     { 0, 1, 2, 2, 3, -2, -2, -1 },
@@ -397,7 +397,7 @@ u8 func_080C76B0(Collider* p) {
 }
 
 void func_080C7714(void) {
-    PoohPos p;
+    PooPos p;
 
     p.x = 0x13000;
     p.y = 0xE800;
@@ -410,7 +410,7 @@ void func_080C7714(void) {
 }
 
 void func_080C774C(void) {
-    PoohPos p;
+    PooPos p;
 
     p.x = 0xB5400;
     p.y = 0x5DE00;
@@ -667,7 +667,7 @@ u8 func_080C7CBC(void) {
 }
 
 void func_080C7CC8(PoohWork* w) {
-    switch (((w->unk_38 + 16) & 0xFF) >> 5) {
+    switch (((w->angle + 16) & 0xFF) >> 5) {
     case 1:
         w->unk_A8 = 4;
         w->unk_24 = 0;
@@ -705,7 +705,7 @@ void func_080C7CC8(PoohWork* w) {
 }
 
 void func_080C7D60(PoohWork* w) {
-    switch (((w->unk_38 + 16) & 0xFF) >> 5) {
+    switch (((w->angle + 16) & 0xFF) >> 5) {
     case 1:
         w->unk_A8 = 4;
         w->unk_24 = 1;
@@ -745,7 +745,7 @@ void func_080C7D60(PoohWork* w) {
 void func_080C7DF8(PoohWork* w) {
     w->unk_24 = 0;
 
-    switch (((w->unk_38 + 16) & 0xFF) >> 5) {
+    switch (((w->angle + 16) & 0xFF) >> 5) {
     case 0:
         w->unk_A8 = 0;
         break;
@@ -777,7 +777,7 @@ void func_080C7DF8(PoohWork* w) {
 }
 
 void func_080C7E98(PoohWork* w) {
-    switch (((w->unk_38 + 16) & 0xFF) >> 5) {
+    switch (((w->angle + 16) & 0xFF) >> 5) {
     case 0:
     case 1:
         w->unk_A8 = 0;
@@ -806,10 +806,10 @@ void func_080C7E98(PoohWork* w) {
 }
 
 void func_080C7F18(PoohWork* w) {
-    if (w->unk_38 <= 99) {
+    if (w->angle <= 99) {
         w->unk_A8 = 3;
         w->unk_24 = 1;
-    } else if (w->unk_38 <= 156) {
+    } else if (w->angle <= 156) {
         w->unk_A8 = 1;
         w->unk_24 = 0;
     } else {
@@ -840,7 +840,7 @@ u8 func_080C7F94(PoohWork* w) {
     u32 col;
 
     memcpy(tbl, gUnk_096FC01C, sizeof(tbl));
-    row = (u32)((w->unk_38 + 16) & 0xFF) >> 5;
+    row = (u32)((w->angle + 16) & 0xFF) >> 5;
     col = (u32)((w->unk_3A + 16) & 0xFF) >> 5;
     if ((s8)tbl[row][col] == 3) {
         return w->unk_3B;
@@ -853,7 +853,7 @@ void func_080C7FEC(PoohWork* w, u32 anim) {
     u16 flags;
 
     flags = 0;
-    ColliderSetRadius(w->collider, gUnk_096FC010.unk_08);
+    ColliderSetRadius(&w->collider, gUnk_096FC010.unk_08);
 
     if (w->unk_26 == anim) {
         flags = 4;
@@ -914,7 +914,7 @@ void func_080C7FEC(PoohWork* w, u32 anim) {
         e = &gUnk_09EF3E98;
         break;
     case 23:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F28;
         w->unk_FA = 1;
         break;
@@ -936,43 +936,43 @@ void func_080C7FEC(PoohWork* w, u32 anim) {
         e = &gUnk_09EF3FE8;
         break;
     case 24:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F38;
         w->unk_FA = 1;
         break;
     case 25:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F48;
         w->unk_FA = 1;
         break;
     case 26:
-        ColliderSetRadius(w->collider, 14);
+        ColliderSetRadius(&w->collider, 14);
         flags |= 1;
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F58;
         w->unk_FA = 1;
         break;
     case 27:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F68;
         w->unk_FA = 1;
         break;
     case 28:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F78;
         w->unk_FA = 1;
         break;
     case 29:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3F98;
         break;
     case 30:
         flags |= 1;
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3FA8;
         break;
     case 31:
-        w->unk_24 = func_080C7F4C(w->unk_38);
+        w->unk_24 = func_080C7F4C(w->angle);
         e = &gUnk_09EF3FB8;
         break;
     case 38:
@@ -1021,7 +1021,7 @@ u8 func_080C83C4(u16 x, u16 y, u16 px, u16 py) {
     return 0;
 }
 
-s32 func_080C8404(PoohPos* a, PoohPos* b) {
+s32 func_080C8404(PooPos* a, PooPos* b) {
     s32 dx;
     s32 dy;
 

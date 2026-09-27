@@ -2,6 +2,8 @@
 #define GUARD_POOH_ACTOR_TYPES_H
 
 #include "types.h"
+#include "anim.h"
+#include "battle_actor_types.h"
 #include "obj.h"
 #include "taskpool.h"
 
@@ -40,35 +42,65 @@ typedef struct PooState {
     u16 unk_42;
 } PooState;
 
+typedef struct PooShadowInfo {
+    u16 unk_00;
+    u16 unk_02;
+    s32 unk_04;
+} PooShadowInfo;
+
+typedef struct PooHitBox {
+    void* unk_00;
+    u16 unk_04;
+    s16 unk_06;
+    s16 unk_08;
+    s16 unk_0A;
+} PooHitBox;
+
 typedef struct PoohWork {
     void* tiles;
-    PaletteSlot* palette;
-    u8 unk_08[0x04];
-    u8 anim[0x18];
+    ObjPalette* palette;
+    void* gfx;
+    AnimState anim;
     u8 unk_24;
     u8 unk_25;
     u16 unk_26;
-    u8 unk_28[0x10];
-    u8 unk_38;
+    PooPos pos;
+    u8 angle;
     u8 unk_39;
     u8 unk_3A;
     u8 unk_3B;
-    u8 unk_3C[0x0C];
+    s32 unk_3C;
+    s32 unk_40;
+    s32 unk_44;
     s32 unk_48;
-    u8 collider[0x5C];
+    Collider collider;
     s32 unk_A8;
     u16 unk_AC;
     u8 unk_AE[0x02];
     TaskPool tasks;
     Task* task;
-    u8 unk_C8[0x0E];
+    Task* unk_C8;
+    u8 unk_CC;
+    u8 unk_CD[0x03];
+    struct PooNode* unk_D0;
+    u16 unk_D4;
     u8 unk_D6;
-    u8 unk_D7[0x03];
-    u16 unk_DA;
-    u8 unk_DC[0x1A];
+    u8 unk_D7;
+    u16 unk_D8;
+    s16 unk_DA;
+    u16 unk_DC;
+    u8 unk_DE[0x02];
+    PooShadowInfo shadowInfo;
+    u8 unk_E8;
+    u8 unk_E9[0x03];
+    s32 unk_EC;
+    s32 unk_F0;
+    u16 unk_F4;
     u8 unk_F6;
-    u8 unk_F7[0x03];
+    u8 unk_F7;
+    u16 unk_F8;
     u8 unk_FA;
+    u8 unk_FB;
 } PoohWork;
 
 #endif

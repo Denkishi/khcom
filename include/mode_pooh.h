@@ -32,28 +32,12 @@
 #include "poo_api.h"
 
 
-typedef struct PoohPos {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 unk_0C;
-} PoohPos;
-
-typedef struct PoohHit {
-    void* unk_00;
-    u16 unk_04;
-    u16 unk_06;
-    s16 unk_08;
-    s16 unk_0A;
-} PoohHit;
-
 extern u32 gUnk_02034DAC;
 
 extern u8 gPoohPalette[];
 extern u8 gTrap0001Palette[];
 extern u8 gTrap0002Palette[];
 extern u8 gTrap0003Palette[];
-extern const PoohHit gUnk_096FC010;
 extern const s8 gUnk_096FC01C[8][8];
 
 void func_080C75E0(u32 a, u16 b);

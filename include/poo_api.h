@@ -6,6 +6,8 @@
 
 struct PooPos;
 
+extern const PooHitBox gUnk_096FC010;
+
 void func_080C84E0(struct PoohWork* w, u32 b);
 void func_080CA35C(void);
 void func_080CA368(s32 a, u16 b, u16 c);

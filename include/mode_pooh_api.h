@@ -4,7 +4,7 @@
 #include "types.h"
 
 struct Collider;
-struct PoohPos;
+struct PooPos;
 struct PoohWork;
 
 void func_080C75A4(u32 a, u16 b);
@@ -22,7 +22,7 @@ u8 func_080C7CBC(void);
 void func_080C7CC8(struct PoohWork* w);
 void func_080C7FEC(struct PoohWork* w, u32 anim);
 u8 func_080C83C4(u16 x, u16 y, u16 px, u16 py);
-s32 func_080C8404(struct PoohPos* a, struct PoohPos* b);
+s32 func_080C8404(struct PooPos* a, struct PooPos* b);
 void func_080C8428(struct PoohWork* w, u32 b);
 
 #endif

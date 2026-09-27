@@ -52,7 +52,7 @@ typedef struct SmnCloudWork {
     u8 unk_164;
     u8 unk_165[0x03];
     BtlObj* target;
-    u16 unk_16C;
+    s16 unk_16C;
     u8 unk_16E[0x02];
     s32 unk_170;
     s32 unk_174;
@@ -212,13 +212,6 @@ typedef struct SmnPrizeArgs {
     s16 unk_14;
     u8 unk_16[0x0A];
 } SmnPrizeArgs;
-
-typedef struct SmnFrdWork {
-    u8 unk_000[0x20];
-    BtlObj body;
-    u8 unk_130[0x24];
-    s32 unk_154;
-} SmnFrdWork;
 
 typedef struct SmnKingWork {
     void* tiles;

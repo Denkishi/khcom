@@ -1,6 +1,7 @@
 #include "task_descriptors.h"
 #include "display.h"
 #include "smn.h"
+#include "frd.h"
 #include "anim.h"
 #include "smn_api.h"
 #include "task_animation_assets.h"
@@ -2563,7 +2564,7 @@ void task_smn_king_3(SmnKingWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_0804544C(SmnFrdWork* work) {
+u8 func_0804544C(FrdDonaldWork* work) {
     BtlObj* body;
 
     body = &work->body;

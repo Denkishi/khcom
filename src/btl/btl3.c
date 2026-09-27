@@ -4,6 +4,7 @@
 #include "util.h"
 #include "btl3.h"
 #include "btl3_api.h"
+#include "smn.h"
 #include "task_animation_assets.h"
 #include "sprites_btl.h"
 #include "sprites_fld.h"
@@ -678,7 +679,7 @@ void task_btl_badstatus_3(BtlBadStatusWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-BtlObj* func_08040C8C(BtlAiWork* work) {
+BtlObj* func_08040C8C(SmnCloudWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
@@ -720,7 +721,7 @@ BtlObj* func_08040C8C(BtlAiWork* work) {
     return p;
 }
 
-BtlObj* func_08040D54(BtlAiWork* work) {
+BtlObj* func_08040D54(SmnCloudWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
@@ -745,8 +746,8 @@ BtlObj* func_08040D54(BtlAiWork* work) {
 
     while (p != 0) {
         if (!(p->flags & 0x01000000)) {
-            d = work->unk_044 - p->z;
-            if (d >= 0 ? d <= 0x3000 : p->z - work->unk_044 <= 0x3000) {
+            d = work->body.z - p->z;
+            if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {
                 list[count] = p;
                 count++;
                 if (count > 9) {

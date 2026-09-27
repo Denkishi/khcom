@@ -115,15 +115,6 @@ typedef struct BtlBadStatusWork {
     void* palette3;
 } BtlBadStatusWork;
 
-typedef struct BtlAiWork {
-    u8 unk_000[0x44];
-    s32 unk_044;
-    u8 unk_048[0x11B];
-    u8 unk_163;
-    u8 unk_164[0x08];
-    s16 unk_16C;
-} BtlAiWork;
-
 extern u8 gSor1ll68wTiles[];
 extern u8 gSoraPalette[];
 extern u8 gBStatesPalette[];

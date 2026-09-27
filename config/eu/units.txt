@@ -79,7 +79,6 @@ sprites_riku_frames.s
 sprites_fld_frames_3.s
 sprites_mode_debug_frames.s
 sprites_emy_frames_1.s
-sprites_map_tasks_1.c
 sprites_map_tasks_frames_1.s
 sprites_emy_frames_2.s
 sprites_btl_frames_3.s
@@ -187,14 +186,12 @@ sprites_msg_frames_2.s
 sprites_mode_test_frames.s
 sprites_msg_frames.s
 sprites_evt_2.c
-sprites_map_tasks_2.c
-sprites_evt_3.c
-sprites_map_tasks_3.c
-sprites_evt_4.c
 sprites_evt_frames_2.s
 sprites_map_tasks_frames_2.s
+sprites_evt_3.c
 sprites_evt_frames_3.s
 sprites_map_tasks_frames_3.s
+sprites_evt_4.c
 sprites_evt_frames_4.s
 sprites_map_frames_1.s
 sprites_worldselect_frames.s

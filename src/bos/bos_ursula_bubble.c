@@ -14,11 +14,7 @@ TaskDesc gTaskDescBosUrsulaBubble = {
     (TaskUpdateFunc)task_bos_ursula_bubble_1,
     (TaskFunc)task_bos_ursula_bubble_2,
     (TaskFunc)task_bos_ursula_bubble_3,
-#ifdef VERSION_EU
-    0x5C,
-#else
-    0x44,
-#endif
+    sizeof(UrsulaBubbleWork),
 };
 
 TaskDesc gTaskDescBosUrsulaBubbleSingle = {
@@ -27,11 +23,7 @@ TaskDesc gTaskDescBosUrsulaBubbleSingle = {
     (TaskUpdateFunc)task_bos_ursula_bubble_single_1,
     (TaskFunc)task_bos_ursula_bubble_single_2,
     (TaskFunc)task_bos_ursula_bubble_single_3,
-#ifdef VERSION_EU
-    0x130,
-#else
-    0x148,
-#endif
+    sizeof(UrsulaBubbleSingleWork),
 };
 
 TaskDesc gTaskDescBosUrsulaThunder = {
@@ -40,11 +32,11 @@ TaskDesc gTaskDescBosUrsulaThunder = {
     (TaskUpdateFunc)task_bos_ursula_thunder_1,
     (TaskFunc)task_bos_ursula_thunder_2,
     (TaskFunc)task_bos_ursula_thunder_3,
-    0x10,
+    sizeof(UrsulaThunderWork),
 };
 
 #ifdef VERSION_EU
-u32 gUnkEu_02035104;
+UrsulaBubbleWork* gUnkEu_02035104;
 #endif
 
 const char gTaskNameBosUrsulaBubble[] = "task_bos_ursula_bubble";
@@ -62,21 +54,21 @@ u16 func_080DD7C4(UrsulaBubbleWork* work) {
         v = -v;
     }
 
-    work->unk_018[0] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[0] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
     v = 0x20;
 
     if (func_080DC510() != 0) {
         v = -v;
     }
 
-    work->unk_018[1] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[1] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
     v = 0x40;
 
     if (func_080DC510() != 0) {
         v = -v;
     }
 
-    work->unk_018[2] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[2] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
 
     return 3;
 }
@@ -93,7 +85,7 @@ u16 func_080DD854(UrsulaBubbleWork* work) {
             v = -v;
         }
 
-        work->unk_018[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+        work->bubbles[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
         a += 20;
     }
 
@@ -112,7 +104,7 @@ u16 func_080DD8A8(UrsulaBubbleWork* work) {
             v = -v;
         }
 
-        work->unk_018[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+        work->bubbles[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
         a += 16;
     }
 
@@ -121,25 +113,24 @@ u16 func_080DD8A8(UrsulaBubbleWork* work) {
 
 void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
 #ifdef VERSION_EU
-    gUnkEu_02035104 = (u32)work;
+    gUnkEu_02035104 = work;
     AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
     AnimStart(&work->anim, 0, 1);
-    *(void**)((u8*)gBtlWork + 0x118) =
-        AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68C0, 6), gUnk_097A0DE4);
+    gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68C0, 6), gUnk_097A0DE4);
 #endif
     TaskPoolInit(&work->tasks, 10);
-    work->unk_040 = 0;
+    work->bubbleCount = 0;
 
     switch (func_080DC5E8()) {
     case 2:
-        work->unk_040 = func_080DD8A8(work);
+        work->bubbleCount = func_080DD8A8(work);
         break;
     case 1:
-        work->unk_040 += func_080DD854(work);
+        work->bubbleCount += func_080DD854(work);
         break;
     case 0:
     default:
-        work->unk_040 += func_080DD7C4(work);
+        work->bubbleCount += func_080DD7C4(work);
         break;
     }
 
@@ -154,13 +145,13 @@ u8 task_bos_ursula_bubble_1(UrsulaBubbleWork* work) {
     AnimUpdate(&work->anim);
 #endif
 
-    for (i = 0; i < work->unk_040; i++) {
-        if (IsTaskActive(work->unk_018[i]) != 0) {
+    for (i = 0; i < work->bubbleCount; i++) {
+        if (IsTaskActive(work->bubbles[i]) != 0) {
             break;
         }
     }
 
-    if (i == work->unk_040) {
+    if (i == work->bubbleCount) {
         return 0;
     }
 
@@ -174,46 +165,46 @@ void task_bos_ursula_bubble_2(UrsulaBubbleWork* work) {
 void task_bos_ursula_bubble_3(UrsulaBubbleWork* work) {
     TaskPoolDestroy(&work->tasks);
 #ifdef VERSION_EU
-    ReleaseObjTiles(*(void**)((u8*)gBtlWork + 0x118));
+    ReleaseObjTiles(gBtlWork->tiles3);
 #endif
 }
 
 void func_080DD9B0(UrsulaBubbleWork* work) {
     s32 i;
 
-    for (i = 0; i < work->unk_040; i++) {
-        if (IsTaskActive(work->unk_018[i]) != 0) {
-            func_080DDD30(*(void**)((u8*)work->unk_018[i] + 4));
+    for (i = 0; i < work->bubbleCount; i++) {
+        if (IsTaskActive(work->bubbles[i]) != 0) {
+            func_080DDD30(work->bubbles[i]->work);
         }
     }
 }
 
 #ifdef VERSION_EU
 void eu_080DA80C(u16 a, u16 b) {
-    AnimChange(&((UrsulaBubbleWork*)gUnkEu_02035104)->anim, a, b);
+    AnimChange(&gUnkEu_02035104->anim, a, b);
 }
 
 u16 eu_080DA830(void) {
-    return AnimGetId(&((UrsulaBubbleWork*)gUnkEu_02035104)->anim);
+    return AnimGetId(&gUnkEu_02035104->anim);
 }
 
 u8 eu_080DA848(void) {
-    return AnimIsFinished(&((UrsulaBubbleWork*)gUnkEu_02035104)->anim);
+    return AnimIsFinished(&gUnkEu_02035104->anim);
 }
 
 void* eu_080DA860(void) {
-    return AnimGetGfx(&((UrsulaBubbleWork*)gUnkEu_02035104)->anim);
+    return AnimGetGfx(&gUnkEu_02035104->anim);
 }
 #endif
 
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->angle = *arg;
     work->unk_140 = 0x333;
-    func_0801B37C(&work->unk_024, &gBosUrsulaBubbleSingleEmyKind, gBtlWork->unk_0CC,
+    func_0801B37C(&work->obj, &gBosUrsulaBubbleSingleEmyKind, gBtlWork->unk_0CC,
         gBtlWork->unk_0D0 + 0x1000, gBtlWork->unk_0D4);
-    func_0801C2DC(&work->unk_024, 1);
+    func_0801C2DC(&work->obj, 1);
 #ifdef VERSION_EU
-    work->tiles = *(void**)((u8*)gBtlWork + 0x118);
+    work->tiles = gBtlWork->tiles3;
 #else
     work->tiles = LoadObjTiles(gUnk_097A0DE4, 0xA80);
 #endif
@@ -229,7 +220,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->timer = 0x3C;
 }
 u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_024;
+    BtlObj* p = &work->obj;
 
     work->unk_140 -= 12;
 
@@ -276,7 +267,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 #else
             AnimStart(&work->anim, 1, 0);
 #endif
-            func_0801C2DC(&work->unk_024, 1);
+            func_0801C2DC(&work->obj, 1);
         }
     }
 
@@ -303,13 +294,13 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 
     AnimUpdate(&work->anim);
 #endif
-    ColliderSetPosition((u8*)p + 0x40, p->x, p->y, p->z);
+    ColliderSetPosition(&p->collider, p->x, p->y, p->z);
 
     return 1;
 }
 
 void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
-    BtlObjPos* p = (BtlObjPos*)&work->unk_024;
+    BtlObj* p = &work->obj;
     void* pal;
     u16 v;
     s16 x;
@@ -326,7 +317,7 @@ void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
 }
 
 void task_bos_ursula_bubble_single_3(UrsulaBubbleSingleWork* work) {
-    func_0801B7D8(&work->unk_024);
+    func_0801B7D8(&work->obj);
 #ifndef VERSION_EU
     ReleaseObjTiles((void*)work->tiles);
 #endif
@@ -346,7 +337,7 @@ void func_080DDD30(UrsulaBubbleSingleWork* work) {
 #else
         AnimStart(&work->anim, 1, 0);
 #endif
-        func_0801C2DC(&work->unk_024, 1);
+        func_0801C2DC(&work->obj, 1);
         work->unk_138 = 2;
     }
 }

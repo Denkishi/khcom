@@ -191,14 +191,9 @@ typedef struct UrsulaBubbleSingleWork {
     void* palette;
     void* palette2;
 #ifndef VERSION_EU
-    u32 anim;
-    u8 unk_010[0x14];
+    AnimState anim;
 #endif
-    u32 unk_024;
-    u32 unk_028;
-    u32 unk_02C;
-    u32 unk_030;
-    u8 unk_034[0x100];
+    BtlObj obj;
     u16 timer;
     u8 unk_136[0x2];
     u32 unk_138;
@@ -260,10 +255,9 @@ typedef struct BoogieDiceWork {
 
 typedef struct UrsulaBubbleWork {
     u32 unk_000;
-    u32 tasks;
-    u8 unk_008[0x10];
-    void* unk_018[10];
-    u16 unk_040;
+    TaskPool tasks;
+    Task* bubbles[10];
+    u16 bubbleCount;
     u8 unk_042[0x2];
 #ifdef VERSION_EU
     AnimState anim;

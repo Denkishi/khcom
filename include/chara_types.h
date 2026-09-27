@@ -25,10 +25,24 @@ typedef struct CharaObjParam {
     u32 unk_30;
     u32 unk_34;
     u32 unk_38;
-    u32 unk_3C;
-    u32 unk_40;
+    void (*unk_3C)(void);
+    struct BtlObj* unk_40;
     u16 unk_44;
 } CharaObjParam;
+
+typedef struct CharaObjParam2 {
+    u32 unk_00;
+    u16 unk_04;
+    u8 unk_06[0x02];
+    u32 unk_08;
+    u16 unk_0C;
+    u8 unk_0E[0x02];
+    u32 unk_10;
+    u32 unk_14;
+    u32 unk_18;
+    void (*unk_1C)(void);
+    struct BtlObj* unk_20;
+} CharaObjParam2;
 
 typedef struct CharaLinkData {
     u16 unk_00;

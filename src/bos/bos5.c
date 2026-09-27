@@ -2664,7 +2664,7 @@ u8 func_080FABE4(GaWork* work) {
                     param.unk_30 = e->unk_124 + (work->unk_018 == 0 ? -0x700 : 0x700);
                     param.unk_34 = e->unk_128;
                     param.unk_38 = e->unk_12C + 0x1000;
-                    param.unk_40 = (u32)e;
+                    param.unk_40 = (BtlObj*)e;
                     break;
                 case 1:
                     param.unk_10 = 0x06010000 + (((RoomObjResource*)e->tiles)->unk_06 << 5);
@@ -2678,7 +2678,7 @@ u8 func_080FABE4(GaWork* work) {
             param.unk_24 = 0;
             param.unk_28 = 0;
             param.unk_2C = 0;
-            param.unk_3C = (u32)func_080F83BC;
+            param.unk_3C = func_080F83BC;
             func_080C6894(&param);
             work->unk_00C = 6;
             break;

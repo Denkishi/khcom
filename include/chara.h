@@ -85,20 +85,6 @@ typedef struct ChgCardObjParam {
     u16 unk_20;
 } ChgCardObjParam;
 
-typedef struct CharaObjParam2 {
-    u32 unk_00;
-    u16 unk_04;
-    u8 unk_06[0x02];
-    u32 unk_08;
-    u16 unk_0C;
-    u8 unk_0E[0x02];
-    u32 unk_10;
-    u32 unk_14;
-    u32 unk_18;
-    u32 unk_1C;
-    u32 unk_20;
-} CharaObjParam2;
-
 typedef struct CharaObj {
     u32 x;
     u32 y;
@@ -128,8 +114,8 @@ typedef struct CharaObj {
     u8 unk_45;
     u16 unk_46[0x400];
     u16 unk_846[0x400];
-    u32 unk_1048;
-    u32 unk_104C;
+    void (*unk_1048)(void);
+    struct BtlObj* unk_104C;
     u16 unk_1050[32];
     u16 unk_1090;
     u8 unk_1092[0x02];

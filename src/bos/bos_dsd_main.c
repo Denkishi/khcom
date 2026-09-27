@@ -991,7 +991,7 @@ void func_080C3928(DsdMainWork* work) {
         param.unk_34 = d->body[0].y;
         param.unk_38 = d->body[0].z + 0x3000;
         param.unk_3C = 0;
-        param.unk_40 = (u32)a;
+        param.unk_40 = a;
         param.unk_44 = 1;
         func_080C6894(&param);
         work->dsd->unk_350++;

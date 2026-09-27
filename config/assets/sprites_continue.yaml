@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_continue.c
-    start: 0x09EEB0C4
-    end: 0x09EEB188
   - name: sprites_continue_frames.s
     start: 0x090A6A20
     end: 0x090AA3C4
+    data_start: 0x09EEB0C4
+    data_end: 0x09EEB188
   - name: sprites_continue_tiles.s
     start: 0x0941A418
     end: 0x0941BEB8
@@ -27,12 +26,11 @@ objects:
     start: 0x0951CAB8
     end: 0x0951D2B8
   jp:
-  - name: sprites_continue.c
-    start: 0x09EC24B0
-    end: 0x09EC2574
   - name: sprites_continue_frames.s
     start: 0x09061F48
     end: 0x090658EC
+    data_start: 0x09EC24B0
+    data_end: 0x09EC2574
   - name: sprites_continue_tiles.s
     start: 0x093D2754
     end: 0x093D4194
@@ -40,12 +38,11 @@ objects:
     start: 0x094D5594
     end: 0x094D5D94
   eu:
-  - name: sprites_continue.c
-    start: 0x09F77254
-    end: 0x09F77318
   - name: sprites_continue_frames.s
     start: 0x0919728C
     end: 0x0919AC30
+    data_start: 0x09F77254
+    data_end: 0x09F77318
   - name: sprites_continue_tiles.s
     start: 0x0954C284
     end: 0x0954DD34

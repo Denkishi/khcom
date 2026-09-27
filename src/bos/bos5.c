@@ -1941,7 +1941,7 @@ u8 func_080F9C2C(GaWork* work) {
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = (s32)e;
+        gBtlWork->unk_0D4 = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2115,7 +2115,7 @@ u8 func_080F9EDC(GaWork* work) {
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = (s32)e;
+        gBtlWork->unk_0D4 = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2275,7 +2275,7 @@ u8 func_080FA2B4(GaWork* work) {
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = (s32)e;
+        gBtlWork->unk_0D4 = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2442,7 +2442,7 @@ u8 func_080FA644(GaWork* work) {
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = (s32)e;
+        gBtlWork->unk_0D4 = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2516,7 +2516,7 @@ u8 func_080FAA18(GaWork* work) {
         func_080F7F54(work, 1);
         break;
     case 2:
-        gBtlWork->unk_0D4 = (s32)e;
+        gBtlWork->unk_0D4 = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];

@@ -17,8 +17,8 @@ void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->unk_080 = 0;
     ColliderInit(&work->collider, 7, 0x20, 3);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    work->gfx = (u32)gUnk_09EF3BF8[0];
-    work->gfx2 = (u32)gUnk_09EF3C18;
+    work->gfx = gUnk_09EF3BF8[0];
+    work->gfx2 = gUnk_09EF3C18;
 }
 
 u8 task_bos_dsd_ita_1(DsdItaWork* work) {

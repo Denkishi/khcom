@@ -202,8 +202,7 @@ typedef struct DsdMainWork {
 
 typedef struct DsdItaWork {
     DsdWork* dsd;
-    u32 collider;
-    u8 unk_008[0x58];
+    Collider collider;
     s32 x;
     s32 y;
     s32 z;

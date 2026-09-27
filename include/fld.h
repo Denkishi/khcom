@@ -34,8 +34,10 @@ typedef struct FldShadowWork {
     void* tiles;
     void* palette;
     FldActor* actor;
-    u8 anim[0x18];
+    AnimState anim;
 } FldShadowWork;
+
+typedef char FldShadowWork_size[(sizeof(FldShadowWork) == 0x2C) ? 1 : -1];
 
 void func_0803473C(FldWork* work, s32 index, u16 flags);
 

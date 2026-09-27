@@ -436,7 +436,7 @@ void func_080BDAAC(void);
 void func_080BDB28(s16 a);
 void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg);
 u8 task_bos_jf_map_1(JfMapWork* work);
-u8 func_080BD7F8(s32* p, s32* a, s32 b, s32* out);
+u8 func_080BD7F8(s32* p, s32* a, s32* b, s32* out);
 void task_bos_dsd_energy1_2(DsdEnergy1Work* work);
 void task_bos_dsd_energy2_2(DsdEnergy2Work* work);
 void task_bos_dsd_map_0(void);

@@ -1659,7 +1659,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         return 0;
     }
 
-    func_080BD7F8(&work->x, &work->y, (s32)&work->z, (s32*)&work->unk_03C);
+    func_080BD7F8(&work->x, &work->y, &work->z, (s32*)&work->unk_03C);
     TaskPoolUpdate(&work->tasks);
 
     return 1;

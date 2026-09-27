@@ -461,7 +461,7 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
     return 0;
 }
 
-u8 func_080BD7F8(s32* p, s32* a, s32 b, s32* out) {
+u8 func_080BD7F8(s32* p, s32* a, s32* b, s32* out) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -831,7 +831,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
     }
 
     work->unk_1E++;
-    work->unk_2D = func_080BD7F8(&sub->x, &sub->y, (s32)&sub->z, &sub->unk_010);
+    work->unk_2D = func_080BD7F8(&sub->x, &sub->y, &sub->z, &sub->unk_010);
     ColliderSetPosition(&sub->collider, sub->x, sub->y, sub->z);
     TaskPoolUpdate(&work->tasks);
 

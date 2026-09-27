@@ -41,7 +41,7 @@
 #include "sprites_card_pictures.h"
 
 void func_08090170(DeckCard2Work* node);
-u8 func_080901B8(u8* p);
+u8 func_080901B8(DeckCard2Work* n);
 
 const s16 gUnk_09035950[3] = { 13, 36, 59 };
 
@@ -52,42 +52,42 @@ const s16 gUnk_0903595E[3] = { 181, 204, 227 };
 const s16 gUnk_09035964[4] = { 47, 73, 99, 125 };
 
 void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
-    *(DeckCard2Args*)&n->pool = *a;
+    n->args = *a;
     n->tiles = 0;
     n->palette = 0;
     n->tiles2 = 0;
     n->palette2 = 0;
     n->flags = 0;
 
-    switch (n->unk_26) {
+    switch (n->args.unk_0A) {
     case 0:
-        if ((u16)n->unk_24 <= 3) {
-            n->x = gUnk_09035950[n->unk_22] << 8;
-            n->y = gUnk_09035956[n->unk_24] << 8;
+        if ((u16)n->args.row <= 3) {
+            n->x = gUnk_09035950[n->args.col] << 8;
+            n->y = gUnk_09035956[n->args.row] << 8;
         } else {
-            n->x = gUnk_09035950[n->unk_22] << 8;
+            n->x = gUnk_09035950[n->args.col] << 8;
             n->y = 0x20000;
         }
         break;
     case 1:
-        if ((u16)n->unk_24 <= 3) {
-            n->x = gUnk_0903595E[n->unk_22] << 8;
-            n->y = gUnk_09035964[n->unk_24] << 8;
+        if ((u16)n->args.row <= 3) {
+            n->x = gUnk_0903595E[n->args.col] << 8;
+            n->y = gUnk_09035964[n->args.row] << 8;
         } else {
-            n->x = gUnk_0903595E[n->unk_22] << 8;
+            n->x = gUnk_0903595E[n->args.col] << 8;
             n->y = 0x20000;
         }
         break;
     }
 
-    if (n->cardId != 0xFFFF) {
-        if (!(n->cardId & 0x8000)) {
+    if (n->args.cardId != 0xFFFF) {
+        if (!(n->args.cardId & 0x8000)) {
             n->unk_4D = 0;
         } else {
             n->unk_4D = 1;
         }
 
-        n->cardDef = &gCardDefs[n->cardId & 0xFFF];
+        n->cardDef = &gCardDefs[n->args.cardId & 0xFFF];
 
         if (n->cardDef->flags & 0xC) {
             n->cardBack = &gUnk_08F709B0[3];
@@ -97,8 +97,8 @@ void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
     }
 
     n->unk_4A = 0;
-    ListNodeInit(&n->node, n->pool, n);
-    ListPoolAppend(&n->node, n->pool);
+    ListNodeInit(&n->node, n->args.pool, n);
+    ListPoolAppend(&n->node, n->args.pool);
 }
 
 u8 DeckCard2_1(DeckCard2Work* n) {
@@ -106,28 +106,28 @@ u8 DeckCard2_1(DeckCard2Work* n) {
         return 0;
     }
 
-    switch (n->unk_26) {
+    switch (n->args.unk_0A) {
     case 0:
-        if ((u16)n->unk_24 <= 3) {
-            n->x = gUnk_09035950[n->unk_22] << 8;
-            n->y = gUnk_09035956[n->unk_24] << 8;
+        if ((u16)n->args.row <= 3) {
+            n->x = gUnk_09035950[n->args.col] << 8;
+            n->y = gUnk_09035956[n->args.row] << 8;
         } else {
-            n->x = gUnk_09035950[n->unk_22] << 8;
+            n->x = gUnk_09035950[n->args.col] << 8;
             n->y = 0x20000;
         }
         break;
     case 1:
-        if ((u16)n->unk_24 <= 3) {
-            n->x = gUnk_0903595E[n->unk_22] << 8;
-            n->y = gUnk_09035964[n->unk_24] << 8;
+        if ((u16)n->args.row <= 3) {
+            n->x = gUnk_0903595E[n->args.col] << 8;
+            n->y = gUnk_09035964[n->args.row] << 8;
         } else {
-            n->x = gUnk_0903595E[n->unk_22] << 8;
+            n->x = gUnk_0903595E[n->args.col] << 8;
             n->y = 0x20000;
         }
         break;
     }
 
-    if (func_080901B8((u8*)n)) {
+    if (func_080901B8(n)) {
         func_08090100(n);
     } else {
         func_08090170(n);
@@ -147,18 +147,18 @@ void DeckCard2_2(DeckCard2Work* n) {
         }
     }
 
-    if (n->unk_26 == 0 && n->cardDef->unk_2A != 3) {
+    if (n->args.unk_0A == 0 && n->cardDef->unk_2A != 3) {
         DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 4, gUnk_09EE981C[n->cardDef->unk_20], n->tiles2, n->palette2, 0, 0, 0x31);
     }
 }
 
-void DeckCard2_3(u8* p) {
-    func_08090170((DeckCard2Work*)p);
-    ListPoolRemove(&p[0x2C], *(void**)&p[0x1C]);
+void DeckCard2_3(DeckCard2Work* n) {
+    func_08090170(n);
+    ListPoolRemove(&n->node, n->args.pool);
 }
 
 void func_08090100(DeckCard2Work* n) {
-    if (n->cardId == 0xFFFF) {
+    if (n->args.cardId == 0xFFFF) {
         return;
     }
 
@@ -190,12 +190,12 @@ void func_08090170(DeckCard2Work* node) {
     }
 }
 
-u8 func_080901B8(u8* p) {
+u8 func_080901B8(DeckCard2Work* n) {
     s16 a;
     s16 b;
 
-    a = *(s32*)&p[0x40] >> 8;
-    b = *(s32*)&p[0x44] >> 8;
+    a = n->x >> 8;
+    b = n->y >> 8;
 
     if (a < 0) {
         return 0;
@@ -222,5 +222,5 @@ TaskDesc gTaskDescDeckCard2 = {
     (TaskUpdateFunc)DeckCard2_1,
     (TaskFunc)DeckCard2_2,
     (TaskFunc)DeckCard2_3,
-    0x50,
+    sizeof(DeckCard2Work),
 };

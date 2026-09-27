@@ -612,21 +612,21 @@ void func_080A6838(UnkStruct_080A5D3C* w, u8 kind) {
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
             if (kind == 0) {
-                args.unk_00 = &w->pool;
-                args.unk_04 = gCardCollection[cards[i]] & 0x8FFF;
-                args.unk_06 = x;
-                args.unk_08 = y;
+                args.pool = &w->pool;
+                args.cardId = gCardCollection[cards[i]] & 0x8FFF;
+                args.col = x;
+                args.row = y;
                 args.unk_0A = 0;
-                args.unk_0C = &cards[i];
+                args.slot = &cards[i];
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
             } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].unk_2A == kind - 1) {
-                args.unk_00 = &w->pool;
-                args.unk_04 = gCardCollection[cards[i]] & 0x8FFF;
-                args.unk_06 = x;
-                args.unk_08 = y;
+                args.pool = &w->pool;
+                args.cardId = gCardCollection[cards[i]] & 0x8FFF;
+                args.col = x;
+                args.row = y;
                 args.unk_0A = 0;
-                args.unk_0C = &cards[i];
+                args.slot = &cards[i];
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
             }
@@ -663,9 +663,9 @@ void func_080A69A0(u8* work) {
     }
 
     while (node != 0) {
-        node->unk_24--;
+        node->args.row--;
 
-        if (node->unk_24 < 0) {
+        if (node->args.row < 0) {
             node->y = 0x20000;
             func_08090170(node);
         }
@@ -702,14 +702,14 @@ u8 func_080A6A38(u8* work) {
         return 1;
     }
 
-    if (node->unk_24 == 0) {
+    if (node->args.row == 0) {
         return 0;
     }
 
     do {
-        node->unk_24++;
+        node->args.row++;
 
-        if (node->unk_24 > 3) {
+        if (node->args.row > 3) {
             node->y = 0x20000;
             func_08090170(node);
         }
@@ -734,8 +734,8 @@ DeckCard2Work* func_080A6AE8(u8* work) {
     node = ListPoolFirst(&work[0x434]);
 
     while (node != 0) {
-        if (*(s16*)&work[0x4C8] == node->unk_22 &&
-            *(s16*)&work[0x4CA] == node->unk_24) {
+        if (*(s16*)&work[0x4C8] == node->args.col &&
+            *(s16*)&work[0x4CA] == node->args.row) {
             return node;
         }
 
@@ -926,8 +926,8 @@ void func_080A6FAC(UnkStruct_080A6FAC* w) {
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        if (node->unk_24 == w->unk_4CA && node->unk_22 == w->unk_4C8) {
-            id = node->cardId;
+        if (node->args.row == w->unk_4CA && node->args.col == w->unk_4C8) {
+            id = node->args.cardId;
             break;
         }
 
@@ -1049,7 +1049,7 @@ u8 func_080A7388(u8* work, s16 x, s16 y, u16 dir) {
     node = ListPoolFirst(&work[0x434]);
 
     while (node != 0) {
-        if (node->unk_22 == x && node->unk_24 == y) {
+        if (node->args.col == x && node->args.row == y) {
             return 1;
         }
 

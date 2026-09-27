@@ -404,6 +404,16 @@ typedef struct CardMessageArgs {
     u32 unk_07 : 8;
 } CardMessageArgs;
 
+typedef struct DeckCard2Args {
+    void* pool;
+    u16 cardId;
+    s16 col;
+    s16 row;
+    u8 unk_0A;
+    u8 unk_0B;
+    u16* slot;
+} DeckCard2Args;
+
 typedef struct DeckCard2Work {
     u8 unk_00[0x04];
     void* palette2;
@@ -412,13 +422,7 @@ typedef struct DeckCard2Work {
     void* tiles2;
     CardDef* cardDef;
     CardBack* cardBack;
-    ListPool* pool;
-    u16 cardId;
-    s16 unk_22;
-    s16 unk_24;
-    u8 unk_26;
-    u8 unk_27;
-    void* unk_28;
+    DeckCard2Args args;
     ListNode node;
     s32 x;
     s32 y;
@@ -427,11 +431,6 @@ typedef struct DeckCard2Work {
     u8 unk_4B[0x02];
     u8 unk_4D;
 } DeckCard2Work;
-
-typedef struct UnkStruct_0808E3E0 {
-    u8 unk_00[0x24];
-    u16 unk_24;
-} UnkStruct_0808E3E0;
 
 typedef struct UnkStruct_0809C534 {
     CardDef* cardDef;
@@ -1512,16 +1511,6 @@ typedef struct WorldSelBeforeArgs {
     s32 unk_08;
 } WorldSelBeforeArgs;
 
-typedef struct DeckCard2Args {
-    void* unk_00;
-    u16 unk_04;
-    s16 unk_06;
-    s16 unk_08;
-    u8 unk_0A;
-    u8 unk_0B;
-    u16* unk_0C;
-} DeckCard2Args;
-
 typedef struct EventBgEffectFrame {
     u16 duration;
     u16 tilesOffset;
@@ -1707,16 +1696,6 @@ typedef struct BossCardWork {
 
 extern const s16 gUnk_0903595E[];
 extern const s16 gUnk_09035964[];
-
-typedef struct UnkStruct_080A97D4 {
-    void* unk_00;
-    u16 cardId;
-    s16 unk_06;
-    s16 unk_08;
-    u8 unk_0A;
-    u8 unk_0B;
-    u32 unk_0C;
-} UnkStruct_080A97D4;
 
 typedef struct UnkStruct_0808F358 {
     u8 unk_000[0x784];

@@ -102,14 +102,14 @@ void func_080D5B04(void) {
     case 4:
     case 5:
     case 6:
+#endif
         LoadBgMap(0, gUnk_0983F398, 0x800);
+#ifdef VERSION_EU
         break;
     case 2:
         LoadBgMap(0, gUnkEu_09814E40, 0x800);
         break;
     }
-#else
-    LoadBgMap(0, gUnk_0983F398, 0x800);
 #endif
     SetBgBlend(0, 5, 16);
     EnableBg(1);

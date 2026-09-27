@@ -14,24 +14,21 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_map_1.c
-    start: 0x09EF0F64
-    end: 0x09EF1060
-  - name: sprites_map_2.c
-    start: 0x09EF1138
-    end: 0x09EF1150
-  - name: sprites_map_3.c
-    start: 0x09EF8414
-    end: 0x09EF8E94
   - name: sprites_map_frames_1.s
     start: 0x093EDD44
     end: 0x093F2020
+    data_start: 0x09EF0F64
+    data_end: 0x09EF1060
   - name: sprites_map_frames_2.s
     start: 0x093F3E3C
     end: 0x093F4478
+    data_start: 0x09EF1138
+    data_end: 0x09EF1150
   - name: sprites_map_frames_3.s
     start: 0x098582E0
     end: 0x098A9C84
+    data_start: 0x09EF8414
+    data_end: 0x09EF8E94
   - name: sprites_map_tiles.s
     start: 0x0993B764
     end: 0x09968144
@@ -42,24 +39,21 @@ objects:
     start: 0x09991D44
     end: 0x09991F44
   jp:
-  - name: sprites_map_1.c
-    start: 0x09EC8350
-    end: 0x09EC844C
-  - name: sprites_map_2.c
-    start: 0x09EC8524
-    end: 0x09EC853C
-  - name: sprites_map_3.c
-    start: 0x09ECF800
-    end: 0x09ED0280
   - name: sprites_map_frames_1.s
     start: 0x093A926C
     end: 0x093AD548
+    data_start: 0x09EC8350
+    data_end: 0x09EC844C
   - name: sprites_map_frames_2.s
     start: 0x093AF364
     end: 0x093AF9A0
+    data_start: 0x09EC8524
+    data_end: 0x09EC853C
   - name: sprites_map_frames_3.s
     start: 0x0980CDF4
     end: 0x0985E798
+    data_start: 0x09ECF800
+    data_end: 0x09ED0280
   - name: sprites_map_tiles.s
     start: 0x098F0278
     end: 0x0991CC58
@@ -70,24 +64,21 @@ objects:
     start: 0x09946858
     end: 0x09946A58
   eu:
-  - name: sprites_map_1.c
-    start: 0x09F7C148
-    end: 0x09F7C244
-  - name: sprites_map_2.c
-    start: 0x09F7C31C
-    end: 0x09F7C334
-  - name: sprites_map_3.c
-    start: 0x09F83A84
-    end: 0x09F84744
   - name: sprites_map_frames_1.s
     start: 0x094BD3CC
     end: 0x094C16A8
+    data_start: 0x09F7C148
+    data_end: 0x09F7C244
   - name: sprites_map_frames_2.s
     start: 0x094C34C4
     end: 0x094C3B00
+    data_start: 0x09F7C31C
+    data_end: 0x09F7C334
   - name: sprites_map_frames_3.s
     start: 0x09834CCC
     end: 0x09889B10
+    data_start: 0x09F83A84
+    data_end: 0x09F84744
   - name: sprites_map_tiles_1.s
     start: 0x0991B5F0
     end: 0x0994A6B0

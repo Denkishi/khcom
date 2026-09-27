@@ -198,9 +198,6 @@ sprites_map_tasks_2.c
 sprites_evt_3.c
 sprites_map_tasks_3.c
 sprites_evt_4.c
-sprites_map_1.c
-sprites_worldselect.c
-sprites_map_2.c
 sprites_mode_test_frames_2.s
 sprites_msg_frames.s
 sprites_evt_frames_2.s
@@ -209,6 +206,7 @@ sprites_evt_frames_3.s
 sprites_map_tasks_frames_3.s
 sprites_evt_frames_4.s
 sprites_map_frames_1.s
+sprites_worldselect.c
 sprites_worldselect_frames.s
 sprites_map_frames_2.s
 sprites_card_frames_3.s
@@ -351,7 +349,6 @@ room.c
 map_room_tables.s
 map_rooms.c
 map_data.c
-sprites_map_3.c
 sprites_map_frames_3.s
 map_room_tiles_1.s
 map_tile_animation_tiles_5.s

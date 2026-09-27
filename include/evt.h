@@ -6,6 +6,7 @@
 
 #include "evt_tasks.h"
 
+#include "obj.h"
 #include "obj_api.h"
 #include "types.h"
 #include "anim.h"
@@ -23,9 +24,9 @@ typedef struct EvtObjParam {
 typedef struct EvtObjWork {
     EvtObj* obj;
     void* tiles;
-    u16* palette;
-    u8 anim[0x18];
-    u8 tasks[0x14];
+    ObjPalette* palette;
+    AnimState anim;
+    TaskPool tasks;
 } EvtObjWork;
 
 typedef struct EvtShadowWork {

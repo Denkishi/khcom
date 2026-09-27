@@ -12,7 +12,7 @@ void EvtObjSetAnim(EvtObj* obj, s32 anim) {
     u16 t = obj->flags | 1;
 
     obj->flags = t;
-    obj->unk_00 = (s32)&gEvtObjAnims[anim];
+    obj->animEntry = &gEvtObjAnims[anim];
 }
 
 void EvtObjSetPos(EvtObj* obj, s32 a, s32 b, s32 c) {
@@ -45,7 +45,7 @@ void func_0801CE00(EvtObj* obj, u16 a) {
     obj->unk_16 = a;
 }
 
-s32 func_0801CE04(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
+Task* func_0801CE04(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
     EvtObjParam param;
 
     param.res = &gUnk_0813B09C[res].res;
@@ -58,16 +58,16 @@ s32 func_0801CE04(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a,
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;
-    TaskCreate(pool, desc, &param);
+    return TaskCreate(pool, desc, &param);
 }
 
 void EvtObjChangeAnim(EvtObjWork* work) {
     EvtObj* obj;
-    EvtObjAnim* anim;
+    const EvtObjAnim* anim;
     EvtAnimDef* def;
 
     obj = work->obj;
-    anim = (EvtObjAnim*)obj->unk_00;
+    anim = obj->animEntry;
     def = anim->animDef;
     AnimChangeWithTables(&work->anim, anim->animId, anim->flags, def->anims, def->gfxTable);
     SetObjTileSource(work->tiles, def->tiles);
@@ -83,7 +83,7 @@ void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
     work->palette = LoadObjPalette(res->palette, 32);
     AnimInit(&work->anim, 0, 0);
     work->obj->anim = &work->anim;
-    work->obj->unk_1C = work->palette[3];
+    work->obj->unk_1C = work->palette->index;
     EvtObjChangeAnim(work);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescEvtShadow, work->obj);
@@ -189,6 +189,6 @@ void task_evt_shadow_3(EvtShadowWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-TaskDesc gTaskDescEvtObj = { gTaskNameEvtObj, task_evt_obj_0, task_evt_obj_1, task_evt_obj_2, task_evt_obj_3, 0x38 };
+TaskDesc gTaskDescEvtObj = { gTaskNameEvtObj, (TaskInitFunc)task_evt_obj_0, (TaskUpdateFunc)task_evt_obj_1, (TaskFunc)task_evt_obj_2, (TaskFunc)task_evt_obj_3, 0x38 };
 
-TaskDesc gTaskDescEvtShadow = { "task_evt_shadow", task_evt_shadow_0, task_evt_shadow_1, task_evt_shadow_2, task_evt_shadow_3, 0x14 };
+TaskDesc gTaskDescEvtShadow = { "task_evt_shadow", (TaskInitFunc)task_evt_shadow_0, (TaskUpdateFunc)task_evt_shadow_1, (TaskFunc)task_evt_shadow_2, (TaskFunc)task_evt_shadow_3, 0x14 };

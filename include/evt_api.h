@@ -4,11 +4,12 @@
 #include "types.h"
 
 struct EvtObj;
+struct Task;
 
 void EvtObjSetAnim(struct EvtObj* obj, s32 anim);
 void EvtObjSetPos(struct EvtObj* obj, s32 a, s32 b, s32 c);
 void CreateEvtObjTask(void* pool, struct EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c);
 void func_0801CE00(struct EvtObj* obj, u16 a);
-s32 func_0801CE04(void* pool, void* desc, struct EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c);
+struct Task* func_0801CE04(void* pool, void* desc, struct EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c);
 
 #endif

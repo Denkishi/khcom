@@ -50,7 +50,7 @@ TaskPool gUnk_02034AB8;
 
 u8 gUnk_02034ACC;
 
-u32 gUnk_02034AD0;
+void* gUnk_02034AD0;
 
 MapCardUiResources gMapCardUiResources EWRAM_COMMON(16);
 
@@ -492,7 +492,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         break;
     case A_BUTTON:
-        n = (u8)func_080E8D64((u32)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel] + 0x20);
+        n = (u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel].unk_20);
 
         if (n == 1) {
             if (gUnk_0203A8C0[w->card->unk_20 + (s16)sel] != 0) {
@@ -506,7 +506,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
                     RemoveMapCard(w->card->unk_20 + sel);
 
-                    if ((u8)func_080E8E24((u32)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel] + 0x20) == 1) {
+                    if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel].unk_20) == 1) {
                         w->unk_2DA = func_080E8D00();
                         w->eventKey->unk_122++;
                         w->eventKey->unk_11A = 8;
@@ -672,11 +672,11 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
     case A_BUTTON:
         if (w->card != 0) {
             if (w->card->unk_20 >= 220) {
-                if ((u8)func_080E8D64((u32)&gUnk_09EE4C80[w->card->unk_20] + 0x48) == 1) {
+                if ((u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->unk_20 + 1].unk_20) == 1) {
                     if (gUnk_0203A8C0[w->card->unk_20 + 1] != 0) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(w->card->unk_20 + 1);
-                        if ((u8)func_080E8E24((u32)&gUnk_09EE4C80[w->card->unk_20] + 0x48) == 1) {
+                        if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->unk_20 + 1].unk_20) == 1) {
                             w->unk_2DA = func_080E8D00();
                             w->eventKey->unk_122++;
                             w->eventKey->unk_11A = 8;
@@ -1402,11 +1402,11 @@ void func_08093BE0(void) {
     gUnk_02034ACC = 1;
 }
 
-void func_08093BEC(u32 a) {
+void func_08093BEC(void* a) {
     gUnk_02034AD0 = a;
 }
 
-u32 func_08093BF8(void) {
+void* func_08093BF8(void) {
     return gUnk_02034AD0;
 }
 
@@ -2066,14 +2066,14 @@ u8 func_08094A18(MapcardWork* w, void* a) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
             w->unk_6C = f;
-            func_08093BEC((u32)&gUnk_09EE4C80[w->unk_20 + w->unk_74] + 0x20);
+            func_08093BEC(&gUnk_09EE4C80[w->unk_20 + w->unk_74].unk_20);
         }
     } else {
         if (d <= 0x7FF && (*(u8**)((u8*)w + 0x24))[0x2DA] == 0) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
             w->unk_6C = f;
-            func_08093BEC((u32)&gUnk_09EE4C80[w->unk_20 + w->unk_74] + 0x20);
+            func_08093BEC(&gUnk_09EE4C80[w->unk_20 + w->unk_74].unk_20);
         }
     }
 

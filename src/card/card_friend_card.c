@@ -66,7 +66,8 @@ extern u8 gUnkEu_09162C8C[];
 #define LANGSTR(x) (x)
 #endif
 void CreateCardNameDisplay(void* a, void* b);
-u8 func_0809BE80(u8* work, void* a);
+u8 func_0809BE80(UnkStruct_0809BB4C* w, void* a);
+void func_0809C294(UnkStruct_0809BB4C* w);
 void ConvertActiveDeckCardToPremium(u16 index);
 s16 func_08084458(u16 cardId);
 void ConvertActiveDeckCardToPremium(u16 index);
@@ -1035,13 +1036,13 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
     u32 zero1;
     u32 zero2;
 
-    CpuSet(&zero0, w, 0x05000024);
-    gCardListWork = EwramAlloc(0x2C);
-    w->slots = EwramAlloc(0x4B0);
+    CpuSet(&zero0, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_0809BB4C) / 4);
+    gCardListWork = EwramAlloc(sizeof(CardListWork));
+    w->slots = EwramAlloc(sizeof(CardSlot) * 100);
     zero1 = 0;
-    CpuSet(&zero1, gCardListWork, 0x0500000B);
+    CpuSet(&zero1, gCardListWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardListWork) / 4);
     zero2 = 0;
-    CpuSet(&zero2, w->slots, 0x0500012C);
+    CpuSet(&zero2, w->slots, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardSlot) * 100 / 4);
     cards = GetActiveDeck()->cards;
     w->tiles2 = AllocObjTiles(0x120, 0);
     w->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
@@ -1141,7 +1142,7 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
     gCardListWork->selectedCard = 0;
     gCardListWork->effectCount = 0;
     TaskPoolInit(&gCardListWork->effectTasks, 24);
-    func_0809C294((u8*)w);
+    func_0809C294(w);
     w->unk_51 = 10;
     w->unk_52 = 0;
     w->unk_84 = 0;
@@ -1151,213 +1152,213 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
     w->unk_8A = 0;
     w->unk_8B = 16;
     w->unk_8C = 16;
-    w->unk_30 = 0xFF80;
+    w->unk_30 = -0x80;
     w->unk_34 = -0x800;
     w->unk_38 = 0xA000;
 }
 
-u8 func_0809BE80(u8* work, void* a) {
+u8 func_0809BE80(UnkStruct_0809BB4C* w, void* a) {
     UnkStruct_0809C534* n;
     s32 t;
     s32 z;
 
-    if (work[0x85] != 0) {
-        if ((GetKeysPressed() & A_BUTTON) && work[0x84] == 0) {
-            work[0x84] = 1;
+    if (w->unk_85 != 0) {
+        if ((GetKeysPressed() & A_BUTTON) && w->unk_84 == 0) {
+            w->unk_84 = 1;
             m4aSongNumStart(SONG_SYS_ITEMGET);
         }
 
-        if ((GetKeysPressed() & B_BUTTON) && work[0x84] != 1) {
+        if ((GetKeysPressed() & B_BUTTON) && w->unk_84 != 1) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            work[0x8B] = 16;
-            work[0x8C] = 16;
+            w->unk_8B = 16;
+            w->unk_8C = 16;
             SetTaskUpdate(a, (TaskUpdateFunc)func_0809C4B0);
             n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
 
             while (n != 0) {
                 n->unk_55 |= 0xFF;
-                work[0x86] = 0;
+                w->unk_86 = 0;
                 n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
             }
 
-            TaskPoolUpdate(&work[0x3C]);
+            TaskPoolUpdate(&w->tasks);
             TaskPoolUpdate(&gCardListWork->effectTasks);
             z = 0;
-            work[0x87] = 1;
-            work[0x85] = z;
+            w->unk_87 = 1;
+            w->unk_85 = z;
             return 1;
         }
     }
 
     n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
 
-    if (work[0x84] == 0) {
+    if (w->unk_84 == 0) {
         while (n != 0) {
             t = n->unk_53;
 
             if (t == 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (n->unk_52 < work[0x50] - 1) {
+                if (n->unk_52 < w->unk_50 - 1) {
                     n->unk_52++;
                 } else {
                     n->unk_52 = t;
                 }
 
-                n->unk_53 = work[0x51];
-                work[0x52] = 1;
+                n->unk_53 = w->unk_51;
+                w->unk_52 = 1;
             }
 
             n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
         }
     } else {
-        work[0x87] = 1;
+        w->unk_87 = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809C2D0);
     }
 
-    if (work[0x51] == 4 || work[0x51] == 10) {
-        work[0x85] = 1;
+    if (w->unk_51 == 4 || w->unk_51 == 10) {
+        w->unk_85 = 1;
     } else {
-        work[0x85] = 0;
+        w->unk_85 = 0;
     }
 
-    if (work[0x52] != 0) {
-        if (work[0x51] > 4) {
-            work[0x51]--;
+    if (w->unk_52 != 0) {
+        if (w->unk_51 > 4) {
+            w->unk_51--;
         }
 
-        work[0x52] = 0;
+        w->unk_52 = 0;
     }
 
-    *(void**)&work[0x28] = AnimUpdate(&work[0x54]);
-    *(void**)&work[0x2C] = AnimUpdate(&work[0x6C]);
-    TaskPoolUpdate(&work[0x3C]);
+    w->gfx = AnimUpdate(&w->anim);
+    w->gfx2 = AnimUpdate(&w->anim2);
+    TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
 
-u8 func_0809C078(u8* work, void* a) {
+u8 func_0809C078(UnkStruct_0809BB4C* w, void* a) {
     s32 v;
     u8* p;
-    u8* n;
+    UnkStruct_0809C534* n;
 
-    n = (u8*)ListPoolFirst(&gCardListWork->cards);
+    n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
 
-    if (n != 0 && n[0x55] == 1) {
+    if (n != 0 && n->unk_55 == 1) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809BE80);
     }
 
-    p = &work[0x8C];
+    p = &w->unk_8C;
 
     if (*p != 0) {
-        ApproachValue(&work[0x34], 0, *p);
-        ApproachValue(&work[0x38], 0x9800, *p);
+        ApproachValue(&w->unk_34, 0, *p);
+        ApproachValue(&w->unk_38, 0x9800, *p);
     } else {
-        v = *(s16*)&work[0x30] << 8;
-        p = &work[0x8B];
+        v = w->unk_30 << 8;
+        p = &w->unk_8B;
         ApproachValue(&v, 0, *p);
-        *(s16*)&work[0x30] = v >> 8;
+        w->unk_30 = v >> 8;
     }
 
     (*p)--;
-    TaskPoolUpdate(&work[0x3C]);
+    TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
 
-void func_0809C110(u8* work) {
-    if (work[0x87] == 0) {
-        DrawSprite(62, 50, *(void**)&work[0x28], *(void**)&work[0x08], *(void**)&work[0x0C], 0, 0, 0);
-        DrawSprite(53, 64, *(void**)&work[0x2C], *(void**)&work[0x10], *(void**)&work[0x14], 0, 0, 0);
+void func_0809C110(UnkStruct_0809BB4C* w) {
+    if (w->unk_87 == 0) {
+        DrawSprite(62, 50, w->gfx, w->tiles2, w->palette2, 0, 0, 0);
+        DrawSprite(53, 64, w->gfx2, w->tiles3, w->palette3, 0, 0, 0);
     }
 
-    if (work[0x85] != 0) {
-        DrawSprite(88, 70, gUnk_09EE98EC[0], *(void**)&work[0x18], *(void**)&work[0x1C], 0, 0, 0);
+    if (w->unk_85 != 0) {
+        DrawSprite(88, 70, gUnk_09EE98EC[0], w->tiles4, w->palette4, 0, 0, 0);
     }
 
 #ifdef VERSION_EU
-    DrawSprite(*(s16*)&work[0x30], 0, gUnkEu_09F72BFC[gLanguage][0], *(void**)&work[0x00], *(void**)&work[0x04], 0, 0, 0);
+    DrawSprite(w->unk_30, 0, gUnkEu_09F72BFC[gLanguage][0], w->tiles, w->palette, 0, 0, 0);
 #else
-    DrawSprite(*(s16*)&work[0x30], 0, gUnk_09EEA16C[0], *(void**)&work[0x00], *(void**)&work[0x04], 0, 0, 0);
+    DrawSprite(w->unk_30, 0, gUnk_09EEA16C[0], w->tiles, w->palette, 0, 0, 0);
 #endif
-    DrawSprite(120, *(s32*)&work[0x34] >> 8, gUnk_09EEA174[0], *(void**)&work[0x20], *(void**)&work[0x04], 0, 0, 60);
-    DrawSprite(120, *(s32*)&work[0x38] >> 8, gUnk_09EEA174[1], *(void**)&work[0x20], *(void**)&work[0x04], 0, 0, 60);
-    TaskPoolDraw(&work[0x3C]);
+    DrawSprite(120, w->unk_34 >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, 0, 0, 60);
+    DrawSprite(120, w->unk_38 >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, 0, 0, 60);
+    TaskPoolDraw(&w->tasks);
     TaskPoolDraw(&gCardListWork->effectTasks);
 }
 
-void func_0809C1EC(u8* work) {
+void func_0809C1EC(UnkStruct_0809BB4C* w) {
     TaskPoolDestroy(&gCardListWork->effectTasks);
-    EwramFree(*(void**)&work[0x24]);
+    EwramFree(w->slots);
     EwramFree(gCardListWork);
-    ReleaseObjTiles(*(void**)&work[0x08]);
-    ReleaseObjTiles(*(void**)&work[0x10]);
-    ReleaseObjTiles(*(void**)&work[0x18]);
-    ReleaseObjTiles(*(void**)&work[0x00]);
-    ReleaseObjTiles(*(void**)&work[0x20]);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x04])->index + 16, 0);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x14])->index + 16, 0);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x0C])->index + 16, 0);
-    FadeSetPaletteExcluded((*(UnkStruct_080038C8**)&work[0x1C])->index + 16, 0);
-    ReleaseObjPalette(*(void**)&work[0x0C]);
-    ReleaseObjPalette(*(void**)&work[0x14]);
-    ReleaseObjPalette(*(void**)&work[0x1C]);
-    ReleaseObjPalette(*(void**)&work[0x04]);
+    ReleaseObjTiles(w->tiles2);
+    ReleaseObjTiles(w->tiles3);
+    ReleaseObjTiles(w->tiles4);
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjTiles(w->tiles5);
+    FadeSetPaletteExcluded(w->palette->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette3->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
+    FadeSetPaletteExcluded(w->palette4->index + 16, 0);
+    ReleaseObjPalette(w->palette2);
+    ReleaseObjPalette(w->palette3);
+    ReleaseObjPalette(w->palette4);
+    ReleaseObjPalette(w->palette);
     func_0800FDD0(0xF5);
-    TaskPoolDestroy(&work[0x3C]);
+    TaskPoolDestroy(&w->tasks);
 }
 
-void func_0809C294(u8* work) {
+void func_0809C294(UnkStruct_0809BB4C* w) {
     u8 i;
 
-    for (i = 0; i < work[0x50]; i++) {
-        (*(u8**)&work[0x24])[i * 12 + 6] = i;
-        TaskCreate(&work[0x3C], &gUnk_09EE781C, &(*(u8**)&work[0x24])[i * 12]);
+    for (i = 0; i < w->unk_50; i++) {
+        w->slots[i].unk_06 = i;
+        TaskCreate(&w->tasks, &gUnk_09EE781C, &w->slots[i]);
     }
 }
-u8 func_0809C2D0(u8* work, void* a) {
-    u8* n;
-    u8* pool;
+u8 func_0809C2D0(UnkStruct_0809BB4C* w, void* a) {
+    UnkStruct_0809C534* n;
+    TaskPool* pool;
     u8 z;
     u8 t;
     u8* q;
 
-    n = (u8*)ListPoolFirst(&gCardListWork->cards);
-    *(void**)&work[0x28] = AnimUpdate(&work[0x54]);
-    *(void**)&work[0x2C] = AnimUpdate(&work[0x6C]);
-    work[0x51] = 0;
-    work[0x8A]++;
-    work[0x85] = 0;
+    n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
+    w->gfx = AnimUpdate(&w->anim);
+    w->gfx2 = AnimUpdate(&w->anim2);
+    w->unk_51 = 0;
+    w->unk_8A++;
+    w->unk_85 = 0;
 
-    if (work[0x86] != 0) {
+    if (w->unk_86 != 0) {
         while (n != 0) {
-            if (n[0x53] == 0) {
-                if ((s8)n[0x52] == 3) {
-                    n[0x55] = 2;
-                    ConvertActiveDeckCardToPremium(*(u16*)&n[0x48]);
+            if (n->unk_53 == 0) {
+                if (n->unk_52 == 3) {
+                    n->unk_55 = 2;
+                    ConvertActiveDeckCardToPremium(n->unk_48);
                 } else {
-                    n[0x55] = 3;
+                    n->unk_55 = 3;
                 }
 
-                work[0x86] = 0;
+                w->unk_86 = 0;
             }
 
-            n = (u8*)ListPoolNext(&n[0x58]);
+            n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
         }
     }
 
-    t = work[0x8A];
-    pool = &work[0x3C];
+    t = w->unk_8A;
+    pool = &w->tasks;
 
     if (t == 30) {
-        q = &work[0x87];
+        q = &w->unk_87;
         z = 0;
         *q = 1;
         SetBgPriority(2, 0);
         BgAnimInit(2, 0x8000, 0x80);
         BgAnimStart(&gUnk_09EDA9A8, 120, 60);
-        work[0x88] = BgAnimGetDuration(&gUnk_09EDA9A8);
-        work[0x89] = z;
+        w->unk_88 = BgAnimGetDuration(&gUnk_09EDA9A8);
+        w->unk_89 = z;
         gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         gBldAlpha = 0x1010;
         BgAnimUpdate();
@@ -1376,56 +1377,56 @@ u8 func_0809C2D0(u8* work, void* a) {
     return 1;
 }
 
-u8 func_0809C448(u8* work, void* a) {
+u8 func_0809C448(UnkStruct_0809BB4C* w, void* a) {
     ListPoolFirst(&gCardListWork->cards);
     BgAnimUpdate();
-    *(void**)&work[0x28] = AnimUpdate(&work[0x54]);
-    *(void**)&work[0x2C] = AnimUpdate(&work[0x6C]);
-    TaskPoolUpdate(&work[0x3C]);
+    w->gfx = AnimUpdate(&w->anim);
+    w->gfx2 = AnimUpdate(&w->anim2);
+    TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
 
     if ((GetKeysPressed() & A_BUTTON)
 #ifdef VERSION_EU
-        && work[0x89] > 8
+        && w->unk_89 > 8
 #endif
     ) {
-        work[0x8B] = 16;
-        work[0x8C] = 16;
+        w->unk_8B = 16;
+        w->unk_8C = 16;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809C4B0);
     }
 
 #ifdef VERSION_EU
-    if (work[0x89] <= 254) {
-        work[0x89]++;
+    if (w->unk_89 <= 254) {
+        w->unk_89++;
     }
 #endif
 
     return 1;
 }
 
-u8 func_0809C4B0(u8* work, void* a) {
+u8 func_0809C4B0(UnkStruct_0809BB4C* w, void* a) {
     s32 v;
     u8* p;
 
-    p = &work[0x8B];
+    p = &w->unk_8B;
 
     if (*p != 0) {
-        v = *(s16*)&work[0x30] << 8;
+        v = w->unk_30 << 8;
         ApproachValue(&v, -0x8000, *p);
-        *(s16*)&work[0x30] = v >> 8;
+        w->unk_30 = v >> 8;
     } else {
-        p = &work[0x8C];
+        p = &w->unk_8C;
 
         if (*p == 0) {
             return 0;
         }
 
-        ApproachValue(&work[0x34], -0x800, *p);
-        ApproachValue(&work[0x38], 0xA000, *p);
+        ApproachValue(&w->unk_34, -0x800, *p);
+        ApproachValue(&w->unk_38, 0xA000, *p);
     }
 
     (*p)--;
-    TaskPoolUpdate(&work[0x3C]);
+    TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
@@ -1487,5 +1488,5 @@ TaskDesc gUnk_09EE7804 = {
     (TaskUpdateFunc)func_0809C078,
     (TaskFunc)func_0809C110,
     (TaskFunc)func_0809C1EC,
-    0x90,
+    sizeof(UnkStruct_0809BB4C),
 };

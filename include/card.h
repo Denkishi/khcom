@@ -1362,9 +1362,9 @@ typedef struct LvupMsgWork {
 } LvupMsgWork;
 
 typedef struct DeckConfirmWork {
-    u8 textSlots[0x280];
-    u8 textSlots2[0x280];
-    u8 textSlots3[0x280];
+    TextSlot textSlots[80];
+    TextSlot textSlots2[80];
+    TextSlot textSlots3[80];
     void* tiles;
     void* palette;
     void* palette2;

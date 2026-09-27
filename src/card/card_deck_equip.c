@@ -67,10 +67,10 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     w->textSlotCount3 = 0;
-    InitTextSlots(w, 80);
+    InitTextSlots(w->textSlots, 80);
     InitTextSlots(w->textSlots2, 80);
     InitTextSlots(w->textSlots3, 80);
-    w->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), w);
+    w->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), w->textSlots);
 #ifdef VERSION_JP
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x28], w->textSlots2);
 #elif defined(VERSION_EU)
@@ -83,14 +83,14 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
     w->textSlotCount3 = LoadTextSlots((u16*)gUnk_0903C008, w->textSlots3);
-    w->x = (233 - GetTextSlotsWidth(w, w->textSlotCount) - GetTextSlotsWidth(w->textSlots3, w->textSlotCount3)) / 2;
-    w->x3 = w->x + GetTextSlotsWidth(w, w->textSlotCount);
+    w->x = (233 - GetTextSlotsWidth(w->textSlots, w->textSlotCount) - GetTextSlotsWidth(w->textSlots3, w->textSlotCount3)) / 2;
+    w->x3 = w->x + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
     w->y3 = 66;
     w->y = 66;
     w->x2 = (243 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
     w->y2 = 82;
 #else
-    w->x = (240 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
 #ifdef VERSION_EU
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
     if (gLanguage - 1 <= 1) {
@@ -115,7 +115,7 @@ void func_080A2980(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     w->textSlotCount3 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
@@ -148,7 +148,7 @@ void func_080A2980(DeckConfirmWork* w, u8* a) {
 void func_080A2A80(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
@@ -162,7 +162,7 @@ void func_080A2A80(DeckConfirmWork* w, u8* a) {
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->x = (250 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (250 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
     w->y = 64;
 #ifdef VERSION_JP
     w->x2 = (219 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
@@ -185,11 +185,11 @@ extern u8 gUnk_0814FBD4[];
 void func_080A2BA4(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
-    w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w);
+    w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_0814FBBC, w->textSlots2);
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895CF8), w->textSlots2);
@@ -199,7 +199,7 @@ void func_080A2BA4(DeckConfirmWork* w, u8* a) {
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->x = (242 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (242 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
     w->y = 66;
     w->x2 = (242 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
 #ifdef VERSION_JP
@@ -216,11 +216,11 @@ void func_080A2BA4(DeckConfirmWork* w, u8* a) {
 void func_080A2CC4(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
-    w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w);
+    w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_0814FBD4, w->textSlots2);
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895DBC), w->textSlots2);
@@ -230,7 +230,7 @@ void func_080A2CC4(DeckConfirmWork* w, u8* a) {
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->x = (243 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (243 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
     w->y = 66;
     w->x2 = (243 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
 #ifdef VERSION_JP
@@ -254,14 +254,14 @@ s32 func_080A2DE4(void) {
 }
 
 void func_080A2E14(DeckConfirmWork* w) {
-    DrawTextSlots(w->x, w->y, w, w->palette, 1, w->textSlotCount);
+    DrawTextSlots(w->x, w->y, w->textSlots, w->palette, 1, w->textSlotCount);
     DrawTextSlots(w->x2, w->y2, w->textSlots2, w->palette, 1, w->textSlotCount2);
     DrawTextSlots(w->x3, w->y3, w->textSlots3, w->palette, 1, w->textSlotCount3);
     DrawSprite(120, 80, gUnk_09EF1278[0], w->tiles, w->palette2, 0, 0, 2);
 }
 
 void func_080A2EF8(DeckConfirmWork* w) {
-    FreeTextSlots(w, 80);
+    FreeTextSlots(w->textSlots, 80);
     FreeTextSlots(w->textSlots2, 80);
     FreeTextSlots(w->textSlots3, 80);
     ReleaseObjPalette(w->palette);
@@ -281,22 +281,22 @@ void func_080A2EF8(DeckConfirmWork* w) {
 void Deck_Yes_No_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890EC0), w);
+    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890EC0), w->textSlots);
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots2);
     w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots3);
 #else
-    w->textSlotCount = LoadTextSlots(gUnk_08159FBC, w);
+    w->textSlotCount = LoadTextSlots(gUnk_08159FBC, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_08159E10, w->textSlots2);
     w->textSlotCount3 = LoadTextSlots(gUnk_08159E18, w->textSlots3);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->x = (240 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
     w->y = 66;
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
     w->y2 = 88;
@@ -317,22 +317,22 @@ s32 func_080A30C0(void) {
 void Deck_Clear_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
-    InitTextSlots(w, 0x50);
+    InitTextSlots(w->textSlots, 0x50);
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08895E94), w);
+    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08895E94), w->textSlots);
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots2);
     w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots3);
 #else
-    w->textSlotCount = LoadTextSlots(gUnk_0815C1C2, w);
+    w->textSlotCount = LoadTextSlots(gUnk_0815C1C2, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_08159E10, w->textSlots2);
     w->textSlotCount3 = LoadTextSlots(gUnk_08159E18, w->textSlots3);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->x = (240 - GetTextSlotsWidth(w, w->textSlotCount)) / 2;
+    w->x = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;
     w->y2 = 88;
     w->x3 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount3)) / 2 + DECK_PROMPT_RIGHT_DX;
@@ -417,7 +417,7 @@ TaskDesc gTaskDescDeckEquip = {
     (TaskUpdateFunc)func_080A2DE4,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gTaskDescDeckYesNo = {
@@ -426,7 +426,7 @@ TaskDesc gTaskDescDeckYesNo = {
     (TaskUpdateFunc)func_080A30C0,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gTaskDescDeckClear = {
@@ -435,7 +435,7 @@ TaskDesc gTaskDescDeckClear = {
     (TaskUpdateFunc)func_080A30C0,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gUnk_09EE7FA8 = {
@@ -444,7 +444,7 @@ TaskDesc gUnk_09EE7FA8 = {
     (TaskUpdateFunc)func_080A2DE4,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gUnk_09EE7FC0 = {
@@ -453,7 +453,7 @@ TaskDesc gUnk_09EE7FC0 = {
     (TaskUpdateFunc)func_080A2DE4,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gUnk_09EE7FD8 = {
@@ -462,7 +462,7 @@ TaskDesc gUnk_09EE7FD8 = {
     (TaskUpdateFunc)func_080A2DE4,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 
 TaskDesc gUnk_09EE7FF0 = {
@@ -471,7 +471,7 @@ TaskDesc gUnk_09EE7FF0 = {
     (TaskUpdateFunc)func_080A2DE4,
     (TaskFunc)func_080A2E14,
     (TaskFunc)func_080A2EF8,
-    0x7A8,
+    sizeof(DeckConfirmWork),
 };
 #ifdef VERSION_EU
 u8* gUnkEu_09F73464[5] = { gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5 };

@@ -393,8 +393,8 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     return 0;
 }
 
-void SetObjTileSource(void* a, void* b) {
-    *(void**)a = b;
+void SetObjTileSource(ObjTiles* a, void* b) {
+    a->src = b;
 }
 
 ObjPalette* LoadObjPalette(void* src, u16 size) {

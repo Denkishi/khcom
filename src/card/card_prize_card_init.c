@@ -1306,7 +1306,7 @@ u8 func_08097600(UnkStruct_08096F94* w) {
 
 static void PrizeCard_2(UnkStruct_08096F94* w) {
     u16 pal;
-    s32 affine;
+    ObjAffine* affine;
     void* gfx;
     s16 v;
 
@@ -1851,7 +1851,7 @@ void func_08098598(s32 x, s32 y, UnkStruct_08098670* p) {
 }
 
 void func_080985A0(UnkStruct_08098670* w, u16 b, s16 c, s16 d) {
-    s32 aff;
+    ObjAffine* aff;
 
     aff = AllocObjAffine(0, d, d, 1);
 

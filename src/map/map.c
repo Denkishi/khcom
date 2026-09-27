@@ -619,7 +619,7 @@ void func_080E64D4(MapEnmWork* p) {
     x = (p->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
     t = flags;
     y = k + (q->fieldPosition.z >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, p->gfx, p->tiles, p->palette, z, t, v);
+    DrawSprite(x, y, p->gfx, p->tiles, p->palette, 0, t, v);
     TaskPoolDraw(&p->tasks);
 }
 

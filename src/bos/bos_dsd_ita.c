@@ -93,7 +93,7 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
 void task_bos_dsd_ita_2(DsdItaWork* work) {
     u16 pal;
     u16 prio;
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
     s32 flag;
     s16 x;
@@ -266,7 +266,7 @@ u8 task_bos_dsd_rock_1(DsdRockWork* work) {
     return 1;
 }
 void task_bos_dsd_rock_2(DsdRockWork* work) {
-    s32 affine;
+    ObjAffine* affine;
     s32 h;
     s32 prio;
     s16 x;

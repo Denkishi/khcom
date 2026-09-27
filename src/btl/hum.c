@@ -3080,7 +3080,7 @@ void task_hum_hades_2(HadesWork* work) {
     void* gfx;
     u16 attr;
     s32 sx;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
     s32 i;
@@ -3211,7 +3211,7 @@ void func_0804FAD4(MahluxiaWork* work, RikuSpawn* p) {
     u16 attr;
     s32 sx;
     s32 sy;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
     u16 pri;
@@ -5380,7 +5380,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 void func_08054100(AxcelWork* work, HumSub* sub) {
     s16 x;
     s16 y;
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
     s32 f;
 
@@ -6207,7 +6207,7 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
     s16 y;
     void* gfx;
     s32 s;
-    s32 affine;
+    ObjAffine* affine;
 
     if (work->sub->unk_01 != 0) {
         gfx = AnimGetGfx(&work->anim);
@@ -7104,7 +7104,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     s16 y;
     void* gfx;
     u16 attr;
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
 
     gfx = AnimGetGfx(&work->anim);
@@ -7174,7 +7174,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
     u16 attr;
     s32 sx;
     s32 h;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
 
@@ -7549,7 +7549,7 @@ void func_08057E90(RikuWork* work, RikuSpawn* p) {
     u16 attr;
     s32 sx;
     s32 sy;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
     u16 pri;

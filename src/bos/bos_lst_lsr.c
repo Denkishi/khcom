@@ -191,7 +191,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
     u16 y;
     u16 prio;
     void* gfx;
-    s32 oam;
+    ObjAffine* oam;
 
     switch (work->state) {
     case 2:

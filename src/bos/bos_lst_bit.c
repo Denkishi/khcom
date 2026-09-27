@@ -657,7 +657,7 @@ void task_bos_lst_bit_2(LstState* work) {
     s16 x;
     s16 y;
     void* pal;
-    s32 affine;
+    ObjAffine* affine;
     u16 prio;
     u16 z;
     void* gfx;

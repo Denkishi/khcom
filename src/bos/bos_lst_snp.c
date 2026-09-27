@@ -57,7 +57,7 @@ u8 task_bos_lst_snp_1(LstSnpWork* work) {
 void task_bos_lst_snp_2(LstSnpWork* work) {
     s16 x;
     s16 y;
-    s32 oam;
+    ObjAffine* oam;
     void* gfx;
     u16 prio;
 

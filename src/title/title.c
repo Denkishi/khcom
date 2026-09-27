@@ -110,7 +110,7 @@ u8 task_title_logo_1(TitleLogoWork* work) {
 
 void task_title_logo_2(TitleLogoWork* work) {
     s32 i;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
 

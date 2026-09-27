@@ -901,7 +901,7 @@ void func_080F83BC(void) {
 }
 
 void func_080F83E0(GaWork* work, GaEntryWork* e) {
-    s32 f;
+    ObjAffine* f;
     u16 g;
     void* pal;
     u16 sx;
@@ -4215,7 +4215,7 @@ void task_bos_md_fire_2(MdFireWork* work) {
     s16 x;
     s16 y;
     void* gfx;
-    s32 sprite;
+    ObjAffine* sprite;
     u16 frame;
 
     if (work->unk_006 > 0 && (gFrameCounter & 1)) {
@@ -4444,7 +4444,7 @@ void task_bos_md_hahen_2(MdHahenWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
     DrawSprite(x, y, work->gfx, work->tiles, work->palette,
-                  flag, frame, (u16)(-4100 - (work->y >> 8) * 4));
+                  0, frame, (u16)(-4100 - (work->y >> 8) * 4));
 }
 
 void task_bos_md_hahen_3(MdHahenWork* work) {
@@ -4785,7 +4785,7 @@ void func_080FDC04(void) {
 
 void func_080FE47C(void) {
     s16 i;
-    s32 sprite;
+    ObjAffine* sprite;
     s16 x;
     s16 y;
     u8 ang;

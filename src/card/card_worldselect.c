@@ -2095,7 +2095,7 @@ u8 func_08094A18(MapcardWork* w, void* a) {
 }
 
 void Mapcard_2(MapcardWork* w) {
-    s32 aff;
+    ObjAffine* aff;
     u16 y;
     void* sprite;
 
@@ -2535,7 +2535,7 @@ u8 func_080954C4(CardDisplayWork* w, void* a) {
 }
 void Reload_Gage_2(CardDisplayWork* p) {
     UnkStruct_08095A5C* q;
-    s32 affine;
+    ObjAffine* affine;
     void* gfx;
     s32 t;
 

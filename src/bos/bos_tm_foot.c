@@ -798,16 +798,16 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
     return 1;
 }
 void task_bos_tm_clb_2(TmClbWork* work) {
-    u8* p;
+    ObjAffine* p;
     s16 x;
     s16 y;
 
     p = AllocObjAffineAngle(work->unk_00C, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, (s32)p, 0x800,
+    DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, 0x800,
                (u16)(-0x1002 - (work->y >> 8) * 4));
-    p[0x0A] = 1;
-    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, (s32)p, 0x800,
+    p->doubleSize = 1;
+    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, 0x800,
                (u16)(-0x1003 - (work->y >> 8) * 4));
 }
 
@@ -1560,7 +1560,7 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
 void task_bos_tm_arm_2(TmArmWork* work) {
     void* pal;
     s32 mode;
-    s32 affine;
+    ObjAffine* affine;
     s16 depth;
     s16 endDepth;
     s16 x;

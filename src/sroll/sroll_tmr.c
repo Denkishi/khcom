@@ -56,14 +56,14 @@ void task_sroll_tmr_2(SrollTmrWork* w) {
     m = t / 60 % 60;
     s = t % 60;
     z = 0;
-    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], w->tiles, w->palette, z, z, z);
-    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], w->tiles, w->palette, z, z, z);
-    DrawSprite(24, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, z, z, z);
-    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], w->tiles, w->palette, z, z, z);
-    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], w->tiles, w->palette, z, z, z);
-    DrawSprite(48, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, z, z, z);
-    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], w->tiles, w->palette, z, z, z);
-    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], w->tiles, w->palette, z, z, z);
+    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(24, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(48, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], w->tiles, w->palette, 0, z, z);
 }
 void task_sroll_tmr_3(SrollTmrWork* w) {
     ReleaseObjTiles(w->tiles);

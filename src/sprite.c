@@ -143,7 +143,7 @@ void SpriteReset(void) {
     SetObjPaletteRange(0, 0x10);
 }
 
-u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h) {
+u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
     if (e != 0 && c != 0) {

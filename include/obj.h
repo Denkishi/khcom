@@ -28,6 +28,20 @@ typedef struct ObjTiles {
     struct ObjTiles* self;
 } ObjTiles;
 
+typedef struct ObjAffine {
+    u16 pa;
+    u16 pb;
+    u16 pc;
+    u16 pd;
+    u16 index;
+    u8 doubleSize;
+    u8 unk_0B;
+    s32 sx;
+    s32 sy;
+    u8 angle;
+    u8 unk_15[0x03];
+} ObjAffine;
+
 typedef struct ObjPalette {
     void* src;
     u16 refCount;

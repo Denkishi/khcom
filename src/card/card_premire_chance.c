@@ -157,7 +157,7 @@ u8 func_0809C710(UnkStruct_0809C534* w, void* a) {
 }
 
 void func_0809C78C(UnkStruct_0809C534* w) {
-    s32 affine;
+    ObjAffine* affine;
 
     if (w->unk_55 == 0xFF) {
         return;

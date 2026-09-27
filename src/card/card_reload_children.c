@@ -188,7 +188,7 @@ s32 func_08098BA4(ReloadChildWork* w) {
 void RELOAD_CHILDREN_2(ReloadChildWork* w) {
     s16 x;
     s16 y;
-    s32 aff;
+    ObjAffine* aff;
 
     if (w->args.unk_0C <= 3) {
         x = (w->unk_20 + *w->args.unk_04) >> 8;
@@ -634,7 +634,7 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
 
 void PrizeBoss_2(BossPrizeWork* w) {
     u16 pal;
-    s32 affine;
+    ObjAffine* affine;
     void* gfx;
     CardBack* back;
     CardDef* def;
@@ -919,7 +919,7 @@ void Card_EFFECT_2(CardEffectWork* w) {
     t = -4100 - ((w->y >> 8) * 4);
     z = 0;
     w->priority = t;
-    DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, z, z, w->priority);
+    DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, 0, z, w->priority);
 }
 
 void Card_EFFECT_3(CardEffectWork* w) {

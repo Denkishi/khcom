@@ -6218,7 +6218,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
 void task_btl_sora_2(BtlSoraWork* work) {
     BtlObj* p;
-    s32 affine;
+    ObjAffine* affine;
     s32 sx;
     s32 sy;
     u16 attr;
@@ -6441,7 +6441,7 @@ void func_080275D4(BtlRikuWork* work, BtlDrawInfo* out) {
     BtlObj* a;
     void* gfx;
     u16 flags;
-    s32 affine;
+    ObjAffine* affine;
     s32 p;
     s32 q;
     s16 x;
@@ -10750,7 +10750,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
 void task_btl_riku_2(BtlRikuWork* work) {
     BtlObj* p;
-    s32 affine;
+    ObjAffine* affine;
     s32 sx;
     s32 sy;
     u16 attr;

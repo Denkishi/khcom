@@ -809,7 +809,7 @@ void func_0800DF30(EmyWork* work) {
     if (work->unk_15A != 0) {
         BtlObj* actor;
         u16 g;
-        s32 affine;
+        ObjAffine* affine;
         s32 sx;
         s32 sy;
         s16 x;

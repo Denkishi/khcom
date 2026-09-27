@@ -515,7 +515,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -804,7 +804,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1037,7 +1037,7 @@ void task_frd_ariel_2(FrdArielWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1514,7 +1514,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
     u8 angle;
@@ -1837,7 +1837,7 @@ void task_frd_pan_2(FrdPanWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -2076,7 +2076,7 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -2307,7 +2307,7 @@ void task_frd_beast_2(FrdBeastWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 

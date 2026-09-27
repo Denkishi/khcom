@@ -24,7 +24,7 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
     s32 size;
     s32 flip;
     u16 frame;
-    s32 sprite;
+    ObjAffine* sprite;
 
     obj = work->actor;
 

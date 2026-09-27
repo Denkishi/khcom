@@ -513,7 +513,7 @@ void func_08102DC8(void) {
 
 void func_08102F30(void) {
     s16 i;
-    s32 affine;
+    ObjAffine* affine;
     void* obj;
     s32 v;
     void* anim;

@@ -3464,7 +3464,7 @@ void task_fld_shadow_2(FldShadowWork* work) {
     void* spr;
     s32 z;
     s32 size;
-    s32 sprite;
+    ObjAffine* sprite;
     s32 x;
     s32 y;
 

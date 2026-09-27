@@ -2779,7 +2779,7 @@ u8 task_poo_shadowdodai_1(PooShadowWork* w) {
 
 void task_poo_shadowdodai_2(PooShadowWork* w) {
     s32 s;
-    s32 aff;
+    ObjAffine* aff;
     s32 h;
     s16 x;
     s16 y;
@@ -2826,7 +2826,7 @@ u8 task_poo_shadowscale_1(PooScaleWork* w) {
 
 void task_poo_shadowscale_2(PooScaleWork* w) {
     s32 s;
-    s32 affine;
+    ObjAffine* affine;
     u16 x;
     u16 y;
 
@@ -6446,7 +6446,7 @@ u8 task_poo_prize_1(PooPrizeWork* w) {
 }
 
 void task_poo_prize_2(PooPrizeWork* w) {
-    s32 aff;
+    ObjAffine* aff;
     s32 s;
     s16 x;
     s16 y;

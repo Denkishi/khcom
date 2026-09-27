@@ -791,7 +791,7 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
     s16 y;
     u16 c;
     void* pal;
-    s32 aff;
+    ObjAffine* aff;
     s32 a;
     s32 b;
 
@@ -959,7 +959,7 @@ void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
     c = GetBattleSpritePriorityFlags(p->y);
     pal = work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, f, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, c,
         -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
@@ -1319,10 +1319,10 @@ void task_bos_boogie_disk_2(BoogieDiskWork* work) {
     s16 y;
     u16 c = GetBattleSpritePriorityFlags(p->y);
     void* pal = work->palette;
-    u8* obj = AllocObjAffineAngle(work->unk_15C, 1);
+    ObjAffine* obj = AllocObjAffineAngle(work->unk_15C, 1);
 
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, (s32)obj, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, obj, c,
         -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
@@ -1453,7 +1453,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
     s16 y;
     u16 c;
     void* pal;
-    s32 aff;
+    ObjAffine* aff;
 
     WorldToScreen(&x, &y, p->x + work->unk_14C, p->y - 0x2400, p->z);
 
@@ -2755,10 +2755,10 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, f, 0xC00,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, 0xC00,
         0xFE00);
     WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, f, 0xC01,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, 0xC01,
         0xFE00);
 }
 

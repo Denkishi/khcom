@@ -14,27 +14,13 @@ typedef struct ObjListPool {
 typedef struct SpriteEntry {
     void* tiles;
     void* palette;
-    s32 affine;
+    ObjAffine* affine;
     void* sprite;
     u16 x;
     u16 y;
     u16 priority;
     u16 flags;
 } SpriteEntry;
-
-typedef struct ObjAffine {
-    u16 pa;
-    u16 pb;
-    u16 pc;
-    u16 pd;
-    u16 index;
-    u8 unk_0A;
-    u8 unk_0B;
-    s32 sx;
-    s32 sy;
-    u8 angle;
-    u8 unk_15[0x03];
-} ObjAffine;
 
 struct SpriteWork {
     ObjTiles tiles[128];

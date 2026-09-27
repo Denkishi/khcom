@@ -3850,7 +3850,7 @@ s32 Task_MapPrize_1(MapPrizeWork* w) {
 void Task_MapPrize_2(MapPrizeWork* w) {
     s16 x;
     s16 y;
-    s32 aff;
+    ObjAffine* aff;
 
     if (w->unk_96 != 0) {
         x = (w->x >> 8) - (gFieldState->x >> 8);
@@ -4125,7 +4125,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* w) {
     CardDef* d;
     CardBack* q;
     void* t;
-    s32 affine;
+    ObjAffine* affine;
     s16 x;
     s16 y;
     s16 s;

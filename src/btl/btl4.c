@@ -550,7 +550,7 @@ void task_btl_exp_2(BtlExpWork* work) {
     if (work->state != 0) {
         y = 40;
         x = 0;
-        DrawSprite(0, y, work->gfx, work->tiles, work->palette, x, 0x410, x);
+        DrawSprite(0, y, work->gfx, work->tiles, work->palette, 0, 0x410, x);
 
 #ifdef VERSION_JP
         x = 32;
@@ -891,7 +891,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
 
 void task_btl_hpoth_2(BtlHpothWork* work) {
     s32 scale;
-    s32 affine;
+    ObjAffine* affine;
 
     DrawSprite(236, 2, work->gfx, work->tiles, work->palette, 0, 0x411, 1);
 

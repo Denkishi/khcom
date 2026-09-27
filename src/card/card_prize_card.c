@@ -294,7 +294,7 @@ u8 func_08096390(PrizeCardWork* w) {
 }
 static void PrizeCard_2(PrizeCardWork* w) {
     u16 pal;
-    s32 affine;
+    ObjAffine* affine;
     void* gfx;
     CardBack* back;
     CardDef* def;

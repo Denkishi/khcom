@@ -175,7 +175,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
 }
 
 void task_monsgage_2(MonsgageWork* work) {
-    s32 affine;
+    ObjAffine* affine;
 
     if (gBtlWork->unk_0A0 != 0) {
         DrawSprite(172, 12, work->gfx, work->tiles, work->palette, 0, 0x410, 3);

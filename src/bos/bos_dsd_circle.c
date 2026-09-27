@@ -182,7 +182,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
 }
 
 void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
     s32 flag;
     s16 x;
@@ -417,7 +417,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
 }
 
 void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
     s32 flag;
     s16 x;

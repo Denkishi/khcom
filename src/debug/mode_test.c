@@ -290,7 +290,7 @@ void eu_08061588(FrdPoohWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 

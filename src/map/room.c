@@ -174,7 +174,7 @@ u8 task_room_name_1(RoomNameWork* work) {
 }
 
 void task_room_name_2(RoomNameWork* work) {
-    s32 affine;
+    ObjAffine* affine;
 
     if (work->state != 0) {
         affine = AllocObjAffine(0, 0x100, work->scaleY, 0);

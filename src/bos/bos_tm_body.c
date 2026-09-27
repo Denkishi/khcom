@@ -821,8 +821,8 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     BtlObj* s1;
     BtlObj* s2;
     BtlObj* s3;
-    s32 a1;
-    s32 a2;
+    ObjAffine* a1;
+    ObjAffine* a2;
     u16 mode;
     void* pal;
     s16 x;

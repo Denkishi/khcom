@@ -6572,7 +6572,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     return 1;
 }
 void msgface_2(MsgFaceWork* p) {
-    s32 t;
+    ObjAffine* t;
     u8 v;
 
     if (p->unk_34 != 0) {
@@ -6584,7 +6584,7 @@ void msgface_2(MsgFaceWork* p) {
             if (v != 0) {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, 1, 50);
             } else {
-                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, v, v, 50);
+                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, v, 50);
             }
         }
     }

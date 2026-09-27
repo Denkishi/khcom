@@ -732,7 +732,7 @@ u8 task_emy_00_1(EmyWork* work) {
 void task_emy_00_2(EmyWork* work) {
     BtlObj* act;
     u16 pri;
-    s32 affine;
+    ObjAffine* affine;
     s32 rot;
     s32 scale;
     s32 zoom;
@@ -2043,7 +2043,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
 void task_emy_16_b_2(Emy16bWork* work) {
     void* gfx;
     u16 pri;
-    s32 affine;
+    ObjAffine* affine;
     s32 angle;
     s16 x;
     s16 y;
@@ -4236,7 +4236,7 @@ void task_emy_37_2(Emy37Work* work) {
     Emy37Work* w;
     BtlObj* act;
     u16 pri;
-    s32 affine;
+    ObjAffine* affine;
     s32 rot;
     s32 scale;
     s32 zoom;

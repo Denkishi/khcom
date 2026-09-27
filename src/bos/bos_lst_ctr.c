@@ -188,7 +188,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 void task_bos_lst_ctr_2(LstCtrWork* work) {
     s16 x;
     s16 y;
-    s32 affine;
+    ObjAffine* affine;
     u16 prio;
     u16 z;
     void* gfx;

@@ -128,9 +128,9 @@ void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 count);
 void SplineEvaluate2D(Spline2D* spline, s32 t, s32* x, s32* y);
 void SplineFreeBuffers(Spline2D* spline);
 
-u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h);
-u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h);
-u8 func_080022D4(s16 x, s16 y, void* obj, void* e, s32 f, u16 g, u16 h);
+u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 func_080022D4(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
 void ReleaseSharedObjTiles(ObjTiles* p);
 void ReleaseAllocatedObjTiles(ObjTiles* p);
 void ReleaseSpriteFrameTiles(ObjTiles* p);

@@ -2668,7 +2668,7 @@ u8 func_0807BE54(CardDisplayWork* p, void* a) {
 static void card_2(CardDisplayWork* p) {
     s16 y;
     void* gfx;
-    s32 aff;
+    ObjAffine* aff;
     u8 j;
     u8 k;
     u16 attr;
@@ -3801,7 +3801,7 @@ void func_0807DAD0(CardDisplayWork* p) {
 void card_reload_2(CardDisplayWork* p) {
     UnkStruct_08095A5C* w;
     s16 y;
-    s32 affine;
+    ObjAffine* affine;
     s32 attr;
 
     if (p->unk_78 & 0x80) {

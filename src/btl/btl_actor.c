@@ -14,7 +14,7 @@ void func_0800EEBC(HumWork* p, HumSub* s) {
     s16 y;
     BtlObj* c;
     u16 attr;
-    s32 affine;
+    ObjAffine* affine;
     u16 prio;
     s32 sx;
     s32 sy;
@@ -67,7 +67,7 @@ void func_0800EFE8(HumWork* work) {
     s16 y;
     BtlObj* c = &work->actor;
     u16 attr;
-    s32 affine;
+    ObjAffine* affine;
     s32 sx;
     s32 sy;
     s32 g;

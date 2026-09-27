@@ -553,7 +553,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
     s16 sx;
     s16 sy;
     u16 flags;
-    s32 affine;
+    ObjAffine* affine;
     s32 scale;
 
     if (work->flags & 2) {

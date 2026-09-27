@@ -2829,7 +2829,7 @@ void mode_sio_chg_card_2(void) {
 
 void func_080B2CD0(void) {
     s32 i;
-    s32 aff;
+    ObjAffine* aff;
     gSioChgCardWork->gfx[0] = AnimUpdate(&gSioChgCardWork->anim[0]);
     gSioChgCardWork->gfx[1] = AnimUpdate(&gSioChgCardWork->anim[1]);
     gSioChgCardWork->gfx2 = AnimUpdate(&gSioChgCardWork->anim2);

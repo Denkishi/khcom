@@ -148,7 +148,7 @@ u8 card_enemy_1(CardDisplayWork* p, void* a) {
 
 void func_08090374(CardDisplayWork* p) {
     void* gfx;
-    s32 affine;
+    ObjAffine* affine;
     u16 flags;
 
     gfx = p->cardDef->gfx;

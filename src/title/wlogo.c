@@ -376,7 +376,7 @@ u8 task_wlogo_won_1(WlogoWonWork* work) {
 
 void task_wlogo_won_2(WlogoWonWork* work) {
     s32 i;
-    s32 affine;
+    ObjAffine* affine;
 
     if (work->state == 1) {
         for (i = 0; i < 10; i++) {
@@ -1716,7 +1716,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
 }
 
 void task_wlogo_tt_2(WlogoTtWork* work) {
-    s32 affine;
+    ObjAffine* affine;
 
     if (work->unk_100[4] == 1) {
         DrawSprite(72, 64, work->gfx5, work->tiles, work->palette, 0, 0, 4);
@@ -2077,7 +2077,7 @@ u8 task_wlogo_bks_obj_1(WlogoBksObjWork* work) {
 }
 
 void task_wlogo_bks_obj_2(WlogoBksObjWork* work) {
-    s32 affine;
+    ObjAffine* affine;
 
     affine = AllocObjAffine(0, work->scaleX, work->scaleY, 1);
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, affine, 0, work->unk_048);

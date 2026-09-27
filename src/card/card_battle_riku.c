@@ -2756,7 +2756,7 @@ u8 func_08081B70(CardDisplayWork* p, void* a) {
 
 static void card_2(CardDisplayWork* p) {
     void* gfx;
-    s32 aff;
+    ObjAffine* aff;
     u16 y;
     s16 sy;
     u16 flags;
@@ -3715,8 +3715,8 @@ void func_08083340(CardDisplayWork* p) {
     }
 }
 void Reload_Card_2(CardDisplayWork* p) {
-    s32 affine;
-    s32 affine2;
+    ObjAffine* affine;
+    ObjAffine* affine2;
     UnkStruct_08095A5C* w;
     s16 y;
     u16 attr;

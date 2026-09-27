@@ -454,7 +454,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -804,7 +804,7 @@ void task_smn_bambi_2(SmnBambiWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1136,7 +1136,7 @@ void task_smn_tink_2(SmnTinkWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1427,7 +1427,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1681,7 +1681,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -1885,7 +1885,7 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -2308,7 +2308,7 @@ void task_smn_genie_2(SmnGenieWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 
@@ -2518,7 +2518,7 @@ void task_smn_king_2(SmnKingWork* work) {
     u16 flags;
     s16 sx;
     s16 sy;
-    s32 affine;
+    ObjAffine* affine;
     s32 sclX;
     s32 sclY;
 

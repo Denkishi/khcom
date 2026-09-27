@@ -101,7 +101,7 @@ void task_btl_shadow_2(BtlShadowWork* work) {
     s16 x;
     s16 y;
     u16 anim;
-    s32 aff;
+    ObjAffine* aff;
 
     if (actor->unk_0CC != 0) {
         if (!(actor->flags & 0x0000000402000000)) {
@@ -409,7 +409,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
 
 void task_btl_hpply_2(BtlHpplyWork* work) {
     s32 v;
-    s32 aff;
+    ObjAffine* aff;
 
     DrawSprite(4, 2, work->gfx, work->tiles, work->palette, 0, 0x410, 1);
 
@@ -625,7 +625,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     void* gfx;
     void* bar;
     s32 v;
-    s32 aff;
+    ObjAffine* aff;
 
     if (work->unk_14 == 0) {
         return;
@@ -1316,7 +1316,7 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     s16 x;
     s16 y;
     s32 v;
-    s32 aff;
+    ObjAffine* aff;
 
     if (work->unk_22 == 0) {
         return;
@@ -1658,7 +1658,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
 void task_btl_prize_2(BtlPrizeWork* work) {
     s16 x;
     s16 y;
-    s32 aff;
+    ObjAffine* aff;
 
     if (work->flags & 1) {
         s32 pri = 0x800;
@@ -1889,7 +1889,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 void task_btl_premire_2(BtlPremireWork* work) {
     s16 x;
     s16 y;
-    s32 aff;
+    ObjAffine* aff;
 
     if (work->flags & 1) {
         u16 anim = GetBattleSpritePriorityFlags(work->y);

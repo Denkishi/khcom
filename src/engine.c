@@ -99,7 +99,7 @@ u8 gMosaicActive;
 
 extern u16 gSystemFlags;
 
-u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h) {
+u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
     SpriteWork* w;
     u16 n;
@@ -141,7 +141,7 @@ u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h)
     w->entryCount += 1;
     return 1;
 }
-u8 func_080022D4(s16 x, s16 y, void* obj, void* e, s32 f, u16 g, u16 h) {
+u8 func_080022D4(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
     if (e == 0 || ((ObjTiles*)obj)->src == 0) {
@@ -162,7 +162,7 @@ u8 func_080022D4(s16 x, s16 y, void* obj, void* e, s32 f, u16 g, u16 h) {
     }
     return 1;
 }
-u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, s32 f, u16 g, u16 h) {
+u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     if (gSpriteWork->entryCount <= 127 && obj != 0) {
         switch (((ObjTiles*)obj)->type) {
         case 0:
@@ -189,7 +189,7 @@ void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
     p->entries[p->entryCount].y = b;
     p->entries[p->entryCount].tiles = d;
     p->entries[p->entryCount].palette = e;
-    p->entries[p->entryCount].affine = z;
+    p->entries[p->entryCount].affine = 0;
     p->entries[p->entryCount].flags = f;
     p->entries[p->entryCount].priority = z;
     p->entries[p->entryCount].sprite = c;
@@ -198,7 +198,7 @@ void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
     p->sortLo += 1;
 }
 
-void func_08002594(u16 a, u16 b, void* c, void* d, void* e, void* f, u16 g) {
+void func_08002594(u16 a, u16 b, void* c, void* d, void* e, ObjAffine* f, u16 g) {
     SpriteWork* p;
     u32 z;
 
@@ -486,7 +486,7 @@ void ReleaseObjPalette(ObjPalette* p) {
         ReleaseObjPaletteRef(p);
     }
 }
-u8* AllocObjAffineAngle(u8 a, u8 b) {
+ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
@@ -500,16 +500,16 @@ u8* AllocObjAffineAngle(u8 a, u8 b) {
         e->pc = -sin;
         e->pd = cos;
         e->index = gSpriteWork->affineCount;
-        e->unk_0A = b;
+        e->doubleSize = b;
         e->sx = 0x100;
         e->sy = 0x100;
         e->angle = a;
         gSpriteWork->affineCount += 1;
-        return (u8*)e;
+        return e;
     }
     return 0;
 }
-u8* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
+ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
@@ -525,15 +525,15 @@ u8* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     e->pc = (-sin << 8) / sx;
     e->pd = (cos << 8) / sy;
     e->index = gSpriteWork->affineCount;
-    e->unk_0A = f;
+    e->doubleSize = f;
     e->sx = sx;
     e->sy = sy;
     e->angle = a;
     gSpriteWork->affineCount += 1;
 
-    return (u8*)e;
+    return e;
 }
-u8* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
+ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
     ObjAffine* e;
     s32 sin;
     s32 cos;
@@ -549,15 +549,15 @@ u8* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
     e->pc = (-sin << 8) / sy;
     e->pd = (cos << 8) / sy;
     e->index = gSpriteWork->affineCount;
-    e->unk_0A = f;
+    e->doubleSize = f;
     e->sx = sx;
     e->sy = sy;
     e->angle = a;
     gSpriteWork->affineCount += 1;
 
-    return (u8*)e;
+    return e;
 }
-u8* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
+ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     ObjAffine* e;
     u32 z;
 
@@ -571,13 +571,13 @@ u8* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     e->pc = c;
     e->pd = d;
     e->index = gSpriteWork->affineCount;
-    e->unk_0A = f;
+    e->doubleSize = f;
     e->sx = 0x100;
     e->sy = 0x100;
     e->angle = z;
     gSpriteWork->affineCount += 1;
 
-    return (u8*)e;
+    return e;
 }
 void SortSprites(void) {
     if (gSpriteWork->entryCount > 1) {
@@ -702,7 +702,7 @@ void func_08002F50(void) {
     for (i = 0; i < count; i++) {
         entry = entries[i];
         parts = entry->sprite;
-        affine = (ObjAffine*)entry->affine;
+        affine = entry->affine;
         partCount = *parts++;
         tileOffset = 0;
         if (mosaic != 0 && (entry->flags & 0x10) == 0) {
@@ -742,13 +742,13 @@ void func_08002F50(void) {
                 y = yy >> 8;
                 x -= (s16)width >> 1;
                 y -= (s16)height >> 1;
-                if (affine->unk_0A != 0) {
+                if (affine->doubleSize != 0) {
                     x -= (s16)width >> 1;
                     y -= (s16)height >> 1;
                     width <<= 1;
                     height <<= 1;
                 }
-                if (affine->unk_0A != 0) {
+                if (affine->doubleSize != 0) {
                     attr0 |= 0x300;
                 } else {
                     attr0 |= 0x100;

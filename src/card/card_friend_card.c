@@ -656,7 +656,7 @@ s32 Heartless_card_1(UnkStruct_0809A02C* w, void* a) {
 void func_0809B200(UnkStruct_0809A02C* w) {
     s16 x;
     s16 y;
-    s32 affine;
+    ObjAffine* affine;
     s16 v;
     u8 kind;
 
@@ -707,7 +707,7 @@ void func_0809B200(UnkStruct_0809A02C* w) {
 void Heartless_card_2(UnkStruct_0809A02C* w) {
     s16 x;
     s16 y;
-    s32 affine;
+    ObjAffine* affine;
     s16 v;
 
     if (w->unk_1CD != 0) {

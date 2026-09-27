@@ -1505,6 +1505,17 @@ typedef struct LevelUpEffectWork {
     TaskPool tasks;
 } LevelUpEffectWork;
 
+typedef struct StockInfoWork {
+    void* tiles;
+    void* palette;
+    s32 x;
+    s32 y;
+    s8 timer;
+    u8 unk_11[3];
+    u8* active;
+    TaskPool tasks;
+} StockInfoWork;
+
 typedef struct UnkStruct_080ABA80 {
     s32 unk_00[6];
 } UnkStruct_080ABA80;
@@ -1824,7 +1835,7 @@ void func_0809D1FC(u8 bg);
 u8 func_08083B20(BossCardWork* w, u8 b);
 void func_08097390(UnkStruct_08096F94* w);
 void func_080999A4(BossPrizeWork* w);
-u8 StockInfo_1(u8* work, void* a);
+u8 StockInfo_1(StockInfoWork* w, void* a);
 void func_08090A54(CardDisplayWork* p, void* a);
 u8 func_0809438C(MapSelectWork* w, void* a);
 void func_080A6E3C(u8* work);
@@ -1988,7 +1999,7 @@ void deckexchange_3(u8* work);
 void func_0807BB04(void);
 void func_080818E4(void);
 u8 func_0809DA64(s32 a, u16 n);
-void StockInfo_0(u8* work, void* a);
+void StockInfo_0(StockInfoWork* w, u8* active);
 u8 func_080A3754(UnkStruct_080A3F5C* w, void* a);
 u8 func_08082C98(CardDisplayWork* p, void* a);
 u8 Reload_Card_1(CardDisplayWork* p, void* a);

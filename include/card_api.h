@@ -9,12 +9,13 @@ struct UnkStruct_02039DD4;
 struct CardBattleWork;
 struct UnkStruct_08098670;
 struct BtlObj;
+struct LevelUpWork;
 struct TaskPool;
 struct UnkStruct_080ABA80;
 struct MapcardWork;
 
 void Mapcard_2(struct MapcardWork* w);
-void Level_Up_3(u8* work);
+void Level_Up_3(struct LevelUpWork* w);
 void mode_sio_battle_0(s32 a);
 void mode_sio_battle_1(void);
 void mode_sio_battle_2(void);

@@ -1510,20 +1510,6 @@ typedef struct LevelUpEffectWork {
     TaskPool tasks;
 } LevelUpEffectWork;
 
-typedef struct UnkStruct_0809FBCC {
-#ifdef VERSION_EU
-    u8 unk_000[0xD2];
-#else
-    u8 unk_000[0x77A];
-#endif
-    s16 unk_77A;
-    s16 unk_77C;
-    u8 unk_77E[0x32];
-    u8 unk_7B0;
-    u8 unk_7B1;
-    u8 unk_7B2[3];
-} UnkStruct_0809FBCC;
-
 typedef struct UnkStruct_080ABA80 {
     s32 unk_00[6];
 } UnkStruct_080ABA80;

@@ -57,8 +57,8 @@ extern u8 gUnk_0886AC70[];
 extern u8 sMovieHeapName[];
 extern u8 gUnk_09614718[];
 
-s32 GetIwramHeapStart(void);
-s32 GetIwramHeapSize(void);
+void* GetIwramHeapStart(void);
+u32 GetIwramHeapSize(void);
 void func_0805EA90(void);
 s32 func_0805E93C(s32 arg);
 

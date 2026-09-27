@@ -2657,23 +2657,23 @@ u8 func_080FABE4(GaWork* work) {
                 e = &work->entries[i];
                 switch (i) {
                 case 0:
-                    param.unk_00 = 0x06010000 + (((RoomObjResource*)e->tiles)->unk_06 << 5);
-                    param.unk_04 = ((RoomObjResource*)e->tiles)->unk_08;
-                    param.unk_08 = 0x06010000 + (((RoomObjResource*)work->tiles)->unk_06 << 5);
-                    param.unk_0C = ((RoomObjResource*)work->tiles)->unk_08;
+                    param.unk_00 = 0x06010000 + (e->tiles->index << 5);
+                    param.unk_04 = e->tiles->count;
+                    param.unk_08 = 0x06010000 + (work->tiles->index << 5);
+                    param.unk_0C = work->tiles->count;
                     param.unk_30 = e->unk_124 + (work->unk_018 == 0 ? -0x700 : 0x700);
                     param.unk_34 = e->unk_128;
                     param.unk_38 = e->unk_12C + 0x1000;
-                    param.unk_40 = (BtlObj*)e;
+                    param.unk_40 = &e->actor;
                     break;
                 case 1:
-                    param.unk_10 = 0x06010000 + (((RoomObjResource*)e->tiles)->unk_06 << 5);
-                    param.unk_14 = ((RoomObjResource*)e->tiles)->unk_08;
+                    param.unk_10 = 0x06010000 + (e->tiles->index << 5);
+                    param.unk_14 = e->tiles->count;
                     break;
                 }
             }
-            param.unk_18 = 0x05000200 + (((RoomObjResource*)work->palette)->unk_06 << 5);
-            param.unk_1C = ((RoomObjResource*)work->palette)->unk_08 << 5;
+            param.unk_18 = 0x05000200 + (work->palette->index << 5);
+            param.unk_1C = work->palette->count << 5;
             param.unk_20 = 0;
             param.unk_24 = 0;
             param.unk_28 = 0;
@@ -3038,8 +3038,8 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     func_0801C2DC(&work->entries[1].actor, 1);
     work->palette = LoadObjPalette(gBoss01objPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    func_0801C298(work->palette[6] + 16, 1);
-    func_0801C298(work->palette2[6] + 16, 1);
+    func_0801C298(work->palette->index + 16, 1);
+    func_0801C298(work->palette2->index + 16, 1);
     func_08083900(GetRandom() % 4 + 1);
 }
 u8 task_bos_ga_1(GaWork* work) {
@@ -3145,7 +3145,7 @@ void task_bos_ga_3(GaWork* work) {
         i++;
     } while (i <= 5);
 
-    ReleaseObjTiles((void*)work->tiles);
+    ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
 }

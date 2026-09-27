@@ -4,6 +4,7 @@
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "obj.h"
 #include "battle_actor_types.h"
 
 typedef struct GaEntryWork {
@@ -40,7 +41,7 @@ typedef struct GaEntryWork {
     s32 unk_168;
     TaskPool tasks;
     AnimState anim;
-    void* tiles;
+    ObjTiles* tiles;
     void* gfx;
     u32 unk_1A0;
     u8 unk_1A4;
@@ -63,10 +64,10 @@ typedef struct GaWork {
     u8 unk_01D[0x03];
     GaEntryWork entries[6];
     AnimState anim;
-    void* tiles;
+    ObjTiles* tiles;
     void* gfx;
-    u8* palette;
-    u8* palette2;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     s32 unk_A38;
     s32 unk_A3C;
     s32 unk_A40;
@@ -77,16 +78,5 @@ typedef struct GaWork {
     u8 unk_A52;
     u8 unk_A53;
 } GaWork;
-
-typedef struct RoomObjResource {
-    void* unk_00;
-    u16 refCount;
-    u16 unk_06;
-    u16 unk_08;
-    u16 unk_0A;
-    u8 unk_0C[0x10];
-    u8 unk_1C[0x04];
-    u32 unk_20;
-} RoomObjResource;
 
 #endif

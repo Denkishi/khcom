@@ -6943,9 +6943,9 @@ void view_0(EventCameraWork* p, u8* arg) {
     EvtObj* obj;
     u8 n;
 
-    gEventScanlineScroll = (EventScanlineScroll*)p->unk_18;
+    gEventScanlineScroll = &p->scanline;
     p->wavePhase = 0;
-    p->waveEnabled = 0;
+    p->scanline.enabled = 0;
     p->unk_08 = arg[0];
     p->unk_09 = 0;
     p->unk_10 = 0;
@@ -7008,7 +7008,7 @@ void func_080746D8(void) {
 #define MSG_VIEW_ID_B4 0xB4
 #endif
 
-u8 view_1(EventCameraWork* p, u8* task) {
+u8 view_1(EventCameraWork* p, Task* task) {
     EventBackgroundDef* u = gUnk_09EE3CA0[p->unk_08];
     const EventCameraKeyframe* e;
     EvtObj* q;
@@ -7125,11 +7125,11 @@ u8 view_1(EventCameraWork* p, u8* task) {
 
         if (e->unk_14 & 0x20000) {
             StartBgWave(func_08074564);
-            p->waveEnabled = 1;
+            p->scanline.enabled = 1;
         }
 
         if (e->unk_14 & 0x40000) {
-            p->waveEnabled = 0;
+            p->scanline.enabled = 0;
             ResetHBlankCallback();
             DisableHBlankIntr();
         }
@@ -7411,9 +7411,9 @@ void func_08075010(EventCameraWork* p) {
     u8 i;
     s32 v;
 
-    if (p->waveEnabled == 1) {
+    if (p->scanline.enabled == 1) {
         for (i = 0; i < 160; i++) {
-            p->scanlineScrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + p->wavePhase) * 2) & 0xFF]) / 32;
+            p->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + p->wavePhase) * 2) & 0xFF]) / 32;
         }
         p->wavePhase++;
     }

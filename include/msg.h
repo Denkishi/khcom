@@ -166,10 +166,7 @@ typedef struct EventCameraWork {
     u8 unk_14;
     u8 unk_15;
     u16 wavePhase;
-    u8 unk_18[2];
-    u8 waveEnabled;
-    u8 unk_1B;
-    u16 scanlineScrollX[160];
+    EventScanlineScroll scanline;
 } EventCameraWork;
 
 typedef struct MsgWaitWork {

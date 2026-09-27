@@ -20,7 +20,7 @@ typedef struct PooActor {
     u8 angle;
     u8 unk_15[0x05];
     u16 unk_1A;
-    u8 unk_1C[0x14];
+    ListNode node;
     u16 unk_30;
     u16 unk_32;
     u8 unk_34[0x06];

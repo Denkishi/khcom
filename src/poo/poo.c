@@ -1711,51 +1711,51 @@ void func_080CA6A8(s32 a, s32 b) {
     ScrollBgMapTo(2, gUnk_0203C40C, gUnk_0203C3F8);
 }
 
-void func_080CA724(PooSoraWork* w) {
+void func_080CA724(PooActor* p) {
     if ((GetKeysHeld() & DPAD_LEFT) != 0 && (GetKeysHeld() & DPAD_DOWN) != 0) {
-        w->unk_14 = 0xAD;
+        p->angle = 0xAD;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && (GetKeysHeld() & DPAD_LEFT) != 0) {
-        w->unk_14 = 0xD3;
+        p->angle = 0xD3;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && (GetKeysHeld() & DPAD_RIGHT) != 0) {
-        w->unk_14 = 0x2D;
+        p->angle = 0x2D;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && (GetKeysHeld() & DPAD_DOWN) != 0) {
-        w->unk_14 = 0x53;
+        p->angle = 0x53;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0 && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        w->unk_14 = 0xAD;
+        p->angle = 0xAD;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0 && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        w->unk_14 = 0x53;
+        p->angle = 0x53;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-        w->unk_14 = 0xD3;
+        p->angle = 0xD3;
     } else if ((GetKeysHeld() & DPAD_UP) != 0 && GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-        w->unk_14 = 0x2D;
+        p->angle = 0x2D;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0 && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        w->unk_14 = 0xD3;
+        p->angle = 0xD3;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0 && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        w->unk_14 = 0xAD;
+        p->angle = 0xAD;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && GetKeyReleaseTime(DPAD_UP) <= 4) {
-        w->unk_14 = 0x2D;
+        p->angle = 0x2D;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0 && GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-        w->unk_14 = 0x53;
+        p->angle = 0x53;
     } else if ((GetKeysHeld() & DPAD_DOWN) != 0) {
-        w->unk_14 = 0x80;
+        p->angle = 0x80;
     } else if ((GetKeysHeld() & DPAD_UP) != 0) {
-        w->unk_14 = 0;
+        p->angle = 0;
     } else if ((GetKeysHeld() & DPAD_LEFT) != 0) {
-        w->unk_14 = 0xC0;
+        p->angle = 0xC0;
     } else if ((GetKeysHeld() & DPAD_RIGHT) != 0) {
-        w->unk_14 = 0x40;
+        p->angle = 0x40;
     }
 }
 
 u8 func_080CA8D4(PooSoraWork* w, PooPos* p) {
-    if (w->unk_64 != 0 && ColliderIsTouchingType(w->unk_38, 5) == 0 && ColliderIsTouchingType(w->unk_38, 3) == 0 && ColliderIsTouchingType(w->unk_38, 5) == 0 && ColliderIsTouchingType(w->unk_38, 11) == 0) {
+    if (w->collider.unk_2C != 0 && ColliderIsTouchingType(&w->collider, 5) == 0 && ColliderIsTouchingType(&w->collider, 3) == 0 && ColliderIsTouchingType(&w->collider, 5) == 0 && ColliderIsTouchingType(&w->collider, 11) == 0) {
         if (func_080CFF30() != 0) {
-            p->x += w->unk_70;
-            p->y += w->unk_74;
+            p->x += w->collider.unk_38;
+            p->y += w->collider.unk_3C;
             func_080CFF58((u32*)&p->x, (u32*)&p->y, 1);
         } else {
-            p->x += w->unk_70;
-            p->y += w->unk_74;
+            p->x += w->collider.unk_38;
+            p->y += w->collider.unk_3C;
         }
         return 1;
     }
@@ -1788,17 +1788,17 @@ u8 func_080CA960(PooPos* p) {
     }
 }
 
-void func_080CA9DC(PooSoraWork* w) {
+void func_080CA9DC(PooActor* p) {
     u8 old;
 
-    old = w->unk_14;
-    func_080CA724(w);
+    old = p->angle;
+    func_080CA724(p);
 
-    if (old != w->unk_14) {
-        if (abs((s8)GetAngleDiff(old, w->unk_14)) > 100) {
-            w->unk_10 = 0;
+    if (old != p->angle) {
+        if (abs((s8)GetAngleDiff(old, p->angle)) > 100) {
+            p->unk_10 = 0;
         } else {
-            w->unk_10 >>= 1;
+            p->unk_10 >>= 1;
         }
     }
 }
@@ -1809,11 +1809,11 @@ s32 func_080CAA14(PooSoraWork* w) {
 
     p = &gPooActor.pos;
 
-    if ((w->unk_66 & 1) != 0) {
-        if (p->unk_0C < w->unk_78) {
+    if ((w->collider.unk_2E & 1) != 0) {
+        if (p->unk_0C < w->collider.unk_40) {
             v = p->unk_0C;
         } else {
-            v = w->unk_78;
+            v = w->collider.unk_40;
         }
         w->unk_AC = 1;
     } else {
@@ -1868,7 +1868,7 @@ void func_080CAA50(PooSoraWork* w, s32 b, u16 c) {
     }
     w->unk_A4 = b;
     e = &gUnk_096FCF54[b][d];
-    AnimChangeWithTables(w->unk_08, (u8)e->unk_0C, c, e->unk_04, e->unk_00);
+    AnimChangeWithTables(&w->anim, (u8)e->unk_0C, c, e->unk_04, e->unk_00);
     SetObjTileSource(w->tiles, e->unk_08);
 }
 
@@ -1902,7 +1902,7 @@ void func_080CAB24(PooActor* p) {
 void task_poo_sora_0(PooSoraWork* w) {
     PooActor* a = &gPooActor;
 
-    gUnk_0203C414 = w->unk_38;
+    gUnk_0203C414 = &w->collider;
     gUnk_0203C410 = &w->node;
     gPooSoraWork = w;
     w->tiles = AllocObjTiles(0xA00, 0);
@@ -1919,19 +1919,19 @@ void task_poo_sora_0(PooSoraWork* w) {
     a->pos.unk_0C = 0;
     a->unk_10 = 0;
     func_080C9FA8(a->pos.x, a->pos.y + a->pos.z);
-    AnimInit((AnimState*)w->unk_08, 0, 0);
+    AnimInit(&w->anim, 0, 0);
     func_080CAA50(w, 0, 1);
-    w->gfx = AnimGetGfx((AnimState*)w->unk_08);
-    w->animDesc = (const PooAnimDesc*)gUnk_096FD2C4;
+    w->gfx = AnimGetGfx(&w->anim);
+    w->sounds = gUnk_096FD2C4;
     TaskPoolInit(&w->tasks, 2);
     gFieldState = EwramAlloc(0xE8);
     TaskCreate(&w->tasks, &gTaskDescFldShadow, a);
     func_080CCB90(&w->node, 1, a);
-    ColliderInit(w->unk_38, 1, 18, 48);
-    ColliderSetPosition(w->unk_38, a->pos.x, a->pos.y, a->pos.z);
+    ColliderInit(&w->collider, 1, 18, 48);
+    ColliderSetPosition(&w->collider, a->pos.x, a->pos.y, a->pos.z);
 }
 
-u8 func_080CAD08(PooSoraWork* w, u8* t) {
+u8 func_080CAD08(PooSoraWork* w, Task* t) {
     PooActor* a = &gPooActor;
     PooPos p;
     s32 z;
@@ -1943,7 +1943,7 @@ u8 func_080CAD08(PooSoraWork* w, u8* t) {
     z = func_080CAA14(w);
     sx = a->pos.x;
     sy = a->pos.y;
-    func_080CA9DC((PooSoraWork*)a);
+    func_080CA9DC(a);
 
     switch (w->unk_94) {
     case 7:
@@ -1953,7 +1953,7 @@ u8 func_080CAD08(PooSoraWork* w, u8* t) {
         a->pos.x += gSineTable[a->angle] * a->unk_10 >> 8;
         a->pos.y += -gSineTable[a->angle + 0x40] * a->unk_10 >> 8;
 
-        if (AnimGetFrame((AnimState*)w->unk_08) > 3) {
+        if (AnimGetFrame(&w->anim) > 3) {
             a->pos.z += w->unk_9C;
             w->unk_9C += 66;
 
@@ -1970,14 +1970,14 @@ u8 func_080CAD08(PooSoraWork* w, u8* t) {
             a->unk_10 = 0;
         }
 
-        switch (AnimGetFrame((AnimState*)w->unk_08)) {
+        switch (AnimGetFrame(&w->anim)) {
         case 3:
         case 4:
             func_080CAB24(a);
             break;
         }
 
-        if (AnimIsFinished((AnimState*)w->unk_08) != 0) {
+        if (AnimIsFinished(&w->anim) != 0) {
             if (w->unk_9C < 0) {
                 w->unk_94 = 3;
             } else {
@@ -2091,7 +2091,7 @@ u8 func_080CAD08(PooSoraWork* w, u8* t) {
     case 5:
         if (w->timer == 0) {
             func_080CAA50(w, 7, 0);
-            m4aSongNumStart(((const u16*)w->animDesc)[3]);
+            m4aSongNumStart(w->sounds[3]);
         }
         a->unk_10 = 0;
         k = GetKeysPressed() & B_BUTTON;
@@ -2130,14 +2130,14 @@ u8 func_080CAD08(PooSoraWork* w, u8* t) {
             }
         }
     }
-    ColliderSetPosition(w->unk_38, a->pos.x, a->pos.y, a->pos.z);
+    ColliderSetPosition(&w->collider, a->pos.x, a->pos.y, a->pos.z);
     func_080C9FA8(a->pos.x, a->pos.y + a->pos.z);
-    w->gfx = AnimUpdate((AnimState*)w->unk_08);
+    w->gfx = AnimUpdate(&w->anim);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-u8 func_080CB1BC(PooSoraWork* w, u8* t) {
+u8 func_080CB1BC(PooSoraWork* w, Task* t) {
     PooActor* a = &gPooActor;
     s32 sx;
     s32 sy;
@@ -2152,10 +2152,10 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
             m4aSongNumStart(SONG_SYS_SR_AT_VO00);
         }
 
-        if (((AnimState*)w->unk_08)->timer == 0) {
+        if (w->anim.timer == 0) {
             switch (a->angle) {
             case 0xAD:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x -= 0x500;
                     a->pos.y += 0x400;
@@ -2169,7 +2169,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0x53:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x += 0x500;
                     a->pos.y += 0x400;
@@ -2183,7 +2183,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0xD3:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x -= 0x500;
                     a->pos.y -= 0x200;
@@ -2197,7 +2197,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0x2D:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x += 0x500;
                     a->pos.y -= 0x200;
@@ -2211,7 +2211,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0x80:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x -= 0x300;
                     a->pos.y += 0x400;
@@ -2229,7 +2229,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0x40:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x += 0x700;
                     a->pos.y += 0x100;
@@ -2243,7 +2243,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0xC0:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.x -= 0x700;
                     a->pos.y += 0x100;
@@ -2257,7 +2257,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
                 }
                 break;
             case 0:
-                switch (AnimGetFrame((AnimState*)w->unk_08)) {
+                switch (AnimGetFrame(&w->anim)) {
                 case 0:
                     a->pos.y -= 0x400;
                     break;
@@ -2280,7 +2280,7 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
             func_080CAB24(a);
         }
 
-        if (AnimIsFinished((AnimState*)w->unk_08) != 0) {
+        if (AnimIsFinished(&w->anim) != 0) {
             switch (a->angle) {
             case 0xAD:
                 a->pos.x -= 0x200;
@@ -2316,14 +2316,14 @@ u8 func_080CB1BC(PooSoraWork* w, u8* t) {
         a->pos.y = sy;
         a->unk_10 = 0;
     }
-    ColliderSetPosition(w->unk_38, a->pos.x, a->pos.y, a->pos.z);
+    ColliderSetPosition(&w->collider, a->pos.x, a->pos.y, a->pos.z);
     func_080C9FA8(a->pos.x, a->pos.y + a->pos.z);
-    w->gfx = AnimUpdate((AnimState*)w->unk_08);
+    w->gfx = AnimUpdate(&w->anim);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-u8 func_080CB5A8(PooSoraWork* w, u8* t) {
+u8 func_080CB5A8(PooSoraWork* w, Task* t) {
     PooActor* a = &gPooActor;
     s32 x;
     s32 y;
@@ -2359,14 +2359,14 @@ u8 func_080CB5A8(PooSoraWork* w, u8* t) {
         a->pos.y = y;
         a->unk_10 = 0;
     }
-    ColliderSetPosition(w->unk_38, a->pos.x, a->pos.y, a->pos.z);
+    ColliderSetPosition(&w->collider, a->pos.x, a->pos.y, a->pos.z);
     func_080C9FA8(a->pos.x, a->pos.y + a->pos.z);
-    w->gfx = AnimUpdate((AnimState*)w->unk_08);
+    w->gfx = AnimUpdate(&w->anim);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
+u8 task_poo_sora_1(PooSoraWork* w, Task* t) {
     PooActor* a = &gPooActor;
     s32 z;
     s32 sx;
@@ -2378,7 +2378,7 @@ u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
     sy = a->pos.y;
 
     if (w->unk_94 <= 1) {
-        func_080CA9DC((PooSoraWork*)a);
+        func_080CA9DC(a);
 
         if ((GetKeysHeld() & DPAD_ANY) != 0) {
             a->unk_10 += 128;
@@ -2388,13 +2388,13 @@ u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
                 a->unk_10 = 0x266;
             }
 
-            if (((AnimState*)w->unk_08)->timer == 0) {
-                switch (((AnimState*)w->unk_08)->frame) {
+            if (w->anim.timer == 0) {
+                switch (w->anim.frame) {
                 case 3:
-                    m4aSongNumStart(((const u16*)w->animDesc)[0]);
+                    m4aSongNumStart(w->sounds[0]);
                     break;
                 case 7:
-                    m4aSongNumStart(((const u16*)w->animDesc)[1]);
+                    m4aSongNumStart(w->sounds[1]);
                     break;
                 }
             }
@@ -2413,7 +2413,7 @@ u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
             w->timer = 0;
             w->unk_94 = 2;
             SetTaskUpdate(t, (TaskUpdateFunc)func_080CAD08);
-            m4aSongNumStart(((const u16*)w->animDesc)[2]);
+            m4aSongNumStart(w->sounds[2]);
         } else if ((GetKeysPressed() & A_BUTTON) != 0) {
             func_080CAB24(a);
             gUnk_0203C3D8 = 0;
@@ -2436,7 +2436,7 @@ u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
             SetTaskUpdate(t, (TaskUpdateFunc)func_080CB5A8);
             a->angle = func_080CA960(&a->pos);
         }
-    } else if (AnimIsFinished((AnimState*)w->unk_08) != 0) {
+    } else if (AnimIsFinished(&w->anim) != 0) {
         w->unk_94 = 0;
     }
 
@@ -2462,9 +2462,9 @@ u8 task_poo_sora_1(PooSoraWork* w, u8* t) {
         w->unk_94 = 4;
         SetTaskUpdate(t, (TaskUpdateFunc)func_080CAD08);
     }
-    ColliderSetPosition(w->unk_38, a->pos.x, a->pos.y, a->pos.z);
+    ColliderSetPosition(&w->collider, a->pos.x, a->pos.y, a->pos.z);
     func_080C9FA8(a->pos.x, a->pos.y + a->pos.z);
-    w->gfx = AnimUpdate((AnimState*)w->unk_08);
+    w->gfx = AnimUpdate(&w->anim);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
@@ -2486,17 +2486,17 @@ void task_poo_sora_2(PooSoraWork* w) {
 
     ac = w->unk_AC;
     if (ac != 0) {
-        gUnk_02034DEC = -0x1008 - (w->unk_80 >> 8) * 4;
+        gUnk_02034DEC = -0x1008 - (w->collider.unk_48 >> 8) * 4;
 
-        if (w->unk_84 <= w->unk_48 || w->unk_88[4] == 0x400) {
-            if (w->unk_78 != 0) {
+        if (w->collider.unk_4C <= w->collider.radius || w->collider.other->radius == 0x400) {
+            if (w->collider.unk_40 != 0) {
                 a->unk_3A = 0;
             } else {
                 a->unk_3A = gUnk_02034DEC + 1;
             }
             a->unk_3C = 0;
         } else {
-            a->unk_3C = w->unk_78;
+            a->unk_3C = w->collider.unk_40;
             a->unk_3A = gUnk_02034DEC + 1;
         }
     } else {
@@ -2519,7 +2519,7 @@ void task_poo_sora_3(PooSoraWork* w) {
     SetPooStatePos2(&gPooActor.pos);
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    ColliderUnregister(w->unk_38);
+    ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
     EwramFree(gFieldState);
     func_080CCBD4(&w->node);

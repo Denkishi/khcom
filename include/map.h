@@ -1128,6 +1128,7 @@ void func_080EB2D0(NewGameSlotMenuWork* w);
 void func_080ED314(u8* work);
 s32 Task_MapSave_1(MapSaveWork* w);
 void func_080E4B34(void);
+void func_080E4B78(s16 x, s16 y);
 void RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, s32 e);
 void* func_08093BF8(void);
 s32 func_080ECAC8(MapDoorWork* p);

@@ -19,8 +19,8 @@ extern u8 gUnkEu_08895CF8[];
 #endif
 
 #ifdef VERSION_JP
-extern u8 gUnk_0814FBB0[];
-extern u8 gUnk_0814FBBC[];
+extern u16 gUnk_0814FBB0[];
+extern u16 gUnk_0814FBBC[];
 #endif
 
 #ifdef VERSION_EU
@@ -130,29 +130,29 @@ struct ObjTiles* gUnk_02035F70;
 u32 gUnk_02035F74;
 AnimState gUnk_02035F78;
 u8 gUnk_02035F90;
-u8* gUnk_02035F94;
+TextSlot* gUnk_02035F94;
 u8 gUnk_02035F98;
-u8* gUnk_02035F9C;
+TextSlot* gUnk_02035F9C;
 u8 gUnk_02035FA0;
-u8* gUnk_02035FA4;
+TextSlot* gUnk_02035FA4;
 u8 gUnk_02035FA8;
 u16 gUnk_02035FAA;
-u8* gUnk_02035FAC;
+TextSlot* gUnk_02035FAC;
 u8 gUnk_02035FB0;
 u16 gUnk_02035FB2;
-u8* gUnk_02035FB4;
+TextSlot* gUnk_02035FB4;
 u8 gUnk_02035FB8;
 u16 gUnk_02035FBA;
 #ifdef VERSION_JP
 u32 gUnkJp_02035F1C;
 #endif
 #ifdef VERSION_JP
-u8* gUnk_02035FBC[2];
+TextSlot* gUnk_02035FBC[2];
 u8 gUnk_02035FC0[2];
 u16 gUnkJp_02035F2A;
 u16 gUnk_02035FC2[2];
 #else
-u8* gUnk_02035FBC[1];
+TextSlot* gUnk_02035FBC[1];
 u8 gUnk_02035FC0[1];
 u16 gUnk_02035FC2[1];
 #endif
@@ -1049,7 +1049,7 @@ void mode_mapinspect_0(void) {
     s16 v;
     u16 length;
 
-    gMapCardInventoryEntries = EwramAlloc(0x2F4);
+    gMapCardInventoryEntries = EwramAlloc(27 * sizeof(MapCardInventoryEntry));
     SpriteReset();
     FadeStartIn(0, 16);
     SetBgMode0();
@@ -1167,9 +1167,9 @@ void mode_mapinspect_0(void) {
     AnimInit(&gUnk_02035F78, gUnk_09EEA198, gUnk_09EEA180);
     AnimStart(&gUnk_02035F78, 0, 1);
 
-    gUnk_02035F94 = EwramAlloc(0x120);
+    gUnk_02035F94 = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(gUnk_02035F94, 0x24);
-    gUnk_02035F9C = EwramAlloc(0x2D0);
+    gUnk_02035F9C = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(gUnk_02035F9C, 0x5A);
 
 #ifdef VERSION_EU
@@ -1178,7 +1178,7 @@ void mode_mapinspect_0(void) {
     length = GetTextLength(gUnk_08159FBC);
 #endif
     gUnk_02035FAA = length;
-    gUnk_02035FA4 = EwramAlloc(gUnk_02035FAA * 8);
+    gUnk_02035FA4 = EwramAlloc(gUnk_02035FAA * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FA4, gUnk_02035FAA);
 #ifdef VERSION_EU
     gUnk_02035FA8 = LoadTextSlots(eu_0805E924(gUnkEu_08890EC0), gUnk_02035FA4);
@@ -1192,7 +1192,7 @@ void mode_mapinspect_0(void) {
     length = GetTextLength(gUnk_08159E10);
 #endif
     gUnk_02035FB2 = length;
-    gUnk_02035FAC = EwramAlloc(gUnk_02035FB2 * 8);
+    gUnk_02035FAC = EwramAlloc(gUnk_02035FB2 * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FAC, gUnk_02035FB2);
 #ifdef VERSION_EU
     gUnk_02035FB0 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), gUnk_02035FAC);
@@ -1206,7 +1206,7 @@ void mode_mapinspect_0(void) {
     length = GetTextLength(gUnk_08159E18);
 #endif
     gUnk_02035FBA = length;
-    gUnk_02035FB4 = EwramAlloc(gUnk_02035FBA * 8);
+    gUnk_02035FB4 = EwramAlloc(gUnk_02035FBA * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FB4, gUnk_02035FBA);
 #ifdef VERSION_EU
     gUnk_02035FB8 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), gUnk_02035FB4);
@@ -1216,12 +1216,12 @@ void mode_mapinspect_0(void) {
 
 #ifdef VERSION_JP
     gUnk_02035FC2[0] = GetTextLength(gUnk_0814FBB0);
-    gUnk_02035FBC[0] = EwramAlloc(gUnk_02035FC2[0] * 8);
+    gUnk_02035FBC[0] = EwramAlloc(gUnk_02035FC2[0] * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FBC[0], gUnk_02035FC2[0]);
     gUnk_02035FC0[0] = LoadTextSlots(gUnk_0814FBB0, gUnk_02035FBC[0]);
 
     gUnk_02035FC2[1] = GetTextLength(gUnk_0814FBBC);
-    gUnk_02035FBC[1] = EwramAlloc(gUnk_02035FC2[1] * 8);
+    gUnk_02035FBC[1] = EwramAlloc(gUnk_02035FC2[1] * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FBC[1], gUnk_02035FC2[1]);
     gUnk_02035FC0[1] = LoadTextSlots(gUnk_0814FBBC, gUnk_02035FBC[1]);
 #else
@@ -1230,7 +1230,7 @@ void mode_mapinspect_0(void) {
 #else
     gUnk_02035FC2[0] = GetTextLength(gUnk_0815C136);
 #endif
-    gUnk_02035FBC[0] = EwramAlloc(gUnk_02035FC2[0] * 8);
+    gUnk_02035FBC[0] = EwramAlloc(gUnk_02035FC2[0] * sizeof(TextSlot));
     InitTextSlots(gUnk_02035FBC[0], gUnk_02035FC2[0]);
 #ifdef VERSION_EU
     gUnk_02035FC0[0] = LoadTextSlots(eu_0805E924(gUnkEu_08895CF8), gUnk_02035FBC[0]);

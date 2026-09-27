@@ -27,10 +27,10 @@
 #include "ms_types.h"
 #include "main.h"
 #include "anim.h"
-extern u8 gUnk_08159E10[];
-extern u8 gUnk_08159E18[];
-extern u8 gUnk_08159FBC[];
-extern u8 gUnk_0815C136[];
+extern u16 gUnk_08159E10[];
+extern u16 gUnk_08159E18[];
+extern u16 gUnk_08159FBC[];
+extern u16 gUnk_0815C136[];
 extern u8 gCard00Palette[];
 
 s16 func_0810712C(s16 a);

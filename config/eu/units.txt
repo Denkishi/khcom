@@ -76,7 +76,6 @@ sprites_fld_2.c
 sprites_btl_2.c
 sprites_riku.c
 sprites_fld_3.c
-sprites_mode_debug.c
 sprites_evt_frames_1.s
 sprites_fld_frames_1.s
 sprites_btl_frames_1.s

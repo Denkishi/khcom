@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_mode_debug.c
-    start: 0x09EDF764
-    end: 0x09EDF778
   - name: sprites_mode_debug_frames.s
     start: 0x0895085C
     end: 0x08950BE4
+    data_start: 0x09EDF764
+    data_end: 0x09EDF778
   - name: sprites_mode_debug_tiles.s
     start: 0x08C6B0C4
     end: 0x08C78824
@@ -30,12 +29,11 @@ objects:
     start: 0x08F683C4
     end: 0x08F68624
   jp:
-  - name: sprites_mode_debug.c
-    start: 0x09EB71E0
-    end: 0x09EB71F4
   - name: sprites_mode_debug_frames.s
     start: 0x08943E44
     end: 0x089441CC
+    data_start: 0x09EB71E0
+    data_end: 0x09EB71F4
   - name: sprites_mode_debug_tiles.s
     start: 0x08C5E6AC
     end: 0x08C6BE0C
@@ -46,12 +44,11 @@ objects:
     start: 0x08F5B8CC
     end: 0x08F5BB2C
   eu:
-  - name: sprites_mode_debug.c
-    start: 0x09F5A3BC
-    end: 0x09F5A3D0
   - name: sprites_mode_debug_frames.s
     start: 0x0897C180
     end: 0x0897C508
+    data_start: 0x09F5A3BC
+    data_end: 0x09F5A3D0
   - name: sprites_mode_debug_palettes.s
     start: 0x08F6491C
     end: 0x08F64B7C

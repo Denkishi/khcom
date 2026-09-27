@@ -564,16 +564,18 @@ typedef char UnkStruct_0808C940_sizechk[(sizeof(struct UnkStruct_0808C940) ==
 #endif
 ) ? 1 : -1];
 
-typedef struct UnkStruct_0808E2F0 {
-    u16 unk_00[0x0B];
+typedef struct UnkStruct_08084D78 {
+    u16 unk_00[0x0A];
+    u16 unk_14;
     u16 unk_16;
-    u8 unk_18[0x04];
+    u16 unk_18;
+    u8 unk_1A[0x02];
     u16* unk_1C;
-} UnkStruct_0808E2F0;
+} UnkStruct_08084D78;
 
 typedef struct UnkStruct_080AAB08 {
     u8 unk_000[0x4CC];
-    UnkStruct_0808E2F0* unk_4CC;
+    UnkStruct_08084D78* unk_4CC;
     u8 unk_4D0[0x1FC];
     u16 unk_6CC;
     u8 unk_6CE[2];
@@ -621,8 +623,8 @@ typedef struct UnkStruct_0808DB04 {
     void* tiles6;
     void* palette3;
     u8 unk_4C4[0x10];
-    UnkStruct_0808E2F0* unk_4D4;
-    UnkStruct_0808E2F0* unk_4D8;
+    UnkStruct_08084D78* unk_4D4;
+    UnkStruct_08084D78* unk_4D8;
     void* gfx2;
     void* gfx3;
     void* gfx4;
@@ -1715,15 +1717,6 @@ typedef struct UnkStruct_080A97D4 {
     u8 unk_0B;
     u32 unk_0C;
 } UnkStruct_080A97D4;
-
-typedef struct UnkStruct_08084D78 {
-    u16 unk_00[0x0A];
-    u16 unk_14;
-    u16 unk_16;
-    u16 unk_18;
-    u8 unk_1A[0x02];
-    u16* unk_1C;
-} UnkStruct_08084D78;
 
 typedef struct UnkStruct_0808F358 {
     u8 unk_000[0x784];

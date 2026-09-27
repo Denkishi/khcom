@@ -1526,7 +1526,7 @@ void func_080AA450(u8* work) {
         LoadPalette(&gUnk_09614118[def->unk_2A * 32 + 0x200], dst, 32);
 
         for (j = 0; j < 10; j++) {
-            func_0808DD20((*(UnkStruct_0808E2F0**)&work[0x4CC])[i].unk_00[j], j);
+            func_0808DD20((*(UnkStruct_08084D78**)&work[0x4CC])[i].unk_00[j], j);
         }
 
         func_080AA3A0(work, id);
@@ -1834,7 +1834,7 @@ void func_080AAA8C(u8* work, u8 kind) {
 
 s32 func_080AAB08(UnkStruct_080AAB08* w) {
     u16 idx;
-    UnkStruct_0808E2F0* e;
+    UnkStruct_08084D78* e;
     u16 i;
     s32 card;
     u16 id;

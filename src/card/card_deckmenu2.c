@@ -2000,7 +2000,7 @@ u8 func_0808778C(UnkStruct_080889DC* w, void* a) {
 void func_08087B98(UnkStruct_0808DB04* w, u8 mode) {
     DeckCard2Work* node;
     DeckCard2Work* p;
-    UnkStruct_0808E2F0* e;
+    UnkStruct_08084D78* e;
     s32 i;
 
     node = ListPoolFirst(&w->pool);
@@ -3597,7 +3597,7 @@ u8 func_0808A910(UnkStruct_0808DB04* w, void* a) {
     switch (w->unk_8D0) {
     case 0:
         w->unk_898 = 286;
-        w->unk_4D8 = EwramAlloc(w->unk_898 * sizeof(UnkStruct_0808E2F0));
+        w->unk_4D8 = EwramAlloc(w->unk_898 * sizeof(UnkStruct_08084D78));
         zero = 0;
         CpuSet(&zero, w->unk_4D8, 0x05000000 | (w->unk_898 * 8));
         w->unk_4D4 = 0;
@@ -3605,10 +3605,10 @@ u8 func_0808A910(UnkStruct_0808DB04* w, void* a) {
         w->unk_896 = 113;
         break;
     case 1:
-        func_08084D78((UnkStruct_08084D78*)w->unk_4D8, w->unk_8C0, 0, w->unk_898, w->unk_4FC);
+        func_08084D78(w->unk_4D8, w->unk_8C0, 0, w->unk_898, w->unk_4FC);
         break;
     case 2:
-        w->unk_898 = func_08084E50((UnkStruct_08084D78*)w->unk_4D8, w->unk_8C0, 0, w->unk_898, w->unk_4FC);
+        w->unk_898 = func_08084E50(w->unk_4D8, w->unk_8C0, 0, w->unk_898, w->unk_4FC);
         break;
     case 3:
         if (w->unk_898 != 0) {
@@ -4252,10 +4252,10 @@ s32 func_0808C60C(u8* work, u8 kind, u8 c) {
     if (c == 0) {
         for (i = 0; i < *(u16*)&work[CARDWORK(0x898)]; i++) {
             if (kind == 5) {
-                if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_16 != 0) {
+                if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_16 != 0) {
                     args.unk_00 = &work[CARDWORK(0x7F0)];
                     args.cardId = func_0808C8D0(
-                        (*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10]);
+                        (*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14);
                     args.unk_06 = x;
                     args.unk_08 = y;
                     args.unk_0A = 1;
@@ -4264,10 +4264,10 @@ s32 func_0808C60C(u8* work, u8 kind, u8 c) {
                     x++;
                     count++;
                 }
-            } else if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_16 != 0) {
+            } else if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_16 != 0) {
                 args.unk_00 = &work[CARDWORK(0x7F0)];
                 args.cardId = func_0808C8D0(
-                    (*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10]);
+                    (*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14);
 
                 if (gCardDefs[args.cardId & 0xFFF].unk_2A == kind - 1) {
                     args.unk_06 = x;
@@ -4288,12 +4288,12 @@ s32 func_0808C60C(u8* work, u8 kind, u8 c) {
     } else {
         for (i = 0; i < *(u16*)&work[CARDWORK(0x898)]; i++) {
             if (kind == 5) {
-                if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_16 != 0) {
-                    if ((u16)((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10] - 78) >
+                if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_16 != 0) {
+                    if ((u16)((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14 - 78) >
                         64) {
                         args.unk_00 = &work[CARDWORK(0x7F0)];
                         args.cardId = func_0808C8D0(
-                            (*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10]);
+                            (*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14);
                         args.unk_06 = x;
                         args.unk_08 = y;
                         args.unk_0A = 1;
@@ -4303,13 +4303,13 @@ s32 func_0808C60C(u8* work, u8 kind, u8 c) {
                         count++;
                     }
                 }
-            } else if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_16 != 0) {
+            } else if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_16 != 0) {
                 args.unk_00 = &work[CARDWORK(0x7F0)];
                 args.cardId = func_0808C8D0(
-                    (*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10]);
+                    (*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14);
 
                 if (gCardDefs[args.cardId & 0xFFF].unk_2A == kind - 1) {
-                    if ((u16)((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10] - 78) >
+                    if ((u16)((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14 - 78) >
                         64) {
                         args.unk_06 = x;
                         args.unk_08 = y;
@@ -5007,12 +5007,12 @@ s32 func_0808D828(u8* work) {
 
         for (i = 0; i < *(u16*)&work[CARDWORK(0x898)]; i++) {
             if ((u16)(id & 0x8000) != 0) {
-                if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10] ==
+                if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14 ==
                     def->unk_1C + 143) {
                     break;
                 }
             } else {
-                if ((*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[10] ==
+                if ((*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_14 ==
                     def->unk_1C) {
                     break;
                 }
@@ -5024,7 +5024,7 @@ s32 func_0808D828(u8* work) {
         LoadPalette(&gUnk_09614318[def->unk_2A * 32], dst, 32);
 
         for (j = 0; j <= 9; j++) {
-            func_0808DD20((u8)(*(UnkStruct_0808E2F0**)&work[0x4D4])[i].unk_00[j], j);
+            func_0808DD20((u8)(*(UnkStruct_08084D78**)&work[0x4D4])[i].unk_00[j], j);
         }
 
         v = id & 0xFFF;
@@ -5217,7 +5217,7 @@ u32 func_0808DEB8(u16* data) {
 }
 
 s32 func_0808DED0(UnkStruct_0808DB04* w, u16 keys) {
-    UnkStruct_0808E2F0* p;
+    UnkStruct_08084D78* p;
     u8 y0;
     u8 x0;
     u8 idx;
@@ -5405,7 +5405,7 @@ store:
 s32 func_0808E19C(UnkStruct_0808DB04* w) {
     u16 mask;
     u16 idx;
-    UnkStruct_0808E2F0* e;
+    UnkStruct_08084D78* e;
     u16 i;
     u16 card;
     u16 v;
@@ -5540,7 +5540,7 @@ void func_0808E3E0(u8* work) {
 }
 u8 func_0808E474(UnkStruct_0808DB04* w) {
     u16 idx;
-    UnkStruct_0808E2F0* e;
+    UnkStruct_08084D78* e;
     u16 i;
     u16 id;
     u16 c;
@@ -5603,7 +5603,7 @@ u8 func_0808E474(UnkStruct_0808DB04* w) {
 }
 u8 func_0808E58C(UnkStruct_0808DB04* w) {
     u16 idx;
-    UnkStruct_0808E2F0* e;
+    UnkStruct_08084D78* e;
     u16 i;
     u16 card;
     u16 id;

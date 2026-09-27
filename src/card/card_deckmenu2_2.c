@@ -993,7 +993,7 @@ void func_080A7210(u8* work) {
 
     if (*(void**)&work[0x3E8] != 0) {
         for (i = 0; i < *(u16*)&work[0x4DC]; i++) {
-            EwramFree(((UnkStruct_0808E2F0*)*(void**)&work[0x3E8])[i].unk_1C);
+            EwramFree(((UnkStruct_08084D78*)*(void**)&work[0x3E8])[i].unk_1C);
         }
 
         p = (void**)&work[0x3E8];

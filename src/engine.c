@@ -2725,7 +2725,7 @@ void FadeUpdate(void) {
             } else if (!changed) {
                 continue;
             }
-            dst = (u16*)slot->buffer;
+            dst = slot->buffer;
             for (j = 0; j < 16; j++) {
                 color = *src++;
                 r = color & 31;

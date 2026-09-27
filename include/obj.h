@@ -8,7 +8,7 @@
 typedef struct PaletteSlot {
     void* src;
     void* dst;
-    u8 buffer[0x20];
+    u16 buffer[16];
     u8 excluded;
     u8 dirty;
     u8 unk_2A[0x02];

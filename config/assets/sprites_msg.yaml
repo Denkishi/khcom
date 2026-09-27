@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_msg.c
-    start: 0x09EEC670
-    end: 0x09EEDFA8
   - name: sprites_msg_frames.s
     start: 0x090D7E04
     end: 0x0919752C
+    data_start: 0x09EEC670
+    data_end: 0x09EEDFA8
   - name: sprites_msg_tiles_1.s
     start: 0x094233B8
     end: 0x09443138
@@ -38,12 +37,11 @@ objects:
     data_start: 0x09EEB188
     data_end: 0x09EEC660
   jp:
-  - name: sprites_msg.c
-    start: 0x09EC3A5C
-    end: 0x09EC5394
   - name: sprites_msg_frames.s
     start: 0x0909332C
     end: 0x09152A54
+    data_start: 0x09EC3A5C
+    data_end: 0x09EC5394
   - name: sprites_msg_tiles_1.s
     start: 0x093DB694
     end: 0x093FB414
@@ -62,12 +60,11 @@ objects:
     data_start: 0x09EC2574
     data_end: 0x09EC3A4C
   eu:
-  - name: sprites_msg.c
-    start: 0x09F77854
-    end: 0x09F7918C
   - name: sprites_msg_frames.s
     start: 0x091A748C
     end: 0x09266BB4
+    data_start: 0x09F77854
+    data_end: 0x09F7918C
   - name: sprites_msg_tiles_1.s
     start: 0x094F97C4
     end: 0x09519544

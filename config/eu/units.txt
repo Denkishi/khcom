@@ -197,7 +197,6 @@ sprites_premire_chance.c
 sprites_card_1.c
 sprites_level_up.c
 sprites_card_2.c
-sprites_deck_menu.c
 sprites_number_plus_frames.s
 sprites_card_pictures_frames.s
 sprites_premire_chance_frames.s

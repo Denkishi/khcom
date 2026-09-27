@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_deck_menu.c
-    start: 0x09EEAFD4
-    end: 0x09EEB0C4
   - name: sprites_deck_menu_frames.s
     start: 0x090A1F88
     end: 0x090A6A20
+    data_start: 0x09EEAFD4
+    data_end: 0x09EEB0C4
   - name: sprites_deck_menu_tiles.s
     start: 0x09402F78
     end: 0x0941A418
@@ -27,12 +26,11 @@ objects:
     start: 0x09512AB8
     end: 0x0951CAB8
   jp:
-  - name: sprites_deck_menu.c
-    start: 0x09EC23C8
-    end: 0x09EC24B0
   - name: sprites_deck_menu_frames.s
     start: 0x0905D7F8
     end: 0x09061F48
+    data_start: 0x09EC23C8
+    data_end: 0x09EC24B0
   - name: sprites_deck_menu_tiles_1.s
     start: 0x093BE294
     end: 0x093D2694
@@ -43,12 +41,11 @@ objects:
     start: 0x094CAD94
     end: 0x094D5594
   eu:
-  - name: sprites_deck_menu.c
-    start: 0x09F77044
-    end: 0x09F77254
   - name: sprites_deck_menu_frames.s
     start: 0x091879E4
     end: 0x0919728C
+    data_start: 0x09F77044
+    data_end: 0x09F77254
   - name: sprites_deck_menu_tiles.s
     start: 0x094DCCE4
     end: 0x094F22C4

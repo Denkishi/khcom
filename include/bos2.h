@@ -184,13 +184,13 @@ typedef struct DsdMainWork {
     s8 unk_054;
     u8 unk_055[0x3];
     TaskPool tasks;
-    void* unk_06C;
+    Task* unk_06C;
     s8 unk_070;
     u8 unk_071[0x3];
     BtlObj body;
-    void* unk_184;
-    void* unk_188;
-    void* unk_18C;
+    Task* unk_184;
+    Task* unk_188;
+    Task* unk_18C;
 } DsdMainWork;
 
 typedef struct DsdItaWork {

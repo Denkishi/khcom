@@ -374,23 +374,23 @@ void func_080C7684(s32 a, s32 b, s32 c) {
     gUnk_02034DA4 = c;
 }
 
-u8 func_080C76B0(PoohNear* p) {
+u8 func_080C76B0(Collider* p) {
     s32 lim;
     s32 dx;
     s32 dy;
     s32 dz;
 
-    lim = p->unk_10 + 0x1400;
-    dx = gUnk_02034D9C - p->unk_04;
+    lim = p->radius + 0x1400;
+    dx = gUnk_02034D9C - p->x;
     if (dx < 0) {
-        dx = p->unk_04 - gUnk_02034D9C;
+        dx = p->x - gUnk_02034D9C;
     }
-    dy = gUnk_02034DA0 - p->unk_08;
+    dy = gUnk_02034DA0 - p->y;
     if (dy < 0) {
-        dy = p->unk_08 - gUnk_02034DA0;
+        dy = p->y - gUnk_02034DA0;
     }
-    dz = gUnk_02034DA4 - p->unk_0C;
-    if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < p->unk_14) {
+    dz = gUnk_02034DA4 - p->z;
+    if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < p->height) {
         return 1;
     }
     return 0;

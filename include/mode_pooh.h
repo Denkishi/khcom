@@ -39,15 +39,6 @@ typedef struct PoohPos {
     s32 unk_0C;
 } PoohPos;
 
-typedef struct PoohNear {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    s32 unk_14;
-} PoohNear;
-
 typedef struct PoohHit {
     void* unk_00;
     u16 unk_04;

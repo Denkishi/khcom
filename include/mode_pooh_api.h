@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-struct PoohNear;
+struct Collider;
 struct PoohPos;
 struct PoohWork;
 
@@ -13,7 +13,7 @@ void func_080C73A4(u16 r, u16 g, u16 b);
 void func_080C7568(u32 a, u16 b);
 void func_080C73D8(void);
 void func_080C7684(s32 a, s32 b, s32 c);
-u8 func_080C76B0(struct PoohNear* p);
+u8 func_080C76B0(struct Collider* p);
 void func_080C7B84(u32 a);
 void func_080C7BCC(u16 a);
 u16 func_080C7BF8(u8 kind, u8 count, s32 x, s32 y, s32 z);

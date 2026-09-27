@@ -973,19 +973,19 @@ typedef struct ScrollBarWork {
 typedef char ScrollBarWork_sizechk[(sizeof(struct ScrollBarWork) == 0x18) ? 1 : -1];
 
 typedef struct PrizeCardWork {
-    UnkStruct_080038C8* tiles;
-    UnkStruct_080038C8* palette;
-    UnkStruct_080038C8* tiles2;
-    UnkStruct_080038C8* tiles3;
-    UnkStruct_080038C8* palette2;
-    UnkStruct_080038C8* tiles4;
-    UnkStruct_080038C8* tiles5;
-    UnkStruct_080038C8* palette3;
-    u8 unk_20[0x2C];
-    u8 collider[0x5C];
-    s32 unk_A8;
-    s32 unk_AC;
-    u8 unk_B0[0x18];
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette2;
+    ObjTiles* tiles4;
+    ObjTiles* tiles5;
+    ObjPalette* palette3;
+    TaskPool tasks;
+    CardStat stat;
+    Collider collider;
+    FldPos pos;
+    FldPos prevPos;
     u32 cardId;
     s32 unk_CC;
     s32 unk_D0;

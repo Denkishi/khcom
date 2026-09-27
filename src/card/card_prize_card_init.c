@@ -1355,10 +1355,10 @@ static void PrizeCard_2(UnkStruct_08096F94* w) {
     TaskPoolDraw(&w->tasks);
 }
 
-static void PrizeCard_3(PrizeCardWork* w) {
-    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette->index + 16, 0);
-    ColliderUnregister(&w->unk_20[0x24]);
+static void PrizeCard_3(UnkStruct_08096F94* w) {
+    FadeSetPaletteExcluded(((ObjPalette*)w->palette2)->index + 16, 0);
+    FadeSetPaletteExcluded(((ObjPalette*)w->palette)->index + 16, 0);
+    ColliderUnregister(w->unk_44);
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles4);
@@ -1367,7 +1367,7 @@ static void PrizeCard_3(PrizeCardWork* w) {
     ReleaseObjPalette(w->palette);
     ReleaseObjPalette(w->palette2);
     ReleaseObjPalette(w->palette3);
-    TaskPoolDestroy(&w->unk_20[8]);
+    TaskPoolDestroy(&w->tasks);
     gBtlWork->unk_0B0--;
 }
 

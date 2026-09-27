@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_premire_chance.c
-    start: 0x09EEA16C
-    end: 0x09EEA180
   - name: sprites_premire_chance_frames.s
     start: 0x0908BB54
     end: 0x0908C374
+    data_start: 0x09EEA16C
+    data_end: 0x09EEA180
   jp:
-  - name: sprites_premire_chance.c
-    start: 0x09EC1560
-    end: 0x09EC1574
   - name: sprites_premire_chance_frames.s
     start: 0x090473C4
     end: 0x09047BE4
+    data_start: 0x09EC1560
+    data_end: 0x09EC1574
   eu:
-  - name: sprites_premire_chance.c
-    start: 0x09F75F84
-    end: 0x09F75F98
   - name: sprites_premire_chance_frames.s
     start: 0x09161E28
     end: 0x09162648
+    data_start: 0x09F75F84
+    data_end: 0x09F75F98
 entries:
 - name: gUnk_09EEA16C
   record: SpriteTable

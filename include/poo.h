@@ -97,9 +97,7 @@ typedef struct PooMapBornWork {
     s32 unk_08;
     u8 unk_0C[0x04];
     PooPos pos;
-    u8 unk_20[0x2E];
-    u16 flags;
-    u8 unk_50[0x2C];
+    Collider collider;
     u8 unk_7C;
     u8 unk_7D[0x03];
     TaskPool tasks;
@@ -161,14 +159,6 @@ typedef struct PooAnim {
     u8 unk_00[0x08];
     void* unk_08;
 } PooAnim;
-
-typedef struct PooAnimWork {
-    void* tiles;
-    void* unk_04;
-    u8 unk_08[0x04];
-    u8 unk_0C[0x1A];
-    u16 unk_26;
-} PooAnimWork;
 
 typedef struct PooFrame {
     u16 unk_00;
@@ -317,12 +307,6 @@ typedef struct PooGfxDesc {
     u16 unk_06;
 } PooGfxDesc;
 
-typedef struct PooTiggerArgs {
-    void* unk_00;
-    void* unk_04;
-    void* unk_08;
-} PooTiggerArgs;
-
 typedef struct PooTiggerWork {
     void* tiles;
     void* palette;
@@ -335,14 +319,7 @@ typedef struct PooTiggerWork {
     s32 y;
     s32 z;
     s32 unk_34;
-    u8 unk_38[0x10];
-    s32 unk_48;
-    u8 unk_4C[0x2C];
-    s32 unk_78;
-    u8 unk_7C[0x04];
-    s32 unk_80;
-    s32 unk_84;
-    u8 unk_88[0x0C];
+    Collider collider;
     TaskPool tasks;
     s32 unk_A8;
     s32 unk_AC;
@@ -355,9 +332,7 @@ typedef struct PooTiggerWork {
     u16 unk_BE;
     s32 unk_C0;
     u8 unk_C4[0x04];
-    u16 unk_C8;
-    u16 unk_CA;
-    s32 unk_CC;
+    PooShadowInfo shadowInfo;
     u8 unk_D0;
     u8 unk_D1;
     u16 unk_D2;
@@ -496,10 +471,7 @@ typedef struct PooMapObjHitWork {
     u8 unk_38;
     u8 unk_39;
     u16 unk_3A;
-    u8 unk_3C[0x10];
-    s32 unk_4C;
-    s32 unk_50;
-    u8 unk_54[0x44];
+    Collider collider;
     s32 unk_98;
     u16 unk_9C;
     u16 unk_9E;
@@ -514,9 +486,7 @@ typedef struct PooLeafWork {
     s32 y;
     s32 z;
     u8 unk_30[0x04];
-    u8 unk_34[0x2E];
-    u16 flags;
-    u8 unk_64[0x2C];
+    Collider collider;
     u8 unk_90;
     u8 unk_91;
     u16 unk_92;
@@ -528,9 +498,7 @@ typedef struct PooOwlWork {
     void* tiles;
     void* palette;
     void* gfx;
-    u8 unk_0C[0x0A];
-    u16 unk_16;
-    u8 unk_18[0x0C];
+    AnimState anim;
     PooPos pos;
     TaskPool tasks;
     u8 unk_48;
@@ -600,9 +568,7 @@ typedef struct PooTanpopoWork {
     s32 y;
     s32 z;
     u8 unk_50[0x04];
-    u8 unk_54[0x2E];
-    u16 flags;
-    u8 unk_84[0x2C];
+    Collider collider;
     u8 unk_B0;
     u8 unk_B1;
     u16 unk_B2;
@@ -1155,13 +1121,13 @@ void task_poo_tigerstump_0(PooStumpWork* w, PooPos* p);
 u8 task_poo_tigerstump_1(PooStumpWork* w);
 void task_poo_poohstump_0(PooStumpWork* w, PooPos* p);
 u8 task_poo_poohstump_1(PooStumpWork* w);
-void func_080CD854(PooAnimWork* w, s32 b, u16 c);
+void func_080CD854(PooPigletWork* w, s32 b, u16 c);
 u8 task_poo_piglet_1(PooPigletWork* w);
 void task_poo_piglet_3(PooPigletWork* w);
 void task_poo_eeyore_3(PooEeyoreWork* w);
 u8 task_poo_rabbit_1(PooRabbitWork* w);
 void task_poo_rabbit_3(PooRabbitWork* w);
-u16 func_080CE880(PooAnimWork* w);
+u16 func_080CE880(PooTiggerWork* w);
 void task_poo_tiggerroo_3(PooTiggerWork* w);
 void task_poo_trapballoon_3(PooBalloonWork* w);
 void task_poo_owlballoon_3(PooOwlBalloonWork* w);

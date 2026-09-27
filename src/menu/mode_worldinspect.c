@@ -352,11 +352,13 @@ void func_080FF2B8(s16 index) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
+#endif
         if ((gGameState.flags & 8) == 0) {
             src = gUnk_09A020FC;
         } else {
             src = gUnk_09A02EFC;
         }
+#ifdef VERSION_EU
         break;
     case 1:
         if ((gGameState.flags & 8) == 0) {
@@ -387,12 +389,6 @@ void func_080FF2B8(s16 index) {
             src = gUnkEu_09A39A00;
         }
         break;
-    }
-#else
-    if ((gGameState.flags & 8) == 0) {
-        src = gUnk_09A020FC;
-    } else {
-        src = gUnk_09A02EFC;
     }
 #endif
 

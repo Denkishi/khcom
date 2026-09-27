@@ -41,7 +41,7 @@
 #include "sprites_card.h"
 
 u8 func_080A25E0(LvupMsgWork* w, void* a);
-void Lvup_msg_3(u8* work);
+void Lvup_msg_3(LvupMsgWork* w);
 extern u8 gUnk_0815A09A[];
 extern u8 gUnk_0815A198[];
 extern u8 gUnk_0815A0EE[];
@@ -57,8 +57,8 @@ const u8 gUnk_0903BFF8[] = ".";
 const u16 gUnk_0903BFF8[2] = { '.', 0 };
 #endif
 
-void Lvup_msg_0(LvupMsgWork* w, LvupMsgArgs* a) {
-    struct UnkStruct_080A23A0_Packed args = *(struct UnkStruct_080A23A0_Packed*)a;
+void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
+    StatIncreaseDisplayArgs args = *a;
 
     InitTextSlots(w->textSlots, 20);
     InitTextSlots(w->textSlots2, 20);
@@ -67,15 +67,15 @@ void Lvup_msg_0(LvupMsgWork* w, LvupMsgArgs* a) {
     InitTextSlots(w->textSlots4, 20);
     w->textSlotCount4 = LoadTextSlots((u16*)gUnk_0903BFF8, w->textSlots4);
 #endif
-    w->unk_28C = a->unk_04 >> 16;
-    w->unk_2B4 = a->unk_00;
-    if (args.unk_04 & 0x8000) {
+    w->unk_28C = a->amount;
+    w->unk_2B4 = a->done;
+    if (args.flags & 0x8000) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A09A), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A09A, w->textSlots);
 #endif
-    } else if (args.unk_04 & 0x4000) {
+    } else if (args.flags & 0x4000) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A198), w->textSlots);
 #else
@@ -96,7 +96,7 @@ void Lvup_msg_0(LvupMsgWork* w, LvupMsgArgs* a) {
     }
     w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->unk_28C, w->textSlots2);
 #ifdef VERSION_EU
-    if ((args.unk_04 & 0x8000) && gLanguage == 4) {
+    if ((args.flags & 0x8000) && gLanguage == 4) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08895EDC), w->textSlots3);
     } else {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnk_0815A0A0), w->textSlots3);
@@ -105,7 +105,7 @@ void Lvup_msg_0(LvupMsgWork* w, LvupMsgArgs* a) {
     w->textSlotCount3 = LoadTextSlots(gUnk_0815A0A0, w->textSlots3);
 #endif
     w->unk_280 = _08066468(1);
-    FadeSetPaletteExcluded(((u16*)w->unk_280)[3] + 16, 1);
+    FadeSetPaletteExcluded(w->unk_280->index + 16, 1);
     w->x = 0x1000;
     w->x2 = 0x3000;
     w->x3 = 0x4200;
@@ -206,20 +206,16 @@ void Lvup_msg_2(LvupMsgWork* w) {
                   w->textSlots4, w->unk_280, 40, w->textSlotCount4);
 #endif
 }
-void Lvup_msg_3(u8* work) {
-    FreeTextSlots((TextSlot*)work, 20);
-    FreeTextSlots((TextSlot*)&work[0xA0], 20);
-    FreeTextSlots((TextSlot*)&work[0x140], 20);
-#ifdef VERSION_JP
-    ReleaseObjPalette(*(u8**)&work[0x1E0]);
-    ReleaseObjTiles(*(void**)&work[0x1E4]);
-    ReleaseObjPalette(*(u8**)&work[0x1E8]);
-#else
-    FreeTextSlots((TextSlot*)&work[0x1E0], 20);
-    ReleaseObjPalette(*(u8**)&work[0x280]);
-    ReleaseObjTiles(*(void**)&work[0x284]);
-    ReleaseObjPalette(*(u8**)&work[0x288]);
+void Lvup_msg_3(LvupMsgWork* w) {
+    FreeTextSlots(w->textSlots, 20);
+    FreeTextSlots(w->textSlots2, 20);
+    FreeTextSlots(w->textSlots3, 20);
+#ifndef VERSION_JP
+    FreeTextSlots(w->textSlots4, 20);
 #endif
+    ReleaseObjPalette(w->unk_280);
+    ReleaseObjTiles(w->tiles);
+    ReleaseObjPalette(w->palette);
 }
 
 TaskDesc gTaskDescLvupMsg = {
@@ -228,9 +224,5 @@ TaskDesc gTaskDescLvupMsg = {
     (TaskUpdateFunc)Lvup_msg_1,
     (TaskFunc)Lvup_msg_2,
     (TaskFunc)Lvup_msg_3,
-#ifdef VERSION_JP
-    0x218,
-#else
-    0x2B8,
-#endif
+    sizeof(LvupMsgWork),
 };

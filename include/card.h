@@ -1369,11 +1369,6 @@ typedef struct MapSelectWork {
 
 typedef char MapSelectWork_size[(sizeof(struct MapSelectWork) == 0x2E4) ? 1 : -1];
 
-typedef struct LvupMsgArgs {
-    u8* unk_00;
-    u32 unk_04;
-} LvupMsgArgs;
-
 typedef struct LvupMsgWork {
     TextSlot textSlots[20];
     TextSlot textSlots2[20];
@@ -1381,7 +1376,7 @@ typedef struct LvupMsgWork {
 #ifndef VERSION_JP
     TextSlot textSlots4[20];
 #endif
-    void* unk_280;
+    ObjPalette* unk_280;
     void* tiles;
     void* palette;
     u16 unk_28C;
@@ -2417,12 +2412,6 @@ typedef struct StatIncreaseDisplayArgs {
     u32 flags : 16;
     u32 amount : 16;
 } StatIncreaseDisplayArgs;
-
-struct UnkStruct_080A23A0_Packed {
-    u8* unk_00;
-    u32 unk_04 : 16;
-    u32 unk_06 : 16;
-};
 
 extern s8 gUnk_0203C374;
 

@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_sora.c
-    start: 0x09EDE8CC
-    end: 0x09EDECC0
   - name: sprites_sora_frames.s
     start: 0x088B629C
     end: 0x088D8110
+    data_start: 0x09EDE8CC
+    data_end: 0x09EDECC0
   jp:
-  - name: sprites_sora.c
-    start: 0x09EB6348
-    end: 0x09EB673C
   - name: sprites_sora_frames.s
     start: 0x088A9884
     end: 0x088CB6F8
+    data_start: 0x09EB6348
+    data_end: 0x09EB673C
   eu:
-  - name: sprites_sora.c
-    start: 0x09F59524
-    end: 0x09F59918
   - name: sprites_sora_frames.s
     start: 0x088E1BC0
     end: 0x08903A34
+    data_start: 0x09F59524
+    data_end: 0x09F59918
 entries:
 - name: gSor1ff00Frames
   record: SpriteTable

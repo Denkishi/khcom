@@ -14,7 +14,7 @@ void HeapUnlinkFreeBlock(HeapBlock* b) {
 }
 
 u8 HeapContains(void* p, Heap* heap) {
-    if (p != 0 && (u32)p > (u32)heap->start && (u32)p < (u32)heap->end) {
+    if (p != 0 && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
         return 1;
     }
     

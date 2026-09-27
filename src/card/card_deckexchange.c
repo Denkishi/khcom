@@ -1362,7 +1362,6 @@ void func_080A9FF4(u8 kind) {
     u8 e[3];
     u8* base;
     u16 n;
-    u8* p;
     u8* ep;
 
     base = 0;
@@ -1371,10 +1370,9 @@ void func_080A9FF4(u8 kind) {
     d[1] = n / 10 - d[0] * 10;
     d[2] = n - d[0] * 100 - d[1] * 10;
     ep = e;
-    p = (u8*)&gGameState;
-    ep[0] = *(s16*)(p + 0xFA) / 100;
-    ep[1] = *(s16*)(p + 0xFA) / 10 - ep[0] * 10;
-    ep[2] = *(s16*)(p + 0xFA) - ep[0] * 100 - ep[1] * 10;
+    ep[0] = gGameState.progression.cp / 100;
+    ep[1] = gGameState.progression.cp / 10 - ep[0] * 10;
+    ep[2] = gGameState.progression.cp - ep[0] * 100 - ep[1] * 10;
 
     switch (kind) {
     case 0:

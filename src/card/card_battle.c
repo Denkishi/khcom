@@ -600,7 +600,7 @@ void func_0807B894(CardBattleWork* w);
 void func_0807B910(CardBattleWork* w);
 void func_0807B98C(CardBattleWork* w);
 void func_0807B9EC(CardBattleWork* w);
-void func_0807B6F4(void* work);
+void func_0807B6F4(CardBattleWork* w);
 void func_080789E4(CardBattleWork* w);
 void func_08078BB4(CardBattleWork* w);
 u8 func_080782AC(CardDisplayWork** cards, u8 count);

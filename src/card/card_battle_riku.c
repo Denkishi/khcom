@@ -263,6 +263,17 @@ Deck* sub_08083EFC(void);
 void func_08081740(CardBattleWork* w, u16 n);
 void func_08081744(CardBattleWork* w);
 void func_08080228(CardBattleWork* w);
+void func_0807FF48(CardBattleWork* w);
+void func_080800B4(CardBattleWork* w);
+u8 func_08080594(CardBattleWork* w);
+void func_08080994(CardBattleWork* w);
+u8 func_08080B44(CardBattleWork* w);
+void func_08081210(CardBattleWork* w);
+u8 func_080814BC(CardBattleWork* w);
+void func_080819E8(void);
+void func_08081A04(CardBattleWork* w);
+void func_08082EFC(CardDisplayWork* p);
+void func_080838A0(void);
 u8 func_080827E0(CardDisplayWork* p, void* a);
 void func_08083340(CardDisplayWork* p);
 void func_08082DA4(CardDisplayArgs* a, CardDef** out, u8 index);
@@ -2001,7 +2012,7 @@ void func_08080994(CardBattleWork* w) {
 
     func_080818E4();
 }
-u8 func_08080B44(CardBattleWork* w, void* a) {
+u8 func_08080B44(CardBattleWork* w) {
     CardDisplayArgs args;
     u16 t;
     u8 n;
@@ -2620,7 +2631,7 @@ void func_080819E8(void) {
     }
 }
 
-void func_08081A04(void) {
+void func_08081A04(CardBattleWork* w) {
     gUnk_02039DD4->unk_0F8 = 0;
     gUnk_02039DD4->unk_0FE = 0;
     gUnk_02039DD4->unk_102 = 4;

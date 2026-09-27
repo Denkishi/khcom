@@ -76,6 +76,12 @@ u8 func_0807CE68(CardDisplayWork* p);
 void func_0807C39C(CardDisplayWork* p);
 void func_0807D318(CardDisplayArgs* a, CardDef** out, u8 index);
 void func_0807D380(CardDisplayWork* p);
+void func_0807D490(CardDisplayWork* p);
+void func_0807E018(CardDisplayWork* w);
+void func_0807E158(void);
+void func_0807A620(CardBattleWork* w);
+void func_0807AE78(CardBattleWork* w);
+void func_0807BC08(void);
 void func_0807C33C(CardDisplayWork* p);
 u8 func_0807C934(CardDisplayWork* p, void* a);
 u8 func_0807D810(CardDisplayWork* p);
@@ -2269,7 +2275,7 @@ void func_0807B668(UnkStruct_02039DD4* p) {
     p->gfx2 = AnimGetGfx(&p->anim2);
 }
 
-void func_0807B6F4(void) {
+void func_0807B6F4(CardBattleWork* w) {
     UnkStruct_02039DD4* p;
 
     p = gUnk_02039DD4;

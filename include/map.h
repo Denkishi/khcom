@@ -1074,7 +1074,7 @@ void func_080ED314(MapMenuWork* w);
 s32 Task_MapSave_1(MapSaveWork* w);
 void func_080E4B34(void);
 void func_080E4B78(s16 x, s16 y);
-void RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, s32 e);
+u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e);
 void* func_08093BF8(void);
 u8 func_080ECAC8(MapDoorWork* p);
 u8 func_080ECBC8(MapDoorWork* p);

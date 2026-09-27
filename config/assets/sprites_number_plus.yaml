@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_number_plus.c
-    start: 0x09EE91A8
-    end: 0x09EE91B0
   - name: sprites_number_plus_frames.s
     start: 0x090451AC
     end: 0x09045240
+    data_start: 0x09EE91A8
+    data_end: 0x09EE91B0
   jp:
-  - name: sprites_number_plus.c
-    start: 0x09EC07EC
-    end: 0x09EC07F4
   - name: sprites_number_plus_frames.s
     start: 0x09012054
     end: 0x090120E8
+    data_start: 0x09EC07EC
+    data_end: 0x09EC07F4
   eu:
-  - name: sprites_number_plus.c
-    start: 0x09F74628
-    end: 0x09F74630
   - name: sprites_number_plus_frames.s
     start: 0x090D1FCC
     end: 0x090D2060
+    data_start: 0x09F74628
+    data_end: 0x09F74630
 entries:
 - name: gUnk_09EE91A8
   record: SpriteTable

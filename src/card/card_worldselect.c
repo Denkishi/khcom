@@ -2242,7 +2242,7 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     w->unk_88 = 0x2400;
     w->unk_80 = 0;
     w->unk_7C = 0;
-    w->unk_20 = EwramAlloc(0x68);
+    w->unk_20 = EwramAlloc(sizeof(UnkStruct_08095A5C));
     w->unk_A2 = 0;
     w->unk_A3 = 0;
     d = w->unk_20;
@@ -2666,18 +2666,18 @@ void func_08095AD8(UnkStruct_08095A5C* p, u16 a) {
 
     p->gfx3 = gfx;
 }
-s32 func_08095B04(u8* p, ReloadGageWork* w) {
+s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w) {
     if (w->unk_9C > 0 && w->unk_A2 == 1) {
         switch (w->unk_40) {
         case 1:
-            ApproachValue(&p[4], -0x3000, (u16)w->unk_9C);
+            ApproachValue(&p->unk_04, -0x3000, (u16)w->unk_9C);
             break;
         case 2:
-            ApproachValue(&p[4], 0x12000, (u16)w->unk_9C);
+            ApproachValue(&p->unk_04, 0x12000, (u16)w->unk_9C);
             break;
         }
     } else {
-        *(u32*)&p[4] = 0;
+        p->unk_04 = 0;
     }
 }
 void func_08095B50(UnkStruct_08095A5C* p, ReloadGageWork* w, u8 idx) {
@@ -2704,8 +2704,8 @@ void func_08095C00(UnkStruct_08095A5C* p) {
 
     AnimStart(&p->anim3, p->unk_0D, 5);
 }
-void func_08095C20(u8* p) {
-    p[13] = 2;
+void func_08095C20(UnkStruct_08095A5C* p) {
+    p->unk_0D = 2;
 }
 void* func_08095C28(CardBattleWork* w, u16 b, void* pool, u8 mode) {
     ReloadGageArgs args;

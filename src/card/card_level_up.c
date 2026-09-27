@@ -59,6 +59,8 @@ extern u8 gUnkEu_0916FDCA[];
 extern void* gUnkEu_09F72D08[];
 #endif
 u8 func_0809FE14(void);
+s32 func_080A151C(void);
+u8 func_080A2370(void);
 struct LevelUpWork;
 u8 func_0809F730(struct LevelUpWork* w, void* a);
 u8 func_080A0A44(struct LevelUpWork* w, void* a);

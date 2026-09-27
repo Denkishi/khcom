@@ -14,18 +14,16 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_emy_1.c
-    start: 0x09EDF778
-    end: 0x09EDF97C
-  - name: sprites_emy_2.c
-    start: 0x09EDF9A8
-    end: 0x09EE10E0
   - name: sprites_emy_frames_1.s
     start: 0x08950BE4
     end: 0x0896207C
+    data_start: 0x09EDF778
+    data_end: 0x09EDF97C
   - name: sprites_emy_frames_2.s
     start: 0x08963B3C
     end: 0x08B1D828
+    data_start: 0x09EDF9A8
+    data_end: 0x09EE10E0
   - name: sprites_emy_palettes.s
     start: 0x08F6DD44
     end: 0x08F6DD64
@@ -33,18 +31,16 @@ objects:
     start: 0x08C69188
     end: 0x08C69C04
   jp:
-  - name: sprites_emy_1.c
-    start: 0x09EB71F4
-    end: 0x09EB73F8
-  - name: sprites_emy_2.c
-    start: 0x09EB7424
-    end: 0x09EB8B5C
   - name: sprites_emy_frames_1.s
     start: 0x089441CC
     end: 0x08955664
+    data_start: 0x09EB71F4
+    data_end: 0x09EB73F8
   - name: sprites_emy_frames_2.s
     start: 0x08957124
     end: 0x08B10E10
+    data_start: 0x09EB7424
+    data_end: 0x09EB8B5C
   - name: sprites_emy_palettes.s
     start: 0x08F6124C
     end: 0x08F6126C
@@ -52,18 +48,16 @@ objects:
     start: 0x08C5C770
     end: 0x08C5D1EC
   eu:
-  - name: sprites_emy_1.c
-    start: 0x09F5A3D0
-    end: 0x09F5A5D4
-  - name: sprites_emy_2.c
-    start: 0x09F5A600
-    end: 0x09F5BD38
   - name: sprites_emy_frames_1.s
     start: 0x0897C508
     end: 0x0898D9A0
+    data_start: 0x09F5A3D0
+    data_end: 0x09F5A5D4
   - name: sprites_emy_frames_2.s
     start: 0x0898F460
     end: 0x08B4914C
+    data_start: 0x09F5A600
+    data_end: 0x09F5BD38
   - name: sprites_emy_palettes.s
     start: 0x08F6A29C
     end: 0x08F6A2BC

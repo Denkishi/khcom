@@ -7,6 +7,12 @@
 #include "evt_object_types.h"
 #include "msg_types.h"
 
+typedef struct EventSeqArg {
+    u32 unk_00 : 16;
+    u32 unk_02 : 8;
+    u32 unk_03 : 8;
+} EventSeqArg;
+
 typedef struct EventCharaParams {
     s16 spriteYOffset;
     s16 unk_02;
@@ -22,9 +28,7 @@ typedef struct EventCharaWork {
     void* palette;
     void* gfx;
     TaskPool tasks;
-    u16 unk_024;
-    u8 unk_026;
-    u8 unk_027;
+    EventSeqArg arg;
     EvtObj obj;
     BtlObj actor;
     u8 unk_164[0x18];

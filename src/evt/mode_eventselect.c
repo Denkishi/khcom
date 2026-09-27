@@ -186,13 +186,13 @@ void mode_eventselect_2(void) {
     func_080609A0();
 }
 
-void Hanabira_0(EffectWork* w, EventCharaWork* arg) {
+void Hanabira_0(EffectWork* w, EventCharaWork* chara) {
     s32 i;
 
     TaskPoolInit(&w->tasks, 16);
 
     for (i = 15; i >= 0; i--) {
-        TaskCreate(&w->tasks, &gTaskDescHanabiraC, arg);
+        TaskCreate(&w->tasks, &gTaskDescHanabiraC, chara);
     }
 }
 
@@ -210,11 +210,11 @@ void Hanabira_3(EffectWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-void Hanabira_c_0(EffectWork* w, EventCharaWork* arg) {
+void Hanabira_c_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->palette = LoadObjPalette(gMaruxhaBtEffPalette, 32);
     w->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 256);
     w->x = b->x;
@@ -283,11 +283,11 @@ void Hanabira_c_3(EffectWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void smoke_0(EffectWork* w, EventCharaWork* arg) {
+void smoke_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->x = b->x;
     w->y = b->y - 0x800;
     w->tiles = AllocObjTiles(128, 0);
@@ -300,11 +300,11 @@ void smoke_0(EffectWork* w, EventCharaWork* arg) {
     w->unk_46 = 0;
 }
 
-void Exclamation_0(EffectWork* w, EventCharaWork* arg) {
+void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
     w->tiles = AllocObjTiles(128, 0);
@@ -322,11 +322,11 @@ void Exclamation_0(EffectWork* w, EventCharaWork* arg) {
     w->unk_46 = 0;
 }
 
-void balloon_0(EffectWork* w, EventCharaWork* arg) {
+void balloon_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
     w->tiles = AllocObjTiles(128, 0);
@@ -371,7 +371,7 @@ void EffectDrawObj(EffectWork* w) {
     }
 
     DrawSprite((w->x >> 8) - (gEventState->x >> 8),
-               (y = (w->y >> 8) + gUnk_0903380C[w->actor->unk_026].spriteYOffset) -
+               (y = (w->y >> 8) + gUnk_0903380C[w->actor->arg.unk_02].spriteYOffset) -
                    (gEventState->y >> 8),
                w->gfx, w->tiles, w->palette, 0, pr, 50);
 }
@@ -381,11 +381,11 @@ void EffectReleaseObj(EffectWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void Question_0(EffectWork* w, EventCharaWork* arg) {
+void Question_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
     w->tiles = AllocObjTiles(128, 0);
@@ -416,14 +416,14 @@ s32 Question_1(EffectWork* w) {
     return 1;
 }
 
-void func_080758D0(EffectWork* w, EventCharaWork* arg) {
+void func_080758D0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
     s32 d1;
     s32 d2;
     s32 k;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     k = 0x400;
     d1 = (GetRandom() % 9 << 8) - k;
     w->x = b->x + d1;
@@ -475,11 +475,11 @@ void func_08075A54(EffectWork* w) {
     gEventState->unk_86--;
 }
 
-void GlowNose_0(EffectWork* w, EventCharaWork* arg) {
+void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
     w->x = b->x - 1536;
     w->y = b->y + 3072;
     w->tiles = AllocObjTiles(128, 0);
@@ -503,13 +503,13 @@ s32 GlowNose_1(EffectWork* w) {
     return 1;
 }
 
-void GlowNose2_0(EffectWork* w, EventCharaWork* arg) {
+void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
 
-    switch (arg->unk_026) {
+    switch (chara->arg.unk_02) {
     case 3:
         w->x = b->x - 6144;
         w->y = b->y + 8192;
@@ -541,15 +541,15 @@ s32 GlowNose2_1(EffectWork* w) {
     return 1;
 }
 
-void down_0(EffectWork* w, EventCharaWork* arg) {
+void down_0(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
     DownWork* s;
     u8 i;
 
-    w->actor = arg;
-    b = &arg->obj;
+    w->actor = chara;
+    b = &chara->obj;
 
-    switch (arg->unk_026) {
+    switch (chara->arg.unk_02) {
     case 0:
         w->x = b->x + 4096;
         w->y = b->y - 6144;
@@ -623,8 +623,8 @@ void down_3(EffectWork* w) {
     EwramFree(w->down);
 }
 
-void Tinkerbell_0(EffectWork* w, EventCharaWork* arg) {
-    w->actor = arg;
+void Tinkerbell_0(EffectWork* w, EventCharaWork* chara) {
+    w->actor = chara;
     gEventState->unk_86 = 0;
     w->unk_44 = 0;
     TaskPoolInit(&w->tasks, 8);

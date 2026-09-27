@@ -141,12 +141,6 @@ typedef struct EventSeqWork {
     u8 unk_3D;
 } EventSeqWork;
 
-typedef struct EventSeqArg {
-    u32 unk_00 : 16;
-    u32 unk_02 : 8;
-    u32 unk_03 : 8;
-} EventSeqArg;
-
 typedef struct EventScanlineScroll {
     u8 unk_00[2];
     u8 enabled;

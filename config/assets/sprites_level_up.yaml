@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_level_up.c
-    start: 0x09EEA19C
-    end: 0x09EEA2F4
   - name: sprites_level_up_frames.s
     start: 0x0908C630
     end: 0x09098808
+    data_start: 0x09EEA19C
+    data_end: 0x09EEA2F4
   - name: sprites_level_up_tiles.s
     start: 0x093FD438
     end: 0x09402F78
@@ -30,12 +29,11 @@ objects:
     start: 0x0951F2B8
     end: 0x09522AB8
   jp:
-  - name: sprites_level_up.c
-    start: 0x09EC1590
-    end: 0x09EC16E8
   - name: sprites_level_up_frames.s
     start: 0x09047EA0
     end: 0x09054078
+    data_start: 0x09EC1590
+    data_end: 0x09EC16E8
   - name: sprites_level_up_tiles.s
     start: 0x093B8B54
     end: 0x093BE294
@@ -46,12 +44,11 @@ objects:
     start: 0x094D7D94
     end: 0x094DB594
   eu:
-  - name: sprites_level_up.c
-    start: 0x09F75FD4
-    end: 0x09F76364
   - name: sprites_level_up_frames.s
     start: 0x09163764
     end: 0x0917E264
+    data_start: 0x09F75FD4
+    data_end: 0x09F76364
   - name: sprites_level_up_tiles.s
     start: 0x094D0304
     end: 0x094DCCE4

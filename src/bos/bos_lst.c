@@ -71,8 +71,10 @@ s32 func_0810C2BC(s32 x) {
     return x * x;
 }
 
-void func_0810C2C4(u8** p) {
-    p[1][1] = 1;
+void func_0810C2C4(Task* task) {
+    BosLstWork* work = task->work;
+
+    work->unk_001 = 1;
 }
 
 void func_0810C2CC(BosLstWork* work, u16 a, u16 b) {

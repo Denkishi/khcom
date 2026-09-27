@@ -3,7 +3,9 @@
 
 #include "types.h"
 
-s32 func_0810B350(void** p);
-void func_0810C2C4(u8** p);
+struct Task;
+
+s32 func_0810B350(struct Task* task);
+void func_0810C2C4(struct Task* task);
 
 #endif

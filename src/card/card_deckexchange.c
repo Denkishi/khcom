@@ -619,7 +619,7 @@ u8 func_080A8430(DeckExchangeWork* w, void* a) {
         w->unk_6E0 = 286;
         w->unk_4D0 = EwramAlloc(w->unk_6E0 * sizeof(UnkStruct_08084D78));
         zero = 0;
-        CpuSet(&zero, w->unk_4D0, 0x05000000 | (w->unk_6E0 * 8));
+        CpuSet(&zero, w->unk_4D0, CPU_SET_SRC_FIXED | CPU_SET_32BIT | w->unk_6E0 * (sizeof(UnkStruct_08084D78) / 4));
         break;
     case 1:
         func_08084D78(w->unk_4D0, w->unk_700, 0, w->unk_6E0, w->unk_4F4);
@@ -1058,10 +1058,9 @@ s32 func_080A97D4(DeckExchangeWork* w, u8 kind) {
 
     for (i = 0; i < w->unk_6E0; i++) {
         if (kind == 5) {
-            if (*(u16*)(i * 32 + (u32)w->unk_4CC + 20) <= 77) {
+            if (w->unk_4CC[i].unk_14 <= 77) {
                 args.pool = &w->pool;
-                args.cardId =
-                    func_080A993C(*(u16*)(i * 32 + (u32)w->unk_4CC + 20));
+                args.cardId = func_080A993C(w->unk_4CC[i].unk_14);
                 args.col = x;
                 args.row = y;
                 args.unk_0A = 1;
@@ -1071,11 +1070,9 @@ s32 func_080A97D4(DeckExchangeWork* w, u8 kind) {
             }
         } else {
             args.pool = &w->pool;
-            args.cardId =
-                func_080A993C(*(u16*)(i * 32 + (u32)w->unk_4CC + 20));
+            args.cardId = func_080A993C(w->unk_4CC[i].unk_14);
 
-            if (gCardDefs[args.cardId].unk_2A == kind - 1 &&
-                *(u16*)(i * 32 + (u32)w->unk_4CC + 20) <= 77) {
+            if (gCardDefs[args.cardId].unk_2A == kind - 1 && w->unk_4CC[i].unk_14 <= 77) {
                 args.col = x;
                 args.row = y;
                 args.unk_0A = 1;
@@ -1507,7 +1504,7 @@ void func_080AA450(DeckExchangeWork* w) {
         w->gfx4 = def->gfx;
 
         for (i = 0; i < w->unk_6E0; i++) {
-            if (*(u16*)(i * 32 + (u32)w->unk_4CC + 20) == def->unk_1C) {
+            if (w->unk_4CC[i].unk_14 == def->unk_1C) {
                 break;
             }
         }
@@ -1565,7 +1562,7 @@ void func_080AA634(DeckExchangeWork* w) {
 
 void func_080AA680(DeckExchangeWork* w) {
     func_080AA6D4(GetCardCpCost(
-        func_080A993C(*(u16*)(w->unk_6CC * 32 + (u32)w->unk_4CC + 20)) +
+        func_080A993C(w->unk_4CC[w->unk_6CC].unk_14) +
         w->unk_6D0 * 5 + (u16)w->unk_6D2));
 }
 
@@ -1797,7 +1794,7 @@ void func_080AAA38(DeckExchangeWork* w) {
 
     if (w->unk_4CC != 0) {
         for (i = 0; i < w->unk_6E0; i++) {
-            EwramFree(*(void**)((u8*)w->unk_4CC + i * 32 + 28));
+            EwramFree(w->unk_4CC[i].unk_1C);
         }
 
         EwramFree(w->unk_4CC);

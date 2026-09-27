@@ -277,7 +277,6 @@ bos3.c
 mode_sio_dbg.c
 sprites_wlogo.c
 sprites_boss_tm.c
-sprites_bos2.c
 sprites_wlogo_frames.s
 sprites_boss_tm_frames.s
 sprites_bos2_frames.s

@@ -649,7 +649,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     work->gfx2 = gUnk_09EF3A48[14];
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    FadeSetPaletteExcluded(*(u16*)((u8*)work->palette + 6) + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
     work->unk_2E = 0;
     work->unk_1C = 0;
     work->unk_1E = 0;
@@ -667,7 +667,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
 u8 task_bos_jf_lamp_1(JfLampWork* work) {
     BtlObj* sub = &work->jf->sub;
     JfWork* jf = work->jf;
-    u16* p;
+    ObjTiles* p;
     s32 d;
 
     if (jf->unk_238 <= 3) {
@@ -827,7 +827,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         }
 
         p = work->tiles2;
-        RequestDma3Copy(gUnk_09685DA4 + (work->unk_1C << 9), gUnk_06010000 + (p[3] << 5), 512);
+        RequestDma3Copy(gUnk_09685DA4 + (work->unk_1C << 9), gUnk_06010000 + (p->index << 5), 512);
     }
 
     work->unk_1E++;

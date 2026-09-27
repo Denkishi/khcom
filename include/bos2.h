@@ -53,13 +53,6 @@ extern void* gUnk_09EF275C[2][15];
 #include "acgtrans.h"
 #include "mode_battle_data.h"
 
-typedef struct BosPos {
-    s32 unk_00;
-    s32 x;
-    s32 y;
-    s32 z;
-} BosPos;
-
 typedef struct DsdWork {
     BtlObj body[3];
     u32 unk_330;
@@ -80,13 +73,13 @@ typedef struct DsdWork {
     s8 unk_35A;
     u8 unk_35B;
     s32 unk_35C;
-    void* tiles;
-    void* palette;
-    void* tiles2;
-    void* palette2;
-    void* palette3;
-    void* tiles3;
-    void* palette4;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjTiles* tiles2;
+    ObjPalette* palette2;
+    ObjPalette* palette3;
+    ObjTiles* tiles3;
+    ObjPalette* palette4;
     TaskPool tasks;
     u16 unk_390;
     u16 unk_392;
@@ -254,12 +247,12 @@ typedef struct JfMapWork {
 
 typedef struct JfLampWork {
     JfWork* jf;
-    void* tiles;
+    ObjTiles* tiles;
     void* gfx;
-    void* tiles2;
+    ObjTiles* tiles2;
     void* gfx2;
-    void* palette;
-    void* palette2;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     s16 unk_1C;
     s16 unk_1E;
     s16 unk_20;
@@ -283,8 +276,8 @@ typedef struct JfLampWork {
 
 typedef struct JfRockWork {
     JfWork* jf;
-    void* tiles;
-    void* palette;
+    ObjTiles* tiles;
+    ObjPalette* palette;
     void* gfx;
     AnimState anim;
     s16 unk_028;
@@ -313,8 +306,8 @@ typedef struct JfRockWork {
     s16 unk_15E;
     u8 state;
     u8 unk_161[0x3];
-    void* tiles2;
-    void* palette2;
+    ObjTiles* tiles2;
+    ObjPalette* palette2;
     void* gfx2;
     s32 x2;
     s32 y2;
@@ -366,9 +359,9 @@ typedef struct JfMajinWork {
 } JfMajinWork;
 
 typedef struct JfBorderlineWork {
-    BosPos* jf;
-    u32 tiles;
-    u32 palette;
+    JfWork* jf;
+    ObjTiles* tiles;
+    ObjPalette* palette;
     void* gfx;
     void* gfx2;
     void* gfx3;
@@ -514,7 +507,7 @@ void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg);
 void task_bos_jf_lamp_0(JfLampWork* work, JfWork* jf);
 u8 task_bos_dsd_circle_1(DsdCircleWork* work);
 void task_bos_dsd_0(DsdWork* work, void* arg);
-void task_bos_jf_borderline_0(JfBorderlineWork* work, BosPos* arg);
+void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg);
 void task_bos_jf_lamp_2(JfLampWork* work);
 void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg);
 u8 task_bos_dsd_1(DsdWork* work);

@@ -47,7 +47,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
                 work->unk_16 = 0;
             }
 
-            LoadObjPaletteBank(((u16*)work->dsd->palette)[3],
+            LoadObjPaletteBank(work->dsd->palette->index,
                                &gUnk_096FB904[work->unk_16 * 32]);
         }
 
@@ -59,7 +59,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
         work->unk_1C++;
         break;
     case 4:
-        LoadObjPaletteBank(((u16*)work->dsd->palette)[3], gUnk_096FB904);
+        LoadObjPaletteBank(work->dsd->palette->index, gUnk_096FB904);
         work->unk_1A = work->dsd->unk_354 - 21;
         break;
     case 5:

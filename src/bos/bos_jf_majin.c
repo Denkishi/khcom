@@ -1478,7 +1478,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->unk_028 = 0;
             }
 
-            LoadObjPaletteBank(((u16*)work->palette)[3] + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
         }
 
         if (work->unk_15C > 0) {
@@ -1549,7 +1549,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->unk_028 = 0;
             }
 
-            LoadObjPaletteBank(((u16*)work->palette)[3] + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
         }
 
         work->unk_15E++;
@@ -1592,7 +1592,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->unk_028 = 0;
             }
 
-            LoadObjPaletteBank(((u16*)work->palette)[3] + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
         }
 
         work->x += work->vx;
@@ -1746,14 +1746,14 @@ u8 func_080C1370(s32 a, s32 b, s32 c) {
     return 0;
 }
 
-void task_bos_jf_borderline_0(JfBorderlineWork* work, BosPos* arg) {
+void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     work->jf = arg;
     func_080C1A48(work);
     work->unk_0A8 = 0xA00;
     work->unk_0AC = 0x3600;
-    work->x = arg->x + work->unk_0A4;
-    work->y = arg->y + work->unk_0A8;
-    work->z = arg->z + work->unk_0AC;
+    work->x = arg->body.x + work->unk_0A4;
+    work->y = arg->body.y + work->unk_0A8;
+    work->z = arg->body.z + work->unk_0AC;
     work->unk_0B0 = 0;
     work->unk_0B2 = 0;
     work->unk_0B4 = 0;
@@ -1775,15 +1775,15 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, BosPos* arg) {
     AnimInit(&work->anim5, gUnk_09EF3B40, gUnk_09EF3A48);
     AnimStart(&work->anim5, 6, 1);
     work->gfx5 = AnimGetGfx(&work->anim5);
-    func_0801C298(*(u8*)((u8*)work->palette + 6) + 16, 0);
+    func_0801C298(work->palette->index + 16, 0);
 }
 
 u8 task_bos_jf_borderline_1(JfBorderlineWork* work) {
-    BosPos* p = work->jf;
+    JfWork* p = work->jf;
 
     func_080C1A48(work);
-    work->x = p->x + work->unk_0A4;
-    work->y = p->y + work->unk_0A8;
+    work->x = p->body.x + work->unk_0A4;
+    work->y = p->body.y + work->unk_0A8;
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
     work->gfx3 = AnimUpdate(&work->anim3);
@@ -1858,12 +1858,12 @@ void task_bos_jf_borderline_2(JfBorderlineWork* work) {
 }
 
 void task_bos_jf_borderline_3(JfBorderlineWork* work) {
-    ReleaseObjTiles((void*)work->tiles);
-    ReleaseObjPalette((void*)work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 void func_080C1A48(JfBorderlineWork* work) {
-    JfWork* jf = (JfWork*)work->jf;
+    JfWork* jf = work->jf;
 
     switch (jf->unk_238) {
     case 0:

@@ -65,8 +65,8 @@ extern AnimHeader** gUnk_09EE75C8[];
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09618D18[];
 u16 func_08093B08(u16 a);
-u8 Reload_Gage_1(ReloadGageWork* w, void* a);
-u8 func_080954C4(ReloadGageWork* w, void* a);
+u8 Reload_Gage_1(CardDisplayWork* w, void* a);
+u8 func_080954C4(CardDisplayWork* w, void* a);
 u8 func_0809217C(MapSelectWork* w, void* a);
 void func_08093C44(u16 a, MapSelectWork* w);
 s32 func_08093E34(u16 a, MapSelectWork* w);
@@ -95,7 +95,15 @@ void func_08094DEC(MapcardWork* w);
 u8 func_08094E4C(MapcardWork* w);
 MapcardWork* CreateMapCard(MapcardArgs* args, TaskPool* pool);
 void func_08094E90(MapcardWork* w);
-s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w);
+void func_080958E0(CardDisplayWork* w);
+void func_08095A5C(UnkStruct_08095A5C* p);
+void func_08095A78(UnkStruct_08095A5C* p, void* a, u8 b, s32 count);
+void func_08095AD8(UnkStruct_08095A5C* p, s32 count);
+s32 func_08095B04(UnkStruct_08095A5C* p, CardDisplayWork* w);
+void func_08095B50(UnkStruct_08095A5C* p, CardDisplayWork* w, u8 idx);
+void func_08095BAC(UnkStruct_08095A5C* p, CardDisplayWork* w);
+void func_08095BC8(UnkStruct_08095A5C* p, CardDisplayWork* w);
+void func_08095C00(UnkStruct_08095A5C* p, CardDisplayWork* w);
 void func_08095C20(UnkStruct_08095A5C* p);
 
 void WORLDSELECT_0(void) {
@@ -2217,7 +2225,7 @@ void func_08094E90(MapcardWork* w) {
     ListNodeInit(&w->node, w->args.pool, w);
     ListPoolAppend(&w->node, w->args.pool);
 }
-void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
+void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     UnkStruct_08095A5C* d;
     ReloadChildArgs args;
     u16 v;
@@ -2231,8 +2239,8 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     w->tiles5 = 0;
     w->palette = 0;
     w->unk_A1 = 0;
-    *(ReloadGageArgs*)&w->pool2 = *a;
-    w->flags = 0;
+    w->args = *a;
+    w->unk_78 = 0;
     w->unk_9C = 16;
     w->unk_84 = 0;
     w->unk_9F = 0;
@@ -2244,7 +2252,7 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     w->unk_A2 = 0;
     w->unk_A3 = 0;
     d = w->unk_20;
-    v = a->unk_0C;
+    v = a->index;
 
     if ((s16)v >= 0) {
         d->unk_64 = v;
@@ -2257,43 +2265,43 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     }
 
     d->unk_65 = 0;
-    w->pool = EwramAlloc(0x10);
+    w->unk_1C = EwramAlloc(sizeof(ListPool));
 
-    switch (w->unk_40) {
+    switch (w->args.unk_08) {
     case 1:
         w->unk_8C = gUnk_09033FF4[0][0];
         w->unk_90 = gUnk_09033FF4[0][1];
-        w->unk_4C = gUnk_09033FF4[4][0];
-        w->unk_50 = gUnk_09033FF4[4][1];
-        w->angle = w->targetAngle = 0x2000;
-        w->flags |= 0x8000000;
+        w->x = gUnk_09033FF4[4][0];
+        w->y = gUnk_09033FF4[4][1];
+        w->unk_94 = w->unk_98 = 0x2000;
+        w->unk_78 |= 0x8000000;
         break;
     case 2:
         w->unk_8C = gUnk_0903401C[0][0];
         w->unk_90 = gUnk_0903401C[0][1];
-        w->unk_4C = gUnk_0903401C[4][0];
-        w->unk_50 = gUnk_0903401C[4][1];
-        w->angle = w->targetAngle = -0x2000;
+        w->x = gUnk_0903401C[4][0];
+        w->y = gUnk_0903401C[4][1];
+        w->unk_94 = w->unk_98 = -0x2000;
         break;
     }
 
     w->unk_54 = 0x100;
     w->unk_58 = 0;
-    ListPoolInit(w->pool);
-    ListNodeInit(&w->node, w->pool2, w);
-    ListPoolAppend(&w->node, w->pool2);
-    w->tiles2 = LoadObjTiles(gUnk_09EE75A8[w->unk_46], 0x280);
+    ListPoolInit(w->unk_1C);
+    ListNodeInit(&w->node, w->args.pool, w);
+    ListPoolAppend(&w->node, w->args.pool);
+    w->tiles2 = LoadObjTiles(gUnk_09EE75A8[w->args.unk_0E], 0x280);
     w->tiles3 = AllocObjTiles(0x200, 0);
     SetObjTileSource(w->tiles3, gUnk_09EE75A8[1]);
     w->tiles4 = AllocObjTiles(0x80, 0);
     SetObjTileSource(w->tiles4, gUnk_09EE75A8[1]);
-    func_08095B50(w->unk_20, w, w->unk_46);
+    func_08095B50(w->unk_20, w, w->args.unk_0E);
     w->tiles = LoadObjTiles(gUnk_0905F03C, 0x80);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     w->tiles5 = AllocObjTiles(0x100, 0);
-    SetObjTileSource(w->tiles5, gUnk_09EE7578[w->unk_46]);
-    func_08095A78(w->unk_20, w->tiles5, w->unk_46, d->unk_64);
-    w->flags |= 0x1000026;
+    SetObjTileSource(w->tiles5, gUnk_09EE7578[w->args.unk_0E]);
+    func_08095A78(w->unk_20, w->tiles5, w->args.unk_0E, d->unk_64);
+    w->unk_78 |= 0x1000026;
 
     if (d->unk_64 >= 0) {
         TaskPoolInit(&w->tasks, d->unk_64 + 1);
@@ -2304,13 +2312,13 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
         }
 
         for (i = 0; i < n; i++) {
-            args.unk_00 = w->pool;
+            args.unk_00 = w->unk_1C;
             args.unk_0C = i;
-            args.unk_04 = &w->unk_4C;
-            args.unk_08 = &w->unk_50;
+            args.unk_04 = &w->x;
+            args.unk_08 = &w->y;
             args.unk_10 = 0;
-            args.unk_0D = w->unk_46;
-            args.unk_0E = w->unk_40;
+            args.unk_0D = w->args.unk_0E;
+            args.unk_0E = w->args.unk_08;
             TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args);
         }
     } else {
@@ -2318,7 +2326,7 @@ void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     }
 }
 
-u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
+u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
     ReloadChildArgs args;
     UnkStruct_08095A5C* p;
     ReloadChildWork* node;
@@ -2329,25 +2337,25 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
     p = w->unk_20;
     v = 0;
 
-    switch (w->unk_40) {
+    switch (w->args.unk_08) {
     case 1:
-        if (gUnk_02039DD4->unk_0D2 == w->unk_46) {
+        if (gUnk_02039DD4->unk_0D2 == w->args.unk_0E) {
             v = gUnk_02039DD4->unk_0E7;
             gUnk_02039DD4->unk_0E7 = 0;
         }
         break;
     case 2:
-        if (gUnk_02039DD4->unk_0D4 == w->unk_46) {
+        if (gUnk_02039DD4->unk_0D4 == w->args.unk_0E) {
             v = gUnk_02039DD4->unk_0E8;
             gUnk_02039DD4->unk_0E8 = 0;
         }
         break;
     }
 
-    if ((w->flags & 0x44) == 0x44) {
+    if ((w->unk_78 & 0x44) == 0x44) {
         if (v == 1) {
             if ((s8)p->unk_65 == 2) {
-                switch (w->unk_40) {
+                switch (w->args.unk_08) {
                 case 1:
                     if ((gBtlWork->flags & 0x1000000) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
@@ -2362,7 +2370,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                     break;
                 }
 
-                node = (ReloadChildWork*)ListPoolFirst(w->pool);
+                node = (ReloadChildWork*)ListPoolFirst(w->unk_1C);
 
                 while (node != 0) {
                     node->args.unk_10 &= 0xFFFD;
@@ -2384,7 +2392,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                         w->unk_A0 = 4;
                         w->unk_58 = 0;
                         w->unk_9F = 0;
-                        child = (ReloadChildWork*)ListPoolFirst(w->pool);
+                        child = (ReloadChildWork*)ListPoolFirst(w->unk_1C);
 
                         while (child != 0) {
                             child->args.unk_10 |= 1;
@@ -2395,13 +2403,13 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                         p->unk_64--;
 
                         if (p->unk_64 > 2) {
-                            args.unk_00 = w->pool;
+                            args.unk_00 = w->unk_1C;
                             args.unk_0C = 3;
-                            args.unk_04 = &w->unk_4C;
-                            args.unk_08 = &w->unk_50;
+                            args.unk_04 = &w->x;
+                            args.unk_08 = &w->y;
                             args.unk_10 = 0;
-                            args.unk_0D = w->unk_46;
-                            args.unk_0E = w->unk_40;
+                            args.unk_0D = w->args.unk_0E;
+                            args.unk_0E = w->args.unk_08;
                             child = TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args)->work;
                             flags = child->args.unk_10 | 1;
                             flags &= 0xFFFD;
@@ -2416,7 +2424,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                     }
                 }
 
-                switch (w->unk_40) {
+                switch (w->args.unk_08) {
                 case 1:
                     if (gBtlWork->unk_0F4 == 9) {
                         p->unk_65 = 1;
@@ -2443,10 +2451,10 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
         } else {
             func_08095BC8(w->unk_20, w);
             p->unk_65 = 0;
-            w->flags |= 0x8000000;
+            w->unk_78 |= 0x8000000;
             m4aSongNumStop(SONG_SYS_CHAGE);
 
-            switch (w->unk_40) {
+            switch (w->args.unk_08) {
             case 1:
                 gBtlWork->flags &= ~0x1000000;
                 break;
@@ -2455,7 +2463,7 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
                 break;
             }
 
-            node = (ReloadChildWork*)ListPoolFirst(w->pool);
+            node = (ReloadChildWork*)ListPoolFirst(w->unk_1C);
 
             while (node != 0) {
                 node->args.unk_10 |= 2;
@@ -2465,8 +2473,8 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
     }
 
     if (p->unk_64 < 0) {
-        if ((w->flags & 0x4000000) == 0) {
-            w->flags |= 0x4000000;
+        if ((w->unk_78 & 0x4000000) == 0) {
+            w->unk_78 |= 0x4000000;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
         }
 
@@ -2479,24 +2487,24 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
 
     func_08095B04(w->unk_20, w);
 
-    if (w->unk_A2 == 1 && w->unk_9C == 1) {
+    if (w->unk_A2 == 1 && (s16)w->unk_9C == 1) {
         func_08095AD8(w->unk_20, p->unk_64);
     }
 
     func_080958E0(w);
 
-    if (w->flags & 0x4000) {
+    if (w->unk_78 & 0x4000) {
         return 0;
     }
 
     func_08095A5C(w->unk_20);
-    w->unk_5C[3] += 4;
+    w->unk_5F += 4;
 
-    if ((w->flags & 0x20) == 0) {
+    if ((w->unk_78 & 0x20) == 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_080954C4);
         m4aSongNumStop(SONG_SYS_CHAGE);
 
-        switch (w->unk_40) {
+        switch (w->args.unk_08) {
         case 1:
             gBtlWork->flags &= ~0x1000000;
             break;
@@ -2510,16 +2518,16 @@ u8 Reload_Gage_1(ReloadGageWork* w, void* a) {
     return 1;
 }
 
-u8 func_080954C4(ReloadGageWork* w, void* a) {
+u8 func_080954C4(CardDisplayWork* w, void* a) {
     if (w->unk_A1 == 7) {
         return 0;
     }
 
     w->unk_84 += -w->unk_84 >> 1;
-    w->unk_4C += (gUnk_09033FF4[4][0] - w->unk_4C) >> 1;
-    w->unk_50 += (gUnk_09033FF4[4][1] - w->unk_50) >> 1;
+    w->x += (gUnk_09033FF4[4][0] - w->x) >> 1;
+    w->y += (gUnk_09033FF4[4][1] - w->y) >> 1;
 
-    if (w->flags & 0x20) {
+    if (w->unk_78 & 0x20) {
         SetTaskUpdate(a, (TaskUpdateFunc)Reload_Gage_1);
     }
 
@@ -2608,32 +2616,32 @@ void Reload_Gage_3(CardDisplayWork* p) {
 
     ListPoolRemove(&p->node, p->args.pool);
 }
-void func_080958E0(ReloadGageWork* w) {
-    ApproachValue(&w->angle, w->targetAngle, w->unk_A3);
+void func_080958E0(CardDisplayWork* w) {
+    ApproachValue(&w->unk_94, w->unk_98, w->unk_A3);
     if (w->unk_A3 != 0) {
         w->unk_A3--;
     }
     w->unk_84 += (w->unk_88 - w->unk_84) >> 1;
-    if (w->unk_9C > 0) {
+    if ((s16)w->unk_9C > 0) {
         w->unk_9C--;
-        w->flags &= ~0x40;
+        w->unk_78 &= ~0x40;
     } else {
         w->unk_9C = 0;
-        w->flags |= 0x40;
+        w->unk_78 |= 0x40;
     }
 
-    switch (w->unk_40) {
+    switch (w->args.unk_08) {
     case 1:
-        w->unk_8C = gSineTable[(w->angle >> 8) & 0xFF] * 80 + gUnk_09033FF4[0][0];
-        w->unk_90 = -gSineTable[((w->angle >> 8) & 0xFF) + 0x40] * 80 + gUnk_09033FF4[0][1];
-        w->unk_4C = gSineTable[0x20] * (w->unk_84 >> 8) + w->unk_8C;
-        w->unk_50 = -gSineTable[0x60] * (w->unk_84 >> 8) + w->unk_90;
+        w->unk_8C = gSineTable[(w->unk_94 >> 8) & 0xFF] * 80 + gUnk_09033FF4[0][0];
+        w->unk_90 = -gSineTable[((w->unk_94 >> 8) & 0xFF) + 0x40] * 80 + gUnk_09033FF4[0][1];
+        w->x = gSineTable[0x20] * (w->unk_84 >> 8) + w->unk_8C;
+        w->y = -gSineTable[0x60] * (w->unk_84 >> 8) + w->unk_90;
         break;
     case 2:
-        w->unk_8C = gSineTable[(w->angle >> 8) & 0xFF] * 80 + gUnk_0903401C[0][0];
-        w->unk_90 = -gSineTable[((w->angle >> 8) & 0xFF) + 0x40] * 80 + gUnk_0903401C[0][1];
-        w->unk_4C = gSineTable[0xE0] * (w->unk_84 >> 8) + w->unk_8C;
-        w->unk_50 = -gSineTable[0x120] * (w->unk_84 >> 8) + w->unk_90;
+        w->unk_8C = gSineTable[(w->unk_94 >> 8) & 0xFF] * 80 + gUnk_0903401C[0][0];
+        w->unk_90 = -gSineTable[((w->unk_94 >> 8) & 0xFF) + 0x40] * 80 + gUnk_0903401C[0][1];
+        w->x = gSineTable[0xE0] * (w->unk_84 >> 8) + w->unk_8C;
+        w->y = -gSineTable[0x120] * (w->unk_84 >> 8) + w->unk_90;
         break;
     }
 }
@@ -2641,7 +2649,9 @@ void func_08095A5C(UnkStruct_08095A5C* p) {
     p->unk_00 = gSineTable[(u8)p->angle] >> 8;
     p->angle += 16;
 }
-void func_08095A78(UnkStruct_08095A5C* p, void* a, u8 b, u8 c) {
+void func_08095A78(UnkStruct_08095A5C* p, void* a, u8 b, s32 count) {
+    u8 c = count;
+
     AnimInit(&p->anim, gUnk_09EE7588[b], gUnk_09EE7598[b]);
 
     if ((s8)c >= 0) {
@@ -2652,11 +2662,11 @@ void func_08095A78(UnkStruct_08095A5C* p, void* a, u8 b, u8 c) {
 
     p->gfx3 = AnimGetGfx(&p->anim);
 }
-void func_08095AD8(UnkStruct_08095A5C* p, u16 a) {
+void func_08095AD8(UnkStruct_08095A5C* p, s32 count) {
     void* gfx;
 
-    if (a <= 18) {
-        AnimStart(&p->anim, a, 0);
+    if ((u16)count <= 18) {
+        AnimStart(&p->anim, count, 0);
         gfx = AnimGetGfx(&p->anim);
     } else {
         gfx = 0;
@@ -2664,21 +2674,21 @@ void func_08095AD8(UnkStruct_08095A5C* p, u16 a) {
 
     p->gfx3 = gfx;
 }
-s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w) {
-    if (w->unk_9C > 0 && w->unk_A2 == 1) {
-        switch (w->unk_40) {
+s32 func_08095B04(UnkStruct_08095A5C* p, CardDisplayWork* w) {
+    if ((s16)w->unk_9C > 0 && w->unk_A2 == 1) {
+        switch (w->args.unk_08) {
         case 1:
-            ApproachValue(&p->unk_04, -0x3000, (u16)w->unk_9C);
+            ApproachValue(&p->unk_04, -0x3000, w->unk_9C);
             break;
         case 2:
-            ApproachValue(&p->unk_04, 0x12000, (u16)w->unk_9C);
+            ApproachValue(&p->unk_04, 0x12000, w->unk_9C);
             break;
         }
     } else {
         p->unk_04 = 0;
     }
 }
-void func_08095B50(UnkStruct_08095A5C* p, ReloadGageWork* w, u8 idx) {
+void func_08095B50(UnkStruct_08095A5C* p, CardDisplayWork* w, u8 idx) {
     p->unk_0D = 2;
     AnimInit(&p->anim2, gUnk_09EE75C8[idx], gUnk_09EE75B8[idx]);
     AnimStart(&p->anim2, 1, 1);
@@ -2687,15 +2697,15 @@ void func_08095B50(UnkStruct_08095A5C* p, ReloadGageWork* w, u8 idx) {
     AnimStart(&p->anim3, 2, 1);
     p->gfx2 = gUnk_09EE75B8[idx][6];
 }
-void func_08095BAC(UnkStruct_08095A5C* p) {
+void func_08095BAC(UnkStruct_08095A5C* p, CardDisplayWork* w) {
     p->gfx = AnimUpdate(&p->anim2);
     p->gfx2 = AnimUpdate(&p->anim3);
 }
-void func_08095BC8(UnkStruct_08095A5C* p, ReloadGageWork* w) {
-    p->gfx = gUnk_09EE75B8[w->unk_46][3];
-    p->gfx2 = gUnk_09EE75B8[w->unk_46][w->unk_A0 + 2];
+void func_08095BC8(UnkStruct_08095A5C* p, CardDisplayWork* w) {
+    p->gfx = gUnk_09EE75B8[w->args.unk_0E][3];
+    p->gfx2 = gUnk_09EE75B8[w->args.unk_0E][w->unk_A0 + 2];
 }
-void func_08095C00(UnkStruct_08095A5C* p) {
+void func_08095C00(UnkStruct_08095A5C* p, CardDisplayWork* w) {
     if (p->unk_0D <= 3) {
         p->unk_0D++;
     }
@@ -2706,31 +2716,31 @@ void func_08095C20(UnkStruct_08095A5C* p) {
     p->unk_0D = 2;
 }
 void* func_08095C28(CardBattleWork* w, u16 b, void* pool, u8 mode) {
-    ReloadGageArgs args;
+    CardDisplayArgs args;
 
-    args.unk_00 = &w->unk_54[w->unk_B8];
-    args.unk_04 = 0;
+    args.pool = &w->unk_54[w->unk_B8];
+    args.slot = 0;
 
     switch (mode) {
     case 1:
         if (gBtlWork->unk_0F4 == 10) {
-            args.unk_0C = b - 2;
+            args.index = b - 2;
         } else {
-            args.unk_0C = b;
+            args.index = b;
         }
         break;
     case 2:
         if (gUnk_02039B9C->unk_0F4 == 10) {
-            args.unk_0C = b - 2;
+            args.index = b - 2;
         } else {
-            args.unk_0C = b;
+            args.index = b;
         }
         break;
     }
 
     args.unk_08 = mode;
     args.unk_0E = w->unk_B8;
-    return ((void**)TaskCreate(pool, &gTaskDescReloadGage, &args))[1];
+    return TaskCreate(pool, &gTaskDescReloadGage, &args)->work;
 }
 
 Mode gModeWORLDSELECT = {
@@ -3091,7 +3101,7 @@ TaskDesc gTaskDescReloadGage = {
     (TaskUpdateFunc)Reload_Gage_1,
     (TaskFunc)Reload_Gage_2,
     (TaskFunc)Reload_Gage_3,
-    0xA8,
+    sizeof(CardDisplayWork),
 };
 
 void* gUnk_09EE7578[4] = {

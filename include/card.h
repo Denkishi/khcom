@@ -1036,15 +1036,6 @@ typedef struct UnkStruct_08095A5C {
 
 typedef char UnkStruct_08095A5C_size[(sizeof(UnkStruct_08095A5C) == 0x68) ? 1 : -1];
 
-typedef struct ReloadGageArgs {
-    void* unk_00;
-    void* unk_04;
-    s32 unk_08;
-    u16 unk_0C;
-    u8 unk_0E;
-    u8 unk_0F;
-} ReloadGageArgs;
-
 typedef struct UnkStruct_02034AD4 {
     u8 unk_00;
     u8 unk_01;
@@ -1153,48 +1144,6 @@ typedef struct PrizeCardWork {
     u8 unk_FB;
     u8 unk_FC[0x04];
 } PrizeCardWork;
-
-typedef struct ReloadGageWork {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* tiles4;
-    void* tiles5;
-    void* palette;
-    u8 unk_18[0x04];
-    ListPool* pool;
-    UnkStruct_08095A5C* unk_20;
-    TaskPool tasks;
-    ListPool* pool2;
-    void* unk_3C;
-    u32 unk_40;
-    u8 unk_44[0x02];
-    u8 unk_46;
-    u8 unk_47[0x05];
-    s32 unk_4C;
-    s32 unk_50;
-    s32 unk_54;
-    s32 unk_58;
-    u8 unk_5C[0x08];
-    ListNode node;
-    u32 flags;
-    s32 unk_7C;
-    s32 unk_80;
-    s32 unk_84;
-    s32 unk_88;
-    s32 unk_8C;
-    s32 unk_90;
-    s32 angle;
-    s32 targetAngle;
-    s16 unk_9C;
-    u8 unk_9E;
-    u8 unk_9F;
-    u8 unk_A0;
-    u8 unk_A1;
-    u8 unk_A2;
-    u8 unk_A3;
-    u8 unk_A4[0x04];
-} ReloadGageWork;
 
 typedef struct UnkStruct_08096C38_Item {
     u16 unk_00;

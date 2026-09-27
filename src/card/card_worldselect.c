@@ -90,7 +90,10 @@ void func_08093708(MapSelectWork* w);
 s32 func_08093838(MapSelectWork* w);
 void func_08093D28(u16 a, MapSelectWork* w);
 void func_08093F5C(MapSelectWork* w);
+void func_08094DA8(MapcardWork* w);
 void func_08094DEC(MapcardWork* w);
+u8 func_08094E4C(MapcardWork* w);
+MapcardWork* CreateMapCard(MapcardArgs* args, TaskPool* pool);
 void func_08094E90(MapcardWork* w);
 s32 func_08095B04(UnkStruct_08095A5C* p, ReloadGageWork* w);
 void func_08095C20(UnkStruct_08095A5C* p);
@@ -237,7 +240,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     InitTextSlots(w->textSlots, 48);
     if (w->card != 0) {
         w->prevCard = w->card;
-        w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), w->textSlots);
+        w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->args.unk_00].unk_20), w->textSlots);
     }
     w->unk_244 = 0x19100;
     FadeSetPaletteExcluded((u16)(w->palette3->index + 16), 1);
@@ -312,7 +315,7 @@ u8 func_0809217C(MapSelectWork* w, void* a) {
             TaskCreate(&w->tasks, &gTaskDescSELMAPEVKEY, &w->eventKeyArgs)->work;
     }
 
-    func_08093C44(w->card->unk_20, w);
+    func_08093C44(w->card->args.unk_00, w);
     SetTaskUpdate(a, (TaskUpdateFunc)func_08092234);
     return 1;
 }
@@ -400,8 +403,8 @@ u8 func_080923E0(MapSelectWork* w, void* a) {
         }
 #endif
         LoadBgMap(1, &gUnk_0960F2B8[0x1800], 0x800);
-        func_08093D28(w->card->unk_20, w);
-        v = func_08093E34(w->card->unk_20, w);
+        func_08093D28(w->card->args.unk_00, w);
+        v = func_08093E34(w->card->args.unk_00, w);
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809254C);
         ReleaseObjTiles(w->tiles);
         w->tiles = AllocObjTiles(0x1E0, 0);
@@ -492,21 +495,21 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         break;
     case A_BUTTON:
-        n = (u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel].unk_20);
+        n = (u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20);
 
         if (n == 1) {
-            if (gUnk_0203A8C0[w->card->unk_20 + (s16)sel] != 0) {
+            if (gUnk_0203A8C0[w->card->args.unk_00 + (s16)sel] != 0) {
                 if (w->unk_2BE == 1) {
                     m4aSongNumStart(SONG_SYS_KETEI2);
 
-                    if (func_08093B08(w->card->unk_20) == 0) {
+                    if (func_08093B08(w->card->args.unk_00) == 0) {
                         w->card->unk_74 = sel;
                         w->card->unk_6C |= 0x40;
                     }
 
-                    RemoveMapCard(w->card->unk_20 + sel);
+                    RemoveMapCard(w->card->args.unk_00 + sel);
 
-                    if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->unk_20 + (s16)sel].unk_20) == 1) {
+                    if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20) == 1) {
                         w->unk_2DA = func_080E8D00();
                         w->eventKey->unk_122++;
                         w->eventKey->unk_11A = 8;
@@ -525,10 +528,10 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
                         }
                     }
 
-                    func_08093C44(w->card->unk_20, w);
-                    func_08093D28(w->card->unk_20, w);
+                    func_08093C44(w->card->args.unk_00, w);
+                    func_08093D28(w->card->args.unk_00, w);
 
-                    if ((s8)func_08093E34(w->card->unk_20, w) == -1) {
+                    if ((s8)func_08093E34(w->card->args.unk_00, w) == -1) {
 #ifdef VERSION_EU
                         LoadBgTiles(1, gUnk_09508098, 0x2020);
 
@@ -563,7 +566,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
                 w->card->unk_74 = sel;
                 w->card->unk_6C |= 0x40;
-                RemoveMapCard(w->card->unk_20 + sel);
+                RemoveMapCard(w->card->args.unk_00 + sel);
                 *w->unk_294 = 2;
                 w->unk_28F = 16;
                 w->unk_290 = 16;
@@ -671,12 +674,12 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
     switch (keys & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | L_BUTTON | R_BUTTON)) {
     case A_BUTTON:
         if (w->card != 0) {
-            if (w->card->unk_20 >= 220) {
-                if ((u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->unk_20 + 1].unk_20) == 1) {
-                    if (gUnk_0203A8C0[w->card->unk_20 + 1] != 0) {
+            if (w->card->args.unk_00 >= 220) {
+                if ((u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
+                    if (gUnk_0203A8C0[w->card->args.unk_00 + 1] != 0) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
-                        RemoveMapCard(w->card->unk_20 + 1);
-                        if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->unk_20 + 1].unk_20) == 1) {
+                        RemoveMapCard(w->card->args.unk_00 + 1);
+                        if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
                             w->unk_2DA = func_080E8D00();
                             w->eventKey->unk_122++;
                             w->eventKey->unk_11A = 8;
@@ -702,7 +705,7 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
                     }
                 }
             } else {
-                if (func_08093B08(w->card->unk_20) != 0) {
+                if (func_08093B08(w->card->args.unk_00) != 0) {
                     for (p = ListPoolFirst(&w->cards); p != 0; p = ListPoolNext(&p->node)) {
                         if (w->card != p) {
                             p->unk_6C &= 0xFFFD;
@@ -743,8 +746,8 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
     if (w->unk_298 == 0) {
         if (w->card != w->prevCard) {
             if (w->card != 0) {
-                w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->unk_20].unk_20), w->textSlots);
-                func_08093C44(w->card->unk_20, w);
+                w->unk_287[0] = LoadTextSlots(GetRoomName(gUnk_09EE4C80[w->card->args.unk_00].unk_20), w->textSlots);
+                func_08093C44(w->card->args.unk_00, w);
             } else {
                 w->unk_287[0] = 0;
                 w->unk_287[1] = 0;
@@ -811,7 +814,7 @@ void MapSelect_2(MapSelectWork* w) {
                    w->tiles3, w->palette3, 0, 0, 80);
     }
     if (w->unk_2BE == 1) {
-        switch (gUnk_09EE4C80[w->card->unk_20].backIndex) {
+        switch (gUnk_09EE4C80[w->card->args.unk_00].backIndex) {
         case 0:
             break;
         case 2:
@@ -897,8 +900,8 @@ void func_0809332C(MapSelectWork* w) {
         args.unk_01 = i;
         args.unk_02 = w->unk_27C;
         args.unk_03 = q[i].unk_02;
-        args.unk_08 = &w->cards;
-        args.unk_04 = w;
+        args.pool = &w->cards;
+        args.parent = w;
         CreateMapCard(&args, &w->tasks);
     }
 }
@@ -1838,7 +1841,7 @@ void func_08094548(MapSelectWork* w) {
     w->card = n;
 
     while (n != 0) {
-        n->unk_21--;
+        n->args.unk_01--;
 
         if (i <= 5) {
             n->x = gUnk_09EE7520[i] << 8;
@@ -1870,8 +1873,8 @@ void Mapcard_0(MapcardWork* w, MapcardArgs* a) {
     w->unk_04 = 0;
     w->tiles2 = 0;
     w->palette = 0;
-    *(MapcardArgs*)&w->unk_20 = *a;
-    w->x = w->unk_21 <= 5 ? gUnk_09EE7520[w->unk_21] << 8 : -0x6400;
+    w->args = *a;
+    w->x = w->args.unk_01 <= 5 ? gUnk_09EE7520[w->args.unk_01] << 8 : -0x6400;
     w->y = 0x10500;
     w->unk_6A = 50;
     w->unk_5C = 0;
@@ -1884,8 +1887,8 @@ void Mapcard_0(MapcardWork* w, MapcardArgs* a) {
     w->scale = 0x100;
     w->unk_71 = 0;
     w->unk_72 = 0;
-    w->unk_74 = gUnk_09EE4C80[w->unk_20].unk_22;
-    w->cardDef = &gUnk_09EE4C80[w->unk_20];
+    w->unk_74 = gUnk_09EE4C80[w->args.unk_00].unk_22;
+    w->cardDef = &gUnk_09EE4C80[w->args.unk_00];
     w->cardBack = &gUnk_09EE4BF4[w->cardDef->backIndex];
     func_08094E90(w);
     func_08094DA8(w);
@@ -1954,7 +1957,7 @@ u8 func_080947B4(MapcardWork* w, void* a) {
 }
 
 u8 func_0809486C(MapcardWork* w, void* a) {
-    ApproachValue(&w->x, gUnk_09EE7520[w->unk_21 % 6] << 8, w->unk_6F);
+    ApproachValue(&w->x, gUnk_09EE7520[w->args.unk_01 % 6] << 8, w->unk_6F);
     w->unk_6F--;
 
     if (w->unk_6F == 0) {
@@ -2050,9 +2053,12 @@ u8 func_08094A18(MapcardWork* w, void* a) {
 
     {
         u8* q = &w->angle;
+        u16* scale;
+
         *q += 24;
-        t = *(u16*)(q - 6);
-        *(u16*)(q - 6) = (s16)t > 25 ? t - 12 : 25;
+        scale = (u16*)(q - (offsetof(MapcardWork, angle) - offsetof(MapcardWork, scale)));
+        t = *scale;
+        *scale = (s16)t > 25 ? t - 12 : 25;
     }
     w->x += (w->unk_54 * w->unk_60) >> 8;
     w->y += (w->unk_58 * w->unk_60) >> 8;
@@ -2061,19 +2067,19 @@ u8 func_08094A18(MapcardWork* w, void* a) {
     w->unk_60 -= w->unk_5C;
     w->unk_5C += 2;
 
-    if ((*(u8**)((u8*)w + 0x24))[0x2BE] != 1) {
+    if (w->args.parent->unk_2BE != 1) {
         if (d <= 0x7FF) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
             w->unk_6C = f;
-            func_08093BEC(&gUnk_09EE4C80[w->unk_20 + w->unk_74].unk_20);
+            func_08093BEC(&gUnk_09EE4C80[w->args.unk_00 + w->unk_74].unk_20);
         }
     } else {
-        if (d <= 0x7FF && (*(u8**)((u8*)w + 0x24))[0x2DA] == 0) {
+        if (d <= 0x7FF && w->args.parent->unk_2DA == 0) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
             w->unk_6C = f;
-            func_08093BEC(&gUnk_09EE4C80[w->unk_20 + w->unk_74].unk_20);
+            func_08093BEC(&gUnk_09EE4C80[w->args.unk_00 + w->unk_74].unk_20);
         }
     }
 
@@ -2106,13 +2112,13 @@ void Mapcard_2(MapcardWork* w) {
                 aff = AllocObjAffine(w->angle, (s16)w->scale, (s16)w->scale, 1);
             }
 
-            if (gUnk_09EE4C80[w->unk_20].backIndex == 4) {
-                DrawSprite(w->x >> 8, y, gMapCardUiResources.gfx, gMapCardUiResources.tiles, *(void**)&w->unk_10[4], aff, 0,
+            if (gUnk_09EE4C80[w->args.unk_00].backIndex == 4) {
+                DrawSprite(w->x >> 8, y, gMapCardUiResources.gfx, gMapCardUiResources.tiles, w->palette2, aff, 0,
                            (u16)(w->unk_6A - 2));
             }
 
             sprite = w->cardBack->sprites[0];
-            DrawSprite(w->x >> 8, y, sprite, *(void**)&w->unk_10[0], *(void**)&w->unk_10[4], aff, 0, w->unk_6A);
+            DrawSprite(w->x >> 8, y, sprite, w->tiles3, w->palette2, aff, 0, w->unk_6A);
             sprite = w->cardDef->sprites[0];
             DrawSprite(w->x >> 8, y, sprite, w->tiles2, w->palette, aff, 0, (u16)(w->unk_6A + 1));
         }
@@ -2123,16 +2129,16 @@ void Mapcard_3(MapcardWork* w) {
     if (w->unk_6C & 1) {
         ReleaseObjTiles(w->tiles2);
         ReleaseObjPalette(w->palette);
-        ReleaseObjTiles(*(void**)&w->unk_10[0]);
-        ReleaseObjPalette(*(void**)&w->unk_10[4]);
+        ReleaseObjTiles(w->tiles3);
+        ReleaseObjPalette(w->palette2);
     }
 }
 
-u8 func_08094CB0(s32* p) {
-    if (p[19] >= -4096) {
-        if (p[19] <= 0x10000) {
-            if (p[20] >= -5120) {
-                if (p[20] <= 0xC000) {
+u8 func_08094CB0(MapcardWork* w) {
+    if (w->x >= -4096) {
+        if (w->x <= 0x10000) {
+            if (w->y >= -5120) {
+                if (w->y <= 0xC000) {
                     return 1;
                 }
             }
@@ -2143,21 +2149,21 @@ u8 func_08094CB0(s32* p) {
 }
 
 void func_08094CE4(MapcardWork* w) {
-    UnkStruct_08094CE4_A* a;
-    UnkStruct_08094CE4_B* b;
+    MapCardDef* a;
+    MapCardBackDef* b;
     u16 t;
 
-    if (func_08094CB0((s32*)w)) {
+    if (func_08094CB0(w)) {
         if (!(w->unk_6C & 1)) {
-            a = (UnkStruct_08094CE4_A*)w->cardDef;
-            b = (UnkStruct_08094CE4_B*)w->cardBack;
+            a = w->cardDef;
+            b = w->cardBack;
             w->tiles2 = LoadObjTiles(a->tiles, a->tilesSize);
             w->palette = LoadObjPalette(a->palette, 32);
-            *(void**)&w->unk_10[0] = LoadObjTiles(b->tiles, b->tilesSize);
-            *(void**)&w->unk_10[4] = LoadObjPalette(b->palette, 32);
+            w->tiles3 = LoadObjTiles(b->tiles, b->tilesSize);
+            w->palette2 = LoadObjPalette(b->palette, 32);
             w->tiles = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-            FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette)->index + 16, 1);
-            FadeSetPaletteExcluded(((UnkStruct_080038C8*)*(void**)&w->unk_10[4])->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette2->index + 16, 1);
             t = w->unk_6C | 1;
             w->unk_6C = t;
         }
@@ -2165,8 +2171,8 @@ void func_08094CE4(MapcardWork* w) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjTiles(w->tiles2);
         ReleaseObjPalette(w->palette);
-        ReleaseObjTiles(*(void**)&w->unk_10[0]);
-        ReleaseObjPalette(*(void**)&w->unk_10[4]);
+        ReleaseObjTiles(w->tiles3);
+        ReleaseObjPalette(w->palette2);
         w->unk_6C &= ~1;
     }
 }
@@ -2204,12 +2210,12 @@ u8 func_08094E4C(MapcardWork* w) {
 
     return 0;
 }
-void* CreateMapCard(void* a, void* b) {
-    return ((void**)TaskCreate(b, &gTaskDescMapcard, a))[1];
+MapcardWork* CreateMapCard(MapcardArgs* args, TaskPool* pool) {
+    return TaskCreate(pool, &gTaskDescMapcard, args)->work;
 }
 void func_08094E90(MapcardWork* w) {
-    ListNodeInit(&w->node, w->pool, w);
-    ListPoolAppend(&w->node, w->pool);
+    ListNodeInit(&w->node, w->args.pool, w);
+    ListPoolAppend(&w->node, w->args.pool);
 }
 void Reload_Gage_0(ReloadGageWork* w, ReloadGageArgs* a) {
     UnkStruct_08095A5C* d;
@@ -3076,7 +3082,7 @@ TaskDesc gTaskDescMapcard = {
     (TaskUpdateFunc)Mapcard_1,
     (TaskFunc)Mapcard_2,
     (TaskFunc)Mapcard_3,
-    0x78,
+    sizeof(MapcardWork),
 };
 
 TaskDesc gTaskDescReloadGage = {

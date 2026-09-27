@@ -971,19 +971,28 @@ typedef struct DarkPointWork {
 
 typedef char DarkPointWork_sizechk[(sizeof(struct DarkPointWork) == 0x10) ? 1 : -1];
 
+typedef struct MapcardArgs {
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02;
+    u8 unk_03;
+    struct MapSelectWork* parent;
+    ListPool* pool;
+    u8 unk_0C[0x0C];
+} MapcardArgs;
+
+typedef char MapcardArgs_size[(sizeof(MapcardArgs) == 0x18) ? 1 : -1];
+
 typedef struct MapcardWork {
     void* tiles;
     void* unk_04;
     void* tiles2;
-    void* palette;
-    u8 unk_10[0x08];
+    ObjPalette* palette;
+    void* tiles3;
+    ObjPalette* palette2;
     MapCardDef* cardDef;
     MapCardBackDef* cardBack;
-    u8 unk_20;
-    u8 unk_21;
-    u8 unk_22[0x06];
-    ListPool* pool;
-    u8 unk_2C[0x0C];
+    MapcardArgs args;
     ListNode node;
     s32 x;
     s32 y;
@@ -1005,6 +1014,8 @@ typedef struct MapcardWork {
     u8 unk_75[0x03];
 } MapcardWork;
 
+typedef char MapcardWork_size[(sizeof(MapcardWork) == 0x78) ? 1 : -1];
+
 typedef struct UnkStruct_08095A5C {
     s16 unk_00;
     u16 angle;
@@ -1024,16 +1035,6 @@ typedef struct UnkStruct_08095A5C {
 } UnkStruct_08095A5C;
 
 typedef char UnkStruct_08095A5C_size[(sizeof(UnkStruct_08095A5C) == 0x68) ? 1 : -1];
-
-typedef struct MapcardArgs {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-    void* unk_04;
-    void* unk_08;
-    u8 unk_0C[0x0C];
-} MapcardArgs;
 
 typedef struct ReloadGageArgs {
     void* unk_00;
@@ -1771,20 +1772,6 @@ typedef struct CardMsgWinWork {
 } CardMsgWinWork;
 
 typedef char CardMsgWinWork_size[(sizeof(CardMsgWinWork) == 0x150) ? 1 : -1];
-
-typedef struct UnkStruct_08094CE4_A {
-    void* tiles;
-    void* palette;
-    u8 unk_08[0x10];
-    u16 tilesSize;
-} UnkStruct_08094CE4_A;
-
-typedef struct UnkStruct_08094CE4_B {
-    void* tiles;
-    void* palette;
-    u8 unk_08[0x0C];
-    u16 tilesSize;
-} UnkStruct_08094CE4_B;
 
 extern const s16 gUnk_090361B0[];
 extern const s16 gUnk_090361B8[];

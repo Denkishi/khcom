@@ -76,23 +76,23 @@ void task_status_0(StatusWork* work) {
     work->unk_1A = 0;
     work->unk_1C = 0;
     TaskPoolInit(&work->pool, 9);
-    TaskCreate(work, &gTaskDescStatusFriend, 0);
-    TaskCreate(work, &gTaskDescStatusSora, 0);
+    TaskCreate(&work->pool, &gTaskDescStatusFriend, 0);
+    TaskCreate(&work->pool, &gTaskDescStatusSora, 0);
 
     if (!(gGameState.flags & 8)) {
-        TaskCreate(work, &gTaskDescStatusTab, &work->unk_14);
-        TaskCreate(work, &gTaskDescStatusDeckname, &gUnk_02034F00);
+        TaskCreate(&work->pool, &gTaskDescStatusTab, &work->unk_14);
+        TaskCreate(&work->pool, &gTaskDescStatusDeckname, &gUnk_02034F00);
     }
-    TaskCreate(work, &gTaskDescStatusStocklist, &work->unk_14);
-    TaskCreate(work, &gTaskDescStatusScrollcursor, &work->unk_1C);
-    TaskCreate(work, &gTaskDescStatusMeswindow, &gUnk_02034F00);
+    TaskCreate(&work->pool, &gTaskDescStatusStocklist, &work->unk_14);
+    TaskCreate(&work->pool, &gTaskDescStatusScrollcursor, &work->unk_1C);
+    TaskCreate(&work->pool, &gTaskDescStatusMeswindow, &gUnk_02034F00);
 
     if (func_080D82D4() == 0) {
         work->unk_1A = ~work->unk_14;
     } else {
         work->unk_1A = 0;
     }
-    TaskCreate(work, &gTaskDescStatusCursor, &work->unk_1A);
+    TaskCreate(&work->pool, &gTaskDescStatusCursor, &work->unk_1A);
     gUnk_02034F02 = work->unk_1A + work->unk_1C;
 }
 
@@ -425,9 +425,9 @@ void task_status_sora_3(StatusSoraWork* work) {
 }
 
 void task_status_deckname_0(StatusDecknameWork* work, u8* arg) {
-    InitTextSlots(work, 10);
+    InitTextSlots(work->textSlots, 10);
     work->unk_58 = arg;
-    work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work);
+    work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
 }
 
@@ -437,12 +437,12 @@ u8 task_status_deckname_1(StatusDecknameWork* work) {
 
 void task_status_deckname_2(StatusDecknameWork* work) {
     if (*work->unk_58 == 0) {
-        DrawTextSlots(144, 142, work, work->palette, 4, work->textSlotCount);
+        DrawTextSlots(144, 142, work->textSlots, work->palette, 4, work->textSlotCount);
     }
 }
 
 void task_status_deckname_3(StatusDecknameWork* work) {
-    FreeTextSlots(work, 10);
+    FreeTextSlots(work->textSlots, 10);
     ReleaseObjPalette(work->palette);
 }
 
@@ -911,7 +911,7 @@ u8 task_status_meswindow_1(StatusMeswindowWork* work) {
                     work->unk_20 = GetStockMesDispTextIndex(work->task);
                     func_08000DE8(&work->pool, work->task);
                 }
-                work->task = CreateStockMesDispTask(work, func_080D85F8(work->unk_18), work->unk_20, 88, 98);
+                work->task = CreateStockMesDispTask(&work->pool, func_080D85F8(work->unk_18), work->unk_20, 88, 98);
                 func_0800FD68(work->unk_18);
             }
             TaskPoolUpdate(&work->pool);
@@ -934,9 +934,9 @@ void task_status_meswindow_3(StatusMeswindowWork* work) {
 }
 
 void task_status_message_0(StatusMessageWork* work, StatusMessageParam* arg) {
-    InitTextSlots(work, 100);
+    InitTextSlots(work->textSlots, 100);
     work->param = *arg;
-    work->textSlotCount = LoadTextSlots(work->param.unk_00, work);
+    work->textSlotCount = LoadTextSlots(work->param.unk_00, work->textSlots);
     work->palette = LoadObjPalette(gUnk_0984B1B8, 0x20);
 }
 
@@ -945,21 +945,21 @@ u8 task_status_message_1(StatusMessageWork* work) {
 }
 
 void task_status_message_2(StatusMessageWork* work) {
-    DrawTextSlots(work->param.x, work->param.y, work, work->palette, 3, work->textSlotCount);
+    DrawTextSlots(work->param.x, work->param.y, work->textSlots, work->palette, 3, work->textSlotCount);
 }
 
 void task_status_message_3(StatusMessageWork* work) {
-    FreeTextSlots(work, 100);
+    FreeTextSlots(work->textSlots, 100);
     ReleaseObjPalette(work->palette);
 }
 
-s32 CreateStatusMessageTask(void* pool, s16 x, s16 y, void* p) {
+Task* CreateStatusMessageTask(void* pool, s16 x, s16 y, void* p) {
     StatusMessageParam param;
 
     param.x = x;
     param.y = y;
     param.unk_00 = p;
-    TaskCreate(pool, &gTaskDescStatusMessage, &param);
+    return TaskCreate(pool, &gTaskDescStatusMessage, &param);
 }
 
 void task_status_friend_0(StatusFriendWork* work) {
@@ -1028,9 +1028,9 @@ u16 func_080D8B84(void** a, void** b, void** c) {
     return count;
 }
 
-void stock_mes_disp_0(StockMesDispWork* work, StockMesDispParam* arg) {
+void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     gStockMesDispWork = (u8*)work;
-    *(StockMesDispParam*)&work->x = *arg;
+    *(StatusMesParam*)&work->x = *arg;
     work->textCount = GetCardHelpTextCount(work->helpIndex);
 
     if (work->textIndex >= work->textCount - 1) {
@@ -1039,7 +1039,7 @@ void stock_mes_disp_0(StockMesDispWork* work, StockMesDispParam* arg) {
     work->tiles = func_080D85C0(work->helpIndex);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     TaskPoolInit(&work->tasks, 1);
-    work->task = (void*)CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16,
+    work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16,
                                         GetCardHelpText(work->helpIndex, work->textIndex));
     work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6948, 2), gUnk_097A2CF6);
     work->palette2 = LoadObjPalette(gUnk_0984B258, 0x20);
@@ -1067,7 +1067,7 @@ u8 stock_mes_disp_1(StockMesDispWork* work) {
     if (changed) {
         m4aSongNumStart(SONG_SYS_CANSEL);
         func_08000DE8(&work->tasks, work->task);
-        work->task = (void*)CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16, GetCardHelpText(work->helpIndex, work->textIndex));
+        work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16, GetCardHelpText(work->helpIndex, work->textIndex));
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -1109,7 +1109,7 @@ void* CreateStockMesDispTask(void* pool, u16 b, u8 c, u16 d, s32 e) {
 }
 
 u8 GetStockMesDispTextIndex(void* a) {
-    return gStockMesDispWork[0x40];
+    return ((StockMesDispWork*)gStockMesDispWork)->textIndex;
 }
 
 TaskDesc gTaskDescStatus = {

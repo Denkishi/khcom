@@ -79,7 +79,7 @@ typedef struct StatusSoraWork {
 } StatusSoraWork;
 
 typedef struct StatusDecknameWork {
-    u8 textSlots[0x50];
+    TextSlot textSlots[10];
     void* palette;
     u8 textSlotCount;
     u8 unk_55[0x3];
@@ -127,7 +127,7 @@ typedef struct StatusMessageParam {
 } StatusMessageParam;
 
 typedef struct StatusMessageWork {
-    u8 textSlots[0x320];
+    TextSlot textSlots[100];
     u8 textSlotCount;
     u8 unk_321[3];
     void* palette;
@@ -180,11 +180,6 @@ typedef struct StockMesDispWork {
     u8 textCount;
     u8 unk_45[3];
 } StockMesDispWork;
-
-typedef struct StockMesDispParam {
-    u32 unk_00;
-    u32 unk_04;
-} StockMesDispParam;
 
 typedef struct StatusWork {
     TaskPool pool;

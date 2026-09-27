@@ -409,4 +409,4 @@ s32 task_btl_map_1(BtlMapWork* work) {
     return 1;
 }
 
-TaskDesc gTaskDescBtlMap = { "task_btl_map", task_btl_map_0, task_btl_map_1, 0, 0, sizeof(BtlMapWork) };
+TaskDesc gTaskDescBtlMap = { "task_btl_map", (TaskInitFunc)task_btl_map_0, (TaskUpdateFunc)task_btl_map_1, 0, 0, sizeof(BtlMapWork) };

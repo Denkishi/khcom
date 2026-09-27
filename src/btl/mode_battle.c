@@ -569,4 +569,4 @@ void mode_battle_2(void) {
 Mode gModeLang = { "mode_lang", eu_08009CD0, eu_08009E10, eu_0800A0DC };
 #endif
 
-Mode gModeBattle = { "mode_battle", mode_battle_0, mode_battle_1, mode_battle_2 };
+Mode gModeBattle = { "mode_battle", (ModeInitFunc)mode_battle_0, mode_battle_1, mode_battle_2 };

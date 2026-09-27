@@ -1943,20 +1943,20 @@ s32 task_btl_start_1(BtlStartWork* work) {
     return 1;
 }
 
-TaskDesc gTaskDescBtlShadow = { "task_btl_shadow", task_btl_shadow_0, task_btl_shadow_1, task_btl_shadow_2, task_btl_shadow_3, sizeof(BtlShadowWork) };
+TaskDesc gTaskDescBtlShadow = { "task_btl_shadow", (TaskInitFunc)task_btl_shadow_0, (TaskUpdateFunc)task_btl_shadow_1, (TaskFunc)task_btl_shadow_2, (TaskFunc)task_btl_shadow_3, sizeof(BtlShadowWork) };
 
-TaskDesc gTaskDescBtlHpply = { "task_btl_hpply", task_btl_hpply_0, task_btl_hpply_1, task_btl_hpply_2, task_btl_hpply_3, sizeof(BtlHpplyWork) };
+TaskDesc gTaskDescBtlHpply = { "task_btl_hpply", (TaskInitFunc)task_btl_hpply_0, (TaskUpdateFunc)task_btl_hpply_1, (TaskFunc)task_btl_hpply_2, (TaskFunc)task_btl_hpply_3, sizeof(BtlHpplyWork) };
 
-TaskDesc gTaskDescBtlHpenm = { "task_btl_hpenm", task_btl_hpenm_0, task_btl_hpenm_1, task_btl_hpenm_2, task_btl_hpenm_3, sizeof(BtlHpenmWork) };
+TaskDesc gTaskDescBtlHpenm = { "task_btl_hpenm", (TaskInitFunc)task_btl_hpenm_0, (TaskUpdateFunc)task_btl_hpenm_1, (TaskFunc)task_btl_hpenm_2, (TaskFunc)task_btl_hpenm_3, sizeof(BtlHpenmWork) };
 
-TaskDesc gTaskDescBtlPause = { "task_btl_pause", task_btl_pause_0, task_btl_pause_1, task_btl_pause_2, task_btl_pause_3, sizeof(BtlPauseWork) };
+TaskDesc gTaskDescBtlPause = { "task_btl_pause", (TaskInitFunc)task_btl_pause_0, (TaskUpdateFunc)task_btl_pause_1, (TaskFunc)task_btl_pause_2, (TaskFunc)task_btl_pause_3, sizeof(BtlPauseWork) };
 
-TaskDesc gTaskDescBtlPop = { "task_btl_pop", task_btl_pop_0, task_btl_pop_1, task_btl_pop_2, task_btl_pop_3, sizeof(BtlPopWork) };
+TaskDesc gTaskDescBtlPop = { "task_btl_pop", (TaskInitFunc)task_btl_pop_0, (TaskUpdateFunc)task_btl_pop_1, (TaskFunc)task_btl_pop_2, (TaskFunc)task_btl_pop_3, sizeof(BtlPopWork) };
 
-TaskDesc gTaskDescBtlEscape = { "task_btl_escape", task_btl_escape_0, task_btl_escape_1, task_btl_escape_2, task_btl_escape_3, sizeof(BtlEscapeWork) };
+TaskDesc gTaskDescBtlEscape = { "task_btl_escape", (TaskInitFunc)task_btl_escape_0, (TaskUpdateFunc)task_btl_escape_1, (TaskFunc)task_btl_escape_2, (TaskFunc)task_btl_escape_3, sizeof(BtlEscapeWork) };
 
-TaskDesc gTaskDescBtlPrize = { "task_btl_prize", task_btl_prize_0, task_btl_prize_1, task_btl_prize_2, task_btl_prize_3, sizeof(BtlPrizeWork) };
+TaskDesc gTaskDescBtlPrize = { "task_btl_prize", (TaskInitFunc)task_btl_prize_0, (TaskUpdateFunc)task_btl_prize_1, (TaskFunc)task_btl_prize_2, (TaskFunc)task_btl_prize_3, sizeof(BtlPrizeWork) };
 
-TaskDesc gTaskDescBtlPremire = { "task_btl_premire", task_btl_premire_0, task_btl_premire_1, task_btl_premire_2, task_btl_premire_3, sizeof(BtlPremireWork) };
+TaskDesc gTaskDescBtlPremire = { "task_btl_premire", (TaskInitFunc)task_btl_premire_0, (TaskUpdateFunc)task_btl_premire_1, (TaskFunc)task_btl_premire_2, (TaskFunc)task_btl_premire_3, sizeof(BtlPremireWork) };
 
-TaskDesc gTaskDescBtlStart = { "task_btl_start", task_btl_start_0, task_btl_start_1, 0, 0, sizeof(BtlStartWork) };
+TaskDesc gTaskDescBtlStart = { "task_btl_start", (TaskInitFunc)task_btl_start_0, (TaskUpdateFunc)task_btl_start_1, 0, 0, sizeof(BtlStartWork) };

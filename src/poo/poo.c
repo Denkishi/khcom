@@ -6970,7 +6970,7 @@ void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* w) {
 }
 
 u8 task_poo_cabbageAfterEvent_1(PooCabbageAfterEventWork* w) {
-    *(vu32*)&w->palette;
+    *(void* volatile*)&w->palette;
     return 1;
 }
 

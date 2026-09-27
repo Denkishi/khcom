@@ -1372,14 +1372,12 @@ void ClearMapCardInventory(void) {
 }
 
 void InitMapCardInventory(void) {
-#ifdef VERSION_EU
-    s32 i;
-#endif
-
     ClearMapCardInventory();
 
-#ifdef VERSION_EU
     if (gUnk_03006C10 & 8) {
+#ifdef VERSION_EU
+        s32 i;
+
         AddMapCard(211);
         AddMapCard(191);
 
@@ -1393,14 +1391,10 @@ void InitMapCardInventory(void) {
         AddMapCard(231);
         AddMapCard(241);
         AddMapCard(251);
+#endif
     } else {
         AddMapCard(191);
     }
-#else
-    if (!(gUnk_03006C10 & 8)) {
-        AddMapCard(191);
-    }
-#endif
 }
 
 u8 func_08093BD4(void) {

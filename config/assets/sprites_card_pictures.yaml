@@ -14,26 +14,23 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_card_pictures.c
-    start: 0x09EE91B0
-    end: 0x09EEA16C
   - name: sprites_card_pictures_frames.s
     start: 0x09045240
     end: 0x0908BB54
+    data_start: 0x09EE91B0
+    data_end: 0x09EEA16C
   jp:
-  - name: sprites_card_pictures.c
-    start: 0x09EC07F4
-    end: 0x09EC1560
   - name: sprites_card_pictures_frames.s
     start: 0x090120E8
     end: 0x090473C4
+    data_start: 0x09EC07F4
+    data_end: 0x09EC1560
   eu:
-  - name: sprites_card_pictures.c
-    start: 0x09F74630
-    end: 0x09F75F84
   - name: sprites_card_pictures_frames.s
     start: 0x090D2060
     end: 0x09161E28
+    data_start: 0x09F74630
+    data_end: 0x09F75F84
 entries:
 - name: gCardItm01Frames
   record: SpriteTable

@@ -498,16 +498,16 @@ u8 task_hum_cloud_1(CloudWork* work) {
     case 17: {
         AnimChangeWithDef(gHumCloudAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
         if (gBtlWork->flags & 0x20000000) {
-            if ((u8)func_08049F50((struct PcCharaWork*)w)) {
+            if ((u8)func_08049F50(w)) {
                 break;
             }
         }
         if ((act->x - x >= 0) ? act->x - x <= 0x4FFF : x - act->x <= 0x4FFF) {
             if (x <= 0xFFFF) {
-                func_08049F24((struct PcCharaWork*)w, (gBtlWork->unk_0DC - 40) << 8,
+                func_08049F24(w, (gBtlWork->unk_0DC - 40) << 8,
                     (gBtlWork->unk_0DE + gBtlWork->unk_0E0) << 7);
             } else {
-                func_08049F24((struct PcCharaWork*)w, (gBtlWork->unk_0DA + 40) << 8,
+                func_08049F24(w, (gBtlWork->unk_0DA + 40) << 8,
                     (gBtlWork->unk_0DE + gBtlWork->unk_0E0) << 7);
             }
         }
@@ -524,12 +524,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
             break;
         }
         if (func_0800F4C8(&work->base, 40)) {
-            func_08049F24((struct PcCharaWork*)w, 0x10000,
+            func_08049F24(w, 0x10000,
                 (gBtlWork->unk_0DE + gBtlWork->unk_0E0) << 7);
             break;
         }
         if (gBtlWork->flags & 0x20000000) {
-            if ((u8)func_08049F50((struct PcCharaWork*)w)) {
+            if ((u8)func_08049F50(w)) {
                 break;
             }
         } else {
@@ -548,12 +548,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
         if ((u16)((u16)GetRandom() % 150) == 0) {
             if ((act->x - x >= 0) ? act->x - x > 70 : x - act->x > 70) {
-                func_08049EE4((struct PcCharaWork*)w, x, y);
+                func_08049EE4(w, x, y);
                 break;
             }
         }
         if (gBtlWork->flags & 0x20000000) {
-            if ((u8)func_08049F50((struct PcCharaWork*)w)) {
+            if ((u8)func_08049F50(w)) {
                 break;
             }
         } else {

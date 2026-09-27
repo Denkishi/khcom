@@ -40,39 +40,39 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
     return 1;
 }
 
-void func_08049E70(PcCharaWork* work, s16 a, s32 b) {
-    PcCharaWork* w = work;
-    BtlObj* obj = (BtlObj*)work->unk_040;
+void func_08049E70(CloudWork* work, s16 a, s32 b) {
+    CloudWork* w = work;
+    BtlObj* obj = &work->base.actor;
 
     if (obj->flags & 4) {
-        work->unk_15C = obj->x - (a << 8);
+        work->base.targetX = obj->x - (a << 8);
     } else {
-        work->unk_15C = obj->x + (a << 8);
+        work->base.targetX = obj->x + (a << 8);
     }
-    w->unk_160 = obj->y;
-    w->unk_170 = 0x19;
-    w->unk_150 = 0;
+    w->base.targetY = obj->y;
+    w->base.unk_170 = 0x19;
+    w->base.unk_150 = 0;
     work->unk_188 = -b;
-    work->unk_18C = 0;
+    work->state = 0;
 }
 
-void func_08049EE4(PcCharaWork* work, s32 a, s32 b) {
-    work->unk_15C = a;
-    work->unk_160 = b;
-    work->unk_170 = 0x19;
-    work->unk_150 = 0;
+void func_08049EE4(CloudWork* work, s32 a, s32 b) {
+    work->base.targetX = a;
+    work->base.targetY = b;
+    work->base.unk_170 = 0x19;
+    work->base.unk_150 = 0;
     work->unk_188 = -0x500;
     work->unk_190 = 0;
 }
 
-void func_08049F24(PcCharaWork* work, s32 a, s32 b) {
-    work->unk_15C = a;
-    work->unk_160 = b;
-    work->unk_170 = 0x21;
-    work->unk_150 = 0;
+void func_08049F24(CloudWork* work, s32 a, s32 b) {
+    work->base.targetX = a;
+    work->base.targetY = b;
+    work->base.unk_170 = 0x21;
+    work->base.unk_150 = 0;
 }
 
-s32 func_08049F50(PcCharaWork* work) {
+s32 func_08049F50(CloudWork* work) {
     s32 x;
     s32 y;
     BtlObj* obj;
@@ -80,7 +80,7 @@ s32 func_08049F50(PcCharaWork* work) {
     obj = gBtlWork->actor;
 
     if ((u16)GetRandom() % 60 == 0) {
-        func_0801C700(work->unk_040, &x, &y, 0);
+        func_0801C700(&work->base.actor, &x, &y, 0);
         func_0800F368(work, 1);
 
         if (func_0800F504(work, 0x100, 0x100, 0x100)) {
@@ -101,4 +101,11 @@ s32 func_08049F50(PcCharaWork* work) {
     return 0;
 }
 
-TaskDesc gTaskDescPcAcddmg = { "task_pc_acddmg", task_pc_acddmg_0, task_pc_acddmg_1, 0, 0, 0xC };
+TaskDesc gTaskDescPcAcddmg = {
+    "task_pc_acddmg",
+    (TaskInitFunc)task_pc_acddmg_0,
+    (TaskUpdateFunc)task_pc_acddmg_1,
+    0,
+    0,
+    sizeof(PcAcdDmgWork),
+};

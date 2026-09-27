@@ -512,6 +512,4 @@ u8 func_0800FF70(u16 a);
 
 s32 func_0805A574(s32 idx);
 
-struct PcCharaWork;
-
 #endif /* GUARD_HUM_H */

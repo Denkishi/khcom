@@ -220,7 +220,7 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
     u8 idx;
 
     zero = 0;
-    CpuSet((void*)&zero, w, 0x05000011);
+    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(RevCountWork) / 4);
     w->args = *a;
     idx = w->args.unk_0C;
     w->unk_24 = idx;
@@ -989,7 +989,7 @@ void func_08099FE8(ScrollBarWork* w, u16 b, u8 c) {
         w->unk_17 = c;
     }
 }
-s32 CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
+ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
     u16 args[5];
 
     args[0] = a;
@@ -997,7 +997,7 @@ s32 CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
     args[2] = c;
     args[3] = d;
     args[4] = e;
-    return (s32)((void**)TaskCreate(pool, &gTaskDescScrollbar, args))[1];
+    return TaskCreate(pool, &gTaskDescScrollbar, args)->work;
 }
 
 void* gUnk_09EE7698[4] = {
@@ -1044,7 +1044,7 @@ TaskDesc gTaskDescREVCOUNT = {
     (TaskUpdateFunc)REV_COUNT_1,
     (TaskFunc)REV_COUNT_2,
     (TaskFunc)REV_COUNT_3,
-    0x44,
+    sizeof(RevCountWork),
 };
 
 void* gUnk_09EE7708[3] = {
@@ -1098,5 +1098,5 @@ TaskDesc gTaskDescScrollbar = {
     (TaskUpdateFunc)scrollbar_1,
     (TaskFunc)scrollbar_2,
     (TaskFunc)scrollbar_3,
-    0x18,
+    sizeof(ScrollBarWork),
 };

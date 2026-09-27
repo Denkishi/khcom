@@ -22,7 +22,7 @@ u32 gUnk_0203C1E0[100] EWRAM_COMMON(16);
 u16 gUnk_0203C370 EWRAM_COMMON(4);
 s8 gUnk_0203C374 EWRAM_COMMON(4);
 u16 gUnk_0203C378 EWRAM_COMMON(4);
-u16* gUnk_0203C37C EWRAM_COMMON(4);
+Deck* gUnk_0203C37C EWRAM_COMMON(4);
 s8 gUnk_0203C380 EWRAM_COMMON(4);
 s8 gUnk_0203C384 EWRAM_COMMON(4);
 u16 gUnk_0203C388 EWRAM_COMMON(4);
@@ -32,7 +32,7 @@ u16* gUnk_0203C390 EWRAM_COMMON(4);
 u16 gUnkEu_0203C964 EWRAM_COMMON(4);
 #endif
 u16 gUnk_0203C394 EWRAM_COMMON(4);
-u16* gUnk_0203C398 EWRAM_COMMON(4);
+Deck* gUnk_0203C398 EWRAM_COMMON(4);
 #ifdef VERSION_EU
 u16 gUnkEu_0203C970 EWRAM_COMMON(4);
 #endif
@@ -788,8 +788,8 @@ s32 func_080C5ECC(void) {
 
 
 void func_080C5F94(void) {
-    u16* a;
-    u16* b;
+    Deck* a;
+    Deck* b;
 
     a = func_08083C94();
     gUnk_0203C37C = a;
@@ -802,8 +802,8 @@ void func_080C5F94(void) {
     gUnk_0203C380 = 0;
     gUnk_0203C384 = 0;
     gUnk_0203C3B8 = 0;
-    gUnk_0203C390 = gUnk_0203C37C;
-    gUnk_0203C39C = gUnk_0203C398;
+    gUnk_0203C390 = (u16*)gUnk_0203C37C;
+    gUnk_0203C39C = (u16*)gUnk_0203C398;
 }
 
 
@@ -1037,7 +1037,7 @@ s32 eu_080C2740(void) {
 void func_080C640C(CharaObjParam2* param) {
     s32 i;
 
-    gCharaObj = EwramAlloc(0x1094);
+    gCharaObj = EwramAlloc(sizeof(CharaObj));
     gCharaObj->unk_0C = param->unk_00;
     gCharaObj->unk_10 = param->unk_04;
     gCharaObj->unk_24 = param->unk_08;
@@ -1155,7 +1155,7 @@ u8 func_080C64A4(void) {
     case 10:
         gCharaObj->unk_40 = 0;
         if (gCharaObj->unk_1048 != 0) {
-            ((void (*)(void))gCharaObj->unk_1048)();
+            gCharaObj->unk_1048();
         }
         gCharaObj->unk_44++;
         break;
@@ -1173,7 +1173,7 @@ u8 func_080C64A4(void) {
         prize.y = gCharaObj->y;
         prize.z = gCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        func_0801B918((void*)gCharaObj->unk_104C);
+        func_0801B918(gCharaObj->unk_104C);
         gCharaObj->unk_44++;
         break;
     case 13:
@@ -1226,7 +1226,7 @@ void func_080C6894(CharaObjParam* param) {
     s32 i;
     u16 idx;
 
-    gCharaObj = EwramAlloc(0x1094);
+    gCharaObj = EwramAlloc(sizeof(CharaObj));
     gCharaObj->unk_1090 = 0;
     gCharaObj->unk_0C = param->unk_00;
     gCharaObj->unk_10 = param->unk_04;
@@ -1397,7 +1397,7 @@ u8 func_080C69B4(void) {
     case 11:
         gCharaObj->unk_40 = 0;
         if (gCharaObj->unk_1048 != 0) {
-            ((void (*)(void))gCharaObj->unk_1048)();
+            gCharaObj->unk_1048();
         }
         gCharaObj->unk_3A = 32;
         gCharaObj->unk_44++;
@@ -1423,7 +1423,7 @@ u8 func_080C69B4(void) {
         prize.y = gCharaObj->y;
         prize.z = gCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        func_0801B918((void*)gCharaObj->unk_104C);
+        func_0801B918(gCharaObj->unk_104C);
         if ((gCharaObj->unk_1090 & 1) == 0) {
             func_08014B30(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
             gCharaObj->unk_42 = 0;

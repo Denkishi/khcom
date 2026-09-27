@@ -1410,12 +1410,12 @@ void func_080C0714(JfMajinWork* work) {
 }
 void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->jf = arg;
-    work->x = arg->body.x;
-    work->y = arg->body.y + 0x500;
-    work->z = arg->body.z - 0x4800;
-    work->unk_03C = 0;
-    work->unk_0F8 = 0xFE00;
-    work->unk_060 = 0x20000;
+    work->body.x = arg->body.x;
+    work->body.y = arg->body.y + 0x500;
+    work->body.z = arg->body.z - 0x4800;
+    work->body.unk_010 = 0;
+    work->body.unk_0CC = 0xFE00;
+    work->body.flags = 0x20000;
     work->unk_13C = 0;
     work->unk_140 = 0;
     work->unk_144 = 0;
@@ -1455,7 +1455,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->palette2 = LoadObjPalette(gUnk_096FB5A4, 0x60);
     work->gfx2 = gUnk_09EF3A48[gUnk_09EF2A42[work->unk_17E]];
     TaskPoolInit(&work->tasks, 1);
-    TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->unk_02C);
+    TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->body);
 }
 u8 task_bos_jf_rock_1(JfRockWork* work) {
     JfWork* jf = work->jf;
@@ -1465,7 +1465,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
     switch (work->state) {
     case 0:
         if (work->unk_15C > 40) {
-            func_0802F274(work->x, work->y + work->z - 0x2000);
+            func_0802F274(work->body.x, work->body.y + work->body.z - 0x2000);
         }
 
         work->unk_02A++;
@@ -1482,15 +1482,15 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         }
 
         if (work->unk_15C > 0) {
-            ApproachValue(&work->z, work->unk_144 - 0x4800, work->unk_15C);
+            ApproachValue(&work->body.z, work->unk_144 - 0x4800, work->unk_15C);
             ApproachValue(&work->z2, work->unk_144 - 0x1C00, work->unk_15C);
             work->unk_15C--;
 
-            if (work->z <= -0xC00) {
+            if (work->body.z <= -0xC00) {
                 work->unk_158 = 8;
                 work->unk_15A = 1;
             } else {
-                n = 8 - ((work->z >> 8) + 12) / 8;
+                n = 8 - ((work->body.z >> 8) + 12) / 8;
 
                 if (n < 0) {
                     work->unk_158 = 0;
@@ -1524,10 +1524,10 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->unk_13C = (b = gBtlWork->actor)->x;
             work->unk_140 = b->y;
             work->unk_144 = b->z;
-            work->vx = (work->unk_13C - work->x) / 40;
-            work->vy = (work->unk_140 - work->y) / 40;
+            work->vx = (work->unk_13C - work->body.x) / 40;
+            work->vy = (work->unk_140 - work->body.y) / 40;
             work->vz = 0;
-            work->unk_154 = (work->unk_144 - work->z) / 820;
+            work->unk_154 = (work->unk_144 - work->body.z) / 820;
             work->state++;
         }
 
@@ -1595,18 +1595,18 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
         }
 
-        work->x += work->vx;
-        work->y += work->vy;
-        work->z += work->vz;
+        work->body.x += work->vx;
+        work->body.y += work->vy;
+        work->body.z += work->vz;
         work->vz += work->unk_154;
 
         if (work->unk_15E == 7) {
             work->unk_17C = 0;
         }
 
-        if (func_08011F78(231, work->x, work->y, work->z - 0x2000, 28, 28, 28) == 1) {
+        if (func_08011F78(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == 1) {
             m4aSongNumStart(SONG_EF_JF_BALLHIT);
-            func_08014020(work->x - 0x800, work->y + work->z - 0x2400, 0);
+            func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->unk_194 = 0;
             work->state = 3;
         }
@@ -1619,10 +1619,10 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->state = 5;
         }
 
-        switch ((s8)func_080C1370(work->x, work->y, work->z - 0x2000)) {
+        switch ((s8)func_080C1370(work->body.x, work->body.y, work->body.z - 0x2000)) {
         case 1:
             m4aSongNumStart(SONG_EF_FIRE01);
-            func_08014020(work->x - 0x800, work->y + work->z - 0x2400, 0);
+            func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
             work->unk_194 = 0;
             work->state = 3;
             break;
@@ -1637,7 +1637,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
     case 5:
         if (MosaicIsActive() == 0) {
             if (work->unk_15C == 0) {
-                func_08014020(work->x - 0x800, work->y + work->z - 0x2400, 0);
+                func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
                 work->unk_15C++;
             } else {
                 if (AnimIsFinished(&work->anim)) {
@@ -1659,7 +1659,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         return 0;
     }
 
-    func_080BD7F8(&work->x, &work->y, &work->z, (s32*)&work->unk_03C);
+    func_080BD7F8(&work->body.x, &work->body.y, &work->body.z, &work->body.unk_010);
     TaskPoolUpdate(&work->tasks);
 
     return 1;
@@ -1674,22 +1674,22 @@ void task_bos_jf_rock_2(JfRockWork* work) {
 
     if (work->unk_15A == 1) {
         if (jf->body.flags & 4) {
-            if (work->x <= 0x259FF) {
-                pal = GetBattleSpritePriorityFlags(work->y);
+            if (work->body.x <= 0x259FF) {
+                pal = GetBattleSpritePriorityFlags(work->body.y);
                 prio = 0xFD00;
             } else {
                 pal = 0x400;
                 prio = 0xFFF5;
             }
-        } else if (work->x > 0x1B200) {
-            pal = GetBattleSpritePriorityFlags(work->y);
+        } else if (work->body.x > 0x1B200) {
+            pal = GetBattleSpritePriorityFlags(work->body.y);
             prio = 0xFD00;
         } else {
             pal = 0x400;
             prio = 0xFFF5;
         }
 
-        WorldToScreen(&x, &y, work->x, work->y, work->z);
+        WorldToScreen(&x, &y, work->body.x, work->body.y, work->body.z);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, pal, prio);
     }
 

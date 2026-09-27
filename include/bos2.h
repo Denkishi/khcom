@@ -282,16 +282,7 @@ typedef struct JfRockWork {
     AnimState anim;
     s16 unk_028;
     s16 unk_02A;
-    u32 unk_02C;
-    s32 x;
-    s32 y;
-    s32 z;
-    u32 unk_03C;
-    u8 unk_040[0x20];
-    u64 unk_060;
-    u8 unk_068[0x90];
-    u16 unk_0F8;
-    u8 unk_0FA[0x42];
+    BtlObj body;
     s32 unk_13C;
     s32 unk_140;
     s32 unk_144;

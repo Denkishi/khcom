@@ -204,18 +204,28 @@ void task_title_obj_0(TitleObjWork* work) {
     case 6:
         break;
     }
+#else
+    work->sprites[0].tiles = LoadObjTiles(gUnk_09771060, 0x3C0);
+    work->sprites[0].palette = LoadObjPalette(gUnk_0984A718, 0x20);
+    work->sprites[0].gfx = gUnk_09EF65E0[0];
+#endif
 
     if (gGameState.flags & 0x200) {
+#ifdef VERSION_EU
         if (gLanguage == 4 || gLanguage == 2) {
             work->sprites[0].x = 0xB500;
         } else {
             work->sprites[0].x = 0xBA00;
         }
+#else
+        work->sprites[0].x = 0xBA00;
+#endif
         work->sprites[0].y = 0x76;
     } else {
         work->sprites[0].x = 0x3D00;
         work->sprites[0].y = 0x77;
     }
+#ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_0973F402, 0x700);
@@ -236,10 +246,14 @@ void task_title_obj_0(TitleObjWork* work) {
     case 6:
         break;
     }
+#else
+    work->sprites[1].tiles = LoadObjTiles(gUnk_09771666, 0x700);
+#endif
     work->sprites[1].palette = LoadObjPalette(&gUnk_0984A778[t], 0x20);
     work->sprites[1].x = -0x7800;
     work->sprites[1].targetX = 0x7C00;
     work->sprites[1].y = 0xA0;
+#ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
         AnimInit(&work->anim, gUnkEu_09F81A1C, gUnkEu_09F81A08);
@@ -260,33 +274,20 @@ void task_title_obj_0(TitleObjWork* work) {
     case 6:
         break;
     }
+#else
+    AnimInit(&work->anim, gUnk_09EF6604, gUnk_09EF65F0);
+#endif
     AnimStart(&work->anim, 0, 1);
     work->sprites[1].gfx = AnimGetGfx(&work->anim);
+#ifdef VERSION_EU
     work->sprites[2].tiles = LoadObjTiles(gUnkEu_0973EEFE, 0x100);
+#else
+    work->sprites[2].tiles = LoadObjTiles(gUnk_0977143A, 0x100);
+#endif
     work->sprites[2].palette = LoadObjPalette(&gUnk_0984A778[t], 0x20);
+#ifdef VERSION_EU
     work->sprites[2].gfx = gUnk_09EF65E0[0];
 #else
-    work->sprites[0].tiles = LoadObjTiles(gUnk_09771060, 0x3C0);
-    work->sprites[0].palette = LoadObjPalette(gUnk_0984A718, 0x20);
-    work->sprites[0].gfx = gUnk_09EF65E0[0];
-
-    if (gGameState.flags & 0x200) {
-        work->sprites[0].x = 0xBA00;
-        work->sprites[0].y = 0x76;
-    } else {
-        work->sprites[0].x = 0x3D00;
-        work->sprites[0].y = 0x77;
-    }
-    work->sprites[1].tiles = LoadObjTiles(gUnk_09771666, 0x700);
-    work->sprites[1].palette = LoadObjPalette(&gUnk_0984A778[t], 0x20);
-    work->sprites[1].x = -0x7800;
-    work->sprites[1].targetX = 0x7C00;
-    work->sprites[1].y = 0xA0;
-    AnimInit(&work->anim, gUnk_09EF6604, gUnk_09EF65F0);
-    AnimStart(&work->anim, 0, 1);
-    work->sprites[1].gfx = AnimGetGfx(&work->anim);
-    work->sprites[2].tiles = LoadObjTiles(gUnk_0977143A, 0x100);
-    work->sprites[2].palette = LoadObjPalette(&gUnk_0984A778[t], 0x20);
     work->sprites[2].gfx = gUnk_09EF65E8[0];
 #endif
     work->sprites[2].x = 0x15800;

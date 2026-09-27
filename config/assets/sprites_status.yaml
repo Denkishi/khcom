@@ -14,12 +14,11 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_status.c
-    start: 0x09EF68E0
-    end: 0x09EF6960
   - name: sprites_status_frames.s
     start: 0x097A1864
     end: 0x097A2ED8
+    data_start: 0x09EF68E0
+    data_end: 0x09EF6960
   - name: sprites_status_tiles.s
     start: 0x097FFB98
     end: 0x09801C98
@@ -30,12 +29,11 @@ objects:
     start: 0x0984B118
     end: 0x0984B298
   jp:
-  - name: sprites_status.c
-    start: 0x09ECDCCC
-    end: 0x09ECDD4C
   - name: sprites_status_frames.s
     start: 0x0975BCF8
     end: 0x0975D36C
+    data_start: 0x09ECDCCC
+    data_end: 0x09ECDD4C
   - name: sprites_status_tiles.s
     start: 0x097BA02C
     end: 0x097BC12C
@@ -46,12 +44,11 @@ objects:
     start: 0x097FFDEC
     end: 0x097FFF6C
   eu:
-  - name: sprites_status.c
-    start: 0x09F81EC8
-    end: 0x09F81FD0
   - name: sprites_status_frames.s
     start: 0x0977DA78
     end: 0x09780840
+    data_start: 0x09F81EC8
+    data_end: 0x09F81FD0
   - name: sprites_status_tiles.s
     start: 0x097D62A0
     end: 0x097DAF60

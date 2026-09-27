@@ -534,13 +534,13 @@ void RecalculateInactiveDeckCpCosts(void) {
 }
 
 void ConvertActiveDeckCardToPremium(u16 index) {
-    Deck* d;
+    u16* cards;
     u16 v;
 
-    d = GetActiveDeck();
-    gDecks[gActiveDeck].unk_DA -= GetCardCpCost(gCardCollection[*(u16*)(index * 2 + (u32)d)]);
-    gCardCollection[*(u16*)(index * 2 + (u32)d)] |= 0x8000;
-    v = GetCardCpCost(gCardCollection[*(u16*)(index * 2 + (u32)d)]) + gDecks[gActiveDeck].unk_DA;
+    cards = GetActiveDeck()->cards;
+    gDecks[gActiveDeck].unk_DA -= GetCardCpCost(gCardCollection[cards[index]]);
+    gCardCollection[cards[index]] |= 0x8000;
+    v = GetCardCpCost(gCardCollection[cards[index]]) + gDecks[gActiveDeck].unk_DA;
     gDecks[gActiveDeck].unk_DA = v;
     RecalculateInactiveDeckCpCosts();
 }

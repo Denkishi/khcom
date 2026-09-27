@@ -85,7 +85,7 @@ const u32 gUnk_09036210[8] = {
 };
 
 void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
-    u8* p;
+    Collider* p;
 
     w->cardId = args[3];
     w->unk_38 = args[0];
@@ -120,7 +120,7 @@ void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
     w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
     w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = w->unk_144;
+    p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
@@ -128,7 +128,7 @@ void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
 }
 
 void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
-    u8* p;
+    Collider* p;
 
     w->cardId = args[3];
     w->unk_38 = args[0];
@@ -164,7 +164,7 @@ void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
     w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
     w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = w->unk_144;
+    p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
@@ -172,7 +172,7 @@ void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
 }
 
 void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
-    u8* p;
+    Collider* p;
 
     w->cardId = args->cardId;
     w->unk_38 = args->unk_00;
@@ -201,7 +201,7 @@ void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
     w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
     w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = w->unk_144;
+    p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
@@ -264,9 +264,9 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
     }
 
     if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(w->unk_144, 50);
+        ColliderSetRadius(&w->collider, 50);
     } else {
-        ColliderSetRadius(w->unk_144, 10);
+        ColliderSetRadius(&w->collider, 10);
     }
 
     if ((u8)func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40,
@@ -274,7 +274,7 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
         w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
     }
 
-    if (w->unk_170 != 0) {
+    if (w->collider.unk_2C != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
         w->unk_1C2 = 10;
@@ -286,7 +286,7 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
             w->unk_38 = sx << 8;
             w->unk_3C = sy << 8;
             w->unk_1CA = 1;
-            ColliderSetDisabled(w->unk_144, 1);
+            ColliderSetDisabled(&w->collider, 1);
             func_0809A4E0(w, 0);
 #ifdef VERSION_EU
             w->unk_1CD = 1;
@@ -297,7 +297,7 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
         return 1;
     }
 
-    ColliderSetPosition(w->unk_144, w->unk_38, w->unk_3C,
+    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C,
                   w->unk_40);
     w->scaleX =
         (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] *
@@ -370,9 +370,9 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
     }
 
     if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(w->unk_144, 50);
+        ColliderSetRadius(&w->collider, 50);
     } else {
-        ColliderSetRadius(w->unk_144, 10);
+        ColliderSetRadius(&w->collider, 10);
     }
 
     if ((u8)func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40,
@@ -380,7 +380,7 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
         w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
     }
 
-    if (w->unk_170 != 0) {
+    if (w->collider.unk_2C != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
         w->unk_1C2 = 10;
@@ -392,7 +392,7 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
             w->unk_38 = sx << 8;
             w->unk_3C = sy << 8;
             w->unk_1CA = 1;
-            ColliderSetDisabled(w->unk_144, 1);
+            ColliderSetDisabled(&w->collider, 1);
             func_0809A4E0(w, 0);
 #ifdef VERSION_EU
             w->unk_1CD = 1;
@@ -403,7 +403,7 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
         return 1;
     }
 
-    ColliderSetPosition(w->unk_144, w->unk_38, w->unk_3C,
+    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C,
                   w->unk_40);
     w->scaleX =
         (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] *
@@ -610,16 +610,16 @@ s32 Heartless_card_1(UnkStruct_0809A02C* w, void* a) {
     }
 
     if (gBtlWork->unk_0F4 == 6) {
-        ColliderSetRadius(w->unk_144, 50);
+        ColliderSetRadius(&w->collider, 50);
     } else {
-        ColliderSetRadius(w->unk_144, 10);
+        ColliderSetRadius(&w->collider, 10);
     }
 
     if (func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40, &w->unk_44)) {
         w->unk_1C6 = (u8)(w->unk_1C6 + 0x70) + GetRandom() % 33;
     }
 
-    if (w->unk_170 != 0) {
+    if (w->collider.unk_2C != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
         w->unk_1C2 = 10;
@@ -629,13 +629,13 @@ s32 Heartless_card_1(UnkStruct_0809A02C* w, void* a) {
         w->unk_38 = x << 8;
         w->unk_3C = y << 8;
         w->unk_1CA = 1;
-        ColliderSetDisabled(w->unk_144, 1);
+        ColliderSetDisabled(&w->collider, 1);
         func_0809A4E0(w, 1);
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809AD98);
         return 1;
     }
 
-    ColliderSetPosition(w->unk_144, w->unk_38, w->unk_3C, w->unk_40);
+    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C, w->unk_40);
     w->scaleX = (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
     w->scaleY = (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
 
@@ -755,7 +755,7 @@ void func_0809B59C(UnkStruct_0809A02C* w) {
     ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles4);
     ReleaseObjPalette(w->palette3);
-    ColliderUnregister(w->unk_144);
+    ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
     gUnk_02039DD4->unk_0D6 = 0;
     gBtlWork->unk_0B0--;
@@ -768,7 +768,7 @@ void Heartless_card_3(UnkStruct_0809A02C* w) {
     ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles4);
     ReleaseObjPalette(w->palette3);
-    ColliderUnregister(w->unk_144);
+    ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
     gBtlWork->unk_0B0--;
 }
@@ -802,7 +802,7 @@ void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     TaskCreate(pool, &gTaskDescHeartlessCard, args);
 }
 
-void CreateGimmickCardTask(void* pool, u16 a, u16 b, u16 c, u16 d) {
+void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     s32 args[4];
 
     if (gUnk_02039DD4 != 0 && gUnk_02039DD4->unk_0DC == 0) {
@@ -1439,7 +1439,7 @@ TaskDesc gTaskDescFriendCard = {
     (TaskUpdateFunc)Friend_card_1,
     (TaskFunc)func_0809B200,
     (TaskFunc)func_0809B59C,
-    0x1D4,
+    sizeof(UnkStruct_0809A02C),
 };
 
 TaskDesc gTaskDescHeartlessCard = {
@@ -1448,7 +1448,7 @@ TaskDesc gTaskDescHeartlessCard = {
     (TaskUpdateFunc)Heartless_card_1,
     (TaskFunc)Heartless_card_2,
     (TaskFunc)Heartless_card_3,
-    0x1D4,
+    sizeof(UnkStruct_0809A02C),
 };
 
 TaskDesc gTaskDescGimmickCard = {
@@ -1457,7 +1457,7 @@ TaskDesc gTaskDescGimmickCard = {
     (TaskUpdateFunc)Gimmick_card_1,
     (TaskFunc)func_0809B200,
     (TaskFunc)func_0809B59C,
-    0x1D4,
+    sizeof(UnkStruct_0809A02C),
 };
 
 TaskDesc gUnk_09EE77D4 = {

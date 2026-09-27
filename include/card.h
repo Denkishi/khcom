@@ -45,6 +45,7 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "listpool.h"
+#include "battle_actor_types.h"
 #include "card_types.h"
 #include "fld_types.h"
 #include "game.h"
@@ -300,9 +301,7 @@ typedef struct UnkStruct_0809A02C {
     s32 unk_40;
     s32 unk_44;
     u8 unk_48[0xFC];
-    u8 unk_144[0x2C];
-    u8 unk_170;
-    u8 unk_171[0x2F];
+    Collider collider;
     s32 cardId;
     s32 unk_1A4;
     s32 unk_1A8;

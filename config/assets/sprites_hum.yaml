@@ -14,50 +14,44 @@ types:
     header: anim.h
 objects:
   us:
-  - name: sprites_hum_1.c
-    start: 0x09EE15FC
-    end: 0x09EE25D0
-  - name: sprites_hum_2.c
-    start: 0x09EE2690
-    end: 0x09EE26D4
   - name: sprites_hum_frames_1.s
     start: 0x08B26854
     end: 0x08C69188
+    data_start: 0x09EE15FC
+    data_end: 0x09EE25D0
   - name: sprites_hum_frames_2.s
     start: 0x08C6AF80
     end: 0x08C6B0C4
+    data_start: 0x09EE2690
+    data_end: 0x09EE26D4
   - name: sprites_hum_frames_3.s
     start: 0x08EE3A84
     end: 0x08EE4A64
   jp:
-  - name: sprites_hum_1.c
-    start: 0x09EB9078
-    end: 0x09EBA04C
-  - name: sprites_hum_2.c
-    start: 0x09EBA10C
-    end: 0x09EBA150
   - name: sprites_hum_frames_1.s
     start: 0x08B19E3C
     end: 0x08C5C770
+    data_start: 0x09EB9078
+    data_end: 0x09EBA04C
   - name: sprites_hum_frames_2.s
     start: 0x08C5E568
     end: 0x08C5E6AC
+    data_start: 0x09EBA10C
+    data_end: 0x09EBA150
   - name: sprites_hum_frames_3.s
     start: 0x08ED706C
     end: 0x08ED804C
   eu:
-  - name: sprites_hum_1.c
-    start: 0x09F5C408
-    end: 0x09F5D3DC
-  - name: sprites_hum_2.c
-    start: 0x09F5D500
-    end: 0x09F5D544
   - name: sprites_hum_frames_1.s
     start: 0x08B56804
     end: 0x08C99138
+    data_start: 0x09F5C408
+    data_end: 0x09F5D3DC
   - name: sprites_hum_frames_2.s
     start: 0x08C9CBF8
     end: 0x08C9CD3C
+    data_start: 0x09F5D500
+    data_end: 0x09F5D544
   - name: sprites_hum_frames_3.s
     start: 0x08EEFF9C
     end: 0x08EF0F7C

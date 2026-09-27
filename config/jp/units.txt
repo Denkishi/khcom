@@ -98,10 +98,8 @@ sprites_emy_frames_2.s
 sprites_btl_frames_3.s
 sprites_mode_test_frames_1.s
 sprites_btl_hud_frames.s
-sprites_hum_1.c
-actor_localized_data.c
-sprites_hum_2.c
 sprites_hum_frames_1.s
+actor_localized_data.c
 sprites_emy_frames_3.s
 jiminy_journal_frames.s
 sprites_hum_frames_2.s

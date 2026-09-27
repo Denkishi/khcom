@@ -358,18 +358,6 @@ typedef struct RevCountWork {
 
 typedef char UnkStruct_08098CE4_sizechk[(sizeof(struct RevCountWork) == 0x44) ? 1 : -1];
 
-typedef struct UnkStruct_02034AFC {
-    u8 unk_000[0x10C];
-    u64 unk_10C;
-    u8 unk_114[0x28];
-    s16 unk_13C;
-    u8 unk_13E[0x07];
-    u8 unk_145;
-    u8 unk_146[0x08];
-    u8 unk_14E;
-    u8 unk_14F;
-} UnkStruct_02034AFC;
-
 extern const s16 gUnk_09037FB4[];
 extern const s16 gUnk_09037FBA[];
 extern const s32 gUnk_09037FFC[];
@@ -1644,35 +1632,33 @@ typedef struct SysMsgWinWork {
 
 typedef char SysMsgWinWork_size[(sizeof(SysMsgWinWork) == 0x148) ? 1 : -1];
 
-typedef struct UnkStruct_080A3F5C {
-    void* tiles3;
-    void* palette;
-    void* tiles4;
-    void* palette2;
-    void* tiles;
-    void* palette3;
-    void* tiles2;
-    UnkStruct_080038C8* palette4;
-    u8 textSlots[0x50];
-    u8 textSlots2[0x50];
-    s32 unk_0C0;
-    u8 anim[0x18];
-    u8 anim2[0x18];
-    u8 anim3[0x18];
-    s32 bg;
-    u8 unk_110[0x03];
-    u8 unk_113;
+typedef struct CardMsgWinWork {
+    ObjTiles* tiles3;
+    ObjPalette* palette;
+    ObjTiles* tiles4;
+    ObjPalette* palette2;
+    ObjTiles* tiles;
+    ObjPalette* palette3;
+    ObjTiles* tiles2;
+    ObjPalette* palette4;
+    TextSlot textSlots[10];
+    TextSlot textSlots2[10];
+    ObjPalette* unk_0C0;
+    AnimState anim;
+    AnimState anim2;
+    AnimState anim3;
+    CardMessageArgs args;
     CardMessageDef* messageDef;
     s32 x;
     s32 unk_11C;
     s32 unk_120;
     s32 unk_124;
-    s32 gfx4;
+    s32 unk_128;
     void* gfx;
     void* gfx2;
     void* gfx3;
-    u8 unk_138[0x05];
-    u8 unk_13D;
+    TextChar* nextText;
+    u16 unk_13C;
     s16 unk_13E;
     u8 unk_140;
     u8 unk_141;
@@ -1688,9 +1674,9 @@ typedef struct UnkStruct_080A3F5C {
     u8 unk_14D;
     u8 unk_14E;
     u8 unk_14F;
-} UnkStruct_080A3F5C;
+} CardMsgWinWork;
 
-typedef char UnkStruct_080A3F5C_sizechk[(sizeof(struct UnkStruct_080A3F5C) == 0x150) ? 1 : -1];
+typedef char CardMsgWinWork_size[(sizeof(CardMsgWinWork) == 0x150) ? 1 : -1];
 
 typedef struct UnkStruct_08094CE4_A {
     void* tiles;
@@ -1895,7 +1881,7 @@ void func_0808E7D8(u8* work);
 u8 func_080947B4(MapcardWork* w, void* a);
 u8 func_080A63B8(u8* work, void* a);
 s16 func_080859A0(s32 mode, Deck* d);
-u8 func_080A3DD0(UnkStruct_080A3F5C* w);
+u8 func_080A3DD0(CardMsgWinWork* w);
 u8 func_08098AE4(ReloadChildWork* w, void* a);
 void DeckCard2_2(DeckCard2Work* n);
 void func_08081760(CardBattleWork* w);
@@ -1924,7 +1910,7 @@ void Deck_Yes_No_0(DeckConfirmWork* w, u8* a);
 void LVUP_EFFECT_2(LevelUpEffectWork* w);
 u8 func_0809CB0C(UnkStruct_0809C534* w, void* a);
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a);
-u8 func_080A3E8C(UnkStruct_080A3F5C* w, void* a);
+u8 func_080A3E8C(CardMsgWinWork* w, void* a);
 u8 func_080A5EA0(UnkStruct_080A5D3C* w, void* a);
 void func_080A4C1C(SysMsgWinWork* w);
 void func_080A53E4(SysMsgWinWork* w);
@@ -1946,7 +1932,7 @@ void func_080A2EF8(DeckConfirmWork* w);
 u8 func_0808CA78(u8* work, u8 a);
 void func_0808C2F0(u8* work);
 void HCEffectName_2(HcEffectNameWork* w);
-u8 func_080A3558(UnkStruct_080A3F5C* w, void* a);
+u8 func_080A3558(CardMsgWinWork* w, void* a);
 void func_08090B50(CardDisplayWork* p, void* a);
 void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a);
 u8 Bosscard_1(BossCardWork* w, void* a);
@@ -1979,14 +1965,14 @@ void func_0807BB04(void);
 void func_080818E4(void);
 u8 func_0809DA64(HcEffectNameWork* w, u16 n);
 void StockInfo_0(StockInfoWork* w, u8* active);
-u8 func_080A3754(UnkStruct_080A3F5C* w, void* a);
+u8 func_080A3754(CardMsgWinWork* w, void* a);
 u8 func_08082C98(CardDisplayWork* p, void* a);
 u8 Reload_Card_1(CardDisplayWork* p, void* a);
 u8 func_0808686C(u8* work, void* a);
 u8 func_0807C4BC(CardDisplayWork* p, void* a);
 u8 func_080A5034(SysMsgWinWork* w, void* a);
 u8 func_0808E474(UnkStruct_0808DB04* w);
-u8 func_080A3A98(UnkStruct_080A3F5C* w, void* a);
+u8 func_080A3A98(CardMsgWinWork* w, void* a);
 u8 func_08082224(CardDisplayWork* p, void* a);
 u8 func_08081B70(CardDisplayWork* p, void* a);
 u8 func_0807D68C(CardDisplayWork* p, void* a);
@@ -2632,7 +2618,7 @@ extern TaskPool gUnk_02034AE0;
 extern u8 gUnk_02034AF4[4];
 #endif
 extern u8 gUnk_02034AF8;
-extern UnkStruct_02034AFC* gUnk_02034AFC;
+extern CardMsgWinWork* gUnk_02034AFC;
 extern SysMsgWinWork* gUnk_02034B00;
 #ifndef VERSION_EU
 extern u8 gUnk_02034B04[4];

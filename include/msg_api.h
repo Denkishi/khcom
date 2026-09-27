@@ -30,6 +30,10 @@ u16 FormatSmallFontHex(s32 v, u16* out);
 s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n);
 void func_0806BA0C(s16 v, u8* out);
 u16 func_0806BA74(s32 mode, s32 flag);
+u8 func_0806BB44(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
+#ifndef VERSION_EU
+u8 func_0806BDB8(s32 x, s32 y, u8* s, u8** d);
+#endif
 void func_0806C2C0(u8 n);
 void func_0806C34C(void);
 

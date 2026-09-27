@@ -62,10 +62,6 @@ s32 func_080A4910(SysMsgWinWork* w);
 u8 func_080A4958(SysMsgWinWork* w, void* a);
 u8 func_080A4CC8(SysMsgWinWork* w, void* a);
 s32 func_080A5150(SysMsgWinWork* w);
-u8 func_0806BB44(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
-#ifdef VERSION_JP
-u8 func_0806BDB8(s32 x, s32 y, u8* s, u8** d);
-#endif
 
 const s32 gUnk_09041E80[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 

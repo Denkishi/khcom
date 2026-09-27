@@ -410,10 +410,10 @@ typedef struct DeckCard2Args {
 
 typedef struct DeckCard2Work {
     u8 unk_00[0x04];
-    void* palette2;
-    void* tiles;
-    void* palette;
-    void* tiles2;
+    ObjPalette* palette2;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjTiles* tiles2;
     CardDef* cardDef;
     CardBack* cardBack;
     DeckCard2Args args;
@@ -567,28 +567,28 @@ typedef struct UnkStruct_08084D78 {
 } UnkStruct_08084D78;
 
 typedef struct DeckMenuWork {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* palette2;
-    void* tiles4;
-    void* palette;
-    void* tiles12;
-    void* tiles7;
-    void* tiles8;
-    void* tiles9;
-    void* tiles10;
+    ObjTiles* tiles;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette2;
+    ObjTiles* tiles4;
+    ObjPalette* palette;
+    ObjTiles* tiles12;
+    ObjTiles* tiles7;
+    ObjTiles* tiles8;
+    ObjTiles* tiles9;
+    ObjTiles* tiles10;
     void* unk_02C;
-    void* palette5;
-    void* palette6;
+    ObjPalette* palette5;
+    ObjPalette* palette6;
     TextSlot textSlots[8];
     TextSlot textSlots2[8];
     TextSlot textSlots3[8];
     TextSlot textSlots4[30];
     TextSlot textSlots5[90];
-    void* tiles5;
-    void* tiles6;
-    void* palette3;
+    ObjTiles* tiles5;
+    ObjTiles* tiles6;
+    ObjPalette* palette3;
     ObjPalette* palette4;
     DeckCard2Work* unk_4C8;
     DeckCard2Work* unk_4CC;
@@ -604,9 +604,9 @@ typedef struct DeckMenuWork {
     void* gfx2;
     void* gfx3;
     u8 unk_4FC[0x23C];
-    void* tiles11;
+    ObjTiles* tiles11;
     ObjTiles* tiles13;
-    void* palette7;
+    ObjPalette* palette7;
     TextSlot textSlots6[8];
     u8 unk_784[20];
     AnimState anim4;
@@ -706,27 +706,27 @@ typedef struct DeckMenuWork {
 } DeckMenuWork;
 
 typedef struct RikuDeckMenuWork {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    void* palette2;
-    void* tiles4;
-    void* palette;
-    void* tiles7;
-    void* tiles8;
-    void* tiles9;
-    void* tiles10;
-    void* palette5;
-    void* palette6;
+    ObjTiles* tiles;
+    ObjTiles* tiles2;
+    ObjTiles* tiles3;
+    ObjPalette* palette2;
+    ObjTiles* tiles4;
+    ObjPalette* palette;
+    ObjTiles* tiles7;
+    ObjTiles* tiles8;
+    ObjTiles* tiles9;
+    ObjTiles* tiles10;
+    ObjPalette* palette5;
+    ObjPalette* palette6;
     TextSlot textSlots[8];
     TextSlot textSlots2[8];
     TextSlot textSlots3[8];
     TextSlot textSlots4[30];
     TextSlot textSlots5[60];
     u8 unk_3C0[4];
-    void* tiles6;
-    void* palette3;
-    void* tiles12;
+    ObjTiles* tiles6;
+    ObjPalette* palette3;
+    ObjTiles* tiles12;
     u8 unk_3D0[8];
     ObjPalette* palette4;
     DeckCard2Work* unk_3DC;
@@ -957,7 +957,7 @@ typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x22C) ? 1 : -
 #endif
 
 typedef struct DarkPointWork {
-    void* tiles;
+    ObjTiles* tiles;
     s32 x;
     u8 unk_08[0x02];
     s8 slideTimer;
@@ -1503,9 +1503,9 @@ typedef struct DeckConfirmWork {
     TextSlot textSlots[80];
     TextSlot textSlots2[80];
     TextSlot textSlots3[80];
-    void* tiles;
-    void* palette;
-    void* palette2;
+    ObjTiles* tiles;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     u8 textSlotCount;
     u8 textSlotCount2;
     u8 textSlotCount3;

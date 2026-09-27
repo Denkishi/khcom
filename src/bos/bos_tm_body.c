@@ -6,7 +6,6 @@
 #include "engine_math.h"
 #include "system_state.h"
 #include "acgtrans.h"
-#include <string.h>
 
 extern u8 gUnk_09EF1D58[11];
 extern s16 gUnk_09EF1D64[8];
@@ -595,7 +594,7 @@ void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
                       work->tm->z - 33);
         func_080B83A4(&work->body4, work->tm->x - 1, work->tm->y - 4,
                       work->tm->z - 30);
-        memcpy(&gUnk_0203AB50, &work->body2, 272);
+        gUnk_0203AB50 = work->body2;
     }
 }
 u8 task_bos_tm_body_1(TmBodyWork* work) {

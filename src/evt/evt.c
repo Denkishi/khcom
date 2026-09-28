@@ -4,7 +4,14 @@
 #include "evt_api.h"
 #include "sprites_btl.h"
 
-TaskDesc gTaskDescEvtObj = { "task_evt_obj", (TaskInitFunc)task_evt_obj_0, (TaskUpdateFunc)task_evt_obj_1, (TaskFunc)task_evt_obj_2, (TaskFunc)task_evt_obj_3, sizeof(EvtObjWork) };
+TaskDesc gTaskDescEvtObj = {
+    "task_evt_obj",
+    (TaskInitFunc)task_evt_obj_0,
+    (TaskUpdateFunc)task_evt_obj_1,
+    (TaskFunc)task_evt_obj_2,
+    (TaskFunc)task_evt_obj_3,
+    sizeof(EvtObjWork),
+};
 
 EventState* gEventState EWRAM_COMMON(4);
 
@@ -189,4 +196,11 @@ void task_evt_shadow_3(EvtShadowWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-TaskDesc gTaskDescEvtShadow = { "task_evt_shadow", (TaskInitFunc)task_evt_shadow_0, (TaskUpdateFunc)task_evt_shadow_1, (TaskFunc)task_evt_shadow_2, (TaskFunc)task_evt_shadow_3, sizeof(EvtShadowWork) };
+TaskDesc gTaskDescEvtShadow = {
+    "task_evt_shadow",
+    (TaskInitFunc)task_evt_shadow_0,
+    (TaskUpdateFunc)task_evt_shadow_1,
+    (TaskFunc)task_evt_shadow_2,
+    (TaskFunc)task_evt_shadow_3,
+    sizeof(EvtShadowWork),
+};

@@ -9,11 +9,32 @@
 #include "sprites_btl.h"
 #include "sprites_fld.h"
 
-TaskDesc gTaskDescBtlForm = { "task_btl_form", (TaskInitFunc)task_btl_form_0, (TaskUpdateFunc)task_btl_form_1, 0, (TaskFunc)task_btl_form_3, sizeof(BtlFormWork) };
+TaskDesc gTaskDescBtlForm = {
+    "task_btl_form",
+    (TaskInitFunc)task_btl_form_0,
+    (TaskUpdateFunc)task_btl_form_1,
+    NULL,
+    (TaskFunc)task_btl_form_3,
+    sizeof(BtlFormWork),
+};
 
-TaskDesc gTaskDescBtlBorn = { "task_btl_born", (TaskInitFunc)task_btl_born_0, (TaskUpdateFunc)task_btl_born_1, 0, 0, sizeof(BtlBornWork) };
+TaskDesc gTaskDescBtlBorn = {
+    "task_btl_born",
+    (TaskInitFunc)task_btl_born_0,
+    (TaskUpdateFunc)task_btl_born_1,
+    NULL,
+    NULL,
+    sizeof(BtlBornWork),
+};
 
-TaskDesc gTaskDescBtlRaid = { "task_btl_raid", (TaskInitFunc)task_btl_raid_0, (TaskUpdateFunc)task_btl_raid_1, (TaskFunc)task_btl_raid_2, (TaskFunc)task_btl_raid_3, sizeof(BtlRaidWork) };
+TaskDesc gTaskDescBtlRaid = {
+    "task_btl_raid",
+    (TaskInitFunc)task_btl_raid_0,
+    (TaskUpdateFunc)task_btl_raid_1,
+    (TaskFunc)task_btl_raid_2,
+    (TaskFunc)task_btl_raid_3,
+    sizeof(BtlRaidWork),
+};
 
 const AnimDef gBtlBadstatusAnimDefs[5] = {
     { gUnk_09EE12E8, gUnk_09EE130C, gUnk_08B21CFC, 0, { 0, 0, 0 } },
@@ -766,4 +787,11 @@ BtlObj* func_08040D54(SmnCloudWork* work) {
     return p;
 }
 
-TaskDesc gTaskDescBtlBadstatus = { "task_btl_badstatus", (TaskInitFunc)task_btl_badstatus_0, (TaskUpdateFunc)task_btl_badstatus_1, (TaskFunc)task_btl_badstatus_2, (TaskFunc)task_btl_badstatus_3, sizeof(BtlBadStatusWork) };
+TaskDesc gTaskDescBtlBadstatus = {
+    "task_btl_badstatus",
+    (TaskInitFunc)task_btl_badstatus_0,
+    (TaskUpdateFunc)task_btl_badstatus_1,
+    (TaskFunc)task_btl_badstatus_2,
+    (TaskFunc)task_btl_badstatus_3,
+    sizeof(BtlBadStatusWork),
+};

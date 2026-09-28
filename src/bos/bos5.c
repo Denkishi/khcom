@@ -406,8 +406,8 @@ TaskDesc gTaskDescBosMdMap = {
     "task_bos_md_map",
     (TaskInitFunc)task_bos_md_map_0,
     (TaskUpdateFunc)task_bos_md_map_1,
-    0,
-    0,
+    NULL,
+    NULL,
     sizeof(MdMapWork),
 };
 

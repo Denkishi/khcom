@@ -1844,7 +1844,7 @@ TaskDesc gTaskDescBosTmTbl = {
     "task_bos_tm_tbl",
     (TaskInitFunc)task_bos_tm_tbl_0,
     (TaskUpdateFunc)task_bos_tm_tbl_1,
-    0,
+    NULL,
     (TaskFunc)task_bos_tm_tbl_3,
     sizeof(TmTblWork),
 };

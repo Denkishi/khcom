@@ -54,8 +54,7 @@
 #include "poo_api.h"
 #include "evt_api.h"
 #include "mode_battle_data.h"
-
-#define NULL ((void*)0)
+#include <stddef.h>
 
 typedef struct SpriteTextLine {
     s32 x;

@@ -240,4 +240,11 @@ void menu_3(MenuWork* w) {
 
 Mode gUnk_09EE2704 = { "Mode_Deck", (ModeInitFunc)func_08060A74, func_08060AD8, func_08060BAC };
 
-TaskDesc gTaskDescMenu = { "menu", (TaskInitFunc)menu_0, (TaskUpdateFunc)menu_1, (TaskFunc)menu_2, (TaskFunc)menu_3, sizeof(MenuWork) };
+TaskDesc gTaskDescMenu = {
+    "menu",
+    (TaskInitFunc)menu_0,
+    (TaskUpdateFunc)menu_1,
+    (TaskFunc)menu_2,
+    (TaskFunc)menu_3,
+    sizeof(MenuWork),
+};

@@ -42,7 +42,14 @@ const AnimDef gHumCloudAnimDefs[20] = {
 
 const HumDef gHumCloudDef = { 128, 0, gCroudPalette, 0, { 43, 99, 38, 14, 24, 99, 0 } };
 
-TaskDesc gTaskDescHumCloud = { "task_hum_cloud", (TaskInitFunc)task_hum_cloud_0, (TaskUpdateFunc)task_hum_cloud_1, (TaskFunc)task_hum_cloud_2, (TaskFunc)task_hum_cloud_3, sizeof(CloudWork) };
+TaskDesc gTaskDescHumCloud = {
+    "task_hum_cloud",
+    (TaskInitFunc)task_hum_cloud_0,
+    (TaskUpdateFunc)task_hum_cloud_1,
+    (TaskFunc)task_hum_cloud_2,
+    (TaskFunc)task_hum_cloud_3,
+    sizeof(CloudWork),
+};
 
 const u32 gUnk_0813EF54[3] = {
     36, 36, 38,
@@ -76,11 +83,32 @@ const u8 gUnk_0813F078[8] = {
     0, 4, 4, 6, 8, 10, 8, 6,
 };
 
-TaskDesc gTaskDescHumHook = { "task_hum_hook", (TaskInitFunc)task_hum_hook_0, (TaskUpdateFunc)task_hum_hook_1, (TaskFunc)task_hum_hook_2, (TaskFunc)task_hum_hook_3, sizeof(HookWork) };
+TaskDesc gTaskDescHumHook = {
+    "task_hum_hook",
+    (TaskInitFunc)task_hum_hook_0,
+    (TaskUpdateFunc)task_hum_hook_1,
+    (TaskFunc)task_hum_hook_2,
+    (TaskFunc)task_hum_hook_3,
+    sizeof(HookWork),
+};
 
-TaskDesc gTaskDescHumHookMoon = { "task_hum_hook_moon", (TaskInitFunc)task_hum_hook_moon_0, (TaskUpdateFunc)task_hum_hook_moon_1, (TaskFunc)task_hum_hook_moon_2, (TaskFunc)task_hum_hook_moon_3, sizeof(HookMoonWork) };
+TaskDesc gTaskDescHumHookMoon = {
+    "task_hum_hook_moon",
+    (TaskInitFunc)task_hum_hook_moon_0,
+    (TaskUpdateFunc)task_hum_hook_moon_1,
+    (TaskFunc)task_hum_hook_moon_2,
+    (TaskFunc)task_hum_hook_moon_3,
+    sizeof(HookMoonWork),
+};
 
-TaskDesc gTaskDescHumHookBomb = { "task_hum_hook_bomb", (TaskInitFunc)task_hum_hook_bomb_0, (TaskUpdateFunc)task_hum_hook_bomb_1, (TaskFunc)task_hum_hook_bomb_2, (TaskFunc)task_hum_hook_bomb_3, sizeof(HookBombWork) };
+TaskDesc gTaskDescHumHookBomb = {
+    "task_hum_hook_bomb",
+    (TaskInitFunc)task_hum_hook_bomb_0,
+    (TaskUpdateFunc)task_hum_hook_bomb_1,
+    (TaskFunc)task_hum_hook_bomb_2,
+    (TaskFunc)task_hum_hook_bomb_3,
+    sizeof(HookBombWork),
+};
 
 const u32 gUnk_0813F0B8[3] = {
     36, 37, 37,
@@ -117,7 +145,14 @@ const HumSubDef gHumAnsemSubDef = { gAnsembackPalette, 128, 0 };
 
 const HumDef gHumAnsemDef = { 80, 0, gAnsemPalette, 0, { 52, 99, 65, 14, 42, 99, 0 } };
 
-TaskDesc gTaskDescHumAnsem = { "task_hum_ansem", (TaskInitFunc)task_hum_ansem_0, (TaskUpdateFunc)task_hum_ansem_1, (TaskFunc)task_hum_ansem_2, (TaskFunc)task_hum_ansem_3, sizeof(AnsemWork) };
+TaskDesc gTaskDescHumAnsem = {
+    "task_hum_ansem",
+    (TaskInitFunc)task_hum_ansem_0,
+    (TaskUpdateFunc)task_hum_ansem_1,
+    (TaskFunc)task_hum_ansem_2,
+    (TaskFunc)task_hum_ansem_3,
+    sizeof(AnsemWork),
+};
 
 const u32 gUnk_0813F214[3] = {
     36, 36, 36,
@@ -158,7 +193,14 @@ const HumDef gHumHadesDef = {
 #endif
     , 0, gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, 4 } };
 
-TaskDesc gTaskDescHumHades = { "task_hum_hades", (TaskInitFunc)task_hum_hades_0, (TaskUpdateFunc)task_hum_hades_1, (TaskFunc)task_hum_hades_2, (TaskFunc)task_hum_hades_3, sizeof(HadesWork) };
+TaskDesc gTaskDescHumHades = {
+    "task_hum_hades",
+    (TaskInitFunc)task_hum_hades_0,
+    (TaskUpdateFunc)task_hum_hades_1,
+    (TaskFunc)task_hum_hades_2,
+    (TaskFunc)task_hum_hades_3,
+    sizeof(HadesWork),
+};
 
 const u32 gUnk_0813F350[3] = {
     37, 36, 37,
@@ -190,7 +232,14 @@ const HumSubDef gHumMahluxiaSubDef = { gMaruxhaBtEffPalette, 90, 0 };
 
 const HumDef gHumMahluxiaDef = { 90, 0, gMaruxhaPalette, 0, { 51, 99, 60, 14, 40, 99, 0 } };
 
-TaskDesc gTaskDescHumMahluxia = { "task_hum_mahluxia", (TaskInitFunc)task_hum_mahluxia_0, (TaskUpdateFunc)task_hum_mahluxia_1, (TaskFunc)task_hum_mahluxia_2, (TaskFunc)task_hum_mahluxia_3, sizeof(MahluxiaWork) };
+TaskDesc gTaskDescHumMahluxia = {
+    "task_hum_mahluxia",
+    (TaskInitFunc)task_hum_mahluxia_0,
+    (TaskUpdateFunc)task_hum_mahluxia_1,
+    (TaskFunc)task_hum_mahluxia_2,
+    (TaskFunc)task_hum_mahluxia_3,
+    sizeof(MahluxiaWork),
+};
 
 const u32 gUnk_0813F480[2][3] = {
     { 36, 38, 38 },
@@ -217,9 +266,23 @@ const AnimDef gHumLaxeneAnimDefs[15] = {
 
 const HumDef gHumLaxeneDef = { 128, 0, gLaxinePalette, 0, { 49, 99, 60, 14, 46, 99, 0 } };
 
-TaskDesc gTaskDescHumLaxene = { "task_hum_laxene", (TaskInitFunc)task_hum_laxene_0, (TaskUpdateFunc)task_hum_laxene_1, (TaskFunc)task_hum_laxene_2, (TaskFunc)task_hum_laxene_3, sizeof(LaxeneWork) };
+TaskDesc gTaskDescHumLaxene = {
+    "task_hum_laxene",
+    (TaskInitFunc)task_hum_laxene_0,
+    (TaskUpdateFunc)task_hum_laxene_1,
+    (TaskFunc)task_hum_laxene_2,
+    (TaskFunc)task_hum_laxene_3,
+    sizeof(LaxeneWork),
+};
 
-TaskDesc gTaskDescHumLaxeneKnf = { "task_hum_laxene_knf", (TaskInitFunc)task_hum_laxene_knf_0, (TaskUpdateFunc)task_hum_laxene_knf_1, (TaskFunc)task_hum_laxene_knf_2, (TaskFunc)task_hum_laxene_knf_3, sizeof(LaxeneKnfWork) };
+TaskDesc gTaskDescHumLaxeneKnf = {
+    "task_hum_laxene_knf",
+    (TaskInitFunc)task_hum_laxene_knf_0,
+    (TaskUpdateFunc)task_hum_laxene_knf_1,
+    (TaskFunc)task_hum_laxene_knf_2,
+    (TaskFunc)task_hum_laxene_knf_3,
+    sizeof(LaxeneKnfWork),
+};
 
 const u32 gUnk_0813F5C8[2][3] = {
     { 36, 36, 36 },
@@ -266,9 +329,23 @@ const HumDef gHumAxcelDef = {
 #endif
     , 0, gAccelePalette, 0, { 48, 99, 60, 14, 32, 99, 0 } };
 
-TaskDesc gTaskDescHumAxcel = { "task_hum_axcel", (TaskInitFunc)task_hum_axcel_0, (TaskUpdateFunc)task_hum_axcel_1, (TaskFunc)task_hum_axcel_2, (TaskFunc)task_hum_axcel_3, sizeof(AxcelWork) };
+TaskDesc gTaskDescHumAxcel = {
+    "task_hum_axcel",
+    (TaskInitFunc)task_hum_axcel_0,
+    (TaskUpdateFunc)task_hum_axcel_1,
+    (TaskFunc)task_hum_axcel_2,
+    (TaskFunc)task_hum_axcel_3,
+    sizeof(AxcelWork),
+};
 
-TaskDesc gTaskDescHumAxcelPtc = { "task_hum_axcel_ptc", (TaskInitFunc)task_hum_axcel_ptc_0, (TaskUpdateFunc)task_hum_axcel_ptc_1, (TaskFunc)task_hum_axcel_ptc_2, (TaskFunc)task_hum_axcel_ptc_3, sizeof(AxcelPtcWork) };
+TaskDesc gTaskDescHumAxcelPtc = {
+    "task_hum_axcel_ptc",
+    (TaskInitFunc)task_hum_axcel_ptc_0,
+    (TaskUpdateFunc)task_hum_axcel_ptc_1,
+    (TaskFunc)task_hum_axcel_ptc_2,
+    (TaskFunc)task_hum_axcel_ptc_3,
+    sizeof(AxcelPtcWork),
+};
 
 const u32 gUnk_0813F7A8[3] = {
     36, 37, 36,
@@ -306,11 +383,32 @@ const AnimDef gHumVixenAnimDefs[15] = {
 
 const HumDef gHumVixenDef = { 83, 0, gVixenPalette, 0, { 50, 99, 80, 14, 48, 99, 0 } };
 
-TaskDesc gTaskDescHumVixen = { "task_hum_vixen", (TaskInitFunc)task_hum_vixen_0, (TaskUpdateFunc)task_hum_vixen_1, (TaskFunc)task_hum_vixen_2, (TaskFunc)task_hum_vixen_3, sizeof(VixenWork) };
+TaskDesc gTaskDescHumVixen = {
+    "task_hum_vixen",
+    (TaskInitFunc)task_hum_vixen_0,
+    (TaskUpdateFunc)task_hum_vixen_1,
+    (TaskFunc)task_hum_vixen_2,
+    (TaskFunc)task_hum_vixen_3,
+    sizeof(VixenWork),
+};
 
-TaskDesc gTaskDescHumVixenNdl = { "task_hum_vixen_ndl", (TaskInitFunc)task_hum_vixen_ndl_0, (TaskUpdateFunc)task_hum_vixen_ndl_1, (TaskFunc)task_hum_vixen_ndl_2, (TaskFunc)task_hum_vixen_ndl_3, sizeof(VixenNdlWork) };
+TaskDesc gTaskDescHumVixenNdl = {
+    "task_hum_vixen_ndl",
+    (TaskInitFunc)task_hum_vixen_ndl_0,
+    (TaskUpdateFunc)task_hum_vixen_ndl_1,
+    (TaskFunc)task_hum_vixen_ndl_2,
+    (TaskFunc)task_hum_vixen_ndl_3,
+    sizeof(VixenNdlWork),
+};
 
-TaskDesc gTaskDescHumVixenIce = { "task_hum_vixen_ice", (TaskInitFunc)task_hum_vixen_ice_0, (TaskUpdateFunc)task_hum_vixen_ice_1, (TaskFunc)task_hum_vixen_ice_2, (TaskFunc)task_hum_vixen_ice_3, sizeof(VixenIceWork) };
+TaskDesc gTaskDescHumVixenIce = {
+    "task_hum_vixen_ice",
+    (TaskInitFunc)task_hum_vixen_ice_0,
+    (TaskUpdateFunc)task_hum_vixen_ice_1,
+    (TaskFunc)task_hum_vixen_ice_2,
+    (TaskFunc)task_hum_vixen_ice_3,
+    sizeof(VixenIceWork),
+};
 
 const AnimDef gHumVixenFrzAnimDefs[13] = {
     { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 0, { 0, 0, 0 } },
@@ -328,7 +426,14 @@ const AnimDef gHumVixenFrzAnimDefs[13] = {
     { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 2, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescHumVixenFrz = { "task_hum_vixen_frz", (TaskInitFunc)task_hum_vixen_frz_0, (TaskUpdateFunc)task_hum_vixen_frz_1, (TaskFunc)task_hum_vixen_frz_2, (TaskFunc)task_hum_vixen_frz_3, sizeof(VixenFrzWork) };
+TaskDesc gTaskDescHumVixenFrz = {
+    "task_hum_vixen_frz",
+    (TaskInitFunc)task_hum_vixen_frz_0,
+    (TaskUpdateFunc)task_hum_vixen_frz_1,
+    (TaskFunc)task_hum_vixen_frz_2,
+    (TaskFunc)task_hum_vixen_frz_3,
+    sizeof(VixenFrzWork),
+};
 
 const VixenFrgDef gVixenFrgDefs[15] = {
     { 12, -29, 3, 0 },
@@ -348,7 +453,14 @@ const VixenFrgDef gVixenFrgDefs[15] = {
     { 3, -54, 1, 1 },
 };
 
-TaskDesc gTaskDescHumVixenFrg = { "task_hum_vixen_frg", (TaskInitFunc)task_hum_vixen_frg_0, (TaskUpdateFunc)task_hum_vixen_frg_1, (TaskFunc)task_hum_vixen_frg_2, (TaskFunc)task_hum_vixen_frg_3, sizeof(VixenFrgWork) };
+TaskDesc gTaskDescHumVixenFrg = {
+    "task_hum_vixen_frg",
+    (TaskInitFunc)task_hum_vixen_frg_0,
+    (TaskUpdateFunc)task_hum_vixen_frg_1,
+    (TaskFunc)task_hum_vixen_frg_2,
+    (TaskFunc)task_hum_vixen_frg_3,
+    sizeof(VixenFrgWork),
+};
 
 const u32 gUnk_0813FA8C[3] = {
     36, 37, 36,
@@ -369,15 +481,50 @@ const AnimDef gHumLexceusAnimDefs[10] = {
 
 const HumDef gHumLexceusDef = { 128, 0, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, 4 } };
 
-TaskDesc gTaskDescHumLexceus = { "task_hum_lexceus", (TaskInitFunc)task_hum_lexceus_0, (TaskUpdateFunc)task_hum_lexceus_1, (TaskFunc)task_hum_lexceus_2, (TaskFunc)task_hum_lexceus_3, sizeof(LexceusWork) };
+TaskDesc gTaskDescHumLexceus = {
+    "task_hum_lexceus",
+    (TaskInitFunc)task_hum_lexceus_0,
+    (TaskUpdateFunc)task_hum_lexceus_1,
+    (TaskFunc)task_hum_lexceus_2,
+    (TaskFunc)task_hum_lexceus_3,
+    sizeof(LexceusWork),
+};
 
-TaskDesc gTaskDescHumLexTmh = { "task_hum_lex_tmh", (TaskInitFunc)task_hum_lex_tmh_0, (TaskUpdateFunc)task_hum_lex_tmh_1, (TaskFunc)task_hum_lex_tmh_2, (TaskFunc)task_hum_lex_tmh_3, sizeof(LexTmhWork) };
+TaskDesc gTaskDescHumLexTmh = {
+    "task_hum_lex_tmh",
+    (TaskInitFunc)task_hum_lex_tmh_0,
+    (TaskUpdateFunc)task_hum_lex_tmh_1,
+    (TaskFunc)task_hum_lex_tmh_2,
+    (TaskFunc)task_hum_lex_tmh_3,
+    sizeof(LexTmhWork),
+};
 
-TaskDesc gTaskDescHumLexTmh0 = { "task_hum_lex_tmh0", (TaskInitFunc)task_hum_lex_tmh0_0, (TaskUpdateFunc)task_hum_lex_tmh0_1, (TaskFunc)task_hum_lex_tmh0_2, (TaskFunc)task_hum_lex_tmh0_3, sizeof(LexTmh0Work) };
+TaskDesc gTaskDescHumLexTmh0 = {
+    "task_hum_lex_tmh0",
+    (TaskInitFunc)task_hum_lex_tmh0_0,
+    (TaskUpdateFunc)task_hum_lex_tmh0_1,
+    (TaskFunc)task_hum_lex_tmh0_2,
+    (TaskFunc)task_hum_lex_tmh0_3,
+    sizeof(LexTmh0Work),
+};
 
-TaskDesc gTaskDescHumLexRock = { "task_hum_lex_rock", (TaskInitFunc)task_hum_lex_rock_0, (TaskUpdateFunc)task_hum_lex_rock_1, (TaskFunc)task_hum_lex_rock_2, (TaskFunc)task_hum_lex_rock_3, sizeof(LexRockWork) };
+TaskDesc gTaskDescHumLexRock = {
+    "task_hum_lex_rock",
+    (TaskInitFunc)task_hum_lex_rock_0,
+    (TaskUpdateFunc)task_hum_lex_rock_1,
+    (TaskFunc)task_hum_lex_rock_2,
+    (TaskFunc)task_hum_lex_rock_3,
+    sizeof(LexRockWork),
+};
 
-TaskDesc gTaskDescHumMahluxiaFlw = { "task_hum_mahluxia_flw", (TaskInitFunc)task_hum_mahluxia_flw_0, (TaskUpdateFunc)task_hum_mahluxia_flw_1, (TaskFunc)task_hum_mahluxia_flw_2, (TaskFunc)task_hum_mahluxia_flw_3, sizeof(MahluxiaFlwWork) };
+TaskDesc gTaskDescHumMahluxiaFlw = {
+    "task_hum_mahluxia_flw",
+    (TaskInitFunc)task_hum_mahluxia_flw_0,
+    (TaskUpdateFunc)task_hum_mahluxia_flw_1,
+    (TaskFunc)task_hum_mahluxia_flw_2,
+    (TaskFunc)task_hum_mahluxia_flw_3,
+    sizeof(MahluxiaFlwWork),
+};
 
 const u32 gUnk_0813FBBC[2][3] = {
     { 36, 36, 38 },
@@ -412,7 +559,14 @@ const HumDef gHumRikuDef = { 64, 0, gNiserikuPalette, 0, { 45, 99, 38, 14, 24, 9
 
 const HumSubDef gHumRikuSubDef = { gNiserikuPalette, 64, 0 };
 
-TaskDesc gTaskDescHumRiku = { "task_hum_riku", (TaskInitFunc)task_hum_riku_0, (TaskUpdateFunc)task_hum_riku_1, (TaskFunc)task_hum_riku_2, (TaskFunc)task_hum_riku_3, sizeof(RikuWork) };
+TaskDesc gTaskDescHumRiku = {
+    "task_hum_riku",
+    (TaskInitFunc)task_hum_riku_0,
+    (TaskUpdateFunc)task_hum_riku_1,
+    (TaskFunc)task_hum_riku_2,
+    (TaskFunc)task_hum_riku_3,
+    sizeof(RikuWork),
+};
 
 const AnimDef gHumLeonAnimDefs[5] = {
     { gReonFl00Frames, gReonFl00Anims, gReonFl00Tiles, 0, { 0, 0, 0 } },
@@ -424,7 +578,14 @@ const AnimDef gHumLeonAnimDefs[5] = {
 
 const HumDef gHumLeonDef = { 128, 0, gReonPalette, 0, { 41, 99, 64, 14, 40, 99, 0 } };
 
-TaskDesc gTaskDescHumLeon = { "task_hum_leon", (TaskInitFunc)task_hum_leon_0, (TaskUpdateFunc)task_hum_leon_1, (TaskFunc)task_hum_leon_2, (TaskFunc)task_hum_leon_3, sizeof(LeonWork) };
+TaskDesc gTaskDescHumLeon = {
+    "task_hum_leon",
+    (TaskInitFunc)task_hum_leon_0,
+    (TaskUpdateFunc)task_hum_leon_1,
+    (TaskFunc)task_hum_leon_2,
+    (TaskFunc)task_hum_leon_3,
+    sizeof(LeonWork),
+};
 
 const AnimDef gHumRobeAnimDefs[2] = {
     { gRobeFl00Frames, gRobeFl00Anims, gRobeFl00Tiles, 5, { 0, 0, 0 } },
@@ -8751,4 +8912,11 @@ void ApplySaveFileSmall(SaveFileSmall* save) {
     gGameState.flags |= 8;
 }
 
-TaskDesc gTaskDescHumRobe = { "task_hum_robe", (TaskInitFunc)task_hum_robe_0, (TaskUpdateFunc)task_hum_robe_1, (TaskFunc)task_hum_robe_2, (TaskFunc)task_hum_robe_3, sizeof(RobeWork) };
+TaskDesc gTaskDescHumRobe = {
+    "task_hum_robe",
+    (TaskInitFunc)task_hum_robe_0,
+    (TaskUpdateFunc)task_hum_robe_1,
+    (TaskFunc)task_hum_robe_2,
+    (TaskFunc)task_hum_robe_3,
+    sizeof(RobeWork),
+};

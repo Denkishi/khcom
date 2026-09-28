@@ -105,7 +105,7 @@ TaskDesc gTaskDescPcAcddmg = {
     "task_pc_acddmg",
     (TaskInitFunc)task_pc_acddmg_0,
     (TaskUpdateFunc)task_pc_acddmg_1,
-    0,
-    0,
+    NULL,
+    NULL,
     sizeof(PcAcdDmgWork),
 };

@@ -83,8 +83,8 @@ TaskDesc gTaskDescBosBoogieMap = {
     "task_bos_boogie_map",
     (TaskInitFunc)task_bos_boogie_map_0,
     (TaskUpdateFunc)task_bos_boogie_map_1,
-    0,
-    0,
+    NULL,
+    NULL,
     0x4,
 };
 
@@ -340,7 +340,7 @@ TaskDesc gTaskDescBosUrsulaMap = {
     "task_bos_ursula_map",
     (TaskInitFunc)task_bos_ursula_map_0,
     (TaskUpdateFunc)task_bos_ursula_map_1,
-    0,
+    NULL,
     (TaskFunc)task_bos_ursula_map_3,
     sizeof(UrsulaMapWork),
 };

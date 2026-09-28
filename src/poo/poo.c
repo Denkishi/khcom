@@ -8089,8 +8089,8 @@ TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",
     (TaskInitFunc)task_poo_mapanime_0,
     (TaskUpdateFunc)task_poo_mapanime_1,
-    task_poo_mapanime_2,
-    task_poo_mapanime_3,
+    (TaskFunc)task_poo_mapanime_2,
+    (TaskFunc)task_poo_mapanime_3,
     sizeof(PooMapAnimeWork),
 };
 

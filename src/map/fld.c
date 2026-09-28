@@ -39,7 +39,14 @@ const u16 gUnk_0813CD4C[8][8] = {
     { 109, 110, 111, 112, 122, 123, 135, 0 },
 };
 
-TaskDesc gTaskDescFldSora = { "task_fld_sora", (TaskInitFunc)task_fld_sora_0, (TaskUpdateFunc)task_fld_sora_1, (TaskFunc)task_fld_sora_2, (TaskFunc)task_fld_sora_3, sizeof(FldWork) };
+TaskDesc gTaskDescFldSora = {
+    "task_fld_sora",
+    (TaskInitFunc)task_fld_sora_0,
+    (TaskUpdateFunc)task_fld_sora_1,
+    (TaskFunc)task_fld_sora_2,
+    (TaskFunc)task_fld_sora_3,
+    sizeof(FldWork),
+};
 
 const AnimDef gUnk_0813CDDC[15][5] = {
     { { gUnk_09EDF4C0, gUnk_09EDF4C4, gUnk_08933A34, 0, { 0, 0, 0 } }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0, { 0, 0, 0 } }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0, { 0, 0, 0 } }, { gUnk_09EDF4C8, gUnk_09EDF4CC, gUnk_08933D94, 0, { 0, 0, 0 } }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0, { 0, 0, 0 } } },
@@ -3499,6 +3506,20 @@ void task_fld_shadow_3(FldShadowWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-TaskDesc gTaskDescFldRiku = { "task_fld_riku", (TaskInitFunc)task_fld_riku_0, (TaskUpdateFunc)task_fld_riku_1, (TaskFunc)task_fld_riku_2, (TaskFunc)task_fld_riku_3, sizeof(FldWork) };
+TaskDesc gTaskDescFldRiku = {
+    "task_fld_riku",
+    (TaskInitFunc)task_fld_riku_0,
+    (TaskUpdateFunc)task_fld_riku_1,
+    (TaskFunc)task_fld_riku_2,
+    (TaskFunc)task_fld_riku_3,
+    sizeof(FldWork),
+};
 
-TaskDesc gTaskDescFldShadow = { "task_fld_shadow", (TaskInitFunc)task_fld_shadow_0, (TaskUpdateFunc)task_fld_shadow_1, (TaskFunc)task_fld_shadow_2, (TaskFunc)task_fld_shadow_3, sizeof(FldShadowWork) };
+TaskDesc gTaskDescFldShadow = {
+    "task_fld_shadow",
+    (TaskInitFunc)task_fld_shadow_0,
+    (TaskUpdateFunc)task_fld_shadow_1,
+    (TaskFunc)task_fld_shadow_2,
+    (TaskFunc)task_fld_shadow_3,
+    sizeof(FldShadowWork),
+};

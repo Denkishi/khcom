@@ -47,4 +47,11 @@ void CreateBgTileTransferTask(TaskPool* pool, s32 bg, u16 tile, u16 count, u16 f
     TaskCreate(pool, &gTaskDescAcgtrans, &cfg);
 }
 
-TaskDesc gTaskDescAcgtrans = { "task_acgtrans", (TaskInitFunc)task_acgtrans_0, (TaskUpdateFunc)task_acgtrans_1, 0, 0, sizeof(AcgTransWork) };
+TaskDesc gTaskDescAcgtrans = {
+    "task_acgtrans",
+    (TaskInitFunc)task_acgtrans_0,
+    (TaskUpdateFunc)task_acgtrans_1,
+    NULL,
+    NULL,
+    sizeof(AcgTransWork),
+};

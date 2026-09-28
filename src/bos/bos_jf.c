@@ -1003,8 +1003,8 @@ TaskDesc gTaskDescBosJfMap = {
     "task_bos_jf_map",
     (TaskInitFunc)task_bos_jf_map_0,
     (TaskUpdateFunc)task_bos_jf_map_1,
-    0,
-    0,
+    NULL,
+    NULL,
     sizeof(JfMapWork),
 };
 

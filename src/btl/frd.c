@@ -16,7 +16,14 @@ const AnimDef gFrdDonaldAnimDefs[6] = {
     { gDonaBl00Frames, gDonaBl00Anims, gDonaBl00Tiles, 2, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdDonald = { "task_frd_donald", (TaskInitFunc)task_frd_donald_0, (TaskUpdateFunc)task_frd_donald_1, (TaskFunc)task_frd_donald_2, (TaskFunc)task_frd_donald_3, sizeof(FrdDonaldWork) };
+TaskDesc gTaskDescFrdDonald = {
+    "task_frd_donald",
+    (TaskInitFunc)task_frd_donald_0,
+    (TaskUpdateFunc)task_frd_donald_1,
+    (TaskFunc)task_frd_donald_2,
+    (TaskFunc)task_frd_donald_3,
+    sizeof(FrdDonaldWork),
+};
 
 const AnimDef gFrdGoofyAnimDefs[5] = {
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0, { 0, 0, 0 } },
@@ -26,7 +33,14 @@ const AnimDef gFrdGoofyAnimDefs[5] = {
     { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 2, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdGoofy = { "task_frd_goofy", (TaskInitFunc)task_frd_goofy_0, (TaskUpdateFunc)task_frd_goofy_1, (TaskFunc)task_frd_goofy_2, (TaskFunc)task_frd_goofy_3, sizeof(FrdGoofyWork) };
+TaskDesc gTaskDescFrdGoofy = {
+    "task_frd_goofy",
+    (TaskInitFunc)task_frd_goofy_0,
+    (TaskUpdateFunc)task_frd_goofy_1,
+    (TaskFunc)task_frd_goofy_2,
+    (TaskFunc)task_frd_goofy_3,
+    sizeof(FrdGoofyWork),
+};
 
 const AnimDef gFrdArielAnimDefs[3] = {
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 0, { 0, 0, 0 } },
@@ -34,7 +48,14 @@ const AnimDef gFrdArielAnimDefs[3] = {
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 2, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdAriel = { "task_frd_ariel", (TaskInitFunc)task_frd_ariel_0, (TaskUpdateFunc)task_frd_ariel_1, (TaskFunc)task_frd_ariel_2, (TaskFunc)task_frd_ariel_3, sizeof(FrdArielWork) };
+TaskDesc gTaskDescFrdAriel = {
+    "task_frd_ariel",
+    (TaskInitFunc)task_frd_ariel_0,
+    (TaskUpdateFunc)task_frd_ariel_1,
+    (TaskFunc)task_frd_ariel_2,
+    (TaskFunc)task_frd_ariel_3,
+    sizeof(FrdArielWork),
+};
 
 const AnimDef gFrdJackAnimDefs[5] = {
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 0, { 0, 0, 0 } },
@@ -44,7 +65,14 @@ const AnimDef gFrdJackAnimDefs[5] = {
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 4, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdJack = { "task_frd_jack", (TaskInitFunc)task_frd_jack_0, (TaskUpdateFunc)task_frd_jack_1, (TaskFunc)task_frd_jack_2, (TaskFunc)task_frd_jack_3, sizeof(FrdJackWork) };
+TaskDesc gTaskDescFrdJack = {
+    "task_frd_jack",
+    (TaskInitFunc)task_frd_jack_0,
+    (TaskUpdateFunc)task_frd_jack_1,
+    (TaskFunc)task_frd_jack_2,
+    (TaskFunc)task_frd_jack_3,
+    sizeof(FrdJackWork),
+};
 
 const AnimDef gFrdPanAnimDefs[4] = {
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0, { 0, 0, 0 } },
@@ -53,7 +81,14 @@ const AnimDef gFrdPanAnimDefs[4] = {
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 3, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdPan = { "task_frd_pan", (TaskInitFunc)task_frd_pan_0, (TaskUpdateFunc)task_frd_pan_1, (TaskFunc)task_frd_pan_2, (TaskFunc)task_frd_pan_3, sizeof(FrdPanWork) };
+TaskDesc gTaskDescFrdPan = {
+    "task_frd_pan",
+    (TaskInitFunc)task_frd_pan_0,
+    (TaskUpdateFunc)task_frd_pan_1,
+    (TaskFunc)task_frd_pan_2,
+    (TaskFunc)task_frd_pan_3,
+    sizeof(FrdPanWork),
+};
 
 const AnimDef gFrdAladdinAnimDefs[3] = {
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 2, { 0, 0, 0 } },
@@ -61,7 +96,14 @@ const AnimDef gFrdAladdinAnimDefs[3] = {
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 1, { 0, 0, 0 } },
 };
 
-TaskDesc gTaskDescFrdAladdin = { "task_frd_aladdin", (TaskInitFunc)task_frd_aladdin_0, (TaskUpdateFunc)task_frd_aladdin_1, (TaskFunc)task_frd_aladdin_2, (TaskFunc)task_frd_aladdin_3, sizeof(FrdAladdinWork) };
+TaskDesc gTaskDescFrdAladdin = {
+    "task_frd_aladdin",
+    (TaskInitFunc)task_frd_aladdin_0,
+    (TaskUpdateFunc)task_frd_aladdin_1,
+    (TaskFunc)task_frd_aladdin_2,
+    (TaskFunc)task_frd_aladdin_3,
+    sizeof(FrdAladdinWork),
+};
 
 const AnimDef gFrdBeastAnimDefs[2] = {
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0, { 0, 0, 0 } },
@@ -2352,4 +2394,11 @@ void task_frd_beast_3(FrdBeastWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-TaskDesc gTaskDescFrdBeast = { "task_frd_beast", (TaskInitFunc)task_frd_beast_0, (TaskUpdateFunc)task_frd_beast_1, (TaskFunc)task_frd_beast_2, (TaskFunc)task_frd_beast_3, sizeof(FrdBeastWork) };
+TaskDesc gTaskDescFrdBeast = {
+    "task_frd_beast",
+    (TaskInitFunc)task_frd_beast_0,
+    (TaskUpdateFunc)task_frd_beast_1,
+    (TaskFunc)task_frd_beast_2,
+    (TaskFunc)task_frd_beast_3,
+    sizeof(FrdBeastWork),
+};

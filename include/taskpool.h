@@ -1,6 +1,7 @@
 #ifndef GUARD_TASKPOOL_H
 #define GUARD_TASKPOOL_H
 
+#include <stddef.h>
 #include "types.h"
 #include "listpool.h"
 

@@ -18,9 +18,23 @@
 #include "gba/io_reg.h"
 #include "system_state.h"
 
-TaskDesc gTaskDescBtlLockon = { "task_btl_lockon", (TaskInitFunc)task_btl_lockon_0, (TaskUpdateFunc)task_btl_lockon_1, (TaskFunc)task_btl_lockon_2, (TaskFunc)task_btl_lockon_3, sizeof(BtlLockonWork) };
+TaskDesc gTaskDescBtlLockon = {
+    "task_btl_lockon",
+    (TaskInitFunc)task_btl_lockon_0,
+    (TaskUpdateFunc)task_btl_lockon_1,
+    (TaskFunc)task_btl_lockon_2,
+    (TaskFunc)task_btl_lockon_3,
+    sizeof(BtlLockonWork),
+};
 
-TaskDesc gTaskDescBtlArea = { "task_btl_area", (TaskInitFunc)task_btl_area_0, (TaskUpdateFunc)task_btl_area_1, (TaskFunc)task_btl_area_2, (TaskFunc)task_btl_area_3, sizeof(BtlAreaWork) };
+TaskDesc gTaskDescBtlArea = {
+    "task_btl_area",
+    (TaskInitFunc)task_btl_area_0,
+    (TaskUpdateFunc)task_btl_area_1,
+    (TaskFunc)task_btl_area_2,
+    (TaskFunc)task_btl_area_3,
+    sizeof(BtlAreaWork),
+};
 
 const AnimDef gBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0, { 0, 0, 0 } },
@@ -150,7 +164,14 @@ const u8 gUnk_0813C294[5] = {
     10, 12, 15, 18, 20,
 };
 
-TaskDesc gTaskDescBtlSora = { "task_btl_sora", (TaskInitFunc)task_btl_sora_0, (TaskUpdateFunc)task_btl_sora_1, (TaskFunc)task_btl_sora_2, (TaskFunc)task_btl_sora_3, sizeof(BtlSoraWork) };
+TaskDesc gTaskDescBtlSora = {
+    "task_btl_sora",
+    (TaskInitFunc)task_btl_sora_0,
+    (TaskUpdateFunc)task_btl_sora_1,
+    (TaskFunc)task_btl_sora_2,
+    (TaskFunc)task_btl_sora_3,
+    sizeof(BtlSoraWork),
+};
 
 const AnimDef gBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0, { 0, 0, 0 } },
@@ -10882,4 +10903,11 @@ void task_btl_riku_3(BtlRikuWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-TaskDesc gTaskDescBtlRiku = { "task_btl_riku", (TaskInitFunc)task_btl_riku_0, (TaskUpdateFunc)task_btl_riku_1, (TaskFunc)task_btl_riku_2, (TaskFunc)task_btl_riku_3, sizeof(BtlRikuWork) };
+TaskDesc gTaskDescBtlRiku = {
+    "task_btl_riku",
+    (TaskInitFunc)task_btl_riku_0,
+    (TaskUpdateFunc)task_btl_riku_1,
+    (TaskFunc)task_btl_riku_2,
+    (TaskFunc)task_btl_riku_3,
+    sizeof(BtlRikuWork),
+};

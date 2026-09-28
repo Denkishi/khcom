@@ -113,8 +113,8 @@ TaskDesc gTaskDescBosMap = {
     "task_bos_map",
     (TaskInitFunc)task_bos_map_0,
     (TaskUpdateFunc)task_bos_map_1,
-    0,
-    0,
+    NULL,
+    NULL,
     0x4,
 };
 

@@ -183,4 +183,11 @@ void task_roomcreate_3(RoomCreateWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-TaskDesc gTaskDescRoomcreate = { "task_roomcreate", (TaskInitFunc)task_roomcreate_0, (TaskUpdateFunc)task_roomcreate_1, (TaskFunc)task_roomcreate_2, (TaskFunc)task_roomcreate_3, sizeof(RoomCreateWork) };
+TaskDesc gTaskDescRoomcreate = {
+    "task_roomcreate",
+    (TaskInitFunc)task_roomcreate_0,
+    (TaskUpdateFunc)task_roomcreate_1,
+    (TaskFunc)task_roomcreate_2,
+    (TaskFunc)task_roomcreate_3,
+    sizeof(RoomCreateWork),
+};

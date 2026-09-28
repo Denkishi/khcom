@@ -6412,17 +6412,17 @@ void func_0807361C(MsgWinWork* p) {
             if (p->unk_2B == 0) {
                 if ((p->script[p->unk_27].flags & 0x8000) == 0) {
                     if ((p->script[p->unk_27].flags & 0x40) == 0) {
-                        TaskCreate(&p->tasks, &gTaskDescMsgface[1], &p->script[p->unk_27 + 1].positionIndex);
+                        TaskCreate(&p->tasks, &gTaskDescMsgwait, &p->script[p->unk_27 + 1].positionIndex);
                     } else {
-                        TaskCreate(&p->tasks, &gTaskDescMsgface[2], &p->script[p->unk_27 + 1].positionIndex);
+                        TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &p->script[p->unk_27 + 1].positionIndex);
                     }
                 } else {
                     v = 0;
 
                     if ((p->script[p->unk_27].flags & 0x40) == 0) {
-                        TaskCreate(&p->tasks, &gTaskDescMsgface[1], &v);
+                        TaskCreate(&p->tasks, &gTaskDescMsgwait, &v);
                     } else {
-                        TaskCreate(&p->tasks, &gTaskDescMsgface[2], &v);
+                        TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &v);
                     }
                 }
                 p->unk_2B = 1;
@@ -6707,7 +6707,7 @@ void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c) {
     p->positionIndex = c;
     p->command = 0;
     p->unk_03 = 0;
-    TaskCreate(pool, &gTaskDescMsgface[0], p);
+    TaskCreate(pool, &gTaskDescMsgface, p);
 }
 
 void func_08073E34(MsgFaceControl* p, u8 a, u8 b, u8 c) {
@@ -7460,31 +7460,31 @@ TaskDesc gTaskDescMsgwin = {
     sizeof(MsgWinWork),
 };
 
-TaskDesc gTaskDescMsgface[3] = {
-    {
-        gTaskNameMsgface,
-        (TaskInitFunc)msgface_0,
-        (TaskUpdateFunc)msgface_1,
-        (TaskFunc)msgface_2,
-        (TaskFunc)msgface_3,
-        sizeof(MsgFaceWork),
-    },
-    {
-        gTaskNameMsgwait,
-        (TaskInitFunc)msgwait_0,
-        (TaskUpdateFunc)msgwait_1,
-        (TaskFunc)msgwait_2,
-        (TaskFunc)msgwait_3,
-        sizeof(MsgWaitWork),
-    },
-    {
-        "msgwait_yesno",
-        (TaskInitFunc)msgwait_yesno_0,
-        (TaskUpdateFunc)msgwait_yesno_1,
-        (TaskFunc)msgwait_yesno_2,
-        (TaskFunc)msgwait_yesno_3,
-        sizeof(MsgWaitWork),
-    },
+TaskDesc gTaskDescMsgface = {
+    gTaskNameMsgface,
+    (TaskInitFunc)msgface_0,
+    (TaskUpdateFunc)msgface_1,
+    (TaskFunc)msgface_2,
+    (TaskFunc)msgface_3,
+    sizeof(MsgFaceWork),
+};
+
+TaskDesc gTaskDescMsgwait = {
+    gTaskNameMsgwait,
+    (TaskInitFunc)msgwait_0,
+    (TaskUpdateFunc)msgwait_1,
+    (TaskFunc)msgwait_2,
+    (TaskFunc)msgwait_3,
+    sizeof(MsgWaitWork),
+};
+
+TaskDesc gTaskDescMsgwaitYesno = {
+    "msgwait_yesno",
+    (TaskInitFunc)msgwait_yesno_0,
+    (TaskUpdateFunc)msgwait_yesno_1,
+    (TaskFunc)msgwait_yesno_2,
+    (TaskFunc)msgwait_yesno_3,
+    sizeof(MsgWaitWork),
 };
 
 TaskDesc gTaskDescView = {

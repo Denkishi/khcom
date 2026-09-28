@@ -19,37 +19,168 @@ extern void* gUnkEu_09F80350[5];
 extern void* gUnkEu_09F80364[5];
 #endif
 
-const char gTaskNameStatus[] = "task_status";
+TaskDesc gTaskDescStatus = {
+    "task_status",
+    (TaskInitFunc)task_status_0,
+    (TaskUpdateFunc)task_status_1,
+    (TaskFunc)task_status_2,
+    (TaskFunc)task_status_3,
+    sizeof(StatusWork),
+};
 
 #ifdef VERSION_EU
 const u16 gUnkEu_096CB088[5] = {736, 608, 736, 640, 704};
 #endif
 
-const char gTaskNameStatusBar[] = "task_status_bar";
+#ifdef VERSION_EU
+void* gUnkEu_09F80288[5] = {
+    gUnk_097A18EC,
+    gUnkEu_0977DE68,
+    gUnk_097A18EC,
+    gUnkEu_0977E494,
+    gUnkEu_0977E14A,
+};
 
-const char gTaskNameStatusTab[] = "task_status_tab";
+void** gUnkEu_09F8029C[5] = {
+    gUnkEu_09F81EC8,
+    gUnkEu_09F81ED8,
+    gUnkEu_09F81EC8,
+    gUnkEu_09F81EF8,
+    gUnkEu_09F81EE8,
+};
+#endif
 
-const char gTaskNameStatusSora[] = "task_status_sora";
+TaskDesc gTaskDescStatusBar = {
+    "task_status_bar",
+    (TaskInitFunc)task_status_bar_0,
+    (TaskUpdateFunc)task_status_bar_1,
+    (TaskFunc)task_status_bar_2,
+    (TaskFunc)task_status_bar_3,
+    sizeof(StatusBarWork),
+};
 
-const char gTaskNameStatusDeckname[] = "task_status_deckname";
+#ifdef VERSION_EU
+void* gUnkEu_09F802C8[5] = {
+    gUnkEu_0977E746,
+    gUnkEu_0977EFAE,
+    gUnkEu_0977EB7A,
+    gUnkEu_0977F3E2,
+    gUnkEu_0977EB7A,
+};
+
+void** gUnkEu_09F802DC[5] = {
+    gUnkEu_09F81F08,
+    gUnkEu_09F81F30,
+    gUnkEu_09F81F1C,
+    gUnkEu_09F81F44,
+    gUnkEu_09F81F1C,
+};
+#endif
+
+TaskDesc gTaskDescStatusTab = {
+    "task_status_tab",
+    (TaskInitFunc)task_status_tab_0,
+    (TaskUpdateFunc)task_status_tab_1,
+    (TaskFunc)task_status_tab_2,
+    (TaskFunc)task_status_tab_3,
+    sizeof(StatusTabWork),
+};
+
+TaskDesc gTaskDescStatusSora = {
+    "task_status_sora",
+    (TaskInitFunc)task_status_sora_0,
+    (TaskUpdateFunc)task_status_sora_1,
+    (TaskFunc)task_status_sora_2,
+    (TaskFunc)task_status_sora_3,
+    sizeof(StatusSoraWork),
+};
+
+TaskDesc gTaskDescStatusDeckname = {
+    "task_status_deckname",
+    (TaskInitFunc)task_status_deckname_0,
+    (TaskUpdateFunc)task_status_deckname_1,
+    (TaskFunc)task_status_deckname_2,
+    (TaskFunc)task_status_deckname_3,
+    sizeof(StatusDecknameWork),
+};
 
 const s32 gUnk_096FDD8C[4] = {-1536, 2816, 6912, 10240};
 
-const char gTaskNameStatusCursor[] = "task_status_cursor";
+TaskDesc gTaskDescStatusCursor = {
+    "task_status_cursor",
+    (TaskInitFunc)task_status_cursor_0,
+    (TaskUpdateFunc)task_status_cursor_1,
+    (TaskFunc)task_status_cursor_2,
+    (TaskFunc)task_status_cursor_3,
+    sizeof(StatusCursorWork),
+};
 
 #ifdef VERSION_EU
 const u16 gUnkEu_096CB104[5] = {64, 128, 64, 128, 128};
 #endif
 
-const char gTaskNameStatusStocklist[] = "task_status_stocklist";
+#ifdef VERSION_EU
+void* gUnkEu_09F80350[5] = {
+    gUnkEu_0977F7F8,
+    gUnkEu_0977F84C,
+    gUnkEu_0977FA08,
+    gUnkEu_0977F974,
+    gUnkEu_0977F8E0,
+};
 
-const char gTaskNameStatusScrollcursor[] = "task_status_scrollcursor";
+void* gUnkEu_09F80364[5] = {
+    gUnkEu_0977F7E4,
+    gUnkEu_0977F838,
+    gUnkEu_0977F9F4,
+    gUnkEu_0977F960,
+    gUnkEu_0977F8CC,
+};
+#endif
 
-const char gTaskNameStatusMeswindow[] = "task_status_meswindow";
+TaskDesc gTaskDescStatusStocklist = {
+    "task_status_stocklist",
+    (TaskInitFunc)task_status_stocklist_0,
+    (TaskUpdateFunc)task_status_stocklist_1,
+    (TaskFunc)task_status_stocklist_2,
+    (TaskFunc)task_status_stocklist_3,
+    sizeof(StatusStocklistWork),
+};
 
-const char gTaskNameStatusMessage[] = "task_status_message";
+TaskDesc gTaskDescStatusScrollcursor = {
+    "task_status_scrollcursor",
+    (TaskInitFunc)task_status_scrollcursor_0,
+    (TaskUpdateFunc)task_status_scrollcursor_1,
+    (TaskFunc)task_status_scrollcursor_2,
+    (TaskFunc)task_status_scrollcursor_3,
+    sizeof(StatusScrollcursorWork),
+};
 
-const char gTaskNameStatusFriend[] = "task_status_friend";
+TaskDesc gTaskDescStatusMeswindow = {
+    "task_status_meswindow",
+    (TaskInitFunc)task_status_meswindow_0,
+    (TaskUpdateFunc)task_status_meswindow_1,
+    (TaskFunc)task_status_meswindow_2,
+    (TaskFunc)task_status_meswindow_3,
+    sizeof(StatusMeswindowWork),
+};
+
+TaskDesc gTaskDescStatusMessage = {
+    "task_status_message",
+    (TaskInitFunc)task_status_message_0,
+    (TaskUpdateFunc)task_status_message_1,
+    (TaskFunc)task_status_message_2,
+    (TaskFunc)task_status_message_3,
+    sizeof(StatusMessageWork),
+};
+
+TaskDesc gTaskDescStatusFriend = {
+    "task_status_friend",
+    (TaskInitFunc)task_status_friend_0,
+    (TaskUpdateFunc)task_status_friend_1,
+    (TaskFunc)task_status_friend_2,
+    (TaskFunc)task_status_friend_3,
+    sizeof(StatusFriendWork),
+};
 
 const StatusFriendTable gStatusFriendTable = {{
     {2, CARD_ID(CARD_DONALD_DUCK, 0)},
@@ -1111,159 +1242,6 @@ void* CreateStockMesDispTask(void* pool, u16 b, u8 c, u16 d, s32 e) {
 u8 GetStockMesDispTextIndex(void* a) {
     return ((StockMesDispWork*)gStockMesDispWork)->textIndex;
 }
-
-TaskDesc gTaskDescStatus = {
-    gTaskNameStatus,
-    (TaskInitFunc)task_status_0,
-    (TaskUpdateFunc)task_status_1,
-    (TaskFunc)task_status_2,
-    (TaskFunc)task_status_3,
-    sizeof(StatusWork),
-};
-
-#ifdef VERSION_EU
-void* gUnkEu_09F80288[5] = {
-    gUnk_097A18EC,
-    gUnkEu_0977DE68,
-    gUnk_097A18EC,
-    gUnkEu_0977E494,
-    gUnkEu_0977E14A,
-};
-
-void** gUnkEu_09F8029C[5] = {
-    gUnkEu_09F81EC8,
-    gUnkEu_09F81ED8,
-    gUnkEu_09F81EC8,
-    gUnkEu_09F81EF8,
-    gUnkEu_09F81EE8,
-};
-#endif
-
-TaskDesc gTaskDescStatusBar = {
-    gTaskNameStatusBar,
-    (TaskInitFunc)task_status_bar_0,
-    (TaskUpdateFunc)task_status_bar_1,
-    (TaskFunc)task_status_bar_2,
-    (TaskFunc)task_status_bar_3,
-    sizeof(StatusBarWork),
-};
-
-#ifdef VERSION_EU
-void* gUnkEu_09F802C8[5] = {
-    gUnkEu_0977E746,
-    gUnkEu_0977EFAE,
-    gUnkEu_0977EB7A,
-    gUnkEu_0977F3E2,
-    gUnkEu_0977EB7A,
-};
-
-void** gUnkEu_09F802DC[5] = {
-    gUnkEu_09F81F08,
-    gUnkEu_09F81F30,
-    gUnkEu_09F81F1C,
-    gUnkEu_09F81F44,
-    gUnkEu_09F81F1C,
-};
-#endif
-
-TaskDesc gTaskDescStatusTab = {
-    gTaskNameStatusTab,
-    (TaskInitFunc)task_status_tab_0,
-    (TaskUpdateFunc)task_status_tab_1,
-    (TaskFunc)task_status_tab_2,
-    (TaskFunc)task_status_tab_3,
-    sizeof(StatusTabWork),
-};
-
-TaskDesc gTaskDescStatusSora = {
-    gTaskNameStatusSora,
-    (TaskInitFunc)task_status_sora_0,
-    (TaskUpdateFunc)task_status_sora_1,
-    (TaskFunc)task_status_sora_2,
-    (TaskFunc)task_status_sora_3,
-    sizeof(StatusSoraWork),
-};
-
-TaskDesc gTaskDescStatusDeckname = {
-    gTaskNameStatusDeckname,
-    (TaskInitFunc)task_status_deckname_0,
-    (TaskUpdateFunc)task_status_deckname_1,
-    (TaskFunc)task_status_deckname_2,
-    (TaskFunc)task_status_deckname_3,
-    sizeof(StatusDecknameWork),
-};
-
-TaskDesc gTaskDescStatusCursor = {
-    gTaskNameStatusCursor,
-    (TaskInitFunc)task_status_cursor_0,
-    (TaskUpdateFunc)task_status_cursor_1,
-    (TaskFunc)task_status_cursor_2,
-    (TaskFunc)task_status_cursor_3,
-    sizeof(StatusCursorWork),
-};
-
-#ifdef VERSION_EU
-void* gUnkEu_09F80350[5] = {
-    gUnkEu_0977F7F8,
-    gUnkEu_0977F84C,
-    gUnkEu_0977FA08,
-    gUnkEu_0977F974,
-    gUnkEu_0977F8E0,
-};
-
-void* gUnkEu_09F80364[5] = {
-    gUnkEu_0977F7E4,
-    gUnkEu_0977F838,
-    gUnkEu_0977F9F4,
-    gUnkEu_0977F960,
-    gUnkEu_0977F8CC,
-};
-#endif
-
-TaskDesc gTaskDescStatusStocklist = {
-    gTaskNameStatusStocklist,
-    (TaskInitFunc)task_status_stocklist_0,
-    (TaskUpdateFunc)task_status_stocklist_1,
-    (TaskFunc)task_status_stocklist_2,
-    (TaskFunc)task_status_stocklist_3,
-    sizeof(StatusStocklistWork),
-};
-
-TaskDesc gTaskDescStatusScrollcursor = {
-    gTaskNameStatusScrollcursor,
-    (TaskInitFunc)task_status_scrollcursor_0,
-    (TaskUpdateFunc)task_status_scrollcursor_1,
-    (TaskFunc)task_status_scrollcursor_2,
-    (TaskFunc)task_status_scrollcursor_3,
-    sizeof(StatusScrollcursorWork),
-};
-
-TaskDesc gTaskDescStatusMeswindow = {
-    gTaskNameStatusMeswindow,
-    (TaskInitFunc)task_status_meswindow_0,
-    (TaskUpdateFunc)task_status_meswindow_1,
-    (TaskFunc)task_status_meswindow_2,
-    (TaskFunc)task_status_meswindow_3,
-    sizeof(StatusMeswindowWork),
-};
-
-TaskDesc gTaskDescStatusMessage = {
-    gTaskNameStatusMessage,
-    (TaskInitFunc)task_status_message_0,
-    (TaskUpdateFunc)task_status_message_1,
-    (TaskFunc)task_status_message_2,
-    (TaskFunc)task_status_message_3,
-    sizeof(StatusMessageWork),
-};
-
-TaskDesc gTaskDescStatusFriend = {
-    gTaskNameStatusFriend,
-    (TaskInitFunc)task_status_friend_0,
-    (TaskUpdateFunc)task_status_friend_1,
-    (TaskFunc)task_status_friend_2,
-    (TaskFunc)task_status_friend_3,
-    sizeof(StatusFriendWork),
-};
 
 TaskDesc gTaskDescStockMesDisp = {
     "stock_mes_disp",

@@ -332,4 +332,19 @@ u8 func_0806D830(EventSeqWork* p, void* a);
 void func_08070008(EventCharaWork* p);
 u8 func_080700D4(EventCharaWork* p, void* a);
 
+void event_seq_0(EventSeqWork* work, u8* a);
+u8 event_seq_1(EventSeqWork* work, void* a);
+void event_seq_2(EventSeqWork* p);
+void event_seq_3(EventSeqWork* p);
+void event_chara_0(EventCharaWork* p, EventSeqArg* a);
+void event_chara_2(EventCharaWork* p);
+void event_chara_3(EventCharaWork* p);
+void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl);
+void msgface_2(MsgFaceWork* p);
+void msgface_3(MsgFaceWork* p);
+void msgwait_0(MsgWaitWork* p, u8* arg);
+u8 msgwait_1(MsgWaitWork* p, void* a);
+void msgwait_2(MsgWaitWork* p);
+void msgwait_3(MsgWaitWork* p);
+
 #endif /* GUARD_MSG_H */

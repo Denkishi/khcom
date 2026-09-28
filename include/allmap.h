@@ -223,4 +223,21 @@ extern u8 gUnk_0203C538;
 extern s16 gUnk_0203C53C;
 extern s16 gUnk_0203C540;
 
+void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg);
+s32 task_allmap_room_1(void);
+void task_allmap_room_2(AllmapRoomWork* work);
+void task_allmap_room_3(AllmapRoomWork* work);
+void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg);
+s32 task_allmap_cursor_1(AllmapCursorWork* work);
+void task_allmap_cursor_2(AllmapCursorWork* work);
+void task_allmap_cursor_3(AllmapCursorWork* work);
+void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg);
+s32 task_allmap_roomname_1(void);
+void task_allmap_roomname_2(AllmapRoomnameWork* work);
+void task_allmap_roomname_3(AllmapRoomnameWork* work);
+void task_allmap_bar_0(AllmapBarWork* work);
+s32 task_allmap_bar_1(AllmapBarWork* work);
+void task_allmap_bar_2(AllmapBarWork* work);
+void task_allmap_bar_3(AllmapBarWork* work);
+
 #endif /* GUARD_ALLMAP_H */

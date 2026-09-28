@@ -25,7 +25,14 @@ UnkStruct_0203C590 gUnk_0203C590 EWRAM_COMMON(16);
 
 const EmyKind gUnk_096FDF54 = { 39, 0, 16, 16, 0, 0, 1 };
 
-const char gTaskNameBosBoogieDice[] = "task_bos_boogie_dice";
+TaskDesc gTaskDescBosBoogieDice = {
+    "task_bos_boogie_dice",
+    (TaskInitFunc)task_bos_boogie_dice_0,
+    (TaskUpdateFunc)task_bos_boogie_dice_1,
+    (TaskFunc)task_bos_boogie_dice_2,
+    (TaskFunc)task_bos_boogie_dice_3,
+    sizeof(BoogieDiceWork),
+};
 
 void* const gUnk_096FDF7C[6][3] = {
 #if defined(VERSION_US)
@@ -54,15 +61,6 @@ void* const gUnk_096FDF7C[6][3] = {
 
 const EmyKind gUnk_096FDFC4 = { 39, 0, 16, 16, 0, 0, 0 };
 
-TaskDesc gTaskDescBosBoogieDice = {
-    gTaskNameBosBoogieDice,
-    (TaskInitFunc)task_bos_boogie_dice_0,
-    (TaskUpdateFunc)task_bos_boogie_dice_1,
-    (TaskFunc)task_bos_boogie_dice_2,
-    (TaskFunc)task_bos_boogie_dice_3,
-    sizeof(BoogieDiceWork),
-};
-
 TaskDesc gTaskDescBosBoogieExplosiondice = {
     "task_bos_boogie_explosiondice",
     (TaskInitFunc)task_bos_boogie_explosiondice_0,
@@ -81,7 +79,14 @@ TaskDesc gTaskDescBosBoogieSaku = {
     sizeof(BoogieSakuWork),
 };
 
-const char gTaskNameBosBoogieMap[] = "task_bos_boogie_map";
+TaskDesc gTaskDescBosBoogieMap = {
+    "task_bos_boogie_map",
+    (TaskInitFunc)task_bos_boogie_map_0,
+    (TaskUpdateFunc)task_bos_boogie_map_1,
+    0,
+    0,
+    0x4,
+};
 
 const UnkStruct_096FE034Entry gUnk_096FE020[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
@@ -91,21 +96,8 @@ const UnkStruct_096FE034 gUnk_096FE04C = { gUnk_096FE020, 5, 0, gUnk_097ED578, 0
 
 const UnkStruct_096FE034 gUnk_096FE064 = { gUnk_096FE020, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
 
-TaskDesc gTaskDescBosBoogieMap = {
-    gTaskNameBosBoogieMap,
-    (TaskInitFunc)task_bos_boogie_map_0,
-    (TaskUpdateFunc)task_bos_boogie_map_1,
-    0,
-    0,
-    0x4,
-};
-
-const char gTaskNameBosBoogieMapanime[] = "task_bos_boogie_mapanime";
-
-const EmyKind gBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, 4 };
-
 TaskDesc gTaskDescBosBoogieMapanime = {
-    gTaskNameBosBoogieMapanime,
+    "task_bos_boogie_mapanime",
     (TaskInitFunc)task_bos_boogie_mapanime_0,
     (TaskUpdateFunc)task_bos_boogie_mapanime_1,
     (TaskFunc)task_bos_boogie_mapanime_2,
@@ -113,12 +105,10 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     sizeof(BoogieMapanimeWork),
 };
 
-const char gTaskNameBosBoogieDisk[] = "task_bos_boogie_disk";
-
-const EmyKind gUnk_096FE0C0 = { 39, 0, 192, 16, 0, 0, 0 };
+const EmyKind gBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, 4 };
 
 TaskDesc gTaskDescBosBoogieDisk = {
-    gTaskNameBosBoogieDisk,
+    "task_bos_boogie_disk",
     (TaskInitFunc)task_bos_boogie_disk_0,
     (TaskUpdateFunc)task_bos_boogie_disk_1,
     (TaskFunc)task_bos_boogie_disk_2,
@@ -126,12 +116,10 @@ TaskDesc gTaskDescBosBoogieDisk = {
     sizeof(BoogieDiskWork),
 };
 
-const char gTaskNameBosBoogieKnife[] = "task_bos_boogie_knife";
-
-const EmyKind gBosBoogieKnifereaderEmyKind = { 39, 0, 0, 0, 0, 0, 0 };
+const EmyKind gUnk_096FE0C0 = { 39, 0, 192, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKnife = {
-    gTaskNameBosBoogieKnife,
+    "task_bos_boogie_knife",
     (TaskInitFunc)task_bos_boogie_knife_0,
     (TaskUpdateFunc)task_bos_boogie_knife_1,
     (TaskFunc)task_bos_boogie_knife_2,
@@ -139,12 +127,10 @@ TaskDesc gTaskDescBosBoogieKnife = {
     sizeof(BoogieKnifeWork),
 };
 
-const char gTaskNameBosBoogieKnifereader[] = "task_bos_boogie_knifereader";
-
-const EmyKind gBosBoogieKaihukuEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
+const EmyKind gBosBoogieKnifereaderEmyKind = { 39, 0, 0, 0, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKnifereader = {
-    gTaskNameBosBoogieKnifereader,
+    "task_bos_boogie_knifereader",
     (TaskInitFunc)task_bos_boogie_knifereader_0,
     (TaskUpdateFunc)task_bos_boogie_knifereader_1,
     (TaskFunc)task_bos_boogie_knifereader_2,
@@ -152,21 +138,21 @@ TaskDesc gTaskDescBosBoogieKnifereader = {
     sizeof(BoogieKnifereaderWork),
 };
 
-const char gTaskNameBosBoogieKaihuku[] = "task_bos_boogie_kaihuku";
-
-const EmyKind gBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
-
-const BattleBackgroundDef gBosUrsulaBattleBackgroundDef = {
-    gUnk_097EE378, 0x7000, { 0, 0 }, gUnk_0984AFF8, 0xe0, { 0, 0 }, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
-};
+const EmyKind gBosBoogieKaihukuEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKaihuku = {
-    gTaskNameBosBoogieKaihuku,
+    "task_bos_boogie_kaihuku",
     (TaskInitFunc)task_bos_boogie_kaihuku_0,
     (TaskUpdateFunc)task_bos_boogie_kaihuku_1,
     (TaskFunc)task_bos_boogie_kaihuku_2,
     (TaskFunc)task_bos_boogie_kaihuku_3,
     sizeof(BoogieKaihukuWork),
+};
+
+const EmyKind gBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
+
+const BattleBackgroundDef gBosUrsulaBattleBackgroundDef = {
+    gUnk_097EE378, 0x7000, { 0, 0 }, gUnk_0984AFF8, 0xe0, { 0, 0 }, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
 };
 
 const u16* gUnk_09EF5100[12] = {
@@ -359,18 +345,16 @@ TaskDesc gTaskDescBosUrsulaMap = {
     sizeof(UrsulaMapWork),
 };
 
-const char gTaskNameBosUrsulaBorder[] = "task_bos_ursula_border";
-
-const EmyKind gBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, 1 };
-
 TaskDesc gTaskDescBosUrsulaBorder = {
-    gTaskNameBosUrsulaBorder,
+    "task_bos_ursula_border",
     (TaskInitFunc)task_bos_ursula_border_0,
     (TaskUpdateFunc)task_bos_ursula_border_1,
     (TaskFunc)task_bos_ursula_border_2,
     (TaskFunc)task_bos_ursula_border_3,
     sizeof(UrsulaBorderWork),
 };
+
+const EmyKind gBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, 1 };
 
 TaskDesc gTaskDescBosUrsulaTako = {
     "task_bos_ursula_tako",
@@ -381,7 +365,14 @@ TaskDesc gTaskDescBosUrsulaTako = {
     sizeof(UrsulaTakoWork),
 };
 
-const char gTaskNameBosUrsulaBacktako[] = "task_bos_ursula_backtako";
+TaskDesc gTaskDescBosUrsulaBacktako = {
+    "task_bos_ursula_backtako",
+    (TaskInitFunc)task_bos_ursula_backtako_0,
+    (TaskUpdateFunc)task_bos_ursula_backtako_1,
+    (TaskFunc)task_bos_ursula_backtako_2,
+    (TaskFunc)task_bos_ursula_backtako_3,
+    sizeof(UrsulaBacktakoWork),
+};
 
 const UnkStruct_096FE034Entry gUnk_096FE1EC[6] = { { 60, 0 }, { 4, 1 }, { 6, 2 }, { 20, 0 }, { 4, 1 }, { 6, 2 } };
 
@@ -402,15 +393,6 @@ const UnkStruct_096FE034 gUnk_096FE290 = { gUnk_096FE234, 5, 0, gUnk_097F8AD8, 0
 const UnkStruct_096FE034 gUnk_096FE2A8 = { gUnk_096FE248, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
 const UnkStruct_096FE034 gUnk_096FE2C0 = { gUnk_096FE25C, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
-
-TaskDesc gTaskDescBosUrsulaBacktako = {
-    gTaskNameBosUrsulaBacktako,
-    (TaskInitFunc)task_bos_ursula_backtako_0,
-    (TaskUpdateFunc)task_bos_ursula_backtako_1,
-    (TaskFunc)task_bos_ursula_backtako_2,
-    (TaskFunc)task_bos_ursula_backtako_3,
-    sizeof(UrsulaBacktakoWork),
-};
 
 TaskDesc gTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",

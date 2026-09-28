@@ -2,10 +2,8 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 
-const char gTaskNameBosLstEdg[] = "task_bos_lst_edg";
-
 TaskDesc gTaskDescBosLstEdg = {
-    gTaskNameBosLstEdg,
+    "task_bos_lst_edg",
     (TaskInitFunc)task_bos_lst_edg_0,
     (TaskUpdateFunc)task_bos_lst_edg_1,
     (TaskFunc)task_bos_lst_edg_2,

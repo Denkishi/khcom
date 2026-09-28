@@ -20,13 +20,59 @@ extern void* gUnkEu_09F80124[5];
 extern void* gUnkEu_09F80138[5];
 #endif
 
-const char gTaskNameAllmapRoom[] = "task_allmap_room";
+TaskDesc gTaskDescAllmapRoom = {
+    "task_allmap_room",
+    (TaskInitFunc)task_allmap_room_0,
+    (TaskUpdateFunc)task_allmap_room_1,
+    (TaskFunc)task_allmap_room_2,
+    (TaskFunc)task_allmap_room_3,
+    sizeof(AllmapRoomWork),
+};
 
-const char gTaskNameAllmapCursor[] = "task_allmap_cursor";
+TaskDesc gTaskDescAllmapCursor = {
+    "task_allmap_cursor",
+    (TaskInitFunc)task_allmap_cursor_0,
+    (TaskUpdateFunc)task_allmap_cursor_1,
+    (TaskFunc)task_allmap_cursor_2,
+    (TaskFunc)task_allmap_cursor_3,
+    sizeof(AllmapCursorWork),
+};
 
-const char gTaskNameAllmapRoomname[] = "task_allmap_roomname";
+TaskDesc gTaskDescAllmapRoomname = {
+    "task_allmap_roomname",
+    (TaskInitFunc)task_allmap_roomname_0,
+    (TaskUpdateFunc)task_allmap_roomname_1,
+    (TaskFunc)task_allmap_roomname_2,
+    (TaskFunc)task_allmap_roomname_3,
+    sizeof(AllmapRoomnameWork),
+};
 
-const char gTaskNameAllmapBar[] = "task_allmap_bar";
+#ifdef VERSION_EU
+void* gUnkEu_09F80124[5] = {
+    gUnkEu_09738538,
+    gUnkEu_09738554,
+    gUnkEu_09738590,
+    gUnkEu_0973857A,
+    gUnkEu_09738564,
+};
+
+void* gUnkEu_09F80138[5] = {
+    gUnkEu_0980F840,
+    gUnkEu_0980FD40,
+    gUnkEu_09810C40,
+    gUnkEu_09810740,
+    gUnkEu_09810240,
+};
+#endif
+
+TaskDesc gTaskDescAllmapBar = {
+    "task_allmap_bar",
+    (TaskInitFunc)task_allmap_bar_0,
+    (TaskUpdateFunc)task_allmap_bar_1,
+    (TaskFunc)task_allmap_bar_2,
+    (TaskFunc)task_allmap_bar_3,
+    sizeof(AllmapBarWork),
+};
 
 const s16 gUnk_096FDC10[4][2] = {
     {-24, 48},
@@ -1191,60 +1237,6 @@ u8 func_080D5944(u8 a, u16 b) {
 void* func_080D5960(u8 a) {
     return ((AllmapState*)gUnk_0203C4B4)->roomTasks[a]->work;
 }
-
-TaskDesc gTaskDescAllmapRoom = {
-    gTaskNameAllmapRoom,
-    (TaskInitFunc)task_allmap_room_0,
-    (TaskUpdateFunc)task_allmap_room_1,
-    (TaskFunc)task_allmap_room_2,
-    (TaskFunc)task_allmap_room_3,
-    sizeof(AllmapRoomWork),
-};
-
-TaskDesc gTaskDescAllmapCursor = {
-    gTaskNameAllmapCursor,
-    (TaskInitFunc)task_allmap_cursor_0,
-    (TaskUpdateFunc)task_allmap_cursor_1,
-    (TaskFunc)task_allmap_cursor_2,
-    (TaskFunc)task_allmap_cursor_3,
-    sizeof(AllmapCursorWork),
-};
-
-TaskDesc gTaskDescAllmapRoomname = {
-    gTaskNameAllmapRoomname,
-    (TaskInitFunc)task_allmap_roomname_0,
-    (TaskUpdateFunc)task_allmap_roomname_1,
-    (TaskFunc)task_allmap_roomname_2,
-    (TaskFunc)task_allmap_roomname_3,
-    sizeof(AllmapRoomnameWork),
-};
-
-#ifdef VERSION_EU
-void* gUnkEu_09F80124[5] = {
-    gUnkEu_09738538,
-    gUnkEu_09738554,
-    gUnkEu_09738590,
-    gUnkEu_0973857A,
-    gUnkEu_09738564,
-};
-
-void* gUnkEu_09F80138[5] = {
-    gUnkEu_0980F840,
-    gUnkEu_0980FD40,
-    gUnkEu_09810C40,
-    gUnkEu_09810740,
-    gUnkEu_09810240,
-};
-#endif
-
-TaskDesc gTaskDescAllmapBar = {
-    gTaskNameAllmapBar,
-    (TaskInitFunc)task_allmap_bar_0,
-    (TaskUpdateFunc)task_allmap_bar_1,
-    (TaskFunc)task_allmap_bar_2,
-    (TaskFunc)task_allmap_bar_3,
-    sizeof(AllmapBarWork),
-};
 
 TaskDesc gTaskDescAllmapDoorinfo = {
     "task_allmap_doorinfo",

@@ -33,6 +33,11 @@ extern void* gUnkEu_08890E44[];
 #define LANGSTR(x) ((void*)(x))
 #endif
 
+static void msgwin_0(MsgWinWork* p, u8* arg);
+static u8 msgwin_1(MsgWinWork* p, void* a);
+static void msgwin_2(MsgWinWork* p);
+static void msgwin_3(MsgWinWork* p);
+
 const MsgFaceAnim gUnk_09032484[8] = {
     {
         gTalk0000Tiles,
@@ -2549,9 +2554,23 @@ const EventCharaParams gUnk_0903380C[94] = {
     { 0, 0, 0, 0, 0, 0 },
 };
 
-const char gTaskNameEventSeq[] = "event_seq";
+TaskDesc gTaskDescEventSeq = {
+    "event_seq",
+    (TaskInitFunc)event_seq_0,
+    (TaskUpdateFunc)event_seq_1,
+    (TaskFunc)event_seq_2,
+    (TaskFunc)event_seq_3,
+    sizeof(EventSeqWork),
+};
 
-const char gTaskNameEventChara[] = "event_chara";
+TaskDesc gTaskDescEventChara = {
+    "event_chara",
+    (TaskInitFunc)event_chara_0,
+    (TaskUpdateFunc)event_chara_1,
+    (TaskFunc)event_chara_2,
+    (TaskFunc)event_chara_3,
+    sizeof(EventCharaWork),
+};
 
 const u16 gUnk_09033C8C[2] = {
     145, 167,
@@ -2577,7 +2596,28 @@ const s32 gUnk_09033CB8[4] = {
     3584, 28160, 3584, 28160,
 };
 
-const char gTaskNameMsgwin[] = "msgwin";
+const u16* gUnk_09EE4704[4][2] = {
+    {gUnk_08125E24, gUnk_0951D2B8},
+    {gUnk_08125E24, gUnk_0951DAB8},
+    {gUnk_0951E2B8, gUnk_08125E24},
+    {gUnk_0951EAB8, gUnk_08125E24},
+};
+
+void* gUnk_09EE4724[4] = {
+    gUnk_09EE4704[0],
+    gUnk_09EE4704[1],
+    gUnk_09EE4704[2],
+    gUnk_09EE4704[3],
+};
+
+TaskDesc gTaskDescMsgwin = {
+    "msgwin",
+    (TaskInitFunc)msgwin_0,
+    (TaskUpdateFunc)msgwin_1,
+    (TaskFunc)msgwin_2,
+    (TaskFunc)msgwin_3,
+    sizeof(MsgWinWork),
+};
 
 const s32 gUnk_09033CD0[4] = {
     114944, 114944, -76544, -76544,
@@ -2591,7 +2631,14 @@ const s32 gUnk_09033CF0[4] = {
     14336, 32768, 14336, 32768,
 };
 
-const char gTaskNameMsgface[] = "msgface";
+TaskDesc gTaskDescMsgface = {
+    "msgface",
+    (TaskInitFunc)msgface_0,
+    (TaskUpdateFunc)msgface_1,
+    (TaskFunc)msgface_2,
+    (TaskFunc)msgface_3,
+    sizeof(MsgFaceWork),
+};
 
 const s32 gUnk_09033D08[4][2] = {
     {26112, 15872},
@@ -2604,7 +2651,14 @@ const s32 gUnk_09033D28[2] = {
     16128, 19968,
 };
 
-const char gTaskNameMsgwait[] = "msgwait";
+TaskDesc gTaskDescMsgwait = {
+    "msgwait",
+    (TaskInitFunc)msgwait_0,
+    (TaskUpdateFunc)msgwait_1,
+    (TaskFunc)msgwait_2,
+    (TaskFunc)msgwait_3,
+    sizeof(MsgWaitWork),
+};
 
 EventScanlineScroll* gEventScanlineScroll EWRAM_COMMON(4);
 
@@ -7418,65 +7472,6 @@ void func_08075010(EventCameraWork* p) {
         p->wavePhase++;
     }
 }
-
-TaskDesc gTaskDescEventSeq = {
-    gTaskNameEventSeq,
-    (TaskInitFunc)event_seq_0,
-    (TaskUpdateFunc)event_seq_1,
-    (TaskFunc)event_seq_2,
-    (TaskFunc)event_seq_3,
-    sizeof(EventSeqWork),
-};
-
-TaskDesc gTaskDescEventChara = {
-    gTaskNameEventChara,
-    (TaskInitFunc)event_chara_0,
-    (TaskUpdateFunc)event_chara_1,
-    (TaskFunc)event_chara_2,
-    (TaskFunc)event_chara_3,
-    sizeof(EventCharaWork),
-};
-
-const u16* gUnk_09EE4704[4][2] = {
-    {gUnk_08125E24, gUnk_0951D2B8},
-    {gUnk_08125E24, gUnk_0951DAB8},
-    {gUnk_0951E2B8, gUnk_08125E24},
-    {gUnk_0951EAB8, gUnk_08125E24},
-};
-
-void* gUnk_09EE4724[4] = {
-    gUnk_09EE4704[0],
-    gUnk_09EE4704[1],
-    gUnk_09EE4704[2],
-    gUnk_09EE4704[3],
-};
-
-TaskDesc gTaskDescMsgwin = {
-    gTaskNameMsgwin,
-    (TaskInitFunc)msgwin_0,
-    (TaskUpdateFunc)msgwin_1,
-    (TaskFunc)msgwin_2,
-    (TaskFunc)msgwin_3,
-    sizeof(MsgWinWork),
-};
-
-TaskDesc gTaskDescMsgface = {
-    gTaskNameMsgface,
-    (TaskInitFunc)msgface_0,
-    (TaskUpdateFunc)msgface_1,
-    (TaskFunc)msgface_2,
-    (TaskFunc)msgface_3,
-    sizeof(MsgFaceWork),
-};
-
-TaskDesc gTaskDescMsgwait = {
-    gTaskNameMsgwait,
-    (TaskInitFunc)msgwait_0,
-    (TaskUpdateFunc)msgwait_1,
-    (TaskFunc)msgwait_2,
-    (TaskFunc)msgwait_3,
-    sizeof(MsgWaitWork),
-};
 
 TaskDesc gTaskDescMsgwaitYesno = {
     "msgwait_yesno",

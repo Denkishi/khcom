@@ -93,7 +93,14 @@ const s32 gUnk_0999204C[32] = {
     256,
 };
 
-const char gTaskNameBosGa[] = "task_bos_ga";
+TaskDesc gTaskDescBosGa = {
+    "task_bos_ga",
+    (TaskInitFunc)task_bos_ga_0,
+    (TaskUpdateFunc)task_bos_ga_1,
+    (TaskFunc)task_bos_ga_2,
+    (TaskFunc)task_bos_ga_3,
+    sizeof(GaWork),
+};
 
 const EmyKind gBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
 
@@ -386,15 +393,6 @@ const MdAnimDef gMdAnimDefs[11] = {
     { gUnk_09992E20, 1, 0 },
 };
 
-TaskDesc gTaskDescBosGa = {
-    gTaskNameBosGa,
-    (TaskInitFunc)task_bos_ga_0,
-    (TaskUpdateFunc)task_bos_ga_1,
-    (TaskFunc)task_bos_ga_2,
-    (TaskFunc)task_bos_ga_3,
-    sizeof(GaWork),
-};
-
 TaskDesc gTaskDescBosMd = {
     "task_bos_md",
     (TaskInitFunc)task_bos_md_0,
@@ -404,7 +402,14 @@ TaskDesc gTaskDescBosMd = {
     sizeof(MdWork),
 };
 
-const char gTaskNameBosMdMap[] = "task_bos_md_map";
+TaskDesc gTaskDescBosMdMap = {
+    "task_bos_md_map",
+    (TaskInitFunc)task_bos_md_map_0,
+    (TaskUpdateFunc)task_bos_md_map_1,
+    0,
+    0,
+    sizeof(MdMapWork),
+};
 
 const MdFirePoint gUnk_09992E98[4] = { { 88, 288, 240, 0 }, { 56, 312, 330, 0 }, { 72, 336, 420, 0 }, { 104, 360, 510, 0 } };
 
@@ -422,15 +427,6 @@ const MdFireDef gMdFireDefs[6] = {
 };
 
 const EmyKind gBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
-
-TaskDesc gTaskDescBosMdMap = {
-    gTaskNameBosMdMap,
-    (TaskInitFunc)task_bos_md_map_0,
-    (TaskUpdateFunc)task_bos_md_map_1,
-    0,
-    0,
-    sizeof(MdMapWork),
-};
 
 TaskDesc gTaskDescBosMdFire = {
     "task_bos_md_fire",

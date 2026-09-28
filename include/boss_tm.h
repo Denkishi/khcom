@@ -321,4 +321,11 @@ extern s32 gUnk_0203AC70;
 extern u16 gUnk_0203AC74;
 extern s32 gUnk_0203AC78;
 
+void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg);
+u8 task_bos_tm_body_1(TmBodyWork* work);
+void task_bos_tm_body_2(TmBodyWork* work);
+void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg);
+u8 task_bos_tm_foot_1(TmFootWork* work);
+void task_bos_tm_foot_2(TmFootWork* work);
+
 #endif

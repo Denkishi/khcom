@@ -16,7 +16,14 @@ const BattleBackgroundDef gUnk_09619C68 = {
     gUnk_0964AE84, 0x8000, { 0, 0 }, gUnk_096FB164, 0x140, { 0, 0 }, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
 };
 
-const char gTaskNameBosTm[] = "task_bos_tm";
+TaskDesc gTaskDescBosTm = {
+    "task_bos_tm",
+    (TaskInitFunc)task_bos_tm_0,
+    (TaskUpdateFunc)task_bos_tm_1,
+    (TaskFunc)task_bos_tm_2,
+    (TaskFunc)task_bos_tm_3,
+    sizeof(TmWork),
+};
 
 static Task* gBosTmBodyTask;
 static Task* gBosTmArmTask;
@@ -213,12 +220,3 @@ void func_080B82D4(void) {
     func_08000DE8(&gBosTmTaskPool, gBosTmFootTask);
     func_08000DE8(&gBosTmTaskPool, gBosTmArmTask);
 }
-
-TaskDesc gTaskDescBosTm = {
-    gTaskNameBosTm,
-    (TaskInitFunc)task_bos_tm_0,
-    (TaskUpdateFunc)task_bos_tm_1,
-    (TaskFunc)task_bos_tm_2,
-    (TaskFunc)task_bos_tm_3,
-    sizeof(TmWork),
-};

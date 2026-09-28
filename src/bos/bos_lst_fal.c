@@ -4,10 +4,8 @@
 
 const LstFalAnim gBosLstFalAnims[8] = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
 
-const char gTaskNameBosLstFal[] = "task_bos_lst_fal";
-
 TaskDesc gTaskDescBosLstFal = {
-    gTaskNameBosLstFal,
+    "task_bos_lst_fal",
     (TaskInitFunc)task_bos_lst_fal_0,
     (TaskUpdateFunc)task_bos_lst_fal_1,
     (TaskFunc)task_bos_lst_fal_2,

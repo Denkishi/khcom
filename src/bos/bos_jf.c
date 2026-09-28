@@ -1010,10 +1010,8 @@ TaskDesc gTaskDescBosJfMap = {
 
 u8 gUnk_09EF27EC[8] = { 0, 1, 1, 0, 0, 0, 0, 0 };
 
-const char gTaskNameBosJfLamp[] = "task_bos_jf_lamp";
-
 TaskDesc gTaskDescBosJfLamp = {
-    gTaskNameBosJfLamp,
+    "task_bos_jf_lamp",
     (TaskInitFunc)task_bos_jf_lamp_0,
     (TaskUpdateFunc)task_bos_jf_lamp_1,
     (TaskFunc)task_bos_jf_lamp_2,

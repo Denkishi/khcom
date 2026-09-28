@@ -62,7 +62,14 @@ const UnkStruct_0984BC9C gUnk_0984BC9C = {
     &gTaskDescMapEnm00, 1, 0,
 };
 
-const char gTaskNameMapEnm00[] = "Task_MapEnm00";
+TaskDesc gTaskDescMapEnm00 = {
+    "Task_MapEnm00",
+    (TaskInitFunc)Task_MapEnm00_0,
+    (TaskUpdateFunc)Task_MapEnm00_1,
+    (TaskFunc)Task_MapEnm00_2,
+    (TaskFunc)Task_MapEnm00_3,
+    sizeof(MapEnmWork),
+};
 
 const AnimDef gUnk_0984BCC4[6] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
@@ -79,7 +86,14 @@ const UnkStruct_0984BC9C gUnk_0984BD24 = {
     &gTaskDescMapEnm01, 2, 0,
 };
 
-const char gTaskNameMapEnm01[] = "Task_MapEnm01";
+TaskDesc gTaskDescMapEnm01 = {
+    "Task_MapEnm01",
+    (TaskInitFunc)Task_MapEnm01_0,
+    (TaskUpdateFunc)Task_MapEnm01_1,
+    (TaskFunc)Task_MapEnm01_2,
+    (TaskFunc)Task_MapEnm01_3,
+    sizeof(MapEnm01Work),
+};
 
 const AnimDef gUnk_0984BD4C[2] = {
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
@@ -100,7 +114,14 @@ const UnkStruct_0984BC9C gUnk_0984BD8C = {
     &gTaskDescMapEnm02, 8, 0,
 };
 
-const char gTaskNameMapEnm02[] = "Task_MapEnm02";
+TaskDesc gTaskDescMapEnm02 = {
+    "Task_MapEnm02",
+    (TaskInitFunc)Task_MapEnm02_0,
+    (TaskUpdateFunc)Task_MapEnm02_1,
+    (TaskFunc)Task_MapEnm02_2,
+    (TaskFunc)Task_MapEnm02_3,
+    sizeof(MapEnmWork),
+};
 
 const AnimDef gUnk_0984BDB4[4] = {
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
@@ -123,7 +144,14 @@ const UnkStruct_0984BC9C gUnk_0984BE14 = {
     &gTaskDescMapEnm03, 10, 0,
 };
 
-const char gTaskNameMapEnm03[] = "Task_MapEnm03";
+TaskDesc gTaskDescMapEnm03 = {
+    "Task_MapEnm03",
+    (TaskInitFunc)Task_MapEnm03_0,
+    (TaskUpdateFunc)Task_MapEnm03_1,
+    (TaskFunc)Task_MapEnm03_2,
+    (TaskFunc)Task_MapEnm03_3,
+    sizeof(MapEnm03Work),
+};
 
 const AnimDef gUnk_0984BE3C[6] = {
     { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0, { 0, 0, 0 } },
@@ -140,7 +168,14 @@ const UnkStruct_0984BC9C gUnk_0984BE9C = {
     &gTaskDescMapEnm04, 2, 0,
 };
 
-const char gTaskNameMapEnm04[] = "Task_MapEnm04";
+TaskDesc gTaskDescMapEnm04 = {
+    "Task_MapEnm04",
+    (TaskInitFunc)Task_MapEnm04_0,
+    (TaskUpdateFunc)Task_MapEnm04_1,
+    (TaskFunc)Task_MapEnm04_2,
+    (TaskFunc)Task_MapEnm04_3,
+    sizeof(MapEnm01Work),
+};
 
 const AnimDef gUnk_0984BEC4[8] = {
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
@@ -159,7 +194,14 @@ const UnkStruct_0984BC9C gUnk_0984BF44 = {
     &gTaskDescMapEnm05, 4, 0,
 };
 
-const char gTaskNameMapEnm05[] = "Task_MapEnm05";
+TaskDesc gTaskDescMapEnm05 = {
+    "Task_MapEnm05",
+    (TaskInitFunc)Task_MapEnm05_0,
+    (TaskUpdateFunc)Task_MapEnm05_1,
+    (TaskFunc)Task_MapEnm05_2,
+    (TaskFunc)Task_MapEnm05_3,
+    sizeof(MapEnmWork),
+};
 
 const AnimDef gUnk_0984BF6C[8] = {
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
@@ -178,41 +220,169 @@ const UnkStruct_0984BC9C gUnk_0984BFEC = {
     &gTaskDescMapEnm06, 4, 0,
 };
 
-const char gTaskNameMapEnm06[] = "Task_MapEnm06";
+TaskDesc gTaskDescMapEnm06 = {
+    "Task_MapEnm06",
+    (TaskInitFunc)Task_MapEnm06_0,
+    (TaskUpdateFunc)Task_MapEnm06_1,
+    (TaskFunc)Task_MapEnm06_2,
+    (TaskFunc)Task_MapEnm06_3,
+    sizeof(MapEnmWork),
+};
 
-const char gTaskNameMapDbg[] = "Task_MapDbg";
+u8 gUnk_09EF6C38[] = "_";
 
-const char gTaskNameMapGmkJump[] = "Task_MapGmk_Jump";
+TaskDesc gTaskDescMapDbg = {
+    "Task_MapDbg",
+    (TaskInitFunc)Task_MapDbg_0,
+    (TaskUpdateFunc)Task_MapDbg_1,
+    (TaskFunc)Task_MapDbg_2,
+    (TaskFunc)Task_MapDbg_3,
+    sizeof(MapDbgWork),
+};
 
-const char gTaskNameMapGmkEnm[] = "Task_MapGmk_Enm";
+TaskDesc gTaskDescMapGmkJump = {
+    "Task_MapGmk_Jump",
+    (TaskInitFunc)Task_MapGmk_Jump_0,
+    (TaskUpdateFunc)Task_MapGmk_Jump_1,
+    (TaskFunc)Task_MapGmk_Jump_2,
+    (TaskFunc)Task_MapGmk_Jump_3,
+    sizeof(MapGmkJumpWork),
+};
 
-const char gTaskNameMapGmkDmy[] = "Task_MapGmk_Dmy";
+TaskDesc gTaskDescMapGmkEnm = {
+    "Task_MapGmk_Enm",
+    (TaskInitFunc)Task_MapGmk_Enm_0,
+    (TaskUpdateFunc)Task_MapGmk_Enm_1,
+    (TaskFunc)Task_MapGmk_Enm_2,
+    (TaskFunc)Task_MapGmk_Enm_3,
+    sizeof(MapGmkEnmWork),
+};
 
-const char gTaskNameMapGmkTutorial[] = "Task_MapGmk_Tutorial";
+TaskDesc gTaskDescMapGmkDmy = {
+    "Task_MapGmk_Dmy",
+    (TaskInitFunc)Task_MapGmk_Dmy_0,
+    (TaskUpdateFunc)Task_MapGmk_Dmy_1,
+    (TaskFunc)Task_MapGmk_Dmy_2,
+    (TaskFunc)Task_MapGmk_Dmy_3,
+    sizeof(MapGmkDmyWork),
+};
 
-const char gTaskNameMapGmkSpider[] = "Task_MapGmk_Spider";
+TaskDesc gTaskDescMapGmkTutorial = {
+    "Task_MapGmk_Tutorial",
+    (TaskInitFunc)Task_MapGmk_Tutorial_0,
+    (TaskUpdateFunc)Task_MapGmk_Tutorial_1,
+    (TaskFunc)Task_MapGmk_Tutorial_2,
+    (TaskFunc)Task_MapGmk_Tutorial_3,
+    sizeof(MapGmkTutorialWork),
+};
 
-const char gTaskNameMapGmkGP00[] = "Task_MapGmk_GP00";
+TaskDesc gTaskDescMapGmkSpider = {
+    "Task_MapGmk_Spider",
+    (TaskInitFunc)Task_MapGmk_Spider_0,
+    (TaskUpdateFunc)Task_MapGmk_Spider_1,
+    (TaskFunc)Task_MapGmk_Spider_2,
+    (TaskFunc)Task_MapGmk_Spider_3,
+    sizeof(MapGmkSpiderWork),
+};
 
-const char gTaskNameMapGmkGP01[] = "Task_MapGmk_GP01";
+TaskDesc gTaskDescMapGmkGP00 = {
+    "Task_MapGmk_GP00",
+    (TaskInitFunc)Task_MapGmk_GP00_0,
+    (TaskUpdateFunc)Task_MapGmk_GP00_1,
+    (TaskFunc)Task_MapGmk_GP00_2,
+    (TaskFunc)Task_MapGmk_GP00_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP02[] = "Task_MapGmk_GP02";
+TaskDesc gTaskDescMapGmkGP01 = {
+    "Task_MapGmk_GP01",
+    (TaskInitFunc)Task_MapGmk_GP01_0,
+    (TaskUpdateFunc)Task_MapGmk_GP01_1,
+    (TaskFunc)Task_MapGmk_GP01_2,
+    (TaskFunc)Task_MapGmk_GP01_3,
+    sizeof(MapGmkGp1Work),
+};
 
-const char gTaskNameMapGmkGP03[] = "Task_MapGmk_GP03";
+TaskDesc gTaskDescMapGmkGP02 = {
+    "Task_MapGmk_GP02",
+    (TaskInitFunc)Task_MapGmk_GP02_0,
+    (TaskUpdateFunc)Task_MapGmk_GP02_1,
+    (TaskFunc)Task_MapGmk_GP02_2,
+    (TaskFunc)Task_MapGmk_GP02_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP04[] = "Task_MapGmk_GP04";
+TaskDesc gTaskDescMapGmkGP03 = {
+    "Task_MapGmk_GP03",
+    (TaskInitFunc)Task_MapGmk_GP03_0,
+    (TaskUpdateFunc)Task_MapGmk_GP03_1,
+    (TaskFunc)Task_MapGmk_GP03_2,
+    (TaskFunc)Task_MapGmk_GP03_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP05[] = "Task_MapGmk_GP05";
+TaskDesc gTaskDescMapGmkGP04 = {
+    "Task_MapGmk_GP04",
+    (TaskInitFunc)Task_MapGmk_GP04_0,
+    (TaskUpdateFunc)Task_MapGmk_GP04_1,
+    (TaskFunc)Task_MapGmk_GP04_2,
+    (TaskFunc)Task_MapGmk_GP04_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP06[] = "Task_MapGmk_GP06";
+TaskDesc gTaskDescMapGmkGP05 = {
+    "Task_MapGmk_GP05",
+    (TaskInitFunc)Task_MapGmk_GP05_0,
+    (TaskUpdateFunc)Task_MapGmk_GP05_1,
+    (TaskFunc)Task_MapGmk_GP05_2,
+    (TaskFunc)Task_MapGmk_GP05_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP07[] = "Task_MapGmk_GP07";
+TaskDesc gTaskDescMapGmkGP06 = {
+    "Task_MapGmk_GP06",
+    (TaskInitFunc)Task_MapGmk_GP06_0,
+    (TaskUpdateFunc)Task_MapGmk_GP06_1,
+    (TaskFunc)Task_MapGmk_GP06_2,
+    (TaskFunc)Task_MapGmk_GP06_3,
+    sizeof(MapGmkGpWork),
+};
 
-const char gTaskNameMapGmkGP08[] = "Task_MapGmk_GP08";
+TaskDesc gTaskDescMapGmkGP07 = {
+    "Task_MapGmk_GP07",
+    (TaskInitFunc)Task_MapGmk_GP07_0,
+    (TaskUpdateFunc)Task_MapGmk_GP07_1,
+    (TaskFunc)Task_MapGmk_GP07_2,
+    (TaskFunc)Task_MapGmk_GP07_3,
+    sizeof(MapGmkGp07Work),
+};
 
-const char gTaskNameMapGmkGP09[] = "Task_MapGmk_GP09";
+TaskDesc gTaskDescMapGmkGP08 = {
+    "Task_MapGmk_GP08",
+    (TaskInitFunc)Task_MapGmk_GP08_0,
+    (TaskUpdateFunc)Task_MapGmk_GP08_1,
+    (TaskFunc)Task_MapGmk_GP08_2,
+    (TaskFunc)Task_MapGmk_GP08_3,
+    sizeof(MapGmkGp08Work),
+};
 
-const char gTaskNameMapGmk00[] = "Task_MapGmk00";
+TaskDesc gTaskDescMapGmkGP09 = {
+    "Task_MapGmk_GP09",
+    (TaskInitFunc)Task_MapGmk_GP09_0,
+    (TaskUpdateFunc)Task_MapGmk_GP09_1,
+    (TaskFunc)Task_MapGmk_GP09_2,
+    (TaskFunc)Task_MapGmk_GP09_3,
+    sizeof(MapGmkGp09Work),
+};
+
+TaskDesc gTaskDescMapGmk00 = {
+    "Task_MapGmk00",
+    (TaskInitFunc)Task_MapGmk00_0,
+    (TaskUpdateFunc)Task_MapGmk00_1,
+    (TaskFunc)Task_MapGmk00_2,
+    (TaskFunc)Task_MapGmk00_3,
+    sizeof(MapGmk00Work),
+};
 
 s32 func_080EF3A0(MapEnmWork* p) {
     FldPos* q = &p->obj.fieldPosition;
@@ -4358,270 +4528,8 @@ const UnkStruct_080E7D80 gUnk_0984C158 = {
     1, 13, 0, 0, 0, 16, 16, 208, 0, &gTaskDescMapGmk01,
 };
 
-const char gTaskNameMapGmk01[] = "Task_MapGmk01";
-
-const UnkStruct_080E7D80 gUnk_0984C190 = {
-    gUnk_099912E4, gUnk_09858B3C, 0x400, 0, 0, gUnk_09EF8424, gUnk_09EF8460,
-    1, 0, 0, 0, 0, 12, 24, 144, 0, &gTaskDescMapGmkBarrel,
-};
-
-const char gTaskNameMapGmkBarrel[] = "Task_MapGmk_Barrel";
-
-const UnkStruct_080E7D80 gUnk_0984C1CC = {
-    gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, &gUnk_09EF8494, &gUnk_09EF84A4,
-    1, 13, 0, 0, 0, 24, 62, 102, 0, &gTaskDescMapGmk04,
-};
-
-const char gTaskNameMapGmk04[] = "Task_MapGmk04";
-
-const UnkStruct_080E7D80 gUnk_0984C204 = {
-    gMoguPalette, gMoguFl00Tiles, 0x100, 0, 0, gMoguFl00Frames, gMoguFl00Anims,
-    1, 13, 0, 0, 0, 16, 24, 207, 0, &gTaskDescMapGmk05,
-};
-
-const char gTaskNameMapGmk05[] = "Task_MapGmk05";
-
-const UnkStruct_080E7D80 gUnk_0984C23C = {
-    gUnk_09991344, gUnk_0985BDEA, 0x400, 0, 0, &gUnk_09EF84A8, &gUnk_09EF84B8,
-    1, 13, 0, 0, 0, 24, 54, 102, 0, &gTaskDescMapGmk06,
-};
-
-const char gTaskNameMapGmk06[] = "Task_MapGmk06";
-
-const char gTaskNameMapPrize[] = "Task_MapPrize";
-
-const char gTaskNameMapPrzCard[] = "Task_MapPrzCard";
-
-const char gTaskNameMapPrzStock[] = "Task_MapPrzStock";
-
-const char gTaskNameMapMsg[] = "Task_MapMsg";
-
-const char gTaskNameMapMsg2[] = "Task_MapMsg2";
-
-const char gTaskNameMapSpark[] = "Task_MapSpark";
-
-const char gTaskNameMapTalk[] = "Task_MapTalk";
-
-TaskDesc gTaskDescMapEnm00 = {
-    gTaskNameMapEnm00,
-    (TaskInitFunc)Task_MapEnm00_0,
-    (TaskUpdateFunc)Task_MapEnm00_1,
-    (TaskFunc)Task_MapEnm00_2,
-    (TaskFunc)Task_MapEnm00_3,
-    sizeof(MapEnmWork),
-};
-
-TaskDesc gTaskDescMapEnm01 = {
-    gTaskNameMapEnm01,
-    (TaskInitFunc)Task_MapEnm01_0,
-    (TaskUpdateFunc)Task_MapEnm01_1,
-    (TaskFunc)Task_MapEnm01_2,
-    (TaskFunc)Task_MapEnm01_3,
-    sizeof(MapEnm01Work),
-};
-
-TaskDesc gTaskDescMapEnm02 = {
-    gTaskNameMapEnm02,
-    (TaskInitFunc)Task_MapEnm02_0,
-    (TaskUpdateFunc)Task_MapEnm02_1,
-    (TaskFunc)Task_MapEnm02_2,
-    (TaskFunc)Task_MapEnm02_3,
-    sizeof(MapEnmWork),
-};
-
-TaskDesc gTaskDescMapEnm03 = {
-    gTaskNameMapEnm03,
-    (TaskInitFunc)Task_MapEnm03_0,
-    (TaskUpdateFunc)Task_MapEnm03_1,
-    (TaskFunc)Task_MapEnm03_2,
-    (TaskFunc)Task_MapEnm03_3,
-    sizeof(MapEnm03Work),
-};
-
-TaskDesc gTaskDescMapEnm04 = {
-    gTaskNameMapEnm04,
-    (TaskInitFunc)Task_MapEnm04_0,
-    (TaskUpdateFunc)Task_MapEnm04_1,
-    (TaskFunc)Task_MapEnm04_2,
-    (TaskFunc)Task_MapEnm04_3,
-    sizeof(MapEnm01Work),
-};
-
-TaskDesc gTaskDescMapEnm05 = {
-    gTaskNameMapEnm05,
-    (TaskInitFunc)Task_MapEnm05_0,
-    (TaskUpdateFunc)Task_MapEnm05_1,
-    (TaskFunc)Task_MapEnm05_2,
-    (TaskFunc)Task_MapEnm05_3,
-    sizeof(MapEnmWork),
-};
-
-TaskDesc gTaskDescMapEnm06 = {
-    gTaskNameMapEnm06,
-    (TaskInitFunc)Task_MapEnm06_0,
-    (TaskUpdateFunc)Task_MapEnm06_1,
-    (TaskFunc)Task_MapEnm06_2,
-    (TaskFunc)Task_MapEnm06_3,
-    sizeof(MapEnmWork),
-};
-
-u8 gUnk_09EF6C38[] = "_";
-
-TaskDesc gTaskDescMapDbg = {
-    gTaskNameMapDbg,
-    (TaskInitFunc)Task_MapDbg_0,
-    (TaskUpdateFunc)Task_MapDbg_1,
-    (TaskFunc)Task_MapDbg_2,
-    (TaskFunc)Task_MapDbg_3,
-    sizeof(MapDbgWork),
-};
-
-TaskDesc gTaskDescMapGmkJump = {
-    gTaskNameMapGmkJump,
-    (TaskInitFunc)Task_MapGmk_Jump_0,
-    (TaskUpdateFunc)Task_MapGmk_Jump_1,
-    (TaskFunc)Task_MapGmk_Jump_2,
-    (TaskFunc)Task_MapGmk_Jump_3,
-    sizeof(MapGmkJumpWork),
-};
-
-TaskDesc gTaskDescMapGmkEnm = {
-    gTaskNameMapGmkEnm,
-    (TaskInitFunc)Task_MapGmk_Enm_0,
-    (TaskUpdateFunc)Task_MapGmk_Enm_1,
-    (TaskFunc)Task_MapGmk_Enm_2,
-    (TaskFunc)Task_MapGmk_Enm_3,
-    sizeof(MapGmkEnmWork),
-};
-
-TaskDesc gTaskDescMapGmkDmy = {
-    gTaskNameMapGmkDmy,
-    (TaskInitFunc)Task_MapGmk_Dmy_0,
-    (TaskUpdateFunc)Task_MapGmk_Dmy_1,
-    (TaskFunc)Task_MapGmk_Dmy_2,
-    (TaskFunc)Task_MapGmk_Dmy_3,
-    sizeof(MapGmkDmyWork),
-};
-
-TaskDesc gTaskDescMapGmkTutorial = {
-    gTaskNameMapGmkTutorial,
-    (TaskInitFunc)Task_MapGmk_Tutorial_0,
-    (TaskUpdateFunc)Task_MapGmk_Tutorial_1,
-    (TaskFunc)Task_MapGmk_Tutorial_2,
-    (TaskFunc)Task_MapGmk_Tutorial_3,
-    sizeof(MapGmkTutorialWork),
-};
-
-TaskDesc gTaskDescMapGmkSpider = {
-    gTaskNameMapGmkSpider,
-    (TaskInitFunc)Task_MapGmk_Spider_0,
-    (TaskUpdateFunc)Task_MapGmk_Spider_1,
-    (TaskFunc)Task_MapGmk_Spider_2,
-    (TaskFunc)Task_MapGmk_Spider_3,
-    sizeof(MapGmkSpiderWork),
-};
-
-TaskDesc gTaskDescMapGmkGP00 = {
-    gTaskNameMapGmkGP00,
-    (TaskInitFunc)Task_MapGmk_GP00_0,
-    (TaskUpdateFunc)Task_MapGmk_GP00_1,
-    (TaskFunc)Task_MapGmk_GP00_2,
-    (TaskFunc)Task_MapGmk_GP00_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP01 = {
-    gTaskNameMapGmkGP01,
-    (TaskInitFunc)Task_MapGmk_GP01_0,
-    (TaskUpdateFunc)Task_MapGmk_GP01_1,
-    (TaskFunc)Task_MapGmk_GP01_2,
-    (TaskFunc)Task_MapGmk_GP01_3,
-    sizeof(MapGmkGp1Work),
-};
-
-TaskDesc gTaskDescMapGmkGP02 = {
-    gTaskNameMapGmkGP02,
-    (TaskInitFunc)Task_MapGmk_GP02_0,
-    (TaskUpdateFunc)Task_MapGmk_GP02_1,
-    (TaskFunc)Task_MapGmk_GP02_2,
-    (TaskFunc)Task_MapGmk_GP02_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP03 = {
-    gTaskNameMapGmkGP03,
-    (TaskInitFunc)Task_MapGmk_GP03_0,
-    (TaskUpdateFunc)Task_MapGmk_GP03_1,
-    (TaskFunc)Task_MapGmk_GP03_2,
-    (TaskFunc)Task_MapGmk_GP03_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP04 = {
-    gTaskNameMapGmkGP04,
-    (TaskInitFunc)Task_MapGmk_GP04_0,
-    (TaskUpdateFunc)Task_MapGmk_GP04_1,
-    (TaskFunc)Task_MapGmk_GP04_2,
-    (TaskFunc)Task_MapGmk_GP04_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP05 = {
-    gTaskNameMapGmkGP05,
-    (TaskInitFunc)Task_MapGmk_GP05_0,
-    (TaskUpdateFunc)Task_MapGmk_GP05_1,
-    (TaskFunc)Task_MapGmk_GP05_2,
-    (TaskFunc)Task_MapGmk_GP05_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP06 = {
-    gTaskNameMapGmkGP06,
-    (TaskInitFunc)Task_MapGmk_GP06_0,
-    (TaskUpdateFunc)Task_MapGmk_GP06_1,
-    (TaskFunc)Task_MapGmk_GP06_2,
-    (TaskFunc)Task_MapGmk_GP06_3,
-    sizeof(MapGmkGpWork),
-};
-
-TaskDesc gTaskDescMapGmkGP07 = {
-    gTaskNameMapGmkGP07,
-    (TaskInitFunc)Task_MapGmk_GP07_0,
-    (TaskUpdateFunc)Task_MapGmk_GP07_1,
-    (TaskFunc)Task_MapGmk_GP07_2,
-    (TaskFunc)Task_MapGmk_GP07_3,
-    sizeof(MapGmkGp07Work),
-};
-
-TaskDesc gTaskDescMapGmkGP08 = {
-    gTaskNameMapGmkGP08,
-    (TaskInitFunc)Task_MapGmk_GP08_0,
-    (TaskUpdateFunc)Task_MapGmk_GP08_1,
-    (TaskFunc)Task_MapGmk_GP08_2,
-    (TaskFunc)Task_MapGmk_GP08_3,
-    sizeof(MapGmkGp08Work),
-};
-
-TaskDesc gTaskDescMapGmkGP09 = {
-    gTaskNameMapGmkGP09,
-    (TaskInitFunc)Task_MapGmk_GP09_0,
-    (TaskUpdateFunc)Task_MapGmk_GP09_1,
-    (TaskFunc)Task_MapGmk_GP09_2,
-    (TaskFunc)Task_MapGmk_GP09_3,
-    sizeof(MapGmkGp09Work),
-};
-
-TaskDesc gTaskDescMapGmk00 = {
-    gTaskNameMapGmk00,
-    (TaskInitFunc)Task_MapGmk00_0,
-    (TaskUpdateFunc)Task_MapGmk00_1,
-    (TaskFunc)Task_MapGmk00_2,
-    (TaskFunc)Task_MapGmk00_3,
-    sizeof(MapGmk00Work),
-};
-
 TaskDesc gTaskDescMapGmk01 = {
-    gTaskNameMapGmk01,
+    "Task_MapGmk01",
     (TaskInitFunc)Task_MapGmk01_0,
     (TaskUpdateFunc)Task_MapGmk01_1,
     (TaskFunc)Task_MapGmk01_2,
@@ -4629,8 +4537,13 @@ TaskDesc gTaskDescMapGmk01 = {
     sizeof(MapGmk01Work),
 };
 
+const UnkStruct_080E7D80 gUnk_0984C190 = {
+    gUnk_099912E4, gUnk_09858B3C, 0x400, 0, 0, gUnk_09EF8424, gUnk_09EF8460,
+    1, 0, 0, 0, 0, 12, 24, 144, 0, &gTaskDescMapGmkBarrel,
+};
+
 TaskDesc gTaskDescMapGmkBarrel = {
-    gTaskNameMapGmkBarrel,
+    "Task_MapGmk_Barrel",
     (TaskInitFunc)Task_MapGmk_Barrel_0,
     (TaskUpdateFunc)Task_MapGmk_Barrel_1,
     (TaskFunc)Task_MapGmk_Barrel_2,
@@ -4638,8 +4551,13 @@ TaskDesc gTaskDescMapGmkBarrel = {
     sizeof(MapGmkBarrelWork),
 };
 
+const UnkStruct_080E7D80 gUnk_0984C1CC = {
+    gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, &gUnk_09EF8494, &gUnk_09EF84A4,
+    1, 13, 0, 0, 0, 24, 62, 102, 0, &gTaskDescMapGmk04,
+};
+
 TaskDesc gTaskDescMapGmk04 = {
-    gTaskNameMapGmk04,
+    "Task_MapGmk04",
     (TaskInitFunc)Task_MapGmk04_0,
     (TaskUpdateFunc)Task_MapGmk04_1,
     (TaskFunc)Task_MapGmk04_2,
@@ -4647,8 +4565,13 @@ TaskDesc gTaskDescMapGmk04 = {
     sizeof(MapGmk04Work),
 };
 
+const UnkStruct_080E7D80 gUnk_0984C204 = {
+    gMoguPalette, gMoguFl00Tiles, 0x100, 0, 0, gMoguFl00Frames, gMoguFl00Anims,
+    1, 13, 0, 0, 0, 16, 24, 207, 0, &gTaskDescMapGmk05,
+};
+
 TaskDesc gTaskDescMapGmk05 = {
-    gTaskNameMapGmk05,
+    "Task_MapGmk05",
     (TaskInitFunc)Task_MapGmk05_0,
     (TaskUpdateFunc)Task_MapGmk05_1,
     (TaskFunc)Task_MapGmk05_2,
@@ -4656,8 +4579,13 @@ TaskDesc gTaskDescMapGmk05 = {
     sizeof(MapGmk05Work),
 };
 
+const UnkStruct_080E7D80 gUnk_0984C23C = {
+    gUnk_09991344, gUnk_0985BDEA, 0x400, 0, 0, &gUnk_09EF84A8, &gUnk_09EF84B8,
+    1, 13, 0, 0, 0, 24, 54, 102, 0, &gTaskDescMapGmk06,
+};
+
 TaskDesc gTaskDescMapGmk06 = {
-    gTaskNameMapGmk06,
+    "Task_MapGmk06",
     (TaskInitFunc)Task_MapGmk06_0,
     (TaskUpdateFunc)Task_MapGmk06_1,
     (TaskFunc)Task_MapGmk06_2,
@@ -4666,7 +4594,7 @@ TaskDesc gTaskDescMapGmk06 = {
 };
 
 TaskDesc gTaskDescMapPrize = {
-    gTaskNameMapPrize,
+    "Task_MapPrize",
     (TaskInitFunc)Task_MapPrize_0,
     (TaskUpdateFunc)Task_MapPrize_1,
     (TaskFunc)Task_MapPrize_2,
@@ -4675,7 +4603,7 @@ TaskDesc gTaskDescMapPrize = {
 };
 
 TaskDesc gTaskDescMapPrzCard = {
-    gTaskNameMapPrzCard,
+    "Task_MapPrzCard",
     (TaskInitFunc)Task_MapPrzCard_0,
     (TaskUpdateFunc)Task_MapPrzCard_1,
     (TaskFunc)Task_MapPrzCard_2,
@@ -4684,7 +4612,7 @@ TaskDesc gTaskDescMapPrzCard = {
 };
 
 TaskDesc gTaskDescMapPrzStock = {
-    gTaskNameMapPrzStock,
+    "Task_MapPrzStock",
     (TaskInitFunc)Task_MapPrzStock_0,
     (TaskUpdateFunc)Task_MapPrzStock_1,
     (TaskFunc)Task_MapPrzStock_2,
@@ -4693,7 +4621,7 @@ TaskDesc gTaskDescMapPrzStock = {
 };
 
 TaskDesc gTaskDescMapMsg = {
-    gTaskNameMapMsg,
+    "Task_MapMsg",
     (TaskInitFunc)func_080F58C4,
     (TaskUpdateFunc)Task_MapMsg_1,
     (TaskFunc)func_080F596C,
@@ -4702,7 +4630,7 @@ TaskDesc gTaskDescMapMsg = {
 };
 
 TaskDesc gTaskDescMapMsg2 = {
-    gTaskNameMapMsg2,
+    "Task_MapMsg2",
     (TaskInitFunc)func_080F58C4,
     (TaskUpdateFunc)Task_MapMsg2_1,
     (TaskFunc)func_080F596C,
@@ -4711,7 +4639,7 @@ TaskDesc gTaskDescMapMsg2 = {
 };
 
 TaskDesc gTaskDescMapSpark = {
-    gTaskNameMapSpark,
+    "Task_MapSpark",
     (TaskInitFunc)Task_MapSpark_0,
     (TaskUpdateFunc)Task_MapSpark_1,
     (TaskFunc)Task_MapSpark_2,
@@ -4720,7 +4648,7 @@ TaskDesc gTaskDescMapSpark = {
 };
 
 TaskDesc gTaskDescMapTalk = {
-    gTaskNameMapTalk,
+    "Task_MapTalk",
     (TaskInitFunc)Task_MapTalk_0,
     (TaskUpdateFunc)Task_MapTalk_1,
     (TaskFunc)Task_MapTalk_2,

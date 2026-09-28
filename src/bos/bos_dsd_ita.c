@@ -291,12 +291,8 @@ void task_bos_dsd_rock_3(void) {
 
 const s16 gUnk_0961A860[6] = { 3, 2, 1, 1, 0, 0 };
 
-const char gTaskNameBosDsdIta[] = "task_bos_dsd_ita";
-
-const char gTaskNameBosDsdRock[] = "task_bos_dsd_rock";
-
 TaskDesc gTaskDescBosDsdIta = {
-    gTaskNameBosDsdIta,
+    "task_bos_dsd_ita",
     (TaskInitFunc)task_bos_dsd_ita_0,
     (TaskUpdateFunc)task_bos_dsd_ita_1,
     (TaskFunc)task_bos_dsd_ita_2,
@@ -305,7 +301,7 @@ TaskDesc gTaskDescBosDsdIta = {
 };
 
 TaskDesc gTaskDescBosDsdRock = {
-    gTaskNameBosDsdRock,
+    "task_bos_dsd_rock",
     (TaskInitFunc)task_bos_dsd_rock_0,
     (TaskUpdateFunc)task_bos_dsd_rock_1,
     (TaskFunc)task_bos_dsd_rock_2,

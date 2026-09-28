@@ -288,40 +288,12 @@ extern TaskDesc gTaskDescSrollBSecn;
 extern TaskDesc gTaskDescSrollBCrtn;
 extern TaskDesc gTaskDescSrollCChar;
 
-extern const char gTaskNameBosJfLamp[];
-extern const char gTaskNameBosJfMajin[];
-extern const char gTaskNameBosDsd[];
-extern const char gTaskNameBosDsdMain[];
-extern const char gTaskNameBosDsdMap[];
-extern const char gTaskNameBosDsdIta[];
-extern const char gTaskNameBosDsdRock[];
-extern const char gTaskNamePooPooh[];
-extern const char gTaskNamePooMap[];
-extern const char gTaskNamePooPile[];
-extern const char gTaskNamePooOwl[];
-extern const char gTaskNamePooRabbit[];
-extern const char gTaskNamePooSpark[];
-extern const char gTaskNamePooBeeAfterEvent[];
-extern const char gTaskNamePooCabbageborn[];
-extern const char gTaskNameStatus[];
-extern const char gTaskNameStatusBar[];
-extern const char gTaskNameStatusTab[];
-extern const char gTaskNameStatusSora[];
-extern const char gTaskNameStatusDeckname[];
-extern const char gTaskNameStatusCursor[];
-extern const char gTaskNameStatusStocklist[];
-extern const char gTaskNameStatusScrollcursor[];
-extern const char gTaskNameStatusMeswindow[];
-extern const char gTaskNameStatusMessage[];
-extern const char gTaskNameStatusFriend[];
 extern const char gModeNameMapDbg[];
 extern const char gModeNameMapFld[];
 extern const char gModeNameMapFix[];
 extern const char gModeNameMenuNew[];
 extern const char gModeNameMenuLoad[];
 extern const char gModeNameMenuMsg[];
-extern const char gTaskNameMapRnd[];
-extern const char gTaskNameMapFix[];
 
 extern TaskDesc gUnk_09EE484C;
 extern TaskDesc gTaskDescEventDebug;
@@ -411,10 +383,6 @@ extern TaskDesc gTaskDescBosLstEdg;
 extern TaskDesc gTaskDescBosLstPtl;
 extern TaskDesc gTaskDescSrollTmr;
 
-extern const char gTaskNameBosJfRock[];
-extern const char gTaskNameBosJfBorderline[];
-extern const char gTaskNamePooHoney[];
-extern const char gTaskNamePooPoohstump[];
 
 extern Mode gModeWORLDSELECT;
 

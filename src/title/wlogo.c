@@ -2088,9 +2088,23 @@ void task_wlogo_bks_obj_3(WlogoBksObjWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-const char gTaskNameWlogoMons[] = "task_wlogo_mons";
+TaskDesc gTaskDescWlogoMons = {
+    "task_wlogo_mons",
+    (TaskInitFunc)task_wlogo_mons_0,
+    (TaskUpdateFunc)task_wlogo_mons_1,
+    (TaskFunc)task_wlogo_mons_2,
+    (TaskFunc)task_wlogo_mons_3,
+    sizeof(WlogoMonsWork),
+};
 
-const char gTaskNameWlogoHwt[] = "task_wlogo_hwt";
+TaskDesc gTaskDescWlogoHwt = {
+    "task_wlogo_hwt",
+    (TaskInitFunc)task_wlogo_hwt_0,
+    (TaskUpdateFunc)task_wlogo_hwt_1,
+    (TaskFunc)task_wlogo_hwt_2,
+    (TaskFunc)task_wlogo_hwt_3,
+    sizeof(WlogoHwtWork),
+};
 
 const WlogoHwtObjA gUnk_096194D0[6] = {
     { 17920, 46080, 384, 1, { 0, 0, 0 } },
@@ -2152,101 +2166,8 @@ const WlogoHwtObjB gUnk_09619530[6][6] = {
     },
 };
 
-const char gTaskNameWlogoHwtObj[] = "task_wlogo_hwt_obj";
-
-const char gTaskNameWlogoWon[] = "task_wlogo_won";
-
-const char gTaskNameWlogoAtl[] = "task_wlogo_atl";
-
-const char gTaskNameWlogoNvl[] = "task_wlogo_nvl";
-
-const WlogoHwtObjB gUnk_096198D4[4] = {
-    { 20, { 0, 0 }, 768, 256, -5, -12, 0, { 0, 0, 0 } },
-    { 20, { 0, 0 }, 921, -51, -46, -25, 0, { 0, 0, 0 } },
-    { 20, { 0, 0 }, 0, -512, -46, 23, 0, { 0, 0, 0 } },
-    { 20, { 0, 0 }, -921, -115, 19, -5, 1, { 0, 0, 0 } },
-};
-
-const char gTaskNameWlogoNvlMov[] = "task_wlogo_nvl_mov";
-
-const char gTaskNameWlogoNvlObj[] = "task_wlogo_nvl_obj";
-
-const char gTaskNameWlogoCol[] = "task_wlogo_col";
-
-const char gTaskNameWlogoHlw[] = "task_wlogo_hlw";
-
-const char gTaskNameWlogoDil[] = "task_wlogo_dil";
-
-const char gTaskNameWlogoAgr[] = "task_wlogo_agr";
-
-const char gTaskNameWlogoAgrSmoke[] = "task_wlogo_agr_smoke";
-
-const char gTaskNameWlogoAgrFlash0[] = "task_wlogo_agr_flash0";
-
-const char gTaskNameWlogoAgrFlash1[] = "task_wlogo_agr_flash1";
-
-const char gTaskNameWlogoTvt[] = "task_wlogo_tvt";
-
-const char gTaskNameWlogoPoo[] = "task_wlogo_poo";
-
-const WlogoPooObjStep gWlogoPooObjSteps[5][5] = {
-    {
-        { 20, { 0, 0 }, -128, 0, 0, -2 },
-        { 20, { 0, 0 }, -128, -51, 0, -2 },
-        { 20, { 0, 0 }, -128, -102, 0, -2 },
-        { 20, { 0, 0 }, -128, -153, 0, -2 },
-        { 10, { 0, 0 }, -128, -204, 0, 0 },
-    },
-    {
-        { 20, { 0, 0 }, -128, 0, 0, 5 },
-        { 20, { 0, 0 }, -128, 0, 0, -5 },
-        { 20, { 0, 0 }, -128, 0, 0, 5 },
-        { 20, { 0, 0 }, -128, 0, 0, -7 },
-        { 10, { 0, 0 }, -128, -25, 0, 0 },
-    },
-    {
-        { 20, { 0, 0 }, 128, 0, 0, -5 },
-        { 20, { 0, 0 }, 128, 0, 0, 7 },
-        { 20, { 0, 0 }, 128, 0, 0, -5 },
-        { 20, { 0, 0 }, 128, 0, 0, 2 },
-        { 10, { 0, 0 }, 128, -51, 0, 0 },
-    },
-    {
-        { 20, { 0, 0 }, 128, 0, 0, 5 },
-        { 20, { 0, 0 }, 128, 51, 0, 2 },
-        { 20, { 0, 0 }, 128, 76, 0, -5 },
-        { 20, { 0, 0 }, 128, 25, 0, -2 },
-        { 10, { 0, 0 }, 128, 25, 0, 0 },
-    },
-    {
-        { 0, { 0, 0 }, 0, 0, 0, 0 },
-        { 0, { 0, 0 }, 0, 0, 0, 0 },
-        { 0, { 0, 0 }, 0, 0, 0, 0 },
-        { 0, { 0, 0 }, 0, 0, 0, 0 },
-        { 0, { 0, 0 }, 0, 0, 0, 0 },
-    },
-};
-
-TaskDesc gTaskDescWlogoMons = {
-    gTaskNameWlogoMons,
-    (TaskInitFunc)task_wlogo_mons_0,
-    (TaskUpdateFunc)task_wlogo_mons_1,
-    (TaskFunc)task_wlogo_mons_2,
-    (TaskFunc)task_wlogo_mons_3,
-    sizeof(WlogoMonsWork),
-};
-
-TaskDesc gTaskDescWlogoHwt = {
-    gTaskNameWlogoHwt,
-    (TaskInitFunc)task_wlogo_hwt_0,
-    (TaskUpdateFunc)task_wlogo_hwt_1,
-    (TaskFunc)task_wlogo_hwt_2,
-    (TaskFunc)task_wlogo_hwt_3,
-    sizeof(WlogoHwtWork),
-};
-
 TaskDesc gTaskDescWlogoHwtObj = {
-    gTaskNameWlogoHwtObj,
+    "task_wlogo_hwt_obj",
     (TaskInitFunc)task_wlogo_hwt_obj_0,
     (TaskUpdateFunc)task_wlogo_hwt_obj_1,
     (TaskFunc)task_wlogo_hwt_obj_2,
@@ -2304,7 +2225,7 @@ s32 gUnk_09EF180C[20] = {
 };
 
 TaskDesc gTaskDescWlogoWon = {
-    gTaskNameWlogoWon,
+    "task_wlogo_won",
     (TaskInitFunc)task_wlogo_won_0,
     (TaskUpdateFunc)task_wlogo_won_1,
     (TaskFunc)task_wlogo_won_2,
@@ -2313,7 +2234,7 @@ TaskDesc gTaskDescWlogoWon = {
 };
 
 TaskDesc gTaskDescWlogoAtl = {
-    gTaskNameWlogoAtl,
+    "task_wlogo_atl",
     (TaskInitFunc)task_wlogo_atl_0,
     (TaskUpdateFunc)task_wlogo_atl_1,
     (TaskFunc)task_wlogo_atl_2,
@@ -2322,7 +2243,7 @@ TaskDesc gTaskDescWlogoAtl = {
 };
 
 TaskDesc gTaskDescWlogoNvl = {
-    gTaskNameWlogoNvl,
+    "task_wlogo_nvl",
     (TaskInitFunc)task_wlogo_nvl_0,
     (TaskUpdateFunc)task_wlogo_nvl_1,
     (TaskFunc)task_wlogo_nvl_2,
@@ -2330,8 +2251,15 @@ TaskDesc gTaskDescWlogoNvl = {
     sizeof(WlogoNvlWork),
 };
 
+const WlogoHwtObjB gUnk_096198D4[4] = {
+    { 20, { 0, 0 }, 768, 256, -5, -12, 0, { 0, 0, 0 } },
+    { 20, { 0, 0 }, 921, -51, -46, -25, 0, { 0, 0, 0 } },
+    { 20, { 0, 0 }, 0, -512, -46, 23, 0, { 0, 0, 0 } },
+    { 20, { 0, 0 }, -921, -115, 19, -5, 1, { 0, 0, 0 } },
+};
+
 TaskDesc gTaskDescWlogoNvlMov = {
-    gTaskNameWlogoNvlMov,
+    "task_wlogo_nvl_mov",
     (TaskInitFunc)task_wlogo_nvl_mov_0,
     (TaskUpdateFunc)task_wlogo_nvl_mov_1,
     (TaskFunc)task_wlogo_nvl_mov_2,
@@ -2340,7 +2268,7 @@ TaskDesc gTaskDescWlogoNvlMov = {
 };
 
 TaskDesc gTaskDescWlogoNvlObj = {
-    gTaskNameWlogoNvlObj,
+    "task_wlogo_nvl_obj",
     (TaskInitFunc)task_wlogo_nvl_obj_0,
     (TaskUpdateFunc)task_wlogo_nvl_obj_1,
     (TaskFunc)task_wlogo_nvl_obj_2,
@@ -2349,7 +2277,7 @@ TaskDesc gTaskDescWlogoNvlObj = {
 };
 
 TaskDesc gTaskDescWlogoCol = {
-    gTaskNameWlogoCol,
+    "task_wlogo_col",
     (TaskInitFunc)task_wlogo_col_0,
     (TaskUpdateFunc)task_wlogo_col_1,
     (TaskFunc)task_wlogo_col_2,
@@ -2358,7 +2286,7 @@ TaskDesc gTaskDescWlogoCol = {
 };
 
 TaskDesc gTaskDescWlogoHlw = {
-    gTaskNameWlogoHlw,
+    "task_wlogo_hlw",
     (TaskInitFunc)task_wlogo_hlw_0,
     (TaskUpdateFunc)task_wlogo_hlw_1,
     (TaskFunc)task_wlogo_hlw_2,
@@ -2367,7 +2295,7 @@ TaskDesc gTaskDescWlogoHlw = {
 };
 
 TaskDesc gTaskDescWlogoDil = {
-    gTaskNameWlogoDil,
+    "task_wlogo_dil",
     (TaskInitFunc)task_wlogo_dil_0,
     (TaskUpdateFunc)task_wlogo_dil_1,
     (TaskFunc)task_wlogo_dil_2,
@@ -2399,7 +2327,7 @@ WlogoAgrEntry gWlogoAgrEntries[20] = {
 };
 
 TaskDesc gTaskDescWlogoAgr = {
-    gTaskNameWlogoAgr,
+    "task_wlogo_agr",
     (TaskInitFunc)task_wlogo_agr_0,
     (TaskUpdateFunc)task_wlogo_agr_1,
     (TaskFunc)task_wlogo_agr_2,
@@ -2408,7 +2336,7 @@ TaskDesc gTaskDescWlogoAgr = {
 };
 
 TaskDesc gTaskDescWlogoAgrSmoke = {
-    gTaskNameWlogoAgrSmoke,
+    "task_wlogo_agr_smoke",
     (TaskInitFunc)task_wlogo_agr_smoke_0,
     (TaskUpdateFunc)task_wlogo_agr_smoke_1,
     (TaskFunc)task_wlogo_agr_smoke_2,
@@ -2417,7 +2345,7 @@ TaskDesc gTaskDescWlogoAgrSmoke = {
 };
 
 TaskDesc gTaskDescWlogoAgrFlash0 = {
-    gTaskNameWlogoAgrFlash0,
+    "task_wlogo_agr_flash0",
     (TaskInitFunc)task_wlogo_agr_flash0_0,
     (TaskUpdateFunc)task_wlogo_agr_flash0_1,
     (TaskFunc)task_wlogo_agr_flash0_2,
@@ -2426,7 +2354,7 @@ TaskDesc gTaskDescWlogoAgrFlash0 = {
 };
 
 TaskDesc gTaskDescWlogoAgrFlash1 = {
-    gTaskNameWlogoAgrFlash1,
+    "task_wlogo_agr_flash1",
     (TaskInitFunc)task_wlogo_agr_flash1_0,
     (TaskUpdateFunc)task_wlogo_agr_flash1_1,
     (TaskFunc)task_wlogo_agr_flash1_2,
@@ -2435,7 +2363,7 @@ TaskDesc gTaskDescWlogoAgrFlash1 = {
 };
 
 TaskDesc gTaskDescWlogoTvt = {
-    gTaskNameWlogoTvt,
+    "task_wlogo_tvt",
     (TaskInitFunc)task_wlogo_tvt_0,
     (TaskUpdateFunc)task_wlogo_tvt_1,
     (TaskFunc)task_wlogo_tvt_2,
@@ -2444,12 +2372,50 @@ TaskDesc gTaskDescWlogoTvt = {
 };
 
 TaskDesc gTaskDescWlogoPoo = {
-    gTaskNameWlogoPoo,
+    "task_wlogo_poo",
     (TaskInitFunc)task_wlogo_poo_0,
     (TaskUpdateFunc)task_wlogo_poo_1,
     (TaskFunc)task_wlogo_poo_2,
     (TaskFunc)task_wlogo_poo_3,
     sizeof(WlogoPooWork),
+};
+
+const WlogoPooObjStep gWlogoPooObjSteps[5][5] = {
+    {
+        { 20, { 0, 0 }, -128, 0, 0, -2 },
+        { 20, { 0, 0 }, -128, -51, 0, -2 },
+        { 20, { 0, 0 }, -128, -102, 0, -2 },
+        { 20, { 0, 0 }, -128, -153, 0, -2 },
+        { 10, { 0, 0 }, -128, -204, 0, 0 },
+    },
+    {
+        { 20, { 0, 0 }, -128, 0, 0, 5 },
+        { 20, { 0, 0 }, -128, 0, 0, -5 },
+        { 20, { 0, 0 }, -128, 0, 0, 5 },
+        { 20, { 0, 0 }, -128, 0, 0, -7 },
+        { 10, { 0, 0 }, -128, -25, 0, 0 },
+    },
+    {
+        { 20, { 0, 0 }, 128, 0, 0, -5 },
+        { 20, { 0, 0 }, 128, 0, 0, 7 },
+        { 20, { 0, 0 }, 128, 0, 0, -5 },
+        { 20, { 0, 0 }, 128, 0, 0, 2 },
+        { 10, { 0, 0 }, 128, -51, 0, 0 },
+    },
+    {
+        { 20, { 0, 0 }, 128, 0, 0, 5 },
+        { 20, { 0, 0 }, 128, 51, 0, 2 },
+        { 20, { 0, 0 }, 128, 76, 0, -5 },
+        { 20, { 0, 0 }, 128, 25, 0, -2 },
+        { 10, { 0, 0 }, 128, 25, 0, 0 },
+    },
+    {
+        { 0, { 0, 0 }, 0, 0, 0, 0 },
+        { 0, { 0, 0 }, 0, 0, 0, 0 },
+        { 0, { 0, 0 }, 0, 0, 0, 0 },
+        { 0, { 0, 0 }, 0, 0, 0, 0 },
+        { 0, { 0, 0 }, 0, 0, 0, 0 },
+    },
 };
 
 u8 gUnk_09EF1AEC[4] = { 0, 0, 2, 2 };

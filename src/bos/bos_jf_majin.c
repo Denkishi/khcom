@@ -2265,16 +2265,8 @@ u32 gUnk_09EF2A18 __attribute__((aligned(4))) = 668;
 
 u32 gUnk_09EF2A1C __attribute__((aligned(4))) = 683;
 
-const char gTaskNameBosJfMajin[] = "task_bos_jf_majin";
-
-const char gTaskNameBosJfRock[] = "task_bos_jf_rock";
-
-const char gTaskNameBosJfBorderline[] = "task_bos_jf_borderline";
-
-const EmyKind gBosDsdEmyKind = { 38, 1000, 16, 16, 40, 60, 0 };
-
 TaskDesc gTaskDescBosJfMajin = {
-    gTaskNameBosJfMajin,
+    "task_bos_jf_majin",
     (TaskInitFunc)task_bos_jf_majin_0,
     (TaskUpdateFunc)task_bos_jf_majin_1,
     (TaskFunc)task_bos_jf_majin_2,
@@ -2288,10 +2280,8 @@ s8 gUnk_09EF2A41 __attribute__((aligned(1))) = -1;
 
 s16 gUnk_09EF2A42[12] __attribute__((aligned(2))) = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 55 };
 
-const char gTaskNameBosDsd[] = "task_bos_dsd";
-
 TaskDesc gTaskDescBosJfRock = {
-    gTaskNameBosJfRock,
+    "task_bos_jf_rock",
     (TaskInitFunc)task_bos_jf_rock_0,
     (TaskUpdateFunc)task_bos_jf_rock_1,
     (TaskFunc)task_bos_jf_rock_2,
@@ -2300,7 +2290,7 @@ TaskDesc gTaskDescBosJfRock = {
 };
 
 TaskDesc gTaskDescBosJfBorderline = {
-    gTaskNameBosJfBorderline,
+    "task_bos_jf_borderline",
     (TaskInitFunc)task_bos_jf_borderline_0,
     (TaskUpdateFunc)task_bos_jf_borderline_1,
     (TaskFunc)task_bos_jf_borderline_2,
@@ -2308,8 +2298,10 @@ TaskDesc gTaskDescBosJfBorderline = {
     sizeof(JfBorderlineWork),
 };
 
+const EmyKind gBosDsdEmyKind = { 38, 1000, 16, 16, 40, 60, 0 };
+
 TaskDesc gTaskDescBosDsd = {
-    gTaskNameBosDsd,
+    "task_bos_dsd",
     (TaskInitFunc)task_bos_dsd_0,
     (TaskUpdateFunc)task_bos_dsd_1,
     (TaskFunc)task_bos_dsd_2,

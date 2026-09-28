@@ -121,10 +121,8 @@ const u8 gUnk_0984C2E4[28] = {
     14, 15, 16, 17, 18, 19, 20, 21, 21, 21, 22, 22, 23, 23,
 };
 
-const char gTaskNameMapDonald[] = "Task_MapDonald";
-
 TaskDesc gTaskDescMapDonald = {
-    gTaskNameMapDonald,
+    "Task_MapDonald",
     (TaskInitFunc)Task_MapDonald_0,
     (TaskUpdateFunc)Task_MapDonald_1,
     (TaskFunc)Task_MapDonald_2,

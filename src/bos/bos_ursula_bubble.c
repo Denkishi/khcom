@@ -8,8 +8,12 @@ extern u8 eu_080DA848(void);
 extern void* eu_080DA860(void);
 #endif
 
+#ifdef VERSION_EU
+UrsulaBubbleWork* gUnkEu_02035104;
+#endif
+
 TaskDesc gTaskDescBosUrsulaBubble = {
-    gTaskNameBosUrsulaBubble,
+    "task_bos_ursula_bubble",
     (TaskInitFunc)task_bos_ursula_bubble_0,
     (TaskUpdateFunc)task_bos_ursula_bubble_1,
     (TaskFunc)task_bos_ursula_bubble_2,
@@ -17,8 +21,10 @@ TaskDesc gTaskDescBosUrsulaBubble = {
     sizeof(UrsulaBubbleWork),
 };
 
+const EmyKind gBosUrsulaBubbleSingleEmyKind = { 35, 0, 1, 1, 0, 0, 0 };
+
 TaskDesc gTaskDescBosUrsulaBubbleSingle = {
-    gTaskNameBosUrsulaBubbleSingle,
+    "task_bos_ursula_bubble_single",
     (TaskInitFunc)task_bos_ursula_bubble_single_0,
     (TaskUpdateFunc)task_bos_ursula_bubble_single_1,
     (TaskFunc)task_bos_ursula_bubble_single_2,
@@ -27,25 +33,13 @@ TaskDesc gTaskDescBosUrsulaBubbleSingle = {
 };
 
 TaskDesc gTaskDescBosUrsulaThunder = {
-    gTaskNameBosUrsulaThunder,
+    "task_bos_ursula_thunder",
     (TaskInitFunc)task_bos_ursula_thunder_0,
     (TaskUpdateFunc)task_bos_ursula_thunder_1,
     (TaskFunc)task_bos_ursula_thunder_2,
     (TaskFunc)task_bos_ursula_thunder_3,
     sizeof(UrsulaThunderWork),
 };
-
-#ifdef VERSION_EU
-UrsulaBubbleWork* gUnkEu_02035104;
-#endif
-
-const char gTaskNameBosUrsulaBubble[] = "task_bos_ursula_bubble";
-
-const EmyKind gBosUrsulaBubbleSingleEmyKind = { 35, 0, 1, 1, 0, 0, 0 };
-
-const char gTaskNameBosUrsulaBubbleSingle[] = "task_bos_ursula_bubble_single";
-
-const char gTaskNameBosUrsulaThunder[] = "task_bos_ursula_thunder";
 
 u16 func_080DD7C4(UrsulaBubbleWork* work) {
     s8 v = 0x60;

@@ -1143,10 +1143,6 @@ const s16 gUnk_0961A7D0[47] = {
 
 const s8 gUnk_0961A82E[10] = { -1, 1, 1, 1, 1, -1, -1, -1, 0, 0 };
 
-const char gTaskNameBosDsdMain[] = "task_bos_dsd_main";
-
-const char gTaskNameBosDsdMap[] = "task_bos_dsd_map";
-
 const u16* gUnk_09EF2AA4[46][4] = {
     { gUnk_08125E24, gUnk_08125E24, gUnk_096E3C64, gUnk_08125E24 },
     { gUnk_08125E24, gUnk_08125E24, gUnk_096E4464, gUnk_08125E24 },
@@ -1265,7 +1261,7 @@ void* gUnk_09EF2E48 = gUnk_096A8BA4;
 void* gUnk_09EF2E4C = 0;
 
 TaskDesc gTaskDescBosDsdMain = {
-    gTaskNameBosDsdMain,
+    "task_bos_dsd_main",
     (TaskInitFunc)task_bos_dsd_main_0,
     (TaskUpdateFunc)task_bos_dsd_main_1,
     (TaskFunc)task_bos_dsd_main_2,
@@ -1293,7 +1289,7 @@ const u16* gUnk_09EF2E68[4] = {
 };
 
 TaskDesc gTaskDescBosDsdMap = {
-    gTaskNameBosDsdMap,
+    "task_bos_dsd_map",
     (TaskInitFunc)task_bos_dsd_map_0,
     (TaskUpdateFunc)task_bos_dsd_map_1,
     0,

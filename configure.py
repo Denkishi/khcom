@@ -384,6 +384,7 @@ with out.open("w") as f:
         "assetgen",
         command="python3 tools/assetgen.py $version $manifest",
         description="ASSETGEN $manifest",
+        restat=True,
     )
     n.rule(
         "check",

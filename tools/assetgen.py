@@ -251,8 +251,8 @@ def plan(version, manifests=None):
                 owner, target = lender(lookup, e, version)
                 sources.update(owner.sources(target, version))
         sources = sorted(sources, key=str)
-        binaries = sorted({manifest.binary(e, version) for e in manifest.entries
-                           if version in e and manifest.binary(e, version) is not None}, key=str)
+        binaries = sorted({path for name, obj in objects.items() if name.endswith(".s")
+                           for path in obj["binaries"]}, key=str)
         out[manifest.group] = {"manifest": manifest, "objects": objects, "header": gen / f"{manifest.group}.h",
                                "sources": sources, "binaries": binaries}
     return out

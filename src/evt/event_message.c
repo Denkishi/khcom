@@ -2558,8 +2558,8 @@ TaskDesc gTaskDescEventSeq = {
     "event_seq",
     (TaskInitFunc)event_seq_0,
     (TaskUpdateFunc)event_seq_1,
-    (TaskFunc)event_seq_2,
-    (TaskFunc)event_seq_3,
+    (TaskDrawFunc)event_seq_2,
+    (TaskDestroyFunc)event_seq_3,
     sizeof(EventSeqWork),
 };
 
@@ -2567,8 +2567,8 @@ TaskDesc gTaskDescEventChara = {
     "event_chara",
     (TaskInitFunc)event_chara_0,
     (TaskUpdateFunc)event_chara_1,
-    (TaskFunc)event_chara_2,
-    (TaskFunc)event_chara_3,
+    (TaskDrawFunc)event_chara_2,
+    (TaskDestroyFunc)event_chara_3,
     sizeof(EventCharaWork),
 };
 
@@ -2614,8 +2614,8 @@ TaskDesc gTaskDescMsgwin = {
     "msgwin",
     (TaskInitFunc)msgwin_0,
     (TaskUpdateFunc)msgwin_1,
-    (TaskFunc)msgwin_2,
-    (TaskFunc)msgwin_3,
+    (TaskDrawFunc)msgwin_2,
+    (TaskDestroyFunc)msgwin_3,
     sizeof(MsgWinWork),
 };
 
@@ -2635,8 +2635,8 @@ TaskDesc gTaskDescMsgface = {
     "msgface",
     (TaskInitFunc)msgface_0,
     (TaskUpdateFunc)msgface_1,
-    (TaskFunc)msgface_2,
-    (TaskFunc)msgface_3,
+    (TaskDrawFunc)msgface_2,
+    (TaskDestroyFunc)msgface_3,
     sizeof(MsgFaceWork),
 };
 
@@ -2655,8 +2655,8 @@ TaskDesc gTaskDescMsgwait = {
     "msgwait",
     (TaskInitFunc)msgwait_0,
     (TaskUpdateFunc)msgwait_1,
-    (TaskFunc)msgwait_2,
-    (TaskFunc)msgwait_3,
+    (TaskDrawFunc)msgwait_2,
+    (TaskDestroyFunc)msgwait_3,
     sizeof(MsgWaitWork),
 };
 
@@ -7477,8 +7477,8 @@ TaskDesc gTaskDescMsgwaitYesno = {
     "msgwait_yesno",
     (TaskInitFunc)msgwait_yesno_0,
     (TaskUpdateFunc)msgwait_yesno_1,
-    (TaskFunc)msgwait_yesno_2,
-    (TaskFunc)msgwait_yesno_3,
+    (TaskDrawFunc)msgwait_yesno_2,
+    (TaskDestroyFunc)msgwait_yesno_3,
     sizeof(MsgWaitWork),
 };
 
@@ -7486,7 +7486,7 @@ TaskDesc gTaskDescView = {
     "view",
     (TaskInitFunc)view_0,
     (TaskUpdateFunc)view_1,
-    (TaskFunc)view_2,
-    (TaskFunc)view_3,
+    (TaskDrawFunc)view_2,
+    (TaskDestroyFunc)view_3,
     sizeof(EventCameraWork),
 };

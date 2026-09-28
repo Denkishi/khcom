@@ -24,8 +24,8 @@ TaskDesc gTaskDescBosLstBit = {
     "task_bos_lst_bit",
     (TaskInitFunc)task_bos_lst_bit_0,
     (TaskUpdateFunc)task_bos_lst_bit_1,
-    (TaskFunc)task_bos_lst_bit_2,
-    (TaskFunc)task_bos_lst_bit_3,
+    (TaskDrawFunc)task_bos_lst_bit_2,
+    (TaskDestroyFunc)task_bos_lst_bit_3,
     sizeof(LstState),
 };
 

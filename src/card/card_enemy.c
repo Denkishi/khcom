@@ -1037,8 +1037,8 @@ TaskDesc gTaskDescCardEnemy = {
     "card_enemy",
     (TaskInitFunc)card_enemy_0,
     (TaskUpdateFunc)card_enemy_1,
-    (TaskFunc)func_08090374,
-    (TaskFunc)func_08090530,
+    (TaskDrawFunc)func_08090374,
+    (TaskDestroyFunc)func_08090530,
     sizeof(CardDisplayWork),
 };
 
@@ -1046,8 +1046,8 @@ TaskDesc gUnk_09EE4B58 = {
     "EnemyUsecard",
     (TaskInitFunc)func_08090EA0,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskFunc)func_08090374,
-    (TaskFunc)func_08090530,
+    (TaskDrawFunc)func_08090374,
+    (TaskDestroyFunc)func_08090530,
     sizeof(CardDisplayWork),
 };
 
@@ -1055,8 +1055,8 @@ TaskDesc gUnk_09EE4B70 = {
     "EnemyUsecard",
     (TaskInitFunc)func_08091048,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskFunc)func_08090374,
-    (TaskFunc)func_08090530,
+    (TaskDrawFunc)func_08090374,
+    (TaskDestroyFunc)func_08090530,
     sizeof(CardDisplayWork),
 };
 
@@ -1064,7 +1064,7 @@ TaskDesc gUnk_09EE4B88 = {
     "EnemyUsecard",
     (TaskInitFunc)func_08091138,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskFunc)func_08090374,
-    (TaskFunc)func_08090530,
+    (TaskDrawFunc)func_08090374,
+    (TaskDestroyFunc)func_08090530,
     sizeof(CardDisplayWork),
 };

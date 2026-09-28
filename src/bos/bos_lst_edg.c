@@ -6,8 +6,8 @@ TaskDesc gTaskDescBosLstEdg = {
     "task_bos_lst_edg",
     (TaskInitFunc)task_bos_lst_edg_0,
     (TaskUpdateFunc)task_bos_lst_edg_1,
-    (TaskFunc)task_bos_lst_edg_2,
-    (TaskFunc)task_bos_lst_edg_3,
+    (TaskDrawFunc)task_bos_lst_edg_2,
+    (TaskDestroyFunc)task_bos_lst_edg_3,
     sizeof(LstEdgWork),
 };
 

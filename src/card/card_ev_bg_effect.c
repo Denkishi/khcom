@@ -352,7 +352,7 @@ TaskDesc gTaskDescEVBGEFFECT = {
     "EV_BG_EFFECT",
     (TaskInitFunc)EV_BG_EFFECT_0,
     (TaskUpdateFunc)EV_BG_EFFECT_1,
-    (TaskFunc)EV_BG_EFFECT_2,
-    (TaskFunc)EV_BG_EFFECT_3,
+    (TaskDrawFunc)EV_BG_EFFECT_2,
+    (TaskDestroyFunc)EV_BG_EFFECT_3,
     sizeof(EventBgEffectWork),
 };

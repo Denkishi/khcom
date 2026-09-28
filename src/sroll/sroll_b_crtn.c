@@ -100,7 +100,7 @@ TaskDesc gTaskDescSrollBCrtn = {
     "task_sroll_b_crtn",
     (TaskInitFunc)task_sroll_b_crtn_0,
     (TaskUpdateFunc)task_sroll_b_crtn_1,
-    (TaskFunc)task_sroll_b_crtn_2,
-    (TaskFunc)task_sroll_b_crtn_3,
+    (TaskDrawFunc)task_sroll_b_crtn_2,
+    (TaskDestroyFunc)task_sroll_b_crtn_3,
     sizeof(SrollBCrtnWork),
 };

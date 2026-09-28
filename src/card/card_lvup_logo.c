@@ -211,8 +211,8 @@ TaskDesc gTaskDescLvupLogo = {
     "Lvup_Logo",
     (TaskInitFunc)Lvup_Logo_0,
     (TaskUpdateFunc)Lvup_Logo_1,
-    (TaskFunc)Lvup_Logo_2,
-    (TaskFunc)Lvup_Logo_3,
+    (TaskDrawFunc)Lvup_Logo_2,
+    (TaskDestroyFunc)Lvup_Logo_3,
     sizeof(LevelUpEffectWork),
 };
 
@@ -220,8 +220,8 @@ TaskDesc gTaskDescEvMapObj = {
     "Ev_mapObj",
     (TaskInitFunc)Ev_mapObj_0,
     (TaskUpdateFunc)Ev_mapObj_1,
-    (TaskFunc)Ev_mapObj_2,
-    (TaskFunc)Ev_mapObj_3,
+    (TaskDrawFunc)Ev_mapObj_2,
+    (TaskDestroyFunc)Ev_mapObj_3,
     sizeof(EventMapObjectWork),
 };
 

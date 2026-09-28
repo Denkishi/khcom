@@ -542,7 +542,7 @@ TaskDesc gTaskDescTutorial = {
     "task_tutorial",
     (TaskInitFunc)task_tutorial_0,
     (TaskUpdateFunc)task_tutorial_1,
-    (TaskFunc)task_tutorial_2,
-    (TaskFunc)task_tutorial_3,
+    (TaskDrawFunc)task_tutorial_2,
+    (TaskDestroyFunc)task_tutorial_3,
     sizeof(TutorialWork),
 };

@@ -84,7 +84,7 @@ TaskDesc gTaskDescBosJfShadow = {
     "task_bos_jf_shadow",
     (TaskInitFunc)task_bos_jf_shadow_0,
     (TaskUpdateFunc)task_bos_jf_shadow_1,
-    (TaskFunc)task_bos_jf_shadow_2,
-    (TaskFunc)task_bos_jf_shadow_3,
+    (TaskDrawFunc)task_bos_jf_shadow_2,
+    (TaskDestroyFunc)task_bos_jf_shadow_3,
     sizeof(JfShadowWork),
 };

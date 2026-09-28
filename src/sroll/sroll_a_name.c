@@ -109,7 +109,7 @@ TaskDesc gTaskDescSrollAName = {
     "task_sroll_a_name",
     (TaskInitFunc)task_sroll_a_name_0,
     (TaskUpdateFunc)task_sroll_a_name_1,
-    (TaskFunc)task_sroll_a_name_2,
-    (TaskFunc)task_sroll_a_name_3,
+    (TaskDrawFunc)task_sroll_a_name_2,
+    (TaskDestroyFunc)task_sroll_a_name_3,
     sizeof(SrollANameWork),
 };

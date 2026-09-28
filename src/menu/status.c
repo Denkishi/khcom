@@ -23,8 +23,8 @@ TaskDesc gTaskDescStatus = {
     "task_status",
     (TaskInitFunc)task_status_0,
     (TaskUpdateFunc)task_status_1,
-    (TaskFunc)task_status_2,
-    (TaskFunc)task_status_3,
+    (TaskDrawFunc)task_status_2,
+    (TaskDestroyFunc)task_status_3,
     sizeof(StatusWork),
 };
 
@@ -54,8 +54,8 @@ TaskDesc gTaskDescStatusBar = {
     "task_status_bar",
     (TaskInitFunc)task_status_bar_0,
     (TaskUpdateFunc)task_status_bar_1,
-    (TaskFunc)task_status_bar_2,
-    (TaskFunc)task_status_bar_3,
+    (TaskDrawFunc)task_status_bar_2,
+    (TaskDestroyFunc)task_status_bar_3,
     sizeof(StatusBarWork),
 };
 
@@ -81,8 +81,8 @@ TaskDesc gTaskDescStatusTab = {
     "task_status_tab",
     (TaskInitFunc)task_status_tab_0,
     (TaskUpdateFunc)task_status_tab_1,
-    (TaskFunc)task_status_tab_2,
-    (TaskFunc)task_status_tab_3,
+    (TaskDrawFunc)task_status_tab_2,
+    (TaskDestroyFunc)task_status_tab_3,
     sizeof(StatusTabWork),
 };
 
@@ -90,8 +90,8 @@ TaskDesc gTaskDescStatusSora = {
     "task_status_sora",
     (TaskInitFunc)task_status_sora_0,
     (TaskUpdateFunc)task_status_sora_1,
-    (TaskFunc)task_status_sora_2,
-    (TaskFunc)task_status_sora_3,
+    (TaskDrawFunc)task_status_sora_2,
+    (TaskDestroyFunc)task_status_sora_3,
     sizeof(StatusSoraWork),
 };
 
@@ -99,8 +99,8 @@ TaskDesc gTaskDescStatusDeckname = {
     "task_status_deckname",
     (TaskInitFunc)task_status_deckname_0,
     (TaskUpdateFunc)task_status_deckname_1,
-    (TaskFunc)task_status_deckname_2,
-    (TaskFunc)task_status_deckname_3,
+    (TaskDrawFunc)task_status_deckname_2,
+    (TaskDestroyFunc)task_status_deckname_3,
     sizeof(StatusDecknameWork),
 };
 
@@ -110,8 +110,8 @@ TaskDesc gTaskDescStatusCursor = {
     "task_status_cursor",
     (TaskInitFunc)task_status_cursor_0,
     (TaskUpdateFunc)task_status_cursor_1,
-    (TaskFunc)task_status_cursor_2,
-    (TaskFunc)task_status_cursor_3,
+    (TaskDrawFunc)task_status_cursor_2,
+    (TaskDestroyFunc)task_status_cursor_3,
     sizeof(StatusCursorWork),
 };
 
@@ -141,8 +141,8 @@ TaskDesc gTaskDescStatusStocklist = {
     "task_status_stocklist",
     (TaskInitFunc)task_status_stocklist_0,
     (TaskUpdateFunc)task_status_stocklist_1,
-    (TaskFunc)task_status_stocklist_2,
-    (TaskFunc)task_status_stocklist_3,
+    (TaskDrawFunc)task_status_stocklist_2,
+    (TaskDestroyFunc)task_status_stocklist_3,
     sizeof(StatusStocklistWork),
 };
 
@@ -150,8 +150,8 @@ TaskDesc gTaskDescStatusScrollcursor = {
     "task_status_scrollcursor",
     (TaskInitFunc)task_status_scrollcursor_0,
     (TaskUpdateFunc)task_status_scrollcursor_1,
-    (TaskFunc)task_status_scrollcursor_2,
-    (TaskFunc)task_status_scrollcursor_3,
+    (TaskDrawFunc)task_status_scrollcursor_2,
+    (TaskDestroyFunc)task_status_scrollcursor_3,
     sizeof(StatusScrollcursorWork),
 };
 
@@ -159,8 +159,8 @@ TaskDesc gTaskDescStatusMeswindow = {
     "task_status_meswindow",
     (TaskInitFunc)task_status_meswindow_0,
     (TaskUpdateFunc)task_status_meswindow_1,
-    (TaskFunc)task_status_meswindow_2,
-    (TaskFunc)task_status_meswindow_3,
+    (TaskDrawFunc)task_status_meswindow_2,
+    (TaskDestroyFunc)task_status_meswindow_3,
     sizeof(StatusMeswindowWork),
 };
 
@@ -168,8 +168,8 @@ TaskDesc gTaskDescStatusMessage = {
     "task_status_message",
     (TaskInitFunc)task_status_message_0,
     (TaskUpdateFunc)task_status_message_1,
-    (TaskFunc)task_status_message_2,
-    (TaskFunc)task_status_message_3,
+    (TaskDrawFunc)task_status_message_2,
+    (TaskDestroyFunc)task_status_message_3,
     sizeof(StatusMessageWork),
 };
 
@@ -177,8 +177,8 @@ TaskDesc gTaskDescStatusFriend = {
     "task_status_friend",
     (TaskInitFunc)task_status_friend_0,
     (TaskUpdateFunc)task_status_friend_1,
-    (TaskFunc)task_status_friend_2,
-    (TaskFunc)task_status_friend_3,
+    (TaskDrawFunc)task_status_friend_2,
+    (TaskDestroyFunc)task_status_friend_3,
     sizeof(StatusFriendWork),
 };
 
@@ -1247,7 +1247,7 @@ TaskDesc gTaskDescStockMesDisp = {
     "stock_mes_disp",
     (TaskInitFunc)stock_mes_disp_0,
     (TaskUpdateFunc)stock_mes_disp_1,
-    (TaskFunc)stock_mes_disp_2,
-    (TaskFunc)stock_mes_disp_3,
+    (TaskDrawFunc)stock_mes_disp_2,
+    (TaskDestroyFunc)stock_mes_disp_3,
     sizeof(StockMesDispWork),
 };

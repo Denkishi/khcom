@@ -167,7 +167,7 @@ TaskDesc gTaskDescSrollCChar = {
     "task_sroll_c_char",
     (TaskInitFunc)task_sroll_c_char_0,
     (TaskUpdateFunc)task_sroll_c_char_1,
-    (TaskFunc)task_sroll_c_char_2,
-    (TaskFunc)task_sroll_c_char_3,
+    (TaskDrawFunc)task_sroll_c_char_2,
+    (TaskDestroyFunc)task_sroll_c_char_3,
     sizeof(SrollCCharWork),
 };

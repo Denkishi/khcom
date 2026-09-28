@@ -46,8 +46,8 @@ TaskDesc gTaskDescHumCloud = {
     "task_hum_cloud",
     (TaskInitFunc)task_hum_cloud_0,
     (TaskUpdateFunc)task_hum_cloud_1,
-    (TaskFunc)task_hum_cloud_2,
-    (TaskFunc)task_hum_cloud_3,
+    (TaskDrawFunc)task_hum_cloud_2,
+    (TaskDestroyFunc)task_hum_cloud_3,
     sizeof(CloudWork),
 };
 
@@ -87,8 +87,8 @@ TaskDesc gTaskDescHumHook = {
     "task_hum_hook",
     (TaskInitFunc)task_hum_hook_0,
     (TaskUpdateFunc)task_hum_hook_1,
-    (TaskFunc)task_hum_hook_2,
-    (TaskFunc)task_hum_hook_3,
+    (TaskDrawFunc)task_hum_hook_2,
+    (TaskDestroyFunc)task_hum_hook_3,
     sizeof(HookWork),
 };
 
@@ -96,8 +96,8 @@ TaskDesc gTaskDescHumHookMoon = {
     "task_hum_hook_moon",
     (TaskInitFunc)task_hum_hook_moon_0,
     (TaskUpdateFunc)task_hum_hook_moon_1,
-    (TaskFunc)task_hum_hook_moon_2,
-    (TaskFunc)task_hum_hook_moon_3,
+    (TaskDrawFunc)task_hum_hook_moon_2,
+    (TaskDestroyFunc)task_hum_hook_moon_3,
     sizeof(HookMoonWork),
 };
 
@@ -105,8 +105,8 @@ TaskDesc gTaskDescHumHookBomb = {
     "task_hum_hook_bomb",
     (TaskInitFunc)task_hum_hook_bomb_0,
     (TaskUpdateFunc)task_hum_hook_bomb_1,
-    (TaskFunc)task_hum_hook_bomb_2,
-    (TaskFunc)task_hum_hook_bomb_3,
+    (TaskDrawFunc)task_hum_hook_bomb_2,
+    (TaskDestroyFunc)task_hum_hook_bomb_3,
     sizeof(HookBombWork),
 };
 
@@ -149,8 +149,8 @@ TaskDesc gTaskDescHumAnsem = {
     "task_hum_ansem",
     (TaskInitFunc)task_hum_ansem_0,
     (TaskUpdateFunc)task_hum_ansem_1,
-    (TaskFunc)task_hum_ansem_2,
-    (TaskFunc)task_hum_ansem_3,
+    (TaskDrawFunc)task_hum_ansem_2,
+    (TaskDestroyFunc)task_hum_ansem_3,
     sizeof(AnsemWork),
 };
 
@@ -197,8 +197,8 @@ TaskDesc gTaskDescHumHades = {
     "task_hum_hades",
     (TaskInitFunc)task_hum_hades_0,
     (TaskUpdateFunc)task_hum_hades_1,
-    (TaskFunc)task_hum_hades_2,
-    (TaskFunc)task_hum_hades_3,
+    (TaskDrawFunc)task_hum_hades_2,
+    (TaskDestroyFunc)task_hum_hades_3,
     sizeof(HadesWork),
 };
 
@@ -236,8 +236,8 @@ TaskDesc gTaskDescHumMahluxia = {
     "task_hum_mahluxia",
     (TaskInitFunc)task_hum_mahluxia_0,
     (TaskUpdateFunc)task_hum_mahluxia_1,
-    (TaskFunc)task_hum_mahluxia_2,
-    (TaskFunc)task_hum_mahluxia_3,
+    (TaskDrawFunc)task_hum_mahluxia_2,
+    (TaskDestroyFunc)task_hum_mahluxia_3,
     sizeof(MahluxiaWork),
 };
 
@@ -270,8 +270,8 @@ TaskDesc gTaskDescHumLaxene = {
     "task_hum_laxene",
     (TaskInitFunc)task_hum_laxene_0,
     (TaskUpdateFunc)task_hum_laxene_1,
-    (TaskFunc)task_hum_laxene_2,
-    (TaskFunc)task_hum_laxene_3,
+    (TaskDrawFunc)task_hum_laxene_2,
+    (TaskDestroyFunc)task_hum_laxene_3,
     sizeof(LaxeneWork),
 };
 
@@ -279,8 +279,8 @@ TaskDesc gTaskDescHumLaxeneKnf = {
     "task_hum_laxene_knf",
     (TaskInitFunc)task_hum_laxene_knf_0,
     (TaskUpdateFunc)task_hum_laxene_knf_1,
-    (TaskFunc)task_hum_laxene_knf_2,
-    (TaskFunc)task_hum_laxene_knf_3,
+    (TaskDrawFunc)task_hum_laxene_knf_2,
+    (TaskDestroyFunc)task_hum_laxene_knf_3,
     sizeof(LaxeneKnfWork),
 };
 
@@ -333,8 +333,8 @@ TaskDesc gTaskDescHumAxcel = {
     "task_hum_axcel",
     (TaskInitFunc)task_hum_axcel_0,
     (TaskUpdateFunc)task_hum_axcel_1,
-    (TaskFunc)task_hum_axcel_2,
-    (TaskFunc)task_hum_axcel_3,
+    (TaskDrawFunc)task_hum_axcel_2,
+    (TaskDestroyFunc)task_hum_axcel_3,
     sizeof(AxcelWork),
 };
 
@@ -342,8 +342,8 @@ TaskDesc gTaskDescHumAxcelPtc = {
     "task_hum_axcel_ptc",
     (TaskInitFunc)task_hum_axcel_ptc_0,
     (TaskUpdateFunc)task_hum_axcel_ptc_1,
-    (TaskFunc)task_hum_axcel_ptc_2,
-    (TaskFunc)task_hum_axcel_ptc_3,
+    (TaskDrawFunc)task_hum_axcel_ptc_2,
+    (TaskDestroyFunc)task_hum_axcel_ptc_3,
     sizeof(AxcelPtcWork),
 };
 
@@ -387,8 +387,8 @@ TaskDesc gTaskDescHumVixen = {
     "task_hum_vixen",
     (TaskInitFunc)task_hum_vixen_0,
     (TaskUpdateFunc)task_hum_vixen_1,
-    (TaskFunc)task_hum_vixen_2,
-    (TaskFunc)task_hum_vixen_3,
+    (TaskDrawFunc)task_hum_vixen_2,
+    (TaskDestroyFunc)task_hum_vixen_3,
     sizeof(VixenWork),
 };
 
@@ -396,8 +396,8 @@ TaskDesc gTaskDescHumVixenNdl = {
     "task_hum_vixen_ndl",
     (TaskInitFunc)task_hum_vixen_ndl_0,
     (TaskUpdateFunc)task_hum_vixen_ndl_1,
-    (TaskFunc)task_hum_vixen_ndl_2,
-    (TaskFunc)task_hum_vixen_ndl_3,
+    (TaskDrawFunc)task_hum_vixen_ndl_2,
+    (TaskDestroyFunc)task_hum_vixen_ndl_3,
     sizeof(VixenNdlWork),
 };
 
@@ -405,8 +405,8 @@ TaskDesc gTaskDescHumVixenIce = {
     "task_hum_vixen_ice",
     (TaskInitFunc)task_hum_vixen_ice_0,
     (TaskUpdateFunc)task_hum_vixen_ice_1,
-    (TaskFunc)task_hum_vixen_ice_2,
-    (TaskFunc)task_hum_vixen_ice_3,
+    (TaskDrawFunc)task_hum_vixen_ice_2,
+    (TaskDestroyFunc)task_hum_vixen_ice_3,
     sizeof(VixenIceWork),
 };
 
@@ -430,8 +430,8 @@ TaskDesc gTaskDescHumVixenFrz = {
     "task_hum_vixen_frz",
     (TaskInitFunc)task_hum_vixen_frz_0,
     (TaskUpdateFunc)task_hum_vixen_frz_1,
-    (TaskFunc)task_hum_vixen_frz_2,
-    (TaskFunc)task_hum_vixen_frz_3,
+    (TaskDrawFunc)task_hum_vixen_frz_2,
+    (TaskDestroyFunc)task_hum_vixen_frz_3,
     sizeof(VixenFrzWork),
 };
 
@@ -457,8 +457,8 @@ TaskDesc gTaskDescHumVixenFrg = {
     "task_hum_vixen_frg",
     (TaskInitFunc)task_hum_vixen_frg_0,
     (TaskUpdateFunc)task_hum_vixen_frg_1,
-    (TaskFunc)task_hum_vixen_frg_2,
-    (TaskFunc)task_hum_vixen_frg_3,
+    (TaskDrawFunc)task_hum_vixen_frg_2,
+    (TaskDestroyFunc)task_hum_vixen_frg_3,
     sizeof(VixenFrgWork),
 };
 
@@ -485,8 +485,8 @@ TaskDesc gTaskDescHumLexceus = {
     "task_hum_lexceus",
     (TaskInitFunc)task_hum_lexceus_0,
     (TaskUpdateFunc)task_hum_lexceus_1,
-    (TaskFunc)task_hum_lexceus_2,
-    (TaskFunc)task_hum_lexceus_3,
+    (TaskDrawFunc)task_hum_lexceus_2,
+    (TaskDestroyFunc)task_hum_lexceus_3,
     sizeof(LexceusWork),
 };
 
@@ -494,8 +494,8 @@ TaskDesc gTaskDescHumLexTmh = {
     "task_hum_lex_tmh",
     (TaskInitFunc)task_hum_lex_tmh_0,
     (TaskUpdateFunc)task_hum_lex_tmh_1,
-    (TaskFunc)task_hum_lex_tmh_2,
-    (TaskFunc)task_hum_lex_tmh_3,
+    (TaskDrawFunc)task_hum_lex_tmh_2,
+    (TaskDestroyFunc)task_hum_lex_tmh_3,
     sizeof(LexTmhWork),
 };
 
@@ -503,8 +503,8 @@ TaskDesc gTaskDescHumLexTmh0 = {
     "task_hum_lex_tmh0",
     (TaskInitFunc)task_hum_lex_tmh0_0,
     (TaskUpdateFunc)task_hum_lex_tmh0_1,
-    (TaskFunc)task_hum_lex_tmh0_2,
-    (TaskFunc)task_hum_lex_tmh0_3,
+    (TaskDrawFunc)task_hum_lex_tmh0_2,
+    (TaskDestroyFunc)task_hum_lex_tmh0_3,
     sizeof(LexTmh0Work),
 };
 
@@ -512,8 +512,8 @@ TaskDesc gTaskDescHumLexRock = {
     "task_hum_lex_rock",
     (TaskInitFunc)task_hum_lex_rock_0,
     (TaskUpdateFunc)task_hum_lex_rock_1,
-    (TaskFunc)task_hum_lex_rock_2,
-    (TaskFunc)task_hum_lex_rock_3,
+    (TaskDrawFunc)task_hum_lex_rock_2,
+    (TaskDestroyFunc)task_hum_lex_rock_3,
     sizeof(LexRockWork),
 };
 
@@ -521,8 +521,8 @@ TaskDesc gTaskDescHumMahluxiaFlw = {
     "task_hum_mahluxia_flw",
     (TaskInitFunc)task_hum_mahluxia_flw_0,
     (TaskUpdateFunc)task_hum_mahluxia_flw_1,
-    (TaskFunc)task_hum_mahluxia_flw_2,
-    (TaskFunc)task_hum_mahluxia_flw_3,
+    (TaskDrawFunc)task_hum_mahluxia_flw_2,
+    (TaskDestroyFunc)task_hum_mahluxia_flw_3,
     sizeof(MahluxiaFlwWork),
 };
 
@@ -563,8 +563,8 @@ TaskDesc gTaskDescHumRiku = {
     "task_hum_riku",
     (TaskInitFunc)task_hum_riku_0,
     (TaskUpdateFunc)task_hum_riku_1,
-    (TaskFunc)task_hum_riku_2,
-    (TaskFunc)task_hum_riku_3,
+    (TaskDrawFunc)task_hum_riku_2,
+    (TaskDestroyFunc)task_hum_riku_3,
     sizeof(RikuWork),
 };
 
@@ -582,8 +582,8 @@ TaskDesc gTaskDescHumLeon = {
     "task_hum_leon",
     (TaskInitFunc)task_hum_leon_0,
     (TaskUpdateFunc)task_hum_leon_1,
-    (TaskFunc)task_hum_leon_2,
-    (TaskFunc)task_hum_leon_3,
+    (TaskDrawFunc)task_hum_leon_2,
+    (TaskDestroyFunc)task_hum_leon_3,
     sizeof(LeonWork),
 };
 
@@ -8916,7 +8916,7 @@ TaskDesc gTaskDescHumRobe = {
     "task_hum_robe",
     (TaskInitFunc)task_hum_robe_0,
     (TaskUpdateFunc)task_hum_robe_1,
-    (TaskFunc)task_hum_robe_2,
-    (TaskFunc)task_hum_robe_3,
+    (TaskDrawFunc)task_hum_robe_2,
+    (TaskDestroyFunc)task_hum_robe_3,
     sizeof(RobeWork),
 };

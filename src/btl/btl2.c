@@ -1947,8 +1947,8 @@ TaskDesc gTaskDescBtlShadow = {
     "task_btl_shadow",
     (TaskInitFunc)task_btl_shadow_0,
     (TaskUpdateFunc)task_btl_shadow_1,
-    (TaskFunc)task_btl_shadow_2,
-    (TaskFunc)task_btl_shadow_3,
+    (TaskDrawFunc)task_btl_shadow_2,
+    (TaskDestroyFunc)task_btl_shadow_3,
     sizeof(BtlShadowWork),
 };
 
@@ -1956,8 +1956,8 @@ TaskDesc gTaskDescBtlHpply = {
     "task_btl_hpply",
     (TaskInitFunc)task_btl_hpply_0,
     (TaskUpdateFunc)task_btl_hpply_1,
-    (TaskFunc)task_btl_hpply_2,
-    (TaskFunc)task_btl_hpply_3,
+    (TaskDrawFunc)task_btl_hpply_2,
+    (TaskDestroyFunc)task_btl_hpply_3,
     sizeof(BtlHpplyWork),
 };
 
@@ -1965,8 +1965,8 @@ TaskDesc gTaskDescBtlHpenm = {
     "task_btl_hpenm",
     (TaskInitFunc)task_btl_hpenm_0,
     (TaskUpdateFunc)task_btl_hpenm_1,
-    (TaskFunc)task_btl_hpenm_2,
-    (TaskFunc)task_btl_hpenm_3,
+    (TaskDrawFunc)task_btl_hpenm_2,
+    (TaskDestroyFunc)task_btl_hpenm_3,
     sizeof(BtlHpenmWork),
 };
 
@@ -1974,8 +1974,8 @@ TaskDesc gTaskDescBtlPause = {
     "task_btl_pause",
     (TaskInitFunc)task_btl_pause_0,
     (TaskUpdateFunc)task_btl_pause_1,
-    (TaskFunc)task_btl_pause_2,
-    (TaskFunc)task_btl_pause_3,
+    (TaskDrawFunc)task_btl_pause_2,
+    (TaskDestroyFunc)task_btl_pause_3,
     sizeof(BtlPauseWork),
 };
 
@@ -1983,8 +1983,8 @@ TaskDesc gTaskDescBtlPop = {
     "task_btl_pop",
     (TaskInitFunc)task_btl_pop_0,
     (TaskUpdateFunc)task_btl_pop_1,
-    (TaskFunc)task_btl_pop_2,
-    (TaskFunc)task_btl_pop_3,
+    (TaskDrawFunc)task_btl_pop_2,
+    (TaskDestroyFunc)task_btl_pop_3,
     sizeof(BtlPopWork),
 };
 
@@ -1992,8 +1992,8 @@ TaskDesc gTaskDescBtlEscape = {
     "task_btl_escape",
     (TaskInitFunc)task_btl_escape_0,
     (TaskUpdateFunc)task_btl_escape_1,
-    (TaskFunc)task_btl_escape_2,
-    (TaskFunc)task_btl_escape_3,
+    (TaskDrawFunc)task_btl_escape_2,
+    (TaskDestroyFunc)task_btl_escape_3,
     sizeof(BtlEscapeWork),
 };
 
@@ -2001,8 +2001,8 @@ TaskDesc gTaskDescBtlPrize = {
     "task_btl_prize",
     (TaskInitFunc)task_btl_prize_0,
     (TaskUpdateFunc)task_btl_prize_1,
-    (TaskFunc)task_btl_prize_2,
-    (TaskFunc)task_btl_prize_3,
+    (TaskDrawFunc)task_btl_prize_2,
+    (TaskDestroyFunc)task_btl_prize_3,
     sizeof(BtlPrizeWork),
 };
 
@@ -2010,8 +2010,8 @@ TaskDesc gTaskDescBtlPremire = {
     "task_btl_premire",
     (TaskInitFunc)task_btl_premire_0,
     (TaskUpdateFunc)task_btl_premire_1,
-    (TaskFunc)task_btl_premire_2,
-    (TaskFunc)task_btl_premire_3,
+    (TaskDrawFunc)task_btl_premire_2,
+    (TaskDestroyFunc)task_btl_premire_3,
     sizeof(BtlPremireWork),
 };
 

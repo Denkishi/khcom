@@ -6,8 +6,8 @@ TaskDesc gTaskDescBosLstLsr = {
     "task_bos_lst_lsr",
     (TaskInitFunc)task_bos_lst_lsr_0,
     (TaskUpdateFunc)task_bos_lst_lsr_1,
-    (TaskFunc)task_bos_lst_lsr_2,
-    (TaskFunc)task_bos_lst_lsr_3,
+    (TaskDrawFunc)task_bos_lst_lsr_2,
+    (TaskDestroyFunc)task_bos_lst_lsr_3,
     sizeof(LstLsrWork),
 };
 

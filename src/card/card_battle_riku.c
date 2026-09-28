@@ -3984,8 +3984,8 @@ TaskDesc gTaskDescCardBattleRiku = {
     "cardbattle",
     (TaskInitFunc)cardbattle_0,
     (TaskUpdateFunc)cardbattle_1,
-    (TaskFunc)cardbattle_2,
-    (TaskFunc)cardbattle_3,
+    (TaskDrawFunc)cardbattle_2,
+    (TaskDestroyFunc)cardbattle_3,
     sizeof(CardBattleWork),
 };
 
@@ -3993,8 +3993,8 @@ TaskDesc gUnk_09EE49CC = {
     "card",
     (TaskInitFunc)func_08081A3C,
     (TaskUpdateFunc)func_08081B70,
-    (TaskFunc)card_2,
-    (TaskFunc)func_080820F4,
+    (TaskDrawFunc)card_2,
+    (TaskDestroyFunc)func_080820F4,
     sizeof(CardDisplayWork),
 };
 
@@ -4002,8 +4002,8 @@ TaskDesc gTaskDescNOCard = {
     "NO_Card",
     (TaskInitFunc)func_08081A3C,
     (TaskUpdateFunc)func_08081B70,
-    (TaskFunc)NO_Card_2,
-    (TaskFunc)func_080820F4,
+    (TaskDrawFunc)NO_Card_2,
+    (TaskDestroyFunc)func_080820F4,
     sizeof(CardDisplayWork),
 };
 
@@ -4011,8 +4011,8 @@ TaskDesc gTaskDescReloadCard = {
     "Reload_Card",
     (TaskInitFunc)Reload_Card_0,
     (TaskUpdateFunc)Reload_Card_1,
-    (TaskFunc)Reload_Card_2,
-    (TaskFunc)Reload_Card_3,
+    (TaskDrawFunc)Reload_Card_2,
+    (TaskDestroyFunc)Reload_Card_3,
     sizeof(CardDisplayWork),
 };
 
@@ -4020,7 +4020,7 @@ TaskDesc gTaskDescBosscard = {
     "Bosscard",
     (TaskInitFunc)Bosscard_0,
     (TaskUpdateFunc)Bosscard_1,
-    (TaskFunc)Bosscard_2,
-    (TaskFunc)Bosscard_3,
+    (TaskDrawFunc)Bosscard_2,
+    (TaskDestroyFunc)Bosscard_3,
     sizeof(BossCardWork),
 };

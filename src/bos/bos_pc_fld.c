@@ -29,8 +29,8 @@ TaskDesc gTaskDescBosPcFld = {
     "task_bos_pc_fld",
     (TaskInitFunc)task_bos_pc_fld_0,
     (TaskUpdateFunc)task_bos_pc_fld_1,
-    (TaskFunc)task_bos_pc_fld_2,
-    (TaskFunc)task_bos_pc_fld_3,
+    (TaskDrawFunc)task_bos_pc_fld_2,
+    (TaskDestroyFunc)task_bos_pc_fld_3,
     sizeof(PcFldWork),
 };
 

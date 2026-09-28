@@ -313,7 +313,7 @@ TaskDesc gUnk_09EE781C = {
     "Premire Chance",
     (TaskInitFunc)func_0809C534,
     (TaskUpdateFunc)func_0809C710,
-    (TaskFunc)func_0809C78C,
-    (TaskFunc)func_0809C98C,
+    (TaskDrawFunc)func_0809C78C,
+    (TaskDestroyFunc)func_0809C98C,
     sizeof(UnkStruct_0809C534),
 };

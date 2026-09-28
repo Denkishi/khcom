@@ -119,7 +119,7 @@ TaskDesc gTaskDescSrollBChar = {
     "task_sroll_b_char",
     (TaskInitFunc)task_sroll_b_char_0,
     (TaskUpdateFunc)task_sroll_b_char_1,
-    (TaskFunc)task_sroll_b_char_2,
-    (TaskFunc)task_sroll_b_char_3,
+    (TaskDrawFunc)task_sroll_b_char_2,
+    (TaskDestroyFunc)task_sroll_b_char_3,
     sizeof(SrollBCharWork),
 };

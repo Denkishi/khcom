@@ -20,8 +20,8 @@ TaskDesc gTaskDescFrdDonald = {
     "task_frd_donald",
     (TaskInitFunc)task_frd_donald_0,
     (TaskUpdateFunc)task_frd_donald_1,
-    (TaskFunc)task_frd_donald_2,
-    (TaskFunc)task_frd_donald_3,
+    (TaskDrawFunc)task_frd_donald_2,
+    (TaskDestroyFunc)task_frd_donald_3,
     sizeof(FrdDonaldWork),
 };
 
@@ -37,8 +37,8 @@ TaskDesc gTaskDescFrdGoofy = {
     "task_frd_goofy",
     (TaskInitFunc)task_frd_goofy_0,
     (TaskUpdateFunc)task_frd_goofy_1,
-    (TaskFunc)task_frd_goofy_2,
-    (TaskFunc)task_frd_goofy_3,
+    (TaskDrawFunc)task_frd_goofy_2,
+    (TaskDestroyFunc)task_frd_goofy_3,
     sizeof(FrdGoofyWork),
 };
 
@@ -52,8 +52,8 @@ TaskDesc gTaskDescFrdAriel = {
     "task_frd_ariel",
     (TaskInitFunc)task_frd_ariel_0,
     (TaskUpdateFunc)task_frd_ariel_1,
-    (TaskFunc)task_frd_ariel_2,
-    (TaskFunc)task_frd_ariel_3,
+    (TaskDrawFunc)task_frd_ariel_2,
+    (TaskDestroyFunc)task_frd_ariel_3,
     sizeof(FrdArielWork),
 };
 
@@ -69,8 +69,8 @@ TaskDesc gTaskDescFrdJack = {
     "task_frd_jack",
     (TaskInitFunc)task_frd_jack_0,
     (TaskUpdateFunc)task_frd_jack_1,
-    (TaskFunc)task_frd_jack_2,
-    (TaskFunc)task_frd_jack_3,
+    (TaskDrawFunc)task_frd_jack_2,
+    (TaskDestroyFunc)task_frd_jack_3,
     sizeof(FrdJackWork),
 };
 
@@ -85,8 +85,8 @@ TaskDesc gTaskDescFrdPan = {
     "task_frd_pan",
     (TaskInitFunc)task_frd_pan_0,
     (TaskUpdateFunc)task_frd_pan_1,
-    (TaskFunc)task_frd_pan_2,
-    (TaskFunc)task_frd_pan_3,
+    (TaskDrawFunc)task_frd_pan_2,
+    (TaskDestroyFunc)task_frd_pan_3,
     sizeof(FrdPanWork),
 };
 
@@ -100,8 +100,8 @@ TaskDesc gTaskDescFrdAladdin = {
     "task_frd_aladdin",
     (TaskInitFunc)task_frd_aladdin_0,
     (TaskUpdateFunc)task_frd_aladdin_1,
-    (TaskFunc)task_frd_aladdin_2,
-    (TaskFunc)task_frd_aladdin_3,
+    (TaskDrawFunc)task_frd_aladdin_2,
+    (TaskDestroyFunc)task_frd_aladdin_3,
     sizeof(FrdAladdinWork),
 };
 
@@ -2398,7 +2398,7 @@ TaskDesc gTaskDescFrdBeast = {
     "task_frd_beast",
     (TaskInitFunc)task_frd_beast_0,
     (TaskUpdateFunc)task_frd_beast_1,
-    (TaskFunc)task_frd_beast_2,
-    (TaskFunc)task_frd_beast_3,
+    (TaskDrawFunc)task_frd_beast_2,
+    (TaskDestroyFunc)task_frd_beast_3,
     sizeof(FrdBeastWork),
 };

@@ -85,8 +85,8 @@ TaskDesc gTaskDescBosTmBody = {
     "task_bos_tm_body",
     (TaskInitFunc)task_bos_tm_body_0,
     (TaskUpdateFunc)task_bos_tm_body_1,
-    (TaskFunc)task_bos_tm_body_2,
-    (TaskFunc)task_bos_tm_body_3,
+    (TaskDrawFunc)task_bos_tm_body_2,
+    (TaskDestroyFunc)task_bos_tm_body_3,
     sizeof(TmBodyWork),
 };
 

@@ -1339,7 +1339,7 @@ TaskDesc gTaskDescSrollTmr = {
     "task_sroll_tmr",
     (TaskInitFunc)task_sroll_tmr_0,
     (TaskUpdateFunc)task_sroll_tmr_1,
-    (TaskFunc)task_sroll_tmr_2,
-    (TaskFunc)task_sroll_tmr_3,
+    (TaskDrawFunc)task_sroll_tmr_2,
+    (TaskDestroyFunc)task_sroll_tmr_3,
     sizeof(SrollTmrWork),
 };

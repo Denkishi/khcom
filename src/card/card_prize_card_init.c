@@ -2019,8 +2019,8 @@ TaskDesc gTaskDescPrizeCardInit = {
     "PrizeCardInit",
     (TaskInitFunc)func_08096714,
     (TaskUpdateFunc)PrizeCardInit_1,
-    (TaskFunc)func_08096C20,
-    (TaskFunc)func_08096C2C,
+    (TaskDrawFunc)func_08096C20,
+    (TaskDestroyFunc)func_08096C2C,
     sizeof(PrizeCardInitWork),
 };
 
@@ -2028,8 +2028,8 @@ TaskDesc gTaskDescPrizeCardInitBoss = {
     "PrizeCardInit_Boss",
     (TaskInitFunc)func_08096714,
     (TaskUpdateFunc)PrizeCardInit_Boss_1,
-    (TaskFunc)func_08096C20,
-    (TaskFunc)func_08096C2C,
+    (TaskDrawFunc)func_08096C20,
+    (TaskDestroyFunc)func_08096C2C,
     sizeof(PrizeCardInitWork),
 };
 
@@ -2037,8 +2037,8 @@ TaskDesc gTaskDescDispCardname = {
     "DispCardname",
     (TaskInitFunc)DispCardname_0,
     (TaskUpdateFunc)DispCardname_1,
-    (TaskFunc)DispCardname_2,
-    (TaskFunc)DispCardname_3,
+    (TaskDrawFunc)DispCardname_2,
+    (TaskDestroyFunc)DispCardname_3,
     sizeof(DispCardnameWork),
 };
 
@@ -2046,8 +2046,8 @@ TaskDesc gTaskDescVersion = {
     "Version",
     (TaskInitFunc)Version_0,
     (TaskUpdateFunc)Version_1,
-    (TaskFunc)Version_2,
-    (TaskFunc)Version_3,
+    (TaskDrawFunc)Version_2,
+    (TaskDestroyFunc)Version_3,
     sizeof(VersionWork),
 };
 
@@ -2055,8 +2055,8 @@ TaskDesc gUnk_09EE7650 = {
     "PrizeCard",
     (TaskInitFunc)PrizeCard_0,
     (TaskUpdateFunc)PrizeCard_1,
-    (TaskFunc)PrizeCard_2,
-    (TaskFunc)PrizeCard_3,
+    (TaskDrawFunc)PrizeCard_2,
+    (TaskDestroyFunc)PrizeCard_3,
     sizeof(UnkStruct_08096F94),
 };
 
@@ -2064,8 +2064,8 @@ TaskDesc gTaskDescSpotLight = {
     "SpotLight",
     (TaskInitFunc)SpotLight_0,
     (TaskUpdateFunc)SpotLight_1,
-    (TaskFunc)SpotLight_2,
-    (TaskFunc)SpotLight_3,
+    (TaskDrawFunc)SpotLight_2,
+    (TaskDestroyFunc)SpotLight_3,
     sizeof(SpotlightWork),
 };
 #ifdef VERSION_EU
@@ -2080,7 +2080,7 @@ TaskDesc gTaskDescSELMAPEVKEY = {
     "SELMAP_EVKEY",
     (TaskInitFunc)SELMAP_EVKEY_0,
     (TaskUpdateFunc)SELMAP_EVKEY_1,
-    (TaskFunc)SELMAP_EVKEY_2,
-    (TaskFunc)SELMAP_EVKEY_3,
+    (TaskDrawFunc)SELMAP_EVKEY_2,
+    (TaskDestroyFunc)SELMAP_EVKEY_3,
     sizeof(SelmapEventKeyWork),
 };

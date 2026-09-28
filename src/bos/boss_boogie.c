@@ -570,7 +570,7 @@ TaskDesc gTaskDescBosBoogie = {
     "task_bos_boogie",
     (TaskInitFunc)task_bos_boogie_0,
     (TaskUpdateFunc)task_bos_boogie_1,
-    (TaskFunc)task_bos_boogie_2,
-    (TaskFunc)task_bos_boogie_3,
+    (TaskDrawFunc)task_bos_boogie_2,
+    (TaskDestroyFunc)task_bos_boogie_3,
     sizeof(BoogieWork),
 };

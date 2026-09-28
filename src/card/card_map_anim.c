@@ -1258,8 +1258,8 @@ TaskDesc gTaskDescMapAnim = {
     "map_anim",
     (TaskInitFunc)map_anim_0,
     (TaskUpdateFunc)map_anim_1,
-    (TaskFunc)map_anim_2,
-    (TaskFunc)map_anim_3,
+    (TaskDrawFunc)map_anim_2,
+    (TaskDestroyFunc)map_anim_3,
     sizeof(MapTileAnimationWork),
 };
 

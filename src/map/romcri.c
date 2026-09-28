@@ -279,7 +279,7 @@ TaskDesc gTaskDescRomcriEff = {
     (TaskInitFunc)task_romcri_eff_0,
     (TaskUpdateFunc)task_romcri_eff_1,
     NULL,
-    (TaskFunc)task_romcri_eff_3,
+    (TaskDestroyFunc)task_romcri_eff_3,
     sizeof(RomcriEffWork),
 };
 
@@ -288,6 +288,6 @@ TaskDesc gTaskDescRomcriEff2 = {
     (TaskInitFunc)task_romcri_eff2_0,
     (TaskUpdateFunc)task_romcri_eff2_1,
     NULL,
-    (TaskFunc)task_romcri_eff2_3,
+    (TaskDestroyFunc)task_romcri_eff2_3,
     sizeof(RomcriEff2Work),
 };

@@ -406,8 +406,8 @@ TaskDesc gTaskDescDarkPoint = {
     "DarkPoint",
     (TaskInitFunc)DarkPoint_0,
     (TaskUpdateFunc)DarkPoint_1,
-    (TaskFunc)DarkPoint_2,
-    (TaskFunc)DarkPoint_3,
+    (TaskDrawFunc)DarkPoint_2,
+    (TaskDestroyFunc)DarkPoint_3,
     sizeof(DarkPointWork),
 };
 

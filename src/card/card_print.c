@@ -431,7 +431,7 @@ TaskDesc gTaskDescPrint = {
     "task_print",
     (TaskInitFunc)task_print_0,
     (TaskUpdateFunc)task_print_1,
-    (TaskFunc)task_print_2,
-    (TaskFunc)task_print_3,
+    (TaskDrawFunc)task_print_2,
+    (TaskDestroyFunc)task_print_3,
     0x4,
 };

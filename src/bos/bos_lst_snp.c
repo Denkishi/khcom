@@ -6,8 +6,8 @@ TaskDesc gTaskDescBosLstSnp = {
     "task_bos_lst_snp",
     (TaskInitFunc)task_bos_lst_snp_0,
     (TaskUpdateFunc)task_bos_lst_snp_1,
-    (TaskFunc)task_bos_lst_snp_2,
-    (TaskFunc)task_bos_lst_snp_3,
+    (TaskDrawFunc)task_bos_lst_snp_2,
+    (TaskDestroyFunc)task_bos_lst_snp_3,
     sizeof(LstSnpWork),
 };
 

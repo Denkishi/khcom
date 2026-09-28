@@ -154,7 +154,7 @@ TaskDesc gTaskDescSrollBSecn = {
     "task_sroll_b_secn",
     (TaskInitFunc)task_sroll_b_secn_0,
     (TaskUpdateFunc)task_sroll_b_secn_1,
-    (TaskFunc)task_sroll_b_secn_2,
-    (TaskFunc)task_sroll_b_secn_3,
+    (TaskDrawFunc)task_sroll_b_secn_2,
+    (TaskDestroyFunc)task_sroll_b_secn_3,
     sizeof(SrollBSecnWork),
 };

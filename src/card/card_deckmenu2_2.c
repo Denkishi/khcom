@@ -1092,7 +1092,7 @@ TaskDesc gUnk_09EE8EF0 = {
     "Deckmenu2",
     (TaskInitFunc)Deckmenu2_0,
     (TaskUpdateFunc)func_080A5C9C,
-    (TaskFunc)Deckmenu2_2,
-    (TaskFunc)Deckmenu2_3,
+    (TaskDrawFunc)Deckmenu2_2,
+    (TaskDestroyFunc)Deckmenu2_3,
     sizeof(RikuDeckMenuWork),
 };

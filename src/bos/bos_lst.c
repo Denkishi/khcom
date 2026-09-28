@@ -58,8 +58,8 @@ TaskDesc gTaskDescBosLst = {
     "task_bos_lst",
     (TaskInitFunc)task_bos_lst_0,
     (TaskUpdateFunc)task_bos_lst_1,
-    (TaskFunc)task_bos_lst_2,
-    (TaskFunc)task_bos_lst_3,
+    (TaskDrawFunc)task_bos_lst_2,
+    (TaskDestroyFunc)task_bos_lst_3,
     0x10A4,
 };
 

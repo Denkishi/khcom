@@ -5096,8 +5096,8 @@ TaskDesc gTaskDescBosPc = {
     "task_bos_pc",
     (TaskInitFunc)task_bos_pc_0,
     (TaskUpdateFunc)task_bos_pc_1,
-    (TaskFunc)task_bos_pc_2,
-    (TaskFunc)task_bos_pc_3,
+    (TaskDrawFunc)task_bos_pc_2,
+    (TaskDestroyFunc)task_bos_pc_3,
     0x1F1C,
 };
 

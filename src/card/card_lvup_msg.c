@@ -222,7 +222,7 @@ TaskDesc gTaskDescLvupMsg = {
     "Lvup msg",
     (TaskInitFunc)Lvup_msg_0,
     (TaskUpdateFunc)Lvup_msg_1,
-    (TaskFunc)Lvup_msg_2,
-    (TaskFunc)Lvup_msg_3,
+    (TaskDrawFunc)Lvup_msg_2,
+    (TaskDestroyFunc)Lvup_msg_3,
     sizeof(LvupMsgWork),
 };

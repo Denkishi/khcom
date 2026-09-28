@@ -43,8 +43,8 @@ TaskDesc gTaskDescFldSora = {
     "task_fld_sora",
     (TaskInitFunc)task_fld_sora_0,
     (TaskUpdateFunc)task_fld_sora_1,
-    (TaskFunc)task_fld_sora_2,
-    (TaskFunc)task_fld_sora_3,
+    (TaskDrawFunc)task_fld_sora_2,
+    (TaskDestroyFunc)task_fld_sora_3,
     sizeof(FldWork),
 };
 
@@ -3510,8 +3510,8 @@ TaskDesc gTaskDescFldRiku = {
     "task_fld_riku",
     (TaskInitFunc)task_fld_riku_0,
     (TaskUpdateFunc)task_fld_riku_1,
-    (TaskFunc)task_fld_riku_2,
-    (TaskFunc)task_fld_riku_3,
+    (TaskDrawFunc)task_fld_riku_2,
+    (TaskDestroyFunc)task_fld_riku_3,
     sizeof(FldWork),
 };
 
@@ -3519,7 +3519,7 @@ TaskDesc gTaskDescFldShadow = {
     "task_fld_shadow",
     (TaskInitFunc)task_fld_shadow_0,
     (TaskUpdateFunc)task_fld_shadow_1,
-    (TaskFunc)task_fld_shadow_2,
-    (TaskFunc)task_fld_shadow_3,
+    (TaskDrawFunc)task_fld_shadow_2,
+    (TaskDestroyFunc)task_fld_shadow_3,
     sizeof(FldShadowWork),
 };

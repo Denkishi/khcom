@@ -1049,8 +1049,8 @@ TaskDesc gTaskDescBtlPopCb = {
     "task_btl_pop_cb",
     (TaskInitFunc)task_btl_pop_cb_0,
     (TaskUpdateFunc)task_btl_pop_cb_1,
-    (TaskFunc)task_btl_pop_cb_2,
-    (TaskFunc)task_btl_pop_cb_3,
+    (TaskDrawFunc)task_btl_pop_cb_2,
+    (TaskDestroyFunc)task_btl_pop_cb_3,
     sizeof(BtlPopCbWork),
 };
 
@@ -1058,8 +1058,8 @@ TaskDesc gTaskDescBtlExp = {
     "task_btl_exp",
     (TaskInitFunc)task_btl_exp_0,
     (TaskUpdateFunc)task_btl_exp_1,
-    (TaskFunc)task_btl_exp_2,
-    (TaskFunc)task_btl_exp_3,
+    (TaskDrawFunc)task_btl_exp_2,
+    (TaskDestroyFunc)task_btl_exp_3,
     sizeof(BtlExpWork),
 };
 
@@ -1067,8 +1067,8 @@ TaskDesc gTaskDescBtlVslockon = {
     "task_btl_vslockon",
     (TaskInitFunc)task_btl_vslockon_0,
     (TaskUpdateFunc)task_btl_vslockon_1,
-    (TaskFunc)task_btl_vslockon_2,
-    (TaskFunc)task_btl_vslockon_3,
+    (TaskDrawFunc)task_btl_vslockon_2,
+    (TaskDestroyFunc)task_btl_vslockon_3,
     sizeof(BtlVslockonWork),
 };
 
@@ -1076,7 +1076,7 @@ TaskDesc gTaskDescBtlHpoth = {
     "task_btl_hpoth",
     (TaskInitFunc)task_btl_hpoth_0,
     (TaskUpdateFunc)task_btl_hpoth_1,
-    (TaskFunc)task_btl_hpoth_2,
-    (TaskFunc)task_btl_hpoth_3,
+    (TaskDrawFunc)task_btl_hpoth_2,
+    (TaskDestroyFunc)task_btl_hpoth_3,
     sizeof(BtlHpothWork),
 };

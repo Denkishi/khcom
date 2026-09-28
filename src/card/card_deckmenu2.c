@@ -7041,8 +7041,8 @@ TaskDesc gUnk_09EE4AF4 = {
     "Deckmenu2",
     (TaskInitFunc)Deckmenu2_0,
     (TaskUpdateFunc)Deckmenu2_1,
-    (TaskFunc)Deckmenu2_2,
-    (TaskFunc)func_0808C2F0,
+    (TaskDrawFunc)Deckmenu2_2,
+    (TaskDestroyFunc)func_0808C2F0,
     sizeof(DeckMenuWork),
 };
 #ifdef VERSION_EU

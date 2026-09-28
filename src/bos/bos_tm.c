@@ -20,8 +20,8 @@ TaskDesc gTaskDescBosTm = {
     "task_bos_tm",
     (TaskInitFunc)task_bos_tm_0,
     (TaskUpdateFunc)task_bos_tm_1,
-    (TaskFunc)task_bos_tm_2,
-    (TaskFunc)task_bos_tm_3,
+    (TaskDrawFunc)task_bos_tm_2,
+    (TaskDestroyFunc)task_bos_tm_3,
     sizeof(TmWork),
 };
 

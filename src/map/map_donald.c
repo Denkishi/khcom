@@ -125,7 +125,7 @@ TaskDesc gTaskDescMapDonald = {
     "Task_MapDonald",
     (TaskInitFunc)Task_MapDonald_0,
     (TaskUpdateFunc)Task_MapDonald_1,
-    (TaskFunc)Task_MapDonald_2,
-    (TaskFunc)Task_MapDonald_3,
+    (TaskDrawFunc)Task_MapDonald_2,
+    (TaskDestroyFunc)Task_MapDonald_3,
     sizeof(MapDonaldWork),
 };

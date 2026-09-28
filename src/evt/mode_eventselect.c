@@ -890,8 +890,8 @@ TaskDesc gTaskDescHanabira = {
     "Hanabira",
     (TaskInitFunc)Hanabira_0,
     (TaskUpdateFunc)Hanabira_1,
-    (TaskFunc)Hanabira_2,
-    (TaskFunc)Hanabira_3,
+    (TaskDrawFunc)Hanabira_2,
+    (TaskDestroyFunc)Hanabira_3,
     sizeof(EffectWork),
 };
 
@@ -899,8 +899,8 @@ TaskDesc gTaskDescHanabiraC = {
     "Hanabira_c",
     (TaskInitFunc)Hanabira_c_0,
     (TaskUpdateFunc)Hanabira_c_1,
-    (TaskFunc)Hanabira_c_2,
-    (TaskFunc)Hanabira_c_3,
+    (TaskDrawFunc)Hanabira_c_2,
+    (TaskDestroyFunc)Hanabira_c_3,
     sizeof(EffectWork),
 };
 
@@ -908,8 +908,8 @@ TaskDesc gTaskDescSmoke = {
     "smoke",
     (TaskInitFunc)smoke_0,
     (TaskUpdateFunc)func_08075720,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -917,8 +917,8 @@ TaskDesc gTaskDescExclamation = {
     "Exclamation",
     (TaskInitFunc)Exclamation_0,
     (TaskUpdateFunc)Exclamation_1,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -926,8 +926,8 @@ TaskDesc gTaskDescBalloon = {
     "balloon",
     (TaskInitFunc)balloon_0,
     (TaskUpdateFunc)func_08075720,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -935,8 +935,8 @@ TaskDesc gTaskDescQuestion = {
     "Question",
     (TaskInitFunc)Question_0,
     (TaskUpdateFunc)Question_1,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -944,8 +944,8 @@ TaskDesc gUnk_09EE484C = {
     "GlowNose",
     (TaskInitFunc)func_080758D0,
     (TaskUpdateFunc)func_080759B0,
-    (TaskFunc)func_080759E0,
-    (TaskFunc)func_08075A54,
+    (TaskDrawFunc)func_080759E0,
+    (TaskDestroyFunc)func_08075A54,
     sizeof(EffectWork),
 };
 
@@ -953,8 +953,8 @@ TaskDesc gTaskDescGlowNose = {
     "GlowNose",
     (TaskInitFunc)GlowNose_0,
     (TaskUpdateFunc)GlowNose_1,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -962,8 +962,8 @@ TaskDesc gTaskDescGlowNose2 = {
     "GlowNose",
     (TaskInitFunc)GlowNose2_0,
     (TaskUpdateFunc)GlowNose2_1,
-    (TaskFunc)EffectDrawObj,
-    (TaskFunc)EffectReleaseObj,
+    (TaskDrawFunc)EffectDrawObj,
+    (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
 };
 
@@ -971,8 +971,8 @@ TaskDesc gTaskDescDown = {
     "down",
     (TaskInitFunc)down_0,
     (TaskUpdateFunc)down_1,
-    (TaskFunc)down_2,
-    (TaskFunc)down_3,
+    (TaskDrawFunc)down_2,
+    (TaskDestroyFunc)down_3,
     sizeof(EffectWork),
 };
 
@@ -980,8 +980,8 @@ TaskDesc gTaskDescTinkerbell = {
     "Tinkerbell",
     (TaskInitFunc)Tinkerbell_0,
     (TaskUpdateFunc)Tinkerbell_1,
-    (TaskFunc)Tinkerbell_2,
-    (TaskFunc)Tinkerbell_3,
+    (TaskDrawFunc)Tinkerbell_2,
+    (TaskDestroyFunc)Tinkerbell_3,
     sizeof(EffectWork),
 };
 
@@ -989,8 +989,8 @@ TaskDesc gTaskDescEvSound = {
     "EV_SOUND",
     (TaskInitFunc)EV_SOUND_0,
     (TaskUpdateFunc)EV_SOUND_1,
-    (TaskFunc)EV_SOUND_2,
-    (TaskFunc)EV_SOUND_3,
+    (TaskDrawFunc)EV_SOUND_2,
+    (TaskDestroyFunc)EV_SOUND_3,
     sizeof(EvSoundWork),
 };
 
@@ -998,7 +998,7 @@ TaskDesc gTaskDescEventDebug = {
     "Event_Debug",
     (TaskInitFunc)Event_Debug_0,
     (TaskUpdateFunc)Event_Debug_1,
-    (TaskFunc)Event_Debug_2,
-    (TaskFunc)Event_Debug_3,
+    (TaskDrawFunc)Event_Debug_2,
+    (TaskDestroyFunc)Event_Debug_3,
     sizeof(EventDebugWork),
 };

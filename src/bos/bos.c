@@ -122,7 +122,7 @@ TaskDesc gTaskDescBosShadow = {
     "task_bos_shadow",
     (TaskInitFunc)task_bos_shadow_0,
     (TaskUpdateFunc)task_bos_shadow_1,
-    (TaskFunc)task_bos_shadow_2,
-    (TaskFunc)task_bos_shadow_3,
+    (TaskDrawFunc)task_bos_shadow_2,
+    (TaskDestroyFunc)task_bos_shadow_3,
     sizeof(BosShadowWork),
 };

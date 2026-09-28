@@ -24,8 +24,8 @@ TaskDesc gTaskDescAllmapRoom = {
     "task_allmap_room",
     (TaskInitFunc)task_allmap_room_0,
     (TaskUpdateFunc)task_allmap_room_1,
-    (TaskFunc)task_allmap_room_2,
-    (TaskFunc)task_allmap_room_3,
+    (TaskDrawFunc)task_allmap_room_2,
+    (TaskDestroyFunc)task_allmap_room_3,
     sizeof(AllmapRoomWork),
 };
 
@@ -33,8 +33,8 @@ TaskDesc gTaskDescAllmapCursor = {
     "task_allmap_cursor",
     (TaskInitFunc)task_allmap_cursor_0,
     (TaskUpdateFunc)task_allmap_cursor_1,
-    (TaskFunc)task_allmap_cursor_2,
-    (TaskFunc)task_allmap_cursor_3,
+    (TaskDrawFunc)task_allmap_cursor_2,
+    (TaskDestroyFunc)task_allmap_cursor_3,
     sizeof(AllmapCursorWork),
 };
 
@@ -42,8 +42,8 @@ TaskDesc gTaskDescAllmapRoomname = {
     "task_allmap_roomname",
     (TaskInitFunc)task_allmap_roomname_0,
     (TaskUpdateFunc)task_allmap_roomname_1,
-    (TaskFunc)task_allmap_roomname_2,
-    (TaskFunc)task_allmap_roomname_3,
+    (TaskDrawFunc)task_allmap_roomname_2,
+    (TaskDestroyFunc)task_allmap_roomname_3,
     sizeof(AllmapRoomnameWork),
 };
 
@@ -69,8 +69,8 @@ TaskDesc gTaskDescAllmapBar = {
     "task_allmap_bar",
     (TaskInitFunc)task_allmap_bar_0,
     (TaskUpdateFunc)task_allmap_bar_1,
-    (TaskFunc)task_allmap_bar_2,
-    (TaskFunc)task_allmap_bar_3,
+    (TaskDrawFunc)task_allmap_bar_2,
+    (TaskDestroyFunc)task_allmap_bar_3,
     sizeof(AllmapBarWork),
 };
 
@@ -1242,8 +1242,8 @@ TaskDesc gTaskDescAllmapDoorinfo = {
     "task_allmap_doorinfo",
     (TaskInitFunc)task_allmap_doorinfo_0,
     (TaskUpdateFunc)task_allmap_doorinfo_1,
-    (TaskFunc)task_allmap_doorinfo_2,
-    (TaskFunc)task_allmap_doorinfo_3,
+    (TaskDrawFunc)task_allmap_doorinfo_2,
+    (TaskDestroyFunc)task_allmap_doorinfo_3,
     sizeof(AllmapDoorinfoWork),
 };
 
@@ -1251,7 +1251,7 @@ TaskDesc gTaskDescAllmapPusha = {
     "task_allmap_pusha",
     (TaskInitFunc)task_allmap_pusha_0,
     (TaskUpdateFunc)task_allmap_pusha_1,
-    (TaskFunc)task_allmap_pusha_2,
-    (TaskFunc)task_allmap_pusha_3,
+    (TaskDrawFunc)task_allmap_pusha_2,
+    (TaskDestroyFunc)task_allmap_pusha_3,
     sizeof(AllmapPushaWork),
 };

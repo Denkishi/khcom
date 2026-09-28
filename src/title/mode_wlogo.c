@@ -442,7 +442,7 @@ TaskDesc gTaskDescWLogo = {
     "task_wLogo",
     (TaskInitFunc)task_wLogo_0,
     (TaskUpdateFunc)task_wLogo_1,
-    (TaskFunc)task_wLogo_2,
-    (TaskFunc)task_wLogo_3,
+    (TaskDrawFunc)task_wLogo_2,
+    (TaskDestroyFunc)task_wLogo_3,
     sizeof(WLogoTaskWork),
 };

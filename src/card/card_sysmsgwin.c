@@ -802,8 +802,8 @@ TaskDesc gUnk_09EE8E30 = {
     "sysmsgwin",
     (TaskInitFunc)func_080A430C,
     (TaskUpdateFunc)func_080A4578,
-    (TaskFunc)func_080A4A50,
-    (TaskFunc)func_080A4C1C,
+    (TaskDrawFunc)func_080A4A50,
+    (TaskDestroyFunc)func_080A4C1C,
     sizeof(SysMsgWinWork),
 };
 
@@ -811,8 +811,8 @@ TaskDesc gUnk_09EE8E48 = {
     "sysmsgwin",
     (TaskInitFunc)func_080A4DCC,
     (TaskUpdateFunc)func_080A4F14,
-    (TaskFunc)func_080A52BC,
-    (TaskFunc)func_080A53E4,
+    (TaskDrawFunc)func_080A52BC,
+    (TaskDestroyFunc)func_080A53E4,
     sizeof(SysMsgWinWork),
 };
 

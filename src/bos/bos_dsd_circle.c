@@ -460,8 +460,8 @@ TaskDesc gTaskDescBosDsdCircle = {
     "task_bos_dsd_circle",
     (TaskInitFunc)task_bos_dsd_circle_0,
     (TaskUpdateFunc)task_bos_dsd_circle_1,
-    (TaskFunc)task_bos_dsd_circle_2,
-    (TaskFunc)task_bos_dsd_circle_3,
+    (TaskDrawFunc)task_bos_dsd_circle_2,
+    (TaskDestroyFunc)task_bos_dsd_circle_3,
     sizeof(DsdCircleWork),
 };
 
@@ -469,8 +469,8 @@ TaskDesc gTaskDescBosDsdEnergy1 = {
     "task_bos_dsd_energy1",
     (TaskInitFunc)task_bos_dsd_energy1_0,
     (TaskUpdateFunc)task_bos_dsd_energy1_1,
-    (TaskFunc)task_bos_dsd_energy1_2,
-    (TaskFunc)task_bos_dsd_energy1_3,
+    (TaskDrawFunc)task_bos_dsd_energy1_2,
+    (TaskDestroyFunc)task_bos_dsd_energy1_3,
     sizeof(DsdEnergy1Work),
 };
 
@@ -478,7 +478,7 @@ TaskDesc gTaskDescBosDsdEnergy2 = {
     "task_bos_dsd_energy2",
     (TaskInitFunc)task_bos_dsd_energy2_0,
     (TaskUpdateFunc)task_bos_dsd_energy2_1,
-    (TaskFunc)task_bos_dsd_energy2_2,
-    (TaskFunc)task_bos_dsd_energy2_3,
+    (TaskDrawFunc)task_bos_dsd_energy2_2,
+    (TaskDestroyFunc)task_bos_dsd_energy2_3,
     sizeof(DsdEnergy2Work),
 };

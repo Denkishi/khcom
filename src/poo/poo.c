@@ -7242,8 +7242,8 @@ TaskDesc gTaskDescPooPooh = {
     "task_poo_pooh",
     (TaskInitFunc)task_poo_pooh_0,
     (TaskUpdateFunc)task_poo_pooh_1,
-    (TaskFunc)task_poo_pooh_2,
-    (TaskFunc)task_poo_pooh_3,
+    (TaskDrawFunc)task_poo_pooh_2,
+    (TaskDestroyFunc)task_poo_pooh_3,
     sizeof(PoohWork),
 };
 
@@ -7441,8 +7441,8 @@ TaskDesc gTaskDescPooMap = {
     "task_poo_map",
     (TaskInitFunc)task_poo_map_0,
     (TaskUpdateFunc)task_poo_map_1,
-    (TaskFunc)task_poo_map_2,
-    (TaskFunc)task_poo_map_3,
+    (TaskDrawFunc)task_poo_map_2,
+    (TaskDestroyFunc)task_poo_map_3,
     sizeof(PooMapWork),
 };
 
@@ -7973,8 +7973,8 @@ TaskDesc gTaskDescPooSora = {
     "task_poo_sora",
     (TaskInitFunc)task_poo_sora_0,
     (TaskUpdateFunc)task_poo_sora_1,
-    (TaskFunc)task_poo_sora_2,
-    (TaskFunc)task_poo_sora_3,
+    (TaskDrawFunc)task_poo_sora_2,
+    (TaskDestroyFunc)task_poo_sora_3,
     sizeof(PooSoraWork),
 };
 
@@ -7982,8 +7982,8 @@ TaskDesc gTaskDescPooTrap = {
     "task_poo_trap",
     (TaskInitFunc)task_poo_trap_0,
     (TaskUpdateFunc)task_poo_trap_1,
-    (TaskFunc)task_poo_trap_2,
-    (TaskFunc)task_poo_trap_3,
+    (TaskDrawFunc)task_poo_trap_2,
+    (TaskDestroyFunc)task_poo_trap_3,
     sizeof(PooTrapWork),
 };
 
@@ -7991,8 +7991,8 @@ TaskDesc gTaskDescPooPitAndButterfly = {
     "task_poo_pitAndButterfly",
     (TaskInitFunc)task_poo_pitAndButterfly_0,
     (TaskUpdateFunc)task_poo_pitAndButterfly_1,
-    (TaskFunc)task_poo_pitAndButterfly_2,
-    (TaskFunc)task_poo_pitAndButterfly_3,
+    (TaskDrawFunc)task_poo_pitAndButterfly_2,
+    (TaskDestroyFunc)task_poo_pitAndButterfly_3,
     sizeof(PooTrapWork),
 };
 
@@ -8000,8 +8000,8 @@ TaskDesc gTaskDescPooBalloon = {
     "task_poo_balloon",
     (TaskInitFunc)task_poo_balloon_0,
     (TaskUpdateFunc)task_poo_balloon_1,
-    (TaskFunc)task_poo_balloon_2,
-    (TaskFunc)task_poo_balloon_3,
+    (TaskDrawFunc)task_poo_balloon_2,
+    (TaskDestroyFunc)task_poo_balloon_3,
     sizeof(PooBalloonObjWork),
 };
 
@@ -8009,8 +8009,8 @@ TaskDesc gTaskDescPooShadow = {
     "task_poo_shadow",
     (TaskInitFunc)task_poo_shadow_0,
     (TaskUpdateFunc)task_poo_shadow_1,
-    (TaskFunc)task_poo_shadow_2,
-    (TaskFunc)task_poo_shadow_3,
+    (TaskDrawFunc)task_poo_shadow_2,
+    (TaskDestroyFunc)task_poo_shadow_3,
     sizeof(TaskPool),
 };
 
@@ -8018,8 +8018,8 @@ TaskDesc gTaskDescPooShadowdodai = {
     "task_poo_shadowdodai",
     (TaskInitFunc)task_poo_shadowdodai_0,
     (TaskUpdateFunc)task_poo_shadowdodai_1,
-    (TaskFunc)task_poo_shadowdodai_2,
-    (TaskFunc)task_poo_shadowdodai_3,
+    (TaskDrawFunc)task_poo_shadowdodai_2,
+    (TaskDestroyFunc)task_poo_shadowdodai_3,
     sizeof(PooShadowWork),
 };
 
@@ -8027,8 +8027,8 @@ TaskDesc gTaskDescPooShadowscale = {
     "task_poo_shadowscale",
     (TaskInitFunc)task_poo_shadowscale_0,
     (TaskUpdateFunc)task_poo_shadowscale_1,
-    (TaskFunc)task_poo_shadowscale_2,
-    (TaskFunc)task_poo_shadowscale_3,
+    (TaskDrawFunc)task_poo_shadowscale_2,
+    (TaskDestroyFunc)task_poo_shadowscale_3,
     sizeof(PooScaleWork),
 };
 
@@ -8036,8 +8036,8 @@ TaskDesc gTaskDescPooFreeballoon = {
     "task_poo_freeballoon",
     (TaskInitFunc)task_poo_freeballoon_0,
     (TaskUpdateFunc)task_poo_freeballoon_1,
-    (TaskFunc)task_poo_freeballoon_2,
-    (TaskFunc)task_poo_freeballoon_3,
+    (TaskDrawFunc)task_poo_freeballoon_2,
+    (TaskDestroyFunc)task_poo_freeballoon_3,
     sizeof(PooFreeBalloonWork),
 };
 
@@ -8045,8 +8045,8 @@ TaskDesc gTaskDescPooGauge = {
     "task_poo_gauge",
     (TaskInitFunc)task_poo_gauge_0,
     (TaskUpdateFunc)task_poo_gauge_1,
-    (TaskFunc)task_poo_gauge_2,
-    (TaskFunc)task_poo_gauge_3,
+    (TaskDrawFunc)task_poo_gauge_2,
+    (TaskDestroyFunc)task_poo_gauge_3,
     sizeof(PooGaugeWork),
 };
 
@@ -8054,8 +8054,8 @@ TaskDesc gTaskDescPooTrapballoon = {
     "task_poo_trapballoon",
     (TaskInitFunc)task_poo_trapballoon_0,
     (TaskUpdateFunc)task_poo_trapballoon_1,
-    (TaskFunc)task_poo_trapballoon_2,
-    (TaskFunc)task_poo_trapballoon_3,
+    (TaskDrawFunc)task_poo_trapballoon_2,
+    (TaskDestroyFunc)task_poo_trapballoon_3,
     sizeof(PooBalloonWork),
 };
 
@@ -8063,8 +8063,8 @@ TaskDesc gTaskDescPooOwlballoon = {
     "task_poo_owlballoon",
     (TaskInitFunc)task_poo_owlballoon_0,
     (TaskUpdateFunc)task_poo_owlballoon_1,
-    (TaskFunc)task_poo_owlballoon_2,
-    (TaskFunc)task_poo_owlballoon_3,
+    (TaskDrawFunc)task_poo_owlballoon_2,
+    (TaskDestroyFunc)task_poo_owlballoon_3,
     sizeof(PooOwlBalloonWork),
 };
 
@@ -8072,8 +8072,8 @@ TaskDesc gTaskDescPooHoney = {
     "task_poo_honey",
     (TaskInitFunc)task_poo_honey_0,
     (TaskUpdateFunc)task_poo_honey_1,
-    (TaskFunc)task_poo_honey_2,
-    (TaskFunc)task_poo_honey_3,
+    (TaskDrawFunc)task_poo_honey_2,
+    (TaskDestroyFunc)task_poo_honey_3,
     sizeof(PooHoneyWork),
 };
 
@@ -8089,8 +8089,8 @@ TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",
     (TaskInitFunc)task_poo_mapanime_0,
     (TaskUpdateFunc)task_poo_mapanime_1,
-    (TaskFunc)task_poo_mapanime_2,
-    (TaskFunc)task_poo_mapanime_3,
+    (TaskDrawFunc)task_poo_mapanime_2,
+    (TaskDestroyFunc)task_poo_mapanime_3,
     sizeof(PooMapAnimeWork),
 };
 
@@ -8098,8 +8098,8 @@ TaskDesc gTaskDescPooPile = {
     "task_poo_pile",
     (TaskInitFunc)task_poo_pile_0,
     (TaskUpdateFunc)task_poo_pile_1,
-    (TaskFunc)task_poo_pile_2,
-    (TaskFunc)task_poo_pile_3,
+    (TaskDrawFunc)task_poo_pile_2,
+    (TaskDestroyFunc)task_poo_pile_3,
     sizeof(PooPileWork),
 };
 
@@ -8109,8 +8109,8 @@ TaskDesc gTaskDescPooTigerstump = {
     "task_poo_tigerstump",
     (TaskInitFunc)task_poo_tigerstump_0,
     (TaskUpdateFunc)task_poo_tigerstump_1,
-    (TaskFunc)task_poo_tigerstump_2,
-    (TaskFunc)task_poo_tigerstump_3,
+    (TaskDrawFunc)task_poo_tigerstump_2,
+    (TaskDestroyFunc)task_poo_tigerstump_3,
     sizeof(PooStumpWork),
 };
 
@@ -8118,8 +8118,8 @@ TaskDesc gTaskDescPooPoohstump = {
     "task_poo_poohstump",
     (TaskInitFunc)task_poo_poohstump_0,
     (TaskUpdateFunc)task_poo_poohstump_1,
-    (TaskFunc)task_poo_poohstump_2,
-    (TaskFunc)task_poo_poohstump_3,
+    (TaskDrawFunc)task_poo_poohstump_2,
+    (TaskDestroyFunc)task_poo_poohstump_3,
     sizeof(PooStumpWork),
 };
 
@@ -8141,8 +8141,8 @@ TaskDesc gTaskDescPooPiglet = {
     "task_poo_piglet",
     (TaskInitFunc)task_poo_piglet_0,
     (TaskUpdateFunc)task_poo_piglet_1,
-    (TaskFunc)task_poo_piglet_2,
-    (TaskFunc)task_poo_piglet_3,
+    (TaskDrawFunc)task_poo_piglet_2,
+    (TaskDestroyFunc)task_poo_piglet_3,
     sizeof(PooPigletWork),
 };
 
@@ -8150,8 +8150,8 @@ TaskDesc gTaskDescPooEeyore = {
     "task_poo_eeyore",
     (TaskInitFunc)task_poo_eeyore_0,
     (TaskUpdateFunc)task_poo_eeyore_1,
-    (TaskFunc)task_poo_eeyore_2,
-    (TaskFunc)task_poo_eeyore_3,
+    (TaskDrawFunc)task_poo_eeyore_2,
+    (TaskDestroyFunc)task_poo_eeyore_3,
     sizeof(PooEeyoreWork),
 };
 
@@ -8159,8 +8159,8 @@ TaskDesc gTaskDescPooOwl = {
     "task_poo_owl",
     (TaskInitFunc)task_poo_owl_0,
     (TaskUpdateFunc)task_poo_owl_1,
-    (TaskFunc)task_poo_owl_2,
-    (TaskFunc)task_poo_owl_3,
+    (TaskDrawFunc)task_poo_owl_2,
+    (TaskDestroyFunc)task_poo_owl_3,
     sizeof(PooOwlWork),
 };
 
@@ -8183,8 +8183,8 @@ TaskDesc gTaskDescPooRabbit = {
     "task_poo_rabbit",
     (TaskInitFunc)task_poo_rabbit_0,
     (TaskUpdateFunc)task_poo_rabbit_1,
-    (TaskFunc)task_poo_rabbit_2,
-    (TaskFunc)task_poo_rabbit_3,
+    (TaskDrawFunc)task_poo_rabbit_2,
+    (TaskDestroyFunc)task_poo_rabbit_3,
     sizeof(PooRabbitWork),
 };
 
@@ -8210,8 +8210,8 @@ TaskDesc gTaskDescPooTigger = {
     "task_poo_tigger",
     (TaskInitFunc)task_poo_tigger_0,
     (TaskUpdateFunc)task_poo_tiggerroo_1,
-    (TaskFunc)task_poo_tiggerroo_2,
-    (TaskFunc)task_poo_tiggerroo_3,
+    (TaskDrawFunc)task_poo_tiggerroo_2,
+    (TaskDestroyFunc)task_poo_tiggerroo_3,
     sizeof(PooTiggerWork),
 };
 
@@ -8219,8 +8219,8 @@ TaskDesc gTaskDescPooTiggerroo = {
     "task_poo_tiggerroo",
     (TaskInitFunc)task_poo_tiggerroo_0,
     (TaskUpdateFunc)task_poo_tiggerroo_1,
-    (TaskFunc)task_poo_tiggerroo_2,
-    (TaskFunc)task_poo_tiggerroo_3,
+    (TaskDrawFunc)task_poo_tiggerroo_2,
+    (TaskDestroyFunc)task_poo_tiggerroo_3,
     sizeof(PooTiggerWork),
 };
 
@@ -8228,8 +8228,8 @@ TaskDesc gTaskDescPooRoo = {
     "task_poo_roo",
     (TaskInitFunc)task_poo_roo_0,
     (TaskUpdateFunc)task_poo_roo_1,
-    (TaskFunc)task_poo_roo_2,
-    (TaskFunc)task_poo_roo_3,
+    (TaskDrawFunc)task_poo_roo_2,
+    (TaskDestroyFunc)task_poo_roo_3,
     sizeof(PooRooWork),
 };
 
@@ -8237,8 +8237,8 @@ TaskDesc gTaskDescPooRooFootmark = {
     "task_poo_roo_footmark",
     (TaskInitFunc)task_poo_roo_footmark_0,
     (TaskUpdateFunc)task_poo_roo_footmark_1,
-    (TaskFunc)task_poo_roo_footmark_2,
-    (TaskFunc)task_poo_roo_footmark_3,
+    (TaskDrawFunc)task_poo_roo_footmark_2,
+    (TaskDestroyFunc)task_poo_roo_footmark_3,
     sizeof(PooFootmarkWork),
 };
 
@@ -8246,8 +8246,8 @@ TaskDesc gTaskDescPooLeaf = {
     "task_poo_leaf",
     (TaskInitFunc)task_poo_leaf_0,
     (TaskUpdateFunc)task_poo_leaf_1,
-    (TaskFunc)task_poo_leaf_2,
-    (TaskFunc)task_poo_leaf_3,
+    (TaskDrawFunc)task_poo_leaf_2,
+    (TaskDestroyFunc)task_poo_leaf_3,
     sizeof(PooLeafWork),
 };
 
@@ -8255,8 +8255,8 @@ TaskDesc gTaskDescPooTanpopo = {
     "task_poo_tanpopo",
     (TaskInitFunc)task_poo_tanpopo_0,
     (TaskUpdateFunc)task_poo_tanpopo_1,
-    (TaskFunc)task_poo_tanpopo_2,
-    (TaskFunc)task_poo_tanpopo_3,
+    (TaskDrawFunc)task_poo_tanpopo_2,
+    (TaskDestroyFunc)task_poo_tanpopo_3,
     sizeof(PooTanpopoWork),
 };
 
@@ -8264,8 +8264,8 @@ TaskDesc gTaskDescPooTiBoard = {
     "task_poo_ti_board",
     (TaskInitFunc)task_poo_ti_board_0,
     (TaskUpdateFunc)task_poo_ti_board_1,
-    (TaskFunc)task_poo_ti_board_2,
-    (TaskFunc)task_poo_ti_board_3,
+    (TaskDrawFunc)task_poo_ti_board_2,
+    (TaskDestroyFunc)task_poo_ti_board_3,
     sizeof(PooBoardWork),
 };
 
@@ -8273,8 +8273,8 @@ TaskDesc gTaskDescPooEeyoretail = {
     "task_poo_eeyoretail",
     (TaskInitFunc)task_poo_eeyoretail_0,
     (TaskUpdateFunc)task_poo_eeyoretail_1,
-    (TaskFunc)task_poo_eeyoretail_2,
-    (TaskFunc)task_poo_eeyoretail_3,
+    (TaskDrawFunc)task_poo_eeyoretail_2,
+    (TaskDestroyFunc)task_poo_eeyoretail_3,
     sizeof(PooEeyoreTailWork),
 };
 
@@ -8282,8 +8282,8 @@ TaskDesc gTaskDescPooHoneycomb = {
     "task_poo_honeycomb",
     (TaskInitFunc)task_poo_honeycomb_0,
     (TaskUpdateFunc)task_poo_honeycomb_1,
-    (TaskFunc)task_poo_honeycomb_2,
-    (TaskFunc)task_poo_honeycomb_3,
+    (TaskDrawFunc)task_poo_honeycomb_2,
+    (TaskDestroyFunc)task_poo_honeycomb_3,
     sizeof(PooHoneycombWork),
 };
 
@@ -8291,8 +8291,8 @@ TaskDesc gTaskDescPooVegetable = {
     "task_poo_vegetable",
     (TaskInitFunc)task_poo_vegetable_0,
     (TaskUpdateFunc)task_poo_vegetable_1,
-    (TaskFunc)task_poo_vegetable_2,
-    (TaskFunc)task_poo_vegetable_3,
+    (TaskDrawFunc)task_poo_vegetable_2,
+    (TaskDestroyFunc)task_poo_vegetable_3,
     sizeof(PooVegetableWork),
 };
 
@@ -8300,8 +8300,8 @@ TaskDesc gTaskDescPooWagon = {
     "task_poo_wagon",
     (TaskInitFunc)task_poo_wagon_0,
     (TaskUpdateFunc)task_poo_wagon_1,
-    (TaskFunc)task_poo_wagon_2,
-    (TaskFunc)task_poo_wagon_3,
+    (TaskDrawFunc)task_poo_wagon_2,
+    (TaskDestroyFunc)task_poo_wagon_3,
     sizeof(PooCamera),
 };
 
@@ -8309,8 +8309,8 @@ TaskDesc gTaskDescPooWagonwheel = {
     "task_poo_wagonwheel",
     (TaskInitFunc)task_poo_wagonwheel_0,
     (TaskUpdateFunc)task_poo_wagonwheel_1,
-    (TaskFunc)task_poo_wagonwheel_2,
-    (TaskFunc)task_poo_wagonwheel_3,
+    (TaskDrawFunc)task_poo_wagonwheel_2,
+    (TaskDestroyFunc)task_poo_wagonwheel_3,
     sizeof(PooWheelWork),
 };
 
@@ -8318,8 +8318,8 @@ TaskDesc gTaskDescPooSpark = {
     "task_poo_spark",
     (TaskInitFunc)task_poo_spark_0,
     (TaskUpdateFunc)task_poo_spark_1,
-    (TaskFunc)task_poo_spark_2,
-    (TaskFunc)task_poo_spark_3,
+    (TaskDrawFunc)task_poo_spark_2,
+    (TaskDestroyFunc)task_poo_spark_3,
     sizeof(PooSparkWork),
 };
 
@@ -8329,8 +8329,8 @@ TaskDesc gTaskDescPooBee = {
     "task_poo_bee",
     (TaskInitFunc)task_poo_bee_0,
     (TaskUpdateFunc)task_poo_bee_1,
-    (TaskFunc)task_poo_bee_2,
-    (TaskFunc)task_poo_bee_3,
+    (TaskDrawFunc)task_poo_bee_2,
+    (TaskDestroyFunc)task_poo_bee_3,
     sizeof(PooBeeWork),
 };
 
@@ -8338,8 +8338,8 @@ TaskDesc gTaskDescPooBeeAfterEvent = {
     "task_poo_beeAfterEvent",
     (TaskInitFunc)task_poo_beeAfterEvent_0,
     (TaskUpdateFunc)task_poo_beeAfterEvent_1,
-    (TaskFunc)task_poo_beeAfterEvent_2,
-    (TaskFunc)task_poo_beeAfterEvent_3,
+    (TaskDrawFunc)task_poo_beeAfterEvent_2,
+    (TaskDestroyFunc)task_poo_beeAfterEvent_3,
     sizeof(PooBeeAfterEventWork),
 };
 
@@ -8372,8 +8372,8 @@ TaskDesc gTaskDescPooCabbage = {
     "task_poo_cabbage",
     (TaskInitFunc)task_poo_cabbage_0,
     (TaskUpdateFunc)task_poo_cabbage_1,
-    (TaskFunc)task_poo_cabbage_2,
-    (TaskFunc)task_poo_cabbage_3,
+    (TaskDrawFunc)task_poo_cabbage_2,
+    (TaskDestroyFunc)task_poo_cabbage_3,
     sizeof(PooCabbageWork),
 };
 
@@ -8381,8 +8381,8 @@ TaskDesc gTaskDescPooCabbageborn = {
     "task_poo_cabbageborn",
     (TaskInitFunc)task_poo_cabbageborn_0,
     (TaskUpdateFunc)task_poo_cabbageborn_1,
-    (TaskFunc)task_poo_cabbageborn_2,
-    (TaskFunc)task_poo_cabbageborn_3,
+    (TaskDrawFunc)task_poo_cabbageborn_2,
+    (TaskDestroyFunc)task_poo_cabbageborn_3,
     sizeof(PooCabbageBornWork),
 };
 
@@ -8427,8 +8427,8 @@ TaskDesc gTaskDescPooMapobjhit = {
     "task_poo_mapobjhit",
     (TaskInitFunc)task_poo_mapobjhit_0,
     (TaskUpdateFunc)task_poo_mapobjhit_1,
-    (TaskFunc)task_poo_mapobjhit_2,
-    (TaskFunc)task_poo_mapobjhit_3,
+    (TaskDrawFunc)task_poo_mapobjhit_2,
+    (TaskDestroyFunc)task_poo_mapobjhit_3,
     sizeof(PooMapObjHitWork),
 };
 
@@ -8436,8 +8436,8 @@ TaskDesc gTaskDescPooPrize = {
     "task_poo_prize",
     (TaskInitFunc)task_poo_prize_0,
     (TaskUpdateFunc)task_poo_prize_1,
-    (TaskFunc)task_poo_prize_2,
-    (TaskFunc)task_poo_prize_3,
+    (TaskDrawFunc)task_poo_prize_2,
+    (TaskDestroyFunc)task_poo_prize_3,
     sizeof(PooPrizeWork),
 };
 
@@ -8445,8 +8445,8 @@ TaskDesc gTaskDescPooZzz = {
     "task_poo_zzz",
     (TaskInitFunc)task_poo_zzz_0,
     (TaskUpdateFunc)task_poo_zzz_1,
-    (TaskFunc)task_poo_zzz_2,
-    (TaskFunc)task_poo_zzz_3,
+    (TaskDrawFunc)task_poo_zzz_2,
+    (TaskDestroyFunc)task_poo_zzz_3,
     sizeof(PooZzzWork),
 };
 
@@ -8462,8 +8462,8 @@ TaskDesc gTaskDescPooButterfly = {
     "task_poo_butterfly",
     (TaskInitFunc)task_poo_butterfly_0,
     (TaskUpdateFunc)task_poo_butterfly_1,
-    (TaskFunc)task_poo_butterfly_2,
-    (TaskFunc)task_poo_butterfly_3,
+    (TaskDrawFunc)task_poo_butterfly_2,
+    (TaskDestroyFunc)task_poo_butterfly_3,
     sizeof(PooButterflyWork),
 };
 
@@ -8471,8 +8471,8 @@ TaskDesc gTaskDescPooButterflyRight = {
     "task_poo_butterflyRight",
     (TaskInitFunc)task_poo_butterfly_0,
     (TaskUpdateFunc)task_poo_butterflyRight_1,
-    (TaskFunc)task_poo_butterflyRight_2,
-    (TaskFunc)task_poo_butterfly_3,
+    (TaskDrawFunc)task_poo_butterflyRight_2,
+    (TaskDestroyFunc)task_poo_butterfly_3,
     sizeof(PooButterflyWork),
 };
 
@@ -8480,8 +8480,8 @@ TaskDesc gTaskDescPooButterflyLeft = {
     "task_poo_butterflyLeft",
     (TaskInitFunc)task_poo_butterfly_0,
     (TaskUpdateFunc)task_poo_butterflyLeft_1,
-    (TaskFunc)task_poo_butterflyLeft_2,
-    (TaskFunc)task_poo_butterfly_3,
+    (TaskDrawFunc)task_poo_butterflyLeft_2,
+    (TaskDestroyFunc)task_poo_butterfly_3,
     sizeof(PooButterflyWork),
 };
 
@@ -8489,8 +8489,8 @@ TaskDesc gTaskDescPooMapbee = {
     "task_poo_mapbee",
     (TaskInitFunc)task_poo_mapbee_0,
     (TaskUpdateFunc)task_poo_mapbee_1,
-    (TaskFunc)task_poo_mapbee_2,
-    (TaskFunc)task_poo_mapbee_3,
+    (TaskDrawFunc)task_poo_mapbee_2,
+    (TaskDestroyFunc)task_poo_mapbee_3,
     sizeof(PooMapBeeWork),
 };
 
@@ -8498,8 +8498,8 @@ TaskDesc gTaskDescPooMapbeeborn = {
     "task_poo_mapbeeborn",
     (TaskInitFunc)task_poo_mapbeeborn_0,
     (TaskUpdateFunc)task_poo_mapbeeborn_1,
-    (TaskFunc)task_poo_mapbeeborn_2,
-    (TaskFunc)task_poo_mapbeeborn_3,
+    (TaskDrawFunc)task_poo_mapbeeborn_2,
+    (TaskDestroyFunc)task_poo_mapbeeborn_3,
     sizeof(PooMapBornWork),
 };
 
@@ -8507,8 +8507,8 @@ TaskDesc gTaskDescPooMapbutterfly = {
     "task_poo_mapbutterfly",
     (TaskInitFunc)task_poo_mapbutterfly_0,
     (TaskUpdateFunc)task_poo_mapbutterfly_1,
-    (TaskFunc)task_poo_mapbutterfly_2,
-    (TaskFunc)task_poo_mapbutterfly_3,
+    (TaskDrawFunc)task_poo_mapbutterfly_2,
+    (TaskDestroyFunc)task_poo_mapbutterfly_3,
     sizeof(PooMapButterflyWork),
 };
 
@@ -8516,8 +8516,8 @@ TaskDesc gTaskDescPooMapbutterflyborn = {
     "task_poo_mapbutterflyborn",
     (TaskInitFunc)task_poo_mapbutterflyborn_0,
     (TaskUpdateFunc)task_poo_mapbutterflyborn_1,
-    (TaskFunc)task_poo_mapbutterflyborn_2,
-    (TaskFunc)task_poo_mapbutterflyborn_3,
+    (TaskDrawFunc)task_poo_mapbutterflyborn_2,
+    (TaskDestroyFunc)task_poo_mapbutterflyborn_3,
     sizeof(PooMapBornWork),
 };
 
@@ -8525,8 +8525,8 @@ TaskDesc gTaskDescPooRabbitAfterEvent = {
     "task_poo_rabbitAfterEvent",
     (TaskInitFunc)task_poo_rabbitAfterEvent_0,
     (TaskUpdateFunc)task_poo_rabbitAfterEvent_1,
-    (TaskFunc)task_poo_rabbitAfterEvent_2,
-    (TaskFunc)task_poo_rabbitAfterEvent_3,
+    (TaskDrawFunc)task_poo_rabbitAfterEvent_2,
+    (TaskDestroyFunc)task_poo_rabbitAfterEvent_3,
     sizeof(PooRabbitAfterEventWork),
 };
 
@@ -8534,8 +8534,8 @@ TaskDesc gTaskDescPooCabbageAfterEvent = {
     "task_poo_cabbageAfterEvent",
     (TaskInitFunc)task_poo_cabbageAfterEvent_0,
     (TaskUpdateFunc)task_poo_cabbageAfterEvent_1,
-    (TaskFunc)task_poo_cabbageAfterEvent_2,
-    (TaskFunc)task_poo_cabbageAfterEvent_3,
+    (TaskDrawFunc)task_poo_cabbageAfterEvent_2,
+    (TaskDestroyFunc)task_poo_cabbageAfterEvent_3,
     sizeof(PooCabbageAfterEventWork),
 };
 

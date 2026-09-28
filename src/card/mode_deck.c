@@ -244,7 +244,7 @@ TaskDesc gTaskDescMenu = {
     "menu",
     (TaskInitFunc)menu_0,
     (TaskUpdateFunc)menu_1,
-    (TaskFunc)menu_2,
-    (TaskFunc)menu_3,
+    (TaskDrawFunc)menu_2,
+    (TaskDestroyFunc)menu_3,
     sizeof(MenuWork),
 };

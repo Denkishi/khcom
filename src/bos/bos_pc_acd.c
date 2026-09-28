@@ -5,8 +5,8 @@ TaskDesc gTaskDescBosPcAcd = {
     "task_bos_pc_acd",
     (TaskInitFunc)task_bos_pc_acd_0,
     (TaskUpdateFunc)task_bos_pc_acd_1,
-    (TaskFunc)task_bos_pc_acd_2,
-    (TaskFunc)task_bos_pc_acd_3,
+    (TaskDrawFunc)task_bos_pc_acd_2,
+    (TaskDestroyFunc)task_bos_pc_acd_3,
     sizeof(PcAcdWork),
 };
 

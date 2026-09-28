@@ -52,8 +52,8 @@ TaskDesc gTaskDescTitleLogo = {
     "task_title_logo",
     (TaskInitFunc)task_title_logo_0,
     (TaskUpdateFunc)task_title_logo_1,
-    (TaskFunc)task_title_logo_2,
-    (TaskFunc)task_title_logo_3,
+    (TaskDrawFunc)task_title_logo_2,
+    (TaskDestroyFunc)task_title_logo_3,
     sizeof(TitleLogoWork),
 };
 
@@ -61,8 +61,8 @@ TaskDesc gTaskDescTitleObj = {
     "task_title_obj",
     (TaskInitFunc)task_title_obj_0,
     (TaskUpdateFunc)task_title_obj_1,
-    (TaskFunc)task_title_obj_2,
-    (TaskFunc)task_title_obj_3,
+    (TaskDrawFunc)task_title_obj_2,
+    (TaskDestroyFunc)task_title_obj_3,
     sizeof(TitleObjWork),
 };
 
@@ -82,8 +82,8 @@ TaskDesc gTaskDescTitleMenu = {
     "task_title_menu",
     (TaskInitFunc)task_title_menu_0,
     (TaskUpdateFunc)task_title_menu_1,
-    (TaskFunc)task_title_menu_2,
-    (TaskFunc)task_title_menu_3,
+    (TaskDrawFunc)task_title_menu_2,
+    (TaskDestroyFunc)task_title_menu_3,
     sizeof(TitleMenuWork),
 };
 
@@ -855,7 +855,7 @@ TaskDesc gTaskDescTitleLumichange = {
     "task_title_lumichange",
     (TaskInitFunc)task_title_lumichange_0,
     (TaskUpdateFunc)task_title_lumichange_1,
-    (TaskFunc)task_title_lumichange_2,
-    (TaskFunc)task_title_lumichange_3,
+    (TaskDrawFunc)task_title_lumichange_2,
+    (TaskDestroyFunc)task_title_lumichange_3,
     sizeof(TitleLumiChangeWork),
 };

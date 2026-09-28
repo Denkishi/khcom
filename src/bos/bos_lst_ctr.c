@@ -17,8 +17,8 @@ TaskDesc gTaskDescBosLstCtr = {
     "task_bos_lst_ctr",
     (TaskInitFunc)task_bos_lst_ctr_0,
     (TaskUpdateFunc)task_bos_lst_ctr_1,
-    (TaskFunc)task_bos_lst_ctr_2,
-    (TaskFunc)task_bos_lst_ctr_3,
+    (TaskDrawFunc)task_bos_lst_ctr_2,
+    (TaskDestroyFunc)task_bos_lst_ctr_3,
     sizeof(LstCtrWork),
 };
 

@@ -4155,8 +4155,8 @@ TaskDesc gUnk_09EE496C = {
     "card",
     (TaskInitFunc)func_0807BC24,
     (TaskUpdateFunc)func_0807BD64,
-    (TaskFunc)card_2,
-    (TaskFunc)func_0807C2E0,
+    (TaskDrawFunc)card_2,
+    (TaskDestroyFunc)func_0807C2E0,
     sizeof(CardDisplayWork),
 };
 
@@ -4164,8 +4164,8 @@ TaskDesc gTaskDescCardNotHave = {
     "card_not_have",
     (TaskInitFunc)func_0807BC24,
     (TaskUpdateFunc)func_0807BD64,
-    (TaskFunc)card_not_have_2,
-    (TaskFunc)func_0807C2E0,
+    (TaskDrawFunc)card_not_have_2,
+    (TaskDestroyFunc)func_0807C2E0,
     sizeof(CardDisplayWork),
 };
 
@@ -4173,7 +4173,7 @@ TaskDesc gTaskDescCardReload = {
     "card_reload",
     (TaskInitFunc)card_reload_0,
     (TaskUpdateFunc)card_reload_1,
-    (TaskFunc)card_reload_2,
-    (TaskFunc)card_reload_3,
+    (TaskDrawFunc)card_reload_2,
+    (TaskDestroyFunc)card_reload_3,
     sizeof(CardDisplayWork),
 };

@@ -203,7 +203,7 @@ TaskDesc gTaskDescMonsgage = {
     "task_monsgage",
     (TaskInitFunc)task_monsgage_0,
     (TaskUpdateFunc)task_monsgage_1,
-    (TaskFunc)task_monsgage_2,
-    (TaskFunc)task_monsgage_3,
+    (TaskDrawFunc)task_monsgage_2,
+    (TaskDestroyFunc)task_monsgage_3,
     sizeof(MonsgageWork),
 };

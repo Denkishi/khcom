@@ -8,8 +8,8 @@ TaskDesc gTaskDescEvtObj = {
     "task_evt_obj",
     (TaskInitFunc)task_evt_obj_0,
     (TaskUpdateFunc)task_evt_obj_1,
-    (TaskFunc)task_evt_obj_2,
-    (TaskFunc)task_evt_obj_3,
+    (TaskDrawFunc)task_evt_obj_2,
+    (TaskDestroyFunc)task_evt_obj_3,
     sizeof(EvtObjWork),
 };
 
@@ -200,7 +200,7 @@ TaskDesc gTaskDescEvtShadow = {
     "task_evt_shadow",
     (TaskInitFunc)task_evt_shadow_0,
     (TaskUpdateFunc)task_evt_shadow_1,
-    (TaskFunc)task_evt_shadow_2,
-    (TaskFunc)task_evt_shadow_3,
+    (TaskDrawFunc)task_evt_shadow_2,
+    (TaskDestroyFunc)task_evt_shadow_3,
     sizeof(EvtShadowWork),
 };

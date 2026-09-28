@@ -166,7 +166,7 @@ TaskDesc gTaskDescWorldSelBefore = {
     "WorldSel Before",
     (TaskInitFunc)WorldSel_Before_0,
     (TaskUpdateFunc)WorldSel_Before_1,
-    (TaskFunc)WorldSel_Before_2,
-    (TaskFunc)WorldSel_Before_3,
+    (TaskDrawFunc)WorldSel_Before_2,
+    (TaskDestroyFunc)WorldSel_Before_3,
     sizeof(WorldSelBeforeWork),
 };

@@ -301,8 +301,8 @@ TaskDesc gUnk_09EE2834 = {
     "Continue",
     (TaskInitFunc)func_0806CD60,
     (TaskUpdateFunc)Continue_1,
-    (TaskFunc)Continue_2,
-    (TaskFunc)Continue_3,
+    (TaskDrawFunc)Continue_2,
+    (TaskDestroyFunc)Continue_3,
     0x6C,
 };
 
@@ -310,7 +310,7 @@ TaskDesc gUnk_09EE284C = {
     "Continue",
     (TaskInitFunc)func_0806CF04,
     (TaskUpdateFunc)Continue_1,
-    (TaskFunc)Continue_2,
-    (TaskFunc)Continue_3,
+    (TaskDrawFunc)Continue_2,
+    (TaskDestroyFunc)Continue_3,
     0x6C,
 };

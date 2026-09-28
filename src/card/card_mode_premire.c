@@ -462,8 +462,8 @@ TaskDesc gTaskDescHCEffectName = {
     "HCEffectName",
     (TaskInitFunc)HCEffectName_0,
     (TaskUpdateFunc)HCEffectName_1,
-    (TaskFunc)HCEffectName_2,
-    (TaskFunc)HCEffectName_3,
+    (TaskDrawFunc)HCEffectName_2,
+    (TaskDestroyFunc)HCEffectName_3,
     sizeof(HcEffectNameWork),
 };
 
@@ -471,7 +471,7 @@ TaskDesc gTaskDescNumberPlus = {
     "NumberPlus",
     (TaskInitFunc)NumberPlus_0,
     (TaskUpdateFunc)NumberPlus_1,
-    (TaskFunc)NumberPlus_2,
-    (TaskFunc)NumberPlus_3,
+    (TaskDrawFunc)NumberPlus_2,
+    (TaskDestroyFunc)NumberPlus_3,
     sizeof(NumberPlusWork),
 };

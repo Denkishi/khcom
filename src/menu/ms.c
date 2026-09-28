@@ -59,7 +59,7 @@ TaskDesc gTaskDescMsShopHosi = {
     "task_ms_shop_hosi",
     (TaskInitFunc)task_ms_shop_hosi_0,
     (TaskUpdateFunc)task_ms_shop_hosi_1,
-    (TaskFunc)task_ms_shop_hosi_2,
-    (TaskFunc)task_ms_shop_hosi_3,
+    (TaskDrawFunc)task_ms_shop_hosi_2,
+    (TaskDestroyFunc)task_ms_shop_hosi_3,
     sizeof(MsShopHosiWork),
 };

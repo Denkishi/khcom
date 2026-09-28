@@ -97,8 +97,8 @@ TaskDesc gTaskDescBosGa = {
     "task_bos_ga",
     (TaskInitFunc)task_bos_ga_0,
     (TaskUpdateFunc)task_bos_ga_1,
-    (TaskFunc)task_bos_ga_2,
-    (TaskFunc)task_bos_ga_3,
+    (TaskDrawFunc)task_bos_ga_2,
+    (TaskDestroyFunc)task_bos_ga_3,
     sizeof(GaWork),
 };
 
@@ -397,8 +397,8 @@ TaskDesc gTaskDescBosMd = {
     "task_bos_md",
     (TaskInitFunc)task_bos_md_0,
     (TaskUpdateFunc)task_bos_md_1,
-    (TaskFunc)task_bos_md_2,
-    (TaskFunc)task_bos_md_3,
+    (TaskDrawFunc)task_bos_md_2,
+    (TaskDestroyFunc)task_bos_md_3,
     sizeof(MdWork),
 };
 
@@ -432,8 +432,8 @@ TaskDesc gTaskDescBosMdFire = {
     "task_bos_md_fire",
     (TaskInitFunc)task_bos_md_fire_0,
     (TaskUpdateFunc)task_bos_md_fire_1,
-    (TaskFunc)task_bos_md_fire_2,
-    (TaskFunc)task_bos_md_fire_3,
+    (TaskDrawFunc)task_bos_md_fire_2,
+    (TaskDestroyFunc)task_bos_md_fire_3,
     sizeof(MdFireWork),
 };
 
@@ -441,8 +441,8 @@ TaskDesc gTaskDescBosMdDai = {
     "task_bos_md_dai",
     (TaskInitFunc)task_bos_md_dai_0,
     (TaskUpdateFunc)task_bos_md_dai_1,
-    (TaskFunc)task_bos_md_dai_2,
-    (TaskFunc)task_bos_md_dai_3,
+    (TaskDrawFunc)task_bos_md_dai_2,
+    (TaskDestroyFunc)task_bos_md_dai_3,
     sizeof(MdDaiWork),
 };
 
@@ -450,8 +450,8 @@ TaskDesc gTaskDescBosMdHahen = {
     "task_bos_md_hahen",
     (TaskInitFunc)task_bos_md_hahen_0,
     (TaskUpdateFunc)task_bos_md_hahen_1,
-    (TaskFunc)task_bos_md_hahen_2,
-    (TaskFunc)task_bos_md_hahen_3,
+    (TaskDrawFunc)task_bos_md_hahen_2,
+    (TaskDestroyFunc)task_bos_md_hahen_3,
     sizeof(MdHahenWork),
 };
 

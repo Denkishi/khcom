@@ -2942,7 +2942,7 @@ TaskDesc gUnk_09EE8E18 = {
     "msgwin",
     (TaskInitFunc)msgwin_0,
     (TaskUpdateFunc)msgwin_1,
-    (TaskFunc)msgwin_2,
-    (TaskFunc)msgwin_3,
+    (TaskDrawFunc)msgwin_2,
+    (TaskDestroyFunc)msgwin_3,
     sizeof(CardMsgWinWork),
 };

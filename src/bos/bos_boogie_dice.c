@@ -29,8 +29,8 @@ TaskDesc gTaskDescBosBoogieDice = {
     "task_bos_boogie_dice",
     (TaskInitFunc)task_bos_boogie_dice_0,
     (TaskUpdateFunc)task_bos_boogie_dice_1,
-    (TaskFunc)task_bos_boogie_dice_2,
-    (TaskFunc)task_bos_boogie_dice_3,
+    (TaskDrawFunc)task_bos_boogie_dice_2,
+    (TaskDestroyFunc)task_bos_boogie_dice_3,
     sizeof(BoogieDiceWork),
 };
 
@@ -65,8 +65,8 @@ TaskDesc gTaskDescBosBoogieExplosiondice = {
     "task_bos_boogie_explosiondice",
     (TaskInitFunc)task_bos_boogie_explosiondice_0,
     (TaskUpdateFunc)task_bos_boogie_explosiondice_1,
-    (TaskFunc)task_bos_boogie_explosiondice_2,
-    (TaskFunc)task_bos_boogie_explosiondice_3,
+    (TaskDrawFunc)task_bos_boogie_explosiondice_2,
+    (TaskDestroyFunc)task_bos_boogie_explosiondice_3,
     sizeof(BoogieExplosiondiceWork),
 };
 
@@ -74,8 +74,8 @@ TaskDesc gTaskDescBosBoogieSaku = {
     "task_bos_boogie_saku",
     (TaskInitFunc)task_bos_boogie_saku_0,
     (TaskUpdateFunc)task_bos_boogie_saku_1,
-    (TaskFunc)task_bos_boogie_saku_2,
-    (TaskFunc)task_bos_boogie_saku_3,
+    (TaskDrawFunc)task_bos_boogie_saku_2,
+    (TaskDestroyFunc)task_bos_boogie_saku_3,
     sizeof(BoogieSakuWork),
 };
 
@@ -100,8 +100,8 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
     (TaskInitFunc)task_bos_boogie_mapanime_0,
     (TaskUpdateFunc)task_bos_boogie_mapanime_1,
-    (TaskFunc)task_bos_boogie_mapanime_2,
-    (TaskFunc)task_bos_boogie_mapanime_3,
+    (TaskDrawFunc)task_bos_boogie_mapanime_2,
+    (TaskDestroyFunc)task_bos_boogie_mapanime_3,
     sizeof(BoogieMapanimeWork),
 };
 
@@ -111,8 +111,8 @@ TaskDesc gTaskDescBosBoogieDisk = {
     "task_bos_boogie_disk",
     (TaskInitFunc)task_bos_boogie_disk_0,
     (TaskUpdateFunc)task_bos_boogie_disk_1,
-    (TaskFunc)task_bos_boogie_disk_2,
-    (TaskFunc)task_bos_boogie_disk_3,
+    (TaskDrawFunc)task_bos_boogie_disk_2,
+    (TaskDestroyFunc)task_bos_boogie_disk_3,
     sizeof(BoogieDiskWork),
 };
 
@@ -122,8 +122,8 @@ TaskDesc gTaskDescBosBoogieKnife = {
     "task_bos_boogie_knife",
     (TaskInitFunc)task_bos_boogie_knife_0,
     (TaskUpdateFunc)task_bos_boogie_knife_1,
-    (TaskFunc)task_bos_boogie_knife_2,
-    (TaskFunc)task_bos_boogie_knife_3,
+    (TaskDrawFunc)task_bos_boogie_knife_2,
+    (TaskDestroyFunc)task_bos_boogie_knife_3,
     sizeof(BoogieKnifeWork),
 };
 
@@ -133,8 +133,8 @@ TaskDesc gTaskDescBosBoogieKnifereader = {
     "task_bos_boogie_knifereader",
     (TaskInitFunc)task_bos_boogie_knifereader_0,
     (TaskUpdateFunc)task_bos_boogie_knifereader_1,
-    (TaskFunc)task_bos_boogie_knifereader_2,
-    (TaskFunc)task_bos_boogie_knifereader_3,
+    (TaskDrawFunc)task_bos_boogie_knifereader_2,
+    (TaskDestroyFunc)task_bos_boogie_knifereader_3,
     sizeof(BoogieKnifereaderWork),
 };
 
@@ -144,8 +144,8 @@ TaskDesc gTaskDescBosBoogieKaihuku = {
     "task_bos_boogie_kaihuku",
     (TaskInitFunc)task_bos_boogie_kaihuku_0,
     (TaskUpdateFunc)task_bos_boogie_kaihuku_1,
-    (TaskFunc)task_bos_boogie_kaihuku_2,
-    (TaskFunc)task_bos_boogie_kaihuku_3,
+    (TaskDrawFunc)task_bos_boogie_kaihuku_2,
+    (TaskDestroyFunc)task_bos_boogie_kaihuku_3,
     sizeof(BoogieKaihukuWork),
 };
 
@@ -331,8 +331,8 @@ TaskDesc gTaskDescBosUrsula = {
     "task_bos_ursula",
     (TaskInitFunc)task_bos_ursula_0,
     (TaskUpdateFunc)task_bos_ursula_1,
-    (TaskFunc)task_bos_ursula_2,
-    (TaskFunc)task_bos_ursula_3,
+    (TaskDrawFunc)task_bos_ursula_2,
+    (TaskDestroyFunc)task_bos_ursula_3,
     sizeof(UrsulaWork),
 };
 
@@ -341,7 +341,7 @@ TaskDesc gTaskDescBosUrsulaMap = {
     (TaskInitFunc)task_bos_ursula_map_0,
     (TaskUpdateFunc)task_bos_ursula_map_1,
     NULL,
-    (TaskFunc)task_bos_ursula_map_3,
+    (TaskDestroyFunc)task_bos_ursula_map_3,
     sizeof(UrsulaMapWork),
 };
 
@@ -349,8 +349,8 @@ TaskDesc gTaskDescBosUrsulaBorder = {
     "task_bos_ursula_border",
     (TaskInitFunc)task_bos_ursula_border_0,
     (TaskUpdateFunc)task_bos_ursula_border_1,
-    (TaskFunc)task_bos_ursula_border_2,
-    (TaskFunc)task_bos_ursula_border_3,
+    (TaskDrawFunc)task_bos_ursula_border_2,
+    (TaskDestroyFunc)task_bos_ursula_border_3,
     sizeof(UrsulaBorderWork),
 };
 
@@ -360,8 +360,8 @@ TaskDesc gTaskDescBosUrsulaTako = {
     "task_bos_ursula_tako",
     (TaskInitFunc)task_bos_ursula_tako_0,
     (TaskUpdateFunc)task_bos_ursula_tako_1,
-    (TaskFunc)task_bos_ursula_tako_2,
-    (TaskFunc)task_bos_ursula_tako_3,
+    (TaskDrawFunc)task_bos_ursula_tako_2,
+    (TaskDestroyFunc)task_bos_ursula_tako_3,
     sizeof(UrsulaTakoWork),
 };
 
@@ -369,8 +369,8 @@ TaskDesc gTaskDescBosUrsulaBacktako = {
     "task_bos_ursula_backtako",
     (TaskInitFunc)task_bos_ursula_backtako_0,
     (TaskUpdateFunc)task_bos_ursula_backtako_1,
-    (TaskFunc)task_bos_ursula_backtako_2,
-    (TaskFunc)task_bos_ursula_backtako_3,
+    (TaskDrawFunc)task_bos_ursula_backtako_2,
+    (TaskDestroyFunc)task_bos_ursula_backtako_3,
     sizeof(UrsulaBacktakoWork),
 };
 
@@ -398,8 +398,8 @@ TaskDesc gTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",
     (TaskInitFunc)task_bos_ursula_mapanime_0,
     (TaskUpdateFunc)task_bos_ursula_mapanime_1,
-    (TaskFunc)task_bos_ursula_mapanime_2,
-    (TaskFunc)task_bos_ursula_mapanime_3,
+    (TaskDrawFunc)task_bos_ursula_mapanime_2,
+    (TaskDestroyFunc)task_bos_ursula_mapanime_3,
     sizeof(UrsulaMapanimeWork),
 };
 

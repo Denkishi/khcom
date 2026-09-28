@@ -66,8 +66,8 @@ TaskDesc gTaskDescMapEnm00 = {
     "Task_MapEnm00",
     (TaskInitFunc)Task_MapEnm00_0,
     (TaskUpdateFunc)Task_MapEnm00_1,
-    (TaskFunc)Task_MapEnm00_2,
-    (TaskFunc)Task_MapEnm00_3,
+    (TaskDrawFunc)Task_MapEnm00_2,
+    (TaskDestroyFunc)Task_MapEnm00_3,
     sizeof(MapEnmWork),
 };
 
@@ -90,8 +90,8 @@ TaskDesc gTaskDescMapEnm01 = {
     "Task_MapEnm01",
     (TaskInitFunc)Task_MapEnm01_0,
     (TaskUpdateFunc)Task_MapEnm01_1,
-    (TaskFunc)Task_MapEnm01_2,
-    (TaskFunc)Task_MapEnm01_3,
+    (TaskDrawFunc)Task_MapEnm01_2,
+    (TaskDestroyFunc)Task_MapEnm01_3,
     sizeof(MapEnm01Work),
 };
 
@@ -118,8 +118,8 @@ TaskDesc gTaskDescMapEnm02 = {
     "Task_MapEnm02",
     (TaskInitFunc)Task_MapEnm02_0,
     (TaskUpdateFunc)Task_MapEnm02_1,
-    (TaskFunc)Task_MapEnm02_2,
-    (TaskFunc)Task_MapEnm02_3,
+    (TaskDrawFunc)Task_MapEnm02_2,
+    (TaskDestroyFunc)Task_MapEnm02_3,
     sizeof(MapEnmWork),
 };
 
@@ -148,8 +148,8 @@ TaskDesc gTaskDescMapEnm03 = {
     "Task_MapEnm03",
     (TaskInitFunc)Task_MapEnm03_0,
     (TaskUpdateFunc)Task_MapEnm03_1,
-    (TaskFunc)Task_MapEnm03_2,
-    (TaskFunc)Task_MapEnm03_3,
+    (TaskDrawFunc)Task_MapEnm03_2,
+    (TaskDestroyFunc)Task_MapEnm03_3,
     sizeof(MapEnm03Work),
 };
 
@@ -172,8 +172,8 @@ TaskDesc gTaskDescMapEnm04 = {
     "Task_MapEnm04",
     (TaskInitFunc)Task_MapEnm04_0,
     (TaskUpdateFunc)Task_MapEnm04_1,
-    (TaskFunc)Task_MapEnm04_2,
-    (TaskFunc)Task_MapEnm04_3,
+    (TaskDrawFunc)Task_MapEnm04_2,
+    (TaskDestroyFunc)Task_MapEnm04_3,
     sizeof(MapEnm01Work),
 };
 
@@ -198,8 +198,8 @@ TaskDesc gTaskDescMapEnm05 = {
     "Task_MapEnm05",
     (TaskInitFunc)Task_MapEnm05_0,
     (TaskUpdateFunc)Task_MapEnm05_1,
-    (TaskFunc)Task_MapEnm05_2,
-    (TaskFunc)Task_MapEnm05_3,
+    (TaskDrawFunc)Task_MapEnm05_2,
+    (TaskDestroyFunc)Task_MapEnm05_3,
     sizeof(MapEnmWork),
 };
 
@@ -224,8 +224,8 @@ TaskDesc gTaskDescMapEnm06 = {
     "Task_MapEnm06",
     (TaskInitFunc)Task_MapEnm06_0,
     (TaskUpdateFunc)Task_MapEnm06_1,
-    (TaskFunc)Task_MapEnm06_2,
-    (TaskFunc)Task_MapEnm06_3,
+    (TaskDrawFunc)Task_MapEnm06_2,
+    (TaskDestroyFunc)Task_MapEnm06_3,
     sizeof(MapEnmWork),
 };
 
@@ -235,8 +235,8 @@ TaskDesc gTaskDescMapDbg = {
     "Task_MapDbg",
     (TaskInitFunc)Task_MapDbg_0,
     (TaskUpdateFunc)Task_MapDbg_1,
-    (TaskFunc)Task_MapDbg_2,
-    (TaskFunc)Task_MapDbg_3,
+    (TaskDrawFunc)Task_MapDbg_2,
+    (TaskDestroyFunc)Task_MapDbg_3,
     sizeof(MapDbgWork),
 };
 
@@ -244,8 +244,8 @@ TaskDesc gTaskDescMapGmkJump = {
     "Task_MapGmk_Jump",
     (TaskInitFunc)Task_MapGmk_Jump_0,
     (TaskUpdateFunc)Task_MapGmk_Jump_1,
-    (TaskFunc)Task_MapGmk_Jump_2,
-    (TaskFunc)Task_MapGmk_Jump_3,
+    (TaskDrawFunc)Task_MapGmk_Jump_2,
+    (TaskDestroyFunc)Task_MapGmk_Jump_3,
     sizeof(MapGmkJumpWork),
 };
 
@@ -253,8 +253,8 @@ TaskDesc gTaskDescMapGmkEnm = {
     "Task_MapGmk_Enm",
     (TaskInitFunc)Task_MapGmk_Enm_0,
     (TaskUpdateFunc)Task_MapGmk_Enm_1,
-    (TaskFunc)Task_MapGmk_Enm_2,
-    (TaskFunc)Task_MapGmk_Enm_3,
+    (TaskDrawFunc)Task_MapGmk_Enm_2,
+    (TaskDestroyFunc)Task_MapGmk_Enm_3,
     sizeof(MapGmkEnmWork),
 };
 
@@ -262,8 +262,8 @@ TaskDesc gTaskDescMapGmkDmy = {
     "Task_MapGmk_Dmy",
     (TaskInitFunc)Task_MapGmk_Dmy_0,
     (TaskUpdateFunc)Task_MapGmk_Dmy_1,
-    (TaskFunc)Task_MapGmk_Dmy_2,
-    (TaskFunc)Task_MapGmk_Dmy_3,
+    (TaskDrawFunc)Task_MapGmk_Dmy_2,
+    (TaskDestroyFunc)Task_MapGmk_Dmy_3,
     sizeof(MapGmkDmyWork),
 };
 
@@ -271,8 +271,8 @@ TaskDesc gTaskDescMapGmkTutorial = {
     "Task_MapGmk_Tutorial",
     (TaskInitFunc)Task_MapGmk_Tutorial_0,
     (TaskUpdateFunc)Task_MapGmk_Tutorial_1,
-    (TaskFunc)Task_MapGmk_Tutorial_2,
-    (TaskFunc)Task_MapGmk_Tutorial_3,
+    (TaskDrawFunc)Task_MapGmk_Tutorial_2,
+    (TaskDestroyFunc)Task_MapGmk_Tutorial_3,
     sizeof(MapGmkTutorialWork),
 };
 
@@ -280,8 +280,8 @@ TaskDesc gTaskDescMapGmkSpider = {
     "Task_MapGmk_Spider",
     (TaskInitFunc)Task_MapGmk_Spider_0,
     (TaskUpdateFunc)Task_MapGmk_Spider_1,
-    (TaskFunc)Task_MapGmk_Spider_2,
-    (TaskFunc)Task_MapGmk_Spider_3,
+    (TaskDrawFunc)Task_MapGmk_Spider_2,
+    (TaskDestroyFunc)Task_MapGmk_Spider_3,
     sizeof(MapGmkSpiderWork),
 };
 
@@ -289,8 +289,8 @@ TaskDesc gTaskDescMapGmkGP00 = {
     "Task_MapGmk_GP00",
     (TaskInitFunc)Task_MapGmk_GP00_0,
     (TaskUpdateFunc)Task_MapGmk_GP00_1,
-    (TaskFunc)Task_MapGmk_GP00_2,
-    (TaskFunc)Task_MapGmk_GP00_3,
+    (TaskDrawFunc)Task_MapGmk_GP00_2,
+    (TaskDestroyFunc)Task_MapGmk_GP00_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -298,8 +298,8 @@ TaskDesc gTaskDescMapGmkGP01 = {
     "Task_MapGmk_GP01",
     (TaskInitFunc)Task_MapGmk_GP01_0,
     (TaskUpdateFunc)Task_MapGmk_GP01_1,
-    (TaskFunc)Task_MapGmk_GP01_2,
-    (TaskFunc)Task_MapGmk_GP01_3,
+    (TaskDrawFunc)Task_MapGmk_GP01_2,
+    (TaskDestroyFunc)Task_MapGmk_GP01_3,
     sizeof(MapGmkGp1Work),
 };
 
@@ -307,8 +307,8 @@ TaskDesc gTaskDescMapGmkGP02 = {
     "Task_MapGmk_GP02",
     (TaskInitFunc)Task_MapGmk_GP02_0,
     (TaskUpdateFunc)Task_MapGmk_GP02_1,
-    (TaskFunc)Task_MapGmk_GP02_2,
-    (TaskFunc)Task_MapGmk_GP02_3,
+    (TaskDrawFunc)Task_MapGmk_GP02_2,
+    (TaskDestroyFunc)Task_MapGmk_GP02_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -316,8 +316,8 @@ TaskDesc gTaskDescMapGmkGP03 = {
     "Task_MapGmk_GP03",
     (TaskInitFunc)Task_MapGmk_GP03_0,
     (TaskUpdateFunc)Task_MapGmk_GP03_1,
-    (TaskFunc)Task_MapGmk_GP03_2,
-    (TaskFunc)Task_MapGmk_GP03_3,
+    (TaskDrawFunc)Task_MapGmk_GP03_2,
+    (TaskDestroyFunc)Task_MapGmk_GP03_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -325,8 +325,8 @@ TaskDesc gTaskDescMapGmkGP04 = {
     "Task_MapGmk_GP04",
     (TaskInitFunc)Task_MapGmk_GP04_0,
     (TaskUpdateFunc)Task_MapGmk_GP04_1,
-    (TaskFunc)Task_MapGmk_GP04_2,
-    (TaskFunc)Task_MapGmk_GP04_3,
+    (TaskDrawFunc)Task_MapGmk_GP04_2,
+    (TaskDestroyFunc)Task_MapGmk_GP04_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -334,8 +334,8 @@ TaskDesc gTaskDescMapGmkGP05 = {
     "Task_MapGmk_GP05",
     (TaskInitFunc)Task_MapGmk_GP05_0,
     (TaskUpdateFunc)Task_MapGmk_GP05_1,
-    (TaskFunc)Task_MapGmk_GP05_2,
-    (TaskFunc)Task_MapGmk_GP05_3,
+    (TaskDrawFunc)Task_MapGmk_GP05_2,
+    (TaskDestroyFunc)Task_MapGmk_GP05_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -343,8 +343,8 @@ TaskDesc gTaskDescMapGmkGP06 = {
     "Task_MapGmk_GP06",
     (TaskInitFunc)Task_MapGmk_GP06_0,
     (TaskUpdateFunc)Task_MapGmk_GP06_1,
-    (TaskFunc)Task_MapGmk_GP06_2,
-    (TaskFunc)Task_MapGmk_GP06_3,
+    (TaskDrawFunc)Task_MapGmk_GP06_2,
+    (TaskDestroyFunc)Task_MapGmk_GP06_3,
     sizeof(MapGmkGpWork),
 };
 
@@ -352,8 +352,8 @@ TaskDesc gTaskDescMapGmkGP07 = {
     "Task_MapGmk_GP07",
     (TaskInitFunc)Task_MapGmk_GP07_0,
     (TaskUpdateFunc)Task_MapGmk_GP07_1,
-    (TaskFunc)Task_MapGmk_GP07_2,
-    (TaskFunc)Task_MapGmk_GP07_3,
+    (TaskDrawFunc)Task_MapGmk_GP07_2,
+    (TaskDestroyFunc)Task_MapGmk_GP07_3,
     sizeof(MapGmkGp07Work),
 };
 
@@ -361,8 +361,8 @@ TaskDesc gTaskDescMapGmkGP08 = {
     "Task_MapGmk_GP08",
     (TaskInitFunc)Task_MapGmk_GP08_0,
     (TaskUpdateFunc)Task_MapGmk_GP08_1,
-    (TaskFunc)Task_MapGmk_GP08_2,
-    (TaskFunc)Task_MapGmk_GP08_3,
+    (TaskDrawFunc)Task_MapGmk_GP08_2,
+    (TaskDestroyFunc)Task_MapGmk_GP08_3,
     sizeof(MapGmkGp08Work),
 };
 
@@ -370,8 +370,8 @@ TaskDesc gTaskDescMapGmkGP09 = {
     "Task_MapGmk_GP09",
     (TaskInitFunc)Task_MapGmk_GP09_0,
     (TaskUpdateFunc)Task_MapGmk_GP09_1,
-    (TaskFunc)Task_MapGmk_GP09_2,
-    (TaskFunc)Task_MapGmk_GP09_3,
+    (TaskDrawFunc)Task_MapGmk_GP09_2,
+    (TaskDestroyFunc)Task_MapGmk_GP09_3,
     sizeof(MapGmkGp09Work),
 };
 
@@ -379,8 +379,8 @@ TaskDesc gTaskDescMapGmk00 = {
     "Task_MapGmk00",
     (TaskInitFunc)Task_MapGmk00_0,
     (TaskUpdateFunc)Task_MapGmk00_1,
-    (TaskFunc)Task_MapGmk00_2,
-    (TaskFunc)Task_MapGmk00_3,
+    (TaskDrawFunc)Task_MapGmk00_2,
+    (TaskDestroyFunc)Task_MapGmk00_3,
     sizeof(MapGmk00Work),
 };
 
@@ -4532,8 +4532,8 @@ TaskDesc gTaskDescMapGmk01 = {
     "Task_MapGmk01",
     (TaskInitFunc)Task_MapGmk01_0,
     (TaskUpdateFunc)Task_MapGmk01_1,
-    (TaskFunc)Task_MapGmk01_2,
-    (TaskFunc)Task_MapGmk01_3,
+    (TaskDrawFunc)Task_MapGmk01_2,
+    (TaskDestroyFunc)Task_MapGmk01_3,
     sizeof(MapGmk01Work),
 };
 
@@ -4546,8 +4546,8 @@ TaskDesc gTaskDescMapGmkBarrel = {
     "Task_MapGmk_Barrel",
     (TaskInitFunc)Task_MapGmk_Barrel_0,
     (TaskUpdateFunc)Task_MapGmk_Barrel_1,
-    (TaskFunc)Task_MapGmk_Barrel_2,
-    (TaskFunc)Task_MapGmk_Barrel_3,
+    (TaskDrawFunc)Task_MapGmk_Barrel_2,
+    (TaskDestroyFunc)Task_MapGmk_Barrel_3,
     sizeof(MapGmkBarrelWork),
 };
 
@@ -4560,8 +4560,8 @@ TaskDesc gTaskDescMapGmk04 = {
     "Task_MapGmk04",
     (TaskInitFunc)Task_MapGmk04_0,
     (TaskUpdateFunc)Task_MapGmk04_1,
-    (TaskFunc)Task_MapGmk04_2,
-    (TaskFunc)Task_MapGmk04_3,
+    (TaskDrawFunc)Task_MapGmk04_2,
+    (TaskDestroyFunc)Task_MapGmk04_3,
     sizeof(MapGmk04Work),
 };
 
@@ -4574,8 +4574,8 @@ TaskDesc gTaskDescMapGmk05 = {
     "Task_MapGmk05",
     (TaskInitFunc)Task_MapGmk05_0,
     (TaskUpdateFunc)Task_MapGmk05_1,
-    (TaskFunc)Task_MapGmk05_2,
-    (TaskFunc)Task_MapGmk05_3,
+    (TaskDrawFunc)Task_MapGmk05_2,
+    (TaskDestroyFunc)Task_MapGmk05_3,
     sizeof(MapGmk05Work),
 };
 
@@ -4588,8 +4588,8 @@ TaskDesc gTaskDescMapGmk06 = {
     "Task_MapGmk06",
     (TaskInitFunc)Task_MapGmk06_0,
     (TaskUpdateFunc)Task_MapGmk06_1,
-    (TaskFunc)Task_MapGmk06_2,
-    (TaskFunc)Task_MapGmk06_3,
+    (TaskDrawFunc)Task_MapGmk06_2,
+    (TaskDestroyFunc)Task_MapGmk06_3,
     sizeof(MapGmk06Work),
 };
 
@@ -4597,8 +4597,8 @@ TaskDesc gTaskDescMapPrize = {
     "Task_MapPrize",
     (TaskInitFunc)Task_MapPrize_0,
     (TaskUpdateFunc)Task_MapPrize_1,
-    (TaskFunc)Task_MapPrize_2,
-    (TaskFunc)Task_MapPrize_3,
+    (TaskDrawFunc)Task_MapPrize_2,
+    (TaskDestroyFunc)Task_MapPrize_3,
     sizeof(MapPrizeWork),
 };
 
@@ -4606,8 +4606,8 @@ TaskDesc gTaskDescMapPrzCard = {
     "Task_MapPrzCard",
     (TaskInitFunc)Task_MapPrzCard_0,
     (TaskUpdateFunc)Task_MapPrzCard_1,
-    (TaskFunc)Task_MapPrzCard_2,
-    (TaskFunc)Task_MapPrzCard_3,
+    (TaskDrawFunc)Task_MapPrzCard_2,
+    (TaskDestroyFunc)Task_MapPrzCard_3,
     sizeof(MapPrzCardWork),
 };
 
@@ -4615,8 +4615,8 @@ TaskDesc gTaskDescMapPrzStock = {
     "Task_MapPrzStock",
     (TaskInitFunc)Task_MapPrzStock_0,
     (TaskUpdateFunc)Task_MapPrzStock_1,
-    (TaskFunc)Task_MapPrzStock_2,
-    (TaskFunc)Task_MapPrzStock_3,
+    (TaskDrawFunc)Task_MapPrzStock_2,
+    (TaskDestroyFunc)Task_MapPrzStock_3,
     sizeof(MapPrzStockWork),
 };
 
@@ -4624,8 +4624,8 @@ TaskDesc gTaskDescMapMsg = {
     "Task_MapMsg",
     (TaskInitFunc)func_080F58C4,
     (TaskUpdateFunc)Task_MapMsg_1,
-    (TaskFunc)func_080F596C,
-    (TaskFunc)func_080F59A0,
+    (TaskDrawFunc)func_080F596C,
+    (TaskDestroyFunc)func_080F59A0,
     sizeof(MapMsgWork),
 };
 
@@ -4633,8 +4633,8 @@ TaskDesc gTaskDescMapMsg2 = {
     "Task_MapMsg2",
     (TaskInitFunc)func_080F58C4,
     (TaskUpdateFunc)Task_MapMsg2_1,
-    (TaskFunc)func_080F596C,
-    (TaskFunc)func_080F59A0,
+    (TaskDrawFunc)func_080F596C,
+    (TaskDestroyFunc)func_080F59A0,
     sizeof(MapMsgWork),
 };
 
@@ -4642,8 +4642,8 @@ TaskDesc gTaskDescMapSpark = {
     "Task_MapSpark",
     (TaskInitFunc)Task_MapSpark_0,
     (TaskUpdateFunc)Task_MapSpark_1,
-    (TaskFunc)Task_MapSpark_2,
-    (TaskFunc)Task_MapSpark_3,
+    (TaskDrawFunc)Task_MapSpark_2,
+    (TaskDestroyFunc)Task_MapSpark_3,
     sizeof(MapSparkWork),
 };
 
@@ -4651,7 +4651,7 @@ TaskDesc gTaskDescMapTalk = {
     "Task_MapTalk",
     (TaskInitFunc)Task_MapTalk_0,
     (TaskUpdateFunc)Task_MapTalk_1,
-    (TaskFunc)Task_MapTalk_2,
-    (TaskFunc)Task_MapTalk_3,
+    (TaskDrawFunc)Task_MapTalk_2,
+    (TaskDestroyFunc)Task_MapTalk_3,
     sizeof(MapTalkWork),
 };

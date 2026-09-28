@@ -8,8 +8,8 @@ TaskDesc gTaskDescBosLstFal = {
     "task_bos_lst_fal",
     (TaskInitFunc)task_bos_lst_fal_0,
     (TaskUpdateFunc)task_bos_lst_fal_1,
-    (TaskFunc)task_bos_lst_fal_2,
-    (TaskFunc)task_bos_lst_fal_3,
+    (TaskDrawFunc)task_bos_lst_fal_2,
+    (TaskDestroyFunc)task_bos_lst_fal_3,
     sizeof(LstFalWork),
 };
 

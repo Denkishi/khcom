@@ -16,8 +16,8 @@ TaskDesc gTaskDescBosUrsulaBubble = {
     "task_bos_ursula_bubble",
     (TaskInitFunc)task_bos_ursula_bubble_0,
     (TaskUpdateFunc)task_bos_ursula_bubble_1,
-    (TaskFunc)task_bos_ursula_bubble_2,
-    (TaskFunc)task_bos_ursula_bubble_3,
+    (TaskDrawFunc)task_bos_ursula_bubble_2,
+    (TaskDestroyFunc)task_bos_ursula_bubble_3,
     sizeof(UrsulaBubbleWork),
 };
 
@@ -27,8 +27,8 @@ TaskDesc gTaskDescBosUrsulaBubbleSingle = {
     "task_bos_ursula_bubble_single",
     (TaskInitFunc)task_bos_ursula_bubble_single_0,
     (TaskUpdateFunc)task_bos_ursula_bubble_single_1,
-    (TaskFunc)task_bos_ursula_bubble_single_2,
-    (TaskFunc)task_bos_ursula_bubble_single_3,
+    (TaskDrawFunc)task_bos_ursula_bubble_single_2,
+    (TaskDestroyFunc)task_bos_ursula_bubble_single_3,
     sizeof(UrsulaBubbleSingleWork),
 };
 
@@ -36,8 +36,8 @@ TaskDesc gTaskDescBosUrsulaThunder = {
     "task_bos_ursula_thunder",
     (TaskInitFunc)task_bos_ursula_thunder_0,
     (TaskUpdateFunc)task_bos_ursula_thunder_1,
-    (TaskFunc)task_bos_ursula_thunder_2,
-    (TaskFunc)task_bos_ursula_thunder_3,
+    (TaskDrawFunc)task_bos_ursula_thunder_2,
+    (TaskDestroyFunc)task_bos_ursula_thunder_3,
     sizeof(UrsulaThunderWork),
 };
 

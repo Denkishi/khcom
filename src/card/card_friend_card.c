@@ -1438,8 +1438,8 @@ TaskDesc gTaskDescFriendCard = {
     "Friend card",
     (TaskInitFunc)Friend_card_0,
     (TaskUpdateFunc)Friend_card_1,
-    (TaskFunc)func_0809B200,
-    (TaskFunc)func_0809B59C,
+    (TaskDrawFunc)func_0809B200,
+    (TaskDestroyFunc)func_0809B59C,
     sizeof(UnkStruct_0809A02C),
 };
 
@@ -1447,8 +1447,8 @@ TaskDesc gTaskDescHeartlessCard = {
     "Heartless card",
     (TaskInitFunc)Heartless_card_0,
     (TaskUpdateFunc)Heartless_card_1,
-    (TaskFunc)Heartless_card_2,
-    (TaskFunc)Heartless_card_3,
+    (TaskDrawFunc)Heartless_card_2,
+    (TaskDestroyFunc)Heartless_card_3,
     sizeof(UnkStruct_0809A02C),
 };
 
@@ -1456,8 +1456,8 @@ TaskDesc gTaskDescGimmickCard = {
     "Gimmick card",
     (TaskInitFunc)Gimmick_card_0,
     (TaskUpdateFunc)Gimmick_card_1,
-    (TaskFunc)func_0809B200,
-    (TaskFunc)func_0809B59C,
+    (TaskDrawFunc)func_0809B200,
+    (TaskDestroyFunc)func_0809B59C,
     sizeof(UnkStruct_0809A02C),
 };
 
@@ -1465,8 +1465,8 @@ TaskDesc gUnk_09EE77D4 = {
     "StockName",
     (TaskInitFunc)func_0809B76C,
     (TaskUpdateFunc)func_0809B840,
-    (TaskFunc)func_0809B8F0,
-    (TaskFunc)func_0809BB18,
+    (TaskDrawFunc)func_0809B8F0,
+    (TaskDestroyFunc)func_0809BB18,
     sizeof(StockNameWork),
 };
 
@@ -1474,8 +1474,8 @@ TaskDesc gUnk_09EE77EC = {
     "StockName",
     (TaskInitFunc)func_0809B920,
     (TaskUpdateFunc)func_0809B9F4,
-    (TaskFunc)func_0809BAA4,
-    (TaskFunc)func_0809BAE4,
+    (TaskDrawFunc)func_0809BAA4,
+    (TaskDestroyFunc)func_0809BAE4,
     sizeof(StockNameWork),
 };
 #ifdef VERSION_EU
@@ -1486,7 +1486,7 @@ TaskDesc gUnk_09EE7804 = {
     "Premire Chance",
     (TaskInitFunc)func_0809BB4C,
     (TaskUpdateFunc)func_0809C078,
-    (TaskFunc)func_0809C110,
-    (TaskFunc)func_0809C1EC,
+    (TaskDrawFunc)func_0809C110,
+    (TaskDestroyFunc)func_0809C1EC,
     sizeof(UnkStruct_0809BB4C),
 };

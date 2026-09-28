@@ -220,7 +220,7 @@ TaskDesc gTaskDescDeckCard2 = {
     "DeckCard2",
     (TaskInitFunc)DeckCard2_0,
     (TaskUpdateFunc)DeckCard2_1,
-    (TaskFunc)DeckCard2_2,
-    (TaskFunc)DeckCard2_3,
+    (TaskDrawFunc)DeckCard2_2,
+    (TaskDestroyFunc)DeckCard2_3,
     sizeof(DeckCard2Work),
 };

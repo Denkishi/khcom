@@ -1393,7 +1393,7 @@ TaskDesc gTaskDescCardBattleSora = {
     "cardbattle",
     (TaskInitFunc)cardbattle_0,
     (TaskUpdateFunc)func_08076F80,
-    (TaskFunc)cardbattle_2,
-    (TaskFunc)cardbattle_3,
+    (TaskDrawFunc)cardbattle_2,
+    (TaskDestroyFunc)cardbattle_3,
     sizeof(CardBattleWork),
 };

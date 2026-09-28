@@ -187,7 +187,7 @@ TaskDesc gTaskDescRoomcreate = {
     "task_roomcreate",
     (TaskInitFunc)task_roomcreate_0,
     (TaskUpdateFunc)task_roomcreate_1,
-    (TaskFunc)task_roomcreate_2,
-    (TaskFunc)task_roomcreate_3,
+    (TaskDrawFunc)task_roomcreate_2,
+    (TaskDestroyFunc)task_roomcreate_3,
     sizeof(RoomCreateWork),
 };

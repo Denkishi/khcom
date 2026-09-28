@@ -14,14 +14,15 @@ struct Task;
 
 typedef void (*TaskInitFunc)(void* work, void* arg);
 typedef u8 (*TaskUpdateFunc)(void* work, struct Task* task);
-typedef void (*TaskFunc)(void* work);
+typedef void (*TaskDrawFunc)(void* work);
+typedef void (*TaskDestroyFunc)(void* work);
 
 typedef struct TaskDesc {
     const char* name;
     TaskInitFunc init;
     TaskUpdateFunc update;
-    TaskFunc draw;
-    TaskFunc destroy;
+    TaskDrawFunc draw;
+    TaskDestroyFunc destroy;
     s32 workSize;
 } TaskDesc;
 

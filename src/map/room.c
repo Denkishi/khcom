@@ -194,7 +194,7 @@ TaskDesc gTaskDescRoomName = {
     "task_room_name",
     (TaskInitFunc)task_room_name_0,
     (TaskUpdateFunc)task_room_name_1,
-    (TaskFunc)task_room_name_2,
-    (TaskFunc)task_room_name_3,
+    (TaskDrawFunc)task_room_name_2,
+    (TaskDestroyFunc)task_room_name_3,
     sizeof(RoomNameWork),
 };

@@ -2018,8 +2018,8 @@ TaskDesc gTaskDescDeckexchange = {
     "deckexchange",
     (TaskInitFunc)deckexchange_0,
     (TaskUpdateFunc)deckexchange_1,
-    (TaskFunc)deckexchange_2,
-    (TaskFunc)deckexchange_3,
+    (TaskDrawFunc)deckexchange_2,
+    (TaskDestroyFunc)deckexchange_3,
     sizeof(DeckExchangeWork),
 };
 #endif

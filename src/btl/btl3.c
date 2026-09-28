@@ -14,7 +14,7 @@ TaskDesc gTaskDescBtlForm = {
     (TaskInitFunc)task_btl_form_0,
     (TaskUpdateFunc)task_btl_form_1,
     NULL,
-    (TaskFunc)task_btl_form_3,
+    (TaskDestroyFunc)task_btl_form_3,
     sizeof(BtlFormWork),
 };
 
@@ -31,8 +31,8 @@ TaskDesc gTaskDescBtlRaid = {
     "task_btl_raid",
     (TaskInitFunc)task_btl_raid_0,
     (TaskUpdateFunc)task_btl_raid_1,
-    (TaskFunc)task_btl_raid_2,
-    (TaskFunc)task_btl_raid_3,
+    (TaskDrawFunc)task_btl_raid_2,
+    (TaskDestroyFunc)task_btl_raid_3,
     sizeof(BtlRaidWork),
 };
 
@@ -791,7 +791,7 @@ TaskDesc gTaskDescBtlBadstatus = {
     "task_btl_badstatus",
     (TaskInitFunc)task_btl_badstatus_0,
     (TaskUpdateFunc)task_btl_badstatus_1,
-    (TaskFunc)task_btl_badstatus_2,
-    (TaskFunc)task_btl_badstatus_3,
+    (TaskDrawFunc)task_btl_badstatus_2,
+    (TaskDestroyFunc)task_btl_badstatus_3,
     sizeof(BtlBadStatusWork),
 };

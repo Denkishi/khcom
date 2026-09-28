@@ -957,8 +957,8 @@ TaskDesc gTaskDescBosJf = {
     "task_bos_jf",
     (TaskInitFunc)task_bos_jf_0,
     (TaskUpdateFunc)task_bos_jf_1,
-    (TaskFunc)task_bos_jf_2,
-    (TaskFunc)task_bos_jf_3,
+    (TaskDrawFunc)task_bos_jf_2,
+    (TaskDestroyFunc)task_bos_jf_3,
     sizeof(JfWork),
 };
 
@@ -1014,7 +1014,7 @@ TaskDesc gTaskDescBosJfLamp = {
     "task_bos_jf_lamp",
     (TaskInitFunc)task_bos_jf_lamp_0,
     (TaskUpdateFunc)task_bos_jf_lamp_1,
-    (TaskFunc)task_bos_jf_lamp_2,
-    (TaskFunc)task_bos_jf_lamp_3,
+    (TaskDrawFunc)task_bos_jf_lamp_2,
+    (TaskDestroyFunc)task_bos_jf_lamp_3,
     sizeof(JfLampWork),
 };

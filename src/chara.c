@@ -1503,8 +1503,8 @@ TaskDesc gTaskDescCharaMaskFade = {
     "task_chara_mask_fade",
     (TaskInitFunc)task_chara_mask_fade_0,
     (TaskUpdateFunc)task_chara_mask_fade_1,
-    (TaskFunc)task_chara_mask_fade_2,
-    (TaskFunc)task_chara_mask_fade_3,
+    (TaskDrawFunc)task_chara_mask_fade_2,
+    (TaskDestroyFunc)task_chara_mask_fade_3,
     0x240,
 };
 
@@ -1512,7 +1512,7 @@ TaskDesc gTaskDescChgCardObj = {
     "task_chgCardObj",
     (TaskInitFunc)task_chgCardObj_0,
     (TaskUpdateFunc)task_chgCardObj_1,
-    (TaskFunc)task_chgCardObj_2,
-    (TaskFunc)task_chgCardObj_3,
+    (TaskDrawFunc)task_chgCardObj_2,
+    (TaskDestroyFunc)task_chgCardObj_3,
     0x44,
 };

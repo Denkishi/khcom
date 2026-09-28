@@ -346,8 +346,8 @@ TaskDesc gTaskDescFrdPoohEu = {
     "task_frd_pooh",
     (TaskInitFunc)eu_08060C8C,
     (TaskUpdateFunc)eu_08060DF8,
-    (TaskFunc)eu_08061588,
-    (TaskFunc)eu_08061698,
+    (TaskDrawFunc)eu_08061588,
+    (TaskDestroyFunc)eu_08061698,
     sizeof(FrdPoohWork),
 };
 #endif

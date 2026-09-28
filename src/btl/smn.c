@@ -24,8 +24,8 @@ TaskDesc gTaskDescSmnCloud = {
     "task_smn_cloud",
     (TaskInitFunc)task_smn_cloud_0,
     (TaskUpdateFunc)task_smn_cloud_1,
-    (TaskFunc)task_smn_cloud_2,
-    (TaskFunc)task_smn_cloud_3,
+    (TaskDrawFunc)task_smn_cloud_2,
+    (TaskDestroyFunc)task_smn_cloud_3,
     sizeof(SmnCloudWork),
 };
 
@@ -35,8 +35,8 @@ TaskDesc gTaskDescSmnBambi = {
     "task_smn_bambi",
     (TaskInitFunc)task_smn_bambi_0,
     (TaskUpdateFunc)task_smn_bambi_1,
-    (TaskFunc)task_smn_bambi_2,
-    (TaskFunc)task_smn_bambi_3,
+    (TaskDrawFunc)task_smn_bambi_2,
+    (TaskDestroyFunc)task_smn_bambi_3,
     sizeof(SmnBambiWork),
 };
 
@@ -50,8 +50,8 @@ TaskDesc gTaskDescSmnTink = {
     "task_smn_tink",
     (TaskInitFunc)task_smn_tink_0,
     (TaskUpdateFunc)task_smn_tink_1,
-    (TaskFunc)task_smn_tink_2,
-    (TaskFunc)task_smn_tink_3,
+    (TaskDrawFunc)task_smn_tink_2,
+    (TaskDestroyFunc)task_smn_tink_3,
     sizeof(SmnTinkWork),
 };
 
@@ -59,8 +59,8 @@ TaskDesc gTaskDescSmnTinkeff = {
     "task_smn_tinkeff",
     (TaskInitFunc)task_smn_tinkeff_0,
     (TaskUpdateFunc)task_smn_tinkeff_1,
-    (TaskFunc)task_smn_tinkeff_2,
-    (TaskFunc)task_smn_tinkeff_3,
+    (TaskDrawFunc)task_smn_tinkeff_2,
+    (TaskDestroyFunc)task_smn_tinkeff_3,
     sizeof(SmnTinkeffWork),
 };
 
@@ -70,8 +70,8 @@ TaskDesc gTaskDescSmnSimba = {
     "task_smn_simba",
     (TaskInitFunc)task_smn_simba_0,
     (TaskUpdateFunc)task_smn_simba_1,
-    (TaskFunc)task_smn_simba_2,
-    (TaskFunc)task_smn_simba_3,
+    (TaskDrawFunc)task_smn_simba_2,
+    (TaskDestroyFunc)task_smn_simba_3,
     sizeof(SmnSimbaWork),
 };
 
@@ -88,8 +88,8 @@ TaskDesc gTaskDescSmnMushu = {
     "task_smn_mushu",
     (TaskInitFunc)task_smn_mushu_0,
     (TaskUpdateFunc)task_smn_mushu_1,
-    (TaskFunc)task_smn_mushu_2,
-    (TaskFunc)task_smn_mushu_3,
+    (TaskDrawFunc)task_smn_mushu_2,
+    (TaskDestroyFunc)task_smn_mushu_3,
     sizeof(SmnMushuWork),
 };
 
@@ -103,8 +103,8 @@ TaskDesc gTaskDescSmnDumbo = {
     "task_smn_dumbo",
     (TaskInitFunc)task_smn_dumbo_0,
     (TaskUpdateFunc)task_smn_dumbo_1,
-    (TaskFunc)task_smn_dumbo_2,
-    (TaskFunc)task_smn_dumbo_3,
+    (TaskDrawFunc)task_smn_dumbo_2,
+    (TaskDestroyFunc)task_smn_dumbo_3,
     sizeof(SmnDumboWork),
 };
 
@@ -117,8 +117,8 @@ TaskDesc gTaskDescSmnGenie = {
     "task_smn_genie",
     (TaskInitFunc)task_smn_genie_0,
     (TaskUpdateFunc)task_smn_genie_1,
-    (TaskFunc)task_smn_genie_2,
-    (TaskFunc)task_smn_genie_3,
+    (TaskDrawFunc)task_smn_genie_2,
+    (TaskDestroyFunc)task_smn_genie_3,
     sizeof(SmnGenieWork),
 };
 
@@ -2683,7 +2683,7 @@ TaskDesc gTaskDescSmnKing = {
     "task_smn_king",
     (TaskInitFunc)task_smn_king_0,
     (TaskUpdateFunc)task_smn_king_1,
-    (TaskFunc)task_smn_king_2,
-    (TaskFunc)task_smn_king_3,
+    (TaskDrawFunc)task_smn_king_2,
+    (TaskDestroyFunc)task_smn_king_3,
     sizeof(SmnKingWork),
 };

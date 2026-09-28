@@ -840,8 +840,8 @@ TaskDesc gTaskDescLockon = {
     "task_lockon",
     (TaskInitFunc)task_lockon_0,
     (TaskUpdateFunc)task_lockon_1,
-    (TaskFunc)task_lockon_2,
-    (TaskFunc)task_lockon_3,
+    (TaskDrawFunc)task_lockon_2,
+    (TaskDestroyFunc)task_lockon_3,
     sizeof(LockonWork),
 };
 

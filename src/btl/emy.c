@@ -28,8 +28,8 @@ TaskDesc gTaskDescEmy00 = {
     "task_emy_00",
     (TaskInitFunc)task_emy_00_0,
     (TaskUpdateFunc)task_emy_00_1,
-    (TaskFunc)task_emy_00_2,
-    (TaskFunc)task_emy_00_3,
+    (TaskDrawFunc)task_emy_00_2,
+    (TaskDestroyFunc)task_emy_00_3,
     sizeof(EmyWork),
 };
 
@@ -50,8 +50,8 @@ TaskDesc gTaskDescEmy01 = {
     "task_emy_01",
     (TaskInitFunc)task_emy_01_0,
     (TaskUpdateFunc)task_emy_01_1,
-    (TaskFunc)task_emy_01_2,
-    (TaskFunc)task_emy_01_3,
+    (TaskDrawFunc)task_emy_01_2,
+    (TaskDestroyFunc)task_emy_01_3,
     sizeof(EmyWork),
 };
 
@@ -72,8 +72,8 @@ TaskDesc gTaskDescEmy02 = {
     "task_emy_02",
     (TaskInitFunc)task_emy_02_0,
     (TaskUpdateFunc)task_emy_02_1,
-    (TaskFunc)task_emy_02_2,
-    (TaskFunc)task_emy_02_3,
+    (TaskDrawFunc)task_emy_02_2,
+    (TaskDestroyFunc)task_emy_02_3,
     sizeof(EmyWork),
 };
 
@@ -94,8 +94,8 @@ TaskDesc gTaskDescEmy03 = {
     "task_emy_03",
     (TaskInitFunc)task_emy_03_0,
     (TaskUpdateFunc)task_emy_03_1,
-    (TaskFunc)task_emy_03_2,
-    (TaskFunc)task_emy_03_3,
+    (TaskDrawFunc)task_emy_03_2,
+    (TaskDestroyFunc)task_emy_03_3,
     sizeof(Emy03Work),
 };
 
@@ -113,8 +113,8 @@ TaskDesc gTaskDescEmy04 = {
     "task_emy_04",
     (TaskInitFunc)task_emy_04_0,
     (TaskUpdateFunc)task_emy_04_1,
-    (TaskFunc)task_emy_04_2,
-    (TaskFunc)task_emy_04_3,
+    (TaskDrawFunc)task_emy_04_2,
+    (TaskDestroyFunc)task_emy_04_3,
     sizeof(Emy04Work),
 };
 
@@ -135,8 +135,8 @@ TaskDesc gTaskDescEmy06 = {
     "task_emy_06",
     (TaskInitFunc)task_emy_06_0,
     (TaskUpdateFunc)task_emy_06_1,
-    (TaskFunc)task_emy_06_2,
-    (TaskFunc)task_emy_06_3,
+    (TaskDrawFunc)task_emy_06_2,
+    (TaskDestroyFunc)task_emy_06_3,
     sizeof(Emy06Work),
 };
 
@@ -162,8 +162,8 @@ TaskDesc gTaskDescEmy07 = {
     "task_emy_07",
     (TaskInitFunc)task_emy_07_0,
     (TaskUpdateFunc)task_emy_07_1,
-    (TaskFunc)task_emy_07_2,
-    (TaskFunc)task_emy_07_3,
+    (TaskDrawFunc)task_emy_07_2,
+    (TaskDestroyFunc)task_emy_07_3,
     sizeof(Emy07Work),
 };
 
@@ -188,8 +188,8 @@ TaskDesc gTaskDescEmy08 = {
     "task_emy_08",
     (TaskInitFunc)task_emy_08_0,
     (TaskUpdateFunc)task_emy_08_1,
-    (TaskFunc)task_emy_08_2,
-    (TaskFunc)task_emy_08_3,
+    (TaskDrawFunc)task_emy_08_2,
+    (TaskDestroyFunc)task_emy_08_3,
     sizeof(Emy08Work),
 };
 
@@ -210,8 +210,8 @@ TaskDesc gTaskDescEmy14 = {
     "task_emy_14",
     (TaskInitFunc)task_emy_14_0,
     (TaskUpdateFunc)task_emy_14_1,
-    (TaskFunc)task_emy_14_2,
-    (TaskFunc)task_emy_14_3,
+    (TaskDrawFunc)task_emy_14_2,
+    (TaskDestroyFunc)task_emy_14_3,
     sizeof(EmyWork),
 };
 
@@ -235,8 +235,8 @@ TaskDesc gTaskDescEmy15 = {
     "task_emy_15",
     (TaskInitFunc)task_emy_15_0,
     (TaskUpdateFunc)task_emy_15_1,
-    (TaskFunc)task_emy_15_2,
-    (TaskFunc)task_emy_15_3,
+    (TaskDrawFunc)task_emy_15_2,
+    (TaskDestroyFunc)task_emy_15_3,
     sizeof(EmyWork),
 };
 
@@ -257,8 +257,8 @@ TaskDesc gTaskDescEmy16 = {
     "task_emy_16",
     (TaskInitFunc)task_emy_16_0,
     (TaskUpdateFunc)task_emy_16_1,
-    (TaskFunc)task_emy_16_2,
-    (TaskFunc)task_emy_16_3,
+    (TaskDrawFunc)task_emy_16_2,
+    (TaskDestroyFunc)task_emy_16_3,
     sizeof(Emy16Work),
 };
 
@@ -266,8 +266,8 @@ TaskDesc gTaskDescEmy16B = {
     "task_emy_16_b",
     (TaskInitFunc)task_emy_16_b_0,
     (TaskUpdateFunc)task_emy_16_b_1,
-    (TaskFunc)task_emy_16_b_2,
-    (TaskFunc)task_emy_16_b_3,
+    (TaskDrawFunc)task_emy_16_b_2,
+    (TaskDestroyFunc)task_emy_16_b_3,
     sizeof(Emy16bWork),
 };
 
@@ -275,8 +275,8 @@ TaskDesc gTaskDescEmy16P = {
     "task_emy_16_p",
     (TaskInitFunc)task_emy_16_p_0,
     (TaskUpdateFunc)task_emy_16_p_1,
-    (TaskFunc)task_emy_16_p_2,
-    (TaskFunc)task_emy_16_p_3,
+    (TaskDrawFunc)task_emy_16_p_2,
+    (TaskDestroyFunc)task_emy_16_p_3,
     sizeof(Emy16pWork),
 };
 
@@ -299,8 +299,8 @@ TaskDesc gTaskDescEmy18 = {
     "task_emy_18",
     (TaskInitFunc)task_emy_18_0,
     (TaskUpdateFunc)task_emy_18_1,
-    (TaskFunc)task_emy_18_2,
-    (TaskFunc)task_emy_18_3,
+    (TaskDrawFunc)task_emy_18_2,
+    (TaskDestroyFunc)task_emy_18_3,
     sizeof(Emy18Work),
 };
 
@@ -324,8 +324,8 @@ TaskDesc gTaskDescEmy19 = {
     "task_emy_19",
     (TaskInitFunc)task_emy_19_0,
     (TaskUpdateFunc)task_emy_19_1,
-    (TaskFunc)task_emy_19_2,
-    (TaskFunc)task_emy_19_3,
+    (TaskDrawFunc)task_emy_19_2,
+    (TaskDestroyFunc)task_emy_19_3,
     sizeof(Emy19Work),
 };
 
@@ -348,8 +348,8 @@ TaskDesc gTaskDescEmy21 = {
     "task_emy_21",
     (TaskInitFunc)task_emy_21_0,
     (TaskUpdateFunc)task_emy_21_1,
-    (TaskFunc)task_emy_21_2,
-    (TaskFunc)task_emy_21_3,
+    (TaskDrawFunc)task_emy_21_2,
+    (TaskDestroyFunc)task_emy_21_3,
     sizeof(Emy21Work),
 };
 
@@ -370,8 +370,8 @@ TaskDesc gTaskDescEmy22 = {
     "task_emy_22",
     (TaskInitFunc)task_emy_22_0,
     (TaskUpdateFunc)task_emy_22_1,
-    (TaskFunc)task_emy_22_2,
-    (TaskFunc)task_emy_22_3,
+    (TaskDrawFunc)task_emy_22_2,
+    (TaskDestroyFunc)task_emy_22_3,
     sizeof(Emy22Work),
 };
 
@@ -392,8 +392,8 @@ TaskDesc gTaskDescEmy23 = {
     "task_emy_23",
     (TaskInitFunc)task_emy_23_0,
     (TaskUpdateFunc)task_emy_23_1,
-    (TaskFunc)task_emy_23_2,
-    (TaskFunc)task_emy_23_3,
+    (TaskDrawFunc)task_emy_23_2,
+    (TaskDestroyFunc)task_emy_23_3,
     sizeof(Emy23Work),
 };
 
@@ -414,8 +414,8 @@ TaskDesc gTaskDescEmy25 = {
     "task_emy_25",
     (TaskInitFunc)task_emy_25_0,
     (TaskUpdateFunc)task_emy_25_1,
-    (TaskFunc)task_emy_25_2,
-    (TaskFunc)task_emy_25_3,
+    (TaskDrawFunc)task_emy_25_2,
+    (TaskDestroyFunc)task_emy_25_3,
     sizeof(EmyWork),
 };
 
@@ -436,8 +436,8 @@ TaskDesc gTaskDescEmy26 = {
     "task_emy_26",
     (TaskInitFunc)task_emy_26_0,
     (TaskUpdateFunc)task_emy_26_1,
-    (TaskFunc)task_emy_26_2,
-    (TaskFunc)task_emy_26_3,
+    (TaskDrawFunc)task_emy_26_2,
+    (TaskDestroyFunc)task_emy_26_3,
     sizeof(EmyWork),
 };
 
@@ -458,8 +458,8 @@ TaskDesc gTaskDescEmy27 = {
     "task_emy_27",
     (TaskInitFunc)task_emy_27_0,
     (TaskUpdateFunc)task_emy_27_1,
-    (TaskFunc)task_emy_27_2,
-    (TaskFunc)task_emy_27_3,
+    (TaskDrawFunc)task_emy_27_2,
+    (TaskDestroyFunc)task_emy_27_3,
     sizeof(EmyWork),
 };
 
@@ -482,8 +482,8 @@ TaskDesc gTaskDescEmy28 = {
     "task_emy_28",
     (TaskInitFunc)task_emy_28_0,
     (TaskUpdateFunc)task_emy_28_1,
-    (TaskFunc)task_emy_28_2,
-    (TaskFunc)task_emy_28_3,
+    (TaskDrawFunc)task_emy_28_2,
+    (TaskDestroyFunc)task_emy_28_3,
     sizeof(Emy28Work),
 };
 
@@ -504,8 +504,8 @@ TaskDesc gTaskDescEmy29 = {
     "task_emy_29",
     (TaskInitFunc)task_emy_29_0,
     (TaskUpdateFunc)task_emy_29_1,
-    (TaskFunc)task_emy_29_2,
-    (TaskFunc)task_emy_29_3,
+    (TaskDrawFunc)task_emy_29_2,
+    (TaskDestroyFunc)task_emy_29_3,
     sizeof(Emy29Work),
 };
 
@@ -532,8 +532,8 @@ TaskDesc gTaskDescEmy30 = {
     "task_emy_30",
     (TaskInitFunc)task_emy_30_0,
     (TaskUpdateFunc)task_emy_30_1,
-    (TaskFunc)task_emy_30_2,
-    (TaskFunc)task_emy_30_3,
+    (TaskDrawFunc)task_emy_30_2,
+    (TaskDestroyFunc)task_emy_30_3,
     sizeof(EmyWork),
 };
 
@@ -555,8 +555,8 @@ TaskDesc gTaskDescEmy31 = {
     "task_emy_31",
     (TaskInitFunc)task_emy_31_0,
     (TaskUpdateFunc)task_emy_31_1,
-    (TaskFunc)task_emy_31_2,
-    (TaskFunc)task_emy_31_3,
+    (TaskDrawFunc)task_emy_31_2,
+    (TaskDestroyFunc)task_emy_31_3,
     sizeof(Emy31Work),
 };
 
@@ -586,8 +586,8 @@ TaskDesc gTaskDescEmy37 = {
     "task_emy_37",
     (TaskInitFunc)task_emy_37_0,
     (TaskUpdateFunc)task_emy_37_1,
-    (TaskFunc)task_emy_37_2,
-    (TaskFunc)task_emy_37_3,
+    (TaskDrawFunc)task_emy_37_2,
+    (TaskDestroyFunc)task_emy_37_3,
     sizeof(Emy37Work),
 };
 
@@ -608,8 +608,8 @@ TaskDesc gTaskDescEmy38 = {
     "task_emy_38",
     (TaskInitFunc)task_emy_38_0,
     (TaskUpdateFunc)task_emy_38_1,
-    (TaskFunc)task_emy_38_2,
-    (TaskFunc)task_emy_38_3,
+    (TaskDrawFunc)task_emy_38_2,
+    (TaskDestroyFunc)task_emy_38_3,
     sizeof(EmyWork),
 };
 
@@ -630,8 +630,8 @@ TaskDesc gTaskDescEmy39 = {
     "task_emy_39",
     (TaskInitFunc)task_emy_39_0,
     (TaskUpdateFunc)task_emy_39_1,
-    (TaskFunc)task_emy_39_2,
-    (TaskFunc)task_emy_39_3,
+    (TaskDrawFunc)task_emy_39_2,
+    (TaskDestroyFunc)task_emy_39_3,
     sizeof(Emy39Work),
 };
 
@@ -652,8 +652,8 @@ TaskDesc gTaskDescEmy41 = {
     "task_emy_41",
     (TaskInitFunc)task_emy_41_0,
     (TaskUpdateFunc)task_emy_41_1,
-    (TaskFunc)task_emy_41_2,
-    (TaskFunc)task_emy_41_3,
+    (TaskDrawFunc)task_emy_41_2,
+    (TaskDestroyFunc)task_emy_41_3,
     sizeof(Emy41Work),
 };
 
@@ -674,8 +674,8 @@ TaskDesc gTaskDescEmy44 = {
     "task_emy_44",
     (TaskInitFunc)task_emy_44_0,
     (TaskUpdateFunc)task_emy_44_1,
-    (TaskFunc)task_emy_44_2,
-    (TaskFunc)task_emy_44_3,
+    (TaskDrawFunc)task_emy_44_2,
+    (TaskDestroyFunc)task_emy_44_3,
     sizeof(EmyWork),
 };
 
@@ -699,8 +699,8 @@ TaskDesc gTaskDescEmy81 = {
     "task_emy_81",
     (TaskInitFunc)task_emy_81_0,
     (TaskUpdateFunc)task_emy_81_1,
-    (TaskFunc)task_emy_81_2,
-    (TaskFunc)task_emy_81_3,
+    (TaskDrawFunc)task_emy_81_2,
+    (TaskDestroyFunc)task_emy_81_3,
     sizeof(Emy81Work),
 };
 
@@ -725,8 +725,8 @@ TaskDesc gTaskDescEmy82 = {
     "task_emy_82",
     (TaskInitFunc)task_emy_82_0,
     (TaskUpdateFunc)task_emy_82_1,
-    (TaskFunc)task_emy_82_2,
-    (TaskFunc)task_emy_82_3,
+    (TaskDrawFunc)task_emy_82_2,
+    (TaskDestroyFunc)task_emy_82_3,
     sizeof(Emy82Work),
 };
 
@@ -749,8 +749,8 @@ TaskDesc gTaskDescEmy83 = {
     "task_emy_83",
     (TaskInitFunc)task_emy_83_0,
     (TaskUpdateFunc)task_emy_83_1,
-    (TaskFunc)task_emy_83_2,
-    (TaskFunc)task_emy_83_3,
+    (TaskDrawFunc)task_emy_83_2,
+    (TaskDestroyFunc)task_emy_83_3,
     sizeof(Emy83Work),
 };
 
@@ -758,8 +758,8 @@ TaskDesc gTaskDescEmy83B = {
     "task_emy_83_b",
     (TaskInitFunc)task_emy_83_b_0,
     (TaskUpdateFunc)task_emy_83_b_1,
-    (TaskFunc)task_emy_83_b_2,
-    (TaskFunc)task_emy_83_b_3,
+    (TaskDrawFunc)task_emy_83_b_2,
+    (TaskDestroyFunc)task_emy_83_b_3,
     sizeof(Emy83bWork),
 };
 
@@ -767,8 +767,8 @@ TaskDesc gTaskDescEmy83S = {
     "task_emy_83_s",
     (TaskInitFunc)task_emy_83_s_0,
     (TaskUpdateFunc)task_emy_83_s_1,
-    (TaskFunc)task_emy_83_s_2,
-    (TaskFunc)task_emy_83_s_3,
+    (TaskDrawFunc)task_emy_83_s_2,
+    (TaskDestroyFunc)task_emy_83_s_3,
     sizeof(Emy83sWork),
 };
 
@@ -786,8 +786,8 @@ TaskDesc gTaskDescEmyTrumpH = {
     "task_emy_trump_h",
     (TaskInitFunc)task_emy_trump_h_0,
     (TaskUpdateFunc)task_emy_trump_h_1,
-    (TaskFunc)task_emy_trump_h_2,
-    (TaskFunc)task_emy_trump_h_3,
+    (TaskDrawFunc)task_emy_trump_h_2,
+    (TaskDestroyFunc)task_emy_trump_h_3,
     sizeof(EmyWork),
 };
 
@@ -805,8 +805,8 @@ TaskDesc gTaskDescEmyTrumpS = {
     "task_emy_trump_s",
     (TaskInitFunc)task_emy_trump_s_0,
     (TaskUpdateFunc)task_emy_trump_s_1,
-    (TaskFunc)task_emy_trump_s_2,
-    (TaskFunc)task_emy_trump_s_3,
+    (TaskDrawFunc)task_emy_trump_s_2,
+    (TaskDestroyFunc)task_emy_trump_s_3,
     sizeof(EmyWork),
 };
 
@@ -5942,7 +5942,7 @@ TaskDesc gTaskDescEmyTest = {
     "task_emy_test",
     (TaskInitFunc)task_emy_test_0,
     (TaskUpdateFunc)task_emy_test_1,
-    (TaskFunc)task_emy_test_2,
-    (TaskFunc)task_emy_test_3,
+    (TaskDrawFunc)task_emy_test_2,
+    (TaskDestroyFunc)task_emy_test_3,
     sizeof(EmyWork),
 };

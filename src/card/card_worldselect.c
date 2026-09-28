@@ -2787,8 +2787,8 @@ TaskDesc gTaskDescMapSelect = {
     "MapSelect",
     (TaskInitFunc)MapSelect_0,
     (TaskUpdateFunc)MapSelect_1,
-    (TaskFunc)MapSelect_2,
-    (TaskFunc)MapSelect_3,
+    (TaskDrawFunc)MapSelect_2,
+    (TaskDestroyFunc)MapSelect_3,
     sizeof(MapSelectWork),
 };
 
@@ -3090,8 +3090,8 @@ TaskDesc gTaskDescMapcard = {
     "Mapcard",
     (TaskInitFunc)Mapcard_0,
     (TaskUpdateFunc)Mapcard_1,
-    (TaskFunc)Mapcard_2,
-    (TaskFunc)Mapcard_3,
+    (TaskDrawFunc)Mapcard_2,
+    (TaskDestroyFunc)Mapcard_3,
     sizeof(MapcardWork),
 };
 
@@ -3099,8 +3099,8 @@ TaskDesc gTaskDescReloadGage = {
     "Reload Gage",
     (TaskInitFunc)Reload_Gage_0,
     (TaskUpdateFunc)Reload_Gage_1,
-    (TaskFunc)Reload_Gage_2,
-    (TaskFunc)Reload_Gage_3,
+    (TaskDrawFunc)Reload_Gage_2,
+    (TaskDestroyFunc)Reload_Gage_3,
     sizeof(CardDisplayWork),
 };
 

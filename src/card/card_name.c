@@ -489,8 +489,8 @@ TaskDesc gTaskDescCardName = {
     "CardName",
     (TaskInitFunc)CardName_0,
     (TaskUpdateFunc)CardName_1,
-    (TaskFunc)CardName_2,
-    (TaskFunc)CardName_3,
+    (TaskDrawFunc)CardName_2,
+    (TaskDestroyFunc)CardName_3,
     sizeof(CardNameWork),
 };
 
@@ -498,8 +498,8 @@ TaskDesc gUnk_09EE784C = {
     "Premire_EFFECT",
     (TaskInitFunc)func_0809CE88,
     (TaskUpdateFunc)func_0809D040,
-    (TaskFunc)func_0809D0CC,
-    (TaskFunc)func_0809D0FC,
+    (TaskDrawFunc)func_0809D0CC,
+    (TaskDestroyFunc)func_0809D0FC,
     sizeof(PremiumCardEffectWork),
 };
 
@@ -507,8 +507,8 @@ TaskDesc gTaskDescPremireEFFECT2 = {
     "Premire_EFFECT2",
     (TaskInitFunc)func_0809CE88,
     (TaskUpdateFunc)Premire_EFFECT2_1,
-    (TaskFunc)func_0809D0CC,
-    (TaskFunc)func_0809D0FC,
+    (TaskDrawFunc)func_0809D0CC,
+    (TaskDestroyFunc)func_0809D0FC,
     sizeof(PremiumCardEffectWork),
 };
 
@@ -516,7 +516,7 @@ TaskDesc gUnk_09EE787C = {
     "Premire_EFFECT",
     (TaskInitFunc)func_0809CF64,
     (TaskUpdateFunc)func_0809D09C,
-    (TaskFunc)func_0809D0CC,
-    (TaskFunc)func_0809D0FC,
+    (TaskDrawFunc)func_0809D0CC,
+    (TaskDestroyFunc)func_0809D0FC,
     sizeof(PremiumCardEffectWork),
 };

@@ -57,7 +57,7 @@ TaskDesc gTaskDescSrollBLogo = {
     "task_sroll_b_logo",
     (TaskInitFunc)task_sroll_b_logo_0,
     (TaskUpdateFunc)task_sroll_b_logo_1,
-    (TaskFunc)task_sroll_b_logo_2,
-    (TaskFunc)task_sroll_b_logo_3,
+    (TaskDrawFunc)task_sroll_b_logo_2,
+    (TaskDestroyFunc)task_sroll_b_logo_3,
     sizeof(SrollBLogoWork),
 };

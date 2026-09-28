@@ -2269,8 +2269,8 @@ TaskDesc gTaskDescBosJfMajin = {
     "task_bos_jf_majin",
     (TaskInitFunc)task_bos_jf_majin_0,
     (TaskUpdateFunc)task_bos_jf_majin_1,
-    (TaskFunc)task_bos_jf_majin_2,
-    (TaskFunc)task_bos_jf_majin_3,
+    (TaskDrawFunc)task_bos_jf_majin_2,
+    (TaskDestroyFunc)task_bos_jf_majin_3,
     sizeof(JfMajinWork),
 };
 
@@ -2284,8 +2284,8 @@ TaskDesc gTaskDescBosJfRock = {
     "task_bos_jf_rock",
     (TaskInitFunc)task_bos_jf_rock_0,
     (TaskUpdateFunc)task_bos_jf_rock_1,
-    (TaskFunc)task_bos_jf_rock_2,
-    (TaskFunc)task_bos_jf_rock_3,
+    (TaskDrawFunc)task_bos_jf_rock_2,
+    (TaskDestroyFunc)task_bos_jf_rock_3,
     sizeof(JfRockWork),
 };
 
@@ -2293,8 +2293,8 @@ TaskDesc gTaskDescBosJfBorderline = {
     "task_bos_jf_borderline",
     (TaskInitFunc)task_bos_jf_borderline_0,
     (TaskUpdateFunc)task_bos_jf_borderline_1,
-    (TaskFunc)task_bos_jf_borderline_2,
-    (TaskFunc)task_bos_jf_borderline_3,
+    (TaskDrawFunc)task_bos_jf_borderline_2,
+    (TaskDestroyFunc)task_bos_jf_borderline_3,
     sizeof(JfBorderlineWork),
 };
 
@@ -2304,7 +2304,7 @@ TaskDesc gTaskDescBosDsd = {
     "task_bos_dsd",
     (TaskInitFunc)task_bos_dsd_0,
     (TaskUpdateFunc)task_bos_dsd_1,
-    (TaskFunc)task_bos_dsd_2,
-    (TaskFunc)task_bos_dsd_3,
+    (TaskDrawFunc)task_bos_dsd_2,
+    (TaskDestroyFunc)task_bos_dsd_3,
     sizeof(DsdWork),
 };

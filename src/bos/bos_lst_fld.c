@@ -375,8 +375,8 @@ TaskDesc gTaskDescBosLstFld = {
     "task_bos_lst_fld",
     (TaskInitFunc)task_bos_lst_fld_0,
     (TaskUpdateFunc)task_bos_lst_fld_1,
-    (TaskFunc)task_bos_lst_fld_2,
-    (TaskFunc)task_bos_lst_fld_3,
+    (TaskDrawFunc)task_bos_lst_fld_2,
+    (TaskDestroyFunc)task_bos_lst_fld_3,
     sizeof(LstFldWork),
 };
 

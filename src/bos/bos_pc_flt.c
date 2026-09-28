@@ -58,8 +58,8 @@ TaskDesc gTaskDescBosPcFlt = {
     "task_bos_pc_flt",
     (TaskInitFunc)task_bos_pc_flt_0,
     (TaskUpdateFunc)task_bos_pc_flt_1,
-    (TaskFunc)task_bos_pc_flt_2,
-    (TaskFunc)task_bos_pc_flt_3,
+    (TaskDrawFunc)task_bos_pc_flt_2,
+    (TaskDestroyFunc)task_bos_pc_flt_3,
     sizeof(PcFltWork),
 };
 

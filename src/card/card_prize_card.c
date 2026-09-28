@@ -394,7 +394,7 @@ TaskDesc gUnk_09EE75D8 = {
     "PrizeCard",
     (TaskInitFunc)PrizeCard_0,
     (TaskUpdateFunc)PrizeCard_1,
-    (TaskFunc)PrizeCard_2,
-    (TaskFunc)PrizeCard_3,
+    (TaskDrawFunc)PrizeCard_2,
+    (TaskDestroyFunc)PrizeCard_3,
     sizeof(PrizeCardWork),
 };

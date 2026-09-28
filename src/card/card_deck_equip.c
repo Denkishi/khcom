@@ -415,8 +415,8 @@ TaskDesc gTaskDescDeckEquip = {
     "Deck Equip",
     (TaskInitFunc)Deck_Equip_0,
     (TaskUpdateFunc)func_080A2DE4,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -424,8 +424,8 @@ TaskDesc gTaskDescDeckYesNo = {
     "Deck_Yes_No",
     (TaskInitFunc)Deck_Yes_No_0,
     (TaskUpdateFunc)func_080A30C0,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -433,8 +433,8 @@ TaskDesc gTaskDescDeckClear = {
     "Deck_Clear",
     (TaskInitFunc)Deck_Clear_0,
     (TaskUpdateFunc)func_080A30C0,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -442,8 +442,8 @@ TaskDesc gUnk_09EE7FA8 = {
     "Deck Error",
     (TaskInitFunc)func_080A2980,
     (TaskUpdateFunc)func_080A2DE4,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -451,8 +451,8 @@ TaskDesc gUnk_09EE7FC0 = {
     "Deck Error",
     (TaskInitFunc)func_080A2A80,
     (TaskUpdateFunc)func_080A2DE4,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -460,8 +460,8 @@ TaskDesc gUnk_09EE7FD8 = {
     "Deck Error",
     (TaskInitFunc)func_080A2BA4,
     (TaskUpdateFunc)func_080A2DE4,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 
@@ -469,8 +469,8 @@ TaskDesc gUnk_09EE7FF0 = {
     "Deck Error",
     (TaskInitFunc)func_080A2CC4,
     (TaskUpdateFunc)func_080A2DE4,
-    (TaskFunc)func_080A2E14,
-    (TaskFunc)func_080A2EF8,
+    (TaskDrawFunc)func_080A2E14,
+    (TaskDestroyFunc)func_080A2EF8,
     sizeof(DeckConfirmWork),
 };
 #ifdef VERSION_EU

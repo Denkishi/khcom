@@ -1264,8 +1264,8 @@ TaskDesc gTaskDescBosDsdMain = {
     "task_bos_dsd_main",
     (TaskInitFunc)task_bos_dsd_main_0,
     (TaskUpdateFunc)task_bos_dsd_main_1,
-    (TaskFunc)task_bos_dsd_main_2,
-    (TaskFunc)task_bos_dsd_main_3,
+    (TaskDrawFunc)task_bos_dsd_main_2,
+    (TaskDestroyFunc)task_bos_dsd_main_3,
     sizeof(DsdMainWork),
 };
 

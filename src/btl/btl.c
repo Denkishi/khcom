@@ -22,8 +22,8 @@ TaskDesc gTaskDescBtlLockon = {
     "task_btl_lockon",
     (TaskInitFunc)task_btl_lockon_0,
     (TaskUpdateFunc)task_btl_lockon_1,
-    (TaskFunc)task_btl_lockon_2,
-    (TaskFunc)task_btl_lockon_3,
+    (TaskDrawFunc)task_btl_lockon_2,
+    (TaskDestroyFunc)task_btl_lockon_3,
     sizeof(BtlLockonWork),
 };
 
@@ -31,8 +31,8 @@ TaskDesc gTaskDescBtlArea = {
     "task_btl_area",
     (TaskInitFunc)task_btl_area_0,
     (TaskUpdateFunc)task_btl_area_1,
-    (TaskFunc)task_btl_area_2,
-    (TaskFunc)task_btl_area_3,
+    (TaskDrawFunc)task_btl_area_2,
+    (TaskDestroyFunc)task_btl_area_3,
     sizeof(BtlAreaWork),
 };
 
@@ -168,8 +168,8 @@ TaskDesc gTaskDescBtlSora = {
     "task_btl_sora",
     (TaskInitFunc)task_btl_sora_0,
     (TaskUpdateFunc)task_btl_sora_1,
-    (TaskFunc)task_btl_sora_2,
-    (TaskFunc)task_btl_sora_3,
+    (TaskDrawFunc)task_btl_sora_2,
+    (TaskDestroyFunc)task_btl_sora_3,
     sizeof(BtlSoraWork),
 };
 
@@ -10907,7 +10907,7 @@ TaskDesc gTaskDescBtlRiku = {
     "task_btl_riku",
     (TaskInitFunc)task_btl_riku_0,
     (TaskUpdateFunc)task_btl_riku_1,
-    (TaskFunc)task_btl_riku_2,
-    (TaskFunc)task_btl_riku_3,
+    (TaskDrawFunc)task_btl_riku_2,
+    (TaskDestroyFunc)task_btl_riku_3,
     sizeof(BtlRikuWork),
 };

@@ -1011,8 +1011,8 @@ TaskDesc gTaskDescReloadChildren = {
     "RELOAD_CHILDREN",
     (TaskInitFunc)RELOAD_CHILDREN_0,
     (TaskUpdateFunc)RELOAD_CHILDREN_1,
-    (TaskFunc)RELOAD_CHILDREN_2,
-    (TaskFunc)RELOAD_CHILDREN_3,
+    (TaskDrawFunc)RELOAD_CHILDREN_2,
+    (TaskDestroyFunc)RELOAD_CHILDREN_3,
     sizeof(ReloadChildWork),
 };
 
@@ -1042,8 +1042,8 @@ TaskDesc gTaskDescREVCOUNT = {
     "REV_COUNT",
     (TaskInitFunc)REV_COUNT_0,
     (TaskUpdateFunc)REV_COUNT_1,
-    (TaskFunc)REV_COUNT_2,
-    (TaskFunc)REV_COUNT_3,
+    (TaskDrawFunc)REV_COUNT_2,
+    (TaskDestroyFunc)REV_COUNT_3,
     sizeof(RevCountWork),
 };
 
@@ -1069,8 +1069,8 @@ TaskDesc gTaskDescRELOAD = {
     "RELOAD",
     (TaskInitFunc)RELOAD_0,
     (TaskUpdateFunc)RELOAD_1,
-    (TaskFunc)RELOAD_2,
-    (TaskFunc)RELOAD_3,
+    (TaskDrawFunc)RELOAD_2,
+    (TaskDestroyFunc)RELOAD_3,
     sizeof(ReloadWork),
 };
 
@@ -1078,8 +1078,8 @@ TaskDesc gTaskDescPrizeBoss = {
     "PrizeBoss",
     (TaskInitFunc)PrizeBoss_0,
     (TaskUpdateFunc)PrizeBoss_1,
-    (TaskFunc)PrizeBoss_2,
-    (TaskFunc)PrizeBoss_3,
+    (TaskDrawFunc)PrizeBoss_2,
+    (TaskDestroyFunc)PrizeBoss_3,
     sizeof(BossPrizeWork),
 };
 
@@ -1087,8 +1087,8 @@ TaskDesc gTaskDescCardEFFECT = {
     "Card_EFFECT",
     (TaskInitFunc)Card_EFFECT_0,
     (TaskUpdateFunc)Card_EFFECT_1,
-    (TaskFunc)Card_EFFECT_2,
-    (TaskFunc)Card_EFFECT_3,
+    (TaskDrawFunc)Card_EFFECT_2,
+    (TaskDestroyFunc)Card_EFFECT_3,
     sizeof(CardEffectWork),
 };
 
@@ -1096,7 +1096,7 @@ TaskDesc gTaskDescScrollbar = {
     "scrollbar",
     (TaskInitFunc)scrollbar_0,
     (TaskUpdateFunc)scrollbar_1,
-    (TaskFunc)scrollbar_2,
-    (TaskFunc)scrollbar_3,
+    (TaskDrawFunc)scrollbar_2,
+    (TaskDestroyFunc)scrollbar_3,
     sizeof(ScrollBarWork),
 };

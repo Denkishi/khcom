@@ -2033,8 +2033,8 @@ TaskDesc gTaskDescLevelUp = {
     "Level_Up",
     (TaskInitFunc)Level_Up_0,
     (TaskUpdateFunc)Level_Up_1,
-    (TaskFunc)Level_Up_2,
-    (TaskFunc)Level_Up_3,
+    (TaskDrawFunc)Level_Up_2,
+    (TaskDestroyFunc)Level_Up_3,
     sizeof(LevelUpWork),
 };
 #ifdef VERSION_EU
@@ -2059,8 +2059,8 @@ TaskDesc gTaskDescLVUPEFFECT = {
     "LVUP_EFFECT",
     (TaskInitFunc)LVUP_EFFECT_0,
     (TaskUpdateFunc)LVUP_EFFECT_1,
-    (TaskFunc)LVUP_EFFECT_2,
-    (TaskFunc)LVUP_EFFECT_3,
+    (TaskDrawFunc)LVUP_EFFECT_2,
+    (TaskDestroyFunc)LVUP_EFFECT_3,
     sizeof(LevelUpEffectWork),
 };
 

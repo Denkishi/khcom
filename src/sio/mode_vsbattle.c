@@ -9,7 +9,7 @@ void mode_vsbattle_0(u32 mode) {
     BtlWork** p;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
-    p = &gUnk_02039B9C;
+    p = &gRikuBtlWork;
     *p = EwramAlloc(sizeof(BtlWork));
 
     if (gSioPlayerId == 0) {
@@ -86,7 +86,7 @@ void mode_vsbattle_2(void) {
     TaskPoolDestroy(&gBtlWork->taskPools[1]);
     TaskPoolDestroy(&gBtlWork->taskPools[0]);
     func_0801C104();
-    EwramFree(gUnk_02039B9C);
+    EwramFree(gRikuBtlWork);
     EwramFree(gBtlWork);
 }
 

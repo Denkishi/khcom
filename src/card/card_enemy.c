@@ -164,19 +164,19 @@ void func_08090374(CardDisplayWork* p) {
 
                 flags = 0x410;
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                           gUnk_08F70A28[0].gfx, gUnk_02039DD4->tiles[p->cardDef->unk_2A],
-                           gUnk_02039DD4->palette, affine, flags, (u16)(p->unk_A0 - 1));
+                           gUnk_08F70A28[0].gfx, gCardBattleState->tiles[p->cardDef->unk_2A],
+                           gCardBattleState->palette, affine, flags, (u16)(p->unk_A0 - 1));
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
                            gfx, p->tiles, p->palette, affine, flags, p->unk_A0);
 
                 if (p->unk_A7 != 0) {
                     DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                               gUnk_09EE981C[p->unk_A5], gUnk_02039DD4->tiles7,
-                               gUnk_02039DD4->palette2, affine, flags, (u16)(p->unk_A0 - 2));
+                               gUnk_09EE981C[p->unk_A5], gCardBattleState->tiles7,
+                               gCardBattleState->palette2, affine, flags, (u16)(p->unk_A0 - 2));
                 } else {
                     DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                               gUnk_09EE981C[p->unk_A5], gUnk_02039DD4->tiles5,
-                               gUnk_02039DD4->palette, affine, flags, (u16)(p->unk_A0 - 2));
+                               gUnk_09EE981C[p->unk_A5], gCardBattleState->tiles5,
+                               gCardBattleState->palette, affine, flags, (u16)(p->unk_A0 - 2));
                 }
             }
         }
@@ -196,8 +196,8 @@ u8 func_08090550(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & 0x20) {
         p->unk_9C = 8;
         p->unk_9E = 8;
-        gUnk_02039DD4->unk_0D0 = 0;
-        gUnk_02039DD4->unk_0C2 = 0;
+        gCardBattleState->unk_0D0 = 0;
+        gCardBattleState->unk_0C2 = 0;
         gBtlWork->flags &= ~0x20;
         gBtlWork->flags &= ~0x80;
         gBtlWork->flags &= ~0x10000000;
@@ -544,12 +544,12 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
             id = tbl[(s16)p->args.index - 1];
         }
     } else {
-        if (gUnk_02039DD4->unk_0D7 > n) {
-            gUnk_02039DD4->unk_0D7 = n;
+        if (gCardBattleState->unk_0D7 > n) {
+            gCardBattleState->unk_0D7 = n;
         }
 
-        id = tbl[gUnk_02039DD4->unk_0D7];
-        gUnk_02039DD4->unk_0D7 = GetRandom() % n;
+        id = tbl[gCardBattleState->unk_0D7];
+        gCardBattleState->unk_0D7 = GetRandom() % n;
     }
 
     p->cardDef = &gCardDefs[id];
@@ -695,34 +695,34 @@ void func_08091234(u16 arg) {
     args.unk_08 = arg;
     args.index = gUnk_02034AB4;
     args.unk_0E = 0;
-    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B58, &args)->work;
+    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B58, &args)->work;
     gBtlWork->flags |= 0x10000000;
-    gUnk_02039DD4->unk_0E0 = 1;
+    gCardBattleState->unk_0E0 = 1;
 
     if ((gBtlWork->flags & 0x80) == 0) {
         p->unk_78 |= 0x2000;
-        gUnk_02039DD4->unk_000[0] = p;
-        gUnk_02039DD4->unk_0C2 = p->unk_A5;
-        gUnk_02039DD4->unk_0D0 = 1;
+        gCardBattleState->unk_000[0] = p;
+        gCardBattleState->unk_0C2 = p->unk_A5;
+        gCardBattleState->unk_0D0 = 1;
         gBtlWork->unk_0A4 = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if ((gBtlWork->flags & 0x20) == 0) {
 #ifdef VERSION_EU
-        if ((s16)gUnk_02039DD4->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
 #else
-        if ((s16)gUnk_02039DD4->unk_0C2 <= p->unk_A5) {
+        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif
             found = 0;
 
             if (gBtlWork->unk_0F4 == 2) {
 #ifdef VERSION_EU
-                if (gUnk_02039DD4->unk_000[0]->cardDef->unk_2A == 0 && gUnk_02039DD4->unk_0E1 == 0) {
+                if (gCardBattleState->unk_000[0]->cardDef->unk_2A == 0 && gCardBattleState->unk_0E1 == 0) {
                     found = 1;
                 }
 #else
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 0) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 0) {
                         found = 1;
                         break;
                     }
@@ -732,14 +732,14 @@ void func_08091234(u16 arg) {
 
             if (gBtlWork->unk_0F4 == 20) {
 #ifdef VERSION_EU
-                for (j = 0; j < gUnk_02039DD4->unk_0D0; j++) {
-                    if (gUnk_02039DD4->unk_000[j]->cardDef->unk_24 == 22) {
+                for (j = 0; j < gCardBattleState->unk_0D0; j++) {
+                    if (gCardBattleState->unk_000[j]->cardDef->unk_24 == 22) {
                         found = 1;
                     }
                 }
 #else
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_24 == 22) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_24 == 22) {
                         found = 1;
                         break;
                     }
@@ -749,14 +749,14 @@ void func_08091234(u16 arg) {
 
             if (gBtlWork->unk_0F4 == 29) {
 #ifdef VERSION_EU
-                for (k = 0; k < gUnk_02039DD4->unk_0D0; k++) {
-                    if (gUnk_02039DD4->unk_000[k]->cardDef->unk_2A == 2 && !(gUnk_02039DD4->unk_000[k]->cardDef->flags & 8)) {
+                for (k = 0; k < gCardBattleState->unk_0D0; k++) {
+                    if (gCardBattleState->unk_000[k]->cardDef->unk_2A == 2 && !(gCardBattleState->unk_000[k]->cardDef->flags & 8)) {
                         found = 1;
                     }
                 }
 #else
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 2) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2) {
                         found = 1;
                         break;
                     }
@@ -767,41 +767,41 @@ void func_08091234(u16 arg) {
             if (found == 0) {
                 gBtlWork->flags |= 0x800000;
 
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    gUnk_02039DD4->unk_000[i]->unk_78 |= 0x200000;
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
                 }
 
-                if ((s16)gUnk_02039DD4->unk_0C2 != p->unk_A5) {
+                if ((s16)gCardBattleState->unk_0C2 != p->unk_A5) {
                     if (p->unk_A5 == 0) {
-                        gBtlWork->unk_1CA = -(s8)gUnk_02039DD4->unk_0C2;
+                        gBtlWork->unk_1CA = -(s8)gCardBattleState->unk_0C2;
                     } else {
-                        gBtlWork->unk_1CA = gUnk_02039DD4->unk_0C2 - p->unk_A5;
+                        gBtlWork->unk_1CA = gCardBattleState->unk_0C2 - p->unk_A5;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= 0x400;
                     gBtlWork->flags |= 0x80;
                     gBtlWork->flags &= ~0x20;
-                    gUnk_02039DD4->unk_000[0] = p;
+                    gCardBattleState->unk_000[0] = p;
 
                     if (gBtlWork->unk_0F4 == 48) {
                         if (p->unk_A5 != 0) {
-                            gUnk_02039DD4->unk_0C2 = p->unk_A5 - gUnk_02039DD4->unk_0C2;
-                            p->unk_A5 = gUnk_02039DD4->unk_0C2;
+                            gCardBattleState->unk_0C2 = p->unk_A5 - gCardBattleState->unk_0C2;
+                            p->unk_A5 = gCardBattleState->unk_0C2;
                         } else {
-                            gUnk_02039DD4->unk_0C2 = 0;
+                            gCardBattleState->unk_0C2 = 0;
                         }
 
-                        if ((s16)gUnk_02039DD4->unk_0C2 < 0) {
-                            gUnk_02039DD4->unk_0C2 = 0;
+                        if ((s16)gCardBattleState->unk_0C2 < 0) {
+                            gCardBattleState->unk_0C2 = 0;
                         }
 
                         gBtlWork->unk_0F8--;
                     } else {
-                        gUnk_02039DD4->unk_0C2 = p->unk_A5;
+                        gCardBattleState->unk_0C2 = p->unk_A5;
                     }
 
-                    gUnk_02039DD4->unk_0D0 = 1;
+                    gCardBattleState->unk_0D0 = 1;
                     gBtlWork->unk_0A4 = 0;
                     p->unk_78 |= 0x2000;
                     func_0807BA54();
@@ -816,20 +816,20 @@ void func_08091234(u16 arg) {
         }
     } else {
 #ifdef VERSION_EU
-        if ((s16)gUnk_02039DD4->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
 #else
-        if ((s16)gUnk_02039DD4->unk_0C2 <= p->unk_A5) {
+        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
 #endif
             flag = 0;
 
             if (gBtlWork->unk_0F4 == 2) {
 #ifdef VERSION_EU
-                if (gUnk_02039DD4->unk_000[0]->cardDef->unk_2A == 0 && gUnk_02039DD4->unk_0E1 == 0) {
+                if (gCardBattleState->unk_000[0]->cardDef->unk_2A == 0 && gCardBattleState->unk_0E1 == 0) {
                     flag = 1;
                 }
 #else
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 0) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 0) {
                         flag = 1;
                         break;
                     }
@@ -839,8 +839,8 @@ void func_08091234(u16 arg) {
 
 #ifndef VERSION_EU
             if (gBtlWork->unk_0F4 == 54) {
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 1) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 1) {
                         flag = 1;
                         break;
                     }
@@ -849,8 +849,8 @@ void func_08091234(u16 arg) {
 
 #endif
             if (gBtlWork->unk_0F4 == 20) {
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_24 == 22) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_24 == 22) {
                         flag = 1;
                         break;
                     }
@@ -858,11 +858,11 @@ void func_08091234(u16 arg) {
             }
 
             if (gBtlWork->unk_0F4 == 29) {
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
 #ifdef VERSION_EU
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 2 && !(gUnk_02039DD4->unk_000[i]->cardDef->flags & 8)) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2 && !(gCardBattleState->unk_000[i]->cardDef->flags & 8)) {
 #else
-                    if (gUnk_02039DD4->unk_000[i]->cardDef->unk_2A == 2) {
+                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2) {
 #endif
                         flag = 1;
                         break;
@@ -873,45 +873,45 @@ void func_08091234(u16 arg) {
             if (flag == 0) {
                 gBtlWork->flags |= 0x800000;
 
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    gUnk_02039DD4->unk_000[i]->unk_78 |= 0x200000;
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
                 }
 
-                if ((s16)gUnk_02039DD4->unk_0C2 != p->unk_A5) {
+                if ((s16)gCardBattleState->unk_0C2 != p->unk_A5) {
                     if (p->unk_A5 == 0) {
-                        gBtlWork->unk_1CA = -(s8)gUnk_02039DD4->unk_0C2;
+                        gBtlWork->unk_1CA = -(s8)gCardBattleState->unk_0C2;
                     } else {
-                        gBtlWork->unk_1CA = gUnk_02039DD4->unk_0C2 - p->unk_A5;
+                        gBtlWork->unk_1CA = gCardBattleState->unk_0C2 - p->unk_A5;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= 0x400;
                     gBtlWork->flags |= 0x80;
                     gBtlWork->flags &= ~0x20;
-                    gUnk_02039DD4->unk_000[0] = p;
+                    gCardBattleState->unk_000[0] = p;
 #ifdef VERSION_EU
 
                     if (gBtlWork->unk_0F4 == 48) {
                         if (p->unk_A5 != 0) {
-                            gUnk_02039DD4->unk_0C2 = p->unk_A5 - gUnk_02039DD4->unk_0C2;
-                            p->unk_A5 = gUnk_02039DD4->unk_0C2;
+                            gCardBattleState->unk_0C2 = p->unk_A5 - gCardBattleState->unk_0C2;
+                            p->unk_A5 = gCardBattleState->unk_0C2;
                         } else {
-                            gUnk_02039DD4->unk_0C2 = 0;
+                            gCardBattleState->unk_0C2 = 0;
                         }
 
-                        if ((s16)gUnk_02039DD4->unk_0C2 < 0) {
-                            gUnk_02039DD4->unk_0C2 = 0;
+                        if ((s16)gCardBattleState->unk_0C2 < 0) {
+                            gCardBattleState->unk_0C2 = 0;
                         }
 
                         gBtlWork->unk_0F8--;
                     } else {
-                        gUnk_02039DD4->unk_0C2 = p->unk_A5;
+                        gCardBattleState->unk_0C2 = p->unk_A5;
                     }
 
 #else
-                    gUnk_02039DD4->unk_0C2 = p->unk_A5;
+                    gCardBattleState->unk_0C2 = p->unk_A5;
 #endif
-                    gUnk_02039DD4->unk_0D0 = 1;
+                    gCardBattleState->unk_0D0 = 1;
                     gBtlWork->unk_0A4 = 0;
                     p->unk_78 |= 0x2000;
                     func_0807BA54();
@@ -939,31 +939,31 @@ void func_080917C8(u16 a, u8 b) {
     arg.unk_08 = a;
     arg.index = b;
     arg.unk_0E = 0;
-    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B70, &arg)->work;
+    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B70, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {
         p->unk_78 |= 0x2000;
-        gUnk_02039DD4->unk_000[0] = p;
-        gUnk_02039DD4->unk_0C2 = p->cardDef->unk_20;
-        gUnk_02039DD4->unk_0D0 = 1;
+        gCardBattleState->unk_000[0] = p;
+        gCardBattleState->unk_0C2 = p->cardDef->unk_20;
+        gCardBattleState->unk_0D0 = 1;
         gBtlWork->unk_0A4 = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if ((gBtlWork->flags & 0x20) == 0) {
-        if (gUnk_02039DD4->unk_0CC != 2) {
-            if ((s16)gUnk_02039DD4->unk_0C2 < p->cardDef->unk_20) {
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    gUnk_02039DD4->unk_000[i]->unk_78 |= 0x200000;
+        if (gCardBattleState->unk_0CC != 2) {
+            if ((s16)gCardBattleState->unk_0C2 < p->cardDef->unk_20) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
                 }
 
                 m4aSongNumStart(SONG_SYS_CARDLOSE);
                 gBtlWork->flags |= 0x800000;
                 gBtlWork->flags |= 0x400;
                 gBtlWork->flags |= 0x80;
-                gUnk_02039DD4->unk_000[0] = p;
-                gUnk_02039DD4->unk_0C2 = p->cardDef->unk_20;
-                gUnk_02039DD4->unk_0D0 = 1;
+                gCardBattleState->unk_000[0] = p;
+                gCardBattleState->unk_0C2 = p->cardDef->unk_20;
+                gCardBattleState->unk_0D0 = 1;
                 gBtlWork->unk_0A4 = 0;
                 p->unk_78 |= 0x2000;
             }
@@ -984,31 +984,31 @@ void func_08091978(u16 a, u8 b) {
     arg.unk_08 = a;
     arg.index = b;
     arg.unk_0E = 0;
-    p = TaskCreate(&gUnk_02039DD4->tasks, &gUnk_09EE4B88, &arg)->work;
+    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B88, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {
         p->unk_78 |= 0x2000;
-        gUnk_02039DD4->unk_000[0] = p;
-        gUnk_02039DD4->unk_0C2 = p->cardDef->unk_20;
-        gUnk_02039DD4->unk_0D0 = 1;
+        gCardBattleState->unk_000[0] = p;
+        gCardBattleState->unk_0C2 = p->cardDef->unk_20;
+        gCardBattleState->unk_0D0 = 1;
         gBtlWork->unk_0A4 = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if (gBtlWork->flags & 0x20) {
         if (gBtlWork->unk_0F4 == 2) {
-            if ((s16)gUnk_02039DD4->unk_0C2 < p->cardDef->unk_20) {
-                for (i = 0; i < gUnk_02039DD4->unk_0D0; i++) {
-                    gUnk_02039DD4->unk_000[i]->unk_78 |= 0x200000;
+            if ((s16)gCardBattleState->unk_0C2 < p->cardDef->unk_20) {
+                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
                 }
 
                 m4aSongNumStart(SONG_SYS_CARDLOSE);
                 gBtlWork->flags |= 0x800000;
                 gBtlWork->flags |= 0x400;
                 gBtlWork->flags |= 0x80;
-                gUnk_02039DD4->unk_000[0] = p;
-                gUnk_02039DD4->unk_0C2 = p->cardDef->unk_20;
-                gUnk_02039DD4->unk_0D0 = 1;
+                gCardBattleState->unk_000[0] = p;
+                gCardBattleState->unk_0C2 = p->cardDef->unk_20;
+                gCardBattleState->unk_0D0 = 1;
                 gBtlWork->unk_0A4 = 0;
                 p->unk_78 |= 0x2000;
             }
@@ -1030,7 +1030,7 @@ u16 func_08091B44(void) {
         return gUnk_02034AB4;
     }
 
-    return gUnk_02039DD4->unk_0D7;
+    return gCardBattleState->unk_0D7;
 }
 
 TaskDesc gTaskDescCardEnemy = {

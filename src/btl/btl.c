@@ -725,7 +725,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
             e->unk_030 = gGameState.unk_1E2;
         } else {
             work->unk_172 = 0;
-            e->btl = gUnk_02039B9C;
+            e->btl = gRikuBtlWork;
             e->unk_02E = gGameState.unk_1F8;
             e->unk_02C = gGameState.unk_1F8;
             e->unk_030 = gGameState.unk_1FA;
@@ -943,7 +943,7 @@ BtlObj* func_0801E6DC(BtlSoraWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_172 != 0) {
-            e = gUnk_02039B9C->actor;
+            e = gRikuBtlWork->actor;
         } else {
             e = gBtlWork->actor;
         }
@@ -996,7 +996,7 @@ BtlObj* func_0801E7D4(BtlSoraWork* work) {
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_172 != 0) {
             if (gBtlWork->flags & 0x40) {
-                return gUnk_02039B9C->actor;
+                return gRikuBtlWork->actor;
             }
         } else {
             if (gBtlWork->flags & 0x20000000) {
@@ -1167,7 +1167,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (work->unk_1A8 % 20 == 0) {
             if (gBtlWork->flags & 0x4000) {
                 if (work->unk_172 != 0) {
-                    e = gUnk_02039B9C->actor;
+                    e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
                 }
@@ -3214,7 +3214,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             if (gBtlWork->flags & 0x4000) {
-                e = gUnk_02039B9C->actor;
+                e = gRikuBtlWork->actor;
 
                 if (e->unk_0E8 != 2) {
                     func_08019190(e, 10);
@@ -4778,7 +4778,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (gBtlWork->flags & 0x4000) {
                 if (work->unk_172 != 0) {
-                    e = gUnk_02039B9C->actor;
+                    e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
                 }
@@ -6746,7 +6746,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
             e->btl = gBtlWork;
         } else {
             work->unk_178 = 0;
-            e->btl = gUnk_02039B9C;
+            e->btl = gRikuBtlWork;
         }
 
         e->unk_02E = 1000;
@@ -6955,7 +6955,7 @@ BtlObj* func_0802828C(BtlRikuWork* work) {
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_178 != 0) {
             if (gBtlWork->flags & 0x40) {
-                return gUnk_02039B9C->actor;
+                return gRikuBtlWork->actor;
             }
         } else {
             if (gBtlWork->flags & 0x20000000) {
@@ -7003,7 +7003,7 @@ BtlObj* func_08028370(BtlRikuWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_178 != 0) {
-            e = gUnk_02039B9C->actor;
+            e = gRikuBtlWork->actor;
         } else {
             e = gBtlWork->actor;
         }
@@ -7245,7 +7245,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 u16 uv;
 
                 if (work->unk_178 != 0) {
-                    e = gUnk_02039B9C->actor;
+                    e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
                 }

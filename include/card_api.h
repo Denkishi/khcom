@@ -5,7 +5,7 @@
 #include "card_types.h"
 #include "card_ui_types.h"
 
-struct UnkStruct_02039DD4;
+struct CardBattleState;
 struct CardBattleWork;
 struct UnkStruct_08098670;
 struct BtlObj;
@@ -25,7 +25,7 @@ void _08085D04(u8 a);
 void func_08078E34(struct CardBattleWork* w, u8 b, u8 c);
 u8 func_0807B3C8(void);
 u8 func_0807B3E0(void);
-void func_0807B668(struct UnkStruct_02039DD4* p);
+void func_0807B668(struct CardBattleState* p);
 void func_0807E1A0(void);
 void func_0807E1AC(void);
 void func_0807E1B8(void);

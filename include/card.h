@@ -1879,7 +1879,7 @@ void Mode_Premire_0(void);
 void func_080A1DAC(EventBgEffectWork* w);
 u8 func_080A207C(EventBgEffectWork* w);
 u8 func_080A5C9C(RikuDeckMenuWork* w, void* a);
-void func_080837FC(CardDisplayWork* p);
+void UpdateRikuCardValue(CardDisplayWork* p);
 u8 map_anim_1(MapTileAnimationWork* w);
 u8 Mapcard_1(MapcardWork* w, void* a);
 void RELOAD_0(ReloadWork* w, ReloadArgs* a);
@@ -2399,7 +2399,7 @@ extern Mode gUnk_09EE8F20;
 
 extern u32 gUnk_02034AA4;
 extern u32 gUnk_02034AA8;
-extern CardDisplayWork* gUnk_02034AAC;
+extern CardDisplayWork* gRikuSelectedCard;
 extern u8 gActiveDeck;
 extern u8 gUnk_02034AB1[3];
 extern s16 gUnk_02034AB4;

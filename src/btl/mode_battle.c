@@ -171,7 +171,7 @@ void mode_battle_0(u32 mode) {
     vu32 zero;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
-    gUnk_02039B9C = 0;
+    gRikuBtlWork = 0;
     BtlWorkInit();
     func_0801C068();
     gBtlWork->unk_10C = mode;
@@ -185,10 +185,10 @@ void mode_battle_0(u32 mode) {
         gBtlWork->flags |= 0x800000000;
     case 0x9D ... 0xB1:
         gBtlWork->flags |= 0x800;
-        p = &gUnk_02039B9C;
+        p = &gRikuBtlWork;
         *p = EwramAlloc(sizeof(BtlWork));
         zero = 0;
-        CpuSet((void*)&zero, gUnk_02039B9C, CPU_SET_32BIT | CPU_SET_SRC_FIXED | (sizeof(BtlWork) / 4));
+        CpuSet((void*)&zero, gRikuBtlWork, CPU_SET_32BIT | CPU_SET_SRC_FIXED | (sizeof(BtlWork) / 4));
         break;
     }
 
@@ -559,7 +559,7 @@ void mode_battle_2(void) {
     func_0801C104();
 
     if (gBtlWork->flags & 0x800) {
-        EwramFree(gUnk_02039B9C);
+        EwramFree(gRikuBtlWork);
     }
 
     EwramFree(gBtlWork);

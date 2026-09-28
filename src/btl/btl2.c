@@ -539,7 +539,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
     }
 
     if (gBtlWork->flags & 0x800) {
-        actor = gUnk_02039B9C->actor;
+        actor = gRikuBtlWork->actor;
         work->unk_14 = 1;
     } else {
         if (gBtlWork->actor2 == 0) {
@@ -1515,7 +1515,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
 
             if (f & 0x4000) {
                 d1 = DIST(work->x, gBtlWork->actor->x);
-                d2 = DIST(work->x, gUnk_02039B9C->actor->x);
+                d2 = DIST(work->x, gRikuBtlWork->actor->x);
 
                 if (d1 == d2) {
                     bit = f & 0x1000;
@@ -1529,16 +1529,16 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 }
 
                 if (near) {
-                    if (gUnk_02039B9C->unk_0F4 == 6) {
+                    if (gRikuBtlWork->unk_0F4 == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2800;
                     }
 
-                    if (DIST(gUnk_02039B9C->actor->x, work->x) < range &&
-                        DIST(gUnk_02039B9C->actor->y, work->y) < (range >> 1) &&
-                        DIST(gUnk_02039B9C->actor->z, work->z) < 12800) {
-                        work->actor = gUnk_02039B9C->actor;
+                    if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                        DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                        DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                        work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
                         if (gBtlWork->unk_0F4 == 6) {
@@ -1565,16 +1565,16 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
                         hit = 1;
                     } else {
-                        if (gUnk_02039B9C->unk_0F4 == 6) {
+                        if (gRikuBtlWork->unk_0F4 == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2800;
                         }
 
-                        if (DIST(gUnk_02039B9C->actor->x, work->x) < range &&
-                            DIST(gUnk_02039B9C->actor->y, work->y) < (range >> 1) &&
-                            DIST(gUnk_02039B9C->actor->z, work->z) < 12800) {
-                            work->actor = gUnk_02039B9C->actor;
+                        if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                            DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                            DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                            work->actor = gRikuBtlWork->actor;
                             hit = 1;
                         }
                     }
@@ -1771,16 +1771,16 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
             if (f & 0x4000) {
                 if (f & 0x1000) {
-                    if (gUnk_02039B9C->unk_0F4 == 6) {
+                    if (gRikuBtlWork->unk_0F4 == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2000;
                     }
 
-                    if (DIST(gUnk_02039B9C->actor->x, work->x) < range &&
-                        DIST(gUnk_02039B9C->actor->y, work->y) < (range >> 1) &&
-                        DIST(gUnk_02039B9C->actor->z, work->z) < 12800) {
-                        work->actor = gUnk_02039B9C->actor;
+                    if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                        DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                        DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                        work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
                         if (gBtlWork->unk_0F4 == 6) {
@@ -1807,16 +1807,16 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
                         hit = 1;
                     } else {
-                        if (gUnk_02039B9C->unk_0F4 == 6) {
+                        if (gRikuBtlWork->unk_0F4 == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2000;
                         }
 
-                        if (DIST(gUnk_02039B9C->actor->x, work->x) < range &&
-                            DIST(gUnk_02039B9C->actor->y, work->y) < (range >> 1) &&
-                            DIST(gUnk_02039B9C->actor->z, work->z) < 12800) {
-                            work->actor = gUnk_02039B9C->actor;
+                        if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                            DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                            DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                            work->actor = gRikuBtlWork->actor;
                             hit = 1;
                         }
                     }

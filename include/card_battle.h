@@ -9,7 +9,7 @@ struct CardDisplayWork;
 struct CardSlot;
 struct CardBattleWork;
 
-typedef struct UnkStruct_02039DD4 {
+typedef struct CardBattleState {
     struct CardDisplayWork* unk_000[6];
     struct CardDisplayWork* unk_018[3];
     struct CardDisplayWork* unk_024[3];
@@ -82,12 +82,12 @@ typedef struct UnkStruct_02039DD4 {
     s16 unk_104;
     s16 unk_106;
     u8 unk_108[0x04];
-} UnkStruct_02039DD4;
+} CardBattleState;
 
-typedef char UnkStruct_02039DD4_size[(sizeof(UnkStruct_02039DD4) == 0x10C) ? 1 : -1];
+typedef char CardBattleState_size[(sizeof(CardBattleState) == 0x10C) ? 1 : -1];
 
-extern struct CardDisplayWork* gUnk_02034A98;
-extern UnkStruct_02039DD4* gUnk_02039DD4;
+extern struct CardDisplayWork* gSoraSelectedCard;
+extern CardBattleState* gCardBattleState;
 
 void func_080763F0(void);
 void func_08076318(void);

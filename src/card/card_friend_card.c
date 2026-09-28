@@ -281,7 +281,7 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
         w->unk_1C2 = 10;
 #endif
 
-        if (gUnk_02039DD4 != 0) {
+        if (gCardBattleState != 0) {
             WorldToScreen(&sx, &sy, w->unk_38, w->unk_3C,
                           w->unk_40);
             w->unk_38 = sx << 8;
@@ -387,7 +387,7 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
         w->unk_1C2 = 10;
 #endif
 
-        if (gUnk_02039DD4 != 0) {
+        if (gCardBattleState != 0) {
             WorldToScreen(&sx, &sy, w->unk_38, w->unk_3C,
                           w->unk_40);
             w->unk_38 = sx << 8;
@@ -428,7 +428,7 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
     n = w->unk_1C4;
 
     if (n > 359) {
-        *(u8*)&gUnk_02039DD4->unk_0DC -= 1;
+        *(u8*)&gCardBattleState->unk_0DC -= 1;
         return 0;
     }
 
@@ -459,9 +459,9 @@ u8 func_0809AB2C(UnkStruct_0809A02C* w) {
 
         if (w->unk_1AC < 0x800) {
             if (w->cardId >= 655 && w->cardId <= 659) {
-                gUnk_02039DD4->unk_0BC = w->cardId;
+                gCardBattleState->unk_0BC = w->cardId;
             } else {
-                gUnk_02039DD4->unk_0B8 = w->cardId;
+                gCardBattleState->unk_0B8 = w->cardId;
             }
 
             return 0;
@@ -675,7 +675,7 @@ void func_0809B200(UnkStruct_0809A02C* w) {
                                 w->scaleY, 0);
         DrawSprite(x, (u16)y - 8,
                    gUnk_08F709B0[w->cardDef->unk_2A].gfx,
-                   gUnk_02039DD4->tiles[w->cardDef->unk_2A],
+                   gCardBattleState->tiles[w->cardDef->unk_2A],
                    w->palette, affine,
                    w->unk_1D0, w->unk_1C2);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
@@ -758,7 +758,7 @@ void func_0809B59C(UnkStruct_0809A02C* w) {
     ReleaseObjPalette(w->palette3);
     ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
-    gUnk_02039DD4->unk_0D6 = 0;
+    gCardBattleState->unk_0D6 = 0;
     gBtlWork->unk_0B0--;
 }
 
@@ -777,15 +777,15 @@ void Heartless_card_3(UnkStruct_0809A02C* w) {
 void func_0809B644(void* pool, s16 x, s16 y, s16 z, u8 idx) {
     s32 args[4];
 
-    if (gUnk_02039DD4 != 0) {
-        if (gUnk_02039DD4->unk_0DA[0] <= 4) {
-            if (gUnk_02039DD4->unk_0D6 == 0) {
+    if (gCardBattleState != 0) {
+        if (gCardBattleState->unk_0DA[0] <= 4) {
+            if (gCardBattleState->unk_0D6 == 0) {
                 args[0] = (s16)x << 8;
                 args[1] = (s16)y << 8;
                 args[2] = (s16)z << 8;
                 args[3] = gUnk_09036210[idx] + GetRandom() % 9;
                 TaskCreate(pool, &gTaskDescFriendCard, args);
-                gUnk_02039DD4->unk_0D6++;
+                gCardBattleState->unk_0D6++;
             }
         }
     }
@@ -806,8 +806,8 @@ void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     s32 args[4];
 
-    if (gUnk_02039DD4 != 0 && gUnk_02039DD4->unk_0DC == 0) {
-        gUnk_02039DD4->unk_0DC++;
+    if (gCardBattleState != 0 && gCardBattleState->unk_0DC == 0) {
+        gCardBattleState->unk_0DC++;
         args[0] = (s16)a << 8;
         args[1] = (s16)b << 8;
         args[2] = (s16)c << 8;
@@ -849,11 +849,11 @@ void func_0809B76C(StockNameWork* w, const s32* src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].sprites);
-        u = LANGSTR(gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].spriteIndex], u);
+        t = (void**)LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C4].sprites);
+        u = LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C4].tiles);
+        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gCardBattleState->unk_0C4].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].sprites[gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].spriteIndex], gUnk_08F7CF18[gUnk_02039DD4->unk_0C4].tiles);
+        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gCardBattleState->unk_0C4].sprites[gUnk_08F7CF18[gCardBattleState->unk_0C4].spriteIndex], gUnk_08F7CF18[gCardBattleState->unk_0C4].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
@@ -870,7 +870,7 @@ void func_0809B76C(StockNameWork* w, const s32* src) {
 
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     w->unk_31 = 1;
-    w->unk_14 = gUnk_02039DD4->unk_0C4;
+    w->unk_14 = gCardBattleState->unk_0C4;
 }
 
 u8 func_0809B840(StockNameWork* w) {
@@ -879,7 +879,7 @@ u8 func_0809B840(StockNameWork* w) {
     void* u = LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
 #endif
 
-    if (gUnk_02039DD4->unk_0E3 == 0 || gUnk_02039DD4->unk_0C4 != w->unk_14) {
+    if (gCardBattleState->unk_0E3 == 0 || gCardBattleState->unk_0C4 != w->unk_14) {
         return 0;
     }
 
@@ -950,11 +950,11 @@ void func_0809B920(StockNameWork* w, const s32* src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].sprites);
-        u = LANGSTR(gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].spriteIndex], u);
+        t = (void**)LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C6].sprites);
+        u = LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C6].tiles);
+        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gCardBattleState->unk_0C6].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].sprites[gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].spriteIndex], gUnk_08F7CF18[gUnk_02039DD4->unk_0C6].tiles);
+        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gCardBattleState->unk_0C6].sprites[gUnk_08F7CF18[gCardBattleState->unk_0C6].spriteIndex], gUnk_08F7CF18[gCardBattleState->unk_0C6].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
@@ -971,7 +971,7 @@ void func_0809B920(StockNameWork* w, const s32* src) {
 
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     w->unk_31 = 1;
-    w->unk_14 = gUnk_02039DD4->unk_0C6;
+    w->unk_14 = gCardBattleState->unk_0C6;
 }
 
 u8 func_0809B9F4(StockNameWork* w) {
@@ -980,7 +980,7 @@ u8 func_0809B9F4(StockNameWork* w) {
     void* u = LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
 #endif
 
-    if (gUnk_02039DD4->unk_0E4 == 0 || gUnk_02039DD4->unk_0C6 != w->unk_14) {
+    if (gCardBattleState->unk_0E4 == 0 || gCardBattleState->unk_0C6 != w->unk_14) {
         return 0;
     }
 
@@ -1008,23 +1008,23 @@ u8 func_0809B9F4(StockNameWork* w) {
 }
 
 void func_0809BAA4(StockNameWork* w) {
-    if (gUnk_02039B9C->unk_0F4 != 28 && w->unk_31 != 0) {
+    if (gRikuBtlWork->unk_0F4 != 28 && w->unk_31 != 0) {
         DrawSprite(120, 14, 0, w->tiles, w->palette, 0, 0, 10);
     }
 }
 void func_0809BAE4(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gUnk_02039DD4->unk_0D9 = 0;
+    gCardBattleState->unk_0D9 = 0;
     w->unk_31 = 0;
-    gUnk_02039DD4->unk_0CA = 256;
+    gCardBattleState->unk_0CA = 256;
 }
 void func_0809BB18(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gUnk_02039DD4->unk_0D8 = 0;
+    gCardBattleState->unk_0D8 = 0;
     w->unk_31 = 0;
-    gUnk_02039DD4->unk_0C8 = 256;
+    gCardBattleState->unk_0C8 = 256;
 }
 
 void func_0809BB4C(UnkStruct_0809BB4C* w) {

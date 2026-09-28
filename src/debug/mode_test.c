@@ -98,8 +98,8 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
         work->tiles = gBtlWork->tiles2;
     } else {
         work->side = args->side;
-        gUnk_02039B9C->flags |= 0x200000;
-        work->actor = gUnk_02039B9C->actor;
+        gRikuBtlWork->flags |= 0x200000;
+        work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
     work->card = args->card;
@@ -131,7 +131,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     BtlWork* battle;
 
     body = &work->body;
-    battle = work->side != 0 ? gBtlWork : gUnk_02039B9C;
+    battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
     if (battle->flags & 0x40000000) {
         return 0;
     }
@@ -330,7 +330,7 @@ void eu_08061698(FrdPoohWork* work) {
     BtlWork* battle;
 
     ColliderUnregister(work->body.particles);
-    battle = work->side != 0 ? gBtlWork : gUnk_02039B9C;
+    battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
     battle->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

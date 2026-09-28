@@ -141,9 +141,9 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles;
     } else {
         work->unk_163 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
-        work->tiles = gUnk_02039B9C->tiles;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
+        work->tiles = gRikuBtlWork->tiles;
     }
 
     body->x = obj->unk_014;
@@ -184,7 +184,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     s32 dz;
     s32 targetZ;
     s32 pixelX;
-    owner = work->unk_163 != 0 ? gBtlWork : gUnk_02039B9C;
+    owner = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
     if (owner->flags & 0x40000000) return 0;
     if (work->unk_034 == 4) func_0802F284(body->x, body->y, body->z + 0x2000);
     else func_0802F284(body->x, body->y, body->z);
@@ -556,7 +556,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
 void task_smn_cloud_3(SmnCloudWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_163 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -587,8 +587,8 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles2;
     } else {
         work->unk_163 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
@@ -652,7 +652,7 @@ BtlObj* func_08042018(SmnBambiWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_163 != 0) {
-            p = gUnk_02039B9C->actor;
+            p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
@@ -692,7 +692,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
     SmnPrizeArgs args;
 
     body = &work->body;
-    obj = work->unk_163 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -900,7 +900,7 @@ void task_smn_bambi_2(SmnBambiWork* work) {
 void task_smn_bambi_3(SmnBambiWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_163 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -920,8 +920,8 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles2;
     } else {
         work->unk_153 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
@@ -956,7 +956,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     if (work->unk_153 != 0) {
         work->actor = gBtlWork->actor;
     } else {
-        work->actor = gUnk_02039B9C->actor;
+        work->actor = gRikuBtlWork->actor;
     }
 
     m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -1007,7 +1007,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     s32 t;
 
     body = &work->body;
-    if ((work->unk_153 != 0 ? gBtlWork->flags : gUnk_02039B9C->flags) & 0x40000000) {
+    if ((work->unk_153 != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
         return 0;
     }
 
@@ -1232,7 +1232,7 @@ void task_smn_tink_2(SmnTinkWork* work) {
 void task_smn_tink_3(SmnTinkWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_153 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     m4aSongNumStop(SONG_EF_TINK_LOOP);
     ReleaseObjPalette(work->palette);
@@ -1305,9 +1305,9 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles;
     } else {
         work->unk_155 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
-        work->tiles = gUnk_02039B9C->tiles;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
+        work->tiles = gRikuBtlWork->tiles;
     }
 
     body->x = obj->unk_014;
@@ -1340,7 +1340,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     BtlWork* obj;
 
     body = &work->body;
-    obj = work->unk_155 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         do {
@@ -1523,7 +1523,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
 void task_smn_simba_3(SmnSimbaWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_155 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1542,8 +1542,8 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles2;
     } else {
         work->unk_153 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
@@ -1572,7 +1572,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     if (work->unk_153 != 0) {
         work->actor = gBtlWork->actor;
     } else {
-        work->actor = gUnk_02039B9C->actor;
+        work->actor = gRikuBtlWork->actor;
     }
 
     m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -1593,7 +1593,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     u16 v2;
 
     body = &work->body;
-    obj = work->unk_153 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -1776,7 +1776,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
 void task_smn_mushu_3(SmnMushuWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_153 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1795,9 +1795,9 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles;
     } else {
         work->unk_155 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
-        work->tiles = gUnk_02039B9C->tiles;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
+        work->tiles = gRikuBtlWork->tiles;
     }
 
     body->x = obj->unk_014;
@@ -1830,7 +1830,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
     BtlWork* obj;
 
     body = &work->body;
-    obj = work->unk_155 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -1981,7 +1981,7 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
 void task_smn_dumbo_3(SmnDumboWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_155 != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
     ReleaseObjPalette(work->palette);
@@ -2001,9 +2001,9 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles;
     } else {
         work->unk_151 = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
-        work->tiles = gUnk_02039B9C->tiles;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
+        work->tiles = gRikuBtlWork->tiles;
     }
 
     if (obj->flags & 4) {
@@ -2054,7 +2054,7 @@ BtlObj* func_08044450(SmnGenieWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_151 != 0) {
-            p = gUnk_02039B9C->actor;
+            p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
@@ -2155,7 +2155,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    if ((work->unk_151 != 0 ? gBtlWork->flags : gUnk_02039B9C->flags) & 0x40000000) {
+    if ((work->unk_151 != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
         return 0;
     }
     func_0802F284(body->x, body->y, body->z);
@@ -2407,7 +2407,7 @@ void task_smn_genie_3(SmnGenieWork* work) {
     if (work->unk_151 != 0) {
         gBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
     } else {
-        gUnk_02039B9C->flags &= 0xFFFFFFFFFFDFFFFF;
+        gRikuBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
     }
 
     ReleaseObjPalette(work->palette);
@@ -2427,9 +2427,9 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
         work->tiles = gBtlWork->tiles;
     } else {
         work->unk_15D = args->unk_02;
-        gUnk_02039B9C->flags |= 0x200000;
-        obj = gUnk_02039B9C->actor;
-        work->tiles = gUnk_02039B9C->tiles;
+        gRikuBtlWork->flags |= 0x200000;
+        obj = gRikuBtlWork->actor;
+        work->tiles = gRikuBtlWork->tiles;
     }
 
     body->x = obj->unk_014;
@@ -2472,7 +2472,7 @@ u8 func_08044F98(SmnKingWork* work) {
 u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
     BtlWork* obj;
-    obj = work->unk_15D != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_15D != 0 ? gBtlWork : gRikuBtlWork;
     if (obj->flags & 0x40000000) {
         return 0;
     }
@@ -2614,7 +2614,7 @@ void task_smn_king_2(SmnKingWork* work) {
 void task_smn_king_3(SmnKingWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_15D != 0 ? gBtlWork : gUnk_02039B9C;
+    obj = work->unk_15D != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

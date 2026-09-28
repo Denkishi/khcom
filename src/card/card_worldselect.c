@@ -2339,15 +2339,15 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
 
     switch (w->args.unk_08) {
     case 1:
-        if (gUnk_02039DD4->unk_0D2 == w->args.unk_0E) {
-            v = gUnk_02039DD4->unk_0E7;
-            gUnk_02039DD4->unk_0E7 = 0;
+        if (gCardBattleState->unk_0D2 == w->args.unk_0E) {
+            v = gCardBattleState->unk_0E7;
+            gCardBattleState->unk_0E7 = 0;
         }
         break;
     case 2:
-        if (gUnk_02039DD4->unk_0D4 == w->args.unk_0E) {
-            v = gUnk_02039DD4->unk_0E8;
-            gUnk_02039DD4->unk_0E8 = 0;
+        if (gCardBattleState->unk_0D4 == w->args.unk_0E) {
+            v = gCardBattleState->unk_0E8;
+            gCardBattleState->unk_0E8 = 0;
         }
         break;
     }
@@ -2363,9 +2363,9 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                     }
                     break;
                 case 2:
-                    if ((gUnk_02039B9C->flags & 0x1000000) == 0) {
+                    if ((gRikuBtlWork->flags & 0x1000000) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
-                        gUnk_02039B9C->flags |= 0x1000000;
+                        gRikuBtlWork->flags |= 0x1000000;
                     }
                     break;
                 }
@@ -2435,9 +2435,9 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                     }
                     break;
                 case 2:
-                    if (gUnk_02039B9C->unk_0F4 == 9) {
+                    if (gRikuBtlWork->unk_0F4 == 9) {
                         p->unk_65 = 1;
-                    } else if (gUnk_02039B9C->unk_0F4 == 43) {
+                    } else if (gRikuBtlWork->unk_0F4 == 43) {
                         p->unk_65 = 254;
                     } else {
                         p->unk_65 = 0;
@@ -2459,7 +2459,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                 gBtlWork->flags &= ~0x1000000;
                 break;
             case 2:
-                gUnk_02039B9C->flags &= ~0x1000000;
+                gRikuBtlWork->flags &= ~0x1000000;
                 break;
             }
 
@@ -2509,7 +2509,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
             gBtlWork->flags &= ~0x1000000;
             break;
         case 2:
-            gUnk_02039B9C->flags &= ~0x1000000;
+            gRikuBtlWork->flags &= ~0x1000000;
             break;
         }
     }
@@ -2544,19 +2544,19 @@ void Reload_Gage_2(CardDisplayWork* p) {
     DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
                gfx, p->tiles2,
-               gUnk_02039DD4->palette, 0, 0x400, 50);
+               gCardBattleState->palette, 0, 0x400, 50);
 
     if (p->unk_58 > 0) {
         affine = AllocObjAffine(0, 0x100, p->unk_58, 0);
         DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                    (p->y >> 8) + (t = (gSineTable[p->unk_5F] >> 8) + 17),
-                   q->gfx, p->tiles3, gUnk_02039DD4->palette, affine,
+                   q->gfx, p->tiles3, gCardBattleState->palette, affine,
                    0x400, 49);
 
         if (p->unk_9F == 1) {
             DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                        (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                       q->gfx2, p->tiles4, gUnk_02039DD4->palette, 0,
+                       q->gfx2, p->tiles4, gCardBattleState->palette, 0,
                        0x400, 49);
         }
     }
@@ -2565,7 +2565,7 @@ void Reload_Gage_2(CardDisplayWork* p) {
         DrawSprite((p->x >> 8) + (q->unk_04 >> 8),
                    (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
                    q->gfx3, p->tiles5,
-                   gUnk_02039DD4->palette, 0, 0x400, 48);
+                   gCardBattleState->palette, 0, 0x400, 48);
     }
 
     TaskPoolDraw(&p->tasks);
@@ -2598,9 +2598,9 @@ void Reload_Gage_3(CardDisplayWork* p) {
         }
         break;
     case 2:
-        gUnk_02039B9C->flags &= ~0x1000000;
+        gRikuBtlWork->flags &= ~0x1000000;
 
-        switch (gUnk_02039B9C->unk_0F4) {
+        switch (gRikuBtlWork->unk_0F4) {
         case 9:
         case 10:
         case 25:
@@ -2608,7 +2608,7 @@ void Reload_Gage_3(CardDisplayWork* p) {
         case 40:
         case 43:
         case 54:
-            gUnk_02039B9C->unk_0F8--;
+            gRikuBtlWork->unk_0F8--;
             break;
         }
         break;
@@ -2730,7 +2730,7 @@ void* func_08095C28(CardBattleWork* w, u16 b, void* pool, u8 mode) {
         }
         break;
     case 2:
-        if (gUnk_02039B9C->unk_0F4 == 10) {
+        if (gRikuBtlWork->unk_0F4 == 10) {
             args.index = b - 2;
         } else {
             args.index = b;

@@ -259,15 +259,15 @@ void func_080195A8(void) {
     u16 t;
     u16 a;
 
-    if (gUnk_02039B9C->flags & 0x1000000) {
+    if (gRikuBtlWork->flags & 0x1000000) {
         return;
     }
-    t = gUnk_02039B9C->unk_1CC;
+    t = gRikuBtlWork->unk_1CC;
 
     if ((s16)t > 0) {
-        gUnk_02039B9C->unk_1CC = t - 1;
+        gRikuBtlWork->unk_1CC = t - 1;
 
-        if (gUnk_02039B9C->unk_1CC == 0) {
+        if (gRikuBtlWork->unk_1CC == 0) {
             func_0807E260();
         }
         return;
@@ -316,7 +316,7 @@ void func_080195A8(void) {
     if (gBtlWork->unk_0E3 > 32) {
         func_0807E200();
     }
-    p = gUnk_02039B9C->actor;
+    p = gRikuBtlWork->actor;
 
     if (p->flags & 0x200) {
         return;
@@ -347,7 +347,7 @@ void func_080195A8(void) {
 
         if (func_08081838() == 3) {
             if (func_0807E34C() == 0) {
-                gUnk_02039B9C->unk_1CC = 15;
+                gRikuBtlWork->unk_1CC = 15;
             }
         }
     }
@@ -467,7 +467,7 @@ void func_08019A30(void) {
 
     if (w->flags & 0x4000) {
         if (w->flags & 0x20000000) {
-            p = gUnk_02039B9C->actor;
+            p = gRikuBtlWork->actor;
             p->flags &= ~0x80;
             return;
         }
@@ -620,7 +620,7 @@ void _08019CB4(void) {
         gBtlWork->flags |= 0x400000ULL;
         gBtlWork->flags &= ~2ULL;
         if (gBtlWork->flags & 0x800) {
-            gUnk_02039B9C->flags &= ~2ULL;
+            gRikuBtlWork->flags &= ~2ULL;
         }
         gBtlWork->unk_0A0 = 1;
         if (gBtlWork->unk_0A4) {
@@ -929,11 +929,11 @@ void _08019CB4(void) {
                     func_08019C5C();
                 }
             } else {
-                if (gUnk_02039B9C->unk_0B2 >= (s8)count) {
-                    gUnk_02039B9C->flags &= ~2ULL;
+                if (gRikuBtlWork->unk_0B2 >= (s8)count) {
+                    gRikuBtlWork->flags &= ~2ULL;
                 }
-                if (gUnk_02039B9C->flags & 2) {
-                    gUnk_02039B9C->actor->flags |= 1;
+                if (gRikuBtlWork->flags & 2) {
+                    gRikuBtlWork->actor->flags |= 1;
                 } else {
                     func_08019C5C();
                 }
@@ -1969,7 +1969,7 @@ void func_0801C068(void) {
         gBtlWork->tiles2 = AllocObjTiles(0xA00, 0);
 
         if (gBtlWork->flags & 0x4000) {
-            gUnk_02039B9C->tiles = AllocObjTiles(0xC80, 0);
+            gRikuBtlWork->tiles = AllocObjTiles(0xC80, 0);
         }
     }
     gBtlWork->flags |= 0x1000000000000;
@@ -1984,7 +1984,7 @@ void func_0801C104(void) {
             ReleaseObjTiles(gBtlWork->tiles2);
 
             if (gBtlWork->flags & 0x4000) {
-                ReleaseObjTiles(gUnk_02039B9C->tiles);
+                ReleaseObjTiles(gRikuBtlWork->tiles);
             }
         }
         gBtlWork->flags &= ~0x1000000000000;

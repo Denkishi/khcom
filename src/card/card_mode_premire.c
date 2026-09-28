@@ -167,39 +167,39 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
     switch (w->unk_19) {
     case 1:
         w->x = 48;
-        w->unk_1E = gUnk_02039DD4->unk_0CC;
+        w->unk_1E = gCardBattleState->unk_0CC;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
+        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
 #endif
-        tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_08);
-        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_0C], LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_00));
+        tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_08);
+        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_0C], LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_00));
 #ifdef VERSION_EU
         UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
+        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
         UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
 
-        if (gUnk_02039DD4->unk_0CC == 0) {
+        if (gCardBattleState->unk_0CC == 0) {
             w->unk_27 = 0;
         }
         break;
     case 2:
         w->x = 162;
-        w->unk_1E = gUnk_02039DD4->unk_0CE;
+        w->unk_1E = gCardBattleState->unk_0CE;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
+        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
 #endif
-        tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_08);
-        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_0C], LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_00));
+        tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_08);
+        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_0C], LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_00));
 #ifdef VERSION_EU
         UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
+        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
         UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
 
-        if (gUnk_02039DD4->unk_0CE == 0) {
+        if (gCardBattleState->unk_0CE == 0) {
             w->unk_27 = 0;
         }
         break;
@@ -214,7 +214,7 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
 u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
     u8 done;
     s32 div;
-    UnkStruct_02039DD4* d;
+    CardBattleState* d;
 
     done = func_0809DE18(w);
 
@@ -230,7 +230,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
     case 1:
         div = gUnk_08F7CBA8[gBtlWork->unk_0F4].unk_0E << 8;
         w->unk_1C = (u32)(((s16)gBtlWork->unk_0F8 << 16) / div) >> 3;
-        d = gUnk_02039DD4;
+        d = gCardBattleState;
 
         if (d->unk_0CC == 0) {
             d->unk_0EB = 0;
@@ -257,9 +257,9 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
         func_0806BA0C((s16)gBtlWork->unk_0F8, &w->unk_22);
         break;
     case 2:
-        div = gUnk_08F7CBA8[gUnk_02039B9C->unk_0F4].unk_0E << 8;
-        w->unk_1C = (u32)(((s16)gUnk_02039B9C->unk_0F8 << 16) / div) >> 3;
-        d = gUnk_02039DD4;
+        div = gUnk_08F7CBA8[gRikuBtlWork->unk_0F4].unk_0E << 8;
+        w->unk_1C = (u32)(((s16)gRikuBtlWork->unk_0F8 << 16) / div) >> 3;
+        d = gCardBattleState;
 
         if (d->unk_0CE == 0) {
             d->unk_0EC = 0;
@@ -276,14 +276,14 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
             return 0;
         }
 
-        if ((s16)gUnk_02039B9C->unk_0F8 <= 0) {
+        if ((s16)gRikuBtlWork->unk_0F8 <= 0) {
             d->unk_0CE = 0;
-            gUnk_02039B9C->unk_0F4 = 0;
+            gRikuBtlWork->unk_0F4 = 0;
             d->unk_0EC = 0;
             return 0;
         }
 
-        func_0806BA0C((s16)gUnk_02039B9C->unk_0F8, &w->unk_22);
+        func_0806BA0C((s16)gRikuBtlWork->unk_0F8, &w->unk_22);
         break;
     }
 
@@ -318,23 +318,23 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
 
     switch (w->unk_19) {
     case 1:
-        if (gUnk_02039DD4->unk_0CC != 37) {
-            w->unk_1E = gUnk_02039DD4->unk_0CC;
-            if (gUnk_02039DD4->unk_0CC == 0) {
-                gUnk_02039DD4->unk_0EB = 0;
+        if (gCardBattleState->unk_0CC != 37) {
+            w->unk_1E = gCardBattleState->unk_0CC;
+            if (gCardBattleState->unk_0CC == 0) {
+                gCardBattleState->unk_0EB = 0;
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
+            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
 #endif
-            tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CC].unk_00));
+            tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_08);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_0C],
+                         LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_00));
 #ifdef VERSION_EU
             UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
                          gUnkEu_09F72CB0[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CC);
+            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
             UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
@@ -347,23 +347,23 @@ u8 func_0809DE30(HcEffectNameWork* w, void* a) {
         }
         break;
     case 2:
-        if (gUnk_02039DD4->unk_0CE != 37) {
-            w->unk_1E = gUnk_02039DD4->unk_0CE;
-            if (gUnk_02039DD4->unk_0CE == 0) {
-                gUnk_02039DD4->unk_0EB = 0;
+        if (gCardBattleState->unk_0CE != 37) {
+            w->unk_1E = gCardBattleState->unk_0CE;
+            if (gCardBattleState->unk_0CE == 0) {
+                gCardBattleState->unk_0EB = 0;
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
+            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
 #endif
-            tiles = LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[gUnk_02039DD4->unk_0CE].unk_00));
+            tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_08);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_0C],
+                         LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_00));
 #ifdef VERSION_EU
             UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
                          gUnkEu_09F72CB0[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64(w, gUnk_02039DD4->unk_0CE);
+            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
             UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
@@ -409,9 +409,9 @@ void HCEffectName_3(HcEffectNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles3);
     ReleaseObjPalette(w->palette);
-    gUnk_02039DD4->unk_0D8 = 0;
-    gUnk_02039DD4->unk_0E5 = 0;
-    gUnk_02039DD4->unk_0C8 = 256;
+    gCardBattleState->unk_0D8 = 0;
+    gCardBattleState->unk_0E5 = 0;
+    gCardBattleState->unk_0C8 = 256;
 }
 
 void NumberPlus_0(NumberPlusWork* w, NumberPlusArgs* args) {

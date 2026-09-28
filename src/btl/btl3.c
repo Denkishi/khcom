@@ -261,7 +261,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     } else {
         work->unk_3D = 0;
         work->tiles2 = gBtlWork->tiles2;
-        work->actor = gUnk_02039B9C->actor;
+        work->actor = gRikuBtlWork->actor;
         work->palette = LoadObjPalette(gUnk_096FAC64, 32);
     }
 
@@ -346,7 +346,7 @@ BtlObj* func_08040458(BtlRaidWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_3D != 0) {
-            obj = gUnk_02039B9C->actor;
+            obj = gRikuBtlWork->actor;
         } else {
             obj = gBtlWork->actor;
         }
@@ -372,7 +372,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     s32 y;
     s32 z;
 
-    if ((work->unk_3D != 0 ? gBtlWork : gUnk_02039B9C)->flags & 0x40000000) {
+    if ((work->unk_3D != 0 ? gBtlWork : gRikuBtlWork)->flags & 0x40000000) {
         return 0;
     }
 
@@ -707,7 +707,7 @@ BtlObj* func_08040C8C(SmnCloudWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_163 != 0) {
-            p = gUnk_02039B9C->actor;
+            p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
@@ -750,7 +750,7 @@ BtlObj* func_08040D54(SmnCloudWork* work) {
 
     if (gBtlWork->flags & 0x4000) {
         if (work->unk_163 != 0) {
-            p = gUnk_02039B9C->actor;
+            p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }

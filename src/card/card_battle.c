@@ -37,12 +37,12 @@ void func_080763AC(void);
 void func_080763B8(void);
 void func_080763C4(void);
 void func_08076438(void);
-void func_08076458(void);
+void CreateCardBattleState(void);
 
-CardDisplayWork* gUnk_02034A98;
+CardDisplayWork* gSoraSelectedCard;
 u32 gUnk_02034A9C;
 u32 gUnk_02034AA0;
-UnkStruct_02039DD4* gUnk_02039DD4 EWRAM_COMMON(4);
+CardBattleState* gCardBattleState EWRAM_COMMON(4);
 
 const s32 gUnk_09033FA8[4] = {
     -0x2000, 0, 0x1000, 0x8000,
@@ -73,7 +73,7 @@ void func_0807629C(void) {
 }
 
 u8 func_080762A8(void) {
-    return gUnk_02039DD4->unk_0D2;
+    return gCardBattleState->unk_0D2;
 }
 
 void func_080762B8(void) {
@@ -167,7 +167,7 @@ void func_080763C4(void) {
 }
 
 u8 func_080763D0(void) {
-    if (gUnk_02034A98 != 0 && (gUnk_02034A98->unk_78 & 0x100000)) {
+    if (gSoraSelectedCard != 0 && (gSoraSelectedCard->unk_78 & 0x100000)) {
         return 1;
     }
 
@@ -175,14 +175,14 @@ u8 func_080763D0(void) {
 }
 
 void func_080763F0(void) {
-    if (gUnk_02034A98 != 0) {
-        if ((gUnk_02034A98->unk_78 & 0x01000044) == 0x01000044) {
-            gUnk_02039DD4->unk_0E7 = 1;
+    if (gSoraSelectedCard != 0) {
+        if ((gSoraSelectedCard->unk_78 & 0x01000044) == 0x01000044) {
+            gCardBattleState->unk_0E7 = 1;
         } else {
-            gUnk_02039DD4->unk_0E7 = 0;
+            gCardBattleState->unk_0E7 = 0;
         }
     } else {
-        gUnk_02039DD4->unk_0E7 = 0;
+        gCardBattleState->unk_0E7 = 0;
     }
 }
 
@@ -190,89 +190,89 @@ void func_08076438(void) {
 }
 
 u8 func_0807643C(void) {
-    if (gUnk_02034A98 != 0) {
-        return gUnk_02034A98->unk_78 & 2;
+    if (gSoraSelectedCard != 0) {
+        return gSoraSelectedCard->unk_78 & 2;
     }
 
     return 0;
 }
 
-void func_08076458(void) {
+void CreateCardBattleState(void) {
     u32 zero;
 
-    gUnk_02039DD4 = EwramAlloc(sizeof(UnkStruct_02039DD4));
+    gCardBattleState = EwramAlloc(sizeof(CardBattleState));
     zero = 0;
-    CpuSet(&zero, gUnk_02039DD4, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_02039DD4) / 4);
-    gUnk_02039DD4->unk_000[0] = 0;
-    gUnk_02039DD4->unk_000[1] = 0;
-    gUnk_02039DD4->unk_000[2] = 0;
-    gUnk_02039DD4->unk_000[3] = 0;
-    gUnk_02039DD4->unk_000[4] = 0;
-    gUnk_02039DD4->unk_000[5] = 0;
-    gUnk_02039DD4->unk_0B0 = 145;
-    gUnk_02039DD4->unk_0B4 = 145;
-    gUnk_02039DD4->unk_0B8 = 950;
-    gUnk_02039DD4->unk_0BC = 950;
-    gUnk_02039DD4->unk_0C0 = 0;
-    gUnk_02039DD4->unk_0C2 = 0;
-    gUnk_02039DD4->unk_0C4 = 106;
-    gUnk_02039DD4->unk_0C6 = 106;
-    gUnk_02039DD4->unk_0C8 = 256;
-    gUnk_02039DD4->unk_0CA = 256;
-    gUnk_02039DD4->unk_0CC = 0;
-    gUnk_02039DD4->unk_0CE = 0;
-    gUnk_02039DD4->unk_0D0 = 0;
-    gUnk_02039DD4->unk_0D1 = 0;
-    gUnk_02039DD4->unk_0D2 = 0;
-    gUnk_02039DD4->unk_0D3 = 0;
-    gUnk_02039DD4->unk_0D4 = 0;
-    gUnk_02039DD4->unk_0D5 = 0;
-    gUnk_02039DD4->unk_0D6 = 0;
-    gUnk_02039DD4->unk_0D7 = 0;
-    gUnk_02039DD4->unk_0D8 = 0;
-    gUnk_02039DD4->unk_0D9 = 0;
-    gUnk_02039DD4->unk_0DC = 0;
-    gUnk_02039DD4->unk_0E0 = 0;
-    gUnk_02039DD4->unk_0E1 = 0;
-    gUnk_02039DD4->unk_0E2 = 0;
-    gUnk_02039DD4->unk_0E0 = 0;
-    gUnk_02039DD4->unk_0E3 = 0;
-    gUnk_02039DD4->unk_0E4 = 0;
-    gUnk_02039DD4->unk_0E5 = 0;
-    gUnk_02039DD4->unk_0E6 = 0;
-    gUnk_02039DD4->unk_0E9 = 0;
-    gUnk_02039DD4->unk_0DA[0] = 0;
-    gUnk_02039DD4->unk_0DA[1] = 0;
-    gUnk_02039DD4->unk_0EA = 0;
-    gUnk_02039DD4->unk_0EB = 0;
-    gUnk_02039DD4->unk_0EC = 0;
-    gUnk_02039DD4->unk_0ED = 0;
-    gUnk_02039DD4->unk_0DE = 0;
-    gUnk_02039DD4->unk_0DF = 0;
-    gUnk_02039DD4->unk_0EE = 0;
-    gUnk_02039DD4->unk_0F0 = 0;
-    gUnk_02039DD4->unk_0F4 = 0;
-    gUnk_02039DD4->unk_0F8 = 0;
-    gUnk_02039DD4->unk_0FC = 0;
-    gUnk_02039DD4->unk_0FE = 0;
-    gUnk_02039DD4->unk_100 = 4;
-    gUnk_02039DD4->unk_102 = 4;
-    gUnk_02039DD4->unk_104 = 2;
-    gUnk_02039DD4->unk_106 = 2;
-    gUnk_02039DD4->unk_108[0] = 0;
-    gUnk_02039DD4->unk_108[1] = 0;
-    TaskPoolInit(&gUnk_02039DD4->tasks, 6);
-    gUnk_02039DD4->tiles[0] = LoadObjTiles(gUnk_08F709B0[0].tiles, 640);
-    gUnk_02039DD4->tiles[1] = LoadObjTiles(gUnk_08F709B0[1].tiles, 640);
-    gUnk_02039DD4->tiles[2] = LoadObjTiles(gUnk_08F709B0[2].tiles, 640);
-    gUnk_02039DD4->tiles[3] = LoadObjTiles(gUnk_08F709B0[3].tiles, 640);
-    gUnk_02039DD4->tiles5 = LoadObjTiles(gUnk_0905EAE8, 320);
-    gUnk_02039DD4->tiles6 = LoadObjTiles(gUnk_0905ED36, 320);
-    gUnk_02039DD4->tiles7 = LoadObjTiles(gUnk_0905EEE6, 320);
-    gUnk_02039DD4->palette = LoadObjPalette(gCard00Palette, 32);
-    gUnk_02039DD4->palette2 = LoadObjPalette(gBStatesPalette, 32);
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)gUnk_02039DD4->palette)->index + 16, 1);
-    func_0807B668(gUnk_02039DD4);
+    CpuSet(&zero, gCardBattleState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleState) / 4);
+    gCardBattleState->unk_000[0] = 0;
+    gCardBattleState->unk_000[1] = 0;
+    gCardBattleState->unk_000[2] = 0;
+    gCardBattleState->unk_000[3] = 0;
+    gCardBattleState->unk_000[4] = 0;
+    gCardBattleState->unk_000[5] = 0;
+    gCardBattleState->unk_0B0 = 145;
+    gCardBattleState->unk_0B4 = 145;
+    gCardBattleState->unk_0B8 = 950;
+    gCardBattleState->unk_0BC = 950;
+    gCardBattleState->unk_0C0 = 0;
+    gCardBattleState->unk_0C2 = 0;
+    gCardBattleState->unk_0C4 = 106;
+    gCardBattleState->unk_0C6 = 106;
+    gCardBattleState->unk_0C8 = 256;
+    gCardBattleState->unk_0CA = 256;
+    gCardBattleState->unk_0CC = 0;
+    gCardBattleState->unk_0CE = 0;
+    gCardBattleState->unk_0D0 = 0;
+    gCardBattleState->unk_0D1 = 0;
+    gCardBattleState->unk_0D2 = 0;
+    gCardBattleState->unk_0D3 = 0;
+    gCardBattleState->unk_0D4 = 0;
+    gCardBattleState->unk_0D5 = 0;
+    gCardBattleState->unk_0D6 = 0;
+    gCardBattleState->unk_0D7 = 0;
+    gCardBattleState->unk_0D8 = 0;
+    gCardBattleState->unk_0D9 = 0;
+    gCardBattleState->unk_0DC = 0;
+    gCardBattleState->unk_0E0 = 0;
+    gCardBattleState->unk_0E1 = 0;
+    gCardBattleState->unk_0E2 = 0;
+    gCardBattleState->unk_0E0 = 0;
+    gCardBattleState->unk_0E3 = 0;
+    gCardBattleState->unk_0E4 = 0;
+    gCardBattleState->unk_0E5 = 0;
+    gCardBattleState->unk_0E6 = 0;
+    gCardBattleState->unk_0E9 = 0;
+    gCardBattleState->unk_0DA[0] = 0;
+    gCardBattleState->unk_0DA[1] = 0;
+    gCardBattleState->unk_0EA = 0;
+    gCardBattleState->unk_0EB = 0;
+    gCardBattleState->unk_0EC = 0;
+    gCardBattleState->unk_0ED = 0;
+    gCardBattleState->unk_0DE = 0;
+    gCardBattleState->unk_0DF = 0;
+    gCardBattleState->unk_0EE = 0;
+    gCardBattleState->unk_0F0 = 0;
+    gCardBattleState->unk_0F4 = 0;
+    gCardBattleState->unk_0F8 = 0;
+    gCardBattleState->unk_0FC = 0;
+    gCardBattleState->unk_0FE = 0;
+    gCardBattleState->unk_100 = 4;
+    gCardBattleState->unk_102 = 4;
+    gCardBattleState->unk_104 = 2;
+    gCardBattleState->unk_106 = 2;
+    gCardBattleState->unk_108[0] = 0;
+    gCardBattleState->unk_108[1] = 0;
+    TaskPoolInit(&gCardBattleState->tasks, 6);
+    gCardBattleState->tiles[0] = LoadObjTiles(gUnk_08F709B0[0].tiles, 640);
+    gCardBattleState->tiles[1] = LoadObjTiles(gUnk_08F709B0[1].tiles, 640);
+    gCardBattleState->tiles[2] = LoadObjTiles(gUnk_08F709B0[2].tiles, 640);
+    gCardBattleState->tiles[3] = LoadObjTiles(gUnk_08F709B0[3].tiles, 640);
+    gCardBattleState->tiles5 = LoadObjTiles(gUnk_0905EAE8, 320);
+    gCardBattleState->tiles6 = LoadObjTiles(gUnk_0905ED36, 320);
+    gCardBattleState->tiles7 = LoadObjTiles(gUnk_0905EEE6, 320);
+    gCardBattleState->palette = LoadObjPalette(gCard00Palette, 32);
+    gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, 32);
+    FadeSetPaletteExcluded(((UnkStruct_080038C8*)gCardBattleState->palette)->index + 16, 1);
+    func_0807B668(gCardBattleState);
 }
 
 CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
@@ -490,10 +490,10 @@ void func_0807682C(CardBattleWork* w, u8 slot) {
     }
     w->unk_34[slot] = ListPoolFirst(&w->unk_54[slot]);
     {
-        CardDisplayWork** active = &gUnk_02034A98;
+        CardDisplayWork** active = &gSoraSelectedCard;
         *active = ListPoolFirst(&w->unk_54[slot]);
     }
-    gUnk_02034A98->unk_78 |= 0x804;
+    gSoraSelectedCard->unk_78 |= 0x804;
 }
 
 void func_08091B28(void);
@@ -506,7 +506,7 @@ static void cardbattle_0(CardBattleWork* w) {
     u8 i;
 
     CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
-    gUnk_02039DD4->unk_05C = w;
+    gCardBattleState->unk_05C = w;
     gBtlWork->unk_0F4 = 0;
     func_08091B28();
     func_080782EC();
@@ -555,7 +555,7 @@ static void cardbattle_0(CardBattleWork* w) {
         func_080785B8(w, 1);
     }
     w->unk_9C[2] = w->unk_9C[1] = w->unk_9C[0] = 0;
-    func_08076458();
+    CreateCardBattleState();
     CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
     ListPoolInit(&w->unk_54[0]);
     ListPoolInit(&w->unk_54[1]);
@@ -631,8 +631,8 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
         w->unk_C4[3]--;
     }
     if (w->unk_C9 == 0) {
-        if (gUnk_02034A98->unk_78 & 0x1000000) {
-            if (gUnk_02034A98->unk_78 & 0x4000000) {
+        if (gSoraSelectedCard->unk_78 & 0x1000000) {
+            if (gSoraSelectedCard->unk_78 & 0x4000000) {
             if (gBtlWork->unk_0F4 == 9) {
                 func_0807A620(w);
                 TaskPoolUpdate(&w->tasks);
@@ -645,9 +645,9 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                         }
                     }
                 }
-                gUnk_02039DD4->unk_0FC = w->unk_9C[w->unk_B8];
-                gUnk_02039DD4->unk_0F4 = 0;
-                gUnk_02039DD4->unk_100 = 4;
+                gCardBattleState->unk_0FC = w->unk_9C[w->unk_B8];
+                gCardBattleState->unk_0F4 = 0;
+                gCardBattleState->unk_100 = 4;
                 func_08078914(w, 0);
                 w->unk_B0[0] = func_08078754(w, 0);
                 w->unk_94[0] = 0;
@@ -665,14 +665,14 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                         }
                     }
                 }
-                gUnk_02039DD4->unk_0FC = w->unk_9C[w->unk_B8];
-                gUnk_02039DD4->unk_0F4 = 0;
-                gUnk_02039DD4->unk_100 = 4;
+                gCardBattleState->unk_0FC = w->unk_9C[w->unk_B8];
+                gCardBattleState->unk_0F4 = 0;
+                gCardBattleState->unk_100 = 4;
                 func_080788CC(w, 0);
                 w->unk_94[w->unk_B8] = 0;
                 w->unk_B0[w->unk_B8] = 0;
                 w->unk_C0[w->unk_B8] = 1;
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
                 gUnk_02034A9C = 0;
             }
             }
@@ -683,40 +683,40 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
         case 1:
             gUnk_02034A9C = 0;
             if (w->unk_B0[w->unk_B8] > 2) {
-                if (gUnk_02034A98->unk_78 & 0x40) {
+                if (gSoraSelectedCard->unk_78 & 0x40) {
                     func_08078FFC(w, w->unk_B8);
                 }
-            } else if (w->unk_B0[w->unk_B8] > 1 && (gUnk_02034A98->unk_78 & 0x40)) {
+            } else if (w->unk_B0[w->unk_B8] > 1 && (gSoraSelectedCard->unk_78 & 0x40)) {
                 func_08078D98(w, w->unk_B8, 4);
             }
             break;
         case 2:
             gUnk_02034A9C = 0;
             if (w->unk_B0[w->unk_B8] > 2) {
-                if (gUnk_02034A98->unk_78 & 0x40) {
+                if (gSoraSelectedCard->unk_78 & 0x40) {
                     func_08078E34(w, w->unk_B8, 4);
                 }
-            } else if (w->unk_B0[w->unk_B8] > 1 && (gUnk_02034A98->unk_78 & 0x40)) {
+            } else if (w->unk_B0[w->unk_B8] > 1 && (gSoraSelectedCard->unk_78 & 0x40)) {
                 func_08078D98(w, w->unk_B8, 4);
             }
             break;
         case 4:
             gUnk_02034A9C = 0;
-            if (!(gUnk_02034A98->unk_78 & 0x100000)) {
+            if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
                 if (w->unk_B9 == 3) {
                     func_0807ABC8(w);
-                } else if (gUnk_02034A98->cardDef->unk_2A == 3) {
+                } else if (gSoraSelectedCard->cardDef->unk_2A == 3) {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 } else if (w->unk_C0[w->unk_B8] == 0) {
-                    if (!(gUnk_02034A98->unk_78 & 2)) {
+                    if (!(gSoraSelectedCard->unk_78 & 2)) {
                         if (func_0807B60C() != 0) {
-                            if (w->unk_B0[w->unk_B8] > 0 && w->unk_B9 <= 2 && gUnk_02039DD4->unk_0E1 == 0) {
+                            if (w->unk_B0[w->unk_B8] > 0 && w->unk_B9 <= 2 && gCardBattleState->unk_0E1 == 0) {
                                 func_0807A188(w);
                             }
-                        } else if (gUnk_02034A98->unk_78 & 0x20) {
+                        } else if (gSoraSelectedCard->unk_78 & 0x20) {
                             m4aSongNumStart(SONG_SYS_BEEP);
                         }
-                    } else if (gUnk_02034A98->unk_78 & 0x20) {
+                    } else if (gSoraSelectedCard->unk_78 & 0x20) {
                         m4aSongNumStart(SONG_SYS_BEEP);
                     }
                 }
@@ -729,31 +729,31 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             break;
         case 3:
             gUnk_02034A9C = 0;
-            if (gUnk_02034A98->cardDef->unk_2A != 3) {
-                if (!(gUnk_02034A98->unk_78 & 0x100000)) {
+            if (gSoraSelectedCard->cardDef->unk_2A != 3) {
+                if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
                     if (w->unk_C0[w->unk_B8] == 0) {
-                        if (gUnk_02034A98->cardDef->flags & 0x10) {
+                        if (gSoraSelectedCard->cardDef->flags & 0x10) {
                             func_08079ECC(w);
-                        } else if (!(gUnk_02034A98->unk_78 & 2)) {
+                        } else if (!(gSoraSelectedCard->unk_78 & 2)) {
                             if (func_0807B60C() != 0) {
                                 func_08079600(w);
-                            } else if (gUnk_02034A98->unk_78 & 0x20) {
+                            } else if (gSoraSelectedCard->unk_78 & 0x20) {
                                 m4aSongNumStart(SONG_SYS_BEEP);
                             }
-                        } else if (gUnk_02034A98->unk_78 & 0x20) {
+                        } else if (gSoraSelectedCard->unk_78 & 0x20) {
                             m4aSongNumStart(SONG_SYS_BEEP);
                         }
                     }
                 } else {
                     goto locked;
                 }
-            } else if (!(gUnk_02034A98->unk_78 & 0x100000)) {
+            } else if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
                 func_08079B3C(w);
             } else {
             locked:
                 if (gGameState.flags & 8) {
                     func_0807A620(w);
-                    gUnk_02034A98 = 0;
+                    gSoraSelectedCard = 0;
                     gBtlWork->flags |= 0x80000000LL;
                     w->unk_B0[w->unk_B8] = 0;
                     w->unk_C0[w->unk_B8] = 1;
@@ -816,14 +816,14 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             gUnk_02034AA0 = 0;
             if (w->unk_B8 == 0) {
                 func_0807A620(w);
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             } else {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             }
             gBtlWork->flags |= 0x80000000LL;
             w->unk_B0[0] = 0;
@@ -837,14 +837,14 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             gUnk_02034AA0 = 0;
             if (w->unk_B8 == 0) {
                 func_0807A620(w);
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             } else {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
@@ -858,14 +858,14 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             gUnk_02034AA0 = 0;
             if (w->unk_B8 == 0) {
                 func_0807A620(w);
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             } else {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
@@ -884,7 +884,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -908,7 +908,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -934,7 +934,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -958,7 +958,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -984,7 +984,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -1008,7 +1008,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -1034,7 +1034,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
@@ -1055,14 +1055,14 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             if (w->unk_B8 == 0) {
                 w->unk_9C[0] = 0;
                 func_0807A620(w);
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             } else {
                 func_0807A620(w);
                 w->unk_B8 = 0;
 #ifdef VERSION_EU
-                gUnk_02039DD4->unk_0D2 = 0;
+                gCardBattleState->unk_0D2 = 0;
 #endif
-                gUnk_02034A98 = 0;
+                gSoraSelectedCard = 0;
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
@@ -1076,23 +1076,23 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
             gUnk_02034AA0 = 0;
             break;
         }
-        if (gUnk_02039DD4->unk_0B8 != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
+        if (gCardBattleState->unk_0B8 != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
             gBtlWork->flags |= 0x20000000000LL;
             func_08078BB4(w);
         }
-        if (gUnk_02039DD4->unk_0BC != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
+        if (gCardBattleState->unk_0BC != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
             func_08078BB4(w);
         }
         if (w->unk_C0[w->unk_B8] != 0) {
-            if (gUnk_02034A98 != 0) {
-                if (gUnk_02034A98->unk_78 & 0x4000000) {
-                    gUnk_02034A98->unk_78 |= 0x4000;
+            if (gSoraSelectedCard != 0) {
+                if (gSoraSelectedCard->unk_78 & 0x4000000) {
+                    gSoraSelectedCard->unk_78 |= 0x4000;
                     func_080789E4(w);
                     w->unk_C0[w->unk_B8] = 0;
                     w->unk_C4[0] = 1;
                     SetTaskUpdate(task, (TaskUpdateFunc)func_08077F44);
                     TaskPoolUpdate(&w->tasks);
-                    TaskPoolUpdate(&gUnk_02039DD4->tasks);
+                    TaskPoolUpdate(&gCardBattleState->tasks);
                     args.slot = w->unk_B8;
                     args.state = &w->unk_C4[0];
                     args.mode = 1;
@@ -1104,12 +1104,12 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 w->unk_C0[w->unk_B8] = 0;
                 SetTaskUpdate(task, (TaskUpdateFunc)func_08077F44);
                 TaskPoolUpdate(&w->tasks);
-                TaskPoolUpdate(&gUnk_02039DD4->tasks);
+                TaskPoolUpdate(&gCardBattleState->tasks);
                 return 1;
             }
-        } else if (gUnk_02034A98 != 0 && (gUnk_02034A98->unk_78 & 0x42) == 0x42 && func_080787B8(w, w->unk_B8) != 0) {
+        } else if (gSoraSelectedCard != 0 && (gSoraSelectedCard->unk_78 & 0x42) == 0x42 && func_080787B8(w, w->unk_B8) != 0) {
             w->unk_C0[w->unk_B8] = 1;
-            gUnk_02034A98->unk_A1 = 7;
+            gSoraSelectedCard->unk_A1 = 7;
             actor = gBtlWork->actor;
             if (actor->unk_02C > 3) {
                 actor->unk_02C -= 2;
@@ -1133,23 +1133,23 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 result = func_080AD144(w->unk_28, w->unk_B9, w->unk_BA, &data, flag, 0);
             }
             if (result != 108) {
-                gUnk_02039DD4->unk_0C4 = result;
+                gCardBattleState->unk_0C4 = result;
                 if (result <= 105) {
                     if (result != 107) {
                         for (i = 0; i < w->unk_B9; i++) {
                             w->unk_28[i]->unk_78 |= 0x10000000;
                         }
-                        if (gUnk_02039DD4->unk_0E3 == 0) {
+                        if (gCardBattleState->unk_0E3 == 0) {
                             TaskCreate(&w->tasks, &gUnk_09EE77D4, 0);
-                            gUnk_02039DD4->unk_0E3 = 1;
+                            gCardBattleState->unk_0E3 = 1;
                         }
                     } else {
                         for (i = 0; i < w->unk_B9; i++) {
                             w->unk_28[i]->unk_78 |= 0x10000000;
                         }
-                        if (gUnk_02039DD4->unk_0E3 == 0) {
+                        if (gCardBattleState->unk_0E3 == 0) {
                             TaskCreate(&w->tasks, &gUnk_09EE77D4, &data);
-                            gUnk_02039DD4->unk_0E3 = 1;
+                            gCardBattleState->unk_0E3 = 1;
                         }
                     }
                 } else if (w->unk_B9 == 3) {
@@ -1183,7 +1183,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                     case 41:
                     case 43:
                     case 44:
-                        gUnk_02039DD4->unk_0C4 = kind;
+                        gCardBattleState->unk_0C4 = kind;
                         found = 1;
                         break;
                     }
@@ -1191,16 +1191,16 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                         for (i = 0; i < w->unk_B9; i++) {
                             w->unk_28[i]->unk_78 &= ~0x10000000;
                         }
-                        if (gUnk_02039DD4->unk_0E3 != 0) {
-                            gUnk_02039DD4->unk_0E3 = 0;
+                        if (gCardBattleState->unk_0E3 != 0) {
+                            gCardBattleState->unk_0E3 = 0;
                         }
                     } else {
                         for (i = 0; i < w->unk_B9; i++) {
                             w->unk_28[i]->unk_78 |= 0x10000000;
                         }
-                        if (gUnk_02039DD4->unk_0E3 == 0) {
+                        if (gCardBattleState->unk_0E3 == 0) {
                             TaskCreate(&w->tasks, &gUnk_09EE77D4, 0);
-                            gUnk_02039DD4->unk_0E3 = 1;
+                            gCardBattleState->unk_0E3 = 1;
                         }
                     }
                 }
@@ -1209,8 +1209,8 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
         }
     }
     TaskPoolUpdate(&w->tasks);
-    TaskPoolUpdate(&gUnk_02039DD4->tasks);
-    gUnk_02039DD4->unk_0D3 = w->unk_B9;
+    TaskPoolUpdate(&gCardBattleState->tasks);
+    gCardBattleState->unk_0D3 = w->unk_B9;
     w->unk_C4[4] = 0;
     if (gBtlWork->flags & 0x80000000000000LL) {
         gBtlWork->flags &= ~0x80000000000000LL;
@@ -1220,23 +1220,23 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
 }
 
 static void cardbattle_2(CardBattleWork* w) {
-    gUnk_02039DD4->gfx = AnimUpdate(&gUnk_02039DD4->anim);
-    gUnk_02039DD4->gfx2 = AnimUpdate(&gUnk_02039DD4->anim2);
+    gCardBattleState->gfx = AnimUpdate(&gCardBattleState->anim);
+    gCardBattleState->gfx2 = AnimUpdate(&gCardBattleState->anim2);
 
-    if (gUnk_02039DD4->unk_0EA != 0 && w->unk_B9 != 0 && w->unk_BA != 0) {
+    if (gCardBattleState->unk_0EA != 0 && w->unk_B9 != 0 && w->unk_BA != 0) {
         DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, 16,
                    12);
     }
 
     TaskPoolDraw(&w->tasks);
-    TaskPoolDraw(&gUnk_02039DD4->tasks);
+    TaskPoolDraw(&gCardBattleState->tasks);
 }
 
 static void cardbattle_3(CardBattleWork* w) {
     u8 i;
 
     TaskPoolDestroy(&w->tasks);
-    TaskPoolDestroy(&gUnk_02039DD4->tasks);
+    TaskPoolDestroy(&gCardBattleState->tasks);
 
     for (i = 0; i < 4; i++) {
         if (w->slots[i] != 0) {
@@ -1244,19 +1244,19 @@ static void cardbattle_3(CardBattleWork* w) {
         }
     }
 
-    ReleaseObjTiles(gUnk_02039DD4->tiles7);
-    ReleaseObjTiles(gUnk_02039DD4->tiles6);
-    ReleaseObjTiles(gUnk_02039DD4->tiles5);
-    ReleaseObjPalette(gUnk_02039DD4->palette);
-    ReleaseObjPalette(gUnk_02039DD4->palette2);
-    ReleaseObjTiles(gUnk_02039DD4->unk_040);
-    ReleaseObjTiles(gUnk_02039DD4->unk_050);
-    ReleaseObjTiles(gUnk_02039DD4->tiles[0]);
-    ReleaseObjTiles(gUnk_02039DD4->tiles[1]);
-    ReleaseObjTiles(gUnk_02039DD4->tiles[2]);
-    ReleaseObjTiles(gUnk_02039DD4->tiles[3]);
-    EwramFree(gUnk_02039DD4);
-    gUnk_02039DD4 = 0;
+    ReleaseObjTiles(gCardBattleState->tiles7);
+    ReleaseObjTiles(gCardBattleState->tiles6);
+    ReleaseObjTiles(gCardBattleState->tiles5);
+    ReleaseObjPalette(gCardBattleState->palette);
+    ReleaseObjPalette(gCardBattleState->palette2);
+    ReleaseObjTiles(gCardBattleState->unk_040);
+    ReleaseObjTiles(gCardBattleState->unk_050);
+    ReleaseObjTiles(gCardBattleState->tiles[0]);
+    ReleaseObjTiles(gCardBattleState->tiles[1]);
+    ReleaseObjTiles(gCardBattleState->tiles[2]);
+    ReleaseObjTiles(gCardBattleState->tiles[3]);
+    EwramFree(gCardBattleState);
+    gCardBattleState = 0;
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
@@ -1274,8 +1274,8 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
     b = 255;
 
     if (gBtlWork->unk_0A0 == 4) {
-        if (gUnk_02039B9C->flags & 0x1000000) {
-            gUnk_02039B9C->flags &= ~0x1000000;
+        if (gRikuBtlWork->flags & 0x1000000) {
+            gRikuBtlWork->flags &= ~0x1000000;
         }
 
         m4aSongNumStop(SONG_SYS_RELOAD);
@@ -1283,9 +1283,9 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
         return 0;
     }
 
-    if (*(s16*)&gUnk_02034A98->unk_9C == 0) {
+    if (*(s16*)&gSoraSelectedCard->unk_9C == 0) {
         if (func_08078754(w, w->unk_B8) > w->unk_C4[2]) {
-            gUnk_02034A98->unk_78 &= ~4;
+            gSoraSelectedCard->unk_78 &= ~4;
             e = ListPoolFirst(&w->unk_54[w->unk_B8]);
 
             while (e != 0) {
@@ -1296,7 +1296,7 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
                 e = ListPoolNext(&e->node);
             }
 
-            n = gUnk_02034A98->args.index - 1;
+            n = gSoraSelectedCard->args.index - 1;
             c = func_08076750(w, w->unk_B8, &n);
 
             if (c != 0) {
@@ -1318,7 +1318,7 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
                 e->unk_9C = 8;
                 e->unk_A0 = 50;
                 e->unk_78 |= 0x814;
-                gUnk_02034A98 = e;
+                gSoraSelectedCard = e;
                 w->unk_C4[2]++;
                 w->unk_B0[w->unk_B8]++;
             }
@@ -1380,7 +1380,7 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
     }
 
     TaskPoolUpdate(&w->tasks);
-    TaskPoolUpdate(&gUnk_02039DD4->tasks);
+    TaskPoolUpdate(&gCardBattleState->tasks);
 
     return 1;
 }

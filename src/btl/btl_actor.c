@@ -4,7 +4,7 @@
 #include "hum_types.h"
 #include "romcri_backgrounds.h"
 
-BtlWork* gUnk_02039B9C EWRAM_COMMON(4);
+BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
 
 const u8 gUnk_08133E54[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
@@ -137,19 +137,19 @@ void func_0800EFE8(HumWork* work) {
     TaskPoolDraw(&work->tasks);
 }
 void func_0800F230(void) {
-    BtlObj* c = gUnk_02039B9C->actor;
+    BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
     u16 t;
 
-    if (gUnk_02039B9C->flags & 0x1000000) {
+    if (gRikuBtlWork->flags & 0x1000000) {
         return;
     }
-    t = gUnk_02039B9C->unk_1CC;
+    t = gRikuBtlWork->unk_1CC;
 
     if ((s16)t > 0) {
-        gUnk_02039B9C->unk_1CC = t - 1;
+        gRikuBtlWork->unk_1CC = t - 1;
 
-        if (gUnk_02039B9C->unk_1CC == 0) {
+        if (gRikuBtlWork->unk_1CC == 0) {
             func_0807E260();
         }
         return;
@@ -201,14 +201,14 @@ void func_0800F230(void) {
         func_0807E20C();
 
         if (func_08081838() == 3 && !func_0807E34C()) {
-            gUnk_02039B9C->unk_1CC = 15;
+            gRikuBtlWork->unk_1CC = 15;
         }
     }
 }
 
 #ifdef VERSION_EU
 void eu_08013190(void) {
-    BtlObj* c = gUnk_02039B9C->actor;
+    BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
 
     keys = gBtlWork->unk_0EF;
@@ -371,7 +371,7 @@ u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) 
     if (gBtlWork->flags & 0x40) {
         return 0;
     }
-    if ((s16)gUnk_02039B9C->unk_1CC > 0) {
+    if ((s16)gRikuBtlWork->unk_1CC > 0) {
         return 0;
     }
     if ((u16)((u32)GetRandom() % interval) != 0) {
@@ -422,7 +422,7 @@ u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) 
         }
         return 0;
     }
-    if (!(work->flags & 0x10) && gUnk_02039B9C->unk_0F4 == 0
+    if (!(work->flags & 0x10) && gRikuBtlWork->unk_0F4 == 0
         && (u16)(GetRandom() % 60U) == 0) {
         gBtlWork->unk_0EF |= 4;
         return 0;
@@ -462,12 +462,12 @@ s32 _0800F84C(HumWork* work) {
     s32 id = func_080ABA80(buf);
 
     if (id == 145) {
-        if (!(gUnk_02039B9C->flags & 2)) {
-            gUnk_02039B9C->flags |= 2;
-            gUnk_02039B9C->unk_0B2 = 0;
+        if (!(gRikuBtlWork->flags & 2)) {
+            gRikuBtlWork->flags |= 2;
+            gRikuBtlWork->unk_0B2 = 0;
         }
-        id = buf[gUnk_02039B9C->unk_0B2];
-        gUnk_02039B9C->unk_0B2++;
+        id = buf[gRikuBtlWork->unk_0B2];
+        gRikuBtlWork->unk_0B2++;
     }
     work->unk_150 = 0;
 

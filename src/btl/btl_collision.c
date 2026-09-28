@@ -411,7 +411,7 @@ s32 func_08011398(BtlObj* hit, s32 index) {
     }
     if (gBtlWork->flags & 0x4000) {
         if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
-        else source = gUnk_02039B9C->actor;
+        else source = gRikuBtlWork->actor;
     } else if (gBtlWork->flags & 0x800) {
         if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
         else source = gBtlWork->actor3;
@@ -714,7 +714,7 @@ u8 func_08011E3C(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
 
     if (gBtlWork->flags & 0x4000) {
         if (gBtlWork->flags & 0x20000000) {
-            o = gUnk_02039B9C->actor;
+            o = gRikuBtlWork->actor;
         } else {
             o = gBtlWork->actor;
         }
@@ -769,7 +769,7 @@ s32 func_08011F78(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
 
     if (gBtlWork->flags & 0x4000) {
         if (gBtlWork->flags & 0x20000000) {
-            o = gUnk_02039B9C->actor;
+            o = gRikuBtlWork->actor;
         } else {
             o = gBtlWork->actor;
         }

@@ -100,6 +100,6 @@ typedef struct BtlWork {
 typedef char BtlWork_size[(sizeof(BtlWork) == 0x1D0) ? 1 : -1];
 
 extern BtlWork* gBtlWork;
-extern BtlWork* gUnk_02039B9C;
+extern BtlWork* gRikuBtlWork;
 
 #endif

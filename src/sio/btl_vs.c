@@ -80,7 +80,7 @@ void func_0801071C(void) {
     a = 0;
     CpuSet(&a, gBtlWork, 0x05000074);
     b = 0;
-    CpuSet(&b, gUnk_02039B9C, 0x05000074);
+    CpuSet(&b, gRikuBtlWork, 0x05000074);
     gBtlWork->unk_0A0 = 0;
     gBtlWork->unk_0FC = -0x10000;
     gBtlWork->unk_12C = 66;
@@ -107,7 +107,7 @@ void func_080107D4(void) {
     s32 res;
     u8 f;
 
-    w = gUnk_02039B9C;
+    w = gRikuBtlWork;
 
     if (gBtlWork->flags & 0x1000) {
         held = SioKeyGetHeldB();
@@ -117,7 +117,7 @@ void func_080107D4(void) {
         pressed = SioKeyGetPressedA();
     }
 
-    if (gUnk_02039B9C->flags & 0x10000000000000) {
+    if (gRikuBtlWork->flags & 0x10000000000000) {
         if (held & A_BUTTON) {
             if (!(held & (L_BUTTON | R_BUTTON))) {
                 func_0807E2F4();
@@ -125,13 +125,13 @@ void func_080107D4(void) {
         }
     }
 
-    if (gUnk_02039B9C->flags & 0x1000000) {
+    if (gRikuBtlWork->flags & 0x1000000) {
         gUnk_020348E2 = 5;
         return;
     }
 
-    if ((s16)gUnk_02039B9C->unk_1CC > 0) {
-        if (--gUnk_02039B9C->unk_1CC == 0) {
+    if ((s16)gRikuBtlWork->unk_1CC > 0) {
+        if (--gRikuBtlWork->unk_1CC == 0) {
             func_0807E260();
         }
         return;
@@ -221,7 +221,7 @@ void func_080107D4(void) {
 
         if (func_08081838() == 3) {
             if (func_0807E34C() == 0) {
-                gUnk_02039B9C->unk_1CC = 15;
+                gRikuBtlWork->unk_1CC = 15;
             }
         }
     }
@@ -368,12 +368,12 @@ void func_08010C70(void) {
 
 void func_08010CC8(void) {
     BtlObj* player = gBtlWork->actor;
-    BtlObj* other = gUnk_02039B9C->actor;
+    BtlObj* other = gRikuBtlWork->actor;
     s32 entered;
     s32 i;
     s32 busy;
     u8 rank;
-    if (gBtlWork->unk_0F4 == 53 || gUnk_02039B9C->unk_0F4 == 53) {
+    if (gBtlWork->unk_0F4 == 53 || gRikuBtlWork->unk_0F4 == 53) {
         gBtlWork->unk_12C = 38;
     } else {
         gBtlWork->unk_12C = 66;
@@ -394,7 +394,7 @@ void func_08010CC8(void) {
     if (gBtlWork->flags & 0x800000) {
         gBtlWork->flags |= 0x400000;
         gBtlWork->flags &= ~2ULL;
-        gUnk_02039B9C->flags &= ~2ULL;
+        gRikuBtlWork->flags &= ~2ULL;
         gBtlWork->unk_0A0 = 1;
         if (gBtlWork->unk_0A4 != 0) {
             gBtlWork->flags &= ~0x40ULL;
@@ -468,11 +468,11 @@ void func_08010CC8(void) {
             func_08076374();
             func_080838EC();
             gBtlWork->flags |= 0x20;
-            gUnk_02039B9C->flags |= 0x40000000;
+            gRikuBtlWork->flags |= 0x40000000;
             gBtlWork->flags |= 0x40000000;
             func_08019050(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->unk_0F4 = 0;
-            gUnk_02039B9C->unk_0F4 = 0;
+            gRikuBtlWork->unk_0F4 = 0;
         }
         if (gBtlWork->unk_0E4 == 140) {
             FadeStartOut(1, 100);
@@ -500,8 +500,8 @@ void func_08010CC8(void) {
             if (gBtlWork->flags & 2) player->flags |= 1;
             else func_08010C70();
         } else {
-            if (gUnk_02039B9C->unk_0B2 >= (s8)rank) gUnk_02039B9C->flags &= ~2ULL;
-            if (gUnk_02039B9C->flags & 2) other->flags |= 1;
+            if (gRikuBtlWork->unk_0B2 >= (s8)rank) gRikuBtlWork->flags &= ~2ULL;
+            if (gRikuBtlWork->flags & 2) other->flags |= 1;
             else func_08010C70();
         }
         break;

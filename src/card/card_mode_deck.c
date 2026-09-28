@@ -101,17 +101,17 @@ s32 DarkPoint_1(DarkPointWork* w) {
     return 1;
 }
 void DarkPoint_2(DarkPointWork* w) {
-    DrawSprite(w->x >> 8, 27, gUnk_09EF1298[0], w->tiles, gUnk_02039DD4->palette, 0, 0, 30);
+    DrawSprite(w->x >> 8, 27, gUnk_09EF1298[0], w->tiles, gCardBattleState->palette, 0, 0, 30);
 
     if (w->hundreds != 0) {
-        DrawSprite((w->x >> 8) + 11, 30, gUnk_09EF1298[w->hundreds + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
-        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
-        DrawSprite((w->x >> 8) + 23, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 11, 30, gUnk_09EF1298[w->hundreds + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 23, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
     } else if (w->tens != 0) {
-        DrawSprite((w->x >> 8) + 15, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
-        DrawSprite((w->x >> 8) + 21, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 15, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 21, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
     } else {
-        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gUnk_02039DD4->palette, 0, 0, 29);
+        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
     }
 }
 void DarkPoint_3(DarkPointWork* w) {

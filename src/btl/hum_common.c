@@ -44,9 +44,9 @@ void HumInit(HumWork* work, const HumDef* def) {
     work->sub = 0;
     work->sub2 = 0;
     work->unk_184 = 0;
-    gUnk_02039B9C->actor = actor;
+    gRikuBtlWork->actor = actor;
     gBtlWork->actor3 = actor;
-    actor->btl = gUnk_02039B9C;
+    actor->btl = gRikuBtlWork;
     actor->flags |= 0x24000000000;
 }
 
@@ -104,7 +104,7 @@ s32 _0800E434(HumWork* work) {
     switch (r) {
     case 5:
         work->flags |= 4;
-        gUnk_02039B9C->flags &= ~0x40000000;
+        gRikuBtlWork->flags &= ~0x40000000;
         work->unk_17E = 0;
         work->unk_150 = 0;
         AnimReset(&work->anim);

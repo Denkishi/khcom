@@ -115,8 +115,8 @@ void Level_Up_0(LevelUpWork* w) {
     w->unk_7C8[0] = 1;
     w->unk_7C8[1] = 1;
     w->unk_7C8[2] = 1;
-    if (gUnk_02039DD4 != 0) {
-        gUnk_02039DD4->unk_0E9 = 1;
+    if (gCardBattleState != 0) {
+        gCardBattleState->unk_0E9 = 1;
     }
 #ifndef VERSION_EU
     InitTextSlots(w->textSlots[0], 36);

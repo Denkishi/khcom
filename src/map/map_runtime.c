@@ -827,8 +827,8 @@ void func_080DF8C0(u8 a, u8 b) {
 
     for (i = 0; i <= 3; i++) {
         gUnk_0203C590.unk_18[i] = 0;
-        gUnk_0203C590.unk_08[i][0] = 0;
-        gUnk_0203C590.unk_08[i][1] = 0;
+        gUnk_0203C590.unk_08[i].unk_00 = 0;
+        gUnk_0203C590.unk_08[i].unk_01 = 0;
     }
 
     for (i = 0; i < 32; i++) {

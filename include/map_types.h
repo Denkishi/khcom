@@ -87,6 +87,12 @@ typedef struct UnkStruct_080DEE18 {
     u8 unk_0D[0x03];
 } UnkStruct_080DEE18;
 
+typedef struct UnkStruct_02034F84 {
+    u8 unk_00;
+    u8 unk_01;
+    u8 unk_02[0x02];
+} UnkStruct_02034F84;
+
 typedef struct UnkStruct_0203C590 {
     u8 unk_00;
     u8 unk_01;
@@ -95,7 +101,7 @@ typedef struct UnkStruct_0203C590 {
     u8 unk_05;
     u8 unk_06;
     u8 unk_07;
-    u8 unk_08[4][4];
+    UnkStruct_02034F84 unk_08[4];
     u8 unk_18[0x04];
     UnkStruct_080DEE18 unk_1C[32];
 } UnkStruct_0203C590;

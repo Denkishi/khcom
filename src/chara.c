@@ -1505,7 +1505,7 @@ TaskDesc gTaskDescCharaMaskFade = {
     (TaskUpdateFunc)task_chara_mask_fade_1,
     (TaskDrawFunc)task_chara_mask_fade_2,
     (TaskDestroyFunc)task_chara_mask_fade_3,
-    0x240,
+    sizeof(MaskFadeWork),
 };
 
 TaskDesc gTaskDescChgCardObj = {
@@ -1514,5 +1514,5 @@ TaskDesc gTaskDescChgCardObj = {
     (TaskUpdateFunc)task_chgCardObj_1,
     (TaskDrawFunc)task_chgCardObj_2,
     (TaskDestroyFunc)task_chgCardObj_3,
-    0x44,
+    sizeof(ChgCardObjWork),
 };

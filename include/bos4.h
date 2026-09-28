@@ -215,7 +215,11 @@ extern UnkStruct_02034F7C gUnk_0984CECC[];
 
 extern const u8 gUnk_0984D0CC[][4];
 
-void task_bos_boogie_map_0(void* work, BattleBackgroundDef* arg);
+typedef struct BoogieMapWork {
+    u32 unk_00;
+} BoogieMapWork;
+
+void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg);
 
 extern const EmyKind gBosBoogieKnifereaderEmyKind;
 u8 func_080DABFC(s32* x, s32* y, s16 w, s16 h, s32 z);

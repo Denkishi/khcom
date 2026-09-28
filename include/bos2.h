@@ -245,6 +245,10 @@ typedef struct JfMapWork {
     s16 unk_02;
 } JfMapWork;
 
+typedef struct DsdMapWork {
+    u32 unk_00;
+} DsdMapWork;
+
 typedef struct JfLampWork {
     JfWork* jf;
     ObjTiles* tiles;

@@ -2,7 +2,7 @@
 #include "bos.h"
 #include "sprites_btl.h"
 
-void task_bos_map_0(void* work, BosMapConfig* cfg) {
+void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);
     LoadBgPalette(0, cfg->palette, cfg->paletteSize);
     SetBgMapBlocks(0, cfg->maps, 2, 2);
@@ -115,7 +115,7 @@ TaskDesc gTaskDescBosMap = {
     (TaskUpdateFunc)task_bos_map_1,
     NULL,
     NULL,
-    0x4,
+    sizeof(BosMapWork),
 };
 
 TaskDesc gTaskDescBosShadow = {

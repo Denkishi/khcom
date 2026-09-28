@@ -5098,7 +5098,7 @@ TaskDesc gTaskDescBosPc = {
     (TaskUpdateFunc)task_bos_pc_1,
     (TaskDrawFunc)task_bos_pc_2,
     (TaskDestroyFunc)task_bos_pc_3,
-    0x1F1C,
+    sizeof(PcWork),
 };
 
 static s32 Square(s32 x) {

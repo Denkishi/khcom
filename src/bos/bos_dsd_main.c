@@ -1294,5 +1294,5 @@ TaskDesc gTaskDescBosDsdMap = {
     (TaskUpdateFunc)task_bos_dsd_map_1,
     NULL,
     NULL,
-    0x4,
+    sizeof(DsdMapWork),
 };

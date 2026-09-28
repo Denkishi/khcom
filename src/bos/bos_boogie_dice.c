@@ -85,7 +85,7 @@ TaskDesc gTaskDescBosBoogieMap = {
     (TaskUpdateFunc)task_bos_boogie_map_1,
     NULL,
     NULL,
-    0x4,
+    sizeof(BoogieMapWork),
 };
 
 const UnkStruct_096FE034Entry gUnk_096FE020[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
@@ -1060,7 +1060,7 @@ void task_bos_boogie_saku_3(BoogieSakuWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void task_bos_boogie_map_0(void* work, BattleBackgroundDef* arg) {
+void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg) {
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 2);

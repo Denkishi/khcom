@@ -60,7 +60,7 @@ TaskDesc gTaskDescBosLst = {
     (TaskUpdateFunc)task_bos_lst_1,
     (TaskDrawFunc)task_bos_lst_2,
     (TaskDestroyFunc)task_bos_lst_3,
-    0x10A4,
+    sizeof(BosLstWork),
 };
 
 s32 func_0810C2B4(s32 x) {

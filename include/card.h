@@ -949,6 +949,10 @@ typedef struct CardNameWork {
     u8 textSlotCount3;
 } CardNameWork;
 
+typedef struct PrintWork {
+    u32 unk_00;
+} PrintWork;
+
 #ifdef VERSION_EU
 typedef char CardNameWork_sizechk[(sizeof(struct CardNameWork) == 0x31C) ? 1 : -1];
 #else

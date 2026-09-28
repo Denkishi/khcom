@@ -303,7 +303,7 @@ TaskDesc gUnk_09EE2834 = {
     (TaskUpdateFunc)Continue_1,
     (TaskDrawFunc)Continue_2,
     (TaskDestroyFunc)Continue_3,
-    0x6C,
+    sizeof(ContinueWork),
 };
 
 TaskDesc gUnk_09EE284C = {
@@ -312,5 +312,5 @@ TaskDesc gUnk_09EE284C = {
     (TaskUpdateFunc)Continue_1,
     (TaskDrawFunc)Continue_2,
     (TaskDestroyFunc)Continue_3,
-    0x6C,
+    sizeof(ContinueWork),
 };

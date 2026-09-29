@@ -1,0 +1,219 @@
+pool: event_name_text
+objects:
+  us:
+    name: event_name_text.s
+    start: 0x0902FCE8
+    end: 0x09032484
+    encoding: sjis
+    align: 4
+    ctype: const char
+  jp:
+    name: event_name_text.s
+    start: 0x09002FAC
+    end: 0x09005748
+    encoding: sjis
+    align: 4
+    ctype: const char
+  eu:
+    name: event_name_text.s
+    start: 0x090C9044
+    end: 0x090CB778
+    encoding: sjis
+    align: 4
+    ctype: const char
+entries:
+- gEventName_0902FCE8
+- gEventName_0902FD1C
+- gEventName_0902FD50
+- gEventName_0902FD84
+- gEventName_0902FDB8
+- gEventName_0902FDEC
+- gEventName_0902FE20
+- gEventName_0902FE54
+- gEventName_0902FE88
+- gEventName_0902FEBC
+- gEventName_0902FEF0
+- gEventName_0902FF24
+- gEventName_0902FF58
+- gEventName_0902FF8C
+- gEventName_0902FFC0
+- gEventName_0902FFF4
+- gEventName_09030028
+- gEventName_0903005C
+- gEventName_09030090
+- gEventName_090300C4
+- gEventName_090300F8
+- gEventName_0903012C
+- gEventName_09030160
+- gEventName_09030194
+- gEventName_090301C8
+- gEventName_090301FC
+- gEventName_09030230
+- gEventName_09030264
+- gEventName_09030298
+- gEventName_090302CC
+- gEventName_09030300
+- gEventName_09030334
+- gEventName_09030368
+- gEventName_0903039C
+- gEventName_090303D0
+- gEventName_09030404
+- gEventName_09030438
+- gEventName_0903046C
+- gEventName_090304A0
+- gEventName_090304D4
+- gEventName_09030508
+- gEventName_0903053C
+- gEventName_09030570
+- gEventName_090305A4
+- gEventName_090305D8
+- gEventName_0903060C
+- gEventName_09030640
+- gEventName_09030674
+- gEventName_090306A8
+- gEventName_090306DC
+- gEventName_09030710
+- gEventName_09030744
+- gEventName_09030778
+- gEventName_090307AC
+- gEventName_090307E0
+- gEventName_09030814
+- gEventName_09030848
+- gEventName_0903087C
+- gEventName_090308B0
+- gEventName_090308E4
+- gEventName_09030918
+- gEventName_0903094C
+- gEventName_09030980
+- gEventName_090309B4
+- gEventName_090309E8
+- gEventName_09030A1C
+- gEventName_09030A50
+- gEventName_09030A84
+- {name: gEventName_09030AB8, versions: [us, jp]}
+- {name: gEventName_09030AEC, versions: [us, jp]}
+- gEventName_09030B20
+- gEventName_09030B54
+- gEventName_09030B88
+- gEventName_09030BBC
+- gEventName_09030BF0
+- gEventName_09030C24
+- gEventName_09030C58
+- gEventName_09030C8C
+- gEventName_09030CC0
+- gEventName_09030CF4
+- gEventName_09030D28
+- gEventName_09030D5C
+- gEventName_09030D90
+- gEventName_09030DC4
+- gEventName_09030DF8
+- gEventName_09030E2C
+- gEventName_09030E60
+- gEventName_09030E94
+- gEventName_09030EC8
+- gEventName_09030EFC
+- gEventName_09030F30
+- gEventName_09030F64
+- gEventName_09030F98
+- gEventName_09030FCC
+- gEventName_09031000
+- gEventName_09031034
+- gEventName_09031068
+- gEventName_0903109C
+- gEventName_090310D0
+- gEventName_09031104
+- gEventName_09031138
+- gEventName_0903116C
+- gEventName_090311A0
+- gEventName_090311D4
+- gEventName_09031208
+- gEventName_0903123C
+- gEventName_09031270
+- gEventName_090312A4
+- gEventName_090312D8
+- gEventName_0903130C
+- gEventName_09031340
+- gEventName_09031374
+- gEventName_090313A8
+- gEventName_090313DC
+- gEventName_09031410
+- gEventName_09031444
+- gEventName_09031478
+- gEventName_090314AC
+- gEventName_090314E0
+- gEventName_09031514
+- gEventName_09031548
+- gEventName_0903157C
+- gEventName_090315B0
+- gEventName_090315E4
+- gEventName_09031618
+- gEventName_0903164C
+- gEventName_09031680
+- gEventName_090316B4
+- gEventName_090316E8
+- gEventName_0903171C
+- gEventName_09031750
+- gEventName_09031784
+- gEventName_090317B8
+- gEventName_090317EC
+- gEventName_09031820
+- gEventName_09031854
+- gEventName_09031888
+- gEventName_090318BC
+- gEventName_090318F0
+- gEventName_09031924
+- gEventName_09031958
+- gEventName_0903198C
+- gEventName_090319C0
+- gEventName_090319F4
+- gEventName_09031A28
+- gEventName_09031A5C
+- gEventName_09031A90
+- gEventName_09031AC4
+- gEventName_09031AF8
+- gEventName_09031B2C
+- gEventName_09031B60
+- gEventName_09031B94
+- gEventName_09031BC8
+- gEventName_09031BFC
+- gEventName_09031C30
+- gEventName_09031C64
+- gEventName_09031C98
+- gEventName_09031CCC
+- gEventName_09031D00
+- gEventName_09031D34
+- gEventName_09031D68
+- gEventName_09031D9C
+- gEventName_09031DD0
+- gEventName_09031E04
+- gEventName_09031E38
+- gEventName_09031E6C
+- gEventName_09031EA0
+- gEventName_09031ED4
+- gEventName_09031F08
+- gEventName_09031F3C
+- gEventName_09031F70
+- gEventName_09031FA4
+- gEventName_09031FD8
+- gEventName_0903200C
+- gEventName_09032040
+- gEventName_09032074
+- gEventName_090320A8
+- gEventName_090320DC
+- gEventName_09032110
+- gEventName_09032144
+- gEventName_09032178
+- gEventName_090321AC
+- gEventName_090321E0
+- gEventName_09032214
+- gEventName_09032248
+- gEventName_0903227C
+- gEventName_090322B0
+- gEventName_090322E4
+- gEventName_09032318
+- gEventName_0903234C
+- gEventName_09032380
+- gEventName_090323B4
+- gEventName_090323E8
+- gEventName_0903241C
+- gEventName_09032450

@@ -802,11 +802,7 @@ s32 func_08085BAC(void) {
 }
 
 #ifdef VERSION_JP
-const u8 gUnkJp_090089B0[12] = "________";
-
-const u8 gUnkJp_090089BC[12] = "________";
-
-const u8 gUnkJp_090089C8[12] = "________";
+#include "deck_names_shift_jis.inc"
 #endif
 
 void func_08085C3C(void) {
@@ -1031,12 +1027,12 @@ const s16 gUnk_0903570E[6] = { 50, 67, 85, 108, 126, 149 };
 
 const s16 gUnk_0903571A[2] = { 80, 128 };
 
-const s16 gUnk_0903571E[9] = { 80, 88, 96, 104, 112, 45, 93, 141, 0 };
+const s16 gUnk_0903571E[9] = { 80, 88, 96, 104, 112, 45, 93, 141, 30 };
 
 #ifdef VERSION_JP
-const UnkStruct_09035730 gUnk_09035730 = { { 0, 0 } };
+const UnkStruct_09035730 gUnk_09035730 = { { 94, 151 } };
 #else
-const UnkStruct_09035730 gUnk_09035730 = { { 0, 0 } };
+const UnkStruct_09035730 gUnk_09035730 = { { 102, 148 } };
 #endif
 
 static void Deckmenu2_0(DeckMenuWork* w, void* a) {
@@ -6996,19 +6992,7 @@ const u16* gUnk_09EE4A98[12] = {
     gUnk_090356BA,
     gUnk_090356BA,
 };
-#ifdef VERSION_EU
-u8 gUnkEu_09F6FD74[7] = { '_', '_', '_', '_', '_', '_', 0 };
-
-u8 gUnkEu_09F6FD7B[7] = { '_', '_', '_', '_', '_', '_', 0 };
-
-u8 gUnkEu_09F6FD82[7] = { '_', '_', '_', '_', '_', '_', 0 };
-#else
-u16 gUnk_09EE4AC8[7] = { '_', '_', '_', '_', '_', '_', 0 };
-
-u16 gUnk_09EE4AD6[7] = { '_', '_', '_', '_', '_', '_', 0 };
-
-u16 gUnk_09EE4AE4[7] = { '_', '_', '_', '_', '_', '_', 0 };
-#endif
+#include "deck_names.inc"
 #ifdef VERSION_EU
 void* gUnkEu_09F6FD8C[5] = { gUnk_090A1FB2, gUnkEu_09189F36, gUnkEu_0918A73A, gUnkEu_0918A48E, gUnkEu_0918A1E2 };
 
@@ -7053,19 +7037,7 @@ void** gUnkEu_09F6FE44[5] = { gUnk_09EEB08C, gUnk_09EEB08C, gUnkEu_09F7721C, gUn
 void* gUnkEu_09F6FE58[5] = { gUnk_09EEB0B8, gUnk_09EEB0B8, gUnkEu_09F77248, gUnkEu_09F77210, gUnk_09EEB0B8 };
 #endif
 #ifdef VERSION_US
-const u16 gKeyboardTextUs_09035742[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u16 gKeyboardTextUs_09035762[12] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u16 gKeyboardTextUs_0903577A[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u16 gKeyboardTextUs_0903579A[12] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u16 gKeyboardTextUs_090357B2[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0, 0, 0, '_', '_', 0 };
-
-const u16 gKeyboardTextUs_090357D2[16] = { '_', '_', 0, '_', '_', '_', '_', '_', '_', '_', '_', 0, 0, 0, 0, 0 };
-
-const u16 gKeyboardTextUs_090357F2[11] = { '_', '_', '_', '_', '_', 0, 0, 0, 0, '_', 0 };
+#include "deck_keyboard.inc"
 
 const u8* gUnk_09EE4B0C[7] = {
     (const u8*)gKeyboardTextUs_09035742,
@@ -7078,66 +7050,40 @@ const u8* gUnk_09EE4B0C[7] = {
 };
 #endif
 #ifdef VERSION_JP
+#include "deck_keyboard.inc"
+
 const u8* gUnk_09EE4B0C[7] = {
-    "______________________________",
-    "______________________________",
-    "______________________________",
-    "____________________",
-    "______________________________",
-    "______________________________",
-    "________________________",
+    gDeckKeyboardHiraganaRow0,
+    gDeckKeyboardHiraganaRow1,
+    gDeckKeyboardHiraganaRow2,
+    gDeckKeyboardHiraganaRow3,
+    gDeckKeyboardHiraganaRow4,
+    gDeckKeyboardHiraganaRow5,
+    gDeckKeyboardHiraganaRow6,
 };
 
 const u8* gUnkJp_09EBC148[7] = {
-    "______________________________",
-    "______________________________",
-    "______________________________",
-    "____________________",
-    "______________________________",
-    "______________________________",
-    "________________________",
+    gDeckKeyboardKatakanaRow0,
+    gDeckKeyboardKatakanaRow1,
+    gDeckKeyboardKatakanaRow2,
+    gDeckKeyboardKatakanaRow3,
+    gDeckKeyboardKatakanaRow4,
+    gDeckKeyboardKatakanaRow5,
+    gDeckKeyboardKatakanaRow6,
 };
 
 const u8* gUnkJp_09EBC164[7] = {
-    "______________________________",
-    "______________________________",
-    "______________________________",
-    "______________________________",
-    "____________________",
-    "______________________________",
-    "____________________",
+    gDeckKeyboardAlphanumericRow0,
+    gDeckKeyboardAlphanumericRow1,
+    gDeckKeyboardAlphanumericRow2,
+    gDeckKeyboardAlphanumericRow3,
+    gDeckKeyboardAlphanumericRow4,
+    gDeckKeyboardAlphanumericRow5,
+    gDeckKeyboardAlphanumericRow6,
 };
 #endif
 #ifdef VERSION_EU
-const u8 gKeyboardTextEu_090CEA56[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEA66[12] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEA72[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEA82[12] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEA8E[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-const u8 gKeyboardTextEu_090CEA9E[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, '_', 0 };
-
-const u8 gKeyboardTextEu_090CEAA9[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-const u8 gKeyboardTextEu_090CEAB9[11] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
-const u8 gKeyboardTextEu_090CEAC4[16] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0, 0, 0, 0, 0 };
-
-const u8 gKeyboardTextEu_090CEAD4[11] = { '_', '_', 0, 0, '_', '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEADF[16] = { '_', '_', 0, '_', '_', '_', '_', 0, 0, 0, '_', '_', 0, 0, '_', 0 };
-
-const u8 gKeyboardTextEu_090CEAEF[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '_', 0 };
-
-const u8 gKeyboardTextEu_090CEAFF[6] = { '_', '_', 0, '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEB05[16] = { '_', '_', '_', '_', 0, 0, 0, 0, 0, 0, '_', '_', '_', '_', '_', 0 };
-
-const u8 gKeyboardTextEu_090CEB15[6] = { 0, 0, '_', '_', '_', 0 };
+#include "deck_keyboard.inc"
 
 const u8* gUnkEu_09F6FE6C[8] = {
     gKeyboardTextEu_090CEA56,

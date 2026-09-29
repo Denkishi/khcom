@@ -183,8 +183,12 @@ class Unit:
         self.header = spec.get("header")
         self.form = spec.get("form", "array")
         self.count = spec.get("count")
-        if self.form not in ("array", "string") or self.count not in (None, "exact", "slot"):
+        self.stride = spec.get("stride")
+        self.size = spec.get("size")
+        if self.form not in ("array", "string", "macro") or self.count not in (None, "exact", "slot"):
             raise TextError(f"{pool.name}: {version} {self.name} has an unknown form or count")
+        if (self.form == "macro") != (self.stride is not None and self.size is not None):
+            raise TextError(f"{pool.name}: {version} {self.name} needs a stride and size exactly when it writes macros")
 
     def encoding(self, charmap):
         name = self.spec["encoding"]
@@ -198,6 +202,14 @@ class Unit:
         return entry.get("align", self.align)
 
     def layout(self, data_of, width):
+        if self.stride is not None:
+            placed = []
+            for index, entry in enumerate(self.entries):
+                start = self.start + index * self.stride
+                if len(data_of(entry, start)) > self.size:
+                    raise TextError(f"{self.pool.name}: {entry['name']} is longer than its {self.size}-byte field")
+                placed.append((entry, start, self.size))
+            return placed, (placed[-1][1] + self.size if placed else self.start)
         position = self.start
         placed = []
         for entry in self.entries:
@@ -406,14 +418,14 @@ def decode_unit(unit, encoding, rom):
             raise TextError(f"{pool.name}: {version} {entry['name']} runs past the end of {unit.name}")
         return rom[start - ROM_BASE:end]
 
-    if unit.kind == "fragment" and unit.count != "slot" and unit.align != natural_align(unit, encoding):
+    if unit.kind == "fragment" and unit.form != "macro" and unit.count != "slot" and unit.align != natural_align(unit, encoding):
         raise TextError(f"{pool.name}: {version} {unit.name} aligns its entries to {unit.align}, which C only does"
                         f" for {natural_align(unit, encoding)}-aligned {unit.form} definitions")
     placed, position = unit.layout(found, encoding.width)
     cursor = unit.start
     texts = []
     for entry, start, size in placed:
-        if any(rom_at(cursor, start - cursor)):
+        if unit.stride is None and any(rom_at(cursor, start - cursor)):
             raise TextError(f"{pool.name}: {version} padding before {entry['name']} is not zero")
         data = rom_at(start, size)
         if "record" in entry:
@@ -527,11 +539,13 @@ def c_text(unit, entry, data, slot, width):
     else:
         count = ""
     head = f"{entry.get('ctype', unit.ctype)} {entry['name']}[{count}] = "
-    if unit.form == "string":
+    if unit.form == "macro":
+        head = f"#define {entry['name']} "
+    if unit.form in ("string", "macro"):
         if width != 1 or units[-1] != 0 or 0 in units[:-1]:
             raise TextError(f"{unit.pool.name}: {entry['name']} cannot be written as a C string")
         body = "".join(f"\\{value:03o}" for value in units[:-1])
-        return [f'{head}"{body}";', ""]
+        return [f'{head}"{body}"' + ("" if unit.form == "macro" else ";"), ""]
     return [head + "{"] + c_values(units, 16) + ["};", ""]
 
 
@@ -557,7 +571,7 @@ def emit_header(pool, version, path):
             headers.append(unit.header)
     lines += [f'#include "{header}"' for header in headers]
     declared = [(entry.get("ctype", unit.ctype), entry["name"]) for unit in units for entry in unit.entries
-                if "record" not in entry and entry.get("declare", True)]
+                if "record" not in entry and unit.form != "macro" and entry.get("declare", True)]
     if declared:
         lines.append("")
         lines += [f"extern {ctype} {name}[];" for ctype, name in declared]

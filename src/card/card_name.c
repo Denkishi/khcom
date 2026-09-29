@@ -53,17 +53,7 @@ void func_0809D124(PremiumCardEffectWork* w);
 void func_0809D1B0(PremiumCardEffectWork* w);
 void func_0809D160(PremiumCardEffectWork* w);
 
-#ifdef VERSION_JP
-const u8 gUnkJp_09009748[] = "__";
-
-const u8 gUnkJp_0900974C[] = "________________";
-#elif defined(VERSION_EU)
-const u8 gUnkEu_090CF648[5] = { '_', '_', '_', '_', 0 };
-
-const u8 gUnkEu_090CF64D[2] = { 0, 0 };
-#else
-const u16 gUnk_090362A4[23] = { '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 0 };
-#endif
+#include "premium_message.inc"
 
 void CardName_0(CardNameWork* w) {
     UnkStruct_0809C534* q = gCardListWork->selectedCard;

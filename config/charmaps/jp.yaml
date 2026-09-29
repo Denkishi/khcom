@@ -9,3 +9,8 @@ sjis:
   codec: cp932
   controls:
     END: [0x00]
+latin16:
+  width: 2
+  codec: cp1252
+  controls:
+    END: [0x0000]

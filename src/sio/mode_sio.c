@@ -80,8 +80,7 @@ extern const SioAnimDef gSioChgCardAnimDefs[3];
 #endif
 
 #ifdef VERSION_EU
-const u8 gUnkEu_095DA860[7] = {'_', '_', '_', '_', '_', '_', 0};
-const u8 gUnkEu_095DA867[8] = {'_', '_', '_', '_', '_', '_', '_', 0};
+#include "link_deck_names.inc"
 #endif
 
 #ifdef VERSION_EU

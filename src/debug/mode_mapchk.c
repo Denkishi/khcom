@@ -1,5 +1,4 @@
 #include "mode_mapchk.h"
-#include "debug_menu_assets.h"
 #include "registration_data.h"
 #include "map_runtime.h"
 #include "map_api.h"
@@ -17,51 +16,87 @@
 
 extern UnkStruct_0203C590 gUnk_0203C590;
 
-extern const char gUnk_0984B74C[];
-extern const char gUnk_0984B754[];
-extern const char gUnk_0984B72C[];
-extern const char gUnk_0984B77C[];
-extern const char gUnk_0984B7B0[];
-extern const char gUnk_0984B7C0[];
-extern const char gUnk_0984B7D0[];
-extern const char gUnk_0984B7E0[];
-extern const char gUnk_0984B7F0[];
-extern const char gUnk_0984B800[];
-extern const char gUnk_0984B810[];
-extern const char gUnk_0984B820[];
-extern const char gUnk_0984B75C[];
-extern const char gUnk_0984B76C[];
-extern const char gUnk_0984B830[];
-extern const char gUnk_0984B834[];
+const char gDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
+
+const char gDebugMenuTextUs_0984B60C[] = "\202f\202n\202`\202k\201@\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B620[] = "\202r\202s\202`\202q\202s\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B634[] = "\202e\202h\202d\202k\202c\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B648[] = "\202c\202d\202a\202t\202f\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B65C[] = "\202e\202t\202m\202m\202d\202k\201@";
+
+const char gDebugMenuTextUs_0984B66C[] = "\202r\202s\202`\202f\202d\201@\201@";
+
+const char gDebugMenuTextUs_0984B67C[] = "\202g\202d\202w\202`\202f\202n\202m";
+
+const char gDebugMenuTextUs_0984B68C[] = "\202b\202k\202h\202e\202e\201@\201@";
+
+const char gDebugMenuTextUs_0984B69C[] = "\202o\202`\202r\202r\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B6AC[] = "\202s\202n\202v\202d\202q\201@\201@";
+
+const char gDebugMenuTextUs_0984B6BC[] = "\202r\202l\202`\202k\202k\201@\201@";
+
+const char gDebugMenuTextUs_0984B6CC[] = "\202e\202k\202`\202s\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B6DC[] = "\202v\202h\202c\202d\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B6EC[] = "\202g\202h\202f\202g\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B6FC[] = "\202k\202n\202v\201@\201@\201@\201@";
+
+const char gDebugMenuTextUs_0984B70C[] = "\202q\202`\202m\202c\202n\202l\201@";
+
+const char gDebugMenuTextUs_0984B71C[] = "\202c\202d\202e\202`\202t\202k\202s";
+
+const char gUnk_0984B72C[32] = "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377";
+
+const char gUnk_0984B74C[] = "\202n\202m\201@";
+
+const char gUnk_0984B754[] = "\202n\202e\202e";
+
+const char gUnk_0984B75C[] = "\201i\202a\201@\201@\201@\201j";
+
+const char gUnk_0984B76C[] = "\201i\202a\201|\201|\201|\201j";
+
+const char gUnk_0984B77C[] = "\202t\202c\201F\202r\202d\202k\202d\202b\202s\201@\202k\202q\201F\202r\202d\202s\201@\202`\201F\202r\202s\202`\202q\202s";
+
+const char gUnk_0984B7B0[] = "\202l\202n\202c\202d\201@\201F";
+
+const char gUnk_0984B7C0[] = "\202v\202n\202q\202k\202c\201F";
+
+const char gUnk_0984B7D0[] = "\202e\202k\202n\202n\202q\201F";
+
+const char gUnk_0984B7E0[] = "\202o\202`\202q\202`\202l\201F";
+
+const char gUnk_0984B7F0[] = "\202e\202n\202q\202l\201@\201F";
+
+const char gUnk_0984B800[] = "\202v\202h\202c\202d\201@\201F";
+
+const char gUnk_0984B810[] = "\202g\202h\202f\202g\201@\201F";
+
+const char gUnk_0984B820[] = "\202c\202d\202d\202o\201@\201F";
+
+const char gUnk_0984B830[] = "\201@";
+
+const char gUnk_0984B834[] = "\201\204";
 extern const u8 gUnk_0984B458[][8];
 
 static MapChkWork* gMapChkWork;
 static UnkStruct_0203C7B0* gUnk_02034F18;
 
 const char* gUnk_09EF6960[] = {
-#if defined(VERSION_US)
     gDebugMenuTextUs_0984B648,
     gDebugMenuTextUs_0984B634,
     gDebugMenuTextUs_0984B620,
     gDebugMenuTextUs_0984B60C,
     gDebugMenuTextUs_0984B5F8,
-#elif defined(VERSION_JP)
-    gDebugMenuTextJp_0980015C,
-    gDebugMenuTextJp_09800148,
-    gDebugMenuTextJp_09800134,
-    gDebugMenuTextJp_09800120,
-    gDebugMenuTextJp_0980010C,
-#elif defined(VERSION_EU)
-    gDebugMenuTextEu_0982801C,
-    gDebugMenuTextEu_09828008,
-    gDebugMenuTextEu_09827FF4,
-    gDebugMenuTextEu_09827FE0,
-    gDebugMenuTextEu_09827FCC,
-#endif
 };
 
 const char* gUnk_09EF6974[] = {
-#if defined(VERSION_US)
     gDebugMenuTextUs_0984B71C,
     gDebugMenuTextUs_0984B70C,
     gDebugMenuTextUs_0984B6FC,
@@ -75,35 +110,6 @@ const char* gUnk_09EF6974[] = {
     gDebugMenuTextUs_0984B67C,
     gDebugMenuTextUs_0984B66C,
     gDebugMenuTextUs_0984B65C,
-#elif defined(VERSION_JP)
-    gDebugMenuTextJp_09800230,
-    gDebugMenuTextJp_09800220,
-    gDebugMenuTextJp_09800210,
-    gDebugMenuTextJp_09800200,
-    gDebugMenuTextJp_098001F0,
-    gDebugMenuTextJp_098001E0,
-    gDebugMenuTextJp_098001D0,
-    gDebugMenuTextJp_098001C0,
-    gDebugMenuTextJp_098001B0,
-    gDebugMenuTextJp_098001A0,
-    gDebugMenuTextJp_09800190,
-    gDebugMenuTextJp_09800180,
-    gDebugMenuTextJp_09800170,
-#elif defined(VERSION_EU)
-    gDebugMenuTextEu_098280F0,
-    gDebugMenuTextEu_098280E0,
-    gDebugMenuTextEu_098280D0,
-    gDebugMenuTextEu_098280C0,
-    gDebugMenuTextEu_098280B0,
-    gDebugMenuTextEu_098280A0,
-    gDebugMenuTextEu_09828090,
-    gDebugMenuTextEu_09828080,
-    gDebugMenuTextEu_09828070,
-    gDebugMenuTextEu_09828060,
-    gDebugMenuTextEu_09828050,
-    gDebugMenuTextEu_09828040,
-    gDebugMenuTextEu_09828030,
-#endif
 };
 
 void (*gUnk_09EF69A8[10])(MapChkWork*) = {

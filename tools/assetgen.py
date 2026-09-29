@@ -22,9 +22,10 @@ MANIFEST_DIR = ROOT / "config" / "assets"
 GBAGFX = ROOT / "tools" / "gbagfx" / "gbagfx"
 VERSIONS = ("us", "jp", "eu")
 SOURCE_EXT = {"tiles4": "png", "tiles8": "png", "palette": "pal", "tilemap": "bin", "raw": "bin", "sprite_sheet": "png",
-              **m4a_assets.SOURCE_EXT}
+              "glyphs": "png", **m4a_assets.SOURCE_EXT}
 BINARY_EXT = {"tiles4": "4bpp", "tiles8": "8bpp", "palette": "gbapal", "tilemap": "bin", "raw": "bin",
-              "sprite_sheet": "4bpp", **m4a_assets.BINARY_EXT}
+              "sprite_sheet": "4bpp", "glyphs": "bin", **m4a_assets.BINARY_EXT}
+GLYPH_GREYS = {1: [(0, 0, 0), (255, 255, 255)], 2: [(0, 0, 0), (85, 85, 85), (170, 170, 170), (255, 255, 255)]}
 GBAGFX_MAX_COLORS = 256
 ASM_KINDS = ("sprite", "anim", "array", "string")
 SCALAR_SIZES = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
@@ -453,6 +454,52 @@ def write_jasc(path, data):
     Path(path).write_text("\r\n".join(lines) + "\r\n")
 
 
+def glyph_geometry(entry, size):
+    width, height = entry["glyph"]
+    bpp = entry["bpp"]
+    row = width * bpp // 8
+    if bpp not in GLYPH_GREYS or width * bpp % 8 or size % (row * height):
+        raise ManifestError(f"{entry['name']}: {size} bytes are not whole {width}x{height} {bpp}bpp glyphs")
+    count = size // (row * height)
+    columns = entry.get("columns", 16)
+    return width, height, bpp, row, count, columns, (count + columns - 1) // columns
+
+
+def glyphs_to_png(entry, data):
+    width, height, bpp, row, count, columns, rows = glyph_geometry(entry, len(data))
+    sheet = columns * width
+    pixels = bytearray(sheet * rows * height)
+    per, mask = 8 // bpp, (1 << bpp) - 1
+    for glyph in range(count):
+        left, top, base = (glyph % columns) * width, (glyph // columns) * height, glyph * row * height
+        for y in range(height):
+            for x in range(width):
+                value = data[base + y * row + x // per] >> (8 - bpp * (x % per + 1))
+                pixels[(top + y) * sheet + left + x] = value & mask
+    return sprite_sheet.write_png(sheet, rows * height, pixels, GLYPH_GREYS[bpp])
+
+
+def png_to_glyphs(entry, png, size):
+    width, height, bpp, row, count, columns, rows = glyph_geometry(entry, size)
+    try:
+        sheet, sheet_height, pixels = sprite_sheet.read_png(png)
+    except sprite_sheet.SheetError as error:
+        raise ManifestError(f"{entry['name']}: {error}")
+    if (sheet, sheet_height) != (columns * width, rows * height):
+        raise ManifestError(f"{entry['name']}: the glyph sheet is {sheet}x{sheet_height}, the description needs {columns * width}x{rows * height}")
+    per = 8 // bpp
+    out = bytearray(size)
+    for glyph in range(count):
+        left, top, base = (glyph % columns) * width, (glyph // columns) * height, glyph * row * height
+        for y in range(height):
+            for x in range(width):
+                value = pixels[(top + y) * sheet + left + x]
+                if value >> bpp:
+                    raise ManifestError(f"{entry['name']}: glyph {glyph} uses colour {value}, beyond {bpp}bpp")
+                out[base + y * row + x // per] |= value << (8 - bpp * (x % per + 1))
+    return bytes(out)
+
+
 def jasc_colors(data):
     lines = data.decode("ascii").replace("\r\n", "\n").split("\n")
     if lines[:2] != ["JASC-PAL", "0100"]:
@@ -464,10 +511,12 @@ def jasc_colors(data):
     return colors
 
 
-def read_source(entry, source, tmp):
+def read_source(entry, source, tmp, size=None):
     fmt = entry["format"]
     if not source.exists():
         raise ManifestError(f"{source} is missing; run python3 tools/extract_assets.py")
+    if fmt == "glyphs":
+        return png_to_glyphs(entry, source.read_bytes(), size)
     if fmt == "palette" and int(source.read_bytes().split(b"\n", 3)[2]) > GBAGFX_MAX_COLORS:
         return b"".join(((r // 8) | ((g // 8) << 5) | ((b // 8) << 10)).to_bytes(2, "little")
                         for r, g, b in jasc_colors(source.read_bytes()))
@@ -495,7 +544,7 @@ def compress(data, method, tmp, name):
 
 def encode(manifest, entry, version, tmp, source=None):
     source = manifest.source(entry, version) if source is None else source
-    data = read_source(entry, source, tmp)
+    data = read_source(entry, source, tmp, entry[version]["size"])
     method = entry[version].get("compress")
     if method:
         data = compress(data, method, tmp, entry["name"])
@@ -517,6 +566,8 @@ def decode_one(manifest, entry, version, data, tmp, palette_bytes):
         raise ManifestError(f"{entry['name']}: unsupported compression {method}")
     if fmt in ("tilemap", "raw"):
         return data
+    if fmt == "glyphs":
+        return glyphs_to_png(entry, data)
     if fmt == "palette":
         out = tmp / f"{entry['name']}.pal"
         write_jasc(out, data)

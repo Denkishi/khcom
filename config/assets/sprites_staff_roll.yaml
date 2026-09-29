@@ -1,5 +1,11 @@
 group: sprites_staff_roll
 types:
+  StaffRollTileBlock:
+    fields:
+    - name: tiles
+      type: void*
+    - name: size
+      type: u32
   SpriteTable:
     kind: table
     type: void*
@@ -33,8 +39,8 @@ objects:
     end: 0x09C913F4
     data_start: 0x09EFBC40
     data_end: 0x09EFBEC4
-  - name: sprites_staff_roll_tiles_1.s
-    start: 0x09A54217
+  - name: sprites_staff_roll_names.s
+    start: 0x09A54218
     end: 0x09A542B8
   - name: sprites_staff_roll_tiles_2.s
     start: 0x09CD1774
@@ -66,8 +72,8 @@ objects:
     end: 0x09C6A900
     data_start: 0x09ED31B8
     data_end: 0x09ED343C
-  - name: sprites_staff_roll_tiles_1.s
-    start: 0x09A090A7
+  - name: sprites_staff_roll_names.s
+    start: 0x09A090A8
     end: 0x09A09148
   - name: sprites_staff_roll_tiles_2.s
     start: 0x09CAAC80
@@ -99,8 +105,8 @@ objects:
     end: 0x09D01720
     data_start: 0x09F88454
     data_end: 0x09F886D8
-  - name: sprites_staff_roll_tiles_1.s
-    start: 0x09AB1F4F
+  - name: sprites_staff_roll_names.s
+    start: 0x09AB1F50
     end: 0x09AB1FF0
   - name: sprites_staff_roll_tiles_2.s
     start: 0x09D41AA0
@@ -36330,31 +36336,78 @@ entries:
   eu:
     address: 0x09CFE2B8
     size: 9392
-- name: gUnk_09A54217
-  format: raw
-  us:
-    address: 0x09A54217
-    size: 1
-  jp:
-    address: 0x09A090A7
-    size: 1
-    symbol: gUnkJp_09A090A7
-  eu:
-    address: 0x09AB1F4F
-    size: 1
-    symbol: gUnkEu_09AB1F4F
 - name: gUnk_09A54218
-  format: tiles4
+  record: StaffRollTileBlock
   declare: false
   us:
     address: 0x09A54218
-    size: 160
+    elements:
+    - [gUnk_09C638BE, 1120]
+    - [gUnk_09C642B8, 5760]
+    - [gUnk_09C65ED0, 5760]
+    - [gUnk_09C67AE8, 5760]
+    - [gUnk_09C69700, 5760]
+    - [gUnk_09C6B318, 5760]
+    - [gUnk_09C6CF30, 5760]
+    - [gUnk_09C6EB48, 5760]
+    - [gUnk_09C70760, 5760]
+    - [gUnk_09C72378, 5760]
+    - [gUnk_09C73F90, 5760]
+    - [gUnk_09C75BA8, 5760]
+    - [gUnk_09C777C0, 5760]
+    - [gUnk_09C793D8, 5696]
+    - [gUnk_09C7AFB0, 5696]
+    - [gUnk_09C7CB88, 5760]
+    - [gUnk_09C7E7A0, 5696]
+    - [gUnk_09C80378, 5760]
+    - [gUnk_09C81F90, 5760]
+    - [gUnk_09C83BA8, 5760]
   jp:
     address: 0x09A090A8
-    size: 160
+    elements:
+    - [gUnk_09C638BE, 1440]
+    - [gUnkJp_09C3CB44, 5760]
+    - [gUnkJp_09C3E75C, 5760]
+    - [gUnkJp_09C40374, 5760]
+    - [gUnkJp_09C41F8C, 5760]
+    - [gUnkJp_09C43BA4, 5760]
+    - [gUnkJp_09C457BC, 5760]
+    - [gUnkJp_09C473D4, 5760]
+    - [gUnkJp_09C48FEC, 5760]
+    - [gUnkJp_09C4AC04, 5760]
+    - [gUnkJp_09C4C81C, 5760]
+    - [gUnkJp_09C4E434, 5760]
+    - [gUnkJp_09C5004C, 5760]
+    - [gUnkJp_09C51C64, 5696]
+    - [gUnkJp_09C5383C, 5696]
+    - [gUnkJp_09C55414, 5760]
+    - [gUnkJp_09C5702C, 5696]
+    - [gUnkJp_09C58C04, 5760]
+    - [gUnkJp_09C5A81C, 5760]
+    - [gUnkJp_09C5C434, 5760]
   eu:
     address: 0x09AB1F50
-    size: 160
+    elements:
+    - [gUnk_09C638BE, 1120]
+    - [gUnkEu_09CC13C8, 5760]
+    - [gUnkEu_09CC2FE0, 5760]
+    - [gUnkEu_09CC4BF8, 5760]
+    - [gUnkEu_09CC6810, 5760]
+    - [gUnkEu_09CC8428, 5760]
+    - [gUnkEu_09CCA040, 5760]
+    - [gUnkEu_09CCBC58, 5760]
+    - [gUnkEu_09CCD870, 5760]
+    - [gUnkEu_09CCF488, 5760]
+    - [gUnkEu_09CD10A0, 5760]
+    - [gUnkEu_09CD2CB8, 5760]
+    - [gUnkEu_09CD48D0, 5760]
+    - [gUnkEu_09CD64E8, 5696]
+    - [gUnkEu_09CD80C0, 5696]
+    - [gUnkEu_09CD9C98, 5760]
+    - [gUnkEu_09CDB8B0, 5696]
+    - [gUnkEu_09CDD488, 5760]
+    - [gUnkEu_09CDF0A0, 5760]
+    - [gUnkEu_09CE0CB8, 5760]
 - name: gUnk_09CD1774
   format: tiles4
   width: 32

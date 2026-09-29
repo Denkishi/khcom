@@ -379,7 +379,7 @@ bos_lst_ctr.c
 bos_lst_snp.c
 staff_roll_script_text.s
 mode_staffroll.c
-sprites_staff_roll_tiles_1.s
+sprites_staff_roll_names.s
 sroll_a_name.c
 sroll_b_char.c
 sroll_b_logo.c
@@ -387,7 +387,7 @@ sroll_b_secn.c
 sroll_b_crtn.c
 sroll_c_char.c
 sroll_tmr.c
-sroll_rodata.s
+staff_roll_font.s
 staff_roll_audio.s
 pcm_audio.c
 audio_block_codec.c

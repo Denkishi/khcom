@@ -55,13 +55,7 @@ u8* GetDeckName(u8 index);
 void SetActiveDeckIndex(u8 index);
 u8 GetActiveDeckIndex(void);
 
-#ifdef VERSION_JP
-const u8 gUnk_0903C008[] = "\x82\xf0";
-#elif defined(VERSION_EU)
-const u8 gUnk_0903C008[] = ".";
-#else
-const u16 gUnk_0903C008[2] = { '.', 0 };
-#endif
+#include "deck_equip_suffix.inc"
 
 void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;

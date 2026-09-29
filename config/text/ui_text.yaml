@@ -56,6 +56,15 @@ fragments:
     count: exact
     entries:
     - gUnk_090362A4
+  - name: deck_equip_suffix.inc
+    start: 0x0903C008
+    end: 0x0903C00C
+    encoding: game
+    align: 2
+    ctype: const u16
+    count: exact
+    entries:
+    - gUnk_0903C008
   - name: deck_names.inc
     start: 0x09EE4AC8
     end: 0x09EE4AF2
@@ -150,6 +159,15 @@ fragments:
     entries:
     - gUnkJp_09009748
     - gUnkJp_0900974C
+  - name: deck_equip_suffix.inc
+    start: 0x0900D48C
+    end: 0x0900D48F
+    encoding: game
+    align: 4
+    ctype: const u8
+    form: string
+    entries:
+    - gUnk_0903C008
   - name: deck_names.inc
     start: 0x09EBC0E8
     end: 0x09EBC112
@@ -226,6 +244,15 @@ fragments:
     entries:
     - gUnkEu_090CF648
     - gUnkEu_090CF64D
+  - name: deck_equip_suffix.inc
+    start: 0x090D1884
+    end: 0x090D1886
+    encoding: game
+    align: 4
+    ctype: const u8
+    form: string
+    entries:
+    - gUnk_0903C008
   - name: link_deck_names.inc
     start: 0x095DA860
     end: 0x095DA86F

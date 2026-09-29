@@ -92,7 +92,9 @@ class Manifest:
         if kind == "struct":
             return record_layout(self.types[entry["record"]], version)[2]
         if kind == "array":
-            return scalar_size(self.types[entry["record"]]["type"])
+            return max(scalar_size(self.types[entry["record"]]["type"]), self.types[entry["record"]].get("align", 1))
+        if kind == "string":
+            return self.types[entry["record"]].get("align", 1)
         return 1
 
     def size(self, entry, version):

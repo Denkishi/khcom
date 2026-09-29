@@ -309,7 +309,7 @@ sprite_palettes_12.s
 sprites_status_palettes.s
 copyright_screen_palettes_2.s
 sprites_title_tiles_2.s
-mode_mapchk_rodata.s
+map_check_worlds.s
 mode_mapchk.c
 map_runtime.c
 map_cell.c

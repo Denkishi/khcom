@@ -758,6 +758,7 @@ void func_0809B59C(UnkStruct_0809A02C* w) {
     ReleaseObjPalette(w->palette3);
     ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
+    // @bug Leaving a battle frees gCardBattleState before this card is destroyed (NULL write).
     gCardBattleState->unk_0D6 = 0;
     gBtlWork->prizeCount--;
 }

@@ -1774,7 +1774,6 @@ TARGET_ONLY_SYMBOLS = {
         "gMoogleAssetEu_099B23E8": 0x99b23e8,
         "gMoogleAssetEu_099B2668": 0x99b2668,
         "gBossMapBlockEu_08124944": 0x8124944,
-        "gUnkEu_090D1DA5": 0x090D1DA5,
         "gUnk_08B1ED76": 0x08b4a686,
         "gUnk_08B1EF0C": 0x08b4a81c,
         "gUnk_08B1F020": 0x08b4a930,

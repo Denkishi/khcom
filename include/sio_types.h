@@ -9,7 +9,7 @@ typedef struct SioWork {
     u8 playerId;
     u8 playerCount;
     u16 recv[4];
-    u8 unk_0C;
+    u8 recvEmpty;
     u8 unk_0D;
     u8 unk_0E;
     u8 unk_0F;

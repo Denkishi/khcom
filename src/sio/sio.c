@@ -220,9 +220,9 @@ u32 func_08006ED4(u8* a, u16* b, u16 (*c)[2]) {
         gSioWork.unk_01 = 4;
     case 4:
         if (gSioWork.unk_0E == 0) {
-            func_0800712C(b);
+            SioQueueSendFrame(b);
         }
-        func_08007210(c);
+        SioReadRecvFrame(c);
         break;
     }
 
@@ -232,7 +232,7 @@ u32 func_08006ED4(u8* a, u16* b, u16 (*c)[2]) {
     if (gSioWork.unk_00 == 8) {
         r |= 0x20;
     }
-    t0 = gSioWork.unk_0C << 8;
+    t0 = gSioWork.recvEmpty << 8;
     t1 = gSioWork.unk_11 << 9;
     t2 = gSioWork.unk_12 << 16;
     t3 = gSioWork.unk_13 << 17;
@@ -260,9 +260,9 @@ u32 func_0800702C(u8* a, u16* b, u16 (*c)[2]) {
 
     if (gSioWork.unk_01 == 4) {
         if (gSioWork.unk_0E == 0) {
-            func_0800712C(b);
+            SioQueueSendFrame(b);
         }
-        func_08007210(c);
+        SioReadRecvFrame(c);
     }
 
     r = gSioWork.playerId | (gSioWork.playerCount << 2);
@@ -270,7 +270,7 @@ u32 func_0800702C(u8* a, u16* b, u16 (*c)[2]) {
     if (gSioWork.unk_00 == 8) {
         r |= 0x20;
     }
-    t0 = gSioWork.unk_0C << 8;
+    t0 = gSioWork.recvEmpty << 8;
     t1 = gSioWork.unk_11 << 9;
     t2 = gSioWork.unk_12 << 16;
     t3 = gSioWork.unk_13 << 17;
@@ -309,7 +309,7 @@ void func_080070DC(void) {
     }
 }
 
-void func_0800712C(u16* p) {
+void SioQueueSendFrame(u16* frame) {
     u8 idx;
     u8 i;
 
@@ -323,10 +323,10 @@ void func_0800712C(u16* p) {
         }
 
         for (i = 0; i < 4; i++) {
-            gUnk_02034076 |= *p;
-            gSioWork.sendBuf[i][idx] = *p;
-            *p = 0;
-            p++;
+            gUnk_02034076 |= *frame;
+            gSioWork.sendBuf[i][idx] = *frame;
+            *frame = 0;
+            frame++;
         }
     } else {
         gSioWork.unk_14 |= 1;
@@ -340,7 +340,7 @@ void func_0800712C(u16* p) {
     gUnk_020397D0 = gSioWork.sendCount;
 }
 
-void func_08007210(u16 (*c)[2]) {
+void SioReadRecvFrame(u16 (*frame)[2]) {
     u8 i;
     u8 j;
 
@@ -350,14 +350,14 @@ void func_08007210(u16 (*c)[2]) {
     if (gSioWork.recvCount == 0) {
         for (i = 0; i < 4; i++) {
             for (j = 0; j < gSioWork.playerCount; j++) {
-                c[i][j] = 0;
+                frame[i][j] = 0;
             }
         }
-        gSioWork.unk_0C = 1;
+        gSioWork.recvEmpty = 1;
     } else {
         for (i = 0; i < 4; i++) {
             for (j = 0; j < gSioWork.playerCount; j++) {
-                c[i][j] = gSioWork.recvBuf[j][i][gSioWork.recvReadIdx];
+                frame[i][j] = gSioWork.recvBuf[j][i][gSioWork.recvReadIdx];
             }
         }
         gSioWork.recvCount--;
@@ -365,7 +365,7 @@ void func_08007210(u16 (*c)[2]) {
         if (gSioWork.recvReadIdx > 31) {
             gSioWork.recvReadIdx = 0;
         }
-        gSioWork.unk_0C = 0;
+        gSioWork.recvEmpty = 0;
     }
     REG_IME = gUnk_0203406E;
 }

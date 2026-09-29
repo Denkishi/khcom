@@ -162,7 +162,7 @@ card_worldsel_before.c
 card_deckmenu2_2.c
 card_deckexchange.c
 card_mode_deck.c
-card_mode_deck_tables.s
+tutorial_deck.s
 card_description_text.s
 card_riku_tutorial.c
 card_print.c

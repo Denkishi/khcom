@@ -25,7 +25,10 @@ SOURCE_EXT = {"tiles4": "png", "tiles8": "png", "palette": "pal", "tilemap": "bi
               **m4a_assets.SOURCE_EXT}
 BINARY_EXT = {"tiles4": "4bpp", "tiles8": "8bpp", "palette": "gbapal", "tilemap": "bin", "raw": "bin",
               "sprite_sheet": "4bpp", **m4a_assets.BINARY_EXT}
-ASM_KINDS = ("sprite", "anim")
+ASM_KINDS = ("sprite", "anim", "array", "string")
+SCALAR_SIZES = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
+DIRECTIVES = {1: ".byte", 2: ".hword", 4: ".4byte"}
+VALUES_PER_LINE = {1: 16, 2: 8, 4: 4}
 
 
 class ManifestError(Exception):
@@ -59,17 +62,45 @@ class Manifest:
     def kind(self, entry):
         if "record" not in entry:
             return None
+        if entry["record"] not in self.types:
+            raise ManifestError(f"{self.group}: {entry['name']} has the unknown record type {entry['record']}")
         return self.types[entry["record"]].get("kind", "struct")
 
     def data(self, entry, version, key):
         return entry[version].get(key, entry.get(key))
+
+    def elements(self, entry, version):
+        return self.data(entry, version, "elements")
+
+    def string_bytes(self, entry, version):
+        rtype = self.types[entry["record"]]
+        try:
+            return self.data(entry, version, "text").encode(rtype["encoding"]) + b"\0"
+        except UnicodeError as error:
+            raise ManifestError(f"{self.group}: {entry['name']}: {error}")
+
+    def align(self, entry, version):
+        if "align" in entry:
+            return entry["align"]
+        kind = self.kind(entry)
+        if kind == "struct":
+            return record_layout(self.types[entry["record"]], version)[2]
+        if kind == "array":
+            return scalar_size(self.types[entry["record"]]["type"])
+        return 1
 
     def size(self, entry, version):
         kind = self.kind(entry)
         if kind is None:
             return entry[version]["size"]
         if kind == "struct":
-            return record_size(self.types[entry["record"]], version)
+            size = record_size(self.types[entry["record"]], version)
+            elements = self.elements(entry, version)
+            return size if elements is None else size * len(elements)
+        if kind == "array":
+            return scalar_size(self.types[entry["record"]]["type"]) * len(self.data(entry, version, "values"))
+        if kind == "string":
+            return len(self.string_bytes(entry, version))
         if kind == "table":
             return 4 * len(self.data(entry, version, "items"))
         if kind == "sprite":
@@ -85,12 +116,13 @@ class Manifest:
         return fields
 
     def source(self, entry, version):
-        if "record" in entry:
+        if "record" in entry or entry.get("format") == "fill":
             return None
         return ROOT / "assets" / version / self.group / f"{entry['name']}.{SOURCE_EXT[entry['format']]}"
 
     def binary(self, entry, version):
-        if "record" in entry or entry.get("tiles") or entry.get("format") in m4a_assets.INCLUDED:
+        if ("record" in entry or entry.get("tiles") or entry.get("format") in m4a_assets.INCLUDED
+                or entry.get("format") == "fill"):
             return None
         return ROOT / "build" / version / "gen" / self.group / f"{entry['name']}.{BINARY_EXT[entry['format']]}"
 
@@ -156,18 +188,16 @@ class Manifest:
                 for entry in members:
                     if not lo <= entry[version]["address"] < hi:
                         continue
-                    position = aligned(position, entry)
+                    position = aligned(position, self.align(entry, version))
                     if entry[version]["address"] != position:
                         raise ManifestError(f"{self.group}: {obj['name']} has a gap before {entry['name']} at {position:#x} in {version}")
                     position += self.size(entry, version)
                     kind = self.kind(entry)
                     if "data_start" in obj and (kind == "table") != data:
                         raise ManifestError(f"{self.group}: {obj['name']} holds {entry['name']} in its {'.data' if data else 'payload'} range, which takes {'only' if data else 'no'} table records")
-                    if obj["name"].endswith(".c") and entry.get("format") == "sprite_sheet":
-                        raise ManifestError(f"{self.group}: {obj['name']} holds sprite sheet {entry['name']} but is not an assembler object")
-                    if obj["name"].endswith(".s") and (kind == "struct" or kind == "table" and not data):
-                        raise ManifestError(f"{self.group}: {obj['name']} holds a {kind} record but is not a C object")
-                    if obj["name"].endswith(".c") and kind in ASM_KINDS:
+                    if obj["name"].endswith(".c") and entry.get("format") in ("sprite_sheet", "fill"):
+                        raise ManifestError(f"{self.group}: {obj['name']} holds {entry['format']} {entry['name']} but is not an assembler object")
+                    if obj["name"].endswith(".c") and (kind in ASM_KINDS or kind == "struct" and self.elements(entry, version) is not None):
                         raise ManifestError(f"{self.group}: {obj['name']} holds a {kind} record but is not an assembler object")
                 if not position <= hi < position + 4:
                     raise ManifestError(f"{self.group}: {obj['name']} ends at {position:#x}, not {hi:#x}, in {version}")
@@ -186,27 +216,163 @@ def in_data(obj, entry, version):
     return "data_start" in obj and obj["data_start"] <= entry[version]["address"] < obj["data_end"]
 
 
-def aligned(position, entry):
-    align = entry.get("align", 1)
+def aligned(position, align):
     return (position + align - 1) // align * align
 
 
 def scalar_size(ctype):
-    return {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}.get(ctype, 4 if ctype.endswith("*") else None)
+    return SCALAR_SIZES.get(ctype, 4 if ctype.endswith("*") else None)
 
 
-def record_size(rtype, version):
-    size, align = 0, 1
+def record_layout(rtype, version):
+    placed, size, align, unit = [], 0, rtype.get("align", 1), None
     for field in rtype["fields"]:
         if version not in field.get("versions", VERSIONS):
             continue
         width = scalar_size(field["type"])
         if width is None:
             raise ManifestError(f"unknown field type {field['type']}")
-        size = (size + width - 1) // width * width
-        size += width * field.get("count", 1)
+        bits = field.get("bits")
+        if bits:
+            if unit is None or unit[1] != width or unit[2] + bits > 8 * width:
+                size = aligned(size, width)
+                unit = [size, width, 0]
+                size += width
+            placed.append((field, unit[0], width, 1, unit[2]))
+            unit[2] += bits
+        else:
+            unit = None
+            size = aligned(size, width)
+            count = field.get("count", 1)
+            placed.append((field, size, width, count, None))
+            size += width * count
         align = max(align, width)
-    return (size + align - 1) // align * align
+    return placed, aligned(size, align), align
+
+
+def record_size(rtype, version):
+    return record_layout(rtype, version)[1]
+
+
+def element_values(manifest, entry, layout, element):
+    names = [field["name"] for field, *_rest in layout]
+    if isinstance(element, dict):
+        missing = [name for name in names if name not in element]
+        unknown = sorted(set(element) - set(names))
+        if missing or unknown:
+            raise ManifestError(f"{manifest.group}: {entry['name']} lacks {missing[:3]} or has unknown fields {unknown[:3]}")
+        return element
+    if len(element) != len(names):
+        raise ManifestError(f"{manifest.group}: {entry['name']} element {element} has {len(element)} values for {len(names)} fields")
+    return dict(zip(names, element))
+
+
+def field_list(manifest, entry, field, count, value):
+    if isinstance(value, str) and field.get("encoding"):
+        data = value.encode(field["encoding"])
+        if len(data) > count:
+            raise ManifestError(f"{manifest.group}: {entry['name']}.{field['name']} is longer than {count} bytes")
+        return list(data.ljust(count, b"\0"))
+    if not isinstance(value, list) or len(value) != count:
+        raise ManifestError(f"{manifest.group}: {entry['name']}.{field['name']} needs {count} values")
+    return value
+
+
+def record_chunks(manifest, entry, version):
+    kind = manifest.kind(entry)
+    rtype = manifest.types[entry["record"]]
+    if kind == "array":
+        width = scalar_size(rtype["type"])
+        return [(index * width, width, value) for index, value in enumerate(manifest.data(entry, version, "values"))]
+    if kind == "string":
+        return [(index, 1, value) for index, value in enumerate(manifest.string_bytes(entry, version))]
+    if kind == "table":
+        return [(4 * index, 4, item or 0) for index, item in enumerate(manifest.data(entry, version, "items"))]
+    if kind != "struct":
+        raise ManifestError(f"{manifest.group}: {entry['name']} is a {kind} record, which has no field layout")
+    layout, size, _align = record_layout(rtype, version)
+    elements = manifest.elements(entry, version)
+    elements = [manifest.fields(entry, version)] if elements is None else elements
+    out = []
+    for index, element in enumerate(elements):
+        values = element_values(manifest, entry, layout, element)
+        base = index * size
+        units = {}
+        for field, offset, width, count, shift in layout:
+            value = values[field["name"]]
+            if shift is not None:
+                if not isinstance(value, int):
+                    raise ManifestError(f"{manifest.group}: {entry['name']}.{field['name']} is a bit field and needs a number")
+                packed = units.get(offset, (width, 0))[1] | ((value & ((1 << field["bits"]) - 1)) << shift)
+                units[offset] = (width, packed)
+            elif "count" in field:
+                out += [(base + offset + i * width, width, item)
+                        for i, item in enumerate(field_list(manifest, entry, field, count, value))]
+            else:
+                out.append((base + offset, width, value))
+        out += [(base + offset, width, packed) for offset, (width, packed) in units.items()]
+    return sorted(out, key=lambda chunk: chunk[0])
+
+
+def expression(value, resolve):
+    name, sign, rest = value.partition("+") if "+" in value else value.partition("-")
+    return resolve(name.strip()) + (f"{sign}{rest.strip()}" if sign else "")
+
+
+def value_text(value, width, resolve):
+    if value is None:
+        return "0"
+    if isinstance(value, int):
+        return str(value & ((1 << (8 * width)) - 1))
+    if width != 4:
+        raise ManifestError(f"symbol {value} does not fit a {width}-byte field")
+    return expression(value, resolve)
+
+
+def chunk_lines(chunks, size, resolve):
+    lines, position, run = [], 0, None
+
+    def flush():
+        if run:
+            lines.append(f"\t{DIRECTIVES[run[0]]} {', '.join(run[1])}")
+
+    for offset, width, value in chunks:
+        if offset < position:
+            raise ManifestError(f"record fields overlap at offset {offset}")
+        if offset > position:
+            flush()
+            run = (1, ["0"] * (offset - position))
+            position = offset
+        text = value_text(value, width, resolve)
+        if run is None or run[0] != width or len(run[1]) >= VALUES_PER_LINE[width]:
+            flush()
+            run = (width, [])
+        run[1].append(text)
+        position = offset + width
+    flush()
+    if size > position:
+        lines.append(f"\t.byte {', '.join(['0'] * (size - position))}")
+    return lines
+
+
+def record_lines(manifest, entry, version, resolve):
+    return chunk_lines(record_chunks(manifest, entry, version), manifest.size(entry, version), resolve)
+
+
+def check_record(manifest, entry, version, data, addresses):
+    expected = bytearray(len(data))
+    known = bytearray(b"\1" * len(data))
+    for offset, width, value in record_chunks(manifest, entry, version):
+        if isinstance(value, str):
+            name, sign, rest = value.partition("+") if "+" in value else value.partition("-")
+            if name.strip() not in addresses:
+                known[offset:offset + width] = bytes(width)
+                continue
+            value = addresses[name.strip()] + (int(rest, 0) * (-1 if sign == "-" else 1) if sign else 0)
+        expected[offset:offset + width] = ((value or 0) & ((1 << (8 * width)) - 1)).to_bytes(width, "little")
+    for offset, (want, got, check) in enumerate(zip(expected, data, known)):
+        if check and want != got:
+            raise ManifestError(f"{manifest.group}: {entry['name']} differs from the {version} ROM at offset {offset:#x}")
 
 
 def load_manifests(directory=MANIFEST_DIR):
@@ -410,19 +576,30 @@ def decode(manifest, version, rom, rom_base=0x08000000, lookup=None):
     palettes = {name: owner.by_name[name] for name, owner in lookup.items()} if lookup else manifest.by_name
 
     def rom_bytes(entry):
-        address, size = entry[version]["address"], entry[version]["size"]
+        address = entry[version]["address"]
+        size = entry[version]["size"] if "size" in entry[version] else manifest.size(entry, version)
         data = rom[address - rom_base:address - rom_base + size]
         if len(data) != size:
             raise ManifestError(f"{entry['name']}: {version} extent is outside the ROM")
         return data
 
+    addresses = {e["name"]: e[version]["address"] for other in (set(lookup.values()) if lookup else [manifest])
+                 for e in other.entries if version in e}
+    for entry in manifest.entries:
+        if version in entry and manifest.kind(entry) in ("struct", "array", "string", "table"):
+            check_record(manifest, entry, version, rom_bytes(entry), addresses)
+            checked += 1
+        elif version in entry and entry.get("format") == "fill":
+            if rom_bytes(entry) != bytes([entry["value"]]) * entry[version]["size"]:
+                raise ManifestError(f"{manifest.group}: {entry['name']} is not a {entry['value']:#x} fill in the {version} ROM")
+            checked += 1
     audio = None
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         probe_dir = tmp / "probe"
         probe_dir.mkdir()
         for entry in manifest.entries:
-            if "record" in entry or version not in entry:
+            if "record" in entry or version not in entry or entry.get("format") == "fill":
                 continue
             data = rom_bytes(entry)
             palette = palettes.get(entry.get("palette"))
@@ -609,7 +786,7 @@ def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
         if in_data(obj, entry, version):
             continue
         symbol = manifest.symbol(entry, version)
-        pad = aligned(position, entry) - position
+        pad = aligned(position, manifest.align(entry, version)) - position
         if pad:
             lines.append(f"\t.byte {words([0] * pad)}")
             position += pad
@@ -640,6 +817,10 @@ def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
             lines.append(f"\t.hword {fields['unk_00']}, {fields['unk_02']}, {len(frames)}")
             for frame in frames:
                 lines.append(f"\t.hword {words(frame)}")
+        elif kind is not None:
+            lines += record_lines(manifest, entry, version, resolve)
+        elif entry.get("format") == "fill":
+            lines.append(f"\t.fill {entry[version]['size']}, 1, {entry['value']}")
         else:
             binary = manifest.binary(entry, version)
             data = encode(manifest, entry, version, tmp)
@@ -670,7 +851,7 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
     guard = "GUARD_GEN_" + manifest.group.upper() + "_H"
     lines = [f"#ifndef {guard}", f"#define {guard}", ""]
     headers = {manifest.types[e.get("record", e.get("type"))].get("header") for members in members_by_object.values()
-               for e in members if "record" in e or "type" in e}
+               for e in members if ("record" in e or "type" in e) and e.get("declare") is not False}
     if any(manifest.animations(e, version) for members in members_by_object.values()
            for e in members if e.get("format") == "sprite_sheet"):
         headers.add(manifest.types[manifest.anim_type()].get("header"))
@@ -703,7 +884,19 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
                 else:
                     lines.append(f"extern {ctype} {symbol}[{len(manifest.data(entry, version, 'items'))}];")
             elif kind == "struct":
-                lines.append(f"extern const {entry['record']} {symbol};")
+                if not manifest.types[entry["record"]].get("header"):
+                    raise ManifestError(f"{manifest.group}: {entry['name']} is declared but {entry['record']} has no header")
+                elements = manifest.elements(entry, version)
+                count = "" if elements is None else f"[{len(elements)}]"
+                lines.append(f"extern const {entry['record']} {symbol}{count};")
+            elif kind == "array":
+                rtype = manifest.types[entry["record"]]
+                values = len(manifest.data(entry, version, "values"))
+                columns = rtype.get("columns")
+                shape = f"[{values}]" if not columns else f"[{values // columns}][{columns}]"
+                lines.append(f"extern const {rtype.get('ctype', rtype['type'])} {symbol}{shape};")
+            elif kind == "string":
+                lines.append(f"extern const {manifest.types[entry['record']].get('ctype', 'char')} {symbol}[];")
             elif kind == "anim":
                 lines.append(f"extern {entry['record']} {symbol};")
             elif kind == "sprite":
@@ -755,7 +948,10 @@ def generate(version, manifest_path, all_manifests=None):
         sheets = {e["name"]: encode_sheet(manifest, e, version,
                                           borrowed=borrowed_block(lookup, e, version, tmp) if e.get("tiles") else None)
                   for members in members_by_object.values() for e in members if e.get("format") == "sprite_sheet"}
-        resolve = resolver(all_manifests, version) if any("data_start" in obj for obj in objects.values()) else None
+        needs = any("data_start" in obj for obj in objects.values()) or any(
+            manifest.kind(e) not in (None, "sprite", "anim") for name, members in members_by_object.items()
+            if name.endswith(".s") for e in members)
+        resolve = resolver(all_manifests, version) if needs else None
         for name, members in members_by_object.items():
             if name.endswith(".c"):
                 emit_c(manifest, version, members, gen / name, all_manifests)

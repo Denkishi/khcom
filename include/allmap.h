@@ -203,7 +203,7 @@ u8 IsStockMesDispActive(void);
 s32 func_080D5494(AllmapCursorPos a);
 void func_080D576C(u8 a, u16 b, u16 c);
 void* func_080986FC(u8 a);
-void func_08098014(AllmapDoorEntry* a, void* b);
+void InitEventKeyCard(AllmapDoorEntry* a, void* b);
 void func_08098598(s32 a, s32 b, AllmapDoorEntry* c);
 
 extern u8 gUnk_0203C590[];

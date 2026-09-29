@@ -1440,7 +1440,7 @@ typedef struct MapSelectWork {
     u8 unk_29C;
     u8 unk_29D;
     u8 unk_29E[0x20];
-    u8 unk_2BE;
+    u8 isEventDoor;
     u8 unk_2BF;
     u8 unk_2C0;
     u8 unk_2C1;
@@ -1448,7 +1448,7 @@ typedef struct MapSelectWork {
     u8 unk_2C3;
     SelmapEventKeyArgs eventKeyArgs;
     u8 unk_2D0[0x0A];
-    u8 unk_2DA;
+    u8 remainingKeys;
     u8 unk_2DB;
     void* unk_2DC;
     UnkStruct_080933D8* unk_2E0;
@@ -1646,16 +1646,16 @@ typedef struct ReloadWork {
     u8 unk_34;
 } ReloadWork;
 
-typedef struct UnkStruct_080984E4 {
+typedef struct EventKeyCard {
     UnkStruct_08098670 sprite;
     u16 unk_2C;
-    u16 unk_2E;
-    u16 unk_30;
-    u8 unk_32;
+    u16 total;
+    u16 drawnTotal;
+    u8 color;
     u8 unk_33;
-} UnkStruct_080984E4;
+} EventKeyCard;
 
-typedef char UnkStruct_080984E4_size[(sizeof(UnkStruct_080984E4) == 0x34) ? 1 : -1];
+typedef char EventKeyCard_size[(sizeof(EventKeyCard) == 0x34) ? 1 : -1];
 
 typedef struct SysMsgWinWork {
     ObjTiles* tiles3;
@@ -1897,8 +1897,8 @@ u8 func_080A6A38(RikuDeckMenuWork* w);
 u8 func_080A9A38(DeckExchangeWork* w);
 void func_080AA148(u8 kind, u8 slot);
 void Ev_mapObj_2(EventMapObjectWork* w);
-void func_08098014(UnkStruct_080984E4* card, struct EventKey* a);
-void func_080984E4(UnkStruct_080984E4* w);
+void InitEventKeyCard(EventKeyCard* card, struct EventKey* a);
+void UpdateEventKeyTotal(EventKeyCard* w);
 void func_08098598(s32 x, s32 y, UnkStruct_08098670* p);
 void func_08098778(UnkStruct_08098670* p);
 u8 card_reload_1(CardDisplayWork* p, void* a);
@@ -2035,7 +2035,7 @@ void func_080A9B84(DeckExchangeWork* w, u8 b);
 typedef struct SelmapEventKeyWork {
     void* tiles;
     ObjPalette* palette;
-    UnkStruct_080984E4 cards[4];
+    EventKeyCard cards[4];
     SelmapEventKeyArgs* args;
     AnimState anim;
     void* gfx;
@@ -2056,8 +2056,8 @@ typedef struct SelmapEventKeyWork {
     u8 unk_11E;
     u8 unk_11F;
     u8 unk_120;
-    u8 unk_121;
-    u8 unk_122;
+    u8 keyCount;
+    u8 paidCount;
     u8 unk_123;
 } SelmapEventKeyWork;
 

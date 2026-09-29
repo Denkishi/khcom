@@ -645,7 +645,7 @@ void func_080D44D4(AllmapDoorinfoWork* work) {
 
     for (i = 0; i < work->unk_114; i++) {
         e = &work->doors[i];
-        func_08098014(e, GetEventKey(i));
+        InitEventKeyCard(e, GetEventKey(i));
         func_08098598(func_080D44A0(work->unk_114, i), 0x6800, e);
 
         if (work->doors[i].palette != 0) {

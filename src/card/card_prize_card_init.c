@@ -1482,10 +1482,10 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     CpuSet(&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SelmapEventKeyWork) / 4);
     work->args = a;
     work->unk_F8 = a->unk_04;
-    work->unk_121 = CountRemainingEventKeys();
+    work->keyCount = CountRemainingEventKeys();
 
-    for (i = 0; i < work->unk_121; i++) {
-        func_08098014(&work->cards[i], GetEventKey((u8)i));
+    for (i = 0; i < work->keyCount; i++) {
+        InitEventKeyCard(&work->cards[i], GetEventKey((u8)i));
 
         if (work->cards[i].sprite.palette != 0) {
             FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, 1);
@@ -1529,7 +1529,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     work->unk_114 = 0x100;
     work->unk_116 = 0x100;
     work->unk_11B = 0;
-    work->unk_122 = 0;
+    work->paidCount = 0;
     work->unk_11A = 8;
     work->unk_118 = 0;
     func_08098598(0x10000, work->unk_100, &work->cards[0].sprite);
@@ -1543,15 +1543,15 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     u8 n;
 
     work->gfx = AnimUpdate(&work->anim);
-    work->unk_104 = ((240 - (work->unk_121 - work->unk_122) * 32) << 7) + 0x1000;
+    work->unk_104 = ((240 - (work->keyCount - work->paidCount) * 32) << 7) + 0x1000;
     ApproachValue(&work->unk_FC, work->unk_104, work->unk_11A);
 
     if (work->unk_11A != 0) {
         work->unk_11A--;
     }
 
-    for (i = work->unk_122; i < work->unk_121; i++) {
-        func_08098598(work->unk_FC + ((i - work->unk_122) << 13), work->unk_100, &work->cards[i].sprite);
+    for (i = work->paidCount; i < work->keyCount; i++) {
+        func_08098598(work->unk_FC + ((i - work->paidCount) << 13), work->unk_100, &work->cards[i].sprite);
     }
 
     SetObjMosaicSize(work->unk_11E, work->unk_11F);
@@ -1575,13 +1575,13 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_08097DE4);
     }
 
-    if (work->cards[work->unk_122].unk_2E != 0) {
+    if (work->cards[work->paidCount].total != 0) {
         r = GetEventKey(0);
-        work->cards[work->unk_122].unk_2E = r->value;
-        n = work->unk_122;
+        work->cards[work->paidCount].total = r->value;
+        n = work->paidCount;
 
-        if (work->cards[n].unk_30 != work->cards[n].unk_2E) {
-            func_080984E4(&work->cards[n]);
+        if (work->cards[n].drawnTotal != work->cards[n].total) {
+            UpdateEventKeyTotal(&work->cards[n]);
         }
     }
 
@@ -1621,12 +1621,12 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
             break;
         }
 
-        for (i = work->unk_122; i < work->unk_121; i++) {
-            if (i == work->unk_122) {
+        for (i = work->paidCount; i < work->keyCount; i++) {
+            if (i == work->paidCount) {
                 func_080985A0(&work->cards[i].sprite, 0x808, 0,
                               (gSineTable[(u8)work->unk_118] >> 8) * 8 + 256);
 
-                switch (work->cards[i].unk_32) {
+                switch (work->cards[i].color) {
                 case 2:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
@@ -1664,14 +1664,14 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
 void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     s32 i;
 
-    for (i = 0; i < work->unk_121; i++) {
+    for (i = 0; i < work->keyCount; i++) {
         func_08098778(&work->cards[i].sprite);
     }
 
     ReleaseObjTiles(work->tiles);
 }
 
-void func_08098014(UnkStruct_080984E4* work, EventKey* key) {
+void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     s32 zero;
     MapCardDef* c;
     MapCardBackDef* b;
@@ -1683,7 +1683,7 @@ void func_08098014(UnkStruct_080984E4* work, EventKey* key) {
     u8* q;
 
     zero = 0;
-    CpuSet((void*)&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_080984E4) / 4);
+    CpuSet((void*)&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(EventKeyCard) / 4);
 
     if (key->kind != 255) {
         c = &gUnk_09EE4C80[key->kind * 10];
@@ -1737,7 +1737,7 @@ void func_08098014(UnkStruct_080984E4* work, EventKey* key) {
         }
     }
 
-    q = &work->unk_32;
+    q = &work->color;
     *q = (z = 0, n);
 
     if (key->rule == 0) {
@@ -1808,8 +1808,8 @@ void func_08098014(UnkStruct_080984E4* work, EventKey* key) {
         }
 
         t = key->value;
-        work->unk_2E = t;
-        work->unk_30 = t;
+        work->total = t;
+        work->drawnTotal = t;
         break;
     }
 
@@ -1826,23 +1826,23 @@ void func_08098014(UnkStruct_080984E4* work, EventKey* key) {
     }
 }
 
-void func_080984E4(UnkStruct_080984E4* w) {
+void UpdateEventKeyTotal(EventKeyCard* w) {
     void* z;
 
-    if (w->unk_2E <= 9) {
+    if (w->total <= 9) {
         z = 0;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
         w->sprite.gfx3 = z;
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + w->unk_2E * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
     } else {
         z = 0;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
         w->sprite.gfx3 = z;
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + (u16)(w->unk_2E / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + (w->unk_2E - (u16)(w->unk_2E / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy((u8*)w->sprite.tiles3->src + (w->total - (u16)(w->total / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
     }
 
-    w->unk_30 = w->unk_2E;
+    w->drawnTotal = w->total;
 }
 
 void func_08098598(s32 x, s32 y, UnkStruct_08098670* p) {

@@ -149,14 +149,14 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->unk_29C = 0;
     w->unk_29D = 0;
     w->unk_2C0 = 0;
-    w->unk_2BE = SelectCurrentEventDoor();
+    w->isEventDoor = SelectCurrentEventDoor();
     n = (u8)func_080E0378() + 1;
     w->unk_27E = n;
     if (n == 10) {
         w->unk_27E = 0;
     }
     w->tiles3 = 0;
-    if (w->unk_2BE == 0) {
+    if (w->isEventDoor == 0) {
         if (w->unk_27E == 0) {
             w->tiles4 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[0], gUnk_0950C478);
@@ -308,10 +308,10 @@ u8 func_0809217C(MapSelectWork* w, void* a) {
     ScrollBgMapTo(1, 0, 0);
     EnableBg(1);
 
-    if (w->unk_2BE == 1) {
-        w->unk_2DA = CountRemainingEventKeys();
+    if (w->isEventDoor == 1) {
+        w->remainingKeys = CountRemainingEventKeys();
         w->unk_2DC = GetEventKey(0);
-        n = w->unk_2DA;
+        n = w->remainingKeys;
 
         while (n != 0) {
             n--;
@@ -349,7 +349,7 @@ u8 func_08092234(MapSelectWork* w, void* a) {
                 func_080A42B4();
                 w->unk_2C2 = 95;
                 SetTaskUpdate(a, (TaskUpdateFunc)func_0809423C);
-            } else if ((gGameState.progression.unk_82 & 0x40) == 0 && w->unk_2BE == 1) {
+            } else if ((gGameState.progression.unk_82 & 0x40) == 0 && w->isEventDoor == 1) {
                 func_080A42B4();
                 w->unk_2C2 = 109;
                 SetTaskUpdate(a, (TaskUpdateFunc)func_08094404);
@@ -507,7 +507,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
         if (n == 1) {
             if (gUnk_0203A8C0[w->card->args.unk_00 + (s16)sel] != 0) {
-                if (w->unk_2BE == 1) {
+                if (w->isEventDoor == 1) {
                     m4aSongNumStart(SONG_SYS_KETEI2);
 
                     if (func_08093B08(w->card->args.unk_00) == 0) {
@@ -518,11 +518,11 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
                     RemoveMapCard(w->card->args.unk_00 + sel);
 
                     if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20) == 1) {
-                        w->unk_2DA = CountRemainingEventKeys();
-                        w->eventKey->unk_122++;
+                        w->remainingKeys = CountRemainingEventKeys();
+                        w->eventKey->paidCount++;
                         w->eventKey->unk_11A = 8;
 
-                        if (w->unk_2DA == 0) {
+                        if (w->remainingKeys == 0) {
                             w->card->unk_74 = sel;
                             w->card->unk_6C |= 0x40;
                             *w->unk_294 = 2;
@@ -688,10 +688,10 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(w->card->args.unk_00 + 1);
                         if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
-                            w->unk_2DA = CountRemainingEventKeys();
-                            w->eventKey->unk_122++;
+                            w->remainingKeys = CountRemainingEventKeys();
+                            w->eventKey->paidCount++;
                             w->eventKey->unk_11A = 8;
-                            if (w->unk_2DA == 0) {
+                            if (w->remainingKeys == 0) {
                                 w->card->unk_74 = 1;
                                 w->card->unk_6C |= 0x40;
                                 for (p = ListPoolFirst(&w->cards); p != 0; p = ListPoolNext(&p->node)) {
@@ -821,7 +821,7 @@ void MapSelect_2(MapSelectWork* w) {
 #endif
                    w->tiles3, w->palette3, 0, 0, 80);
     }
-    if (w->unk_2BE == 1) {
+    if (w->isEventDoor == 1) {
         switch (gUnk_09EE4C80[w->card->args.unk_00].backIndex) {
         case 0:
             break;
@@ -851,7 +851,7 @@ void MapSelect_2(MapSelectWork* w) {
 #endif
                    gUnk_09EEB000, w->tiles6, w->palette, 0, 0, 40);
     }
-    if (w->unk_2BE == 0 && w->unk_299 != 9 && w->unk_29A != 9) {
+    if (w->isEventDoor == 0 && w->unk_299 != 9 && w->unk_29A != 9) {
         DrawSprite(120, 56, 0, w->tiles4, w->palette, 0, 8, 60);
         DrawSprite(120, 56, gUnk_08F709B0[4].gfx2, w->tiles2, w->palette, 0, 8, 60);
     }
@@ -2075,7 +2075,7 @@ u8 func_08094A18(MapcardWork* w, void* a) {
     w->unk_60 -= w->unk_5C;
     w->unk_5C += 2;
 
-    if (w->args.parent->unk_2BE != 1) {
+    if (w->args.parent->isEventDoor != 1) {
         if (d <= 0x7FF) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
@@ -2083,7 +2083,7 @@ u8 func_08094A18(MapcardWork* w, void* a) {
             func_08093BEC(&gUnk_09EE4C80[w->args.unk_00 + w->unk_74].unk_20);
         }
     } else {
-        if (d <= 0x7FF && w->args.parent->unk_2DA == 0) {
+        if (d <= 0x7FF && w->args.parent->remainingKeys == 0) {
             func_08093BE0();
             f = w->unk_6C | 0x80;
             w->unk_6C = f;

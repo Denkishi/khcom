@@ -142,7 +142,7 @@ entries:
     address: 0x0981F2E0
     size: 512
 - name: gUnk_0984AE38
-  format: raw
+  format: palette
   us:
     address: 0x0984AE38
     size: 320

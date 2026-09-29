@@ -1395,12 +1395,14 @@ entries:
     address: 0x094EA2E4
     size: 1536
 - name: gUnkEu_094EAD64
-  format: raw
+  format: tiles4
+  width: 1
   eu:
     address: 0x094EAD64
     size: 32
 - name: gUnkEu_094EB184
-  format: raw
+  format: tiles4
+  width: 25
   eu:
     address: 0x094EB184
     size: 800

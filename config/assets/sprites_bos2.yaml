@@ -2056,7 +2056,7 @@ entries:
     address: 0x09672B2C
     size: 16032
 - name: gUnk_096C0464
-  format: raw
+  format: tilemap
   us:
     address: 0x096C0464
     size: 18432

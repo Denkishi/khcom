@@ -8223,7 +8223,8 @@ entries:
     address: 0x0972DAE8
     size: 1278
 - name: gUnk_097AED78
-  format: raw
+  format: tiles4
+  width: 32
   us:
     address: 0x097AED78
     size: 22528

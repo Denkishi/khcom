@@ -871,7 +871,7 @@ entries:
     address: 0x09544CE4
     size: 32
 - name: gUnk_09611C98
-  format: raw
+  format: palette
   us:
     address: 0x09611C98
     size: 96
@@ -906,7 +906,7 @@ entries:
     address: 0x09544D84
     size: 32
 - name: gUnk_09611D38
-  format: raw
+  format: palette
   us:
     address: 0x09611D38
     size: 32
@@ -930,7 +930,7 @@ entries:
     address: 0x09544DC4
     size: 32
 - name: gUnk_09611D78
-  format: raw
+  format: palette
   us:
     address: 0x09611D78
     size: 64
@@ -1013,7 +1013,7 @@ entries:
     address: 0x09544EC4
     size: 32
 - name: gUnk_09611E78
-  format: raw
+  format: palette
   us:
     address: 0x09611E78
     size: 32
@@ -1334,7 +1334,7 @@ entries:
     address: 0x09545264
     size: 32
 - name: gUnk_09612218
-  format: raw
+  format: palette
   us:
     address: 0x09612218
     size: 32
@@ -2296,7 +2296,7 @@ entries:
     address: 0x09546DC4
     size: 32
 - name: gUnk_09613EF8
-  format: raw
+  format: palette
   us:
     address: 0x09613EF8
     size: 32
@@ -2331,7 +2331,7 @@ entries:
     address: 0x09546E24
     size: 32
 - name: gUnk_09613F58
-  format: raw
+  format: palette
   us:
     address: 0x09613F58
     size: 32
@@ -2685,7 +2685,7 @@ entries:
     address: 0x095476A4
     size: 32
 - name: gUnk_096147D8
-  format: raw
+  format: palette
   us:
     address: 0x096147D8
     size: 224
@@ -4234,7 +4234,7 @@ entries:
     address: 0x0954B3C4
     size: 32
 - name: gUnk_096184F8
-  format: raw
+  format: palette
   us:
     address: 0x096184F8
     size: 32
@@ -4269,7 +4269,7 @@ entries:
     address: 0x0954B424
     size: 32
 - name: gUnk_09618558
-  format: raw
+  format: palette
   us:
     address: 0x09618558
     size: 64
@@ -4887,7 +4887,7 @@ entries:
     address: 0x0954BBC4
     size: 32
 - name: gUnk_09618CF8
-  format: raw
+  format: palette
   us:
     address: 0x09618CF8
     size: 32
@@ -4922,7 +4922,7 @@ entries:
     address: 0x0954BC24
     size: 32
 - name: gUnk_09618D58
-  format: raw
+  format: palette
   us:
     address: 0x09618D58
     size: 32
@@ -4935,7 +4935,7 @@ entries:
     size: 32
     symbol: gUnkEu_0954BC44
 - name: gUnk_09618D78
-  format: raw
+  format: palette
   us:
     address: 0x09618D78
     size: 800
@@ -5168,7 +5168,7 @@ entries:
     address: 0x096C91EC
     size: 32
 - name: gUnk_096FBCE4
-  format: raw
+  format: palette
   us:
     address: 0x096FBCE4
     size: 64
@@ -5214,7 +5214,7 @@ entries:
     address: 0x096C928C
     size: 32
 - name: gUnk_096FBD84
-  format: raw
+  format: palette
   us:
     address: 0x096FBD84
     size: 32
@@ -5238,7 +5238,7 @@ entries:
     address: 0x096C92CC
     size: 32
 - name: gUnk_096FBDC4
-  format: raw
+  format: palette
   us:
     address: 0x096FBDC4
     size: 32
@@ -5495,7 +5495,7 @@ entries:
     address: 0x0981E360
     size: 32
 - name: gUnk_09849CD8
-  format: raw
+  format: palette
   us:
     address: 0x09849CD8
     size: 32
@@ -5884,7 +5884,7 @@ entries:
     address: 0x099970B0
     size: 32
 - name: gUnk_099910E4
-  format: raw
+  format: palette
   us:
     address: 0x099910E4
     size: 32
@@ -6139,7 +6139,7 @@ entries:
     address: 0x09997BF0
     size: 32
 - name: gUnk_09991C24
-  format: raw
+  format: palette
   us:
     address: 0x09991C24
     size: 32
@@ -6163,7 +6163,7 @@ entries:
     address: 0x09997C30
     size: 32
 - name: gUnk_09991C64
-  format: raw
+  format: palette
   us:
     address: 0x09991C64
     size: 32

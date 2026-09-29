@@ -137,7 +137,8 @@ entries:
     address: 0x08EFD43C
     size: 5280
 - name: gUnkEu_08EF3DFC
-  format: raw
+  format: tiles4
+  width: 7
   eu:
     address: 0x08EF3DFC
     size: 224

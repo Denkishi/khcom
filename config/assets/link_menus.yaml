@@ -315,7 +315,7 @@ entries:
     address: 0x096B2C40
     size: 2048
 - name: gUnk_096FBF24
-  format: raw
+  format: palette
   us:
     address: 0x096FBF24
     size: 96

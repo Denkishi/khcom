@@ -983,7 +983,7 @@ entries:
     address: 0x0981E8A0
     size: 32
 - name: gUnk_0984A218
-  format: raw
+  format: palette
   us:
     address: 0x0984A218
     size: 512
@@ -996,7 +996,7 @@ entries:
     size: 512
     symbol: gUnkEu_0981E8C0
 - name: gUnkEu_09811640
-  format: raw
+  format: tilemap
   eu:
     address: 0x09811640
     size: 28

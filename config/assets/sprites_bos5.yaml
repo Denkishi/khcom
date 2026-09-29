@@ -311,7 +311,8 @@ entries:
     address: 0x099B669C
     size: 62
 - name: gUnk_099A92DC
-  format: raw
+  format: tiles4
+  width: 23
   us:
     address: 0x099A92DC
     size: 13984
@@ -1725,7 +1726,8 @@ entries:
     address: 0x09A83BA0
     size: 1280
 - name: gUnkEu_09A02CC0
-  format: raw
+  format: tiles4
+  width: 21
   eu:
     address: 0x09A02CC0
     size: 4032

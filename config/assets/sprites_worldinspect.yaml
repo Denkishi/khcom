@@ -5375,7 +5375,8 @@ entries:
     address: 0x09A41000
     size: 5120
 - name: gUnkEu_09A44D80
-  format: raw
+  format: tiles4
+  width: 20
   eu:
     address: 0x09A44D80
     size: 640

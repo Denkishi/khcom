@@ -1862,7 +1862,7 @@ entries:
     address: 0x0991ADF0
     size: 2048
 - name: gUnk_099912A4
-  format: raw
+  format: palette
   us:
     address: 0x099912A4
     size: 32
@@ -1908,7 +1908,7 @@ entries:
     address: 0x09997310
     size: 32
 - name: gUnk_09991344
-  format: raw
+  format: palette
   us:
     address: 0x09991344
     size: 1408

@@ -22030,11 +22030,6 @@ entries:
   eu:
     address: 0x09160E2C
     size: 410
-- name: gUnkEu_09160FC6
-  format: raw
-  eu:
-    address: 0x09160FC6
-    size: 2
 - name: gUnk_0908AF32
   format: sprite_sheet
   cell: [72, 16]

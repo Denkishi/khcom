@@ -1984,7 +1984,8 @@ entries:
     address: 0x09D00ADC
     size: 638
 - name: gUnk_09C91E54
-  format: raw
+  format: tiles4
+  width: 6
   us:
     address: 0x09C91E54
     size: 11328
@@ -3391,7 +3392,7 @@ entries:
     address: 0x09DC51A0
     size: 2048
 - name: gUnk_09D69294
-  format: raw
+  format: palette
   us:
     address: 0x09D69294
     size: 224

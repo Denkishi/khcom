@@ -496,7 +496,7 @@ entries:
     address: 0x08F69F5C
     size: 32
 - name: gUnk_08F6DA24
-  format: raw
+  format: palette
   us:
     address: 0x08F6DA24
     size: 512

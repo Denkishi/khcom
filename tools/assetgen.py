@@ -25,6 +25,7 @@ SOURCE_EXT = {"tiles4": "png", "tiles8": "png", "palette": "pal", "tilemap": "bi
               **m4a_assets.SOURCE_EXT}
 BINARY_EXT = {"tiles4": "4bpp", "tiles8": "8bpp", "palette": "gbapal", "tilemap": "bin", "raw": "bin",
               "sprite_sheet": "4bpp", **m4a_assets.BINARY_EXT}
+GBAGFX_MAX_COLORS = 256
 ASM_KINDS = ("sprite", "anim", "array", "string")
 SCALAR_SIZES = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
 DIRECTIVES = {1: ".byte", 2: ".hword", 4: ".4byte"}
@@ -452,10 +453,24 @@ def write_jasc(path, data):
     Path(path).write_text("\r\n".join(lines) + "\r\n")
 
 
+def jasc_colors(data):
+    lines = data.decode("ascii").replace("\r\n", "\n").split("\n")
+    if lines[:2] != ["JASC-PAL", "0100"]:
+        raise ManifestError("not a JASC-PAL 0100 palette")
+    count = int(lines[2])
+    colors = [tuple(int(x) for x in line.split()) for line in lines[3:3 + count]]
+    if len(colors) != count or any(len(c) != 3 or not all(0 <= x <= 255 for x in c) for c in colors):
+        raise ManifestError(f"the palette does not list {count} RGB colours")
+    return colors
+
+
 def read_source(entry, source, tmp):
     fmt = entry["format"]
     if not source.exists():
         raise ManifestError(f"{source} is missing; run python3 tools/extract_assets.py")
+    if fmt == "palette" and int(source.read_bytes().split(b"\n", 3)[2]) > GBAGFX_MAX_COLORS:
+        return b"".join(((r // 8) | ((g // 8) << 5) | ((b // 8) << 10)).to_bytes(2, "little")
+                        for r, g, b in jasc_colors(source.read_bytes()))
     if fmt in ("palette", "tiles4", "tiles8"):
         out = tmp / f"{entry['name']}.{BINARY_EXT[fmt]}"
         run_gbagfx(source, out)

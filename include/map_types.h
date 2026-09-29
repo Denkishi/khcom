@@ -4,18 +4,18 @@
 #include "types.h"
 #include "fld_types.h"
 
-typedef struct UnkStruct_02034F80 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-} UnkStruct_02034F80;
+typedef struct EventKey {
+    u8 kind;
+    u8 color;
+    u8 rule;
+    u8 value;
+} EventKey;
 
-typedef struct UnkStruct_02034F7C {
-    u8 unk_00;
+typedef struct EventKeyList {
+    u8 count;
     u8 unk_01[0x03];
-    UnkStruct_02034F80* unk_04;
-} UnkStruct_02034F7C;
+    EventKey* keys;
+} EventKeyList;
 
 typedef struct UnkStruct_080DFB7C {
     u16 unk_00;
@@ -87,11 +87,11 @@ typedef struct UnkStruct_080DEE18 {
     u8 unk_0D[0x03];
 } UnkStruct_080DEE18;
 
-typedef struct UnkStruct_02034F84 {
-    u8 unk_00;
-    u8 unk_01;
+typedef struct EventKeyProgress {
+    u8 paid;
+    u8 remaining;
     u8 unk_02[0x02];
-} UnkStruct_02034F84;
+} EventKeyProgress;
 
 typedef struct UnkStruct_0203C590 {
     u8 unk_00;
@@ -101,7 +101,7 @@ typedef struct UnkStruct_0203C590 {
     u8 unk_05;
     u8 unk_06;
     u8 unk_07;
-    UnkStruct_02034F84 unk_08[4];
+    EventKeyProgress eventKeyProgress[4];
     u8 unk_18[0x04];
     UnkStruct_080DEE18 unk_1C[32];
 } UnkStruct_0203C590;

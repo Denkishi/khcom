@@ -1897,7 +1897,7 @@ u8 func_080A6A38(RikuDeckMenuWork* w);
 u8 func_080A9A38(DeckExchangeWork* w);
 void func_080AA148(u8 kind, u8 slot);
 void Ev_mapObj_2(EventMapObjectWork* w);
-void func_08098014(UnkStruct_080984E4* card, struct UnkStruct_02034F80* a);
+void func_08098014(UnkStruct_080984E4* card, struct EventKey* a);
 void func_080984E4(UnkStruct_080984E4* w);
 void func_08098598(s32 x, s32 y, UnkStruct_08098670* p);
 void func_08098778(UnkStruct_08098670* p);

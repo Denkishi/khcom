@@ -149,7 +149,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->unk_29C = 0;
     w->unk_29D = 0;
     w->unk_2C0 = 0;
-    w->unk_2BE = func_080DF500();
+    w->unk_2BE = SelectCurrentEventDoor();
     n = (u8)func_080E0378() + 1;
     w->unk_27E = n;
     if (n == 10) {
@@ -309,8 +309,8 @@ u8 func_0809217C(MapSelectWork* w, void* a) {
     EnableBg(1);
 
     if (w->unk_2BE == 1) {
-        w->unk_2DA = func_080E8D00();
-        w->unk_2DC = func_080E8D1C(0);
+        w->unk_2DA = CountRemainingEventKeys();
+        w->unk_2DC = GetEventKey(0);
         n = w->unk_2DA;
 
         while (n != 0) {
@@ -503,7 +503,7 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         break;
     case A_BUTTON:
-        n = (u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20);
+        n = (u8)DoorAcceptsMapCard((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20);
 
         if (n == 1) {
             if (gUnk_0203A8C0[w->card->args.unk_00 + (s16)sel] != 0) {
@@ -517,8 +517,8 @@ u8 func_0809254C(MapSelectWork* w, void* a) {
 
                     RemoveMapCard(w->card->args.unk_00 + sel);
 
-                    if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20) == 1) {
-                        w->unk_2DA = func_080E8D00();
+                    if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + (s16)sel].unk_20) == 1) {
+                        w->unk_2DA = CountRemainingEventKeys();
                         w->eventKey->unk_122++;
                         w->eventKey->unk_11A = 8;
 
@@ -683,12 +683,12 @@ u8 func_08092A34(MapSelectWork* w, void* a) {
     case A_BUTTON:
         if (w->card != 0) {
             if (w->card->args.unk_00 >= 220) {
-                if ((u8)func_080E8D64((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
+                if ((u8)DoorAcceptsMapCard((struct UnkStruct_080E8D64*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
                     if (gUnk_0203A8C0[w->card->args.unk_00 + 1] != 0) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(w->card->args.unk_00 + 1);
-                        if ((u8)func_080E8E24((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
-                            w->unk_2DA = func_080E8D00();
+                        if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gUnk_09EE4C80[w->card->args.unk_00 + 1].unk_20) == 1) {
+                            w->unk_2DA = CountRemainingEventKeys();
                             w->eventKey->unk_122++;
                             w->eventKey->unk_11A = 8;
                             if (w->unk_2DA == 0) {

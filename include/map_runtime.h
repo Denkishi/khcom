@@ -35,7 +35,7 @@ void func_080DF380(void);
 void func_080DF480(void);
 u8 func_080DF49C(void);
 u8 func_080DF4D8(void);
-u8 func_080DF500(void);
+u8 SelectCurrentEventDoor(void);
 u8 func_080DF51C(u8 a);
 s32 func_080DF548(u8 a);
 void func_080DF570(u8 a);

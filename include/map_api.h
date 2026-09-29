@@ -4,7 +4,7 @@
 #include "types.h"
 #include "map_types.h"
 
-struct UnkStruct_02034F80;
+struct EventKey;
 struct UnkStruct_080E8D64;
 struct UnkStruct_080E8E24;
 struct MapCell;
@@ -26,11 +26,11 @@ void func_080E5510(u8 a);
 UnkStruct_080DFB7C* func_080E5590(u8 a);
 struct MapCell* func_080E58F8(s16 a, s16 b);
 u8 func_080E86C8(struct MapCell* p, s32 x, s32 y);
-u8 func_080E8C84(u8 a, u8 b);
-u8 func_080E8D00(void);
-struct UnkStruct_02034F80* func_080E8D1C(u8 a);
-u8 func_080E8D64(struct UnkStruct_080E8D64* p);
-s32 func_080E8E24(struct UnkStruct_080E8E24* p);
+u8 SelectEventDoor(u8 a, u8 b);
+u8 CountRemainingEventKeys(void);
+struct EventKey* GetEventKey(u8 a);
+u8 DoorAcceptsMapCard(struct UnkStruct_080E8D64* p);
+s32 PayEventKey(struct UnkStruct_080E8E24* p);
 u8 func_080E924C(void);
 void func_080E92B8(struct UnkStruct_080E92B8* p);
 void func_080E92F8(struct UnkStruct_080E92B8* p);

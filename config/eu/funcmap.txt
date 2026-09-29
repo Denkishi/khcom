@@ -3743,7 +3743,7 @@ func_080DF380	0x080df380	256	0x080dc1cc	global
 func_080DF480	0x080df480	28	0x080dc2cc	global
 func_080DF49C	0x080df49c	60	0x080dc2e8	global
 func_080DF4D8	0x080df4d8	40	0x080dc324	global
-func_080DF500	0x080df500	28	0x080dc34c	global
+SelectCurrentEventDoor	0x080df500	28	0x080dc34c	global
 func_080DF51C	0x080df51c	44	0x080dc368	global
 func_080DF548	0x080df548	40	0x080dc394	global
 func_080DF570	0x080df570	132	0x080dc3bc	global
@@ -3968,12 +3968,12 @@ func_080E8BB4	0x080e8bb4	36	0x080e5a08	global
 func_080E8BD8	0x080e8bd8	12	0x080e5a2c	body
 func_080E8BE4	0x080e8be4	76	0x080e5a38	global
 func_080E8C30	0x080e8c30	8	0x080e5a84	body
-func_080E8C38	0x080e8c38	76	0x080e5a8c	global
-func_080E8C84	0x080e8c84	124	0x080e5ad8	global
-func_080E8D00	0x080e8d00	28	0x080e5b54	global
-func_080E8D1C	0x080e8d1c	72	0x080e5b70	global
-func_080E8D64	0x080e8d64	192	0x080e5bb8	global
-func_080E8E24	0x080e8e24	80	0x080e5c78	global
+IsEventDoor	0x080e8c38	76	0x080e5a8c	global
+SelectEventDoor	0x080e8c84	124	0x080e5ad8	global
+CountRemainingEventKeys	0x080e8d00	28	0x080e5b54	global
+GetEventKey	0x080e8d1c	72	0x080e5b70	global
+DoorAcceptsMapCard	0x080e8d64	192	0x080e5bb8	global
+PayEventKey	0x080e8e24	80	0x080e5c78	global
 func_080E8E74	0x080e8e74	152	0x080e5cc8	global
 func_080E8F0C	0x080e8f0c	68	0x080e5d60	global
 func_080E8F50	0x080e8f50	104	0x080e5da4	global

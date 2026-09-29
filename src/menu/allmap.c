@@ -639,13 +639,13 @@ void func_080D44D4(AllmapDoorinfoWork* work) {
     if (i == 4) {
         work->unk_114 = 0;
     } else {
-        func_080E8C84(work->unk_004, gUnk_096FDC40[i]);
-        work->unk_114 = func_080E8D00();
+        SelectEventDoor(work->unk_004, gUnk_096FDC40[i]);
+        work->unk_114 = CountRemainingEventKeys();
     }
 
     for (i = 0; i < work->unk_114; i++) {
         e = &work->doors[i];
-        func_08098014(e, func_080E8D1C(i));
+        func_08098014(e, GetEventKey(i));
         func_08098598(func_080D44A0(work->unk_114, i), 0x6800, e);
 
         if (work->doors[i].palette != 0) {

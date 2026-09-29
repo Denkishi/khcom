@@ -515,29 +515,29 @@ void func_080DF480(void) {
 
 u8 func_080DF49C(void) {
     u8* e = func_080E54B8(gUnk_0203C590.unk_05);
-    UnkStruct_02034F7C* t = &gUnk_0984CECC[func_080DEDD8(*e)->unk_01];
-    UnkStruct_02034F80* q;
+    EventKeyList* t = &gEventKeyLists[func_080DEDD8(*e)->unk_01];
+    EventKey* q;
 
     t += *e;
-    q = t->unk_04;
+    q = t->keys;
 
-    while (q->unk_00 == 0xFF) {
+    while (q->kind == 0xFF) {
         q++;
     }
 
-    return q->unk_00;
+    return q->kind;
 }
 
 u8 func_080DF4D8(void) {
-    if (func_080E8C84(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) != 0) {
-        return func_080E8D1C(0)->unk_00;
+    if (SelectEventDoor(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) != 0) {
+        return GetEventKey(0)->kind;
     }
 
     return 0xFF;
 }
 
-u8 func_080DF500(void) {
-    return func_080E8C84(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
+u8 SelectCurrentEventDoor(void) {
+    return SelectEventDoor(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
 }
 
 u8 func_080DF51C(u8 a) {
@@ -827,8 +827,8 @@ void func_080DF8C0(u8 a, u8 b) {
 
     for (i = 0; i <= 3; i++) {
         gUnk_0203C590.unk_18[i] = 0;
-        gUnk_0203C590.unk_08[i].unk_00 = 0;
-        gUnk_0203C590.unk_08[i].unk_01 = 0;
+        gUnk_0203C590.eventKeyProgress[i].paid = 0;
+        gUnk_0203C590.eventKeyProgress[i].remaining = 0;
     }
 
     for (i = 0; i < 32; i++) {

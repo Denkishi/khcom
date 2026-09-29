@@ -68,9 +68,9 @@ FldPos gUnk_02034F48[3];
 u8 gUnk_02034F78;
 u8 gUnk_02034F79;
 u16 gUnk_02034F7A;
-UnkStruct_02034F7C* gUnk_02034F7C;
-UnkStruct_02034F80 gUnk_02034F80;
-UnkStruct_02034F84* gUnk_02034F84;
+EventKeyList* gEventKeyList;
+EventKey gEventKey;
+EventKeyProgress* gEventKeyProgress;
 ModeFunc gUnk_02034F88;
 u32 gUnk_02034F8C;
 TaskPool gUnk_02034F90;
@@ -1986,7 +1986,7 @@ u8 func_080E8C30(UnkStruct_080E8B1C* p) {
     return 1;
 }
 
-u8 func_080E8C38(u8 a, u8 b) {
+u8 IsEventDoor(u8 a, u8 b) {
     UnkStruct_080DEDD8* p;
 
     if ((s32)gUnk_0203C7AC->flags < 0) {
@@ -2002,7 +2002,7 @@ u8 func_080E8C38(u8 a, u8 b) {
     return 0;
 }
 
-u8 func_080E8C84(u8 a, u8 b) {
+u8 SelectEventDoor(u8 a, u8 b) {
     UnkStruct_080DEDD8* p;
     u8 i;
 
@@ -2013,8 +2013,8 @@ u8 func_080E8C84(u8 a, u8 b) {
     p = func_080DEDD8(0);
     while (p->unk_00 != 5) {
         if (p->unk_01 != 0xFF && p->unk_02 == a && p->unk_03 == b) {
-            gUnk_02034F7C = &gUnk_0984CECC[p->unk_01];
-            gUnk_02034F84 = &gUnk_0203C590.unk_08[i];
+            gEventKeyList = &gEventKeyLists[p->unk_01];
+            gEventKeyProgress = &gUnk_0203C590.eventKeyProgress[i];
             return 1;
         }
         i++;
@@ -2023,27 +2023,27 @@ u8 func_080E8C84(u8 a, u8 b) {
     return 0;
 }
 
-u8 func_080E8D00(void) {
-    return gUnk_02034F7C->unk_00 - gUnk_02034F84->unk_00;
+u8 CountRemainingEventKeys(void) {
+    return gEventKeyList->count - gEventKeyProgress->paid;
 }
 
-UnkStruct_02034F80* func_080E8D1C(u8 a) {
-    UnkStruct_02034F80* p = &gUnk_02034F7C->unk_04[gUnk_02034F84->unk_00];
-    UnkStruct_02034F80* q = &p[a];
+EventKey* GetEventKey(u8 a) {
+    EventKey* p = &gEventKeyList->keys[gEventKeyProgress->paid];
+    EventKey* q = &p[a];
 
-    gUnk_02034F80 = *q;
+    gEventKey = *q;
 
-    if (a == 0 && q->unk_02 == 4 && gUnk_02034F84->unk_01 != 0) {
-        gUnk_02034F80.unk_03 = gUnk_02034F84->unk_01;
+    if (a == 0 && q->rule == 4 && gEventKeyProgress->remaining != 0) {
+        gEventKey.value = gEventKeyProgress->remaining;
     }
-    return &gUnk_02034F80;
+    return &gEventKey;
 }
 
-u8 func_080E8D64(UnkStruct_080E8D64* p) {
-    UnkStruct_02034F80* q;
+u8 DoorAcceptsMapCard(UnkStruct_080E8D64* p) {
+    EventKey* q;
     u8 n;
 
-    if (func_080E8C38(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) == 0) {
+    if (IsEventDoor(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) == 0) {
         if (p->unk_00 > 21) {
             return 0;
         }
@@ -2056,43 +2056,43 @@ u8 func_080E8D64(UnkStruct_080E8D64* p) {
         return p->unk_02 > n;
     }
 
-    q = func_080E8D1C(0);
+    q = GetEventKey(0);
 
-    if (q->unk_00 != 0xFF) {
-        if (q->unk_00 != p->unk_00) {
+    if (q->kind != 0xFF) {
+        if (q->kind != p->unk_00) {
             return 0;
         }
     } else if (p->unk_00 > 21) {
         return 0;
     }
 
-    if (q->unk_01 != 0 && q->unk_01 != p->unk_04) {
+    if (q->color != 0 && q->color != p->unk_04) {
         return 0;
     }
 
-    switch (q->unk_02) {
+    switch (q->rule) {
     case 1:
-        return p->unk_02 >= q->unk_03;
+        return p->unk_02 >= q->value;
     case 2:
-        return p->unk_02 <= q->unk_03;
+        return p->unk_02 <= q->value;
     case 3:
-        return p->unk_02 == q->unk_03;
+        return p->unk_02 == q->value;
     case 4:
         return p->unk_02 != 0;
     }
     return 1;
 }
 
-s32 func_080E8E24(UnkStruct_080E8E24* p) {
-    if (func_080E8D1C(0)->unk_02 == 4) {
-        if (gUnk_02034F80.unk_03 > p->unk_02) {
-            gUnk_02034F80.unk_03 -= p->unk_02;
-            gUnk_02034F84->unk_01 = gUnk_02034F80.unk_03;
+s32 PayEventKey(UnkStruct_080E8E24* p) {
+    if (GetEventKey(0)->rule == 4) {
+        if (gEventKey.value > p->unk_02) {
+            gEventKey.value -= p->unk_02;
+            gEventKeyProgress->remaining = gEventKey.value;
             return 0;
         }
-        gUnk_02034F84->unk_01 = 0;
+        gEventKeyProgress->remaining = 0;
     }
-    gUnk_02034F84->unk_00++;
+    gEventKeyProgress->paid++;
     return 1;
 }
 

@@ -211,7 +211,7 @@ extern const UnkStruct_096FE034 gUnk_096FE290;
 extern const UnkStruct_096FE034 gUnk_096FE2A8;
 extern u8 gUnk_0984B0D8[];
 
-extern UnkStruct_02034F7C gUnk_0984CECC[];
+extern EventKeyList gEventKeyLists[];
 
 extern const u8 gUnk_0984D0CC[][4];
 

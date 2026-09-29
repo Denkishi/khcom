@@ -241,7 +241,7 @@ for src, obj, flags in units:
         group_name, unit = generated[src.name]
         deps += [rel(groups[group_name]["header"])]
         if rule == "as":
-            deps += [rel(path) for path in unit["binaries"]]
+            deps += [rel(path) for path in unit["binaries"] + unit["includes"]]
         else:
             deps += headers + generated_headers + ["tools/legacy/bin/arm-elf-as"]
         edges.append((obj, rule, src, deps, variables))
@@ -425,7 +425,8 @@ with out.open("w") as f:
         n.build(
             outputs,
             "assetgen",
-            implicit=manifests + ["tools/assetgen.py", "tools/sprite_sheet.py", "tools/gbagfx/gbagfx", assets_stamp]
+            implicit=manifests + ["tools/assetgen.py", "tools/m4a_assets.py", "tools/sprite_sheet.py", "tools/gbagfx/gbagfx",
+                                  assets_stamp]
             + [rel(path) for path in group["sources"]],
             implicit_outputs=[rel(path) for path in group["binaries"]],
             variables={"version": version, "manifest": rel(group["manifest"].path)},

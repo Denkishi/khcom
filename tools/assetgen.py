@@ -8,6 +8,7 @@ from pathlib import Path
 
 import yaml
 
+import m4a_assets
 import sprite_sheet
 
 YAML_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
@@ -20,9 +21,10 @@ ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_DIR = ROOT / "config" / "assets"
 GBAGFX = ROOT / "tools" / "gbagfx" / "gbagfx"
 VERSIONS = ("us", "jp", "eu")
-SOURCE_EXT = {"tiles4": "png", "tiles8": "png", "palette": "pal", "tilemap": "bin", "raw": "bin", "sprite_sheet": "png"}
+SOURCE_EXT = {"tiles4": "png", "tiles8": "png", "palette": "pal", "tilemap": "bin", "raw": "bin", "sprite_sheet": "png",
+              **m4a_assets.SOURCE_EXT}
 BINARY_EXT = {"tiles4": "4bpp", "tiles8": "8bpp", "palette": "gbapal", "tilemap": "bin", "raw": "bin",
-              "sprite_sheet": "4bpp"}
+              "sprite_sheet": "4bpp", **m4a_assets.BINARY_EXT}
 ASM_KINDS = ("sprite", "anim")
 
 
@@ -88,7 +90,7 @@ class Manifest:
         return ROOT / "assets" / version / self.group / f"{entry['name']}.{SOURCE_EXT[entry['format']]}"
 
     def binary(self, entry, version):
-        if "record" in entry or entry.get("tiles"):
+        if "record" in entry or entry.get("tiles") or entry.get("format") in m4a_assets.INCLUDED:
             return None
         return ROOT / "build" / version / "gen" / self.group / f"{entry['name']}.{BINARY_EXT[entry['format']]}"
 
@@ -243,7 +245,9 @@ def plan(version, manifests=None):
         for obj in manifest.objects.get(version, []):
             objects[obj["name"]] = {"source": gen / obj["name"], "members": members[obj["name"]],
                                     "binaries": [manifest.binary(e, version) for e in members[obj["name"]]
-                                                 if manifest.binary(e, version) is not None]}
+                                                 if manifest.binary(e, version) is not None],
+                                    "includes": m4a_assets.includes(members[obj["name"]],
+                                                                    lambda e: manifest.source(e, version))}
         sources = {path for e in manifest.entries if version in e and "record" not in e
                    for path in manifest.sources(e, version)}
         for e in manifest.entries:
@@ -282,6 +286,11 @@ def read_source(entry, source, tmp):
         out = tmp / f"{entry['name']}.{BINARY_EXT[fmt]}"
         run_gbagfx(source, out)
         return out.read_bytes()
+    if fmt in m4a_assets.FORMATS:
+        try:
+            return m4a_assets.encode(fmt, source.read_bytes())
+        except m4a_assets.M4aError as error:
+            raise ManifestError(f"{source.relative_to(ROOT)}: {error}")
     return source.read_bytes()
 
 
@@ -407,6 +416,7 @@ def decode(manifest, version, rom, rom_base=0x08000000, lookup=None):
             raise ManifestError(f"{entry['name']}: {version} extent is outside the ROM")
         return data
 
+    audio = None
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         probe_dir = tmp / "probe"
@@ -426,6 +436,13 @@ def decode(manifest, version, rom, rom_base=0x08000000, lookup=None):
                         frames, anims = owner.frames(target, version), owner.animations(target, version)
                         borrowed = sprite_sheet.parse_records(borrowed, len(frames), len(anims))[2]
                 files = decode_sheet(manifest, entry, version, data, palette_bytes, borrowed)
+            elif entry["format"] in m4a_assets.FORMATS:
+                try:
+                    audio = audio or m4a_assets.Context(set(lookup.values()) if lookup else [manifest], version, rom_bytes)
+                    decoded = audio.decode(entry, manifest.symbol(entry, version), entry[version]["address"], data)
+                except m4a_assets.M4aError as error:
+                    raise ManifestError(f"{manifest.group}: {version} {error}")
+                files = {manifest.source(entry, version): decoded}
             else:
                 decoded = decode_one(manifest, entry, version, data, tmp, palette_bytes)
                 source = manifest.source(entry, version)
@@ -581,7 +598,7 @@ def emit_sheet(manifest, entry, version, sheet, lines):
 
 
 def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
-    lines = ["\t.section .rodata"]
+    lines = m4a_assets.prelude(members) + ["\t.section .rodata"]
     position = obj["start"]
     if position % 4 == 0:
         lines.append("\t.balign 4")
@@ -598,6 +615,13 @@ def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
             position += pad
         if entry.get("format") == "sprite_sheet":
             emit_sheet(manifest, entry, version, sheets[entry["name"]], lines)
+            position += manifest.size(entry, version)
+            continue
+        if entry.get("format") in m4a_assets.INCLUDED:
+            source = manifest.source(entry, version)
+            if not source.exists():
+                raise ManifestError(f"{source.relative_to(ROOT)} is missing; run python3 tools/extract_assets.py")
+            lines.append(f'\t.include "{source.relative_to(ROOT).as_posix()}"')
             position += manifest.size(entry, version)
             continue
         lines.append(f"\t.global {symbol}")

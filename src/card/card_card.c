@@ -2560,6 +2560,7 @@ void func_0807BC24(CardDisplayWork* p, CardDisplayArgs* a) {
         p->unk_78 = 2;
     }
 
+    // @bug A "not have" display has no slot (NULL read).
     if (p->args.slot->cardId & 0x8000) {
         p->unk_A6 = 1;
     } else {
@@ -3947,6 +3948,7 @@ void func_0807DE10(CardDisplayWork* p) {
 }
 
 void UpdateSoraCardValue(CardDisplayWork* w) {
+    // @bug A "not have" display has no cardDef (NULL read).
     if (gBtlWork->unk_0F4 == 16) {
         if (w->unk_78 & 4) {
             w->unk_A7 = 1;
@@ -4112,6 +4114,7 @@ s32 func_0807E2BC(void) {
 
     if (gRikuSelectedCard != 0) {
         if (!(gRikuSelectedCard->unk_78 & 0x1100000)) {
+            // @bug The opponent's empty slot has no cardDef (NULL read).
             d = gRikuSelectedCard->cardDef;
 
             if (d->unk_2A == 3) {
@@ -4126,6 +4129,7 @@ s32 func_0807E2BC(void) {
 }
 
 void func_0807E2F4(void) {
+    // @bug Called before the card battle state exists (NULL write).
     if (gRikuSelectedCard != 0) {
         if ((gRikuSelectedCard->unk_78 & 0x1000044) == 0x1000044) {
             gCardBattleState->unk_0E8 = 1;
@@ -4138,6 +4142,7 @@ void func_0807E2F4(void) {
 }
 
 u8 func_0807E33C(void) {
+    // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->unk_0F0;
 }
 

@@ -2536,14 +2536,17 @@ void func_08081760(CardBattleWork* w) {
 }
 
 u8 func_08081828(void) {
+    // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->unk_0ED;
 }
 
 u8 func_08081838(void) {
+    // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->unk_0D4;
 }
 
 u8 func_08081848(void) {
+    // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->unk_0C2;
 }
 
@@ -3799,6 +3802,7 @@ void func_08083714(CardDisplayWork* w) {
 }
 
 void UpdateRikuCardValue(CardDisplayWork* p) {
+    // @bug The reload card and the empty slot have no cardDef (NULL read).
     if (gRikuBtlWork->unk_0F4 == 16) {
         if (p->unk_78 & 4) {
             p->unk_A7 = 1;

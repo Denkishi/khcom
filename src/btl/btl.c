@@ -778,6 +778,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     e->unk_104 = 0;
     e->vx = e->vy = 0;
 
+    // @bug arg is NULL in normal battles (NULL read).
     if (arg->unk_04 != 0) {
         ColliderInit(&e->collider, 1, e->unk_09E, e->unk_09C);
     } else {
@@ -6800,6 +6801,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     e->unk_104 = 0;
     e->vx = e->vy = 0;
 
+    // @bug arg is NULL in normal battles (NULL read).
     if (arg->unk_04 != 0) {
         ColliderInit(&e->collider, 1, e->unk_09E, e->unk_09C);
     } else {

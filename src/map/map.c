@@ -1768,6 +1768,7 @@ void func_080E8724(s16 x, s16 y, const u8* p, u16* base) {
                 break;
             }
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
+            // @bug q is NULL where the pattern reaches past the room edge (NULL write).
             q->unk_04 = 50;
             q->unk_18 = base + off;
         }
@@ -1779,6 +1780,7 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
     s32 v;
 
     while (p->unk_04 != 0xFF) {
+        // @bug MapCellAt returns NULL past the room edge (NULL read).
         q = MapCellAt(x + p->dx, y + p->dy);
 
         if (q->unk_0C == 0x100000) {
@@ -1850,6 +1852,7 @@ void func_080E893C(s16 x, s16 y, const u8* p, u16* base) {
         for (i = 0; i < p[4]; i++) {
             q = MapCellAt(x + j, y + i);
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
+            // @bug q is NULL where the pattern reaches past the room edge (NULL write).
             q->unk_05 = 38;
             q->unk_1C = base + off;
         }

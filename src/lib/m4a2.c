@@ -90,6 +90,7 @@ void m4aSoundInit(void) {
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++) {
         MusicPlayerInfo* mplayInfo = gMPlayTable[i].info;
         MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].numTracks);
+        // @bug Entries 13-15 of gMPlayTable have no player (NULL write).
         mplayInfo->unk_B = gMPlayTable[i].unk_A;
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
@@ -162,6 +163,7 @@ void m4aMPlayAllStop(void) {
     s32 i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
+        // @bug Entries 13-15 of gMPlayTable have no player (NULL read).
         m4aMPlayStop(gMPlayTable[i].info);
 }
 

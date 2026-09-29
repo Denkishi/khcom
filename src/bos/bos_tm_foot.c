@@ -882,6 +882,7 @@ void task_bos_tm_clb_2(TmClbWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, 0x800,
                (u16)(-0x1002 - (work->y >> 8) * 4));
+    // @bug AllocObjAffineAngle returns NULL at angle 0 (NULL write).
     p->doubleSize = 1;
     DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, 0x800,
                (u16)(-0x1003 - (work->y >> 8) * 4));

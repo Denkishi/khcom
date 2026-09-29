@@ -2852,6 +2852,7 @@ u8 eu_0806C974(EventSeqWork* work) {
     gEventState->unk_7D = 0;
     gEventState->unk_7E = 0;
     gEventState->unk_60 = 0;
+    // @bug u is NULL for events without a background (NULL read).
     if (u->unk_20 != 5) {
         gEventState->unk_44 = u->unk_20;
         work->unk_3D = 1;
@@ -2967,6 +2968,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     gEventState->unk_7E = 0;
     gEventState->unk_60 = 0;
 
+    // @bug u is NULL for events without a background (NULL read).
     if (u->unk_20 != 5) {
         gEventState->unk_44 = u->unk_20;
         flag = 1;
@@ -3191,6 +3193,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
 
     switch (p->arg.unk_02) {
     case 95:
+        // @bug Never sets gBtlWork->actor, which this intro dereferences (NULL read and write).
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
@@ -3306,6 +3309,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(0, 2);
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);
+        // @bug Never sets gBtlWork->actor, which this intro dereferences (NULL read and write).
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         TaskPoolInit(&gBtlWork->taskPools[0], 32);

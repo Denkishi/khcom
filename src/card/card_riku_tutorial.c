@@ -445,6 +445,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
 }
 
 u8 GetStockMoveCount(void) {
+    // @bug Still called after the card battle frees gCardBattleState (NULL read).
     if (gCardBattleState->unk_0E1 || gCardBattleState->unk_0E2) {
         return gCardBattleState->stockMoveCount;
     }
@@ -1592,6 +1593,7 @@ s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
+    // @bug Outside EU, reads three cards even when fewer are stocked (NULL read).
     if (
 #ifdef VERSION_EU
         b == 3 &&
@@ -1605,6 +1607,7 @@ s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
 }
 
 s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d) {
+    // @bug Outside EU, reads three cards even when fewer are stocked (NULL read).
     if (
 #ifdef VERSION_EU
         b == 3 &&

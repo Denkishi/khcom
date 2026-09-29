@@ -437,6 +437,7 @@ u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) 
             gBtlWork->unk_0EF |= 0x10;
             return 1;
         }
+        // @bug unk_184 is NULL for humanoid bosses without a card table (NULL read).
         if (value == 0 || work->unk_184[cards] != id) {
             gBtlWork->unk_0EF |= 1;
         } else {

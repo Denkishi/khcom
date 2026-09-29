@@ -5438,6 +5438,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
         CreateBosPcFltTask(work, zero, 0xB000, 0x17000, -0x800, 2);
         CreateBosPcFltTask(work, zero, 0x11000, 0x17000, -0x800, 3);
     }
+    // @bug flt[0] is NULL when no floats were created (NULL read).
     func_0810B7E8(work->flt[0], &x, &y, &z);
     SetBattleActorPosition(x, y, z - 0x400);
     CreateBosPcAcdTask(work, pool);

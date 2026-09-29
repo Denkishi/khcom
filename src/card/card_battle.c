@@ -175,6 +175,7 @@ u8 func_080763D0(void) {
 }
 
 void func_080763F0(void) {
+    // @bug Called before the card battle state exists (NULL write).
     if (gSoraSelectedCard != 0) {
         if ((gSoraSelectedCard->unk_78 & 0x01000044) == 0x01000044) {
             gCardBattleState->unk_0E7 = 1;
@@ -485,6 +486,7 @@ void func_0807682C(CardBattleWork* w, u8 slot) {
     }
     p = (CardDisplayWork*)ListPoolFirst(&w->unk_54[slot]);
     while (p != 0) {
+        // @bug A "not have" display has no slot (NULL write).
         p->args.slot->unk_06 = 0;
         p = (CardDisplayWork*)ListPoolNext(&p->node);
     }
@@ -506,6 +508,7 @@ static void cardbattle_0(CardBattleWork* w) {
     u8 i;
 
     CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
+    // @bug gCardBattleState is only allocated further down (NULL write).
     gCardBattleState->unk_05C = w;
     gBtlWork->unk_0F4 = 0;
     func_08091B28();

@@ -2062,9 +2062,6 @@ TARGET_DATA_ADDR = {
 }
 
 TARGET_BLOB_REGIONS = {
-    "jp": (
-        (0x09EA6C7C, "rodata_end_fill"),
-    ),
     "eu": (
         (0x09F49910, "rodata_registrations"),
     ),

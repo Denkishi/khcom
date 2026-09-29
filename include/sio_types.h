@@ -32,6 +32,7 @@ typedef struct SioWork {
     u16 recvBuf[2][4][32];
     u8 recvReadIdx;
     u8 recvCount;
+    u8 unk_322[0x02];
 } SioWork;
 
 typedef char SioWork_size[(sizeof(SioWork) == 0x324) ? 1 : -1];

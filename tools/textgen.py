@@ -197,12 +197,15 @@ class Unit:
             return self.pool.fields(entry["record"])[2]
         return entry.get("align", self.align)
 
-    def layout(self, data_of):
+    def layout(self, data_of, width):
         position = self.start
         placed = []
         for entry in self.entries:
             start = aligned(position, self.entry_align(entry))
-            size = self.pool.fields(entry["record"])[1] if "record" in entry else len(data_of(entry, start))
+            if "record" in entry:
+                size = self.pool.fields(entry["record"])[1]
+            else:
+                size = max(len(data_of(entry, start)), entry.get("count", 0) * width)
             placed.append((entry, start, size))
             position = start + size
         return placed, position
@@ -406,7 +409,7 @@ def decode_unit(unit, encoding, rom):
     if unit.kind == "fragment" and unit.count != "slot" and unit.align != natural_align(unit, encoding):
         raise TextError(f"{pool.name}: {version} {unit.name} aligns its entries to {unit.align}, which C only does"
                         f" for {natural_align(unit, encoding)}-aligned {unit.form} definitions")
-    placed, position = unit.layout(found)
+    placed, position = unit.layout(found, encoding.width)
     cursor = unit.start
     texts = []
     for entry, start, size in placed:
@@ -416,6 +419,9 @@ def decode_unit(unit, encoding, rom):
         if "record" in entry:
             check_record(pool, version, entry, data)
         else:
+            data = found(entry, start)
+            if any(rom_at(start + len(data), size - len(data))):
+                raise TextError(f"{pool.name}: {version} {entry['name']} holds data past its terminator")
             text = encoding.decode(data)
             where = f"{pool.name}: {version} {entry['name']}"
             if encoding.encode(text, where) != data:
@@ -472,20 +478,23 @@ def record_lines(pool, entry):
     return lines
 
 
-def emit_object(unit, encoded, path):
+def emit_object(unit, encoded, path, width):
     lines = ["\t.section .rodata"]
     if unit.start % 4 == 0:
         lines.append("\t.balign 4")
     elif unit.start % 2 == 0:
         lines.append("\t.balign 2")
-    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]], width)
     cursor = unit.start
     for entry, start, size in placed:
         if start > cursor:
             lines += byte_lines(bytes(start - cursor))
         name = entry["name"]
         lines += [f"\t.global {name}", f"\t.type {name}, %object", f"{name}:"]
-        lines += record_lines(unit.pool, entry) if "record" in entry else byte_lines(encoded[name])
+        if "record" in entry:
+            lines += record_lines(unit.pool, entry)
+        else:
+            lines += byte_lines(encoded[name] + bytes(size - len(encoded[name])))
         lines.append(f"\t.size {name}, .-{name}")
         cursor = start + size
     if 0 < unit.end - position < 4:
@@ -509,13 +518,15 @@ def c_record(pool, entry):
 
 def c_text(unit, entry, data, slot, width):
     units = [int.from_bytes(data[i:i + width], "little") for i in range(0, len(data), width)]
-    if unit.count == "slot":
+    if "count" in entry:
+        count = str(entry["count"])
+    elif unit.count == "slot":
         count = str(slot // width)
     elif unit.count == "exact":
         count = str(len(units))
     else:
         count = ""
-    head = f"{unit.ctype} {entry['name']}[{count}] = "
+    head = f"{entry.get('ctype', unit.ctype)} {entry['name']}[{count}] = "
     if unit.form == "string":
         if width != 1 or units[-1] != 0 or 0 in units[:-1]:
             raise TextError(f"{unit.pool.name}: {entry['name']} cannot be written as a C string")
@@ -525,7 +536,7 @@ def c_text(unit, entry, data, slot, width):
 
 
 def emit_fragment(unit, encoded, path, width):
-    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]], width)
     lines = []
     for index, (entry, start, size) in enumerate(placed):
         if "record" in entry:
@@ -545,7 +556,7 @@ def emit_header(pool, version, path):
         if unit.header and unit.header not in headers:
             headers.append(unit.header)
     lines += [f'#include "{header}"' for header in headers]
-    declared = [(unit.ctype, entry["name"]) for unit in units for entry in unit.entries
+    declared = [(entry.get("ctype", unit.ctype), entry["name"]) for unit in units for entry in unit.entries
                 if "record" not in entry and entry.get("declare", True)]
     if declared:
         lines.append("")
@@ -561,7 +572,7 @@ def generate(version, manifest):
         encoded = read_source(pool, version, charmap)
         for unit in pool.units(version):
             if unit.kind == "object":
-                emit_object(unit, encoded, pool.generated(version))
+                emit_object(unit, encoded, pool.generated(version), unit.encoding(charmap).width)
             else:
                 emit_fragment(unit, encoded, ROOT / "build" / version / "gen" / unit.name, unit.encoding(charmap).width)
     emit_header(pool, version, pool.header(version))

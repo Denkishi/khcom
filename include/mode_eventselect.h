@@ -86,7 +86,6 @@ extern u8 gMaruxhaBtEff2Tiles[];
 extern const EventCharaParams gUnk_0903380C[];
 extern const char gUnk_08F70990[];
 #ifdef VERSION_EU
-extern Mode gUnkEu_09F5D6EC;
 #endif
 
 void mode_eventselect_0(void);

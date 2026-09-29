@@ -190,8 +190,6 @@ u8 func_08081848(void);
 void func_080838E8(void);
 void func_080838EC(void);
 #ifdef VERSION_EU
-extern u8 gUnkEu_09F72C10[];
-extern u8 gUnkEu_09F72D80[];
 void eu_08013190(void);
 #endif
 extern Mode gModeChkbtl;

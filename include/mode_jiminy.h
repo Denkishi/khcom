@@ -52,8 +52,6 @@ void func_0805B9D0(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_09A9A880[];
-extern u8 gUnkEu_09A9A8A0[];
 extern u8 gUnkEu_099FBE00[];
 #endif
 

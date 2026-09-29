@@ -8,6 +8,7 @@
 #include "fade.h"
 #include "engine_math.h"
 #include "listpool.h"
+#include "mode_event.h"
 #include "mode_eventselect.h"
 #include "gba/keys.h"
 #include "sprites_evt.h"
@@ -159,14 +160,14 @@ void mode_eventselect_1(void) {
         switch (sEventSelectList) {
         case 0:
 #ifdef VERSION_EU
-            ModeRequest(&gUnkEu_09F5D6EC, gSoraEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gUnk_09EE273C, gSoraEventIds[gEventSelectIndex] | 0x8000);
 #else
             func_0806180C(gSoraEventIds[gEventSelectIndex]);
 #endif
             break;
         case 1:
 #ifdef VERSION_EU
-            ModeRequest(&gUnkEu_09F5D6EC, gRikuEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gUnk_09EE273C, gRikuEventIds[gEventSelectIndex] | 0x8000);
 #else
             func_0806180C(gRikuEventIds[gEventSelectIndex]);
 #endif

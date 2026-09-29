@@ -51,7 +51,6 @@ u8 gUnk_02034AF4[4];
 #ifdef VERSION_EU
 extern void** gUnkEu_09F72CC4[];
 extern void* gUnkEu_09F72CB0[];
-extern u8 gUnkEu_09F72D80[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
@@ -82,11 +81,7 @@ void Mode_Premire_0(void) {
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
     TaskPoolInit(&gUnk_02034AE0, 1);
-#ifdef VERSION_EU
-    TaskCreate(&gUnk_02034AE0, gUnkEu_09F72D80, 0);
-#else
     TaskCreate(&gUnk_02034AE0, &gTaskDescLevelUp, 0);
-#endif
 }
 
 void Mode_Premire_1(void) {

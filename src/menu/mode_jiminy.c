@@ -2233,9 +2233,9 @@ void func_0805BAE4(void) {
         LoadBgMap(1, map1, 0x800);
         if (gJiminyWork->detail->tiles != 0) {
 #ifdef VERSION_EU
-            if (gJiminyWork->detail->palette == gUnkEu_09A9A880 && func_080D2DD8()) {
-                LoadObjPaletteBank(gJiminyWork->palette8->index, gUnkEu_09A9A8A0);
-                LoadObjPaletteBank(gJiminyWork->palette8->index + 1, gUnkEu_09A9A8A0 + 0x20);
+            if (gJiminyWork->detail->palette == gUnk_09A3CDBC && func_080D2DD8()) {
+                LoadObjPaletteBank(gJiminyWork->palette8->index, gUnk_09A3CDDC);
+                LoadObjPaletteBank(gJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x20);
                 SetObjTileSource(gJiminyWork->tiles7, gUnk_099EDE7C);
             } else
 #endif

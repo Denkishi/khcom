@@ -792,20 +792,12 @@ void _08019CB4(void) {
             if (gBtlWork->flags & 0x8000000000000ULL) {
                 if ((s16)gBtlWork->unk_0E4 == 2) {
                     func_0801C104();
-#ifdef VERSION_EU
-                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], gUnkEu_09F72C10, 0);
-#else
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gUnk_09EE7804, 0);
-#endif
                     gBtlWork->flags |= 0x4000000ULL;
                     gBtlWork->flags |= 0x2000ULL;
                     gBtlWork->unk_0E4 = -1;
                 } else {
-#ifdef VERSION_EU
-                    if (IsTaskActiveNamed(gBtlWork->task, *(const char**)gUnkEu_09F72C10)) {
-#else
                     if (IsTaskActiveNamed(gBtlWork->task, *(const char**)&gUnk_09EE7804)) {
-#endif
                         break;
                     }
                     gBtlWork->flags &= ~0x8000000000000ULL;
@@ -816,11 +808,7 @@ void _08019CB4(void) {
             if (gBtlWork->unk_0FA != 0) {
                 if ((s16)gBtlWork->unk_0E4 == 2) {
                     func_0801C104();
-#ifdef VERSION_EU
-                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], gUnkEu_09F72D80, 0);
-#else
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, 0);
-#endif
                     gBtlWork->flags |= 0x4000000ULL;
                     gBtlWork->flags |= 0x2000ULL;
                     gBtlWork->unk_0E4 = -1;

@@ -2068,7 +2068,6 @@ TARGET_BLOB_REGIONS = {
         (0x09EA6C7C, "rodata_end_fill"),
     ),
     "eu": (
-        (0x08F8EA09, "msg_localized_text"),
         (0x090D1E59, "card_mode_deck_tables"),
         (0x09F49910, "rodata_registrations"),
     ),

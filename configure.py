@@ -161,13 +161,16 @@ for pool in text_pools:
     if text_object["name"] not in listed:
         sys.exit(f"error: text object {text_object['name']} of config/text/{pool.name}.yaml is not in {units_file}")
     text_objects[text_object["name"]] = pool
-missing_text = [pool.source(version) for pool in text_objects.values() if not pool.source(version).exists()]
+missing_text = [pool.source(version) for pool in text_pools if pool.present(version) and not pool.source(version).exists()]
 if missing_text:
     sys.exit(f"error: {len(missing_text)} extracted text sources for {version} are missing"
              f" (first: {os.path.relpath(missing_text[0])}); run python3 tools/extract_assets.py {version}")
 
 def rel(path):
     return os.path.relpath(str(path))
+
+text_fragments = {path.name: rel(path) for pool in text_pools for path in pool.fragment_paths(version)}
+C_INCLUDE_RE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 
 sources = {}
 for path in sorted(Path("src").rglob("*.c")):
@@ -276,6 +279,7 @@ for src, obj, flags in units:
             deps.append(str(legacy_assembler))
     if rule == "cc":
         deps += headers + generated_headers + ["tools/legacy/bin/arm-elf-as"]
+        deps += sorted({text_fragments[name] for name in C_INCLUDE_RE.findall(src.read_text()) if name in text_fragments})
     if any(dep.startswith("assets/") for dep in deps):
         deps.append(assets_stamp)
     edges.append((obj, rule, src, deps, variables))
@@ -460,12 +464,11 @@ with out.open("w") as f:
             variables={"version": version, "manifest": rel(group["manifest"].path)},
         )
     for pool in text_pools:
-        text_object = pool.object(version)
         n.build(
-            [rel(pool.header(version))] + ([rel(pool.generated(version))] if text_object else []),
+            [rel(path) for path in pool.outputs(version)],
             "textgen",
             implicit=[rel(pool.path), f"config/charmaps/{version}.yaml", "tools/textgen.py"]
-            + ([rel(pool.source(version))] if text_object else []),
+            + ([rel(pool.source(version))] if pool.present(version) else []),
             variables={"version": version, "manifest": rel(pool.path)},
         )
     for obj, rule, src, deps, variables in edges:

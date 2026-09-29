@@ -165,50 +165,111 @@ def load_charmap(version):
     return {name: Encoding(f"{version}/{name}", doc) for name, doc in load_yaml(path).items()}
 
 
-def pool_encoding(pool, version, charmap):
-    name = pool.object(version)["encoding"]
-    if name not in charmap:
-        raise TextError(f"{pool.name}: config/charmaps/{version}.yaml has no encoding {name}")
-    return charmap[name]
+class Unit:
+    def __init__(self, pool, version, kind, spec, entries):
+        self.pool = pool
+        self.version = version
+        self.kind = kind
+        self.spec = spec
+        self.entries = entries
+        for key in ("name", "start", "end", "encoding", "align", "ctype"):
+            if key not in spec:
+                raise TextError(f"{pool.name}: {version} {kind} {spec.get('name')} has no {key}")
+        self.name = spec["name"]
+        self.start = spec["start"]
+        self.end = spec["end"]
+        self.align = spec["align"]
+        self.ctype = spec["ctype"]
+        self.header = spec.get("header")
+        self.form = spec.get("form", "array")
+        self.count = spec.get("count")
+        if self.form not in ("array", "string") or self.count not in (None, "exact", "slot"):
+            raise TextError(f"{pool.name}: {version} {self.name} has an unknown form or count")
+
+    def encoding(self, charmap):
+        name = self.spec["encoding"]
+        if name not in charmap:
+            raise TextError(f"{self.pool.name}: config/charmaps/{self.version}.yaml has no encoding {name}")
+        return charmap[name]
+
+    def entry_align(self, entry):
+        if "record" in entry:
+            return self.pool.fields(entry["record"])[2]
+        return entry.get("align", self.align)
+
+    def layout(self, data_of):
+        position = self.start
+        placed = []
+        for entry in self.entries:
+            start = aligned(position, self.entry_align(entry))
+            size = self.pool.fields(entry["record"])[1] if "record" in entry else len(data_of(entry, start))
+            placed.append((entry, start, size))
+            position = start + size
+        return placed, position
 
 
 class Pool:
     def __init__(self, path):
         self.path = Path(path)
         doc = load_yaml(self.path)
-        for key in ("pool", "objects", "entries"):
-            if key not in doc:
-                raise TextError(f"{self.path}: missing {key}")
+        if "pool" not in doc:
+            raise TextError(f"{self.path}: missing pool")
         self.name = doc["pool"]
         if self.name != self.path.stem:
             raise TextError(f"{self.path}: pool {self.name} must be named after its file")
-        self.objects = doc["objects"]
+        self.objects = doc.get("objects", {})
         self.types = doc.get("types", {})
-        self.listed = doc["entries"]
-        for version in self.objects:
+        self.listed = doc.get("entries", [])
+        self.formats = doc.get("formats", {})
+        self.fragment_specs = doc.get("fragments", {})
+        for version in list(self.objects) + list(self.fragment_specs):
             if version not in VERSIONS:
                 raise TextError(f"{self.name}: unknown version {version}")
 
     def object(self, version):
         return self.objects.get(version)
 
-    def entries(self, version):
+    def parse_entries(self, items):
+        return [{"name": item} if isinstance(item, str) else item for item in items]
+
+    def object_entries(self, version):
         if isinstance(self.listed, dict):
             items = self.listed.get(version, [])
         else:
             items = [item for item in self.listed if isinstance(item, str) or version in item.get("versions", VERSIONS)]
-        entries = [{"name": item} if isinstance(item, str) else item for item in items]
+        return self.parse_entries(items)
+
+    def fragments(self, version):
+        out = []
+        for spec in self.fragment_specs.get(version, []):
+            merged = dict(self.formats.get(spec.get("format"), {})) if "format" in spec else {}
+            merged.update({key: value for key, value in spec.items() if key not in ("format", "entries")})
+            out.append(Unit(self, version, "fragment", merged, self.parse_entries(spec.get("entries", []))))
+        return out
+
+    def units(self, version):
+        units = []
+        if self.object(version) is not None:
+            units.append(Unit(self, version, "object", self.object(version), self.object_entries(version)))
+        units += self.fragments(version)
         names = set()
-        for entry in entries:
-            if not entry["name"].isascii() or not entry["name"].isidentifier():
-                raise TextError(f"{self.name}: {entry['name']!r} is not a symbol name")
-            if entry["name"] in names:
-                raise TextError(f"{self.name}: {version} lists {entry['name']} twice")
-            names.add(entry["name"])
-        return entries
+        for unit in units:
+            for entry in unit.entries:
+                if not entry["name"].isascii() or not entry["name"].isidentifier():
+                    raise TextError(f"{self.name}: {entry['name']!r} is not a symbol name")
+                if entry["name"] in names:
+                    raise TextError(f"{self.name}: {version} lists {entry['name']} twice")
+                names.add(entry["name"])
+        return units
+
+    def entries(self, version):
+        return [entry for unit in self.units(version) for entry in unit.entries]
 
     def texts(self, version):
         return [entry for entry in self.entries(version) if "record" not in entry]
+
+    def present(self, version):
+        return self.object(version) is not None or bool(self.fragment_specs.get(version))
 
     def source(self, version):
         return ROOT / "assets" / version / "text" / f"{self.name}.txt"
@@ -219,6 +280,15 @@ class Pool:
     def generated(self, version):
         obj = self.object(version)
         return None if obj is None else ROOT / "build" / version / "gen" / obj["name"]
+
+    def fragment_paths(self, version):
+        return [ROOT / "build" / version / "gen" / unit.name for unit in self.fragments(version)]
+
+    def outputs(self, version):
+        paths = [self.header(version)]
+        if self.generated(version) is not None:
+            paths.append(self.generated(version))
+        return paths + self.fragment_paths(version)
 
     def fields(self, record):
         if record not in self.types:
@@ -231,11 +301,6 @@ class Pool:
             offset += width * field.get("count", 1)
             align = max(align, width)
         return out, aligned(offset, align), align
-
-    def align(self, entry, version):
-        if "record" in entry:
-            return self.fields(entry["record"])[2]
-        return entry.get("align", self.object(version)["align"])
 
 
 def load_pools(directory=POOL_DIR):
@@ -286,7 +351,7 @@ def parse_source(pool, version, text):
     return entries
 
 
-def read_source(pool, version, encoding):
+def read_source(pool, version, charmap):
     path = pool.source(version)
     if not path.exists():
         raise TextError(f"{path.relative_to(ROOT)} is missing; run python3 tools/extract_assets.py {version}")
@@ -297,7 +362,14 @@ def read_source(pool, version, encoding):
     if missing or extra:
         raise TextError(f"{path.relative_to(ROOT)}: entries differ from config/text/{pool.name}.yaml"
                         f" (missing {missing[:3]}, unknown {extra[:3]})")
-    return {name: encoding.encode(text, f"{path.relative_to(ROOT)}:{line}") for name, (text, line) in parsed.items()}
+    encoded = {}
+    for unit in pool.units(version):
+        encoding = unit.encoding(charmap)
+        for entry in unit.entries:
+            if "record" not in entry:
+                text, line = parsed[entry["name"]]
+                encoded[entry["name"]] = encoding.encode(text, f"{path.relative_to(ROOT)}:{line}")
+    return encoded
 
 
 def record_values(pool, entry):
@@ -313,56 +385,57 @@ def record_values(pool, entry):
     return out
 
 
-def layout(pool, version, data_of):
-    obj = pool.object(version)
-    position = obj["start"]
-    placed = []
-    for entry in pool.entries(version):
-        start = aligned(position, pool.align(entry, version))
-        size = pool.fields(entry["record"])[1] if "record" in entry else len(data_of(entry, start))
-        placed.append((entry, start, size))
-        position = start + size
-    return placed, position
+def natural_align(unit, encoding):
+    return 4 if unit.form == "string" else encoding.width
+
+
+def decode_unit(unit, encoding, rom):
+    pool, version = unit.pool, unit.version
+
+    def rom_at(address, size):
+        return rom[address - ROM_BASE:address - ROM_BASE + size]
+
+    def found(entry, start):
+        if "record" in entry:
+            return b""
+        end = encoding.terminated(rom, start - ROM_BASE)
+        if end is None or end + ROM_BASE > unit.end:
+            raise TextError(f"{pool.name}: {version} {entry['name']} runs past the end of {unit.name}")
+        return rom[start - ROM_BASE:end]
+
+    if unit.kind == "fragment" and unit.count != "slot" and unit.align != natural_align(unit, encoding):
+        raise TextError(f"{pool.name}: {version} {unit.name} aligns its entries to {unit.align}, which C only does"
+                        f" for {natural_align(unit, encoding)}-aligned {unit.form} definitions")
+    placed, position = unit.layout(found)
+    cursor = unit.start
+    texts = []
+    for entry, start, size in placed:
+        if any(rom_at(cursor, start - cursor)):
+            raise TextError(f"{pool.name}: {version} padding before {entry['name']} is not zero")
+        data = rom_at(start, size)
+        if "record" in entry:
+            check_record(pool, version, entry, data)
+        else:
+            text = encoding.decode(data)
+            where = f"{pool.name}: {version} {entry['name']}"
+            if encoding.encode(text, where) != data:
+                raise TextError(f"{where} does not re-encode to the ROM bytes")
+            texts.append((entry["name"], text))
+        cursor = start + size
+    if not position <= unit.end < position + 4 or any(rom_at(position, unit.end - position)):
+        raise TextError(f"{pool.name}: {version} entries of {unit.name} end at {position:#x}, not {unit.end:#x}")
+    return texts
 
 
 def decode(version, rom):
     charmap = load_charmap(version)
     checked = written = 0
     for pool in load_pools():
-        obj = pool.object(version)
-        if obj is None:
+        if not pool.present(version):
             continue
-        encoding = pool_encoding(pool, version, charmap)
-
-        def rom_at(address, size):
-            return rom[address - ROM_BASE:address - ROM_BASE + size]
-
-        def found(entry, start):
-            if "record" in entry:
-                return b""
-            end = encoding.terminated(rom, start - ROM_BASE)
-            if end is None or end + ROM_BASE > obj["end"]:
-                raise TextError(f"{pool.name}: {version} {entry['name']} runs past the object end")
-            return rom[start - ROM_BASE:end]
-
-        placed, position = layout(pool, version, found)
-        cursor = obj["start"]
         texts = []
-        for entry, start, size in placed:
-            if any(rom_at(cursor, start - cursor)):
-                raise TextError(f"{pool.name}: {version} padding before {entry['name']} is not zero")
-            data = rom_at(start, size)
-            if "record" in entry:
-                check_record(pool, version, entry, data)
-            else:
-                text = encoding.decode(data)
-                where = f"{pool.name}: {version} {entry['name']}"
-                if encoding.encode(text, where) != data:
-                    raise TextError(f"{where} does not re-encode to the ROM bytes")
-                texts.append((entry["name"], text))
-            cursor = start + size
-        if not position <= obj["end"] < position + 4 or any(rom_at(position, obj["end"] - position)):
-            raise TextError(f"{pool.name}: {version} entries end at {position:#x}, object ends at {obj['end']:#x}")
+        for unit in pool.units(version):
+            texts += decode_unit(unit, unit.encoding(charmap), rom)
         source = "\n".join(f"@{name}\n{text}\n" for name, text in texts)
         reparsed = parse_source(pool, version, source)
         if [(name, reparsed[name][0]) for name, _text in texts] != texts:
@@ -399,48 +472,98 @@ def record_lines(pool, entry):
     return lines
 
 
-def emit_object(pool, version, encoded, path):
-    obj = pool.object(version)
+def emit_object(unit, encoded, path):
     lines = ["\t.section .rodata"]
-    if obj["start"] % 4 == 0:
+    if unit.start % 4 == 0:
         lines.append("\t.balign 4")
-    elif obj["start"] % 2 == 0:
+    elif unit.start % 2 == 0:
         lines.append("\t.balign 2")
-    placed, position = layout(pool, version, lambda entry, _start: encoded[entry["name"]])
-    cursor = obj["start"]
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
+    cursor = unit.start
     for entry, start, size in placed:
         if start > cursor:
             lines += byte_lines(bytes(start - cursor))
         name = entry["name"]
         lines += [f"\t.global {name}", f"\t.type {name}, %object", f"{name}:"]
-        lines += record_lines(pool, entry) if "record" in entry else byte_lines(encoded[name])
+        lines += record_lines(unit.pool, entry) if "record" in entry else byte_lines(encoded[name])
         lines.append(f"\t.size {name}, .-{name}")
         cursor = start + size
-    if 0 < obj["end"] - position < 4:
-        lines += byte_lines(bytes(obj["end"] - position))
+    if 0 < unit.end - position < 4:
+        lines += byte_lines(bytes(unit.end - position))
     write_if_changed(path, "\n".join(lines) + "\n")
+
+
+def c_values(values, per_line):
+    return [f"    {', '.join(str(value) for value in values[i:i + per_line])}," for i in range(0, len(values), per_line)]
+
+
+def c_record(pool, entry):
+    record = entry["record"]
+    ctype = pool.types[record].get("ctype", f"const {record}")
+    parts = []
+    for _field, _width, _offset, values in record_values(pool, entry):
+        text = ", ".join(str(value) for value in values)
+        parts.append(f"{{ {text} }}" if len(values) > 1 else text)
+    return [f"{ctype} {entry['name']} = {{ {', '.join(parts)} }};", ""]
+
+
+def c_text(unit, entry, data, slot, width):
+    units = [int.from_bytes(data[i:i + width], "little") for i in range(0, len(data), width)]
+    if unit.count == "slot":
+        count = str(slot // width)
+    elif unit.count == "exact":
+        count = str(len(units))
+    else:
+        count = ""
+    head = f"{unit.ctype} {entry['name']}[{count}] = "
+    if unit.form == "string":
+        if width != 1 or units[-1] != 0 or 0 in units[:-1]:
+            raise TextError(f"{unit.pool.name}: {entry['name']} cannot be written as a C string")
+        body = "".join(f"\\{value:03o}" for value in units[:-1])
+        return [f'{head}"{body}";', ""]
+    return [head + "{"] + c_values(units, 16) + ["};", ""]
+
+
+def emit_fragment(unit, encoded, path, width):
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
+    lines = []
+    for index, (entry, start, size) in enumerate(placed):
+        if "record" in entry:
+            lines += c_record(unit.pool, entry)
+            continue
+        slot = (placed[index + 1][1] if index + 1 < len(placed) else unit.end) - start
+        lines += c_text(unit, entry, encoded[entry["name"]], slot, width)
+    write_if_changed(path, "\n".join(lines).rstrip("\n") + "\n")
 
 
 def emit_header(pool, version, path):
     guard = f"GUARD_GEN_{pool.name.upper()}_H"
     lines = [f"#ifndef {guard}", f"#define {guard}", "", '#include "types.h"']
-    obj = pool.object(version)
-    if obj is not None and obj.get("header"):
-        lines.append(f'#include "{obj["header"]}"')
-    declared = [entry["name"] for entry in pool.texts(version) if entry.get("declare", True)] if obj else []
+    units = pool.units(version)
+    headers = []
+    for unit in units:
+        if unit.header and unit.header not in headers:
+            headers.append(unit.header)
+    lines += [f'#include "{header}"' for header in headers]
+    declared = [(unit.ctype, entry["name"]) for unit in units for entry in unit.entries
+                if "record" not in entry and entry.get("declare", True)]
     if declared:
         lines.append("")
-        lines += [f"extern {obj['ctype']} {name}[];" for name in declared]
+        lines += [f"extern {ctype} {name}[];" for ctype, name in declared]
     lines += ["", "#endif"]
     write_if_changed(path, "\n".join(lines) + "\n")
 
 
 def generate(version, manifest):
     pool = Pool(manifest)
-    obj = pool.object(version)
-    if obj is not None:
-        encoding = pool_encoding(pool, version, load_charmap(version))
-        emit_object(pool, version, read_source(pool, version, encoding), pool.generated(version))
+    if pool.present(version):
+        charmap = load_charmap(version)
+        encoded = read_source(pool, version, charmap)
+        for unit in pool.units(version):
+            if unit.kind == "object":
+                emit_object(unit, encoded, pool.generated(version))
+            else:
+                emit_fragment(unit, encoded, ROOT / "build" / version / "gen" / unit.name, unit.encoding(charmap).width)
     emit_header(pool, version, pool.header(version))
 
 

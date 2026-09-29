@@ -204,7 +204,7 @@ def decoded_sources(root, version):
             for source in manifest.sources(entry, version):
                 refs[source.relative_to(root).as_posix()] = manifest
     for pool in textgen.load_pools(root / "config" / "text"):
-        if pool.object(version) is not None:
+        if pool.present(version):
             refs[pool.source(version).relative_to(root).as_posix()] = pool
     return refs
 

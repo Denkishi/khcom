@@ -15,7 +15,7 @@ objects:
     end: 0x09DDF538
 entries:
 - name: gVoicegroup0
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6D620
     size: 1524
@@ -26,7 +26,7 @@ entries:
     address: 0x09DDD54C
     size: 1524
 - name: gVoicegroup1
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6DC14
     size: 336
@@ -37,7 +37,7 @@ entries:
     address: 0x09DDDB40
     size: 336
 - name: gVoicegroup2
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6DD64
     size: 1536
@@ -48,7 +48,7 @@ entries:
     address: 0x09DDDC90
     size: 1536
 - name: gVoicegroup3
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6E364
     size: 1248
@@ -59,7 +59,7 @@ entries:
     address: 0x09DDE290
     size: 1248
 - name: gVoicegroup4
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6E844
     size: 852
@@ -70,7 +70,7 @@ entries:
     address: 0x09DDE770
     size: 852
 - name: gVoicegroup5
-  format: raw
+  format: voicegroup
   us:
     address: 0x09D6EB98
     size: 240
@@ -81,7 +81,8 @@ entries:
     address: 0x09DDEAC4
     size: 240
 - name: gVoicegroup0Keysplit12
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EC88
     size: 108
@@ -92,7 +93,8 @@ entries:
     address: 0x09DDEBB4
     size: 108
 - name: gVoicegroup0Keysplit18
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6ECF4
     size: 84
@@ -103,7 +105,8 @@ entries:
     address: 0x09DDEC20
     size: 84
 - name: gVoicegroup0Keysplit21
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6ED48
     size: 72
@@ -114,7 +117,8 @@ entries:
     address: 0x09DDEC74
     size: 72
 - name: gVoicegroup0Keysplit27
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6ED90
     size: 84
@@ -125,7 +129,8 @@ entries:
     address: 0x09DDECBC
     size: 84
 - name: gVoicegroup0Keysplit35
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EDE4
     size: 84
@@ -136,7 +141,8 @@ entries:
     address: 0x09DDED10
     size: 84
 - name: gVoicegroup0Keysplit44
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EE38
     size: 84
@@ -147,7 +153,8 @@ entries:
     address: 0x09DDED64
     size: 84
 - name: gVoicegroup0Keysplit50
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EE8C
     size: 84
@@ -158,7 +165,8 @@ entries:
     address: 0x09DDEDB8
     size: 84
 - name: gVoicegroup0Keysplit57
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EEE0
     size: 84
@@ -169,7 +177,8 @@ entries:
     address: 0x09DDEE0C
     size: 84
 - name: gVoicegroup0Keysplit63
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EF34
     size: 84
@@ -180,7 +189,8 @@ entries:
     address: 0x09DDEE60
     size: 84
 - name: gVoicegroup0Keysplit66
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EF88
     size: 84
@@ -191,7 +201,8 @@ entries:
     address: 0x09DDEEB4
     size: 84
 - name: gVoicegroup0Keysplit69
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6EFDC
     size: 84
@@ -202,7 +213,8 @@ entries:
     address: 0x09DDEF08
     size: 84
 - name: gVoicegroup0Keysplit75
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F030
     size: 84
@@ -213,7 +225,8 @@ entries:
     address: 0x09DDEF5C
     size: 84
 - name: gVoicegroup0Keysplit79
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F084
     size: 84
@@ -224,7 +237,8 @@ entries:
     address: 0x09DDEFB0
     size: 84
 - name: gVoicegroup0Keysplit89
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F0D8
     size: 84
@@ -235,7 +249,8 @@ entries:
     address: 0x09DDF004
     size: 84
 - name: gVoicegroup0Keysplit92
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F12C
     size: 84
@@ -246,7 +261,8 @@ entries:
     address: 0x09DDF058
     size: 84
 - name: gVoicegroup0Keysplit101
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F180
     size: 84
@@ -257,7 +273,8 @@ entries:
     address: 0x09DDF0AC
     size: 84
 - name: gVoicegroup0Keysplit104
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F1D4
     size: 84
@@ -268,7 +285,8 @@ entries:
     address: 0x09DDF100
     size: 84
 - name: gVoicegroup0Keysplit108
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F228
     size: 84
@@ -279,7 +297,8 @@ entries:
     address: 0x09DDF154
     size: 84
 - name: gVoicegroup0Keysplit111
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F27C
     size: 84
@@ -290,7 +309,8 @@ entries:
     address: 0x09DDF1A8
     size: 84
 - name: gVoicegroup0Keysplit121
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F2D0
     size: 84
@@ -301,7 +321,8 @@ entries:
     address: 0x09DDF1FC
     size: 84
 - name: gVoicegroup0Keysplit125
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F324
     size: 84
@@ -312,7 +333,8 @@ entries:
     address: 0x09DDF250
     size: 84
 - name: gVoicegroup0Keysplit9
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F378
     size: 84
@@ -323,7 +345,8 @@ entries:
     address: 0x09DDF2A4
     size: 84
 - name: gVoicegroup1Keysplit3
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F3CC
     size: 84
@@ -334,7 +357,8 @@ entries:
     address: 0x09DDF2F8
     size: 84
 - name: gVoicegroup1Keysplit6
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F420
     size: 84
@@ -345,7 +369,8 @@ entries:
     address: 0x09DDF34C
     size: 84
 - name: gVoicegroup1Keysplit13
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F474
     size: 84
@@ -356,7 +381,8 @@ entries:
     address: 0x09DDF3A0
     size: 84
 - name: gVoicegroup1Keysplit25
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F4C8
     size: 84
@@ -367,7 +393,8 @@ entries:
     address: 0x09DDF3F4
     size: 84
 - name: gVoicegroup0Keysplit105
-  format: raw
+  format: keysplit
+  declare: false
   us:
     address: 0x09D6F51C
     size: 96
@@ -378,7 +405,7 @@ entries:
     address: 0x09DDF448
     size: 96
 - name: gVoicegroup0Wave58
-  format: raw
+  format: wave
   us:
     address: 0x09D6F57C
     size: 16
@@ -389,7 +416,7 @@ entries:
     address: 0x09DDF4A8
     size: 16
 - name: gWave1
-  format: raw
+  format: wave
   us:
     address: 0x09D6F58C
     size: 16
@@ -400,7 +427,7 @@ entries:
     address: 0x09DDF4B8
     size: 16
 - name: gVoicegroup2Wave2
-  format: raw
+  format: wave
   us:
     address: 0x09D6F59C
     size: 16
@@ -411,7 +438,7 @@ entries:
     address: 0x09DDF4C8
     size: 16
 - name: gWave3
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5AC
     size: 16
@@ -422,7 +449,7 @@ entries:
     address: 0x09DDF4D8
     size: 16
 - name: gWave4
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5BC
     size: 16
@@ -433,7 +460,7 @@ entries:
     address: 0x09DDF4E8
     size: 16
 - name: gWave5
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5CC
     size: 16
@@ -444,7 +471,7 @@ entries:
     address: 0x09DDF4F8
     size: 16
 - name: gWave6
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5DC
     size: 16
@@ -455,7 +482,7 @@ entries:
     address: 0x09DDF508
     size: 16
 - name: gWave7
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5EC
     size: 16
@@ -466,7 +493,7 @@ entries:
     address: 0x09DDF518
     size: 16
 - name: gWave8
-  format: raw
+  format: wave
   us:
     address: 0x09D6F5FC
     size: 16

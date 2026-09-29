@@ -478,7 +478,7 @@ class Context:
         for manifest in manifests:
             for entry in manifest.entries:
                 fmt = entry.get("format")
-                if version not in entry or fmt not in ("sample", "wave", "voicegroup", "keysplit"):
+                if version not in entry or fmt in ("sprite_sheet", "song"):
                     continue
                 address = entry[version]["address"]
                 symbol = manifest.symbol(entry, version)

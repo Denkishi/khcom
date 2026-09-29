@@ -826,7 +826,7 @@ void func_080DA42C(BoogieDiceWork* work) {
     void* tbl[6][3];
     u8 n;
 
-    memcpy(tbl, gUnk_096FDF7C, 72);
+    memcpy(tbl, gUnk_096FDF7C, sizeof(tbl));
 
     switch (GetRandom() % 4) {
     case 0:

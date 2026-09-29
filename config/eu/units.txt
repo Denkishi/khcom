@@ -28,7 +28,7 @@ asset_gfx.s
 movie_text.c
 mode_movie.c
 jiminy_data.c
-jiminy_eu_localized_text_data.c
+jiminy_text.s
 jiminy_records_index_data.c
 mode_jiminy.c
 formation_data.c

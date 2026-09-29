@@ -1,8 +1,0 @@
-version: 1
-regions:
-  us:
-    named_assets:
-    - name: gUnk_0813FE3C
-      address: '0x813fe3c'
-      size: 16
-      encoding: utf16le

@@ -52,9 +52,7 @@ pc.c
 hum.c
 save_signature.c
 jiminy_data.c
-padding_us_jiminy_text_prefix.s
-asset_us_jiminy_text_prefix.s
-rodata_script.s
+jiminy_text.s
 jiminy_records_index_data.c
 mode_jiminy.c
 rodata_script_gap_1.s

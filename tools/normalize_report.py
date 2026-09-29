@@ -19,7 +19,7 @@ from pathlib import Path
 # written asm: compressed art and audio, FMV, and 0xFF filler. They are real
 # cartridge bytes and the build needs them, but they are not decompilation work,
 # so counting them as unmatched data would report 31 MB as outstanding forever.
-EXCLUDED_UNITS = ("asm/asset_", "asm/padding", "asm/rodata_script")
+EXCLUDED_UNITS = ("asm/asset_", "asm/rodata_script")
 UNATTRIBUTED_UNITS = ("asm/rodata_",)
 
 DIMENSIONS = {

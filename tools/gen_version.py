@@ -1996,7 +1996,6 @@ TARGET_DATA_SIZE = {
         ("mode_mapinspect.c", ".data"): 0xc4,
         ("mode_staffroll.c", ".data"): 0xb60,
         ("mode_chkmov.c", ".rodata"): 0x84,
-        ("jiminy_eu_localized_text_data.c", ".rodata"): 0x3ba89,
         ("jiminy_inline_text_data.c", ".rodata"): 0x1c4,
         ("localized_names_eu.c", ".rodata"): 0x7fec,
         ("mode_chkmov.c", ".data"): 0x10,
@@ -2052,7 +2051,6 @@ TARGET_DATA_ADDR = {
     },
     "eu": {
         ("mode_chkmov.c", ".rodata"): 0x0812f680,
-        ("jiminy_eu_localized_text_data.c", ".rodata"): 0x0883f2db,
         ("jiminy_inline_text_data.c", ".rodata"): 0x0888e310,
         ("localized_names_eu.c", ".rodata"): 0x0888e4d4,
         ("monsgage.c", ".rodata"): 0x088964c0,

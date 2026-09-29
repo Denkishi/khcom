@@ -1994,7 +1994,6 @@ TARGET_DATA_SIZE = {
         ("jiminy_data.c", ".data"): 0x23d4,
         ("card_stock_info.c", ".rodata"): 0x1a62,
         ("mode_staffroll.c", ".data"): 0xba0,
-        ("jiminy_inline_text_data.c", ".rodata"): 0x1c9,
         ("mode_jiminy.c", ".rodata"): 0x48a8,
         ("card_deckmenu2.c", ".rodata"): 0x442,
         ("card_name.c", ".rodata"): 0x44,
@@ -2004,7 +2003,6 @@ TARGET_DATA_SIZE = {
 
 TARGET_DATA_ADDR = {
     "jp": {
-        ("jiminy_inline_text_data.c", ".rodata"): 0x0813feb8,
         ("monsgage.c", ".rodata"): 0x0814fc14,
         ("btl4.c", ".rodata"): 0x0814fc24,
         ("tutorial.c", ".rodata"): 0x0814fc68,

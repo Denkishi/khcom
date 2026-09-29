@@ -16,7 +16,7 @@ objects:
     header: jiminy_types.h
   jp:
     name: jiminy_text.s
-    start: 0x08140084
+    start: 0x0813FEB8
     end: 0x08149A2E
     encoding: game
     align: 4
@@ -30,6 +30,77 @@ objects:
     align: 1
     ctype: const JiminyTextChar
     header: jiminy_types.h
+fragments:
+  us:
+  - name: jiminy_placeholders.inc
+    start: 0x08159D14
+    end: 0x08159DE4
+    encoding: game
+    align: 2
+    ctype: const JiminyTextChar
+    count: exact
+    header: jiminy_types.h
+    entries:
+    - gUnk_08159D14
+    - gUnk_08159D18
+    - gUnk_08159D1E
+    - gUnk_08159D26
+    - gUnk_08159D30
+    - gUnk_08159D3C
+    - gUnk_08159D4A
+    - gUnk_08159D5A
+    - gUnk_08159D6C
+    - gUnk_08159D80
+    - gUnk_08159D96
+    - gUnk_08159DAE
+    - gUnk_08159DC8
+  jp:
+  - name: jiminy_placeholders.inc
+    start: 0x0814E494
+    end: 0x0814E56F
+    encoding: game
+    align: 4
+    ctype: const JiminyTextChar
+    form: string
+    count: exact
+    header: jiminy_types.h
+    entries:
+    - gUnkJp_0814E494
+    - gUnkJp_0814E4B0
+    - gUnkJp_0814E4CC
+    - gUnkJp_0814E4E4
+    - gUnkJp_0814E4FC
+    - gUnkJp_0814E510
+    - gUnkJp_0814E524
+    - gUnkJp_0814E534
+    - gUnkJp_0814E544
+    - gUnkJp_0814E550
+    - gUnkJp_0814E55C
+    - gUnkJp_0814E564
+    - gUnkJp_0814E56C
+  eu:
+  - name: jiminy_placeholders.inc
+    start: 0x0887F2CC
+    end: 0x0887F334
+    encoding: game
+    align: 1
+    ctype: const JiminyTextChar
+    count: exact
+    header: jiminy_types.h
+    entries:
+    - gUnkEu_0887F2CC
+    - gUnkEu_0887F2CE
+    - gUnkEu_0887F2D1
+    - gUnkEu_0887F2D5
+    - gUnkEu_0887F2DA
+    - gUnkEu_0887F2E0
+    - gUnkEu_0887F2E7
+    - gUnkEu_0887F2EF
+    - gUnkEu_0887F2F8
+    - gUnkEu_0887F302
+    - gUnkEu_0887F30D
+    - gUnkEu_0887F319
+    - gUnkEu_0887F326
 entries:
   us:
   - gUnk_0813FE3C
@@ -2521,6 +2592,24 @@ entries:
   - gUnk_0815527A
   - gUnk_0815529E
   jp:
+  - gUnkJp_0813FEB8
+  - gUnkJp_0813FED0
+  - gUnkJp_0813FEEC
+  - gUnkJp_0813FF08
+  - gUnkJp_0813FF24
+  - gUnkJp_0813FF38
+  - gUnkJp_0813FF54
+  - gUnkJp_0813FF70
+  - gUnkJp_0813FF7C
+  - gUnkJp_0813FF98
+  - gUnkJp_0813FFB4
+  - gUnkJp_0813FFD0
+  - gUnkJp_0813FFEC
+  - gUnkJp_0813FFF8
+  - gUnkJp_08140014
+  - gUnkJp_08140030
+  - gUnkJp_0814004C
+  - gUnkJp_08140068
   - gUnkJp_08140084
   - gUnkJp_0814009C
   - gUnkJp_081400B8

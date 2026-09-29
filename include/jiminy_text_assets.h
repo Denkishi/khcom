@@ -7,39 +7,7 @@
 #include "common_text.h"
 #include "localized_names.h"
 
-#if defined(VERSION_US)
-
-extern const JiminyTextChar gUnk_08159D14[2];
-extern const JiminyTextChar gUnk_08159D18[3];
-extern const JiminyTextChar gUnk_08159D1E[4];
-extern const JiminyTextChar gUnk_08159D26[5];
-extern const JiminyTextChar gUnk_08159D30[6];
-extern const JiminyTextChar gUnk_08159D3C[7];
-extern const JiminyTextChar gUnk_08159D4A[8];
-extern const JiminyTextChar gUnk_08159D5A[9];
-extern const JiminyTextChar gUnk_08159D6C[10];
-extern const JiminyTextChar gUnk_08159D80[11];
-extern const JiminyTextChar gUnk_08159D96[12];
-extern const JiminyTextChar gUnk_08159DAE[13];
-extern const JiminyTextChar gUnk_08159DC8[14];
-
-#elif defined(VERSION_JP)
-
-extern const JiminyTextChar gUnkJp_0814E494[27];
-extern const JiminyTextChar gUnkJp_0814E4B0[25];
-extern const JiminyTextChar gUnkJp_0814E4CC[23];
-extern const JiminyTextChar gUnkJp_0814E4E4[21];
-extern const JiminyTextChar gUnkJp_0814E4FC[19];
-extern const JiminyTextChar gUnkJp_0814E510[17];
-extern const JiminyTextChar gUnkJp_0814E524[15];
-extern const JiminyTextChar gUnkJp_0814E534[13];
-extern const JiminyTextChar gUnkJp_0814E544[11];
-extern const JiminyTextChar gUnkJp_0814E550[9];
-extern const JiminyTextChar gUnkJp_0814E55C[7];
-extern const JiminyTextChar gUnkJp_0814E564[5];
-extern const JiminyTextChar gUnkJp_0814E56C[3];
-
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
 
 extern const JiminyLocalizedName gUnkEu_088945CC;
 extern const JiminyLocalizedName gUnkEu_08894614;
@@ -90,19 +58,6 @@ extern const JiminyLocalizedName gUnkEu_08895380;
 extern const JiminyLocalizedName gUnkEu_088953D0;
 extern const JiminyLocalizedName gUnkEu_08895408;
 extern const JiminyLocalizedName gUnkEu_08895454;
-extern const JiminyTextChar gUnkEu_0887F2CC[2];
-extern const JiminyTextChar gUnkEu_0887F2CE[3];
-extern const JiminyTextChar gUnkEu_0887F2D1[4];
-extern const JiminyTextChar gUnkEu_0887F2D5[5];
-extern const JiminyTextChar gUnkEu_0887F2DA[6];
-extern const JiminyTextChar gUnkEu_0887F2E0[7];
-extern const JiminyTextChar gUnkEu_0887F2E7[8];
-extern const JiminyTextChar gUnkEu_0887F2EF[9];
-extern const JiminyTextChar gUnkEu_0887F2F8[10];
-extern const JiminyTextChar gUnkEu_0887F302[11];
-extern const JiminyTextChar gUnkEu_0887F30D[12];
-extern const JiminyTextChar gUnkEu_0887F319[13];
-extern const JiminyTextChar gUnkEu_0887F326[14];
 
 #endif
 

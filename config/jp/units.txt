@@ -51,7 +51,6 @@ pc.c
 hum.c
 save_signature.c
 jiminy_data.c
-jiminy_inline_text_data.c
 jiminy_text.s
 jiminy_records_index_data.c
 mode_jiminy.c

@@ -315,7 +315,7 @@ map_donald.c
 map_goofy.c
 room.c
 map_room_tables.s
-map_rooms.c
+map_rooms.s
 map_data.c
 sprites_map_frames_3.s
 map_room_tiles_1.s

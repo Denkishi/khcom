@@ -22,16 +22,6 @@ types:
       count: 3
     - name: keys
       type: EventKey*
-  MapRoomEvent:
-    fields:
-    - name: room
-      type: u8
-    - name: event
-      type: u8
-    - name: unk_02
-      type: u8
-    - name: unk_03
-      type: u8
   MapFloorLinks:
     kind: array
     type: u8
@@ -102,15 +92,15 @@ objects:
   us:
   - name: map_room_tables.s
     start: 0x0984C3D0
-    end: 0x0984D2D8
+    end: 0x0984D2D4
   jp:
   - name: map_room_tables.s
     start: 0x09800EE4
-    end: 0x09801DEC
+    end: 0x09801DE8
   eu:
   - name: map_room_tables.s
     start: 0x09828DA4
-    end: 0x09829CAC
+    end: 0x09829CA8
 entries:
 - name: gMapFloorLinks13
   record: MapFloorLinks
@@ -2036,14 +2026,3 @@ entries:
     address: 0x09801D08
   eu:
     address: 0x09829BC8
-- name: gUnk_0984D2D4
-  record: MapRoomEvent
-  declare: false
-  elements:
-  - [255, 255, 26, 0]
-  us:
-    address: 0x0984D2D4
-  jp:
-    address: 0x09801DE8
-  eu:
-    address: 0x09829CA8

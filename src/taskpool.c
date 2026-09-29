@@ -24,7 +24,7 @@ u16 gDebugModeIndex;
 Mode* gPendingMode;
 s32 gPendingModeArg;
 vu8 gModeFlags;
-u16 gUnk_0300749E;
+u16 gModeBlankColor;
 void (*gUnk_030074A0)(void);
 void (*gUnk_030074A4)(void);
 #ifdef VERSION_EU
@@ -231,11 +231,11 @@ s32 func_08000F90(void) {
 
 void ModeBlankDisplay(void) {
     REG_DISPCNT &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
-    *(vu16*)0x05000000 = gUnk_0300749E;
+    *(vu16*)0x05000000 = gModeBlankColor;
 }
 
 void ModeStart(Mode* mode, s32 arg) {
-    gUnk_0300749E = FadeGetColor();
+    gModeBlankColor = FadeGetColor();
     VTransReset();
     BgReset();
     SpriteReset();
@@ -257,7 +257,7 @@ void ModeInit(u8 a) {
 void ModeInit(void) {
 #endif
     gModeFlags = 3;
-    gUnk_0300749E = 0;
+    gModeBlankColor = 0;
     gDebugModeIndex = 0;
 #ifdef VERSION_EU
 

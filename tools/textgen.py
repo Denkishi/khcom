@@ -16,7 +16,7 @@ VERSIONS = ("us", "jp", "eu")
 ROM_BASE = 0x08000000
 FIELD_WIDTHS = {"u8": 1, "u16": 2, "u32": 4, "ptr": 4}
 DIRECTIVES = {1: ".byte", 2: ".hword", 4: ".4byte"}
-SHOWN_SPACES = (" ", "　")
+SHOWN_SPACES = (" ", "\u3000")
 HIDDEN_CATEGORIES = ("Cc", "Cf", "Cs", "Co", "Cn", "Zl", "Zp", "Zs")
 BYTES_PER_LINE = 32
 
@@ -200,6 +200,8 @@ class Pool:
         entries = [{"name": item} if isinstance(item, str) else item for item in items]
         names = set()
         for entry in entries:
+            if not entry["name"].isascii() or not entry["name"].isidentifier():
+                raise TextError(f"{self.name}: {entry['name']!r} is not a symbol name")
             if entry["name"] in names:
                 raise TextError(f"{self.name}: {version} lists {entry['name']} twice")
             names.add(entry["name"])
@@ -288,7 +290,7 @@ def read_source(pool, version, encoding):
     path = pool.source(version)
     if not path.exists():
         raise TextError(f"{path.relative_to(ROOT)} is missing; run python3 tools/extract_assets.py {version}")
-    parsed = parse_source(pool, version, path.read_text(encoding="utf-8"))
+    parsed = parse_source(pool, version, path.read_text(encoding="utf-8").replace("\r\n", "\n"))
     wanted = [entry["name"] for entry in pool.texts(version)]
     missing = [name for name in wanted if name not in parsed]
     extra = sorted(set(parsed) - set(wanted))

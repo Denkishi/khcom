@@ -72,6 +72,12 @@ class Manifest:
     def elements(self, entry, version):
         return self.data(entry, version, "elements")
 
+    def values(self, entry, version):
+        values = self.data(entry, version, "values")
+        if values and isinstance(values[0], list):
+            return [value for row in values for value in row]
+        return values
+
     def string_bytes(self, entry, version):
         rtype = self.types[entry["record"]]
         try:
@@ -98,7 +104,7 @@ class Manifest:
             elements = self.elements(entry, version)
             return size if elements is None else size * len(elements)
         if kind == "array":
-            return scalar_size(self.types[entry["record"]]["type"]) * len(self.data(entry, version, "values"))
+            return scalar_size(self.types[entry["record"]]["type"]) * len(self.values(entry, version))
         if kind == "string":
             return len(self.string_bytes(entry, version))
         if kind == "table":
@@ -283,7 +289,7 @@ def record_chunks(manifest, entry, version):
     rtype = manifest.types[entry["record"]]
     if kind == "array":
         width = scalar_size(rtype["type"])
-        return [(index * width, width, value) for index, value in enumerate(manifest.data(entry, version, "values"))]
+        return [(index * width, width, value) for index, value in enumerate(manifest.values(entry, version))]
     if kind == "string":
         return [(index, 1, value) for index, value in enumerate(manifest.string_bytes(entry, version))]
     if kind == "table":
@@ -891,7 +897,7 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
                 lines.append(f"extern const {entry['record']} {symbol}{count};")
             elif kind == "array":
                 rtype = manifest.types[entry["record"]]
-                values = len(manifest.data(entry, version, "values"))
+                values = len(manifest.values(entry, version))
                 columns = rtype.get("columns")
                 shape = f"[{values}]" if not columns else f"[{values // columns}][{columns}]"
                 lines.append(f"extern const {rtype.get('ctype', rtype['type'])} {symbol}{shape};")

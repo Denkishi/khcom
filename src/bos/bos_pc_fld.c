@@ -133,7 +133,7 @@ void func_0810B51C(PcFldWork* work) {
     work->unk_000 = 0;
 }
 
-void task_bos_pc_fld_0(PcFldWork* work, BattleBackgroundDef* arg) {
+void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     Collider* p;
 
     LoadBgTiles(0, arg->tiles, arg->tilesSize);

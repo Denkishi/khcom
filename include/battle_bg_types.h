@@ -13,4 +13,14 @@ typedef struct BattleBackgroundDef {
     void* map[4];
 } BattleBackgroundDef;
 
+typedef struct PcBattleBackgroundDef {
+    void* tiles;
+    u16 tilesSize;
+    u8 unk_06[0x2];
+    void* palette;
+    u16 paletteSize;
+    u8 unk_0E[0x2];
+    void* map[6];
+} PcBattleBackgroundDef;
+
 #endif

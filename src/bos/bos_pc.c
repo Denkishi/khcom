@@ -124,11 +124,10 @@ PcAnimStep* gUnk_09EF9DB4[14] = {
 
 const EmyKind gUnk_09A3DEFC = { 36, 256, 16, 8, 0, 128, 0 };
 
-const BattleBackgroundDef gUnk_09A3DF0C = {
-    gUnk_09C91754, 0x3340, { 0, 0 }, gBosPcBgPalette, 0x100, { 0, 0 }, { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274 }
+const PcBattleBackgroundDef gBosPcBattleBackgroundDef = {
+    gUnk_09C91754, 0x3340, { 0, 0 }, gBosPcBgPalette, 0x100, { 0, 0 },
+    { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x800, gUnk_09D33A74 + 0x800 }
 };
-
-u8* const gUnk_09A3DF2C[2] = { gUnk_09D33A74 + 0x800, gUnk_09D33A74 + 0x800 };
 
 const PcSpriteCmd gUnk_09A3DF34[51] = {
     { 1, 0, 8, -40, -57, 49, 0 },
@@ -5377,7 +5376,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     BtlWork* g;
     u16 zero;
 
-    work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gUnk_09A3DF0C);
+    work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gBosPcBattleBackgroundDef);
     work->state = 0;
     work->unk_002 = 0;
     work->unk_004 = 600;

@@ -541,7 +541,7 @@ void func_0810A444(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
 
-extern const BattleBackgroundDef gUnk_09A3DF0C;
+extern const PcBattleBackgroundDef gBosPcBattleBackgroundDef;
 extern const EmyKind gUnk_09A3DEFC;
 extern u8 gUnk_08F69BC4[];
 extern const BattleBackgroundDef gBosLstBattleBackgroundDef;
@@ -605,7 +605,7 @@ typedef struct PcFltInit {
 void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg);
 void task_bos_pc_flt_2(PcFltWork* work);
 
-void task_bos_pc_fld_0(PcFldWork* work, BattleBackgroundDef* arg);
+void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg);
 
 u8 task_bos_pc_fld_1(PcFldWork* work);
 

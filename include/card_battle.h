@@ -52,7 +52,7 @@ typedef struct CardBattleState {
     u8 unk_0D9;
     u8 unk_0DA[0x02];
     u8 unk_0DC;
-    u8 unk_0DD;
+    u8 stockMoveCount;
     u8 unk_0DE;
     u8 unk_0DF;
     u8 unk_0E0;

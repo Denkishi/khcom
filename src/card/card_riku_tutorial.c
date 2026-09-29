@@ -158,7 +158,7 @@ s32 func_080ABA80(s32* out) {
 #else
     if (gCardBattleState->unk_0D0 == 1) {
 #endif
-        gCardBattleState->unk_0DD = 1;
+        gCardBattleState->stockMoveCount = 1;
 
         if ((gGameState.flags & 8) && gBtlWork->unk_0A4 == 1 && !(gBtlWork->flags & 0x800000000000)) {
             if (gCardBattleState->unk_0EE == 1 || gBtlWork->unk_1C8 > 29) {
@@ -172,21 +172,21 @@ s32 func_080ABA80(s32* out) {
     } else if (gCardBattleState->unk_0D0 == 1 && (p = gBtlWork)->unk_0A4 == 1) {
         if (p->unk_0F4 == 47) {
             out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
-            gCardBattleState->unk_0DD = 2;
+            gCardBattleState->stockMoveCount = 2;
             return 145;
         } else {
             return gCardBattleState->unk_000[0]->cardDef->unk_24;
         }
 #endif
     } else if (gCardBattleState->unk_0D0 == 0) {
-        gCardBattleState->unk_0DD = 0;
+        gCardBattleState->stockMoveCount = 0;
         return -1;
     } else {
         r = func_080AC5E8(gCardBattleState->unk_000, gCardBattleState->unk_0D0, gCardBattleState->unk_0C2, &arr, &flag);
 
         switch (r) {
         case 108:
-            gCardBattleState->unk_0DD = 1;
+            gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
             p = gBtlWork;
@@ -194,7 +194,7 @@ s32 func_080ABA80(s32* out) {
             if (p->unk_0A4 == 1) {
                 if (p->unk_0F4 == 47) {
                     out[0] = out[1] = func_080AC140(r);
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return func_080AC140(r);
@@ -202,7 +202,7 @@ s32 func_080ABA80(s32* out) {
             } else {
                 if (gRikuBtlWork->unk_0F4 == 47) {
                     out[0] = out[1] = func_080AC140(r);
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return func_080AC140(r);
@@ -251,15 +251,15 @@ s32 func_080ABA80(s32* out) {
 
                 if (gBtlWork->unk_0A4 == 1) {
                     if (gBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0 * 2;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
                     } else {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
                     }
                 } else {
                     if (gRikuBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0 * 2;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
                     } else {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
                     }
                 }
 #ifndef VERSION_EU
@@ -321,7 +321,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
 
         if (f == 0) {
 #endif
-        gCardBattleState->unk_0DD = 1;
+        gCardBattleState->stockMoveCount = 1;
 
         if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
             if (gCardBattleState->unk_0EE == 1 || gBtlWork->unk_1C8 > 29) {
@@ -336,7 +336,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
             if (gBtlWork->unk_0A4 == 1) {
                 if (gBtlWork->unk_0F4 == 47) {
                     out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return gCardBattleState->unk_000[0]->cardDef->unk_24;
@@ -344,7 +344,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
             } else {
                 if (gRikuBtlWork->unk_0F4 == 47) {
                     out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return gCardBattleState->unk_000[0]->cardDef->unk_24;
@@ -353,20 +353,20 @@ s32 func_080ABCA4(s32* out, s32 b) {
         }
 #endif
     } else if (gCardBattleState->unk_0D0 == 0) {
-        gCardBattleState->unk_0DD = 0;
+        gCardBattleState->stockMoveCount = 0;
         return -1;
     } else {
         r = func_080AD144(gCardBattleState->unk_000, gCardBattleState->unk_0D0, gCardBattleState->unk_0C2, &arr, &flag, b);
 
         switch (r) {
         case 108:
-            gCardBattleState->unk_0DD = 1;
+            gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
             if (gBtlWork->unk_0A4 == 1) {
                 if (gBtlWork->unk_0F4 == 47) {
                     out[0] = out[1] = func_080AC140(r);
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return func_080AC140(r);
@@ -374,7 +374,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
             } else {
                 if (gRikuBtlWork->unk_0F4 == 47) {
                     out[0] = out[1] = func_080AC140(r);
-                    gCardBattleState->unk_0DD = 2;
+                    gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
                     return func_080AC140(r);
@@ -424,15 +424,15 @@ s32 func_080ABCA4(s32* out, s32 b) {
 
                 if (gBtlWork->unk_0A4 == 1) {
                     if (gBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0 * 2;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
                     } else {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
                     }
                 } else {
                     if (gRikuBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0 * 2;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
                     } else {
-                        gCardBattleState->unk_0DD = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
                     }
                 }
 #ifndef VERSION_EU
@@ -444,9 +444,9 @@ s32 func_080ABCA4(s32* out, s32 b) {
     }
 }
 
-u8 func_080ABED0(void) {
+u8 GetStockMoveCount(void) {
     if (gCardBattleState->unk_0E1 || gCardBattleState->unk_0E2) {
-        return gCardBattleState->unk_0DD;
+        return gCardBattleState->stockMoveCount;
     }
 
     return 0;

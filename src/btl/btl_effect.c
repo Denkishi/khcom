@@ -421,17 +421,17 @@ void func_08012908(void) {
     if (gBtlWork->flags & 0x4000) {
         if (gBtlWork->flags & 0x20000000) {
             if (gBtlWork->flags & 2) {
-                if (gBtlWork->unk_0B2 < func_080ABED0()) {
+                if (gBtlWork->stockMove < GetStockMoveCount()) {
                     func_08012728(gBgFx->unk_4C);
                 }
             }
         } else if (gRikuBtlWork->flags & 2) {
-            if (gRikuBtlWork->unk_0B2 < func_080ABED0()) {
+            if (gRikuBtlWork->stockMove < GetStockMoveCount()) {
                 func_08012728(gBgFx->unk_4C);
             }
         }
     } else if (gBtlWork->flags & 2) {
-        if (gBtlWork->unk_0B2 < func_080ABED0()) {
+        if (gBtlWork->stockMove < GetStockMoveCount()) {
             func_08012728(gBgFx->unk_4C);
         }
     }

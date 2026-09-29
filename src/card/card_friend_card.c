@@ -125,7 +125,7 @@ void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
 }
 
 void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
@@ -169,7 +169,7 @@ void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
 }
 
 void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
@@ -206,7 +206,7 @@ void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
     ColliderInit(p, 5, 8, 10);
     ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
     TaskPoolInit(&w->tasks, 1);
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
 }
 
 void func_0809A4E0(UnkStruct_0809A02C* w, u8 kind) {
@@ -759,7 +759,7 @@ void func_0809B59C(UnkStruct_0809A02C* w) {
     ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
     gCardBattleState->unk_0D6 = 0;
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void Heartless_card_3(UnkStruct_0809A02C* w) {
@@ -771,7 +771,7 @@ void Heartless_card_3(UnkStruct_0809A02C* w) {
     ReleaseObjPalette(w->palette3);
     ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void func_0809B644(void* pool, s16 x, s16 y, s16 z, u8 idx) {

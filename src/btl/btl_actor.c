@@ -464,10 +464,10 @@ s32 _0800F84C(HumWork* work) {
     if (id == 145) {
         if (!(gRikuBtlWork->flags & 2)) {
             gRikuBtlWork->flags |= 2;
-            gRikuBtlWork->unk_0B2 = 0;
+            gRikuBtlWork->stockMove = 0;
         }
-        id = buf[gRikuBtlWork->unk_0B2];
-        gRikuBtlWork->unk_0B2++;
+        id = buf[gRikuBtlWork->stockMove];
+        gRikuBtlWork->stockMove++;
     }
     work->unk_150 = 0;
 

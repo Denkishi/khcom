@@ -1442,7 +1442,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
 
     work->unk_30 = 0;
     work->unk_34 = 0x100;
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * spd) >> 8;
     work->vy = (-gSineTable[angle + 64] * spd) >> 8;
 
@@ -1678,7 +1678,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
 void task_btl_prize_3(BtlPrizeWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
@@ -1713,7 +1713,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     spd = 384;
     work->unk_30 = 0;
     work->unk_34 = 0x100;
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * spd) >> 8;
     work->vy = (-gSineTable[angle + 64] * spd) >> 8;
     work->actor = gBtlWork->actor;
@@ -1909,7 +1909,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
 void task_btl_premire_3(BtlPremireWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void task_btl_start_0(BtlStartWork* work) {

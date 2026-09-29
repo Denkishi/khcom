@@ -1113,7 +1113,7 @@ static void PrizeCard_0(UnkStruct_08096F94* w, s32* args) {
     w->unk_E2 = 0;
     w->unk_E3 = 0;
     TaskPoolInit(&w->tasks, 1);
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
 }
 static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
     s16 x;
@@ -1369,7 +1369,7 @@ static void PrizeCard_3(UnkStruct_08096F94* w) {
     ReleaseObjPalette(w->palette2);
     ReleaseObjPalette(w->palette3);
     TaskPoolDestroy(&w->tasks);
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void func_080978B0(UnkStruct_08096F94* w) {

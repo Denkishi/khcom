@@ -586,7 +586,7 @@ void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
     w->unk_EF = 0;
     m4aSongNumStart(SONG_EF_BOSS_DEAD4);
     TaskPoolInit(&w->tasks, 10);
-    gBtlWork->unk_0B0++;
+    gBtlWork->prizeCount++;
 }
 u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
     s16 x;
@@ -682,7 +682,7 @@ void PrizeBoss_3(BossPrizeWork* w) {
     ReleaseObjPalette(w->palette2);
     ReleaseObjPalette(w->palette3);
     TaskPoolDestroy(&w->tasks);
-    gBtlWork->unk_0B0--;
+    gBtlWork->prizeCount--;
 }
 
 void func_08099928(BossPrizeWork* w) {

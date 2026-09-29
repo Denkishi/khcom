@@ -37,8 +37,8 @@ typedef struct BtlWork {
     u8 unk_0A5[0x03];
     BtlObj* actor3;
     BtlObj* actor4;
-    s16 unk_0B0;
-    s8 unk_0B2;
+    s16 prizeCount;
+    s8 stockMove;
     u8 fadeAmount;
     u8 unk_0B4;
     u8 unk_0B5[0x03];

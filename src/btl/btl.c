@@ -1311,11 +1311,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (id == 145) {
             if (!(p->btl->flags & 2)) {
                 p->btl->flags |= 2;
-                p->btl->unk_0B2 = 0;
+                p->btl->stockMove = 0;
             }
 
-            id = sel[p->btl->unk_0B2];
-            p->btl->unk_0B2++;
+            id = sel[p->btl->stockMove];
+            p->btl->stockMove++;
         }
 
         work->unk_191[0] = 2;
@@ -7354,11 +7354,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (id == 145) {
                 if (!(p->btl->flags & 2)) {
                     p->btl->flags |= 2;
-                    p->btl->unk_0B2 = 0;
+                    p->btl->stockMove = 0;
                 }
 
-                id = sel[p->btl->unk_0B2];
-                p->btl->unk_0B2++;
+                id = sel[p->btl->stockMove];
+                p->btl->stockMove++;
             }
 
             switch (id) {

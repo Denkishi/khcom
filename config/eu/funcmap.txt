@@ -2543,7 +2543,7 @@ Mode_riku_deckTutorial_1	0x080ab9e0	144	0x080a8d58	global
 func_080ABA70	0x080aba70	16	0x080a8de8	body
 func_080ABA80	0x080aba80	548	0x080a8df8	xref
 func_080ABCA4	0x080abca4	556	0x080a9090	match
-func_080ABED0	0x080abed0	40	0x080a9378	global
+GetStockMoveCount	0x080abed0	40	0x080a9378	global
 func_080ABEF8	0x080abef8	584	0x080a93a0	global
 func_080AC140	0x080ac140	1148	0x080a95e8	global
 func_080AC5BC	0x080ac5bc	44	0x080a9a64	global

@@ -493,14 +493,14 @@ void func_08010CC8(void) {
         if (player->flags & 0x10) busy = 1;
         if (other->flags & 0x10) busy = 1;
         if (busy) return;
-        rank = func_080ABED0();
+        rank = GetStockMoveCount();
         gBtlWork->unk_0E4 = 0;
         if (gBtlWork->flags & 0x20000000) {
-            if (gBtlWork->unk_0B2 >= (s8)rank) gBtlWork->flags &= ~2ULL;
+            if (gBtlWork->stockMove >= (s8)rank) gBtlWork->flags &= ~2ULL;
             if (gBtlWork->flags & 2) player->flags |= 1;
             else func_08010C70();
         } else {
-            if (gRikuBtlWork->unk_0B2 >= (s8)rank) gRikuBtlWork->flags &= ~2ULL;
+            if (gRikuBtlWork->stockMove >= (s8)rank) gRikuBtlWork->flags &= ~2ULL;
             if (gRikuBtlWork->flags & 2) other->flags |= 1;
             else func_08010C70();
         }

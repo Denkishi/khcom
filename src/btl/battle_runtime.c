@@ -786,7 +786,7 @@ void _08019CB4(void) {
             if (gBtlWork->flags & 0x80000) {
                 break;
             }
-            if (gBtlWork->unk_0B0 != 0 && !(gBtlWork->flags & 0x10)) {
+            if (gBtlWork->prizeCount != 0 && !(gBtlWork->flags & 0x10)) {
                 break;
             }
             if (gBtlWork->flags & 0x8000000000000ULL) {
@@ -916,11 +916,11 @@ void _08019CB4(void) {
         if (busy) {
             break;
         }
-        count = func_080ABED0();
+        count = GetStockMoveCount();
         gBtlWork->unk_0E4 = 0;
         if (gBtlWork->flags & 0x800) {
             if (gBtlWork->flags & 0x20000000) {
-                if (gBtlWork->unk_0B2 >= (s8)count) {
+                if (gBtlWork->stockMove >= (s8)count) {
                     gBtlWork->flags &= ~2ULL;
                 }
                 if (gBtlWork->flags & 2) {
@@ -929,7 +929,7 @@ void _08019CB4(void) {
                     func_08019C5C();
                 }
             } else {
-                if (gRikuBtlWork->unk_0B2 >= (s8)count) {
+                if (gRikuBtlWork->stockMove >= (s8)count) {
                     gRikuBtlWork->flags &= ~2ULL;
                 }
                 if (gRikuBtlWork->flags & 2) {
@@ -939,7 +939,7 @@ void _08019CB4(void) {
                 }
             }
         } else {
-            if (gBtlWork->unk_0B2 >= (s8)count) {
+            if (gBtlWork->stockMove >= (s8)count) {
                 gBtlWork->flags &= ~2ULL;
             }
             if (gBtlWork->flags & 2) {

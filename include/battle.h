@@ -173,7 +173,7 @@ void func_080185D0(void);
 void func_0801884C(void);
 void ColliderCheckPoolPairs(ListPool* a, ListPool* b);
 s64 __ashldi3(s64 v, s32 n);
-u8 func_080ABED0(void);
+u8 GetStockMoveCount(void);
 
 void func_0800EEBC(struct HumWork* p, struct HumSub* s);
 void func_0800F230(void);

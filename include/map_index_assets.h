@@ -3,13 +3,8 @@
 
 #include "jiminy_data.h"
 #include "jiminy_text_assets.h"
+#include "common_text.h"
 
-#ifdef VERSION_US
-extern u16 gMapWorldNameTextUs_0815B57A[22];
-#endif
-#ifdef VERSION_JP
-extern u8 gMapWorldNameTextJp_0814F2E0[17];
-#endif
 #ifdef VERSION_EU
 extern const u8 gMapWorldNameTextEu_08892680[22];
 extern const u8 gMapWorldNameTextEu_08892696[22];

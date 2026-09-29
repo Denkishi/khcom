@@ -3,66 +3,7 @@
 
 #include "types.h"
 #include "jiminy_text_assets.h"
-
-#ifdef VERSION_US
-extern u16 gMapNameTextUs_0815B5F6[29];
-extern u16 gMapNameTextUs_0815B630[30];
-extern u16 gMapNameTextUs_0815B66C[29];
-extern u16 gMapNameTextUs_0815B6A6[30];
-extern u16 gMapNameTextUs_0815B6E2[29];
-extern u16 gMapNameTextUs_0815B71C[29];
-extern u16 gMapNameTextUs_0815B756[31];
-extern u16 gMapNameTextUs_0815B794[30];
-extern u16 gMapNameTextUs_0815B7D0[29];
-extern u16 gMapNameTextUs_0815B80A[29];
-extern u16 gMapNameTextUs_0815B844[32];
-extern u16 gMapNameTextUs_0815B884[31];
-extern u16 gMapNameTextUs_0815B8C2[34];
-extern u16 gMapNameTextUs_0815B906[33];
-extern u16 gMapNameTextUs_0815B948[33];
-extern u16 gMapNameTextUs_0815B98A[30];
-extern u16 gMapNameTextUs_0815B9C6[31];
-extern u16 gMapNameTextUs_0815BA04[32];
-extern u16 gMapNameTextUs_0815BA44[32];
-extern u16 gMapNameTextUs_0815BA84[30];
-extern u16 gMapNameTextUs_0815BAC0[31];
-extern u16 gMapNameTextUs_0815BAFE[31];
-extern u16 gMapNameTextUs_0815BB3C[32];
-extern u16 gMapNameTextUs_0815BB7C[30];
-extern u16 gMapNameTextUs_0815BBB8[30];
-extern u16 gMapNameTextUs_0815ADB6[14];
-extern u16 gMapNameTextUs_0815B5C4[15];
-#endif
-
-#ifdef VERSION_JP
-extern u8 gMapNameTextJp_0814F52C[15];
-extern u8 gMapNameTextJp_0814F53C[15];
-extern u8 gMapNameTextJp_0814F54C[15];
-extern u8 gMapNameTextJp_0814F55C[15];
-extern u8 gMapNameTextJp_0814F56C[15];
-extern u8 gMapNameTextJp_0814F57C[15];
-extern u8 gMapNameTextJp_0814F58C[15];
-extern u8 gMapNameTextJp_0814F59C[15];
-extern u8 gMapNameTextJp_0814F5AC[15];
-extern u8 gMapNameTextJp_0814F5BC[17];
-extern u8 gMapNameTextJp_0814F5D0[17];
-extern u8 gMapNameTextJp_0814F5E4[17];
-extern u8 gMapNameTextJp_0814F5F8[17];
-extern u8 gMapNameTextJp_0814F60C[21];
-extern u8 gMapNameTextJp_0814F624[21];
-extern u8 gMapNameTextJp_0814F63C[21];
-extern u8 gMapNameTextJp_0814F654[19];
-extern u8 gMapNameTextJp_0814F668[19];
-extern u8 gMapNameTextJp_0814F67C[19];
-extern u8 gMapNameTextJp_0814F690[19];
-extern u8 gMapNameTextJp_0814F6A4[19];
-extern u8 gMapNameTextJp_0814F6B8[19];
-extern u8 gMapNameTextJp_0814F6CC[19];
-extern u8 gMapNameTextJp_0814F6E0[19];
-extern u8 gMapNameTextJp_0814F6F4[19];
-extern u8 gMapNameTextJp_0814F510[13];
-extern u8 gMapNameTextJp_0814F520[9];
-#endif
+#include "common_text.h"
 
 #ifdef VERSION_EU
 extern const u8 gMapNameTextEu_088933E8[29];

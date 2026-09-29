@@ -493,18 +493,6 @@ TARGET_ANCHORS = {
 
 TARGET_ABSENT_SYMBOLS = {
     "eu": {
-        "gUnk_0815A0A0",
-        "gUnk_0815A09A",
-        "gUnk_0815A198",
-        "gUnk_0815A0EE",
-        "gUnk_0815A152",
-        "gUnk_0815A4B6",
-        "gUnk_0815B3D4",
-        "gUnk_0815B3FA",
-        "gUnk_0815B5A6",
-        "gUnk_0815C136",
-        "gUnk_0815C1C2",
-        "gUnk_0815C204",
         "gUnk_09C5D922",
         "gUnk_09C5DD46",
         "gUnk_09C5E15E",
@@ -1588,17 +1576,6 @@ TARGET_ABSENT_SYMBOLS = {
         "gBossMapBlockUs_09846F98",
         "gUnk_09037FAC",
         "gUnk_09041F58",
-        "gUnk_0815A066",
-        "gUnk_0815A0BA",
-        "gUnk_0815B1D2",
-        "gUnk_0815A078",
-        "gUnk_0815A0CC",
-        "gUnk_0815B1A8",
-        "gUnk_0815A116",
-        "gUnk_0815A158",
-        "gUnk_0815A0F4",
-        "gUnk_0815A130",
-        "gUnk_0815A176",
     },
     "jp": {
         "gUnk_09C5D922",
@@ -1827,10 +1804,6 @@ TARGET_ONLY_SYMBOLS = {
         "gUnk_097A2E16": 0x0978085e,
     },
     "jp": {
-        "gUnk_0814F180": 0x0814F180,
-        "gUnk_0814FBB0": 0x0814FBB0,
-        "gUnk_0814FBBC": 0x0814FBBC,
-        "gUnk_0814FBD4": 0x0814FBD4,
         "gMoogleAssetJp_0995892C": 0x995892c,
         "gMoogleAssetJp_09958C6C": 0x9958c6c,
         "gMoogleAssetJp_09958EEC": 0x9958eec,
@@ -2092,7 +2065,6 @@ TARGET_DATA_ADDR = {
 
 TARGET_BLOB_REGIONS = {
     "jp": (
-        (0x0814E57C, "rodata_script_gap_1"),
         (0x09EA6C7C, "rodata_end_fill"),
     ),
     "eu": (

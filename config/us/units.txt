@@ -55,7 +55,7 @@ jiminy_data.c
 jiminy_text.s
 jiminy_records_index_data.c
 mode_jiminy.c
-rodata_script_gap_1.s
+common_text.s
 monsgage.c
 btl4.c
 tutorial.c

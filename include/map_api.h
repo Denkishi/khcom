@@ -20,7 +20,7 @@ void func_080E0418(void);
 FldObj* func_080E04E0(void);
 void func_080E04EC(void);
 void func_080E052C(u8 a);
-struct MapCell* func_080E548C(s16 a, s16 b);
+struct MapCell* MapCellAt(s16 x, s16 y);
 u8* func_080E54B8(u8 a);
 void func_080E5510(u8 a);
 UnkStruct_080DFB7C* func_080E5590(u8 a);

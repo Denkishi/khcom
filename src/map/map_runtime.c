@@ -957,7 +957,7 @@ MapCell* func_080DFB8C(s32 x, s32 y) {
         return func_080E58F8(a, b);
     }
 
-    return func_080E548C(a, b);
+    return MapCellAt(a, b);
 }
 
 u8 func_080DFBDC(FldPos* p) {

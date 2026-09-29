@@ -147,7 +147,7 @@ u8 func_080E59D8(UnkStruct_080E5B90* w) {
 
         for (j = 0; j < wd; j++) {
             s32 x = (s16)(q->unk_00 + j);
-            MapCell* e = func_080E548C(x, y);
+            MapCell* e = MapCellAt(x, y);
 
             if (e->unk_0C == q->unk_04 && (e->unk_00 & 0x20)) {
                 s32 t;
@@ -192,7 +192,7 @@ u8 func_080E5AC8(UnkStruct_080E5B90* w) {
         for (j = 0; j < wd; j++) {
             s32 x = (s16)(q->unk_00 + j);
 
-            if (func_080E548C(x, y)->unk_00 & 0x80) {
+            if (MapCellAt(x, y)->unk_00 & 0x80) {
                 s32 t;
 
                 d->x = x << 13;
@@ -709,7 +709,7 @@ u8 func_080E6634(u8 a) {
 MapCell* func_080E67D4(s32 x, s32 y) {
     u16 a = x / 0x2000;
     u16 b = y / 0x1000;
-    return func_080E548C(a, b);
+    return MapCellAt(a, b);
 }
 
 s32 func_080E6804(s16 x, s16 y) {
@@ -734,7 +734,7 @@ s32 func_080E6804(s16 x, s16 y) {
 }
 
 u8 func_080E68A4(s16 x, s16 y, u8 n) {
-    MapCell* p = func_080E548C(x, y);
+    MapCell* p = MapCellAt(x, y);
 
     if (p != 0 && p->unk_0C != 0x100000 && p->unk_02 == n && (p->unk_00 & 0x960) == 0) {
         return 1;
@@ -758,7 +758,7 @@ s32 func_080E68E4(s16 x, s16 y, u8 w, u8 h, u8 n) {
 
 s32 func_080E6968(s16 a, s16 b, u8 c) {
     u16 d;
-    MapCell* p = func_080E548C(a, b);
+    MapCell* p = MapCellAt(a, b);
     d = (p->unk_0C - p->unk_08) >> 8;
     return d > (c << 4);
 }
@@ -769,7 +769,7 @@ void func_080E6998(s16 x, s16 y, u8 w, u8 h) {
 
     for (i = 0; i < w; i++) {
         for (j = 0; j < h; j++) {
-            func_080E548C(x + i, y + j)->unk_00 |= 0x100;
+            MapCellAt(x + i, y + j)->unk_00 |= 0x100;
         }
     }
 }
@@ -779,7 +779,7 @@ s16 func_080E6A14(s16 x, s16 y) {
     s32 i;
 
     for (i = 0; i < n; i++) {
-        MapCell* p = func_080E548C(x, y + i);
+        MapCell* p = MapCellAt(x, y + i);
         if (p->unk_00 & 0x100) {
             return 0;
         }
@@ -802,7 +802,7 @@ s32 func_080E6A80(s16 x, s16 y, u16 n) {
 
     for (j = 0; j < n; j++) {
         for (i = 0; i < h; i++) {
-            q = func_080E548C(x + j, y - i);
+            q = MapCellAt(x + j, y - i);
             if (q->unk_00 & 0x100) {
                 return 0;
             }
@@ -1339,7 +1339,7 @@ u8 func_080E7C40(FldPos* p) {
         for (i = 0; i < w; i++) {
             s32 sx = (s16)(e->unk_00 + rx);
 
-            if ((u8)func_080E68E4(sx, sy, 2, 2, 0) != 0 && e->unk_04 == func_080E548C(sx, sy)->unk_0C) {
+            if ((u8)func_080E68E4(sx, sy, 2, 2, 0) != 0 && e->unk_04 == MapCellAt(sx, sy)->unk_0C) {
                 func_080E6998(sx, sy, 2, 2);
                 func_080DFF5C(p, sx, sy, 2, 2);
                 return 1;
@@ -1757,14 +1757,14 @@ void func_080E8724(s16 x, s16 y, const u8* p, u16* base) {
         for (i = 0; i < p[4]; i++) {
             switch (p[5]) {
             case 1:
-                q = func_080E548C(x + j, y + i + (p[3] - 1 - j));
+                q = MapCellAt(x + j, y + i + (p[3] - 1 - j));
                 break;
             case 2:
-                q = func_080E548C(x + j, y + i + j);
+                q = MapCellAt(x + j, y + i + j);
                 break;
             case 0:
             default:
-                q = func_080E548C(x + j, y + i);
+                q = MapCellAt(x + j, y + i);
                 break;
             }
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
@@ -1774,12 +1774,12 @@ void func_080E8724(s16 x, s16 y, const u8* p, u16* base) {
     }
 }
 
-u8 func_080E87EC(s16 x, s16 y, const UnkStruct_080E87EC* p) {
+u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
     MapCell* q;
     s32 v;
 
     while (p->unk_04 != 0xFF) {
-        q = func_080E548C(x + p->unk_00, y + p->unk_02);
+        q = MapCellAt(x + p->dx, y + p->dy);
 
         if (q->unk_0C == 0x100000) {
             return 0;
@@ -1817,7 +1817,7 @@ void func_080E8864(UnkStruct_080E8864* p) {
         s16 j;
 
         for (j = 0; j < w; j++) {
-            if (func_080E87EC(j, y, (const UnkStruct_080E87EC*)p->unk_00)) {
+            if (MapPatternFits(j, y, (const MapCellPattern*)p->unk_00)) {
                 if (GetRandom() % 100 < p->unk_06) {
                     func_080E8724(j, y, p->unk_08, p->unk_0C);
                 }
@@ -1848,7 +1848,7 @@ void func_080E893C(s16 x, s16 y, const u8* p, u16* base) {
     }
     for (j = 0; j < p[3]; j++) {
         for (i = 0; i < p[4]; i++) {
-            q = func_080E548C(x + j, y + i);
+            q = MapCellAt(x + j, y + i);
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
             q->unk_05 = 38;
             q->unk_1C = base + off;
@@ -1858,7 +1858,7 @@ void func_080E893C(s16 x, s16 y, const u8* p, u16* base) {
 
 u8 func_080E89E4(s16 x, s16 y, const u8* p) {
     while (p[0] != 0xFF) {
-        if (func_080E548C(p[0] + x, p[1] + y)->unk_05 != p[2]) {
+        if (MapCellAt(p[0] + x, p[1] + y)->unk_05 != p[2]) {
             return 0;
         }
         p += 4;

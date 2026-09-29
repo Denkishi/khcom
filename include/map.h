@@ -130,15 +130,15 @@ typedef struct UnkStruct_0203C7B8 {
     const UnkStruct_080E7D80* unk_14;
 } UnkStruct_0203C7B8;
 
-typedef struct UnkStruct_080E87EC {
-    s16 unk_00;
-    s16 unk_02;
+typedef struct MapCellPattern {
+    s16 dx;
+    s16 dy;
     u8 unk_04;
     u8 unk_05;
     u16 unk_06;
     u16 unk_08;
     u8 unk_0A[0x02];
-} UnkStruct_080E87EC;
+} MapCellPattern;
 
 typedef struct UnkStruct_080E8D64 {
     u16 unk_00;
@@ -1076,7 +1076,7 @@ u8 func_080ECBC8(MapDoorWork* p);
 u8 func_080ECC54(MapDoorWork* p);
 void func_080E9078(s32 x, s32 y, s32 z);
 u8 IsCardCollectionFull(void);
-MapCell* func_080E08BC(s16 x, s16 y);
+MapCell* MapGetCell(s16 x, s16 y);
 void func_080E2D80(void);
 void func_080E0960(MapCell* p, s32 n);
 void sub_080E0B00(MapCell* p, s32 n);
@@ -1101,7 +1101,7 @@ void func_080E55E4(const u8* src);
 void func_080E5800(void);
 void func_080E5868(UnkStruct_09EF8370* p);
 void func_080E8864(UnkStruct_080E8864* p);
-u8 func_080E87EC(s16 x, s16 y, const UnkStruct_080E87EC* p);
+u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p);
 void func_080E8724(s16 x, s16 y, const u8* p, u16* base);
 void func_080E893C(s16 x, s16 y, const u8* p, u16* base);
 void func_080E8A24(UnkStruct_080E8864* p);

@@ -8,8 +8,8 @@ struct UnkStruct_0203C7B8* gUnk_0203C7B8 EWRAM_COMMON(4);
 MapCell* gMapCells;
 UnkStruct_02034F20* gUnk_02034F20;
 UnkStruct_080DFB7C* gUnk_02034F24;
-u16 gUnk_02034F28;
-u16 gUnk_02034F2A;
+u16 gMapCols;
+u16 gMapRows;
 u16 gUnk_02034F2C;
 u16 gUnk_02034F2E;
 void* gUnk_02034F30;
@@ -470,15 +470,15 @@ void func_080E0878(void) {
     TaskPoolDestroy(&gUnk_0203C7AC->tasks);
 }
 
-MapCell* func_080E08BC(s16 x, s16 y) {
-    if (y < 0 || y >= gUnk_02034F2A) {
+MapCell* MapGetCell(s16 x, s16 y) {
+    if (y < 0 || y >= gMapRows) {
         return 0;
     }
 
-    if (x < 0 || x >= gUnk_02034F28) {
+    if (x < 0 || x >= gMapCols) {
         return 0;
     }
-    return &gMapCells[gUnk_02034F28 * y + x];
+    return &gMapCells[gMapCols * y + x];
 }
 
 void func_080E0900(MapCell* p, s32 a, s32 b) {
@@ -636,7 +636,7 @@ void func_080E0B98(MapCell* p, s32 n, u8 v) {
 }
 
 void func_080E0BF4(s16 x, s16 y, s32 a, s32 b) {
-    MapCell* p = func_080E08BC(x, y);
+    MapCell* p = MapGetCell(x, y);
 
     func_080E0960(p, a);
     sub_080E0B00(p, b);
@@ -650,30 +650,30 @@ void func_080E0C1C(u16 x, u16 y) {
     go = 1;
 
     while (go) {
-        e = func_080E08BC((s16)x, (s16)y);
+        e = MapGetCell((s16)x, (s16)y);
 
         switch (e->unk_02) {
         case 3:
-            func_080E08BC((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
-            func_080E08BC((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
-            func_080E08BC((s16)(x - 1), (s16)(y - 1))->unk_00 |= 0x800;
+            MapGetCell((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)(y - 1))->unk_00 |= 0x800;
             v = func_080E0938(38);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 38, v);
             y++;
-            e = func_080E08BC((s16)x, (s16)y);
+            e = MapGetCell((s16)x, (s16)y);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 39, v);
             break;
         case 5:
-            func_080E08BC((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
-            func_080E08BC((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
-            func_080E08BC((s16)(x + 1), (s16)(y - 1))->unk_00 |= 0x800;
+            MapGetCell((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)(y - 1))->unk_00 |= 0x800;
             v = func_080E0938(43);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 43, v);
             y++;
-            e = func_080E08BC((s16)x, (s16)y);
+            e = MapGetCell((s16)x, (s16)y);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 44, v);
             break;
@@ -686,25 +686,25 @@ void func_080E0C1C(u16 x, u16 y) {
             func_080E0B98(e, 42, 0xFF);
             break;
         case 4:
-            func_080E08BC((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
-            func_080E08BC((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
-            func_080E08BC((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x800;
+            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x800;
             v = func_080E0938(40);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 40, v);
-            e = func_080E08BC((s16)x, (s16)(y - 1));
+            e = MapGetCell((s16)x, (s16)(y - 1));
             e->unk_00 |= 0x20;
             func_080E0B98(e, 41, v);
             go = 0;
             break;
         case 6:
-            func_080E08BC((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
-            func_080E08BC((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
-            func_080E08BC((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x800;
+            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x800;
             v = func_080E0938(45);
             e->unk_00 |= 0x20;
             func_080E0B98(e, 45, v);
-            e = func_080E08BC((s16)x, (s16)(y - 1));
+            e = MapGetCell((s16)x, (s16)(y - 1));
             e->unk_00 |= 0x20;
             func_080E0B98(e, 46, v);
             go = 0;
@@ -721,22 +721,22 @@ void func_080E0ED4(UnkStruct_02034F20* p) {
 
     while (go) {
         s16 cy = (s16)y;
-        MapCell* c = func_080E08BC((s16)x, cy);
+        MapCell* c = MapGetCell((s16)x, cy);
 
         switch (c->unk_02) {
         case 4:
-            func_080E08BC((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
-            func_080E08BC((s16)(x + 1), cy)->unk_00 |= 0x40;
-            func_080E08BC((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x40;
+            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
+            MapGetCell((s16)(x + 1), cy)->unk_00 |= 0x40;
+            MapGetCell((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x40;
             c->unk_00 |= 0x40;
             p->x = x + 1;
             p->y = y + 1;
             go = 0;
             break;
         case 6:
-            func_080E08BC((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
-            func_080E08BC((s16)(x - 1), cy)->unk_00 |= 0x40;
-            func_080E08BC((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x40;
+            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
+            MapGetCell((s16)(x - 1), cy)->unk_00 |= 0x40;
+            MapGetCell((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x40;
             c->unk_00 |= 0x40;
             p->x = x;
             p->y = y + 1;
@@ -762,14 +762,14 @@ void func_080E0FD8(UnkStruct_02034F20* p) {
         y = gUnk_02034F2C;
 
         while (y < gUnk_02034F2E) {
-            e = func_080E08BC((s16)x, (s16)y);
+            e = MapGetCell((s16)x, (s16)y);
 
             if (e->unk_02 == 4 || e->unk_02 == 6) {
                 if (e->unk_08 != -0x100000 && p->unk_04 == e->unk_0C) {
                     d = ((p->unk_04 - e->unk_08) >> 8) / 16;
 
                     if (func_080E0920((FldPos*)e, 3)) {
-                        q = func_080E08BC((s16)x, (s16)(y - d));
+                        q = MapGetCell((s16)x, (s16)(y - d));
 
                         if ((e->unk_00 & 28) == 0 && (q->unk_00 & 28) == 0) {
                             if (p->unk_08 == 0 ||
@@ -882,11 +882,11 @@ void func_080E1274(void) {
     s32 dir;
     MapCell* p;
 
-    for (i = 0; i < gUnk_02034F28; i++) {
+    for (i = 0; i < gMapCols; i++) {
         dir = 10;
 
-        for (j = 0; j < gUnk_02034F2A; j++) {
-            p = func_080E08BC(i, j);
+        for (j = 0; j < gMapRows; j++) {
+            p = MapGetCell(i, j);
 
             switch (p->unk_02) {
             case 2:
@@ -912,17 +912,17 @@ void func_080E1274(void) {
         }
 
         if (dir == 11) {
-            for (j = 0; j < gUnk_02034F2A; j++) {
-                func_080E0900(func_080E08BC(i, j), 7, 0);
+            for (j = 0; j < gMapRows; j++) {
+                func_080E0900(MapGetCell(i, j), 7, 0);
             }
         }
     }
 
-    for (i = 0; i < gUnk_02034F28; i++) {
+    for (i = 0; i < gMapCols; i++) {
         dir = 10;
 
-        for (j = gUnk_02034F2A - 1; j >= 0; j--) {
-            p = func_080E08BC(i, j);
+        for (j = gMapRows - 1; j >= 0; j--) {
+            p = MapGetCell(i, j);
 
             switch (p->unk_02) {
             case 4:
@@ -952,8 +952,8 @@ void func_080E13B0(void) {
     for (j = 0; j < n; j++) {
         u16 x;
 
-        for (x = 0; x < gUnk_02034F28; x++) {
-            MapCell* c = func_080E08BC((s16)x, (s16)y);
+        for (x = 0; x < gMapCols; x++) {
+            MapCell* c = MapGetCell((s16)x, (s16)y);
             s32 v;
             s32 ok;
             s32 k;
@@ -1007,10 +1007,10 @@ void func_080E14D0(void) {
     s32 x;
     s32 y;
 
-    for (y = 0; y < gUnk_02034F2A; y++) {
-        for (x = 0; x < gUnk_02034F28 - 1; x++) {
-            MapCell* a = func_080E08BC(x, y);
-            MapCell* b = func_080E08BC(x + 1, y);
+    for (y = 0; y < gMapRows; y++) {
+        for (x = 0; x < gMapCols - 1; x++) {
+            MapCell* a = MapGetCell(x, y);
+            MapCell* b = MapGetCell(x + 1, y);
             s32 flag = 0;
 
             switch (a->unk_02) {
@@ -1062,22 +1062,22 @@ void func_080E14D0(void) {
 
             switch (a->unk_02) {
             case 4:
-                if (func_080E08BC(x + 1, y - 1)->unk_02 == 2) {
+                if (MapGetCell(x + 1, y - 1)->unk_02 == 2) {
                     a->unk_00 |= 8;
                 }
                 break;
             case 6:
-                if (func_080E08BC(x - 1, y - 1)->unk_02 == 2) {
+                if (MapGetCell(x - 1, y - 1)->unk_02 == 2) {
                     a->unk_00 |= 4;
                 }
                 break;
             case 3:
-                if (func_080E08BC(x - 1, y + 1)->unk_02 == 1) {
+                if (MapGetCell(x - 1, y + 1)->unk_02 == 1) {
                     a->unk_00 |= 4;
                 }
                 break;
             case 5:
-                if (func_080E08BC(x + 1, y + 1)->unk_02 == 1) {
+                if (MapGetCell(x + 1, y + 1)->unk_02 == 1) {
                     a->unk_00 |= 8;
                 }
                 break;
@@ -1092,9 +1092,9 @@ void func_080E1670(void) {
     MapCell* e;
     u8 v;
 
-    for (i = 0; i < gUnk_02034F28; i++) {
-        for (j = 0; j < gUnk_02034F2A; j++) {
-            e = func_080E08BC(i, j);
+    for (i = 0; i < gMapCols; i++) {
+        for (j = 0; j < gMapRows; j++) {
+            e = MapGetCell(i, j);
 
             if (e->unk_03 != 7) {
                 continue;
@@ -1122,8 +1122,8 @@ void func_080E1670(void) {
                 if (func_080E0920((FldPos*)e, 3)) {
                     func_080E0A38(e);
                     func_080E09B4(e, 10, v);
-                    func_080E0960(func_080E08BC(i, j - 1), 3);
-                    func_080E09B4(func_080E08BC(i, j - 1), 11, v);
+                    func_080E0960(MapGetCell(i, j - 1), 3);
+                    func_080E09B4(MapGetCell(i, j - 1), 11, v);
                 } else {
                     func_080E0A38(e);
                     func_080E09B4(e, 12, v);
@@ -1131,13 +1131,13 @@ void func_080E1670(void) {
                 break;
             case 1:
                 v = func_080E0938(7);
-                func_080E09B4(func_080E08BC(i, j - 1), 48, v);
+                func_080E09B4(MapGetCell(i, j - 1), 48, v);
                 func_080E0A38(e);
 
                 if (func_080E0920((FldPos*)e, 3)) {
                     func_080E09B4(e, 7, v);
-                    func_080E0960(func_080E08BC(i, j + 1), 3);
-                    func_080E09B4(func_080E08BC(i, j + 1), 8, v);
+                    func_080E0960(MapGetCell(i, j + 1), 3);
+                    func_080E09B4(MapGetCell(i, j + 1), 8, v);
                 } else {
                     func_080E09B4(e, 9, v);
                 }
@@ -1152,25 +1152,25 @@ void func_080E1670(void) {
                     } else {
                         func_080E0BF4(i, j + 1, 4, 25);
 
-                        if ((func_080E08BC(i, j + 2)->unk_00 & 16) == 0) {
-                            func_080E0A38(func_080E08BC(i, j + 2));
-                            func_080E09B4(func_080E08BC(i, j + 2), 15, 0);
+                        if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
+                            func_080E0A38(MapGetCell(i, j + 2));
+                            func_080E09B4(MapGetCell(i, j + 2), 15, 0);
                         }
                     }
                 } else {
                     v = func_080E0938(13);
                     func_080E0A38(e);
                     func_080E09B4(e, 13, v);
-                    func_080E09B4(func_080E08BC(i, j - 1), 47, v);
+                    func_080E09B4(MapGetCell(i, j - 1), 47, v);
 
                     if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(func_080E08BC(i, j + 1), 4);
-                        func_080E09B4(func_080E08BC(i, j + 1), 14, v);
-                    } else if ((func_080E08BC(i, j + 2)->unk_00 & 16) == 0) {
-                        func_080E0960(func_080E08BC(i, j + 1), 4);
-                        func_080E09B4(func_080E08BC(i, j + 1), 17, v);
-                        func_080E0A38(func_080E08BC(i, j + 2));
-                        func_080E09B4(func_080E08BC(i, j + 2), 15, v);
+                        func_080E0960(MapGetCell(i, j + 1), 4);
+                        func_080E09B4(MapGetCell(i, j + 1), 14, v);
+                    } else if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
+                        func_080E0960(MapGetCell(i, j + 1), 4);
+                        func_080E09B4(MapGetCell(i, j + 1), 17, v);
+                        func_080E0A38(MapGetCell(i, j + 2));
+                        func_080E09B4(MapGetCell(i, j + 2), 15, v);
                     }
                 }
                 break;
@@ -1184,25 +1184,25 @@ void func_080E1670(void) {
                     } else {
                         func_080E0BF4(i, j + 1, 5, 31);
 
-                        if ((func_080E08BC(i, j + 2)->unk_00 & 16) == 0) {
-                            func_080E0A38(func_080E08BC(i, j + 2));
-                            func_080E09B4(func_080E08BC(i, j + 2), 20, 0);
+                        if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
+                            func_080E0A38(MapGetCell(i, j + 2));
+                            func_080E09B4(MapGetCell(i, j + 2), 20, 0);
                         }
                     }
                 } else {
                     v = func_080E0938(18);
                     func_080E0A38(e);
                     func_080E09B4(e, 18, v);
-                    func_080E09B4(func_080E08BC(i, j - 1), 49, v);
+                    func_080E09B4(MapGetCell(i, j - 1), 49, v);
 
                     if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(func_080E08BC(i, j + 1), 5);
-                        func_080E09B4(func_080E08BC(i, j + 1), 19, v);
-                    } else if ((func_080E08BC(i, j + 2)->unk_00 & 16) == 0) {
-                        func_080E0960(func_080E08BC(i, j + 1), 5);
-                        func_080E09B4(func_080E08BC(i, j + 1), 22, v);
-                        func_080E0A38(func_080E08BC(i, j + 2));
-                        func_080E09B4(func_080E08BC(i, j + 2), 20, v);
+                        func_080E0960(MapGetCell(i, j + 1), 5);
+                        func_080E09B4(MapGetCell(i, j + 1), 19, v);
+                    } else if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
+                        func_080E0960(MapGetCell(i, j + 1), 5);
+                        func_080E09B4(MapGetCell(i, j + 1), 22, v);
+                        func_080E0A38(MapGetCell(i, j + 2));
+                        func_080E09B4(MapGetCell(i, j + 2), 20, v);
                     }
                 }
                 break;
@@ -1213,7 +1213,7 @@ void func_080E1670(void) {
 
                     if (func_080E0920((FldPos*)e, 2)) {
                         func_080E0BF4(i, j - 1, 4, 27);
-                    } else if ((func_080E08BC(i, j - 2)->unk_00 & 16) == 0) {
+                    } else if ((MapGetCell(i, j - 2)->unk_00 & 16) == 0) {
                         func_080E0BF4(i, j - 1, 4, 28);
                     } else {
                         func_080E0BF4(i, j - 1, 4, 35);
@@ -1224,8 +1224,8 @@ void func_080E1670(void) {
                     func_080E09B4(e, 15, v);
 
                     if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(func_080E08BC(i, j - 1), 4);
-                        func_080E09B4(func_080E08BC(i, j - 1), 16, v);
+                        func_080E0960(MapGetCell(i, j - 1), 4);
+                        func_080E09B4(MapGetCell(i, j - 1), 16, v);
                     }
                 }
                 break;
@@ -1236,7 +1236,7 @@ void func_080E1670(void) {
 
                     if (func_080E0920((FldPos*)e, 2)) {
                         func_080E0BF4(i, j - 1, 5, 33);
-                    } else if ((func_080E08BC(i, j - 2)->unk_00 & 16) == 0) {
+                    } else if ((MapGetCell(i, j - 2)->unk_00 & 16) == 0) {
                         func_080E0BF4(i, j - 1, 5, 34);
                     } else {
                         func_080E0BF4(i, j - 1, 5, 36);
@@ -1247,8 +1247,8 @@ void func_080E1670(void) {
                     func_080E09B4(e, 20, v);
 
                     if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(func_080E08BC(i, j - 1), 5);
-                        func_080E09B4(func_080E08BC(i, j - 1), 21, v);
+                        func_080E0960(MapGetCell(i, j - 1), 5);
+                        func_080E09B4(MapGetCell(i, j - 1), 21, v);
                     }
                 }
                 break;
@@ -1258,7 +1258,7 @@ void func_080E1670(void) {
 }
 
 void func_080E1C64(s16 x, s16 y, u8 n) {
-    MapCell* p = func_080E08BC(x, y);
+    MapCell* p = MapGetCell(x, y);
     if (p != 0) {
         u16* base = gUnk_02034F34->map;
         const u8* q = gUnk_0984D3F8[n];
@@ -1269,7 +1269,7 @@ void func_080E1C64(s16 x, s16 y, u8 n) {
 }
 
 u8 func_080E1CA8(s16 x, s16 y) {
-    MapCell* p = func_080E08BC(x, y);
+    MapCell* p = MapGetCell(x, y);
     if (p == 0 || p->unk_08 == -0x100000 || p->unk_0C == 0x100000) {
         return 1;
     }
@@ -1277,7 +1277,7 @@ u8 func_080E1CA8(s16 x, s16 y) {
 }
 
 u8 func_080E1CE0(s16 x, s16 y, u8 n) {
-    MapCell* p = func_080E08BC(x, y);
+    MapCell* p = MapGetCell(x, y);
 
     if (p != 0 && p->unk_02 == n) {
         return 1;
@@ -1286,7 +1286,7 @@ u8 func_080E1CE0(s16 x, s16 y, u8 n) {
 }
 
 void func_080E1D08(s16 x, s16 y) {
-    MapCell* p = func_080E08BC(x, y + 7);
+    MapCell* p = MapGetCell(x, y + 7);
 
     if (p->unk_08 == -0x100000) {
         switch (p->unk_02) {
@@ -1346,7 +1346,7 @@ void func_080E1D08(s16 x, s16 y) {
 }
 
 void func_080E1FA8(s16 x, s16 y) {
-    MapCell* p = func_080E08BC(x, y);
+    MapCell* p = MapGetCell(x, y);
 
     if (p->unk_0C == 0x100000 && p->unk_05 == 0) {
         switch (p->unk_02) {
@@ -1446,7 +1446,7 @@ void func_080E1FA8(s16 x, s16 y) {
 }
 
 void func_080E2318(s16 y) {
-    switch (func_080E08BC(0, y)->unk_05) {
+    switch (MapGetCell(0, y)->unk_05) {
     case 10:
         func_080E1C64(0, y, 16);
         break;
@@ -1466,8 +1466,8 @@ void func_080E2318(s16 y) {
 }
 
 void func_080E23CC(s16 j) {
-    s16 x = gUnk_02034F28 - 1;
-    MapCell* q = func_080E08BC(x, j);
+    s16 x = gMapCols - 1;
+    MapCell* q = MapGetCell(x, j);
 
     switch (q->unk_05) {
     case 12:
@@ -1492,14 +1492,14 @@ void func_080E249C(void) {
     s32 i;
     s32 j;
 
-    for (i = 0; i < gUnk_02034F28; i++) {
-        for (j = 0; j < gUnk_02034F2A; j++) {
+    for (i = 0; i < gMapCols; i++) {
+        for (j = 0; j < gMapRows; j++) {
             func_080E1D08(i, j);
             func_080E1FA8(i, j);
         }
     }
 
-    for (j = 0; j < gUnk_02034F2A; j++) {
+    for (j = 0; j < gMapRows; j++) {
         func_080E2318(j);
         func_080E23CC(j);
     }
@@ -1511,11 +1511,11 @@ void func_080E2520(void) {
     s32 z;
     MapCell* p;
 
-    for (i = 0; i < gUnk_02034F28; i++) {
+    for (i = 0; i < gMapCols; i++) {
         z = 0x100000;
 
-        for (j = gUnk_02034F2A - 1; j >= 0; j--) {
-            p = func_080E08BC(i, j);
+        for (j = gMapRows - 1; j >= 0; j--) {
+            p = MapGetCell(i, j);
 
             switch (p->unk_02) {
             case 1:
@@ -1543,11 +1543,11 @@ void func_080E2520(void) {
         }
     }
 
-    for (i = 0; i < gUnk_02034F28; i++) {
+    for (i = 0; i < gMapCols; i++) {
         z = -0x100000;
 
-        for (j = 0; j < gUnk_02034F2A; j++) {
-            p = func_080E08BC(i, j);
+        for (j = 0; j < gMapRows; j++) {
+            p = MapGetCell(i, j);
 
             switch (p->unk_02) {
             case 1:
@@ -1591,19 +1591,19 @@ void func_080E2668(UnkStruct_02034F20* p, s32 a) {
 
         for (i = 0; i < w; i++) {
             for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
-                q = func_080E08BC(x, y);
+                q = MapGetCell(x, y);
 
                 if (q->unk_02 == 6 && q->unk_0C == p->unk_04 && q->unk_08 == -0x100000 && (q->unk_00 & 0x20) == 0) {
                     e->unk_02 = x;
                     e->unk_04 = y;
                     q->unk_00 |= 0x800;
                     q->unk_00 |= 0x400;
-                    func_080E08BC(x, y + 1)->unk_00 |= 0x800;
-                    func_080E08BC(x - 1, y)->unk_00 |= 0x800;
-                    func_080E08BC(x - 1, y + 1)->unk_00 |= 0x800;
-                    func_080E08BC(x, y - 1)->unk_00 |= 0x400;
-                    func_080E08BC(x, y - 2)->unk_00 |= 0x400;
-                    func_080E08BC(x, y - 3)->unk_00 |= 0x400;
+                    MapGetCell(x, y + 1)->unk_00 |= 0x800;
+                    MapGetCell(x - 1, y)->unk_00 |= 0x800;
+                    MapGetCell(x - 1, y + 1)->unk_00 |= 0x800;
+                    MapGetCell(x, y - 1)->unk_00 |= 0x400;
+                    MapGetCell(x, y - 2)->unk_00 |= 0x400;
+                    MapGetCell(x, y - 3)->unk_00 |= 0x400;
                     return;
                 }
             }
@@ -1617,15 +1617,15 @@ void func_080E2668(UnkStruct_02034F20* p, s32 a) {
 
         for (i = 0; i < w; i++) {
             for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
-                q = func_080E08BC(x, y);
+                q = MapGetCell(x, y);
 
                 if (q->unk_02 == 3 && q->unk_08 == p->unk_04 && q->unk_0C == 0x100000 && (q->unk_00 & 0x20) == 0) {
                     e->unk_02 = x;
                     e->unk_04 = y;
-                    func_080E08BC(x, y)->unk_00 |= 0x800;
-                    func_080E08BC(x, y - 1)->unk_00 |= 0x800;
-                    func_080E08BC(x - 1, y)->unk_00 |= 0x800;
-                    func_080E08BC(x - 1, y - 1)->unk_00 |= 0x800;
+                    MapGetCell(x, y)->unk_00 |= 0x800;
+                    MapGetCell(x, y - 1)->unk_00 |= 0x800;
+                    MapGetCell(x - 1, y)->unk_00 |= 0x800;
+                    MapGetCell(x - 1, y - 1)->unk_00 |= 0x800;
                     return;
                 }
             }
@@ -1639,15 +1639,15 @@ void func_080E2668(UnkStruct_02034F20* p, s32 a) {
 
         for (i = 0; i < w; i++) {
             for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
-                q = func_080E08BC(x, y);
+                q = MapGetCell(x, y);
 
                 if (q->unk_02 == 5 && q->unk_08 == p->unk_04 && q->unk_0C == 0x100000 && (q->unk_00 & 0x20) == 0) {
                     e->unk_02 = x;
                     e->unk_04 = y;
-                    func_080E08BC(x, y)->unk_00 |= 0x800;
-                    func_080E08BC(x, y - 1)->unk_00 |= 0x800;
-                    func_080E08BC(x + 1, y)->unk_00 |= 0x800;
-                    func_080E08BC(x + 1, y - 1)->unk_00 |= 0x800;
+                    MapGetCell(x, y)->unk_00 |= 0x800;
+                    MapGetCell(x, y - 1)->unk_00 |= 0x800;
+                    MapGetCell(x + 1, y)->unk_00 |= 0x800;
+                    MapGetCell(x + 1, y - 1)->unk_00 |= 0x800;
                     return;
                 }
             }
@@ -1661,19 +1661,19 @@ void func_080E2668(UnkStruct_02034F20* p, s32 a) {
 
         for (i = 0; i < w; i++) {
             for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
-                q = func_080E08BC(x, y);
+                q = MapGetCell(x, y);
 
                 if (q->unk_02 == 4 && q->unk_0C == p->unk_04 && q->unk_08 == -0x100000 && (q->unk_00 & 0x20) == 0) {
                     e->unk_02 = x;
                     e->unk_04 = y;
                     q->unk_00 |= 0x800;
                     q->unk_00 |= 0x400;
-                    func_080E08BC(x, y + 1)->unk_00 |= 0x800;
-                    func_080E08BC(x + 1, y)->unk_00 |= 0x800;
-                    func_080E08BC(x + 1, y + 1)->unk_00 |= 0x800;
-                    func_080E08BC(x, y - 1)->unk_00 |= 0x400;
-                    func_080E08BC(x, y - 2)->unk_00 |= 0x400;
-                    func_080E08BC(x, y - 3)->unk_00 |= 0x400;
+                    MapGetCell(x, y + 1)->unk_00 |= 0x800;
+                    MapGetCell(x + 1, y)->unk_00 |= 0x800;
+                    MapGetCell(x + 1, y + 1)->unk_00 |= 0x800;
+                    MapGetCell(x, y - 1)->unk_00 |= 0x400;
+                    MapGetCell(x, y - 2)->unk_00 |= 0x400;
+                    MapGetCell(x, y - 3)->unk_00 |= 0x400;
                     return;
                 }
             }
@@ -1699,7 +1699,7 @@ s32 func_080E2B08(void) {
         r = 2;
         break;
     case 0x6000000:
-        if (p->unk_02 == gUnk_02034F28) {
+        if (p->unk_02 == gMapCols) {
             r = 2;
         } else if (p->unk_00 == 0) {
             r = 1;
@@ -1742,7 +1742,7 @@ u8 func_080E2BA0(u8 a) {
 
 void func_080E2BF8(u8 a) {
     UnkStruct_02034F20* p = gUnk_02034F20;
-    while (p->unk_02 != gUnk_02034F28) {
+    while (p->unk_02 != gMapCols) {
         p++;
     }
     func_080E2668(p, a);
@@ -1821,12 +1821,12 @@ void func_080E2D80(void) {
     s32 i;
     s32 j;
 
-    gUnk_02034F2C = gUnk_02034F2A;
+    gUnk_02034F2C = gMapRows;
     gUnk_02034F2E = 0;
 
-    for (i = 0; i < gUnk_02034F28; i++) {
-        for (j = 0; j < gUnk_02034F2A; j++) {
-            switch (func_080E08BC(i, j)->unk_02) {
+    for (i = 0; i < gMapCols; i++) {
+        for (j = 0; j < gMapRows; j++) {
+            switch (MapGetCell(i, j)->unk_02) {
             case 2:
             case 4:
             case 6:
@@ -1885,7 +1885,7 @@ s32 func_080E2E9C(s16 a, s16 b, s16 c) {
 }
 
 s32 func_080E2F14(s16 x, s16 y) {
-    switch (func_080E08BC(x, y)->unk_02) {
+    switch (MapGetCell(x, y)->unk_02) {
     case 6:
         return 5;
     case 2:
@@ -1937,7 +1937,7 @@ s32 func_080E300C(u8 d, s16 x, s16 y) {
 
     if (d != 0) {
         for (i = y; i >= 0; i--) {
-            switch (func_080E08BC(x, i)->unk_02) {
+            switch (MapGetCell(x, i)->unk_02) {
             case 3:
                 return 4;
             case 5:
@@ -1976,7 +1976,7 @@ void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
     buf = EwramAlloc(96);
     y = c;
     k = 4;
-    q = func_080E08BC(a, y);
+    q = MapGetCell(a, y);
     func_080E0900(q, 4, v);
     q->unk_00 |= 0x10;
     w = buf;
@@ -2003,18 +2003,18 @@ void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
 
         y = func_080E1194(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         *w++ = y;
     }
 
     n = func_080E1194(k, 6, y);
-    q = func_080E08BC(x, n);
+    q = MapGetCell(x, n);
     func_080E0900(q, 6, v);
     q->unk_00 |= 0x10;
     yb = n + (b - a);
     y = c + 1;
-    q = func_080E08BC(a, y);
+    q = MapGetCell(a, y);
     k = 5;
     func_080E0900(q, 5, v);
     q->unk_00 |= 0x10;
@@ -2043,20 +2043,20 @@ void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = func_080E2E9C(a, b, x);
         }
 
-        if (yn >= gUnk_02034F2A - 1 && t == 5) {
+        if (yn >= gMapRows - 1 && t == 5) {
             t = 1;
         }
 
         y = func_080E1194(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         w++;
         yb--;
     }
 
     m = func_080E1194(k, 3, y);
-    q = func_080E08BC(x, m);
+    q = MapGetCell(x, m);
     func_080E0900(q, 3, v);
     q->unk_00 |= 0x10;
     EwramFree(buf);
@@ -2080,7 +2080,7 @@ void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
     buf = EwramAlloc(96);
     y = c;
     k = 6;
-    q = func_080E08BC(b - 1, y);
+    q = MapGetCell(b - 1, y);
     func_080E0900(q, 6, v);
     q->unk_00 |= 0x10;
     w = buf;
@@ -2107,18 +2107,18 @@ void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
 
         y = func_080E1204(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         *w++ = y;
     }
 
     n = func_080E1204(k, 4, y);
-    q = func_080E08BC(x, n);
+    q = MapGetCell(x, n);
     func_080E0900(q, 4, v);
     q->unk_00 |= 0x10;
     yb = n + (b - a);
     y = c + 1;
-    q = func_080E08BC(b - 1, y);
+    q = MapGetCell(b - 1, y);
     k = 3;
     func_080E0900(q, 3, v);
     q->unk_00 |= 0x10;
@@ -2147,20 +2147,20 @@ void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = func_080E2E9C(a, b, x);
         }
 
-        if (yn >= gUnk_02034F2A - 1 && t == 3) {
+        if (yn >= gMapRows - 1 && t == 3) {
             t = 1;
         }
 
         y = func_080E1204(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         w++;
         yb--;
     }
 
     m = func_080E1204(k, 5, y);
-    q = func_080E08BC(x, m);
+    q = MapGetCell(x, m);
     func_080E0900(q, 5, v);
     q->unk_00 |= 0x10;
     EwramFree(buf);
@@ -2186,7 +2186,7 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
     y = d;
     t = func_080E300C(i, c, y);
     k = t;
-    q = func_080E08BC(c, y);
+    q = MapGetCell(c, y);
     func_080E0900(q, t, v);
     *w++ = y;
 
@@ -2211,13 +2211,13 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
 
         y = func_080E1194(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         *w++ = y;
     }
 
     y = func_080E1194(k, 6, y);
-    q = func_080E08BC(x, y);
+    q = MapGetCell(x, y);
     func_080E0900(q, 6, v);
     q->unk_00 |= 0x10;
     *w = y;
@@ -2248,18 +2248,18 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
 
         y = func_080E1204(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         *w-- = y;
     }
 
     n = func_080E1204(k, 4, y);
-    q = func_080E08BC(x, n);
+    q = MapGetCell(x, n);
     func_080E0900(q, 4, v);
     q->unk_00 |= 0x10;
     yb = *(buf + b - a - 1) + (b - a);
     y = n + 1;
-    q = func_080E08BC(a, y);
+    q = MapGetCell(a, y);
     k = 5;
     func_080E0900(q, 5, v);
     q->unk_00 |= 0x10;
@@ -2288,20 +2288,20 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
             t = func_080E2E9C(a, b, x);
         }
 
-        if (yn >= gUnk_02034F2A - 1 && t == 5) {
+        if (yn >= gMapRows - 1 && t == 5) {
             t = 1;
         }
 
         y = func_080E1194(k, t, y);
         k = t;
-        q = func_080E08BC(x, y);
+        q = MapGetCell(x, y);
         func_080E0900(q, t, v);
         w++;
         yb--;
     }
 
     m = func_080E1194(k, 3, y);
-    q = func_080E08BC(x, m);
+    q = MapGetCell(x, m);
     func_080E0900(q, 3, v);
     q->unk_00 |= 0x10;
     EwramFree(buf);
@@ -2314,8 +2314,8 @@ void func_080E3C1C(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi) {
     for (n = 0; n < -lo + hi; n++) {
         s32 j;
 
-        for (j = gUnk_02034F2A - 1; j >= 0; j--) {
-            MapCell* p = func_080E08BC(x, j);
+        for (j = gMapRows - 1; j >= 0; j--) {
+            MapCell* p = MapGetCell(x, j);
 
             if (p->unk_02 == a) {
                 *px = x;
@@ -2347,8 +2347,8 @@ void func_080E3CD4(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
     x = e + GetRandom() % (-e + f);
 
     for (i = 0; i < n; i++) {
-        for (j = gUnk_02034F2A - 1; j >= 0; j--) {
-            q = func_080E08BC(x, j);
+        for (j = gMapRows - 1; j >= 0; j--) {
+            q = MapGetCell(x, j);
 
             if (q->unk_02 == a) {
                 *px = x;
@@ -2376,9 +2376,9 @@ u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
     s32 y;
     MapCell* p;
 
-    for (x = 0; x < gUnk_02034F28; x++) {
-        for (y = gUnk_02034F2A - 1; y >= 0; y--) {
-            p = func_080E08BC((s16)x, (s16)y);
+    for (x = 0; x < gMapCols; x++) {
+        for (y = gMapRows - 1; y >= 0; y--) {
+            p = MapGetCell((s16)x, (s16)y);
 
             if (p->unk_02 == 3) {
                 x1 = x;
@@ -2400,9 +2400,9 @@ u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
 
     found = 0;
 
-    for (x = gUnk_02034F28 - 1; x >= 0; x--) {
-        for (y = gUnk_02034F2A - 1; y >= 0; y--) {
-            p = func_080E08BC((s16)x, (s16)y);
+    for (x = gMapCols - 1; x >= 0; x--) {
+        for (y = gMapRows - 1; y >= 0; y--) {
+            p = MapGetCell((s16)x, (s16)y);
 
             if (p->unk_02 == 5) {
                 x2 = x + 1;
@@ -2422,8 +2422,8 @@ u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
         }
     }
 
-    if ((s16)y1 <= gUnk_02034F2A - gUnk_02034F2A / 4 &&
-        (s16)y2 <= gUnk_02034F2A - gUnk_02034F2A / 4 && (s16)x2 - (s16)x1 > 4) {
+    if ((s16)y1 <= gMapRows - gMapRows / 4 &&
+        (s16)y2 <= gMapRows - gMapRows / 4 && (s16)x2 - (s16)x1 > 4) {
         *a = x1;
         *b = x2;
 
@@ -2448,13 +2448,13 @@ void func_080E3EFC(void) {
     s16 d;
     s16 v;
 
-    d = gUnk_02034F28 / 2;
-    b = gUnk_02034F2A / 4;
-    d = gUnk_02034F28 - d;
-    a = gUnk_02034F28;
+    d = gMapCols / 2;
+    b = gMapRows / 4;
+    d = gMapCols - d;
+    a = gMapCols;
     func_080E3060(0, d, a, 0);
     func_080E309C(0, d, a, b, 2);
-    func_080E3CD4(5, &a, &b, &c, 0, gUnk_02034F28);
+    func_080E3CD4(5, &a, &b, &c, 0, gMapCols);
     v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
     func_080E3060(1, 0, a + 1, v + c);
     func_080E3400(1, 0, a + 1, v + b, 0);
@@ -2469,31 +2469,31 @@ void func_080E3FD4(void) {
     s16 v;
     s32 k;
 
-    t = GetRandom() % (gUnk_02034F28 - 7) + 4;
-    a = GetRandom() % (gUnk_02034F28 - t - 3) + 2;
+    t = GetRandom() % (gMapCols - 7) + 4;
+    a = GetRandom() % (gMapCols - t - 3) + 2;
     d = a + t;
-    b = gUnk_02034F2A / 4;
+    b = gMapRows / 4;
     func_080E3060(0, a, d, 0);
     func_080E309C(0, a, d, b, k = 0);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, k, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, k, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, a, gUnk_02034F28, v + c);
-        func_080E309C(1, a, gUnk_02034F28, v + b, k);
-        func_080E3CD4(5, &d, &b, &c, k, gUnk_02034F28);
+        func_080E3060(1, a, gMapCols, v + c);
+        func_080E309C(1, a, gMapCols, v + b, k);
+        func_080E3CD4(5, &d, &b, &c, k, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
         func_080E3060(2, 0, d + 1, v + c);
         func_080E3400(2, 0, d + 1, v + b, k);
     } else {
-        func_080E3CD4(5, &d, &b, &c, k, gUnk_02034F28);
+        func_080E3CD4(5, &d, &b, &c, k, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
         func_080E3060(1, 0, d + 1, v + c);
         func_080E3400(1, 0, d + 1, v + b, k);
-        func_080E3C1C(3, &a, &b, &c, k, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, k, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gUnk_02034F28, v + c);
-        func_080E309C(2, a, gUnk_02034F28, v + b, k);
+        func_080E3060(2, a, gMapCols, v + c);
+        func_080E309C(2, a, gMapCols, v + b, k);
     }
 }
 
@@ -2505,31 +2505,31 @@ void func_080E4244(void) {
     s16 t;
     s16 v;
 
-    t = GetRandom() % (gUnk_02034F28 - 9) + 6;
-    a = (gUnk_02034F28 - t) / 2;
+    t = GetRandom() % (gMapCols - 9) + 6;
+    a = (gMapCols - t) / 2;
     d = a + t;
-    b = gUnk_02034F2A / 4;
+    b = gMapRows / 4;
     func_080E3060(0, a, d, 0);
     func_080E309C(0, a, d, b, 2);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, 0, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1) + 10;
-        func_080E3060(1, a, gUnk_02034F28, v + c);
-        func_080E309C(1, a, gUnk_02034F28, v + b, 2);
-        func_080E3CD4(5, &d, &b, &c, 0, gUnk_02034F28);
+        func_080E3060(1, a, gMapCols, v + c);
+        func_080E309C(1, a, gMapCols, v + b, 2);
+        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
         func_080E3060(2, 0, d + 1, v + c);
         func_080E3400(2, 0, d + 1, v + b, 2);
     } else {
-        func_080E3CD4(5, &d, &b, &c, 0, gUnk_02034F28);
+        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1) + 10;
         func_080E3060(1, 0, d + 1, v + c);
         func_080E3400(1, 0, d + 1, v + b, 2);
-        func_080E3C1C(3, &a, &b, &c, 0, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gUnk_02034F28, v + c);
-        func_080E309C(2, a, gUnk_02034F28, v + b, 2);
+        func_080E3060(2, a, gMapCols, v + c);
+        func_080E309C(2, a, gMapCols, v + b, 2);
     }
 }
 
@@ -2541,31 +2541,31 @@ void func_080E44A8(void) {
     s16 t;
     s16 v;
 
-    t = GetRandom() % (gUnk_02034F28 - 9) + 6;
-    a = (gUnk_02034F28 - t) / 2;
+    t = GetRandom() % (gMapCols - 9) + 6;
+    a = (gMapCols - t) / 2;
     d = a + t;
-    b = gUnk_02034F2A / 4;
+    b = gMapRows / 4;
     func_080E3060(0, a, d, 0);
     func_080E309C(0, a, d, b, 3);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, 0, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, a, gUnk_02034F28, v + c);
-        func_080E309C(1, a, gUnk_02034F28, v + b, 3);
-        func_080E3CD4(5, &d, &b, &c, 0, gUnk_02034F28);
+        func_080E3060(1, a, gMapCols, v + c);
+        func_080E309C(1, a, gMapCols, v + b, 3);
+        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
         func_080E3060(2, 0, d + 1, v + c);
         func_080E3400(2, 0, d + 1, v + b, 3);
     } else {
-        func_080E3CD4(5, &d, &b, &c, 0, gUnk_02034F28);
+        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
         func_080E3060(1, 0, d + 1, v + c);
         func_080E3400(1, 0, d + 1, v + b, 3);
-        func_080E3C1C(3, &a, &b, &c, 0, gUnk_02034F28);
+        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
         v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gUnk_02034F28, v + c);
-        func_080E309C(2, a, gUnk_02034F28, v + b, 3);
+        func_080E3060(2, a, gMapCols, v + c);
+        func_080E309C(2, a, gMapCols, v + b, 3);
     }
 }
 
@@ -2578,16 +2578,16 @@ void func_080E470C(void) {
     s16 v;
     s32 k;
 
-    t = (gUnk_02034F28 * 5) / 8;
-    a = (gUnk_02034F28 - t) / 2;
+    t = (gMapCols * 5) / 8;
+    a = (gMapCols - t) / 2;
     d = a + t;
-    b = gUnk_02034F2A / 4;
+    b = gMapRows / 4;
     func_080E3060(0, a, d, 0);
     func_080E309C(0, a, d, b, k = 3);
-    func_080E3C1C(3, &a, &b, &c, 0, gUnk_02034F28);
+    func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
     v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-    func_080E3060(1, 0, gUnk_02034F28, v + c);
-    func_080E3768(1, 0, gUnk_02034F28, a, v + b, k);
+    func_080E3060(1, 0, gMapCols, v + c);
+    func_080E3768(1, 0, gMapCols, a, v + b, k);
 }
 
 void func_080E47E8(u8 a, u8 b) {
@@ -2620,8 +2620,8 @@ void func_080E47E8(u8 a, u8 b) {
 void func_080E4900(void) {
     switch (gUnk_0203C7B0.unk_00) {
     case 0:
-        func_080E3060(0, 0, gUnk_02034F28, 0);
-        func_080E309C(0, 0, gUnk_02034F28, gUnk_02034F2A / 4, 0);
+        func_080E3060(0, 0, gMapCols, 0);
+        func_080E309C(0, 0, gMapCols, gMapRows / 4, 0);
         break;
     case 1:
         func_080E3EFC();
@@ -2641,8 +2641,8 @@ void func_080E4900(void) {
         func_080E470C();
         break;
     case 7:
-        func_080E3060(0, 0, gUnk_02034F28, 0);
-        func_080E309C(0, 0, gUnk_02034F28, gUnk_02034F2A / 4, 3);
+        func_080E3060(0, 0, gMapCols, 0);
+        func_080E309C(0, 0, gMapCols, gMapRows / 4, 3);
         func_080E47E8(1, 12);
         break;
     case 3:
@@ -2659,8 +2659,8 @@ void func_080E49DC(u16 a, u16 b) {
     void** p;
 
     gUnk_02034F34 = gUnk_09EF70D0[gUnk_0203C590.unk_04];
-    gUnk_02034F28 = a;
-    gUnk_02034F2A = b;
+    gMapCols = a;
+    gMapRows = b;
     p = &gUnk_02034F30;
     *p = EwramAlloc(0x1800);
 
@@ -2668,7 +2668,7 @@ void func_080E49DC(u16 a, u16 b) {
         gMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
         gUnk_02034F20 = EwramAlloc(0x120);
         gUnk_02034F24 = EwramAlloc(sizeof(UnkStruct_080DFB7C) * 4);
-        n = gUnk_02034F28 * gUnk_02034F2A;
+        n = gMapCols * gMapRows;
 
         for (i = 0; i < n; i++) {
             gMapCells[i].unk_00 = 0;
@@ -2760,7 +2760,7 @@ void func_080E4B78(s16 x, s16 y) {
 
             n = xx % 4;
             xa = xx & 31;
-            e = func_080E08BC(c, v);
+            e = MapGetCell(c, v);
 
             if (e != 0) {
                 p0[ya * 32 + xa] = e->unk_14[m * 32 + n];
@@ -2832,7 +2832,7 @@ void func_080E4D68(s32 x, s32 y) {
 
             n = xx % 4;
             xa = xx & 31;
-            e = func_080E08BC(c, v);
+            e = MapGetCell(c, v);
 
             if (e != 0) {
                 if (e->unk_1C != 0) {
@@ -2867,7 +2867,7 @@ void func_080E4EB0(u16* a, u16* b, u16* c, s16 d, s16 e) {
     for (i = 0; i < 32; i++) {
         hy = (e < 0) ? (e - 8) / 2 : e / 2;
         my = e % 2;
-        cell = func_080E08BC(hx, hy);
+        cell = MapGetCell(hx, hy);
 
         if (cell != 0) {
             a[i] = cell->unk_14[my * 32 + mx];
@@ -2919,7 +2919,7 @@ void func_080E507C(u16* a, u16* b, u16* c, s16 d, s16 e) {
             hx = d / 4;
         }
         mx = d % 4;
-        cell = func_080E08BC(hx, hy);
+        cell = MapGetCell(hx, hy);
 
         if (cell != 0) {
             a[i] = cell->unk_14[my * 32 + mx];
@@ -2962,21 +2962,21 @@ u8 func_080E524C(FldPos* a, s32* b) {
     s32 j;
 
     h = gUnk_02034F2E - gUnk_02034F2C;
-    x = GetRandom() % gUnk_02034F28;
+    x = GetRandom() % gMapCols;
     y = GetRandom() % h;
 
     for (i = 0; i < h; i++) {
-        for (j = 0; j < gUnk_02034F28; j++) {
+        for (j = 0; j < gMapCols; j++) {
             u16 yy = y + gUnk_02034F2C;
 
-            if ((*(u32*)func_080E08BC(x, yy) & 0xFF0340) == 0) {
+            if ((*(u32*)MapGetCell(x, yy) & 0xFF0340) == 0) {
                 a->x = (x << 13) + 0x1000;
                 *b = (yy << 12) + 0x800;
                 return 1;
             }
 
             x++;
-            x %= gUnk_02034F28;
+            x %= gMapCols;
         }
 
         y++;
@@ -3014,7 +3014,7 @@ u8 func_080E5354(FldPos* a, s32* b) {
                 continue;
             }
 
-            e = func_080E08BC(xx, yy);
+            e = MapGetCell(xx, yy);
 
             if (e != 0 && (*(u32*)e & 0xFF0340) == 0) {
                 a->x = (xx << 13) + 0x1000;
@@ -3034,8 +3034,8 @@ u8 func_080E5354(FldPos* a, s32* b) {
     return 0;
 }
 
-MapCell* func_080E548C(s16 a, s16 b) {
-    return func_080E08BC(a, b);
+MapCell* MapCellAt(s16 x, s16 y) {
+    return MapGetCell(x, y);
 }
 
 UnkStruct_02034F20* func_080E54A0(u8 a) {

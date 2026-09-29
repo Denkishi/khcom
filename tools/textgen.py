@@ -172,23 +172,24 @@ class Unit:
         self.kind = kind
         self.spec = spec
         self.entries = entries
-        for key in ("name", "start", "end", "encoding", "align", "ctype"):
+        self.form = spec.get("form", "array")
+        required = ("name", "start", "end", "encoding") + (("stride", "size") if self.form == "macro" else ("align", "ctype"))
+        for key in required:
             if key not in spec:
                 raise TextError(f"{pool.name}: {version} {kind} {spec.get('name')} has no {key}")
         self.name = spec["name"]
         self.start = spec["start"]
         self.end = spec["end"]
-        self.align = spec["align"]
-        self.ctype = spec["ctype"]
+        self.align = spec.get("align", 1)
+        self.ctype = spec.get("ctype")
         self.header = spec.get("header")
-        self.form = spec.get("form", "array")
         self.count = spec.get("count")
         self.stride = spec.get("stride")
         self.size = spec.get("size")
         if self.form not in ("array", "string", "macro") or self.count not in (None, "exact", "slot"):
             raise TextError(f"{pool.name}: {version} {self.name} has an unknown form or count")
-        if (self.form == "macro") != (self.stride is not None and self.size is not None):
-            raise TextError(f"{pool.name}: {version} {self.name} needs a stride and size exactly when it writes macros")
+        if self.form != "macro" and (self.stride is not None or self.size is not None):
+            raise TextError(f"{pool.name}: {version} {self.name} only takes a stride and size when it writes macros")
 
     def encoding(self, charmap):
         name = self.spec["encoding"]
@@ -201,7 +202,7 @@ class Unit:
             return self.pool.fields(entry["record"])[2]
         return entry.get("align", self.align)
 
-    def layout(self, data_of, width):
+    def layout(self, data_of):
         if self.stride is not None:
             placed = []
             for index, entry in enumerate(self.entries):
@@ -214,10 +215,7 @@ class Unit:
         placed = []
         for entry in self.entries:
             start = aligned(position, self.entry_align(entry))
-            if "record" in entry:
-                size = self.pool.fields(entry["record"])[1]
-            else:
-                size = max(len(data_of(entry, start)), entry.get("count", 0) * width)
+            size = self.pool.fields(entry["record"])[1] if "record" in entry else len(data_of(entry, start))
             placed.append((entry, start, size))
             position = start + size
         return placed, position
@@ -421,7 +419,7 @@ def decode_unit(unit, encoding, rom):
     if unit.kind == "fragment" and unit.form != "macro" and unit.count != "slot" and unit.align != natural_align(unit, encoding):
         raise TextError(f"{pool.name}: {version} {unit.name} aligns its entries to {unit.align}, which C only does"
                         f" for {natural_align(unit, encoding)}-aligned {unit.form} definitions")
-    placed, position = unit.layout(found, encoding.width)
+    placed, position = unit.layout(found)
     cursor = unit.start
     texts = []
     for entry, start, size in placed:
@@ -490,23 +488,20 @@ def record_lines(pool, entry):
     return lines
 
 
-def emit_object(unit, encoded, path, width):
+def emit_object(unit, encoded, path):
     lines = ["\t.section .rodata"]
     if unit.start % 4 == 0:
         lines.append("\t.balign 4")
     elif unit.start % 2 == 0:
         lines.append("\t.balign 2")
-    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]], width)
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
     cursor = unit.start
     for entry, start, size in placed:
         if start > cursor:
             lines += byte_lines(bytes(start - cursor))
         name = entry["name"]
         lines += [f"\t.global {name}", f"\t.type {name}, %object", f"{name}:"]
-        if "record" in entry:
-            lines += record_lines(unit.pool, entry)
-        else:
-            lines += byte_lines(encoded[name] + bytes(size - len(encoded[name])))
+        lines += record_lines(unit.pool, entry) if "record" in entry else byte_lines(encoded[name])
         lines.append(f"\t.size {name}, .-{name}")
         cursor = start + size
     if 0 < unit.end - position < 4:
@@ -530,9 +525,7 @@ def c_record(pool, entry):
 
 def c_text(unit, entry, data, slot, width):
     units = [int.from_bytes(data[i:i + width], "little") for i in range(0, len(data), width)]
-    if "count" in entry:
-        count = str(entry["count"])
-    elif unit.count == "slot":
+    if unit.count == "slot":
         count = str(slot // width)
     elif unit.count == "exact":
         count = str(len(units))
@@ -550,7 +543,7 @@ def c_text(unit, entry, data, slot, width):
 
 
 def emit_fragment(unit, encoded, path, width):
-    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]], width)
+    placed, position = unit.layout(lambda entry, _start: encoded[entry["name"]])
     lines = []
     for index, (entry, start, size) in enumerate(placed):
         if "record" in entry:
@@ -586,7 +579,7 @@ def generate(version, manifest):
         encoded = read_source(pool, version, charmap)
         for unit in pool.units(version):
             if unit.kind == "object":
-                emit_object(unit, encoded, pool.generated(version), unit.encoding(charmap).width)
+                emit_object(unit, encoded, pool.generated(version))
             else:
                 emit_fragment(unit, encoded, ROOT / "build" / version / "gen" / unit.name, unit.encoding(charmap).width)
     emit_header(pool, version, pool.header(version))

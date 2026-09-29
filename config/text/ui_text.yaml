@@ -5,8 +5,6 @@ fragments:
     start: 0x0903414A
     end: 0x090352DE
     encoding: sjis
-    align: 1
-    ctype: const u8
     form: macro
     stride: 224
     size: 20
@@ -81,8 +79,6 @@ fragments:
     start: 0x0900740E
     end: 0x090085A2
     encoding: sjis
-    align: 1
-    ctype: const u8
     form: macro
     stride: 224
     size: 20
@@ -184,8 +180,6 @@ fragments:
     start: 0x090CD43E
     end: 0x090CE5D2
     encoding: sjis
-    align: 1
-    ctype: const u8
     form: macro
     stride: 224
     size: 20

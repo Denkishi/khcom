@@ -34,7 +34,7 @@ TaskDesc gTaskDescBosBoogieDice = {
     sizeof(BoogieDiceWork),
 };
 
-void* const gUnk_096FDF7C[6][3] = {
+void* const gBoogieDiceFaces[6][3] = {
 #if defined(VERSION_US)
     { gUnkUs_09EF67A8, gUnkUs_09EF679C, gUnk_097976DC },
     { gUnkUs_09EF67B8, gUnkUs_09EF67AC, gUnk_09797D0C },
@@ -607,7 +607,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             work->unk_154 = work->unk_154 * 212 >> 8;
 
             if (work->unk_150 >= -25) {
-                func_080DA42C(work);
+                RollBoogieDice(work);
                 work->state = 4;
                 p->flags |= 0x100;
 
@@ -822,11 +822,11 @@ void task_bos_boogie_dice_3(BoogieDiceWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_080DA42C(BoogieDiceWork* work) {
+void RollBoogieDice(BoogieDiceWork* work) {
     void* tbl[6][3];
     u8 n;
 
-    memcpy(tbl, gUnk_096FDF7C, sizeof(tbl));
+    memcpy(tbl, gBoogieDiceFaces, sizeof(tbl));
 
     switch (GetRandom() % 4) {
     case 0:

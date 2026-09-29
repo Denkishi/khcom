@@ -3598,7 +3598,7 @@ task_bos_boogie_dice_0	0x080d9b90	400	0x080d9bb0	named
 task_bos_boogie_dice_1	0x080d9d20	1484	0x080d9d40	named
 task_bos_boogie_dice_2	0x080da2ec	216	0x080da30c	named
 task_bos_boogie_dice_3	0x080da3c4	104	0x080da3e4	named
-func_080DA42C	0x080da42c	176	0x080da44c	global
+RollBoogieDice	0x080da42c	176	0x080da44c	global
 func_080DA4DC	0x080da4dc	44	0x080da4fc	global
 task_bos_boogie_explosiondice_0	0x080da508	240	0x080da528	named
 task_bos_boogie_explosiondice_1	0x080da5f8	128	0x080da618	named

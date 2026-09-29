@@ -592,7 +592,7 @@ def decode(manifest, version, rom, rom_base=0x08000000, lookup=None):
         return data
 
     addresses = {e["name"]: e[version]["address"] for other in (set(lookup.values()) if lookup else [manifest])
-                 for e in other.entries if version in e}
+                 for e in other.entries if version in e and e.get("format") != "sprite_sheet"}
     for entry in manifest.entries:
         if version in entry and manifest.kind(entry) in ("struct", "array", "string", "table"):
             check_record(manifest, entry, version, rom_bytes(entry), addresses)

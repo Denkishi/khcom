@@ -11,6 +11,7 @@ import yaml
 
 import assetgen
 import baserom
+import textgen
 
 YAML_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
 
@@ -76,8 +77,9 @@ def migrate(root=ROOT):
 
 
 def generated_units(root):
-    return {obj["name"] for manifest in assetgen.load_manifests(root / "config" / "assets")
-            for objects in manifest.objects.values() for obj in objects}
+    return ({obj["name"] for manifest in assetgen.load_manifests(root / "config" / "assets")
+             for objects in manifest.objects.values() for obj in objects}
+            | {obj["name"] for pool in textgen.load_pools(root / "config" / "text") for obj in pool.objects.values()})
 
 
 def unit_roots(root, version):
@@ -201,6 +203,9 @@ def decoded_sources(root, version):
                 continue
             for source in manifest.sources(entry, version):
                 refs[source.relative_to(root).as_posix()] = manifest
+    for pool in textgen.load_pools(root / "config" / "text"):
+        if pool.object(version) is not None:
+            refs[pool.source(version).relative_to(root).as_posix()] = pool
     return refs
 
 
@@ -214,7 +219,10 @@ def decode(root, version, rom):
             done, wrote = assetgen.decode(manifest, version, rom, lookup=lookup)
             checked += done
             written += wrote
-    except (assetgen.ManifestError, subprocess.CalledProcessError) as error:
+        done, wrote = textgen.decode(version, rom)
+        checked += done
+        written += wrote
+    except (assetgen.ManifestError, textgen.TextError, subprocess.CalledProcessError) as error:
         raise AssetError(str(error))
     return checked, written
 

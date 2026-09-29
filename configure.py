@@ -15,6 +15,7 @@ from asset_objects import materialize_assets
 from assetgen import ManifestError
 from assetgen import plan as asset_plan
 from regional_data import asset_symbols, load_sidecars
+from textgen import TextError, load_pools as load_text_pools
 
 ASM_FILE_REF_RE = re.compile(r'\.(?:include|incbin)\s+"([^"]+)"')
 LEGACY_ASM_UNITS = {"libagbsyscall.s", "m4a_1.s", "transform_veneers.s"}
@@ -148,6 +149,23 @@ for group_name, group in groups.items():
     for unit_name, unit in group["objects"].items():
         generated[unit_name] = (group_name, unit)
 
+try:
+    text_pools = load_text_pools()
+except TextError as error:
+    sys.exit(f"error: {error}")
+text_objects = {}
+for pool in text_pools:
+    text_object = pool.object(version)
+    if text_object is None:
+        continue
+    if text_object["name"] not in listed:
+        sys.exit(f"error: text object {text_object['name']} of config/text/{pool.name}.yaml is not in {units_file}")
+    text_objects[text_object["name"]] = pool
+missing_text = [pool.source(version) for pool in text_objects.values() if not pool.source(version).exists()]
+if missing_text:
+    sys.exit(f"error: {len(missing_text)} extracted text sources for {version} are missing"
+             f" (first: {os.path.relpath(missing_text[0])}); run python3 tools/extract_assets.py {version}")
+
 def rel(path):
     return os.path.relpath(str(path))
 
@@ -174,7 +192,7 @@ for line in units_file.read_text().splitlines():
         archives.append((path, member, obj))
         units.append((None, obj, None))
         continue
-    if name in generated:
+    if name in generated or name in text_objects:
         src = Path(f"{build_dir}/gen") / name
         obj = f"{build_dir}/gen/{src.stem}.o"
     elif name.endswith(".c"):
@@ -185,7 +203,7 @@ for line in units_file.read_text().splitlines():
         if not src.exists():
             src = Path("asm") / name
         obj = f"{build_dir}/asm/{src.stem}.o"
-    if name not in generated and not src.exists():
+    if name not in generated and name not in text_objects and not src.exists():
         sys.exit(f"error: unit {src} listed in {units_file} does not exist")
     if obj in linked:
         sys.exit(f"error: unit {name} is listed twice in {units_file}")
@@ -225,7 +243,8 @@ if asset_gfx_mode == "built":
 units = materialize_assets(regional_plan, units, version, build_dir)
 
 headers = sorted(str(p) for p in Path("include").glob("*.h"))
-generated_headers = sorted(rel(group["header"]) for group in groups.values())
+generated_headers = sorted([rel(group["header"]) for group in groups.values()]
+                           + [rel(pool.header(version)) for pool in text_pools])
 asm_includes = sorted(str(p) for p in Path("include").glob("*.inc"))
 missing_assets = set()
 edges = []
@@ -237,6 +256,9 @@ for src, obj, flags in units:
     rule = "cc" if src.suffix == ".c" else "as"
     variables = {"cflags": f"-mthumb-interwork -fno-common {flags}"} if flags else None
     deps = []
+    if src.name in text_objects:
+        edges.append((obj, rule, src, deps, variables))
+        continue
     if src.name in generated:
         group_name, unit = generated[src.name]
         deps += [rel(groups[group_name]["header"])]
@@ -387,6 +409,12 @@ with out.open("w") as f:
         restat=True,
     )
     n.rule(
+        "textgen",
+        command="python3 tools/textgen.py $version $manifest",
+        description="TEXTGEN $manifest",
+        restat=True,
+    )
+    n.rule(
         "check",
         command=f"python3 -c \"import hashlib,sys; sys.exit(hashlib.sha1(open('{rom}','rb').read()).hexdigest() != '{sha1}')\""
                 f" && cp {rom} {verified}"
@@ -430,6 +458,15 @@ with out.open("w") as f:
             + [rel(path) for path in group["sources"]],
             implicit_outputs=[rel(path) for path in group["binaries"]],
             variables={"version": version, "manifest": rel(group["manifest"].path)},
+        )
+    for pool in text_pools:
+        text_object = pool.object(version)
+        n.build(
+            [rel(pool.header(version))] + ([rel(pool.generated(version))] if text_object else []),
+            "textgen",
+            implicit=[rel(pool.path), f"config/charmaps/{version}.yaml", "tools/textgen.py"]
+            + ([rel(pool.source(version))] if text_object else []),
+            variables={"version": version, "manifest": rel(pool.path)},
         )
     for obj, rule, src, deps, variables in edges:
         n.build(obj, rule, str(src), implicit=deps, variables=variables)

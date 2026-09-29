@@ -30,6 +30,7 @@ from movie_assets import apply_movie_regions, load_movie_assets
 from function_pointer_evidence import literal_pointer_pairs, load_literal_loads, load_function_modes, trace_literal_loads
 import assetgen
 import baserom
+import textgen
 from regional_data import asset_symbols, load_sidecars, managed_asset_names
 
 ROM_BASE = 0x08000000
@@ -2655,12 +2656,20 @@ def main():
                  if any(obj["name"] in us_units for obj in manifest.objects.get("us", []))
                  or (not manifest.objects.get("us") and manifest.objects.get(ver))]
     generated = {obj["name"] for manifest in manifests for objects in manifest.objects.values() for obj in objects}
+    text_pools = [pool for pool in textgen.load_pools()
+                  if pool.object("us") and pool.object("us")["name"] in us_units
+                  or not pool.object("us") and pool.object(ver)]
+    generated |= {obj["name"] for pool in text_pools for obj in pool.objects.values()}
     head, body, cdata, blobs, placed = [], [], [], [], set()
     for manifest in manifests:
         for obj in manifest.objects.get(ver, []):
             cdata.append((obj["start"], obj["end"] - obj["start"], f"{obj['name']}(.rodata)"))
             if "data_start" in obj:
                 cdata.append((obj["data_start"], obj["data_end"] - obj["data_start"], f"{obj['name']}(.data)"))
+    for pool in text_pools:
+        obj = pool.object(ver)
+        if obj is not None:
+            cdata.append((obj["start"], obj["end"] - obj["start"], f"{obj['name']}(.rodata)"))
     for line in Path("config/us/units.txt").read_text().splitlines():
         t = line.strip()
         if not t or t.startswith("#"):

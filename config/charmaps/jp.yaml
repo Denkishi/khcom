@@ -1,0 +1,11 @@
+game:
+  width: 1
+  codec: cp932
+  controls:
+    END: [0x00]
+    NL: [0x6E, 0x6E]
+sjis:
+  width: 1
+  codec: cp932
+  controls:
+    END: [0x00]

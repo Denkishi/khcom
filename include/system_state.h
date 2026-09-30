@@ -26,6 +26,7 @@ extern vu32 gFrameCounter;
 #ifdef VERSION_EU
 extern u32 gLanguage;
 #endif
+extern IntrFunc gVBlankHandlerOverride;
 
 extern u8 IrqHandler[];
 

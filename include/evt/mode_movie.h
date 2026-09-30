@@ -46,7 +46,6 @@ extern volatile u16 gMovieSubUpperAlpha;
 extern volatile s16 gMovieSubLowerTimer;
 extern volatile u16 gMovieSubLowerLength;
 extern volatile u16 gMovieSubLowerAlpha;
-extern void* gVBlankHandlerOverride;
 extern u8 gUnk_0815C3EC[];
 extern u8 gUnk_084E0F34[];
 extern u8 gUnk_084F4660[];

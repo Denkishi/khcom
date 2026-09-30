@@ -471,7 +471,6 @@ void MapEnm00Idle(MapEnmWork* p) {
     FldObj* q = &p->obj;
     s32 x;
     s32 y;
-    s32 v;
 
     MapEnmSetAnim(p, 1, 1);
     MapEnmUpdateAnim(p);
@@ -485,19 +484,18 @@ void MapEnm00Idle(MapEnmWork* p) {
     } else if (GetRandom() % 80 == 0) {
         switch (GetRandom() % 4) {
         case 0:
-            v = 173;
+            q->angle = 173;
             break;
         case 1:
-            v = 83;
+            q->angle = 83;
             break;
         case 2:
-            v = 211;
+            q->angle = 211;
             break;
         default:
-            v = 45;
+            q->angle = 45;
             break;
         }
-        *(u8*)&q->angle = v;
         p->timer = 0;
         p->update = MapEnm00Wander;
     }
@@ -1913,7 +1911,6 @@ void MapGmkJumpLaunch(MapGmkJumpWork* w) {
 void Task_MapGmk_Jump_0(MapGmkJumpWork* w, MapPlatform* arg) {
     FldObj* p = &w->obj;
     AnimState* a;
-    s32 v;
 
     p->fieldPosition.x = arg->x << 13;
     p->fieldPosition.y = arg->y << 12;
@@ -1923,17 +1920,16 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* w, MapPlatform* arg) {
 
     switch (arg->spotType) {
     case 3:
-        v = 211;
+        p->angle = 211;
         break;
     case 5:
-        v = 45;
+        p->angle = 45;
         break;
     case 0:
     default:
-        v = 0;
+        p->angle = 0;
         break;
     }
-    *(u8*)&p->angle = v;
     w->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
     w->palette = LoadObjPalette(&gUnk_099910C4[0x240], 32);
     w->tiles = LoadObjTiles(gUnk_0985A3EA, 0x980);

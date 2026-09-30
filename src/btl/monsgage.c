@@ -89,8 +89,8 @@ s32 task_monsgage_1(MonsgageWork* work) {
             }
 
 #ifdef VERSION_EU
-            if (gBtlWork->flags & 0x10000) {
-                gBtlWork->flags &= ~0x10000;
+            if (gBtlWork->flags & BTL_FLAG_ENEMY_DEFEATED) {
+                gBtlWork->flags &= ~BTL_FLAG_ENEMY_DEFEATED;
                 work->value += 20;
                 if (work->value > 255) {
                     work->value = 256;
@@ -131,8 +131,8 @@ s32 task_monsgage_1(MonsgageWork* work) {
                 }
             }
 
-            if (gBtlWork->flags & 0x10000) {
-                gBtlWork->flags &= ~0x10000;
+            if (gBtlWork->flags & BTL_FLAG_ENEMY_DEFEATED) {
+                gBtlWork->flags &= ~BTL_FLAG_ENEMY_DEFEATED;
                 work->timer = 0;
 #ifdef VERSION_EU
                 work->value += 20;
@@ -153,7 +153,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             if (work->timer == 0) {
                 work->gfx2 = gUnk_08B25590;
                 work->gfx = gUnk_08B2559A;
-                gBtlWork->flags |= 0x0100000000000000;
+                gBtlWork->flags |= BTL_FLAG_STOP_SPAWNING;
                 gBtlWork->flags |= 0x100000;
             }
 
@@ -164,7 +164,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             }
 
             if (work->timer > 99 && gBtlWork->enemyCount == 0) {
-                gBtlWork->flags |= 0x200000000;
+                gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
             }
             work->timer++;
             break;

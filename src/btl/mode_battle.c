@@ -183,12 +183,12 @@ void mode_battle_0(u32 mode) {
 
     switch (mode) {
     case 0x94 ... 0x9C:
-        gBtlWork->flags |= 4;
+        gBtlWork->flags |= BTL_FLAG_BOSS_BATTLE;
         break;
     case 0xB2 ... 0xB8:
-        gBtlWork->flags |= 0x800000000;
+        gBtlWork->flags |= BTL_FLAG_TUTORIAL;
     case 0x9D ... 0xB1:
-        gBtlWork->flags |= 0x800;
+        gBtlWork->flags |= BTL_FLAG_HUM_BATTLE;
         p = &gRikuBtlWork;
         *p = EwramAlloc(sizeof(BtlWork));
         zero = 0;
@@ -196,7 +196,7 @@ void mode_battle_0(u32 mode) {
         break;
     }
 
-    if (gBtlWork->flags & 4) {
+    if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
         SetBgMode1();
 
         switch (mode) {
@@ -249,7 +249,7 @@ void mode_battle_0(u32 mode) {
             SetBgOverflow(2, 0);
             break;
         }
-    } else if (gBtlWork->flags & 0x800000000) {
+    } else if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         m4aSongNumStart(SONG_BGM_EVENT2);
         gBtlWork->bg = 3;
         gBtlWork->mapBg = 2;
@@ -260,7 +260,7 @@ void mode_battle_0(u32 mode) {
         SetBgPriority(gBtlWork->bg, 0);
         SetBgOverflow(gBtlWork->mapBg, 1);
         SetBgOverflow(gBtlWork->bg, 0);
-    } else if (gBtlWork->flags & 0x800) {
+    } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         gBtlWork->bg = 2;
         gBtlWork->mapBg = 3;
 
@@ -364,8 +364,8 @@ void mode_battle_0(u32 mode) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, 0);
     }
 
-    if (gBtlWork->flags & 4) {
-        gBtlWork->flags |= 0x400000000;
+    if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
+        gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
 
         switch (mode) {
         case 0x9A:
@@ -421,7 +421,7 @@ void mode_battle_0(u32 mode) {
             gBtlWork->fadeAmount = 10;
             break;
         }
-    } else if (gBtlWork->flags & 0x800000000) {
+    } else if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
         if (mode == 0xB2) {
@@ -434,8 +434,8 @@ void mode_battle_0(u32 mode) {
 
         gGameState.battleStage = BATTLE_STAGE_TRAVERSE_TOWN;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
-    } else if (gBtlWork->flags & 0x800) {
-        gBtlWork->flags |= 0x400000000;
+    } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
+        gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
 
         switch (mode) {
         case 0x9E:
@@ -502,13 +502,13 @@ void mode_battle_0(u32 mode) {
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
 
         if (mode == 0x79) {
-            gBtlWork->flags |= 0x400000000;
+            gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
             gGameState.flags |= GAME_FLAG_MONSGAGE_BATTLE;
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescMonsgage, 0);
         }
     }
 
-    if (!(gBtlWork->flags & 0x800000000)) {
+    if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
         TaskCreate(&gBtlWork->taskPools[2], &gTaskDescBtlPause, 0);
     }
 
@@ -534,21 +534,21 @@ void mode_battle_1(void) {
                 gBtlWork->hitStop--;
             }
 
-            if (!(gBtlWork->flags & 0x200000000000000)) {
+            if (!(gBtlWork->flags & BTL_FLAG_BGFX_PAUSED)) {
                 BgFxUpdate();
             }
 
             ColliderUpdateAll();
             TaskPoolDraw(&gBtlWork->taskPools[1]);
 
-            if (gBtlWork->flags & 0x800000) {
-                gBtlWork->flags &= ~0x800000;
+            if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
+                gBtlWork->flags &= ~BTL_FLAG_CARD_BREAK;
             }
 
             UpdatePlayTime();
         }
 
-        if (!(gBtlWork->flags & 0x2000)) {
+        if (!(gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN)) {
             TaskPoolDraw(&gBtlWork->taskPools[0]);
         }
     }
@@ -562,7 +562,7 @@ void mode_battle_2(void) {
     TaskPoolDestroy(&gBtlWork->taskPools[0]);
     ReleaseBattleTiles();
 
-    if (gBtlWork->flags & 0x800) {
+    if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         EwramFree(gRikuBtlWork);
     }
 

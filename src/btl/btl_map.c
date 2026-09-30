@@ -19,7 +19,7 @@ extern u8 gUnkEu_08F7D724[];
 void task_btl_map_0(BtlMapWork* work) {
     SetBgSize(gBtlWork->mapBg, 0x8000);
 
-    if (gBtlWork->flags & 0x800) {
+    if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         switch (gBtlWork->battleId) {
         case 0xB2:
         case 0xB3:

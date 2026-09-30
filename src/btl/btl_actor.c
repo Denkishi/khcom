@@ -141,7 +141,7 @@ void HandleRikuAiCardInput(void) {
     u8 keys;
     u16 t;
 
-    if (gRikuBtlWork->flags & 0x1000000) {
+    if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
     t = gRikuBtlWork->listSwitchTimer;
@@ -173,15 +173,15 @@ void HandleRikuAiCardInput(void) {
         return;
     }
 
-    if (gBtlWork->flags & 0x40) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return;
     }
 
-    if (gBtlWork->flags & 0x10000000) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_BUSY) {
         return;
     }
 
-    if (gBtlWork->flags & 0x800000) {
+    if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
 
@@ -216,13 +216,13 @@ void eu_08013190(void) {
     if (c->flags & 0x200) {
         return;
     }
-    if (gBtlWork->flags & 0x40) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return;
     }
-    if (gBtlWork->flags & 0x10000000) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_BUSY) {
         return;
     }
-    if (gBtlWork->flags & 0x800000) {
+    if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
     if (c->flags & 2) {
@@ -368,7 +368,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
     s32 count;
     s32 n;
 
-    if (gBtlWork->flags & 0x40) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return 0;
     }
     if ((s16)gRikuBtlWork->listSwitchTimer > 0) {
@@ -445,7 +445,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
         }
         return 0;
     }
-    if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
             if (GetActiveCardValue() <= value || value == 0) {
                 gBtlWork->rikuKeys |= 0x20;
@@ -463,8 +463,8 @@ s32 HumResolveCardMove(HumWork* work) {
     s32 id = ResolveActiveCardsMove(buf);
 
     if (id == 145) {
-        if (!(gRikuBtlWork->flags & 2)) {
-            gRikuBtlWork->flags |= 2;
+        if (!(gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE)) {
+            gRikuBtlWork->flags |= BTL_FLAG_STOCK_SEQUENCE;
             gRikuBtlWork->stockMove = 0;
         }
         id = buf[gRikuBtlWork->stockMove];

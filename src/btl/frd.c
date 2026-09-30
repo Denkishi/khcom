@@ -122,12 +122,12 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -215,7 +215,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         owner = gRikuBtlWork;
         target = owner->actor2;
     }
-    if (owner->flags & 0x40000000) return 0;
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
@@ -238,7 +238,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             SelectLockonTarget();
-            if (gBtlWork->flags & 0x800000000ULL) work->state = 4;
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
@@ -263,7 +263,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     case 2:
         if (work->repeatsLeft > 0) {
             SelectLockonTarget();
-            if (gBtlWork->flags & 0x800000000ULL) work->state = 4;
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
@@ -602,7 +602,7 @@ void task_frd_donald_3(FrdDonaldWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -640,12 +640,12 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -684,7 +684,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
     body = &work->body;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -891,7 +891,7 @@ void task_frd_goofy_3(FrdGoofyWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -904,12 +904,12 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -966,7 +966,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -1124,7 +1124,7 @@ void task_frd_ariel_3(FrdArielWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -1154,12 +1154,12 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -1217,7 +1217,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         owner = gRikuBtlWork;
         target = owner->actor2;
     }
-    if (owner->flags & 0x40000000) return 0;
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
@@ -1611,7 +1611,7 @@ void task_frd_jack_3(FrdJackWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -1624,12 +1624,12 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -1735,7 +1735,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     }
     owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     target = owner->actor2;
-    if (owner->flags & 0x40000000) {
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
     if (gBtlWork->boundsCallback != NULL) {
@@ -1813,7 +1813,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
         SelectLockonTarget();
-        if (gBtlWork->flags & 0x4000) {
+        if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
             BtlObj* other = work->mainSide != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
             y = other->y;
             z = other->z;
@@ -1924,7 +1924,7 @@ void task_frd_pan_3(FrdPanWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -1959,12 +1959,12 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -2018,7 +2018,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     if (gGameState.world != WORLD_AGRABAH) {
         return 0;
     }
-    if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) return 0;
+    if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) return 0;
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
@@ -2163,7 +2163,7 @@ void task_frd_aladdin_3(FrdAladdinWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -2202,13 +2202,13 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
         obj = gBtlWork->actor2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
         obj = gRikuBtlWork->actor2;
@@ -2273,7 +2273,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -2394,7 +2394,7 @@ void task_frd_beast_3(FrdBeastWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

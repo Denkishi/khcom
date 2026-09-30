@@ -142,12 +142,12 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
@@ -191,7 +191,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     s32 targetZ;
     s32 pixelX;
     owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    if (owner->flags & 0x40000000) return 0;
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
     if (work->state == 4) BtlMapFollowPosition(body->x, body->y, body->z + 0x2000);
     else BtlMapFollowPosition(body->x, body->y, body->z);
     switch (work->state) {
@@ -563,7 +563,7 @@ void task_smn_cloud_3(SmnCloudWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -588,12 +588,12 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -656,7 +656,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     BtlObj* p;
     s16 count;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
@@ -700,7 +700,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
     body = &work->body;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -907,7 +907,7 @@ void task_smn_bambi_3(SmnBambiWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -921,12 +921,12 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -1013,7 +1013,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     s32 t;
 
     body = &work->body;
-    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -1239,7 +1239,7 @@ void task_smn_tink_3(SmnTinkWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     m4aSongNumStop(SONG_EF_TINK_LOOP);
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1306,12 +1306,12 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
@@ -1348,7 +1348,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     body = &work->body;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         do {
             return 0;
         } while (0);
@@ -1530,7 +1530,7 @@ void task_smn_simba_3(SmnSimbaWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -1543,12 +1543,12 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -1601,7 +1601,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     body = &work->body;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -1783,7 +1783,7 @@ void task_smn_mushu_3(SmnMushuWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
@@ -1796,12 +1796,12 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
@@ -1838,7 +1838,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
     body = &work->body;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -1988,7 +1988,7 @@ void task_smn_dumbo_3(SmnDumboWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -2002,12 +2002,12 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
@@ -2058,7 +2058,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     BtlObj* p;
     s16 count;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
@@ -2161,7 +2161,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
     BtlMapFollowPosition(body->x, body->y, body->z);
@@ -2204,7 +2204,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         break;
     case 2:
         if ((s16)work->stateTimer == 0) {
-            gBtlWork->flags |= 0x40000;
+            gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         }
         height = ((u32)gSineTable[(work->stateTimer * 2) & 255] << 3) + 0xC00;
@@ -2239,7 +2239,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 work->state = 6;
                 break;
             }
-            gBtlWork->flags &= ~0x40000ULL;
+            gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
@@ -2408,12 +2408,12 @@ void task_smn_genie_2(SmnGenieWork* work) {
 }
 
 void task_smn_genie_3(SmnGenieWork* work) {
-    gBtlWork->flags |= 0x40000;
+    gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
 
     if (work->mainSide != 0) {
-        gBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
+        gBtlWork->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     } else {
-        gRikuBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
+        gRikuBtlWork->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     }
 
     ReleaseObjPalette(work->palette);
@@ -2428,12 +2428,12 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
 
     if (args->mainSide != 0) {
         work->mainSide = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
         work->mainSide = args->mainSide;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
@@ -2479,7 +2479,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
     BtlWork* obj;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    if (obj->flags & 0x40000000) {
+    if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
     BtlMapFollowPosition(body->x, body->y, body->z);
@@ -2621,7 +2621,7 @@ void task_smn_king_3(SmnKingWork* work) {
     BtlWork* obj;
 
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
-    obj->flags &= 0xFFFFFFFFFFDFFFFF;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

@@ -188,7 +188,7 @@ u8 task_bos_tm_1(TmWork* w) {
     gBosTmActorZ = gBtlWork->actor->z >> 8;
     gUnk_0203AB48 = gBtlWork->bossY >> 8;
 
-    if ((gBtlWork->flags & 0x20000000) && w->state != 13) {
+    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && w->state != 13) {
         if (gBtlWork->actor->originZ <= -0x2D00) {
             gBtlWork->bossPriorityOffset = -10;
         } else {

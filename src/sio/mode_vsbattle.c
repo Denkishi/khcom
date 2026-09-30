@@ -48,7 +48,7 @@ void mode_vsbattle_0(u32 mode) {
         arg.mainSide = 0;
         arg.side = 1;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
-        gBtlWork->flags |= 0x1000;
+        gBtlWork->flags |= BTL_FLAG_VS_LINK_PARENT;
     } else {
         arg2.mainSide = 0;
         arg2.side = 0;
@@ -79,8 +79,8 @@ void mode_vsbattle_1(void) {
         ColliderUpdateAll();
         TaskPoolDraw(&gBtlWork->taskPools[1]);
 
-        if (gBtlWork->flags & 0x800000) {
-            gBtlWork->flags &= ~0x800000;
+        if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
+            gBtlWork->flags &= ~BTL_FLAG_CARD_BREAK;
         }
     }
 

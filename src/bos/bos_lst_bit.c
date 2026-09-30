@@ -421,7 +421,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         break;
     case 1:
         if (work->timer == 0) {
-            if (gBtlWork->flags & 0x2000000000000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) {
                 work->targetX = (GetRandom() % 113 << 8) + 0xC000;
 #ifndef VERSION_EU
                 work->targetY = gBtlWork->actor->y;
@@ -438,7 +438,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         }
 
-        if (!(gBtlWork->flags & 0x2000000000000)) {
+        if (!(gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN)) {
             if (gBtlWork->actor->z > -0xC000) {
                 work->targetZ = -0x6000;
             } else {
@@ -581,7 +581,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
     WorldToScreen(&x1, &y1, work->x + work->orbitX, work->y + work->orbitY,
                   work->z + work->orbitZ);
 
-    if (gBtlWork->flags & 0x2000000000000) {
+    if (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) {
         WorldToScreen(&x2, &y2, work->actorX, work->actorY, work->actorZ);
         work->angle += 2;
     } else {

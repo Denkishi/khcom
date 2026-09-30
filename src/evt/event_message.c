@@ -3228,7 +3228,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 0);
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3245,7 +3245,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 0);
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3270,7 +3270,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3290,7 +3290,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3348,7 +3348,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3365,7 +3365,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;
@@ -3382,7 +3382,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
         gBtlWork->actor = &p->actor;
-        gBtlWork->flags = 4;
+        gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         p->usesBtlWork = 1;

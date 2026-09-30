@@ -195,8 +195,8 @@ u8 task_bos_jf_1(JfWork* work) {
         work->state = 11;
         work->flags |= 4;
 
-        if (gBtlWork->flags & 0x40) {
-            gBtlWork->flags |= 0x400000;
+        if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
+            gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
         }
     }
 

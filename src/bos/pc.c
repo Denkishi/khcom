@@ -32,7 +32,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
                 work->timer = 0;
             }
 
-            if (!(gBtlWork->flags & 0x8000)) {
+            if (!(gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE)) {
                 work->timer = 0x28;
             }
         }
@@ -84,7 +84,7 @@ s32 CloudTryJumpAway(CloudWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
-            if (gBtlWork->flags & 0x8000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 CloudJumpOffset(work, -0x63, 0x280);
             } else if (GetRandom() & 1) {
                 if (obj->flags & 4) {

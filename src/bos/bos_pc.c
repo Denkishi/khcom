@@ -5498,7 +5498,7 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
     BosPcSetAnim(work, 0);
     work->cardDelay -= 1;
     if (work->cardDelay < 0) {
-        if ((gBtlWork->flags & 0x20000000) == 0) {
+        if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
             RequestEnemyCardUse(&work->body);
             u = work->shared.hpRatio;
             work->cardDelay = ((u >> 6) + 6) * 60;
@@ -5506,7 +5506,7 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
             work->cardDelay = 4;
         }
     } else if (work->cardDelay % (work->shared.hpRatio >> 4) == 0) {
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             t = (((s32)work->shared.hpRatio * 5) >> 3) + 96;
             if (GetRandom() >> 7 > t) {
                 RequestEnemyCardUse(&work->body);

@@ -55,8 +55,8 @@ u8 task_bos_pc_acd_1(PcAcdWork* work) {
     anim = &work->anim;
     AnimUpdate(anim);
     if (gBtlWork->actor->z >= 0) {
-        if ((gBtlWork->flags & 0x20000000) == 0 ||
-            (gBtlWork->flags & 0x200000) == 0) {
+        if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0 ||
+            (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) == 0) {
             if (work->x < 0 || AnimIsFinished(anim) == 1) {
                 v = 0;
                 if (work->acdOff == 1) {
@@ -108,7 +108,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
         DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
                    (u16)((-0x1004 - ((work->y >> 8) << 2)) | 3));
     } else if (pos->z >= 0) {
-        if (((*gp)->flags & 0x20000000) && ((*gp)->flags & 0x200000)) {
+        if (((*gp)->flags & BTL_FLAG_PLAYER_CARD_ACTION) && ((*gp)->flags & BTL_FLAG_SUMMON_ACTIVE)) {
             return;
         }
         anim = &work->anim;

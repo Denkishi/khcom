@@ -95,6 +95,18 @@ typedef struct RikuAttackDef {
     const struct RikuAttackDef* next;
 } RikuAttackDef;
 
+enum BtlSoraFlag {
+    BTL_SORA_FLAG_SWING_HIT = 0x2,
+    BTL_SORA_FLAG_HIDDEN = 0x4,
+    BTL_SORA_FLAG_OVER_PLATFORM = 0x10,
+    BTL_SORA_FLAG_ON_PLATFORM = 0x20,
+    BTL_SORA_FLAG_COMBO_EXTENDED = 0x40,
+    BTL_SORA_FLAG_PASS_THROUGH = 0x80,
+    BTL_SORA_FLAG_HIT_FLASH = 0x100,
+    BTL_SORA_FLAG_AT_SIDE_EDGE = 0x200,
+    BTL_SORA_FLAG_HC_STATUS = 0x400
+};
+
 typedef struct BtlSoraWork {
     void* tiles;
     ObjPalette* palette;
@@ -135,6 +147,21 @@ typedef struct BtlSoraWork {
     u16 frameCount;
     u8 unk_1AA[0x2];
 } BtlSoraWork;
+
+enum BtlRikuFlag {
+    BTL_RIKU_FLAG_SWING_HIT = 0x2,
+    BTL_RIKU_FLAG_HIDDEN = 0x4,
+    BTL_RIKU_FLAG_OVER_PLATFORM = 0x10,
+    BTL_RIKU_FLAG_ON_PLATFORM = 0x20,
+    BTL_RIKU_FLAG_COMBO_EXTENDED = 0x40,
+    BTL_RIKU_FLAG_PASS_THROUGH = 0x80,
+    BTL_RIKU_FLAG_HIT_FLASH = 0x100,
+    BTL_RIKU_FLAG_AT_SIDE_EDGE = 0x200,
+    BTL_RIKU_FLAG_FIRE_LAUNCHED = 0x400,
+    BTL_RIKU_FLAG_AFTERIMAGE = 0x800,
+    BTL_RIKU_FLAG_HC_STATUS = 0x1000,
+    BTL_RIKU_FLAG_DASH_UP = 0x2000
+};
 
 typedef struct BtlRikuWork {
     ObjTiles* tiles2;

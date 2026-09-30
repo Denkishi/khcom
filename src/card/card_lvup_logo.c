@@ -99,7 +99,7 @@ u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
 
     gLvupLogoActive = 0;
 
-    if (gBtlWork->flags & 0x20000) {
+    if (gBtlWork->flags & BTL_FLAG_LEVEL_UP_EFFECT) {
         return 0;
     }
 
@@ -108,7 +108,7 @@ u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
     args.unk_08 = 0;
     args.target = p;
     TaskCreate(pool, &gTaskDescLVUPEFFECT, &args);
-    gBtlWork->flags |= 0x20000;
+    gBtlWork->flags |= BTL_FLAG_LEVEL_UP_EFFECT;
     return 1;
 }
 

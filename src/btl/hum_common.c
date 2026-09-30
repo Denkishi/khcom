@@ -108,7 +108,7 @@ s32 _0800E434(HumWork* work) {
     switch (r) {
     case 5:
         work->flags |= 4;
-        gRikuBtlWork->flags &= ~0x40000000;
+        gRikuBtlWork->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
         work->itemIndex = 0;
         work->stateTimer = 0;
         AnimReset(&work->anim);
@@ -405,7 +405,7 @@ s32 HumUpdate(HumWork* work) {
             FadeStartIn(2, 60);
             FadeLock();
             m4aSongNumStart(SONG_BTL_KU_JUMP);
-            gBtlWork->flags |= 0x400000;
+            gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             EndBossDefeat();
             DropBossPrizes(actor);
             arg.x = actor->x;

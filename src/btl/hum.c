@@ -667,7 +667,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     case 17: {
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
             }
@@ -698,7 +698,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 (gBtlWork->yMin + gBtlWork->yMax) << 7);
             break;
         }
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
             }
@@ -722,7 +722,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 break;
             }
         }
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
             }
@@ -1240,7 +1240,7 @@ u8 HookTryJumpAway(CloudWork* work) {
     HumFaceTarget(&work->base, 1);
 
     if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
-        if (gBtlWork->flags & 0x8000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             HookJumpOffset(work, -99, 0x280);
         } else if (GetRandom() & 1) {
             if (c->flags & 4) {
@@ -1336,7 +1336,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (HookTryJumpAway((CloudWork*)w)) {
                 break;
             }
@@ -1373,7 +1373,7 @@ u8 task_hum_hook_1(HookWork* work) {
             break;
         }
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (HookTryJumpAway((CloudWork*)w)) {
                 break;
             }
@@ -1393,7 +1393,7 @@ u8 task_hum_hook_1(HookWork* work) {
             break;
         }
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (HookTryJumpAway((CloudWork*)w)) {
                 break;
             }
@@ -1980,7 +1980,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
 }
 
 u8 task_hum_hook_bomb_1(HookBombWork* work) {
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -2197,7 +2197,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
 
         if (gBtlWork->battleId == 177) {
             if ((u16)(GetRandom() % 15) == 0) {
-                if (gBtlWork->flags & 0x20000000) {
+                if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                     work->base.state = 29;
                     work->base.stateTimer = 0;
                     break;
@@ -2229,7 +2229,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
 
         if (gBtlWork->battleId == 177) {
             if ((u16)(GetRandom() % 30) == 0) {
-                if (gBtlWork->flags & 0x20000000) {
+                if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                     work->base.state = 29;
                     work->base.stateTimer = 0;
                     break;
@@ -2259,7 +2259,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             break;
         }
 
-        if (!(gBtlWork->flags & 0x20000000)) {
+        if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
             break;
         }
 
@@ -3341,7 +3341,7 @@ u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
     HumFaceTarget(&work->base, 1);
 
     if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
-        if (gBtlWork->flags & 0x8000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             MahluxiaJumpOffset(work, -128);
         } else if (GetRandom() & 1) {
             if (c->flags & 4) {
@@ -3532,7 +3532,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     case 17:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (MahluxiaTryJumpAway(w)) {
                 break;
             }
@@ -3567,7 +3567,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (MahluxiaTryJumpAway(w)) {
                 break;
             }
@@ -3587,7 +3587,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
 
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (MahluxiaTryJumpAway(w)) {
                 break;
             }
@@ -4754,7 +4754,7 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
 u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
     BtlObj* c;
 
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -5492,7 +5492,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             m4aSongNumStop(SONG_EF_AKL_FIREWALL);
             work->base.state = 34;
             work->base.stateTimer = 0;
-            gBtlWork->flags |= 0x400000;
+            gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             FadeToOriginal(0, 8);
         } else {
             work->base.stateTimer++;
@@ -6054,7 +6054,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             (w->base.stateTimer > 120 && gBtlWork->actor->hp <= 1)) {
             m4aSongNumStop(SONG_BTL_VIC_ICEFALL);
             FadeToOriginal(0, 8);
-            gBtlWork->flags |= 0x400000;
+            gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             ClearBtlObjActionFlags(act);
             w->base.state = 0;
             w->base.stateTimer = 0;
@@ -6228,7 +6228,7 @@ void task_hum_vixen_ndl_0(VixenNdlWork* work, VixenNdlArgs* args) {
 }
 
 u8 task_hum_vixen_ndl_1(VixenNdlWork* work) {
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -6403,7 +6403,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     work->tiles = gBtlWork->tiles2;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        if (gBtlWork->flags & 0x800000000000) {
+        if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
             work->variant = 2;
         } else {
             work->variant = 1;
@@ -6430,7 +6430,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
     VixenNdlArgs args;
     VixenNdlArgs args2;
 
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -6623,7 +6623,7 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
     VixenFrgSub* e;
     s32 i;
 
-    if (gBtlWork->flags & 0x200000) {
+    if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
         return 0;
     }
 
@@ -7201,7 +7201,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
 }
 
 u8 task_hum_lex_tmh_1(LexTmhWork* work) {
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -7328,7 +7328,7 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
 }
 
 u8 task_hum_lex_tmh0_1(LexTmh0Work* work) {
-    if (gBtlWork->flags & 0x40) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         ApproachValue(&work->scale, 0x100, work->steps--);
 
         if (work->steps > 0) {
@@ -7396,7 +7396,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
     LexRockSub* e;
     u32 v;
 
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -7678,7 +7678,7 @@ u8 RikuTryJumpAway(RikuWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
-            if (gBtlWork->flags & 0x8000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 RikuJumpOffset(work, -99, 0x280);
             } else if (GetRandom() & 1) {
                 if (c->flags & 4) {
@@ -7856,7 +7856,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         break;
     case 17:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
-        if ((gBtlWork->flags & 0x20000000) && RikuTryJumpAway(w)) {
+        if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && RikuTryJumpAway(w)) {
             break;
         }
         if ((act->x - x >= 0 ? act->x - x : x - act->x) <= 0x4FFF) {
@@ -7881,7 +7881,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             RikuJumpTo(w, 0x10000, (gBtlWork->yMin + gBtlWork->yMax) << 7);
             break;
         }
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (RikuTryJumpAway(w)) {
                 break;
             }
@@ -7903,7 +7903,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             RikuJumpTo(w, x, y);
             break;
         }
-        if (gBtlWork->flags & 0x20000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (RikuTryJumpAway(w)) {
                 break;
             }
@@ -8575,7 +8575,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         }
 
         if (gBtlWork->flags & 0x100000) {
-            if (gBtlWork->flags & 0x20000000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                 work->base.state = 20;
                 work->base.stateTimer = 0;
             }
@@ -8590,7 +8590,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         break;
     case 2:
         if (gBtlWork->flags & 0x100000) {
-            if (gBtlWork->flags & 0x20000000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                 work->base.state = 20;
                 work->base.stateTimer = 0;
             }
@@ -8663,7 +8663,7 @@ u8 task_hum_robe_1(RobeWork* work) {
         work->base.stateTimer = 1;
     }
 
-    if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         if (work->idleAnim == 1) {
             AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 1, 0, work->base.tiles);
             work->idleAnim = 0;

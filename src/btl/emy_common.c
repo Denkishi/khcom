@@ -252,7 +252,7 @@ s32 _0800CDF0(EmyWork* work) {
 
     GetEnemyTargetPosition(actor, &x, &y, &z);
 
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 
@@ -284,7 +284,7 @@ s32 _0800CDF0(EmyWork* work) {
                 actor->flags &= ~4;
             }
         }
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 tx;
             s32 ty;
             s32 d;
@@ -381,7 +381,7 @@ s32 _0800CDF0(EmyWork* work) {
         }
         break;
     case 14:
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 tx;
             s32 ty;
 
@@ -416,7 +416,7 @@ s32 _0800CDF0(EmyWork* work) {
         }
         break;
     case 4:
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 px;
             s32 tx;
             s32 ty;
@@ -706,7 +706,7 @@ s32 _0800CDF0(EmyWork* work) {
                     TryDropPremireCard(actor);
                 }
             }
-            gBtlWork->flags |= 0x10000;
+            gBtlWork->flags |= BTL_FLAG_ENEMY_DEFEATED;
             SetEnemyJiminyFlag(actor);
             return 0;
         }
@@ -786,13 +786,13 @@ s32 _0800CDF0(EmyWork* work) {
     if (actor->flags & 0x10) {
         work->gfx = AnimUpdate(&work->anim);
     } else if (actor->badStatus != 2) {
-        if (gBtlWork->flags & 1) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_FRAME_CHANGED) {
             if (!AnimIsFrameEnding(&work->anim)) {
                 work->gfx = AnimUpdate(&work->anim);
             }
         } else {
             if (AnimIsFrameEnding(&work->anim)) {
-                gBtlWork->flags |= 1;
+                gBtlWork->flags |= BTL_FLAG_ENEMY_FRAME_CHANGED;
             }
             work->gfx = AnimUpdate(&work->anim);
         }
@@ -876,7 +876,7 @@ void EmyReleaseResources(EmyWork* work) {
     if (gBtlWork->enemyCount == 0) {
         if (gBtlWork->pendingEnemies <= 0) {
             if (gBtlWork->actor->hp > 0) {
-                gBtlWork->flags |= 0x200000000;
+                gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
             }
         }
     }

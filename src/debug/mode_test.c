@@ -93,12 +93,12 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     body = &work->body;
     if (args->side != 0) {
         work->side = 1;
-        gBtlWork->flags |= 0x200000;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
         work->side = args->side;
-        gRikuBtlWork->flags |= 0x200000;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
@@ -132,7 +132,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
 
     body = &work->body;
     battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
-    if (battle->flags & 0x40000000) {
+    if (battle->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
     BtlMapFollowPosition(body->x, body->y, body->z);
@@ -331,7 +331,7 @@ void eu_08061698(FrdPoohWork* work) {
 
     ColliderUnregister(work->body.particles);
     battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
-    battle->flags &= 0xFFFFFFFFFFDFFFFF;
+    battle->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }

@@ -2343,15 +2343,15 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
             if ((s8)p->chargeTick == 2) {
                 switch (w->args.unk_08) {
                 case 1:
-                    if ((gBtlWork->flags & 0x1000000) == 0) {
+                    if ((gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
-                        gBtlWork->flags |= 0x1000000;
+                        gBtlWork->flags |= BTL_FLAG_RELOAD_CHARGING;
                     }
                     break;
                 case 2:
-                    if ((gRikuBtlWork->flags & 0x1000000) == 0) {
+                    if ((gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
-                        gRikuBtlWork->flags |= 0x1000000;
+                        gRikuBtlWork->flags |= BTL_FLAG_RELOAD_CHARGING;
                     }
                     break;
                 }
@@ -2442,10 +2442,10 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
 
             switch (w->args.unk_08) {
             case 1:
-                gBtlWork->flags &= ~0x1000000;
+                gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
                 break;
             case 2:
-                gRikuBtlWork->flags &= ~0x1000000;
+                gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
                 break;
             }
 
@@ -2492,10 +2492,10 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
 
         switch (w->args.unk_08) {
         case 1:
-            gBtlWork->flags &= ~0x1000000;
+            gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
             break;
         case 2:
-            gRikuBtlWork->flags &= ~0x1000000;
+            gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
             break;
         }
     }
@@ -2569,7 +2569,7 @@ void Reload_Gage_3(CardDisplayWork* p) {
 
     switch (p->args.unk_08) {
     case 1:
-        gBtlWork->flags &= ~0x1000000;
+        gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gBtlWork->hcEffect) {
         case 9:
@@ -2584,7 +2584,7 @@ void Reload_Gage_3(CardDisplayWork* p) {
         }
         break;
     case 2:
-        gRikuBtlWork->flags &= ~0x1000000;
+        gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
         switch (gRikuBtlWork->hcEffect) {
         case 9:

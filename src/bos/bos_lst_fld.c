@@ -541,9 +541,9 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     default:
         a = (gBtlWork->x2 - gBtlWork->x) >> 3;
 
-        if (gBtlWork->flags & 0x2000000000000) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) {
             b = (gBtlWork->y2 - gBtlWork->y) >> 3;
-        } else if (gBtlWork->flags & 0x200000) {
+        } else if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
             if (gBtlWork->actor->z < -0xA000) {
                 b = (gBtlWork->actor->y + gBtlWork->actor->z -
                       gBtlWork->y) >> 3;

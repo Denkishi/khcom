@@ -254,7 +254,7 @@ void BosPcFltUpdateGimmick(PcFltWork* work) {
 void BosPcFltUpdateMotion(PcFltWork* work) {
     s32 f;
 
-    if ((gBtlWork->flags & 0x20000000) || (gBtlWork->flags & 0x40) ||
+    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) || (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) ||
         work->shared->fltStopTimer > 0) {
         f = -1;
     } else {

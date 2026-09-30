@@ -50,7 +50,7 @@ static const AnimDef sBtlBadstatusAnimDefs[5] = {
 void task_btl_form_0(BtlFormWork* work, const BtlFormList* list) {
     s32 i;
 
-    gBtlWork->flags |= 0x2000000;
+    gBtlWork->flags |= BTL_FLAG_FORMATION_ACTIVE;
     work->flags = 0;
     work->list = list;
     work->entry = list->entries[0];
@@ -75,7 +75,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
     s32 y;
     s32 z;
 
-    if (gBtlWork->flags & 0x0100000000000000) {
+    if (gBtlWork->flags & BTL_FLAG_STOP_SPAWNING) {
         return 0;
     }
 
@@ -153,7 +153,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
 }
 
 void task_btl_form_3(void) {
-    gBtlWork->flags &= ~0x2000000;
+    gBtlWork->flags &= ~BTL_FLAG_FORMATION_ACTIVE;
 }
 
 void task_btl_born_0(BtlBornWork* work, BtlBornArgs* args) {
@@ -347,7 +347,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
 BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
     BtlObj* obj;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
             obj = gRikuBtlWork->actor;
         } else {
@@ -375,7 +375,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     s32 y;
     s32 z;
 
-    if ((work->mainSide != 0 ? gBtlWork : gRikuBtlWork)->flags & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork : gRikuBtlWork)->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -708,7 +708,7 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     BtlObj* p;
     s16 count;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
@@ -751,7 +751,7 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     s16 count;
     s32 d;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {

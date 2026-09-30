@@ -135,7 +135,7 @@ void Level_Up_0(LevelUpWork* w) {
         AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
         AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     }
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         w->x7 = 0x1C400;
         w->y6 = 0x5000;
     } else {
@@ -143,7 +143,7 @@ void Level_Up_0(LevelUpWork* w) {
         w->y6 = y << 8;
     }
     w->gfx = AnimGetGfx(&w->anim2);
-    if (!(gBtlWork->flags & 4)) {
+    if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
         w->unk_7C6 = 0;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
         gBg1Cnt &= ~BGCNT_256COLOR;
@@ -1945,8 +1945,8 @@ void LVUP_EFFECT_3(LevelUpEffectWork* w) {
     ReleaseObjPalette(w->palette);
     TaskPoolDestroy(&w->tasks);
 
-    if (gBtlWork->flags & 0x20000) {
-        gBtlWork->flags &= ~0x20000;
+    if (gBtlWork->flags & BTL_FLAG_LEVEL_UP_EFFECT) {
+        gBtlWork->flags &= ~BTL_FLAG_LEVEL_UP_EFFECT;
     }
 }
 

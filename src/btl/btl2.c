@@ -207,7 +207,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         return 0;
     }
 
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 
@@ -474,7 +474,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         return 0;
     }
 
-    if (gBtlWork->flags & 0x800) {
+    if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         actor = gRikuBtlWork->actor;
         work->visible = 1;
     } else {
@@ -853,14 +853,14 @@ void task_btl_pause_0(BtlPauseWork* work) {
     work->visible = 0;
     work->steps = 0;
     work->unk_26 = 0;
-    gBtlWork->flags |= 0x04000000;
+    gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
 }
 
 s32 task_btl_pause_1(BtlPauseWork* work) {
     s32 paused;
 
     if (GetKeysPressed() & START_BUTTON) {
-        if (!(gBtlWork->flags & 0x04000000)) {
+        if (!(gBtlWork->flags & BTL_FLAG_PAUSE_DISABLED)) {
             gBtlWork->paused = gBtlWork->paused == 0 ? 1 : 0;
         }
     }
@@ -1215,11 +1215,11 @@ void task_btl_escape_0(BtlEscapeWork* work) {
 }
 
 s32 task_btl_escape_1(BtlEscapeWork* work) {
-    if (gBtlWork->flags & 0x0100000000000000) {
+    if (gBtlWork->flags & BTL_FLAG_STOP_SPAWNING) {
         return 0;
     }
 
-    if (!(gBtlWork->flags & 8)) {
+    if (!(gBtlWork->flags & BTL_FLAG_PUSHING_EDGE)) {
         if (work->visible != 0) {
             work->progress = 0;
             work->visible = 0;
@@ -1235,8 +1235,8 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
 
             if (work->progress >= work->progressMax) {
                 gGameState.flags |= GAME_FLAG_BATTLE_NOT_WON;
-                gBtlWork->flags |= 0x10;
-                gBtlWork->flags |= 0x0000000200000000;
+                gBtlWork->flags |= BTL_FLAG_ESCAPED;
+                gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
                 work->visible = 0;
             } else {
                 work->progress += 256;
@@ -1408,7 +1408,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
     u64 f;
     u64 bit;
 
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 
@@ -1449,12 +1449,12 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
             hit = 0;
             f = gBtlWork->flags;
 
-            if (f & 0x4000) {
+            if (f & BTL_FLAG_VS_BATTLE) {
                 d1 = DIST(work->x, gBtlWork->actor->x);
                 d2 = DIST(work->x, gRikuBtlWork->actor->x);
 
                 if (d1 == d2) {
-                    bit = f & 0x1000;
+                    bit = f & BTL_FLAG_VS_LINK_PARENT;
                     near = bit != 0;
                 } else {
                     near = 1;
@@ -1532,7 +1532,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
             if (hit) {
                 m4aSongNumStart(SONG_SYS_POWER_GET);
 
-                if (gBtlWork->flags & 0x4000) {
+                if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
                     work->actor->hp += work->healAmount;
 
                     if (work->actor->hp > work->actor->maxHp) {
@@ -1664,7 +1664,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
     s32 tz;
     u64 f;
 
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 
@@ -1705,8 +1705,8 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             hit = 0;
             f = gBtlWork->flags;
 
-            if (f & 0x4000) {
-                if (f & 0x1000) {
+            if (f & BTL_FLAG_VS_BATTLE) {
+                if (f & BTL_FLAG_VS_LINK_PARENT) {
                     if (gRikuBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
@@ -1773,7 +1773,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
             if (hit) {
                 m4aSongNumStart(SONG_SYS_POWER_GET);
-                gBtlWork->flags |= 0x0008000000000000;
+                gBtlWork->flags |= BTL_FLAG_PREMIRE_COLLECTED;
                 work->timer = 0;
                 work->collected = 1;
                 work->timer = 0;

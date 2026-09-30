@@ -275,7 +275,7 @@ void BosLstTickCardDelay(BosLstWork* work) {
 
     t = work->cardDelay;
     work->cardDelay = t - 0x100;
-    if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         work->cardDelay = t - 0x200;
     }
     if (work->facing > 0) {
@@ -463,7 +463,7 @@ void BosLstMoveMode0(BosLstWork* work) {
         BosLstTickCardDelay(work);
         if (work->cardDelay < 0) {
             work->cardDelay = 0x400;
-            if (!(gBtlWork->flags & 0x20000000)) {
+            if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
                 BosLstRequestCardUse(work);
             }
         }
@@ -482,7 +482,7 @@ void BosLstMoveMode1(BosLstWork* work) {
     BosLstTickCardDelay(work);
     if (work->cardDelay < 0) {
         work->cardDelay = 0x400;
-        if (((*pp)->flags & 0x20000000) == 0) {
+        if (((*pp)->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
             work->groundVz = -0x1200;
             work->groundTargetX = (*pp)->actor->x - ((work->facing * 5) << 10);
             if (work->groundTargetX > 0x14000) {
@@ -522,7 +522,7 @@ void BosLstMoveMode2(BosLstWork* work) {
     BosLstTickCardDelay(work);
     if (work->cardDelay < 0) {
         work->cardDelay = 0x400;
-        if (!(gBtlWork->flags & 0x20000000)) {
+        if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
             BosLstRequestCardUse(work);
         }
     }
@@ -553,7 +553,7 @@ void BosLstMoveDash(BosLstWork* work) {
         BosLstTickCardDelay(work);
         if (work->cardDelay < 0) {
             work->cardDelay = 0x400;
-            if ((gBtlWork->flags & 0x20000000) == 0) {
+            if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
                 work->step += 1;
                 work->dashCount += 1;
                 work->dashStep = 0;
@@ -866,7 +866,7 @@ void BosLstMoveBits(BosLstWork* work) {
                     break;
                 }
 #endif
-                if ((gBtlWork->flags & 0x20000000) == 0) {
+                if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0) {
                     BosLstRequestCardUse(work);
                     work->bitAttackStarted = 0;
                 }
@@ -954,7 +954,7 @@ void BosLstMovePlatform(BosLstWork* work) {
                 work->lstTasks[i] = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstBit, &s);
             }
         }
-        if ((gBtlWork->flags & 0x2000000000000) == 0) {
+        if ((gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) == 0) {
             work->platformTimer += 1;
         }
         found = 0;
@@ -995,7 +995,7 @@ void BosLstMovePlatform(BosLstWork* work) {
             work->platformSpeed = 0;
         }
         if (work->platformTimer > 0x4AF ||
-            (work->playerOnPlatform == 1 && (gBtlWork->flags & 0x2000000000000) == 0 &&
+            (work->playerOnPlatform == 1 && (gBtlWork->flags & BTL_FLAG_PLAYER_OFFSCREEN) == 0 &&
              gBtlWork->actor->z > work->z + work->offsetZ + 0x1800)) {
             BosLstReturnBits(work);
             work->platformStep += 1;
@@ -1863,7 +1863,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
             FadeStartIn(2, 60);
             FadeLock();
             m4aSongNumStart(SONG_SND_719);
-            gBtlWork->flags |= 0x400000;
+            gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             work->hidden = 1;
             work->step += 1;
             work->timer = 0;
@@ -2061,7 +2061,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
         y = BosLstGetPlatformY(work);
         p2 = (*gp)->actor;
         p2->y = y;
-        if (((*gp)->flags & 0x2000000000000) == 0) {
+        if (((*gp)->flags & BTL_FLAG_PLAYER_OFFSCREEN) == 0) {
             t = (work->platformSpeed * 70) >> 8;
             v = p2->x + t * work->facing;
             p2->x = v;

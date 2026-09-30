@@ -410,14 +410,14 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         target->flags |= 0x40;
         return 0;
     }
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) source = gBtlWork->actor;
         else source = gRikuBtlWork->actor;
-    } else if (gBtlWork->flags & 0x800) {
-        if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
+    } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) source = gBtlWork->actor;
         else source = gBtlWork->actor3;
     } else {
-        if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) source = gBtlWork->actor;
         else source = gBtlWork->actor3;
     }
     if (source->btl != NULL) {
@@ -713,8 +713,8 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     gBtlWork->areaHalfY = b;
     gBtlWork->areaHalfZ = c;
 
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             o = gRikuBtlWork->actor;
         } else {
             o = gBtlWork->actor;
@@ -722,7 +722,7 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
         if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
             return 1;
         }
-    } else if (gBtlWork->flags & 0x20000000) {
+    } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         o = ListPoolFirst(&gBtlWork->pool);
 
         while (o != NULL) {
@@ -768,8 +768,8 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
     gBtlWork->areaHalfY = q;
     gBtlWork->areaHalfZ = r;
 
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             o = gRikuBtlWork->actor;
         } else {
             o = gBtlWork->actor;
@@ -784,7 +784,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
             }
             return res;
         }
-    } else if (gBtlWork->flags & 0x20000000) {
+    } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         o = ListPoolFirst(&gBtlWork->pool);
         sz = 0;
         sy = 0;

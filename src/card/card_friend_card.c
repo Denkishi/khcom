@@ -298,7 +298,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
     w->priority = -0x1004 - (w->posY >> 8) * 4;
     TaskPoolUpdate(&w->tasks);
 
-    if (gBtlWork->flags & 0x800000000) {
+    if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         return 1;
     }
 

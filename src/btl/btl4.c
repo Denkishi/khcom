@@ -330,7 +330,7 @@ void task_btl_exp_0(BtlExpWork* work) {
 }
 
 s32 task_btl_exp_1(BtlExpWork* work) {
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 
@@ -705,7 +705,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         return 0;
     }
 
-    if (gBtlWork->flags & 0x2000) {
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         return 0;
     }
 

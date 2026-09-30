@@ -523,7 +523,7 @@ static void cardbattle_0(CardBattleWork* w) {
         w->slots[i] = 0;
     }
     w->unk_C4[1] = 0;
-    if (gBtlWork->flags & 0x800000000LL) {
+    if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         w->slotCounts[0] = gUnk_09041FA0.cardCount + 15;
         w->cardsLeft[0] = gUnk_09041FA0.cardCount + 1;
         w->slotCounts[3] = w->cardsLeft[3] = 0;
@@ -582,8 +582,8 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
     BtlObj* actor;
 
     if (gBtlWork->phase == 4) {
-        if (gBtlWork->flags & 0x1000000) {
-            gBtlWork->flags &= ~0x1000000;
+        if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
+            gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }
         return 0;
     }
@@ -617,7 +617,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 CreateSoraCardRing(w, 0);
                 TickSoraHcEffectOnReload();
             } else {
-                gBtlWork->flags |= 0x80000000LL;
+                gBtlWork->flags |= BTL_FLAG_RELOADING;
                 RemoveSoraCardDisplays(w);
                 if (gBtlWork->hcEffect != 25) {
                     IncrementReloadCount(w);
@@ -711,7 +711,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             } else if (gGameState.flags & GAME_FLAG_RIKU) {
                 RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
-                gBtlWork->flags |= 0x80000000LL;
+                gBtlWork->flags |= BTL_FLAG_RELOADING;
                 w->cardsLeft[w->listIndex] = 0;
                 w->reloadPending[w->listIndex] = 1;
             }
@@ -721,7 +721,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             gSoraCardRequest = 0;
             if (w->stockCount != 0) {
                 UseSoraStock(w);
-            } else if (!(gBtlWork->flags & 0x80)) {
+            } else if (!(gBtlWork->flags & BTL_FLAG_CARD_ACTIVE)) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
             w->unk_C4[4] = 1;
@@ -781,7 +781,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
 #endif
                 gSoraSelectedCard = 0;
             }
-            gBtlWork->flags |= 0x80000000LL;
+            gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
             w->reloadPending[0] = 1;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -806,7 +806,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             if (FadeGetAmount() == 0) {
                 FadeFromAmount(2, 16, 20);
             }
-            gBtlWork->flags |= 0x80000000LL;
+            gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
             w->reloadPending[0] = 1;
             break;
@@ -827,7 +827,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             if (FadeGetAmount() == 0) {
                 FadeFromAmount(2, 16, 20);
             }
-            gBtlWork->flags |= 0x80000000LL;
+            gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
             w->reloadPending[0] = 1;
             break;
@@ -1024,7 +1024,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             if (FadeGetAmount() == 0) {
                 FadeFromAmount(2, 16, 20);
             }
-            gBtlWork->flags |= 0x80000000LL;
+            gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
             w->reloadPending[0] = 1;
             break;
@@ -1070,7 +1070,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             if (actor->hp > 3) {
                 actor->hp -= 2;
             }
-            gBtlWork->flags |= 0x80000000LL;
+            gBtlWork->flags |= BTL_FLAG_RELOADING;
             if (gBtlWork->hcEffect != 25) {
                 IncrementReloadCount(w);
                 if (gBtlWork->hcEffect == 10) {
@@ -1083,7 +1083,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
         }
         if (w->unk_C4[1] == 0 && AreCardsSettled(w->stock, w->stockCount) != 0) {
             data = gUnk_09033FD0;
-            if (!(gBtlWork->flags & 0x4000)) {
+            if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
                 result = LookupStockName(w->stock, w->stockCount, w->stockValue, &data, flag);
             } else {
                 result = LookupLinkStockName(w->stock, w->stockCount, w->stockValue, &data, flag, 0);
@@ -1168,8 +1168,8 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
     TaskPoolUpdate(&gCardBattleState->tasks);
     gCardBattleState->soraStockCount = w->stockCount;
     w->unk_C4[4] = 0;
-    if (gBtlWork->flags & 0x80000000000000LL) {
-        gBtlWork->flags &= ~0x80000000000000LL;
+    if (gBtlWork->flags & BTL_FLAG_DARK_MODE_CHANGED) {
+        gBtlWork->flags &= ~BTL_FLAG_DARK_MODE_CHANGED;
         w->unk_C4[1] = 0;
     }
     return 1;
@@ -1230,8 +1230,8 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
     b = 255;
 
     if (gBtlWork->phase == 4) {
-        if (gRikuBtlWork->flags & 0x1000000) {
-            gRikuBtlWork->flags &= ~0x1000000;
+        if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
+            gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
         }
 
         m4aSongNumStop(SONG_SYS_RELOAD);
@@ -1319,7 +1319,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
                 e->flags |= 0x800;
             }
 
-            gBtlWork->flags &= ~0x80000000LL;
+            gBtlWork->flags &= ~BTL_FLAG_RELOADING;
             gBtlWork->flags &= ~0x100;
             w->unk_C4[0] = 0;
             m4aSongNumStop(SONG_SYS_RELOAD);

@@ -880,7 +880,7 @@ u8 task_emy_00_1(EmyWork* work) {
         }
         break;
     case 20:
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             GetEnemyTargetPosition(act, &pos, 0, 0);
             AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             act->x += gSineTable[w->angle] * w->speed >> 8;
@@ -2362,7 +2362,7 @@ void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
 }
 
 u8 task_emy_16_p_1(Emy16pWork* work) {
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -2468,7 +2468,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
 
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->base.x) {
                 act->flags |= 4;
             } else {
@@ -3510,7 +3510,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
 
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->base.x) {
                 act->flags |= 4;
             } else {
@@ -3790,7 +3790,7 @@ u8 task_emy_30_1(EmyWork* work) {
         work->vz = 0;
         AnimChangeWithDef(w->def->animDef, &w->anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->tiles);
 
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->x) {
                 act->flags |= 4;
             } else {
@@ -4348,7 +4348,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
         break;
     case 20:
-        if (gBtlWork->flags & 0x40000) {
+        if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 x;
             s32 y;
             s32 dx;
@@ -5284,7 +5284,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         break;
     case 22:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
-        if (act->z < act->groundZ && (gBtlWork->flags & 0x40000)) {
+        if (act->z < act->groundZ && (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED)) {
             act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
             act->y += -gSineTable[work->base.angle + 64] * work->base.speed >> 8;
             if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
@@ -5684,7 +5684,7 @@ void task_emy_83_b_0(Emy83bWork* work, EmySpawn* spawn) {
 }
 
 u8 task_emy_83_b_1(Emy83bWork* work) {
-    if ((gBtlWork->flags & 0x40) == 0) {
+    if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
         return 0;
     }
 
@@ -5776,7 +5776,7 @@ u8 task_emy_83_s_1(Emy83sWork* work) {
     s32 x;
     s32 y;
 
-    if (gBtlWork->flags & 0x40) {
+    if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         x = work->x + work->vx;
         work->x = x;
         y = work->y + work->vy;

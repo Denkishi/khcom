@@ -302,7 +302,7 @@ BgAnimationDef gUnk_09EDADB0 = { &sBgAnimationChunks[107], gUnk_08F4B384, gUnk_0
 BgFx* gBgFx;
 
 void BgFxReset(void) {
-    if (gBtlWork->flags & 4) {
+    if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
         SetBgPriority(gBgFx->bg, 0);
     } else {
         SetBgPriority(gBgFx->bg, 1);
@@ -373,8 +373,8 @@ void BgFxFree(void) {
 }
 
 void BgFxUpdate(void) {
-    if (gBtlWork->flags & 0x400000) {
-        gBtlWork->flags &= ~0x400000;
+    if (gBtlWork->flags & BTL_FLAG_STOP_BGFX) {
+        gBtlWork->flags &= ~BTL_FLAG_STOP_BGFX;
         gBgFx->flags &= 0xFFFD;
         gBgFx->update = 0;
         BgAnimStop();
@@ -384,7 +384,7 @@ void BgFxUpdate(void) {
     if (gBgFx->update != NULL) {
         gBgFx->update();
 
-        if (!(gBtlWork->flags & 4)) {
+        if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
             gBtlWork->bossY = gBgFx->y;
 
             if (gBgFx->flags & 0x10) {
@@ -422,19 +422,19 @@ void BgFxUpdateBase(void) {
         return;
     }
 
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) {
-            if (gBtlWork->flags & 2) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
+            if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
                 if (gBtlWork->stockMove < GetStockMoveCount()) {
                     BgFxReleaseEarly(gBgFx->releaseFrames);
                 }
             }
-        } else if (gRikuBtlWork->flags & 2) {
+        } else if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
             if (gRikuBtlWork->stockMove < GetStockMoveCount()) {
                 BgFxReleaseEarly(gBgFx->releaseFrames);
             }
         }
-    } else if (gBtlWork->flags & 2) {
+    } else if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
         if (gBtlWork->stockMove < GetStockMoveCount()) {
             BgFxReleaseEarly(gBgFx->releaseFrames);
         }
@@ -611,7 +611,7 @@ void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w)
         BgAnimStart(&gBgAnimDefFire00, sx, sy);
     }
 
-    if ((gBtlWork->flags & 0x4000) == 0 && (gBtlWork->flags & 0x40)) {
+    if ((gBtlWork->flags & BTL_FLAG_VS_BATTLE) == 0 && (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION)) {
         m4aSongNumStart(SONG_EF_MON_FIRE);
     } else {
         m4aSongNumStart(SONG_EF_FIRE00);
@@ -784,7 +784,7 @@ void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s3
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefBlizzard00, sx, sy);
 
-    if ((gBtlWork->flags & 0x4000) == 0 && (gBtlWork->flags & 0x40)) {
+    if ((gBtlWork->flags & BTL_FLAG_VS_BATTLE) == 0 && (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION)) {
         m4aSongNumStart(SONG_EF_MON_BURIZA);
     } else {
         m4aSongNumStart(SONG_EF_BURIZA00);
@@ -2648,8 +2648,8 @@ void func_080162A8(s32 x, s32 y, s32 z, s32 w) {
 }
 
 BtlObj* BgFxGetSyncTarget(void) {
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             return gBtlWork->actor;
         }
         return gRikuBtlWork->actor;
@@ -2664,9 +2664,9 @@ BtlObj* BgFxGetSyncTarget(void) {
 void BgFxApplySyncHp(s16 a) {
     BtlObj* o;
 
-    if (gBtlWork->flags & 0x4000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (GetRandom() % 5) {
-            if (gBtlWork->flags & 0x20000000) {
+            if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                 CreateBtlPopTask(gBtlWork->actor, 2);
             } else {
                 CreateBtlPopTask(gRikuBtlWork->actor, 2);
@@ -3406,8 +3406,8 @@ void BgFxTornadoLiftOpponents(u8 a, u8 b) {
     BtlObj* p;
     BtlObj* o;
 
-    if (gBtlWork->flags & 0x4000) {
-        if (gBtlWork->flags & 0x20000000) {
+    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+        if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             p = gBtlWork->actor;
             o = gRikuBtlWork->actor;
         } else {

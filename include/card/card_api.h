@@ -70,7 +70,7 @@ void ReleaseLayeredCardSprite(LayeredCardSprite* p);
 struct ObjTiles* AllocKeyValueTiles(u8 a);
 void InitEventKeyCard(EventKeyCard* card, struct EventKey* key);
 u8 GetRoomCardBackIndex(u16 n);
-void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d);
+void CreateREVCOUNTTask(void* pool, u8* a, s16* b, u8* c, u8 d);
 void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx);
 void PrintString(u8 a, u8 b, u8 c, u8* s);
 void PrintNumber(u16 x, u16 y, u16 color, s32 value);

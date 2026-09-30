@@ -316,9 +316,9 @@ typedef struct UnkStruct_080993D4 {
 } UnkStruct_080993D4;
 
 typedef struct RevCountArgs {
-    void* shownList;
-    void* count;
-    void* visible;
+    u8* shownList;
+    s16* count;
+    u8* visible;
     u8 list;
     u8 side;
     u8 unk_0E[0x02];

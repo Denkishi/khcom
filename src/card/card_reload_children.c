@@ -209,7 +209,7 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
     w->palette = LoadObjPalette(gCard00Palette, 32);
 
     if (w->list == 0) {
-        count = (s16*)w->args.count;
+        count = w->args.count;
 
         if (*count >= 2 && *count <= 100) {
             row = gRevCountSprites[w->list];
@@ -222,7 +222,7 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
             UpdateSpriteFrameTiles(w->tiles, row[0], gRevCountTileSources[w->list]);
         }
     } else {
-        count2 = (s16*)w->args.count;
+        count2 = w->args.count;
 
         if (*count2 >= 1 && *count2 <= 99) {
             row = gRevCountSprites[w->list];
@@ -234,7 +234,7 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
     }
 
     w->gfx = AnimGetGfx(&w->anim);
-    w->shownCount = *(u16*)w->args.count;
+    w->shownCount = *w->args.count;
 
     switch (w->args.side) {
     case 1:
@@ -254,7 +254,7 @@ u8 REV_COUNT_1(RevCountWork* w, void* a) {
     s16* count;
     void** row;
 
-    count = (s16*)w->args.count;
+    count = w->args.count;
 
     if (*count != (s16)w->shownCount) {
         if (w->list == 0) {
@@ -268,7 +268,7 @@ u8 REV_COUNT_1(RevCountWork* w, void* a) {
                 w->steps = 8;
                 f = UpdateRevCountEmpty;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->shownCount = *(u16*)w->args.count;
+                w->shownCount = *w->args.count;
                 return f(w, a);
             }
         } else {
@@ -282,19 +282,19 @@ u8 REV_COUNT_1(RevCountWork* w, void* a) {
                 w->steps = 8;
                 f = UpdateRevCountEmpty;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->shownCount = *(u16*)w->args.count;
+                w->shownCount = *w->args.count;
                 return f(w, a);
             }
         }
 
-        w->shownCount = *(u16*)w->args.count;
+        w->shownCount = *w->args.count;
     } else if (*count <= 0) {
         u8 (*f)(RevCountWork*, void*);
 
         w->steps = 8;
         f = UpdateRevCountEmpty;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
-        w->shownCount = *(u16*)w->args.count;
+        w->shownCount = *w->args.count;
         return f(w, a);
     }
 
@@ -311,7 +311,7 @@ u8 REV_COUNT_1(RevCountWork* w, void* a) {
         w->steps--;
     }
 
-    if (w->args.list != *(u8*)w->args.shownList) {
+    if (w->args.list != *w->args.shownList) {
         u8 (*f)(RevCountWork*, void*);
 
         f = (u8 (*)(RevCountWork*, void*))UpdateRevCountListChanged;
@@ -325,7 +325,7 @@ u8 REV_COUNT_1(RevCountWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
     }
 
-    if (*(u8*)w->args.visible == 0) {
+    if (*w->args.visible == 0) {
         w->steps = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
     }
@@ -347,7 +347,7 @@ u8 UpdateRevCountListChanged(RevCountWork* w) {
         w->steps--;
     }
 
-    if (w->args.list == *(u8*)w->args.shownList && *(s16*)w->args.count > 0) {
+    if (w->args.list == *w->args.shownList && *w->args.count > 0) {
         return 0;
     }
 
@@ -372,7 +372,7 @@ u8 UpdateRevCountHidden(RevCountWork* w, void* a) {
 
     w->steps--;
 
-    if (*(u8*)w->args.visible == 1) {
+    if (*w->args.visible == 1) {
         w->steps = 8;
         f = REV_COUNT_1;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
@@ -400,14 +400,14 @@ u8 UpdateRevCountEmpty(RevCountWork* w, void* a) {
 
     do {
         if (w->list == 0) {
-            if (*(s16*)w->args.count > 1) {
+            if (*w->args.count > 1) {
                 f = REV_COUNT_1;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
                 w->steps = 8;
                 return f(w, a);
             }
         } else {
-            if (*(s16*)w->args.count > 0) {
+            if (*w->args.count > 0) {
                 f = REV_COUNT_1;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
                 w->steps = 8;
@@ -434,7 +434,7 @@ void REV_COUNT_3(RevCountWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d) {
+void CreateREVCOUNTTask(void* pool, u8* a, s16* b, u8* c, u8 d) {
     RevCountArgs args;
 
     c[0] = 1;

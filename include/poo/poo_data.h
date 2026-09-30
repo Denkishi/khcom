@@ -2,7 +2,6 @@
 #define GUARD_POO_DATA_H
 
 #include "types.h"
-#include "anim.h"
 
 typedef struct PooPoint {
     s32 x;

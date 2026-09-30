@@ -2,7 +2,6 @@
 #define GUARD_PALLET_H
 
 #include "types.h"
-#include "engine_math.h"
 
 typedef struct PaletteBuffer {
     u16 colors[512];

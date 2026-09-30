@@ -6,6 +6,24 @@
 #include "fade.h"
 #include "songs.h"
 #include <string.h>
+#include "anim.h"
+#include "battle_actor_types.h"
+#include "btl_collision.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "m4a_song.h"
+#include "map_runtime.h"
+#include "mode.h"
+#include "msg_api.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "poo_api.h"
+#include "pooh_actor_types.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 Mode gModePooh = {
     "mode_pooh",

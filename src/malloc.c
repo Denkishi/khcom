@@ -1,6 +1,7 @@
 #include "listpool.h"
 #include "malloc.h"
 #include <stddef.h>
+#include "types.h"
 
 static const u8 sEwramHeapName[12] = "HEAP_SYSTEM";
 

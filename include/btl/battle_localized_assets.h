@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_LOCALIZED_ASSETS_H
 
 #include "anim.h"
+#include "types.h"
 
 #if defined(VERSION_US)
 extern u8 gUnkUs_08B1D888[8];

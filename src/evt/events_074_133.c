@@ -1,10 +1,10 @@
-#include "events_074_133.h"
 #include "msg.h"
-#include "card_message_assets.h"
 #include "eventselect_api.h"
 #include "event_text.h"
 #include "msg_localized_data.h"
 #include "songs.h"
+#include "msg_types.h"
+#include "types.h"
 
 #ifdef VERSION_US
 #include "event_074_text.inc"

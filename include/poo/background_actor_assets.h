@@ -1,7 +1,7 @@
 #ifndef GUARD_BACKGROUND_ACTOR_ASSETS_H
 #define GUARD_BACKGROUND_ACTOR_ASSETS_H
 
-#include "mode_battle_data.h"
+#include "types.h"
 
 extern const u16 gUnk_096E3C64[1024];
 extern const u16 gUnk_096E4464[1024];

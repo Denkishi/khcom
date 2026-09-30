@@ -1,23 +1,8 @@
 #ifndef GUARD_ROOM_H
 #define GUARD_ROOM_H
 
-#include "room_data.h"
-#include "map_text_data.h"
-#include "registration_data.h"
-#include "ga_types.h"
-#include "field_state.h"
-#include "chara_api.h"
-#include "m4a_song.h"
-#include "text.h"
-#include "obj_api.h"
-#include "btl_collision.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "anim.h"
 #include "text_types.h"
-#include "taskpool.h"
 
 typedef struct RoomNameWork {
     void* tiles;

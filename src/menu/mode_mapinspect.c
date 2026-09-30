@@ -1,5 +1,3 @@
-#include "localized_resource_assets.h"
-#include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"
 #include "text.h"
@@ -18,6 +16,22 @@
 #include "ms_types.h"
 #include "jiminy_data.h"
 #include "common_text.h"
+#include "anim.h"
+#include "card.h"
+#include "card_api.h"
+#include "card_description_data.h"
+#include "card_ui_types.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "text_types.h"
+#include "types.h"
+#include <stddef.h>
 
 #ifdef VERSION_EU
 static void* sUnkEu_09F85008[5] = {

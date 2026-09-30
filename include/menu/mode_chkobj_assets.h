@@ -2,7 +2,6 @@
 #define GUARD_MODE_CHKOBJ_ASSETS_H
 
 #include "types.h"
-#include "anim.h"
 
 extern u8 gGoofy05Tiles[];
 extern u8 gGoofy14Tiles[];

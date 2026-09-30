@@ -2,7 +2,6 @@
 #define GUARD_MAP_FIXED_DATA_H
 
 #include "types.h"
-#include "map_rooms.h"
 
 extern u8 gUnk_09EF7108[1536];
 extern u8 gUnk_09EF7708[768];

@@ -1,4 +1,3 @@
-#include "localized_resource_assets.h"
 #include "registration_data.h"
 #include "system_state.h"
 #include "title_api.h"
@@ -8,6 +7,16 @@
 #include "sprites_title.h"
 #include "songs.h"
 #include <string.h>
+#include "anim.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "title_types.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 extern void** gTitleLumiSpritesEu[5];

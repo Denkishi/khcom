@@ -1,9 +1,7 @@
 #ifndef GUARD_WORLDINSPECT_ASSETS_H
 #define GUARD_WORLDINSPECT_ASSETS_H
 
-#include "jiminy_data.h"
-#include "jiminy_text_assets.h"
-#include "mode_jiminy.h"
+#include "types.h"
 
 extern u8 gUnk_09A3CCBC[];
 extern u8 gUnk_09A3CCDC[];

@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+struct BtlObj;
+
 typedef struct CharaObjParam {
     u32 tilesAddr;
     u16 tileCount;

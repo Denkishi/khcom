@@ -1,11 +1,8 @@
 #ifndef GUARD_ACGTRANS_H
 #define GUARD_ACGTRANS_H
 
-#include "task_descriptors.h"
-#include "display.h"
 #include "types.h"
 #include "taskpool.h"
-#include "game.h"
 
 typedef struct AcgTransWork {
     u8* dst;

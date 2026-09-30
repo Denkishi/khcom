@@ -1,6 +1,23 @@
 #include "map_tasks.h"
 #include "sprites_evt.h"
 #include "gba/keys.h"
+#include "anim.h"
+#include "btl_collision.h"
+#include "card_api.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "game_state.h"
+#include "key.h"
+#include "map.h"
+#include "map_api.h"
+#include "map_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void MapDonaldCheckTalk(MapDonaldWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {

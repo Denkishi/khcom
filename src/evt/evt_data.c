@@ -1,4 +1,3 @@
-#include "evt_data.h"
 #include "mode_chkobj_assets.h"
 #include "evt_assets.h"
 #include "sprites_continue.h"
@@ -11,6 +10,7 @@
 #include "sprites_pooh.h"
 #include "sprites_smn.h"
 #include "sprites_sora.h"
+#include "evt_types.h"
 
 static const EvtAnimDef sEvtAnimDefs[500] = {
     { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles },

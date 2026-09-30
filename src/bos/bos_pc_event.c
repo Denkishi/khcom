@@ -1,4 +1,6 @@
 #include "bos6.h"
+#include "taskpool.h"
+#include "types.h"
 
 static s32 Square(s32 x) {
     return x * x;

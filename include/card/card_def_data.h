@@ -2,6 +2,7 @@
 #define GUARD_CARD_DEF_DATA_H
 
 #include "card_types.h"
+#include "types.h"
 
 extern const CardDef gCardDefs[];
 extern const CardBack gCardBacks[];

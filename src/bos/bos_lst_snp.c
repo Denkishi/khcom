@@ -2,6 +2,15 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "bos7_api.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskDesc gTaskDescBosLstSnp = {
     "task_bos_lst_snp",

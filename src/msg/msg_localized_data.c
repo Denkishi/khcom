@@ -1,6 +1,5 @@
-#include "msg_localized_data.h"
-#include "msg_localized_assets.h"
 #include "msg_localized_text.h"
+#include "text_types.h"
 
 #ifdef VERSION_EU
 

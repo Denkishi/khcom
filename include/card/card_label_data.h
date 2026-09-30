@@ -2,6 +2,7 @@
 #define GUARD_CARD_LABEL_DATA_H
 
 #include "card_ui_types.h"
+#include "types.h"
 
 typedef struct HcEffectDef {
 #ifdef VERSION_EU

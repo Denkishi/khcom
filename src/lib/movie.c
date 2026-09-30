@@ -3,6 +3,7 @@
 #include "movie.h"
 #include "gba/io_reg.h"
 #include <stddef.h>
+#include "types.h"
 
 #define MOVIE_TICKS_PER_FRAME 228
 #define MOVIE_SECONDS_PER_TICK 0.000073433f

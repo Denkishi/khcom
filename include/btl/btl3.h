@@ -1,22 +1,10 @@
 #ifndef GUARD_BTL3_H
 #define GUARD_BTL3_H
 
-#include "display.h"
-#include "util.h"
-#include "m4a_song.h"
-#include "obj_api.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "taskpool.h"
 #include "anim.h"
-#include "romcri.h"
 #include "formation_types.h"
+#include "battle_actor_types.h"
 
 enum BtlFormFlag {
     BTL_FORM_FLAG_MIRROR_X = 0x1,

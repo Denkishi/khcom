@@ -1,15 +1,9 @@
 #ifndef GUARD_SROLL_H
 #define GUARD_SROLL_H
 
-#include "registration_data.h"
-#include "system_state.h"
 #include "evt_object_types.h"
 #include "obj.h"
 #include "anim.h"
-#include "obj_api.h"
-#include "engine.h"
-#include "gba/syscall.h"
-#include "main.h"
 #include "types.h"
 #include "taskpool.h"
 

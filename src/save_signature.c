@@ -1,4 +1,5 @@
 #include "save.h"
+#include "types.h"
 
 const u8* gSaveSignature = gSaveSignatureText;
 

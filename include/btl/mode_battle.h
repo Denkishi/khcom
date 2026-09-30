@@ -1,24 +1,10 @@
 #ifndef GUARD_MODE_BATTLE_H
 #define GUARD_MODE_BATTLE_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
-#include "system_state.h"
-#include "mode_chkbtl_api.h"
-#include "mode_battle_api.h"
-#include "display.h"
-#include "battle_actor.h"
-#include "btl_collision.h"
 #include "types.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "taskpool.h"
-#include "gba/syscall.h"
-#include "main.h"
-#include "engine.h"
-#include "m4a.h"
-#include "btl_effect.h"
-#include "formation_data.h"
+
+struct ObjPalette;
+struct ObjTiles;
 #ifdef VERSION_EU
 #include "save_api.h"
 #include "battle_localized_assets.h"

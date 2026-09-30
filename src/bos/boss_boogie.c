@@ -9,9 +9,6 @@
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "battle_work.h"
-#include "game_state.h"
-#include "engine.h"
-#include "m4a.h"
 #include "battle_bg_types.h"
 #include "prize_types.h"
 #include "boss_map_block_assets.h"
@@ -19,6 +16,15 @@
 #include "sprites_evt.h"
 #include "sprites_title.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor_types.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 extern u8 gBoss02objPalette[];
 extern u8 gUnk_08F69BC4[];

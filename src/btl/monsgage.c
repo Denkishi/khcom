@@ -1,10 +1,12 @@
-#include "registration_data.h"
 #include "system_state.h"
-#include "battle_localized_assets.h"
 #include "monsgage.h"
 #include "obj_api.h"
 #include "game.h"
 #include "sprites_btl_hud.h"
+#include "battle_work.h"
+#include "obj.h"
+#include "taskpool.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 void* eu_0805E924(const void* strings) {

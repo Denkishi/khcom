@@ -1,24 +1,9 @@
 #ifndef GUARD_MODE_VSBATTLE_H
 #define GUARD_MODE_VSBATTLE_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
 #include "hum_types.h"
 #include "enemy_types.h"
-#include "chara_types.h"
-#include "card_api.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "anim.h"
-#include "taskpool.h"
-#include "m4a.h"
 
 typedef struct VsTaskArg {
     s32 side;

@@ -5,6 +5,24 @@
 #include "btl_api.h"
 #include "fade.h"
 #include "songs.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "boss_jafar_types.h"
+#include "btl_collision.h"
+#include "chara_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "pallet.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 s16 gBosJfActorX EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);

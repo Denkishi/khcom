@@ -4,6 +4,19 @@
 #include "boss_lst_data.h"
 #include "songs.h"
 #include <stdlib.h>
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bos7_api.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 static const EmyKind sBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 

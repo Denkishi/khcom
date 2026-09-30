@@ -6,6 +6,18 @@
 #include "songs.h"
 #include "mode_sio_api.h"
 #include "sio_api.h"
+#include "battle_actor.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
 
 u8 gUnk_02039B98 EWRAM_COMMON(4);
 

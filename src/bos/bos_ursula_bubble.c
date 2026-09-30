@@ -1,6 +1,20 @@
 #include "bos4.h"
 #include "sprites_bos4.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bos4_api.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "display.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj_api.h"
+#include "poo_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 UrsulaBubbleWork* gUrsulaBubbleWork;

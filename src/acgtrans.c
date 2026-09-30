@@ -1,6 +1,9 @@
 #include "task_descriptors.h"
 #include "acgtrans.h"
 #include <stddef.h>
+#include "display.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_acgtrans_0(AcgTransWork* work, AcgTransConfig* cfg) {
     work->dst = cfg->dst;

@@ -1,18 +1,10 @@
 #ifndef GUARD_TITLE_H
 #define GUARD_TITLE_H
 
-#include "registration_data.h"
 #include "obj.h"
-#include "title_api.h"
-#include "pallet.h"
-#include "m4a_song.h"
-#include "obj_api.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
 #include "taskpool.h"
 #include "title_types.h"
-#include "main.h"
 #include "anim.h"
 
 typedef struct TitleObjSprite {

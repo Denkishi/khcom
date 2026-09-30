@@ -1,12 +1,18 @@
 #include "macros.h"
 #include "registration_data.h"
-#include "chara_api.h"
 #include "intr.h"
 #include "pallet.h"
 #include "wlogo.h"
 #include "sprites_boss_tm.h"
 #include "sprites_wlogo.h"
 #include "gba/io_reg.h"
+#include "anim.h"
+#include "display.h"
+#include "engine_math.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 extern const WlogoHwtObjA gWlogoHwtObjStarts[6];
 extern const WlogoHwtObjB gWlogoHwtObjSteps[6][6];

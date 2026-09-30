@@ -2,6 +2,7 @@
 #define GUARD_MAP_TEXT_DATA_H
 
 #include "text_types.h"
+#include "types.h"
 
 #ifdef VERSION_US
 typedef u16 MapNameText;

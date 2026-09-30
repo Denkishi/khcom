@@ -5,7 +5,13 @@
 #include "card_api.h"
 #include "engine_math.h"
 #include "system_state.h"
-#include "acgtrans.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 BtlObj gBosTmBodyObjCopy EWRAM_COMMON(16);
 

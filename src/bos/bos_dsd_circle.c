@@ -4,6 +4,18 @@
 #include "btl_api.h"
 #include "fade.h"
 #include "songs.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "display.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
     work->dsd = arg;

@@ -1,25 +1,11 @@
 #ifndef GUARD_BTL_H
 #define GUARD_BTL_H
 
-#include "task_descriptors.h"
-#include "battle_localized_data.h"
-#include "card_api.h"
-#include "card_battle.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
 #include "obj.h"
-#include "fld_types.h"
+#include "battle_actor_types.h"
 
 typedef struct BtlSpawnArgs {
     u32 variant : 16;

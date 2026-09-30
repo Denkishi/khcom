@@ -1,9 +1,5 @@
-#include "map_index_assets.h"
-#include "boss_map_block_assets.h"
-#include "registration_data.h"
 #include "map_api.h"
 #include "msg_api.h"
-#include "m4a_song.h"
 #include "monsgage.h"
 #include "bos4.h"
 #include "bos4_api.h"
@@ -12,9 +8,18 @@
 #include "world_types.h"
 #include "system_state.h"
 #include "player_progression.h"
-#include "common_text.h"
 #include "jiminy_inline_text_data.h"
 #include "jiminy_data.h"
+#include "battle_actor.h"
+#include "card_api.h"
+#include "common_text.h"
+#include "engine_math.h"
+#include "fld_types.h"
+#include "game_state.h"
+#include "map_types.h"
+#include "player_progression_types.h"
+#include "types.h"
+#include <stddef.h>
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];

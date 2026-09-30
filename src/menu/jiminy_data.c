@@ -1,7 +1,8 @@
 #include "jiminy_data.h"
-#include "jiminy_text_assets.h"
-#include "jiminy_text.h"
 #include "common_text.h"
+#include "jiminy_inline_text_data.h"
+#include "jiminy_text.h"
+#include "jiminy_types.h"
 
 #if defined(VERSION_US)
 

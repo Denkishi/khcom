@@ -1,10 +1,10 @@
-#include "mode_continue.h"
 #include "continue_ui.h"
-#include "registration_data.h"
 #include "map_api.h"
 #include "mode.h"
-#include "mode_test.h"
-#include "mode_test_api.h"
+#include "continue_types.h"
+#include "game_state.h"
+#include "gba/syscall.h"
+#include "taskpool.h"
 
 TaskPool gContinueTaskPool;
 Task* gContinueTask;

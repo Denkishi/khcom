@@ -1,5 +1,14 @@
 #include "bos2.h"
 #include "sprites_bos2.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->dsd = arg;

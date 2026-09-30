@@ -1,10 +1,18 @@
-#include "task_descriptors.h"
 #include "bos.h"
 #include "sprites_btl.h"
 #include "boss_background_types.h"
 #include <stddef.h>
 #include "btl_api.h"
 #include "bos_tasks.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "display.h"
+#include "game.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);

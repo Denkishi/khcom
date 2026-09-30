@@ -1,6 +1,7 @@
 #include <string.h>
 #include "gba/syscall.h"
 #include "movie.h"
+#include "types.h"
 
 static const u8 sMovieVideoCodecConstantsSrc[96] = {
     0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5,

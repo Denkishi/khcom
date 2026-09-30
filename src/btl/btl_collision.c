@@ -1,9 +1,16 @@
 #include "engine_math.h"
 #include "listpool.h"
 #include "battle.h"
-#include "btl_collision.h"
 #include "btl_effect.h"
 #include "songs.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "m4a_song.h"
+#include "types.h"
+#include <stddef.h>
 
 static const BattleAttackDef sBattleAttackDefs[330] = {
     { 256, 204, 0, 3, BgFxStartRikuHit, ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_ELEMENT_PHYSICAL },

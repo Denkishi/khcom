@@ -13,6 +13,21 @@
 #include "songs.h"
 #include <stdlib.h>
 #include "fld_tasks.h"
+#include "anim.h"
+#include "battle_actor_types.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "map_runtime.h"
+#include "map_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 static const AnimDef sFldSoraAnimDefs[15][5] = {
     { { gSor1bb00Frames, gSor1bb00Anims, gSor1bb00Tiles, 0, { 0, 0, 0 } }, { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 0, { 0, 0, 0 } }, { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0, { 0, 0, 0 } }, { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 0, { 0, 0, 0 } }, { gSor1bl00Frames, gSor1bl00Anims, gSor1bl00Tiles, 0, { 0, 0, 0 } } },

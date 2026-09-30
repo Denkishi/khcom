@@ -3,6 +3,19 @@
 #include "battle.h"
 #include "gba/keys.h"
 #include "fade.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "card_api.h"
+#include "card_battle.h"
+#include "gba/syscall.h"
+#include "mode.h"
+#include "mode_vsbattle.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include "util.h"
 
 u16 gVsKeyHoldL[2];
 u16 gVsKeyHoldR[2];

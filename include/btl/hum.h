@@ -1,35 +1,13 @@
 #ifndef GUARD_HUM_H
 #define GUARD_HUM_H
 
-#include "task_descriptors.h"
-#include "jiminy_records_data.h"
 #include "hum_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "ms_api.h"
-#include "pallet.h"
-#include "save_api.h"
-#include "m4a_song.h"
-#include "text.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "text_types.h"
 #include "jiminy_types.h"
-#include "save_types.h"
-#include "key.h"
 #include "anim.h"
 #include "taskpool.h"
 #include "obj.h"
-#include "bos3.h"
-#include "bos4_api.h"
-#include "btl_api.h"
+#include "battle_actor_types.h"
 
 typedef struct VixenSub {
     u8 pending;

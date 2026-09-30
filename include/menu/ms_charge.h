@@ -1,28 +1,8 @@
 #ifndef GUARD_MS_CHARGE_H
 #define GUARD_MS_CHARGE_H
 
-#include "card_def_data.h"
-#include "registration_data.h"
-#include "map_card_data.h"
-#include "obj.h"
-#include "card_ui_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "game_state.h"
-#include "anim.h"
-#include "mode.h"
-#include "card_description_data.h"
-#include "card_types.h"
 #include "ms_charge_api.h"
-#include "display.h"
-#include "engine_math.h"
-#include "text.h"
-#include "obj_api.h"
 #include "types.h"
-#include "text_types.h"
-#include "key.h"
-#include "engine.h"
-#include "m4a.h"
 
 extern u8 gUnk_09A3DE7C[];
 

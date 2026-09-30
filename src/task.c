@@ -1,9 +1,10 @@
-#include "task.h"
 #include "system_state.h"
 #include "game_state.h"
 #include "card_api.h"
 #include "map_runtime.h"
 #include "player_progression.h"
+#include "player_progression_types.h"
+#include "types.h"
 
 u8 GetAngle(s32 x0, s32 y0, s32 x1, s32 y1) {
     s32 dx;

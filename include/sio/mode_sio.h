@@ -1,29 +1,12 @@
 #ifndef GUARD_MODE_SIO_H
 #define GUARD_MODE_SIO_H
 
-#include "mode_deck.h"
-#include "card_def_data.h"
-#include "registration_data.h"
-#include "card_description_data.h"
-#include "chara_api.h"
-#include "map_api.h"
-#include "pallet.h"
-#include "save_api.h"
-#include "engine_math.h"
-#include "card_api.h"
-#include "text.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "game_state.h"
-#include "card_types.h"
 #include "text_types.h"
-#include "key.h"
 #include "anim.h"
 #include "mode.h"
 #include "taskpool.h"
-#include "m4a.h"
-#include "poo_api.h"
+#include "obj.h"
 typedef struct SioWorldEntry {
     void* tiles;
     u16 tilesSize;

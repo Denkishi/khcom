@@ -1,9 +1,16 @@
 #include "macros.h"
 #include "task_descriptors.h"
 #include "evt.h"
-#include "evt_api.h"
 #include "sprites_btl.h"
 #include "evt_tasks.h"
+#include "anim.h"
+#include "evt_data.h"
+#include "evt_object_types.h"
+#include "evt_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 static TaskDesc sTaskDescEvtObj = {
     "task_evt_obj",

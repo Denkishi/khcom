@@ -1,12 +1,17 @@
 #include "macros.h"
 #include "registration_data.h"
 #include "boss_tm.h"
-#include "boss_tm_assets.h"
 #include "event_backgrounds.h"
 #include "chara_types.h"
 #include "chara_api.h"
-#include "acgtrans.h"
 #include <stddef.h>
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_bg_types.h"
+#include "battle_work.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
 
 s16 gBosTmActorZ EWRAM_COMMON(4);
 s16 gUnk_0203AB40 EWRAM_COMMON(4);

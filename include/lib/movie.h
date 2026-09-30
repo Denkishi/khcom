@@ -1,7 +1,6 @@
 #ifndef GUARD_MOVIE_H
 #define GUARD_MOVIE_H
 
-#include "snd_stream.h"
 #include "types.h"
 
 typedef void* (*MovieAllocFunc)(u32);

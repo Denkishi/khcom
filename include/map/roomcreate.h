@@ -1,19 +1,8 @@
 #ifndef GUARD_ROOMCREATE_H
 #define GUARD_ROOMCREATE_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
-#include "field_state.h"
-#include "card_api.h"
-#include "map_api.h"
 #include "types.h"
-#include "engine_math.h"
-#include "m4a.h"
-#include "m4a_catalog_data.h"
 #include "taskpool.h"
-#include "fld_types.h"
-#include "engine.h"
-#include "bos4_api.h"
 
 typedef struct RoomCreateWork {
     s32 x;

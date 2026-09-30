@@ -1,4 +1,5 @@
 #include "audio_block_codec.h"
+#include "types.h"
 
 u8* gAudioCodecSrc;
 s32 gAudioCodecBitBuffer;

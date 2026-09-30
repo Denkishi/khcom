@@ -1,4 +1,3 @@
-#include "task_descriptors.h"
 #include "system_state.h"
 #include "map_api.h"
 #include "ms_api.h"
@@ -6,7 +5,6 @@
 #include "obj_api.h"
 #include "pallet.h"
 #include "hum.h"
-#include "task_animation_assets.h"
 #include "sprites_btl.h"
 #include "sprites_cloud.h"
 #include "sprites_evt.h"
@@ -20,6 +18,29 @@
 #include "actor_localized_data.h"
 #include <string.h>
 #include "hum_tasks.h"
+#include "anim.h"
+#include "battle.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bos3.h"
+#include "bos4_api.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "hum_types.h"
+#include "m4a_song.h"
+#include "mode_chkobj_assets.h"
+#include "obj.h"
+#include "player_progression_types.h"
+#include "save_api.h"
+#include "save_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const u32 sHumCloudStockMoves[2][3] = {
     { 37, 37, 37 },

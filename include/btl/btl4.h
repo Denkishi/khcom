@@ -1,14 +1,7 @@
 #ifndef GUARD_BTL4_H
 #define GUARD_BTL4_H
 
-#include "battle_localized_data.h"
-#include "display.h"
-#include "card_api.h"
-#include "obj_api.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "anim.h"
 typedef struct BtlPopSrc {
     s32 x;

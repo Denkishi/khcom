@@ -2,7 +2,9 @@
 #define GUARD_BATTLE_ACTOR_TYPES_H
 
 #include "types.h"
-#include "taskpool.h"
+#include "listpool.h"
+
+struct BtlWork;
 
 enum EmyKindFlag {
     EMY_KIND_FLAG_NO_COLLIDER = 0x1,

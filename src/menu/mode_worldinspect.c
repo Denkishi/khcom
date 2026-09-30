@@ -17,8 +17,6 @@
 #include "anim.h"
 #include "card_description_data.h"
 #include "worldselect_assets.h"
-#include "bos4_api.h"
-#include "msg_api.h"
 #include "worldinspect_assets.h"
 #include "sprites_bos5.h"
 #include "sprites_worldinspect.h"
@@ -27,6 +25,14 @@
 #include "common_text.h"
 #include "jiminy_records_assets.h"
 #include "world_types.h"
+#include "jiminy_data.h"
+#include "jiminy_inline_text_data.h"
+#include "key.h"
+#include "mode.h"
+#include "obj.h"
+#include "poo_api.h"
+#include "text_types.h"
+#include <stddef.h>
 
 static s16 sWorldInspectCursor;
 static s16 sWorldInspectFloorCount;

@@ -2,6 +2,13 @@
 #include "ms_api.h"
 #include "player_progression.h"
 #include "battle.h"
+#include "battle_work.h"
+#include "bos3.h"
+#include "bos4_api.h"
+#include "game_state.h"
+#include "player_progression_types.h"
+#include "types.h"
+#include <stddef.h>
 
 static const EnemyBaseStats sEnemyBaseStats[54] = {
     { 33, 2, 3, 0 },

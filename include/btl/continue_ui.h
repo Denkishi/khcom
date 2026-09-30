@@ -3,6 +3,7 @@
 
 #include "continue_types.h"
 #include "taskpool.h"
+#include "types.h"
 
 extern TaskDesc gTaskDescContinueSora;
 extern TaskDesc gTaskDescContinueRiku;

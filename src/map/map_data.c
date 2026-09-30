@@ -1,6 +1,4 @@
 #include "map.h"
-#include "map_room_data.h"
-#include "map_fixed_data.h"
 #include "map_enemy_data.h"
 #include "map_spawn_data.h"
 #include "mode_battle_data.h"
@@ -11,6 +9,9 @@
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
 #include "songs.h"
+#include "map_room_types.h"
+#include "map_rooms.h"
+#include "types.h"
 
 MapRoomDef* gMapRoomDefs[14] = {
     &gUnk_0984D2D8,

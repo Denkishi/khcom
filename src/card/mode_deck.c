@@ -5,10 +5,17 @@
 #include "m4a_song.h"
 #include "mode_test.h"
 #include "gba/keys.h"
-#include "mode_test_api.h"
 #include "sprites_msg.h"
 #include "fade.h"
 #include "songs.h"
+#include "battle_actor.h"
+#include "field_state.h"
+#include "game_state.h"
+#include "key.h"
+#include "obj_api.h"
+#include "system_state.h"
+#include "taskpool.h"
+#include "types.h"
 
 static TaskPool sModeDeckTasks;
 static u8 sModeDeckResult;

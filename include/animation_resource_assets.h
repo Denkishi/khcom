@@ -1,8 +1,6 @@
 #ifndef GUARD_ANIMATION_RESOURCE_ASSETS_H
 #define GUARD_ANIMATION_RESOURCE_ASSETS_H
 
-#include "anim.h"
-
 extern u8 gGoofy05Frame0[];
 extern u8 gGoofy05Frame1[];
 extern u8 gGoofy05Frame2[];

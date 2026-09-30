@@ -3,6 +3,7 @@
 
 #include "mode.h"
 #include "taskpool.h"
+#include "types.h"
 
 typedef struct EvtArg {
     u32 eventId : 8;

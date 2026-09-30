@@ -1,10 +1,8 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-#include "save_api.h"
 #include "types.h"
 #include "save_types.h"
-#include "card.h"
 
 extern u8 gSramFileLarge[];
 

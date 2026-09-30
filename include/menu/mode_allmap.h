@@ -1,24 +1,8 @@
 #ifndef GUARD_MODE_ALLMAP_H
 #define GUARD_MODE_ALLMAP_H
 
-#include "registration_data.h"
-#include "allmap_types.h"
-#include "map_api.h"
-#include "display.h"
-#include "game_state.h"
-#include "obj_api.h"
 #include "types.h"
-#include "m4a.h"
-#include "m4a_catalog_data.h"
 #include "taskpool.h"
-#include "gba/syscall.h"
-#include "main.h"
-#include "anim.h"
-#include "engine.h"
-#include "bos4_api.h"
-#include "poo_api.h"
-#include "mode_battle_data.h"
-#include "gba/io_reg.h"
 
 typedef struct AllmapRoomOrder {
     s32 shapes[16];

@@ -5,7 +5,6 @@
 #include "m4a_song.h"
 #include "fade.h"
 #include "engine_math.h"
-#include "listpool.h"
 #include "mode_event.h"
 #include "mode_eventselect.h"
 #include "gba/keys.h"
@@ -16,6 +15,23 @@
 #include "obj_resource_types.h"
 #include "mode_test_api.h"
 #include "malloc.h"
+#include "anim.h"
+#include "card.h"
+#include "display.h"
+#include "event_chara_types.h"
+#include "event_index_data.h"
+#include "evt_object_types.h"
+#include "evt_types.h"
+#include "key.h"
+#include "m4a.h"
+#include "mode.h"
+#include "msg_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "text.h"
+#include "types.h"
+#include <stddef.h>
 
 static const s16 sSoraEventIds[147] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,

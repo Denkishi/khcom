@@ -3,6 +3,17 @@
 #include "battle_actor.h"
 #include "hum_types.h"
 #include "romcri_backgrounds.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "field_state.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);

@@ -1,4 +1,5 @@
-#include "movie_text.h"
+#include "text_types.h"
+#include "types.h"
 
 #ifndef VERSION_JP
 s16 GetCenteredTextX(u16* widths, u16 count) {

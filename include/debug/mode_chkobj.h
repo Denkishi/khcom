@@ -1,19 +1,8 @@
 #ifndef GUARD_MODE_CHKOBJ_H
 #define GUARD_MODE_CHKOBJ_H
 
-#include "registration_data.h"
-#include "card_api.h"
-#include "display.h"
-#include "anim.h"
-#include "obj_api.h"
 #include "types.h"
-#include "engine_math.h"
-#include "taskpool.h"
 #include "chkobj.h"
-#include "main.h"
-#include "engine.h"
-#include "mode.h"
-#include "key.h"
 
 typedef struct ChkObjEntry {
     ObjDef* defs;

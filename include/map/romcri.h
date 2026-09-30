@@ -1,10 +1,7 @@
 #ifndef GUARD_ROMCRI_H
 #define GUARD_ROMCRI_H
 
-#include "pallet.h"
-#include "display.h"
 #include "types.h"
-#include "game_state.h"
 #include "formation_types.h"
 
 typedef struct RomcriEffWork {

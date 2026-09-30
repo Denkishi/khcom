@@ -4,7 +4,8 @@
 #include "anim.h"
 #include "obj.h"
 #include "taskpool.h"
-#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "types.h"
 
 typedef struct BoogieWork {
     s32 state;

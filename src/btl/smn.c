@@ -3,8 +3,6 @@
 #include "smn.h"
 #include "frd.h"
 #include "anim.h"
-#include "smn_api.h"
-#include "task_animation_assets.h"
 #include "sprites_cloud.h"
 #include "sprites_evt.h"
 #include "sprites_smn.h"
@@ -14,6 +12,20 @@
 #include "btl3_api.h"
 #include <stdlib.h>
 #include "smn_tasks.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_battle.h"
+#include "engine_math.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const AnimDef sSmnCloudAnimDefs[8] = {
     { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0, { 0, 0, 0 } },

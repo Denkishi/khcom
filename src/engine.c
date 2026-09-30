@@ -15,6 +15,8 @@
 #include "system_state.h"
 #include "gba/io_reg.h"
 #include "gba/oam.h"
+#include "obj.h"
+#include <stddef.h>
 
 u16 gLastBackdropColor IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);

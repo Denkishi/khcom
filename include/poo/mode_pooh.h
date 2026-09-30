@@ -1,24 +1,8 @@
 #ifndef GUARD_MODE_POOH_H
 #define GUARD_MODE_POOH_H
 
-#include "registration_data.h"
-#include "card_api.h"
-#include "msg_api.h"
-#include "anim.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
-#include "taskpool.h"
-#include "main.h"
-#include "mode.h"
-#include "obj.h"
-#include "key.h"
-#include "m4a.h"
-#include "bos4_api.h"
-#include "poo_api.h"
+#include "pooh_actor_types.h"
 
 extern u32 gPoohAction;
 

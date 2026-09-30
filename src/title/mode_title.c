@@ -4,7 +4,6 @@
 #include "map_api.h"
 #include "task.h"
 #include "system_state.h"
-#include "mode_title.h"
 #include "sprites_title.h"
 #include "game_state.h"
 #include "title_types.h"
@@ -15,6 +14,19 @@
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
+#include "battle_actor.h"
+#include "display.h"
+#include "engine_math.h"
+#include "intr.h"
+#include "key.h"
+#include "m4a.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "obj_api.h"
+#include "save_api.h"
+#include "save_types.h"
+#include "taskpool.h"
+#include "types.h"
 
 s32 gTitleBgScale EWRAM_COMMON(4);
 s32 gTitleBgX EWRAM_COMMON(4);

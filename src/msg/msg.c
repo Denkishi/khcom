@@ -2,6 +2,17 @@
 #include "sprites_msg.h"
 #include "malloc.h"
 #include "fade.h"
+#include "display.h"
+#include "gba/syscall.h"
+#include "msg_api.h"
+#include "msg_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "text.h"
+#include "text_types.h"
+#include "types.h"
+#include <stddef.h>
+#include "system_state.h"
 
 #ifdef VERSION_EU
 #define LANGSTR(x) (((void**)(x))[gLanguage])

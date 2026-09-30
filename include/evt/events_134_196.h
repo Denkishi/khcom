@@ -2,6 +2,7 @@
 #define GUARD_EVENTS_134_196_H
 
 #include "msg_types.h"
+#include "types.h"
 
 extern const EventSequenceDef gEvent134;
 extern const EventSequenceDef gEvent135;

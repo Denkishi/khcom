@@ -1,25 +1,8 @@
 #ifndef GUARD_CHARA_H
 #define GUARD_CHARA_H
 
-#include "registration_data.h"
 #include "chara_types.h"
-#include "card_api.h"
-#include "chara_api.h"
-#include "sio_api.h"
-#include "util.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "display.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
-#include "taskpool.h"
-#include "gba/syscall.h"
-#include "key.h"
-#include "game.h"
-#include "mode.h"
-#include "pallet.h"
 
 typedef struct MaskFadeWork {
     u8* tiles;

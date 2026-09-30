@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "fld_types.h"
+#include "taskpool.h"
 
 typedef struct EventKey {
     u8 kind;

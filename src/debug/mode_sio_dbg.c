@@ -4,12 +4,15 @@
 #include "mode_chkbtl.h"
 #include "mode_sio_api.h"
 #include "game_state.h"
-#include "obj_api.h"
 #include "display.h"
 #include "key.h"
 #include "gba/keys.h"
 #include "mode.h"
 #include "mode_test_api.h"
+#include "card_api.h"
+#include "chara_types.h"
+#include "player_progression_types.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 u16 gUnk_0203C3C4 EWRAM_COMMON(4);

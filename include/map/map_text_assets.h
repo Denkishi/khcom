@@ -1,7 +1,4 @@
 #ifndef GUARD_MAP_TEXT_ASSETS_H
 #define GUARD_MAP_TEXT_ASSETS_H
 
-#include "common_text.h"
-#include "localized_names.h"
-
 #endif

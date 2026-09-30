@@ -6,6 +6,7 @@
 #include "save_types.h"
 #include "fld_types.h"
 #include "player_progression_types.h"
+#include "listpool.h"
 
 enum GameFlag {
     GAME_FLAG_MAP_ENEMY_BATTLE = 0x2,

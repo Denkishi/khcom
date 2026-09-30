@@ -2,6 +2,13 @@
 #include "mode_chksnd.h"
 #include "gba/keys.h"
 #include "songs.h"
+#include "card_api.h"
+#include "display.h"
+#include "key.h"
+#include "mode.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskPool gChkSndPool;
 s16 gChkSndIndex;

@@ -1,29 +1,10 @@
 #ifndef GUARD_STATUS_H
 #define GUARD_STATUS_H
 
-#include "card_def_data.h"
-#include "registration_data.h"
-#include "card_label_data.h"
-#include "poo_api.h"
-#include "bos4_api.h"
-#include "card_ui_types.h"
-#include "card_api.h"
-#include "engine_math.h"
 #include "anim.h"
-#include "text.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "text_types.h"
 #include "taskpool.h"
-#include "main.h"
-#include "engine.h"
-#include "key.h"
-#include "m4a.h"
 
 typedef struct StatusEntry {
     s32 items[72];

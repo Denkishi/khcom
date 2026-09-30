@@ -7,6 +7,11 @@
 #include "sprites_sora.h"
 #include "gba/io_reg.h"
 #include "malloc.h"
+#include "anim.h"
+#include "game_state.h"
+#include "obj.h"
+#include "system_state.h"
+#include "types.h"
 
 FieldTransitionWork* gFieldTransitionWork;
 

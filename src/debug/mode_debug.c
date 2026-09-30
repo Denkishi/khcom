@@ -12,6 +12,19 @@
 #include "songs.h"
 #include "player_progression.h"
 #include "gba/io_reg.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "card_api.h"
+#include "display.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "obj_api.h"
+#include "pallet.h"
+#include "player_progression_types.h"
+#include "registration_data.h"
+#include "save_api.h"
+#include "types.h"
 
 DebugWork* gDebugWork;
 

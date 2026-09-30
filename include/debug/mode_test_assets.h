@@ -1,8 +1,6 @@
 #ifndef GUARD_MODE_TEST_ASSETS_H
 #define GUARD_MODE_TEST_ASSETS_H
 
-#include "types.h"
-
 #ifdef VERSION_EU
 extern u8 gUnkEu_0910DD2E[];
 extern u8 gUnkEu_09121002[];

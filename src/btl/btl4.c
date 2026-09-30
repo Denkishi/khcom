@@ -1,12 +1,22 @@
-#include "battle_localized_data.h"
-#include "registration_data.h"
 #include "system_state.h"
 #include "btl4.h"
-#include "btl4_api.h"
 #include "tutorial.h"
 #include "sprites_btl.h"
 #include "sprites_btl_hud.h"
 #include "gba/io_reg.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "card_api.h"
+#include "display.h"
+#include "game_state.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "player_progression_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
 #ifdef VERSION_EU

@@ -1,20 +1,10 @@
 #ifndef GUARD_FRD_H
 #define GUARD_FRD_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
-#include "display.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "battle_actor_types.h"
 
 typedef struct FrdArgs {
     u16 variant;

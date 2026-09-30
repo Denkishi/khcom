@@ -4,6 +4,16 @@
 #include "roomcreate.h"
 #include "fade.h"
 #include "songs.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "m4a_catalog_data.h"
+#include "map_runtime.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;

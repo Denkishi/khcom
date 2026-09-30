@@ -1,5 +1,4 @@
 #include "macros.h"
-#include "registration_data.h"
 #include "boss_tm.h"
 #include "boss_tm_assets.h"
 #include "sprites_boss_tm.h"
@@ -7,11 +6,20 @@
 #include "m4a_song.h"
 #include "btl_effect.h"
 #include "system_state.h"
-#include "acgtrans.h"
 #include "sprites_wlogo.h"
 #include <stddef.h>
 #include "btl_api.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "display.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 s16 gUnk_0203AC60 EWRAM_COMMON(4);
 s32 gUnk_0203AC64 EWRAM_COMMON(4);

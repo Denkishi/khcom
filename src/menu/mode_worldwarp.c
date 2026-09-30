@@ -3,13 +3,6 @@
 #include "monsgage.h"
 #include "types.h"
 #include "jiminy_data.h"
-#include "jiminy_text_assets.h"
-#include "mode_chkobj_assets.h"
-#include "mode_ms.h"
-#include "ms_charge.h"
-#include "mode_mapinspect.h"
-#include "worldinspect_assets.h"
-#include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"
 #include "mode_worldwarp.h"
@@ -20,6 +13,19 @@
 #include "fade.h"
 #include "songs.h"
 #include "common_text.h"
+#include "anim.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "jiminy_inline_text_data.h"
+#include "m4a_song.h"
+#include "map_runtime.h"
+#include "mode.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "text.h"
+#include "text_types.h"
+#include <stddef.h>
 
 static s16 sWorldWarpCursor;
 static s16 sWorldWarpFloorCount;

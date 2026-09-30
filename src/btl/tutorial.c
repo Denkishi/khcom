@@ -1,9 +1,21 @@
-#include "registration_data.h"
 #include "tutorial.h"
 #include "gba/keys.h"
 #include "sprites_btl_hud.h"
 #include "system_state.h"
 #include "btl4_api.h"
+#include "anim.h"
+#include "battle_work.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "card_battle.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game.h"
+#include "key.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 void task_tutorial_0(TutorialWork* work, s32 arg1) {
     gBg0Cnt = 0;

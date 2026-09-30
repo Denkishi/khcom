@@ -1,5 +1,5 @@
-#include "jiminy_inline_text_data.h"
 #include "localized_names.h"
+#include "jiminy_types.h"
 
 #ifdef VERSION_EU
 

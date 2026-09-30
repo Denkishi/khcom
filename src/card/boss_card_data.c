@@ -1,5 +1,5 @@
-#include "boss_card_data.h"
 #include "card_ids.h"
+#include "types.h"
 
 static const s32 sUnk_08F7D638[3] = {
     450, 451, 452,

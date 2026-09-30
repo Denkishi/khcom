@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include "m4a_catalog_data.h"
 #include "m4a_songs.h"
+#include "m4a.h"
 
 MusicPlayerTrack gMPlayTracks0[14] __attribute__((aligned(8)));
 MusicPlayerTrack gMPlayTracks1[1] __attribute__((aligned(8)));

@@ -8,6 +8,14 @@
 #include "sroll_api.h"
 #include "fade.h"
 #include <stddef.h>
+#include "display.h"
+#include "gba/syscall.h"
+#include "intr.h"
+#include "key.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 DmaStream gDmaStream __attribute__((aligned(8)));
 u8 gBlockAudioPlaying;

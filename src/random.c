@@ -1,7 +1,9 @@
 #include "pallet.h"
 #include "gba/syscall.h"
-#include "sprite.h"
 #include <stddef.h>
+#include "bg_animation_types.h"
+#include "display.h"
+#include "types.h"
 
 u32 gRandSeed;
 u8 gUnk_0203402C[4];

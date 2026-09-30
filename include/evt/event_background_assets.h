@@ -1,9 +1,6 @@
 #ifndef GUARD_EVENT_BACKGROUND_ASSETS_H
 #define GUARD_EVENT_BACKGROUND_ASSETS_H
 
-#include "types.h"
-#include "mode_battle_data.h"
-
 extern u8 gUnk_09755F34[];
 extern u8 gRaVegetablesFrame9[];
 extern u8 gUnk_0985D208[];

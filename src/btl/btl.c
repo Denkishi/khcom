@@ -4,8 +4,6 @@
 #include "display.h"
 #include "obj_api.h"
 #include "btl.h"
-#include "task_animation_assets.h"
-#include "registration_data.h"
 #include "btl_effect.h"
 #include "btl_api.h"
 #include "sprites_btl.h"
@@ -22,6 +20,24 @@
 #include "songs.h"
 #include <string.h>
 #include "btl_tasks.h"
+#include "anim.h"
+#include "battle.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "card_api.h"
+#include "fld_types.h"
+#include "game_state.h"
+#include "key.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "player_progression_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include "util.h"
+#include <stddef.h>
 
 TaskDesc gTaskDescBtlLockon = {
     "task_btl_lockon",

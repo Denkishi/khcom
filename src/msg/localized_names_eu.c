@@ -1,10 +1,7 @@
-#include "jiminy_data.h"
-#include "jiminy_text_assets.h"
-#include "map_runtime.h"
-#include "map_index_assets.h"
-#include "map_text_data.h"
-#include "map_text_assets.h"
+#include "jiminy_types.h"
 #include "localized_names.h"
+#include "text_types.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 

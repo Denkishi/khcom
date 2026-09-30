@@ -1,18 +1,7 @@
 #ifndef GUARD_MODE_DUMMY_H
 #define GUARD_MODE_DUMMY_H
 
-#include "registration_data.h"
-#include "mode_battle_data.h"
-#include "map_api.h"
-#include "msg_api.h"
-#include "mode_test_api.h"
-#include "fade.h"
-#include "display.h"
 #include "types.h"
-#include "game_state.h"
-#include "key.h"
-#include "mode.h"
-#include "bos4_api.h"
 typedef struct DummyEntry {
     const char* name;
     const char* desc;

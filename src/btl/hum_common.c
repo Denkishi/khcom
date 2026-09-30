@@ -1,9 +1,23 @@
 #include "mode_vsbattle.h"
-#include "hum_common.h"
 #include "prize_types.h"
 #include "btl_api.h"
 #include "fade.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "engine_math.h"
+#include "hum_types.h"
+#include "m4a_song.h"
+#include "obj_api.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void HumInit(HumWork* work, const HumDef* def) {
     BtlObj* actor = &work->actor;

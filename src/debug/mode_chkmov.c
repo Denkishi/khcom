@@ -6,6 +6,8 @@
 #include "mode_chkmov.h"
 #include "registration_data.h"
 #include "taskpool.h"
+#include "mode.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 

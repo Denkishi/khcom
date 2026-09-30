@@ -2,6 +2,7 @@
 #define GUARD_BTL_EFFECT_H
 
 #include "battle_actor_types.h"
+#include "types.h"
 
 u8 BgFxIsActive(void);
 void BgFxSetPosition(s32 x, s32 y, s32 z);

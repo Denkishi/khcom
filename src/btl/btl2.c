@@ -1,7 +1,4 @@
-#include "task_descriptors.h"
-#include "battle_localized_data.h"
 #include "system_state.h"
-#include "map_api.h"
 #include "display.h"
 #include "m4a_song.h"
 #include "btl2.h"
@@ -11,6 +8,21 @@
 #include "fade.h"
 #include "songs.h"
 #include <stdlib.h>
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bg_animation_data.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_catalog_data.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "player_progression_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
     work->actor = actor;

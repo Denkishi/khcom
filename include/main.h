@@ -2,8 +2,6 @@
 #define GUARD_MAIN_H
 
 #include "types.h"
-#include "listpool.h"
-#include "key.h"
 #include "taskpool.h"
 
 struct Task;

@@ -1,7 +1,7 @@
 #ifndef GUARD_CARD_RELOAD_ASSETS_H
 #define GUARD_CARD_RELOAD_ASSETS_H
 
-#include "anim.h"
+#include "types.h"
 
 extern u8 gRiCardF0RedTiles[];
 

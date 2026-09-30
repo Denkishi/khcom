@@ -16,6 +16,13 @@
 #include <stddef.h>
 #include "gba/keys.h"
 #include "gba/oam.h"
+#include "engine.h"
+#include "gba/syscall.h"
+#include "m4a.h"
+#include "obj_api.h"
+#include "sprite.h"
+#include "types.h"
+#include "util.h"
 
 vu16 gMovieModeState;
 s32 gMovieId;

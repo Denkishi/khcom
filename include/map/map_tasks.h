@@ -2,6 +2,9 @@
 #define GUARD_MAP_TASKS_H
 
 #include "map.h"
+#include "fld_types.h"
+#include "map_types.h"
+#include "types.h"
 
 s32 MapEnm00CheckOffscreen(MapEnmWork* p);
 void MapEnm00Move(MapEnmWork* p, s32 b, s32 c);

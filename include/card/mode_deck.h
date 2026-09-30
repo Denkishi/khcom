@@ -2,6 +2,7 @@
 #define GUARD_MODE_DECK_H
 
 #include "mode.h"
+#include "types.h"
 
 typedef struct MenuWork {
     void* tiles;

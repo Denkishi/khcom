@@ -18,6 +18,22 @@
 #include "songs.h"
 #include "jiminy_data.h"
 #include "common_text.h"
+#include "anim.h"
+#include "card.h"
+#include "card_def_data.h"
+#include "card_types.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "map_api.h"
+#include "mode.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "text_types.h"
+#include "types.h"
+#include <stddef.h>
 
 #ifdef VERSION_EU
 #define LANGSTR(x) (((void**)(x))[gLanguage])

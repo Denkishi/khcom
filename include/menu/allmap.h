@@ -1,30 +1,13 @@
 #ifndef GUARD_ALLMAP_H
 #define GUARD_ALLMAP_H
 
-#include "registration_data.h"
-#include "poo_api.h"
 #include "obj.h"
-#include "field_state.h"
 #include "allmap_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "task.h"
-#include "save_api.h"
-#include "text.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
 #include "text_types.h"
 #include "taskpool.h"
-#include "main.h"
-#include "m4a.h"
 #include "anim.h"
-#include "mode.h"
-#include "key.h"
-#include "bos4_api.h"
-#include "mode_battle_data.h"
+#include "card_ui_types.h"
 
 #ifdef VERSION_EU
 #define ALLMAP_ROOMNAME_TEXT_SLOTS 36

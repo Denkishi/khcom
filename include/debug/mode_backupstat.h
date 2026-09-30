@@ -1,15 +1,7 @@
 #ifndef GUARD_MODE_BACKUPSTAT_H
 #define GUARD_MODE_BACKUPSTAT_H
 
-#include "mode_test_api.h"
-#include "save_api.h"
-#include "display.h"
 #include "types.h"
-#include "taskpool.h"
-#include "evt_types.h"
-#include "main.h"
-#include "mode.h"
-#include "key.h"
 
 typedef struct BackupStatEntry {
     const char* name;

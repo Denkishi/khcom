@@ -1,6 +1,6 @@
 #include "macros.h"
-#include "agb_sram.h"
 #include "gba/io_reg.h"
+#include "types.h"
 
 static const char sSramVersion[] = "SRAM_F_V103";
 

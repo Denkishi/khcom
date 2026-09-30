@@ -3,8 +3,6 @@
 
 #include "types.h"
 #include "anim.h"
-#include "battle_actor_types.h"
-#include "boss_background_types.h"
 
 typedef struct GaEntryDef {
     s32 hpScale;

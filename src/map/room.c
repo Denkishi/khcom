@@ -1,14 +1,16 @@
-#include "registration_data.h"
-#include "chara_api.h"
 #include "text.h"
 #include "monsgage.h"
 #include "room.h"
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
 #include "map_text_data.h"
-#include "map_text_assets.h"
 #include "jiminy_data.h"
 #include "common_text.h"
+#include "field_state.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 MapNameText* gRoomNames[28] = {
 #if defined(VERSION_US)

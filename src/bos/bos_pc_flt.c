@@ -1,5 +1,14 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const s16 sBosPcFltSine[256] = {
     0, 6, 12, 18, 25, 31, 37, 43, 49, 56, 62, 68, 74, 80, 86, 92,

@@ -1,6 +1,6 @@
 #include "gba/keys.h"
-#include "key.h"
 #include "gba/io_reg.h"
+#include "types.h"
 
 u16 gKeysHeld;
 u16 gKeysPressed;

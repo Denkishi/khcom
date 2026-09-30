@@ -1,7 +1,11 @@
 #include "registration_data.h"
-#include "mode_copyright2.h"
 #include "copyright_screens.h"
 #include "fade.h"
+#include "display.h"
+#include "game_state.h"
+#include "mode.h"
+#include "player_progression_types.h"
+#include "types.h"
 
 u16 gCopyright2Timer __attribute__((aligned(4)));
 

@@ -1,31 +1,13 @@
 #ifndef GUARD_CARD_H
 #define GUARD_CARD_H
 
-#include "mode_deck.h"
-#include "boss_card_data.h"
-#include "map_animation_data.h"
-#include "event_index_data.h"
-#include "card_def_data.h"
-#include "battle_localized_data.h"
-#include "msg_portrait_data.h"
 #include "card_help_data.h"
-#include "map_text_data.h"
-#include "card_localized_data.h"
 #include "card_message_data.h"
-#include "registration_data.h"
-#include "system_state.h"
 #include "anim.h"
-#include "card_label_data.h"
 #include "card_description_data.h"
-#include "map_card_data.h"
-#include "bg_animation_data.h"
 #include "msg_types.h"
-#include "field_state.h"
 #include "card_ui_types.h"
-#include "card_api.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
 #include "text_types.h"
 #include "obj.h"
 #include "taskpool.h"
@@ -33,9 +15,9 @@
 #include "battle_actor_types.h"
 #include "card_types.h"
 #include "fld_types.h"
-#include "game.h"
 #include "mode.h"
-#include "mode_battle_data.h"
+#include "event_background_types.h"
+#include "map_animation_types.h"
 
 typedef struct PrizeMapCardBackAnimStep {
     u8 sprite;

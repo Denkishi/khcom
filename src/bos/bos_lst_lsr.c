@@ -2,6 +2,17 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 #include <stdlib.h>
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bos7_api.h"
+#include "btl_collision.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskDesc gTaskDescBosLstLsr = {
     "task_bos_lst_lsr",

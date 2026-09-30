@@ -6,6 +6,24 @@
 #include <stdlib.h>
 #include "map_fixed_data.h"
 #include "world_types.h"
+#include "card_api.h"
+#include "display.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "game_state.h"
+#include "listpool.h"
+#include "m4a_catalog_data.h"
+#include "m4a_song.h"
+#include "map_api.h"
+#include "map_room_data.h"
+#include "map_room_types.h"
+#include "map_types.h"
+#include "mode.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);

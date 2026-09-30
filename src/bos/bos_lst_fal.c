@@ -1,6 +1,14 @@
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "bos7_api.h"
+#include "engine_math.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const LstFalAnim sBosLstFalAnims[8] = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
 

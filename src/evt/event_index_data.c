@@ -1,9 +1,11 @@
-#include "event_index_data.h"
-#include "event_index_assets.h"
 #include "events_000_073.h"
 #include "events_074_133.h"
 #include "events_134_196.h"
 #include "event_name_text.h"
+#include "event_background_types.h"
+#include "event_backgrounds.h"
+#include "msg_types.h"
+#include "types.h"
 
 #ifdef VERSION_US
 #include "event_022_data_text.inc"

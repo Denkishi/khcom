@@ -2,6 +2,7 @@
 #define GUARD_CARD_DECK_DATA_H
 
 #include "types.h"
+#include "card_types.h"
 
 extern const u16 gUnk_090354E8[21];
 extern const u16 gUnk_09035512[20];

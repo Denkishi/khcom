@@ -2,6 +2,18 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bos7_api.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 const EmyKind gBosLstCtrEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 

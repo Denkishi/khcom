@@ -1,4 +1,5 @@
 #include "formation_data.h"
+#include "formation_types.h"
 
 #ifdef VERSION_EU
 #define FORMATION_LIST_DROP 1

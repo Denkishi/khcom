@@ -2,10 +2,6 @@
 #define GUARD_CARD_DEF_ASSETS_H
 
 #include "types.h"
-#include "animation_resource_assets.h"
-#include "jiminy_data.h"
-#include "jiminy_text_assets.h"
-#include "mode_chkobj_assets.h"
 
 extern u8 gUnk_09047A2A[];
 extern u8 gUnk_09047256[];

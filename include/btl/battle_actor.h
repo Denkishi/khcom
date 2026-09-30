@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_ACTOR_H
 
 #include "battle_actor_types.h"
+#include "types.h"
 
 struct EmyKind;
 struct AnimDef;

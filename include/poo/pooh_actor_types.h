@@ -6,6 +6,9 @@
 #include "battle_actor_types.h"
 #include "obj.h"
 #include "taskpool.h"
+#include "listpool.h"
+
+struct PooNode;
 
 typedef struct PooPos {
     s32 x;

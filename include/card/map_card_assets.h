@@ -1,7 +1,6 @@
 #ifndef GUARD_MAP_CARD_ASSETS_H
 #define GUARD_MAP_CARD_ASSETS_H
 
-#include "anim.h"
 #include "types.h"
 
 extern u8 gCardRoom01Tiles[];

@@ -1,25 +1,13 @@
 #ifndef GUARD_BOS6_H
 #define GUARD_BOS6_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
 #include "battle_actor_types.h"
 #include "battle_bg_types.h"
 #include "evt_types.h"
-#include "card_api.h"
-#include "gba/syscall.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "taskpool.h"
 #include "anim.h"
+#include "obj.h"
 
 typedef struct PcAnimStep {
     u16 op;

@@ -1,22 +1,8 @@
 #ifndef GUARD_MODE_MOVIE_H
 #define GUARD_MODE_MOVIE_H
 
-#include "registration_data.h"
-#include "movie.h"
-#include "movie_text.h"
-#include "msg_api.h"
-#include "display.h"
-#include "pallet.h"
-#include "obj_api.h"
 #include "types.h"
-#include "mode.h"
-#include "gba/syscall.h"
-#include "malloc.h"
-#include "sprite.h"
-#include "main.h"
-#include "engine.h"
-#include "util.h"
-#include "m4a.h"
+#include "text_types.h"
 
 typedef struct MovieSub {
     s16 frame;

@@ -1,15 +1,11 @@
 #include "registration_data.h"
 #include "system_state.h"
 #include "mode.h"
-#include "bos7.h"
 #include "mode_staffroll.h"
-#include "bos7_api.h"
 #include "sprites_title.h"
 #include "sprites_staff_roll.h"
 #include "gba/io_reg.h"
-#include "staff_roll_script_data.h"
 #include "staff_roll_text_assets.h"
-#include "staff_roll_scene_data.h"
 #include "staff_roll_types.h"
 #include "gba/keys.h"
 #include "sroll_api.h"
@@ -18,6 +14,17 @@
 #include "fade.h"
 #include "songs.h"
 #include "staff_roll_script_text.h"
+#include "display.h"
+#include "evt_object_types.h"
+#include "game_state.h"
+#include "gba/syscall.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const s32 sStaffRollSoraScript0[46] = {
     6, 6, 0, 0, 0, 6,

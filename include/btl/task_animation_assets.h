@@ -1,9 +1,7 @@
 #ifndef GUARD_TASK_ANIMATION_ASSETS_H
 #define GUARD_TASK_ANIMATION_ASSETS_H
 
-#include "battle_localized_data.h"
-#include "anim.h"
-#include "mode_chkobj_assets.h"
+#include "types.h"
 
 extern u8 gUnk_08933A34[];
 extern u8 gUnk_08933D94[];

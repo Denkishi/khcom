@@ -18,6 +18,7 @@
 #include "gba/io_reg.h"
 #include "system_state.h"
 #include <stddef.h>
+#include "types.h"
 
 Mode* gCurrentMode;
 void (*gCurrentModeUpdate)(void);

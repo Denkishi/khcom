@@ -1,4 +1,3 @@
-#include "save_api.h"
 #include "agb_sram.h"
 #include "gba/syscall.h"
 #include "save.h"
@@ -6,6 +5,9 @@
 #include "gba/keys.h"
 #include "sram_error_screen.h"
 #include "malloc.h"
+#include "save_types.h"
+#include "system_state.h"
+#include "types.h"
 
 static u16 gRawKeys;
 static u16 gRawKeysPrev;

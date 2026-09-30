@@ -2,6 +2,7 @@
 #define GUARD_CARD_DECK_H
 
 #include "card_types.h"
+#include "types.h"
 
 u8 GetActiveDeckIndex(void);
 u16 CountCardsById(u16 cardId);

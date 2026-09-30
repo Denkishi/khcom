@@ -1,6 +1,13 @@
-#include "task_descriptors.h"
 #include "pc.h"
-#include "pc_api.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "engine_math.h"
+#include "hum.h"
+#include "hum_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void task_pc_acddmg_0(PcAcdDmgWork* work, BtlObj* obj) {
     work->actor = obj;

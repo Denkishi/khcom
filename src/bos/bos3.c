@@ -1,7 +1,15 @@
-#include "registration_data.h"
 #include "macros.h"
 #include "bos3.h"
 #include "sprites_btl.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "game.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "save_types.h"
+#include "taskpool.h"
+#include "types.h"
 
 u16 gUnk_0203C3BC EWRAM_COMMON(4);
 u16 gUnk_0203C3C0 EWRAM_COMMON(4);

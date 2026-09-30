@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "map_types.h"
+#include "fld_types.h"
 
 struct EventKey;
 struct MapCardAttributes;

@@ -2,6 +2,7 @@
 #define GUARD_SMN_API_H
 
 #include "battle_actor_types.h"
+#include "types.h"
 
 struct FrdDonaldWork;
 

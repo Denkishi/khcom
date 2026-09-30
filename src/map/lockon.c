@@ -1,12 +1,22 @@
-#include "registration_data.h"
-#include "map_api.h"
-#include "mode.h"
-#include "m4a_song.h"
 #include "mode_test.h"
 #include "mode_test_api.h"
 #include "sprites_mode_test.h"
 #include "debug_font.h"
 #include "malloc.h"
+#include "anim.h"
+#include "card_def_data.h"
+#include "card_types.h"
+#include "display.h"
+#include "engine_math.h"
+#include "field_state.h"
+#include "fld_types.h"
+#include "gba/syscall.h"
+#include "listpool.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 u8* gDebugTextTileDest;
 u8 gDebugTextPaletteBank;

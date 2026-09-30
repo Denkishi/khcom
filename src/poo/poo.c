@@ -19,6 +19,30 @@
 #include "mode_allmap_api.h"
 #include "poo_background_data.h"
 #include <string.h>
+#include "anim.h"
+#include "battle_actor_types.h"
+#include "bos4_api.h"
+#include "btl_collision.h"
+#include "display.h"
+#include "engine_math.h"
+#include "field_state.h"
+#include "game_state.h"
+#include "key.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "mode_battle_data.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "player_progression_types.h"
+#include "poo_api.h"
+#include "poo_data.h"
+#include "pooh_actor_types.h"
+#include "prize_types.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);

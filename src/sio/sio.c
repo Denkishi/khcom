@@ -1,10 +1,11 @@
 #include "macros.h"
-#include "display.h"
 #include "intr.h"
-#include "sio_api.h"
 #include "sio.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include "gba/syscall.h"
+#include "sio_types.h"
+#include "types.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);

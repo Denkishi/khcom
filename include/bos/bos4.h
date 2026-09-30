@@ -1,34 +1,15 @@
 #ifndef GUARD_BOS4_H
 #define GUARD_BOS4_H
 
-#include "registration_data.h"
 #include "battle_actor_types.h"
 #include "boss_boogie.h"
-#include "map_text_data.h"
 #include "battle_bg_types.h"
 #include "map_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "msg_api.h"
-#include "save_api.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "anim.h"
-#include "mode.h"
-#include "key.h"
 #include "taskpool.h"
 #include "bos4_api.h"
-#include "map_runtime.h"
-#include "poo_api.h"
+#include "obj.h"
 
 typedef struct BoogieExplosiondiceWork {
     u32 state;

@@ -1,29 +1,12 @@
 #ifndef GUARD_BOS2_H
 #define GUARD_BOS2_H
 
-#include "registration_data.h"
 #include "battle_actor_types.h"
-#include "background_actor_assets.h"
 #include "boss_jafar_types.h"
-#include "card_api.h"
-#include "chara_api.h"
-#include "pallet.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "game.h"
-#include "btl_api.h"
-#include "acgtrans.h"
-#include "mode_battle_data.h"
+#include "obj.h"
 
 extern void* gBosJfMajinFrameMaps[48];
 extern const u16* gUnk_09EF28CC;

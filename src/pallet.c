@@ -4,9 +4,10 @@
 #include "gba/syscall.h"
 #include "malloc.h"
 #include "types.h"
-#include "engine.h"
 #include "system_state.h"
 #include "gba/io_reg.h"
+#include "display.h"
+#include "engine_math.h"
 
 static const s32 sBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,

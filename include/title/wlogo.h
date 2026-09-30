@@ -1,22 +1,10 @@
 #ifndef GUARD_WLOGO_H
 #define GUARD_WLOGO_H
 
-#include "registration_data.h"
-#include "animation_resource_assets.h"
 #include "obj.h"
-#include "chara_api.h"
-#include "pallet.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
 #include "taskpool.h"
-#include "intr.h"
-#include "main.h"
 #include "anim.h"
-#include "gba/io_reg.h"
 
 typedef struct WlogoWonEntry {
     s32 x;

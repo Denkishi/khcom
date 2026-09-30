@@ -2,6 +2,7 @@
 #define GUARD_CARD_MESSAGE_DATA_H
 
 #include "text_types.h"
+#include "types.h"
 
 #ifdef VERSION_US
 typedef u16 CardMessageText;

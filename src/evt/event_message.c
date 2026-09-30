@@ -2,7 +2,6 @@
 #include "registration_data.h"
 #include "eventselect_api.h"
 #include "system_state.h"
-#include "map_api.h"
 #include "msg_api.h"
 #include "intr.h"
 #include "m4a_song.h"
@@ -30,6 +29,26 @@
 #include "common_text.h"
 #include <stdlib.h>
 #include <string.h>
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "engine_math.h"
+#include "event_background_types.h"
+#include "event_chara_types.h"
+#include "event_index_data.h"
+#include "evt_data.h"
+#include "evt_object_types.h"
+#include "evt_types.h"
+#include "key.h"
+#include "listpool.h"
+#include "mode_battle_data.h"
+#include "mode_chkobj_assets.h"
+#include "msg_types.h"
+#include "obj.h"
+#include "poo_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 #ifdef VERSION_EU
 #define LANGSTR(x) (((void**)(x))[gLanguage])

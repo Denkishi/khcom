@@ -5,6 +5,7 @@
 #include "taskpool.h"
 #include "battle_bounds.h"
 #include "battle_actor_types.h"
+#include "listpool.h"
 
 enum BtlFlag {
     BTL_FLAG_ENEMY_FRAME_CHANGED = 0x1,

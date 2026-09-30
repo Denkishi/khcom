@@ -3,6 +3,8 @@
 
 #include "map_types.h"
 #include "text_types.h"
+#include "fld_types.h"
+#include "types.h"
 
 typedef struct MapFloorDef {
     u8 entryRoom;

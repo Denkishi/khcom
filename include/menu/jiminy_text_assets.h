@@ -1,11 +1,6 @@
 #ifndef GUARD_JIMINY_TEXT_ASSETS_H
 #define GUARD_JIMINY_TEXT_ASSETS_H
 
-#include "jiminy_types.h"
-#include "jiminy_inline_text_data.h"
-#include "jiminy_text.h"
-#include "localized_names.h"
-
 #ifdef VERSION_EU
 
 extern const JiminyLocalizedName gUnkEu_088945CC;

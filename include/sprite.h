@@ -2,8 +2,9 @@
 #define GUARD_SPRITE_H
 
 #include "types.h"
-#include "taskpool.h"
 #include "engine.h"
+#include "listpool.h"
+#include "obj.h"
 
 typedef struct ObjListPool {
     ListPool head;

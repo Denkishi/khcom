@@ -18,6 +18,8 @@
 #include "sio_api.h"
 #include "save_api.h"
 #include <stddef.h>
+#include "engine_math.h"
+#include "types.h"
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
 

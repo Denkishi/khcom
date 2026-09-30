@@ -24,6 +24,17 @@
 #include "mode_test_api.h"
 #include "malloc.h"
 #include <stdlib.h>
+#include "anim.h"
+#include "card_api.h"
+#include "chkobj.h"
+#include "display.h"
+#include "engine_math.h"
+#include "key.h"
+#include "mode.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 ChkObjWork* gChkObjWork;
 

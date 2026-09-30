@@ -6,6 +6,24 @@
 #include "songs.h"
 #include <stdlib.h>
 #include "bos7.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_bg_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "display.h"
+#include "engine_math.h"
+#include "gba/syscall.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 

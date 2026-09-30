@@ -1,9 +1,9 @@
-#include "actor_localized_data.h"
 #include "battle_localized_assets.h"
 #include "sprites_hum.h"
 #include "sprites_emy.h"
 #include "jiminy_journal.h"
 #include "sprites_language_select.h"
+#include "anim.h"
 
 #ifdef VERSION_US
 void* gUnk_09EE25D0[5] = {

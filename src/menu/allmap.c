@@ -3,7 +3,6 @@
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"
-#include "task.h"
 #include "obj_api.h"
 #include "allmap.h"
 #include "gba/keys.h"
@@ -18,6 +17,21 @@
 #include "map_runtime.h"
 #include "songs.h"
 #include <string.h>
+#include "allmap_types.h"
+#include "anim.h"
+#include "card_ui_types.h"
+#include "display.h"
+#include "field_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "map_types.h"
+#include "mode_battle_data.h"
+#include "obj.h"
+#include "poo_api.h"
+#include "taskpool.h"
+#include "text.h"
+#include "types.h"
+#include <stddef.h>
 
 u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);

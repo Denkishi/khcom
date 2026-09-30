@@ -1,29 +1,12 @@
 #ifndef GUARD_MODE_EVENTSELECT_H
 #define GUARD_MODE_EVENTSELECT_H
 
-#include "event_index_data.h"
-#include "card_localized_data.h"
-#include "registration_data.h"
-#include "card_api.h"
-#include "msg_api.h"
-#include "eventselect_api.h"
-#include "text.h"
-#include "fade.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "key.h"
 #include "taskpool.h"
-#include "gba/syscall.h"
-#include "m4a.h"
 #include "evt_types.h"
 #include "event_chara_types.h"
-#include "game.h"
-#include "card.h"
-#include "mode.h"
 #include "anim.h"
+#include "msg_types.h"
 
 typedef struct EventSoundMix {
     s16 pan;

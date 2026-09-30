@@ -2,7 +2,6 @@
 #define GUARD_JIMINY_DATA_H
 
 #include "jiminy_types.h"
-#include "jiminy_inline_text_data.h"
 
 #if defined(VERSION_US)
 

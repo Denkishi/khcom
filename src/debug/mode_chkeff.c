@@ -6,6 +6,13 @@
 #include "system_state.h"
 #include "malloc.h"
 #include "fade.h"
+#include "bg_animation_types.h"
+#include "card_api.h"
+#include "key.h"
+#include "mode.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 extern BgAnimationDef* gChkEffBgAnimations[83];
 

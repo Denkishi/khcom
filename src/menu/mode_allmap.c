@@ -9,6 +9,24 @@
 #include "malloc.h"
 #include "fade.h"
 #include <string.h>
+#include "allmap_types.h"
+#include "anim.h"
+#include "display.h"
+#include "game_state.h"
+#include "gba/syscall.h"
+#include "intr.h"
+#include "m4a_catalog_data.h"
+#include "m4a_song.h"
+#include "map_api.h"
+#include "map_runtime.h"
+#include "map_types.h"
+#include "mode.h"
+#include "mode_battle_data.h"
+#include "obj_api.h"
+#include "poo_api.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 #if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {

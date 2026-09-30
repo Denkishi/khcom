@@ -17,6 +17,29 @@
 #include <stdlib.h>
 #include "enemy_tile_counts.h"
 #include <string.h>
+#include "anim.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "card_battle.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "gba/syscall.h"
+#include "listpool.h"
+#include "m4a.h"
+#include "map_runtime.h"
+#include "mode.h"
+#include "mode_chkbtl_api.h"
+#include "obj.h"
+#include "player_progression_types.h"
+#include "save_api.h"
+#include "system_state.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);

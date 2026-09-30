@@ -1,7 +1,6 @@
 #ifndef GUARD_M4A_H
 #define GUARD_M4A_H
 
-#include "m4a_song.h"
 #include "types.h"
 #include "gba/syscall.h"
 

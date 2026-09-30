@@ -1,6 +1,14 @@
 #include "sroll.h"
 #include "evt.h"
 #include "fade.h"
+#include "anim.h"
+#include "evt_object_types.h"
+#include "evt_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
 
 static s32 Square(s32 x) {
     return x * x;

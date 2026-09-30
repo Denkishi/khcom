@@ -1,6 +1,15 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "fade.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "evt_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskDesc gTaskDescBosPcAcd = {
     "task_bos_pc_acd",

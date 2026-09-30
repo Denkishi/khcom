@@ -1,8 +1,13 @@
 #include "registration_data.h"
-#include "mode_copyright1.h"
 #include "copyright_screens.h"
 #include "fade.h"
 #include "songs.h"
+#include "display.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "save_api.h"
+#include "save_types.h"
+#include "types.h"
 
 #ifndef VERSION_JP
 u8 gCopyrightExtraScreen __attribute__((aligned(4)));

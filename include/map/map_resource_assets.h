@@ -2,6 +2,7 @@
 #define GUARD_MAP_RESOURCE_ASSETS_H
 
 #include "anim.h"
+#include "types.h"
 
 extern const u8 gUnk_09858320[1536];
 extern const u8 gUnk_09858B3C[6144];

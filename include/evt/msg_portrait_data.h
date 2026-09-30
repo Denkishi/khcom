@@ -2,6 +2,7 @@
 #define GUARD_MSG_PORTRAIT_DATA_H
 
 #include "anim.h"
+#include "types.h"
 
 typedef struct MsgFaceAnim {
     void* tiles;

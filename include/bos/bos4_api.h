@@ -2,7 +2,6 @@
 #define GUARD_BOS4_API_H
 
 #include "types.h"
-#include "map_runtime.h"
 
 typedef struct BosMapanimeFrame {
     u16 duration;

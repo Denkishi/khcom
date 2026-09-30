@@ -1,4 +1,3 @@
-#include "continue_ui.h"
 #include "system_state.h"
 #include "anim.h"
 #include "types.h"
@@ -16,6 +15,9 @@
 #include "gba/io_reg.h"
 #include "songs.h"
 #include "battle.h"
+#include "continue_types.h"
+#include "obj.h"
+#include "taskpool.h"
 
 extern u8 gUnk_096145D8[];
 extern u8 gUnk_09614618[];

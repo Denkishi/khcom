@@ -1,7 +1,6 @@
 #include "task_descriptors.h"
 #include "display.h"
 #include "emy.h"
-#include "task_animation_assets.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"
 #include "system_state.h"
@@ -11,6 +10,23 @@
 #include "player_progression.h"
 #include "actor_localized_data.h"
 #include "emy_tasks.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "enemy_types.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "mode_chkobj_assets.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 static const AnimDef sEmy00CommonAnimDefs[3] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },

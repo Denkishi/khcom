@@ -1,20 +1,8 @@
 #ifndef GUARD_MODE_CHKBTL_H
 #define GUARD_MODE_CHKBTL_H
 
-#include "mode_deck.h"
-#include "task_descriptors.h"
-#include "system_state.h"
-#include "card_api.h"
-#include "mode_chkbtl_api.h"
 #include "types.h"
-#include "battle_work.h"
-#include "game_state.h"
 #include "taskpool.h"
-#include "main.h"
-#include "mode.h"
-#include "mode_battle_data.h"
-#include "engine.h"
-#include "key.h"
 #include "battle_debug_types.h"
 
 typedef struct ChkBtlEntry {

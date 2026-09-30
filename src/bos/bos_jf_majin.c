@@ -6,6 +6,24 @@
 #include "btl_api.h"
 #include "fade.h"
 #include "songs.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "mode_battle_data.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "pallet.h"
+#include "registration_data.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void* gBosJfMajinMapBlockTable[4] EWRAM_COMMON(16);
 void* gBosJfMajinMapBlocks EWRAM_COMMON(4);

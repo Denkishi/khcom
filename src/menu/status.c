@@ -14,6 +14,24 @@
 #include "card_deck.h"
 #include "songs.h"
 #include "mode_status_api.h"
+#include "card_api.h"
+#include "card_def_data.h"
+#include "card_label_data.h"
+#include "card_types.h"
+#include "card_ui_types.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "player_progression_types.h"
+#include "poo_api.h"
+#include "taskpool.h"
+#include "text.h"
+#include "types.h"
+#include <stddef.h>
 
 TaskDesc gTaskDescStatus = {
     "task_status",

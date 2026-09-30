@@ -1,36 +1,13 @@
 #ifndef GUARD_MODE_TEST_H
 #define GUARD_MODE_TEST_H
 
-#include "event_index_data.h"
 #include "mode.h"
 #include "taskpool.h"
-#include "card_def_data.h"
-#include "registration_data.h"
-#include "system_state.h"
-#include "msg_types.h"
-#include "field_state.h"
-#include "continue_types.h"
 #include "fld_types.h"
 #include "evt_types.h"
-#include "card_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "key.h"
 #include "anim.h"
-#include "mode_battle_data.h"
-#include "gba/syscall.h"
-#include "m4a.h"
-#include "bos4_api.h"
+#include "battle_actor_types.h"
 
 typedef struct DebugTextLine {
     u16 glyphs[61];

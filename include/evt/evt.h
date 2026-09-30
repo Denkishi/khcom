@@ -1,16 +1,12 @@
 #ifndef GUARD_EVT_H
 #define GUARD_EVT_H
 
-#include "task_descriptors.h"
 #include "evt_object_types.h"
 #include "obj.h"
-#include "obj_api.h"
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
 #include "evt_types.h"
-#include "evt_data.h"
-#include "game.h"
 
 typedef struct EvtObjParam {
     EvtObjRes* res;

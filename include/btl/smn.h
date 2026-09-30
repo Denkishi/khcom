@@ -1,21 +1,10 @@
 #ifndef GUARD_SMN_H
 #define GUARD_SMN_H
 
-#include "task_descriptors.h"
-#include "registration_data.h"
-#include "card_battle.h"
-#include "display.h"
-#include "m4a_song.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
 #include "types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "battle_work.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "battle_actor_types.h"
 typedef struct SmnArgs {
     u16 variant;
     u8 mainSide;

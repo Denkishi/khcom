@@ -1,6 +1,12 @@
 #include "sroll.h"
 #include "sprites_staff_roll.h"
 #include "gba/io_reg.h"
+#include "anim.h"
+#include "display.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 s32 func_08114748(s32 x) {
     return x * x;

@@ -9,6 +9,28 @@
 #include "fade.h"
 #include "songs.h"
 #include <string.h>
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_bg_types.h"
+#include "battle_work.h"
+#include "bos4_api.h"
+#include "boss_boogie.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "display.h"
+#include "engine_math.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "map_types.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "registration_data.h"
+#include "task_descriptors.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 void task_bos_boogie_saku_2(BoogieSakuWork* work);
 u8 task_bos_ursula_1(UrsulaWork* work);

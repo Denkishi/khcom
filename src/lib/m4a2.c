@@ -1,10 +1,9 @@
-#include "m4a_song.h"
 #include "m4a.h"
 #include "macros.h"
-#define M4A_CATALOG_NO_PLAYER_EXTERNS
-#include "m4a_catalog_data.h"
 #include "gba/io_reg.h"
 #include <stddef.h>
+#include "gba/syscall.h"
+#include "types.h"
 
 char SoundMainRAM_Buffer[0x400];
 

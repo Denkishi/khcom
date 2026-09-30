@@ -1,15 +1,8 @@
 #ifndef GUARD_MODE_CHKEFF_H
 #define GUARD_MODE_CHKEFF_H
 
-#include "registration_data.h"
-#include "bg_animation_data.h"
-#include "card_api.h"
-#include "display.h"
 #include "types.h"
 #include "taskpool.h"
-#include "main.h"
-#include "mode.h"
-#include "key.h"
 
 typedef struct ChkEffWork {
     TaskPool pool;

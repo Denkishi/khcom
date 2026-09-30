@@ -1,8 +1,7 @@
 #ifndef GUARD_BOS_H
 #define GUARD_BOS_H
 
-#include "types.h"
-#include "game.h"
+#include "battle_actor_types.h"
 
 typedef struct BosShadowWork {
     void* tiles;

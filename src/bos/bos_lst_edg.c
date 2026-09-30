@@ -1,6 +1,15 @@
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskDesc gTaskDescBosLstEdg = {
     "task_bos_lst_edg",

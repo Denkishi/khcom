@@ -1,26 +1,9 @@
 #ifndef GUARD_MODE_MS_H
 #define GUARD_MODE_MS_H
 
-#include "card_def_data.h"
-#include "registration_data.h"
-#include "card_description_data.h"
-#include "obj.h"
-#include "card_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "text.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "game_state.h"
-#include "text_types.h"
-#include "key.h"
-#include "taskpool.h"
 #include "fld_types.h"
 #include "anim.h"
-#include "mode.h"
-#include "m4a.h"
 
 typedef struct MooglePackCardDef {
     u16 cardId;

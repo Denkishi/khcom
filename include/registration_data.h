@@ -1,9 +1,9 @@
 #ifndef GUARD_REGISTRATION_DATA_H
 #define GUARD_REGISTRATION_DATA_H
 
-#include "task_descriptors.h"
 #include "taskpool.h"
 #include "mode.h"
+#include "types.h"
 
 extern Mode gModeJiminy;
 extern TaskDesc gTaskDescMonsgage;

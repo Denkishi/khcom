@@ -2,11 +2,13 @@
 #include "system_state.h"
 #include "map_api.h"
 #include "display.h"
-#include "mode_status.h"
 #include "sprites_status.h"
 #include "game_state.h"
 #include "fade.h"
 #include "mode_copyright2.h"
+#include "mode.h"
+#include "taskpool.h"
+#include "types.h"
 
 TaskPool gStatusTaskPool __attribute__((aligned(8)));
 Task* gStatusBarTask;

@@ -1,11 +1,7 @@
 #ifndef GUARD_MODE_COPYRIGHT2_H
 #define GUARD_MODE_COPYRIGHT2_H
 
-#include "registration_data.h"
 #include "types.h"
-#include "game_state.h"
-#include "mode.h"
-#include "engine.h"
 
 void mode_copyright2_0(s32 arg);
 void mode_copyright2_1(void);

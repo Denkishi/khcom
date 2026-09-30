@@ -4,6 +4,12 @@
 #include "gba/io_reg.h"
 #include "btl_api.h"
 #include "sroll_api.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "display.h"
+#include "engine_math.h"
+#include "taskpool.h"
+#include "types.h"
 
 static const u16 sBosLstFldVofsTable[832] = {
     0, 0, 3, 6, 6, 12, 9, 18, 12, 25, 15, 31, 18, 37, 21, 43,

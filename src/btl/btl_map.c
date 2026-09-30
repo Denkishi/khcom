@@ -1,7 +1,13 @@
-#include "task_descriptors.h"
 #include "btl.h"
 #include "battle_backgrounds.h"
 #include "btl_api.h"
+#include "battle_work.h"
+#include "display.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 u8 gBtlMapShakeActive;
 u16 gBtlMapShakeStep;

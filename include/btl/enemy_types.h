@@ -4,7 +4,7 @@
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "battle_actor.h"
+#include "battle_actor_types.h"
 
 enum EmyDefFlag {
     EMY_DEF_FLAG_NO_SHADOW = 0x1,

@@ -2,8 +2,8 @@
 #define GUARD_BOS3_H
 
 #include "types.h"
-#include "game.h"
 #include "save_types.h"
+#include "battle_actor_types.h"
 
 typedef struct JfShadowWork {
     void* tiles;

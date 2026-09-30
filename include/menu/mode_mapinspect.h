@@ -1,26 +1,8 @@
 #ifndef GUARD_MODE_MAPINSPECT_H
 #define GUARD_MODE_MAPINSPECT_H
 
-#include "registration_data.h"
-#include "card_description_data.h"
-#include "map_card_data.h"
-#include "card_ui_types.h"
-#include "card_api.h"
-#include "key.h"
-#include "mode.h"
-#include "m4a.h"
-#include "obj.h"
-#include "map_api.h"
-#include "game_state.h"
-#include "text.h"
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "text_types.h"
 #include "ms_types.h"
-#include "main.h"
-#include "anim.h"
 extern u16 gUnk_0815C136[];
 extern u8 gCard00Palette[];
 

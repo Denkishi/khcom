@@ -3,6 +3,7 @@
 
 #include "mode.h"
 #include "taskpool.h"
+#include "types.h"
 
 #ifdef VERSION_EU
 

@@ -1,4 +1,3 @@
-#include "obj_api.h"
 #include "display.h"
 #include "gba/syscall.h"
 #include "listpool.h"
@@ -7,6 +6,9 @@
 #include "gba/io_reg.h"
 #include <stddef.h>
 #include "gba/oam.h"
+#include "engine.h"
+#include "obj.h"
+#include "types.h"
 
 static const u8 sSpriteHeapName[8] = "SPRITE";
 

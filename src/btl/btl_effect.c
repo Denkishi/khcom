@@ -1,12 +1,20 @@
 #include "display.h"
 #include "battle.h"
-#include "btl_effect.h"
-#include "bg_animation_data.h"
 #include "battle_bg_animations.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
 #include <stdlib.h>
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "bg_animation_types.h"
+#include "btl_collision.h"
+#include "engine_math.h"
+#include "listpool.h"
+#include "m4a_song.h"
+#include "types.h"
+#include <stddef.h>
 
 static const BgAnimationChunk sBgAnimationChunks[108] = {
     { gUnk_08CEFCE4, 29696, 0 },

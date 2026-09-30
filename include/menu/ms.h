@@ -1,13 +1,8 @@
 #ifndef GUARD_MS_H
 #define GUARD_MS_H
 
-#include "anim.h"
 #include "ms_types.h"
-#include "ms_api.h"
-#include "obj_api.h"
 #include "types.h"
-#include "engine_math.h"
-#include "engine.h"
 
 typedef struct MsShopHosiWork {
     s32 x;

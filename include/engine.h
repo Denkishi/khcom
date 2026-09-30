@@ -1,14 +1,10 @@
 #ifndef GUARD_ENGINE_H
 #define GUARD_ENGINE_H
 
-#include "obj_api.h"
-#include "display.h"
 #include "types.h"
-#include "bg_animation_types.h"
-#include "engine_math.h"
-#include "listpool.h"
-#include "anim.h"
 #include "obj.h"
+
+struct SpriteWork;
 
 typedef struct ObjTileListEntry {
     u16 attr0;

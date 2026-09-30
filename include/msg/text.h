@@ -2,6 +2,7 @@
 #define GUARD_TEXT_H
 
 #include "text_types.h"
+#include "types.h"
 
 void InitTextSlots(TextSlot* slots, s32 count);
 void FreeTextSlots(TextSlot* slots, s32 count);

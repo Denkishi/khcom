@@ -1,33 +1,12 @@
 #ifndef GUARD_BOS5_H
 #define GUARD_BOS5_H
 
-#include "room_data.h"
-#include "registration_data.h"
 #include "battle_actor_types.h"
-#include "bg_animation_data.h"
 #include "obj.h"
 #include "ga_types.h"
-#include "card_api.h"
-#include "map_api.h"
-#include "msg_api.h"
-#include "m4a_song.h"
-#include "text.h"
-#include "fade.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
 #include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "text_types.h"
-#include "key.h"
 #include "taskpool.h"
 #include "anim.h"
-#include "bos4_api.h"
-#include "poo_api.h"
 
 typedef struct MdFrameSprite {
     u16 x;

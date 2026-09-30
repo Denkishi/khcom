@@ -14,7 +14,10 @@
 #include "malloc.h"
 #include "world_types.h"
 #include "gba/keys.h"
-#include "bos4.h"
+#include "map_types.h"
+#include "mode.h"
+#include "player_progression_types.h"
+#include "types.h"
 
 static const char sDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
 

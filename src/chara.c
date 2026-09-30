@@ -15,6 +15,21 @@
 #include "mode_test_api.h"
 #include "songs.h"
 #include "mode_sio_api.h"
+#include "battle_actor.h"
+#include "battle_work.h"
+#include "btl_effect.h"
+#include "card_api.h"
+#include "card_types.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "gba/syscall.h"
+#include "key.h"
+#include "m4a_song.h"
+#include "mode.h"
+#include "player_progression_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
 
 u32 gDebugLogC[100] EWRAM_COMMON(16);
 u32 gVBlankTimerElapsed EWRAM_COMMON(4);

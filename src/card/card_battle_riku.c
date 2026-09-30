@@ -561,8 +561,7 @@ static void cardbattle_0(CardBattleWork* w) {
     w->revCountShown[3] = 0;
     w->stockValue = 0;
     w->unk_C4[3] = 0;
-    // @bug? Reads past the end of the array.
-    w->x = *(u16*)&sRikuCardSwingAngles[4];
+    w->x = sRikuStockValueX[0];
 
     for (i = 0; i <= 2; i++) {
         w->playedCards[i] = 0;
@@ -2128,7 +2127,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
 #ifdef VERSION_EU
     CardDisplayWork* previous[3];
 #endif
-    UnkStruct_080ABA80 arr = *(UnkStruct_080ABA80*)&sRikuCardSwingAngles[6];
+    UnkStruct_080ABA80 arr = sUnk_090352FC;
     u8 flag;
     u8 skip;
     u8 i;

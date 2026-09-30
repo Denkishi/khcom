@@ -38,7 +38,7 @@ s8 gSioDebugMode EWRAM_COMMON(4);
 
 u8 gSioBattleFileLoaded EWRAM_COMMON(4);
 
-static void** sSioBattleWork;
+static SioBattleWork* sSioBattleWork;
 
 void task_print_0(void) {
     InitPrintLayer(0);
@@ -66,58 +66,58 @@ void mode_sio_battle_0(s32 a) {
     LoadBgPalette(1, gUnk_096FBA04, 64);
     LoadBgMap(1, gUnk_096F5464, 0x800);
     EnableBg(1);
-    ((SioBattleWork*)sSioBattleWork)->state = 0;
-    ((SioBattleWork*)sSioBattleWork)->slideTimer = 0;
-    ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
-    ((SioBattleWork*)sSioBattleWork)->x = -0x8000;
-    ((SioBattleWork*)sSioBattleWork)->y = -0x800;
-    ((SioBattleWork*)sSioBattleWork)->y2 = 0xA000;
-    ((SioBattleWork*)sSioBattleWork)->tiles = LoadObjTiles(gUnk_0962AD62, 0x240);
-    ((SioBattleWork*)sSioBattleWork)->palette = LoadObjPalette(gUnk_096FBA44, 32);
+    sSioBattleWork->state = 0;
+    sSioBattleWork->slideTimer = 0;
+    sSioBattleWork->stateFrames = 0;
+    sSioBattleWork->x = -0x8000;
+    sSioBattleWork->y = -0x800;
+    sSioBattleWork->y2 = 0xA000;
+    sSioBattleWork->tiles = LoadObjTiles(gUnk_0962AD62, 0x240);
+    sSioBattleWork->palette = LoadObjPalette(gUnk_096FBA44, 32);
 
     for (i = 0; i < 3; i++) {
-        ((SioBattleWork*)sSioBattleWork)->gfx2[i] = gUnk_09EF3884[i];
+        sSioBattleWork->gfx2[i] = gUnk_09EF3884[i];
     }
 
 #ifdef VERSION_EU
-    ((SioBattleWork*)sSioBattleWork)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    ((SioBattleWork*)sSioBattleWork)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    sSioBattleWork->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
+    sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 
     switch (gLanguage) {
     case 0:
-        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EDAAA, 0x600);
-        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EE0E2, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EDAAA, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EE0E2, 0x600);
         break;
     case 3:
-        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
-        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
         break;
     case 1:
-        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
-        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
         break;
     case 4:
-        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
-        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
         break;
     case 2:
     default:
-        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
-        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
         break;
     }
 #else
-    ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
-    ((SioBattleWork*)sSioBattleWork)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
-    ((SioBattleWork*)sSioBattleWork)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    sSioBattleWork->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
+    sSioBattleWork->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
+    sSioBattleWork->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
+    sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 #endif
-    ((SioBattleWork*)sSioBattleWork)->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
-    ((SioBattleWork*)sSioBattleWork)->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
-    AnimInit(&((SioBattleWork*)sSioBattleWork)->anim, gUnk_09EF38B4, gUnk_09EF3894);
-    AnimStart(&((SioBattleWork*)sSioBattleWork)->anim, 1, 1);
-    gfx = AnimGetGfx(&((SioBattleWork*)sSioBattleWork)->anim);
-    w = (SioBattleWork*)sSioBattleWork;
+    sSioBattleWork->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
+    sSioBattleWork->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
+    AnimInit(&sSioBattleWork->anim, gUnk_09EF38B4, gUnk_09EF3894);
+    AnimStart(&sSioBattleWork->anim, 1, 1);
+    gfx = AnimGetGfx(&sSioBattleWork->anim);
+    w = sSioBattleWork;
     w->gfx = gfx;
     w->modeArg = a;
 
@@ -138,107 +138,107 @@ void mode_sio_battle_0(s32 a) {
         }
 
 #ifdef VERSION_EU
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
 
         switch (gLanguage) {
         case 0:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
         case 3:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
         case 1:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
         case 4:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
         case 2:
         default:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
             break;
         }
 #else
-        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
         w->cursor = 0;
 
         switch (gLanguage) {
         case 0:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
         case 3:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
         case 1:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
         case 4:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
         case 2:
         default:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
             break;
         }
 #else
         w->cursor = 0;
-        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
 #endif
         break;
     case 3:
         w->cursor = 0;
 #ifdef VERSION_EU
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
 
         switch (gLanguage) {
         case 0:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
         case 3:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
         case 1:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
         case 4:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
         case 2:
         default:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
             break;
         }
 #else
-        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
 #endif
         break;
@@ -251,58 +251,58 @@ void mode_sio_battle_0(s32 a) {
 }
 
 void mode_sio_battle_1(void) {
-    switch ((s8)((SioBattleWork*)sSioBattleWork)->state) {
+    switch ((s8)sSioBattleWork->state) {
     case 0:
-        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
-            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
+        if ((s16)sSioBattleWork->stateFrames == 0) {
+            sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y, 0, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y2, 0x9800, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
+        ApproachValue(&sSioBattleWork->y, 0, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->y2, 0x9800, sSioBattleWork->slideTimer);
+        sSioBattleWork->slideTimer--;
 
-        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
-            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
+        if ((s16)sSioBattleWork->slideTimer > 0) {
+            sSioBattleWork->stateFrames++;
         } else {
-            ((SioBattleWork*)sSioBattleWork)->state = 1;
-            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
+            sSioBattleWork->state = 1;
+            sSioBattleWork->stateFrames = 0;
         }
         break;
     case 1:
-        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
-            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
+        if ((s16)sSioBattleWork->stateFrames == 0) {
+            sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->x, 0, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
+        ApproachValue(&sSioBattleWork->x, 0, sSioBattleWork->slideTimer);
+        sSioBattleWork->slideTimer--;
 
-        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
-            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
+        if ((s16)sSioBattleWork->slideTimer > 0) {
+            sSioBattleWork->stateFrames++;
         } else {
-            ((SioBattleWork*)sSioBattleWork)->state = 5;
-            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
+            sSioBattleWork->state = 5;
+            sSioBattleWork->stateFrames = 0;
         }
         break;
     case 5:
-        ((SioBattleWork*)sSioBattleWork)->state = 6;
+        sSioBattleWork->state = 6;
         break;
     case 6:
         if (gSioBattleFileLoaded == 1) {
             if (GetKeysPressed() & DPAD_UP) {
                 m4aSongNumStart(SONG_SYS_CLICK);
-                ((SioBattleWork*)sSioBattleWork)->cursor--;
+                sSioBattleWork->cursor--;
 
-                if (((SioBattleWork*)sSioBattleWork)->cursor < 0) {
-                    ((SioBattleWork*)sSioBattleWork)->cursor = 1;
+                if (sSioBattleWork->cursor < 0) {
+                    sSioBattleWork->cursor = 1;
                 }
             }
 
             if (GetKeysPressed() & DPAD_DOWN) {
                 m4aSongNumStart(SONG_SYS_CLICK);
-                ((SioBattleWork*)sSioBattleWork)->cursor++;
+                sSioBattleWork->cursor++;
 
-                if (((SioBattleWork*)sSioBattleWork)->cursor > 1) {
-                    ((SioBattleWork*)sSioBattleWork)->cursor = 0;
+                if (sSioBattleWork->cursor > 1) {
+                    sSioBattleWork->cursor = 0;
                 }
             }
         } else {
@@ -314,36 +314,36 @@ void mode_sio_battle_1(void) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
         case 3:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
         case 1:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
         case 4:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
         case 2:
         default:
-            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
-            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
+            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
             break;
         }
 #else
-        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
-        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
+        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
 #endif
 
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             m4aSongNumStart(SONG_SYS_KETTEI);
 
-            switch (((SioBattleWork*)sSioBattleWork)->cursor) {
+            switch (sSioBattleWork->cursor) {
             case 0:
                 ModeRequest(&gModeSioBtlConnect, 0);
                 break;
@@ -355,35 +355,35 @@ void mode_sio_battle_1(void) {
 
         if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            ((SioBattleWork*)sSioBattleWork)->state = 2;
+            sSioBattleWork->state = 2;
         }
         break;
     case 2:
-        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
-            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
+        if ((s16)sSioBattleWork->stateFrames == 0) {
+            sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->x, -0x8000, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
+        ApproachValue(&sSioBattleWork->x, -0x8000, sSioBattleWork->slideTimer);
+        sSioBattleWork->slideTimer--;
 
-        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
-            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
+        if ((s16)sSioBattleWork->slideTimer > 0) {
+            sSioBattleWork->stateFrames++;
         } else {
-            ((SioBattleWork*)sSioBattleWork)->state = 3;
-            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
+            sSioBattleWork->state = 3;
+            sSioBattleWork->stateFrames = 0;
         }
         break;
     case 3:
-        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
-            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
+        if ((s16)sSioBattleWork->stateFrames == 0) {
+            sSioBattleWork->slideTimer = 16;
         }
 
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y, -0x800, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y2, 0xA000, ((SioBattleWork*)sSioBattleWork)->slideTimer);
-        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
+        ApproachValue(&sSioBattleWork->y, -0x800, sSioBattleWork->slideTimer);
+        ApproachValue(&sSioBattleWork->y2, 0xA000, sSioBattleWork->slideTimer);
+        sSioBattleWork->slideTimer--;
 
-        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
-            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
+        if ((s16)sSioBattleWork->slideTimer > 0) {
+            sSioBattleWork->stateFrames++;
         } else {
             ModeRequest(&gModeTitle, 0);
             return;
@@ -391,25 +391,25 @@ void mode_sio_battle_1(void) {
         break;
     }
 
-    ((SioBattleWork*)sSioBattleWork)->gfx = AnimUpdate(&((SioBattleWork*)sSioBattleWork)->anim);
-    DrawSprite(((SioBattleWork*)sSioBattleWork)->x >> 8, 0, ((SioBattleWork*)sSioBattleWork)->gfx2[0], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -16);
-    DrawSprite(128, ((SioBattleWork*)sSioBattleWork)->y >> 8, ((SioBattleWork*)sSioBattleWork)->gfx2[1], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -1);
-    DrawSprite(128, ((SioBattleWork*)sSioBattleWork)->y2 >> 8, ((SioBattleWork*)sSioBattleWork)->gfx2[2], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -1);
-    DrawSprite(72, 48, ((SioBattleWork*)sSioBattleWork)->gfx3, ((SioBattleWork*)sSioBattleWork)->tiles2, ((SioBattleWork*)sSioBattleWork)->palette2, 0, 0x400, -32);
-    DrawSprite(72, 48, ((SioBattleWork*)sSioBattleWork)->gfx4, ((SioBattleWork*)sSioBattleWork)->tiles3, ((SioBattleWork*)sSioBattleWork)->palette3, 0, 0x400, -32);
-    ApproachValueHalf(&((SioBattleWork*)sSioBattleWork)->cursorY, ((SioBattleWork*)sSioBattleWork)->cursor * 7 * 1024 + 0x3300);
-    DrawSprite(64, ((SioBattleWork*)sSioBattleWork)->cursorY >> 8, ((SioBattleWork*)sSioBattleWork)->gfx, ((SioBattleWork*)sSioBattleWork)->tiles4, ((SioBattleWork*)sSioBattleWork)->palette4, 0, 0x400, -48);
+    sSioBattleWork->gfx = AnimUpdate(&sSioBattleWork->anim);
+    DrawSprite(sSioBattleWork->x >> 8, 0, sSioBattleWork->gfx2[0], sSioBattleWork->tiles, sSioBattleWork->palette, 0, 0x400, -16);
+    DrawSprite(128, sSioBattleWork->y >> 8, sSioBattleWork->gfx2[1], sSioBattleWork->tiles, sSioBattleWork->palette, 0, 0x400, -1);
+    DrawSprite(128, sSioBattleWork->y2 >> 8, sSioBattleWork->gfx2[2], sSioBattleWork->tiles, sSioBattleWork->palette, 0, 0x400, -1);
+    DrawSprite(72, 48, sSioBattleWork->gfx3, sSioBattleWork->tiles2, sSioBattleWork->palette2, 0, 0x400, -32);
+    DrawSprite(72, 48, sSioBattleWork->gfx4, sSioBattleWork->tiles3, sSioBattleWork->palette3, 0, 0x400, -32);
+    ApproachValueHalf(&sSioBattleWork->cursorY, sSioBattleWork->cursor * 7 * 1024 + 0x3300);
+    DrawSprite(64, sSioBattleWork->cursorY >> 8, sSioBattleWork->gfx, sSioBattleWork->tiles4, sSioBattleWork->palette4, 0, 0x400, -48);
 }
 
 void mode_sio_battle_2(void) {
-    ReleaseObjTiles(sSioBattleWork[5]);
-    ReleaseObjPalette(sSioBattleWork[6]);
-    ReleaseObjTiles(sSioBattleWork[10]);
-    ReleaseObjPalette(sSioBattleWork[11]);
-    ReleaseObjTiles(sSioBattleWork[13]);
-    ReleaseObjPalette(sSioBattleWork[14]);
-    ReleaseObjTiles(sSioBattleWork[16]);
-    ReleaseObjPalette(sSioBattleWork[17]);
+    ReleaseObjTiles(sSioBattleWork->tiles);
+    ReleaseObjPalette(sSioBattleWork->palette);
+    ReleaseObjTiles(sSioBattleWork->tiles2);
+    ReleaseObjPalette(sSioBattleWork->palette2);
+    ReleaseObjTiles(sSioBattleWork->tiles3);
+    ReleaseObjPalette(sSioBattleWork->palette3);
+    ReleaseObjTiles(sSioBattleWork->tiles4);
+    ReleaseObjPalette(sSioBattleWork->palette4);
     EwramFree(sSioBattleWork);
 }
 

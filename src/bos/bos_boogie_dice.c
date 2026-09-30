@@ -496,7 +496,7 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF6798, gUnk_09EF6788);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     r = GetRandom();
     AnimSetFrame(&work->anim, r & 3);
     TaskPoolInit(&work->tasks, 1);
@@ -894,7 +894,7 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF6784, gUnk_09EF6774);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
 }
@@ -1209,7 +1209,7 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gNokogiriAnims, gNokogiriFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
     RequestEnemyCardUse(&work->obj);
@@ -1377,7 +1377,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->palette = LoadObjPalette(gKnifePalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gKnifeAnims, gKnifeFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
@@ -1642,7 +1642,7 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gKaifukuAnims, gKaifukuFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     RequestEnemyCardUse(&work->obj);
 }
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
@@ -2447,7 +2447,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
+    AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
     work->state = 0;
     ColliderInit(&work->collider, 7, (u16)BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
@@ -2497,7 +2497,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
 
     switch (work->state) {
     case 0:
-        AnimChange(&work->anim, (u16)(work->animBase + 4), 1);
+        AnimChange(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
         break;
     case 1:
         if (work->timer == 0) {
@@ -2513,7 +2513,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     case 2:
         if (AnimGetId(&work->anim) == (s16)work->animBase + 4) {
             if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
-                AnimStart(&work->anim, (u16)(work->animBase + 5), 1);
+                AnimStart(&work->anim, (u16)(work->animBase + 5), ANIM_FLAG_LOOP);
                 SetBtlObjUnhittable(p, 1);
                 if ((u16)(GetRandom() % 100) <= 19) {
                     _0801C1F8(0, p->x, p->y, p->z);
@@ -2526,7 +2526,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
                 work->timer = 0;
             }
         } else {
-            AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
+            AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
         }
         break;
     case 3:
@@ -2584,7 +2584,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         AnimChange(&work->anim, (u16)(work->animBase + 6), 0);
         if (AnimIsFinished(&work->anim) || BosUrsulaIsGimmickActive()) {
             work->state = 0;
-            AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
+            AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
             ClearBtlObjActionFlags(p);
         } else {
             if (AnimGetFrame(&work->anim) == 1) {
@@ -2717,7 +2717,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 8), gUnk_0979E344);
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
+    AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
     AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);
 }
 

@@ -26,6 +26,13 @@ typedef struct AnimHeader {
 typedef char AnimHeader_size[(sizeof(AnimHeader) == 6) ? 1 : -1];
 typedef char AnimFrame_size[(sizeof(AnimFrame) == 4) ? 1 : -1];
 
+enum AnimFlag {
+    ANIM_FLAG_LOOP = 0x1,
+    ANIM_FLAG_RANDOM_START = 0x2,
+    ANIM_FLAG_KEEP_FRAME = 0x4,
+    ANIM_FLAG_FINISHED = 0x1000
+};
+
 typedef struct AnimState {
     AnimHeader** anims;
     void** gfxTable;

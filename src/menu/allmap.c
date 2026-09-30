@@ -257,7 +257,7 @@ void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg) {
     work->tiles = LoadObjTiles(gUnk_0976D7C0, 0xC0);
     work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
     AnimInit(&work->anim, gUnk_09EF64C4, gUnk_09EF64B4);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->moveSteps = 0;
 }

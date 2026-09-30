@@ -640,13 +640,13 @@ void mode_worldwarp_0(void) {
     gUnk_0203551C = LoadObjPalette(gUnk_09A3D59C, 32);
     gUnk_02035518 = LoadObjTiles(gUnk_0999FA20, 0x680);
     AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
-    AnimStart(&sWorldWarpHighlightAnim, 0, 1);
+    AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
     AnimInit(&gUnk_02035538, gUnk_09EF9898, gUnk_09EF9870);
-    AnimStart(&gUnk_02035538, 1, 1);
+    AnimStart(&gUnk_02035538, 1, ANIM_FLAG_LOOP);
     sWorldWarpCursorPalette = LoadObjPalette(gUnk_09A3D5BC, 32);
     sWorldWarpCursorTiles = LoadObjTiles(gUnk_099A012C, 192);
     AnimInit(&sWorldWarpCursorAnim, gUnk_09EF98B0, gUnk_09EF98A0);
-    AnimStart(&sWorldWarpCursorAnim, 0, 1);
+    AnimStart(&sWorldWarpCursorAnim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
     InitTextSlots(sWorldWarpCurrentName, 48);
     InitTextSlots(sWorldWarpSelectedName, 48);

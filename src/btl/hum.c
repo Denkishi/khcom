@@ -663,10 +663,10 @@ u8 task_hum_cloud_1(CloudWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17: {
-        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         if (gBtlWork->flags & 0x20000000) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
@@ -684,7 +684,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     }
     case 0:
-        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         if (func_08081828()) {
             break;
         }
@@ -708,7 +708,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         work->base.stateTimer++;
         break;
     case 8: {
-        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 1, 3, w->base.tiles);
+        AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
         if (HumMoveToward(&work->base, work->base.targetX, y, 0x133)) {
@@ -1329,12 +1329,12 @@ u8 task_hum_hook_1(HookWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17: {
         s32 d;
 
-        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if (gBtlWork->flags & 0x20000000) {
             if (HookTryJumpAway((CloudWork*)w)) {
@@ -1355,7 +1355,7 @@ u8 task_hum_hook_1(HookWork* work) {
         break;
     }
     case 0:
-        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
 
         if (func_08081828()) {
             break;
@@ -1383,7 +1383,7 @@ u8 task_hum_hook_1(HookWork* work) {
         work->base.stateTimer++;
         break;
     case 8:
-        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 1, 3, w->base.tiles);
+        AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
@@ -1433,7 +1433,7 @@ u8 task_hum_hook_1(HookWork* work) {
         break;
     case 26:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 11, 1, w->base.tiles);
+            AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 11, ANIM_FLAG_LOOP, w->base.tiles);
         }
         BtlMapFollowPosition(act->x, act->y, act->z);
         HumFaceTarget(&work->base, 1);
@@ -1538,7 +1538,7 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         } else if (w->flags & 2) {
             if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, 1, w->base.tiles);
+                AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, ANIM_FLAG_LOOP, w->base.tiles);
             }
         } else {
             if (AnimIsFinished(&work->base.anim)) {
@@ -1586,7 +1586,7 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         } else if (w->flags & 2) {
             if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, 1, w->base.tiles);
+                AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, ANIM_FLAG_LOOP, w->base.tiles);
             }
         } else {
             if (AnimIsFinished(&work->base.anim)) {
@@ -1944,7 +1944,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gPBakudanPalette, 0x20);
     work->tiles = AllocObjTiles(0x280, gPBakudanTiles);
     AnimInit(&work->anim, gPBakudanAnims, gPBakudanFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -2178,17 +2178,17 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
-        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
-        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         w->hoverZ = -0x5000;
         break;
     case 0:
-        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
-        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+        AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+        AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
         w->hoverZ = -0xC00;
 
         if (func_08081828()) {
@@ -2215,8 +2215,8 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     case 8:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
-            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
             w->hoverZ = -0xC00;
             work->base.targetY = y;
 
@@ -2271,7 +2271,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     case 20:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 2, 0, w->base.sub->tiles);
             w->hoverZ = -0x800;
             m4aSongNumStart(SONG_VO_AN_ATTACK00);
@@ -2352,7 +2352,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     case 22:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 5, 0, w->base.sub->tiles);
         }
         w->subRiseSpeed += 25;
@@ -2368,7 +2368,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     case 23:
         if (work->base.stateTimer == 0) {
             AnimReset(&w->sub.anim);
-            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 4, 0, w->base.sub->tiles);
             w->subRiseSpeed = 0x800;
             w->sub.x = x + (d = ((u16)(GetRandom() % 65) << 8) - 0x2000);
@@ -2438,7 +2438,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     case 24:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
             w->steps = 30;
         }
 
@@ -2527,8 +2527,8 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.targetY = y;
             AnimReset(&work->base.anim);
             AnimReset(&w->sub.anim);
-            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 5, 1, w->base.tiles);
-            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 8, 1, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
+            AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 8, ANIM_FLAG_LOOP, w->base.sub->tiles);
             w->hoverZ = -0xC00;
             w->steps = 40;
             func_080169A0(w->sub.x, w->sub.y,
@@ -2718,11 +2718,11 @@ void task_hum_hades_0(HadesWork* work) {
     work->tiles3 = AllocObjTiles(0x3A0, gHadesFramespreadHiTiles);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     AnimInit(&work->anim, gHadesFramespreadHiAnims, gHadesFramespreadHiFrames);
-    AnimStart(&work->anim, 2, 1);
+    AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     AnimInit(&work->anim2, gHadesFramespreadHiAnims, gHadesFramespreadHiFrames);
-    AnimStart(&work->anim2, 1, 1);
+    AnimStart(&work->anim2, 1, ANIM_FLAG_LOOP);
     AnimInit(&work->anim3, gHadesFramespreadHiAnims, gHadesFramespreadHiFrames);
-    AnimStart(&work->anim3, 0, 1);
+    AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
     work->base.stockMoves = sHumHadesStockMoves;
 }
 
@@ -2792,7 +2792,7 @@ u8 task_hum_hades_1(HadesWork* work) {
     case 12:
     case 17:
     case 18:
-        AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+        AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 0:
     case 8:
@@ -2810,15 +2810,15 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             if (act->flags & 4) {
                 if ((s32)work->base.targetX < act->x) {
-                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
                 } else {
-                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
                 }
             } else {
                 if ((s32)work->base.targetX < act->x) {
-                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
                 } else {
-                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+                    AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
                 }
             }
         }
@@ -2886,7 +2886,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         break;
     case 23:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 3, 1, w->base.sub->tiles);
+            AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 3, ANIM_FLAG_LOOP, w->base.sub->tiles);
 
             if (act->flags & 4) {
                 w->sub.x -= 0xA00;
@@ -2944,7 +2944,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         break;
     case 25:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 8, 1, w->base.tiles);
+            AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 8, ANIM_FLAG_LOOP, w->base.tiles);
             w->scale = 10;
             work->base.steps = 8;
             w->flags = (w->flags & 0xFFFB) | 2;
@@ -3442,7 +3442,7 @@ void task_hum_mahluxia_0(MahluxiaWork* work) {
     work->hoverZ = -0x300;
     work->sub.flags |= 3;
     work->unk_1D8 = 0;
-    AnimChangeWithDef(sHumMahluxiaAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+    AnimChangeWithDef(sHumMahluxiaAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
     MahluxiaSaveAfterimage(work, &work->spawns[0]);
     work->spawns[1] = work->spawns[0];
     work->spawns[2] = work->spawns[0];
@@ -3527,10 +3527,10 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (gBtlWork->flags & 0x20000000) {
             if (MahluxiaTryJumpAway(w)) {
@@ -3547,7 +3547,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
         break;
     case 0:
-        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x300;
 
         if (func_08081828()) {
@@ -3577,7 +3577,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         work->base.stateTimer++;
         break;
     case 8:
-        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+        AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
 
@@ -3633,7 +3633,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             } else {
                 w->flags |= 1;
             }
-            AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+            AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         }
 
         if ((s16)w->steps != 0) {
@@ -3673,7 +3673,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         break;
     case 23:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 5, 1, w->base.tiles);
+            AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
         }
         act->y += (y - act->y) >> 2;
         n = (u16)work->base.stateTimer;
@@ -4100,13 +4100,13 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 0:
-        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         HumFaceTarget(&work->base, 5);
 
         if (func_08081828() == 0) {
@@ -4132,7 +4132,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             }
             w->hoverZ = 0;
         } else if (AnimIsFinished(&work->base.anim)) {
-            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         }
         ApproachValue(&act->x, work->base.targetX, (u16)work->base.steps);
         ApproachValue(&act->y, work->base.targetY, (u16)work->base.steps);
@@ -4177,7 +4177,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case 26:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, 1, w->base.tiles);
+            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
             if (act->flags & 4) {
                 BgFxStartThunder(0, act->x + 0x400, act->y, act->z - 0x5000, act->x,
@@ -4210,7 +4210,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case 28:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 10, 1, w->base.tiles);
+            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 10, ANIM_FLAG_LOOP, w->base.tiles);
             m4aSongNumStart(SONG_EF_RAC_BEEM);
 
             if (act->flags & 4) {
@@ -4260,7 +4260,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case 23:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, 1, w->base.tiles);
+            AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
             if (act->flags & 4) {
                 BgFxStartThunder(1, act->x + 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
@@ -4941,13 +4941,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 0:
-        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x300;
         if (func_08081828()) {
             break;
@@ -4999,7 +4999,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         break;
     case 22:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.steps = 10;
         }
         if (act->x < x) {
@@ -5036,7 +5036,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 24:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 0, 1, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
             sub->palette2 = work->base.palette;
             sub->flags |= 4;
             sub->flags &= ~2;
@@ -5109,13 +5109,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             switch (AnimGetFrame(&work->base.anim)) {
             case 3:
                 m4aSongNumStart(SONG_BTL_AKL_FIREENTRY);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 7, 1, w->base.sub->tiles);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 3, 1, w->base.sub2->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 7, ANIM_FLAG_LOOP, w->base.sub->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 3, ANIM_FLAG_LOOP, w->base.sub2->tiles);
                 break;
             case 6:
                 m4aSongNumStart(SONG_SND_290);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 8, 1, w->base.sub->tiles);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 4, 1, w->base.sub2->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 8, ANIM_FLAG_LOOP, w->base.sub->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 4, ANIM_FLAG_LOOP, w->base.sub2->tiles);
                 break;
             case 7:
                 AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 9, 0, w->base.sub->tiles);
@@ -5174,9 +5174,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 27: {
         s32 t;
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
+            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {
@@ -5239,9 +5239,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         s32 dy;
         HumFaceTarget(&work->base, 1);
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
+            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {
@@ -5313,9 +5313,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 31:
         HumFaceTarget(&work->base, 1);
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
+            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {
@@ -5517,7 +5517,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         break;
     case 19:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AxcelScaleTo(w, 12, 512, 8);
         }
         if (work->base.stateTimer > 6) {
@@ -5791,15 +5791,15 @@ u8 task_hum_vixen_1(VixenWork* work) {
     switch (w->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->hoverZ = -0x4000;
         HumFaceTarget(&w->base, 20);
         break;
     case 0:
-        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+        AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->hoverZ = 0;
 
         if (func_08081828() == 0) {
@@ -5815,7 +5815,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case 8:
         if (w->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 1, 1, work->base.tiles);
+            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 1, ANIM_FLAG_LOOP, work->base.tiles);
             work->hoverZ = -0xF00;
 
             if (act->x <= 0xFFFF) {
@@ -5954,7 +5954,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case 24:
         if (w->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 6, 1, work->base.tiles);
+            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 6, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
@@ -6077,7 +6077,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case 30:
         if (w->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 10, 1, work->base.tiles);
+            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 10, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
@@ -6132,7 +6132,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     case 34:
         if (w->base.stateTimer == 0) {
-            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 13, 1, work->base.tiles);
+            AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 13, ANIM_FLAG_LOOP, work->base.tiles);
         }
 
         if (w->base.stateTimer > 60) {
@@ -6758,14 +6758,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
     switch (work->base.state) {
     case 12:
-        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17:
     case 18:
-        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 0:
-        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (func_08081828()) {
             break;
@@ -6782,7 +6782,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         work->base.stateTimer++;
         break;
     case 8:
-        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x1000;
         work->base.targetX = x;
         work->base.targetY = y;
@@ -7049,7 +7049,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 act->x = act->x + 0x1900;
             }
-            AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.stateTimer = 0;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -7179,7 +7179,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gRexeusPalette, 0x20);
     work->tiles = AllocObjTiles(0x400, gRexeusTmhAxTiles);
     AnimInit(&work->anim, gRexeusTmhAxAnims, gRexeusTmhAxFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 
     if (args->unk_12 != 0) {
         work->facingLeft = 1;
@@ -7312,7 +7312,7 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gRexeusPalette, 0x20);
     work->tiles = AllocObjTiles(0x400, gRexeusTmhTiles);
     AnimInit(&work->anim, gRexeusTmhAnims, gRexeusTmhFrames);
-    AnimStart(&work->anim, 2, 1);
+    AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
 
     if (args->unk_12 != 0) {
         work->facingLeft = 1;
@@ -7446,7 +7446,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             e = &work->sub[i];
             work->tiles2[i] = AllocObjTiles(0xC0, gRexeusRock02Tiles);
             AnimInit(&work->anim[i], gRexeusRock02Anims, gRexeusRock02Frames);
-            AnimStart(&work->anim[i], GetRandom() % 5 + 2, 3);
+            AnimStart(&work->anim[i], GetRandom() % 5 + 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START);
 
             if (work->facingLeft != 0) {
                 e->vx = -(GetRandom() % 0x501 + 0x300);
@@ -7590,7 +7590,7 @@ void task_hum_mahluxia_flw_0(MahluxiaFlwWork* work, VixenNdlArgs* args) {
     work->vx = GetRandom() % 717 - 358;
     work->vz = -(GetRandom() % 539 + 102);
     AnimInit(&work->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
-    AnimStart(&work->anim, GetRandom() & 1, 1);
+    AnimStart(&work->anim, GetRandom() & 1, ANIM_FLAG_LOOP);
 }
 
 u8 task_hum_mahluxia_flw_1(MahluxiaFlwWork* work) {
@@ -7852,10 +7852,10 @@ u8 task_hum_riku_1(RikuWork* work) {
     switch (work->base.state) {
     case 12:
     case 18:
-        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 17:
-        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         if ((gBtlWork->flags & 0x20000000) && RikuTryJumpAway(w)) {
             break;
         }
@@ -7868,7 +7868,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
         break;
     case 0:
-        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         if (func_08081828()) {
             break;
         }
@@ -7891,7 +7891,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         work->base.stateTimer++;
         break;
     case 8:
-        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 1, 1, w->base.tiles);
+        AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
         if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 512) && AnimIsFinished(&work->base.anim)) {
@@ -8004,7 +8004,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             act->flags ^= 4;
             switch ((u16)(GetRandom() % 3)) {
             case 0:
-                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 17, 1, w->base.tiles);
+                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 17, ANIM_FLAG_LOOP, w->base.tiles);
                 if (act->flags & 4) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 184;
                 } else {
@@ -8013,7 +8013,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 act->y = y + (((u16)(GetRandom() % 33) - 16) << 8);
                 break;
             case 1:
-                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 18, 1, w->base.tiles);
+                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 18, ANIM_FLAG_LOOP, w->base.tiles);
                 if (act->flags & 4) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 203;
                 } else {
@@ -8022,7 +8022,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 act->y = y + (((u16)(GetRandom() % 17) + 16) << 8);
                 break;
             case 2:
-                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 19, 1, w->base.tiles);
+                AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 19, ANIM_FLAG_LOOP, w->base.tiles);
                 if (act->flags & 4) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 165;
                 } else {
@@ -8208,7 +8208,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             }
         }
         if (AnimIsFinished(&work->base.anim)) {
-            AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         }
         if (AnimIsFinished(&work->base.anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(act);
@@ -8521,7 +8521,7 @@ void task_hum_leon_0(LeonWork* work) {
     HumInit(&work->base, &sHumLeonDef);
     work->flashTimer = 0;
     work->unk_18A = 0;
-    AnimChangeWithDef(sHumLeonAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+    AnimChangeWithDef(sHumLeonAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
     work->savedLearnedStocks = gGameState.progression.learnedStocks;
     work->savedLearnedStocks2 = gGameState.progression.learnedStocks2;
     gGameState.progression.learnedStocks = 0;
@@ -8555,7 +8555,7 @@ u8 task_hum_leon_1(LeonWork* work) {
 
     switch (work->base.state) {
     case 12:
-        AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         break;
     case 0:
         if (gBtlWork->flags & 0x20000000000) {
@@ -8570,7 +8570,7 @@ u8 task_hum_leon_1(LeonWork* work) {
                 AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
                 w->unk_18A = 0;
             } else if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+                AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             }
         }
 
@@ -8649,7 +8649,7 @@ void task_hum_leon_3(LeonWork* work) {
 void task_hum_robe_0(RobeWork* work) {
     HumInit(&work->base, &sHumRobeDef);
     work->idleAnim = 1;
-    AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+    AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
 }
 
 u8 task_hum_robe_1(RobeWork* work) {
@@ -8669,7 +8669,7 @@ u8 task_hum_robe_1(RobeWork* work) {
             work->idleAnim = 0;
         }
     } else if (AnimIsFinished(&work->base.anim)) {
-        AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, 1, work->base.tiles);
+        AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->idleAnim = 1;
     }
     HumFaceTarget(&work->base, 1);

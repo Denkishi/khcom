@@ -115,7 +115,7 @@ void mode_sio_battle_0(s32 a) {
     sSioBattleWork->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
     sSioBattleWork->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
     AnimInit(&sSioBattleWork->anim, gUnk_09EF38B4, gUnk_09EF3894);
-    AnimStart(&sSioBattleWork->anim, 1, 1);
+    AnimStart(&sSioBattleWork->anim, 1, ANIM_FLAG_LOOP);
     gfx = AnimGetGfx(&sSioBattleWork->anim);
     w = sSioBattleWork;
     w->gfx = gfx;

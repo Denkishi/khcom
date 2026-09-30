@@ -3461,7 +3461,7 @@ void task_fld_shadow_0(FldShadowWork* work, FldObj* obj) {
     work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     AnimInit(&work->anim, gUnk_09EE1384, gUnk_09EE1380);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 
 s32 task_fld_shadow_1(FldShadowWork* work) {

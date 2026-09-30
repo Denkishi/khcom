@@ -269,7 +269,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     }
 
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithTables(&work->anim, 0, 1, gSor1ll68wAnims, gSor1ll68wFrames);
+    AnimChangeWithTables(&work->anim, 0, ANIM_FLAG_LOOP, gSor1ll68wAnims, gSor1ll68wFrames);
     SetObjTileSource(work->tiles2, gSor1ll68wTiles);
     work->x = args->x;
     work->y = args->y;
@@ -620,7 +620,7 @@ void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->palette3 = work->palette;
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, 1, work->tiles);
+    AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
 }
 
 u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
@@ -639,24 +639,24 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
 
         switch (state) {
         case 2:
-            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, 1, work->tiles);
+            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
             break;
         case 5:
-            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette2;
             break;
         case 3:
-            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
             break;
         case 4:
-            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 4, 1, work->tiles);
+            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette2;
             break;
         case 1:
         default:
-            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
             break;
         }

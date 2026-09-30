@@ -81,7 +81,7 @@ void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->tiles = LoadObjTiles(gUnk_09C5C704, 0x500);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFAF50, gUnk_09EFAF24);
-    AnimStart(&work->anim, 3, 1);
+    AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
 }
 
 u8 task_bos_lst_ctr_1(LstCtrWork* work) {
@@ -177,7 +177,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         work->timer++;
         break;
     case 4:
-        AnimStart(&work->anim, 2, 1);
+        AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
     }
 

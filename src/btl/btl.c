@@ -256,7 +256,7 @@ void task_btl_lockon_0(BtlLockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     AnimInit(&work->anim, gUnk_09EE10F8, gUnk_09EE10EC);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->unk_024 = 0;
     gBtlWork->actor2 = 0;

@@ -1035,7 +1035,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->tiles = AllocObjTiles(0x120, 0);
     SetObjTileSource(w->tiles, gUnk_090A4664);
     AnimInit(&w->anim2, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&w->anim2, 0, 1);
+    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim2);
     w->x = sDeckTabPointerX[0] << 8;
     w->y = sDeckTabPointerY[0] << 8;
@@ -1065,7 +1065,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, 32);
     SetObjTileSource(gCardUiSpriteState.tiles, gUnk_0908C3CE);
     AnimInit(&gCardUiSpriteState.anim, gUnk_09EEA198, gUnk_09EEA180);
-    AnimStart(&gCardUiSpriteState.anim, 0, 1);
+    AnimStart(&gCardUiSpriteState.anim, 0, ANIM_FLAG_LOOP);
     gCardUiSpriteState.gfx = AnimUpdate(&gCardUiSpriteState.anim);
     w->tiles10 = 0;
     w->tiles7 = 0;
@@ -1419,7 +1419,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                     w->prevView = w->view;
                     w->view = 2;
-                    AnimStart(&w->anim2, 0, 1);
+                    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
                     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
                     DrawCpCost(0);
                     return 1;
@@ -1494,7 +1494,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->holding = 0;
-            AnimStart(&w->anim2, 0, 1);
+            AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
             return 1;
         }
     case A_BUTTON:
@@ -1508,12 +1508,12 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
             w->heldRow = w->cursorRow;
             w->x3 = gDeckGridColumnX[w->heldCol] << 8;
             w->y3 = gDeckGridRowY[w->heldRow] << 8;
-            AnimStart(&w->anim2, 4, 1);
+            AnimStart(&w->anim2, 4, ANIM_FLAG_LOOP);
         } else {
             if (SwapHeldDeckCard(w) != 0) {
                 m4aSongNumStart(SONG_SYS_KETEI2);
                 w->holding = 0;
-                AnimStart(&w->anim2, 0, 1);
+                AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
@@ -1530,14 +1530,14 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
     case L_BUTTON:
         m4aSongNumStart(SONG_SYS_CANSEL);
         w->holding = 0;
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
         return 1;
     case R_BUTTON:
         FreeCollectionEntries(w);
         m4aSongNumStart(SONG_SYS_CANSEL);
         w->holding = 0;
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         return 1;
     }
@@ -1552,7 +1552,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
         w->timer = 1;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         w->view = 2;
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         TaskPoolUpdate(&w->taskpool);
         TaskPoolUpdate(&w->cardpool);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckFilter);
@@ -4388,13 +4388,13 @@ void SetDeckMenuHandAnim(DeckMenuWork* w) {
     case 10:
     case 11:
     case 13:
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         w->handFlags &= ~1;
         break;
     case 1:
     case 3:
     case 12:
-        AnimStart(&w->anim2, 2, 1);
+        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
         t = w->handFlags | 1;
         w->handFlags = t;
         break;
@@ -4798,7 +4798,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
             w->tiles10 = AllocObjTiles(0x280, 0);
             SetObjTileSource(w->tiles10, gUnk_0908B1B4);
             AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
-            AnimStart(&w->anim, 0, 1);
+            AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
             w->gfx3 = AnimGetGfx(&w->anim);
         }
 
@@ -4930,7 +4930,7 @@ void ShowDeckCardPreview(DeckMenuWork* w) {
             w->tiles10 = AllocObjTiles(0x280, 0);
             SetObjTileSource(w->tiles10, gUnk_0908B1B4);
             AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
-            AnimStart(&w->anim, 0, 1);
+            AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
             w->gfx3 = AnimGetGfx(&w->anim);
         }
 
@@ -5293,13 +5293,13 @@ void SetDeckMenuFrameCursor(DeckMenuWork* w, u8 kind) {
     case 0:
         SetObjTileSource(w->tiles2, gUnk_090A4A0C);
         AnimInit(&w->anim3, gUnk_09EEB064, gUnk_09EEB050);
-        AnimStart(&w->anim3, 0, 1);
+        AnimStart(&w->anim3, 0, ANIM_FLAG_LOOP);
         w->gfx2 = AnimGetGfx(&w->anim3);
         break;
     case 1:
         SetObjTileSource(w->tiles2, gUnk_090A51F6);
         AnimInit(&w->anim3, gUnk_09EEB07C, gUnk_09EEB068);
-        AnimStart(&w->anim3, 0, 1);
+        AnimStart(&w->anim3, 0, ANIM_FLAG_LOOP);
         w->gfx2 = AnimGetGfx(&w->anim3);
         break;
     }
@@ -5885,10 +5885,10 @@ u8 WrapKanaKeyboardCursor(DeckMenuWork* w, u16 dir) {
     if (w->cursor.parts.y == 6 && w->cursor.parts.x > 11) {
         if (w->cursor.parts.x == 13 && dir == 0x20) {
             w->cursor.parts.x = 11;
-            AnimStart(&w->anim4, 0, 1);
+            AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
         } else {
             w->cursor.parts.x = 14;
-            AnimStart(&w->anim4, 1, 1);
+            AnimStart(&w->anim4, 1, ANIM_FLAG_LOOP);
         }
 
         return 0;
@@ -5997,13 +5997,13 @@ u8 WrapKeyboardCursor(DeckMenuWork* w, u16 keys) {
 #endif
         if (w->cursor.parts.x == 13 && keys == 32) {
             w->cursor.parts.x = 9;
-            AnimStart(&w->anim4, 0, 1);
+            AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
             w->onEndKey = 0;
 #endif
         } else {
             w->cursor.parts.x = 14;
-            AnimStart(&w->anim4, 1, 1);
+            AnimStart(&w->anim4, 1, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
             w->onEndKey = 1;
 #endif
@@ -6073,11 +6073,11 @@ u8 func_eu_0808E94C(DeckMenuWork* w, u16 keys) {
     if (w->cursor.parts.y == 6 &&w->cursor.parts.x > 1) {
         if (w->cursor.parts.x == 13 && keys == 32) {
             w->cursor.parts.x = 1;
-            AnimStart(&w->anim4, 0, 1);
+            AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
             w->onEndKey = 0;
         } else {
             w->cursor.parts.x = 14;
-            AnimStart(&w->anim4, 1, 1);
+            AnimStart(&w->anim4, 1, ANIM_FLAG_LOOP);
             w->onEndKey = 1;
         }
         return 0;
@@ -6393,7 +6393,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
         SetObjTileSource(w->tiles11, gUnk_090A5F1E);
         AnimInit(&w->anim4, gUnk_09EEB0B8, gUnk_09EEB08C);
 #endif
-        AnimStart(&w->anim4, 0, 1);
+        AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
         w->gfx9 = AnimGetGfx(&w->anim4);
 #ifdef VERSION_EU
         UpdateSpriteFrameTiles(w->tiles13, gDeckKeyboardCursorSprites[gLanguage][10], gDeckKeyboardCursorTiles[gLanguage]);
@@ -6576,12 +6576,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         case 0:
         case 1:
             if (WrapKanaKeyboardCursor(w, 32) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
             }
             break;
         case 2:
             if (WrapKeyboardCursor(w, 32) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
 #endif
@@ -6590,7 +6590,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
         case 3:
             if ((u8)func_eu_0808E94C(w, 32) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
             break;
@@ -6605,12 +6605,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         case 0:
         case 1:
             if (WrapKanaKeyboardCursor(w, 16) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
             }
             break;
         case 2:
             if (WrapKeyboardCursor(w, 16) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
 #endif
@@ -6619,7 +6619,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
         case 3:
             if ((u8)func_eu_0808E94C(w, 16) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
             break;
@@ -6643,12 +6643,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         case 0:
         case 1:
             if (WrapKanaKeyboardCursor(w, 64) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
             }
             break;
         case 2:
             if (WrapKeyboardCursor(w, 64) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
 #endif
@@ -6657,7 +6657,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
         case 3:
             if ((u8)func_eu_0808E94C(w, 64) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
             break;
@@ -6672,12 +6672,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         case 0:
         case 1:
             if (WrapKanaKeyboardCursor(w, 128) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
             }
             break;
         case 2:
             if (WrapKeyboardCursor(w, 128) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
 #endif
@@ -6686,7 +6686,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
         case 3:
             if ((u8)func_eu_0808E94C(w, 128) != 0) {
-                AnimStart(&w->anim4, 0, 1);
+                AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
             break;
@@ -6722,7 +6722,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #else
                 w->cursor.parts.y = 6;
 #endif
-                AnimStart(&w->anim4, 1, 1);
+                AnimStart(&w->anim4, 1, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
                 w->onEndKey = 1;
 #endif
@@ -6744,7 +6744,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #else
         w->cursor.parts.y = 6;
 #endif
-        AnimStart(&w->anim4, 1, 1);
+        AnimStart(&w->anim4, 1, ANIM_FLAG_LOOP);
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 #ifdef VERSION_EU
         w->onEndKey = 1;

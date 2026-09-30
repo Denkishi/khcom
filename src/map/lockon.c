@@ -26,7 +26,7 @@ void task_lockon_0(LockonWork* w) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     SetObjTileSource(w->tiles, gUnk_090D7C84);
     AnimInit(&w->anim, gUnk_09EEC66C, gUnk_09EEC660);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
 
     for (i = 0; i < 8; i++) {

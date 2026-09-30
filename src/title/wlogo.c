@@ -241,7 +241,7 @@ void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 arg) {
     work->tiles = LoadObjTiles(gUnk_0961B072, 0xF20);
     work->palette = LoadObjPalette(gUnk_096FAD64, 0x20);
     AnimInit(&work->anim, gUnk_09EF356C, gUnk_09EF3548);
-    AnimStart(&work->anim, gWlogoHwtObjStarts[work->id].animId, 1);
+    AnimStart(&work->anim, gWlogoHwtObjStarts[work->id].animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->x = gWlogoHwtObjStarts[work->id].x;
     work->y = gWlogoHwtObjStarts[work->id].y;
@@ -1132,7 +1132,7 @@ void task_wlogo_agr_smoke_0(WlogoAgrSmokeWork* work, WlogoAgrEntry* arg) {
     work->tiles = LoadObjTiles(gUnk_0961DC0E, 0x1DE0);
     work->palette = LoadObjPalette(gUnk_096FADE4, 0x20);
     AnimInit(&work->anim, gUnk_09EF36AC, gUnk_09EF3614);
-    AnimStart(&work->anim, work->animId, 1);
+    AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 }
 
@@ -1188,7 +1188,7 @@ void task_wlogo_agr_flash1_0(WlogoAgrFlashWork* work, WlogoAgrEntry* arg) {
     work->tiles = LoadObjTiles(gUnk_0961DC0E, 0x1DE0);
     work->palette = LoadObjPalette(gUnk_096FADE4, 0x20);
     AnimInit(&work->anim, gUnk_09EF36AC, gUnk_09EF3614);
-    AnimStart(&work->anim, work->animId, 1);
+    AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 }
 
@@ -1416,7 +1416,7 @@ void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 arg) {
     work->visible = 1;
     work->animId = gWlogoPooObjAnimIds[work->id];
     AnimInit(&work->anim, gUnk_09EF376C, gUnk_09EF3734);
-    AnimStart(&work->anim, work->animId, 1);
+    AnimStart(&work->anim, work->animId, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 }
 

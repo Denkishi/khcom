@@ -91,6 +91,12 @@ typedef struct SpriteWork SpriteWork;
 extern SpriteWork* gSpriteWork;
 extern Dma3Queue* gDma3Requests;
 
+enum FadeFlag {
+    FADE_FLAG_ACTIVE = 0x1,
+    FADE_FLAG_LOCKED = 0x2,
+    FADE_FLAG_PAUSED = 0x4
+};
+
 typedef struct FadeWork {
     PaletteSlot slots[32];
     u32 amount;

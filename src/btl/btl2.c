@@ -83,7 +83,7 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
     work->tiles4 = AllocObjTiles(0x80, gBHpgagTiles);
     work->gfx2 = gBHpgagFrame1;
     AnimInit(&work->anim2, gBHpgagAnims, gBHpgagFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 
     if (gBtlWork->actor->maxHp <= 40) {
         work->gaugeSize = 0;
@@ -136,30 +136,30 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
         switch (work->gaugeSize) {
         case 0:
         case 1:
-            AnimStart(&work->anim2, 1, 1);
+            AnimStart(&work->anim2, 1, ANIM_FLAG_LOOP);
             break;
         case 2:
-            AnimStart(&work->anim2, 3, 1);
+            AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
             break;
         case 3:
-            AnimStart(&work->anim2, 5, 1);
+            AnimStart(&work->anim2, 5, ANIM_FLAG_LOOP);
             break;
         case 4:
-            AnimStart(&work->anim2, 7, 1);
+            AnimStart(&work->anim2, 7, ANIM_FLAG_LOOP);
             break;
         case 5:
-            AnimStart(&work->anim2, 9, 1);
+            AnimStart(&work->anim2, 9, ANIM_FLAG_LOOP);
             break;
         case 6:
-            AnimStart(&work->anim2, 11, 1);
+            AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         default:
-            AnimStart(&work->anim2, 11, 1);
+            AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         }
         work->gfx3 = 0;
     } else {
-        AnimStart(&work->anim2, 11, 1);
+        AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
 
         switch (work->gaugeSize) {
         case 0:
@@ -222,12 +222,12 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     }
 
     if (work->timer != 0) {
-        AnimChange(&work->anim, 1, 1);
+        AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         work->timer--;
     } else if (flag != 0) {
-        AnimChange(&work->anim, 2, 1);
+        AnimChange(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
-        AnimChange(&work->anim, 0, 1);
+        AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (work->firstUpdate != 0) {
@@ -277,58 +277,58 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
-                AnimChange(&work->anim2, 2, 1);
+                AnimChange(&work->anim2, 2, ANIM_FLAG_LOOP);
                 break;
             case 2:
-                AnimChange(&work->anim2, 4, 1);
+                AnimChange(&work->anim2, 4, ANIM_FLAG_LOOP);
                 break;
             case 3:
-                AnimChange(&work->anim2, 6, 1);
+                AnimChange(&work->anim2, 6, ANIM_FLAG_LOOP);
                 break;
             case 4:
-                AnimChange(&work->anim2, 8, 1);
+                AnimChange(&work->anim2, 8, ANIM_FLAG_LOOP);
                 break;
             case 5:
-                AnimChange(&work->anim2, 10, 1);
+                AnimChange(&work->anim2, 10, ANIM_FLAG_LOOP);
                 break;
             case 6:
-                AnimChange(&work->anim2, 12, 1);
+                AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
                 break;
             default:
-                AnimChange(&work->anim2, 12, 1);
+                AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
                 break;
             }
         } else {
-            AnimChange(&work->anim2, 12, 1);
+            AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
         }
     } else {
         if (work->gaugeMode == 0) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
-                AnimChange(&work->anim2, 1, 1);
+                AnimChange(&work->anim2, 1, ANIM_FLAG_LOOP);
                 break;
             case 2:
-                AnimChange(&work->anim2, 3, 1);
+                AnimChange(&work->anim2, 3, ANIM_FLAG_LOOP);
                 break;
             case 3:
-                AnimChange(&work->anim2, 5, 1);
+                AnimChange(&work->anim2, 5, ANIM_FLAG_LOOP);
                 break;
             case 4:
-                AnimChange(&work->anim2, 7, 1);
+                AnimChange(&work->anim2, 7, ANIM_FLAG_LOOP);
                 break;
             case 5:
-                AnimChange(&work->anim2, 9, 1);
+                AnimChange(&work->anim2, 9, ANIM_FLAG_LOOP);
                 break;
             case 6:
-                AnimChange(&work->anim2, 11, 1);
+                AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
                 break;
             default:
-                AnimChange(&work->anim2, 11, 1);
+                AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
                 break;
             }
         } else {
-            AnimChange(&work->anim2, 11, 1);
+            AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
         }
 
         if (work->alarmPlaying != 0) {
@@ -1076,64 +1076,64 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         break;
     }
 
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 #else
     switch (src->kind) {
     case 0:
         work->tiles = LoadObjTiles(gUnk_08B1F020, 0x100);
         AnimInit(&work->anim, gUnk_09EE11D0, gUnk_09EE11CC);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 1:
         work->tiles = LoadObjTiles(gUnk_08B1ED76, 0x180);
         AnimInit(&work->anim, gUnk_09EE11C0, gUnk_09EE11BC);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 2:
         work->tiles = LoadObjTiles(gUnk_08B1EF0C, 0x100);
         AnimInit(&work->anim, gUnk_09EE11C8, gUnk_09EE11C4);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 3:
         work->tiles = LoadObjTiles(gUnk_08B1F13A, 0x180);
         AnimInit(&work->anim, gUnk_09EE11D8, gUnk_09EE11D4);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 5:
         work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
         AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 6:
         work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
         AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
-        AnimStart(&work->anim, 2, 1);
+        AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
     case 7:
         work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
         AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
-        AnimStart(&work->anim, 1, 1);
+        AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
     case 8:
         work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
         AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
-        AnimStart(&work->anim, 3, 1);
+        AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
         break;
     case 9:
         work->tiles = LoadObjTiles(gUnk_08B1F472, 0x180);
         AnimInit(&work->anim, gUnk_09EE11E8, gUnk_09EE11E4);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 10:
         work->tiles = LoadObjTiles(gUnk_08B1F60E, 0x140);
         AnimInit(&work->anim, gUnk_09EE11F0, gUnk_09EE11EC);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 4:
     default:
         work->tiles = LoadObjTiles(gUnk_08B1F2D6, 0x180);
         AnimInit(&work->anim, gUnk_09EE11E0, gUnk_09EE11DC);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     }
 #endif
@@ -1636,7 +1636,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     AnimInit(&work->anim, gBPuraizuAnims, gBPuraizuFrames);
-    AnimStart(&work->anim, 10, 1);
+    AnimStart(&work->anim, 10, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;

@@ -3,6 +3,11 @@
 
 #include "types.h"
 
+enum ListNodeFlag {
+    LIST_NODE_FLAG_ACTIVE = 0x1,
+    LIST_NODE_FLAG_SKIP = 0x2
+};
+
 typedef struct ListNode {
     void* owner;
     struct ListNode* prev;

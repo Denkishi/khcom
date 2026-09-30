@@ -6803,7 +6803,7 @@ void msgwait_0(MsgWaitWork* p, u8* arg) {
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
     SetObjTileSource(p->tiles, gFEventTiles);
     AnimInit(&p->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&p->anim, 2, 1);
+    AnimStart(&p->anim, 2, ANIM_FLAG_LOOP);
     p->timer = 0;
     gEventState->msgWaitActive = 1;
 }
@@ -6811,7 +6811,7 @@ u8 msgwait_1(MsgWaitWork* p, void* a) {
     p->gfx = AnimUpdate(&p->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(&p->anim, 3, 1);
+        AnimStart(&p->anim, 3, ANIM_FLAG_LOOP);
 
         if (p->unk_103 == 4) {
             gEventState->msgWaitActive = 0;
@@ -6862,14 +6862,14 @@ void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
     SetObjTileSource(p->tiles, gFEventTiles);
     AnimInit(&p->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&p->anim, 2, 1);
+    AnimStart(&p->anim, 2, ANIM_FLAG_LOOP);
     p->timer = 0;
     p->tiles2 = AllocObjTiles(288, 0);
     p->palette2 = LoadObjPalette(gUnk_09614418, 32);
     LoadObjPaletteBank(p->palette2->index, gUnk_09614418);
     SetObjTileSource(p->tiles2, gUnk_090A4664);
     AnimInit(&p->anim2, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&p->anim2, 2, 1);
+    AnimStart(&p->anim2, 2, ANIM_FLAG_LOOP);
     p->gfx2 = AnimGetGfx(&p->anim2);
     p->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
     p->palette3 = LoadObjPalette(gCard00Palette, 32);
@@ -6948,7 +6948,7 @@ u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
     p->gfx = AnimUpdate(&p->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(&p->anim, 3, 1);
+        AnimStart(&p->anim, 3, ANIM_FLAG_LOOP);
         p->choiceShown = 1;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);

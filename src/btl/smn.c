@@ -410,7 +410,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->speed = 0;
         }
         if (body->flags & 4) pixelX = gBtlWork->xMin + 50;
@@ -949,7 +949,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     work->variant = args->variant;
     work->palette = LoadObjPalette(gTinkPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, 1, work->tiles);
+    AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
     work->steps = 0;
@@ -1069,7 +1069,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         SmnTinkSpawnSparkle(work);
 
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, 1, work->tiles);
+            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->hoverZ = body->z;
             work->steps = 30;
         } else {
@@ -1094,7 +1094,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         SmnTinkSpawnSparkle(work);
 
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
         }
 
         p = work->actor;
@@ -1172,7 +1172,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             work->state = 3;
             work->stateTimer = 1;
         } else {
@@ -1260,13 +1260,13 @@ void task_smn_tinkeff_0(SmnTinkeffWork* work, BtlObj* args) {
 
     switch ((u16)(GetRandom() % 3)) {
     case 0:
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 1:
-        AnimStart(&work->anim, 1, 1);
+        AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
     case 2:
-        AnimStart(&work->anim, 2, 1);
+        AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
     }
 }
@@ -1567,7 +1567,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     work->variant = args->variant;
     work->palette = LoadObjPalette(gMushuPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, 1, work->tiles);
+    AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
     work->unk_14A = 0;
@@ -1663,7 +1663,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         break;
     case 2:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
 
             switch (work->variant) {
             case 0:
@@ -1893,7 +1893,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 
             if (body->flags & 4) {
                 BgFxStartDumboSplash(work->variant, body->x - 0x1C00, body->y,

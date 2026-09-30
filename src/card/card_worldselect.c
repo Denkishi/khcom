@@ -165,19 +165,19 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     gMapCardUiResources.tiles = AllocObjTiles(0x280, 0);
     SetObjTileSource(gMapCardUiResources.tiles, gUnk_0908B1B4);
     AnimInit(&gMapCardUiResources.anim, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&gMapCardUiResources.anim, 0, 1);
+    AnimStart(&gMapCardUiResources.anim, 0, ANIM_FLAG_LOOP);
     gMapCardUiResources.gfx = AnimGetGfx(&gMapCardUiResources.anim);
     w->tiles = AllocObjTiles(0x3C0, 0);
     w->palette2 = LoadObjPalette(gUnk_09618D18, 32);
     SetObjTileSource(w->tiles, gUnk_093F47E4);
     AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->tiles5 = AllocObjTiles(0x120, 0);
     w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
     SetObjTileSource(w->tiles5, gUnk_093F4578);
     AnimInit(&w->anim2, gUnk_09EF1170, gUnk_09EF1150);
-    AnimStart(&w->anim2, 0, 1);
+    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx2 = AnimGetGfx(&w->anim2);
     w->tiles7 = LoadObjTiles(gUnk_093F5422, 0xC0);
     w->y3 = -0x800;
@@ -403,7 +403,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a) {
         w->tiles = AllocObjTiles(0x1E0, 0);
         SetObjTileSource(w->tiles, gUnk_093F556C);
         AnimInit(&w->anim, gUnk_09EF11CC, gUnk_09EF11B8);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(&w->anim);
         w->savedCursorX = w->x2 >> 8;
         w->savedCursorY = w->y2 >> 8;
@@ -621,7 +621,7 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* w, void* a) {
         w->tiles = AllocObjTiles(0x3C0, 0);
         SetObjTileSource(w->tiles, gUnk_093F47E4);
         AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(&w->anim);
         w->x2 = w->savedCursorX << 8;
         w->y2 = w->savedCursorY << 8;
@@ -2677,10 +2677,10 @@ s32 UpdateReloadGageSlide(ReloadGauge* p, CardDisplayWork* w) {
 void InitReloadGageAnims(ReloadGauge* p, CardDisplayWork* w, u8 idx) {
     p->unk_0D = 2;
     AnimInit(&p->anim2, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
-    AnimStart(&p->anim2, 1, 1);
+    AnimStart(&p->anim2, 1, ANIM_FLAG_LOOP);
     p->gfx = gReloadGaugeFrames[idx][3];
     AnimInit(&p->anim3, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
-    AnimStart(&p->anim3, 2, 1);
+    AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP);
     p->gfx2 = gReloadGaugeFrames[idx][6];
 }
 void UpdateReloadGageAnims(ReloadGauge* p, CardDisplayWork* w) {
@@ -2696,7 +2696,7 @@ void AdvanceReloadGageAnim(ReloadGauge* p, CardDisplayWork* w) {
         p->unk_0D++;
     }
 
-    AnimStart(&p->anim3, p->unk_0D, 5);
+    AnimStart(&p->anim3, p->unk_0D, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 void ResetReloadGageAnim(ReloadGauge* p) {
     p->unk_0D = 2;

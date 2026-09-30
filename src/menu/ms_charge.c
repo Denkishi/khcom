@@ -637,7 +637,7 @@ void MsChargeHandleGridInput(void) {
     if (keys & 1) {
         MsChargeSelectFirstValue();
         m4aSongNumStart(SONG_SYS_KETTEI);
-        AnimStart(&sMsChargeHighlightAnim, 0, 1);
+        AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 1;
         sMsChargeMenuState = 2;
         MsChargeDrawPoints();
@@ -725,7 +725,7 @@ void MsChargeHandleTabInput(void) {
                 sMsChargeGridCol = 0;
                 sMsChargeGridRow = 0;
                 sMsChargeGridScroll = 0;
-                AnimStart(&sMsChargeHighlightAnim, 2, 1);
+                AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
                 sMsChargeMoogleAnimId = 0;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
                 sMsChargeMenuState = 0;
@@ -807,13 +807,13 @@ void MsChargeHandleValueInput(void) {
         } else {
             sMsChargeConfirmCursor = 0;
             sMsChargeConfirmCursorX = 0x4800;
-            AnimStart(&sMsChargeConfirmCursorAnim, 0, 1);
+            AnimStart(&sMsChargeConfirmCursorAnim, 0, ANIM_FLAG_LOOP);
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_CANSEL);
             sMsChargeMenuState = 3;
         }
     } else if (keys & 2) {
-        AnimStart(&sMsChargeHighlightAnim, 2, 1);
+        AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 0;
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeMenuState = 0;
@@ -884,7 +884,7 @@ void MsChargeHandleConfirmInput(void) {
                 MsChargeLoadSelectedCard();
 
                 if (GetMsChargeTabCount(sMsChargeTab) > 0) {
-                    AnimStart(&sMsChargeHighlightAnim, 2, 1);
+                    AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
                     sMsChargeMoogleAnimId = 0;
                     sMsChargeMenuState = 0;
                 } else {
@@ -895,7 +895,7 @@ void MsChargeHandleConfirmInput(void) {
                 if (MsCardSelectedValueIsEmpty(card)) {
                     MsChargeSelectNextValue(card);
                 }
-                AnimStart(&sMsChargeHighlightAnim, 0, 1);
+                AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
                 sMsChargeMoogleAnimId = 1;
                 sMsChargeMenuState = 2;
             }
@@ -905,14 +905,14 @@ void MsChargeHandleConfirmInput(void) {
             MsChargeDrawCategoryCounts();
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            AnimStart(&sMsChargeHighlightAnim, 0, 1);
+            AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
             sMsChargeMoogleAnimId = 1;
             sMsChargeMenuState = 2;
         }
     } else if (keys & 2) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        AnimStart(&sMsChargeHighlightAnim, 0, 1);
+        AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 1;
         sMsChargeMenuState = 2;
     } else if (keys & 8) {
@@ -1159,17 +1159,17 @@ void mode_ms_charge_0(void) {
     gUnk_02035D90 = LoadObjPalette(gCard00Palette, 32);
     sMsChargePremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
     AnimInit(&sMsChargePremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&sMsChargePremiumAnim, 0, 1);
+    AnimStart(&sMsChargePremiumAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeGridPremiumTiles = LoadObjTiles(gUnk_0908C3CE, 0x260);
     AnimInit(&sMsChargeGridPremiumAnim, gUnk_09EEA198, gUnk_09EEA180);
-    AnimStart(&sMsChargeGridPremiumAnim, 0, 1);
+    AnimStart(&sMsChargeGridPremiumAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeScrollbarTiles = LoadObjTiles(gUnk_099A7C78, 32);
     gUnk_02035C44 = LoadObjPalette(gUnk_09A3DE7C, 32);
     gUnk_02035C48 = LoadObjTiles(gUnk_099A6C82, 0xFE0);
     AnimInit(&gUnk_02035C50, gUnk_09EF9AA4, gUnk_09EF9A68);
-    AnimStart(&gUnk_02035C50, 1, 1);
+    AnimStart(&gUnk_02035C50, 1, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeHighlightAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
-    AnimStart(&sMsChargeHighlightAnim, 2, 1);
+    AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
     sMsChargeMoogleTiles = LoadObjTiles(
 #ifdef VERSION_EU
@@ -1183,13 +1183,13 @@ void mode_ms_charge_0(void) {
     ,
         gUnk_09EF9928
     );
-    AnimStart(&sMsChargeCursorAnim, 3, 1);
+    AnimStart(&sMsChargeCursorAnim, 3, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeMoogleAnim,
         gUnk_09EF9978
     ,
         gUnk_09EF9928
     );
-    AnimStart(&sMsChargeMoogleAnim, 0, 1);
+    AnimStart(&sMsChargeMoogleAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, 32);
     sMsChargeConfirmCursorTiles = LoadObjTiles(
 #ifdef VERSION_EU
@@ -1346,18 +1346,18 @@ void mode_ms_charge_1(void) {
             if (sMsChargeMoogleAnimId < 0) {
                 sMsChargeMoogleAnimId = AnimGetId(&sMsChargeMoogleAnim);
             }
-            AnimStart(&sMsChargeMoogleAnim, 2, 1);
+            AnimStart(&sMsChargeMoogleAnim, 2, ANIM_FLAG_LOOP);
         }
 
         if (--sMsChargeMoogleAnimTimer <= 0) {
             if (AnimGetId(&sMsChargeMoogleAnim) != sMsChargeMoogleAnimId) {
-                AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, 1);
+                AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, ANIM_FLAG_LOOP);
             }
             sMsChargeMoogleAnimId = -1;
         }
     } else if (sMsChargeMoogleAnimId >= 0) {
         if (AnimGetId(&sMsChargeMoogleAnim) != sMsChargeMoogleAnimId) {
-            AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, 1);
+            AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, ANIM_FLAG_LOOP);
         }
         sMsChargeMoogleAnimId = -1;
     }

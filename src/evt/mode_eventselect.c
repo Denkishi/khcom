@@ -225,7 +225,7 @@ void Hanabira_c_0(EffectWork* w, EventCharaWork* chara) {
     w->vx = GetRandom() % 717 - 358;
     w->vz = -(GetRandom() % 539 + 102);
     AnimInit(&w->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
-    AnimStart(&w->anim, GetRandom() & 1, 1);
+    AnimStart(&w->anim, GetRandom() & 1, ANIM_FLAG_LOOP);
     w->state = 0;
 }
 
@@ -296,7 +296,7 @@ void smoke_0(EffectWork* w, EventCharaWork* chara) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_093215CA);
     AnimInit(&w->anim, gUnk_09EEFD78, gUnk_09EEFD60);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->followFlip = 1;
     w->age = 0;
@@ -335,7 +335,7 @@ void balloon_0(EffectWork* w, EventCharaWork* chara) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gFEventTiles);
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&w->anim, 1, 1);
+    AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->followFlip = 0;
     w->age = 0;
@@ -406,7 +406,7 @@ s32 Question_1(EffectWork* w) {
     w->timer++;
 
     if (w->timer == 12) {
-        AnimStart(&w->anim, 6, 1);
+        AnimStart(&w->anim, 6, ANIM_FLAG_LOOP);
     }
 
     if (w->actor->callbackActive == 0) {
@@ -488,7 +488,7 @@ void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_09321804);
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->followFlip = 1;
     w->age = 0;
@@ -526,7 +526,7 @@ void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_09321804);
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
-    AnimStart(&w->anim, 1, 1);
+    AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->followFlip = 1;
     w->age = 0;

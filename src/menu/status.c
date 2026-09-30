@@ -523,7 +523,7 @@ void task_status_sora_0(StatusSoraWork* work) {
         SetObjTileSource(work->tiles, gSor1ll51Tiles);
         AnimInit(&work->anim, gSor1ll51Anims, gSor1ll51Frames);
     }
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 }
 
@@ -578,12 +578,12 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68F0, 5), gUnk_097A1C54);
     work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
     AnimInit(&work->anim[0], gUnk_09EF6904, gUnk_09EF68F0);
-    AnimStart(&work->anim[0], 0, 1);
+    AnimStart(&work->anim[0], 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim[0]);
     work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6908, 4), gUnk_097A2394);
     work->palette2 = LoadObjPalette(gUnk_0984B1F8, 0x20);
     AnimInit(&work->anim[1], gUnk_09EF691C, gUnk_09EF6908);
-    AnimStart(&work->anim[1], 0, 1);
+    AnimStart(&work->anim[1], 0, ANIM_FLAG_LOOP);
     work->gfx[1] = AnimGetGfx(&work->anim[1]);
     work->lastCursor = *work->cursor;
     if (work->lastCursor < 0) {

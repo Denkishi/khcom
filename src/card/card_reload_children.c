@@ -452,7 +452,7 @@ void RELOAD_0(ReloadWork* w, ReloadArgs* a) {
     w->args = *a;
     SetObjTileSource(w->tiles, gReloadTiles[w->args.slot]);
     AnimInit(&w->anim, gReloadAnims[w->args.slot], gReloadFrames[w->args.slot]);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
 
     switch (w->args.mode) {

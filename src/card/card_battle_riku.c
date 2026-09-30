@@ -3579,11 +3579,11 @@ void AdvanceRikuReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
         gCardBattleState->rikuGaugeAnim++;
     }
 
-    AnimStart(&p->anim3, (u16)gCardBattleState->rikuGaugeAnim, 5);
+    AnimStart(&p->anim3, (u16)gCardBattleState->rikuGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 void ResetRikuReloadGaugeAnim(ReloadGauge* p) {
     gCardBattleState->rikuGaugeAnim = 2;
-    AnimStart(&p->anim3, 2, 5);
+    AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 void func_080832D0(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = gRiCardF0RedFrames[3];
@@ -3765,10 +3765,10 @@ void LoadRikuReloadCardGfx(CardDisplayWork* w) {
     w->tiles4 = AllocObjTiles(128, 0);
     SetObjTileSource(w->tiles4, gRiCardF0RedTiles);
     AnimInit(&q->anim2, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(&q->anim2, 1, 1);
+    AnimStart(&q->anim2, 1, ANIM_FLAG_LOOP);
     q->gfx = gRiCardF0RedFrames[3];
     AnimInit(&q->anim3, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(&q->anim3, gCardBattleState->rikuGaugeAnim, 1);
+    AnimStart(&q->anim3, gCardBattleState->rikuGaugeAnim, ANIM_FLAG_LOOP);
     q->gfx2 = gRiCardF0RedFrames[gCardBattleState->rikuGaugeFullFrame + 2];
 }
 

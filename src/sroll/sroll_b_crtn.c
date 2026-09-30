@@ -75,7 +75,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
         break;
     case 5:
         if (w->timer == 12) {
-            AnimStart(&w->anim, 6, 1);
+            AnimStart(&w->anim, 6, ANIM_FLAG_LOOP);
         }
     case 0:
     case 3:

@@ -145,7 +145,7 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             work->state = 3;
             work->timer = 0;
             AnimReset(&work->anim);
-            AnimChange(&work->anim, 6, 1);
+            AnimChange(&work->anim, 6, ANIM_FLAG_LOOP);
         }
         break;
     case 3:

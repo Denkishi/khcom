@@ -861,11 +861,11 @@ void mode_worldinspect_0(void) {
     gUnk_02035124 = LoadObjPalette(gUnk_09A3D09C, 0x20);
     sWorldInspectHighlightTiles = LoadObjTiles(gUnk_0999D41A, 0x400);
     AnimInit(&sWorldInspectHighlightAnim, gUnk_09EF97C4, gUnk_09EF97B0);
-    AnimStart(&sWorldInspectHighlightAnim, 0, 1);
+    AnimStart(&sWorldInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
     sWorldInspectCursorPalette = LoadObjPalette(gUnk_09A3D0BC, 0x20);
     sWorldInspectCursorTiles = LoadObjTiles(gUnk_0999D8A8, 0xC0);
     AnimInit(&sWorldInspectCursorAnim, gUnk_09EF97DC, gUnk_09EF97CC);
-    AnimStart(&sWorldInspectCursorAnim, 0, 1);
+    AnimStart(&sWorldInspectCursorAnim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
     InitTextSlots(sWorldInspectNameText, 0x30);
 #else

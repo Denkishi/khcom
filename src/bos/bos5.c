@@ -878,13 +878,13 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     p = sGaEntryDefs[i].gfxTable;
     e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, sGaEntryDefs[i].spriteCount), sGaEntryDefs[i].owner);
     AnimInit(&e->anim, sGaEntryDefs[i].anims, p);
-    AnimStart(&e->anim, 0, 1);
+    AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
     e->gfx = AnimGetGfx(&e->anim);
 
     if (i == 0) {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF9728, 4), gUnk_099999AC);
         AnimInit(&work->anim, gUnk_09EF9738, gUnk_09EF9728);
-        AnimStart(&work->anim, 0, 1);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
     }
     ColliderInit(&e->actor.collider, 8, 8, 0x10);
@@ -1770,11 +1770,11 @@ u8 BosGaUpdateOrbit(GaWork* work) {
                 break;
             case 2:
                 e->orbitAngle = 0x80;
-                AnimStart(&e->anim, 1, 1);
+                AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             case 3:
                 e->orbitAngle = work->flipped == 0 ? 0xC0 : 0x40;
-                AnimStart(&e->anim, 1, 1);
+                AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             }
             break;
@@ -1841,7 +1841,7 @@ u8 BosGaUpdateOrbit(GaWork* work) {
                 break;
             case 2:
             case 3:
-                AnimStart(&e->anim, 0, 1);
+                AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 break;
             }
             BosGaEntryResetHome(work, i);
@@ -1879,8 +1879,8 @@ u8 BosGaUpdateJump(GaWork* work) {
             e->flags |= 1;
 
             if (i == 0) {
-                AnimStart(&work->anim, 1, 1);
-                AnimStart(&e->anim, 2, 1);
+                AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
+                AnimStart(&e->anim, 2, ANIM_FLAG_LOOP);
             }
         }
         work->step = 0;
@@ -1953,8 +1953,8 @@ u8 BosGaUpdateJump(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&work->anim, 0, 1);
-                AnimStart(&e->anim, 0, 1);
+                AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+                AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 ClearBtlObjActionFlags(&e->actor);
             default:
                 e->flags &= 0xFFFE;
@@ -1998,7 +1998,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&e->anim, 1, 1);
+                AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             case 1:
                 e->baseX = gBtlWork->bossX;
@@ -2127,8 +2127,8 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&work->anim, 0, 1);
-                AnimStart(&e->anim, 0, 1);
+                AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+                AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 ClearBtlObjActionFlags(&e->actor);
             default:
                 e->flags &= 0xFFFE;
@@ -2172,7 +2172,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&e->anim, 1, 1);
+                AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             case 1:
                 e->baseX = gBtlWork->bossX;
@@ -2287,8 +2287,8 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&work->anim, 0, 1);
-                AnimStart(&e->anim, 0, 1);
+                AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+                AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 ClearBtlObjActionFlags(&e->actor);
             default:
                 e->flags &= 0xFFFE;
@@ -2332,7 +2332,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&e->anim, 1, 1);
+                AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             case 1:
                 e->baseX = gBtlWork->bossX;
@@ -2454,8 +2454,8 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
 
             switch (i) {
             case 0:
-                AnimStart(&work->anim, 0, 1);
-                AnimStart(&e->anim, 0, 1);
+                AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+                AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 ClearBtlObjActionFlags(&e->actor);
             default:
                 e->flags &= 0xFFFE;
@@ -2505,8 +2505,8 @@ u8 BosGaUpdateGimmick(GaWork* work) {
                 e->mode = 1;
 
                 if (i == 0) {
-                    AnimStart(&work->anim, 1, 1);
-                    AnimStart(&e->anim, 2, 1);
+                    AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
+                    AnimStart(&e->anim, 2, ANIM_FLAG_LOOP);
                 }
             }
         }
@@ -2528,8 +2528,8 @@ u8 BosGaUpdateGimmick(GaWork* work) {
             t = e->flags & 4;
             if (t == 0) {
                 if (i == 0) {
-                    AnimStart(&work->anim, 0, 1);
-                    AnimStart(&e->anim, 0, 1);
+                    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+                    AnimStart(&e->anim, 0, ANIM_FLAG_LOOP);
                 }
                 e->mode = t;
                 BosGaEntryResetHome(work, i);
@@ -4179,7 +4179,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->tiles = LoadObjTiles(gUnk_099E367C, 0x800);
     AnimInit(&work->anim, gUnk_09EF9BC0, gUnk_09EF9BB0);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     a.pool = 0;
     a.pattern = arg->pattern;
     a.flags = arg->flags;

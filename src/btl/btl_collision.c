@@ -1073,11 +1073,11 @@ void ColliderUpdateAll(void) {
 
 void ColliderSetDisabled(Collider* p, u8 b) {
     if (b) {
-        p->node.flags |= 2;
+        p->node.flags |= LIST_NODE_FLAG_SKIP;
         p->colliding = 0;
         p->standFlags = 0;
     } else {
-        p->node.flags &= ~2;
+        p->node.flags &= ~LIST_NODE_FLAG_SKIP;
     }
 }
 

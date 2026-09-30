@@ -1878,7 +1878,7 @@ void MapGmkJumpWaitStep(MapGmkJumpWork* w) {
         gMapRoomState->jumpGmkAngle = w->obj.angle;
         w->update = MapGmkJumpWaitJump;
         w->state = 1;
-        AnimStart(&w->anim, 1, 1);
+        AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     } else {
         AnimUpdate(&w->anim);
     }
@@ -1891,11 +1891,11 @@ void MapGmkJumpWaitJump(MapGmkJumpWork* w) {
     } else if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.ground) {
         w->update = MapGmkJumpLaunch;
         w->state = 2;
-        AnimStart(&w->anim, 2, 1);
+        AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
     } else {
         w->update = MapGmkJumpWaitStep;
         w->state = 0;
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     }
 }
 
@@ -1903,7 +1903,7 @@ void MapGmkJumpLaunch(MapGmkJumpWork* w) {
     if (AnimIsFinished(&w->anim)) {
         w->update = MapGmkJumpWaitStep;
         w->state = 0;
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     } else {
         AnimUpdate(&w->anim);
     }
@@ -1937,7 +1937,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* w, MapPlatform* arg) {
     a = &w->anim;
     AnimInit(a, gUnk_09EF8488, gUnk_09EF8468);
     w->state = 0;
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->update = MapGmkJumpWaitStep;
     ColliderInit(&w->collider, 6, 16, 0);
     ColliderSetPosition(&w->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
@@ -2022,7 +2022,7 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* w, FldPos* arg) {
 
     do {
         AnimInit(an, anim, frames);
-        AnimStart(an, 0, 1);
+        AnimStart(an, 0, ANIM_FLAG_LOOP);
     } while (0);
     w->gfx = AnimGetGfx(an);
     w->update = MapGmkEnmRise;
@@ -2217,7 +2217,7 @@ void Task_MapGmk_Spider_0(MapGmkSpiderWork* w, MapGmkPlacement* arg) {
     w->tiles = AllocObjTiles(0x720, gEmy2103Tiles);
     w->palette = LoadObjPalette(gEmy21Palette, 32);
     AnimInit(&w->anim, gEmy2103Anims, gEmy2103Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     SetObjTileSource(w->tiles, gEmy2103Tiles);
     w->update = MapGmkSpiderStartBattle;
@@ -2309,7 +2309,7 @@ void Task_MapGmk_GP00_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     w->tiles = LoadObjTiles(d->tiles, d->tilesSize);
     w->palette = LoadObjPalette(d->palette, 32);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 6, d->radius, d->height);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -2406,7 +2406,7 @@ void Task_MapGmk_GP01_0(MapGmkGp1Work* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     SetObjTileSource(w->tiles, d->tiles);
     ColliderInit(&w->collider, 6, d->radius, d->height);
@@ -2498,7 +2498,7 @@ void Task_MapGmk_GP02_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     SetObjTileSource(w->tiles, d->tiles);
     ColliderInit(&w->collider, 6, d->radius, d->height);
@@ -2602,7 +2602,7 @@ void Task_MapGmk_GP03_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     SetObjTileSource(w->tiles, d->tiles);
     ColliderInit(&w->collider, 6, d->radius, d->height);
@@ -2659,7 +2659,7 @@ u8 MapGmkGp04WaitHit(MapGmkGpWork* w) {
         DropMapGmkPrize(q);
         w->placement->flags |= 2;
         gMapRoomState->flags |= 0x80;
-        AnimStart(a, 1, 1);
+        AnimStart(a, 1, ANIM_FLAG_LOOP);
         w->timer = 20;
         w->update = MapGmkGp04HitDelay;
     }
@@ -2693,9 +2693,9 @@ void Task_MapGmk_GP04_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     AnimInit(&w->anim, d->anims, d->gfxTable);
 
     if (w->placement->flags & 2) {
-        AnimStart(&w->anim, 1, 1);
+        AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     } else {
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     }
 
     w->gfx = AnimGetGfx(&w->anim);
@@ -2786,9 +2786,9 @@ void Task_MapGmk_GP05_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     AnimInit(&w->anim, d->anims, d->gfxTable);
 
     if (w->placement->flags & 2) {
-        AnimStart(&w->anim, 2, 1);
+        AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
     } else {
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     }
 
     w->gfx = AnimGetGfx(&w->anim);
@@ -2854,10 +2854,10 @@ u8 MapGmkGp06WaitHit(MapGmkGpWork* w) {
 
         if (w->placement->flags & 4) {
             w->placement->flags &= ~4;
-            AnimStart(a, 0, 1);
+            AnimStart(a, 0, ANIM_FLAG_LOOP);
         } else {
             w->placement->flags |= 4;
-            AnimStart(a, 1, 1);
+            AnimStart(a, 1, ANIM_FLAG_LOOP);
         }
 
         w->timer = 20;
@@ -2893,9 +2893,9 @@ void Task_MapGmk_GP06_0(MapGmkGpWork* w, MapGmkPlacement* arg) {
     AnimInit(&w->anim, d->anims, d->gfxTable);
 
     if (w->placement->flags & 4) {
-        AnimStart(&w->anim, 1, 1);
+        AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     } else {
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     }
 
     w->gfx = AnimGetGfx(&w->anim);
@@ -2975,7 +2975,7 @@ s32 MapGmkGp07EndAnim(MapGmkGp07Work* w) {
     AnimState* a = &w->anim;
 
     if (AnimIsFinished(a)) {
-        AnimStart(a, 0, 1);
+        AnimStart(a, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         w->update = MapGmkGp07WaitStep;
     } else {
@@ -2997,7 +2997,7 @@ void Task_MapGmk_GP07_0(MapGmkGp07Work* w, MapGmkPlacement* arg) {
     w->tiles = AllocObjTiles(d->tilesSize, d->tiles);
     w->palette = LoadObjPalette(d->palette, 32);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     SetObjTileSource(w->tiles, d->tiles);
     ColliderInit(&w->collider, 6, d->radius, d->height);
@@ -3090,7 +3090,7 @@ void Task_MapGmk_GP08_0(MapGmkGp08Work* w, MapGmkPlacement* arg) {
     w->tiles = LoadObjTiles(d->tiles, d->tilesSize);
     w->palette = LoadObjPalette(d->palette, 32);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 6, d->radius, d->height);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -3190,7 +3190,7 @@ void Task_MapGmk_GP09_0(MapGmkGp09Work* w, MapGmkPlacement* arg) {
     w->tiles = LoadObjTiles(d->tiles, d->tilesSize);
     w->palette = LoadObjPalette(d->palette, 32);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 6, d->radius, d->height);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -3253,7 +3253,7 @@ void Task_MapGmk00_0(MapGmk00Work* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     ColliderInit(&w->collider, 6, d->radius, d->height);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -3325,7 +3325,7 @@ u8 MapGmk01WaitHit(MapGmk01Work* w) {
         gMapRoomState->flags |= 0x80;
         m4aSongNumStart(SONG_SYS_TRESURE);
         a = &w->anim;
-        AnimStart(a, 1, 1);
+        AnimStart(a, 1, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         SetObjTileSource(w->tiles, gUnk_09858320);
         w->update = MapGmk01Open;
@@ -3379,12 +3379,12 @@ void Task_MapGmk01_0(MapGmk01Work* w, MapGmkPlacement* arg) {
     AnimInit(a, d->anims, d->gfxTable);
 
     if (w->placement->flags & 2) {
-        AnimStart(a, 1, 1);
+        AnimStart(a, 1, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         w->update = 0;
     } else {
         gMapRoomState->flags |= 0x20;
-        AnimStart(a, 0, 1);
+        AnimStart(a, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         w->update = MapGmk01WaitHit;
     }
@@ -3519,7 +3519,7 @@ void Task_MapGmk_Barrel_0(MapGmkBarrelWork* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     SetObjTileSource(w->tiles, d->tiles);
     ColliderInit(&w->collider, 6, d->radius, d->height);
@@ -3618,7 +3618,7 @@ void Task_MapGmk04_0(MapGmk04Work* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     w->tiles = AllocObjTiles(d->tilesSize, d->tiles);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 4, 24, 24);
     ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -3708,7 +3708,7 @@ void Task_MapGmk05_0(MapGmk05Work* w, MapGmkPlacement* arg) {
     w->tiles = AllocObjTiles(d->tilesSize, d->tiles);
     a = &w->anim;
     AnimInit(a, d->anims, d->gfxTable);
-    AnimStart(a, 0, 1);
+    AnimStart(a, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(a);
     ColliderInit(&w->collider, 4, 16, 24);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -3815,7 +3815,7 @@ void Task_MapGmk06_0(MapGmk06Work* w, MapGmkPlacement* arg) {
     w->palette = LoadObjPalette(d->palette, 32);
     w->tiles = AllocObjTiles(d->tilesSize, d->tiles);
     AnimInit(&w->anim, d->anims, d->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 4, 24, 24);
     ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
@@ -4442,9 +4442,9 @@ void Task_MapSpark_0(MapSparkWork* w, FldObj* obj) {
     AnimInit(a, gUnk_09EF8CC0, gUnk_09EF8CA0);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        AnimStart(a, 1, 1);
+        AnimStart(a, 1, ANIM_FLAG_LOOP);
     } else {
-        AnimStart(a, 0, 1);
+        AnimStart(a, 0, ANIM_FLAG_LOOP);
     }
 }
 
@@ -4484,7 +4484,7 @@ void Task_MapTalk_0(MapTalkWork* w, FldObj* obj) {
     w->tiles = AllocObjTiles(0x200, &gUnk_098A4B68[0x1028]);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     AnimInit(&w->anim, gUnk_09EF8CD0, gUnk_09EF8CC8);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->playerOnRight = 0;
 }
 
@@ -4496,10 +4496,10 @@ s32 Task_MapTalk_1(MapTalkWork* w) {
 
     if (gFieldState->actor.fieldPosition.x < p->fieldPosition.x) {
         w->playerOnRight = 0;
-        AnimStart(anim, 0, 1);
+        AnimStart(anim, 0, ANIM_FLAG_LOOP);
     } else {
         w->playerOnRight = 1;
-        AnimStart(anim, 1, 1);
+        AnimStart(anim, 1, ANIM_FLAG_LOOP);
     }
     return 1;
 }

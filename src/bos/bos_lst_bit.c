@@ -195,7 +195,7 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
 
 #ifdef VERSION_EU
     AnimReset(&s->anim);
-    AnimChange(&s->anim, sLstAnimSets[s->animSet].idleAnim, 1);
+    AnimChange(&s->anim, sLstAnimSets[s->animSet].idleAnim, ANIM_FLAG_LOOP);
 
     if (s->state != 0 && s->state != 5) {
         s->state = 7;
@@ -338,7 +338,7 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
-    AnimStart(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
+    AnimStart(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
     InitEnemyBtlObj(&work->obj, &sBosLstBitEmyKind, work->x, work->y, work->z);
     pool = &work->tasks;
     TaskPoolInit(pool, 4);
@@ -435,7 +435,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             }
 
             AnimReset(&work->anim);
-            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
+            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         }
 
         if (!(gBtlWork->flags & 0x2000000000000)) {
@@ -483,7 +483,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             work->fireZ = work->z + work->orbitZ;
             m4aSongNumStart(SONG_SND_708);
             AnimReset(&work->anim);
-            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
+            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         }
         break;
     case 3:
@@ -571,10 +571,10 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->scaleX = 0x100;
         work->scaleY = 0x100;
         AnimReset(&work->anim);
-        AnimChange(&work->anim, 4, 1);
+        AnimChange(&work->anim, 4, ANIM_FLAG_LOOP);
         break;
     case 7:
-        AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
+        AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         break;
     }
 

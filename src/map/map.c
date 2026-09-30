@@ -3698,7 +3698,7 @@ void Mode_MenuNew_0(void) {
     gNewGameSlotMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
     gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
     AnimInit(&gNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
-    AnimStart(&gNewGameSlotMenuWork->anim, 0, 1);
+    AnimStart(&gNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
     gNewGameSlotMenuWork->palette8 = LoadObjPalette(gUnk_09991C04, 32);
     gNewGameSlotMenuWork->textSlotCount = 0;
     InitTextSlots(gNewGameSlotMenuWork->textSlots, 36);
@@ -4326,7 +4326,7 @@ void Mode_MenuLoad_0(s32 arg) {
     gLoadGameMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
     gLoadGameMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
     AnimInit(&gLoadGameMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
-    AnimStart(&gLoadGameMenuWork->anim, 0, 1);
+    AnimStart(&gLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
     gLoadGameMenuWork->palette7 = LoadObjPalette(gUnk_09991C04, 32);
     gLoadGameMenuWork->textSlotCount = 0;
     InitTextSlots(gLoadGameMenuWork->textSlots, 36);
@@ -5125,7 +5125,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
         w->palette = LoadObjPalette(gUnk_099919A4, 32);
         w->tiles = AllocObjTiles(0x120, gUnk_098A8628);
         AnimInit(&w->anim, gUnk_09EF8D58, gUnk_09EF8D48);
-        AnimStart(&w->anim, 2, 1);
+        AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
 
         for (i = 0; i < 3; i++) {
             w->tiles9[i] = 0;
@@ -6008,7 +6008,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
         w->palette = LoadObjPalette(gUnk_099919A4, 32);
         w->tiles = AllocObjTiles(0x120, gUnk_098A8628);
         AnimInit(&w->anim, gUnk_09EF8D58, gUnk_09EF8D48);
-        AnimStart(&w->anim, 2, 1);
+        AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
         w->palette8 = LoadTextPalette(1);
         p1 = w->textSlots2;
 #ifdef VERSION_EU

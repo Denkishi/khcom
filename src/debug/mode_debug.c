@@ -55,7 +55,7 @@ void mode_debug_0(void) {
     gDebugWork->tiles = LoadObjTiles(gUnk_08950902, 0x2E0);
     gDebugWork->palette = LoadObjPalette(gUnk_08F685E4, 0x20);
     AnimInit(&gDebugWork->anim, gUnk_09EDF774, gUnk_09EDF764);
-    AnimStart(&gDebugWork->anim, 0, 1);
+    AnimStart(&gDebugWork->anim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_JP
     DebugTextPrint(0, 0, 2, "\x82\x69\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
 #elif defined(VERSION_EU)

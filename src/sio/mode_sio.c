@@ -429,7 +429,7 @@ void SioBtlOptionInitObjs(void) {
     gSioBtlOptionWork->tiles2 = LoadObjTiles(gUnk_0962B090, 0x1C0);
     gSioBtlOptionWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
     AnimInit(&gSioBtlOptionWork->anim, gUnk_09EF38B4, gUnk_09EF3894);
-    AnimStart(&gSioBtlOptionWork->anim, 1, 1);
+    AnimStart(&gSioBtlOptionWork->anim, 1, ANIM_FLAG_LOOP);
     gSioBtlOptionWork->gfx2 = AnimGetGfx(&gSioBtlOptionWork->anim);
     gSioBtlOptionWork->cursorVisible = 1;
     gSioBtlOptionWork->tiles3 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -2402,12 +2402,12 @@ void SioChgCardInitObjs(void) {
     gSioChgCardWork->tiles = LoadObjTiles(gUnk_0962DEA8, 0x780);
     gSioChgCardWork->palette = LoadObjPalette(gUnk_096FBF04, 32);
     AnimInit(&gSioChgCardWork->anim2, gUnk_09EF3920, gUnk_09EF390C);
-    AnimStart(&gSioChgCardWork->anim2, 0, 1);
+    AnimStart(&gSioChgCardWork->anim2, 0, ANIM_FLAG_LOOP);
     gSioChgCardWork->gfx2 = AnimGetGfx(&gSioChgCardWork->anim2);
     gSioChgCardWork->tiles2 = LoadObjTiles(gUnk_0962B090, 0x1C0);
     gSioChgCardWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
     AnimInit(&gSioChgCardWork->anim3, gUnk_09EF38B4, gUnk_09EF3894);
-    AnimStart(&gSioChgCardWork->anim3, 0, 1);
+    AnimStart(&gSioChgCardWork->anim3, 0, ANIM_FLAG_LOOP);
     gSioChgCardWork->gfx3 = AnimGetGfx(&gSioChgCardWork->anim3);
 
     for (i = 0; i < 10; i++) {

@@ -40,7 +40,7 @@ void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
     work->tiles = AllocObjTiles(0x80, gUnk_09C5C4E2);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFAF1C, gUnk_09EFAEF8);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 
 u8 task_bos_lst_edg_1(LstEdgWork* work) {
@@ -94,7 +94,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         work->delay = 0;
         break;
     case 4:
-        AnimStart(&work->anim, 1, 1);
+        AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
     }
 

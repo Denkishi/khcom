@@ -1035,11 +1035,11 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
 
     for (i = 0; i < 3; i++) {
         AnimInit(&work->joints.arms[0][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
-        AnimStart(&work->joints.arms[0][i].anim, 0, 1);
+        AnimStart(&work->joints.arms[0][i].anim, 0, ANIM_FLAG_LOOP);
         work->joints.arms[0][i].anim.frame = i * 2;
         work->joints.arms[0][i].gfx = AnimGetGfx(&work->joints.arms[0][i].anim);
         AnimInit(&work->joints.arms[1][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
-        AnimStart(&work->joints.arms[1][i].anim, 0, 1);
+        AnimStart(&work->joints.arms[1][i].anim, 0, ANIM_FLAG_LOOP);
         work->joints.arms[1][i].anim.frame = i * 2;
         work->joints.arms[1][i].gfx = AnimGetGfx(&work->joints.arms[1][i].anim);
     }
@@ -1049,7 +1049,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->tiles2 = AllocObjTiles(0x140, gUnk_09657C04);
     work->src->tm->tileCount += work->tiles2->count;
     AnimInit(&work->anim, gUnk_09EF3A18, gUnk_09EF39F8);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->clb.tiles = work->tiles2;
     work->clb2.tiles = work->tiles2;
     gfx = AnimGetGfx(&work->anim);

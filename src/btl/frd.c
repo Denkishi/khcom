@@ -317,8 +317,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->unk_158 = gSineTable[angle] * 3;
             work->unk_15C = -gSineTable[angle + 64] * 3;
         }
-        if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, 1, work->tiles);
-        else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, 1, work->tiles);
+        if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
+        else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
         if (work->unk_158 < 0) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x += work->unk_158;
@@ -814,7 +814,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 6:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 4, 1, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
             work->angle = GetRandom();
         }
 
@@ -1024,7 +1024,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         }
         break;
     case 2:
-        AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, 1, work->tiles);
+        AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
 
         if (body->flags & 4
                 ? ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)
@@ -1808,7 +1808,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 4:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->steps = 70;
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
@@ -2065,7 +2065,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         }
         SelectLockonTarget();
         if (work->actor->flags & 4) {
@@ -2313,7 +2313,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 
             if (work->variant != 2) {
                 m4aSongNumStart(SONG_VO_BE_ATTACK00);

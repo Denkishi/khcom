@@ -210,12 +210,12 @@ void UpdateMsTopWarpGfx(void) {
         sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[flag].gfx[i].palette, sWarpDefs[flag].gfx[i].paletteSize);
         sMsTopWarpTiles[i] = LoadObjTiles(sWarpDefs[flag].gfx[i].tiles, sWarpDefs[flag].gfx[i].tilesSize);
         AnimInit(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].anims, sWarpDefs[flag].gfx[i].gfxTable);
-        AnimStart(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].animId, 1);
+        AnimStart(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].animId, ANIM_FLAG_LOOP);
     }
 }
 
 void SetMsTopWarpAnim(s16 a) {
-    AnimStart(&gWorldwarpAnim, sWarpDefs[a].animId, 1);
+    AnimStart(&gWorldwarpAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
 }
 
 void QueueMsTopIntroMessage(void) {
@@ -235,7 +235,7 @@ void MsTopHandleInput(void) {
     keys = GetKeysPressed();
     if (keys & A_BUTTON) {
         if (sMsTopCursor == 1) {
-            AnimStart(&sMsTopWarpAnims[sMsTopCursor], 2, 1);
+            AnimStart(&sMsTopWarpAnims[sMsTopCursor], 2, ANIM_FLAG_LOOP);
         }
         sMsTopNextMode = sWarpDefs[sMsTopCursor].mode;
         m4aSongNumStart(SONG_SYS_KETTEI);
@@ -270,13 +270,13 @@ void MsTopHandleInput(void) {
         sMsTopScrollDir = 1;
         sMsTopScrollSteps = 30 - sMsTopScrollSteps;
         sMsTopMoogleWalkDir = 1;
-        AnimStart(&sMsTopMoogleAnim, 1, 1);
+        AnimStart(&sMsTopMoogleAnim, 1, ANIM_FLAG_LOOP);
     } else if ((keys & DPAD_RIGHT) && sMsTopScrollDir != 2 && sMsTopCursor != 1) {
         sMsTopCursor = 1;
         sMsTopScrollDir = 2;
         sMsTopScrollSteps = 30 - sMsTopScrollSteps;
         sMsTopMoogleWalkDir = 2;
-        AnimStart(&sMsTopMoogleAnim, 1, 1);
+        AnimStart(&sMsTopMoogleAnim, 1, ANIM_FLAG_LOOP);
     }
 
     if (sMsTopCursor != prev) {
@@ -434,13 +434,13 @@ void mode_ms_top_0(u32 a) {
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, 0x20);
     sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
-    AnimStart(&sMsTopSoraAnim, 0, 1);
+    AnimStart(&sMsTopSoraAnim, 0, ANIM_FLAG_LOOP);
     sMsTopShadowPalette = LoadObjPalette(gBStatesPalette, 0x20);
     sMsTopShadowTiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
     sMsTopMooglePalette = LoadObjPalette(gMoguPalette, 0x20);
     sMsTopMoogleTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
     AnimInit(&sMsTopMoogleAnim, gMoguFl00Anims, gMoguFl00Frames);
-    AnimStart(&sMsTopMoogleAnim, 0, 1);
+    AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
     SetMsTopWarpAnim(sMsTopCursor);
     UpdateMsTopWarpGfx();
     UpdateMsTopMooglePalette();
@@ -604,7 +604,7 @@ void mode_ms_top_1(void) {
         sMsTopMoogleX -= 0x180;
 
         if (sMsTopMoogleX <= 0) {
-            AnimStart(&sMsTopMoogleAnim, 0, 1);
+            AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
             sMsTopMoogleX = 0;
             sMsTopMoogleWalkDir = 0;
         }
@@ -613,7 +613,7 @@ void mode_ms_top_1(void) {
         UpdateMsTopMooglePalette();
         sMsTopMoogleX += 0x180;
         if (sMsTopMoogleX >= 0xBC00) {
-            AnimStart(&sMsTopMoogleAnim, 0, 1);
+            AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
             sMsTopMoogleX = 0xBC00;
             sMsTopMoogleWalkDir = 0;
         }

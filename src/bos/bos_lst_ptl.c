@@ -38,7 +38,7 @@ void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
     work->tiles = LoadObjTiles(gUnk_09CD0C34, 0x200);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBF54, gUnk_09EFBF40);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 
 u8 task_bos_lst_ptl_1(LstPtlWork* work) {
@@ -55,7 +55,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
             work->timer = 0;
             work->delay = 0;
             AnimReset(&work->anim);
-            AnimChange(&work->anim, 1, 1);
+            AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         }
         break;
     case 1:
@@ -73,7 +73,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
         break;
     case 2:
         AnimReset(&work->anim);
-        AnimChange(&work->anim, 0, 1);
+        AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     }
 

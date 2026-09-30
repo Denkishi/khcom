@@ -444,7 +444,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].tiles2 = LoadObjTiles(gUnk_099A4B9A, 0x1D80);
         sMooglePackCards[i].backSprite = 0;
         AnimInit(&sMooglePackCards[i].anim, gUnk_09EF9A48, gUnk_09EF9A20);
-        AnimStart(&sMooglePackCards[i].anim, 0, 1);
+        AnimStart(&sMooglePackCards[i].anim, 0, ANIM_FLAG_LOOP);
         sMooglePackCards[i].x = x << 8;
         sMooglePackCards[i].y = y << 8;
         sMooglePackCards[i].scale = 2;
@@ -462,7 +462,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
     gUnk_02035AE0 = LoadObjPalette(gUnk_09A3DA7C, 0x20);
     sMooglePackCursorTiles = LoadObjTiles(gUnk_099A3CE4, 0x1C0);
     AnimInit(&sMooglePackCursorAnim, gUnk_09EF99F8, gUnk_09EF99D8);
-    AnimStart(&sMooglePackCursorAnim, 0, 1);
+    AnimStart(&sMooglePackCursorAnim, 0, ANIM_FLAG_LOOP);
     FadeSetPaletteExcluded(gUnk_02035AE0->index + 0x10, 1);
     gUnk_02035A40 = LoadObjPalette(gUnk_09A3DB7C, 0x20);
     FadeSetPaletteExcluded(gUnk_02035A40->index + 0x10, 1);
@@ -474,7 +474,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
     InitTextSlots(sMooglePackDescText, 0x5A);
     sMooglePackPremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
     AnimInit(&sMooglePackPremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&sMooglePackPremiumAnim, 0, 1);
+    AnimStart(&sMooglePackPremiumAnim, 0, ANIM_FLAG_LOOP);
 
     for (i = 0; i < 5; i++) {
         TaskPoolInit(&sMooglePackHosiTasks[i], 8);
@@ -1164,7 +1164,7 @@ void mode_ms_shop_0(void) {
     sMoogleShopCursorPalette = LoadObjPalette(gUnk_09A3DA7C, 0x20);
     sMoogleShopCursorTiles = LoadObjTiles(gUnk_099A3CE4, 0x1C0);
     AnimInit(&sMoogleShopCursorAnim, gUnk_09EF99F8, gUnk_09EF99D8);
-    AnimStart(&sMoogleShopCursorAnim, 0, 1);
+    AnimStart(&sMoogleShopCursorAnim, 0, ANIM_FLAG_LOOP);
 
     for (i = 0; i < 4; i++) {
         sMooglePackPalettes[i] = LoadObjPalette(sMooglePackSpriteDefs[i].palette, sMooglePackSpriteDefs[i].paletteSize);

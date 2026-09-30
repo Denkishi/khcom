@@ -407,7 +407,7 @@ void ListPoolActivate(void* a, void* b) {
     list = b;
     ListRemove(node, &list->freeHead, &list->freeTail);
     ListAppend(node, &list->activeHead, &list->activeTail);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -418,7 +418,7 @@ void ListPoolActivateAfter(void* p, void* pool, void* position) {
 
     ListRemove(node, &list->freeHead, &list->freeTail);
     ListInsertAfter(node, &list->activeHead, &list->activeTail, after);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -429,7 +429,7 @@ void ListPoolActivateBefore(void* p, void* pool, void* position) {
 
     ListRemove(node, &list->freeHead, &list->freeTail);
     ListInsertBefore(node, &list->activeHead, &list->activeTail, before);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -441,7 +441,7 @@ void* ListPoolRelease(void* p, void* pool) {
     next = node->next;
     ListRemove(node, &list->activeHead, &list->activeTail);
     ListAppend(node, &list->freeHead, &list->freeTail);
-    node->flags &= 0xFFFE;
+    node->flags &= ~LIST_NODE_FLAG_ACTIVE;
 
     if (next != NULL) {
         return next->owner;
@@ -458,7 +458,7 @@ void* ListPoolFirst(void* pool) {
     n = list->activeHead;
 
     if (n != NULL) {
-        if (n->flags & 2) {
+        if (n->flags & LIST_NODE_FLAG_SKIP) {
             return ListPoolNext(n);
         }
 
@@ -478,7 +478,7 @@ void* ListPoolLast(void* pool) {
     n = list->activeTail;
 
     if (n != NULL) {
-        if (n->flags & 2) {
+        if (n->flags & LIST_NODE_FLAG_SKIP) {
             return ListPoolPrev(n);
         }
 
@@ -498,7 +498,7 @@ void* ListPoolNext(void* p) {
     n = node->next;
 
     if (n != NULL) {
-        if (n->flags & 2) {
+        if (n->flags & LIST_NODE_FLAG_SKIP) {
             return ListPoolNext(n);
         }
 
@@ -518,7 +518,7 @@ void* ListPoolPrev(void* p) {
     n = node->prev;
 
     if (n != NULL) {
-        if (n->flags & 2) {
+        if (n->flags & LIST_NODE_FLAG_SKIP) {
             return ListPoolPrev(n);
         }
 
@@ -558,7 +558,7 @@ void ListPoolAppend(void* p, void* pool) {
     ListPool* list = pool;
 
     ListAppend(node, &list->activeHead, &list->activeTail);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -568,7 +568,7 @@ void ListPoolInsertAfter(void* p, void* pool, void* position) {
     ListNode* after = position;
 
     ListInsertAfter(node, &list->activeHead, &list->activeTail, after);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -578,7 +578,7 @@ void ListPoolInsertBefore(void* p, void* pool, void* position) {
     ListNode* before = position;
 
     ListInsertBefore(node, &list->activeHead, &list->activeTail, before);
-    node->flags |= 1;
+    node->flags |= LIST_NODE_FLAG_ACTIVE;
     node->self = node;
 }
 
@@ -589,7 +589,7 @@ void* ListPoolRemove(void* p, void* pool) {
 
     next = node->next;
     ListRemove(node, &list->activeHead, &list->activeTail);
-    node->flags &= 0xFFFE;
+    node->flags &= ~LIST_NODE_FLAG_ACTIVE;
 
     if (next != NULL) {
         return next->owner;

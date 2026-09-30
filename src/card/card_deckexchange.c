@@ -125,7 +125,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     w->tiles = AllocObjTiles(0x120, 0);
     SetObjTileSource(w->tiles, gUnk_090A4664);
     AnimInit(&w->anim, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->x2 = sDeckExchangeTabPointerX[0] << 8;
     w->y2 = sDeckExchangeTabPointerY[0] << 8;
@@ -1197,12 +1197,12 @@ void SetDeckExchangeHandAnim(DeckExchangeWork* w) {
     case 9:
     case 10:
     case 11:
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         w->handFlags &= ~1;
         break;
     case 1:
     case 3:
-        AnimStart(&w->anim, 2, 1);
+        AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
         t = w->handFlags | 1;
         w->handFlags = t;
         break;
@@ -1796,13 +1796,13 @@ void SetDeckExchangeFrameCursor(DeckExchangeWork* w, u8 kind) {
     case 0:
         SetObjTileSource(w->tiles2, gUnk_090A4A0C);
         AnimInit(&w->anim2, gUnk_09EEB064, gUnk_09EEB050);
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         w->gfx2 = AnimGetGfx(&w->anim2);
         break;
     case 1:
         SetObjTileSource(w->tiles2, gUnk_090A51F6);
         AnimInit(&w->anim2, gUnk_09EEB07C, gUnk_09EEB068);
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
         w->gfx2 = AnimGetGfx(&w->anim2);
         break;
     }

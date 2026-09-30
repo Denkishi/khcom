@@ -58,7 +58,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->y = 0;
     work->hoverZ = 0;
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(work->def->animDef, &work->anim, 0, 1, work->tiles);
+    AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 3);
 
@@ -273,7 +273,7 @@ s32 _0800CDF0(EmyWork* work) {
         break;
     case 8:
         work->vz = 0;
-        AnimChangeWithDef(work->def->animDef, &work->anim, 2, 1, work->tiles);
+        AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
         actor->z += ((work->hoverZ + gSineTable[gFrameCounter & 0xFF] * 10) - actor->z) >> 4;
 
@@ -316,7 +316,7 @@ s32 _0800CDF0(EmyWork* work) {
         break;
     case 7:
         work->vz = 0;
-        AnimChangeWithDef(work->def->animDef, &work->anim, 0, 1, work->tiles);
+        AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
         actor->z += ((work->hoverZ + gSineTable[gFrameCounter * 2 & 0xFF] * 12) - actor->z) >> 4;
 
@@ -386,7 +386,7 @@ s32 _0800CDF0(EmyWork* work) {
             s32 ty;
 
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(work->def->animDef, &work->anim, 2, 1, work->tiles);
+                AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             }
             if (x < 0x10000) {
                 tx = x >> 1;
@@ -422,7 +422,7 @@ s32 _0800CDF0(EmyWork* work) {
             s32 ty;
             s32 d;
 
-            AnimChangeWithDef(work->def->animDef, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             TryEnemyCardUse(actor);
             px = x;
             tx = px + work->x;
@@ -463,7 +463,7 @@ s32 _0800CDF0(EmyWork* work) {
         }
         break;
     case 0:
-        AnimChangeWithDef(work->def->animDef, &work->anim, 0, 1, work->tiles);
+        AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
 
         if (GetRandom() % work->def->moveInterval == 0) {
@@ -610,7 +610,7 @@ s32 _0800CDF0(EmyWork* work) {
         break;
     case 6:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(work->def->animDef, &work->anim, 0, 1, work->tiles);
+            AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->scaleX = 0x100;
             work->scaleY = 0x100;
             actor->vx = 0;

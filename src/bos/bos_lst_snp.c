@@ -31,7 +31,7 @@ void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg) {
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     m4aSongNumStart(SONG_SND_707);
     AnimInit(&work->anim, gUnk_09EFBF60, gUnk_09EFBF5C);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 
 u8 task_bos_lst_snp_1(LstSnpWork* work) {

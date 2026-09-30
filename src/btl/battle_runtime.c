@@ -1199,7 +1199,7 @@ void BeginBossDefeat(BtlObj* actor) {
     p = ListPoolFirst(&gBtlWork->pool);
 
     while (p != NULL) {
-        p->node.flags |= 2;
+        p->node.flags |= LIST_NODE_FLAG_SKIP;
         p = ListPoolNext(&p->node);
     }
     gBtlWork->enemyCount = 0;

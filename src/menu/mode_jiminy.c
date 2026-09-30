@@ -1406,7 +1406,7 @@ u8 JiminyHandleListInput(void) {
     }
 
     if (gJiminyWork->shownChars < gJiminyWork->charCount) {
-        AnimChange(&gJiminyWork->anim, 1, 1);
+        AnimChange(&gJiminyWork->anim, 1, ANIM_FLAG_LOOP);
 
         if (!FadeIsActive()) {
             if (gJiminyWork->stateTimer % 5 == 0) {
@@ -1414,7 +1414,7 @@ u8 JiminyHandleListInput(void) {
             }
         }
     } else {
-        AnimChange(&gJiminyWork->anim, 0, 1);
+        AnimChange(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (gJiminyWork->cursorRow < gJiminyWork->cursor) {
@@ -1543,19 +1543,19 @@ void mode_jiminy_0(void) {
         gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
         gJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, 0x20);
         AnimInit(&gJiminyWork->anim, gTalk2700Anims, gTalk2700Frames);
-        AnimStart(&gJiminyWork->anim, 0, 1);
+        AnimStart(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     } else {
         gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk0600Tiles);
         gJiminyWork->palette4 = LoadObjPalette(gTalk0600Palette, 0x20);
         AnimInit(&gJiminyWork->anim, gTalk0600Anims, gTalk0600Frames);
-        AnimStart(&gJiminyWork->anim, 0, 1);
+        AnimStart(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (FadeIsActive() == 0) {
         gJiminyWork->tiles4 = AllocObjTiles(0x200, gUnk_08C6A958);
         gJiminyWork->palette5 = LoadObjPalette(gUnk_08F6DE04, 0x20);
         AnimInit(&gJiminyWork->anim2, gUnk_09EE2678, gUnk_09EE2668);
-        AnimStart(&gJiminyWork->anim2, 2, 1);
+        AnimStart(&gJiminyWork->anim2, 2, ANIM_FLAG_LOOP);
     }
 
     gJiminyWork->tiles7 = AllocObjTiles(0x2000, 0);

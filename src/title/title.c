@@ -243,7 +243,7 @@ void task_title_obj_0(TitleObjWork* work) {
 #else
     AnimInit(&work->anim, gUnk_09EF6604, gUnk_09EF65F0);
 #endif
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->sprites[1].gfx = AnimGetGfx(&work->anim);
 #ifdef VERSION_EU
     work->sprites[2].tiles = LoadObjTiles(gUnkEu_0973EEFE, 0x100);
@@ -406,7 +406,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #else
     AnimInit(&work->anim, gUnk_09EF661C, gUnk_09EF6608);
 #endif
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim);
 #ifdef VERSION_EU
     switch (gLanguage) {

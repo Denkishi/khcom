@@ -609,7 +609,7 @@ void MapInspectHandleGridInput(void) {
         if (GetMapInspectSelectedEntry()->category != 3) {
             MapInspectSelectFirstValue();
             m4aSongNumStart(SONG_SYS_KETTEI);
-            AnimStart(&gMapInspectHighlightAnim, 1, 1);
+            AnimStart(&gMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
             gMapInspectMenuState = 2;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
@@ -701,7 +701,7 @@ void MapInspectHandleTabInput(void) {
                 MapInspectSelectFirstValue();
                 MapInspectDrawValueCounts();
                 MapInspectLoadSelectedCard();
-                AnimStart(&gMapInspectHighlightAnim, 0, 1);
+                AnimStart(&gMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
                 gMapInspectMenuState = 0;
                 MapInspectDrawValueCounts();
@@ -774,7 +774,7 @@ void MapInspectHandleValueInput(void) {
             gMapInspectConfirmCursor = 1;
             gMapInspectCursorX = 0x7400;
             gMapInspectCursorY = 0x5000;
-            AnimStart(&gMapInspectCursorAnim, 4, 1);
+            AnimStart(&gMapInspectCursorAnim, 4, ANIM_FLAG_LOOP);
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_CANSEL);
             gMapInspectMenuState = 3;
@@ -786,7 +786,7 @@ void MapInspectHandleValueInput(void) {
     } else {
         if (keys & 2) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            AnimStart(&gMapInspectHighlightAnim, 0, 1);
+            AnimStart(&gMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
             gMapInspectMenuState = 0;
         } else if (keys & 8) {
             LoadBgMap(0, gUnk_09A3439C, 0x500);
@@ -837,7 +837,7 @@ void MapInspectHandleConfirmInput(void) {
     if (keys & 1) {
         gMapInspectCursorX = gMapInspectValueCol * 12288 + 0x9200;
         gMapInspectCursorY = gMapInspectValueRow * 2048 + 0x1000;
-        AnimStart(&gMapInspectCursorAnim, 0, 1);
+        AnimStart(&gMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
         DisableBg(2);
 
         if (gMapInspectConfirmCursor == 0) {
@@ -848,7 +848,7 @@ void MapInspectHandleConfirmInput(void) {
                 MapInspectRemoveEntry(p);
 
                 if (GetMapInspectTabCount(gMapInspectTab) > 0) {
-                    AnimStart(&gMapInspectHighlightAnim, 0, 1);
+                    AnimStart(&gMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
                     gMapInspectMenuState = 0;
                 } else {
                     gMapInspectMenuState = 1;
@@ -857,21 +857,21 @@ void MapInspectHandleConfirmInput(void) {
                 if (MapCardEntrySelectedValueIsEmpty(p)) {
                     MapInspectSelectNextValue(p);
                 }
-                AnimStart(&gMapInspectHighlightAnim, 1, 1);
+                AnimStart(&gMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
                 gMapInspectMenuState = 2;
             }
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            AnimStart(&gMapInspectHighlightAnim, 1, 1);
+            AnimStart(&gMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
             gMapInspectMenuState = 2;
         }
     } else if (keys & 2) {
         gMapInspectCursorX = gMapInspectValueCol * 12288 + 0x9200;
         gMapInspectCursorY = gMapInspectValueRow * 2048 + 0x1000;
-        AnimStart(&gMapInspectCursorAnim, 0, 1);
+        AnimStart(&gMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        AnimStart(&gMapInspectHighlightAnim, 1, 1);
+        AnimStart(&gMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
         gMapInspectMenuState = 2;
     } else if (keys & 8) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
@@ -1151,17 +1151,17 @@ void mode_mapinspect_0(void) {
 #endif
     AnimInit(&gMapInspectCursorAnim, gUnk_09EF981C, gUnk_09EF97EC);
 #endif
-    AnimStart(&gMapInspectCursorAnim, 0, 1);
+    AnimStart(&gMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
     gMapInspectHighlightTiles = LoadObjTiles(gUnk_0999E69E, 0xD60);
     AnimInit(&gMapInspectHighlightAnim, gUnk_09EF9858, gUnk_09EF9830);
-    AnimStart(&gMapInspectHighlightAnim, 0, 1);
+    AnimStart(&gMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
     gUnk_02035E70 = LoadObjPalette(gUnk_09A3D2DC, 0x20);
     gUnk_02035F54 = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
     AnimInit(&gUnk_02035F58, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&gUnk_02035F58, 0, 1);
+    AnimStart(&gUnk_02035F58, 0, ANIM_FLAG_LOOP);
     gUnk_02035F70 = LoadObjTiles(gUnk_0908C3CE, 0x260);
     AnimInit(&gUnk_02035F78, gUnk_09EEA198, gUnk_09EEA180);
-    AnimStart(&gUnk_02035F78, 0, 1);
+    AnimStart(&gUnk_02035F78, 0, ANIM_FLAG_LOOP);
 
     gMapInspectNameText = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(gMapInspectNameText, 0x24);

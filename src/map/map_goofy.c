@@ -72,7 +72,7 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
     w->tiles = AllocObjTiles(0x400, gGoofyFl00Tiles);
     w->palette = LoadObjPalette(gGoofyPalette, 32);
     AnimInit(&w->anim, gGoofyFl00Anims, gGoofyFl00Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);
@@ -189,7 +189,7 @@ void Task_MapNamine_0(MapNamineWork* w) {
     w->tiles = AllocObjTiles(0x300, gNamiF00Tiles);
     w->palette = LoadObjPalette(gNaminePalette, 32);
     AnimInit(&w->anim, gNamiF00Anims, gNamiF00Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
 
@@ -354,7 +354,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         w->tiles = AllocObjTiles(0x680, gNiseFl00Tiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiseFl00Anims, gNiseFl00Frames);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&w->collider, 4, 16, 48);
         ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
         TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
@@ -364,7 +364,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         w->tiles = AllocObjTiles(0x320, gNiserikuHizaFTiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         ColliderInit(&w->collider, 4, 16, 48);
         ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
         TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
@@ -377,7 +377,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         w->tiles = AllocObjTiles(0x300, gNiserikuDownFTiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
-        AnimStart(&w->anim, 1, 1);
+        AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
         ColliderInit(&w->collider, 4, 36, 48);
         ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
         break;
@@ -488,7 +488,7 @@ void Task_MapMickey_0(MapMickeyWork* w) {
     w->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
     w->palette = LoadObjPalette(gMickeyPalette, 32);
     AnimInit(&w->anim, gMickeyFl00Anims, gMickeyFl00Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);
@@ -586,7 +586,7 @@ void MapTutorialDropBarrel(MapTutorialWork* w) {
         w->palette = LoadObjPalette(gUnk_099912E4, 32);
         a = &w->anim;
         AnimInit(a, gUnk_09EF8460, gUnk_09EF8424);
-        AnimStart(a, 0, 1);
+        AnimStart(a, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         ColliderInit(&w->collider, 6, 12, 24);
         ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
@@ -664,7 +664,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* w) {
         w->palette = LoadObjPalette(gEmy00Palette, 32);
         a = &w->anim;
         AnimInit(a, gEmy00L06Anims, gEmy00L06Frames);
-        AnimStart(a, 0, 1);
+        AnimStart(a, 0, ANIM_FLAG_LOOP);
         w->gfx = AnimGetGfx(a);
         ColliderInit(&w->collider, 3, 8, 16);
         ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
@@ -677,7 +677,7 @@ void MapTutorialEnemyAppear(MapTutorialWork* w) {
     AnimState* a = &w->anim;
 
     if (AnimIsFinished(a)) {
-        AnimChangeWithTables(a, 0, 1, gEmy00L00Anims, gEmy00L00Frames);
+        AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L00Anims, gEmy00L00Frames);
         SetObjTileSource(w->tiles, gEmy00L00Tiles);
         CreateCardMessageTask(&w->tasks, 0, 0x6C);
         w->update = MapTutorialWaitEnemyMessage;
@@ -706,7 +706,7 @@ void MapTutorialEnemyUpdate(MapTutorialWork* w) {
         gMapRoomState->flags |= 4;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
         m4aSongNumStart(SONG_SYS_FIELD_ATT00);
-        AnimChangeWithTables(a, 0, 1, gEmy00L09Anims, gEmy00L09Frames);
+        AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L09Anims, gEmy00L09Frames);
         SetObjTileSource(w->tiles, gEmy00L09Tiles);
         w->update = MapTutorialEnemyHit;
     } else if (w->collider.colliding != 0) {
@@ -934,7 +934,7 @@ void Task_MapFaint_0(MapFaintWork* w, FldObj* obj) {
     w->tiles = AllocObjTiles(0x80, gUnk_08B21ACE);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     AnimInit(&w->anim, gUnk_09EE12E4, gUnk_09EE12D4);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
 }
 
 s32 Task_MapFaint_1(MapFaintWork* w) {

@@ -2257,12 +2257,12 @@ void LoadPremiumCardGfx(CardBattleState* p) {
     p->premiumTiles = AllocObjTiles(0x280, 0);
     SetObjTileSource(p->premiumTiles, gUnk_0908B1B4);
     AnimInit(&p->anim, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&p->anim, 0, 1);
+    AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
     p->gfx = AnimGetGfx(&p->anim);
     p->premiumTiles2 = AllocObjTiles(0x100, 0);
     SetObjTileSource(p->premiumTiles2, gUnk_0908C3CE);
     AnimInit(&p->anim2, gUnk_09EEA198, gUnk_09EEA180);
-    AnimStart(&p->anim2, 0, 1);
+    AnimStart(&p->anim2, 0, ANIM_FLAG_LOOP);
     p->gfx2 = AnimGetGfx(&p->anim2);
 }
 
@@ -3787,10 +3787,10 @@ void LoadSoraReloadCardGfx(CardDisplayWork* p) {
     p->tiles4 = AllocObjTiles(0x80, 0);
     SetObjTileSource(p->tiles4, gRiCardF0RedTiles);
     AnimInit(&d->anim2, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(&d->anim2, 1, 1);
+    AnimStart(&d->anim2, 1, ANIM_FLAG_LOOP);
     d->gfx = gRiCardF0RedFrames[3];
     AnimInit(&d->anim3, gRiCardF0RedAnims, gRiCardF0RedFrames);
-    AnimStart(&d->anim3, gCardBattleState->soraGaugeAnim, 1);
+    AnimStart(&d->anim3, gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP);
     d->gfx2 = gRiCardF0RedFrames[gCardBattleState->soraGaugeFullFrame + 2];
 }
 void card_reload_2(CardDisplayWork* p) {
@@ -3847,11 +3847,11 @@ void AdvanceSoraReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
         gCardBattleState->soraGaugeAnim++;
     }
 
-    AnimStart(&p->anim3, (u16)gCardBattleState->soraGaugeAnim, 5);
+    AnimStart(&p->anim3, (u16)gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 void ResetSoraReloadGaugeAnim(ReloadGauge* p) {
     gCardBattleState->soraGaugeAnim = 2;
-    AnimStart(&p->anim3, 2, 5);
+    AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 void func_0807DDCC(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = gRiCardF0RedFrames[3];

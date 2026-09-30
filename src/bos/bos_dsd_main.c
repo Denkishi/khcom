@@ -38,13 +38,13 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     SetBgMapBlocks(1, gBosDsdFrameMaps, 2, 2);
     work->tiles = LoadObjTiles(gUnk_096983E4, 0x12A0);
     AnimInit(&work->anim, gUnk_09EF3C34, gUnk_09EF3C20);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     arg->body[0].y++;
     arg->body[0].y--;
     work->tiles2 = LoadObjTiles(gUnk_096983E4, 0x12A0);
     AnimInit(&work->anim2, gUnk_09EF3C4C, gUnk_09EF3C38);
-    AnimStart(&work->anim2, 0, 1);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
     work->palette = LoadObjPalette(gUnk_096FB8C4, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
@@ -221,8 +221,8 @@ void BosDsdMainResetPose(DsdMainWork* work) {
     work->dsd->bgFrameTimer = 0;
     BosDsdSetBgFrame(0, 0x60);
     work->spriteVisible = 1;
-    AnimStart(&work->anim, 0, 1);
-    AnimStart(&work->anim2, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     p->body[0].z = -0x6400;
     q->z = -0x8C00;
 }

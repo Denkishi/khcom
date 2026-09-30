@@ -2718,12 +2718,12 @@ void task_poo_balloon_0(PooBalloonObjWork* w, PooPos* p) {
         w->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF5E38, 3), gUnk_0974B4D8);
         w->palette = LoadObjPalette(gUnk_09849C98, 0x20);
         AnimInit(&w->anim, gUnk_09EF5E44, gUnk_09EF5E38);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     } else {
         w->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0006Frames, 4), gTrap0006Tiles);
         w->palette = LoadObjPalette(gUnk_09849B78, 0x20);
         AnimInit(&w->anim, gTrap0006Anims, gTrap0006Frames);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     }
     w->gfx = AnimGetGfx(&w->anim);
 }
@@ -2779,7 +2779,7 @@ void task_poo_shadowdodai_0(PooShadowWork* w, PooShadowArgs* a) {
     w->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     AnimInit(&w->anim, gUnk_09EE1384, gUnk_09EE1380);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimUpdate(&w->anim);
 }
 
@@ -2826,7 +2826,7 @@ void task_poo_shadowscale_0(PooScaleWork* w, PooShadowArgs* a) {
     w->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     AnimInit(&w->anim, gUnk_09EE1384, gUnk_09EE1380);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimUpdate(&w->anim);
 }
 
@@ -2878,12 +2878,12 @@ void task_poo_freeballoon_0(PooFreeBalloonWork* w, PooPos* p) {
     w->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0004Frames, 4), gTrap0004Tiles);
     w->palette = LoadObjPalette(gTrap0004Palette, 0x20);
     AnimInit(&w->anim, gTrap0004Anims, gTrap0004Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0005Frames, 4), gTrap0005Tiles);
     w->palette2 = LoadObjPalette(gUnk_09849B58, 0x20);
     AnimInit(&w->anim2, gTrap0005Anims, gTrap0005Frames);
-    AnimStart(&w->anim2, 0, 1);
+    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx2 = AnimGetGfx(&w->anim2);
     w->timer = 0;
 }
@@ -3028,7 +3028,7 @@ void task_poo_trapballoon_0(PooBalloonWork* w, PooPos* p) {
     w->tileBytes = GetMaxSpriteTileBytes(gTrap0006Frames, 4);
     w->palette = 0;
     AnimInit(&w->anim, gTrap0006Anims, gTrap0006Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     TaskPoolInit(&w->tasks, 3);
     w->task = TaskCreate(&w->tasks, &gTaskDescPooShadow, &w->pos);
@@ -3141,7 +3141,7 @@ void task_poo_owlballoon_0(PooOwlBalloonWork* w, PooPos* p) {
     w->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF5E38, 3);
     w->palette = 0;
     AnimInit(&w->anim, gUnk_09EF5E44, gUnk_09EF5E38);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     TaskPoolInit(&w->tasks, 2);
     w->task = TaskCreate(&w->tasks, &gTaskDescPooShadow, &w->pos);
@@ -3289,7 +3289,7 @@ void task_poo_honey_0(PooHoneyWork* w, PooPos* p) {
     w->palette = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gPoohHoneyFrames, 14);
     AnimInit(&w->anim, gPoohHoneyAnims, gPoohHoneyFrames);
-    AnimStart(&w->anim, 3, 1);
+    AnimStart(&w->anim, 3, ANIM_FLAG_LOOP);
     ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
     w->pos2 = w->pos;
     w->pos2.x += 0xB00;
@@ -3948,7 +3948,7 @@ void task_poo_eeyore_0(PooEeyoreWork* w) {
         w->animId = 4;
     }
     AnimInit(&w->anim, gEeyoreFl00Anims, gEeyoreFl00Frames);
-    AnimStart(&w->anim, w->animId, 1);
+    AnimStart(&w->anim, w->animId, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     TaskPoolInit(&w->tasks, 1);
     TaskCreate(&w->tasks, &gTaskDescPooShadow, &w->x);
@@ -3974,7 +3974,7 @@ u8 task_poo_eeyore_1(PooEeyoreWork* w) {
 
     if (IsPooEeyoreTailLanded() != 0 && w->animId == 4) {
         w->animId = 5;
-        AnimStart(&w->anim, 5, 1);
+        AnimStart(&w->anim, 5, ANIM_FLAG_LOOP);
         w->moveTimer = 180;
     }
 
@@ -3992,7 +3992,7 @@ u8 task_poo_eeyore_1(PooEeyoreWork* w) {
             SetPooEventDone(2);
             SetJiminyFlag(0x51);
             w->animId = 1;
-            AnimStart(&w->anim, 1, 1);
+            AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
         }
     }
     return 1;
@@ -4097,7 +4097,7 @@ u8 task_poo_owl_1(PooOwlWork* w) {
     if (IsPoohDescendingWithOwl() != 0) {
         if (w->descending == 0) {
             w->descending = 1;
-            AnimStart(&w->anim, 4, 1);
+            AnimStart(&w->anim, 4, ANIM_FLAG_LOOP);
         }
 
         if (AnimGetFrame(&w->anim) == 0 && w->anim.timer == 0) {
@@ -5633,7 +5633,7 @@ void task_poo_wagonwheel_0(PooWheelWork* w) {
     w->tileBytes = 0x180;
     w->palette = 0;
     AnimInit(&w->anim, gRaWagonAnims, gRaWagonFrames);
-    AnimStart(&w->anim, w->animId, 1);
+    AnimStart(&w->anim, w->animId, ANIM_FLAG_LOOP);
     w->speed = 0;
     w->unk_40 = 0;
 }
@@ -5641,7 +5641,7 @@ void task_poo_wagonwheel_0(PooWheelWork* w) {
 u8 task_poo_wagonwheel_1(PooWheelWork* w) {
     if (w->animId == 2 && IsPooEventDone(6) != 0) {
         w->animId = 3;
-        AnimStart(&w->anim, 3, 1);
+        AnimStart(&w->anim, 3, ANIM_FLAG_LOOP);
     }
 
     if (w->animId == 3) {
@@ -5713,7 +5713,7 @@ void task_poo_spark_0(PooSparkWork* w, PooPos* p) {
     w->tiles = AllocObjTiles(0x200, gUnk_098A4B68);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     AnimInit(&w->anim, gUnk_09EF8CC0, gUnk_09EF8CA0);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
 }
 
 u8 task_poo_spark_1(PooSparkWork* w) {
@@ -5759,7 +5759,7 @@ void task_poo_bee_0(PooBeeWork* w) {
         w->sub[i].targetY = gPooBeePoints[i].y;
     }
     AnimInit(&w->anim, a, b);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->palette = 0;
     gPooBeeCount = 0;
@@ -5874,10 +5874,10 @@ void task_poo_beeAfterEvent_0(PooBeeAfterEventWork* w) {
     w->z = -0xA00;
     w->unk_50 = 0;
     AnimInit(&w->anim, gEeBeeAnims, gEeBeeFrames);
-    AnimStart(&w->anim, 1, 1);
+    AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     AnimInit(&w->anim2, gEeBeeAnims, gEeBeeFrames);
-    AnimStart(&w->anim2, 0, 1);
+    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx2 = AnimGetGfx(&w->anim2);
     w->palette = 0;
 }
@@ -5961,7 +5961,7 @@ void task_poo_cabbage_0(PooCabbageWork* w) {
     w->palette = 0;
     AnimInit(&w->anim, gRaVegetablesAnims, gRaVegetablesFrames);
     w->state = 2;
-    AnimStart(&w->anim, 2, 1);
+    AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 10, 8, 16);
     ColliderSetPosition(&w->collider, w->x, w->y, w->z);
@@ -6218,7 +6218,7 @@ void task_poo_mapobjhit_0(PooMapObjHitWork* w, PooMapObjHitArgs* a) {
     w->tileBytes = GetMaxSpriteTileBytes(w->desc->gfxTable, w->desc->gfxCount);
     w->palette = 0;
     AnimInit(&w->anim, w->desc->anims, w->desc->gfxTable);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->collider.radius = 0x1000;
     w->collider.height = 0x1800;
@@ -6500,9 +6500,9 @@ void task_poo_zzz_0(PooZzzWork* w, u8* arg) {
     AnimInit(&w->anim, gPoohFl05Anims, gPoohFl05Frames);
 
     if (*arg != 0) {
-        AnimStart(&w->anim, 8, 1);
+        AnimStart(&w->anim, 8, ANIM_FLAG_LOOP);
     } else {
-        AnimStart(&w->anim, 7, 1);
+        AnimStart(&w->anim, 7, ANIM_FLAG_LOOP);
     }
     w->gfx = AnimGetGfx(&w->anim);
 }
@@ -6575,7 +6575,7 @@ void PooBflyPartSetAnimation(PooBflyPart* p) {
 
     PooBflyPartSetDir(p);
     d = &gTrap01AnimDefs[p->dirIndex];
-    AnimChangeWithTables(&p->anim, d->animId, 1, d->anims, d->gfxTable);
+    AnimChangeWithTables(&p->anim, d->animId, ANIM_FLAG_LOOP, d->anims, d->gfxTable);
     SetObjTileSource(p->tiles, d->tiles);
 }
 
@@ -6712,7 +6712,7 @@ u8 task_poo_mapbee_1(PooMapBeeWork* w) {
     switch (w->state) {
     case 0:
         if (AnimIsFinished(&w->anim) != 0) {
-            AnimStart(&w->anim, 1, 1);
+            AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
             w->state = 1;
         }
         break;
@@ -6915,7 +6915,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* w) {
     w->palette = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gRabbitBl00Frames, 15);
     AnimInit(&w->anim, gRabbitBl00Anims, gRabbitBl00Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     TaskPoolInit(&w->tasks, 1);
     CreatePooShadowscaleTask(&w->tasks, &w->x, 0x100);

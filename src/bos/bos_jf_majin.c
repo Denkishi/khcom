@@ -104,7 +104,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     work->idleStep = 0;
     x = 0x308;
     AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim, 1, 1);
+    AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     y.bounds = gBtlWork;
     ScrollBgMapTo(1, ((y.bounds->viewX - arg->body.x) >> 8) + x,
@@ -1766,19 +1766,19 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim, 27, 1);
+    AnimStart(&work->anim, 27, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     AnimInit(&work->anim2, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim2, 8, 1);
+    AnimStart(&work->anim2, 8, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
     AnimInit(&work->anim3, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim3, 7, 1);
+    AnimStart(&work->anim3, 7, ANIM_FLAG_LOOP);
     work->gfx3 = AnimGetGfx(&work->anim3);
     AnimInit(&work->anim4, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim4, 28, 1);
+    AnimStart(&work->anim4, 28, ANIM_FLAG_LOOP);
     work->gfx4 = AnimGetGfx(&work->anim4);
     AnimInit(&work->anim5, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim5, 6, 1);
+    AnimStart(&work->anim5, 6, ANIM_FLAG_LOOP);
     work->gfx5 = AnimGetGfx(&work->anim5);
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
 }

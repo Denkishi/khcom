@@ -414,9 +414,9 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     AnimInit(anim, gUnk_09EFAD3C, gUnk_09EFABB0);
     BosLstSetAnim(work, 0, 1, 0);
     AnimInit(&work->sub[0].anim, gUnk_09EFAE1C, gUnk_09EFADC4);
-    AnimStart(&work->sub[0].anim, 0, 1);
+    AnimStart(&work->sub[0].anim, 0, ANIM_FLAG_LOOP);
     AnimInit(&work->sub[1].anim, gUnk_09EFAEAC, gUnk_09EFAE54);
-    AnimStart(&work->sub[1].anim, 0, 1);
+    AnimStart(&work->sub[1].anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 0x60);
     SetBtlPaletteFadeExcluded(0, 1);
     SetBtlPaletteFadeExcluded(1, 1);

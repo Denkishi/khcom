@@ -103,7 +103,7 @@ void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
 #ifdef VERSION_EU
     gUrsulaBubbleWork = work;
     AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68C0, 6), gUnk_097A0DE4);
 #endif
     TaskPoolInit(&work->tasks, 10);
@@ -202,7 +202,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     eu_080DA80C(0, 1);
 #else
     AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 #endif
     work->state = 0;
     work->timer = 0x3C;

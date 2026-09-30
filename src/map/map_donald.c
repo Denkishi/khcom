@@ -56,7 +56,7 @@ void Task_MapDonald_0(MapDonaldWork* w) {
     w->tiles = AllocObjTiles(0x400, gDonaFl00Tiles);
     w->palette = LoadObjPalette(gDonaldPalette, 32);
     AnimInit(&w->anim, gDonaFl00Anims, gDonaFl00Frames);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);

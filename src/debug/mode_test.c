@@ -142,35 +142,35 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         u8 angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
         switch (((angle + 16) & 255) >> 5) {
         case 0:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 4, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
             flip = 1;
             break;
         case 1:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
             flip = 1;
             break;
         case 2:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             flip = 1;
             break;
         case 3:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             flip = 1;
             break;
         case 4:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             flip = 0;
             break;
         case 5:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             flip = 0;
             break;
         case 6:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             flip = 0;
             break;
         case 7:
-            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
             flip = 0;
             break;
         }
@@ -191,7 +191,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         u8 angle;
         work->targetX = work->actor->x;
         work->targetY = work->actor->y;
-        AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 5, 1, work->tiles);
+        AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
         angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
         if (work->targetX < body->x) body->flags |= 4;
         else body->flags &= ~4ULL;

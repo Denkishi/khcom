@@ -532,7 +532,7 @@ void task_btl_vslockon_0(BtlVslockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     AnimInit(&work->anim, gUnk_09EE10F8, gUnk_09EE10EC);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     gBtlWork->actor2 = gRikuBtlWork->actor;
     gRikuBtlWork->actor2 = gBtlWork->actor;
@@ -583,7 +583,7 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
     work->tiles4 = AllocObjTiles(0x80, gBHpgagTiles);
     work->gfx2 = gBHpgagFrame1;
     AnimInit(&work->anim2, gBHpgagAnims, gBHpgagFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 
     if (gRikuBtlWork->actor->maxHp <= 40) {
         work->gaugeSize = 0;
@@ -636,30 +636,30 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
         switch (work->gaugeSize) {
         case 0:
         case 1:
-            AnimStart(&work->anim2, 1, 1);
+            AnimStart(&work->anim2, 1, ANIM_FLAG_LOOP);
             break;
         case 2:
-            AnimStart(&work->anim2, 3, 1);
+            AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
             break;
         case 3:
-            AnimStart(&work->anim2, 5, 1);
+            AnimStart(&work->anim2, 5, ANIM_FLAG_LOOP);
             break;
         case 4:
-            AnimStart(&work->anim2, 7, 1);
+            AnimStart(&work->anim2, 7, ANIM_FLAG_LOOP);
             break;
         case 5:
-            AnimStart(&work->anim2, 9, 1);
+            AnimStart(&work->anim2, 9, ANIM_FLAG_LOOP);
             break;
         case 6:
-            AnimStart(&work->anim2, 11, 1);
+            AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         default:
-            AnimStart(&work->anim2, 11, 1);
+            AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         }
         work->gfx3 = 0;
     } else {
-        AnimStart(&work->anim2, 11, 1);
+        AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
 
         switch (work->gaugeSize) {
         case 0:
@@ -720,12 +720,12 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     }
 
     if (work->timer != 0) {
-        AnimChange(&work->anim, 1, 1);
+        AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         work->timer--;
     } else if (flag != 0) {
-        AnimChange(&work->anim, 2, 1);
+        AnimChange(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
-        AnimChange(&work->anim, 0, 1);
+        AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (work->firstUpdate != 0) {
@@ -772,56 +772,56 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
-                AnimChange(&work->anim2, 2, 1);
+                AnimChange(&work->anim2, 2, ANIM_FLAG_LOOP);
                 break;
             case 2:
-                AnimChange(&work->anim2, 4, 1);
+                AnimChange(&work->anim2, 4, ANIM_FLAG_LOOP);
                 break;
             case 3:
-                AnimChange(&work->anim2, 6, 1);
+                AnimChange(&work->anim2, 6, ANIM_FLAG_LOOP);
                 break;
             case 4:
-                AnimChange(&work->anim2, 8, 1);
+                AnimChange(&work->anim2, 8, ANIM_FLAG_LOOP);
                 break;
             case 5:
-                AnimChange(&work->anim2, 10, 1);
+                AnimChange(&work->anim2, 10, ANIM_FLAG_LOOP);
                 break;
             case 6:
-                AnimChange(&work->anim2, 12, 1);
+                AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
                 break;
             default:
-                AnimChange(&work->anim2, 12, 1);
+                AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
                 break;
             }
         } else {
-            AnimChange(&work->anim2, 12, 1);
+            AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
         }
     } else {
         if (state == 0) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
-                AnimChange(&work->anim2, 1, 1);
+                AnimChange(&work->anim2, 1, ANIM_FLAG_LOOP);
                 break;
             case 2:
-                AnimChange(&work->anim2, 3, 1);
+                AnimChange(&work->anim2, 3, ANIM_FLAG_LOOP);
                 break;
             case 3:
-                AnimChange(&work->anim2, 5, 1);
+                AnimChange(&work->anim2, 5, ANIM_FLAG_LOOP);
                 break;
             case 4:
-                AnimChange(&work->anim2, 7, 1);
+                AnimChange(&work->anim2, 7, ANIM_FLAG_LOOP);
                 break;
             case 5:
-                AnimChange(&work->anim2, 9, 1);
+                AnimChange(&work->anim2, 9, ANIM_FLAG_LOOP);
                 break;
             case 6:
             default:
-                AnimChange(&work->anim2, 11, 1);
+                AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
                 break;
             }
         } else {
-            AnimChange(&work->anim2, 11, 1);
+            AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
         }
     }
 
@@ -980,7 +980,7 @@ void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d) {
     p->flags |= 4;
     p->arrowX = b;
     p->arrowY = c;
-    AnimStart(&p->anim, d, 1);
+    AnimStart(&p->anim, d, ANIM_FLAG_LOOP);
 }
 
 void TutorialHideArrow(TutorialWork* p) {

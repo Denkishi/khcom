@@ -189,7 +189,7 @@ void func_08000F30(TaskPool* a) {
 }
 
 u8 IsTaskActive(Task* t) {
-    if (t == NULL || (t->node.flags & 1) == 0) {
+    if (t == NULL || (t->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
         return 0;
     }
 
@@ -197,7 +197,7 @@ u8 IsTaskActive(Task* t) {
 }
 
 u8 IsTaskActiveNamed(Task* t, const char* name) {
-    if (t == NULL || name == NULL || t->desc->name != name || (t->node.flags & 1) == 0) {
+    if (t == NULL || name == NULL || t->desc->name != name || (t->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
         return 0;
     }
 

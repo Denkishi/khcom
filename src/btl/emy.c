@@ -882,7 +882,7 @@ u8 task_emy_00_1(EmyWork* work) {
     case 20:
         if (gBtlWork->flags & 0x40000) {
             GetEnemyTargetPosition(act, &pos, 0, 0);
-            AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             act->x += gSineTable[w->angle] * w->speed >> 8;
             act->y += -gSineTable[w->angle + 64] * w->speed >> 8;
 
@@ -944,7 +944,7 @@ u8 task_emy_00_1(EmyWork* work) {
         if (w->stateTimer == 0) {
             ColliderSetDisabled(&act->collider, 0);
             act->flags &= ~0x300;
-            AnimChangeWithDef(work->def->animDef, &work->anim, 0, 3,
+            AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
                 work->tiles);
         }
 
@@ -989,7 +989,7 @@ u8 task_emy_00_1(EmyWork* work) {
     ret = _0800CDF0(w);
 
     if (w->state == 14) {
-        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, 1, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
     }
 
     return ret;
@@ -1604,7 +1604,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
     switch (work->base.state) {
     case 18:
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 3,
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
         GetEnemyTargetPosition(act, &pos, 0, 0);
 
@@ -1634,7 +1634,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -1644,7 +1644,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 4, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 4, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -1654,7 +1654,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 23:
-        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -2206,7 +2206,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy1611bTiles);
     AnimInit(&work->anim, gEmy1611bAnims, gEmy1611bFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->state = 0;
     work->x = spawn->x;
     work->y = spawn->y;
@@ -2247,7 +2247,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
     case 1:
         if (work->timer == 0) {
             ColliderSetDisabled(&work->collider, 0);
-            AnimStart(&work->anim, 1, 1);
+            AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         }
 
         if (work->collider.colliding != 0) {
@@ -2269,7 +2269,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
                 break;
             }
         } else {
-            AnimStart(&work->anim, 2, 1);
+            AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
             work->vz = -0x3CC;
         }
 
@@ -2354,7 +2354,7 @@ void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);
     work->tiles = AllocObjTiles(0x80, gEmy1610bTiles);
     AnimInit(&work->anim, gEmy1610bAnims, gEmy1610bFrames);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->x = spawn->x;
     work->y = spawn->y;
     work->z = spawn->z;
@@ -2465,7 +2465,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         break;
     case 22:
         work->base.vz = 0;
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, 3,
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
 
         if (gBtlWork->flags & 0x40000) {
@@ -2614,7 +2614,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
         break;
     case 0x14:
-        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
@@ -2724,7 +2724,7 @@ u8 task_emy_21_1(Emy21Work* work) {
     switch (work->base.state) {
     case 0x12:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         }
 
         if (work->base.stateTimer > 29) {
@@ -2771,7 +2771,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         break;
     case 0x15:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
             w->dashSpeed = 0;
         }
 
@@ -2893,7 +2893,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case 18:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 1,
+            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
             act->flags |= 0x300;
             work->base.steps = 20;
@@ -2916,7 +2916,7 @@ u8 task_emy_22_1(Emy22Work* work) {
     case 19:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &pos, 0, 0);
-            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 1,
+            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
 
             if (act->x > pos) {
@@ -3405,7 +3405,7 @@ u8 task_emy_27_1(EmyWork* work) {
         EmyLungeAttack(work, 0x3D, 6, 0x14, 0xC8, 0x20, SONG_BTL_MON_SWORD04, 0x28, 0, 0x14);
         break;
     case 0x13:
-        AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 1, 1, w->tiles);
+        AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 1, ANIM_FLAG_LOOP, w->tiles);
         GetEnemyTargetPosition(act, &tx, &ty, 0);
 
         if (work->stateTimer % 6 == 0) {
@@ -3507,7 +3507,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         break;
     case 22:
         work->base.vz = 0;
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, 3,
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
 
         if (gBtlWork->flags & 0x40000) {
@@ -3788,7 +3788,7 @@ u8 task_emy_30_1(EmyWork* work) {
         break;
     case 26:
         work->vz = 0;
-        AnimChangeWithDef(w->def->animDef, &w->anim, 2, 3, w->tiles);
+        AnimChangeWithDef(w->def->animDef, &w->anim, 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->tiles);
 
         if (gBtlWork->flags & 0x40000) {
             if (act->x > work->x) {
@@ -3863,7 +3863,7 @@ u8 task_emy_30_1(EmyWork* work) {
     case 19: {
     s32 currentX;
     s32 targetX;
-        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 3, 1, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 3, ANIM_FLAG_LOOP, w->tiles);
         work->vz = 0;
         act->z += (-0x2000 - act->z) >> 3;
         act->y += (y - act->y) >> 4;
@@ -3938,7 +3938,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 6, 1, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 6, ANIM_FLAG_LOOP, w->tiles);
         work->vz = 0;
         work->speed += 38;
         act->y += (y - act->y) >> 4;
@@ -4077,7 +4077,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 1,
+                AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                     w->base.tiles);
             }
 
@@ -4112,7 +4112,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             break;
         case 1:
             if (work->base.stateTimer == 0) {
-                AnimStart(&work->base.anim, 1, 1);
+                AnimStart(&work->base.anim, 1, ANIM_FLAG_LOOP);
 
                 y = act->y;
                 if (act->flags & 4) {
@@ -4139,7 +4139,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             }
 
             if (AnimIsFinished(&work->base.anim)) {
-                AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 1,
+                AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                     w->base.tiles);
             }
 
@@ -4294,7 +4294,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 x;
             s32 y;
 
-            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
             w->speed = 0;
             GetEnemyTargetPosition(act, &x, &y, 0);
             w->angle = GetAngle(act->x, act->y, x, y);
@@ -4357,7 +4357,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 offset;
 
             GetEnemyTargetPosition(act, &x, &y, 0);
-            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
             sample = gSineTable[work->base.angle];
             offset = 70;
             offset *= sample;
@@ -4455,7 +4455,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             act->centerHeight = 20;
             ColliderSetDisabled(&act->collider, 0);
             act->flags &= ~0x300;
-            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 3, w->base.tiles);
+            AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         }
 
         TryEnemyCardUse(act);
@@ -5032,7 +5032,7 @@ u8 task_emy_81_1(Emy81Work* work) {
     case 21:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &a, &b, 0);
-            AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
             w->targetX = (a * 2) - act->x;
             w->targetY = (b * 2) - act->y;
             w->speedX = 0;
@@ -5283,7 +5283,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, 1, w->base.tiles);
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         if (act->z < act->groundZ && (gBtlWork->flags & 0x40000)) {
             act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
             act->y += -gSineTable[work->base.angle + 64] * work->base.speed >> 8;
@@ -5314,7 +5314,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 1, w->base.tiles);
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
             s32 x;
             GetEnemyTargetPosition(act, &x, 0, 0);
@@ -5565,7 +5565,7 @@ u8 task_emy_83_1(Emy83Work* work) {
 
     switch (work->base.state) {
     case 0x16:
-        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, 3, w->base.tiles);
+        AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         TryEnemyCardUse(act);
         GetEnemyTargetPosition(act, &pos, 0, 0);
 
@@ -5605,7 +5605,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
         break;
     case 0x14:
-        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
             if (act->flags & 4) {

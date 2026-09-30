@@ -1490,7 +1490,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     SetObjTileSource(work->tiles, gUnk_093F6ACC);
     AnimInit(&work->anim, gUnk_09EF1224, gUnk_09EF1220);
 #endif
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->palette = work->args->palette;
     work->unk_11C = 0;

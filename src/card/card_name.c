@@ -165,7 +165,7 @@ void PremireEffectInit(PremiumCardEffectWork* w, s16* a) {
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
-    AnimStart(&w->anim, GetRandom() % 3, 1);
+    AnimStart(&w->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->centerX = a[1] << 8;
     w->centerY = a[2] << 8;
@@ -185,7 +185,7 @@ void PremireEffectConvergeInit(PremiumCardEffectWork* w, s16* a) {
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
-    AnimStart(&w->anim, GetRandom() % 3, 1);
+    AnimStart(&w->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->centerX = a[1] << 8;
     w->centerY = a[2] << 8;

@@ -252,7 +252,7 @@ u8 StartPremireChanceCardAnim(PremireChanceCardWork* w, void* a) {
     w->tiles4 = AllocObjTiles(640, 0);
     SetObjTileSource(w->tiles4, gUnk_0908B1B4);
     AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceCardAnim);
     return 1;

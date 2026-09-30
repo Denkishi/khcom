@@ -114,7 +114,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
         SetObjTileSource(w->tiles3, gFEventTiles);
         AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
-        AnimStart(&w->anim2, 2, 1);
+        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
         w->gfx4 = AnimGetGfx(&w->anim2);
         SetBgPriority(w->args.bg, 0);
         break;
@@ -127,7 +127,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
         SetObjTileSource(w->tiles3, gFEventTiles);
         AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
-        AnimStart(&w->anim2, 2, 1);
+        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
         w->gfx4 = AnimGetGfx(&w->anim2);
         break;
     }
@@ -221,7 +221,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
 #endif
             w->unk_138[1] = w->unk_138[3];
         } else if (!(w->messageDef->flags & 1)) {
-            AnimStart(&w->anim2, 3, 1);
+            AnimStart(&w->anim2, 3, ANIM_FLAG_LOOP);
             w->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
             w->closeTimer = 0;
@@ -242,7 +242,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
             LoadObjPaletteBank(w->palette2->index, pal);
             SetObjTileSource(w->tiles4, gUnk_090A4664);
             AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-            AnimStart(&w->anim3, 2, 1);
+            AnimStart(&w->anim3, 2, ANIM_FLAG_LOOP);
             w->gfx = AnimGetGfx(&w->anim3);
             w->choice = 1;
             w->x = 0x5800;
@@ -623,7 +623,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
     LoadObjPaletteBank(w->palette2->index, pal);
     SetObjTileSource(w->tiles4, gUnk_090A4664);
     AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&w->anim3, 2, 1);
+    AnimStart(&w->anim3, 2, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim3);
     w->choice = 1;
     w->x = 0x8500;

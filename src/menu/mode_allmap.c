@@ -345,7 +345,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
 
         if (func_080D3538(work->room, i) != 0) {
             AnimInit(&work->anim[i], gUnk_09EF653C, gUnk_09EF64FC);
-            AnimStart(&work->anim[i], dirs.animIds[i], 1);
+            AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
             if (work->asSprite == 0) {
@@ -355,7 +355,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
             }
         } else if (func_080D358C(work->room, i) == 0) {
             AnimInit(&work->anim[i], gUnk_09EF658C, gUnk_09EF654C);
-            AnimStart(&work->anim[i], dirs.animIds[i], 1);
+            AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
             if (work->asSprite == 0) {

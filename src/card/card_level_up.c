@@ -122,7 +122,7 @@ void Level_Up_0(LevelUpWork* w) {
                       gBtlWork->actor->z);
         SetObjTileSource(w->tiles4, gSor1ll51Tiles);
         AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     } else {
         w->tiles4 = AllocObjTiles(0x800, 0);
         w->palette5 = AllocObjPalette(32);
@@ -133,7 +133,7 @@ void Level_Up_0(LevelUpWork* w) {
                       gBtlWork->actor->z);
         SetObjTileSource(w->tiles4, gRikuBt00Tiles);
         AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
-        AnimStart(&w->anim2, 0, 1);
+        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     }
     if (gBtlWork->flags & 0x2000) {
         w->x7 = 0x1C400;
@@ -480,7 +480,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);
             AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-            AnimStart(&w->anim, 2, 1);
+            AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
             w->gfx2 = AnimGetGfx(&w->anim);
             w->loaded[0] = 1;
             w->timer = 0;
@@ -777,7 +777,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
         FadeSetPaletteExcluded(w->palette3->index + 16, 1);
         SetObjTileSource(w->tiles, gUnk_0908F190);
         AnimInit(&w->anim, gUnk_09EEA280, gUnk_09EEA26C);
-        AnimStart(&w->anim, 0, 1);
+        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
         w->gfx2 = AnimGetGfx(&w->anim);
         w->cursorSteps = 16;
         w->x3 = 136;
@@ -1445,7 +1445,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);
             AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-            AnimStart(&w->anim, 2, 1);
+            AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
             w->gfx2 = AnimGetGfx(&w->anim);
             w->loaded[0] = 1;
             w->timer = 0;
@@ -1731,11 +1731,11 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 SetObjTileSource(w->tiles4, gSor1ll51Tiles);
                 AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
-                AnimStart(&w->anim2, 0, 1);
+                AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
             } else {
                 SetObjTileSource(w->tiles4, gRikuBt00Tiles);
                 AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
-                AnimStart(&w->anim2, 0, 1);
+                AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
             }
 
             w->loaded[0] = 0;

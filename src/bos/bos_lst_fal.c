@@ -71,7 +71,7 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
     work->tiles = LoadObjTiles(gUnk_09CD1074, 0x700);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBFC4, gUnk_09EFBF64);
-    AnimStart(&work->anim, anim, 1);
+    AnimStart(&work->anim, anim, ANIM_FLAG_LOOP);
 }
 
 u8 task_bos_lst_fal_1(LstFalWork* work) {

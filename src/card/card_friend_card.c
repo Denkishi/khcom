@@ -1027,7 +1027,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
     SetObjTileSource(w->tiles2, gUnk_093F4578);
     AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-    AnimStart(&w->anim, 0, 1);
+    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -1059,7 +1059,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->palette3 = LoadObjPalette(gUnk_09618D18, 32);
     SetObjTileSource(w->tiles3, gUnk_093F47E4);
     AnimInit(&w->anim2, gUnk_09EF1194, gUnk_09EF1180);
-    AnimStart(&w->anim2, 0, 1);
+    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx2 = AnimGetGfx(&w->anim2);
     w->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
     w->palette4 = LoadObjPalette(gBStatesPalette, 32);

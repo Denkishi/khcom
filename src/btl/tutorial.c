@@ -25,7 +25,7 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     work->tiles = AllocObjTiles(0x100, gUnk_08B263D2);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     AnimInit(&work->anim, gUnk_09EE15F0, gUnk_09EE15C0);
-    AnimStart(&work->anim, 0, 1);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     SeedRandom(2);
 }
 

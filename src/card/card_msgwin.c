@@ -325,7 +325,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
                 w->palette2 = LoadObjPalette(gUnk_08F69BE4, 32);
                 SetObjTileSource(w->tiles4, gFEventTiles);
                 AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
-                AnimStart(&w->anim2, 2, 1);
+                AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
                 w->gfx2 = AnimGetGfx(&w->anim2);
             }
 
@@ -365,7 +365,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
             w->waitIconVisible = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinTyping);
         } else if (!(w->messageDef->flags & 1)) {
-            AnimStart(&w->anim2, 3, 1);
+            AnimStart(&w->anim2, 3, ANIM_FLAG_LOOP);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinClose);
             w->closeTimer = 0;
             w->steps = 8;
@@ -380,7 +380,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
             LoadObjPaletteBank(w->palette3->index, pal);
             SetObjTileSource(w->tiles, gUnk_090A4664);
             AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-            AnimStart(&w->anim3, 2, 1);
+            AnimStart(&w->anim3, 2, ANIM_FLAG_LOOP);
             w->gfx3 = AnimGetGfx(&w->anim3);
             w->tiles2 = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
             w->palette4 = LoadObjPalette(gCard00Palette, 32);

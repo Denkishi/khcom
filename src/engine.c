@@ -2511,10 +2511,10 @@ void AnimStart(AnimState* a, u16 animId, u16 flags) {
     }
     a->frames = h->frames;
 
-    if ((flags & 4) == 0) {
+    if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
         a->timer = 0;
 
-        if (flags & 2) {
+        if (flags & ANIM_FLAG_RANDOM_START) {
             a->frame = GetRandom() % a->frameCount;
         } else {
             a->frame = 0;
@@ -2538,10 +2538,10 @@ void AnimChange(AnimState* a, u16 id, u16 flags) {
     }
     a->frames = h->frames;
 
-    if ((flags & 4) == 0) {
+    if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
         a->timer = 0;
 
-        if (flags & 2) {
+        if (flags & ANIM_FLAG_RANDOM_START) {
             a->frame = GetRandom() % a->frameCount;
         } else {
             a->frame = 0;
@@ -2567,12 +2567,12 @@ void* AnimUpdate(AnimState* a) {
         a->timer = 0;
 
         if (a->frame >= a->frameCount) {
-            if (a->flags & 1) {
+            if (a->flags & ANIM_FLAG_LOOP) {
                 a->frame = 0;
             } else {
                 a->frame = index;
             }
-            a->flags |= 0x1000;
+            a->flags |= ANIM_FLAG_FINISHED;
         }
     }
 
@@ -2584,8 +2584,8 @@ u8 AnimIsFrameEnding(AnimState* a) {
         return 0;
     }
 
-    if (!(a->flags & 1)) {
-        if (a->flags & 0x1000) {
+    if (!(a->flags & ANIM_FLAG_LOOP)) {
+        if (a->flags & ANIM_FLAG_FINISHED) {
             return 0;
         }
     }
@@ -2610,7 +2610,7 @@ void* AnimGetGfx(AnimState* a) {
 }
 
 u8 AnimIsFinished(AnimState* a) {
-    if (a->flags & 0x1000) {
+    if (a->flags & ANIM_FLAG_FINISHED) {
         return 1;
     }
 
@@ -2633,14 +2633,14 @@ void AnimSetFrame(AnimState* a, u16 frame) {
     if (frame < a->frameCount) {
         a->frame = frame;
         a->timer = 0;
-        a->flags &= 0xEFFF;
+        a->flags &= ~ANIM_FLAG_FINISHED;
     }
 }
 
 void AnimReset(AnimState* a) {
     a->frame = 0;
     a->timer = 0;
-    a->flags &= 0xEFFF;
+    a->flags &= ~ANIM_FLAG_FINISHED;
 }
 
 void FadeInit(void) {
@@ -2713,7 +2713,7 @@ void FadeUpdate(void) {
             if (src == NULL) {
                 continue;
             }
-            if (slot->excluded != 0 && (gFadeWork->flags & 2) == 0) {
+            if (slot->excluded != 0 && (gFadeWork->flags & FADE_FLAG_LOCKED) == 0) {
                 continue;
             }
             if (slot->dirty != 0) {
@@ -2823,7 +2823,7 @@ void FadeUpdate(void) {
     }
     gFadeWork->lastAmount = gFadeWork->amount;
     if (gFadeWork->timer != 0) {
-        if ((gFadeWork->flags & 4) == 0) {
+        if ((gFadeWork->flags & FADE_FLAG_PAUSED) == 0) {
             ApproachValue((s32*)&gFadeWork->amount, gFadeWork->target, gFadeWork->timer);
             gFadeWork->timer--;
         }
@@ -2841,13 +2841,13 @@ void FadeStartIn(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
 
-    if (base->flags & 2) {
-        if (base->flags & 1) {
+    if (base->flags & FADE_FLAG_LOCKED) {
+        if (base->flags & FADE_FLAG_ACTIVE) {
             return;
         }
     }
     z = 0;
-    base->flags = 1;
+    base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
     base->amount = 0x1F00;
     base->target = z;
@@ -2858,13 +2858,13 @@ void FadeStartOut(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
 
-    if (base->flags & 2) {
-        if (base->flags & 1) {
+    if (base->flags & FADE_FLAG_LOCKED) {
+        if (base->flags & FADE_FLAG_ACTIVE) {
             return;
         }
     }
     z = 0;
-    base->flags = 1;
+    base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
     base->amount = z;
     base->target = 0x1F00;
@@ -2875,13 +2875,13 @@ void FadeToOriginal(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
 
-    if (base->flags & 2) {
-        if (base->flags & 1) {
+    if (base->flags & FADE_FLAG_LOCKED) {
+        if (base->flags & FADE_FLAG_ACTIVE) {
             return;
         }
     }
     z = 0;
-    base->flags = 1;
+    base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
     base->target = z;
     base->mode = a;
@@ -2890,12 +2890,12 @@ void FadeToOriginal(s32 a, u16 b) {
 void FadeToAmount(s32 a, u16 b, u16 c) {
     FadeWork* base = gFadeWork;
 
-    if (base->flags & 2) {
-        if (base->flags & 1) {
+    if (base->flags & FADE_FLAG_LOCKED) {
+        if (base->flags & FADE_FLAG_ACTIVE) {
             return;
         }
     }
-    base->flags = 1;
+    base->flags = FADE_FLAG_ACTIVE;
     base->timer = c;
     base->target = b << 8;
     base->mode = a;
@@ -2905,13 +2905,13 @@ void FadeFromAmount(s32 a, u16 b, u16 c) {
     FadeWork* base = gFadeWork;
     u32 z;
 
-    if (base->flags & 2) {
-        if (base->flags & 1) {
+    if (base->flags & FADE_FLAG_LOCKED) {
+        if (base->flags & FADE_FLAG_ACTIVE) {
             return;
         }
     }
     z = 0;
-    base->flags = 1;
+    base->flags = FADE_FLAG_ACTIVE;
     base->timer = c;
     base->amount = b << 8;
     base->lastAmount = z;
@@ -2931,7 +2931,7 @@ void FadeSetPaletteExcluded(u16 slot, u8 value) {
 }
 
 u8 FadeIsActive(void) {
-    if (gFadeWork->flags & 1) {
+    if (gFadeWork->flags & FADE_FLAG_ACTIVE) {
         return 1;
     }
     return 0;
@@ -2959,18 +2959,18 @@ u16 FadeGetAmount(void) {
 }
 
 void FadeLock(void) {
-    u16 v = gFadeWork->flags | 2;
+    u16 v = gFadeWork->flags | FADE_FLAG_LOCKED;
 
     gFadeWork->flags = v;
 }
 
 void FadeSetPaused(u8 on) {
     if (on) {
-        u16 v = gFadeWork->flags | 4;
+        u16 v = gFadeWork->flags | FADE_FLAG_PAUSED;
 
         gFadeWork->flags = v;
     } else {
-        gFadeWork->flags &= 0xFFFB;
+        gFadeWork->flags &= ~FADE_FLAG_PAUSED;
     }
 }
 

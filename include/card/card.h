@@ -232,33 +232,6 @@ typedef struct PrizeMapCardWork {
 
 typedef char PrizeMapCardWork_sizechk[(sizeof(struct PrizeMapCardWork) == 0xEC) ? 1 : -1];
 
-typedef struct SioBattleWork {
-    s8 cursor;
-    u8 state;
-    u16 slideTimer;
-    u16 stateFrames;
-    u8 unk_06[0x02];
-    s32 x;
-    s32 y;
-    s32 y2;
-    void* tiles;
-    void* palette;
-    void* gfx2[3];
-    void* tiles2;
-    void* palette2;
-    void* gfx3;
-    void* tiles3;
-    void* palette3;
-    void* gfx4;
-    void* tiles4;
-    void* palette4;
-    void* gfx;
-    AnimState anim;
-    s32 cursorY;
-    u16 modeArg;
-    u8 unk_6A[0x02];
-} SioBattleWork;
-
 typedef struct PickupCardWork {
     void* tiles;
     void* palette;
@@ -1144,14 +1117,6 @@ extern const s32 gPlayedCardAngles[];
 extern u8 gUnk_096144D8[];
 extern u8 gUnk_096FBA04[];
 extern u8 gUnk_09628DC0[];
-extern u8 gUnk_0962B090[];
-extern u8 gUnk_096FBAA4[];
-extern u8 gUnk_0962AD62[];
-extern u8 gUnk_096FBA44[];
-extern u8 gUnk_0962B286[];
-extern u8 gUnk_096FBA64[];
-extern u8 gUnk_0962B8BE[];
-extern u8 gUnk_096FBA84[];
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_095EDAAA[];
@@ -2369,8 +2334,6 @@ extern u8 gMessageWindowAnswerYes;
 extern u16 gSioTradeCardId;
 #endif
 extern u8 gRikuDeckTutorialState;
-extern s8 gSioDebugMode;
-extern u8 gSioBattleFileLoaded;
 extern TaskDesc gTaskDescCardSora;
 extern TaskDesc gTaskDescCardNotHave;
 extern TaskDesc gTaskDescCardReload;

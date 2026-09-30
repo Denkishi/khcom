@@ -4,8 +4,14 @@
 #include "types.h"
 #include "chara_types.h"
 
+void mode_sio_battle_0(s32 a);
+void mode_sio_battle_1(void);
+void mode_sio_battle_2(void);
+void ClearSioBattleFileLoaded(void);
 void SioChgCardRecvSlotIds(void);
 
+extern s8 gSioDebugMode;
+extern u8 gSioBattleFileLoaded;
 extern u16 gSioWinCount;
 extern u16 gSioLoseCount;
 extern s8 gSioWorldCursor;

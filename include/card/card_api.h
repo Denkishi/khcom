@@ -21,9 +21,6 @@ struct BtlPrizeSrc;
 
 void Mapcard_2(struct MapcardWork* w);
 void Level_Up_3(struct LevelUpWork* w);
-void mode_sio_battle_0(s32 a);
-void mode_sio_battle_1(void);
-void mode_sio_battle_2(void);
 
 void InitRikuDeckForWorld(u8 a);
 void SelectPrevSoraCard(struct CardBattleWork* w, u8 b, u8 c);
@@ -90,8 +87,6 @@ s32 LookupStockName(struct CardDisplayWork** cards, u8 count, u8 kind, struct Un
 s32 LookupLinkStockName(struct CardDisplayWork** cards, u8 count, u8 kind, struct UnkStruct_080ABA80* arr, u8* flag, s32 b);
 s32 LookupStockPairName(struct UnkStruct_080ABA80* cards, u8* output, u8 count);
 
-void ClearSioBattleFileLoaded(void);
-
 struct CardListWork;
 
 extern u8 gBossCardRequestValue;
@@ -111,7 +106,5 @@ extern u8 gMessageWindowAnswerYes;
 extern u16 gSioTradeCardId;
 #endif
 extern u8 gRikuDeckTutorialState;
-extern s8 gSioDebugMode;
-extern u8 gSioBattleFileLoaded;
 
 #endif

@@ -7,6 +7,34 @@
 #include "mode.h"
 #include "taskpool.h"
 #include "obj.h"
+
+typedef struct SioBattleWork {
+    s8 cursor;
+    u8 state;
+    u16 slideTimer;
+    u16 stateFrames;
+    u8 unk_06[0x02];
+    s32 x;
+    s32 y;
+    s32 y2;
+    void* tiles;
+    void* palette;
+    void* gfx2[3];
+    void* tiles2;
+    void* palette2;
+    void* gfx3;
+    void* tiles3;
+    void* palette3;
+    void* gfx4;
+    void* tiles4;
+    void* palette4;
+    void* gfx;
+    AnimState anim;
+    s32 cursorY;
+    u16 modeArg;
+    u8 unk_6A[0x02];
+} SioBattleWork;
+
 typedef struct SioWorldEntry {
     void* tiles;
     u16 tilesSize;
@@ -270,7 +298,10 @@ extern u8 gSoraPalette[];
 extern u8 gSor1fl26Tiles[];
 extern u8 gUnk_0815A394[];
 extern u8 gCard00Palette[];
+extern u8 gUnk_0962AD62[];
 extern u8 gUnk_0962B090[];
+extern u8 gUnk_0962B286[];
+extern u8 gUnk_0962B8BE[];
 extern u8 gUnk_0962CAFC[];
 extern u8 gUnk_0962D196[];
 extern u8 gUnk_0962BEDA[];
@@ -280,6 +311,9 @@ extern u8 gUnk_0962DEA8[];
 extern u8 gUnk_0962DBA0[];
 extern u8 gUnk_096B2524[];
 extern u8 gUnk_096FBA04[];
+extern u8 gUnk_096FBA44[];
+extern u8 gUnk_096FBA64[];
+extern u8 gUnk_096FBA84[];
 extern u8 gUnk_096FAC64[];
 extern u8 gUnk_096FBAA4[];
 extern u8 gUnk_096FBAC4[];

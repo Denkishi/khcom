@@ -21,6 +21,7 @@
 #include "m4a.h"
 #include "m4a_song.h"
 #include "mode.h"
+#include "mode_sio_api.h"
 #include "save_api.h"
 #include "save_types.h"
 #include "taskpool.h"

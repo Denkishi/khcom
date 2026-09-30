@@ -133,7 +133,7 @@ void mode_wLogo_1(void) {
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             DisableBg(0);
             DisableBg(1);
             sWLogoState++;
@@ -177,7 +177,7 @@ void mode_wLogo_2(void) {
 
 void WLogoInitWorldSelect(void) {
     u8* p;
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(1, 2, 31, 0);
     SetBgSize(1, 0);
@@ -199,7 +199,7 @@ void WLogoInitWorldSelect(void) {
 }
 
 void WLogoStartLogo(u8 a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode1();
     SetupBg(0, 0, 7, 14);
     SetBgPriority(0, 0);

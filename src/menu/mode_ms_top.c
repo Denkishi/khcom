@@ -239,7 +239,7 @@ void MsTopHandleInput(void) {
         }
         sMsTopNextMode = sWarpDefs[sMsTopCursor].mode;
         m4aSongNumStart(SONG_SYS_KETTEI);
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         sMsTopState = 11;
     } else if (keys & B_BUTTON) {
@@ -262,7 +262,7 @@ void MsTopHandleInput(void) {
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         sMsTopState = 11;
     } else if ((keys & DPAD_LEFT) && sMsTopScrollDir != 1 && sMsTopCursor != 0) {
@@ -348,7 +348,7 @@ void mode_ms_top_0(u32 a) {
     s32 i;
 
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     gBldCnt = (BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0);
     gBldAlpha = BLDALPHA_BLEND(16, 16);
@@ -515,7 +515,7 @@ void mode_ms_top_1(void) {
 
             InitMooglePackOpening(120, 80);
             FadeSetPaletteExcluded(13, 1);
-            FadeToAmount(0, 16, 8);
+            FadeToAmount(FADE_MODE_BLACK, 16, 8);
             sMsTopState = 6;
         }
         break;
@@ -526,7 +526,7 @@ void mode_ms_top_1(void) {
             SetupBg(3, 3, 31, 14);
             DisableBg(3);
             LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A123DC, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             sMsTopState = 7;
         }
         break;
@@ -551,7 +551,7 @@ void mode_ms_top_1(void) {
         ApproachValue(&sMsTopBarY[1], 0xA800, sMsTopSteps);
 
         if (--sMsTopSteps <= 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
             sMsTopState = 11;
         }

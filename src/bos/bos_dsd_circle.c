@@ -345,7 +345,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         }
         break;
     case 4:
-        FadeToAmount(0, gBtlWork->fadeAmount, 8);
+        FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->state++;
         break;
     case 5:
@@ -387,7 +387,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         if (work->dropCount >= (s8)work->dropTotal - 1) {
             if (BgFxIsActive() == 0) {
                 BgAnimStop();
-                FadeToOriginal(0, 8);
+                FadeToOriginal(FADE_MODE_BLACK, 8);
                 work->state++;
             }
 
@@ -409,7 +409,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
     if (work->dsd->state == 8 || work->dsd->state == 11) {
         if (BgFxIsActive() == 1) {
             BgAnimStop();
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
         }
 
         work->visible = 0;

@@ -26,7 +26,7 @@ static const DummyEntry sDummyEntries[10] = {
 void mode_dummy_0(u32 arg) {
     const DummyEntry* entry;
 
-    FadeStartIn(0, 0x10);
+    FadeStartIn(FADE_MODE_BLACK, 0x10);
     SetBgMode0();
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
@@ -111,7 +111,7 @@ void DummyUpdateExit(void) {
 
 void mode_dummy_1(void) {
     if (!FadeIsActive() && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         SetModeUpdate(DummyUpdateExit);
     }
 

@@ -95,7 +95,7 @@ void TitleShowLogo(u16 a) {
     if (IsTaskActive(gTitleObjTask) == 0) {
         gTitleObjTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleObj, 0);
     }
-    FadeStartIn(2, a);
+    FadeStartIn(FADE_MODE_ADD_WHITE, a);
 }
 
 void TitleFinishIntro(void) {
@@ -123,7 +123,7 @@ void TitleFinishIntro(void) {
 
 void TitleFadeOut(void) {
     m4aMPlayFadeOut(gMPlayTable[gSongTable[6].ms].info, 5);
-    FadeStartOut(0, 90);
+    FadeStartOut(FADE_MODE_BLACK, 90);
     BackdropFadeStartOut(0, 90);
     gTitleState = 9;
 }
@@ -190,7 +190,7 @@ void mode_title_0(void) {
     TaskPoolInit(&gTitleTaskPool, 4);
     gTitleLogoTask = 0;
     gTitleObjTask = 0;
-    FadeStartIn(0, 0x4C);
+    FadeStartIn(FADE_MODE_BLACK, 0x4C);
     gTitleState = 0;
     m4aSongNumStart(SONG_SND_0);
     gTitleTimer = 0x1E;
@@ -226,7 +226,7 @@ void mode_title_1(void) {
             BackdropFadeStartOut(1, 0x46);
 
             if (gTitleTimer == 0x46) {
-                FadeStartOut(1, 0x46);
+                FadeStartOut(FADE_MODE_WHITE, 0x46);
             }
         }
 

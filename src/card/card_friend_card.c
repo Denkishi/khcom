@@ -1063,7 +1063,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->gfx2 = AnimGetGfx(&w->anim2);
     w->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
     w->palette4 = LoadObjPalette(gBStatesPalette, 32);
-    FadeToAmount(0, 16, 16);
+    FadeToAmount(FADE_MODE_BLACK, 16, 16);
     FadeSetPaletteExcluded((u16)(w->palette->index + 16), 1);
     FadeSetPaletteExcluded((u16)(w->palette3->index + 16), 1);
     FadeSetPaletteExcluded((u16)(w->palette2->index + 16), 1);

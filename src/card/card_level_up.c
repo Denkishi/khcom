@@ -484,7 +484,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             w->gfx2 = AnimGetGfx(&w->anim);
             w->loaded[0] = 1;
             w->timer = 0;
-            FadeToAmount(0, 8, 16);
+            FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
         return 1;
     }
@@ -1449,7 +1449,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->gfx2 = AnimGetGfx(&w->anim);
             w->loaded[0] = 1;
             w->timer = 0;
-            FadeToAmount(0, 8, 16);
+            FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
         return 1;
     }

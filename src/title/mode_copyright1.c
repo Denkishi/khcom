@@ -81,7 +81,7 @@ void mode_copyright1_0(s32 arg) {
         LoadBgMap(0, gUnk_09841798, 0x800);
     }
 
-    FadeStartIn(1, 0x43);
+    FadeStartIn(FADE_MODE_WHITE, 0x43);
     gCopyright1Timer = 60;
 }
 
@@ -91,7 +91,7 @@ void mode_copyright1_1(void) {
     } else if (!FadeIsActive()) {
         if (gCopyright1Timer != 0) {
             if (--gCopyright1Timer == 0) {
-                FadeStartOut(1, 0x43);
+                FadeStartOut(FADE_MODE_WHITE, 0x43);
             }
         } else
 #ifndef VERSION_JP

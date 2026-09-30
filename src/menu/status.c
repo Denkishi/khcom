@@ -402,7 +402,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
         break;
     case 4:
         if (!FadeIsActive() && work->fadeStarted == 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             work->fadeStarted = 1;
         }
         ApproachValue(&work->y, work->targetY, work->steps);
@@ -416,7 +416,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
         if (work->closing == 0) {
             if (GetKeysPressed() & START_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
-                FadeStartOut(0, 16);
+                FadeStartOut(FADE_MODE_BLACK, 16);
                 SetStatusReturnToMenu(0);
                 gStatusBarState = 5;
             } else if (GetKeysPressed() & B_BUTTON) {

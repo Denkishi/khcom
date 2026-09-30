@@ -541,7 +541,7 @@ void Mode_MapChk_0(void) {
     DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
     DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
     DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
-    FadeStartIn(0, 8);
+    FadeStartIn(FADE_MODE_BLACK, 8);
     m4aMPlayAllStop();
 }
 void Mode_MapChk_1(void) {

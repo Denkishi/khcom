@@ -1814,7 +1814,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
     case 3:
         BgFxStartHumDefeat(work->x, -0x800 + work->y + work->z);
         m4aSongNumStart(SONG_SND_718);
-        FadeToAmount(0, gBtlWork->fadeAmount, 8);
+        FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->step += 1;
         work->timer = 0;
     case 4:
@@ -1835,7 +1835,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
                 for (i = 0; i < 8; i++) {
                     BosLstSpawnFal(work, 5);
                 }
-                FadeStartOut(2, 4);
+                FadeStartOut(FADE_MODE_ADD_WHITE, 4);
                 m4aSongNumStart(SONG_SND_720);
                 break;
             case 120:
@@ -1844,23 +1844,23 @@ u8 BosLstUpdateDefeat(BosLstWork* work) {
                 for (i = 0; i < 8; i++) {
                     BosLstSpawnFal(work, 5);
                 }
-                FadeStartOut(2, 2);
+                FadeStartOut(FADE_MODE_ADD_WHITE, 2);
                 m4aSongNumStart(SONG_SND_720);
                 break;
             case 44:
-                FadeStartIn(2, 4);
+                FadeStartIn(FADE_MODE_ADD_WHITE, 4);
                 break;
             case 122:
             case 172:
             case 192:
-                FadeStartIn(2, 2);
+                FadeStartIn(FADE_MODE_ADD_WHITE, 2);
                 break;
             }
         } else {
             for (i = 0; i < 80; i++) {
                 BosLstSpawnFal(work, 5);
             }
-            FadeStartIn(2, 60);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             FadeLock();
             m4aSongNumStart(SONG_SND_719);
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;

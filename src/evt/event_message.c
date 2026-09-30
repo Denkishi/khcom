@@ -2708,7 +2708,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
 
         if (work->seqDef->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             SetBackdropColor(31, 31, 31);
-            FadeStartIn(1, 0x40);
+            FadeStartIn(FADE_MODE_WHITE, 0x40);
         }
 #ifdef VERSION_EU
         u = gEventBackgroundDefs[work->eventId];
@@ -2748,9 +2748,9 @@ void event_seq_0(EventSeqWork* work, u8* a) {
             }
         }
         if ((work->seqDef->keyframes->flags & 0xFF0) == 0) {
-            FadeStartIn(0, 64);
+            FadeStartIn(FADE_MODE_BLACK, 64);
         } else if ((work->seqDef->keyframes->flags & 0xFF0) == CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
-            FadeStartIn(1, 120);
+            FadeStartIn(FADE_MODE_WHITE, 120);
         }
         work->timer = 0;
         eu_0806C974(work);
@@ -3023,9 +3023,9 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
 
 #ifndef VERSION_EU
     if ((work->seqDef->keyframes->flags & 0xFF0) == 0) {
-        FadeStartIn(0, 64);
+        FadeStartIn(FADE_MODE_BLACK, 64);
     } else if ((work->seqDef->keyframes->flags & 0xFF0) == CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
-        FadeStartIn(1, 120);
+        FadeStartIn(FADE_MODE_WHITE, 120);
     }
 
     work->timer = 0;
@@ -3084,7 +3084,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         gEventState->skipHoldTime = 64;
         p->ending = 1;
         gEventState->ending = 1;
-        FadeStartOut(0, 64);
+        FadeStartOut(FADE_MODE_BLACK, 64);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventSeqSkip);
 
         for (i = 0; i < 32; i++) {
@@ -3099,9 +3099,9 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         s32 t = p->seqDef->keyframes->flags & 0xFF0;
 
         if (t == 0) {
-            FadeStartIn(0, 64);
+            FadeStartIn(FADE_MODE_BLACK, 64);
         } else if (t == 128) {
-            FadeStartIn(1, 120);
+            FadeStartIn(FADE_MODE_WHITE, 120);
         }
         p->timer++;
     }
@@ -3121,7 +3121,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
 
     if (gEventState->frame >= t->endFrame && p->ending == 0 && FadeIsActive() == 0) {
         if (gEventState->unk_7F == 0) {
-            FadeStartOut(0, 64);
+            FadeStartOut(FADE_MODE_BLACK, 64);
         }
         p->ending = 1;
         gEventState->ending = 1;
@@ -7122,7 +7122,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         if (e->flags & CAMERA_KEYFRAME_FLAG_FLASH) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
-                FadeStartIn(2, e->duration);
+                FadeStartIn(FADE_MODE_ADD_WHITE, e->duration);
 
                 if (!(e->flags & CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND)) {
                     m4aSongNumStart(SONG_EV_FLASH01);
@@ -7136,7 +7136,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
-                FadeStartOut(1, e->duration);
+                FadeStartOut(FADE_MODE_WHITE, e->duration);
                 gEventState->unk_7F = 1;
                 p->unk_15 = 1;
 
@@ -7149,7 +7149,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
-                FadeStartOut(0, e->duration);
+                FadeStartOut(FADE_MODE_BLACK, e->duration);
                 gEventState->unk_7F = 1;
                 p->unk_15 = 1;
             }
@@ -7157,7 +7157,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             if (p->unk_15 == 0) {
-                FadeStartIn(1, e->duration);
+                FadeStartIn(FADE_MODE_WHITE, e->duration);
                 gEventState->unk_7F = 0;
                 p->unk_15 = 1;
             }
@@ -7166,7 +7166,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
-                FadeStartIn(0, e->duration);
+                FadeStartIn(FADE_MODE_BLACK, e->duration);
                 gEventState->unk_7F = 0;
                 p->unk_15 = 1;
             }
@@ -7175,7 +7175,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         if (e->flags & CAMERA_KEYFRAME_FLAG_HALF_FLASH) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
-                FadeFromAmount(2, 16, e->duration);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, e->duration);
 
                 if (!(e->flags & CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND)) {
                     m4aSongNumStart(SONG_EV_FLASH00);
@@ -7198,7 +7198,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE_LINEAR) {
             if (p->unk_15 == 0) {
-                FadeStartIn(7, e->duration);
+                FadeStartIn(FADE_MODE_WHITE_BLEND, e->duration);
             }
 
             p->unk_15 = 1;

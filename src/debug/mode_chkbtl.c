@@ -244,7 +244,7 @@ static const ChkBtlWorld sChkBtlWorlds[13] = {
 const char gWhitePalette[32] = "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff";
 
 void mode_chkbtl_0(void) {
-    FadeStartIn(0, 8);
+    FadeStartIn(FADE_MODE_BLACK, 8);
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
     EnableBg(0);

@@ -114,7 +114,7 @@ void ContinueSora_0(ContinueWork* p) {
     p->y = 0x4000;
     p->unk_64 = 0;
     p->blendAlpha = 0;
-    FadeStartIn(1, 24);
+    FadeStartIn(FADE_MODE_WHITE, 24);
 
     for (i = 0; i < 5; i++) {
         FadeSetPaletteExcluded(p->palette->index + i, 0);
@@ -181,7 +181,7 @@ void ContinueRiku_0(ContinueWork* p) {
     p->y = 0x4000;
     p->unk_64 = 0;
     p->blendAlpha = 0;
-    FadeStartIn(1, 24);
+    FadeStartIn(FADE_MODE_WHITE, 24);
 
     for (i = 0; i < 5; i++) {
         FadeSetPaletteExcluded(p->palette->index + i, 0);
@@ -234,10 +234,10 @@ static s32 Continue_1(ContinueWork* p) {
         if ((GetKeysHeld() & A_BUTTON) != 0) {
             switch (p->cursor) {
             case 0:
-                FadeStartOut(0, 96);
+                FadeStartOut(FADE_MODE_BLACK, 96);
                 break;
             case 1:
-                FadeStartOut(0, 96);
+                FadeStartOut(FADE_MODE_BLACK, 96);
                 break;
             }
 

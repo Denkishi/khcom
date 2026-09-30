@@ -427,7 +427,7 @@ void mode_worldwarp_0(void) {
     p = &sWorldWarpTilemap;
     *p = EwramAlloc(0x500);
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -700,7 +700,7 @@ void mode_worldwarp_1(void) {
 
         if (--sWorldWarpSteps <= 0) {
             sWorldWarpSteps = 16;
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sWorldWarpState = 5;
         }
         break;

@@ -516,7 +516,7 @@ void mode_pooh_0(s32 arg) {
     TaskPoolInit(&sModePoohMessageTasks, 1);
     BackdropFadeReset();
     BackdropFadeSetColor(6, 31, 31);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     BackdropFadeStartIn(0, 16);
     sModePoohExiting = 0;
 #ifdef VERSION_EU
@@ -609,7 +609,7 @@ void ExitPoohMode(u32 a) {
         for (i = 0; i <= 31; i++) {
             FadeSetPaletteExcluded(i, 0);
         }
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         BackdropFadeStartOut(0, 16);
         sModePoohExiting = 1;
     }

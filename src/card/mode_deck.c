@@ -119,7 +119,7 @@ u8 menu_1(MenuWork* w) {
                 break;
             case 2:
                 RequestFieldResume();
-                FadeStartOut(0, 32);
+                FadeStartOut(FADE_MODE_BLACK, 32);
                 w->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
@@ -186,7 +186,7 @@ u8 menu_1(MenuWork* w) {
                 break;
             case 9:
                 RequestFieldResume();
-                FadeStartOut(0, 32);
+                FadeStartOut(FADE_MODE_BLACK, 32);
                 w->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;

@@ -110,7 +110,7 @@ static SioErrorWork* gSioErrorWork;
 
 void mode_sio_btl_connect_0(s32 arg) {
     gSioBtlConnectWork = EwramAlloc(sizeof(SioBtlConnectWork));
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 7, 15);
     SetupBg(1, 1, 31, 0);
@@ -517,7 +517,7 @@ void SioBtlOptionLoadWorld(void) {
 
 void SioBtlOptionFadeIn(void) {
     s8 i = gSioWorldList[gSioWorldCursor];
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     RequestDma3Copy((u8*)gSioWorldEntries[i].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[i].tilesSize - 0x2000);
     EnableBg(0);
     EnableBg(1);
@@ -1906,7 +1906,7 @@ void SioBtlCardgetLoadBg(void) {
 }
 
 void SioBtlCardgetShowResult(void) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     DisableBg(0);
     EnableBg(1);
     EnableBg(2);
@@ -2222,7 +2222,7 @@ void SioBtlCardgetLoad2PWin(void) {
 #ifndef VERSION_EU
 void mode_sio_chg_connect_0(s32 arg) {
     gSioChgConnectWork = EwramAlloc(sizeof(SioBtlConnectWork));
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 7, 15);
     SetupBg(1, 1, 31, 0);
@@ -2368,7 +2368,7 @@ void SioChgCardLoadBg(void) {
 void SioChgCardInitObjs(void) {
     s32 i;
     s16 n;
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     LoadBgMap(1, gUnk_096F9C64, 0x800);
     LoadBgMap(2, gUnk_096F9464, 0x800);
     DisableBg(0);
@@ -3293,7 +3293,7 @@ void mode_sioError_0(s32 arg) {
     gSystemFlags |= SYSTEM_FLAG_NO_SOFT_RESET;
     gSioErrorWork = EwramAlloc(sizeof(SioErrorWork));
     m4aMPlayAllStop();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SioLinkClose();
     SetBgMode0();
     SetupBg(0, 0, 7, 15);

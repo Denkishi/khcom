@@ -1078,7 +1078,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
             BgFxStartBossDeath(jf->body.x + 0x800, jf->body.y + jf->body.z - 0x800);
         }
 
-        FadeToAmount(0, gBtlWork->fadeAmount, 8);
+        FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->step++;
         break;
     case 2:

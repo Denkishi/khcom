@@ -99,7 +99,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
     SetBgPriority(2, 2);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     ListPoolInit(&w->pool);
     TaskPoolInit(&w->taskpool, 99);
     TaskPoolInit(&w->cardpool, 1);
@@ -359,7 +359,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if (CheckRikuDeckCpCost(w) != 0 && CheckRikuDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -414,7 +414,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
     case START_BUTTON:
         w->result = 7;
         m4aSongNumStart(SONG_SYS_CANSEL);
-        FadeStartOut(0, 4);
+        FadeStartOut(FADE_MODE_BLACK, 4);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         return 1;
     case B_BUTTON:
@@ -489,7 +489,7 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* w, void* a) {
             ApproachValue(&w->y6, 0xA000, (u16)(s8)*p);
             (*p)--;
         } else {
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         }
     }

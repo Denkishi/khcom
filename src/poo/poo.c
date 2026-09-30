@@ -7243,7 +7243,7 @@ void AllmapDimPalette10(void) {
         FadeSetPaletteExcluded(i, 1);
     }
     FadeSetPaletteExcluded(10, 0);
-    FadeToAmount(0, 16, 16);
+    FadeToAmount(FADE_MODE_BLACK, 16, 16);
 }
 
 void AllmapSetBlend(s16 a) {

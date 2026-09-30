@@ -995,7 +995,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11B, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
@@ -1018,7 +1018,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11B, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
@@ -1038,7 +1038,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11C, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11C, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
-                        FadeStartIn(2, 50);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 50);
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x200, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
@@ -1152,7 +1152,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -1163,7 +1163,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -1175,7 +1175,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -2322,7 +2322,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 3, 0, w->base.sub->tiles);
             w->subRiseSpeed = 0;
-            FadeStartOut(9, 90);
+            FadeStartOut(FADE_MODE_DARK_MAGENTA, 90);
             m4aSongNumStart(SONG_BTL_AN_STANDENTRY);
             w->hoverZ = -0xC00;
         }
@@ -2452,7 +2452,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         w->steps--;
 
         if (w->steps <= 0) {
-            FadeStartIn(0, 30);
+            FadeStartIn(FADE_MODE_BLACK, 30);
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -2598,7 +2598,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 6, 0, w->base.sub->tiles);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             w->hoverZ = -0xC00;
         }
 
@@ -2643,7 +2643,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (AnimIsFinished(&w->sub.anim)) {
             if (BgFxIsActive() == 0) {
                 ClearBtlObjActionFlags(act);
-                FadeToOriginal(0, 8);
+                FadeToOriginal(FADE_MODE_BLACK, 8);
                 work->base.state = 0;
                 work->base.stateTimer = 0;
                 break;
@@ -3756,7 +3756,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     case 29:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
-            FadeStartIn(2, 20);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 20);
             m4aSongNumStart(SONG_SND_706);
             FadeLock();
             gBtlWork->hitStop = 20;
@@ -4293,7 +4293,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_285);
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             w->hoverZ = 0;
             work->base.vz = 0x400;
         }
@@ -4321,7 +4321,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         }
 
         if (work->base.stateTimer > 120) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -4662,7 +4662,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             act->z = 0;
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             w->hoverZ = 0;
             work->base.vz = 0x400;
             w->scaleSteps = 8;
@@ -4684,7 +4684,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             work->base.stateTimer = 0;
             work->base.steps--;
 
@@ -5469,7 +5469,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 33: {
         s32 a, b, c;
         if (work->base.stateTimer == 0) {
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartAxcelFireWall(act->x, 1, 303);
@@ -5493,7 +5493,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.state = 34;
             work->base.stateTimer = 0;
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
         } else {
             work->base.stateTimer++;
         }
@@ -6033,7 +6033,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 8, 0, work->base.tiles);
             work->hoverZ = 0;
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
 
         if (AnimGetFrame(&w->base.anim) > 4 && BgFxIsActive() == 0) {
@@ -6053,7 +6053,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (w->base.stateTimer > 300 ||
             (w->base.stateTimer > 120 && gBtlWork->actor->hp <= 1)) {
             m4aSongNumStop(SONG_BTL_VIC_ICEFALL);
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             ClearBtlObjActionFlags(act);
             w->base.state = 0;
@@ -6105,7 +6105,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (AnimGetFrame(&w->base.anim) == 3 && w->base.anim.timer == 0) {
-            FadeStartIn(1, 60);
+            FadeStartIn(FADE_MODE_WHITE, 60);
             VixenPlaceGroundIce(work);
         }
 
@@ -7940,7 +7940,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
             m4aSongNumStart(SONG_BTL_AN_STANDENTRY);
-            FadeStartOut(9, 80);
+            FadeStartOut(FADE_MODE_DARK_MAGENTA, 80);
         }
         work->base.vz = 0;
         act->z += (-0x2800 - act->z) >> 5;
@@ -8096,7 +8096,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             work->base.flags &= ~8;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
-            FadeStartIn(9, 30);
+            FadeStartIn(FADE_MODE_DARK_MAGENTA, 30);
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
@@ -8351,7 +8351,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                     ApplyAttackBox(attack, act->x + 0x1400, act->y, act->z, 20, 8, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
                     if (attack == 291) {
-                        FadeStartIn(2, 45);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 45);
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 332, act->x - 0x2000, (act->y - 0x1800) + act->z);
                         } else {

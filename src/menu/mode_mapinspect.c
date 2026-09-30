@@ -624,7 +624,7 @@ void MapInspectHandleGridInput(void) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         gMapInspectReturnToMenu = 0;
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         gMapInspectState = 5;
     } else if (keys & 4) {
         gMapInspectGridCol = 0;
@@ -691,7 +691,7 @@ void MapInspectHandleTabInput(void) {
             LoadBgMap(0, gUnk_09A3439C, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             gMapInspectReturnToMenu = 0;
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             gMapInspectState = 5;
         } else if (keys & 0x82) {
             if (GetMapInspectTabCount(gMapInspectTab) > 0) {
@@ -792,7 +792,7 @@ void MapInspectHandleValueInput(void) {
             LoadBgMap(0, gUnk_09A3439C, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             gMapInspectReturnToMenu = 0;
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             gMapInspectState = 5;
         } else if (keys & 0x20) {
             MapInspectSelectValueInColumn(p, 0);
@@ -877,7 +877,7 @@ void MapInspectHandleConfirmInput(void) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         gMapInspectReturnToMenu = 0;
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         gMapInspectState = 5;
     } else if (keys & 0x20) {
         gMapInspectConfirmCursor = 0;
@@ -902,7 +902,7 @@ void MapInspectHandleNoticeInput(void) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         gMapInspectReturnToMenu = 0;
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         gMapInspectState = 5;
     }
 }
@@ -1047,7 +1047,7 @@ void mode_mapinspect_0(void) {
 
     gMapCardInventoryEntries = EwramAlloc(27 * sizeof(MapCardInventoryEntry));
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -1296,7 +1296,7 @@ void mode_mapinspect_1(void) {
         ApproachValue(&gMapInspectBarY[1], 0xA800, gMapInspectSteps);
         gMapInspectSteps--;
         if (gMapInspectSteps <= 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             gMapInspectState = 5;
         }
         break;

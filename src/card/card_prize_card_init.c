@@ -1409,7 +1409,7 @@ void SpotLight_0(SpotlightWork* w, u8* src) {
     w->steps = 30;
     w->blendB = 0x1000;
     w->blendA = 0;
-    FadeStartOut(0, 30);
+    FadeStartOut(FADE_MODE_BLACK, 30);
     gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
 }
 
@@ -1423,7 +1423,7 @@ u8 SpotLight_1(SpotlightWork* w, void* a) {
     }
 
     if (*w->endFlag == 1) {
-        FadeStartIn(0, 30);
+        FadeStartIn(FADE_MODE_BLACK, 30);
         w->steps = 30;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSpotLightFadeOut);

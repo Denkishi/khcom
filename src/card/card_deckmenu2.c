@@ -1026,7 +1026,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     SetBgPriority(1, 1);
     SetBgPriority(2, 2);
     SetBgPriority(3, 3);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     ListPoolInit(&w->pool);
     TaskPoolInit(&w->taskpool, 286);
     TaskPoolInit(&w->cardpool, 1);
@@ -1124,7 +1124,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->result = 0;
 }
 static u8 Deckmenu2_1(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     if (w->step == 0) {
         RequestDma3Clear(GetBgCharBase(0), 0x2000);
@@ -1170,7 +1170,7 @@ static u8 Deckmenu2_1(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* w, void* a);
 
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (w->step) {
     case 0:
@@ -1256,7 +1256,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a) {
     return 1;
 }
 u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     switch (w->step) {
     case 0:
         LoadBgMap(0, gUnk_09519AB8, 0x180);
@@ -1398,7 +1398,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
@@ -1522,7 +1522,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -1590,7 +1590,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -1656,7 +1656,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             w->result = 7;
         }
         return 1;
@@ -1791,7 +1791,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -1903,7 +1903,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -1992,7 +1992,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -2153,7 +2153,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -2189,7 +2189,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -2300,7 +2300,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
         return 1;
     case L_BUTTON:
         if (w->view == 6) {
-            FadeStartIn(0, 1);
+            FadeStartIn(FADE_MODE_BLACK, 1);
             FreeCollectionEntries(w);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -2310,7 +2310,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -2431,7 +2431,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
@@ -2512,7 +2512,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -2632,7 +2632,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* w, void* a) {
             w->step = 0;
             ReleaseCommandMenuGfx(w);
 #ifdef VERSION_EU
-            FadeStartIn(0, 16);
+            FadeStartIn(FADE_MODE_BLACK, 16);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenKeyboard);
             break;
@@ -2718,7 +2718,7 @@ u8 UpdateDeckMenuCloseCommands(DeckMenuWork* w, void* a) {
     return 1;
 }
 u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (w->deckIndex) {
     case 0:
@@ -2815,7 +2815,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* w, void* a) {
     u8* q;
     vu32 zero;
 
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (w->step) {
     case 0:
@@ -2909,7 +2909,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
@@ -3004,12 +3004,12 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
                 return 1;
             }
         case B_BUTTON:
-            FadeStartIn(0, 1);
+            FadeStartIn(FADE_MODE_BLACK, 1);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseAddMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         case L_BUTTON:
-            FadeStartIn(0, 1);
+            FadeStartIn(FADE_MODE_BLACK, 1);
             FreeCollectionEntries(w);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenRemoveMode);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -3017,7 +3017,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
         case START_BUTTON:
             if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-                FadeStartOut(0, 4);
+                FadeStartOut(FADE_MODE_BLACK, 4);
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 w->result = 7;
             }
@@ -3054,7 +3054,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
     u8* q;
 
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
     q = &w->view;
     *q = 4;
     w->removeLabelX = 95;
@@ -3096,7 +3096,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
 }
 
 u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (w->deckIndex) {
     case 0:
@@ -3230,7 +3230,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -3306,14 +3306,14 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
         break;
     case B_BUTTON:
         w->unk_8CA = 0;
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseRemoveMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case R_BUTTON:
         w->unk_8CA = 1;
         FreeCollectionEntries(w);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuOpenAddMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
@@ -3327,7 +3327,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-        FadeStartOut(0, 4);
+        FadeStartOut(FADE_MODE_BLACK, 4);
         m4aSongNumStart(SONG_SYS_CLOSE);
         w->result = 7;
         return 1;
@@ -3359,7 +3359,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
 }
 
 u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
     w->removeLabelX = 95;
     ReleaseCardPreview(w);
     SetupBg(3, 0, 30, 0);
@@ -3402,7 +3402,7 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* w, void* a) {
     u8 z;
     u8* q;
 
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
     SetupBg(3, 0, 30, 0);
     SetupBg(2, 0, 15, 0);
     SetupBg(1, 0, 23, 0);
@@ -3435,7 +3435,7 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a) {
     u16 i;
     u32 zero;
 
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
 
     switch (w->step) {
     case 0:
@@ -3511,7 +3511,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         } else {
@@ -3607,14 +3607,14 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
             return 1;
         }
     case B_BUTTON:
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseDeleteMode);
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     case START_BUTTON:
         if ((u8)CheckDeckCpCost(w) != 0 && (u8)CheckDeckHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CLOSE);
             w->result = 7;
         }
@@ -3647,7 +3647,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a) {
     u8* q;
 
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
     q = &w->view;
     *q = 9;
     w->removeLabelX = 95;
@@ -3739,7 +3739,7 @@ u8 UpdateDeckMenuSlideOut(DeckMenuWork* w, void* a) {
         ApproachValue(&w->y6, 0xA000, (u16)(s8)w->barSlideTimer);
         w->barSlideTimer--;
     } else {
-        FadeStartOut(0, 4);
+        FadeStartOut(FADE_MODE_BLACK, 4);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuFadeOut);
     }
 
@@ -6367,7 +6367,7 @@ void func_jp_0808F34C(DeckMenuWork* w) {
 extern u8 gUnk_096145B8[];
 extern u8 gUnk_09614518[];
 u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 #ifdef VERSION_EU
     w->handVisible = 0;
     w->onEndKey = 0;
@@ -6710,7 +6710,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
             SaveDeckNameFromBuffer(w);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuCloseKeyboard);
             m4aSongNumStart(SONG_SYS_KETTEI);
-            FadeStartIn(0, 16);
+            FadeStartIn(FADE_MODE_BLACK, 16);
         } else {
             if ((u8)AppendKeyboardChar(w) != 0) {
                 w->textSlotCount6 = LoadTextSlots(w->nameBuffer, w->textSlots6);
@@ -6825,7 +6825,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 }
 
 u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     w->view = 0;
     SetDeckMenuFrameCursor(w, 0);
     SetDeckMenuHandAnim(w);

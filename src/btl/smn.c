@@ -296,7 +296,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 case 6:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
@@ -317,7 +317,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     MakeOpponentsHittable();
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
@@ -335,7 +335,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     MakeOpponentsHittable();
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
-                        FadeStartIn(2, 50);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 50);
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
@@ -371,7 +371,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 case 6:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
@@ -392,7 +392,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     MakeOpponentsHittable();
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
@@ -469,7 +469,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 if (AnimGetFrame(&work->anim) == 4) {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -478,7 +478,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     MakeOpponentsHittable();
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -488,7 +488,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     MakeOpponentsHittable();
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
-                        FadeStartIn(2, 20);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
                 break;
@@ -1417,7 +1417,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             }
 
             BtlMapStartShake();
-            FadeFromAmount(5, 8, 20);
+            FadeFromAmount(FADE_MODE_GREEN, 8, 20);
             SetBattleZoom(30, 0xCC, 0x10000, 0x15E00);
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -2310,13 +2310,13 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     BgFxStartGravity(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
                 }
                 work->fired = 1;
-                FadeStartOut(6, 8);
+                FadeStartOut(FADE_MODE_GRAY, 8);
             }
         } else {
             BgAnimIsStopped();
         }
         if (work->fired != 0 && !BgFxIsActive()) {
-            FadeStartIn(6, 8);
+            FadeStartIn(FADE_MODE_GRAY, 8);
             work->state = 2;
             work->stateTimer = 0;
         } else {
@@ -2518,7 +2518,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
         if (SmnKingApplyGravity(work)) {
             work->state = 4;
             work->stateTimer = 0;
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
         break;
     case 4:
@@ -2556,7 +2556,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
     case 5:
         ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
         if (work->stateTimer > 60) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             work->state = 1;
             work->stateTimer = 0;
         } else {

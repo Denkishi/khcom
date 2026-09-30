@@ -59,7 +59,7 @@ void mode_status_0(void) {
     TaskPoolInit(&gStatusTaskPool, 4);
     gStatusBarTask = TaskCreate(&gStatusTaskPool, &gTaskDescStatusBar, 0);
     TaskCreate(&gStatusTaskPool, &gTaskDescStatus, 0);
-    FadeStartIn(0, 0x10);
+    FadeStartIn(FADE_MODE_BLACK, 0x10);
 }
 
 void mode_status_1(void) {

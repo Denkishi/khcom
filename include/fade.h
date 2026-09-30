@@ -3,6 +3,20 @@
 
 #include "types.h"
 
+enum FadeMode {
+    FADE_MODE_BLACK,
+    FADE_MODE_WHITE,
+    FADE_MODE_ADD_WHITE,
+    FADE_MODE_RED,
+    FADE_MODE_BLUE,
+    FADE_MODE_GREEN,
+    FADE_MODE_GRAY,
+    FADE_MODE_WHITE_BLEND,
+    FADE_MODE_CONTRAST,
+    FADE_MODE_DARK_MAGENTA,
+    FADE_MODE_DARK_RED
+};
+
 void FadeReset(void);
 void FadeUpdate(void);
 void FadeStartIn(s32 mode, u16 frames);

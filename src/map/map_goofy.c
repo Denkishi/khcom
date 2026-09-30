@@ -291,7 +291,7 @@ void MapNiserikuWaitApproach(MapNiserikuWork* w) {
 
     if (dx <= 0x8000 && dy <= 0x8000) {
         if (Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < 0x3000) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
             w->update = MapNiserikuStartEvent;
         }

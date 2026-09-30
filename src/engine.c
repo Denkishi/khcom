@@ -2729,7 +2729,7 @@ void FadeUpdate(void) {
                 g = (color >> 5) & 31;
                 b = (color >> 10) & 31;
                 switch (gFadeWork->mode) {
-                case 0:
+                case FADE_MODE_BLACK:
                     r -= amount;
                     g -= amount;
                     b -= amount;
@@ -2737,12 +2737,12 @@ void FadeUpdate(void) {
                     if (g < 0) g = 0;
                     if (b < 0) b = 0;
                     break;
-                case 1:
+                case FADE_MODE_WHITE:
                     if (r < amount) r = amount;
                     if (g < amount) g = amount;
                     if (b < amount) b = amount;
                     break;
-                case 3:
+                case FADE_MODE_RED:
                     r += amount;
                     g -= amount;
                     b -= amount;
@@ -2750,7 +2750,7 @@ void FadeUpdate(void) {
                     if (g < 0) g = 0;
                     if (b < 0) b = 0;
                     break;
-                case 5:
+                case FADE_MODE_GREEN:
                     r -= amount;
                     g += amount;
                     b -= amount;
@@ -2758,7 +2758,7 @@ void FadeUpdate(void) {
                     if (g > 31) g = 31;
                     if (b < 0) b = 0;
                     break;
-                case 4:
+                case FADE_MODE_BLUE:
                     r -= amount;
                     g -= amount;
                     b += amount;
@@ -2766,7 +2766,7 @@ void FadeUpdate(void) {
                     if (g < 0) g = 0;
                     if (b > 31) b = 31;
                     break;
-                case 2:
+                case FADE_MODE_ADD_WHITE:
                     r += amount;
                     g += amount;
                     b += amount;
@@ -2774,13 +2774,13 @@ void FadeUpdate(void) {
                     if (g > 31) g = 31;
                     if (b > 31) b = 31;
                     break;
-                case 6:
+                case FADE_MODE_GRAY:
                     gray = ((r + g + b) >> 2) * amount;
                     r = (gray + r * (31 - amount)) >> 5;
                     g = (gray + g * (31 - amount)) >> 5;
                     b = (gray + b * (31 - amount)) >> 5;
                     break;
-                case 7:
+                case FADE_MODE_WHITE_BLEND:
                     red = (31 - r) * amount;
                     green = (31 - g) * amount;
                     blue = (31 - b) * amount;
@@ -2788,7 +2788,7 @@ void FadeUpdate(void) {
                     g = (green + g * (31 - amount)) / 31;
                     b = (blue + b * (31 - amount)) / 31;
                     break;
-                case 8:
+                case FADE_MODE_CONTRAST:
                     gray = 31 * amount;
                     if ((r + g + b) / 3 > 12) {
                         r = (gray + r * (31 - amount)) / 31;
@@ -2800,7 +2800,7 @@ void FadeUpdate(void) {
                         b = b * (31 - amount) / 31;
                     }
                     break;
-                case 9:
+                case FADE_MODE_DARK_MAGENTA:
                     r -= amount;
                     g -= amount * 2;
                     b -= amount;
@@ -2808,7 +2808,7 @@ void FadeUpdate(void) {
                     if (g < 0) g = 0;
                     if (b < 0) b = 0;
                     break;
-                case 10:
+                case FADE_MODE_DARK_RED:
                     r -= amount;
                     g -= amount * 2;
                     b -= amount * 2;
@@ -2940,16 +2940,16 @@ u8 FadeIsActive(void) {
 
 u16 FadeGetColor(void) {
     switch (gFadeWork->mode) {
-    case 1:
-    case 2:
+    case FADE_MODE_WHITE:
+    case FADE_MODE_ADD_WHITE:
         return 0x7FFF;
-    case 3:
+    case FADE_MODE_RED:
         return 0x1F;
-    case 4:
+    case FADE_MODE_BLUE:
         return 0x7C00;
-    case 5:
+    case FADE_MODE_GREEN:
         return 0x3E0;
-    case 0:
+    case FADE_MODE_BLACK:
     default:
         return 0;
     }

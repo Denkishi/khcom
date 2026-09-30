@@ -650,7 +650,7 @@ s32 _0800CDF0(EmyWork* work) {
         if (work->steps <= 0) {
             if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
                 BgAnimStop();
-                FadeStartIn(2, 20);
+                FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                 FadeLock();
             }
             DropEnemyPrizes(actor);
@@ -692,7 +692,7 @@ s32 _0800CDF0(EmyWork* work) {
             work->stateTimer++;
         } else if (work->stateTimer > 0) {
             if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
-                FadeStartIn(2, 20);
+                FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                 FadeLock();
             }
             DropEnemyPrizes(actor);

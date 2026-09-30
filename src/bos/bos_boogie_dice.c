@@ -2085,7 +2085,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
                 x = p->x - 0x1C00;
             }
             BgFxStartBossDeath(x, p->y + p->z + 0x1C00);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             work->timer++;
         } else if ((s16)work->timer == 3) {
             if (!FadeIsActive()) {

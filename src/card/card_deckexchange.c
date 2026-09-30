@@ -116,7 +116,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
     SetBgPriority(2, 2);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     ListPoolInit(&w->pool);
     TaskPoolInit(&w->tasks, 99);
     TaskPoolInit(&w->tasks2, 1);
@@ -182,7 +182,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     InitTextSlots(w->textSlots5, 90);
 }
 u8 deckexchange_1(DeckExchangeWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (w->step) {
     case 0:
@@ -241,7 +241,7 @@ u8 deckexchange_1(DeckExchangeWork* w, void* a) {
 }
 
 u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (w->step) {
     case 0:
@@ -295,7 +295,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a) {
 u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* w, void* a) {
     s32 v;
 
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     switch (w->step) {
     case 1:
@@ -365,7 +365,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -466,7 +466,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
 
@@ -553,7 +553,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
         return 1;
@@ -568,7 +568,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* w, void* a) {
     return 1;
 }
 u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a) {
-    FadeStartIn(0, 4);
+    FadeStartIn(FADE_MODE_BLACK, 4);
     SetupBg(3, 0, 30, 0);
     SetupBg(2, 0, 15, 0);
     SetupBg(1, 0, 23, 0);
@@ -604,7 +604,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a) {
     u16 j;
     u16 n;
 
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     switch (w->step) {
     case 0:
         w->entryCount = 286;
@@ -680,7 +680,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
     if (w->exitRequested != 0) {
         if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
@@ -778,7 +778,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
     case START_BUTTON:
         if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
-            FadeStartOut(0, 4);
+            FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
         return 1;
@@ -805,7 +805,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
     return 1;
 }
 u8 UpdateDeckExchangeClose(DeckExchangeWork* w, void* a) {
-    FadeStartOut(0, 16);
+    FadeStartOut(FADE_MODE_BLACK, 16);
     w->categoryFilter = 0;
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
     TaskPoolUpdate(&w->tasks);

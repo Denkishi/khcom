@@ -2465,7 +2465,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
         }
 
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
 
         return 0;

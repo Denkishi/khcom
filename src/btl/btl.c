@@ -2227,7 +2227,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer = 0;
         break;
     case 11:
-        FadeStartIn(2, 20);
+        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
         gBtlWork->hitStop = 15;
 
         if (p->badStatus != BAD_STATUS_STUN) {
@@ -2850,7 +2850,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 44, 0);
             m4aSongNumStart(SONG_VO_SR_STOP00);
-            FadeStartOut(6, 8);
+            FadeStartOut(FADE_MODE_GRAY, 8);
         } else if ((s16)work->stateTimer == 25) {
             if (p->btl->actor2 != NULL) {
                 e = p->btl->actor2;
@@ -2886,7 +2886,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer > 25 && BgFxIsActive() == 0) {
-            FadeStartIn(6, 8);
+            FadeStartIn(FADE_MODE_GRAY, 8);
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -3202,7 +3202,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 51, 0);
-            FadeStartOut(0, 30);
+            FadeStartOut(FADE_MODE_BLACK, 30);
         }
 
         if ((s16)work->stateTimer == 30) {
@@ -3252,7 +3252,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             SetBtlSoraState(work, 1);
-            FadeStartIn(0, 16);
+            FadeStartIn(FADE_MODE_BLACK, 16);
             break;
         }
 
@@ -3303,7 +3303,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
 
                 if (e2 != NULL) {
-                    FadeFromAmount(4, 15, 32);
+                    FadeFromAmount(FADE_MODE_BLUE, 15, 32);
 
                     if (e2->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
                         CreateBtlPopTask(e2, 0);
@@ -3341,7 +3341,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 40) {
-            FadeStartIn(7, 8);
+            FadeStartIn(FADE_MODE_WHITE_BLEND, 8);
             FadeLock();
             m4aSongNumStart(SONG_EF_TELER);
             gBtlWork->hitStop = 8;
@@ -3495,7 +3495,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_158 = 20;
             BtlMapStartShake();
             ApplyAttackBox(114, p->x, p->y, p->z, 256, 256, 256);
-            FadeFromAmount(4, 16, 20);
+            FadeFromAmount(FADE_MODE_BLUE, 16, 20);
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
         } else if ((s16)work->stateTimer > 27 && (s16)--work->unk_158 <= 0) {
             SetBtlSoraAnimation(work, 46, 0);
@@ -3546,7 +3546,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 40) {
             m4aSongNumStart(SONG_BTL_GMIC_OK);
-            FadeStartIn(8, 8);
+            FadeStartIn(FADE_MODE_CONTRAST, 8);
             FadeLock();
             gBtlWork->hitStop = 8;
         } else if ((s16)work->stateTimer == 41) {
@@ -3574,7 +3574,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 1, 0);
             work->steps = 16;
-            FadeStartOut(6, 1);
+            FadeStartOut(FADE_MODE_GRAY, 1);
         }
 
         ApproachValue(&work->scaleX, 10, work->steps);
@@ -3615,7 +3615,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         ApproachValue(&work->scaleY, 256, work->steps);
 
         if ((s16)--work->steps <= 0) {
-            FadeStartIn(6, 1);
+            FadeStartIn(FADE_MODE_GRAY, 1);
             MakeOpponentsHittable();
             SetBtlSoraState(work, 1);
         } else {
@@ -3717,7 +3717,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FocusBtlSoraCameraOnTarget(work);
             SetBtlSoraAnimation(work, 42, 0);
             m4aSongNumStart(SONG_VO_SR_GURABI00);
-            FadeToAmount(2, 13, 60);
+            FadeToAmount(FADE_MODE_ADD_WHITE, 13, 60);
         }
 
         if ((s16)work->stateTimer == 27) {
@@ -3744,7 +3744,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
             SetBtlSoraState(work, 1);
-            FadeToOriginal(2, 20);
+            FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
             break;
         }
 
@@ -4083,7 +4083,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             m4aSongNumStart(SONG_EF_LIMIMOV);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         } else if ((u16)(uv - 22) <= 42) {
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= 1280;
@@ -4129,7 +4129,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (d == 2) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 33);
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             DisableBtlSoraPassThrough(work);
@@ -4148,7 +4148,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
             DisableBtlSoraPassThrough(work);
             break;
@@ -4369,7 +4369,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         st = work->stateTimer;
 
         if (st == 0) {
-            FadeFromAmount(3, 4, 10);
+            FadeFromAmount(FADE_MODE_RED, 4, 10);
             AnimReset(&work->anim);
             SetBtlSoraAnimation(work, 38, 0);
             p->flags |= BTLOBJ_FLAG_HURT;
@@ -4471,7 +4471,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, 41, 0);
             m4aSongNumStart(SONG_VO_SR_DEATH00);
             work->speed = 0;
-            FadeFromAmount(3, 16, 60);
+            FadeFromAmount(FADE_MODE_RED, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
             p->flags &= ~BTLOBJ_FLAG_HURT;
@@ -4492,7 +4492,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            FadeStartIn(2, 30);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
             p->hp = p->maxHp / 4;
@@ -4607,10 +4607,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->speed = 0;
 
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-                FadeStartIn(2, 20);
+                FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                 FadeLock();
             } else {
-                FadeFromAmount(3, 16, 60);
+                FadeFromAmount(FADE_MODE_RED, 16, 60);
             }
 
             work->stateTimer++;
@@ -4758,7 +4758,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         switch ((s16)work->stateTimer) {
         case 0:
             SetBtlSoraAnimation(work, 14, 0);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             m4aSongNumStart(SONG_VO_SR_ATTACK08);
             break;
         case 15:
@@ -4813,7 +4813,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv == 41) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer = uv + 1;
@@ -5039,7 +5039,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 BgFxStartZantetsuken(p->x + 5120, p->y, p->z - 7680, 1);
             }
 
-            FadeStartIn(3, 10);
+            FadeStartIn(FADE_MODE_RED, 10);
 
             if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(95, p->x - 6400, p->y, p->z, 10, 12, 12) != 0
@@ -5081,7 +5081,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         FocusBtlSoraCameraOnTarget(work);
-        FadeToAmount(0, gBtlWork->fadeAmount, 8);
+        FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         work->state = 53;
         work->steps = 0;
         work->stateTimer = 0;
@@ -5185,7 +5185,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (AnimIsFinished(&work->anim) != 0) {
             if (work->comboCount == 0) {
                 SetBtlSoraState(work, 1);
-                FadeToOriginal(0, 8);
+                FadeToOriginal(FADE_MODE_BLACK, 8);
                 break;
             }
 
@@ -5248,7 +5248,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                         SetBattleZoom(8, 384, p->x + 2048, p->y + p->z);
                     }
 
-                    FadeStartIn(2, 20);
+                    FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                 }
             } else if ((s16)work->stateTimer == 39) {
                 SetBattleZoom(5, 256, gBtlWork->x2, gBtlWork->y2);
@@ -5347,7 +5347,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->vz = 0;
 
         if ((s16)work->stateTimer == 0) {
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             SetBtlSoraAnimation(work, 66, 0);
 
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -5424,7 +5424,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 3);
         } else {
             work->stateTimer++;
@@ -5607,7 +5607,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 69, 0);
             m4aSongNumStart(SONG_VO_SR_ATTACK08);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
 
         if (work->anim.timer == 0) {
@@ -5631,7 +5631,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -5648,7 +5648,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 69, 0);
             m4aSongNumStart(SONG_VO_SR_ATTACK08);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
 
         if (work->anim.timer == 0) {
@@ -5660,7 +5660,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             case 6:
                 BtlMapStartShake();
                 m4aSongNumStart(SONG_EF_KUEIK);
-                FadeFromAmount(9, 15, 30);
+                FadeFromAmount(FADE_MODE_DARK_MAGENTA, 15, 30);
                 MakeOpponentsHittable();
                 ApplyAttackBox(106, p->x, p->y, p->z, 512, 512, 1);
                 break;
@@ -5668,7 +5668,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0 && FadeIsActive() == 0) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -5732,7 +5732,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         switch ((s16)work->stateTimer) {
         case 0:
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             m4aSongNumStart(SONG_VO_SR_SUMMON01);
             SetBtlSoraAnimation(work, 60, 0);
             break;
@@ -5826,7 +5826,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags &= ~0x0000000400000000LL;
             break;
         case 44:
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             break;
         }
 
@@ -5880,7 +5880,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             m4aSongNumStart(SONG_EF_LIMIMOV);
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             break;
         case 25:
             SetBtlSoraAnimation(work, 55, 0);
@@ -5921,7 +5921,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         SetBtlSoraAnimation(work, 57, 0);
 
         if (AnimIsFinished(&work->anim) != 0) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         }
         break;
@@ -7627,7 +7627,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 26, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
             m4aSongNumStart(SONG_BTL_AN_STANDENTRY);
-            FadeStartOut(9, 80);
+            FadeStartOut(FADE_MODE_DARK_MAGENTA, 80);
         }
 
         work->vz = 0;
@@ -7843,7 +7843,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(p);
             work->state = 35;
-            FadeStartIn(9, 30);
+            FadeStartIn(FADE_MODE_DARK_MAGENTA, 30);
             work->stateTimer = 0;
             break;
         }
@@ -8211,7 +8211,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
 
                     if (mode == 5) {
-                        FadeStartIn(2, 45);
+                        FadeStartIn(FADE_MODE_ADD_WHITE, 45);
 
                         if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 332, p->x - 8192, p->y - 6144 + p->z);
@@ -8508,7 +8508,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->stateTimer == 0) {
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             SetBtlRikuAnimation(work, 15, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
         }
@@ -8641,7 +8641,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->x += (work->targetX - p->x) >> 3;
 
         if (AnimIsFinished(&work->anim) != 0 && p->z >= p->groundZ) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -8967,7 +8967,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 0, 1);
-            FadeToAmount(9, 17, 16);
+            FadeToAmount(FADE_MODE_DARK_MAGENTA, 17, 16);
             m4aSongNumStart(SONG_SND_702);
             BgFxStartRikuDarkModeFlash(p->x, p->y, p->z);
             work->steps = 6;
@@ -9029,7 +9029,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->steps <= 0 && p->z >= p->groundZ) {
-            FadeToOriginal(9, 10);
+            FadeToOriginal(FADE_MODE_DARK_MAGENTA, 10);
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->steps = 0;
@@ -10244,7 +10244,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         FocusBtlRikuCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
-            FadeFromAmount(3, 4, 10);
+            FadeFromAmount(FADE_MODE_RED, 4, 10);
             SetBtlRikuAnimation(work, 7, 0);
             p->flags |= BTLOBJ_FLAG_HURT;
             work->speed = 0;
@@ -10286,7 +10286,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         FocusBtlRikuCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
-            FadeFromAmount(3, 4, 10);
+            FadeFromAmount(FADE_MODE_RED, 4, 10);
             SetBtlRikuAnimation(work, 14, 0);
             p->flags |= BTLOBJ_FLAG_HURT;
             work->speed = 0;
@@ -10392,7 +10392,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 8, 0);
             m4aSongNumStart(SONG_VO_RK_DEATH00);
             work->speed = 0;
-            FadeFromAmount(3, 16, 60);
+            FadeFromAmount(FADE_MODE_RED, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
             p->flags &= ~BTLOBJ_FLAG_HURT;
@@ -10411,7 +10411,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            FadeStartIn(2, 30);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
             p->hp = p->maxHp / 4;
@@ -10460,7 +10460,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 8, 0);
             m4aSongNumStart(SONG_VO_RK_DEATH00);
             work->speed = 0;
-            FadeFromAmount(3, 16, 60);
+            FadeFromAmount(FADE_MODE_RED, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
             p->flags &= ~BTLOBJ_FLAG_HURT;

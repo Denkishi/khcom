@@ -75,7 +75,7 @@ void Event_0(s32 arg) {
 
     // @bug? Should mask with 0x7FFF.
     if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
-        FadeStartIn(1, 999);
+        FadeStartIn(FADE_MODE_WHITE, 999);
     }
 
     TaskPoolInit(&gEventTaskPool, 2);
@@ -229,7 +229,7 @@ void EventUpdate(void) {
         return;
     }
     if (p->toTitle != 0) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
@@ -321,7 +321,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 173);
         break;
@@ -330,7 +330,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 133);
         break;
@@ -339,7 +339,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 134);
         break;
@@ -348,7 +348,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 139);
         break;
@@ -357,7 +357,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 160);
         break;
@@ -366,7 +366,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 159);
         break;
@@ -375,7 +375,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 136);
         break;
@@ -384,7 +384,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 137);
         break;
@@ -393,7 +393,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 135);
         break;
@@ -402,7 +402,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
         CreateSysmsgwinTask(&gEventTaskPool, 138);
         break;
@@ -412,7 +412,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 162);
         break;
     case 114:
@@ -421,7 +421,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 161);
         break;
     case 57:
@@ -430,7 +430,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 163);
         break;
     case MSG_CODE(143):
@@ -440,7 +440,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 165);
         break;
     case MSG_CODE(145):
@@ -451,7 +451,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 166);
         break;
     case 3:
@@ -473,7 +473,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 168);
         break;
     case 54:
@@ -492,7 +492,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 169);
         break;
     case 5:
@@ -501,7 +501,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 175);
         break;
     case 6:
@@ -519,7 +519,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 170);
         break;
     case 119:
@@ -528,7 +528,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 172);
         break;
     case 60:
@@ -537,7 +537,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 164);
         break;
     case 27:
@@ -548,7 +548,7 @@ void ShowEventEndMessage(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         CreateSysmsgwinTask(&gEventTaskPool, 174);
         break;
     }

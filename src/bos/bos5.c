@@ -3581,7 +3581,7 @@ u8 BosMdUpdateDefeat(MdWork* work) {
                 if (FadeIsActive() == 0) {
                     BgFxStartBossDeath(work->sub[0].x,
                                   work->sub[0].y + work->sub[0].z);
-                    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+                    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
                     work->timer = 120;
                     work->step = 1;
                 }
@@ -4944,7 +4944,7 @@ void mode_worldselect_0(void) {
     gWorldselectFirstVisit = (gGameState.progression.unk_82 ^ 1) & 1;
     gWorldselectBgAnimActive = 0;
     gWorldselectCancelled = 0;
-    FadeStartIn(2, 16);
+    FadeStartIn(FADE_MODE_ADD_WHITE, 16);
 
     if (gWorldselectFirstVisit != 0) {
         WorldselectSetBgMode0();
@@ -5123,9 +5123,9 @@ void mode_worldselect_1(void) {
         FadeLock();
 
         if (gWorldselectCancelled != 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
         } else {
-            FadeStartOut(2, 16);
+            FadeStartOut(FADE_MODE_ADD_WHITE, 16);
         }
 
         gWorldselectStep = 8;

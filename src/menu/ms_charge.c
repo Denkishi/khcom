@@ -644,12 +644,12 @@ void MsChargeHandleGridInput(void) {
     } else if (keys & 2) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 1;
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
     } else if (keys & 4) {
         sMsChargeGridCol = 0;
@@ -718,7 +718,7 @@ void MsChargeHandleTabInput(void) {
         if (keys & 8) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMsChargeBackToTop = 0;
-            FadeStartOut(0, 0x10);
+            FadeStartOut(FADE_MODE_BLACK, 0x10);
             sMsChargeState = 2;
         } else if (keys & 0x82) {
             if (GetMsChargeTabCount(sMsChargeTab) > 0) {
@@ -735,7 +735,7 @@ void MsChargeHandleTabInput(void) {
             } else if (keys & 2) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMsChargeBackToTop = 1;
-                FadeStartOut(0, 0x10);
+                FadeStartOut(FADE_MODE_BLACK, 0x10);
                 sMsChargeState = 2;
             } else if (keys & 0x80) {
                 m4aSongNumStart(SONG_SYS_BEEP);
@@ -821,7 +821,7 @@ void MsChargeHandleValueInput(void) {
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
     } else if (keys & 0x20) {
         MsChargeSelectValueInColumn(card, 0);
@@ -918,7 +918,7 @@ void MsChargeHandleConfirmInput(void) {
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
     } else if (keys & 0x20) {
         sMsChargeConfirmCursor = 0;
@@ -942,7 +942,7 @@ void MsChargeHandleNoticeInput(void) {
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
-        FadeStartOut(0, 0x10);
+        FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
     }
 }
@@ -1067,7 +1067,7 @@ void mode_ms_charge_0(void) {
         *dst = EwramAlloc(286 * sizeof(MsCard));
     }
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);

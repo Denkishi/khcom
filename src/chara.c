@@ -1139,7 +1139,7 @@ u8 CharaObjUpdateDefeat2(void) {
         gCharaObj->fadeLevel = 0;
         gCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
-        FadeStartOut(2, 20);
+        FadeStartOut(FADE_MODE_ADD_WHITE, 20);
         FadeLock();
         gCharaObj->state++;
         break;
@@ -1381,7 +1381,7 @@ u8 CharaObjUpdateDefeat(void) {
         gCharaObj->fadeLevel = 0;
         gCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
-        FadeStartOut(2, 20);
+        FadeStartOut(FADE_MODE_ADD_WHITE, 20);
         FadeLock();
         gCharaObj->state++;
         break;

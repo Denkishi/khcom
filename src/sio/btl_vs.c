@@ -401,11 +401,11 @@ void VsBattleUpdate(void) {
         if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
             other->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
-            FadeFromAmount(2, 10, 4);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 10, 4);
         } else {
             gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
-            FadeFromAmount(3, 10, 4);
+            FadeFromAmount(FADE_MODE_RED, 10, 4);
         }
         MosaicStartIn(16, 15);
         SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
@@ -477,7 +477,7 @@ void VsBattleUpdate(void) {
             gRikuBtlWork->hcEffect = 0;
         }
         if (gBtlWork->phaseStep == 140) {
-            FadeStartOut(1, 100);
+            FadeStartOut(FADE_MODE_WHITE, 100);
             FadeLock();
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             gBtlWork->hitStop = 100;

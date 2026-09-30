@@ -637,11 +637,11 @@ void _08019CB4(void) {
             if (obj != NULL) {
                 obj->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             }
-            FadeFromAmount(2, 10, 4);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 10, 4);
         } else {
             gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
-            FadeFromAmount(3, 10, 4);
+            FadeFromAmount(FADE_MODE_RED, 10, 4);
         }
         MosaicStartIn(16, 15);
         SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
@@ -776,7 +776,7 @@ void _08019CB4(void) {
             gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
             if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
                 gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
-                FadeToOriginal(0, 8);
+                FadeToOriginal(FADE_MODE_BLACK, 8);
             }
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
@@ -838,7 +838,7 @@ void _08019CB4(void) {
                 gBtlWork->phaseStep = 3;
             } else if (gBtlWork->phaseStep == 3) {
                 SetBackdropColor(0, 0, 0);
-                FadeStartOut(0, 15);
+                FadeStartOut(FADE_MODE_BLACK, 15);
                 FadeLock();
                 gBtlWork->phaseStep = 4;
             } else if (!FadeIsActive()) {
@@ -856,7 +856,7 @@ void _08019CB4(void) {
             gBtlWork->pendingEnemies = 0;
         }
         if (gBtlWork->phaseStep == 140) {
-            FadeStartOut(1, 100);
+            FadeStartOut(FADE_MODE_WHITE, 100);
             FadeLock();
             gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
@@ -1194,7 +1194,7 @@ void BeginBossDefeat(BtlObj* actor) {
     gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
     SetEnemyJiminyFlag(actor);
     m4aMPlayFadeOut(gMPlayTable[gSongTable[3].ms].info, 12);
-    FadeStartIn(2, 20);
+    FadeStartIn(FADE_MODE_ADD_WHITE, 20);
     FadeLock();
     p = ListPoolFirst(&gBtlWork->pool);
 

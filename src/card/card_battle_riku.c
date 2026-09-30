@@ -1203,7 +1203,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 #endif
 
             if (FadeGetAmount() == 0) {
-                FadeFromAmount(2, 16, 20);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
             }
         } else {
             w->selectedCards[w->listIndex] = 0;
@@ -1919,7 +1919,7 @@ u8 UseRikuCard(CardBattleWork* w) {
 #endif
 
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
 
@@ -2113,7 +2113,7 @@ u8 StockRikuCard(CardBattleWork* w) {
 #endif
 
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
 
@@ -3684,7 +3684,7 @@ void UpdateRikuReloadGauge(CardDisplayWork* p) {
         }
 
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
 
         gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;

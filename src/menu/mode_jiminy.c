@@ -1568,7 +1568,7 @@ void mode_jiminy_0(void) {
     gJiminyWork->palette9 = LoadObjPalette(gCard00Palette, 0x20);
     gJiminyWork->unk_D3C = 0;
     gJiminyWork->unk_D38 = 0x100;
-    FadeStartIn(0, 0x10);
+    FadeStartIn(FADE_MODE_BLACK, 0x10);
 
     for (i = 0; i < 8; i++) {
         InitTextSlots(gJiminyWork->lines[i].textSlots, 0x30);
@@ -1671,7 +1671,7 @@ void mode_jiminy_1(void) {
         break;
     case 4:
         if (gJiminyWork->stateTimer == 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
 
@@ -1681,7 +1681,7 @@ void mode_jiminy_1(void) {
         break;
     case 5:
         if (gJiminyWork->stateTimer == 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
 
@@ -1744,7 +1744,7 @@ void mode_jiminy_1(void) {
             } else {
                 gJiminyWork->state = 6;
                 gJiminyWork->entry = e2->parent;
-                FadeStartIn(0, 5);
+                FadeStartIn(FADE_MODE_BLACK, 5);
                 FadeLock();
             }
             m4aSongNumStart(SONG_SYS_CLOSE);
@@ -1771,11 +1771,11 @@ void mode_jiminy_1(void) {
                     gJiminyWork->state = 6;
                     gJiminyWork->entry = e2->children[gJiminyWork->cursor];
                     gJiminyWork->stateTimer = 0;
-                    FadeStartIn(0, 5);
+                    FadeStartIn(FADE_MODE_BLACK, 5);
                     FadeLock();
                     break;
                 } else {
-                    FadeStartIn(0, 5);
+                    FadeStartIn(FADE_MODE_BLACK, 5);
                     FadeLock();
                     gJiminyWork->stateTimer = 0;
                     gJiminyWork->state = 8;
@@ -2459,7 +2459,7 @@ void JiminyDetailUpdate(void) {
         if (GetKeysPressed() & B_BUTTON) {
             gJiminyWork->stateTimer = 0;
             gJiminyWork->state = 6;
-            FadeStartIn(0, 5);
+            FadeStartIn(FADE_MODE_BLACK, 5);
             FadeLock();
             SetModeUpdate(mode_jiminy_1);
             m4aSongNumStart(SONG_SYS_CLOSE);
@@ -2471,7 +2471,7 @@ void JiminyDetailUpdate(void) {
         break;
     case 5:
         if (gJiminyWork->stateTimer == 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
         if (FadeGetAmount() > 30) {

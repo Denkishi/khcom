@@ -58,7 +58,7 @@ void mode_sio_battle_0(s32 a) {
     s32 i;
 
     sSioBattleWork = EwramAlloc(sizeof(SioBattleWork));
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 7, 0);
     SetupBg(1, 0, 31, 0);

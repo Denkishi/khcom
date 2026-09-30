@@ -342,7 +342,7 @@ void BgFxReleaseEarly(s16 a) {
 
         if (gBgFx->flags & BGFX_FLAG_SCREEN_DIMMED) {
             gBgFx->flags &= ~BGFX_FLAG_SCREEN_DIMMED;
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
         }
     }
 }
@@ -417,7 +417,7 @@ void BgFxUpdateBase(void) {
         gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
 
         if (gBgFx->flags & BGFX_FLAG_SCREEN_DIMMED) {
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
         }
         return;
     }
@@ -491,7 +491,7 @@ void BgFxStartCure(u16 a, s32 x, s32 y, s32 z) {
         m4aSongNumStart(SONG_EF_CAREL02);
         break;
     }
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
     gBgFx->update = BgFxUpdateBase;
 }
@@ -629,7 +629,7 @@ void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w)
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
         gBgFx->scaleX = -0x100;
     }
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a) {
@@ -662,7 +662,7 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a) 
         gBgFx->scaleX = 0x180;
     }
     gBgFx->scaleY = 0x180;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateBlizzard(void) {
@@ -803,7 +803,7 @@ void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s3
         gBgFx->scaleX = -0x100;
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -1067,7 +1067,7 @@ void BgFxStartPotion(s32 x, s32 y, s32 z) {
     BgAnimStart(&gBgAnimDefPotion, sx, sy);
     m4aSongNumStart(SONG_EF_POSION);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateWideThunder(void) {
@@ -1142,7 +1142,7 @@ void BgFxStartWideThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q) {
     gBgFx->attack = q;
     gBgFx->update = BgFxUpdateWideThunder;
     gBgFx->unk_26 = a;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -1272,7 +1272,7 @@ void BgFxStartExplosion(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateExplosion;
     m4aSongNumStart(SONG_EF_TARU_BOMB);
     gBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -1296,7 +1296,7 @@ void BgFxStartSummon(s32 x, s32 y, s32 z) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefSummon, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -1342,7 +1342,7 @@ void BgFxStartActorThunder(BtlObj* p) {
     BgAnimStart(&gBgAnimDefThunder00, sx, sy);
     BgAnimSetLoopStartFrame(4);
     gBgFx->update = BgFxUpdateFollowActor;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_08014294(void) {
@@ -1402,7 +1402,7 @@ void func_0801435C(s32 x, s32 y, s32 z, s32 w, s32 v) {
     BgAnimStart(&gBgAnimDefThunder00, sx, sy);
     BgAnimSetLoopStartFrame(4);
     gBgFx->update = func_08014294;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateDsdEnergy(void) {
@@ -1493,7 +1493,7 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 w, s32 paramA, s32 paramB) {
     gBgFx->update = BgFxUpdateDsdEnergy;
     gBgFx->unk_0A = a;
     gBgFx->unk_0C = b;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_08014654(void) {
@@ -1533,7 +1533,7 @@ void func_080146A8(s32 x, s32 y, s32 z) {
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = func_08014654;
     gBgFx->unk_08 = 0;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -1945,7 +1945,7 @@ void BgFxStartGas(s32 x, s32 y, s32 z, u8 f) {
     if (f == 0) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
     BgAnimSetLoopStartFrame(3);
 }
@@ -2003,7 +2003,7 @@ void BgFxStartBoogieKaihuku(s32 x, s32 y, s32 z, s32 s) {
     BgAnimStart(&gBgAnimDefBoogieKaihuku, sx, sy);
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateFadeInOut;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -2011,7 +2011,7 @@ void BgFxUpdateBossDeathFlash(void) {
     switch (gBgFx->unk_26) {
     case 0:
         if (gBgFx->unk_08 > 30) {
-            FadeStartOut(2, 60);
+            FadeStartOut(FADE_MODE_ADD_WHITE, 60);
             FadeLock();
             gBgFx->unk_08 = 0;
             gBgFx->unk_26 = 1;
@@ -2022,7 +2022,7 @@ void BgFxUpdateBossDeathFlash(void) {
     case 1:
         if (FadeIsActive() == 0) {
             BgAnimStop();
-            FadeStartIn(2, 120);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 120);
             FadeLock();
             gBgFx->update = 0;
             gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
@@ -2127,7 +2127,7 @@ void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s, u16 a, s32
     gBgFx->unk_26 = 0;
     gBgFx->attack = s;
     gBgFx->unk_3C = t;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
@@ -2153,7 +2153,7 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
     m4aSongNumStart(SONG_EF_THUND01);
     ApplyAttackBox(w, gBgFx->x, gBgFx->y, gBgFx->z, 16, 16, 256);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateThunder(void) {
@@ -2230,7 +2230,7 @@ void BgFxStartThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s) {
     gBgFx->attack = s;
     gBgFx->update = BgFxUpdateThunder;
     gBgFx->unk_26 = a;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateDumboSplash(void) {
@@ -2372,7 +2372,7 @@ void BgFxStartDumboSplash(u16 a, s32 x, s32 y, s32 z, u8 f, s32 w) {
     BgAnimStart(&gBgAnimDefDumboSplash, sx, sy);
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateDumboSplash;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_08015C80(s32 x, s32 y, s32 z) {
@@ -2468,7 +2468,7 @@ void BgFxUpdateTrinityLimitBlast(void) {
         if ((s16)t > 32) {
             ApplyAttackBox(87, gBgFx->x, gBgFx->y, 0, 0x100, 0x100, 0x100);
             SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
-            FadeStartIn(2, 60);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             gBgFx->unk_08 = 0;
             gBgFx->unk_26++;
         } else {
@@ -2512,7 +2512,7 @@ void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z) {
     gBgFx->unk_26 = 0;
     gBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
     gBgFx->update = BgFxUpdateTrinityLimitBlast;
-    FadeStartOut(2, 40);
+    FadeStartOut(FADE_MODE_ADD_WHITE, 40);
     SetBattleZoom(80, 204, x, y + z + 0x2000);
 }
 
@@ -2782,7 +2782,7 @@ void BgFxStartSync(s32 x, s32 y, s32 z) {
     gBgFx->scaleY = 89;
     gBgFx->update = BgFxUpdateSync;
     m4aSongNumStart(SONG_EF_SYNC1);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartStunImpact(s32 x, s32 y, s32 z) {
@@ -2906,7 +2906,7 @@ void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a) {
     m4aSongNumStart(SONG_EF_UR_BEEM);
     gBgFx->update = BgFxUpdateUrsulaBeam;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_080169A0(s32 x, s32 y, s32 z, u8 f) {
@@ -2933,7 +2933,7 @@ void func_080169A0(s32 x, s32 y, s32 z, u8 f) {
     gBgFx->scaleY = 0x100;
     gBgFx->update = BgFxUpdateFadeInOut;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -2977,7 +2977,7 @@ void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w) {
     m4aSongNumStart(SONG_EF_AN_WAVE);
     gBgFx->update = BgFxUpdateAnsemWave;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_08016BCC(s32 x, s32 y) {
@@ -3015,7 +3015,7 @@ void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 w, u8 f, u16 a) {
     gBgFx->scaleY = w;
     gBgFx->update = BgFxUpdateFadeInOut;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateFireBurst(void) {
@@ -3128,7 +3128,7 @@ void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
         gBgFx->scaleX = -0x100;
     }
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
@@ -3147,7 +3147,7 @@ void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefFire03, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateFullscreen(void) {
@@ -3236,7 +3236,7 @@ void BgFxStartFlame(s32 x, s32 y, s32 z, s32 s) {
     BgAnimStart(&gBgAnimDefFlame, sx, sy);
     gBgFx->update = BgFxUpdateBase;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -3257,7 +3257,7 @@ void BgFxStartFrost(s32 x, s32 y, s32 z, s32 s) {
     BgAnimStart(&gBgAnimDefFrost, sx, sy);
     gBgFx->update = BgFxUpdateBase;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartUrsulaThunder(s32 x, s32 y, s32 z) {
@@ -3274,7 +3274,7 @@ void BgFxStartUrsulaThunder(s32 x, s32 y, s32 z) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefUrsulaThunder, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
 }
 void BgFxUpdateHoly(void) {
     if (gBgFx->unk_0C > 0) {
@@ -3355,7 +3355,7 @@ void BgFxStartHoly(s32 x, s32 y, s32 z, s32 w) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gUnk_09EDAC00, sx, sy);
     gBgFx->update = BgFxUpdateHoly;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
@@ -3543,7 +3543,7 @@ void BgFxStartTornado(s32 x, s32 y, s32 z, s32 w, u8 f) {
     BgAnimStart(&gBgAnimDefTornado, sx, sy);
     gBgFx->update = BgFxUpdateTornado;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateBind(void) {
@@ -3611,7 +3611,7 @@ void BgFxStartBind(s32 x, s32 w) {
     SetBlendAlpha(16, 8);
     gBgFx->update = BgFxUpdateBind;
     BgAnimSetLoopStartFrame(0);
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateAxcelFireWall(void) {
@@ -3736,7 +3736,7 @@ void BgFxStartMahluxiaGround(s32 x, s32 y, s32 z, s32 w) {
     gBgFx->unk_0A = BgAnimGetDuration(BgAnimGetCurrent());
     gBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     gBgFx->update = BgFxUpdateGround;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -3759,7 +3759,7 @@ void BgFxStartLexceusGround(s32 x, s32 y, s32 z, s32 w) {
     gBgFx->unk_0A = BgAnimGetDuration(BgAnimGetCurrent());
     gBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     gBgFx->update = BgFxUpdateGround;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -3818,7 +3818,7 @@ void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w) {
     gBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
     m4aSongNumStart(SONG_EF_MARL_HANABIRA);
     gBgFx->update = BgFxUpdateHanabira;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateKama(void) {
@@ -3905,7 +3905,7 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 w, s32 v) {
     BgAnimStart(&gBgAnimDefKama, sx, sy);
     gBgFx->unk_26 = 0;
     gBgFx->update = BgFxUpdateKama;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -3953,7 +3953,7 @@ void BgFxStartDragonFire(s32 x, s32 y, s32 z, s32 s) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefDragonFire, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxUpdateLaxeneBeam(void) {
@@ -4049,7 +4049,7 @@ void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 f, s32 v) {
     }
     BgAnimSetLoopStartFrame(3);
     gBgFx->update = BgFxUpdateLaxeneBeam;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -4097,7 +4097,7 @@ void BgFxStartAero(u16 a, s32 x, s32 y, s32 z, s32 w) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefAero, sx, sy);
     gBgFx->update = BgFxUpdateAero;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 
@@ -4132,7 +4132,7 @@ void BgFxStartLstCtr(s32 x, s32 y, s32 z, s32 s) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefLstCtr, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s) {
@@ -4151,7 +4151,7 @@ void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s) {
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefLstCtr, sx, sy);
     gBgFx->update = BgFxUpdateBase;
-    FadeToAmount(0, gBtlWork->fadeAmount, 8);
+    FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
 void func_08018B04(s32 x, s32 y, s32 z, s32 s) {

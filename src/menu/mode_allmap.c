@@ -200,7 +200,7 @@ void mode_allmap_0(s32 a) {
     REG_DISPSTAT |= DISPSTAT_VCOUNT_SETTING(80) | DISPSTAT_VCOUNT_INTR;
     SetVCountCallback(AllmapVCountCallback);
     REG_IME = 1;
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 
     if (gAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);

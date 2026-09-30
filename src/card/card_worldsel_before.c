@@ -33,7 +33,7 @@
 void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     u8 i;
 
-    FadeToAmount(0, 16, 8);
+    FadeToAmount(FADE_MODE_BLACK, 16, 8);
     w->pos = *a;
     w->tiles = LoadObjTiles(gUnk_093FB0CC, 0xC0);
     w->palette = LoadObjPalette(gUnk_09619378, 32);

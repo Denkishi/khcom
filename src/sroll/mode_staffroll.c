@@ -3033,10 +3033,10 @@ void StaffRollRunScript(StaffRollWork* w) {
             w->opDuration = w->script[w->scriptPos + 4];
             break;
         case 9:
-            FadeStartIn(0, (u16)w->script[w->scriptPos + 4]);
+            FadeStartIn(FADE_MODE_BLACK, (u16)w->script[w->scriptPos + 4]);
             break;
         case 10:
-            FadeStartOut(0, (u16)w->script[w->scriptPos + 4]);
+            FadeStartOut(FADE_MODE_BLACK, (u16)w->script[w->scriptPos + 4]);
             break;
         case 11:
             e = StaffRollGetScriptObj(w);
@@ -3623,7 +3623,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* w) {
         break;
     case 1:
         if (w->creditsTimer == 0) {
-            FadeStartIn(0, 1);
+            FadeStartIn(FADE_MODE_BLACK, 1);
             w->creditsTimer++;
         }
         t = FadeIsActive();
@@ -3641,7 +3641,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* w) {
         break;
     case 3:
         if (w->creditsTimer == 0) {
-            FadeStartOut(0, 120);
+            FadeStartOut(FADE_MODE_BLACK, 120);
             w->creditsTimer++;
         }
         t = FadeIsActive();
@@ -3684,7 +3684,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
         break;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(0, 60);
+            FadeStartIn(FADE_MODE_BLACK, 60);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3713,7 +3713,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
         break;
     case 3:
         if (w->imageTimer == 0) {
-            FadeStartOut(0, 120);
+            FadeStartOut(FADE_MODE_BLACK, 120);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3766,7 +3766,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* w) {
         w->imageTimer = 0;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(0, 120);
+            FadeStartIn(FADE_MODE_BLACK, 120);
             w->imageTimer++;
         }
         t = FadeIsActive();
@@ -3795,7 +3795,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* w) {
     case 4:
         if (w->imageTimer == 0) {
             SetBackdropColor(31, 31, 31);
-            FadeStartOut(1, 120);
+            FadeStartOut(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3823,7 +3823,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* w) {
         w->imageTimer = 0;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(1, 120);
+            FadeStartIn(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         t = FadeIsActive();
@@ -3842,7 +3842,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* w) {
         break;
     case 3:
         if (w->imageTimer == 0) {
-            FadeStartOut(0, 60);
+            FadeStartOut(FADE_MODE_BLACK, 60);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3894,7 +3894,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* w) {
         w->imageTimer = 0;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(0, 120);
+            FadeStartIn(FADE_MODE_BLACK, 120);
             w->imageTimer++;
         }
         t = FadeIsActive();
@@ -3913,7 +3913,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* w) {
     case 3:
         if (w->imageTimer == 0) {
             SetBackdropColor(31, 31, 31);
-            FadeStartOut(1, 120);
+            FadeStartOut(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3940,7 +3940,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* w) {
         w->imageTimer = 0;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(1, 120);
+            FadeStartIn(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         t = FadeIsActive();
@@ -3958,7 +3958,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* w) {
         break;
     case 3:
         if (w->imageTimer == 0) {
-            FadeStartOut(1, 120);
+            FadeStartOut(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -3985,7 +3985,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* w) {
         w->imageTimer = 0;
     case 1:
         if (w->imageTimer == 0) {
-            FadeStartIn(1, 120);
+            FadeStartIn(FADE_MODE_WHITE, 120);
             w->imageTimer++;
         }
         t = FadeIsActive();
@@ -4004,7 +4004,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* w) {
         break;
     case 3:
         if (w->imageTimer == 0) {
-            FadeStartOut(0, 60);
+            FadeStartOut(FADE_MODE_BLACK, 60);
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
@@ -4100,7 +4100,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
         break;
     case 2:
         if (w->endTimer == 0) {
-            FadeStartIn(0, 120);
+            FadeStartIn(FADE_MODE_BLACK, 120);
             w->endTimer++;
         }
         t = FadeIsActive();
@@ -4488,7 +4488,7 @@ void mode_StaffRoll_1(void) {
         break;
     case 11:
         if (w->phaseTimer == 0) {
-            FadeStartOut(0, 120);
+            FadeStartOut(FADE_MODE_BLACK, 120);
         }
         w->phaseTimer++;
         if (w->phaseTimer > 120) {

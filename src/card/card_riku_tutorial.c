@@ -65,7 +65,7 @@ s32 func_080AE1E8(CardDisplayWork** p, u8 b);
 u8 IsLinkSideStockLearned(s32 a, s32 b);
 
 void RikuTutorialModeInit(s32 a) {
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     gRikuTutorialModeArg = a;
     TaskPoolInit(&gRikuTutorialTasks, 1);
     gRikuDeckTutorialState = 0;

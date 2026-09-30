@@ -299,7 +299,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             if (FadeIsActive() == 0) {
                 BgFxStartBossDeath(a->x, a->y + a->z - ((s16)sBosBoogieEmyKind.centerHeight << 8));
                 SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
-                FadeToAmount(0, gBtlWork->fadeAmount, 8);
+                FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
                 work->defeatStep = 3;
                 work->timer = 0;
             }

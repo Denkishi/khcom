@@ -28,7 +28,7 @@ void mode_debug_0(void) {
     SaveLoadHeader();
 #endif
     gDebugWork = EwramAlloc(sizeof(DebugWork));
-    FadeStartIn(1, 16);
+    FadeStartIn(FADE_MODE_WHITE, 16);
     ResetGameState();
 #ifdef VERSION_EU
     gDebugFlags |= DEBUG_FLAG_DEBUG_MENU;

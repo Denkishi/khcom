@@ -183,9 +183,9 @@ void StartEventBgEffectFadeOut(EventBgEffectWork* w) {
     }
 
     if (p->flags & 0x10) {
-        FadeStartOut(0, v);
+        FadeStartOut(FADE_MODE_BLACK, v);
     } else {
-        FadeToAmount(0, 16, v);
+        FadeToAmount(FADE_MODE_BLACK, 16, v);
     }
 }
 
@@ -202,9 +202,9 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* w) {
     }
 
     if (t->flags & 0x10) {
-        FadeStartIn(0, v);
+        FadeStartIn(FADE_MODE_BLACK, v);
     } else {
-        FadeToOriginal(0, v);
+        FadeToOriginal(FADE_MODE_BLACK, v);
     }
 }
 void EV_BG_EFFECT_0(EventBgEffectWork* w, u8* b) {

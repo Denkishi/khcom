@@ -842,12 +842,12 @@ void MoogleShopHandleSoldOutInput(void) {
     if ((keys & A_BUTTON) == 0) {
         if (keys & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 1;
             sMoogleShopState = 5;
         } else if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 0;
             sMoogleShopState = 5;
         }
@@ -865,12 +865,12 @@ void MoogleShopHandleRowInput(void) {
     if ((keys & A_BUTTON) == 0) {
         if (keys & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 1;
             sMoogleShopState = 5;
         } else if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sMoogleShopBackToTop = 0;
             sMoogleShopState = 5;
         } else if (keys & DPAD_UP) {
@@ -1049,7 +1049,7 @@ void MoogleShopHandlePackInput(void) {
             RollMooglePackCards(sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]);
             InitMooglePackOpening(sMoogleShopPackCursor % 2 * 96 + 72, sMoogleShopPackCursor / 2 * 64 + 48);
             FadeSetPaletteExcluded(13, 1);
-            FadeToAmount(0, 16, 8);
+            FadeToAmount(FADE_MODE_BLACK, 16, 8);
             m4aSongNumStart(SONG_SYS_KETTEI);
             sMoogleShopState = 4;
         } else {
@@ -1057,12 +1057,12 @@ void MoogleShopHandlePackInput(void) {
         }
     } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         sMoogleShopBackToTop = 1;
         sMoogleShopState = 5;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         sMoogleShopBackToTop = 0;
         sMoogleShopState = 5;
     } else if (keys & DPAD_UP) {
@@ -1131,7 +1131,7 @@ void mode_ms_shop_0(void) {
     size = 0x500;
     *p = EwramAlloc(size);
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -1237,7 +1237,7 @@ void mode_ms_shop_1(void) {
             
             LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A18D7C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             DisableBg(3);
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
             sMoogleShopState = sMoogleShopHasPacks != 0 ? 3 : 1;
         }
         break;

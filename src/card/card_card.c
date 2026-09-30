@@ -1093,7 +1093,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
     return 1;
@@ -1494,7 +1494,7 @@ s32 StockSoraCard(CardBattleWork* w) {
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
     return 1;
@@ -3558,7 +3558,7 @@ u8 func_0807D584(CardDisplayWork* p, void* a) {
         p->angle = 0;
         p->unk_80 = 25;
         gBtlWork->hitStop = 10000;
-        FadeStartOut(7, 1);
+        FadeStartOut(FADE_MODE_WHITE_BLEND, 1);
         m4aSongNumStart(SONG_BTL_GMIC_OK);
         FadeLock();
         gBtlWork->flags |= BTL_FLAG_BGFX_PAUSED;
@@ -3616,7 +3616,7 @@ u8 func_0807D68C(CardDisplayWork* p, void* a) {
 
 u8 func_0807D7B0(CardDisplayWork* p) {
     if (gBtlWork->hitStop == 0) {
-        FadeStartIn(7, 8);
+        FadeStartIn(FADE_MODE_WHITE_BLEND, 8);
         FadeLock();
         gBtlWork->flags &= ~BTL_FLAG_BGFX_PAUSED;
 
@@ -3934,7 +3934,7 @@ void UpdateSoraReloadGauge(CardDisplayWork* p) {
         }
 
         if (FadeGetAmount() == 0) {
-            FadeFromAmount(2, 16, 20);
+            FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
 
         gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;

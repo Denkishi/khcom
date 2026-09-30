@@ -2381,7 +2381,7 @@ void MapDbgMain(void) {
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
     }
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         MapDbgSetUpdateAndRun(MapDbgExitRoom);
         return;
     }
@@ -2467,7 +2467,7 @@ void MapDbgWaitMenu(void) {
 
 void MapDbgWaitRoomCreate(void) {
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         MapDbgSetUpdateAndRun(MapDbgExitRoom);
     } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gBldCnt = 0;
@@ -2526,7 +2526,7 @@ void Mode_MapDbg_0(void) {
     TaskPoolInit(&gMapDbgTasks, 1);
     TaskCreate(&gMapDbgTasks, &gTaskDescMapDbg, &gMapDbgEditing);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapDmg, 0);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void Mode_MapDbg_1(void) {
@@ -2651,13 +2651,13 @@ void MapFldShowWorldLogo(void) {
 
 void MapFldMain(void) {
     if (gMapRoomState->flags & ROOM_FLAG_START_BATTLE) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         MapFldSetUpdateAndRun(MapFldStartBattle);
         return;
     }
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         MapFldSetUpdateAndRun(MapFldExitRoom);
         return;
@@ -2666,7 +2666,7 @@ void MapFldMain(void) {
         (gFieldState->flags & (FIELD_FLAG_FREEZE_PLAYER | FIELD_FLAG_ROOM_CREATE)) == 0 && (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0) {
         if (GetKeysPressed() & SELECT_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
             MapFldSetUpdateAndRun(MapFldOpenAllmap);
             return;
@@ -2789,7 +2789,7 @@ void MapFldWaitRoomCreate(void) {
     u16 t;
 
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         MapFldSetUpdateAndRun(MapFldExitRoom);
         if ((gGameState.progression.unk_82 & 0x200) == 0) {
@@ -2894,7 +2894,7 @@ void Mode_MapFld_0(void) {
     ClearFieldResume();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void Mode_MapFld_1(void) {
@@ -3045,7 +3045,7 @@ void MapFixMain(void) {
         return;
     }
     if (gMapRoomState->flags & (ROOM_FLAG_ENTER_WORLD | ROOM_FLAG_EXIT_NEXT_FLOOR | ROOM_FLAG_EXIT_PREV_FLOOR)) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         if (gMapFloorState.room == 0xFE) {
             MapFixSetUpdateAndRun(func_080EA5CC);
             return;
@@ -3164,7 +3164,7 @@ void MapFixWaitMenu(void) {
 
 void MapFixWaitWalkOut(void) {
     if ((gMapRoomState->flags & ROOM_FLAG_WALK_OUT) == 0) {
-        FadeStartOut(2, 60);
+        FadeStartOut(FADE_MODE_ADD_WHITE, 60);
         FadeLock();
         gMapRoomState->flags |= ROOM_FLAG_ENTER_WORLD;
         MapFixSetUpdateAndRun(func_080EA5CC);
@@ -3184,7 +3184,7 @@ void MapFixWaitWorldEvent(void) {
 
 void MapFixWaitRoomCreate(void) {
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         MapFixSetUpdateAndRun(MapFixEnterMapFld);
     } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gBldCnt = 0;
@@ -3278,9 +3278,9 @@ void Mode_MapFix_0(void) {
         t = gMapFloorState.flags & ~FLOOR_FLAG_WARP_IN;
         gMapFloorState.flags = t;
         MosaicStartIn(16, 15);
-        FadeStartIn(0, 16);
+        FadeStartIn(FADE_MODE_BLACK, 16);
     } else {
-        FadeStartIn(0, 16);
+        FadeStartIn(FADE_MODE_BLACK, 16);
     }
 }
 
@@ -3605,7 +3605,7 @@ void NewGameSlotMenuSlideOut(NewGameSlotMenuWork* w) {
         ApproachValue(&w->y2, 0xA000, w->timer);
         w->timer--;
     } else {
-        FadeStartOut(0, 90);
+        FadeStartOut(FADE_MODE_BLACK, 90);
         w->update = NewGameSlotMenuExit;
     }
 }
@@ -3726,7 +3726,7 @@ void Mode_MenuNew_0(void) {
 
     NewGameSlotMenuSelectSlot(gNewGameSlotMenuWork->selectedSlot);
     gNewGameSlotMenuWork->y3 = (gNewGameSlotMenuWork->slotBaseY + gNewGameSlotMenuWork->selectedSlot * 45) << 8;
-    FadeStartIn(0, 8);
+    FadeStartIn(FADE_MODE_BLACK, 8);
 }
 
 void Mode_MenuNew_1(void) {
@@ -4182,7 +4182,7 @@ void LoadGameMenuSlideOutY(LoadGameMenuWork* work) {
         ApproachValue(&work->y2, 0xA000, work->timer);
         work->timer--;
     } else {
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         work->update = LoadGameMenuExit;
     }
 }
@@ -4336,7 +4336,7 @@ void Mode_MenuLoad_0(s32 arg) {
     }
 
     LoadGameMenuSelectSlot(gLoadGameMenuWork->selectedSlot);
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void Mode_MenuLoad_1(void) {
@@ -4368,10 +4368,10 @@ void MenuMsgWaitMessage(MenuMsgWork* w) {
     if (IsMessageWindowOpen() == 0) {
         if (w->toTitle == 0) {
             BackdropFadeStartOut(1, 16);
-            FadeStartOut(1, 16);
+            FadeStartOut(FADE_MODE_WHITE, 16);
         } else {
             BackdropFadeStartOut(0, 16);
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
         }
         w->update = MenuMsgWaitFade;
     }
@@ -4398,7 +4398,7 @@ void Mode_MenuMsg_0(s32 arg) {
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
         BackdropFadeStartIn(1, 16);
-        FadeStartIn(1, 16);
+        FadeStartIn(FADE_MODE_WHITE, 16);
         FadeLock();
     } else {
 #ifdef VERSION_EU
@@ -4409,7 +4409,7 @@ void Mode_MenuMsg_0(s32 arg) {
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
         BackdropFadeStartIn(0, 1);
-        FadeStartIn(0, 1);
+        FadeStartIn(FADE_MODE_BLACK, 1);
         FadeLock();
     }
     gMenuMsgWork->update = MenuMsgWaitMessage;
@@ -5020,7 +5020,7 @@ s32 MapMenuOpen(MapMenuWork* w) {
     MapMenuSetCharaPalettesExcluded(w, 1);
 
     if (w->reopened == 0) {
-        FadeToAmount(0, 16, 16);
+        FadeToAmount(FADE_MODE_BLACK, 16, 16);
     }
     return 1;
 }
@@ -5190,7 +5190,7 @@ s32 MapMenuSlideInX(MapMenuWork* w) {
 
         if (w->reopened != 0) {
             w->reopened = 0;
-            FadeToAmount(0, 16, 1);
+            FadeToAmount(FADE_MODE_BLACK, 16, 1);
             w->update = MapMenuResume;
         } else {
             w->update = (gGameState.flags & GAME_FLAG_RIKU) ? MapMenuRikuInput : MapMenuSoraInput;
@@ -5353,7 +5353,7 @@ s32 MapMenuSlideOutX(MapMenuWork* w) {
         gMapRoomState->flags &= ~ROOM_FLAG_HIDE_PLAYER;
         gFieldState->flags &= ~FIELD_FLAG_HIDE_ENEMIES;
         MapMenuSetPanelPalettesExcluded(w, 0);
-        FadeToOriginal(0, 16);
+        FadeToOriginal(FADE_MODE_BLACK, 16);
         w->steps = 16;
         w->update = MapMenuSlideOutY;
     }
@@ -5437,7 +5437,7 @@ void Task_MapMenu_0(MapMenuWork* w) {
 
 s32 Task_MapMenu_1(MapMenuWork* w) {
     if (w->reopened != 0) {
-        FadeStartIn(0, 16);
+        FadeStartIn(FADE_MODE_BLACK, 16);
     }
 
     if (w->panelsVisible != 0) {
@@ -6116,7 +6116,7 @@ s32 MapSaveSlideOutX(MapSaveWork* w) {
         gMapRoomState->flags &= ~ROOM_FLAG_HIDE_PLAYER;
         gFieldState->flags &= ~FIELD_FLAG_HIDE_ENEMIES;
         MapSaveSetPanelPalettesExcluded(w, 0);
-        FadeToOriginal(0, 16);
+        FadeToOriginal(FADE_MODE_BLACK, 16);
         w->steps = 16;
         w->update = MapSaveSlideOutY;
     }
@@ -6188,7 +6188,7 @@ void Task_MapSave_0(MapSaveWork* w) {
     w->update = MapSaveSlideInY;
     TaskPoolInit(&w->tasks, 1);
     MapSaveSetCharaPalettesExcluded(w, 1);
-    FadeToAmount(0, 16, 16);
+    FadeToAmount(FADE_MODE_BLACK, 16, 16);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
 

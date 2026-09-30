@@ -1414,7 +1414,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
-                FadeToAmount(2, 13, 60);
+                FadeToAmount(FADE_MODE_ADD_WHITE, 13, 60);
             }
             if (work->stateTimer == 44) {
                 if (target != NULL) {
@@ -1446,7 +1446,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 }
             }
             if (work->stateTimer > 44 && !BgFxIsActive()) {
-                FadeToOriginal(2, 20);
+                FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
                 work->state = 2;
                 work->stateTimer = 0;
             } else work->stateTimer++;
@@ -1810,7 +1810,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->steps = 70;
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
         SelectLockonTarget();
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
@@ -1866,7 +1866,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             work->state = 1;
-            FadeToOriginal(0, 8);
+            FadeToOriginal(FADE_MODE_BLACK, 8);
         } else {
             work->stateTimer++;
         }

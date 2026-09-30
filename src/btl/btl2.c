@@ -1853,7 +1853,7 @@ void task_btl_start_0(BtlStartWork* work) {
     BgAnimSetTransform(0, 0x200, 0x200);
     SetBgBlend(gBtlWork->bg, 16, 16);
     SetBattleZoom(1, 0x200, 0x10000, 0x14000);
-    FadeStartIn(0, 60);
+    FadeStartIn(FADE_MODE_BLACK, 60);
     work->timer = 0;
     m4aSongNumStart(SONG_SYS_ENCOUNT);
     SetBgPriority(gBtlWork->bg, 0);
@@ -1861,7 +1861,7 @@ void task_btl_start_0(BtlStartWork* work) {
 
 s32 task_btl_start_1(BtlStartWork* work) {
     if (work->timer <= 20) {
-        FadeStartIn(0, 40);
+        FadeStartIn(FADE_MODE_BLACK, 40);
     }
 
     switch (work->timer) {
@@ -1869,7 +1869,7 @@ s32 task_btl_start_1(BtlStartWork* work) {
         SetBattleZoom(35, 0x100, gBtlWork->x2, gBtlWork->y2);
         break;
     case 43:
-        FadeStartIn(2, 30);
+        FadeStartIn(FADE_MODE_ADD_WHITE, 30);
         break;
     case 74:
         return 0;

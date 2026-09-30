@@ -457,7 +457,7 @@ void WorldInspectHandleInput(void) {
         sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 32);
 #endif
         sWorldInspectReturnToMenu = 0;
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         sWorldInspectState = 5;
     } else if (keys & 0x40) {
         while (1) {
@@ -561,7 +561,7 @@ void WorldInspectHandleDetailInput(void) {
             sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 32);
 #endif
             sWorldInspectReturnToMenu = 0;
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sWorldInspectState = 5;
         }
     }
@@ -712,7 +712,7 @@ void mode_worldinspect_0(void) {
     p = &sWorldInspectTilemap;
     *p = EwramAlloc(0x500);
     SpriteReset();
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();
     SetupBg(0, 0, 0x1C, 0);
     SetupBg(1, 0, 0x1D, 0);
@@ -958,7 +958,7 @@ void mode_worldinspect_1(void) {
         ApproachValue(&sWorldInspectBarY[1], 0xA800, sWorldInspectSteps);
         sWorldInspectSteps--;
         if (sWorldInspectSteps <= 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
             sWorldInspectState = 5;
         }
         break;

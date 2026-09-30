@@ -3672,7 +3672,7 @@ void MapGmk05CheckTalk(MapGmk05Work* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         RequestFieldResume();
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         m4aSongNumStart(SONG_SYS_MOUGURI);
         w->update = MapGmk05EnterShop;
     }
@@ -3781,7 +3781,7 @@ void MapGmk06CheckTalk(MapGmk06Work* w) {
         m4aSongNumStart(SONG_SYS_KETTEI);
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         RequestFieldResume();
-        FadeStartOut(0, 16);
+        FadeStartOut(FADE_MODE_BLACK, 16);
         w->update = MapGmk06EnterWorldWarp;
     }
 }

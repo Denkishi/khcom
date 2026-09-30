@@ -441,7 +441,7 @@ void task_allmap_bar_0(AllmapBarWork* work) {
 }
 
 void AllmapBarFadeOut(AllmapBarWork* work) {
-    FadeStartOut(0, 16);
+    FadeStartOut(FADE_MODE_BLACK, 16);
     FadeLock();
 }
 
@@ -701,7 +701,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     work->x = work->roomX << 8;
     work->y = work->roomY << 8;
     work->closing = 0;
-    FadeToAmount(0, 14, 8);
+    FadeToAmount(FADE_MODE_BLACK, 14, 8);
 }
 
 s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
@@ -711,7 +711,7 @@ s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
         work->steps = 8 - work->steps;
         work->targetX = work->roomX << 8;
         work->targetY = work->roomY << 8;
-        FadeToOriginal(0, 8);
+        FadeToOriginal(FADE_MODE_BLACK, 8);
     }
 
     if (work->steps != 0) {
@@ -768,7 +768,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
     s32 i;
 
     if (work->closing == 0) {
-        FadeToOriginal(0, 8);
+        FadeToOriginal(FADE_MODE_BLACK, 8);
     }
     ReleaseObjTiles(work->tiles2);
 

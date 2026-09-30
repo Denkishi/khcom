@@ -786,7 +786,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             w->reloadPending[0] = 1;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
-                FadeFromAmount(2, 16, 20);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
             }
             break;
         case 15:
@@ -804,7 +804,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
-                FadeFromAmount(2, 16, 20);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
             }
             gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
@@ -825,7 +825,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
-                FadeFromAmount(2, 16, 20);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
             }
             gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;
@@ -1022,7 +1022,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             }
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
-                FadeFromAmount(2, 16, 20);
+                FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
             }
             gBtlWork->flags |= BTL_FLAG_RELOADING;
             w->cardsLeft[0] = 0;

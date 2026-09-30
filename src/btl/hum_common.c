@@ -114,7 +114,7 @@ s32 _0800E434(HumWork* work) {
         AnimReset(&work->anim);
         break;
     case 11:
-        FadeStartIn(2, 20);
+        FadeStartIn(FADE_MODE_ADD_WHITE, 20);
         gBtlWork->hitStop = 15;
 
         if (actor->badStatus != BAD_STATUS_STUN) {
@@ -386,7 +386,7 @@ s32 HumUpdate(HumWork* work) {
     case 4:
         if (work->stateTimer == 0) {
             BgFxStartHumDefeat(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
         work->vz = 0;
@@ -402,7 +402,7 @@ s32 HumUpdate(HumWork* work) {
         if (work->stateTimer == 0) {
             PrizeCardArg arg;
 
-            FadeStartIn(2, 60);
+            FadeStartIn(FADE_MODE_ADD_WHITE, 60);
             FadeLock();
             m4aSongNumStart(SONG_BTL_KU_JUMP);
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
@@ -420,7 +420,7 @@ s32 HumUpdate(HumWork* work) {
     case 6:
         if (work->stateTimer == 0) {
             BgFxStartBossDeath(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
-            FadeToAmount(0, gBtlWork->fadeAmount, 8);
+            FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
         work->vz = 0;

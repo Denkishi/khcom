@@ -51,7 +51,7 @@ void eu_08009CD0(s32 arg) {
     }
 
     gLangWork->language = gLanguage;
-    FadeStartIn(0, 16);
+    FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void eu_08009E10(void) {
@@ -131,7 +131,7 @@ void eu_08009E10(void) {
         break;
     case 3:
         if (gLangWork->timer == 0) {
-            FadeStartOut(0, 16);
+            FadeStartOut(FADE_MODE_BLACK, 16);
         }
 
         if (!FadeIsActive()) {
@@ -512,7 +512,7 @@ void mode_battle_0(u32 mode) {
         TaskCreate(&gBtlWork->taskPools[2], &gTaskDescBtlPause, 0);
     }
 
-    FadeStartIn(0, 60);
+    FadeStartIn(FADE_MODE_BLACK, 60);
     gGameState.battleCount++;
 }
 

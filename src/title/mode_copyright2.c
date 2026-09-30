@@ -14,9 +14,9 @@ void mode_copyright2_0(s32 arg) {
     LoadBgMap(0, gUnk_09841F98, 0x800);
 
     if (arg == 0) {
-        FadeStartIn(0, 0x43);
+        FadeStartIn(FADE_MODE_BLACK, 0x43);
     } else {
-        FadeStartIn(1, 0x43);
+        FadeStartIn(FADE_MODE_WHITE, 0x43);
     }
 
     gCopyright2Timer = 60;
@@ -26,7 +26,7 @@ void mode_copyright2_1(void) {
     if (!FadeIsActive()) {
         if (gCopyright2Timer != 0) {
             if (--gCopyright2Timer == 0) {
-                FadeStartOut(0, 0x43);
+                FadeStartOut(FADE_MODE_BLACK, 0x43);
             }
         } else {
             ModeRequest(&gModeTitle, 0);

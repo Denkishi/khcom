@@ -85,14 +85,14 @@ void UpdateWorldFriendFlags(void) {
             || gMapFloorState.room == 0xFD) {
         if ((gGameState.flags & GAME_FLAG_FRIENDS_SAVED) == 0) {
             gGameState.flags |= GAME_FLAG_FRIENDS_SAVED;
-            gGameState.progression.savedFriendFlags = gGameState.progression.friendFlags & 0x7C;
+            gGameState.progression.savedFriendFlags = gGameState.progression.friendFlags & FRIEND_FLAGS_WORLD;
         }
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             return;
         }
 
-        t = gGameState.progression.friendFlags & 0xFF83;
+        t = gGameState.progression.friendFlags & ~FRIEND_FLAGS_WORLD;
         gGameState.progression.friendFlags = t;
 
         if (gMapFloorState.room >= 0xFD && gMapFloorState.room <= 0xFE) {
@@ -101,23 +101,23 @@ void UpdateWorldFriendFlags(void) {
 
         switch (gMapFloorState.world) {
         case WORLD_AGRABAH:
-            t = 4 | gGameState.progression.friendFlags;
+            t = FRIEND_FLAG_ALADDIN | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
         case WORLD_ATLANTICA:
-            t = 8 | gGameState.progression.friendFlags;
+            t = FRIEND_FLAG_ARIEL | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
         case WORLD_HALLOWEEN_TOWN:
-            t = 0x10 | gGameState.progression.friendFlags;
+            t = FRIEND_FLAG_JACK | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
         case WORLD_NEVER_LAND:
-            t = 0x20 | gGameState.progression.friendFlags;
+            t = FRIEND_FLAG_PETER_PAN | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
         case WORLD_HOLLOW_BASTION:
-            t = 0x40 | gGameState.progression.friendFlags;
+            t = FRIEND_FLAG_THE_BEAST | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
         case WORLD_OLYMPUS_COLISEUM:
@@ -132,7 +132,7 @@ void UpdateWorldFriendFlags(void) {
         }
 
         gGameState.flags &= ~GAME_FLAG_FRIENDS_SAVED;
-        t = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
+        t = (gGameState.progression.friendFlags & ~FRIEND_FLAGS_WORLD) | gGameState.progression.savedFriendFlags;
         gGameState.progression.friendFlags = t;
     }
 }

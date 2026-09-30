@@ -556,109 +556,109 @@ void ShowEventEndMessage(void) {
 void func_08061FC8(void) {
     switch (gEventId) {
     case 0:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 94:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 74:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 88:
-        gGameState.progression.friendFlags = 19;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_JACK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(62);
         break;
     case 93:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 107:
-        gGameState.progression.friendFlags = 7;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ALADDIN);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(61);
         break;
     case 114:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 103:
-        gGameState.progression.friendFlags = 11;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_ARIEL);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(63);
         break;
     case 106:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case MSG_CODE(131):
-        gGameState.progression.friendFlags = 67;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_THE_BEAST);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(65);
         break;
     case MSG_CODE(133):
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 117:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 116:
     case 118:
-        gGameState.progression.friendFlags = 35;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK | FRIEND_FLAG_PETER_PAN);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         LearnStock(64);
         break;
     case 119:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 120:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 44:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
         break;
     case 59:
-        gGameState.progression.friendFlags = 3;
+        gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
         LearnStock(59);
         LearnStock(60);
@@ -671,7 +671,7 @@ void func_08061FC8(void) {
         LearnStock(60);
         break;
     case MSG_CODE(155):
-        gGameState.progression.friendFlags = 128;
+        gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
         LearnStock(69);
         break;
     case MSG_CODE(174):
@@ -680,7 +680,7 @@ void func_08061FC8(void) {
         break;
     case MSG_CODE(185):
     case MSG_CODE(190):
-        gGameState.progression.friendFlags = 128;
+        gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
         break;
     case MSG_CODE(156):
         gGameState.flags &= ~GAME_FLAG_DARK_POINTS_LOCKED;

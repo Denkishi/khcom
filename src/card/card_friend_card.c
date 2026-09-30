@@ -88,7 +88,7 @@ void Friend_card_0(PickupCardWork* w, s32* args) {
     w->visible = 1;
     w->cardDef = &gCardDefs[args[3]];
 
-    if (w->cardDef->flags & 8) {
+    if (w->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
         w->backCategory = 3;
     } else {
         w->backCategory = w->cardDef->category;
@@ -131,7 +131,7 @@ void Heartless_card_0(PickupCardWork* w, s32* args) {
     w->visible = 1;
     w->cardDef = &gCardDefs[args[3]];
 
-    if (w->cardDef->flags & 8) {
+    if (w->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
         w->backCategory = 3;
     } else {
         w->backCategory = w->cardDef->category;

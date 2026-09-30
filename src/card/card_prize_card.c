@@ -53,7 +53,7 @@ static void PrizeCard_0(PrizeCardWork* w, PrizeCardTaskArgs* p) {
     w->palette = LoadObjPalette(def->palette, 32);
     w->stat = *(CardStat*)&def->kind;
 
-    if (gCardDefs[w->cardId].flags & 12) {
+    if (gCardDefs[w->cardId].flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
         back = &gCardBacks[3];
     } else {
         back = &gCardBacks[w->stat.category];

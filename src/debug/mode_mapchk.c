@@ -569,8 +569,8 @@ void Mode_MapChk_1(void) {
 
         InitMapCardInventory();
         gMapChkUseParams = gMapChkWork->useParams;
-        gGameState.progression.friendFlags |= 2;
-        gGameState.progression.friendFlags |= 1;
+        gGameState.progression.friendFlags |= FRIEND_FLAG_DONALD_DUCK;
+        gGameState.progression.friendFlags |= FRIEND_FLAG_GOOFY;
         gGameState.progression.unk_82 |= 0x778;
         e = gMapChkWork;
 

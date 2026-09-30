@@ -2960,10 +2960,10 @@ void MapFixCreateCharaTasks(void) {
         }
         return;
     }
-    if (gGameState.progression.friendFlags & 2) {
+    if (gGameState.progression.friendFlags & FRIEND_FLAG_DONALD_DUCK) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapDonald, 0);
     }
-    if (gGameState.progression.friendFlags & 1) {
+    if (gGameState.progression.friendFlags & FRIEND_FLAG_GOOFY) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGoofy, 0);
     }
     if (gMapFloorState.room != 0xFD) {
@@ -3091,7 +3091,7 @@ void func_080EA5CC(void) {
     if (gMapRoomState->flags & 0x200) {
         if (gGameState.floor == GetProgressFloor()) {
             gGameState.flags &= ~GAME_FLAG_FRIENDS_SAVED;
-            gGameState.progression.friendFlags = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
+            gGameState.progression.friendFlags = (gGameState.progression.friendFlags & ~FRIEND_FLAGS_WORLD) | gGameState.progression.savedFriendFlags;
         }
         if (gMapFloorState.world == 0) {
             gMapFloorState.entrySide = 0;

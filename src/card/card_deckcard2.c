@@ -77,7 +77,7 @@ void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
 
         n->cardDef = &gCardDefs[n->args.cardId & 0xFFF];
 
-        if (n->cardDef->flags & 0xC) {
+        if (n->cardDef->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
             n->cardBack = &gCardBacks[3];
         } else {
             n->cardBack = &gCardBacks[n->cardDef->category];

@@ -2287,7 +2287,7 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     w->tiles5 = AllocObjTiles(0x100, 0);
     SetObjTileSource(w->tiles5, gReloadCounterTiles[w->args.listIndex]);
     InitReloadGageCounterAnim(w->reloadGauge, w->tiles5, w->args.listIndex, d->unk_64);
-    w->flags |= 0x1000026;
+    w->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_GAUGE);
 
     if (d->unk_64 >= 0) {
         TaskPoolInit(&w->tasks, d->unk_64 + 1);
@@ -2338,7 +2338,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
         break;
     }
 
-    if ((w->flags & 0x44) == 0x44) {
+    if ((w->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED)) {
         if (v == 1) {
             if ((s8)p->chargeTick == 2) {
                 switch (w->args.unk_08) {
@@ -2459,8 +2459,8 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
     }
 
     if (p->unk_64 < 0) {
-        if ((w->flags & 0x4000000) == 0) {
-            w->flags |= 0x4000000;
+        if ((w->flags & CARD_DISP_FLAG_RELOAD_DONE) == 0) {
+            w->flags |= CARD_DISP_FLAG_RELOAD_DONE;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
         }
 
@@ -2479,14 +2479,14 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
 
     UpdateReloadGageRingPosition(w);
 
-    if (w->flags & 0x4000) {
+    if (w->flags & CARD_DISP_FLAG_REMOVE) {
         return 0;
     }
 
     StepReloadGageSine(w->reloadGauge);
     w->bobAngle += 4;
 
-    if ((w->flags & 0x20) == 0) {
+    if ((w->flags & CARD_DISP_FLAG_OPEN) == 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadGageIdle);
         m4aSongNumStop(SONG_SYS_CHAGE);
 
@@ -2513,7 +2513,7 @@ u8 UpdateReloadGageIdle(CardDisplayWork* w, void* a) {
     w->x += (gSoraCardLayout[4][0] - w->x) >> 1;
     w->y += (gSoraCardLayout[4][1] - w->y) >> 1;
 
-    if (w->flags & 0x20) {
+    if (w->flags & CARD_DISP_FLAG_OPEN) {
         SetTaskUpdate(a, (TaskUpdateFunc)Reload_Gage_1);
     }
 
@@ -2610,10 +2610,10 @@ void UpdateReloadGageRingPosition(CardDisplayWork* w) {
     w->unk_84 += (w->unk_88 - w->unk_84) >> 1;
     if ((s16)w->timer > 0) {
         w->timer--;
-        w->flags &= ~0x40;
+        w->flags &= ~CARD_DISP_FLAG_SETTLED;
     } else {
         w->timer = 0;
-        w->flags |= 0x40;
+        w->flags |= CARD_DISP_FLAG_SETTLED;
     }
 
     switch (w->args.unk_08) {

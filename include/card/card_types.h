@@ -14,6 +14,13 @@ typedef struct Deck {
     u16 unk_DE;
 } Deck;
 
+enum CardDefFlag {
+    CARD_DEF_FLAG_ITEM = 0x2,
+    CARD_DEF_FLAG_SUMMON = 0x4,
+    CARD_DEF_FLAG_FRIEND = 0x8,
+    CARD_DEF_FLAG_GIMMICK = 0x10
+};
+
 typedef struct CardDef {
     void* gfx;
     void* tiles;

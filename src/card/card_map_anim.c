@@ -296,7 +296,7 @@ s16 AddCardToCollection(u16 cardId) {
         }
     }
 
-    if (gCardDefs[cardId & CARD_ID_MASK].flags & 8) {
+    if (gCardDefs[cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_FRIEND) {
         return -1;
     }
 
@@ -629,7 +629,7 @@ s16 ObtainCard(u16 cardId) {
             return -1;
         }
     }
-    if (gCardDefs[cardId & CARD_ID_MASK].flags & 8) {
+    if (gCardDefs[cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_FRIEND) {
         return -1;
     }
     gCardCollection[i] = cardId;

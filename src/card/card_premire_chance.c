@@ -57,7 +57,7 @@ void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
     def = &gCardDefs[a->cardId];
     w->cardDef = def;
 
-    if (def->flags & 0xC) {
+    if (def->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
         w->cardBack = &gCardBacks[1];
     } else {
         w->cardBack = &gCardBacks[def->category];

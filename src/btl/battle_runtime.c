@@ -503,7 +503,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        if (flags & 0x80) {
+        if (flags & FRIEND_FLAG_THE_KING) {
             SetJiminyFlag(244);
             CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
         }
@@ -515,31 +515,31 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
     if (GetRandom() % 4 != 0) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
-            if (flags & 4) {
+            if (flags & FRIEND_FLAG_ALADDIN) {
                 v = 2;
                 SetJiminyFlag(159);
             }
             break;
         case WORLD_ATLANTICA:
-            if (flags & 8) {
+            if (flags & FRIEND_FLAG_ARIEL) {
                 v = 3;
                 SetJiminyFlag(160);
             }
             break;
         case WORLD_HALLOWEEN_TOWN:
-            if (flags & 0x10) {
+            if (flags & FRIEND_FLAG_JACK) {
                 v = 4;
                 SetJiminyFlag(161);
             }
             break;
         case WORLD_NEVER_LAND:
-            if (flags & 0x20) {
+            if (flags & FRIEND_FLAG_PETER_PAN) {
                 v = 5;
                 SetJiminyFlag(162);
             }
             break;
         case WORLD_HOLLOW_BASTION:
-            if (flags & 0x40) {
+            if (flags & FRIEND_FLAG_THE_BEAST) {
                 v = 6;
                 SetJiminyFlag(163);
             }
@@ -549,12 +549,12 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
 
     if (v == -1) {
         if (GetRandom() % 2 != 0) {
-            if (flags & 1) {
+            if (flags & FRIEND_FLAG_GOOFY) {
                 v = 0;
                 SetJiminyFlag(158);
             }
         } else {
-            if (flags & 2) {
+            if (flags & FRIEND_FLAG_DONALD_DUCK) {
                 v = 1;
                 SetJiminyFlag(157);
             }
@@ -874,11 +874,11 @@ void _08019CB4(void) {
                     state->progression.friendFlags = 0;
                     break;
                 case 174:
-                    state->progression.friendFlags &= ~3;
+                    state->progression.friendFlags &= ~(FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
                     break;
 #ifdef VERSION_EU
                 case 158:
-                    state->progression.friendFlags &= ~0x20;
+                    state->progression.friendFlags &= ~FRIEND_FLAG_PETER_PAN;
                     break;
 #endif
                 }

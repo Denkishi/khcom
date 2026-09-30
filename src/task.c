@@ -71,7 +71,7 @@ void UpdatePlayTime(void) {
 void SetupRikuNewGame(void) {
     InitStartFloor(0, 0);
     gGameState.progression.unk_82 = 0xE7FF;
-    gGameState.progression.friendFlags = 0x80;
+    gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
     InitRikuDeckForWorld(0);
     gGameState.flags |= GAME_FLAG_RIKU;
     gGameState.flags |= GAME_FLAG_DARK_POINTS_LOCKED;
@@ -85,7 +85,7 @@ void SetupRikuNewGame(void) {
 }
 
 void SetupSoraNewGame(void) {
-    gGameState.progression.friendFlags = 3;
+    gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
     InitSoraDecks();
     gGameState.flags &= ~GAME_FLAG_RIKU;
     SetJiminyFlag(0x11);

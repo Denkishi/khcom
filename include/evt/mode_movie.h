@@ -41,6 +41,13 @@ extern MovieSub* volatile gMovieSubLower;
 extern MovieSub* gMovieSubs;
 extern volatile s16 gMovieSubUpperTimer;
 extern volatile u16 gMovieSubUpperLength;
+enum MovieFlag {
+    MOVIE_FLAG_UPPER_SUB_PENDING = 0x1,
+    MOVIE_FLAG_LOWER_SUB_PENDING = 0x2,
+    MOVIE_FLAG_SOFT_RESET = 0x4,
+    MOVIE_FLAG_PLAYING = 0x8
+};
+
 extern volatile u16 gMovieFlags;
 extern volatile u16 gMovieSubUpperAlpha;
 extern volatile s16 gMovieSubLowerTimer;

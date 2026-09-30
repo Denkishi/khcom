@@ -45,6 +45,15 @@
 #include "bos4_api.h"
 struct BtlObj;
 
+enum BgFxFlag {
+    BGFX_FLAG_FLIP_X = 0x1,
+    BGFX_FLAG_ACTIVE = 0x2,
+    BGFX_FLAG_IGNORE_ZOOM = 0x4,
+    BGFX_FLAG_SCREEN_DIMMED = 0x8,
+    BGFX_FLAG_ABOVE_SPRITES = 0x10,
+    BGFX_FLAG_BELOW_SPRITES = 0x20
+};
+
 typedef struct BgFx {
     s32 bg;
     void (*update)(void);

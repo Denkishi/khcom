@@ -14,6 +14,7 @@
 #include "malloc.h"
 #include "fade.h"
 #include <stddef.h>
+#include "gba/keys.h"
 
 vu16 gMovieModeState;
 s32 gMovieId;
@@ -65,8 +66,8 @@ s32 HandleMovieFrame(s32 arg) {
 
     keys = ~REG_KEYINPUT;
 
-    if ((keys & 0xF) == 0xF) {
-        gMovieFlags |= 4;
+    if ((keys & SOFT_RESET_KEYS) == SOFT_RESET_KEYS) {
+        gMovieFlags |= MOVIE_FLAG_SOFT_RESET;
         return 1;
     }
 
@@ -77,7 +78,7 @@ s32 HandleMovieFrame(s32 arg) {
                     MovieSub* e;
 
                     gMovieSubUpper = e = &gMovieSubs[gMovieSubIndex];
-                    gMovieFlags |= 1;
+                    gMovieFlags |= MOVIE_FLAG_UPPER_SUB_PENDING;
                     gMovieSubUpperTimer = e->duration;
 
                     if (gMovieSubIndex < gMovieSubCount - 1) {
@@ -93,7 +94,7 @@ s32 HandleMovieFrame(s32 arg) {
                     MovieSub* e;
 
                     gMovieSubLower = e = &gMovieSubs[gMovieSubIndex];
-                    gMovieFlags |= 2;
+                    gMovieFlags |= MOVIE_FLAG_LOWER_SUB_PENDING;
                     gMovieSubLowerTimer = e->duration;
 
                     if (gMovieSubIndex < gMovieSubCount - 1) {
@@ -130,12 +131,12 @@ void MovieVBlankIntr(void) {
     u32 attr0;
     u32 attr1;
 
-    if (gMovieFlags & 8) {
+    if (gMovieFlags & MOVIE_FLAG_PLAYING) {
         REG_DISPCNT = (DISPCNT_MODE_3 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON);
         MovieUpdate();
         if (gMovieSubs != NULL) {
-            if (gMovieFlags & 1) {
-                gMovieFlags &= ~1;
+            if (gMovieFlags & MOVIE_FLAG_UPPER_SUB_PENDING) {
+                gMovieFlags &= ~MOVIE_FLAG_UPPER_SUB_PENDING;
                 gMovieSubUpperAlpha = 0;
 #ifdef VERSION_JP
                 CopySjisGlyphsToVram(gMovieSubUpper->text);
@@ -143,8 +144,8 @@ void MovieVBlankIntr(void) {
                 CopyLatinGlyphsToVram(gMovieSubUpper->text, gMovieSubUpperWidths, 0);
 #endif
             }
-            if (gMovieFlags & 2) {
-                gMovieFlags &= ~2;
+            if (gMovieFlags & MOVIE_FLAG_LOWER_SUB_PENDING) {
+                gMovieFlags &= ~MOVIE_FLAG_LOWER_SUB_PENDING;
                 gMovieSubLowerAlpha = 0;
 #ifdef VERSION_JP
                 CopySjisGlyphsToVramAt(gMovieSubLower->text, 0x100);
@@ -438,9 +439,9 @@ void mode_movie_1(void) {
         }
 
         if (MovieStart(p)) {
-            gMovieFlags |= 8;
+            gMovieFlags |= MOVIE_FLAG_PLAYING;
             MoviePlay(HandleMovieFrame, 0);
-            gMovieFlags &= 0xFFF7u;
+            gMovieFlags &= ~MOVIE_FLAG_PLAYING;
         }
 
         MovieClose();
@@ -469,7 +470,7 @@ void mode_movie_1(void) {
         fill = 0;
         CpuSet(&fill, (void*)0x06000000, 0x05006000);
 
-        if (gMovieFlags & 4) {
+        if (gMovieFlags & MOVIE_FLAG_SOFT_RESET) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else

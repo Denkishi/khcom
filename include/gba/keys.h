@@ -15,4 +15,6 @@
 #define DPAD_ANY        0x00F0
 #define KEYS_MASK       0x03FF
 
+#define SOFT_RESET_KEYS (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON)
+
 #endif /* GUARD_GBA_KEYS_H */

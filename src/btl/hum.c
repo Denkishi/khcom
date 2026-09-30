@@ -8221,7 +8221,7 @@ u8 task_hum_riku_1(RikuWork* work) {
     case 23:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
         if (work->base.anim.timer == 0) {
             s32 d = 0;
@@ -8292,7 +8292,7 @@ u8 task_hum_riku_1(RikuWork* work) {
     case 22:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
         if (AnimGetGfxIndex(&work->base.anim) == 6) {
 

@@ -4680,7 +4680,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
         } else if (st == 5) {
-            m4aSongNumStart(GetRandom() % 4 + 150);
+            m4aSongNumStart(GetRandom() % 4 + SONG_VO_SR_ATTACK00);
         }
 
         uv = work->stateTimer;
@@ -8034,7 +8034,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 21, 0);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             work->vz = -384;
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
@@ -8138,7 +8138,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 20, 0);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
 
         if (AnimGetGfxIndex(&work->anim) == 6) {
@@ -8241,7 +8241,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 33, 0);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             MakeOpponentsHittable();
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
@@ -8383,7 +8383,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 34, 0);
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
 
             switch (p->btl->hcEffect) {
@@ -9612,7 +9612,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->unk_194 = 0x1080;
             work->steps = 20;
             work->vz = -819;
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
 
         if (work->vz < 0) {
@@ -9685,7 +9685,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->unk_194 = 0x580;
             work->steps = 20;
             work->vz = -819;
-            m4aSongNumStart(GetRandom() % 2 + 259);
+            m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
 
         if (work->vz < 0) {
@@ -9872,9 +9872,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, (u16)a->animId, 0);
 
             if (work->comboCount == 2) {
-                m4aSongNumStart(GetRandom() % 2 + 257);
+                m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK05);
             } else {
-                m4aSongNumStart(GetRandom() % 3 + 254);
+                m4aSongNumStart(GetRandom() % 3 + SONG_VO_RK_ATTACK00);
             }
 
             work->vz = a->vz;

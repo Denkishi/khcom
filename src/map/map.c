@@ -581,10 +581,10 @@ void MapEnmDraw(MapEnmWork* p) {
     }
 
     t = p->flags & MAP_ENM_FLAG_HFLIP;
-    flags = 0x800;
+    flags = SPRITE_PRIORITY(2);
 
     if (t) {
-        flags = 0x801;
+        flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     }
 
     k = q->fieldPosition.y >> 8;

@@ -786,10 +786,10 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
         y = k + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         t = w->flip;
-        flags = 0x800;
+        flags = SPRITE_PRIORITY(2);
 
         if (t != 0) {
-            flags = 0x801;
+            flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         }
         DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, flags, v);
 

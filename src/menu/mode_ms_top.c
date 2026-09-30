@@ -305,18 +305,18 @@ void MsTopDraw(void) {
 #endif
     }
 
-    flags = 0x800;
+    flags = SPRITE_PRIORITY(2);
 
     switch (sMsTopMoogleWalkDir) {
     case 0:
         if (sMsTopCursor == 0) {
-            flags |= 1;
+            flags |= SPRITE_FLAG_HFLIP;
         }
         break;
     case 1:
         break;
     case 2:
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
         break;
     }
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,

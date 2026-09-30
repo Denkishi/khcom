@@ -139,7 +139,7 @@ void EnemyCardDraw(CardDisplayWork* p) {
                     affine = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 1);
                 }
 
-                flags = 0x410;
+                flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                            gEnemyCardBacks[0].gfx, gCardBattleState->tiles[p->cardDef->category],
                            gCardBattleState->palette, affine, flags, (u16)(p->priority - 1));

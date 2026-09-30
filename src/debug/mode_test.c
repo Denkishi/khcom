@@ -304,7 +304,7 @@ void eu_08061588(FrdPoohWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;

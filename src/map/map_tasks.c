@@ -2055,10 +2055,10 @@ void Task_MapGmk_Enm_2(MapGmkEnmWork* w) {
     s32 t;
 
     t = w->flipX;
-    flags = 0x800;
+    flags = SPRITE_PRIORITY(2);
 
     if (t) {
-        flags = 0x801;
+        flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     }
     x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
     k = w->obj.fieldPosition.y >> 8;
@@ -2249,10 +2249,10 @@ void Task_MapGmk_Spider_2(MapGmkSpiderWork* w) {
     s32 y;
 
     t = w->flipX;
-    flags = 0x800;
+    flags = SPRITE_PRIORITY(2);
 
     if (t) {
-        flags = 0x801;
+        flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     }
 
     x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);

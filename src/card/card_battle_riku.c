@@ -2763,7 +2763,7 @@ static void card_2(CardDisplayWork* p) {
         }
 
         aff = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 0);
-        flags = 0x410;
+        flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
         DrawSprite(p->x >> 8, y, gCardBacks[p->cardDef->category].gfx, gCardBattleState->tiles[p->cardDef->category], gCardBattleState->palette, aff, flags, (u16)(p->priority - 1));
         DrawSprite(p->x >> 8, y, gfx, p->tiles, p->palette, aff, flags, p->priority);
         j = p->value;
@@ -2792,7 +2792,7 @@ static void card_2(CardDisplayWork* p) {
     }
 
     aff = AllocObjAffine(0, p->scaleX, p->scaleY, 0);
-    flags = 0x410;
+    flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
     sy = y;
     DrawSprite(p->x >> 8, sy, p->cardDef->gfx2, p->tiles, p->palette, aff, flags, p->priority);
     j = p->value;

@@ -576,7 +576,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -865,7 +865,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1098,7 +1098,7 @@ void task_frd_ariel_2(FrdArielWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1577,7 +1577,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     } else if (angle == 0 && gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1898,7 +1898,7 @@ void task_frd_pan_2(FrdPanWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -2137,7 +2137,7 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -2368,7 +2368,7 @@ void task_frd_beast_2(FrdBeastWork* work) {
     } else if (gBtlWork->scale == 256) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;

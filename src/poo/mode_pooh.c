@@ -861,7 +861,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     ColliderSetRadius(&w->collider, gPoohHitBox.radius);
 
     if (w->animAction == anim) {
-        flags = 4;
+        flags = ANIM_FLAG_KEEP_FRAME;
     }
     w->animAction = anim;
 
@@ -869,13 +869,13 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     case 3:
     case 4:
     case 7:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         SetPoohDir8(w);
         e = &sPooh01AnimDefs[w->dirIndex];
         break;
     case 5:
     case 6:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         SetPoohDir3(w);
         e = &sPooh10AnimDefs[w->dirIndex];
         break;
@@ -952,7 +952,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         break;
     case 26:
         ColliderSetRadius(&w->collider, 14);
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         w->flipped = IsAngleFacingRight(w->angle);
         e = &sPoohFl05Anim3Def;
         w->hideShadow = 1;
@@ -972,7 +972,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         e = &sPoohFl06Anim1Def;
         break;
     case 30:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         w->flipped = IsAngleFacingRight(w->angle);
         e = &sPoohFl06Anim2Def;
         break;
@@ -982,12 +982,12 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         break;
     case 38:
     case 39:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         w->flipped = 0;
         e = &sTrap0003Anim0Def;
         break;
     case 22:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         w->flipped = 0;
         e = &sPoohOwlDescentAnimDef;
         break;
@@ -1002,13 +1002,13 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     case 13:
     case 14:
     case 15:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         SetPoohDir5Right(w);
         w->lookColumn = GetPoohLookColumn(w);
         e = &sPooh00LookAnimDefs[w->dirIndex][GetPoohLookColumn(w)];
         break;
     default:
-        flags |= 1;
+        flags |= ANIM_FLAG_LOOP;
         SetPoohDir5Right(w);
         e = &sPooh00AnimDefs[w->dirIndex];
         break;

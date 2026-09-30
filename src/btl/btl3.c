@@ -589,7 +589,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
             affine = 0;
 
             if (work->facingLeft == 0) {
-                flags |= 1;
+                flags |= SPRITE_FLAG_HFLIP;
             }
         } else {
             if (work->facingLeft == 0) {

@@ -285,7 +285,7 @@ void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
     }
 
     if (work->animAction == a) {
-        flags |= 4;
+        flags |= ANIM_FLAG_KEEP_FRAME;
     }
     work->animAction = a;
 
@@ -1984,7 +1984,7 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags) {
     }
 
     if (work->animAction == index) {
-        flags |= 4;
+        flags |= ANIM_FLAG_KEEP_FRAME;
     }
 
     work->animAction = index;

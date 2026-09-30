@@ -2913,7 +2913,7 @@ void StaffRollBlendFadeIn(StaffRollWork* w, u16 flags, s32 dur) {
     w->blendMode = 0;
     w->blendDuration = dur;
     w->blendTimer = 0;
-    gBldCnt = flags | 0xE0;
+    gBldCnt = flags | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     gBldY = 16;
 }
 
@@ -2921,7 +2921,7 @@ void StaffRollBlendFadeOut(StaffRollWork* w, u16 flags, s32 dur) {
     w->blendMode = 1;
     w->blendDuration = dur;
     w->blendTimer = 0;
-    gBldCnt = flags | 0xE0;
+    gBldCnt = flags | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN;
     gBldY = 0;
 }
 
@@ -2929,7 +2929,7 @@ void StaffRollBlendAlphaIn(StaffRollWork* w, u16 flags, s32 dur) {
     w->blendMode = 4;
     w->blendDuration = dur;
     w->blendTimer = 0;
-    gBldCnt = flags | 0x40;
+    gBldCnt = flags | BLDCNT_EFFECT_BLEND;
     gBldAlpha = 0;
 }
 
@@ -2937,7 +2937,7 @@ void StaffRollBlendAlphaOut(StaffRollWork* w, u16 flags, s32 dur) {
     w->blendMode = 5;
     w->blendDuration = dur;
     w->blendTimer = 0;
-    gBldCnt = flags | 0x40;
+    gBldCnt = flags | BLDCNT_EFFECT_BLEND;
     gBldAlpha = 16;
 }
 

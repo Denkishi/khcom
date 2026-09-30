@@ -6481,7 +6481,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     if (BgFxIsActive() == 0) {
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetBlendAlpha(6, 12);
-        flags = 0x804;
+        flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_BLEND;
     } else {
         flags = GetBattleSpritePriorityFlags(a->y);
     }
@@ -6493,7 +6493,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
         p = out->scale;
         if (p == 256) {
             q = p;
-            flags |= 1;
+            flags |= SPRITE_FLAG_HFLIP;
         } else {
             v = gBtlWork->scale;
             q = -v;

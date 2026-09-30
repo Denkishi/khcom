@@ -532,7 +532,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
         } else if (gBtlWork->scale == work->scaleY) {
             sclY = gBtlWork->scale;
             sclX = sclY;
-            flags |= 1;
+            flags |= SPRITE_FLAG_HFLIP;
         } else {
             sclY = gBtlWork->scale;
             sclX = -sclY;
@@ -880,7 +880,7 @@ void task_smn_bambi_2(SmnBambiWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1212,7 +1212,7 @@ void task_smn_tink_2(SmnTinkWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1503,7 +1503,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1757,7 +1757,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -1961,7 +1961,7 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -2384,7 +2384,7 @@ void task_smn_genie_2(SmnGenieWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;
@@ -2594,7 +2594,7 @@ void task_smn_king_2(SmnKingWork* work) {
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
         sclY = work->scale;
         sclX = sclY;
-        flags |= 1;
+        flags |= SPRITE_FLAG_HFLIP;
     } else {
         sclX = -gBtlWork->scale;
         sclY = gBtlWork->scale;

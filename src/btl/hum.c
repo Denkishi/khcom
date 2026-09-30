@@ -5095,7 +5095,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimReset(&sub->anim);
             AnimReset(&sub2->anim);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 6, 0, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 2, 0, ((HumSub*)w->base.sub2)->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 2, 0, w->base.sub2->tiles);
             sub->palette2 = sub->palette;
             sub->flags &= ~6;
             sub2->flags &= ~6;
@@ -5110,16 +5110,16 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             case 3:
                 m4aSongNumStart(SONG_BTL_AKL_FIREENTRY);
                 AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 7, 1, w->base.sub->tiles);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 3, 1, ((HumSub*)w->base.sub2)->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 3, 1, w->base.sub2->tiles);
                 break;
             case 6:
                 m4aSongNumStart(SONG_SND_290);
                 AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 8, 1, w->base.sub->tiles);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 4, 1, ((HumSub*)w->base.sub2)->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 4, 1, w->base.sub2->tiles);
                 break;
             case 7:
                 AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 9, 0, w->base.sub->tiles);
-                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 5, 0, ((HumSub*)w->base.sub2)->tiles);
+                AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 5, 0, w->base.sub2->tiles);
                 m4aSongNumStart(SONG_BTL_AKL_FIRETHR);
                 break;
             }
@@ -5176,7 +5176,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if ((s16)work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 1, 1, ((HumSub*)w->base.sub2)->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {
@@ -5241,7 +5241,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if ((s16)work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 1, 1, ((HumSub*)w->base.sub2)->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {
@@ -5315,7 +5315,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if ((s16)work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, 1, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, 1, w->base.sub->tiles);
-            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &((HumSub*)w->base.sub2)->anim, 1, 1, ((HumSub*)w->base.sub2)->tiles);
+            AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, 1, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
             if (act->flags & 4) {

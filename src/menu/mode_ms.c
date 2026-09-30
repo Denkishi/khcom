@@ -454,18 +454,18 @@ void InitMooglePackOpening(s16 x, s16 y) {
     }
 
     gUnk_02035A30 = LoadObjPalette(gCard00Palette, 0x20);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A30)->index + 0x10, 1);
+    FadeSetPaletteExcluded(gUnk_02035A30->index + 0x10, 1);
     gUnk_02035A34 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     gUnk_02035A38 = LoadObjPalette(gBStatesPalette, 0x20);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A38)->index + 0x10, 1);
+    FadeSetPaletteExcluded(gUnk_02035A38->index + 0x10, 1);
     gUnk_02035A3C = LoadObjTiles(gUnk_0905ED36, 0x140);
     gUnk_02035AE0 = LoadObjPalette(gUnk_09A3DA7C, 0x20);
     sMooglePackCursorTiles = LoadObjTiles(gUnk_099A3CE4, 0x1C0);
     AnimInit(&sMooglePackCursorAnim, gUnk_09EF99F8, gUnk_09EF99D8);
     AnimStart(&sMooglePackCursorAnim, 0, 1);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035AE0)->index + 0x10, 1);
+    FadeSetPaletteExcluded(gUnk_02035AE0->index + 0x10, 1);
     gUnk_02035A40 = LoadObjPalette(gUnk_09A3DB7C, 0x20);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A40)->index + 0x10, 1);
+    FadeSetPaletteExcluded(gUnk_02035A40->index + 0x10, 1);
     p = &sMooglePackNameText;
     *p = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(sMooglePackNameText, 0x24);
@@ -495,19 +495,19 @@ void ReleaseMooglePackOpening(void) {
         ReleaseObjTiles(sMooglePackCards[i].tiles2);
     }
 
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035AE0)->index + 0x10, 0);
+    FadeSetPaletteExcluded(gUnk_02035AE0->index + 0x10, 0);
     ReleaseObjPalette(gUnk_02035AE0);
     ReleaseObjTiles(sMooglePackCursorTiles);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A40)->index + 0x10, 0);
+    FadeSetPaletteExcluded(gUnk_02035A40->index + 0x10, 0);
     ReleaseObjPalette(gUnk_02035A40);
     FreeTextSlots(sMooglePackNameText, 0x24);
     EwramFree(sMooglePackNameText);
     FreeTextSlots(sMooglePackDescText, 0x5A);
     EwramFree(sMooglePackDescText);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A30)->index + 0x10, 0);
+    FadeSetPaletteExcluded(gUnk_02035A30->index + 0x10, 0);
     ReleaseObjPalette(gUnk_02035A30);
     ReleaseObjTiles(gUnk_02035A34);
-    FadeSetPaletteExcluded(((FldRes*)gUnk_02035A38)->index + 0x10, 0);
+    FadeSetPaletteExcluded(gUnk_02035A38->index + 0x10, 0);
     ReleaseObjPalette(gUnk_02035A38);
     ReleaseObjTiles(gUnk_02035A3C);
     ReleaseObjTiles(sMooglePackPremiumTiles);
@@ -764,7 +764,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                     LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)0x050001A0, 0x20);
                     sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                     sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                    LoadObjPaletteBank(((FldRes*)gUnk_02035A40)->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                    LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
                     EnableBg(3);
                     sMooglePackCards[i].state = 9;
                 }
@@ -806,7 +806,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)0x050001A0, 0x20);
                 sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                 sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                LoadObjPaletteBank(((FldRes*)gUnk_02035A40)->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
 

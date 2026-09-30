@@ -3577,8 +3577,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeStartOut(6, 1);
         }
 
-        ApproachValue((s32*)&work->scaleX, 10, work->steps);
-        ApproachValue((s32*)&work->scaleY, 512, work->steps);
+        ApproachValue(&work->scaleX, 10, work->steps);
+        ApproachValue(&work->scaleY, 512, work->steps);
 
         if ((s16)--work->steps > 0) {
             work->stateTimer++;
@@ -3611,8 +3611,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        ApproachValue((s32*)&work->scaleX, 256, work->steps);
-        ApproachValue((s32*)&work->scaleY, 256, work->steps);
+        ApproachValue(&work->scaleX, 256, work->steps);
+        ApproachValue(&work->scaleY, 256, work->steps);
 
         if ((s16)--work->steps <= 0) {
             FadeStartIn(6, 1);
@@ -4553,7 +4553,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValue((s32*)&work->scaleY, 64, (*(s16*)&work->steps)--);
+        ApproachValue(&work->scaleY, 64, (*(s16*)&work->steps)--);
 
         if ((s16)work->steps > 0) {
             work->stateTimer++;
@@ -4583,7 +4583,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValueHalfSteps((s32*)&work->scaleY, 256, (*(s16*)&work->steps)--);
+        ApproachValueHalfSteps(&work->scaleY, 256, (*(s16*)&work->steps)--);
 
         if ((s16)work->steps > 0) {
             work->stateTimer++;
@@ -10748,7 +10748,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
     }
 
-    TaskPoolUpdate((TaskPool*)&work->tasks);
+    TaskPoolUpdate(&work->tasks);
 
     if (work->state == 11 || work->state == 55) {
         if (work->flags & 4) {

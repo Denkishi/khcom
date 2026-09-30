@@ -3521,7 +3521,7 @@ void NewGameSlotMenuDraw(void) {
         gNewGameSlotMenuWork->palette2, 0, 0xC00, 90);
 
     if (gNewGameSlotMenuWork->isRiku == 0) {
-        DrawSprite(56, 112, ((void**)gSor1ff00Frames)[0], gNewGameSlotMenuWork->tiles4,
+        DrawSprite(56, 112, gSor1ff00Frames[0], gNewGameSlotMenuWork->tiles4,
             gNewGameSlotMenuWork->palette4, 0, 0x400, 80);
         DrawSprite(72, 96, gDona2Fl00Frames[0], gNewGameSlotMenuWork->tiles5, gNewGameSlotMenuWork->palette5, 0,
             0x401, 81);
@@ -4036,11 +4036,11 @@ void LoadGameMenuDraw(void) {
 #endif
 
     if (gLoadGameMenuWork->selectedSlot <= 1) {
-        DrawSprite(56, 112, ((void**)gSor1ff00Frames)[0], gLoadGameMenuWork->tiles3,
+        DrawSprite(56, 112, gSor1ff00Frames[0], gLoadGameMenuWork->tiles3,
             gLoadGameMenuWork->palette3, 0, 0x400, 80);
-        DrawSprite(72, 96, ((void**)gDonaFl00Frames)[0], gLoadGameMenuWork->tiles4,
+        DrawSprite(72, 96, gDonaFl00Frames[0], gLoadGameMenuWork->tiles4,
             gLoadGameMenuWork->palette4, 0, 0x401, 81);
-        DrawSprite(40, 96, ((void**)gGoofyFl00Frames)[0], gLoadGameMenuWork->tiles5,
+        DrawSprite(40, 96, gGoofyFl00Frames[0], gLoadGameMenuWork->tiles5,
             gLoadGameMenuWork->palette5, 0, 0x400, 81);
     } else {
         DrawSprite(56, 112, gRikuFf00Frames[0], gLoadGameMenuWork->tiles6, gLoadGameMenuWork->palette6, 0,
@@ -5471,7 +5471,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
             DrawSprite(w->x8 >> 8, w->y4 >> 8, gRikuFf00Frames[0], w->tiles8, w->palette6,
                 0, 0x400, 80);
         } else {
-            DrawSprite(w->x8 >> 8, w->y4 >> 8, ((void**)gSor1ff00Frames)[0], w->tiles8,
+            DrawSprite(w->x8 >> 8, w->y4 >> 8, gSor1ff00Frames[0], w->tiles8,
                 w->palette6, 0, 0x400, 80);
         }
 
@@ -6249,15 +6249,15 @@ void Task_MapSave_2(MapSaveWork* w) {
             DrawSprite(w->x3 >> 8, w->y3 >> 8, gRikuFf00Frames[0], w->tiles4, w->palette5,
                 0, 0x400, 80);
         } else {
-            DrawSprite(w->x3 >> 8, w->y3 >> 8, ((void**)gSor1ff00Frames)[0], w->tiles4,
+            DrawSprite(w->x3 >> 8, w->y3 >> 8, gSor1ff00Frames[0], w->tiles4,
                 w->palette5, 0, 0x400, 80);
         }
     }
 
     if (w->dialogVisible != 0) {
         if (!(gGameState.flags & 8)) {
-            DrawSprite(72, 96, ((void**)gDonaFl00Frames)[0], w->tiles5, w->palette6, 0, 0x401, 81);
-            DrawSprite(40, 96, ((void**)gGoofyFl00Frames)[0], w->tiles6, w->palette7, 0, 0x400, 81);
+            DrawSprite(72, 96, gDonaFl00Frames[0], w->tiles5, w->palette6, 0, 0x401, 81);
+            DrawSprite(40, 96, gGoofyFl00Frames[0], w->tiles6, w->palette7, 0, 0x400, 81);
         }
 
         DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, w->tiles3, w->palette3, 0, 0x400, 90);

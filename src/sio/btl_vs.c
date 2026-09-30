@@ -445,7 +445,7 @@ void VsBattleUpdate(void) {
             }
             gBtlWork->phaseStep = 2;
         }
-        if (IsTaskActive((Task*)gBtlWork->task)) return;
+        if (IsTaskActive(gBtlWork->task)) return;
         if (gBtlWork->phaseStep == 2) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);

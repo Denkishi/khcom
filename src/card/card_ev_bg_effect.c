@@ -303,7 +303,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* w) {
 
         if (w->frame < d->frameCount - 1) {
             w->frame++;
-            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, (void*)GetBgCharBase(0), d->tilesSize);
+            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
         } else {
             if (d->loopFrame == -1) {
                 w->animating = 0;
@@ -311,7 +311,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* w) {
             }
 
             w->frame = d->loopFrame;
-            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, (void*)GetBgCharBase(0), d->tilesSize);
+            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
         }
     }
 

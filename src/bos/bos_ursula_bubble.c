@@ -309,8 +309,8 @@ void task_bos_ursula_bubble_single_3(UrsulaBubbleSingleWork* work) {
 #ifndef VERSION_EU
     ReleaseObjTiles((void*)work->tiles);
 #endif
-    ReleaseObjPalette((void*)work->palette);
-    ReleaseObjPalette((void*)work->palette2);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
 }
 
 void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work) {

@@ -1639,7 +1639,7 @@ u8 BosLstUpdateHurt(BosLstWork* work) {
     void* p;
 
     p = &work->body;
-    if (AnimIsFinished((AnimState*)&work->anim) == 1) {
+    if (AnimIsFinished(&work->anim) == 1) {
         ClearBtlObjActionFlags(p);
         BosLstSetAnim(work, 0, 1, 1);
         work->state = 0;

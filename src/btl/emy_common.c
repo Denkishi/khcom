@@ -867,7 +867,7 @@ void EmyDraw(EmyWork* work) {
 void EmyReleaseResources(EmyWork* work) {
     gBtlWork->enemyTileCount -= gEnemyTileCounts[work->actor.kind];
 
-    if (gBtlWork->actor2 == (BtlObj*)&work->actor) {
+    if (gBtlWork->actor2 == &work->actor) {
         gBtlWork->actor2 = 0;
     }
 

@@ -2733,7 +2733,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
                     LoadBgTiles(2, u->tiles, u->tilesSize);
                 }
                 LoadBgPalette(2, u->palette, u->paletteSize);
-                SetBgColorMode(2, 128);
+                SetBgColorMode(2, BGCNT_256COLOR);
                 SetBgSize(2, 0x8000);
                 if (u->compression[0] == 2 || u->compression[0] == 3) {
                     eu_080059F4(2, (void*)*u->maps);
@@ -2906,7 +2906,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
         if (u->isAffine != 0) {
             LoadBgTiles(2, u->tiles, u->tilesSize);
             LoadBgPalette(2, u->palette, u->paletteSize);
-            SetBgColorMode(2, 128);
+            SetBgColorMode(2, BGCNT_256COLOR);
             SetBgSize(2, 0x8000);
             LoadBgMap(2, (void*)*u->maps, 0x1000);
             SetBgAffine(2, 0, 256, 256, 0, 0);

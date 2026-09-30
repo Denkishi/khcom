@@ -2003,8 +2003,8 @@ void DisableBg(s32 bg) {
 void SetupBg(s32 bg, u8 charBase, u8 screenBase, u8 palette) {
     vu16* p = sBgControl[bg];
 
-    *p = (*p & 0xFFF3) | (charBase << 2);
-    *p = (*p & 0xE0FF) | (screenBase << 8);
+    *p = (*p & ~BGCNT_CHARBASE_MASK) | BGCNT_CHARBASE(charBase);
+    *p = (*p & ~BGCNT_SCREENBASE_MASK) | BGCNT_SCREENBASE(screenBase);
     gBgPaletteBank[bg] = palette;
 }
 
@@ -2024,11 +2024,11 @@ void LoadBgMap(s32 bg, void* src, u16 size) {
 }
 
 void* GetBgCharBase(s32 bg) {
-    return (void*)(((*sBgControl[bg] & 0x0C) << 12) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & BGCNT_CHARBASE_MASK) << 12) + 0x06000000);
 }
 
 void* GetBgScreenBase(s32 bg) {
-    return (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000);
 }
 
 void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
@@ -2055,7 +2055,7 @@ void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
     }
     e->x = x;
     e->y = y;
-    CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
+    CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
     SetBgScroll(bg, x & 7, y & 7);
     e->dirty = 0;
 }
@@ -2096,7 +2096,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         e->y = y;
         return;
     }
-    dst = (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000);
+    dst = (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000);
     tx = sx >> 3;
     ty = sy >> 3;
     cx = GetBgScrollX(bg) >> 3;
@@ -2153,9 +2153,9 @@ u16 GetBgMapY(s32 bg) {
 
 void SetBgMosaic(s32 bg, u8 on) {
     if (on) {
-        *sBgControl[bg] |= 0x40;
+        *sBgControl[bg] |= BGCNT_MOSAIC;
     } else {
-        *sBgControl[bg] &= 0xFFBF;
+        *sBgControl[bg] &= ~BGCNT_MOSAIC;
     }
 }
 
@@ -2236,36 +2236,36 @@ u8 GetBgScrollY(u32 a) {
 void SetBgPriority(s32 bg, u16 priority) {
     vu16* p = sBgControl[bg];
 
-    *p &= 0xFFFC;
+    *p &= ~BGCNT_PRIORITY_MASK;
     *p |= priority;
 }
 
 void SetBgSize(s32 bg, u16 v) {
     vu16* p = sBgControl[bg];
 
-    *p &= 0x3FFF;
+    *p &= ~BGCNT_SIZE_MASK;
     *p |= v;
 }
 
 void SetBgColorMode(s32 bg, u16 v) {
-    if (v == 0x80) {
+    if (v == BGCNT_256COLOR) {
         vu16* p = sBgControl[bg];
 
         *p &= 0xFFFF;
-        *p |= 0x80;
+        *p |= BGCNT_256COLOR;
     } else {
         vu16* p = sBgControl[bg];
 
-        *p &= 0xFF7F;
+        *p &= ~BGCNT_256COLOR;
         *p |= 0;
     }
 }
 
 void SetBgOverflow(s32 bg, u8 on) {
     if (on) {
-        *sBgControl[bg] |= 0x2000;
+        *sBgControl[bg] |= BGCNT_WRAP;
     } else {
-        *sBgControl[bg] &= 0xDFFF;
+        *sBgControl[bg] &= ~BGCNT_WRAP;
     }
 }
 

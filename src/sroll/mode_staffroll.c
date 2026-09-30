@@ -3173,15 +3173,15 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        SetBgColorMode(0, 0x80);
+        SetBgColorMode(0, BGCNT_256COLOR);
 
         if (w->sceneIndex != w->nextScene) {
             w->sceneIndex = w->nextScene;
 
             if (w->scene[w->sceneIndex].color256 == 1) {
-                SetBgColorMode(0, 0x80);
+                SetBgColorMode(0, BGCNT_256COLOR);
             } else {
-                SetBgColorMode(0, 0);
+                SetBgColorMode(0, BGCNT_16COLOR);
             }
 
             EnableBg(0);
@@ -4029,7 +4029,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
         DisableBg(2);
         DisableBg(3);
         SetBgScroll(1, 0, 0);
-        SetBgColorMode(1, 0x80);
+        SetBgColorMode(1, BGCNT_256COLOR);
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
 #ifdef VERSION_EU

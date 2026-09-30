@@ -11,6 +11,7 @@
 #include "fade.h"
 #include "songs.h"
 #include "player_progression.h"
+#include "gba/io_reg.h"
 
 DebugWork* gDebugWork;
 
@@ -36,7 +37,7 @@ void mode_debug_0(void) {
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
     SetupBg(1, 2, 31, 0);
-    SetBgColorMode(1, 0x80);
+    SetBgColorMode(1, BGCNT_256COLOR);
     SetBgSize(1, 0);
 #ifdef VERSION_EU
     LoadBgPalette(1, gUnk_08F683E4, 0x200);

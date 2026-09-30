@@ -434,16 +434,19 @@
 
 #define BGCNT_PRIORITY(n)   (n)
 #define BGCNT_PRIORITY_MASK 0x0003
+#define BGCNT_CHARBASE_MASK 0x000C
 #define BGCNT_CHARBASE(n)   ((n) << 2)
 #define BGCNT_MOSAIC        0x0040
 #define BGCNT_16COLOR       0x0000
 #define BGCNT_256COLOR      0x0080
 #define BGCNT_SCREENBASE(n) ((n) << 8)
+#define BGCNT_SCREENBASE_MASK 0x1F00
 #define BGCNT_WRAP          0x2000
 #define BGCNT_TXT256x256    0x0000
 #define BGCNT_TXT512x256    0x4000
 #define BGCNT_TXT256x512    0x8000
 #define BGCNT_TXT512x512    0xC000
+#define BGCNT_SIZE_MASK     0xC000
 #define BGCNT_AFF128x128    0x0000
 #define BGCNT_AFF256x256    0x4000
 #define BGCNT_AFF512x512    0x8000

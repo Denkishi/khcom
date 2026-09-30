@@ -26,4 +26,6 @@ void SaveClearFileSmall(u16 file);
 void SaveWriteFileLarge(u16 file);
 int SaveRepairSystem(void);
 
+void SaveInitSram(void);
+
 #endif

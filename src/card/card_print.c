@@ -40,8 +40,6 @@ u8 gSioBattleFileLoaded EWRAM_COMMON(4);
 
 static void** sSioBattleWork;
 
-void FreePrintLayer(void);
-void ResetPrintLines(void);
 void task_print_0(void) {
     InitPrintLayer(0);
 }

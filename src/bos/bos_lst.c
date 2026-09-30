@@ -5,6 +5,7 @@
 #include "fade.h"
 #include "songs.h"
 #include <stdlib.h>
+#include "bos7.h"
 
 const EmyKind gBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 
@@ -709,7 +710,6 @@ u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx) {
 }
 
 #ifdef VERSION_EU
-extern u8 eu_0810F08C(Task* task);
 u8 eu_0810BA1C(BosLstWork* work, s32 idx) {
     s32 i;
     u8 r;

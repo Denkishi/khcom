@@ -27,4 +27,7 @@ extern const u16 gUnk_090356B8;
 extern const u16 gRikuDeckCardCounts[12];
 extern const u16 gRikuDeckEnemyCardCounts[12];
 
+Deck* GetLinkPartnerDeck(void);
+void InitCardCollection(void);
+
 #endif

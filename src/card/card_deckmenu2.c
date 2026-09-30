@@ -49,7 +49,6 @@ CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 
 u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* w, void* a);
 #ifdef VERSION_EU
-extern AnimHeader gUnk_090A44BA;
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
@@ -57,13 +56,8 @@ extern AnimHeader gUnk_090A44BA;
 #endif
 void ReleaseCardPreview(DeckMenuWork* w);
 void HighlightDeckTab(DeckMenuWork* w, u8 b);
-void func_080AB22C(u8 a);
-void BuildDebugKingdomKeyDeck(u8 a);
-void func_080AB4AC(u8 a);
 void DrawCpCost(u8 a);
 s32 GetCardIdForKindEntry(s32 a);
-void func_080AB964(void);
-void func_080AB968(void);
 u8 UpdateDeckMenuBuildAddList(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuCommands(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuCloseCommands(DeckMenuWork* w, void* a);
@@ -93,7 +87,6 @@ void SetGridRowCount(DeckMenuWork* w, s16 n);
 void UpdateGridScrollBar(DeckMenuWork* w);
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a);
 void DrawCollectionCategoryCount(u16 a, u8 b);
-void DeckCard2ReleaseGfx(DeckCard2Work* node);
 u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuFadeOut(DeckMenuWork* w);
 u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a);
@@ -102,7 +95,6 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a);
 void FreeCollectionEntries(DeckMenuWork* w);
 void DrawValueCount(u8 a, u16 b);
 void DrawDeckCategoryCount(u8 a, u8 b);
-void InitCardCollection(void);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
 void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode);
@@ -122,8 +114,6 @@ s32 IsCardAtCursor(DeckMenuWork* w);
 u8 IsCardAt(DeckMenuWork* w, s16 a, s16 b);
 u8 SwapHeldDeckCard(DeckMenuWork* w);
 void BuildCollectionEntries(DeckMenuWork* w);
-void ObtainStarterCards(void);
-void FillStarterDeck(void);
 
 void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p) {
     u16 mask;

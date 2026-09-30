@@ -2602,4 +2602,74 @@ extern TaskDesc gTaskDescDeckexchange;
 #endif
 extern CardDescriptionText* gCardKindDescriptions[98];
 
+void AddPickedCardToSoraDeck(CardBattleWork* w);
+u8 AreCardsSettled(CardDisplayWork** p, u8 n);
+void BeginSoraReloadDeal(CardBattleWork* w);
+void BuildDebugKingdomKeyDeck(u8 a);
+void ClearStockedCardSlots(CardBattleWork* w);
+void ClearUsedCardSlots(CardBattleWork* w, u8 b);
+u8 CollectionHasCard(u16 id);
+void ConvertActiveDeckCardToPremium(u16 index);
+u16 CountActiveDeckCardsOfCategory(u8 slot);
+u16 CountAvailableCards(CardBattleWork* w, u8 n);
+void CountCardsNotInDeckByCategory(u8 mode, u16* out);
+u16 CountMapCardsOfKind(u16 a);
+u16 CountRemainingAttackCards(CardBattleWork* w, u8 b);
+u16 CountZeroValueMapCards(void);
+void CreateCardNameDisplay(void* a, void* b);
+void CycleSoraCardList(CardBattleWork* w);
+void DeckCard2ReleaseGfx(DeckCard2Work* node);
+void DrawCollectionCategoryCount(u16 a, u8 b);
+void DrawDeckCategoryCount(u8 a, u8 b);
+void DrawValueCount(u8 a, u16 b);
+void FillStarterDeck(void);
+void FreePrintLayer(void);
+u16 GetNextRandomHcEffect(u16* p);
+u16 GetRandomHcEffect(void);
+u8 HasMapCard(u16 a);
+void IncrementReloadCount(CardBattleWork* w);
+void InitSoraCardList(CardBattleWork* w, s32 mode);
+void InitSoraTutorialCardList(CardBattleWork* w, s32 mode);
+u8 IsCardDisplayOffScreen(CardDisplayWork* p);
+u8 IsLevelUpStockUnlocked(void);
+u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p);
+void LoadCardDisplayGfx(CardDisplayWork* p);
+void ObtainStarterCards(void);
+u16 PickPrizeMapCardForWorld(u16 a, s32 b);
+void ReleaseCardDisplayGfx(CardDisplayWork* p);
+void RemoveItemCards(CardBattleWork* w);
+void RemoveSoraCardDisplays(CardBattleWork* w);
+void ResetBossCardValue(void);
+void ResetPrintLines(void);
+void ResetSoraReloadGauge(CardBattleWork* w);
+void RestoreCardsForElixir(CardBattleWork* w);
+void RestoreCardsForEther(CardBattleWork* w);
+void RestoreCardsForHiPotion(CardBattleWork* w);
+void RestoreCardsForMegaEther(CardBattleWork* w);
+void RestoreCardsForMegaPotion(CardBattleWork* w);
+void RestoreCardsForPotion(CardBattleWork* w);
+void SelectNextSoraCard(CardBattleWork* w, u8 b);
+void ShuffleCardSlots(CardSlot* slots, u8 n);
+s32 StockSoraCard(CardBattleWork* w);
+void SwitchSoraCardList(CardBattleWork* w);
+void SyncCardDisplayGfx(CardDisplayWork* p);
+void TrackLevelUpEffectTarget(LevelUpEffectWork* w);
+void UpdateCardDisplayFlip(CardDisplayWork* p);
+s32 UseSoraCard(CardBattleWork* w);
+s32 UseSoraGimmickCard(CardBattleWork* w);
+s32 UseSoraHeartlessCard(CardBattleWork* w);
+void UseSoraStock(CardBattleWork* w);
+void func_080782EC(void);
+u8 func_0807CF4C(CardDisplayWork* p, void* a);
+void func_080AB22C(u8 a);
+void func_080AB4AC(u8 a);
+void func_080AB964(void);
+void func_080AB968(void);
+#ifdef VERSION_EU
+extern AnimHeader gUnk_090A44BA;
+#endif
+#ifdef VERSION_JP
+extern u8 gUnk_0814FBD4[];
+#endif
+
 #endif /* GUARD_CARD_H */

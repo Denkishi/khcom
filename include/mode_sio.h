@@ -409,4 +409,8 @@ void SioBtlCardgetLoad1PWin(void);
 void SioBtlCardgetLoad2PWin(void);
 void SioBtlOptionPlayWorldBgm(void);
 
+#ifdef VERSION_JP
+extern u8 gUnk_0814F180[];
+#endif
+
 #endif /* GUARD_MODE_SIO_H */

@@ -32,8 +32,6 @@
 #include "songs.h"
 #include "bos6.h"
 
-void TrackLevelUpEffectTarget(LevelUpEffectWork* w);
-
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->x[0] = a->x;
     w->targetX = a->x;

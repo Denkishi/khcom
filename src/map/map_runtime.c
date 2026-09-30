@@ -17,7 +17,6 @@
 #include "jiminy_data.h"
 
 extern MapFloorDef gUnk_0984C868[];
-extern MapFloorDef gUnk_0984CBD0[];
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
 extern const MapNameText* gMapWorldNames[];

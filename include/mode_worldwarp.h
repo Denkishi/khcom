@@ -51,4 +51,11 @@ typedef struct WarpRect {
     s16 y;
 } WarpRect;
 
+#ifdef VERSION_EU
+extern u8 gUnkEu_099AABA4[];
+extern u8 gUnkEu_099AABBA[];
+extern u8 gUnkEu_099AABEE[];
+extern u8 gUnkEu_099AAC2C[];
+#endif
+
 #endif /* GUARD_MODE_WORLDWARP_H */

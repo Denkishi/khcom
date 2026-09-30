@@ -39,15 +39,11 @@
 #include "card_ids.h"
 #include "songs.h"
 
-u16 CountMapCardsOfKind(u16 a);
 u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
 u16 PickPrizeMapCardForWorld(u16 a, s32 b);
 void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
 s32 UpdateSpotLightFadeOut(SpotlightWork* w);
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
-u8 CollectionHasCard(u16 id);
-u16 CountZeroValueMapCards(void);
-u8 HasMapCard(u16 a);
 
 const u16 gPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 

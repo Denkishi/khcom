@@ -67,12 +67,6 @@ Mode* gDebugModes[] = {
     &gModeMapinspect,
 };
 
-void FlushDma3QueueWithCpu(void);
-void FlushDma3Queue(void);
-void CommitDisplayRegs(void);
-void MosaicUpdate(void);
-void SortSprites(void);
-
 Task* TaskDestroy(TaskPool* a, Task* t) {
     if (t->desc->destroy != 0) {
         t->desc->destroy(t->work);

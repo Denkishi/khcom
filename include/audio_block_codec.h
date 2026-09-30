@@ -3,7 +3,6 @@
 
 #include "types.h"
 
-
 extern u8* gAudioCodecSrc;
 extern s32 gAudioCodecBitBuffer;
 extern s32 gAudioCodecBitCount;
@@ -17,5 +16,9 @@ void _08117A4C(s32 offset);
 void DecodeAudioSubblock(s32 offset);
 void DecodeAudioBlock(u8* src, s32* samples, s32 offset);
 s32 PeekAudioBits8(void);
+
+void func_081213C4(s32* a, s32* b, const s32* c);
+void func_081213CC(s32* a, s32* b);
+void func_081213D4(s32* a, s32* b);
 
 #endif

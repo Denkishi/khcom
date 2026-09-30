@@ -18,8 +18,6 @@
 #include "songs.h"
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099AEE98[];
-extern u8 gUnkEu_092D1F74[];
 extern u8 gUnkEu_08890F40[];
 extern u8 gUnkEu_08895960[];
 extern u8 gUnkEu_08890E1C[];

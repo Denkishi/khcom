@@ -29,11 +29,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern const u16 gUnk_0951D2B8[1024];
-extern const u16 gUnk_0951DAB8[1024];
-extern const u16 gUnk_0951E2B8[1024];
-extern const u16 gUnk_0951EAB8[1024];
-
 #ifdef VERSION_EU
 extern void* gUnkEu_08890E1C[];
 extern void* gUnkEu_08890E44[];

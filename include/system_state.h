@@ -27,4 +27,6 @@ extern vu32 gFrameCounter;
 extern u32 gLanguage;
 #endif
 
+extern u8 IrqHandler[];
+
 #endif

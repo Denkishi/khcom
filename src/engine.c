@@ -1516,7 +1516,6 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
 }
 
 #ifdef VERSION_EU
-void LZ77UnCompVram(void* src, void* dst);
 
 u8 eu_080044C0(void* src, void* dst) {
     Dma3Queue* q = gDma3Requests;
@@ -2351,8 +2350,6 @@ void eu_080059F4(s32 bg, void* src) {
 u32 eu_08005A14(u32* src) {
     return *src >> 8;
 }
-
-void LZ77UnCompWram(void* src, void* dst);
 
 u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
     BgEntry* e;

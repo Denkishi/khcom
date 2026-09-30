@@ -33,7 +33,6 @@
 #include "sprites_card.h"
 #include "songs.h"
 
-void CreateCardNameDisplay(void* a, void* b);
 s32 UpdateReloadChildAbsorb(ReloadChildWork* w);
 u8 UpdateReloadSlideOut(ReloadWork* w);
 

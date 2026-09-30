@@ -33,4 +33,9 @@ void RegisterRamReset(u32 flags);
 void VBlankIntrWait(void);
 u32 Sqrt(u32 value);
 
+#ifdef VERSION_EU
+void LZ77UnCompVram(void* src, void* dst);
+void LZ77UnCompWram(void* src, void* dst);
+#endif
+
 #endif

@@ -23,7 +23,6 @@
 #include "common_text.h"
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099AAC2C[];
 #endif
 
 static s16 sWorldWarpCursor;
@@ -63,9 +62,6 @@ static s32 sWorldWarpCursorX;
 static s32 sWorldWarpCursorY;
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099AABA4[];
-extern u8 gUnkEu_099AABBA[];
-extern u8 gUnkEu_099AABEE[];
 #endif
 
 const WarpRect gWarpRects[4] = {

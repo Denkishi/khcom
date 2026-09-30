@@ -40,9 +40,7 @@
 #else
 #define LANGSTR(x) (x)
 #endif
-u16 CountActiveDeckCardsOfCategory(u8 slot);
 void DrawRikuCpCost(u8 a);
-void DeckCard2ReleaseGfx(DeckCard2Work* node);
 void ShowRikuDeckCardPreview(RikuDeckMenuWork* w);
 u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a);
 s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* w);

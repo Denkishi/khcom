@@ -45,7 +45,6 @@ extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09613E98[];
 u8 UpdateLevelUpWaitFade(void);
 s32 IsLevelUpApUnlocked(void);
-u8 IsLevelUpStockUnlocked(void);
 struct LevelUpWork;
 u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);

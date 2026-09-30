@@ -1298,4 +1298,31 @@ void MapMarkJumpSpot(MapPlatform* p);
 void MapFindPlatformStairs(MapPlatform* p);
 void MapPlacePlatformStairs(void);
 
+#ifdef VERSION_EU
+extern const u8 gUnkEu_09953BF0[];
+extern const u8 gUnkEu_099543F0[];
+extern const u8 gUnkEu_09954BF0[];
+extern const u8 gUnkEu_09955250[][320];
+extern const u8 gUnkEu_09959850[][320];
+extern const u8 gUnkEu_0995A9D0[][320];
+extern const u8 gUnkEu_0995BB50[][320];
+extern const u8 gUnkEu_0995CCD0[][320];
+extern const u8 gUnkEu_0995DE50[][320];
+extern const u8 gUnkEu_0995EFD0[][320];
+extern const u8 gUnkEu_09960150[][320];
+extern const u8 gUnkEu_099612D0[][320];
+extern const u8 gUnkEu_09962450[][320];
+extern const u8 gUnkEu_099635D0[][320];
+extern const u8 gUnkEu_09964750[][320];
+extern const u8 gUnkEu_099658D0[][320];
+extern const u8 gUnkEu_09966A50[][320];
+extern const u8 gUnkEu_09967BD0[][320];
+extern const u8 gUnkEu_09968D50[][320];
+extern const u8 gUnkEu_09969ED0[][320];
+extern const u8 gUnkEu_0996D130[];
+extern const u8 gUnkEu_0996D930[];
+extern const u8 gUnkEu_0996E130[];
+extern const u8 gUnkEu_0996E930[];
+#endif
+
 #endif /* GUARD_MAP_H */

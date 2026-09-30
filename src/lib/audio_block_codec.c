@@ -148,10 +148,6 @@ const u8 gUnk_09C43708[4096] = {
     63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63,
 };
 
-void func_081213C4(s32* a, s32* b, const s32* c);
-void func_081213CC(s32* a, s32* b);
-void func_081213D4(s32* a, s32* b);
-
 static inline void ShiftInByte(void) {
     gAudioCodecBitBuffer = (u32)gAudioCodecBitBuffer << 8;
     gAudioCodecBitBuffer |= *gAudioCodecSrc++;

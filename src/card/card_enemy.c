@@ -37,11 +37,6 @@ u8 gUnk_02034AB6[2];
 u8 gUnkEu_02034AD4[4];
 #endif
 
-u8 IsCardDisplayOffScreen(CardDisplayWork* p);
-void ReleaseCardDisplayGfx(CardDisplayWork* p);
-void LoadCardDisplayGfx(CardDisplayWork* p);
-void UpdateCardDisplayFlip(CardDisplayWork* p);
-u8 func_0807CF4C(CardDisplayWork* p, void* a);
 u8 func_0809075C(CardDisplayWork* p, void* a);
 u8 func_08090808(CardDisplayWork* p, void* a);
 u8 func_08090940(CardDisplayWork* p);

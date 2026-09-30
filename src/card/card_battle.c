@@ -25,7 +25,6 @@
 #include "obj_resource_types.h"
 #include "songs.h"
 
-u16 CountAvailableCards(CardBattleWork* w, u8 n);
 s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task);
 
 CardDisplayWork* gSoraSelectedCard;
@@ -487,11 +486,6 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
     gSoraSelectedCard->flags |= 0x804;
 }
 
-void ResetBossCardValue(void);
-void func_080782EC(void);
-void InitSoraTutorialCardList(CardBattleWork* w, s32 mode);
-void InitSoraCardList(CardBattleWork* w, s32 mode);
-
 static void cardbattle_0(CardBattleWork* w) {
     u32 zero = 0;
     u8 i;
@@ -573,29 +567,6 @@ s32 func_08076F4C(CardBattleWork* w) {
 
     return 0;
 }
-
-void RemoveSoraCardDisplays(CardBattleWork* w);
-void IncrementReloadCount(CardBattleWork* w);
-void ClearUsedCardSlots(CardBattleWork* w, u8 slot);
-void SelectNextSoraCard(CardBattleWork* w, u8 slot);
-s32 UseSoraCard(CardBattleWork* w);
-s32 UseSoraHeartlessCard(CardBattleWork* w);
-s32 UseSoraGimmickCard(CardBattleWork* w);
-s32 StockSoraCard(CardBattleWork* w);
-void UseSoraStock(CardBattleWork* w);
-void CycleSoraCardList(CardBattleWork* w);
-void SwitchSoraCardList(CardBattleWork* w);
-void RestoreCardsForPotion(CardBattleWork* w);
-void RestoreCardsForHiPotion(CardBattleWork* w);
-void RestoreCardsForMegaPotion(CardBattleWork* w);
-void RestoreCardsForEther(CardBattleWork* w);
-void RestoreCardsForMegaEther(CardBattleWork* w);
-void RestoreCardsForElixir(CardBattleWork* w);
-void RemoveItemCards(CardBattleWork* w);
-void ResetSoraReloadGauge(CardBattleWork* w);
-void BeginSoraReloadDeal(CardBattleWork* w);
-void AddPickedCardToSoraDeck(CardBattleWork* w);
-u8 AreCardsSettled(CardDisplayWork** cards, u8 count);
 
 s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
     UnkStruct_080ABA80 data;

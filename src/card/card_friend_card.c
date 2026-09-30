@@ -51,9 +51,7 @@ extern u8 gUnk_09618D18[];
 #else
 #define LANGSTR(x) (x)
 #endif
-void CreateCardNameDisplay(void* a, void* b);
 void CreatePremireChanceCardTasks(PremireChanceWork* w);
-void ConvertActiveDeckCardToPremium(u16 index);
 
 const u32 gFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),

@@ -44,7 +44,6 @@ u8 gUnk_02034AF4[4];
 #endif
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a);
-u16 GetNextRandomHcEffect(u16* p);
 
 void Mode_Premire_0(void) {
     func_08085FB0();

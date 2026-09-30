@@ -39,28 +39,21 @@
 u16 gSioTradeCardId EWRAM_COMMON(4);
 #endif
 
-u16 CountActiveDeckCardsOfCategory(u8 slot);
 u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* w);
 u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a);
 u8 UpdateDeckExchangeClose(DeckExchangeWork* w, void* a);
-void DrawCollectionCategoryCount(u16 a, u8 b);
 u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a);
-void DeckCard2ReleaseGfx(DeckCard2Work* node);
 void ClearDeckExchangeCardGrid(DeckExchangeWork* w);
 void DrawDeckExchangeCpCost(u8 a);
 void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* w, u16 index);
 void SetDeckExchangeGridRowCount(DeckExchangeWork* w, s16 n);
 u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a);
-void DrawValueCount(u8 a, u16 b);
 s32 TakeTradeCard(DeckExchangeWork* w);
-void DrawDeckCategoryCount(u8 a, u8 b);
 void DrawDeckExchangeEquipMarker(u8 a);
 void DrawDeckExchangeCardTotals(void);
 u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
-u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p);
-void CountCardsNotInDeckByCategory(u8 mode, u16* out);
 void ClearCardCollectionSlot(u16* p);
 u8 GetActiveDeckIndex(void);
 void CreateDeckExchangeDeckGridCards(DeckExchangeWork* w, u8 kind);

@@ -83,7 +83,6 @@ const char gMapChkDeepLabel[] = "\202c\202d\202d\202o\201@\201F";
 const char gMapChkCursorBlankText[] = "\201@";
 
 const char gMapChkCursorText[] = "\201\204";
-extern const u8 gUnk_0984B458[][8];
 
 static MapChkWork* gMapChkWork;
 static MapFormDef* sMapChkForm;

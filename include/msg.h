@@ -7,7 +7,6 @@
 #include "event_background_types.h"
 #include "registration_data.h"
 
-
 #include "bg_animation_data.h"
 
 #include "obj.h"
@@ -335,5 +334,10 @@ void msgwait_0(MsgWaitWork* p, u8* arg);
 u8 msgwait_1(MsgWaitWork* p, void* a);
 void msgwait_2(MsgWaitWork* p);
 void msgwait_3(MsgWaitWork* p);
+
+extern const u16 gUnk_0951D2B8[1024];
+extern const u16 gUnk_0951DAB8[1024];
+extern const u16 gUnk_0951E2B8[1024];
+extern const u16 gUnk_0951EAB8[1024];
 
 #endif /* GUARD_MSG_H */

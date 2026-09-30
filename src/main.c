@@ -16,6 +16,7 @@
 #include "gba/io_reg.h"
 #include "sroll_api.h"
 #include "sio_api.h"
+#include "save_api.h"
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
 
@@ -42,10 +43,6 @@ vu32 gFrameCounter;
 u32 gLanguage;
 #endif
 IntrFunc gVBlankHandlerOverride;
-
-extern u8 IrqHandler[];
-
-void SaveInitSram(void);
 
 void* GetEwramHeapStart(void) {
     return gEwramHeapStart;

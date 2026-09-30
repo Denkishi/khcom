@@ -317,4 +317,8 @@ void BosLstBitHandleHit(LstState* work);
 void BosLstLsrFire(Task* task, Vec3* a, Vec3* b, s32 c, u16 d);
 void BosLstLsrStop(Task* task);
 
+#ifdef VERSION_EU
+u8 eu_0810F08C(Task* task);
+#endif
+
 #endif /* GUARD_BOS7_H */

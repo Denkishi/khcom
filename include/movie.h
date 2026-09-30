@@ -84,4 +84,19 @@ void MoviePlay(s32 (*a)(s32), s32 b);
 void MovieClose(void);
 void MovieUpdate(void);
 
+extern u8 MovieAudioCodecAdpcm[];
+extern u8 MovieAudioCodecAdpcmSteps[];
+extern u8 MovieAudioCodecEnd[];
+extern u8 MovieAudioCodecStart[];
+extern u8 MovieDeltaCodecDecode[];
+extern u8 MovieDeltaCodecOffsets[];
+extern u8 MovieDeltaCodecStart[];
+extern u8 MovieVideoCodecConstants[];
+extern u8 MovieVideoCodecEnd[];
+extern u8 MovieVideoCodecKeyFrame[];
+extern u8 MovieVideoCodecPostProcess[];
+extern u8 MovieVideoCodecStart[];
+extern u8 gUnk_0811D184[];
+extern u8 gUnk_0811D1A4[];
+
 #endif

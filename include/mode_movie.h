@@ -70,4 +70,23 @@ u8 CopyLatinGlyphsToVram(void* str, u16* widths, u16 tile);
 extern u16 gMovieSubUpperWidths[];
 extern u16 gMovieSubLowerWidths[];
 #endif
+
+#ifdef VERSION_EU
+extern u8 gUnkEu_0883E040[];
+extern u8 gUnkEu_0883E070[];
+extern u8 gUnkEu_0883E150[];
+extern u8 gUnkEu_0883E454[];
+extern u8 gUnkEu_0883E494[];
+extern u8 gUnkEu_0883E574[];
+extern u8 gUnkEu_0883E8D4[];
+extern u8 gUnkEu_0883E914[];
+extern u8 gUnkEu_0883E9F4[];
+extern u8 gUnkEu_0883ECE8[];
+extern u8 gUnkEu_0883ED28[];
+extern u8 gUnkEu_0883EE08[];
+extern u8 gUnkEu_0883F0F8[];
+extern u8 gUnkEu_0883F138[];
+extern u8 gUnkEu_0883F218[];
+#endif
+
 #endif

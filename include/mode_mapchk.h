@@ -29,4 +29,6 @@ void Mode_MapChk_0(void);
 void Mode_MapChk_1(void);
 void Mode_MapChk_2(void);
 
+extern const u8 gUnk_0984B458[][8];
+
 #endif

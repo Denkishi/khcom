@@ -11,8 +11,6 @@
 #include <string.h>
 
 #ifdef VERSION_EU
-extern u8* gAllmapFloorTilesByLanguage[5];
-extern u8* gAllmapRikuFloorTilesByLanguage[5];
 #endif
 
 #if defined(VERSION_US)

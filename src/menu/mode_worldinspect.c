@@ -32,9 +32,6 @@ static s16 sWorldInspectFloorCount;
 static s16 sWorldInspectWorlds[12];
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099A421C[];
-extern u8 gUnkEu_099A4238[];
-extern u8 gUnkEu_099A426C[];
 #endif
 
 extern u8 gUnk_09A3CE7C[];

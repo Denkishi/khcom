@@ -162,7 +162,6 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
 #ifdef VERSION_JP
 extern u8 gUnk_0814FBB0[];
 extern u8 gUnk_0814FBBC[];
-extern u8 gUnk_0814FBD4[];
 #endif
 void DeckErrorLastAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;

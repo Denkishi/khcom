@@ -34,6 +34,7 @@
 #include "sprites_card.h"
 #include "sprites_card_pictures.h"
 #include "songs.h"
+#include "card_deck_data.h"
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
 
@@ -246,14 +247,10 @@ const UnkStruct_080ABA80 gUnk_090352FC = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
-u8 IsCardDisplayOffScreen(CardDisplayWork* p);
-void ReleaseCardDisplayGfx(CardDisplayWork* p);
-void LoadCardDisplayGfx(CardDisplayWork* p);
 u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a);
 void SelectNextRikuCard(CardBattleWork* w, u8 n);
 void SelectPrevRikuCard(CardBattleWork* w, u8 n);
 u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind);
-Deck* GetLinkPartnerDeck(void);
 void func_08081740(CardBattleWork* w, u16 n);
 void func_08081744(CardBattleWork* w);
 void SwitchRikuCardList(CardBattleWork* w);
@@ -276,20 +273,6 @@ u8 func_08082FF0(CardDisplayWork* p);
 void RefreshRikuCardDisplayGfx(CardDisplayWork* p);
 s32 func_08083ADC(BossCardWork* w);
 void func_08082BF8(CardDisplayWork* p);
-u8 AreCardsSettled(CardDisplayWork** p, u8 n);
-void ShuffleCardSlots(CardSlot* slots, u8 n);
-u16 CountRemainingAttackCards(CardBattleWork* w, u8 b);
-void ClearUsedCardSlots(CardBattleWork* w, u8 b);
-u16 GetRandomHcEffect(void);
-void ClearStockedCardSlots(CardBattleWork* w);
-void IncrementReloadCount(CardBattleWork* w);
-void RestoreCardsForPotion(CardBattleWork* w);
-void RestoreCardsForHiPotion(CardBattleWork* w);
-void RestoreCardsForMegaPotion(CardBattleWork* w);
-void RestoreCardsForEther(CardBattleWork* w);
-void RestoreCardsForMegaEther(CardBattleWork* w);
-void RestoreCardsForElixir(CardBattleWork* w);
-void SyncCardDisplayGfx(CardDisplayWork* p);
 
 void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
     CardDisplayArgs args;

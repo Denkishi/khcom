@@ -2,22 +2,6 @@
 #include "gba/syscall.h"
 #include "movie.h"
 
-extern u8 MovieAudioCodecStart[];
-extern u8 MovieAudioCodecAdpcmSteps[];
-extern u8 MovieAudioCodecAdpcm[];
-extern u8 gUnk_0811D184[];
-extern u8 gUnk_0811D1A4[];
-extern u8 MovieAudioCodecEnd[];
-
-extern u8 MovieVideoCodecStart[];
-extern u8 MovieVideoCodecEnd[];
-extern u8 MovieVideoCodecConstants[];
-extern u8 MovieVideoCodecKeyFrame[];
-extern u8 MovieVideoCodecPostProcess[];
-extern u8 MovieDeltaCodecStart[];
-extern u8 MovieDeltaCodecOffsets[];
-extern u8 MovieDeltaCodecDecode[];
-
 const u8 gMovieVideoCodecConstantsSrc[96] = {
     0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5,
     5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10,

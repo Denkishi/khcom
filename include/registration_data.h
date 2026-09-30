@@ -61,7 +61,6 @@ extern TaskDesc gTaskDescWorldSelBefore;
 #ifndef VERSION_EU
 extern TaskDesc gTaskDescDeckexchange;
 
-
 #endif
 extern Mode gModeRikuBtlTutorial;
 extern Mode gModeRikuDeckTutorial;
@@ -73,11 +72,9 @@ extern Mode gModeSioBtlCardget;
 #ifndef VERSION_EU
 extern Mode gModeSioChgConnect;
 
-
 #endif
 #ifndef VERSION_EU
 extern Mode gModeSioChgCard;
-
 
 #endif
 extern Mode gModeSioError;
@@ -383,13 +380,18 @@ extern TaskDesc gTaskDescBosLstEdg;
 extern TaskDesc gTaskDescBosLstPtl;
 extern TaskDesc gTaskDescSrollTmr;
 
-
 extern Mode gModeWORLDSELECT;
 
 extern Mode gModeSioDbgFlg;
 
 #ifdef VERSION_EU
 extern TaskDesc gTaskDescFrdPoohEu;
+#endif
+
+#ifdef VERSION_EU
+extern u8 gUnkEu_099A421C[];
+extern u8 gUnkEu_099A4238[];
+extern u8 gUnkEu_099A426C[];
 #endif
 
 #endif

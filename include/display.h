@@ -109,4 +109,10 @@ extern u32 gBg3Y;
 extern u16 gBldAlpha;
 extern struct FadeWork* gFadeWork;
 
+void CommitDisplayRegs(void);
+void FlushDma3Queue(void);
+void FlushDma3QueueWithCpu(void);
+void MosaicUpdate(void);
+void SortSprites(void);
+
 #endif

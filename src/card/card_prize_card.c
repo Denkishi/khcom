@@ -32,13 +32,11 @@
 #include "sprites_card_pictures.h"
 #include "songs.h"
 
-void CreateCardNameDisplay(void* a, void* b);
 u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a);
 u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w);
 u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a);
 void AimFieldPrizeCardAtCenter(PrizeCardWork* w);
 void CreateFieldPrizeCardTask(TaskPool* pool, PrizeCardTaskArgs* args);
-u16 PickPrizeMapCardForWorld(u16 a, s32 b);
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 

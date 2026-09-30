@@ -69,4 +69,10 @@ extern u16 gSioConnectId;
 extern u16 gSioRelayKeysA;
 extern u16 gUnk_0203C3B8;
 
+#ifdef VERSION_EU
+void eu_080C24D8(void);
+s32 eu_080C273C(void);
+s32 eu_080C2740(void);
+#endif
+
 #endif

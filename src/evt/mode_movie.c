@@ -23,7 +23,7 @@ volatile s16 gMovieSubIndex;
 volatile u16 gMovieSubCount;
 MovieSub* volatile gMovieSubUpper;
 MovieSub* volatile gMovieSubLower;
-void* gMovieSubs;
+MovieSub* gMovieSubs;
 volatile s16 gMovieSubUpperTimer;
 volatile u16 gMovieSubUpperLength;
 volatile u16 gMovieFlags;
@@ -72,11 +72,11 @@ s32 HandleMovieFrame(s32 arg) {
 
     if (gMovieSubs != NULL) {
         for (i = 0; i < 2; i++) {
-            if (((MovieSub*)gMovieSubs)[gMovieSubIndex].frame == gMovieFrame) {
-                if (((MovieSub*)gMovieSubs)[gMovieSubIndex].line == 0) {
+            if (gMovieSubs[gMovieSubIndex].frame == gMovieFrame) {
+                if (gMovieSubs[gMovieSubIndex].line == 0) {
                     MovieSub* e;
 
-                    gMovieSubUpper = e = &((MovieSub*)gMovieSubs)[gMovieSubIndex];
+                    gMovieSubUpper = e = &gMovieSubs[gMovieSubIndex];
                     gMovieFlags |= 1;
                     gMovieSubUpperTimer = e->duration;
 
@@ -84,7 +84,7 @@ s32 HandleMovieFrame(s32 arg) {
                         gMovieSubIndex++;
                     }
 
-                    gMovieSubUpperLength = CountNonSpaceChars((TextChar*)gMovieSubUpper->text);
+                    gMovieSubUpperLength = CountNonSpaceChars(gMovieSubUpper->text);
 
                     if (gMovieSubUpperLength > MOVIE_SUB_MAX_CHARS) {
                         gMovieSubUpperLength = MOVIE_SUB_MAX_CHARS;
@@ -92,7 +92,7 @@ s32 HandleMovieFrame(s32 arg) {
                 } else {
                     MovieSub* e;
 
-                    gMovieSubLower = e = &((MovieSub*)gMovieSubs)[gMovieSubIndex];
+                    gMovieSubLower = e = &gMovieSubs[gMovieSubIndex];
                     gMovieFlags |= 2;
                     gMovieSubLowerTimer = e->duration;
 
@@ -100,7 +100,7 @@ s32 HandleMovieFrame(s32 arg) {
                         gMovieSubIndex++;
                     }
 
-                    gMovieSubLowerLength = CountNonSpaceChars((TextChar*)e->text);
+                    gMovieSubLowerLength = CountNonSpaceChars(e->text);
 
                     if (gMovieSubLowerLength > MOVIE_SUB_MAX_CHARS) {
                         gMovieSubLowerLength = MOVIE_SUB_MAX_CHARS;

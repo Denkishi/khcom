@@ -33,7 +33,10 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag);
 u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
 #ifndef VERSION_EU
 u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d);
+s32 CopySjisGlyphsToVram(TextChar* str);
+s32 CopySjisGlyphsToVramAt(TextChar* str, u16 tile);
 #endif
+u8 CopyLatinGlyphsToVram(TextChar* str, u16* widths, u16 tile);
 void DrawCardMsgGlyphs(u8 n);
 void FreeCardMsgGlyphSprites(void);
 

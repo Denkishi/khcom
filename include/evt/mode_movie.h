@@ -22,7 +22,7 @@
 typedef struct MovieSub {
     s16 frame;
     s16 x;
-    u16* text;
+    TextChar* text;
     u8 line;
     u8 unk_09;
     u16 duration;
@@ -38,7 +38,7 @@ extern volatile s16 gMovieSubIndex;
 extern volatile u16 gMovieSubCount;
 extern MovieSub* volatile gMovieSubUpper;
 extern MovieSub* volatile gMovieSubLower;
-extern void* gMovieSubs;
+extern MovieSub* gMovieSubs;
 extern volatile s16 gMovieSubUpperTimer;
 extern volatile u16 gMovieSubUpperLength;
 extern volatile u16 gMovieFlags;
@@ -51,9 +51,9 @@ extern u8 gUnk_084E0F34[];
 extern u8 gUnk_084F4660[];
 extern u8 gUnk_0855CCB4[];
 extern u8 gUnk_086FBA14[];
-extern u8 gUnk_0886AB40[];
-extern u8 gUnk_0886AB90[];
-extern u8 gUnk_0886AC70[];
+extern MovieSub gUnk_0886AB40[];
+extern MovieSub gUnk_0886AB90[];
+extern MovieSub gUnk_0886AC70[];
 extern u8 sMovieHeapName[];
 extern u8 gUnk_09614718[];
 
@@ -62,30 +62,27 @@ u32 GetIwramHeapSize(void);
 void MovieVBlankIntr(void);
 s32 HandleMovieFrame(s32 arg);
 
-s32 CopySjisGlyphsToVram(void* str);
-s32 CopySjisGlyphsToVramAt(void* str, u16 tile);
-u8 CopyLatinGlyphsToVram(void* str, u16* widths, u16 tile);
 #ifndef VERSION_JP
 extern u16 gMovieSubUpperWidths[];
 extern u16 gMovieSubLowerWidths[];
 #endif
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_0883E040[];
-extern u8 gUnkEu_0883E070[];
-extern u8 gUnkEu_0883E150[];
-extern u8 gUnkEu_0883E454[];
-extern u8 gUnkEu_0883E494[];
-extern u8 gUnkEu_0883E574[];
-extern u8 gUnkEu_0883E8D4[];
-extern u8 gUnkEu_0883E914[];
-extern u8 gUnkEu_0883E9F4[];
-extern u8 gUnkEu_0883ECE8[];
-extern u8 gUnkEu_0883ED28[];
-extern u8 gUnkEu_0883EE08[];
-extern u8 gUnkEu_0883F0F8[];
-extern u8 gUnkEu_0883F138[];
-extern u8 gUnkEu_0883F218[];
+extern MovieSub gUnkEu_0883E040[];
+extern MovieSub gUnkEu_0883E070[];
+extern MovieSub gUnkEu_0883E150[];
+extern MovieSub gUnkEu_0883E454[];
+extern MovieSub gUnkEu_0883E494[];
+extern MovieSub gUnkEu_0883E574[];
+extern MovieSub gUnkEu_0883E8D4[];
+extern MovieSub gUnkEu_0883E914[];
+extern MovieSub gUnkEu_0883E9F4[];
+extern MovieSub gUnkEu_0883ECE8[];
+extern MovieSub gUnkEu_0883ED28[];
+extern MovieSub gUnkEu_0883EE08[];
+extern MovieSub gUnkEu_0883F0F8[];
+extern MovieSub gUnkEu_0883F138[];
+extern MovieSub gUnkEu_0883F218[];
 #endif
 
 #endif

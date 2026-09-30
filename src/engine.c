@@ -750,19 +750,19 @@ void UpdateSpriteOam(void) {
                     height <<= 1;
                 }
                 if (affine->doubleSize != 0) {
-                    attr0 |= 0x300;
+                    attr0 |= OAM_AFFINE | OAM_DOUBLE_SIZE;
                 } else {
-                    attr0 |= 0x100;
+                    attr0 |= OAM_AFFINE;
                 }
                 attr1 |= affine->index << 9;
             } else {
                 flags = entry->flags;
-                flip = flags & 2;
+                flip = flags & SPRITE_FLAG_VFLIP;
                 if (flip) {
                     attr1 ^= flip << 12;
                     y = -y - height;
                 }
-                flip = flags & 1;
+                flip = flags & SPRITE_FLAG_HFLIP;
                 if (flip) {
                     attr1 ^= flip << 12;
                     x = -x - width;
@@ -789,13 +789,13 @@ void UpdateSpriteOam(void) {
             }
             oam[0] |= (entry->flags & SPRITE_FLAG_MOSAIC) << 9;
             oam[0] |= (entry->flags & SPRITE_FLAG_BLEND) << 8;
-            oam[2] |= entry->flags & SPRITE_PRIORITY(3);
+            oam[2] |= entry->flags & SPRITE_PRIORITY_MASK;
             oam += 4;
             emitted++;
         }
     }
     for (i = emitted; i < 128; i++) {
-        *oam = 0x200;
+        *oam = OAM_DISABLE;
         oam += 4;
     }
     gSpriteWork->entryCount = 0;

@@ -13,6 +13,7 @@ enum SpriteFlag {
 };
 
 #define SPRITE_PRIORITY(n) ((n) << 10)
+#define SPRITE_PRIORITY_MASK SPRITE_PRIORITY(3)
 
 typedef struct PaletteSlot {
     void* src;

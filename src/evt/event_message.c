@@ -7087,7 +7087,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
     if (gEventState->unk_7C == 0) {
         e = &p->keyframes[p->keyframe];
 
-        if (gEventState->frame >= *(u16*)&e->frame && !(e->flags & 0x8000)) {
+        if (gEventState->frame >= (u16)e->frame && !(e->flags & 0x8000)) {
             p->keyframe++;
             e = &p->keyframes[p->keyframe];
             p->unk_15 = 0;

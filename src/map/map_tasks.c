@@ -443,8 +443,6 @@ s32 MapEnm00SpotPlayer(MapEnmWork* p) {
 }
 
 void MapEnm00Appear(MapEnmWork* p) {
-    s32 z;
-
     MapEnmSetAnim(p, 0, 0);
     TaskPoolUpdate(&p->tasks);
 
@@ -454,15 +452,15 @@ void MapEnm00Appear(MapEnmWork* p) {
         } else {
             p->update = MapEnm00Idle;
         }
-        *(u16*)&p->timer = z = 0;
-        ColliderSetDisabled(&p->collider, z);
+        p->timer = 0;
+        ColliderSetDisabled(&p->collider, 0);
     } else {
         MapEnmUpdateAnim(p);
 
-        if (*(s16*)&p->colliderDelay > 0) {
-            (*(s16*)&p->colliderDelay)--;
+        if (p->colliderDelay > 0) {
+            p->colliderDelay--;
 
-            if (*(s16*)&p->colliderDelay <= 0) {
+            if (p->colliderDelay <= 0) {
                 ColliderSetDisabled(&p->collider, 0);
             }
         }
@@ -656,7 +654,7 @@ void Task_MapEnm00_0(MapEnmWork* p, MapEnmArgs* q) {
     } else {
         ColliderSetDisabled(&p->collider, 0);
     }
-    *(u16*)&p->timer = 0;
+    p->timer = 0;
 }
 
 s32 Task_MapEnm00_1(MapEnmWork* p) {
@@ -4306,22 +4304,22 @@ void Task_MapPrzCard_2(MapPrzCardWork* w) {
     s16 y;
     s16 s;
 
-    if (*(s32*)&w->scaleX == 0x01000100 && w->rotation == 0) {
+    if (w->scaleX == 0x100 && w->scaleY == 0x100 && w->rotation == 0) {
         affine = 0;
     } else {
         affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     }
 
     d = &gCardDefs[w->cardId];
-    DrawSprite(w->x, *(u16*)&w->y - 8, d->gfx, w->tiles, w->palette,
+    DrawSprite(w->x, w->y - 8, d->gfx, w->tiles, w->palette,
         affine, w->spriteFlags, w->priority + 1);
     q = &gCardBacks[w->stat.category];
-    DrawSprite(w->x, *(u16*)&w->y - 8, q->gfx, w->tiles2,
+    DrawSprite(w->x, w->y - 8, q->gfx, w->tiles2,
         w->palette2, affine, w->spriteFlags, w->priority);
 
     if (w->stat.category != 3) {
         t = gUnk_09EE981C[w->stat.value];
-        DrawSprite(w->x, *(u16*)&w->y - 8, t, w->tiles3,
+        DrawSprite(w->x, w->y - 8, t, w->tiles3,
             w->palette2, affine, w->spriteFlags, w->priority - 1);
     }
 

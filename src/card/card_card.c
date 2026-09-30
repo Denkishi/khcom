@@ -1669,7 +1669,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
             if (n - (s16)gCardBattleState->activeValue > 9) {
                 gBtlWork->breakDifference = 9;
             } else {
-                gBtlWork->breakDifference = n - *(u8*)&gCardBattleState->activeValue;
+                gBtlWork->breakDifference = n - (u8)gCardBattleState->activeValue;
             }
         }
 

@@ -1559,8 +1559,8 @@ u8 BosLstUpdateAttack(BosLstWork* work) {
     u8 d;
 
     p = &work->body;
-    t = *(s16*)&work->hpRatio;
-    if (*(s16*)&work->hpRatio <= 63) {
+    t = work->hpRatio;
+    if (t <= 63) {
         t = 64;
     }
     switch (work->attackKind) {

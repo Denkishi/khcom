@@ -1038,7 +1038,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     p = &work->actor;
 
-    if (*(s32*)&gBtlWork->phase == 4 && (p->flags & 0x10)) {
+    if (gBtlWork->phase == 4 && (p->flags & 0x10)) {
         switch (work->state) {
         case 23:
         case 24:
@@ -2291,7 +2291,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         SetBtlSoraAnimation(work, 1, 1);
 
-        if (*(s32*)&gBtlWork->phase == 0) {
+        if (gBtlWork->phase == 0) {
             break;
         }
 
@@ -6360,7 +6360,7 @@ void task_btl_sora_3(BtlSoraWork* work) {
     m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
 
     if (!(gBtlWork->flags & 0x4000)) {
-        if (*(s32*)&gBtlWork->phase == 3) {
+        if (gBtlWork->phase == 3) {
             gGameState.hp = gGameState.progression.maxHp;
         } else {
             gGameState.hp = p->hp;
@@ -7114,7 +7114,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     p = &work->actor;
 
-    if (*(s32*)&gBtlWork->phase == 4 && (p->flags & 0x10)) {
+    if (gBtlWork->phase == 4 && (p->flags & 0x10)) {
         switch (work->state) {
         case 24:
         case 25:
@@ -9125,7 +9125,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         SetBtlRikuAnimation(work, 0, 1);
 
-        if (*(s32*)&gBtlWork->phase == 0) {
+        if (gBtlWork->phase == 0) {
             break;
         }
 
@@ -9869,11 +9869,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             MakeOpponentsHittable();
-#ifdef VERSION_EU
-            SetBtlRikuAnimation(work, *(u16*)&a->animId, 0);
-#else
-            SetBtlRikuAnimation(work, a->animId, 0);
-#endif
+            SetBtlRikuAnimation(work, (u16)a->animId, 0);
 
             if (work->comboCount == 2) {
                 m4aSongNumStart(GetRandom() % 2 + 257);
@@ -10897,7 +10893,7 @@ void task_btl_riku_3(BtlRikuWork* work) {
 
     p = &work->actor;
 
-    if (*(s32*)&gBtlWork->phase == 3) {
+    if (gBtlWork->phase == 3) {
         gGameState.hp = gGameState.progression.maxHp;
     } else {
         gGameState.hp = p->hp;

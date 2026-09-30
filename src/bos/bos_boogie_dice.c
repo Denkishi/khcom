@@ -2228,7 +2228,7 @@ u8 BosUrsulaIsGimmickStarting(void) {
 }
 
 u8 func_080DC5B0(void) {
-    if (BosUrsulaIsGimmickActive() != 0 && (*(u32*)&gUrsulaWork->sinkSteps != 0 || gUrsulaWork->unk_15C != 0)) {
+    if (BosUrsulaIsGimmickActive() != 0 && (gUrsulaWork->sinkSteps != 0 || gUrsulaWork->riseSteps != 0 || gUrsulaWork->unk_15C != 0)) {
         return 1;
     }
 

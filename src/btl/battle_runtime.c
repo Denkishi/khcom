@@ -804,7 +804,7 @@ void _08019CB4(void) {
                     gBtlWork->flags |= 0x2000ULL;
                     gBtlWork->phaseStep = -1;
                 } else {
-                    if (IsTaskActiveNamed(gBtlWork->task, *(const char**)&gTaskDescPremireChance)) {
+                    if (IsTaskActiveNamed(gBtlWork->task, gTaskDescPremireChance.name)) {
                         break;
                     }
                     gBtlWork->flags &= ~0x8000000000000ULL;

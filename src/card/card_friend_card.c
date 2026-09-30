@@ -407,7 +407,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
     n = w->timer;
 
     if (n > 359) {
-        *(u8*)&gCardBattleState->gimmickCardCount -= 1;
+        gCardBattleState->gimmickCardCount -= 1;
         return 0;
     }
 
@@ -507,7 +507,6 @@ s32 WaitHeartlessCardName(PickupCardWork* w, void* a) {
 s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
     s32 dx = 0;
     s32 dy = 0;
-    s32 v;
     u16 t;
 
     if (w->speed < 0) {
@@ -523,8 +522,8 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
             w->flipAngleX = 0;
             w->posX = 0x7800;
             w->posY = 0x5000;
-            *(u16*)&w->scaleX = v = 0x100;
-            *(u16*)&w->scaleY = v;
+            w->scaleX = 0x100;
+            w->scaleY = 0x100;
 #ifdef VERSION_EU
             CreateCardNameDisplay(&w->tasks, eu_0805E924(gCardDefs[w->cardId].name));
 #else

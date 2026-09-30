@@ -2232,7 +2232,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
                 w->stock[i]->args.slot->removed = 1;
             }
         }
-        *(u8*)&gBtlWork->soraOwnsPlay = 0;
+        gBtlWork->soraOwnsPlay = 0;
         gCardBattleState->rikuStockActive = 1;
         m4aSongNumStart(SONG_BTL_GARD);
 #ifdef VERSION_EU
@@ -2258,7 +2258,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
         gBtlWork->flags &= ~0x20ULL;
         gBtlWork->flags &= ~0x80ULL;
         gCardBattleState->rikuStockActive = 0;
-        *(u8*)&gBtlWork->soraOwnsPlay = 0;
+        gBtlWork->soraOwnsPlay = 0;
     }
 }
 

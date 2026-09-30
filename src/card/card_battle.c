@@ -1246,7 +1246,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
         return 0;
     }
 
-    if (*(s16*)&gSoraSelectedCard->timer == 0) {
+    if ((s16)gSoraSelectedCard->timer == 0) {
         if (CountAvailableCardSlots(w, w->listIndex) > w->unk_C4[2]) {
             gSoraSelectedCard->flags &= ~4;
             e = ListPoolFirst(&w->cardDisplays[w->listIndex]);

@@ -596,7 +596,7 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
     if (w->collider.colliding != 0) {
         w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        ObtainCard(*(u16*)&w->cardId);
+        ObtainCard(w->cardId);
         if (gGameState.flags & 8) {
             InitRikuDeckForWorld(gGameState.world);
         }

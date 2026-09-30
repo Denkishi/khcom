@@ -215,15 +215,15 @@ void EventUpdate(void) {
     }
     if (p->startsBattle != 0) {
         if (p->battleId == 122) {
-            gGameState.battleStage = 7;
+            gGameState.battleStage = BATTLE_STAGE_HALLOWEEN_TOWN;
         } else if (p->battleId == 120) {
-            gGameState.battleStage = 1;
+            gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
         } else if (p->battleId == 121) {
-            gGameState.battleStage = 5;
+            gGameState.battleStage = BATTLE_STAGE_MONSTRO;
         } else if (p->battleId == 123) {
-            gGameState.battleStage = 3;
+            gGameState.battleStage = BATTLE_STAGE_AGRABAH;
         } else if (p->battleId == 124) {
-            gGameState.battleStage = 3;
+            gGameState.battleStage = BATTLE_STAGE_AGRABAH;
         }
         ModeRequest(&gModeBattle, p->battleId);
         return;
@@ -809,7 +809,7 @@ void func_0806297C(void) {
         break;
     case 83:
     case 84:
-        gGameState.battleStage = 5;
+        gGameState.battleStage = BATTLE_STAGE_MONSTRO;
         ModeRequest(&gModeBattle, m->battleId);
         break;
     }

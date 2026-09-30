@@ -300,45 +300,45 @@ void mode_battle_0(u32 mode) {
         gBtlWork->mapBg = 3;
 
         switch (gGameState.battleStage) {
-        case 1:
+        case BATTLE_STAGE_WONDERLAND:
         case 2:
             m4aSongNumStart(SONG_BGM_ALICE_BTL);
             break;
-        case 3:
+        case BATTLE_STAGE_AGRABAH:
             m4aSongNumStart(SONG_BGM_ALADDIN_BATTLE);
             break;
-        case 4:
+        case BATTLE_STAGE_ATLANTICA:
             m4aSongNumStart(SONG_BGM_MARMAID_BATTLE);
             break;
-        case 5:
+        case BATTLE_STAGE_MONSTRO:
             if (mode == 0x79) {
                 m4aSongNumStart(SONG_BGM_EVENT2);
             } else {
                 m4aSongNumStart(SONG_BGM_PINOCCHIO_BTL);
             }
             break;
-        case 6:
+        case BATTLE_STAGE_OLYMPUS_COLISEUM:
             m4aSongNumStart(SONG_BGM_HERCULES_BATTLE);
             break;
-        case 7:
+        case BATTLE_STAGE_HALLOWEEN_TOWN:
             m4aSongNumStart(SONG_BGM_HALLOWEEN_BTL);
             break;
-        case 8:
+        case BATTLE_STAGE_NEVER_LAND:
             m4aSongNumStart(SONG_BGM_PETERPAN_BTL);
             break;
-        case 10:
+        case BATTLE_STAGE_HOLLOW_BASTION:
             m4aSongNumStart(SONG_BGM_HOLLOW_BATTLE);
             break;
-        case 11:
+        case BATTLE_STAGE_TRAVERSE_TOWN:
             m4aSongNumStart(SONG_BGM_TOWN_BTL);
             break;
-        case 9:
+        case BATTLE_STAGE_DESTINY_ISLANDS:
             m4aSongNumStart(SONG_BGM_DESTINY_BATTLE);
             break;
-        case 12:
+        case BATTLE_STAGE_CASTLE_OBLIVION:
             m4aSongNumStart(SONG_BGM_F13F_FORGET_BATTLE);
             break;
-        case 13:
+        case BATTLE_STAGE_TWILIGHT_TOWN:
             m4aSongNumStart(SONG_BGM_TWILIGHT_BATTLE);
             break;
         }
@@ -432,7 +432,7 @@ void mode_battle_0(u32 mode) {
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, (void*)1);
         }
 
-        gGameState.battleStage = 11;
+        gGameState.battleStage = BATTLE_STAGE_TRAVERSE_TOWN;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
     } else if (gBtlWork->flags & 0x800) {
         gBtlWork->flags |= 0x400000000;

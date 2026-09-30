@@ -2462,7 +2462,7 @@ void InitGameState(void) {
         gGameState.flags |= GAME_FLAG_SORA_CLEAR;
     }
     gGameState.world = WORLD_WONDERLAND;
-    gGameState.battleStage = 1;
+    gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
     InitPlayerProgression();
     gGameState.availableWorlds = 0xFFFF;
     ResetMapFloors();

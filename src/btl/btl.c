@@ -845,17 +845,17 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
         }
     } else {
         switch (gGameState.battleStage) {
-        case 1:
+        case BATTLE_STAGE_WONDERLAND:
         case 2:
             work->groundSongs = sBtlSoraGroundSongs[0];
             break;
-        case 3:
-        case 6:
-        case 7:
+        case BATTLE_STAGE_AGRABAH:
+        case BATTLE_STAGE_OLYMPUS_COLISEUM:
+        case BATTLE_STAGE_HALLOWEEN_TOWN:
             work->groundSongs = sBtlSoraGroundSongs[1];
             break;
-        case 4:
-        case 5:
+        case BATTLE_STAGE_ATLANTICA:
+        case BATTLE_STAGE_MONSTRO:
             work->groundSongs = sBtlSoraGroundSongs[2];
             break;
         default:
@@ -6864,17 +6864,17 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         }
     } else {
         switch (gGameState.battleStage) {
-        case 1:
+        case BATTLE_STAGE_WONDERLAND:
         case 2:
             work->groundSongs = sBtlRikuGroundSongs[0];
             break;
-        case 3:
-        case 6:
-        case 7:
+        case BATTLE_STAGE_AGRABAH:
+        case BATTLE_STAGE_OLYMPUS_COLISEUM:
+        case BATTLE_STAGE_HALLOWEEN_TOWN:
             work->groundSongs = sBtlRikuGroundSongs[1];
             break;
-        case 4:
-        case 5:
+        case BATTLE_STAGE_ATLANTICA:
+        case BATTLE_STAGE_MONSTRO:
             work->groundSongs = sBtlRikuGroundSongs[2];
             break;
         default:

@@ -237,11 +237,11 @@ void UpdateGameWorld(void) {
     case 0xFD:
     case 0xFE:
         gGameState.world = 0;
-        gGameState.battleStage = 12;
+        gGameState.battleStage = BATTLE_STAGE_CASTLE_OBLIVION;
         break;
     case 0xFC:
         gGameState.world = WORLD_TRAVERSE_TOWN;
-        gGameState.battleStage = 11;
+        gGameState.battleStage = BATTLE_STAGE_TRAVERSE_TOWN;
         break;
     default:
         gGameState.world = gMapFloorState.world;
@@ -797,7 +797,7 @@ void EnterExitHall(void) {
 
     if (v != 0xFF) {
         gGameState.world = 0;
-        gGameState.battleStage = 12;
+        gGameState.battleStage = BATTLE_STAGE_CASTLE_OBLIVION;
         gGameState.roomEffect = 0;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
@@ -1131,19 +1131,19 @@ s32 func_080DFE7C(s32 x, s32 y, s32 z) {
 }
 
 u8 gWorldBattleStages[14] = {
-    12,
-    3,
-    4,
-    6,
-    1,
-    5,
-    7,
-    8,
-    10,
-    9,
-    11,
-    13,
-    12,
+    BATTLE_STAGE_CASTLE_OBLIVION,
+    BATTLE_STAGE_AGRABAH,
+    BATTLE_STAGE_ATLANTICA,
+    BATTLE_STAGE_OLYMPUS_COLISEUM,
+    BATTLE_STAGE_WONDERLAND,
+    BATTLE_STAGE_MONSTRO,
+    BATTLE_STAGE_HALLOWEEN_TOWN,
+    BATTLE_STAGE_NEVER_LAND,
+    BATTLE_STAGE_HOLLOW_BASTION,
+    BATTLE_STAGE_DESTINY_ISLANDS,
+    BATTLE_STAGE_TRAVERSE_TOWN,
+    BATTLE_STAGE_TWILIGHT_TOWN,
+    BATTLE_STAGE_CASTLE_OBLIVION,
 };
 
 u8 gRikuRoomTypes[14] = {

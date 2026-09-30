@@ -139,7 +139,7 @@ void task_btl_map_0(BtlMapWork* work) {
         gBtlWork->fadeAmount = 10;
     } else {
         switch (gGameState.battleStage) {
-        case 1:
+        case BATTLE_STAGE_WONDERLAND:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C84824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68904, 0xC0);
 #ifdef VERSION_EU
@@ -159,7 +159,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 3:
+        case BATTLE_STAGE_AGRABAH:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C90824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68B84, 0x100);
 #ifdef VERSION_EU
@@ -169,7 +169,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 4:
+        case BATTLE_STAGE_ATLANTICA:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C88824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F689C4, 0xC0);
 #ifdef VERSION_EU
@@ -179,7 +179,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 5:
+        case BATTLE_STAGE_MONSTRO:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C8C824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68A84, 0x100);
 #ifdef VERSION_EU
@@ -189,7 +189,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 7:
+        case BATTLE_STAGE_HALLOWEEN_TOWN:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C94824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68C84, 0xE0);
 #ifdef VERSION_EU
@@ -199,7 +199,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 5;
             break;
-        case 8:
+        case BATTLE_STAGE_NEVER_LAND:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C98824, 0x3EC0);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68D64, 0x140);
 #ifdef VERSION_EU
@@ -209,7 +209,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 5;
             break;
-        case 9:
+        case BATTLE_STAGE_DESTINY_ISLANDS:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C9C6E4, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68EA4, 0x120);
 #ifdef VERSION_EU
@@ -219,7 +219,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 10:
+        case BATTLE_STAGE_HOLLOW_BASTION:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08CA06E4, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68FC4, 0xE0);
 #ifdef VERSION_EU
@@ -229,7 +229,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 11:
+        case BATTLE_STAGE_TRAVERSE_TOWN:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08C78824, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F68624, 0xC0);
 #ifdef VERSION_EU
@@ -239,7 +239,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 5;
             break;
-        case 12:
+        case BATTLE_STAGE_CASTLE_OBLIVION:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08CA86E4, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F691E4, 0xE0);
 #ifdef VERSION_EU
@@ -249,7 +249,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 20;
             break;
-        case 13:
+        case BATTLE_STAGE_TWILIGHT_TOWN:
             LoadBgTiles(gBtlWork->mapBg, gUnk_08CA46E4, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F690A4, 0x140);
 #ifdef VERSION_EU

@@ -55,7 +55,7 @@ void MarkEventRoomDone(MapEventDoor* p) {
         e->cardValue = 0;
         e->nameId = 26;
         e->roomType = 0;
-        e->flags |= 8;
+        e->flags |= FLOOR_ROOM_FLAG_EVENT_DONE;
     }
 }
 
@@ -183,34 +183,34 @@ u16 GetMapDoorFlags(u8 a, u8 b) {
     }
 
     if (c >= 0xFD && c <= 0xFE) {
-        return 3;
+        return DOOR_FLAG_PRESENT | DOOR_FLAG_OPEN;
     }
 
     e = GetMapFloorRoom(c);
-    r = 1;
+    r = DOOR_FLAG_PRESENT;
 
-    if ((e->flags & 1) != 0) {
-        r = 3;
+    if ((e->flags & FLOOR_ROOM_FLAG_CREATED) != 0) {
+        r = DOOR_FLAG_PRESENT | DOOR_FLAG_OPEN;
     }
 
-    if ((e->flags & 8) != 0) {
-        r |= 8;
+    if ((e->flags & FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
+        r |= DOOR_FLAG_SEALED;
     }
 
-    if ((e->flags & 4) != 0) {
-        r |= 8;
+    if ((e->flags & FLOOR_ROOM_FLAG_LOCKED) != 0) {
+        r |= DOOR_FLAG_SEALED;
     }
 
     d = GetEventRoomKind(c);
 
     if (d == 1 || d == 4 || d == 2) {
-        r |= 0x10;
+        r |= DOOR_FLAG_EVENT;
         p = GetMapEventDoor(0);
 
         while (p->kind != 5) {
             if (p->room == c) {
                 if (p->side != b) {
-                    r |= 8;
+                    r |= DOOR_FLAG_SEALED;
                 }
 
                 break;
@@ -220,11 +220,11 @@ u16 GetMapDoorFlags(u8 a, u8 b) {
         }
     }
 
-    if ((gMapFloorState.flags & 8) != 0) {
+    if ((gMapFloorState.flags & FLOOR_FLAG_EVENT_ROOM_OPEN) != 0) {
         p = GetMapEventDoor(*GetMapRoomEvent(gMapFloorState.eventStep));
 
         if (p->room == c && p->side == b) {
-            r |= 2;
+            r |= DOOR_FLAG_OPEN;
         }
     }
 
@@ -457,7 +457,7 @@ void AdvanceFloorStory(void) {
     u16 v;
 
     if (gMapFloorState.room == 0xFE) {
-        t = gMapFloorState.flags | 2;
+        t = gMapFloorState.flags | FLOOR_FLAG_ENTRY_EVENT_DONE;
         gMapFloorState.flags = t;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
@@ -478,7 +478,7 @@ void AdvanceFloorStory(void) {
 
         EnterFloorWorld();
     } else if (gMapFloorState.room == 0xFD) {
-        u = gMapFloorState.flags | 1;
+        u = gMapFloorState.flags | FLOOR_FLAG_CLEARED;
         gMapFloorState.flags = u;
         SetFloorJiminyFlags();
         gMapFloorState.progress++;
@@ -486,12 +486,12 @@ void AdvanceFloorStory(void) {
         GoToNextFloor();
         SetHallDefaultSpawn();
     } else if (e[0] == 0xFF) {
-        v = gMapFloorState.flags | 4;
+        v = gMapFloorState.flags | FLOOR_FLAG_EXIT_EVENT_DONE;
         gMapFloorState.flags = v;
         gMapFloorState.progress++;
         SetCurrentMapRoom(0xFD, 5);
     } else {
-        t = gMapFloorState.flags & ~8;
+        t = gMapFloorState.flags & ~FLOOR_FLAG_EVENT_ROOM_OPEN;
         gMapFloorState.flags = t;
         p = GetMapEventDoor(e[0]);
         MarkEventRoomDone(p);
@@ -501,9 +501,9 @@ void AdvanceFloorStory(void) {
 
         if (e[4] == 0xFF) {
             q = GetMapFloorRoom(GetMapFloorDef(gGameState.floor)->exitRoom);
-            t = q->flags & ~4;
+            t = q->flags & ~FLOOR_ROOM_FLAG_LOCKED;
             q->flags = t;
-            gMapFloorState.flags |= 0x20;
+            gMapFloorState.flags |= FLOOR_FLAG_EXIT_UNLOCKED;
             SetWorldJiminyFlags();
         }
     }
@@ -582,7 +582,7 @@ void SetCardlessRoomType(u8 a) {
                 return;
             }
 
-            gMapFloorState.flags |= 8;
+            gMapFloorState.flags |= FLOOR_FLAG_EVENT_ROOM_OPEN;
             e->cardValue = 0;
             e->nameId = 26;
             e->roomType = 0;
@@ -616,13 +616,13 @@ void CreateMapRoom(u8 a, UnkStruct_080DF640* p) {
     const u8* row;
     const u8* anim;
 
-    if (p == NULL && (e->flags & 1) != 0) {
+    if (p == NULL && (e->flags & FLOOR_ROOM_FLAG_CREATED) != 0) {
         return;
     }
 
-    e->flags &= ~0x10;
-    e->flags &= ~0x20;
-    e->flags |= 1;
+    e->flags &= ~FLOOR_ROOM_FLAG_CHEST_OPENED;
+    e->flags &= ~FLOOR_ROOM_FLAG_SHOP_VISITED;
+    e->flags |= FLOOR_ROOM_FLAG_CREATED;
     e->seed = gFrameCounter * gFrameCounter;
 
     if (p != NULL) {
@@ -649,7 +649,7 @@ void LoadMapRoomState(MapRoomState* p, u8 a) {
     const u8* row;
     u16 t;
 
-    t = e->flags | 2;
+    t = e->flags | FLOOR_ROOM_FLAG_VISITED;
     e->flags = t;
     SeedRandom(e->seed);
     gMapRoomState->nameId = e->nameId;
@@ -785,7 +785,7 @@ void EnterExitHall(void) {
     u8 v;
     u16 f;
 
-    if ((gMapFloorState.flags & 4) != 0) {
+    if ((gMapFloorState.flags & FLOOR_FLAG_EXIT_EVENT_DONE) != 0) {
         v = 0xFF;
     } else {
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
@@ -806,8 +806,8 @@ void EnterExitHall(void) {
 
         RequestEventMode(v);
     } else {
-        if ((gMapFloorState.flags & 4) == 0) {
-            f = gMapFloorState.flags | 4;
+        if ((gMapFloorState.flags & FLOOR_FLAG_EXIT_EVENT_DONE) == 0) {
+            f = gMapFloorState.flags | FLOOR_FLAG_EXIT_EVENT_DONE;
             gMapFloorState.flags = f;
             gMapFloorState.progress++;
         }
@@ -841,7 +841,7 @@ void InitMapFloorState(u8 a, u8 b) {
     }
 
     gGameState.mapMenuCursor = 0xFF;
-    t = gMapFloorState.flags | 0x100;
+    t = gMapFloorState.flags | FLOOR_FLAG_SHOW_FLOOR_NAME;
     gMapFloorState.flags = t;
 }
 
@@ -876,7 +876,7 @@ void WarpToFloor(u8 a) {
     GoToFloor(a);
     gMapFloorState.room = 0xFE;
     gMapFloorState.entrySide = 5;
-    t = gMapFloorState.flags | 0x80;
+    t = gMapFloorState.flags | FLOOR_FLAG_WARP_IN;
     gMapFloorState.flags = t;
     RequestMapMode();
 }
@@ -903,9 +903,9 @@ void EnterFloorWorld(void) {
 
     MarkPastEventRoomsDone();
 
-    if ((gMapFloorState.flags & 0x20) == 0) {
+    if ((gMapFloorState.flags & FLOOR_FLAG_EXIT_UNLOCKED) == 0) {
         p = GetMapFloorRoom(e->exitRoom);
-        t = p->flags | 4;
+        t = p->flags | FLOOR_ROOM_FLAG_LOCKED;
         p->flags = t;
     }
 
@@ -924,7 +924,7 @@ void InitStartFloor(u8 a, u8 b) {
 
     if (a == 0) {
         gMapFloorState.progress = 0;
-        gMapFloorState.flags &= 0xFEFF;
+        gMapFloorState.flags &= ~FLOOR_FLAG_SHOW_FLOOR_NAME;
     }
 }
 
@@ -977,7 +977,7 @@ u8 IsFldPosBlocked(FldPos* p) {
 }
 
 u8 GetMapWalkOutMode(void) {
-    if (gMapRoomState->flags & 0x100) {
+    if (gMapRoomState->flags & ROOM_FLAG_WALK_OUT) {
         if (gMapFloorState.world != 0) {
             return 2;
         }
@@ -994,7 +994,7 @@ u8 GetMapWalkOutMode(void) {
 }
 
 void EndMapWalkOut(void) {
-    gMapRoomState->flags &= ~0x100;
+    gMapRoomState->flags &= ~ROOM_FLAG_WALK_OUT;
 }
 
 u8 FldPosRevertIfBlocked(FldPos* p, s32 x, s32 y) {
@@ -1046,7 +1046,7 @@ u8 MapFindOpenDoor(FldPos* p) {
     for (i = 0; i <= 3; i++) {
         e = GetMapDoor(i);
 
-        if ((e->flags & 1) != 0 && (e->flags & 0xA) == 2 && e->cellX == a && e->cellY == b) {
+        if ((e->flags & DOOR_FLAG_PRESENT) != 0 && (e->flags & (DOOR_FLAG_OPEN | DOOR_FLAG_SEALED)) == DOOR_FLAG_OPEN && e->cellX == a && e->cellY == b) {
             gMapRoomState->doorRoom = e->room;
             gMapRoomState->doorSide = e->side;
             r = 1;
@@ -1076,7 +1076,7 @@ u8 IsAtTargetDoor(FldPos* p) {
     for (i = 0; i <= 3; i++) {
         e = GetMapDoor(i);
 
-        if ((e->flags & 1) != 0 && (e->flags & 0xA) == 2 && e->cellX == a && e->cellY == b
+        if ((e->flags & DOOR_FLAG_PRESENT) != 0 && (e->flags & (DOOR_FLAG_OPEN | DOOR_FLAG_SEALED)) == DOOR_FLAG_OPEN && e->cellX == a && e->cellY == b
                 && e->room == gMapRoomState->doorRoom && e->side == gMapRoomState->doorSide) {
             return 1;
         }
@@ -1088,7 +1088,7 @@ u8 IsAtTargetDoor(FldPos* p) {
 u8 _080DFE1C(FldPos* p) {
     MapCell* q = FieldCellAt(p->x, p->y + p->ground);
 
-    if (q->flags & 0x20) {
+    if (q->flags & MAP_CELL_FLAG_STAIRS) {
         switch (q->type) {
         case 3:
         case 4:

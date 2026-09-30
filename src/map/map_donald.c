@@ -4,7 +4,7 @@
 
 void MapDonaldCheckTalk(MapDonaldWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
             CreateCardMessageTask(&w->tasks, 0, 24);
@@ -18,7 +18,7 @@ void MapDonaldCheckTalk(MapDonaldWork* w) {
 
 void MapDonaldWaitMessage(MapDonaldWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapDonaldCheckTalk;
     }
 }

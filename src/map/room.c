@@ -126,7 +126,7 @@ void task_room_name_0(RoomNameWork* work, s32 arg) {
 }
 
 u8 task_room_name_1(RoomNameWork* work) {
-    if (gFieldState->flags & 0x42000) {
+    if (gFieldState->flags & (FIELD_FLAG_MENU_OPEN | FIELD_FLAG_ROOM_CREATE)) {
         return 0;
     }
 

@@ -156,7 +156,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
         g = 0x800;
         h = -4100 - work->y * 4;
     } else {
-        if ((gFieldState->flags & 0x40000) != 0) {
+        if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
             return;
         }
         x = work->x;
@@ -214,12 +214,12 @@ void* CreateAllmapRoomTask(TaskPool* pool) {
 
 u8 func_080D3A70(u8 a, u8 b) {
     if (GetEventRoomKind(a) != 0) {
-        if (TestAllmapRoomFlag(a, 8) != 0) {
+        if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 0;
         }
     }
 
-    if (TestAllmapRoomFlag(a, 2) != 0) {
+    if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) != 0) {
         return func_080D3564(a, b);
     }
     return 0;
@@ -227,14 +227,14 @@ u8 func_080D3A70(u8 a, u8 b) {
 
 u8 func_080D3AB8(u8 a, u8 b) {
     if (GetEventRoomKind(a) == 0) {
-        if (TestAllmapRoomFlag(a, 2) == 0) {
+        if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 0;
         }
     } else {
-        if (TestAllmapRoomFlag(a, 8) != 0) {
+        if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 0;
         }
-        if (TestAllmapRoomFlag(a, 2) == 0) {
+        if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 0;
         }
     }
@@ -872,7 +872,7 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
     room = GetAllmapRoomAt(p);
     tile = c * 16;
 
-    if (TestAllmapRoomFlag(room, 8) != 0 || TestAllmapRoomFlag(room, 2) != 0 || AllmapHasDoorInfo(p) != 0) {
+    if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || AllmapHasDoorInfo(p) != 0) {
         if (d != 0) {
             tile += 0x2000;
         } else if (c == 1) {
@@ -1143,7 +1143,7 @@ void AllmapHandleInput(void) {
         TaskKill(gUnk_0203C4B4, ((AllmapState*)gUnk_0203C4B4)->roomnameTask);
     }
     d = GetMapFloorRoom(r);
-    if (d->nameId != 26 && (TestAllmapRoomFlag(r, 2) != 0 || TestAllmapRoomFlag(r, 8) != 0)) {
+    if (d->nameId != 26 && (TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
         ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoomname, &d->nameId);
     } else {
         ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;

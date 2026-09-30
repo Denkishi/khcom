@@ -69,6 +69,13 @@ typedef struct MapProgress {
     GameFloor floors[13];
 } MapProgress;
 
+enum MapEnmDefFlag {
+    MAP_ENM_DEF_FLAG_NO_SHADOW = 0x1,
+    MAP_ENM_DEF_FLAG_AIRBORNE = 0x2,
+    MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE = 0x4,
+    MAP_ENM_DEF_FLAG_GUARD = 0x8
+};
+
 typedef struct MapEnmDef {
     const AnimDef* animDef;
     void* palette;
@@ -112,6 +119,13 @@ typedef struct MapAnmSlot {
     void* script;
     s16* scriptPos;
 } MapAnmSlot;
+
+enum GmkFlag {
+    GMK_FLAG_DESTROYED = 0x1,
+    GMK_FLAG_USED = 0x2,
+    GMK_FLAG_TOGGLED = 0x4,
+    GMK_FLAG_HAS_ENEMY = 0x8
+};
 
 typedef struct MapGmkPlacement {
     u16 flags;
@@ -168,6 +182,18 @@ typedef struct MapEnmArgs {
     u8 unk_19[0x03];
     s32 speed;
 } MapEnmArgs;
+
+enum MapEnmFlag {
+    MAP_ENM_FLAG_HFLIP = 0x1,
+    MAP_ENM_FLAG_PERSISTENT = 0x2,
+    MAP_ENM_FLAG_REMOVED = 0x4,
+    MAP_ENM_FLAG_AGGRESSIVE = 0x8,
+    MAP_ENM_FLAG_SLOW = 0x10,
+    MAP_ENM_FLAG_ASLEEP = 0x20,
+    MAP_ENM_FLAG_FIRST_STRIKE = 0x40,
+    MAP_ENM_FLAG_WHITE_MUSHROOM = 0x100,
+    MAP_ENM_FLAG_BLACK_FUNGUS = 0x200
+};
 
 typedef struct MapEnmWork {
     const MapEnmDef* def;

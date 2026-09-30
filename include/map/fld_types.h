@@ -52,6 +52,14 @@ typedef struct FldObj {
 typedef char FldActor_size[(sizeof(FldActor) == 0x50) ? 1 : -1];
 typedef char FldObj_size[(sizeof(FldObj) == 0x40) ? 1 : -1];
 
+enum FldFlag {
+    FLD_FLAG_HFLIP = 0x2,
+    FLD_FLAG_NO_AIR_TURN = 0x4,
+    FLD_FLAG_RESTORE_STATE = 0x8,
+    FLD_FLAG_WALK_OUT = 0x10,
+    FLD_FLAG_TO_WORLD_SELECT = 0x20
+};
+
 typedef struct FldWork {
     void* tiles;
     FldRes* palette;

@@ -20,7 +20,7 @@ extern MapNameText* gBasementFloorNames[12];
 
 void MapGoofyCheckTalk(MapGoofyWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
             CreateCardMessageTask(&w->tasks, 0, 49);
@@ -34,7 +34,7 @@ void MapGoofyCheckTalk(MapGoofyWork* w) {
 
 void MapGoofyWaitMessage(MapGoofyWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapGoofyCheckTalk;
     }
 }
@@ -135,7 +135,7 @@ void Task_MapGoofy_3(MapGoofyWork* w) {
 
 void MapNamineCheckTalk(MapNamineWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gMapFloorState.progress == 27) {
             CreateCardMessageTask(&w->tasks, 0, 0x33);
@@ -148,7 +148,7 @@ void MapNamineCheckTalk(MapNamineWork* w) {
 
 void MapNamineWaitMessage(MapNamineWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapNamineCheckTalk;
     }
 }
@@ -260,7 +260,7 @@ void Task_MapNamine_3(MapNamineWork* w) {
 
 void MapNiserikuCheckTalk(MapNiserikuWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         CreateCardMessageTask(&w->tasks, 0, 0x34);
         w->update = MapNiserikuWaitMessage;
     }
@@ -268,7 +268,7 @@ void MapNiserikuCheckTalk(MapNiserikuWork* w) {
 
 void MapNiserikuWaitMessage(MapNiserikuWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapNiserikuCheckTalk;
     }
 }
@@ -292,7 +292,7 @@ void MapNiserikuWaitApproach(MapNiserikuWork* w) {
     if (dx <= 0x8000 && dy <= 0x8000) {
         if (Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < 0x3000) {
             FadeStartOut(0, 16);
-            gFieldState->flags |= 0x1000;
+            gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
             w->update = MapNiserikuStartEvent;
         }
     }
@@ -444,7 +444,7 @@ void Task_MapNiseriku_3(MapNiserikuWork* w) {
 
 void MapMickeyCheckTalk(MapMickeyWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         switch (gMapFloorState.progress) {
         case 20:
@@ -465,7 +465,7 @@ void MapMickeyCheckTalk(MapMickeyWork* w) {
 
 void MapMickeyWaitMessage(MapMickeyWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapMickeyCheckTalk;
     }
 }
@@ -550,10 +550,10 @@ void Task_MapMickey_3(MapMickeyWork* w) {
 }
 
 void MapTutorialStartBattle(void) {
-    gFieldState->flags |= 0x80;
+    gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     gMapRoomState->battleId = 10;
-    gMapRoomState->flags &= ~0x4000;
-    gMapRoomState->flags |= 2;
+    gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
+    gMapRoomState->flags |= ROOM_FLAG_START_BATTLE;
 }
 
 void MapTutorialWaitStart(MapTutorialWork* w) {
@@ -562,9 +562,9 @@ void MapTutorialWaitStart(MapTutorialWork* w) {
     if (gFieldState->lockonTarget == NULL) {
         flags = gFieldState->flags;
 
-        if (!(flags & 0x2000) && !(gMapRoomState->flags & 0x2000) && (gGameState.progression.unk_82 & 0x10)) {
-            gMapRoomState->flags |= 0x4000;
-            gFieldState->flags = flags | 0x1000;
+        if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.unk_82 & 0x10)) {
+            gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
+            gFieldState->flags = flags | FIELD_FLAG_FREEZE_PLAYER;
             CreateCardMessageTask(&w->tasks, 0, 0x6A);
             w->update = MapTutorialDropBarrel;
         }
@@ -604,7 +604,7 @@ void MapTutorialBarrelFall(MapTutorialWork* w) {
     w->obj.fieldPosition.z += w->obj.speed;
 
     if (w->obj.fieldPosition.z > w->obj.fieldPosition.ground) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         m4aSongNumStart(SONG_SND_215);
         w->obj.fieldPosition.z = w->obj.fieldPosition.ground;
         w->obj.speed = 0;
@@ -618,7 +618,7 @@ void MapTutorialWaitBarrelHit(MapTutorialWork* w) {
     if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 8)) {
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
-        gMapRoomState->flags &= ~0x20;
+        gMapRoomState->flags &= ~ROOM_FLAG_NO_RANDOM_PRIZE;
         TryCreateRandomPrzCard(0, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
         AnimStart(&w->anim, 1, 0);
         w->update = MapTutorialBarrelBreak;
@@ -635,9 +635,9 @@ void MapTutorialBarrelBreak(MapTutorialWork* w) {
 }
 
 void MapTutorialWaitPrizeCard(MapTutorialWork* w) {
-    if ((gMapRoomState->flags & 0x10) == 0) {
+    if ((gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) == 0) {
         gGameState.progression.unk_82 |= 0x2000;
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         CreateCardMessageTask(&w->tasks, 0, 0x6B);
         w->update = MapTutorialSpawnEnemy;
     }
@@ -690,7 +690,7 @@ void MapTutorialWaitEnemyMessage(MapTutorialWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         ColliderSetDisabled(&w->collider, 0);
         w->update = MapTutorialEnemyUpdate;
     }
@@ -702,15 +702,15 @@ void MapTutorialEnemyUpdate(MapTutorialWork* w) {
     w->gfx = AnimUpdate(a);
 
     if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 16)) {
-        gMapRoomState->flags |= 0x80;
-        gMapRoomState->flags |= 4;
+        gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
+        gMapRoomState->flags |= ROOM_FLAG_ENEMY_STRUCK;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
         m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L09Anims, gEmy00L09Frames);
         SetObjTileSource(w->tiles, gEmy00L09Tiles);
         w->update = MapTutorialEnemyHit;
     } else if (w->collider.colliding != 0) {
-        if (!(gMapRoomState->flags & 4) && w->collider.otherType == 1) {
+        if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && w->collider.otherType == 1) {
             ColliderSetDisabled(&w->collider, 1);
             MapTutorialStartBattle();
         } else {
@@ -737,7 +737,7 @@ void Task_MapTutorial_0(MapTutorialWork* w) {
 
     TaskPoolInit(&w->tasks, 1);
     TaskPoolInit(&w->tasks2, 1);
-    gMapRoomState->flags |= 0x20;
+    gMapRoomState->flags |= ROOM_FLAG_NO_RANDOM_PRIZE;
     w->tiles = 0;
     w->palette = 0;
     w->flip = 0;
@@ -748,7 +748,7 @@ void Task_MapTutorial_0(MapTutorialWork* w) {
         w->visible = 0;
         w->update = MapTutorialWaitStart;
     } else {
-        gFieldState->flags |= 0x1000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         TaskCreate(&w->tasks2, &gTaskDescFldShadow, &w->obj);
         w->visible = 1;
         w->shadowVisible = 1;
@@ -833,9 +833,9 @@ void func_080F74E8(MapStairWork* w) {
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800) != 0) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == 0xFE) {
-                gMapRoomState->flags |= 0x100;
+                gMapRoomState->flags |= ROOM_FLAG_WALK_OUT;
             } else {
-                gMapRoomState->flags |= 0x400;
+                gMapRoomState->flags |= ROOM_FLAG_EXIT_NEXT_FLOOR;
             }
         }
     }
@@ -849,7 +849,7 @@ void func_080F753C(MapStairWork* w) {
             if (gMapFloorState.room == 0xFE) {
                 gMapRoomState->flags |= k;
             } else {
-                gMapRoomState->flags |= 0x200;
+                gMapRoomState->flags |= ROOM_FLAG_ENTER_WORLD;
             }
         }
     }
@@ -857,8 +857,8 @@ void func_080F753C(MapStairWork* w) {
 
 void MapStairWaitApproach(MapStairWork* w) {
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x3000) != 0) {
-        gFieldState->flags |= 0x1000;
-        gMapRoomState->flags |= 0x4000;
+        gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
+        gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
         CreateCardMessageTask(&w->tasks, 0, 0xA7);
         w->update = MapStairWaitMessage;
     }
@@ -866,8 +866,8 @@ void MapStairWaitApproach(MapStairWork* w) {
 
 void MapStairWaitMessage(MapStairWork* w) {
     if (IsMessageWindowOpen() == 0) {
-        gFieldState->flags &= ~0x1000;
-        gMapRoomState->flags &= ~0x4000;
+        gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
+        gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
         gGameState.progression.unk_82 |= 0x400;
         w->update = func_080F74E8;
     }
@@ -971,7 +971,7 @@ s32 Task_MapDmg_1(MapDmgWork* w) {
     if (w->enabled == 0) {
         w->visible = 0;
     } else {
-        if (gMapRoomState->attackActive != 0 || (gMapRoomState->flags & 4)) {
+        if (gMapRoomState->attackActive != 0 || (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK)) {
             w->timer = 20;
         }
 
@@ -1033,8 +1033,8 @@ void* GetFloorName(void) {
 }
 
 void Task_MapFloor_0(MapFloorWork* w) {
-    gFieldState->flags |= 0x1000;
-    gFieldState->flags |= 0x80;
+    gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
+    gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     w->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
     w->palette = LoadObjPalette(gUnk_099910C4, 32);
     w->gfx = gUnk_09EF8DA4[0];
@@ -1073,8 +1073,8 @@ void Task_MapFloor_3(MapFloorWork* w) {
 #else
     FreeTextSlots(w->textSlots, 40);
 #endif
-    gFieldState->flags &= ~0x80;
-    gFieldState->flags &= ~0x1000;
+    gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
+    gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
 }
 
 const u8 gGoofyTalkMessages[28] = {

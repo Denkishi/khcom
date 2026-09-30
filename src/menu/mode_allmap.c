@@ -324,14 +324,14 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     }
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
-        if (TestAllmapRoomFlag(work->room, 8) != 0) {
+        if (TestAllmapRoomFlag(work->room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 17;
         }
 
-        if (TestAllmapRoomFlag(work->room, 2) == 0) {
+        if (TestAllmapRoomFlag(work->room, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 1;
         }
-    } else if (TestAllmapRoomFlag(work->room, 2) == 0) {
+    } else if (TestAllmapRoomFlag(work->room, FLOOR_ROOM_FLAG_VISITED) == 0) {
         return 0;
     }
 

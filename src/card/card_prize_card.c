@@ -157,7 +157,7 @@ static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
         w->timer++;
     }
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return 0;
     }
 
@@ -215,7 +215,7 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a) {
     w->y2 = w->pos.y >> 8;
     UpdateFieldPrizeCardScale(w);
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return 0;
     }
 
@@ -258,7 +258,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a) {
 
     TaskPoolUpdate(&w->tasks);
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return 0;
     }
 
@@ -274,7 +274,7 @@ u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w) {
     w->scaleX -= 10;
     w->scaleY -= 10;
 
-    if (w->scaleX > 10 && !(gFieldState->flags & 0x40000)) {
+    if (w->scaleX > 10 && !(gFieldState->flags & FIELD_FLAG_ROOM_CREATE)) {
         return 1;
     }
 

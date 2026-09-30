@@ -63,9 +63,9 @@ void Mode_Deck_2(void) {
     TaskPoolDestroy(&sModeDeckTasks);
 }
 void menu_0(MenuWork* w) {
-    gFieldState->flags |= 0x1000;
-    gFieldState->flags |= 0x80;
-    gFieldState->flags |= 0x2000;
+    gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
+    gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
+    gFieldState->flags |= FIELD_FLAG_MENU_OPEN;
     w->x = 0xF000;
     w->y = 0x4800;
     w->cursor = 0;
@@ -235,9 +235,9 @@ void menu_2(MenuWork* w) {
 void menu_3(MenuWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gFieldState->flags &= ~0x1000;
-    gFieldState->flags &= ~0x80;
-    gFieldState->flags &= ~0x2000;
+    gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
+    gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
+    gFieldState->flags &= ~FIELD_FLAG_MENU_OPEN;
 }
 
 Mode gModeDeck = { "Mode_Deck", (ModeInitFunc)Mode_Deck_0, Mode_Deck_1, Mode_Deck_2 };

@@ -251,36 +251,36 @@ void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
     switch (gFieldState->actor.angle) {
     case 45:
         idx = 4;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 64:
         idx = 3;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 83:
         idx = 2;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 128:
         idx = 1;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 173:
         idx = 2;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 192:
         idx = 3;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 211:
         idx = 4;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 0:
     default:
         idx = 0;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     }
 
@@ -306,7 +306,7 @@ void task_fld_sora_0(FldWork* work) {
     work->unk_9D = 0;
     work->unk_9E = 0;
     work->timer = 0;
-    work->flags = 8;
+    work->flags = FLD_FLAG_RESTORE_STATE;
     work->animAction = 16;
     act->unk_32 = 0;
     act->kind = 0;
@@ -379,15 +379,15 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
     act = &gFieldState->actor;
     flags = gFieldState->flags;
 
-    if (flags & 0x100000) {
+    if (flags & FIELD_FLAG_CARD_POSE) {
         FldSoraSetAnim(work, 12, 0);
-    } else if (flags & 0x80000) {
+    } else if (flags & FIELD_FLAG_AUTO_WALK) {
         FldSoraSetAnim(work, 1, 1);
     } else {
         FldSoraSetAnim(work, 0, 1);
     }
 
-    if ((gFieldState->flags & 0x40000) == 0) {
+    if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         FadeSetPaletteExcluded(work->palette->index + 16, 0);
         work->state = 0;
         work->timer = 0;
@@ -449,7 +449,7 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
         if (work->vz >= 0) {
             work->timer = 0;
             work->state = 4;
-            work->flags |= 4;
+            work->flags |= FLD_FLAG_NO_AIR_TURN;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else {
             work->timer++;
@@ -485,7 +485,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     sy = act->fieldPosition.y;
     gFieldState->lockonTarget = 0;
 
-    if ((work->flags & 4) == 0) {
+    if ((work->flags & FLD_FLAG_NO_AIR_TURN) == 0) {
         FldSoraTurn(act);
     }
 
@@ -685,12 +685,12 @@ u8 FldSoraJump(FldWork* work, void* task) {
         act->speed = 0;
 
         if ((GetKeysPressed() & B_BUTTON) != 0) {
-            work->flags &= ~4;
+            work->flags &= ~FLD_FLAG_NO_AIR_TURN;
             work->timer = 0;
             work->state = 2;
         } else if (work->timer > 6) {
-            gFieldState->flags &= ~0x800000;
-            work->flags &= ~4;
+            gFieldState->flags &= ~FIELD_FLAG_PLAYER_JUMPING;
+            work->flags &= ~FLD_FLAG_NO_AIR_TURN;
             work->state = 0;
             work->timer = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)task_fld_sora_1);
@@ -760,7 +760,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
 
-    if ((gFieldState->flags & 0x40000) != 0) {
+    if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraWaitRoomCreate);
         TaskPoolUpdate(&work->tasks);
@@ -839,7 +839,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
             if (FldSoraCheckBlocked(&p) == 0) {
                 act->speed = 204;
                 work->vz = -0x580;
-                work->flags |= 4;
+                work->flags |= FLD_FLAG_NO_AIR_TURN;
                 work->state = 7;
                 work->timer = 0;
                 m4aSongNumStart(work->sounds[6]);
@@ -872,7 +872,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
             work->state = 4;
             act->angle += 0x80;
             act->speed = 0x80;
-            work->flags |= 4;
+            work->flags |= FLD_FLAG_NO_AIR_TURN;
             act->fieldPosition.x += gSineTable[act->angle] * 10;
             act->fieldPosition.y += -gSineTable[act->angle + 64] * 10;
             FldSoraSetAnim(work, 6, 0);
@@ -934,7 +934,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         work->state = 10;
         act->speed = 0x133;
         work->vz = -0x5C0;
-        work->flags |= 4;
+        work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
         gFieldState->lockonTarget = 0;
         return 1;
@@ -1022,7 +1022,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
     switch (work->state) {
     case 15:
         if (work->timer == 0) {
-            work->flags |= 0x10;
+            work->flags |= FLD_FLAG_WALK_OUT;
             act->angle = 45;
             FldSoraSetAnim(work, 2, 1);
 
@@ -1063,7 +1063,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
         if (work->steps <= 0) {
             work->timer = 0;
 
-            if (work->flags & 0x20) {
+            if (work->flags & FLD_FLAG_TO_WORLD_SELECT) {
                 work->state = 16;
             } else {
                 work->state = 17;
@@ -1399,7 +1399,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraWaitRoomCreate);
     }
@@ -1425,8 +1425,8 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
 
     act = &gFieldState->actor;
 
-    if ((work->flags & 8) != 0) {
-        work->flags &= ~8;
+    if ((work->flags & FLD_FLAG_RESTORE_STATE) != 0) {
+        work->flags &= ~FLD_FLAG_RESTORE_STATE;
 
         switch (work->state) {
         case 12:
@@ -1434,7 +1434,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         case 2:
         case 3:
         case 4:
-            gFieldState->flags |= 0x800000;
+            gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
         case 5:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
             gFieldState->lockonTarget = 0;
@@ -1468,11 +1468,11 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         work->state = 15;
 
         if (GetMapWalkOutMode() == 1) {
-            work->flags |= 0x20;
+            work->flags |= FLD_FLAG_TO_WORLD_SELECT;
         }
 
         return 1;
-    } else if ((gFieldState->flags & 0x40000) != 0) {
+    } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraWaitRoomCreate);
         TaskPoolUpdate(&work->tasks);
@@ -1518,7 +1518,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
 
             if ((GetKeysPressed() & B_BUTTON) != 0) {
                 gFieldState->lockonTarget = 0;
-                gFieldState->flags |= 0x800000;
+                gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
                 work->timer = 0;
                 work->state = 2;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
@@ -1574,7 +1574,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             } else {
                 if (FldSoraCheckDoorAhead(act) != 0) {
                     FadeSetPaletteExcluded(work->palette->index + 16, 1);
-                    gFieldState->flags |= 16;
+                    gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
                     return 1;
                 }
 
@@ -1679,7 +1679,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             work->vz = 0;
             work->timer = 0;
             gFieldState->lockonTarget = 0;
-            gFieldState->flags |= 0x800000;
+            gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = 4;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else if (z != act->fieldPosition.ground) {
@@ -1703,7 +1703,7 @@ void task_fld_sora_2(FldWork* work) {
     s32 z;
 
     act = &gFieldState->actor;
-    pri = (work->flags & 2) ? 0x801 : 0x800;
+    pri = (work->flags & FLD_FLAG_HFLIP) ? 0x801 : 0x800;
 
     if (work->onCollider != 0) {
         depth = -0x1006 - (work->collider.platformY >> 8) * 4;
@@ -1718,7 +1718,7 @@ void task_fld_sora_2(FldWork* work) {
     } else {
         depth = -0x1004 - (act->fieldPosition.y >> 8) * 4;
 
-        if (work->flags & 0x10) {
+        if (work->flags & FLD_FLAG_WALK_OUT) {
             act->shadowZ = act->fieldPosition.ground;
         } else {
             act->shadowZ = GetFldPosGround(&act->fieldPosition);
@@ -1950,36 +1950,36 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags) {
     switch (gFieldState->actor.angle) {
     case 0x2D:
         dir = 4;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 0x40:
         dir = 3;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 0x53:
         dir = 2;
-        work->flags |= 2;
+        work->flags |= FLD_FLAG_HFLIP;
         break;
     case 0x80:
         dir = 1;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 0xAD:
         dir = 2;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 0xC0:
         dir = 3;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 0xD3:
         dir = 4;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     case 0x00:
     default:
         dir = 0;
-        work->flags &= 0xFFFD;
+        work->flags &= ~FLD_FLAG_HFLIP;
         break;
     }
 
@@ -2005,7 +2005,7 @@ void task_fld_riku_0(FldWork* work) {
     work->unk_9D = 0;
     work->unk_9E = 0;
     work->timer = 0;
-    work->flags = 8;
+    work->flags = FLD_FLAG_RESTORE_STATE;
     work->animAction = 16;
     act->unk_32 = 0;
     act->kind = 0;
@@ -2078,15 +2078,15 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
     act = &gFieldState->actor;
     flags = gFieldState->flags;
 
-    if (flags & 0x100000) {
+    if (flags & FIELD_FLAG_CARD_POSE) {
         FldRikuSetAnim(work, 12, 0);
-    } else if (flags & 0x80000) {
+    } else if (flags & FIELD_FLAG_AUTO_WALK) {
         FldRikuSetAnim(work, 1, 1);
     } else {
         FldRikuSetAnim(work, 0, 1);
     }
 
-    if ((gFieldState->flags & 0x40000) == 0) {
+    if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         FadeSetPaletteExcluded(work->palette->index + 16, 0);
         work->state = 0;
         work->timer = 0;
@@ -2149,7 +2149,7 @@ u8 FldRikuGmkJump(FldWork* work, void* task) {
         if (work->vz >= 0) {
             work->timer = 0;
             work->state = 4;
-            work->flags |= 4;
+            work->flags |= FLD_FLAG_NO_AIR_TURN;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
         } else {
             work->timer++;
@@ -2185,7 +2185,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
     sy = act->fieldPosition.y;
     gFieldState->lockonTarget = 0;
 
-    if ((work->flags & 4) == 0) {
+    if ((work->flags & FLD_FLAG_NO_AIR_TURN) == 0) {
         FldRikuTurn(act);
     }
 
@@ -2384,12 +2384,12 @@ u8 FldRikuJump(FldWork* work, void* task) {
         act->speed = 0;
 
         if ((GetKeysPressed() & B_BUTTON) != 0) {
-            work->flags &= ~4;
+            work->flags &= ~FLD_FLAG_NO_AIR_TURN;
             work->timer = 0;
             work->state = 2;
         } else if (work->timer > 6) {
-            gFieldState->flags &= ~0x800000;
-            work->flags &= ~4;
+            gFieldState->flags &= ~FIELD_FLAG_PLAYER_JUMPING;
+            work->flags &= ~FLD_FLAG_NO_AIR_TURN;
             work->state = 0;
             work->timer = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)task_fld_riku_1);
@@ -2459,7 +2459,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
 
-    if ((gFieldState->flags & 0x40000) != 0) {
+    if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldRikuWaitRoomCreate);
     }
@@ -2537,7 +2537,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
             if (FldRikuCheckBlocked(&p) == 0) {
                 act->speed = 204;
                 work->vz = -0x580;
-                work->flags |= 4;
+                work->flags |= FLD_FLAG_NO_AIR_TURN;
                 work->state = 7;
                 work->timer = 0;
                 m4aSongNumStart(work->sounds[6]);
@@ -2570,7 +2570,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
             work->state = 4;
             act->angle += 0x80;
             act->speed = 0x80;
-            work->flags |= 4;
+            work->flags |= FLD_FLAG_NO_AIR_TURN;
             act->fieldPosition.x += gSineTable[act->angle] * 10;
             act->fieldPosition.y += -gSineTable[act->angle + 64] * 10;
             FldRikuSetAnim(work, 6, 0);
@@ -2632,7 +2632,7 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
         work->state = 10;
         act->speed = 0x133;
         work->vz = -0x5C0;
-        work->flags |= 4;
+        work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
         gFieldState->lockonTarget = 0;
         return 1;
@@ -2720,7 +2720,7 @@ u8 FldRikuWalkOut(FldWork* work, void* task) {
     switch (work->state) {
     case 15:
         if (work->timer == 0) {
-            work->flags |= 0x10;
+            work->flags |= FLD_FLAG_WALK_OUT;
             act->angle = 45;
             FldRikuSetAnim(work, 2, 1);
 
@@ -2756,7 +2756,7 @@ u8 FldRikuWalkOut(FldWork* work, void* task) {
         if (work->steps <= 0) {
             work->timer = 0;
 
-            if (work->flags & 0x20) {
+            if (work->flags & FLD_FLAG_TO_WORLD_SELECT) {
                 work->state = 16;
             } else {
                 work->state = 17;
@@ -3092,7 +3092,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
     work->gfx = AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldRikuWaitRoomCreate);
         TaskPoolUpdate(&work->tasks);
@@ -3119,8 +3119,8 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
 
     act = &gFieldState->actor;
 
-    if ((work->flags & 8) != 0) {
-        work->flags &= ~8;
+    if ((work->flags & FLD_FLAG_RESTORE_STATE) != 0) {
+        work->flags &= ~FLD_FLAG_RESTORE_STATE;
 
         switch (work->state) {
         case 12:
@@ -3161,11 +3161,11 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
         work->state = 15;
 
         if (GetMapWalkOutMode() == 1) {
-            work->flags |= 0x20;
+            work->flags |= FLD_FLAG_TO_WORLD_SELECT;
         }
 
         return 1;
-    } else if ((gFieldState->flags & 0x40000) != 0) {
+    } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
         work->timer = 0;
         SetTaskUpdate(task, (TaskUpdateFunc)FldRikuWaitRoomCreate);
         TaskPoolUpdate(&work->tasks);
@@ -3210,7 +3210,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             act->fieldPosition.y += -gSineTable[act->angle + 64] * act->speed >> 8;
 
             if ((GetKeysPressed() & B_BUTTON) != 0) {
-                gFieldState->flags |= 0x800000;
+                gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
                 gFieldState->lockonTarget = 0;
                 work->timer = 0;
                 work->state = 2;
@@ -3267,7 +3267,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             } else {
                 if (FldRikuCheckDoorAhead(act) != 0) {
                     FadeSetPaletteExcluded(work->palette->index + 16, 1);
-                    gFieldState->flags |= 16;
+                    gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
                     return 1;
                 }
 
@@ -3372,7 +3372,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             work->vz = 0;
             work->timer = 0;
             gFieldState->lockonTarget = 0;
-            gFieldState->flags |= 0x800000;
+            gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = 4;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
         } else if (z != act->fieldPosition.ground) {
@@ -3396,7 +3396,7 @@ void task_fld_riku_2(FldWork* work) {
     s32 z;
 
     act = &gFieldState->actor;
-    pri = (work->flags & 2) ? 0x801 : 0x800;
+    pri = (work->flags & FLD_FLAG_HFLIP) ? 0x801 : 0x800;
 
     if (work->onCollider != 0) {
         depth = -0x1006 - (work->collider.platformY >> 8) * 4;
@@ -3411,7 +3411,7 @@ void task_fld_riku_2(FldWork* work) {
     } else {
         depth = -0x1004 - (act->fieldPosition.y >> 8) * 4;
 
-        if (work->flags & 0x10) {
+        if (work->flags & FLD_FLAG_WALK_OUT) {
             act->shadowZ = act->fieldPosition.ground;
         } else {
             act->shadowZ = GetFldPosGround(&act->fieldPosition);

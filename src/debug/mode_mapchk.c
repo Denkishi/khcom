@@ -580,7 +580,7 @@ void Mode_MapChk_1(void) {
             MapChkSetFloorProgress(gMapChkWork->floor, 0);
             GoToFloor(gMapChkWork->floor);
             SetFloorWorld(gUnk_0984B458[gMapChkWork->world][0]);
-            gMapFloorState.flags |= 0x10;
+            gMapFloorState.flags |= FLOOR_FLAG_LOGO_SHOWN;
             EnterFloorWorld();
             RequestMapMode();
             break;

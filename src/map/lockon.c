@@ -56,7 +56,7 @@ u8 task_lockon_1(LockonWork* w) {
     i = 0;
     o = ListPoolFirst(&gFieldState->actor.pool);
 
-    if (gFieldState->flags & 1) {
+    if (gFieldState->flags & FIELD_FLAG_NO_LOCKON) {
         gFieldState->lockonTarget = 0;
         return 1;
     }
@@ -71,7 +71,7 @@ u8 task_lockon_1(LockonWork* w) {
     py = gFieldState->actor.fieldPosition.y;
     count = 0;
 
-    if ((gFieldState->flags & 2) == 0) {
+    if ((gFieldState->flags & FIELD_FLAG_HOLD_LOCKON) == 0) {
         while (o != NULL) {
             ox = o->fieldPosition.x;
             oy = o->fieldPosition.y;
@@ -142,7 +142,7 @@ void task_lockon_2(LockonWork* w) {
         u8 counter;
     } x2, y2;
 
-    if (gFieldState->flags & 0x40000) {
+    if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return;
     }
 
@@ -249,7 +249,7 @@ s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
 void LockonClearTargets(LockonWork* w) {
     s8 i;
 
-    if ((gFieldState->flags & 2) == 0) {
+    if ((gFieldState->flags & FIELD_FLAG_HOLD_LOCKON) == 0) {
         w->selected = -1;
 
         for (i = 0; i < 8; i++) {

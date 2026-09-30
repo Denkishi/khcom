@@ -9,8 +9,8 @@ void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;
 
     ResetSelectedMapCard();
-    gFieldState->flags |= 0x40000;
-    gFieldState->flags |= 2;
+    gFieldState->flags |= FIELD_FLAG_ROOM_CREATE;
+    gFieldState->flags |= FIELD_FLAG_HOLD_LOCKON;
     work->mapSelectStatus = 0;
     work->spotLightEnd = 0;
     work->timer = 0;
@@ -41,7 +41,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         if (work->timer == 0) {
             gFieldState->actor.angle = work->angle + 0x80;
             TaskCreate(&work->tasks, &gTaskDescSpotLight, &work->spotLightEnd);
-            gFieldState->flags |= 0x80000;
+            gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
         steps = 30 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->frontX, steps);
@@ -51,7 +51,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         if (steps <= 1) {
             MapFreezeBg1();
             work->state = 1;
-            gFieldState->flags &= ~0x80000;
+            gFieldState->flags &= ~FIELD_FLAG_AUTO_WALK;
             work->timer = 8;
         } else {
             MapSetCameraTarget((gFieldState->actor.fieldPosition.x + work->x2) / 2,
@@ -86,7 +86,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         break;
     case 3:
         if (work->timer == 0) {
-            gFieldState->flags |= 0x100000;
+            gFieldState->flags |= FIELD_FLAG_CARD_POSE;
             DisableBg(2);
             DisableBg(3);
             FadeStartIn(0, 1);
@@ -115,13 +115,13 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         }
 
         if (work->timer == 40) {
-            gFieldState->flags |= 0x200000;
+            gFieldState->flags |= FIELD_FLAG_DOOR_OPENED;
         }
 
         if (work->timer > 60) {
             work->timer = 0;
             work->state = 6;
-            gFieldState->flags &= ~0x100000;
+            gFieldState->flags &= ~FIELD_FLAG_CARD_POSE;
         } else {
             work->timer++;
         }
@@ -137,7 +137,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
     case 2:
         if (work->timer == 0) {
             work->spotLightEnd = 1;
-            gFieldState->flags |= 0x80000;
+            gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
         steps = 30 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x, steps);
@@ -146,8 +146,8 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
         if (steps <= 1) {
             gFieldState->actor.angle = work->playerAngle;
-            gFieldState->flags &= ~0x40000;
-            gFieldState->flags &= ~2;
+            gFieldState->flags &= ~FIELD_FLAG_ROOM_CREATE;
+            gFieldState->flags &= ~FIELD_FLAG_HOLD_LOCKON;
             DisableBg(0);
             SetBgPriority(1, 1);
             return 0;
@@ -158,7 +158,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         break;
     case 6:
         if (work->timer == 0) {
-            gFieldState->flags |= 0x80000;
+            gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
         steps = 40 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x2, steps);
@@ -166,7 +166,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         ApproachValue(&gFieldState->actor.fieldPosition.z, work->z2, steps);
 
         if (IsAtTargetDoor(&gFieldState->actor.fieldPosition)) {
-            gFieldState->flags |= 0x10;
+            gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
         }
         break;
     case 7:

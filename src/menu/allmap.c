@@ -608,11 +608,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     if (work->count != 0) {
         work->tiles = LoadObjTiles(gUnk_0976DD62, 0x80);
         work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
-        FadeSetPaletteExcluded(((ObjPalette*)work->palette)->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, 1);
         work->tiles2 = LoadObjTiles(gUnk_0976B340, 0x2400);
         work->gfx = gUnk_09EF6424[0];
         InitObjPaletteAtSlot(work->palette2, 15, gUnk_0984A0F8, 32);
-        FadeSetPaletteExcluded(((ObjPalette*)work->palette2)->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
     }
 }
 
@@ -674,7 +674,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         InitObjPaletteAtSlot(work->palette2, 15, gUnk_0984A0F8, 32);
     }
 
-    FadeSetPaletteExcluded(((ObjPalette*)work->palette2)->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 }
 
 void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {

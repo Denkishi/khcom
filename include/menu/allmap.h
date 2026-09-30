@@ -127,9 +127,9 @@ typedef struct AllmapDoorinfoWork {
     void* gfx2[4];
     void* tiles;
     EventKeyCard doors[4];
-    void* palette;
+    ObjPalette* palette;
     void* tiles2;
-    void* palette2;
+    ObjPalette* palette2;
     void* gfx;
     s16 roomX;
     s16 roomY;

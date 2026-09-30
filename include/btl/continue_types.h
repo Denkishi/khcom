@@ -4,13 +4,15 @@
 #include "types.h"
 #include "anim.h"
 
+struct ObjPalette;
+
 typedef struct ContinueWork {
     void* tiles;
-    void* palette;
+    struct ObjPalette* palette;
     void* tiles2;
-    void* palette2;
+    struct ObjPalette* palette2;
     void* tiles3;
-    void* palette3;
+    struct ObjPalette* palette3;
     void* gfx;
     void* gfx2;
     AnimState anim;

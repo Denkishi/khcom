@@ -117,7 +117,7 @@ void ContinueSora_0(ContinueWork* p) {
     FadeStartIn(1, 24);
 
     for (i = 0; i < 5; i++) {
-        FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + i, 0);
+        FadeSetPaletteExcluded(p->palette->index + i, 0);
     }
     p->blendAlpha = 0x1000;
     p->state = 0;
@@ -184,7 +184,7 @@ void ContinueRiku_0(ContinueWork* p) {
     FadeStartIn(1, 24);
 
     for (i = 0; i < 5; i++) {
-        FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + i, 0);
+        FadeSetPaletteExcluded(p->palette->index + i, 0);
     }
     p->blendAlpha = 0x1000;
     p->state = 0;

@@ -118,7 +118,7 @@ typedef struct VixenFrzWork {
 typedef struct VixenIceWork {
     u32 state;
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     AnimState anim;
     VixenSub* sub;
     Collider collider;

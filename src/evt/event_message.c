@@ -6168,7 +6168,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                         p->palette = LoadObjPalette(gUnk_09614718, 32);
 
                         if ((e->flags & 0x80) != 0) {
-                            FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
+                            FadeSetPaletteExcluded(p->palette->index + 16, 1);
                         }
                     }
                     RequestMsgfaceSlideIn(&p->face);
@@ -6221,7 +6221,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                 p->palette = LoadObjPalette(gUnk_09614718, 32);
 
                 if ((e->flags & 0x80) != 0) {
-                FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
+                FadeSetPaletteExcluded(p->palette->index + 16, 1);
                 }
             }
             RequestMsgfaceSlideIn(&p->face);
@@ -6625,9 +6625,9 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     }
 
     if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 0);
+        FadeSetPaletteExcluded(p->palette->index + 16, 0);
     } else {
-        FadeSetPaletteExcluded(((ObjPalette*)p->palette)->index + 16, 1);
+        FadeSetPaletteExcluded(p->palette->index + 16, 1);
     }
 
     p->gfx = AnimUpdate(&p->anim);
@@ -6866,14 +6866,14 @@ void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     p->timer = 0;
     p->tiles2 = AllocObjTiles(288, 0);
     p->palette2 = LoadObjPalette(gUnk_09614418, 32);
-    LoadObjPaletteBank(((ObjPalette*)p->palette2)->index, gUnk_09614418);
+    LoadObjPaletteBank(p->palette2->index, gUnk_09614418);
     SetObjTileSource(p->tiles2, gUnk_090A4664);
     AnimInit(&p->anim2, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&p->anim2, 2, 1);
     p->gfx2 = AnimGetGfx(&p->anim2);
     p->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
     p->palette3 = LoadObjPalette(gCard00Palette, 32);
-    LoadObjPaletteBank(((ObjPalette*)p->palette3)->index, gCard00Palette);
+    LoadObjPaletteBank(p->palette3->index, gCard00Palette);
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
     InitTextSlots(p->textSlots, 10);
     InitTextSlots(p->textSlots2, 10);

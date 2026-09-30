@@ -2035,17 +2035,17 @@ typedef struct LevelUpWork {
 #else
     TextSlot textSlots[6][36];
 #endif
-    void* palette;
-    void* palette2;
+    ObjPalette* palette;
+    ObjPalette* palette2;
     void* tiles;
-    void* palette3;
+    ObjPalette* palette3;
     void* tiles2;
     void* tiles3;
-    void* palette4;
+    ObjPalette* palette4;
     TaskPool pool;
     AnimState anim;
     void* tiles4;
-    void* palette5;
+    ObjPalette* palette5;
     void* gfx;
     AnimState anim2;
     void* gfx2;

@@ -116,7 +116,7 @@ void Level_Up_0(LevelUpWork* w) {
         w->tiles4 = AllocObjTiles(0x500, 0);
         w->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(w->palette5, gSoraPalette);
-        FadeSetPaletteExcluded(((ObjPalette*)w->palette5)->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette5->index + 16, 1);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
@@ -127,7 +127,7 @@ void Level_Up_0(LevelUpWork* w) {
         w->tiles4 = AllocObjTiles(0x800, 0);
         w->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(w->palette5, gRikuPalette);
-        FadeSetPaletteExcluded(((ObjPalette*)w->palette5)->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette5->index + 16, 1);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
@@ -474,10 +474,10 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             w->palette4 = LoadObjPalette(gCard00Palette, 32);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)w->palette4)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
             w->tiles = AllocObjTiles(0x3C0, 0);
             w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)w->palette3)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);
             AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
             AnimStart(&w->anim, 2, 1);
@@ -670,8 +670,8 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         w->palette = LoadObjPalette(gUnk_09613FD8, 32);
                         w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
                     }
-                    FadeSetPaletteExcluded(((ObjPalette*)w->palette)->index + 16, 1);
-                    FadeSetPaletteExcluded(((ObjPalette*)w->palette2)->index + 16, 1);
+                    FadeSetPaletteExcluded(w->palette->index + 16, 1);
+                    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
                     for (i = 0; i < 3; i++) {
                         if (w->optionEnabled[i] == 1) {
                             break;
@@ -774,7 +774,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
         ReleaseObjPalette(w->palette3);
         w->tiles = AllocObjTiles(128, 0);
         w->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
-        FadeSetPaletteExcluded(((ObjPalette*)w->palette3)->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette3->index + 16, 1);
         SetObjTileSource(w->tiles, gUnk_0908F190);
         AnimInit(&w->anim, gUnk_09EEA280, gUnk_09EEA26C);
         AnimStart(&w->anim, 0, 1);
@@ -1439,10 +1439,10 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->palette4 = LoadObjPalette(gCard00Palette, 32);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)w->palette4)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
             w->tiles = AllocObjTiles(0x3C0, 0);
             w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)w->palette3)->index + 16, 1);
+            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);
             AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
             AnimStart(&w->anim, 2, 1);
@@ -1605,8 +1605,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->palette = LoadObjPalette(gUnk_09613FD8, 32);
             w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
         }
-        FadeSetPaletteExcluded(((ObjPalette*)w->palette)->index + 16, 1);
-        FadeSetPaletteExcluded(((ObjPalette*)w->palette2)->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
+        FadeSetPaletteExcluded(w->palette2->index + 16, 1);
         for (i = 0; i < 3; i++) {
             if (w->optionEnabled[i] == 1) {
                 break;

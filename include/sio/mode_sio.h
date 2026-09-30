@@ -124,7 +124,7 @@ typedef struct SioChgCardWork {
     void* gfx[2];
     AnimState anim[2];
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     void* gfx2;
     AnimState anim2;
     s8 cursorVisible;
@@ -250,7 +250,7 @@ typedef struct SioBtlOptionWork {
     u16 frameCount;
     void* tiles5[2];
     void* gfx5[2];
-    void* palette5[2];
+    ObjPalette* palette5[2];
     s8 handicaps[2];
     s8 handicap;
     s8 player1Ready;

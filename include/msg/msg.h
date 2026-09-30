@@ -72,7 +72,7 @@ typedef struct BgTextLine {
 
 typedef struct MsgFaceWork {
     void* tiles;
-    void* palette;
+    ObjPalette* palette;
     void* gfx;
     AnimState anim;
     s32 x;
@@ -89,7 +89,7 @@ typedef struct MsgFaceWork {
 
 typedef struct MsgWinWork {
     TaskPool tasks;
-    void* palette;
+    ObjPalette* palette;
     s32 scrollX;
     u16 unk_1C;
     u8 steps;
@@ -156,9 +156,9 @@ typedef struct EventCameraWork {
 typedef struct MsgWaitWork {
     void* tiles;
     void* tiles2;
-    void* palette2;
+    ObjPalette* palette2;
     void* tiles3;
-    void* palette3;
+    ObjPalette* palette3;
     ObjPalette* palette;
     void* palette4;
     TextSlot textSlots[10];

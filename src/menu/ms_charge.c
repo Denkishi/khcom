@@ -256,7 +256,7 @@ void MsChargeLoadSelectedCard(void) {
 #endif
         q = &sMsChargeDescTextCount;
         *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
-        LoadObjPaletteBank(((u16*)gUnk_02035C44)[3], gUnk_09A3DE7C + card->category * 0x20);
+        LoadObjPaletteBank(gUnk_02035C44->index, gUnk_09A3DE7C + card->category * 0x20);
     } else {
         sMsChargeCardPalette = 0;
         sMsChargeCardTiles = 0;

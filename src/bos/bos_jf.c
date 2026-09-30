@@ -179,8 +179,8 @@ u8 task_bos_jf_1(JfWork* work) {
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-        if (sub->hitFlags & 0x20000000) {
-            sub->hitFlags &= ~0x20000000;
+        if (sub->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
+            sub->hitFlags &= ~ATTACK_FLAG_ELEMENT_BLIZZARD;
 
             if ((work->flags & 1) == 0) {
                 if (work->gimmickTimer == 0) {

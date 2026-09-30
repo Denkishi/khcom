@@ -1571,7 +1571,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         case 21:
             w->unk_186 = 0;
 
-            if (act->hitFlags & 0x10000000) {
+            if (act->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
                 ClearBtlObjActionFlags(act);
                 work->base.state = 20;
                 work->base.stateTimer = 0;
@@ -1580,7 +1580,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         case 22:
             w->unk_186 = 0;
 
-            if (act->hitFlags & 0x20000000) {
+            if (act->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 ClearBtlObjActionFlags(act);
                 work->base.state = 20;
                 work->base.stateTimer = 0;
@@ -1589,7 +1589,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         case 23:
             w->unk_186 = 1;
 
-            if (act->hitFlags & 0x40000000) {
+            if (act->hitFlags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 ClearBtlObjActionFlags(act);
                 work->base.state = 20;
                 work->base.stateTimer = 0;

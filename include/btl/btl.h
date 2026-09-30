@@ -71,6 +71,11 @@ typedef struct BtlAreaWork {
     s16 timer;
 } BtlAreaWork;
 
+enum ComboFlag {
+    COMBO_FLAG_AERIAL_SWING = 0x1,
+    COMBO_FLAG_ZOOM_ON_HIT = 0x2
+};
+
 typedef struct SoraAttackDef {
     s32 animId;
     const s32* attackIds;

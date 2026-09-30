@@ -5633,7 +5633,7 @@ u8 BosPcUpdateHurt(PcWork* work, Task* task) {
     work->step += 1;
     if (work->step > 15) {
         ClearBtlObjActionFlags(p);
-        if (work->hitFlags & 0x10000000) {
+        if (work->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
             switch (work->hitAttack) {
             case 67:
                 work->reactionAnim = 2;

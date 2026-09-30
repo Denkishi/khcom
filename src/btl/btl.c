@@ -155,15 +155,15 @@ static const SoraAttackDef sUnk_0813C1EC = { 7, sUnk_0813C144, SONG_VO_SR_ATTACK
 
 static const SoraAttackDef sUnk_0813C204 = { 12, sUnk_0813C0FC, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, 2, 0, NULL };
+static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_ZOOM_ON_HIT, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, -640, 1, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1D4 };
 
-static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, SONG_VO_SR_ATTACK00, SONG_BTL_SR_ATT00, 0, 1, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, SONG_VO_SR_ATTACK00, SONG_BTL_SR_ATT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1D4 };
 
-static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, 0, 1, 0, &sUnk_0813C1EC };
+static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1EC };
 
-static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, 3, 0, &sUnk_0813C21C };
+static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_AERIAL_SWING | COMBO_FLAG_ZOOM_ON_HIT, 0, &sUnk_0813C21C };
 
 static const u8 sBtlSoraSwingHitFrames[5] = {
     10, 12, 15, 18, 20,
@@ -244,13 +244,13 @@ static const RikuAttackDef sUnk_0813C720 = { 3, 15, 0, sBtlRikuAttackIds, 256, S
 
 static const RikuAttackDef sUnk_0813C73C = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, 1, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C6E8 };
 
-static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, 1, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C6E8 };
 
-static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, 1, 0, &sUnk_0813C704 };
+static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C704 };
 
-static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, 1, 0, &sUnk_0813C73C };
+static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C73C };
 
 void task_btl_lockon_0(BtlLockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
@@ -2996,7 +2996,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (work->comboCount != 0) {
-            if (a->flags & 1) {
+            if (a->flags & COMBO_FLAG_AERIAL_SWING) {
                 if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
                     a = a->next;
                 }
@@ -3094,7 +3094,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (d == 1) {
                 m4aSongNumStart(a->hitSound);
 
-                if (a->flags & 2) {
+                if (a->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(8, 384, p->x - 5120, (p->y - 5120) + p->z);
                     } else {
@@ -3107,7 +3107,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->flags &= ~BTL_SORA_FLAG_SWING_HIT;
             }
         } else if ((s16)work->stateTimer == buf[work->swingSpeed] + 2) {
-            if (a->flags & 2) {
+            if (a->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                 SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             }
 
@@ -3167,7 +3167,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->y += ((p->originY + t2) - p->y) >> 4;
                 }
 
-                if (a->flags & 1) {
+                if (a->flags & COMBO_FLAG_AERIAL_SWING) {
                     s32 t3 = (e->z - (e->centerHeight << 8)) - p->z;
 
                     if (t3 < 0) {
@@ -9860,7 +9860,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (work->comboCount != 0) {
-            if (a->flags & 1) {
+            if (a->flags & COMBO_FLAG_AERIAL_SWING) {
                 if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
                     a = a->next;
                 }
@@ -9955,7 +9955,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (d == 1) {
                 m4aSongNumStart(a->song);
 
-                if (a->flags & 2) {
+                if (a->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(8, 384, p->x - 5120, (p->y - 5120) + p->z);
                     } else {
@@ -9968,7 +9968,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
             }
         } else if ((s16)work->stateTimer == a->hitFrame + 2) {
-            if (a->flags & 2) {
+            if (a->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                 SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             }
 
@@ -10029,7 +10029,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     p->y += ((p->originY + t2) - p->y) >> 4;
                 }
 
-                if (a->flags & 1) {
+                if (a->flags & COMBO_FLAG_AERIAL_SWING) {
                     t3 = (e->z - (e->centerHeight << 8)) - p->z;
 
                     if (t3 < 0) {

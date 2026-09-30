@@ -992,7 +992,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
     if (p->flags & BTLOBJ_FLAG_WARP_PENDING) {
         p->flags &= ~BTLOBJ_FLAG_WARP_PENDING;
 
-        if (p->hitFlags & 0x20000) {
+        if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
             p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
         }
         return 11;
@@ -1017,7 +1017,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             p->badStatus = BAD_STATUS_NONE;
             p->badStatusTimer = 0;
 
-            if (p->hitFlags & 0x20000) {
+            if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
                 p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
             }
 

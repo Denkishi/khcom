@@ -233,7 +233,7 @@ void EmyFinishSpawn(EmyWork* work) {
             actor->damage = (actor->maxHp * 25) >> 8;
         }
 
-        actor->hitFlags = 0x200;
+        actor->hitFlags = ATTACK_FLAG_INFLICT_STUN;
         gBtlWork->pendingHitStop = 0;
         actor->knockbackSpeed = 0;
         actor->knockbackLift = 0;

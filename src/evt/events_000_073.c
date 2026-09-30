@@ -3814,9 +3814,9 @@ static const EvSoundCue sEvent018SoundCues[4] = {
 };
 
 static const EventBgEffectEntry sEvent018BgEffects[3] = {
-    { { 52, 3 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 20, 5 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 108, 7 }, 0, 0, 0, { 24, 128, 0, 0 } },
+    { 820, 0, 0, 0, 0 },
+    { 1300, 0, 0, 0, 0x14 },
+    { 1900, 0, 0, 0, 0x8018 },
 };
 
 static const EventCharaKeyframe sEvent018Track0[31] = {
@@ -7829,10 +7829,10 @@ static const EventCameraKeyframe sEvent044Camera[7] = {
 };
 
 static const EventBgEffectEntry sEvent044BgEffects[4] = {
-    { { 68, 7 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 254, 6 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 182, 8 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 246, 9 }, 0, 0, 0, { 24, 128, 0, 0 } },
+    { 1860, 0, 0, 0, 0 },
+    { 1790, 0, 0, 0, 0x14 },
+    { 2230, 0, 0, 0, 0x2 },
+    { 2550, 0, 0, 0, 0x8018 },
 };
 
 static const EventCharaKeyframe sEvent044Track0[40] = {
@@ -9934,11 +9934,11 @@ static const EvSoundCue sEvent056SoundCues[6] = {
 };
 
 static const EventBgEffectEntry sEvent056BgEffects[5] = {
-    { { 212, 8 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 36, 9 }, 0, 80, 0, { 20, 0, 0, 0 } },
-    { { 136, 19 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 112, 23 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 88, 27 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 2260, 0, 0, 0, 0 },
+    { 2340, 0, 80, 0, 0x14 },
+    { 5000, 0, 0, 0, 0 },
+    { 6000, 0, 0, 0, 0x2 },
+    { 7000, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent056Track0[63] = {
@@ -10544,11 +10544,11 @@ static const EvSoundCue sEvent059SoundCues[17] = {
 };
 
 static const EventBgEffectEntry sEvent059BgEffects[5] = {
-    { { 208, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 238, 12 }, 0, 0, 0, { 4, 0, 0, 0 } },
-    { { 27, 13 }, 1, 150272, 64512, { 1, 0, 0, 0 } },
-    { { 52, 13 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 3280, 0, 0, 0, 0 },
+    { 3310, 0, 0, 0, 0x4 },
+    { 3355, 1, 150272, 64512, 0x1 },
+    { 3380, 0, 0, 0, 0x2 },
+    { 3500, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent059Track0[25] = {
@@ -12697,12 +12697,12 @@ static const EvSoundCue sEvent071SoundCues[4] = {
 };
 
 static const EventBgEffectEntry sEvent071BgEffects[6] = {
-    { { 200, 0 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 228, 0 }, 0, 0, 0, { 4, 0, 0, 0 } },
-    { { 34, 1 }, 3, 200960, 41472, { 1, 0, 0, 0 } },
-    { { 94, 1 }, 4, 215296, 31488, { 1, 0, 0, 0 } },
-    { { 123, 1 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 194, 1 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 200, 0, 0, 0, 0 },
+    { 228, 0, 0, 0, 0x4 },
+    { 290, 3, 200960, 41472, 0x1 },
+    { 350, 4, 215296, 31488, 0x1 },
+    { 379, 0, 0, 0, 0x2 },
+    { 450, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent071Track0[9] = {

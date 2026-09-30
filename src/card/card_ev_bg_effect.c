@@ -182,7 +182,7 @@ void StartEventBgEffectFadeOut(EventBgEffectWork* w) {
         v = p->x;
     }
 
-    if (*(u16*)p->flags & 0x10) {
+    if (p->flags & 0x10) {
         FadeStartOut(0, v);
     } else {
         FadeToAmount(0, 16, v);
@@ -201,7 +201,7 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* w) {
         v = t->x;
     }
 
-    if (*(u16*)t->flags & 0x10) {
+    if (t->flags & 0x10) {
         FadeStartIn(0, v);
     } else {
         FadeToOriginal(0, v);
@@ -229,11 +229,11 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
         return 0;
     }
 
-    if (*(u16*)e[w->entry].frame <= gEventState->frame && !(*(u16*)e[w->entry].flags & 0x8000)) {
+    if (e[w->entry].frame <= gEventState->frame && !(e[w->entry].flags & 0x8000)) {
         w->entry++;
         cur = &e[w->entry];
 
-        if (*(u16*)cur->flags & 1) {
+        if (cur->flags & 1) {
             LoadEventBgEffect(w);
 
             if (w->animating != 0) {
@@ -241,16 +241,16 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
             }
         }
 
-        if (*(u16*)cur->flags & 4) {
+        if (cur->flags & 4) {
             StartEventBgEffectFadeOut(w);
         }
 
-        if (*(u16*)cur->flags & 8) {
+        if (cur->flags & 8) {
             StartEventBgEffectFadeIn(w);
             w->fadingIn = 1;
         }
 
-        if (*(u16*)cur->flags & 2) {
+        if (cur->flags & 2) {
             ClearEventBgEffect(w);
             gEventState->unk_80 = 0;
             gBldCnt = gEventState->bldCnt;

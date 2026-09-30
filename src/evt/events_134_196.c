@@ -2669,9 +2669,9 @@ static const EventCameraKeyframe sEvent154Camera[6] = {
 };
 
 static const EventBgEffectEntry sEvent154BgEffects[3] = {
-    { { 112, 5 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 122, 5 }, 0, 0, 0, { 4, 0, 0, 0 } },
-    { { 132, 5 }, 6, 64000, 40448, { 1, 128, 0, 0 } },
+    { 1392, 0, 0, 0, 0 },
+    { 1402, 0, 0, 0, 0x4 },
+    { 1412, 6, 64000, 40448, 0x8001 },
 };
 
 static const EventCharaKeyframe sEvent154Track0[26] = {
@@ -3039,11 +3039,11 @@ static const EventCameraKeyframe sEvent156Camera[2] = {
 };
 
 static const EventBgEffectEntry sEvent156BgEffects[5] = {
-    { { 68, 2 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 128, 2 }, 0, 60, 0, { 4, 0, 0, 0 } },
-    { { 224, 2 }, 5, 169728, 54016, { 1, 0, 0, 0 } },
-    { { 228, 2 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 72, 3 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 580, 0, 0, 0, 0 },
+    { 640, 0, 60, 0, 0x4 },
+    { 736, 5, 169728, 54016, 0x1 },
+    { 740, 0, 0, 0, 0x2 },
+    { 840, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent156Track0[14] = {
@@ -4657,11 +4657,11 @@ static const EventCameraKeyframe sEvent167Camera[7] = {
 #endif
 
 static const EventBgEffectEntry sEvent167BgEffects[5] = {
-    { { 234, 6 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 58, 7 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 52, 13 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 122, 13 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1770, 0, 0, 0, 0 },
+    { 1850, 0, 0, 0, 0x14 },
+    { 3380, 0, 0, 0, 0 },
+    { 3450, 0, 0, 0, 0x2 },
+    { 3500, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent167Track0[7] = {
@@ -5384,11 +5384,11 @@ static const EventCameraKeyframe sEvent172Camera[5] = {
 };
 
 static const EventBgEffectEntry sEvent172BgEffects[5] = {
-    { { 64, 1 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 194, 1 }, 0, 60, 0, { 20, 0, 0, 0 } },
-    { { 238, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 52, 13 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 320, 0, 0, 0, 0 },
+    { 450, 0, 60, 0, 0x14 },
+    { 3310, 0, 0, 0, 0 },
+    { 3380, 0, 0, 0, 0x2 },
+    { 3500, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent172Track0[7] = {
@@ -6275,11 +6275,11 @@ static const EventCameraKeyframe sEvent178Camera[6] = {
 };
 
 static const EventBgEffectEntry sEvent178BgEffects[5] = {
-    { { 210, 5 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 4, 6 }, 0, 60, 0, { 20, 0, 0, 0 } },
-    { { 238, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 160, 15 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 136, 19 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1490, 0, 0, 0, 0 },
+    { 1540, 0, 60, 0, 0x14 },
+    { 3310, 0, 0, 0, 0 },
+    { 4000, 0, 0, 0, 0x2 },
+    { 5000, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent178Track0[23] = {
@@ -6436,11 +6436,11 @@ static const EventCameraKeyframe sEvent179Camera[8] = {
 };
 
 static const EventBgEffectEntry sEvent179BgEffects[5] = {
-    { { 180, 0 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 200, 0 }, 0, 10, 0, { 20, 0, 0, 0 } },
-    { { 210, 0 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 211, 0 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 250, 0 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 180, 0, 0, 0, 0 },
+    { 200, 0, 10, 0, 0x14 },
+    { 210, 0, 0, 0, 0 },
+    { 211, 0, 0, 0, 0x2 },
+    { 250, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent179Track0[11] = {
@@ -6839,11 +6839,11 @@ static const EventCameraKeyframe sEvent182Camera[7] = {
 };
 
 static const EventBgEffectEntry sEvent182BgEffects[5] = {
-    { { 100, 5 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 160, 5 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 210, 5 }, 2, 87040, 22784, { 1, 0, 0, 0 } },
-    { { 64, 6 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1380, 0, 0, 0, 0 },
+    { 1440, 0, 0, 0, 0x14 },
+    { 1490, 2, 87040, 22784, 0x1 },
+    { 1600, 0, 0, 0, 0x2 },
+    { 3500, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent182Track0[11] = {
@@ -7147,11 +7147,11 @@ static const EventCameraKeyframe sEvent184Camera[6] = {
 };
 
 static const EventBgEffectEntry sEvent184BgEffects[5] = {
-    { { 250, 5 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 94, 6 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 238, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 52, 13 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1530, 0, 0, 0, 0 },
+    { 1630, 0, 0, 0, 0x14 },
+    { 3310, 0, 0, 0, 0 },
+    { 3380, 0, 0, 0, 0x2 },
+    { 3500, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent184Track0[10] = {
@@ -7727,11 +7727,11 @@ static const EventCameraKeyframe sEvent187Camera[3] = {
 };
 
 static const EventBgEffectEntry sEvent187BgEffects[5] = {
-    { { 48, 4 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 106, 4 }, 0, 50, 0, { 4, 0, 0, 0 } },
-    { { 202, 4 }, 5, 44032, 74752, { 1, 0, 0, 0 } },
-    { { 206, 4 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 241, 4 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1072, 0, 0, 0, 0 },
+    { 1130, 0, 50, 0, 0x4 },
+    { 1226, 5, 44032, 74752, 0x1 },
+    { 1230, 0, 0, 0, 0x2 },
+    { 1265, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent187Track0[10] = {
@@ -8644,10 +8644,10 @@ static const EventCameraKeyframe sEvent193Camera[6] = {
 };
 
 static const EventBgEffectEntry sEvent193BgEffects[4] = {
-    { { 226, 4 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 70, 5 }, 0, 0, 0, { 20, 0, 0, 0 } },
-    { { 184, 11 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 136, 19 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 1250, 0, 0, 0, 0 },
+    { 1350, 0, 0, 0, 0x14 },
+    { 3000, 0, 0, 0, 0x2 },
+    { 5000, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent193Track0[7] = {
@@ -8777,11 +8777,11 @@ static const EventCameraKeyframe sEvent194Camera[12] = {
 };
 
 static const EventBgEffectEntry sEvent194BgEffects[5] = {
-    { { 194, 1 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 18, 2 }, 0, 80, 0, { 20, 0, 0, 0 } },
-    { { 238, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
-    { { 160, 15 }, 0, 0, 0, { 2, 0, 0, 0 } },
-    { { 136, 19 }, 0, 0, 0, { 8, 128, 0, 0 } },
+    { 450, 0, 0, 0, 0 },
+    { 530, 0, 80, 0, 0x14 },
+    { 3310, 0, 0, 0, 0 },
+    { 4000, 0, 0, 0, 0x2 },
+    { 5000, 0, 0, 0, 0x8008 },
 };
 
 static const EventCharaKeyframe sEvent194Track0[15] = {

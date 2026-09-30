@@ -63,11 +63,12 @@ typedef struct EvSoundCue {
 } EvSoundCue;
 
 typedef struct EventBgEffectEntry {
-    u8 frame[0x02];
+    u16 frame;
     u16 effect;
     s32 x;
     s32 y;
-    u8 flags[0x04];
+    u16 flags;
+    u8 unk_0E[0x02];
 } EventBgEffectEntry;
 
 typedef struct EventSequenceDef {

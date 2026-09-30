@@ -132,22 +132,22 @@ u8 task_bos_jf_1(JfWork* work) {
     }
 
     switch (UpdateBtlObjReaction(sub)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = work->attackState;
         work->stateStep = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->flags |= 1;
         work->hurtTimer = 20;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->state = 9;
         work->stateStep = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (work->gimmickTimer == 0) {
                 if (GetRandom() % 100 <= 19) {

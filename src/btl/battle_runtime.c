@@ -995,7 +995,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
             p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
         }
-        return 11;
+        return BTL_REACTION_WARPED;
     }
 
     if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
@@ -1023,9 +1023,9 @@ s32 ApplyBtlObjHit(BtlObj* p) {
 
             if (p->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
                 p->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
-                return 8;
+                return BTL_REACTION_GRAVITY_DEFEATED;
             }
-            return 3;
+            return BTL_REACTION_DEFEATED;
         }
 
         if (p->kind != 55 && GetRandom() % 8 == 0) {
@@ -1037,7 +1037,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
             p->badStatus = BAD_STATUS_NONE;
             p->badStatusTimer = 0;
-            return 7;
+            return BTL_REACTION_GRAVITY;
         }
 
         if (p->flags & BTLOBJ_FLAG_STUN_PENDING) {
@@ -1047,21 +1047,21 @@ s32 ApplyBtlObjHit(BtlObj* p) {
                 p->badStatus = BAD_STATUS_STUN;
                 p->badStatusTimer = 240;
             }
-            return 6;
+            return BTL_REACTION_STUNNED;
         }
 
         if (p->flags & BTLOBJ_FLAG_TERROR_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
             p->badStatus = BAD_STATUS_TERROR;
             p->badStatusTimer = 300;
-            return 12;
+            return BTL_REACTION_TERRIFIED;
         }
 
         if (p->flags & BTLOBJ_FLAG_CONFUSE_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
             p->badStatus = BAD_STATUS_CONFUSE;
             p->badStatusTimer = 300;
-            return 1;
+            return BTL_REACTION_HURT;
         }
 
         if (p->flags & BTLOBJ_FLAG_BIND_PENDING) {
@@ -1071,17 +1071,17 @@ s32 ApplyBtlObjHit(BtlObj* p) {
                 p->badStatus = BAD_STATUS_BIND;
                 p->badStatusTimer = 600;
             }
-            return 1;
+            return BTL_REACTION_HURT;
         }
         p->badStatus = BAD_STATUS_NONE;
         p->badStatusTimer = 0;
-        return 1;
+        return BTL_REACTION_HURT;
     }
 
     if (p->flags & BTLOBJ_FLAG_HEAL_PENDING) {
         p->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_HEAL_PENDING);
         p->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-        return 2;
+        return BTL_REACTION_HEALED;
     }
 
     if (p->flags & BTLOBJ_FLAG_HAZARD_PENDING) {
@@ -1089,9 +1089,9 @@ s32 ApplyBtlObjHit(BtlObj* p) {
 
         if (p->hp > 0) {
             ClearBtlObjActionFlags(p);
-            return 9;
+            return BTL_REACTION_HAZARD;
         }
-        return 0;
+        return BTL_REACTION_NONE;
     }
 
     if (p->flags & BTLOBJ_FLAG_STOP_PENDING) {
@@ -1104,9 +1104,9 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             p->badStatus = BAD_STATUS_STOP;
             p->badStatusTimer = p->damage;
         }
-        return 10;
+        return BTL_REACTION_STOPPED;
     }
-    return 0;
+    return BTL_REACTION_NONE;
 }
 
 u8 TryStartCardAction(BtlObj* p) {
@@ -1167,10 +1167,10 @@ s32 UpdateBtlObjReaction(BtlObj* p) {
         p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
         CreateBtlPopTask(p, 9);
         gBtlWork->hitStop = 12;
-        return 4;
+        return BTL_REACTION_CARD_BROKEN;
     }
     if (TryStartCardAction(p)) {
-        return 5;
+        return BTL_REACTION_CARD_ACTION;
     }
     return ApplyBtlObjHit(p);
 }

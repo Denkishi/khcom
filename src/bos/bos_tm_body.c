@@ -547,19 +547,19 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
     }
 
     switch (UpdateBtlObjReaction(a)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         BosTmBodyResetTimers(b);
         BosTmBodyRollBossCard(b);
         BosTmBodyChooseAction(b);
         b->tm->flags &= ~1;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         b->tm->stateTimer = 0;
         b->tm->state = 14;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         b->hp = a->hp;
         b->tm->flags |= 1;
         b->tm->hitCount++;
@@ -573,8 +573,8 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
             b->tm->flags |= 4;
         }
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         BeginBossDefeat(a);
         b->tm->step = 0;
         b->tm->state = 13;

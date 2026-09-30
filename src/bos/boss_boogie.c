@@ -235,25 +235,25 @@ u8 task_bos_boogie_1(BoogieWork* work) {
     u16 random;
 
     switch (UpdateBtlObjReaction(a)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 1;
         work->timer = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->state = 3;
         work->timer = 0;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (work->state != 4) {
             work->state = 4;
             work->defeatStep = 0;
             work->timer = 0;
         }
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 2;
         work->timer = 0;
         break;

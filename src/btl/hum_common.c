@@ -106,14 +106,14 @@ s32 _0800E434(HumWork* work) {
     r = UpdateBtlObjReaction(actor);
 
     switch (r) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->flags |= 4;
         gRikuBtlWork->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
         work->itemIndex = 0;
         work->stateTimer = 0;
         AnimReset(&work->anim);
         break;
-    case 11:
+    case BTL_REACTION_WARPED:
         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
         gBtlWork->hitStop = 15;
 
@@ -125,35 +125,35 @@ s32 _0800E434(HumWork* work) {
         work->state = 11;
         work->stateTimer = 0;
         break;
-    case 6:
+    case BTL_REACTION_STUNNED:
         HumStartKnockback(work);
         work->state = 11;
         work->stateTimer = 0;
         break;
-    case 7:
-    case 8:
+    case BTL_REACTION_GRAVITY:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->state = 14;
         work->stateTimer = 0;
         break;
-    case 1:
+    case BTL_REACTION_HURT:
         HumStartKnockback(work);
         work->state = 1;
         work->stateTimer = 0;
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         work->flags |= 4;
         work->state = 3;
         work->stateTimer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
         work->state = 10;
         work->stateTimer = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 9;
         work->stateTimer = 0;
         break;
-    case 10:
+    case BTL_REACTION_STOPPED:
         if (work->state != 13) {
             work->state = 13;
             work->stateTimer = 0;

@@ -2024,23 +2024,23 @@ u8 task_bos_dsd_1(DsdWork* work) {
     }
 
     switch (UpdateBtlObjReaction(b)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 2;
         b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->stateStep = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->flags |= 1;
         work->timer = 20;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->state = 11;
         work->stateStep = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 8;
         work->stateStep = 0;
         break;

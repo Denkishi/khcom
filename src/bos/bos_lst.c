@@ -1970,13 +1970,13 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
         return;
     }
     switch (UpdateBtlObjReaction(obj)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         p->state = 1;
         p->timer = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
         p->hurtTimer = 20;
@@ -1988,7 +1988,7 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
             p->timer = 0;
         }
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         p->state = 4;
         p->timer = 0;
         p->restartAnim = 1;
@@ -1999,7 +1999,7 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
         s.facing = work->facing;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstSnp, &s);
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         p->state = 2;
         p->timer = 0;
         break;
@@ -2103,13 +2103,13 @@ u8 task_bos_lst_1(BosLstWork* work) {
         work->subsDefeated = 0;
     }
     switch (UpdateBtlObjReaction(obj)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 1;
         work->step = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
         work->unk_076 = 20;
@@ -2125,12 +2125,12 @@ u8 task_bos_lst_1(BosLstWork* work) {
             work->state = 3;
         }
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         work->state = 4;
         work->step = 0;
         work->defeatTimer = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 2;
         work->step = 0;
         break;

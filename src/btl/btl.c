@@ -1263,20 +1263,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     switch (UpdateBtlObjReaction(p)) {
-    case 7:
+    case BTL_REACTION_GRAVITY:
         work->speed = 0;
         work->state = 87;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 1:
+    case BTL_REACTION_HURT:
         work->speed = 0;
         work->state = 13;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->speed = 0;
 
         if (p->btl->hcEffect == 27) {
@@ -1290,14 +1290,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
         p->flags &= ~BTLOBJ_FLAG_HURT;
         work->state = 1;
         work->steps = 0;
         work->stateTimer = 0;
         p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
         break;
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         p->btl->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
         p->btl->flags &= ~BTL_FLAG_PUSHING_EDGE;
         work->flags |= BTL_SORA_FLAG_PASS_THROUGH;
@@ -2148,7 +2148,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->speed = 0;
         p->vx = p->vy = 0;
         break;
-    case 9:
+    case BTL_REACTION_HAZARD:
         switch (work->state) {
         case 67:
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
@@ -2182,7 +2182,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         switch (work->state) {
         case 23:
         case 24:
@@ -2226,7 +2226,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 11:
+    case BTL_REACTION_WARPED:
         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
         gBtlWork->hitStop = 15;
 
@@ -2240,14 +2240,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 6:
+    case BTL_REACTION_STUNNED:
         StartBtlSoraKnockback(work);
         work->speed = 0;
         work->state = 34;
         work->steps = 0;
         work->stateTimer = 0;
         break;
-    case 10:
+    case BTL_REACTION_STOPPED:
         if (work->state != 43) {
             work->flags |= BTL_SORA_FLAG_PASS_THROUGH;
             work->speed = 0;
@@ -7308,8 +7308,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
         switch (UpdateBtlObjReaction(p)) {
-        case 1:
-        case 7:
+        case BTL_REACTION_HURT:
+        case BTL_REACTION_GRAVITY:
             work->speed = 0;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -7324,8 +7324,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->stateTimer = 0;
             }
             break;
-        case 3:
-        case 8:
+        case BTL_REACTION_DEFEATED:
+        case BTL_REACTION_GRAVITY_DEFEATED:
             EndRikuDarkMode(work);
             work->speed = 0;
 
@@ -7339,14 +7339,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->stateTimer = 0;
             }
             break;
-        case 2:
+        case BTL_REACTION_HEALED:
             p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
             p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
             break;
-        case 5: {
+        case BTL_REACTION_CARD_ACTION: {
             BtlObj* e;
 
             DisableBtlRikuPassThrough(work);
@@ -7511,7 +7511,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->vx = p->vy = 0;
             break;
         }
-        case 9:
+        case BTL_REACTION_HAZARD:
             if ((gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) == 0) {
                 gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
             }
@@ -7534,7 +7534,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->stateTimer = 0;
             }
             break;
-        case 4:
+        case BTL_REACTION_CARD_BROKEN:
             switch (work->state) {
             case 24:
             case 25:
@@ -7574,8 +7574,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->stateTimer = 0;
             }
             break;
-        case 6:
-        case 11:
+        case BTL_REACTION_STUNNED:
+        case BTL_REACTION_WARPED:
             work->speed = 0;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -7590,7 +7590,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->stateTimer = 0;
             }
             break;
-        case 10:
+        case BTL_REACTION_STOPPED:
             if (work->state != 17) {
                 work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
                 work->speed = 0;

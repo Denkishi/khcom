@@ -5823,13 +5823,13 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
         }
     }
     switch (UpdateBtlObjReaction(p)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 1;
         work->step = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         if (work->state == 5) {
             work->hurtTimer = 16;
             if (work->shared.gimmickTimer <= 0) {
@@ -5842,11 +5842,11 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
             work->step = 0;
         }
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         work->state = 4;
         work->step = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 2;
         work->step = 0;
         break;

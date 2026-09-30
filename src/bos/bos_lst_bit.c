@@ -356,26 +356,26 @@ void BosLstBitHandleHit(LstState* work) {
     obj = &work->obj;
 
     switch (UpdateBtlObjReaction(obj)) {
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->hurtTimer = 20;
         BosLstBitSpawnFal(work, 0);
         ClearBtlObjActionFlags(obj);
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         SetBtlObjUnhittable(&work->obj, 1);
         BosLstBitSpawnFal(work, 0);
         BosLstBitSpawnFal(work, 0);
         ClearBtlObjActionFlags(obj);
         break;
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         ClearBtlObjActionFlags(obj);
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         ClearBtlObjActionFlags(obj);
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
         break;
     }
 }

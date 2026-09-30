@@ -511,16 +511,16 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
     if (work->follower == 0) {
         switch (UpdateBtlObjReaction(p)) {
-        case 5:
+        case BTL_REACTION_CARD_ACTION:
             work->state = 3;
             work->timer = 0;
             break;
-        case 4:
+        case BTL_REACTION_CARD_BROKEN:
             work->state = 0;
             work->timer = 0;
             gBosBoogieSakuOpenTime += 180;
             break;
-        case 2:
+        case BTL_REACTION_HEALED:
         default:
             if (ConsumeGimmickFlag(0) != 0) {
                 BosBoogieApplyGimmick();
@@ -532,11 +532,11 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             }
 
             break;
-        case 1:
-        case 3:
-        case 6:
-        case 7:
-        case 8:
+        case BTL_REACTION_HURT:
+        case BTL_REACTION_DEFEATED:
+        case BTL_REACTION_STUNNED:
+        case BTL_REACTION_GRAVITY:
+        case BTL_REACTION_GRAVITY_DEFEATED:
             work->state = 2;
             work->timer = 0;
             break;
@@ -567,11 +567,11 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         }
 
         switch ((u32)UpdateBtlObjReaction(p)) {
-        case 1:
-        case 3:
-        case 6:
-        case 7:
-        case 8:
+        case BTL_REACTION_HURT:
+        case BTL_REACTION_DEFEATED:
+        case BTL_REACTION_STUNNED:
+        case BTL_REACTION_GRAVITY:
+        case BTL_REACTION_GRAVITY_DEFEATED:
             work->state = 2;
             work->timer = 0;
             break;
@@ -1219,23 +1219,23 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
     BtlObj* p = &work->obj;
 
     switch (UpdateBtlObjReaction(p)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 0;
         work->timer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
     default:
         if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
         BosBoogieApplyGimmick();
-    case 1:
-    case 3:
-    case 4:
-    case 6:
-    case 7:
-    case 8:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_CARD_BROKEN:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (work->state != 1) {
             work->state = 1;
             work->timer = 0;
@@ -1536,23 +1536,23 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
     s32 checkKnives;
 
     switch (UpdateBtlObjReaction(e)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 0;
         work->timer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
     default:
         if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
         BosBoogieApplyGimmick();
-    case 1:
-    case 3:
-    case 4:
-    case 6:
-    case 7:
-    case 8:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_CARD_BROKEN:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (work->state != 1) {
             work->state = 1;
             work->timer = 0;
@@ -1651,23 +1651,23 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
     BtlObj* q = &arg->actor;
 
     switch (UpdateBtlObjReaction(p)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 0;
         work->timer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
     default:
         if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
         BosBoogieApplyGimmick();
-    case 1:
-    case 3:
-    case 4:
-    case 6:
-    case 7:
-    case 8:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_CARD_BROKEN:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (work->state != 1) {
             work->state = 1;
             work->timer = 0;
@@ -1964,23 +1964,23 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     u16 chance;
 
     switch (UpdateBtlObjReaction(p)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 1;
         work->timer = 0;
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         BosUrsulaUpdateTakoRecovery(work);
         work->state = 3;
         work->timer = 0;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->state = 4;
         work->timer = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 2;
         break;
     }
@@ -2472,23 +2472,23 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     }
 
     switch (UpdateBtlObjReaction(p)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->state = 7;
         work->timer = 0;
         RequestBossCardRandom();
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->state = 1;
         work->timer = 0;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         work->state = 2;
         work->timer = 0;
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         ClearBtlObjActionFlags(p);
         work->state = 0;
         RequestBossCardRandom();

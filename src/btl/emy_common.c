@@ -161,55 +161,55 @@ u8 _0800CBDC(EmyWork* work) {
     }
 
     switch (UpdateBtlObjReaction(actor)) {
-    case 6:
+    case BTL_REACTION_STUNNED:
         EmyStartKnockback(work);
         work->state = 9;
         work->stateTimer = 0;
         break;
-    case 7:
+    case BTL_REACTION_GRAVITY:
         work->state = 15;
         work->stateTimer = 0;
         break;
-    case 8:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         SetBtlObjUnhittable(actor, 1);
         work->state = 15;
         work->stateTimer = 0;
         break;
-    case 1:
+    case BTL_REACTION_HURT:
         EmyStartKnockback(work);
         work->state = 1;
         work->stateTimer = 0;
         break;
-    case 11:
+    case BTL_REACTION_WARPED:
         SetBtlObjUnhittable(actor, 1);
         work->state = 10;
         work->stateTimer = 0;
         break;
-    case 3:
+    case BTL_REACTION_DEFEATED:
         SetBtlObjUnhittable(actor, 1);
         EmyStartKnockback(work);
         work->state = 3;
         work->stateTimer = 0;
         break;
-    case 12:
+    case BTL_REACTION_TERRIFIED:
         work->state = 13;
         work->stateTimer = 0;
         break;
-    case 2:
+    case BTL_REACTION_HEALED:
         if (work->state != 12) {
             work->state = 6;
             work->stateTimer = 0;
         }
         break;
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->stateTimer = 0;
         return 1;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         work->state = 5;
         work->stateTimer = 0;
         work->visible = 1;
         break;
-    case 10:
+    case BTL_REACTION_STOPPED:
         if (work->state != 12) {
             work->state = 12;
             work->stateTimer = 0;

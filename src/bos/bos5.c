@@ -2721,7 +2721,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
     }
 
     switch (UpdateBtlObjReaction(&e->actor)) {
-    case 5:
+    case BTL_REACTION_CARD_ACTION:
         work->cardActionSeen = 1;
 
         if (work->state == 10 || work->nextState == 10) {
@@ -2881,9 +2881,9 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             }
         }
         break;
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         e->flags |= 2;
         e->flashTimer = 0;
 
@@ -2892,8 +2892,8 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             work->entries[1].flashTimer = 0;
         }
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         SetBtlObjUnhittable(&e->actor, 1);
         e->flags |= 4;
 
@@ -2916,7 +2916,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             }
         }
         break;
-    case 4:
+    case BTL_REACTION_CARD_BROKEN:
         if (work->state != 10 && work->nextState != 10) {
             if (GetRandom() % 100 < 30) {
                 _0801C1F8(0, e->baseX, e->baseY, e->baseZ);
@@ -3683,21 +3683,21 @@ void BosMdHandleReaction(MdWork* work) {
         BtlObj* e = &work->sub[i];
 
         switch (UpdateBtlObjReaction(e)) {
-        case 5:
+        case BTL_REACTION_CARD_ACTION:
             BosMdChooseAttack(work);
             break;
-        case 1:
-        case 6:
-        case 7:
+        case BTL_REACTION_HURT:
+        case BTL_REACTION_STUNNED:
+        case BTL_REACTION_GRAVITY:
             work->hurtTimer = 30;
             work->hurtState[i] = 2;
             break;
-        case 3:
-        case 8:
+        case BTL_REACTION_DEFEATED:
+        case BTL_REACTION_GRAVITY_DEFEATED:
             SetBtlObjUnhittable(e, 1);
             BosMdRequestState(work, 4);
             break;
-        case 4:
+        case BTL_REACTION_CARD_BROKEN:
             BosMdRequestState(work, 0);
             ClearBtlObjActionFlags(e);
             break;
@@ -3988,14 +3988,14 @@ void BosMdFireHandleReaction(MdFireWork* work) {
     e = &work->sub;
 
     switch (UpdateBtlObjReaction(e)) {
-    case 1:
-    case 6:
-    case 7:
+    case BTL_REACTION_HURT:
+    case BTL_REACTION_STUNNED:
+    case BTL_REACTION_GRAVITY:
         work->flashTimer = 30;
         work->state = 3;
         break;
-    case 3:
-    case 8:
+    case BTL_REACTION_DEFEATED:
+    case BTL_REACTION_GRAVITY_DEFEATED:
         if (GetRandom() % 100 <= 49) {
             if ((gBtlWork->flags & 0x100000) == 0) {
                 _0801C1F8(0, e->x, e->y, e->z);

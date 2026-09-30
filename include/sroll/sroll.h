@@ -193,6 +193,10 @@ typedef struct SrollFont {
     u8 unk_14;
 } SrollFont;
 
+enum SrollFlag {
+    SROLL_FLAG_TILEMAP_DIRTY = 0x1
+};
+
 typedef struct SrollWork {
     u16 flags;
     u16 fgColor;

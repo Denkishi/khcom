@@ -884,7 +884,7 @@ void SrollTextResetWindow(SrollWork* w, u8 flush) {
     if (flush == 1) {
         SrollTextFlushTilemap(w);
     } else {
-        t = w->flags | 1;
+        t = w->flags | SROLL_FLAG_TILEMAP_DIRTY;
         w->flags = t;
     }
 }
@@ -925,7 +925,7 @@ void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
     if (flush == 1) {
         SrollTextFlushTilemap(w);
     } else {
-        t = w->flags | 1;
+        t = w->flags | SROLL_FLAG_TILEMAP_DIRTY;
         w->flags = t;
     }
 }
@@ -998,7 +998,7 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
             t += w->textWidth;
         }
         w->x += wd;
-        w->flags |= 1;
+        w->flags |= SROLL_FLAG_TILEMAP_DIRTY;
         r = 1;
     } else {
         switch (c) {
@@ -1046,7 +1046,7 @@ void SrollTextDrawNextGlyph(SrollWork* w, u8 flush) {
         r = SrollTextProcessNextChar(w);
     }
 
-    if (flush == 1 && (w->flags & 1)) {
+    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1056,7 +1056,7 @@ void SrollTextDrawQueued(SrollWork* w, u8 flush) {
         SrollTextProcessNextChar(w);
     }
 
-    if (flush == 1 && (w->flags & 1)) {
+    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1078,7 +1078,7 @@ void SrollTextFlushTilemap(SrollWork* w) {
         off = w->windowY * w->mapWidth * 2;
         RequestDma3Copy(w->tilemapBuffer + off, w->tilemap + off, w->windowHeight * w->mapWidth * 2);
     }
-    w->flags &= 0xFFFE;
+    w->flags &= ~SROLL_FLAG_TILEMAP_DIRTY;
 }
 
 void SrollTextDrawString(SrollWork* w, u8* s, u8 flush) {
@@ -1086,7 +1086,7 @@ void SrollTextDrawString(SrollWork* w, u8* s, u8 flush) {
     SrollTextEnqueueString(w, s);
     SrollTextDrawQueued(w, 0);
 
-    if (flush == 1 && (w->flags & 1)) {
+    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1097,7 +1097,7 @@ void SrollTextDrawStringAtTile(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     SrollTextEnqueueString(w, s);
     SrollTextDrawQueued(w, 0);
 
-    if (flush == 1 && (w->flags & 1)) {
+    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1125,7 +1125,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
         SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, 8 - (w->x & 7));
     }
 
-    if (flush == 1 && (w->flags & 1)) {
+    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(w);
     }
 }

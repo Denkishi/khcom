@@ -31,6 +31,10 @@
 void _08019CB4(void);
 
 #ifdef VERSION_EU
+enum LangFlag {
+    LANG_FLAG_HIDE_CURSOR = 0x1
+};
+
 typedef struct LangWork {
     s16 cursor;
     s16 timer;

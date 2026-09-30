@@ -1842,36 +1842,36 @@ void SetPooSoraAnimation(PooSoraWork* w, s32 b, u16 c) {
     switch (gPooActor.angle) {
     case 0x2D:
         d = 4;
-        w->flags |= 2;
+        w->flags |= POO_SORA_FLAG_FLIP_X;
         break;
     case 0x40:
         d = 3;
-        w->flags |= 2;
+        w->flags |= POO_SORA_FLAG_FLIP_X;
         break;
     case 0x53:
         d = 2;
-        w->flags |= 2;
+        w->flags |= POO_SORA_FLAG_FLIP_X;
         break;
     case 0x80:
         d = 1;
-        w->flags &= ~2;
+        w->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
     case 0xAD:
         d = 2;
-        w->flags &= ~2;
+        w->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
     case 0xC0:
         d = 3;
-        w->flags &= ~2;
+        w->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
     case 0xD3:
         d = 4;
-        w->flags &= ~2;
+        w->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
     case 0x00:
     default:
         d = 0;
-        w->flags &= ~2;
+        w->flags &= ~POO_SORA_FLAG_FLIP_X;
         break;
     }
 
@@ -2489,7 +2489,7 @@ void task_poo_sora_2(PooSoraWork* w) {
     s16 x;
     s16 y;
 
-    c = w->flags & 2;
+    c = w->flags & POO_SORA_FLAG_FLIP_X;
     prio = 0x800;
 
     if (c != 0) {

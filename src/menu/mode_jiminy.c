@@ -1392,7 +1392,7 @@ void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s1
     gJiminyWork->x2 = f + 56;
     gJiminyWork->y = g - 10;
     gJiminyWork->y2 = g + h * (a - 1) + 12;
-    gJiminyWork->flags = (gJiminyWork->flags & 0xFFE5) | 4;
+    gJiminyWork->flags = (gJiminyWork->flags & ~(JIMINY_FLAG_SHOW_TITLE | JIMINY_FLAG_SCROLL_UP | JIMINY_FLAG_SCROLL_DOWN)) | JIMINY_FLAG_SHOW_CURSOR;
     gJiminyWork->shownChars = 0;
     JiminyInitCursor(gJiminyWork->listX - 24, gJiminyWork->listY - 4,
         gJiminyWork->rowHeight);
@@ -1418,16 +1418,16 @@ u8 JiminyHandleListInput(void) {
     }
 
     if (gJiminyWork->cursorRow < gJiminyWork->cursor) {
-        gJiminyWork->flags |= 8;
+        gJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
     } else {
-        gJiminyWork->flags &= 0xFFF7;
+        gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
     }
 
     if (gJiminyWork->visibleRows - gJiminyWork->cursorRow <
         gJiminyWork->itemCount - gJiminyWork->cursor) {
-        gJiminyWork->flags |= 0x10;
+        gJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
     } else {
-        gJiminyWork->flags &= 0xFFEF;
+        gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
     }
 
     if (gJiminyWork->moveDelay <= 0) {
@@ -1593,12 +1593,12 @@ void mode_jiminy_0(void) {
         e = sJiminyEntries;
         e += 14;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
-        gJiminyWork->flags = 2;
+        gJiminyWork->flags = JIMINY_FLAG_SHOW_TITLE;
     } else {
         gJiminyWork->entry = 0;
         e = sJiminyEntries;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
-        gJiminyWork->flags = 3;
+        gJiminyWork->flags = (JIMINY_FLAG_SHOW_MESSAGE | JIMINY_FLAG_SHOW_TITLE);
     }
 }
 
@@ -1641,8 +1641,8 @@ void mode_jiminy_1(void) {
         break;
     case 2:
         if (gJiminyWork->stateTimer == 0) {
-            c = gJiminyWork->flags | 2;
-            gJiminyWork->flags = c & 0xFFFB;
+            c = gJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
+            gJiminyWork->flags = c & ~JIMINY_FLAG_SHOW_CURSOR;
             gJiminyWork->steps = 16;
             LoadBgMap(1, gUnk_08F61B84, 0x800);
         }
@@ -1795,7 +1795,7 @@ void mode_jiminy_1(void) {
     gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     SetBlendAlpha(t, 16 - t);
 
-    if (gJiminyWork->flags & 1) {
+    if (gJiminyWork->flags & JIMINY_FLAG_SHOW_MESSAGE) {
         EnableBg(2);
         DrawMsgGlyphs(gJiminyWork->shownChars);
         DrawSprite(0x23, 0x76, AnimUpdate(&gJiminyWork->anim), gJiminyWork->tiles3,
@@ -1856,7 +1856,7 @@ void mode_jiminy_1(void) {
         }
     }
 
-    if (gJiminyWork->flags & 2) {
+    if (gJiminyWork->flags & JIMINY_FLAG_SHOW_TITLE) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
@@ -1948,18 +1948,18 @@ void mode_jiminy_1(void) {
     }
 
     if (gJiminyWork->state == 7) {
-        if (gJiminyWork->flags & 8) {
+        if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
             DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3),
                 gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
         }
 
-        if (gJiminyWork->flags & 0x10) {
+        if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
             DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
                 gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
         }
 
         if (FadeIsActive() == 0) {
-            if (gJiminyWork->flags & 4) {
+            if (gJiminyWork->flags & JIMINY_FLAG_SHOW_CURSOR) {
                 if (gJiminyWork->moveDelay <= 0) {
                     DrawSprite(gJiminyWork->x4 >> 8, gJiminyWork->y5 >> 8,
                         AnimUpdate(&gJiminyWork->anim2), gJiminyWork->tiles4,
@@ -2410,14 +2410,14 @@ void JiminyDetailUpdate(void) {
         SetBlendAlpha(0, 16);
     case 9:
         if (gJiminyWork->cursor > 0) {
-            gJiminyWork->flags |= 8;
+            gJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
         } else {
-            gJiminyWork->flags &= ~8;
+            gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
         }
         if (gJiminyWork->visibleRows < gJiminyWork->itemCount - gJiminyWork->cursor) {
-            gJiminyWork->flags |= 0x10;
+            gJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
         } else {
-            gJiminyWork->flags &= ~0x10;
+            gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
         }
         if (FadeIsActive() != 0) {
             break;
@@ -2484,11 +2484,11 @@ void JiminyDetailUpdate(void) {
         DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
             gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
     }
-    if (gJiminyWork->flags & 8) {
+    if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
         DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3) + 4,
             gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
     }
-    if (gJiminyWork->flags & 0x10) {
+    if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
         DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
             gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
     }

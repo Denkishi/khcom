@@ -771,6 +771,10 @@ typedef struct PooButterflyWork {
     s32 unk_E0;
 } PooButterflyWork;
 
+enum PooSoraFlag {
+    POO_SORA_FLAG_FLIP_X = 0x2
+};
+
 typedef struct PooSoraWork {
     void* tiles;
     void* palette;

@@ -66,6 +66,14 @@ typedef struct JiminyEntry {
     s32 detail;
 } JiminyEntry;
 
+enum JiminyFlag {
+    JIMINY_FLAG_SHOW_MESSAGE = 0x1,
+    JIMINY_FLAG_SHOW_TITLE = 0x2,
+    JIMINY_FLAG_SHOW_CURSOR = 0x4,
+    JIMINY_FLAG_SCROLL_UP = 0x8,
+    JIMINY_FLAG_SCROLL_DOWN = 0x10
+};
+
 typedef struct JiminyWork {
     s32 state;
     void* tiles;

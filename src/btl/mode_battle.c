@@ -116,13 +116,13 @@ void eu_08009E10(void) {
         }
 
         if (gLangWork->timer % 4 < 2) {
-            gLangWork->flags &= ~1;
+            gLangWork->flags &= ~LANG_FLAG_HIDE_CURSOR;
         } else {
-            gLangWork->flags |= 1;
+            gLangWork->flags |= LANG_FLAG_HIDE_CURSOR;
         }
 
         if (gLangWork->timer > 29) {
-            gLangWork->flags &= ~1;
+            gLangWork->flags &= ~LANG_FLAG_HIDE_CURSOR;
             gLangWork->state = 3;
             gLangWork->timer = 0;
         } else {
@@ -142,7 +142,7 @@ void eu_08009E10(void) {
         break;
     }
 
-    if (!(gLangWork->flags & 1)) {
+    if (!(gLangWork->flags & LANG_FLAG_HIDE_CURSOR)) {
         switch (gLangWork->cursor) {
         case 0:
             DrawSprite(0x60, 0x58, gUnkEu_08C9C97C, gLangWork->tiles, gLangWork->palette, 0, 0, 0);

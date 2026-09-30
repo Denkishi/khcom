@@ -106,7 +106,7 @@ extern u16 gBldCnt;
 extern u16 gBg1VOfs;
 extern u16 gBg3HOfs;
 extern u32 gBg3Y;
-extern u16 gBldAlpha;
+extern vu16 gBldAlpha;
 extern struct FadeWork* gFadeWork;
 
 void CommitDisplayRegs(void);

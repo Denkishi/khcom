@@ -53,7 +53,7 @@ u16 gBldCnt IWRAM_DATA(4);
 u16 gBg1VOfs IWRAM_DATA(4);
 u16 gBg3HOfs IWRAM_DATA(4);
 u32 gBg3Y IWRAM_DATA(4);
-u16 gBldAlpha IWRAM_DATA(4);
+vu16 gBldAlpha IWRAM_DATA(4);
 struct FadeWork* gFadeWork IWRAM_DATA(4);
 
 static vu16* sBgControl[4] = { &gBg0Cnt, &gBg1Cnt, &gBg2Cnt, &gBg3Cnt };

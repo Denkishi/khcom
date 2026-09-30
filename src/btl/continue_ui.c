@@ -196,7 +196,7 @@ static s32 Continue_1(ContinueWork* p) {
     p->gfx = AnimUpdate(&p->anim);
     p->gfx2 = AnimUpdate(&p->anim2);
     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = p->blendAlpha;
+    gBldAlpha = p->blendAlpha;
 
     if (p->state == 0) {
         if (FadeIsActive() == 0) {

@@ -2815,7 +2815,7 @@ u8 eu_0806C848(EventSeqWork* work) {
         if (u->maps3 != NULL) {
             if ((u->flags & 2) != 0) {
                 gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
-                (*(volatile u16*)&gBldAlpha) = 0x050E;
+                gBldAlpha = 0x050E;
                 SetBgPriority(2, 1);
                 gEventState->bldCnt = 0x1D42;
                 gEventState->bldAlpha = 0x050E;
@@ -2938,7 +2938,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             if (u->maps3 != NULL) {
                 if ((u->flags & 2) != 0) {
                     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
-                    (*(volatile u16*)&gBldAlpha) = 0x050E;
+                    gBldAlpha = 0x050E;
                     SetBgPriority(2, 1);
                     gEventState->bldCnt = 0x1D42;
                     gEventState->bldAlpha = 0x050E;
@@ -3494,7 +3494,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         if (gFrameCounter % 6 == 0) {
             u16 v = GetRandom() % 7 + 4;
 
-            (*(volatile u16*)&gBldAlpha) = ((16 - v) << 8) | v;
+            gBldAlpha = ((16 - v) << 8) | v;
         }
     }
     return 1;
@@ -3911,7 +3911,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 16;
+    gBldAlpha = 16;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeOutUpdate);
@@ -3934,7 +3934,7 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
             p->unk_1A9--;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
+    gBldAlpha = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;
@@ -3985,7 +3985,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 0x1000;
+    gBldAlpha = 0x1000;
     p->unk_1AA = 0;
     p->unk_1A9 = 0;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeInUpdate);
@@ -4008,7 +4008,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
             p->unk_1A9++;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
+    gBldAlpha = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;
@@ -4058,7 +4058,7 @@ u8 func_0806F2EC(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 16;
+    gBldAlpha = 16;
     p->unk_1AA = 0;
     p->unk_1A9 = 0;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F3A8);
@@ -4074,7 +4074,7 @@ u8 func_0806F3A8(EventCharaWork* p, void* a) {
             p->unk_1A9++;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = (p->unk_1A9 << 8) | 16;
+    gBldAlpha = (p->unk_1A9 << 8) | 16;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;
@@ -4118,7 +4118,7 @@ u8 func_0806F47C(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 0x1010;
+    gBldAlpha = 0x1010;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F53C);
@@ -4134,7 +4134,7 @@ u8 func_0806F53C(EventCharaWork* p, void* a) {
             p->unk_1A9--;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = (p->unk_1A9 << 8) | 16;
+    gBldAlpha = (p->unk_1A9 << 8) | 16;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;
@@ -4373,7 +4373,7 @@ u8 func_0806FB6C(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 16;
+    gBldAlpha = 16;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806FC28);
@@ -4389,7 +4389,7 @@ u8 func_0806FC28(EventCharaWork* p, void* a) {
             p->unk_1A9--;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = p->unk_1A9;
+    gBldAlpha = p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;
@@ -4433,7 +4433,7 @@ u8 func_0806FCF4(void* work, void* a) {
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
     gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-    (*(volatile u16*)&gBldAlpha) = 0;
+    gBldAlpha = 0;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806FDB0);
@@ -4449,8 +4449,8 @@ u8 func_0806FDB0(EventCharaWork* p, void* a) {
             p->unk_1A9--;
         }
     }
-    (*(volatile u16*)&gBldAlpha) = (16 - p->unk_1A9) | (p->unk_1A9 << 8);
-    (*(volatile u16*)&gBldAlpha) = (p->unk_1A9 << 8) | 16;
+    gBldAlpha = (16 - p->unk_1A9) | (p->unk_1A9 << 8);
+    gBldAlpha = (p->unk_1A9 << 8) | 16;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
         gBldCnt = 0;

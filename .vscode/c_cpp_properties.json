@@ -5,6 +5,7 @@
       "compileCommands": "${workspaceFolder}/compile_commands.json",
       "includePath": [
         "${workspaceFolder}/include",
+        "${workspaceFolder}/include/**",
         "${workspaceFolder}/tools/agbcc/include"
       ],
       "defines": ["VERSION_US"],

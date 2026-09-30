@@ -245,7 +245,9 @@ if asset_gfx_mode == "built":
 
 units = materialize_assets(regional_plan, units, version, build_dir)
 
-headers = sorted(str(p) for p in Path("include").glob("*.h"))
+include_dirs = ["include"] + sorted(str(p) for p in Path("include").iterdir() if p.is_dir() and p.name != "gba")
+include_flags = " ".join(f"-I {d}" for d in include_dirs)
+headers = sorted(str(p) for p in Path("include").rglob("*.h"))
 generated_headers = sorted([rel(group["header"]) for group in groups.values()]
                            + [rel(pool.header(version)) for pool in text_pools])
 asm_includes = sorted(str(p) for p in Path("include").glob("*.inc"))
@@ -362,7 +364,7 @@ with out.open("w") as f:
         f"{raw_as_flags} -I . -I include",
     )
     n.variable("asdefines", f"--defsym VERSION_{version.upper()}=1")
-    n.variable("cppflags", f"-nostdinc -undef -I include -I {build_dir}/gen -I tools/agbcc/include -DVERSION_{version.upper()}")
+    n.variable("cppflags", f"-nostdinc -undef {include_flags} -I {build_dir}/gen -I tools/agbcc/include -DVERSION_{version.upper()}")
     n.variable("cflags", "-mthumb-interwork -fno-common -O2 -fprologue-bugfix")
     n.variable("pyreport", report_python)
     n.newline()
@@ -511,7 +513,7 @@ Path("objdiff.json").write_text(json.dumps(objdiff_config, indent=2) + "\n")
 root = Path.cwd()
 cc_args = [
     "clang", "-nostdinc", "-fno-builtin", "--target=arm-none-eabi",
-    "-mthumb", "-std=gnu89", "-Iinclude", "-Itools/agbcc/include",
+    "-mthumb", "-std=gnu89", *[f"-I{d}" for d in include_dirs], "-Itools/agbcc/include",
     f"-DVERSION_{version.upper()}",
 ]
 compile_commands = [

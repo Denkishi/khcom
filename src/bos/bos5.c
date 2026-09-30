@@ -29,7 +29,7 @@
 #include "world_types.h"
 
 static const EmyKind sBosGaEmyKind =
-{32, 100, 16, 16, 0, 100, 1}
+{32, 100, 16, 16, 0, 100, EMY_KIND_FLAG_NO_COLLIDER}
 ;
 
 static const GaEntryDef sGaEntryDefs[6] = {
@@ -111,7 +111,7 @@ TaskDesc gTaskDescBosGa = {
     sizeof(GaWork),
 };
 
-static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
+static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static const MdMapData sMdMapData = {
     gUnk_099AC97C, 32768, { 0, 0 }, gUnk_09A3C8BC, 192, { 0, 0 }, { gUnk_09A208DC, gUnk_09A210DC, gUnk_09A218DC, gUnk_09A220DC }
@@ -435,7 +435,7 @@ static const MdFireDef sMdFireDefs[6] = {
     { sUnk_09992E98, 4, 0 },
 };
 
-static const EmyKind sBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
+static const EmyKind sBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static TaskDesc sTaskDescBosMdFire = {
     "task_bos_md_fire",

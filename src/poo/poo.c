@@ -488,7 +488,7 @@ void UpdatePoohStumpCircle(PoohWork* w) {
 s32 GetPooGroundZ(Collider* w, PooPos* p, u8* c) {
     s32 v;
 
-    if ((w->standFlags & 1) != 0) {
+    if ((w->standFlags & COLLIDER_STAND_OVER_PLATFORM) != 0) {
         if (p->ground < w->platformZ) {
             v = p->ground;
         } else {
@@ -1821,7 +1821,7 @@ s32 GetPooSoraGroundZ(PooSoraWork* w) {
 
     p = &gPooActor.pos;
 
-    if ((w->collider.standFlags & 1) != 0) {
+    if ((w->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) != 0) {
         if (p->ground < w->collider.platformZ) {
             v = p->ground;
         } else {
@@ -4806,7 +4806,7 @@ void task_poo_leaf_0(PooLeafWork* w, PooSpawnArgs* a) {
 }
 
 u8 task_poo_leaf_1(PooLeafWork* w) {
-    if (w->palette != NULL && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
+    if (w->palette != NULL && (w->collider.standFlags & COLLIDER_STAND_STOOD_ON) != 0 && w->playing == 0) {
         w->playing = 1;
         AnimReset(&w->anim);
         m4aSongNumStart(SONG_SND_224);
@@ -4847,7 +4847,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
 
             if (AnimIsFinished(&w->anim) == 0) {
                 DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, 0x800, 0xFFF1);
-            } else if ((w->collider.standFlags & 2) == 0) {
+            } else if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) == 0) {
                 *p = 0;
             }
         }
@@ -4881,7 +4881,7 @@ void task_poo_tanpopo_0(PooTanpopoWork* w, PooSpawnArgs* a) {
 }
 
 u8 task_poo_tanpopo_1(PooTanpopoWork* w) {
-    if (w->palette != NULL && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
+    if (w->palette != NULL && (w->collider.standFlags & COLLIDER_STAND_STOOD_ON) != 0 && w->playing == 0) {
         w->playing = 1;
         AnimReset(&w->anim);
         AnimReset(&w->anim2);
@@ -4926,7 +4926,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
 
             if (AnimIsFinished(&w->anim2) == 0) {
                 DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, 0, 0x800, 100);
-            } else if ((w->collider.standFlags & 2) == 0) {
+            } else if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) == 0) {
                 *p = 0;
             }
         }
@@ -6763,7 +6763,7 @@ void task_poo_mapbeeborn_0(PooMapBornWork* w, PooPos* p) {
 
 u8 task_poo_mapbeeborn_1(PooMapBornWork* w) {
     if (w->colliderActive != 0) {
-        if ((w->collider.standFlags & 2) != 0) {
+        if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) != 0) {
             if (IsTaskActive(w->task) == 0 && w->armed != 0) {
                 w->armed = 0;
                 w->task = TaskCreate(&w->tasks, &gTaskDescPooMapbee, &w->pos);
@@ -6865,7 +6865,7 @@ void task_poo_mapbutterflyborn_0(PooMapBornWork* w, PooPos* p) {
 
 u8 task_poo_mapbutterflyborn_1(PooMapBornWork* w) {
     if (w->colliderActive != 0) {
-        if ((w->collider.standFlags & 2) != 0) {
+        if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) != 0) {
             if (IsTaskActive(w->task) == 0 && w->armed != 0) {
                 w->armed = 0;
                 w->task = TaskCreate(&w->tasks, &gTaskDescPooMapbutterfly, &w->pos);

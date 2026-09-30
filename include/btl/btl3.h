@@ -19,6 +19,16 @@
 #include "romcri.h"
 #include "formation_types.h"
 
+enum BtlFormFlag {
+    BTL_FORM_FLAG_MIRROR_X = 0x1,
+    BTL_FORM_FLAG_WAIT_NEXT_ENTRY = 0x2
+};
+
+enum BtlRaidFlag {
+    BTL_RAID_FLAG_STRIKE_ON_CONTACT = 0x1,
+    BTL_RAID_FLAG_BLADE_VISIBLE = 0x2
+};
+
 typedef struct BtlFormWork {
     s16 timer;
     s16 stepTimer;

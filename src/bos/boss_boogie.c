@@ -92,7 +92,7 @@ static const StatusObjDef sBosBoogieSpriteDefs[6] = {
 };
 #endif
 
-static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, 4 };
+static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
 
 #if defined(VERSION_US)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {

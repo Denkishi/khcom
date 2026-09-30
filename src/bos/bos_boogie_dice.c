@@ -28,7 +28,7 @@ s32 gBosUrsulaBaseZ EWRAM_COMMON(4);
 u8 gMapChkUseParams EWRAM_COMMON(4);
 MapFloorState gMapFloorState EWRAM_COMMON(16);
 
-static const EmyKind sBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, 1 };
+static const EmyKind sBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, EMY_KIND_FLAG_NO_COLLIDER };
 
 TaskDesc gTaskDescBosBoogieDice = {
     "task_bos_boogie_dice",
@@ -110,7 +110,7 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     sizeof(BoogieMapanimeWork),
 };
 
-static const EmyKind sBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, 4 };
+static const EmyKind sBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, EMY_KIND_FLAG_LARGE_BODY };
 
 TaskDesc gTaskDescBosBoogieDisk = {
     "task_bos_boogie_disk",
@@ -359,7 +359,7 @@ static TaskDesc sTaskDescBosUrsulaBorder = {
     sizeof(UrsulaBorderWork),
 };
 
-static const EmyKind sBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, 1 };
+static const EmyKind sBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, EMY_KIND_FLAG_NO_COLLIDER };
 
 static TaskDesc sTaskDescBosUrsulaTako = {
     "task_bos_ursula_tako",
@@ -2668,7 +2668,7 @@ void BosUrsulaTakoEndDown(UrsulaTakoWork* work) {
 }
 
 u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work) {
-    if (work->collider.standFlags & 2) {
+    if (work->collider.standFlags & COLLIDER_STAND_STOOD_ON) {
         return 1;
     }
 

@@ -165,6 +165,10 @@ typedef struct LexTmhWork {
     s16 timer;
 } LexTmhWork;
 
+enum RikuSpawnFlag {
+    RIKU_SPAWN_FLAG_FACING_LEFT = 0x1
+};
+
 typedef struct RikuSpawn {
     s32 x;
     s32 y;

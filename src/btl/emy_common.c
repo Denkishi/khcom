@@ -62,13 +62,13 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 3);
 
-    if (!(def->flags & 1)) {
+    if (!(def->flags & EMY_DEF_FLAG_NO_SHADOW)) {
         TaskCreate(&work->tasks, &gTaskDescBtlShadow, actor);
     }
 
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
 
-    if (def->flags & 2) {
+    if (def->flags & EMY_DEF_FLAG_NO_SCALE_IN) {
         work->scaleX = 0x100;
         work->scaleY = 0x100;
     } else {
@@ -89,7 +89,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
     ret = 0;
 
     if (work->stateTimer == 0) {
-        work->flags &= ~4;
+        work->flags &= ~EMY_FLAG_LUNGE_HIT;
     }
 
     if (work->stateTimer >= a) {
@@ -108,18 +108,18 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
                 ApproachValueHalfSteps(&actor->y, target, steps);
             }
 
-            if (!(work->flags & 4)) {
+            if (!(work->flags & EMY_FLAG_LUNGE_HIT)) {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (ApplyAttackBox(d, actor->x - (g << 8), actor->y, actor->z + (h << 8), (s16)i, i / 2, (s16)i) != 0) {
                         m4aSongNumStart(f);
-                        work->flags |= 4;
+                        work->flags |= EMY_FLAG_LUNGE_HIT;
                         ret = 1;
                     }
                 } else {
                     if (ApplyAttackBox(d, actor->x + (g << 8), actor->y, actor->z + (h << 8), (s16)i, i / 2, (s16)i) != 0) {
                         m4aSongNumStart(f);
                         ret = 1;
-                        work->flags |= 4;
+                        work->flags |= EMY_FLAG_LUNGE_HIT;
                     }
                 }
             }
@@ -684,7 +684,7 @@ s32 _0800CDF0(EmyWork* work) {
             }
             t = (actor->height / 2) * work->fxScale;
 
-            if (work->flags & 1) {
+            if (work->flags & EMY_FLAG_DARK_DEATH) {
                 BgFxStartDarkDeath(actor->x, actor->y, actor->z - t, work->fxScale);
             } else {
                 BgFxStartEnemyDeath(actor->x, actor->y, actor->z - t, work->fxScale);
@@ -733,7 +733,7 @@ s32 _0800CDF0(EmyWork* work) {
             actor->z = 0;
             work->vz = 0;
         }
-        if (actor->collider.colliding != 0 && !(actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) && !(actor->collider.other->flags & 2)) {
+        if (actor->collider.colliding != 0 && !(actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }
@@ -770,16 +770,16 @@ s32 _0800CDF0(EmyWork* work) {
     switch (ClampBattlePosition(&actor->x, &actor->y, -20, 0)) {
     case 1:
     case 2:
-        work->flags |= 2;
+        work->flags |= EMY_FLAG_AT_FIELD_EDGE;
         actor->vx = -(actor->vx >> 1);
         break;
     case 3:
     case 4:
-        work->flags |= 2;
+        work->flags |= EMY_FLAG_AT_FIELD_EDGE;
         actor->vy = -(actor->vy >> 1);
         break;
     default:
-        work->flags &= 0xFFFD;
+        work->flags &= ~EMY_FLAG_AT_FIELD_EDGE;
         break;
     }
 

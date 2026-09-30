@@ -912,7 +912,7 @@ void ColliderInit(Collider* p, u32 type, u16 r, u16 h) {
     switch (type) {
     case 6:
     case 7:
-        p->flags |= 1;
+        p->flags |= COLLIDER_FLAG_IS_PLATFORM;
         break;
     }
     ListNodeInit(&p->node, pool, p);
@@ -994,26 +994,26 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
                         q->pushY = -p->pushY;
                         q->other = p;
 
-                        if (q->flags & 1) {
+                        if (q->flags & COLLIDER_FLAG_IS_PLATFORM) {
                             p->platformZ = q->z - q->height;
                             p->penetration = pen;
                             p->platformY = q->y >> 1;
                             p->platformX = q->x;
                         }
 
-                        if (p->flags & 1) {
+                        if (p->flags & COLLIDER_FLAG_IS_PLATFORM) {
                             q->platformZ = p->z - p->height;
                             q->penetration = pen;
                             q->platformY = p->y >> 1;
                             q->platformX = p->x;
                         }
                     } else {
-                        if (q->flags & 1) {
+                        if (q->flags & COLLIDER_FLAG_IS_PLATFORM) {
                             if (q->z - q->height >= p->z) {
-                                p->standFlags |= 1;
+                                p->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
 
                                 if (q->z - q->height == p->z) {
-                                    q->standFlags |= 2;
+                                    q->standFlags |= COLLIDER_STAND_STOOD_ON;
                                     p->touchedTypes |= 1 << q->type;
                                     q->touchedTypes |= 1 << p->type;
                                 }
@@ -1028,12 +1028,12 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
                             }
                         }
 
-                        if (p->flags & 1) {
+                        if (p->flags & COLLIDER_FLAG_IS_PLATFORM) {
                             if (p->z - p->height >= q->z) {
-                                q->standFlags |= 1;
+                                q->standFlags |= COLLIDER_STAND_OVER_PLATFORM;
 
                                 if (p->z - p->height == q->z) {
-                                    p->standFlags |= 2;
+                                    p->standFlags |= COLLIDER_STAND_STOOD_ON;
                                     p->touchedTypes |= 1 << q->type;
                                     q->touchedTypes |= 1 << p->type;
                                 }

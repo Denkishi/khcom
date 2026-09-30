@@ -210,7 +210,7 @@ s32 FldSoraGetGround(FldWork* work) {
 
     act = &gFieldState->actor;
 
-    if (work->collider.standFlags & 1) {
+    if (work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         if (act->fieldPosition.ground < work->collider.platformZ) {
             v = act->fieldPosition.ground;
         } else {
@@ -708,7 +708,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
         case 11:
             break;
         default:
-            if ((work->collider.standFlags & 1) == 0) {
+            if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                 act->speed = 230 * act->speed >> 8;
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
@@ -1380,7 +1380,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
         case 11:
             break;
         default:
-            if ((work->collider.standFlags & 1) == 0) {
+            if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
             }
@@ -1540,7 +1540,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             case 11:
                 break;
             default:
-                if ((work->collider.standFlags & 1) == 0) {
+                if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                     act->speed = 230 * act->speed >> 8;
                     act->fieldPosition.x += work->collider.pushX;
                     act->fieldPosition.y += work->collider.pushY;
@@ -1905,7 +1905,7 @@ s32 FldRikuGetGround(FldWork* work) {
 
     act = &gFieldState->actor;
 
-    if (work->collider.standFlags & 1) {
+    if (work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         if (act->fieldPosition.ground < work->collider.platformZ) {
             v = act->fieldPosition.ground;
         } else {
@@ -2407,7 +2407,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
         case 11:
             break;
         default:
-            if ((work->collider.standFlags & 1) == 0) {
+            if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                 act->speed = 230 * act->speed >> 8;
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
@@ -3073,7 +3073,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
         case 11:
             break;
         default:
-            if ((work->collider.standFlags & 1) == 0) {
+            if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
             }
@@ -3233,7 +3233,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             case 11:
                 break;
             default:
-                if ((work->collider.standFlags & 1) == 0) {
+                if ((work->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) == 0) {
                     act->speed = 230 * act->speed >> 8;
                     act->fieldPosition.x += work->collider.pushX;
                     act->fieldPosition.y += work->collider.pushY;

@@ -1504,15 +1504,15 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     case EMY_ID_38:
     case EMY_ID_39:
     case EMY_ID_40:
-        if (!(d->flags & 1)) {
+        if (!(d->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
             ColliderInit(&p->collider, 8, d->radius, d->height);
         }
         p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_IMMUNE_BIND);
         p->flags |= BTLOBJ_FLAG_BOSS;
         break;
     default:
-        if (!(d->flags & 1)) {
-            if (d->flags & 8) {
+        if (!(d->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
+            if (d->flags & EMY_KIND_FLAG_NO_ENEMY_COLLISION) {
                 ColliderInit(&p->collider, 11, d->radius, d->height);
             } else {
                 ColliderInit(&p->collider, 3, d->radius, d->height);
@@ -1521,7 +1521,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     }
     SetEnemyKindFlags(p);
 
-    if (d->flags & 4) {
+    if (d->flags & EMY_KIND_FLAG_LARGE_BODY) {
         p->flags |= BTLOBJ_FLAG_LARGE_SHADOW;
     }
     ListNodeInit(&p->node, &gBtlWork->pool, p);
@@ -1534,7 +1534,7 @@ void ReleaseEnemyBtlObj(BtlObj* obj) {
     if (p == obj) {
         ListPoolRemove(&p->node, &gBtlWork->pool);
 
-        if (!(p->kindFlags & 1)) {
+        if (!(p->kindFlags & EMY_KIND_FLAG_NO_COLLIDER)) {
             ColliderUnregister(&p->collider);
         }
         gBtlWork->enemyCount--;
@@ -1877,26 +1877,26 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
         break;
     case 18:
         s.desc = &gTaskDescEmy26;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 19:
         s.desc = &gTaskDescEmy27;
         break;
     case 20:
         s.desc = &gTaskDescEmy28;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 21:
         s.desc = &gTaskDescEmy29;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 22:
         s.desc = &gTaskDescEmy30;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 23:
         s.desc = &gTaskDescEmy31;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 24:
         s.desc = &gTaskDescEmy37;
@@ -1904,19 +1904,19 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
         break;
     case 25:
         s.desc = &gTaskDescEmy38;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 26:
         s.desc = &gTaskDescEmy39;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 27:
         s.desc = &gTaskDescEmy41;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 28:
         s.desc = &gTaskDescEmy44;
-        s.flags |= 1;
+        s.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
     case 29:
         s.desc = &gTaskDescEmy81;

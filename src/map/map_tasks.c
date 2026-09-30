@@ -1873,7 +1873,7 @@ void Task_MapDbg_3(MapDbgWork* w) {
 }
 
 void MapGmkJumpWaitStep(MapGmkJumpWork* w) {
-    if (ColliderIsTouchingType(&w->collider, 1) && (w->collider.standFlags & 2)) {
+    if (ColliderIsTouchingType(&w->collider, 1) && (w->collider.standFlags & COLLIDER_STAND_STOOD_ON)) {
         gMapRoomState->jumpGmkHeight = w->jumpHeight;
         gMapRoomState->jumpGmkAngle = w->obj.angle;
         w->update = MapGmkJumpWaitJump;
@@ -2160,7 +2160,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* w) {
 }
 
 s32 Task_MapGmk_Tutorial_1(MapGmkTutorialWork* w) {
-    if (w->opened != 0 && (w->collider.standFlags & 2) && w->collider.otherType == 1) {
+    if (w->opened != 0 && (w->collider.standFlags & COLLIDER_STAND_STOOD_ON) && w->collider.otherType == 1) {
         gMapRoomState->flags |= 0x200;
     }
 
@@ -2948,7 +2948,7 @@ s32 MapGmkGp07WaitStep(MapGmkGp07Work* w) {
     w->gfx = AnimUpdate(a);
 
     if (ColliderIsTouchingType(&w->collider, 1) != 0) {
-        if (w->collider.standFlags & 2) {
+        if (w->collider.standFlags & COLLIDER_STAND_STOOD_ON) {
             if (!(w->placement->flags & 2)) {
                 w->placement->flags |= 2;
                 DropMapGmkPrize(&w->obj.fieldPosition);
@@ -3145,7 +3145,7 @@ s32 MapGmkGp09WaitStep(MapGmkGp09Work* w) {
     w->gfx2 = AnimUpdate(a);
 
     if (ColliderIsTouchingType(&w->collider, 1) != 0) {
-        if (w->collider.standFlags & 2) {
+        if (w->collider.standFlags & COLLIDER_STAND_STOOD_ON) {
             if (!(w->placement->flags & 2)) {
                 w->placement->flags |= 2;
                 DropMapGmkPrize(&w->obj.fieldPosition);
@@ -3282,7 +3282,7 @@ u8 Task_MapGmk00_1(MapGmk00Work* w) {
     }
 
     if (!(w->placement->flags & 2)) {
-        t = w->collider.standFlags & 2;
+        t = w->collider.standFlags & COLLIDER_STAND_STOOD_ON;
 
         if (t != 0) {
             if (w->stoodOn != 1) {

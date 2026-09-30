@@ -1303,10 +1303,10 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;
-    work->flags = 3;
+    work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);
 
     if (src->noTimeout != 0) {
-        work->flags = 11;
+        work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
     }
 
     switch (src->kind) {
@@ -1413,7 +1413,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
     }
 
     if (work->collected == 0) {
-        if (!(work->flags & 4)) {
+        if (!(work->flags & BTL_PRIZE_FLAG_NO_MOVE)) {
             if (gBtlWork->boundsCallback != NULL) {
                 gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
@@ -1437,15 +1437,15 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
             work->y += work->vy;
 
             if (work->z > work->groundZ) {
-                work->flags &= ~2;
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
                 work->z = work->groundZ;
                 work->vz = -((work->bounceSpeed >> 1) + GetRandom() % (work->bounceSpeed - (work->bounceSpeed >> 1) + 1));
             } else {
-                work->flags |= 2;
+                work->flags |= BTL_PRIZE_FLAG_DRAW_SHADOW;
             }
         }
 
-        if (work->flags & 16) {
+        if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
             hit = 0;
             f = gBtlWork->flags;
 
@@ -1550,15 +1550,15 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 work->collected = 1;
                 work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
-                work->flags &= ~2;
-                work->flags |= 1;
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
+                work->flags |= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
                 work->spinSpeed = GetRandom() % 6 + 5;
                 return 1;
             }
 
-            if (!(work->flags & 8)) {
+            if (!(work->flags & BTL_PRIZE_FLAG_NO_TIMEOUT)) {
                 if (work->timer > 360 && (work->timer & 3) == 0) {
-                    work->flags ^= 1;
+                    work->flags ^= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
                 }
 
                 if (work->timer > 420) {
@@ -1567,7 +1567,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
             }
         } else {
             if (work->timer > 10) {
-                work->flags |= 16;
+                work->flags |= BTL_PRIZE_FLAG_CAN_COLLECT;
             }
         }
 
@@ -1596,7 +1596,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
     s16 y;
     ObjAffine* aff;
 
-    if (work->flags & 1) {
+    if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
         s32 pri = 0x800;
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -1604,7 +1604,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, pri,
                    (u16)(-4100 - (work->y >> 8) * 4));
 
-        if (work->flags & 2) {
+        if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
             DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, pri, 0xFFFF);
         }
@@ -1640,10 +1640,10 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->gfx = AnimGetGfx(&work->anim);
     work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;
-    work->flags = 3;
+    work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);
 
     if (src->noTimeout != 0) {
-        work->flags = 11;
+        work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
     }
     work->bounceSpeed = 0x400;
     spd = 384;
@@ -1669,7 +1669,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
     }
 
     if (work->collected == 0) {
-        if (!(work->flags & 4)) {
+        if (!(work->flags & BTL_PRIZE_FLAG_NO_MOVE)) {
             if (gBtlWork->boundsCallback != NULL) {
                 gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
@@ -1693,15 +1693,15 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             work->y += work->vy;
 
             if (work->z > work->groundZ) {
-                work->flags &= ~2;
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
                 work->z = work->groundZ;
                 work->vz = -((work->bounceSpeed >> 1) + GetRandom() % (work->bounceSpeed - (work->bounceSpeed >> 1) + 1));
             } else {
-                work->flags |= 2;
+                work->flags |= BTL_PRIZE_FLAG_DRAW_SHADOW;
             }
         }
 
-        if (work->flags & 16) {
+        if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
             hit = 0;
             f = gBtlWork->flags;
 
@@ -1778,16 +1778,16 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                 work->collected = 1;
                 work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
-                work->flags &= ~2;
-                work->flags |= 1;
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
+                work->flags |= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
                 work->spinSpeed = GetRandom() % 6 + 5;
                 work->gfx = AnimUpdate(&work->anim);
                 return 1;
             }
 
-            if (!(work->flags & 8)) {
+            if (!(work->flags & BTL_PRIZE_FLAG_NO_TIMEOUT)) {
                 if (work->timer > 360 && (work->timer & 3) == 0) {
-                    work->flags ^= 1;
+                    work->flags ^= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
                 }
 
                 if (work->timer > 420) {
@@ -1796,7 +1796,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             }
         } else {
             if (work->timer > 10) {
-                work->flags |= 16;
+                work->flags |= BTL_PRIZE_FLAG_CAN_COLLECT;
             }
         }
 
@@ -1827,7 +1827,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
     s16 y;
     ObjAffine* aff;
 
-    if (work->flags & 1) {
+    if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
         u16 anim = GetBattleSpritePriorityFlags(work->y);
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -1835,7 +1835,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim,
                    (u16)(-4100 - (work->y >> 8) * 4));
 
-        if (work->flags & 2) {
+        if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
             DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, anim, 0xFFFF);
         }

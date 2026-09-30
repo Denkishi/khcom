@@ -28,7 +28,7 @@ static const AnimDef sEmy00AnimDefs[7] = {
     { gEmy00L11Frames, gEmy00L11Anims, gEmy00L11Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy00Def = { gEmy00Palette, sEmy00CommonAnimDefs, 384, 130, 10, 20, 64, 32, 16, 10, 3, { 0, 12, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy00Def = { gEmy00Palette, sEmy00CommonAnimDefs, 384, 130, 10, 20, 64, 32, 16, 10, EMY_DEF_FLAG_NO_SHADOW | EMY_DEF_FLAG_NO_SCALE_IN, { 0, 12, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy00 = {
     "task_emy_00",
@@ -50,7 +50,7 @@ static const AnimDef sEmy01AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy01Def = { gEmy01Palette, sEmy01CommonAnimDefs, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy01Def = { gEmy01Palette, sEmy01CommonAnimDefs, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
 
 TaskDesc gTaskDescEmy01 = {
     "task_emy_01",
@@ -72,7 +72,7 @@ static const AnimDef sEmy02AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 8, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy02Def = { gEmy02Palette, sEmy02CommonAnimDefs, 460, 130, 20, 20, 64, 32, 32, 10, 0, { 2, 34, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy02Def = { gEmy02Palette, sEmy02CommonAnimDefs, 460, 130, 20, 20, 64, 32, 32, 10, 0, { 2, 34, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
 
 TaskDesc gTaskDescEmy02 = {
     "task_emy_02",
@@ -94,7 +94,7 @@ static const AnimDef sEmy03AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 5, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy03Def = { gEmy03Palette, sEmy03CommonAnimDefs, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy03Def = { gEmy03Palette, sEmy03CommonAnimDefs, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
 
 TaskDesc gTaskDescEmy03 = {
     "task_emy_03",
@@ -113,7 +113,7 @@ static const AnimDef sEmy04CommonAnimDefs[3] = {
 
 static const AnimDef sEmy04AnimDef = { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 4, { 0, 0, 0 } };
 
-static const EmyDef sEmy04Def = { gEmy04Palette, sEmy04CommonAnimDefs, 332, 130, 20, 20, 0, 0, 0, 200, 0, { 4, 27, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy04Def = { gEmy04Palette, sEmy04CommonAnimDefs, 332, 130, 20, 20, 0, 0, 0, 200, 0, { 4, 27, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
 
 TaskDesc gTaskDescEmy04 = {
     "task_emy_04",
@@ -370,7 +370,7 @@ static const AnimDef sEmy22AnimDefs[2] = {
     { gEmy2211Frames, gEmy2211Anims, gEmy2211Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy22Def = { gEmy22Palette, sEmy22CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, 8 } };
+static const EmyDef sEmy22Def = { gEmy22Palette, sEmy22CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
 
 TaskDesc gTaskDescEmy22 = {
     "task_emy_22",
@@ -436,7 +436,7 @@ static const AnimDef sEmy26AnimDefs[2] = {
     { gEmy2611Frames, gEmy2611Anims, gEmy2611Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy26Def = { gEmy26Palette, sEmy26CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, 4 } };
+static const EmyDef sEmy26Def = { gEmy26Palette, sEmy26CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy26 = {
     "task_emy_26",
@@ -482,7 +482,7 @@ static const AnimDef sEmy28AnimDefs[4] = {
     { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 2, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy28Def = { gEmy28Palette, sEmy28CommonAnimDefs, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, 4 } };
+static const EmyDef sEmy28Def = { gEmy28Palette, sEmy28CommonAnimDefs, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy28 = {
     "task_emy_28",
@@ -504,7 +504,7 @@ static const AnimDef sEmy29AnimDefs[2] = {
     { gEmy2911Frames, gEmy2911Anims, gEmy2911Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy29Def = { gEmy29Palette, sEmy29CommonAnimDefs, 192, 300, 20, 20, 64, 64, 32, 30, 0, { 21, 80, 56, 22, 32, 100, 4 } };
+static const EmyDef sEmy29Def = { gEmy29Palette, sEmy29CommonAnimDefs, 192, 300, 20, 20, 64, 64, 32, 30, 0, { 21, 80, 56, 22, 32, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy29 = {
     "task_emy_29",
@@ -532,7 +532,7 @@ static const AnimDef sEmy30AnimDefs[8] = {
     { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 2, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy30Def = { gEmy30Palette, sEmy30CommonAnimDefs, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, 4 } };
+static const EmyDef sEmy30Def = { gEmy30Palette, sEmy30CommonAnimDefs, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy30 = {
     "task_emy_30",
@@ -586,7 +586,7 @@ static const AnimDef sEmy37AnimDefs[11] = {
     { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 1, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy37Def = { gEmy37Palette, sEmy37CommonAnimDefs, 409, 130, 20, 20, 64, 32, 32, 10, 3, { 24, 110, 38, 12, 20, 100, 0 } };
+static const EmyDef sEmy37Def = { gEmy37Palette, sEmy37CommonAnimDefs, 409, 130, 20, 20, 64, 32, 32, 10, EMY_DEF_FLAG_NO_SHADOW | EMY_DEF_FLAG_NO_SCALE_IN, { 24, 110, 38, 12, 20, 100, 0 } };
 
 TaskDesc gTaskDescEmy37 = {
     "task_emy_37",
@@ -608,7 +608,7 @@ static const AnimDef sEmy38AnimDefs[2] = {
     { gEmy3810Frames, gEmy3810Anims, gEmy3810Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy38Def = { gEmy38Palette, sEmy38CommonAnimDefs, 76, 130, 80, 22, 64, 32, 32, 10, 0, { 25, 112, 56, 25, 32, 100, 4 } };
+static const EmyDef sEmy38Def = { gEmy38Palette, sEmy38CommonAnimDefs, 76, 130, 80, 22, 64, 32, 32, 10, 0, { 25, 112, 56, 25, 32, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy38 = {
     "task_emy_38",
@@ -630,7 +630,7 @@ static const AnimDef sEmy39AnimDefs[2] = {
     { gEmy3911Frames, gEmy3911Anims, gEmy3911Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy39Def = { gEmy39Palette, sEmy39CommonAnimDefs, 102, 130, 100, 22, 64, 32, 32, 10, 0, { 26, 134, 56, 25, 32, 100, 4 } };
+static const EmyDef sEmy39Def = { gEmy39Palette, sEmy39CommonAnimDefs, 102, 130, 100, 22, 64, 32, 32, 10, 0, { 26, 134, 56, 25, 32, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy39 = {
     "task_emy_39",
@@ -652,7 +652,7 @@ static const AnimDef sEmy41AnimDefs[2] = {
     { gEmy4111Frames, gEmy4111Anims, gEmy4111Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy41Def = { gEmy41Palette, sEmy41CommonAnimDefs, 192, 400, 50, 20, 64, 32, 32, 10, 0, { 27, 108, 56, 32, 20, 100, 4 } };
+static const EmyDef sEmy41Def = { gEmy41Palette, sEmy41CommonAnimDefs, 192, 400, 50, 20, 64, 32, 32, 10, 0, { 27, 108, 56, 32, 20, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy41 = {
     "task_emy_41",
@@ -674,7 +674,7 @@ static const AnimDef sEmy44AnimDefs[2] = {
     { gEmy4412Frames, gEmy4412Anims, gEmy4412Tiles, 0, { 0, 0, 0 } },
 };
 
-static const EmyDef sEmy44Def = { gEmy44Palette, sEmy44CommonAnimDefs, 192, 130, 90, 20, 60, 60, 16, 10, 0, { 28, 260, 48, 25, 32, 100, 4 } };
+static const EmyDef sEmy44Def = { gEmy44Palette, sEmy44CommonAnimDefs, 192, 130, 90, 20, 60, 60, 16, 10, 0, { 28, 260, 48, 25, 32, 100, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescEmy44 = {
     "task_emy_44",
@@ -826,7 +826,7 @@ static const EmyDef sEmyTestDef = { gUnk_08F6DD44, sEmyTestCommonAnimDefs, 0, 13
 
 void task_emy_00_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmy00Def, obj);
-    work->flags |= 1;
+    work->flags |= EMY_FLAG_DARK_DEATH;
     work->idleState = 0x12;
     work->state = 0x16;
 }
@@ -2483,7 +2483,7 @@ u8 task_emy_18_1(Emy18Work* work) {
                 >> 8;
             act->z += (work->base.hoverZ - act->z) >> 3;
 
-            if ((work->base.flags & 2) ||
+            if ((work->base.flags & EMY_FLAG_AT_FIELD_EDGE) ||
                     ((act->x - work->base.x >= 0
                     ? act->x - work->base.x <= 0xFFF
                     : work->base.x - act->x <= 0xFFF) &&
@@ -3525,7 +3525,7 @@ u8 task_emy_28_1(Emy28Work* work) {
                 >> 8;
             act->z += (work->base.hoverZ - act->z) >> 3;
 
-            if ((work->base.flags & 2) ||
+            if ((work->base.flags & EMY_FLAG_AT_FIELD_EDGE) ||
                     ((act->x - work->base.x >= 0
                     ? act->x - work->base.x <= 0xFFF
                     : work->base.x - act->x <= 0xFFF) &&
@@ -3617,7 +3617,7 @@ void task_emy_29_0(Emy29Work* work, void* obj) {
     EmyInit(&work->base, &sEmy29Def, obj);
     work->base.fxScale = 0x180;
     work->base.idleState = 7;
-    work->base.flags |= 1;
+    work->base.flags |= EMY_FLAG_DARK_DEATH;
     work->state = 0;
     work->steps = 0;
 }
@@ -3803,7 +3803,7 @@ u8 task_emy_30_1(EmyWork* work) {
             act->y += -gSineTable[work->angle + 64] * work->speed >> 8;
             act->z += (work->hoverZ - act->z) >> 3;
 
-            if ((work->flags & 2)
+            if ((work->flags & EMY_FLAG_AT_FIELD_EDGE)
                 || ((act->x - work->x >= 0
                         ? act->x - work->x
                         : work->x - act->x) <= 0xFFF
@@ -3929,7 +3929,7 @@ u8 task_emy_30_1(EmyWork* work) {
         act->y += (y - act->y) >> 4;
         act->z += (-0x800 - act->z) >> 4;
 
-        if (AnimIsFinished(&work->anim) && (work->flags & 2)) {
+        if (AnimIsFinished(&work->anim) && (work->flags & EMY_FLAG_AT_FIELD_EDGE)) {
             work->stateTimer = 0;
             work->state = 22;
             work->speed = 0;
@@ -4229,7 +4229,7 @@ void task_emy_31_3(EmyWork* work) {
 
 void task_emy_37_0(Emy37Work* work, void* obj) {
     EmyInit(&work->base, &sEmy37Def, obj);
-    work->base.flags |= 1;
+    work->base.flags |= EMY_FLAG_DARK_DEATH;
     work->base.idleState = 0x12;
     work->base.state = 0x1C;
     work->rotation = 0;
@@ -5075,7 +5075,7 @@ u8 task_emy_81_1(Emy81Work* work) {
 
         act->y += d;
 
-        if ((work->base.flags & 2)
+        if ((work->base.flags & EMY_FLAG_AT_FIELD_EDGE)
                 || ((w->targetX - act->x < 0
                         ? act->x - w->targetX
                         : w->targetX - act->x) <= 0x7FF

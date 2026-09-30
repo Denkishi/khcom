@@ -490,7 +490,7 @@ void EnableBtlSoraPassThrough(BtlSoraWork* work) {
     u16 b;
 
     work->flags = a;
-    b = work->actor.collider.flags | 2;
+    b = work->actor.collider.flags | COLLIDER_FLAG_PASS_THROUGH;
     work->actor.collider.flags = b;
 }
 
@@ -499,7 +499,7 @@ void DisableBtlSoraPassThrough(BtlSoraWork* work) {
     u16 b;
 
     work->flags = a;
-    b = work->actor.collider.flags & 0xFFFD;
+    b = work->actor.collider.flags & ~COLLIDER_FLAG_PASS_THROUGH;
     work->actor.collider.flags = b;
 }
 
@@ -6072,9 +6072,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->stateTimer = 0;
             }
         } else if ((work->flags & BTL_SORA_FLAG_ON_PLATFORM) && p->collider.otherType == 7) {
-            p->collider.standFlags |= 1;
+            p->collider.standFlags |= COLLIDER_STAND_OVER_PLATFORM;
         } else if ((work->flags & BTL_SORA_FLAG_PASS_THROUGH) == 0 && p->collider.otherType != 5 &&
-                   (p->collider.other->flags & 2) == 0) {
+                   (p->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH) == 0) {
             p->x += p->collider.pushX >> 1;
             p->y += p->collider.pushY >> 1;
         }
@@ -6083,7 +6083,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     p->z += work->vz;
     work->vz += gBtlWork->gravity;
 
-    if (p->collider.standFlags & 1) {
+    if (p->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         p->groundZ = p->collider.platformZ;
         work->flags |= BTL_SORA_FLAG_OVER_PLATFORM;
         work->platformPriority = -4100 - (((p->collider.platformY + 1024) >> 8) * 4);
@@ -6101,7 +6101,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (p->z >= p->groundZ) {
-        if (p->collider.standFlags & 1) {
+        if (p->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
             work->flags |= BTL_SORA_FLAG_ON_PLATFORM;
             work->platformX = p->collider.platformX;
             work->platformY = p->collider.platformY;
@@ -6376,7 +6376,7 @@ void EnableBtlRikuPassThrough(BtlRikuWork* work) {
     u16 b;
 
     work->flags = a;
-    b = work->actor.collider.flags | 2;
+    b = work->actor.collider.flags | COLLIDER_FLAG_PASS_THROUGH;
     work->actor.collider.flags = b;
 }
 
@@ -6385,7 +6385,7 @@ void DisableBtlRikuPassThrough(BtlRikuWork* work) {
     u16 b;
 
     work->flags = a;
-    b = work->actor.collider.flags & 0xFFFD;
+    b = work->actor.collider.flags & ~COLLIDER_FLAG_PASS_THROUGH;
     work->actor.collider.flags = b;
 }
 
@@ -10592,7 +10592,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     if (p->collider.colliding != 0 && p->collider.otherType != 12) {
         if ((work->flags & BTL_RIKU_FLAG_ON_PLATFORM) && p->collider.otherType == 7) {
-            p->collider.standFlags |= 1;
+            p->collider.standFlags |= COLLIDER_STAND_OVER_PLATFORM;
         } else if (!(work->flags & BTL_RIKU_FLAG_PASS_THROUGH)) {
             p->x += p->collider.pushX >> 1;
             p->y += p->collider.pushY >> 1;
@@ -10606,7 +10606,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     p->z += work->vz;
     work->vz += gBtlWork->gravity;
 
-    if (p->collider.standFlags & 1) {
+    if (p->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
         p->groundZ = p->collider.platformZ;
         work->flags |= BTL_RIKU_FLAG_OVER_PLATFORM;
         work->platformPriority = -4100 - ((p->collider.platformY + 0x400) >> 8) * 4;
@@ -10622,7 +10622,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     if (p->z >= p->groundZ) {
-        if (p->collider.standFlags & 1) {
+        if (p->collider.standFlags & COLLIDER_STAND_OVER_PLATFORM) {
             work->flags |= BTL_RIKU_FLAG_ON_PLATFORM;
             work->platformX = p->collider.platformX;
             work->platformY = p->collider.platformY;

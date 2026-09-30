@@ -6,6 +6,17 @@
 #include "taskpool.h"
 #include "battle_actor.h"
 
+enum EmyDefFlag {
+    EMY_DEF_FLAG_NO_SHADOW = 0x1,
+    EMY_DEF_FLAG_NO_SCALE_IN = 0x2
+};
+
+enum EmyFlag {
+    EMY_FLAG_DARK_DEATH = 0x1,
+    EMY_FLAG_AT_FIELD_EDGE = 0x2,
+    EMY_FLAG_LUNGE_HIT = 0x4
+};
+
 typedef struct EmyDef {
     void* palette;
     const AnimDef* animDef;

@@ -480,7 +480,7 @@ s32 HumUpdate(HumWork* work) {
             actor->z = 0;
             work->vz = 0;
         }
-        if (actor->collider.colliding != 0 && !(work->flags & 4) && !(actor->collider.other->flags & 2)) {
+        if (actor->collider.colliding != 0 && !(work->flags & 4) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }

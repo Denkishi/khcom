@@ -200,7 +200,7 @@ static const HumDef sHumHadesDef = {
 #else
         128
 #endif
-    , 0, gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, 4 } };
+    , 0, gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumHades = {
     "task_hum_hades",
@@ -488,7 +488,7 @@ static const AnimDef sHumLexceusAnimDefs[10] = {
     { gRexeusImpFrames, gRexeusImpAnims, gRexeusImpTiles, 0, { 0, 0, 0 } },
 };
 
-static const HumDef sHumLexceusDef = { 128, 0, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, 4 } };
+static const HumDef sHumLexceusDef = { 128, 0, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumLexceus = {
     "task_hum_lexceus",
@@ -3365,9 +3365,9 @@ void MahluxiaSaveAfterimage(MahluxiaWork* work, RikuSpawn* dst) {
     dst->z = act->z;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        dst->flags |= 1;
+        dst->flags |= RIKU_SPAWN_FLAG_FACING_LEFT;
     } else {
-        dst->flags &= 0xFFFE;
+        dst->flags &= ~RIKU_SPAWN_FLAG_FACING_LEFT;
     }
     dst->anim = work->base.anim;
     dst->tileSrc = work->base.tiles->src;
@@ -3398,7 +3398,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
         attr = GetBattleSpritePriorityFlags(act->y);
     }
 
-    if (p->flags & 1) {
+    if (p->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
         sy = p->scale;
         sx = sy;
     } else if (p->scale == 0x100) {
@@ -7703,9 +7703,9 @@ void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst) {
     dst->z = act->z;
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        dst->flags |= 1;
+        dst->flags |= RIKU_SPAWN_FLAG_FACING_LEFT;
     } else {
-        dst->flags &= 0xFFFE;
+        dst->flags &= ~RIKU_SPAWN_FLAG_FACING_LEFT;
     }
     dst->anim = work->base.anim;
     dst->tileSrc = work->base.tiles->src;
@@ -7736,7 +7736,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
         attr = GetBattleSpritePriorityFlags(act->y);
     }
 
-    if (p->flags & 1) {
+    if (p->flags & RIKU_SPAWN_FLAG_FACING_LEFT) {
         sy = p->scale;
         sx = sy;
     } else if (p->scale == 0x100) {

@@ -110,6 +110,14 @@ typedef struct BtlEscapeWork {
     u8 unk_23;
 } BtlEscapeWork;
 
+enum BtlPrizeFlag {
+    BTL_PRIZE_FLAG_SPRITE_VISIBLE = 0x1,
+    BTL_PRIZE_FLAG_DRAW_SHADOW = 0x2,
+    BTL_PRIZE_FLAG_NO_MOVE = 0x4,
+    BTL_PRIZE_FLAG_NO_TIMEOUT = 0x8,
+    BTL_PRIZE_FLAG_CAN_COLLECT = 0x10
+};
+
 typedef struct BtlPrizeWork {
     s32 x;
     s32 y;

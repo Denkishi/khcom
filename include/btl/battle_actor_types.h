@@ -4,6 +4,26 @@
 #include "types.h"
 #include "taskpool.h"
 
+enum EmyKindFlag {
+    EMY_KIND_FLAG_NO_COLLIDER = 0x1,
+    EMY_KIND_FLAG_LARGE_BODY = 0x4,
+    EMY_KIND_FLAG_NO_ENEMY_COLLISION = 0x8
+};
+
+enum SpawnFlag {
+    SPAWN_FLAG_LARGE_EFFECT = 0x1
+};
+
+enum ColliderFlag {
+    COLLIDER_FLAG_IS_PLATFORM = 0x1,
+    COLLIDER_FLAG_PASS_THROUGH = 0x2
+};
+
+enum ColliderStandFlag {
+    COLLIDER_STAND_OVER_PLATFORM = 0x1,
+    COLLIDER_STAND_STOOD_ON = 0x2
+};
+
 typedef struct EmyKind {
     u32 id;
     u16 maxHp;

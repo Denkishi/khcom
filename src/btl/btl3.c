@@ -79,7 +79,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
         return 0;
     }
 
-    if (work->flags & 2) {
+    if (work->flags & BTL_FORM_FLAG_WAIT_NEXT_ENTRY) {
         list = work->list;
         if (list->threshold >= work->nextTileCount + gBtlWork->enemyTileCount) {
             if (work->nextTileCount == 0) {
@@ -89,13 +89,13 @@ u8 task_btl_form_1(BtlFormWork* work) {
             work->timer = work->entry->delay;
             work->stepTimer = 0;
             work->stepIndex = 0;
-            work->flags &= ~2;
+            work->flags &= ~BTL_FORM_FLAG_WAIT_NEXT_ENTRY;
             work->entryIndex++;
             work->waitTimer = 100;
         }
     } else if (work->entry->count <= work->stepIndex) {
         if (work->waitTimer-- <= 0) {
-            work->flags |= 2;
+            work->flags |= BTL_FORM_FLAG_WAIT_NEXT_ENTRY;
 
             if (gGameState.roomEffect != 4) {
                 gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
@@ -119,22 +119,22 @@ u8 task_btl_form_1(BtlFormWork* work) {
 
                 if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 5 != 0) {
-                        work->flags |= 1;
+                        work->flags |= BTL_FORM_FLAG_MIRROR_X;
                     } else {
-                        work->flags &= ~1;
+                        work->flags &= ~BTL_FORM_FLAG_MIRROR_X;
                     }
                 } else {
                     if (GetRandom() % 5 == 0) {
-                        work->flags |= 1;
+                        work->flags |= BTL_FORM_FLAG_MIRROR_X;
                     } else {
-                        work->flags &= ~1;
+                        work->flags &= ~BTL_FORM_FLAG_MIRROR_X;
                     }
                 }
                 work->timer = 0xFFFF;
             }
             step = &work->entry->steps[work->stepIndex];
             if (work->stepTimer >= step->delay) {
-                if (work->flags & 1) {
+                if (work->flags & BTL_FORM_FLAG_MIRROR_X) {
                     x = work->x - (step->x << 8);
                 } else {
                     x = work->x + (step->x << 8);
@@ -181,7 +181,7 @@ u8 task_btl_born_1(BtlBornWork* work) {
             return 0;
         }
 
-        if (work->flags & 1) {
+        if (work->flags & SPAWN_FLAG_LARGE_EFFECT) {
             BgFxStartEnemySpawn(work->pos.x, work->pos.y,
                           work->pos.z - 0x1000, 0x200);
         } else {
@@ -279,7 +279,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->scale = 256;
     work->vx = 0x800;
     work->hitHalfSize = 10;
-    work->flags = 2;
+    work->flags = BTL_RAID_FLAG_BLADE_VISIBLE;
     work->song = SONG_EF_LT2_HIT;
 
     switch (work->variant) {
@@ -305,12 +305,12 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         break;
     case 4:
         work->attack = 103;
-        work->flags |= 1;
+        work->flags |= BTL_RAID_FLAG_STRIKE_ON_CONTACT;
         work->hitHalfSize = 8;
         break;
     case 5:
         work->attack = 104;
-        work->flags |= 1;
+        work->flags |= BTL_RAID_FLAG_STRIKE_ON_CONTACT;
         work->hitHalfSize = 8;
         break;
     case 6:
@@ -476,7 +476,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             work->x = work->x + work->vx;
         }
 
-        if (work->flags & 1) {
+        if (work->flags & BTL_RAID_FLAG_STRIKE_ON_CONTACT) {
             if (TestAttackBox(work->x, work->y, work->z, work->hitHalfSize, work->hitHalfSize, 32) != 0) {
                 work->state = 2;
                 work->timer = 0;
@@ -549,11 +549,11 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             ApproachValue(&work->scale, 25, work->steps);
             work->steps--;
             if (work->steps <= 0) {
-                work->flags &= ~2;
+                work->flags &= ~BTL_RAID_FLAG_BLADE_VISIBLE;
             }
         }
 
-        if (!(work->flags & 2) && BgFxIsActive() == 0) {
+        if (!(work->flags & BTL_RAID_FLAG_BLADE_VISIBLE) && BgFxIsActive() == 0) {
             return 0;
         }
 
@@ -580,7 +580,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
     ObjAffine* affine;
     s32 scale;
 
-    if (work->flags & 2) {
+    if (work->flags & BTL_RAID_FLAG_BLADE_VISIBLE) {
         flags = GetBattleSpritePriorityFlags(work->y);
         WorldToScreen(&sx, &sy, work->x, work->y, work->z);
         scale = gBtlWork->scale * work->scale >> 8;

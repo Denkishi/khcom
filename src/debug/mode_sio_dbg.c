@@ -30,7 +30,7 @@ u16 gSioDbgLevel2P EWRAM_COMMON(4);
 s8 gUnk_0203C3D4 EWRAM_COMMON(4);
 #endif
 
-const char* gSioDbgRowNames[] = {
+static const char* sSioDbgRowNames[] = {
 #ifdef VERSION_EU
     "\x82\x50\x82\x6f\x81\x40\x82\x6b\x82\x64\x82\x75\x82\x64\x82\x6b\x81\x40\x81\x40\x81\x40\x81\x46",
     "\x82\x50\x82\x6f\x81\x40\x82\x67\x82\x6f\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x46",
@@ -54,17 +54,17 @@ const char* gSioDbgRowNames[] = {
 };
 
 #ifndef VERSION_EU
-const char* gSioDbgModeNames[] = {
+static const char* sSioDbgModeNames[] = {
     "\x82\x60\x82\x6b\x82\x6b\x81\x40\x81\x40\x81\x40",
     "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82\x6b",
 };
 #endif
 
-const char gSioDbgCursorText[] = "\x81\x84";
+static const char sSioDbgCursorText[] = "\x81\x84";
 
-const char gSioDbgTitleText[] = "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x82\x62\x82\x6e\x82\x6d\x82\x65\x82\x68\x82\x66";
+static const char sSioDbgTitleText[] = "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x82\x62\x82\x6e\x82\x6d\x82\x65\x82\x68\x82\x66";
 
-const char gSioDbgCursorBlankText[] = "\x81\x40";
+static const char sSioDbgCursorBlankText[] = "\x81\x40";
 
 Mode gModeSioDbgFlg = {
     "mode_sio_dbg_flg",
@@ -92,25 +92,25 @@ void mode_sio_dbg_flg_0(s32 arg) {
 #ifdef VERSION_EU
     zero = 0;
 #endif
-    DebugTextPrint(8, 0x24, 2, gSioDbgCursorText);
+    DebugTextPrint(8, 0x24, 2, sSioDbgCursorText);
 #ifdef VERSION_EU
     sSioDbgRowCount = 10;
 #else
     sSioDbgRowCount = 5;
 #endif
-    DebugTextPrint(0x0C, 0x12, 2, gSioDbgTitleText);
+    DebugTextPrint(0x0C, 0x12, 2, sSioDbgTitleText);
 
 #ifdef VERSION_EU
-    DebugTextPrint(0x14, 0x24, 2, gSioDbgRowNames[0]);
-    DebugTextPrint(0x14, 0x2D, 2, gSioDbgRowNames[1]);
-    DebugTextPrint(0x14, 0x36, 2, gSioDbgRowNames[2]);
-    DebugTextPrint(0x14, 0x3F, 2, gSioDbgRowNames[3]);
-    DebugTextPrint(0x14, 0x48, 2, gSioDbgRowNames[4]);
-    DebugTextPrint(0x14, 0x5A, 2, gSioDbgRowNames[5]);
-    DebugTextPrint(0x14, 0x63, 2, gSioDbgRowNames[6]);
-    DebugTextPrint(0x14, 0x6C, 2, gSioDbgRowNames[7]);
-    DebugTextPrint(0x14, 0x75, 2, gSioDbgRowNames[8]);
-    DebugTextPrint(0x14, 0x7E, 2, gSioDbgRowNames[9]);
+    DebugTextPrint(0x14, 0x24, 2, sSioDbgRowNames[0]);
+    DebugTextPrint(0x14, 0x2D, 2, sSioDbgRowNames[1]);
+    DebugTextPrint(0x14, 0x36, 2, sSioDbgRowNames[2]);
+    DebugTextPrint(0x14, 0x3F, 2, sSioDbgRowNames[3]);
+    DebugTextPrint(0x14, 0x48, 2, sSioDbgRowNames[4]);
+    DebugTextPrint(0x14, 0x5A, 2, sSioDbgRowNames[5]);
+    DebugTextPrint(0x14, 0x63, 2, sSioDbgRowNames[6]);
+    DebugTextPrint(0x14, 0x6C, 2, sSioDbgRowNames[7]);
+    DebugTextPrint(0x14, 0x75, 2, sSioDbgRowNames[8]);
+    DebugTextPrint(0x14, 0x7E, 2, sSioDbgRowNames[9]);
     gSioDbgLevel1P = 1;
     gUnk_0203C3C4 = 80;
     gSioDbgCp = 275;
@@ -133,7 +133,7 @@ void mode_sio_dbg_flg_0(s32 arg) {
     DebugTextPrintNumber(0x78, 0x7E, 2, gUnk_0203C3D4);
 #else
     for (i = 0; i < sSioDbgRowCount; i++) {
-        DebugTextPrint(0x14, i * 9 + 0x24, 2, gSioDbgRowNames[i]);
+        DebugTextPrint(0x14, i * 9 + 0x24, 2, sSioDbgRowNames[i]);
     }
 
     gUnk_0203C3C8 = 50;
@@ -144,8 +144,8 @@ void mode_sio_dbg_flg_0(s32 arg) {
     DebugTextPrintNumber(0x64, 0x24, 2, gUnk_0203C3C8);
     DebugTextPrintNumber(0x64, 0x2D, 2, gUnk_0203C3CC);
     DebugTextPrintNumber(0x64, 0x36, 2, gSioDbgCp);
-    DebugTextPrint(0x64, 0x3F, 2, gSioDbgModeNames[gUnk_0203C3C4]);
-    DebugTextPrint(0x64, 0x48, 2, gSioDbgModeNames[gUnk_0203C3D4]);
+    DebugTextPrint(0x64, 0x3F, 2, sSioDbgModeNames[gUnk_0203C3C4]);
+    DebugTextPrint(0x64, 0x48, 2, sSioDbgModeNames[gUnk_0203C3D4]);
 #endif
 }
 
@@ -193,8 +193,8 @@ void mode_sio_dbg_flg_1(void) {
         }
 #endif
 
-        DebugTextPrint(8, (prev + 4) * 9, 2, gSioDbgCursorBlankText);
-        DebugTextPrint(8, (sSioDbgCursor + 4) * 9, 2, gSioDbgCursorText);
+        DebugTextPrint(8, (prev + 4) * 9, 2, sSioDbgCursorBlankText);
+        DebugTextPrint(8, (sSioDbgCursor + 4) * 9, 2, sSioDbgCursorText);
     }
 
     switch (sSioDbgCursor) {

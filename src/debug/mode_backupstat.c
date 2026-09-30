@@ -4,13 +4,13 @@
 #include "gba/keys.h"
 #include "mode_test_api.h"
 
-const char* gBackupStatStateNames[3] = {
+static const char* sBackupStatStateNames[3] = {
     "\x82\xC8\x82\xB5\x81\x40",
     "\x82\xB1\x82\xED\x82\xEA",
     "\x82\xA0\x82\xE8\x81\x40",
 };
 
-const BackupStatEntry gBackupStatEntryTable[6] = {
+static const BackupStatEntry sBackupStatEntryTable[6] = {
     {"\x82\x72\x82\x78\x82\x72\x82\x73\x82\x64\x82\x6C\x81\x40", 2},
     {"\x82\x72\x82\x6E\x82\x71\x82\x60\x81\x40\x81\x40\x82\x50", 64},
     {"\x82\x72\x82\x6E\x82\x71\x82\x60\x81\x40\x81\x40\x82\x51", 64},
@@ -36,7 +36,7 @@ void mode_backupstat_0(void) {
     gBackupStatCursor = 0;
     DebugTextPrint(0, 0, 2, "\x81\x84");
     gBackupStatCount = 6;
-    gBackupStatEntries = gBackupStatEntryTable;
+    gBackupStatEntries = sBackupStatEntryTable;
 
     for (i = 0; i < gBackupStatCount; i++) {
         for (j = 0; j <= 1; j++) {
@@ -74,7 +74,7 @@ void mode_backupstat_0(void) {
             DebugTextPrint(75, i * 9, 2, "\x81\x7C\x82\x51");
             break;
         }
-        DebugTextPrint(120, i * 9, 2, gBackupStatStateNames[gBackupStatStates[i]]);
+        DebugTextPrint(120, i * 9, 2, sBackupStatStateNames[gBackupStatStates[i]]);
     }
 }
 
@@ -103,7 +103,7 @@ void BackupStatApplyState(void) {
         SaveSetSystemState(slot, gBackupStatStates[gBackupStatCursor]);
         break;
     }
-    DebugTextPrint(120, gBackupStatCursor * 9, 2, gBackupStatStateNames[gBackupStatStates[gBackupStatCursor]]);
+    DebugTextPrint(120, gBackupStatCursor * 9, 2, sBackupStatStateNames[gBackupStatStates[gBackupStatCursor]]);
 }
 
 void mode_backupstat_1(void) {

@@ -28,7 +28,7 @@ s32 gBosUrsulaBaseZ EWRAM_COMMON(4);
 u8 gMapChkUseParams EWRAM_COMMON(4);
 MapFloorState gMapFloorState EWRAM_COMMON(16);
 
-const EmyKind gBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, 1 };
+static const EmyKind sBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, 1 };
 
 TaskDesc gTaskDescBosBoogieDice = {
     "task_bos_boogie_dice",
@@ -39,7 +39,7 @@ TaskDesc gTaskDescBosBoogieDice = {
     sizeof(BoogieDiceWork),
 };
 
-void* const gBoogieDiceFaces[6][3] = {
+static void* const sBoogieDiceFaces[6][3] = {
 #if defined(VERSION_US)
     { gUnkUs_09EF67A8, gUnkUs_09EF679C, gUnk_097976DC },
     { gUnkUs_09EF67B8, gUnkUs_09EF67AC, gUnk_09797D0C },
@@ -64,9 +64,9 @@ void* const gBoogieDiceFaces[6][3] = {
 #endif
 };
 
-const EmyKind gBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
 
-TaskDesc gTaskDescBosBoogieExplosiondice = {
+static TaskDesc sTaskDescBosBoogieExplosiondice = {
     "task_bos_boogie_explosiondice",
     (TaskInitFunc)task_bos_boogie_explosiondice_0,
     (TaskUpdateFunc)task_bos_boogie_explosiondice_1,
@@ -93,13 +93,13 @@ TaskDesc gTaskDescBosBoogieMap = {
     sizeof(BoogieMapWork),
 };
 
-const BosMapanimeFrame gBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
+static const BosMapanimeFrame sBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-const BosMapanimeDef gUnk_096FE034 = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0X7C00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE034 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0X7C00, 0X0100, 0X0300, 0, 0 };
 
-const BosMapanimeDef gUnk_096FE04C = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0X7D00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE04C = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0X7D00, 0X0100, 0X0300, 0, 0 };
 
-const BosMapanimeDef gUnk_096FE064 = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE064 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
@@ -110,7 +110,7 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     sizeof(BoogieMapanimeWork),
 };
 
-const EmyKind gBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, 4 };
+static const EmyKind sBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, 4 };
 
 TaskDesc gTaskDescBosBoogieDisk = {
     "task_bos_boogie_disk",
@@ -121,9 +121,9 @@ TaskDesc gTaskDescBosBoogieDisk = {
     sizeof(BoogieDiskWork),
 };
 
-const EmyKind gBosBoogieKnifeEmyKind = { 39, 0, 192, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieKnifeEmyKind = { 39, 0, 192, 16, 0, 0, 0 };
 
-TaskDesc gTaskDescBosBoogieKnife = {
+static TaskDesc sTaskDescBosBoogieKnife = {
     "task_bos_boogie_knife",
     (TaskInitFunc)task_bos_boogie_knife_0,
     (TaskUpdateFunc)task_bos_boogie_knife_1,
@@ -132,7 +132,7 @@ TaskDesc gTaskDescBosBoogieKnife = {
     sizeof(BoogieKnifeWork),
 };
 
-const EmyKind gBosBoogieKnifereaderEmyKind = { 39, 0, 0, 0, 0, 0, 0 };
+static const EmyKind sBosBoogieKnifereaderEmyKind = { 39, 0, 0, 0, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKnifereader = {
     "task_bos_boogie_knifereader",
@@ -143,7 +143,7 @@ TaskDesc gTaskDescBosBoogieKnifereader = {
     sizeof(BoogieKnifereaderWork),
 };
 
-const EmyKind gBosBoogieKaihukuEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieKaihukuEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKaihuku = {
     "task_bos_boogie_kaihuku",
@@ -154,13 +154,13 @@ TaskDesc gTaskDescBosBoogieKaihuku = {
     sizeof(BoogieKaihukuWork),
 };
 
-const EmyKind gBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
+static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 
-const BattleBackgroundDef gBosUrsulaBattleBackgroundDef = {
+static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
     gUnk_097EE378, 0x7000, { 0, 0 }, gUnk_0984AFF8, 0xe0, { 0, 0 }, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
 };
 
-const u16* gBosUrsulaMapBlocksLeft[12] = {
+static const u16* sBosUrsulaMapBlocksLeft[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -203,7 +203,7 @@ const u16* gBosUrsulaMapBlocksLeft[12] = {
 #endif
 };
 
-const u16* gBosUrsulaMapBlocksHurtLeft[12] = {
+static const u16* sBosUrsulaMapBlocksHurtLeft[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -246,7 +246,7 @@ const u16* gBosUrsulaMapBlocksHurtLeft[12] = {
 #endif
 };
 
-const u16* gBosUrsulaMapBlocksRight[12] = {
+static const u16* sBosUrsulaMapBlocksRight[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -289,7 +289,7 @@ const u16* gBosUrsulaMapBlocksRight[12] = {
 #endif
 };
 
-const u16* gBosUrsulaMapBlocksHurtRight[12] = {
+static const u16* sBosUrsulaMapBlocksHurtRight[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -341,7 +341,7 @@ TaskDesc gTaskDescBosUrsula = {
     sizeof(UrsulaWork),
 };
 
-TaskDesc gTaskDescBosUrsulaMap = {
+static TaskDesc sTaskDescBosUrsulaMap = {
     "task_bos_ursula_map",
     (TaskInitFunc)task_bos_ursula_map_0,
     (TaskUpdateFunc)task_bos_ursula_map_1,
@@ -350,7 +350,7 @@ TaskDesc gTaskDescBosUrsulaMap = {
     sizeof(UrsulaMapWork),
 };
 
-TaskDesc gTaskDescBosUrsulaBorder = {
+static TaskDesc sTaskDescBosUrsulaBorder = {
     "task_bos_ursula_border",
     (TaskInitFunc)task_bos_ursula_border_0,
     (TaskUpdateFunc)task_bos_ursula_border_1,
@@ -359,9 +359,9 @@ TaskDesc gTaskDescBosUrsulaBorder = {
     sizeof(UrsulaBorderWork),
 };
 
-const EmyKind gBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, 1 };
+static const EmyKind sBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, 1 };
 
-TaskDesc gTaskDescBosUrsulaTako = {
+static TaskDesc sTaskDescBosUrsulaTako = {
     "task_bos_ursula_tako",
     (TaskInitFunc)task_bos_ursula_tako_0,
     (TaskUpdateFunc)task_bos_ursula_tako_1,
@@ -370,7 +370,7 @@ TaskDesc gTaskDescBosUrsulaTako = {
     sizeof(UrsulaTakoWork),
 };
 
-TaskDesc gTaskDescBosUrsulaBacktako = {
+static TaskDesc sTaskDescBosUrsulaBacktako = {
     "task_bos_ursula_backtako",
     (TaskInitFunc)task_bos_ursula_backtako_0,
     (TaskUpdateFunc)task_bos_ursula_backtako_1,
@@ -379,27 +379,27 @@ TaskDesc gTaskDescBosUrsulaBacktako = {
     sizeof(UrsulaBacktakoWork),
 };
 
-const BosMapanimeFrame gBosUrsulaMapanimeIdleFrames[6] = { { 60, 0 }, { 4, 1 }, { 6, 2 }, { 20, 0 }, { 4, 1 }, { 6, 2 } };
+static const BosMapanimeFrame sBosUrsulaMapanimeIdleFrames[6] = { { 60, 0 }, { 4, 1 }, { 6, 2 }, { 20, 0 }, { 4, 1 }, { 6, 2 } };
 
-const BosMapanimeFrame gBosUrsulaMapanimeWindupFrames[12] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 } };
+static const BosMapanimeFrame sBosUrsulaMapanimeWindupFrames[12] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 } };
 
-const BosMapanimeFrame gBosUrsulaMapanimeBubbleFrames[5] = { { 10, 0 }, { 10, 1 }, { 10, 2 }, { 10, 3 }, { 10, 4 } };
+static const BosMapanimeFrame sBosUrsulaMapanimeBubbleFrames[5] = { { 10, 0 }, { 10, 1 }, { 10, 2 }, { 10, 3 }, { 10, 4 } };
 
-const BosMapanimeFrame gBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, { 10, 1 }, { 120, 2 }, { 10, 3 }, { 10, 4 } };
+static const BosMapanimeFrame sBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, { 10, 1 }, { 120, 2 }, { 10, 3 }, { 10, 4 } };
 
-const BosMapanimeFrame gBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
+static const BosMapanimeFrame sBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
 
-const BosMapanimeDef gBosUrsulaMapanimeIdle = { gBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0X0C00, 0X0300, 0X0400, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0X0C00, 0X0300, 0X0400, 0, 0 };
 
-const BosMapanimeDef gBosUrsulaMapanimeWindup = { gBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const BosMapanimeDef gBosUrsulaMapanimeBubble = { gBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const BosMapanimeDef gBosUrsulaMapanimeCharge = { gBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const BosMapanimeDef gBosUrsulaMapanimeRecover = { gBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-TaskDesc gTaskDescBosUrsulaMapanime = {
+static TaskDesc sTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",
     (TaskInitFunc)task_bos_ursula_mapanime_0,
     (TaskUpdateFunc)task_bos_ursula_mapanime_1,
@@ -484,8 +484,8 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     c = p->x;
     d = 0x24000;
     e = p->z - 0x3800;
-    InitEnemyBtlObj(&work->obj, &gBosBoogieDiceEmyKind, c, d, e);
-    ColliderInit(&work->obj.collider, 3, gBosBoogieDiceEmyKind.radius, gBosBoogieDiceEmyKind.height);
+    InitEnemyBtlObj(&work->obj, &sBosBoogieDiceEmyKind, c, d, e);
+    ColliderInit(&work->obj.collider, 3, sBosBoogieDiceEmyKind.radius, sBosBoogieDiceEmyKind.height);
     work->obj.flags |= 0x400;
 #ifdef VERSION_EU
     work->obj.flags |= 0x100;
@@ -831,7 +831,7 @@ void RollBoogieDice(BoogieDiceWork* work) {
     void* tbl[6][3];
     u8 n;
 
-    memcpy(tbl, gBoogieDiceFaces, sizeof(tbl));
+    memcpy(tbl, sBoogieDiceFaces, sizeof(tbl));
 
     switch (GetRandom() % 4) {
     case 0:
@@ -889,7 +889,7 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->obj.x = p->x;
     work->obj.y = p->y;
     work->obj.z = -0xA000;
-    ColliderInit(&work->obj.collider, 8, gBosBoogieExplosiondiceEmyKind.radius, gBosBoogieExplosiondiceEmyKind.height);
+    ColliderInit(&work->obj.collider, 8, sBosBoogieExplosiondiceEmyKind.radius, sBosBoogieExplosiondiceEmyKind.height);
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6774, 4), gUnk_0979666A);
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
@@ -1005,7 +1005,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             SetBtlObjUnhittable(&work->boogie->actor, 1);
 
             if (BosBoogieIsActorPastSaku() != 0) {
-                work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieExplosiondice, work->boogie);
+                work->task = TaskCreate(&work->tasks, &sTaskDescBosBoogieExplosiondice, work->boogie);
             }
         }
     }
@@ -1123,9 +1123,9 @@ u8 task_bos_boogie_map_1(void) {
 }
 
 void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work) {
-    BosMapanimeInit(&work->anims[0], &gUnk_096FE034);
-    BosMapanimeInit(&work->anims[1], &gUnk_096FE04C);
-    BosMapanimeInit(&work->anims[2], &gUnk_096FE064);
+    BosMapanimeInit(&work->anims[0], &sUnk_096FE034);
+    BosMapanimeInit(&work->anims[1], &sUnk_096FE04C);
+    BosMapanimeInit(&work->anims[2], &sUnk_096FE064);
 }
 
 u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {
@@ -1203,7 +1203,7 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
 
     d = gBtlWork->actor->y;
     e = -0x1000;
-    InitEnemyBtlObj(&work->obj, &gBosBoogieDiskEmyKind, x, d, e);
+    InitEnemyBtlObj(&work->obj, &sBosBoogieDiskEmyKind, x, d, e);
     work->obj.flags |= 0x400;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gNokogiriFrames, 8), gNokogiriTiles);
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
@@ -1372,7 +1372,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->obj.y = 0x25C00;
     work->obj.z = -0xC000;
     work->obj.x = *arg;
-    ColliderInit(&work->obj.collider, 8, gBosBoogieKnifeEmyKind.radius, gBosBoogieKnifeEmyKind.height);
+    ColliderInit(&work->obj.collider, 8, sBosBoogieKnifeEmyKind.radius, sBosBoogieKnifeEmyKind.height);
     work->tiles = LoadObjTiles(gKnifeTiles, 0xC40);
     work->palette = LoadObjPalette(gKnifePalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
@@ -1498,7 +1498,7 @@ void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
         v = -0x4000;
 
         for (i = 0; i <= 4; i++) {
-            work->knives[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
+            work->knives[i] = TaskCreate(&work->tasks, &sTaskDescBosBoogieKnife, &v);
             v += 0x6800;
         }
     } else {
@@ -1506,7 +1506,7 @@ void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
         v = 0x23000;
 
         for (i = 0; i <= 4; i++) {
-            work->knives[i] = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnife, &v);
+            work->knives[i] = TaskCreate(&work->tasks, &sTaskDescBosBoogieKnife, &v);
             v += -0x6800;
         }
     }
@@ -1524,7 +1524,7 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
         work->knives[i] = 0;
     }
 
-    InitEnemyBtlObj(&work->obj, &gBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
+    InitEnemyBtlObj(&work->obj, &sBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
     SetBtlObjUnhittable(&work->obj, 1);
     RequestEnemyCardUse(&work->obj);
 }
@@ -1636,7 +1636,7 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     c = arg->actor.x;
     d = arg->actor.y + 0x100;
     e = arg->actor.z - 0x7C00;
-    InitEnemyBtlObj(&work->obj, &gBosBoogieKaihukuEmyKind, c, d, e);
+    InitEnemyBtlObj(&work->obj, &sBosBoogieKaihukuEmyKind, c, d, e);
     work->obj.flags |= 0x400;
     work->tiles = LoadObjTiles(gKaifukuTiles, 0x400);
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
@@ -1758,29 +1758,29 @@ void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work) {
 void BosUrsulaUpdateMapBlocks(UrsulaWork* work) {
     if (work->state >= 3 && work->state <= 4) {
         if (work->obj.x > gBtlWork->actor->x) {
-            if (work->mapBlocks != gBosUrsulaMapBlocksHurtLeft) {
-                work->mapBlocks = gBosUrsulaMapBlocksHurtLeft;
-                SetBgMapBlocks(0, gBosUrsulaMapBlocksHurtLeft, 4, 3);
+            if (work->mapBlocks != sBosUrsulaMapBlocksHurtLeft) {
+                work->mapBlocks = sBosUrsulaMapBlocksHurtLeft;
+                SetBgMapBlocks(0, sBosUrsulaMapBlocksHurtLeft, 4, 3);
             } else {
                 BosUrsulaStartAttack(0);
             }
         } else {
-            if (work->mapBlocks != gBosUrsulaMapBlocksHurtRight) {
-                work->mapBlocks = gBosUrsulaMapBlocksHurtRight;
-                SetBgMapBlocks(0, gBosUrsulaMapBlocksHurtRight, 4, 3);
+            if (work->mapBlocks != sBosUrsulaMapBlocksHurtRight) {
+                work->mapBlocks = sBosUrsulaMapBlocksHurtRight;
+                SetBgMapBlocks(0, sBosUrsulaMapBlocksHurtRight, 4, 3);
             } else {
                 BosUrsulaStartAttack(0);
             }
         }
     } else if (BosUrsulaIsFacingLeft() != 0) {
-        if (work->mapBlocks != gBosUrsulaMapBlocksLeft) {
-            work->mapBlocks = gBosUrsulaMapBlocksLeft;
-            SetBgMapBlocks(0, gBosUrsulaMapBlocksLeft, 4, 3);
+        if (work->mapBlocks != sBosUrsulaMapBlocksLeft) {
+            work->mapBlocks = sBosUrsulaMapBlocksLeft;
+            SetBgMapBlocks(0, sBosUrsulaMapBlocksLeft, 4, 3);
         }
     } else {
-        if (work->mapBlocks != gBosUrsulaMapBlocksRight) {
-            work->mapBlocks = gBosUrsulaMapBlocksRight;
-            SetBgMapBlocks(0, gBosUrsulaMapBlocksRight, 4, 3);
+        if (work->mapBlocks != sBosUrsulaMapBlocksRight) {
+            work->mapBlocks = sBosUrsulaMapBlocksRight;
+            SetBgMapBlocks(0, sBosUrsulaMapBlocksRight, 4, 3);
         }
     }
 }
@@ -1798,8 +1798,8 @@ void task_bos_ursula_0(UrsulaWork* work) {
 
     gUrsulaWork = work;
     gBosUrsulaActive = 1;
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosUrsulaMap, (void*)&gBosUrsulaBattleBackgroundDef);
-    TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsulaBorder, 0);
+    TaskCreate(&gBtlWork->taskPools[1], &sTaskDescBosUrsulaMap, (void*)&sBosUrsulaBattleBackgroundDef);
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescBosUrsulaBorder, 0);
     work->state = 0;
     work->timer = 0;
     work->mapBlocks = 0;
@@ -1812,7 +1812,7 @@ void task_bos_ursula_0(UrsulaWork* work) {
     SetBattleActorPosition(0x10000, 0x1A800, 0);
     gBtlWork->bossPriorityOffset = 0xFF00;
     gBosUrsulaBaseZ = -0x5000;
-    InitEnemyBtlObj(&work->obj, &gBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
+    InitEnemyBtlObj(&work->obj, &sBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
     work->obj.groundZ = 0;
     work->obj.flags |= 4;
     SetBtlObjUnhittable(&work->obj, 1);
@@ -1826,12 +1826,12 @@ void task_bos_ursula_0(UrsulaWork* work) {
     gBtlWork->bossZ = work->obj.z;
     TaskPoolInit(&work->tasks, 5);
     v = 1;
-    work->tako = TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
+    work->tako = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
     v = 0;
-    work->tako2 = TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
-    TaskCreate(&work->tasks, &gTaskDescBosUrsulaMapanime, 0);
+    work->tako2 = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
+    TaskCreate(&work->tasks, &sTaskDescBosUrsulaMapanime, 0);
     v = 1;
-    TaskCreate(&work->tasks, &gTaskDescBosUrsulaBacktako, &v);
+    TaskCreate(&work->tasks, &sTaskDescBosUrsulaBacktako, &v);
     work->gimmickDelay = 0;
 }
 
@@ -2176,9 +2176,9 @@ void task_bos_ursula_2(UrsulaWork* work) {
     BtlObj* p = &work->obj;
     s32 d = 0;
 
-    if (BosUrsulaIsFacingLeft() != 0 && work->mapBlocks == gBosUrsulaMapBlocksHurtRight) {
+    if (BosUrsulaIsFacingLeft() != 0 && work->mapBlocks == sBosUrsulaMapBlocksHurtRight) {
         d = -0x1000;
-    } else if (BosUrsulaIsFacingLeft() == 0 && work->mapBlocks == gBosUrsulaMapBlocksHurtLeft) {
+    } else if (BosUrsulaIsFacingLeft() == 0 && work->mapBlocks == sBosUrsulaMapBlocksHurtLeft) {
         d = 0x1000;
     }
 
@@ -2431,7 +2431,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->offsetX = 0;
     work->offsetZ = 0;
     BosUrsulaTakoGetPosition(&x, &y, &z, work);
-    InitEnemyBtlObj(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+    InitEnemyBtlObj(&work->obj, &sBosUrsulaTakoEmyKind, x, y, z);
     ColliderInit(&work->collider2, 7, 0x28, 0x20);
 
     if (work->isLeft != 0) {
@@ -2557,7 +2557,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         if (work->timer == 5) {
             ReleaseEnemyBtlObj(&work->obj);
             BosUrsulaTakoGetPosition(&x, &y, &z, work);
-            InitEnemyBtlObj(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+            InitEnemyBtlObj(&work->obj, &sBosUrsulaTakoEmyKind, x, y, z);
             work->obj.flags |= 0x400;
             SetEnemyHpFromStats(&work->obj, 35, 25);
         }
@@ -2769,25 +2769,25 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
     BosMapanimeUpdate(&work->anim, work->anim.def, 0);
 
     if (BosMapanimeIsAtEnd(&work->anim) != 0) {
-        if (work->anim.def == &gBosUrsulaMapanimeWindup) {
+        if (work->anim.def == &sBosUrsulaMapanimeWindup) {
             if (work->attack == 1) {
-                BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeBubble);
+                BosMapanimeInit(&work->anim, &sBosUrsulaMapanimeBubble);
                 work->attack = 4;
             } else if (work->attack == 2) {
-                BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeCharge);
+                BosMapanimeInit(&work->anim, &sBosUrsulaMapanimeCharge);
                 work->attack = 4;
             }
-        } else if (work->anim.def == &gBosUrsulaMapanimeBubble
-                || work->anim.def == &gBosUrsulaMapanimeCharge) {
-            BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeRecover);
+        } else if (work->anim.def == &sBosUrsulaMapanimeBubble
+                || work->anim.def == &sBosUrsulaMapanimeCharge) {
+            BosMapanimeInit(&work->anim, &sBosUrsulaMapanimeRecover);
             work->attack = 4;
-        } else if (work->anim.def == &gBosUrsulaMapanimeRecover) {
-            BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeIdle);
+        } else if (work->anim.def == &sBosUrsulaMapanimeRecover) {
+            BosMapanimeInit(&work->anim, &sBosUrsulaMapanimeIdle);
             work->attack = 0;
         }
     }
 
-    if (work->anim.def == &gBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&work->anim) == 2) {
+    if (work->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&work->anim) == 2) {
         if (work->attackSpawned == 0) {
             work->attackSpawned = 1;
             BgFxStartUrsulaBeam(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
@@ -2801,7 +2801,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
         ApplyAttackBox(0xF3, gBtlWork->bossX + d, 0x1C400, 0, 0x18, 0x38, 0x50);
     }
 
-    if (work->anim.def == &gBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2
+    if (work->anim.def == &sBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2
             && work->attackSpawned == 0) {
         work->attackSpawned = 1;
         work->task = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubble, 0);
@@ -2835,10 +2835,10 @@ void BosUrsulaStartAttack(s32 a) {
         gUrsulaMapanimeWork->attack = a;
 
         if (a == 0) {
-            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &gBosUrsulaMapanimeRecover);
+            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeRecover);
             gUrsulaMapanimeWork->attackSpawned = 1;
         } else {
-            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &gBosUrsulaMapanimeWindup);
+            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeWindup);
             gUrsulaMapanimeWork->attackSpawned = 0;
             m4aSongNumStart(SONG_VO_UR_ATTACK00);
         }
@@ -2846,7 +2846,7 @@ void BosUrsulaStartAttack(s32 a) {
 }
 
 u8 BosUrsulaIsAttacking(void) {
-    if (gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeBubble || gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeCharge || gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeWindup) {
+    if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeBubble || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeWindup) {
         return 1;
     }
 
@@ -2854,7 +2854,7 @@ u8 BosUrsulaIsAttacking(void) {
 }
 
 u8 BosUrsulaIsCharging(void) {
-    if (gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&gUrsulaMapanimeWork->anim) == 2) {
+    if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&gUrsulaMapanimeWork->anim) == 2) {
         return 1;
     }
 

@@ -15,8 +15,6 @@ typedef struct DebugFlag {
     u32 mask;
 } DebugFlag;
 extern u8 gDebflagReturnToMap;
-extern const DebugFlag gDebugFlagList[];
-extern const DebugFlag gDebugFlagListMap[];
 
 void mode_debflag_0(s32 arg);
 void mode_debflag_1(void);

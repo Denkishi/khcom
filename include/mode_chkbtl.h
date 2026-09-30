@@ -45,8 +45,6 @@ typedef struct ChkBtlWorld {
 extern u16 gVsBattleMinY;
 extern u16 gVsBattleMaxY;
 extern u16 gVsBattleHalfWidth;
-extern const ChkBtlEntry gChkBtlEntries[];
-extern const ChkBtlWorld gChkBtlWorlds[];
 extern ChkBtlWork* gChkBtlWork;
 extern const char gWhitePalette[32];
 

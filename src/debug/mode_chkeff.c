@@ -11,15 +11,15 @@ extern BgAnimationDef* gChkEffBgAnimations[83];
 
 ChkEffWork* gChkEffWork;
 
-const char gChkEffPauseText[8] = "PAUSE";
-const char gChkEffPauseBlankText[8] = "     ";
-const char gChkEffBlankLineText[40] = "                                      ";
-const char gChkEffAlphaALabel[8] = "alp A";
-const char gChkEffAlphaBLabel[8] = "alp B";
-const char gChkEffScaleLabel[8] = "scale";
-const char gChkEffNumLabel[4] = "num";
-const char gChkEffPicLabel[4] = "pic";
-const char gChkEffFrameLabel[8] = "frame";
+static const char sChkEffPauseText[8] = "PAUSE";
+static const char sChkEffPauseBlankText[8] = "     ";
+static const char sChkEffBlankLineText[40] = "                                      ";
+static const char sChkEffAlphaALabel[8] = "alp A";
+static const char sChkEffAlphaBLabel[8] = "alp B";
+static const char sChkEffScaleLabel[8] = "scale";
+static const char sChkEffNumLabel[4] = "num";
+static const char sChkEffPicLabel[4] = "pic";
+static const char sChkEffFrameLabel[8] = "frame";
 
 void mode_chkeff_0(void) {
     gChkEffWork = EwramAlloc(sizeof(ChkEffWork));
@@ -135,30 +135,30 @@ void mode_chkeff_1(void) {
         }
 
         if (gChkEffWork->paused != 0) {
-            PrintString(0, 0, 0, gChkEffPauseText);
+            PrintString(0, 0, 0, sChkEffPauseText);
         } else {
-            PrintString(0, 0, 0, gChkEffPauseBlankText);
+            PrintString(0, 0, 0, sChkEffPauseBlankText);
         }
 
         wp = &gChkEffWork;
-        PrintString(0, 14, 0, gChkEffBlankLineText);
-        PrintString(0, 15, 0, gChkEffBlankLineText);
-        PrintString(0, 16, 0, gChkEffBlankLineText);
-        PrintString(0, 17, 0, gChkEffBlankLineText);
-        PrintString(0, 18, 0, gChkEffBlankLineText);
-        PrintString(0, 19, 0, gChkEffBlankLineText);
+        PrintString(0, 14, 0, sChkEffBlankLineText);
+        PrintString(0, 15, 0, sChkEffBlankLineText);
+        PrintString(0, 16, 0, sChkEffBlankLineText);
+        PrintString(0, 17, 0, sChkEffBlankLineText);
+        PrintString(0, 18, 0, sChkEffBlankLineText);
+        PrintString(0, 19, 0, sChkEffBlankLineText);
         BgAnimGetFrameState(&a, &b);
-        PrintString(0, 14, 0, gChkEffAlphaALabel);
+        PrintString(0, 14, 0, sChkEffAlphaALabel);
         PrintNumber(6, 14, 0, (*wp)->alphaA);
-        PrintString(0, 15, 0, gChkEffAlphaBLabel);
+        PrintString(0, 15, 0, sChkEffAlphaBLabel);
         PrintNumber(6, 15, 0, (*wp)->alphaB);
-        PrintString(0, 16, 0, gChkEffScaleLabel);
+        PrintString(0, 16, 0, sChkEffScaleLabel);
         PrintNumber(6, 16, 0, (*wp)->scale);
-        PrintString(0, 17, 0, gChkEffNumLabel);
+        PrintString(0, 17, 0, sChkEffNumLabel);
         PrintNumber(6, 17, 0, (*wp)->effectIndex);
-        PrintString(0, 18, 0, gChkEffPicLabel);
+        PrintString(0, 18, 0, sChkEffPicLabel);
         PrintNumber(6, 18, 0, a);
-        PrintString(0, 19, 0, gChkEffFrameLabel);
+        PrintString(0, 19, 0, sChkEffFrameLabel);
         PrintNumber(6, 19, 0, b);
         TaskPoolUpdate(&(*wp)->pool);
         TaskPoolDraw(&(*wp)->pool);

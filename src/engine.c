@@ -56,7 +56,7 @@ u32 gBg3Y IWRAM_DATA(4);
 u16 gBldAlpha IWRAM_DATA(4);
 struct FadeWork* gFadeWork IWRAM_DATA(4);
 
-vu16* gBgControl[4] = { &gBg0Cnt, &gBg1Cnt, &gBg2Cnt, &gBg3Cnt };
+static vu16* sBgControl[4] = { &gBg0Cnt, &gBg1Cnt, &gBg2Cnt, &gBg3Cnt };
 
 const s16 gSineTable[320] = {
         0,     6,    12,    18,    25,    31,    37,    43,    49,    56,    62,    68,
@@ -88,11 +88,11 @@ const s16 gSineTable[320] = {
       251,   252,   253,   254,   254,   255,   255,   255,
 };
 
-const u8 sVTransHeapName[] = "VTRANS";
+static const u8 sVTransHeapName[] = "VTRANS";
 
-const u8 sBgHeapName[] = "BG";
+static const u8 sBgHeapName[] = "BG";
 
-const u8 sFadeHeapName[8] = "FADE";
+static const u8 sFadeHeapName[8] = "FADE";
 
 u32 gMosaicSize;
 u32 gMosaicTarget;
@@ -2000,7 +2000,7 @@ void DisableBg(s32 bg) {
 }
 
 void SetupBg(s32 bg, u8 charBase, u8 screenBase, u8 palette) {
-    vu16* p = gBgControl[bg];
+    vu16* p = sBgControl[bg];
 
     *p = (*p & 0xFFF3) | (charBase << 2);
     *p = (*p & 0xE0FF) | (screenBase << 8);
@@ -2023,11 +2023,11 @@ void LoadBgMap(s32 bg, void* src, u16 size) {
 }
 
 void* GetBgCharBase(s32 bg) {
-    return (void*)(((*gBgControl[bg] & 0x0C) << 12) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & 0x0C) << 12) + 0x06000000);
 }
 
 void* GetBgScreenBase(s32 bg) {
-    return (void*)(((*gBgControl[bg] & 0x1F00) << 3) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000);
 }
 
 void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
@@ -2054,7 +2054,7 @@ void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
     }
     e->x = x;
     e->y = y;
-    CopyBgMapRect(x, y, e, (void*)(((*gBgControl[bg] & 0x1F00) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
+    CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
     SetBgScroll(bg, x & 7, y & 7);
     e->dirty = 0;
 }
@@ -2095,7 +2095,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         e->y = y;
         return;
     }
-    dst = (void*)(((*gBgControl[bg] & 0x1F00) << 3) + 0x06000000);
+    dst = (void*)(((*sBgControl[bg] & 0x1F00) << 3) + 0x06000000);
     tx = sx >> 3;
     ty = sy >> 3;
     cx = GetBgScrollX(bg) >> 3;
@@ -2152,9 +2152,9 @@ u16 GetBgMapY(s32 bg) {
 
 void SetBgMosaic(s32 bg, u8 on) {
     if (on) {
-        *gBgControl[bg] |= 0x40;
+        *sBgControl[bg] |= 0x40;
     } else {
-        *gBgControl[bg] &= 0xFFBF;
+        *sBgControl[bg] &= 0xFFBF;
     }
 }
 
@@ -2233,14 +2233,14 @@ u8 GetBgScrollY(u32 a) {
 }
 
 void SetBgPriority(s32 bg, u16 priority) {
-    vu16* p = gBgControl[bg];
+    vu16* p = sBgControl[bg];
 
     *p &= 0xFFFC;
     *p |= priority;
 }
 
 void SetBgSize(s32 bg, u16 v) {
-    vu16* p = gBgControl[bg];
+    vu16* p = sBgControl[bg];
 
     *p &= 0x3FFF;
     *p |= v;
@@ -2248,12 +2248,12 @@ void SetBgSize(s32 bg, u16 v) {
 
 void SetBgColorMode(s32 bg, u16 v) {
     if (v == 0x80) {
-        vu16* p = gBgControl[bg];
+        vu16* p = sBgControl[bg];
 
         *p &= 0xFFFF;
         *p |= 0x80;
     } else {
-        vu16* p = gBgControl[bg];
+        vu16* p = sBgControl[bg];
 
         *p &= 0xFF7F;
         *p |= 0;
@@ -2262,9 +2262,9 @@ void SetBgColorMode(s32 bg, u16 v) {
 
 void SetBgOverflow(s32 bg, u8 on) {
     if (on) {
-        *gBgControl[bg] |= 0x2000;
+        *sBgControl[bg] |= 0x2000;
     } else {
-        *gBgControl[bg] &= 0xDFFF;
+        *sBgControl[bg] &= 0xDFFF;
     }
 }
 

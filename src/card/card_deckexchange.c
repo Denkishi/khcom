@@ -71,21 +71,21 @@ u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* w);
 u8 IsDeckExchangeCardAt(DeckExchangeWork* w, s16 x, s16 y);
 void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* w);
 #ifndef VERSION_EU
-const s16 gDeckExchangeTabPointerX[3] = { 116, 116, 116 };
+static const s16 sDeckExchangeTabPointerX[3] = { 116, 116, 116 };
 
-const s16 gDeckExchangeTabPointerY[3] = { 56, 104, 148 };
+static const s16 sDeckExchangeTabPointerY[3] = { 56, 104, 148 };
 
 const s16 gUnk_09041F10[5] = { 12, 28, 42, 56, 70 };
 
-const s16 gDeckExchangeFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
+static const s16 sDeckExchangeFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
 
 const s16 gUnk_09041F26[5] = { 64, 82, 100, 118, 136 };
 
-const s16 gDeckExchangeValueGridX[2] = { 80, 128 };
+static const s16 sDeckExchangeValueGridX[2] = { 80, 128 };
 
-const s16 gDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
+static const s16 sDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
 
-const u16 gUnk_09041F3E[4] = { 45, 93, 141, 30 };
+static const u16 sUnk_09041F3E[4] = { 45, 93, 141, 30 };
 
 void deckexchange_0(DeckExchangeWork* w, void* a) {
     s32 zero;
@@ -127,8 +127,8 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     AnimInit(&w->anim, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->x2 = gDeckExchangeTabPointerX[0] << 8;
-    w->y2 = gDeckExchangeTabPointerY[0] << 8;
+    w->x2 = sDeckExchangeTabPointerX[0] << 8;
+    w->y2 = sDeckExchangeTabPointerY[0] << 8;
     w->handFlags = 0;
     w->tiles3 = LoadObjTiles(gUnk_090A44C4, 32);
     w->palette = LoadObjPalette(gUnk_09614418, 32);
@@ -164,10 +164,10 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     w->y7 = 113;
     w->textSlotCount5 = 0;
     w->unk_6C4 = 79;
-    n = gUnk_09041F3E[w->deckIndex];
+    n = sUnk_09041F3E[w->deckIndex];
     w->unk_6C6 = n;
     w->unk_6C8 = 225;
-    n = gUnk_09041F3E[w->deckIndex];
+    n = sUnk_09041F3E[w->deckIndex];
     w->unk_6CA = n;
     w->unk_70F = 0;
     w->unk_713 = 0;
@@ -334,8 +334,8 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* w, void* a) {
         w->y = 0x2800;
         v = w->deckIndex;
         w->cursorRow = v;
-        ApproachValue(&w->x2, gDeckExchangeTabPointerX[w->cursorCol] << 8, w->timer);
-        ApproachValue(&w->y2, gDeckExchangeTabPointerY[w->cursorRow] << 8, w->timer);
+        ApproachValue(&w->x2, sDeckExchangeTabPointerX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, sDeckExchangeTabPointerY[w->cursorRow] << 8, w->timer);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
         w->view = 1;
         SetDeckExchangeHandAnim(w);
@@ -474,8 +474,8 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
     }
 
     if (w->timer != 0) {
-        ApproachValue(&w->x2, gDeckExchangeValueGridX[w->cursorCol] << 8, w->timer);
-        ApproachValue(&w->y2, (gDeckExchangeValueGridY[w->cursorRow] - 16) << 8, w->timer);
+        ApproachValue(&w->x2, sDeckExchangeValueGridX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, (sDeckExchangeValueGridY[w->cursorRow] - 16) << 8, w->timer);
         w->timer--;
     }
 
@@ -559,7 +559,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* w, void* a) {
         return 1;
     }
     if (w->timer != 0) {
-        ApproachValue(&w->x2, gDeckExchangeFilterTabX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->x2, sDeckExchangeFilterTabX[w->cursorCol] << 8, w->timer);
         ApproachValue(&w->y2, 0x1E00, w->timer);
         w->timer--;
     }
@@ -757,8 +757,8 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
             m4aSongNumStart(SONG_SYS_KETTEI);
             if ((u8)MoveDeckExchangeValueCursor(w, 0) != 0) {
                 DrawDeckExchangeValueCpCost(w);
-                w->x2 = gDeckExchangeValueGridX[w->cursorCol] << 8;
-                w->y2 = (gDeckExchangeValueGridY[w->cursorRow] - 16) << 8;
+                w->x2 = sDeckExchangeValueGridX[w->cursorCol] << 8;
+                w->y2 = (sDeckExchangeValueGridY[w->cursorRow] - 16) << 8;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeValueSelect);
                 return 1;
             }

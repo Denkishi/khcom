@@ -3,7 +3,7 @@
 #include "m4a.h"
 #include "gba/io_reg.h"
 
-SoundEntry gPcmPlaybackConfigs[13] = {
+static SoundEntry sPcmPlaybackConfigs[13] = {
     {5734, 96, 62610},
     {7884, 132, 63408},
     {10512, 176, 63940},
@@ -31,13 +31,13 @@ u8 LookupPcmPlaybackConfig(u32 sampleRate, u16* timerReload, u32* samplesPerBuff
     s32 i = 0;
 
     do {
-        if (gPcmPlaybackConfigs[i].sampleRate == sampleRate) {
-            *timerReload = gPcmPlaybackConfigs[i].timerReload;
-            *samplesPerBuffer = gPcmPlaybackConfigs[i].samplesPerBuffer;
+        if (sPcmPlaybackConfigs[i].sampleRate == sampleRate) {
+            *timerReload = sPcmPlaybackConfigs[i].timerReload;
+            *samplesPerBuffer = sPcmPlaybackConfigs[i].samplesPerBuffer;
             return 1;
         }
         i++;
-    } while (gPcmPlaybackConfigs[i].sampleRate != 0);
+    } while (sPcmPlaybackConfigs[i].sampleRate != 0);
     return 0;
 }
 

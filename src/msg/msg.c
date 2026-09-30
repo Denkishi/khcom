@@ -20,7 +20,7 @@ static BgTextLine* gBgTextLines;
 static u8 sTextEntryCount;
 static u8 sBgTextDrawQueued;
 
-const GlyphWidthTable gLatinGlyphWidths = {
+static const GlyphWidthTable sLatinGlyphWidths = {
     {
         0, 4, 4, 5, 5, 6, 8, 8, 8, 6, 6, 6, 8, 8, 8, 8,
         8, 8, 7, 8, 8, 8, 8, 8, 6, 12, 0, 0, 0, 0, 0, 0,
@@ -1426,7 +1426,7 @@ s32 GetMsgTextWidth(TextChar* a) {
                 }
             }
 
-            sum = (u16)(gLatinGlyphWidths.widths[v] + ((s32)(sum << 16) >> 16));
+            sum = (u16)(sLatinGlyphWidths.widths[v] + ((s32)(sum << 16) >> 16));
         }
 
         a++;
@@ -1539,7 +1539,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)gLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
 #ifdef VERSION_EU
@@ -1669,7 +1669,7 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s) {
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)gLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
 #ifdef VERSION_EU
@@ -2234,7 +2234,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
             }
 
             if (v != 32) {
-                b->advance = gLatinGlyphWidths.widths[v];
+                b->advance = sLatinGlyphWidths.widths[v];
             } else {
                 b->advance = 255;
             }
@@ -6251,7 +6251,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                 sCardMsgGlyphSprites[sTextEntryCount].tiles = NULL;
             }
 
-            cx += (s16)gLatinGlyphWidths.widths[v] << 8;
+            cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
 #ifdef VERSION_EU
@@ -7040,7 +7040,7 @@ u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
             }
 #endif
             if (v != 32) {
-                *b = gLatinGlyphWidths.widths[v];
+                *b = sLatinGlyphWidths.widths[v];
 #ifdef VERSION_EU
                 v = ((u16*)gUnk_09EEB204[v])[3];
                 CpuSet(&gUnk_090AB5B2[v * 32], dst, 0x40);

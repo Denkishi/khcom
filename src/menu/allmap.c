@@ -23,7 +23,7 @@ u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);
 s16 gAllmapCameraX EWRAM_COMMON(4);
 
-TaskDesc gTaskDescAllmapRoom = {
+static TaskDesc sTaskDescAllmapRoom = {
     "task_allmap_room",
     (TaskInitFunc)task_allmap_room_0,
     (TaskUpdateFunc)task_allmap_room_1,
@@ -32,7 +32,7 @@ TaskDesc gTaskDescAllmapRoom = {
     sizeof(AllmapRoomWork),
 };
 
-TaskDesc gTaskDescAllmapCursor = {
+static TaskDesc sTaskDescAllmapCursor = {
     "task_allmap_cursor",
     (TaskInitFunc)task_allmap_cursor_0,
     (TaskUpdateFunc)task_allmap_cursor_1,
@@ -41,7 +41,7 @@ TaskDesc gTaskDescAllmapCursor = {
     sizeof(AllmapCursorWork),
 };
 
-TaskDesc gTaskDescAllmapRoomname = {
+static TaskDesc sTaskDescAllmapRoomname = {
     "task_allmap_roomname",
     (TaskInitFunc)task_allmap_roomname_0,
     (TaskUpdateFunc)task_allmap_roomname_1,
@@ -51,7 +51,7 @@ TaskDesc gTaskDescAllmapRoomname = {
 };
 
 #ifdef VERSION_EU
-void* gAllmapBarSprites[5] = {
+static void* sAllmapBarSprites[5] = {
     gUnkEu_09738538,
     gUnkEu_09738554,
     gUnkEu_09738590,
@@ -59,7 +59,7 @@ void* gAllmapBarSprites[5] = {
     gUnkEu_09738564,
 };
 
-void* gUnkEu_09F80138[5] = {
+static void* sUnkEu_09F80138[5] = {
     gUnkEu_0980F840,
     gUnkEu_0980FD40,
     gUnkEu_09810C40,
@@ -77,7 +77,7 @@ TaskDesc gTaskDescAllmapBar = {
     sizeof(AllmapBarWork),
 };
 
-const s16 gAllmapDoorCardOffsets[4][2] = {
+static const s16 sAllmapDoorCardOffsets[4][2] = {
     {-24, 48},
     {56, 48},
     {56, -19},
@@ -91,16 +91,16 @@ const s16 gUnk_096FDC20[4][2] = {
     {16, 16},
 };
 
-const u16 gAllmapDirDeltas[4][2] = {
+static const u16 sAllmapDirDeltas[4][2] = {
     {0xFFFF, 1},
     {1, 1},
     {1, 0xFFFF},
     {0xFFFF, 0xFFFF},
 };
 
-const u32 gAllmapReverseDoors[4] = {0, 3, 1, 2};
+static const u32 sAllmapReverseDoors[4] = {0, 3, 1, 2};
 
-const s16 gAllmapKeyCardX[4][4] = {
+static const s16 sAllmapKeyCardX[4][4] = {
     {120, 0, 0, 0},
     {104, 136, 0, 0},
     {88, 120, 152, 0},
@@ -209,7 +209,7 @@ Task* CreateAllmapRoomTask(TaskPool* pool) {
     arg.y = 0;
     arg.room = gMapFloorState[6];
     arg.asSprite = 1;
-    return TaskCreate(pool, &gTaskDescAllmapRoom, &arg);
+    return TaskCreate(pool, &sTaskDescAllmapRoom, &arg);
 }
 
 u8 func_080D3A70(u8 a, u8 b) {
@@ -463,7 +463,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
         work->steps--;
         if (work->steps == 0) {
 #ifdef VERSION_EU
-            LoadBgMap(3, gUnkEu_09F80138[gLanguage], 0x500);
+            LoadBgMap(3, sUnkEu_09F80138[gLanguage], 0x500);
 #else
             LoadBgMap(3, gUnk_0983B298, 0x500);
 #endif
@@ -530,7 +530,7 @@ void task_allmap_bar_2(AllmapBarWork* work) {
         return;
     }
 #ifdef VERSION_EU
-    DrawSprite(work->x >> 8, 0, gAllmapBarSprites[gLanguage], work->tiles, work->palette, 0,
+    DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, 0,
         0xC00, 1000);
 #else
     DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, 0, 0xC00, 1000);
@@ -552,14 +552,14 @@ u8 AllmapHasDoorInfo(AllmapCursorPos a) {
     u8 v;
 
     for (i = 0; i < 4; i++) {
-        p.x = a.x + gAllmapDirDeltas[i][0];
-        p.y = a.y + gAllmapDirDeltas[i][1];
+        p.x = a.x + sAllmapDirDeltas[i][0];
+        p.y = a.y + sAllmapDirDeltas[i][1];
         r = GetAllmapRoomAt(p);
         if (r != 255) {
             if (GetEventRoomKind(GetAllmapRoomAt(a)) == 2) {
-                v = func_080D3AB8(r, gAllmapReverseDoors[i]);
+                v = func_080D3AB8(r, sAllmapReverseDoors[i]);
             } else {
-                v = func_080D3A70(r, gAllmapReverseDoors[i]);
+                v = func_080D3A70(r, sAllmapReverseDoors[i]);
             }
 
             if (v != 0) {
@@ -579,11 +579,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     work->count = 0;
 
     for (i = 0; i < 4; i++) {
-        pos.x = work->pos.x + gAllmapDirDeltas[i][0];
-        pos.y = work->pos.y + gAllmapDirDeltas[i][1];
+        pos.x = work->pos.x + sAllmapDirDeltas[i][0];
+        pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != 0xFF && func_080D3A70(room, gAllmapReverseDoors[i])) {
+        if (room != 0xFF && func_080D3A70(room, sAllmapReverseDoors[i])) {
             n = GetMapRoomCardValue(room) + 1;
 
             if (n == 10) {
@@ -619,7 +619,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
 s32 GetAllmapKeyCardX(u16 a, s32 b) {
     s16 tbl[4][4];
 
-    memcpy(tbl, gAllmapKeyCardX, sizeof(tbl));
+    memcpy(tbl, sAllmapKeyCardX, sizeof(tbl));
     return tbl[a - 1][b] << 8;
 }
 
@@ -630,11 +630,11 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     AllmapDoorEntry* e;
 
     for (i = 0; i < 4; i++) {
-        pos.x = work->pos.x + gAllmapDirDeltas[i][0];
-        pos.y = work->pos.y + gAllmapDirDeltas[i][1];
+        pos.x = work->pos.x + sAllmapDirDeltas[i][0];
+        pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != 0xFF && func_080D3AB8(room, gAllmapReverseDoors[i])) {
+        if (room != 0xFF && func_080D3AB8(room, sAllmapReverseDoors[i])) {
             break;
         }
     }
@@ -642,7 +642,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     if (i == 4) {
         work->count = 0;
     } else {
-        SelectEventDoor(work->room, gAllmapReverseDoors[i]);
+        SelectEventDoor(work->room, sAllmapReverseDoors[i]);
         work->count = CountRemainingEventKeys();
     }
 
@@ -736,8 +736,8 @@ void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
     for (i = 0; i < 4; i++) {
         if (work->gfx2[i] != 0 && work->steps == 0) {
             DrawSprite(work->x >> 8, work->y >> 8, work->gfx2[i], work->tiles, work->palette, 0, 0, i + 51);
-            sAllmapDoorOffsetX = gAllmapDoorCardOffsets[i][0];
-            sAllmapDoorOffsetY = gAllmapDoorCardOffsets[i][1];
+            sAllmapDoorOffsetX = sAllmapDoorCardOffsets[i][0];
+            sAllmapDoorOffsetY = sAllmapDoorCardOffsets[i][1];
             DrawSprite(sAllmapDoorOffsetX + (work->x >> 8), sAllmapDoorOffsetY + (work->y >> 8), work->doors[i].gfx, work->doors[i].tiles, work->doors[i].palette, 0, 0, i + 40);
             DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].gfx2, work->doors[i].tiles2, work->doors[i].palette2, 0, 0, i + 30);
         }
@@ -939,7 +939,7 @@ void InitAllmap(void) {
     c = ((AllmapState*)gUnk_0203C4B4)->roomTasks[gAllmapCursorRoom]->work;
     arg.x = c->x;
     arg.y = c->y;
-    ((AllmapState*)gUnk_0203C4B4)->cursorTask = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapCursor, &arg);
+    ((AllmapState*)gUnk_0203C4B4)->cursorTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapCursor, &arg);
     func_080D53F8();
 }
 void AllmapUpdateCamera(AllmapState* s) {
@@ -1144,7 +1144,7 @@ void AllmapHandleInput(void) {
     }
     d = GetMapFloorRoom(r);
     if (d->nameId != 26 && (TestAllmapRoomFlag(r, 2) != 0 || TestAllmapRoomFlag(r, 8) != 0)) {
-        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapRoomname, &d->nameId);
+        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoomname, &d->nameId);
     } else {
         ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;
         AllmapClearRoomnameFrame();
@@ -1189,7 +1189,7 @@ void AllmapAddRoom(u8 a, u16 b, u16 c) {
     arg.y = c;
     arg.room = a;
     arg.asSprite = 0;
-    ((AllmapState*)gUnk_0203C4B4)->roomTasks[a] = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapRoom, &arg);
+    ((AllmapState*)gUnk_0203C4B4)->roomTasks[a] = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoom, &arg);
 
     room = d[0];
     if ((u8)(room + 3) > 2) {

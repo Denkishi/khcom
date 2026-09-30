@@ -25,11 +25,11 @@ TaskDesc gTaskDescStatus = {
 };
 
 #ifdef VERSION_EU
-const u16 gStatusBarTileSizes[5] = {736, 608, 736, 640, 704};
+static const u16 sStatusBarTileSizes[5] = {736, 608, 736, 640, 704};
 #endif
 
 #ifdef VERSION_EU
-void* gStatusBarTiles[5] = {
+static void* sStatusBarTiles[5] = {
     gUnk_097A18EC,
     gUnkEu_0977DE68,
     gUnk_097A18EC,
@@ -37,7 +37,7 @@ void* gStatusBarTiles[5] = {
     gUnkEu_0977E14A,
 };
 
-void** gStatusBarSprites[5] = {
+static void** sStatusBarSprites[5] = {
     gUnkEu_09F81EC8,
     gUnkEu_09F81ED8,
     gUnkEu_09F81EC8,
@@ -56,7 +56,7 @@ TaskDesc gTaskDescStatusBar = {
 };
 
 #ifdef VERSION_EU
-void* gStatusTabTiles[5] = {
+static void* sStatusTabTiles[5] = {
     gUnkEu_0977E746,
     gUnkEu_0977EFAE,
     gUnkEu_0977EB7A,
@@ -64,7 +64,7 @@ void* gStatusTabTiles[5] = {
     gUnkEu_0977EB7A,
 };
 
-void** gStatusTabSprites[5] = {
+static void** sStatusTabSprites[5] = {
     gUnkEu_09F81F08,
     gUnkEu_09F81F30,
     gUnkEu_09F81F1C,
@@ -73,7 +73,7 @@ void** gStatusTabSprites[5] = {
 };
 #endif
 
-TaskDesc gTaskDescStatusTab = {
+static TaskDesc sTaskDescStatusTab = {
     "task_status_tab",
     (TaskInitFunc)task_status_tab_0,
     (TaskUpdateFunc)task_status_tab_1,
@@ -82,7 +82,7 @@ TaskDesc gTaskDescStatusTab = {
     sizeof(StatusTabWork),
 };
 
-TaskDesc gTaskDescStatusSora = {
+static TaskDesc sTaskDescStatusSora = {
     "task_status_sora",
     (TaskInitFunc)task_status_sora_0,
     (TaskUpdateFunc)task_status_sora_1,
@@ -91,7 +91,7 @@ TaskDesc gTaskDescStatusSora = {
     sizeof(StatusSoraWork),
 };
 
-TaskDesc gTaskDescStatusDeckname = {
+static TaskDesc sTaskDescStatusDeckname = {
     "task_status_deckname",
     (TaskInitFunc)task_status_deckname_0,
     (TaskUpdateFunc)task_status_deckname_1,
@@ -100,9 +100,9 @@ TaskDesc gTaskDescStatusDeckname = {
     sizeof(StatusDecknameWork),
 };
 
-const s32 gStatusTabCursorX[4] = {-1536, 2816, 6912, 10240};
+static const s32 sStatusTabCursorX[4] = {-1536, 2816, 6912, 10240};
 
-TaskDesc gTaskDescStatusCursor = {
+static TaskDesc sTaskDescStatusCursor = {
     "task_status_cursor",
     (TaskInitFunc)task_status_cursor_0,
     (TaskUpdateFunc)task_status_cursor_1,
@@ -112,11 +112,11 @@ TaskDesc gTaskDescStatusCursor = {
 };
 
 #ifdef VERSION_EU
-const u16 gStatusNewMarkTileSizes[5] = {64, 128, 64, 128, 128};
+static const u16 sStatusNewMarkTileSizes[5] = {64, 128, 64, 128, 128};
 #endif
 
 #ifdef VERSION_EU
-void* gStatusNewMarkTiles[5] = {
+static void* sStatusNewMarkTiles[5] = {
     gUnkEu_0977F7F8,
     gUnkEu_0977F84C,
     gUnkEu_0977FA08,
@@ -124,7 +124,7 @@ void* gStatusNewMarkTiles[5] = {
     gUnkEu_0977F8E0,
 };
 
-void* gStatusNewMarkSprites[5] = {
+static void* sStatusNewMarkSprites[5] = {
     gUnkEu_0977F7E4,
     gUnkEu_0977F838,
     gUnkEu_0977F9F4,
@@ -133,7 +133,7 @@ void* gStatusNewMarkSprites[5] = {
 };
 #endif
 
-TaskDesc gTaskDescStatusStocklist = {
+static TaskDesc sTaskDescStatusStocklist = {
     "task_status_stocklist",
     (TaskInitFunc)task_status_stocklist_0,
     (TaskUpdateFunc)task_status_stocklist_1,
@@ -142,7 +142,7 @@ TaskDesc gTaskDescStatusStocklist = {
     sizeof(StatusStocklistWork),
 };
 
-TaskDesc gTaskDescStatusScrollcursor = {
+static TaskDesc sTaskDescStatusScrollcursor = {
     "task_status_scrollcursor",
     (TaskInitFunc)task_status_scrollcursor_0,
     (TaskUpdateFunc)task_status_scrollcursor_1,
@@ -151,7 +151,7 @@ TaskDesc gTaskDescStatusScrollcursor = {
     sizeof(StatusScrollcursorWork),
 };
 
-TaskDesc gTaskDescStatusMeswindow = {
+static TaskDesc sTaskDescStatusMeswindow = {
     "task_status_meswindow",
     (TaskInitFunc)task_status_meswindow_0,
     (TaskUpdateFunc)task_status_meswindow_1,
@@ -160,7 +160,7 @@ TaskDesc gTaskDescStatusMeswindow = {
     sizeof(StatusMeswindowWork),
 };
 
-TaskDesc gTaskDescStatusMessage = {
+static TaskDesc sTaskDescStatusMessage = {
     "task_status_message",
     (TaskInitFunc)task_status_message_0,
     (TaskUpdateFunc)task_status_message_1,
@@ -169,7 +169,7 @@ TaskDesc gTaskDescStatusMessage = {
     sizeof(StatusMessageWork),
 };
 
-TaskDesc gTaskDescStatusFriend = {
+static TaskDesc sTaskDescStatusFriend = {
     "task_status_friend",
     (TaskInitFunc)task_status_friend_0,
     (TaskUpdateFunc)task_status_friend_1,
@@ -178,7 +178,7 @@ TaskDesc gTaskDescStatusFriend = {
     sizeof(StatusFriendWork),
 };
 
-const StatusFriendTable gStatusFriendTable = {{
+static const StatusFriendTable sStatusFriendTable = {{
     {2, CARD_ID(CARD_DONALD_DUCK, 0)},
     {1, CARD_ID(CARD_GOOFY, 0)},
     {4, CARD_ID(CARD_ALADDIN, 0)},
@@ -203,23 +203,23 @@ void task_status_0(StatusWork* work) {
     work->cursor = 0;
     work->scroll = 0;
     TaskPoolInit(&work->pool, 9);
-    TaskCreate(&work->pool, &gTaskDescStatusFriend, 0);
-    TaskCreate(&work->pool, &gTaskDescStatusSora, 0);
+    TaskCreate(&work->pool, &sTaskDescStatusFriend, 0);
+    TaskCreate(&work->pool, &sTaskDescStatusSora, 0);
 
     if (!(gGameState.flags & 8)) {
-        TaskCreate(&work->pool, &gTaskDescStatusTab, &work->tab);
-        TaskCreate(&work->pool, &gTaskDescStatusDeckname, &sStatusMesWindowOpen);
+        TaskCreate(&work->pool, &sTaskDescStatusTab, &work->tab);
+        TaskCreate(&work->pool, &sTaskDescStatusDeckname, &sStatusMesWindowOpen);
     }
-    TaskCreate(&work->pool, &gTaskDescStatusStocklist, &work->tab);
-    TaskCreate(&work->pool, &gTaskDescStatusScrollcursor, &work->scroll);
-    TaskCreate(&work->pool, &gTaskDescStatusMeswindow, &sStatusMesWindowOpen);
+    TaskCreate(&work->pool, &sTaskDescStatusStocklist, &work->tab);
+    TaskCreate(&work->pool, &sTaskDescStatusScrollcursor, &work->scroll);
+    TaskCreate(&work->pool, &sTaskDescStatusMeswindow, &sStatusMesWindowOpen);
 
     if (GetStatusVisibleRowCount() == 0) {
         work->cursor = ~work->tab;
     } else {
         work->cursor = 0;
     }
-    TaskCreate(&work->pool, &gTaskDescStatusCursor, &work->cursor);
+    TaskCreate(&work->pool, &sTaskDescStatusCursor, &work->cursor);
     sStatusSelectedIndex = work->cursor + work->scroll;
 }
 
@@ -356,7 +356,7 @@ void StatusBarStartClose(StatusBarWork* work) {
 
 void task_status_bar_0(StatusBarWork* work) {
 #ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gStatusBarTiles[gLanguage], gStatusBarTileSizes[gLanguage]);
+    work->tiles = LoadObjTiles(sStatusBarTiles[gLanguage], sStatusBarTileSizes[gLanguage]);
 #else
     work->tiles = LoadObjTiles(gUnk_097A18EC, 0x2E0);
 #endif
@@ -439,7 +439,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
 
 void task_status_bar_2(StatusBarWork* work) {
 #ifdef VERSION_EU
-    DrawSprite(work->x >> 8, 0, ((void**)gStatusBarSprites[gLanguage])[2], work->tiles,
+    DrawSprite(work->x >> 8, 0, ((void**)sStatusBarSprites[gLanguage])[2], work->tiles,
         work->palette, 0, 0xC00, 29);
 #else
     DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, 0, 0xC00, 29);
@@ -447,9 +447,9 @@ void task_status_bar_2(StatusBarWork* work) {
 
     if (gStatusBarState != 2) {
 #ifdef VERSION_EU
-        DrawSprite(128, work->y >> 8, ((void**)gStatusBarSprites[gLanguage])[0], work->tiles,
+        DrawSprite(128, work->y >> 8, ((void**)sStatusBarSprites[gLanguage])[0], work->tiles,
             work->palette, 0, 0xC00, 30);
-        DrawSprite(128, work->y2 >> 8, ((void**)gStatusBarSprites[gLanguage])[1], work->tiles,
+        DrawSprite(128, work->y2 >> 8, ((void**)sStatusBarSprites[gLanguage])[1], work->tiles,
             work->palette, 0, 0xC00, 31);
 #else
         DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, 0, 0xC00, 30);
@@ -473,14 +473,14 @@ u8 IsStatusBarIdle(void) {
 void task_status_tab_0(StatusTabWork* work, s32* arg) {
     work->tab = arg;
 #ifdef VERSION_EU
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabSprites[gLanguage], 4),
-        gStatusTabTiles[gLanguage]);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(sStatusTabSprites[gLanguage], 4),
+        sStatusTabTiles[gLanguage]);
 #else
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6920, 4), gUnk_097A24A6);
 #endif
     work->palette = LoadObjPalette(gUnk_0984B218, 0x20);
 #ifdef VERSION_EU
-    work->gfx = ((void**)gStatusTabSprites[gLanguage])[*work->tab];
+    work->gfx = ((void**)sStatusTabSprites[gLanguage])[*work->tab];
 #else
     work->gfx = gUnk_09EF6920[*work->tab];
 #endif
@@ -491,7 +491,7 @@ void task_status_tab_0(StatusTabWork* work, s32* arg) {
 
 u8 task_status_tab_1(StatusTabWork* work) {
 #ifdef VERSION_EU
-    work->gfx = ((void**)gStatusTabSprites[gLanguage])[*work->tab];
+    work->gfx = ((void**)sStatusTabSprites[gLanguage])[*work->tab];
 #else
     work->gfx = gUnk_09EF6920[*work->tab];
 #endif
@@ -587,7 +587,7 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
     work->gfx[1] = AnimGetGfx(&work->anim[1]);
     work->lastCursor = *work->cursor;
     if (work->lastCursor < 0) {
-        work->x = gStatusTabCursorX[~work->lastCursor];
+        work->x = sStatusTabCursorX[~work->lastCursor];
         work->targetX = work->x;
         work->y = 0x1000;
         work->targetY = 0x1000;
@@ -608,7 +608,7 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
         work->unk_4E = 4;
 
         if (work->lastCursor < 0) {
-            work->targetX = gStatusTabCursorX[~work->lastCursor];
+            work->targetX = sStatusTabCursorX[~work->lastCursor];
             work->targetY = 0x1000;
         } else {
             work->targetX = 0x1800;
@@ -677,13 +677,13 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     StatusStocklistLoadRows(0);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 #ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gStatusNewMarkTiles[gLanguage], gStatusNewMarkTileSizes[gLanguage]);
+    work->tiles = LoadObjTiles(sStatusNewMarkTiles[gLanguage], sStatusNewMarkTileSizes[gLanguage]);
 #else
     work->tiles = LoadObjTiles(gUnk_097A2E16, 0xC0);
 #endif
     work->palette2 = LoadObjPalette(gUnk_0984B278, 0x20);
 #ifdef VERSION_EU
-    work->gfx = gStatusNewMarkSprites[gLanguage];
+    work->gfx = sStatusNewMarkSprites[gLanguage];
 #else
     work->gfx = gUnk_097A2DF8;
 #endif
@@ -1086,7 +1086,7 @@ Task* CreateStatusMessageTask(void* pool, s16 x, s16 y, void* p) {
     param.x = x;
     param.y = y;
     param.text = p;
-    return TaskCreate(pool, &gTaskDescStatusMessage, &param);
+    return TaskCreate(pool, &sTaskDescStatusMessage, &param);
 }
 
 void task_status_friend_0(StatusFriendWork* work) {
@@ -1127,7 +1127,7 @@ u16 LoadFriendCardSprites(void** a, void** b, void** c) {
     u16 limit;
     const void* source;
 
-    source = &gStatusFriendTable;
+    source = &sStatusFriendTable;
     table = *(const StatusFriendTable*)source;
 
     data = &gGameState;

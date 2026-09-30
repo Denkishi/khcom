@@ -6,7 +6,7 @@
 #include "sprite.h"
 #include "gba/io_reg.h"
 
-const u8 sSpriteHeapName[8] = "SPRITE";
+static const u8 sSpriteHeapName[8] = "SPRITE";
 
 SpriteWork* gSpriteWork;
 

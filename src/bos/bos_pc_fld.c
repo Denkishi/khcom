@@ -8,23 +8,23 @@ static s16 sBosPcFldShakePattern;
 static s16 sBosPcFldShakeStep;
 static s32 sBosPcFldShakeOffset;
 
-const s8 gUnk_09A4CA94[33] = {
+static const s8 sUnk_09A4CA94[33] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1, 0,
 };
 
-const s8 gUnk_09A4CAB5[9] = {
+static const s8 sUnk_09A4CAB5[9] = {
     1, 2, 2, 1, -1, -2, -2, -1, 0,
 };
 
-const u16 gBosPcFldPaletteCycleNext[3] = {
+static const u16 sBosPcFldPaletteCycleNext[3] = {
     1, 2, 0,
 };
 
-const s16 gBosPcFldPaletteCycleFrames[3] = {
+static const s16 sBosPcFldPaletteCycleFrames[3] = {
     6, 6, 6,
 };
 
-const s8* gBosPcFldShakePatterns[2] = { gUnk_09A4CA94, gUnk_09A4CAB5 };
+static const s8* sBosPcFldShakePatterns[2] = { sUnk_09A4CA94, sUnk_09A4CAB5 };
 
 TaskDesc gTaskDescBosPcFld = {
     "task_bos_pc_fld",
@@ -86,7 +86,7 @@ void BosPcFldUpdateShake(void) {
     const s8* p;
 
     if (sBosPcFldShakeActive != 0) {
-        p = gBosPcFldShakePatterns[sBosPcFldShakePattern];
+        p = sBosPcFldShakePatterns[sBosPcFldShakePattern];
         sBosPcFldShakeOffset += ((p[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
         sBosPcFldShakeStep += 1;
         if (p[sBosPcFldShakeStep] == 0) {
@@ -114,8 +114,8 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
     u16 zero;
 
     if (work->paletteCycle != 0) {
-        if (work->paletteTimer > gBosPcFldPaletteCycleFrames[work->paletteIndex]) {
-            t = gBosPcFldPaletteCycleNext[work->paletteIndex];
+        if (work->paletteTimer > sBosPcFldPaletteCycleFrames[work->paletteIndex]) {
+            t = sBosPcFldPaletteCycleNext[work->paletteIndex];
             zero = 0;
             work->paletteIndex = t;
             work->paletteTimer = zero;

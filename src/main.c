@@ -258,7 +258,7 @@ void VCountIntrDummy(void) {
 void SerialIntrDummy(void) {
 }
 
-IntrFunc gIntrTableTemplate[14] = {
+static IntrFunc sIntrTableTemplate[14] = {
     SerialIntrDummy, VBlankIntr, HBlankIntrDummy, VCountIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
     SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
 };
@@ -267,7 +267,7 @@ void InitIntrTable(void) {
     s32 i;
 
     for (i = 0; i < 14; i++) {
-        gIntrTable[i] = gIntrTableTemplate[i];
+        gIntrTable[i] = sIntrTableTemplate[i];
     }
     gIntrTableVBlank = &gIntrTable[1];
     gIntrTableVCount = &gIntrTable[3];

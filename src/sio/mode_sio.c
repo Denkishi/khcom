@@ -75,7 +75,7 @@ Mode gModeSioBtlConnect = {
     mode_sio_btl_connect_2,
 };
 
-const SioAnimDef gSioBtlOptionAnimDefs[2] = {
+static const SioAnimDef sSioBtlOptionAnimDefs[2] = {
     {gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0},
     {gSor1ll51Frames, gSor1ll51Anims, gSor1ll51Tiles, 0},
 };
@@ -277,7 +277,7 @@ void SioInitWorldList(void) {
 }
 
 void SetSioBtlOptionAnimation(u16 a, u16 b, u16 c) {
-    const SioAnimDef* def = &gSioBtlOptionAnimDefs[b];
+    const SioAnimDef* def = &sSioBtlOptionAnimDefs[b];
     AnimChangeWithTables(&gSioBtlOptionWork->anim2[a], def->animId, c, def->anims, def->gfxTable);
     SetObjTileSource(gSioBtlOptionWork->unk_008[a], def->tiles);
 }

@@ -18,7 +18,7 @@
 void WLogoInitWorldSelect(void);
 void WLogoStartLogo(u8 a);
 
-u8* gWorldNames[13] = {
+static u8* sWorldNames[13] = {
 #if defined(VERSION_US)
     (u8*)gUnk_0815A534,
     (u8*)gUnk_0815A59A,
@@ -64,7 +64,7 @@ u8* gWorldNames[13] = {
 #endif
 };
 
-u8 gWLogoWorldIds[13] = {
+static u8 sWLogoWorldIds[13] = {
     4,
     5,
     6,
@@ -113,9 +113,9 @@ void mode_wLogo_1(void) {
                 sWLogoWorld = 12;
             }
 #ifdef VERSION_EU
-            sWLogoNameLength = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
+            sWLogoNameLength = LoadTextSlots(eu_0805E924(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-            sWLogoNameLength = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
+            sWLogoNameLength = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
         }
 
@@ -126,9 +126,9 @@ void mode_wLogo_1(void) {
             }
             p = &sWLogoNameLength;
 #ifdef VERSION_EU
-            *p = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
+            *p = LoadTextSlots(eu_0805E924(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-            *p = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
+            *p = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
         }
 
@@ -144,7 +144,7 @@ void mode_wLogo_1(void) {
         }
         break;
     case 1:
-        WLogoStartLogo(gWLogoWorldIds[sWLogoWorld]);
+        WLogoStartLogo(sWLogoWorldIds[sWLogoWorld]);
         sWLogoState++;
         break;
     case 2:
@@ -191,9 +191,9 @@ void WLogoInitWorldSelect(void) {
     InitTextSlots(sWLogoNameSlots, 20);
     p = &sWLogoNameLength;
 #ifdef VERSION_EU
-    *p = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
+    *p = LoadTextSlots(eu_0805E924(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-    *p = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
+    *p = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
     sWLogoNamePalette = LoadObjPalette(gUnk_096FBCC4, 32);
 }

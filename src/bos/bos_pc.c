@@ -9,7 +9,7 @@
 
 void task_bos_pc_3(PcWork* work);
 
-PcSpriteCmd* gBosPcSpriteCmdLists[96] = {
+static PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gUnk_09A42BD8,
     gUnk_09A410FC,
     gUnk_09A41360,
@@ -108,7 +108,7 @@ PcSpriteCmd* gBosPcSpriteCmdLists[96] = {
     gUnk_09A4AAD4,
 };
 
-PcAnimStep* gBosPcAnims[14] = {
+static PcAnimStep* sBosPcAnims[14] = {
     gBosPcIdleAnim,
     gUnk_09A4B174,
     gUnk_09A4B3B4,
@@ -125,9 +125,9 @@ PcAnimStep* gBosPcAnims[14] = {
     gUnk_09A4C860,
 };
 
-const EmyKind gBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
+static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
 
-const PcBattleBackgroundDef gBosPcBattleBackgroundDef = {
+static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
     gUnk_09C91754, 0x3340, { 0, 0 }, gBosPcBgPalette, 0x100, { 0, 0 },
     { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x800, gUnk_09D33A74 + 0x800 }
 };
@@ -4800,7 +4800,7 @@ const PcSpriteCmd gUnk_09A4AAD4[36] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcGfxSet gPcGfxSets[43] = {
+static const PcGfxSet sPcGfxSets[43] = {
     { gUnk_09C94A94, 3328, { 0, 0 }, gUnk_09D35A74, 2048, { 0, 0 } },
     { gUnk_09C95794, 3488, { 0, 0 }, gUnk_09D36274, 2048, { 0, 0 } },
     { gUnk_09C96534, 3552, { 0, 0 }, gUnk_09D36A74, 2048, { 0, 0 } },
@@ -5078,11 +5078,11 @@ const PcAnimStep gUnk_09A4C860[11] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const u16 gBosPcPaletteCycleNext[3] = { 1, 2, 0 };
+static const u16 sBosPcPaletteCycleNext[3] = { 1, 2, 0 };
 
-const s16 gBosPcPaletteCycleFrames[3] = { 6, 6, 6 };
+static const s16 sBosPcPaletteCycleFrames[3] = { 6, 6, 6 };
 
-const PcShot gPcShots[9] = {
+static const PcShot sPcShots[9] = {
     { 32768, 79104, 48, { 0, 0 }, 512 },
     { 59392, 79104, 24, { 0, 0 }, 512 },
     { 77056, 79104, 16, { 0, 0 }, 512 },
@@ -5118,12 +5118,12 @@ PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
         return gUnk_09A3DF34;
     }
     step = &work->animSteps[work->animFrame];
-    return gBosPcSpriteCmdLists[step->cmdList];
+    return sBosPcSpriteCmdLists[step->cmdList];
 }
 
 void BosPcSetAnim(PcWork* work, s32 a) {
-    if (work->animSteps != gBosPcAnims[a]) {
-        work->animSteps = gBosPcAnims[a];
+    if (work->animSteps != sBosPcAnims[a]) {
+        work->animSteps = sBosPcAnims[a];
         work->animIndex = 0;
         work->animTimer = 0;
         work->animFrame = 0;
@@ -5249,7 +5249,7 @@ void BosPcDraw(PcWork* work) {
         work->prevFlash = work->flash;
     }
     WorldToScreen(&sx, &sy, work->x - ox * 256, work->y - oy * 256, work->z);
-    cmds = gBosPcSpriteCmdLists[step->cmdList];
+    cmds = sBosPcSpriteCmdLists[step->cmdList];
 
     for (j = 0; j < 24; j++) {
         work->oam[j].count = 0;
@@ -5302,8 +5302,8 @@ void BosPcDraw(PcWork* work) {
     WorldToScreen(&sx, &sy, work->x + ((-0x70 - ox) * 256), work->y + ((-0x64 - oy) * 256), work->z);
 
     if (work->animFrame != work->bgFrame) {
-        LoadBgTiles(1, gPcGfxSets[step->gfxSet].tiles, gPcGfxSets[step->gfxSet].tilesSize);
-        LoadBgMap(1, gPcGfxSets[step->gfxSet].map, gPcGfxSets[step->gfxSet].mapSize);
+        LoadBgTiles(1, sPcGfxSets[step->gfxSet].tiles, sPcGfxSets[step->gfxSet].tilesSize);
+        LoadBgMap(1, sPcGfxSets[step->gfxSet].map, sPcGfxSets[step->gfxSet].mapSize);
         work->bgFrame = work->animFrame;
     }
     SetBgScroll(1, (u16)(-sx + 0x50), (u16)(-sy + 8));
@@ -5329,8 +5329,8 @@ void BosPcStartPaletteCycle(PcWork* work) {
 
 void BosPcUpdatePaletteCycle(PcWork* work) {
     if (work->paletteCycle != 0) {
-        if (work->paletteTimer > gBosPcPaletteCycleFrames[work->paletteIndex]) {
-            work->paletteIndex = gBosPcPaletteCycleNext[work->paletteIndex];
+        if (work->paletteTimer > sBosPcPaletteCycleFrames[work->paletteIndex]) {
+            work->paletteIndex = sBosPcPaletteCycleNext[work->paletteIndex];
             work->paletteTimer = 0;
         }
         work->paletteTimer++;
@@ -5379,7 +5379,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     BtlWork* g;
     u16 zero;
 
-    work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gBosPcBattleBackgroundDef);
+    work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&sBosPcBattleBackgroundDef);
     work->state = 0;
     work->step = 0;
     work->cardDelay = 600;
@@ -5406,11 +5406,11 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     BosPcStartPaletteCycle(work);
     BosPcUpdatePaletteCycle(work);
     p = &work->body;
-    InitEnemyBtlObj(p, &gBosPcEmyKind, work->x, work->y, work->z);
+    InitEnemyBtlObj(p, &sBosPcEmyKind, work->x, work->y, work->z);
     work->body.flags |= 0x400;
     work->body.flags |= 4;
     q = &work->body2;
-    InitEnemyBtlObj(q, &gBosPcEmyKind, work->x, work->y, work->z - 0x1000);
+    InitEnemyBtlObj(q, &sBosPcEmyKind, work->x, work->y, work->z - 0x1000);
     work->body2.flags |= 4;
     SetBtlObjParent(q, p);
     ColliderInit(&work->collider, 8, 32, 56);
@@ -5603,9 +5603,9 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
                     idx += 6;
                 }
             }
-            BgFxStartPcShot(p->x - 0xC00, p->y, p->z, gPcShots[idx].targetX,
-                          gPcShots[idx].targetY, -0x1000, 0xF7, gPcShots[idx].unk_08,
-                          gPcShots[idx].unk_0C);
+            BgFxStartPcShot(p->x - 0xC00, p->y, p->z, sPcShots[idx].targetX,
+                          sPcShots[idx].targetY, -0x1000, 0xF7, sPcShots[idx].unk_08,
+                          sPcShots[idx].unk_0C);
             m4aSongNumStart(SONG_BTL_PK_BEEM);
             break;
         case 5:

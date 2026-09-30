@@ -41,7 +41,7 @@
 #endif
 
 #if defined(VERSION_US)
-const CardHelpDef gUnk_0903BD0C = {
+static const CardHelpDef sUnk_0903BD0C = {
     gUnk_09EE7A38,
     2,
     { 0, 0, 0 },
@@ -49,7 +49,7 @@ const CardHelpDef gUnk_0903BD0C = {
 #endif
 
 #if defined(VERSION_US)
-const CardHelpDef gUnk_0903BD14 = {
+static const CardHelpDef sUnk_0903BD14 = {
     gUnk_09EE7A40,
     2,
     { 0, 0, 0 },
@@ -57,7 +57,7 @@ const CardHelpDef gUnk_0903BD14 = {
 #endif
 
 #if defined(VERSION_JP)
-const CardHelpDef gUnk_0903BD0C = {
+static const CardHelpDef sUnk_0903BD0C = {
     gUnk_09EE7A38,
     2,
     { 0, 0, 0 },
@@ -69,7 +69,7 @@ const CardHelpDef gUnk_0903BD0C = {
 #endif
 
 #if defined(VERSION_JP)
-const CardHelpDef gUnk_0903BD14 = {
+static const CardHelpDef sUnk_0903BD14 = {
     gUnk_09EE7A40,
     2,
     { 0, 0, 0 },
@@ -81,32 +81,32 @@ const CardHelpDef gUnk_0903BD14 = {
 #endif
 
 #if defined(VERSION_JP)
-const CardHelpDef gUnk_0903BFB4 = {
+static const CardHelpDef sUnk_0903BFB4 = {
     gUnk_09EE7D44,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-const CardHelpDef gUnk_0903BD1C = {
+static const CardHelpDef sUnk_0903BD1C = {
     gUnk_09EE7A48,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD24 = {
+static const CardHelpDef sUnk_0903BD24 = {
     gUnk_09EE7A50,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD2C = {
+static const CardHelpDef sUnk_0903BD2C = {
     gUnk_09EE7A60,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD34 = {
+static const CardHelpDef sUnk_0903BD34 = {
     gUnk_09EE79F4,
 #if defined(VERSION_US) || defined(VERSION_EU)
     3,
@@ -116,245 +116,245 @@ const CardHelpDef gUnk_0903BD34 = {
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD3C = {
+static const CardHelpDef sUnk_0903BD3C = {
     gUnk_09EE7A08,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
-const CardHelpDef gUnk_0903BD0C = {
+static const CardHelpDef sUnk_0903BD0C = {
     gUnk_09EE7A38,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-const CardHelpDef gUnk_0903BD44 = {
+static const CardHelpDef sUnk_0903BD44 = {
     gUnk_09EE7A70,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
-const CardHelpDef gUnk_0903BD14 = {
+static const CardHelpDef sUnk_0903BD14 = {
     gUnk_09EE7A40,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-const CardHelpDef gUnk_0903BD4C = {
+static const CardHelpDef sUnk_0903BD4C = {
     gUnk_09EE7A78,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD54 = {
+static const CardHelpDef sUnk_0903BD54 = {
     gUnk_09EE7A80,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD5C = {
+static const CardHelpDef sUnk_0903BD5C = {
     gUnk_09EE7A88,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD64 = {
+static const CardHelpDef sUnk_0903BD64 = {
     gUnk_09EE7A58,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD6C = {
+static const CardHelpDef sUnk_0903BD6C = {
     gUnk_09EE7A90,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD74 = {
+static const CardHelpDef sUnk_0903BD74 = {
     gUnk_09EE7A98,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD7C = {
+static const CardHelpDef sUnk_0903BD7C = {
     gUnk_09EE7B98,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD84 = {
+static const CardHelpDef sUnk_0903BD84 = {
     gUnk_09EE7BA0,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD8C = {
+static const CardHelpDef sUnk_0903BD8C = {
     gUnk_09EE7B78,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD94 = {
+static const CardHelpDef sUnk_0903BD94 = {
     gUnk_09EE7B88,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BD9C = {
+static const CardHelpDef sUnk_0903BD9C = {
     gUnk_09EE7AA8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDA4 = {
+static const CardHelpDef sUnk_0903BDA4 = {
     gUnk_09EE7AB8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDAC = {
+static const CardHelpDef sUnk_0903BDAC = {
     gUnk_09EE7AC8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDB4 = {
+static const CardHelpDef sUnk_0903BDB4 = {
     gUnk_09EE7AD8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDBC = {
+static const CardHelpDef sUnk_0903BDBC = {
     gUnk_09EE7B38,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDC4 = {
+static const CardHelpDef sUnk_0903BDC4 = {
     gUnk_09EE7B48,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDCC = {
+static const CardHelpDef sUnk_0903BDCC = {
     gUnk_09EE7B58,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDD4 = {
+static const CardHelpDef sUnk_0903BDD4 = {
     gUnk_09EE7B68,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDDC = {
+static const CardHelpDef sUnk_0903BDDC = {
     gUnk_09EE7AE8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDE4 = {
+static const CardHelpDef sUnk_0903BDE4 = {
     gUnk_09EE7AF8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDEC = {
+static const CardHelpDef sUnk_0903BDEC = {
     gUnk_09EE7B08,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDF4 = {
+static const CardHelpDef sUnk_0903BDF4 = {
     gUnk_09EE7B18,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BDFC = {
+static const CardHelpDef sUnk_0903BDFC = {
     gUnk_09EE7B28,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE04 = {
+static const CardHelpDef sUnk_0903BE04 = {
     gUnk_09EE7B30,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE0C = {
+static const CardHelpDef sUnk_0903BE0C = {
     gUnk_09EE7BA8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE14 = {
+static const CardHelpDef sUnk_0903BE14 = {
     gUnk_09EE7BB8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE1C = {
+static const CardHelpDef sUnk_0903BE1C = {
     gUnk_09EE7BE8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE24 = {
+static const CardHelpDef sUnk_0903BE24 = {
     gUnk_09EE7BF8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE2C = {
+static const CardHelpDef sUnk_0903BE2C = {
     gUnk_09EE7BC8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE34 = {
+static const CardHelpDef sUnk_0903BE34 = {
     gUnk_09EE7BD8,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE3C = {
+static const CardHelpDef sUnk_0903BE3C = {
     gUnk_09EE7C08,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE44 = {
+static const CardHelpDef sUnk_0903BE44 = {
     gUnk_09EE7C18,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE4C = {
+static const CardHelpDef sUnk_0903BE4C = {
     gUnk_09EE7C28,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE54 = {
+static const CardHelpDef sUnk_0903BE54 = {
     gUnk_09EE7C38,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE5C = {
+static const CardHelpDef sUnk_0903BE5C = {
     gUnk_09EE7D54,
     4,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE64 = {
+static const CardHelpDef sUnk_0903BE64 = {
     gUnk_09EE7D64,
 #if defined(VERSION_US) || defined(VERSION_EU)
     4,
@@ -364,258 +364,258 @@ const CardHelpDef gUnk_0903BE64 = {
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE6C = {
+static const CardHelpDef sUnk_0903BE6C = {
     gUnk_09EE7A68,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE74 = {
+static const CardHelpDef sUnk_0903BE74 = {
     gUnk_09EE7AA0,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE7C = {
+static const CardHelpDef sUnk_0903BE7C = {
     gUnk_09EE79EC,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE84 = {
+static const CardHelpDef sUnk_0903BE84 = {
     gUnk_09EE7A00,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE8C = {
+static const CardHelpDef sUnk_0903BE8C = {
     gUnk_09EE7A10,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE94 = {
+static const CardHelpDef sUnk_0903BE94 = {
     gUnk_09EE7A18,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BE9C = {
+static const CardHelpDef sUnk_0903BE9C = {
     gUnk_09EE7A20,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEA4 = {
+static const CardHelpDef sUnk_0903BEA4 = {
     gUnk_09EE7A28,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEAC = {
+static const CardHelpDef sUnk_0903BEAC = {
     gUnk_09EE7A30,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEB4 = {
+static const CardHelpDef sUnk_0903BEB4 = {
     gUnk_09EE7C48,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEBC = {
+static const CardHelpDef sUnk_0903BEBC = {
     gUnk_09EE7C50,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEC4 = {
+static const CardHelpDef sUnk_0903BEC4 = {
     gUnk_09EE7C58,
     3,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BECC = {
+static const CardHelpDef sUnk_0903BECC = {
     gUnk_09EE7C64,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
-const CardHelpDef gUnk_0903BED4 = {
+static const CardHelpDef sUnk_0903BED4 = {
     gUnk_09EE7D74,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-const CardHelpDef gUnk_0903BEDC = {
+static const CardHelpDef sUnk_0903BEDC = {
     gUnk_09EE7C6C,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEE4 = {
+static const CardHelpDef sUnk_0903BEE4 = {
     gUnk_09EE7C74,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEEC = {
+static const CardHelpDef sUnk_0903BEEC = {
     gUnk_09EE7C7C,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEF4 = {
+static const CardHelpDef sUnk_0903BEF4 = {
     gUnk_09EE7C84,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BEFC = {
+static const CardHelpDef sUnk_0903BEFC = {
     gUnk_09EE7C8C,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF04 = {
+static const CardHelpDef sUnk_0903BF04 = {
     gUnk_09EE7C94,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF0C = {
+static const CardHelpDef sUnk_0903BF0C = {
     gUnk_09EE7C9C,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF14 = {
+static const CardHelpDef sUnk_0903BF14 = {
     gUnk_09EE7CA4,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF1C = {
+static const CardHelpDef sUnk_0903BF1C = {
     gUnk_09EE7CAC,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF24 = {
+static const CardHelpDef sUnk_0903BF24 = {
     gUnk_09EE7CB4,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
-const CardHelpDef gUnk_0903BF2C = {
+static const CardHelpDef sUnk_0903BF2C = {
     gUnk_09EE7D7C,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-const CardHelpDef gUnk_0903BF34 = {
+static const CardHelpDef sUnk_0903BF34 = {
     gUnk_09EE7CBC,
     3,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF3C = {
+static const CardHelpDef sUnk_0903BF3C = {
     gUnk_09EE7CC8,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF44 = {
+static const CardHelpDef sUnk_0903BF44 = {
     gUnk_09EE7CD0,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF4C = {
+static const CardHelpDef sUnk_0903BF4C = {
     gUnk_09EE7CD8,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF54 = {
+static const CardHelpDef sUnk_0903BF54 = {
     gUnk_09EE7CE0,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF5C = {
+static const CardHelpDef sUnk_0903BF5C = {
     gUnk_09EE7CE8,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF64 = {
+static const CardHelpDef sUnk_0903BF64 = {
     gUnk_09EE7CF0,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF6C = {
+static const CardHelpDef sUnk_0903BF6C = {
     gUnk_09EE7CF8,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF74 = {
+static const CardHelpDef sUnk_0903BF74 = {
     gUnk_09EE7D00,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF7C = {
+static const CardHelpDef sUnk_0903BF7C = {
     gUnk_09EE7D08,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF84 = {
+static const CardHelpDef sUnk_0903BF84 = {
     gUnk_09EE7D10,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF8C = {
+static const CardHelpDef sUnk_0903BF8C = {
     gUnk_09EE7D18,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF94 = {
+static const CardHelpDef sUnk_0903BF94 = {
     gUnk_09EE7D20,
     3,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BF9C = {
+static const CardHelpDef sUnk_0903BF9C = {
     gUnk_09EE7D2C,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BFA4 = {
+static const CardHelpDef sUnk_0903BFA4 = {
     gUnk_09EE7D34,
     2,
     { 0, 0, 0 },
 };
 
-const CardHelpDef gUnk_0903BFAC = {
+static const CardHelpDef sUnk_0903BFAC = {
     gUnk_09EE7D3C,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_US)
-const CardHelpDef gUnk_0903BFB4 = {
+static const CardHelpDef sUnk_0903BFB4 = {
     gUnk_09EE7D44,
     4,
     { 0, 0, 0 },
@@ -1939,11 +1939,11 @@ CardHelpText* gUnk_09EE7D64[] = {
 };
 #endif
 
-const u16 gLevelUpStockHelpIndices[12] = {
+static const u16 sLevelUpStockHelpIndices[12] = {
     50, 51, 6, 46, 5, 52, 79, 47, 66, 48, 70, 0xFFFF,
 };
 
-const u16 gLevelUpStockLevels[12] = {
+static const u16 sLevelUpStockLevels[12] = {
     2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 999,
 };
 
@@ -2008,7 +2008,7 @@ u8 StockInfo_1(StockInfoWork* w, void* a) {
         w->timer--;
     } else {
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        CreateStockMesDispTask(&w->tasks, gLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
+        CreateStockMesDispTask(&w->tasks, sLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateStockInfoMessage);
     }
 
@@ -2046,7 +2046,7 @@ u8 GetCardHelpTextCount(u16 a) {
     return gCardHelpDefs[a]->textCount;
 }
 u8 IsLevelUpStockUnlocked(void) {
-    if (gGameState.progression.level >= gLevelUpStockLevels[gGameState.progression.levelMilestone]) {
+    if (gGameState.progression.level >= sLevelUpStockLevels[gGameState.progression.levelMilestone]) {
         return 1;
     }
 
@@ -2054,122 +2054,122 @@ u8 IsLevelUpStockUnlocked(void) {
 }
 
 const CardHelpDef* gCardHelpDefs[] = {
-    &gUnk_0903BD0C,
-    &gUnk_0903BD14,
-    &gUnk_0903BD1C,
-    &gUnk_0903BD24,
-    &gUnk_0903BD2C,
-    &gUnk_0903BD34,
-    &gUnk_0903BD3C,
-    &gUnk_0903BD44,
-    &gUnk_0903BD4C,
-    &gUnk_0903BD54,
-    &gUnk_0903BD5C,
-    &gUnk_0903BD64,
-    &gUnk_0903BD6C,
-    &gUnk_0903BD74,
-    &gUnk_0903BD84,
-    &gUnk_0903BD7C,
-    &gUnk_0903BD8C,
-    &gUnk_0903BD94,
-    &gUnk_0903BD9C,
-    &gUnk_0903BDA4,
-    &gUnk_0903BDAC,
-    &gUnk_0903BDB4,
-    &gUnk_0903BDBC,
-    &gUnk_0903BDC4,
-    &gUnk_0903BDCC,
-    &gUnk_0903BDD4,
-    &gUnk_0903BDDC,
-    &gUnk_0903BDE4,
-    &gUnk_0903BDEC,
-    &gUnk_0903BDF4,
-    &gUnk_0903BDFC,
-    &gUnk_0903BE04,
-    &gUnk_0903BE0C,
-    &gUnk_0903BE14,
-    &gUnk_0903BE1C,
-    &gUnk_0903BE24,
-    &gUnk_0903BE2C,
-    &gUnk_0903BE34,
-    &gUnk_0903BE3C,
-    &gUnk_0903BE44,
-    &gUnk_0903BE4C,
-    &gUnk_0903BE54,
-    &gUnk_0903BE5C,
-    &gUnk_0903BE64,
-    &gUnk_0903BE6C,
-    &gUnk_0903BE74,
-    &gUnk_0903BE7C,
-    &gUnk_0903BE84,
-    &gUnk_0903BE8C,
-    &gUnk_0903BE94,
-    &gUnk_0903BE9C,
-    &gUnk_0903BEA4,
-    &gUnk_0903BEAC,
-    &gUnk_0903BEB4,
-    &gUnk_0903BEBC,
-    &gUnk_0903BEC4,
-    &gUnk_0903BECC,
+    &sUnk_0903BD0C,
+    &sUnk_0903BD14,
+    &sUnk_0903BD1C,
+    &sUnk_0903BD24,
+    &sUnk_0903BD2C,
+    &sUnk_0903BD34,
+    &sUnk_0903BD3C,
+    &sUnk_0903BD44,
+    &sUnk_0903BD4C,
+    &sUnk_0903BD54,
+    &sUnk_0903BD5C,
+    &sUnk_0903BD64,
+    &sUnk_0903BD6C,
+    &sUnk_0903BD74,
+    &sUnk_0903BD84,
+    &sUnk_0903BD7C,
+    &sUnk_0903BD8C,
+    &sUnk_0903BD94,
+    &sUnk_0903BD9C,
+    &sUnk_0903BDA4,
+    &sUnk_0903BDAC,
+    &sUnk_0903BDB4,
+    &sUnk_0903BDBC,
+    &sUnk_0903BDC4,
+    &sUnk_0903BDCC,
+    &sUnk_0903BDD4,
+    &sUnk_0903BDDC,
+    &sUnk_0903BDE4,
+    &sUnk_0903BDEC,
+    &sUnk_0903BDF4,
+    &sUnk_0903BDFC,
+    &sUnk_0903BE04,
+    &sUnk_0903BE0C,
+    &sUnk_0903BE14,
+    &sUnk_0903BE1C,
+    &sUnk_0903BE24,
+    &sUnk_0903BE2C,
+    &sUnk_0903BE34,
+    &sUnk_0903BE3C,
+    &sUnk_0903BE44,
+    &sUnk_0903BE4C,
+    &sUnk_0903BE54,
+    &sUnk_0903BE5C,
+    &sUnk_0903BE64,
+    &sUnk_0903BE6C,
+    &sUnk_0903BE74,
+    &sUnk_0903BE7C,
+    &sUnk_0903BE84,
+    &sUnk_0903BE8C,
+    &sUnk_0903BE94,
+    &sUnk_0903BE9C,
+    &sUnk_0903BEA4,
+    &sUnk_0903BEAC,
+    &sUnk_0903BEB4,
+    &sUnk_0903BEBC,
+    &sUnk_0903BEC4,
+    &sUnk_0903BECC,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &gUnk_0903BED4,
+    &sUnk_0903BED4,
 #elif defined(VERSION_EU)
     0,
 #endif
-    &gUnk_0903BEDC,
-    &gUnk_0903BEE4,
-    &gUnk_0903BEEC,
-    &gUnk_0903BEF4,
-    &gUnk_0903BEFC,
-    &gUnk_0903BF04,
-    &gUnk_0903BF0C,
-    &gUnk_0903BF14,
-    &gUnk_0903BF1C,
-    &gUnk_0903BF24,
+    &sUnk_0903BEDC,
+    &sUnk_0903BEE4,
+    &sUnk_0903BEEC,
+    &sUnk_0903BEF4,
+    &sUnk_0903BEFC,
+    &sUnk_0903BF04,
+    &sUnk_0903BF0C,
+    &sUnk_0903BF14,
+    &sUnk_0903BF1C,
+    &sUnk_0903BF24,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &gUnk_0903BF2C,
+    &sUnk_0903BF2C,
 #elif defined(VERSION_EU)
     0,
 #endif
-    &gUnk_0903BF34,
-    &gUnk_0903BF3C,
-    &gUnk_0903BF44,
-    &gUnk_0903BF4C,
-    &gUnk_0903BF54,
-    &gUnk_0903BF5C,
-    &gUnk_0903BF64,
-    &gUnk_0903BF6C,
-    &gUnk_0903BF74,
-    &gUnk_0903BF7C,
-    &gUnk_0903BF84,
-    &gUnk_0903BF8C,
-    &gUnk_0903BF94,
-    &gUnk_0903BF9C,
-    &gUnk_0903BFA4,
-    &gUnk_0903BFAC,
+    &sUnk_0903BF34,
+    &sUnk_0903BF3C,
+    &sUnk_0903BF44,
+    &sUnk_0903BF4C,
+    &sUnk_0903BF54,
+    &sUnk_0903BF5C,
+    &sUnk_0903BF64,
+    &sUnk_0903BF6C,
+    &sUnk_0903BF74,
+    &sUnk_0903BF7C,
+    &sUnk_0903BF84,
+    &sUnk_0903BF8C,
+    &sUnk_0903BF94,
+    &sUnk_0903BF9C,
+    &sUnk_0903BFA4,
+    &sUnk_0903BFAC,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
-    &gUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
+    &sUnk_0903BFB4,
 #endif
 };
 

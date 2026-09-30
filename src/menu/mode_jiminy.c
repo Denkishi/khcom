@@ -25,7 +25,7 @@
 #include "map_card_assets.h"
 #include "actor_localized_data.h"
 
-const JiminyEntry gJiminyEntries[21] = {
+static const JiminyEntry sJiminyEntries[21] = {
     { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, 0, 0 },
     { gUnk_08F61384, gJiminyEntry01Names, 17, 0, 0, gJiminyEntry01Flags, 1 },
     { gUnk_08F5E384, gJiminyEntry02Names, 7, 0, gJiminyEntry02Children, 0, 0 },
@@ -51,7 +51,7 @@ const JiminyEntry gJiminyEntries[21] = {
 
 #if defined(VERSION_US)
 
-const JiminyDetail gJiminyEntry01Details[17] = {
+static const JiminyDetail sJiminyEntry01Details[17] = {
     { gUnk_0815B502, gUnk_09EDB7EC, 22, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815B51E, gUnk_09EDB844, 19, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815B53C, gUnk_09EDD46C, 18, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -71,7 +71,7 @@ const JiminyDetail gJiminyEntry01Details[17] = {
     { gUnk_0815A64A, gUnk_09EDDE38, 24, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry15Details[6] = {
+static const JiminyDetail sJiminyEntry15Details[6] = {
     { gUnk_0815C01E, gUnk_09EDD698, 41, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C03A, gUnk_09EDBB1C, 26, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C058, gUnk_09EDBB84, 20, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -80,7 +80,7 @@ const JiminyDetail gJiminyEntry15Details[6] = {
     { gUnk_0815C0B2, gUnk_09EDD78C, 31, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry04Details[17] = {
+static const JiminyDetail sJiminyEntry04Details[17] = {
     { gUnk_0815A66A, gUnk_09EDD928, 12, 0, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A682, gUnk_09EDD958, 11, 0, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A69C, gUnk_09EDD984, 12, 0, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -100,7 +100,7 @@ const JiminyDetail gJiminyEntry04Details[17] = {
     { gUnk_0815A7A2, gUnk_09EDDE98, 10, 0, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry05Details[14] = {
+static const JiminyDetail sJiminyEntry05Details[14] = {
     { gUnk_0815A7FA, gUnk_09EDCCAC, 4, 0, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A804, gUnk_09EDCCBC, 4, 0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A816, gUnk_09EDCCCC, 5, 0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -117,7 +117,7 @@ const JiminyDetail gJiminyEntry05Details[14] = {
     { gUnk_0815A8A8, gUnk_09EDCDA0, 4, 0, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry06Details[7] = {
+static const JiminyDetail sJiminyEntry06Details[7] = {
     { gUnk_0815A8B4, gUnk_09EDCDB0, 5, 0, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A8C2, gUnk_09EDCDC4, 5, 0, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A8D6, gUnk_09EDCDD8, 6, 0, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -127,7 +127,7 @@ const JiminyDetail gJiminyEntry06Details[7] = {
     { gUnk_0815A91E, gUnk_09EDCE2C, 6, 0, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry07Details[7] = {
+static const JiminyDetail sJiminyEntry07Details[7] = {
     { gUnk_0815A932, gUnk_09EDCE44, 5, 0, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A94A, gUnk_09EDCE58, 4, 0, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A956, gUnk_09EDCE68, 5, 0, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -137,7 +137,7 @@ const JiminyDetail gJiminyEntry07Details[7] = {
     { gUnk_0815A990, gUnk_09EDCEB4, 5, 0, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry08Details[49] = {
+static const JiminyDetail sJiminyEntry08Details[49] = {
     { gUnk_0815A9A4, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9B2, gUnk_09EDCEDC, 5, 0, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9EC, gUnk_09EDCEF0, 6, 0, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -189,7 +189,7 @@ const JiminyDetail gJiminyEntry08Details[49] = {
     { gUnk_0815ADAA, gUnk_09EDDC54, 7, 0, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry09Details[26] = {
+static const JiminyDetail sJiminyEntry09Details[26] = {
     { gUnk_0815ADF4, gUnk_09EDD26C, 2, 0, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815ADD2, gUnk_09EDDCBC, 4, 0, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815AE9E, gUnk_09EDD294, 3, 0, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -218,11 +218,11 @@ const JiminyDetail gJiminyEntry09Details[26] = {
     { gUnk_0815B0CA, gUnk_09EDD374, 2, 0, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry10Details[1] = {
+static const JiminyDetail sJiminyEntry10Details[1] = {
     { gUnk_0815C10E, gUnk_09EDDCF4, 17, 0, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry16Details[22] = {
+static const JiminyDetail sJiminyEntry16Details[22] = {
     { gUnk_0815C372, gUnk_09EDBC30, 4, 0, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C360, gUnk_09EDDD38, 4, 0, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9A4, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -247,7 +247,7 @@ const JiminyDetail gJiminyEntry16Details[22] = {
     { gUnk_0815AD9A, gUnk_09EDD37C, 14, 0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry11Details[25] = {
+static const JiminyDetail sJiminyEntry11Details[25] = {
     { gUnk_0815B0E8, gUnk_09EDBC40, 15, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { gUnk_0815A932, gUnk_09EDBC7C, 16, 0, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { gUnk_0815A94A, gUnk_09EDBCBC, 12, 0, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -275,7 +275,7 @@ const JiminyDetail gJiminyEntry11Details[25] = {
     { gUnk_0815AD4C, gUnk_09EDBF84, 10, 0, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gJiminyEntry12Details[40] = {
+static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnk_0815B296, gUnk_09EDC1E0, 11, 0, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { gUnk_0815B2A2, gUnk_09EDC20C, 8, 0, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { gUnk_0815B2CA, gUnk_09EDC22C, 7, 0, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -318,7 +318,7 @@ const JiminyDetail gJiminyEntry12Details[40] = {
     { gUnk_0815B3C6, gUnk_09EDC4BC, 9, 0, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gJiminyEntry13Details[35] = {
+static const JiminyDetail sJiminyEntry13Details[35] = {
     { gUnk_0815A9A4, gUnk_09EDC540, 9, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnk_0815A9B2, gUnk_09EDC564, 7, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnk_0815A9EC, gUnk_09EDC580, 10, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -356,7 +356,7 @@ const JiminyDetail gJiminyEntry13Details[35] = {
     { gUnk_0815ACFA, gUnk_09EDD67C, 7, 0, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry18Details[14] = {
+static const JiminyDetail sJiminyEntry18Details[14] = {
     { gUnk_0815B0F2, gUnk_09EDD808, 24, 0, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { gUnk_0815C360, gUnk_09EDD868, 15, 0, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { gUnk_0815B0E8, gUnk_09EDC91C, 13, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -373,7 +373,7 @@ const JiminyDetail gJiminyEntry18Details[14] = {
     { gUnk_0815C0EA, gUnk_09EDCB38, 11, 0, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gJiminyEntry19Details[6] = {
+static const JiminyDetail sJiminyEntry19Details[6] = {
     { gUnk_0815B356, gUnk_09EDCB64, 13, 0, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { gUnk_0815B1FE, gUnk_09EDCB98, 8, 0, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { gUnk_0815AC88, gUnk_09EDCBB8, 9, 0, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -382,7 +382,7 @@ const JiminyDetail gJiminyEntry19Details[6] = {
     { gUnk_0815B340, gUnk_09EDCC1C, 6, 0, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gJiminyEntry20Details[33] = {
+static const JiminyDetail sJiminyEntry20Details[33] = {
     { gUnk_0815A9A4, gUnk_09EDC540, 9, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnk_0815A9B2, gUnk_09EDC564, 7, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnk_0815A9EC, gUnk_09EDC580, 10, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -420,7 +420,7 @@ const JiminyDetail gJiminyEntry20Details[33] = {
 
 #elif defined(VERSION_JP)
 
-const JiminyDetail gJiminyEntry01Details[17] = {
+static const JiminyDetail sJiminyEntry01Details[17] = {
     { gUnkJp_0814F25C, gUnk_09EDB7EC, 12, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F270, gUnk_09EDB844, 14, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F284, gUnk_09EDD46C, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -440,7 +440,7 @@ const JiminyDetail gJiminyEntry01Details[17] = {
     { gUnkJp_0814E658, gUnk_09EDDE38, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry15Details[6] = {
+static const JiminyDetail sJiminyEntry15Details[6] = {
     { gUnkJp_0814FA18, gUnk_09EDD698, 28, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814FA2C, gUnk_09EDBB1C, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814FA40, gUnk_09EDBB84, 13, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -449,7 +449,7 @@ const JiminyDetail gJiminyEntry15Details[6] = {
     { gUnkJp_0814FA7C, gUnk_09EDD78C, 23, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry04Details[17] = {
+static const JiminyDetail sJiminyEntry04Details[17] = {
     { gUnkJp_0814E664, gUnk_09EDD928, 11, 0, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E678, gUnk_09EDD958, 11, 0, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E68C, gUnk_09EDD984, 13, 0, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -469,7 +469,7 @@ const JiminyDetail gJiminyEntry04Details[17] = {
     { gUnkJp_0814E76C, gUnk_09EDDE98, 10, 0, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry05Details[14] = {
+static const JiminyDetail sJiminyEntry05Details[14] = {
     { gUnkJp_0814E7A0, gUnk_09EDCCAC, 5, 0, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E7AC, gUnk_09EDCCBC, 5, 0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E7B8, gUnk_09EDCCCC, 5, 0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -486,7 +486,7 @@ const JiminyDetail gJiminyEntry05Details[14] = {
     { gUnkJp_0814E834, gUnk_09EDCDA0, 3, 0, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry06Details[7] = {
+static const JiminyDetail sJiminyEntry06Details[7] = {
     { gUnkJp_0814E840, gUnk_09EDCDB0, 5, 0, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E84C, gUnk_09EDCDC4, 5, 0, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E85C, gUnk_09EDCDD8, 6, 0, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -496,7 +496,7 @@ const JiminyDetail gJiminyEntry06Details[7] = {
     { gUnkJp_0814E894, gUnk_09EDCE2C, 6, 0, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry07Details[7] = {
+static const JiminyDetail sJiminyEntry07Details[7] = {
     { gUnkJp_0814E8A8, gUnk_09EDCE44, 5, 0, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E8B8, gUnk_09EDCE58, 4, 0, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E8DC, gUnk_09EDCE68, 4, 0, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -506,7 +506,7 @@ const JiminyDetail gJiminyEntry07Details[7] = {
     { gUnkJp_0814E910, gUnk_09EDCEB4, 3, 0, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry08Details[49] = {
+static const JiminyDetail sJiminyEntry08Details[49] = {
     { gUnkJp_0814E9EC, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E9F8, gUnk_09EDCEDC, 5, 0, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814EA28, gUnk_09EDCEF0, 6, 0, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -558,7 +558,7 @@ const JiminyDetail gJiminyEntry08Details[49] = {
     { gUnkJp_0814EE94, gUnk_09EDDC54, 9, 0, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry09Details[26] = {
+static const JiminyDetail sJiminyEntry09Details[26] = {
     { gUnkJp_0814F364, gUnk_09EDD26C, 2, 0, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F358, gUnk_09EDDCBC, 5, 0, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F3A8, gUnk_09EDD294, 2, 0, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -587,11 +587,11 @@ const JiminyDetail gJiminyEntry09Details[26] = {
     { gUnkJp_0814F4F8, gUnk_09EDD374, 2, 0, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry10Details[1] = {
+static const JiminyDetail sJiminyEntry10Details[1] = {
     { gUnkJp_0814FAB8, gUnk_09EDDCF4, 13, 0, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry16Details[22] = {
+static const JiminyDetail sJiminyEntry16Details[22] = {
     { gUnkJp_0814EEA8, gUnk_09EDBC30, 3, 0, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814EEA0, gUnk_09EDDD38, 4, 0, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E9EC, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -616,7 +616,7 @@ const JiminyDetail gJiminyEntry16Details[22] = {
     { gUnkJp_0814EE88, gUnk_09EDD37C, 11, 0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry11Details[25] = {
+static const JiminyDetail sJiminyEntry11Details[25] = {
     { gUnkJp_0814E91C, gUnk_09EDBC40, 8, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { gUnkJp_0814E8A8, gUnk_09EDBC7C, 10, 0, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { gUnkJp_0814E8B8, gUnk_09EDBCBC, 9, 0, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -644,7 +644,7 @@ const JiminyDetail gJiminyEntry11Details[25] = {
     { gUnkJp_0814E9D0, gUnk_09EDBF84, 6, 0, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gJiminyEntry12Details[40] = {
+static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnkJp_0814ED50, gUnk_09EDC1E0, 8, 0, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { gUnkJp_0814ED58, gUnk_09EDC20C, 6, 0, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { gUnkJp_0814ED68, gUnk_09EDC22C, 4, 0, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -687,7 +687,7 @@ const JiminyDetail gJiminyEntry12Details[40] = {
     { gUnkJp_0814EE3C, gUnk_09EDC4BC, 6, 0, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gJiminyEntry13Details[35] = {
+static const JiminyDetail sJiminyEntry13Details[35] = {
     { gUnkJp_0814E9EC, gUnk_09EDC540, 7, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnkJp_0814E9F8, gUnk_09EDC564, 5, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnkJp_0814EA28, gUnk_09EDC580, 8, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -725,7 +725,7 @@ const JiminyDetail gJiminyEntry13Details[35] = {
     { gUnkJp_0814EC70, gUnk_09EDD67C, 6, 0, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry18Details[14] = {
+static const JiminyDetail sJiminyEntry18Details[14] = {
     { gUnkJp_0814E924, gUnk_09EDD808, 11, 0, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { gUnkJp_0814EEA0, gUnk_09EDD868, 7, 0, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { gUnkJp_0814E91C, gUnk_09EDC91C, 7, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -742,7 +742,7 @@ const JiminyDetail gJiminyEntry18Details[14] = {
     { gUnkJp_0814FAA0, gUnk_09EDCB38, 7, 0, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gJiminyEntry19Details[6] = {
+static const JiminyDetail sJiminyEntry19Details[6] = {
     { gUnkJp_0814EDF0, gUnk_09EDCB64, 6, 0, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { gUnkJp_0814ECF4, gUnk_09EDCB98, 6, 0, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { gUnkJp_0814EC28, gUnk_09EDCBB8, 6, 0, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -751,7 +751,7 @@ const JiminyDetail gJiminyEntry19Details[6] = {
     { gUnkJp_0814EDE0, gUnk_09EDCC1C, 4, 0, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gJiminyEntry20Details[33] = {
+static const JiminyDetail sJiminyEntry20Details[33] = {
     { gUnkJp_0814E9EC, gUnk_09EDC540, 7, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnkJp_0814E9F8, gUnk_09EDC564, 5, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnkJp_0814EA28, gUnk_09EDC580, 8, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -789,7 +789,7 @@ const JiminyDetail gJiminyEntry20Details[33] = {
 
 #elif defined(VERSION_EU)
 
-const JiminyDetail gJiminyEntry01Details[17] = {
+static const JiminyDetail sJiminyEntry01Details[17] = {
     { &gUnkEu_08892450, &gUnkEu_0883FB1C, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_088924BC, &gUnkEu_088402A4, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0889252C, &gUnkEu_08840A14, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -809,7 +809,7 @@ const JiminyDetail gJiminyEntry01Details[17] = {
     { &gUnkEu_0888E804, &gUnkEu_08848808, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry15Details[6] = {
+static const JiminyDetail sJiminyEntry15Details[6] = {
     { &gUnkEu_088954F4, &gUnkEu_08849768, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08895560, &gUnkEu_0884A1C8, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_088955D0, &gUnkEu_0884AA20, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -818,7 +818,7 @@ const JiminyDetail gJiminyEntry15Details[6] = {
     { &gUnkEu_08895710, &gUnkEu_0884C7C0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry04Details[17] = {
+static const JiminyDetail sJiminyEntry04Details[17] = {
     { &gUnkEu_0888E860, &gUnkEu_0884CB9C, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888E8B4, &gUnkEu_0884CF0C, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888E904, &gUnkEu_0884D304, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -838,7 +838,7 @@ const JiminyDetail gJiminyEntry04Details[17] = {
     { &gUnkEu_0888ECE8, &gUnkEu_08850724, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry05Details[14] = {
+static const JiminyDetail sJiminyEntry05Details[14] = {
     { &gUnkEu_0888EDE0, &gUnkEu_088508FC, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888EE18, &gUnkEu_08850AE0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888EE50, &gUnkEu_08850CD0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -855,7 +855,7 @@ const JiminyDetail gJiminyEntry05Details[14] = {
     { &gUnkEu_0888F0A4, &gUnkEu_08852574, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry06Details[7] = {
+static const JiminyDetail sJiminyEntry06Details[7] = {
     { &gUnkEu_0888F0DC, &gUnkEu_088527E4, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F128, &gUnkEu_08852A50, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F178, &gUnkEu_08852D50, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -865,7 +865,7 @@ const JiminyDetail gJiminyEntry06Details[7] = {
     { &gUnkEu_0888F278, &gUnkEu_08853754, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry07Details[7] = {
+static const JiminyDetail sJiminyEntry07Details[7] = {
     { &gUnkEu_0888F2C0, &gUnkEu_08853980, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F2F4, &gUnkEu_08853B98, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F394, &gUnkEu_08853DAC, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -875,7 +875,7 @@ const JiminyDetail gJiminyEntry07Details[7] = {
     { &gUnkEu_0888F484, &gUnkEu_088545F8, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry08Details[49] = {
+static const JiminyDetail sJiminyEntry08Details[49] = {
     { &gUnkEu_0888F880, &gUnkEu_0885479C, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F8C4, &gUnkEu_08855548, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F9AC, &gUnkEu_08857454, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -927,7 +927,7 @@ const JiminyDetail gJiminyEntry08Details[49] = {
     { &gUnkEu_08890FB0, &gUnkEu_0885AF84, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry09Details[26] = {
+static const JiminyDetail sJiminyEntry09Details[26] = {
     { &gUnkEu_088929B0, &gUnkEu_0885BB4C, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0889294C, &gUnkEu_0885BA50, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08892BB0, &gUnkEu_0885C230, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -956,11 +956,11 @@ const JiminyDetail gJiminyEntry09Details[26] = {
     { &gUnkEu_08893310, &gUnkEu_0885DC30, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry10Details[1] = {
+static const JiminyDetail sJiminyEntry10Details[1] = {
     { &gUnkEu_08895850, &gUnkEu_0885E1D8, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry16Details[22] = {
+static const JiminyDetail sJiminyEntry16Details[22] = {
     { &gUnkEu_0889103C, &gUnkEu_0885B6AC, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08890FEC, &gUnkEu_0885B870, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F880, &gUnkEu_0885479C, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -985,7 +985,7 @@ const JiminyDetail gJiminyEntry16Details[22] = {
     { &gUnkEu_08890F7C, &gUnkEu_0885ACC0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry11Details[25] = {
+static const JiminyDetail sJiminyEntry11Details[25] = {
     { &gUnkEu_0888F4FC, &gUnkEu_0885E7B8, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { &gUnkEu_0888F2C0, &gUnkEu_0885ED64, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { &gUnkEu_0888F2F4, &gUnkEu_0885F1AC, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -1013,7 +1013,7 @@ const JiminyDetail gJiminyEntry11Details[25] = {
     { &gUnkEu_0888F7E8, &gUnkEu_08864A34, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gJiminyEntry12Details[40] = {
+static const JiminyDetail sJiminyEntry12Details[40] = {
     { &gUnkEu_088908E4, &gUnkEu_088683FC, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { &gUnkEu_08890950, &gUnkEu_0886871C, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { &gUnkEu_088909B4, &gUnkEu_08868954, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -1056,7 +1056,7 @@ const JiminyDetail gJiminyEntry12Details[40] = {
     { &gUnkEu_08890DF4, &gUnkEu_0886CF18, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gJiminyEntry13Details[35] = {
+static const JiminyDetail sJiminyEntry13Details[35] = {
     { &gUnkEu_0888F880, &gUnkEu_0886DF4C, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { &gUnkEu_0888F8C4, &gUnkEu_0886E1FC, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { &gUnkEu_0888F9AC, &gUnkEu_0886E5EC, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -1094,7 +1094,7 @@ const JiminyDetail gJiminyEntry13Details[35] = {
     { &gUnkEu_08890484, &gUnkEu_0886DBF8, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gJiminyEntry18Details[14] = {
+static const JiminyDetail sJiminyEntry18Details[14] = {
     { &gUnkEu_0888F52C, &gUnkEu_08874658, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { &gUnkEu_08890FEC, &gUnkEu_08874BC8, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { &gUnkEu_0888F4FC, &gUnkEu_088750B8, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -1111,7 +1111,7 @@ const JiminyDetail gJiminyEntry18Details[14] = {
     { &gUnkEu_08895784, &gUnkEu_08878F40, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gJiminyEntry19Details[6] = {
+static const JiminyDetail sJiminyEntry19Details[6] = {
     { &gUnkEu_08890C48, &gUnkEu_088793FC, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { &gUnkEu_08890700, &gUnkEu_08879700, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { &gUnkEu_08890300, &gUnkEu_08879A6C, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -1120,7 +1120,7 @@ const JiminyDetail gJiminyEntry19Details[6] = {
     { &gUnkEu_08890BD0, &gUnkEu_0887A250, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gJiminyEntry20Details[33] = {
+static const JiminyDetail sJiminyEntry20Details[33] = {
     { &gUnkEu_0888F880, &gUnkEu_0886DF4C, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { &gUnkEu_0888F8C4, &gUnkEu_0886E1FC, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { &gUnkEu_0888F9AC, &gUnkEu_0886E5EC, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -1226,7 +1226,7 @@ s32 GetJiminyEntryState(s32 idx) {
     s32 d;
     s32 i;
 
-    e = &gJiminyEntries[idx];
+    e = &sJiminyEntries[idx];
     if (e->flags != 0) {
         a = 1;
         b = 1;
@@ -1589,13 +1589,13 @@ void mode_jiminy_0(void) {
 
     if (gGameState.flags & 8) {
         gJiminyWork->entry = 14;
-        e = gJiminyEntries;
+        e = sJiminyEntries;
         e += 14;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         gJiminyWork->flags = 2;
     } else {
         gJiminyWork->entry = 0;
-        e = gJiminyEntries;
+        e = sJiminyEntries;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         gJiminyWork->flags = 3;
     }
@@ -1689,7 +1689,7 @@ void mode_jiminy_1(void) {
         }
         break;
     case 6:
-        e = &gJiminyEntries[gJiminyWork->entry];
+        e = &sJiminyEntries[gJiminyWork->entry];
         p = &gJiminyWork->pairs[gJiminyWork->entry];
 #ifdef VERSION_JP
         gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
@@ -1725,7 +1725,7 @@ void mode_jiminy_1(void) {
 
         gJiminyWork->state = 7;
     case 7:
-        e2 = &gJiminyEntries[gJiminyWork->entry];
+        e2 = &sJiminyEntries[gJiminyWork->entry];
         p2 = &gJiminyWork->pairs[gJiminyWork->entry];
 
         if (JiminyHandleListInput() != 0) {
@@ -2025,87 +2025,87 @@ void JiminyDetailUpdate(void) {
         switch ((u32)gJiminyWork->detailTable) {
         case 1:
             count = 17;
-            entries = gJiminyEntry01Details;
+            entries = sJiminyEntry01Details;
             gJiminyWork->unk_D30 = 0;
             break;
         case 2:
             count = 17;
-            entries = gJiminyEntry04Details;
+            entries = sJiminyEntry04Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 3:
             count = 14;
-            entries = gJiminyEntry05Details;
+            entries = sJiminyEntry05Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 4:
             count = 7;
-            entries = gJiminyEntry06Details;
+            entries = sJiminyEntry06Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 5:
             count = 7;
-            entries = gJiminyEntry07Details;
+            entries = sJiminyEntry07Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 6:
             count = 49;
-            entries = gJiminyEntry08Details;
+            entries = sJiminyEntry08Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 7:
             count = 26;
-            entries = gJiminyEntry09Details;
+            entries = sJiminyEntry09Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 8:
             count = 1;
-            entries = gJiminyEntry10Details;
+            entries = sJiminyEntry10Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 9:
             count = 25;
-            entries = gJiminyEntry11Details;
+            entries = sJiminyEntry11Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 10:
             count = 40;
-            entries = gJiminyEntry12Details;
+            entries = sJiminyEntry12Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 11:
             count = 35;
-            entries = gJiminyEntry13Details;
+            entries = sJiminyEntry13Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 12:
             count = 6;
-            entries = gJiminyEntry15Details;
+            entries = sJiminyEntry15Details;
             gJiminyWork->unk_D30 = 0;
             break;
         case 13:
             count = 22;
-            entries = gJiminyEntry16Details;
+            entries = sJiminyEntry16Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 14:
             count = 14;
-            entries = gJiminyEntry18Details;
+            entries = sJiminyEntry18Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 15:
             count = 6;
-            entries = gJiminyEntry19Details;
+            entries = sJiminyEntry19Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 16:
             count = 33;
-            entries = gJiminyEntry20Details;
+            entries = sJiminyEntry20Details;
             gJiminyWork->unk_D30 = 2;
             break;
         default:
             count = 25;
-            entries = gJiminyEntry11Details;
+            entries = sJiminyEntry11Details;
             gJiminyWork->unk_D30 = 2;
             break;
         }

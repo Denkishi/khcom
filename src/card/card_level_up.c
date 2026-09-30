@@ -50,7 +50,7 @@ u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);
 
 #ifdef VERSION_EU
-const u16 gUnkEu_090D1328[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
+static const u16 sUnkEu_090D1328[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
 
 const u16 gUnkEu_090D1332[5] = { 0xE80, 0x1140, 0x1280, 0xF00, 0xF60 };
 
@@ -63,9 +63,9 @@ const u8 gLevelUpDisabledText[] = "\x81\x7c\x81\x7c\x81\x7c";
 const u16 gLevelUpDisabledText[4] = { 0xE000, 0xE000, 0xE000, 0 };
 #endif
 
-const s16 gLevelUpCursorY[3] = { 30, 78, 128 };
+static const s16 sLevelUpCursorY[3] = { 30, 78, 128 };
 
-const s16 gLevelUpApLevels[20] = { 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95 };
+static const s16 sLevelUpApLevels[20] = { 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95 };
 
 void Level_Up_0(LevelUpWork* w) {
     s16 x;
@@ -103,7 +103,7 @@ void Level_Up_0(LevelUpWork* w) {
     InitTextSlots(w->textSlots[5], 36);
     w->unk_000[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
 #else
-    w->unk_000[6] = LoadObjTiles(gUnkEu_09F72D1C[gLanguage], gUnkEu_090D1328[gLanguage]);
+    w->unk_000[6] = LoadObjTiles(gUnkEu_09F72D1C[gLanguage], sUnkEu_090D1328[gLanguage]);
     w->tiles5[0] = AllocSpriteFrameTiles(0x500);
     w->tiles5[1] = AllocSpriteFrameTiles(0x500);
     w->tiles5[2] = AllocSpriteFrameTiles(0x500);
@@ -218,7 +218,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->bgScrollX = 0;
     w->statsOffsetX = 256;
     w->x3 = 132;
-    w->y3 = gLevelUpCursorY[0];
+    w->y3 = sLevelUpCursorY[0];
     w->state = 0;
     w->cursor = 0;
     w->applied = 0;
@@ -678,7 +678,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         }
                     }
                     w->cursor = i;
-                    w->y3 = gLevelUpCursorY[w->cursor];
+                    w->y3 = sLevelUpCursorY[w->cursor];
                     SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
                     if (gBtlWork->battleId == 151) {
                         LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
@@ -797,7 +797,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
     }
 
     x = w->y3 << 8;
-    ApproachValue(&x, gLevelUpCursorY[w->cursor] << 8, w->cursorSteps);
+    ApproachValue(&x, sLevelUpCursorY[w->cursor] << 8, w->cursorSteps);
     w->cursorSteps--;
     w->y3 = x >> 8;
     w->gfx2 = AnimUpdate(&w->anim);
@@ -1613,7 +1613,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             }
         }
         w->cursor = i;
-        w->y3 = gLevelUpCursorY[w->cursor];
+        w->y3 = sLevelUpCursorY[w->cursor];
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
@@ -1726,7 +1726,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
             w->y5[1] = 79;
             w->y5[2] = 127;
             w->x3 = 132;
-            w->y3 = gLevelUpCursorY[0];
+            w->y3 = sLevelUpCursorY[0];
 
             if ((gGameState.flags & 8) == 0) {
                 SetObjTileSource(w->tiles4, gSor1ll51Tiles);
@@ -1756,7 +1756,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
 }
 
 s32 IsLevelUpApUnlocked(void) {
-    if (gGameState.progression.level >= gLevelUpApLevels[gGameState.progression.levelMilestone]) {
+    if (gGameState.progression.level >= sLevelUpApLevels[gGameState.progression.levelMilestone]) {
         return 1;
     }
 
@@ -2000,15 +2000,15 @@ TaskDesc gTaskDescLevelUp = {
 #ifdef VERSION_EU
 void* gLvupEffectSprites[6] = { gUnkEu_09163774, gUnkEu_0916377E, gUnkEu_09163788, gUnkEu_09163792, gUnkEu_0916379C, gUnkEu_091637A6 };
 
-void* gUnkEu_09F72DB0[6] = { gUnkEu_0916F94C, gUnkEu_0916F956, gUnkEu_0916F960, gUnkEu_0916F96A, gUnkEu_0916F974, gUnkEu_0916F97E };
+static void* sUnkEu_09F72DB0[6] = { gUnkEu_0916F94C, gUnkEu_0916F956, gUnkEu_0916F960, gUnkEu_0916F96A, gUnkEu_0916F974, gUnkEu_0916F97E };
 
-void* gUnkEu_09F72DC8[6] = { gUnkEu_0916FD84, gUnkEu_0916FD8E, gUnkEu_0916FD98, gUnkEu_0916FDA2, gUnkEu_0916FDAC, gUnkEu_0916FDB6 };
+static void* sUnkEu_09F72DC8[6] = { gUnkEu_0916FD84, gUnkEu_0916FD8E, gUnkEu_0916FD98, gUnkEu_0916FDA2, gUnkEu_0916FDAC, gUnkEu_0916FDB6 };
 
-void* gUnkEu_09F72DE0[6] = { gUnkEu_091701BC, gUnkEu_091701C6, gUnkEu_091701D0, gUnkEu_091701DA, gUnkEu_091701E4, gUnkEu_091701EE };
+static void* sUnkEu_09F72DE0[6] = { gUnkEu_091701BC, gUnkEu_091701C6, gUnkEu_091701D0, gUnkEu_091701DA, gUnkEu_091701E4, gUnkEu_091701EE };
 
-void* gUnkEu_09F72DF8[6] = { gUnkEu_091705F4, gUnkEu_091705FE, gUnkEu_09170608, gUnkEu_09170612, gUnkEu_0917061C, gUnkEu_09170626 };
+static void* sUnkEu_09F72DF8[6] = { gUnkEu_091705F4, gUnkEu_091705FE, gUnkEu_09170608, gUnkEu_09170612, gUnkEu_0917061C, gUnkEu_09170626 };
 
-void** gLvupEffectSpritesByLanguage[5] = { gLvupEffectSprites, gUnkEu_09F72DB0, gUnkEu_09F72DF8, gUnkEu_09F72DE0, gUnkEu_09F72DC8 };
+void** gLvupEffectSpritesByLanguage[5] = { gLvupEffectSprites, sUnkEu_09F72DB0, sUnkEu_09F72DF8, sUnkEu_09F72DE0, sUnkEu_09F72DC8 };
 #elif defined(VERSION_JP)
 void* gLvupEffectSprites[6] = { gUnkJp_09047EB0, gUnkJp_09047EBA, gUnkJp_09047EC4, gUnkJp_09047ECE, gUnkJp_09047ED8, gUnkJp_09047EE2 };
 #else

@@ -45,30 +45,30 @@ void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
 s32 UpdateSpotLightFadeOut(SpotlightWork* w);
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
 
-const u16 gPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
+static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-const PrizeMapCardEntry gUnk_09035A10[1] = {
+static const PrizeMapCardEntry sUnk_09035A10[1] = {
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035A14[4] = {
+static const PrizeMapCardEntry sUnk_09035A14[4] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
     { CARD_ID(CARD_CRABCLAW, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035A24[2] = {
-    { gUnk_09035A10, 1, 30 },
-    { gUnk_09035A14, 4, 100 },
+static const PrizeMapCardGroup sUnk_09035A24[2] = {
+    { sUnk_09035A10, 1, 30 },
+    { sUnk_09035A14, 4, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035A34[2] = {
+static const PrizeMapCardEntry sUnk_09035A34[2] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035A3C[7] = {
+static const PrizeMapCardEntry sUnk_09035A3C[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -78,7 +78,7 @@ const PrizeMapCardEntry gUnk_09035A3C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035A58[8] = {
+static const PrizeMapCardEntry sUnk_09035A58[8] = {
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -89,18 +89,18 @@ const PrizeMapCardEntry gUnk_09035A58[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035A78[3] = {
-    { gUnk_09035A34, 2, 40 },
-    { gUnk_09035A3C, 7, 85 },
-    { gUnk_09035A58, 8, 100 },
+static const PrizeMapCardGroup sUnk_09035A78[3] = {
+    { sUnk_09035A34, 2, 40 },
+    { sUnk_09035A3C, 7, 85 },
+    { sUnk_09035A58, 8, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035A90[2] = {
+static const PrizeMapCardEntry sUnk_09035A90[2] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035A98[7] = {
+static const PrizeMapCardEntry sUnk_09035A98[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -110,7 +110,7 @@ const PrizeMapCardEntry gUnk_09035A98[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035AB4[8] = {
+static const PrizeMapCardEntry sUnk_09035AB4[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
@@ -121,18 +121,18 @@ const PrizeMapCardEntry gUnk_09035AB4[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035AD4[3] = {
-    { gUnk_09035A90, 2, 40 },
-    { gUnk_09035A98, 7, 85 },
-    { gUnk_09035AB4, 8, 100 },
+static const PrizeMapCardGroup sUnk_09035AD4[3] = {
+    { sUnk_09035A90, 2, 40 },
+    { sUnk_09035A98, 7, 85 },
+    { sUnk_09035AB4, 8, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035AEC[2] = {
+static const PrizeMapCardEntry sUnk_09035AEC[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035AF4[7] = {
+static const PrizeMapCardEntry sUnk_09035AF4[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -142,7 +142,7 @@ const PrizeMapCardEntry gUnk_09035AF4[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035B10[7] = {
+static const PrizeMapCardEntry sUnk_09035B10[7] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -152,18 +152,18 @@ const PrizeMapCardEntry gUnk_09035B10[7] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035B2C[3] = {
-    { gUnk_09035AEC, 2, 40 },
-    { gUnk_09035AF4, 7, 85 },
-    { gUnk_09035B10, 7, 100 },
+static const PrizeMapCardGroup sUnk_09035B2C[3] = {
+    { sUnk_09035AEC, 2, 40 },
+    { sUnk_09035AF4, 7, 85 },
+    { sUnk_09035B10, 7, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035B44[2] = {
+static const PrizeMapCardEntry sUnk_09035B44[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035B4C[7] = {
+static const PrizeMapCardEntry sUnk_09035B4C[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -173,60 +173,60 @@ const PrizeMapCardEntry gUnk_09035B4C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035B68[8] = {
+static const PrizeMapCardEntry sUnk_09035B68[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
     { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
-};
-
-const PrizeMapCardGroup gUnk_09035B88[3] = {
-    { gUnk_09035B44, 2, 40 },
-    { gUnk_09035B4C, 7, 85 },
-    { gUnk_09035B68, 8, 100 },
-};
-
-const PrizeMapCardEntry gUnk_09035BA0[2] = {
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-};
-
-const PrizeMapCardEntry gUnk_09035BA8[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
-};
-
-const PrizeMapCardEntry gUnk_09035BC4[8] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035BE4[3] = {
-    { gUnk_09035BA0, 2, 40 },
-    { gUnk_09035BA8, 7, 85 },
-    { gUnk_09035BC4, 8, 100 },
+static const PrizeMapCardGroup sUnk_09035B88[3] = {
+    { sUnk_09035B44, 2, 40 },
+    { sUnk_09035B4C, 7, 85 },
+    { sUnk_09035B68, 8, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035BFC[1] = {
+static const PrizeMapCardEntry sUnk_09035BA0[2] = {
+    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
+    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
+};
+
+static const PrizeMapCardEntry sUnk_09035BA8[7] = {
+    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
+    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
+    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
+    { CARD_ID(CARD_THUNDER, 0), 0 },
+    { CARD_ID(CARD_CRABCLAW, 0), 0 },
+    { CARD_ID(CARD_GRAVITY, 0), 0 },
+    { CARD_ID(CARD_OBLIVION, 0), 0 },
+};
+
+static const PrizeMapCardEntry sUnk_09035BC4[8] = {
+    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
+    { CARD_ID(CARD_LIONHEART, 0), 0 },
+    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
+    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
+    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
+    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
+    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
+    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+};
+
+static const PrizeMapCardGroup sUnk_09035BE4[3] = {
+    { sUnk_09035BA0, 2, 40 },
+    { sUnk_09035BA8, 7, 85 },
+    { sUnk_09035BC4, 8, 100 },
+};
+
+static const PrizeMapCardEntry sUnk_09035BFC[1] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035C00[5] = {
+static const PrizeMapCardEntry sUnk_09035C00[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -234,7 +234,7 @@ const PrizeMapCardEntry gUnk_09035C00[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035C14[9] = {
+static const PrizeMapCardEntry sUnk_09035C14[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -246,17 +246,17 @@ const PrizeMapCardEntry gUnk_09035C14[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035C38[3] = {
-    { gUnk_09035BFC, 1, 20 },
-    { gUnk_09035C00, 5, 80 },
-    { gUnk_09035C14, 9, 100 },
+static const PrizeMapCardGroup sUnk_09035C38[3] = {
+    { sUnk_09035BFC, 1, 20 },
+    { sUnk_09035C00, 5, 80 },
+    { sUnk_09035C14, 9, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035C50[1] = {
+static const PrizeMapCardEntry sUnk_09035C50[1] = {
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035C54[5] = {
+static const PrizeMapCardEntry sUnk_09035C54[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -264,7 +264,7 @@ const PrizeMapCardEntry gUnk_09035C54[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035C68[9] = {
+static const PrizeMapCardEntry sUnk_09035C68[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -276,17 +276,17 @@ const PrizeMapCardEntry gUnk_09035C68[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035C8C[3] = {
-    { gUnk_09035C50, 1, 20 },
-    { gUnk_09035C54, 5, 80 },
-    { gUnk_09035C68, 9, 100 },
+static const PrizeMapCardGroup sUnk_09035C8C[3] = {
+    { sUnk_09035C50, 1, 20 },
+    { sUnk_09035C54, 5, 80 },
+    { sUnk_09035C68, 9, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035CA4[1] = {
+static const PrizeMapCardEntry sUnk_09035CA4[1] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035CA8[5] = {
+static const PrizeMapCardEntry sUnk_09035CA8[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -294,7 +294,7 @@ const PrizeMapCardEntry gUnk_09035CA8[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035CBC[9] = {
+static const PrizeMapCardEntry sUnk_09035CBC[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -306,17 +306,17 @@ const PrizeMapCardEntry gUnk_09035CBC[9] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035CE0[3] = {
-    { gUnk_09035CA4, 1, 20 },
-    { gUnk_09035CA8, 5, 80 },
-    { gUnk_09035CBC, 9, 100 },
+static const PrizeMapCardGroup sUnk_09035CE0[3] = {
+    { sUnk_09035CA4, 1, 20 },
+    { sUnk_09035CA8, 5, 80 },
+    { sUnk_09035CBC, 9, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035CF8[1] = {
+static const PrizeMapCardEntry sUnk_09035CF8[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035CFC[6] = {
+static const PrizeMapCardEntry sUnk_09035CFC[6] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -325,7 +325,7 @@ const PrizeMapCardEntry gUnk_09035CFC[6] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035D14[8] = {
+static const PrizeMapCardEntry sUnk_09035D14[8] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
@@ -336,24 +336,24 @@ const PrizeMapCardEntry gUnk_09035D14[8] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035D34[3] = {
-    { gUnk_09035CF8, 1, 20 },
-    { gUnk_09035CFC, 6, 80 },
-    { gUnk_09035D14, 8, 100 },
+static const PrizeMapCardGroup sUnk_09035D34[3] = {
+    { sUnk_09035CF8, 1, 20 },
+    { sUnk_09035CFC, 6, 80 },
+    { sUnk_09035D14, 8, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035D4C[1] = {
+static const PrizeMapCardEntry sUnk_09035D4C[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035D50[4] = {
+static const PrizeMapCardEntry sUnk_09035D50[4] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035D60[5] = {
+static const PrizeMapCardEntry sUnk_09035D60[5] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
@@ -361,13 +361,13 @@ const PrizeMapCardEntry gUnk_09035D60[5] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035D74[3] = {
-    { gUnk_09035D4C, 1, 30 },
-    { gUnk_09035D50, 4, 80 },
-    { gUnk_09035D60, 5, 100 },
+static const PrizeMapCardGroup sUnk_09035D74[3] = {
+    { sUnk_09035D4C, 1, 30 },
+    { sUnk_09035D50, 4, 80 },
+    { sUnk_09035D60, 5, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035D8C[9] = {
+static const PrizeMapCardEntry sUnk_09035D8C[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FIRE, 0), 0 },
@@ -379,37 +379,37 @@ const PrizeMapCardEntry gUnk_09035D8C[9] = {
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-const PrizeMapCardEntry gUnk_09035DB0[3] = {
+static const PrizeMapCardEntry sUnk_09035DB0[3] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035DBC[2] = {
-    { gUnk_09035D8C, 9, 85 },
-    { gUnk_09035DB0, 3, 100 },
+static const PrizeMapCardGroup sUnk_09035DBC[2] = {
+    { sUnk_09035D8C, 9, 85 },
+    { sUnk_09035DB0, 3, 100 },
 };
 
-const PrizeMapCardGroupList gSoraPrizeMapCardGroups[14] = {
-    { gUnk_09035A24, 2 },
-    { gUnk_09035A78, 3 },
-    { gUnk_09035C38, 3 },
-    { gUnk_09035B88, 3 },
-    { gUnk_09035BE4, 3 },
-    { gUnk_09035B2C, 3 },
-    { gUnk_09035AD4, 3 },
-    { gUnk_09035C8C, 3 },
-    { gUnk_09035CE0, 3 },
-    { gUnk_09035D74, 3 },
-    { gUnk_09035A24, 2 },
-    { gUnk_09035D34, 3 },
-    { gUnk_09035DBC, 2 },
-    { gUnk_09035DBC, 2 },
+static const PrizeMapCardGroupList sSoraPrizeMapCardGroups[14] = {
+    { sUnk_09035A24, 2 },
+    { sUnk_09035A78, 3 },
+    { sUnk_09035C38, 3 },
+    { sUnk_09035B88, 3 },
+    { sUnk_09035BE4, 3 },
+    { sUnk_09035B2C, 3 },
+    { sUnk_09035AD4, 3 },
+    { sUnk_09035C8C, 3 },
+    { sUnk_09035CE0, 3 },
+    { sUnk_09035D74, 3 },
+    { sUnk_09035A24, 2 },
+    { sUnk_09035D34, 3 },
+    { sUnk_09035DBC, 2 },
+    { sUnk_09035DBC, 2 },
 };
 
 const u16 gUnk_09035E3C[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-const PrizeMapCardEntry gUnk_09035E50[11] = {
+static const PrizeMapCardEntry sUnk_09035E50[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -423,11 +423,11 @@ const PrizeMapCardEntry gUnk_09035E50[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035E7C[1] = {
-    { gUnk_09035E50, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035E7C[1] = {
+    { sUnk_09035E50, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035E84[11] = {
+static const PrizeMapCardEntry sUnk_09035E84[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -441,11 +441,11 @@ const PrizeMapCardEntry gUnk_09035E84[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035EB0[1] = {
-    { gUnk_09035E84, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035EB0[1] = {
+    { sUnk_09035E84, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035EB8[11] = {
+static const PrizeMapCardEntry sUnk_09035EB8[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -459,11 +459,11 @@ const PrizeMapCardEntry gUnk_09035EB8[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035EE4[1] = {
-    { gUnk_09035EB8, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035EE4[1] = {
+    { sUnk_09035EB8, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035EEC[11] = {
+static const PrizeMapCardEntry sUnk_09035EEC[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -477,11 +477,11 @@ const PrizeMapCardEntry gUnk_09035EEC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035F18[1] = {
-    { gUnk_09035EEC, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035F18[1] = {
+    { sUnk_09035EEC, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035F20[11] = {
+static const PrizeMapCardEntry sUnk_09035F20[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -495,11 +495,11 @@ const PrizeMapCardEntry gUnk_09035F20[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035F4C[1] = {
-    { gUnk_09035F20, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035F4C[1] = {
+    { sUnk_09035F20, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035F54[11] = {
+static const PrizeMapCardEntry sUnk_09035F54[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -513,11 +513,11 @@ const PrizeMapCardEntry gUnk_09035F54[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035F80[1] = {
-    { gUnk_09035F54, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035F80[1] = {
+    { sUnk_09035F54, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035F88[11] = {
+static const PrizeMapCardEntry sUnk_09035F88[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -531,11 +531,11 @@ const PrizeMapCardEntry gUnk_09035F88[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035FB4[1] = {
-    { gUnk_09035F88, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035FB4[1] = {
+    { sUnk_09035F88, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09035FBC[11] = {
+static const PrizeMapCardEntry sUnk_09035FBC[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -549,12 +549,12 @@ const PrizeMapCardEntry gUnk_09035FBC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09035FE8[1] = {
-    { gUnk_09035FBC, 11, 100 },
+static const PrizeMapCardGroup sUnk_09035FE8[1] = {
+    { sUnk_09035FBC, 11, 100 },
 };
 
 #ifdef VERSION_EU
-const PrizeMapCardEntry gUnk_09035FF0[9] = {
+static const PrizeMapCardEntry sUnk_09035FF0[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -566,7 +566,7 @@ const PrizeMapCardEntry gUnk_09035FF0[9] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 #else
-const PrizeMapCardEntry gUnk_09035FF0[10] = {
+static const PrizeMapCardEntry sUnk_09035FF0[10] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -581,16 +581,16 @@ const PrizeMapCardEntry gUnk_09035FF0[10] = {
 #endif
 
 #ifdef VERSION_EU
-const PrizeMapCardGroup gUnk_09036018[1] = {
-    { gUnk_09035FF0, 9, 100 },
+static const PrizeMapCardGroup sUnk_09036018[1] = {
+    { sUnk_09035FF0, 9, 100 },
 };
 #else
-const PrizeMapCardGroup gUnk_09036018[1] = {
-    { gUnk_09035FF0, 10, 100 },
+static const PrizeMapCardGroup sUnk_09036018[1] = {
+    { sUnk_09035FF0, 10, 100 },
 };
 #endif
 
-const PrizeMapCardEntry gUnk_09036020[11] = {
+static const PrizeMapCardEntry sUnk_09036020[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -604,11 +604,11 @@ const PrizeMapCardEntry gUnk_09036020[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_0903604C[1] = {
-    { gUnk_09036020, 11, 100 },
+static const PrizeMapCardGroup sUnk_0903604C[1] = {
+    { sUnk_09036020, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09036054[11] = {
+static const PrizeMapCardEntry sUnk_09036054[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -622,11 +622,11 @@ const PrizeMapCardEntry gUnk_09036054[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_09036080[1] = {
-    { gUnk_09036054, 11, 100 },
+static const PrizeMapCardGroup sUnk_09036080[1] = {
+    { sUnk_09036054, 11, 100 },
 };
 
-const PrizeMapCardEntry gUnk_09036088[11] = {
+static const PrizeMapCardEntry sUnk_09036088[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -640,28 +640,28 @@ const PrizeMapCardEntry gUnk_09036088[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const PrizeMapCardGroup gUnk_090360B4[1] = {
-    { gUnk_09036088, 11, 100 },
+static const PrizeMapCardGroup sUnk_090360B4[1] = {
+    { sUnk_09036088, 11, 100 },
 };
 
-const PrizeMapCardGroupList gRikuPrizeMapCardGroups[14] = {
-    { gUnk_09035E7C, 1 },
-    { gUnk_09035EB0, 1 },
-    { gUnk_09035FB4, 1 },
-    { gUnk_09035F4C, 1 },
-    { gUnk_09035F80, 1 },
-    { gUnk_09035F18, 1 },
-    { gUnk_09035EE4, 1 },
-    { gUnk_09035FE8, 1 },
-    { gUnk_09036018, 1 },
-    { gUnk_09036080, 1 },
-    { gUnk_09035E7C, 1 },
-    { gUnk_0903604C, 1 },
-    { gUnk_090360B4, 1 },
-    { gUnk_090360B4, 1 },
+static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
+    { sUnk_09035E7C, 1 },
+    { sUnk_09035EB0, 1 },
+    { sUnk_09035FB4, 1 },
+    { sUnk_09035F4C, 1 },
+    { sUnk_09035F80, 1 },
+    { sUnk_09035F18, 1 },
+    { sUnk_09035EE4, 1 },
+    { sUnk_09035FE8, 1 },
+    { sUnk_09036018, 1 },
+    { sUnk_09036080, 1 },
+    { sUnk_09035E7C, 1 },
+    { sUnk_0903604C, 1 },
+    { sUnk_090360B4, 1 },
+    { sUnk_090360B4, 1 },
 };
 
-const u16 gUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
+static const u16 sUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
 
 void PrizeCardInitInit(PrizeCardInitWork* w, PrizeCardArgs* args) {
     w->spawned = 0;
@@ -753,8 +753,8 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 if ((gGameState.flags & 8) == 0) {
                     if (HasMapCard(0xFB) == 0) {
                         if (AreWorldPrizesCollected() == 0) {
-                            if (gUnk_0903612C[gGameState.world] != 0) {
-                                if (GetRandom() % 100 <= gUnk_0903612C[gGameState.world]) {
+                            if (sUnk_0903612C[gGameState.world] != 0) {
+                                if (GetRandom() % 100 <= sUnk_0903612C[gGameState.world]) {
                                     args[8] = 0xFB;
                                 } else {
                                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
@@ -940,7 +940,7 @@ u16 PickPrizeMapCardValue(void) {
 
     do {
         i = GetRandom() % 10;
-    } while (gPrizeMapCardValueChances[i] <= GetRandom() % 100);
+    } while (sPrizeMapCardValueChances[i] <= GetRandom() % 100);
 
     return i;
 }
@@ -950,11 +950,11 @@ u16 PickPrizeMapCardKindForWorld(u16 a, s32 b) {
     u16 n;
 
     if (gGameState.flags & 8) {
-        tiles = gRikuPrizeMapCardGroups[a].data;
-        n = gRikuPrizeMapCardGroups[a].size;
+        tiles = sRikuPrizeMapCardGroups[a].data;
+        n = sRikuPrizeMapCardGroups[a].size;
     } else {
-        tiles = gSoraPrizeMapCardGroups[a].data;
-        n = gSoraPrizeMapCardGroups[a].size;
+        tiles = sSoraPrizeMapCardGroups[a].data;
+        n = sSoraPrizeMapCardGroups[a].size;
     }
 
     return PickPrizeMapCardKind(tiles, n);
@@ -968,11 +968,11 @@ u16 PickPrizeMapCardForWorld(u16 a, s32 b) {
     off = 0;
 
     if (gGameState.flags & 8) {
-        tiles = gRikuPrizeMapCardGroups[a].data;
-        base = PickPrizeMapCardKind(tiles, gRikuPrizeMapCardGroups[a].size);
+        tiles = sRikuPrizeMapCardGroups[a].data;
+        base = PickPrizeMapCardKind(tiles, sRikuPrizeMapCardGroups[a].size);
     } else {
-        tiles = gSoraPrizeMapCardGroups[a].data;
-        base = PickPrizeMapCardKind(tiles, gSoraPrizeMapCardGroups[a].size);
+        tiles = sSoraPrizeMapCardGroups[a].data;
+        base = PickPrizeMapCardKind(tiles, sSoraPrizeMapCardGroups[a].size);
     }
 
     if (base != 0xFFFF) {

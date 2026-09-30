@@ -3,7 +3,7 @@
 #include "m4a.h"
 #include "gba/keys.h"
 
-const u8 sSioKeyHeapName[8] = "SIOKEY";
+static const u8 sSioKeyHeapName[8] = "SIOKEY";
 
 KeyState* gSioKeyStateA;
 KeyState* gSioKeyStateB;

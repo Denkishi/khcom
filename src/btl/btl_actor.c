@@ -7,7 +7,7 @@
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
 
-const u8 gHumReloadPaletteCycle[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
+static const u8 sHumReloadPaletteCycle[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 
 void HumDrawSub(HumWork* p, HumSub* s) {
     s16 x;
@@ -119,7 +119,7 @@ void HumDraw(HumWork* work) {
 
         if (work->stateTimer & 1) {
             work->flags |= 2;
-            LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 32 + gHumReloadPaletteCycle[idx] * 32);
+            LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 32 + sHumReloadPaletteCycle[idx] * 32);
         } else {
             work->flags &= ~2;
             LoadObjPaletteBank(work->palette->index, work->paletteData);

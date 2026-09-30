@@ -31,7 +31,6 @@ void mode_chkobj_2(void);
 
 extern ChkObjWork* gChkObjWork;
 extern u8 gSor1ff00Frame0[];
-extern const ChkObjEntry gChkObjEntries[];
 extern u8 gSoraPalette[];
 
 #endif /* GUARD_MODE_CHKOBJ_H */

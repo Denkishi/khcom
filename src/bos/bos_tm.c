@@ -12,7 +12,7 @@ s16 gUnk_0203AB40 EWRAM_COMMON(4);
 s16 gBosTmActorY EWRAM_COMMON(4);
 s16 gUnk_0203AB48 EWRAM_COMMON(4);
 
-const BattleBackgroundDef gBosTmBattleBackgroundDef = {
+static const BattleBackgroundDef sBosTmBattleBackgroundDef = {
     gUnk_0964AE84, 0x8000, { 0, 0 }, gUnk_096FB164, 0x140, { 0, 0 }, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
 };
 
@@ -99,7 +99,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
         gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
     } else {
         w->state = 0;
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&gBosTmBattleBackgroundDef);
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&sBosTmBattleBackgroundDef);
         gBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);

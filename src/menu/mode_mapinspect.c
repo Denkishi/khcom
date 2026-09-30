@@ -30,7 +30,7 @@ extern u16 gUnk_0814FBBC[];
 #endif
 
 #ifdef VERSION_EU
-void* gUnkEu_09F85008[5] = {
+static void* sUnkEu_09F85008[5] = {
     gUnk_0999D9C0,
     gUnkEu_099A6BA8,
     gUnkEu_099A9128,
@@ -38,7 +38,7 @@ void* gUnkEu_09F85008[5] = {
     gUnkEu_099A7828,
 };
 
-void* gUnkEu_09F8501C[5] = {
+static void* sUnkEu_09F8501C[5] = {
     gUnk_0999D9CA,
     gUnkEu_099A6BB2,
     gUnkEu_099A9132,
@@ -46,7 +46,7 @@ void* gUnkEu_09F8501C[5] = {
     gUnkEu_099A7832,
 };
 
-void* gUnkEu_09F85030[5] = {
+static void* sUnkEu_09F85030[5] = {
     gUnk_0999D9E6,
     gUnkEu_099A6BC8,
     gUnkEu_099A9148,
@@ -54,7 +54,7 @@ void* gUnkEu_09F85030[5] = {
     gUnkEu_099A7848,
 };
 
-void* gUnkEu_09F85044[5] = {
+static void* sUnkEu_09F85044[5] = {
     gUnk_0999DA1A,
     gUnkEu_099A6BFC,
     gUnkEu_099A917C,
@@ -62,7 +62,7 @@ void* gUnkEu_09F85044[5] = {
     gUnkEu_099A787C,
 };
 
-void* gUnkEu_09F85058[5] = {
+static void* sUnkEu_09F85058[5] = {
     gUnkEu_099A6090,
     gUnkEu_099A6CCE,
     gUnkEu_099A924E,
@@ -70,7 +70,7 @@ void* gUnkEu_09F85058[5] = {
     gUnkEu_099A794E,
 };
 
-AnimHeader** gUnkEu_09F8506C[5] = {
+static AnimHeader** sUnkEu_09F8506C[5] = {
     gUnk_09EF981C,
     gUnkEu_09F8533C,
     gUnkEu_09F85408,
@@ -78,7 +78,7 @@ AnimHeader** gUnkEu_09F8506C[5] = {
     gUnkEu_09F85380,
 };
 
-void** gUnkEu_09F85080[5] = {
+static void** sUnkEu_09F85080[5] = {
     gUnk_09EF97EC,
     gUnkEu_09F8530C,
     gUnkEu_09F853D8,
@@ -87,7 +87,7 @@ void** gUnkEu_09F85080[5] = {
 };
 #endif
 
-MapCardCategoryDef gMapCardCategoryDefs[5] = {
+static MapCardCategoryDef sMapCardCategoryDefs[5] = {
     {4, 1, 1, 0},
     {0, 2, 2, 0},
     {1, 3, 3, 0},
@@ -96,10 +96,10 @@ MapCardCategoryDef gMapCardCategoryDefs[5] = {
 };
 
 #ifdef VERSION_EU
-const u16 gUnkEu_09999A50[5] = {2752, 2816, 2816, 2816, 2816};
+static const u16 sUnkEu_09999A50[5] = {2752, 2816, 2816, 2816, 2816};
 #endif
 
-const u16 gMapCardCategoryTypes[4] = {2, 1, 3, 4};
+static const u16 sMapCardCategoryTypes[4] = {2, 1, 3, 4};
 
 MapCardInventoryEntry* gMapCardInventoryEntries;
 s16 gMapInspectMenuState;
@@ -309,7 +309,7 @@ void MapInspectLoadSelectedCard(void) {
 
     if (p->cardType <= 26 && GetMapInspectTabCount(gMapInspectTab) > 0) {
         idx = p->cardIndex;
-        k = gMapCardCategoryTypes[p->category];
+        k = sMapCardCategoryTypes[p->category];
         gMapInspectCardPalette = LoadObjPalette(gMapCardDefs[idx].palette, gMapCardDefs[idx].paletteSize);
         gMapInspectCardTiles = LoadObjTiles(gMapCardDefs[idx].tiles, gMapCardDefs[idx].tilesSize);
         gMapInspectCardSprite = *gMapCardDefs[idx].sprites;
@@ -424,7 +424,7 @@ void MapInspectDrawValueCounts(void) {
 }
 
 void MapInspectDrawTab(s16 a) {
-    RequestTilemapRectCopy(gUnk_09A34D9C, GetBgScreenBase(0), 0, gMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
+    RequestTilemapRectCopy(gUnk_09A34D9C, GetBgScreenBase(0), 0, sMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
 }
 
 void MapInspectDeleteCard(void) {
@@ -564,7 +564,7 @@ void MapInspectBuildInventory(void) {
 
         for (k = 0; k <= 26; k++) {
             t = gMapCardDefs[k * 10].color;
-            if (t == gMapCardCategoryTypes[j]) {
+            if (t == sMapCardCategoryTypes[j]) {
                 u = gMapCardDefs[k * 10].kind;
 
                 for (i = 0; i <= 9; i++) {
@@ -725,9 +725,9 @@ void MapInspectHandleTabInput(void) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
         } else if (keys & 0x20) {
-            gMapInspectTab = gMapCardCategoryDefs[gMapInspectTab].leftCategory;
+            gMapInspectTab = sMapCardCategoryDefs[gMapInspectTab].leftCategory;
         } else if (keys & 0x10) {
-            gMapInspectTab = gMapCardCategoryDefs[gMapInspectTab].rightCategory;
+            gMapInspectTab = sMapCardCategoryDefs[gMapInspectTab].rightCategory;
         }
     }
 
@@ -927,21 +927,21 @@ void MapInspectDraw(void) {
     if (gMapInspectState != 2) {
         DrawSprite(gMapInspectBarX >> 8, 0,
 #ifdef VERSION_EU
-            gUnkEu_09F8501C[gLanguage],
+            sUnkEu_09F8501C[gLanguage],
 #else
             gUnk_0999D9CA,
 #endif
             gUnk_02035E50, gUnk_02035E4C, 0, 0xC00, 0xBB8);
         DrawSprite(128, gMapInspectBarY[0] >> 8,
 #ifdef VERSION_EU
-            gUnkEu_09F85030[gLanguage],
+            sUnkEu_09F85030[gLanguage],
 #else
             gUnk_0999D9E6,
 #endif
             gUnk_02035E50, gUnk_02035E4C, 0, 0xC00, 0xBB9);
         DrawSprite(128, gMapInspectBarY[1] >> 8,
 #ifdef VERSION_EU
-            gUnkEu_09F85044[gLanguage],
+            sUnkEu_09F85044[gLanguage],
 #else
             gUnk_0999DA1A,
 #endif
@@ -955,7 +955,7 @@ void MapInspectDraw(void) {
     }
     DrawSprite(72, t + 40,
 #ifdef VERSION_EU
-            gUnkEu_09F85008[gLanguage],
+            sUnkEu_09F85008[gLanguage],
 #else
             gUnk_0999D9C0,
 #endif
@@ -964,7 +964,7 @@ void MapInspectDraw(void) {
     if (gMapInspectState == 2) {
         switch (gMapInspectMenuState) {
         case 1:
-            ApproachValueHalf(&gMapInspectCursorX, gMapCardCategoryDefs[gMapInspectTab].displayIndex * 3584 - 256);
+            ApproachValueHalf(&gMapInspectCursorX, sMapCardCategoryDefs[gMapInspectTab].displayIndex * 3584 - 256);
             ApproachValueHalf(&gMapInspectCursorY, 0);
             DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, 0x800, 0x7D0);
             break;
@@ -1083,7 +1083,7 @@ void mode_mapinspect_0(void) {
         gMapInspectCursorY = 0x1000;
         gMapInspectMenuState = v;
     } else {
-        gMapInspectCursorX = gMapCardCategoryDefs[4].displayIndex * 7 * 512 - 0x100;
+        gMapInspectCursorX = sMapCardCategoryDefs[4].displayIndex * 7 * 512 - 0x100;
         gMapInspectCursorY = 0;
         gMapInspectMenuState = 1;
     }
@@ -1151,8 +1151,8 @@ void mode_mapinspect_0(void) {
     MapInspectDrawValueCounts();
     gUnk_02035E4C = LoadObjPalette(gUnk_09A3D2DC, 0x20);
 #ifdef VERSION_EU
-    gUnk_02035E50 = LoadObjTiles(gUnkEu_09F85058[gLanguage], gUnkEu_09999A50[gLanguage]);
-    AnimInit(&gMapInspectCursorAnim, gUnkEu_09F8506C[gLanguage], gUnkEu_09F85080[gLanguage]);
+    gUnk_02035E50 = LoadObjTiles(sUnkEu_09F85058[gLanguage], sUnkEu_09999A50[gLanguage]);
+    AnimInit(&gMapInspectCursorAnim, sUnkEu_09F8506C[gLanguage], sUnkEu_09F85080[gLanguage]);
 #else
 #ifdef VERSION_JP
     gUnk_02035E50 = LoadObjTiles(gUnk_0999DAEC, 0xA80);

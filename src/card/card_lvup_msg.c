@@ -41,9 +41,9 @@ extern u8 gUnkEu_08895EDC[];
 #endif
 
 #ifdef VERSION_EU
-const u8 gLvupMsgPeriod[] = ".";
+static const u8 sLvupMsgPeriod[] = ".";
 #elif defined(VERSION_US)
-const u16 gLvupMsgPeriod[2] = { '.', 0 };
+static const u16 sLvupMsgPeriod[2] = { '.', 0 };
 #endif
 
 void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
@@ -54,7 +54,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     InitTextSlots(w->textSlots3, 20);
 #ifndef VERSION_JP
     InitTextSlots(w->textSlots4, 20);
-    w->textSlotCount4 = LoadTextSlots((u16*)gLvupMsgPeriod, w->textSlots4);
+    w->textSlotCount4 = LoadTextSlots((u16*)sLvupMsgPeriod, w->textSlots4);
 #endif
     w->amount = a->amount;
     w->active = a->done;

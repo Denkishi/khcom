@@ -31,7 +31,7 @@ void (*gModeVBlankCallback)(void);
 u32 gUnkEu_030074AC;
 #endif
 
-Mode* gDebugModes[] = {
+static Mode* sDebugModes[] = {
     &gModeDebug,
     &gModeJiminy,
 #ifndef VERSION_EU
@@ -421,7 +421,7 @@ void UpdateDebugModeSelect(void) {
 #endif
             }
 
-            ModeRequest(gDebugModes[(s16)gDebugModeIndex], 0);
+            ModeRequest(sDebugModes[(s16)gDebugModeIndex], 0);
         }
 
         if (GetKeysPressed() & R_BUTTON) {
@@ -435,7 +435,7 @@ void UpdateDebugModeSelect(void) {
                 gDebugModeIndex = 0;
             }
 
-            ModeRequest(gDebugModes[(s16)gDebugModeIndex], 0);
+            ModeRequest(sDebugModes[(s16)gDebugModeIndex], 0);
         }
     }
 }

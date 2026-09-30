@@ -36,11 +36,11 @@
 s32 UpdateReloadChildAbsorb(ReloadChildWork* w);
 u8 UpdateReloadSlideOut(ReloadWork* w);
 
-const s16 gSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
+static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 
-const s16 gRikuReloadChildOffsetX[4] = { -16, -29, -42, -51 };
+static const s16 sRikuReloadChildOffsetX[4] = { -16, -29, -42, -51 };
 
-const s16 gReloadChildOffsetY[4] = { 0, 0, 0, 24 };
+static const s16 sReloadChildOffsetY[4] = { 0, 0, 0, 24 };
 
 void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
     w->args = *a;
@@ -51,20 +51,20 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
     switch (w->args.side) {
     case 1:
         if ((s8)w->args.index <= 3) {
-            w->offsetX = gSoraReloadChildOffsetX[(s8)w->args.index] << 8;
-            w->offsetY = gReloadChildOffsetY[(s8)w->args.index] << 8;
+            w->offsetX = sSoraReloadChildOffsetX[(s8)w->args.index] << 8;
+            w->offsetY = sReloadChildOffsetY[(s8)w->args.index] << 8;
         } else {
-            w->offsetX = gSoraReloadChildOffsetX[3] << 8;
-            w->offsetY = gReloadChildOffsetY[3] << 8;
+            w->offsetX = sSoraReloadChildOffsetX[3] << 8;
+            w->offsetY = sReloadChildOffsetY[3] << 8;
         }
         break;
     case 2:
         if ((s8)w->args.index <= 3) {
-            w->offsetX = gRikuReloadChildOffsetX[(s8)w->args.index] << 8;
-            w->offsetY = gReloadChildOffsetY[(s8)w->args.index] << 8;
+            w->offsetX = sRikuReloadChildOffsetX[(s8)w->args.index] << 8;
+            w->offsetY = sReloadChildOffsetY[(s8)w->args.index] << 8;
         } else {
-            w->offsetX = gRikuReloadChildOffsetX[3] << 8;
-            w->offsetY = gReloadChildOffsetY[3] << 8;
+            w->offsetX = sRikuReloadChildOffsetX[3] << 8;
+            w->offsetY = sReloadChildOffsetY[3] << 8;
         }
         break;
     }
@@ -96,14 +96,14 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
     if (w->args.index <= 3) {
         switch (w->args.side) {
         case 1:
-            ApproachValue(&w->offsetX, gSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
+            ApproachValue(&w->offsetX, sSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
             break;
         case 2:
-            ApproachValue(&w->offsetX, gRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
+            ApproachValue(&w->offsetX, sRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
             break;
         }
 
-        ApproachValue(&w->offsetY, gReloadChildOffsetY[(s8)w->args.index] << 8, w->steps);
+        ApproachValue(&w->offsetY, sReloadChildOffsetY[(s8)w->args.index] << 8, w->steps);
     } else if ((s8)w->args.index < 0) {
         ListPoolRemove(&w->node, w->args.pool);
         w->tiles2 = LoadObjTiles(gCardBacks[w->args.listIndex].tiles2, 0xD00);
@@ -137,14 +137,14 @@ u8 UpdateReloadChildRetracted(ReloadChildWork* w, void* a) {
 
     switch (w->args.side) {
     case 1:
-        ApproachValue(&w->offsetX, gSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
+        ApproachValue(&w->offsetX, sSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
         break;
     case 2:
-        ApproachValue(&w->offsetX, gRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
+        ApproachValue(&w->offsetX, sRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
         break;
     }
 
-    ApproachValue(&w->offsetY, gReloadChildOffsetY[3] << 8, w->steps);
+    ApproachValue(&w->offsetY, sReloadChildOffsetY[3] << 8, w->steps);
 
     if (w->steps != 0) {
         w->steps--;

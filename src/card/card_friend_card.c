@@ -53,7 +53,7 @@ extern u8 gUnk_09618D18[];
 #endif
 void CreatePremireChanceCardTasks(PremireChanceWork* w);
 
-const u32 gFriendCardIds[8] = {
+static const u32 sFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),
     CARD_ID(CARD_DONALD_DUCK, 0),
     CARD_ID(CARD_ALADDIN, 0),
@@ -763,7 +763,7 @@ void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
                 args[0] = (s16)x << 8;
                 args[1] = (s16)y << 8;
                 args[2] = (s16)z << 8;
-                args[3] = gFriendCardIds[idx] + GetRandom() % 9;
+                args[3] = sFriendCardIds[idx] + GetRandom() % 9;
                 TaskCreate(pool, &gTaskDescFriendCard, args);
                 gCardBattleState->friendCardCount++;
             }

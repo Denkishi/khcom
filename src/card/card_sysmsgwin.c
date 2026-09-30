@@ -53,7 +53,7 @@ s32 UpdateSysmsgwinClose(SysMsgWinWork* w);
 u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a);
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a);
 
-const s32 gSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
+static const s32 sSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 
 void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
     vu32 zero = 0;
@@ -95,10 +95,10 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
                                    (TextChar*)w->messageDef->text, &w->nextText);
 #else
     if (w->nextText != 0) {
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, gSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                                        (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     } else {
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, gSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                                        (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     }
 #endif
@@ -216,7 +216,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
             w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
                                            w->nextText, &w->nextText);
 #else
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, gSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                                            w->nextText, &w->nextText);
 #endif
             w->unk_138[1] = w->unk_138[3];
@@ -436,12 +436,12 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
         if (*p != 0) {
             w->unk_138[3] = LayoutCardMsgGlyphsPage(
                 0x2E00,
-                gSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+                sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                 *p, p);
         } else {
             w->unk_138[3] = LayoutCardMsgGlyphsPage(
                 0x2E00,
-                gSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+                sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                 (TextChar*)LANGSTR(w->messageDef->text),
                 p);
         }

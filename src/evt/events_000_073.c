@@ -10,7 +10,7 @@
 #ifdef VERSION_US
 #include "event_000_text.inc"
 
-const MessageScriptEntry gEvent000Script[42] = {
+static const MessageScriptEntry sEvent000Script[42] = {
     { 24, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBD378, 0, 560 },
     { 25, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBD3AC, 0, 600 },
     { 24, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBD404, 0, 620 },
@@ -56,7 +56,7 @@ const MessageScriptEntry gEvent000Script[42] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent000Script[42] = {
+static const MessageScriptEntry sEvent000Script[42] = {
     { 24, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA745C, 0, 560 },
     { 25, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA7440, 0, 600 },
     { 24, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA7400, 0, 620 },
@@ -104,7 +104,7 @@ const MessageScriptEntry gEvent000Script[42] = {
 #include "event_000_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent000Script[42] = {
+static const MessageScriptEntry sEvent000Script[42] = {
     { 24, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F637DC, 0, 560 },
     { 25, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F637F0, 0, 600 },
     { 24, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63804, 0, 620 },
@@ -150,7 +150,7 @@ const MessageScriptEntry gEvent000Script[42] = {
 };
 #endif
 
-const EvSoundCue gEvent000SoundCues[6] = {
+static const EvSoundCue sEvent000SoundCues[6] = {
     { 65535, 0, 0, 0 },
     { 304, 1235, 0, 0 },
     { 30, 1650, 2, 0 },
@@ -159,7 +159,7 @@ const EvSoundCue gEvent000SoundCues[6] = {
     { 30, 3590, 32769, 0 },
 };
 
-const EventCameraKeyframe gEvent000Camera[11] = {
+static const EventCameraKeyframe sEvent000Camera[11] = {
     { -65356, 104448, 108800, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64686, 156672, 83968, 0, 255, { 0, 0, 0 }, 1, 250, { 0, 0 }, 0 },
     { -63936, 165632, 77056, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
@@ -173,7 +173,7 @@ const EventCameraKeyframe gEvent000Camera[11] = {
     { -55217, 204032, 50944, 0, 255, { 0, 0, 0 }, 32769, 20, { 0, 0 }, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track0[98] = {
+static const EventCharaKeyframe sEvent000Track0[98] = {
     { 4, 40, { 0, 0 }, 108288, 109312, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 0, 50, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 4, 80, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -274,7 +274,7 @@ const EventCharaKeyframe gEvent000Track0[98] = {
     { 75, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track1[59] = {
+static const EventCharaKeyframe sEvent000Track1[59] = {
     { 612, 50, { 0, 0 }, 109568, 116992, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 612, 70, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 611, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -336,7 +336,7 @@ const EventCharaKeyframe gEvent000Track1[59] = {
     { 612, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track2[74] = {
+static const EventCharaKeyframe sEvent000Track2[74] = {
     { 647, 50, { 0, 0 }, 96768, 108800, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 651, 70, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 651, 90, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -413,7 +413,7 @@ const EventCharaKeyframe gEvent000Track2[74] = {
     { 647, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track4[12] = {
+static const EventCharaKeyframe sEvent000Track4[12] = {
     { 229, 950, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 951, { 0, 0 }, 173568, 76800, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 234, 980, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -428,7 +428,7 @@ const EventCharaKeyframe gEvent000Track4[12] = {
     { 229, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98309, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track3[17] = {
+static const EventCharaKeyframe sEvent000Track3[17] = {
     { 180, 1600, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 180, 1680, { 0, 0 }, 111616, 109568, 0, 0, { 0, 0 }, 16450, 0, 0 },
     { 186, 1700, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -448,21 +448,21 @@ const EventCharaKeyframe gEvent000Track3[17] = {
     { 193, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track6[4] = {
+static const EventCharaKeyframe sEvent000Track6[4] = {
     { 178, 2820, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 178, 2821, { 0, 0 }, 170240, 77824, 0, 0, { 0, 0 }, 540674, 0, 0 },
     { 178, 2860, { 0, 0 }, 122624, 102400, 0, 178, { 0, 0 }, 524291, 0, 0 },
     { 180, 2891, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track7[4] = {
+static const EventCharaKeyframe sEvent000Track7[4] = {
     { 178, 2830, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 178, 2831, { 0, 0 }, 170240, 77824, 0, 0, { 0, 0 }, 540674, 0, 0 },
     { 178, 2870, { 0, 0 }, 122624, 102400, 0, 178, { 0, 0 }, 524291, 0, 0 },
     { 180, 2901, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent000Track5[9] = {
+static const EventCharaKeyframe sEvent000Track5[9] = {
     { 591, 3308, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 605, 3330, { 0, 0 }, 214784, 46592, 0, 0, { 0, 0 }, 274, 0, 0 },
     { 591, 3338, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
@@ -474,24 +474,24 @@ const EventCharaKeyframe gEvent000Track5[9] = {
     { 591, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaTrack gEvent000Tracks[8] = {
-    { gEvent000Track0, 0, { 0, 0, 0 } },
-    { gEvent000Track1, 53, { 0, 0, 0 } },
-    { gEvent000Track2, 58, { 0, 0, 0 } },
-    { gEvent000Track3, 3, { 0, 0, 0 } },
-    { gEvent000Track4, 8, { 0, 0, 0 } },
-    { gEvent000Track5, 50, { 0, 0, 0 } },
-    { gEvent000Track6, 3, { 0, 0, 0 } },
-    { gEvent000Track7, 3, { 0, 0, 0 } },
+static const EventCharaTrack sEvent000Tracks[8] = {
+    { sEvent000Track0, 0, { 0, 0, 0 } },
+    { sEvent000Track1, 53, { 0, 0, 0 } },
+    { sEvent000Track2, 58, { 0, 0, 0 } },
+    { sEvent000Track3, 3, { 0, 0, 0 } },
+    { sEvent000Track4, 8, { 0, 0, 0 } },
+    { sEvent000Track5, 50, { 0, 0, 0 } },
+    { sEvent000Track6, 3, { 0, 0, 0 } },
+    { sEvent000Track7, 3, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent000 = {
     8,
     { 0, 0, 0 },
-    gEvent000Tracks,
-    gEvent000Camera,
-    gEvent000Script,
-    gEvent000SoundCues,
+    sEvent000Tracks,
+    sEvent000Camera,
+    sEvent000Script,
+    sEvent000SoundCues,
     0,
     3600,
     0,
@@ -513,14 +513,14 @@ const EventSequenceDef gEvent000 = {
 #ifdef VERSION_US
 #include "event_001_text.inc"
 
-const MessageScriptEntry gEvent001Script[3] = {
+static const MessageScriptEntry sEvent001Script[3] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0CDC, 0, 190 },
     { 3, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0CF2, 0, 230 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0D80, 32768, 650 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent001Script[3] = {
+static const MessageScriptEntry sEvent001Script[3] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA9E20, 0, 190 },
     { 3, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA9DC8, 0, 230 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA9DB4, 32768, 650 },
@@ -529,27 +529,27 @@ const MessageScriptEntry gEvent001Script[3] = {
 #include "event_001_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent001Script[3] = {
+static const MessageScriptEntry sEvent001Script[3] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F637A0, 0, 190 },
     { 3, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F637B4, 0, 230 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F637C8, 32768, 650 },
 };
 #endif
 
-const EvSoundCue gEvent001SoundCues[3] = {
+static const EvSoundCue sEvent001SoundCues[3] = {
     { 30, 0, 0, 0 },
     { 30, 718, 1, 0 },
     { 345, 720, 32768, 0 },
 };
 
-const EventCameraKeyframe gEvent001Camera[4] = {
+static const EventCameraKeyframe sEvent001Camera[4] = {
     { -65536, 208896, 46592, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65386, 0, 0, 0, 255, { 0, 0, 0 }, 130, 100, { 0, 0 }, 0 },
     { -64816, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
     { -64766, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 50, { 0, 0 }, 0 },
 };
 
-const EventCharaKeyframe gEvent001Track0[19] = {
+static const EventCharaKeyframe sEvent001Track0[19] = {
     { 4, 150, { 0, 0 }, 216320, 45056, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 3, 155, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 2, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -571,7 +571,7 @@ const EventCharaKeyframe gEvent001Track0[19] = {
     { 4, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent001Track1[7] = {
+static const EventCharaKeyframe sEvent001Track1[7] = {
     { 612, 160, { 0, 0 }, 226816, 47104, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 611, 303, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 622, 313, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -581,7 +581,7 @@ const EventCharaKeyframe gEvent001Track1[7] = {
     { 612, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent001Track2[7] = {
+static const EventCharaKeyframe sEvent001Track2[7] = {
     { 647, 160, { 0, 0 }, 211456, 40704, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 647, 305, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 663, 315, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -591,26 +591,26 @@ const EventCharaKeyframe gEvent001Track2[7] = {
     { 647, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent001Track3[3] = {
+static const EventCharaKeyframe sEvent001Track3[3] = {
     { 180, 270, { 0, 0 }, 197376, 65024, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 180, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, EventCharaFadeOut, 0 },
     { 180, 301, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaTrack gEvent001Tracks[4] = {
-    { gEvent001Track0, 0, { 0, 0, 0 } },
-    { gEvent001Track1, 53, { 0, 0, 0 } },
-    { gEvent001Track2, 58, { 0, 0, 0 } },
-    { gEvent001Track3, 3, { 0, 0, 0 } },
+static const EventCharaTrack sEvent001Tracks[4] = {
+    { sEvent001Track0, 0, { 0, 0, 0 } },
+    { sEvent001Track1, 53, { 0, 0, 0 } },
+    { sEvent001Track2, 58, { 0, 0, 0 } },
+    { sEvent001Track3, 3, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent001 = {
     4,
     { 0, 0, 0 },
-    gEvent001Tracks,
-    gEvent001Camera,
-    gEvent001Script,
-    gEvent001SoundCues,
+    sEvent001Tracks,
+    sEvent001Camera,
+    sEvent001Script,
+    sEvent001SoundCues,
     0,
     840,
     0,
@@ -632,7 +632,7 @@ const EventSequenceDef gEvent001 = {
 #ifdef VERSION_US
 #include "event_002_text.inc"
 
-const MessageScriptEntry gEvent002Script[8] = {
+static const MessageScriptEntry sEvent002Script[8] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC13EC, 0, 250 },
     { 3, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC1452, 0, 370 },
     { 3, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC1490, 0, 372 },
@@ -644,7 +644,7 @@ const MessageScriptEntry gEvent002Script[8] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent002Script[7] = {
+static const MessageScriptEntry sEvent002Script[7] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAA624, 0, 250 },
     { 3, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAA5CC, 0, 370 },
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAA5B8, 0, 400 },
@@ -657,7 +657,7 @@ const MessageScriptEntry gEvent002Script[7] = {
 #include "event_002_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent002Script[8] = {
+static const MessageScriptEntry sEvent002Script[8] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62D3C, 0, 250 },
     { 3, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62D50, 0, 370 },
     { 3, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62D64, 0, 372 },
@@ -669,7 +669,7 @@ const MessageScriptEntry gEvent002Script[8] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent002Camera[9] = {
+static const EventCameraKeyframe sEvent002Camera[9] = {
     { -65536, 40448, 67840, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65455, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
     { -64926, 66048, 56576, 0, 255, { 0, 0, 0 }, 1, 85, { 0, 0 }, 0 },
@@ -681,12 +681,12 @@ const EventCameraKeyframe gEvent002Camera[9] = {
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent002SoundCues[2] = {
+static const EvSoundCue sEvent002SoundCues[2] = {
     { 65535, 0, 0, 0 },
     { 28, 285, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent002Track0[43] = {
+static const EventCharaKeyframe sEvent002Track0[43] = {
     { 4, 1, { 0, 0 }, 17408, 90112, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 150, { 0, 0 }, 66560, 60416, 0, 4, { 0, 0 }, 99, 0, 0 },
     { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -732,7 +732,7 @@ const EventCharaKeyframe gEvent002Track0[43] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent002Track1[19] = {
+static const EventCharaKeyframe sEvent002Track1[19] = {
     { 231, 200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 231, 201, { 0, 0 }, 66816, 58880, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 234, 230, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -754,7 +754,7 @@ const EventCharaKeyframe gEvent002Track1[19] = {
     { 229, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32834, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent002Track2[8] = {
+static const EventCharaKeyframe sEvent002Track2[8] = {
     { 180, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 180, 290, { 0, 0 }, 41472, 74240, 0, 0, { 0, 0 }, 16450, EventCharaFadeIn, 0 },
     { 186, 360, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -765,19 +765,19 @@ const EventCharaKeyframe gEvent002Track2[8] = {
     { 178, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent002Tracks[3] = {
-    { gEvent002Track0, 0, { 0, 0, 0 } },
-    { gEvent002Track1, 8, { 0, 0, 0 } },
-    { gEvent002Track2, 3, { 0, 0, 0 } },
+static const EventCharaTrack sEvent002Tracks[3] = {
+    { sEvent002Track0, 0, { 0, 0, 0 } },
+    { sEvent002Track1, 8, { 0, 0, 0 } },
+    { sEvent002Track2, 3, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent002 = {
     3,
     { 0, 0, 0 },
-    gEvent002Tracks,
-    gEvent002Camera,
-    gEvent002Script,
-    gEvent002SoundCues,
+    sEvent002Tracks,
+    sEvent002Camera,
+    sEvent002Script,
+    sEvent002SoundCues,
     0,
     1200,
     0,
@@ -799,7 +799,7 @@ const EventSequenceDef gEvent002 = {
 #ifdef VERSION_US
 #include "event_003_text.inc"
 
-const MessageScriptEntry gEvent003Script[24] = {
+static const MessageScriptEntry sEvent003Script[24] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC22F8, 0, 90 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC2350, 0, 120 },
     { 1, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC23D6, 0, 122 },
@@ -827,7 +827,7 @@ const MessageScriptEntry gEvent003Script[24] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent003Script[24] = {
+static const MessageScriptEntry sEvent003Script[24] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAB8B0, 0, 90 },
     { 1, 2, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAB868, 0, 120 },
     { 1, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAB838, 0, 122 },
@@ -857,7 +857,7 @@ const MessageScriptEntry gEvent003Script[24] = {
 #include "event_003_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent003Script[24] = {
+static const MessageScriptEntry sEvent003Script[24] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62B5C, 0, 90 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62B70, 0, 120 },
     { 1, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62B84, 0, 122 },
@@ -885,19 +885,19 @@ const MessageScriptEntry gEvent003Script[24] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent003Camera[4] = {
+static const EventCameraKeyframe sEvent003Camera[4] = {
     { -65126, 62976, 58880, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64516, 66048, 57600, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
     { -63975, 75008, 54528, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -60536, 81152, 49664, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent003SoundCues[2] = {
+static const EvSoundCue sEvent003SoundCues[2] = {
     { 28, 0, 0, 0 },
     { 28, 1685, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent003Track0[41] = {
+static const EventCharaKeyframe sEvent003Track0[41] = {
     { 2, 30, { 0, 0 }, 60928, 65792, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 1, 45, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 3, 60, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -941,7 +941,7 @@ const EventCharaKeyframe gEvent003Track0[41] = {
     { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent003Track1[19] = {
+static const EventCharaKeyframe sEvent003Track1[19] = {
     { 114, 30, { 0, 0 }, 61952, 72704, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 114, 115, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 126, 124, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -963,7 +963,7 @@ const EventCharaKeyframe gEvent003Track1[19] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent003Track2[19] = {
+static const EventCharaKeyframe sEvent003Track2[19] = {
     { 144, 30, { 0, 0 }, 48896, 62464, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 144, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 144, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -985,14 +985,14 @@ const EventCharaKeyframe gEvent003Track2[19] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent003Track3[4] = {
+static const EventCharaKeyframe sEvent003Track3[4] = {
     { 231, 30, { 0, 0 }, 52992, 70656, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 1350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 232, 1380, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 231, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent003Track4[5] = {
+static const EventCharaKeyframe sEvent003Track4[5] = {
     { 181, 1115, { 0, 0 }, 82688, 55552, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 178, 1150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 178, 1160, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 4, 0, 0 },
@@ -1000,21 +1000,21 @@ const EventCharaKeyframe gEvent003Track4[5] = {
     { 178, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaTrack gEvent003Tracks[5] = {
-    { gEvent003Track0, 0, { 0, 0, 0 } },
-    { gEvent003Track1, 1, { 0, 0, 0 } },
-    { gEvent003Track2, 2, { 0, 0, 0 } },
-    { gEvent003Track3, 8, { 0, 0, 0 } },
-    { gEvent003Track4, 3, { 0, 0, 0 } },
+static const EventCharaTrack sEvent003Tracks[5] = {
+    { sEvent003Track0, 0, { 0, 0, 0 } },
+    { sEvent003Track1, 1, { 0, 0, 0 } },
+    { sEvent003Track2, 2, { 0, 0, 0 } },
+    { sEvent003Track3, 8, { 0, 0, 0 } },
+    { sEvent003Track4, 3, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent003 = {
     5,
     { 0, 0, 0 },
-    gEvent003Tracks,
-    gEvent003Camera,
-    gEvent003Script,
-    gEvent003SoundCues,
+    sEvent003Tracks,
+    sEvent003Camera,
+    sEvent003Script,
+    sEvent003SoundCues,
     0,
     1690,
     0,
@@ -1036,7 +1036,7 @@ const EventSequenceDef gEvent003 = {
 #ifdef VERSION_US
 #include "event_004_text.inc"
 
-const MessageScriptEntry gEvent004Script[38] = {
+static const MessageScriptEntry sEvent004Script[38] = {
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC3C20, 0, 260 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC3C80, 0, 740 },
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC3CD8, 0, 770 },
@@ -1078,7 +1078,7 @@ const MessageScriptEntry gEvent004Script[38] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent004Script[38] = {
+static const MessageScriptEntry sEvent004Script[38] = {
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FACF80, 0, 260 },
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FACF5C, 0, 740 },
     { 1, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FACF10, 0, 770 },
@@ -1122,7 +1122,7 @@ const MessageScriptEntry gEvent004Script[38] = {
 #include "event_004_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent004Script[38] = {
+static const MessageScriptEntry sEvent004Script[38] = {
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62E2C, 0, 260 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62E40, 0, 740 },
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62E54, 0, 770 },
@@ -1164,7 +1164,7 @@ const MessageScriptEntry gEvent004Script[38] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent004Camera[11] = {
+static const EventCameraKeyframe sEvent004Camera[11] = {
     { -65186, 44544, 81408, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65106, 36352, 78592, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
     { -65086, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
@@ -1178,7 +1178,7 @@ const EventCameraKeyframe gEvent004Camera[11] = {
     { -62536, 56064, 74496, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent004SoundCues[8] = {
+static const EvSoundCue sEvent004SoundCues[8] = {
     { 13, 0, 0, 0 },
     { 337, 262, 0, 0 },
     { 336, 500, 0, 0 },
@@ -1189,7 +1189,7 @@ const EvSoundCue gEvent004SoundCues[8] = {
     { 7, 2950, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track0[37] = {
+static const EventCharaKeyframe sEvent004Track0[37] = {
     { 4, 1, { 0, 0 }, 15616, 103424, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 190, { 0, 0 }, 47360, 86272, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 205, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1229,7 +1229,7 @@ const EventCharaKeyframe gEvent004Track0[37] = {
     { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track1[28] = {
+static const EventCharaKeyframe sEvent004Track1[28] = {
     { 112, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 112, 765, { 0, 0 }, 34816, 75520, 0, 0, { 0, 0 }, 16450, 0, 0 },
     { 125, 772, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1260,7 +1260,7 @@ const EventCharaKeyframe gEvent004Track1[28] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track2[26] = {
+static const EventCharaKeyframe sEvent004Track2[26] = {
     { 144, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 144, 795, { 0, 0 }, 26368, 83456, 0, 0, { 0, 0 }, 16450, 0, 0 },
     { 164, 802, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1289,7 +1289,7 @@ const EventCharaKeyframe gEvent004Track2[26] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track3[27] = {
+static const EventCharaKeyframe sEvent004Track3[27] = {
     { 638, 980, { 0, 0 }, 94464, 65024, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 640, 1080, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
     { 638, 1455, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -1319,7 +1319,7 @@ const EventCharaKeyframe gEvent004Track3[27] = {
     { 638, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track4[12] = {
+static const EventCharaKeyframe sEvent004Track4[12] = {
     { 684, 2149, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 684, 2150, { 0, 0 }, 92160, 59392, 0, 0, { 0, 0 }, 16386, 0, 0 },
     { 686, 2280, { 0, 0 }, 65792, 71936, 0, 684, { 0, 0 }, 3, 0, 0 },
@@ -1334,37 +1334,37 @@ const EventCharaKeyframe gEvent004Track4[12] = {
     { 685, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98373, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track5[4] = {
+static const EventCharaKeyframe sEvent004Track5[4] = {
     { 597, 262, { 0, 0 }, 35072, 48640, 0, 0, { 0, 0 }, 258, 0, 0 },
     { 597, 335, { 0, 0 }, 35072, 71680, 0, 596, { 0, 0 }, 259, 0, 0 },
     { 597, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 261, 0, 0 },
     { 597, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent004Track6[4] = {
+static const EventCharaKeyframe sEvent004Track6[4] = {
     { 597, 265, { 0, 0 }, 26368, 54784, 0, 0, { 0, 0 }, 258, 0, 0 },
     { 597, 340, { 0, 0 }, 26368, 76800, 0, 596, { 0, 0 }, 259, 0, 0 },
     { 597, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 261, 0, 0 },
     { 597, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent004Tracks[7] = {
-    { gEvent004Track0, 0, { 0, 0, 0 } },
-    { gEvent004Track1, 1, { 0, 0, 0 } },
-    { gEvent004Track2, 2, { 0, 0, 0 } },
-    { gEvent004Track3, 57, { 0, 0, 0 } },
-    { gEvent004Track4, 63, { 0, 0, 0 } },
-    { gEvent004Track5, 52, { 0, 0, 0 } },
-    { gEvent004Track6, 52, { 0, 0, 0 } },
+static const EventCharaTrack sEvent004Tracks[7] = {
+    { sEvent004Track0, 0, { 0, 0, 0 } },
+    { sEvent004Track1, 1, { 0, 0, 0 } },
+    { sEvent004Track2, 2, { 0, 0, 0 } },
+    { sEvent004Track3, 57, { 0, 0, 0 } },
+    { sEvent004Track4, 63, { 0, 0, 0 } },
+    { sEvent004Track5, 52, { 0, 0, 0 } },
+    { sEvent004Track6, 52, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent004 = {
     7,
     { 0, 0, 0 },
-    gEvent004Tracks,
-    gEvent004Camera,
-    gEvent004Script,
-    gEvent004SoundCues,
+    sEvent004Tracks,
+    sEvent004Camera,
+    sEvent004Script,
+    sEvent004SoundCues,
     0,
     3300,
     0,
@@ -1386,7 +1386,7 @@ const EventSequenceDef gEvent004 = {
 #ifdef VERSION_US
 #include "event_005_text.inc"
 
-const MessageScriptEntry gEvent005Script[4] = {
+static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC63D0, 0, 100 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC641E, 0, 130 },
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC64B2, 0, 160 },
@@ -1394,7 +1394,7 @@ const MessageScriptEntry gEvent005Script[4] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent005Script[4] = {
+static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAE60C, 0, 100 },
     { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAE5DC, 0, 130 },
     { 31, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAE5C4, 0, 160 },
@@ -1404,7 +1404,7 @@ const MessageScriptEntry gEvent005Script[4] = {
 #include "event_005_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent005Script[4] = {
+static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62DDC, 0, 100 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62DF0, 0, 130 },
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62E04, 0, 160 },
@@ -1412,18 +1412,18 @@ const MessageScriptEntry gEvent005Script[4] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent005Camera[2] = {
+static const EventCameraKeyframe sEvent005Camera[2] = {
     { -65156, 57856, 76288, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -62536, 73984, 64256, 0, 255, { 0, 0, 0 }, 32769, 110, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent005SoundCues[3] = {
+static const EvSoundCue sEvent005SoundCues[3] = {
     { 5, 0, 0, 0 },
     { 334, 203, 0, 0 },
     { 5, 520, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent005Track0[8] = {
+static const EventCharaKeyframe sEvent005Track0[8] = {
     { 4, 125, { 0, 0 }, 51200, 83456, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 36, 140, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 203, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1434,17 +1434,17 @@ const EventCharaKeyframe gEvent005Track0[8] = {
     { 9, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent005Track1[2] = {
+static const EventCharaKeyframe sEvent005Track1[2] = {
     { 114, 382, { 0, 0 }, 40192, 82688, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent005Track2[2] = {
+static const EventCharaKeyframe sEvent005Track2[2] = {
     { 146, 380, { 0, 0 }, 44800, 91904, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent005Track3[6] = {
+static const EventCharaKeyframe sEvent005Track3[6] = {
     { 642, 170, { 0, 0 }, 71936, 76032, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 638, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 646, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -1453,7 +1453,7 @@ const EventCharaKeyframe gEvent005Track3[6] = {
     { 641, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent005Track4[7] = {
+static const EventCharaKeyframe sEvent005Track4[7] = {
     { 593, 202, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 593, 203, { 0, 0 }, 62976, 69120, 0, 0, { 0, 0 }, 16642, 0, 0 },
     { 593, 210, { 0, 0 }, 56064, 73728, 0, 593, { 0, 0 }, 275, 0, 0 },
@@ -1463,21 +1463,21 @@ const EventCharaKeyframe gEvent005Track4[7] = {
     { 593, 465, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaTrack gEvent005Tracks[5] = {
-    { gEvent005Track0, 0, { 0, 0, 0 } },
-    { gEvent005Track1, 1, { 0, 0, 0 } },
-    { gEvent005Track2, 2, { 0, 0, 0 } },
-    { gEvent005Track3, 57, { 0, 0, 0 } },
-    { gEvent005Track4, 51, { 0, 0, 0 } },
+static const EventCharaTrack sEvent005Tracks[5] = {
+    { sEvent005Track0, 0, { 0, 0, 0 } },
+    { sEvent005Track1, 1, { 0, 0, 0 } },
+    { sEvent005Track2, 2, { 0, 0, 0 } },
+    { sEvent005Track3, 57, { 0, 0, 0 } },
+    { sEvent005Track4, 51, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent005 = {
     5,
     { 0, 0, 0 },
-    gEvent005Tracks,
-    gEvent005Camera,
-    gEvent005Script,
-    gEvent005SoundCues,
+    sEvent005Tracks,
+    sEvent005Camera,
+    sEvent005Script,
+    sEvent005SoundCues,
     0,
     530,
     0,
@@ -1499,7 +1499,7 @@ const EventSequenceDef gEvent005 = {
 #ifdef VERSION_US
 #include "event_006_text.inc"
 
-const MessageScriptEntry gEvent006Script[29] = {
+static const MessageScriptEntry sEvent006Script[29] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC6A08, 0, 470 },
     { 32, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC6A66, 0, 660 },
     { 32, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC6B3C, 0, 662 },
@@ -1532,7 +1532,7 @@ const MessageScriptEntry gEvent006Script[29] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent006Script[30] = {
+static const MessageScriptEntry sEvent006Script[30] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAF2F4, 0, 470 },
     { 32, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAF2B0, 0, 660 },
     { 32, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAF274, 0, 662 },
@@ -1568,7 +1568,7 @@ const MessageScriptEntry gEvent006Script[30] = {
 #include "event_006_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent006Script[29] = {
+static const MessageScriptEntry sEvent006Script[29] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63124, 0, 470 },
     { 32, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63138, 0, 660 },
     { 32, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6314C, 0, 662 },
@@ -1601,18 +1601,18 @@ const MessageScriptEntry gEvent006Script[29] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent006Camera[2] = {
+static const EventCameraKeyframe sEvent006Camera[2] = {
     { -65535, 80128, 49920, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -63536, 80128, 58112, 0, 255, { 0, 0, 0 }, 32769, 100, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent006SoundCues[3] = {
+static const EvSoundCue sEvent006SoundCues[3] = {
     { 65535, 0, 0, 0 },
     { 5, 655, 2, 0 },
     { 5, 2295, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track0[23] = {
+static const EventCharaKeyframe sEvent006Track0[23] = {
     { 4, 30, { 0, 0 }, 30720, 86016, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 200, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1638,7 +1638,7 @@ const EventCharaKeyframe gEvent006Track0[23] = {
     { 36, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track1[12] = {
+static const EventCharaKeyframe sEvent006Track1[12] = {
     { 114, 40, { 0, 0 }, 22016, 85248, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 198, { 0, 0 }, 57600, 67584, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 910, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1653,7 +1653,7 @@ const EventCharaKeyframe gEvent006Track1[12] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track2[9] = {
+static const EventCharaKeyframe sEvent006Track2[9] = {
     { 146, 30, { 0, 0 }, 28672, 91648, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 180, { 0, 0 }, 66560, 73216, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 1155, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1665,7 +1665,7 @@ const EventCharaKeyframe gEvent006Track2[9] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track3[13] = {
+static const EventCharaKeyframe sEvent006Track3[13] = {
     { 639, 1, { 0, 0 }, 44288, 86016, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 641, 225, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 639, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1681,7 +1681,7 @@ const EventCharaKeyframe gEvent006Track3[13] = {
     { 642, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track4[9] = {
+static const EventCharaKeyframe sEvent006Track4[9] = {
     { 684, 60, { 0, 0 }, 73728, 60672, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 684, 90, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 685, 105, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -1693,7 +1693,7 @@ const EventCharaKeyframe gEvent006Track4[9] = {
     { 684, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent006Track5[14] = {
+static const EventCharaKeyframe sEvent006Track5[14] = {
     { 452, 80, { 0, 0 }, 81152, 60928, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 451, 130, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 451, 500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -1710,22 +1710,22 @@ const EventCharaKeyframe gEvent006Track5[14] = {
     { 451, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent006Tracks[6] = {
-    { gEvent006Track0, 0, { 0, 0, 0 } },
-    { gEvent006Track1, 1, { 0, 0, 0 } },
-    { gEvent006Track2, 2, { 0, 0, 0 } },
-    { gEvent006Track3, 57, { 0, 0, 0 } },
-    { gEvent006Track4, 63, { 0, 0, 0 } },
-    { gEvent006Track5, 36, { 0, 0, 0 } },
+static const EventCharaTrack sEvent006Tracks[6] = {
+    { sEvent006Track0, 0, { 0, 0, 0 } },
+    { sEvent006Track1, 1, { 0, 0, 0 } },
+    { sEvent006Track2, 2, { 0, 0, 0 } },
+    { sEvent006Track3, 57, { 0, 0, 0 } },
+    { sEvent006Track4, 63, { 0, 0, 0 } },
+    { sEvent006Track5, 36, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent006 = {
     6,
     { 0, 0, 0 },
-    gEvent006Tracks,
-    gEvent006Camera,
-    gEvent006Script,
-    gEvent006SoundCues,
+    sEvent006Tracks,
+    sEvent006Camera,
+    sEvent006Script,
+    sEvent006SoundCues,
     0,
     2300,
     0,
@@ -1747,7 +1747,7 @@ const EventSequenceDef gEvent006 = {
 #ifdef VERSION_US
 #include "event_007_text.inc"
 
-const MessageScriptEntry gEvent007Script[16] = {
+static const MessageScriptEntry sEvent007Script[16] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC8768, 0, 290 },
     { 33, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC87A8, 0, 400 },
     { 33, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC87FC, 0, 402 },
@@ -1767,7 +1767,7 @@ const MessageScriptEntry gEvent007Script[16] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent007Script[16] = {
+static const MessageScriptEntry sEvent007Script[16] = {
     { 33, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB0360, 0, 290 },
     { 33, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB0328, 0, 400 },
     { 33, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB02D8, 0, 402 },
@@ -1789,7 +1789,7 @@ const MessageScriptEntry gEvent007Script[16] = {
 #include "event_007_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent007Script[16] = {
+static const MessageScriptEntry sEvent007Script[16] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63660, 0, 290 },
     { 33, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63674, 0, 400 },
     { 33, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63688, 0, 402 },
@@ -1809,7 +1809,7 @@ const MessageScriptEntry gEvent007Script[16] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent007Camera[9] = {
+static const EventCameraKeyframe sEvent007Camera[9] = {
     { -64986, 66304, 66560, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64756, 92416, 24576, 0, 255, { 0, 0, 0 }, 1, 180, { 0, 0 }, 0 },
     { -64506, 66304, 66560, 0, 255, { 0, 0, 0 }, 1, 180, { 0, 0 }, 0 },
@@ -1821,7 +1821,7 @@ const EventCameraKeyframe gEvent007Camera[9] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent007SoundCues[8] = {
+static const EvSoundCue sEvent007SoundCues[8] = {
     { 13, 0, 0, 0 },
     { 13, 1151, 1, 0 },
     { 338, 1190, 0, 0 },
@@ -1832,7 +1832,7 @@ const EvSoundCue gEvent007SoundCues[8] = {
     { 338, 1428, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent007Track0[16] = {
+static const EventCharaKeyframe sEvent007Track0[16] = {
     { 4, 1, { 0, 0 }, 36864, 84224, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 115, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 425, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1851,7 +1851,7 @@ const EventCharaKeyframe gEvent007Track0[16] = {
     { 29, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent007Track1[9] = {
+static const EventCharaKeyframe sEvent007Track1[9] = {
     { 114, 20, { 0, 0 }, 32000, 92416, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 135, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 1145, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1863,7 +1863,7 @@ const EventCharaKeyframe gEvent007Track1[9] = {
     { 134, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent007Track2[10] = {
+static const EventCharaKeyframe sEvent007Track2[10] = {
     { 146, 15, { 0, 0 }, 28160, 84736, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 1060, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1876,7 +1876,7 @@ const EventCharaKeyframe gEvent007Track2[10] = {
     { 162, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent007Track3[16] = {
+static const EventCharaKeyframe sEvent007Track3[16] = {
     { 624, 160, { 0, 0 }, 79104, 68096, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 624, 175, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 623, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -1895,20 +1895,20 @@ const EventCharaKeyframe gEvent007Track3[16] = {
     { 623, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98309, 0, 0 },
 };
 
-const EventCharaTrack gEvent007Tracks[4] = {
-    { gEvent007Track0, 0, { 0, 0, 0 } },
-    { gEvent007Track1, 1, { 0, 0, 0 } },
-    { gEvent007Track2, 2, { 0, 0, 0 } },
-    { gEvent007Track3, 54, { 0, 0, 0 } },
+static const EventCharaTrack sEvent007Tracks[4] = {
+    { sEvent007Track0, 0, { 0, 0, 0 } },
+    { sEvent007Track1, 1, { 0, 0, 0 } },
+    { sEvent007Track2, 2, { 0, 0, 0 } },
+    { sEvent007Track3, 54, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent007 = {
     4,
     { 0, 0, 0 },
-    gEvent007Tracks,
-    gEvent007Camera,
-    gEvent007Script,
-    gEvent007SoundCues,
+    sEvent007Tracks,
+    sEvent007Camera,
+    sEvent007Script,
+    sEvent007SoundCues,
     0,
     1500,
     0,
@@ -1928,22 +1928,22 @@ const EventSequenceDef gEvent007 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent008Script[1] = {
+static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC8768, 32768, 9999 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent008Script[1] = {
+static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB0360, 32768, 9999 },
 };
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent008Script[1] = {
+static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63660, 32768, 9999 },
 };
 #endif
 
-const EventCameraKeyframe gEvent008Camera[9] = {
+static const EventCameraKeyframe sEvent008Camera[9] = {
     { -65436, 69120, 94720, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65366, 0, 0, 0, 255, { 0, 0, 0 }, 8194, 0, { 0, 0 }, 0 },
     { -65311, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
@@ -1955,7 +1955,7 @@ const EventCameraKeyframe gEvent008Camera[9] = {
     { -63536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent008SoundCues[7] = {
+static const EvSoundCue sEvent008SoundCues[7] = {
     { 4, 0, 0, 0 },
     { 389, 220, 0, 0 },
     { 339, 225, 0, 0 },
@@ -1965,7 +1965,7 @@ const EvSoundCue gEvent008SoundCues[7] = {
     { 339, 355, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent008Track0[5] = {
+static const EventCharaKeyframe sEvent008Track0[5] = {
     { 3, 100, { 0, 0 }, 48640, 110080, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 105, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
     { 105, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -1973,22 +1973,22 @@ const EventCharaKeyframe gEvent008Track0[5] = {
     { 18, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent008Track1[1] = {
+static const EventCharaKeyframe sEvent008Track1[1] = {
     { 945, 1, { 0, 0 }, 36864, 104704, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaTrack gEvent008Tracks[2] = {
-    { gEvent008Track0, 0, { 0, 0, 0 } },
-    { gEvent008Track1, 104, { 0, 0, 0 } },
+static const EventCharaTrack sEvent008Tracks[2] = {
+    { sEvent008Track0, 0, { 0, 0, 0 } },
+    { sEvent008Track1, 104, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent008 = {
     2,
     { 0, 0, 0 },
-    gEvent008Tracks,
-    gEvent008Camera,
-    gEvent008Script,
-    gEvent008SoundCues,
+    sEvent008Tracks,
+    sEvent008Camera,
+    sEvent008Script,
+    sEvent008SoundCues,
     0,
     500,
     0,
@@ -2010,7 +2010,7 @@ const EventSequenceDef gEvent008 = {
 #ifdef VERSION_US
 #include "event_009_text.inc"
 
-const MessageScriptEntry gEvent009Script[38] = {
+static const MessageScriptEntry sEvent009Script[38] = {
     { 37, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC9A48, 0, 80 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC9A80, 0, 130 },
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC9ADC, 0, 132 },
@@ -2052,7 +2052,7 @@ const MessageScriptEntry gEvent009Script[38] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent009Script[38] = {
+static const MessageScriptEntry sEvent009Script[38] = {
     { 37, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB188C, 0, 80 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB1864, 0, 130 },
     { 0, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB1830, 0, 132 },
@@ -2096,7 +2096,7 @@ const MessageScriptEntry gEvent009Script[38] = {
 #include "event_009_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent009Script[38] = {
+static const MessageScriptEntry sEvent009Script[38] = {
     { 37, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63368, 0, 80 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6337C, 0, 130 },
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63390, 0, 132 },
@@ -2138,7 +2138,7 @@ const MessageScriptEntry gEvent009Script[38] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent009Camera[5] = {
+static const EventCameraKeyframe sEvent009Camera[5] = {
     { -64766, 57600, 67840, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -63686, 61952, 67840, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -63536, 93440, 58880, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
@@ -2146,14 +2146,14 @@ const EventCameraKeyframe gEvent009Camera[5] = {
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent009SoundCues[4] = {
+static const EvSoundCue sEvent009SoundCues[4] = {
     { 13, 0, 0, 0 },
     { 13, 580, 1, 0 },
     { 27, 1265, 2, 0 },
     { 27, 1855, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track0[64] = {
+static const EventCharaKeyframe sEvent009Track0[64] = {
     { 2, 100, { 0, 0 }, 67072, 74752, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 15, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 2, 215, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -2220,7 +2220,7 @@ const EventCharaKeyframe gEvent009Track0[64] = {
     { 2, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track1[16] = {
+static const EventCharaKeyframe sEvent009Track1[16] = {
     { 112, 630, { 0, 0 }, 78592, 76800, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 111, 635, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 112, 640, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2239,7 +2239,7 @@ const EventCharaKeyframe gEvent009Track1[16] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track2[14] = {
+static const EventCharaKeyframe sEvent009Track2[14] = {
     { 144, 640, { 0, 0 }, 74496, 70144, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 143, 645, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 144, 650, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2256,7 +2256,7 @@ const EventCharaKeyframe gEvent009Track2[14] = {
     { 144, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track3[10] = {
+static const EventCharaKeyframe sEvent009Track3[10] = {
     { 451, 505, { 0, 0 }, 54272, 73472, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 451, 520, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 453, 700, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
@@ -2269,7 +2269,7 @@ const EventCharaKeyframe gEvent009Track3[10] = {
     { 451, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track4[7] = {
+static const EventCharaKeyframe sEvent009Track4[7] = {
     { 638, 185, { 0, 0 }, 47360, 78848, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 643, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 645, 360, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2279,7 +2279,7 @@ const EventCharaKeyframe gEvent009Track4[7] = {
     { 638, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track5[5] = {
+static const EventCharaKeyframe sEvent009Track5[5] = {
     { 684, 30, { 0, 0 }, 43264, 70400, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 684, 495, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 684, 515, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -2287,7 +2287,7 @@ const EventCharaKeyframe gEvent009Track5[5] = {
     { 684, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent009Track6[8] = {
+static const EventCharaKeyframe sEvent009Track6[8] = {
     { 623, 155, { 0, 0 }, 37632, 74240, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 626, 162, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 623, 345, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2298,23 +2298,23 @@ const EventCharaKeyframe gEvent009Track6[8] = {
     { 623, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent009Tracks[7] = {
-    { gEvent009Track0, 0, { 0, 0, 0 } },
-    { gEvent009Track1, 1, { 0, 0, 0 } },
-    { gEvent009Track2, 2, { 0, 0, 0 } },
-    { gEvent009Track3, 36, { 0, 0, 0 } },
-    { gEvent009Track4, 57, { 0, 0, 0 } },
-    { gEvent009Track5, 63, { 0, 0, 0 } },
-    { gEvent009Track6, 54, { 0, 0, 0 } },
+static const EventCharaTrack sEvent009Tracks[7] = {
+    { sEvent009Track0, 0, { 0, 0, 0 } },
+    { sEvent009Track1, 1, { 0, 0, 0 } },
+    { sEvent009Track2, 2, { 0, 0, 0 } },
+    { sEvent009Track3, 36, { 0, 0, 0 } },
+    { sEvent009Track4, 57, { 0, 0, 0 } },
+    { sEvent009Track5, 63, { 0, 0, 0 } },
+    { sEvent009Track6, 54, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent009 = {
     7,
     { 0, 0, 0 },
-    gEvent009Tracks,
-    gEvent009Camera,
-    gEvent009Script,
-    gEvent009SoundCues,
+    sEvent009Tracks,
+    sEvent009Camera,
+    sEvent009Script,
+    sEvent009SoundCues,
     0,
     3010,
     0,
@@ -2336,7 +2336,7 @@ const EventSequenceDef gEvent009 = {
 #ifdef VERSION_US
 #include "event_010_text.inc"
 
-const MessageScriptEntry gEvent010Script[14] = {
+static const MessageScriptEntry sEvent010Script[14] = {
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCBDC0, 0, 230 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCBE22, 0, 260 },
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCBED8, 0, 290 },
@@ -2354,7 +2354,7 @@ const MessageScriptEntry gEvent010Script[14] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent010Script[14] = {
+static const MessageScriptEntry sEvent010Script[14] = {
     { 3, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB2E5C, 0, 230 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB2E0C, 0, 260 },
     { 3, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB2DEC, 0, 290 },
@@ -2374,7 +2374,7 @@ const MessageScriptEntry gEvent010Script[14] = {
 #include "event_010_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent010Script[14] = {
+static const MessageScriptEntry sEvent010Script[14] = {
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63D2C, 0, 230 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63D40, 0, 260 },
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63D54, 0, 290 },
@@ -2392,7 +2392,7 @@ const MessageScriptEntry gEvent010Script[14] = {
 };
 #endif
 
-const EvSoundCue gEvent010SoundCues[7] = {
+static const EvSoundCue sEvent010SoundCues[7] = {
     { 30, 0, 0, 0 },
     { 331, 560, 0, 0 },
     { 18, 580, 0, 0 },
@@ -2402,7 +2402,7 @@ const EvSoundCue gEvent010SoundCues[7] = {
     { 4, 1340, 32768, 0 },
 };
 
-const EventCameraKeyframe gEvent010Camera[7] = {
+static const EventCameraKeyframe sEvent010Camera[7] = {
     { -65016, 183808, 65536, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64546, 183296, 61184, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -64236, 179456, 65792, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
@@ -2412,7 +2412,7 @@ const EventCameraKeyframe gEvent010Camera[7] = {
     { -63796, 0, 0, 0, 255, { 0, 0, 0 }, 32834, 30, { 0, 0 }, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track0[17] = {
+static const EventCharaKeyframe sEvent010Track0[17] = {
     { 4, 1, { 0, 0 }, 149504, 87552, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 130, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2432,7 +2432,7 @@ const EventCharaKeyframe gEvent010Track0[17] = {
     { 19, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track1[14] = {
+static const EventCharaKeyframe sEvent010Track1[14] = {
     { 114, 1, { 0, 0 }, 146688, 94976, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 140, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2449,7 +2449,7 @@ const EventCharaKeyframe gEvent010Track1[14] = {
     { 123, 1999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track2[14] = {
+static const EventCharaKeyframe sEvent010Track2[14] = {
     { 146, 1, { 0, 0 }, 136704, 90624, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2466,7 +2466,7 @@ const EventCharaKeyframe gEvent010Track2[14] = {
     { 158, 1999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track3[15] = {
+static const EventCharaKeyframe sEvent010Track3[15] = {
     { 485, 550, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 485, 845, { 0, 0 }, 171776, 60160, 0, 0, { 0, 0 }, 16450, EventCharaFadeIn, 0 },
     { 487, 850, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2484,13 +2484,13 @@ const EventCharaKeyframe gEvent010Track3[15] = {
     { 493, 1999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track4[3] = {
+static const EventCharaKeyframe sEvent010Track4[3] = {
     { 485, 1296, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 512, 1309, { 0, 0 }, 192768, 67584, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 485, 1999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track5[15] = {
+static const EventCharaKeyframe sEvent010Track5[15] = {
     { 181, 100, { 0, 0 }, 221440, 54016, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 184, 180, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
     { 181, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -2508,7 +2508,7 @@ const EventCharaKeyframe gEvent010Track5[15] = {
     { 178, 1820, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent010Track6[6] = {
+static const EventCharaKeyframe sEvent010Track6[6] = {
     { 591, 837, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 605, 841, { 0, 0 }, 198144, 65792, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 591, 846, { 0, 0 }, 186880, 51968, 0, 0, { 0, 0 }, 274, 0, 0 },
@@ -2517,23 +2517,23 @@ const EventCharaKeyframe gEvent010Track6[6] = {
     { 591, 1999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent010Tracks[7] = {
-    { gEvent010Track0, 0, { 0, 0, 0 } },
-    { gEvent010Track1, 1, { 0, 0, 0 } },
-    { gEvent010Track2, 2, { 0, 0, 0 } },
-    { gEvent010Track3, 43, { 0, 0, 0 } },
-    { gEvent010Track4, 43, { 0, 0, 0 } },
-    { gEvent010Track5, 3, { 0, 0, 0 } },
-    { gEvent010Track6, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent010Tracks[7] = {
+    { sEvent010Track0, 0, { 0, 0, 0 } },
+    { sEvent010Track1, 1, { 0, 0, 0 } },
+    { sEvent010Track2, 2, { 0, 0, 0 } },
+    { sEvent010Track3, 43, { 0, 0, 0 } },
+    { sEvent010Track4, 43, { 0, 0, 0 } },
+    { sEvent010Track5, 3, { 0, 0, 0 } },
+    { sEvent010Track6, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent010 = {
     7,
     { 0, 0, 0 },
-    gEvent010Tracks,
-    gEvent010Camera,
-    gEvent010Script,
-    gEvent010SoundCues,
+    sEvent010Tracks,
+    sEvent010Camera,
+    sEvent010Script,
+    sEvent010SoundCues,
     0,
     1560,
     0,
@@ -2555,7 +2555,7 @@ const EventSequenceDef gEvent010 = {
 #ifdef VERSION_US
 #include "event_011_text.inc"
 
-const MessageScriptEntry gEvent011Script[27] = {
+static const MessageScriptEntry sEvent011Script[27] = {
     { 62, 0, 3, 1, { 0, 0, 0 }, (u32)gCardMessageTextUs_09041CD6, 0, 2 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCD028, 0, 100 },
     { 6, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCD040, 0, 130 },
@@ -2586,7 +2586,7 @@ const MessageScriptEntry gEvent011Script[27] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent011Script[27] = {
+static const MessageScriptEntry sEvent011Script[27] = {
     { 62, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB42A8, 0, 2 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB4294, 0, 100 },
     { 6, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB424C, 0, 130 },
@@ -2619,7 +2619,7 @@ const MessageScriptEntry gEvent011Script[27] = {
 #include "event_011_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent011Script[27] = {
+static const MessageScriptEntry sEvent011Script[27] = {
     { 62, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66720, 0, 2 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63B24, 0, 100 },
     { 6, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63B38, 0, 130 },
@@ -2650,14 +2650,14 @@ const MessageScriptEntry gEvent011Script[27] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent011Camera[4] = {
+static const EventCameraKeyframe sEvent011Camera[4] = {
     { -65335, 194816, 61952, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64746, 204544, 55808, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -64298, 198912, 61184, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -60536, 204544, 55808, 0, 255, { 0, 0, 0 }, 32769, 20, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent011SoundCues[7] = {
+static const EvSoundCue sEvent011SoundCues[7] = {
     { 30, 0, 0, 0 },
     { 106, 1, 0, 0 },
     { 30, 201, 1, 0 },
@@ -2667,7 +2667,7 @@ const EvSoundCue gEvent011SoundCues[7] = {
     { 18, 1625, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track0[26] = {
+static const EventCharaKeyframe sEvent011Track0[26] = {
     { 87, 205, { 0, 0 }, 199936, 63232, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 2, 220, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 1, 225, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -2696,7 +2696,7 @@ const EventCharaKeyframe gEvent011Track0[26] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track1[22] = {
+static const EventCharaKeyframe sEvent011Track1[22] = {
     { 110, 220, { 0, 0 }, 199680, 72448, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 114, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 133, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -2721,7 +2721,7 @@ const EventCharaKeyframe gEvent011Track1[22] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track2[23] = {
+static const EventCharaKeyframe sEvent011Track2[23] = {
     { 144, 95, { 0, 0 }, 188672, 63232, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 164, 102, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 144, 215, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2747,7 +2747,7 @@ const EventCharaKeyframe gEvent011Track2[23] = {
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track3[5] = {
+static const EventCharaKeyframe sEvent011Track3[5] = {
     { 231, 210, { 0, 0 }, 189440, 69888, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 232, 220, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 234, 250, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -2755,7 +2755,7 @@ const EventCharaKeyframe gEvent011Track3[5] = {
     { 231, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track4[8] = {
+static const EventCharaKeyframe sEvent011Track4[8] = {
     { 485, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 485, 765, { 0, 0 }, 219648, 55808, 0, 0, { 0, 0 }, 2, EventCharaFadeIn, 0 },
     { 499, 780, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -2766,27 +2766,27 @@ const EventCharaKeyframe gEvent011Track4[8] = {
     { 485, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent011Track5[2] = {
+static const EventCharaKeyframe sEvent011Track5[2] = {
     { 598, 205, { 0, 0 }, 199936, 63232, 0, 0, { 0, 0 }, 274, 0, 0 },
     { 591, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent011Tracks[6] = {
-    { gEvent011Track0, 0, { 0, 0, 0 } },
-    { gEvent011Track1, 1, { 0, 0, 0 } },
-    { gEvent011Track2, 2, { 0, 0, 0 } },
-    { gEvent011Track3, 8, { 0, 0, 0 } },
-    { gEvent011Track4, 43, { 0, 0, 0 } },
-    { gEvent011Track5, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent011Tracks[6] = {
+    { sEvent011Track0, 0, { 0, 0, 0 } },
+    { sEvent011Track1, 1, { 0, 0, 0 } },
+    { sEvent011Track2, 2, { 0, 0, 0 } },
+    { sEvent011Track3, 8, { 0, 0, 0 } },
+    { sEvent011Track4, 43, { 0, 0, 0 } },
+    { sEvent011Track5, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent011 = {
     6,
     { 0, 0, 0 },
-    gEvent011Tracks,
-    gEvent011Camera,
-    gEvent011Script,
-    gEvent011SoundCues,
+    sEvent011Tracks,
+    sEvent011Camera,
+    sEvent011Script,
+    sEvent011SoundCues,
     0,
     1630,
     0,
@@ -2808,7 +2808,7 @@ const EventSequenceDef gEvent011 = {
 #ifdef VERSION_US
 #include "event_012_text.inc"
 
-const MessageScriptEntry gEvent012Script[18] = {
+static const MessageScriptEntry sEvent012Script[18] = {
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCE81C, 0, 290 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCE826, 0, 320 },
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCE858, 0, 400 },
@@ -2830,7 +2830,7 @@ const MessageScriptEntry gEvent012Script[18] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent012Script[18] = {
+static const MessageScriptEntry sEvent012Script[18] = {
     { 6, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB54B0, 0, 290 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB5498, 0, 320 },
     { 6, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB5450, 0, 400 },
@@ -2854,7 +2854,7 @@ const MessageScriptEntry gEvent012Script[18] = {
 #include "event_012_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent012Script[18] = {
+static const MessageScriptEntry sEvent012Script[18] = {
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64434, 0, 290 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64448, 0, 320 },
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6445C, 0, 400 },
@@ -2876,15 +2876,15 @@ const MessageScriptEntry gEvent012Script[18] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent012Camera[1] = {
+static const EventCameraKeyframe sEvent012Camera[1] = {
     { -65485, 189696, 62208, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent012SoundCues[1] = {
+static const EvSoundCue sEvent012SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent012Track0[13] = {
+static const EventCharaKeyframe sEvent012Track0[13] = {
     { 4, 1, { 0, 0 }, 164352, 80640, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 121, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 435, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2900,7 +2900,7 @@ const EventCharaKeyframe gEvent012Track0[13] = {
     { 2, 5050, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent012Track1[13] = {
+static const EventCharaKeyframe sEvent012Track1[13] = {
     { 114, 5, { 0, 0 }, 160256, 87040, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 126, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 540, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2916,7 +2916,7 @@ const EventCharaKeyframe gEvent012Track1[13] = {
     { 114, 5050, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent012Track2[19] = {
+static const EventCharaKeyframe sEvent012Track2[19] = {
     { 146, 7, { 0, 0 }, 149248, 83712, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 128, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 495, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -2938,7 +2938,7 @@ const EventCharaKeyframe gEvent012Track2[19] = {
     { 144, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent012Track3[8] = {
+static const EventCharaKeyframe sEvent012Track3[8] = {
     { 231, 121, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 122, { 0, 0 }, 192000, 66816, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 150, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -2949,20 +2949,20 @@ const EventCharaKeyframe gEvent012Track3[8] = {
     { 229, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent012Tracks[4] = {
-    { gEvent012Track0, 0, { 0, 0, 0 } },
-    { gEvent012Track1, 1, { 0, 0, 0 } },
-    { gEvent012Track2, 2, { 0, 0, 0 } },
-    { gEvent012Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent012Tracks[4] = {
+    { sEvent012Track0, 0, { 0, 0, 0 } },
+    { sEvent012Track1, 1, { 0, 0, 0 } },
+    { sEvent012Track2, 2, { 0, 0, 0 } },
+    { sEvent012Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent012 = {
     4,
     { 0, 0, 0 },
-    gEvent012Tracks,
-    gEvent012Camera,
-    gEvent012Script,
-    gEvent012SoundCues,
+    sEvent012Tracks,
+    sEvent012Camera,
+    sEvent012Script,
+    sEvent012SoundCues,
     0,
     1510,
     1,
@@ -2984,7 +2984,7 @@ const EventSequenceDef gEvent012 = {
 #ifdef VERSION_US
 #include "event_013_text.inc"
 
-const MessageScriptEntry gEvent013Script[17] = {
+static const MessageScriptEntry sEvent013Script[17] = {
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCF724, 0, 395 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCF74A, 0, 495 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCF7D4, 0, 705 },
@@ -3005,7 +3005,7 @@ const MessageScriptEntry gEvent013Script[17] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent013Script[17] = {
+static const MessageScriptEntry sEvent013Script[17] = {
     { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85940, 0, 395 },
     { 2, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB6174, 0, 495 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB6124, 0, 705 },
@@ -3028,7 +3028,7 @@ const MessageScriptEntry gEvent013Script[17] = {
 #include "event_013_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent013Script[17] = {
+static const MessageScriptEntry sEvent013Script[17] = {
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F642E0, 0, 395 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F642F4, 0, 495 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64308, 0, 705 },
@@ -3049,16 +3049,16 @@ const MessageScriptEntry gEvent013Script[17] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent013Camera[1] = {
+static const EventCameraKeyframe sEvent013Camera[1] = {
     { -65485, 197632, 58368, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent013SoundCues[2] = {
+static const EvSoundCue sEvent013SoundCues[2] = {
     { 30, 0, 0, 0 },
     { 340, 1730, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent013Track0[20] = {
+static const EventCharaKeyframe sEvent013Track0[20] = {
     { 4, 1, { 0, 0 }, 170496, 76800, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 171, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3081,7 +3081,7 @@ const EventCharaKeyframe gEvent013Track0[20] = {
     { 32, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent013Track1[27] = {
+static const EventCharaKeyframe sEvent013Track1[27] = {
     { 114, 51, { 0, 0 }, 158720, 89856, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 231, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3111,7 +3111,7 @@ const EventCharaKeyframe gEvent013Track1[27] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent013Track2[14] = {
+static const EventCharaKeyframe sEvent013Track2[14] = {
     { 146, 1, { 0, 0 }, 156672, 77056, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 131, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3128,7 +3128,7 @@ const EventCharaKeyframe gEvent013Track2[14] = {
     { 144, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent013Track3[9] = {
+static const EventCharaKeyframe sEvent013Track3[9] = {
     { 229, 1320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 229, 1321, { 0, 0 }, 199168, 62976, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 233, 1350, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -3140,20 +3140,20 @@ const EventCharaKeyframe gEvent013Track3[9] = {
     { 229, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent013Tracks[4] = {
-    { gEvent013Track0, 0, { 0, 0, 0 } },
-    { gEvent013Track1, 1, { 0, 0, 0 } },
-    { gEvent013Track2, 2, { 0, 0, 0 } },
-    { gEvent013Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent013Tracks[4] = {
+    { sEvent013Track0, 0, { 0, 0, 0 } },
+    { sEvent013Track1, 1, { 0, 0, 0 } },
+    { sEvent013Track2, 2, { 0, 0, 0 } },
+    { sEvent013Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent013 = {
     4,
     { 0, 0, 0 },
-    gEvent013Tracks,
-    gEvent013Camera,
-    gEvent013Script,
-    gEvent013SoundCues,
+    sEvent013Tracks,
+    sEvent013Camera,
+    sEvent013Script,
+    sEvent013SoundCues,
     0,
     1940,
     0,
@@ -3173,35 +3173,35 @@ const EventSequenceDef gEvent013 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent014Script[1] = {
+static const MessageScriptEntry sEvent014Script[1] = {
     { 40, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD09C0, 32768, 9000 },
 };
 
 #include "event_014_text.inc"
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent014Script[1] = {
+static const MessageScriptEntry sEvent014Script[1] = {
     { 40, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB6C38, 32768, 9000 },
 };
 
 #include "event_014_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent014Script[1] = {
+static const MessageScriptEntry sEvent014Script[1] = {
     { 40, 0, 1, 1, { 0, 0, 0 }, 0, 32768, 9000 },
 };
 #endif
 
-const EventCameraKeyframe gEvent014Camera[1] = {
+static const EventCameraKeyframe sEvent014Camera[1] = {
     { -60536, 60672, 48384, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent014SoundCues[2] = {
+static const EvSoundCue sEvent014SoundCues[2] = {
     { 19, 0, 0, 0 },
     { 19, 395, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent014Track0[7] = {
+static const EventCharaKeyframe sEvent014Track0[7] = {
     { 442, 100, { 0, 0 }, 59904, 54016, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 443, 130, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
     { 442, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
@@ -3211,22 +3211,22 @@ const EventCharaKeyframe gEvent014Track0[7] = {
     { 442, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent014Track1[1] = {
+static const EventCharaKeyframe sEvent014Track1[1] = {
     { 919, 5000, { 0, 0 }, 60416, 53760, 0, 0, { 0, 0 }, 33106, 0, 0 },
 };
 
-const EventCharaTrack gEvent014Tracks[2] = {
-    { gEvent014Track0, 35, { 0, 0, 0 } },
-    { gEvent014Track1, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent014Tracks[2] = {
+    { sEvent014Track0, 35, { 0, 0, 0 } },
+    { sEvent014Track1, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent014 = {
     2,
     { 0, 0, 0 },
-    gEvent014Tracks,
-    gEvent014Camera,
-    gEvent014Script,
-    gEvent014SoundCues,
+    sEvent014Tracks,
+    sEvent014Camera,
+    sEvent014Script,
+    sEvent014SoundCues,
     0,
     400,
     0,
@@ -3248,7 +3248,7 @@ const EventSequenceDef gEvent014 = {
 #ifdef VERSION_US
 #include "event_015_text.inc"
 
-const MessageScriptEntry gEvent015Script[26] = {
+static const MessageScriptEntry sEvent015Script[26] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD0B94, 0, 240 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD0C34, 0, 270 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD0C86, 0, 340 },
@@ -3278,7 +3278,7 @@ const MessageScriptEntry gEvent015Script[26] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent015Script[26] = {
+static const MessageScriptEntry sEvent015Script[26] = {
     { 1, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB74FC, 0, 240 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB74DC, 0, 270 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB74A8, 0, 340 },
@@ -3310,7 +3310,7 @@ const MessageScriptEntry gEvent015Script[26] = {
 #include "event_015_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent015Script[26] = {
+static const MessageScriptEntry sEvent015Script[26] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64754, 0, 240 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64768, 0, 270 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6477C, 0, 340 },
@@ -3340,13 +3340,13 @@ const MessageScriptEntry gEvent015Script[26] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent015Camera[3] = {
+static const EventCameraKeyframe sEvent015Camera[3] = {
     { -64616, 153088, 81920, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64036, 158720, 77568, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -55537, 166656, 77056, 0, 255, { 0, 0, 0 }, 32769, 40, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent015SoundCues[5] = {
+static const EvSoundCue sEvent015SoundCues[5] = {
     { 30, 0, 2, 0 },
     { 30, 895, 1, 0 },
     { 340, 1450, 0, 0 },
@@ -3354,7 +3354,7 @@ const EvSoundCue gEvent015SoundCues[5] = {
     { 340, 1610, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent015Track0[33] = {
+static const EventCharaKeyframe sEvent015Track0[33] = {
     { 4, 1, { 0, 0 }, 112640, 104960, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 180, { 0, 0 }, 149504, 85504, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 215, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3390,7 +3390,7 @@ const EventCharaKeyframe gEvent015Track0[33] = {
     { 37, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent015Track1[38] = {
+static const EventCharaKeyframe sEvent015Track1[38] = {
     { 114, 1, { 0, 0 }, 141056, 96256, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 90, { 0, 0 }, 157696, 87296, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3431,7 +3431,7 @@ const EventCharaKeyframe gEvent015Track1[38] = {
     { 135, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent015Track2[16] = {
+static const EventCharaKeyframe sEvent015Track2[16] = {
     { 146, 1, { 0, 0 }, 122624, 99072, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 320, { 0, 0 }, 195840, 62976, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 144, 910, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -3450,7 +3450,7 @@ const EventCharaKeyframe gEvent015Track2[16] = {
     { 166, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent015Track3[13] = {
+static const EventCharaKeyframe sEvent015Track3[13] = {
     { 231, 375, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 376, { 0, 0 }, 149504, 85504, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 405, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -3466,20 +3466,20 @@ const EventCharaKeyframe gEvent015Track3[13] = {
     { 231, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent015Tracks[4] = {
-    { gEvent015Track0, 0, { 0, 0, 0 } },
-    { gEvent015Track1, 1, { 0, 0, 0 } },
-    { gEvent015Track2, 2, { 0, 0, 0 } },
-    { gEvent015Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent015Tracks[4] = {
+    { sEvent015Track0, 0, { 0, 0, 0 } },
+    { sEvent015Track1, 1, { 0, 0, 0 } },
+    { sEvent015Track2, 2, { 0, 0, 0 } },
+    { sEvent015Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent015 = {
     4,
     { 0, 0, 0 },
-    gEvent015Tracks,
-    gEvent015Camera,
-    gEvent015Script,
-    gEvent015SoundCues,
+    sEvent015Tracks,
+    sEvent015Camera,
+    sEvent015Script,
+    sEvent015SoundCues,
     0,
     1780,
     1,
@@ -3501,7 +3501,7 @@ const EventSequenceDef gEvent015 = {
 #ifdef VERSION_US
 #include "event_016_text.inc"
 
-const MessageScriptEntry gEvent016Script[10] = {
+static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD267C, 0, 260 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD26AE, 0, 300 },
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD26F4, 0, 320 },
@@ -3515,7 +3515,7 @@ const MessageScriptEntry gEvent016Script[10] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent016Script[10] = {
+static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB86A8, 0, 260 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8694, 0, 300 },
     { 1, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8664, 0, 320 },
@@ -3531,7 +3531,7 @@ const MessageScriptEntry gEvent016Script[10] = {
 #include "event_016_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent016Script[10] = {
+static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6468C, 0, 260 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F646A0, 0, 300 },
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F646B4, 0, 320 },
@@ -3545,15 +3545,15 @@ const MessageScriptEntry gEvent016Script[10] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent016Camera[1] = {
+static const EventCameraKeyframe sEvent016Camera[1] = {
     { -65485, 193536, 60672, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent016SoundCues[1] = {
+static const EvSoundCue sEvent016SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent016Track0[10] = {
+static const EventCharaKeyframe sEvent016Track0[10] = {
     { 4, 1, { 0, 0 }, 156928, 84224, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 250, { 0, 0 }, 206080, 60672, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 270, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3566,7 +3566,7 @@ const EventCharaKeyframe gEvent016Track0[10] = {
     { 2, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent016Track1[13] = {
+static const EventCharaKeyframe sEvent016Track1[13] = {
     { 114, 1, { 0, 0 }, 147968, 87552, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 180, { 0, 0 }, 181760, 71168, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 259, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3582,7 +3582,7 @@ const EventCharaKeyframe gEvent016Track1[13] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent016Track2[11] = {
+static const EventCharaKeyframe sEvent016Track2[11] = {
     { 146, 1, { 0, 0 }, 152064, 80384, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 220, { 0, 0 }, 192512, 60160, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 275, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3596,19 +3596,19 @@ const EventCharaKeyframe gEvent016Track2[11] = {
     { 144, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent016Tracks[3] = {
-    { gEvent016Track0, 0, { 0, 0, 0 } },
-    { gEvent016Track1, 1, { 0, 0, 0 } },
-    { gEvent016Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent016Tracks[3] = {
+    { sEvent016Track0, 0, { 0, 0, 0 } },
+    { sEvent016Track1, 1, { 0, 0, 0 } },
+    { sEvent016Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent016 = {
     3,
     { 0, 0, 0 },
-    gEvent016Tracks,
-    gEvent016Camera,
-    gEvent016Script,
-    gEvent016SoundCues,
+    sEvent016Tracks,
+    sEvent016Camera,
+    sEvent016Script,
+    sEvent016SoundCues,
     0,
     510,
     0,
@@ -3630,7 +3630,7 @@ const EventSequenceDef gEvent016 = {
 #ifdef VERSION_US
 #include "event_017_text.inc"
 
-const MessageScriptEntry gEvent017Script[11] = {
+static const MessageScriptEntry sEvent017Script[11] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3090, 0, 150 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD30FE, 0, 180 },
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD311E, 0, 200 },
@@ -3645,7 +3645,7 @@ const MessageScriptEntry gEvent017Script[11] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent017Script[11] = {
+static const MessageScriptEntry sEvent017Script[11] = {
     { 54, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8F60, 0, 150 },
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8F3C, 0, 180 },
     { 54, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8EF8, 0, 200 },
@@ -3662,7 +3662,7 @@ const MessageScriptEntry gEvent017Script[11] = {
 #include "event_017_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent017Script[11] = {
+static const MessageScriptEntry sEvent017Script[11] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F645B0, 0, 150 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F645C4, 0, 180 },
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F645D8, 0, 200 },
@@ -3677,16 +3677,16 @@ const MessageScriptEntry gEvent017Script[11] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent017Camera[1] = {
+static const EventCameraKeyframe sEvent017Camera[1] = {
     { -64537, 70912, 60672, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent017SoundCues[2] = {
+static const EvSoundCue sEvent017SoundCues[2] = {
     { 18, 0, 0, 0 },
     { 18, 595, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent017Track0[7] = {
+static const EventCharaKeyframe sEvent017Track0[7] = {
     { 485, 175, { 0, 0 }, 79360, 73216, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 509, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 485, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3696,7 +3696,7 @@ const EventCharaKeyframe gEvent017Track0[7] = {
     { 486, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent017Track1[6] = {
+static const EventCharaKeyframe sEvent017Track1[6] = {
     { 856, 130, { 0, 0 }, 63232, 63488, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 857, 265, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 858, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3705,18 +3705,18 @@ const EventCharaKeyframe gEvent017Track1[6] = {
     { 858, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent017Tracks[2] = {
-    { gEvent017Track0, 43, { 0, 0, 0 } },
-    { gEvent017Track1, 81, { 0, 0, 0 } },
+static const EventCharaTrack sEvent017Tracks[2] = {
+    { sEvent017Track0, 43, { 0, 0, 0 } },
+    { sEvent017Track1, 81, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent017 = {
     2,
     { 0, 0, 0 },
-    gEvent017Tracks,
-    gEvent017Camera,
-    gEvent017Script,
-    gEvent017SoundCues,
+    sEvent017Tracks,
+    sEvent017Camera,
+    sEvent017Script,
+    sEvent017SoundCues,
     0,
     600,
     0,
@@ -3738,7 +3738,7 @@ const EventSequenceDef gEvent017 = {
 #ifdef VERSION_US
 #include "event_018_text.inc"
 
-const MessageScriptEntry gEvent018Script[16] = {
+static const MessageScriptEntry sEvent018Script[16] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD39A4, 0, 210 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3A2A, 0, 230 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3A72, 0, 380 },
@@ -3758,7 +3758,7 @@ const MessageScriptEntry gEvent018Script[16] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent018Script[16] = {
+static const MessageScriptEntry sEvent018Script[16] = {
     { 1, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB9598, 0, 210 },
     { 2, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB9570, 0, 230 },
     { 2, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB952C, 0, 380 },
@@ -3780,7 +3780,7 @@ const MessageScriptEntry gEvent018Script[16] = {
 #include "event_018_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent018Script[16] = {
+static const MessageScriptEntry sEvent018Script[16] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F649FC, 0, 210 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64A10, 0, 230 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64A24, 0, 380 },
@@ -3800,26 +3800,26 @@ const MessageScriptEntry gEvent018Script[16] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent018Camera[3] = {
+static const EventCameraKeyframe sEvent018Camera[3] = {
     { -64656, 182528, 66304, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64236, 200448, 56832, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
     { -64036, 182528, 66304, 0, 255, { 0, 0, 0 }, 32769, 60, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent018SoundCues[4] = {
+static const EvSoundCue sEvent018SoundCues[4] = {
     { 30, 0, 0, 0 },
     { 30, 415, 1, 0 },
     { 369, 820, 0, 0 },
     { 370, 1260, 32768, 0 },
 };
 
-const EventBgEffectEntry gEvent018BgEffects[3] = {
+static const EventBgEffectEntry sEvent018BgEffects[3] = {
     { { 52, 3 }, 0, 0, 0, { 0, 0, 0, 0 } },
     { { 20, 5 }, 0, 0, 0, { 20, 0, 0, 0 } },
     { { 108, 7 }, 0, 0, 0, { 24, 128, 0, 0 } },
 };
 
-const EventCharaKeyframe gEvent018Track0[31] = {
+static const EventCharaKeyframe sEvent018Track0[31] = {
     { 4, 0, { 0, 0 }, 152832, 85504, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 170, { 0, 0 }, 190208, 68352, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3853,7 +3853,7 @@ const EventCharaKeyframe gEvent018Track0[31] = {
     { 2, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent018Track1[20] = {
+static const EventCharaKeyframe sEvent018Track1[20] = {
     { 114, 0, { 0, 0 }, 150272, 91904, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 160, { 0, 0 }, 179712, 77312, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 209, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3876,7 +3876,7 @@ const EventCharaKeyframe gEvent018Track1[20] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent018Track2[21] = {
+static const EventCharaKeyframe sEvent018Track2[21] = {
     { 146, 0, { 0, 0 }, 141568, 91648, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 160, { 0, 0 }, 173056, 71680, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -3900,7 +3900,7 @@ const EventCharaKeyframe gEvent018Track2[21] = {
     { 145, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent018Track3[5] = {
+static const EventCharaKeyframe sEvent018Track3[5] = {
     { 420, 970, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 420, 1000, { 0, 0 }, 205568, 58112, 0, 0, { 0, 0 }, 16642, EventCharaFadeIn, 0 },
     { 420, 1220, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 261, 0, 0 },
@@ -3908,7 +3908,7 @@ const EventCharaKeyframe gEvent018Track3[5] = {
     { 420, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent018Track4[5] = {
+static const EventCharaKeyframe sEvent018Track4[5] = {
     { 422, 1080, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 422, 1110, { 0, 0 }, 205568, 58368, 0, 0, { 0, 0 }, 540930, EventCharaFadeIn, 0 },
     { 422, 1260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 524549, 0, 0 },
@@ -3916,29 +3916,29 @@ const EventCharaKeyframe gEvent018Track4[5] = {
     { 422, 1300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent018Track5[3] = {
+static const EventCharaKeyframe sEvent018Track5[3] = {
     { 911, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 911, 680, { 0, 0 }, 190208, 68352, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 911, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent018Tracks[6] = {
-    { gEvent018Track0, 0, { 0, 0, 0 } },
-    { gEvent018Track1, 1, { 0, 0, 0 } },
-    { gEvent018Track2, 2, { 0, 0, 0 } },
-    { gEvent018Track3, 34, { 0, 0, 0 } },
-    { gEvent018Track4, 35, { 0, 0, 0 } },
-    { gEvent018Track5, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent018Tracks[6] = {
+    { sEvent018Track0, 0, { 0, 0, 0 } },
+    { sEvent018Track1, 1, { 0, 0, 0 } },
+    { sEvent018Track2, 2, { 0, 0, 0 } },
+    { sEvent018Track3, 34, { 0, 0, 0 } },
+    { sEvent018Track4, 35, { 0, 0, 0 } },
+    { sEvent018Track5, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent018 = {
     6,
     { 0, 0, 0 },
-    gEvent018Tracks,
-    gEvent018Camera,
-    gEvent018Script,
-    gEvent018SoundCues,
-    gEvent018BgEffects,
+    sEvent018Tracks,
+    sEvent018Camera,
+    sEvent018Script,
+    sEvent018SoundCues,
+    sEvent018BgEffects,
     1740,
     1,
     0,
@@ -3959,7 +3959,7 @@ const EventSequenceDef gEvent018 = {
 #ifdef VERSION_US
 #include "event_019_text.inc"
 
-const MessageScriptEntry gEvent019Script[8] = {
+static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4CD0, 0, 250 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4D3A, 0, 350 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4D6A, 0, 450 },
@@ -3971,7 +3971,7 @@ const MessageScriptEntry gEvent019Script[8] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent019Script[8] = {
+static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBA460, 0, 250 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBA44C, 0, 350 },
     { 0, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBA430, 0, 450 },
@@ -3985,7 +3985,7 @@ const MessageScriptEntry gEvent019Script[8] = {
 #include "event_019_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent019Script[8] = {
+static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6495C, 0, 250 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64970, 0, 350 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64984, 0, 450 },
@@ -3997,17 +3997,17 @@ const MessageScriptEntry gEvent019Script[8] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent019Camera[3] = {
+static const EventCameraKeyframe sEvent019Camera[3] = {
     { -64966, 180736, 68608, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64656, 186368, 67072, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
     { -64536, 180736, 68608, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent019SoundCues[1] = {
+static const EvSoundCue sEvent019SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent019Track0[11] = {
+static const EventCharaKeyframe sEvent019Track0[11] = {
     { 4, 0, { 0, 0 }, 133632, 98048, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 200, { 0, 0 }, 179712, 73728, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4021,7 +4021,7 @@ const EventCharaKeyframe gEvent019Track0[11] = {
     { 9, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent019Track1[15] = {
+static const EventCharaKeyframe sEvent019Track1[15] = {
     { 114, 0, { 0, 0 }, 145664, 94464, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 450, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 112, 451, { 0, 0 }, 221696, 60928, 0, 0, { 0, 0 }, 2, 0, 0 },
@@ -4039,24 +4039,24 @@ const EventCharaKeyframe gEvent019Track1[15] = {
     { 114, 1210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent019Track2[2] = {
+static const EventCharaKeyframe sEvent019Track2[2] = {
     { 146, 0, { 0, 0 }, 145408, 88832, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 450, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaTrack gEvent019Tracks[3] = {
-    { gEvent019Track0, 0, { 0, 0, 0 } },
-    { gEvent019Track1, 1, { 0, 0, 0 } },
-    { gEvent019Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent019Tracks[3] = {
+    { sEvent019Track0, 0, { 0, 0, 0 } },
+    { sEvent019Track1, 1, { 0, 0, 0 } },
+    { sEvent019Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent019 = {
     3,
     { 0, 0, 0 },
-    gEvent019Tracks,
-    gEvent019Camera,
-    gEvent019Script,
-    gEvent019SoundCues,
+    sEvent019Tracks,
+    sEvent019Camera,
+    sEvent019Script,
+    sEvent019SoundCues,
     0,
     950,
     0,
@@ -4076,35 +4076,35 @@ const EventSequenceDef gEvent019 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent020Script[1] = {
+static const MessageScriptEntry sEvent020Script[1] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD546C, 32768, 1000 },
 };
 
 #include "event_020_text.inc"
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent020Script[1] = {
+static const MessageScriptEntry sEvent020Script[1] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBA95C, 32768, 1000 },
 };
 
 #include "event_020_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent020Script[1] = {
+static const MessageScriptEntry sEvent020Script[1] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, 0, 32768, 1000 },
 };
 #endif
 
-const EventCameraKeyframe gEvent020Camera[1] = {
+static const EventCameraKeyframe sEvent020Camera[1] = {
     { -60536, 60672, 48384, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent020SoundCues[2] = {
+static const EvSoundCue sEvent020SoundCues[2] = {
     { 19, 0, 0, 0 },
     { 19, 395, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent020Track0[7] = {
+static const EventCharaKeyframe sEvent020Track0[7] = {
     { 442, 80, { 0, 0 }, 59904, 54016, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 443, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
     { 442, 200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
@@ -4114,22 +4114,22 @@ const EventCharaKeyframe gEvent020Track0[7] = {
     { 442, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent020Track1[1] = {
+static const EventCharaKeyframe sEvent020Track1[1] = {
     { 919, 5000, { 0, 0 }, 60416, 53760, 0, 0, { 0, 0 }, 33106, 0, 0 },
 };
 
-const EventCharaTrack gEvent020Tracks[2] = {
-    { gEvent020Track0, 35, { 0, 0, 0 } },
-    { gEvent020Track1, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent020Tracks[2] = {
+    { sEvent020Track0, 35, { 0, 0, 0 } },
+    { sEvent020Track1, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent020 = {
     2,
     { 0, 0, 0 },
-    gEvent020Tracks,
-    gEvent020Camera,
-    gEvent020Script,
-    gEvent020SoundCues,
+    sEvent020Tracks,
+    sEvent020Camera,
+    sEvent020Script,
+    sEvent020SoundCues,
     0,
     400,
     0,
@@ -4151,7 +4151,7 @@ const EventSequenceDef gEvent020 = {
 #ifdef VERSION_US
 #include "event_021_text.inc"
 
-const MessageScriptEntry gEvent021Script[17] = {
+static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD561C, 0, 380 },
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD5634, 0, 520 },
     { 2, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD5664, 0, 660 },
@@ -4172,7 +4172,7 @@ const MessageScriptEntry gEvent021Script[17] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent021Script[17] = {
+static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBAF68, 0, 380 },
     { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBAF50, 0, 520 },
     { 2, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBAF3C, 0, 660 },
@@ -4195,7 +4195,7 @@ const MessageScriptEntry gEvent021Script[17] = {
 #include "event_021_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent021Script[17] = {
+static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64E48, 0, 380 },
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64E5C, 0, 520 },
     { 2, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64E70, 0, 660 },
@@ -4216,16 +4216,16 @@ const MessageScriptEntry gEvent021Script[17] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent021Camera[2] = {
+static const EventCameraKeyframe sEvent021Camera[2] = {
     { -65236, 176640, 70144, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64537, 194560, 60672, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent021SoundCues[1] = {
+static const EvSoundCue sEvent021SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent021Track0[27] = {
+static const EventCharaKeyframe sEvent021Track0[27] = {
     { 4, 1, { 0, 0 }, 150272, 89088, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 170, { 0, 0 }, 182784, 72704, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4255,7 +4255,7 @@ const EventCharaKeyframe gEvent021Track0[27] = {
     { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent021Track2[26] = {
+static const EventCharaKeyframe sEvent021Track2[26] = {
     { 146, 1, { 0, 0 }, 137216, 91392, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 170, { 0, 0 }, 169216, 74496, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4284,7 +4284,7 @@ const EventCharaKeyframe gEvent021Track2[26] = {
     { 144, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent021Track1[19] = {
+static const EventCharaKeyframe sEvent021Track1[19] = {
     { 114, 1, { 0, 0 }, 146432, 95232, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 170, { 0, 0 }, 176896, 80896, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4306,7 +4306,7 @@ const EventCharaKeyframe gEvent021Track1[19] = {
     { 112, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent021Track3[7] = {
+static const EventCharaKeyframe sEvent021Track3[7] = {
     { 231, 690, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 691, { 0, 0 }, 186112, 71680, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 720, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -4316,20 +4316,20 @@ const EventCharaKeyframe gEvent021Track3[7] = {
     { 229, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent021Tracks[4] = {
-    { gEvent021Track0, 0, { 0, 0, 0 } },
-    { gEvent021Track1, 1, { 0, 0, 0 } },
-    { gEvent021Track2, 2, { 0, 0, 0 } },
-    { gEvent021Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent021Tracks[4] = {
+    { sEvent021Track0, 0, { 0, 0, 0 } },
+    { sEvent021Track1, 1, { 0, 0, 0 } },
+    { sEvent021Track2, 2, { 0, 0, 0 } },
+    { sEvent021Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent021 = {
     4,
     { 0, 0, 0 },
-    gEvent021Tracks,
-    gEvent021Camera,
-    gEvent021Script,
-    gEvent021SoundCues,
+    sEvent021Tracks,
+    sEvent021Camera,
+    sEvent021Script,
+    sEvent021SoundCues,
     0,
     1220,
     1,
@@ -4351,7 +4351,7 @@ const EventSequenceDef gEvent021 = {
 #ifdef VERSION_US
 #include "event_022_text.inc"
 
-const MessageScriptEntry gEvent022Script[25] = {
+static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD695C, 0, 250 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD69D2, 0, 270 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD6A00, 0, 290 },
@@ -4380,7 +4380,7 @@ const MessageScriptEntry gEvent022Script[25] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent022Script[25] = {
+static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBC2DC, 0, 250 },
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBC2C0, 0, 270 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBC270, 0, 290 },
@@ -4411,7 +4411,7 @@ const MessageScriptEntry gEvent022Script[25] = {
 #include "event_022_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent022Script[25] = {
+static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64C54, 0, 250 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64C68, 0, 270 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64C7C, 0, 290 },
@@ -4440,17 +4440,17 @@ const MessageScriptEntry gEvent022Script[25] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent022Camera[1] = {
+static const EventCameraKeyframe sEvent022Camera[1] = {
     { -64537, 180992, 66560, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent022SoundCues[3] = {
+static const EvSoundCue sEvent022SoundCues[3] = {
     { 30, 0, 0, 0 },
     { 30, 305, 1, 0 },
     { 19, 475, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent022Track0[16] = {
+static const EventCharaKeyframe sEvent022Track0[16] = {
     { 4, 1, { 0, 0 }, 142592, 92160, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 180, { 0, 0 }, 179456, 73728, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4469,7 +4469,7 @@ const EventCharaKeyframe gEvent022Track0[16] = {
     { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent022Track1[13] = {
+static const EventCharaKeyframe sEvent022Track1[13] = {
     { 114, 1, { 0, 0 }, 152576, 94208, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 180, { 0, 0 }, 192256, 73728, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4485,7 +4485,7 @@ const EventCharaKeyframe gEvent022Track1[13] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent022Track2[9] = {
+static const EventCharaKeyframe sEvent022Track2[9] = {
     { 146, 1, { 0, 0 }, 143616, 82688, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 180, { 0, 0 }, 174080, 67328, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4497,7 +4497,7 @@ const EventCharaKeyframe gEvent022Track2[9] = {
     { 144, 2190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent022Track3[7] = {
+static const EventCharaKeyframe sEvent022Track3[7] = {
     { 231, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 181, { 0, 0 }, 179456, 73728, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 210, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -4507,20 +4507,20 @@ const EventCharaKeyframe gEvent022Track3[7] = {
     { 229, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent022Tracks[4] = {
-    { gEvent022Track0, 0, { 0, 0, 0 } },
-    { gEvent022Track1, 1, { 0, 0, 0 } },
-    { gEvent022Track2, 2, { 0, 0, 0 } },
-    { gEvent022Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent022Tracks[4] = {
+    { sEvent022Track0, 0, { 0, 0, 0 } },
+    { sEvent022Track1, 1, { 0, 0, 0 } },
+    { sEvent022Track2, 2, { 0, 0, 0 } },
+    { sEvent022Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent022 = {
     4,
     { 0, 0, 0 },
-    gEvent022Tracks,
-    gEvent022Camera,
-    gEvent022Script,
-    gEvent022SoundCues,
+    sEvent022Tracks,
+    sEvent022Camera,
+    sEvent022Script,
+    sEvent022SoundCues,
     0,
     1010,
     0,
@@ -4542,7 +4542,7 @@ const EventSequenceDef gEvent022 = {
 #ifdef VERSION_US
 #include "event_023_text.inc"
 
-const MessageScriptEntry gEvent023Script[14] = {
+static const MessageScriptEntry sEvent023Script[14] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD794C, 0, 100 },
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD79D2, 0, 140 },
     { 54, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD7A6C, 0, 190 },
@@ -4560,7 +4560,7 @@ const MessageScriptEntry gEvent023Script[14] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent023Script[14] = {
+static const MessageScriptEntry sEvent023Script[14] = {
     { 54, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBCD80, 0, 100 },
     { 20, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBCD34, 0, 140 },
     { 54, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBCD08, 0, 190 },
@@ -4580,7 +4580,7 @@ const MessageScriptEntry gEvent023Script[14] = {
 #include "event_023_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent023Script[14] = {
+static const MessageScriptEntry sEvent023Script[14] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64B3C, 0, 100 },
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64B50, 0, 140 },
     { 54, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64B64, 0, 190 },
@@ -4598,19 +4598,19 @@ const MessageScriptEntry gEvent023Script[14] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent023Camera[2] = {
+static const EventCameraKeyframe sEvent023Camera[2] = {
     { -64676, 68608, 60672, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64537, 76544, 66816, 0, 255, { 0, 0, 0 }, 32769, 130, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent023SoundCues[4] = {
+static const EvSoundCue sEvent023SoundCues[4] = {
     { 18, 0, 0, 0 },
     { 334, 382, 0, 0 },
     { 330, 720, 0, 0 },
     { 18, 1075, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent023Track0[8] = {
+static const EventCharaKeyframe sEvent023Track0[8] = {
     { 856, 385, { 0, 0 }, 62720, 62208, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 866, 415, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 856, 530, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4621,7 +4621,7 @@ const EventCharaKeyframe gEvent023Track0[8] = {
     { 856, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent023Track1[17] = {
+static const EventCharaKeyframe sEvent023Track1[17] = {
     { 486, 135, { 0, 0 }, 72960, 72704, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 506, 143, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
     { 486, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
@@ -4641,7 +4641,7 @@ const EventCharaKeyframe gEvent023Track1[17] = {
     { 485, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent023Track2[6] = {
+static const EventCharaKeyframe sEvent023Track2[6] = {
     { 591, 381, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 591, 382, { 0, 0 }, 73216, 60672, 0, 0, { 0, 0 }, 274, 0, 0 },
     { 591, 390, { 0, 0 }, 66816, 55808, 0, 591, { 0, 0 }, 275, 0, 0 },
@@ -4650,19 +4650,19 @@ const EventCharaKeyframe gEvent023Track2[6] = {
     { 591, 500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent023Tracks[3] = {
-    { gEvent023Track0, 81, { 0, 0, 0 } },
-    { gEvent023Track1, 43, { 0, 0, 0 } },
-    { gEvent023Track2, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent023Tracks[3] = {
+    { sEvent023Track0, 81, { 0, 0, 0 } },
+    { sEvent023Track1, 43, { 0, 0, 0 } },
+    { sEvent023Track2, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent023 = {
     3,
     { 0, 0, 0 },
-    gEvent023Tracks,
-    gEvent023Camera,
-    gEvent023Script,
-    gEvent023SoundCues,
+    sEvent023Tracks,
+    sEvent023Camera,
+    sEvent023Script,
+    sEvent023SoundCues,
     0,
     1080,
     0,
@@ -4684,7 +4684,7 @@ const EventSequenceDef gEvent023 = {
 #ifdef VERSION_US
 #include "event_024_text.inc"
 
-const MessageScriptEntry gEvent024Script[4] = {
+static const MessageScriptEntry sEvent024Script[4] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8524, 0, 220 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8590, 0, 230 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD862C, 0, 250 },
@@ -4692,7 +4692,7 @@ const MessageScriptEntry gEvent024Script[4] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent024Script[4] = {
+static const MessageScriptEntry sEvent024Script[4] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBD3A4, 0, 220 },
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBD370, 0, 230 },
     { 1, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBD328, 0, 250 },
@@ -4702,7 +4702,7 @@ const MessageScriptEntry gEvent024Script[4] = {
 #include "event_024_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent024Script[4] = {
+static const MessageScriptEntry sEvent024Script[4] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65460, 0, 220 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65474, 0, 230 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65488, 0, 250 },
@@ -4710,15 +4710,15 @@ const MessageScriptEntry gEvent024Script[4] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent024Camera[1] = {
+static const EventCameraKeyframe sEvent024Camera[1] = {
     { -65485, 186880, 65024, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent024SoundCues[1] = {
+static const EvSoundCue sEvent024SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent024Track0[5] = {
+static const EventCharaKeyframe sEvent024Track0[5] = {
     { 4, 1, { 0, 0 }, 144896, 91392, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 180, { 0, 0 }, 182272, 71168, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4726,7 +4726,7 @@ const EventCharaKeyframe gEvent024Track0[5] = {
     { 36, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent024Track1[7] = {
+static const EventCharaKeyframe sEvent024Track1[7] = {
     { 114, 1, { 0, 0 }, 152576, 91136, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 180, { 0, 0 }, 192000, 73472, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4736,7 +4736,7 @@ const EventCharaKeyframe gEvent024Track1[7] = {
     { 114, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent024Track2[9] = {
+static const EventCharaKeyframe sEvent024Track2[9] = {
     { 146, 1, { 0, 0 }, 143104, 86272, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 180, { 0, 0 }, 189952, 62720, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4748,19 +4748,19 @@ const EventCharaKeyframe gEvent024Track2[9] = {
     { 144, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent024Tracks[3] = {
-    { gEvent024Track0, 0, { 0, 0, 0 } },
-    { gEvent024Track1, 1, { 0, 0, 0 } },
-    { gEvent024Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent024Tracks[3] = {
+    { sEvent024Track0, 0, { 0, 0, 0 } },
+    { sEvent024Track1, 1, { 0, 0, 0 } },
+    { sEvent024Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent024 = {
     3,
     { 0, 0, 0 },
-    gEvent024Tracks,
-    gEvent024Camera,
-    gEvent024Script,
-    gEvent024SoundCues,
+    sEvent024Tracks,
+    sEvent024Camera,
+    sEvent024Script,
+    sEvent024SoundCues,
     0,
     320,
     1,
@@ -4782,7 +4782,7 @@ const EventSequenceDef gEvent024 = {
 #ifdef VERSION_US
 #include "event_025_text.inc"
 
-const MessageScriptEntry gEvent025Script[11] = {
+static const MessageScriptEntry sEvent025Script[11] = {
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8AB0, 0, 350 },
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8AEC, 0, 370 },
     { 54, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8B44, 0, 470 },
@@ -4797,7 +4797,7 @@ const MessageScriptEntry gEvent025Script[11] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent025Script[11] = {
+static const MessageScriptEntry sEvent025Script[11] = {
     { 1, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBDA34, 0, 350 },
     { 54, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBDA14, 0, 370 },
     { 54, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBD9F0, 0, 470 },
@@ -4814,7 +4814,7 @@ const MessageScriptEntry gEvent025Script[11] = {
 #include "event_025_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent025Script[11] = {
+static const MessageScriptEntry sEvent025Script[11] = {
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65384, 0, 350 },
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65398, 0, 370 },
     { 54, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F653AC, 0, 470 },
@@ -4829,7 +4829,7 @@ const MessageScriptEntry gEvent025Script[11] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent025Camera[6] = {
+static const EventCameraKeyframe sEvent025Camera[6] = {
     { -65536, 140032, 86784, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65281, 171264, 70912, 0, 255, { 0, 0, 0 }, 1, 180, { 0, 0 }, 0 },
     { -65116, 211456, 52736, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
@@ -4838,12 +4838,12 @@ const EventCameraKeyframe gEvent025Camera[6] = {
     { -64036, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent025SoundCues[2] = {
+static const EvSoundCue sEvent025SoundCues[2] = {
     { 65535, 0, 0, 0 },
     { 18, 375, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent025Track0[26] = {
+static const EventCharaKeyframe sEvent025Track0[26] = {
     { 856, 380, { 0, 0 }, 213504, 57344, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 881, 450, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
     { 856, 520, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -4872,7 +4872,7 @@ const EventCharaKeyframe gEvent025Track0[26] = {
     { 870, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent025Track1[21] = {
+static const EventCharaKeyframe sEvent025Track1[21] = {
     { 4, 0, { 0, 0 }, 129536, 98304, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 200, { 0, 0 }, 174592, 74752, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 205, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4896,7 +4896,7 @@ const EventCharaKeyframe gEvent025Track1[21] = {
     { 21, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent025Track2[15] = {
+static const EventCharaKeyframe sEvent025Track2[15] = {
     { 114, 0, { 0, 0 }, 128768, 105728, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 200, { 0, 0 }, 174080, 82944, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 205, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4914,7 +4914,7 @@ const EventCharaKeyframe gEvent025Track2[15] = {
     { 123, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent025Track3[14] = {
+static const EventCharaKeyframe sEvent025Track3[14] = {
     { 146, 0, { 0, 0 }, 116992, 98560, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 200, { 0, 0 }, 162304, 75520, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 205, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -4931,20 +4931,20 @@ const EventCharaKeyframe gEvent025Track3[14] = {
     { 158, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent025Tracks[4] = {
-    { gEvent025Track0, 81, { 0, 0, 0 } },
-    { gEvent025Track1, 0, { 0, 0, 0 } },
-    { gEvent025Track2, 1, { 0, 0, 0 } },
-    { gEvent025Track3, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent025Tracks[4] = {
+    { sEvent025Track0, 81, { 0, 0, 0 } },
+    { sEvent025Track1, 0, { 0, 0, 0 } },
+    { sEvent025Track2, 1, { 0, 0, 0 } },
+    { sEvent025Track3, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent025 = {
     4,
     { 0, 0, 0 },
-    gEvent025Tracks,
-    gEvent025Camera,
-    gEvent025Script,
-    gEvent025SoundCues,
+    sEvent025Tracks,
+    sEvent025Camera,
+    sEvent025Script,
+    sEvent025SoundCues,
     0,
     770,
     0,
@@ -4966,7 +4966,7 @@ const EventSequenceDef gEvent025 = {
 #ifdef VERSION_US
 #include "event_026_text.inc"
 
-const MessageScriptEntry gEvent026Script[20] = {
+static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD9BFC, 0, 145 },
     { 0, 6, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD9C54, 0, 165 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD9C60, 0, 185 },
@@ -4990,7 +4990,7 @@ const MessageScriptEntry gEvent026Script[20] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent026Script[20] = {
+static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBEB0C, 0, 145 },
     { 0, 6, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBEB00, 0, 165 },
     { 2, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E724, 0, 185 },
@@ -5016,7 +5016,7 @@ const MessageScriptEntry gEvent026Script[20] = {
 #include "event_026_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent026Script[20] = {
+static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F651F4, 0, 145 },
     { 0, 6, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65208, 0, 165 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6521C, 0, 185 },
@@ -5040,7 +5040,7 @@ const MessageScriptEntry gEvent026Script[20] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent026Camera[11] = {
+static const EventCameraKeyframe sEvent026Camera[11] = {
     { -65536, 159488, 78848, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65385, 0, 0, 0, 255, { 0, 0, 0 }, 130, 130, { 0, 0 }, 0 },
     { -65091, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
@@ -5054,7 +5054,7 @@ const EventCameraKeyframe gEvent026Camera[11] = {
     { -64471, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 20, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent026SoundCues[5] = {
+static const EvSoundCue sEvent026SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 18, 80, 2, 0 },
     { 335, 525, 0, 0 },
@@ -5062,7 +5062,7 @@ const EvSoundCue gEvent026SoundCues[5] = {
     { 331, 856, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track0[15] = {
+static const EventCharaKeyframe sEvent026Track0[15] = {
     { 863, 10, { 0, 0 }, 171008, 76800, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 863, 55, { 0, 0 }, 146176, 91392, 0, 856, { 0, 0 }, 3, 0, 0 },
     { 864, 65, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -5080,7 +5080,7 @@ const EventCharaKeyframe gEvent026Track0[15] = {
     { 870, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track1[10] = {
+static const EventCharaKeyframe sEvent026Track1[10] = {
     { 68, 190, { 0, 0 }, 174592, 74752, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 80, 275, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 81, 335, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5093,7 +5093,7 @@ const EventCharaKeyframe gEvent026Track1[10] = {
     { 21, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track2[13] = {
+static const EventCharaKeyframe sEvent026Track2[13] = {
     { 114, 10, { 0, 0 }, 174080, 82944, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 133, 30, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 133, 80, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -5109,7 +5109,7 @@ const EventCharaKeyframe gEvent026Track2[13] = {
     { 123, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track3[12] = {
+static const EventCharaKeyframe sEvent026Track3[12] = {
     { 146, 10, { 0, 0 }, 162304, 75520, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 161, 30, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 161, 80, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -5124,14 +5124,14 @@ const EventCharaKeyframe gEvent026Track3[12] = {
     { 158, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track4[4] = {
+static const EventCharaKeyframe sEvent026Track4[4] = {
     { 909, 14, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 909, 15, { 0, 0 }, 173568, 73728, 0, 0, { 0, 0 }, 258, 0, 0 },
     { 910, 35, { 0, 0 }, 182272, 67584, 0, 910, { 0, 0 }, 323, 0, 0 },
     { 909, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 33029, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent026Track5[5] = {
+static const EventCharaKeyframe sEvent026Track5[5] = {
     { 928, 335, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 928, 465, { 0, 0 }, 170752, 67072, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 927, 625, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 258, 0, 0 },
@@ -5139,22 +5139,22 @@ const EventCharaKeyframe gEvent026Track5[5] = {
     { 928, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent026Tracks[6] = {
-    { gEvent026Track0, 81, { 0, 0, 0 } },
-    { gEvent026Track1, 0, { 0, 0, 0 } },
-    { gEvent026Track2, 1, { 0, 0, 0 } },
-    { gEvent026Track3, 2, { 0, 0, 0 } },
-    { gEvent026Track4, 85, { 0, 0, 0 } },
-    { gEvent026Track5, 93, { 0, 0, 0 } },
+static const EventCharaTrack sEvent026Tracks[6] = {
+    { sEvent026Track0, 81, { 0, 0, 0 } },
+    { sEvent026Track1, 0, { 0, 0, 0 } },
+    { sEvent026Track2, 1, { 0, 0, 0 } },
+    { sEvent026Track3, 2, { 0, 0, 0 } },
+    { sEvent026Track4, 85, { 0, 0, 0 } },
+    { sEvent026Track5, 93, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent026 = {
     6,
     { 0, 0, 0 },
-    gEvent026Tracks,
-    gEvent026Camera,
-    gEvent026Script,
-    gEvent026SoundCues,
+    sEvent026Tracks,
+    sEvent026Camera,
+    sEvent026Script,
+    sEvent026SoundCues,
     0,
     1075,
     0,
@@ -5176,7 +5176,7 @@ const EventSequenceDef gEvent026 = {
 #ifdef VERSION_US
 #include "event_027_text.inc"
 
-const MessageScriptEntry gEvent027Script[10] = {
+static const MessageScriptEntry sEvent027Script[10] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDADB8, 0, 150 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDAE4A, 0, 170 },
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDAE6A, 0, 190 },
@@ -5190,7 +5190,7 @@ const MessageScriptEntry gEvent027Script[10] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent027Script[10] = {
+static const MessageScriptEntry sEvent027Script[10] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBF7C8, 0, 150 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBF7B8, 0, 170 },
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBF760, 0, 190 },
@@ -5206,7 +5206,7 @@ const MessageScriptEntry gEvent027Script[10] = {
 #include "event_027_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent027Script[10] = {
+static const MessageScriptEntry sEvent027Script[10] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6512C, 0, 150 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65140, 0, 170 },
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65154, 0, 190 },
@@ -5220,20 +5220,20 @@ const MessageScriptEntry gEvent027Script[10] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent027Camera[3] = {
+static const EventCameraKeyframe sEvent027Camera[3] = {
     { -65223, 196352, 58880, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65066, 206080, 53248, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
     { -64537, 199936, 60928, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent027SoundCues[4] = {
+static const EvSoundCue sEvent027SoundCues[4] = {
     { 18, 0, 0, 0 },
     { 334, 241, 0, 0 },
     { 330, 260, 0, 0 },
     { 18, 315, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track0[20] = {
+static const EventCharaKeyframe sEvent027Track0[20] = {
     { 21, 210, { 0, 0 }, 186624, 69888, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 220, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 245, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5256,7 +5256,7 @@ const EventCharaKeyframe gEvent027Track0[20] = {
     { 15, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track2[7] = {
+static const EventCharaKeyframe sEvent027Track2[7] = {
     { 114, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 114, 451, { 0, 0 }, 175360, 84224, 0, 0, { 0, 0 }, 16450, 0, 0 },
     { 120, 525, { 0, 0 }, 204544, 69120, 0, 114, { 0, 0 }, 67, 0, 0 },
@@ -5266,7 +5266,7 @@ const EventCharaKeyframe gEvent027Track2[7] = {
     { 114, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track4[9] = {
+static const EventCharaKeyframe sEvent027Track4[9] = {
     { 146, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 146, 451, { 0, 0 }, 169216, 72960, 0, 0, { 0, 0 }, 16450, 0, 0 },
     { 153, 520, { 0, 0 }, 191488, 61440, 0, 146, { 0, 0 }, 67, 0, 0 },
@@ -5278,7 +5278,7 @@ const EventCharaKeyframe gEvent027Track4[9] = {
     { 144, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track3[8] = {
+static const EventCharaKeyframe sEvent027Track3[8] = {
     { 229, 470, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 229, 471, { 0, 0 }, 204800, 62208, 0, 0, { 0, 0 }, 16386, 0, 0 },
     { 233, 500, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -5289,14 +5289,14 @@ const EventCharaKeyframe gEvent027Track3[8] = {
     { 231, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track1[4] = {
+static const EventCharaKeyframe sEvent027Track1[4] = {
     { 856, 192, { 0, 0 }, 204800, 62208, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 865, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 856, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, 0 },
     { 856, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent027Track5[5] = {
+static const EventCharaKeyframe sEvent027Track5[5] = {
     { 591, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 591, 241, { 0, 0 }, 201472, 62208, -5120, 0, { 0, 0 }, 258, 0, 0 },
     { 591, 250, { 0, 0 }, 189952, 67328, -5120, 591, { 0, 0 }, 259, 0, 0 },
@@ -5304,22 +5304,22 @@ const EventCharaKeyframe gEvent027Track5[5] = {
     { 591, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent027Tracks[6] = {
-    { gEvent027Track0, 0, { 0, 0, 0 } },
-    { gEvent027Track1, 81, { 0, 0, 0 } },
-    { gEvent027Track2, 1, { 0, 0, 0 } },
-    { gEvent027Track3, 8, { 0, 0, 0 } },
-    { gEvent027Track4, 2, { 0, 0, 0 } },
-    { gEvent027Track5, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent027Tracks[6] = {
+    { sEvent027Track0, 0, { 0, 0, 0 } },
+    { sEvent027Track1, 81, { 0, 0, 0 } },
+    { sEvent027Track2, 1, { 0, 0, 0 } },
+    { sEvent027Track3, 8, { 0, 0, 0 } },
+    { sEvent027Track4, 2, { 0, 0, 0 } },
+    { sEvent027Track5, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent027 = {
     6,
     { 0, 0, 0 },
-    gEvent027Tracks,
-    gEvent027Camera,
-    gEvent027Script,
-    gEvent027SoundCues,
+    sEvent027Tracks,
+    sEvent027Camera,
+    sEvent027Script,
+    sEvent027SoundCues,
     0,
     720,
     0,
@@ -5341,7 +5341,7 @@ const EventSequenceDef gEvent027 = {
 #ifdef VERSION_US
 #include "event_028_text.inc"
 
-const MessageScriptEntry gEvent028Script[20] = {
+static const MessageScriptEntry sEvent028Script[20] = {
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDBAE0, 0, 160 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDBB52, 0, 180 },
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDBBDC, 0, 250 },
@@ -5365,7 +5365,7 @@ const MessageScriptEntry gEvent028Script[20] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent028Script[20] = {
+static const MessageScriptEntry sEvent028Script[20] = {
     { 54, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC05FC, 0, 160 },
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC05C8, 0, 180 },
     { 54, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC0588, 0, 250 },
@@ -5391,7 +5391,7 @@ const MessageScriptEntry gEvent028Script[20] = {
 #include "event_028_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent028Script[20] = {
+static const MessageScriptEntry sEvent028Script[20] = {
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64F9C, 0, 160 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64FB0, 0, 180 },
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F64FC4, 0, 250 },
@@ -5415,19 +5415,19 @@ const MessageScriptEntry gEvent028Script[20] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent028Camera[3] = {
+static const EventCameraKeyframe sEvent028Camera[3] = {
     { -65166, 60672, 48640, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64546, 60672, 55808, 0, 255, { 0, 0, 0 }, 1, 130, { 0, 0 }, 0 },
     { -64336, 65536, 58112, 0, 255, { 0, 0, 0 }, 32769, 60, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent028SoundCues[3] = {
+static const EvSoundCue sEvent028SoundCues[3] = {
     { 18, 0, 0, 0 },
     { 334, 904, 0, 0 },
     { 18, 1015, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent028Track0[9] = {
+static const EventCharaKeyframe sEvent028Track0[9] = {
     { 485, 175, { 0, 0 }, 51200, 55808, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 509, 275, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
     { 485, 675, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -5439,7 +5439,7 @@ const EventCharaKeyframe gEvent028Track0[9] = {
     { 485, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent028Track2[11] = {
+static const EventCharaKeyframe sEvent028Track2[11] = {
     { 738, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 738, 351, { 0, 0 }, 95744, 91392, 0, 0, { 0, 0 }, 16386, 0, 0 },
     { 742, 500, { 0, 0 }, 63488, 70656, 0, 738, { 0, 0 }, 3, 0, 0 },
@@ -5453,7 +5453,7 @@ const EventCharaKeyframe gEvent028Track2[11] = {
     { 721, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent028Track1[10] = {
+static const EventCharaKeyframe sEvent028Track1[10] = {
     { 876, 1, { 0, 0 }, 97536, 74752, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 882, 120, { 0, 0 }, 74752, 62464, 0, 876, { 0, 0 }, 3, 0, 0 },
     { 876, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -5466,7 +5466,7 @@ const EventCharaKeyframe gEvent028Track1[10] = {
     { 857, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent028Track3[6] = {
+static const EventCharaKeyframe sEvent028Track3[6] = {
     { 591, 903, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 591, 904, { 0, 0 }, 55296, 56320, -5120, 0, { 0, 0 }, 338, 0, 0 },
     { 591, 917, { 0, 0 }, 57856, 63488, -5120, 591, { 0, 0 }, 339, 0, 0 },
@@ -5475,28 +5475,28 @@ const EventCharaKeyframe gEvent028Track3[6] = {
     { 591, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent028Track4[4] = {
+static const EventCharaKeyframe sEvent028Track4[4] = {
     { 696, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 696, 1001, { 0, 0 }, 99072, 91648, 0, 0, { 0, 0 }, 16386, 0, 0 },
     { 712, 1060, { 0, 0 }, 90112, 87040, 0, 696, { 0, 0 }, 3, 0, 0 },
     { 696, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent028Tracks[5] = {
-    { gEvent028Track0, 43, { 0, 0, 0 } },
-    { gEvent028Track1, 81, { 0, 0, 0 } },
-    { gEvent028Track2, 67, { 0, 0, 0 } },
-    { gEvent028Track3, 50, { 0, 0, 0 } },
-    { gEvent028Track4, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent028Tracks[5] = {
+    { sEvent028Track0, 43, { 0, 0, 0 } },
+    { sEvent028Track1, 81, { 0, 0, 0 } },
+    { sEvent028Track2, 67, { 0, 0, 0 } },
+    { sEvent028Track3, 50, { 0, 0, 0 } },
+    { sEvent028Track4, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent028 = {
     5,
     { 0, 0, 0 },
-    gEvent028Tracks,
-    gEvent028Camera,
-    gEvent028Script,
-    gEvent028SoundCues,
+    sEvent028Tracks,
+    sEvent028Camera,
+    sEvent028Script,
+    sEvent028SoundCues,
     0,
     1020,
     0,
@@ -5518,7 +5518,7 @@ const EventSequenceDef gEvent028 = {
 #ifdef VERSION_US
 #include "event_029_text.inc"
 
-const MessageScriptEntry gEvent029Script[6] = {
+static const MessageScriptEntry sEvent029Script[6] = {
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCB60, 0, 130 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCB82, 0, 180 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCC02, 0, 510 },
@@ -5528,7 +5528,7 @@ const MessageScriptEntry gEvent029Script[6] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent029Script[6] = {
+static const MessageScriptEntry sEvent029Script[6] = {
     { 1, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC0E64, 0, 130 },
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC0E24, 0, 180 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC0DF8, 0, 510 },
@@ -5540,7 +5540,7 @@ const MessageScriptEntry gEvent029Script[6] = {
 #include "event_029_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent029Script[6] = {
+static const MessageScriptEntry sEvent029Script[6] = {
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F656B8, 0, 130 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F656CC, 0, 180 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F656E0, 0, 510 },
@@ -5550,16 +5550,16 @@ const MessageScriptEntry gEvent029Script[6] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent029Camera[2] = {
+static const EventCameraKeyframe sEvent029Camera[2] = {
     { -65176, 165120, 78336, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64537, 152320, 83712, 0, 255, { 0, 0, 0 }, 32769, 40, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent029SoundCues[1] = {
+static const EvSoundCue sEvent029SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent029Track0[15] = {
+static const EventCharaKeyframe sEvent029Track0[15] = {
     { 4, 1, { 0, 0 }, 118784, 104448, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 140, { 0, 0 }, 164608, 82176, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5577,7 +5577,7 @@ const EventCharaKeyframe gEvent029Track0[15] = {
     { 4, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98373, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent029Track1[11] = {
+static const EventCharaKeyframe sEvent029Track1[11] = {
     { 114, 280, { 0, 0 }, 120064, 108544, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 380, { 0, 0 }, 154624, 89600, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 382, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -5591,7 +5591,7 @@ const EventCharaKeyframe gEvent029Track1[11] = {
     { 119, 700, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent029Track2[13] = {
+static const EventCharaKeyframe sEvent029Track2[13] = {
     { 146, 280, { 0, 0 }, 114944, 103936, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 153, 390, { 0, 0 }, 145152, 87296, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 392, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -5607,19 +5607,19 @@ const EventCharaKeyframe gEvent029Track2[13] = {
     { 151, 700, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaTrack gEvent029Tracks[3] = {
-    { gEvent029Track0, 0, { 0, 0, 0 } },
-    { gEvent029Track1, 1, { 0, 0, 0 } },
-    { gEvent029Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent029Tracks[3] = {
+    { sEvent029Track0, 0, { 0, 0, 0 } },
+    { sEvent029Track1, 1, { 0, 0, 0 } },
+    { sEvent029Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent029 = {
     3,
     { 0, 0, 0 },
-    gEvent029Tracks,
-    gEvent029Camera,
-    gEvent029Script,
-    gEvent029SoundCues,
+    sEvent029Tracks,
+    sEvent029Camera,
+    sEvent029Script,
+    sEvent029SoundCues,
     0,
     650,
     1,
@@ -5641,7 +5641,7 @@ const EventSequenceDef gEvent029 = {
 #ifdef VERSION_US
 #include "event_030_text.inc"
 
-const MessageScriptEntry gEvent030Script[25] = {
+static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDD468, 0, 200 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDD482, 0, 300 },
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDD490, 0, 440 },
@@ -5670,7 +5670,7 @@ const MessageScriptEntry gEvent030Script[25] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent030Script[25] = {
+static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC1B30, 0, 200 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC1B24, 0, 300 },
     { 0, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC1B08, 0, 440 },
@@ -5701,7 +5701,7 @@ const MessageScriptEntry gEvent030Script[25] = {
 #include "event_030_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent030Script[25] = {
+static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F654C4, 0, 200 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F654D8, 0, 300 },
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F654EC, 0, 440 },
@@ -5730,7 +5730,7 @@ const MessageScriptEntry gEvent030Script[25] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent030Camera[7] = {
+static const EventCameraKeyframe sEvent030Camera[7] = {
     { -65316, 159744, 79360, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65176, 205824, 54272, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
     { -64436, 194048, 60672, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
@@ -5740,7 +5740,7 @@ const EventCameraKeyframe gEvent030Camera[7] = {
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 20, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent030SoundCues[5] = {
+static const EvSoundCue sEvent030SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 28, 635, 2, 0 },
     { 28, 1085, 1, 0 },
@@ -5748,7 +5748,7 @@ const EvSoundCue gEvent030SoundCues[5] = {
     { 4, 1160, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent030Track0[16] = {
+static const EventCharaKeyframe sEvent030Track0[16] = {
     { 4, 1, { 0, 0 }, 125696, 101120, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 150, { 0, 0 }, 160256, 83712, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 27, 200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -5767,7 +5767,7 @@ const EventCharaKeyframe gEvent030Track0[16] = {
     { 27, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent030Track1[8] = {
+static const EventCharaKeyframe sEvent030Track1[8] = {
     { 114, 1, { 0, 0 }, 124928, 108800, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 150, { 0, 0 }, 156928, 90880, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5778,7 +5778,7 @@ const EventCharaKeyframe gEvent030Track1[8] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent030Track2[8] = {
+static const EventCharaKeyframe sEvent030Track2[8] = {
     { 144, 1, { 0, 0 }, 116736, 100864, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 151, 150, { 0, 0 }, 149248, 86016, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 325, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5789,7 +5789,7 @@ const EventCharaKeyframe gEvent030Track2[8] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent030Track3[8] = {
+static const EventCharaKeyframe sEvent030Track3[8] = {
     { 514, 450, { 0, 0 }, 204800, 60160, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 514, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 514, 800, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -5800,26 +5800,26 @@ const EventCharaKeyframe gEvent030Track3[8] = {
     { 514, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98309, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent030Track4[2] = {
+static const EventCharaKeyframe sEvent030Track4[2] = {
     { 695, 1110, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 698, 9999, { 0, 0 }, 204800, 60160, 0, 0, { 0, 0 }, 49154, 0, 0 },
 };
 
-const EventCharaTrack gEvent030Tracks[5] = {
-    { gEvent030Track0, 0, { 0, 0, 0 } },
-    { gEvent030Track1, 1, { 0, 0, 0 } },
-    { gEvent030Track2, 2, { 0, 0, 0 } },
-    { gEvent030Track3, 44, { 0, 0, 0 } },
-    { gEvent030Track4, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent030Tracks[5] = {
+    { sEvent030Track0, 0, { 0, 0, 0 } },
+    { sEvent030Track1, 1, { 0, 0, 0 } },
+    { sEvent030Track2, 2, { 0, 0, 0 } },
+    { sEvent030Track3, 44, { 0, 0, 0 } },
+    { sEvent030Track4, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent030 = {
     5,
     { 0, 0, 0 },
-    gEvent030Tracks,
-    gEvent030Camera,
-    gEvent030Script,
-    gEvent030SoundCues,
+    sEvent030Tracks,
+    sEvent030Camera,
+    sEvent030Script,
+    sEvent030SoundCues,
     0,
     1275,
     0,
@@ -5841,33 +5841,33 @@ const EventSequenceDef gEvent030 = {
 #ifdef VERSION_US
 #include "event_031_text.inc"
 
-const MessageScriptEntry gEvent031Script[1] = {
+static const MessageScriptEntry sEvent031Script[1] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE5E8, 32768, 415 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent031Script[1] = {
+static const MessageScriptEntry sEvent031Script[1] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC22A0, 32768, 415 },
 };
 
 #include "event_031_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent031Script[1] = {
+static const MessageScriptEntry sEvent031Script[1] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F654B0, 32768, 415 },
 };
 #endif
 
-const EventCameraKeyframe gEvent031Camera[1] = {
+static const EventCameraKeyframe sEvent031Camera[1] = {
     { -65485, 191744, 62208, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent031SoundCues[2] = {
+static const EvSoundCue sEvent031SoundCues[2] = {
     { 18, 0, 0, 0 },
     { 18, 470, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent031Track0[8] = {
+static const EventCharaKeyframe sEvent031Track0[8] = {
     { 21, 300, { 0, 0 }, 188160, 69632, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 21, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
     { 22, 360, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -5878,19 +5878,19 @@ const EventCharaKeyframe gEvent031Track0[8] = {
     { 30, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent031Track1[3] = {
+static const EventCharaKeyframe sEvent031Track1[3] = {
     { 123, 365, { 0, 0 }, 185088, 77312, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 370, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent031Track2[3] = {
+static const EventCharaKeyframe sEvent031Track2[3] = {
     { 158, 367, { 0, 0 }, 176640, 71936, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 372, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent031Track3[6] = {
+static const EventCharaKeyframe sEvent031Track3[6] = {
     { 699, 150, { 0, 0 }, 205056, 59648, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 699, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 700, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -5899,20 +5899,20 @@ const EventCharaKeyframe gEvent031Track3[6] = {
     { 710, 380, { 0, 0 }, 228096, 47104, 0, 696, { 0, 0 }, 32835, 0, 0 },
 };
 
-const EventCharaTrack gEvent031Tracks[4] = {
-    { gEvent031Track0, 0, { 0, 0, 0 } },
-    { gEvent031Track1, 1, { 0, 0, 0 } },
-    { gEvent031Track2, 2, { 0, 0, 0 } },
-    { gEvent031Track3, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent031Tracks[4] = {
+    { sEvent031Track0, 0, { 0, 0, 0 } },
+    { sEvent031Track1, 1, { 0, 0, 0 } },
+    { sEvent031Track2, 2, { 0, 0, 0 } },
+    { sEvent031Track3, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent031 = {
     4,
     { 0, 0, 0 },
-    gEvent031Tracks,
-    gEvent031Camera,
-    gEvent031Script,
-    gEvent031SoundCues,
+    sEvent031Tracks,
+    sEvent031Camera,
+    sEvent031Script,
+    sEvent031SoundCues,
     0,
     475,
     0,
@@ -5934,7 +5934,7 @@ const EventSequenceDef gEvent031 = {
 #ifdef VERSION_US
 #include "event_032_text.inc"
 
-const MessageScriptEntry gEvent032Script[30] = {
+static const MessageScriptEntry sEvent032Script[30] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE97C, 0, 125 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE9A6, 0, 547 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE9CE, 0, 577 },
@@ -5968,7 +5968,7 @@ const MessageScriptEntry gEvent032Script[30] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent032Script[30] = {
+static const MessageScriptEntry sEvent032Script[30] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC2DBC, 0, 125 },
     { 2, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC2DAC, 0, 547 },
     { 0, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC2D7C, 0, 577 },
@@ -6004,7 +6004,7 @@ const MessageScriptEntry gEvent032Script[30] = {
 #include "event_032_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent032Script[30] = {
+static const MessageScriptEntry sEvent032Script[30] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F659B0, 0, 125 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F659C4, 0, 547 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F659D8, 0, 577 },
@@ -6038,18 +6038,18 @@ const MessageScriptEntry gEvent032Script[30] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent032Camera[2] = {
+static const EventCameraKeyframe sEvent032Camera[2] = {
     { -63641, 184064, 64768, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -60536, 189952, 61184, 0, 255, { 0, 0, 0 }, 32769, 100, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent032SoundCues[3] = {
+static const EvSoundCue sEvent032SoundCues[3] = {
     { 30, 0, 0, 0 },
     { 30, 1825, 1, 0 },
     { 7, 2115, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent032Track0[39] = {
+static const EventCharaKeyframe sEvent032Track0[39] = {
     { 4, 1, { 0, 0 }, 145152, 91392, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 90, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 100, 0, 0 },
     { 4, 93, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -6091,7 +6091,7 @@ const EventCharaKeyframe gEvent032Track0[39] = {
     { 94, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent032Track1[23] = {
+static const EventCharaKeyframe sEvent032Track1[23] = {
     { 114, 385, { 0, 0 }, 152064, 94720, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 495, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 100, 0, 0 },
     { 114, 498, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -6117,7 +6117,7 @@ const EventCharaKeyframe gEvent032Track1[23] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent032Track2[18] = {
+static const EventCharaKeyframe sEvent032Track2[18] = {
     { 146, 330, { 0, 0 }, 138240, 86272, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 153, 470, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 100, 0, 0 },
     { 146, 473, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -6138,7 +6138,7 @@ const EventCharaKeyframe gEvent032Track2[18] = {
     { 144, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent032Track3[13] = {
+static const EventCharaKeyframe sEvent032Track3[13] = {
     { 231, 620, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 621, { 0, 0 }, 183296, 70144, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 650, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -6154,20 +6154,20 @@ const EventCharaKeyframe gEvent032Track3[13] = {
     { 233, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32832, _0806E9DC, 0 },
 };
 
-const EventCharaTrack gEvent032Tracks[4] = {
-    { gEvent032Track0, 0, { 0, 0, 0 } },
-    { gEvent032Track1, 1, { 0, 0, 0 } },
-    { gEvent032Track2, 2, { 0, 0, 0 } },
-    { gEvent032Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent032Tracks[4] = {
+    { sEvent032Track0, 0, { 0, 0, 0 } },
+    { sEvent032Track1, 1, { 0, 0, 0 } },
+    { sEvent032Track2, 2, { 0, 0, 0 } },
+    { sEvent032Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent032 = {
     4,
     { 0, 0, 0 },
-    gEvent032Tracks,
-    gEvent032Camera,
-    gEvent032Script,
-    gEvent032SoundCues,
+    sEvent032Tracks,
+    sEvent032Camera,
+    sEvent032Script,
+    sEvent032SoundCues,
     0,
     2420,
     1,
@@ -6189,7 +6189,7 @@ const EventSequenceDef gEvent032 = {
 #ifdef VERSION_US
 #include "event_033_text.inc"
 
-const MessageScriptEntry gEvent033Script[19] = {
+static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE0464, 0, 295 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE04B6, 0, 450 },
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE0514, 0, 520 },
@@ -6212,7 +6212,7 @@ const MessageScriptEntry gEvent033Script[19] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent033Script[19] = {
+static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC40D4, 0, 295 },
     { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC40A8, 0, 450 },
     { 27, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC4078, 0, 520 },
@@ -6237,7 +6237,7 @@ const MessageScriptEntry gEvent033Script[19] = {
 #include "event_033_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent033Script[19] = {
+static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65834, 0, 295 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65848, 0, 450 },
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6585C, 0, 520 },
@@ -6260,14 +6260,14 @@ const MessageScriptEntry gEvent033Script[19] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent033Camera[4] = {
+static const EventCameraKeyframe sEvent033Camera[4] = {
     { -65326, 157184, 78336, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64186, 194560, 61440, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -63456, 200704, 58368, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 20, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent033SoundCues[5] = {
+static const EvSoundCue sEvent033SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 28, 210, 2, 0 },
     { 28, 1870, 1, 0 },
@@ -6275,7 +6275,7 @@ const EvSoundCue gEvent033SoundCues[5] = {
     { 359, 2015, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent033Track0[32] = {
+static const EventCharaKeyframe sEvent033Track0[32] = {
     { 4, 1, { 0, 0 }, 140544, 92416, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 90, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6310,7 +6310,7 @@ const EventCharaKeyframe gEvent033Track0[32] = {
     { 19, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent033Track1[10] = {
+static const EventCharaKeyframe sEvent033Track1[10] = {
     { 114, 1, { 0, 0 }, 136960, 100352, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 90, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 125, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6323,7 +6323,7 @@ const EventCharaKeyframe gEvent033Track1[10] = {
     { 123, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent033Track2[10] = {
+static const EventCharaKeyframe sEvent033Track2[10] = {
     { 146, 1, { 0, 0 }, 129024, 94720, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 90, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 130, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6336,7 +6336,7 @@ const EventCharaKeyframe gEvent033Track2[10] = {
     { 158, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent033Track3[16] = {
+static const EventCharaKeyframe sEvent033Track3[16] = {
     { 695, 470, { 0, 0 }, 206080, 60928, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 696, 480, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 696, 570, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6355,20 +6355,20 @@ const EventCharaKeyframe gEvent033Track3[16] = {
     { 698, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent033Tracks[4] = {
-    { gEvent033Track0, 0, { 0, 0, 0 } },
-    { gEvent033Track1, 1, { 0, 0, 0 } },
-    { gEvent033Track2, 2, { 0, 0, 0 } },
-    { gEvent033Track3, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent033Tracks[4] = {
+    { sEvent033Track0, 0, { 0, 0, 0 } },
+    { sEvent033Track1, 1, { 0, 0, 0 } },
+    { sEvent033Track2, 2, { 0, 0, 0 } },
+    { sEvent033Track3, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent033 = {
     4,
     { 0, 0, 0 },
-    gEvent033Tracks,
-    gEvent033Camera,
-    gEvent033Script,
-    gEvent033SoundCues,
+    sEvent033Tracks,
+    sEvent033Camera,
+    sEvent033Script,
+    sEvent033SoundCues,
     0,
     2125,
     0,
@@ -6390,7 +6390,7 @@ const EventSequenceDef gEvent033 = {
 #ifdef VERSION_US
 #include "event_034_text.inc"
 
-const MessageScriptEntry gEvent034Script[10] = {
+static const MessageScriptEntry sEvent034Script[10] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE1830, 0, 100 },
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE183C, 0, 160 },
     { 27, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE1894, 0, 162 },
@@ -6404,7 +6404,7 @@ const MessageScriptEntry gEvent034Script[10] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent034Script[10] = {
+static const MessageScriptEntry sEvent034Script[10] = {
     { 27, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC4E30, 0, 100 },
     { 27, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC4DE4, 0, 160 },
     { 27, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC4DC8, 0, 162 },
@@ -6420,7 +6420,7 @@ const MessageScriptEntry gEvent034Script[10] = {
 #include "event_034_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent034Script[10] = {
+static const MessageScriptEntry sEvent034Script[10] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6576C, 0, 100 },
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65780, 0, 160 },
     { 27, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65794, 0, 162 },
@@ -6434,16 +6434,16 @@ const MessageScriptEntry gEvent034Script[10] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent034Camera[2] = {
+static const EventCameraKeyframe sEvent034Camera[2] = {
     { -64966, 193792, 61696, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -62536, 188416, 64768, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent034SoundCues[1] = {
+static const EvSoundCue sEvent034SoundCues[1] = {
     { 28, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent034Track0[9] = {
+static const EventCharaKeyframe sEvent034Track0[9] = {
     { 21, 190, { 0, 0 }, 190464, 68352, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 205, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 270, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6455,19 +6455,19 @@ const EventCharaKeyframe gEvent034Track0[9] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent034Track1[3] = {
+static const EventCharaKeyframe sEvent034Track1[3] = {
     { 123, 195, { 0, 0 }, 186624, 75776, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent034Track2[3] = {
+static const EventCharaKeyframe sEvent034Track2[3] = {
     { 158, 198, { 0, 0 }, 178432, 70144, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 213, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent034Track3[7] = {
+static const EventCharaKeyframe sEvent034Track3[7] = {
     { 699, 120, { 0, 0 }, 208128, 60160, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 700, 135, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 695, 490, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -6477,20 +6477,20 @@ const EventCharaKeyframe gEvent034Track3[7] = {
     { 696, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent034Tracks[4] = {
-    { gEvent034Track0, 0, { 0, 0, 0 } },
-    { gEvent034Track1, 1, { 0, 0, 0 } },
-    { gEvent034Track2, 2, { 0, 0, 0 } },
-    { gEvent034Track3, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent034Tracks[4] = {
+    { sEvent034Track0, 0, { 0, 0, 0 } },
+    { sEvent034Track1, 1, { 0, 0, 0 } },
+    { sEvent034Track2, 2, { 0, 0, 0 } },
+    { sEvent034Track3, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent034 = {
     4,
     { 0, 0, 0 },
-    gEvent034Tracks,
-    gEvent034Camera,
-    gEvent034Script,
-    gEvent034SoundCues,
+    sEvent034Tracks,
+    sEvent034Camera,
+    sEvent034Script,
+    sEvent034SoundCues,
     0,
     890,
     0,
@@ -6512,14 +6512,14 @@ const EventSequenceDef gEvent034 = {
 #ifdef VERSION_US
 #include "event_035_text.inc"
 
-const MessageScriptEntry gEvent035Script[3] = {
+static const MessageScriptEntry sEvent035Script[3] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE2010, 0, 340 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE205C, 0, 450 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE20CA, 32768, 520 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent035Script[3] = {
+static const MessageScriptEntry sEvent035Script[3] = {
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC52B4, 0, 340 },
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5278, 0, 450 },
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5234, 32768, 520 },
@@ -6528,29 +6528,29 @@ const MessageScriptEntry gEvent035Script[3] = {
 #include "event_035_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent035Script[3] = {
+static const MessageScriptEntry sEvent035Script[3] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65730, 0, 340 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65744, 0, 450 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65758, 32768, 520 },
 };
 #endif
 
-const EventCameraKeyframe gEvent035Camera[1] = {
+static const EventCameraKeyframe sEvent035Camera[1] = {
     { -65485, 55296, 51456, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent035SoundCues[2] = {
+static const EvSoundCue sEvent035SoundCues[2] = {
     { 18, 0, 0, 0 },
     { 18, 735, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent035Track0[3] = {
+static const EventCharaKeyframe sEvent035Track0[3] = {
     { 486, 50, { 0, 0 }, 33792, 68864, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 502, 130, { 0, 0 }, 50176, 61952, 0, 486, { 0, 0 }, 83, 0, 0 },
     { 486, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent035Track1[8] = {
+static const EventCharaKeyframe sEvent035Track1[8] = {
     { 445, 160, { 0, 0 }, 60928, 53760, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 445, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 16, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 445, 360, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
@@ -6561,23 +6561,23 @@ const EventCharaKeyframe gEvent035Track1[8] = {
     { 445, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent035Track2[1] = {
+static const EventCharaKeyframe sEvent035Track2[1] = {
     { 919, 5000, { 0, 0 }, 62464, 52992, 0, 0, { 0, 0 }, 33106, 0, 0 },
 };
 
-const EventCharaTrack gEvent035Tracks[3] = {
-    { gEvent035Track0, 43, { 0, 0, 0 } },
-    { gEvent035Track1, 35, { 0, 0, 0 } },
-    { gEvent035Track2, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent035Tracks[3] = {
+    { sEvent035Track0, 43, { 0, 0, 0 } },
+    { sEvent035Track1, 35, { 0, 0, 0 } },
+    { sEvent035Track2, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent035 = {
     3,
     { 0, 0, 0 },
-    gEvent035Tracks,
-    gEvent035Camera,
-    gEvent035Script,
-    gEvent035SoundCues,
+    sEvent035Tracks,
+    sEvent035Camera,
+    sEvent035Script,
+    sEvent035SoundCues,
     0,
     740,
     0,
@@ -6599,7 +6599,7 @@ const EventSequenceDef gEvent035 = {
 #ifdef VERSION_US
 #include "event_036_text.inc"
 
-const MessageScriptEntry gEvent036Script[14] = {
+static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE23B4, 0, 200 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE23BE, 0, 260 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE2418, 0, 310 },
@@ -6617,7 +6617,7 @@ const MessageScriptEntry gEvent036Script[14] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent036Script[14] = {
+static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78204, 0, 200 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC587C, 0, 260 },
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5830, 0, 310 },
@@ -6637,7 +6637,7 @@ const MessageScriptEntry gEvent036Script[14] = {
 #include "event_036_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent036Script[14] = {
+static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65EC4, 0, 200 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65ED8, 0, 260 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65EEC, 0, 310 },
@@ -6655,15 +6655,15 @@ const MessageScriptEntry gEvent036Script[14] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent036Camera[1] = {
+static const EventCameraKeyframe sEvent036Camera[1] = {
     { -65485, 178944, 70912, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent036SoundCues[1] = {
+static const EvSoundCue sEvent036SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent036Track0[17] = {
+static const EventCharaKeyframe sEvent036Track0[17] = {
     { 4, 1, { 0, 0 }, 139776, 92928, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 170, { 0, 0 }, 182528, 72192, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6683,7 +6683,7 @@ const EventCharaKeyframe gEvent036Track0[17] = {
     { 2, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent036Track1[12] = {
+static const EventCharaKeyframe sEvent036Track1[12] = {
     { 114, 1, { 0, 0 }, 141056, 101376, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 173, { 0, 0 }, 176896, 82176, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6698,7 +6698,7 @@ const EventCharaKeyframe gEvent036Track1[12] = {
     { 114, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent036Track2[7] = {
+static const EventCharaKeyframe sEvent036Track2[7] = {
     { 146, 1, { 0, 0 }, 131328, 91904, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 175, { 0, 0 }, 166144, 74240, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6708,7 +6708,7 @@ const EventCharaKeyframe gEvent036Track2[7] = {
     { 146, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent036Track3[8] = {
+static const EventCharaKeyframe sEvent036Track3[8] = {
     { 229, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 229, 581, { 0, 0 }, 182528, 72192, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 233, 610, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -6719,20 +6719,20 @@ const EventCharaKeyframe gEvent036Track3[8] = {
     { 231, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent036Tracks[4] = {
-    { gEvent036Track0, 0, { 0, 0, 0 } },
-    { gEvent036Track1, 1, { 0, 0, 0 } },
-    { gEvent036Track2, 2, { 0, 0, 0 } },
-    { gEvent036Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent036Tracks[4] = {
+    { sEvent036Track0, 0, { 0, 0, 0 } },
+    { sEvent036Track1, 1, { 0, 0, 0 } },
+    { sEvent036Track2, 2, { 0, 0, 0 } },
+    { sEvent036Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent036 = {
     4,
     { 0, 0, 0 },
-    gEvent036Tracks,
-    gEvent036Camera,
-    gEvent036Script,
-    gEvent036SoundCues,
+    sEvent036Tracks,
+    sEvent036Camera,
+    sEvent036Script,
+    sEvent036SoundCues,
     0,
     720,
     1,
@@ -6754,14 +6754,14 @@ const EventSequenceDef gEvent036 = {
 #ifdef VERSION_US
 #include "event_037_text.inc"
 
-const MessageScriptEntry gEvent037Script[3] = {
+static const MessageScriptEntry sEvent037Script[3] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE306C, 0, 260 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE30D6, 0, 280 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE3138, 32768, 330 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent037Script[3] = {
+static const MessageScriptEntry sEvent037Script[3] = {
     { 1, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5FE8, 0, 260 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5FB8, 0, 280 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5FA4, 32768, 330 },
@@ -6770,22 +6770,22 @@ const MessageScriptEntry gEvent037Script[3] = {
 #include "event_037_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent037Script[3] = {
+static const MessageScriptEntry sEvent037Script[3] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65E88, 0, 260 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65E9C, 0, 280 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65EB0, 32768, 330 },
 };
 #endif
 
-const EventCameraKeyframe gEvent037Camera[1] = {
+static const EventCameraKeyframe sEvent037Camera[1] = {
     { -65485, 189184, 63488, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent037SoundCues[1] = {
+static const EvSoundCue sEvent037SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent037Track0[16] = {
+static const EventCharaKeyframe sEvent037Track0[16] = {
     { 4, 1, { 0, 0 }, 151808, 87808, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 170, { 0, 0 }, 192768, 67328, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6804,7 +6804,7 @@ const EventCharaKeyframe gEvent037Track0[16] = {
     { 36, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent037Track1[13] = {
+static const EventCharaKeyframe sEvent037Track1[13] = {
     { 114, 1, { 0, 0 }, 148736, 95232, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 170, { 0, 0 }, 189696, 75264, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6820,7 +6820,7 @@ const EventCharaKeyframe gEvent037Track1[13] = {
     { 114, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent037Track2[13] = {
+static const EventCharaKeyframe sEvent037Track2[13] = {
     { 146, 1, { 0, 0 }, 140288, 90112, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 170, { 0, 0 }, 181248, 69632, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -6836,19 +6836,19 @@ const EventCharaKeyframe gEvent037Track2[13] = {
     { 146, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent037Tracks[3] = {
-    { gEvent037Track0, 0, { 0, 0, 0 } },
-    { gEvent037Track1, 1, { 0, 0, 0 } },
-    { gEvent037Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent037Tracks[3] = {
+    { sEvent037Track0, 0, { 0, 0, 0 } },
+    { sEvent037Track1, 1, { 0, 0, 0 } },
+    { sEvent037Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent037 = {
     3,
     { 0, 0, 0 },
-    gEvent037Tracks,
-    gEvent037Camera,
-    gEvent037Script,
-    gEvent037SoundCues,
+    sEvent037Tracks,
+    sEvent037Camera,
+    sEvent037Script,
+    sEvent037SoundCues,
     0,
     380,
     0,
@@ -6870,7 +6870,7 @@ const EventSequenceDef gEvent037 = {
 #ifdef VERSION_US
 #include "event_038_text.inc"
 
-const MessageScriptEntry gEvent038Script[32] = {
+static const MessageScriptEntry sEvent038Script[32] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE37FC, 0, 150 },
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE388E, 0, 170 },
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE39BE, 0, 190 },
@@ -6906,7 +6906,7 @@ const MessageScriptEntry gEvent038Script[32] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent038Script[32] = {
+static const MessageScriptEntry sEvent038Script[32] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC6E90, 0, 150 },
     { 20, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC6E3C, 0, 170 },
     { 54, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC6DF0, 0, 190 },
@@ -6944,7 +6944,7 @@ const MessageScriptEntry gEvent038Script[32] = {
 #include "event_038_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent038Script[32] = {
+static const MessageScriptEntry sEvent038Script[32] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65C08, 0, 150 },
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65C1C, 0, 170 },
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F65C30, 0, 190 },
@@ -6980,21 +6980,21 @@ const MessageScriptEntry gEvent038Script[32] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent038Camera[4] = {
+static const EventCameraKeyframe sEvent038Camera[4] = {
     { -65176, 60928, 48128, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65076, 89088, 70912, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
     { -63966, 64512, 52736, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
     { -63866, 30720, 60672, 0, 255, { 0, 0, 0 }, 32769, 120, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent038SoundCues[4] = {
+static const EvSoundCue sEvent038SoundCues[4] = {
     { 18, 0, 0, 0 },
     { 940, 230, 0, 0 },
     { 330, 1270, 0, 0 },
     { 18, 2015, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track0[5] = {
+static const EventCharaKeyframe sEvent038Track0[5] = {
     { 485, 1350, { 0, 0 }, 81152, 54272, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 494, 1440, { 0, 0 }, 56064, 55808, 0, 485, { 0, 0 }, 19, 0, 0 },
     { 485, 1460, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, 0, 0 },
@@ -7002,13 +7002,13 @@ const EventCharaKeyframe gEvent038Track0[5] = {
     { 485, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track1[3] = {
+static const EventCharaKeyframe sEvent038Track1[3] = {
     { 856, 191, { 0, 0 }, 65024, 52736, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 857, 1480, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 856, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track2[14] = {
+static const EventCharaKeyframe sEvent038Track2[14] = {
     { 738, 220, { 0, 0 }, 50176, 60160, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 742, 240, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 84, 0, 0 },
     { 738, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -7025,13 +7025,13 @@ const EventCharaKeyframe gEvent038Track2[14] = {
     { 721, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track3[3] = {
+static const EventCharaKeyframe sEvent038Track3[3] = {
     { 180, 480, { 0, 0 }, 101632, 81664, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 186, 510, { 0, 0 }, 98560, 80640, 0, 180, { 0, 0 }, 3, 0, 0 },
     { 180, 590, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98309, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track4[15] = {
+static const EventCharaKeyframe sEvent038Track4[15] = {
     { 842, 530, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 842, 531, { 0, 0 }, 98560, 80640, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 844, 670, { 0, 0 }, 77056, 68864, 0, 842, { 0, 0 }, 19, 0, 0 },
@@ -7049,7 +7049,7 @@ const EventCharaKeyframe gEvent038Track4[15] = {
     { 842, 2500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track5[5] = {
+static const EventCharaKeyframe sEvent038Track5[5] = {
     { 445, 1710, { 0, 0 }, 24576, 65024, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 445, 1840, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 80, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 445, 1860, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -7057,27 +7057,27 @@ const EventCharaKeyframe gEvent038Track5[5] = {
     { 447, 1860, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent038Track6[1] = {
+static const EventCharaKeyframe sEvent038Track6[1] = {
     { 919, 30, { 0, 0 }, 24064, 64768, 0, 0, { 0, 0 }, 32786, 0, 0 },
 };
 
-const EventCharaTrack gEvent038Tracks[7] = {
-    { gEvent038Track0, 43, { 0, 0, 0 } },
-    { gEvent038Track1, 81, { 0, 0, 0 } },
-    { gEvent038Track2, 67, { 0, 0, 0 } },
-    { gEvent038Track3, 3, { 0, 0, 0 } },
-    { gEvent038Track4, 79, { 0, 0, 0 } },
-    { gEvent038Track5, 35, { 0, 0, 0 } },
-    { gEvent038Track6, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent038Tracks[7] = {
+    { sEvent038Track0, 43, { 0, 0, 0 } },
+    { sEvent038Track1, 81, { 0, 0, 0 } },
+    { sEvent038Track2, 67, { 0, 0, 0 } },
+    { sEvent038Track3, 3, { 0, 0, 0 } },
+    { sEvent038Track4, 79, { 0, 0, 0 } },
+    { sEvent038Track5, 35, { 0, 0, 0 } },
+    { sEvent038Track6, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent038 = {
     7,
     { 0, 0, 0 },
-    gEvent038Tracks,
-    gEvent038Camera,
-    gEvent038Script,
-    gEvent038SoundCues,
+    sEvent038Tracks,
+    sEvent038Camera,
+    sEvent038Script,
+    sEvent038SoundCues,
     0,
     2020,
     0,
@@ -7099,7 +7099,7 @@ const EventSequenceDef gEvent038 = {
 #ifdef VERSION_US
 #include "event_039_text.inc"
 
-const MessageScriptEntry gEvent039Script[10] = {
+static const MessageScriptEntry sEvent039Script[10] = {
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE4D50, 0, 305 },
     { 6, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE4DB0, 0, 330 },
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE4E0C, 0, 360 },
@@ -7113,7 +7113,7 @@ const MessageScriptEntry gEvent039Script[10] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent039Script[10] = {
+static const MessageScriptEntry sEvent039Script[10] = {
     { 1, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC7948, 0, 305 },
     { 6, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC78FC, 0, 330 },
     { 6, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC78B8, 0, 360 },
@@ -7129,7 +7129,7 @@ const MessageScriptEntry gEvent039Script[10] = {
 #include "event_039_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent039Script[10] = {
+static const MessageScriptEntry sEvent039Script[10] = {
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F600B4, 0, 305 },
     { 6, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F600C8, 0, 330 },
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F600DC, 0, 360 },
@@ -7143,15 +7143,15 @@ const MessageScriptEntry gEvent039Script[10] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent039Camera[1] = {
+static const EventCameraKeyframe sEvent039Camera[1] = {
     { -65485, 182016, 67328, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent039SoundCues[1] = {
+static const EvSoundCue sEvent039SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent039Track0[16] = {
+static const EventCharaKeyframe sEvent039Track0[16] = {
     { 4, 5, { 0, 0 }, 140800, 92928, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 220, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7170,7 +7170,7 @@ const EventCharaKeyframe gEvent039Track0[16] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent039Track1[5] = {
+static const EventCharaKeyframe sEvent039Track1[5] = {
     { 114, 1, { 0, 0 }, 151296, 94464, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7178,7 +7178,7 @@ const EventCharaKeyframe gEvent039Track1[5] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent039Track2[6] = {
+static const EventCharaKeyframe sEvent039Track2[6] = {
     { 146, 15, { 0, 0 }, 130816, 91136, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 200, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7187,7 +7187,7 @@ const EventCharaKeyframe gEvent039Track2[6] = {
     { 145, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent039Track3[7] = {
+static const EventCharaKeyframe sEvent039Track3[7] = {
     { 231, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 229, 250, { 0, 0 }, 189440, 68864, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 233, 280, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -7197,20 +7197,20 @@ const EventCharaKeyframe gEvent039Track3[7] = {
     { 231, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent039Tracks[4] = {
-    { gEvent039Track0, 0, { 0, 0, 0 } },
-    { gEvent039Track1, 1, { 0, 0, 0 } },
-    { gEvent039Track2, 2, { 0, 0, 0 } },
-    { gEvent039Track3, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent039Tracks[4] = {
+    { sEvent039Track0, 0, { 0, 0, 0 } },
+    { sEvent039Track1, 1, { 0, 0, 0 } },
+    { sEvent039Track2, 2, { 0, 0, 0 } },
+    { sEvent039Track3, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent039 = {
     4,
     { 0, 0, 0 },
-    gEvent039Tracks,
-    gEvent039Camera,
-    gEvent039Script,
-    gEvent039SoundCues,
+    sEvent039Tracks,
+    sEvent039Camera,
+    sEvent039Script,
+    sEvent039SoundCues,
     0,
     810,
     1,
@@ -7232,7 +7232,7 @@ const EventSequenceDef gEvent039 = {
 #ifdef VERSION_US
 #include "event_040_text.inc"
 
-const MessageScriptEntry gEvent040Script[12] = {
+static const MessageScriptEntry sEvent040Script[12] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE57C8, 0, 335 },
     { 38, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE57E4, 0, 365 },
     { 38, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE5836, 0, 367 },
@@ -7248,7 +7248,7 @@ const MessageScriptEntry gEvent040Script[12] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent040Script[12] = {
+static const MessageScriptEntry sEvent040Script[12] = {
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73088, 0, 335 },
     { 38, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8154, 0, 365 },
     { 38, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8120, 0, 367 },
@@ -7266,7 +7266,7 @@ const MessageScriptEntry gEvent040Script[12] = {
 #include "event_040_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent040Script[12] = {
+static const MessageScriptEntry sEvent040Script[12] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FFC4, 0, 335 },
     { 38, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FFD8, 0, 365 },
     { 38, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FFEC, 0, 367 },
@@ -7282,19 +7282,19 @@ const MessageScriptEntry gEvent040Script[12] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent040Camera[2] = {
+static const EventCameraKeyframe sEvent040Camera[2] = {
     { -65296, 165376, 73728, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -62536, 190208, 60672, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent040SoundCues[4] = {
+static const EvSoundCue sEvent040SoundCues[4] = {
     { 65535, 0, 0, 0 },
     { 18, 360, 2, 0 },
     { 18, 700, 1, 0 },
     { 4, 825, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent040Track0[26] = {
+static const EventCharaKeyframe sEvent040Track0[26] = {
     { 4, 1, { 0, 0 }, 137216, 95488, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 150, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7323,7 +7323,7 @@ const EventCharaKeyframe gEvent040Track0[26] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent040Track1[8] = {
+static const EventCharaKeyframe sEvent040Track1[8] = {
     { 114, 5, { 0, 0 }, 133632, 103168, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 155, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7334,7 +7334,7 @@ const EventCharaKeyframe gEvent040Track1[8] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent040Track2[12] = {
+static const EventCharaKeyframe sEvent040Track2[12] = {
     { 146, 8, { 0, 0 }, 123136, 96256, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 158, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7349,25 +7349,25 @@ const EventCharaKeyframe gEvent040Track2[12] = {
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent040Track3[2] = {
+static const EventCharaKeyframe sEvent040Track3[2] = {
     { 721, 30, { 0, 0 }, 202496, 61184, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 721, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent040Tracks[4] = {
-    { gEvent040Track0, 0, { 0, 0, 0 } },
-    { gEvent040Track1, 1, { 0, 0, 0 } },
-    { gEvent040Track2, 2, { 0, 0, 0 } },
-    { gEvent040Track3, 67, { 0, 0, 0 } },
+static const EventCharaTrack sEvent040Tracks[4] = {
+    { sEvent040Track0, 0, { 0, 0, 0 } },
+    { sEvent040Track1, 1, { 0, 0, 0 } },
+    { sEvent040Track2, 2, { 0, 0, 0 } },
+    { sEvent040Track3, 67, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent040 = {
     4,
     { 0, 0, 0 },
-    gEvent040Tracks,
-    gEvent040Camera,
-    gEvent040Script,
-    gEvent040SoundCues,
+    sEvent040Tracks,
+    sEvent040Camera,
+    sEvent040Script,
+    sEvent040SoundCues,
     0,
     910,
     0,
@@ -7389,7 +7389,7 @@ const EventSequenceDef gEvent040 = {
 #ifdef VERSION_US
 #include "event_041_text.inc"
 
-const MessageScriptEntry gEvent041Script[9] = {
+static const MessageScriptEntry sEvent041Script[9] = {
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE63B0, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6410, 0, 130 },
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6448, 0, 160 },
@@ -7402,7 +7402,7 @@ const MessageScriptEntry gEvent041Script[9] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent041Script[9] = {
+static const MessageScriptEntry sEvent041Script[9] = {
     { 38, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8B24, 0, 100 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8B00, 0, 130 },
     { 38, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8AEC, 0, 160 },
@@ -7417,7 +7417,7 @@ const MessageScriptEntry gEvent041Script[9] = {
 #include "event_041_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent041Script[9] = {
+static const MessageScriptEntry sEvent041Script[9] = {
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FF10, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FF24, 0, 130 },
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FF38, 0, 160 },
@@ -7430,18 +7430,18 @@ const MessageScriptEntry gEvent041Script[9] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent041Camera[2] = {
+static const EventCameraKeyframe sEvent041Camera[2] = {
     { -65091, 187904, 61440, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -60536, 182272, 66560, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent041SoundCues[3] = {
+static const EvSoundCue sEvent041SoundCues[3] = {
     { 18, 0, 0, 0 },
     { 334, 355, 0, 0 },
     { 330, 370, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent041Track0[14] = {
+static const EventCharaKeyframe sEvent041Track0[14] = {
     { 21, 180, { 0, 0 }, 182272, 70400, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 21, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
     { 21, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7458,19 +7458,19 @@ const EventCharaKeyframe gEvent041Track0[14] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent041Track1[3] = {
+static const EventCharaKeyframe sEvent041Track1[3] = {
     { 158, 400, { 0, 0 }, 167936, 71168, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 413, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent041Track2[3] = {
+static const EventCharaKeyframe sEvent041Track2[3] = {
     { 123, 405, { 0, 0 }, 180992, 78336, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 418, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent041Track3[6] = {
+static const EventCharaKeyframe sEvent041Track3[6] = {
     { 721, 280, { 0, 0 }, 201472, 61440, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 722, 318, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 724, 370, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -7479,7 +7479,7 @@ const EventCharaKeyframe gEvent041Track3[6] = {
     { 721, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent041Track4[9] = {
+static const EventCharaKeyframe sEvent041Track4[9] = {
     { 591, 271, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 322, 0, 0 },
     { 609, 318, { 0, 0 }, 201472, 61440, 0, 0, { 0, 0 }, 274, 0, 0 },
     { 591, 354, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 322, 0, 0 },
@@ -7491,21 +7491,21 @@ const EventCharaKeyframe gEvent041Track4[9] = {
     { 591, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 33093, 0, 0 },
 };
 
-const EventCharaTrack gEvent041Tracks[5] = {
-    { gEvent041Track0, 0, { 0, 0, 0 } },
-    { gEvent041Track1, 2, { 0, 0, 0 } },
-    { gEvent041Track2, 1, { 0, 0, 0 } },
-    { gEvent041Track3, 67, { 0, 0, 0 } },
-    { gEvent041Track4, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent041Tracks[5] = {
+    { sEvent041Track0, 0, { 0, 0, 0 } },
+    { sEvent041Track1, 2, { 0, 0, 0 } },
+    { sEvent041Track2, 1, { 0, 0, 0 } },
+    { sEvent041Track3, 67, { 0, 0, 0 } },
+    { sEvent041Track4, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent041 = {
     5,
     { 0, 0, 0 },
-    gEvent041Tracks,
-    gEvent041Camera,
-    gEvent041Script,
-    gEvent041SoundCues,
+    sEvent041Tracks,
+    sEvent041Camera,
+    sEvent041Script,
+    sEvent041SoundCues,
     0,
     750,
     0,
@@ -7527,7 +7527,7 @@ const EventSequenceDef gEvent041 = {
 #ifdef VERSION_US
 #include "event_042_text.inc"
 
-const MessageScriptEntry gEvent042Script[7] = {
+static const MessageScriptEntry sEvent042Script[7] = {
     { 54, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6D18, 0, 100 },
     { 54, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6DBE, 0, 130 },
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6E4E, 0, 330 },
@@ -7538,7 +7538,7 @@ const MessageScriptEntry gEvent042Script[7] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent042Script[7] = {
+static const MessageScriptEntry sEvent042Script[7] = {
     { 54, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC92D8, 0, 100 },
     { 54, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC9290, 0, 130 },
     { 20, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC9258, 0, 330 },
@@ -7551,7 +7551,7 @@ const MessageScriptEntry gEvent042Script[7] = {
 #include "event_042_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent042Script[7] = {
+static const MessageScriptEntry sEvent042Script[7] = {
     { 54, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE84, 0, 100 },
     { 54, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE98, 0, 130 },
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FEAC, 0, 330 },
@@ -7562,16 +7562,16 @@ const MessageScriptEntry gEvent042Script[7] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent042Camera[1] = {
+static const EventCameraKeyframe sEvent042Camera[1] = {
     { -65485, 68864, 59904, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent042SoundCues[2] = {
+static const EvSoundCue sEvent042SoundCues[2] = {
     { 18, 0, 0, 0 },
     { 18, 625, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent042Track0[8] = {
+static const EventCharaKeyframe sEvent042Track0[8] = {
     { 509, 150, { 0, 0 }, 79360, 62976, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 509, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 509, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
@@ -7582,31 +7582,31 @@ const EventCharaKeyframe gEvent042Track0[8] = {
     { 485, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent042Track1[3] = {
+static const EventCharaKeyframe sEvent042Track1[3] = {
     { 876, 120, { 0, 0 }, 69632, 74752, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 876, 600, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 856, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent042Track2[3] = {
+static const EventCharaKeyframe sEvent042Track2[3] = {
     { 841, 505, { 0, 0 }, 56320, 61952, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 845, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 841, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent042Tracks[3] = {
-    { gEvent042Track0, 43, { 0, 0, 0 } },
-    { gEvent042Track1, 81, { 0, 0, 0 } },
-    { gEvent042Track2, 79, { 0, 0, 0 } },
+static const EventCharaTrack sEvent042Tracks[3] = {
+    { sEvent042Track0, 43, { 0, 0, 0 } },
+    { sEvent042Track1, 81, { 0, 0, 0 } },
+    { sEvent042Track2, 79, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent042 = {
     3,
     { 0, 0, 0 },
-    gEvent042Tracks,
-    gEvent042Camera,
-    gEvent042Script,
-    gEvent042SoundCues,
+    sEvent042Tracks,
+    sEvent042Camera,
+    sEvent042Script,
+    sEvent042SoundCues,
     0,
     630,
     0,
@@ -7628,13 +7628,13 @@ const EventSequenceDef gEvent042 = {
 #ifdef VERSION_US
 #include "event_043_text.inc"
 
-const MessageScriptEntry gEvent043Script[2] = {
+static const MessageScriptEntry sEvent043Script[2] = {
     { 6, 1, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7390, 0, 210 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7436, 32768, 250 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent043Script[2] = {
+static const MessageScriptEntry sEvent043Script[2] = {
     { 6, 1, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC9624, 0, 210 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC95D0, 32768, 250 },
 };
@@ -7642,21 +7642,21 @@ const MessageScriptEntry gEvent043Script[2] = {
 #include "event_043_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent043Script[2] = {
+static const MessageScriptEntry sEvent043Script[2] = {
     { 6, 1, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60C58, 0, 210 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60C6C, 32768, 250 },
 };
 #endif
 
-const EventCameraKeyframe gEvent043Camera[1] = {
+static const EventCameraKeyframe sEvent043Camera[1] = {
     { -65485, 165120, 75776, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent043SoundCues[1] = {
+static const EvSoundCue sEvent043SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent043Track0[7] = {
+static const EventCharaKeyframe sEvent043Track0[7] = {
     { 4, 1, { 0, 0 }, 136704, 95488, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 110, { 0, 0 }, 163584, 82176, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -7666,21 +7666,21 @@ const EventCharaKeyframe gEvent043Track0[7] = {
     { 9, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent043Track1[4] = {
+static const EventCharaKeyframe sEvent043Track1[4] = {
     { 114, 1, { 0, 0 }, 137984, 103680, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 110, { 0, 0 }, 160512, 90624, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 315, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 119, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent043Track2[4] = {
+static const EventCharaKeyframe sEvent043Track2[4] = {
     { 146, 1, { 0, 0 }, 125440, 95744, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 110, { 0, 0 }, 150784, 80384, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 151, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent043Track3[8] = {
+static const EventCharaKeyframe sEvent043Track3[8] = {
     { 231, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 231, 121, { 0, 0 }, 163584, 82176, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 234, 150, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -7691,27 +7691,27 @@ const EventCharaKeyframe gEvent043Track3[8] = {
     { 229, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent043Track4[3] = {
+static const EventCharaKeyframe sEvent043Track4[3] = {
     { 591, 206, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 601, 252, { 0, 0 }, 163584, 82176, 0, 0, { 0, 0 }, 16722, 0, 0 },
     { 591, 500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaTrack gEvent043Tracks[5] = {
-    { gEvent043Track0, 0, { 0, 0, 0 } },
-    { gEvent043Track1, 1, { 0, 0, 0 } },
-    { gEvent043Track2, 2, { 0, 0, 0 } },
-    { gEvent043Track3, 8, { 0, 0, 0 } },
-    { gEvent043Track4, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent043Tracks[5] = {
+    { sEvent043Track0, 0, { 0, 0, 0 } },
+    { sEvent043Track1, 1, { 0, 0, 0 } },
+    { sEvent043Track2, 2, { 0, 0, 0 } },
+    { sEvent043Track3, 8, { 0, 0, 0 } },
+    { sEvent043Track4, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent043 = {
     5,
     { 0, 0, 0 },
-    gEvent043Tracks,
-    gEvent043Camera,
-    gEvent043Script,
-    gEvent043SoundCues,
+    sEvent043Tracks,
+    sEvent043Camera,
+    sEvent043Script,
+    sEvent043SoundCues,
     0,
     400,
     1,
@@ -7733,7 +7733,7 @@ const EventSequenceDef gEvent043 = {
 #ifdef VERSION_US
 #include "event_044_text.inc"
 
-const MessageScriptEntry gEvent044Script[22] = {
+static const MessageScriptEntry sEvent044Script[22] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7918, 0, 620 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7950, 0, 650 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE795A, 0, 790 },
@@ -7759,7 +7759,7 @@ const MessageScriptEntry gEvent044Script[22] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent044Script[22] = {
+static const MessageScriptEntry sEvent044Script[22] = {
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCA0BC, 0, 620 },
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBC264, 0, 650 },
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCA08C, 0, 790 },
@@ -7787,7 +7787,7 @@ const MessageScriptEntry gEvent044Script[22] = {
 #include "event_044_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent044Script[22] = {
+static const MessageScriptEntry sEvent044Script[22] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60398, 0, 620 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F603AC, 0, 650 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F603C0, 0, 790 },
@@ -7813,12 +7813,12 @@ const MessageScriptEntry gEvent044Script[22] = {
 };
 #endif
 
-const EvSoundCue gEvent044SoundCues[2] = {
+static const EvSoundCue sEvent044SoundCues[2] = {
     { 36, 0, 0, 0 },
     { 36, 2615, 32769, 0 },
 };
 
-const EventCameraKeyframe gEvent044Camera[7] = {
+static const EventCameraKeyframe sEvent044Camera[7] = {
     { -65536, 65280, 32768, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65386, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
     { -64026, 65280, 104704, 0, 255, { 0, 0, 0 }, 1, 230, { 0, 0 }, 0 },
@@ -7828,14 +7828,14 @@ const EventCameraKeyframe gEvent044Camera[7] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EventBgEffectEntry gEvent044BgEffects[4] = {
+static const EventBgEffectEntry sEvent044BgEffects[4] = {
     { { 68, 7 }, 0, 0, 0, { 0, 0, 0, 0 } },
     { { 254, 6 }, 0, 0, 0, { 20, 0, 0, 0 } },
     { { 182, 8 }, 0, 0, 0, { 2, 0, 0, 0 } },
     { { 246, 9 }, 0, 0, 0, { 24, 128, 0, 0 } },
 };
 
-const EventCharaKeyframe gEvent044Track0[40] = {
+static const EventCharaKeyframe sEvent044Track0[40] = {
     { 4, 350, { 0, 0 }, 32768, 130304, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 9, 530, { 0, 0 }, 73216, 109312, 0, 4, { 0, 0 }, 83, 0, 0 },
     { 4, 550, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -7878,7 +7878,7 @@ const EventCharaKeyframe gEvent044Track0[40] = {
     { 86, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent044Track1[23] = {
+static const EventCharaKeyframe sEvent044Track1[23] = {
     { 114, 350, { 0, 0 }, 29952, 137728, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 119, 510, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 84, 0, 0 },
     { 114, 530, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -7904,7 +7904,7 @@ const EventCharaKeyframe gEvent044Track1[23] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent044Track2[23] = {
+static const EventCharaKeyframe sEvent044Track2[23] = {
     { 146, 300, { 0, 0 }, 19200, 130048, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 151, 458, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 84, 0, 0 },
     { 146, 470, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -7930,7 +7930,7 @@ const EventCharaKeyframe gEvent044Track2[23] = {
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent044Track3[13] = {
+static const EventCharaKeyframe sEvent044Track3[13] = {
     { 229, 550, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 231, 551, { 0, 0 }, 72704, 108544, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 234, 580, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 20, _0806E9DC, 0 },
@@ -7946,37 +7946,37 @@ const EventCharaKeyframe gEvent044Track3[13] = {
     { 229, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent044Track4[4] = {
+static const EventCharaKeyframe sEvent044Track4[4] = {
     { 422, 1990, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 424, 2120, { 0, 0 }, 93696, 100352, 0, 0, { 0, 0 }, 16658, EventCharaFadeIn, 0 },
     { 424, 2150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 272, EventCharaFadeOut, 0 },
     { 422, 2220, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent044Track5[4] = {
+static const EventCharaKeyframe sEvent044Track5[4] = {
     { 912, 1365, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 912, 1380, { 0, 0 }, 73216, 109312, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 912, 1815, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 910, 5000, { 0, 0 }, 82688, 104960, 0, 0, { 0, 0 }, 33042, 0, 0 },
 };
 
-const EventCharaTrack gEvent044Tracks[6] = {
-    { gEvent044Track0, 0, { 0, 0, 0 } },
-    { gEvent044Track1, 1, { 0, 0, 0 } },
-    { gEvent044Track2, 2, { 0, 0, 0 } },
-    { gEvent044Track3, 8, { 0, 0, 0 } },
-    { gEvent044Track4, 35, { 0, 0, 0 } },
-    { gEvent044Track5, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent044Tracks[6] = {
+    { sEvent044Track0, 0, { 0, 0, 0 } },
+    { sEvent044Track1, 1, { 0, 0, 0 } },
+    { sEvent044Track2, 2, { 0, 0, 0 } },
+    { sEvent044Track3, 8, { 0, 0, 0 } },
+    { sEvent044Track4, 35, { 0, 0, 0 } },
+    { sEvent044Track5, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent044 = {
     6,
     { 0, 0, 0 },
-    gEvent044Tracks,
-    gEvent044Camera,
-    gEvent044Script,
-    gEvent044SoundCues,
-    gEvent044BgEffects,
+    sEvent044Tracks,
+    sEvent044Camera,
+    sEvent044Script,
+    sEvent044SoundCues,
+    sEvent044BgEffects,
     2620,
     0,
     0,
@@ -7997,7 +7997,7 @@ const EventSequenceDef gEvent044 = {
 #ifdef VERSION_US
 #include "event_045_text.inc"
 
-const MessageScriptEntry gEvent045Script[26] = {
+static const MessageScriptEntry sEvent045Script[26] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE93B0, 0, 515 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE93D6, 0, 725 },
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE9402, 0, 727 },
@@ -8027,7 +8027,7 @@ const MessageScriptEntry gEvent045Script[26] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent045Script[26] = {
+static const MessageScriptEntry sEvent045Script[26] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85940, 0, 515 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCB984, 0, 725 },
     { 0, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCB938, 0, 727 },
@@ -8059,7 +8059,7 @@ const MessageScriptEntry gEvent045Script[26] = {
 #include "event_045_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent045Script[26] = {
+static const MessageScriptEntry sEvent045Script[26] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F606CC, 0, 515 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F606E0, 0, 725 },
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F606F4, 0, 727 },
@@ -8089,14 +8089,14 @@ const MessageScriptEntry gEvent045Script[26] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent045Camera[4] = {
+static const EventCameraKeyframe sEvent045Camera[4] = {
     { -65416, 65024, 42496, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64436, 65024, 96256, 0, 255, { 0, 0, 0 }, 1, 280, { 0, 0 }, 0 },
     { -64336, 65024, 88320, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent045SoundCues[5] = {
+static const EvSoundCue sEvent045SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 5, 720, 2, 0 },
     { 5, 1045, 1, 0 },
@@ -8104,7 +8104,7 @@ const EvSoundCue gEvent045SoundCues[5] = {
     { 331, 1200, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent045Track0[28] = {
+static const EventCharaKeyframe sEvent045Track0[28] = {
     { 4, 300, { 0, 0 }, 38400, 112128, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 370, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 410, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8135,7 +8135,7 @@ const EventCharaKeyframe gEvent045Track0[28] = {
     { 14, 5120, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32868, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent045Track1[14] = {
+static const EventCharaKeyframe sEvent045Track1[14] = {
     { 114, 300, { 0, 0 }, 29952, 104448, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 380, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 114, 460, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8152,7 +8152,7 @@ const EventCharaKeyframe gEvent045Track1[14] = {
     { 123, 5120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent045Track2[18] = {
+static const EventCharaKeyframe sEvent045Track2[18] = {
     { 146, 320, { 0, 0 }, 50944, 113408, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 390, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 146, 440, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8173,7 +8173,7 @@ const EventCharaKeyframe gEvent045Track2[18] = {
     { 158, 5120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent045Track3[5] = {
+static const EventCharaKeyframe sEvent045Track3[5] = {
     { 721, 1200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 721, 1530, { 0, 0 }, 75264, 91392, 0, 0, { 0, 0 }, 2, EventCharaFadeIn, 0 },
     { 721, 1660, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
@@ -8181,20 +8181,20 @@ const EventCharaKeyframe gEvent045Track3[5] = {
     { 721, 5120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent045Tracks[4] = {
-    { gEvent045Track0, 0, { 0, 0, 0 } },
-    { gEvent045Track1, 1, { 0, 0, 0 } },
-    { gEvent045Track2, 2, { 0, 0, 0 } },
-    { gEvent045Track3, 67, { 0, 0, 0 } },
+static const EventCharaTrack sEvent045Tracks[4] = {
+    { sEvent045Track0, 0, { 0, 0, 0 } },
+    { sEvent045Track1, 1, { 0, 0, 0 } },
+    { sEvent045Track2, 2, { 0, 0, 0 } },
+    { sEvent045Track3, 67, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent045 = {
     4,
     { 0, 0, 0 },
-    gEvent045Tracks,
-    gEvent045Camera,
-    gEvent045Script,
-    gEvent045SoundCues,
+    sEvent045Tracks,
+    sEvent045Camera,
+    sEvent045Script,
+    sEvent045SoundCues,
     0,
     1980,
     0,
@@ -8216,7 +8216,7 @@ const EventSequenceDef gEvent045 = {
 #ifdef VERSION_US
 #include "event_046_text.inc"
 
-const MessageScriptEntry gEvent046Script[19] = {
+static const MessageScriptEntry sEvent046Script[19] = {
     { 38, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEAB94, 0, 100 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEAC5E, 0, 230 },
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEACC4, 0, 260 },
@@ -8239,7 +8239,7 @@ const MessageScriptEntry gEvent046Script[19] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent046Script[19] = {
+static const MessageScriptEntry sEvent046Script[19] = {
     { 38, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCC898, 0, 100 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCC864, 0, 230 },
     { 38, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCC820, 0, 260 },
@@ -8264,7 +8264,7 @@ const MessageScriptEntry gEvent046Script[19] = {
 #include "event_046_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent046Script[19] = {
+static const MessageScriptEntry sEvent046Script[19] = {
     { 38, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60550, 0, 100 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60564, 0, 230 },
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60578, 0, 260 },
@@ -8287,7 +8287,7 @@ const MessageScriptEntry gEvent046Script[19] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent046Camera[9] = {
+static const EventCameraKeyframe sEvent046Camera[9] = {
     { -65201, 50432, 100096, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65196, 0, 0, 0, 255, { 0, 0, 0 }, 34, 5, { 0, 0 }, 0 },
     { -65156, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
@@ -8299,7 +8299,7 @@ const EventCameraKeyframe gEvent046Camera[9] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent046SoundCues[6] = {
+static const EvSoundCue sEvent046SoundCues[6] = {
     { 18, 0, 0, 0 },
     { 643, 332, 0, 0 },
     { 664, 850, 0, 0 },
@@ -8308,7 +8308,7 @@ const EvSoundCue gEvent046SoundCues[6] = {
     { 18, 1295, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent046Track0[16] = {
+static const EventCharaKeyframe sEvent046Track0[16] = {
     { 21, 150, { 0, 0 }, 40448, 114432, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 225, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8327,7 +8327,7 @@ const EventCharaKeyframe gEvent046Track0[16] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent046Track1[6] = {
+static const EventCharaKeyframe sEvent046Track1[6] = {
     { 123, 155, { 0, 0 }, 33024, 107776, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 165, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8336,7 +8336,7 @@ const EventCharaKeyframe gEvent046Track1[6] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent046Track2[6] = {
+static const EventCharaKeyframe sEvent046Track2[6] = {
     { 158, 160, { 0, 0 }, 50176, 117248, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8345,7 +8345,7 @@ const EventCharaKeyframe gEvent046Track2[6] = {
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent046Track3[7] = {
+static const EventCharaKeyframe sEvent046Track3[7] = {
     { 732, 263, { 0, 0 }, 60672, 102912, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 733, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 730, 410, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -8355,7 +8355,7 @@ const EventCharaKeyframe gEvent046Track3[7] = {
     { 721, 4000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent046Track4[11] = {
+static const EventCharaKeyframe sEvent046Track4[11] = {
     { 513, 301, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 258, 0, 0 },
     { 513, 321, { 0, 0 }, 85760, 79104, 0, 0, { 0, 0 }, 258, 0, 0 },
     { 513, 340, { 0, 0 }, 62464, 90624, 0, 485, { 0, 0 }, 4355, 0, 0 },
@@ -8369,21 +8369,21 @@ const EventCharaKeyframe gEvent046Track4[11] = {
     { 485, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent046Tracks[5] = {
-    { gEvent046Track0, 0, { 0, 0, 0 } },
-    { gEvent046Track1, 1, { 0, 0, 0 } },
-    { gEvent046Track2, 2, { 0, 0, 0 } },
-    { gEvent046Track3, 67, { 0, 0, 0 } },
-    { gEvent046Track4, 43, { 0, 0, 0 } },
+static const EventCharaTrack sEvent046Tracks[5] = {
+    { sEvent046Track0, 0, { 0, 0, 0 } },
+    { sEvent046Track1, 1, { 0, 0, 0 } },
+    { sEvent046Track2, 2, { 0, 0, 0 } },
+    { sEvent046Track3, 67, { 0, 0, 0 } },
+    { sEvent046Track4, 43, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent046 = {
     5,
     { 0, 0, 0 },
-    gEvent046Tracks,
-    gEvent046Camera,
-    gEvent046Script,
-    gEvent046SoundCues,
+    sEvent046Tracks,
+    sEvent046Camera,
+    sEvent046Script,
+    sEvent046SoundCues,
     0,
     1300,
     0,
@@ -8405,7 +8405,7 @@ const EventSequenceDef gEvent046 = {
 #ifdef VERSION_US
 #include "event_048_text.inc"
 
-const MessageScriptEntry gEvent048Script[21] = {
+static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEBD7C, 0, 350 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEBDF6, 0, 370 },
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEBE68, 0, 390 },
@@ -8430,7 +8430,7 @@ const MessageScriptEntry gEvent048Script[21] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent048Script[21] = {
+static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCD66C, 0, 350 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCD624, 0, 370 },
     { 27, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCD5F0, 0, 390 },
@@ -8457,7 +8457,7 @@ const MessageScriptEntry gEvent048Script[21] = {
 #include "event_048_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent048Script[21] = {
+static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60AB4, 0, 350 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60AC8, 0, 370 },
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60ADC, 0, 390 },
@@ -8482,7 +8482,7 @@ const MessageScriptEntry gEvent048Script[21] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent048Camera[5] = {
+static const EventCameraKeyframe sEvent048Camera[5] = {
     { -65366, 157184, 79616, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65276, 206592, 55040, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
     { -64736, 192000, 62720, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
@@ -8490,7 +8490,7 @@ const EventCameraKeyframe gEvent048Camera[5] = {
     { -63536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent048SoundCues[6] = {
+static const EvSoundCue sEvent048SoundCues[6] = {
     { 28, 0, 0, 0 },
     { 359, 355, 0, 0 },
     { 28, 505, 1, 0 },
@@ -8499,7 +8499,7 @@ const EvSoundCue gEvent048SoundCues[6] = {
     { 359, 1120, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent048Track0[18] = {
+static const EventCharaKeyframe sEvent048Track0[18] = {
     { 4, 1, { 0, 0 }, 133120, 98816, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 100, { 0, 0 }, 158464, 82944, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 27, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
@@ -8520,7 +8520,7 @@ const EventCharaKeyframe gEvent048Track0[18] = {
     { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent048Track1[6] = {
+static const EventCharaKeyframe sEvent048Track1[6] = {
     { 114, 1, { 0, 0 }, 130048, 105984, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 119, 100, { 0, 0 }, 155392, 90368, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8529,7 +8529,7 @@ const EventCharaKeyframe gEvent048Track1[6] = {
     { 114, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent048Track2[6] = {
+static const EventCharaKeyframe sEvent048Track2[6] = {
     { 146, 1, { 0, 0 }, 121600, 100864, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 151, 100, { 0, 0 }, 146944, 84736, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8538,7 +8538,7 @@ const EventCharaKeyframe gEvent048Track2[6] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent048Track3[19] = {
+static const EventCharaKeyframe sEvent048Track3[19] = {
     { 695, 1, { 0, 0 }, 206336, 60416, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 695, 355, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 698, 405, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -8560,7 +8560,7 @@ const EventCharaKeyframe gEvent048Track3[19] = {
     { 698, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent048Track4[5] = {
+static const EventCharaKeyframe sEvent048Track4[5] = {
     { 909, 687, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 915, 950, { 0, 0 }, 187136, 69376, 0, 0, { 0, 0 }, 16722, 0, 0 },
     { 909, 989, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
@@ -8568,21 +8568,21 @@ const EventCharaKeyframe gEvent048Track4[5] = {
     { 909, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaTrack gEvent048Tracks[5] = {
-    { gEvent048Track0, 0, { 0, 0, 0 } },
-    { gEvent048Track1, 1, { 0, 0, 0 } },
-    { gEvent048Track2, 2, { 0, 0, 0 } },
-    { gEvent048Track3, 65, { 0, 0, 0 } },
-    { gEvent048Track4, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent048Tracks[5] = {
+    { sEvent048Track0, 0, { 0, 0, 0 } },
+    { sEvent048Track1, 1, { 0, 0, 0 } },
+    { sEvent048Track2, 2, { 0, 0, 0 } },
+    { sEvent048Track3, 65, { 0, 0, 0 } },
+    { sEvent048Track4, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent048 = {
     5,
     { 0, 0, 0 },
-    gEvent048Tracks,
-    gEvent048Camera,
-    gEvent048Script,
-    gEvent048SoundCues,
+    sEvent048Tracks,
+    sEvent048Camera,
+    sEvent048Script,
+    sEvent048SoundCues,
     0,
     1220,
     0,
@@ -8604,7 +8604,7 @@ const EventSequenceDef gEvent048 = {
 #ifdef VERSION_US
 #include "event_049_text.inc"
 
-const MessageScriptEntry gEvent049Script[4] = {
+static const MessageScriptEntry sEvent049Script[4] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FECF68, 0, 430 },
     { 1, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FECF74, 0, 690 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FECFCC, 0, 750 },
@@ -8612,7 +8612,7 @@ const MessageScriptEntry gEvent049Script[4] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent049Script[4] = {
+static const MessageScriptEntry sEvent049Script[4] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCE020, 0, 430 },
     { 1, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCE000, 0, 690 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCDFD0, 0, 750 },
@@ -8622,7 +8622,7 @@ const MessageScriptEntry gEvent049Script[4] = {
 #include "event_049_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent049Script[4] = {
+static const MessageScriptEntry sEvent049Script[4] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F608D4, 0, 430 },
     { 1, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F608E8, 0, 690 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F608FC, 0, 750 },
@@ -8630,7 +8630,7 @@ const MessageScriptEntry gEvent049Script[4] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent049Camera[5] = {
+static const EventCameraKeyframe sEvent049Camera[5] = {
     { -65066, 179712, 68864, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64606, 203776, 56832, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
     { -64596, 0, 0, 0, 255, { 0, 0, 0 }, 34, 10, { 0, 0 }, 0 },
@@ -8638,13 +8638,13 @@ const EventCameraKeyframe gEvent049Camera[5] = {
     { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent049SoundCues[3] = {
+static const EvSoundCue sEvent049SoundCues[3] = {
     { 28, 0, 0, 0 },
     { 360, 410, 0, 0 },
     { 335, 935, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track0[11] = {
+static const EventCharaKeyframe sEvent049Track0[11] = {
     { 21, 430, { 0, 0 }, 173824, 76544, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 25, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 14, 530, { 0, 0 }, 202752, 63232, 0, 4, { 0, 0 }, 67, 0, 0 },
@@ -8658,7 +8658,7 @@ const EventCharaKeyframe gEvent049Track0[11] = {
     { 75, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track1[12] = {
+static const EventCharaKeyframe sEvent049Track1[12] = {
     { 123, 520, { 0, 0 }, 168960, 84992, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 605, { 0, 0 }, 201216, 70400, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 607, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -8673,7 +8673,7 @@ const EventCharaKeyframe gEvent049Track1[12] = {
     { 114, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track2[8] = {
+static const EventCharaKeyframe sEvent049Track2[8] = {
     { 158, 525, { 0, 0 }, 160768, 79616, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 153, 610, { 0, 0 }, 193024, 65024, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 612, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -8684,7 +8684,7 @@ const EventCharaKeyframe gEvent049Track2[8] = {
     { 146, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track3[7] = {
+static const EventCharaKeyframe sEvent049Track3[7] = {
     { 699, 300, { 0, 0 }, 193792, 67328, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 700, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 695, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -8694,7 +8694,7 @@ const EventCharaKeyframe gEvent049Track3[7] = {
     { 696, 401, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track4[9] = {
+static const EventCharaKeyframe sEvent049Track4[9] = {
     { 909, 375, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 909, 395, { 0, 0 }, 215552, 56576, -2560, 0, { 0, 0 }, 16642, 0, 0 },
     { 909, 410, { 0, 0 }, 206336, 60416, 0, 909, { 0, 0 }, 259, 0, 0 },
@@ -8706,29 +8706,29 @@ const EventCharaKeyframe gEvent049Track4[9] = {
     { 917, 9000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent049Track5[4] = {
+static const EventCharaKeyframe sEvent049Track5[4] = {
     { 591, 940, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 592, 1000, { 0, 0 }, 206336, 55296, -11520, 591, { 0, 0 }, 16643, 0, 0 },
     { 592, 1080, { 0, 0 }, 206336, 55296, -512, 591, { 0, 0 }, 259, 0, 0 },
     { 601, 9000, { 0, 0 }, 203520, 62976, 0, 0, { 0, 0 }, 33106, 0, 0 },
 };
 
-const EventCharaTrack gEvent049Tracks[6] = {
-    { gEvent049Track0, 0, { 0, 0, 0 } },
-    { gEvent049Track1, 1, { 0, 0, 0 } },
-    { gEvent049Track2, 2, { 0, 0, 0 } },
-    { gEvent049Track3, 65, { 0, 0, 0 } },
-    { gEvent049Track4, 85, { 0, 0, 0 } },
-    { gEvent049Track5, 50, { 0, 0, 0 } },
+static const EventCharaTrack sEvent049Tracks[6] = {
+    { sEvent049Track0, 0, { 0, 0, 0 } },
+    { sEvent049Track1, 1, { 0, 0, 0 } },
+    { sEvent049Track2, 2, { 0, 0, 0 } },
+    { sEvent049Track3, 65, { 0, 0, 0 } },
+    { sEvent049Track4, 85, { 0, 0, 0 } },
+    { sEvent049Track5, 50, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent049 = {
     6,
     { 0, 0, 0 },
-    gEvent049Tracks,
-    gEvent049Camera,
-    gEvent049Script,
-    gEvent049SoundCues,
+    sEvent049Tracks,
+    sEvent049Camera,
+    sEvent049Script,
+    sEvent049SoundCues,
     0,
     1200,
     0,
@@ -8750,7 +8750,7 @@ const EventSequenceDef gEvent049 = {
 #ifdef VERSION_US
 #include "event_050_text.inc"
 
-const MessageScriptEntry gEvent050Script[19] = {
+static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED910, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED968, 0, 320 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED9D8, 0, 390 },
@@ -8773,7 +8773,7 @@ const MessageScriptEntry gEvent050Script[19] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent050Script[19] = {
+static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCEDDC, 0, 200 },
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCEDA0, 0, 320 },
     { 1, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCED88, 0, 390 },
@@ -8798,7 +8798,7 @@ const MessageScriptEntry gEvent050Script[19] = {
 #include "event_050_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent050Script[19] = {
+static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60924, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60938, 0, 320 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6094C, 0, 390 },
@@ -8821,7 +8821,7 @@ const MessageScriptEntry gEvent050Script[19] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent050Camera[6] = {
+static const EventCameraKeyframe sEvent050Camera[6] = {
     { -65416, 219904, 47616, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65306, 151040, 83456, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
     { -65206, 220416, 48384, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
@@ -8830,11 +8830,11 @@ const EventCameraKeyframe gEvent050Camera[6] = {
     { -64386, 193536, 60672, 0, 255, { 0, 0, 0 }, 32769, 40, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent050SoundCues[1] = {
+static const EvSoundCue sEvent050SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent050Track0[37] = {
+static const EventCharaKeyframe sEvent050Track0[37] = {
     { 4, 80, { 0, 0 }, 220416, 53248, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 3, 85, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 2, 90, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8874,7 +8874,7 @@ const EventCharaKeyframe gEvent050Track0[37] = {
     { 14, 1500, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32868, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent050Track1[16] = {
+static const EventCharaKeyframe sEvent050Track1[16] = {
     { 128, 370, { 0, 0 }, 153088, 92416, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 129, 380, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 114, 385, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -8893,7 +8893,7 @@ const EventCharaKeyframe gEvent050Track1[16] = {
     { 114, 9920, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent050Track2[11] = {
+static const EventCharaKeyframe sEvent050Track2[11] = {
     { 146, 550, { 0, 0 }, 142336, 86272, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 165, 551, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -8907,19 +8907,19 @@ const EventCharaKeyframe gEvent050Track2[11] = {
     { 146, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent050Tracks[3] = {
-    { gEvent050Track0, 0, { 0, 0, 0 } },
-    { gEvent050Track1, 1, { 0, 0, 0 } },
-    { gEvent050Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent050Tracks[3] = {
+    { sEvent050Track0, 0, { 0, 0, 0 } },
+    { sEvent050Track1, 1, { 0, 0, 0 } },
+    { sEvent050Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent050 = {
     3,
     { 0, 0, 0 },
-    gEvent050Tracks,
-    gEvent050Camera,
-    gEvent050Script,
-    gEvent050SoundCues,
+    sEvent050Tracks,
+    sEvent050Camera,
+    sEvent050Script,
+    sEvent050SoundCues,
     0,
     1180,
     0,
@@ -8941,7 +8941,7 @@ const EventSequenceDef gEvent050 = {
 #ifdef VERSION_US
 #include "event_047_text.inc"
 
-const MessageScriptEntry gEvent047Script[15] = {
+static const MessageScriptEntry sEvent047Script[15] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEEC10, 0, 130 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEEC7A, 0, 160 },
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEECEC, 0, 180 },
@@ -8960,7 +8960,7 @@ const MessageScriptEntry gEvent047Script[15] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent047Script[15] = {
+static const MessageScriptEntry sEvent047Script[15] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCFC10, 0, 130 },
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCFBC8, 0, 160 },
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCFBA4, 0, 180 },
@@ -8981,7 +8981,7 @@ const MessageScriptEntry gEvent047Script[15] = {
 #include "event_047_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent047Script[15] = {
+static const MessageScriptEntry sEvent047Script[15] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6026C, 0, 130 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60280, 0, 160 },
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60294, 0, 180 },
@@ -9000,19 +9000,19 @@ const MessageScriptEntry gEvent047Script[15] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent047Camera[2] = {
+static const EventCameraKeyframe sEvent047Camera[2] = {
     { -64596, 76288, 54272, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -60536, 92416, 63232, 0, 255, { 0, 0, 0 }, 32769, 100, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent047SoundCues[4] = {
+static const EvSoundCue sEvent047SoundCues[4] = {
     { 18, 0, 0, 0 },
     { 330, 660, 0, 0 },
     { 330, 730, 0, 0 },
     { 18, 735, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent047Track0[6] = {
+static const EventCharaKeyframe sEvent047Track0[6] = {
     { 856, 420, { 0, 0 }, 82176, 57600, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 856, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
     { 857, 680, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -9021,7 +9021,7 @@ const EventCharaKeyframe gEvent047Track0[6] = {
     { 856, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98373, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent047Track1[8] = {
+static const EventCharaKeyframe sEvent047Track1[8] = {
     { 486, 1, { 0, 0 }, 36096, 65280, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 502, 90, { 0, 0 }, 57088, 57088, 0, 486, { 0, 0 }, 83, 0, 0 },
     { 486, 110, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -9032,7 +9032,7 @@ const EventCharaKeyframe gEvent047Track1[8] = {
     { 509, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent047Track2[5] = {
+static const EventCharaKeyframe sEvent047Track2[5] = {
     { 842, 390, { 0, 0 }, 77312, 70144, 0, 0, { 0, 0 }, 18, 0, 0 },
     { 842, 400, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
     { 841, 660, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -9040,7 +9040,7 @@ const EventCharaKeyframe gEvent047Track2[5] = {
     { 841, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent047Track3[7] = {
+static const EventCharaKeyframe sEvent047Track3[7] = {
     { 445, 430, { 0, 0 }, 99840, 70400, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 445, 560, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 445, 790, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -9050,25 +9050,25 @@ const EventCharaKeyframe gEvent047Track3[7] = {
     { 444, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent047Track4[1] = {
+static const EventCharaKeyframe sEvent047Track4[1] = {
     { 919, 30, { 0, 0 }, 100352, 70144, 0, 0, { 0, 0 }, 33090, 0, 0 },
 };
 
-const EventCharaTrack gEvent047Tracks[5] = {
-    { gEvent047Track0, 81, { 0, 0, 0 } },
-    { gEvent047Track1, 43, { 0, 0, 0 } },
-    { gEvent047Track2, 79, { 0, 0, 0 } },
-    { gEvent047Track3, 35, { 0, 0, 0 } },
-    { gEvent047Track4, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent047Tracks[5] = {
+    { sEvent047Track0, 81, { 0, 0, 0 } },
+    { sEvent047Track1, 43, { 0, 0, 0 } },
+    { sEvent047Track2, 79, { 0, 0, 0 } },
+    { sEvent047Track3, 35, { 0, 0, 0 } },
+    { sEvent047Track4, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent047 = {
     5,
     { 0, 0, 0 },
-    gEvent047Tracks,
-    gEvent047Camera,
-    gEvent047Script,
-    gEvent047SoundCues,
+    sEvent047Tracks,
+    sEvent047Camera,
+    sEvent047Script,
+    sEvent047SoundCues,
     0,
     1260,
     0,
@@ -9090,7 +9090,7 @@ const EventSequenceDef gEvent047 = {
 #ifdef VERSION_US
 #include "event_051_text.inc"
 
-const MessageScriptEntry gEvent051Script[12] = {
+static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF820, 0, 280 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF854, 0, 430 },
     { 60, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF89E, 0, 590 },
@@ -9106,7 +9106,7 @@ const MessageScriptEntry gEvent051Script[12] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent051Script[12] = {
+static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD03C4, 0, 280 },
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD0394, 0, 430 },
     { 60, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD037C, 0, 590 },
@@ -9124,7 +9124,7 @@ const MessageScriptEntry gEvent051Script[12] = {
 #include "event_051_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent051Script[12] = {
+static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6017C, 0, 280 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60190, 0, 430 },
     { 60, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F601A4, 0, 590 },
@@ -9140,17 +9140,17 @@ const MessageScriptEntry gEvent051Script[12] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent051Camera[2] = {
+static const EventCameraKeyframe sEvent051Camera[2] = {
     { -65366, 98304, 63744, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -60536, 89088, 65536, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent051SoundCues[2] = {
+static const EvSoundCue sEvent051SoundCues[2] = {
     { 18, 0, 0, 0 },
     { 18, 950, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent051Track0[10] = {
+static const EventCharaKeyframe sEvent051Track0[10] = {
     { 486, 111, { 0, 0 }, 57856, 83456, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 502, 190, { 0, 0 }, 79616, 74240, 0, 486, { 0, 0 }, 67, 0, 0 },
     { 486, 630, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -9163,7 +9163,7 @@ const EventCharaKeyframe gEvent051Track0[10] = {
     { 495, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent051Track1[12] = {
+static const EventCharaKeyframe sEvent051Track1[12] = {
     { 445, 290, { 0, 0 }, 100096, 70144, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 445, 420, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 445, 440, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -9178,23 +9178,23 @@ const EventCharaKeyframe gEvent051Track1[12] = {
     { 422, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98309, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent051Track2[1] = {
+static const EventCharaKeyframe sEvent051Track2[1] = {
     { 919, 1, { 0, 0 }, 100608, 69888, 0, 0, { 0, 0 }, 33090, 0, 0 },
 };
 
-const EventCharaTrack gEvent051Tracks[3] = {
-    { gEvent051Track0, 43, { 0, 0, 0 } },
-    { gEvent051Track1, 35, { 0, 0, 0 } },
-    { gEvent051Track2, 86, { 0, 0, 0 } },
+static const EventCharaTrack sEvent051Tracks[3] = {
+    { sEvent051Track0, 43, { 0, 0, 0 } },
+    { sEvent051Track1, 35, { 0, 0, 0 } },
+    { sEvent051Track2, 86, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent051 = {
     3,
     { 0, 0, 0 },
-    gEvent051Tracks,
-    gEvent051Camera,
-    gEvent051Script,
-    gEvent051SoundCues,
+    sEvent051Tracks,
+    sEvent051Camera,
+    sEvent051Script,
+    sEvent051SoundCues,
     0,
     1210,
     0,
@@ -9216,13 +9216,13 @@ const EventSequenceDef gEvent051 = {
 #ifdef VERSION_US
 #include "event_052_text.inc"
 
-const MessageScriptEntry gEvent052Script[2] = {
+static const MessageScriptEntry sEvent052Script[2] = {
     { 6, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF0078, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF00DE, 32768, 265 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent052Script[2] = {
+static const MessageScriptEntry sEvent052Script[2] = {
     { 6, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD07FC, 0, 200 },
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD07E8, 32768, 265 },
 };
@@ -9230,21 +9230,21 @@ const MessageScriptEntry gEvent052Script[2] = {
 #include "event_052_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent052Script[2] = {
+static const MessageScriptEntry sEvent052Script[2] = {
     { 6, 4, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61CC0, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61CD4, 32768, 265 },
 };
 #endif
 
-const EventCameraKeyframe gEvent052Camera[1] = {
+static const EventCameraKeyframe sEvent052Camera[1] = {
     { -64536, 192512, 60672, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent052SoundCues[1] = {
+static const EvSoundCue sEvent052SoundCues[1] = {
     { 30, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent052Track0[14] = {
+static const EventCharaKeyframe sEvent052Track0[14] = {
     { 4, 1, { 0, 0 }, 156160, 83968, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 110, { 0, 0 }, 195072, 65536, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -9261,7 +9261,7 @@ const EventCharaKeyframe gEvent052Track0[14] = {
     { 4, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent052Track1[9] = {
+static const EventCharaKeyframe sEvent052Track1[9] = {
     { 229, 75, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 229, 76, { 0, 0 }, 185856, 68096, 0, 0, { 0, 0 }, 16402, 0, 0 },
     { 233, 103, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -9273,18 +9273,18 @@ const EventCharaKeyframe gEvent052Track1[9] = {
     { 231, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent052Tracks[2] = {
-    { gEvent052Track0, 0, { 0, 0, 0 } },
-    { gEvent052Track1, 8, { 0, 0, 0 } },
+static const EventCharaTrack sEvent052Tracks[2] = {
+    { sEvent052Track0, 0, { 0, 0, 0 } },
+    { sEvent052Track1, 8, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent052 = {
     2,
     { 0, 0, 0 },
-    gEvent052Tracks,
-    gEvent052Camera,
-    gEvent052Script,
-    gEvent052SoundCues,
+    sEvent052Tracks,
+    sEvent052Camera,
+    sEvent052Script,
+    sEvent052SoundCues,
     0,
     320,
     0,
@@ -9306,7 +9306,7 @@ const EventSequenceDef gEvent052 = {
 #ifdef VERSION_US
 #include "event_053_text.inc"
 
-const MessageScriptEntry gEvent053Script[26] = {
+static const MessageScriptEntry sEvent053Script[26] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF04DC, 0, 495 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF0552, 0, 765 },
     { 39, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF05DC, 32, 840 },
@@ -9336,7 +9336,7 @@ const MessageScriptEntry gEvent053Script[26] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent053Script[26] = {
+static const MessageScriptEntry sEvent053Script[26] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD11FC, 0, 495 },
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD11B8, 0, 765 },
     { 39, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD11AC, 32, 840 },
@@ -9368,7 +9368,7 @@ const MessageScriptEntry gEvent053Script[26] = {
 #include "event_053_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent053Script[26] = {
+static const MessageScriptEntry sEvent053Script[26] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60C80, 0, 495 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60C94, 0, 765 },
     { 39, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60CA8, 32, 840 },
@@ -9398,7 +9398,7 @@ const MessageScriptEntry gEvent053Script[26] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent053Camera[6] = {
+static const EventCameraKeyframe sEvent053Camera[6] = {
     { -65536, 99584, 82688, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65455, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
     { -65236, 88064, 77824, 0, 255, { 0, 0, 0 }, 1, 70, { 0, 0 }, 0 },
@@ -9407,14 +9407,14 @@ const EventCameraKeyframe gEvent053Camera[6] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent053SoundCues[4] = {
+static const EvSoundCue sEvent053SoundCues[4] = {
     { 33, 0, 0, 0 },
     { 356, 1, 0, 0 },
     { 356, 2795, 1, 0 },
     { 33, 2796, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent053Track0[49] = {
+static const EventCharaKeyframe sEvent053Track0[49] = {
     { 4, 1, { 0, 0 }, 116992, 93184, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 14, 100, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 36, 0, 0 },
     { 4, 103, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, 0, 0 },
@@ -9466,7 +9466,7 @@ const EventCharaKeyframe gEvent053Track0[49] = {
     { 14, 5000, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 32804, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent053Track1[20] = {
+static const EventCharaKeyframe sEvent053Track1[20] = {
     { 678, 800, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 678, 845, { 0, 0 }, 33792, 57856, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 680, 950, { 0, 0 }, 0, 0, 0, 83, { 0, 0 }, 100, 0, 0 },
@@ -9489,7 +9489,7 @@ const EventCharaKeyframe gEvent053Track1[20] = {
     { 678, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent053Track2[20] = {
+static const EventCharaKeyframe sEvent053Track2[20] = {
     { 627, 800, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 627, 841, { 0, 0 }, 43264, 54016, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 631, 936, { 0, 0 }, 0, 0, 0, 83, { 0, 0 }, 100, 0, 0 },
@@ -9512,7 +9512,7 @@ const EventCharaKeyframe gEvent053Track2[20] = {
     { 627, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent053Track3[10] = {
+static const EventCharaKeyframe sEvent053Track3[10] = {
     { 676, 800, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 676, 851, { 0, 0 }, 32512, 49664, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 677, 956, { 0, 0 }, 0, 0, 0, 83, { 0, 0 }, 100, 0, 0 },
@@ -9525,20 +9525,20 @@ const EventCharaKeyframe gEvent053Track3[10] = {
     { 676, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, 0, 0 },
 };
 
-const EventCharaTrack gEvent053Tracks[4] = {
-    { gEvent053Track0, 0, { 0, 0, 0 } },
-    { gEvent053Track1, 61, { 0, 0, 0 } },
-    { gEvent053Track2, 55, { 0, 0, 0 } },
-    { gEvent053Track3, 60, { 0, 0, 0 } },
+static const EventCharaTrack sEvent053Tracks[4] = {
+    { sEvent053Track0, 0, { 0, 0, 0 } },
+    { sEvent053Track1, 61, { 0, 0, 0 } },
+    { sEvent053Track2, 55, { 0, 0, 0 } },
+    { sEvent053Track3, 60, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent053 = {
     4,
     { 0, 0, 0 },
-    gEvent053Tracks,
-    gEvent053Camera,
-    gEvent053Script,
-    gEvent053SoundCues,
+    sEvent053Tracks,
+    sEvent053Camera,
+    sEvent053Script,
+    sEvent053SoundCues,
     0,
     2800,
     0,
@@ -9560,7 +9560,7 @@ const EventSequenceDef gEvent053 = {
 #ifdef VERSION_US
 #include "event_054_text.inc"
 
-const MessageScriptEntry gEvent054Script[18] = {
+static const MessageScriptEntry sEvent054Script[18] = {
     { 26, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF1E54, 0, 250 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF1E94, 0, 280 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF1EAC, 0, 380 },
@@ -9582,7 +9582,7 @@ const MessageScriptEntry gEvent054Script[18] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent054Script[18] = {
+static const MessageScriptEntry sEvent054Script[18] = {
     { 26, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD25BC, 0, 250 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD25AC, 0, 280 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD259C, 0, 380 },
@@ -9606,7 +9606,7 @@ const MessageScriptEntry gEvent054Script[18] = {
 #include "event_054_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent054Script[18] = {
+static const MessageScriptEntry sEvent054Script[18] = {
     { 26, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60E88, 0, 250 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60E9C, 0, 280 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60EB0, 0, 380 },
@@ -9628,13 +9628,13 @@ const MessageScriptEntry gEvent054Script[18] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent054Camera[3] = {
+static const EventCameraKeyframe sEvent054Camera[3] = {
     { -65535, 46592, 79872, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64456, 78848, 57600, 0, 255, { 0, 0, 0 }, 1, 120, { 0, 0 }, 0 },
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 33794, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent054SoundCues[6] = {
+static const EvSoundCue sEvent054SoundCues[6] = {
     { 33, 0, 0, 0 },
     { 33, 1055, 1, 0 },
     { 339, 1080, 0, 0 },
@@ -9643,7 +9643,7 @@ const EvSoundCue gEvent054SoundCues[6] = {
     { 4, 1536, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent054Track0[38] = {
+static const EventCharaKeyframe sEvent054Track0[38] = {
     { 4, 1, { 0, 0 }, 24832, 92160, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 110, { 0, 0 }, 71168, 68864, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 113, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -9684,7 +9684,7 @@ const EventCharaKeyframe gEvent054Track0[38] = {
     { 2, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent054Track1[12] = {
+static const EventCharaKeyframe sEvent054Track1[12] = {
     { 515, 200, { 0, 0 }, 86016, 60416, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 515, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 514, 550, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -9699,18 +9699,18 @@ const EventCharaKeyframe gEvent054Track1[12] = {
     { 520, 5000, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 32772, 0, 0 },
 };
 
-const EventCharaTrack gEvent054Tracks[2] = {
-    { gEvent054Track0, 0, { 0, 0, 0 } },
-    { gEvent054Track1, 44, { 0, 0, 0 } },
+static const EventCharaTrack sEvent054Tracks[2] = {
+    { sEvent054Track0, 0, { 0, 0, 0 } },
+    { sEvent054Track1, 44, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent054 = {
     2,
     { 0, 0, 0 },
-    gEvent054Tracks,
-    gEvent054Camera,
-    gEvent054Script,
-    gEvent054SoundCues,
+    sEvent054Tracks,
+    sEvent054Camera,
+    sEvent054Script,
+    sEvent054SoundCues,
     0,
     1540,
     0,
@@ -9732,34 +9732,34 @@ const EventSequenceDef gEvent054 = {
 #ifdef VERSION_US
 #include "event_055_text.inc"
 
-const MessageScriptEntry gEvent055Script[1] = {
+static const MessageScriptEntry sEvent055Script[1] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2D30, 32768, 115 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent055Script[1] = {
+static const MessageScriptEntry sEvent055Script[1] = {
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD2DDC, 32768, 115 },
 };
 
 #include "event_055_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent055Script[1] = {
+static const MessageScriptEntry sEvent055Script[1] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61298, 32768, 115 },
 };
 #endif
 
-const EventCameraKeyframe gEvent055Camera[1] = {
+static const EventCameraKeyframe sEvent055Camera[1] = {
     { -60536, 60928, 26880, 0, 255, { 0, 0, 0 }, 40960, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent055SoundCues[3] = {
+static const EvSoundCue sEvent055SoundCues[3] = {
     { 4, 0, 0, 0 },
     { 339, 1, 0, 0 },
     { 339, 155, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent055Track0[5] = {
+static const EventCharaKeyframe sEvent055Track0[5] = {
     { 4, 5, { 0, 0 }, 96256, 49152, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 14, 85, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 36, 0, 0 },
     { 4, 88, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 36, 0, 0 },
@@ -9767,17 +9767,17 @@ const EventCharaKeyframe gEvent055Track0[5] = {
     { 27, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent055Tracks[1] = {
-    { gEvent055Track0, 0, { 0, 0, 0 } },
+static const EventCharaTrack sEvent055Tracks[1] = {
+    { sEvent055Track0, 0, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent055 = {
     1,
     { 0, 0, 0 },
-    gEvent055Tracks,
-    gEvent055Camera,
-    gEvent055Script,
-    gEvent055SoundCues,
+    sEvent055Tracks,
+    sEvent055Camera,
+    sEvent055Script,
+    sEvent055SoundCues,
     0,
     160,
     0,
@@ -9799,7 +9799,7 @@ const EventSequenceDef gEvent055 = {
 #ifdef VERSION_US
 #include "event_056_text.inc"
 
-const MessageScriptEntry gEvent056Script[34] = {
+static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2EA0, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2ED2, 0, 245 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2F04, 0, 560 },
@@ -9837,7 +9837,7 @@ const MessageScriptEntry gEvent056Script[34] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent056Script[34] = {
+static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD37A4, 0, 100 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD3784, 0, 245 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBE990, 0, 560 },
@@ -9877,7 +9877,7 @@ const MessageScriptEntry gEvent056Script[34] = {
 #include "event_056_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent056Script[34] = {
+static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F60FF0, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61004, 0, 245 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61018, 0, 560 },
@@ -9915,7 +9915,7 @@ const MessageScriptEntry gEvent056Script[34] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent056Camera[6] = {
+static const EventCameraKeyframe sEvent056Camera[6] = {
     { -65166, 50432, 40448, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64485, 85760, 28160, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -64088, 75008, 30720, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
@@ -9924,7 +9924,7 @@ const EventCameraKeyframe gEvent056Camera[6] = {
     { -60536, 32512, 100864, 0, 255, { 0, 0, 0 }, 32769, 1, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent056SoundCues[6] = {
+static const EvSoundCue sEvent056SoundCues[6] = {
     { 65535, 0, 0, 0 },
     { 19, 645, 2, 0 },
     { 19, 1050, 1, 0 },
@@ -9933,7 +9933,7 @@ const EvSoundCue gEvent056SoundCues[6] = {
     { 27, 2061, 32769, 0 },
 };
 
-const EventBgEffectEntry gEvent056BgEffects[5] = {
+static const EventBgEffectEntry sEvent056BgEffects[5] = {
     { { 212, 8 }, 0, 0, 0, { 0, 0, 0, 0 } },
     { { 36, 9 }, 0, 80, 0, { 20, 0, 0, 0 } },
     { { 136, 19 }, 0, 0, 0, { 0, 0, 0, 0 } },
@@ -9941,7 +9941,7 @@ const EventBgEffectEntry gEvent056BgEffects[5] = {
     { { 88, 27 }, 0, 0, 0, { 8, 128, 0, 0 } },
 };
 
-const EventCharaKeyframe gEvent056Track0[63] = {
+static const EventCharaKeyframe sEvent056Track0[63] = {
     { 24, 130, { 0, 0 }, 50432, 43264, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 23, 145, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 3, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -10007,7 +10007,7 @@ const EventCharaKeyframe gEvent056Track0[63] = {
     { 15, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent056Track1[14] = {
+static const EventCharaKeyframe sEvent056Track1[14] = {
     { 428, 590, { 0, 0 }, 95232, 28928, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 428, 605, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 422, 720, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -10024,7 +10024,7 @@ const EventCharaKeyframe gEvent056Track1[14] = {
     { 428, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent056Track2[8] = {
+static const EventCharaKeyframe sEvent056Track2[8] = {
     { 428, 1100, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 428, 1620, { 0, 0 }, 54016, 45568, 0, 0, { 0, 0 }, 66, EventCharaFadeIn, 0 },
     { 428, 1750, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
@@ -10035,7 +10035,7 @@ const EventCharaKeyframe gEvent056Track2[8] = {
     { 428, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent056Track3[6] = {
+static const EventCharaKeyframe sEvent056Track3[6] = {
     { 912, 1858, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 912, 1891, { 0, 0 }, 67328, 29440, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 912, 2251, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
@@ -10044,21 +10044,21 @@ const EventCharaKeyframe gEvent056Track3[6] = {
     { 912, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent056Tracks[4] = {
-    { gEvent056Track0, 0, { 0, 0, 0 } },
-    { gEvent056Track1, 35, { 0, 0, 0 } },
-    { gEvent056Track2, 35, { 0, 0, 0 } },
-    { gEvent056Track3, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent056Tracks[4] = {
+    { sEvent056Track0, 0, { 0, 0, 0 } },
+    { sEvent056Track1, 35, { 0, 0, 0 } },
+    { sEvent056Track2, 35, { 0, 0, 0 } },
+    { sEvent056Track3, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent056 = {
     4,
     { 0, 0, 0 },
-    gEvent056Tracks,
-    gEvent056Camera,
-    gEvent056Script,
-    gEvent056SoundCues,
-    gEvent056BgEffects,
+    sEvent056Tracks,
+    sEvent056Camera,
+    sEvent056Script,
+    sEvent056SoundCues,
+    sEvent056BgEffects,
     2290,
     0,
     0,
@@ -10079,14 +10079,14 @@ const EventSequenceDef gEvent056 = {
 #ifdef VERSION_US
 #include "event_057_text.inc"
 
-const MessageScriptEntry gEvent057Script[3] = {
+static const MessageScriptEntry sEvent057Script[3] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4A7C, 0, 150 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4A86, 0, 335 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4B04, 32768, 635 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent057Script[3] = {
+static const MessageScriptEntry sEvent057Script[3] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD46C0, 0, 150 },
     { 0, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4694, 0, 335 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4668, 32768, 635 },
@@ -10095,22 +10095,22 @@ const MessageScriptEntry gEvent057Script[3] = {
 #include "event_057_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent057Script[3] = {
+static const MessageScriptEntry sEvent057Script[3] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F612AC, 0, 150 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F612C0, 0, 335 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F612D4, 32768, 635 },
 };
 #endif
 
-const EventCameraKeyframe gEvent057Camera[1] = {
+static const EventCameraKeyframe sEvent057Camera[1] = {
     { -60536, 32512, 31488, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent057SoundCues[1] = {
+static const EvSoundCue sEvent057SoundCues[1] = {
     { 65535, 0, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent057Track0[21] = {
+static const EventCharaKeyframe sEvent057Track0[21] = {
     { 15, 180, { 0, 0 }, 33024, 35840, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 15, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, 0, (EventCharaKeyframeFunc)CreateBalloonTask },
     { 15, 430, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -10134,17 +10134,17 @@ const EventCharaKeyframe gEvent057Track0[21] = {
     { 12, 1120, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 32804, 0, 0 },
 };
 
-const EventCharaTrack gEvent057Tracks[1] = {
-    { gEvent057Track0, 0, { 0, 0, 0 } },
+static const EventCharaTrack sEvent057Tracks[1] = {
+    { sEvent057Track0, 0, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent057 = {
     1,
     { 0, 0, 0 },
-    gEvent057Tracks,
-    gEvent057Camera,
-    gEvent057Script,
-    gEvent057SoundCues,
+    sEvent057Tracks,
+    sEvent057Camera,
+    sEvent057Script,
+    sEvent057SoundCues,
     0,
     740,
     0,
@@ -10166,7 +10166,7 @@ const EventSequenceDef gEvent057 = {
 #ifdef VERSION_US
 #include "event_058_text.inc"
 
-const MessageScriptEntry gEvent058Script[12] = {
+static const MessageScriptEntry sEvent058Script[12] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4EF8, 0, 160 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4F08, 0, 450 },
     { 0, 7, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4F24, 0, 452 },
@@ -10182,7 +10182,7 @@ const MessageScriptEntry gEvent058Script[12] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent058Script[12] = {
+static const MessageScriptEntry sEvent058Script[12] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4D08, 0, 160 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4CF0, 0, 450 },
     { 0, 7, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4CD8, 0, 452 },
@@ -10200,7 +10200,7 @@ const MessageScriptEntry gEvent058Script[12] = {
 #include "event_058_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent058Script[12] = {
+static const MessageScriptEntry sEvent058Script[12] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61BD0, 0, 160 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61BE4, 0, 450 },
     { 0, 7, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61BF8, 0, 452 },
@@ -10216,19 +10216,19 @@ const MessageScriptEntry gEvent058Script[12] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent058Camera[3] = {
+static const EventCameraKeyframe sEvent058Camera[3] = {
     { -65336, 171264, 71424, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64836, 178432, 68864, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
     { -60536, 183296, 70144, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent058SoundCues[3] = {
+static const EvSoundCue sEvent058SoundCues[3] = {
     { 30, 0, 0, 0 },
     { 30, 575, 1, 0 },
     { 359, 830, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent058Track0[17] = {
+static const EventCharaKeyframe sEvent058Track0[17] = {
     { 4, 1, { 0, 0 }, 140800, 92160, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 80, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 4, 100, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -10248,7 +10248,7 @@ const EventCharaKeyframe gEvent058Track0[17] = {
     { 18, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent058Track1[14] = {
+static const EventCharaKeyframe sEvent058Track1[14] = {
     { 423, 160, { 0, 0 }, 182528, 71168, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 425, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 422, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -10265,7 +10265,7 @@ const EventCharaKeyframe gEvent058Track1[14] = {
     { 422, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent058Track2[5] = {
+static const EventCharaKeyframe sEvent058Track2[5] = {
     { 695, 700, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 695, 701, { 0, 0 }, 212480, 64000, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 711, 800, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
@@ -10273,19 +10273,19 @@ const EventCharaKeyframe gEvent058Track2[5] = {
     { 698, 1845, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent058Tracks[3] = {
-    { gEvent058Track0, 0, { 0, 0, 0 } },
-    { gEvent058Track1, 35, { 0, 0, 0 } },
-    { gEvent058Track2, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent058Tracks[3] = {
+    { sEvent058Track0, 0, { 0, 0, 0 } },
+    { sEvent058Track1, 35, { 0, 0, 0 } },
+    { sEvent058Track2, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent058 = {
     3,
     { 0, 0, 0 },
-    gEvent058Tracks,
-    gEvent058Camera,
-    gEvent058Script,
-    gEvent058SoundCues,
+    sEvent058Tracks,
+    sEvent058Camera,
+    sEvent058Script,
+    sEvent058SoundCues,
     0,
     920,
     0,
@@ -10307,7 +10307,7 @@ const EventSequenceDef gEvent058 = {
 #ifdef VERSION_US
 #include "event_059_text.inc"
 
-const MessageScriptEntry gEvent059Script[61] = {
+static const MessageScriptEntry sEvent059Script[61] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF59AC, 0, 100 },
     { 27, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF59B8, 0, 140 },
     { 60, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF59D8, 0, 280 },
@@ -10372,7 +10372,7 @@ const MessageScriptEntry gEvent059Script[61] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent059Script[61] = {
+static const MessageScriptEntry sEvent059Script[61] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCE020, 0, 100 },
     { 27, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD6348, 0, 140 },
     { 60, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCEA34, 0, 280 },
@@ -10439,7 +10439,7 @@ const MessageScriptEntry gEvent059Script[61] = {
 #include "event_059_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent059Script[61] = {
+static const MessageScriptEntry sEvent059Script[61] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F612E8, 0, 100 },
     { 27, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F612FC, 0, 140 },
     { 60, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61310, 0, 280 },
@@ -10504,7 +10504,7 @@ const MessageScriptEntry gEvent059Script[61] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent059Camera[16] = {
+static const EventCameraKeyframe sEvent059Camera[16] = {
     { -65376, 212480, 50944, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65368, 0, 0, 0, 255, { 0, 0, 0 }, 34, 8, { 0, 0 }, 0 },
     { -65360, 0, 0, 0, 255, { 0, 0, 0 }, 130, 8, { 0, 0 }, 0 },
@@ -10523,7 +10523,7 @@ const EventCameraKeyframe gEvent059Camera[16] = {
     { -56536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent059SoundCues[17] = {
+static const EvSoundCue sEvent059SoundCues[17] = {
     { 65535, 0, 0, 0 },
     { 332, 160, 0, 0 },
     { 28, 285, 2, 0 },
@@ -10543,7 +10543,7 @@ const EvSoundCue gEvent059SoundCues[17] = {
     { 516, 3310, 32768, 0 },
 };
 
-const EventBgEffectEntry gEvent059BgEffects[5] = {
+static const EventBgEffectEntry sEvent059BgEffects[5] = {
     { { 208, 12 }, 0, 0, 0, { 0, 0, 0, 0 } },
     { { 238, 12 }, 0, 0, 0, { 4, 0, 0, 0 } },
     { { 27, 13 }, 1, 150272, 64512, { 1, 0, 0, 0 } },
@@ -10551,7 +10551,7 @@ const EventBgEffectEntry gEvent059BgEffects[5] = {
     { { 172, 13 }, 0, 0, 0, { 8, 128, 0, 0 } },
 };
 
-const EventCharaKeyframe gEvent059Track0[25] = {
+static const EventCharaKeyframe sEvent059Track0[25] = {
     { 4, 160, { 0, 0 }, 208128, 58112, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 97, 180, { 0, 0 }, 166400, 80384, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 68, 840, { 0, 0 }, 160768, 82944, 0, 0, { 0, 0 }, 322, 0, 0 },
@@ -10579,7 +10579,7 @@ const EventCharaKeyframe gEvent059Track0[25] = {
     { 19, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track1[11] = {
+static const EventCharaKeyframe sEvent059Track1[11] = {
     { 705, 145, { 0, 0 }, 215296, 54528, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 697, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 705, 281, { 0, 0 }, 204800, 60672, 0, 0, { 0, 0 }, 2, 0, 0 },
@@ -10593,7 +10593,7 @@ const EventCharaKeyframe gEvent059Track1[11] = {
     { 713, 5000, { 0, 0 }, 178176, 81664, 0, 0, { 0, 0 }, 33090, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track2[26] = {
+static const EventCharaKeyframe sEvent059Track2[26] = {
     { 422, 491, { 0, 0 }, 228352, 54272, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 422, 500, { 0, 0 }, 203776, 69376, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 448, 540, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 36, 0, 0 },
@@ -10622,7 +10622,7 @@ const EventCharaKeyframe gEvent059Track2[26] = {
     { 436, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track3[28] = {
+static const EventCharaKeyframe sEvent059Track3[28] = {
     { 856, 1089, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 856, 1090, { 0, 0 }, 206848, 59904, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 881, 1170, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, 0, 0 },
@@ -10653,7 +10653,7 @@ const EventCharaKeyframe gEvent059Track3[28] = {
     { 868, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track4[6] = {
+static const EventCharaKeyframe sEvent059Track4[6] = {
     { 114, 3400, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 114, 3401, { 0, 0 }, 135424, 86272, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 3510, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 100, 0, 0 },
@@ -10662,7 +10662,7 @@ const EventCharaKeyframe gEvent059Track4[6] = {
     { 123, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track5[5] = {
+static const EventCharaKeyframe sEvent059Track5[5] = {
     { 146, 3199, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 146, 3200, { 0, 0 }, 152832, 50944, 0, 0, { 0, 0 }, 322, 0, 0 },
     { 171, 3220, { 0, 0 }, 166400, 79616, 0, 0, { 0, 0 }, 4419, EventCharaFadeIn, 0 },
@@ -10670,7 +10670,7 @@ const EventCharaKeyframe gEvent059Track5[5] = {
     { 173, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent059Track6[9] = {
+static const EventCharaKeyframe sEvent059Track6[9] = {
     { 928, 1040, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 927, 1090, { 0, 0 }, 157696, 73472, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 928, 1620, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 258, 0, 0 },
@@ -10682,24 +10682,24 @@ const EventCharaKeyframe gEvent059Track6[9] = {
     { 928, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent059Tracks[7] = {
-    { gEvent059Track0, 0, { 0, 0, 0 } },
-    { gEvent059Track1, 65, { 0, 0, 0 } },
-    { gEvent059Track2, 35, { 0, 0, 0 } },
-    { gEvent059Track3, 81, { 0, 0, 0 } },
-    { gEvent059Track4, 1, { 0, 0, 0 } },
-    { gEvent059Track5, 2, { 0, 0, 0 } },
-    { gEvent059Track6, 93, { 0, 0, 0 } },
+static const EventCharaTrack sEvent059Tracks[7] = {
+    { sEvent059Track0, 0, { 0, 0, 0 } },
+    { sEvent059Track1, 65, { 0, 0, 0 } },
+    { sEvent059Track2, 35, { 0, 0, 0 } },
+    { sEvent059Track3, 81, { 0, 0, 0 } },
+    { sEvent059Track4, 1, { 0, 0, 0 } },
+    { sEvent059Track5, 2, { 0, 0, 0 } },
+    { sEvent059Track6, 93, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent059 = {
     7,
     { 0, 0, 0 },
-    gEvent059Tracks,
-    gEvent059Camera,
-    gEvent059Script,
-    gEvent059SoundCues,
-    gEvent059BgEffects,
+    sEvent059Tracks,
+    sEvent059Camera,
+    sEvent059Script,
+    sEvent059SoundCues,
+    sEvent059BgEffects,
     4105,
     0,
     1,
@@ -10720,7 +10720,7 @@ const EventSequenceDef gEvent059 = {
 #ifdef VERSION_US
 #include "event_060_text.inc"
 
-const MessageScriptEntry gEvent060Script[53] = {
+static const MessageScriptEntry sEvent060Script[53] = {
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF8788, 0, 100 },
     { 54, 4, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF87F0, 0, 102 },
     { 2, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF8862, 0, 560 },
@@ -10777,7 +10777,7 @@ const MessageScriptEntry gEvent060Script[53] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent060Script[53] = {
+static const MessageScriptEntry sEvent060Script[53] = {
     { 54, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD84D0, 0, 100 },
     { 54, 4, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD848C, 0, 102 },
     { 2, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD8458, 0, 560 },
@@ -10836,7 +10836,7 @@ const MessageScriptEntry gEvent060Script[53] = {
 #include "event_060_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent060Script[53] = {
+static const MessageScriptEntry sEvent060Script[53] = {
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F617AC, 0, 100 },
     { 54, 4, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F617C0, 0, 102 },
     { 2, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F617D4, 0, 560 },
@@ -10893,7 +10893,7 @@ const MessageScriptEntry gEvent060Script[53] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent060Camera[12] = {
+static const EventCameraKeyframe sEvent060Camera[12] = {
     { -65416, 193792, 60928, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65406, 0, 0, 0, 255, { 0, 0, 0 }, 18, 8, { 0, 0 }, 0 },
     { -65386, 0, 0, 0, 255, { 0, 0, 0 }, 18, 8, { 0, 0 }, 0 },
@@ -10908,13 +10908,13 @@ const EventCameraKeyframe gEvent060Camera[12] = {
     { -59536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent060SoundCues[3] = {
+static const EvSoundCue sEvent060SoundCues[3] = {
     { 65535, 0, 0, 0 },
     { 364, 168, 0, 0 },
     { 19, 1516, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track0[57] = {
+static const EventCharaKeyframe sEvent060Track0[57] = {
     { 21, 320, { 0, 0 }, 189184, 66048, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 333, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 400, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -10974,7 +10974,7 @@ const EventCharaKeyframe gEvent060Track0[57] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track1[41] = {
+static const EventCharaKeyframe sEvent060Track1[41] = {
     { 123, 322, { 0, 0 }, 189440, 74752, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 336, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 400, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -11018,7 +11018,7 @@ const EventCharaKeyframe gEvent060Track1[41] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track2[41] = {
+static const EventCharaKeyframe sEvent060Track2[41] = {
     { 158, 325, { 0, 0 }, 178432, 66048, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 338, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 408, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -11062,7 +11062,7 @@ const EventCharaKeyframe gEvent060Track2[41] = {
     { 144, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track3[10] = {
+static const EventCharaKeyframe sEvent060Track3[10] = {
     { 422, 1045, { 0, 0 }, 151040, 64000, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 423, 1640, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 425, 1700, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -11075,7 +11075,7 @@ const EventCharaKeyframe gEvent060Track3[10] = {
     { 428, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track4[17] = {
+static const EventCharaKeyframe sEvent060Track4[17] = {
     { 231, 490, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 231, 491, { 0, 0 }, 170752, 74752, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 234, 521, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -11095,34 +11095,34 @@ const EventCharaKeyframe gEvent060Track4[17] = {
     { 231, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track5[4] = {
+static const EventCharaKeyframe sEvent060Track5[4] = {
     { 872, 200, { 0, 0 }, 207616, 59392, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 872, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, 0 },
     { 872, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 872, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent060Track6[1] = {
+static const EventCharaKeyframe sEvent060Track6[1] = {
     { 713, 5000, { 0, 0 }, 157696, 66048, 0, 0, { 0, 0 }, 33026, 0, 0 },
 };
 
-const EventCharaTrack gEvent060Tracks[7] = {
-    { gEvent060Track0, 0, { 0, 0, 0 } },
-    { gEvent060Track1, 1, { 0, 0, 0 } },
-    { gEvent060Track2, 2, { 0, 0, 0 } },
-    { gEvent060Track3, 35, { 0, 0, 0 } },
-    { gEvent060Track4, 8, { 0, 0, 0 } },
-    { gEvent060Track5, 81, { 0, 0, 0 } },
-    { gEvent060Track6, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent060Tracks[7] = {
+    { sEvent060Track0, 0, { 0, 0, 0 } },
+    { sEvent060Track1, 1, { 0, 0, 0 } },
+    { sEvent060Track2, 2, { 0, 0, 0 } },
+    { sEvent060Track3, 35, { 0, 0, 0 } },
+    { sEvent060Track4, 8, { 0, 0, 0 } },
+    { sEvent060Track5, 81, { 0, 0, 0 } },
+    { sEvent060Track6, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent060 = {
     7,
     { 0, 0, 0 },
-    gEvent060Tracks,
-    gEvent060Camera,
-    gEvent060Script,
-    gEvent060SoundCues,
+    sEvent060Tracks,
+    sEvent060Camera,
+    sEvent060Script,
+    sEvent060SoundCues,
     0,
     4240,
     0,
@@ -11144,7 +11144,7 @@ const EventSequenceDef gEvent060 = {
 #ifdef VERSION_US
 #include "event_061_text.inc"
 
-const MessageScriptEntry gEvent061Script[18] = {
+static const MessageScriptEntry sEvent061Script[18] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFB9C8, 0, 250 },
     { 0, 5, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFBA04, 0, 430 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFBA1E, 0, 460 },
@@ -11166,7 +11166,7 @@ const MessageScriptEntry gEvent061Script[18] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent061Script[18] = {
+static const MessageScriptEntry sEvent061Script[18] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDA368, 0, 250 },
     { 0, 5, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDA35C, 0, 430 },
     { 1, 2, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDA348, 0, 460 },
@@ -11190,7 +11190,7 @@ const MessageScriptEntry gEvent061Script[18] = {
 #include "event_061_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent061Script[18] = {
+static const MessageScriptEntry sEvent061Script[18] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61CE8, 0, 250 },
     { 0, 5, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61CFC, 0, 430 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61D10, 0, 460 },
@@ -11212,12 +11212,12 @@ const MessageScriptEntry gEvent061Script[18] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent061Camera[2] = {
+static const EventCameraKeyframe sEvent061Camera[2] = {
     { -65536, 34304, 34560, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32898, 80, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent061SoundCues[5] = {
+static const EvSoundCue sEvent061SoundCues[5] = {
     { 38, 0, 0, 0 },
     { 914, 990, 0, 0 },
     { 358, 1192, 0, 0 },
@@ -11225,7 +11225,7 @@ const EvSoundCue gEvent061SoundCues[5] = {
     { 38, 1455, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent061Track0[19] = {
+static const EventCharaKeyframe sEvent061Track0[19] = {
     { 4, 1, { 0, 0 }, 73472, 55808, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 9, 180, { 0, 0 }, 29696, 36096, 0, 4, { 0, 0 }, 3, 0, 0 },
     { 4, 200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -11247,7 +11247,7 @@ const EventCharaKeyframe gEvent061Track0[19] = {
     { 92, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent061Track1[25] = {
+static const EventCharaKeyframe sEvent061Track1[25] = {
     { 114, 1, { 0, 0 }, 71680, 65024, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 119, 180, { 0, 0 }, 32256, 45312, 0, 114, { 0, 0 }, 3, 0, 0 },
     { 114, 460, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -11275,7 +11275,7 @@ const EventCharaKeyframe gEvent061Track1[25] = {
     { 141, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent061Track2[18] = {
+static const EventCharaKeyframe sEvent061Track2[18] = {
     { 146, 1, { 0, 0 }, 83968, 57088, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 151, 180, { 0, 0 }, 42496, 34304, 0, 146, { 0, 0 }, 3, 0, 0 },
     { 146, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -11296,26 +11296,26 @@ const EventCharaKeyframe gEvent061Track2[18] = {
     { 175, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent061Track3[3] = {
+static const EventCharaKeyframe sEvent061Track3[3] = {
     { 909, 226, { 0, 0 }, 128000, 128000, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 913, 470, { 0, 0 }, 29696, 36096, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 909, 1000, { 0, 0 }, 128000, 128000, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent061Tracks[4] = {
-    { gEvent061Track0, 0, { 0, 0, 0 } },
-    { gEvent061Track1, 1, { 0, 0, 0 } },
-    { gEvent061Track2, 2, { 0, 0, 0 } },
-    { gEvent061Track3, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent061Tracks[4] = {
+    { sEvent061Track0, 0, { 0, 0, 0 } },
+    { sEvent061Track1, 1, { 0, 0, 0 } },
+    { sEvent061Track2, 2, { 0, 0, 0 } },
+    { sEvent061Track3, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent061 = {
     4,
     { 0, 0, 0 },
-    gEvent061Tracks,
-    gEvent061Camera,
-    gEvent061Script,
-    gEvent061SoundCues,
+    sEvent061Tracks,
+    sEvent061Camera,
+    sEvent061Script,
+    sEvent061SoundCues,
     0,
     1460,
     0,
@@ -11335,63 +11335,63 @@ const EventSequenceDef gEvent061 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent062Script[1] = {
+static const MessageScriptEntry sEvent062Script[1] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCA5C, 32768, 9999 },
 };
 
 #include "event_062_text.inc"
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent062Script[1] = {
+static const MessageScriptEntry sEvent062Script[1] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDAD80, 32768, 9999 },
 };
 
 #include "event_062_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent062Script[1] = {
+static const MessageScriptEntry sEvent062Script[1] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, 0, 32768, 9999 },
 };
 #endif
 
-const EventCameraKeyframe gEvent062Camera[1] = {
+static const EventCameraKeyframe sEvent062Camera[1] = {
     { -65485, 159744, 66048, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent062SoundCues[3] = {
+static const EvSoundCue sEvent062SoundCues[3] = {
     { 18, 0, 0, 0 },
     { 331, 290, 0, 0 },
     { 18, 365, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent062Track0[1] = {
+static const EventCharaKeyframe sEvent062Track0[1] = {
     { 714, 1000, { 0, 0 }, 153088, 68864, 0, 0, { 0, 0 }, 33026, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent062Track1[1] = {
+static const EventCharaKeyframe sEvent062Track1[1] = {
     { 440, 30, { 0, 0 }, 157952, 71680, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent062Track2[4] = {
+static const EventCharaKeyframe sEvent062Track2[4] = {
     { 842, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 842, 350, { 0, 0 }, 184064, 84480, 0, 0, { 0, 0 }, 2, EventCharaFadeIn, 0 },
     { 844, 450, { 0, 0 }, 167936, 76800, 0, 842, { 0, 0 }, 3, 0, 0 },
     { 842, 330, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent062Tracks[3] = {
-    { gEvent062Track0, 65, { 0, 0, 0 } },
-    { gEvent062Track1, 35, { 0, 0, 0 } },
-    { gEvent062Track2, 79, { 0, 0, 0 } },
+static const EventCharaTrack sEvent062Tracks[3] = {
+    { sEvent062Track0, 65, { 0, 0, 0 } },
+    { sEvent062Track1, 35, { 0, 0, 0 } },
+    { sEvent062Track2, 79, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent062 = {
     3,
     { 0, 0, 0 },
-    gEvent062Tracks,
-    gEvent062Camera,
-    gEvent062Script,
-    gEvent062SoundCues,
+    sEvent062Tracks,
+    sEvent062Camera,
+    sEvent062Script,
+    sEvent062SoundCues,
     0,
     370,
     0,
@@ -11413,7 +11413,7 @@ const EventSequenceDef gEvent062 = {
 #ifdef VERSION_US
 #include "event_063_text.inc"
 
-const MessageScriptEntry gEvent063Script[15] = {
+static const MessageScriptEntry sEvent063Script[15] = {
     { 58, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCBCC, 0, 260 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCC42, 0, 280 },
     { 58, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCCA4, 0, 300 },
@@ -11432,7 +11432,7 @@ const MessageScriptEntry gEvent063Script[15] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent063Script[15] = {
+static const MessageScriptEntry sEvent063Script[15] = {
     { 58, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDB364, 0, 260 },
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDB33C, 0, 280 },
     { 58, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDB324, 0, 300 },
@@ -11453,7 +11453,7 @@ const MessageScriptEntry gEvent063Script[15] = {
 #include "event_063_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent063Script[15] = {
+static const MessageScriptEntry sEvent063Script[15] = {
     { 58, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61FE0, 0, 260 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61FF4, 0, 280 },
     { 58, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62008, 0, 300 },
@@ -11472,7 +11472,7 @@ const MessageScriptEntry gEvent063Script[15] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent063Camera[5] = {
+static const EventCameraKeyframe sEvent063Camera[5] = {
     { -65346, 190464, 70144, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64946, 180480, 65792, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -64936, 0, 0, 0, 255, { 0, 0, 0 }, 34, 10, { 0, 0 }, 0 },
@@ -11480,14 +11480,14 @@ const EventCameraKeyframe gEvent063Camera[5] = {
     { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent063SoundCues[4] = {
+static const EvSoundCue sEvent063SoundCues[4] = {
     { 18, 0, 0, 0 },
     { 322, 510, 0, 0 },
     { 323, 599, 0, 0 },
     { 18, 745, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent063Track0[15] = {
+static const EventCharaKeyframe sEvent063Track0[15] = {
     { 485, 99, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 485, 100, { 0, 0 }, 194560, 46848, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 494, 210, { 0, 0 }, 170240, 66304, 0, 485, { 0, 0 }, 3, 0, 0 },
@@ -11505,32 +11505,32 @@ const EventCharaKeyframe gEvent063Track0[15] = {
     { 493, 670, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent063Track1[4] = {
+static const EventCharaKeyframe sEvent063Track1[4] = {
     { 841, 200, { 0, 0 }, 191232, 78592, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 841, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 842, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 842, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent063Track2[3] = {
+static const EventCharaKeyframe sEvent063Track2[3] = {
     { 485, 586, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 512, 599, { 0, 0 }, 170240, 66304, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 485, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32834, 0, 0 },
 };
 
-const EventCharaTrack gEvent063Tracks[3] = {
-    { gEvent063Track0, 43, { 0, 0, 0 } },
-    { gEvent063Track1, 79, { 0, 0, 0 } },
-    { gEvent063Track2, 43, { 0, 0, 0 } },
+static const EventCharaTrack sEvent063Tracks[3] = {
+    { sEvent063Track0, 43, { 0, 0, 0 } },
+    { sEvent063Track1, 79, { 0, 0, 0 } },
+    { sEvent063Track2, 43, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent063 = {
     3,
     { 0, 0, 0 },
-    gEvent063Tracks,
-    gEvent063Camera,
-    gEvent063Script,
-    gEvent063SoundCues,
+    sEvent063Tracks,
+    sEvent063Camera,
+    sEvent063Script,
+    sEvent063SoundCues,
     0,
     750,
     0,
@@ -11552,7 +11552,7 @@ const EventSequenceDef gEvent063 = {
 #ifdef VERSION_US
 #include "event_064_text.inc"
 
-const MessageScriptEntry gEvent064Script[16] = {
+static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD77C, 0, 150 },
     { 20, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD7CA, 0, 152 },
     { 58, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD886, 0, 180 },
@@ -11572,7 +11572,7 @@ const MessageScriptEntry gEvent064Script[16] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent064Script[16] = {
+static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDBBCC, 0, 150 },
     { 20, 3, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDBB84, 0, 152 },
     { 58, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDBB60, 0, 180 },
@@ -11594,7 +11594,7 @@ const MessageScriptEntry gEvent064Script[16] = {
 #include "event_064_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent064Script[16] = {
+static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61E50, 0, 150 },
     { 20, 3, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61E64, 0, 152 },
     { 58, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61E78, 0, 180 },
@@ -11614,13 +11614,13 @@ const MessageScriptEntry gEvent064Script[16] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent064Camera[3] = {
+static const EventCameraKeyframe sEvent064Camera[3] = {
     { -65046, 182016, 66304, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64881, 170752, 66560, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
     { -64537, 164352, 66560, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent064SoundCues[6] = {
+static const EvSoundCue sEvent064SoundCues[6] = {
     { 18, 0, 0, 0 },
     { 323, 270, 0, 0 },
     { 18, 450, 1, 0 },
@@ -11629,7 +11629,7 @@ const EvSoundCue gEvent064SoundCues[6] = {
     { 323, 790, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track0[6] = {
+static const EventCharaKeyframe sEvent064Track0[6] = {
     { 510, 240, { 0, 0 }, 175872, 67584, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 503, 270, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 493, 410, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -11638,14 +11638,14 @@ const EventCharaKeyframe gEvent064Track0[6] = {
     { 511, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track1[4] = {
+static const EventCharaKeyframe sEvent064Track1[4] = {
     { 842, 615, { 0, 0 }, 190720, 80128, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 844, 635, { 0, 0 }, 185600, 76544, 0, 842, { 0, 0 }, 3, 0, 0 },
     { 842, 655, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, 0 },
     { 842, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track2[7] = {
+static const EventCharaKeyframe sEvent064Track2[7] = {
     { 428, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 428, 210, { 0, 0 }, 184320, 75008, 0, 0, { 0, 0 }, 16386, EventCharaFadeIn, 0 },
     { 428, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -11655,7 +11655,7 @@ const EventCharaKeyframe gEvent064Track2[7] = {
     { 428, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track3[6] = {
+static const EventCharaKeyframe sEvent064Track3[6] = {
     { 4, 450, { 0, 0 }, 139520, 86272, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 520, { 0, 0 }, 164096, 74240, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 522, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -11664,7 +11664,7 @@ const EventCharaKeyframe gEvent064Track3[6] = {
     { 21, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track4[6] = {
+static const EventCharaKeyframe sEvent064Track4[6] = {
     { 114, 450, { 0, 0 }, 132352, 89088, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 530, { 0, 0 }, 154112, 76288, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 532, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -11673,7 +11673,7 @@ const EventCharaKeyframe gEvent064Track4[6] = {
     { 123, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent064Track5[6] = {
+static const EventCharaKeyframe sEvent064Track5[6] = {
     { 146, 450, { 0, 0 }, 142848, 94720, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 153, 530, { 0, 0 }, 160512, 82944, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 532, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -11682,22 +11682,22 @@ const EventCharaKeyframe gEvent064Track5[6] = {
     { 158, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent064Tracks[6] = {
-    { gEvent064Track0, 43, { 0, 0, 0 } },
-    { gEvent064Track1, 79, { 0, 0, 0 } },
-    { gEvent064Track2, 35, { 0, 0, 0 } },
-    { gEvent064Track3, 0, { 0, 0, 0 } },
-    { gEvent064Track4, 1, { 0, 0, 0 } },
-    { gEvent064Track5, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent064Tracks[6] = {
+    { sEvent064Track0, 43, { 0, 0, 0 } },
+    { sEvent064Track1, 79, { 0, 0, 0 } },
+    { sEvent064Track2, 35, { 0, 0, 0 } },
+    { sEvent064Track3, 0, { 0, 0, 0 } },
+    { sEvent064Track4, 1, { 0, 0, 0 } },
+    { sEvent064Track5, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent064 = {
     6,
     { 0, 0, 0 },
-    gEvent064Tracks,
-    gEvent064Camera,
-    gEvent064Script,
-    gEvent064SoundCues,
+    sEvent064Tracks,
+    sEvent064Camera,
+    sEvent064Script,
+    sEvent064SoundCues,
     0,
     880,
     0,
@@ -11719,7 +11719,7 @@ const EventSequenceDef gEvent064 = {
 #ifdef VERSION_US
 #include "event_065_text.inc"
 
-const MessageScriptEntry gEvent065Script[4] = {
+static const MessageScriptEntry sEvent065Script[4] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE3EC, 0, 140 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE47E, 0, 160 },
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE4B8, 0, 350 },
@@ -11727,7 +11727,7 @@ const MessageScriptEntry gEvent065Script[4] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent065Script[4] = {
+static const MessageScriptEntry sEvent065Script[4] = {
     { 20, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDC280, 0, 140 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDC264, 0, 160 },
     { 20, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDC240, 0, 350 },
@@ -11737,7 +11737,7 @@ const MessageScriptEntry gEvent065Script[4] = {
 #include "event_065_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent065Script[4] = {
+static const MessageScriptEntry sEvent065Script[4] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61F90, 0, 140 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61FA4, 0, 160 },
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F61FB8, 0, 350 },
@@ -11745,18 +11745,18 @@ const MessageScriptEntry gEvent065Script[4] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent065Camera[2] = {
+static const EventCameraKeyframe sEvent065Camera[2] = {
     { -65146, 161792, 69888, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent065SoundCues[3] = {
+static const EvSoundCue sEvent065SoundCues[3] = {
     { 18, 0, 0, 0 },
     { 330, 400, 0, 0 },
     { 18, 865, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent065Track0[20] = {
+static const EventCharaKeyframe sEvent065Track0[20] = {
     { 21, 141, { 0, 0 }, 156672, 76800, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 145, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 27, 161, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -11779,48 +11779,48 @@ const EventCharaKeyframe gEvent065Track0[20] = {
     { 14, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32868, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent065Track1[4] = {
+static const EventCharaKeyframe sEvent065Track1[4] = {
     { 123, 155, { 0, 0 }, 146688, 77824, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 165, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 795, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 120, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32868, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent065Track2[4] = {
+static const EventCharaKeyframe sEvent065Track2[4] = {
     { 158, 160, { 0, 0 }, 155136, 86528, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 796, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 153, 999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32868, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent065Track3[4] = {
+static const EventCharaKeyframe sEvent065Track3[4] = {
     { 508, 170, { 0, 0 }, 172800, 69632, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 508, 400, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 508, 420, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, 0 },
     { 508, 430, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent065Track4[3] = {
+static const EventCharaKeyframe sEvent065Track4[3] = {
     { 928, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 928, 300, { 0, 0 }, 173824, 59136, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 928, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent065Tracks[5] = {
-    { gEvent065Track0, 0, { 0, 0, 0 } },
-    { gEvent065Track1, 1, { 0, 0, 0 } },
-    { gEvent065Track2, 2, { 0, 0, 0 } },
-    { gEvent065Track3, 43, { 0, 0, 0 } },
-    { gEvent065Track4, 93, { 0, 0, 0 } },
+static const EventCharaTrack sEvent065Tracks[5] = {
+    { sEvent065Track0, 0, { 0, 0, 0 } },
+    { sEvent065Track1, 1, { 0, 0, 0 } },
+    { sEvent065Track2, 2, { 0, 0, 0 } },
+    { sEvent065Track3, 43, { 0, 0, 0 } },
+    { sEvent065Track4, 93, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent065 = {
     5,
     { 0, 0, 0 },
-    gEvent065Tracks,
-    gEvent065Camera,
-    gEvent065Script,
-    gEvent065SoundCues,
+    sEvent065Tracks,
+    sEvent065Camera,
+    sEvent065Script,
+    sEvent065SoundCues,
     0,
     870,
     0,
@@ -11842,7 +11842,7 @@ const EventSequenceDef gEvent065 = {
 #ifdef VERSION_US
 #include "event_066_text.inc"
 
-const MessageScriptEntry gEvent066Script[41] = {
+static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFEB0C, 0, 200 },
     { 58, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFEB74, 0, 202 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFEC6A, 0, 220 },
@@ -11887,7 +11887,7 @@ const MessageScriptEntry gEvent066Script[41] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent066Script[41] = {
+static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDD344, 0, 200 },
     { 58, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDD2EC, 0, 202 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDD2CC, 0, 220 },
@@ -11934,7 +11934,7 @@ const MessageScriptEntry gEvent066Script[41] = {
 #include "event_066_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent066Script[41] = {
+static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62828, 0, 200 },
     { 58, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6283C, 0, 202 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62850, 0, 220 },
@@ -11979,7 +11979,7 @@ const MessageScriptEntry gEvent066Script[41] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent066Camera[7] = {
+static const EventCameraKeyframe sEvent066Camera[7] = {
     { -65516, 150272, 81920, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64386, 185856, 62720, 0, 255, { 0, 0, 0 }, 1, 110, { 0, 0 }, 0 },
     { -64166, 195328, 55552, 0, 255, { 0, 0, 0 }, 1, 10, { 0, 0 }, 0 },
@@ -11989,7 +11989,7 @@ const EventCameraKeyframe gEvent066Camera[7] = {
     { -55537, 195840, 50944, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent066SoundCues[9] = {
+static const EvSoundCue sEvent066SoundCues[9] = {
     { 18, 0, 0, 0 },
     { 18, 470, 1, 0 },
     { 27, 611, 2, 0 },
@@ -12001,7 +12001,7 @@ const EvSoundCue gEvent066SoundCues[9] = {
     { 332, 1532, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track0[22] = {
+static const EventCharaKeyframe sEvent066Track0[22] = {
     { 4, 1, { 0, 0 }, 142592, 89600, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 14, 130, { 0, 0 }, 176640, 71168, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 133, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -12026,7 +12026,7 @@ const EventCharaKeyframe gEvent066Track0[22] = {
     { 19, 2500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track1[23] = {
+static const EventCharaKeyframe sEvent066Track1[23] = {
     { 114, 1, { 0, 0 }, 131584, 89088, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 120, 130, { 0, 0 }, 165632, 73216, 0, 114, { 0, 0 }, 67, 0, 0 },
     { 114, 133, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -12052,7 +12052,7 @@ const EventCharaKeyframe gEvent066Track1[23] = {
     { 123, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track2[23] = {
+static const EventCharaKeyframe sEvent066Track2[23] = {
     { 146, 1, { 0, 0 }, 144896, 97792, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 153, 130, { 0, 0 }, 178432, 80640, 0, 146, { 0, 0 }, 67, 0, 0 },
     { 146, 133, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -12078,7 +12078,7 @@ const EventCharaKeyframe gEvent066Track2[23] = {
     { 158, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track3[11] = {
+static const EventCharaKeyframe sEvent066Track3[11] = {
     { 841, 375, { 0, 0 }, 194560, 62464, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 845, 440, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 841, 1050, { 0, 0 }, 194560, 62464, 0, 0, { 0, 0 }, 2, 0, 0 },
@@ -12092,7 +12092,7 @@ const EventCharaKeyframe gEvent066Track3[11] = {
     { 850, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track6[5] = {
+static const EventCharaKeyframe sEvent066Track6[5] = {
     { 841, 1150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 841, 1151, { 0, 0 }, 194560, 62464, 0, 0, { 0, 0 }, 540674, 0, 0 },
     { 846, 1160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 524293, 0, 0 },
@@ -12100,7 +12100,7 @@ const EventCharaKeyframe gEvent066Track6[5] = {
     { 841, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track7[5] = {
+static const EventCharaKeyframe sEvent066Track7[5] = {
     { 841, 1160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 841, 1161, { 0, 0 }, 194560, 62464, 0, 0, { 0, 0 }, 540674, 0, 0 },
     { 841, 1170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 524293, 0, 0 },
@@ -12108,7 +12108,7 @@ const EventCharaKeyframe gEvent066Track7[5] = {
     { 841, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track4[20] = {
+static const EventCharaKeyframe sEvent066Track4[20] = {
     { 422, 270, { 0, 0 }, 197632, 66816, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 422, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, 0, (EventCharaKeyframeFunc)CreateExclamationTask },
     { 422, 330, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12131,7 +12131,7 @@ const EventCharaKeyframe gEvent066Track4[20] = {
     { 422, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track5[8] = {
+static const EventCharaKeyframe sEvent066Track5[8] = {
     { 696, 1088, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 696, 1089, { 0, 0 }, 169728, 39680, 0, 0, { 0, 0 }, 322, 0, 0 },
     { 696, 1100, { 0, 0 }, 185856, 67328, 0, 0, { 0, 0 }, 4419, EventCharaFadeIn, 0 },
@@ -12142,7 +12142,7 @@ const EventCharaKeyframe gEvent066Track5[8] = {
     { 702, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent066Track8[5] = {
+static const EventCharaKeyframe sEvent066Track8[5] = {
     { 853, 1399, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, 0, 0 },
     { 853, 1400, { 0, 0 }, 208640, 41728, 0, 0, { 0, 0 }, 16658, 0, 0 },
     { 853, 1480, { 0, 0 }, 205312, 54784, 0, 855, { 0, 0 }, 275, 0, 0 },
@@ -12150,25 +12150,25 @@ const EventCharaKeyframe gEvent066Track8[5] = {
     { 853, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaTrack gEvent066Tracks[9] = {
-    { gEvent066Track0, 0, { 0, 0, 0 } },
-    { gEvent066Track1, 1, { 0, 0, 0 } },
-    { gEvent066Track2, 2, { 0, 0, 0 } },
-    { gEvent066Track3, 79, { 0, 0, 0 } },
-    { gEvent066Track4, 35, { 0, 0, 0 } },
-    { gEvent066Track5, 65, { 0, 0, 0 } },
-    { gEvent066Track6, 79, { 0, 0, 0 } },
-    { gEvent066Track7, 79, { 0, 0, 0 } },
-    { gEvent066Track8, 80, { 0, 0, 0 } },
+static const EventCharaTrack sEvent066Tracks[9] = {
+    { sEvent066Track0, 0, { 0, 0, 0 } },
+    { sEvent066Track1, 1, { 0, 0, 0 } },
+    { sEvent066Track2, 2, { 0, 0, 0 } },
+    { sEvent066Track3, 79, { 0, 0, 0 } },
+    { sEvent066Track4, 35, { 0, 0, 0 } },
+    { sEvent066Track5, 65, { 0, 0, 0 } },
+    { sEvent066Track6, 79, { 0, 0, 0 } },
+    { sEvent066Track7, 79, { 0, 0, 0 } },
+    { sEvent066Track8, 80, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent066 = {
     9,
     { 0, 0, 0 },
-    gEvent066Tracks,
-    gEvent066Camera,
-    gEvent066Script,
-    gEvent066SoundCues,
+    sEvent066Tracks,
+    sEvent066Camera,
+    sEvent066Script,
+    sEvent066SoundCues,
     0,
     1780,
     0,
@@ -12190,7 +12190,7 @@ const EventSequenceDef gEvent066 = {
 #ifdef VERSION_US
 #include "event_067_text.inc"
 
-const MessageScriptEntry gEvent067Script[14] = {
+static const MessageScriptEntry sEvent067Script[14] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09001060, 0, 130 },
     { 58, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_09001080, 0, 250 },
     { 58, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_090010A8, 0, 460 },
@@ -12208,7 +12208,7 @@ const MessageScriptEntry gEvent067Script[14] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent067Script[14] = {
+static const MessageScriptEntry sEvent067Script[14] = {
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDE8C4, 0, 130 },
     { 58, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDE8B4, 0, 250 },
     { 58, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDE884, 0, 460 },
@@ -12228,7 +12228,7 @@ const MessageScriptEntry gEvent067Script[14] = {
 #include "event_067_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent067Script[14] = {
+static const MessageScriptEntry sEvent067Script[14] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62364, 0, 130 },
     { 58, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62378, 0, 250 },
     { 58, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6238C, 0, 460 },
@@ -12246,7 +12246,7 @@ const MessageScriptEntry gEvent067Script[14] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent067Camera[7] = {
+static const EventCameraKeyframe sEvent067Camera[7] = {
     { -65196, 172544, 70912, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65006, 223488, 50176, 0, 255, { 0, 0, 0 }, 1, 70, { 0, 0 }, 0 },
     { -64996, 0, 0, 0, 255, { 0, 0, 0 }, 34, 10, { 0, 0 }, 0 },
@@ -12256,7 +12256,7 @@ const EventCameraKeyframe gEvent067Camera[7] = {
     { -56536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent067SoundCues[5] = {
+static const EvSoundCue sEvent067SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 18, 345, 2, 0 },
     { 367, 517, 0, 0 },
@@ -12264,7 +12264,7 @@ const EvSoundCue gEvent067SoundCues[5] = {
     { 28, 945, 32770, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track0[18] = {
+static const EventCharaKeyframe sEvent067Track0[18] = {
     { 21, 180, { 0, 0 }, 169984, 71168, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 22, 192, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -12285,7 +12285,7 @@ const EventCharaKeyframe gEvent067Track0[18] = {
     { 3, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track1[13] = {
+static const EventCharaKeyframe sEvent067Track1[13] = {
     { 123, 175, { 0, 0 }, 159744, 71168, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 124, 187, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -12301,7 +12301,7 @@ const EventCharaKeyframe gEvent067Track1[13] = {
     { 112, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track2[13] = {
+static const EventCharaKeyframe sEvent067Track2[13] = {
     { 158, 185, { 0, 0 }, 171776, 79616, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 159, 197, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -12317,14 +12317,14 @@ const EventCharaKeyframe gEvent067Track2[13] = {
     { 146, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track3[4] = {
+static const EventCharaKeyframe sEvent067Track3[4] = {
     { 841, 560, { 0, 0 }, 224000, 55808, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 841, 630, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, (EventCharaKeyframeFunc)CreateHanabiraTask },
     { 841, 560, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 841, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track4[18] = {
+static const EventCharaKeyframe sEvent067Track4[18] = {
     { 696, 1, { 0, 0 }, 148224, 104704, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 710, 125, { 0, 0 }, 189440, 79616, 0, 696, { 0, 0 }, 4195, 0, 0 },
     { 696, 128, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -12345,7 +12345,7 @@ const EventCharaKeyframe gEvent067Track4[18] = {
     { 695, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent067Track5[13] = {
+static const EventCharaKeyframe sEvent067Track5[13] = {
     { 428, 33, { 0, 0 }, 136448, 93440, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 449, 93, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 100, 0, 0 },
     { 428, 96, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
@@ -12361,22 +12361,22 @@ const EventCharaKeyframe gEvent067Track5[13] = {
     { 422, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent067Tracks[6] = {
-    { gEvent067Track0, 0, { 0, 0, 0 } },
-    { gEvent067Track1, 1, { 0, 0, 0 } },
-    { gEvent067Track2, 2, { 0, 0, 0 } },
-    { gEvent067Track3, 79, { 0, 0, 0 } },
-    { gEvent067Track4, 65, { 0, 0, 0 } },
-    { gEvent067Track5, 35, { 0, 0, 0 } },
+static const EventCharaTrack sEvent067Tracks[6] = {
+    { sEvent067Track0, 0, { 0, 0, 0 } },
+    { sEvent067Track1, 1, { 0, 0, 0 } },
+    { sEvent067Track2, 2, { 0, 0, 0 } },
+    { sEvent067Track3, 79, { 0, 0, 0 } },
+    { sEvent067Track4, 65, { 0, 0, 0 } },
+    { sEvent067Track5, 35, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent067 = {
     6,
     { 0, 0, 0 },
-    gEvent067Tracks,
-    gEvent067Camera,
-    gEvent067Script,
-    gEvent067SoundCues,
+    sEvent067Tracks,
+    sEvent067Camera,
+    sEvent067Script,
+    sEvent067SoundCues,
     0,
     1530,
     0,
@@ -12398,13 +12398,13 @@ const EventSequenceDef gEvent067 = {
 #ifdef VERSION_US
 #include "event_068_text.inc"
 
-const MessageScriptEntry gEvent068Script[2] = {
+static const MessageScriptEntry sEvent068Script[2] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002100, 0, 100 },
     { 2, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002148, 32832, 130 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent068Script[2] = {
+static const MessageScriptEntry sEvent068Script[2] = {
     { 1, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDF5A0, 0, 100 },
     { 2, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDF58C, 32832, 130 },
 };
@@ -12412,66 +12412,66 @@ const MessageScriptEntry gEvent068Script[2] = {
 #include "event_068_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent068Script[2] = {
+static const MessageScriptEntry sEvent068Script[2] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6247C, 0, 100 },
     { 2, 4, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62490, 32832, 130 },
 };
 #endif
 
-const EventCameraKeyframe gEvent068Camera[3] = {
+static const EventCameraKeyframe sEvent068Camera[3] = {
     { -65206, 216576, 51968, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65166, 0, 0, 0, 255, { 0, 0, 0 }, 34, 60, { 0, 0 }, 0 },
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent068SoundCues[2] = {
+static const EvSoundCue sEvent068SoundCues[2] = {
     { 65535, 0, 0, 0 },
     { 345, 330, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent068Track0[3] = {
+static const EventCharaKeyframe sEvent068Track0[3] = {
     { 4, 240, { 0, 0 }, 214016, 59392, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 16, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent068Track1[3] = {
+static const EventCharaKeyframe sEvent068Track1[3] = {
     { 114, 95, { 0, 0 }, 205568, 58880, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 126, 105, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent068Track2[3] = {
+static const EventCharaKeyframe sEvent068Track2[3] = {
     { 146, 125, { 0, 0 }, 217088, 68096, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 165, 135, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent068Track3[2] = {
+static const EventCharaKeyframe sEvent068Track3[2] = {
     { 428, 30, { 0, 0 }, 199936, 54528, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 428, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent068Track4[2] = {
+static const EventCharaKeyframe sEvent068Track4[2] = {
     { 696, 30, { 0, 0 }, 228352, 67328, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 696, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent068Tracks[5] = {
-    { gEvent068Track0, 0, { 0, 0, 0 } },
-    { gEvent068Track1, 1, { 0, 0, 0 } },
-    { gEvent068Track2, 2, { 0, 0, 0 } },
-    { gEvent068Track3, 35, { 0, 0, 0 } },
-    { gEvent068Track4, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent068Tracks[5] = {
+    { sEvent068Track0, 0, { 0, 0, 0 } },
+    { sEvent068Track1, 1, { 0, 0, 0 } },
+    { sEvent068Track2, 2, { 0, 0, 0 } },
+    { sEvent068Track3, 35, { 0, 0, 0 } },
+    { sEvent068Track4, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent068 = {
     5,
     { 0, 0, 0 },
-    gEvent068Tracks,
-    gEvent068Camera,
-    gEvent068Script,
-    gEvent068SoundCues,
+    sEvent068Tracks,
+    sEvent068Camera,
+    sEvent068Script,
+    sEvent068SoundCues,
     0,
     490,
     0,
@@ -12491,81 +12491,81 @@ const EventSequenceDef gEvent068 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent069Script[1] = {
+static const MessageScriptEntry sEvent069Script[1] = {
     { 1, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002450, 32768, 9999 },
 };
 
 #include "event_069_text.inc"
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent069Script[1] = {
+static const MessageScriptEntry sEvent069Script[1] = {
     { 1, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDF86C, 32768, 9999 },
 };
 
 #include "event_069_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent069Script[1] = {
+static const MessageScriptEntry sEvent069Script[1] = {
     { 1, 1, 3, 1, { 0, 0, 0 }, 0, 32768, 9999 },
 };
 #endif
 
-const EventCameraKeyframe gEvent069Camera[3] = {
+static const EventCameraKeyframe sEvent069Camera[3] = {
     { -65536, 216576, 51968, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65286, 0, 0, 0, 255, { 0, 0, 0 }, 130, 150, { 0, 0 }, 0 },
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent069SoundCues[2] = {
+static const EvSoundCue sEvent069SoundCues[2] = {
     { 65535, 0, 0, 0 },
     { 13, 2000, 32768, 0 },
 };
 
-const EventCharaKeyframe gEvent069Track0[3] = {
+static const EventCharaKeyframe sEvent069Track0[3] = {
     { 4, 250, { 0, 0 }, 214016, 59392, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 350, { 0, 0 }, 224512, 50432, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent069Track1[3] = {
+static const EventCharaKeyframe sEvent069Track1[3] = {
     { 114, 30, { 0, 0 }, 205568, 58880, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 114, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent069Track2[3] = {
+static const EventCharaKeyframe sEvent069Track2[3] = {
     { 146, 30, { 0, 0 }, 217088, 68096, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 146, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 146, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent069Track3[3] = {
+static const EventCharaKeyframe sEvent069Track3[3] = {
     { 428, 30, { 0, 0 }, 199936, 54528, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 428, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 428, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent069Track4[3] = {
+static const EventCharaKeyframe sEvent069Track4[3] = {
     { 696, 30, { 0, 0 }, 228352, 67328, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 696, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 696, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent069Tracks[5] = {
-    { gEvent069Track0, 0, { 0, 0, 0 } },
-    { gEvent069Track1, 1, { 0, 0, 0 } },
-    { gEvent069Track2, 2, { 0, 0, 0 } },
-    { gEvent069Track3, 35, { 0, 0, 0 } },
-    { gEvent069Track4, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent069Tracks[5] = {
+    { sEvent069Track0, 0, { 0, 0, 0 } },
+    { sEvent069Track1, 1, { 0, 0, 0 } },
+    { sEvent069Track2, 2, { 0, 0, 0 } },
+    { sEvent069Track3, 35, { 0, 0, 0 } },
+    { sEvent069Track4, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent069 = {
     5,
     { 0, 0, 0 },
-    gEvent069Tracks,
-    gEvent069Camera,
-    gEvent069Script,
-    gEvent069SoundCues,
+    sEvent069Tracks,
+    sEvent069Camera,
+    sEvent069Script,
+    sEvent069SoundCues,
     0,
     250,
     0,
@@ -12587,36 +12587,36 @@ const EventSequenceDef gEvent069 = {
 #ifdef VERSION_US
 #include "event_070_text.inc"
 
-const MessageScriptEntry gEvent070Script[1] = {
+static const MessageScriptEntry sEvent070Script[1] = {
     { 58, 1, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002750, 32768, 300 },
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent070Script[1] = {
+static const MessageScriptEntry sEvent070Script[1] = {
     { 58, 1, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDFB84, 32768, 300 },
 };
 
 #include "event_070_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent070Script[1] = {
+static const MessageScriptEntry sEvent070Script[1] = {
     { 58, 1, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F624A4, 32768, 300 },
 };
 #endif
 
-const EventCameraKeyframe gEvent070Camera[3] = {
+static const EventCameraKeyframe sEvent070Camera[3] = {
     { -65206, 97280, 113664, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -63536, 0, 0, 0, 255, { 0, 0, 0 }, 8194, 0, { 0, 0 }, 0 },
     { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent070SoundCues[3] = {
+static const EvSoundCue sEvent070SoundCues[3] = {
     { 65535, 0, 0, 0 },
     { 339, 330, 0, 0 },
     { 339, 595, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent070Track0[7] = {
+static const EventCharaKeyframe sEvent070Track0[7] = {
     { 3, 100, { 0, 0 }, 57088, 122368, 0, 0, { 0, 0 }, 322, 0, 0 },
     { 13, 160, { 0, 0 }, 0, 0, 0, 64, { 0, 0 }, 356, 0, 0 },
     { 3, 163, { 0, 0 }, 0, 0, 0, 64, { 0, 0 }, 324, 0, 0 },
@@ -12626,23 +12626,23 @@ const EventCharaKeyframe gEvent070Track0[7] = {
     { 20, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 33093, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent070Track1[2] = {
+static const EventCharaKeyframe sEvent070Track1[2] = {
     { 938, 430, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 939, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32770, 0, 0 },
 };
 
-const EventCharaTrack gEvent070Tracks[2] = {
-    { gEvent070Track0, 0, { 0, 0, 0 } },
-    { gEvent070Track1, 100, { 0, 0, 0 } },
+static const EventCharaTrack sEvent070Tracks[2] = {
+    { sEvent070Track0, 0, { 0, 0, 0 } },
+    { sEvent070Track1, 100, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent070 = {
     2,
     { 0, 0, 0 },
-    gEvent070Tracks,
-    gEvent070Camera,
-    gEvent070Script,
-    gEvent070SoundCues,
+    sEvent070Tracks,
+    sEvent070Camera,
+    sEvent070Script,
+    sEvent070SoundCues,
     0,
     600,
     0,
@@ -12662,26 +12662,26 @@ const EventSequenceDef gEvent070 = {
 };
 
 #ifdef VERSION_US
-const MessageScriptEntry gEvent071Script[1] = {
+static const MessageScriptEntry sEvent071Script[1] = {
     { 28, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002A38, 32768, 9999 },
 };
 
 #include "event_071_text.inc"
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent071Script[1] = {
+static const MessageScriptEntry sEvent071Script[1] = {
     { 28, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDFDD8, 32768, 9999 },
 };
 
 #include "event_071_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent071Script[1] = {
+static const MessageScriptEntry sEvent071Script[1] = {
     { 28, 0, 3, 1, { 0, 0, 0 }, 0, 32768, 9999 },
 };
 #endif
 
-const EventCameraKeyframe gEvent071Camera[5] = {
+static const EventCameraKeyframe sEvent071Camera[5] = {
     { -65535, 222208, 43776, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -65256, 211712, 51200, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
     { -65140, 226560, 36864, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
@@ -12689,14 +12689,14 @@ const EventCameraKeyframe gEvent071Camera[5] = {
     { -56536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent071SoundCues[4] = {
+static const EvSoundCue sEvent071SoundCues[4] = {
     { 65535, 0, 0, 0 },
     { 361, 228, 0, 0 },
     { 362, 290, 0, 0 },
     { 345, 396, 32768, 0 },
 };
 
-const EventBgEffectEntry gEvent071BgEffects[6] = {
+static const EventBgEffectEntry sEvent071BgEffects[6] = {
     { { 200, 0 }, 0, 0, 0, { 0, 0, 0, 0 } },
     { { 228, 0 }, 0, 0, 0, { 4, 0, 0, 0 } },
     { { 34, 1 }, 3, 200960, 41472, { 1, 0, 0, 0 } },
@@ -12705,7 +12705,7 @@ const EventBgEffectEntry gEvent071BgEffects[6] = {
     { { 194, 1 }, 0, 0, 0, { 8, 128, 0, 0 } },
 };
 
-const EventCharaKeyframe gEvent071Track0[9] = {
+static const EventCharaKeyframe sEvent071Track0[9] = {
     { 2, 1, { 0, 0 }, 215808, 57344, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 12, 40, { 0, 0 }, 200192, 63232, 0, 2, { 0, 0 }, 3, 0, 0 },
     { 2, 70, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12717,7 +12717,7 @@ const EventCharaKeyframe gEvent071Track0[9] = {
     { 100, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent071Track1[8] = {
+static const EventCharaKeyframe sEvent071Track1[8] = {
     { 112, 1, { 0, 0 }, 213504, 53760, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 121, 80, { 0, 0 }, 185088, 63232, 0, 112, { 0, 0 }, 3, 0, 0 },
     { 112, 110, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12728,7 +12728,7 @@ const EventCharaKeyframe gEvent071Track1[8] = {
     { 114, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent071Track2[8] = {
+static const EventCharaKeyframe sEvent071Track2[8] = {
     { 144, 1, { 0, 0 }, 222976, 58880, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 152, 115, { 0, 0 }, 196096, 74496, 0, 144, { 0, 0 }, 3, 0, 0 },
     { 144, 140, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12739,20 +12739,20 @@ const EventCharaKeyframe gEvent071Track2[8] = {
     { 146, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaTrack gEvent071Tracks[3] = {
-    { gEvent071Track0, 0, { 0, 0, 0 } },
-    { gEvent071Track1, 1, { 0, 0, 0 } },
-    { gEvent071Track2, 2, { 0, 0, 0 } },
+static const EventCharaTrack sEvent071Tracks[3] = {
+    { sEvent071Track0, 0, { 0, 0, 0 } },
+    { sEvent071Track1, 1, { 0, 0, 0 } },
+    { sEvent071Track2, 2, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent071 = {
     3,
     { 0, 0, 0 },
-    gEvent071Tracks,
-    gEvent071Camera,
-    gEvent071Script,
-    gEvent071SoundCues,
-    gEvent071BgEffects,
+    sEvent071Tracks,
+    sEvent071Camera,
+    sEvent071Script,
+    sEvent071SoundCues,
+    sEvent071BgEffects,
     650,
     0,
     1,
@@ -12773,7 +12773,7 @@ const EventSequenceDef gEvent071 = {
 #ifdef VERSION_US
 #include "event_072_text.inc"
 
-const MessageScriptEntry gEvent072Script[44] = {
+static const MessageScriptEntry sEvent072Script[44] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002F30, 0, 330 },
     { 27, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002F58, 0, 360 },
     { 27, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002F88, 0, 460 },
@@ -12821,7 +12821,7 @@ const MessageScriptEntry gEvent072Script[44] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent072Script[44] = {
+static const MessageScriptEntry sEvent072Script[44] = {
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE0E5C, 0, 330 },
     { 27, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE0E3C, 0, 360 },
     { 27, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE0E04, 0, 460 },
@@ -12871,7 +12871,7 @@ const MessageScriptEntry gEvent072Script[44] = {
 #include "event_072_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent072Script[44] = {
+static const MessageScriptEntry sEvent072Script[44] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F624B8, 0, 330 },
     { 27, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F624CC, 0, 360 },
     { 27, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F624E0, 0, 460 },
@@ -12919,7 +12919,7 @@ const MessageScriptEntry gEvent072Script[44] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent072Camera[7] = {
+static const EventCameraKeyframe sEvent072Camera[7] = {
     { -65536, 227072, 36608, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
     { -65436, 0, 0, 0, 255, { 0, 0, 0 }, 130, 100, { 0, 0 }, 0 },
     { -64836, 188416, 64256, 0, 255, { 0, 0, 0 }, 1, 150, { 0, 0 }, 0 },
@@ -12929,14 +12929,14 @@ const EventCameraKeyframe gEvent072Camera[7] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent072SoundCues[4] = {
+static const EvSoundCue sEvent072SoundCues[4] = {
     { 65535, 0, 0, 0 },
     { 27, 365, 2, 0 },
     { 357, 1410, 0, 0 },
     { 27, 1685, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track0[33] = {
+static const EventCharaKeyframe sEvent072Track0[33] = {
     { 4, 230, { 0, 0 }, 200192, 63232, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 0, 235, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 4, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12972,7 +12972,7 @@ const EventCharaKeyframe gEvent072Track0[33] = {
     { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track1[11] = {
+static const EventCharaKeyframe sEvent072Track1[11] = {
     { 114, 240, { 0, 0 }, 185088, 62464, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 113, 245, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
     { 112, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -12986,7 +12986,7 @@ const EventCharaKeyframe gEvent072Track1[11] = {
     { 114, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track2[10] = {
+static const EventCharaKeyframe sEvent072Track2[10] = {
     { 146, 230, { 0, 0 }, 196096, 74496, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 142, 235, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
     { 146, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, 0, 0 },
@@ -12999,7 +12999,7 @@ const EventCharaKeyframe gEvent072Track2[10] = {
     { 142, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track3[8] = {
+static const EventCharaKeyframe sEvent072Track3[8] = {
     { 231, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 231, 251, { 0, 0 }, 199936, 64000, 0, 0, { 0, 0 }, 2, 0, 0 },
     { 234, 280, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, _0806E9DC, 0 },
@@ -13010,7 +13010,7 @@ const EventCharaKeyframe gEvent072Track3[8] = {
     { 231, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track4[18] = {
+static const EventCharaKeyframe sEvent072Track4[18] = {
     { 428, 105, { 0, 0 }, 143360, 76800, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 450, 235, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 428, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -13031,7 +13031,7 @@ const EventCharaKeyframe gEvent072Track4[18] = {
     { 422, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent072Track5[16] = {
+static const EventCharaKeyframe sEvent072Track5[16] = {
     { 696, 105, { 0, 0 }, 151296, 87552, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 712, 220, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, 0, 0 },
     { 696, 600, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -13050,22 +13050,22 @@ const EventCharaKeyframe gEvent072Track5[16] = {
     { 695, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, 0, 0 },
 };
 
-const EventCharaTrack gEvent072Tracks[6] = {
-    { gEvent072Track0, 0, { 0, 0, 0 } },
-    { gEvent072Track1, 1, { 0, 0, 0 } },
-    { gEvent072Track2, 2, { 0, 0, 0 } },
-    { gEvent072Track3, 8, { 0, 0, 0 } },
-    { gEvent072Track4, 35, { 0, 0, 0 } },
-    { gEvent072Track5, 65, { 0, 0, 0 } },
+static const EventCharaTrack sEvent072Tracks[6] = {
+    { sEvent072Track0, 0, { 0, 0, 0 } },
+    { sEvent072Track1, 1, { 0, 0, 0 } },
+    { sEvent072Track2, 2, { 0, 0, 0 } },
+    { sEvent072Track3, 8, { 0, 0, 0 } },
+    { sEvent072Track4, 35, { 0, 0, 0 } },
+    { sEvent072Track5, 65, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent072 = {
     6,
     { 0, 0, 0 },
-    gEvent072Tracks,
-    gEvent072Camera,
-    gEvent072Script,
-    gEvent072SoundCues,
+    sEvent072Tracks,
+    sEvent072Camera,
+    sEvent072Script,
+    sEvent072SoundCues,
     0,
     3500,
     0,
@@ -13087,7 +13087,7 @@ const EventSequenceDef gEvent072 = {
 #ifdef VERSION_US
 #include "event_073_text.inc"
 
-const MessageScriptEntry gEvent073Script[30] = {
+static const MessageScriptEntry sEvent073Script[30] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09005068, 0, 270 },
     { 60, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_090050D0, 0, 310 },
     { 2, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_09005160, 0, 340 },
@@ -13121,7 +13121,7 @@ const MessageScriptEntry gEvent073Script[30] = {
 };
 #endif
 #ifdef VERSION_JP
-const MessageScriptEntry gEvent073Script[30] = {
+static const MessageScriptEntry sEvent073Script[30] = {
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE252C, 0, 270 },
     { 60, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE24F4, 0, 310 },
     { 2, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE24BC, 0, 340 },
@@ -13157,7 +13157,7 @@ const MessageScriptEntry gEvent073Script[30] = {
 #include "event_073_text.inc"
 #endif
 #ifdef VERSION_EU
-const MessageScriptEntry gEvent073Script[30] = {
+static const MessageScriptEntry sEvent073Script[30] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6210C, 0, 270 },
     { 60, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62120, 0, 310 },
     { 2, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F62134, 0, 340 },
@@ -13191,7 +13191,7 @@ const MessageScriptEntry gEvent073Script[30] = {
 };
 #endif
 
-const EventCameraKeyframe gEvent073Camera[9] = {
+static const EventCameraKeyframe sEvent073Camera[9] = {
     { -65506, 65536, 51200, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
     { -64666, 65536, 86528, 0, 255, { 0, 0, 0 }, 1, 220, { 0, 0 }, 0 },
     { -64216, 77824, 76800, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
@@ -13203,7 +13203,7 @@ const EventCameraKeyframe gEvent073Camera[9] = {
     { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
 };
 
-const EvSoundCue gEvent073SoundCues[5] = {
+static const EvSoundCue sEvent073SoundCues[5] = {
     { 65535, 0, 0, 0 },
     { 19, 940, 2, 0 },
     { 906, 1710, 0, 0 },
@@ -13211,7 +13211,7 @@ const EvSoundCue gEvent073SoundCues[5] = {
     { 19, 2095, 32769, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track1[13] = {
+static const EventCharaKeyframe sEvent073Track1[13] = {
     { 428, 120, { 0, 0 }, 44032, 96256, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 450, 220, { 0, 0 }, 65536, 86784, 0, 428, { 0, 0 }, 83, 0, 0 },
     { 428, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -13227,7 +13227,7 @@ const EventCharaKeyframe gEvent073Track1[13] = {
     { 428, 1570, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track0[62] = {
+static const EventCharaKeyframe sEvent073Track0[62] = {
     { 4, 120, { 0, 0 }, 51200, 100096, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 9, 220, { 0, 0 }, 73216, 91648, 0, 4, { 0, 0 }, 67, 0, 0 },
     { 4, 230, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, 0, 0 },
@@ -13292,7 +13292,7 @@ const EventCharaKeyframe gEvent073Track0[62] = {
     { 86, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track2[17] = {
+static const EventCharaKeyframe sEvent073Track2[17] = {
     { 114, 120, { 0, 0 }, 34560, 97792, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 119, 220, { 0, 0 }, 52736, 88064, 0, 114, { 0, 0 }, 83, 0, 0 },
     { 114, 270, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -13312,7 +13312,7 @@ const EventCharaKeyframe gEvent073Track2[17] = {
     { 112, 969, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98373, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track3[18] = {
+static const EventCharaKeyframe sEvent073Track3[18] = {
     { 146, 120, { 0, 0 }, 41728, 105216, 0, 0, { 0, 0 }, 82, 0, 0 },
     { 151, 220, { 0, 0 }, 60160, 95232, 0, 146, { 0, 0 }, 83, 0, 0 },
     { 146, 315, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 85, 0, 0 },
@@ -13333,7 +13333,7 @@ const EventCharaKeyframe gEvent073Track3[18] = {
     { 144, 969, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98373, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track4[8] = {
+static const EventCharaKeyframe sEvent073Track4[8] = {
     { 229, 380, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 229, 381, { 0, 0 }, 73216, 91648, 0, 0, { 0, 0 }, 66, 0, 0 },
     { 233, 410, { 0, 0 }, 0, 0, 0, 83, { 0, 0 }, 68, _0806E9DC, 0 },
@@ -13344,28 +13344,28 @@ const EventCharaKeyframe gEvent073Track4[8] = {
     { 231, 65326, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, 0, 0 },
 };
 
-const EventCharaKeyframe gEvent073Track5[3] = {
+static const EventCharaKeyframe sEvent073Track5[3] = {
     { 918, 2235, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8258, 0, 0 },
     { 918, 3000, { 0, 0 }, 65536, 72448, 0, 0, { 0, 0 }, 16706, 0, 0 },
     { 918, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 33093, 0, 0 },
 };
 
-const EventCharaTrack gEvent073Tracks[6] = {
-    { gEvent073Track0, 0, { 0, 0, 0 } },
-    { gEvent073Track1, 35, { 0, 0, 0 } },
-    { gEvent073Track2, 1, { 0, 0, 0 } },
-    { gEvent073Track3, 2, { 0, 0, 0 } },
-    { gEvent073Track4, 8, { 0, 0, 0 } },
-    { gEvent073Track5, 85, { 0, 0, 0 } },
+static const EventCharaTrack sEvent073Tracks[6] = {
+    { sEvent073Track0, 0, { 0, 0, 0 } },
+    { sEvent073Track1, 35, { 0, 0, 0 } },
+    { sEvent073Track2, 1, { 0, 0, 0 } },
+    { sEvent073Track3, 2, { 0, 0, 0 } },
+    { sEvent073Track4, 8, { 0, 0, 0 } },
+    { sEvent073Track5, 85, { 0, 0, 0 } },
 };
 
 const EventSequenceDef gEvent073 = {
     6,
     { 0, 0, 0 },
-    gEvent073Tracks,
-    gEvent073Camera,
-    gEvent073Script,
-    gEvent073SoundCues,
+    sEvent073Tracks,
+    sEvent073Camera,
+    sEvent073Script,
+    sEvent073SoundCues,
     0,
     2370,
     0,

@@ -21,12 +21,12 @@ extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
 extern const MapNameText* gMapWorldNames[];
 
-const u8 gSoraWorldExitEvents[13] = { 10, 13, 16, 19, 22, 25, 30, 33, 37, 40, 47, 58, 66 };
+static const u8 sSoraWorldExitEvents[13] = { 10, 13, 16, 19, 22, 25, 30, 33, 37, 40, 47, 58, 66 };
 
 #ifdef VERSION_EU
-const u8 gRikuWorldExitEvents[13] = { 153, 255, 158, 255, 161, 255, 255, 255, 169, 255, 188, 191, 0 };
+static const u8 sRikuWorldExitEvents[13] = { 153, 255, 158, 255, 161, 255, 255, 255, 169, 255, 188, 191, 0 };
 #else
-const u8 gRikuWorldExitEvents[13] = { 155, 255, 160, 255, 163, 255, 255, 255, 171, 255, 190, 193, 0 };
+static const u8 sRikuWorldExitEvents[13] = { 155, 255, 160, 255, 163, 255, 255, 255, 171, 255, 190, 193, 0 };
 #endif
 
 u8 GetOppositeDoorSide(u8 a) {
@@ -790,9 +790,9 @@ void EnterExitHall(void) {
         v = 0xFF;
     } else {
         if ((gGameState.flags & 8) != 0) {
-            v = gRikuWorldExitEvents[(s8)gGameState.floor];
+            v = sRikuWorldExitEvents[(s8)gGameState.floor];
         } else {
-            v = gSoraWorldExitEvents[(s8)gGameState.floor];
+            v = sSoraWorldExitEvents[(s8)gGameState.floor];
         }
     }
 

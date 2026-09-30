@@ -6406,9 +6406,9 @@ const u8 gCellMasks[16][8] = {
     { 0x08, 0x09, 0x01, 0x01, 0x00, 0x00, 0x08, 0x09 },
 };
 
-const char gModeNameMapDbg[] = "Mode_MapDbg";
+static const char sModeNameMapDbg[] = "Mode_MapDbg";
 
-const char gModeNameMapFld[] = "Mode_MapFld";
+static const char sModeNameMapFld[] = "Mode_MapFld";
 
 const u8 gSoraFloorEvents[13] = { 12, 14, 17, 20, 23, 28, 32, 35, 38, 42, 50, 255, 68 };
 
@@ -6418,13 +6418,13 @@ const u8 gRikuFloorEvents[13] = { 155, 157, 255, 160, 163, 165, 166, 167, 173, 1
 const u8 gRikuFloorEvents[13] = { 157, 159, 255, 162, 165, 167, 168, 169, 175, 184, 191, 255, 0 };
 #endif
 
-const char gModeNameMapFix[] = "Mode_MapFix";
+static const char sModeNameMapFix[] = "Mode_MapFix";
 
-const char gModeNameMenuNew[] = "Mode_MenuNew";
+static const char sModeNameMenuNew[] = "Mode_MenuNew";
 
-const char gModeNameMenuLoad[] = "Mode_MenuLoad";
+static const char sModeNameMenuLoad[] = "Mode_MenuLoad";
 
-const char gModeNameMenuMsg[] = "Mode_MenuMsg";
+static const char sModeNameMenuMsg[] = "Mode_MenuMsg";
 
 u8 gSoraWorldBattleBase[14] = {
     40,
@@ -6483,14 +6483,14 @@ u8 (*gMapAnmCmds[2])(MapAnmSlot*) = {
 };
 
 Mode gModeMapDbg = {
-    gModeNameMapDbg,
+    sModeNameMapDbg,
     (ModeInitFunc)Mode_MapDbg_0,
     Mode_MapDbg_1,
     Mode_MapDbg_2,
 };
 
 Mode gModeMapFld = {
-    gModeNameMapFld,
+    sModeNameMapFld,
     (ModeInitFunc)Mode_MapFld_0,
     Mode_MapFld_1,
     Mode_MapFld_2,
@@ -6546,28 +6546,28 @@ u8 gWorldEntryEvents[14] = {
 };
 
 Mode gModeMapFix = {
-    gModeNameMapFix,
+    sModeNameMapFix,
     (ModeInitFunc)Mode_MapFix_0,
     Mode_MapFix_1,
     Mode_MapFix_2,
 };
 
 Mode gModeMenuNew = {
-    gModeNameMenuNew,
+    sModeNameMenuNew,
     (ModeInitFunc)Mode_MenuNew_0,
     Mode_MenuNew_1,
     Mode_MenuNew_2,
 };
 
 Mode gModeMenuLoad = {
-    gModeNameMenuLoad,
+    sModeNameMenuLoad,
     Mode_MenuLoad_0,
     Mode_MenuLoad_1,
     Mode_MenuLoad_2,
 };
 
 Mode gModeMenuMsg = {
-    gModeNameMenuMsg,
+    sModeNameMenuMsg,
     Mode_MenuMsg_0,
     Mode_MenuMsg_1,
     Mode_MenuMsg_2,

@@ -16,7 +16,7 @@ Mode gModePooh = {
 
 const PooHitBox gPoohHitBox = { gPoohPalette, 36, 16, 6, 0 };
 
-const s8 gPoohLookOffsets[8][8] = {
+static const s8 sPoohLookOffsets[8][8] = {
     { 0, 1, 2, 2, 3, -2, -2, -1 },
     { -1, 0, 1, 2, 2, 3, -2, -2 },
     { -2, -1, 0, 1, 2, 2, 3, -2 },
@@ -27,7 +27,7 @@ const s8 gPoohLookOffsets[8][8] = {
     { -1, -2, -2, 3, 2, 2, 1, 0 },
 };
 
-AnimDef gPooh00AnimDefs[5] = {
+static AnimDef sPooh00AnimDefs[5] = {
     { gPoohBb00Frames, gPoohBb00Anims, gPoohBb00Tiles, 0, { 0, 0, 0 } },
     { gPoohFf00Frames, gPoohFf00Anims, gPoohFf00Tiles, 0, { 0, 0, 0 } },
     { gPoohFr00Frames, gPoohFr00Anims, gPoohFr00Tiles, 0, { 0, 0, 0 } },
@@ -35,7 +35,7 @@ AnimDef gPooh00AnimDefs[5] = {
     { gPoohBr00Frames, gPoohBr00Anims, gPoohBr00Tiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gPooh04AnimDefs[5] = {
+static AnimDef sPooh04AnimDefs[5] = {
     { gPoohBb04Frames, gPoohBb04Anims, gPoohBb04Tiles, 0, { 0, 0, 0 } },
     { gPoohFf04Frames, gPoohFf04Anims, gPoohFf04Tiles, 0, { 0, 0, 0 } },
     { gPoohFl04Frames, gPoohFl04Anims, gPoohFl04Tiles, 0, { 0, 0, 0 } },
@@ -43,7 +43,7 @@ AnimDef gPooh04AnimDefs[5] = {
     { gPoohBl04Frames, gPoohBl04Anims, gPoohBl04Tiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gPooh04aAnimDefs[5] = {
+static AnimDef sPooh04aAnimDefs[5] = {
     { gPoohBb04aFrames, gPoohBb04aAnims, gPoohBb04aTiles, 0, { 0, 0, 0 } },
     { gPoohFf04aFrames, gPoohFf04aAnims, gPoohFf04aTiles, 0, { 0, 0, 0 } },
     { gPoohFl04aFrames, gPoohFl04aAnims, gPoohFl04aTiles, 0, { 0, 0, 0 } },
@@ -51,7 +51,7 @@ AnimDef gPooh04aAnimDefs[5] = {
     { gPoohBl04aFrames, gPoohBl04aAnims, gPoohBl04aTiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gPooh01AnimDefs[8] = {
+static AnimDef sPooh01AnimDefs[8] = {
     { gPoohBb01Frames, gPoohBb01Anims, gPoohBb01Tiles, 0, { 0, 0, 0 } },
     { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 0, { 0, 0, 0 } },
     { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 0, { 0, 0, 0 } },
@@ -62,7 +62,7 @@ AnimDef gPooh01AnimDefs[8] = {
     { gPoohBl01Frames, gPoohBl01Anims, gPoohBl01Tiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gTrap0001AnimDefs[8] = {
+static AnimDef sTrap0001AnimDefs[8] = {
     { gTrap0001bbFrames, gTrap0001bbAnims, gTrap0001bbTiles, 0, { 0, 0, 0 } },
     { gTrap0001ffFrames, gTrap0001ffAnims, gTrap0001ffTiles, 0, { 0, 0, 0 } },
     { gTrap0001frFrames, gTrap0001frAnims, gTrap0001frTiles, 0, { 0, 0, 0 } },
@@ -73,56 +73,56 @@ AnimDef gTrap0001AnimDefs[8] = {
     { gTrap0001blFrames, gTrap0001blAnims, gTrap0001blTiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gTrap0002Anim0Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 0, { 0, 0, 0 } };
+static AnimDef sTrap0002Anim0Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 0, { 0, 0, 0 } };
 
-AnimDef gTrap0002Anim1Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 1, { 0, 0, 0 } };
+static AnimDef sTrap0002Anim1Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 1, { 0, 0, 0 } };
 
-AnimDef gTrap0003Anim0Def = { gTrap0003Frames, gTrap0003Anims, gTrap0003Tiles, 0, { 0, 0, 0 } };
+static AnimDef sTrap0003Anim0Def = { gTrap0003Frames, gTrap0003Anims, gTrap0003Tiles, 0, { 0, 0, 0 } };
 
-AnimDef gPoohOwlDescentAnimDef = { gUnk_09EF5824, gUnk_09EF583C, gUnk_09724C1C, 1, { 0, 0, 0 } };
+static AnimDef sPoohOwlDescentAnimDef = { gUnk_09EF5824, gUnk_09EF583C, gUnk_09724C1C, 1, { 0, 0, 0 } };
 
-AnimDef gPooh03AnimDefs[2] = {
+static AnimDef sPooh03AnimDefs[2] = {
     { gPoohBl03Frames, gPoohBl03Anims, gPoohBl03Tiles, 0, { 0, 0, 0 } },
     { gPoohFl03Frames, gPoohFl03Anims, gPoohFl03Tiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gPooh07Anim0Defs[2] = {
+static AnimDef sPooh07Anim0Defs[2] = {
     { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 0, { 0, 0, 0 } },
     { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 0, { 0, 0, 0 } },
 };
 
-AnimDef gPooh07Anim1Defs[2] = {
+static AnimDef sPooh07Anim1Defs[2] = {
     { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 1, { 0, 0, 0 } },
     { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 1, { 0, 0, 0 } },
 };
 
-AnimDef gPoohFl05Anim0Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 0, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim0Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 0, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim1Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim1Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 1, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim2Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim2Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 2, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim3Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 3, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim3Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 3, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim4Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 4, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim4Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 4, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim5Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 5, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim5Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 5, { 0, 0, 0 } };
 
-AnimDef gPoohFl05Anim9Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 9, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim9Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 9, { 0, 0, 0 } };
 
-AnimDef gPoohFl06Anim1Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim1Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 1, { 0, 0, 0 } };
 
-AnimDef gPoohFl06Anim2Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim2Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 2, { 0, 0, 0 } };
 
-AnimDef gPoohFl06Anim3Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 3, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim3Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 3, { 0, 0, 0 } };
 
-AnimDef gPoohFl09Anim0Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 0, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim0Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 0, { 0, 0, 0 } };
 
-AnimDef gPoohFl09Anim1Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim1Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 1, { 0, 0, 0 } };
 
-AnimDef gPoohFl09Anim2Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim2Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 2, { 0, 0, 0 } };
 
-AnimDef gPooh10AnimDefs[4] = {
+static AnimDef sPooh10AnimDefs[4] = {
     { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } },
     { gPoohFf10Frames, gPoohFf10Anims, gPoohFf10Tiles, 0, { 0, 0, 0 } },
     { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } },
@@ -131,7 +131,7 @@ AnimDef gPooh10AnimDefs[4] = {
 
 AnimDef gPoohLl10Anim0Def = { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } };
 
-AnimDef gPooh00LookAnimDefs[5][5] = {
+static AnimDef sPooh00LookAnimDefs[5][5] = {
     {
         { gPoohBb00LlFrames, gPoohBb00LlAnims, gPoohBb00LlTiles, 0, { 0, 0, 0 } },
         { gPoohBb00BlFrames, gPoohBb00BlAnims, gPoohBb00BlTiles, 0, { 0, 0, 0 } },
@@ -844,7 +844,7 @@ u8 GetPoohLookColumn(PoohWork* w) {
     u32 row;
     u32 col;
 
-    memcpy(tbl, gPoohLookOffsets, sizeof(tbl));
+    memcpy(tbl, sPoohLookOffsets, sizeof(tbl));
     row = (u32)((w->angle + 16) & 0xFF) >> 5;
     col = (u32)((w->lookAngle + 16) & 0xFF) >> 5;
     if ((s8)tbl[row][col] == 3) {
@@ -871,125 +871,125 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     case 7:
         flags |= 1;
         SetPoohDir8(w);
-        e = &gPooh01AnimDefs[w->dirIndex];
+        e = &sPooh01AnimDefs[w->dirIndex];
         break;
     case 5:
     case 6:
         flags |= 1;
         SetPoohDir3(w);
-        e = &gPooh10AnimDefs[w->dirIndex];
+        e = &sPooh10AnimDefs[w->dirIndex];
         break;
     case 16:
         SetPoohDir8(w);
-        e = &gTrap0001AnimDefs[w->dirIndex];
+        e = &sTrap0001AnimDefs[w->dirIndex];
         break;
     case 17:
         SetPoohDir5Left(w);
-        e = &gPooh04AnimDefs[w->dirIndex];
+        e = &sPooh04AnimDefs[w->dirIndex];
         break;
     case 18:
         SetPoohDir5Left(w);
-        e = &gPooh04aAnimDefs[w->dirIndex];
+        e = &sPooh04aAnimDefs[w->dirIndex];
         break;
     case 19:
         SetPoohDir2(w);
-        e = &gPooh03AnimDefs[w->dirIndex];
+        e = &sPooh03AnimDefs[w->dirIndex];
         break;
     case 20:
         w->hideShadow = 1;
         SetPoohDir2(w);
-        e = &gPooh07Anim0Defs[w->dirIndex];
+        e = &sPooh07Anim0Defs[w->dirIndex];
         break;
     case 21:
         w->hideShadow = 1;
         SetPoohDir2(w);
 
         if (IsPooEventDone(6) != 0 || w->leavingWagon != 0 || (w->dirIndex == 5 && w->flipped == 0)) {
-            e = &gPooh07Anim0Defs[w->dirIndex];
+            e = &sPooh07Anim0Defs[w->dirIndex];
         } else {
-            e = &gPooh07Anim1Defs[w->dirIndex];
+            e = &sPooh07Anim1Defs[w->dirIndex];
         }
         break;
     case 36:
         w->flipped = 0;
-        e = &gTrap0002Anim0Def;
+        e = &sTrap0002Anim0Def;
         break;
     case 37:
         w->flipped = 0;
-        e = &gTrap0002Anim1Def;
+        e = &sTrap0002Anim1Def;
         break;
     case 23:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim0Def;
+        e = &sPoohFl05Anim0Def;
         w->hideShadow = 1;
         break;
     case 32:
         w->flipped = 0;
-        e = &gPoohFl05Anim9Def;
+        e = &sPoohFl05Anim9Def;
         w->hideShadow = 1;
         break;
     case 33:
         w->flipped = 0;
-        e = &gPoohFl09Anim0Def;
+        e = &sPoohFl09Anim0Def;
         break;
     case 34:
         w->flipped = 0;
-        e = &gPoohFl09Anim1Def;
+        e = &sPoohFl09Anim1Def;
         break;
     case 35:
         w->flipped = 0;
-        e = &gPoohFl09Anim2Def;
+        e = &sPoohFl09Anim2Def;
         break;
     case 24:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim1Def;
+        e = &sPoohFl05Anim1Def;
         w->hideShadow = 1;
         break;
     case 25:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim2Def;
+        e = &sPoohFl05Anim2Def;
         w->hideShadow = 1;
         break;
     case 26:
         ColliderSetRadius(&w->collider, 14);
         flags |= 1;
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim3Def;
+        e = &sPoohFl05Anim3Def;
         w->hideShadow = 1;
         break;
     case 27:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim4Def;
+        e = &sPoohFl05Anim4Def;
         w->hideShadow = 1;
         break;
     case 28:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl05Anim5Def;
+        e = &sPoohFl05Anim5Def;
         w->hideShadow = 1;
         break;
     case 29:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl06Anim1Def;
+        e = &sPoohFl06Anim1Def;
         break;
     case 30:
         flags |= 1;
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl06Anim2Def;
+        e = &sPoohFl06Anim2Def;
         break;
     case 31:
         w->flipped = IsAngleFacingRight(w->angle);
-        e = &gPoohFl06Anim3Def;
+        e = &sPoohFl06Anim3Def;
         break;
     case 38:
     case 39:
         flags |= 1;
         w->flipped = 0;
-        e = &gTrap0003Anim0Def;
+        e = &sTrap0003Anim0Def;
         break;
     case 22:
         flags |= 1;
         w->flipped = 0;
-        e = &gPoohOwlDescentAnimDef;
+        e = &sPoohOwlDescentAnimDef;
         break;
     case 0:
     case 1:
@@ -1005,12 +1005,12 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         flags |= 1;
         SetPoohDir5Right(w);
         w->lookColumn = GetPoohLookColumn(w);
-        e = &gPooh00LookAnimDefs[w->dirIndex][GetPoohLookColumn(w)];
+        e = &sPooh00LookAnimDefs[w->dirIndex][GetPoohLookColumn(w)];
         break;
     default:
         flags |= 1;
         SetPoohDir5Right(w);
-        e = &gPooh00AnimDefs[w->dirIndex];
+        e = &sPooh00AnimDefs[w->dirIndex];
         break;
     }
 

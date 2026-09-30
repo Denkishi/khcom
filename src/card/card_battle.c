@@ -40,7 +40,7 @@ const s32 gSoraCardSwingAngles[4] = {
     0x2000, 0xE000, 0xA000, 0x6000,
 };
 
-const u16 gSoraStockValueX[4] = {
+static const u16 sSoraStockValueX[4] = {
     40, 52, 64, 0,
 };
 
@@ -512,7 +512,7 @@ static void cardbattle_0(CardBattleWork* w) {
     w->revCountShown[3] = 0;
     w->stockValue = 0;
     w->unk_C4[3] = 0;
-    w->x = gSoraStockValueX[0];
+    w->x = sSoraStockValueX[0];
     w->cardsClosed = 0;
     for (i = 0; i < 3; i++) {
         w->playedCards[i] = 0;
@@ -589,7 +589,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
     }
     if (w->unk_C4[3] != 0) {
         position = w->x * 256;
-        ApproachValue(&position, (s16)gSoraStockValueX[w->stockCount - 1] * 256, w->unk_C4[3]);
+        ApproachValue(&position, (s16)sSoraStockValueX[w->stockCount - 1] * 256, w->unk_C4[3]);
         w->x = position >> 8;
         w->unk_C4[3]--;
     }

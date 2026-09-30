@@ -2,7 +2,7 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 
-const LstFalAnim gBosLstFalAnims[8] = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
+static const LstFalAnim sBosLstFalAnims[8] = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 } };
 
 TaskDesc gTaskDescBosLstFal = {
     "task_bos_lst_fal",
@@ -24,7 +24,7 @@ s32 BosLstFalSquare2(s32 x) {
 void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
     u16 anim;
 
-    anim = gBosLstFalAnims[GetRandom() & 7].anim;
+    anim = sBosLstFalAnims[GetRandom() & 7].anim;
     work->kind = arg->kind;
     work->x = arg->x;
     work->y = arg->y;

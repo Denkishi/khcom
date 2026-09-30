@@ -175,7 +175,6 @@ typedef struct PcGfxSet {
     u8 unk_0E[0x02];
 } PcGfxSet;
 
-extern const PcGfxSet gPcGfxSets[];
 
 typedef struct PcShot {
     s32 targetX;
@@ -185,15 +184,8 @@ typedef struct PcShot {
     s32 unk_0C;
 } PcShot;
 
-extern const u16 gBosPcPaletteCycleNext[];
-extern const s16 gBosPcPaletteCycleFrames[];
-extern const PcShot gPcShots[];
 
-extern const s8 gUnk_09A4CA94[];
-extern const s8 gUnk_09A4CAB5[];
 
-extern const u16 gBosPcFldPaletteCycleNext[];
-extern const s16 gBosPcFldPaletteCycleFrames[];
 
 typedef struct PcShared {
     s16 hpRatio;
@@ -476,7 +468,6 @@ typedef struct PcFltFrameDef {
     u16 nextAnim;
 } PcFltFrameDef;
 
-extern const PcFltFrameDef gBosPcFltFrameDefs[12];
 
 extern u8 gUnk_05000220[];
 
@@ -494,7 +485,6 @@ s32 BosLstApproachValue(s32 a, s32 b, s32 c, s32 d, s32 e);
 u8 BosPcUpdateReaction(PcWork* work, Task* task);
 u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx);
 
-extern const s32 gBosLstBobZ[16];
 
 u8 BosPcUpdateBreak(PcWork* work, Task* task);
 void BosLstTickCardDelay(BosLstWork* work);
@@ -507,7 +497,6 @@ u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a);
 u8 task_bos_pc_flt_1(PcFltWork* work);
 void BosPcFltUpdateMotion(PcFltWork* work);
 
-extern const u8 gBosLstAnimSheets[8];
 extern u8 gUnk_09C4B012[];
 extern u8 gUnk_09C51CBC[];
 
@@ -527,11 +516,7 @@ void BosPcStartPaletteCycle(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
 
-extern const PcBattleBackgroundDef gBosPcBattleBackgroundDef;
-extern const EmyKind gBosPcEmyKind;
 extern u8 gUnk_08F69BC4[];
-extern const BattleBackgroundDef gBosLstBattleBackgroundDef;
-extern const EmyKind gBosLstEmyKind;
 extern u8 gUnk_09C53724[];
 extern u8 gUnk_09C58590[];
 
@@ -561,7 +546,6 @@ typedef struct LstAnimDef {
     u8 unk_2A[0x2];
 } LstAnimDef;
 
-extern void* const gBosLstBgFrames[18][2];
 
 void task_bos_lst_2(BosLstWork* work);
 u8 BosLstUpdateDefeat(BosLstWork* work);
@@ -569,8 +553,6 @@ u8 BosLstUpdateDefeat(BosLstWork* work);
 extern EventState* gEventState;
 void task_bos_pc_acd_2(PcAcdWork* work);
 
-extern const u16 gBosLstBodyFrames[48];
-extern const LstAnimDef gLstAnimDefs[8];
 PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work);
 
 void BosPcPlaceBodies(PcWork* work);
@@ -620,8 +602,6 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task);
 
 u8 BosPcUpdateHurt(PcWork* work, Task* task);
 
-extern const s16 gBosPcFltCosine[256];
-extern const s16 gBosPcFltSine[256];
 
 typedef struct LstSpawn3 {
     s32 x;

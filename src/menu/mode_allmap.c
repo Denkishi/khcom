@@ -14,7 +14,7 @@
 #endif
 
 #if defined(VERSION_US)
-const PooBgSet gAllmapWorldBgs[15] = {
+static const PooBgSet sAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnk_0984A218 + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnk_0984A218 + 0x120 },
@@ -32,7 +32,7 @@ const PooBgSet gAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x60 },
 };
 #elif defined(VERSION_JP)
-const PooBgSet gAllmapWorldBgs[15] = {
+static const PooBgSet sAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnkJp_097FEEEC + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnkJp_097FEEEC + 0x120 },
@@ -50,7 +50,7 @@ const PooBgSet gAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x60 },
 };
 #elif defined(VERSION_EU)
-const PooBgSet gAllmapWorldBgs[15] = {
+static const PooBgSet sAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnkEu_0979E8A0 + 0x1040, gUnkEu_0981E8C0 + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnkEu_0979E8A0 + 0x54C0, gUnkEu_0981E8C0 + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnkEu_0979E8A0 + 0x72C0, gUnkEu_0981E8C0 + 0x120 },
@@ -69,7 +69,7 @@ const PooBgSet gAllmapWorldBgs[15] = {
 };
 #endif
 
-const PooPalStep gAllmapPalSteps[9] = {
+static const PooPalStep sAllmapPalSteps[9] = {
     { 0, 40 },
     { 1, 8 },
     { 2, 8 },
@@ -88,11 +88,11 @@ Mode gModeAllmap = {
     mode_allmap_2,
 };
 
-const AllmapRoomOrder gAllmapRoomOrder = {{
+static const AllmapRoomOrder sAllmapRoomOrder = {{
     0, 4, 2, 5, 3, 10, 9, 13, 1, 7, 8, 11, 6, 14, 12, 15,
 }};
 
-const AllmapRoomDirs gAllmapRoomDirs = {{1, 2, 3, 0}};
+static const AllmapRoomDirs sAllmapRoomDirs = {{1, 2, 3, 0}};
 
 u16* gAllmapBg0MapBlocks[8] EWRAM_COMMON(16);
 u32 gAllmapModeState EWRAM_COMMON(4);
@@ -114,7 +114,7 @@ u8 gAllmapLowerBgm;
 void AllmapCyclePalette(void) {
     PooPalStep t[9];
 
-    memcpy(t, gAllmapPalSteps, sizeof(t));
+    memcpy(t, sAllmapPalSteps, sizeof(t));
     gAllmapPalTimer++;
     if (gAllmapPalTimer < t[gAllmapPalStep].duration) {
         return;
@@ -128,9 +128,9 @@ void AllmapCyclePalette(void) {
 }
 
 void AllmapLoadWorldBg(void) {
-    RequestDma3Copy(gAllmapWorldBgs[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
-    RequestDma3Copy(gAllmapWorldBgs[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
-    LoadPalette(gAllmapWorldBgs[gGameState.world].palette, (void*)0x05000140, 0x20);
+    RequestDma3Copy(sAllmapWorldBgs[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
+    RequestDma3Copy(sAllmapWorldBgs[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
+    LoadPalette(sAllmapWorldBgs[gGameState.world].palette, (void*)0x05000140, 0x20);
 }
 
 void AllmapLoadFloorTiles(void) {
@@ -316,8 +316,8 @@ u8 func_080D358C(u8 a, u8 b) {
 }
 
 s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
-    AllmapRoomOrder order = gAllmapRoomOrder;
-    AllmapRoomDirs dirs = gAllmapRoomDirs;
+    AllmapRoomOrder order = sAllmapRoomOrder;
+    AllmapRoomDirs dirs = sAllmapRoomDirs;
     u32 mask;
     u8 i;
 

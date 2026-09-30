@@ -3,7 +3,7 @@
 #include "player_progression.h"
 #include "battle.h"
 
-const EnemyBaseStats gEnemyBaseStats[54] = {
+static const EnemyBaseStats sEnemyBaseStats[54] = {
     { 33, 2, 3, 0 },
     { 35, 3, 3, 0 },
     { 35, 3, 3, 0 },
@@ -163,7 +163,7 @@ const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
     if (i > 0x35) {
         return 0;
     }
-    return &gEnemyBaseStats[i];
+    return &sEnemyBaseStats[i];
 }
 
 void LearnStock(u32 a) {

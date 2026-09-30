@@ -36,9 +36,9 @@ void LoadPremireChanceCardGfx(PremireChanceCardWork* w);
 u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* w);
 u8 StartPremireChanceCardAnim(PremireChanceCardWork* w, void* a);
 
-const s16 gPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
+static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 
-const u8 gPremireChanceCardPriorities[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 };
+static const u8 sPremireChanceCardPriorities[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 };
 
 void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
     CardDef* def;
@@ -47,7 +47,7 @@ void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
     w->tiles4 = 0;
 
     if (a->unk_06 <= 8) {
-        w->angle = gPremireChanceCardAngles[a->unk_06];
+        w->angle = sPremireChanceCardAngles[a->unk_06];
     } else {
         w->angle = -0x20;
     }
@@ -83,7 +83,7 @@ u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* w, void* a) {
     v = w->angle << 8;
 
     if (w->position <= 8) {
-        ApproachValue(&v, gPremireChanceCardAngles[w->position] << 8, w->steps);
+        ApproachValue(&v, sPremireChanceCardAngles[w->position] << 8, w->steps);
         w->angle = v >> 8;
     } else {
         lim = 0xFFE0;
@@ -155,22 +155,22 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
     if (w->gfxLoaded != 0) {
         affine = AllocObjAffine(0, w->scaleX, w->scaleY, 1);
         DrawSprite(w->x + w->x2, w->y + w->y2, w->cardDef->gfx, w->tiles, w->palette2, affine, 0x400,
-                   gPremireChanceCardPriorities[w->position] + 70);
+                   sPremireChanceCardPriorities[w->position] + 70);
         DrawSprite(w->x + w->x2, w->y + w->y2, w->cardBack->gfx, w->tiles2, w->palette3, affine, 0x400,
-                   gPremireChanceCardPriorities[w->position] + 69);
+                   sPremireChanceCardPriorities[w->position] + 69);
 
         if (w->premium == 0) {
             DrawSprite(w->x + w->x2, w->y + w->y2, gUnk_09EE981C[w->cardDef->value], w->tiles3, w->palette3,
-                       affine, 0x400, gPremireChanceCardPriorities[w->position] + 68);
+                       affine, 0x400, sPremireChanceCardPriorities[w->position] + 68);
         } else {
             DrawSprite(w->x + w->x2, w->y + w->y2, gUnk_09EE9894[w->cardDef->value], w->tiles5, w->palette,
-                       affine, 0x400, gPremireChanceCardPriorities[w->position] + 68);
+                       affine, 0x400, sPremireChanceCardPriorities[w->position] + 68);
         }
     }
 
     if (w->state == 2 && w->tiles4 != 0) {
         DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, 0, 0x400,
-                   gPremireChanceCardPriorities[w->position] + 67);
+                   sPremireChanceCardPriorities[w->position] + 67);
     }
 }
 void PremireChanceCard_3(PremireChanceCardWork* w) {

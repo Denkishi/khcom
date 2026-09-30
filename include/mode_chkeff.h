@@ -31,14 +31,5 @@ typedef struct ChkEffWork {
 void mode_chkeff_0(void);
 void mode_chkeff_1(void);
 void mode_chkeff_2(void);
-extern const char gChkEffPauseText[];
-extern const char gChkEffPauseBlankText[];
-extern const char gChkEffBlankLineText[];
-extern const char gChkEffAlphaALabel[];
-extern const char gChkEffAlphaBLabel[];
-extern const char gChkEffScaleLabel[];
-extern const char gChkEffNumLabel[];
-extern const char gChkEffPicLabel[];
-extern const char gChkEffFrameLabel[];
 
 #endif /* GUARD_MODE_CHKEFF_H */

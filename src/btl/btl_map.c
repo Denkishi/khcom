@@ -7,7 +7,7 @@ u8 gBtlMapShakeActive;
 u16 gBtlMapShakeStep;
 s32 gBtlMapShakeOffset;
 
-const s8 gBtlMapShakePattern[32] = {
+static const s8 sBtlMapShakePattern[32] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1,
 };
 
@@ -307,7 +307,7 @@ void BtlMapStartShake(void) {
 
 void BtlMapUpdateShake(void) {
     if (gBtlMapShakeActive != 0) {
-        gBtlMapShakeOffset += ((gBtlMapShakePattern[(s16)gBtlMapShakeStep] << 12) - gBtlMapShakeOffset) >> 3;
+        gBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)gBtlMapShakeStep] << 12) - gBtlMapShakeOffset) >> 3;
         gBtlMapShakeStep++;
         if (gBtlMapShakeStep > 0x1F) {
             gBtlMapShakeActive = 0;

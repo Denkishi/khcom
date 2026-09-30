@@ -41,7 +41,7 @@ u8 func_0809075C(CardDisplayWork* p, void* a);
 u8 func_08090808(CardDisplayWork* p, void* a);
 u8 func_08090940(CardDisplayWork* p);
 
-const s32 gEnemyCardLayout[10] = {
+static const s32 sEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,
 };
 
@@ -87,8 +87,8 @@ void card_enemy_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->angle = 0;
     p->unk_84 = 0;
     p->unk_88 = 0x2400;
-    p->unk_8C = gEnemyCardLayout[0];
-    p->unk_90 = gEnemyCardLayout[1];
+    p->unk_8C = sEnemyCardLayout[0];
+    p->unk_90 = sEnemyCardLayout[1];
     p->x = 0xDC00;
     p->y = 0x8400;
     p->value = p->cardDef->value;
@@ -227,9 +227,9 @@ u8 EnemyUsecard_1(CardDisplayWork* p, void* a) {
 }
 
 u8 func_0809075C(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->x, gSineTable[((p->unk_7C >> 8) - 32) & 0xFF] * (p->unk_84 >> 8) + gEnemyCardLayout[0],
+    ApproachValue(&p->x, gSineTable[((p->unk_7C >> 8) - 32) & 0xFF] * (p->unk_84 >> 8) + sEnemyCardLayout[0],
                   p->timer);
-    ApproachValue(&p->y, -gSineTable[(((p->unk_7C >> 8) - 32) & 0xFF) + 0x40] * (p->unk_84 >> 8) + gEnemyCardLayout[1],
+    ApproachValue(&p->y, -gSineTable[(((p->unk_7C >> 8) - 32) & 0xFF) + 0x40] * (p->unk_84 >> 8) + sEnemyCardLayout[1],
                   p->timer);
     p->timer--;
 
@@ -248,8 +248,8 @@ u8 func_08090808(CardDisplayWork* p, void* a) {
     }
 
     p->unk_84 += -p->unk_84 >> 1;
-    p->x += (gEnemyCardLayout[8] - p->x) >> 1;
-    p->y += (gEnemyCardLayout[9] - p->y) >> 1;
+    p->x += (sEnemyCardLayout[8] - p->x) >> 1;
+    p->y += (sEnemyCardLayout[9] - p->y) >> 1;
 
     if (p->flags & 0x20) {
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
@@ -412,10 +412,10 @@ u8 func_08090C3C(CardDisplayWork* p, void* a) {
     UpdateCardDisplayFlip(p);
 
     if (p->flags & 0x20) {
-        q = &p->x; tbl = (s32 (*)[2])gEnemyCardLayout; ApproachValue(q, tbl[3 - p->stockIndex][0], p->timer); ApproachValue(&p->y, ((s32 (*)[2])gEnemyCardLayout)[3 - p->stockIndex][1], p->timer);
+        q = &p->x; tbl = (s32 (*)[2])sEnemyCardLayout; ApproachValue(q, tbl[3 - p->stockIndex][0], p->timer); ApproachValue(&p->y, ((s32 (*)[2])sEnemyCardLayout)[3 - p->stockIndex][1], p->timer);
     } else {
-        ApproachValue(&p->x, gEnemyCardLayout[8], p->timer);
-        ApproachValue(&p->y, gEnemyCardLayout[9], p->timer);
+        ApproachValue(&p->x, sEnemyCardLayout[8], p->timer);
+        ApproachValue(&p->y, sEnemyCardLayout[9], p->timer);
     }
 
     if ((s16)p->timer > 0) {

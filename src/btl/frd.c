@@ -12,7 +12,7 @@
 #include "songs.h"
 #include "frd_tasks.h"
 
-const AnimDef gFrdDonaldAnimDefs[6] = {
+static const AnimDef sFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0, { 0, 0, 0 } },
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 1, { 0, 0, 0 } },
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 2, { 0, 0, 0 } },
@@ -30,7 +30,7 @@ TaskDesc gTaskDescFrdDonald = {
     sizeof(FrdDonaldWork),
 };
 
-const AnimDef gFrdGoofyAnimDefs[5] = {
+static const AnimDef sFrdGoofyAnimDefs[5] = {
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0, { 0, 0, 0 } },
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 1, { 0, 0, 0 } },
     { gGoofy14Frames, gGoofy14Anims, gGoofy14Tiles, 0, { 0, 0, 0 } },
@@ -47,7 +47,7 @@ TaskDesc gTaskDescFrdGoofy = {
     sizeof(FrdGoofyWork),
 };
 
-const AnimDef gFrdArielAnimDefs[3] = {
+static const AnimDef sFrdArielAnimDefs[3] = {
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 0, { 0, 0, 0 } },
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 1, { 0, 0, 0 } },
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 2, { 0, 0, 0 } },
@@ -62,7 +62,7 @@ TaskDesc gTaskDescFrdAriel = {
     sizeof(FrdArielWork),
 };
 
-const AnimDef gFrdJackAnimDefs[5] = {
+static const AnimDef sFrdJackAnimDefs[5] = {
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 0, { 0, 0, 0 } },
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 1, { 0, 0, 0 } },
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 2, { 0, 0, 0 } },
@@ -79,7 +79,7 @@ TaskDesc gTaskDescFrdJack = {
     sizeof(FrdJackWork),
 };
 
-const AnimDef gFrdPanAnimDefs[4] = {
+static const AnimDef sFrdPanAnimDefs[4] = {
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0, { 0, 0, 0 } },
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 1, { 0, 0, 0 } },
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 2, { 0, 0, 0 } },
@@ -95,7 +95,7 @@ TaskDesc gTaskDescFrdPan = {
     sizeof(FrdPanWork),
 };
 
-const AnimDef gFrdAladdinAnimDefs[3] = {
+static const AnimDef sFrdAladdinAnimDefs[3] = {
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 2, { 0, 0, 0 } },
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 0, { 0, 0, 0 } },
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 1, { 0, 0, 0 } },
@@ -110,7 +110,7 @@ TaskDesc gTaskDescFrdAladdin = {
     sizeof(FrdAladdinWork),
 };
 
-const AnimDef gFrdBeastAnimDefs[2] = {
+static const AnimDef sFrdBeastAnimDefs[2] = {
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0, { 0, 0, 0 } },
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 1, { 0, 0, 0 } },
 };
@@ -153,7 +153,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->palette = LoadObjPalette(gDonaldPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
     case 0:
@@ -219,7 +219,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
             work->stateTimer++;
         }
         body->x += (work->unk_158 - body->x) >> 4;
@@ -235,7 +235,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         }
         break;
     case 1:
-        if (work->stateTimer == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             SelectLockonTarget();
             if (gBtlWork->flags & 0x800000000ULL) work->state = 4;
@@ -285,7 +285,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->stateTimer = 0;
             work->repeatsLeft--;
         } else {
-            if (work->stateTimer == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+            if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
                 work->stateTimer = 0;
@@ -294,7 +294,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
             if (!(body->flags & 4)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
             else work->unk_158 = (gBtlWork->xMax + 64) * 256;
             work->vz = -0x500;
@@ -317,8 +317,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->unk_158 = gSineTable[angle] * 3;
             work->unk_15C = -gSineTable[angle + 64] * 3;
         }
-        if (work->unk_15C > 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 4, 1, work->tiles);
-        else AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 5, 1, work->tiles);
+        if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, 1, work->tiles);
+        else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, 1, work->tiles);
         if (work->unk_158 < 0) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x += work->unk_158;
@@ -344,7 +344,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         {
             s32 x,y,z;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
                     if (target->x < body->x) body->flags |= 4;
@@ -395,7 +395,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         {
             s32 x,y,z;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
                     if (target->x < body->x) body->flags |= 4;
@@ -444,7 +444,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         }
     case 6:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != 0) {
                 if (target->x < body->x) body->flags |= 4;
@@ -489,7 +489,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         {
             BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
+                AnimChangeWithDef(sFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
                 AnimReset(&work->anim);
                 if (ally->x < body->x) body->flags |= 4;
                 else body->flags &= ~4ULL;
@@ -671,7 +671,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->palette = LoadObjPalette(gGoofyPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -691,7 +691,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
             work->stateTimer++;
         }
 
@@ -706,7 +706,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
@@ -727,7 +727,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 2:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
@@ -739,7 +739,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
 
             if (body->flags & 4) {
                 work->targetX = (gBtlWork->xMin - 0x40) << 8;
@@ -763,7 +763,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 4:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 2, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 2, 0, work->tiles);
 
             if (body->flags & 4) {
                 work->targetX = body->x - 0x8500;
@@ -800,7 +800,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 5:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 3, 0, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 3, 0, work->tiles);
         }
 
         FrdGoofyApplyGravity(work);
@@ -814,7 +814,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         break;
     case 6:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 4, 1, work->tiles);
+            AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 4, 1, work->tiles);
             work->angle = GetRandom();
         }
 
@@ -932,7 +932,7 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     body->z = -0x1000;
     work->palette = LoadObjPalette(gArielPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdArielAnimDefs, &work->anim, 1, 0, work->tiles);
+    AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 1, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
@@ -993,7 +993,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         if (work->stateTimer == 0) {
             work->speed = 0;
             work->steps = 12;
-            AnimChangeWithDef(gFrdArielAnimDefs, &work->anim, 2, 0, work->tiles);
+            AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 2, 0, work->tiles);
         }
 
         switch (AnimGetFrame(&work->anim)) {
@@ -1024,7 +1024,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         }
         break;
     case 2:
-        AnimChangeWithDef(gFrdArielAnimDefs, &work->anim, 0, 1, work->tiles);
+        AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, 1, work->tiles);
 
         if (body->flags & 4
                 ? ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)
@@ -1186,7 +1186,7 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     work->rotation = 0;
     work->palette = LoadObjPalette(gJackPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
     case 0:
@@ -1221,7 +1221,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
             work->stateTimer++;
         }
         body->x += (work->targetX - body->x) >> 4;
@@ -1233,7 +1233,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         }
         break;
     case 1:
-        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
             SelectLockonTarget();
@@ -1262,7 +1262,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             work->stateTimer = 0;
             work->repeatsLeft--;
         } else {
-            if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+            if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
                 work->stateTimer = 0;
@@ -1271,7 +1271,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
+            AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
             if (!(body->flags & 4)) work->targetX = (gBtlWork->xMin - 64) * 256;
             else work->targetX = (gBtlWork->xMax + 64) * 256;
             work->vz = -0x500;
@@ -1284,7 +1284,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         work->steps--;
         break;
     case 8:
-        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             work->state = 9;
             GetRandom();
@@ -1315,8 +1315,8 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             work->stateTimer++;
         }
         FrdJackApplyGravity(work);
-        if (work->vz > 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
-        else AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
+        if (work->vz > 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
+        else AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
         if (work->steps > 0) {
             ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
             ApproachValueHalfSteps(&body->y, work->targetY, work->steps);
@@ -1330,7 +1330,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         }
         break;
     case 10:
-        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
             SelectLockonTarget();
@@ -1357,7 +1357,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         {
             s32 x, y, z;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
                     if (target->x < body->x) body->flags |= 4;
@@ -1408,7 +1408,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         {
             s32 x, y, z;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
                     if (target->x < body->x) body->flags |= 4;
@@ -1456,7 +1456,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         {
             s32 x, y, z;
             if (work->stateTimer == 0) {
-                AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
                     if (target->x < body->x) body->flags |= 4;
@@ -1505,7 +1505,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         }
     case 6:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != 0) {
                 if (target->x < body->x) body->flags |= 4;
@@ -1659,7 +1659,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     body->z = -0x2000;
     work->palette = LoadObjPalette(gPeterPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 15);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
@@ -1749,7 +1749,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
             work->steps = 30;
         }
         ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
@@ -1764,7 +1764,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
         }
         FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
@@ -1776,7 +1776,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 2:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
             if (!(body->flags & 4)) {
                 work->targetX = (gBtlWork->xMin - 64) * 256;
             } else {
@@ -1795,7 +1795,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 1, 0, work->tiles);
         }
         FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
@@ -1808,7 +1808,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 4:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 2, 1, work->tiles);
             work->steps = 70;
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
@@ -1860,7 +1860,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         break;
     case 5:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 3, 0, work->tiles);
+            AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 3, 0, work->tiles);
         }
         FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
@@ -1990,7 +1990,7 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->palette = LoadObjPalette(gAladdinPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
@@ -2022,7 +2022,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
             work->stateTimer++;
         }
         body->x += (work->targetX - body->x) >> 4;
@@ -2035,7 +2035,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 1, 0, work->tiles);
         }
         if (AnimIsFinished(&work->anim)) {
             work->state = 3;
@@ -2046,7 +2046,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         break;
     case 2:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
+            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
             if (!(body->flags & 4)) {
                 work->targetX = (gBtlWork->xMin - 64) << 8;
             } else {
@@ -2065,7 +2065,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         break;
     case 3:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, 1, work->tiles);
         }
         SelectLockonTarget();
         if (work->actor->flags & 4) {
@@ -2256,7 +2256,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
 
     work->palette = LoadObjPalette(gBeastPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gFrdBeastAnimDefs, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -2313,7 +2313,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gFrdBeastAnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 1, 1, work->tiles);
 
             if (work->variant != 2) {
                 m4aSongNumStart(SONG_VO_BE_ATTACK00);

@@ -5,7 +5,7 @@
 
 const EmyKind gBosLstCtrEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 
-const u32 gBosLstCtrAngles[6][5] = {
+static const u32 sBosLstCtrAngles[6][5] = {
     { 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0 },
     { 0, 128, 0, 0, 0 },
@@ -116,9 +116,9 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->duration = (s16)BosLstCtrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 9;
         } else {
             work->offsetX =
-                (-gSineTable[((gBosLstCtrAngles[work->count][work->index] + c) & 0xFF) + 0x40] * 5 >> 6) << 8;
+                (-gSineTable[((sBosLstCtrAngles[work->count][work->index] + c) & 0xFF) + 0x40] * 5 >> 6) << 8;
             work->offsetZ =
-                ((gSineTable[(gBosLstCtrAngles[work->count][work->index] + c) & 0xFF] * 3 >> 5) - 4) << 8;
+                ((gSineTable[(sBosLstCtrAngles[work->count][work->index] + c) & 0xFF] * 3 >> 5) - 4) << 8;
         }
         break;
     case 1:

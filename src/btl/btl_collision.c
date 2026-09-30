@@ -5,7 +5,7 @@
 #include "btl_effect.h"
 #include "songs.h"
 
-const BattleAttackDef gBattleAttackDefs[330] = {
+static const BattleAttackDef sBattleAttackDefs[330] = {
     { 256, 204, 0, 3, BgFxStartRikuHit, 0x80002000 },
     { 256, 204, 204, 3, BgFxStartRikuHit, 0x80002000 },
     { 384, 384, 384, 16, BgFxStartRikuHit, 0x80002000 },
@@ -389,7 +389,7 @@ void AbsorbAttack(BtlObj* a, BtlObj* b, const BattleAttackDef* c) {
 }
 
 s32 ResolveAttackHit(BtlObj* hit, s32 index) {
-    const BattleAttackDef* attack = &gBattleAttackDefs[index];
+    const BattleAttackDef* attack = &sBattleAttackDefs[index];
     s32 scale = gBtlWork->damageScale;
     BtlObj* target;
     BtlObj* source;
@@ -757,7 +757,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
     s32 res;
     s32 r2;
 
-    t = &gBattleAttackDefs[a];
+    t = &sBattleAttackDefs[a];
     cnt = 0;
     flag = 0;
     gBtlWork->areaUpdated = 1;

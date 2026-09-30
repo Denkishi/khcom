@@ -1,9 +1,9 @@
 #include "listpool.h"
 #include "malloc.h"
 
-const u8 sEwramHeapName[12] = "HEAP_SYSTEM";
+static const u8 sEwramHeapName[12] = "HEAP_SYSTEM";
 
-const u8 sIwramHeapName[16] = "HEAPCPU_SYSTEM";
+static const u8 sIwramHeapName[16] = "HEAPCPU_SYSTEM";
 
 Heap gEwramHeap;
 Heap gIwramHeap;

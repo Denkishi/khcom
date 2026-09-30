@@ -8,7 +8,7 @@
 #include "songs.h"
 #include <stdlib.h>
 
-const BgAnimationChunk gBgAnimationChunks[108] = {
+static const BgAnimationChunk sBgAnimationChunks[108] = {
     { gUnk_08CEFCE4, 29696, 0 },
     { gUnk_08D0E664, 31168, 0 },
     { gUnk_08D16024, 3008, 0 },
@@ -119,185 +119,185 @@ const BgAnimationChunk gBgAnimationChunks[108] = {
     { gUnk_08ECD324, 20160, 0 },
 };
 
-BgAnimationDef gBgAnimDefCure00 = { &gBgAnimationChunks[0], gUnk_08F0C384, gUnk_08F6A824, 192, 58, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefCure00 = { &sBgAnimationChunks[0], gUnk_08F0C384, gUnk_08F6A824, 192, 58, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefFire00 = { &gBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F6AA64, 192, 56, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefFire00 = { &sBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F6AA64, 192, 56, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefRikuFire00 = { &gBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F69FE4, 192, 56, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefRikuFire00 = { &sBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F69FE4, 192, 56, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefFlame = { &gBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F6AA64, 192, 56, 12, 16, 3, 4 };
+BgAnimationDef gBgAnimDefFlame = { &sBgAnimationChunks[1], gUnk_08F0F384, gUnk_08F6AA64, 192, 56, 12, 16, 3, 4 };
 
-BgAnimationDef gBgAnimDefFire01 = { &gBgAnimationChunks[3], gUnk_08F10384, gUnk_08F6AB24, 192, 41, 16, 16, 7, 4 };
+BgAnimationDef gBgAnimDefFire01 = { &sBgAnimationChunks[3], gUnk_08F10384, gUnk_08F6AB24, 192, 41, 16, 16, 7, 4 };
 
-BgAnimationDef gBgAnimDefFireHit = { &gBgAnimationChunks[3], gUnk_08F10384, gUnk_08F6AB24, 192, 41, 16, 16, 7, 2 };
+static BgAnimationDef sBgAnimDefFireHit = { &sBgAnimationChunks[3], gUnk_08F10384, gUnk_08F6AB24, 192, 41, 16, 16, 7, 2 };
 
-BgAnimationDef gBgAnimDefFire02 = { &gBgAnimationChunks[4], gUnk_08F11384, gUnk_08F6ABE4, 192, 48, 16, 16, 7, 4 };
+BgAnimationDef gBgAnimDefFire02 = { &sBgAnimationChunks[4], gUnk_08F11384, gUnk_08F6ABE4, 192, 48, 16, 16, 7, 4 };
 
-BgAnimationDef gBgAnimDefExplosion = { &gBgAnimationChunks[5], gUnk_08F02384, gUnk_08F6A0A4, 192, 33, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefExplosion = { &sBgAnimationChunks[5], gUnk_08F02384, gUnk_08F6A0A4, 192, 33, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefFlash = { &gBgAnimationChunks[6], gUnk_08F03384, gUnk_08F6A164, 192, 69, 16, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefFlash = { &sBgAnimationChunks[6], gUnk_08F03384, gUnk_08F6A164, 192, 69, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefSoraHit = { &gBgAnimationChunks[7], gUnk_08F06384, gUnk_08F6A3A4, 192, 37, 16, 16, 4, 3 };
+BgAnimationDef gBgAnimDefSoraHit = { &sBgAnimationChunks[7], gUnk_08F06384, gUnk_08F6A3A4, 192, 37, 16, 16, 4, 3 };
 
-BgAnimationDef gBgAnimDefLimit = { &gBgAnimationChunks[8], gUnk_08F04384, gUnk_08F6A224, 192, 42, 16, 16, 6, 3 };
+BgAnimationDef gBgAnimDefLimit = { &sBgAnimationChunks[8], gUnk_08F04384, gUnk_08F6A224, 192, 42, 16, 16, 6, 3 };
 
-BgAnimationDef gUnk_09EDA660 = { &gBgAnimationChunks[9], gUnk_08F05384, gUnk_08F6A2E4, 192, 74, 16, 16, 5, 3 };
+BgAnimationDef gUnk_09EDA660 = { &sBgAnimationChunks[9], gUnk_08F05384, gUnk_08F6A2E4, 192, 74, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefEnemyHit = { &gBgAnimationChunks[10], gUnk_08F07384, gUnk_08F6A464, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefEnemyHit = { &sBgAnimationChunks[10], gUnk_08F07384, gUnk_08F6A464, 192, 36, 16, 16, 4, 4 };
 
-BgAnimationDef gUnk_09EDA690 = { &gBgAnimationChunks[10], gUnk_08F07384, gUnk_08F69DA4, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gUnk_09EDA690 = { &sBgAnimationChunks[10], gUnk_08F07384, gUnk_08F69DA4, 192, 36, 16, 16, 4, 4 };
 
-BgAnimationDef gUnk_09EDA6A8 = { &gBgAnimationChunks[10], gUnk_08F07384, gUnk_08F69E64, 192, 36, 16, 16, 4, 4 };
+BgAnimationDef gUnk_09EDA6A8 = { &sBgAnimationChunks[10], gUnk_08F07384, gUnk_08F69E64, 192, 36, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefPotion = { &gBgAnimationChunks[11], gUnk_08F0B384, gUnk_08F6A764, 192, 46, 16, 16, 9, 5 };
+BgAnimationDef gBgAnimDefPotion = { &sBgAnimationChunks[11], gUnk_08F0B384, gUnk_08F6A764, 192, 46, 16, 16, 9, 5 };
 
-BgAnimationDef gBgAnimDefBlizzard00 = { &gBgAnimationChunks[12], gUnk_08F13384, gUnk_08F6AD64, 192, 66, 21, 16, 10, 3 };
+BgAnimationDef gBgAnimDefBlizzard00 = { &sBgAnimationChunks[12], gUnk_08F13384, gUnk_08F6AD64, 192, 66, 21, 16, 10, 3 };
 
-BgAnimationDef gBgAnimDefFrost = { &gBgAnimationChunks[12], gUnk_08F13384, gUnk_08F6AD64, 192, 66, 12, 16, 3, 4 };
+BgAnimationDef gBgAnimDefFrost = { &sBgAnimationChunks[12], gUnk_08F13384, gUnk_08F6AD64, 192, 66, 12, 16, 3, 4 };
 
-BgAnimationDef gBgAnimDefBlizzard01 = { &gBgAnimationChunks[14], gUnk_08F14384, gUnk_08F6AE24, 192, 37, 16, 16, 5, 7 };
+BgAnimationDef gBgAnimDefBlizzard01 = { &sBgAnimationChunks[14], gUnk_08F14384, gUnk_08F6AE24, 192, 37, 16, 16, 5, 7 };
 
-BgAnimationDef gBgAnimDefBlizzardHit = { &gBgAnimationChunks[14], gUnk_08F14384, gUnk_08F6AE24, 192, 37, 16, 16, 5, 3 };
+static BgAnimationDef sBgAnimDefBlizzardHit = { &sBgAnimationChunks[14], gUnk_08F14384, gUnk_08F6AE24, 192, 37, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefBlizzard02 = { &gBgAnimationChunks[15], gUnk_08F15384, gUnk_08F6AEE4, 192, 48, 16, 16, 6, 8 };
+BgAnimationDef gBgAnimDefBlizzard02 = { &sBgAnimationChunks[15], gUnk_08F15384, gUnk_08F6AEE4, 192, 48, 16, 16, 6, 8 };
 
-BgAnimationDef gBgAnimDefBlizzard03 = { &gBgAnimationChunks[16], gUnk_08F16384, gUnk_08F6AFA4, 192, 97, 16, 16, 9, 7 };
+BgAnimationDef gBgAnimDefBlizzard03 = { &sBgAnimationChunks[16], gUnk_08F16384, gUnk_08F6AFA4, 192, 97, 16, 16, 9, 7 };
 
-BgAnimationDef gBgAnimDefThunder00 = { &gBgAnimationChunks[18], gUnk_08F17384, gUnk_08F6B064, 192, 57, 16, 16, 8, 4 };
+BgAnimationDef gBgAnimDefThunder00 = { &sBgAnimationChunks[18], gUnk_08F17384, gUnk_08F6B064, 192, 57, 16, 16, 8, 4 };
 
-BgAnimationDef gBgAnimDefThunderHit = { &gBgAnimationChunks[18], gUnk_08F17384, gUnk_08F6B064, 192, 57, 16, 16, 8, 2 };
+static BgAnimationDef sBgAnimDefThunderHit = { &sBgAnimationChunks[18], gUnk_08F17384, gUnk_08F6B064, 192, 57, 16, 16, 8, 2 };
 
-BgAnimationDef gBgAnimDefThunder01 = { &gBgAnimationChunks[19], gUnk_08F18384, gUnk_08F6B124, 192, 36, 16, 21, 5, 5 };
+BgAnimationDef gBgAnimDefThunder01 = { &sBgAnimationChunks[19], gUnk_08F18384, gUnk_08F6B124, 192, 36, 16, 21, 5, 5 };
 
-BgAnimationDef gBgAnimDefThunder02 = { &gBgAnimationChunks[20], gUnk_08F19384, gUnk_08F6B1E4, 192, 111, 16, 19, 9, 5 };
+BgAnimationDef gBgAnimDefThunder02 = { &sBgAnimationChunks[20], gUnk_08F19384, gUnk_08F6B1E4, 192, 111, 16, 19, 9, 5 };
 
-BgAnimationDef gBgAnimDefThunder03 = { &gBgAnimationChunks[23], gUnk_08F1A384, gUnk_08F6B2A4, 192, 117, 16, 19, 12, 6 };
+BgAnimationDef gBgAnimDefThunder03 = { &sBgAnimationChunks[23], gUnk_08F1A384, gUnk_08F6B2A4, 192, 117, 16, 19, 12, 6 };
 
-BgAnimationDef gBgAnimDefCharaDefeatEnd = { &gBgAnimationChunks[26], gUnk_08F20384, gUnk_08F6B724, 192, 21, 16, 16, 8, 8 };
+BgAnimationDef gBgAnimDefCharaDefeatEnd = { &sBgAnimationChunks[26], gUnk_08F20384, gUnk_08F6B724, 192, 21, 16, 16, 8, 8 };
 
-BgAnimationDef gBgAnimDefEnemyDeath = { &gBgAnimationChunks[27], gUnk_08F21384, gUnk_08F6B7E4, 192, 61, 16, 21, 5, 2 };
+BgAnimationDef gBgAnimDefEnemyDeath = { &sBgAnimationChunks[27], gUnk_08F21384, gUnk_08F6B7E4, 192, 61, 16, 21, 5, 2 };
 
-BgAnimationDef gBgAnimDefDarkDeath = { &gBgAnimationChunks[28], gUnk_08F22384, gUnk_08F6B8A4, 64, 64, 8, 8, 5, 3 };
+BgAnimationDef gBgAnimDefDarkDeath = { &sBgAnimationChunks[28], gUnk_08F22384, gUnk_08F6B8A4, 64, 64, 8, 8, 5, 3 };
 
-BgAnimationDef gBgAnimDefCure02 = { &gBgAnimationChunks[29], gUnk_08F0E384, gUnk_08F6A9A4, 192, 79, 16, 16, 10, 6 };
+BgAnimationDef gBgAnimDefCure02 = { &sBgAnimationChunks[29], gUnk_08F0E384, gUnk_08F6A9A4, 192, 79, 16, 16, 10, 6 };
 
-BgAnimationDef gBgAnimDefCure01 = { &gBgAnimationChunks[31], gUnk_08F0D384, gUnk_08F6A8E4, 192, 80, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefCure01 = { &sBgAnimationChunks[31], gUnk_08F0D384, gUnk_08F6A8E4, 192, 80, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefFire03 = { &gBgAnimationChunks[33], gUnk_08F12384, gUnk_08F6ACA4, 192, 68, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefFire03 = { &sBgAnimationChunks[33], gUnk_08F12384, gUnk_08F6ACA4, 192, 68, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefRikuFire03 = { &gBgAnimationChunks[33], gUnk_08F12384, gUnk_08F69F24, 192, 68, 16, 16, 9, 6 };
+BgAnimationDef gBgAnimDefRikuFire03 = { &sBgAnimationChunks[33], gUnk_08F12384, gUnk_08F69F24, 192, 68, 16, 16, 9, 6 };
 
-BgAnimationDef gBgAnimDefFriendHit = { &gBgAnimationChunks[35], gUnk_08F08384, gUnk_08F6A524, 192, 61, 16, 16, 5, 3 };
+BgAnimationDef gBgAnimDefFriendHit = { &sBgAnimationChunks[35], gUnk_08F08384, gUnk_08F6A524, 192, 61, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefStop00 = { &gBgAnimationChunks[36], gUnk_08F1B384, gUnk_08F6B364, 192, 33, 16, 16, 6, 5 };
+BgAnimationDef gBgAnimDefStop00 = { &sBgAnimationChunks[36], gUnk_08F1B384, gUnk_08F6B364, 192, 33, 16, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefStop01 = { &gBgAnimationChunks[37], gUnk_08F1C384, gUnk_08F6B424, 192, 52, 16, 16, 6, 5 };
+BgAnimationDef gBgAnimDefStop01 = { &sBgAnimationChunks[37], gUnk_08F1C384, gUnk_08F6B424, 192, 52, 16, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefStop02 = { &gBgAnimationChunks[38], gUnk_08F1D384, gUnk_08F6B4E4, 192, 90, 16, 16, 8, 5 };
+BgAnimationDef gBgAnimDefStop02 = { &sBgAnimationChunks[38], gUnk_08F1D384, gUnk_08F6B4E4, 192, 90, 16, 16, 8, 5 };
 
-BgAnimationDef gBgAnimDefSummon = { &gBgAnimationChunks[40], gUnk_08F23384, gUnk_08F6B8E4, 192, 81, 16, 16, 8, 3 };
+BgAnimationDef gBgAnimDefSummon = { &sBgAnimationChunks[40], gUnk_08F23384, gUnk_08F6B8E4, 192, 81, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefGroundImpact = { &gBgAnimationChunks[42], gUnk_08F0A384, gUnk_08F6A6A4, 192, 72, 16, 16, 8, 3 };
+BgAnimationDef gBgAnimDefGroundImpact = { &sBgAnimationChunks[42], gUnk_08F0A384, gUnk_08F6A6A4, 192, 72, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefBtlStart = { &gBgAnimationChunks[44], gUnk_08F24384, gUnk_08F6B9A4, 192, 177, 16, 11, 11, 4 };
+BgAnimationDef gBgAnimDefBtlStart = { &sBgAnimationChunks[44], gUnk_08F24384, gUnk_08F6B9A4, 192, 177, 16, 11, 11, 4 };
 
-BgAnimationDef gBgAnimDefGuard = { &gBgAnimationChunks[50], gUnk_08F09384, gUnk_08F6A5E4, 192, 41, 16, 16, 6, 3 };
+BgAnimationDef gBgAnimDefGuard = { &sBgAnimationChunks[50], gUnk_08F09384, gUnk_08F6A5E4, 192, 41, 16, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefCharaDefeat = { &gBgAnimationChunks[51], gUnk_08F25384, gUnk_08F6BA64, 192, 69, 16, 16, 11, 5 };
+BgAnimationDef gBgAnimDefCharaDefeat = { &sBgAnimationChunks[51], gUnk_08F25384, gUnk_08F6BA64, 192, 69, 16, 16, 11, 5 };
 
-BgAnimationDef gBgAnimDefHumDefeat = { &gBgAnimationChunks[53], gUnk_08F26384, gUnk_08F6BB24, 192, 85, 16, 16, 10, 5 };
+BgAnimationDef gBgAnimDefHumDefeat = { &sBgAnimationChunks[53], gUnk_08F26384, gUnk_08F6BB24, 192, 85, 16, 16, 10, 5 };
 
-BgAnimationDef gBgAnimDefGravity00 = { &gBgAnimationChunks[55], gUnk_08F1E384, gUnk_08F6B5A4, 192, 41, 16, 16, 9, 2 };
+BgAnimationDef gBgAnimDefGravity00 = { &sBgAnimationChunks[55], gUnk_08F1E384, gUnk_08F6B5A4, 192, 41, 16, 16, 9, 2 };
 
-BgAnimationDef gBgAnimDefGravity01 = { &gBgAnimationChunks[56], gUnk_08F1F384, gUnk_08F6B664, 192, 85, 16, 22, 10, 6 };
+BgAnimationDef gBgAnimDefGravity01 = { &sBgAnimationChunks[56], gUnk_08F1F384, gUnk_08F6B664, 192, 85, 16, 22, 10, 6 };
 
-BgAnimationDef gBgAnimDefPremireChance = { &gBgAnimationChunks[58], gUnk_08F27384, gUnk_08F6BBE4, 192, 96, 12, 14, 9, 5 };
+BgAnimationDef gBgAnimDefPremireChance = { &sBgAnimationChunks[58], gUnk_08F27384, gUnk_08F6BBE4, 192, 96, 12, 14, 9, 5 };
 
-BgAnimationDef gBgAnimDefGas = { &gBgAnimationChunks[60], gUnk_08F28384, gUnk_08F6BCA4, 192, 73, 16, 16, 4, 5 };
+BgAnimationDef gBgAnimDefGas = { &sBgAnimationChunks[60], gUnk_08F28384, gUnk_08F6BCA4, 192, 73, 16, 16, 4, 5 };
 
-BgAnimationDef gBgAnimDefEnemySpawn = { &gBgAnimationChunks[61], gUnk_08F29384, gUnk_08F6BD64, 192, 46, 16, 16, 4, 2 };
+BgAnimationDef gBgAnimDefEnemySpawn = { &sBgAnimationChunks[61], gUnk_08F29384, gUnk_08F6BD64, 192, 46, 16, 16, 4, 2 };
 
-BgAnimationDef gBgAnimDefBoogieKaihuku = { &gBgAnimationChunks[62], gUnk_08F2A384, gUnk_08F6BE24, 192, 45, 16, 9, 3, 6 };
+BgAnimationDef gBgAnimDefBoogieKaihuku = { &sBgAnimationChunks[62], gUnk_08F2A384, gUnk_08F6BE24, 192, 45, 16, 9, 3, 6 };
 
-BgAnimationDef gBgAnimDefPcShot = { &gBgAnimationChunks[63], gUnk_08F2B384, gUnk_08F6BEE4, 192, 48, 16, 16, 3, 8 };
+BgAnimationDef gBgAnimDefPcShot = { &sBgAnimationChunks[63], gUnk_08F2B384, gUnk_08F6BEE4, 192, 48, 16, 16, 3, 8 };
 
-BgAnimationDef gUnk_09EDAA20 = { &gBgAnimationChunks[64], gUnk_08F2D384, gUnk_08F6C124, 192, 122, 16, 16, 1, 65535 };
+BgAnimationDef gUnk_09EDAA20 = { &sBgAnimationChunks[64], gUnk_08F2D384, gUnk_08F6C124, 192, 122, 16, 16, 1, 65535 };
 
-BgAnimationDef gUnk_09EDAA38 = { &gBgAnimationChunks[64], gUnk_08F2D384, gUnk_08F6C064, 192, 122, 16, 16, 1, 65535 };
+static BgAnimationDef sUnk_09EDAA38 = { &sBgAnimationChunks[64], gUnk_08F2D384, gUnk_08F6C064, 192, 122, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefBossDeath = { &gBgAnimationChunks[65], gUnk_08F2C384, gUnk_08F6BFA4, 192, 67, 16, 16, 8, 5 };
+BgAnimationDef gBgAnimDefBossDeath = { &sBgAnimationChunks[65], gUnk_08F2C384, gUnk_08F6BFA4, 192, 67, 16, 16, 8, 5 };
 
-BgAnimationDef gBgAnimDefDumboSplash = { &gBgAnimationChunks[67], gUnk_08F2E384, gUnk_08F6C1E4, 192, 77, 26, 16, 4, 4 };
+BgAnimationDef gBgAnimDefDumboSplash = { &sBgAnimationChunks[67], gUnk_08F2E384, gUnk_08F6C1E4, 192, 77, 26, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefTrinityLimit = { &gBgAnimationChunks[68], gUnk_08F2F384, gUnk_08F6C2A4, 192, 105, 16, 15, 1, 65535 };
+BgAnimationDef gBgAnimDefTrinityLimit = { &sBgAnimationChunks[68], gUnk_08F2F384, gUnk_08F6C2A4, 192, 105, 16, 15, 1, 65535 };
 
-BgAnimationDef gBgAnimDefTrinityLimitCharge = { &gBgAnimationChunks[69], gUnk_08F30384, gUnk_08F6C364, 192, 122, 16, 22, 8, 4 };
+BgAnimationDef gBgAnimDefTrinityLimitCharge = { &sBgAnimationChunks[69], gUnk_08F30384, gUnk_08F6C364, 192, 122, 16, 22, 8, 4 };
 
-BgAnimationDef gBgAnimDefTrinityLimitBlast = { &gBgAnimationChunks[71], gUnk_08F31384, gUnk_08F6C424, 192, 113, 15, 15, 1, 65535 };
+BgAnimationDef gBgAnimDefTrinityLimitBlast = { &sBgAnimationChunks[71], gUnk_08F31384, gUnk_08F6C424, 192, 113, 15, 15, 1, 65535 };
 
-BgAnimationDef gBgAnimDefRagnarokCharge = { &gBgAnimationChunks[72], gUnk_08F32384, gUnk_08F6C5A4, 192, 64, 10, 16, 3, 8 };
+BgAnimationDef gBgAnimDefRagnarokCharge = { &sBgAnimationChunks[72], gUnk_08F32384, gUnk_08F6C5A4, 192, 64, 10, 16, 3, 8 };
 
-BgAnimationDef gUnk_09EDAAE0 = { &gBgAnimationChunks[72], gUnk_08F32384, gUnk_08F6C4E4, 192, 86, 10, 16, 6, 3 };
+static BgAnimationDef sUnk_09EDAAE0 = { &sBgAnimationChunks[72], gUnk_08F32384, gUnk_08F6C4E4, 192, 86, 10, 16, 6, 3 };
 
-BgAnimationDef gBgAnimDefRagnarokShot = { &gBgAnimationChunks[73], gUnk_08F33384, gUnk_08F6C664, 192, 95, 10, 16, 7, 3 };
+BgAnimationDef gBgAnimDefRagnarokShot = { &sBgAnimationChunks[73], gUnk_08F33384, gUnk_08F6C664, 192, 95, 10, 16, 7, 3 };
 
-BgAnimationDef gBgAnimDefUrsulaBeam = { &gBgAnimationChunks[75], gUnk_08F34384, gUnk_08F6C724, 192, 122, 24, 8, 4, 8 };
+BgAnimationDef gBgAnimDefUrsulaBeam = { &sBgAnimationChunks[75], gUnk_08F34384, gUnk_08F6C724, 192, 122, 24, 8, 4, 8 };
 
-BgAnimationDef gBgAnimDefJfMajinBeam = { &gBgAnimationChunks[76], gUnk_08F37384, gUnk_08F6C964, 192, 82, 16, 27, 3, 8 };
+BgAnimationDef gBgAnimDefJfMajinBeam = { &sBgAnimationChunks[76], gUnk_08F37384, gUnk_08F6C964, 192, 82, 16, 27, 3, 8 };
 
-BgAnimationDef gUnk_09EDAB40 = { &gBgAnimationChunks[77], gUnk_08F35384, gUnk_08F6C7E4, 192, 74, 17, 16, 1, 65535 };
+BgAnimationDef gUnk_09EDAB40 = { &sBgAnimationChunks[77], gUnk_08F35384, gUnk_08F6C7E4, 192, 74, 17, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefAnsemWave = { &gBgAnimationChunks[78], gUnk_08F36384, gUnk_08F6C8A4, 192, 75, 16, 26, 3, 3 };
+BgAnimationDef gBgAnimDefAnsemWave = { &sBgAnimationChunks[78], gUnk_08F36384, gUnk_08F6C8A4, 192, 75, 16, 26, 3, 3 };
 
-BgAnimationDef gBgAnimDefStunImpact = { &gBgAnimationChunks[79], gUnk_08F38384, gUnk_08F6CA24, 192, 74, 16, 18, 4, 5 };
+BgAnimationDef gBgAnimDefStunImpact = { &sBgAnimationChunks[79], gUnk_08F38384, gUnk_08F6CA24, 192, 74, 16, 18, 4, 5 };
 
-BgAnimationDef gBgAnimDefUrsulaThunder = { &gBgAnimationChunks[80], gUnk_08F39384, gUnk_08F6CAE4, 192, 45, 16, 16, 4, 5 };
+BgAnimationDef gBgAnimDefUrsulaThunder = { &sBgAnimationChunks[80], gUnk_08F39384, gUnk_08F6CAE4, 192, 45, 16, 16, 4, 5 };
 
-BgAnimationDef gBgAnimDefWorldSelect = { &gBgAnimationChunks[81], gUnk_08F3A384, gUnk_08F6CBA4, 192, 64, 20, 7, 8, 6 };
+BgAnimationDef gBgAnimDefWorldSelect = { &sBgAnimationChunks[81], gUnk_08F3A384, gUnk_08F6CBA4, 192, 64, 20, 7, 8, 6 };
 
-BgAnimationDef gBgAnimDefWorldStart = { &gBgAnimationChunks[82], gUnk_08F3B384, gUnk_08F6CC64, 192, 155, 16, 16, 6, 4 };
+BgAnimationDef gBgAnimDefWorldStart = { &sBgAnimationChunks[82], gUnk_08F3B384, gUnk_08F6CC64, 192, 155, 16, 16, 6, 4 };
 
-BgAnimationDef gBgAnimDefXmas = { &gBgAnimationChunks[84], gUnk_08F3C384, gUnk_08F6CD24, 192, 64, 32, 32, 10, 8 };
+BgAnimationDef gBgAnimDefXmas = { &sBgAnimationChunks[84], gUnk_08F3C384, gUnk_08F6CD24, 192, 64, 32, 32, 10, 8 };
 
-BgAnimationDef gBgAnimDefVixenIceFall = { &gBgAnimationChunks[84], gUnk_08F3C384, gUnk_08F6CD24, 192, 64, 32, 32, 10, 2 };
+BgAnimationDef gBgAnimDefVixenIceFall = { &sBgAnimationChunks[84], gUnk_08F3C384, gUnk_08F6CD24, 192, 64, 32, 32, 10, 2 };
 
-BgAnimationDef gUnk_09EDAC00 = { &gBgAnimationChunks[86], gUnk_08F3D384, gUnk_08F6CDE4, 192, 115, 16, 27, 1, 65535 };
+BgAnimationDef gUnk_09EDAC00 = { &sBgAnimationChunks[86], gUnk_08F3D384, gUnk_08F6CDE4, 192, 115, 16, 27, 1, 65535 };
 
-BgAnimationDef gBgAnimDefTornado = { &gBgAnimationChunks[87], gUnk_08F3E384, gUnk_08F6CEA4, 192, 79, 16, 23, 3, 6 };
+BgAnimationDef gBgAnimDefTornado = { &sBgAnimationChunks[87], gUnk_08F3E384, gUnk_08F6CEA4, 192, 79, 16, 23, 3, 6 };
 
-BgAnimationDef gUnk_09EDAC30 = { &gBgAnimationChunks[8], gUnk_08F04384, gUnk_08F69C24, 192, 42, 16, 16, 6, 3 };
+BgAnimationDef gUnk_09EDAC30 = { &sBgAnimationChunks[8], gUnk_08F04384, gUnk_08F69C24, 192, 42, 16, 16, 6, 3 };
 
-BgAnimationDef gUnk_09EDAC48 = { &gBgAnimationChunks[9], gUnk_08F05384, gUnk_08F69CE4, 192, 74, 16, 16, 5, 3 };
+BgAnimationDef gUnk_09EDAC48 = { &sBgAnimationChunks[9], gUnk_08F05384, gUnk_08F69CE4, 192, 74, 16, 16, 5, 3 };
 
-BgAnimationDef gBgAnimDefAxcelFireWall = { &gBgAnimationChunks[88], gUnk_08F3F384, gUnk_08F6CF64, 192, 144, 20, 30, 4, 6 };
+BgAnimationDef gBgAnimDefAxcelFireWall = { &sBgAnimationChunks[88], gUnk_08F3F384, gUnk_08F6CF64, 192, 144, 20, 30, 4, 6 };
 
-BgAnimationDef gBgAnimDefMahluxiaGround = { &gBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D0E4, 192, 74, 16, 16, 8, 6 };
+BgAnimationDef gBgAnimDefMahluxiaGround = { &sBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D0E4, 192, 74, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefLexceusGround = { &gBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D024, 192, 74, 16, 16, 8, 4 };
+static BgAnimationDef sBgAnimDefLexceusGround = { &sBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D024, 192, 74, 16, 16, 8, 4 };
 
-BgAnimationDef gBgAnimDefRikuLimit = { &gBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D0E4, 192, 74, 16, 16, 8, 3 };
+static BgAnimationDef sBgAnimDefRikuLimit = { &sBgAnimationChunks[90], gUnk_08F40384, gUnk_08F6D0E4, 192, 74, 16, 16, 8, 3 };
 
-BgAnimationDef gBgAnimDefHanabira = { &gBgAnimationChunks[92], gUnk_08F42384, gUnk_08F6D264, 192, 64, 32, 32, 1, 65535 };
+BgAnimationDef gBgAnimDefHanabira = { &sBgAnimationChunks[92], gUnk_08F42384, gUnk_08F6D264, 192, 64, 32, 32, 1, 65535 };
 
-BgAnimationDef gBgAnimDefKama = { &gBgAnimationChunks[93], gUnk_08F41384, gUnk_08F6D1A4, 192, 67, 16, 16, 1, 65535 };
+BgAnimationDef gBgAnimDefKama = { &sBgAnimationChunks[93], gUnk_08F41384, gUnk_08F6D1A4, 192, 67, 16, 16, 1, 65535 };
 
-BgAnimationDef gBgAnimDefDragonFire = { &gBgAnimationChunks[94], gUnk_08F43384, gUnk_08F6D324, 192, 96, 13, 24, 5, 6 };
+BgAnimationDef gBgAnimDefDragonFire = { &sBgAnimationChunks[94], gUnk_08F43384, gUnk_08F6D324, 192, 96, 13, 24, 5, 6 };
 
-BgAnimationDef gBgAnimDefLaxeneBeam = { &gBgAnimationChunks[96], gUnk_08F44384, gUnk_08F6D3E4, 192, 117, 8, 16, 6, 5 };
+BgAnimationDef gBgAnimDefLaxeneBeam = { &sBgAnimationChunks[96], gUnk_08F44384, gUnk_08F6D3E4, 192, 117, 8, 16, 6, 5 };
 
-BgAnimationDef gBgAnimDefAero = { &gBgAnimationChunks[98], gUnk_08F45384, gUnk_08F6D4A4, 192, 81, 16, 22, 6, 6 };
+BgAnimationDef gBgAnimDefAero = { &sBgAnimationChunks[98], gUnk_08F45384, gUnk_08F6D4A4, 192, 81, 16, 22, 6, 6 };
 
-BgAnimationDef gBgAnimDefRikuHit = { &gBgAnimationChunks[99], gUnk_08F46384, gUnk_08F6D564, 192, 48, 16, 16, 4, 4 };
+BgAnimationDef gBgAnimDefRikuHit = { &sBgAnimationChunks[99], gUnk_08F46384, gUnk_08F6D564, 192, 48, 16, 16, 4, 4 };
 
-BgAnimationDef gBgAnimDefRikuDarkModeFlash = { &gBgAnimationChunks[100], gUnk_08F47384, gUnk_08F6D624, 192, 74, 16, 21, 7, 5 };
+BgAnimationDef gBgAnimDefRikuDarkModeFlash = { &sBgAnimationChunks[100], gUnk_08F47384, gUnk_08F6D624, 192, 74, 16, 21, 7, 5 };
 
-BgAnimationDef gBgAnimDefLstCtr = { &gBgAnimationChunks[102], gUnk_08F49384, gUnk_08F6D7A4, 192, 108, 16, 16, 12, 7 };
+BgAnimationDef gBgAnimDefLstCtr = { &sBgAnimationChunks[102], gUnk_08F49384, gUnk_08F6D7A4, 192, 108, 16, 16, 12, 7 };
 
-BgAnimationDef gUnk_09EDAD80 = { &gBgAnimationChunks[105], gUnk_08F4A384, gUnk_08F6D864, 192, 64, 16, 16, 8, 6 };
+BgAnimationDef gUnk_09EDAD80 = { &sBgAnimationChunks[105], gUnk_08F4A384, gUnk_08F6D864, 192, 64, 16, 16, 8, 6 };
 
-BgAnimationDef gBgAnimDefRikuLimitFinish = { &gBgAnimationChunks[106], gUnk_08F48384, gUnk_08F6D6E4, 192, 64, 30, 30, 6, 7 };
+BgAnimationDef gBgAnimDefRikuLimitFinish = { &sBgAnimationChunks[106], gUnk_08F48384, gUnk_08F6D6E4, 192, 64, 30, 30, 6, 7 };
 
-BgAnimationDef gUnk_09EDADB0 = { &gBgAnimationChunks[107], gUnk_08F4B384, gUnk_08F6D924, 192, 64, 16, 16, 5, 5 };
+BgAnimationDef gUnk_09EDADB0 = { &sBgAnimationChunks[107], gUnk_08F4B384, gUnk_08F6D924, 192, 64, 16, 16, 5, 5 };
 
 BgFx* gBgFx;
 
@@ -1000,7 +1000,7 @@ void BgFxStartFireHit(s32 x, s32 y, s32 z) {
     gBgFx->z = z - 0x1000;
     gBgFx->scaleY = 0x200;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    BgAnimStart(&gBgAnimDefFireHit, sx, sy);
+    BgAnimStart(&sBgAnimDefFireHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
 void BgFxStartBlizzardHit(s32 x, s32 y, s32 z) {
@@ -1015,7 +1015,7 @@ void BgFxStartBlizzardHit(s32 x, s32 y, s32 z) {
     gBgFx->y = y;
     gBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    BgAnimStart(&gBgAnimDefBlizzardHit, sx, sy);
+    BgAnimStart(&sBgAnimDefBlizzardHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
 
@@ -1031,7 +1031,7 @@ void BgFxStartThunderHit(s32 x, s32 y, s32 z) {
     gBgFx->y = y;
     gBgFx->z = z - 0x1000;
     WorldToScreen(&sx, &sy, x, y, z - 0x1000);
-    BgAnimStart(&gBgAnimDefThunderHit, sx, sy);
+    BgAnimStart(&sBgAnimDefThunderHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
 
@@ -1461,7 +1461,7 @@ void func_080144D8(s32 x, s32 y, s32 z, s32 w, u16 a, u16 b) {
     gBgFx->unk_3C = 0;
     gBgFx->endSignals = 0;
     WorldToScreen(&sx, &sy, x, y, z);
-    BgAnimStart(&gUnk_09EDAAE0, sx, sy);
+    BgAnimStart(&sUnk_09EDAAE0, sx, sy);
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateDsdEnergy;
     gBgFx->unk_0A = a;
@@ -1488,7 +1488,7 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 w, s32 paramA, s32 paramB) {
     gBgFx->unk_3C = 0;
     gBgFx->endSignals = 0;
     WorldToScreen(&sx, &sy, x, y, z);
-    BgAnimStart(&gUnk_09EDAA38, sx, sy);
+    BgAnimStart(&sUnk_09EDAA38, sx, sy);
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateDsdEnergy;
     gBgFx->unk_0A = a;
@@ -3753,7 +3753,7 @@ void BgFxStartLexceusGround(s32 x, s32 y, s32 z, s32 w) {
     gBgFx->z = z;
     gBgFx->attack = w;
     WorldToScreen(&sx, &sy, x, y, z);
-    BgAnimStart(&gBgAnimDefLexceusGround, sx, sy);
+    BgAnimStart(&sBgAnimDefLexceusGround, sx, sy);
     gBgFx->scaleX = 0x80;
     gBgFx->scaleY = 0x80;
     gBgFx->unk_0A = BgAnimGetDuration(BgAnimGetCurrent());
@@ -3933,7 +3933,7 @@ void BgFxStartRikuLimit(s32 x, s32 y, s32 z, u8 f) {
     gBgFx->z = z;
     gBgFx->angle = f;
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
-    BgAnimStart(&gBgAnimDefRikuLimit, sx, sy);
+    BgAnimStart(&sBgAnimDefRikuLimit, sx, sy);
     gBgFx->flags |= 0x20;
     gBgFx->update = BgFxUpdateRikuLimit;
 }
@@ -4222,7 +4222,7 @@ void BgFxStartRikuDarkMode(s32 x, s32 y, s32 z) {
     gBgFx->unk_3C = 0;
     gBgFx->endSignals = 0;
     WorldToScreen(&sx, &sy, x, y, z);
-    BgAnimStart(&gUnk_09EDAA38, sx, sy);
+    BgAnimStart(&sUnk_09EDAA38, sx, sy);
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateRikuDarkMode;
     gBgFx->unk_0A = 43;

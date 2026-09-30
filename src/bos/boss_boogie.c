@@ -26,7 +26,7 @@ extern u8 gUnk_08F69BC4[];
 static BoogieWork* gBoogieWork;
 
 #if defined(VERSION_US)
-const StatusAnimDef gBosBoogieAnimDefs[9] = {
+static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnkUs_09EF66C4, gUnkUs_09EF66A8, gUnk_0977A53C, 0, 0 },
     { gUnkUs_09EF66E8, gUnkUs_09EF66C8, gUnk_0977F7B4, 0, 0 },
     { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 0, 0 },
@@ -38,7 +38,7 @@ const StatusAnimDef gBosBoogieAnimDefs[9] = {
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
 };
 #elif defined(VERSION_JP)
-const StatusAnimDef gBosBoogieAnimDefs[9] = {
+static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnkJp_09ECDAB0, gUnkJp_09ECDA94, gUnk_0977A53C, 0, 0 },
     { gUnkJp_09ECDAD4, gUnkJp_09ECDAB4, gUnk_0977F7B4, 0, 0 },
     { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 0, 0 },
@@ -50,7 +50,7 @@ const StatusAnimDef gBosBoogieAnimDefs[9] = {
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
 };
 #elif defined(VERSION_EU)
-const StatusAnimDef gBosBoogieAnimDefs[9] = {
+static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0, 0 },
     { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0, 0 },
     { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 0, 0 },
@@ -64,7 +64,7 @@ const StatusAnimDef gBosBoogieAnimDefs[9] = {
 #endif
 
 #if defined(VERSION_US)
-const StatusObjDef gBosBoogieSpriteDefs[6] = {
+static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnkUs_09EF66A8, 7, 0 },
     { gUnkUs_09EF66C8, 8, 0 },
     { gUnkUs_09EF66EC, 9, 0 },
@@ -73,7 +73,7 @@ const StatusObjDef gBosBoogieSpriteDefs[6] = {
     { gUnkUs_09EF6754, 6, 0 },
 };
 #elif defined(VERSION_JP)
-const StatusObjDef gBosBoogieSpriteDefs[6] = {
+static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnkJp_09ECDA94, 7, 0 },
     { gUnkJp_09ECDAB4, 8, 0 },
     { gUnkJp_09ECDAD8, 9, 0 },
@@ -82,7 +82,7 @@ const StatusObjDef gBosBoogieSpriteDefs[6] = {
     { gUnkJp_09ECDB40, 6, 0 },
 };
 #elif defined(VERSION_EU)
-const StatusObjDef gBosBoogieSpriteDefs[6] = {
+static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnkEu_09F81C90, 7, 0 },
     { gUnkEu_09F81CB0, 8, 0 },
     { gUnkEu_09F81CD4, 9, 0 },
@@ -92,20 +92,20 @@ const StatusObjDef gBosBoogieSpriteDefs[6] = {
 };
 #endif
 
-const EmyKind gBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, 4 };
+static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, 4 };
 
 #if defined(VERSION_US)
-const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
+static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnk_0984AE38, 0x140, { 0, 0 },
     { gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x1000, gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x800 },
 };
 #elif defined(VERSION_JP)
-const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
+static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkJp_097FFB0C, 0x140, { 0, 0 },
     { gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x1000, gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x800 },
 };
 #elif defined(VERSION_EU)
-const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
+static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkEu_0981F4E0, 0x140, { 0, 0 },
     { gBossMapBlockEu_08124944, gUnk_09841F98 + 0x1000, gBossMapBlockEu_08124944, gUnk_09841F98 + 0x800 },
 };
@@ -147,8 +147,8 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
 void SetBoogieAnimation(BoogieWork* work, s32 a, u16 b) {
     if (work->animationIndex != a) {
         work->animationIndex = a;
-        AnimChangeWithTables(&work->anim, gBosBoogieAnimDefs[a].animId, b, gBosBoogieAnimDefs[a].anims, gBosBoogieAnimDefs[a].gfxTable);
-        SetObjTileSource(work->tiles, gBosBoogieAnimDefs[a].tiles);
+        AnimChangeWithTables(&work->anim, sBosBoogieAnimDefs[a].animId, b, sBosBoogieAnimDefs[a].anims, sBosBoogieAnimDefs[a].gfxTable);
+        SetObjTileSource(work->tiles, sBosBoogieAnimDefs[a].tiles);
     }
 }
 
@@ -185,7 +185,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     u16 t;
 
     gBoogieWork = work;
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&gBosBoogieBattleBackgroundDef);
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&sBosBoogieBattleBackgroundDef);
     work->state = 0;
     work->timer = 0;
     gBosBoogieDiceFaceReady = 0;
@@ -195,7 +195,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     gBosBoogieActor = &work->actor;
     gBosBoogieDiceBreakCount = 0;
     SetBattleBounds(128, 368, 576, 632);
-    InitEnemyBtlObj(&work->actor, &gBosBoogieEmyKind, 0x15000, 0x22800, -0x2000);
+    InitEnemyBtlObj(&work->actor, &sBosBoogieEmyKind, 0x15000, 0x22800, -0x2000);
     work->actor.groundZ = -0x2000;
     work->actor.flags |= 4;
     SetBtlObjUnhittable(&work->actor, 1);
@@ -207,7 +207,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     sz = 0;
 
     for (i = 0; i <= 5; i++) {
-        t = GetMaxSpriteTileBytes(gBosBoogieSpriteDefs[i].sprites, gBosBoogieSpriteDefs[i].spriteCount);
+        t = GetMaxSpriteTileBytes(sBosBoogieSpriteDefs[i].sprites, sBosBoogieSpriteDefs[i].spriteCount);
         if (sz < t) {
             sz = t;
         }
@@ -297,7 +297,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             break;
         case 2:
             if (FadeIsActive() == 0) {
-                BgFxStartBossDeath(a->x, a->y + a->z - ((s16)gBosBoogieEmyKind.centerHeight << 8));
+                BgFxStartBossDeath(a->x, a->y + a->z - ((s16)sBosBoogieEmyKind.centerHeight << 8));
                 SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
                 FadeToAmount(0, gBtlWork->fadeAmount, 8);
                 work->defeatStep = 3;

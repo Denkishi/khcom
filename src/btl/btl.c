@@ -41,7 +41,7 @@ TaskDesc gTaskDescBtlArea = {
     sizeof(BtlAreaWork),
 };
 
-const AnimDef gBtlSoraAnimDefs[77] = {
+static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0, { 0, 0, 0 } },
     { gSor1ll51Frames, gSor1ll51Anims, gSor1ll51Tiles, 0, { 0, 0, 0 } },
     { gSor1ll55Frames, gSor1ll55Anims, gSor1ll55Tiles, 4, { 0, 0, 0 } },
@@ -121,7 +121,7 @@ const AnimDef gBtlSoraAnimDefs[77] = {
     { gSor1ll75Frames, gSor1ll75Anims, gSor1ll75Tiles, 2, { 0, 0, 0 } },
 };
 
-const AnimDef gBtlSoraDirAnimDefs[6][5] = {
+static const AnimDef sBtlSoraDirAnimDefs[6][5] = {
     { { gSor1ff02Frames, gSor1ff02Anims, gSor1ff02Tiles, 0, { 0, 0, 0 } }, { gSor1bb02Frames, gSor1bb02Anims, gSor1bb02Tiles, 0, { 0, 0, 0 } }, { gSor1fl02Frames, gSor1fl02Anims, gSor1fl02Tiles, 0, { 0, 0, 0 } }, { gSor1ll02Frames, gSor1ll02Anims, gSor1ll02Tiles, 0, { 0, 0, 0 } }, { gSor1bl02Frames, gSor1bl02Anims, gSor1bl02Tiles, 0, { 0, 0, 0 } } },
     { { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 0, { 0, 0, 0 } }, { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 0, { 0, 0, 0 } }, { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 0, { 0, 0, 0 } }, { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 0, { 0, 0, 0 } }, { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 0, { 0, 0, 0 } } },
     { { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 1, { 0, 0, 0 } }, { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 1, { 0, 0, 0 } }, { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 1, { 0, 0, 0 } }, { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 1, { 0, 0, 0 } }, { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 1, { 0, 0, 0 } } },
@@ -130,42 +130,42 @@ const AnimDef gBtlSoraDirAnimDefs[6][5] = {
     { { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 4, { 0, 0, 0 } }, { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 4, { 0, 0, 0 } }, { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 4, { 0, 0, 0 } }, { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 4, { 0, 0, 0 } }, { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 4, { 0, 0, 0 } } },
 };
 
-const u16 gBtlSoraGroundSongs[4][4] = {
+static const u16 sBtlSoraGroundSongs[4][4] = {
     { 532, 533, 534, 535 },
     { 536, 537, 538, 539 },
     { 540, 541, 542, 543 },
     { 122, 123, 124, 125 },
 };
 
-const s32 gUnk_0813C0FC[18] = {
+static const s32 sUnk_0813C0FC[18] = {
     12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63,
 };
 
-const s32 gUnk_0813C144[18] = {
+static const s32 sUnk_0813C144[18] = {
     13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58, 61, 64,
 };
 
-const s32 gUnk_0813C18C[18] = {
+static const s32 sUnk_0813C18C[18] = {
     14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65,
 };
 
-const SoraAttackDef gUnk_0813C1D4 = { 2, gUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C1D4 = { 2, sUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
 
-const SoraAttackDef gUnk_0813C1EC = { 7, gUnk_0813C144, 153, 501, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C1EC = { 7, sUnk_0813C144, 153, 501, 0, 0, 0, NULL };
 
-const SoraAttackDef gUnk_0813C204 = { 12, gUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C204 = { 12, sUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
 
-const SoraAttackDef gUnk_0813C21C = { 17, gUnk_0813C18C, 155, 502, 0, 2, 0, NULL };
+static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, 155, 502, 0, 2, 0, NULL };
 
-const SoraAttackDef gUnk_0813C234 = { 27, gUnk_0813C0FC, 152, 501, -640, 1, 0, &gUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, 152, 501, -640, 1, 0, &sUnk_0813C1D4 };
 
-const SoraAttackDef gUnk_0813C24C = { 22, gUnk_0813C144, 150, 500, 0, 1, 0, &gUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, 150, 500, 0, 1, 0, &sUnk_0813C1D4 };
 
-const SoraAttackDef gUnk_0813C264 = { 27, gUnk_0813C0FC, 152, 501, 0, 1, 0, &gUnk_0813C1EC };
+static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, 152, 501, 0, 1, 0, &sUnk_0813C1EC };
 
-const SoraAttackDef gUnk_0813C27C = { 32, gUnk_0813C18C, 155, 502, 0, 3, 0, &gUnk_0813C21C };
+static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, 155, 502, 0, 3, 0, &sUnk_0813C21C };
 
-const u8 gBtlSoraSwingHitFrames[5] = {
+static const u8 sBtlSoraSwingHitFrames[5] = {
     10, 12, 15, 18, 20,
 };
 
@@ -178,7 +178,7 @@ TaskDesc gTaskDescBtlSora = {
     sizeof(BtlSoraWork),
 };
 
-const AnimDef gBtlRikuAnimDefs[35] = {
+static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0, { 0, 0, 0 } },
     { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 1, { 0, 0, 0 } },
     { gRikuBt10Frames, gRikuBt10Anims, gRikuBt10Tiles, 3, { 0, 0, 0 } },
@@ -216,7 +216,7 @@ const AnimDef gBtlRikuAnimDefs[35] = {
     { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 3, { 0, 0, 0 } },
 };
 
-const AnimDef gBtlRikuDirAnimDefs[6][5] = {
+static const AnimDef sBtlRikuDirAnimDefs[6][5] = {
     { { gRik1ff02Frames, gRik1ff02Anims, gRik1ff02Tiles, 0, { 0, 0, 0 } }, { gRik1bb02Frames, gRik1bb02Anims, gRik1bb02Tiles, 0, { 0, 0, 0 } }, { gRik1fl02Frames, gRik1fl02Anims, gRik1fl02Tiles, 0, { 0, 0, 0 } }, { gRik1ll02Frames, gRik1ll02Anims, gRik1ll02Tiles, 0, { 0, 0, 0 } }, { gRik1bl02Frames, gRik1bl02Anims, gRik1bl02Tiles, 0, { 0, 0, 0 } } },
     { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 0, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 0, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 0, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 0, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 0, { 0, 0, 0 } } },
     { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 1, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 1, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 1, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 1, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 1, { 0, 0, 0 } } },
@@ -225,32 +225,32 @@ const AnimDef gBtlRikuDirAnimDefs[6][5] = {
     { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 4, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 4, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 4, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 4, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 4, { 0, 0, 0 } } },
 };
 
-const u16 gBtlRikuGroundSongs[4][4] = {
+static const u16 sBtlRikuGroundSongs[4][4] = {
     { 532, 533, 534, 535 },
     { 536, 537, 538, 539 },
     { 540, 541, 542, 543 },
     { 122, 123, 124, 125 },
 };
 
-const s32 gBtlRikuAttackIds[3] = {
+static const s32 sBtlRikuAttackIds[3] = {
     0, 1, 2,
 };
 
-const RikuAttackDef gUnk_0813C6E8 = { 1, 15, 0, gBtlRikuAttackIds, 255, 655, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C6E8 = { 1, 15, 0, sBtlRikuAttackIds, 255, 655, 0, 0, 0, NULL };
 
-const RikuAttackDef gUnk_0813C704 = { 2, 17, 0, &gBtlRikuAttackIds[1], 254, 656, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C704 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, 656, 0, 0, 0, NULL };
 
-const RikuAttackDef gUnk_0813C720 = { 3, 15, 0, gBtlRikuAttackIds, 256, 655, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C720 = { 3, 15, 0, sBtlRikuAttackIds, 256, 655, 0, 0, 0, NULL };
 
-const RikuAttackDef gUnk_0813C73C = { 4, 21, 0, &gBtlRikuAttackIds[2], 258, 657, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C73C = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, 657, 0, 0, 0, NULL };
 
-const RikuAttackDef gUnk_0813C758 = { 6, 15, 0, gBtlRikuAttackIds, 256, 656, -640, 1, 0, &gUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, 656, -640, 1, 0, &sUnk_0813C6E8 };
 
-const RikuAttackDef gUnk_0813C774 = { 5, 15, 0, &gBtlRikuAttackIds[1], 254, 655, 0, 1, 0, &gUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, 655, 0, 1, 0, &sUnk_0813C6E8 };
 
-const RikuAttackDef gUnk_0813C790 = { 5, 15, 0, gBtlRikuAttackIds, 255, 656, 0, 1, 0, &gUnk_0813C704 };
+static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, 656, 0, 1, 0, &sUnk_0813C704 };
 
-const RikuAttackDef gUnk_0813C7AC = { 6, 15, 0, &gBtlRikuAttackIds[2], 257, 657, 0, 1, 0, &gUnk_0813C73C };
+static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, 657, 0, 1, 0, &sUnk_0813C73C };
 
 void func_0807B3C4(s32 a);
 
@@ -585,7 +585,7 @@ void FocusBtlSoraCamera(BtlSoraWork* work) {
 void SetBtlSoraAnimation(BtlSoraWork* work, u16 a, u16 b) {
     const FldAnimDef* e;
 
-    e = &gBtlSoraAnimDefs[a];
+    e = &sBtlSoraAnimDefs[a];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -616,7 +616,7 @@ void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 a, u16 b) {
         idx = 4;
         break;
     }
-    e = &gBtlSoraDirAnimDefs[a][idx];
+    e = &sBtlSoraDirAnimDefs[a][idx];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -833,35 +833,35 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
         case 172:
         case 173:
         case 174:
-            work->groundSongs = gBtlSoraGroundSongs[1];
+            work->groundSongs = sBtlSoraGroundSongs[1];
             break;
         case 152:
-            work->groundSongs = gBtlSoraGroundSongs[2];
+            work->groundSongs = sBtlSoraGroundSongs[2];
             break;
         case 158:
-            work->groundSongs = gBtlSoraGroundSongs[3];
+            work->groundSongs = sBtlSoraGroundSongs[3];
             break;
         default:
-            work->groundSongs = gBtlSoraGroundSongs[0];
+            work->groundSongs = sBtlSoraGroundSongs[0];
             break;
         }
     } else {
         switch (gGameState.battleStage) {
         case 1:
         case 2:
-            work->groundSongs = gBtlSoraGroundSongs[0];
+            work->groundSongs = sBtlSoraGroundSongs[0];
             break;
         case 3:
         case 6:
         case 7:
-            work->groundSongs = gBtlSoraGroundSongs[1];
+            work->groundSongs = sBtlSoraGroundSongs[1];
             break;
         case 4:
         case 5:
-            work->groundSongs = gBtlSoraGroundSongs[2];
+            work->groundSongs = sBtlSoraGroundSongs[2];
             break;
         default:
-            work->groundSongs = gBtlSoraGroundSongs[0];
+            work->groundSongs = sBtlSoraGroundSongs[0];
             break;
         }
     }
@@ -893,30 +893,30 @@ void StartBtlSoraCombo(BtlSoraWork* work) {
     } else {
         switch (GetBtlSoraComboType(work)) {
         case 0:
-            work->attacks[0] = &gUnk_0813C1D4;
-            work->attacks[1] = &gUnk_0813C1EC;
-            work->attacks[2] = &gUnk_0813C21C;
+            work->attacks[0] = &sUnk_0813C1D4;
+            work->attacks[1] = &sUnk_0813C1EC;
+            work->attacks[2] = &sUnk_0813C21C;
             break;
         case 1:
-            work->attacks[0] = &gUnk_0813C1EC;
-            work->attacks[1] = &gUnk_0813C1D4;
-            work->attacks[2] = &gUnk_0813C21C;
+            work->attacks[0] = &sUnk_0813C1EC;
+            work->attacks[1] = &sUnk_0813C1D4;
+            work->attacks[2] = &sUnk_0813C21C;
             break;
         case 2:
-            work->attacks[0] = &gUnk_0813C24C;
-            work->attacks[1] = &gUnk_0813C264;
-            work->attacks[2] = &gUnk_0813C27C;
+            work->attacks[0] = &sUnk_0813C24C;
+            work->attacks[1] = &sUnk_0813C264;
+            work->attacks[2] = &sUnk_0813C27C;
             break;
         case 3:
-            work->attacks[0] = &gUnk_0813C234;
-            work->attacks[1] = &gUnk_0813C24C;
-            work->attacks[2] = &gUnk_0813C27C;
+            work->attacks[0] = &sUnk_0813C234;
+            work->attacks[1] = &sUnk_0813C24C;
+            work->attacks[2] = &sUnk_0813C27C;
             break;
         case 4:
         default:
-            work->attacks[0] = &gUnk_0813C204;
-            work->attacks[1] = &gUnk_0813C1EC;
-            work->attacks[2] = &gUnk_0813C21C;
+            work->attacks[0] = &sUnk_0813C204;
+            work->attacks[1] = &sUnk_0813C1EC;
+            work->attacks[2] = &sUnk_0813C21C;
             break;
         }
         work->state = 16;
@@ -2976,7 +2976,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         d = 0;
         FocusBtlSoraCameraOnTarget(work);
-        memcpy(buf, gBtlSoraSwingHitFrames, 5);
+        memcpy(buf, sBtlSoraSwingHitFrames, 5);
 
         if (p->btl->hcEffect == 3) {
             if ((work->flags & 0x40) == 0) {
@@ -6519,7 +6519,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
 void SetBtlRikuAnimation(BtlRikuWork* work, u16 a, u16 b) {
     const FldAnimDef* e;
 
-    e = &gBtlRikuAnimDefs[a];
+    e = &sBtlRikuAnimDefs[a];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles2, e->tiles);
 }
@@ -6550,7 +6550,7 @@ void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 a, u16 b) {
         idx = 4;
         break;
     }
-    e = &gBtlRikuDirAnimDefs[a][idx];
+    e = &sBtlRikuDirAnimDefs[a][idx];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles2, e->tiles);
 }
@@ -6847,40 +6847,40 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         case 154:
         case 156:
         case 157:
-            work->groundSongs = gBtlRikuGroundSongs[0];
+            work->groundSongs = sBtlRikuGroundSongs[0];
             break;
         case 148:
         case 150:
         case 155:
-            work->groundSongs = gBtlRikuGroundSongs[1];
+            work->groundSongs = sBtlRikuGroundSongs[1];
             break;
         case 152:
-            work->groundSongs = gBtlRikuGroundSongs[2];
+            work->groundSongs = sBtlRikuGroundSongs[2];
             break;
         case 158:
-            work->groundSongs = gBtlRikuGroundSongs[3];
+            work->groundSongs = sBtlRikuGroundSongs[3];
             break;
         default:
-            work->groundSongs = gBtlRikuGroundSongs[0];
+            work->groundSongs = sBtlRikuGroundSongs[0];
             break;
         }
     } else {
         switch (gGameState.battleStage) {
         case 1:
         case 2:
-            work->groundSongs = gBtlRikuGroundSongs[0];
+            work->groundSongs = sBtlRikuGroundSongs[0];
             break;
         case 3:
         case 6:
         case 7:
-            work->groundSongs = gBtlRikuGroundSongs[1];
+            work->groundSongs = sBtlRikuGroundSongs[1];
             break;
         case 4:
         case 5:
-            work->groundSongs = gBtlRikuGroundSongs[2];
+            work->groundSongs = sBtlRikuGroundSongs[2];
             break;
         default:
-            work->groundSongs = gBtlRikuGroundSongs[0];
+            work->groundSongs = sBtlRikuGroundSongs[0];
             break;
         }
     }
@@ -6917,30 +6917,30 @@ void StartBtlRikuCombo(BtlRikuWork* work) {
     } else {
         switch (GetBtlRikuComboType(work)) {
         case 0:
-            work->attacks[0] = &gUnk_0813C6E8;
-            work->attacks[1] = &gUnk_0813C704;
-            work->attacks[2] = &gUnk_0813C73C;
+            work->attacks[0] = &sUnk_0813C6E8;
+            work->attacks[1] = &sUnk_0813C704;
+            work->attacks[2] = &sUnk_0813C73C;
             break;
         case 1:
-            work->attacks[0] = &gUnk_0813C704;
-            work->attacks[1] = &gUnk_0813C6E8;
-            work->attacks[2] = &gUnk_0813C73C;
+            work->attacks[0] = &sUnk_0813C704;
+            work->attacks[1] = &sUnk_0813C6E8;
+            work->attacks[2] = &sUnk_0813C73C;
             break;
         case 2:
-            work->attacks[0] = &gUnk_0813C774;
-            work->attacks[1] = &gUnk_0813C790;
-            work->attacks[2] = &gUnk_0813C7AC;
+            work->attacks[0] = &sUnk_0813C774;
+            work->attacks[1] = &sUnk_0813C790;
+            work->attacks[2] = &sUnk_0813C7AC;
             break;
         case 3:
-            work->attacks[0] = &gUnk_0813C758;
-            work->attacks[1] = &gUnk_0813C774;
-            work->attacks[2] = &gUnk_0813C7AC;
+            work->attacks[0] = &sUnk_0813C758;
+            work->attacks[1] = &sUnk_0813C774;
+            work->attacks[2] = &sUnk_0813C7AC;
             break;
         case 4:
         default:
-            work->attacks[0] = &gUnk_0813C720;
-            work->attacks[1] = &gUnk_0813C704;
-            work->attacks[2] = &gUnk_0813C73C;
+            work->attacks[0] = &sUnk_0813C720;
+            work->attacks[1] = &sUnk_0813C704;
+            work->attacks[2] = &sUnk_0813C73C;
             break;
         }
         work->state = 9;

@@ -37,7 +37,7 @@ static s16 sWorldInspectWorlds[12];
 extern u8 gUnk_09A3CE7C[];
 extern u8 gUnk_09A3D07C[];
 
-const WorldinspectConn gWorldinspectConns[3] = {
+static const WorldinspectConn sWorldinspectConns[3] = {
     { 2, 1, 20, 2 },
     { 2, 5, 0, 13 },
     { 2, 5, 3, 13 },
@@ -80,7 +80,7 @@ static s32 sWorldInspectCursorX;
 static s32 sWorldInspectCursorY;
 static u8 sWorldInspectReturnToMenu;
 
-WorldinspectNav gWorldinspectNavs[12] = {
+static WorldinspectNav sWorldinspectNavs[12] = {
     { 7, 8, 1, 3, 22, 14, 0, 21, 16, { 0, 0 } },
     { 6, 9, 2, 0, 15, 14, 0, 14, 16, { 0, 0 } },
     { 5, 10, 3, 1, 8, 14, 0, 7, 16, { 0, 0 } },
@@ -95,7 +95,7 @@ WorldinspectNav gWorldinspectNavs[12] = {
     { 3, 4, 8, 10, 1, 6, 0, 0, 8, { 0, 0 } },
 };
 
-WorldinspectMsg gWorldinspectMsgs[14] = {
+static WorldinspectMsg sWorldinspectMsgs[14] = {
     {
         0, 0, 0, 0, { 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, { 0, 0 }, 0,
         0,
@@ -286,7 +286,7 @@ u8 WorldInspectLoadName(s16 id) {
     u8 ret = 0;
 
     if (id != 0) {
-        ret = LoadTextSlots(eu_0805E924(gWorldinspectMsgs[id].text), sWorldInspectNameText);
+        ret = LoadTextSlots(eu_0805E924(sWorldinspectMsgs[id].text), sWorldInspectNameText);
     }
     return ret;
 #else
@@ -294,7 +294,7 @@ u8 WorldInspectLoadName(s16 id) {
         return 0;
     }
 
-    return LoadTextSlots(gWorldinspectMsgs[id].text, sWorldInspectNameText);
+    return LoadTextSlots(sWorldinspectMsgs[id].text, sWorldInspectNameText);
 #endif
 }
 u8 WorldInspectLoadDesc(s16 id) {
@@ -306,9 +306,9 @@ u8 WorldInspectLoadDesc(s16 id) {
         tbl = gWorldDescriptions;
 
         if (gGameState.flags & 8) {
-            i = gWorldinspectMsgs[id].descId2;
+            i = sWorldinspectMsgs[id].descId2;
         } else {
-            i = gWorldinspectMsgs[id].descId;
+            i = sWorldinspectMsgs[id].descId;
         }
 
         p = &tbl[i];
@@ -427,12 +427,12 @@ void WorldInspectHandleInput(void) {
                 sWorldInspectDetailSprites[1] = gUnk_099A8914;
             } else {
                 sWorldInspectDetailPalettes[1] =
-                    LoadObjPalette(gWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].palette2,
-                                   gWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].paletteSize2);
+                    LoadObjPalette(sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].palette2,
+                                   sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].paletteSize2);
                 sWorldInspectDetailTiles[1] =
-                    LoadObjTiles(gWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].tiles2,
-                                 gWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].tilesSize2);
-                sWorldInspectDetailSprites[1] = gWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].sprite2;
+                    LoadObjTiles(sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].tiles2,
+                                 sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].tilesSize2);
+                sWorldInspectDetailSprites[1] = sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].sprite2;
             }
 
             sWorldInspectDescTextCount = WorldInspectLoadDesc(sWorldInspectWorlds[sWorldInspectCursor]);
@@ -463,7 +463,7 @@ void WorldInspectHandleInput(void) {
         sWorldInspectState = 5;
     } else if (keys & 0x40) {
         while (1) {
-            sWorldInspectCursor = gWorldinspectNavs[sWorldInspectCursor].up;
+            sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].up;
 
             if (sWorldInspectCursor == old) {
                 break;
@@ -475,7 +475,7 @@ void WorldInspectHandleInput(void) {
         }
     } else if (keys & 0x80) {
         while (1) {
-            sWorldInspectCursor = gWorldinspectNavs[sWorldInspectCursor].down;
+            sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].down;
 
             if (sWorldInspectCursor == old) {
                 break;
@@ -487,7 +487,7 @@ void WorldInspectHandleInput(void) {
         }
     } else if (keys & 0x20) {
         while (1) {
-            sWorldInspectCursor = gWorldinspectNavs[sWorldInspectCursor].left;
+            sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].left;
 
             if (sWorldInspectCursor == old) {
                 break;
@@ -499,7 +499,7 @@ void WorldInspectHandleInput(void) {
         }
     } else if (keys & 0x10) {
         while (1) {
-            sWorldInspectCursor = gWorldinspectNavs[sWorldInspectCursor].right;
+            sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].right;
 
             if (sWorldInspectCursor == old) {
                 break;
@@ -534,15 +534,15 @@ void WorldInspectHandleDetailInput(void) {
         if (sWorldInspectCursor <= 9) {
             for (i = 10; i < 12; i++) {
                 if (sWorldInspectWorlds[i] != 0) {
-                    sWorldInspectIconPalettes[i] = LoadObjPalette(gWorldinspectMsgs[sWorldInspectWorlds[i]].palette,
-                                                      gWorldinspectMsgs[sWorldInspectWorlds[i]].paletteSize);
+                    sWorldInspectIconPalettes[i] = LoadObjPalette(sWorldinspectMsgs[sWorldInspectWorlds[i]].palette,
+                                                      sWorldinspectMsgs[sWorldInspectWorlds[i]].paletteSize);
                 }
             }
         } else {
             for (i = 4; i < 6; i++) {
                 if (sWorldInspectWorlds[i] != 0) {
-                    sWorldInspectIconPalettes[i] = LoadObjPalette(gWorldinspectMsgs[sWorldInspectWorlds[i]].palette,
-                                                      gWorldinspectMsgs[sWorldInspectWorlds[i]].paletteSize);
+                    sWorldInspectIconPalettes[i] = LoadObjPalette(sWorldinspectMsgs[sWorldInspectWorlds[i]].palette,
+                                                      sWorldinspectMsgs[sWorldInspectWorlds[i]].paletteSize);
                 }
             }
         }
@@ -650,20 +650,20 @@ void WorldInspectDraw(void) {
     }
 
     if (sWorldInspectState == 2) {
-        DrawSprite((s16)(gWorldinspectNavs[sWorldInspectCursor].x * 8 + 22),
-                      (s16)(gWorldinspectNavs[sWorldInspectCursor].y * 8 + 12),
+        DrawSprite((s16)(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22),
+                      (s16)(sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12),
                       AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, gUnk_02035124, 0, prio, 2013);
         ApproachValueHalf(&sWorldInspectCursorX,
-                      (gWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000);
+                      (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldInspectCursorY,
-                      (gWorldinspectNavs[sWorldInspectCursor].y << 11) + 0xFFFFFA00);
+                      (sWorldinspectNavs[sWorldInspectCursor].y << 11) + 0xFFFFFA00);
         DrawSprite(sWorldInspectCursorX >> 8, sWorldInspectCursorY >> 8, AnimUpdate(&sWorldInspectCursorAnim),
                       sWorldInspectCursorTiles, sWorldInspectCursorPalette, 0, prio, 2000);
     }
 
     for (i = 0; i < 12; i++) {
         if (sWorldInspectIconSprites[i] != 0 && sWorldInspectIconPalettes[i] != 0) {
-            DrawSprite((s16)(gWorldinspectNavs[i].x * 8 + 16), (s16)(gWorldinspectNavs[i].y * 8 + 16),
+            DrawSprite((s16)(sWorldinspectNavs[i].x * 8 + 16), (s16)(sWorldinspectNavs[i].y * 8 + 16),
                           sWorldInspectIconSprites[i], sWorldInspectIconTiles[i], sWorldInspectIconPalettes[i], 0, prio,
                           (u16)(i + 2001));
         }
@@ -739,8 +739,8 @@ void mode_worldinspect_0(void) {
     }
 
     for (i = 0, fa = sWorldInspectFloorCount; i <= 13; i++) {
-        if ((gGameState.availableWorlds & gWorldinspectMsgs[i].flags) != 0) {
-            sWorldInspectWorlds[fa++] = gWorldinspectMsgs[i].world;
+        if ((gGameState.availableWorlds & sWorldinspectMsgs[i].flags) != 0) {
+            sWorldInspectWorlds[fa++] = sWorldinspectMsgs[i].world;
 
             if (fa > 11) {
                 break;
@@ -750,8 +750,8 @@ void mode_worldinspect_0(void) {
 
     sWorldInspectDetailOpen = 0;
     sWorldInspectBobPhase = 0;
-    sWorldInspectCursorX = (gWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000;
-    sWorldInspectCursorY = (gWorldinspectNavs[sWorldInspectCursor].y << 11) - 0x600;
+    sWorldInspectCursorX = (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000;
+    sWorldInspectCursorY = (sWorldinspectNavs[sWorldInspectCursor].y << 11) - 0x600;
     sWorldInspectState = 0;
     sWorldInspectSteps = 16;
     sWorldInspectBarY[0] = -0x800;
@@ -762,11 +762,11 @@ void mode_worldinspect_0(void) {
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {
             id = sWorldInspectWorlds[i];
-            sWorldInspectIconPalettes[i] = LoadObjPalette(gWorldinspectMsgs[id].palette, gWorldinspectMsgs[id].paletteSize);
+            sWorldInspectIconPalettes[i] = LoadObjPalette(sWorldinspectMsgs[id].palette, sWorldinspectMsgs[id].paletteSize);
             id = sWorldInspectWorlds[i];
-            sWorldInspectIconTiles[i] = LoadObjTiles(gWorldinspectMsgs[id].tiles, gWorldinspectMsgs[id].tilesSize);
+            sWorldInspectIconTiles[i] = LoadObjTiles(sWorldinspectMsgs[id].tiles, sWorldinspectMsgs[id].tilesSize);
             id = sWorldInspectWorlds[i];
-            sWorldInspectIconSprites[i] = gWorldinspectMsgs[id].sprite;
+            sWorldInspectIconSprites[i] = sWorldinspectMsgs[id].sprite;
         } else {
             sWorldInspectIconPalettes[i] = 0;
             sWorldInspectIconTiles[i] = 0;
@@ -818,15 +818,15 @@ void mode_worldinspect_0(void) {
 
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {
-            WorldInspectCopyTilemapRect(7, 4, gUnk_09A333DC, 0, 0, sWorldInspectTilemap, gWorldinspectNavs[i].x, gWorldinspectNavs[i].y);
+            WorldInspectCopyTilemapRect(7, 4, gUnk_09A333DC, 0, 0, sWorldInspectTilemap, sWorldinspectNavs[i].x, sWorldinspectNavs[i].y);
         }
     }
 
     for (i = 0; i < sWorldInspectFloorCount - 1; i++) {
         if (sWorldInspectWorlds[i] != 0 && sWorldInspectWorlds[i + 1] != 0) {
-            const WorldinspectConn* conn = gWorldinspectConns;
-            id = gWorldinspectNavs[i].rect;
-            WorldInspectCopyTilemapRect(conn[id].width, conn[id].height, gUnk_09A333DC, conn[id].x, conn[id].y, sWorldInspectTilemap, gWorldinspectNavs[i].x2, gWorldinspectNavs[i].y2);
+            const WorldinspectConn* conn = sWorldinspectConns;
+            id = sWorldinspectNavs[i].rect;
+            WorldInspectCopyTilemapRect(conn[id].width, conn[id].height, gUnk_09A333DC, conn[id].x, conn[id].y, sWorldInspectTilemap, sWorldinspectNavs[i].x2, sWorldinspectNavs[i].y2);
         }
     }
 
@@ -834,15 +834,15 @@ void mode_worldinspect_0(void) {
         if (sWorldInspectWorlds[i] != 0) {
             if ((gGameState.flags & 8) == 0) {
                 if (i <= 8) {
-                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, i * 3, 9, sWorldInspectTilemap, gWorldinspectNavs[i].x + 3, gWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, i * 3, 9, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 } else {
-                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, (i - 9) * 4, 10, sWorldInspectTilemap, gWorldinspectNavs[i].x + 3, gWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, (i - 9) * 4, 10, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 }
             } else {
                 if (i <= 2) {
-                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, i * 4, 0x15, sWorldInspectTilemap, gWorldinspectNavs[i].x + 3, gWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, i * 4, 0x15, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 } else {
-                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, (i - 3) * 3, 0x16, sWorldInspectTilemap, gWorldinspectNavs[i].x + 3, gWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, (i - 3) * 3, 0x16, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 }
             }
         }
@@ -850,9 +850,9 @@ void mode_worldinspect_0(void) {
 
     for (i = 0; i < sWorldInspectFloorCount; i++) {
         if ((s16)floorKeep == i) {
-            WorldInspectSetTilemapRectPalette(3, 7, 4, sWorldInspectTilemap, gWorldinspectNavs[i].x, gWorldinspectNavs[i].y);
+            WorldInspectSetTilemapRectPalette(3, 7, 4, sWorldInspectTilemap, sWorldinspectNavs[i].x, sWorldinspectNavs[i].y);
         } else {
-            WorldInspectSetTilemapRectPalette(2, 7, 4, sWorldInspectTilemap, gWorldinspectNavs[i].x, gWorldinspectNavs[i].y);
+            WorldInspectSetTilemapRectPalette(2, 7, 4, sWorldInspectTilemap, sWorldinspectNavs[i].x, sWorldinspectNavs[i].y);
         }
     }
 

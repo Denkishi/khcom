@@ -24,7 +24,7 @@
 #define LANGSEL(x) (x)
 #endif
 
-const AnimDef gMapEnm00AnimDefs[10] = {
+static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },
     { gUnk_09EDF860, gUnk_09EDF880, gUnk_08958AC8, 0, { 0, 0, 0 } },
@@ -62,7 +62,7 @@ const AnimDef gUnk_0984BC8C = {
 };
 
 const MapEnmDef gMapEnm00Def = {
-    gMapEnm00AnimDefs, gEmy00Palette,
+    sMapEnm00AnimDefs, gEmy00Palette,
     32, 8, 16, 0,
     &gTaskDescMapEnm00, 1, 0,
 };
@@ -76,7 +76,7 @@ TaskDesc gTaskDescMapEnm00 = {
     sizeof(MapEnmWork),
 };
 
-const AnimDef gMapEnm01AnimDefs[6] = {
+static const AnimDef sMapEnm01AnimDefs[6] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
@@ -86,7 +86,7 @@ const AnimDef gMapEnm01AnimDefs[6] = {
 };
 
 const MapEnmDef gMapEnm01Def = {
-    gMapEnm01AnimDefs, gEmy01Palette,
+    sMapEnm01AnimDefs, gEmy01Palette,
     17, 16, 16, 0,
     &gTaskDescMapEnm01, 2, 0,
 };
@@ -100,7 +100,7 @@ TaskDesc gTaskDescMapEnm01 = {
     sizeof(MapEnm01Work),
 };
 
-const AnimDef gMapEnm02AnimDefs[2] = {
+static const AnimDef sMapEnm02AnimDefs[2] = {
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
 };
@@ -114,7 +114,7 @@ const AnimDef gUnk_0984BD7C = {
 };
 
 const MapEnmDef gMapEnm02Def = {
-    gMapEnm02AnimDefs, gEmy38Palette,
+    sMapEnm02AnimDefs, gEmy38Palette,
     106, 48, 36, 0,
     &gTaskDescMapEnm02, 8, 0,
 };
@@ -128,7 +128,7 @@ TaskDesc gTaskDescMapEnm02 = {
     sizeof(MapEnmWork),
 };
 
-const AnimDef gMapEnm03AnimDefs[4] = {
+static const AnimDef sMapEnm03AnimDefs[4] = {
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
@@ -144,7 +144,7 @@ const AnimDef gUnk_0984BE04 = {
 };
 
 const MapEnmDef gMapEnm03Def = {
-    gMapEnm03AnimDefs, gEmy29Palette,
+    sMapEnm03AnimDefs, gEmy29Palette,
     73, 56, 36, 0,
     &gTaskDescMapEnm03, 10, 0,
 };
@@ -158,7 +158,7 @@ TaskDesc gTaskDescMapEnm03 = {
     sizeof(MapEnm03Work),
 };
 
-const AnimDef gMapEnm04AnimDefs[6] = {
+static const AnimDef sMapEnm04AnimDefs[6] = {
     { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0, { 0, 0, 0 } },
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
     { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0, { 0, 0, 0 } },
@@ -168,7 +168,7 @@ const AnimDef gMapEnm04AnimDefs[6] = {
 };
 
 const MapEnmDef gMapEnm04Def = {
-    gMapEnm04AnimDefs, gEmy06Palette,
+    sMapEnm04AnimDefs, gEmy06Palette,
     34, 16, 12, 0,
     &gTaskDescMapEnm04, 2, 0,
 };
@@ -182,7 +182,7 @@ TaskDesc gTaskDescMapEnm04 = {
     sizeof(MapEnm01Work),
 };
 
-const AnimDef gMapEnm05AnimDefs[8] = {
+static const AnimDef sMapEnm05AnimDefs[8] = {
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
@@ -194,7 +194,7 @@ const AnimDef gMapEnm05AnimDefs[8] = {
 };
 
 const MapEnmDef gMapEnm05Def = {
-    gMapEnm05AnimDefs, gEmy07Palette,
+    sMapEnm05AnimDefs, gEmy07Palette,
     26, 16, 12, 0,
     &gTaskDescMapEnm05, 4, 0,
 };
@@ -208,7 +208,7 @@ TaskDesc gTaskDescMapEnm05 = {
     sizeof(MapEnmWork),
 };
 
-const AnimDef gMapEnm06AnimDefs[8] = {
+static const AnimDef sMapEnm06AnimDefs[8] = {
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
@@ -220,7 +220,7 @@ const AnimDef gMapEnm06AnimDefs[8] = {
 };
 
 const MapEnmDef gMapEnm06Def = {
-    gMapEnm06AnimDefs, gEmy07bPalette,
+    sMapEnm06AnimDefs, gEmy07bPalette,
     26, 16, 12, 0,
     &gTaskDescMapEnm06, 4, 0,
 };
@@ -234,7 +234,7 @@ TaskDesc gTaskDescMapEnm06 = {
     sizeof(MapEnmWork),
 };
 
-u8 gMapDbgCursorString[] = "_";
+static u8 sMapDbgCursorString[] = "_";
 
 TaskDesc gTaskDescMapDbg = {
     "Task_MapDbg",
@@ -254,7 +254,7 @@ TaskDesc gTaskDescMapGmkJump = {
     sizeof(MapGmkJumpWork),
 };
 
-TaskDesc gTaskDescMapGmkEnm = {
+static TaskDesc sTaskDescMapGmkEnm = {
     "Task_MapGmk_Enm",
     (TaskInitFunc)Task_MapGmk_Enm_0,
     (TaskUpdateFunc)Task_MapGmk_Enm_1,
@@ -281,7 +281,7 @@ TaskDesc gTaskDescMapGmkTutorial = {
     sizeof(MapGmkTutorialWork),
 };
 
-TaskDesc gTaskDescMapGmkSpider = {
+static TaskDesc sTaskDescMapGmkSpider = {
     "Task_MapGmk_Spider",
     (TaskInitFunc)Task_MapGmk_Spider_0,
     (TaskUpdateFunc)Task_MapGmk_Spider_1,
@@ -1843,7 +1843,7 @@ void Task_MapDbg_0(MapDbgWork* w, u8* p) {
     w->palette = LoadSmallFontPalette();
     w->seedTextLength = FormatSmallFontHex(d->seed, w->seedText);
     w->codeTextLength = FormatSmallFontHex(GetMapRoomDebugCode(d), w->codeText);
-    w->cursorTextLength = EncodeSmallFontString(gMapDbgCursorString, &w->cursorText);
+    w->cursorTextLength = EncodeSmallFontString(sMapDbgCursorString, &w->cursorText);
 #endif
 }
 
@@ -3344,7 +3344,7 @@ u8 MapGmk01Open(MapGmk01Work* w) {
     if (w->placement->flags & 8) {
         gMapRoomState->flags |= 4;
         w->placement->flags |= 2;
-        TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkEnm, q);
+        TaskCreate(&gFieldState->tasks, &sTaskDescMapGmkEnm, q);
         w->update = 0;
     } else {
         gMapRoomState->flags &= ~0x20;
@@ -3465,7 +3465,7 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* w) {
             gMapRoomState->flags |= 0x80;
             gMapRoomState->flags |= 4;
             w->placement->flags |= 1;
-            TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkSpider, w->placement);
+            TaskCreate(&gFieldState->tasks, &sTaskDescMapGmkSpider, w->placement);
             return 0;
         }
 

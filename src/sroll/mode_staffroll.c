@@ -19,7 +19,7 @@
 #include "songs.h"
 #include "staff_roll_script_text.h"
 
-const s32 gStaffRollSoraScript0[46] = {
+static const s32 sStaffRollSoraScript0[46] = {
     6, 6, 0, 0, 0, 6,
     4, 6, 0, 0, 208, 85,
     9, 5, 0, 0, 30,
@@ -31,7 +31,7 @@ const s32 gStaffRollSoraScript0[46] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript1[61] = {
+static const s32 sStaffRollSoraScript1[61] = {
     6, 6, 0, 0, 1, 117,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 70,
@@ -46,7 +46,7 @@ const s32 gStaffRollSoraScript1[61] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript2[63] = {
+static const s32 sStaffRollSoraScript2[63] = {
     6, 6, 0, 0, 2, 149,
     4, 6, 0, 0, 218, 85,
     9, 5, 0, 0, 30,
@@ -61,7 +61,7 @@ const s32 gStaffRollSoraScript2[63] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript3[80] = {
+static const s32 sStaffRollSoraScript3[80] = {
     6, 6, 0, 0, 9, 245,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 85,
@@ -80,7 +80,7 @@ const s32 gStaffRollSoraScript3[80] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript4[93] = {
+static const s32 sStaffRollSoraScript4[93] = {
     6, 6, 0, 0, 12, 270,
     4, 6, 0, 0, 208, 130,
     9, 5, 0, 0, 30,
@@ -101,7 +101,7 @@ const s32 gStaffRollSoraScript4[93] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript5[79] = {
+static const s32 sStaffRollSoraScript5[79] = {
     6, 6, 0, 1, 7, 222,
     4, 6, 0, 1, 208, 120,
     9, 5, 0, 0, 30,
@@ -120,7 +120,7 @@ const s32 gStaffRollSoraScript5[79] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript6[141] = {
+static const s32 sStaffRollSoraScript6[141] = {
     6, 6, 0, 0, 55, 631,
     4, 6, 0, 0, 223, 65,
     9, 5, 0, 0, 30,
@@ -151,7 +151,7 @@ const s32 gStaffRollSoraScript6[141] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript7[60] = {
+static const s32 sStaffRollSoraScript7[60] = {
     6, 6, 0, 0, 14, 299,
     4, 6, 0, 0, 24, 100,
     3, 5, 0, 0, 1,
@@ -166,7 +166,7 @@ const s32 gStaffRollSoraScript7[60] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript8[113] = {
+static const s32 sStaffRollSoraScript8[113] = {
     6, 6, 0, 0, 15, 318,
     4, 6, 0, 0, 211, 75,
     9, 5, 0, 0, 30,
@@ -191,7 +191,7 @@ const s32 gStaffRollSoraScript8[113] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript9[61] = {
+static const s32 sStaffRollSoraScript9[61] = {
     6, 6, 0, 0, 13, 290,
     4, 6, 0, 0, 32, 100,
     3, 5, 0, 0, 1,
@@ -206,7 +206,7 @@ const s32 gStaffRollSoraScript9[61] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript10[70] = {
+static const s32 sStaffRollSoraScript10[70] = {
     6, 6, 0, 0, 24, 387,
     4, 6, 0, 0, 208, 108,
     6, 6, 0, 1, 23, 381,
@@ -223,7 +223,7 @@ const s32 gStaffRollSoraScript10[70] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript11[44] = {
+static const s32 sStaffRollSoraScript11[44] = {
     6, 6, 0, 0, 16, 328,
     4, 6, 0, 0, 48, 108,
     3, 5, 0, 0, 1,
@@ -235,7 +235,7 @@ const s32 gStaffRollSoraScript11[44] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript12[65] = {
+static const s32 sStaffRollSoraScript12[65] = {
     6, 6, 0, 0, 10, 260,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 20, 100,
@@ -251,7 +251,7 @@ const s32 gStaffRollSoraScript12[65] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript13[101] = {
+static const s32 sStaffRollSoraScript13[101] = {
     6, 6, 0, 0, 76, 827,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 24, 100,
@@ -274,7 +274,7 @@ const s32 gStaffRollSoraScript13[101] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript14[51] = {
+static const s32 sStaffRollSoraScript14[51] = {
     6, 6, 0, 0, 19, 344,
     4, 6, 0, 0, 204, 110,
     9, 5, 0, 0, 30,
@@ -287,7 +287,7 @@ const s32 gStaffRollSoraScript14[51] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript15[61] = {
+static const s32 sStaffRollSoraScript15[61] = {
     6, 6, 0, 0, 57, 638,
     4, 6, 0, 0, 24, 90,
     3, 5, 0, 0, 1,
@@ -302,7 +302,7 @@ const s32 gStaffRollSoraScript15[61] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollSoraScript16[88] = {
+static const s32 sStaffRollSoraScript16[88] = {
     6, 6, 0, 0, 35, 424,
     4, 6, 0, 0, 120, 100,
     9, 5, 0, 0, 80,
@@ -322,7 +322,7 @@ const s32 gStaffRollSoraScript16[88] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript0[51] = {
+static const s32 sStaffRollRikuScript0[51] = {
     6, 6, 0, 0, 44, 516,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 95,
@@ -335,7 +335,7 @@ const s32 gStaffRollRikuScript0[51] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript1[51] = {
+static const s32 sStaffRollRikuScript1[51] = {
     6, 6, 0, 0, 69, 747,
     4, 6, 0, 0, 223, 85,
     9, 5, 0, 0, 30,
@@ -348,7 +348,7 @@ const s32 gStaffRollRikuScript1[51] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript2[44] = {
+static const s32 sStaffRollRikuScript2[44] = {
     6, 6, 0, 0, 43, 485,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 32, 110,
@@ -360,7 +360,7 @@ const s32 gStaffRollRikuScript2[44] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript3[39] = {
+static const s32 sStaffRollRikuScript3[39] = {
     6, 6, 0, 0, 81, 856,
     4, 6, 0, 0, 200, 110,
     9, 5, 0, 0, 30,
@@ -371,7 +371,7 @@ const s32 gStaffRollRikuScript3[39] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript4[39] = {
+static const s32 sStaffRollRikuScript4[39] = {
     6, 6, 0, 0, 67, 721,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 28, 110,
@@ -382,7 +382,7 @@ const s32 gStaffRollRikuScript4[39] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript5[34] = {
+static const s32 sStaffRollRikuScript5[34] = {
     6, 6, 0, 0, 83, 889,
     4, 6, 0, 0, 216, 110,
     9, 5, 0, 0, 30,
@@ -392,7 +392,7 @@ const s32 gStaffRollRikuScript5[34] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript6[44] = {
+static const s32 sStaffRollRikuScript6[44] = {
     6, 6, 0, 0, 82, 887,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 32, 110,
@@ -404,7 +404,7 @@ const s32 gStaffRollRikuScript6[44] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript7[93] = {
+static const s32 sStaffRollRikuScript7[93] = {
     6, 6, 0, 0, 79, 841,
     4, 6, 0, 0, 184, 110,
     9, 5, 0, 0, 30,
@@ -425,7 +425,7 @@ const s32 gStaffRollRikuScript7[93] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript8[49] = {
+static const s32 sStaffRollRikuScript8[49] = {
     6, 6, 0, 0, 30, 410,
     4, 6, 0, 0, 48, 110,
     3, 5, 0, 0, 1,
@@ -438,7 +438,7 @@ const s32 gStaffRollRikuScript8[49] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript9[46] = {
+static const s32 sStaffRollRikuScript9[46] = {
     6, 6, 0, 0, 21, 364,
     4, 6, 0, 0, 212, 110,
     9, 5, 0, 0, 30,
@@ -450,7 +450,7 @@ const s32 gStaffRollRikuScript9[46] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript10[110] = {
+static const s32 sStaffRollRikuScript10[110] = {
     6, 6, 0, 0, 25, 397,
     4, 6, 0, 0, 25, 105,
     3, 5, 0, 0, 1,
@@ -474,7 +474,7 @@ const s32 gStaffRollRikuScript10[110] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript11[54] = {
+static const s32 sStaffRollRikuScript11[54] = {
     6, 6, 0, 0, 47, 582,
     4, 6, 0, 0, 200, 110,
     9, 5, 0, 0, 30,
@@ -488,7 +488,7 @@ const s32 gStaffRollRikuScript11[54] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript12[44] = {
+static const s32 sStaffRollRikuScript12[44] = {
     6, 6, 0, 0, 20, 353,
     4, 6, 0, 0, 52, 110,
     3, 5, 0, 0, 1,
@@ -500,7 +500,7 @@ const s32 gStaffRollRikuScript12[44] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript13[34] = {
+static const s32 sStaffRollRikuScript13[34] = {
     6, 6, 0, 0, 64, 688,
     4, 6, 0, 0, 208, 110,
     9, 5, 0, 0, 30,
@@ -510,7 +510,7 @@ const s32 gStaffRollRikuScript13[34] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript14[39] = {
+static const s32 sStaffRollRikuScript14[39] = {
     6, 6, 0, 0, 84, 907,
     4, 6, 0, 0, 32, 110,
     3, 5, 0, 0, 1,
@@ -521,7 +521,7 @@ const s32 gStaffRollRikuScript14[39] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript15[44] = {
+static const s32 sStaffRollRikuScript15[44] = {
     6, 6, 0, 0, 65, 695,
     4, 6, 0, 0, 216, 100,
     9, 5, 0, 0, 30,
@@ -533,7 +533,7 @@ const s32 gStaffRollRikuScript15[44] = {
     0, 0, -1,
 };
 
-const s32 gStaffRollRikuScript16[88] = {
+static const s32 sStaffRollRikuScript16[88] = {
     6, 6, 0, 1, 34, 420,
     4, 6, 0, 1, 128, 100,
     3, 5, 0, 1, 1,
@@ -555,7 +555,7 @@ const s32 gStaffRollRikuScript16[88] = {
 
 #ifdef VERSION_US
 
-u8* gStaffRollLines[632] = {
+static u8* sStaffRollLines[632] = {
     gUnkUs_09A516BC,
     gUnkUs_09A516B8,
     gUnkUs_09A516A0,
@@ -1190,55 +1190,55 @@ u8* gStaffRollLines[632] = {
     0,
 };
 
-const s32* gStaffRollSoraScripts[17] = {
-    gStaffRollSoraScript0,
-    gStaffRollSoraScript1,
-    gStaffRollSoraScript2,
-    gStaffRollSoraScript3,
-    gStaffRollSoraScript4,
-    gStaffRollSoraScript5,
-    gStaffRollSoraScript6,
-    gStaffRollSoraScript7,
-    gStaffRollSoraScript8,
-    gStaffRollSoraScript9,
-    gStaffRollSoraScript10,
-    gStaffRollSoraScript11,
-    gStaffRollSoraScript12,
-    gStaffRollSoraScript13,
-    gStaffRollSoraScript14,
-    gStaffRollSoraScript15,
-    gStaffRollSoraScript16,
+static const s32* sStaffRollSoraScripts[17] = {
+    sStaffRollSoraScript0,
+    sStaffRollSoraScript1,
+    sStaffRollSoraScript2,
+    sStaffRollSoraScript3,
+    sStaffRollSoraScript4,
+    sStaffRollSoraScript5,
+    sStaffRollSoraScript6,
+    sStaffRollSoraScript7,
+    sStaffRollSoraScript8,
+    sStaffRollSoraScript9,
+    sStaffRollSoraScript10,
+    sStaffRollSoraScript11,
+    sStaffRollSoraScript12,
+    sStaffRollSoraScript13,
+    sStaffRollSoraScript14,
+    sStaffRollSoraScript15,
+    sStaffRollSoraScript16,
 };
 
-const s32* gStaffRollRikuScripts[17] = {
-    gStaffRollRikuScript0,
-    gStaffRollRikuScript1,
-    gStaffRollRikuScript2,
-    gStaffRollRikuScript3,
-    gStaffRollRikuScript4,
-    gStaffRollRikuScript5,
-    gStaffRollRikuScript6,
-    gStaffRollRikuScript7,
-    gStaffRollRikuScript8,
-    gStaffRollRikuScript9,
-    gStaffRollRikuScript10,
-    gStaffRollRikuScript11,
-    gStaffRollRikuScript12,
-    gStaffRollRikuScript13,
-    gStaffRollRikuScript14,
-    gStaffRollRikuScript15,
-    gStaffRollRikuScript16,
+static const s32* sStaffRollRikuScripts[17] = {
+    sStaffRollRikuScript0,
+    sStaffRollRikuScript1,
+    sStaffRollRikuScript2,
+    sStaffRollRikuScript3,
+    sStaffRollRikuScript4,
+    sStaffRollRikuScript5,
+    sStaffRollRikuScript6,
+    sStaffRollRikuScript7,
+    sStaffRollRikuScript8,
+    sStaffRollRikuScript9,
+    sStaffRollRikuScript10,
+    sStaffRollRikuScript11,
+    sStaffRollRikuScript12,
+    sStaffRollRikuScript13,
+    sStaffRollRikuScript14,
+    sStaffRollRikuScript15,
+    sStaffRollRikuScript16,
 };
 
-u8* gStaffRollSpaceText = gUnkUs_09A516B8;
+static u8* sStaffRollSpaceText = gUnkUs_09A516B8;
 
-u8* gStaffRollTildeText = gStaffRollTildeUs;
+static u8* sStaffRollTildeText = gStaffRollTildeUs;
 
 #endif
 
 #ifdef VERSION_JP
 
-u8* gStaffRollLines[704] = {
+static u8* sStaffRollLines[704] = {
     gUnkJp_09A0654C,
     gUnkJp_09A06548,
     gUnkJp_09A06530,
@@ -1945,55 +1945,55 @@ u8* gStaffRollLines[704] = {
     0,
 };
 
-const s32* gStaffRollSoraScripts[17] = {
-    gStaffRollSoraScript0,
-    gStaffRollSoraScript1,
-    gStaffRollSoraScript2,
-    gStaffRollSoraScript3,
-    gStaffRollSoraScript4,
-    gStaffRollSoraScript5,
-    gStaffRollSoraScript6,
-    gStaffRollSoraScript7,
-    gStaffRollSoraScript8,
-    gStaffRollSoraScript9,
-    gStaffRollSoraScript10,
-    gStaffRollSoraScript11,
-    gStaffRollSoraScript12,
-    gStaffRollSoraScript13,
-    gStaffRollSoraScript14,
-    gStaffRollSoraScript15,
-    gStaffRollSoraScript16,
+static const s32* sStaffRollSoraScripts[17] = {
+    sStaffRollSoraScript0,
+    sStaffRollSoraScript1,
+    sStaffRollSoraScript2,
+    sStaffRollSoraScript3,
+    sStaffRollSoraScript4,
+    sStaffRollSoraScript5,
+    sStaffRollSoraScript6,
+    sStaffRollSoraScript7,
+    sStaffRollSoraScript8,
+    sStaffRollSoraScript9,
+    sStaffRollSoraScript10,
+    sStaffRollSoraScript11,
+    sStaffRollSoraScript12,
+    sStaffRollSoraScript13,
+    sStaffRollSoraScript14,
+    sStaffRollSoraScript15,
+    sStaffRollSoraScript16,
 };
 
-const s32* gStaffRollRikuScripts[17] = {
-    gStaffRollRikuScript0,
-    gStaffRollRikuScript1,
-    gStaffRollRikuScript2,
-    gStaffRollRikuScript3,
-    gStaffRollRikuScript4,
-    gStaffRollRikuScript5,
-    gStaffRollRikuScript6,
-    gStaffRollRikuScript7,
-    gStaffRollRikuScript8,
-    gStaffRollRikuScript9,
-    gStaffRollRikuScript10,
-    gStaffRollRikuScript11,
-    gStaffRollRikuScript12,
-    gStaffRollRikuScript13,
-    gStaffRollRikuScript14,
-    gStaffRollRikuScript15,
-    gStaffRollRikuScript16,
+static const s32* sStaffRollRikuScripts[17] = {
+    sStaffRollRikuScript0,
+    sStaffRollRikuScript1,
+    sStaffRollRikuScript2,
+    sStaffRollRikuScript3,
+    sStaffRollRikuScript4,
+    sStaffRollRikuScript5,
+    sStaffRollRikuScript6,
+    sStaffRollRikuScript7,
+    sStaffRollRikuScript8,
+    sStaffRollRikuScript9,
+    sStaffRollRikuScript10,
+    sStaffRollRikuScript11,
+    sStaffRollRikuScript12,
+    sStaffRollRikuScript13,
+    sStaffRollRikuScript14,
+    sStaffRollRikuScript15,
+    sStaffRollRikuScript16,
 };
 
-u8* gStaffRollSpaceText = gUnkJp_09A06548;
+static u8* sStaffRollSpaceText = gUnkJp_09A06548;
 
-u8* gStaffRollTildeText = gStaffRollTildeJp;
+static u8* sStaffRollTildeText = gStaffRollTildeJp;
 
 #endif
 
 #ifdef VERSION_EU
 
-u8* gStaffRollLines[688] = {
+static u8* sStaffRollLines[688] = {
     gUnkEu_09AAF3F4,
     gUnkEu_09AAF3F0,
     gUnkEu_09AAF3D8,
@@ -2684,55 +2684,55 @@ u8* gStaffRollLines[688] = {
     0,
 };
 
-const s32* gStaffRollSoraScripts[17] = {
-    gStaffRollSoraScript0,
-    gStaffRollSoraScript1,
-    gStaffRollSoraScript2,
-    gStaffRollSoraScript3,
-    gStaffRollSoraScript4,
-    gStaffRollSoraScript5,
-    gStaffRollSoraScript6,
-    gStaffRollSoraScript7,
-    gStaffRollSoraScript8,
-    gStaffRollSoraScript9,
-    gStaffRollSoraScript10,
-    gStaffRollSoraScript11,
-    gStaffRollSoraScript12,
-    gStaffRollSoraScript13,
-    gStaffRollSoraScript14,
-    gStaffRollSoraScript15,
-    gStaffRollSoraScript16,
+static const s32* sStaffRollSoraScripts[17] = {
+    sStaffRollSoraScript0,
+    sStaffRollSoraScript1,
+    sStaffRollSoraScript2,
+    sStaffRollSoraScript3,
+    sStaffRollSoraScript4,
+    sStaffRollSoraScript5,
+    sStaffRollSoraScript6,
+    sStaffRollSoraScript7,
+    sStaffRollSoraScript8,
+    sStaffRollSoraScript9,
+    sStaffRollSoraScript10,
+    sStaffRollSoraScript11,
+    sStaffRollSoraScript12,
+    sStaffRollSoraScript13,
+    sStaffRollSoraScript14,
+    sStaffRollSoraScript15,
+    sStaffRollSoraScript16,
 };
 
-const s32* gStaffRollRikuScripts[17] = {
-    gStaffRollRikuScript0,
-    gStaffRollRikuScript1,
-    gStaffRollRikuScript2,
-    gStaffRollRikuScript3,
-    gStaffRollRikuScript4,
-    gStaffRollRikuScript5,
-    gStaffRollRikuScript6,
-    gStaffRollRikuScript7,
-    gStaffRollRikuScript8,
-    gStaffRollRikuScript9,
-    gStaffRollRikuScript10,
-    gStaffRollRikuScript11,
-    gStaffRollRikuScript12,
-    gStaffRollRikuScript13,
-    gStaffRollRikuScript14,
-    gStaffRollRikuScript15,
-    gStaffRollRikuScript16,
+static const s32* sStaffRollRikuScripts[17] = {
+    sStaffRollRikuScript0,
+    sStaffRollRikuScript1,
+    sStaffRollRikuScript2,
+    sStaffRollRikuScript3,
+    sStaffRollRikuScript4,
+    sStaffRollRikuScript5,
+    sStaffRollRikuScript6,
+    sStaffRollRikuScript7,
+    sStaffRollRikuScript8,
+    sStaffRollRikuScript9,
+    sStaffRollRikuScript10,
+    sStaffRollRikuScript11,
+    sStaffRollRikuScript12,
+    sStaffRollRikuScript13,
+    sStaffRollRikuScript14,
+    sStaffRollRikuScript15,
+    sStaffRollRikuScript16,
 };
 
-u8* gStaffRollSpaceText = gUnkEu_09AAF3F0;
+static u8* sStaffRollSpaceText = gUnkEu_09AAF3F0;
 
-u8* gStaffRollTildeText = gStaffRollTildeEu;
+static u8* sStaffRollTildeText = gStaffRollTildeEu;
 
 #endif
 
 #ifdef VERSION_JP
 
-const StaffRollScene gStaffRollSoraScenes[22] = {
+static const StaffRollScene sStaffRollSoraScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CD2B74, 11200, 0, gUnk_09D5A274, 2048, 0, gUnk_09D69614, 512, 0, 30720, 31744, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, 0, gUnk_09D5AA74, 2048, 0, gUnk_09D69814, 512, 0, 30720, 31744, 0, 2 },
@@ -2757,7 +2757,7 @@ const StaffRollScene gStaffRollSoraScenes[22] = {
     { 1, 0, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, 0, gUnk_09D5FA74, 2048, 0, gUnk_09D6A814, 512, 0, 30720, 9216, 0, 19 },
 };
 
-const StaffRollScene gStaffRollRikuScenes[22] = {
+static const StaffRollScene sStaffRollRikuScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CEE0F4, 11200, 0, gUnk_09D60274, 2048, 0, gUnk_09D6AA14, 512, 0, 30720, 31744, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, 0, gUnk_09D60A74, 2048, 0, gUnk_09D6AC14, 512, 0, 30720, 31744, 0, 2 },
@@ -2784,7 +2784,7 @@ const StaffRollScene gStaffRollRikuScenes[22] = {
 
 #else
 
-const StaffRollScene gStaffRollSoraScenes[22] = {
+static const StaffRollScene sStaffRollSoraScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CD2B74, 11200, 0, gUnk_09D5A274, 2048, 0, gUnk_09D69614, 512, 0, 30720, 32768, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, 0, gUnk_09D5AA74, 2048, 0, gUnk_09D69814, 512, 0, 30720, 32768, 0, 2 },
@@ -2809,7 +2809,7 @@ const StaffRollScene gStaffRollSoraScenes[22] = {
     { 1, 0, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, 0, gUnk_09D5FA74, 2048, 0, gUnk_09D6A814, 512, 0, 30720, 10240, 0, 19 },
 };
 
-const StaffRollScene gStaffRollRikuScenes[22] = {
+static const StaffRollScene sStaffRollRikuScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CEE0F4, 11200, 0, gUnk_09D60274, 2048, 0, gUnk_09D6AA14, 512, 0, 30720, 32768, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, 0, gUnk_09D60A74, 2048, 0, gUnk_09D6AC14, 512, 0, 30720, 32768, 0, 2 },
@@ -2836,7 +2836,7 @@ const StaffRollScene gStaffRollRikuScenes[22] = {
 
 #endif
 
-const u8 gStaffRollTextInit[60] = {
+static const u8 sStaffRollTextInit[60] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x08, 0x00, 0x06, 0x00, 0xE0, 0x00, 0x06, 0x0F, 0x00, 0x0D, 0x00,
@@ -3145,9 +3145,9 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
     result = 1;
 
     if ((gGameState.flags & 8) != 0) {
-        w->scene = gStaffRollRikuScenes;
+        w->scene = sStaffRollRikuScenes;
     } else {
-        w->scene = gStaffRollSoraScenes;
+        w->scene = sStaffRollSoraScenes;
     }
 
     switch (w->sceneState) {
@@ -3406,7 +3406,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
             FadeSetPaletteExcluded(i, 1);
         }
 
-        SrollTextInit(&w->text, gStaffRollTextInit);
+        SrollTextInit(&w->text, sStaffRollTextInit);
         LoadBgPalette(0, gUnk_09D6BE14, 32);
         (*(volatile u16*)&gDispCnt) |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
@@ -3426,7 +3426,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
         row = w->scrollY >> 11;
 
         if (sub % 8 == 0 && w->lastRow != row) {
-            s = gStaffRollLines[row];
+            s = sStaffRollLines[row];
 
             if (w->creditsEnded == 0 && s == 0) {
                 w->scrollSpeed = 0;
@@ -3495,8 +3495,8 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
                     case '~':
                         s++;
                         wa = SrollTextMeasureWidth(&w->text, s);
-                        wb = SrollTextMeasureWidth(&w->text, gStaffRollTildeText);
-                        wc = SrollTextMeasureWidth(&w->text, gStaffRollSpaceText);
+                        wb = SrollTextMeasureWidth(&w->text, sStaffRollTildeText);
+                        wc = SrollTextMeasureWidth(&w->text, sStaffRollSpaceText);
                         w1 = wa - wb + wc * 3;
                         x = (240 - w1) >> 1;
                         SrollTextSetColors(&w->text, 7, 5, 0, 6);
@@ -3552,9 +3552,9 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
 
             if (idx <= 16) {
                 if ((gGameState.flags & 8) != 0) {
-                    w->script = gStaffRollRikuScripts[idx];
+                    w->script = sStaffRollRikuScripts[idx];
                 } else {
-                    w->script = gStaffRollSoraScripts[idx];
+                    w->script = sStaffRollSoraScripts[idx];
                 }
             }
 

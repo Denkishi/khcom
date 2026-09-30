@@ -43,7 +43,7 @@ void* gUnk_0203C4B4 EWRAM_COMMON(4);
 
 extern AnimDef gTrap01AnimDefs[5];
 
-const PooSpot gPooh04FrameOffsets[55] = {
+static const PooSpot sPooh04FrameOffsets[55] = {
     { 0, 0, 0 },
     { 0, -512, 0 },
     { 0, -512, 0 },
@@ -101,7 +101,7 @@ const PooSpot gPooh04FrameOffsets[55] = {
     { 0, 0, 0 },
 };
 
-const PooSpot gPooh04aFrameOffsets[80] = {
+static const PooSpot sPooh04aFrameOffsets[80] = {
     { 0, 0, 0 },
     { 0, 512, 0 },
     { 0, 256, 0 },
@@ -184,7 +184,7 @@ const PooSpot gPooh04aFrameOffsets[80] = {
     { 0, 0, 0 },
 };
 
-const PooPoint gPoohStumpCircle[4] = {
+static const PooPoint sPoohStumpCircle[4] = {
     { 593408, 315648 },
     { 584192, 320256 },
     { 593408, 324864 },
@@ -428,18 +428,18 @@ void ApplyPoohFrameOffset(PoohWork* w, const PooSpot* b, u16 c) {
 }
 
 void ApplyPooh04FrameOffset(PoohWork* w) {
-    ApplyPoohFrameOffset(w, gPooh04FrameOffsets, 11);
+    ApplyPoohFrameOffset(w, sPooh04FrameOffsets, 11);
 }
 
 void ApplyPooh04aFrameOffset(PoohWork* w) {
-    ApplyPoohFrameOffset(w, gPooh04aFrameOffsets, 0x10);
+    ApplyPoohFrameOffset(w, sPooh04aFrameOffsets, 0x10);
 }
 
 s32 GetPoohStumpIndex(PoohWork* w) {
     PooPoint t[4];
     u32 i;
 
-    memcpy(t, gPoohStumpCircle, sizeof(t));
+    memcpy(t, sPoohStumpCircle, sizeof(t));
 
     for (i = 0; i < 4; i++) {
         if (w->collider.platformX == t[i].x && w->collider.platformY == t[i].y) {
@@ -8089,13 +8089,13 @@ TaskDesc gTaskDescPooHoney = {
     sizeof(PooHoneyWork),
 };
 
-const BosMapanimeFrame gPooMapanimeFrames0[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
+static const BosMapanimeFrame sPooMapanimeFrames0[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
 
-const BosMapanimeFrame gPooMapanimeFrames1[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
+static const BosMapanimeFrame sPooMapanimeFrames1[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
 
-const BosMapanimeDef gPooMapanimeDef0 = { gPooMapanimeFrames0, 4, 0, gUnk_097B4578, 0X2080, 0X0240, 0X0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, 0, gUnk_097B4578, 0X2080, 0X0240, 0X0400, 0, 3 };
 
-const BosMapanimeDef gPooMapanimeDef1 = { gPooMapanimeFrames1, 4, 0, gUnk_097B5418, 0X3880, 0X0240, 0X0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, 0, gUnk_097B5418, 0X3880, 0X0240, 0X0400, 0, 3 };
 
 TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",

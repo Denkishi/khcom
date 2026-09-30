@@ -15,9 +15,9 @@ TaskDesc gTaskDescBosUrsulaBubble = {
     sizeof(UrsulaBubbleWork),
 };
 
-const EmyKind gBosUrsulaBubbleSingleEmyKind = { 35, 0, 1, 1, 0, 0, 0 };
+static const EmyKind sBosUrsulaBubbleSingleEmyKind = { 35, 0, 1, 1, 0, 0, 0 };
 
-TaskDesc gTaskDescBosUrsulaBubbleSingle = {
+static TaskDesc sTaskDescBosUrsulaBubbleSingle = {
     "task_bos_ursula_bubble_single",
     (TaskInitFunc)task_bos_ursula_bubble_single_0,
     (TaskUpdateFunc)task_bos_ursula_bubble_single_1,
@@ -42,21 +42,21 @@ u16 BosUrsulaSpawnThreeBubbles(UrsulaBubbleWork* work) {
         v = -v;
     }
 
-    work->bubbles[0] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[0] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
     v = 0x20;
 
     if (BosUrsulaIsFacingLeft() != 0) {
         v = -v;
     }
 
-    work->bubbles[1] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[1] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
     v = 0x40;
 
     if (BosUrsulaIsFacingLeft() != 0) {
         v = -v;
     }
 
-    work->bubbles[2] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+    work->bubbles[2] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
 
     return 3;
 }
@@ -73,7 +73,7 @@ u16 BosUrsulaSpawnSixBubbles(UrsulaBubbleWork* work) {
             v = -v;
         }
 
-        work->bubbles[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
         a += 20;
     }
 
@@ -92,7 +92,7 @@ u16 BosUrsulaSpawnTenBubbles(UrsulaBubbleWork* work) {
             v = -v;
         }
 
-        work->bubbles[i] = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubbleSingle, &v);
+        work->bubbles[i] = TaskCreate(&work->tasks, &sTaskDescBosUrsulaBubbleSingle, &v);
         a += 16;
     }
 
@@ -188,7 +188,7 @@ void* eu_080DA860(void) {
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->angle = *arg;
     work->speed = 0x333;
-    InitEnemyBtlObj(&work->obj, &gBosUrsulaBubbleSingleEmyKind, gBtlWork->bossX,
+    InitEnemyBtlObj(&work->obj, &sBosUrsulaBubbleSingleEmyKind, gBtlWork->bossX,
         gBtlWork->bossY + 0x1000, gBtlWork->bossZ);
     SetBtlObjUnhittable(&work->obj, 1);
 #ifdef VERSION_EU

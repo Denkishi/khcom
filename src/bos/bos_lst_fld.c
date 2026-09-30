@@ -5,7 +5,7 @@
 #include "btl_api.h"
 #include "sroll_api.h"
 
-const u16 gBosLstFldVofsTable[832] = {
+static const u16 sBosLstFldVofsTable[832] = {
     0, 0, 3, 6, 6, 12, 9, 18, 12, 25, 15, 31, 18, 37, 21, 43,
     24, 49, 28, 56, 31, 62, 34, 68, 37, 74, 40, 80, 43, 86, 46, 92,
     48, 97, 51, 103, 54, 109, 57, 115, 60, 120, 63, 126, 65, 131, 68, 136,
@@ -280,7 +280,7 @@ const u16 gUnk_09A4EC34[832] = {
     511, 511, 511, 511, 511, 511, 510, 510, 510, 510, 510, 510, 510, 510, 510, 510,
 };
 
-const u16 gBosLstFldHofsTable[1184] = {
+static const u16 sBosLstFldHofsTable[1184] = {
     8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11,
     11, 11, 11, 11, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 14,
     14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16,
@@ -357,21 +357,21 @@ const u16 gBosLstFldHofsTable[1184] = {
     3, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 511, 511, 511, 511,
 };
 
-const s8 gUnk_09A4FBF4[33] = {
+static const s8 sUnk_09A4FBF4[33] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1, 0,
 };
 
-const s8 gUnk_09A4FC15[9] = {
+static const s8 sUnk_09A4FC15[9] = {
     1, 2, 2, 1, -1, -2, -2, -1, 0,
 };
 
-const s32 gBosLstFldFadeLevels[64] = {
+static const s32 sBosLstFldFadeLevels[64] = {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
 };
 
 const s32 gUnk_09A4FD20 = 0;
 
-const s8* gBosLstFldShakePatterns[2] = { gUnk_09A4FBF4, gUnk_09A4FC15 };
+static const s8* sBosLstFldShakePatterns[2] = { sUnk_09A4FBF4, sUnk_09A4FC15 };
 
 TaskDesc gTaskDescBosLstFld = {
     "task_bos_lst_fld",
@@ -412,7 +412,7 @@ void BosLstFldUpdateShake(void) {
     const s8* p;
 
     if (gBosLstFldShakeActive != 0) {
-        p = gBosLstFldShakePatterns[gBosLstFldShakePattern];
+        p = sBosLstFldShakePatterns[gBosLstFldShakePattern];
         gBosLstFldShakeOffset += ((p[gBosLstFldShakeStep] << 12) - gBosLstFldShakeOffset) >> 3;
         gBosLstFldShakeStep++;
         if (p[gBosLstFldShakeStep] == 0) {
@@ -469,11 +469,11 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
     BtlMapResetShake();
     BosLstFldResetShake();
     dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (vu32)gBosLstFldVofsTable;
+    dma[0] = (vu32)sBosLstFldVofsTable;
     dma[1] = (vu32)work->vofsTable;
     dma[2] = (DMA_ENABLE << 16) | 0x340;
     dma[2];
-    dma[0] = (vu32)gBosLstFldHofsTable;
+    dma[0] = (vu32)sBosLstFldHofsTable;
     dma[1] = (vu32)work->hofsTable;
     dma[2] = (DMA_ENABLE << 16) | 0x4A0;
     dma[2];
@@ -684,7 +684,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     }
 
     if (work->fadeStep <= 63) {
-        BosLstFldDarkenPalette(work->paletteBuf, gUnk_09D694F4, 80, gBosLstFldFadeLevels[work->fadeStep]);
+        BosLstFldDarkenPalette(work->paletteBuf, gUnk_09D694F4, 80, sBosLstFldFadeLevels[work->fadeStep]);
         LoadPalette(work->paletteBuf, 0x050000A0, 160);
         work->fadeStep++;
     }

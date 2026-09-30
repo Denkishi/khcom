@@ -1,7 +1,7 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
 
-const s16 gBosPcFltSine[256] = {
+static const s16 sBosPcFltSine[256] = {
     0, 6, 12, 18, 25, 31, 37, 43, 49, 56, 62, 68, 74, 80, 86, 92,
     97, 103, 109, 115, 120, 126, 131, 136, 142, 147, 152, 157, 162, 167, 171, 176,
     181, 185, 189, 193, 197, 201, 205, 209, 212, 216, 219, 222, 225, 228, 231, 234,
@@ -20,7 +20,7 @@ const s16 gBosPcFltSine[256] = {
     -97, -92, -86, -80, -74, -68, -62, -56, -49, -43, -37, -31, -25, -18, -12, -6,
 };
 
-const s16 gBosPcFltCosine[256] = {
+static const s16 sBosPcFltCosine[256] = {
     256, 255, 255, 255, 254, 254, 253, 252, 251, 249, 248, 246, 244, 243, 241, 238,
     236, 234, 231, 228, 225, 222, 219, 216, 212, 209, 205, 201, 197, 193, 189, 185,
     181, 176, 171, 167, 162, 157, 152, 147, 142, 136, 131, 126, 120, 115, 109, 103,
@@ -39,7 +39,7 @@ const s16 gBosPcFltCosine[256] = {
     236, 238, 241, 243, 244, 246, 248, 249, 251, 252, 253, 254, 254, 255, 255, 255,
 };
 
-const PcFltFrameDef gBosPcFltFrameDefs[12] = {
+static const PcFltFrameDef sBosPcFltFrameDefs[12] = {
     { -16, -16, 0, 0 },
     { -16, 0, 24, 11 },
     { -16, 2, 24, 13 },
@@ -239,7 +239,7 @@ void BosPcFltUpdateGimmick(PcFltWork* work) {
             id = AnimGetGfxIndex(anim);
             if (id != 0) {
                 AnimReset(anim);
-                AnimChange(anim, gBosPcFltFrameDefs[id].nextAnim, 0);
+                AnimChange(anim, sBosPcFltFrameDefs[id].nextAnim, 0);
             } else {
                 work->timer = 1;
             }
@@ -294,8 +294,8 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         }
     }
     if (f >= 0) {
-        work->x = (((gBosPcFltCosine[work->orbitAngle >> 8] * (work->radiusX >> 8)) >> 8) + (work->centerX >> 8)) << 8;
-        work->y = (((gBosPcFltSine[work->orbitAngle >> 8] * (work->radiusY >> 8)) >> 8) + (work->centerY >> 8)) << 8;
+        work->x = (((sBosPcFltCosine[work->orbitAngle >> 8] * (work->radiusX >> 8)) >> 8) + (work->centerX >> 8)) << 8;
+        work->y = (((sBosPcFltSine[work->orbitAngle >> 8] * (work->radiusY >> 8)) >> 8) + (work->centerY >> 8)) << 8;
         work->orbitAngle = work->orbitAngle - (((work->shared->hpRatio * 3) << 4) / 256 - 112);
     }
     switch (work->state) {
@@ -385,8 +385,8 @@ u8 task_bos_pc_flt_1(PcFltWork* work) {
     if (id == 0) {
         work->z += 0x1000;
     } else {
-        work->z += gBosPcFltFrameDefs[id].z << 8;
-        ColliderSetRadius(&work->collider, gBosPcFltFrameDefs[id].radius);
+        work->z += sBosPcFltFrameDefs[id].z << 8;
+        ColliderSetRadius(&work->collider, sBosPcFltFrameDefs[id].radius);
     }
     BosPcFltSyncCollider(work);
     work->unk_007 = work->shared->hpRatio & 1;
@@ -403,9 +403,9 @@ void task_bos_pc_flt_2(PcFltWork* work) {
     if (work->z <= 0) {
         id = AnimGetGfxIndex(&work->anim);
         WorldToScreen(&sx, &sy, work->x,
-            work->y + (gBosPcFltFrameDefs[id].drawY << 8), work->z);
+            work->y + (sBosPcFltFrameDefs[id].drawY << 8), work->z);
         if (gBtlWork->platform != 0) {
-            g = GetBattleSpritePriorityFlags(work->y + (gBosPcFltFrameDefs[id].drawY << 8));
+            g = GetBattleSpritePriorityFlags(work->y + (sBosPcFltFrameDefs[id].drawY << 8));
             h = (-0x1004 - ((work->y >> 8) << 2)) | 3;
         } else {
             g = GetBattleSpritePriorityFlags(work->y);

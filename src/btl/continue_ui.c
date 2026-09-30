@@ -22,13 +22,13 @@ extern u8 gUnk_09614618[];
 extern u8 gUnk_09614658[];
 extern u8 gUnk_096146F8[];
 
-const s32 gContinueCursorY[2] = {
+static const s32 sContinueCursorY[2] = {
     0x4000, 0x5600,
 };
 
 #ifdef VERSION_EU
 
-void* gContinueLanguageBgTiles[5] = {
+static void* sContinueLanguageBgTiles[5] = {
     gUnk_0941A418,
     gUnkEu_0954C7B4,
     gUnkEu_0954D7A0,
@@ -67,7 +67,7 @@ void ContinueSora_0(ContinueWork* p) {
     SetBgPriority(0, 1);
     SetBgPriority(1, 2);
 #ifdef VERSION_EU
-    eu_080059D4(0, gContinueLanguageBgTiles[gLanguage]);
+    eu_080059D4(0, sContinueLanguageBgTiles[gLanguage]);
     eu_080059F4(0, gUnk_0951CAB8);
 #else
     LoadBgTiles(0, gUnk_0941A418, MSG_CONT_BG_TILES);
@@ -134,7 +134,7 @@ void ContinueRiku_0(ContinueWork* p) {
     SetBgPriority(0, 1);
     SetBgPriority(1, 2);
 #ifdef VERSION_EU
-    eu_080059D4(0, gContinueLanguageBgTiles[gLanguage]);
+    eu_080059D4(0, sContinueLanguageBgTiles[gLanguage]);
     eu_080059F4(0, gUnk_0951CAB8);
 #else
     LoadBgTiles(0, gUnk_0941A418, MSG_CONT_BG_TILES);
@@ -270,7 +270,7 @@ static s32 Continue_1(ContinueWork* p) {
     }
 
     LoadContinueCursorPalette(p->cursor);
-    t = gContinueCursorY;
+    t = sContinueCursorY;
     p->y += (t[p->cursor] - p->y) >> 3;
     p->unk_64 += 4;
 }

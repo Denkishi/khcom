@@ -201,7 +201,6 @@ extern u8 gUnk_09614758[];
 extern u8 gUnk_09614778[];
 extern u8 gUnk_09614798[];
 extern u8 gUnk_096147B8[];
-extern const s32 gUnk_09033758[];
 extern u8 gUnk_050001C0[];
 extern u8 gUnk_096148D8[];
 extern u8 gUnk_08F69BE4[];
@@ -215,7 +214,6 @@ extern u8 gUnk_09614418[];
 extern u8 gCard00Palette[];
 extern u16 gUnk_08159E10[];
 extern u16 gUnk_08159E18[];
-extern const GlyphWidthTable gLatinGlyphWidths;
 extern u8 gUnk_090CBFB2[];
 extern const EventCharaParams gEventCharaParams[];
 

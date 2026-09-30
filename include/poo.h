@@ -840,11 +840,7 @@ typedef struct PooPalStep {
 
 extern const s32 gUnk_096FDA74[];
 extern u8 gUnk_0984A138[];
-extern const PooBgSet gAllmapWorldBgs[];
-extern const PooPalStep gAllmapPalSteps[];
 
-extern const BosMapanimeFrame gPooMapanimeFrames0[4];
-extern const BosMapanimeFrame gPooMapanimeFrames1[4];
 extern const BosMapanimeDef gPooMapanimeDef0;
 extern const s32 gPooPileKindStages[];
 extern u8 gUnk_097561D4[];

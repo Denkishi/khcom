@@ -3,7 +3,5 @@
 
 #include "staff_roll_types.h"
 
-extern const StaffRollScene gStaffRollSoraScenes[22];
-extern const StaffRollScene gStaffRollRikuScenes[22];
 
 #endif

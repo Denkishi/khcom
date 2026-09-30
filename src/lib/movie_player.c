@@ -2,7 +2,7 @@
 #include "gba/syscall.h"
 #include "movie.h"
 
-const u8 gMovieVideoCodecConstantsSrc[96] = {
+static const u8 sMovieVideoCodecConstantsSrc[96] = {
     0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5,
     5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10,
     11, 11, 11, 12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15, 16,
@@ -22,7 +22,7 @@ const u16 gUnk_09D6D1E4[89] = {
     22358, 24633, 27086, 29794, 32767,
 };
 
-const s32 gMovieArmRotateMasks[16] = {
+static const s32 sMovieArmRotateMasks[16] = {
     0x000000FF, 0xC000003F, 0xF000000F, 0xFC000003,
     0xFF000000, 0x3FC00000, 0x0FF00000, 0x03FC0000,
     0x00FF0000, 0x003FC000, 0x000FF000, 0x0003FC00,
@@ -45,7 +45,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
     memcpy(p->videoCodecCode, MovieVideoCodecStart, size1);
     *(void**)a = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecKeyFrame);
     *(void**)b = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecPostProcess);
-    memcpy((u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecConstants), gMovieVideoCodecConstantsSrc, 96);
+    memcpy((u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecConstants), sMovieVideoCodecConstantsSrc, 96);
     p->deltaCodecCode = gMovieHeap.iwramAlloc(size2);
     memcpy(p->deltaCodecCode, MovieDeltaCodecStart, size2);
     *(void**)c = (u8*)p->deltaCodecCode - (MovieDeltaCodecStart - MovieDeltaCodecDecode);
@@ -88,7 +88,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 encoded |= ((instruction & 0x0000F000) >> 12) << 16;
                 value = (w << 1) * ((instruction & 0xF0) >> 4) + offsets[instruction & 15];
                 for (shift = 0; shift < 16; shift++) {
-                    if ((value & gMovieArmRotateMasks[shift]) == value) {
+                    if ((value & sMovieArmRotateMasks[shift]) == value) {
                         j = 32 - shift * 2;
                         rotated = ((value & ((1U << j) - 1)) << (32 - j)) + (value >> j);
                         immediate = rotated & 0xFF;
@@ -105,7 +105,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 if ((instruction & 15) == 0) {
                     value = (w << 1) >> 4;
                     for (j = 0; j < 16; j++) {
-                        if ((value & gMovieArmRotateMasks[j]) == value) {
+                        if ((value & sMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
                             encoded = ((value & ((1U << shift) - 1)) << (32 - shift)) + (value >> shift);
                             rotate = encoded & 0xFF;
@@ -116,7 +116,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 } else {
                     value = (h << 1) >> 4;
                     for (j = 0; j < 16; j++) {
-                        if ((value & gMovieArmRotateMasks[j]) == value) {
+                        if ((value & sMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
                             encoded = ((value & ((1U << shift) - 1)) << (32 - shift)) + (value >> shift);
                             rotate = encoded & 0xFF;

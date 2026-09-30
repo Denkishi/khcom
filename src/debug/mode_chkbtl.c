@@ -13,7 +13,7 @@ u16 gVsBattleMinY EWRAM_COMMON(4);
 u16 gVsBattleMaxY EWRAM_COMMON(4);
 u16 gVsBattleHalfWidth EWRAM_COMMON(4);
 
-const ChkBtlEntry gChkBtlEntries[209] = {
+static const ChkBtlEntry sChkBtlEntries[209] = {
     { WORLD_TRAVERSE_TOWN, { 0 }, 0, 10, 0, "\x82\x73\x82\x76\x82\x6d\x82\x4f" },
     { WORLD_TRAVERSE_TOWN, { 0 }, 0, 11, 0, "\x82\x73\x82\x76\x82\x6d\x82\x50" },
     { WORLD_TRAVERSE_TOWN, { 0 }, 0, 12, 0, "\x82\x73\x82\x76\x82\x6d\x82\x51" },
@@ -225,7 +225,7 @@ const ChkBtlEntry gChkBtlEntries[209] = {
     { WORLD_TRAVERSE_TOWN, { 0 }, 1, 179, 0, "\x82\x73\x82\x74\x82\x73\x82\x6e\x82\x71\x82\x68\x82\x60\x82\x6b\x82\x50" },
 };
 
-const ChkBtlWorld gChkBtlWorlds[13] = {
+static const ChkBtlWorld sChkBtlWorlds[13] = {
     { 13, { 0 }, "\x82\x73\x82\x76\x82\x68" },
     { 11, { 0 }, "\x82\x73\x82\x76\x82\x6d" },
     { 1, { 0 }, "\x82\x76\x82\x6e\x82\x6d" },
@@ -255,12 +255,12 @@ void mode_chkbtl_0(void) {
     DebugTextPrint(24, 44, 2, "\x82\x61\x82\x66\x81\x40\x81\x46");
     DebugTextPrint(24, 56, 2, "\x82\x65\x82\x6b\x81\x40\x81\x46");
     DebugTextPrint(24, 68, 2, "\x82\x67\x82\x6f\x81\x40\x81\x46");
-    DebugTextPrint(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
+    DebugTextPrint(62, 32, 2, sChkBtlEntries[gChkBtlWork->enemy].name);
 
-    if (gChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
+    if (sChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
         DebugTextPrint(62, 44, 2, "\x81\x5c\x81\x5c");
     } else {
-        DebugTextPrint(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
+        DebugTextPrint(62, 44, 2, sChkBtlWorlds[gChkBtlWork->bg].name);
     }
 
     DebugTextPrintNumber(62, 56, 2, gChkBtlWork->floor + 1);
@@ -376,13 +376,13 @@ void mode_chkbtl_1(void) {
         case 0:
         case 1:
             DebugTextPrint(62, 32, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            DebugTextPrint(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
+            DebugTextPrint(62, 32, 2, sChkBtlEntries[gChkBtlWork->enemy].name);
             DebugTextPrint(62, 44, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
 
-            if (gChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
+            if (sChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
                 DebugTextPrint(62, 44, 2, "\x81\x5c\x81\x5c");
             } else {
-                DebugTextPrint(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
+                DebugTextPrint(62, 44, 2, sChkBtlWorlds[gChkBtlWork->bg].name);
             }
             break;
         case 2:
@@ -398,11 +398,11 @@ void mode_chkbtl_1(void) {
         ModeRequest(&gModeDeck, 0);
     } else if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
         SeedRandom(gFrameCounter);
-        gGameState.battleStage = gChkBtlWorlds[gChkBtlWork->bg].world;
+        gGameState.battleStage = sChkBtlWorlds[gChkBtlWork->bg].world;
         gGameState.floor = gChkBtlWork->floor;
         gGameState.hp = gChkBtlWork->hp;
         gGameState.progression.maxHp = gChkBtlWork->hp;
-        gGameState.world = gChkBtlEntries[gChkBtlWork->enemy].world;
+        gGameState.world = sChkBtlEntries[gChkBtlWork->enemy].world;
 
         if (GetKeysHeld() & L_BUTTON) {
             gGameState.flags |= 4;
@@ -414,7 +414,7 @@ void mode_chkbtl_1(void) {
             InitRikuDeckForWorld(gChkBtlWork->floor);
         }
 
-        ModeRequest(&gModeBattle, gChkBtlEntries[gChkBtlWork->enemy].battleId);
+        ModeRequest(&gModeBattle, sChkBtlEntries[gChkBtlWork->enemy].battleId);
     } else if (GetKeysPressed() & B_BUTTON) {
         ModeRequest(&gModeDebug, 0);
         return;
@@ -432,7 +432,7 @@ void ChkBtlSpawnEnemy(void) {
     ChkBtlEntry* entry;
     ChkBtlPos pos;
 
-    entry = &gChkBtlEntries[gChkBtlWork->enemy];
+    entry = &sChkBtlEntries[gChkBtlWork->enemy];
 
     if (entry->battleId == 0xB9) {
         pos.x = 0x15000;

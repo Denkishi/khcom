@@ -58,12 +58,12 @@ u16 CountCardsInDecks(void);
 u8 GetActiveDeckIndex(void);
 
 #ifdef VERSION_EU
-const u16 gRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
+static const u16 sRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
 #endif
 
-const s16 gRikuDeckTabPointerX[3] = { 116, 116, 116 };
+static const s16 sRikuDeckTabPointerX[3] = { 116, 116, 116 };
 
-const s16 gRikuDeckTabPointerY[3] = { 56, 104, 148 };
+static const s16 sRikuDeckTabPointerY[3] = { 56, 104, 148 };
 
 const s16 gUnk_09041EC0[5] = { 12, 28, 42, 56, 70 };
 
@@ -75,7 +75,7 @@ const s16 gUnk_09041EE0[2] = { 80, 128 };
 
 const s16 gUnk_09041EE4[5] = { 80, 88, 96, 104, 112 };
 
-const u16 gUnk_09041EEE[4] = { 45, 93, 141, 30 };
+static const u16 sUnk_09041EEE[4] = { 45, 93, 141, 30 };
 
 static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     u16 v;
@@ -110,8 +110,8 @@ static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     AnimInit(&w->anim2, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim2, 0, 1);
     w->gfx = AnimGetGfx(&w->anim2);
-    w->x = gRikuDeckTabPointerX[0] << 8;
-    w->y = gRikuDeckTabPointerY[0] << 8;
+    w->x = sRikuDeckTabPointerX[0] << 8;
+    w->y = sRikuDeckTabPointerY[0] << 8;
     w->handFlags = 0;
     w->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
     w->palette = LoadObjPalette(gUnk_09614418, 32);
@@ -155,17 +155,17 @@ static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     w->x7 = -0x8000;
     w->holding = 0;
 #ifdef VERSION_EU
-    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], gRikuDeckTitleBannerTileSizes[gLanguage]);
+    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
     w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
     w->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
     w->palette3 = LoadObjPalette(gUnk_096144F8, 32);
     w->unk_4BC = 79;
-    v = gUnk_09041EEE[w->deckIndex];
+    v = sUnk_09041EEE[w->deckIndex];
     w->unk_4BE = v;
     w->unk_4C0 = 225;
-    v = gUnk_09041EEE[w->deckIndex];
+    v = sUnk_09041EEE[w->deckIndex];
     w->unk_4C2 = v;
     w->unk_503 = 0;
     w->inputDelay = 0;
@@ -262,8 +262,8 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
     w->x2 = 0x4800;
     w->y2 = 0x2800;
     w->cursorRow = w->deckIndex;
-    ApproachValue(&w->x, gRikuDeckTabPointerX[w->cursorCol] << 8, w->timer);
-    ApproachValue(&w->y, gRikuDeckTabPointerY[w->cursorRow] << 8, w->timer);
+    ApproachValue(&w->x, sRikuDeckTabPointerX[w->cursorCol] << 8, w->timer);
+    ApproachValue(&w->y, sRikuDeckTabPointerY[w->cursorRow] << 8, w->timer);
     w->view = 1;
     SetRikuDeckMenuHandAnim(w);
     LoadRikuDeckNameTexts(w);
@@ -454,7 +454,7 @@ s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* w) {
 
 u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
-    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], gRikuDeckTitleBannerTileSizes[gLanguage]);
+    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
     w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif

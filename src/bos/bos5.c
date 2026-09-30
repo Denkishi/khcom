@@ -27,11 +27,11 @@
 #include "worldselect_assets.h"
 #include "jiminy_records_assets.h"
 
-const EmyKind gBosGaEmyKind =
+static const EmyKind sBosGaEmyKind =
 {32, 100, 16, 16, 0, 100, 1}
 ;
 
-const GaEntryDef gGaEntryDefs[6] = {
+static const GaEntryDef sGaEntryDefs[6] = {
 #if defined(VERSION_US)
     {256, 0, 0, -15872, 0, 0, gRoomAssetUs_099939FA, gUnk_09EF96A4, gUnk_09EF9684, 8, 0},
     {256, -2560, 2048, -25088, 0, 0, gRoomAssetUs_09995E9C, gUnk_09EF96C8, gUnk_09EF96B0, 6, 0},
@@ -56,7 +56,7 @@ const GaEntryDef gGaEntryDefs[6] = {
 #endif
 };
 
-const BosMapConfig gBosMapConfig =
+static const BosMapConfig sBosMapConfig =
 #if defined(VERSION_US)
 {gRoomAssetUs_099A899C, 16352, 0, gRoomAssetUs_09A3C75C, 320, 0, {gRoomAssetUs_09A1E0DC, gRoomAssetUs_09A1F0DC, gRoomAssetUs_09A1E8DC, gRoomAssetUs_09A1F8DC}}
 #elif defined(VERSION_JP)
@@ -66,7 +66,7 @@ const BosMapConfig gBosMapConfig =
 #endif
 ;
 
-const s32 gBos5TanTable[32] = {
+static const s32 sBos5TanTable[32] = {
     6,
     12,
     18,
@@ -110,13 +110,13 @@ TaskDesc gTaskDescBosGa = {
     sizeof(GaWork),
 };
 
-const EmyKind gBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
+static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
 
-const MdMapData gMdMapData = {
+static const MdMapData sMdMapData = {
     gUnk_099AC97C, 32768, { 0, 0 }, gUnk_09A3C8BC, 192, { 0, 0 }, { gUnk_09A208DC, gUnk_09A210DC, gUnk_09A218DC, gUnk_09A220DC }
 };
 
-const MdFrameDef gMdFrameDefs[41] = {
+static const MdFrameDef sMdFrameDefs[41] = {
     {
         32, 0, gUnk_099B497C, 16864, 0,
         { gUnk_08125E24, gUnk_08125E24, gUnk_08125E24, gUnk_09A228DC },
@@ -365,40 +365,40 @@ const MdFrameDef gMdFrameDefs[41] = {
     },
 };
 
-const MdAnimFrame gUnk_09992D34[4] = { { 1, 18 }, { 2, 12 }, { 3, 24 }, { 2, 12 } };
+static const MdAnimFrame sUnk_09992D34[4] = { { 1, 18 }, { 2, 12 }, { 3, 24 }, { 2, 12 } };
 
-const MdAnimFrame gUnk_09992D44[4] = { { 4, 18 }, { 5, 12 }, { 6, 24 }, { 5, 12 } };
+static const MdAnimFrame sUnk_09992D44[4] = { { 4, 18 }, { 5, 12 }, { 6, 24 }, { 5, 12 } };
 
-const MdAnimFrame gUnk_09992D54[4] = { { 7, 12 }, { 8, 30 }, { 9, 3 }, { 10, 6 } };
+static const MdAnimFrame sUnk_09992D54[4] = { { 7, 12 }, { 8, 30 }, { 9, 3 }, { 10, 6 } };
 
-const MdAnimFrame gUnk_09992D64[2] = { { 11, 24 }, { 12, 6 } };
+static const MdAnimFrame sUnk_09992D64[2] = { { 11, 24 }, { 12, 6 } };
 
-const MdAnimFrame gUnk_09992D6C[2] = { { 13, 6 }, { 14, 6 } };
+static const MdAnimFrame sUnk_09992D6C[2] = { { 13, 6 }, { 14, 6 } };
 
-const MdAnimFrame gUnk_09992D74[10] = { { 15, 6 }, { 16, 3 }, { 17, 3 }, { 18, 24 }, { 1, 6 }, { 19, 6 }, { 20, 3 }, { 21, 3 }, { 22, 24 }, { 1, 6 } };
+static const MdAnimFrame sUnk_09992D74[10] = { { 15, 6 }, { 16, 3 }, { 17, 3 }, { 18, 24 }, { 1, 6 }, { 19, 6 }, { 20, 3 }, { 21, 3 }, { 22, 24 }, { 1, 6 } };
 
-const MdAnimFrame gUnk_09992D9C[8] = { { 23, 6 }, { 24, 6 }, { 25, 6 }, { 26, 30 }, { 27, 3 }, { 28, 6 }, { 29, 6 }, { 30, 6 } };
+static const MdAnimFrame sUnk_09992D9C[8] = { { 23, 6 }, { 24, 6 }, { 25, 6 }, { 26, 30 }, { 27, 3 }, { 28, 6 }, { 29, 6 }, { 30, 6 } };
 
-const MdAnimFrame gUnk_09992DBC[6] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 40, 3 } };
+static const MdAnimFrame sUnk_09992DBC[6] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 40, 3 } };
 
-const MdAnimFrame gUnk_09992DD4[8] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 35, 3 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 40, 6 } };
+static const MdAnimFrame sUnk_09992DD4[8] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 35, 3 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 40, 6 } };
 
-const MdAnimFrame gUnk_09992DF4[11] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 35, 6 }, { 32, 12 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 38, 6 } };
+static const MdAnimFrame sUnk_09992DF4[11] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 35, 6 }, { 32, 12 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 38, 6 } };
 
-const MdAnimFrame gUnk_09992E20[1] = { { 1, 32767 } };
+static const MdAnimFrame sUnk_09992E20[1] = { { 1, 32767 } };
 
-const MdAnimDef gMdAnimDefs[11] = {
-    { gUnk_09992D34, 4, 0 },
-    { gUnk_09992D44, 4, 0 },
-    { gUnk_09992D54, 4, 0 },
-    { gUnk_09992D64, 2, 0 },
-    { gUnk_09992D6C, 2, 0 },
-    { gUnk_09992D74, 10, 0 },
-    { gUnk_09992D9C, 8, 0 },
-    { gUnk_09992DBC, 6, 0 },
-    { gUnk_09992DD4, 8, 0 },
-    { gUnk_09992DF4, 11, 0 },
-    { gUnk_09992E20, 1, 0 },
+static const MdAnimDef sMdAnimDefs[11] = {
+    { sUnk_09992D34, 4, 0 },
+    { sUnk_09992D44, 4, 0 },
+    { sUnk_09992D54, 4, 0 },
+    { sUnk_09992D64, 2, 0 },
+    { sUnk_09992D6C, 2, 0 },
+    { sUnk_09992D74, 10, 0 },
+    { sUnk_09992D9C, 8, 0 },
+    { sUnk_09992DBC, 6, 0 },
+    { sUnk_09992DD4, 8, 0 },
+    { sUnk_09992DF4, 11, 0 },
+    { sUnk_09992E20, 1, 0 },
 };
 
 TaskDesc gTaskDescBosMd = {
@@ -410,7 +410,7 @@ TaskDesc gTaskDescBosMd = {
     sizeof(MdWork),
 };
 
-TaskDesc gTaskDescBosMdMap = {
+static TaskDesc sTaskDescBosMdMap = {
     "task_bos_md_map",
     (TaskInitFunc)task_bos_md_map_0,
     (TaskUpdateFunc)task_bos_md_map_1,
@@ -419,24 +419,24 @@ TaskDesc gTaskDescBosMdMap = {
     sizeof(MdMapWork),
 };
 
-const MdFirePoint gUnk_09992E98[4] = { { 88, 288, 240, 0 }, { 56, 312, 330, 0 }, { 72, 336, 420, 0 }, { 104, 360, 510, 0 } };
+static const MdFirePoint sUnk_09992E98[4] = { { 88, 288, 240, 0 }, { 56, 312, 330, 0 }, { 72, 336, 420, 0 }, { 104, 360, 510, 0 } };
 
-const MdFirePoint gUnk_09992EB8[4] = { { 128, 304, 0, 0 }, { 104, 324, 0, 0 }, { 144, 344, 0, 0 }, { 112, 364, 0, 0 } };
+static const MdFirePoint sUnk_09992EB8[4] = { { 128, 304, 0, 0 }, { 104, 324, 0, 0 }, { 144, 344, 0, 0 }, { 112, 364, 0, 0 } };
 
-const MdFirePoint gUnk_09992ED8[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
+static const MdFirePoint sUnk_09992ED8[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
 
-const MdFireDef gMdFireDefs[6] = {
-    { gUnk_09992E98, 4, 0 },
-    { gUnk_09992EB8, 4, 0 },
-    { gUnk_09992ED8, 4, 0 },
-    { gUnk_09992E98, 4, 0 },
-    { gUnk_09992E98, 4, 0 },
-    { gUnk_09992E98, 4, 0 },
+static const MdFireDef sMdFireDefs[6] = {
+    { sUnk_09992E98, 4, 0 },
+    { sUnk_09992EB8, 4, 0 },
+    { sUnk_09992ED8, 4, 0 },
+    { sUnk_09992E98, 4, 0 },
+    { sUnk_09992E98, 4, 0 },
+    { sUnk_09992E98, 4, 0 },
 };
 
-const EmyKind gBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
+static const EmyKind sBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, 1 };
 
-TaskDesc gTaskDescBosMdFire = {
+static TaskDesc sTaskDescBosMdFire = {
     "task_bos_md_fire",
     (TaskInitFunc)task_bos_md_fire_0,
     (TaskUpdateFunc)task_bos_md_fire_1,
@@ -445,7 +445,7 @@ TaskDesc gTaskDescBosMdFire = {
     sizeof(MdFireWork),
 };
 
-TaskDesc gTaskDescBosMdDai = {
+static TaskDesc sTaskDescBosMdDai = {
     "task_bos_md_dai",
     (TaskInitFunc)task_bos_md_dai_0,
     (TaskUpdateFunc)task_bos_md_dai_1,
@@ -454,7 +454,7 @@ TaskDesc gTaskDescBosMdDai = {
     sizeof(MdDaiWork),
 };
 
-TaskDesc gTaskDescBosMdHahen = {
+static TaskDesc sTaskDescBosMdHahen = {
     "task_bos_md_hahen",
     (TaskInitFunc)task_bos_md_hahen_0,
     (TaskUpdateFunc)task_bos_md_hahen_1,
@@ -464,7 +464,7 @@ TaskDesc gTaskDescBosMdHahen = {
 };
 
 #ifdef VERSION_EU
-void* gWorldselectBg1Maps[5] = {
+static void* sWorldselectBg1Maps[5] = {
     gUnk_09A31FDC,
     gUnkEu_09A840A0,
     gUnkEu_09A84FA0,
@@ -472,7 +472,7 @@ void* gWorldselectBg1Maps[5] = {
     gUnkEu_09A845A0,
 };
 
-void* gWorldselectNameTileData[5] = {
+static void* sWorldselectNameTileData[5] = {
     gUnk_099F4D3C,
     gUnkEu_09A0A480,
     gUnkEu_09A1DC80,
@@ -480,7 +480,7 @@ void* gWorldselectNameTileData[5] = {
     gUnkEu_09A10C80,
 };
 
-void* gWorldselectTitleGfx[5] = {
+static void* sWorldselectTitleGfx[5] = {
     gUnk_0999CB90,
     gUnkEu_099A31F4,
     gUnkEu_099A3DF4,
@@ -488,7 +488,7 @@ void* gWorldselectTitleGfx[5] = {
     gUnkEu_099A35E0,
 };
 
-void* gWorldselectTitleTileData[5] = {
+static void* sWorldselectTitleTileData[5] = {
     gUnk_0999CBB6,
     gUnkEu_099A3220,
     gUnkEu_099A3E1A,
@@ -498,7 +498,7 @@ void* gWorldselectTitleTileData[5] = {
 
 #endif
 
-void* gWorldselectPaletteCycle[30] = {
+static void* sWorldselectPaletteCycle[30] = {
     gUnk_09A3CA3C,
     gUnk_09A3CA5C,
     gUnk_09A3CA7C,
@@ -532,72 +532,72 @@ void* gWorldselectPaletteCycle[30] = {
 };
 
 #ifdef VERSION_EU
-const WorldselectTileSizes gWorldselectTitleTileSizes = { { 896, 960, 1024, 1024, 960 } };
+static const WorldselectTileSizes sWorldselectTitleTileSizes = { { 896, 960, 1024, 1024, 960 } };
 #endif
 
-const WorldselectWorldDef gWorldselectWorldDefs[13] = {
+static const WorldselectWorldDef sWorldselectWorldDefs[13] = {
 #ifdef VERSION_EU
-    { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gWorldselectNameTileData, 8192, 0 },
+    { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, sWorldselectNameTileData, 8192, 0 },
 #else
     { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gUnk_099F6D3C },
 #endif
 #ifdef VERSION_EU
-    { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gWorldselectNameTileData, 12288, 0 },
+    { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, sWorldselectNameTileData, 12288, 0 },
 #else
     { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gUnk_099F7D3C },
 #endif
 #ifdef VERSION_EU
-    { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gWorldselectNameTileData, 6144, 0 },
+    { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, sWorldselectNameTileData, 6144, 0 },
 #else
     { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gUnk_099F653C },
 #endif
 #ifdef VERSION_EU
-    { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gWorldselectNameTileData, 0, 0 },
+    { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, sWorldselectNameTileData, 0, 0 },
 #else
     { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gUnk_099F4D3C },
 #endif
 #ifdef VERSION_EU
-    { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gWorldselectNameTileData, 10240, 0 },
+    { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, sWorldselectNameTileData, 10240, 0 },
 #else
     { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gUnk_099F753C },
 #endif
 #ifdef VERSION_EU
-    { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gWorldselectNameTileData, 14336, 0 },
+    { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, sWorldselectNameTileData, 14336, 0 },
 #else
     { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gUnk_099F853C },
 #endif
 #ifdef VERSION_EU
-    { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gWorldselectNameTileData, 16384, 0 },
+    { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, sWorldselectNameTileData, 16384, 0 },
 #else
     { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gUnk_099F8D3C },
 #endif
 #ifdef VERSION_EU
-    { 128, 8, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gWorldselectNameTileData, 20480, 0 },
+    { 128, 8, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, sWorldselectNameTileData, 20480, 0 },
 #else
     { 128, 8, 129, 151, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gUnk_099F9D3C },
 #endif
 #ifdef VERSION_EU
-    { 256, 9, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gWorldselectNameTileData, 2048, 0 },
+    { 256, 9, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, sWorldselectNameTileData, 2048, 0 },
 #else
     { 256, 9, 53, 177, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gUnk_099F553C },
 #endif
 #ifdef VERSION_EU
-    { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gWorldselectNameTileData, 4096, 0 },
+    { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, sWorldselectNameTileData, 4096, 0 },
 #else
     { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gUnk_099F5D3C },
 #endif
 #ifdef VERSION_EU
-    { 2048, 11, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gWorldselectNameTileData, 22528, 0 },
+    { 2048, 11, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, sWorldselectNameTileData, 22528, 0 },
 #else
     { 2048, 11, 44, 186, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gUnk_099FA53C },
 #endif
 #ifdef VERSION_EU
-    { 4096, 12, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gWorldselectNameTileData, 24576, 0 },
+    { 4096, 12, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, sWorldselectNameTileData, 24576, 0 },
 #else
     { 4096, 12, 61, 192, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gUnk_099FAD3C },
 #endif
 #ifdef VERSION_EU
-    { 1024, 13, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gWorldselectNameTileData, 18432, 0 },
+    { 1024, 13, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, sWorldselectNameTileData, 18432, 0 },
 #else
     { 1024, 13, 134, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gUnk_099F953C },
 #endif
@@ -652,13 +652,13 @@ u16 Bos5Atan(s32 a) {
     }
     i = 0;
 
-    if (a >= gBos5TanTable[0]) {
+    if (a >= sBos5TanTable[0]) {
         do {
             i++;
             if (i > 0x3F) {
                 break;
             }
-        } while (a >= gBos5TanTable[i]);
+        } while (a >= sBos5TanTable[i]);
     }
     return i;
 }
@@ -760,7 +760,7 @@ void BosGaRequestState(GaWork* work, s32 state) {
 s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
     s32 v;
 
-    v = gGaEntryDefs[i].offsetX;
+    v = sGaEntryDefs[i].offsetX;
 
     if (work->flipped != 0) {
         v = -v;
@@ -769,7 +769,7 @@ s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
 }
 
 s32 BosGaEntryOffsetY(GaWork* work, s16 i) {
-    return gGaEntryDefs[i].offsetY;
+    return sGaEntryDefs[i].offsetY;
 }
 
 s32 BosGaEntryHomeX(GaWork* work, s16 i) {
@@ -781,7 +781,7 @@ s32 BosGaEntryHomeY(GaWork* work, s16 i) {
 }
 
 s32 BosGaEntryHomeZ(GaWork* work, s16 i) {
-    return gGaEntryDefs[i].offsetZ + gBtlWork->bossZ;
+    return sGaEntryDefs[i].offsetZ + gBtlWork->bossZ;
 }
 
 void BosGaEntryResetHome(GaWork* work, s32 i) {
@@ -800,13 +800,13 @@ void BosGaEntryResetHome(GaWork* work, s32 i) {
     e->baseX = BosGaEntryHomeX(work, i);
     e->baseY = BosGaEntryHomeY(work, i);
     e->baseZ = BosGaEntryHomeZ(work, i);
-    v = gGaEntryDefs[i].x2;
+    v = sGaEntryDefs[i].x2;
 
     if (work->flipped != 0) {
         v = -v;
     }
     e->x2 = v;
-    e->y2 = gGaEntryDefs[i].y2;
+    e->y2 = sGaEntryDefs[i].y2;
 }
 
 void BosGaUpdateFacing(GaWork* work) {
@@ -855,8 +855,8 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
         }
         e->baseZ -= 0xA000;
     }
-    InitEnemyBtlObj(&e->actor, &gBosGaEmyKind, e->baseX, e->baseY, e->baseZ);
-    SetEnemyHpFromStats(&e->actor, gBosGaEmyKind.id, gGaEntryDefs[i].hpScale);
+    InitEnemyBtlObj(&e->actor, &sBosGaEmyKind, e->baseX, e->baseY, e->baseZ);
+    SetEnemyHpFromStats(&e->actor, sBosGaEmyKind.id, sGaEntryDefs[i].hpScale);
     e->actor.radiusY = 0x10;
 
     if (i == 0) {
@@ -874,9 +874,9 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     }
     TaskPoolInit(&e->tasks, 1);
     TaskCreate(&e->tasks, &gTaskDescBtlShadow, &e->actor);
-    p = gGaEntryDefs[i].gfxTable;
-    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, gGaEntryDefs[i].spriteCount), gGaEntryDefs[i].owner);
-    AnimInit(&e->anim, gGaEntryDefs[i].anims, p);
+    p = sGaEntryDefs[i].gfxTable;
+    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, sGaEntryDefs[i].spriteCount), sGaEntryDefs[i].owner);
+    AnimInit(&e->anim, sGaEntryDefs[i].anims, p);
     AnimStart(&e->anim, 0, 1);
     e->gfx = AnimGetGfx(&e->anim);
 
@@ -3027,7 +3027,7 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     work->angle = 0;
     work->attackToggle = 0;
     work->cardTimer = 60;
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, &gBosMapConfig);
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, &sBosMapConfig);
     gBtlWork->bossX = 0xE200;
     gBtlWork->bossY = 0x15E00;
     gBtlWork->bossZ = 0;
@@ -3163,11 +3163,11 @@ void BosMdRequestState(MdWork* work, s32 state) {
 }
 
 void BosMdSetBgMap(MdWork* work, u16 index) {
-    SetBgMapBlocks(1, (void*)gMdFrameDefs[index].blocks, 2, 2);
+    SetBgMapBlocks(1, (void*)sMdFrameDefs[index].blocks, 2, 2);
 }
 
 void BosMdLoadBgTiles(MdWork* work, u16 index) {
-    LoadBgTiles(1, gMdFrameDefs[index].tiles, gMdFrameDefs[index].tilesSize);
+    LoadBgTiles(1, sMdFrameDefs[index].tiles, sMdFrameDefs[index].tilesSize);
 }
 
 void BosMdSetFrame(MdWork* work, u16 id) {
@@ -3179,20 +3179,20 @@ void BosMdSetFrame(MdWork* work, u16 id) {
 
     BosMdLoadBgTiles(work, id);
     BosMdSetBgMap(work, id);
-    work->bgOffsetX = gMdFrameDefs[id].bgOffsetX;
-    work->bgOffsetY = gMdFrameDefs[id].bgOffsetY;
+    work->bgOffsetX = sMdFrameDefs[id].bgOffsetX;
+    work->bgOffsetY = sMdFrameDefs[id].bgOffsetY;
 
     for (n = 0; n < 2; n++) {
-        work->gfx[n].sprite = gMdFrameDefs[id].desc[n].sprite;
+        work->gfx[n].sprite = sMdFrameDefs[id].desc[n].sprite;
 
-        if (work->gfx[n].src != gMdFrameDefs[id].desc[n].src && n == 0) {
-            work->gfx[n].src = gMdFrameDefs[id].desc[n].src;
+        if (work->gfx[n].src != sMdFrameDefs[id].desc[n].src && n == 0) {
+            work->gfx[n].src = sMdFrameDefs[id].desc[n].src;
             UpdateSpriteFrameTiles(work->gfx[n].tiles, work->gfx[n].sprite, work->gfx[n].src);
         }
 
-        work->gfx[n].x = gMdFrameDefs[id].desc[n].x;
-        work->gfx[n].y = gMdFrameDefs[id].desc[n].y;
-        work->gfx[n].z = gMdFrameDefs[id].desc[n].z;
+        work->gfx[n].x = sMdFrameDefs[id].desc[n].x;
+        work->gfx[n].y = sMdFrameDefs[id].desc[n].y;
+        work->gfx[n].z = sMdFrameDefs[id].desc[n].z;
     }
 }
 
@@ -3204,7 +3204,7 @@ void MdAnimStart(MdWork* work, s16 id) {
 
     a = &work->anim;
     a->animId = id;
-    base = gMdAnimDefs;
+    base = sMdAnimDefs;
     d = base + id;
     f = d->frames;
     a->frames = f;
@@ -3528,7 +3528,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                             }
                         }
 
-                        TaskCreate(&work->tasks, &gTaskDescBosMdFire, &a);
+                        TaskCreate(&work->tasks, &sTaskDescBosMdFire, &a);
                         MdAnimStart(work, 4);
                         work->step = 2;
                     }
@@ -3718,7 +3718,7 @@ void BosMdEndHurt(MdWork* work) {
 void task_bos_md_0(MdWork* work, void* arg) {
     s16 i;
 
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMdMap, (void*)&gMdMapData);
+    TaskCreate(&gBtlWork->taskPools[1], &sTaskDescBosMdMap, (void*)&sMdMapData);
     gBtlWork->flags &= 0xFFFFFFFFFFEFFFFF;
     work->state = 0;
     work->nextState = 0;
@@ -3750,7 +3750,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
     SetBattleActorPosition(0x7800, gBtlWork->bossY, 0);
 
     for (i = 0; i < 1; i++) {
-        InitEnemyBtlObj(&work->sub[i], &gBosMdEmyKind, gBtlWork->bossX,
+        InitEnemyBtlObj(&work->sub[i], &sBosMdEmyKind, gBtlWork->bossX,
                       gBtlWork->bossY, gBtlWork->bossZ);
 #ifdef VERSION_EU
         ColliderInit(&work->sub[i].collider, 8, 16, 24);
@@ -3814,7 +3814,7 @@ s32 task_bos_md_1(MdWork* work) {
     if (ConsumeGimmickFlag(0) != 0) {
         args[0] = &work->tasks3;
         args[1] = &work->signals;
-        TaskCreate(&work->tasks2, &gTaskDescBosMdDai, args);
+        TaskCreate(&work->tasks2, &sTaskDescBosMdDai, args);
     }
 
     MdAnimUpdate(work);
@@ -3825,13 +3825,13 @@ s32 task_bos_md_1(MdWork* work) {
 
     for (i = 0; i < 1; i++) {
         work->sub[i].x = gBtlWork->bossX
-            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].x * 256;
         work->sub[i].y = gBtlWork->bossY
-            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].y * 256;
         work->sub[i].z = gBtlWork->bossZ
-            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].z * 256;
         ColliderSetPosition(&work->sub[i].collider, work->sub[i].x, work->sub[i].y,
                       work->sub[i].z);
@@ -4120,7 +4120,7 @@ void BosMdFirePlace(MdFireWork* work) {
     case 0:
     case 1:
     case 2:
-        p = gMdFireDefs[work->pattern].points + work->index;
+        p = sMdFireDefs[work->pattern].points + work->index;
         work->x = p->x * 256;
         work->y = p->y * 256;
         work->timer = p->delay;
@@ -4166,7 +4166,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->index = arg->index;
     work->flags = arg->flags;
     BosMdFirePlace(work);
-    InitEnemyBtlObj(&work->sub, &gBosMdFireEmyKind, work->x, work->y, work->z);
+    InitEnemyBtlObj(&work->sub, &sBosMdFireEmyKind, work->x, work->y, work->z);
     ColliderInit(&work->sub.collider, 3, 16, 16);
     ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
@@ -4185,14 +4185,14 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
 
     if (arg->pool != 0) {
         if (work->pattern <= 2) {
-            n = gMdFireDefs[work->pattern].count;
+            n = sMdFireDefs[work->pattern].count;
         } else {
             n = 6;
         }
 
         for (i = 1; i < n; i++) {
             a.index = i;
-            TaskCreate(arg->pool, &gTaskDescBosMdFire, &a);
+            TaskCreate(arg->pool, &sTaskDescBosMdFire, &a);
         }
     }
 }
@@ -4333,7 +4333,7 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             n = GetRandom() % 3 + 3;
 
             for (i = 0; i < n; i++) {
-                TaskCreate(work->pool, &gTaskDescBosMdHahen, args);
+                TaskCreate(work->pool, &sTaskDescBosMdHahen, args);
             }
 
             work->level--;
@@ -4460,11 +4460,11 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
     void* src;
     s32 size;
 
-    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
         src = gUnk_09A3CDDC;
         size = 0x40;
     } else {
-        src = gWorldselectWorldDefs[model].palette;
+        src = sWorldselectWorldDefs[model].palette;
         size = 0x20;
     }
 
@@ -4474,20 +4474,20 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
 void WorldselectLoadSlotTiles(s16 model, s16 slot) {
     void* src;
 
-    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
         src = gUnk_099EDE7C;
     } else {
-        src = gWorldselectWorldDefs[model].tiles;
+        src = sWorldselectWorldDefs[model].tiles;
     }
 
     gWorldselectSlots[slot].tiles = LoadObjTiles(src, 0x1000);
 }
 
 s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
-    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
         gWorldselectSlots[slot].gfx = gUnk_099A8914;
     } else {
-        gWorldselectSlots[slot].gfx = gWorldselectWorldDefs[model].gfx;
+        gWorldselectSlots[slot].gfx = sWorldselectWorldDefs[model].gfx;
     }
 }
 
@@ -4510,10 +4510,10 @@ void WorldselectDrawName(s16 model, s16 n) {
 
     if (n > 0) {
 #ifdef VERSION_EU
-        src = ((u8**)gWorldselectWorldDefs[model].nameTiles)[gLanguage];
-        src += gWorldselectWorldDefs[model].nameTilesOffset;
+        src = ((u8**)sWorldselectWorldDefs[model].nameTiles)[gLanguage];
+        src += sWorldselectWorldDefs[model].nameTilesOffset;
 #else
-        src = gWorldselectWorldDefs[model].nameTiles;
+        src = sWorldselectWorldDefs[model].nameTiles;
 #endif
         dma[0] = (vu32)src;
         dst = (u8*)gWorldselectNameBuffer + (9 - n) * 32;
@@ -4807,7 +4807,7 @@ void WorldselectDraw(void) {
     if (gWorldselectStep < 2 || gWorldselectStep > 4) {
         DrawSprite(gWorldselectTitleX >> 8, 0,
 #ifdef VERSION_EU
-                      gWorldselectTitleGfx[gLanguage],
+                      sWorldselectTitleGfx[gLanguage],
 #else
                       gUnk_0999CB90,
 #endif
@@ -4930,7 +4930,7 @@ void WorldselectCyclePalette(void) {
             gWorldselectPaletteFrame = 0;
         }
 
-        LoadPalette(gWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)0x05000040, 32);
+        LoadPalette(sWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)0x05000040, 32);
     }
 }
 
@@ -4956,7 +4956,7 @@ void mode_worldselect_0(void) {
     j = 0;
 
     for (i = 0; i <= 12; i++) {
-        if (gGameState.availableWorlds & gWorldselectWorldDefs[i].worldBit) {
+        if (gGameState.availableWorlds & sWorldselectWorldDefs[i].worldBit) {
             gWorldselectWorlds[j] = i;
             j++;
         }
@@ -5018,7 +5018,7 @@ void mode_worldselect_0(void) {
     gWorldselectCardTiles[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
     gWorldselectOverlayPalette = LoadObjPalette(gUnk_09A3CC7C, 32);
 #ifdef VERSION_EU
-    gWorldselectTitleTiles = LoadObjTiles(gWorldselectTitleTileData[gLanguage], gWorldselectTitleTileSizes.sizes[gLanguage]);
+    gWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
 #else
     gWorldselectTitleTiles = LoadObjTiles(gUnk_0999CBB6, 0x380);
 #endif
@@ -5067,7 +5067,7 @@ void mode_worldselect_1(void) {
 
             LoadBgMap(0, gUnk_09A315DC, 0x500);
 #ifdef VERSION_EU
-            LoadBgMap(1, gWorldselectBg1Maps[gLanguage], 0x500);
+            LoadBgMap(1, sWorldselectBg1Maps[gLanguage], 0x500);
 #else
             LoadBgMap(1, gUnk_09A31FDC, 0x500);
 #endif
@@ -5143,16 +5143,16 @@ void mode_worldselect_1(void) {
         gWorldselectTimer--;
 
         if (gWorldselectTimer <= 0) {
-            a = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].world;
+            a = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].world;
 
             if ((gGameState.flags & 8) == 0) {
-                b = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].eventId;
+                b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].eventId;
             } else {
-                b = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].rikuEventId;
+                b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].rikuEventId;
             }
 
             gGameState.availableWorlds &=
-                ~gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].worldBit;
+                ~sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].worldBit;
             SetFloorWorld(a);
 
             if (b >= 0) {

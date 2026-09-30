@@ -21,7 +21,6 @@ typedef struct DummyEntry {
     u16 action;
 } DummyEntry;
 
-extern const DummyEntry gDummyEntries[];
 
 void mode_dummy_0(u32 arg);
 void DummyUpdateExit(void);

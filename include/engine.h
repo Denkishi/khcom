@@ -86,7 +86,6 @@ typedef struct Dma3Queue {
     u32 transferredBytes;
 } Dma3Queue;
 
-extern vu16* gBgControl[];
 
 typedef struct SpriteWork SpriteWork;
 extern SpriteWork* gSpriteWork;

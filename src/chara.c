@@ -56,7 +56,7 @@ u16 gSioConnectId EWRAM_COMMON(4);
 u16 gSioRelayKeysA EWRAM_COMMON(4);
 u16 gUnk_0203C3B8 EWRAM_COMMON(4);
 
-u8 gMaskFadeTileMasks[1440] = {
+static u8 sMaskFadeTileMasks[1440] = {
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0x0F, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0xFF, 0xFF,
@@ -177,7 +177,7 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
             CpuFastSet(work->tiles + i * 32, work->tileBuffer, 8);
 
             for (j = 0; j <= 31; j++) {
-                work->maskedTile[j] = work->tileBuffer[j] & gMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
+                work->maskedTile[j] = work->tileBuffer[j] & sMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
             }
             CpuFastSet(work->maskedTile, work->tiles + i * 32, 8);
         }

@@ -29,7 +29,7 @@
 #endif
 
 #ifdef VERSION_EU
-void* gUnkEu_09F84F5C[5] = {
+static void* sUnkEu_09F84F5C[5] = {
     gUnkEu_09A8DAA0,
     gUnk_09A3B25C,
     gUnkEu_09A91920,
@@ -37,7 +37,7 @@ void* gUnkEu_09F84F5C[5] = {
     gUnk_09A3B75C,
 };
 
-u16* gUnkEu_09F84F70[5] = {
+static u16* sUnkEu_09F84F70[5] = {
     (u16*)gMoogleAssetEu_09A8F3A0,
     (u16*)gMoogleAssetEu_09A8F3A0,
     (u16*)gMoogleAssetEu_09A92E20,
@@ -45,7 +45,7 @@ u16* gUnkEu_09F84F70[5] = {
     (u16*)gMoogleAssetEu_09A91E20,
 };
 
-u16* gUnkEu_09F84F84[5] = {
+static u16* sUnkEu_09F84F84[5] = {
     (u16*)gMoogleAssetEu_09A8FBA0,
     (u16*)gMoogleAssetEu_09A8FBA0,
     (u16*)gMoogleAssetEu_09A94620,
@@ -54,7 +54,7 @@ u16* gUnkEu_09F84F84[5] = {
 };
 #endif
 
-const MooglePackMenuEntry gMooglePackMenuEntries[4] = {
+static const MooglePackMenuEntry sMooglePackMenuEntries[4] = {
 #if defined(VERSION_US)
     {-1, 2, 5, 1, 67, 16, gMoogleAssetUs_09A387DC, 1280, 5, 3, 40, 24, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 0, 0}, {(u16*)gMoogleAssetUs_09A39BDC, 0, 16}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 0}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 16}}},
     {-1, 3, 0, -1, 163, 16, gMoogleAssetUs_09A38CDC, 1280, 17, 3, 136, 24, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 12, 0}, {(u16*)gMoogleAssetUs_09A39BDC, 12, 16}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 0}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 16}}},
@@ -66,14 +66,14 @@ const MooglePackMenuEntry gMooglePackMenuEntries[4] = {
     {0, -1, 5, 3, 67, 80, gMoogleAssetJp_099EDC64, 1280, 5, 11, 40, 88, 0, {{(u16*)gMoogleAssetJp_099EE664, 0, 8}, {(u16*)gMoogleAssetJp_099EE664, 0, 24}, {(u16*)gMoogleAssetJp_099EEE64, 0, 8}, {(u16*)gMoogleAssetJp_099EEE64, 0, 24}}},
     {1, -1, 2, -1, 163, 80, gMoogleAssetJp_099EE164, 1280, 17, 11, 136, 88, 0, {{(u16*)gMoogleAssetJp_099EE664, 12, 8}, {(u16*)gMoogleAssetJp_099EE664, 12, 24}, {(u16*)gMoogleAssetJp_099EEE64, 12, 8}, {(u16*)gMoogleAssetJp_099EEE64, 12, 24}}},
 #elif defined(VERSION_EU)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetEu_09A8DFA0, 1280, 5, 3, 40, 24, 0, {{gUnkEu_09F84F70, 0, 0}, {gUnkEu_09F84F70, 0, 16}, {gUnkEu_09F84F84, 0, 0}, {gUnkEu_09F84F84, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetEu_09A8E4A0, 1280, 17, 3, 136, 24, 0, {{gUnkEu_09F84F70, 12, 0}, {gUnkEu_09F84F70, 12, 16}, {gUnkEu_09F84F84, 12, 0}, {gUnkEu_09F84F84, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetEu_09A8E9A0, 1280, 5, 11, 40, 88, 0, {{gUnkEu_09F84F70, 0, 8}, {gUnkEu_09F84F70, 0, 24}, {gUnkEu_09F84F84, 0, 8}, {gUnkEu_09F84F84, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetEu_09A8EEA0, 1280, 17, 11, 136, 88, 0, {{gUnkEu_09F84F70, 12, 8}, {gUnkEu_09F84F70, 12, 24}, {gUnkEu_09F84F84, 12, 8}, {gUnkEu_09F84F84, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetEu_09A8DFA0, 1280, 5, 3, 40, 24, 0, {{sUnkEu_09F84F70, 0, 0}, {sUnkEu_09F84F70, 0, 16}, {sUnkEu_09F84F84, 0, 0}, {sUnkEu_09F84F84, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetEu_09A8E4A0, 1280, 17, 3, 136, 24, 0, {{sUnkEu_09F84F70, 12, 0}, {sUnkEu_09F84F70, 12, 16}, {sUnkEu_09F84F84, 12, 0}, {sUnkEu_09F84F84, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetEu_09A8E9A0, 1280, 5, 11, 40, 88, 0, {{sUnkEu_09F84F70, 0, 8}, {sUnkEu_09F84F70, 0, 24}, {sUnkEu_09F84F84, 0, 8}, {sUnkEu_09F84F84, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetEu_09A8EEA0, 1280, 17, 11, 136, 88, 0, {{sUnkEu_09F84F70, 12, 8}, {sUnkEu_09F84F70, 12, 24}, {sUnkEu_09F84F84, 12, 8}, {sUnkEu_09F84F84, 12, 24}}},
 #endif
 };
 
-const MooglePackSpriteDef gMooglePackSpriteDefs[4] = {
+static const MooglePackSpriteDef sMooglePackSpriteDefs[4] = {
 #if defined(VERSION_US)
     {gMoogleAssetUs_09A3DA9C, 32, {0, 0}, gMoogleAssetUs_099A3EC4, 800, {0, 0}, gMoogleAssetUs_099A3EA4, 10, 12},
     {gMoogleAssetUs_09A3DABC, 32, {0, 0}, gMoogleAssetUs_099A4204, 608, {0, 0}, gMoogleAssetUs_099A41E4, 12, 13},
@@ -92,7 +92,7 @@ const MooglePackSpriteDef gMooglePackSpriteDefs[4] = {
 #endif
 };
 
-const u16 gMoogleCardValueWeights[10] = {
+static const u16 sMoogleCardValueWeights[10] = {
     5,
     15,
     15,
@@ -105,7 +105,7 @@ const u16 gMoogleCardValueWeights[10] = {
     4,
 };
 
-const MooglePackCardDef gMoogleAttackPackCards[17] = {
+static const MooglePackCardDef sMoogleAttackPackCards[17] = {
     {0, {0, 0}, 0, {0, 0, 0, 0}},
     {CARD_ID(CARD_THREE_WISHES, 0), {0, 0}, 1, {20, 14, 4, 4}},
     {CARD_ID(CARD_PUMPKINHEAD, 0), {0, 0}, 3, {20, 14, 4, 4}},
@@ -125,7 +125,7 @@ const MooglePackCardDef gMoogleAttackPackCards[17] = {
     {CARD_ID(CARD_ULTIMA_WEAPON, 0), {0, 0}, 14, {0, 0, 0, 4}},
 };
 
-const MooglePackCardDef gMoogleMagicPackCards[14] = {
+static const MooglePackCardDef sMoogleMagicPackCards[14] = {
     {CARD_ID(CARD_FIRE, 0), {0, 0}, 17, {15, 10, 5, 5}},
     {CARD_ID(CARD_BLIZZARD, 0), {0, 0}, 18, {15, 10, 5, 5}},
     {CARD_ID(CARD_THUNDER, 0), {0, 0}, 19, {15, 10, 5, 5}},
@@ -142,7 +142,7 @@ const MooglePackCardDef gMoogleMagicPackCards[14] = {
     {CARD_ID(CARD_CLOUD, 0), {0, 0}, 30, {5, 5, 10, 15}},
 };
 
-const MooglePackCardDef gMoogleItemPackCards[7] = {
+static const MooglePackCardDef sMoogleItemPackCards[7] = {
     {CARD_ID(CARD_POTION, 0), {0, 0}, 31, {50, 40, 0, 0}},
     {CARD_ID(CARD_ETHER, 0), {0, 0}, 34, {50, 40, 20, 15}},
     {CARD_ID(CARD_HI_POTION, 0), {0, 0}, 32, {0, 10, 25, 20}},
@@ -152,13 +152,13 @@ const MooglePackCardDef gMoogleItemPackCards[7] = {
     {CARD_ID(CARD_MEGALIXIR, 0), {0, 0}, 37, {0, 0, 0, 10}},
 };
 
-const MooglePackCardTable gMooglePackCardTables[3] = {
-    {gMoogleAttackPackCards, 17, {0, 0}},
-    {gMoogleMagicPackCards, 14, {0, 0}},
-    {gMoogleItemPackCards, 7, {0, 0}},
+static const MooglePackCardTable sMooglePackCardTables[3] = {
+    {sMoogleAttackPackCards, 17, {0, 0}},
+    {sMoogleMagicPackCards, 14, {0, 0}},
+    {sMoogleItemPackCards, 7, {0, 0}},
 };
 
-const s16 gMooglePackTiers[13][4][4] = {
+static const s16 sMooglePackTiers[13][4][4] = {
     {{0, 0, -1, -1}, {0, 0, -1, -1}, {0, 0, -1, -1}, {0, 0, -1, -1}},
     {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
     {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
@@ -174,7 +174,7 @@ const s16 gMooglePackTiers[13][4][4] = {
     {{0, 1, 2, 3}, {0, 1, 2, 3}, {0, 1, 2, 3}, {0, 1, 2, 3}},
 };
 
-const s16 gMooglePackPrices[4][4] = {
+static const s16 sMooglePackPrices[4][4] = {
     {100, 200, 300, 500},
     {200, 250, 270, 300},
     {150, 200, 300, 350},
@@ -341,7 +341,7 @@ u8 BuildMooglePackList(s16 a) {
         m = 0;
 
         for (k = 0; k < 4; k++) {
-            v = gMooglePackTiers[a][i][k];
+            v = sMooglePackTiers[a][i][k];
 
             if (IsMooglePackBought(gMapFloorState[6], i, k) == 0) {
                 if (v >= 0) {
@@ -400,12 +400,12 @@ void DrawMoogleShopPacks(s16 a) {
 
     for (j = 0; j < 4; j++) {
         if (sMoogleShopPacks[a][j][0] >= 0) {
-            LoadDecimalDigitTiles(gMooglePackPrices[sMoogleShopRowCategory[a]][sMoogleShopPacks[a][j][1]], gUnk_09A18EBC,
+            LoadDecimalDigitTiles(sMooglePackPrices[sMoogleShopRowCategory[a]][sMoogleShopPacks[a][j][1]], gUnk_09A18EBC,
                 (u8*)GetBgCharBase(2) + (j * 0xC0 + 0xC0), 0x40, 3);
-            MoogleShopCopyTilemapRect(12, 8, LANGSTR(gMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].tilemap),
-                gMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcX,
-                gMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcY, sMoogleShopTilemap,
-                gMooglePackMenuEntries[j].tilemapX, gMooglePackMenuEntries[j].tilemapY);
+            MoogleShopCopyTilemapRect(12, 8, LANGSTR(sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].tilemap),
+                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcX,
+                sMooglePackMenuEntries[j].packTilemaps[sMoogleShopRowCategory[a]].srcY, sMoogleShopTilemap,
+                sMooglePackMenuEntries[j].tilemapX, sMooglePackMenuEntries[j].tilemapY);
         }
     }
 
@@ -832,7 +832,7 @@ void DrawMoogleShopCategoryLabels(s16 a) {
 }
 
 void LoadMooglePackSelectionTilemap(s16 a) {
-    LoadBgMap(1, gMooglePackMenuEntries[a].selectionTilemap, gMooglePackMenuEntries[a].selectionTilemapSize);
+    LoadBgMap(1, sMooglePackMenuEntries[a].selectionTilemap, sMooglePackMenuEntries[a].selectionTilemapSize);
 }
 
 void MoogleShopHandleSoldOutInput(void) {
@@ -925,7 +925,7 @@ u16 RollMoogleCardValue(void) {
 
     r = GetRandom() % 100;
     i = 0;
-    acc = gMoogleCardValueWeights[0];
+    acc = sMoogleCardValueWeights[0];
 
     if (r >= acc) {
         do {
@@ -935,7 +935,7 @@ u16 RollMoogleCardValue(void) {
                 break;
             }
 
-            acc += gMoogleCardValueWeights[i];
+            acc += sMoogleCardValueWeights[i];
         } while (r >= acc);
     }
 
@@ -971,15 +971,15 @@ void RollMooglePackCards(s16 a, s16 b) {
     cnt = 0;
 
     for (j = lo; j < hi; j++) {
-        cnt += gMooglePackCardTables[j].count;
+        cnt += sMooglePackCardTables[j].count;
     }
 
     list = EwramAlloc(cnt * sizeof(*list));
     k = 0;
 
     for (j = lo; j < hi; j++) {
-        e = gMooglePackCardTables[j].cards;
-        n = gMooglePackCardTables[j].count;
+        e = sMooglePackCardTables[j].cards;
+        n = sMooglePackCardTables[j].count;
 
         for (m = 0; m < n; m++) {
             if (e[m].weights[b] != 0) {
@@ -1045,7 +1045,7 @@ void MoogleShopHandlePackInput(void) {
 
     if (keys & A_BUTTON) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0] >= 0 &&
-            SpendMooglePoints(gMooglePackPrices[sMoogleShopRowCategory[sMoogleShopRowCursor]][sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]]) != 0) {
+            SpendMooglePoints(sMooglePackPrices[sMoogleShopRowCategory[sMoogleShopRowCursor]][sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]]) != 0) {
             RollMooglePackCards(sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]);
             InitMooglePackOpening(sMoogleShopPackCursor % 2 * 96 + 72, sMoogleShopPackCursor / 2 * 64 + 48);
             FadeSetPaletteExcluded(13, 1);
@@ -1066,13 +1066,13 @@ void MoogleShopHandlePackInput(void) {
         sMoogleShopBackToTop = 0;
         sMoogleShopState = 5;
     } else if (keys & DPAD_UP) {
-        sMoogleShopPackCursor = gMooglePackMenuEntries[sMoogleShopPackCursor].upEntry;
+        sMoogleShopPackCursor = sMooglePackMenuEntries[sMoogleShopPackCursor].upEntry;
     } else if (keys & DPAD_DOWN) {
-        sMoogleShopPackCursor = gMooglePackMenuEntries[sMoogleShopPackCursor].downEntry;
+        sMoogleShopPackCursor = sMooglePackMenuEntries[sMoogleShopPackCursor].downEntry;
     } else if (keys & DPAD_LEFT) {
-        sMoogleShopPackCursor = gMooglePackMenuEntries[sMoogleShopPackCursor].leftEntry;
+        sMoogleShopPackCursor = sMooglePackMenuEntries[sMoogleShopPackCursor].leftEntry;
     } else if (keys & DPAD_RIGHT) {
-        sMoogleShopPackCursor = gMooglePackMenuEntries[sMoogleShopPackCursor].rightEntry;
+        sMoogleShopPackCursor = sMooglePackMenuEntries[sMoogleShopPackCursor].rightEntry;
     }
 
     if (sMoogleShopPackCursor == -1) {
@@ -1105,8 +1105,8 @@ void MoogleShopDraw(void) {
         }
         break;
     case 3:
-        ApproachValueHalf(&sMoogleShopCursorX, gMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
-        ApproachValueHalf(&sMoogleShopCursorY, gMooglePackMenuEntries[sMoogleShopPackCursor].cursorY << 8);
+        ApproachValueHalf(&sMoogleShopCursorX, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
+        ApproachValueHalf(&sMoogleShopCursorY, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorY << 8);
         DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, 0x400, 0x3E8);
         break;
     case 4:
@@ -1117,7 +1117,7 @@ void MoogleShopDraw(void) {
     for (i = 0; i < 4; i++) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][i][0] >= 0) {
             v = sMoogleShopPacks[sMoogleShopRowCursor][i][1];
-            DrawSprite(gMooglePackMenuEntries[i].spriteX + gMooglePackSpriteDefs[v].xOffset, gMooglePackMenuEntries[i].spriteY + gMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], 0, 0x400, 0x3F2);
+            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], 0, 0x400, 0x3F2);
         }
     }
 }
@@ -1149,7 +1149,7 @@ void mode_ms_shop_0(void) {
     LoadBgTiles(0, gUnk_09A1251C, 0x6860);
     LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A18D7C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 #ifdef VERSION_EU
-    LoadBgMap(0, gUnkEu_09F84F5C[gLanguage], size);
+    LoadBgMap(0, sUnkEu_09F84F5C[gLanguage], size);
 #else
     LoadBgMap(0, gUnk_09A382DC, size);
 #endif
@@ -1167,9 +1167,9 @@ void mode_ms_shop_0(void) {
     AnimStart(&sMoogleShopCursorAnim, 0, 1);
 
     for (i = 0; i < 4; i++) {
-        sMooglePackPalettes[i] = LoadObjPalette(gMooglePackSpriteDefs[i].palette, gMooglePackSpriteDefs[i].paletteSize);
-        sMooglePackTiles[i] = LoadObjTiles(gMooglePackSpriteDefs[i].tiles, gMooglePackSpriteDefs[i].tilesSize);
-        sMooglePackSprites[i] = gMooglePackSpriteDefs[i].sprite;
+        sMooglePackPalettes[i] = LoadObjPalette(sMooglePackSpriteDefs[i].palette, sMooglePackSpriteDefs[i].paletteSize);
+        sMooglePackTiles[i] = LoadObjTiles(sMooglePackSpriteDefs[i].tiles, sMooglePackSpriteDefs[i].tilesSize);
+        sMooglePackSprites[i] = sMooglePackSpriteDefs[i].sprite;
     }
 
     EnableBg(0);
@@ -1208,7 +1208,7 @@ void mode_ms_shop_1(void) {
             SetMooglePackBought(gMapFloorState[6], sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
             sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
 #ifdef VERSION_EU
-            LoadBgMap(0, gUnkEu_09F84F5C[gLanguage], 0x500);
+            LoadBgMap(0, sUnkEu_09F84F5C[gLanguage], 0x500);
 #else
             LoadBgMap(0, gUnk_09A382DC, 0x500);
 #endif

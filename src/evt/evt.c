@@ -5,7 +5,7 @@
 #include "sprites_btl.h"
 #include "evt_tasks.h"
 
-TaskDesc gTaskDescEvtObj = {
+static TaskDesc sTaskDescEvtObj = {
     "task_evt_obj",
     (TaskInitFunc)task_evt_obj_0,
     (TaskUpdateFunc)task_evt_obj_1,
@@ -46,7 +46,7 @@ void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, 
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;
-    TaskCreate(pool, &gTaskDescEvtObj, &param);
+    TaskCreate(pool, &sTaskDescEvtObj, &param);
 }
 
 void EvtObjSetDrawFlags(EvtObj* obj, u16 a) {

@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "fld_tasks.h"
 
-const AnimDef gFldSoraAnimDefs[15][5] = {
+static const AnimDef sFldSoraAnimDefs[15][5] = {
     { { gSor1bb00Frames, gSor1bb00Anims, gSor1bb00Tiles, 0, { 0, 0, 0 } }, { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 0, { 0, 0, 0 } }, { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0, { 0, 0, 0 } }, { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 0, { 0, 0, 0 } }, { gSor1bl00Frames, gSor1bl00Anims, gSor1bl00Tiles, 0, { 0, 0, 0 } } },
     { { gSor1bb01Frames, gSor1bb01Anims, gSor1bb01Tiles, 0, { 0, 0, 0 } }, { gSor1ff01Frames, gSor1ff01Anims, gSor1ff01Tiles, 0, { 0, 0, 0 } }, { gSor1fl01Frames, gSor1fl01Anims, gSor1fl01Tiles, 0, { 0, 0, 0 } }, { gSor1ll01Frames, gSor1ll01Anims, gSor1ll01Tiles, 0, { 0, 0, 0 } }, { gSor1bl01Frames, gSor1bl01Anims, gSor1bl01Tiles, 0, { 0, 0, 0 } } },
     { { gSor1bb02Frames, gSor1bb02Anims, gSor1bb02Tiles, 0, { 0, 0, 0 } }, { gSor1ff02Frames, gSor1ff02Anims, gSor1ff02Tiles, 0, { 0, 0, 0 } }, { gSor1fl02Frames, gSor1fl02Anims, gSor1fl02Tiles, 0, { 0, 0, 0 } }, { gSor1ll02Frames, gSor1ll02Anims, gSor1ll02Tiles, 0, { 0, 0, 0 } }, { gSor1bl02Frames, gSor1bl02Anims, gSor1bl02Tiles, 0, { 0, 0, 0 } } },
@@ -32,7 +32,7 @@ const AnimDef gFldSoraAnimDefs[15][5] = {
     { { gSor1bb61Frames, gSor1bb61Anims, gSor1bb61Tiles, 0, { 0, 0, 0 } }, { gSor1ff61Frames, gSor1ff61Anims, gSor1ff61Tiles, 0, { 0, 0, 0 } }, { gSor1fl61Frames, gSor1fl61Anims, gSor1fl61Tiles, 0, { 0, 0, 0 } }, { gSor1ll61Frames, gSor1ll61Anims, gSor1ll61Tiles, 0, { 0, 0, 0 } }, { gSor1bl61Frames, gSor1bl61Anims, gSor1bl61Tiles, 0, { 0, 0, 0 } } },
 };
 
-const u16 gFldSoraSounds[8][8] = {
+static const u16 sFldSoraSounds[8][8] = {
     { 122, 123, 124, 125, 122, 123, 135, 0 },
     { 122, 123, 124, 125, 122, 123, 135, 0 },
     { 126, 127, 128, 129, 126, 127, 136, 0 },
@@ -52,7 +52,7 @@ TaskDesc gTaskDescFldSora = {
     sizeof(FldWork),
 };
 
-const AnimDef gFldRikuAnimDefs[15][5] = {
+static const AnimDef sFldRikuAnimDefs[15][5] = {
     { { gUnk_09EDF4C0, gUnk_09EDF4C4, gUnk_08933A34, 0, { 0, 0, 0 } }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0, { 0, 0, 0 } }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0, { 0, 0, 0 } }, { gUnk_09EDF4C8, gUnk_09EDF4CC, gUnk_08933D94, 0, { 0, 0, 0 } }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0, { 0, 0, 0 } } },
     { { gUnk_09EDF4F4, gUnk_09EDF514, gUnk_08935BC2, 0, { 0, 0, 0 } }, { gUnk_09EDF4D0, gUnk_09EDF4F0, gUnk_0893416A, 0, { 0, 0, 0 } }, { gRik1fl01Frames, gRik1fl01Anims, gRik1fl01Tiles, 0, { 0, 0, 0 } }, { gRik1ll01Frames, gRik1ll01Anims, gRik1ll01Tiles, 0, { 0, 0, 0 } }, { gRik1bl01Frames, gRik1bl01Anims, gRik1bl01Tiles, 0, { 0, 0, 0 } } },
     { { gRik1bb02Frames, gRik1bb02Anims, gRik1bb02Tiles, 0, { 0, 0, 0 } }, { gRik1ff02Frames, gRik1ff02Anims, gRik1ff02Tiles, 0, { 0, 0, 0 } }, { gRik1fl02Frames, gRik1fl02Anims, gRik1fl02Tiles, 0, { 0, 0, 0 } }, { gRik1ll02Frames, gRik1ll02Anims, gRik1ll02Tiles, 0, { 0, 0, 0 } }, { gRik1bl02Frames, gRik1bl02Anims, gRik1bl02Tiles, 0, { 0, 0, 0 } } },
@@ -70,7 +70,7 @@ const AnimDef gFldRikuAnimDefs[15][5] = {
     { { gRikuBb17Frames, gRikuBb17Anims, gRikuBb17Tiles, 0, { 0, 0, 0 } }, { gRikuFf17Frames, gRikuFf17Anims, gRikuFf17Tiles, 0, { 0, 0, 0 } }, { gRikuFl17Frames, gRikuFl17Anims, gRikuFl17Tiles, 0, { 0, 0, 0 } }, { gRikuLl17Frames, gRikuLl17Anims, gRikuLl17Tiles, 0, { 0, 0, 0 } }, { gRikuBl17Frames, gRikuBl17Anims, gRikuBl17Tiles, 0, { 0, 0, 0 } } },
 };
 
-const u16 gFldRikuSounds[8][8] = {
+static const u16 sFldRikuSounds[8][8] = {
     { 122, 123, 124, 125, 122, 123, 135, 0 },
     { 122, 123, 124, 125, 122, 123, 135, 0 },
     { 126, 127, 128, 129, 126, 127, 136, 0 },
@@ -289,7 +289,7 @@ void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
     }
     work->animAction = a;
 
-    e = &gFldSoraAnimDefs[a][idx];
+    e = &sFldSoraAnimDefs[a][idx];
     AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
 }
@@ -339,30 +339,30 @@ void task_fld_sora_0(FldWork* work) {
 
     switch (gGameState.world) {
     case WORLD_NEVER_LAND:
-        work->sounds = gFldSoraSounds[1];
+        work->sounds = sFldSoraSounds[1];
         break;
     case WORLD_ATLANTICA:
-        work->sounds = gFldSoraSounds[2];
+        work->sounds = sFldSoraSounds[2];
         break;
     case WORLD_MONSTRO:
-        work->sounds = gFldSoraSounds[3];
+        work->sounds = sFldSoraSounds[3];
         break;
     case WORLD_WONDERLAND:
-        work->sounds = gFldSoraSounds[4];
+        work->sounds = sFldSoraSounds[4];
         break;
     case WORLD_HALLOWEEN_TOWN:
-        work->sounds = gFldSoraSounds[5];
+        work->sounds = sFldSoraSounds[5];
         break;
     case 0:
     case WORLD_OLYMPUS_COLISEUM:
     case WORLD_CASTLE_OBLIVION:
-        work->sounds = gFldSoraSounds[6];
+        work->sounds = sFldSoraSounds[6];
         break;
     case WORLD_DESTINY_ISLANDS:
-        work->sounds = gFldSoraSounds[7];
+        work->sounds = sFldSoraSounds[7];
         break;
     default:
-        work->sounds = gFldSoraSounds[0];
+        work->sounds = sFldSoraSounds[0];
         break;
     }
 
@@ -1988,7 +1988,7 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags) {
     }
 
     work->animAction = index;
-    def = &gFldRikuAnimDefs[index][dir];
+    def = &sFldRikuAnimDefs[index][dir];
     AnimChangeWithTables(&work->anim, def->animId, flags, def->anims, def->gfxTable);
     SetObjTileSource(work->tiles, def->tiles);
 }
@@ -2038,30 +2038,30 @@ void task_fld_riku_0(FldWork* work) {
 
     switch (gGameState.world) {
     case WORLD_NEVER_LAND:
-        work->sounds = gFldRikuSounds[1];
+        work->sounds = sFldRikuSounds[1];
         break;
     case WORLD_ATLANTICA:
-        work->sounds = gFldRikuSounds[2];
+        work->sounds = sFldRikuSounds[2];
         break;
     case WORLD_MONSTRO:
-        work->sounds = gFldRikuSounds[3];
+        work->sounds = sFldRikuSounds[3];
         break;
     case WORLD_WONDERLAND:
-        work->sounds = gFldRikuSounds[4];
+        work->sounds = sFldRikuSounds[4];
         break;
     case WORLD_HALLOWEEN_TOWN:
-        work->sounds = gFldRikuSounds[5];
+        work->sounds = sFldRikuSounds[5];
         break;
     case 0:
     case WORLD_OLYMPUS_COLISEUM:
     case WORLD_CASTLE_OBLIVION:
-        work->sounds = gFldRikuSounds[6];
+        work->sounds = sFldRikuSounds[6];
         break;
     case WORLD_DESTINY_ISLANDS:
-        work->sounds = gFldRikuSounds[7];
+        work->sounds = sFldRikuSounds[7];
         break;
     default:
-        work->sounds = gFldRikuSounds[0];
+        work->sounds = sFldRikuSounds[0];
         break;
     }
 

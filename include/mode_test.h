@@ -99,7 +99,6 @@ typedef struct FrdPoohArgs {
 } FrdPoohArgs;
 
 extern u8 gPoohPalette[];
-extern const AnimDef gFrdPoohAnimDefsEu[];
 
 #endif
 

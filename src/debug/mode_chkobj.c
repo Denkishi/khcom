@@ -27,7 +27,7 @@
 
 ChkObjWork* gChkObjWork;
 
-ObjDef gChkObjSoraDefs[] = {
+static ObjDef sChkObjSoraDefs[] = {
     { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 2, 0, gSoraPalette, "sor1ff00.aob", "sora.acl", 32, 0 },
     { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 8, 0, gSoraPalette, "sor1fl00.aob", "sora.acl", 32, 0 },
     { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 1, 0, gSoraPalette, "sor1ll00.aob", "sora.acl", 32, 0 },
@@ -93,7 +93,7 @@ ObjDef gChkObjSoraDefs[] = {
     { gSor1ll75Frames, gSor1ll75Anims, gSor1ll75Tiles, 3, 0, gSoraPalette, "sor1ll75.aob", "sora.acl", 32, 0 },
 };
 
-ObjDef gChkObjEnemyDefs[] = {
+static ObjDef sChkObjEnemyDefs[] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 1, 0, gEmy00Palette, "emy_00_l_00.aob", "emy_00.acl", 32, 0 },
     { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 1, 0, gEmy00Palette, "emy_00_l_02.aob", "emy_00.acl", 32, 0 },
     { gEmy00L04Frames, gEmy00L04Anims, gEmy00L04Tiles, 1, 0, gEmy00Palette, "emy_00_l_04.aob", "emy_00.acl", 32, 0 },
@@ -259,7 +259,7 @@ ObjDef gChkObjEnemyDefs[] = {
     { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 1, 0, gTrumpSPalette, "trump_S_10.aob", "trump_S.acl", 32, 0 },
 };
 
-ObjDef gChkObjSummonDefs[] = {
+static ObjDef sChkObjSummonDefs[] = {
     { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 3, 0, gGoofyPalette, "goofy_05.aob", "goofy.acl", 32, 0 },
     { gGoofy14Frames, gGoofy14Anims, gGoofy14Tiles, 1, 0, gGoofyPalette, "goofy_14.aob", "goofy.acl", 32, 0 },
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 2, 0, gGoofyPalette, "goofy_16.aob", "goofy.acl", 32, 0 },
@@ -280,7 +280,7 @@ ObjDef gChkObjSummonDefs[] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 3, 0, gMickeyPalette, "mickey_10.aob", "mickey.acl", 32, 0 },
 };
 
-ObjDef gChkObjHumBossDefs[] = {
+static ObjDef sChkObjHumBossDefs[] = {
     { gRexeusIdlFrames, gRexeusIdlAnims, gRexeusIdlTiles, 1, 0, gRexeusPalette, "rexeus_idl.aob", "rexeus.acl", 32, 0 },
     { gRexeusMovFrames, gRexeusMovAnims, gRexeusMovTiles, 1, 0, gRexeusPalette, "rexeus_mov.aob", "rexeus.acl", 32, 0 },
     { gRexeusDmgFrames, gRexeusDmgAnims, gRexeusDmgTiles, 1, 0, gRexeusPalette, "rexeus_dmg.aob", "rexeus.acl", 32, 0 },
@@ -391,7 +391,7 @@ ObjDef gChkObjHumBossDefs[] = {
     { gHadesFramespreadHiFrames, gHadesFramespreadHiAnims, gHadesFramespreadHiTiles, 3, 0, gBStatesPalette, "hades_framespread_hi.aob", "b_states.acl", 32, 0 },
 };
 
-ObjDef gChkObjEventDefs[] = {
+static ObjDef sChkObjEventDefs[] = {
     { gFEventFrames, gFEventAnims, gFEventTiles, 10, 0, gBStatesPalette, "f_event.aob", "b_states.acl", 32, 0 },
     { gXexionFl00Frames, gXexionFl00Anims, gXexionFl00Tiles, 15, 0, gXexionPalette, "xexion_fl00.aob", "xexion.acl", 32, 0 },
     { gXexionBl00Frames, gXexionBl00Anims, gXexionBl00Tiles, 3, 0, gXexionPalette, "xexion_bl00.aob", "xexion.acl", 32, 0 },
@@ -784,7 +784,7 @@ ObjDef gChkObjEventDefs[] = {
     { gMickey08Frames, gMickey08Anims, gMickey08Tiles, 1, 0, gMickeyPalette, "mickey_08.aob", "mickey.acl", 32, 0 },
 };
 
-ObjDef gChkObjFaceDefs[] = {
+static ObjDef sChkObjFaceDefs[] = {
     { gTalk0000Frames, gTalk0000Anims, gTalk0000Tiles, 4, 0, gTalk0000Palette, "talk_00_00.aob", "talk_00_00.acl", 32, 0 },
     { gTalk0001Frames, gTalk0001Anims, gTalk0001Tiles, 2, 0, gTalk0000Palette, "talk_00_01.aob", "talk_00_00.acl", 32, 0 },
     { gTalk0002Frames, gTalk0002Anims, gTalk0002Tiles, 2, 0, gTalk0000Palette, "talk_00_02.aob", "talk_00_00.acl", 32, 0 },
@@ -955,7 +955,7 @@ ObjDef gChkObjFaceDefs[] = {
     { gTalk6100Frames, gTalk6100Anims, gTalk6100Tiles, 6, 0, gTalk6100Palette, "talk_61_00.aob", "talk_61_00.acl", 32, 0 },
 };
 
-ObjDef gChkObjCardDefs[] = {
+static ObjDef sChkObjCardDefs[] = {
     { gRiCardF0RedFrames, gRiCardF0RedAnims, gRiCardF0RedTiles, 9, 0, gCard00Palette, "ri_card_f0_red.aob", "card_00.acl", 32, 0 },
     { gCardItm01Frames, gCardItm01Anims, gCardItm01Tiles, 1, 0, gCardItm01Palette, "card_itm01.aob", "card_itm01.acl", 32, 0 },
     { gCardItm02Frames, gCardItm02Anims, gCardItm02Tiles, 1, 0, gCardItm02Palette, "card_itm02.aob", "card_itm02.acl", 32, 0 },
@@ -1164,7 +1164,7 @@ ObjDef gChkObjCardDefs[] = {
     { gCardEve02Frames, gCardEve02Anims, gCardEve02Tiles, 1, 0, gCardEve02Palette, "card_eve02.aob", "card_eve02.acl", 32, 0 },
 };
 
-ObjDef gChkObjEtcDefs[] = {
+static ObjDef sChkObjEtcDefs[] = {
     { gKaifukuFrames, gKaifukuAnims, gKaifukuTiles, 1, 0, gKaifukuPalette, "kaifuku.aob", "kaifuku.acl", 32, 0 },
     { gNokogiriFrames, gNokogiriAnims, gNokogiriTiles, 1, 0, gKaifukuPalette, "nokogiri.aob", "kaifuku.acl", 32, 0 },
     { gKnifeFrames, gKnifeAnims, gKnifeTiles, 1, 0, gKnifePalette, "knife.aob", "knife.acl", 32, 0 },
@@ -1176,7 +1176,7 @@ ObjDef gChkObjEtcDefs[] = {
 #endif
 };
 
-ObjDef gChkObjPoohGameDefs[] = {
+static ObjDef sChkObjPoohGameDefs[] = {
     { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 1, 0, gPoohPalette, "pooh_ff01.aob", "pooh.acl", 32, 0 },
     { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 1, 0, gPoohPalette, "pooh_fr01.aob", "pooh.acl", 32, 0 },
     { gPoohRr01Frames, gPoohRr01Anims, gPoohRr01Tiles, 1, 0, gPoohPalette, "pooh_rr01.aob", "pooh.acl", 32, 0 },
@@ -1267,7 +1267,7 @@ ObjDef gChkObjPoohGameDefs[] = {
     { gRoFootmarkFrames, gRoFootmarkAnims, gRoFootmarkTiles, 2, 0, gRoFootmarkPalette, "ro_footmark.aob", "ro_footmark.acl", 32, 0 },
 };
 
-ObjDef gChkObjRikuDefs[] = {
+static ObjDef sChkObjRikuDefs[] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 1, 0, gRikuPalette, "riku_bt00.aob", "riku.acl", 32, 0 },
     { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 2, 0, gRikuPalette, "riku_bt02.aob", "riku.acl", 32, 0 },
     { gRikuBt04Frames, gRikuBt04Anims, gRikuBt04Tiles, 1, 0, gRikuPalette, "riku_bt04.aob", "riku.acl", 32, 0 },
@@ -1303,17 +1303,17 @@ ObjDef gChkObjRikuDefs[] = {
 #define CHKOBJ_ETC_COUNT 7
 #endif
 
-const ChkObjEntry gChkObjEntries[10] = {
-    { gChkObjSoraDefs, 0x3F, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60" },
-    { gChkObjRikuDefs, 0x1B, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74" },
-    { gChkObjEnemyDefs, 0xA3, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78" },
-    { gChkObjSummonDefs, 0x12, 0, "\x81\x40\x81\x40\x81\x40\x82\x72\x82\x74\x82\x6c\x82\x6c\x82\x6e\x82\x6d" },
-    { gChkObjHumBossDefs, 0x6C, 0, "\x81\x40\x81\x40\x82\x67\x82\x74\x82\x6c\x82\x61\x82\x6e\x82\x72\x82\x72" },
-    { gChkObjEventDefs, 0x186, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73" },
-    { gChkObjFaceDefs, 0xA8, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x65\x82\x60\x82\x62\x82\x64" },
-    { gChkObjCardDefs, 0xCE, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x62\x82\x60\x82\x71\x82\x63" },
-    { gChkObjEtcDefs, CHKOBJ_ETC_COUNT, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x73\x82\x62" },
-    { gChkObjPoohGameDefs, 0x58, 0, "\x81\x40\x82\x6f\x82\x6e\x82\x6e\x82\x67\x82\x66\x82\x60\x82\x6c\x82\x64" },
+static const ChkObjEntry sChkObjEntries[10] = {
+    { sChkObjSoraDefs, 0x3F, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60" },
+    { sChkObjRikuDefs, 0x1B, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74" },
+    { sChkObjEnemyDefs, 0xA3, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78" },
+    { sChkObjSummonDefs, 0x12, 0, "\x81\x40\x81\x40\x81\x40\x82\x72\x82\x74\x82\x6c\x82\x6c\x82\x6e\x82\x6d" },
+    { sChkObjHumBossDefs, 0x6C, 0, "\x81\x40\x81\x40\x82\x67\x82\x74\x82\x6c\x82\x61\x82\x6e\x82\x72\x82\x72" },
+    { sChkObjEventDefs, 0x186, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73" },
+    { sChkObjFaceDefs, 0xA8, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x65\x82\x60\x82\x62\x82\x64" },
+    { sChkObjCardDefs, 0xCE, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x62\x82\x60\x82\x71\x82\x63" },
+    { sChkObjEtcDefs, CHKOBJ_ETC_COUNT, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x73\x82\x62" },
+    { sChkObjPoohGameDefs, 0x58, 0, "\x81\x40\x82\x6f\x82\x6e\x82\x6e\x82\x67\x82\x66\x82\x60\x82\x6c\x82\x64" },
 };
 
 void ChkObjLoadDef(ObjDef* def) {
@@ -1338,12 +1338,12 @@ void mode_chkobj_0(void) {
     gChkObjWork->angle = 0x80A0;
     gChkObjWork->maxTiles = 0;
     gChkObjWork->y = 0;
-    ChkObjLoadDef(gChkObjEntries[0].defs);
+    ChkObjLoadDef(sChkObjEntries[0].defs);
     SetupBg(1, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(1, 0x5400, 0x500);
     DebugTextLoadPalette(1, gWhitePalette, 0x20, 0x0F);
-    DebugTextPrint(166, 0, 2, gChkObjEntries[0].name);
+    DebugTextPrint(166, 0, 2, sChkObjEntries[0].name);
 }
 
 void mode_chkobj_1(void) {
@@ -1374,7 +1374,7 @@ void mode_chkobj_1(void) {
             gChkObjWork->y = 0;
             gChkObjWork->paused = 0;
             gChkObjWork->maxTiles = 0;
-            def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+            def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
 
             if (gChkObjWork->animId < 0) {
                 gChkObjWork->defIndex--;
@@ -1386,16 +1386,16 @@ void mode_chkobj_1(void) {
                         gChkObjWork->category = 9;
                     }
 
-                    gChkObjWork->defIndex = gChkObjEntries[gChkObjWork->category].count - 1;
+                    gChkObjWork->defIndex = sChkObjEntries[gChkObjWork->category].count - 1;
                 }
 
-                def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+                def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
                 gChkObjWork->animId = def->animCount - 1;
                 ChkObjLoadDef(def);
             } else if (gChkObjWork->animId >= def->animCount) {
                 gChkObjWork->defIndex++;
 
-                if (gChkObjWork->defIndex >= gChkObjEntries[gChkObjWork->category].count) {
+                if (gChkObjWork->defIndex >= sChkObjEntries[gChkObjWork->category].count) {
                     gChkObjWork->category++;
 
                     if ((u16)gChkObjWork->category > 9) {
@@ -1405,14 +1405,14 @@ void mode_chkobj_1(void) {
                     gChkObjWork->defIndex = 0;
                 }
 
-                def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+                def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
                 gChkObjWork->animId = 0;
                 ChkObjLoadDef(def);
             } else {
                 AnimStart(&gChkObjWork->anim, gChkObjWork->animId, 0);
             }
 
-            DebugTextPrint(166, 0, 2, gChkObjEntries[gChkObjWork->category].name);
+            DebugTextPrint(166, 0, 2, sChkObjEntries[gChkObjWork->category].name);
         }
 
         keys = GetKeysHeld() & SELECT_BUTTON;
@@ -1446,9 +1446,9 @@ void mode_chkobj_1(void) {
 
             gChkObjWork->animId = 0;
             gChkObjWork->defIndex = 0;
-            def = gChkObjEntries[gChkObjWork->category].defs;
+            def = sChkObjEntries[gChkObjWork->category].defs;
             ChkObjLoadDef(def);
-            DebugTextPrint(166, 0, 2, gChkObjEntries[gChkObjWork->category].name);
+            DebugTextPrint(166, 0, 2, sChkObjEntries[gChkObjWork->category].name);
         }
 
         SetBackdropColor((u16)abs(gSineTable[gChkObjWork->angle & 0xFF] * 5 >> 6),
@@ -1476,7 +1476,7 @@ void mode_chkobj_1(void) {
             PrintString(0, 1, 0, "     ");
         }
 
-        def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+        def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
         PrintString(0, 12, 0, "                                      ");
         PrintString(0, 13, 0, "                                      ");
         PrintString(0, 14, 0, "                                      ");

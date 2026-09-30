@@ -234,20 +234,11 @@ typedef struct LstPtlArg {
     s32 y;
 } LstPtlArg;
 
-extern const LstFalAnim gBosLstFalAnims[8];
-extern const u16 gBosLstFldVofsTable[];
-extern const u16 gBosLstFldHofsTable[];
-extern const s32 gBosLstBitHoverY[3];
-extern const s32 gBosLstBitBobZ[16];
-extern const EmyKind gBosLstBitEmyKind;
 extern const EmyKind gBosLstCtrEmyKind;
-extern const s32 gBosLstBitTanTable[32];
-extern const u32 gBosLstCtrAngles[6][5];
 extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_09C5C4E2[];
 extern u8 gUnk_09C5C704[];
 
-extern const u8 gStaffRollTextInit[];
 
 void BosLstFldUpdateShake(void);
 void BosLstFldResetShake(void);

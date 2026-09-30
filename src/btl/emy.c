@@ -12,13 +12,13 @@
 #include "actor_localized_data.h"
 #include "emy_tasks.h"
 
-const AnimDef gEmy00CommonAnimDefs[3] = {
+static const AnimDef sEmy00CommonAnimDefs[3] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },
     { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0, { 0, 0, 0 } },
     { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy00AnimDefs[7] = {
+static const AnimDef sEmy00AnimDefs[7] = {
     { gEmy00L07Frames, gEmy00L07Anims, gEmy00L07Tiles, 1, { 0, 0, 0 } },
     { gEmy00L12Frames, gEmy00L12Anims, gEmy00L12Tiles, 0, { 0, 0, 0 } },
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 1, { 0, 0, 0 } },
@@ -28,7 +28,7 @@ const AnimDef gEmy00AnimDefs[7] = {
     { gEmy00L11Frames, gEmy00L11Anims, gEmy00L11Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy00Def = { gEmy00Palette, gEmy00CommonAnimDefs, 384, 130, 10, 20, 64, 32, 16, 10, 3, { 0, 12, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy00Def = { gEmy00Palette, sEmy00CommonAnimDefs, 384, 130, 10, 20, 64, 32, 16, 10, 3, { 0, 12, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy00 = {
     "task_emy_00",
@@ -39,18 +39,18 @@ TaskDesc gTaskDescEmy00 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy01CommonAnimDefs[3] = {
+static const AnimDef sEmy01CommonAnimDefs[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy01AnimDefs[2] = {
+static const AnimDef sEmy01AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy01Def = { gEmy01Palette, gEmy01CommonAnimDefs, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy01Def = { gEmy01Palette, sEmy01CommonAnimDefs, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, 8 } };
 
 TaskDesc gTaskDescEmy01 = {
     "task_emy_01",
@@ -61,18 +61,18 @@ TaskDesc gTaskDescEmy01 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy02CommonAnimDefs[3] = {
+static const AnimDef sEmy02CommonAnimDefs[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy02AnimDefs[2] = {
+static const AnimDef sEmy02AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 6, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 8, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy02Def = { gEmy02Palette, gEmy02CommonAnimDefs, 460, 130, 20, 20, 64, 32, 32, 10, 0, { 2, 34, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy02Def = { gEmy02Palette, sEmy02CommonAnimDefs, 460, 130, 20, 20, 64, 32, 32, 10, 0, { 2, 34, 24, 12, 4, 100, 8 } };
 
 TaskDesc gTaskDescEmy02 = {
     "task_emy_02",
@@ -83,18 +83,18 @@ TaskDesc gTaskDescEmy02 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy03CommonAnimDefs[3] = {
+static const AnimDef sEmy03CommonAnimDefs[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy03AnimDefs[2] = {
+static const AnimDef sEmy03AnimDefs[2] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 7, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 5, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy03Def = { gEmy03Palette, gEmy03CommonAnimDefs, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy03Def = { gEmy03Palette, sEmy03CommonAnimDefs, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, 8 } };
 
 TaskDesc gTaskDescEmy03 = {
     "task_emy_03",
@@ -105,15 +105,15 @@ TaskDesc gTaskDescEmy03 = {
     sizeof(Emy03Work),
 };
 
-const AnimDef gEmy04CommonAnimDefs[3] = {
+static const AnimDef sEmy04CommonAnimDefs[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy04AnimDef = { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 4, { 0, 0, 0 } };
+static const AnimDef sEmy04AnimDef = { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 4, { 0, 0, 0 } };
 
-const EmyDef gEmy04Def = { gEmy04Palette, gEmy04CommonAnimDefs, 332, 130, 20, 20, 0, 0, 0, 200, 0, { 4, 27, 24, 12, 4, 100, 8 } };
+static const EmyDef sEmy04Def = { gEmy04Palette, sEmy04CommonAnimDefs, 332, 130, 20, 20, 0, 0, 0, 200, 0, { 4, 27, 24, 12, 4, 100, 8 } };
 
 TaskDesc gTaskDescEmy04 = {
     "task_emy_04",
@@ -124,18 +124,18 @@ TaskDesc gTaskDescEmy04 = {
     sizeof(Emy04Work),
 };
 
-const AnimDef gEmy06CommonAnimDefs[3] = {
+static const AnimDef sEmy06CommonAnimDefs[3] = {
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
     { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0, { 0, 0, 0 } },
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy06AnimDefs[2] = {
+static const AnimDef sEmy06AnimDefs[2] = {
     { gEmy0610Frames, gEmy0610Anims, gEmy0610Tiles, 0, { 0, 0, 0 } },
     { gEmy0611Frames, gEmy0611Anims, gEmy0611Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy06Def = { gEmy06Palette, gEmy06CommonAnimDefs, 230, 130, 20, 20, 70, 32, 48, 10, 0, { 5, 42, 32, 8, 16, 100, 0 } };
+static const EmyDef sEmy06Def = { gEmy06Palette, sEmy06CommonAnimDefs, 230, 130, 20, 20, 70, 32, 48, 10, 0, { 5, 42, 32, 8, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy06 = {
     "task_emy_06",
@@ -146,13 +146,13 @@ TaskDesc gTaskDescEmy06 = {
     sizeof(Emy06Work),
 };
 
-const AnimDef gEmy07CommonAnimDefs[3] = {
+static const AnimDef sEmy07CommonAnimDefs[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy07AnimDefs[7] = {
+static const AnimDef sEmy07AnimDefs[7] = {
     { gEmy07Fl05Frames, gEmy07Fl05Anims, gEmy07Fl05Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl04Frames, gEmy07Fl04Anims, gEmy07Fl04Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl04tFrames, gEmy07Fl04tAnims, gEmy07Fl04tTiles, 0, { 0, 0, 0 } },
@@ -162,7 +162,7 @@ const AnimDef gEmy07AnimDefs[7] = {
     { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy07Def = { gEmy07Palette, gEmy07CommonAnimDefs, 0, 130, 20, 20, 0, 0, 0, 1, 0, { 6, 40, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy07Def = { gEmy07Palette, sEmy07CommonAnimDefs, 0, 130, 20, 20, 0, 0, 0, 1, 0, { 6, 40, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy07 = {
     "task_emy_07",
@@ -173,13 +173,13 @@ TaskDesc gTaskDescEmy07 = {
     sizeof(Emy07Work),
 };
 
-const AnimDef gEmy08CommonAnimDefs[3] = {
+static const AnimDef sEmy08CommonAnimDefs[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
     { gEmy07Fl09Frames, gEmy07Fl09Anims, gEmy07Fl09Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy08AnimDefs[6] = {
+static const AnimDef sEmy08AnimDefs[6] = {
     { gEmy07Fl10Frames, gEmy07Fl10Anims, gEmy07Fl10Tiles, 0, { 0, 0, 0 } },
     { gUnk_09EDFFDC, gUnk_09EE0004, gUnk_089C292C, 0, { 0, 0, 0 } },
     { gEmy07Fl10tFrames, gEmy07Fl10tAnims, gEmy07Fl10tTiles, 0, { 0, 0, 0 } },
@@ -188,7 +188,7 @@ const AnimDef gEmy08AnimDefs[6] = {
     { gEmy07Fl11fFrames, gEmy07Fl11fAnims, gEmy07Fl11fTiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy08Def = { gEmy07bPalette, gEmy08CommonAnimDefs, 179, 130, 20, 20, 24, 24, 16, 5, 0, { 7, 999, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy08Def = { gEmy07bPalette, sEmy08CommonAnimDefs, 179, 130, 20, 20, 24, 24, 16, 5, 0, { 7, 999, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy08 = {
     "task_emy_08",
@@ -199,18 +199,18 @@ TaskDesc gTaskDescEmy08 = {
     sizeof(Emy08Work),
 };
 
-const AnimDef gEmy14CommonAnimDefs[3] = {
+static const AnimDef sEmy14CommonAnimDefs[3] = {
     { gEmy14Ll00Frames, gEmy14Ll00Anims, gEmy14Ll00Tiles, 0, { 0, 0, 0 } },
     { gEmy14Ll03Frames, gEmy14Ll03Anims, gEmy14Ll03Tiles, 0, { 0, 0, 0 } },
     { gEmy14Ll01Frames, gEmy14Ll01Anims, gEmy14Ll01Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy14AnimDefs[2] = {
+static const AnimDef sEmy14AnimDefs[2] = {
     { gEmy14Ll02Frames, gEmy14Ll02Anims, gEmy14Ll02Tiles, 0, { 0, 0, 0 } },
     { gEmy14Ll04Frames, gEmy14Ll04Anims, gEmy14Ll04Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy14Def = { gEmy14Palette, gEmy14CommonAnimDefs, 307, 130, 10, 20, 64, 32, 16, 10, 0, { 9, 32, 35, 12, 16, 100, 0 } };
+static const EmyDef sEmy14Def = { gEmy14Palette, sEmy14CommonAnimDefs, 307, 130, 10, 20, 64, 32, 16, 10, 0, { 9, 32, 35, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy14 = {
     "task_emy_14",
@@ -221,13 +221,13 @@ TaskDesc gTaskDescEmy14 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy15CommonAnimDefs[3] = {
+static const AnimDef sEmy15CommonAnimDefs[3] = {
     { gEmy1500Frames, gEmy1500Anims, gEmy1500Tiles, 0, { 0, 0, 0 } },
     { gEmy1502Frames, gEmy1502Anims, gEmy1502Tiles, 0, { 0, 0, 0 } },
     { gEmy1501Frames, gEmy1501Anims, gEmy1501Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy15AnimDefs[5] = {
+static const AnimDef sEmy15AnimDefs[5] = {
     { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 0, { 0, 0, 0 } },
     { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 1, { 0, 0, 0 } },
     { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 2, { 0, 0, 0 } },
@@ -235,7 +235,7 @@ const AnimDef gEmy15AnimDefs[5] = {
     { gEmy1511Frames, gEmy1511Anims, gEmy1511Tiles, 1, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy15Def = { gEmy15Palette, gEmy15CommonAnimDefs, 192, 200, 2, 20, 64, 32, 32, 10, 0, { 10, 41, 35, 12, 16, 100, 0 } };
+static const EmyDef sEmy15Def = { gEmy15Palette, sEmy15CommonAnimDefs, 192, 200, 2, 20, 64, 32, 32, 10, 0, { 10, 41, 35, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy15 = {
     "task_emy_15",
@@ -246,18 +246,18 @@ TaskDesc gTaskDescEmy15 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy16CommonAnimDefs[3] = {
+static const AnimDef sEmy16CommonAnimDefs[3] = {
     { gEmy1600Frames, gEmy1600Anims, gEmy1600Tiles, 0, { 0, 0, 0 } },
     { gEmy1602Frames, gEmy1602Anims, gEmy1602Tiles, 0, { 0, 0, 0 } },
     { gEmy1601Frames, gEmy1601Anims, gEmy1601Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy16AnimDefs[2] = {
+static const AnimDef sEmy16AnimDefs[2] = {
     { gEmy1610Frames, gEmy1610Anims, gEmy1610Tiles, 0, { 0, 0, 0 } },
     { gEmy1611Frames, gEmy1611Anims, gEmy1611Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy16Def = { gEmy16Palette, gEmy16CommonAnimDefs, 307, 130, 20, 20, 99, 32, 32, 10, 0, { 11, 29, 16, 8, 16, 100, 0 } };
+static const EmyDef sEmy16Def = { gEmy16Palette, sEmy16CommonAnimDefs, 307, 130, 20, 20, 99, 32, 32, 10, 0, { 11, 29, 16, 8, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy16 = {
     "task_emy_16",
@@ -268,7 +268,7 @@ TaskDesc gTaskDescEmy16 = {
     sizeof(Emy16Work),
 };
 
-TaskDesc gTaskDescEmy16B = {
+static TaskDesc sTaskDescEmy16B = {
     "task_emy_16_b",
     (TaskInitFunc)task_emy_16_b_0,
     (TaskUpdateFunc)task_emy_16_b_1,
@@ -277,7 +277,7 @@ TaskDesc gTaskDescEmy16B = {
     sizeof(Emy16bWork),
 };
 
-TaskDesc gTaskDescEmy16P = {
+static TaskDesc sTaskDescEmy16P = {
     "task_emy_16_p",
     (TaskInitFunc)task_emy_16_p_0,
     (TaskUpdateFunc)task_emy_16_p_1,
@@ -286,20 +286,20 @@ TaskDesc gTaskDescEmy16P = {
     sizeof(Emy16pWork),
 };
 
-const AnimDef gEmy18CommonAnimDefs[3] = {
+static const AnimDef sEmy18CommonAnimDefs[3] = {
     { gEmy1800Frames, gEmy1800Anims, gEmy1800Tiles, 0, { 0, 0, 0 } },
     { gEmy1802Frames, gEmy1802Anims, gEmy1802Tiles, 0, { 0, 0, 0 } },
     { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 1, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy18AnimDefs[4] = {
+static const AnimDef sEmy18AnimDefs[4] = {
     { gEmy1810Frames, gEmy1810Anims, gEmy1810Tiles, 0, { 0, 0, 0 } },
     { gEmy1811Frames, gEmy1811Anims, gEmy1811Tiles, 0, { 0, 0, 0 } },
     { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 0, { 0, 0, 0 } },
     { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 2, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy18Def = { gEmy18Palette, gEmy18CommonAnimDefs, 768, 150, 4, 20, 40, 24, 16, 10, 0, { 12, 45, 40, 8, 16, 100, 0 } };
+static const EmyDef sEmy18Def = { gEmy18Palette, sEmy18CommonAnimDefs, 768, 150, 4, 20, 40, 24, 16, 10, 0, { 12, 45, 40, 8, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy18 = {
     "task_emy_18",
@@ -310,13 +310,13 @@ TaskDesc gTaskDescEmy18 = {
     sizeof(Emy18Work),
 };
 
-const AnimDef gEmy19CommonAnimDefs[3] = {
+static const AnimDef sEmy19CommonAnimDefs[3] = {
     { gEmy1900Frames, gEmy1900Anims, gEmy1900Tiles, 0, { 0, 0, 0 } },
     { gEmy1902Frames, gEmy1902Anims, gEmy1902Tiles, 0, { 0, 0, 0 } },
     { gEmy1901Frames, gEmy1901Anims, gEmy1901Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy19AnimDefs[5] = {
+static const AnimDef sEmy19AnimDefs[5] = {
     { gEmy1910Frames, gEmy1910Anims, gEmy1910Tiles, 0, { 0, 0, 0 } },
     { gEmy1910Frames, gEmy1910Anims, gEmy1910Tiles, 1, { 0, 0, 0 } },
     { gEmy1910Frames, gEmy1910Anims, gEmy1910Tiles, 2, { 0, 0, 0 } },
@@ -324,7 +324,7 @@ const AnimDef gEmy19AnimDefs[5] = {
     { gEmy1911Frames, gEmy1911Anims, gEmy1911Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy19Def = { gEmy19Palette, gEmy19CommonAnimDefs, 256, 130, 20, 20, 80, 80, 32, 10, 0, { 13, 53, 32, 13, 16, 100, 0 } };
+static const EmyDef sEmy19Def = { gEmy19Palette, sEmy19CommonAnimDefs, 256, 130, 20, 20, 80, 80, 32, 10, 0, { 13, 53, 32, 13, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy19 = {
     "task_emy_19",
@@ -335,20 +335,20 @@ TaskDesc gTaskDescEmy19 = {
     sizeof(Emy19Work),
 };
 
-const AnimDef gEmy21CommonAnimDefs[3] = {
+static const AnimDef sEmy21CommonAnimDefs[3] = {
     { gEmy2100Frames, gEmy2100Anims, gEmy2100Tiles, 0, { 0, 0, 0 } },
     { gEmy2102Frames, gEmy2102Anims, gEmy2102Tiles, 0, { 0, 0, 0 } },
     { gEmy2101Frames, gEmy2101Anims, gEmy2101Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy21AnimDefs[4] = {
+static const AnimDef sEmy21AnimDefs[4] = {
     { gEmy2110Frames, gEmy2110Anims, gEmy2110Tiles, 0, { 0, 0, 0 } },
     { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 0, { 0, 0, 0 } },
     { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 1, { 0, 0, 0 } },
     { gEmy2111fFrames, gEmy2111fAnims, gEmy2111fTiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy21Def = { gEmy21Palette, gEmy21CommonAnimDefs, 396, 130, 20, 20, 80, 80, 16, 5, 0, { 14, 40, 32, 16, 16, 100, 0 } };
+static const EmyDef sEmy21Def = { gEmy21Palette, sEmy21CommonAnimDefs, 396, 130, 20, 20, 80, 80, 16, 5, 0, { 14, 40, 32, 16, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy21 = {
     "task_emy_21",
@@ -359,18 +359,18 @@ TaskDesc gTaskDescEmy21 = {
     sizeof(Emy21Work),
 };
 
-const AnimDef gEmy22CommonAnimDefs[3] = {
+static const AnimDef sEmy22CommonAnimDefs[3] = {
     { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0, { 0, 0, 0 } },
     { gEmy2202Frames, gEmy2202Anims, gEmy2202Tiles, 0, { 0, 0, 0 } },
     { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy22AnimDefs[2] = {
+static const AnimDef sEmy22AnimDefs[2] = {
     { gEmy2210Frames, gEmy2210Anims, gEmy2210Tiles, 0, { 0, 0, 0 } },
     { gEmy2211Frames, gEmy2211Anims, gEmy2211Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy22Def = { gEmy22Palette, gEmy22CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, 8 } };
+static const EmyDef sEmy22Def = { gEmy22Palette, sEmy22CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, 8 } };
 
 TaskDesc gTaskDescEmy22 = {
     "task_emy_22",
@@ -381,18 +381,18 @@ TaskDesc gTaskDescEmy22 = {
     sizeof(Emy22Work),
 };
 
-const AnimDef gEmy23CommonAnimDefs[3] = {
+static const AnimDef sEmy23CommonAnimDefs[3] = {
     { gEmy2300Frames, gEmy2300Anims, gEmy2300Tiles, 0, { 0, 0, 0 } },
     { gEmy2302Frames, gEmy2302Anims, gEmy2302Tiles, 0, { 0, 0, 0 } },
     { gEmy2301Frames, gEmy2301Anims, gEmy2301Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy23AnimDefs[2] = {
+static const AnimDef sEmy23AnimDefs[2] = {
     { gEmy2310Frames, gEmy2310Anims, gEmy2310Tiles, 0, { 0, 0, 0 } },
     { gEmy2311Frames, gEmy2311Anims, gEmy2311Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy23Def = { gEmy23Palette, gEmy23CommonAnimDefs, 192, 30, 2, 20, 64, 40, 32, 25, 0, { 16, 66, 36, 10, 16, 100, 0 } };
+static const EmyDef sEmy23Def = { gEmy23Palette, sEmy23CommonAnimDefs, 192, 30, 2, 20, 64, 40, 32, 25, 0, { 16, 66, 36, 10, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy23 = {
     "task_emy_23",
@@ -403,18 +403,18 @@ TaskDesc gTaskDescEmy23 = {
     sizeof(Emy23Work),
 };
 
-const AnimDef gEmy25CommonAnimDefs[3] = {
+static const AnimDef sEmy25CommonAnimDefs[3] = {
     { gEmy2500Frames, gEmy2500Anims, gEmy2500Tiles, 0, { 0, 0, 0 } },
     { gEmy2502Frames, gEmy2502Anims, gEmy2502Tiles, 0, { 0, 0, 0 } },
     { gEmy2501Frames, gEmy2501Anims, gEmy2501Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy25AnimDefs[2] = {
+static const AnimDef sEmy25AnimDefs[2] = {
     { gEmy2510Frames, gEmy2510Anims, gEmy2510Tiles, 0, { 0, 0, 0 } },
     { gEmy2511Frames, gEmy2511Anims, gEmy2511Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy25Def = { gEmy25Palette, gEmy25CommonAnimDefs, 253, 130, 20, 20, 24, 16, 16, 3, 0, { 17, 79, 40, 12, 32, 100, 0 } };
+static const EmyDef sEmy25Def = { gEmy25Palette, sEmy25CommonAnimDefs, 253, 130, 20, 20, 24, 16, 16, 3, 0, { 17, 79, 40, 12, 32, 100, 0 } };
 
 TaskDesc gTaskDescEmy25 = {
     "task_emy_25",
@@ -425,18 +425,18 @@ TaskDesc gTaskDescEmy25 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy26CommonAnimDefs[3] = {
+static const AnimDef sEmy26CommonAnimDefs[3] = {
     { gEmy2600Frames, gEmy2600Anims, gEmy2600Tiles, 0, { 0, 0, 0 } },
     { gEmy2602Frames, gEmy2602Anims, gEmy2602Tiles, 0, { 0, 0, 0 } },
     { gEmy2601Frames, gEmy2601Anims, gEmy2601Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy26AnimDefs[2] = {
+static const AnimDef sEmy26AnimDefs[2] = {
     { gEmy2610Frames, gEmy2610Anims, gEmy2610Tiles, 0, { 0, 0, 0 } },
     { gEmy2611Frames, gEmy2611Anims, gEmy2611Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy26Def = { gEmy26Palette, gEmy26CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, 4 } };
+static const EmyDef sEmy26Def = { gEmy26Palette, sEmy26CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, 4 } };
 
 TaskDesc gTaskDescEmy26 = {
     "task_emy_26",
@@ -447,18 +447,18 @@ TaskDesc gTaskDescEmy26 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy27CommonAnimDefs[3] = {
+static const AnimDef sEmy27CommonAnimDefs[3] = {
     { gEmy2700Frames, gEmy2700Anims, gEmy2700Tiles, 0, { 0, 0, 0 } },
     { gEmy2702Frames, gEmy2702Anims, gEmy2702Tiles, 0, { 0, 0, 0 } },
     { gEmy2701Frames, gEmy2701Anims, gEmy2701Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy27AnimDefs[2] = {
+static const AnimDef sEmy27AnimDefs[2] = {
     { gEmy2710Frames, gEmy2710Anims, gEmy2710Tiles, 0, { 0, 0, 0 } },
     { gEmy2711Frames, gEmy2711Anims, gEmy2711Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy27Def = { gEmy27Palette, gEmy27CommonAnimDefs, 192, 130, 20, 20, 64, 32, 64, 10, 0, { 19, 125, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy27Def = { gEmy27Palette, sEmy27CommonAnimDefs, 192, 130, 20, 20, 64, 32, 64, 10, 0, { 19, 125, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy27 = {
     "task_emy_27",
@@ -469,20 +469,20 @@ TaskDesc gTaskDescEmy27 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy28CommonAnimDefs[3] = {
+static const AnimDef sEmy28CommonAnimDefs[3] = {
     { gEmy2800Frames, gEmy2800Anims, gEmy2800Tiles, 0, { 0, 0, 0 } },
     { gEmy2802Frames, gEmy2802Anims, gEmy2802Tiles, 0, { 0, 0, 0 } },
     { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 1, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy28AnimDefs[4] = {
+static const AnimDef sEmy28AnimDefs[4] = {
     { gEmy2810Frames, gEmy2810Anims, gEmy2810Tiles, 0, { 0, 0, 0 } },
     { gEmy2811Frames, gEmy2811Anims, gEmy2811Tiles, 0, { 0, 0, 0 } },
     { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 0, { 0, 0, 0 } },
     { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 2, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy28Def = { gEmy28Palette, gEmy28CommonAnimDefs, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, 4 } };
+static const EmyDef sEmy28Def = { gEmy28Palette, sEmy28CommonAnimDefs, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, 4 } };
 
 TaskDesc gTaskDescEmy28 = {
     "task_emy_28",
@@ -493,18 +493,18 @@ TaskDesc gTaskDescEmy28 = {
     sizeof(Emy28Work),
 };
 
-const AnimDef gEmy29CommonAnimDefs[3] = {
+static const AnimDef sEmy29CommonAnimDefs[3] = {
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
     { gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0, { 0, 0, 0 } },
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy29AnimDefs[2] = {
+static const AnimDef sEmy29AnimDefs[2] = {
     { gEmy2910Frames, gEmy2910Anims, gEmy2910Tiles, 0, { 0, 0, 0 } },
     { gEmy2911Frames, gEmy2911Anims, gEmy2911Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy29Def = { gEmy29Palette, gEmy29CommonAnimDefs, 192, 300, 20, 20, 64, 64, 32, 30, 0, { 21, 80, 56, 22, 32, 100, 4 } };
+static const EmyDef sEmy29Def = { gEmy29Palette, sEmy29CommonAnimDefs, 192, 300, 20, 20, 64, 64, 32, 30, 0, { 21, 80, 56, 22, 32, 100, 4 } };
 
 TaskDesc gTaskDescEmy29 = {
     "task_emy_29",
@@ -515,13 +515,13 @@ TaskDesc gTaskDescEmy29 = {
     sizeof(Emy29Work),
 };
 
-const AnimDef gEmy30CommonAnimDefs[3] = {
+static const AnimDef sEmy30CommonAnimDefs[3] = {
     { gEmy3000Frames, gEmy3000Anims, gEmy3000Tiles, 0, { 0, 0, 0 } },
     { gEmy3002Frames, gEmy3002Anims, gEmy3002Tiles, 0, { 0, 0, 0 } },
     { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 1, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy30AnimDefs[8] = {
+static const AnimDef sEmy30AnimDefs[8] = {
     { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 0, { 0, 0, 0 } },
     { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 2, { 0, 0, 0 } },
     { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 0, { 0, 0, 0 } },
@@ -532,7 +532,7 @@ const AnimDef gEmy30AnimDefs[8] = {
     { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 2, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy30Def = { gEmy30Palette, gEmy30CommonAnimDefs, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, 4 } };
+static const EmyDef sEmy30Def = { gEmy30Palette, sEmy30CommonAnimDefs, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, 4 } };
 
 TaskDesc gTaskDescEmy30 = {
     "task_emy_30",
@@ -543,19 +543,19 @@ TaskDesc gTaskDescEmy30 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy31CommonAnimDefs[3] = {
+static const AnimDef sEmy31CommonAnimDefs[3] = {
     { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0, { 0, 0, 0 } },
     { gEmy3104Frames, gEmy3104Anims, gEmy3104Tiles, 0, { 0, 0, 0 } },
     { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy31AnimDefs[3] = {
+static const AnimDef sEmy31AnimDefs[3] = {
     { gEmy3105Frames, gEmy3105Anims, gEmy3105Tiles, 0, { 0, 0, 0 } },
     { gEmy3106Frames, gEmy3106Anims, gEmy3106Tiles, 0, { 0, 0, 0 } },
     { gEmy3107Frames, gEmy3107Anims, gEmy3107Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy31Def = { gEmy31Palette, gEmy31CommonAnimDefs, 256, 100, 10, 20, 64, 32, 32, 10, 0, { 23, 95, 32, 12, 24, 100, 0 } };
+static const EmyDef sEmy31Def = { gEmy31Palette, sEmy31CommonAnimDefs, 256, 100, 10, 20, 64, 32, 32, 10, 0, { 23, 95, 32, 12, 24, 100, 0 } };
 
 TaskDesc gTaskDescEmy31 = {
     "task_emy_31",
@@ -566,13 +566,13 @@ TaskDesc gTaskDescEmy31 = {
     sizeof(Emy31Work),
 };
 
-const AnimDef gEmy37CommonAnimDefs[3] = {
+static const AnimDef sEmy37CommonAnimDefs[3] = {
     { gEmy3700Frames, gEmy3700Anims, gEmy3700Tiles, 0, { 0, 0, 0 } },
     { gEmy3702Frames, gEmy3702Anims, gEmy3702Tiles, 0, { 0, 0, 0 } },
     { gEmy3701Frames, gEmy3701Anims, gEmy3701Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy37AnimDefs[11] = {
+static const AnimDef sEmy37AnimDefs[11] = {
     { gEmy3710Frames, gEmy3710Anims, gEmy3710Tiles, 0, { 0, 0, 0 } },
     { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 0, { 0, 0, 0 } },
     { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 1, { 0, 0, 0 } },
@@ -586,7 +586,7 @@ const AnimDef gEmy37AnimDefs[11] = {
     { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 1, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy37Def = { gEmy37Palette, gEmy37CommonAnimDefs, 409, 130, 20, 20, 64, 32, 32, 10, 3, { 24, 110, 38, 12, 20, 100, 0 } };
+static const EmyDef sEmy37Def = { gEmy37Palette, sEmy37CommonAnimDefs, 409, 130, 20, 20, 64, 32, 32, 10, 3, { 24, 110, 38, 12, 20, 100, 0 } };
 
 TaskDesc gTaskDescEmy37 = {
     "task_emy_37",
@@ -597,18 +597,18 @@ TaskDesc gTaskDescEmy37 = {
     sizeof(Emy37Work),
 };
 
-const AnimDef gEmy38CommonAnimDefs[3] = {
+static const AnimDef sEmy38CommonAnimDefs[3] = {
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
     { gEmy3802Frames, gEmy3802Anims, gEmy3802Tiles, 0, { 0, 0, 0 } },
     { gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy38AnimDefs[2] = {
+static const AnimDef sEmy38AnimDefs[2] = {
     { gEmy3811Frames, gEmy3811Anims, gEmy3811Tiles, 0, { 0, 0, 0 } },
     { gEmy3810Frames, gEmy3810Anims, gEmy3810Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy38Def = { gEmy38Palette, gEmy38CommonAnimDefs, 76, 130, 80, 22, 64, 32, 32, 10, 0, { 25, 112, 56, 25, 32, 100, 4 } };
+static const EmyDef sEmy38Def = { gEmy38Palette, sEmy38CommonAnimDefs, 76, 130, 80, 22, 64, 32, 32, 10, 0, { 25, 112, 56, 25, 32, 100, 4 } };
 
 TaskDesc gTaskDescEmy38 = {
     "task_emy_38",
@@ -619,18 +619,18 @@ TaskDesc gTaskDescEmy38 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy39CommonAnimDefs[3] = {
+static const AnimDef sEmy39CommonAnimDefs[3] = {
     { gEmy3900Frames, gEmy3900Anims, gEmy3900Tiles, 0, { 0, 0, 0 } },
     { gEmy3902Frames, gEmy3902Anims, gEmy3902Tiles, 0, { 0, 0, 0 } },
     { gEmy3901Frames, gEmy3901Anims, gEmy3901Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy39AnimDefs[2] = {
+static const AnimDef sEmy39AnimDefs[2] = {
     { gEmy3910Frames, gEmy3910Anims, gEmy3910Tiles, 0, { 0, 0, 0 } },
     { gEmy3911Frames, gEmy3911Anims, gEmy3911Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy39Def = { gEmy39Palette, gEmy39CommonAnimDefs, 102, 130, 100, 22, 64, 32, 32, 10, 0, { 26, 134, 56, 25, 32, 100, 4 } };
+static const EmyDef sEmy39Def = { gEmy39Palette, sEmy39CommonAnimDefs, 102, 130, 100, 22, 64, 32, 32, 10, 0, { 26, 134, 56, 25, 32, 100, 4 } };
 
 TaskDesc gTaskDescEmy39 = {
     "task_emy_39",
@@ -641,18 +641,18 @@ TaskDesc gTaskDescEmy39 = {
     sizeof(Emy39Work),
 };
 
-const AnimDef gEmy41CommonAnimDefs[3] = {
+static const AnimDef sEmy41CommonAnimDefs[3] = {
     { gEmy4100Frames, gEmy4100Anims, gEmy4100Tiles, 0, { 0, 0, 0 } },
     { gEmy4102Frames, gEmy4102Anims, gEmy4102Tiles, 0, { 0, 0, 0 } },
     { gEmy4101Frames, gEmy4101Anims, gEmy4101Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy41AnimDefs[2] = {
+static const AnimDef sEmy41AnimDefs[2] = {
     { gEmy4110Frames, gEmy4110Anims, gEmy4110Tiles, 0, { 0, 0, 0 } },
     { gEmy4111Frames, gEmy4111Anims, gEmy4111Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy41Def = { gEmy41Palette, gEmy41CommonAnimDefs, 192, 400, 50, 20, 64, 32, 32, 10, 0, { 27, 108, 56, 32, 20, 100, 4 } };
+static const EmyDef sEmy41Def = { gEmy41Palette, sEmy41CommonAnimDefs, 192, 400, 50, 20, 64, 32, 32, 10, 0, { 27, 108, 56, 32, 20, 100, 4 } };
 
 TaskDesc gTaskDescEmy41 = {
     "task_emy_41",
@@ -663,18 +663,18 @@ TaskDesc gTaskDescEmy41 = {
     sizeof(Emy41Work),
 };
 
-const AnimDef gEmy44CommonAnimDefs[3] = {
+static const AnimDef sEmy44CommonAnimDefs[3] = {
     { gEmy4400Frames, gEmy4400Anims, gEmy4400Tiles, 0, { 0, 0, 0 } },
     { gEmy4402Frames, gEmy4402Anims, gEmy4402Tiles, 0, { 0, 0, 0 } },
     { gEmy4401Frames, gEmy4401Anims, gEmy4401Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy44AnimDefs[2] = {
+static const AnimDef sEmy44AnimDefs[2] = {
     { gEmy4410Frames, gEmy4410Anims, gEmy4410Tiles, 0, { 0, 0, 0 } },
     { gEmy4412Frames, gEmy4412Anims, gEmy4412Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy44Def = { gEmy44Palette, gEmy44CommonAnimDefs, 192, 130, 90, 20, 60, 60, 16, 10, 0, { 28, 260, 48, 25, 32, 100, 4 } };
+static const EmyDef sEmy44Def = { gEmy44Palette, sEmy44CommonAnimDefs, 192, 130, 90, 20, 60, 60, 16, 10, 0, { 28, 260, 48, 25, 32, 100, 4 } };
 
 TaskDesc gTaskDescEmy44 = {
     "task_emy_44",
@@ -685,13 +685,13 @@ TaskDesc gTaskDescEmy44 = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmy81CommonAnimDefs[3] = {
+static const AnimDef sEmy81CommonAnimDefs[3] = {
     { gEmy8100Frames, gEmy8100Anims, gEmy8100Tiles, 0, { 0, 0, 0 } },
     { gEmy8102Frames, gEmy8102Anims, gEmy8102Tiles, 0, { 0, 0, 0 } },
     { gEmy8100Frames, gEmy8100Anims, gEmy8100Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy81AnimDefs[5] = {
+static const AnimDef sEmy81AnimDefs[5] = {
     { gEmy8110Frames, gEmy8110Anims, gEmy8110Tiles, 0, { 0, 0, 0 } },
     { gEmy8111Frames, gEmy8111Anims, gEmy8111Tiles, 0, { 0, 0, 0 } },
     { gEmy8105Frames, gEmy8105Anims, gEmy8105Tiles, 0, { 0, 0, 0 } },
@@ -699,7 +699,7 @@ const AnimDef gEmy81AnimDefs[5] = {
     { gEmy8105Frames, gEmy8105Anims, gEmy8105Tiles, 2, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy81Def = { gEmy81Palette, gEmy81CommonAnimDefs, 128, 130, 20, 15, 64, 32, 32, 10, 0, { 29, 66, 27, 13, 16, 100, 0 } };
+static const EmyDef sEmy81Def = { gEmy81Palette, sEmy81CommonAnimDefs, 128, 130, 20, 15, 64, 32, 32, 10, 0, { 29, 66, 27, 13, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy81 = {
     "task_emy_81",
@@ -710,13 +710,13 @@ TaskDesc gTaskDescEmy81 = {
     sizeof(Emy81Work),
 };
 
-const AnimDef gEmy82CommonAnimDefs[3] = {
+static const AnimDef sEmy82CommonAnimDefs[3] = {
     { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0, { 0, 0, 0 } },
     { gEmy8202Frames, gEmy8202Anims, gEmy8202Tiles, 0, { 0, 0, 0 } },
     { gEmy8201Frames, gEmy8201Anims, gEmy8201Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy82AnimDefs[6] = {
+static const AnimDef sEmy82AnimDefs[6] = {
     { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 0, { 0, 0, 0 } },
     { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 1, { 0, 0, 0 } },
     { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 2, { 0, 0, 0 } },
@@ -725,7 +725,7 @@ const AnimDef gEmy82AnimDefs[6] = {
     { gEmy8212Frames, gEmy8212Anims, gEmy8212Tiles, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy82Def = { gEmy82Palette, gEmy82CommonAnimDefs, 204, 3, 20, 20, 48, 32, 32, 1, 0, { 30, 66, 32, 10, 16, 100, 0 } };
+static const EmyDef sEmy82Def = { gEmy82Palette, sEmy82CommonAnimDefs, 204, 3, 20, 20, 48, 32, 32, 1, 0, { 30, 66, 32, 10, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy82 = {
     "task_emy_82",
@@ -736,20 +736,20 @@ TaskDesc gTaskDescEmy82 = {
     sizeof(Emy82Work),
 };
 
-const AnimDef gEmy83CommonAnimDefs[3] = {
+static const AnimDef sEmy83CommonAnimDefs[3] = {
     { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },
     { gEmy8302Frames, gEmy8302Anims, gEmy8302Tiles, 0, { 0, 0, 0 } },
     { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmy83AnimDefs[4] = {
+static const AnimDef sEmy83AnimDefs[4] = {
     { gEmy8310Frames, gEmy8310Anims, gEmy8310Tiles, 0, { 0, 0, 0 } },
     { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 0, { 0, 0, 0 } },
     { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 1, { 0, 0, 0 } },
     { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 2, { 0, 0, 0 } },
 };
 
-const EmyDef gEmy83Def = { gEmy83Palette, gEmy83CommonAnimDefs, 192, 130, 20, 20, 50, 50, 50, 10, 0, { 31, 66, 35, 12, 24, 100, 0 } };
+static const EmyDef sEmy83Def = { gEmy83Palette, sEmy83CommonAnimDefs, 192, 130, 20, 20, 50, 50, 50, 10, 0, { 31, 66, 35, 12, 24, 100, 0 } };
 
 TaskDesc gTaskDescEmy83 = {
     "task_emy_83",
@@ -760,7 +760,7 @@ TaskDesc gTaskDescEmy83 = {
     sizeof(Emy83Work),
 };
 
-TaskDesc gTaskDescEmy83B = {
+static TaskDesc sTaskDescEmy83B = {
     "task_emy_83_b",
     (TaskInitFunc)task_emy_83_b_0,
     (TaskUpdateFunc)task_emy_83_b_1,
@@ -769,7 +769,7 @@ TaskDesc gTaskDescEmy83B = {
     sizeof(Emy83bWork),
 };
 
-TaskDesc gTaskDescEmy83S = {
+static TaskDesc sTaskDescEmy83S = {
     "task_emy_83_s",
     (TaskInitFunc)task_emy_83_s_0,
     (TaskUpdateFunc)task_emy_83_s_1,
@@ -778,15 +778,15 @@ TaskDesc gTaskDescEmy83S = {
     sizeof(Emy83sWork),
 };
 
-const AnimDef gEmyTrumpHCommonAnimDefs[3] = {
+static const AnimDef sEmyTrumpHCommonAnimDefs[3] = {
     { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0, { 0, 0, 0 } },
     { gTrumpH02bFrames, gTrumpH02bAnims, gTrumpH02bTiles, 0, { 0, 0, 0 } },
     { gTrumpH03Frames, gTrumpH03Anims, gTrumpH03Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmyTrumpHAnimDef = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sEmyTrumpHAnimDef = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles, 0, { 0, 0, 0 } };
 
-const EmyDef gEmyTrumpHDef = { gTrumpHPalette, gEmyTrumpHCommonAnimDefs, 409, 130, 20, 20, 90, 32, 32, 10, 0, { 47, 200, 40, 16, 16, 100, 0 } };
+static const EmyDef sEmyTrumpHDef = { gTrumpHPalette, sEmyTrumpHCommonAnimDefs, 409, 130, 20, 20, 90, 32, 32, 10, 0, { 47, 200, 40, 16, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmyTrumpH = {
     "task_emy_trump_h",
@@ -797,15 +797,15 @@ TaskDesc gTaskDescEmyTrumpH = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmyTrumpSCommonAnimDefs[3] = {
+static const AnimDef sEmyTrumpSCommonAnimDefs[3] = {
     { gTrumpS00bFrames, gTrumpS00bAnims, gTrumpS00bTiles, 0, { 0, 0, 0 } },
     { gTrumpS02bFrames, gTrumpS02bAnims, gTrumpS02bTiles, 0, { 0, 0, 0 } },
     { gTrumpS03Frames, gTrumpS03Anims, gTrumpS03Tiles, 0, { 0, 0, 0 } },
 };
 
-const AnimDef gEmyTrumpSAnimDef = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sEmyTrumpSAnimDef = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 0, { 0, 0, 0 } };
 
-const EmyDef gEmyTrumpSDef = { gTrumpSPalette, gEmyTrumpSCommonAnimDefs, 307, 130, 20, 20, 64, 32, 32, 10, 0, { 46, 200, 40, 16, 16, 100, 0 } };
+static const EmyDef sEmyTrumpSDef = { gTrumpSPalette, sEmyTrumpSCommonAnimDefs, 307, 130, 20, 20, 64, 32, 32, 10, 0, { 46, 200, 40, 16, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmyTrumpS = {
     "task_emy_trump_s",
@@ -816,16 +816,16 @@ TaskDesc gTaskDescEmyTrumpS = {
     sizeof(EmyWork),
 };
 
-const AnimDef gEmyTestCommonAnimDefs[3] = {
+static const AnimDef sEmyTestCommonAnimDefs[3] = {
     { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0, { 0, 0, 0 } },
     { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0, { 0, 0, 0 } },
     { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0, { 0, 0, 0 } },
 };
 
-const EmyDef gEmyTestDef = { gUnk_08F6DD44, gEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { 28, 260, 16, 8, 16, 100, 0 } };
+static const EmyDef sEmyTestDef = { gUnk_08F6DD44, sEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { 28, 260, 16, 8, 16, 100, 0 } };
 
 void task_emy_00_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy00Def, obj);
+    EmyInit(work, &sEmy00Def, obj);
     work->flags |= 1;
     work->idleState = 0x12;
     work->state = 0x16;
@@ -857,11 +857,11 @@ u8 task_emy_00_1(EmyWork* work) {
 
     switch (w->state) {
     case 24:
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 5, 0, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 5, 0, work->tiles);
         EmyLungeAttack(w, 31, 18, 11, 165, 40, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
     case 25:
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 6, 0, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 6, 0, work->tiles);
 
         if (w->stateTimer == 10) {
             w->vz = -0x400;
@@ -870,7 +870,7 @@ u8 task_emy_00_1(EmyWork* work) {
         EmyLungeAttack(w, 14, 35, 10, 166, 96, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
     case 19:
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 0, 0, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 0, 0, work->tiles);
 
         if (AnimIsFinished(&w->anim)) {
             w->state = 20;
@@ -882,7 +882,7 @@ u8 task_emy_00_1(EmyWork* work) {
     case 20:
         if (gBtlWork->flags & 0x40000) {
             GetEnemyTargetPosition(act, &pos, 0, 0);
-            AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, 1, work->tiles);
             act->x += gSineTable[w->angle] * w->speed >> 8;
             act->y += -gSineTable[w->angle + 64] * w->speed >> 8;
 
@@ -904,7 +904,7 @@ u8 task_emy_00_1(EmyWork* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 3, 0, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 3, 0, work->tiles);
 
         if (w->stateTimer == 20) {
             act->flags &= ~0x100;
@@ -923,7 +923,7 @@ u8 task_emy_00_1(EmyWork* work) {
         w->stateTimer++;
         break;
     case 21:
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 2, 0, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (w->stateTimer == 30) {
             act->flags &= ~0x100;
@@ -989,7 +989,7 @@ u8 task_emy_00_1(EmyWork* work) {
     ret = _0800CDF0(w);
 
     if (w->state == 14) {
-        AnimChangeWithDef(gEmy00AnimDefs, &work->anim, 4, 1, work->tiles);
+        AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, 1, work->tiles);
     }
 
     return ret;
@@ -1062,7 +1062,7 @@ void task_emy_00_3(EmyWork* work) {
 }
 
 void task_emy_01_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy01Def, obj);
+    EmyInit(work, &sEmy01Def, obj);
     work->idleState = 7;
 }
 
@@ -1091,7 +1091,7 @@ u8 task_emy_01_1(EmyWork* work) {
     switch (work->state) {
     case 0x12: {
         s32 z;
-        AnimChangeWithDef(gEmy01AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer != 0) {
@@ -1119,7 +1119,7 @@ u8 task_emy_01_1(EmyWork* work) {
     }
     case 0x13: {
         s32 z;
-        AnimChangeWithDef(gEmy01AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer != 0) {
@@ -1159,7 +1159,7 @@ void task_emy_01_3(EmyWork* work) {
 }
 
 void task_emy_02_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy02Def, obj);
+    EmyInit(work, &sEmy02Def, obj);
     work->idleState = 7;
 }
 
@@ -1189,7 +1189,7 @@ u8 task_emy_02_1(EmyWork* work) {
     case 0x12: {
         s32 y;
 
-        AnimChangeWithDef(gEmy02AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy02AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer == 0) {
@@ -1217,7 +1217,7 @@ u8 task_emy_02_1(EmyWork* work) {
     case 0x13: {
         s32 y;
 
-        AnimChangeWithDef(gEmy02AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy02AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer == 0) {
@@ -1256,7 +1256,7 @@ void task_emy_02_3(EmyWork* work) {
 }
 
 void task_emy_03_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy03Def, obj);
+    EmyInit(work, &sEmy03Def, obj);
     work->idleState = 7;
 }
 
@@ -1285,7 +1285,7 @@ u8 task_emy_03_1(Emy03Work* work) {
     case 0x12:
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x480;
-            AnimChangeWithDef(gEmy03AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         } else if (work->base.stateTimer == 1) {
             BgFxStartActorThunder(act);
             m4aSongNumStart(SONG_BTL_YELLOW_MOV);
@@ -1297,7 +1297,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         break;
     case 0x13:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         } else if (work->base.stateTimer == 1) {
             GetEnemyTargetPosition(act, &w->targetX, &w->targetY, 0);
             w->unk_18C = 0;
@@ -1327,7 +1327,7 @@ void task_emy_03_3(EmyWork* work) {
 }
 
 void task_emy_04_0(Emy04Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy04Def, obj);
+    EmyInit(&work->base, &sEmy04Def, obj);
     work->base.idleState = 7;
     work->unk_184 = 0;
     work->healCount = 0;
@@ -1349,7 +1349,7 @@ u8 task_emy_04_1(Emy04Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(&gEmy04AnimDef, &work->base.anim, 0, 0, work->base.tiles);
+        AnimChangeWithDef(&sEmy04AnimDef, &work->base.anim, 0, 0, work->base.tiles);
         work->base.vz = 0;
 
         if (work->healCount > 2) {
@@ -1410,7 +1410,7 @@ void task_emy_04_3(EmyWork* work) {
 }
 
 void task_emy_06_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy06Def, obj);
+    EmyInit(work, &sEmy06Def, obj);
     work->idleState = 7;
 }
 
@@ -1446,7 +1446,7 @@ u8 task_emy_06_1(Emy06Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy06AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         p = &gBtlWork->targetZ;
         t = act->z + 0xC00;
@@ -1478,7 +1478,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy06AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         work->base.vz = 0;
         p = &gBtlWork->targetZ;
         t = act->z + 0xC00;
@@ -1531,7 +1531,7 @@ void task_emy_06_3(EmyWork* work) {
 }
 
 void task_emy_07_0(Emy07Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy07Def, obj);
+    EmyInit(&work->base, &sEmy07Def, obj);
     work->successCount = 0;
     work->unk_186 = 0;
     work->base.idleState = 0x12;
@@ -1634,7 +1634,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -1644,7 +1644,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 4, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 4, 1, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -1654,7 +1654,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 23:
-        AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
 
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
@@ -1665,9 +1665,9 @@ u8 task_emy_07_1(Emy07Work* work) {
         break;
     case 20:
         if (w->unk_186 != 0) {
-            AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         } else {
-            AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         }
 
         if (work->base.stateTimer == 0) {
@@ -1725,7 +1725,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 19:
-        AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0) {
             act->flags |= 0x100;
@@ -1738,7 +1738,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
         break;
     case 25:
-        AnimChangeWithDef(gEmy07AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             if (w->rewarded != 0) {
@@ -1763,7 +1763,7 @@ void task_emy_07_3(EmyWork* work) {
 }
 
 void task_emy_08_0(Emy08Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy08Def, obj);
+    EmyInit(&work->base, &sEmy08Def, obj);
     work->palette = LoadObjPalette(gEmy07mPalette, 0x20);
     work->basePalette = work->base.palette;
     work->flags = 0;
@@ -1805,7 +1805,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 6) {
             act->flags |= 0x180000000;
@@ -1818,7 +1818,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 23:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 4) {
             act->flags &= ~0x180000000;
@@ -1831,7 +1831,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 18:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
@@ -1895,7 +1895,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 20:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
@@ -1906,7 +1906,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
@@ -1917,7 +1917,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
         break;
     case 19:
-        AnimChangeWithDef(gEmy08AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (work->base.anim.timer == 0
                 && AnimGetFrame(&work->base.anim) == 7) {
@@ -1957,7 +1957,7 @@ void task_emy_08_3(Emy08Work* work) {
 }
 
 void task_emy_14_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy14Def, obj);
+    EmyInit(work, &sEmy14Def, obj);
 }
 
 u8 task_emy_14_1(EmyWork* work) {
@@ -1982,11 +1982,11 @@ u8 task_emy_14_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy14AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy14AnimDefs, &w->anim, 0, 0, w->tiles);
         EmyLungeAttack(work, 0x0F, 0x0E, 0x14, 0xB3, 0x18, SONG_BTL_HANE_HIT, 0, 0, 0x16);
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy14AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy14AnimDefs, &w->anim, 1, 0, w->tiles);
         EmyLungeAttack(work, 0x14, 0x25, 0x06, 0xB4, 0x64, SONG_BTL_MON_HIT02, 0, 0, 0x14);
         break;
     }
@@ -2003,7 +2003,7 @@ void task_emy_14_3(EmyWork* work) {
 }
 
 void task_emy_15_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy15Def, obj);
+    EmyInit(work, &sEmy15Def, obj);
 }
 
 u8 task_emy_15_1(EmyWork* work) {
@@ -2029,7 +2029,7 @@ u8 task_emy_15_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy15AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 0x13;
@@ -2037,7 +2037,7 @@ u8 task_emy_15_1(EmyWork* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy15AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (act->flags & 4) {
             ApproachValueHalfSteps(&act->x, act->originX - 0x5000, work->stateTimer);
@@ -2059,7 +2059,7 @@ u8 task_emy_15_1(EmyWork* work) {
         }
         break;
     case 0x14:
-        AnimChangeWithDef(gEmy15AnimDefs, &w->anim, 2, 0, w->tiles);
+        AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 2, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
@@ -2067,7 +2067,7 @@ u8 task_emy_15_1(EmyWork* work) {
         break;
     case 0x15:
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gEmy15AnimDefs, &w->anim, 3, 0, w->tiles);
+            AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 3, 0, w->tiles);
             work->vz = -0x533;
         }
 
@@ -2079,7 +2079,7 @@ u8 task_emy_15_1(EmyWork* work) {
         }
         break;
     case 0x16:
-        AnimChangeWithDef(gEmy15AnimDefs, &w->anim, 4, 0, w->tiles);
+        AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 4, 0, w->tiles);
         EmyLungeAttack(work, 0x16, 0x16, 0x3C, 0xB6, 0x40, SONG_BTL_MON_HIT02, 0x10, -0x0C, 0x0C);
         break;
     }
@@ -2096,7 +2096,7 @@ void task_emy_15_3(EmyWork* work) {
 }
 
 void task_emy_16_0(Emy16Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy16Def, obj);
+    EmyInit(&work->base, &sEmy16Def, obj);
     work->pTask = 0;
     work->bTask = 0;
     TaskPoolInit(&work->tasks, 2);
@@ -2112,7 +2112,7 @@ u8 task_emy_16_1(Emy16Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        if (IsTaskActiveNamed(work->bTask, gTaskDescEmy16B.name)) {
+        if (IsTaskActiveNamed(work->bTask, sTaskDescEmy16B.name)) {
             work->base.state = 0x12;
         } else {
             r = GetRandom();
@@ -2132,7 +2132,7 @@ u8 task_emy_16_1(Emy16Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy16AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 3 && work->base.anim.timer == 0) {
             if (act->flags & 4) {
@@ -2147,18 +2147,18 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.unk_12 = 0;
             }
 
-            w->pTask = TaskCreate(&w->tasks, &gTaskDescEmy16P, &spawn);
+            w->pTask = TaskCreate(&w->tasks, &sTaskDescEmy16P, &spawn);
             w->pTaskStarted = 1;
         }
 
         if (w->pTaskStarted != 0) {
-            if (!IsTaskActiveNamed(w->pTask, gTaskDescEmy16P.name)) {
+            if (!IsTaskActiveNamed(w->pTask, sTaskDescEmy16P.name)) {
                 EmyReturnToIdle(&work->base);
             }
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy16AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 0x0A && work->base.anim.timer == 0) {
             if (act->flags & 4) {
@@ -2173,7 +2173,7 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.unk_12 = 0;
             }
 
-            w->bTask = TaskCreate(&w->tasks, &gTaskDescEmy16B, &spawn);
+            w->bTask = TaskCreate(&w->tasks, &sTaskDescEmy16B, &spawn);
         }
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -2411,7 +2411,7 @@ void task_emy_16_p_3(Emy16pWork* work) {
 }
 
 void task_emy_18_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy18Def, obj);
+    EmyInit(work, &sEmy18Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
     work->idleState = 7;
 }
@@ -2446,7 +2446,7 @@ u8 task_emy_18_1(Emy18Work* work) {
 
     switch (work->base.state) {
     case 20:
-        AnimChangeWithDef(gEmy18AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         work->base.vz = 0;
 
         if (AnimGetFrame(&work->base.anim) == 5) {
@@ -2499,7 +2499,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(gEmy18AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         work->base.vz = 0;
         act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
         act->y += -gSineTable[work->base.angle + 64] * work->base.speed >> 8;
@@ -2515,7 +2515,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
         break;
     case 18:
-        AnimChangeWithDef(gEmy18AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer <= 29) {
             work->base.vz = 0;
@@ -2530,7 +2530,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         }
         break;
     case 19:
-        AnimChangeWithDef(gEmy18AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (work->base.anim.timer == 0) {
             switch (AnimGetFrame(&work->base.anim)) {
@@ -2562,7 +2562,7 @@ void task_emy_18_3(EmyWork* work) {
 }
 
 void task_emy_19_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy19Def, obj);
+    EmyInit(work, &sEmy19Def, obj);
 }
 
 u8 task_emy_19_1(Emy19Work* work) {
@@ -2589,7 +2589,7 @@ u8 task_emy_19_1(Emy19Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 0x13;
@@ -2598,7 +2598,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         break;
     case 0x13:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             work->base.vz = -0x500;
             w->dashSpeed = 0x500;
         }
@@ -2614,7 +2614,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
         break;
     case 0x14:
-        AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
         act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
@@ -2636,7 +2636,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
         break;
     case 0x15:
-        AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
@@ -2646,14 +2646,14 @@ u8 task_emy_19_1(Emy19Work* work) {
         }
         break;
     case 0x16:
-        AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
         break;
     case 0x17:
-        AnimChangeWithDef(gEmy19AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         switch (AnimGetFrame(&work->base.anim)) {
         case 3:
@@ -2695,7 +2695,7 @@ void task_emy_19_3(EmyWork* work) {
 }
 
 void task_emy_21_0(Emy21Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy21Def, obj);
+    EmyInit(&work->base, &sEmy21Def, obj);
     work->dashSpeed = 0;
 }
 
@@ -2724,7 +2724,7 @@ u8 task_emy_21_1(Emy21Work* work) {
     switch (work->base.state) {
     case 0x12:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy21AnimDefs, &w->base.anim, 0, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 0, 1, w->base.tiles);
         }
 
         if (work->base.stateTimer > 29) {
@@ -2762,7 +2762,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         break;
     }
     case 0x14:
-        AnimChangeWithDef(gEmy21AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
@@ -2771,7 +2771,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         break;
     case 0x15:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy21AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
             w->dashSpeed = 0;
         }
 
@@ -2791,7 +2791,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         }
         break;
     case 0x16:
-        AnimChangeWithDef(gEmy21AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
@@ -2855,7 +2855,7 @@ void task_emy_21_3(EmyWork* work) {
 }
 
 void task_emy_22_0(Emy22Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy22Def, obj);
+    EmyInit(&work->base, &sEmy22Def, obj);
     work->base.idleState = 7;
     work->counterPending = 0;
 }
@@ -2964,7 +2964,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         }
 
         act->z += -act->z >> 4;
-        AnimChangeWithDef(gEmy22AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy22AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         EmyLungeAttack(&work->base, 27, 14, 40, 191, 24, SONG_BTL_MON_HIT00, 24, 0, 24);
 
         if (gBtlWork->actor->flags & 2) {
@@ -2989,7 +2989,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         }
 
         act->z += -act->z >> 4;
-        AnimChangeWithDef(gEmy22AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy22AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         EmyLungeAttack(&work->base, 50, 19, 30, 192, 16, SONG_BTL_MON_HIT00, 48, 0, 24);
         break;
     }
@@ -3006,7 +3006,7 @@ void task_emy_22_3(EmyWork* work) {
 }
 
 void task_emy_23_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy23Def, obj);
+    EmyInit(work, &sEmy23Def, obj);
     work->idleState = 7;
 }
 
@@ -3033,7 +3033,7 @@ u8 task_emy_23_1(Emy23Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy23AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy23AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         switch (AnimGetFrame(&work->base.anim)) {
         case 0:
@@ -3068,7 +3068,7 @@ u8 task_emy_23_1(Emy23Work* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy23AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy23AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         act->z += -act->z >> 2;
 
         if (AnimGetFrame(&work->base.anim) == 3) {
@@ -3099,7 +3099,7 @@ void task_emy_23_3(EmyWork* work) {
 }
 
 void task_emy_25_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy25Def, obj);
+    EmyInit(work, &sEmy25Def, obj);
 }
 
 u8 task_emy_25_1(EmyWork* work) {
@@ -3129,7 +3129,7 @@ u8 task_emy_25_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy25AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy25AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
@@ -3182,7 +3182,7 @@ u8 task_emy_25_1(EmyWork* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy25AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy25AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
@@ -3255,7 +3255,7 @@ void task_emy_25_3(EmyWork* work) {
 }
 
 void task_emy_26_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy26Def, obj);
+    EmyInit(work, &sEmy26Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
     work->idleState = 7;
 }
@@ -3287,7 +3287,7 @@ u8 task_emy_26_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy26AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy26AnimDefs, &w->anim, 0, 0, w->tiles);
 
         switch (AnimGetFrame(&work->anim)) {
         case 3:
@@ -3312,7 +3312,7 @@ u8 task_emy_26_1(EmyWork* work) {
 
         switch (work->stateTimer) {
         case 0:
-            AnimChangeWithDef(gEmy26AnimDefs, &w->anim, 1, 0, w->tiles);
+            AnimChangeWithDef(sEmy26AnimDefs, &w->anim, 1, 0, w->tiles);
             work->stateTimer++;
             break;
         case 1:
@@ -3362,7 +3362,7 @@ void task_emy_26_3(EmyWork* work) {
 }
 
 void task_emy_27_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy27Def, obj);
+    EmyInit(work, &sEmy27Def, obj);
 }
 
 u8 task_emy_27_1(EmyWork* work) {
@@ -3390,7 +3390,7 @@ u8 task_emy_27_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy27AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 0, 0, w->tiles);
 
         if (AnimGetFrame(&work->anim) == 1 && work->anim.timer == 0) {
             m4aSongNumStart(SONG_BTL_SWORDFLASH);
@@ -3405,7 +3405,7 @@ u8 task_emy_27_1(EmyWork* work) {
         EmyLungeAttack(work, 0x3D, 6, 0x14, 0xC8, 0x20, SONG_BTL_MON_SWORD04, 0x28, 0, 0x14);
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy27AnimDefs, &w->anim, 1, 1, w->tiles);
+        AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 1, 1, w->tiles);
         GetEnemyTargetPosition(act, &tx, &ty, 0);
 
         if (work->stateTimer % 6 == 0) {
@@ -3453,7 +3453,7 @@ void task_emy_27_3(EmyWork* work) {
 }
 
 void task_emy_28_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy28Def, obj);
+    EmyInit(work, &sEmy28Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
     work->idleState = 7;
 }
@@ -3488,7 +3488,7 @@ u8 task_emy_28_1(Emy28Work* work) {
 
     switch (work->base.state) {
     case 20:
-        AnimChangeWithDef(gEmy28AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         work->base.vz = 0;
 
         if (AnimGetFrame(&work->base.anim) == 1) {
@@ -3541,7 +3541,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(gEmy28AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         work->base.vz = 0;
         act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
         act->y += -gSineTable[work->base.angle + 64] * work->base.speed >> 8;
@@ -3557,7 +3557,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         }
         break;
     case 18:
-        AnimChangeWithDef(gEmy28AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.anim.timer == 0) {
             switch (AnimGetFrame(&work->base.anim)) {
@@ -3576,7 +3576,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         }
         break;
     case 19:
-        AnimChangeWithDef(gEmy28AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (work->base.stateTimer <= 34) {
             work->base.vz = 0;
@@ -3614,7 +3614,7 @@ void task_emy_28_3(EmyWork* work) {
 }
 
 void task_emy_29_0(Emy29Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy29Def, obj);
+    EmyInit(&work->base, &sEmy29Def, obj);
     work->base.fxScale = 0x180;
     work->base.idleState = 7;
     work->base.flags |= 1;
@@ -3660,7 +3660,7 @@ u8 task_emy_29_1(Emy29Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy29AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         a = -gSineTable[(((u16)work->base.stateTimer * 2) & 0xFF) + 0x40] << 4;
         t = act->z + 0x1000;
@@ -3674,7 +3674,7 @@ u8 task_emy_29_1(Emy29Work* work) {
         c = work->base.stateTimer;
 
         if (c == 0) {
-            AnimChangeWithDef(gEmy29AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             w->state = 0;
             w->steps = 8;
             work->base.stateTimer++;
@@ -3734,7 +3734,7 @@ void task_emy_29_3(EmyWork* work) {
 }
 
 void task_emy_30_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy30Def, obj);
+    EmyInit(work, &sEmy30Def, obj);
     work->actor.z = (GetRandom() % 0x1001) - 0x3000;
     work->idleState = 7;
 }
@@ -3771,7 +3771,7 @@ u8 task_emy_30_1(EmyWork* work) {
 
     switch (work->state) {
     case 24:
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
 
         if (AnimGetFrame(&work->anim) == 1) {
@@ -3818,7 +3818,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
         break;
     case 25:
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;
         act->x += gSineTable[work->angle] * work->speed >> 8;
         act->y += -gSineTable[work->angle + 64] * work->speed >> 8;
@@ -3836,7 +3836,7 @@ u8 task_emy_30_1(EmyWork* work) {
     case 18: {
     s32 currentX;
     s32 targetX;
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 2, 0, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 2, 0, w->tiles);
         work->vz = 0;
         act->z += (-0x4000 - act->z) >> 3;
         act->y += (y - act->y) >> 3;
@@ -3863,7 +3863,7 @@ u8 task_emy_30_1(EmyWork* work) {
     case 19: {
     s32 currentX;
     s32 targetX;
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 3, 1, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 3, 1, w->tiles);
         work->vz = 0;
         act->z += (-0x2000 - act->z) >> 3;
         act->y += (y - act->y) >> 4;
@@ -3903,7 +3903,7 @@ u8 task_emy_30_1(EmyWork* work) {
         break;
     }
     case 20:
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 4, 0, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 4, 0, w->tiles);
         work->vz = 0;
 
         if (AnimIsFinished(&work->anim)) {
@@ -3914,7 +3914,7 @@ u8 task_emy_30_1(EmyWork* work) {
         work->vz = 0;
 
         if (work->stateTimer == 0) {
-            AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 5, 0, w->tiles);
+            AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 5, 0, w->tiles);
 
             if (act->x > 0x10000) {
                 act->flags |= 4;
@@ -3938,7 +3938,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 6, 1, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 6, 1, w->tiles);
         work->vz = 0;
         work->speed += 38;
         act->y += (y - act->y) >> 4;
@@ -3969,7 +3969,7 @@ u8 task_emy_30_1(EmyWork* work) {
         }
         break;
     case 23:
-        AnimChangeWithDef(gEmy30AnimDefs, &w->anim, 7, 0, w->tiles);
+        AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 7, 0, w->tiles);
         work->vz = 0;
         work->speed -= 128;
 
@@ -4001,7 +4001,7 @@ void task_emy_30_3(EmyWork* work) {
 }
 
 void task_emy_31_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy31Def, obj);
+    EmyInit(work, &sEmy31Def, obj);
     work->idleState = 7;
 }
 
@@ -4037,7 +4037,7 @@ u8 task_emy_31_1(Emy31Work* work) {
         switch (w->state) {
         case 0:
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy31AnimDefs, &w->base.anim, 0, 0,
+                AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 0, 0,
                     w->base.tiles);
             }
 
@@ -4099,7 +4099,7 @@ u8 task_emy_31_1(Emy31Work* work) {
         switch (w->state) {
         case 0:
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy31AnimDefs, &w->base.anim, 1, 0,
+                AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 1, 0,
                     w->base.tiles);
             }
 
@@ -4159,7 +4159,7 @@ u8 task_emy_31_1(Emy31Work* work) {
         switch (w->state) {
         case 0:
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy31AnimDefs, &w->base.anim, 2, 0,
+                AnimChangeWithDef(sEmy31AnimDefs, &w->base.anim, 2, 0,
                     w->base.tiles);
                 GetEnemyTargetPosition(act, &w->targetX, &w->targetY, &w->targetZ);
             }
@@ -4228,7 +4228,7 @@ void task_emy_31_3(EmyWork* work) {
 }
 
 void task_emy_37_0(Emy37Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy37Def, obj);
+    EmyInit(&work->base, &sEmy37Def, obj);
     work->base.flags |= 1;
     work->base.idleState = 0x12;
     work->base.state = 0x1C;
@@ -4255,11 +4255,11 @@ u8 task_emy_37_1(Emy37Work* work) {
 
     switch (work->base.state) {
     case 24:
-        AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         EmyLungeAttack(&work->base, 30, 14, 20, 0xD2, 70, SONG_BTL_MON_HIT00, 0, 0, 24);
         break;
     case 25:
-        AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
@@ -4271,7 +4271,7 @@ u8 task_emy_37_1(Emy37Work* work) {
     case 29:
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x399;
-            AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         }
 
         if (work->base.vz > 0) {
@@ -4294,7 +4294,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 x;
             s32 y;
 
-            AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
             w->speed = 0;
             GetEnemyTargetPosition(act, &x, &y, 0);
             w->angle = GetAngle(act->x, act->y, x, y);
@@ -4328,7 +4328,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
         break;
     case 28:
-        AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 10, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 10, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             act->flags &= ~0x100;
@@ -4338,7 +4338,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
         break;
     case 19:
-        AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 9, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 9, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 20;
@@ -4357,7 +4357,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 offset;
 
             GetEnemyTargetPosition(act, &x, &y, 0);
-            AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 5, 1, w->base.tiles);
             sample = gSineTable[work->base.angle];
             offset = 70;
             offset *= sample;
@@ -4411,7 +4411,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         }
         break;
     case 21:
-        AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (work->base.stateTimer == 30) {
             act->flags &= ~0x100;
@@ -4427,7 +4427,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         break;
     case 26:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 7, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             work->base.vz = -0x433;
         }
 
@@ -4440,7 +4440,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         break;
     case 27:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy37AnimDefs, &w->base.anim, 8, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 8, 0, w->base.tiles);
         }
 
         if (act->z >= act->groundZ) {
@@ -4572,7 +4572,7 @@ void task_emy_37_3(EmyWork* work) {
 }
 
 void task_emy_38_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy38Def, obj);
+    EmyInit(work, &sEmy38Def, obj);
 }
 
 u8 task_emy_38_1(EmyWork* work) {
@@ -4599,7 +4599,7 @@ u8 task_emy_38_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy38AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy38AnimDefs, &w->anim, 0, 0, w->tiles);
         EmyLungeAttack(work, 0x1E, 0x14, 0x2D, 0xD4, 0x32, SONG_BTL_MON_HIT01, 0, 0, 0x18);
 
         if (work->stateTimer == 0x1E) {
@@ -4607,7 +4607,7 @@ u8 task_emy_38_1(EmyWork* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy38AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy38AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (work->stateTimer == 0x3F) {
             ApplyAttackBox(0xD5, act->x, act->y, act->z, 0x100, 0x100, 1);
@@ -4645,7 +4645,7 @@ void task_emy_38_3(EmyWork* work) {
 }
 
 void task_emy_39_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy39Def, obj);
+    EmyInit(work, &sEmy39Def, obj);
 }
 
 u8 task_emy_39_1(Emy39Work* work) {
@@ -4677,7 +4677,7 @@ u8 task_emy_39_1(Emy39Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy39AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy39AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0x30) {
             z = act->y;
@@ -4703,7 +4703,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         c = work->base.stateTimer;
 
         if (c == 0) {
-            AnimChangeWithDef(gEmy39AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy39AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             w->dashSpeed = 0;
         }
 
@@ -4798,7 +4798,7 @@ void task_emy_39_3(EmyWork* work) {
 }
 
 void task_emy_41_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy41Def, obj);
+    EmyInit(work, &sEmy41Def, obj);
     work->idleState = 7;
 }
 
@@ -4827,7 +4827,7 @@ u8 task_emy_41_1(Emy41Work* work) {
 
     switch (work->base.state) {
     case 0x12:
-        AnimChangeWithDef(gEmy41AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         a = gSineTable[((u16)work->base.stateTimer * 4) & 0xFF] << 4;
         t = act->z + 0x1000;
@@ -4836,7 +4836,7 @@ u8 task_emy_41_1(Emy41Work* work) {
         break;
     case 0x13:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy41AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             GetEnemyTargetPosition(act, &w->targetX, &w->targetY, 0);
             w->targetZ = 0;
         }
@@ -4871,7 +4871,7 @@ void task_emy_41_3(EmyWork* work) {
 }
 
 void task_emy_44_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy44Def, obj);
+    EmyInit(work, &sEmy44Def, obj);
 }
 
 u8 task_emy_44_1(EmyWork* work) {
@@ -4897,7 +4897,7 @@ u8 task_emy_44_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x12:
-        AnimChangeWithDef(gEmy44AnimDefs, &w->anim, 0, 0, w->tiles);
+        AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 0, 0, w->tiles);
 
         switch (AnimGetFrame(&work->anim)) {
         case 1:
@@ -4919,7 +4919,7 @@ u8 task_emy_44_1(EmyWork* work) {
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy44AnimDefs, &w->anim, 1, 0, w->tiles);
+        AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (AnimGetFrame(&work->anim) == 7 && work->anim.timer == 0) {
             if (act->flags & 4) {
@@ -4959,7 +4959,7 @@ void task_emy_44_3(EmyWork* work) {
 }
 
 void task_emy_81_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmy81Def, obj);
+    EmyInit(work, &sEmy81Def, obj);
 }
 
 static inline s32 EmyFacingX(BtlObj* actor, s32 offset) {
@@ -5010,7 +5010,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
         break;
     case 20:
-        AnimChangeWithDef(gEmy81AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
         d = (-0x2800 - act->z) >> 4;
 
@@ -5032,7 +5032,7 @@ u8 task_emy_81_1(Emy81Work* work) {
     case 21:
         if (work->base.stateTimer == 0) {
             GetEnemyTargetPosition(act, &a, &b, 0);
-            AnimChangeWithDef(gEmy81AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
+            AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, 1, w->base.tiles);
             w->targetX = (a * 2) - act->x;
             w->targetY = (b * 2) - act->y;
             w->speedX = 0;
@@ -5089,7 +5089,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
         break;
     case 22:
-        AnimChangeWithDef(gEmy81AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
         work->base.vz -= 25;
 
         if (act->z >= act->groundZ) {
@@ -5099,7 +5099,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         break;
     case 18:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy81AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         }
 
         {
@@ -5153,7 +5153,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         break;
     case 19:
         if (work->base.stateTimer == 0) {
-            AnimChangeWithDef(gEmy81AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+            AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         }
 
         {
@@ -5212,7 +5212,7 @@ void task_emy_81_3(EmyWork* work) {
 }
 
 void task_emy_82_0(Emy82Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy82Def, obj);
+    EmyInit(&work->base, &sEmy82Def, obj);
     work->base.idleState = 0x15;
     work->spawnCount = 0;
 }
@@ -5347,7 +5347,7 @@ u8 task_emy_82_1(Emy82Work* work) {
             u32 frame;
             s32 hitX;
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+                AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
                 work->base.vz = -0x400;
             }
             if (act->flags & 4) {
@@ -5398,7 +5398,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         {
             u32 frame;
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
+                AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
             frame = AnimGetFrame(&work->base.anim);
             if (frame > 1) {
@@ -5446,7 +5446,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         {
             u32 frame;
             if (work->base.stateTimer == 0) {
-                AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
+                AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             }
             frame = AnimGetFrame(&work->base.anim);
             if ((u16)(frame - 2) <= 21) {
@@ -5493,20 +5493,20 @@ u8 task_emy_82_1(Emy82Work* work) {
         }
         break;
     case 23:
-        AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 24;
         }
         break;
     case 24:
-        AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         if (act->z >= act->groundZ) {
             work->base.state = 25;
         }
         break;
     case 25:
-        AnimChangeWithDef(gEmy82AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         if (AnimGetFrame(&work->base.anim) == 1 && work->base.anim.timer == 0) {
             work->base.vz = -0x333;
         }
@@ -5527,7 +5527,7 @@ void task_emy_82_3(EmyWork* work) {
 }
 
 void task_emy_83_0(Emy83Work* work, void* obj) {
-    EmyInit(&work->base, &gEmy83Def, obj);
+    EmyInit(&work->base, &sEmy83Def, obj);
     work->task = 0;
     work->base.idleState = 0x16;
     TaskPoolInit(&work->tasks, 4);
@@ -5576,7 +5576,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
         break;
     case 0x12:
-        AnimChangeWithDef(gEmy83AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         c = work->base.anim.timer;
 
         if (c == 0) {
@@ -5588,24 +5588,24 @@ u8 task_emy_83_1(Emy83Work* work) {
                 spawn.x = w->targetX;
                 spawn.y = w->targetY;
                 spawn.z = c;
-                w->task = TaskCreate(&w->tasks, &gTaskDescEmy83B, &spawn);
+                w->task = TaskCreate(&w->tasks, &sTaskDescEmy83B, &spawn);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->base.anim) && !IsTaskActiveNamed(w->task, gTaskDescEmy83B.name)) {
+        if (AnimIsFinished(&work->base.anim) && !IsTaskActiveNamed(w->task, sTaskDescEmy83B.name)) {
             EmyReturnToIdle(&work->base);
         }
         break;
     case 0x13:
-        AnimChangeWithDef(gEmy83AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 0x14;
         }
         break;
     case 0x14:
-        AnimChangeWithDef(gEmy83AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
+        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, 1, w->base.tiles);
 
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
             if (act->flags & 4) {
@@ -5619,11 +5619,11 @@ u8 task_emy_83_1(Emy83Work* work) {
             spawn.y = act->y;
             spawn.z = act->z - 0x1200;
             spawn.unk_14 = 0;
-            TaskCreate(&w->tasks, &gTaskDescEmy83S, &spawn);
+            TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
             spawn.unk_14 = 1;
-            TaskCreate(&w->tasks, &gTaskDescEmy83S, &spawn);
+            TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
             spawn.unk_14 = 2;
-            TaskCreate(&w->tasks, &gTaskDescEmy83S, &spawn);
+            TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
             w->shotCount++;
         }
 
@@ -5635,7 +5635,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         }
         break;
     case 0x15:
-        AnimChangeWithDef(gEmy83AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
+        AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
 
         if (work->base.stateTimer > 0x28) {
             EmyReturnToIdle(&work->base);
@@ -5819,7 +5819,7 @@ void task_emy_83_s_3(Emy83sWork* work) {
 }
 
 void task_emy_trump_h_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmyTrumpHDef, obj);
+    EmyInit(work, &sEmyTrumpHDef, obj);
 }
 
 u8 task_emy_trump_h_1(EmyWork* work) {
@@ -5837,7 +5837,7 @@ u8 task_emy_trump_h_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x13:
-        AnimChangeWithDef(&gEmyTrumpHAnimDef, &work->anim, 0, 0, work->tiles);
+        AnimChangeWithDef(&sEmyTrumpHAnimDef, &work->anim, 0, 0, work->tiles);
         EmyLungeAttack(work, 0x19, 8, 0x0A, 0x12B, 0x30, SONG_BTL_MON_SWORD00, 0x50, 0, 0x18);
         break;
     case 0x12:
@@ -5870,7 +5870,7 @@ void task_emy_trump_h_3(EmyWork* work) {
 }
 
 void task_emy_trump_s_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmyTrumpSDef, obj);
+    EmyInit(work, &sEmyTrumpSDef, obj);
 }
 
 u8 task_emy_trump_s_1(EmyWork* work) {
@@ -5888,7 +5888,7 @@ u8 task_emy_trump_s_1(EmyWork* work) {
 
     switch (work->state) {
     case 0x13:
-        AnimChangeWithDef(&gEmyTrumpSAnimDef, &work->anim, 0, 0, work->tiles);
+        AnimChangeWithDef(&sEmyTrumpSAnimDef, &work->anim, 0, 0, work->tiles);
         EmyLungeAttack(work, 0x14, 0x1E, 0x0A, 0x12A, 0x46, SONG_BTL_MON_SWORD01, 0x10, 0, 0x18);
 
         if (work->stateTimer == 0x14) {
@@ -5925,7 +5925,7 @@ void task_emy_trump_s_3(EmyWork* work) {
 }
 
 void task_emy_test_0(EmyWork* work, void* obj) {
-    EmyInit(work, &gEmyTestDef, obj);
+    EmyInit(work, &sEmyTestDef, obj);
     work->actor.maxHp = 0xBB8;
     work->actor.hp = 0xBB8;
     work->actor.flags |= 0x1000;

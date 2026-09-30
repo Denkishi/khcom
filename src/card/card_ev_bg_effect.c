@@ -33,11 +33,11 @@
 
 u8 UpdateEventBgEffectAnim(EventBgEffectWork* w, void* a);
 
-const EventBgEffectDef gUnk_0903803C = {
+static const EventBgEffectDef sUnk_0903803C = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x20, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,
 };
 
-const EventBgEffectFrame gUnk_09038058[8] = {
+static const EventBgEffectFrame sUnk_09038058[8] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -48,11 +48,11 @@ const EventBgEffectFrame gUnk_09038058[8] = {
     { 6, 0x3800 },
 };
 
-const EventBgEffectDef gUnk_09038078 = {
-    &gEventBgEffectMaps[1], gUnk_094233B8 + 0xDC0, gUnk_096148D8 + 0x40, 0x800, 0x20, { 1, 1, 0, 0 }, gUnk_09038058, 8, -1,
+static const EventBgEffectDef sUnk_09038078 = {
+    &gEventBgEffectMaps[1], gUnk_094233B8 + 0xDC0, gUnk_096148D8 + 0x40, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_09038058, 8, -1,
 };
 
-const EventBgEffectFrame gUnk_09038094[8] = {
+static const EventBgEffectFrame sUnk_09038094[8] = {
     { 6, 0 },
     { 6, 0xC00 },
     { 6, 0x1800 },
@@ -63,11 +63,11 @@ const EventBgEffectFrame gUnk_09038094[8] = {
     { 6, 0x5400 },
 };
 
-const EventBgEffectDef gUnk_090380B4 = {
-    &gEventBgEffectMaps[2], gUnk_094233B8 + 0x4C80, gUnk_096148D8 + 0x60, 0xC00, 0x20, { 1, 1, 0, 0 }, gUnk_09038094, 8, -1,
+static const EventBgEffectDef sUnk_090380B4 = {
+    &gEventBgEffectMaps[2], gUnk_094233B8 + 0x4C80, gUnk_096148D8 + 0x60, 0xC00, 0x20, { 1, 1, 0, 0 }, sUnk_09038094, 8, -1,
 };
 
-const EventBgEffectFrame gUnk_090380D0[10] = {
+static const EventBgEffectFrame sUnk_090380D0[10] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -80,11 +80,11 @@ const EventBgEffectFrame gUnk_090380D0[10] = {
     { 6, 0x4800 },
 };
 
-const EventBgEffectDef gUnk_090380F8 = {
-    &gEventBgEffectMaps[3], gUnk_094233B8 + 0xFAE0, gUnk_096148D8 + 0xA0, 0x800, 0x20, { 1, 1, 0, 0 }, gUnk_090380D0, 10, -1,
+static const EventBgEffectDef sUnk_090380F8 = {
+    &gEventBgEffectMaps[3], gUnk_094233B8 + 0xFAE0, gUnk_096148D8 + 0xA0, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_090380D0, 10, -1,
 };
 
-const EventBgEffectFrame gUnk_09038114[10] = {
+static const EventBgEffectFrame sUnk_09038114[10] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -97,11 +97,11 @@ const EventBgEffectFrame gUnk_09038114[10] = {
     { 6, 0x4800 },
 };
 
-const EventBgEffectDef gUnk_0903813C = {
-    &gEventBgEffectMaps[4], gUnk_094233B8 + 0xAAE0, gUnk_096148D8 + 0x80, 0x800, 0x20, { 1, 1, 0, 0 }, gUnk_09038114, 10, -1,
+static const EventBgEffectDef sUnk_0903813C = {
+    &gEventBgEffectMaps[4], gUnk_094233B8 + 0xAAE0, gUnk_096148D8 + 0x80, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_09038114, 10, -1,
 };
 
-const EventBgEffectFrame gUnk_09038158[16] = {
+static const EventBgEffectFrame sUnk_09038158[16] = {
     { 6, 0 },
     { 6, 0xC00 },
     { 6, 0x1800 },
@@ -120,11 +120,11 @@ const EventBgEffectFrame gUnk_09038158[16] = {
     { 6, 0x4800 },
 };
 
-const EventBgEffectDef gUnk_09038198 = {
-    &gEventBgEffectMaps[5], gUnk_094233B8 + 0x14AE0, gUnk_096148D8 + 0xC0, 0xC00, 0x20, { 1, 1, 0, 0 }, gUnk_09038158, 16, -1,
+static const EventBgEffectDef sUnk_09038198 = {
+    &gEventBgEffectMaps[5], gUnk_094233B8 + 0x14AE0, gUnk_096148D8 + 0xC0, 0xC00, 0x20, { 1, 1, 0, 0 }, sUnk_09038158, 16, -1,
 };
 
-const EventBgEffectFrame gUnk_090381B4[6] = {
+static const EventBgEffectFrame sUnk_090381B4[6] = {
     { 6, 0 },
     { 6, 0x1000 },
     { 6, 0x2000 },
@@ -133,8 +133,8 @@ const EventBgEffectFrame gUnk_090381B4[6] = {
     { 6, 0x5000 },
 };
 
-const EventBgEffectDef gUnk_090381CC = {
-    &gEventBgEffectMaps[6], gUnk_094233B8 + 0x19D80, gUnk_096148D8 + 0xE0, 0x1000, 0x20, { 1, 1, 0, 0 }, gUnk_090381B4, 6, 2,
+static const EventBgEffectDef sUnk_090381CC = {
+    &gEventBgEffectMaps[6], gUnk_094233B8 + 0x19D80, gUnk_096148D8 + 0xE0, 0x1000, 0x20, { 1, 1, 0, 0 }, sUnk_090381B4, 6, 2,
 };
 
 void LoadEventBgEffect(EventBgEffectWork* w) {
@@ -327,13 +327,13 @@ void CreateEVBGEFFECTTask(u8* work) {
 }
 
 const EventBgEffectDef* gEventBgEffectDefs[8] = {
-    &gUnk_0903803C,
-    &gUnk_09038078,
-    &gUnk_090380B4,
-    &gUnk_090380F8,
-    &gUnk_0903813C,
-    &gUnk_09038198,
-    &gUnk_090381CC,
+    &sUnk_0903803C,
+    &sUnk_09038078,
+    &sUnk_090380B4,
+    &sUnk_090380F8,
+    &sUnk_0903813C,
+    &sUnk_09038198,
+    &sUnk_090381CC,
     NULL,
 };
 

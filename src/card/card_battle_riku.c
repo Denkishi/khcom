@@ -42,7 +42,7 @@ u8 gBossCardRequest EWRAM_COMMON(4);
 
 #include "riku_deck_names.inc"
 
-const Deck gRikuDecks[21] = {
+static const Deck sRikuDecks[21] = {
     {
         { 800, 802, 802, 803, 804, 804, 806, 811, 811, 813, 813, 814, 815, 815 },
         RIKU_DECK_NAME_00,
@@ -235,15 +235,15 @@ const Deck gRikuDecks[21] = {
     },
 };
 
-const s32 gRikuCardSwingAngles[4] = {
+static const s32 sRikuCardSwingAngles[4] = {
     0xE000, 0x2000, 0x6000, 0xA000,
 };
 
-const s16 gRikuStockValueX[4] = {
+static const s16 sRikuStockValueX[4] = {
     184, 172, 160, 0,
 };
 
-const UnkStruct_080ABA80 gUnk_090352FC = {
+static const UnkStruct_080ABA80 sUnk_090352FC = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
@@ -307,14 +307,14 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
         args.slot = w->slots[slot];
         args.listIndex = slot;
         node = TaskCreate(&w->tasks, &gTaskDescNOCard, &args)->work;
-        node->swingAngleTarget = node->swingAngle = gRikuCardSwingAngles[0];
+        node->swingAngleTarget = node->swingAngle = sRikuCardSwingAngles[0];
         node->ringIndex = 0;
         node->priority = 50;
         node->flags |= 0x802;
         gRikuSelectedCard = node;
         break;
     case 1:
-        gRikuSelectedCard->swingAngleTarget = gRikuSelectedCard->swingAngle = gRikuCardSwingAngles[0];
+        gRikuSelectedCard->swingAngleTarget = gRikuSelectedCard->swingAngle = sRikuCardSwingAngles[0];
         gRikuSelectedCard->priority = 50;
         gRikuSelectedCard->flags |= 0x800;
         break;
@@ -328,87 +328,87 @@ void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n) {
     switch (gBtlWork->battleId) {
     case 157:
     case 179:
-        deck = &gRikuDecks[20];
+        deck = &sRikuDecks[20];
         n = deck->cardCount;
         break;
     case 158:
-        deck = &gRikuDecks[4];
+        deck = &sRikuDecks[4];
         n = deck->cardCount;
         break;
     case 159:
-        deck = &gRikuDecks[1];
+        deck = &sRikuDecks[1];
         n = deck->cardCount;
         break;
     case 160:
-        deck = &gRikuDecks[2];
+        deck = &sRikuDecks[2];
         n = deck->cardCount;
         break;
     case 161:
-        deck = &gRikuDecks[5];
+        deck = &sRikuDecks[5];
         n = deck->cardCount;
         break;
     case 162:
-        deck = &gRikuDecks[0];
+        deck = &sRikuDecks[0];
         n = deck->cardCount;
         break;
     case 163:
-        deck = &gRikuDecks[3];
+        deck = &sRikuDecks[3];
         n = deck->cardCount;
         break;
     case 164:
-        deck = &gRikuDecks[7];
+        deck = &sRikuDecks[7];
         n = deck->cardCount;
         break;
     case 165:
-        deck = &gRikuDecks[13];
+        deck = &sRikuDecks[13];
         n = deck->cardCount;
         break;
     case 166:
-        deck = &gRikuDecks[14];
+        deck = &sRikuDecks[14];
         n = deck->cardCount;
         break;
     case 177:
-        deck = &gRikuDecks[19];
+        deck = &sRikuDecks[19];
         n = deck->cardCount;
         break;
     case 167:
-        deck = &gRikuDecks[17];
+        deck = &sRikuDecks[17];
         n = deck->cardCount;
         break;
     case 168:
-        deck = &gRikuDecks[6];
+        deck = &sRikuDecks[6];
         n = deck->cardCount;
         break;
     case 169:
-        deck = &gRikuDecks[9];
+        deck = &sRikuDecks[9];
         n = deck->cardCount;
         break;
     case 170:
-        deck = &gRikuDecks[10];
+        deck = &sRikuDecks[10];
         n = deck->cardCount;
         break;
     case 171:
-        deck = &gRikuDecks[16];
+        deck = &sRikuDecks[16];
         n = deck->cardCount;
         break;
     case 172:
-        deck = &gRikuDecks[18];
+        deck = &sRikuDecks[18];
         n = deck->cardCount;
         break;
     case 173:
-        deck = &gRikuDecks[12];
+        deck = &sRikuDecks[12];
         n = deck->cardCount;
         break;
     case 174:
-        deck = &gRikuDecks[11];
+        deck = &sRikuDecks[11];
         n = deck->cardCount;
         break;
     case 175:
-        deck = &gRikuDecks[8];
+        deck = &sRikuDecks[8];
         n = deck->cardCount;
         break;
     case 176:
-        deck = &gRikuDecks[15];
+        deck = &sRikuDecks[15];
         n = deck->cardCount;
         break;
     default:
@@ -562,7 +562,7 @@ static void cardbattle_0(CardBattleWork* w) {
     w->stockValue = 0;
     w->unk_C4[3] = 0;
     // @bug? Reads past the end of the array.
-    w->x = *(u16*)&gRikuCardSwingAngles[4];
+    w->x = *(u16*)&sRikuCardSwingAngles[4];
 
     for (i = 0; i <= 2; i++) {
         w->playedCards[i] = 0;
@@ -583,128 +583,128 @@ static void cardbattle_0(CardBattleWork* w) {
     switch (gBtlWork->battleId) {
     case 157:
     case 179:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[20]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[20]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[20]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[20]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 158:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[4]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[4]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[4]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[4]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 159:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[1]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[1]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[1]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[1]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 160:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[2]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[2]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[2]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[2]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 161:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[5]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[5]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[5]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[5]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 162:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[0]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[0]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[0]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[0]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 163:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[3]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[3]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[3]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[3]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 164:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[7]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[7]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[7]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[7]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 165:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[13]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[13]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[13]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[13]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 166:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[14]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[14]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[14]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[14]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 177:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[19]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[19]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[19]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[19]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 167:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[17]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[17]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[17]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[17]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 168:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[6]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[6]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[6]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[6]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 169:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[9]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[9]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[9]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[9]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 170:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[10]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[10]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[10]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[10]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 171:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[16]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[16]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[16]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[16]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 172:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[18]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[18]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[18]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[18]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 173:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[12]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[12]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[12]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[12]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 174:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[11]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[11]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[11]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[11]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 175:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[8]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[8]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[8]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[8]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
     case 176:
-        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &gRikuDecks[15]) + 1;
-        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &gRikuDecks[15]);
+        w->slotCounts[0] = w->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[15]) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[15]);
         InitRikuCardList(w, 0);
         InitRikuCardList(w, 3);
         break;
@@ -754,7 +754,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 
     if (w->unk_C4[3] != 0) {
         hold = w->x << 8;
-        ApproachValue(&hold, gRikuStockValueX[w->stockCount - 1] << 8, w->unk_C4[3]);
+        ApproachValue(&hold, sRikuStockValueX[w->stockCount - 1] << 8, w->unk_C4[3]);
         w->x = hold >> 8;
         w->unk_C4[3]--;
     }
@@ -1215,7 +1215,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
     }
 
     if (w->unk_C4[1] == 0 && (u8)AreCardsSettled(w->stock, w->stockCount) != 0) {
-        arr = gUnk_090352FC;
+        arr = sUnk_090352FC;
 
         if (!(gBtlWork->flags & 0x4000)) {
             r = LookupStockName(w->stock, w->stockCount, w->stockValue, &arr, flag);
@@ -1236,7 +1236,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
             }
         } else {
             if (w->stockCount == 3) {
-                arr2 = gUnk_090352FC;
+                arr2 = sUnk_090352FC;
                 memset(buf, 0, 6);
                 done = 0;
 
@@ -1449,7 +1449,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
                     p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
                 }
 
-                p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+                p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
                 p->ringIndex = 0;
                 p->priority = 60;
                 p->timer = 4;
@@ -1494,7 +1494,7 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
                     p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
                 }
 
-                p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+                p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
                 p->ringIndex = 0;
                 p->priority = 60;
                 p->timer = 4;
@@ -1528,7 +1528,7 @@ void SwitchRikuCardList(CardBattleWork* w) {
             gRikuSelectedCard->flags &= ~4;
         } else {
             w->selectedCards[w->listIndex] = gRikuSelectedCard;
-            gRikuSelectedCard->swingAngleTarget = gRikuCardSwingAngles[3];
+            gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
             gRikuSelectedCard->swingSteps = 4;
             gRikuSelectedCard->flags &= ~4;
         }
@@ -1550,7 +1550,7 @@ void SwitchRikuCardList(CardBattleWork* w) {
             gRikuSelectedCard->timer = 1;
         } else {
             gRikuSelectedCard = w->selectedCards[w->listIndex];
-            gRikuSelectedCard->swingAngleTarget = gRikuCardSwingAngles[0];
+            gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
             gRikuSelectedCard->swingAngle = gRikuSelectedCard->swingAngleTarget;
             gRikuSelectedCard->swingSteps = 1;
             gRikuSelectedCard->timer = 1;
@@ -1579,7 +1579,7 @@ void CycleRikuCardList(CardBattleWork* w) {
         gRikuSelectedCard->flags &= ~4;
     } else {
         w->selectedCards[w->listIndex] = gRikuSelectedCard;
-        gRikuSelectedCard->swingAngleTarget = gRikuCardSwingAngles[3];
+        gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
         gRikuSelectedCard->swingSteps = 12;
         gRikuSelectedCard->flags &= ~4;
     }
@@ -1606,8 +1606,8 @@ void CycleRikuCardList(CardBattleWork* w) {
         gRikuSelectedCard->timer = 12;
     } else {
         gRikuSelectedCard = w->selectedCards[w->listIndex];
-        gRikuSelectedCard->swingAngleTarget = gRikuCardSwingAngles[0];
-        gRikuSelectedCard->swingAngle = gRikuCardSwingAngles[1];
+        gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
+        gRikuSelectedCard->swingAngle = sRikuCardSwingAngles[1];
         gRikuSelectedCard->swingSteps = 12;
         gRikuSelectedCard->timer = 12;
         gRikuSelectedCard->flags |= 4;
@@ -1898,7 +1898,7 @@ u8 UseRikuCard(CardBattleWork* w) {
             p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
         }
 
-        p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+        p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
         p->ringIndex = 0;
         p->priority = 60;
         p->timer = 4;
@@ -1955,7 +1955,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
             }
 
             p->unk_80 = p->unk_7C = 0;
-            p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+            p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
             p->ringIndex = 0;
             p->priority = 50;
             p->x = p->unk_8C;
@@ -1973,7 +1973,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
         args.listIndex = w->listIndex;
         q = TaskCreate(&w->tasks, &gTaskDescNOCard, &args)->work;
         q->unk_80 = q->unk_7C = 0;
-        q->swingAngleTarget = q->swingAngle = gRikuCardSwingAngles[0];
+        q->swingAngleTarget = q->swingAngle = sRikuCardSwingAngles[0];
         q->x = q->unk_8C;
         q->y = q->unk_90;
         q->priority = 50;
@@ -2092,7 +2092,7 @@ u8 StockRikuCard(CardBattleWork* w) {
             p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
         }
 
-        p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+        p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
         p->ringIndex = 0;
         p->priority = 60;
         p->timer = 4;
@@ -2128,7 +2128,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
 #ifdef VERSION_EU
     CardDisplayWork* previous[3];
 #endif
-    UnkStruct_080ABA80 arr = *(UnkStruct_080ABA80*)&gRikuCardSwingAngles[6];
+    UnkStruct_080ABA80 arr = *(UnkStruct_080ABA80*)&sRikuCardSwingAngles[6];
     u8 flag;
     u8 skip;
     u8 i;
@@ -2420,7 +2420,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
                 p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
             }
 
-            p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+            p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
             p->ringIndex = 0;
             p->priority = 60;
             p->timer = 4;
@@ -2434,7 +2434,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             args.slot = w->slots[w->listIndex];
             args.listIndex = w->listIndex;
             p = TaskCreate(&w->tasks, &gTaskDescNOCard, &args)->work;
-            p->swingAngleTarget = p->swingAngle = gRikuCardSwingAngles[0];
+            p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
             p->ringIndex = 0;
             p->priority = 50;
             p->timer = 4;

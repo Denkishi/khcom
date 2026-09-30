@@ -20,9 +20,5 @@ typedef struct GaEntryDef {
     u16 unk_22;
 } GaEntryDef;
 
-extern const EmyKind gBosGaEmyKind;
-extern const GaEntryDef gGaEntryDefs[];
-extern const BosMapConfig gBosMapConfig;
-extern const s32 gBos5TanTable[];
 
 #endif

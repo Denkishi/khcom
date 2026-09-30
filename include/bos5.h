@@ -74,18 +74,6 @@ typedef struct MdAnimDef {
     u16 unk_06;
 } MdAnimDef;
 
-extern const MdAnimFrame gUnk_09992D34[4];
-extern const MdAnimFrame gUnk_09992D44[4];
-extern const MdAnimFrame gUnk_09992D54[4];
-extern const MdAnimFrame gUnk_09992D64[2];
-extern const MdAnimFrame gUnk_09992D6C[2];
-extern const MdAnimFrame gUnk_09992D74[10];
-extern const MdAnimFrame gUnk_09992D9C[8];
-extern const MdAnimFrame gUnk_09992DBC[6];
-extern const MdAnimFrame gUnk_09992DD4[8];
-extern const MdAnimFrame gUnk_09992DF4[11];
-extern const MdAnimFrame gUnk_09992E20[1];
-extern const MdAnimDef gMdAnimDefs[11];
 
 typedef struct MdAnim {
     u16 animId;
@@ -206,9 +194,7 @@ typedef struct WorldselectTileSizes {
 } WorldselectTileSizes;
 
 #ifdef VERSION_EU
-extern const WorldselectTileSizes gWorldselectTitleTileSizes;
 #endif
-extern const WorldselectWorldDef gWorldselectWorldDefs[13];
 
 typedef struct MdGfx {
     void* tiles;
@@ -253,7 +239,6 @@ extern u8 gUnk_09A3C9BC[];
 void BosMdFireHandleReaction(MdFireWork* work);
 u8 BosMdFireUpdateMotion(MdFireWork* work);
 
-extern const MdFrameDef gMdFrameDefs[41];
 
 s32 task_bos_md_hahen_1(MdHahenWork* work);
 void task_bos_md_hahen_2(MdHahenWork* work);
@@ -294,11 +279,6 @@ void task_bos_ga_0(GaWork* work, s32 arg);
 s32 task_bos_md_dai_1(MdDaiWork* work);
 void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg);
 void BosMdFirePlace(MdFireWork* work);
-extern const MdFirePoint gUnk_09992E98[4];
-extern const MdFirePoint gUnk_09992EB8[4];
-extern const MdFirePoint gUnk_09992ED8[4];
-extern const MdFireDef gMdFireDefs[6];
-extern const EmyKind gBosMdFireEmyKind;
 extern u8 gUnk_09A3C99C[];
 void task_bos_md_dai_2(MdDaiWork* work);
 u8 task_bos_ga_1(GaWork* work);
@@ -355,9 +335,7 @@ void mode_worldselect_2(void);
 void WorldselectSetBgMode1(void);
 
 void WorldselectCyclePalette(void);
-extern const MdMapData gMdMapData;
 extern u8 gUnk_09A3C8BC[];
-extern const EmyKind gBosMdEmyKind;
 void MdAnimUpdate(MdWork* work);
 extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_09A3C97C[];

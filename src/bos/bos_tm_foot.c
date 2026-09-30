@@ -21,13 +21,13 @@ s32 gUnk_0203AC70 EWRAM_COMMON(4);
 u16 gUnk_0203AC74 EWRAM_COMMON(4);
 s32 gUnk_0203AC78 EWRAM_COMMON(4);
 
-u8 gBosTmFootIdleFrames[8] = { 2, 1, 0, 1, 2, 3, 4, 3 };
+static u8 sBosTmFootIdleFrames[8] = { 2, 1, 0, 1, 2, 3, 4, 3 };
 
-s16 gBosTmFootIdleZ[5] = { -15, -6, 0, 8, 20 };
+static s16 sBosTmFootIdleZ[5] = { -15, -6, 0, 8, 20 };
 
 s16 gUnk_09EF21C2 = 0;
 
-TmFootStep gBosTmFootSteps[3] = {
+static TmFootStep sBosTmFootSteps[3] = {
     { 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 6, 0, 1, 0, 6, 0, 1, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 9, 0, 0, 0, 9, 0, 0, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
@@ -35,7 +35,7 @@ TmFootStep gBosTmFootSteps[3] = {
 
 TmFootStep gUnk_09EF2224 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } };
 
-TmFootStep gBosTmFootThrowSteps[16] = {
+static TmFootStep sBosTmFootThrowSteps[16] = {
     { 0, -8, 0, 3, 0, -8, 0, 3, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, -12, 0, 4, 0, -12, 0, 4, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, -8, 0, 5, 0, -8, 0, 5, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
@@ -56,7 +56,7 @@ TmFootStep gBosTmFootThrowSteps[16] = {
 
 TmFootStep gUnk_09EF2444 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } };
 
-TmFootStep gBosTmFootWalkSteps[10] = {
+static TmFootStep sBosTmFootWalkSteps[10] = {
     { 0, 0, 0, 7, 0, 0, 0, 2, -13, -10, { 0, 0, 0, 0 }, 0, 21, { 0, 0, 0, 0 } },
     { 0, 0, 0, 8, 0, 0, 0, 3, -20, 29, { 0, 0, 0, 0 }, 11, 25, { 0, 0, 0, 0 } },
     { 0, 0, 0, 9, 0, 0, 0, 4, -23, 39, { 0, 0, 0, 0 }, 24, 12, { 0, 0, 0, 0 } },
@@ -69,7 +69,7 @@ TmFootStep gBosTmFootWalkSteps[10] = {
     { 0, 0, 0, 6, 0, 0, 0, 1, -4, -7, { 0, 0, 0, 0 }, 0, 10, { 0, 0, 0, 0 } },
 };
 
-TmFootStep gUnk_09EF25A4[9] = {
+static TmFootStep sUnk_09EF25A4[9] = {
     { 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 6, 0, 1, 0, 6, 0, 1, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 9, 0, 0, 0, 9, 0, 0, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
@@ -92,7 +92,7 @@ TaskDesc gTaskDescBosTmFoot = {
     sizeof(TmFootWork),
 };
 
-TaskDesc gTaskDescBosTmClb = {
+static TaskDesc sTaskDescBosTmClb = {
     "task_bos_tm_clb",
     (TaskInitFunc)task_bos_tm_clb_0,
     (TaskUpdateFunc)task_bos_tm_clb_1,
@@ -101,71 +101,71 @@ TaskDesc gTaskDescBosTmClb = {
     sizeof(TmClbWork),
 };
 
-const TmAnimFrame gUnk_09619CDC[3] = {
+static const TmAnimFrame sUnk_09619CDC[3] = {
     { 10, { 0, 0 }, { 175, 0, 0, 0, 160, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0 } },
     { 10, { 0, 0 }, { 175, 0, 0, 0, 155, 0, 0, 0, 145, 0, 0, 0, 180, 0, 0, 0 } },
     { 10, { 0, 0 }, { 175, 0, 0, 0, 165, 0, 0, 0, 152, 0, 0, 0, 220, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619D18[3] = {
+static const TmAnimFrame sUnk_09619D18[3] = {
     { 10, { 0, 0 }, { 80, 0, 0, 0, 102, 0, 0, 0, 95, 0, 0, 0, 160, 0, 0, 0 } },
     { 10, { 0, 0 }, { 90, 0, 0, 0, 128, 0, 0, 0, 220, 0, 0, 0, 240, 0, 0, 0 } },
     { 10, { 0, 0 }, { 76, 0, 0, 0, 128, 0, 0, 0, 160, 0, 0, 0, 224, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619D54[3] = {
+static const TmAnimFrame sUnk_09619D54[3] = {
     { 10, { 0, 0 }, { 176, 0, 0, 0, 154, 0, 0, 0, 161, 0, 0, 0, 160, 0, 0, 0 } },
     { 10, { 0, 0 }, { 166, 0, 0, 0, 128, 0, 0, 0, 36, 0, 0, 0, 240, 0, 0, 0 } },
     { 10, { 0, 0 }, { 180, 0, 0, 0, 128, 0, 0, 0, 96, 0, 0, 0, 224, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619D90[3] = {
+static const TmAnimFrame sUnk_09619D90[3] = {
     { 10, { 0, 0 }, { 81, 0, 0, 0, 96, 0, 0, 0, 116, 0, 0, 0, 0, 0, 0, 0 } },
     { 10, { 0, 0 }, { 81, 0, 0, 0, 101, 0, 0, 0, 111, 0, 0, 0, 180, 0, 0, 0 } },
     { 10, { 0, 0 }, { 81, 0, 0, 0, 91, 0, 0, 0, 104, 0, 0, 0, 220, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619DCC[1] = {
+static const TmAnimFrame sUnk_09619DCC[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 214, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619DE0[1] = {
+static const TmAnimFrame sUnk_09619DE0[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 64, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619DF4[1] = {
+static const TmAnimFrame sUnk_09619DF4[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 64, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619E08[1] = {
+static const TmAnimFrame sUnk_09619E08[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 214, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619E1C[3] = {
+static const TmAnimFrame sUnk_09619E1C[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 120, 0, 0, 0, 160, 0, 0, 0, 220, 0, 0, 0, 230, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619E58[3] = {
+static const TmAnimFrame sUnk_09619E58[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 120, 0, 0, 0, 160, 0, 0, 0, 220, 0, 0, 0, 5, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619E94[3] = {
+static const TmAnimFrame sUnk_09619E94[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 136, 0, 0, 0, 96, 0, 0, 0, 36, 0, 0, 0, 5, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619ED0[3] = {
+static const TmAnimFrame sUnk_09619ED0[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 136, 0, 0, 0, 112, 0, 0, 0, 36, 0, 0, 0, 245, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619F0C[6] = {
+static const TmAnimFrame sUnk_09619F0C[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -174,7 +174,7 @@ const TmAnimFrame gUnk_09619F0C[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619F84[6] = {
+static const TmAnimFrame sUnk_09619F84[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -183,7 +183,7 @@ const TmAnimFrame gUnk_09619F84[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_09619FFC[6] = {
+static const TmAnimFrame sUnk_09619FFC[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -192,7 +192,7 @@ const TmAnimFrame gUnk_09619FFC[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A074[6] = {
+static const TmAnimFrame sUnk_0961A074[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -201,7 +201,7 @@ const TmAnimFrame gUnk_0961A074[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A0EC[6] = {
+static const TmAnimFrame sUnk_0961A0EC[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -210,7 +210,7 @@ const TmAnimFrame gUnk_0961A0EC[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A164[6] = {
+static const TmAnimFrame sUnk_0961A164[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -219,7 +219,7 @@ const TmAnimFrame gUnk_0961A164[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A1DC[6] = {
+static const TmAnimFrame sUnk_0961A1DC[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -228,7 +228,7 @@ const TmAnimFrame gUnk_0961A1DC[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A254[6] = {
+static const TmAnimFrame sUnk_0961A254[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -237,7 +237,7 @@ const TmAnimFrame gUnk_0961A254[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A2CC[6] = {
+static const TmAnimFrame sUnk_0961A2CC[6] = {
     { 10, { 0, 0 }, { 148, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0 } },
     { 15, { 0, 0 }, { 138, 0, 0, 0, 118, 0, 0, 0, 98, 0, 0, 0, 68, 0, 0, 0 } },
     { 10, { 0, 0 }, { 128, 0, 0, 0, 148, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
@@ -246,7 +246,7 @@ const TmAnimFrame gUnk_0961A2CC[6] = {
     { 10, { 0, 0 }, { 158, 0, 0, 0, 138, 0, 0, 0, 108, 0, 0, 0, 58, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A344[6] = {
+static const TmAnimFrame sUnk_0961A344[6] = {
     { 10, { 0, 0 }, { 108, 0, 0, 0, 138, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
     { 15, { 0, 0 }, { 138, 0, 0, 0, 158, 0, 0, 0, 198, 0, 0, 0, 238, 0, 0, 0 } },
     { 10, { 0, 0 }, { 168, 0, 0, 0, 148, 0, 0, 0, 98, 0, 0, 0, 48, 0, 0, 0 } },
@@ -255,7 +255,7 @@ const TmAnimFrame gUnk_0961A344[6] = {
     { 10, { 0, 0 }, { 128, 0, 0, 0, 148, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A3BC[6] = {
+static const TmAnimFrame sUnk_0961A3BC[6] = {
     { 10, { 0, 0 }, { 108, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 88, 0, 0, 0 } },
     { 15, { 0, 0 }, { 118, 0, 0, 0, 138, 0, 0, 0, 158, 0, 0, 0, 68, 0, 0, 0 } },
     { 10, { 0, 0 }, { 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
@@ -264,7 +264,7 @@ const TmAnimFrame gUnk_0961A3BC[6] = {
     { 10, { 0, 0 }, { 98, 0, 0, 0, 118, 0, 0, 0, 148, 0, 0, 0, 58, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A434[6] = {
+static const TmAnimFrame sUnk_0961A434[6] = {
     { 10, { 0, 0 }, { 148, 0, 0, 0, 118, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
     { 15, { 0, 0 }, { 118, 0, 0, 0, 98, 0, 0, 0, 58, 0, 0, 0, 238, 0, 0, 0 } },
     { 10, { 0, 0 }, { 88, 0, 0, 0, 108, 0, 0, 0, 158, 0, 0, 0, 48, 0, 0, 0 } },
@@ -273,7 +273,7 @@ const TmAnimFrame gUnk_0961A434[6] = {
     { 10, { 0, 0 }, { 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A4AC[5] = {
+static const TmAnimFrame sUnk_0961A4AC[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 112, 0, 0, 0, 72, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 160, 0, 0, 0, 144, 0, 0, 0, 112, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 192, 0, 0, 0, 184, 0, 0, 0, 96, 0, 0, 0, 118, 0, 0, 0 } },
@@ -281,7 +281,7 @@ const TmAnimFrame gUnk_0961A4AC[5] = {
     { 20, { 0, 0 }, { 192, 0, 0, 0, 198, 0, 0, 0, 224, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A510[5] = {
+static const TmAnimFrame sUnk_0961A510[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 112, 0, 0, 0, 72, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 160, 0, 0, 0, 144, 0, 0, 0, 112, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 192, 0, 0, 0, 168, 0, 0, 0, 96, 0, 0, 0, 118, 0, 0, 0 } },
@@ -289,7 +289,7 @@ const TmAnimFrame gUnk_0961A510[5] = {
     { 20, { 0, 0 }, { 192, 0, 0, 0, 198, 0, 0, 0, 224, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A574[5] = {
+static const TmAnimFrame sUnk_0961A574[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 144, 0, 0, 0, 184, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 96, 0, 0, 0, 112, 0, 0, 0, 144, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 64, 0, 0, 0, 72, 0, 0, 0, 160, 0, 0, 0, 118, 0, 0, 0 } },
@@ -297,7 +297,7 @@ const TmAnimFrame gUnk_0961A574[5] = {
     { 20, { 0, 0 }, { 64, 0, 0, 0, 58, 0, 0, 0, 32, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-const TmAnimFrame gUnk_0961A5D8[5] = {
+static const TmAnimFrame sUnk_0961A5D8[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 144, 0, 0, 0, 184, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 96, 0, 0, 0, 112, 0, 0, 0, 144, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 64, 0, 0, 0, 88, 0, 0, 0, 160, 0, 0, 0, 118, 0, 0, 0 } },
@@ -305,7 +305,7 @@ const TmAnimFrame gUnk_0961A5D8[5] = {
     { 20, { 0, 0 }, { 64, 0, 0, 0, 58, 0, 0, 0, 32, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-const u16 gBosTmArmSegmentLengths[6] = { 24, 26, 28, 30, 28, 26 };
+static const u16 sBosTmArmSegmentLengths[6] = { 24, 26, 28, 30, 28, 26 };
 
 void BosTmFootInitPart(BtlObj* work, s16 x, s16 y, s16 z, s16 a, s16 b, s32 c, s16 d) {
     work->x = x << 8;
@@ -404,10 +404,10 @@ void func_080BA2B0(TmFootWork* work) {
 }
 
 void BosTmFootApplyThrowStep(TmFootWork* work, s16 a) {
-    work->gfx = gUnk_09EF39DC[gBosTmFootThrowSteps[a].gfxIndex];
-    work->gfx2 = gUnk_09EF39DC[gBosTmFootThrowSteps[a].gfx2Index];
-    work->body.z += gBosTmFootThrowSteps[a].dz << 8;
-    work->body2.z += gBosTmFootThrowSteps[a].dz2 << 8;
+    work->gfx = gUnk_09EF39DC[sBosTmFootThrowSteps[a].gfxIndex];
+    work->gfx2 = gUnk_09EF39DC[sBosTmFootThrowSteps[a].gfx2Index];
+    work->body.z += sBosTmFootThrowSteps[a].dz << 8;
+    work->body2.z += sBosTmFootThrowSteps[a].dz2 << 8;
 }
 
 void BosTmFootSetWalkPose(TmFootWork* work) {
@@ -451,33 +451,33 @@ void BosTmFootWalk(TmFootWork* work) {
         return;
     }
 
-    work->gfx = gUnk_09EF3A1C[gBosTmFootWalkSteps[work->tm->step].gfxIndex];
-    work->gfx2 = gUnk_09EF3A1C[gBosTmFootWalkSteps[work->tm->step].gfx2Index];
+    work->gfx = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfxIndex];
+    work->gfx2 = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfx2Index];
 
     if (work->tm->flags & 0x20) {
-        work->body3.x = work->tm->x2 + ((gBosTmFootWalkSteps[work->tm->step].x3 + 6) << 8);
-        work->body4.x = work->tm->x2 + ((gBosTmFootWalkSteps[work->tm->step].x4 - 2) << 8);
+        work->body3.x = work->tm->x2 + ((sBosTmFootWalkSteps[work->tm->step].x3 + 6) << 8);
+        work->body4.x = work->tm->x2 + ((sBosTmFootWalkSteps[work->tm->step].x4 - 2) << 8);
         work->body.x = work->tm->x2 + 0x100;
         work->body2.x = work->tm->x2 - 0x600;
         work->body3.y = work->tm->y2 + 0x500;
         work->body4.y = work->tm->y2 - 0x200;
         work->body.y = work->tm->y2 + 0x200;
         work->body2.y = work->tm->y2 - 0x200;
-        work->body3.z = work->tm->z2 + ((gBosTmFootWalkSteps[work->tm->step].z3 + 40) << 8);
-        work->body4.z = work->tm->z2 + ((gBosTmFootWalkSteps[work->tm->step].z4 + 43) << 8);
+        work->body3.z = work->tm->z2 + ((sBosTmFootWalkSteps[work->tm->step].z3 + 40) << 8);
+        work->body4.z = work->tm->z2 + ((sBosTmFootWalkSteps[work->tm->step].z4 + 43) << 8);
         work->body.z = work->tm->z2 - 0x400;
         work->body2.z = work->tm->z2 - 0x400;
     } else {
-        work->body3.x = work->tm->x2 + ((2 - gBosTmFootWalkSteps[work->tm->step].x3) << 8);
-        work->body4.x = work->tm->x2 + ((-6 - gBosTmFootWalkSteps[work->tm->step].x4) << 8);
+        work->body3.x = work->tm->x2 + ((2 - sBosTmFootWalkSteps[work->tm->step].x3) << 8);
+        work->body4.x = work->tm->x2 + ((-6 - sBosTmFootWalkSteps[work->tm->step].x4) << 8);
         work->body.x = work->tm->x2 + 0x600;
         work->body2.x = work->tm->x2 - 0x100;
         work->body3.y = work->tm->y2 - 0x500;
         work->body4.y = work->tm->y2 + 0x200;
         work->body.y = work->tm->y2 - 0x200;
         work->body2.y = work->tm->y2 + 0x200;
-        work->body3.z = work->tm->z2 + ((gBosTmFootWalkSteps[work->tm->step].z3 + 40) << 8);
-        work->body4.z = work->tm->z2 + ((gBosTmFootWalkSteps[work->tm->step].z4 + 43) << 8);
+        work->body3.z = work->tm->z2 + ((sBosTmFootWalkSteps[work->tm->step].z3 + 40) << 8);
+        work->body4.z = work->tm->z2 + ((sBosTmFootWalkSteps[work->tm->step].z4 + 43) << 8);
         work->body.z = work->tm->z2 - 0x400;
         work->body2.z = work->tm->z2 - 0x400;
     }
@@ -496,10 +496,10 @@ void BosTmFootWalk(TmFootWork* work) {
 }
 
 void func_080BA8C8(TmFootWork* work, s16 a) {
-    work->gfx = gUnk_09EF39DC[gUnk_09EF25A4[a].gfxIndex];
-    work->gfx2 = gUnk_09EF39DC[gUnk_09EF25A4[a].gfx2Index];
-    work->body.z += gUnk_09EF25A4[a].dz << 8;
-    work->body2.z += gUnk_09EF25A4[a].dz2 << 8;
+    work->gfx = gUnk_09EF39DC[sUnk_09EF25A4[a].gfxIndex];
+    work->gfx2 = gUnk_09EF39DC[sUnk_09EF25A4[a].gfx2Index];
+    work->body.z += sUnk_09EF25A4[a].dz << 8;
+    work->body2.z += sUnk_09EF25A4[a].dz2 << 8;
 }
 
 void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
@@ -567,14 +567,14 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 break;
             }
 
-            work->footFrame = gBosTmFootIdleFrames[(s16)work->tm->step];
-            work->footFrame2 = gBosTmFootIdleFrames[((s16)work->tm->step + 4) & 7];
+            work->footFrame = sBosTmFootIdleFrames[(s16)work->tm->step];
+            work->footFrame2 = sBosTmFootIdleFrames[((s16)work->tm->step + 4) & 7];
             work->gfx = gUnk_09EF39DC[(s8)work->footFrame];
             work->gfx2 = gUnk_09EF39DC[(s8)work->footFrame2];
             work->body3.z =
-                work->tm->z2 + ((gBosTmFootIdleZ[(s8)work->footFrame] + 40) << 8);
+                work->tm->z2 + ((sBosTmFootIdleZ[(s8)work->footFrame] + 40) << 8);
             work->body4.z =
-                work->tm->z2 + ((gBosTmFootIdleZ[(s8)work->footFrame2] + 43) << 8);
+                work->tm->z2 + ((sBosTmFootIdleZ[(s8)work->footFrame2] + 43) << 8);
             work->body.z = work->tm->z2 - 0x400;
             work->body2.z = work->tm->z2 - 0x400;
         } else {
@@ -662,24 +662,24 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             work->gfx = gUnk_09EF39DC[1];
             work->gfx2 = gUnk_09EF39DC[1];
             work->body.z = work->tm->baseZ +
-                            ((gBosTmFootSteps[(s16)work->tm->step].dz - 4) << 8);
+                            ((sBosTmFootSteps[(s16)work->tm->step].dz - 4) << 8);
             work->body2.z = work->tm->baseZ +
-                            ((gBosTmFootSteps[(s16)work->tm->step].dz2 - 4) << 8);
+                            ((sBosTmFootSteps[(s16)work->tm->step].dz2 - 4) << 8);
             work->body3.z = work->tm->baseZ + 0x2800;
             work->body4.z = work->tm->baseZ + 0x2800;
             break;
         }
 
         if ((s16)work->tm->step <= 2) {
-            work->gfx = gUnk_09EF39DC[gBosTmFootSteps[(s16)work->tm->step].gfxIndex];
-            work->gfx2 = gUnk_09EF39DC[gBosTmFootSteps[(s16)work->tm->step].gfx2Index];
-            work->body.z += gBosTmFootSteps[(s16)work->tm->step].dz << 8;
-            work->body2.z += gBosTmFootSteps[(s16)work->tm->step].dz2 << 8;
+            work->gfx = gUnk_09EF39DC[sBosTmFootSteps[(s16)work->tm->step].gfxIndex];
+            work->gfx2 = gUnk_09EF39DC[sBosTmFootSteps[(s16)work->tm->step].gfx2Index];
+            work->body.z += sBosTmFootSteps[(s16)work->tm->step].dz << 8;
+            work->body2.z += sBosTmFootSteps[(s16)work->tm->step].dz2 << 8;
         }
 
         if (work->tm->hurtTimer <= 2) {
             work->gfx =
-                gUnk_09EF39DC[(table = gBosTmFootSteps, e = &table[work->tm->hurtTimer])->gfxIndex + 1];
+                gUnk_09EF39DC[(table = sBosTmFootSteps, e = &table[work->tm->hurtTimer])->gfxIndex + 1];
             work->gfx2 = gUnk_09EF39DC[e->gfx2Index + 1];
             work->body.z -= e->dz << 8;
             work->body2.z -= e->dz2 << 8;
@@ -765,7 +765,7 @@ void CreateBosTmClbTask(TaskPool* pool, TmClbArg* p, TmArmPos* a) {
     p->moveMode = 0;
     p->spinMode = 1;
     p->vz = 0;
-    TaskCreate(pool, &gTaskDescBosTmClb, p);
+    TaskCreate(pool, &sTaskDescBosTmClb, p);
 }
 
 void BosTmClbThrow(TmClbArg* p, TmArmPos* a, s32 b) {
@@ -942,8 +942,8 @@ void BosTmArmComputeJointPositions(TmArmJoint* joints) {
         p = &joints[i];
         p->x = x;
         p->y = y;
-        x += gSineTable[p->angle] * gBosTmArmSegmentLengths[n = p->anim.frame];
-        y += -gSineTable[p->angle + 0x40] * gBosTmArmSegmentLengths[n = p->anim.frame];
+        x += gSineTable[p->angle] * sBosTmArmSegmentLengths[n = p->anim.frame];
+        y += -gSineTable[p->angle + 0x40] * sBosTmArmSegmentLengths[n = p->anim.frame];
     }
 
     p = &joints[n = 3];
@@ -1006,8 +1006,8 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->prevState = 0;
     work->jointAnim2.frames = 0;
     work->jointAnim.frames = 0;
-    BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619CDC, 3, work->joints.arms[0]);
-    BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619D18, 3, &work->joints.arms[1][0]);
+    BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619CDC, 3, work->joints.arms[0]);
+    BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D18, 3, &work->joints.arms[1][0]);
 
     for (i = 0; i < 4; i++) {
         p = &work->joints.arms[0][i];
@@ -1087,9 +1087,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x110;
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619D18, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D18, 3, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619D90, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D90, 3, &work->joints.all[4]);
             }
         }
 
@@ -1123,9 +1123,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A2CC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A2CC, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A3BC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A3BC, 6, &work->joints.all[4]);
             }
         }
 
@@ -1138,9 +1138,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619DE0, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E08, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
             }
         }
 
@@ -1152,9 +1152,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619DE0, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E08, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
             }
         }
 
@@ -1163,11 +1163,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 1:
         if (work->timer == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E1C, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E94, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E94, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1197,11 +1197,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 10:
         if (work->timer == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E1C, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619E94, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E94, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1246,9 +1246,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 2:
         if (work->timer == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619F0C, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619FFC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1283,9 +1283,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 3:
         if (work->timer == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619F0C, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_09619FFC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1326,9 +1326,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 11:
         if (work->timer == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A0EC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A0EC, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A1DC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A1DC, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1372,9 +1372,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A4AC, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A4AC, 5, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, gUnk_0961A574, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A574, 5, &work->joints.all[4]);
             }
         }
 
@@ -1415,9 +1415,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 0x110;
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619CDC, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619CDC, 3, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619D54, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619D54, 3, work->joints.all);
             }
         }
 
@@ -1440,9 +1440,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A344, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A344, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A434, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A434, 6, work->joints.all);
             }
         }
 
@@ -1455,9 +1455,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619DCC, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619DF4, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
             }
         }
 
@@ -1469,9 +1469,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619DCC, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619DF4, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
             }
         }
 
@@ -1480,11 +1480,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 1:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619E58, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619ED0, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619ED0, 3, work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1501,11 +1501,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 10:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619E58, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619ED0, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619ED0, 3, work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1522,9 +1522,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 2:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619F84, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A074, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1540,9 +1540,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 3:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_09619F84, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A074, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1558,9 +1558,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 11:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A164, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A164, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A254, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A254, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1579,9 +1579,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & 0x20) {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A510, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A510, 5, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, gUnk_0961A5D8, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A5D8, 5, work->joints.all);
             }
         }
 

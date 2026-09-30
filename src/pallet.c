@@ -8,13 +8,13 @@
 #include "system_state.h"
 #include "gba/io_reg.h"
 
-const s32 gBrightenSteps[32] = {
+static const s32 sBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,
       99,  107,  115,  123,  132,  140,  148,  156,  165,  173,  181,  189,
      198,  206,  214,  222,  231,  239,  247,  256,
 };
 
-const u8 sPalletHeapName[8] = "PALLET";
+static const u8 sPalletHeapName[8] = "PALLET";
 
 static PaletteBuffer* gPaletteBuffer;
 static s16 gPaletteEffect;
@@ -148,9 +148,9 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
         s32 gv = g << 8;
         s32 bv = b << 8;
 
-        rv += amount * gBrightenSteps[r];
-        gv += amount * gBrightenSteps[g];
-        bv += amount * gBrightenSteps[b];
+        rv += amount * sBrightenSteps[r];
+        gv += amount * sBrightenSteps[g];
+        bv += amount * sBrightenSteps[b];
 
         if (rv > 0x1F00) {
             rv = 0x1F00;

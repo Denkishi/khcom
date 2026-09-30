@@ -10,10 +10,7 @@ typedef struct LstAnimSet {
     u16 unk_06;
 } LstAnimSet;
 
-extern const s8 gUnk_09A4FBF4[];
-extern const s8 gUnk_09A4FC15[];
 
-extern const s32 gBosLstFldFadeLevels[];
 extern const s32 gUnk_09A4FD20;
 
 #endif

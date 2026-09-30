@@ -5,18 +5,18 @@
 #include "songs.h"
 #include <stdlib.h>
 
-const EmyKind gBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
+static const EmyKind sBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 
-const s32 gBosLstBitTanTable[32] = {
+static const s32 sBosLstBitTanTable[32] = {
     6, 12, 18, 25, 31, 37, 44, 50, 57, 64, 70, 77, 84, 91, 98, 106,
     113, 121, 128, 136, 145, 153, 162, 171, 180, 189, 199, 210, 220, 232, 243, 256,
 };
 
-const s32 gBosLstBitHoverY[3] = { 0, -8, 8 };
+static const s32 sBosLstBitHoverY[3] = { 0, -8, 8 };
 
-const s32 gBosLstBitBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
+static const s32 sBosLstBitBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
 
-LstAnimSet gLstAnimSets[4] = {
+static LstAnimSet sLstAnimSets[4] = {
     { 5, 0, 4, 5 },
     { 5, 0, 4, 12 },
     { 5, 0, 4, 13 },
@@ -195,7 +195,7 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
 
 #ifdef VERSION_EU
     AnimReset(&s->anim);
-    AnimChange(&s->anim, gLstAnimSets[s->animSet].idleAnim, 1);
+    AnimChange(&s->anim, sLstAnimSets[s->animSet].idleAnim, 1);
 
     if (s->state != 0 && s->state != 5) {
         s->state = 7;
@@ -229,14 +229,14 @@ s32 BosLstBitAtanLookup(s32 a, s32 b) {
     }
 
     v = (b << 8) / a;
-    if (v <= gBosLstBitTanTable[0]) {
+    if (v <= sBosLstBitTanTable[0]) {
         return 0;
     }
 
     step = 8;
     i = 16;
-    while (step != 0 && v != gBosLstBitTanTable[i]) {
-        if (v < gBosLstBitTanTable[i]) {
+    while (step != 0 && v != sBosLstBitTanTable[i]) {
+        if (v < sBosLstBitTanTable[i]) {
             i -= step;
         } else {
             i += step;
@@ -338,8 +338,8 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
-    AnimStart(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
-    InitEnemyBtlObj(&work->obj, &gBosLstBitEmyKind, work->x, work->y, work->z);
+    AnimStart(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
+    InitEnemyBtlObj(&work->obj, &sBosLstBitEmyKind, work->x, work->y, work->z);
     pool = &work->tasks;
     TaskPoolInit(pool, 4);
     sub.kind = work->kind;
@@ -428,14 +428,14 @@ u8 task_bos_lst_bit_1(LstState* work) {
 #endif
             } else if (work->kind == 0) {
                 work->targetX = (GetRandom() % 113 << 8) + 0xC000;
-                work->targetY = gBtlWork->actor->y + (gBosLstBitHoverY[work->index] << 8);
+                work->targetY = gBtlWork->actor->y + (sBosLstBitHoverY[work->index] << 8);
             } else {
                 work->targetX = gBtlWork->actor->x;
                 work->targetY = gBtlWork->actor->y;
             }
 
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
+            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
         }
 
         if (!(gBtlWork->flags & 0x2000000000000)) {
@@ -468,12 +468,12 @@ u8 task_bos_lst_bit_1(LstState* work) {
             }
 
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->animSet].chargeAnim, 0);
+            AnimChange(&work->anim, sLstAnimSets[work->animSet].chargeAnim, 0);
         }
 
         work->timer++;
 
-        if (AnimGetId(&work->anim) == (s16)gLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == 1) {
+        if (AnimGetId(&work->anim) == (s16)sLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == 1) {
             work->state = 3;
             work->timer = 0;
             work->unk_018 = 1;
@@ -483,7 +483,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             work->fireZ = work->z + work->orbitZ;
             m4aSongNumStart(SONG_SND_708);
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
+            AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
         }
         break;
     case 3:
@@ -574,7 +574,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         AnimChange(&work->anim, 4, 1);
         break;
     case 7:
-        AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
+        AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, 1);
         break;
     }
 
@@ -635,7 +635,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         work->orbitZ = 0x800;
     }
 
-    work->bobZ = gBosLstBitBobZ[(work->bobFrame >> 2) & 15] << 8;
+    work->bobZ = sBosLstBitBobZ[(work->bobFrame >> 2) & 15] << 8;
     dir = BosLstBitAngleBetween(x2, y2, x1, y1);
     d = BosLstBitAngleDiff(work->aimAngle, dir);
 

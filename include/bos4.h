@@ -40,10 +40,6 @@
 
 extern MapFloorState gMapFloorState;
 
-extern const BosMapanimeFrame gBosBoogieMapanimeFrames[5];
-extern const BosMapanimeDef gUnk_096FE034;
-extern const BosMapanimeDef gUnk_096FE04C;
-extern const BosMapanimeDef gUnk_096FE064;
 
 typedef struct BoogieExplosiondiceWork {
     u32 state;
@@ -193,14 +189,6 @@ typedef struct UrsulaTakoWork {
 } UrsulaTakoWork;
 
 extern u8 gUnk_0979D0B6[];
-extern const BosMapanimeFrame gBosUrsulaMapanimeIdleFrames[6];
-extern const BosMapanimeFrame gBosUrsulaMapanimeWindupFrames[12];
-extern const BosMapanimeFrame gBosUrsulaMapanimeBubbleFrames[5];
-extern const BosMapanimeFrame gBosUrsulaMapanimeChargeFrames[5];
-extern const BosMapanimeFrame gBosUrsulaMapanimeRecoverFrames[1];
-extern const BosMapanimeDef gBosUrsulaMapanimeWindup;
-extern const BosMapanimeDef gBosUrsulaMapanimeBubble;
-extern const BosMapanimeDef gBosUrsulaMapanimeCharge;
 extern u8 gUnk_0984B0D8[];
 
 extern EventKeyList gEventKeyLists[];
@@ -213,7 +201,6 @@ typedef struct BoogieMapWork {
 
 void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg);
 
-extern const EmyKind gBosBoogieKnifereaderEmyKind;
 u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z);
 void task_bos_boogie_dice_3(BoogieDiceWork* work);
 
@@ -374,7 +361,6 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work);
 void task_bos_ursula_tako_2(UrsulaTakoWork* work);
 void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg);
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work);
-extern const EmyKind gBosUrsulaTakoEmyKind;
 u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work);
 void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work);
 
@@ -382,9 +368,6 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work);
 
 u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work);
 void task_bos_ursula_0(UrsulaWork* work);
-extern const BattleBackgroundDef gBosUrsulaBattleBackgroundDef;
-extern const EmyKind gBosUrsulaEmyKind;
-extern const EmyKind gBosBoogieDiskEmyKind;
 extern u8 gNokogiriTiles[];
 u8 task_bos_boogie_saku_1(BoogieSakuWork* work);
 
@@ -396,7 +379,6 @@ void BosBoogieDiceGrow(BoogieDiceWork* work);
 extern u8 gUnk_09796EAA[];
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work);
 
-extern const BosMapanimeDef gBosUrsulaMapanimeIdle;
 
 void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg);
 extern u8 gKnifeTiles[];
@@ -411,9 +393,6 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
 extern u8 gUnk_0979666A[];
 extern u8 gUnk_0984AF98[];
 
-extern const EmyKind gBosBoogieExplosiondiceEmyKind;
-extern const EmyKind gBosBoogieKnifeEmyKind;
-extern const EmyKind gBosBoogieDiceEmyKind;
 u8 task_bos_boogie_map_1(void);
 
 void task_bos_boogie_dice_2(BoogieDiceWork* work);
@@ -421,16 +400,13 @@ u8 BosBoogieDiceIsHeld(BoogieDiceWork* work);
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg);
 extern u8 gUnk_0979E344[];
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg);
-extern const EmyKind gBosUrsulaBubbleSingleEmyKind;
 extern u8 gUnk_097A0DE4[];
 extern u8 gUnk_0984B0F8[];
 void task_bos_ursula_border_2(UrsulaBorderWork* work);
 extern u8 gUnk_0979D090[];
 extern u8 gUnk_0979D8B8[];
 s32 strcmp(const char* a, const char* b);
-extern const BosMapanimeDef gBosUrsulaMapanimeRecover;
 void RollBoogieDice(BoogieDiceWork* work);
-extern void* const gBoogieDiceFaces[6][3];
 extern u8 gUnk_097976DC[];
 extern u8 gUnk_09797D0C[];
 extern u8 gUnk_0979833C[];
@@ -440,15 +416,12 @@ extern u8 gUnk_097995CC[];
 extern u8 gUnk_0984AFF8[];
 
 void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg);
-extern const EmyKind gBosBoogieKaihukuEmyKind;
 extern u8 gKaifukuTiles[];
 extern u8 gKaifukuPalette[];
 extern u8 gUnk_08F69BC4[];
 void BosBoogieSpawnKnives(BoogieKnifereaderWork* work);
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
 void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d);
-extern const u8 gSoraWorldExitEvents[];
-extern const u8 gRikuWorldExitEvents[];
 void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work);
 void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d);
 void task_bos_boogie_disk_2(BoogieDiskWork* work);

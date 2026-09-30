@@ -6,7 +6,7 @@
 TaskPool gChkSndPool;
 s16 gChkSndIndex;
 
-ChkSndEntry gChkSndEntries[] = {
+static ChkSndEntry sChkSndEntries[] = {
     { "BGM_ALICE_BTL", SONG_BGM_ALICE_BTL },
     { "BGM_ALICE_FIELD", SONG_BGM_ALICE_FIELD },
     { "BGM_BOSS1_WORLD", SONG_BGM_BOSS1_WORLD },
@@ -650,9 +650,9 @@ void mode_chksnd_0(void) {
 }
 
 #ifdef VERSION_EU
-const char gChkSndBlankText[0x20] = "                              ";
+static const char sChkSndBlankText[0x20] = "                              ";
 
-const char gChkSndSeparatorText[4] = ": ";
+static const char sChkSndSeparatorText[4] = ": ";
 #endif
 
 void mode_chksnd_1(void) {
@@ -681,15 +681,15 @@ void mode_chksnd_1(void) {
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(gChkSndEntries[gChkSndIndex].songNum);
+            m4aSongNumStart(sChkSndEntries[gChkSndIndex].songNum);
         }
 
-        PrintString(0, 0, 0, gChkSndBlankText);
-        PrintNumber(0, 0, 0, gChkSndEntries[gChkSndIndex].songNum);
-        PrintString(5, 0, 0, gChkSndSeparatorText);
+        PrintString(0, 0, 0, sChkSndBlankText);
+        PrintNumber(0, 0, 0, sChkSndEntries[gChkSndIndex].songNum);
+        PrintString(5, 0, 0, sChkSndSeparatorText);
 #else
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(gChkSndEntries[gChkSndIndex].songNum);
+            m4aSongNumStart(sChkSndEntries[gChkSndIndex].songNum);
         }
 
         if (gChkSndIndex < 0) {
@@ -701,10 +701,10 @@ void mode_chksnd_1(void) {
         }
 
         PrintString(0, 0, 0, "                              ");
-        PrintNumber(0, 0, 0, gChkSndEntries[gChkSndIndex].songNum);
+        PrintNumber(0, 0, 0, sChkSndEntries[gChkSndIndex].songNum);
         PrintString(5, 0, 0, ": ");
 #endif
-        PrintString(7, 0, 0, gChkSndEntries[gChkSndIndex].name);
+        PrintString(7, 0, 0, sChkSndEntries[gChkSndIndex].name);
         TaskPoolUpdate(&gChkSndPool);
         TaskPoolDraw(&gChkSndPool);
     }

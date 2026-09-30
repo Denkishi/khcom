@@ -16,102 +16,102 @@
 #include "gba/keys.h"
 #include "bos4.h"
 
-const char gDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
+static const char sDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
 
-const char gDebugMenuTextUs_0984B60C[] = "\202f\202n\202`\202k\201@\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B60C[] = "\202f\202n\202`\202k\201@\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B620[] = "\202r\202s\202`\202q\202s\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B620[] = "\202r\202s\202`\202q\202s\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B634[] = "\202e\202h\202d\202k\202c\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B634[] = "\202e\202h\202d\202k\202c\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B648[] = "\202c\202d\202a\202t\202f\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B648[] = "\202c\202d\202a\202t\202f\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B65C[] = "\202e\202t\202m\202m\202d\202k\201@";
+static const char sDebugMenuTextUs_0984B65C[] = "\202e\202t\202m\202m\202d\202k\201@";
 
-const char gDebugMenuTextUs_0984B66C[] = "\202r\202s\202`\202f\202d\201@\201@";
+static const char sDebugMenuTextUs_0984B66C[] = "\202r\202s\202`\202f\202d\201@\201@";
 
-const char gDebugMenuTextUs_0984B67C[] = "\202g\202d\202w\202`\202f\202n\202m";
+static const char sDebugMenuTextUs_0984B67C[] = "\202g\202d\202w\202`\202f\202n\202m";
 
-const char gDebugMenuTextUs_0984B68C[] = "\202b\202k\202h\202e\202e\201@\201@";
+static const char sDebugMenuTextUs_0984B68C[] = "\202b\202k\202h\202e\202e\201@\201@";
 
-const char gDebugMenuTextUs_0984B69C[] = "\202o\202`\202r\202r\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B69C[] = "\202o\202`\202r\202r\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B6AC[] = "\202s\202n\202v\202d\202q\201@\201@";
+static const char sDebugMenuTextUs_0984B6AC[] = "\202s\202n\202v\202d\202q\201@\201@";
 
-const char gDebugMenuTextUs_0984B6BC[] = "\202r\202l\202`\202k\202k\201@\201@";
+static const char sDebugMenuTextUs_0984B6BC[] = "\202r\202l\202`\202k\202k\201@\201@";
 
-const char gDebugMenuTextUs_0984B6CC[] = "\202e\202k\202`\202s\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B6CC[] = "\202e\202k\202`\202s\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B6DC[] = "\202v\202h\202c\202d\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B6DC[] = "\202v\202h\202c\202d\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B6EC[] = "\202g\202h\202f\202g\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B6EC[] = "\202g\202h\202f\202g\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B6FC[] = "\202k\202n\202v\201@\201@\201@\201@";
+static const char sDebugMenuTextUs_0984B6FC[] = "\202k\202n\202v\201@\201@\201@\201@";
 
-const char gDebugMenuTextUs_0984B70C[] = "\202q\202`\202m\202c\202n\202l\201@";
+static const char sDebugMenuTextUs_0984B70C[] = "\202q\202`\202m\202c\202n\202l\201@";
 
-const char gDebugMenuTextUs_0984B71C[] = "\202c\202d\202e\202`\202t\202k\202s";
+static const char sDebugMenuTextUs_0984B71C[] = "\202c\202d\202e\202`\202t\202k\202s";
 
-const char gMapChkWhitePalette[32] = "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377";
+static const char sMapChkWhitePalette[32] = "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377";
 
-const char gMapChkOnText[] = "\202n\202m\201@";
+static const char sMapChkOnText[] = "\202n\202m\201@";
 
-const char gMapChkOffText[] = "\202n\202e\202e";
+static const char sMapChkOffText[] = "\202n\202e\202e";
 
-const char gMapChkBasementText[] = "\201i\202a\201@\201@\201@\201j";
+static const char sMapChkBasementText[] = "\201i\202a\201@\201@\201@\201j";
 
-const char gMapChkBasementNoneText[] = "\201i\202a\201|\201|\201|\201j";
+static const char sMapChkBasementNoneText[] = "\201i\202a\201|\201|\201|\201j";
 
-const char gMapChkHelpText[] = "\202t\202c\201F\202r\202d\202k\202d\202b\202s\201@\202k\202q\201F\202r\202d\202s\201@\202`\201F\202r\202s\202`\202q\202s";
+static const char sMapChkHelpText[] = "\202t\202c\201F\202r\202d\202k\202d\202b\202s\201@\202k\202q\201F\202r\202d\202s\201@\202`\201F\202r\202s\202`\202q\202s";
 
-const char gMapChkModeLabel[] = "\202l\202n\202c\202d\201@\201F";
+static const char sMapChkModeLabel[] = "\202l\202n\202c\202d\201@\201F";
 
-const char gMapChkWorldLabel[] = "\202v\202n\202q\202k\202c\201F";
+static const char sMapChkWorldLabel[] = "\202v\202n\202q\202k\202c\201F";
 
-const char gMapChkFloorLabel[] = "\202e\202k\202n\202n\202q\201F";
+static const char sMapChkFloorLabel[] = "\202e\202k\202n\202n\202q\201F";
 
-const char gMapChkParamLabel[] = "\202o\202`\202q\202`\202l\201F";
+static const char sMapChkParamLabel[] = "\202o\202`\202q\202`\202l\201F";
 
-const char gMapChkFormLabel[] = "\202e\202n\202q\202l\201@\201F";
+static const char sMapChkFormLabel[] = "\202e\202n\202q\202l\201@\201F";
 
-const char gMapChkWideLabel[] = "\202v\202h\202c\202d\201@\201F";
+static const char sMapChkWideLabel[] = "\202v\202h\202c\202d\201@\201F";
 
-const char gMapChkHighLabel[] = "\202g\202h\202f\202g\201@\201F";
+static const char sMapChkHighLabel[] = "\202g\202h\202f\202g\201@\201F";
 
-const char gMapChkDeepLabel[] = "\202c\202d\202d\202o\201@\201F";
+static const char sMapChkDeepLabel[] = "\202c\202d\202d\202o\201@\201F";
 
-const char gMapChkCursorBlankText[] = "\201@";
+static const char sMapChkCursorBlankText[] = "\201@";
 
-const char gMapChkCursorText[] = "\201\204";
+static const char sMapChkCursorText[] = "\201\204";
 
 static MapChkWork* gMapChkWork;
 static MapFormDef* sMapChkForm;
 
-const char* gMapChkModeNames[] = {
-    gDebugMenuTextUs_0984B648,
-    gDebugMenuTextUs_0984B634,
-    gDebugMenuTextUs_0984B620,
-    gDebugMenuTextUs_0984B60C,
-    gDebugMenuTextUs_0984B5F8,
+static const char* sMapChkModeNames[] = {
+    sDebugMenuTextUs_0984B648,
+    sDebugMenuTextUs_0984B634,
+    sDebugMenuTextUs_0984B620,
+    sDebugMenuTextUs_0984B60C,
+    sDebugMenuTextUs_0984B5F8,
 };
 
-const char* gMapChkFormNames[] = {
-    gDebugMenuTextUs_0984B71C,
-    gDebugMenuTextUs_0984B70C,
-    gDebugMenuTextUs_0984B6FC,
-    gDebugMenuTextUs_0984B6EC,
-    gDebugMenuTextUs_0984B6DC,
-    gDebugMenuTextUs_0984B6CC,
-    gDebugMenuTextUs_0984B6BC,
-    gDebugMenuTextUs_0984B6AC,
-    gDebugMenuTextUs_0984B69C,
-    gDebugMenuTextUs_0984B68C,
-    gDebugMenuTextUs_0984B67C,
-    gDebugMenuTextUs_0984B66C,
-    gDebugMenuTextUs_0984B65C,
+static const char* sMapChkFormNames[] = {
+    sDebugMenuTextUs_0984B71C,
+    sDebugMenuTextUs_0984B70C,
+    sDebugMenuTextUs_0984B6FC,
+    sDebugMenuTextUs_0984B6EC,
+    sDebugMenuTextUs_0984B6DC,
+    sDebugMenuTextUs_0984B6CC,
+    sDebugMenuTextUs_0984B6BC,
+    sDebugMenuTextUs_0984B6AC,
+    sDebugMenuTextUs_0984B69C,
+    sDebugMenuTextUs_0984B68C,
+    sDebugMenuTextUs_0984B67C,
+    sDebugMenuTextUs_0984B66C,
+    sDebugMenuTextUs_0984B65C,
 };
 
-void (*gMapChkRowHandlers[10])(MapChkWork*) = {
+static void (*sMapChkRowHandlers[10])(MapChkWork*) = {
     MapChkEditMode,
     MapChkEditWorld,
     MapChkEditFloor,
@@ -136,9 +136,9 @@ void MapChkSetParamToggle(u8* p, u8 a) {
         p[5] = a;
 
         if (a != 0) {
-            DebugTextPrint(80, 68, 2, gMapChkOnText);
+            DebugTextPrint(80, 68, 2, sMapChkOnText);
         } else {
-            DebugTextPrint(80, 68, 2, gMapChkOffText);
+            DebugTextPrint(80, 68, 2, sMapChkOffText);
         }
     }
 }
@@ -321,7 +321,7 @@ void MapChkEditMode(MapChkWork* p) {
         p->mode = p->mode > 3 ? 0 : p->mode + 1;
     }
 
-    DebugTextPrint(80, 32, 2, gMapChkModeNames[p->mode]);
+    DebugTextPrint(80, 32, 2, sMapChkModeNames[p->mode]);
 }
 void MapChkEditWorld(MapChkWork* p) {
     u8 v = p->world;
@@ -353,12 +353,12 @@ void MapChkEditFloor(MapChkWork* p) {
     }
 
     DebugTextPrintNumber(80, 56, 2, p->floor + 1);
-    DebugTextPrint(112, 56, 2, gMapChkBasementText);
+    DebugTextPrint(112, 56, 2, sMapChkBasementText);
 
     if (12 - p->floor > 0) {
         DebugTextPrintNumber(128, 56, 2, 12 - p->floor);
     } else {
-        DebugTextPrint(112, 56, 2, gMapChkBasementNoneText);
+        DebugTextPrint(112, 56, 2, sMapChkBasementNoneText);
     }
 }
 void MapChkEditForm(MapChkWork* p) {
@@ -374,7 +374,7 @@ void MapChkEditForm(MapChkWork* p) {
 
     if (v != p->form) {
         LoadMapForm(p->form + 15);
-        DebugTextPrint(80, 80, 2, gMapChkFormNames[p->form]);
+        DebugTextPrint(80, 80, 2, sMapChkFormNames[p->form]);
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
         DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
         DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
@@ -518,24 +518,24 @@ void Mode_MapChk_0(void) {
     SetupBg(0, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gMapChkWhitePalette, 32, 15);
-    DebugTextPrint(0, 0, 2, gMapChkHelpText);
-    DebugTextPrint(24, 32, 2, gMapChkModeLabel);
-    DebugTextPrint(24, 44, 2, gMapChkWorldLabel);
-    DebugTextPrint(24, 56, 2, gMapChkFloorLabel);
-    DebugTextPrint(24, 68, 2, gMapChkParamLabel);
-    DebugTextPrint(24, 80, 2, gMapChkFormLabel);
-    DebugTextPrint(24, 92, 2, gMapChkWideLabel);
-    DebugTextPrint(24, 104, 2, gMapChkHighLabel);
-    DebugTextPrint(24, 128, 2, gMapChkDeepLabel);
-    DebugTextPrint(80, 68, 2, gMapChkOffText);
-    DebugTextPrint(80, 32, 2, gMapChkModeNames[gMapChkWork->mode]);
+    DebugTextLoadPalette(0, sMapChkWhitePalette, 32, 15);
+    DebugTextPrint(0, 0, 2, sMapChkHelpText);
+    DebugTextPrint(24, 32, 2, sMapChkModeLabel);
+    DebugTextPrint(24, 44, 2, sMapChkWorldLabel);
+    DebugTextPrint(24, 56, 2, sMapChkFloorLabel);
+    DebugTextPrint(24, 68, 2, sMapChkParamLabel);
+    DebugTextPrint(24, 80, 2, sMapChkFormLabel);
+    DebugTextPrint(24, 92, 2, sMapChkWideLabel);
+    DebugTextPrint(24, 104, 2, sMapChkHighLabel);
+    DebugTextPrint(24, 128, 2, sMapChkDeepLabel);
+    DebugTextPrint(80, 68, 2, sMapChkOffText);
+    DebugTextPrint(80, 32, 2, sMapChkModeNames[gMapChkWork->mode]);
     t = gUnk_0984B458[0];
     n = gMapChkWork->world * 8;
     t += 4;
     DebugTextPrint(80, 44, 2, *(const char**)(t + n));
     DebugTextPrintNumber(80, 56, 2, gMapChkWork->floor + 1);
-    DebugTextPrint(80, 80, 2, gMapChkFormNames[gMapChkWork->form]);
+    DebugTextPrint(80, 80, 2, sMapChkFormNames[gMapChkWork->form]);
     DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
     DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
     DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
@@ -547,7 +547,7 @@ void Mode_MapChk_0(void) {
 void Mode_MapChk_1(void) {
     MapChkWork* e;
 
-    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, gMapChkCursorBlankText);
+    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, sMapChkCursorBlankText);
 
     if ((GetKeysRepeat() & DPAD_UP) != 0) {
         gMapChkWork->cursor = gMapChkWork->cursor == 0 ? 9 : gMapChkWork->cursor - 1;
@@ -557,8 +557,8 @@ void Mode_MapChk_1(void) {
         gMapChkWork->cursor = gMapChkWork->cursor > 8 ? 0 : gMapChkWork->cursor + 1;
     }
 
-    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, gMapChkCursorText);
-    gMapChkRowHandlers[gMapChkWork->cursor](gMapChkWork);
+    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, sMapChkCursorText);
+    sMapChkRowHandlers[gMapChkWork->cursor](gMapChkWork);
 
     if ((GetKeysPressed() & (A_BUTTON | START_BUTTON)) != 0) {
         func_08085FB0();

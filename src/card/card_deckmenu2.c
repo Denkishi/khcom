@@ -976,35 +976,35 @@ void func_08085FB0(void) {
 }
 
 #ifdef VERSION_EU
-const u16 gDeckButtonLabelTileSizes[5] = { 0x280, 0x280, 0x280, 0x280, 0x280 };
+static const u16 sDeckButtonLabelTileSizes[5] = { 0x280, 0x280, 0x280, 0x280, 0x280 };
 
-const u16 gDeckCommandMenuTileSizes[5] = { 0x1800, 0x1800, 0x1800, 0x1800, 0x1800 };
+static const u16 sDeckCommandMenuTileSizes[5] = { 0x1800, 0x1800, 0x1800, 0x1800, 0x1800 };
 
-const u16 gDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
+static const u16 sDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
 #endif
 
-const s16 gDeckTabPointerX[3] = { 116, 116, 116 };
+static const s16 sDeckTabPointerX[3] = { 116, 116, 116 };
 
 #ifdef VERSION_EU
-const s16 gDeckTabPointerY[3] = { 51, 99, 148 };
+static const s16 sDeckTabPointerY[3] = { 51, 99, 148 };
 #else
-const s16 gDeckTabPointerY[3] = { 56, 104, 148 };
+static const s16 sDeckTabPointerY[3] = { 56, 104, 148 };
 #endif
 
-const s16 gDeckFilterTabX[5] = { 12, 28, 42, 56, 70 };
+static const s16 sDeckFilterTabX[5] = { 12, 28, 42, 56, 70 };
 
-const s16 gCollectionFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
+static const s16 sCollectionFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
 
-const s16 gDeckCommandY[6] = { 50, 67, 85, 108, 126, 149 };
+static const s16 sDeckCommandY[6] = { 50, 67, 85, 108, 126, 149 };
 
-const s16 gValueGridX[2] = { 80, 128 };
+static const s16 sValueGridX[2] = { 80, 128 };
 
-const s16 gValueGridY[9] = { 80, 88, 96, 104, 112, 45, 93, 141, 30 };
+static const s16 sValueGridY[9] = { 80, 88, 96, 104, 112, 45, 93, 141, 30 };
 
 #ifdef VERSION_JP
-const PromptChoiceLayout gDeckPromptChoiceLayout = { { 94, 151 } };
+static const PromptChoiceLayout sDeckPromptChoiceLayout = { { 94, 151 } };
 #else
-const PromptChoiceLayout gDeckPromptChoiceLayout = { { 102, 148 } };
+static const PromptChoiceLayout sDeckPromptChoiceLayout = { { 102, 148 } };
 #endif
 
 static void Deckmenu2_0(DeckMenuWork* w, void* a) {
@@ -1038,8 +1038,8 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     AnimInit(&w->anim2, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim2, 0, 1);
     w->gfx = AnimGetGfx(&w->anim2);
-    w->x = gDeckTabPointerX[0] << 8;
-    w->y = gDeckTabPointerY[0] << 8;
+    w->x = sDeckTabPointerX[0] << 8;
+    w->y = sDeckTabPointerY[0] << 8;
     w->handFlags = 0;
 #ifdef VERSION_EU
     w->tiles4 = LoadObjTiles((u8*)&gUnk_090A44BA + 10, 32);
@@ -1048,7 +1048,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
 #ifdef VERSION_EU
-    w->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], gDeckButtonLabelTileSizes[gLanguage]);
+    w->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
     w->tiles5 = LoadObjTiles(&gRiCardF0RedTiles[0x132C], 0x280);
 #endif
@@ -1295,11 +1295,11 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* w, void* a) {
         w->view = 1;
         SetDeckMenuHandAnim(w);
         LoadDeckNameTexts(w);
-        w->x = gDeckTabPointerX[w->cursorCol] << 8;
-        w->y = gDeckTabPointerY[w->cursorRow] << 8;
+        w->x = sDeckTabPointerX[w->cursorCol] << 8;
+        w->y = sDeckTabPointerY[w->cursorRow] << 8;
         w->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
 #ifdef VERSION_EU
-        w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], gDeckTitleBannerTileSizes[gLanguage]);
+        w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
         if (gGameState.flags & 8) {
             w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
@@ -1577,7 +1577,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim2);
     if (w->popupActive != 0) {
-        ApproachValueHalf(&w->x, gDeckFilterTabX[w->cursorCol] << 8);
+        ApproachValueHalf(&w->x, sDeckFilterTabX[w->cursorCol] << 8);
         ApproachValueHalf(&w->y, 0x1E00);
         TaskPoolUpdate(&w->taskpool);
         TaskPoolUpdate(&w->cardpool);
@@ -1662,7 +1662,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a) {
         }
         return 1;
     }
-    ApproachValueHalf(&w->x, gDeckFilterTabX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->x, sDeckFilterTabX[w->cursorCol] << 8);
     ApproachValueHalf(&w->y, 0x1E00);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
@@ -1670,7 +1670,7 @@ u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a) {
 }
 
 u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* w, void* a) {
-    PromptChoiceLayout table = gDeckPromptChoiceLayout;
+    PromptChoiceLayout table = sDeckPromptChoiceLayout;
 
     w->gfx = AnimUpdate(&w->anim2);
     w->gfx2 = AnimUpdate(&w->anim3);
@@ -1912,8 +1912,8 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
         return 1;
     }
 
-    ApproachValueHalf(&w->x, gValueGridX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, (gValueGridY[w->cursorRow] - 16) << 8);
+    ApproachValueHalf(&w->x, sValueGridX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, (sValueGridY[w->cursorRow] - 16) << 8);
 
     if (w->inputDelay > 0) {
         w->inputDelay--;
@@ -2160,8 +2160,8 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
         }
         return 1;
     }
-    ApproachValueHalf(&w->x, gValueGridX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, gValueGridY[w->cursorRow] << 8);
+    ApproachValueHalf(&w->x, sValueGridX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, sValueGridY[w->cursorRow] << 8);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -2174,7 +2174,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim2);
 
     if (w->popupActive != 0) {
-        ApproachValueHalf(&w->x, gCollectionFilterTabX[w->cursorCol] << 8);
+        ApproachValueHalf(&w->x, sCollectionFilterTabX[w->cursorCol] << 8);
         ApproachValueHalf(&w->y, 0x1E00);
         TaskPoolUpdate(&w->taskpool);
         TaskPoolUpdate(&w->cardpool);
@@ -2319,7 +2319,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
         return 1;
     }
 
-    ApproachValueHalf(&w->x, gCollectionFilterTabX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->x, sCollectionFilterTabX[w->cursorCol] << 8);
     ApproachValueHalf(&w->y, 0x1E00);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
@@ -2329,7 +2329,7 @@ u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuClearPrompt(DeckMenuWork* w, void* a) {
     PromptChoiceLayout tbl;
 
-    tbl = gDeckPromptChoiceLayout;
+    tbl = sDeckPromptChoiceLayout;
     w->gfx = AnimUpdate(&w->anim2);
     w->gfx2 = AnimUpdate(&w->anim3);
 
@@ -2412,8 +2412,8 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
     }
 #endif
     if (w->popupActive != 0) {
-        ApproachValueHalf(&w->x, gDeckTabPointerX[w->cursorCol] << 8);
-        ApproachValueHalf(&w->y, gDeckTabPointerY[w->cursorRow] << 8);
+        ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
+        ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
         TaskPoolUpdate(&w->taskpool);
         TaskPoolUpdate(&w->cardpool);
         if (GetKeysPressed() & START_BUTTON) {
@@ -2530,8 +2530,8 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
         return 1;
     }
     HighlightDeckTab(w, w->deckIndex);
-    ApproachValueHalf(&w->x, gDeckTabPointerX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, gDeckTabPointerY[w->cursorRow] << 8);
+    ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -2542,7 +2542,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* w, void* a) {
     u8 z;
 
 #ifdef VERSION_EU
-    w->tiles3 = LoadObjTiles(gDeckCommandMenuTiles[gLanguage], gDeckCommandMenuTileSizes[gLanguage]);
+    w->tiles3 = LoadObjTiles(gDeckCommandMenuTiles[gLanguage], sDeckCommandMenuTileSizes[gLanguage]);
 #else
     w->tiles3 = LoadObjTiles(gUnk_090A261E, 0x1800);
 #endif
@@ -2683,7 +2683,7 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* w, void* a) {
 #else
     ApproachValueHalf(&w->x, 0x6600);
 #endif
-    ApproachValueHalf(&w->y, gDeckCommandY[w->commandCursor] << 8);
+    ApproachValueHalf(&w->y, sDeckCommandY[w->commandCursor] << 8);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -2990,8 +2990,8 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
                     DrawSelectedValueCpCost(w);
                     SetDeckMenuFrameCursor(w, 1);
                     w->view = 5;
-                    w->x = gValueGridX[w->cursorCol] << 8;
-                    w->y = gValueGridY[w->cursorRow] << 8;
+                    w->x = sValueGridX[w->cursorCol] << 8;
+                    w->y = sValueGridY[w->cursorRow] << 8;
                     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuAddValueSelect);
                     return 1;
                 } else {
@@ -3084,8 +3084,8 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
     w->mode = 0;
     *q = 1;
     SetDeckMenuHandAnim(w);
-    ApproachValueHalf(&w->x, gDeckTabPointerX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, gDeckTabPointerY[w->cursorRow] << 8);
+    ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(&gUnk_09614418[32],
                 (void*)(w->palette4->index * 32 +
@@ -3387,8 +3387,8 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* w, void* a) {
     w->mode = 0;
     w->view = 1;
     SetDeckMenuHandAnim(w);
-    ApproachValueHalf(&w->x, gDeckTabPointerX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, gDeckTabPointerY[w->cursorRow] << 8);
+    ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(&gUnk_09614418[32],
                 (void*)(w->palette4->index * 32 +
@@ -3591,8 +3591,8 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 DrawSelectedValueCpCost(w);
                 w->view = 11;
-                w->x = gValueGridX[w->cursorCol] << 8;
-                w->y = (gValueGridY[w->cursorRow] - 16) << 8;
+                w->x = sValueGridX[w->cursorCol] << 8;
+                w->y = (sValueGridY[w->cursorRow] - 16) << 8;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeleteValueSelect);
                 return 1;
             } else {
@@ -3677,8 +3677,8 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a) {
     w->mode = 0;
     *q = 1;
     SetDeckMenuHandAnim(w);
-    ApproachValueHalf(&w->x, gDeckTabPointerX[w->cursorCol] << 8);
-    ApproachValueHalf(&w->y, gDeckTabPointerY[w->cursorRow] << 8);
+    ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
+    ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(&gUnk_09614418[32],
                 (void*)(w->palette4->index * 32 +
@@ -3702,7 +3702,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* w, void* a) {
     w->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
 
 #ifdef VERSION_EU
-    w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], gDeckTitleBannerTileSizes[gLanguage]);
+    w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
     if (gGameState.flags & 8) {
         w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
@@ -7070,11 +7070,11 @@ const s16 gKeyboardKeyY[8] = {
     33, 47, 61, 76, 92, 110, 128, 143,
 };
 
-const s16 gKeyboardSymbolKeyX[15] = {
+static const s16 sKeyboardSymbolKeyX[15] = {
     4, 18, 32, 46, 60, 83, 97, 109, 123, 137, 164, 177, 191, 205, 219,
 };
 
-const s16 gKeyboardSymbolKeyY[7] = {
+static const s16 sKeyboardSymbolKeyY[7] = {
     40, 56, 70, 86, 102, 118, 134,
 };
 
@@ -7108,32 +7108,32 @@ const KeyboardLineLayout gKeyboardColumnLayouts[15] = {
 };
 
 const KeyboardLineLayout gKeyboardSymbolRowLayouts[8] = {
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
-    { gKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
+    { sKeyboardSymbolKeyX, 15 },
 };
 
 const KeyboardLineLayout gKeyboardSymbolColumnLayouts[15] = {
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
-    { gKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
+    { sKeyboardSymbolKeyY, 7 },
 };
 
 const s16 gKeyboardPageTabXEu[2] = { 1, 15 };

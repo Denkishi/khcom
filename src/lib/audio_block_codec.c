@@ -7,11 +7,11 @@ s32* gAudioCodecSamples;
 s32 gAudioCodecResiduals[8];
 s32 gAudioCodecTransformBuf[16];
 
-const s32 gUnk_09C43688[8] = {
+static const s32 sUnk_09C43688[8] = {
     13, 13, 13, 13, 13, 13, 13, 13,
 };
 
-const s32 gUnk_09C436A8[24] = {
+static const s32 sUnk_09C436A8[24] = {
     11, 11, 11, 11, 11, 12, 12, 12,
     3, 2, 2, 2, 2, 2, 2, 2,
     4, 3, 3, 3, 3, 3, 3, 3,
@@ -250,7 +250,7 @@ void _08117284(s32 p) {
         }
     }
 
-    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, gUnk_09C43688);
+    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, sUnk_09C43688);
 
     i = 0;
     t = p - 72;
@@ -438,7 +438,7 @@ void _08117A4C(s32 p) {
         }
     }
 
-    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, gUnk_09C436A8);
+    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, sUnk_09C436A8);
     i = 0;
     t = p - 1040;
     left = p - 1;

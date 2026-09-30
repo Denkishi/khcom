@@ -7,13 +7,13 @@
 #include <stdlib.h>
 #include "bos7.h"
 
-const EmyKind gBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
+static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 
-const BattleBackgroundDef gBosLstBattleBackgroundDef = {
+static const BattleBackgroundDef sBosLstBattleBackgroundDef = {
     gUnk_09CC5054, 0x8000, { 0, 0 }, gUnk_09D69454, 0x140, { 0, 0 }, { gUnk_09D4B274, gUnk_09D4B274, gUnk_09D4B274, gUnk_09D4B274 }
 };
 
-const LstAnimDef gLstAnimDefs[8] = {
+static const LstAnimDef sLstAnimDefs[8] = {
     { gUnk_09D4DA74, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72, { 0, 0 } },
     { gUnk_09D4FA74, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72, { 0, 0 } },
     { gUnk_09D4E274, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72, { 0, 0 } },
@@ -24,17 +24,17 @@ const LstAnimDef gLstAnimDefs[8] = {
     { gUnk_09D51274, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72, { 0, 0 } },
 };
 
-const u16 gBosLstBodyFrames[48] = {
+static const u16 sBosLstBodyFrames[48] = {
     0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
     2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3,
     2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-const u8 gBosLstAnimSheets[8] = { 0, 0, 0, 0, 0, 0, 0, 1 };
+static const u8 sBosLstAnimSheets[8] = { 0, 0, 0, 0, 0, 0, 0, 1 };
 
-const s32 gBosLstBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
+static const s32 sBosLstBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
 
-void* const gBosLstBgFrames[18][2] = {
+static void* const sBosLstBgFrames[18][2] = {
     { gUnk_09CC5054, gUnk_09D4DA74 },
     { gUnk_09CCD054, gUnk_09D51A74 },
     { gUnk_09CCD694, gUnk_09D52274 },
@@ -171,7 +171,7 @@ void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c) {
     if (work->turned == 1) {
         v ^= 1;
     }
-    switch (gBosLstAnimSheets[a]) {
+    switch (sBosLstAnimSheets[a]) {
     case 0:
         SetObjTileSource(work->tiles, gUnk_09C4B012);
         AnimChangeWithTables(&work->anim, v, b, gUnk_09EFAD3C, gUnk_09EFABB0);
@@ -292,7 +292,7 @@ void BosLstTickCardDelay(BosLstWork* work) {
 }
 
 void BosLstUpdateBob(BosLstWork* work) {
-    work->offsetZ = gBosLstBobZ[(work->bobFrame >> 2) & 15] << 8;
+    work->offsetZ = sBosLstBobZ[(work->bobFrame >> 2) & 15] << 8;
     work->bobFrame += 1;
     if (work->inEvent == 1) {
         work->offsetZ -= 0x1800;
@@ -311,14 +311,14 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     if (pool == 0) {
         work->inEvent = 0;
         work->eventStep = 0;
-        work->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFld, (void*)&gBosLstBattleBackgroundDef);
+        work->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFld, (void*)&sBosLstBattleBackgroundDef);
         work->state = 0;
         work->x = 0x14000;
         work->z = -0x5400;
     } else {
         work->inEvent = 1;
         work->eventStep = 0;
-        work->task = TaskCreate(pool, &gTaskDescBosLstFld, (void*)&gBosLstBattleBackgroundDef);
+        work->task = TaskCreate(pool, &gTaskDescBosLstFld, (void*)&sBosLstBattleBackgroundDef);
         work->state = 7;
         work->x = 0x1D000;
         work->z = -0x14400;
@@ -384,7 +384,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     for (; i < 32; i++) {
         work->lstTasks[i] = 0;
     }
-    tbl = &gBosLstEmyKind;
+    tbl = &sBosLstEmyKind;
     InitEnemyBtlObj(obj, tbl, work->x, work->y, work->z);
     work->body.flags |= 0x200000000400;
     SetBtlObjUnhittable(obj, 1);
@@ -2078,7 +2078,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
             }
         }
     }
-    anim = gBosLstBodyFrames[work->bodyCycle] << 1;
+    anim = sBosLstBodyFrames[work->bodyCycle] << 1;
     idx = 0;
     if (work->facing < 0) {
         anim |= 1;
@@ -2169,17 +2169,17 @@ u8 task_bos_lst_1(BosLstWork* work) {
     k = idx;
     if (work->sub[k].defeated == 0) {
         sub = &work->sub[k].body;
-        sub->x = work->x + work->offsetX + (gLstAnimDefs[anim].subX << 8);
-        sub->y = work->y + work->offsetY + (gLstAnimDefs[anim].subY << 8);
-        sub->z = work->z + work->offsetZ + (gLstAnimDefs[anim].subZ << 8);
+        sub->x = work->x + work->offsetX + (sLstAnimDefs[anim].subX << 8);
+        sub->y = work->y + work->offsetY + (sLstAnimDefs[anim].subY << 8);
+        sub->z = work->z + work->offsetZ + (sLstAnimDefs[anim].subZ << 8);
     }
     j = idx ^ 1;
     if (work->sub[j].defeated == 0) {
         s = &work->sub[j];
         sub = &s->body;
-        sub->x = work->x + work->offsetX + (gLstAnimDefs[anim].sub2X << 8);
-        sub->y = work->y + work->offsetY + (gLstAnimDefs[anim].sub2Y << 8);
-        sub->z = work->z + work->offsetZ + (gLstAnimDefs[anim].sub2Z << 8);
+        sub->x = work->x + work->offsetX + (sLstAnimDefs[anim].sub2X << 8);
+        sub->y = work->y + work->offsetY + (sLstAnimDefs[anim].sub2Y << 8);
+        sub->z = work->z + work->offsetZ + (sLstAnimDefs[anim].sub2Z << 8);
     }
     ColliderSetPosition(&obj->collider, obj->x + (work->facing << 10), obj->y, obj->z);
     ColliderSetPosition(&work->collider, obj->x, obj->y - 0x1000, obj->z + 0x1800);
@@ -2237,7 +2237,7 @@ void task_bos_lst_2(BosLstWork* work) {
     u16 w;
 
     TaskPoolDraw(&work->tasks);
-    anim = gBosLstBodyFrames[work->bodyCycle] << 1;
+    anim = sBosLstBodyFrames[work->bodyCycle] << 1;
     idx = 0;
     if (work->facing < 0) {
         anim |= 1;
@@ -2268,9 +2268,9 @@ void task_bos_lst_2(BosLstWork* work) {
         DisableBg(1);
         return;
     }
-    WorldToScreen(&sx, &sy, work->x + work->offsetX - (gLstAnimDefs[anim].bgX << 8),
-                  work->y + work->offsetY - (gLstAnimDefs[anim].bgY << 8),
-                  work->z + work->offsetZ - (gLstAnimDefs[anim].bgZ << 8));
+    WorldToScreen(&sx, &sy, work->x + work->offsetX - (sLstAnimDefs[anim].bgX << 8),
+                  work->y + work->offsetY - (sLstAnimDefs[anim].bgY << 8),
+                  work->z + work->offsetZ - (sLstAnimDefs[anim].bgZ << 8));
     SetBgScroll(1, (u16)(-sx), (u16)(-sy));
     if ((u16)(sy + 255) > 0x19E || (u16)(sx + 255) > 0x1FE) {
         DisableBg(1);
@@ -2310,18 +2310,18 @@ void task_bos_lst_2(BosLstWork* work) {
             }
         }
         if ((s16)work->bgFrame != n) {
-            LoadBgTiles(1, gBosLstBgFrames[n][0], 0xC00);
+            LoadBgTiles(1, sBosLstBgFrames[n][0], 0xC00);
             work->bgFrame = n;
         }
         if (work->facing < 0) {
             n += 9;
         }
         dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (u32)gLstAnimDefs[anim].bgMap;
+        dma[0] = (u32)sLstAnimDefs[anim].bgMap;
         dma[1] = (u32)work->bgMap;
         dma[2] = (DMA_ENABLE << 16) | 0x400;
         dma[2];
-        src = gBosLstBgFrames[n][1];
+        src = sBosLstBgFrames[n][1];
         dma[0] = (u32)src;
         dma[1] = (u32)work->bgMap;
         dma[2] = (DMA_ENABLE << 16) | 0x140;
@@ -2345,7 +2345,7 @@ void task_bos_lst_2(BosLstWork* work) {
         LoadBgMap(1, work->bgMap, 0x800);
     }
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
-    DrawSprite(sx + gLstAnimDefs[anim].spriteX, sy + gLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].spriteX, sy + sLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY + ((s16)gBtlWork->bossPriorityOffset << 8)),
                (u16)(-0x1004 - (((work->y + work->offsetY + ((s16)gBtlWork->bossPriorityOffset << 8)) >> 8) << 2)));
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
@@ -2355,7 +2355,7 @@ void task_bos_lst_2(BosLstWork* work) {
         work->sub[k].hurtTimer = v - 1;
     }
     sub = &work->sub[k];
-    DrawSprite(sx + gLstAnimDefs[anim].subSpriteX, sy + gLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].subSpriteX, sy + sLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY),
                (u16)(-0x1004 - (((work->y + work->offsetY) >> 8) << 2)));
     j = idx ^ 1;
@@ -2364,7 +2364,7 @@ void task_bos_lst_2(BosLstWork* work) {
         work->sub[j].hurtTimer = w - 1;
     }
     sub = &work->sub[j];
-    DrawSprite(sx + gLstAnimDefs[anim].sub2SpriteX, sy + gLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].sub2SpriteX, sy + sLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY - 0x1100),
                (u16)(-0x1004 - (((work->y + work->offsetY - 0x1100) >> 8) << 2)));
 }

@@ -17,7 +17,7 @@
 #include "mode_test_api.h"
 #include "malloc.h"
 
-const s16 gSoraEventIds[147] = {
+static const s16 sSoraEventIds[147] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
     12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
     24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
@@ -39,7 +39,7 @@ const s16 gSoraEventIds[147] = {
     -1,
 };
 
-const s16 gRikuEventIds[49] = {
+static const s16 sRikuEventIds[49] = {
 #ifdef VERSION_EU
     147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158,
     159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170,
@@ -54,15 +54,15 @@ const s16 gRikuEventIds[49] = {
     -1,
 };
 
-const char gEventSelectCursorText[] = "\x81\xa8";
+static const char sEventSelectCursorText[] = "\x81\xa8";
 
-const char gEventSelectBlankText[] = "\x81\x40";
+static const char sEventSelectBlankText[] = "\x81\x40";
 
-const char gEventSelectSoraLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60";
+static const char sEventSelectSoraLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60";
 
-const char gEventSelectRikuLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74";
+static const char sEventSelectRikuLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74";
 
-const char gEventSelectNoLabel[] = "\x82\x6d\x82\x8f\x81\x40\x81\x81";
+static const char sEventSelectNoLabel[] = "\x82\x6d\x82\x8f\x81\x40\x81\x81";
 
 s16 gEventSelectIndex __attribute__((aligned(4)));
 static u8 sEventSelectList;
@@ -73,12 +73,12 @@ s16 GetEventListLength(u8 a) {
 
     switch (a) {
     case 0:
-        while (gSoraEventIds[n] != -1) {
+        while (sSoraEventIds[n] != -1) {
             n++;
         }
         break;
     case 1:
-        while (gRikuEventIds[n] != -1) {
+        while (sRikuEventIds[n] != -1) {
             n++;
         }
         break;
@@ -116,14 +116,14 @@ void mode_eventselect_1(void) {
 
     switch (sEventSelectList) {
     case 0:
-        DebugTextPrint(0, 0, 2, gEventSelectCursorText);
-        DebugTextPrint(0, 10, 2, gEventSelectBlankText);
-        DebugTextPrint(0, 20, 2, gEventSelectBlankText);
+        DebugTextPrint(0, 0, 2, sEventSelectCursorText);
+        DebugTextPrint(0, 10, 2, sEventSelectBlankText);
+        DebugTextPrint(0, 20, 2, sEventSelectBlankText);
         break;
     case 1:
-        DebugTextPrint(0, 0, 2, gEventSelectBlankText);
-        DebugTextPrint(0, 10, 2, gEventSelectCursorText);
-        DebugTextPrint(0, 20, 2, gEventSelectBlankText);
+        DebugTextPrint(0, 0, 2, sEventSelectBlankText);
+        DebugTextPrint(0, 10, 2, sEventSelectCursorText);
+        DebugTextPrint(0, 20, 2, sEventSelectBlankText);
         break;
     }
 
@@ -143,17 +143,17 @@ void mode_eventselect_1(void) {
         gEventSelectIndex = GetEventListLength(sEventSelectList) - 1;
     }
 
-    DebugTextPrint(10, 0, 2, gEventSelectSoraLabel);
-    DebugTextPrint(10, 10, 2, gEventSelectRikuLabel);
-    DebugTextPrint(20, 40, 2, gEventSelectNoLabel);
+    DebugTextPrint(10, 0, 2, sEventSelectSoraLabel);
+    DebugTextPrint(10, 10, 2, sEventSelectRikuLabel);
+    DebugTextPrint(20, 40, 2, sEventSelectNoLabel);
     DebugTextPrintNumber(100, 40, 2, gEventSelectIndex + 1);
 
     switch (sEventSelectList) {
     case 0:
-        DebugTextPrint(20, 80, 2, gEventNames[gSoraEventIds[gEventSelectIndex]]);
+        DebugTextPrint(20, 80, 2, gEventNames[sSoraEventIds[gEventSelectIndex]]);
         break;
     case 1:
-        DebugTextPrint(20, 80, 2, gEventNames[gRikuEventIds[gEventSelectIndex]]);
+        DebugTextPrint(20, 80, 2, gEventNames[sRikuEventIds[gEventSelectIndex]]);
         break;
     }
 
@@ -161,16 +161,16 @@ void mode_eventselect_1(void) {
         switch (sEventSelectList) {
         case 0:
 #ifdef VERSION_EU
-            ModeRequest(&gModeEventDebug, gSoraEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gModeEventDebug, sSoraEventIds[gEventSelectIndex] | 0x8000);
 #else
-            RequestEventMode(gSoraEventIds[gEventSelectIndex]);
+            RequestEventMode(sSoraEventIds[gEventSelectIndex]);
 #endif
             break;
         case 1:
 #ifdef VERSION_EU
-            ModeRequest(&gModeEventDebug, gRikuEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gModeEventDebug, sRikuEventIds[gEventSelectIndex] | 0x8000);
 #else
-            RequestEventMode(gRikuEventIds[gEventSelectIndex]);
+            RequestEventMode(sRikuEventIds[gEventSelectIndex]);
 #endif
             break;
         }

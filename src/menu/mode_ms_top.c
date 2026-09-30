@@ -60,7 +60,7 @@ static s16 sMsTopPendingOptionMessage;
 static u8 sMsTopMessageStarted;
 static s16 sMsTopIntroIndex;
 
-const WarpDef gWarpDefs[2] = {
+static const WarpDef sWarpDefs[2] = {
 #if defined(VERSION_US)
     {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {0, 0}, {{64, 64, gWorldwarpAssetUs_09A3D81C, 32, {0, 0}, gWorldwarpAssetUs_099A2F84, 832, {0, 0}, gUnk_09EF999C, gUnk_09EF9998, 0, {0, 0}}, {192, 84, gMoguPalette, 32, {0, 0}, gUnk_099A2194, 2368, {0, 0}, gUnk_09EF9978, gUnk_09EF9928, 1, {0, 0}}}},
     {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {0, 0}, {{32, 64, gWorldwarpAssetUs_09A3D83C, 32, {0, 0}, gWorldwarpAssetUs_099A32E4, 832, {0, 0}, gUnk_09EF99A4, gUnk_09EF99A0, 0, {0, 0}}, {160, 84, gUnk_09A3D77C, 32, {0, 0}, gUnk_099A2194, 2368, {0, 0}, gUnk_09EF9978, gUnk_09EF9928, 0, {0, 0}}}},
@@ -73,14 +73,14 @@ const WarpDef gWarpDefs[2] = {
 #endif
 };
 
-const u16 gMsTopIntroMessages[3] = {
+static const u16 sMsTopIntroMessages[3] = {
     129,
     130,
     131,
 };
 
 #ifdef VERSION_EU
-void* gUnkEu_09F84EE8[5] = {
+static void* sUnkEu_09F84EE8[5] = {
     gUnk_09A378DC,
     gUnk_09A382DC,
     gUnkEu_09A8C1A0,
@@ -88,7 +88,7 @@ void* gUnkEu_09F84EE8[5] = {
     gUnkEu_09A8B7A0,
 };
 
-void* gUnkEu_09F84EFC[5] = {
+static void* sUnkEu_09F84EFC[5] = {
     gUnk_09A37DDC,
     gUnkEu_09A8C6A0,
     gUnkEu_09A8D5A0,
@@ -96,7 +96,7 @@ void* gUnkEu_09F84EFC[5] = {
     gUnkEu_09A8CBA0,
 };
 
-void* gUnkEu_09F84F10[5] = {
+static void* sUnkEu_09F84F10[5] = {
     gUnk_099A2AD4,
     gUnkEu_099AFC68,
     gUnkEu_099B0A58,
@@ -104,7 +104,7 @@ void* gUnkEu_09F84F10[5] = {
     gUnkEu_099B00F8,
 };
 
-void* gUnkEu_09F84F24[5] = {
+static void* sUnkEu_09F84F24[5] = {
     gUnk_099A2AF0,
     gUnkEu_099AFC84,
     gUnkEu_099B0A74,
@@ -112,7 +112,7 @@ void* gUnkEu_09F84F24[5] = {
     gUnkEu_099B0114,
 };
 
-void* gUnkEu_09F84F38[5] = {
+static void* sUnkEu_09F84F38[5] = {
     gUnk_099A2B24,
     gUnkEu_099AFCB8,
     gUnkEu_099B0AA8,
@@ -173,7 +173,7 @@ void UpdateMsTopMooglePalette(void) {
     s32 v;
     s32 base;
 
-    x = gWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8);
+    x = sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8);
     flag = 0;
     v = x;
     base = (-sMsTopBg1ScrollX) >> 8;
@@ -192,7 +192,7 @@ void UpdateMsTopWarpGfx(void) {
     s32 base;
 
     for (i = 0; i <= 1; i++) {
-        x = gWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8);
+        x = sWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8);
         flag = 0;
         v = x;
         base = (-sMsTopBg1ScrollX) >> 8;
@@ -207,21 +207,21 @@ void UpdateMsTopWarpGfx(void) {
         if (sMsTopWarpTiles[i] != 0) {
             ReleaseObjTiles(sMsTopWarpTiles[i]);
         }
-        sMsTopWarpPalettes[i] = LoadObjPalette(gWarpDefs[flag].gfx[i].palette, gWarpDefs[flag].gfx[i].paletteSize);
-        sMsTopWarpTiles[i] = LoadObjTiles(gWarpDefs[flag].gfx[i].tiles, gWarpDefs[flag].gfx[i].tilesSize);
-        AnimInit(&sMsTopWarpAnims[i], gWarpDefs[flag].gfx[i].anims, gWarpDefs[flag].gfx[i].gfxTable);
-        AnimStart(&sMsTopWarpAnims[i], gWarpDefs[flag].gfx[i].animId, 1);
+        sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[flag].gfx[i].palette, sWarpDefs[flag].gfx[i].paletteSize);
+        sMsTopWarpTiles[i] = LoadObjTiles(sWarpDefs[flag].gfx[i].tiles, sWarpDefs[flag].gfx[i].tilesSize);
+        AnimInit(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].anims, sWarpDefs[flag].gfx[i].gfxTable);
+        AnimStart(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].animId, 1);
     }
 }
 
 void SetMsTopWarpAnim(s16 a) {
-    AnimStart(&gWorldwarpAnim, gWarpDefs[a].animId, 1);
+    AnimStart(&gWorldwarpAnim, sWarpDefs[a].animId, 1);
 }
 
 void QueueMsTopIntroMessage(void) {
     if (sMsTopPendingMessage < 0) {
         if (sMsTopIntroIndex <= 2) {
-            sMsTopPendingMessage = gMsTopIntroMessages[sMsTopIntroIndex];
+            sMsTopPendingMessage = sMsTopIntroMessages[sMsTopIntroIndex];
             sMsTopIntroIndex++;
         }
     }
@@ -237,7 +237,7 @@ void MsTopHandleInput(void) {
         if (sMsTopCursor == 1) {
             AnimStart(&sMsTopWarpAnims[sMsTopCursor], 2, 1);
         }
-        sMsTopNextMode = gWarpDefs[sMsTopCursor].mode;
+        sMsTopNextMode = sWarpDefs[sMsTopCursor].mode;
         m4aSongNumStart(SONG_SYS_KETTEI);
         FadeStartOut(0, 16);
         FadeLock();
@@ -247,7 +247,7 @@ void MsTopHandleInput(void) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
-        LoadBgMap(2, gUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
@@ -258,7 +258,7 @@ void MsTopHandleInput(void) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
-        LoadBgMap(2, gUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
@@ -295,9 +295,9 @@ void MsTopDraw(void) {
 
     if (sMsTopBarVisible != 0) {
 #ifdef VERSION_EU
-        DrawSprite(sMsTopBarX >> 8, 0, gUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
 #else
         DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D0);
         DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
@@ -319,20 +319,20 @@ void MsTopDraw(void) {
         flags |= 1;
         break;
     }
-    DrawSprite(gWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), gWarpDefs[0].y3,
+    DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, 0, flags, 0x834);
-    DrawSprite((gUnk_02035888 >> 8) + gWarpDefs[0].x, gWarpDefs[0].y,
+    DrawSprite((gUnk_02035888 >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
         AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, 0, 0x800, 0x7D0);
 
-    DrawSprite(gWarpDefs[0].x2 + (gUnk_02035888 >> 8), gWarpDefs[0].y2,
+    DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, 0,
-        0x800 | gWarpDefs[sMsTopCursor].flags, 0x7D0);
-    DrawSprite(gWarpDefs[0].x2 + (gUnk_02035888 >> 8), gWarpDefs[0].y2,
+        0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D0);
+    DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
         gUnk_08B22BA8, sMsTopShadowTiles, sMsTopShadowPalette, 0,
-        0x800 | gWarpDefs[sMsTopCursor].flags, 0x7D1);
+        0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D1);
 
     for (i = 0; i <= 1; i++) {
-        DrawSprite(gWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8), gWarpDefs[0].gfx[i].y,
+        DrawSprite(sWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8), sWarpDefs[0].gfx[i].y,
             AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], 0, 0x800, 0x7D0);
     }
 
@@ -409,13 +409,13 @@ void mode_ms_top_0(u32 a) {
 
     if (sMsTopBarVisible != 0) {
 #ifdef VERSION_EU
-        LoadBgMap(2, gUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
     } else {
 #ifdef VERSION_EU
-        LoadBgMap(2, gUnkEu_09F84EFC[gLanguage], 0x500);
+        LoadBgMap(2, sUnkEu_09F84EFC[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A37DDC, 0x500);
 #endif
@@ -471,7 +471,7 @@ void mode_ms_top_1(void) {
         if (--sMsTopSteps <= 0) {
             sMsTopBarVisible = 0;
 #ifdef VERSION_EU
-            LoadBgMap(2, gUnkEu_09F84EFC[gLanguage], 0x500);
+            LoadBgMap(2, sUnkEu_09F84EFC[gLanguage], 0x500);
 #else
             LoadBgMap(2, gUnk_09A37DDC, 0x500);
 #endif

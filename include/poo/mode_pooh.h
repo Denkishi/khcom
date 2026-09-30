@@ -2,11 +2,8 @@
 #define GUARD_MODE_POOH_H
 
 #include "registration_data.h"
-
-
 #include "card_api.h"
 #include "msg_api.h"
-
 #include "anim.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -22,7 +19,6 @@
 #include "m4a.h"
 #include "bos4_api.h"
 #include "poo_api.h"
-
 
 extern u32 gPoohAction;
 

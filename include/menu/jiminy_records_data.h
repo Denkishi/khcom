@@ -3,5 +3,4 @@
 
 #include "jiminy_types.h"
 
-
 #endif

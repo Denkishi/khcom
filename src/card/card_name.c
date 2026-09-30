@@ -45,7 +45,6 @@ void PremireEffectMoveToCenter(PremiumCardEffectWork* w);
 void PremireEffectMoveFalling(PremiumCardEffectWork* w);
 
 #include "premium_message.inc"
-
 void CardName_0(CardNameWork* w) {
     PremireChanceCardWork* q = gCardListWork->selectedCard;
     ObjPalette* pal;
@@ -75,6 +74,7 @@ void CardName_0(CardNameWork* w) {
 #ifndef VERSION_JP
     w->palette = LoadObjPalette(gUnk_09614798, 32);
 #endif
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -123,9 +123,11 @@ void CardName_0(CardNameWork* w) {
     FadeSetPaletteExcluded(pal->index + 16, 1);
     FadeSetPaletteExcluded(w->textPalette->index + 16, 1);
 }
+
 s32 CardName_1(void) {
     return 1;
 }
+
 void CardName_2(CardNameWork* w) {
     void** p = &gUnk_09EF1278[2];
 
@@ -140,6 +142,7 @@ void CardName_2(CardNameWork* w) {
 #endif
     DrawTextSlots(w->messageX, 130, w->textSlots2, w->textPalette, 30, w->textSlotCount2);
 }
+
 void CardName_3(CardNameWork* w) {
     FreeTextSlots(w->textSlots, 32);
     FreeTextSlots(w->textSlots2, 32);
@@ -213,6 +216,7 @@ s32 PremireEffectSpiralUpdate(PremiumCardEffectWork* w) {
 
     return 0;
 }
+
 s32 Premire_EFFECT2_1(PremiumCardEffectWork* w) {
     PremireEffectMoveFalling(w);
     w->gfx = AnimUpdate(&w->anim);
@@ -223,6 +227,7 @@ s32 Premire_EFFECT2_1(PremiumCardEffectWork* w) {
 
     return 1;
 }
+
 s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* w) {
     PremireEffectMoveToCenter(w);
     w->angle += 8;
@@ -234,9 +239,11 @@ s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* w) {
 
     return 1;
 }
+
 void PremireEffectDraw(PremiumCardEffectWork* w) {
     DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 0);
 }
+
 void PremireEffectDestroy(PremiumCardEffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);

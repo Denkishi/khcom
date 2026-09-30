@@ -3,7 +3,6 @@
 
 #include "task_descriptors.h"
 #include "evt_object_types.h"
-
 #include "obj.h"
 #include "obj_api.h"
 #include "types.h"

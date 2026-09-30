@@ -49,6 +49,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
     switch (work->state) {
     case 0:
         work->delay--;
+
         if (work->delay <= 0) {
             work->state = 1;
             work->unk_002 = 0;
@@ -59,6 +60,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
             work->targetY = p->y;
             work->targetZ = -0x1000;
         }
+
         break;
     case 1:
         work->targetX = gBtlWork->actor->x;
@@ -66,12 +68,14 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         ApproachValueHalfSteps(&work->y, work->targetY, 30);
         ApproachValueHalfSteps(&work->z, work->targetZ, 30);
         work->timer++;
+
         if (work->timer > 49) {
             work->state = 2;
             work->unk_002 = 0;
             work->timer = 0;
             work->delay = 0;
         }
+
         ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
     case 2:
@@ -79,12 +83,14 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         ApproachValueHalfSteps(&work->y, work->homeY, 30);
         ApproachValueHalfSteps(&work->z, work->homeZ, 30);
         work->timer++;
+
         if (work->timer > 49) {
             work->state = 3;
             work->unk_002 = 0;
             work->timer = 0;
             work->delay = 0;
         }
+
         ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
     case 3:

@@ -68,6 +68,7 @@ void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
         *b = (v >> 8) + 80;
     }
 }
+
 void CreateBtlPopTask(BtlObj* p, s16 b) {
     BtlPrizeSrc a;
     s16* t;
@@ -82,30 +83,37 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
         if (*t > 0) {
             return;
         }
+
         *t = 50;
     }
+
     a.x = p->x;
     a.y = p->y;
     a.z = p->z - ((p->height / 2) << 8);
+
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (b == 9) {
             a.kind = abs(gBtlWork->breakDifference);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &a);
             return;
         }
+
         a.kind = b;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
         return;
     }
+
     a.kind = b;
 
     if (b == 9) {
         if (p->flags & BTLOBJ_FLAG_NO_BREAK_POP) {
             return;
         }
+
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
         return;
     }
+
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
 }
 
@@ -132,19 +140,25 @@ void UpdateEnemyCardUse(void) {
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_BUSY) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
+
     p = gBtlWork->actor4;
+
     if (p == NULL) {
         return;
     }
+
     if (p->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
         return;
     }
+
     gBtlWork->actor3 = p;
     UseEnemyCard(p->kind);
 }
@@ -157,6 +171,7 @@ void HandleSoraCardInput(void) {
     if (gBtlWork->flags & BTL_FLAG_GIMMICK_CARD_ACTIVE) {
         return;
     }
+
     t = gBtlWork->listSwitchTimer;
 
     if ((s16)t > 0) {
@@ -165,6 +180,7 @@ void HandleSoraCardInput(void) {
         if (gBtlWork->listSwitchTimer == 0) {
             RequestSwitchSoraCardList();
         }
+
         return;
     }
 
@@ -181,6 +197,7 @@ void HandleSoraCardInput(void) {
     if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
+
     a = ReadKeyChord(L_BUTTON, R_BUTTON);
 
     switch (a) {
@@ -224,20 +241,25 @@ void HandleSoraCardInput(void) {
     if (gBtlWork->rHeldFrames > 32) {
         RequestSoraPrevCard();
     }
+
     p = gBtlWork->actor;
 
     if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_BUSY) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
+
     if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
@@ -269,6 +291,7 @@ void HandleRikuCardInput(void) {
     if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
+
     t = gRikuBtlWork->listSwitchTimer;
 
     if ((s16)t > 0) {
@@ -277,6 +300,7 @@ void HandleRikuCardInput(void) {
         if (gRikuBtlWork->listSwitchTimer == 0) {
             RequestSwitchRikuCardList();
         }
+
         return;
     }
 
@@ -323,20 +347,25 @@ void HandleRikuCardInput(void) {
     if (gBtlWork->rHeldFrames > 32) {
         RequestRikuPrevCard();
     }
+
     p = gRikuBtlWork->actor;
 
     if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_BUSY) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
+
     if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
@@ -381,6 +410,7 @@ void HandleTutorialCardInput(void) {
     if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
         return;
     }
+
     a = ReadKeyChord(L_BUTTON, R_BUTTON);
     pressed = GetKeysPressed();
     held = GetKeysHeld();
@@ -432,20 +462,25 @@ void HandleTutorialCardInput(void) {
     if (gBtlWork->rHeldFrames > 32) {
         RequestSoraPrevCard();
     }
+
     p = gBtlWork->actor;
 
     if (p->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_BUSY) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
+
     if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
@@ -468,6 +503,7 @@ void HandleTutorialCardInput(void) {
         }
     }
 }
+
 void MakeOpponentsHittable(void) {
     BtlWork* w = gBtlWork;
     BtlObj* p;
@@ -486,8 +522,10 @@ void MakeOpponentsHittable(void) {
             p->invincibleTimer = 0;
             p = ListPoolNext(&p->node);
         }
+
         return;
     }
+
     p = w->actor;
     p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 }
@@ -507,6 +545,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
             SetJiminyFlag(244);
             CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
         }
+
         return;
     }
 
@@ -519,30 +558,35 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
                 v = 2;
                 SetJiminyFlag(159);
             }
+
             break;
         case WORLD_ATLANTICA:
             if (flags & FRIEND_FLAG_ARIEL) {
                 v = 3;
                 SetJiminyFlag(160);
             }
+
             break;
         case WORLD_HALLOWEEN_TOWN:
             if (flags & FRIEND_FLAG_JACK) {
                 v = 4;
                 SetJiminyFlag(161);
             }
+
             break;
         case WORLD_NEVER_LAND:
             if (flags & FRIEND_FLAG_PETER_PAN) {
                 v = 5;
                 SetJiminyFlag(162);
             }
+
             break;
         case WORLD_HOLLOW_BASTION:
             if (flags & FRIEND_FLAG_THE_BEAST) {
                 v = 6;
                 SetJiminyFlag(163);
             }
+
             break;
         }
     }
@@ -572,6 +616,7 @@ void EndCardPlay(void) {
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
     }
+
     gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
@@ -585,11 +630,13 @@ void _08019CB4(void) {
     BtlPrizeArgs pos;
 
     player = gBtlWork->actor;
+
     if (gBtlWork->hcEffect == 53) {
         gBtlWork->gravity = 38;
     } else {
         gBtlWork->gravity = 66;
     }
+
     if (gBtlWork->hcEffect == 19) {
         if (!(gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) && gFrameCounter % 30 == 0) {
             gBtlWork->targetX = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) * 256;
@@ -601,7 +648,9 @@ void _08019CB4(void) {
         gBtlWork->targetY = gBtlWork->actor->y;
         gBtlWork->targetZ = gBtlWork->actor->z;
     }
+
     gBtlWork->flags &= ~BTL_FLAG_ENEMY_FRAME_CHANGED;
+
     switch ((u32)gBtlWork->phase) {
     case 1:
     case 2:
@@ -619,37 +668,48 @@ void _08019CB4(void) {
             UpdateEnemyCardUse();
             HandleSoraCardInput();
         }
+
         break;
     }
+
     gBtlWork->actor4 = 0;
     TaskPoolUpdate(&gBtlWork->taskPools[1]);
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
         gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
+
         if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
             gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         }
+
         gBtlWork->phase = 1;
+
         if (gBtlWork->soraOwnsPlay) {
             BtlObj* obj;
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
             obj = gBtlWork->actor3;
+
             if (obj != NULL) {
                 obj->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             }
+
             FadeFromAmount(FADE_MODE_ADD_WHITE, 10, 4);
         } else {
             gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             FadeFromAmount(FADE_MODE_RED, 10, 4);
         }
+
         MosaicStartIn(16, 15);
         SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
         gBtlWork->phaseStep = 0;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_START) {
         changed = 1;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
+
         if (gBtlWork->soraOwnsPlay) {
             gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
@@ -657,15 +717,18 @@ void _08019CB4(void) {
             BtlObj* obj;
             gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_ACTION;
             obj = gBtlWork->actor3;
+
             if (obj != NULL) {
                 obj->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             }
         }
+
         gBtlWork->phase = 2;
         gBtlWork->phaseStep = 0;
     } else {
         changed = 0;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) {
         if (gBtlWork->phase != 3) {
             gBtlWork->phase = 3;
@@ -675,6 +738,7 @@ void _08019CB4(void) {
         if (gBtlWork->phase != 4) {
             gBtlWork->phase = 4;
             gBtlWork->phaseStep = 0;
+
             switch ((u32)gBtlWork->battleId) {
             case 120:
             case 124:
@@ -690,41 +754,52 @@ void _08019CB4(void) {
                     pos.z = -0x4600;
                     CreateBossPrizeCardTask(gBtlWork->taskPools, &pos);
                 }
+
                 break;
             }
         }
     }
+
     switch ((u32)gBtlWork->phase) {
     case 0:
         if (gBtlWork->phaseStep == 0) {
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
                 gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, 0);
             }
+
             gBtlWork->phaseStep = 1;
         }
+
         if (FadeIsActive()) {
             break;
         }
+
         if (gBtlWork->phaseStep == 1) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) {
                     FadeSetPaletteExcluded(i, 1);
                 }
             }
+
             gBtlWork->phaseStep = 2;
         }
+
         if (IsTaskActiveNamed(gBtlWork->task, gTaskDescBtlStart.name)) {
             break;
         }
+
         if (gBtlWork->phaseStep == 2) {
             gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             gBtlWork->flags &= ~BTL_FLAG_PAUSE_DISABLED;
             TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);
+
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpenm, 0);
             }
+
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlExp, 0);
+
             if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) && !(gBtlWork->flags & BTL_FLAG_HUM_BATTLE)) {
                 switch ((u32)gBtlWork->battleId) {
                 case 120:
@@ -745,10 +820,13 @@ void _08019CB4(void) {
                     } else if (gGameState.progression.unk_82 & 0x20) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
                     }
+
                     break;
                 }
             }
+
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
+
             if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
                 if (gBtlWork->battleId == 179) {
                     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
@@ -756,16 +834,19 @@ void _08019CB4(void) {
             } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
             }
+
             RequestOpenCards();
             func_080838E8();
             gBtlWork->phaseStep = 3;
         } else if (gBtlWork->phaseStep == 3) {
             gBtlWork->phase = 1;
             gBtlWork->phaseStep = 0;
+
             if (gGameState.roomEffect == 5) {
                 DropFriendCard(0x10000, gBtlWork->actor->y, gBtlWork->actor->z - 0x7800);
             }
         }
+
         break;
     case 1:
         break;
@@ -774,10 +855,12 @@ void _08019CB4(void) {
             RequestCloseCards();
             RequestBossCardClose();
             gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
+
             if (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) {
                 gBtlWork->flags |= BTL_FLAG_DISMISS_SUMMONS;
                 FadeToOriginal(FADE_MODE_BLACK, 8);
             }
+
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
             gBtlWork->actor2 = 0;
@@ -790,12 +873,15 @@ void _08019CB4(void) {
             if (BgFxIsActive()) {
                 break;
             }
+
             if (gBtlWork->flags & BTL_FLAG_BOSS_DEFEATING) {
                 break;
             }
+
             if (gBtlWork->prizeCount != 0 && !(gBtlWork->flags & BTL_FLAG_ESCAPED)) {
                 break;
             }
+
             if (gBtlWork->flags & BTL_FLAG_PREMIRE_COLLECTED) {
                 if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
@@ -807,11 +893,14 @@ void _08019CB4(void) {
                     if (IsTaskActiveNamed(gBtlWork->task, gTaskDescPremireChance.name)) {
                         break;
                     }
+
                     gBtlWork->flags &= ~BTL_FLAG_PREMIRE_COLLECTED;
                     gBtlWork->phaseStep = 2;
                 }
+
                 break;
             }
+
             if (gBtlWork->pendingLevelUps != 0) {
                 if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
@@ -820,8 +909,10 @@ void _08019CB4(void) {
                     gBtlWork->flags |= BTL_FLAG_FIELD_HIDDEN;
                     gBtlWork->phaseStep = -1;
                 }
+
                 break;
             }
+
             if (gBtlWork->phaseStep == -1) {
                 if (!IsTaskActive(gBtlWork->task)) {
                     BtlObj* healed;
@@ -830,8 +921,10 @@ void _08019CB4(void) {
                     healed->hp = gGameState.progression.maxHp;
                     healed->maxHp = gGameState.progression.maxHp;
                 }
+
                 break;
             }
+
             if (gBtlWork->phaseStep == 2 && !FadeIsActive()) {
                 gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                 gBtlWork->hitStop = 99;
@@ -845,6 +938,7 @@ void _08019CB4(void) {
                 ExitBattle();
             }
         }
+
         break;
     case 3:
         if (gBtlWork->phaseStep == 0) {
@@ -855,6 +949,7 @@ void _08019CB4(void) {
             gBtlWork->actor2 = 0;
             gBtlWork->pendingEnemies = 0;
         }
+
         if (gBtlWork->phaseStep == 140) {
             FadeStartOut(FADE_MODE_WHITE, 100);
             FadeLock();
@@ -863,12 +958,14 @@ void _08019CB4(void) {
             gBtlWork->hitStop = 100;
         } else if (gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
+
             if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
                 ModeRequest(&gModeChkbtl, 0);
             } else {
                 GameState* state = &gGameState;
                 memcpy(&state->progression.maxHp, gBtlWork->savedProgression, 0x88);
                 state->flags |= GAME_FLAG_BATTLE_NOT_WON;
+
                 switch ((u32)gBtlWork->battleId) {
                 case 166:
                     state->progression.friendFlags = 0;
@@ -882,42 +979,56 @@ void _08019CB4(void) {
                     break;
 #endif
                 }
+
                 ModeRequest(&gModeContinue, 0);
             }
+
             break;
         }
+
         gBtlWork->phaseStep++;
         break;
     case 2: {
         BtlObj* obj;
+
         if (changed) {
             break;
         }
+
         busy = 0;
+
         if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
             busy = 1;
         }
+
         if (busy) {
             break;
         }
+
         obj = ListPoolFirst(&gBtlWork->pool);
+
         while (obj != NULL) {
             if (obj->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
                 busy = 1;
                 break;
             }
+
             obj = ListPoolNext(&obj->node);
         }
+
         if (busy) {
             break;
         }
+
         count = GetStockMoveCount();
         gBtlWork->phaseStep = 0;
+
         if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                 if (gBtlWork->stockMove >= (s8)count) {
                     gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
                 }
+
                 if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
                     player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
                 } else {
@@ -927,6 +1038,7 @@ void _08019CB4(void) {
                 if (gRikuBtlWork->stockMove >= (s8)count) {
                     gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
                 }
+
                 if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
                     gRikuBtlWork->actor->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
                 } else {
@@ -937,12 +1049,14 @@ void _08019CB4(void) {
             if (gBtlWork->stockMove >= (s8)count) {
                 gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
             }
+
             if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) {
                 player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             } else {
                 EndCardPlay();
             }
         }
+
         break;
     }
     }
@@ -972,6 +1086,7 @@ u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY) {
         *px = (gBtlWork->xMax + (s16)rx) << 8;
         r = 2;
     }
+
     return r;
 }
 
@@ -995,6 +1110,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
             p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
         }
+
         return BTL_REACTION_WARPED;
     }
 
@@ -1005,6 +1121,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->hp < 0) {
             p->hp = 0;
         }
+
         p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
         gBtlWork->hitStop = gBtlWork->pendingHitStop;
         p->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_HURT);
@@ -1025,6 +1142,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
                 p->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
                 return BTL_REACTION_GRAVITY_DEFEATED;
             }
+
             return BTL_REACTION_DEFEATED;
         }
 
@@ -1047,6 +1165,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
                 p->badStatus = BAD_STATUS_STUN;
                 p->badStatusTimer = 240;
             }
+
             return BTL_REACTION_STUNNED;
         }
 
@@ -1071,8 +1190,10 @@ s32 ApplyBtlObjHit(BtlObj* p) {
                 p->badStatus = BAD_STATUS_BIND;
                 p->badStatusTimer = 600;
             }
+
             return BTL_REACTION_HURT;
         }
+
         p->badStatus = BAD_STATUS_NONE;
         p->badStatusTimer = 0;
         return BTL_REACTION_HURT;
@@ -1091,6 +1212,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             ClearBtlObjActionFlags(p);
             return BTL_REACTION_HAZARD;
         }
+
         return BTL_REACTION_NONE;
     }
 
@@ -1104,8 +1226,10 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             p->badStatus = BAD_STATUS_STOP;
             p->badStatusTimer = p->damage;
         }
+
         return BTL_REACTION_STOPPED;
     }
+
     return BTL_REACTION_NONE;
 }
 
@@ -1120,6 +1244,7 @@ u8 TryStartCardAction(BtlObj* p) {
         p->originZ = p->z;
         return 1;
     }
+
     return 0;
 }
 
@@ -1150,11 +1275,13 @@ s32 UpdateBtlObjReaction(BtlObj* p) {
             p->knockbackLift = 0;
         }
     }
+
     u = p->invincibleTimer;
 
     if (p->invincibleTimer > 0) {
         p->invincibleTimer = u - 1;
     }
+
     v = p->popCooldown;
 
     if (p->popCooldown > 0) {
@@ -1169,9 +1296,11 @@ s32 UpdateBtlObjReaction(BtlObj* p) {
         gBtlWork->hitStop = 12;
         return BTL_REACTION_CARD_BROKEN;
     }
+
     if (TryStartCardAction(p)) {
         return BTL_REACTION_CARD_ACTION;
     }
+
     return ApplyBtlObjHit(p);
 }
 
@@ -1183,6 +1312,7 @@ u16 GetBattleSpritePriorityFlags(s32 a) {
     if (a < gBtlWork->bossY + (gBtlWork->bossPriorityOffset << 8)) {
         return SPRITE_PRIORITY(2);
     }
+
     return SPRITE_PRIORITY(1);
 }
 
@@ -1202,6 +1332,7 @@ void BeginBossDefeat(BtlObj* actor) {
         p->node.flags |= LIST_NODE_FLAG_SKIP;
         p = ListPoolNext(&p->node);
     }
+
     gBtlWork->enemyCount = 0;
 }
 
@@ -1431,6 +1562,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 p->exp = 13131;
                 break;
             }
+
             break;
         case EMY_ID_37:
             if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -1449,6 +1581,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 b = 76;
                 c = 640;
             }
+
             p->maxHp = ((gGameState.floor * a + 256) * e->hp) >> 8;
             p->attack = ((gGameState.floor * b + 256) * e->attack) >> 8;
             p->exp = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
@@ -1460,6 +1593,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
         p->exp = 1;
         v = d->id;
     }
+
     p->attackOffset = 80;
     p->attackRangeX = 32;
     p->attackRangeY = 32;
@@ -1507,6 +1641,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
         if (!(d->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
             ColliderInit(&p->collider, 8, d->radius, d->height);
         }
+
         p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_IMMUNE_BIND);
         p->flags |= BTLOBJ_FLAG_BOSS;
         break;
@@ -1519,11 +1654,13 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
             }
         }
     }
+
     SetEnemyKindFlags(p);
 
     if (d->flags & EMY_KIND_FLAG_LARGE_BODY) {
         p->flags |= BTLOBJ_FLAG_LARGE_SHADOW;
     }
+
     ListNodeInit(&p->node, &gBtlWork->pool, p);
     ListPoolAppend(&p->node, &gBtlWork->pool);
     gBtlWork->enemyCount++;
@@ -1531,12 +1668,14 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
 
 void ReleaseEnemyBtlObj(BtlObj* obj) {
     BtlObj* p = obj->self;
+
     if (p == obj) {
         ListPoolRemove(&p->node, &gBtlWork->pool);
 
         if (!(p->kindFlags & EMY_KIND_FLAG_NO_COLLIDER)) {
             ColliderUnregister(&p->collider);
         }
+
         gBtlWork->enemyCount--;
     }
 }
@@ -1555,6 +1694,7 @@ u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* p, u16 b, s16 c, s16* n, s16* cnt) {
             return 1;
         }
     }
+
     *n = *n % c;
     return 0;
 }
@@ -1568,8 +1708,10 @@ void CreateBtlPrizeTasks(BtlPrizeSrc* p, u16 b, s16 c, s16* n) {
     for (i = 0; i < lim; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, p);
     }
+
     *n = *n % c;
 }
+
 void DropBossPrizes(BtlObj* p) {
     BtlPrizeSrc a;
     s16 n;
@@ -1600,6 +1742,7 @@ void DropEnemyPrizes(BtlObj* p) {
     if (gBtlWork->flags & BTL_FLAG_NO_ENEMY_DROPS) {
         return;
     }
+
     a.x = p->x;
     a.y = p->y;
     a.z = p->z;
@@ -1662,6 +1805,7 @@ void DropEnemyPrizes(BtlObj* p) {
                 if (gGameState.roomEffect == 1 || gGameState.roomEffect == 10) {
                     v = (v * 5 * 128) >> 8;
                 }
+
                 v = 100 / v;
                 r = GetRandom();
                 hit = 0;
@@ -1669,6 +1813,7 @@ void DropEnemyPrizes(BtlObj* p) {
                 if ((u16)r % v == 0) {
                     hit = 1;
                 }
+
                 flag = hit;
             }
         }
@@ -1692,21 +1837,27 @@ void DropEnemyPrizes(BtlObj* p) {
     if (CreateBtlPrizeTasksCapped(&a, 0, 0x578, &n, &cnt)) {
         return;
     }
+
     if (CreateBtlPrizeTasksCapped(&a, 8, 199, &n, &cnt)) {
         return;
     }
+
     if (CreateBtlPrizeTasksCapped(&a, 5, 60, &n, &cnt)) {
         return;
     }
+
     if (CreateBtlPrizeTasksCapped(&a, 7, 30, &n, &cnt)) {
         return;
     }
+
     if (CreateBtlPrizeTasksCapped(&a, 4, 10, &n, &cnt)) {
         return;
     }
+
     if (CreateBtlPrizeTasksCapped(&a, 6, 5, &n, &cnt)) {
         return;
     }
+
     CreateBtlPrizeTasksCapped(&a, 3, 1, &n, &cnt);
 }
 
@@ -1716,21 +1867,27 @@ void TryDropPremireCard(BtlObj* p) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return;
     }
+
     if (IsActiveDeckAllPremium()) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_NO_ENEMY_DROPS) {
         return;
     }
+
     if (gBtlWork->flags & BTL_FLAG_PREMIRE_DROPPED) {
         return;
     }
+
     if (!HasNonPremiumCardsInActiveDeck()) {
         return;
     }
+
     if (GetDeckCardCount(GetActiveDeckIndex()) <= 9) {
         return;
     }
+
     gBtlWork->flags |= BTL_FLAG_PREMIRE_DROPPED;
     a.x = p->x;
     a.y = p->y;
@@ -1771,9 +1928,11 @@ void TryEnemyCardUse(BtlObj* p) {
     if (p->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
         return;
     }
+
     if (GetRandom() % (p->cardInterval * gBtlWork->enemyCount) != 0) {
         return;
     }
+
     GetEnemyTargetPosition(p, &x, &y, 0);
 
     if (p->attackRangeX == 0) {
@@ -1799,15 +1958,19 @@ void TryEnemyCardUse(BtlObj* p) {
     if (x0 > x) {
         return;
     }
+
     if (x1 < x) {
         return;
     }
+
     if (y0 > y) {
         return;
     }
+
     if (y1 < y) {
         return;
     }
+
     gBtlWork->actor4 = p;
 }
 
@@ -1939,6 +2102,7 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
         s.desc = &gTaskDescEmy00;
         break;
     }
+
     s.x = x;
     s.y = y;
     s.z = z;
@@ -1951,8 +2115,10 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
             gBtlWork->pendingEnemies--;
             return 0;
         }
+
         TaskCreate(&gBtlWork->taskPools[0], s.desc, &s.x);
     }
+
     return 1;
 }
 
@@ -1967,6 +2133,7 @@ void AllocBattleTiles(void) {
             gRikuBtlWork->tiles = AllocObjTiles(0xC80, 0);
         }
     }
+
     gBtlWork->flags |= BTL_FLAG_TILES_ALLOCATED;
 }
 
@@ -1982,6 +2149,7 @@ void ReleaseBattleTiles(void) {
                 ReleaseObjTiles(gRikuBtlWork->tiles);
             }
         }
+
         gBtlWork->flags &= ~BTL_FLAG_TILES_ALLOCATED;
     }
 }
@@ -1998,11 +2166,14 @@ u8 ConsumeGimmickFlag(u8 a) {
     if (a > 4) {
         return 0;
     }
+
     m = 1 << a;
+
     if (gBtlWork->gimmickFlags & m) {
         gBtlWork->gimmickFlags &= ~m;
         return 1;
     }
+
     return 0;
 }
 
@@ -2028,6 +2199,7 @@ void _0801C1F8(u8 a, s32 x, s32 y, s32 z) {
     default:
         return;
     }
+
     CreateGimmickCardTask(&gBtlWork->taskPools[0], x >> 8, y >> 8, z >> 8, id);
 }
 
@@ -2057,10 +2229,12 @@ void SetBtlObjUnhittable(BtlObj* p, u8 f) {
 
 void ExitBattle(void) {
     m4aMPlayAllStop();
+
     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
         ModeRequest(&gModeChkbtl, 0);
         return;
     }
+
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gBtlWork->battleId) {
         case 166:
@@ -2124,6 +2298,7 @@ void ExitBattle(void) {
             } else {
                 RequestMapMode();
             }
+
             return;
         }
     } else {
@@ -2139,6 +2314,7 @@ void ExitBattle(void) {
             } else {
                 RequestEventMode(83);
             }
+
             return;
         case 122:
             RequestEventMode(88);
@@ -2244,16 +2420,17 @@ void ExitBattle(void) {
             } else {
                 RequestMapMode();
             }
+
             return;
         }
     }
 }
 
-
 u8 ApplyBattleBounds(s32* a, s32* b, s32* c, s32* d) {
     if (gBtlWork->boundsCallback != NULL) {
         return gBtlWork->boundsCallback(a, b, c, d);
     }
+
     return 0;
 }
 
@@ -2264,21 +2441,26 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
         if (b != NULL) {
             *b = a->unk_0F0;
         }
+
         if (c != NULL) {
             *c = a->unk_0F4;
         }
+
         if (d != NULL) {
             *d = a->unk_0F8;
         }
+
         n = GetRandom() % 6;
 
         if (n == 0) {
             if (b != NULL) {
                 *b = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
             }
+
             if (c != NULL) {
                 *c = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
             }
+
             if (d != NULL) {
                 *d = n;
             }
@@ -2287,9 +2469,11 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
         if (b != NULL) {
             *b = gBtlWork->targetX;
         }
+
         if (c != NULL) {
             *c = gBtlWork->targetY;
         }
+
         if (d != NULL) {
             *d = gBtlWork->targetZ;
         }
@@ -2299,11 +2483,14 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
 void SetEnemyHpFromStats(BtlObj* a, s32 id, s32 c) {
     u16 b = id;
     const EnemyBaseStats* e = GetEnemyBaseStats(b);
+
     if (e != NULL) {
         a->maxHp = (e->hp * c) >> 8;
+
         if (a->maxHp <= 0) {
             a->maxHp = 1;
         }
+
         a->hp = a->maxHp;
     }
 }
@@ -2430,10 +2617,13 @@ u8 StepHitFlash(BtlObj* p) {
     if (p->hitFlashFrames > 0x17) {
         return 0;
     }
+
     p->hitFlashFrames++;
+
     if (p->hitFlashFrames & 1) {
         return 1;
     }
+
     return 0;
 }
 
@@ -2449,6 +2639,7 @@ u8 StepHitFlashSolid(BtlObj* p) {
     if (p->hitFlashFrames > 0x17) {
         return 0;
     }
+
     p->hitFlashFrames++;
     return 1;
 }
@@ -2461,6 +2652,7 @@ void InitGameState(void) {
         gGameState.flags |= GAME_FLAG_RIKU;
         gGameState.flags |= GAME_FLAG_SORA_CLEAR;
     }
+
     gGameState.world = WORLD_WONDERLAND;
     gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
     InitPlayerProgression();

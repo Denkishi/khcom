@@ -63,6 +63,7 @@ void InitSpriteTextLines(void) {
         }
     }
 }
+
 void AddSpriteTextLine(s32 x, s32 y, u8* s) {
     u8 i;
     u8 len;
@@ -86,6 +87,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
     if (len > 15) {
         len = 16;
     }
+
     gSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0; i < len; i++) {
@@ -137,18 +139,20 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
         if (s[i] == 37) {
             idx = 44;
         }
+
         UpdateSpriteFrameTiles(gSpriteTextLines[sTextEntryCount].glyphTiles[i], gUnk_09EEC538[idx], gUnk_090D4180);
     }
+
     gSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gUnk_08F69BE4, 32);
     sTextEntryCount++;
 }
+
 #ifndef VERSION_EU
 void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
     u8 i;
     u8 len;
     u8 k;
     u8 idx;
-
     idx = 0;
 
     if (sTextEntryCount > 44) {
@@ -167,6 +171,7 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
     if (len > 15) {
         len = 16;
     }
+
     gSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0, k = 0; i < len; i++) {
@@ -179,14 +184,17 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
         if ((u8)(c - 65) <= 25) {
             idx = c - 52;
         }
+
         gSpriteTextLines[sTextEntryCount].glyphTiles[k] = AllocSpriteFrameTiles(128);
         UpdateSpriteFrameTiles(gSpriteTextLines[sTextEntryCount].glyphTiles[k], gUnk_09EEB204[idx], gUnk_090AB5B2);
         k++;
     }
+
     gSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(&gUnk_096147B8[0x40], 32);
     sTextEntryCount++;
 }
 #endif
+
 void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
     u8 buf[20];
     u8 i;
@@ -209,6 +217,7 @@ void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
         buf[6] += 0x30;
         buf[7] += 0x30;
         buf[8] = 0;
+
         for (i = 0; i <= 6; i++) {
             if (buf[i] > 0x30) {
                 break;
@@ -236,6 +245,7 @@ void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
         buf[7] += 0x30;
         buf[8] += 0x30;
         buf[9] = 0;
+
         for (i = 1; i <= 7; i++) {
             if (buf[i] > 0x30) {
                 break;
@@ -246,6 +256,7 @@ void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
         AddSpriteTextLine(x, y, &buf[i - 1]);
     }
 }
+
 void DrawSpriteTextLines(void) {
     s32 x;
     s32 y;
@@ -272,8 +283,10 @@ void DrawSpriteTextLines(void) {
             DrawSprite((x >> 8) + j * step, y >> 8, NULL, gSpriteTextLines[i].glyphTiles[j], gSpriteTextLines[i].palette, 0, 0, 50);
             ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
         }
+
         ReleaseObjPalette(gSpriteTextLines[i].palette);
     }
+
     sTextEntryCount = 0;
 }
 
@@ -290,21 +303,24 @@ void ClearSpriteTextLines(void) {
             ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
         }
     }
+
     sTextEntryCount = 0;
 }
+
 void FreeSpriteTextLines(void) {
     ClearSpriteTextLines();
 
     if (gSpriteTextLines != NULL) {
         EwramFree(gSpriteTextLines);
     }
+
     gSpriteTextLines = NULL;
 }
+
 #ifndef VERSION_EU
 void* InitSpriteTextSlots(s32 a) {
     u8 i;
     u8 j;
-
     gSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 24);
     sTextEntryCount = 0;
 
@@ -332,9 +348,11 @@ void* InitSpriteTextSlots(s32 a) {
             break;
         }
     }
+
     return gSpriteTextLines->palette;
 }
 #endif
+
 #ifndef VERSION_EU
 void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
     u16 g;
@@ -342,7 +360,6 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
     u8 kind;
     u8 i;
     u8 j;
-
     g = 0;
     i = 0;
     j = 0;
@@ -364,7 +381,6 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
 
     while (*s != 0) {
         u16 v;
-
         v = *(u16*)s;
         v = (v >> 8) | (v << 8);
         s += 2;
@@ -429,6 +445,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0xE6;
                 break;
             }
+
             kind = 0;
             break;
         case 0x8200:
@@ -449,6 +466,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             if (lo >= 0x9F && lo <= 0xF1) {
                 g = v + 0x7DA0;
             }
+
             kind = 0;
             break;
         case 0x8300:
@@ -461,6 +479,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             if (lo >= 0x80 && lo <= 0x94) {
                 g = v + 0x7D51;
             }
+
             kind = 0;
             break;
         case 0x8800:
@@ -469,6 +488,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             if (v == 0xC5) {
                 g = 9;
             }
+
             kind = 1;
             break;
         case 0x8900:
@@ -486,6 +506,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x2F;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8A00:
@@ -497,6 +518,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x11;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8B00:
@@ -511,6 +533,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x19;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8C00:
@@ -531,6 +554,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x0C;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8D00:
@@ -545,6 +569,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x2E;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8E00:
@@ -574,6 +599,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x12;
                 break;
             }
+
             kind = 1;
             break;
         case 0x8F00:
@@ -591,6 +617,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x20;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9000:
@@ -605,6 +632,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x2B;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9100:
@@ -619,6 +647,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 2;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9200:
@@ -639,6 +668,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x0A;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9300:
@@ -647,6 +677,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             if (v == 0x90) {
                 g = 45;
             }
+
             kind = 1;
             break;
         case 0x9400:
@@ -658,6 +689,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x2A;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9500:
@@ -669,6 +701,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x10;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9600:
@@ -689,6 +722,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 0x18;
                 break;
             }
+
             kind = 1;
             break;
         case 0x9700:
@@ -712,6 +746,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
                 g = 7;
                 break;
             }
+
             kind = 1;
             break;
         default:
@@ -723,6 +758,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
         if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
             ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
         }
+
         g = ((u16*)gUnk_09EEB204[g])[3];
 
         switch (kind) {
@@ -733,6 +769,7 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             gSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090B3FBE[g * 32], 128);
             break;
         }
+
         j++;
         i++;
     }
@@ -743,13 +780,14 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             gSpriteTextLines[slot].glyphTiles[j] = NULL;
         }
     }
+
     gSpriteTextLines[slot].length = i;
 }
 #endif
+
 #ifndef VERSION_EU
 void SetSpriteTextSlotXDigits(s32 a, s32 b, u8 v, u8 d, u8 e) {
     u8 buf[4];
-
     buf[0] = 0x78;
     buf[1] = v / 10;
     buf[2] = v - buf[1] * 10;
@@ -759,6 +797,7 @@ void SetSpriteTextSlotXDigits(s32 a, s32 b, u8 v, u8 d, u8 e) {
     SetSpriteTextSlotAscii(a, b, buf, d, e);
 }
 #endif
+
 #ifndef VERSION_EU
 void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
     u8 i;
@@ -766,7 +805,6 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
     u8 j;
     s16 idx;
     u8 count;
-
     idx = 0;
 
     if (slot > 23) {
@@ -808,6 +846,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
         if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
             ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
         }
+
         idx = ((u8*)gUnk_09EEB204[idx])[6];
         gSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[idx * 32], 128);
         j++;
@@ -821,9 +860,11 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
             gSpriteTextLines[slot].glyphTiles[j] = NULL;
         }
     }
+
     gSpriteTextLines[slot].length = len;
 }
 #endif
+
 #ifndef VERSION_EU
 void DrawSpriteTextSlots(void) {
     s32 x;
@@ -843,6 +884,7 @@ void DrawSpriteTextSlots(void) {
         } else {
             g = gSpriteTextLines[i].alternatePalette;
         }
+
         x = gSpriteTextLines[i].x;
         y = gSpriteTextLines[i].y;
         dx = 0;
@@ -864,16 +906,19 @@ void DrawSpriteTextSlots(void) {
 void HideSpriteTextSlot(u8 i) {
     gSpriteTextLines[i].visible = 0;
 }
+
 void ShowSpriteTextSlot(u8 i) {
     if (gSpriteTextLines[i].length != 0) {
         gSpriteTextLines[i].visible = 1;
     }
 }
+
 void SetSpriteTextSlotPosition(s32 x, s32 y, u8 i) {
     gSpriteTextLines[i].x = x;
     gSpriteTextLines[i].y = y;
 }
 #endif
+
 #ifndef VERSION_EU
 void FreeSpriteTextSlots(void) {
     u8 i;
@@ -885,18 +930,20 @@ void FreeSpriteTextSlots(void) {
                 ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
             }
         }
+
         FadeSetPaletteExcluded(gSpriteTextLines[i].palette->index, 0);
         ReleaseObjPalette(gSpriteTextLines[i].palette);
     }
+
     EwramFree(gSpriteTextLines);
     gSpriteTextLines = NULL;
 }
 #endif
+
 #ifndef VERSION_EU
 void InitBgTextLines(u8 bg) {
     u8 i;
     u8 j;
-
     GetBgCharBase(bg);
     GetBgScreenBase(bg);
     gBgTextLines = EwramAlloc(sizeof(BgTextLine) * 10);
@@ -917,10 +964,10 @@ void InitBgTextLines(u8 bg) {
     sBgTextDrawQueued = 0;
 }
 #endif
+
 #ifndef VERSION_EU
 void SetBgTextLineNumber(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f) {
     u8 buf[5];
-
     buf[1] = d / 10;
     buf[3] = d - buf[1] * 10;
     buf[0] = 0x82;
@@ -931,6 +978,7 @@ void SetBgTextLineNumber(u8 a, u8 b, u8 c, u8 d, u8 e, u8 f) {
     SetBgTextLine(a, b, c, buf, e, f);
 }
 #endif
+
 #ifndef VERSION_EU
 void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
     u32 off = 0x7DAB;
@@ -939,7 +987,6 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
     u8 j;
     u16 w;
     u16 lo;
-
     glyph = 0;
     i = 0;
     j = 0;
@@ -974,6 +1021,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
                 if ((w & 0xFF) == 0x40) {
                     glyph = 0xFFFF;
                 }
+
                 break;
             case 0x8200:
                 lo = w & 0xFF;
@@ -993,6 +1041,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
                 if (lo >= 0x9F && lo <= 0xF1) {
                     glyph = w + 0x7DA0;
                 }
+
                 break;
             case 0x8300:
                 lo = w & 0xFF;
@@ -1004,6 +1053,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
                 if (lo >= 0x80 && lo <= 0x94) {
                     glyph = w + 0x7D51;
                 }
+
                 break;
             }
         } else {
@@ -1014,6 +1064,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
                 if (w == 0x40) {
                     glyph = 0xFFFF;
                 }
+
                 break;
             case 0x8200:
                 lo = w & 0xFF;
@@ -1029,6 +1080,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
                 if (lo == 0x98) {
                     glyph = 15;
                 }
+
                 break;
             }
         }
@@ -1037,6 +1089,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
         j++;
         i++;
     }
+
     gBgTextLines[e].length = i;
 
     if (sBgTextDrawQueued == 0) {
@@ -1045,6 +1098,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
     }
 }
 #endif
+
 #ifndef VERSION_EU
 void DrawBgTextLines(void) {
     u8* screen;
@@ -1065,10 +1119,12 @@ void DrawBgTextLines(void) {
     u32 cur;
     u32 pix;
     u16 tile;
+
     for (n = 0; n < 10; n++) {
         if (gBgTextLines[n].dirty != 1) {
             continue;
         }
+
         gBgTextLines[n].dirty = 0;
 
         for (k = 0; k < gBgTextLines[n].length; k++) {
@@ -1098,6 +1154,7 @@ void DrawBgTextLines(void) {
                         q += (u16)((yy >> 4) * 32);
                         pix = src[q] | ((u32)src[q + 1] << 16);
                     }
+
                     *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
 
                     if (sx != 0) {
@@ -1121,6 +1178,7 @@ void DrawBgTextLines(void) {
                         s32 t = r * 32;
                         *(u16*)(screen + tx * 2 + r * 64) = (tx + 1 + t) | (pal << 12);
                     }
+
                     tx2 = tx + 2;
 
                     if (sx != 0) {
@@ -1144,6 +1202,7 @@ void DrawBgTextLines(void) {
                         pix = src[(yy & 15) + (yy >> 4) * 32 + 16] |
                               ((u32)src[(yy & 15) + (yy >> 4) * 32 + 17] << 16);
                     }
+
                     *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 32) = cur | (pix << (sx * 4));
 
                     if (sy != 0) {
@@ -1155,6 +1214,7 @@ void DrawBgTextLines(void) {
                     if (sx != 0) {
                         *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024 + 64) = pix >> (32 - sx * 4);
                         *(u16*)(screen + tx * 2 + ty * 64 + 4) = (tx + 3 + ty * 32) | (pal << 12);
+
                         {
                             s32 ty1 = ty + 1;
                             s32 t1 = ty1 * 32;
@@ -1213,6 +1273,7 @@ void DrawBgTextLines(void) {
                         q += (yy >> 4) * 32;
                         pix = src[q] | ((u32)src[q + 1] << 16);
                     }
+
                     *(u32*)(p + (y & 7) * 4 + (u8)(y >> 3) * 1024) = cur | (pix << (sx * 4));
 
                     if (sx != 0) {
@@ -1250,15 +1311,18 @@ void DrawBgTextLines(void) {
             }
         }
     }
+
     sBgTextDrawQueued = 0;
 }
 #endif
+
 #ifndef VERSION_EU
 void FreeBgTextLines(void) {
     EwramFree(gBgTextLines);
     gBgTextLines = NULL;
 }
 #endif
+
 u16 InitMsgGlyphSprites(s32 a) {
     s32 i;
 
@@ -1291,6 +1355,7 @@ u16 InitMsgGlyphSprites(s32 a) {
     sTextEntryCount = 0;
     return sMsgGlyphSprites->palette->index;
 }
+
 u16 InitMsgGlyphSpritesAltPalette5(s32 a) {
     s32 i;
 
@@ -1530,8 +1595,8 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                     break;
                 }
             }
-
 #endif
+
             if (sMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
                 ReleaseObjTiles(sMsgGlyphSprites[sTextEntryCount].tiles);
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
@@ -1556,6 +1621,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                 cy += 0xC00;
             }
         }
+
         s++;
 
         if (cy > 0x1800) {
@@ -1660,8 +1726,8 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s) {
                     break;
                 }
             }
-
 #endif
+
             if (sMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
                 ReleaseObjTiles(sMsgGlyphSprites[sTextEntryCount].tiles);
                 sMsgGlyphSprites[sTextEntryCount].tiles = NULL;
@@ -1686,10 +1752,13 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s) {
                 cy += 0xC00;
             }
         }
+
         s++;
     }
+
     return sTextEntryCount;
 }
+
 #ifndef VERSION_EU
 u8 LayoutMsgGlyphsSjis(s32 x, s32 y, u8* s) {
     u16 w;
@@ -1697,7 +1766,6 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, u8* s) {
     s32 cx;
     s32 cy;
     s32 px;
-
     w = 0;
     t = 0;
     cx = 0;
@@ -1712,12 +1780,13 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, u8* s) {
 
     while (*s != 0) {
         u16 v;
-
         w = 0;
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
+
         do {
             sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         } while (0);
+
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
         if (*(u16*)s == 0x6E6E) {
@@ -1869,6 +1938,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, u8* s) {
             if (sMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
                 ReleaseObjTiles(sMsgGlyphSprites[sTextEntryCount].tiles);
             }
+
             px = cx;
 
             if ((u16)(v - 0x8260) <= 58) {
@@ -1948,6 +2018,7 @@ void FreeMsgGlyphSprites(void) {
             ReleaseObjPalette(sMsgGlyphSprites[i].alternatePalette);
         }
     }
+
     EwramFree(sMsgGlyphSprites);
 }
 
@@ -1963,8 +2034,8 @@ void HideMsgGlyphs(void) {
 u16 LoadTwoDigitTextTileArray(u8 v, void** out) {
     u8 buf[8];
     u8 q;
-
     q = v / 10;
+
     if (q != 0) {
         buf[1] = v / 10;
         buf[3] = v - buf[1] * 10;
@@ -1978,9 +2049,11 @@ u16 LoadTwoDigitTextTileArray(u8 v, void** out) {
         buf[0] = 0x82;
         buf[2] = 0;
     }
+
     return LoadTextTileArray(buf, out);
 }
 #endif
+
 void InitTextTileArray(void** p, u8 n) {
     s32 i;
 
@@ -1988,6 +2061,7 @@ void InitTextTileArray(void** p, u8 n) {
         *p++ = NULL;
     }
 }
+
 void FreeTextTileArray(void** p, u8 n) {
     s32 i;
 
@@ -1996,6 +2070,7 @@ void FreeTextTileArray(void** p, u8 n) {
             ReleaseObjTiles(*p);
             *p = NULL;
         }
+
         p++;
     }
 }
@@ -2006,6 +2081,7 @@ u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
     s32 q;
 
     q = v / 10;
+
     if ((u8)q != 0) {
         buf[1] = v / 10;
         buf[3] = v - buf[1] * 10;
@@ -2037,6 +2113,7 @@ u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
         buf[1] = 0;
     }
 #endif
+
     return LoadTextSlots((u16*)buf, out);
 }
 
@@ -2058,6 +2135,7 @@ void FreeTextSlots(TextSlot* p, s32 n) {
             ReleaseObjTiles(p->tiles);
             p->tiles = NULL;
         }
+
         p->advance = 0;
         p++;
     }
@@ -2080,6 +2158,7 @@ s16 GetTextSlotsWidth(TextSlot* p, u8 n) {
             return x;
         }
     }
+
     return x;
 }
 
@@ -2100,12 +2179,15 @@ s16 eu_0806629C(TextSlot* p, u8 n) {
             if (x > max) {
                 max = x;
             }
+
             x = 0;
         }
     }
+
     if (max > x) {
         return max;
     }
+
     return x;
 }
 #endif
@@ -2132,6 +2214,7 @@ s32 GetTextLength(u16* s) {
         n++;
         p++;
     }
+
     return n;
 }
 
@@ -2161,6 +2244,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
                 ReleaseObjTiles(b->tiles);
                 b->tiles = NULL;
             }
+
             b->advance = 0;
         } else {
 #ifdef VERSION_EU
@@ -2224,8 +2308,8 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
                     break;
                 }
             }
-
 #endif
+
             if (b->tiles != NULL) {
                 ReleaseObjTiles(b->tiles);
                 b->tiles = NULL;
@@ -2236,6 +2320,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
             } else {
                 b->advance = 255;
             }
+
 #ifdef VERSION_EU
             v = ((u16*)gUnk_09EEB204[v])[3];
             b->tiles = LoadObjTiles(&gUnk_090AB5B2[v * 32], 128);
@@ -2245,6 +2330,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
 #endif
             b->useAlternatePalette = n;
         }
+
         sTextEntryCount++;
         b++;
 #if defined(VERSION_EU) || defined(VERSION_JP)
@@ -2253,8 +2339,10 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
         a++;
 #endif
     }
+
     return sTextEntryCount;
 }
+
 #ifndef VERSION_EU
 s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
     u8 buf[2];
@@ -2464,6 +2552,7 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
     return n;
 }
 #endif
+
 #ifndef VERSION_EU
 s32 LoadTextTileArray(TextChar* a, void** p) {
     u8 buf[2];
@@ -2658,6 +2747,7 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
     return n;
 }
 #endif
+
 void* LoadTextPalette(s32 a) {
     void* r = NULL;
 
@@ -2681,6 +2771,7 @@ void* LoadTextPalette(s32 a) {
         r = LoadObjPalette(gUnk_09614778, 32);
         break;
     }
+
     return r;
 }
 
@@ -2703,6 +2794,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
         } else {
             x += 3;
         }
+
         p++;
     }
 }
@@ -2726,6 +2818,7 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* p, void* d, s32 e, u8 n) {
         } else {
             x += 3;
         }
+
         p++;
     }
 }
@@ -2749,6 +2842,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* p, void* d, u16 g, u16 h, u8
         } else {
             x += 3;
         }
+
         p++;
     }
 }
@@ -2772,10 +2866,12 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* p, void* d, void* e, u
             } else {
                 DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, e, 0, 0, h);
             }
+
             x += p->advance;
         } else {
             x += 3;
         }
+
         p++;
     }
 }
@@ -2793,9 +2889,11 @@ void DrawTextTileArray(s16 x, s32 y, void** p, void* d, u16 h, u8 n) {
             DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, 0, 0, h);
             x += 10;
         }
+
         p++;
     }
 }
+
 void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u16 h, u8 n) {
     s16 cy = y;
     s16 x0 = x;
@@ -2809,6 +2907,7 @@ void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u1
             DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, 0, 0, h);
             x += 10;
         }
+
         p++;
     }
 }
@@ -2834,7 +2933,9 @@ u16 EncodeSmallFontString(u8* s, u16* out) {
     if (out == NULL) {
         return 0;
     }
+
     n = GetStringLength(s);
+
     for (i = 0; i < n; i++) {
         if ((u8)(s[i] - '0') <= 9) {
             g = s[i] - '0';
@@ -2883,8 +2984,10 @@ u16 EncodeSmallFontString(u8* s, u16* out) {
         if (s[i] == '%') {
             g = 0x2C;
         }
+
         *out++ = g;
     }
+
     return n;
 }
 
@@ -2909,6 +3012,7 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
         for (i = 0; i <= 9; i++) {
             s[i] = t[i] + '0';
         }
+
         s[10] = 0;
 
         for (i = 0; i <= 9; i++) {
@@ -2916,8 +3020,10 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
                 break;
             }
         }
+
         return EncodeSmallFontString(&s[i], out);
     }
+
     d = -1000000000;
 
     for (i = 1; i <= 10; i++) {
@@ -2925,11 +3031,13 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
         acc = (acc + t[i]) * 10;
         d /= 10;
     }
+
     s[0] = '-';
 
     for (i = 1; i <= 10; i++) {
         s[i] = t[i] + '0';
     }
+
     s[11] = 0;
 
     for (i = 1; i <= 10; i++) {
@@ -2937,6 +3045,7 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
             break;
         }
     }
+
     s[i - 1] = '-';
     return EncodeSmallFontString(&s[i - 1], out);
 }
@@ -2965,8 +3074,10 @@ u16 FormatSmallFontHex(s32 v, u16* out) {
         } else {
             *p += 0x37;
         }
+
         p++;
     }
+
     return EncodeSmallFontString(buf, out);
 }
 
@@ -3048,6 +3159,7 @@ u16 FormatSmallFontBinary(u32 v, u16* out, u8 mode) {
         return EncodeSmallFontString(d, out);
     }
 }
+
 s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n) {
     u8 i;
 
@@ -3056,33 +3168,42 @@ s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n) {
         s++;
     }
 }
+
 void GetSjisGlyph(u16 a, u16* b, u8* c) {
     switch (a & 0xFF00) {
     case 0x8200: {
         u16 v = a & 0xFF;
+
         if ((u16)(v - 96) <= 25) {
             *b = a + 0x7DAB;
         }
+
         if ((u16)(v - 129) <= 25) {
             *b = a + 0x7DA4;
         }
+
         if ((u16)(v - 79) <= 9) {
             *b = a + 0x7DB2;
         }
+
         if ((u16)(v - 159) <= 82) {
             *b = a + 0x7DA0;
         }
+
         *c = 0;
         break;
     }
     case 0x8300: {
         u16 v = a & 0xFF;
+
         if ((u16)(v - 64) <= 62) {
             *b = a + 0x7D52;
         }
+
         if ((u16)(v - 128) <= 20) {
             *b = a + 0x7D51;
         }
+
         *c = 0;
         break;
     }
@@ -3101,6 +3222,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8800:
         switch (a & 0xFF) {
@@ -3209,6 +3331,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8900:
         switch (a & 0xFF) {
@@ -3397,6 +3520,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8A00:
         switch (a & 0xFF) {
@@ -3545,6 +3669,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8B00:
         switch (a & 0xFF) {
@@ -3789,6 +3914,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8C00:
         switch (a & 0xFF) {
@@ -4001,6 +4127,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8D00:
         switch (a & 0xFF) {
@@ -4157,6 +4284,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8E00:
         switch (a & 0xFF) {
@@ -4381,6 +4509,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x8F00:
         switch (a & 0xFF) {
@@ -4561,6 +4690,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9000:
         switch (a & 0xFF) {
@@ -4757,6 +4887,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9100:
         switch (a & 0xFF) {
@@ -4965,6 +5096,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9200:
         switch (a & 0xFF) {
@@ -5129,6 +5261,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9300:
         switch (a & 0xFF) {
@@ -5313,6 +5446,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9400:
         switch (a & 0xFF) {
@@ -5485,6 +5619,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9500:
         switch (a & 0xFF) {
@@ -5653,6 +5788,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9600:
         switch (a & 0xFF) {
@@ -5841,6 +5977,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9700:
         switch (a & 0xFF) {
@@ -6025,6 +6162,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9800:
         switch (a & 0xFF) {
@@ -6073,6 +6211,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     case 0x9C00:
         switch (a & 0xFF) {
@@ -6085,6 +6224,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c) {
             *c = 0;
             break;
         }
+
         break;
     default:
         *b = 0;
@@ -6140,9 +6280,11 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
         } else {
             sCardMsgGlyphSprites[i].alternatePalette = LoadTextPalette(5);
         }
+
         FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].palette->index + 0x10, 1);
         FadeSetPaletteExcluded(sCardMsgGlyphSprites[i].alternatePalette->index + 0x10, 1);
     }
+
     sTextEntryCount = 0;
     return sCardMsgGlyphSprites[0].palette->index;
 }
@@ -6240,8 +6382,8 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                     break;
                 }
             }
-
 #endif
+
             sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
 
             if (sCardMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
@@ -6268,6 +6410,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
                 cy += 0xC00;
             }
         }
+
         s++;
 
         if (cy > 0x1800) {
@@ -6279,6 +6422,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
     *d = NULL;
     return sTextEntryCount;
 }
+
 #ifndef VERSION_EU
 u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
     u16 w;
@@ -6286,7 +6430,6 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
     s32 cx;
     s32 cy;
     s32 px;
-
     w = 0;
     t = 0;
     cx = 0;
@@ -6301,7 +6444,6 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
 
     while (*s != 0) {
         u16 v;
-
         w = 0;
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
@@ -6457,6 +6599,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
             if (sCardMsgGlyphSprites[sTextEntryCount].tiles != NULL) {
                 ReleaseObjTiles(sCardMsgGlyphSprites[sTextEntryCount].tiles);
             }
+
             px = cx;
             cx += 0xA00;
 
@@ -6545,6 +6688,7 @@ void FreeCardMsgGlyphSprites(void) {
             ReleaseObjPalette(sCardMsgGlyphSprites[i].alternatePalette);
         }
     }
+
     EwramFree(sCardMsgGlyphSprites);
 }
 
@@ -6569,6 +6713,7 @@ void DrawMsgGlyphsWithPalette(u8 n, void* a) {
         }
     }
 }
+
 u16 FormatSmallFontHex16(s16 v, u16* out) {
     u8 buf[8];
     u8* p;
@@ -6587,10 +6732,13 @@ u16 FormatSmallFontHex16(s16 v, u16* out) {
         } else {
             *p += 0x37;
         }
+
         p++;
     }
+
     return EncodeSmallFontString(buf, out);
 }
+
 #ifndef VERSION_EU
 s32 CopySjisGlyphsToVram(TextChar* a) {
     u8 buf[2];
@@ -6599,7 +6747,6 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
     u8 t;
     u8* dst;
     u8 n;
-
     w = 0;
     dst = (u8*)0x06014000;
     t = 0;
@@ -6607,7 +6754,6 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
 
     while (*a != 0) {
         u16 v;
-
         buf[0] = a[0];
         buf[1] = a[1];
         c = (u16*)buf;
@@ -6776,6 +6922,7 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
     return n;
 }
 #endif
+
 #ifndef VERSION_EU
 s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
     u8 buf[2];
@@ -6784,7 +6931,6 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
     u8 t;
     u8* dst;
     u8 n;
-
     w = 0;
     dst = (u8*)0x06014000 + b * 32;
     t = 0;
@@ -6792,7 +6938,6 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
 
     while (*a != 0) {
         u16 v;
-
         buf[0] = a[0];
         buf[1] = a[1];
         c = (u16*)buf;
@@ -6961,13 +7106,16 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
     return n;
 }
 #endif
+
 u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
     u8* dst = (u8*)0x06014000 + tile * 32;
     s32 flag = 0;
     sTextEntryCount = 0;
     *b = 0;
+
     while (*a != 0) {
         s32 v = 0;
+
 #ifdef VERSION_EU
         if (*a == 31) {
 #else
@@ -7037,6 +7185,7 @@ u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
                 }
             }
 #endif
+
             if (v != 32) {
                 *b = sLatinGlyphWidths.widths[v];
 #ifdef VERSION_EU
@@ -7054,7 +7203,9 @@ u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
                 b[-1] += 3;
             }
         }
+
         a++;
     }
+
     return sTextEntryCount;
 }

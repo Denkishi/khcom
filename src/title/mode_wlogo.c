@@ -109,9 +109,11 @@ void mode_wLogo_1(void) {
 
         if (GetKeysPressed() & DPAD_LEFT) {
             sWLogoWorld--;
+
             if (sWLogoWorld < 0) {
                 sWLogoWorld = 12;
             }
+
 #ifdef VERSION_EU
             sWLogoNameLength = LoadTextSlots(eu_0805E924(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
@@ -121,9 +123,11 @@ void mode_wLogo_1(void) {
 
         if (GetKeysPressed() & DPAD_RIGHT) {
             sWLogoWorld++;
+
             if (sWLogoWorld > 12) {
                 sWLogoWorld = 0;
             }
+
             p = &sWLogoNameLength;
 #ifdef VERSION_EU
             *p = LoadTextSlots(eu_0805E924(sWorldNames[sWLogoWorld]), sWLogoNameSlots);
@@ -142,6 +146,7 @@ void mode_wLogo_1(void) {
         if (GetKeysPressed() & B_BUTTON) {
             ModeRequest(&gModeDebug, 0);
         }
+
         break;
     case 1:
         WLogoStartLogo(sWLogoWorldIds[sWLogoWorld]);
@@ -154,12 +159,15 @@ void mode_wLogo_1(void) {
         } else {
             sWLogoState++;
         }
+
         break;
     case 3:
         sWLogoTimer++;
+
         if (sWLogoTimer > 10) {
             ModeRequest(&gModeWLogo, sWLogoWorld);
         }
+
         break;
     }
 }
@@ -343,6 +351,7 @@ void WLogoStartLogo(u8 a) {
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoBks, 0);
         break;
     }
+
     SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
 }
 
@@ -407,11 +416,13 @@ void task_wLogo_0(WLogoTaskWork* work, u8 arg) {
 u8 task_wLogo_1(WLogoTaskWork* work) {
     if (work->worldId == 0) {
         work->timer++;
+
         if (work->timer <= 314) {
             MovePooCamera(0, 76);
         }
     } else {
         work->timer++;
+
         if (work->timer <= 314) {
             MapMoveCameraTarget(0, 76);
         }
@@ -422,6 +433,7 @@ u8 task_wLogo_1(WLogoTaskWork* work) {
         TaskPoolDraw(&sTaskWLogoTasks);
         return 1;
     }
+
     return 0;
 }
 

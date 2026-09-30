@@ -3,17 +3,11 @@
 
 #include "room_data.h"
 #include "registration_data.h"
-
 #include "battle_actor_types.h"
-
 #include "bg_animation_data.h"
-
 #include "obj.h"
-
 #include "ga_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "msg_api.h"
 #include "m4a_song.h"

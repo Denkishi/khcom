@@ -436,6 +436,7 @@ u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d) {
         *b = ((s16)d + 632) << 8;
         r = 1;
     }
+
     return r;
 }
 
@@ -449,6 +450,7 @@ u8 BosBoogieDiceIsHeld(BoogieDiceWork* work) {
             }
         }
     }
+
     return 0;
 }
 
@@ -506,6 +508,7 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
         RequestEnemyCardUse(&work->obj);
     }
 }
+
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
     BtlObj* p = &work->obj;
 
@@ -855,6 +858,7 @@ void RollBoogieDice(BoogieDiceWork* work) {
             n = 4;
             break;
         }
+
         break;
     }
 
@@ -1215,6 +1219,7 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
     RequestEnemyCardUse(&work->obj);
     m4aSongNumStart(SONG_BTL_BU_KAITEN);
 }
+
 u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
     BtlObj* p = &work->obj;
 
@@ -1301,6 +1306,7 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
 
     return 1;
 }
+
 void task_bos_boogie_disk_2(BoogieDiskWork* work) {
     BtlObj* p = &work->obj;
     s16 x;
@@ -1342,6 +1348,7 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
         m4aSongNumStart(SONG_EF_KU_ATT04);
     }
 }
+
 void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     BtlObj* p;
     s32 v;
@@ -1379,6 +1386,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     AnimInit(&work->anim, gKnifeAnims, gKnifeFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
+
 u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
 
@@ -1435,6 +1443,7 @@ u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
 
     return 1;
 }
+
 void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
     s16 x;
@@ -1645,6 +1654,7 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     RequestEnemyCardUse(&work->obj);
 }
+
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
     BtlObj* p = &work->obj;
     BoogieWork* arg = work->boogie;
@@ -1907,12 +1917,15 @@ s32 BosUrsulaChooseAttackPhase2(UrsulaWork* work) {
             if ((u16)(GetRandom() % 100) < 50) {
                 return 3;
             }
+
             return 1;
         }
     }
+
     if (work->obj.x - 0x8000 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x8000) {
         return 2;
     }
+
     return 1;
 }
 
@@ -1996,7 +2009,9 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             work->sinkZ = 0;
             work->gimmickDelay = 9;
         }
+
         work->gimmickTimer = 300;
+
         if (work->state == 1) {
             work->state = 2;
         }
@@ -2014,19 +2029,24 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             if (work->gimmickTimer == 300) {
                 BtlMapStartShake();
             }
+
             work->gimmickTimer--;
+
             if (work->gimmickTimer == 0 && work->state == 4) {
                 work->gimmickTimer = 1;
             }
+
             if (work->gimmickTimer > 280) {
                 BtlMapSetCameraTarget(work->gimmickCameraX, work->gimmickCameraY);
             }
         }
+
         if (work->gimmickTimer == 0 && work->riseSteps != 0) {
             work->gimmickTimer++;
             ApproachValue((s32*)&work->sinkZ, 0, work->riseSteps);
             work->riseSteps--;
         }
+
         gBosUrsulaBaseZ = work->sinkZ - 0x5000;
     } else {
         work->gimmickDelay--;
@@ -2047,11 +2067,13 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             if (BosUrsulaIsCharging()) {
                 BosUrsulaMoveForward(work);
             }
+
             if (!BosUrsulaIsAttacking()) {
                 ClearBtlObjActionFlags(p);
                 work->state = 0;
             }
         }
+
         break;
     case 2:
         ClearBtlObjActionFlags(p);
@@ -2061,15 +2083,18 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     case 3:
         if ((s16)work->timer > 20) {
             ClearBtlObjActionFlags(p);
+
             if (BosUrsulaGetHpPhase() == 1 && !BosUrsulaIsGimmickActive()) {
                 work->state = 5;
             } else {
                 work->state = 0;
             }
+
             work->timer = 0;
         } else {
             work->timer++;
         }
+
         break;
     case 4:
         if ((s16)work->timer == 0) {
@@ -2084,6 +2109,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             } else {
                 x = p->x - 0x1C00;
             }
+
             BgFxStartBossDeath(x, p->y + p->z + 0x1C00);
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             work->timer++;
@@ -2093,17 +2119,21 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             }
         } else if ((s16)work->timer < 124) {
             work->timer++;
+
             if ((s16)work->timer == 124) {
                 BgFxStartBossDeathFlash();
             }
         } else if (!BgFxIsActive()) {
             pos.x = p->x;
+
             if (pos.x < 0x2000) {
                 pos.x = 0x2000;
             }
+
             if (pos.x > 0x1E000) {
                 pos.x = 0x1E000;
             }
+
             pos.y = 0x1A800;
             pos.z = p->z;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &pos);
@@ -2113,6 +2143,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             gBosUrsulaActive = 0;
             return 0;
         }
+
         break;
     case 0:
         if (work->obj.x > gBtlWork->actor->x) {
@@ -2120,22 +2151,27 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         } else {
             p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
+
         if (!BosUrsulaIsGimmickActive()) {
             if (BosUrsulaIsGuarded(work)) {
                 chance = BosUrsulaGetCardInterval();
+
                 if ((u16)(GetRandom() % chance) == 0) {
                     RequestEnemyCardUse(&work->obj);
                 }
             }
+
             if ((u32)p->x > 0x20000) {
                 work->state = 5;
             }
+
             if (BosUrsulaGetHpPhase() == 2) {
                 if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) > 0x6800) {
                     work->state = 5;
                 }
             }
         }
+
         BosUrsulaUpdateBob(work);
         break;
     case 5:
@@ -2145,33 +2181,39 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             if (!BosUrsulaMoveForward(work)) {
                 p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             }
+
             if (BosUrsulaGetHpPhase() == 2 && p->x > 0x6800 && p->x < 0x19800) {
                 if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && BosUrsulaIsGuarded(work)) {
                     RequestEnemyCardUse(&work->obj);
                     work->state = 0;
                 }
             }
+
             if ((!(p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x6800) || ((p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x19800)) {
                 work->state = 0;
             }
         }
+
         break;
     }
 
     if (work->state != 4) {
         BosUrsulaUpdateMapBlocks(work);
     }
+
     if (BosUrsulaIsGuarded(work)) {
         ColliderSetPosition(&p->collider, p->x, p->y, p->z);
     } else {
         ColliderSetPosition(&p->collider, p->x, p->y + 0x1000, p->z - 0x1000);
     }
+
     gBtlWork->bossX = p->x;
     gBtlWork->bossY = p->y;
     gBtlWork->bossZ = p->z;
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 void task_bos_ursula_2(UrsulaWork* work) {
     BtlObj* p = &work->obj;
     s32 d = 0;
@@ -2288,6 +2330,7 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     work->viewYMaxTarget = 0x1E000;
     work->viewYMaxSteps = 0;
 }
+
 u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     s32 a;
     s32 b;
@@ -2453,6 +2496,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
     SetEnemyHpFromStats(&work->obj, 35, 51);
 }
+
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     BtlObj* p = &work->obj;
     s32 x;
@@ -2503,18 +2547,22 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         if (work->timer == 0) {
             AnimChange(&work->anim, (u16)(work->animBase + 7), 0);
         }
+
         work->timer++;
+
         if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 0;
             work->timer = 0;
         }
+
         break;
     case 2:
         if (AnimGetId(&work->anim) == (s16)work->animBase + 4) {
             if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
                 AnimStart(&work->anim, (u16)(work->animBase + 5), ANIM_FLAG_LOOP);
                 SetBtlObjUnhittable(p, 1);
+
                 if ((u16)(GetRandom() % 100) <= 19) {
                     _0801C1F8(0, p->x, p->y, p->z);
                 }
@@ -2528,6 +2576,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         } else {
             AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
         }
+
         break;
     case 3:
         if (work->timer > 180) {
@@ -2536,24 +2585,29 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 4:
         if (work->timer > 180) {
             AnimStart(&work->anim, (u16)(work->animBase + 6), 0);
             work->state = 5;
             work->offsetZ = 0x800;
+
             if (work->isLeft) {
                 work->offsetX = -0x2AA;
             } else {
                 work->offsetX = 0x2AA;
             }
+
             work->timer = 30;
         } else {
             work->timer++;
         }
+
         break;
     case 5:
         AnimReset(&work->anim);
+
         if (work->timer == 5) {
             ReleaseEnemyBtlObj(&work->obj);
             BosUrsulaTakoGetPosition(&x, &y, &z, work);
@@ -2561,10 +2615,12 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
             work->obj.flags |= 0x400;
             SetEnemyHpFromStats(&work->obj, 35, 25);
         }
+
         if (work->timer == 0) {
             if (!BosUrsulaIsGimmickActive()) {
                 RequestEnemyCardUse(&work->obj);
             }
+
             work->state = 6;
             work->timer = 0;
         } else {
@@ -2572,6 +2628,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
             ApproachValue(&work->offsetX, 0, work->timer);
             work->timer--;
         }
+
         break;
     case 6:
         if (work->timer > 30) {
@@ -2579,9 +2636,11 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 7:
         AnimChange(&work->anim, (u16)(work->animBase + 6), 0);
+
         if (AnimIsFinished(&work->anim) || BosUrsulaIsGimmickActive()) {
             work->state = 0;
             AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
@@ -2589,44 +2648,55 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         } else {
             if (AnimGetFrame(&work->anim) == 1) {
                 dx = 0x800;
+
                 if (work->isLeft) {
                     dx = -0x800;
                 }
+
                 dz = -0x6000;
             } else if (AnimGetFrame(&work->anim) == 0) {
                 dx = -0x1800;
+
                 if (work->isLeft) {
                     dx = 0x1800;
                 }
+
                 dz = -0x3800;
             } else {
                 dx = 0x1800;
+
                 if (work->isLeft) {
                     dx = -0x1800;
                 }
+
                 dz = -0x3800;
             }
+
             if (ApplyAttackBox(241, p->x + dx, p->y + 0x1000, p->z + dz, 24, 16, 8) == 1) {
                 m4aSongNumStart(SONG_BTL_HANE_HIT);
             }
         }
+
         break;
     }
 
     AnimUpdate(&work->anim);
     BosUrsulaTakoGetPosition(&p->x, &p->y, &p->z, work);
+
     if (work->state - 3 <= 4 && gBtlWork->actor->z < -0x5000 && !BosUrsulaIsGimmickActive()) {
         ColliderSetDisabled(&work->collider, 0);
         ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x5000);
     } else {
         ColliderSetDisabled(&work->collider, 1);
     }
+
     if (work->state == 3 && gBtlWork->actor->z <= -0x2000 && gBtlWork->actor->z > -0x3000) {
         ColliderSetDisabled(&work->collider2, 0);
         ColliderSetPosition(&work->collider2, work->obj.x + work->collider2OffsetX, work->obj.y + 0x1000, 0);
     } else {
         ColliderSetDisabled(&work->collider2, 1);
     }
+
     return 1;
 }
 
@@ -2700,6 +2770,7 @@ void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d)
     t = d->offsetZ + 0x5000;
     *c = *p + t;
 }
+
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     work->isLeft = *arg;
     work->offsetX = 0;
@@ -2708,6 +2779,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     work->isLeft = work->isLeft == 0 ? 1 : 0;
     BosUrsulaBacktakoGetPosition(&work->x2, &work->y2, &work->z2, work);
     work->isLeft = work->isLeft == 0 ? 1 : 0;
+
     if (work->isLeft != 0) {
         work->animBase = 0xFFFC;
     } else {

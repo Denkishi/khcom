@@ -158,6 +158,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     switch (args->variant) {
     case 0:
         work->repeatsLeft = 1;
+
 #ifdef VERSION_EU
         if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -170,6 +171,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         break;
     case 1:
         work->repeatsLeft = 1;
+
 #ifdef VERSION_EU
         if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -182,6 +184,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         break;
     case 2:
         work->repeatsLeft = 1;
+
 #ifdef VERSION_EU
         if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -208,6 +211,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     BtlWork* owner;
     BtlObj* target;
     s32 angle;
+
     if (work->mainSide != 0) {
         owner = gBtlWork;
         target = owner->actor2;
@@ -215,33 +219,43 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         owner = gRikuBtlWork;
         target = owner->actor2;
     }
+
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
             work->stateTimer++;
         }
+
         body->x += (work->unk_158 - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
+
         if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+
         if (FrdDonaldApplyGravity(work)) {
             work->stateTimer = 0;
+
             if (work->variant == 3) work->state = 8;
             else {
                 work->state = 1;
                 m4aSongNumStart(SONG_VO_DL_ATTACK00);
             }
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+
         if (AnimIsFinished(&work->anim)) {
             SelectLockonTarget();
+
             if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
+
                 switch (spell) {
                 case 0:
                     work->state = 4;
@@ -257,16 +271,20 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
+
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     case 2:
         if (work->repeatsLeft > 0) {
             SelectLockonTarget();
+
             if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
             else {
                 u16 spell = GetRandom();
                 spell &= 3;
+
                 switch (spell) {
                 case 0:
                     work->state = 4;
@@ -282,31 +300,42 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
+
             work->stateTimer = 0;
             work->repeatsLeft--;
         } else {
             if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
                 work->stateTimer = 0;
             } else work->stateTimer++;
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
+
             if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
             else work->unk_158 = (gBtlWork->xMax + 64) * 256;
+
             work->vz = -0x500;
             work->steps = 30;
         }
+
         ApproachValue(&body->x, work->unk_158, work->steps);
+
         if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+
         FrdDonaldApplyGravity(work);
+
         if (work->steps <= 0) {
             if (work->variant == 3) BgAnimStop();
+
             return 0;
         }
+
         work->stateTimer++;
         work->steps--;
         break;
@@ -314,17 +343,22 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (work->stateTimer == 0) {
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) angle = GetRandom() % 2 ? 0xAD : 0xD3;
             else angle = GetRandom() % 2 ? 0x53 : 0x2D;
+
             work->unk_158 = gSineTable[angle] * 3;
             work->unk_15C = -gSineTable[angle + 64] * 3;
         }
+
         if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
         else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
+
         if (work->unk_158 < 0) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+
         body->x += work->unk_158;
         body->y += work->unk_15C;
         FrdDonaldApplyGravity(work);
         UpdateDonaldFlame(body, 1, 2, 8);
+
         switch (ClampBattlePosition(&body->x, &body->y, 0, 0)) {
         case 1:
         case 2:
@@ -335,110 +369,136 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->unk_15C = -work->unk_15C;
             break;
         }
+
         if (work->stateTimer > 179) {
             work->stateTimer = 0;
             work->state = 3;
         } else work->stateTimer++;
+
         break;
     case 4:
         {
             s32 x,y,z;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
+
                 if (target != NULL) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
+
             if (work->stateTimer == 40) {
                 if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
+
                     if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0xC800;
                     else x = body->x + 0xC800;
+
                     y = body->y;
                     z = body->z - 0x800;
                 }
+
                 switch (work->variant) {
                 case 0:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
                     else BgFxStartFire(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
+
                     break;
                 case 1:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
                     else BgFxStartFire(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
+
                     break;
                 case 2:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
                     else BgFxStartFire(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
+
                     break;
                 }
             }
+
             if (work->stateTimer > 40) {
                 if (!BgFxIsActive()) {
                     work->state = 2;
                     work->stateTimer = 0;
                     break;
                 }
+
                 if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
+
             work->stateTimer++;
             break;
         }
     case 5:
         {
             s32 x,y,z;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
+
                 if (target != NULL) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
+
             if (work->stateTimer == 40) {
                 if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
+
                     if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x6400;
                     else x = body->x + 0x6400;
+
                     y = body->y;
                     z = body->z - 0x800;
                 }
+
                 switch (work->variant) {
                 case 0:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
                     else BgFxStartBlizzard(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
+
                     break;
                 case 1:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
                     else BgFxStartBlizzard(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
+
                     break;
                 case 2:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
                     else BgFxStartBlizzard(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
+
                     break;
                 }
             }
+
             if (work->stateTimer > 40) {
                 if (!BgFxIsActive()) {
                     work->state = 2;
                     work->stateTimer = 0;
                     break;
                 }
+
                 if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
+
             work->stateTimer++;
             break;
         }
@@ -446,16 +506,19 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
+
             if (target != NULL) {
                 if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
+
         if (work->stateTimer == 40) {
             switch (work->variant) {
             case 0:
                 {
                     s32 x,y,z;
+
                     if (target != NULL) {
                         x=target->x;
                         y=target->y;
@@ -463,9 +526,11 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     } else {
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x=body->x-0x5000;
                         else x=body->x+0x5000;
+
                         y=body->y;
                         z=0;
                     }
+
                     BgFxStartThunder(0, body->x, body->y, body->z-0x4000, x,y,z,129);
                     break;
                 }
@@ -478,22 +543,28 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 break;
             }
         }
+
         if (work->stateTimer == 60) SetBattleZoom(15,148,0x10000,0x12C00);
+
         if (work->stateTimer > 40 && !BgFxIsActive()) {
             work->state=2;
             SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
             work->stateTimer=0;
         } else work->stateTimer++;
+
         break;
     case 7:
         {
             BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
                 AnimReset(&work->anim);
+
                 if (ally->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
+
             if (work->stateTimer == 40) {
                 switch (work->variant) {
                 case 0:
@@ -510,6 +581,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
+
             if (work->stateTimer > 40) {
                 if (BgFxIsActive()) {
                     BgFxSetPosition(ally->x,ally->y,ally->z-0x2C00);
@@ -539,7 +611,9 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                             break;
                         }
                     }
+
                     if (ally->hp > ally->maxHp) ally->hp=ally->maxHp;
+
                     CreateBtlPopTask(ally,10);
                     work->state=2;
                     SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
@@ -547,10 +621,12 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
+
             work->stateTimer++;
             break;
         }
     }
+
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     return 1;
@@ -628,6 +704,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     BtlObj* body;
 
     body = &work->body;
+
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_ITALIAN) {
         m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -703,6 +780,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_GF_ATTACK00);
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -724,6 +802,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
@@ -736,6 +815,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
@@ -797,6 +877,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 5:
         if (work->stateTimer == 0) {
@@ -811,6 +892,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 6:
         if (work->stateTimer == 0) {
@@ -988,6 +1070,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -1013,6 +1096,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
             } else {
                 body->x += work->speed;
             }
+
             break;
         }
 
@@ -1022,6 +1106,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 2:
         AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
@@ -1209,7 +1294,9 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     BtlObj* body = &work->body;
     BtlWork* owner;
     BtlObj* target;
+
     if (gGameState.world != WORLD_HALLOWEEN_TOWN) return 0;
+
     if (work->mainSide != 0) {
         owner = gBtlWork;
         target = owner->actor2;
@@ -1217,28 +1304,35 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         owner = gRikuBtlWork;
         target = owner->actor2;
     }
+
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
             work->stateTimer++;
         }
+
         body->x += (work->targetX - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
+
         if (FrdJackApplyGravity(work)) {
             work->state = 1;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
             SelectLockonTarget();
             spell = GetRandom();
             spell &= 3;
+
             switch (spell) {
             case 0:
                 work->state = 4;
@@ -1253,8 +1347,10 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 work->state = 7;
                 break;
             }
+
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     case 2:
         if (work->repeatsLeft > 0) {
@@ -1263,42 +1359,53 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             work->repeatsLeft--;
         } else {
             if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
                 work->stateTimer = 0;
             } else work->stateTimer++;
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
+
             if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) work->targetX = (gBtlWork->xMin - 64) * 256;
             else work->targetX = (gBtlWork->xMax + 64) * 256;
+
             work->vz = -0x500;
             work->steps = 30;
         }
+
         ApproachValue(&body->x, work->targetX, work->steps);
         FrdJackApplyGravity(work);
+
         if (work->steps <= 0) return 0;
+
         work->stateTimer++;
         work->steps--;
         break;
     case 8:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+
         if (AnimIsFinished(&work->anim)) {
             work->state = 9;
             GetRandom();
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     case 9:
         if (work->stateTimer == 0) {
             if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) work->targetX = work->actor->x - 0x2D00;
             else work->targetX = work->actor->x + 0x2D00;
+
             work->targetY = work->actor->y;
             work->vz = -0x500;
             work->steps = 45;
+
             if (work->targetX > body->x) {
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->rotationTarget = 256;
@@ -1312,30 +1419,40 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     work->rotationTarget = 256;
                 }
             }
+
             work->stateTimer++;
         }
+
         FrdJackApplyGravity(work);
+
         if (work->vz > 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
         else AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
+
         if (work->steps > 0) {
             ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
             ApproachValueHalfSteps(&body->y, work->targetY, work->steps);
+
             if (work->steps <= 39) ApproachValueHalfSteps(&work->rotation, work->rotationTarget, work->steps);
+
             work->steps--;
         }
+
         if (body->z >= body->groundZ && work->steps <= 0) {
             work->stateTimer = 0;
             work->rotation = 0;
             work->state = 10;
         }
+
         break;
     case 10:
         if (work->stateTimer == 0) AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
             SelectLockonTarget();
             spell = GetRandom();
             spell &= 3;
+
             switch (spell) {
             case 0:
                 work->state = 4;
@@ -1350,156 +1467,194 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 work->state = 7;
                 break;
             }
+
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     case 4:
         {
             s32 x, y, z;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
+
                 if (target != NULL) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
+
             if (work->stateTimer == 44) {
                 if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
+
                     if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0xC800;
                     else x = body->x + 0xC800;
+
                     y = body->y;
                     z = body->z - 0x1800;
                 }
+
                 switch (work->variant) {
                 case 0:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
                     else BgFxStartFire(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 133);
+
                     break;
                 case 1:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
                     else BgFxStartFire(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 134);
+
                     break;
                 case 2:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
                     else BgFxStartFire(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 135);
+
                     break;
                 }
             }
+
             if (work->stateTimer > 44) {
                 if (!BgFxIsActive()) {
                     work->state = 2;
                     work->stateTimer = 0;
                     break;
                 }
+
                 if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
+
             work->stateTimer++;
             break;
         }
     case 7:
         {
             s32 x, y, z;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
+
                 if (target != NULL) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
+
                 FadeToAmount(FADE_MODE_ADD_WHITE, 13, 60);
             }
+
             if (work->stateTimer == 44) {
                 if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->groundZ;
+
                     if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x4000;
                     else x = body->x + 0x4000;
+
                     y = body->y;
                     z = body->groundZ;
                 }
+
                 switch (work->variant) {
                 case 0:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
                     else BgFxStartGravity(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 142);
+
                     break;
                 case 1:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(1, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
                     else BgFxStartGravity(1, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 143);
+
                     break;
                 case 2:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(2, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
                     else BgFxStartGravity(2, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 144);
+
                     break;
                 }
             }
+
             if (work->stateTimer > 44 && !BgFxIsActive()) {
                 FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
                 work->state = 2;
                 work->stateTimer = 0;
             } else work->stateTimer++;
+
             break;
         }
     case 5:
         {
             s32 x, y, z;
+
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
+
                 if (target != NULL) {
                     if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
+
             if (work->stateTimer == 44) {
                 if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
+
                     if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x6400;
                     else x = body->x + 0x6400;
+
                     y = body->y;
                     z = body->z - 0x1800;
                 }
+
                 switch (work->variant) {
                 case 0:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
                     else BgFxStartBlizzard(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 136);
+
                     break;
                 case 1:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
                     else BgFxStartBlizzard(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 137);
+
                     break;
                 case 2:
                 default:
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
                     else BgFxStartBlizzard(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 138);
+
                     break;
                 }
             }
+
             if (work->stateTimer > 44) {
                 if (!BgFxIsActive()) {
                     work->state = 2;
                     work->stateTimer = 0;
                     break;
                 }
+
                 if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
+
             work->stateTimer++;
             break;
         }
@@ -1507,16 +1662,19 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
+
             if (target != NULL) {
                 if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
+
         if (work->stateTimer == 44) {
             switch (work->variant) {
             case 0:
                 {
                     s32 x, y, z;
+
                     if (target != NULL) {
                         x = target->x;
                         y = target->y;
@@ -1524,32 +1682,41 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     } else {
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x5000;
                         else x = body->x + 0x5000;
+
                         y = body->y;
                         z = 0;
                     }
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartThunder(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
                     else BgFxStartThunder(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
+
                     break;
                 }
             case 1:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(1, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
                 else BgFxStartWideThunder(1, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
+
                 break;
             case 2:
             default:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(2, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
                 else BgFxStartWideThunder(2, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
+
                 break;
             }
         }
+
         if (work->stateTimer == 64) SetBattleZoom(15, 148, 0x10000, 0x12C00);
+
         if (work->stateTimer > 44 && !BgFxIsActive()) {
             work->state = 2;
             SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     }
+
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     return 1;
@@ -1699,6 +1866,7 @@ void FrdPanSpawnSparkle(FrdPanWork* work) {
             } else {
                 sub.x -= 0x2000;
             }
+
             break;
         case 5:
         default:
@@ -1709,6 +1877,7 @@ void FrdPanSpawnSparkle(FrdPanWork* work) {
             } else {
                 sub.x -= 0x1000;
             }
+
             break;
         }
 
@@ -1730,30 +1899,38 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     s32 ground;
     s32 y;
     s32 z;
+
     if (gGameState.world != WORLD_NEVER_LAND) {
         return 0;
     }
+
     owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     target = owner->actor2;
+
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
+
     if (gBtlWork->boundsCallback != NULL) {
         ground = body->groundZ;
         gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &ground);
+
         if (ground != body->groundZ) {
             work->hoverZ = body->groundZ - 0x1000;
             body->groundZ = ground;
         }
     }
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
             work->steps = 30;
         }
+
         ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
         FrdPanHover(work);
+
         if (work->steps <= 0) {
             work->state = 3;
             work->stateTimer = 0;
@@ -1761,35 +1938,44 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             work->stateTimer++;
             work->steps--;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
         }
+
         FrdPanHover(work);
+
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             work->state = 2;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
+
             if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) {
                 work->targetX = (gBtlWork->xMin - 64) * 256;
             } else {
                 work->targetX = (gBtlWork->xMax + 64) * 256;
             }
+
             work->steps = 30;
         }
+
         work->hoverZ -= 0x400;
         ApproachValue(&body->x, work->targetX, work->steps);
         FrdPanHover(work);
+
         if (work->steps <= 0) {
             return 0;
         }
+
         work->stateTimer++;
         work->steps--;
         break;
@@ -1797,7 +1983,9 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 1, 0, work->tiles);
         }
+
         FrdPanHover(work);
+
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             work->state = 4;
@@ -1805,6 +1993,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 4:
         if (work->stateTimer == 0) {
@@ -1812,7 +2001,9 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             work->steps = 70;
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
+
         SelectLockonTarget();
+
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
             BtlObj* other = work->mainSide != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
             y = other->y;
@@ -1824,24 +2015,30 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             y = work->actor->y;
             z = work->actor->z;
         }
+
         body->y += (y - body->y) >> 5;
         work->hoverZ += (z - work->hoverZ) >> 5;
         FrdPanHover(work);
+
         if (work->flyLeft != 0) {
             ApproachValue(&work->vx, -0x800, work->steps);
         } else {
             ApproachValue(&work->vx, 0x800, work->steps);
         }
+
         body->x += work->vx;
+
         if (--work->steps <= 0) {
             work->steps = 70;
             work->flyLeft = !work->flyLeft;
         }
+
         if (work->vx < 0) {
             body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
             body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
+
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (ApplyAttackBox(150, body->x - 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
                 m4aSongNumStart(SONG_BTL_PP_SWORDHIT);
@@ -1851,18 +2048,22 @@ u8 task_frd_pan_1(FrdPanWork* work) {
                 m4aSongNumStart(SONG_BTL_PP_SWORDHIT);
             }
         }
+
         if (work->stateTimer > work->duration) {
             work->stateTimer = 0;
             work->state = 5;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 5:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 3, 0, work->tiles);
         }
+
         FrdPanHover(work);
+
         if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             work->state = 1;
@@ -1870,8 +2071,10 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
+
     FrdPanSpawnSparkle(work);
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
@@ -2015,51 +2218,64 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     s32 delta;
 
     body = &work->body;
+
     if (gGameState.world != WORLD_AGRABAH) {
         return 0;
     }
+
     if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) return 0;
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
             work->stateTimer++;
         }
+
         body->x += (work->targetX - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
+
         if (FrdAladdinApplyGravity(work)) {
             work->state = 1;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_AD_ATTACK00);
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 1, 0, work->tiles);
         }
+
         if (AnimIsFinished(&work->anim)) {
             work->state = 3;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
+
             if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) {
                 work->targetX = (gBtlWork->xMin - 64) << 8;
             } else {
                 work->targetX = (gBtlWork->xMax + 64) << 8;
             }
+
             work->vz = -0x500;
             work->steps = 30;
         }
+
         ApproachValue(&body->x, work->targetX, work->steps);
         FrdAladdinApplyGravity(work);
+
         if (work->steps <= 0) {
             return 0;
         }
+
         work->stateTimer++;
         work->steps--;
         break;
@@ -2067,7 +2283,9 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         }
+
         SelectLockonTarget();
+
         if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             body->flags |= BTLOBJ_FLAG_FACING_LEFT;
             x = work->actor->x - 0x2800;
@@ -2075,21 +2293,27 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
             body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             x = work->actor->x + 0x2800;
         }
+
         y = work->actor->y;
         delta = (x - body->x) >> 3;
+
         if (delta < -0x400) {
             delta = -0x400;
         } else if (delta > 0x400) {
             delta = 0x400;
         }
+
         body->x += delta;
         delta = (y - body->y) >> 5;
+
         if (delta < -0x200) {
             delta = -0x200;
         } else if (delta > 0x200) {
             delta = 0x200;
         }
+
         body->y += delta;
+
         if (work->anim.timer == 0) {
             switch (AnimGetFrame(&work->anim)) {
             case 0:
@@ -2099,19 +2323,24 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
                 if ((body->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(0x95, body->x - 0x1E00, body->y, body->z, 20, 20, 50) : ApplyAttackBox(0x95, body->x + 0x1E00, body->y, body->z, 20, 20, 50)) {
                     m4aSongNumStart(SONG_BTL_AD_SWORDHIT);
                 }
+
                 break;
             }
         }
+
         FrdAladdinApplyGravity(work);
         ClampBattlePosition(&body->x, &body->y, -16, 0);
+
         if (work->stateTimer > work->duration) {
             work->stateTimer = 0;
             work->state = 2;
         } else {
             work->stateTimer++;
         }
+
         break;
     }
+
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     return 1;
@@ -2190,6 +2419,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     BtlObj* obj;
 
     body = &work->body;
+
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_ENGLISH) {
         m4aSongNumStart(SONG_VO_SR_SUMMON09);

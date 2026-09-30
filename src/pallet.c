@@ -22,7 +22,6 @@ static s16 gPaletteEffectSaved;
 
 PaletteWave gBgWaves[5] EWRAM_COMMON(16);
 
-
 u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
     s32 base = ((s32)dst - 0x05000000) >> 1;
     u16 count = size >> 1;
@@ -38,6 +37,7 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
         r[1] = 0;
         g[1] = 0;
         b[1] = 0;
+
         if (b[0] > b[1]) {
             b[0] = b[0] - (amount * b[0] >> 5);
         } else {
@@ -55,6 +55,7 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
         } else {
             r[0] = r[1];
         }
+
         gPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
     }
 
@@ -63,6 +64,7 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
     } else {
         RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
     }
+
     return &gPaletteBuffer->colors[base];
 }
 
@@ -89,6 +91,7 @@ u16* FadePaletteToGray(u16* src, u16* dst, u16 size, u16 amount) {
     } else {
         RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
     }
+
     return &gPaletteBuffer->colors[base];
 }
 
@@ -107,6 +110,7 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
         r[1] = 31;
         g[1] = 31;
         b[1] = 31;
+
         if (b[0] < b[1]) {
             b[0] = b[0] + ((b[1] - b[0]) * amount >> 5);
         } else {
@@ -124,6 +128,7 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
         } else {
             r[0] = r[0] - ((r[0] - r[1]) * amount >> 5);
         }
+
         gPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
     }
 
@@ -132,6 +137,7 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
     } else {
         RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
     }
+
     return &gPaletteBuffer->colors[base];
 }
 
@@ -163,6 +169,7 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
         if (bv > 0x1F00) {
             bv = 0x1F00;
         }
+
         r = rv >> 8;
         g = gv >> 8;
         b = bv >> 8;
@@ -174,6 +181,7 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
     } else {
         RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
     }
+
     return &gPaletteBuffer->colors[base];
 }
 
@@ -187,6 +195,7 @@ u16* LoadPaletteBuffered(void* src, u16* dst, u16 size) {
     } else {
         RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
     }
+
     return &gPaletteBuffer->colors[base];
 }
 
@@ -207,6 +216,7 @@ u16* LoadPaletteWithEffect(void* src, u16* dst, u16 size) {
     if (gPaletteEffect < 0) {
         return FadePaletteToGray(src, dst, size, -gPaletteEffect);
     }
+
     return BrightenPalette(src, dst, size, gPaletteEffect);
 }
 
@@ -276,6 +286,7 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
                 r[1] = 0;
                 g[1] = 0;
                 b[1] = 0;
+
                 if (b[0] > b[1]) {
                     b[0] = b[0] - (amount * b[0] >> 5);
                 } else {
@@ -293,10 +304,12 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
                 } else {
                     r[0] = r[1];
                 }
+
                 gPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
             }
         }
     }
+
     RequestDma3Copy(&gPaletteBuffer->colors[1], pal + 1, 0x3FE);
     return gPaletteBuffer->colors;
 }
@@ -320,6 +333,7 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
                 r[1] = 31;
                 g[1] = 31;
                 b[1] = 31;
+
                 if (b[0] < b[1]) {
                     b[0] = b[0] + ((b[1] - b[0]) * amount >> 5);
                 } else {
@@ -337,10 +351,12 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
                 } else {
                     r[0] = r[0] - ((r[0] - r[1]) * amount >> 5);
                 }
+
                 gPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
             }
         }
     }
+
     RequestDma3Copy(&gPaletteBuffer->colors[1], pal + 1, 0x3FE);
     return gPaletteBuffer->colors;
 }
@@ -353,6 +369,7 @@ void StartBgWave(void (*callback)(void)) {
         gBgWaves[i].frequency = 1;
         gBgWaves[i].enabled = 0;
     }
+
     SetHBlankCallback(callback);
     EnableHBlankIntr();
 }
@@ -409,6 +426,7 @@ void StopAllBgWaves(void) {
     for (i = 0; i < 4; i++) {
         gBgWaves[i].enabled = 0;
     }
+
     ResetHBlankCallback();
     DisableHBlankIntr();
 }

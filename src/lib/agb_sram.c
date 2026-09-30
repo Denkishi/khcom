@@ -31,6 +31,7 @@ u32 VerifySramFast_Core(const u8* src, u8* dest, u32 size) {
         if (*dest++ != *src++)
             return (u32)(dest - 1);
     }
+
     return 0;
 }
 
@@ -73,7 +74,7 @@ u32 WriteAndVerifySramFast(const u8* src, u8* dest, u32 size) {
     for (i = 0; i < 3; i++) {
         WriteSramFast(src, dest, size);
         errorAddr = VerifySramFast(src, dest, size);
-        
+
         if (errorAddr == 0)
             break;
     }

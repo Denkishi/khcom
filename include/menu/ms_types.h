@@ -27,5 +27,4 @@ typedef struct MsShopHosiArg {
     s32 speed;
 } MsShopHosiArg;
 
-
 #endif

@@ -35,6 +35,7 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
         } else {
             work->state = 1;
         }
+
         break;
     case 1:
         if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
@@ -79,6 +80,7 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
         } else {
             work->state++;
         }
+
         break;
     default:
         work->dsd->flags &= ~DSD_FLAG_PLATFORM_ACTIVE;
@@ -265,6 +267,7 @@ u8 task_bos_dsd_rock_1(DsdRockWork* work) {
 
     return 1;
 }
+
 void task_bos_dsd_rock_2(DsdRockWork* work) {
     ObjAffine* affine;
     s32 h;

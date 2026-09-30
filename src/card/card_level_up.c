@@ -91,9 +91,11 @@ void Level_Up_0(LevelUpWork* w) {
     w->optionEnabled[0] = 1;
     w->optionEnabled[1] = 1;
     w->optionEnabled[2] = 1;
+
     if (gCardBattleState != NULL) {
         gCardBattleState->unk_0E9 = 1;
     }
+
 #ifndef VERSION_EU
     InitTextSlots(w->textSlots[0], 36);
     InitTextSlots(w->textSlots[1], 36);
@@ -112,6 +114,7 @@ void Level_Up_0(LevelUpWork* w) {
     FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[7])->index + 16, 1);
     w->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
     TaskPoolInit(&w->pool, 10);
+
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
         w->tiles4 = AllocObjTiles(0x500, 0);
         w->palette5 = AllocObjPalette(32);
@@ -135,6 +138,7 @@ void Level_Up_0(LevelUpWork* w) {
         AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
         AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     }
+
     if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
         w->x7 = 0x1C400;
         w->y6 = 0x5000;
@@ -142,7 +146,9 @@ void Level_Up_0(LevelUpWork* w) {
         w->x7 = x << 8;
         w->y6 = y << 8;
     }
+
     w->gfx = AnimGetGfx(&w->anim2);
+
     if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
         w->unk_7C6 = 0;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
@@ -165,6 +171,7 @@ void Level_Up_0(LevelUpWork* w) {
         gBg2Y = gBg3Y;
     } else {
         w->unk_7C6 = 1;
+
         switch ((u32)gBtlWork->battleId) {
         case 151:
             SetBgSize(0, 0);
@@ -191,6 +198,7 @@ void Level_Up_0(LevelUpWork* w) {
             break;
         }
     }
+
     gBldCnt &= ~BLDCNT_EFFECT_BLEND;
     w->x6 = -128;
     w->x4[0] = -128;
@@ -271,6 +279,7 @@ void LoadLevelUpRikuBgTiles(void) {
 #endif
     }
 }
+
 extern u16* gLevelUpSoraTexts[];
 extern u16* gLevelUpRikuTexts[];
 extern u8 gUnk_09613EB8[];
@@ -292,11 +301,14 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
 #else
     enum { tileSize = 0xD80, mapSize = 0x800, bgSize = 0x3680 };
 #endif
+
     if (w->loaded[1] == 0) {
         w->timer++;
+
         if (w->timer > 7) {
             if (w->unk_7C6 == 0) {
                 LoadBgTiles(1, gUnk_093FF8F8, bgSize);
+
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
@@ -319,18 +331,21 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     break;
                 }
 #endif
+
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                     LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                 } else {
                     LoadLevelUpRikuBgTiles();
                     LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
                 }
+
                 LoadBgMap(1, gUnk_0950F2B8, mapSize);
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
                 RedrawBgMapAt(1, 0, 0);
             } else {
                 if (gBtlWork->battleId == 151) {
                     LoadBgTiles(0, gUnk_093FF8F8, bgSize);
+
 #ifdef VERSION_EU
                     switch (gLanguage) {
                     case LANGUAGE_ENGLISH:
@@ -353,16 +368,19 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         break;
                     }
 #endif
+
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
                         LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
                     }
+
                     SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
                     RedrawBgMapAt(0, 0, 0);
                 } else {
                     LoadBgTiles(1, gUnk_093FF8F8, bgSize);
+
 #ifdef VERSION_EU
                     switch (gLanguage) {
                     case LANGUAGE_ENGLISH:
@@ -385,16 +403,19 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         break;
                     }
 #endif
+
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
                         LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
                     }
+
                     SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
                     RedrawBgMapAt(1, 0, 0);
                 }
             }
+
             FadeSetPaletteExcluded(10, 1);
             FadeSetPaletteExcluded(11, 1);
             FadeSetPaletteExcluded(12, 1);
@@ -403,15 +424,19 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             w->timer = 0;
             return 1;
         }
+
         return 1;
     }
+
     if (w->loaded[0] == 0) {
         w->timer++;
+
         if (w->timer > 7) {
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
@@ -425,12 +450,14 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
+
                 w->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
                 w->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
@@ -444,9 +471,11 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
+
                 w->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
                 w->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -486,14 +515,18 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             w->timer = 0;
             FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
+
         return 1;
     }
+
     w->gfx = AnimUpdate(&w->anim2);
+
     if (w->playerSteps != 0) {
         ApproachValue(&w->x7, 0xBE00, w->playerSteps);
         ApproachValue(&w->y6, 0x5000, w->playerSteps);
         w->playerSteps--;
     }
+
     if (w->barSteps != 0) {
         ApproachValue(&w->y, 0, w->barSteps);
         ApproachValue(&w->y2, 0x9800, w->barSteps);
@@ -503,54 +536,70 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
         s32 x4 = w->statsOffsetX << 8;
         ApproachValue(&x3, 0x10000, w->slideSteps);
         ApproachValue(&x4, 0, w->slideSteps);
+
         if (gBtlWork->battleId == 151) {
             ScrollBgMapTo(0, (u16)(x3 >> 8), 0);
         } else {
             ScrollBgMapTo(1, (u16)(x3 >> 8), 0);
         }
+
         w->bgScrollX = x3 >> 8;
         w->statsOffsetX = x4 >> 8;
+
         if (w->slideSteps > 0) {
             w->slideSteps--;
         }
+
         if (w->slideSteps <= 11) {
             s32 x5 = w->x6 << 8;
             ApproachValue(&x5, 0, w->headerSteps);
             w->x6 = x5 >> 8;
+
             if (w->headerSteps > 0) {
                 w->headerSteps--;
             }
+
             if (w->headerSteps <= 6) {
                 x[0] = w->x4[0] << 8;
                 x[1] = w->x4[1] << 8;
                 x[2] = w->x4[2] << 8;
                 ApproachValue(&x[0], 0x1000, w->optionSteps[0]);
+
                 if (w->optionSteps[0] > 0) {
                     w->optionSteps[0]--;
                 }
+
                 if (w->optionSteps[0] <= 6) {
                     ApproachValue(&x[1], 0x1000, w->optionSteps[1]);
+
                     if (w->optionSteps[1] > 0) {
                         w->optionSteps[1]--;
                     }
                 }
+
                 if (w->optionSteps[1] <= 6) {
                     ApproachValue(&x[2], 0x1000, w->optionSteps[2]);
+
                     if (w->optionSteps[2] > 0) {
                         w->optionSteps[2]--;
                     }
                 }
+
                 w->x4[0] = x[0] >> 8;
                 w->x4[1] = x[1] >> 8;
                 w->x4[2] = x[2] >> 8;
+
                 if (w->optionSteps[2] == 0) {
                     u8 i;
+
                     if (gBtlWork->battleId == 151) {
                         LoadBgMap(0, gUnk_095112B8, mapSize);
                     } else {
                         LoadBgMap(1, gUnk_095112B8, mapSize);
                     }
+
                     w->state = 1;
+
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -568,6 +617,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], w->textSlots[3]);
 #endif
                         }
+
                         if (gGameState.progression.cp > 1899) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -584,6 +634,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], w->textSlots[4]);
 #endif
                         }
+
                         if (gGameState.progression.levelMilestone > 10) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -608,6 +659,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], w->textSlots[5]);
 #endif
                         }
+
                         w->palette = LoadObjPalette(gUnk_09613F98, 32);
                         w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
                     } else {
@@ -627,6 +679,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
 #endif
                         }
+
                         if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -651,6 +704,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
 #endif
                         }
+
                         if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -667,19 +721,24 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], w->textSlots[5]);
 #endif
                         }
+
                         w->palette = LoadObjPalette(gUnk_09613FD8, 32);
                         w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
                     }
+
                     FadeSetPaletteExcluded(w->palette->index + 16, 1);
                     FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+
                     for (i = 0; i < 3; i++) {
                         if (w->optionEnabled[i] == 1) {
                             break;
                         }
                     }
+
                     w->cursor = i;
                     w->y3 = sLevelUpCursorY[w->cursor];
                     SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
+
                     if (gBtlWork->battleId == 151) {
                         LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
                     } else {
@@ -689,6 +748,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             }
         }
     }
+
     TaskPoolUpdate(&w->pool);
     return 1;
 }
@@ -830,6 +890,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
 #endif
         w->effectShown++;
     }
+
     for (i = 0; i < 3; i++) {
         if (i != w->cursor) {
             s32 x = w->x4[i] << 8;
@@ -846,10 +907,12 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             w->y4[i] = x >> 8;
             w->y5[i] = y >> 8;
         }
+
         if (w->optionSteps[i] > 0) {
             w->optionSteps[i]--;
         }
     }
+
     if (w->optionSteps[0] == 0) {
         for (i = 0; i < 3; i++) {
             if (i != w->cursor && w->unk_000[i] != NULL) {
@@ -857,6 +920,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                 w->unk_000[i] = 0;
             }
         }
+
         if (w->applied == 0) {
             switch (w->cursor) {
             case 0: {
@@ -888,6 +952,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                     gGameState.progression.levelMilestone++;
                     TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
                 }
+
                 break;
             case 2:
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
@@ -902,8 +967,10 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                     args.flags = STAT_INCREASE_FLAG_DP;
                     TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
                 }
+
                 break;
             }
+
             LevelUpSplitDigits3(gGameState.progression.maxHp, w->maxHpDigits);
             LevelUpSplitDigits4((u16)gGameState.progression.cp, w->cpDigits);
             LevelUpSplitDigits3(gGameState.progression.dp, w->dpDigits);
@@ -911,18 +978,22 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             w->applied = 1;
         }
     }
+
     {
         s32 y = w->y3 << 8;
         ApproachValue(&y, 0x3000, w->cursorSteps);
         w->cursorSteps--;
         w->y3 = y >> 8;
     }
+
     TaskPoolUpdate(&w->pool);
     w->blinkTimer++;
+
     if (w->blinkTimer == 32) {
         w->blinkTimer = 0;
         w->blinkOn ^= 1;
     }
+
     if (w->timer == 180) {
         if (GetKeysPressed() & A_BUTTON) {
             if (gBtlWork->battleId == 151) {
@@ -930,6 +1001,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             } else {
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
             }
+
             w->headerSteps = 16;
             w->slideSteps = 16;
             w->optionSteps[w->cursor] = 16;
@@ -938,20 +1010,24 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             w->blinkOn = 0;
             w->messageActive = 0;
             gBtlWork->pendingLevelUps--;
+
             if (gBtlWork->pendingLevelUps == 0) {
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpClose);
             } else {
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpNextSlideOut);
             }
+
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
     } else {
         w->timer++;
     }
+
     w->gfx2 = AnimUpdate(&w->anim);
     w->gfx = AnimUpdate(&w->anim2);
     return 1;
 }
+
 u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
     s32 v1;
     s32 v2;
@@ -1007,10 +1083,12 @@ u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
     TaskPoolUpdate(&w->pool);
     return 1;
 }
+
 u8 UpdateLevelUpWaitFade(void) {
     if (FadeIsActive() == 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -1029,6 +1107,7 @@ void Level_Up_2(LevelUpWork* w) {
                        gUnk_09EEA1BC[10],
 #endif
                        w->unk_000[6], w->unk_000[7], 0, 0, 50);
+
             if (w->unk_000[0] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
@@ -1040,6 +1119,7 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
+
             if (w->unk_000[1] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
@@ -1051,6 +1131,7 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
+
             if (w->unk_000[2] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
@@ -1062,6 +1143,7 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
+
             DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
             DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
             break;
@@ -1083,6 +1165,7 @@ void Level_Up_2(LevelUpWork* w) {
 #endif
                 }
             }
+
             DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, 0, 0, 40);
             break;
         case 2:
@@ -1115,6 +1198,7 @@ void Level_Up_2(LevelUpWork* w) {
                     }
                 }
             }
+
             DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, 0, 0, 40);
             break;
         case 3:
@@ -1136,11 +1220,13 @@ void Level_Up_2(LevelUpWork* w) {
             DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
             break;
         }
+
 #ifdef VERSION_JP
         if (w->blinkOn != 0) {
             DrawSprite(192, 82, gUnk_09EEA19C[0], w->tiles3, w->palette4, 0, 0, 10);
         }
 #endif
+
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             DrawLevelUpStatDigits(w->statsOffsetX + 214, 17, w->unk_000[6], w->unk_000[7],
 #ifdef VERSION_EU
@@ -1194,6 +1280,7 @@ void Level_Up_2(LevelUpWork* w) {
                        w->dpDigits, 3);
         }
     }
+
     DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, 0, SPRITE_PRIORITY(1), 40);
     TaskPoolDraw(&w->pool);
 }
@@ -1286,6 +1373,7 @@ void Level_Up_3(LevelUpWork* w) {
 
     TaskPoolDestroy(&w->pool);
 }
+
 void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind) {
     switch (kind) {
     case 0:
@@ -1365,18 +1453,22 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
 #else
     enum { tileSize = 0xD80, mapSize = 0x800 };
 #endif
+
     if (w->loaded[0] == 0) {
         w->timer++;
+
         if (w->timer > 7) {
 #ifdef VERSION_EU
             w->tiles5[0] = AllocSpriteFrameTiles(0x500);
             w->tiles5[1] = AllocSpriteFrameTiles(0x500);
             w->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
+
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
@@ -1390,12 +1482,14 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                     UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
+
                 w->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
                 w->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
@@ -1409,9 +1503,11 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                     UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
+
                 w->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
                 w->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -1451,41 +1547,54 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->timer = 0;
             FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
+
         return 1;
     }
+
     w->gfx = AnimUpdate(&w->anim2);
+
     {
         s32 x0 = w->x4[0] << 8;
         s32 x1 = w->x4[1] << 8;
         s32 x2 = w->x4[2] << 8;
         ApproachValue(&x0, 0x1000, w->optionSteps[0]);
+
         if (w->optionSteps[0] > 0) {
             w->optionSteps[0]--;
         }
+
         if (w->optionSteps[0] <= 6) {
             ApproachValue(&x1, 0x1000, w->optionSteps[1]);
+
             if (w->optionSteps[1] > 0) {
                 w->optionSteps[1]--;
             }
         }
+
         if (w->optionSteps[1] <= 6) {
             ApproachValue(&x2, 0x1000, w->optionSteps[2]);
+
             if (w->optionSteps[2] > 0) {
                 w->optionSteps[2]--;
             }
         }
+
         w->x4[0] = x0 >> 8;
         w->x4[1] = x1 >> 8;
         w->x4[2] = x2 >> 8;
     }
+
     if (w->optionSteps[2] == 0) {
         u8 i;
+
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, gUnk_095112B8, mapSize);
         } else {
             LoadBgMap(1, gUnk_095112B8, mapSize);
         }
+
         w->state = 1;
+
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -1503,6 +1612,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], w->textSlots[3]);
 #endif
             }
+
             if (gGameState.progression.cp > 1899) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -1519,6 +1629,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], w->textSlots[4]);
 #endif
             }
+
             if (gGameState.progression.levelMilestone > 10) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -1543,6 +1654,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], w->textSlots[5]);
 #endif
             }
+
             w->palette = LoadObjPalette(gUnk_09613F98, 32);
             w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
         } else {
@@ -1562,6 +1674,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
 #endif
             }
+
             if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -1586,6 +1699,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
 #endif
             }
+
             if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -1602,25 +1716,31 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], w->textSlots[5]);
 #endif
             }
+
             w->palette = LoadObjPalette(gUnk_09613FD8, 32);
             w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
         }
+
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
         FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+
         for (i = 0; i < 3; i++) {
             if (w->optionEnabled[i] == 1) {
                 break;
             }
         }
+
         w->cursor = i;
         w->y3 = sLevelUpCursorY[w->cursor];
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
+
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
         } else {
             LoadBgMap(1, gLevelUpOptionBgMaps[w->cursor], 0x800);
         }
     }
+
     TaskPoolUpdate(&w->pool);
     return 1;
 }
@@ -1661,8 +1781,8 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
             if (w->unk_000[2] != NULL) {
                 ReleaseObjTiles(w->unk_000[2]);
             }
-#ifdef VERSION_EU
 
+#ifdef VERSION_EU
             if (w->tiles5[0] != NULL) {
                 ReleaseObjTiles(w->tiles5[0]);
             }
@@ -1776,6 +1896,7 @@ void TrackLevelUpEffectTarget(LevelUpEffectWork* w) {
         w->targetY = y - 16;
     }
 }
+
 void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     s32 i;
     LevelUpEffectArgs args;
@@ -1786,6 +1907,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->radius = 30;
     w->unk_97 = a->unk_08;
     TrackLevelUpEffectTarget(w);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -1836,6 +1958,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
         gLvupLogoActive = 1;
     }
 }
+
 u8 LVUP_EFFECT_1(LevelUpEffectWork* w, void* a) {
     s32 i;
 
@@ -1900,6 +2023,7 @@ u8 LVUP_EFFECT_1(LevelUpEffectWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateLevelUpEffectScatter(LevelUpEffectWork* w) {
     s32 i;
 
@@ -1952,7 +2076,6 @@ void LVUP_EFFECT_3(LevelUpEffectWork* w) {
 
 #ifdef VERSION_EU
 void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gUnkEu_094D72E4, gUnkEu_094DB664, gUnkEu_094D9FE4, gUnkEu_094D8964 };
-
 void* gUnkEu_09F72D1C[5] = { gUnk_0908CAEC, gUnkEu_09170AA0, gUnkEu_09171B2C, gUnkEu_091715A8, gUnkEu_09171024 };
 
 void** gUnk_09EEA1BC[5] = {
@@ -1979,12 +2102,11 @@ void** gLevelUpOptionSpritesByLanguage[5] = {
     gUnkEu_09F76304,
 };
 #endif
+
 #ifndef VERSION_EU
 u16* gLevelUpSoraTexts[7] = { gUnk_0815A066, gUnk_0815A0BA, gUnk_0815B1D2, gUnk_0815A078, gUnk_0815A0CC, gUnk_0815B1A8, (u16*)gLevelUpDisabledText };
-
 u16* gLevelUpRikuTexts[7] = { gUnk_0815A066, gUnk_0815A116, gUnk_0815A158, gUnk_0815A0F4, gUnk_0815A130, gUnk_0815A176, (u16*)gLevelUpDisabledText };
 #endif
-
 const void* gLevelUpBgMapBlocks[2] = { gUnk_08125E24, gUnk_0950F2B8 };
 
 void* gLevelUpOptionBgMaps[3] = { gUnk_095112B8, gUnk_09511AB8, gUnk_095122B8 };
@@ -1997,6 +2119,7 @@ TaskDesc gTaskDescLevelUp = {
     (TaskDestroyFunc)Level_Up_3,
     sizeof(LevelUpWork),
 };
+
 #ifdef VERSION_EU
 void* gLvupEffectSprites[6] = { gUnkEu_09163774, gUnkEu_0916377E, gUnkEu_09163788, gUnkEu_09163792, gUnkEu_0916379C, gUnkEu_091637A6 };
 

@@ -55,6 +55,7 @@ u8 gSioDeckNameRecvBuf[2][20] EWRAM_COMMON(16);
 #ifdef VERSION_EU
 s8 gSioDebugReady[2] EWRAM_COMMON(4);
 #endif
+
 #ifndef VERSION_EU
 s8 gSioChgCardCursor EWRAM_COMMON(16);
 u16 gSioChgCardSlots[10] EWRAM_COMMON(16);
@@ -83,15 +84,11 @@ static const SioAnimDef sSioBtlOptionAnimDefs[2] = {
 #ifndef VERSION_EU
 extern const SioAnimDef gSioChgCardAnimDefs[3];
 #endif
-
 #ifdef VERSION_EU
 #include "link_deck_names.inc"
 #endif
-
 #ifdef VERSION_EU
-
 #endif
-
 extern SioWorldEntry gSioWorldEntries[];
 extern s8 gSioHandicapMarkerX[];
 extern u16 gSioHandicapAp[];
@@ -133,6 +130,7 @@ void mode_sio_btl_connect_0(s32 arg) {
     gSioBtlConnectWork->textSlotCount = LoadTextSlots(gUnk_08159E4A, gSioBtlConnectWork->textSlots);
 #endif
     gSioBtlConnectWork->palette = LoadObjPalette(gUnk_096FBAA4, 32);
+
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
         SioReset();
@@ -151,6 +149,7 @@ void mode_sio_btl_connect_1(void) {
 #ifdef VERSION_EU
     s16 width;
     s16 x;
+
     if (gSioDebugMode == 0) {
 #endif
     switch (gSioBtlConnectWork->state) {
@@ -160,6 +159,7 @@ void mode_sio_btl_connect_1(void) {
     case 1:
         SioConnectUpdate();
         gSioBtlConnectWork->timer++;
+
         if (gSioBtlConnectWork->timer > 4) {
             SioSetLinkCallbacks(SioExchangeSend, SioExchangeRecv);
             SioPrepareCharaLinkExchange();
@@ -167,6 +167,7 @@ void mode_sio_btl_connect_1(void) {
             gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
             gSioBtlConnectWork->state++;
         }
+
         break;
     case 2:
         if (gSioLinkResult == 2) {
@@ -174,9 +175,11 @@ void mode_sio_btl_connect_1(void) {
             SioInitWorldList();
             gSioBtlConnectWork->state++;
         }
+
         break;
     case 3:
         gSioBtlConnectWork->timer++;
+
         if (gSioBtlConnectWork->timer > 4) {
             SioSetLinkCallbacks(SioCommandSend, SioCommandRecv);
             SioCommandReset();
@@ -193,11 +196,13 @@ void mode_sio_btl_connect_1(void) {
                     gSioDeckNames[i][j] = 0;
                 }
             }
+
             gSioWinCount = 0;
             gSioLoseCount = 0;
             ModeRequest(&gModeSioBtlOption, 0);
             return;
         }
+
         break;
     }
 #ifdef VERSION_EU
@@ -215,11 +220,14 @@ void mode_sio_btl_connect_1(void) {
                 gSioDeckNames[i][j] = 0;
             }
         }
+
         SioDbgApplySettings();
         SioInitWorldList();
         ModeRequest(&gModeSioBtlOption, 0);
     }
+
     width = eu_0806629C(gSioBtlConnectWork->textSlots, gSioBtlConnectWork->textSlotCount);
+
     if (gLanguage == LANGUAGE_FRENCH) {
         x = 120 - (width >> 1);
         DrawTextSlots(x, 68, gSioBtlConnectWork->textSlots, gSioBtlConnectWork->palette, 20, gSioBtlConnectWork->textSlotCount);
@@ -258,6 +266,7 @@ void SioInitWorldList(void) {
     for (i = 0; i < 13; i++) {
         gSioWorldList[i] = 0;
     }
+
     flags = 0x1FFE;
 
     for (i = 1; i < 14; i++) {
@@ -294,6 +303,7 @@ void mode_sio_btl_option_0(s32 arg) {
     InitTextSlots(gSioBtlOptionWork->textSlots, 40);
     InitTextSlots(gSioBtlOptionWork->textSlots2, 20);
     InitTextSlots(gSioBtlOptionWork->textSlots3, 20);
+
     if (gSioDebugMode == 0) {
         gSioBtlOptionWork->textSlotCount2 = LoadTextSlots(gSioDeckNames[0], gSioBtlOptionWork->textSlots2);
         gSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], gSioBtlOptionWork->textSlots3);
@@ -320,6 +330,7 @@ void mode_sio_btl_option_0(s32 arg) {
 
 void SioBtlOptionLoadBg(void) {
     RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(0) + 0x2000, 0x800);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -372,6 +383,7 @@ void SioBtlOptionInitObjs(void) {
         gSioBtlOptionWork->cursor = 0;
         gSioBtlOptionWork->y = 10752;
     }
+
     gSioBtlOptionWork->fadeLevel = 0;
     gSioBtlOptionWork->timer = 0;
     gSioBtlOptionWork->player1Ready = 0;
@@ -396,8 +408,10 @@ void SioBtlOptionInitObjs(void) {
         gSioBtlOptionWork->unk_008[2] = LoadObjPalette(gUnk_096FAC64, 32);
         gSioBtlOptionWork->unk_008[3] = LoadObjPalette(gSoraPalette, 32);
     }
+
 #ifdef VERSION_EU
     gSioBtlOptionWork->palette = LoadObjPalette(gUnk_096FBD24, 32);
+
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F18BE, 0xC00);
@@ -496,6 +510,7 @@ void SioBtlOptionInitObjs(void) {
     } else {
         gSioBtlOptionWork->handicap = gSioHandicaps[1];
     }
+
     SioBtlOptionDrawStats();
     gSioBtlOptionWork->state = 2;
 }
@@ -631,12 +646,14 @@ void SioBtlOptionDraw(void) {
 #ifdef VERSION_EU
         width = eu_0806629C(gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->textSlotCount4);
         multiline = 0;
+
         for (i = 0; i < gSioBtlOptionWork->textSlotCount4; i++) {
             if (gSioBtlOptionWork->textSlots4[i].tiles == NULL) {
                 multiline = 1;
                 break;
             }
         }
+
         if (multiline != 0) {
             DrawTextSlots(120 - (width >> 1), 119, gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->palette6, 20, gSioBtlOptionWork->textSlotCount4);
         } else {
@@ -646,12 +663,14 @@ void SioBtlOptionDraw(void) {
         DrawTextSlots(gSioBtlOptionWork->x, gSioBtlOptionWork->y2, gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->palette6, 20, gSioBtlOptionWork->textSlotCount4);
 #endif
     }
+
     DrawSprite(32, 24, gSioBtlOptionWork->gfx5[0], gSioBtlOptionWork->tiles5[0], gSioBtlOptionWork->palette5[0], 0, 0, 0xF100);
     DrawSprite(132, 24, gSioBtlOptionWork->gfx5[1], gSioBtlOptionWork->tiles5[1], gSioBtlOptionWork->palette5[1], 0, 0, 0xF100);
 
     if (gSioBtlOptionWork->handicapMarkerVisible == 1) {
         DrawSprite(gSioPlayerId * 101 + 44 + gSioHandicapMarkerX[gSioBtlOptionWork->handicap], -((gSioBtlOptionWork->frameCount >> 3) % 4) / 2 + 22, gSioBtlOptionWork->gfx8, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, 0, 0, 0xF000);
     }
+
     gSioBtlOptionWork->frameCount++;
 }
 
@@ -667,6 +686,7 @@ void SioBtlOptionWaitStart(void) {
     } else {
         gSioBtlOptionWork->timer++;
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionRecvWorld();
@@ -675,6 +695,7 @@ void SioBtlOptionWaitStart(void) {
 
 void SioBtlOptionHandleIdle(void) {
     s8 v = 0;
+
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -692,9 +713,11 @@ void SioBtlOptionHandleIdle(void) {
         } else {
             v = gSioWorldCursor;
             v--;
+
             if (v <= 0) {
                 v = gSioWorldCount;
             }
+
             gSioCommandSend[2] |= v & 15;
         }
     } else if (GetKeysPressed() & R_BUTTON) {
@@ -703,9 +726,11 @@ void SioBtlOptionHandleIdle(void) {
         } else {
             v = gSioWorldCursor;
             v++;
+
             if (v > gSioWorldCount) {
                 v = 1;
             }
+
             gSioCommandSend[2] |= v & 15;
         }
     } else {
@@ -737,6 +762,7 @@ void SioBtlOptionHandleIdle(void) {
             gSioBtlOptionWork->state = 6;
         }
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionRecvWorld();
@@ -752,15 +778,18 @@ void SioBtlOptionHandleIdle(void) {
             gSioBtlOptionWork->menuOpen = 1;
             gSioBtlOptionWork->state = 6;
         }
+
         if (GetKeysPressed() & L_BUTTON) {
             if (gSioWorldCount == 1) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             } else {
                 v = gSioWorldCursor;
                 v--;
+
                 if (v <= 0) {
                     v = gSioWorldCount;
                 }
+
                 gSioBtlOptionWork->timer = 0;
                 gSioBtlOptionWork->fadeLevel = 0;
                 gSioBtlOptionWork->worldChangeState = 0;
@@ -776,9 +805,11 @@ void SioBtlOptionHandleIdle(void) {
             } else {
                 v = gSioWorldCursor;
                 v++;
+
                 if (v > gSioWorldCount) {
                     v = 1;
                 }
+
                 gSioBtlOptionWork->timer = 0;
                 gSioBtlOptionWork->fadeLevel = 0;
                 gSioBtlOptionWork->worldChangeState = 0;
@@ -802,6 +833,7 @@ void SioBtlOptionHandleIdle(void) {
 
 void SioBtlOptionHandleMenu(void) {
     s8 v;
+
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -810,12 +842,14 @@ void SioBtlOptionHandleMenu(void) {
     if (GetKeysPressed() & DPAD_UP) {
         m4aSongNumStart(SONG_SYS_CLICK);
         gSioBtlOptionWork->cursor--;
+
         if (gSioBtlOptionWork->cursor < 0) {
             gSioBtlOptionWork->cursor = 2;
         }
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
         gSioBtlOptionWork->cursor++;
+
         if (gSioBtlOptionWork->cursor > 2) {
             gSioBtlOptionWork->cursor = 0;
         }
@@ -827,9 +861,11 @@ void SioBtlOptionHandleMenu(void) {
         } else {
             v = gSioWorldCursor;
             v--;
+
             if (v <= 0) {
                 v = gSioWorldCount;
             }
+
             gSioCommandSend[2] |= v & 15;
         }
     } else if (GetKeysPressed() & R_BUTTON) {
@@ -838,9 +874,11 @@ void SioBtlOptionHandleMenu(void) {
         } else {
             v = gSioWorldCursor;
             v++;
+
             if (v > gSioWorldCount) {
                 v = 1;
             }
+
             gSioCommandSend[2] |= v & 15;
         }
     } else {
@@ -857,6 +895,7 @@ void SioBtlOptionHandleMenu(void) {
             } else {
                 gSioCommandSend[1] = 0x6AD6;
             }
+
             gSioBtlOptionWork->menuOpen = 0;
             gSioBtlOptionWork->messageVisible = 1;
 #ifdef VERSION_EU
@@ -886,6 +925,7 @@ void SioBtlOptionHandleMenu(void) {
         gSioBtlOptionWork->menuOpen = 0;
         gSioBtlOptionWork->state = 5;
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionRecvWorld();
@@ -895,12 +935,14 @@ void SioBtlOptionHandleMenu(void) {
         if (GetKeysPressed() & DPAD_UP) {
             m4aSongNumStart(SONG_SYS_CLICK);
             gSioBtlOptionWork->cursor--;
+
             if (gSioBtlOptionWork->cursor < 0) {
                 gSioBtlOptionWork->cursor = 2;
             }
         } else if (GetKeysPressed() & DPAD_DOWN) {
             m4aSongNumStart(SONG_SYS_CLICK);
             gSioBtlOptionWork->cursor++;
+
             if (gSioBtlOptionWork->cursor > 2) {
                 gSioBtlOptionWork->cursor = 0;
             }
@@ -912,9 +954,11 @@ void SioBtlOptionHandleMenu(void) {
             } else {
                 v = gSioWorldCursor;
                 v--;
+
                 if (v <= 0) {
                     v = gSioWorldCount;
                 }
+
                 gSioBtlOptionWork->timer = 0;
                 gSioBtlOptionWork->fadeLevel = 0;
                 gSioBtlOptionWork->worldChangeState = 0;
@@ -930,9 +974,11 @@ void SioBtlOptionHandleMenu(void) {
             } else {
                 v = gSioWorldCursor;
                 v++;
+
                 if (v > gSioWorldCount) {
                     v = 1;
                 }
+
                 gSioBtlOptionWork->timer = 0;
                 gSioBtlOptionWork->fadeLevel = 0;
                 gSioBtlOptionWork->worldChangeState = 0;
@@ -975,6 +1021,7 @@ void SioBtlOptionHandleMenu(void) {
             gSioBtlOptionWork->menuOpen = 0;
             gSioBtlOptionWork->state = 5;
         }
+
         SioBtlOptionCheckReady();
         SioBtlOptionSyncHandicaps();
         SioBtlOptionRecvWorld();
@@ -1015,6 +1062,7 @@ void SioBtlOptionSetHandicap(void) {
         gSioBtlOptionWork->handicapMarkerVisible = 0;
         gSioBtlOptionWork->state = 6;
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionRecvWorld();
@@ -1038,6 +1086,7 @@ void SioBtlOptionSetHandicap(void) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
         }
+
         if (GetKeysPressed() & L_BUTTON) {
             if ((s8)gSioHandicaps[1] > 1) {
                 m4aSongNumStart(SONG_SYS_CLICK);
@@ -1053,12 +1102,14 @@ void SioBtlOptionSetHandicap(void) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
         }
+
         if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             gSioBtlOptionWork->cursorVisible = 1;
             gSioBtlOptionWork->handicapMarkerVisible = 0;
             gSioBtlOptionWork->state = 6;
         }
+
         SioBtlOptionCheckReady();
         SioBtlOptionSyncHandicaps();
         SioBtlOptionRecvWorld();
@@ -1074,6 +1125,7 @@ void SioBtlOptionChangeWorld(void) {
     switch (gSioBtlOptionWork->worldChangeState) {
     case 0:
         gSioBtlOptionWork->timer++;
+
         if (gSioBtlOptionWork->timer > 1) {
             gSioBtlOptionWork->timer = 0;
 
@@ -1085,6 +1137,7 @@ void SioBtlOptionChangeWorld(void) {
                 FadePaletteToBlack(gSioWorldEntries[a].palette, (u16*)0x05000000, gSioWorldEntries[a].paletteSize, gSioBtlOptionWork->fadeLevel);
             }
         }
+
         break;
     case 1:
         FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)0x05000000, gSioWorldEntries[b].paletteSize, 32);
@@ -1108,6 +1161,7 @@ void SioBtlOptionChangeWorld(void) {
         break;
     case 3:
         gSioBtlOptionWork->timer++;
+
         if (gSioBtlOptionWork->timer > 1) {
             gSioBtlOptionWork->timer = 0;
 
@@ -1117,6 +1171,7 @@ void SioBtlOptionChangeWorld(void) {
                 gSioBtlOptionWork->worldChangeState++;
             } else {
                 gSioBtlOptionWork->fadeLevel -= 8;
+
                 if (gSioBtlOptionWork->fadeLevel == 0) {
                     LoadPaletteWithEffect(gSioWorldEntries[b].palette, (u16*)0x05000000, gSioWorldEntries[b].paletteSize);
                 } else {
@@ -1124,11 +1179,13 @@ void SioBtlOptionChangeWorld(void) {
                 }
             }
         }
+
         break;
     default:
         gSioBtlOptionWork->state = gSioBtlOptionWork->returnState;
         break;
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionSyncDeckNames();
@@ -1143,6 +1200,7 @@ void SioBtlOptionWaitReady(void) {
         } else {
             gSioCommandSend[1] = 0x6AD6;
         }
+
 #ifdef VERSION_EU
     } else if (GetKeysPressed() & A_BUTTON) {
         gSioDebugReady[1] = 1;
@@ -1164,6 +1222,7 @@ void SioBtlOptionWaitReady(void) {
         gSioBtlOptionWork->y2 = 119;
         gSioBtlOptionWork->state++;
     }
+
     SioBtlOptionCheckReady();
     SioBtlOptionSyncHandicaps();
     SioBtlOptionRecvWorld();
@@ -1218,6 +1277,7 @@ void SioBtlOptionStartDeckExchange(void) {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
         gSioBtlOptionWork->timer++;
+
         if (gSioBtlOptionWork->timer > 9) {
             SioSetLinkCallbacks(SioExchangeSend, SioExchangeRecv);
             SioPrepareDeckExchange();
@@ -1225,6 +1285,7 @@ void SioBtlOptionStartDeckExchange(void) {
         }
     } else {
         gSioBtlOptionWork->timer++;
+
         if (gSioBtlOptionWork->timer > 9) {
             SioPrepareDeckExchange();
             eu_080C24D8();
@@ -1234,6 +1295,7 @@ void SioBtlOptionStartDeckExchange(void) {
     }
 #else
     gSioBtlOptionWork->timer++;
+
     if (gSioBtlOptionWork->timer > 9) {
         SioSetLinkCallbacks(SioExchangeSend, SioExchangeRecv);
         SioPrepareDeckExchange();
@@ -1251,6 +1313,7 @@ void SioBtlOptionWaitDeckExchange(void) {
         }
     } else {
         gSioBtlOptionWork->timer++;
+
         if (gSioBtlOptionWork->timer > 59) {
             gSioBtlOptionWork->timer = 0;
             gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
@@ -1272,6 +1335,7 @@ void SioBtlOptionWaitDeckExchange(void) {
 
 void SioBtlOptionResumeCommands(void) {
     gSioBtlOptionWork->timer++;
+
     if (gSioBtlOptionWork->timer > 4) {
         gSioBtlOptionWork->timer = 0;
         SioSetLinkCallbacks(SioCommandSend, SioCommandRecv);
@@ -1282,6 +1346,7 @@ void SioBtlOptionResumeCommands(void) {
 
 void func_080B041C(void) {
     gSioBtlOptionWork->timer++;
+
     if (gSioBtlOptionWork->timer > 30) {
         gSioBtlOptionWork->timer = 0;
         gSioBtlOptionWork->state++;
@@ -1290,6 +1355,7 @@ void func_080B041C(void) {
 
 void SioBtlOptionSyncStart(void) {
     gSioBtlOptionWork->timer++;
+
     if (gSioBtlOptionWork->timer > 20) {
         gSioCommandSend[1] = 0x7CD2;
 
@@ -1303,6 +1369,7 @@ void SioBtlOptionSyncStart(void) {
 
 void SioBtlOptionStartBattle(void) {
     gSioBtlOptionWork->timer++;
+
     if (gSioBtlOptionWork->timer > 4) {
         gSioBtlOptionWork->timer = 0;
         SioSetLinkCallbacks(SioKeySyncSend, SioKeySyncRecv);
@@ -1361,6 +1428,7 @@ void SioBtlOptionCheckReady(void) {
         if (gSioBtlOptionWork->player1Ready == 0) {
             SetSioBtlOptionAnimation(0, 1, 1);
         }
+
         gSioBtlOptionWork->player1Ready = 1;
     }
 
@@ -1370,6 +1438,7 @@ void SioBtlOptionCheckReady(void) {
         if (gSioBtlOptionWork->player2Ready == 0) {
             SetSioBtlOptionAnimation(1, 1, 1);
         }
+
         gSioBtlOptionWork->player2Ready = 1;
     }
 #ifdef VERSION_EU
@@ -1380,6 +1449,7 @@ void SioBtlOptionCheckReady(void) {
         if (gSioBtlOptionWork->player1Ready == 0) {
             SetSioBtlOptionAnimation(0, 1, 1);
         }
+
         gSioBtlOptionWork->player1Ready = 1;
     }
 
@@ -1389,6 +1459,7 @@ void SioBtlOptionCheckReady(void) {
         if (gSioBtlOptionWork->player2Ready == 0) {
             SetSioBtlOptionAnimation(1, 1, 1);
         }
+
         gSioBtlOptionWork->player2Ready = 1;
     }
     }
@@ -1398,13 +1469,16 @@ void SioBtlOptionCheckReady(void) {
 void SioBtlOptionRecvWorld(void) {
     s8 x;
     s8 y;
+
 #ifdef VERSION_EU
     if (gSioDebugMode != 0) {
         return;
     }
 #endif
+
     x = gSioCommandRecv[2][0] & 15;
     y = gSioCommandRecv[2][1] & 15;
+
     if (x != 0 || y != 0) {
         if (x <= 12 && y <= 12) {
             gSioPrevWorldCursor = gSioWorldCursor;
@@ -1416,6 +1490,7 @@ void SioBtlOptionRecvWorld(void) {
             } else {
                 gSioWorldCursor = x;
             }
+
             gSioBtlOptionWork->timer = 0;
             gSioBtlOptionWork->fadeLevel = 0;
             gSioBtlOptionWork->worldChangeState = 0;
@@ -1431,11 +1506,13 @@ void SioBtlOptionRecvSettings(void) {
     s8 x;
     s8 y;
     s32 i;
+
 #ifdef VERSION_EU
     if (gSioDebugMode != 0) {
         return;
     }
 #endif
+
     buf[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
     buf[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
 
@@ -1470,8 +1547,10 @@ void SioBtlOptionRecvSettings(void) {
             }
         }
     }
+
     x = gSioCommandRecv[2][0] & 15;
     y = gSioCommandRecv[2][1] & 15;
+
     if (x != 0 || y != 0) {
         if (x <= 12 && y <= 12) {
             if (x > y) {
@@ -1488,15 +1567,18 @@ void SioBtlOptionRecvSettings(void) {
 void SioBtlOptionSyncDeckNames(void) {
     s32 deck;
     s32 i;
+
 #ifdef VERSION_EU
     if (gSioDebugMode != 0) {
         return;
     }
 #endif
+
     deck = GetActiveDeckIndex();
     gSioCommandSend[2] |= (gSioDeckNameChunk & 15) << 12;
     gSioCommandSend[3] = gDecks[deck].name[(gSioDeckNameChunk - 1) * 2] | (gDecks[deck].name[(gSioDeckNameChunk - 1) * 2 + 1] << 8);
     gSioDeckNameChunk++;
+
     if (gSioDeckNameChunk > 10) {
         gSioDeckNameChunk = 1;
     }
@@ -1511,6 +1593,7 @@ void SioBtlOptionSyncDeckNames(void) {
                 gSioDeckNameRecv[0][i] = gSioDeckNameRecvBuf[0][i];
                 gSioDeckNames[0][i] = gSioDeckNameRecv[0][i];
             }
+
             gSioBtlOptionWork->textSlotCount2 = LoadTextSlots(gSioDeckNames[0], gSioBtlOptionWork->textSlots2);
         }
     }
@@ -1525,6 +1608,7 @@ void SioBtlOptionSyncDeckNames(void) {
                 gSioDeckNameRecv[1][i] = gSioDeckNameRecvBuf[1][i];
                 gSioDeckNames[1][i] = gSioDeckNameRecv[1][i];
             }
+
             gSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], gSioBtlOptionWork->textSlots3);
         }
     }
@@ -1664,6 +1748,7 @@ void SioBtlOptionDrawStats(void) {
     RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x060005A0, 32);
     RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)0x060005C0, 32);
 }
+
 void SioApplyBattleSettings(void) {
     s8* base;
     s8* p;
@@ -1712,6 +1797,7 @@ void SioBtlOptionSyncHandicaps(void) {
     } else {
         gSioCommandSend[2] |= (gSioHandicaps[1] & 15) << 4;
     }
+
     buf[0] = (gSioCommandRecv[2][0] & 0xF0) >> 4;
     buf[1] = (gSioCommandRecv[2][1] & 0xF0) >> 4;
 
@@ -1724,6 +1810,7 @@ void SioBtlOptionSyncHandicaps(void) {
         gSioBtlOptionWork->handicaps[1] = buf[1];
         gSioHandicaps[1] = gSioBtlOptionWork->handicaps[1];
     }
+
     SioBtlOptionUpdateHandicapGauges(gSioBtlOptionWork->handicaps[0], gSioBtlOptionWork->handicaps[1]);
 #ifdef VERSION_EU
     } else {
@@ -1737,6 +1824,7 @@ void SioBtlOptionSyncHandicaps(void) {
     if (buf[1] >= 1 && buf[1] <= 11) {
         gSioBtlOptionWork->handicaps[1] = buf[1];
     }
+
     SioBtlOptionUpdateHandicapGauges(gSioBtlOptionWork->handicaps[0], gSioBtlOptionWork->handicaps[1]);
     }
 #endif
@@ -1800,6 +1888,7 @@ void SioBtlOptionCancelReady(void) {
 
 void SioBtlOptionPlayWorldBgm(void) {
     s8 i = gSioWorldList[gSioWorldCursor];
+
     switch (i) {
     case 1:
         m4aSongNumStart(SONG_BGM_ALADDIN_BATTLE);
@@ -1853,6 +1942,7 @@ void mode_sio_btl_cardget_0(s32 arg) {
         FreeLinkDecks();
         gLinkDecksAllocated = 0;
     }
+
     gSioBtlCardgetWork = EwramAlloc(sizeof(SioBtlCardgetWork));
 
     if (arg == 0) {
@@ -1860,6 +1950,7 @@ void mode_sio_btl_cardget_0(s32 arg) {
     } else {
         gSioBtlCardgetWork->lost = 1;
     }
+
     SetBgMode0();
     SetupBg(1, 0, 16, 0);
     SetBgPriority(1, 1);
@@ -1880,6 +1971,7 @@ void SioBtlCardgetLoadBg(void) {
     RequestDma3Copy(gUnk_096B1744, (u8*)GetBgCharBase(1) + 0x4000, 0x9E0);
 #endif
     LoadBgPalette(1, gUnk_096FBAC4, 0x200);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -1914,6 +2006,7 @@ void SioBtlCardgetShowResult(void) {
 
     if (gSioBtlCardgetWork->lost == 0) {
         gSioWinCount++;
+
         if (gSioWinCount > 0x270F) {
             gSioWinCount = 0x270F;
         }
@@ -1929,6 +2022,7 @@ void SioBtlCardgetShowResult(void) {
         }
     } else {
         gSioLoseCount++;
+
         if (gSioLoseCount > 0x270F) {
             gSioLoseCount = 0x270F;
         }
@@ -1951,6 +2045,7 @@ void SioBtlCardgetShowResult(void) {
         gSioBtlCardgetWork->unk_20 = 0xB400;
         gSioBtlCardgetWork->unk_24 = 0x6000;
     }
+
     gSioBtlCardgetWork->unk_02 = 0;
     gSioBtlCardgetWork->timer = 0;
     gGameState.hp = gCharaLinkSend.hp;
@@ -1961,6 +2056,7 @@ void mode_sio_btl_cardget_1(void) {
 #ifdef VERSION_EU
     SioBtlCardgetWork* work;
 #endif
+
     switch (gSioBtlCardgetWork->state) {
     case 0:
         SioBtlCardgetLoadBgTiles();
@@ -1976,8 +2072,10 @@ void mode_sio_btl_cardget_1(void) {
         break;
     case 3:
         gSioBtlCardgetWork->timer++;
+
         if (gSioBtlCardgetWork->timer > 4) {
             gSioBtlCardgetWork->timer = 0;
+
 #ifdef VERSION_EU
             if (gSioDebugMode == 0) {
 #endif
@@ -1986,16 +2084,20 @@ void mode_sio_btl_cardget_1(void) {
 #ifdef VERSION_EU
             }
 #endif
+
             gSioBtlCardgetWork->state++;
         }
+
         SioBtlCardgetDraw();
         break;
     case 4:
         gSioBtlCardgetWork->timer++;
+
         if (gSioBtlCardgetWork->timer > 4) {
             gSioBtlCardgetWork->timer = 0;
             gSioBtlCardgetWork->state++;
         }
+
         SioBtlCardgetDraw();
         break;
     case 5:
@@ -2011,6 +2113,7 @@ void mode_sio_btl_cardget_1(void) {
             gSioBtlCardgetWork->timer = 0;
             gSioBtlCardgetWork->state++;
         }
+
 #ifdef VERSION_EU
         } else if (GetKeysPressed() & (A_BUTTON | B_BUTTON | START_BUTTON)) {
             m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -2018,13 +2121,16 @@ void mode_sio_btl_cardget_1(void) {
             gSioBtlCardgetWork->state++;
         }
 #endif
+
         SioBtlCardgetDraw();
         break;
     case 6:
         gSioBtlCardgetWork->timer++;
+
         if (gSioBtlCardgetWork->timer > 4) {
 #ifdef VERSION_EU
             work = gSioBtlCardgetWork;
+
             if (gSioDebugMode == 0) {
 #endif
             SioSetLinkCallbacks(SioExchangeSend, SioExchangeRecv);
@@ -2032,11 +2138,13 @@ void mode_sio_btl_cardget_1(void) {
 #ifdef VERSION_EU
                 work = gSioBtlCardgetWork;
             }
+
             work->state++;
 #else
             gSioBtlCardgetWork->state++;
 #endif
         }
+
         SioBtlCardgetDraw();
         break;
     case 7:
@@ -2047,19 +2155,23 @@ void mode_sio_btl_cardget_1(void) {
             gSioBtlCardgetWork->timer = 0;
             gSioBtlCardgetWork->state++;
         }
+
 #ifdef VERSION_EU
         } else {
             gSioBtlCardgetWork->timer = 0;
             gSioBtlCardgetWork->state++;
         }
 #endif
+
         SioBtlCardgetDraw();
         break;
     case 8:
         gSioBtlCardgetWork->timer++;
+
         if (gSioBtlCardgetWork->timer > 4) {
 #ifdef VERSION_EU
             work = gSioBtlCardgetWork;
+
             if (gSioDebugMode == 0) {
 #endif
             SioSetLinkCallbacks(SioCommandSend, SioCommandRecv);
@@ -2067,11 +2179,13 @@ void mode_sio_btl_cardget_1(void) {
 #ifdef VERSION_EU
                 work = gSioBtlCardgetWork;
             }
+
             work->state++;
 #else
             gSioBtlCardgetWork->state++;
 #endif
         }
+
         SioBtlCardgetDraw();
         break;
     case 9:
@@ -2108,6 +2222,7 @@ void SioBtlCardgetLoad1PWin(void) {
 #ifdef VERSION_EU
     gSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBDE4, 32);
     gSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBE04, 32);
+
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095ECDD8, 0x680);
@@ -2168,6 +2283,7 @@ void SioBtlCardgetLoad2PWin(void) {
 #ifdef VERSION_EU
     gSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBE04, 32);
     gSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBDE4, 32);
+
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095ED472, 0x600);
@@ -2255,6 +2371,7 @@ void mode_sio_chg_connect_1(void) {
     case 1:
         SioConnectUpdate();
         gSioChgConnectWork->timer++;
+
         if (gSioChgConnectWork->timer > 4) {
             SioSetLinkCallbacks(SioCommandSend, SioCommandRecv);
             SioCommandReset();
@@ -2263,8 +2380,10 @@ void mode_sio_chg_connect_1(void) {
             SioChgConnectStartTrade();
             return;
         }
+
         break;
     }
+
     DrawTextSlots(61, 68, gSioChgConnectWork->textSlots, gSioChgConnectWork->palette, 20, gSioChgConnectWork->textSlotCount);
 }
 #endif
@@ -2308,6 +2427,7 @@ void SioChgConnectStartTrade(void) {
     for (i = 0; i < 2; i++) {
         gSioChgCardReady[i] = 0;
     }
+
     ModeRequest(&gModeSioChgCard, 0x800);
 }
 #endif
@@ -2389,6 +2509,7 @@ void SioChgCardInitObjs(void) {
         } else {
             SetSioChgCardAnimation(i, 2, 0);
         }
+
         gSioChgCardWork->gfx[i] = AnimGetGfx(&gSioChgCardWork->anim[i]);
     }
 
@@ -2399,6 +2520,7 @@ void SioChgCardInitObjs(void) {
         gSioChgCardWork->unk_008[2] = LoadObjPalette(gUnk_096FAC64, 32);
         gSioChgCardWork->unk_008[3] = LoadObjPalette(gSoraPalette, 32);
     }
+
     gSioChgCardWork->tiles = LoadObjTiles(gUnk_0962DEA8, 0x780);
     gSioChgCardWork->palette = LoadObjPalette(gUnk_096FBF04, 32);
     AnimInit(&gSioChgCardWork->anim2, gUnk_09EF3920, gUnk_09EF390C);
@@ -2436,6 +2558,7 @@ void SioChgCardInitObjs(void) {
             gSioChgCardWork->angle[i] = 0;
         }
     }
+
     gSioChgCardWork->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     gSioChgCardWork->palette4 = LoadObjPalette(gCard00Palette, 32);
     gSioChgCardWork->tiles5 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -2516,11 +2639,13 @@ void mode_sio_chg_card_1(void) {
 
 void SioChgCardWaitStart(void) {
     gSioChgCardWork->timer++;
+
     if (gSioChgCardWork->timer > 5) {
         SioChgCardRecvSlots();
         SioChgCardDrawPointTotals();
         gSioChgCardWork->state++;
     }
+
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((gSioChgCardWork->offeredCard + 1) & 0x0FFF);
 }
 
@@ -2540,6 +2665,7 @@ void SioChgCardSelect(void) {
             SetSioChgCardAnimation(0, 1, 0);
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
+
         RequestDma3Copy(gUnk_096B5FA4, (void*)0x06000020, 0xC0);
         gSioChgCardReady[0] = 1;
     } else if (gSioCommandRecv[1][0] == 0x2B9A) {
@@ -2548,6 +2674,7 @@ void SioChgCardSelect(void) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             gSioChgCardWork->messageVisible = 0;
         }
+
         RequestDma3Copy(gUnk_096B5EE4, (void*)0x06000020, 0xC0);
         gSioChgCardReady[0] = 0;
     }
@@ -2557,6 +2684,7 @@ void SioChgCardSelect(void) {
             SetSioChgCardAnimation(1, 1, 0);
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
+
         RequestDma3Copy(gUnk_096B63A4, (void*)0x060000E0, 0xC0);
         gSioChgCardReady[1] = 1;
     } else if (gSioCommandRecv[1][1] == 0x2B9A) {
@@ -2565,6 +2693,7 @@ void SioChgCardSelect(void) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             gSioChgCardWork->messageVisible = 0;
         }
+
         RequestDma3Copy(gUnk_096B62E4, (void*)0x060000E0, 0xC0);
         gSioChgCardReady[1] = 0;
     }
@@ -2602,6 +2731,7 @@ void SioChgCardSelect(void) {
             ModeRequest(&gModeDeckExchange, 0);
         }
     }
+
     SioChgCardRecvSlots();
     SioChgCardDrawPointTotals();
 
@@ -2631,6 +2761,7 @@ void SioChgCardConfirm(void) {
         SioChgCardCancelReady();
         gSioChgCardWork->state = 3;
     }
+
     SioChgCardRecvSlots();
     SioChgCardDrawPointTotals();
 }
@@ -2638,11 +2769,13 @@ void SioChgCardConfirm(void) {
 void SioChgCardTryTrade(void) {
     SioChgCardBackupCollection();
     gSioChgCardWork->receiveOk = SioChgCardReceiveCards();
+
     if (gSioChgCardWork->receiveOk == 1) {
         gSioCommandSend[1] = 0xEF23;
     } else {
         gSioCommandSend[1] = 0x1269;
     }
+
     gSioChgCardWork->state++;
 }
 
@@ -2702,6 +2835,7 @@ void SioChgCardSave(void) {
         gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
         ModeRequest(&gModeSioError, 0);
     }
+
     gSioChgCardWork->timer = 0;
     gSioChgCardWork->state++;
 }
@@ -2712,7 +2846,9 @@ void SioChgCardWaitMove(void) {
     if (gSioChgCardWork->timer == 80) {
         gSioChgCardWork->messageVisible = 0;
     }
+
     gSioChgCardWork->timer++;
+
     if (gSioChgCardWork->timer > 199) {
         gSioChgCardWork->timer = 0;
         gSioChgCardWork->messageVisible = 1;
@@ -2725,6 +2861,7 @@ void SioChgCardWaitMove(void) {
 
 void func_080B2AE8(void) {
     gSioChgCardWork->timer++;
+
     if (gSioChgCardWork->timer > 119) {
         gSioChgCardWork->timer = 0;
         gSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815B3FA, gSioChgCardWork->textSlots);
@@ -2736,6 +2873,7 @@ void func_080B2AE8(void) {
 
 void func_080B2B48(void) {
     gSioChgCardWork->timer++;
+
     if (gSioChgCardWork->timer > 119) {
         gSioChgCardWork->timer = 0;
         gSioChgCardWork->messageVisible = 0;
@@ -2757,6 +2895,7 @@ void SioChgCardRestart(void) {
         for (i = 0; i < 10; i++) {
             gSioChgCardSlots[i] = 0x800;
         }
+
         gSioChgCardReady[0] = 0;
         gSioChgCardReady[1] = 0;
         ModeRequest(&gModeSioChgCard, 0x800);
@@ -2778,6 +2917,7 @@ void mode_sio_chg_card_2(void) {
         ReleaseObjTiles(gSioChgCardWork->tiles3[i]);
         ReleaseObjPalette(gSioChgCardWork->palette3[i]);
     }
+
     ReleaseObjTiles(gSioChgCardWork->tiles4);
     ReleaseObjPalette(gSioChgCardWork->palette4);
     ReleaseObjTiles(gSioChgCardWork->tiles5);
@@ -2842,6 +2982,7 @@ void SioChgCardSetSlot(u16 a) {
         i = a;
         i = i >> 12;
         slot = (a & 0x0FFF) - 1;
+
         if (slot == 0x800) {
             gSioChgCardWork->cardVisible[i] = 0;
             ReleaseObjTiles(gSioChgCardWork->tiles3[i]);
@@ -2890,6 +3031,7 @@ void SioChgCardSetSlotId(u16 a) {
         i = a;
         i = i >> 12;
         slot = (a & 0x0FFF) - 1;
+
         if (slot == 0x800) {
             gSioChgCardSlots[i] = 0x800;
         } else {
@@ -2906,15 +3048,17 @@ void SioChgCardDrawPointTotals(void) {
     s32 j;
     s16 digits[3];
     s32 v;
-
     sum = 0;
     lim = 0x800;
+
     for (i = 0; i < 5; i++) {
         x = gSioChgCardSlots[i];
+
         if ((s16)x != lim) {
             sum = GetCardMooglePointValue(x) - (0 - sum);
         }
     }
+
     v = (s16)sum;
     digits[0] = v / 100;
     v = v % 100;
@@ -2924,14 +3068,16 @@ void SioChgCardDrawPointTotals(void) {
     RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)0x060001A0, 32);
     RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)0x060001C0, 32);
     RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)0x060001E0, 32);
-
     sum = 0;
+
     for (j = 5; j < 10; j++) {
         x = gSioChgCardSlots[j];
+
         if ((s16)x != 0x800) {
             sum = GetCardMooglePointValue(x) - (0 - sum);
         }
     }
+
     v = (s16)sum;
     digits[0] = v / 100;
     v = v % 100;
@@ -2982,6 +3128,7 @@ void SioChgCardHandleInput(void) {
             gSioChgCardWork->nextCursor = 10;
             gSioChgCardWork->cursor = 10;
         }
+
         gSioChgCardWork->x = gSioChgCardSlotPos[gSioChgCardWork->cursor].x;
         gSioChgCardWork->y = gSioChgCardSlotPos[gSioChgCardWork->cursor].y;
         v = gSioChgCardSlotPos[gSioChgCardWork->cursor].owner;
@@ -3041,6 +3188,7 @@ void SioChgCardHandleInput(void) {
             gSioChgCardWork->nextCursor = 11;
             gSioChgCardWork->cursor = 11;
         }
+
         gSioChgCardWork->x = gSioChgCardSlotPos[gSioChgCardWork->cursor].x;
         gSioChgCardWork->y = gSioChgCardSlotPos[gSioChgCardWork->cursor].y;
         v = gSioChgCardSlotPos[gSioChgCardWork->cursor].owner;
@@ -3121,6 +3269,7 @@ s8 SioChgCardHasOwnCards(void) {
             }
         }
     }
+
     return 0;
 }
 
@@ -3132,6 +3281,7 @@ s8 SioChgCardSlotsEmpty(void) {
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -3141,7 +3291,6 @@ void SioChgCardShowInfo(void) {
     u16 nameId;
     CardDef* defs;
     CardDef* def;
-
     n = gSioChgCardSlots[gSioChgCardWork->cursor];
     defs = gCardDefs;
     def = &defs[n];
@@ -3163,7 +3312,6 @@ void SioChgCardHideInfo(void) {
 
 void SioChgCardCancelReady(void) {
     s8 v;
-
     gSioChgCardWork->ready = 0;
 
     if (gSioPlayerId == 0) {
@@ -3229,6 +3377,7 @@ void SioChgCardBackupCollection(void) {
     for (i = 0; i <= 0x3E6; i++) {
         gSioChgCardWork->collectionBackup[i] = gCardCollection[i];
     }
+
     gSioChgCardWork->obtainedCardKindsBackup = gGameState.progression.obtainedCardKinds;
 }
 
@@ -3238,6 +3387,7 @@ void SioChgCardRestoreCollection(void) {
     for (i = 0; i <= 0x3E6; i++) {
         gCardCollection[i] = gSioChgCardWork->collectionBackup[i];
     }
+
     gGameState.progression.obtainedCardKinds = gSioChgCardWork->obtainedCardKindsBackup;
 }
 
@@ -3248,6 +3398,7 @@ s16 SioChgCardReceiveCards(void) {
     if (gSioPlayerId == 0) {
         for (i = 5; i < 10; i++) {
             t = gSioChgCardSlots[i] != 0x800;
+
             if (t) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
                     return 0;
@@ -3257,6 +3408,7 @@ s16 SioChgCardReceiveCards(void) {
     } else {
         for (i = 0; i < 5; i++) {
             t = gSioChgCardSlots[i] != 0x800;
+
             if (t) {
                 if (AddCardToCollection(gSioChgCardSlots[i]) == -1) {
                     return 0;
@@ -3264,6 +3416,7 @@ s16 SioChgCardReceiveCards(void) {
             }
         }
     }
+
     return 1;
 }
 
@@ -3312,6 +3465,7 @@ void mode_sioError_0(s32 arg) {
 #ifdef VERSION_EU
     LoadBgPalette(0, gCard00Palette, 32);
     LoadBgTiles(0, gUnk_0950E2F8, 0x140);
+
     if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_SPANISH) {
         LoadBgMap(0, gUnkEu_096C798C, 0x800);
         SetBgScroll(0, 0xFFE9, 0xFFCD);

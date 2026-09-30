@@ -18,6 +18,7 @@ void BosJfMajinSetBgFrame(u8 a, u16 b, JfMajinWork* work) {
     LoadBgTiles(1, gBosJfMajinFrameTiles[a], b * 32);
     work->jf->flags &= ~JF_FLAG_NEEDS_BG_CLIP;
 }
+
 void BosJfMajinCopyBgMap(u8 a, JfMajinWork* work) {
     s16 n;
 
@@ -34,6 +35,7 @@ void BosJfMajinCopyBgMap(u8 a, JfMajinWork* work) {
         }
     }
 }
+
 void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
     s16 n;
 
@@ -56,7 +58,6 @@ void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
     (out_y) = (actor)->y; \
     (out_z) = (actor)->z; \
 } while (0)
-
 void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     JfWork* arg = p;
     s32 x;
@@ -114,7 +115,6 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
 }
 
 #undef GET_ACTOR_POSITION
-
 u8 task_bos_jf_majin_1(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
@@ -220,6 +220,7 @@ void task_bos_jf_majin_3(JfMajinWork* work) {
     ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
+
 s32 BosJfGetActorPillar(void) {
     s32 v = gBtlWork->actor->x;
 
@@ -359,6 +360,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             if (work->stepTimer == 21) {
                 jf->body.flags |= BTLOBJ_FLAG_UNHITTABLE;
             }
+
             break;
         case 1:
             work->stepTimer++;
@@ -381,6 +383,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
                 m4aSongNumStart(SONG_BTL_JF_UP);
                 work->step++;
             }
+
             break;
         case 2:
             if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
@@ -415,6 +418,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             if (work->stepTimer == 22) {
                 jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
             }
+
             break;
         default:
             work->jf->stateStep = 0;
@@ -423,6 +427,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
         }
     }
 }
+
 void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
@@ -477,6 +482,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             if (work->stepTimer == 23) {
                 jf->body.flags |= BTLOBJ_FLAG_UNHITTABLE;
             }
+
             break;
         case 1:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -504,6 +510,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         case 3:
             if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
@@ -532,6 +539,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
                 work->moveSteps = 10;
                 work->step++;
             }
+
             break;
         case 5:
             if (work->moveSteps > 0) {
@@ -540,6 +548,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         default:
             ClearBtlObjActionFlags(q);
@@ -549,6 +558,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
         }
     }
 }
+
 void BosJfMajinUpdateSlam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
@@ -597,6 +607,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         case 1:
             work->stepTimer++;
@@ -606,6 +617,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
                 work->extraClipRows = 1;
                 work->step++;
             }
+
             break;
         case 2:
             jf->body.z += 0xA00;
@@ -668,6 +680,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         default:
             ClearBtlObjActionFlags(q);
@@ -677,6 +690,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
         }
     }
 }
+
 void BosJfMajinUpdateBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
@@ -711,6 +725,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         case 1:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -728,6 +743,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
                 work->moveSteps = 2;
                 work->step++;
             }
+
             break;
         case 2:
             if (work->moveSteps > 0) {
@@ -737,6 +753,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
                 work->step++;
                 work->moveSteps = 0;
             }
+
             break;
         case 3:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -786,6 +803,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         default:
             ClearBtlObjActionFlags(q);
@@ -795,6 +813,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
         }
     }
 }
+
 void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
@@ -834,6 +853,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         case 1:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -851,6 +871,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
                 work->moveSteps = 2;
                 work->step++;
             }
+
             break;
         case 2:
             if (work->moveSteps > 0) {
@@ -860,6 +881,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
                 work->step++;
                 work->moveSteps = 0;
             }
+
             break;
         case 3:
             if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -926,6 +948,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             } else {
                 work->stepTimer++;
             }
+
             break;
         case 5:
             if (work->moveSteps > 0) {
@@ -936,6 +959,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             } else {
                 work->step++;
             }
+
             break;
         default:
             ClearBtlObjActionFlags(q);
@@ -948,6 +972,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
 
 void func_080BFDD4(JfMajinWork* work) {
 }
+
 void BosJfMajinUpdateBreak(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
@@ -1064,6 +1089,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         } else {
             work->moveSteps++;
         }
+
         break;
     case 1:
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
@@ -1090,6 +1116,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
             BgFxStartBossDeathFlash();
             work->step++;
         }
+
         break;
     case 3:
         if (BgFxIsActive() == 0) {
@@ -1122,6 +1149,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         } else {
             BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
         }
+
         break;
     default:
         EndBossDefeat();
@@ -1230,6 +1258,7 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
             m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
             work->jf->stateStep++;
         }
+
         break;
     default:
         work->stepTimer++;
@@ -1284,6 +1313,7 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
             gBosJfRightPillarLevel = work->rightLevel;
             BosJfDrawPillars();
         }
+
         break;
     }
 }
@@ -1352,6 +1382,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                     RequestEnemyCardUse(s);
                     work->jf->attackState = 2;
                 }
+
                 break;
             case 1:
                 RequestEnemyCardUse(s);
@@ -1364,6 +1395,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                     RequestEnemyCardUse(s);
                     work->jf->attackState = 2;
                 }
+
                 break;
             }
         }
@@ -1391,6 +1423,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                     RequestEnemyCardUse(s);
                     work->jf->attackState = 4;
                 }
+
                 break;
             case 1:
                 if (GetRandom() % 100 <= 79) {
@@ -1400,6 +1433,7 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                     RequestEnemyCardUse(s);
                     work->jf->attackState = 4;
                 }
+
                 break;
             case 2:
                 if (GetRandom() % 100 <= 69) {
@@ -1408,11 +1442,13 @@ void BosJfMajinChooseAttack(JfMajinWork* work) {
                     RequestEnemyCardUse(s);
                     work->jf->attackState = 2;
                 }
+
                 break;
             }
         }
     }
 }
+
 void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->jf = arg;
     work->body.x = arg->body.x;
@@ -1462,6 +1498,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->body);
 }
+
 u8 task_bos_jf_rock_1(JfRockWork* work) {
     JfWork* jf = work->jf;
     BtlObj* b;
@@ -1542,6 +1579,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->riseSteps = 0;
             work->state = 5;
         }
+
         break;
     case 1:
         work->paletteTimer++;
@@ -1585,6 +1623,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
             work->riseSteps = 0;
             work->state = 5;
         }
+
         break;
     case 2:
         work->paletteTimer++;
@@ -1652,6 +1691,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->gfx = AnimUpdate(&work->anim);
             }
         }
+
         break;
     case 3:
         if (AnimIsFinished(&work->anim)) {
@@ -1883,6 +1923,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         } else {
             work->offsetX = 0x500;
         }
+
         break;
     case 3:
         if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1890,6 +1931,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         } else {
             work->offsetX = 0x100;
         }
+
         break;
     case 4:
     case 5:
@@ -1898,6 +1940,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         } else {
             work->offsetX = -0x1000;
         }
+
         break;
     case 1:
     case 2:
@@ -1915,6 +1958,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         } else {
             work->offsetX = 0x500;
         }
+
         break;
     }
 
@@ -2013,6 +2057,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         btl->bossZ = w->body[0].z;
     }
 }
+
 u8 task_bos_dsd_1(DsdWork* work) {
     BtlWork* q;
     BtlObj* a = work->body;

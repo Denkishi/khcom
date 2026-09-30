@@ -11,6 +11,7 @@ typedef struct KeyState {
     u8 on[10];
     u8 off[10];
 } KeyState;
+
 u16 KeyGetHeld(KeyState* k);
 u16 KeyGetPressed(KeyState* k);
 u16 KeyGetRepeat(KeyState* k);

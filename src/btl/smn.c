@@ -191,9 +191,12 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     s32 targetZ;
     s32 pixelX;
     owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+
     if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
+
     if (work->state == 4) BtlMapFollowPosition(body->x, body->y, body->z + 0x2000);
     else BtlMapFollowPosition(body->x, body->y, body->z);
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
@@ -201,10 +204,13 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
+
         ApproachValue(&work->scaleX, 256, work->steps);
         work->scaleY = work->scaleX;
+
         if (work->steps <= 0) {
             work->stateTimer = 0;
+
             switch (work->variant) {
             case 0:
                 work->state = 2;
@@ -226,6 +232,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             work->stateTimer++;
             work->steps--;
         }
+
         break;
     case 5:
         if (work->stateTimer == 0) {
@@ -233,31 +240,40 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
+
         ApproachValue(&work->scaleX, 25, work->steps);
         work->scaleY = work->scaleX;
+
         if (work->steps <= 0) return 0;
+
         work->stateTimer++;
         work->steps--;
         break;
     case 6:
         if (work->stateTimer == 0) work->steps = 8;
+
         ApproachValue(&work->scaleX, 10, work->steps);
         ApproachValue(&work->scaleY, 512, work->steps);
+
         if (--work->steps <= 0) {
             work->state = 7;
             work->stateTimer = 0;
             m4aSongNumStart(SONG_EF_TELEP);
         } else work->stateTimer++;
+
         break;
     case 7: {
         BtlObj* target;
+
         if (work->stateTimer == 0) {
             target = SmnCloudPickTeleportTarget(work);
             work->steps = 8;
+
             if (target != NULL) {
                 body->y = target->y;
                 body->z = target->groundZ;
                 body->groundZ = target->groundZ;
+
                 if (target->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     body->x = target->x + 0x2000;
                     body->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -267,13 +283,16 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 }
             }
         }
+
         ApproachValue(&work->scaleX, 256, work->steps);
         ApproachValue(&work->scaleY, 256, work->steps);
+
         if (--work->steps <= 0) {
             work->animating = 1;
             work->state = 1;
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     }
     case 1:
@@ -287,6 +306,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             work->stateTimer = 0;
             break;
         }
+
         if (work->anim.timer == 0) {
             if ((s16)work->unk_160 == 0) {
                 switch (AnimGetFrame(&work->anim)) {
@@ -297,12 +317,14 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
+
                     break;
                 case 7:
                     SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
@@ -315,15 +337,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     MakeOpponentsHittable();
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
+
                     break;
                 case 1:
                     SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
@@ -333,15 +358,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     break;
                 case 5:
                     MakeOpponentsHittable();
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 50);
+
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 512, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
+
                     break;
                 case 6:
                     SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
@@ -349,6 +377,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 }
             }
         }
+
         work->stateTimer++;
         break;
     case 2:
@@ -362,6 +391,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             work->stateTimer = 0;
             break;
         }
+
         if (work->anim.timer == 0) {
             if ((s16)work->unk_160 == 0) {
                 switch (AnimGetFrame(&work->anim)) {
@@ -372,12 +402,14 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
+
                     break;
                 case 7:
                     SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
@@ -390,15 +422,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     MakeOpponentsHittable();
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
+
                     break;
                 case 1:
                     SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
@@ -406,6 +441,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 }
             }
         }
+
         work->stateTimer++;
         break;
     case 3:
@@ -413,35 +449,46 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->speed = 0;
         }
+
         if (body->flags & BTLOBJ_FLAG_FACING_LEFT) pixelX = gBtlWork->xMin + 50;
         else pixelX = gBtlWork->xMax - 50;
+
         x = pixelX * 256;
         targetZ = -0xC800;
         body->x += (x - body->x) >> 4;
         dz = (targetZ - body->z) >> 3;
+
         if (dz > work->speed) dz = work->speed;
+
         if (dz < -work->speed) dz = -work->speed;
+
         body->z += dz;
         work->speed += 128;
+
         if ((body->z - targetZ >= 0 ? body->z - targetZ : targetZ - body->z) < 0x1000) {
             work->state = 4;
             work->stateTimer = 0;
         } else work->stateTimer++;
+
         break;
     case 4: {
         BtlObj* target;
+
         if (work->stateTimer == 0) {
             target = SmnCloudNextTarget(work);
             work->target = target;
+
             if (target == NULL) {
                 work->state = 5;
                 work->stateTimer = 0;
                 break;
             }
+
             work->targetX = target->x;
             work->targetY = target->y;
             work->targetZ = target->z - 0x1000;
             MakeOpponentsHittable();
+
             switch ((s16)work->attackCount) {
             case 0:
                 m4aSongNumStart(SONG_VO_KU_ATTACK00);
@@ -457,12 +504,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 5, 0, work->tiles);
                 break;
             }
+
             if (body->x < work->targetX) body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             else body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
+
         body->x += (work->targetX - body->x) >> 3;
         body->y += (work->targetY - body->y) >> 3;
         body->z += (work->targetZ - body->z) >> 3;
+
         if (work->anim.timer == 0) {
             switch ((s16)work->attackCount) {
             case 0:
@@ -472,40 +522,52 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             case 1:
                 if (AnimGetFrame(&work->anim) == 3) {
                     MakeOpponentsHittable();
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             case 2:
             default:
                 if (AnimGetFrame(&work->anim) == 3) {
                     MakeOpponentsHittable();
+
                     if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             }
         }
+
         if (work->stateTimer > 23 && AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
+
             if ((s16)++work->attackCount > 2) work->state = 5;
             else work->state = 3;
         } else work->stateTimer++;
+
         break;
     }
     }
+
     body->groundZ = 0;
     ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+
     if (body->z > body->groundZ) body->z = body->groundZ;
+
     if (work->animating != 0) AnimUpdate(&work->anim);
+
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
@@ -677,10 +739,12 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
         if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
+
             if (count > 9) {
                 break;
             }
         }
+
         p = ListPoolNext(&p->node);
     }
 
@@ -692,6 +756,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     work->targetIndex++;
     return p;
 }
+
 u8 task_smn_bambi_1(SmnBambiWork* work) {
     BtlObj* body;
     BtlWork* obj;
@@ -731,6 +796,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->stateTimer = 0;
             work->animating = 1;
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
@@ -796,6 +862,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             ClampBattlePosition(&body->x, &body->y, -16, 0);
             work->stateTimer++;
         }
+
         break;
     case 1:
         if (work->unk_14C == 0) {
@@ -849,6 +916,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->state = 3;
             work->stateTimer = 0;
         }
+
         break;
     }
 
@@ -1003,6 +1071,7 @@ void SmnTinkSpawnSparkle(SmnTinkWork* work) {
         TaskCreate(&work->tasks, &gTaskDescSmnTinkeff, &work->body);
     }
 }
+
 u8 task_smn_tink_1(SmnTinkWork* work) {
     BtlObj* body;
     BtlObj* p;
@@ -1013,6 +1082,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     s32 t;
 
     body = &work->body;
+
     if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
@@ -1047,6 +1117,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             work->stateTimer++;
             work->steps--;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -1089,6 +1160,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 3:
         SmnTinkSpawnSparkle(work);
@@ -1148,6 +1220,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 4:
         SmnTinkSpawnSparkle(work);
@@ -1178,6 +1251,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -1374,6 +1448,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             work->stateTimer = 0;
             work->animating = 1;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
@@ -1401,6 +1476,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 SetBattleZoom(30, 0x133, body->x + 0x1400,
                               body->y + body->z - 0x1400);
             }
+
             break;
         case 50:
             switch (work->variant) {
@@ -1435,6 +1511,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                     ApplyAttackBox(0x99, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
+
                 break;
             case 1:
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1444,6 +1521,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                     ApplyAttackBox(0x9A, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
+
                 break;
             case 2:
             default:
@@ -1454,8 +1532,10 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                     ApplyAttackBox(0x9B, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
+
                 break;
             }
+
             break;
         }
 
@@ -1466,6 +1546,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -1636,6 +1717,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             work->stateTimer = 0;
             work->animating = 1;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -1660,6 +1742,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             work->state = 2;
             work->stateTimer = 0;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
@@ -1726,6 +1809,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -1862,6 +1946,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
             work->stateTimer = 0;
             work->animating = 1;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -1890,6 +1975,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
@@ -1924,6 +2010,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -2079,10 +2166,12 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
         if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
+
             if (count > 9) {
                 break;
             }
         }
+
         p = ListPoolNext(&p->node);
     }
 
@@ -2155,22 +2244,28 @@ void SmnGenieFollowTarget(SmnGenieWork* work) {
     body->y += v;
     body->z += (zt - gSineTable[(work->stateTimer * 2) & 0xFF] * 8 - body->z) >> 3;
 }
+
 u8 task_smn_genie_1(SmnGenieWork* work) {
     BtlObj* body = &work->body;
     s32 height;
     s32 x;
     s32 y;
     s32 z;
+
     if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
+
     BtlMapFollowPosition(body->x, body->y, body->z);
+
     if (gBtlWork->boundsCallback != NULL) {
         gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &body->groundZ);
+
         if (body->z > body->groundZ) {
             body->z = body->groundZ;
         }
     }
+
     switch (work->state) {
     case 0:
         if ((s16)work->stateTimer == 0) {
@@ -2178,7 +2273,9 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
+
         ApproachValue(&work->scale, 256, work->steps);
+
         if (work->steps <= 0) {
             work->state = 2;
             work->stateTimer = 0;
@@ -2187,6 +2284,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             work->stateTimer++;
             work->steps--;
         }
+
         break;
     case 1:
         if ((s16)work->stateTimer == 0) {
@@ -2195,10 +2293,13 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
+
         ApproachValue(&work->scale, 25, work->steps);
+
         if (work->steps <= 0) {
             return 0;
         }
+
         work->stateTimer++;
         work->steps--;
         break;
@@ -2207,10 +2308,13 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         }
+
         height = ((u32)gSineTable[(work->stateTimer * 2) & 255] << 3) + 0xC00;
         body->z += (body->groundZ - height - body->z) >> 3;
+
         if ((s16)work->stateTimer > 10) {
             work->target = SmnGenieNextTarget(work);
+
             if (work->target == NULL || work->attacksLeft-- <= 0) {
                 work->state = 1;
                 work->stateTimer = 0;
@@ -2221,12 +2325,15 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 3:
         AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         SmnGenieFollowTarget(work);
+
         if ((s16)work->stateTimer > 40) {
             work->fired = 0;
+
             switch ((u16)(GetRandom() % 3)) {
             case 0:
                 work->state = 4;
@@ -2239,19 +2346,23 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 work->state = 6;
                 break;
             }
+
             gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 4:
         if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK00);
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
+
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
+
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
                 if (work->target != NULL) {
                     x = work->target->x;
@@ -2263,33 +2374,40 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     } else {
                         x = body->x + 0x5000;
                     }
+
                     y = body->y;
                     z = 0;
                 }
+
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartThunder(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 } else {
                     BgFxStartThunder(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 }
+
                 work->fired = 1;
             }
         } else {
             BgAnimIsStopped();
         }
+
         if (work->fired != 0 && !BgFxIsActive()) {
             work->state = 2;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 5:
         if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK01);
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
+
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
+
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
                 if (work->target != NULL) {
                     x = work->target->x;
@@ -2301,20 +2419,24 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     } else {
                         x = body->x + 0x5000;
                     }
+
                     y = body->y;
                     z = 0;
                 }
+
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartGravity(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
                 } else {
                     BgFxStartGravity(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
                 }
+
                 work->fired = 1;
                 FadeStartOut(FADE_MODE_GRAY, 8);
             }
         } else {
             BgAnimIsStopped();
         }
+
         if (work->fired != 0 && !BgFxIsActive()) {
             FadeStartIn(FADE_MODE_GRAY, 8);
             work->state = 2;
@@ -2322,14 +2444,17 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 6:
         if ((s16)work->stateTimer == 0) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
             m4aSongNumStart(SONG_VO_GE_ATTACK02);
         }
+
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
+
             if (AnimIsFinished(&work->anim)) {
                 if (work->target != NULL) {
                     x = work->target->x;
@@ -2341,25 +2466,32 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     } else {
                         x = body->x + 0x5000;
                     }
+
                     y = body->y;
                     z = -0x1000;
                 }
+
                 BgFxStartStop(1, x, y, z, 147);
                 work->fired = 1;
             }
         }
+
         if (work->fired != 0 && !BgFxIsActive()) {
             work->state = 2;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     }
+
     ClampBattlePosition(&body->x, &body->y, 0, -10);
+
     if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
+
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
@@ -2479,10 +2611,13 @@ u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
     BtlWork* obj;
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+
     if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
+
     BtlMapFollowPosition(body->x, body->y, body->z);
+
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
@@ -2490,7 +2625,9 @@ u8 task_smn_king_1(SmnKingWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
+
         ApproachValue(&work->scale, 256, work->steps);
+
         if (work->steps <= 0) {
             work->state = 2;
             work->stateTimer = 0;
@@ -2499,6 +2636,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
             work->stateTimer++;
             work->steps--;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -2506,27 +2644,34 @@ u8 task_smn_king_1(SmnKingWork* work) {
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
+
         ApproachValue(&work->scale, 25, work->steps);
+
         if (work->steps <= 0) {
             return 0;
         }
+
         work->stateTimer++;
         work->steps--;
         break;
     case 2:
         AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 1, 0, work->tiles);
+
         if (SmnKingApplyGravity(work)) {
             work->state = 4;
             work->stateTimer = 0;
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
+
         break;
     case 4:
         AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 2, 0, work->tiles);
+
         if (AnimGetFrame(&work->anim) == 5 && work->anim.timer == 3) {
             BgFxStartFlash(body->x, body->y, body->z - 0x1300);
             ApplyAttackBox(3, body->x, body->y, body->z, 256, 256, 256);
             m4aSongNumStart(SONG_EF_TLIMIT01);
+
             switch (work->variant) {
             case 0:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp / 5;
@@ -2542,19 +2687,25 @@ u8 task_smn_king_1(SmnKingWork* work) {
                 func_0807629C();
                 break;
             }
+
             CreateBtlPopTask(gBtlWork->actor, 10);
+
             if (gBtlWork->actor->hp > gBtlWork->actor->maxHp) {
                 gBtlWork->actor->hp = gBtlWork->actor->maxHp;
             }
         }
+
         ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+
         if (AnimIsFinished(&work->anim)) {
             work->state = 5;
             work->stateTimer = 0;
         }
+
         break;
     case 5:
         ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+
         if (work->stateTimer > 60) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             work->state = 1;
@@ -2562,14 +2713,18 @@ u8 task_smn_king_1(SmnKingWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
+
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
     }
+
     if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
+
     TaskPoolUpdate(&work->tasks);
     return 1;
 }

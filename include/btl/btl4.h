@@ -2,11 +2,8 @@
 #define GUARD_BTL4_H
 
 #include "battle_localized_data.h"
-
 #include "display.h"
-
 #include "card_api.h"
-
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "types.h"

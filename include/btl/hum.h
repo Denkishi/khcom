@@ -3,17 +3,12 @@
 
 #include "task_descriptors.h"
 #include "jiminy_records_data.h"
-
 #include "hum_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "ms_api.h"
-
 #include "pallet.h"
 #include "save_api.h"
-
 #include "m4a_song.h"
 #include "text.h"
 #include "btl_effect.h"

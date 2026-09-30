@@ -29,10 +29,13 @@ s32 MovieStart(void* a) {
     u32 channels;
 
     gMoviePlayer = MovieOpen(a);
+
     if (gMoviePlayer == NULL) {
         return 0;
     }
+
     channels = MovieGetChannels(gMoviePlayer);
+
     if (channels != 0) {
         SndStreamInit(MovieGetSampleRate(gMoviePlayer), channels);
 
@@ -52,6 +55,7 @@ s32 MovieStart(void* a) {
             }
         }
     }
+
     return 1;
 }
 
@@ -78,6 +82,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     MovieAdvanceFrame(gMoviePlayer);
     SndStreamStart();
     channels = MovieGetChannels(gMoviePlayer);
+
     if (channels != 0) {
         ok = 1;
     } else {
@@ -87,6 +92,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     while (1) {
         while (MovieSyncFrame(gMoviePlayer) == 0) {
         }
+
         MovieDrawFrame(gMoviePlayer, (u16*)0x06000000 + (y * 240 + x));
 
         if (MovieAdvanceFrame(gMoviePlayer) == 0) {
@@ -125,6 +131,7 @@ void MovieClose(void) {
     if (MovieGetChannels(gMoviePlayer)) {
         SndStreamClose();
     }
+
     MovieFree(gMoviePlayer);
 }
 
@@ -151,11 +158,13 @@ u8* MovieGetTicks(void) {
 
     REG_IME = 0;
     vc = REG_VCOUNT;
+
     if (vc > 159) {
         t = gMovieHeap.ticks + (vc - MOVIE_TICKS_PER_FRAME);
     } else {
         t = gMovieHeap.ticks + vc;
     }
+
     REG_IME = 1;
     return t;
 }

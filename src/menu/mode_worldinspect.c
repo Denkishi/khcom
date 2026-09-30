@@ -259,9 +259,11 @@ void WorldInspectSetTilemapRectPalette(u8 pal, u16 w, s16 h, u16* map, s16 x, s1
             *map = (*map & 0xFFF) | v;
             map++;
         }
+
         map += 32 - n;
     }
 }
+
 void WorldInspectCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, s16 dx, s16 dy) {
     s16 i;
     s16 j;
@@ -275,10 +277,12 @@ void WorldInspectCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* ds
         for (i = 0; i < n; i++) {
             *dst++ = *src++;
         }
+
         src += 32 - n;
         dst += 32 - n;
     }
 }
+
 u8 WorldInspectLoadName(s16 id) {
 #ifdef VERSION_EU
     u8 ret = 0;
@@ -286,6 +290,7 @@ u8 WorldInspectLoadName(s16 id) {
     if (id != 0) {
         ret = LoadTextSlots(eu_0805E924(sWorldinspectMsgs[id].text), sWorldInspectNameText);
     }
+
     return ret;
 #else
     if (id == 0) {
@@ -295,6 +300,7 @@ u8 WorldInspectLoadName(s16 id) {
     return LoadTextSlots(sWorldinspectMsgs[id].text, sWorldInspectNameText);
 #endif
 }
+
 u8 WorldInspectLoadDesc(s16 id) {
     CardDescriptionText** tbl;
     CardDescriptionText** p;
@@ -310,6 +316,7 @@ u8 WorldInspectLoadDesc(s16 id) {
         }
 
         p = &tbl[i];
+
 #ifdef VERSION_EU
         {
             u8** langs = (*p)->strings;
@@ -336,6 +343,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         } else {
             src = gUnk_09A02EFC;
         }
+
 #ifdef VERSION_EU
         break;
     case LANGUAGE_FRENCH:
@@ -344,6 +352,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         } else {
             src = gUnkEu_09A34400;
         }
+
         break;
     case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
@@ -351,6 +360,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         } else {
             src = gUnkEu_09A35200;
         }
+
         break;
     case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
@@ -358,6 +368,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         } else {
             src = gUnkEu_09A38C00;
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -366,6 +377,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         } else {
             src = gUnkEu_09A39A00;
         }
+
         break;
     }
 #endif
@@ -378,6 +390,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
 
     RequestDma3Copy(src, (u8*)GetBgCharBase(0) + 32, 0x100);
 }
+
 s32 WorldInspectReadMenuKeys(void) {
     s32 keys;
 
@@ -385,6 +398,7 @@ s32 WorldInspectReadMenuKeys(void) {
     keys |= GetKeysRepeat() & (DPAD_ANY | L_BUTTON | R_BUTTON);
     return keys;
 }
+
 void WorldInspectHandleInput(void) {
     u16 keys;
     s16 old;
@@ -515,6 +529,7 @@ void WorldInspectHandleInput(void) {
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
+
 void WorldInspectHandleDetailInput(void) {
     u16 keys;
     s32 i;
@@ -566,6 +581,7 @@ void WorldInspectHandleDetailInput(void) {
         }
     }
 }
+
 void WorldInspectDraw(void) {
     s32 i;
     u16 prio;
@@ -602,7 +618,6 @@ void WorldInspectDraw(void) {
         third = gUnkEu_099A5A8C;
         break;
     }
-
 #endif
 
 #ifdef VERSION_EU
@@ -773,6 +788,7 @@ void mode_worldinspect_0(void) {
     }
 
     LoadBgTiles(0, gUnk_099FB53C, 0x6BC0);
+
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
@@ -878,6 +894,7 @@ void mode_worldinspect_0(void) {
     InitTextSlots(sWorldInspectDescText, 0x3C);
 #endif
     sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 0x20);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -917,14 +934,17 @@ void mode_worldinspect_1(void) {
         ApproachValue(&sWorldInspectBarY[0], 0, sWorldInspectSteps);
         ApproachValue(&sWorldInspectBarY[1], 0x9800, sWorldInspectSteps);
         sWorldInspectSteps--;
+
         if (sWorldInspectSteps <= 0) {
             sWorldInspectSteps = 16;
             sWorldInspectState = 1;
         }
+
         break;
     case 1:
         ApproachValue(&sWorldInspectBarX, 0, sWorldInspectSteps);
         sWorldInspectSteps--;
+
         if (sWorldInspectSteps <= 0) {
 #ifdef VERSION_EU
             LoadBgMap(0, gUnk_09A329DC, 0x500);
@@ -934,6 +954,7 @@ void mode_worldinspect_1(void) {
 #endif
             sWorldInspectState = 2;
         }
+
         break;
     case 2:
         switch (sWorldInspectDetailOpen) {
@@ -944,28 +965,34 @@ void mode_worldinspect_1(void) {
             WorldInspectHandleDetailInput();
             break;
         }
+
         break;
     case 3:
         ApproachValue(&sWorldInspectBarX, -0x8000, sWorldInspectSteps);
         sWorldInspectSteps--;
+
         if (sWorldInspectSteps <= 0) {
             sWorldInspectSteps = 16;
             sWorldInspectState = 4;
         }
+
         break;
     case 4:
         ApproachValue(&sWorldInspectBarY[0], -0x800, sWorldInspectSteps);
         ApproachValue(&sWorldInspectBarY[1], 0xA800, sWorldInspectSteps);
         sWorldInspectSteps--;
+
         if (sWorldInspectSteps <= 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             sWorldInspectState = 5;
         }
+
         break;
     case 5:
         if (!FadeIsActive()) {
             ReturnToMap(sWorldInspectReturnToMenu);
         }
+
         break;
     }
 

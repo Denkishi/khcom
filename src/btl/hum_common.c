@@ -159,6 +159,7 @@ s32 _0800E434(HumWork* work) {
             work->stateTimer = 0;
             actor->vx = actor->vy = 0;
         }
+
         break;
     }
 
@@ -172,7 +173,6 @@ void HumSubUpdateAnimation(HumSub* sub) {
         }
     }
 }
-
 
 s32 HumUpdate(HumWork* work) {
     BtlObj* actor = &work->actor;
@@ -188,11 +188,13 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
         }
+
         if (work->stateTimer > 10) {
             ClearBtlObjActionFlags(actor);
             work->state = 2;
@@ -211,16 +213,19 @@ s32 HumUpdate(HumWork* work) {
                     }
                 }
             }
+
             HumChooseCardAction(work, 3, 64, 64, 32);
         } else {
             work->stateTimer++;
         }
+
         break;
     case 2:
         if (AnimIsFinished(&work->anim)) {
             work->state = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 14:
         if (work->stateTimer == 0) {
@@ -234,6 +239,7 @@ s32 HumUpdate(HumWork* work) {
             actor->vy = 0;
             work->steps = 10;
         }
+
         ApproachValue(&work->scaleY, 64, work->steps--);
 
         if (work->steps > 0) {
@@ -242,6 +248,7 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer = 0;
             work->state = 15;
         }
+
         break;
     case 15:
         if (work->stateTimer > 44) {
@@ -250,16 +257,19 @@ s32 HumUpdate(HumWork* work) {
             } else {
                 work->state = 16;
             }
+
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 16:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 0);
             work->steps = 10;
         }
+
         ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
 
         if (work->steps <= 0) {
@@ -270,24 +280,29 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 11:
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             work->stateTimer++;
         }
+
         if (AnimIsFinished(&work->anim)) {
             actor->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
             actor->flags &= ~BTLOBJ_FLAG_HURT;
         }
+
         if (GetRandom() % 3 == 0) {
             actor->badStatusTimer -= 6;
         }
+
         if (actor->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(actor);
             work->state = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 9:
         if (AnimIsFinished(&work->anim) && work->stateTimer > 60) {
@@ -297,6 +312,7 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 10:
         if (work->stateTimer == 0) {
@@ -305,25 +321,30 @@ s32 HumUpdate(HumWork* work) {
             actor->vx = 0;
             actor->vy = 0;
         }
+
         work->vz = 0;
 
         if (work->stateTimer == 40) {
             CreateBtlPopTask(actor, 10);
             actor->hp -= actor->damage;
+
             if (actor->hp > actor->maxHp) {
                 actor->hp = actor->maxHp;
             }
+
             ClearBtlObjActionFlags(actor);
             work->state = 0;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 18:
         if (work->stateTimer == 23) {
             BgFxStartPotion(actor->x, actor->y, actor->z - ((actor->height - 48) << 8));
         }
+
         if (work->stateTimer > 23 && BgFxIsActive() == 0) {
             switch (work->itemIndex) {
             case 0:
@@ -348,18 +369,21 @@ s32 HumUpdate(HumWork* work) {
                 RequestRikuMegalixir();
                 break;
             }
+
             ClearBtlObjActionFlags(actor);
             work->state = 0;
             work->stateTimer = 0;
         } else {
             work->stateTimer++;
         }
+
         break;
     case 13:
         if (actor->badStatus != BAD_STATUS_STOP) {
             work->state = 0;
             ClearBtlObjActionFlags(actor);
         }
+
         break;
     case 3:
         if (work->stateTimer == 0) {
@@ -368,8 +392,10 @@ s32 HumUpdate(HumWork* work) {
             if (!(work->flags & HUM_FLAG_BOSS_DEATH)) {
                 m4aSongNumStart(SONG_BTL_GF_LOOP);
             }
+
             SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
         }
+
         if (FadeIsActive() == 0) {
             work->stateTimer = 0;
 
@@ -382,12 +408,14 @@ s32 HumUpdate(HumWork* work) {
             BtlMapFollowPosition(actor->x, actor->y, actor->z);
             work->stateTimer++;
         }
+
         break;
     case 4:
         if (work->stateTimer == 0) {
             BgFxStartHumDefeat(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
+
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
         work->vz = 0;
 
@@ -397,6 +425,7 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 5:
         if (work->stateTimer == 0) {
@@ -416,12 +445,14 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 6:
         if (work->stateTimer == 0) {
             BgFxStartBossDeath(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
+
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
         work->vz = 0;
 
@@ -432,6 +463,7 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 7:
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
@@ -450,6 +482,7 @@ s32 HumUpdate(HumWork* work) {
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg2);
             return 0;
         }
+
         work->stateTimer++;
         break;
     case 0:
@@ -459,6 +492,7 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer = 0;
             work->state = 17;
         }
+
         break;
     case 17:
         SetRikuReloadCharging();
@@ -469,6 +503,7 @@ s32 HumUpdate(HumWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -480,6 +515,7 @@ s32 HumUpdate(HumWork* work) {
             actor->z = 0;
             work->vz = 0;
         }
+
         if (actor->collider.colliding != 0 && !(work->flags & HUM_FLAG_PASS_THROUGH) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
@@ -489,12 +525,14 @@ s32 HumUpdate(HumWork* work) {
     if (actor->vx > 0) {
         actor->x += actor->vx;
         actor->vx -= 17;
+
         if (actor->vx < 0) {
             actor->vx = 0;
         }
     } else if (actor->vx < 0) {
         actor->x += actor->vx;
         actor->vx += 17;
+
         if (actor->vx > 0) {
             actor->vx = 0;
         }
@@ -503,12 +541,14 @@ s32 HumUpdate(HumWork* work) {
     if (actor->vy > 0) {
         actor->y += actor->vy;
         actor->vy -= 17;
+
         if (actor->vy < 0) {
             actor->vy = 0;
         }
     } else if (actor->vy < 0) {
         actor->y += actor->vy;
         actor->vy += 17;
+
         if (actor->vy > 0) {
             actor->vy = 0;
         }

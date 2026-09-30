@@ -2,9 +2,7 @@
 #define GUARD_TITLE_H
 
 #include "registration_data.h"
-
 #include "obj.h"
-
 #include "title_api.h"
 #include "pallet.h"
 #include "m4a_song.h"

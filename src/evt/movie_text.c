@@ -15,6 +15,7 @@ s16 GetCenteredTextX(u16* widths, u16 count) {
     if (total / 2 > 120) {
         total = 240;
     }
+
     return 120 - total / 2;
 }
 #endif
@@ -27,6 +28,7 @@ u16 CountNonSpaceChars(TextChar* str) {
 #endif
 
     i = 0;
+
 #ifndef VERSION_JP
     n = 0;
 #endif
@@ -38,6 +40,7 @@ u16 CountNonSpaceChars(TextChar* str) {
         }
 #else
         c = str[i];
+
         if (c == 0) {
             return n;
         }
@@ -46,6 +49,7 @@ u16 CountNonSpaceChars(TextChar* str) {
             n++;
         }
 #endif
+
         i++;
     }
 }

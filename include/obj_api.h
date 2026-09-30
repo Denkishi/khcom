@@ -2,7 +2,6 @@
 #define GUARD_OBJ_API_H
 
 #include "obj.h"
-
 #include "types.h"
 
 struct ObjTiles;

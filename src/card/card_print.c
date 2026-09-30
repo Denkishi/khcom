@@ -43,15 +43,19 @@ static SioBattleWork* sSioBattleWork;
 void task_print_0(void) {
     InitPrintLayer(0);
 }
+
 s32 task_print_1(void) {
     return 1;
 }
+
 void task_print_2(void) {
     ResetPrintLines();
 }
+
 void task_print_3(void) {
     FreePrintLayer();
 }
+
 void mode_sio_battle_0(s32 a) {
     SioBattleWork* w;
     void* gfx;
@@ -267,6 +271,7 @@ void mode_sio_battle_1(void) {
             sSioBattleWork->state = 1;
             sSioBattleWork->stateFrames = 0;
         }
+
         break;
     case 1:
         if ((s16)sSioBattleWork->stateFrames == 0) {
@@ -282,6 +287,7 @@ void mode_sio_battle_1(void) {
             sSioBattleWork->state = 5;
             sSioBattleWork->stateFrames = 0;
         }
+
         break;
     case 5:
         sSioBattleWork->state = 6;
@@ -357,6 +363,7 @@ void mode_sio_battle_1(void) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sSioBattleWork->state = 2;
         }
+
         break;
     case 2:
         if ((s16)sSioBattleWork->stateFrames == 0) {
@@ -372,6 +379,7 @@ void mode_sio_battle_1(void) {
             sSioBattleWork->state = 3;
             sSioBattleWork->stateFrames = 0;
         }
+
         break;
     case 3:
         if ((s16)sSioBattleWork->stateFrames == 0) {
@@ -388,6 +396,7 @@ void mode_sio_battle_1(void) {
             ModeRequest(&gModeTitle, 0);
             return;
         }
+
         break;
     }
 

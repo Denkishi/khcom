@@ -3,17 +3,11 @@
 
 #include "card_def_data.h"
 #include "registration_data.h"
-
 #include "card_description_data.h"
-
 #include "obj.h"
-
 #include "card_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
-
 #include "text.h"
 #include "obj_api.h"
 #include "display.h"

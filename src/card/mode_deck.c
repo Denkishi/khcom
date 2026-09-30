@@ -62,6 +62,7 @@ void Mode_Deck_1(void) {
 void Mode_Deck_2(void) {
     TaskPoolDestroy(&sModeDeckTasks);
 }
+
 void menu_0(MenuWork* w) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;

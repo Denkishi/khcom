@@ -52,6 +52,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 #endif
     w->amount = a->amount;
     w->active = a->done;
+
     if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A09A), w->textSlots);
@@ -77,7 +78,9 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
         w->textSlotCount = LoadTextSlots(gUnk_0815A152, w->textSlots);
 #endif
     }
+
     w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
+
 #ifdef VERSION_EU
     if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == LANGUAGE_SPANISH) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), w->textSlots3);
@@ -118,6 +121,7 @@ s32 Lvup_msg_1(LvupMsgWork* w, void* a) {
     w->unk_2B1++;
     return 1;
 }
+
 u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a) {
     s8* counter = &w->slideSteps;
 
@@ -135,8 +139,10 @@ u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a) {
     if (*w->active == 0) {
         return 0;
     }
+
     return 1;
 }
+
 void Lvup_msg_2(LvupMsgWork* w) {
 #ifdef VERSION_JP
     w->x2 = w->x + w->textSlotCount * 0xA00;
@@ -189,6 +195,7 @@ void Lvup_msg_2(LvupMsgWork* w) {
                   w->textSlots4, w->textPalette, 40, w->textSlotCount4);
 #endif
 }
+
 void Lvup_msg_3(LvupMsgWork* w) {
     FreeTextSlots(w->textSlots, 20);
     FreeTextSlots(w->textSlots2, 20);

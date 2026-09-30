@@ -75,6 +75,7 @@ void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
     w->steps = 32;
     w->premium = 0;
 }
+
 u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* w, void* a) {
     s32 v;
     u8 (*fn)(PremireChanceCardWork*, void*);
@@ -173,6 +174,7 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
                    sPremireChanceCardPriorities[w->position] + 67);
     }
 }
+
 void PremireChanceCard_3(PremireChanceCardWork* w) {
     ReleasePremireChanceCardGfx(w);
 

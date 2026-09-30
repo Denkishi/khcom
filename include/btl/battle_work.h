@@ -4,7 +4,6 @@
 #include "types.h"
 #include "taskpool.h"
 #include "battle_bounds.h"
-
 #include "battle_actor_types.h"
 
 enum BtlFlag {
@@ -63,7 +62,6 @@ enum BtlFlag {
 #define BTL_FLAG_DARK_MODE_CHANGED       0x80000000000000
 #define BTL_FLAG_STOP_SPAWNING           0x100000000000000
 #define BTL_FLAG_BGFX_PAUSED             0x200000000000000
-
 enum RikuKey {
     RIKU_KEY_NEXT_CARD = 0x1,
     RIKU_KEY_PREV_CARD = 0x2,

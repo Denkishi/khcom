@@ -56,6 +56,7 @@ void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
             n->x = gDeckGridColumnX[n->args.col] << 8;
             n->y = 0x20000;
         }
+
         break;
     case 1:
         if ((u16)n->args.row <= 3) {
@@ -65,6 +66,7 @@ void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
             n->x = gCollectionGridColumnX[n->args.col] << 8;
             n->y = 0x20000;
         }
+
         break;
     }
 
@@ -103,6 +105,7 @@ u8 DeckCard2_1(DeckCard2Work* n) {
             n->x = gDeckGridColumnX[n->args.col] << 8;
             n->y = 0x20000;
         }
+
         break;
     case 1:
         if ((u16)n->args.row <= 3) {
@@ -112,6 +115,7 @@ u8 DeckCard2_1(DeckCard2Work* n) {
             n->x = gCollectionGridColumnX[n->args.col] << 8;
             n->y = 0x20000;
         }
+
         break;
     }
 

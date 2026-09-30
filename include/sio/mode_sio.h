@@ -4,19 +4,13 @@
 #include "mode_deck.h"
 #include "card_def_data.h"
 #include "registration_data.h"
-
 #include "card_description_data.h"
-
 #include "chara_api.h"
 #include "map_api.h"
-
 #include "pallet.h"
 #include "save_api.h"
-
 #include "engine_math.h"
-
 #include "card_api.h"
-
 #include "text.h"
 #include "obj_api.h"
 #include "display.h"

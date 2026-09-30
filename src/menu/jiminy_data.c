@@ -11364,7 +11364,4 @@ JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnkEu_0887F326,
 };
 
-
-
-
 #endif

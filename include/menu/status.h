@@ -3,19 +3,12 @@
 
 #include "card_def_data.h"
 #include "registration_data.h"
-
 #include "card_label_data.h"
-
 #include "poo_api.h"
-
 #include "bos4_api.h"
-
 #include "card_ui_types.h"
-
 #include "card_api.h"
-
 #include "engine_math.h"
-
 #include "anim.h"
 #include "text.h"
 #include "btl_effect.h"

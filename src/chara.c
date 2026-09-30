@@ -179,14 +179,18 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
             for (j = 0; j <= 31; j++) {
                 work->maskedTile[j] = work->tileBuffer[j] & sMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
             }
+
             CpuFastSet(work->maskedTile, work->tiles + i * 32, 8);
         }
+
         work->step++;
+
         if (work->step > 8) {
             work->step = 0;
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -232,6 +236,7 @@ static inline u8 ChgCardRotation(ChgCardObjWork* work, u8 rotation) {
     } else {
         phase = rotation;
     }
+
     return phase;
 }
 
@@ -252,6 +257,7 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 1:
         *work->x += (work->dirX * work->speed) >> 8;
@@ -291,8 +297,10 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
                 return 0;
             }
         }
+
         break;
     }
+
     return 1;
 }
 
@@ -321,6 +329,7 @@ u8 SioConnectUpdate(void) {
         if (gSioStatus & 0x7F0000) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
+
                 if (gSioErrorFrameCount > 180) {
                     gSioLinkResult = 1;
                 }
@@ -340,6 +349,7 @@ u8 SioConnectUpdate(void) {
 
         if (gSioCancelTimer > 0) {
             gSioCancelTimer--;
+
             if (gSioCancelTimer == 0) {
                 SioShutdown();
 
@@ -349,6 +359,7 @@ u8 SioConnectUpdate(void) {
             }
         }
     }
+
     return gSioLinkResult;
 }
 
@@ -373,6 +384,7 @@ u8 SioLinkUpdate(void) {
         if (gSioStatus & 0x7F0000) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
+
                 if (gSioErrorFrameCount > 180) {
                     gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
                     gSioErrorStatus = gSioStatus;
@@ -382,9 +394,9 @@ u8 SioLinkUpdate(void) {
             }
         }
     }
+
     return gSioLinkResult;
 }
-
 
 u8 SioConnectUpdateAuto(void) {
     u32* p;
@@ -405,6 +417,7 @@ u8 SioConnectUpdateAuto(void) {
         if (gSioStatus & 0x7F0000) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
+
                 if (gSioErrorFrameCount > 180) {
                     gSioLinkResult = 1;
                 }
@@ -418,6 +431,7 @@ u8 SioConnectUpdateAuto(void) {
             return gSioLinkResult;
         }
     }
+
     return gSioLinkResult;
 }
 
@@ -451,6 +465,7 @@ void DebugLogClear(void) {
         gDebugLogC[i] = 0;
         gDebugLogD[i] = 0;
     }
+
     gDebugLogIndex = 0;
     gDebugLogSeq = 0;
 }
@@ -461,9 +476,11 @@ void DebugLogAdd(u16 a, u16 b, u16 c, u16 d) {
     gDebugLogC[gDebugLogIndex] = (gDebugLogSeq << 24) | c;
     gDebugLogD[gDebugLogIndex] = (gDebugLogSeq << 24) | d;
     gDebugLogIndex++;
+
     if (gDebugLogIndex > 99) {
         gDebugLogIndex = 0;
     }
+
     DebugLogNextSeq();
 }
 
@@ -488,6 +505,7 @@ u8 SioHasError(void) {
     if (gSioStatus & 0x7F0000) {
         return 1;
     }
+
     return 0;
 }
 
@@ -505,6 +523,7 @@ u8 SioAutoConnectUpdate(void) {
         break;
     case 1:
         gSioAutoConnectTimer++;
+
         if (gSioAutoConnectTimer > 4) {
             gSioAutoConnectTimer = 0;
             SioSetLinkCallbacks(SioKeySyncSend, SioKeySyncRecv);
@@ -512,9 +531,11 @@ u8 SioAutoConnectUpdate(void) {
             gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
             gSioAutoConnectState++;
         }
+
         break;
     case 2:
         gSioAutoConnectTimer++;
+
         if (gSioAutoConnectTimer > 4) {
             gSioSendFrame[1] = 0x2811;
 
@@ -523,10 +544,12 @@ u8 SioAutoConnectUpdate(void) {
                 gSioAutoConnectState++;
             }
         }
+
         break;
     default:
         return 1;
     }
+
     return 0;
 }
 
@@ -577,6 +600,7 @@ s32 SioConnectSend(void) {
                     gSioSendFrame[i] = 0;
                 }
             }
+
             send[1] = *param;
         } else {
             gSioSendFrame[0] = 0xECEC;
@@ -586,8 +610,10 @@ s32 SioConnectSend(void) {
             gSioSendFrame[i] = 0;
         }
     }
+
     return 0;
 }
+
 s32 SioConnectRecv(void) {
     u16 c;
     u16 v;
@@ -600,9 +626,11 @@ s32 SioConnectRecv(void) {
                 }
             } else {
                 c = 0xAFAF;
+
                 if (gSioRecvFrame[0][0] == c || gSioRecvFrame[0][1] == c) {
                     SioShutdown();
                     v = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
+
                     if (v == c) {
                         if (gSioCancelCallback != NULL) {
                             gSioCancelCallback();
@@ -618,11 +646,13 @@ s32 SioConnectRecv(void) {
             }
         } else {
             gSioConnectRetries++;
+
             if (gSioConnectRetries > 10) {
                 return 1;
             }
         }
     }
+
     return 0;
 }
 
@@ -640,6 +670,7 @@ s32 SioConnectSendAuto(void) {
             gSioSendFrame[i] = 0;
         }
     }
+
     return 0;
 }
 
@@ -657,11 +688,13 @@ s32 SioConnectRecvAuto(void) {
             }
         } else {
             gSioConnectRetries++;
+
             if (gSioConnectRetries > 10) {
                 return 1;
             }
         }
     }
+
     return 0;
 }
 
@@ -689,7 +722,6 @@ void SioCommandClearRecv(void) {
     }
 }
 
-
 s32 SioCommandSend(void) {
     gSioCommandSend[0] = 0xACD;
     gSioSendFrame[0] = gSioCommandSend[0];
@@ -714,6 +746,7 @@ s32 SioCommandRecv(void) {
         gSioCommandRecv[2][1] = gSioRecvFrame[2][1];
         gSioCommandRecv[3][1] = gSioRecvFrame[3][1];
     }
+
     return 0;
 }
 
@@ -749,7 +782,6 @@ void SioSetLinkCallbacks(s32 (*a)(void), s32 (*b)(void)) {
     *p2 = 0;
 }
 
-
 s32 SioKeySyncSend(void) {
     if (gSioPlayerId == 0) {
         gSioSendFrame[0] = 0xACD;
@@ -762,6 +794,7 @@ s32 SioKeySyncSend(void) {
         gSioSendFrame[2] = 0x1234;
         gSioSendFrame[3] = 0x3456;
     }
+
     return 0;
 }
 
@@ -791,9 +824,9 @@ s32 SioKeySyncRecv(void) {
             gSioStatus |= 0x100;
         }
     }
+
     return 0;
 }
-
 
 void SioPrepareDeckExchange(void) {
     Deck* a;
@@ -813,7 +846,6 @@ void SioPrepareDeckExchange(void) {
     gSioExchangeSendData = (u16*)gSioSendDeck;
     gSioExchangeRecvData = (u16*)gSioRecvDeck;
 }
-
 
 s32 SioExchangeSend(void) {
     u16 n;
@@ -842,11 +874,12 @@ s32 SioExchangeSend(void) {
             gSioSendFrame[2] = 0;
             gSioSendFrame[3] = 0;
         }
+
         gSioExchangeSeq++;
     }
+
     return 0;
 }
-
 
 s32 SioExchangeRecv(void) {
     u16 n;
@@ -865,6 +898,7 @@ s32 SioExchangeRecv(void) {
             if (gSioRecvFrame[1][1] > gSioExchangeSeqEnd) {
                 return 2;
             }
+
             n = gSioRecvFrame[1][1] - 3;
             gSioExchangeRecvData[n * 2 - 2] = gSioRecvFrame[2][1];
             gSioExchangeRecvData[n * 2 - 1] = gSioRecvFrame[3][1];
@@ -874,21 +908,22 @@ s32 SioExchangeRecv(void) {
             if (gSioRecvFrame[1][0] > gSioExchangeSeqEnd) {
                 return 2;
             }
+
             n = gSioRecvFrame[1][0] - 3;
             gSioExchangeRecvData[n * 2 - 2] = gSioRecvFrame[2][0];
             gSioExchangeRecvData[n * 2 - 1] = gSioRecvFrame[3][0];
         }
     }
+
     return 0;
 }
-
 
 #ifdef VERSION_EU
 void eu_080C24D8(void) {
     s32 i;
     s16 count;
-
     count = 112;
+
     for (i = 0; i < count; i++) {
         gSioExchangeRecvData[i] = gSioExchangeSendData[i];
     }
@@ -924,6 +959,7 @@ void SioPrepareCharaLinkExchange(void) {
     } else {
         gCharaLinkSend.seed = 0;
     }
+
     gSioExchangeSeqEnd = 11;
     gSioExchangeSeq = 1;
     gSioHandshakeAck = 0;
@@ -950,6 +986,7 @@ s32 SioSyncSend(void) {
             gSioSendFrame[0] = 0xDF89;
         }
     }
+
     return 0;
 }
 
@@ -968,9 +1005,11 @@ s32 SioSyncRecv(void) {
             if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
             }
+
             gSioHandshakeDone = 1;
         }
     }
+
     return 0;
 }
 
@@ -983,7 +1022,6 @@ s32 eu_080C2740(void) {
     u16 held;
     u16 keys;
     u16 r;
-
     held = GetKeysHeld() & KEYS_MASK;
     keys = 0;
 
@@ -992,8 +1030,8 @@ s32 eu_080C2740(void) {
         gRandomPartnerDpadTimer--;
     } else {
         gRandomPartnerDpadTimer = GetRandom() % 91 + 30;
-
         r = GetRandom();
+
         switch (r & 7) {
         case 0:
             gRandomPartnerDpad = 0x10;
@@ -1036,6 +1074,7 @@ s32 eu_080C2740(void) {
     if ((u16)(GetRandom() % 50) == 0) {
         keys |= 0x300;
     }
+
     SioKeyStateUpdateA(held);
     SioKeyStateUpdateB(keys);
     return 0;
@@ -1068,6 +1107,7 @@ void CharaObjInitDefeat2(CharaObjParam2* param) {
     for (i = 0; i < 32; i++) {
         gCharaObj->bankFadeEnabled[i] = 0;
     }
+
     TaskPoolInit(&gCharaTaskPool, 2);
 }
 
@@ -1080,12 +1120,14 @@ u8 CharaObjUpdateDefeat2(void) {
         if (!BgFxIsActive()) {
             gCharaObj->state++;
         }
+
         break;
     case 1:
         if (++gCharaObj->timer > 59) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 2:
         CpuSet((void*)0x05000000, gCharaObj->savedPalette, 0x200);
@@ -1096,10 +1138,12 @@ u8 CharaObjUpdateDefeat2(void) {
     case 3:
         gCharaObj->fadeLevel++;
         FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+
         if (++gCharaObj->timer > 9) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 4:
         gCharaObj->fadeLevel = 0;
@@ -1111,16 +1155,20 @@ u8 CharaObjUpdateDefeat2(void) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 6:
         if (gCharaObj->fadeTick > 1) {
             gCharaObj->fadeTick = 0;
             gCharaObj->fadeLevel++;
         }
+
         gCharaObj->fadeTick++;
+
         if (gCharaObj->paletteSize != 0) {
             FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
         }
+
         if (gCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
@@ -1129,11 +1177,13 @@ u8 CharaObjUpdateDefeat2(void) {
             fade.stepDelay = 1;
             TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade);
         }
+
         if (++gCharaObj->timer > 39) {
             gCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
             gCharaObj->state++;
         }
+
         break;
     case 7:
         gCharaObj->fadeLevel = 0;
@@ -1148,32 +1198,40 @@ u8 CharaObjUpdateDefeat2(void) {
             gCharaObj->fadeTick = 0;
             gCharaObj->fadeLevel++;
         }
+
         gCharaObj->fadeTick++;
+
         if (++gCharaObj->timer > 37) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 9:
         if (++gCharaObj->timer > 20) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 10:
         gCharaObj->fadeTick = 0;
+
         if (gCharaObj->callback != NULL) {
             gCharaObj->callback();
         }
+
         gCharaObj->state++;
         break;
     case 11:
         gCharaObj->fadeLevel -= 2;
         FadePaletteToWhite(gCharaObj->fadedPalette, (u16*)0x05000000, 1024, gCharaObj->fadeLevel);
+
         if (++gCharaObj->timer > 8) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 12:
         BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
@@ -1186,10 +1244,12 @@ u8 CharaObjUpdateDefeat2(void) {
         break;
     case 13:
         BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+
         if (++gCharaObj->timer > 79) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 14:
         gCharaObj->bgFxVz = 0;
@@ -1198,10 +1258,12 @@ u8 CharaObjUpdateDefeat2(void) {
     case 15:
         BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
         gCharaObj->bgFxVz -= 25;
+
         if (++gCharaObj->timer > 39) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 16:
         BgAnimStop();
@@ -1211,15 +1273,18 @@ u8 CharaObjUpdateDefeat2(void) {
     case 17:
         gCharaObj->fadeLevel--;
         FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+
         if (++gCharaObj->timer > 10) {
             gCharaObj->timer = 0;
             CharaObjFree();
             gCharaObj->state++;
         }
+
         break;
     default:
         return 0;
     }
+
     TaskPoolUpdate(&gCharaTaskPool);
     TaskPoolDraw(&gCharaTaskPool);
     return 1;
@@ -1267,11 +1332,13 @@ void CharaObjInitDefeat(CharaObjParam* param) {
     for (i = 10; i < 32; i++) {
         gCharaObj->bankFadeEnabled[i] = 0;
     }
+
     idx = gCharaObj->paletteAddr >> 5;
 
     if (gCharaObj->paletteSize == 32) {
         gCharaObj->bankFadeEnabled[(s16)idx] = 1;
     }
+
     TaskPoolInit(&gCharaTaskPool, 4);
 }
 
@@ -1294,19 +1361,23 @@ u8 CharaObjUpdateDefeat(void) {
         if (!BgFxIsActive()) {
             gCharaObj->state++;
         }
+
         break;
     case 1:
         if (++gCharaObj->timer > 59) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 2:
         BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
+
         for (i = 0; i < 32; i++) {
             SetPaletteBankFadeEnabled(i, gCharaObj->bankFadeEnabled[i]);
         }
+
         gCharaObj->state++;
         break;
     case 3:
@@ -1316,10 +1387,12 @@ u8 CharaObjUpdateDefeat(void) {
     case 4:
         gCharaObj->fadeLevel++;
         FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+
         if (++gCharaObj->timer > 9) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 5:
         gCharaObj->fadeLevel = 0;
@@ -1330,52 +1403,66 @@ u8 CharaObjUpdateDefeat(void) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 7:
         if (gCharaObj->fadeTick > 1) {
             gCharaObj->fadeTick = 0;
             gCharaObj->fadeLevel++;
         }
+
         gCharaObj->fadeTick++;
+
         if (gCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
             fade0.tiles = (u8*)gCharaObj->tilesAddr;
             fade0.tileCount = gCharaObj->tileCount;
             fade0.stepDelay = 1;
+
             if (fade0.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade0);
             }
+
             fade1.tiles = (u8*)gCharaObj->tilesAddr2;
             fade1.tileCount = gCharaObj->tileCount2;
             fade1.stepDelay = 1;
+
             if (fade1.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade1);
             }
+
             fade2.tiles = (u8*)gCharaObj->tilesAddr3;
             fade2.tileCount = gCharaObj->tileCount3;
             fade2.stepDelay = 1;
+
             if (fade2.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade2);
             }
+
             fade3.tiles = (u8*)gCharaObj->tilesAddr4;
             fade3.tileCount = gCharaObj->tileCount4;
             fade3.stepDelay = 1;
+
             if (fade3.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade3);
             }
         }
+
         if (gCharaObj->paletteSize != 0) {
             FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
         }
+
         if (gCharaObj->paletteSize2 != 0) {
             FadePaletteToWhite((u16*)gCharaObj->paletteAddr2, (u16*)gCharaObj->paletteAddr2, gCharaObj->paletteSize2, gCharaObj->fadeLevel);
         }
+
         if (++gCharaObj->timer > 39) {
             gCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
             gCharaObj->state++;
         }
+
         break;
     case 8:
         gCharaObj->fadeLevel = 0;
@@ -1390,41 +1477,51 @@ u8 CharaObjUpdateDefeat(void) {
             gCharaObj->fadeTick = 0;
             gCharaObj->fadeLevel++;
         }
+
         gCharaObj->fadeTick++;
+
         if (++gCharaObj->timer > 37) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 10:
         if (++gCharaObj->timer > 20) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 11:
         gCharaObj->fadeTick = 0;
+
         if (gCharaObj->callback != NULL) {
             gCharaObj->callback();
         }
+
         gCharaObj->fadeLevel = 32;
         gCharaObj->state++;
         break;
     case 12:
         FadeAllPalettesToWhite(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+
         if ((gCharaObj->fadeLevel -= 2) <= 0) {
             gCharaObj->fadeLevel = 0;
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 13:
         FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+
         if ((gCharaObj->fadeLevel += 2) > 11) {
             gCharaObj->fadeLevel = 12;
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 14:
         prize.x = gCharaObj->x;
@@ -1432,6 +1529,7 @@ u8 CharaObjUpdateDefeat(void) {
         prize.z = gCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
         DropBossPrizes(gCharaObj->prizeObj);
+
         if ((gCharaObj->flags & 1) == 0) {
             BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
             gCharaObj->timer = 0;
@@ -1441,13 +1539,16 @@ u8 CharaObjUpdateDefeat(void) {
             gCharaObj->timer = 0;
             gCharaObj->state = 19;
         }
+
         break;
     case 15:
         BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+
         if (++gCharaObj->timer > 79) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 16:
         gCharaObj->bgFxVz = 0;
@@ -1456,10 +1557,12 @@ u8 CharaObjUpdateDefeat(void) {
     case 17:
         BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
         gCharaObj->bgFxVz -= 25;
+
         if (++gCharaObj->timer > 39) {
             gCharaObj->timer = 0;
             gCharaObj->state++;
         }
+
         break;
     case 18:
         BgAnimStop();
@@ -1469,16 +1572,19 @@ u8 CharaObjUpdateDefeat(void) {
     case 19:
         gCharaObj->fadeLevel--;
         FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+
         if (gCharaObj->fadeLevel <= 0) {
             gCharaObj->fadeLevel = 0;
             gCharaObj->timer = 0;
             CharaObjFree();
             gCharaObj->state++;
         }
+
         break;
     default:
         return 0;
     }
+
     TaskPoolUpdate(&gCharaTaskPool);
     TaskPoolDraw(&gCharaTaskPool);
     return 1;
@@ -1490,6 +1596,7 @@ void RequestTileRowsCopy(u8* src, u8* dst, u16 size, s16 count) {
 
     i = count;
     n = i;
+
     for (i = 0; i < n; i++) {
         RequestDma3Copy(src + i * 0x400, dst + i * 0x400, size * 32);
     }
@@ -1501,6 +1608,7 @@ void RequestMapRowsCopy(u8* src, u8* dst, u16 size, s16 count) {
 
     i = count;
     n = i;
+
     for (i = 0; i < n; i++) {
         RequestDma3Copy(src + i * 0x40, dst + i * 0x40, size * 2);
     }

@@ -98,6 +98,7 @@ u8 map_anim_1(MapTileAnimationWork* w) {
 
 void map_anim_2(void) {
 }
+
 void map_anim_3(void) {
 }
 
@@ -198,6 +199,7 @@ u16 CountLinkPartnerDeckCards(u8 mode) {
                 }
             }
         }
+
         break;
     case 3:
         for (i = 0; i < DECK_SIZE; i++) {
@@ -207,6 +209,7 @@ u16 CountLinkPartnerDeckCards(u8 mode) {
                 }
             }
         }
+
         break;
     }
 
@@ -230,11 +233,13 @@ void CopyLinkPartnerDeckCards(u8 kind, u16* out) {
                 if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {
                     *out++ = deck->cards[i];
                 }
+
                 break;
             case 3:
                 if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category == 3) {
                     *out++ = deck->cards[i];
                 }
+
                 break;
             }
         }
@@ -275,7 +280,7 @@ u16 CountCardsById(u16 cardId) {
             count++;
         }
     }
-    
+
     return count;
 }
 
@@ -334,6 +339,7 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
         if (gCardCount > 999) {
             gCardCount = 999;
         }
+
         return;
     }
 
@@ -604,6 +610,7 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
         if (gCardCount > 999) {
             gCardCount = 999;
         }
+
         return;
     }
 
@@ -622,17 +629,23 @@ s16 ObtainCard(u16 cardId) {
     if (CountCardsById(cardId) > 98) {
         return -1;
     }
+
     ExpandCardCollectionForNewCard(cardId);
+
     while (gCardCollection[i] != CARD_ID_MASK) {
         i++;
+
         if (i == gCardCount) {
             return -1;
         }
     }
+
     if (gCardDefs[cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_FRIEND) {
         return -1;
     }
+
     gCardCollection[i] = cardId;
+
     switch (gCardDefs[cardId & CARD_ID_MASK].kind) {
     case 0:
         SetCardKindObtained(0);
@@ -962,6 +975,7 @@ s16 ObtainCard(u16 cardId) {
         SetJiminyFlag(249);
         break;
     }
+
     SetRikuCardKindObtained(gCardDefs[cardId].kind);
     return i;
 }
@@ -1075,9 +1089,11 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
         if (gCardCollection[i] == CARD_ID_MASK) {
             continue;
         }
+
         if (gCardCollection[i] & mask) {
             continue;
         }
+
         if (!(gCardCollection[i] & 0x8000)) {
             present[gCardDefs[gCardCollection[i] & CARD_ID_MASK].kind] = 1;
         } else {

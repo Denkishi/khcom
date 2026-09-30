@@ -18,7 +18,7 @@ u8 HeapContains(void* p, Heap* heap) {
     if (p != NULL && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
         return 1;
     }
-    
+
     return 0;
 }
 
@@ -26,12 +26,15 @@ HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap) {
     HeapBlock* b;
 
     b = heap->start->nextFree;
+
     while (b != NULL && b != heap->end) {
         if (b->size >= size) {
             return b;
         }
+
         b = b->nextFree;
     }
+
     return 0;
 }
 
@@ -241,6 +244,7 @@ s32 HeapGetFreeTotal(Heap* heap) {
         total += b->size;
         b = b->nextFree;
     }
+
     return total;
 }
 

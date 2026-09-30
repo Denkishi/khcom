@@ -312,6 +312,7 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
         }
     }
 }
+
 void MapChkEditMode(MapChkWork* p) {
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
         p->mode = p->mode == 0 ? 4 : p->mode - 1;
@@ -323,6 +324,7 @@ void MapChkEditMode(MapChkWork* p) {
 
     DebugTextPrint(80, 32, 2, sMapChkModeNames[p->mode]);
 }
+
 void MapChkEditWorld(MapChkWork* p) {
     u8 v = p->world;
     const u8* t;
@@ -343,6 +345,7 @@ void MapChkEditWorld(MapChkWork* p) {
         DebugTextPrint(80, 44, 2, *(const char**)(t + n));
     }
 }
+
 void MapChkEditFloor(MapChkWork* p) {
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
         p->floor = p->floor == 0 ? 13 : p->floor - 1;
@@ -361,6 +364,7 @@ void MapChkEditFloor(MapChkWork* p) {
         DebugTextPrint(112, 56, 2, sMapChkBasementNoneText);
     }
 }
+
 void MapChkEditForm(MapChkWork* p) {
     u8 v = p->form;
 
@@ -383,6 +387,7 @@ void MapChkEditForm(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void MapChkEditWidth(MapChkWork* p) {
     u8 v = sMapChkForm->maxWidth;
 
@@ -401,11 +406,13 @@ void MapChkEditWidth(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void MapChkFlipParamToggle(MapChkWork* p) {
     if ((GetKeysRepeat() & (DPAD_RIGHT | DPAD_LEFT)) != 0) {
         MapChkSetParamToggle((u8*)p, p->useParams == 0 ? 1 : 0);
     }
 }
+
 void MapChkEditMinHeight(MapChkWork* p) {
     u8 v = sMapChkForm->minHeight;
 
@@ -429,6 +436,7 @@ void MapChkEditMinHeight(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void MapChkEditMaxHeight(MapChkWork* p) {
     u8 v = sMapChkForm->maxHeight;
 
@@ -452,6 +460,7 @@ void MapChkEditMaxHeight(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void MapChkEditMinDepth(MapChkWork* p) {
     u8 v = sMapChkForm->minDepth;
 
@@ -475,6 +484,7 @@ void MapChkEditMinDepth(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void MapChkEditMaxDepth(MapChkWork* p) {
     u8 v = sMapChkForm->maxDepth;
 
@@ -498,6 +508,7 @@ void MapChkEditMaxDepth(MapChkWork* p) {
         MapChkSetParamToggle((u8*)p, 1);
     }
 }
+
 void Mode_MapChk_0(void) {
     const u8* t;
     s32 n;
@@ -544,6 +555,7 @@ void Mode_MapChk_0(void) {
     FadeStartIn(FADE_MODE_BLACK, 8);
     m4aMPlayAllStop();
 }
+
 void Mode_MapChk_1(void) {
     MapChkWork* e;
 

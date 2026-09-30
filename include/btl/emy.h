@@ -2,11 +2,8 @@
 #define GUARD_EMY_H
 
 #include "task_descriptors.h"
-
 #include "enemy_types.h"
-
 #include "display.h"
-
 #include "m4a_song.h"
 #include "obj_api.h"
 #include "btl_effect.h"

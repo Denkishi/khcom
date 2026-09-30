@@ -47,6 +47,7 @@ u16 GetObjTileCount(u16 a, u16 b) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
         return 0x20;
     }
+
     return 0;
 }
 
@@ -64,21 +65,26 @@ void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi) {
         while (arr[i]->priority < pivot) {
             i++;
         }
+
         while (pivot < arr[j]->priority) {
             j--;
         }
+
         if (i >= j) {
             break;
         }
+
         t = arr[i];
         arr[i] = arr[j];
         arr[j] = t;
         i++;
         j--;
     }
+
     if (lo < i - 1) {
         SortSpriteEntries(arr, lo, i - 1);
     }
+
     if (j + 1 < hi) {
         SortSpriteEntries(arr, j + 1, hi);
     }
@@ -125,12 +131,14 @@ void SpriteReset(void) {
     for (i = 0; i < 128; i++) {
         ListPoolAddFree(&gSpriteWork->tiles[i].node, &gSpriteWork->tilePool, &gSpriteWork->tiles[i]);
     }
+
     ListPoolInit(&gSpriteWork->palettePool);
 
     for (i = 0; i < 16; i++) {
         ListPoolAddFree(&gSpriteWork->palettes[i].node, &gSpriteWork->palettePool,
                       &gSpriteWork->palettes[i]);
     }
+
     gSpriteWork->entryCount = 0;
     gSpriteWork->affineCount = 0;
     gSpriteWork->sortLo = 0;
@@ -158,5 +166,6 @@ u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f
         p->entryCount += 1;
         return 1;
     }
+
     return 0;
 }

@@ -287,6 +287,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* w, void* a) {
                 w->timer = 16;
                 w->step++;
             }
+
             break;
         case 1:
             ApproachValue(&w->x7, 0, w->timer);
@@ -302,6 +303,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* w, void* a) {
                 w->palette3 = 0;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuEnterDeckGrid);
             }
+
             break;
         }
     }
@@ -345,6 +347,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
         if (GetKeysPressed() & START_BUTTON) {
             w->exitRequested = 1;
         }
+
         w->inputDelay = 4;
         return 1;
     }
@@ -363,6 +366,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
+
         w->exitRequested = 0;
     }
 
@@ -375,6 +379,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
         } else {
             ScrollRikuGridUp(w);
         }
+
         ShowRikuDeckCardPreview(w);
         break;
     case DPAD_DOWN:
@@ -393,6 +398,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
                 }
             }
         }
+
         ShowRikuDeckCardPreview(w);
         break;
     case DPAD_LEFT:
@@ -401,6 +407,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
             w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
+
         ShowRikuDeckCardPreview(w);
         break;
     case DPAD_RIGHT:
@@ -409,6 +416,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
             w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
+
         ShowRikuDeckCardPreview(w);
         break;
     case START_BUTTON:
@@ -591,6 +599,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind) {
     cards = GetDeck(w->deckIndex)->cards;
     x = 0;
     y = 0;
+
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
             if (kind == 0) {
@@ -612,16 +621,19 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind) {
                 TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
             }
+
             if (x > 2) {
                 x = 0;
                 y++;
             }
         }
     }
+
     w->x2 = 0x4800;
     w->y2 = 0x2800;
     w->scrollRowEnd = 4;
 }
+
 void ClearRikuCardGrid(RikuDeckMenuWork* w) {
     DeckCard2Work* node;
 
@@ -969,6 +981,7 @@ void DrawRikuCpCost(u8 a) {
         RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
     }
 }
+
 void FreeRikuCollectionEntries(RikuDeckMenuWork* w) {
     CardKindEntry** p;
     u16 i;
@@ -983,6 +996,7 @@ void FreeRikuCollectionEntries(RikuDeckMenuWork* w) {
         *p = 0;
     }
 }
+
 void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w) {
     if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
@@ -991,6 +1005,7 @@ void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w) {
         w->palette2 = 0;
     }
 }
+
 void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode) {
     switch (mode) {
     case 0:
@@ -1007,6 +1022,7 @@ void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode) {
         break;
     }
 }
+
 u8 CheckRikuDeckCpCost(RikuDeckMenuWork* w) {
     if (GetDeckCpCost(GetActiveDeckIndex()) > gGameState.progression.cp) {
         TaskCreate(&w->cardpool, &gTaskDescDeckErrorCp, &w->popupActive);
@@ -1016,6 +1032,7 @@ u8 CheckRikuDeckCpCost(RikuDeckMenuWork* w) {
 
     return 1;
 }
+
 u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* w) {
     if (CountActiveDeckCardsOfCategory(0) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
@@ -1025,6 +1042,7 @@ u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* w) {
 
     return 1;
 }
+
 u8 FindRikuCardInDirection(RikuDeckMenuWork* w, s16 x, s16 y, u16 dir) {
     DeckCard2Work* node;
 

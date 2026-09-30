@@ -76,13 +76,16 @@ s16 GetEventListLength(u8 a) {
         while (sSoraEventIds[n] != -1) {
             n++;
         }
+
         break;
     case 1:
         while (sRikuEventIds[n] != -1) {
             n++;
         }
+
         break;
     }
+
     return n;
 }
 
@@ -242,6 +245,7 @@ s32 Hanabira_c_1(EffectWork* w) {
         if (w->vz > 256) {
             w->state = 1;
         }
+
         break;
     case 1:
         w->x += w->vx;
@@ -261,6 +265,7 @@ s32 Hanabira_c_1(EffectWork* w) {
         if (w->z >= 0) {
             return 0;
         }
+
         break;
     }
 
@@ -850,6 +855,7 @@ void SetEventSoundPosition(u16 song, s16 x, s16 y) {
         d = 80 - y * 2;
         t = d / 2;
     }
+
     v = dist + t;
 
     if (v > 256) {

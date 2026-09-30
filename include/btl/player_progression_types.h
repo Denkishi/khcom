@@ -15,7 +15,6 @@ enum FriendFlag {
 };
 
 #define FRIEND_FLAGS_WORLD (FRIEND_FLAG_ALADDIN | FRIEND_FLAG_ARIEL | FRIEND_FLAG_JACK | FRIEND_FLAG_PETER_PAN | FRIEND_FLAG_THE_BEAST)
-
 typedef struct PlayerProgression {
     s16 maxHp;
     s16 cp;

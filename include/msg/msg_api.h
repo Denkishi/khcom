@@ -2,7 +2,6 @@
 #define GUARD_MSG_API_H
 
 #include "types.h"
-
 #include "text_types.h"
 #include "msg_types.h"
 

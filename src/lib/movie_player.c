@@ -53,6 +53,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
 
     for (pos = p->deltaCodecCode; (u8*)pos < (u8*)p->deltaCodecCode + size2; pos++) {
         instruction = *pos;
+
         if ((instruction & 0xEF000000) == 0xEF000000) {
             u8 kind;
             s32 offsets[] = {0, 4, 8, 12};
@@ -72,6 +73,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 } else {
                     encoded = 0xE5900000;
                 }
+
                 encoded |= ((instruction & 0x000F0000) >> 16) << 12;
                 encoded |= ((instruction & 0x0000F000) >> 12) << 16;
                 encoded |= ((w << 1) * ((instruction & 0xF0) >> 4) + offsets[instruction & 15]) & 0xFFF;
@@ -84,9 +86,11 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 } else if (kind == 4) {
                     encoded = 0xE2400000;
                 }
+
                 encoded |= ((instruction & 0x000F0000) >> 16) << 12;
                 encoded |= ((instruction & 0x0000F000) >> 12) << 16;
                 value = (w << 1) * ((instruction & 0xF0) >> 4) + offsets[instruction & 15];
+
                 for (shift = 0; shift < 16; shift++) {
                     if ((value & sMovieArmRotateMasks[shift]) == value) {
                         j = 32 - shift * 2;
@@ -96,14 +100,17 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                         break;
                     }
                 }
+
                 encoded |= (rotate << 8) | immediate;
                 *pos = encoded;
                 break;
             case 2:
                 rotated = 0xE3A00000;
                 rotated |= ((instruction & 0x000F0000) >> 16) << 12;
+
                 if ((instruction & 15) == 0) {
                     value = (w << 1) >> 4;
+
                     for (j = 0; j < 16; j++) {
                         if ((value & sMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
@@ -115,6 +122,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                     }
                 } else {
                     value = (h << 1) >> 4;
+
                     for (j = 0; j < 16; j++) {
                         if ((value & sMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
@@ -125,6 +133,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                         }
                     }
                 }
+
                 rotated |= (immediate << 8) | rotate;
                 *pos = rotated;
                 break;
@@ -133,14 +142,15 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
             }
         }
     }
+
     i = 0;
+
     for (y = -8; y < 8; y++) {
         for (x = -8; x < 8; x++) {
             table[i++] = (y * w + x) * 2;
         }
     }
 }
-
 
 void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
     u32 size;
@@ -153,6 +163,7 @@ void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
     size = MovieAudioCodecEnd - MovieAudioCodecStart;
     p->audioCodecCode = gMovieHeap.iwramAlloc(size);
     memcpy(p->audioCodecCode, MovieAudioCodecStart, size);
+
     switch (b) {
     case 0:
         *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - gUnk_0811D184);
@@ -163,8 +174,10 @@ void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
     case 2:
         *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecAdpcm);
         dest = (s16*)((u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecAdpcmSteps));
+
         for (i = 0; i <= 0x58; i++) {
             v = gUnk_09D6D1E4[i];
+
             for (j = 0; j <= 3; j++) {
                 if (j <= 1) {
                     dest[(i << 2) + j] = j * v + v / 2;
@@ -173,6 +186,7 @@ void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
                 }
             }
         }
+
         break;
     }
 }
@@ -226,6 +240,7 @@ MoviePlayer* MovieOpen(void* a) {
         gMovieHeap.iwramFree(p);
         return 0;
     }
+
     MovieSetupVideoCodec(p, &p->decodeKeyFrame, &p->postProcessFrame, &p->decodeDeltaFrame, p->width, p->height);
     p->frameBuf = gMovieHeap.ewramAlloc(p->width * p->height * 2);
     p->workBuf = gMovieHeap.ewramAlloc(p->width * p->height * 2);
@@ -249,6 +264,7 @@ MoviePlayer* MovieOpen(void* a) {
         p->audioBuf = gMovieHeap.ewramAlloc(0x2000);
         MovieSetupAudioCodec(p, &p->decodeAudio, p->audioCodecId);
     }
+
     p->decodeBuf = gMovieHeap.iwramAlloc(v1 > v2 ? v1 : v2);
     p->frameIndex = 0;
     p->audioBlockIndex = 0;
@@ -269,6 +285,7 @@ void MovieFree(MoviePlayer* a) {
     if (p->channels != 0) {
         gMovieHeap.ewramFree(p->audioBuf);
     }
+
     gMovieHeap.iwramFree(p->decodeBuf);
     gMovieHeap.iwramFree(p);
 }
@@ -289,6 +306,7 @@ void MovieDecodeFrame(MoviePlayer* a) {
         p->postProcessFrame(p->workBuf, p->width, p->height);
         break;
     }
+
     p->frameDecoded = 1;
     t = p->frameBuf;
     p->frameBuf = p->workBuf;
@@ -301,12 +319,14 @@ s32 MovieDrawFrame(MoviePlayer* a, void* dst) {
     if (p->videoDone != 0) {
         return 0;
     }
+
     CpuFastSet(p->videoPos, p->decodeBuf, (*(p->frameSizes + p->frameIndex) >> 2) & 0xFFFF);
     MovieDecodeFrame(p);
 
     if (p->framePresent != 0) {
         CpuFastSet(p->frameBuf, dst, (p->width * p->height / 2) & 0x1FFFFF);
     }
+
     return p->framePresent;
 }
 
@@ -329,6 +349,7 @@ u32 MovieDrawFrameRect(MoviePlayer* a, u32 x, u32 y, u32 w, u32 rows, void* dst,
             s = s + (p->width << 1);
         }
     }
+
     return p->framePresent;
 }
 
@@ -346,6 +367,7 @@ u32 MovieCopyFrameRect(MoviePlayer* a, u32 x, u32 y, u32 w, u32 rows, void* dst,
         d = d + dstStride;
         s = s + (p->width << 1);
     }
+
     return p->framePresent;
 }
 
@@ -353,6 +375,7 @@ s32 MovieAdvanceFrame(MoviePlayer* a) {
     MoviePlayer* p = a;
 
     p->frameIndex++;
+
     if (p->videoDone != 0 || p->frameIndex == p->frameCount) {
         p->videoDone = 1;
         return 0;
@@ -362,6 +385,7 @@ s32 MovieAdvanceFrame(MoviePlayer* a) {
         p->timingStarted = 1;
         p->startTicks = MovieGetTicks();
     }
+
     p->videoPos = p->videoPos + *(p->frameSizes + p->frameIndex - 1);
     return 1;
 }
@@ -384,6 +408,7 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
     if (p->audioDone != 0) {
         return;
     }
+
     CpuFastSet(p->audioPos, p->decodeBuf, (*(p->audioBlockSizes + p->audioBlockIndex) >> 2) & 0xFFFF);
     n = *(s32*)p->decodeBuf;
 
@@ -405,6 +430,7 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
         if (lenA2 != 0) {
             CpuFastSet((u8*)p->audioBuf + lenA1, dstA2, (lenA2 / 4) & 0x1FFFFF);
         }
+
         p->decodeAudio(q, p->audioBuf, n);
         CpuFastSet(p->audioBuf, dstB1, (lenB1 / 4) & 0x1FFFFF);
 
@@ -418,16 +444,19 @@ s32 MovieAdvanceAudioBlock(MoviePlayer* a) {
     MoviePlayer* p = a;
 
     p->audioBlockIndex++;
+
     if (p->audioDone != 0 || p->audioBlockIndex == p->audioBlockCount) {
         if (p->audioDone != 2) {
             p->audioDone = 1;
         }
+
         return 0;
     }
 
     if (p->channels != 0) {
         p->audioPos = p->audioPos + *(p->audioBlockSizes + p->audioBlockIndex - 1);
     }
+
     return 1;
 }
 
@@ -443,6 +472,7 @@ s32 MovieSyncFrame(MoviePlayer* a) {
         if (p->audioDone != 2) {
             p->audioDone = 0;
         }
+
         p->audioBlockIndex = 0;
         p->audioPos = p->audioData;
         p->frameIndex = 0;
@@ -458,6 +488,7 @@ s32 MovieSyncFrame(MoviePlayer* a) {
         p->timingStarted = 1;
         p->startTicks = MovieGetTicks();
     }
+
     t = MovieGetTicks();
     now = MovieTicksToSeconds(t - p->startTicks);
     target = p->secondsPerFrame * (p->frameIndex + 1);
@@ -469,8 +500,10 @@ s32 MovieSyncFrame(MoviePlayer* a) {
             p->framePresent = 0;
             return 1;
         }
+
         p->framePresent = 1;
     }
+
     return now >= target;
 }
 

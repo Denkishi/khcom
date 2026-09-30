@@ -40,6 +40,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
             p++;
         }
     }
+
 #ifdef VERSION_EU
         break;
     case LANGUAGE_FRENCH:
@@ -62,6 +63,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
                 p++;
             }
         }
+
         break;
     case LANGUAGE_SPANISH:
         if (kind == 0) {
@@ -83,6 +85,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
                 p++;
             }
         }
+
         break;
     case LANGUAGE_ITALIAN:
         if (kind == 0) {
@@ -104,6 +107,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
                 p++;
             }
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -126,6 +130,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
                 p++;
             }
         }
+
         break;
     }
 #endif
@@ -141,6 +146,7 @@ u8 task_sroll_c_char_1(SrollCCharWork* w) {
         AnimUpdate(p);
         p++;
     }
+
     return 1;
 }
 

@@ -111,6 +111,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
     if (e == NULL || c == NULL) {
         return 0;
     }
+
     p = gSpriteWork;
     p->entries[p->entryCount].x = x;
     p->entries[p->entryCount].y = y;
@@ -129,6 +130,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
 
         if (n != 0) {
             i = n;
+
             do {
                 cnt = GetObjTileCount(((ObjTileListEntry*)c)->attr0, ((ObjTileListEntry*)c)->attr1);
                 RequestDma3Copy((u8*)((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + 0x06010000), cnt << 5);
@@ -137,17 +139,20 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
             } while (--i);
         }
     }
+
     w = gSpriteWork;
     w->sortPtrs[w->entryCount] = &w->entries[w->entryCount];
     w->entryCount += 1;
     return 1;
 }
+
 u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
     if (e == NULL || ((ObjTiles*)obj)->src == NULL) {
         return 0;
     }
+
     {
         p = gSpriteWork;
         p->entries[p->entryCount].x = x;
@@ -161,8 +166,10 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u
         p->sortPtrs[p->entryCount] = &p->entries[p->entryCount];
         p->entryCount += 1;
     }
+
     return 1;
 }
+
 u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     if (gSpriteWork->entryCount <= 127 && obj != NULL) {
         switch (((ObjTiles*)obj)->type) {
@@ -174,6 +181,7 @@ u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u1
             return DrawSpriteFrameTiles(x, y, obj, e, f, g, h);
         }
     }
+
     return 0;
 }
 
@@ -182,9 +190,11 @@ void DrawSpriteUnsorted(s16 a, s16 b, void* c, void* d, void* e, u16 f) {
     u32 z;
 
     p = gSpriteWork;
+
     if (p->entryCount > 0x7F) {
         return;
     }
+
     p->entries[p->entryCount].x = a;
     z = 0;
     p->entries[p->entryCount].y = b;
@@ -204,9 +214,11 @@ void DrawSpriteUnsortedAffine(u16 a, u16 b, void* c, void* d, void* e, ObjAffine
     u32 z;
 
     p = gSpriteWork;
+
     if (p->entryCount > 0x7F) {
         return;
     }
+
     p->entries[p->entryCount].x = a;
     z = 0;
     p->entries[p->entryCount].y = b;
@@ -235,18 +247,24 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     if (src == NULL) {
         return 0;
     }
+
     cur = ListPoolFirst(&gSpriteWork->tilePool);
+
     while (cur != NULL) {
         if (cur->src == src && cur->allocated == 0) {
             cur->refCount++;
             return cur;
         }
+
         cur = ListPoolNext(&cur->node);
     }
+
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
+
     if (node == NULL) {
         return 0;
     }
+
     node->type = 0;
     node->count = size / 32;
     node->src = src;
@@ -255,14 +273,17 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     node->allocated = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
+
     if (cur == NULL) {
         node->index = gSpriteWork->tilePool.rangeStart;
         RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
         ListPoolActivate(&node->node, &gSpriteWork->tilePool);
         return node;
     }
+
     node->index = gSpriteWork->tilePool.rangeStart;
     avail = cur->index - gSpriteWork->tilePool.rangeStart;
+
     if (node->count <= (s16)avail) {
         RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
         ListPoolActivateBefore(&node->node, &gSpriteWork->tilePool, &cur->node);
@@ -273,8 +294,10 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         node->index = cur->index + cur->count;
+
         if (node->index + node->count > gSpriteWork->tilePool.rangeEnd) {
             break;
         }
@@ -290,8 +313,10 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
             ListPoolActivateAfter(&node->node, &gSpriteWork->tilePool, &cur->node);
             return node;
         }
+
         cur = next;
     }
+
     return 0;
 }
 
@@ -303,14 +328,17 @@ void ReleaseSharedObjTiles(ObjTiles* p) {
         ListPoolRelease(&p->node, &gSpriteWork->tilePool);
     }
 }
+
 void ReleaseAllocatedObjTiles(ObjTiles* p) {
     p->self = 0;
     ListPoolRelease(&p->node, &gSpriteWork->tilePool);
 }
+
 void ReleaseSpriteFrameTiles(ObjTiles* p) {
     p->self = 0;
     ListPoolRelease(&p->node, &gSpriteWork->tilePool);
 }
+
 void ReleaseObjTiles(void* a) {
     ObjTiles* p = a;
     ObjTiles* q;
@@ -318,7 +346,9 @@ void ReleaseObjTiles(void* a) {
     if (p == NULL) {
         return;
     }
+
     q = p->self;
+
     if (q != p) {
         return;
     }
@@ -335,6 +365,7 @@ void ReleaseObjTiles(void* a) {
         break;
     }
 }
+
 ObjTiles* AllocObjTiles(u16 size, void* owner) {
     ObjTiles* node;
     ObjTiles* cur;
@@ -345,10 +376,13 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     if (size == 0) {
         return 0;
     }
+
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
+
     if (node == NULL) {
         return 0;
     }
+
     node->type = 1;
     node->count = size / 32;
     node->src = owner;
@@ -357,13 +391,16 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     node->allocated = 1;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
+
     if (cur == NULL) {
         node->index = gSpriteWork->tilePool.rangeStart;
         ListPoolActivate(&node->node, &gSpriteWork->tilePool);
         return node;
     }
+
     node->index = gSpriteWork->tilePool.rangeStart;
     avail = cur->index - gSpriteWork->tilePool.rangeStart;
+
     if (node->count <= (s16)avail) {
         ListPoolActivateBefore(&node->node, &gSpriteWork->tilePool, &cur->node);
         return node;
@@ -373,8 +410,10 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         node->index = cur->index + cur->count;
+
         if (node->index + node->count > gSpriteWork->tilePool.rangeEnd) {
             break;
         }
@@ -389,8 +428,10 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
             ListPoolActivateAfter(&node->node, &gSpriteWork->tilePool, &cur->node);
             return node;
         }
+
         cur = next;
     }
+
     return 0;
 }
 
@@ -419,24 +460,30 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
             return cur;
         }
     }
+
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
+
     if (node == NULL) {
         return 0;
     }
+
     node->type = 0;
     node->count = size / 32;
     node->src = src;
     node->refCount = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->palettePool);
+
     if (cur == NULL) {
         node->index = gSpriteWork->palettePool.rangeStart;
         LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
         ListPoolActivate(&node->node, &gSpriteWork->palettePool);
         return node;
     }
+
     node->index = gSpriteWork->palettePool.rangeStart;
     avail = cur->index - gSpriteWork->palettePool.rangeStart;
+
     if (node->count <= (s16)avail) {
         LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
         ListPoolActivateBefore(&node->node, &gSpriteWork->palettePool, &cur->node);
@@ -447,8 +494,10 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         node->index = cur->index + cur->count;
+
         if (node->index + node->count > gSpriteWork->palettePool.rangeEnd) {
             break;
         }
@@ -464,8 +513,10 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
             ListPoolActivateAfter(&node->node, &gSpriteWork->palettePool, &cur->node);
             return node;
         }
+
         cur = next;
     }
+
     return 0;
 }
 
@@ -482,11 +533,13 @@ void ReleaseObjPaletteRef(ObjPalette* p) {
         ListPoolRelease(&p->node, &gSpriteWork->palettePool);
     }
 }
+
 void ReleaseObjPalette(ObjPalette* p) {
     if (p != NULL && p->self == p) {
         ReleaseObjPaletteRef(p);
     }
 }
+
 ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
     ObjAffine* e;
     s32 sin;
@@ -508,8 +561,10 @@ ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
         gSpriteWork->affineCount += 1;
         return e;
     }
+
     return 0;
 }
+
 ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     ObjAffine* e;
     s32 sin;
@@ -518,6 +573,7 @@ ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
         return 0;
     }
+
     sin = gSineTable[a];
     cos = gSineTable[a + 0x40];
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
@@ -534,6 +590,7 @@ ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
 
     return e;
 }
+
 ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
     ObjAffine* e;
     s32 sin;
@@ -542,6 +599,7 @@ ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
     if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
         return 0;
     }
+
     sin = gSineTable[a];
     cos = gSineTable[a + 0x40];
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
@@ -558,6 +616,7 @@ ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
 
     return e;
 }
+
 ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     ObjAffine* e;
     u32 z;
@@ -565,6 +624,7 @@ ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     if (gSpriteWork->affineCount > 0x1F) {
         return 0;
     }
+
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
     z = 0;
     e->pa = a;
@@ -580,11 +640,13 @@ ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
 
     return e;
 }
+
 void SortSprites(void) {
     if (gSpriteWork->entryCount > 1) {
         SortSpriteEntries(gSpriteWork->sortPtrs, gSpriteWork->sortLo,
                       gSpriteWork->entryCount - 1);
     }
+
     gSpriteWork->sortLo = 0;
 }
 
@@ -593,7 +655,6 @@ void SortSprites(void) {
         *(w) = (size); \
         *(h) = (size); \
     } while (0)
-
 static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
     switch ((((u32)b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
@@ -648,7 +709,6 @@ static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
 }
 
 #undef ENGINE_SET_SQUARE_SIZE
-
 void UpdateSpriteOam(void) {
     SpriteEntry** entries;
     SpriteEntry* entry;
@@ -682,7 +742,9 @@ void UpdateSpriteOam(void) {
     if (gSpriteWork->oamUpdatesPaused != 0) {
         return;
     }
+
     oam = (u16*)0x07000000;
+
     for (i = 0; i < gSpriteWork->affineCount; i++) {
         oam += 3;
         *oam = gSpriteWork->affine[i].pa;
@@ -694,39 +756,49 @@ void UpdateSpriteOam(void) {
         *oam = gSpriteWork->affine[i].pd;
         oam++;
     }
+
     gSpriteWork->affineCount = 0;
     emitted = 0;
     oam = (u16*)0x07000000;
     count = gSpriteWork->entryCount;
     entries = gSpriteWork->sortPtrs;
     mosaic = gSpriteWork->mosaicEnabled;
+
     for (i = 0; i < count; i++) {
         entry = entries[i];
         parts = entry->sprite;
         affine = entry->affine;
         partCount = *parts++;
         tileOffset = 0;
+
         if (mosaic != 0 && (entry->flags & SPRITE_FLAG_NO_MOSAIC) == 0) {
             entry->flags |= SPRITE_FLAG_MOSAIC;
         }
+
         for (j = 0; j < partCount; j++) {
             attr0 = *parts++;
             attr1 = *parts++;
             attr2 = *parts++;
             y = attr0 & 0xFF;
+
             if (y & 0x80) {
                 y = yMask ^ y;
                 y = 0xFFFF ^ y;
             }
+
             x = attr1 & 0x1FF;
+
             if (x & 0x100) {
                 x = 0x1FF ^ x;
                 x = 0xFFFF ^ x;
             }
+
             EngineObjSize(attr0, attr1, &width, &height);
+
             if (affine != NULL) {
                 x += (s16)width >> 1;
                 y += (s16)height >> 1;
+
                 if (affine->angle != 0) {
                     s32 term;
                     term = (s32)((u32)gSineTable[cosIndex = (s16)((sinIndex = -affine->angle) + 64) & 255] * x);
@@ -739,46 +811,58 @@ void UpdateSpriteOam(void) {
                     xx = (s32)((u32)affine->sx * x);
                     yy = (s32)((u32)affine->sy * y);
                 }
+
                 x = xx >> 8;
                 y = yy >> 8;
                 x -= (s16)width >> 1;
                 y -= (s16)height >> 1;
+
                 if (affine->doubleSize != 0) {
                     x -= (s16)width >> 1;
                     y -= (s16)height >> 1;
                     width <<= 1;
                     height <<= 1;
                 }
+
                 if (affine->doubleSize != 0) {
                     attr0 |= OAM_AFFINE | OAM_DOUBLE_SIZE;
                 } else {
                     attr0 |= OAM_AFFINE;
                 }
+
                 attr1 |= affine->index << 9;
             } else {
                 flags = entry->flags;
                 flip = flags & SPRITE_FLAG_VFLIP;
+
                 if (flip) {
                     attr1 ^= flip << 12;
                     y = -y - height;
                 }
+
                 flip = flags & SPRITE_FLAG_HFLIP;
+
                 if (flip) {
                     attr1 ^= flip << 12;
                     x = -x - width;
                 }
             }
+
             x += (s16)entry->x;
             y += (s16)entry->y;
+
             if (x > 239 || x <= -(s16)width || y > 159 || y <= -(s16)height) {
                 if (((ObjTiles*)entry->tiles)->allocated != 0) {
                     tileOffset += GetObjTileCount(attr0, attr1);
                 }
+
                 continue;
             }
+
             oam[0] = (attr0 & 0xFF00) | (y & 0xFF);
             oam[1] = (attr1 & 0xFE00) | (x & 0x1FF);
             tiles = entry->tiles;
+
             if (tiles->allocated != 0) {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
                 oam[2] = (attr2 & 0xC00) | (tileOffset + tiles->index) | (palette << 12);
@@ -787,6 +871,7 @@ void UpdateSpriteOam(void) {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
                 oam[2] = ((attr2 & 0xFFF) + tiles->index) | (palette << 12);
             }
+
             oam[0] |= (entry->flags & SPRITE_FLAG_MOSAIC) << 9;
             oam[0] |= (entry->flags & SPRITE_FLAG_BLEND) << 8;
             oam[2] |= entry->flags & SPRITE_PRIORITY_MASK;
@@ -794,10 +879,12 @@ void UpdateSpriteOam(void) {
             emitted++;
         }
     }
+
     for (i = emitted; i < 128; i++) {
         *oam = OAM_DISABLE;
         oam += 4;
     }
+
     gSpriteWork->entryCount = 0;
 }
 
@@ -840,6 +927,7 @@ u16 GetMaxSpriteTileBytes(void** a, u16 n) {
             max = sum;
         }
     }
+
     return max * 32;
 }
 
@@ -852,6 +940,7 @@ u16 GetSpriteTileBytes(u16* p) {
         total += GetObjTileCount(p[0], p[1]);
         p += 3;
     }
+
     return (u16)(total << 5);
 }
 
@@ -876,6 +965,7 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d) {
     if (y - (s16)top > 0xA0) {
         return 1;
     }
+
     return 0;
 }
 
@@ -905,6 +995,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
             dx = t ^ 0x1FF;
             dx = ~dx;
         }
+
         dy = attr0 & 0xFF;
         t = dy;
 
@@ -912,6 +1003,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
             dy = t ^ 0xFF;
             dy = ~dy;
         }
+
         x += dx;
         y += dy;
         pw = &w;
@@ -931,6 +1023,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
             *pw = 32;
             *ph = 32;
         } while (0);
+
         break;
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
         *pw = 64;
@@ -978,6 +1071,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -1023,6 +1117,7 @@ ObjTiles* AllocSpriteFrameTiles(u16 a) {
     if (t != NULL) {
         t->type = 2;
     }
+
     return t;
 }
 
@@ -1042,6 +1137,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
 
             if (count != 0) {
                 j = count;
+
                 do {
                     n = GetObjTileCount(b[0], b[1]);
                     RequestDma3Copy((u8*)a->src + ((b[2] & 0x3FF) << 5),
@@ -1051,11 +1147,14 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
                     j--;
                 } while (j != 0);
             }
+
             return 1;
         }
     }
+
     return 0;
 }
+
 ObjPalette* AllocObjPalette(u16 size) {
     ObjPalette* node;
     ObjPalette* cur;
@@ -1064,22 +1163,27 @@ ObjPalette* AllocObjPalette(u16 size) {
     s16 end;
 
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
+
     if (node == NULL) {
         return 0;
     }
+
     node->type = 2;
     node->count = size / 32;
     node->src = 0;
     node->refCount = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->palettePool);
+
     if (cur == NULL) {
         node->index = gSpriteWork->palettePool.rangeStart;
         ListPoolActivate(&node->node, &gSpriteWork->palettePool);
         return node;
     }
+
     node->index = gSpriteWork->palettePool.rangeStart;
     avail = cur->index - gSpriteWork->palettePool.rangeStart;
+
     if (node->count <= (s16)avail) {
         ListPoolActivateBefore(&node->node, &gSpriteWork->palettePool, &cur->node);
         return node;
@@ -1089,8 +1193,10 @@ ObjPalette* AllocObjPalette(u16 size) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         node->index = cur->index + cur->count;
+
         if (node->index + node->count > gSpriteWork->palettePool.rangeEnd) {
             break;
         }
@@ -1105,8 +1211,10 @@ ObjPalette* AllocObjPalette(u16 size) {
             ListPoolActivateAfter(&node->node, &gSpriteWork->palettePool, &cur->node);
             return node;
         }
+
         cur = next;
     }
+
     return 0;
 }
 
@@ -1123,10 +1231,13 @@ u8 CanAllocObjTiles(u16 n) {
     s16 end;
 
     cur = ListPoolFirst(&gSpriteWork->tilePool);
+
     if (cur == NULL) {
         return 1;
     }
+
     pos = gSpriteWork->tilePool.rangeStart;
+
     if (n <= (s16)(cur->index - pos)) {
         return 1;
     }
@@ -1135,8 +1246,10 @@ u8 CanAllocObjTiles(u16 n) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         pos = cur->index + cur->count;
+
         if ((s16)pos + n > gSpriteWork->tilePool.rangeEnd) {
             break;
         }
@@ -1150,10 +1263,13 @@ u8 CanAllocObjTiles(u16 n) {
         if (n <= end) {
             return 1;
         }
+
         cur = next;
     }
+
     return 0;
 }
+
 u8 CanAllocObjPalette(u16 n) {
     ObjPalette* cur;
     ObjPalette* next;
@@ -1161,10 +1277,13 @@ u8 CanAllocObjPalette(u16 n) {
     s16 end;
 
     cur = ListPoolFirst(&gSpriteWork->palettePool);
+
     if (cur == NULL) {
         return 1;
     }
+
     pos = gSpriteWork->palettePool.rangeStart;
+
     if (n <= (s16)(cur->index - pos)) {
         return 1;
     }
@@ -1173,8 +1292,10 @@ u8 CanAllocObjPalette(u16 n) {
         if (cur == NULL) {
             break;
         }
+
         next = ListPoolNext(&cur->node);
         pos = cur->index + cur->count;
+
         if ((s16)pos + n > gSpriteWork->palettePool.rangeEnd) {
             break;
         }
@@ -1188,10 +1309,13 @@ u8 CanAllocObjPalette(u16 n) {
         if (n <= end) {
             return 1;
         }
+
         cur = next;
     }
+
     return 0;
 }
+
 void GetObjSize(u16 a, u16 b, u16* w, u16* h) {
     switch (((b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
@@ -1264,8 +1388,10 @@ s32 Sqrt8(s32 a) {
             prev = x;
             x = ((a << 8) / prev + prev) / 2;
         } while (x < prev);
+
         return prev;
     }
+
     return 0;
 }
 
@@ -1286,6 +1412,7 @@ void SplineBuildAxisCoefficients(Spline2D* p, s32* d, s32* xs, s32* e) {
         a[i] = d[i + 1] - d[i];
         b[i + 1] = ((xs[i + 1] - xs[i]) << 8) / a[i];
     }
+
     e[1] = (b[2] - b[1]) - ((a[0] * e[0]) >> 8);
     b[1] = (d[2] - d[0]) << 1;
 
@@ -1294,12 +1421,14 @@ void SplineBuildAxisCoefficients(Spline2D* p, s32* d, s32* xs, s32* e) {
         e[i + 1] = (b[i + 2] - b[i + 1]) - ((e[i] * q) >> 8);
         b[i + 1] = ((d[i + 2] - d[i]) << 1) - ((q * a[i]) >> 8);
     }
+
     e[n - 2] -= (a[n - 2] * e[n - 1]) >> 8;
 
     for (i = n - 2; i > 0; i--) {
         e[i] = ((e[i] - ((a[i] * e[i + 1]) >> 8)) << 8) / b[i];
     }
 }
+
 s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
     s32 lo;
     s32 hi;
@@ -1314,8 +1443,10 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
     cnt = *n;
     lo = 0;
     hi = cnt - 1;
+
     while (lo < hi) {
         mid = (lo + hi) / 2;
+
         if (a[mid] < v) {
             lo = mid + 1;
         } else {
@@ -1326,6 +1457,7 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
     if (lo > 0) {
         lo--;
     }
+
     dx = a[lo + 1] - a[lo];
     t = v - a[lo];
     y1 = b[lo + 1];
@@ -1335,6 +1467,7 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* a, s32* c, s32* b) {
     r += ((c[lo + 1] - c[lo]) << 8) / dx - ((dx * (y0 * 2 + y1)) >> 8);
     return ((t * r) >> 8) + c[lo];
 }
+
 void SplineInit2D(Spline2D* p, s32* xs, s32* ys, s16 n) {
     s32 i;
     s32 len;
@@ -1386,6 +1519,7 @@ void SplineFreeBuffers(Spline2D* p) {
     EwramFree(p->xCoefficients);
     EwramFree(p->yCoefficients);
 }
+
 void InitDisplayRegs(void) {
     gDispCnt = DISPCNT_OBJ_1D_MAP;
     gMosaic = 0;
@@ -1423,6 +1557,7 @@ void InitDisplayRegs(void) {
     gBg3X = 0;
     gBg3Y = 0;
 }
+
 void CommitDisplayRegs(void) {
     REG_MOSAIC = gMosaic;
     REG_BLDCNT = gBldCnt;
@@ -1496,7 +1631,9 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
     if (size == 0) {
         return 0;
     }
+
     q = gDma3Requests;
+
     if (q->requestCount > 255) {
         return 0;
     }
@@ -1513,18 +1650,21 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
         dma[2] = (DMA_ENABLE << 16) | (size / 2);
         dma[2];
     }
+
     return 1;
 }
 
 #ifdef VERSION_EU
-
 u8 eu_080044C0(void* src, void* dst) {
     Dma3Queue* q = gDma3Requests;
     u16 flags;
+
     if (q->lz77RequestCount > 31) {
         return 0;
     }
+
     flags = gSystemFlags & SYSTEM_FLAG_DMA3_IMMEDIATE;
+
     if (flags == 0) {
         q->lz77Requests[q->lz77RequestCount].src = src;
         q->lz77Requests[q->lz77RequestCount].dst = dst;
@@ -1533,6 +1673,7 @@ u8 eu_080044C0(void* src, void* dst) {
     } else {
         LZ77UnCompVram(src, dst);
     }
+
     return 1;
 }
 #endif
@@ -1543,12 +1684,14 @@ u8 RequestDma3Clear(void* a, u16 b) {
     if (q->count > 3) {
         return 0;
     }
+
     q->pending[q->count].dst = a;
     q->pending[q->count].size = b;
     q->count = q->count + 1;
 
     return 1;
 }
+
 u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s8 sh) {
     if (gDma3Requests->blitCount > 63) {
         return 0;
@@ -1557,6 +1700,7 @@ u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s
     if (sw <= 0 || sh <= 0) {
         return 0;
     }
+
     gDma3Requests->blits[gDma3Requests->blitCount].src = src;
     gDma3Requests->blits[gDma3Requests->blitCount].dst = dst;
     gDma3Requests->blits[gDma3Requests->blitCount].srcX = x;
@@ -1573,6 +1717,7 @@ u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e) {
     if (gDma3Requests->fillCount > 7) {
         return 0;
     }
+
     gDma3Requests->fills[gDma3Requests->fillCount].src = a;
     gDma3Requests->fills[gDma3Requests->fillCount].dst = b;
     gDma3Requests->fills[gDma3Requests->fillCount].x = c & 0x1F;
@@ -1589,6 +1734,7 @@ u8 QueueVTransCallback(void* a) {
     if (q->callbackCount > 7) {
         return 0;
     }
+
     q->callbacks[q->callbackCount] = a;
     q->callbackCount = q->callbackCount + 1;
 
@@ -1638,6 +1784,7 @@ void FlushDma3Queue(void) {
     for (i = 0; i < n; i++) {
         cb[i]();
     }
+
     gDma3Requests->callbackCount = 0;
     n = gDma3Requests->requestCount;
 
@@ -1649,18 +1796,22 @@ void FlushDma3Queue(void) {
         dma[2];
         gDma3Requests->transferredBytes += req[i].size;
     }
+
     gDma3Requests->requestCount = 0;
 #ifdef VERSION_EU
     n = gDma3Requests->lz77RequestCount;
+
     for (i = 0; i < n; i++) {
         LZ77UnCompVram(compressed[i].src, compressed[i].dst);
     }
+
     gDma3Requests->lz77RequestCount = 0;
 #endif
     n = gDma3Requests->fillCount;
 
     for (i = 0; i < n; i++) {
         mask = 31;
+
         if (fills[i].vertical != 0) {
             for (row = 0; row < 32; row++) {
                 f = &fills[i];
@@ -1675,6 +1826,7 @@ void FlushDma3Queue(void) {
             }
         }
     }
+
     gDma3Requests->fillCount = 0;
     n = gDma3Requests->blitCount;
 
@@ -1690,6 +1842,7 @@ void FlushDma3Queue(void) {
             }
         }
     }
+
     gDma3Requests->blitCount = 0;
     n = gDma3Requests->count;
 
@@ -1703,8 +1856,10 @@ void FlushDma3Queue(void) {
         dma[2];
         gDma3Requests->transferredBytes += pend[i].size;
     }
+
     gDma3Requests->count = 0;
 }
+
 void FlushDma3QueueWithCpu(void) {
     Dma3Queue* q;
     Dma3Request* req;
@@ -1745,38 +1900,46 @@ void FlushDma3QueueWithCpu(void) {
     if (n != 0) {
         p = cb;
         i = n;
+
         do {
             (*p++)();
         } while (--i);
     }
+
     gDma3Requests->callbackCount = 0;
     n = gDma3Requests->requestCount;
 
     if (n != 0) {
         i = n;
+
         do {
             CpuSet(req->src, req->dst, req->size >> 1);
             gDma3Requests->transferredBytes += req->size;
             req++;
         } while (--i);
     }
+
     gDma3Requests->requestCount = 0;
 #ifdef VERSION_EU
     n = gDma3Requests->lz77RequestCount;
+
     if (n != 0) {
         currentCompressed = compressed;
         i = n;
+
         do {
             LZ77UnCompVram(currentCompressed->src, currentCompressed->dst);
             currentCompressed++;
         } while (--i);
     }
+
     gDma3Requests->lz77RequestCount = 0;
 #endif
     n = gDma3Requests->fillCount;
 
     for (i = 0; i < n; i++) {
         mask = 31;
+
         if (fills[i].vertical != 0) {
             row = 0;
 
@@ -1795,6 +1958,7 @@ void FlushDma3QueueWithCpu(void) {
             }
         }
     }
+
     gDma3Requests->fillCount = 0;
     n = gDma3Requests->blitCount;
 
@@ -1809,6 +1973,7 @@ void FlushDma3QueueWithCpu(void) {
             }
         }
     }
+
     gDma3Requests->blitCount = 0;
     n = gDma3Requests->count;
 
@@ -1816,6 +1981,7 @@ void FlushDma3QueueWithCpu(void) {
         current = pend;
         zeroPtr = &zero;
         i = n;
+
         do {
             *zeroPtr = 0;
             CpuSet((void*)&zero, current->dst, (current->size >> 1) | CPU_SET_SRC_FIXED);
@@ -1823,6 +1989,7 @@ void FlushDma3QueueWithCpu(void) {
             current++;
         } while (--i);
     }
+
     gDma3Requests->count = 0;
 }
 
@@ -1872,6 +2039,7 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
     } else {
         w2 = w - w1;
     }
+
     h1 = 32 - ty;
 
     if (h1 >= h) {
@@ -1880,6 +2048,7 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
     } else {
         h2 = h - h1;
     }
+
     RequestTilemapRectCopy(GetBgMapBlock(e, x, y), dst, tx, ty, sx, sy, w1, h1);
     x2 = x + 256;
     RequestTilemapRectCopy(GetBgMapBlock(e, x2, y), dst, 0, ty, sx2 = sx - (ox = tx - 32), sy, w2, h1);
@@ -1891,7 +2060,6 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
 void BgReset(void) {
 #ifdef VERSION_EU
     u32 zero;
-
     zero = 0;
     CpuSet(&zero, gBgWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
 #endif
@@ -2053,12 +2221,14 @@ void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
     if (e->map == NULL) {
         return;
     }
+
     e->x = x;
     e->y = y;
     CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
     SetBgScroll(bg, x & 7, y & 7);
     e->dirty = 0;
 }
+
 void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
     BgEntry* e;
     s8 dx;
@@ -2072,6 +2242,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
     void* dst;
 
     e = &gBgWork->entries[bg];
+
     if (e->map == NULL) {
         return;
     }
@@ -2080,6 +2251,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         RedrawBgMapAt(bg, x, y);
         return;
     }
+
     dx = (x >> 3) - (e->x >> 3);
     dy = (y >> 3) - (e->y >> 3);
 
@@ -2087,6 +2259,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         RedrawBgMapAt(bg, x, y);
         return;
     }
+
     sx = GetBgScrollX(bg);
     sy = GetBgScrollY(bg);
     SetBgScroll(bg, (u16)(sx + (x - e->x)), (u16)(sy + (y - e->y)));
@@ -2096,6 +2269,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         e->y = y;
         return;
     }
+
     dst = (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000);
     tx = sx >> 3;
     ty = sy >> 3;
@@ -2106,6 +2280,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         if (dx > 31) {
             dx = 31;
         }
+
         CopyBgMapRect(e->x + 248, y, e, dst, tx + 31, cy, dx, 21);
     } else if (dx < 0) {
         dx = -dx;
@@ -2113,6 +2288,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         if (dx > 31) {
             dx = 31;
         }
+
         CopyBgMapRect(e->x - (dx << 3), y, e, dst, tx - dx, cy, dx, 21);
     }
 
@@ -2120,6 +2296,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         if (dy > 21) {
             dy = 21;
         }
+
         CopyBgMapRect(x, e->y + 168, e, dst, cx, ty + 21, 31, dy);
     } else if (dy < 0) {
         dy = -dy;
@@ -2127,8 +2304,10 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         if (dy > 21) {
             dy = 21;
         }
+
         CopyBgMapRect(x, e->y - (dy << 3), e, dst, cx, ty - dy, 31, dy);
     }
+
     e->x = x;
     e->y = y;
 }
@@ -2139,6 +2318,7 @@ u16 GetBgMapX(s32 bg) {
     if (e->map == NULL) {
         return 0;
     }
+
     return e->x;
 }
 
@@ -2148,6 +2328,7 @@ u16 GetBgMapY(s32 bg) {
     if (e->map == NULL) {
         return 0;
     }
+
     return e->y;
 }
 
@@ -2208,6 +2389,7 @@ u8 GetBgScrollX(u32 a) {
     default:
         return 0;
     }
+
     return v;
 }
 
@@ -2230,6 +2412,7 @@ u8 GetBgScrollY(u32 a) {
     default:
         return 0;
     }
+
     return v;
 }
 
@@ -2328,6 +2511,7 @@ void SetBgBlend(s32 a, u16 b, u16 c) {
         gBldCnt = (BLDCNT_TGT1_BG3 | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_OBJ);
         break;
     }
+
     gBldCnt |= BLDCNT_EFFECT_BLEND;
     gBldAlpha = (b << 8) | c;
 }
@@ -2337,7 +2521,6 @@ void SetBlendAlpha(u16 a, u16 b) {
 }
 
 #ifdef VERSION_EU
-
 void eu_080059D4(s32 bg, void* src) {
     EnableBg(bg);
     eu_080044C0(src, GetBgCharBase(bg));
@@ -2356,25 +2539,34 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
     BgEntry* e;
     s32 count;
     s32 i;
+
     if ((gDispCnt & DISPCNT_MODE_MASK) != 0 && (bg == 2 || bg == 3)) {
         return 0;
     }
+
     e = &gBgWork->entries[bg];
+
     if (e->decompressedMap != NULL) {
         return 0;
     }
+
     count = w * h;
     e->decompressedMap = EwramAlloc(count * sizeof(void*));
+
     if (e->decompressedMap == NULL) {
         return 0;
     }
+
     for (i = 0; i < count; i++) {
         e->decompressedMap[i] = EwramAlloc(eu_08005A14(((u32**)src)[i]));
+
         if (e->decompressedMap[i] == NULL) {
             return 0;
         }
+
         LZ77UnCompWram(((u32**)src)[i], e->decompressedMap[i]);
     }
+
     EnableBg(bg);
     e->map = e->decompressedMap;
     e->width = w;
@@ -2389,11 +2581,14 @@ void eu_08005ADC(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
     s32 count;
     s32 i;
+
     if (e->decompressedMap != NULL) {
         count = e->width * e->height;
+
         for (i = 0; i < count; i++) {
             EwramFree(e->decompressedMap[i]);
         }
+
         EwramFree(e->decompressedMap);
         e->decompressedMap = 0;
     }
@@ -2412,6 +2607,7 @@ s16 GetAngleDiff(s32 a, s32 b) {
     if (d > 0x7F) {
         return (x + 0xFFFFFF00) - y;
     }
+
     return d;
 }
 
@@ -2424,11 +2620,13 @@ s32 GetAngleDiff16(s32 a, s32 b) {
     if (d <= -0x8000) {
         return (x + 0x10000) - y;
     }
+
     c = 0x10000;
 
     if (d > 0x7FFF) {
         return (x - c) - y;
     }
+
     return d;
 }
 
@@ -2439,10 +2637,13 @@ void ApproachAngle(u16* p, u16 target, u16 shift) {
     if (*p == target) {
         return;
     }
+
     d = GetAngleDiff((s16)target, (s16)*p);
+
     if (d == 0) {
         return;
     }
+
     v = d >> shift;
     *p = v + *p;
 }
@@ -2475,6 +2676,7 @@ s32 GetHalfStepDivisor(u16 a) {
     if (a == 0) {
         a = 1;
     }
+
     return a;
 }
 
@@ -2506,10 +2708,12 @@ void AnimStart(AnimState* a, u16 animId, u16 flags) {
     AnimHeader* h = a->anims[animId];
 
     a->frameCount = h->frameCount;
+
     if (a->frameCount == 0) {
         a->frames = 0;
         return;
     }
+
     a->frames = h->frames;
 
     if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
@@ -2521,6 +2725,7 @@ void AnimStart(AnimState* a, u16 animId, u16 flags) {
             a->frame = 0;
         }
     }
+
     a->flags = flags;
     a->animId = animId;
 }
@@ -2531,12 +2736,15 @@ void AnimChange(AnimState* a, u16 id, u16 flags) {
     if (a->animId == id) {
         return;
     }
+
     h = a->anims[id];
     a->frameCount = h->frameCount;
+
     if (a->frameCount == 0) {
         a->frames = 0;
         return;
     }
+
     a->frames = h->frames;
 
     if ((flags & ANIM_FLAG_KEEP_FRAME) == 0) {
@@ -2548,6 +2756,7 @@ void AnimChange(AnimState* a, u16 id, u16 flags) {
             a->frame = 0;
         }
     }
+
     a->flags = flags;
     a->animId = id;
 }
@@ -2560,6 +2769,7 @@ void* AnimUpdate(AnimState* a) {
     if (frames == NULL) {
         return 0;
     }
+
     a->timer++;
     index = a->frame;
 
@@ -2573,6 +2783,7 @@ void* AnimUpdate(AnimState* a) {
             } else {
                 a->frame = index;
             }
+
             a->flags |= ANIM_FLAG_FINISHED;
         }
     }
@@ -2708,71 +2919,101 @@ void FadeUpdate(void) {
     if (gFadeWork->target != 0 || gFadeWork->amount != 0) {
         changed = gFadeWork->amount != gFadeWork->lastAmount;
         amount = gFadeWork->amount >> 8;
+
         for (i = 0; i < 32; i++) {
             slot = &gFadeWork->slots[i];
             src = slot->src;
+
             if (src == NULL) {
                 continue;
             }
+
             if (slot->excluded != 0 && (gFadeWork->flags & FADE_FLAG_LOCKED) == 0) {
                 continue;
             }
+
             if (slot->dirty != 0) {
                 slot->dirty = 0;
             } else if (!changed) {
                 continue;
             }
+
             dst = slot->buffer;
+
             for (j = 0; j < 16; j++) {
                 color = *src++;
                 r = color & 31;
                 g = (color >> 5) & 31;
                 b = (color >> 10) & 31;
+
                 switch (gFadeWork->mode) {
                 case FADE_MODE_BLACK:
                     r -= amount;
                     g -= amount;
                     b -= amount;
+
                     if (r < 0) r = 0;
+
                     if (g < 0) g = 0;
+
                     if (b < 0) b = 0;
+
                     break;
                 case FADE_MODE_WHITE:
                     if (r < amount) r = amount;
+
                     if (g < amount) g = amount;
+
                     if (b < amount) b = amount;
+
                     break;
                 case FADE_MODE_RED:
                     r += amount;
                     g -= amount;
                     b -= amount;
+
                     if (r > 31) r = 31;
+
                     if (g < 0) g = 0;
+
                     if (b < 0) b = 0;
+
                     break;
                 case FADE_MODE_GREEN:
                     r -= amount;
                     g += amount;
                     b -= amount;
+
                     if (r < 0) r = 0;
+
                     if (g > 31) g = 31;
+
                     if (b < 0) b = 0;
+
                     break;
                 case FADE_MODE_BLUE:
                     r -= amount;
                     g -= amount;
                     b += amount;
+
                     if (r < 0) r = 0;
+
                     if (g < 0) g = 0;
+
                     if (b > 31) b = 31;
+
                     break;
                 case FADE_MODE_ADD_WHITE:
                     r += amount;
                     g += amount;
                     b += amount;
+
                     if (r > 31) r = 31;
+
                     if (g > 31) g = 31;
+
                     if (b > 31) b = 31;
+
                     break;
                 case FADE_MODE_GRAY:
                     gray = ((r + g + b) >> 2) * amount;
@@ -2790,6 +3031,7 @@ void FadeUpdate(void) {
                     break;
                 case FADE_MODE_CONTRAST:
                     gray = 31 * amount;
+
                     if ((r + g + b) / 3 > 12) {
                         r = (gray + r * (31 - amount)) / 31;
                         g = (gray + g * (31 - amount)) / 31;
@@ -2799,35 +3041,49 @@ void FadeUpdate(void) {
                         g = g * (31 - amount) / 31;
                         b = b * (31 - amount) / 31;
                     }
+
                     break;
                 case FADE_MODE_DARK_MAGENTA:
                     r -= amount;
                     g -= amount * 2;
                     b -= amount;
+
                     if (r < 0) r = 0;
+
                     if (g < 0) g = 0;
+
                     if (b < 0) b = 0;
+
                     break;
                 case FADE_MODE_DARK_RED:
                     r -= amount;
                     g -= amount * 2;
                     b -= amount * 2;
+
                     if (r < 0) r = 0;
+
                     if (g < 0) g = 0;
+
                     if (b < 0) b = 0;
+
                     break;
                 }
+
                 *dst++ = b * 1024 | g * 32 | r;
             }
+
             RequestDma3Copy(slot->buffer, slot->dst, 32);
         }
     }
+
     gFadeWork->lastAmount = gFadeWork->amount;
+
     if (gFadeWork->timer != 0) {
         if ((gFadeWork->flags & FADE_FLAG_PAUSED) == 0) {
             ApproachValue((s32*)&gFadeWork->amount, gFadeWork->target, gFadeWork->timer);
             gFadeWork->timer--;
         }
+
         if (gFadeWork->timer == 0 && gFadeWork->amount == 0) {
             for (i = 0; i < 32; i++) {
                 slot = &gFadeWork->slots[i];
@@ -2838,6 +3094,7 @@ void FadeUpdate(void) {
         gFadeWork->flags = 0;
     }
 }
+
 void FadeStartIn(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
@@ -2847,6 +3104,7 @@ void FadeStartIn(s32 a, u16 b) {
             return;
         }
     }
+
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
@@ -2855,6 +3113,7 @@ void FadeStartIn(s32 a, u16 b) {
     base->lastAmount = z;
     base->mode = a;
 }
+
 void FadeStartOut(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
@@ -2864,6 +3123,7 @@ void FadeStartOut(s32 a, u16 b) {
             return;
         }
     }
+
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
@@ -2872,6 +3132,7 @@ void FadeStartOut(s32 a, u16 b) {
     base->lastAmount = z;
     base->mode = a;
 }
+
 void FadeToOriginal(s32 a, u16 b) {
     FadeWork* base = gFadeWork;
     u32 z;
@@ -2881,6 +3142,7 @@ void FadeToOriginal(s32 a, u16 b) {
             return;
         }
     }
+
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
     base->timer = b;
@@ -2896,6 +3158,7 @@ void FadeToAmount(s32 a, u16 b, u16 c) {
             return;
         }
     }
+
     base->flags = FADE_FLAG_ACTIVE;
     base->timer = c;
     base->target = b << 8;
@@ -2911,6 +3174,7 @@ void FadeFromAmount(s32 a, u16 b, u16 c) {
             return;
         }
     }
+
     z = 0;
     base->flags = FADE_FLAG_ACTIVE;
     base->timer = c;
@@ -2926,6 +3190,7 @@ void FadeSetPaletteExcluded(u16 slot, u8 value) {
     if (slot > 0x1F) {
         return;
     }
+
     p = gFadeWork->slots;
     p += slot;
     p->excluded = value;
@@ -2935,6 +3200,7 @@ u8 FadeIsActive(void) {
     if (gFadeWork->flags & FADE_FLAG_ACTIVE) {
         return 1;
     }
+
     return 0;
 }
 

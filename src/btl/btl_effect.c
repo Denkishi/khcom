@@ -307,6 +307,7 @@ void BgFxReset(void) {
     } else {
         SetBgPriority(gBgFx->bg, 1);
     }
+
     SetBgBlend(gBgFx->bg, 16, 16);
     gBgFx->scaleX = 0x100;
     gBgFx->scaleY = 0x100;
@@ -327,6 +328,7 @@ u8 BgFxIsBlocked(u8 a) {
     if (gBgFx->priority < a) {
         return 1;
     }
+
     gBgFx->priority = a;
     return 0;
 }
@@ -360,6 +362,7 @@ void BgFxInit(u16 a, u16 bg) {
     } else {
         BgAnimInit(bg, 0x8000, 0x80);
     }
+
     SetBgBlend(bg, 16, 16);
     gBgFx->update = 0;
     gBgFx->priority = 0xFF;
@@ -397,6 +400,7 @@ void BgFxUpdate(void) {
             }
         }
     }
+
     BgAnimUpdate();
 }
 
@@ -404,6 +408,7 @@ u8 BgFxIsActive(void) {
     if (gBgFx->flags & BGFX_FLAG_ACTIVE) {
         return 1;
     }
+
     return 0;
 }
 
@@ -419,6 +424,7 @@ void BgFxUpdateBase(void) {
         if (gBgFx->flags & BGFX_FLAG_SCREEN_DIMMED) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
         }
+
         return;
     }
 
@@ -452,6 +458,7 @@ void BgFxUpdateBase(void) {
         BgAnimSetTransform(gBgFx->angle + gBtlWork->rotation, a, b);
     }
 }
+
 void BgFxStartCure(u16 a, s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -459,6 +466,7 @@ void BgFxStartCure(u16 a, s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->releaseFrames = 20;
     gBgFx->x = x;
@@ -475,6 +483,7 @@ void BgFxStartCure(u16 a, s32 x, s32 y, s32 z) {
         gBgFx->z = z - 0x1000;
         break;
     }
+
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
 
     switch (a) {
@@ -491,6 +500,7 @@ void BgFxStartCure(u16 a, s32 x, s32 y, s32 z) {
         m4aSongNumStart(SONG_EF_CAREL02);
         break;
     }
+
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
     gBgFx->update = BgFxUpdateBase;
@@ -504,6 +514,7 @@ void BgFxUpdateFadeOut(void) {
     } else {
         gBgFx->unk_08++;
     }
+
     BgFxUpdateBase();
 }
 
@@ -592,6 +603,7 @@ void BgFxUpdateFire(void) {
 
     BgFxUpdateBase();
 }
+
 void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
     s16 sx;
     s16 sy;
@@ -599,6 +611,7 @@ void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w)
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -616,6 +629,7 @@ void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w)
     } else {
         m4aSongNumStart(SONG_EF_FIRE00);
     }
+
     BgAnimSetLoopStartFrame(8);
     gBgFx->update = BgFxUpdateFire;
     gBgFx->unk_28 = p;
@@ -629,9 +643,11 @@ void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w)
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
         gBgFx->scaleX = -0x100;
     }
+
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a) {
     s16 sx;
     s16 sy;
@@ -639,6 +655,7 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a) 
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -661,10 +678,12 @@ void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a) 
     } else {
         gBgFx->scaleX = 0x180;
     }
+
     gBgFx->scaleY = 0x180;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateBlizzard(void) {
     u16 a;
     u16 b;
@@ -691,6 +710,7 @@ void BgFxUpdateBlizzard(void) {
                         gBgFx->unk_2C) - 64,
                     5);
             }
+
             gBgFx->angle = angle;
             ApproachValue(&gBgFx->x, gBgFx->unk_28, gBgFx->unk_08);
             ApproachValue(&gBgFx->y, gBgFx->unk_2C, gBgFx->unk_08);
@@ -741,6 +761,7 @@ void BgFxUpdateBlizzard(void) {
             m4aSongNumStart(SONG_EF_BURIZA03);
             break;
         }
+
         gBgFx->unk_08 = -2;
     }
 
@@ -751,12 +772,14 @@ void BgFxUpdateBlizzard(void) {
                 ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y,
                     gBgFx->z, 18, 18, 18);
             }
+
             break;
         case 1:
             if (gBgFx->unk_0A == 35) {
                 ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y,
                     gBgFx->z, 24, 24, 30);
             }
+
             break;
         case 2:
         default:
@@ -764,12 +787,16 @@ void BgFxUpdateBlizzard(void) {
                 ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y,
                     gBgFx->z, 48, 48, 52);
             }
+
             break;
         }
+
         gBgFx->unk_0A++;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
     s16 sx;
     s16 sy;
@@ -777,6 +804,7 @@ void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s3
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -789,6 +817,7 @@ void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s3
     } else {
         m4aSongNumStart(SONG_EF_BURIZA00);
     }
+
     BgAnimSetLoopStartFrame(8);
     gBgFx->update = BgFxUpdateBlizzard;
     gBgFx->unk_28 = p;
@@ -803,6 +832,7 @@ void BgFxStartBlizzard(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s3
         gBgFx->scaleX = -0x100;
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
@@ -821,6 +851,7 @@ void BgFxUpdateFlash(void) {
             BgAnimStop();
         }
     }
+
     gBgFx->unk_08++;
 }
 
@@ -831,6 +862,7 @@ void BgFxStartFlash(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(3)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -846,6 +878,7 @@ void BgFxStartFlash(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateFlash;
     gBgFx->unk_08 = 0;
 }
+
 void BgFxUpdateFlashHit(void) {
     s16 t = gBgFx->unk_08;
 
@@ -857,9 +890,11 @@ void BgFxUpdateFlashHit(void) {
     if (t > 15) {
         BgAnimStop();
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
+
 void BgFxStartFlashHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -867,6 +902,7 @@ void BgFxStartFlashHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -882,6 +918,7 @@ void BgFxStartFlashHit(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateFlashHit;
     gBgFx->unk_08 = 0;
 }
+
 void func_080135EC(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -889,6 +926,7 @@ void func_080135EC(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -902,6 +940,7 @@ void func_080135EC(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateFlash;
     gBgFx->unk_08 = 0;
 }
+
 void BgFxStartSoraHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -909,6 +948,7 @@ void BgFxStartSoraHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(3)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -917,6 +957,7 @@ void BgFxStartSoraHit(s32 x, s32 y, s32 z) {
     BgAnimStart(&gBgAnimDefSoraHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartRikuHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -924,6 +965,7 @@ void BgFxStartRikuHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(3)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -940,6 +982,7 @@ void BgFxStartLimit(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -948,6 +991,7 @@ void BgFxStartLimit(s32 x, s32 y, s32 z, u8 f) {
     if (f != 0) {
         gBgFx->scaleX = -0x100;
     }
+
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
     BgAnimStart(&gBgAnimDefLimit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
@@ -960,6 +1004,7 @@ void func_080137C8(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x + 0x400;
     gBgFx->y = y;
@@ -968,10 +1013,12 @@ void func_080137C8(s32 x, s32 y, s32 z, u8 f) {
     if (f != 0) {
         gBgFx->scaleX = -0x100;
     }
+
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
     BgAnimStart(&gUnk_09EDA660, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartEnemyHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -979,6 +1026,7 @@ void BgFxStartEnemyHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -987,6 +1035,7 @@ void BgFxStartEnemyHit(s32 x, s32 y, s32 z) {
     BgAnimStart(&gBgAnimDefEnemyHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartFireHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -994,6 +1043,7 @@ void BgFxStartFireHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1003,6 +1053,7 @@ void BgFxStartFireHit(s32 x, s32 y, s32 z) {
     BgAnimStart(&sBgAnimDefFireHit, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartBlizzardHit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -1010,6 +1061,7 @@ void BgFxStartBlizzardHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1026,6 +1078,7 @@ void BgFxStartThunderHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1042,6 +1095,7 @@ void BgFxStartGuard(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1058,6 +1112,7 @@ void BgFxStartPotion(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->releaseFrames = 20;
     gBgFx->x = x;
@@ -1070,6 +1125,7 @@ void BgFxStartPotion(s32 x, s32 y, s32 z) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateWideThunder(void) {
     s16 sx;
     s16 sy;
@@ -1122,8 +1178,10 @@ void BgFxUpdateWideThunder(void) {
             gBgFx->scaleY = 384;
         }
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartWideThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q) {
     s16 sx;
     s16 sy;
@@ -1131,6 +1189,7 @@ void BgFxStartWideThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1161,6 +1220,7 @@ void BgFxUpdateEnemyDeath(void) {
             gBgFx->unk_08 += 2;
         }
     }
+
     BgFxUpdateBase();
 }
 
@@ -1171,6 +1231,7 @@ void BgFxStartEnemyDeath(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->scaleX = s;
     gBgFx->scaleY = s;
@@ -1186,6 +1247,7 @@ void BgFxStartEnemyDeath(s32 x, s32 y, s32 z, s32 s) {
     gBgFx->unk_2C = 0;
     gBgFx->unk_08 = 0;
 }
+
 void BgFxStartDarkDeath(s32 x, s32 y, s32 z, s32 s) {
     s16 sx;
     s16 sy;
@@ -1193,6 +1255,7 @@ void BgFxStartDarkDeath(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->scaleX = s;
     gBgFx->scaleY = s;
@@ -1215,6 +1278,7 @@ void BgFxStartEnemySpawn(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->scaleX = s;
     gBgFx->scaleY = s;
@@ -1235,6 +1299,7 @@ void BgFxStartDarkDeathBlend(s32 x, s32 y, s32 s, u16 b, u16 c) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->scaleX = s;
     gBgFx->scaleY = s;
@@ -1263,6 +1328,7 @@ void BgFxStartExplosion(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1289,6 +1355,7 @@ void BgFxStartSummon(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1307,6 +1374,7 @@ void BgFxStartFriendHit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1331,6 +1399,7 @@ void BgFxStartActorThunder(BtlObj* p) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->actor = p;
     gBgFx->x = p->x;
@@ -1345,6 +1414,7 @@ void BgFxStartActorThunder(BtlObj* p) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_08014294(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -1353,6 +1423,7 @@ void func_08014294(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         gBgFx->unk_3C += 64;
@@ -1376,12 +1447,14 @@ void func_08014294(void) {
             BgAnimStop();
             gBgFx->update = 0;
         }
+
         break;
     }
 
     ApplyAttackBox(256, gBgFx->x, gBgFx->y, gBgFx->z, 32, 32, 32);
     BgFxUpdateBase();
 }
+
 void func_0801435C(s32 x, s32 y, s32 z, s32 w, s32 v) {
     s16 sx;
     s16 sy;
@@ -1389,6 +1462,7 @@ void func_0801435C(s32 x, s32 y, s32 z, s32 w, s32 v) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1405,6 +1479,7 @@ void func_0801435C(s32 x, s32 y, s32 z, s32 w, s32 v) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateDsdEnergy(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -1418,6 +1493,7 @@ void BgFxUpdateDsdEnergy(void) {
             gBgFx->unk_08 = 0;
             gBgFx->unk_26 = 1;
         }
+
         break;
     case 1:
         if (gBgFx->endSignals != 0) {
@@ -1425,6 +1501,7 @@ void BgFxUpdateDsdEnergy(void) {
             gBgFx->unk_08 = 0;
             gBgFx->unk_0A = 16;
         }
+
         break;
     case 2:
         ApproachValue(&gBgFx->unk_3C, 0, gBgFx->unk_0A);
@@ -1436,12 +1513,14 @@ void BgFxUpdateDsdEnergy(void) {
             gBgFx->unk_26 = 3;
             BgAnimStop();
         }
+
         break;
     }
 
     gBgFx->angle += gBgFx->unk_0C;
     BgFxUpdateBase();
 }
+
 void func_080144D8(s32 x, s32 y, s32 z, s32 w, u16 a, u16 b) {
     s16 sx;
     s16 sy;
@@ -1449,6 +1528,7 @@ void func_080144D8(s32 x, s32 y, s32 z, s32 w, u16 a, u16 b) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
     gBgFx->x = x;
@@ -1467,6 +1547,7 @@ void func_080144D8(s32 x, s32 y, s32 z, s32 w, u16 a, u16 b) {
     gBgFx->unk_0A = a;
     gBgFx->unk_0C = b;
 }
+
 void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 w, s32 paramA, s32 paramB) {
     u16 a = paramA;
     u16 b = paramB;
@@ -1476,6 +1557,7 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 w, s32 paramA, s32 paramB) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
     gBgFx->x = x;
@@ -1496,6 +1578,7 @@ void BgFxStartDsdEnergy(s32 x, s32 y, s32 z, s32 w, s32 paramA, s32 paramB) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_08014654(void) {
     u16 t;
     s16 u;
@@ -1512,8 +1595,10 @@ void func_08014654(void) {
             BgAnimStop();
         }
     }
+
     gBgFx->unk_08++;
 }
+
 void func_080146A8(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -1521,6 +1606,7 @@ void func_080146A8(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1575,6 +1661,7 @@ void BgFxStartGroundImpact(s32 x, s32 y) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBgBlend(gBgFx->bg, 5, 16);
     gBgFx->x = x;
@@ -1595,6 +1682,7 @@ void BgFxUpdateStop(void) {
 #endif
             ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, 16, 16, 48);
         }
+
         break;
     case 1:
 #ifdef VERSION_EU
@@ -1604,13 +1692,16 @@ void BgFxUpdateStop(void) {
 #endif
             ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, 24, 24, 48);
         }
+
         break;
     case 2:
         if (gBgFx->unk_08 == 33) {
             ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, 32, 32, 48);
         }
+
         break;
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
@@ -1622,6 +1713,7 @@ void BgFxStartStop(u16 a, s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->releaseFrames = 20;
     gBgFx->x = x;
@@ -1646,6 +1738,7 @@ void BgFxStartStop(u16 a, s32 x, s32 y, s32 z, s32 w) {
         m4aSongNumStart(SONG_EF_STOP02);
         break;
     }
+
     gBgFx->update = BgFxUpdateStop;
 }
 
@@ -1656,6 +1749,7 @@ void BgFxStartCharaDefeat(s32 x, s32 y) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1673,6 +1767,7 @@ void BgFxStartHumDefeat(s32 x, s32 y) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1690,6 +1785,7 @@ void BgFxStartBossDeath(s32 x, s32 y) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1708,6 +1804,7 @@ void BgFxStartCharaDefeatEnd(s32 x, s32 y) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -1717,6 +1814,7 @@ void BgFxStartCharaDefeatEnd(s32 x, s32 y) {
     gBgFx->update = BgFxUpdateBase;
     gBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
 }
+
 void BgFxUpdateGravity(void) {
     s16 sx;
     s16 sy;
@@ -1791,6 +1889,7 @@ void BgFxUpdateGravity(void) {
 
         gBgFx->unk_08++;
     }
+
     BgFxUpdateBase();
 }
 
@@ -1801,6 +1900,7 @@ void BgFxStartGravity(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(2, 16);
     gBgFx->x = x;
@@ -1815,6 +1915,7 @@ void BgFxStartGravity(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32
         gBgFx->scaleX = -gBgFx->scaleX;
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     gBgFx->unk_0A = 0;
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
     BgAnimStart(&gBgAnimDefGravity00, sx, sy);
@@ -1825,6 +1926,7 @@ void BgFxStartGravity(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32
 
 void BgFxUpdateGravityStrike(void) {
     s16 t = gBgFx->unk_08 % 8;
+
     if (t <= 3) {
         SetBlendAlpha(t, 16);
     } else {
@@ -1836,6 +1938,7 @@ void BgFxUpdateGravityStrike(void) {
             m4aSongNumStart(SONG_EF_GRABI02);
         }
     }
+
     BgFxUpdateBase();
     gBgFx->unk_08++;
 }
@@ -1847,6 +1950,7 @@ void BgFxStartGravityStrike(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(2, 16);
     gBgFx->x = x;
@@ -1870,6 +1974,7 @@ void BgFxUpdateShockwave(void) {
     } else {
         gBgFx->x += 0x300;
     }
+
     BgFxUpdateBase();
     SetBlendAlpha(16, 8 - gBgFx->unk_0A);
 
@@ -1880,6 +1985,7 @@ void BgFxUpdateShockwave(void) {
     if (gBgFx->unk_08 % 5 == 0) {
         gBgFx->unk_0A++;
     }
+
     gBgFx->unk_08++;
 }
 
@@ -1890,6 +1996,7 @@ void BgFxStartShockwave(s32 x, s32 y, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y - 0x1000;
@@ -1898,6 +2005,7 @@ void BgFxStartShockwave(s32 x, s32 y, u8 f) {
     if (f) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, 0);
     gBgFx->scaleX = 128;
     gBgFx->scaleY = 128;
@@ -1919,6 +2027,7 @@ void BgFxUpdateGas(void) {
             BgAnimStop();
         }
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
@@ -1930,6 +2039,7 @@ void BgFxStartGas(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 16);
     gBgFx->x = x;
@@ -1945,6 +2055,7 @@ void BgFxStartGas(s32 x, s32 y, s32 z, u8 f) {
     if (f == 0) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
     BgAnimSetLoopStartFrame(3);
@@ -1961,6 +2072,7 @@ void BgFxUpdateFadeInOut(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         if (gBgFx->unk_08 > gBgFx->unk_0A) {
@@ -1969,6 +2081,7 @@ void BgFxUpdateFadeInOut(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         SetBlendAlpha(16, 16 - gBgFx->unk_08);
@@ -1978,8 +2091,10 @@ void BgFxUpdateFadeInOut(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
 
@@ -1990,6 +2105,7 @@ void BgFxStartBoogieKaihuku(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
     gBgFx->x = x;
@@ -2018,6 +2134,7 @@ void BgFxUpdateBossDeathFlash(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         if (FadeIsActive() == 0) {
@@ -2027,8 +2144,10 @@ void BgFxUpdateBossDeathFlash(void) {
             gBgFx->update = 0;
             gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
         }
+
         break;
     }
+
     BgAnimSetTransform(0, gBgFx->scaleX, gBgFx->scaleY);
     gBgFx->scaleX += 20;
     gBgFx->scaleY += 20;
@@ -2038,6 +2157,7 @@ void BgFxStartBossDeathFlash(void) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->unk_26 = 0;
     gBgFx->scaleX = 0x19;
@@ -2066,6 +2186,7 @@ void BgFxUpdatePcShot(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         ApproachValue(&gBgFx->x, gBgFx->unk_28, gBgFx->unk_08);
@@ -2085,6 +2206,7 @@ void BgFxUpdatePcShot(void) {
         } else {
             gBgFx->unk_08--;
         }
+
         break;
     case 2:
         t = gBgFx->unk_08;
@@ -2098,10 +2220,13 @@ void BgFxUpdatePcShot(void) {
             gBgFx->z -= gBgFx->scaleX;
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s, u16 a, s32 t) {
     s16 sx;
     s16 sy;
@@ -2109,6 +2234,7 @@ void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s, u16 a, s32
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
     gBgFx->x = x;
@@ -2130,6 +2256,7 @@ void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s, u16 a, s32
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
     s16 sx;
     s16 sy;
@@ -2138,6 +2265,7 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2146,9 +2274,11 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
     t = sy << 8;
     gBgFx->scaleX = 384;
     gBgFx->scaleY = t / 40;
+
     if (gBgFx->scaleY < 384) {
         gBgFx->scaleY = 384;
     }
+
     BgAnimStart(&gBgAnimDefThunder01, sx, sy);
     m4aSongNumStart(SONG_EF_THUND01);
     ApplyAttackBox(w, gBgFx->x, gBgFx->y, gBgFx->z, 16, 16, 256);
@@ -2156,6 +2286,7 @@ void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateThunder(void) {
     s16 sx;
     s16 sy;
@@ -2208,8 +2339,10 @@ void BgFxUpdateThunder(void) {
             gBgFx->scaleY = 384;
         }
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s) {
     s16 sx;
     s16 sy;
@@ -2217,6 +2350,7 @@ void BgFxStartThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2233,6 +2367,7 @@ void BgFxStartThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateDumboSplash(void) {
     s32 t;
     u16 v;
@@ -2242,6 +2377,7 @@ void BgFxUpdateDumboSplash(void) {
         if (gBgFx->unk_08 == 0) {
             gBgFx->unk_0A = 40;
         }
+
         ApproachValue(&gBgFx->unk_3C, 0x1000, gBgFx->unk_0A);
         ApproachValue(&gBgFx->scaleX, gBgFx->unk_28, gBgFx->unk_0A);
         ApproachValue(&gBgFx->scaleY, 0x100, gBgFx->unk_0A);
@@ -2252,6 +2388,7 @@ void BgFxUpdateDumboSplash(void) {
         if (t < 0) {
             t = -t;
         }
+
         t *= 44;
 
         if (gBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -2261,6 +2398,7 @@ void BgFxUpdateDumboSplash(void) {
             ApplyAttackBox(gBgFx->attack, gBgFx->x - t, gBgFx->y,
                 gBgFx->z, t << 8 >> 16, 24, 24);
         }
+
         SetBlendAlpha(16, gBgFx->unk_3C >> 8);
 
         if (--gBgFx->unk_0A <= 0) {
@@ -2269,6 +2407,7 @@ void BgFxUpdateDumboSplash(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         v = gBgFx->unk_08;
@@ -2278,11 +2417,13 @@ void BgFxUpdateDumboSplash(void) {
             gBgFx->unk_26 = 2;
             break;
         }
+
         t = gBgFx->scaleX;
 
         if (t < 0) {
             t = -t;
         }
+
         t *= 44;
 
         if (gBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -2294,6 +2435,7 @@ void BgFxUpdateDumboSplash(void) {
             ApplyAttackBox(gBgFx->attack, gBgFx->x - t, gBgFx->y,
                 gBgFx->z, t << 8 >> 16, 24, 24);
         }
+
         gBgFx->angle = gBgFx->unk_40 >> 8;
         gBgFx->unk_08++;
         break;
@@ -2301,6 +2443,7 @@ void BgFxUpdateDumboSplash(void) {
         if (gBgFx->unk_08 == 0) {
             gBgFx->unk_0A = 20;
         }
+
         ApproachValue(&gBgFx->unk_3C, 0, gBgFx->unk_0A);
         ApproachValue(&gBgFx->scaleY, 128, gBgFx->unk_0A);
 
@@ -2311,6 +2454,7 @@ void BgFxUpdateDumboSplash(void) {
             ApproachValue(&gBgFx->scaleX, 128, gBgFx->unk_0A);
             ApproachValue(&gBgFx->unk_40, -0x800, gBgFx->unk_0A);
         }
+
         gBgFx->angle = gBgFx->unk_40 >> 8;
         SetBlendAlpha(16, gBgFx->unk_3C >> 8);
 
@@ -2320,11 +2464,13 @@ void BgFxUpdateDumboSplash(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
 
     BgFxUpdateBase();
 }
+
 void BgFxStartDumboSplash(u16 a, s32 x, s32 y, s32 z, u8 f, s32 w) {
     s16 sx;
     s16 sy;
@@ -2332,6 +2478,7 @@ void BgFxStartDumboSplash(u16 a, s32 x, s32 y, s32 z, u8 f, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
 
@@ -2375,6 +2522,7 @@ void BgFxStartDumboSplash(u16 a, s32 x, s32 y, s32 z, u8 f, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_08015C80(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2382,6 +2530,7 @@ void func_08015C80(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2395,13 +2544,16 @@ void func_08015C80(s32 x, s32 y, s32 z) {
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateFlash;
 }
+
 void BgFxUpdateTrinityLimit(void) {
     if (gBgFx->unk_08 <= 16) {
         SetBlendAlpha(16, gBgFx->unk_08);
         gBgFx->unk_08++;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartTrinityLimit(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2409,6 +2561,7 @@ void BgFxStartTrinityLimit(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2423,6 +2576,7 @@ void BgFxStartTrinityLimit(s32 x, s32 y, s32 z) {
     BgAnimSetLoopStartFrame(0);
     gBgFx->update = BgFxUpdateTrinityLimit;
 }
+
 void BgFxStartTrinityLimitCharge(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2430,6 +2584,7 @@ void BgFxStartTrinityLimitCharge(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2454,6 +2609,7 @@ void BgFxUpdateTrinityLimitBlast(void) {
             gBgFx->unk_08 = 0;
             gBgFx->unk_26++;
         }
+
         gBgFx->scaleX += 25;
         gBgFx->scaleY += 25;
         break;
@@ -2474,6 +2630,7 @@ void BgFxUpdateTrinityLimitBlast(void) {
         } else {
             gBgFx->unk_08 = t + 1;
         }
+
         break;
     }
     case 2: {
@@ -2485,12 +2642,15 @@ void BgFxUpdateTrinityLimitBlast(void) {
         } else {
             BgAnimStop();
         }
+
         break;
     }
     }
+
     gBgFx->angle++;
     BgFxUpdateBase();
 }
+
 void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2498,6 +2658,7 @@ void BgFxStartTrinityLimitBlast(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2522,6 +2683,7 @@ void BgFxUpdateRagnarokCharge(void) {
         ApproachValueHalfSteps(&gBgFx->scaleY, 0x100, gBgFx->unk_08);
         gBgFx->unk_08--;
     }
+
     BgFxUpdateBase();
 }
 
@@ -2532,6 +2694,7 @@ void BgFxStartRagnarokCharge(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2561,11 +2724,13 @@ void BgFxUpdateRagnarokShot(void) {
         if (v == 0) {
             gBgFx->unk_26 = 1;
         }
+
         break;
     case 6:
         if (v == 0) {
             gBgFx->unk_26 = 2;
         }
+
         break;
     }
 
@@ -2578,6 +2743,7 @@ void BgFxUpdateRagnarokShot(void) {
         } else {
             gBgFx->x += gBgFx->unk_3C;
         }
+
         break;
     case 2:
         gBgFx->unk_3C += 51;
@@ -2589,6 +2755,7 @@ void BgFxUpdateRagnarokShot(void) {
             gBgFx->x += gBgFx->unk_3C;
             gBgFx->scaleX += 51;
         }
+
         ApplyAttackBox(91, gBgFx->x + gBgFx->scaleX * 40, gBgFx->y, gBgFx->z, 32, 32, 50);
 
         if (gBgFx->unk_08 > 20) {
@@ -2599,11 +2766,14 @@ void BgFxUpdateRagnarokShot(void) {
                 BgAnimStop();
             }
         }
+
         gBgFx->unk_08++;
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f) {
     s16 sx;
     s16 sy;
@@ -2611,6 +2781,7 @@ void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2622,6 +2793,7 @@ void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
         gBgFx->scaleX = -0x100;
     }
+
     gBgFx->unk_3C = 0;
     m4aSongNumStart(SONG_EF_RAGNA02);
     BgAnimStart(&gBgAnimDefRagnarokShot, sx, sy);
@@ -2636,6 +2808,7 @@ void func_080162A8(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2652,12 +2825,14 @@ BtlObj* BgFxGetSyncTarget(void) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             return gBtlWork->actor;
         }
+
         return gRikuBtlWork->actor;
     }
 
     if (gBtlWork->actor2 != NULL) {
         return gBtlWork->actor2;
     }
+
     return ListPoolFirst(&gBtlWork->pool);
 }
 
@@ -2678,6 +2853,7 @@ void BgFxApplySyncHp(s16 a) {
             if (a > o->maxHp) {
                 o->hp = o->maxHp;
             }
+
             o = gBtlWork->actor;
             o->hp = a;
 
@@ -2698,10 +2874,12 @@ void BgFxApplySyncHp(s16 a) {
                     o->hp = o->maxHp;
                 }
             }
+
             o = ListPoolNext(&o->node);
         }
     }
 }
+
 void BgFxUpdateSync(void) {
     BtlObj* o;
 
@@ -2716,6 +2894,7 @@ void BgFxUpdateSync(void) {
             gBgFx->unk_26 = 1;
             gBgFx->unk_0A = 60;
         }
+
         break;
     case 1:
         gBgFx->scaleX = (gSineTable[((u16)gBgFx->unk_08 * 4) & 0xFF] >> 3) + 89;
@@ -2725,6 +2904,7 @@ void BgFxUpdateSync(void) {
             gBgFx->unk_26 = 2;
             gBgFx->unk_0A = 50;
         }
+
         break;
     case 2:
         gBgFx->scaleX = (gSineTable[((u16)gBgFx->unk_08 * 4) & 0xFF] >> 3) + 89;
@@ -2735,14 +2915,17 @@ void BgFxUpdateSync(void) {
             ApproachValueHalfSteps(&gBgFx->y, o->y, gBgFx->unk_0A);
             ApproachValueHalfSteps(&gBgFx->z, o->z - (o->centerHeight << 8), gBgFx->unk_0A);
         }
+
         gBgFx->unk_0A--;
 
         if (o != NULL) {
             if (gBgFx->unk_0A > 0) {
                 break;
             }
+
             BgFxApplySyncHp(o->hp);
         }
+
         gBgFx->unk_26 = 3;
         m4aSongNumStart(SONG_EF_SYNC2);
         gBgFx->unk_0A = 16;
@@ -2756,12 +2939,15 @@ void BgFxUpdateSync(void) {
         if (gBgFx->unk_0A <= 0) {
             BgAnimStop();
         }
+
         break;
     }
+
     gBgFx->scaleY = gBgFx->scaleX;
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
+
 void BgFxStartSync(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2769,6 +2955,7 @@ void BgFxStartSync(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2785,6 +2972,7 @@ void BgFxStartSync(s32 x, s32 y, s32 z) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartStunImpact(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -2792,6 +2980,7 @@ void BgFxStartStunImpact(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2816,6 +3005,7 @@ void BgFxUpdateZantetsuken(void) {
             BgAnimStop();
         }
     }
+
     gBgFx->unk_08++;
 }
 
@@ -2826,6 +3016,7 @@ void BgFxStartZantetsuken(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2842,8 +3033,10 @@ void BgFxStartZantetsuken(s32 x, s32 y, s32 z, u8 f) {
     } else {
         gBgFx->angle -= 40;
     }
+
     gBgFx->update = BgFxUpdateZantetsuken;
 }
+
 void BgFxUpdateUrsulaBeam(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -2857,6 +3050,7 @@ void BgFxUpdateUrsulaBeam(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         if (gBgFx->unk_08 > gBgFx->unk_0A) {
@@ -2865,6 +3059,7 @@ void BgFxUpdateUrsulaBeam(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         SetBlendAlpha(16, 16 - gBgFx->unk_08);
@@ -2874,10 +3069,13 @@ void BgFxUpdateUrsulaBeam(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a) {
     s16 sx;
     s16 sy;
@@ -2885,6 +3083,7 @@ void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2901,6 +3100,7 @@ void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a) {
         gBgFx->unk_28 = -w;
         gBgFx->scaleX = -76;
     }
+
     gBgFx->unk_2C = w;
     gBgFx->scaleY = 76;
     m4aSongNumStart(SONG_EF_UR_BEEM);
@@ -2909,6 +3109,7 @@ void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_080169A0(s32 x, s32 y, s32 z, u8 f) {
     s16 sx;
     s16 sy;
@@ -2916,6 +3117,7 @@ void func_080169A0(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2930,6 +3132,7 @@ void func_080169A0(s32 x, s32 y, s32 z, u8 f) {
     } else {
         gBgFx->scaleX = 0x100;
     }
+
     gBgFx->scaleY = 0x100;
     gBgFx->update = BgFxUpdateFadeInOut;
     BgAnimSetLoopStartFrame(0);
@@ -2949,6 +3152,7 @@ void BgFxUpdateAnsemWave(void) {
     } else if (ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, 16, 16, 48)) {
         m4aSongNumStart(SONG_BTL_AN_WAVEHIT);
     }
+
     BgFxUpdateBase();
 }
 
@@ -2959,6 +3163,7 @@ void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2973,6 +3178,7 @@ void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w) {
         gBgFx->scaleX = -0x100;
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     gBgFx->scaleY = 0x100;
     m4aSongNumStart(SONG_EF_AN_WAVE);
     gBgFx->update = BgFxUpdateAnsemWave;
@@ -2980,6 +3186,7 @@ void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_08016BCC(s32 x, s32 y) {
     s16 sx;
     s16 sy;
@@ -2987,6 +3194,7 @@ void func_08016BCC(s32 x, s32 y) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -2996,6 +3204,7 @@ void func_08016BCC(s32 x, s32 y) {
     gBgFx->scaleY = 0x900;
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 w, u8 f, u16 a) {
     s16 sx;
     s16 sy;
@@ -3003,6 +3212,7 @@ void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 w, u8 f, u16 a) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3018,6 +3228,7 @@ void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 w, u8 f, u16 a) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateFireBurst(void) {
     u16 a;
     u16 b;
@@ -3101,6 +3312,7 @@ void BgFxUpdateFireBurst(void) {
 
     BgFxUpdateBase();
 }
+
 void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
     s16 sx;
     s16 sy;
@@ -3108,6 +3320,7 @@ void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3128,9 +3341,11 @@ void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w) {
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
         gBgFx->scaleX = -0x100;
     }
+
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -3138,6 +3353,7 @@ void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->scaleX = 0x180;
     gBgFx->scaleY = 0x180;
@@ -3150,6 +3366,7 @@ void BgFxStartFireExplosion(s32 x, s32 y, s32 z) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateFullscreen(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -3161,6 +3378,7 @@ void BgFxUpdateFullscreen(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         if (gBgFx->unk_08 > gBgFx->unk_0A) {
@@ -3169,6 +3387,7 @@ void BgFxUpdateFullscreen(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         SetBlendAlpha(16, 16 - gBgFx->unk_08);
@@ -3180,13 +3399,16 @@ void BgFxUpdateFullscreen(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
 }
+
 void BgFxStartXmas(u16 a) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->unk_0A = a;
     gBgFx->unk_26 = 0;
@@ -3195,6 +3417,7 @@ void BgFxStartXmas(u16 a) {
     BgAnimSetLoopStartFrame(0);
     gBgFx->flags |= BGFX_FLAG_ABOVE_SPRITES;
 }
+
 void BgFxUpdateVixenIceFall(void) {
     u16 t;
     s32 w;
@@ -3204,10 +3427,12 @@ void BgFxUpdateVixenIceFall(void) {
     BgFxUpdateFullscreen();
     gBgFx->unk_0C++;
 }
+
 void BgFxStartVixenIceFall(u16 a) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->unk_0A = a;
     gBgFx->unk_0C = 0;
@@ -3226,6 +3451,7 @@ void BgFxStartFlame(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3247,6 +3473,7 @@ void BgFxStartFrost(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3260,6 +3487,7 @@ void BgFxStartFrost(s32 x, s32 y, s32 z, s32 s) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartUrsulaThunder(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -3267,6 +3495,7 @@ void BgFxStartUrsulaThunder(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3276,6 +3505,7 @@ void BgFxStartUrsulaThunder(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateBase;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
 }
+
 void BgFxUpdateHoly(void) {
     if (gBgFx->unk_0C > 0) {
         ApproachValueHalfSteps(&gBgFx->scaleX, 0x200, gBgFx->unk_0C);
@@ -3300,6 +3530,7 @@ void BgFxUpdateHoly(void) {
         } else {
             gBgFx->unk_08 = t + 1;
         }
+
         break;
     }
     case 1: {
@@ -3314,6 +3545,7 @@ void BgFxUpdateHoly(void) {
         } else {
             gBgFx->unk_08 = t + 1;
         }
+
         break;
     }
     case 2: {
@@ -3329,11 +3561,14 @@ void BgFxUpdateHoly(void) {
         } else {
             gBgFx->unk_08 = t + 1;
         }
+
         break;
     }
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartHoly(s32 x, s32 y, s32 z, s32 w) {
     s16 sx;
     s16 sy;
@@ -3341,6 +3576,7 @@ void BgFxStartHoly(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3358,6 +3594,7 @@ void BgFxStartHoly(s32 x, s32 y, s32 z, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
     s32 h;
     s32 dx;
@@ -3370,6 +3607,7 @@ void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
         b->angle = GetAngle(a->x, a->y, b->x, b->y);
         b->knockbackSpeed = 0;
     }
+
     dx = b->x - gBgFx->x;
 
     if (dx >= 0 ? dx <= 0x4FFF : gBgFx->x - b->x <= 0x4FFF) {
@@ -3385,6 +3623,7 @@ void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
             if (h > 0) {
                 h = 0;
             }
+
             t = -(h >> 9);
             nx = gBgFx->x + gSineTable[(b->angle + c) & 0xFF] * (s16)t;
             ny = gBgFx->y + -gSineTable[((b->angle + c) & 0xFF) + 64] * ((s16)t >> 1);
@@ -3394,6 +3633,7 @@ void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
             } else {
                 b->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
+
             b->x += (nx - b->x) >> 3;
             b->y += (ny - b->y) >> 3;
             b->z += (h - b->z) >> 2;
@@ -3429,6 +3669,7 @@ void BgFxTornadoLiftOpponents(u8 a, u8 b) {
         }
     }
 }
+
 void BgFxUpdateTornado(void) {
     u16 alpha;
     s16 v;
@@ -3453,6 +3694,7 @@ void BgFxUpdateTornado(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         u = (u16)gBgFx->unk_08;
@@ -3480,6 +3722,7 @@ void BgFxUpdateTornado(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         alpha = 16;
@@ -3501,6 +3744,7 @@ void BgFxUpdateTornado(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
 
@@ -3516,6 +3760,7 @@ void BgFxUpdateTornado(void) {
     ClampBattlePosition(&gBgFx->x, &gBgFx->y, -16, 0);
     BgFxUpdateBase();
 }
+
 void BgFxStartTornado(s32 x, s32 y, s32 z, s32 w, u8 f) {
     s16 sx;
     s16 sy;
@@ -3523,6 +3768,7 @@ void BgFxStartTornado(s32 x, s32 y, s32 z, s32 w, u8 f) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3539,6 +3785,7 @@ void BgFxStartTornado(s32 x, s32 y, s32 z, s32 w, u8 f) {
     } else {
         gBgFx->scaleX = 10;
     }
+
     WorldToScreen(&sx, &sy, x, y, z);
     BgAnimStart(&gBgAnimDefTornado, sx, sy);
     gBgFx->update = BgFxUpdateTornado;
@@ -3546,6 +3793,7 @@ void BgFxStartTornado(s32 x, s32 y, s32 z, s32 w, u8 f) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateBind(void) {
     s16 v;
     s16 w;
@@ -3560,6 +3808,7 @@ void BgFxUpdateBind(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         v = gBgFx->unk_08;
@@ -3576,6 +3825,7 @@ void BgFxUpdateBind(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         w = gBgFx->unk_08 >> 2;
@@ -3586,10 +3836,13 @@ void BgFxUpdateBind(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartBind(s32 x, s32 w) {
     s16 sx;
     s16 sy;
@@ -3597,6 +3850,7 @@ void BgFxStartBind(s32 x, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = gBtlWork->yMin << 8;
@@ -3614,6 +3868,7 @@ void BgFxStartBind(s32 x, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateAxcelFireWall(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -3632,6 +3887,7 @@ void BgFxUpdateAxcelFireWall(void) {
             gBgFx->unk_26 = 1;
             gBgFx->unk_0A = 16;
         }
+
         break;
     case 1:
         if (gBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -3656,6 +3912,7 @@ void BgFxUpdateAxcelFireWall(void) {
                 gBgFx->unk_26 = 2;
             }
         }
+
         break;
     case 2:
         SetBlendAlpha(16, gBgFx->unk_0A);
@@ -3665,10 +3922,13 @@ void BgFxUpdateAxcelFireWall(void) {
         } else {
             gBgFx->unk_0A--;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartAxcelFireWall(s32 x, u8 f, s32 w) {
     s16 sx;
     s16 sy;
@@ -3676,6 +3936,7 @@ void BgFxStartAxcelFireWall(s32 x, u8 f, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->unk_26 = 0;
     gBgFx->x = x;
@@ -3694,6 +3955,7 @@ void BgFxStartAxcelFireWall(s32 x, u8 f, s32 w) {
         gBgFx->unk_28 = x + 0x3700;
         gBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
+
     gBgFx->scaleY = 10;
     gBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     gBgFx->update = BgFxUpdateAxcelFireWall;
@@ -3710,10 +3972,12 @@ void BgFxUpdateGround(void) {
 
     if (k <= 4) {
         t = (gBgFx->scaleX * 5) >> 5;
+
         if (ApplyAttackBox(0x13D, gBgFx->x, gBgFx->y, gBgFx->z, (s16)t, (s16)t >> 1, 1)) {
             m4aSongNumStart(SONG_BTL_MARL_GROUNDHIT);
         }
     }
+
     BgFxUpdateBase();
 }
 
@@ -3724,6 +3988,7 @@ void BgFxStartMahluxiaGround(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3747,6 +4012,7 @@ void BgFxStartLexceusGround(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3772,6 +4038,7 @@ void BgFxUpdateHanabira(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         gBgFx->unk_08 = 0;
@@ -3780,6 +4047,7 @@ void BgFxUpdateHanabira(void) {
         if (ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, 0x100, 0x100, 0x100)) {
             m4aSongNumStart(SONG_BTL_ETC_HIT05);
         }
+
         break;
     case 2:
         SetBlendAlpha(16, 16 - gBgFx->unk_08);
@@ -3789,14 +4057,17 @@ void BgFxUpdateHanabira(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     gBgFx->unk_28 += 30;
     gBgFx->angle += gBgFx->unk_28 >> 8;
     gBgFx->scaleX += 10;
     gBgFx->scaleY = gBgFx->scaleX;
     BgFxUpdateBase();
 }
+
 void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w) {
     s16 sx;
     s16 sy;
@@ -3804,6 +4075,7 @@ void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3821,6 +4093,7 @@ void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateKama(void) {
     if (gBtlWork->hitStop != 0) {
         BgFxUpdateBase();
@@ -3832,6 +4105,7 @@ void BgFxUpdateKama(void) {
     } else {
         gBgFx->angle -= 3;
     }
+
     gBgFx->x = gBgFx->unk_28 + ((gSineTable[gBgFx->angle] * gBgFx->unk_3C) >> 8);
     gBgFx->z = gBgFx->unk_30 + ((-gSineTable[gBgFx->angle + 64] * gBgFx->unk_3C) >> 8);
 
@@ -3849,6 +4123,7 @@ void BgFxUpdateKama(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         if (gBgFx->unk_08 > 30) {
@@ -3857,6 +4132,7 @@ void BgFxUpdateKama(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 2:
         SetBlendAlpha(16, 16 - (u16)gBgFx->unk_08 * 2);
@@ -3866,10 +4142,13 @@ void BgFxUpdateKama(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartKama(s32 x, s32 y, s32 z, s32 w, s32 v) {
     s16 sx;
     s16 sy;
@@ -3878,6 +4157,7 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 w, s32 v) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->attack = v;
 
@@ -3891,6 +4171,7 @@ void BgFxStartKama(s32 x, s32 y, s32 z, s32 w, s32 v) {
         x += 0x4000;
         w -= 0x4000;
     }
+
     gBgFx->unk_28 = x;
     gBgFx->unk_30 = z;
     d = abs(w);
@@ -3916,6 +4197,7 @@ void BgFxUpdateRikuLimit(void) {
     if (t > 15) {
         BgAnimStop();
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
@@ -3927,6 +4209,7 @@ void BgFxStartRikuLimit(s32 x, s32 y, s32 z, u8 f) {
     if (BgFxIsBlocked(3)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3937,6 +4220,7 @@ void BgFxStartRikuLimit(s32 x, s32 y, s32 z, u8 f) {
     gBgFx->flags |= BGFX_FLAG_BELOW_SPRITES;
     gBgFx->update = BgFxUpdateRikuLimit;
 }
+
 void BgFxStartDragonFire(s32 x, s32 y, s32 z, s32 s) {
     s16 sx;
     s16 sy;
@@ -3944,6 +4228,7 @@ void BgFxStartDragonFire(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -3956,6 +4241,7 @@ void BgFxStartDragonFire(s32 x, s32 y, s32 z, s32 s) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxUpdateLaxeneBeam(void) {
     s32 x;
     s32 y;
@@ -3971,6 +4257,7 @@ void BgFxUpdateLaxeneBeam(void) {
         } else {
             ApproachValueHalfSteps(&gBgFx->scaleX, 204, gBgFx->unk_0A);
         }
+
         gBgFx->unk_0A--;
 
         if (gBgFx->unk_0A <= 0) {
@@ -3979,6 +4266,7 @@ void BgFxUpdateLaxeneBeam(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     case 1:
         SetBlendAlpha(16, 16 - gBgFx->unk_08);
@@ -3988,8 +4276,10 @@ void BgFxUpdateLaxeneBeam(void) {
         } else {
             gBgFx->unk_08++;
         }
+
         break;
     }
+
     r = (abs(gBgFx->scaleX) * 5) >> 4;
 
     if (gBgFx->flags & BGFX_FLAG_FLIP_X) {
@@ -3997,6 +4287,7 @@ void BgFxUpdateLaxeneBeam(void) {
     } else {
         ang = gBgFx->angle + 64;
     }
+
     x = gBgFx->x + gSineTable[ang] * r;
     z = gBgFx->z + -gSineTable[ang + 64] * r;
     y = gBgFx->y;
@@ -4008,8 +4299,10 @@ void BgFxUpdateLaxeneBeam(void) {
         o->y += (y - o->y) >> 2;
         o->z += (z - o->z) >> 1;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 f, s32 v) {
     s16 sx;
     s16 sy;
@@ -4017,6 +4310,7 @@ void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 f, s32 v) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4047,6 +4341,7 @@ void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 f, s32 v) {
             gBgFx->scaleX = ((gBtlWork->actor->x - gBgFx->x) << 8) / 19200;
         }
     }
+
     BgAnimSetLoopStartFrame(3);
     gBgFx->update = BgFxUpdateLaxeneBeam;
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -4073,10 +4368,12 @@ void BgFxUpdateAero(void) {
 
     if (gBgFx->unk_08 == 10) {
         t = (gBgFx->scaleX * 3) >> 4;
+
         if (ApplyAttackBox(gBgFx->attack, gBgFx->x, gBgFx->y, gBgFx->z, t, t, 100)) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
@@ -4088,6 +4385,7 @@ void BgFxStartAero(u16 a, s32 x, s32 y, s32 z, s32 w) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4108,6 +4406,7 @@ void BgFxStartRikuDarkModeFlash(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4116,6 +4415,7 @@ void BgFxStartRikuDarkModeFlash(s32 x, s32 y, s32 z) {
     BgAnimStart(&gBgAnimDefRikuDarkModeFlash, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxStartLstCtr(s32 x, s32 y, s32 z, s32 s) {
     s16 sx;
     s16 sy;
@@ -4123,6 +4423,7 @@ void BgFxStartLstCtr(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4135,6 +4436,7 @@ void BgFxStartLstCtr(s32 x, s32 y, s32 z, s32 s) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s) {
     s16 sx;
     s16 sy;
@@ -4142,6 +4444,7 @@ void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4154,6 +4457,7 @@ void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s) {
     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
     gBgFx->flags |= BGFX_FLAG_SCREEN_DIMMED;
 }
+
 void func_08018B04(s32 x, s32 y, s32 z, s32 s) {
     s16 sx;
     s16 sy;
@@ -4161,6 +4465,7 @@ void func_08018B04(s32 x, s32 y, s32 z, s32 s) {
     if (BgFxIsBlocked(1)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4171,6 +4476,7 @@ void func_08018B04(s32 x, s32 y, s32 z, s32 s) {
     BgAnimStart(&gUnk_09EDAD80, sx, sy);
     gBgFx->update = BgFxUpdateBase;
 }
+
 void BgFxUpdateRikuDarkMode(void) {
     switch (gBgFx->unk_26) {
     case 0:
@@ -4184,6 +4490,7 @@ void BgFxUpdateRikuDarkMode(void) {
             gBgFx->unk_08 = 0;
             gBgFx->unk_26 = 1;
         }
+
         break;
     case 1:
         gBgFx->unk_26 = 2;
@@ -4200,10 +4507,13 @@ void BgFxUpdateRikuDarkMode(void) {
             gBgFx->unk_26 = 3;
             BgAnimStop();
         }
+
         break;
     }
+
     BgFxUpdateBase();
 }
+
 void BgFxStartRikuDarkMode(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -4211,6 +4521,7 @@ void BgFxStartRikuDarkMode(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     SetBlendAlpha(16, 0);
     gBgFx->x = x;
@@ -4227,6 +4538,7 @@ void BgFxStartRikuDarkMode(s32 x, s32 y, s32 z) {
     gBgFx->update = BgFxUpdateRikuDarkMode;
     gBgFx->unk_0A = 43;
 }
+
 void BgFxUpdateRikuLimitFinish(void) {
     if (gBgFx->unk_08 > 10) {
         switch (gBgFx->unk_26) {
@@ -4272,9 +4584,11 @@ void BgFxUpdateRikuLimitFinish(void) {
             break;
         }
     }
+
     gBgFx->unk_08++;
     BgFxUpdateBase();
 }
+
 void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -4282,6 +4596,7 @@ void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(0)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;
@@ -4289,6 +4604,7 @@ void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z) {
     m4aSongNumStart(SONG_SND_705);
     WorldToScreen(&sx, &sy, gBgFx->x, gBgFx->y, gBgFx->z);
     gBgFx->unk_26 = GetRandom() % 2;
+
     switch (gBgFx->unk_26) {
     case 0:
         BgAnimStart(&gBgAnimDefRikuLimitFinish, sx, sy);
@@ -4299,8 +4615,10 @@ void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z) {
         gBgFx->scaleX = -0x100;
         break;
     }
+
     gBgFx->update = BgFxUpdateRikuLimitFinish;
 }
+
 void func_08018FE4(s32 x, s32 y, s32 z) {
     s16 sx;
     s16 sy;
@@ -4308,6 +4626,7 @@ void func_08018FE4(s32 x, s32 y, s32 z) {
     if (BgFxIsBlocked(2)) {
         return;
     }
+
     BgFxReset();
     gBgFx->x = x;
     gBgFx->y = y;

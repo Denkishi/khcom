@@ -2,11 +2,8 @@
 #define GUARD_MODE_CHKEFF_H
 
 #include "registration_data.h"
-
 #include "bg_animation_data.h"
-
 #include "card_api.h"
-
 #include "display.h"
 #include "types.h"
 #include "taskpool.h"

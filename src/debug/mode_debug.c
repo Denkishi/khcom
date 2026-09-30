@@ -91,6 +91,7 @@ void mode_debug_1(void) {
             ModeRequest(&gModeDebug, 0);
             return;
         }
+
         break;
     case L_BUTTON:
         if (v > -24) {
@@ -98,6 +99,7 @@ void mode_debug_1(void) {
             ModeRequest(&gModeDebug, 0);
             return;
         }
+
         break;
     }
 
@@ -120,12 +122,14 @@ void mode_debug_1(void) {
             ModeRequest(&gModeCopyright1, 0);
             return;
         }
+
         break;
     case 1:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeChkobj, 0);
             return;
         }
+
         break;
     case 2:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -135,24 +139,28 @@ void mode_debug_1(void) {
             ModeRequest(&gModeMapChk, 0);
             return;
         }
+
         break;
     case 3:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeChkeff, 0);
             return;
         }
+
         break;
     case 4:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeChksnd, 0);
             return;
         }
+
         break;
     case 5:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeEventselect, 0);
             return;
         }
+
         break;
     case 6:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -164,26 +172,31 @@ void mode_debug_1(void) {
             ModeRequest(&gModeSioBattle, 0);
             return;
         }
+
         break;
     case 7:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeChkbtl, 0);
         }
+
         break;
     case 8:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModePooh, 0);
         }
+
         break;
     case 9:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeDebflag, 0);
         }
+
         break;
     case 10:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeWLogo, 0);
         }
+
         break;
     case 11:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -195,6 +208,7 @@ void mode_debug_1(void) {
             SaveClearSystem();
             ModeRequest(&gModeDebug, 0);
         }
+
         break;
     case 12:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -207,28 +221,33 @@ void mode_debug_1(void) {
             SetJiminyFlag(22);
             ModeRequest(&gModeBackupstat, 0);
         }
+
         break;
 #ifdef VERSION_EU
     case 13:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeMovieDebugEu, 0);
         }
+
         break;
     case 14:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeStaffRoll, 0);
         }
+
         break;
     case 15:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeLang, 0);
         }
+
         break;
     case 16:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             SetJiminyFlag(250);
             ModeRequest(&gModeJiminy, 0);
         }
+
         break;
     case 17:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -236,11 +255,13 @@ void mode_debug_1(void) {
             gGameState.progression.unk_82 = -1;
             ModeRequest(&gModeWorldselect, 0);
         }
+
         break;
     case 18:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequest(&gModeContinue, 0);
         }
+
         break;
     case 19:
         gDebugWork->cursor = 0;
@@ -253,26 +274,31 @@ void mode_debug_1(void) {
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequestHeapReset(&gModeMovie, 1);
         }
+
         break;
     case 14:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequestHeapReset(&gModeMovie, 2);
         }
+
         break;
     case 15:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequestHeapReset(&gModeMovie, 3);
         }
+
         break;
     case 16:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequestHeapReset(&gModeMovie, 4);
         }
+
         break;
     case 17:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             ModeRequestHeapReset(&gModeMovie, 5);
         }
+
         break;
     case 18:
         gDebugWork->cursor = 0;

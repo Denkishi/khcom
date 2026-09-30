@@ -2,12 +2,9 @@
 #define GUARD_MODE_DEBUG_H
 
 #include "registration_data.h"
-
 #include "card_api.h"
-
 #include "pallet.h"
 #include "save_api.h"
-
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"

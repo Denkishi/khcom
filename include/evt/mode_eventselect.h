@@ -4,13 +4,9 @@
 #include "event_index_data.h"
 #include "card_localized_data.h"
 #include "registration_data.h"
-
 #include "card_api.h"
-
 #include "msg_api.h"
-
 #include "eventselect_api.h"
-
 #include "text.h"
 #include "fade.h"
 #include "obj_api.h"

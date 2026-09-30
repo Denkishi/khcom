@@ -256,6 +256,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
 
     if (w->collider.colliding != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
+
 #ifdef VERSION_EU
         w->priority = 10;
 #endif
@@ -317,6 +318,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
 
     return 1;
 }
+
 s32 Gimmick_card_1(PickupCardWork* w, void* a) {
     s16 sx;
     s32 t;
@@ -362,6 +364,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
 
     if (w->collider.colliding != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
+
 #ifdef VERSION_EU
         w->priority = 10;
 #endif
@@ -420,6 +423,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
 
     return 1;
 }
+
 u8 FlyPickupCardToDeck(PickupCardWork* w) {
     s32 dx;
     s32 dy;
@@ -504,6 +508,7 @@ s32 WaitHeartlessCardName(PickupCardWork* w, void* a) {
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
+
 s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
     s32 dx = 0;
     s32 dy = 0;
@@ -564,6 +569,7 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
+
 s32 Heartless_card_1(PickupCardWork* w, void* a) {
     s16 x;
     s16 y;
@@ -631,6 +637,7 @@ s32 Heartless_card_1(PickupCardWork* w, void* a) {
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
+
 void PickupCardDraw(PickupCardWork* w) {
     s16 x;
     s16 y;
@@ -682,6 +689,7 @@ void PickupCardDraw(PickupCardWork* w) {
         TaskPoolDraw(&w->tasks);
     }
 }
+
 void Heartless_card_2(PickupCardWork* w) {
     s16 x;
     s16 y;
@@ -896,6 +904,7 @@ void StockNameSora_2(StockNameWork* w) {
                    10);
     }
 }
+
 void StockNameRiku_0(StockNameWork* w, const s32* src) {
     u8 i;
     s32* dst;
@@ -991,6 +1000,7 @@ void StockNameRiku_2(StockNameWork* w) {
         DrawSprite(120, 14, 0, w->tiles, w->palette, 0, 0, 10);
     }
 }
+
 void StockNameRiku_3(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -998,6 +1008,7 @@ void StockNameRiku_3(StockNameWork* w) {
     w->visible = 0;
     gCardBattleState->unk_0CA = 256;
 }
+
 void StockNameSora_3(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -1029,6 +1040,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
@@ -1295,6 +1307,7 @@ void CreatePremireChanceCardTasks(PremireChanceWork* w) {
         TaskCreate(&w->tasks, &gTaskDescPremireChanceCard, &w->slots[i]);
     }
 }
+
 u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     PremireChanceCardWork* n;
     TaskPool* pool;
@@ -1454,6 +1467,7 @@ TaskDesc gTaskDescStockNameRiku = {
     (TaskDestroyFunc)StockNameRiku_3,
     sizeof(StockNameWork),
 };
+
 #ifdef VERSION_EU
 void** gPremireChanceTitles[5] = { gUnk_09EEA16C, &gUnkEu_09F75FB4, &gUnkEu_09F75FCC, &gUnkEu_09F75FC4, &gUnkEu_09F75FBC };
 #endif

@@ -210,6 +210,7 @@ void task_status_0(StatusWork* work) {
         TaskCreate(&work->pool, &sTaskDescStatusTab, &work->tab);
         TaskCreate(&work->pool, &sTaskDescStatusDeckname, &sStatusMesWindowOpen);
     }
+
     TaskCreate(&work->pool, &sTaskDescStatusStocklist, &work->tab);
     TaskCreate(&work->pool, &sTaskDescStatusScrollcursor, &work->scroll);
     TaskCreate(&work->pool, &sTaskDescStatusMeswindow, &sStatusMesWindowOpen);
@@ -219,6 +220,7 @@ void task_status_0(StatusWork* work) {
     } else {
         work->cursor = 0;
     }
+
     TaskCreate(&work->pool, &sTaskDescStatusCursor, &work->cursor);
     sStatusSelectedIndex = work->cursor + work->scroll;
 }
@@ -227,6 +229,7 @@ void StatusHandleInput(StatusWork* work) {
     u16 keys;
 
     keys = GetKeysRepeat() & DPAD_UP;
+
     if (keys != 0) {
         if (work->cursor > 0) {
             work->cursor--;
@@ -268,6 +271,7 @@ void StatusHandleInput(StatusWork* work) {
             } else {
                 work->cursor = 0;
             }
+
             work->scroll = 0;
             StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -282,6 +286,7 @@ void StatusHandleInput(StatusWork* work) {
             } else {
                 work->cursor = 0;
             }
+
             work->scroll = 0;
             StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -311,6 +316,7 @@ u8 task_status_1(StatusWork* work) {
     if (IsStatusBarIdle()) {
         StatusHandleInput(work);
     }
+
     sStatusSelectedIndex = work->cursor + work->scroll;
     TaskPoolUpdate(&work->pool);
     return 1;
@@ -348,6 +354,7 @@ void StatusBarStartClose(StatusBarWork* work) {
     if (work->steps == 0) {
         work->steps = 16;
     }
+
     LoadBgMap(3, gUnk_09848198, 0x500);
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
@@ -379,38 +386,47 @@ u8 task_status_bar_1(StatusBarWork* work) {
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             work->steps = 16;
             gStatusBarState = 1;
         }
+
         break;
     case 1:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             LoadBgMap(3, gUnk_09848698, 0x500);
             gStatusBarState = 2;
         }
+
         break;
     case 3:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             work->steps = 16;
             gStatusBarState = 4;
         }
+
         break;
     case 4:
         if (!FadeIsActive() && work->fadeStarted == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             work->fadeStarted = 1;
         }
+
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             return 0;
         }
+
         break;
     case 2:
         if (work->closing == 0) {
@@ -427,13 +443,16 @@ u8 task_status_bar_1(StatusBarWork* work) {
                 }
             }
         }
+
         break;
     case 5:
         if (!FadeIsActive()) {
             return 0;
         }
+
         break;
     }
+
     return 1;
 }
 
@@ -467,6 +486,7 @@ u8 IsStatusBarIdle(void) {
     if (gStatusBarState == 2) {
         return 1;
     }
+
     return 0;
 }
 
@@ -523,6 +543,7 @@ void task_status_sora_0(StatusSoraWork* work) {
         SetObjTileSource(work->tiles, gSor1ll51Tiles);
         AnimInit(&work->anim, gSor1ll51Anims, gSor1ll51Frames);
     }
+
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 }
@@ -543,6 +564,7 @@ void task_status_sora_2(StatusSoraWork* work) {
         x = 140;
         y = 56;
     }
+
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 12);
 }
 
@@ -586,6 +608,7 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
     AnimStart(&work->anim[1], 0, ANIM_FLAG_LOOP);
     work->gfx[1] = AnimGetGfx(&work->anim[1]);
     work->lastCursor = *work->cursor;
+
     if (work->lastCursor < 0) {
         work->x = sStatusTabCursorX[~work->lastCursor];
         work->targetX = work->x;
@@ -597,6 +620,7 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
         work->y = *work->cursor * 3072 + 0x2400;
         work->targetY = work->y;
     }
+
     work->unk_4E = 0;
 }
 
@@ -615,12 +639,14 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
             work->targetY = *work->cursor * 3072 + 0x2400;
         }
     }
+
     ApproachValueHalf(&work->y, work->targetY);
     ApproachValueHalf(&work->x, work->targetX);
 
     for (i = 0; i < 2; i++) {
         work->gfx[i] = AnimUpdate(&work->anim[i]);
     }
+
     return 1;
 }
 
@@ -674,6 +700,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     for (i = 0; i < 8; i++) {
         work->tiles2[i] = 0;
     }
+
     StatusStocklistLoadRows(0);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 #ifdef VERSION_EU
@@ -693,10 +720,12 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
 
 u8 task_status_stocklist_1(StatusStocklistWork* work) {
     work->timer++;
+
     if (work->timer > 24) {
         work->blink = (work->blink == 0) ? 1 : 0;
         work->timer = 0;
     }
+
     return 1;
 }
 
@@ -713,8 +742,10 @@ void task_status_stocklist_2(StatusStocklistWork* work) {
                     DrawSprite(0, y, work->gfx, work->tiles, work->palette2, 0, SPRITE_PRIORITY(2), i + 13);
                 }
             }
+
             DrawSprite(1, y, 0, work->tiles2[i], work->palette, 0, SPRITE_PRIORITY(2), i + 21);
         }
+
         y += 12;
     }
 }
@@ -727,6 +758,7 @@ void task_status_stocklist_3(StatusStocklistWork* work) {
             ReleaseObjTiles(work->tiles2[i]);
         }
     }
+
     ReleaseObjPalette(work->palette);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette2);
@@ -736,14 +768,17 @@ u16 GetStatusVisibleRowCount(void) {
     if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count <= 7) {
         return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count;
     }
+
     return 8;
 }
 
 u16 GetStatusMaxScroll(void) {
     s16 v = gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - 8;
+
     if (v <= 0) {
         return 0;
     }
+
     return v;
 }
 
@@ -751,6 +786,7 @@ u8 StatusTabHasItems(void) {
     if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count == 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -762,6 +798,7 @@ void StatusStocklistScrollDown(void) {
     for (i = 0; i < 7; i++) {
         gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i + 1];
     }
+
     gStatusStocklistWork->scroll++;
     gStatusStocklistWork->tiles2[7] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll + 7]));
 }
@@ -774,6 +811,7 @@ void StatusStocklistScrollUp(void) {
     for (i = 7; i > 0; i--) {
         gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i - 1];
     }
+
     gStatusStocklistWork->scroll--;
     gStatusStocklistWork->tiles2[0] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll]));
 }
@@ -787,6 +825,7 @@ void StatusStocklistLoadRows(u16 a) {
             gStatusStocklistWork->tiles2[i] = 0;
         }
     }
+
     gStatusStocklistWork->scroll = a;
 
     for (i = 0; i < gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - a && i <= 7; i++) {
@@ -815,6 +854,7 @@ s32 GetStatusItemTab(u32 a) {
     if (a >= 9 && a <= 46) {
         return 2;
     }
+
     return 3;
 }
 
@@ -988,6 +1028,7 @@ s16 GetStatusScrollcursorY(StatusScrollcursorWork* work) {
     if (GetStatusMaxScroll() == 0) {
         return 40;
     }
+
     return *work->scroll * 84 / GetStatusMaxScroll() + 40;
 }
 
@@ -1029,8 +1070,10 @@ u8 task_status_meswindow_1(StatusMeswindowWork* work) {
 
     if (*work->open != 0) {
         idx = GetStatusSelectedIndex();
+
         if (idx >= 0) {
             v = GetStatusListItem(GetStatusSelectedIndex());
+
             if (work->item != v) {
                 work->item = v;
 
@@ -1038,12 +1081,15 @@ u8 task_status_meswindow_1(StatusMeswindowWork* work) {
                     work->textIndex = GetStockMesDispTextIndex(work->task);
                     TaskKill(&work->pool, work->task);
                 }
+
                 work->task = CreateStockMesDispTask(&work->pool, GetStatusItemStockIndex(work->item), work->textIndex, 88, 98);
                 ClearStockNew(work->item);
             }
+
             TaskPoolUpdate(&work->pool);
         }
     }
+
     return 1;
 }
 
@@ -1131,27 +1177,32 @@ u16 LoadFriendCardSprites(void** a, void** b, void** c) {
     table = *(const StatusFriendTable*)source;
 
     data = &gGameState;
+
     if (((const GameState*)data)->flags & GAME_FLAG_RIKU) {
         limit = 1;
     } else {
         limit = 3;
     }
+
     count = 0;
 
     for (index = 0; index <= 7; index++) {
         data = &table.entries[index];
         source = &gGameState.progression.friendFlags;
+
         if (*(const u16*)source & ((const StatusFriendEntry*)data)->flag) {
             card = &gCardDefs[((const StatusFriendEntry*)data)->cardId];
             a[count] = LoadObjTiles(card->tiles2, 0x100);
             b[count] = LoadObjPalette(card->palette2, 0x20);
             c[count] = card->gfx2;
             count++;
+
             if (count >= limit) {
                 break;
             }
         }
     }
+
     return count;
 }
 
@@ -1163,6 +1214,7 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     if (work->textIndex >= work->textCount - 1) {
         work->textIndex = work->textCount - 1;
     }
+
     work->tiles = LoadStockNameTiles(work->helpIndex);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     TaskPoolInit(&work->tasks, 1);
@@ -1176,6 +1228,7 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     work->gfx2 = gUnk_09EF6948[1];
     work->frame = 0;
 }
+
 u8 stock_mes_disp_1(StockMesDispWork* work) {
     u8 changed = 0;
 
@@ -1211,6 +1264,7 @@ void stock_mes_disp_2(StockMesDispWork* work) {
     if (work->textIndex < work->textCount - 1) {
         DrawSprite(work->x + ((work->frame / 8) % 4 + 136), work->y, work->gfx2, work->tiles3, work->palette3, 0, 0, 3);
     }
+
     TaskPoolDraw(&work->tasks);
     work->frame++;
 }

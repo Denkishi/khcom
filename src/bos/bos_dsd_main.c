@@ -298,6 +298,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
             work->spriteVisible = 0;
             work->dsd->stateStep++;
         }
+
         break;
     case 2:
         switch (d->attackState) {
@@ -323,6 +324,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
             work->stepTimer = 0;
             d->stateStep++;
         }
+
         break;
     default:
         work->dsd->stateStep = 0;
@@ -372,6 +374,7 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
             DisableBg(1);
             work->dsd->stateStep++;
         }
+
         break;
     case 2:
         CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, gUnk_096874E4);
@@ -391,12 +394,14 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
             p->z = 0;
             work->dsd->stateStep++;
         }
+
         break;
     case 4:
         if (BgFxIsActive() == 0) {
             BosDsdMainEndTransition(work);
             work->dsd->stateStep++;
         }
+
         break;
     default:
         d->stateStep = 0;
@@ -450,6 +455,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             q->z = -0x9400;
             work->dsd->stateStep++;
         }
+
         break;
     case 3:
         work->stepTimer++;
@@ -462,6 +468,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             q->z = -0x9400;
             work->dsd->stateStep++;
         }
+
         break;
     case 4:
         work->stepTimer++;
@@ -472,6 +479,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             d->body[0].z += -0x100;
             work->dsd->stateStep++;
         }
+
         break;
     case 5:
         work->stepTimer++;
@@ -482,6 +490,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             d->body[0].z += 0x100;
             work->dsd->stateStep++;
         }
+
         break;
     case 6:
         work->stepTimer++;
@@ -494,6 +503,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             q->z = -0x9400;
             work->dsd->stateStep++;
         }
+
         break;
     case 7:
         work->stepTimer++;
@@ -506,6 +516,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             q->z = -0x8400;
             work->dsd->stateStep++;
         }
+
         break;
     case 8:
         work->stepTimer++;
@@ -514,6 +525,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->stateStep++;
         }
+
         break;
     default:
         d->stateStep = 0;
@@ -569,6 +581,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
             d->body[0].z += 0x100;
             work->dsd->stateStep++;
         }
+
         break;
     case 2:
         BosDsdMainLoopFrames(work);
@@ -580,6 +593,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
             d->body[0].z += -0x100;
             work->dsd->stateStep++;
         }
+
         break;
     case 3:
         BosDsdMainLoopFrames(work);
@@ -589,6 +603,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->stateStep++;
         }
+
         break;
     case 4:
         BosDsdMainLoopFrames(work);
@@ -598,6 +613,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
             work->stepTimer = 0;
             work->dsd->stateStep++;
         }
+
         break;
     case 5:
         BosDsdSetBgFrame(8, 0x80);
@@ -643,6 +659,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
 
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
         }
+
         break;
     case 2:
         work->dsd->bgFrame = 28;
@@ -673,6 +690,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         if (work->stepTimer > 299) {
             work->dsd->stateStep++;
         }
+
         break;
     case 4:
         work->dsd->bgFrame = 27;
@@ -700,6 +718,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
 
             BosDsdSetBgFrame(work->dsd->bgFrame, 0x80);
         }
+
         break;
     case 6:
         work->stepTimer = 0;
@@ -789,6 +808,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
             work->energy1Task2 = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy1, work->dsd);
             work->dsd->stateStep++;
         }
+
         break;
     case 4:
         BosDsdMainLoopMapFrames(work);
@@ -809,6 +829,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
             work->energy1Task3 = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy1, work->dsd);
             work->dsd->stateStep++;
         }
+
         break;
     case 5:
         BosDsdMainLoopMapFrames(work);
@@ -955,6 +976,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
             work->spriteVisible = 0;
             work->dsd->stateStep++;
         }
+
         break;
     case 3:
         BosDsdSetBgFrame(36, 0xE0);
@@ -1012,6 +1034,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         } else {
             BtlMapSetCameraTarget(d->body[0].x - 0x1800, d->body[0].y + d->body[0].z + 0x3000);
         }
+
         break;
     default:
         d->flags |= DSD_FLAG_DEFEAT_DONE;

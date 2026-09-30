@@ -2,7 +2,6 @@
 #define GUARD_ACGTRANS_H
 
 #include "task_descriptors.h"
-
 #include "display.h"
 #include "types.h"
 #include "taskpool.h"
@@ -24,7 +23,6 @@ typedef struct AcgTransConfig {
     u16 frames;
     u32 bg;
 } AcgTransConfig;
-
 
 void CreateBgTileTransferTask(TaskPool* pool, s32 bg, u16 tile, u16 count, u16 frames, const u8* src);
 

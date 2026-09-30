@@ -3,13 +3,9 @@
 
 #include "task_descriptors.h"
 #include "registration_data.h"
-
 #include "field_state.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
-
 #include "types.h"
 #include "engine_math.h"
 #include "m4a.h"
@@ -18,7 +14,6 @@
 #include "fld_types.h"
 #include "engine.h"
 #include "bos4_api.h"
-
 
 typedef struct RoomCreateWork {
     s32 x;
@@ -39,7 +34,6 @@ typedef struct RoomCreateWork {
     TaskPool tasks;
     s32 state;
 } RoomCreateWork;
-
 
 struct Task;
 

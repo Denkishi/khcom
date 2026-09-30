@@ -74,6 +74,7 @@ void mode_backupstat_0(void) {
             DebugTextPrint(75, i * 9, 2, "\x81\x7C\x82\x51");
             break;
         }
+
         DebugTextPrint(120, i * 9, 2, sBackupStatStateNames[gBackupStatStates[i]]);
     }
 }
@@ -103,6 +104,7 @@ void BackupStatApplyState(void) {
         SaveSetSystemState(slot, gBackupStatStates[gBackupStatCursor]);
         break;
     }
+
     DebugTextPrint(120, gBackupStatCursor * 9, 2, sBackupStatStateNames[gBackupStatStates[gBackupStatCursor]]);
 }
 
@@ -123,6 +125,7 @@ void mode_backupstat_1(void) {
         } else if (gBackupStatCursor >= gBackupStatCount * 2) {
             gBackupStatCursor = 0;
         }
+
         DebugTextPrint(0, prev * 9, 2, "\x81\x40");
         DebugTextPrint(0, gBackupStatCursor * 9, 2, "\x81\x84");
     }
@@ -131,11 +134,13 @@ void mode_backupstat_1(void) {
         if (--gBackupStatStates[gBackupStatCursor] < 0) {
             gBackupStatStates[gBackupStatCursor] = 2;
         }
+
         BackupStatApplyState();
     } else if (GetKeysPressed() & DPAD_RIGHT) {
         if (++gBackupStatStates[gBackupStatCursor] > 2) {
             gBackupStatStates[gBackupStatCursor] = 0;
         }
+
         BackupStatApplyState();
     }
 

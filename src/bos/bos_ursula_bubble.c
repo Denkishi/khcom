@@ -129,6 +129,7 @@ u8 task_bos_ursula_bubble_1(UrsulaBubbleWork* work) {
     s32 i;
 
     TaskPoolUpdate(&work->tasks);
+
 #ifdef VERSION_EU
     AnimUpdate(&work->anim);
 #endif
@@ -207,6 +208,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->state = 0;
     work->timer = 0x3C;
 }
+
 u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     BtlObj* p = &work->obj;
 

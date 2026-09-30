@@ -3,7 +3,6 @@
 
 #include "battle_localized_data.h"
 #include "anim.h"
-
 #include "mode_chkobj_assets.h"
 
 extern u8 gUnk_08933A34[];

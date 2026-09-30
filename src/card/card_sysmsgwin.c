@@ -61,11 +61,13 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
     CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
+
     if (w->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
         w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 1);
     } else {
         w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
     }
+
     FadeSetPaletteExcluded(w->glyphPaletteIndex + 16, 1);
     w->unk_138[4] = 0;
     w->unk_138[0] = 8;
@@ -102,11 +104,13 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
                                        (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     }
 #endif
+
     InitTextSlots(w->textSlots, 10);
     InitTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
     w->unk_138[1] = w->unk_138[3];
+
     switch (w->args.mode) {
     case 0:
         w->tiles3 = AllocObjTiles(0x40, 0);
@@ -131,6 +135,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
         w->gfx4 = AnimGetGfx(&w->anim2);
         break;
     }
+
     gActiveSysmsgwin = w;
 }
 
@@ -158,6 +163,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
             SetBgScroll(w->args.bg, (u16)-24, (u16)-94);
             break;
         }
+
         break;
     case 2:
     case 3:
@@ -211,6 +217,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
 
     if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_KETTEI);
+
         if (w->nextText != NULL) {
 #ifdef VERSION_JP
             w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
@@ -266,8 +273,10 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoice);
         }
     }
+
     return 1;
 }
+
 s32 UpdateSysmsgwinClose(SysMsgWinWork* w) {
     if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
@@ -282,6 +291,7 @@ s32 UpdateSysmsgwinClose(SysMsgWinWork* w) {
 
     return 1;
 }
+
 u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim3);
 
@@ -340,6 +350,7 @@ void sysmsgwin_2(SysMsgWinWork* w) {
                            w->tiles2, w->palette4, 0, 0, 10);
             }
         }
+
         break;
     }
 
@@ -412,6 +423,7 @@ void sysmsgwin_3(SysMsgWinWork* w) {
     gMessageWindowOpen = 0;
     gActiveSysmsgwin = 0;
 }
+
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
 #ifndef VERSION_JP
     TextChar** p;
@@ -452,6 +464,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
 
     return 1;
 }
+
 s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
     if (gActiveSysmsgwin != NULL) {
         gActiveSysmsgwin->args = *src;
@@ -471,6 +484,7 @@ s32 CloseSysmsgwin(void) {
 
     return 0;
 }
+
 void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
     vu32 zero = 0;
 
@@ -553,6 +567,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
 #endif
     }
 #endif
+
     InitTextSlots(w->textSlots, 10);
     InitTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 1;
@@ -563,6 +578,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
 
 u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
     void* pal;
+
     switch (w->args.mode) {
     case 0:
     case 1:
@@ -570,6 +586,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
         LoadBgTiles(w->args.bg, gUnk_099597E4, 0x140);
         LoadBgMap(w->args.bg, gUnk_09985F44, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
+
         switch ((u32)w->messageDef->positionIndex) {
         case 0:
         case 2:
@@ -583,6 +600,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
             SetBgScroll(w->args.bg, 0, 0);
             break;
         }
+
         break;
     case 2:
     case 3:
@@ -598,14 +616,17 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
             w->frameY = 0x8200;
             break;
         }
+
         w->tiles2 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
         w->palette4 = LoadObjPalette(gCard00Palette, 32);
         FadeSetPaletteExcluded(w->palette4->index + 16, 1);
         break;
     }
+
     if (w->args.mode == 0 || w->args.mode == 2) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceSetup);
     }
+
     return 1;
 }
 
@@ -647,6 +668,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceInput);
     return 1;
 }
+
 s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* w) {
     if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
@@ -661,6 +683,7 @@ s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* w) {
 
     return 1;
 }
+
 u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* w, void* a) {
     s32 tbl[2];
 
@@ -715,6 +738,7 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* w, void* a) {
 
     return 1;
 }
+
 void sysmsgwinChoice_2(SysMsgWinWork* w) {
     DrawCardMsgGlyphs(w->unk_138[1]);
 
@@ -724,6 +748,7 @@ void sysmsgwinChoice_2(SysMsgWinWork* w) {
         if (w->tiles2 != NULL) {
             DrawSprite(w->frameX >> 8, w->frameY >> 8, gUnk_09EF1278[0], w->tiles2, w->palette4, 0, 0, 20);
         }
+
         break;
     }
 

@@ -307,6 +307,7 @@ void mode_chkbtl_1(void) {
         } else if ((u16)gChkBtlWork->enemy > 0xD0) {
             gChkBtlWork->enemy = 0;
         }
+
         break;
     case 1:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -322,6 +323,7 @@ void mode_chkbtl_1(void) {
         } else if ((u8)gChkBtlWork->bg > 12) {
             gChkBtlWork->bg = 0;
         }
+
         break;
     case 2:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -345,6 +347,7 @@ void mode_chkbtl_1(void) {
                 gChkBtlWork->floor = 12;
             }
         }
+
         break;
     case 3:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -360,6 +363,7 @@ void mode_chkbtl_1(void) {
         } else if (gChkBtlWork->hp > 560) {
             gChkBtlWork->hp = 560;
         }
+
         break;
     case 4:
         gChkBtlWork->cursor = 0;
@@ -384,6 +388,7 @@ void mode_chkbtl_1(void) {
             } else {
                 DebugTextPrint(62, 44, 2, sChkBtlWorlds[gChkBtlWork->bg].name);
             }
+
             break;
         case 2:
             DebugTextPrintNumber(62, 56, 2, gChkBtlWork->floor + 1);

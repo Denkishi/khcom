@@ -2,14 +2,9 @@
 #define GUARD_BTL2_H
 
 #include "battle_localized_data.h"
-
-
 #include "bg_animation_data.h"
-
 #include "field_state.h"
-
 #include "map_api.h"
-
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "display.h"

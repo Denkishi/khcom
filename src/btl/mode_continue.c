@@ -7,7 +7,6 @@
 #include "gba/keys.h"
 #include "mode_test_api.h"
 
-
 TaskPool gContinueTaskPool;
 Task* gContinueTask;
 

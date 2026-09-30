@@ -10,5 +10,4 @@ typedef struct BosShadowWork {
     BtlObj* actor;
 } BosShadowWork;
 
-
 #endif /* GUARD_BOS_H */

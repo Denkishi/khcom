@@ -71,6 +71,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         case 32:
             return 0;
         }
+
         break;
     case 0x53:
         switch (work->timer) {
@@ -102,6 +103,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         case 32:
             return 0;
         }
+
         break;
     case 0x2D:
         switch (work->timer) {
@@ -132,6 +134,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         case 32:
             return 0;
         }
+
         break;
     case 0xD3:
         switch (work->timer) {
@@ -162,6 +165,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         case 32:
             return 0;
         }
+
         break;
     }
 

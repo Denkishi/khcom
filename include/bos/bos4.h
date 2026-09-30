@@ -3,22 +3,14 @@
 
 #include "registration_data.h"
 #include "battle_actor_types.h"
-
 #include "boss_boogie.h"
-
 #include "map_text_data.h"
-
 #include "battle_bg_types.h"
-
 #include "map_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "msg_api.h"
-
 #include "save_api.h"
-
 #include "m4a_song.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
@@ -375,7 +367,6 @@ void BosBoogieDiceGrow(BoogieDiceWork* work);
 
 extern u8 gUnk_09796EAA[];
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work);
-
 
 void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg);
 extern u8 gKnifeTiles[];

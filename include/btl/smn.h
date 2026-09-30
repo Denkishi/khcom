@@ -2,11 +2,8 @@
 #define GUARD_SMN_H
 
 #include "task_descriptors.h"
-
 #include "registration_data.h"
-
 #include "card_battle.h"
-
 #include "display.h"
 #include "m4a_song.h"
 #include "btl_effect.h"

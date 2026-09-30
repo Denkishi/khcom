@@ -143,15 +143,18 @@ u8 SpendMooglePoints(u32 a) {
         SetMooglePoints(GetMooglePoints() - a);
         ok = 1;
     }
+
     return ok;
 }
 
 u8 AddMooglePoints(u32 a) {
     a += GetMooglePoints();
+
     if (a > 99999) {
         SetMooglePoints(99999);
         return 0;
     }
+
     SetMooglePoints(a);
     return 1;
 }
@@ -177,9 +180,11 @@ void UpdateMsTopMooglePalette(void) {
     flag = 0;
     v = x;
     base = (-sMsTopBg1ScrollX) >> 8;
+
     if (v <= base + 0x1C || v >= base + 0x1C + 0x62) {
         flag = 1;
     }
+
     ReleaseObjPalette(sMsTopMooglePalette);
     sMsTopMooglePalette = LoadObjPalette(flag == 0 ? gMoguPalette : gUnk_09A3D77C, 0x20);
 }
@@ -196,6 +201,7 @@ void UpdateMsTopWarpGfx(void) {
         flag = 0;
         v = x;
         base = (-sMsTopBg1ScrollX) >> 8;
+
         if (v <= base + 0x18 || v >= base + 0x18 + 0x6A) {
             flag = 1;
         }
@@ -207,6 +213,7 @@ void UpdateMsTopWarpGfx(void) {
         if (sMsTopWarpTiles[i] != NULL) {
             ReleaseObjTiles(sMsTopWarpTiles[i]);
         }
+
         sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[flag].gfx[i].palette, sWarpDefs[flag].gfx[i].paletteSize);
         sMsTopWarpTiles[i] = LoadObjTiles(sWarpDefs[flag].gfx[i].tiles, sWarpDefs[flag].gfx[i].tilesSize);
         AnimInit(&sMsTopWarpAnims[i], sWarpDefs[flag].gfx[i].anims, sWarpDefs[flag].gfx[i].gfxTable);
@@ -233,10 +240,12 @@ void MsTopHandleInput(void) {
 
     prev = sMsTopCursor;
     keys = GetKeysPressed();
+
     if (keys & A_BUTTON) {
         if (sMsTopCursor == 1) {
             AnimStart(&sMsTopWarpAnims[sMsTopCursor], 2, ANIM_FLAG_LOOP);
         }
+
         sMsTopNextMode = sWarpDefs[sMsTopCursor].mode;
         m4aSongNumStart(SONG_SYS_KETTEI);
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -283,6 +292,7 @@ void MsTopHandleInput(void) {
         if (IsMessageWindowOpen()) {
             CloseMessageWindow();
         }
+
         sMsTopPendingOptionMessage = sMsTopCursor == 0 ? 0x40 : 0x41;
         SetMsTopWarpAnim(sMsTopCursor);
         m4aSongNumStart(SONG_SYS_CLICK);
@@ -312,6 +322,7 @@ void MsTopDraw(void) {
         if (sMsTopCursor == 0) {
             flags |= SPRITE_FLAG_HFLIP;
         }
+
         break;
     case 1:
         break;
@@ -319,6 +330,7 @@ void MsTopDraw(void) {
         flags |= SPRITE_FLAG_HFLIP;
         break;
     }
+
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, 0, flags, 0x834);
     DrawSprite((gUnk_02035888 >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
@@ -339,6 +351,7 @@ void MsTopDraw(void) {
     if (sMsTopState == 6) {
         DrawMooglePackOpening();
     }
+
     TaskPoolDraw(&gMsTopTaskPool);
     SetBgScroll(0, (u16)(sMsTopBg0ScrollX >> 8), 0);
     SetBgScroll(1, (u16)(sMsTopBg1ScrollX >> 8), 0);
@@ -477,6 +490,7 @@ void mode_ms_top_1(void) {
 #endif
             sMsTopState = 2;
         }
+
         break;
     case 2:
         if ((gGameState.progression.unk_82 & 0x80) == 0) {
@@ -485,6 +499,7 @@ void mode_ms_top_1(void) {
         } else {
             sMsTopState = 4;
         }
+
         break;
     case 3:
         QueueMsTopIntroMessage();
@@ -494,6 +509,7 @@ void mode_ms_top_1(void) {
             gGameState.progression.unk_82 |= 0x80;
             sMsTopState = 4;
         }
+
         break;
     case 4:
         if (GetMoogleFreePackFlag(gMapFloorState.room) == 0) {
@@ -502,6 +518,7 @@ void mode_ms_top_1(void) {
         } else {
             sMsTopState = 7;
         }
+
         break;
     case 5:
         if (IsMessageWindowOpen() == 0) {
@@ -518,6 +535,7 @@ void mode_ms_top_1(void) {
             FadeToAmount(FADE_MODE_BLACK, 16, 8);
             sMsTopState = 6;
         }
+
         break;
     case 6:
         if (UpdateMooglePackOpening(1) == 0) {
@@ -529,6 +547,7 @@ void mode_ms_top_1(void) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             sMsTopState = 7;
         }
+
         break;
     case 7:
         sMsTopPendingOptionMessage = sMsTopCursor == 0 ? 0x40 : 0x41;
@@ -608,15 +627,18 @@ void mode_ms_top_1(void) {
             sMsTopMoogleX = 0;
             sMsTopMoogleWalkDir = 0;
         }
+
         break;
     case 2:
         UpdateMsTopMooglePalette();
         sMsTopMoogleX += 0x180;
+
         if (sMsTopMoogleX >= 0xBC00) {
             AnimStart(&sMsTopMoogleAnim, 0, ANIM_FLAG_LOOP);
             sMsTopMoogleX = 0xBC00;
             sMsTopMoogleWalkDir = 0;
         }
+
         break;
     }
 

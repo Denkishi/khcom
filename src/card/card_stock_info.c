@@ -67,7 +67,6 @@ static const CardHelpDef sUnk_0903BD0C = {
 #if defined(VERSION_JP)
 #include "card_help_pages_head.inc"
 #endif
-
 #if defined(VERSION_JP)
 static const CardHelpDef sUnk_0903BD14 = {
     gUnk_09EE7A40,
@@ -79,7 +78,6 @@ static const CardHelpDef sUnk_0903BD14 = {
 #if defined(VERSION_JP)
 #include "card_help_pages.inc"
 #endif
-
 #if defined(VERSION_JP)
 static const CardHelpDef sUnk_0903BFB4 = {
     gUnk_09EE7D44,
@@ -648,6 +646,7 @@ CardHelpText* gUnk_09EE79F4[] = {
     &gUnkEu_09F6CA08,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7A00[] = {
 #if defined(VERSION_US)
@@ -672,6 +671,7 @@ CardHelpText* gUnk_09EE7A08[] = {
     &gUnkEu_09F6CA58,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7A10[] = {
 #if defined(VERSION_US)
@@ -775,6 +775,7 @@ CardHelpText* gUnk_09EE7A50[] = {
     &gUnkEu_09F6CBC0,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7A58[] = {
 #if defined(VERSION_US)
@@ -799,6 +800,7 @@ CardHelpText* gUnk_09EE7A60[] = {
     &gUnkEu_09F6CC10,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7A68[] = {
 #if defined(VERSION_US)
@@ -862,6 +864,7 @@ CardHelpText* gUnk_09EE7A88[] = {
     &gUnkEu_09F6CCD8,
 #endif
 };
+
 #if defined(VERSION_JP)
 CardHelpText* gUnk_09EE7A58[] = {
     gCardHelpTextJp_0900BBB8,
@@ -894,6 +897,7 @@ CardHelpText* gUnk_09EE7A98[] = {
     &gUnkEu_09F6CD28,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7AA0[] = {
 #if defined(VERSION_US)
@@ -1057,6 +1061,7 @@ CardHelpText* gUnk_09EE7B18[] = {
     &gUnkEu_09F6CE90,
 #endif
 };
+
 #if defined(VERSION_JP)
 CardHelpText* gUnk_09EE7B30[] = {
     gCardHelpTextJp_0900BF88,
@@ -1076,6 +1081,7 @@ CardHelpText* gUnk_09EE7B28[] = {
     &gUnkEu_09F6CEE0,
 #endif
 };
+
 #if defined(VERSION_US) || defined(VERSION_EU)
 CardHelpText* gUnk_09EE7B30[] = {
 #if defined(VERSION_US)
@@ -1417,6 +1423,7 @@ CardHelpText* gUnk_09EE7C38[] = {
     &gUnkEu_09F6D1B0,
 #endif
 };
+
 #if defined(VERSION_JP)
 CardHelpText* gUnk_09EE7D54[] = {
     gCardHelpTextJp_0900D0D8,
@@ -1535,6 +1542,7 @@ CardHelpText* gUnk_09EE7C64[] = {
     &gUnkEu_09F6D264,
 #endif
 };
+
 #if defined(VERSION_JP)
 CardHelpText* gUnk_09EE7D74[] = {
     gCardHelpTextJp_0900C6E0,
@@ -1671,6 +1679,7 @@ CardHelpText* gUnk_09EE7CB4[] = {
     &gUnkEu_09F6D3F4,
 #endif
 };
+
 #if defined(VERSION_JP)
 CardHelpText* gUnk_09EE7D7C[] = {
     gCardHelpTextJp_0900CAC4,
@@ -1891,6 +1900,7 @@ CardHelpText* gUnk_09EE7D3C[] = {
     &gUnkEu_09F6D69C,
 #endif
 };
+
 #if defined(VERSION_US)
 CardHelpText* gUnk_09EE7D44[] = {
     gCardHelpTextUs_0903BCFA,
@@ -1923,6 +1933,7 @@ CardHelpText* gUnk_09EE7D7C[] = {
     gCardHelpTextUs_0903BCFA,
 };
 #endif
+
 #if defined(VERSION_EU)
 CardHelpText* gUnk_09EE7D54[] = {
     &gUnkEu_09F6D6B0,
@@ -2023,10 +2034,12 @@ s32 UpdateStockInfoMessage(StockInfoWork* w) {
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
+
 void StockInfo_2(StockInfoWork* w) {
     DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEA28C, w->tiles, w->palette, 0, 0, 50);
     TaskPoolDraw(&w->tasks);
 }
+
 void StockInfo_3(StockInfoWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -2045,6 +2058,7 @@ void* GetCardHelpText(u16 a, u8 b) {
 u8 GetCardHelpTextCount(u16 a) {
     return gCardHelpDefs[a]->textCount;
 }
+
 u8 IsLevelUpStockUnlocked(void) {
     if (gGameState.progression.level >= sLevelUpStockLevels[gGameState.progression.levelMilestone]) {
         return 1;

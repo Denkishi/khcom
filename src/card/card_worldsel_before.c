@@ -56,6 +56,7 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
 
     m4aSongNumStart(SONG_SND_212);
 }
+
 s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
     u8 i;
 
@@ -84,6 +85,7 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
 
     return 1;
 }
+
 void WorldSel_Before_2(WorldSelBeforeWork* w) {
     u8 i;
 
@@ -106,6 +108,7 @@ void WorldSel_Before_3(WorldSelBeforeWork* w) {
     ReleaseObjPalette(w->palette);
     ReleaseObjPalette(w->palette2);
 }
+
 void func_080A581C(u8* work) {
     TaskCreate(&work[0x10], &gTaskDescWorldSelBefore, work);
 }

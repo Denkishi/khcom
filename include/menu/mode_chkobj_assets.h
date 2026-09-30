@@ -1,7 +1,6 @@
 #ifndef GUARD_MODE_CHKOBJ_ASSETS_H
 #define GUARD_MODE_CHKOBJ_ASSETS_H
 
-
 #include "types.h"
 #include "anim.h"
 

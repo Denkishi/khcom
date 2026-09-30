@@ -14,25 +14,15 @@
 #include "card_message_data.h"
 #include "registration_data.h"
 #include "system_state.h"
-
 #include "anim.h"
-
 #include "card_label_data.h"
-
 #include "card_description_data.h"
-
 #include "map_card_data.h"
-
 #include "bg_animation_data.h"
-
 #include "msg_types.h"
-
 #include "field_state.h"
-
 #include "card_ui_types.h"
-
 #include "card_api.h"
-
 #include "types.h"
 #include "engine_math.h"
 #include "game_state.h"
@@ -178,6 +168,7 @@ typedef struct CardBattleWork {
 typedef char CardBattleWork_size[(sizeof(CardBattleWork) == 0xCC) ? 1 : -1];
 extern u8 gUnk_096148D8[];
 extern u8 gRiCardF0RedTiles[];
+
 typedef struct CardListWork {
     ListPool cards;
     struct PremireChanceCardWork* selectedCard;
@@ -369,6 +360,7 @@ extern const s32 gLvupEffectStartOffsetY[];
 extern const u16 gLvupEffectStartAngles[];
 extern u16 gRandomHcEffects[47];
 extern u8 gUnk_09619178[];
+
 typedef struct WorldSelAnim {
     u8 palette;
     u8 duration;
@@ -1194,6 +1186,7 @@ extern u8 gUnkEu_095F12A2[];
 
 extern const s16 gDeckGridColumnX[];
 extern const s16 gDeckGridRowY[];
+
 typedef struct PromptChoiceLayout {
     s32 x[2];
 } PromptChoiceLayout;
@@ -1972,6 +1965,7 @@ void DarkPoint_0(DarkPointWork* w);
 s32 DarkPoint_1(DarkPointWork* w);
 void DarkPoint_2(DarkPointWork* w);
 void DarkPoint_3(DarkPointWork* w);
+
 #ifndef VERSION_EU
 void DrawDeckExchangeDeckNames(DeckExchangeWork* w, u8 b);
 #ifndef VERSION_EU
@@ -2021,11 +2015,13 @@ extern const s16 gKeyboardKeyX[];
 extern const s16 gKeyboardKeyY[];
 extern const KeyboardLineLayout gKeyboardRowLayouts[];
 extern const KeyboardLineLayout gKeyboardColumnLayouts[];
+
 #ifdef VERSION_EU
 extern const KeyboardLineLayout gKeyboardSymbolRowLayouts[];
 extern const KeyboardLineLayout gKeyboardSymbolColumnLayouts[];
 extern const s16 gKeyboardPageTabXEu[];
 #endif
+
 #ifdef VERSION_JP
 extern const s16 gKeyboardPageTabXJp[];
 extern const u8 gUnkJp_090089B0[];

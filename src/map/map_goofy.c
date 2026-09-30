@@ -142,6 +142,7 @@ void MapNamineCheckTalk(MapNamineWork* w) {
         } else {
             CreateCardMessageTask(&w->tasks, 0, 0x32);
         }
+
         w->update = MapNamineWaitMessage;
     }
 }
@@ -611,6 +612,7 @@ void MapTutorialBarrelFall(MapTutorialWork* w) {
         w->shadowVisible = 0;
         w->update = MapTutorialWaitBarrelHit;
     }
+
     ColliderSetPosition(&p->collider, p->obj.fieldPosition.x, p->obj.fieldPosition.y, p->obj.fieldPosition.z);
 }
 
@@ -659,6 +661,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* w) {
         if (gFieldState->actor.fieldPosition.x > w->obj.fieldPosition.x) {
             v = 1;
         }
+
         w->flip = v;
         w->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
         w->palette = LoadObjPalette(gEmy00Palette, 32);
@@ -767,6 +770,7 @@ s32 Task_MapTutorial_1(MapTutorialWork* w) {
             return 1;
         }
     }
+
     return 0;
 }
 
@@ -791,6 +795,7 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
         if (t != 0) {
             flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         }
+
         DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, flags, v);
 
         if (w->shadowVisible != 0) {
@@ -806,6 +811,7 @@ void Task_MapTutorial_3(MapTutorialWork* w) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
+
     TaskPoolDestroy(&w->tasks);
     TaskPoolDestroy(&w->tasks2);
 }
@@ -815,10 +821,13 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
     s32 dy;
 
     dx = p->x - gFieldState->actor.fieldPosition.x;
+
     if (dx < 0) {
         dx = gFieldState->actor.fieldPosition.x - p->x;
     }
+
     dy = p->y - gFieldState->actor.fieldPosition.y;
+
     if (dy < 0) {
         dy = gFieldState->actor.fieldPosition.y - p->y;
     }
@@ -826,6 +835,7 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
     if (dx > 0x8000 || dy > 0x8000) {
         return 0;
     }
+
     return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? 1 : 0;
 }
 
@@ -893,11 +903,13 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
         } else {
             w->update = func_080F74E8;
         }
+
         break;
     case 0xAD:
         w->update = func_080F753C;
         break;
     }
+
     TaskPoolInit(&w->tasks, 1);
 }
 
@@ -907,6 +919,7 @@ s32 Task_MapStair_1(MapStairWork* w) {
     if (w->update != NULL) {
         w->update(w);
     }
+
     return 1;
 }
 
@@ -981,6 +994,7 @@ s32 Task_MapDmg_1(MapDmgWork* w) {
             w->timer -= 1;
         }
     }
+
     return 1;
 }
 
@@ -1023,11 +1037,13 @@ void* GetFloorName(void) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return eu_0805E924(gBasementFloorNames[(s8)gGameState.floor]);
     }
+
     return eu_0805E924(gFloorNames[(s8)gGameState.floor]);
 #else
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return gBasementFloorNames[(s8)gGameState.floor];
     }
+
     return gFloorNames[(s8)gGameState.floor];
 #endif
 }
@@ -1056,6 +1072,7 @@ s32 Task_MapFloor_1(MapFloorWork* w) {
         (*p)--;
         return 1;
     }
+
     return 0;
 }
 

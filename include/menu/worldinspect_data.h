@@ -41,5 +41,4 @@ typedef struct WorldinspectMsg {
 typedef WorldinspectNav MdWorldNav;
 typedef WorldinspectMsg MdMsg;
 
-
 #endif

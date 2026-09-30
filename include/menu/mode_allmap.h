@@ -2,11 +2,8 @@
 #define GUARD_MODE_ALLMAP_H
 
 #include "registration_data.h"
-
 #include "allmap_types.h"
-
 #include "map_api.h"
-
 #include "display.h"
 #include "game_state.h"
 #include "obj_api.h"

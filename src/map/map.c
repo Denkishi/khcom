@@ -105,8 +105,10 @@ s32 MapEnmPlaceInRoom(MapEnmArgs* p) {
                 return 0;
             }
         }
+
         return 1;
     }
+
     return 0;
 }
 
@@ -151,6 +153,7 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* w) {
             }
         }
     }
+
     return 0;
 }
 
@@ -182,6 +185,7 @@ u8 MapEnmPlaceAboveGmk01(MapEnmArgs* w) {
             }
         }
     }
+
     return 0;
 }
 
@@ -193,6 +197,7 @@ void MapEnmSetupArgs(MapEnmArgs* p, const MapEnmDef* q) {
     } else {
         MapEnmPlaceInView(p);
     }
+
     switch (GetRandom() % 4) {
     case 0:
         p->angle = 0xAD;
@@ -207,6 +212,7 @@ void MapEnmSetupArgs(MapEnmArgs* p, const MapEnmDef* q) {
         p->angle = 0x2D;
         break;
     }
+
     p->speed = 0;
     p->def = q;
     p->update = 0;
@@ -224,9 +230,11 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
     if (gMapEnmCount >= t[1]) {
         return;
     }
+
     if (e->enemiesLeft - gMapEnmCount <= 0) {
         return;
     }
+
     d = gMapEnmDefs[a];
 
     switch (b) {
@@ -242,6 +250,7 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
         w->angle = GetAngle(w->pos.x, w->pos.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
         break;
     }
+
     if (ok) {
         gMapEnmSpawnPositions[gMapEnmCount] = w->pos;
         w->speed = 0;
@@ -293,6 +302,7 @@ void MapEnmSetAnim(MapEnmWork* p, u8 n, u16 a) {
         p->flags &= ~MAP_ENM_FLAG_HFLIP;
         break;
     }
+
     AnimChangeWithTables(&p->anim, q->animId, a, q->anims, q->gfxTable);
     SetObjTileSource(p->tiles, q->tiles);
 }
@@ -307,6 +317,7 @@ void MapEnmUpdateAnim(MapEnmWork* p) {
             gFieldState->flags |= FIELD_FLAG_ENEMY_FRAME_CHANGED;
         }
     }
+
     p->gfx = AnimUpdate(&p->anim);
 }
 
@@ -317,6 +328,7 @@ u8 GetRandomBattleId(void) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return v + gRikuWorldBattleBase[gMapFloorState.world];
     }
+
     return v + gSoraWorldBattleBase[gMapFloorState.world];
 }
 
@@ -326,9 +338,11 @@ void MapEnmStartBattle(MapEnmWork* p) {
     gMapRoomState->flags |= ROOM_FLAG_START_BATTLE;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     p->flags |= MAP_ENM_FLAG_REMOVED;
+
     if (p->flags & MAP_ENM_FLAG_FIRST_STRIKE) {
         gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
     }
+
     if (p->flags & MAP_ENM_FLAG_WHITE_MUSHROOM) {
         gMapRoomState->battleId = GetRandom() % 3 + 128;
     } else if (p->flags & MAP_ENM_FLAG_BLACK_FUNGUS) {
@@ -363,8 +377,10 @@ s32 MapEnmCheckAttacked(MapEnmWork* p) {
         } else {
             m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         }
+
         return 1;
     }
+
     return 0;
 }
 
@@ -388,6 +404,7 @@ void MapEnmRestoreFromCache(void) {
     s32 i;
 
     q = ListPoolFirst(&gGameState.enemyCachePool);
+
     while (q != NULL) {
         d = q->def;
         w.def = d;
@@ -398,6 +415,7 @@ void MapEnmRestoreFromCache(void) {
         TaskCreate(&gFieldState->tasks4, d->desc, &w);
         q = ListPoolNext(&q->node);
     }
+
     ListPoolInit(&gGameState.enemyCachePool);
 
     for (i = 0; i < 3; i++) {
@@ -424,6 +442,7 @@ void MapEnmSpawnRoomSet(void) {
                 MapEnmSpawnFixed(&w, 1, 0);
             }
         }
+
         break;
     }
 }
@@ -441,6 +460,7 @@ void MapEnmInitRoom(void) {
 
     if (gGameState.fieldResume != 0) {
         q = ListPoolFirst(&gGameState.enemyCachePool);
+
         while (q != NULL) {
             d = q->def;
             w.def = d;
@@ -451,10 +471,13 @@ void MapEnmInitRoom(void) {
             TaskCreate(&gFieldState->tasks4, d->desc, &w);
             q = ListPoolNext(&q->node);
         }
+
         if (gGameState.flags & GAME_FLAG_MAP_ENEMY_BATTLE) {
             gGameState.flags &= ~GAME_FLAG_MAP_ENEMY_BATTLE;
+
             if ((gGameState.flags & GAME_FLAG_BATTLE_NOT_WON) == 0) {
                 e = GetMapFloorRoom(gMapFloorState.room);
+
                 if (e->enemiesLeft != 0) {
                     e->enemiesLeft--;
                 }
@@ -463,6 +486,7 @@ void MapEnmInitRoom(void) {
     } else {
         MapEnmSpawnRoomSet();
     }
+
     ListPoolInit(&gGameState.enemyCachePool);
 
     for (i = 0; i < 3; i++) {
@@ -483,20 +507,25 @@ void MapEnmUpdateSpawner(void) {
         gMapEnmSpawnTimer--;
         return;
     }
+
     e = GetMapFloorRoom(gMapFloorState.room);
 
     if (gMapEnmCount >= t[1]) {
         return;
     }
+
     if (e->enemiesLeft - gMapEnmCount <= 0) {
         return;
     }
+
     if (gFieldState->flags & (FIELD_FLAG_FREEZE_ENEMIES | FIELD_FLAG_NO_ENEMY_SPAWN | FIELD_FLAG_ROOM_CREATE)) {
         return;
     }
+
     if (GetRandom() % 10000 <= 7999) {
         return;
     }
+
     switch (gMapRoomState->roomType) {
     case 20:
         d = gMapEnmDefs[5];
@@ -512,11 +541,14 @@ void MapEnmUpdateSpawner(void) {
         } else {
             d = gMapEnmDefs[1];
         }
+
         break;
     }
+
     if (gMapEnmTileCount + d->tileCount > 256) {
         return;
     }
+
     gMapEnmSpawnTimer = 30;
     MapEnmSetupArgs(&w, d);
     TaskCreate(&gFieldState->tasks4, d->desc, &w);
@@ -561,6 +593,7 @@ void MapEnmInit(MapEnmWork* p, MapEnmArgs* q) {
     } else {
         ColliderInit(&p->collider, 3, d->radius, d->height);
     }
+
     ColliderSetPosition(&p->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     ColliderSetDisabled(&p->collider, 1);
     MapEnmApplyRoomFlags(p);
@@ -605,6 +638,7 @@ void MapEnmDestroy(MapEnmWork* p) {
     if (gGameState.fieldResume != 0 && (p->flags & MAP_ENM_FLAG_REMOVED) == 0 &&
         ((gMapRoomState->flags & ROOM_FLAG_START_BATTLE) == 0 || (p->flags & MAP_ENM_FLAG_PERSISTENT))) {
         q = ListPoolFirstFree(&gGameState.enemyCachePool);
+
         if (q != NULL) {
             q->def = p->def;
             q->update = p->update;
@@ -614,6 +648,7 @@ void MapEnmDestroy(MapEnmWork* p) {
             ListPoolActivate(&q->node, &gGameState.enemyCachePool);
         }
     }
+
     gMapEnmCount--;
     gMapEnmTileCount -= p->def->tileCount;
     ColliderUnregister(&p->collider);
@@ -674,11 +709,13 @@ u8 GetRandomMapGmkIndex(u8 a) {
         } else {
             r = GetRandom() % 7 + 22;
         }
+
         break;
     default:
         r = GetRandom() % 3 + 59;
         break;
     }
+
     return r;
 }
 
@@ -699,13 +736,16 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
     for (i = 0; i < gMapGmkCount; i++) {
         cx = (gMapGmkPlacements[i].pos.x >> 8) / 32;
         cy = ((gMapGmkPlacements[i].pos.y + gMapGmkPlacements[i].pos.z) >> 8) / 16;
+
         if (cx > x - 9 && cx < x + 9 && cy > y - 11 && cy < y + 11) {
             n++;
+
             if (n > 2) {
                 return 0;
             }
         }
     }
+
     return 1;
 }
 
@@ -715,6 +755,7 @@ u8 MapCellIsFreeOfType(s16 x, s16 y, u8 n) {
     if (p != NULL && p->lowerZ != 0x100000 && p->type == n && (p->flags & (MAP_CELL_FLAG_STAIRS | MAP_CELL_FLAG_JUMP_PAD | MAP_CELL_FLAG_GMK_RESERVED | MAP_CELL_FLAG_KEEP_CLEAR)) == 0) {
         return 1;
     }
+
     return 0;
 }
 
@@ -729,6 +770,7 @@ s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 n) {
             }
         }
     }
+
     return 1;
 }
 
@@ -756,6 +798,7 @@ s16 func_080E6A14(s16 x, s16 y) {
 
     for (i = 0; i < n; i++) {
         MapCell* p = MapCellAt(x, y + i);
+
         if (p->flags & MAP_CELL_FLAG_GMK_RESERVED) {
             return 0;
         }
@@ -764,6 +807,7 @@ s16 func_080E6A14(s16 x, s16 y) {
             return i;
         }
     }
+
     return 0;
 }
 
@@ -779,14 +823,17 @@ s32 func_080E6A80(s16 x, s16 y, u16 n) {
     for (j = 0; j < n; j++) {
         for (i = 0; i < h; i++) {
             q = MapCellAt(x + j, y - i);
+
             if (q->flags & MAP_CELL_FLAG_GMK_RESERVED) {
                 return 0;
             }
+
             if (q->type < 7 || q->type > 9) {
                 break;
             }
         }
     }
+
     return 1;
 }
 
@@ -896,11 +943,14 @@ u8 func_080E6DB0(FldPos* p) {
                     }
                 }
             }
+
             x++;
             x %= n;
         }
+
         y = (y != 0 ? y : m) - 1;
     }
+
     return 0;
 }
 
@@ -1119,11 +1169,14 @@ u8 func_080E74D8(FldPos* p) {
                     }
                 }
             }
+
             x++;
             x %= n;
         }
+
         y = (y != 0 ? y : m) - 1;
     }
+
     return 0;
 }
 
@@ -1342,6 +1395,7 @@ s32 MapGmkIsPaletteUnused(void* a) {
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -1357,6 +1411,7 @@ s32 MapGmkNeedsTiles(u8 flag, void* a) {
             return 0;
         }
     }
+
     return 1;
 }
 
@@ -1365,6 +1420,7 @@ void MapGmkReserveJump(void) {
 
     for (i = 0; i < 12; i++) {
         MapPlatform* p = GetMapPlatform(i);
+
         if (p->hasStairs == 0 && p->spotLowerZ != 0x100000) {
             gMapGmkTileCount += 0x4C;
             gMapGmkPaletteCount++;
@@ -1570,6 +1626,7 @@ u8 FldObjIsOutOfView(FldObj* p) {
         p->fieldPosition.y + p->fieldPosition.z < gFieldState->y || p->fieldPosition.y + p->fieldPosition.z > lim) {
         return 1;
     }
+
     return 0;
 }
 
@@ -1582,6 +1639,7 @@ void CreateRandomMapPrizes(s32 a, s32 b, s32 c) {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         r = GetRandom() % 10000;
+
         if (r < 2500) {
             CreateMapPrizeTasks(0, 2, a, b, c);
         } else if (r < 6500) {
@@ -1593,6 +1651,7 @@ void CreateRandomMapPrizes(s32 a, s32 b, s32 c) {
         }
     } else {
         r = GetRandom() % 10000;
+
         if (r < 2000) {
             CreateMapPrizeTasks(0, 2, a, b, c);
         } else if (r < 4000) {
@@ -1634,6 +1693,7 @@ void MapGmkInitRoom(void) {
         MapGmkPlaceRandomGimmicks();
         MapGmkPlaceWorldGimmicks();
     }
+
     MapGmkCreateTasks();
 }
 
@@ -1644,10 +1704,12 @@ void MapGmkCreateTasks(void) {
 
     for (i = 0; i < 12; i++) {
         p = GetMapPlatform(i);
+
         if (p->hasStairs == 0 && p->spotLowerZ != 0x100000) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkJump, p);
         }
     }
+
     for (i = 0; i < gMapGmkCount; i++) {
         d = gMapGmkPlacements[i].def;
 
@@ -1655,6 +1717,7 @@ void MapGmkCreateTasks(void) {
             TaskCreate(&gFieldState->tasks, d->desc, &gMapGmkPlacements[i]);
         }
     }
+
     TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkDmy, 0);
 }
 
@@ -1697,6 +1760,7 @@ void* GetCellMaskTable(u8 a) {
         i = 0;
         break;
     }
+
     return &gCellMasks[i + 10];
 }
 
@@ -1710,6 +1774,7 @@ u8 MapCellMaskBitAt(MapCell* p, s32 x, s32 y) {
     if (p == NULL) {
         return 1;
     }
+
     cx = (x >> 8) % 32;
     cy = (y >> 8) % 16;
     t = GetCellMaskBlock(p->maskTable, cx, cy);
@@ -1726,9 +1791,11 @@ void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* p, u16* base) {
     MapCell* q;
 
     v = GetRandom() % 100;
+
     while (v >= p[0]) {
         p += 8;
     }
+
     for (j = 0; j < p[3]; j++) {
         for (i = 0; i < p[4]; i++) {
             switch (p[5]) {
@@ -1743,6 +1810,7 @@ void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* p, u16* base) {
                 q = MapCellAt(x + j, y + i);
                 break;
             }
+
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
             // @bug q is NULL where the pattern reaches past the room edge (NULL write).
             q->bg2Piece = 50;
@@ -1762,25 +1830,31 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
         if (q->lowerZ == 0x100000) {
             return 0;
         }
+
         if (p->unk_04 != 7 && q->bg3Piece != p->unk_04) {
             return 0;
         }
+
         if (q->bg2Piece != p->unk_05) {
             return 0;
         }
+
         v = 0x520;
 
         if ((q->flags & v) != 0) {
             return 0;
         }
+
         v = q->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT);
         v = v & ~p->unk_08;
 
         if (v != p->unk_06) {
             return 0;
         }
+
         p++;
     }
+
     return 1;
 }
 
@@ -1821,9 +1895,11 @@ void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* p, u16* base) {
     MapCell* q;
 
     v = GetRandom() % 100;
+
     while (v >= p[0]) {
         p += 8;
     }
+
     for (j = 0; j < p[3]; j++) {
         for (i = 0; i < p[4]; i++) {
             q = MapCellAt(x + j, y + i);
@@ -1840,8 +1916,10 @@ u8 MapDecorCheckFits(s16 x, s16 y, const u8* p) {
         if (MapCellAt(p[0] + x, p[1] + y)->bg1Piece != p[2]) {
             return 0;
         }
+
         p += 4;
     }
+
     return 1;
 }
 
@@ -1853,6 +1931,7 @@ void MapApplyLayer2DecorRule(MapDecorRule* p) {
 
     w = gMapRoomState->cols - p->width + 1;
     h = gMapRoomState->rows - p->height + 1;
+
     for (j = 0; j < h; j++) {
         for (i = 0; i < w; i++) {
             if (MapDecorCheckFits(i, j, p->pattern)) {
@@ -1957,6 +2036,7 @@ u8 MapAnmCmdFrame(MapAnmSlot* p) {
             w->scriptPos = q + 2;
         }
     }
+
     return 0;
 }
 
@@ -1971,13 +2051,17 @@ u8 IsEventDoor(u8 a, u8 b) {
     if ((s32)gMapRoomState->flags < 0) {
         return 0;
     }
+
     p = GetMapEventDoor(0);
+
     while (p->kind != 5) {
         if (p->keyList != 0xFF && p->room == a && p->side == b) {
             return 1;
         }
+
         p++;
     }
+
     return 0;
 }
 
@@ -1988,17 +2072,21 @@ u8 SelectEventDoor(u8 a, u8 b) {
     if ((s32)gMapRoomState->flags < 0) {
         return 0;
     }
+
     i = 0;
     p = GetMapEventDoor(0);
+
     while (p->kind != 5) {
         if (p->keyList != 0xFF && p->room == a && p->side == b) {
             gEventKeyList = &gEventKeyLists[p->keyList];
             gEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
             return 1;
         }
+
         i++;
         p++;
     }
+
     return 0;
 }
 
@@ -2015,6 +2103,7 @@ EventKey* GetEventKey(u8 a) {
     if (a == 0 && q->rule == 4 && gEventKeyProgress->remaining != 0) {
         gEventKey.value = gEventKeyProgress->remaining;
     }
+
     return &gEventKey;
 }
 
@@ -2032,6 +2121,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* p) {
         if (p->value == 0) {
             return 1;
         }
+
         return p->value > n;
     }
 
@@ -2059,6 +2149,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* p) {
     case 4:
         return p->value != 0;
     }
+
     return 1;
 }
 
@@ -2069,8 +2160,10 @@ s32 PayEventKey(UnkStruct_080E8E24* p) {
             gEventKeyProgress->remaining = gEventKey.value;
             return 0;
         }
+
         gEventKeyProgress->remaining = 0;
     }
+
     gEventKeyProgress->paid++;
     return 1;
 }
@@ -2088,17 +2181,22 @@ UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
             if (IsCardKindObtained(q->unk_00[0])) {
                 return q;
             }
+
             if (p->cardIndex <= 16) {
                 return &gPrzCardKinds[0];
             }
+
             if (p->cardIndex <= 30) {
                 return &gPrzCardKinds[20];
             }
+
             return &gPrzCardKinds[31];
         }
+
         v -= n;
         p++;
     }
+
     return 0;
 }
 
@@ -2110,10 +2208,12 @@ u8 RollCardValue(void) {
 
     for (i = 0; i < 10; i++) {
         acc += p[i];
+
         if (r < acc) {
             return i;
         }
     }
+
     return 0;
 }
 
@@ -2125,6 +2225,7 @@ s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
     w.y = d;
     w.z = e;
     w.id = a->unk_02;
+
     if (w.id <= 0x1B8) {
         w.id += RollCardValue();
     }
@@ -2133,6 +2234,7 @@ s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
         TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzCard, &w);
         return 1;
     }
+
     return 0;
 }
 
@@ -2158,10 +2260,13 @@ u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
     if (GetMapFloorRoom(gMapFloorState.room)->przCardsLeft == 0) {
         return 0;
     }
+
     q = PickRandomPrzCard(a);
+
     if (q == NULL) {
         return 0;
     }
+
     return CreateMapPrzCardTask(q, 0, b, c, d);
 }
 
@@ -2241,6 +2346,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
                 gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
                 return;
             }
+
             break;
         }
     }
@@ -2293,16 +2399,20 @@ u8 AreWorldPrizesCollected(void) {
                 if (IsCardKindObtained((gPrzCardKinds + p[1])->unk_00[0]) != 1) {
                     return 0;
                 }
+
                 break;
             case 3:
                 if (IsStockLearned((gPrzStocks + p[1])->unk_00[0]) != 1) {
                     return 0;
                 }
+
                 break;
             }
+
             p += 4;
         }
     }
+
     return 1;
 }
 
@@ -2356,19 +2466,25 @@ void MapDbgFreeCameraInput(void) {
     if (GetKeysHeld() & DPAD_LEFT) {
         x = -1024;
     }
+
     if (GetKeysHeld() & DPAD_RIGHT) {
         x = 1024;
     }
+
     if (GetKeysHeld() & DPAD_UP) {
         y = -1024;
     }
+
     if (GetKeysHeld() & DPAD_DOWN) {
         y = 1024;
     }
+
     MapMoveCameraTarget(x, y);
+
     if (GetKeysPressed() & A_BUTTON) {
         gDispCnt = (gDispCnt & ~DISPCNT_BG1_ON) | (m1 & ~gDispCnt);
     }
+
     if (GetKeysPressed() & B_BUTTON) {
         gDispCnt = (gDispCnt & ~DISPCNT_OBJ_ON) | (m2 & ~gDispCnt);
     }
@@ -2380,37 +2496,45 @@ void MapDbgMain(void) {
         gMapRoomState->flags &= ~ROOM_FLAG_ENEMY_STRUCK;
         gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
     }
+
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         MapDbgSetUpdateAndRun(MapDbgExitRoom);
         return;
     }
+
     if (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) {
         TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
         gMapDbgAllmapRoomTask = 0;
         MapDbgSetUpdateAndRun(MapDbgWaitMenu);
         return;
     }
+
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
         gMapDbgAllmapRoomTask = 0;
         MapDbgSetUpdateAndRun(MapDbgWaitRoomCreate);
         return;
     }
+
     if (gMapDbgEditing != 0) {
         MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
+
     UpdateMapField();
     DrawMapField();
     ColliderUpdateAll();
     MapEnmUpdateSpawner();
+
     if ((GetKeysHeld() & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON)) {
         return;
     }
+
     if (GetKeysPressed() & START_BUTTON) {
         MapDbgSetUpdate(MapDbgFreeCameraMode);
     }
+
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
     }
@@ -2418,8 +2542,10 @@ void MapDbgMain(void) {
 
 void MapDbgExitRoom(void) {
     DrawMapField();
+
     if (FadeIsActive() == 0) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
+
         if (gMapRoomState->doorRoom != MAP_ROOM_EXIT_HALL && gMapRoomState->doorRoom != MAP_ROOM_ENTRANCE_HALL) {
             ModeRequest(&gModeMapDbg, 0);
         } else {
@@ -2433,15 +2559,19 @@ void MapDbgFreeCameraMode(void) {
         MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
+
     MapDbgFreeCameraInput();
     TaskPoolUpdate(&gFieldState->tasks);
     DrawMapField();
+
     if ((GetKeysHeld() & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON)) {
         return;
     }
+
     if (GetKeysPressed() & START_BUTTON) {
         MapDbgSetUpdate(MapDbgMain);
     }
+
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
     }
@@ -2449,6 +2579,7 @@ void MapDbgFreeCameraMode(void) {
 
 void MapDbgWaitEdit(void) {
     DrawMapField();
+
     if (gMapDbgEditing == 0) {
         ModeRequest(&gModeMapDbg, 0);
     }
@@ -2656,12 +2787,14 @@ void MapFldMain(void) {
         MapFldSetUpdateAndRun(MapFldStartBattle);
         return;
     }
+
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         MapFldSetUpdateAndRun(MapFldExitRoom);
         return;
     }
+
     if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
         (gFieldState->flags & (FIELD_FLAG_FREEZE_PLAYER | FIELD_FLAG_ROOM_CREATE)) == 0 && (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0) {
         if (GetKeysPressed() & SELECT_BUTTON) {
@@ -2671,6 +2804,7 @@ void MapFldMain(void) {
             MapFldSetUpdateAndRun(MapFldOpenAllmap);
             return;
         }
+
         if (GetKeysPressed() & START_BUTTON) {
             MapFldDestroyAllmapRoom();
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
@@ -2678,16 +2812,19 @@ void MapFldMain(void) {
             return;
         }
     }
+
     if (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) {
         MapFldDestroyAllmapRoom();
         MapFldSetUpdateAndRun(MapFldWaitMenu);
         return;
     }
+
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         MapFldDestroyAllmapRoom();
         MapFldSetUpdateAndRun(MapFldWaitRoomCreate);
         return;
     }
+
     UpdateMapField();
     DrawMapField();
     ColliderUpdateAll();
@@ -2701,19 +2838,23 @@ void MapFldExitRoom(void) {
 
     DrawMapField();
     r = FadeIsActive();
+
     if (r != 0) {
         return;
     }
+
     if (gMapRoomState->doorRoom == MAP_ROOM_ENTRANCE_HALL) {
         EnterEntranceHall();
         return;
     }
+
     if (gMapRoomState->doorRoom == MAP_ROOM_EXIT_HALL) {
         EnterExitHall();
         return;
     }
 
     e = GetMapRoomEvent(gMapFloorState.eventStep);
+
     if (e[0] == 0xFF) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
@@ -2721,6 +2862,7 @@ void MapFldExitRoom(void) {
     }
 
     d = GetMapEventDoor(e[0]);
+
     if (d->room != gMapRoomState->doorRoom || d->side != gMapRoomState->doorSide) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
@@ -2737,6 +2879,7 @@ void MapFldExitRoom(void) {
         } else {
             RequestEventMode(e[1]);
         }
+
         break;
     case 2:
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
@@ -2750,8 +2893,10 @@ void MapFldExitRoom(void) {
 
 void MapFldStartBattle(void) {
     DrawMapField();
+
     if (FadeIsActive() == 0) {
         RequestFieldResume();
+
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.progression.unk_82 & 0x1000) {
                 ModeRequest(&gModeBattle, gMapRoomState->battleId);
@@ -2766,6 +2911,7 @@ void MapFldStartBattle(void) {
 
 void MapFldOpenAllmap(void) {
     DrawMapField();
+
     if (FadeIsActive() == 0) {
         RequestFieldResume();
         ModeRequest(&gModeAllmap, 1);
@@ -2792,6 +2938,7 @@ void MapFldWaitRoomCreate(void) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
         MapFldSetUpdateAndRun(MapFldExitRoom);
+
         if ((gGameState.progression.unk_82 & 0x200) == 0) {
             t = gGameState.progression.unk_82 | 0x200;
             gGameState.progression.unk_82 = t;
@@ -2811,6 +2958,7 @@ void MapFldWaitRoomCreate(void) {
 
 void func_080E9F30(void) {
     DrawMapField();
+
     if (gUnk_02034FBC == 0) {
         ModeRequest(&gModeMapFld, 0);
     }
@@ -2834,6 +2982,7 @@ void Mode_MapFld_0(void) {
             gGameState.fieldAngle = 0x53;
             break;
         }
+
         StartFieldTransition();
     }
 
@@ -2876,6 +3025,7 @@ void Mode_MapFld_0(void) {
         MapFldCreateWorldLogo();
     } else if (gGameState.fieldResume != 0) {
         MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
+
         if ((s8)gGameState.mapMenuCursor != -1) {
             gDispCnt &= ~DISPCNT_OBJ_ON;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
@@ -2923,25 +3073,32 @@ MapFixedDef* GetMapFixedDef(void) {
         if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             return gMapFixedDefs[2];
         }
+
         if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
             if (gGameState.floor != 0) {
                 return gMapFixedDefs[1];
             }
+
             return gMapFixedDefs[5];
         }
     }
+
     if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
         if (gGameState.floor != 12) {
             return gMapFixedDefs[2];
         }
+
         return gMapFixedDefs[3];
     }
+
     if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
         if (gGameState.floor != 0) {
             return gMapFixedDefs[1];
         }
+
         return gMapFixedDefs[0];
     }
+
     return gMapFixedDefs[4];
 }
 
@@ -2949,6 +3106,7 @@ void MapFixCreateCharaTasks(void) {
     if (gMapFloorState.room == MAP_ROOM_TUTORIAL) {
         return;
     }
+
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.progress) {
         case 20:
@@ -2958,17 +3116,22 @@ void MapFixCreateCharaTasks(void) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMickey, 0);
             break;
         }
+
         return;
     }
+
     if (gGameState.progression.friendFlags & FRIEND_FLAG_DONALD_DUCK) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapDonald, 0);
     }
+
     if (gGameState.progression.friendFlags & FRIEND_FLAG_GOOFY) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGoofy, 0);
     }
+
     if (gMapFloorState.room != MAP_ROOM_EXIT_HALL) {
         return;
     }
+
     switch (gMapFloorState.progress) {
     case 23:
     case 24:
@@ -2976,6 +3139,7 @@ void MapFixCreateCharaTasks(void) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
+
         break;
     case 25:
     case 26:
@@ -2983,12 +3147,14 @@ void MapFixCreateCharaTasks(void) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
+
         break;
     case 27:
         if (gGameState.floor == 12) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
+
         break;
     }
 }
@@ -2997,6 +3163,7 @@ u8 GetWorldEntryEventId(void) {
     if (gMapFloorState.flags & FLOOR_FLAG_ENTRY_EVENT_DONE) {
         return 0xFF;
     }
+
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.world) {
         case WORLD_HOLLOW_BASTION:
@@ -3024,8 +3191,10 @@ u8 GetWorldEntryEventId(void) {
             return 0xC0;
 #endif
         }
+
         return 0xFF;
     }
+
     return gWorldEntryEvents[gMapFloorState.world];
 }
 
@@ -3033,9 +3202,11 @@ u8 GetFloorEventId(void) {
     if (gMapFloorState.flags & FLOOR_FLAG_CLEARED) {
         return 0xFF;
     }
+
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return gRikuFloorEvents[gGameState.floor];
     }
+
     return gSoraFloorEvents[gGameState.floor];
 }
 
@@ -3044,23 +3215,29 @@ void MapFixMain(void) {
         MapFixSetUpdateAndRun(MapFixWaitWalkOut);
         return;
     }
+
     if (gMapRoomState->flags & (ROOM_FLAG_ENTER_WORLD | ROOM_FLAG_EXIT_NEXT_FLOOR | ROOM_FLAG_EXIT_PREV_FLOOR)) {
         FadeStartOut(FADE_MODE_BLACK, 16);
+
         if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
             MapFixSetUpdateAndRun(func_080EA5CC);
             return;
         }
+
         if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             MapFixSetUpdateAndRun(func_080EA694);
             return;
         }
+
         MapFixSetUpdateAndRun(MapFixEnterMapFld);
         return;
     }
+
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         MapFixSetUpdateAndRun(MapFixWaitRoomCreate);
         return;
     }
+
     if (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) {
         MapFixSetUpdateAndRun(MapFixWaitMenu);
     } else if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
@@ -3077,6 +3254,7 @@ void MapFixMain(void) {
 
 void MapFixEnterMapFld(void) {
     DrawMapField();
+
     if (FadeIsActive() == 0) {
         EnterFloorWorld();
         ModeRequest(&gModeMapFld, 0);
@@ -3085,14 +3263,17 @@ void MapFixEnterMapFld(void) {
 
 void func_080EA5CC(void) {
     DrawMapField();
+
     if (FadeIsActive() != 0) {
         return;
     }
+
     if (gMapRoomState->flags & ROOM_FLAG_ENTER_WORLD) {
         if (gGameState.floor == GetProgressFloor()) {
             gGameState.flags &= ~GAME_FLAG_FRIENDS_SAVED;
             gGameState.progression.friendFlags = (gGameState.progression.friendFlags & ~FRIEND_FLAGS_WORLD) | gGameState.progression.savedFriendFlags;
         }
+
         if (gMapFloorState.world == 0) {
             gMapFloorState.entrySide = 0;
             ModeRequest(&gModeWorldselect, 0);
@@ -3121,9 +3302,11 @@ void func_080EA694(void) {
     u16 t;
 
     DrawMapField();
+
     if (FadeIsActive() != 0) {
         return;
     }
+
     if (gMapRoomState->flags & ROOM_FLAG_ENTER_WORLD) {
         if (gMapFloorState.world != WORLD_100_ACRE_WOOD) {
             EnterFloorWorld();
@@ -3132,19 +3315,24 @@ void func_080EA694(void) {
             gMapFloorState.entrySide = 1;
             ModeRequest(&gModePooh, 2);
         }
+
         return;
     }
+
     v = GetFloorEventId();
+
     if (v != 0xFF) {
         RequestEventMode(v);
         return;
     }
+
     if ((gMapFloorState.flags & FLOOR_FLAG_CLEARED) == 0) {
         t = gMapFloorState.flags | FLOOR_FLAG_CLEARED;
         gMapFloorState.flags = t;
         SetFloorJiminyFlags();
         gMapFloorState.progress++;
     }
+
     StoreMapFloorState();
     GoToNextFloor();
     RequestMapMode();
@@ -3257,6 +3445,7 @@ void Mode_MapFix_0(void) {
 
     if (gGameState.fieldResume != 0) {
         MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
+
         if ((s8)gGameState.mapMenuCursor != -1) {
             gDispCnt &= ~DISPCNT_OBJ_ON;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
@@ -3295,6 +3484,7 @@ void Mode_MapFix_2(void) {
     EwramFree(gMapRoomState);
     EwramFree(gMapGmkPlacements);
 }
+
 void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     const u8* src;
 
@@ -3316,6 +3506,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnk_09962BE4[c];
             }
         }
+
         break;
     case LANGUAGE_FRENCH:
         if (b != 0) {
@@ -3331,6 +3522,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_0995A9D0[c];
             }
         }
+
         break;
     case LANGUAGE_SPANISH:
         if (b != 0) {
@@ -3346,6 +3538,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_0995EFD0[c];
             }
         }
+
         break;
     case LANGUAGE_ITALIAN:
         if (b != 0) {
@@ -3361,6 +3554,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_099635D0[c];
             }
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -3377,6 +3571,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_09967BD0[c];
             }
         }
+
         break;
     }
 #else
@@ -3394,6 +3589,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         }
     }
 #endif
+
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (a * 608 + 320), 320);
 }
 
@@ -3456,6 +3652,7 @@ s32 NewGameSlotMenuShowSummary(u8 i) {
         NewGameSlotMenuLoadFloorTiles(i, 0, p->floor);
         return 1;
     }
+
     NewGameSlotMenuLoadFloorTiles(i, 0, 13);
     return 0;
 }
@@ -3592,9 +3789,11 @@ void NewGameSlotMenuInput(NewGameSlotMenuWork* w) {
             gGameState.flags |= GAME_FLAG_SECOND_FILE;
             break;
         }
+
         m4aSongNumStart(SONG_SYS_SAVELOAD);
         w->confirmed = 1;
     }
+
     w->timer = 16;
     w->update = NewGameSlotMenuSlideOut;
 }
@@ -3651,6 +3850,7 @@ void Mode_MenuNew_0(void) {
     SetBgPriority(0, 0);
 #ifdef VERSION_EU
     LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
+
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
         RequestDma3Copy((void*)gUnkEu_0996D130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
@@ -3665,6 +3865,7 @@ void Mode_MenuNew_0(void) {
         RequestDma3Copy((void*)gUnkEu_0996E930, (u8*)GetBgCharBase(0) + 0x800, 0x800);
         break;
     }
+
     LoadBgPalette(3, gUnk_09991D44, 0x200);
     LoadBgMap(3, gUnk_0998CF44, 0x800);
     LoadBgPalette(1, gUnk_09991D44, 0x200);
@@ -3733,6 +3934,7 @@ void Mode_MenuNew_1(void) {
     if (gNewGameSlotMenuWork->update != NULL) {
         gNewGameSlotMenuWork->update(gNewGameSlotMenuWork);
     }
+
     NewGameSlotMenuDraw();
 }
 
@@ -3765,12 +3967,14 @@ s32 LoadGameMenuLoadFile(u8 a) {
             SaveLoadFileLarge(0);
             return 1;
         }
+
         break;
     case 1:
         if (SaveRepairFileLarge(1) == SAVE_OK) {
             SaveLoadFileLarge(1);
             return 1;
         }
+
         break;
     case 2:
         if (SaveRepairFileSmall(0) == SAVE_OK) {
@@ -3778,6 +3982,7 @@ s32 LoadGameMenuLoadFile(u8 a) {
             InitRikuDeckForWorld(gGameState.world);
             return 1;
         }
+
         break;
     case 3:
         if (SaveRepairFileSmall(1) == SAVE_OK) {
@@ -3785,8 +3990,10 @@ s32 LoadGameMenuLoadFile(u8 a) {
             InitRikuDeckForWorld(gGameState.world);
             return 1;
         }
+
         break;
     }
+
     return 0;
 }
 
@@ -3809,6 +4016,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnk_09964EE4[c];
             }
         }
+
         break;
     case LANGUAGE_FRENCH:
         if (a <= 1) {
@@ -3824,6 +4032,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_0995CCD0[c];
             }
         }
+
         break;
     case LANGUAGE_SPANISH:
         if (a <= 1) {
@@ -3839,6 +4048,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_099612D0[c];
             }
         }
+
         break;
     case LANGUAGE_ITALIAN:
         if (a <= 1) {
@@ -3854,6 +4064,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_099658D0[c];
             }
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -3870,6 +4081,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
                 src = gUnkEu_09969ED0[c];
             }
         }
+
         break;
     }
 #else
@@ -3887,6 +4099,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         }
     }
 #endif
+
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (a * 608 + 320), 320);
 }
 
@@ -3976,12 +4189,14 @@ void LoadGameMenuDeselectSlot(u8 a) {
     } else {
         LoadGameMenuLoadFloorTiles(a, 0, 13);
     }
+
     gLoadGameMenuWork->textSlotCount = 0;
 }
 
 void LoadGameMenuDraw(void) {
     s32 t;
     s32 u;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -4087,6 +4302,7 @@ void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
                 LoadBgMap(1, gUnk_09987F44, 0x800);
                 SetBgScroll(1, 0, (u16)-3);
             }
+
             break;
         case 1:
             if (w->showRikuSlots != 0) {
@@ -4096,6 +4312,7 @@ void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
                 LoadBgMap(1, &gUnk_09985F44[0x2800], 0x800);
                 SetBgScroll(1, 0, 0);
             }
+
             break;
         case 2:
             LoadBgMap(1, &gUnk_09985F44[0x4000], 0x800);
@@ -4156,6 +4373,7 @@ void LoadGameMenuInput(LoadGameMenuWork* work) {
                 gGameState.flags |= GAME_FLAG_SECOND_FILE;
                 break;
             }
+
             m4aSongNumStart(SONG_SYS_SAVELOAD);
             work->loaded = 1;
             work->timer = 16;
@@ -4251,6 +4469,7 @@ void Mode_MenuLoad_0(s32 arg) {
     SetupBg(0, 3, 31, 0);
 #ifdef VERSION_EU
     LoadBgTiles(1, gUnk_09959A64, 0x8000);
+
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
         RequestDma3Copy((void*)gUnk_09961A64, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
@@ -4265,6 +4484,7 @@ void Mode_MenuLoad_0(s32 arg) {
         RequestDma3Copy((void*)gUnkEu_09954BF0, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     }
+
     LoadBgPalette(3, gUnk_099919C4, 0x200);
     LoadBgMap(3, gUnk_09986F44, 0x800);
     LoadBgPalette(2, gUnk_099919C4, 0x200);
@@ -4290,6 +4510,7 @@ void Mode_MenuLoad_0(s32 arg) {
     }
 
     gLoadGameMenuWork->palette2 = LoadObjPalette(gUnk_09991BC4, 32);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -4343,6 +4564,7 @@ void Mode_MenuLoad_1(void) {
     if (gLoadGameMenuWork->update != NULL) {
         gLoadGameMenuWork->update(gLoadGameMenuWork);
     }
+
     LoadGameMenuDraw();
 }
 
@@ -4373,6 +4595,7 @@ void MenuMsgWaitMessage(MenuMsgWork* w) {
             BackdropFadeStartOut(0, 16);
             FadeStartOut(FADE_MODE_BLACK, 16);
         }
+
         w->update = MenuMsgWaitFade;
     }
 }
@@ -4412,6 +4635,7 @@ void Mode_MenuMsg_0(s32 arg) {
         FadeStartIn(FADE_MODE_BLACK, 1);
         FadeLock();
     }
+
     gMenuMsgWork->update = MenuMsgWaitMessage;
 }
 
@@ -4486,6 +4710,7 @@ void MapFixInitColliders(MapFixWork* p, MapFixedCollider* q) {
             } else {
                 break;
             }
+
             q++;
             i++;
         } while (i < 5);
@@ -4619,6 +4844,7 @@ s32 Task_MapFix_1(MapFixWork* w) {
     if (gFieldState->y + 0xA000 > gFieldState->tileRows << 11) {
         gFieldState->y = (gFieldState->tileRows << 11) - 0xA000;
     }
+
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
@@ -4630,6 +4856,7 @@ void Task_MapFix_2(MapFixWork* w) {
     if ((gMapRoomState->flags & ROOM_FLAG_BG1_FROZEN) == 0) {
         ScrollBgMapTo(1, gFieldState->x >> 8, gFieldState->y >> 8);
     }
+
     TaskPoolDraw(&w->tasks);
 }
 
@@ -4692,6 +4919,7 @@ u8 MapDoorWaitHit(MapDoorWork* p) {
         FadeSetPaletteExcluded(p->palette2->index + 16, 1);
         TaskCreate(pool, &gTaskDescRoomcreate, 0);
     }
+
     return 1;
 }
 
@@ -4705,6 +4933,7 @@ u8 MapDoorWaitCard(MapDoorWork* p) {
         } else {
             CreateMapRoom(flags->room, t);
         }
+
         p->update = MapDoorWaitOpen;
     }
 
@@ -4714,6 +4943,7 @@ u8 MapDoorWaitCard(MapDoorWork* p) {
         FadeSetPaletteExcluded(p->palette2->index + 16, 0);
         p->update = MapDoorWaitHit;
     }
+
     return 1;
 }
 
@@ -4945,6 +5175,7 @@ void MapMenuWriteDigits5(ObjTiles* p, u8 a, u32 v) {
         q++;
     }
 }
+
 void MapMenuInitConfirm(MapMenuWork* w) {
     TextSlot* p1;
     TextSlot* p2;
@@ -4978,6 +5209,7 @@ void MapMenuInitConfirm(MapMenuWork* w) {
     w->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
 #endif
 }
+
 void MapMenuFreeConfirm(MapMenuWork* w) {
     FadeSetPaletteExcluded(15, 0);
     DisableBg(0);
@@ -5022,6 +5254,7 @@ s32 MapMenuOpen(MapMenuWork* w) {
     if (w->reopened == 0) {
         FadeToAmount(FADE_MODE_BLACK, 16, 16);
     }
+
     return 1;
 }
 
@@ -5035,6 +5268,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
 
         gMapRoomState->flags |= ROOM_FLAG_HIDE_PLAYER;
         gFieldState->flags |= FIELD_FLAG_HIDE_ENEMIES;
+
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -5082,6 +5316,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993D4B0, 0x1500);
             }
+
             break;
         case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5089,6 +5324,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993E9B0, 0x1500);
             }
+
             break;
         case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5096,6 +5332,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993FEB0, 0x1500);
             }
+
             break;
         case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5103,6 +5340,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_099413B0, 0x1500);
             }
+
             break;
         case LANGUAGE_GERMAN:
         default:
@@ -5111,6 +5349,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_099428B0, 0x1500);
             }
+
             break;
         }
 #else
@@ -5137,6 +5376,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
         InitTextSlots(w->textSlots, 24);
         w->palette8 = LoadTextPalette(1);
         w->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), w->textSlots);
+
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -5156,6 +5396,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             w->tiles3 = LoadObjTiles(gUnkEu_0994AAB0, 0x200);
             break;
         }
+
         w->x = -0x8000;
         w->tiles4 = LoadObjTiles(gUnk_09957C24, 0x300);
 #else
@@ -5235,6 +5476,7 @@ s32 MapMenuSoraInput(MapMenuWork* w) {
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
+
             break;
         case 6:
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -5245,6 +5487,7 @@ s32 MapMenuSoraInput(MapMenuWork* w) {
             break;
         }
     }
+
     return 1;
 }
 
@@ -5287,6 +5530,7 @@ s32 MapMenuRikuInput(MapMenuWork* w) {
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
+
             break;
         case 6:
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -5315,6 +5559,7 @@ s32 MapMenuOpenSubMode(MapMenuWork* w) {
         } else {
             ModeRequest(&gModeDeck, 0);
         }
+
         break;
     case 1:
         ModeRequest(&gModeAllmap, 0);
@@ -5335,6 +5580,7 @@ s32 MapMenuOpenSubMode(MapMenuWork* w) {
         ModeRequest(&gModeMenuMsg, 1);
         break;
     }
+
     return 1;
 }
 
@@ -5357,6 +5603,7 @@ s32 MapMenuSlideOutX(MapMenuWork* w) {
         w->steps = 16;
         w->update = MapMenuSlideOutY;
     }
+
     return 1;
 }
 
@@ -5399,6 +5646,7 @@ s32 MapMenuConfirmInput(MapMenuWork* w) {
         w->update = MapMenuOpenSubMode;
         m4aSongNumStart(SONG_SYS_KETTEI);
     }
+
     return 1;
 }
 
@@ -5432,6 +5680,7 @@ void Task_MapMenu_0(MapMenuWork* w) {
         m4aSongNumStart(SONG_SYS_CANSEL);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
+
     w->update = MapMenuOpen;
 }
 
@@ -5447,6 +5696,7 @@ s32 Task_MapMenu_1(MapMenuWork* w) {
     if (w->update != NULL && (u8)w->update(w) == 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -5647,6 +5897,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
+
             break;
         case LANGUAGE_FRENCH:
             if (w->cursorVisible != 0) {
@@ -5658,6 +5909,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
+
             break;
         case LANGUAGE_SPANISH:
             if (w->cursorVisible != 0) {
@@ -5669,6 +5921,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
+
             break;
         case LANGUAGE_ITALIAN:
             if (w->cursorVisible != 0) {
@@ -5680,6 +5933,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
+
             break;
         case LANGUAGE_GERMAN:
         default:
@@ -5692,6 +5946,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
+
             break;
         }
 #else
@@ -5807,6 +6062,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         } else {
             src = gUnkEu_09955250[a];
         }
+
         break;
     case LANGUAGE_FRENCH:
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5814,6 +6070,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         } else {
             src = gUnkEu_09959850[a];
         }
+
         break;
     case LANGUAGE_SPANISH:
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5821,6 +6078,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         } else {
             src = gUnkEu_0995DE50[a];
         }
+
         break;
     case LANGUAGE_ITALIAN:
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5828,6 +6086,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         } else {
             src = gUnkEu_09962450[a];
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -5836,6 +6095,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         } else {
             src = gUnkEu_09966A50[a];
         }
+
         break;
     }
 #else
@@ -5845,6 +6105,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         src = gUnk_09961A64[a];
     }
 #endif
+
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(0) + 320, 320);
 }
 
@@ -5862,9 +6123,11 @@ void MapSaveLoadLevelTiles(u16 v) {
 
     for (i = 0; i < 2; i++) {
         RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+
         do {
             off += 0x20;
         } while (0);
+
         q++;
     }
 }
@@ -5920,6 +6183,7 @@ s32 MapSaveSlideInY(MapSaveWork* w) {
         w->steps = 16;
         w->update = MapSaveSlideInX;
     }
+
     return 1;
 }
 
@@ -5938,6 +6202,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
             ApproachValue(&w->x3, 0x3800, w->steps);
             ApproachValue(&w->y3, 0x7000, w->steps);
         }
+
         w->steps -= 1;
     } else {
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
@@ -6035,6 +6300,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
         w->x2 = 0xB000;
         w->update = MapSaveInput;
     }
+
     return 1;
 }
 
@@ -6140,6 +6406,7 @@ void Task_MapSave_0(MapSaveWork* w) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     gMapRoomState->flags |= ROOM_FLAG_SAVE_MENU_OPEN;
     gGameState.hp = gGameState.progression.maxHp;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -6159,6 +6426,7 @@ void Task_MapSave_0(MapSaveWork* w) {
         w->tiles2 = LoadObjTiles(gUnkEu_09886FC8, 0x3C0);
         break;
     }
+
     w->palette2 = LoadObjPalette(gUnk_09991D04, 32);
 #else
     w->palette2 = LoadObjPalette(gUnk_09991D04, 32);
@@ -6204,11 +6472,13 @@ s32 Task_MapSave_1(MapSaveWork* w) {
             return 0;
         }
     }
+
     return 1;
 }
 
 void Task_MapSave_2(MapSaveWork* w) {
     TaskPoolDraw(&w->tasks);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -6364,6 +6634,7 @@ s32 Task_MapAnm_1(MapAnmWork* w) {
             MapAnmUpdateSlot(&w->slots[i]);
         }
     }
+
     return 1;
 }
 

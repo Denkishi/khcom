@@ -3,11 +3,8 @@
 
 #include "registration_data.h"
 #include "system_state.h"
-
 #include "evt_object_types.h"
-
 #include "obj.h"
-
 #include "anim.h"
 #include "obj_api.h"
 #include "engine.h"

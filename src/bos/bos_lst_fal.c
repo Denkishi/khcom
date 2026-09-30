@@ -40,6 +40,7 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
             work->vz = work->vz * 384 >> 8;
             work->lift = GetRandom() % 0x81 + 0x380;
         }
+
         break;
     case 2:
         work->vz = GetRandom() % 0x81 + 0x180;
@@ -87,9 +88,11 @@ u8 task_bos_lst_fal_1(LstFalWork* work) {
     if (work->kind != 4) {
         if (work->lift > 0) {
             d = 512;
+
             if (work->lift <= 512) {
                 d = work->lift;
             }
+
             work->z -= d;
             work->lift = work->lift - 25;
         } else {
@@ -125,8 +128,10 @@ void task_bos_lst_fal_3(LstFalWork* work) {
     if (work->tiles != NULL) {
         ReleaseObjTiles(work->tiles);
     }
+
     if (work->palette != NULL) {
         ReleaseObjPalette(work->palette);
     }
+
     (*work->falCount)--;
 }

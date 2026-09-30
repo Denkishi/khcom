@@ -17,6 +17,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a) {
 
     w->timer = 0;
     w->kind = a->kind;
+
     switch (w->kind) {
     case 0:
     case 1:
@@ -50,6 +51,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a) {
         AnimStart(anim, w->kind, 0);
         break;
     }
+
     FadeSetPaletteExcluded((w->palette->index & 15) + 16, 0);
 }
 
@@ -65,6 +67,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
         if (w->timer > 120) {
             r = 0;
         }
+
         break;
     case 2:
         w->y += 0x100;
@@ -72,6 +75,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
         if (w->timer > 20) {
             r = 0;
         }
+
         break;
     case 5:
         if (w->timer == 12) {
@@ -82,8 +86,10 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
         if (w->timer > 50) {
             r = 0;
         }
+
         break;
     }
+
     return r;
 }
 

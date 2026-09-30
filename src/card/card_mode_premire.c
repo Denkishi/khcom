@@ -70,9 +70,11 @@ void Mode_Premire_1(void) {
     TaskPoolUpdate(&gModePremireTasks);
     TaskPoolDraw(&gModePremireTasks);
 }
+
 void Mode_Premire_2(void) {
     TaskPoolDestroy(&gModePremireTasks);
 }
+
 u8 GetHcEffectCountUnit(HcEffectNameWork* w, u16 n) {
     switch (n) {
     case 0:
@@ -129,6 +131,7 @@ u8 GetHcEffectCountUnit(HcEffectNameWork* w, u16 n) {
 
     return 0;
 }
+
 void HCEffectName_0(HcEffectNameWork* w, u8* a) {
     void** tiles;
 
@@ -160,6 +163,7 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
         if (gCardBattleState->soraHcEffect == 0) {
             w->visible = 0;
         }
+
         break;
     case 2:
         w->x = 162;
@@ -179,6 +183,7 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
         if (gCardBattleState->rikuHcEffect == 0) {
             w->visible = 0;
         }
+
         break;
     }
 
@@ -188,6 +193,7 @@ void HCEffectName_0(HcEffectNameWork* w, u8* a) {
     w->countTens = 0;
     w->countOnes = 0;
 }
+
 u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
     u8 done;
     s32 div;
@@ -277,6 +283,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
 
     return 1;
 }
+
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w) {
     if (w->side != 1) {
         if (w->side != 2) {
@@ -290,6 +297,7 @@ u8 IsHcEffectNameShuffling(HcEffectNameWork* w) {
 
     return 1;
 }
+
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a) {
     void** tiles;
 
@@ -297,10 +305,12 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a) {
     case 1:
         if (gCardBattleState->soraHcEffect != 37) {
             w->effect = gCardBattleState->soraHcEffect;
+
             if (gCardBattleState->soraHcEffect == 0) {
                 gCardBattleState->soraHcEffectReplaced = 0;
                 return 0;
             }
+
 #ifdef VERSION_EU
             w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->soraHcEffect);
 #endif
@@ -322,14 +332,17 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a) {
             UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[id].spriteIndex],
                          LANGSTR(gHcEffectDefs[id].tiles));
         }
+
         break;
     case 2:
         if (gCardBattleState->rikuHcEffect != 37) {
             w->effect = gCardBattleState->rikuHcEffect;
+
             if (gCardBattleState->rikuHcEffect == 0) {
                 gCardBattleState->soraHcEffectReplaced = 0;
                 return 0;
             }
+
 #ifdef VERSION_EU
             w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->rikuHcEffect);
 #endif
@@ -351,8 +364,10 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a) {
             UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[id].spriteIndex],
                          LANGSTR(gHcEffectDefs[id].tiles));
         }
+
         break;
     }
+
     return 1;
 }
 
@@ -415,9 +430,11 @@ s32 NumberPlus_1(NumberPlusWork* w) {
 
     return 0;
 }
+
 void NumberPlus_2(NumberPlusWork* w) {
     DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC, 0);
 }
+
 void NumberPlus_3(NumberPlusWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -429,9 +446,9 @@ Mode gModePremire = {
     Mode_Premire_1,
     Mode_Premire_2,
 };
+
 #ifdef VERSION_EU
 void* gHcEffectCountUnitTilesByLanguage[5] = { gUnk_093FB954, gUnkEu_094CE490, gUnkEu_094CE820, gUnkEu_094CE6F0, gUnkEu_094CE5C0 };
-
 void** gHcEffectCountUnitSpritesByLanguage[5] = { gUnk_09EF12C8, gUnkEu_09F7C55C, gUnkEu_09F7C57C, gUnkEu_09F7C59C, gUnkEu_09F7C5BC };
 #endif
 

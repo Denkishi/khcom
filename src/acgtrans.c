@@ -7,9 +7,11 @@ void task_acgtrans_0(AcgTransWork* work, AcgTransConfig* cfg) {
     work->src = cfg->src;
     work->size = cfg->size;
     work->chunkSize = work->size / cfg->frames;
+
     if (work->chunkSize == 0) {
         work->chunkSize = 1;
     }
+
     work->transferredBytes = 0;
     work->bg = cfg->bg;
     DisableBg(cfg->bg);
@@ -45,6 +47,7 @@ void CreateBgTileTransferTask(TaskPool* pool, s32 bg, u16 tile, u16 count, u16 f
     if (cfg.frames == 0) {
         cfg.frames = 1;
     }
+
     TaskCreate(pool, &gTaskDescAcgtrans, &cfg);
 }
 

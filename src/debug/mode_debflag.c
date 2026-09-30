@@ -12,7 +12,6 @@ static const DebugFlag* sDebflagList;
 static u32 gUnkEu_020348D4;
 #endif
 
-
 u8 gDebflagReturnToMap EWRAM_COMMON(4);
 
 static const DebugFlag sDebugFlagList[14] = {

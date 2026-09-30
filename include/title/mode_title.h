@@ -2,15 +2,10 @@
 #define GUARD_MODE_TITLE_H
 
 #include "registration_data.h"
-
 #include "anim.h"
-
 #include "card_api.h"
-
 #include "title_api.h"
-
 #include "save_api.h"
-
 #include "display.h"
 #include "obj_api.h"
 #include "types.h"

@@ -50,16 +50,20 @@ void BosPcFldEnableObject(Task* task, u8 a) {
     ObjPalette* pal;
 
     work = task->work;
+
     if (a == 1) {
         a = 0;
     } else {
         a = 1;
     }
+
     ColliderSetDisabled(&work->collider, a);
+
     if (a == 0) {
         if (work->tiles == NULL) {
             work->tiles = LoadObjTiles(gUnk_09CC4E54, 0x200);
         }
+
         if (work->palette == NULL) {
             pal = LoadObjPalette(gUnk_09D693D4, 0x60);
             work->palette = pal;
@@ -89,6 +93,7 @@ void BosPcFldUpdateShake(void) {
         p = sBosPcFldShakePatterns[sBosPcFldShakePattern];
         sBosPcFldShakeOffset += ((p[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
         sBosPcFldShakeStep += 1;
+
         if (p[sBosPcFldShakeStep] == 0) {
             sBosPcFldShakeActive = 0;
             sBosPcFldShakeOffset = 0;
@@ -120,6 +125,7 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
             work->paletteIndex = t;
             work->paletteTimer = zero;
         }
+
         work->paletteTimer += 1;
     }
 }
@@ -177,31 +183,38 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     pos = gBtlWork->actor;
     u = gBtlWork->viewX - 0x7800;
     t = pos->x - u;
+
     if (t < 0) {
         t = 0;
     }
+
     gBtlWork->x2 = t / 2 + 0xF000;
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
+
     if (dx > 0x500) {
         dx += 0x500;
     } else if (dx < -0x500) {
         dx -= 0x500;
     }
+
     gBtlWork->x += dx;
     gBtlWork->y += dy;
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
+
     if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
         gBtlWork->viewX = (gBtlWork->xMin + 120) * 256;
     } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
         gBtlWork->viewX = (gBtlWork->xMax - 120) * 256;
     }
+
     if (gBtlWork->viewY + 0x3000 < gBtlWork->yMin * 256) {
         gBtlWork->viewY = (gBtlWork->yMin - 48) * 256;
     } else if (gBtlWork->viewY + 0x5000 > gBtlWork->yMax * 256) {
         gBtlWork->viewY = (gBtlWork->yMax - 80) * 256;
     }
+
     gBtlWork->viewY += BtlMapGetShake();
     gBtlWork->viewY += BosPcFldGetShake();
     ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (gBtlWork->viewY >> 8) + 40);
@@ -219,6 +232,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
 
     BosPcFldLoadPaletteCycle(work);
     pos = gBtlWork->actor;
+
     if (pos->z >= -0x100) {
         if ((pos->flags & BTLOBJ_FLAG_HIT_LOCKED) == 0) {
             if (work->tiles != NULL) {

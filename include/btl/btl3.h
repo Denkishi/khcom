@@ -1,7 +1,6 @@
 #ifndef GUARD_BTL3_H
 #define GUARD_BTL3_H
 
-
 #include "display.h"
 #include "util.h"
 #include "m4a_song.h"

@@ -3,5 +3,4 @@
 
 #include "map_animation_types.h"
 
-
 #endif

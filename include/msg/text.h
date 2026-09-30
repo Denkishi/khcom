@@ -14,5 +14,4 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 pri
 void* LoadSmallFontTiles(void);
 void* LoadSmallFontPalette(void);
 
-
 #endif

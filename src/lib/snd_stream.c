@@ -10,12 +10,9 @@ SoundStream gSndStream EWRAM_COMMON(16);
     ((DMA_ENABLE | DMA_START_SPECIAL | DMA_32BIT | DMA_REPEAT |               \
       DMA_DEST_FIXED)                                                         \
      << 16)
-
 #define GBA_CLOCK 16780000.0f
 #define GBA_REFRESH 59.727f
-
 #define FRAMES_PER_BUFFER 30
-
 void SndStreamInit(u32 rate, u32 channels) {
     u32 i;
 
@@ -59,9 +56,11 @@ void SndStreamInit(u32 rate, u32 channels) {
 void SndStreamUpdate(void) {
     if (gSndStream.playing != 0) {
         gSndStream.dmaOffset += gSndStream.samplesPerFrame;
+
         if (gSndStream.dmaOffset == gSndStream.bufferSize) {
             gSndStream.dmaOffset = 0;
         }
+
         gSndStream.playedTotal += gSndStream.samplesPerFrame;
 
         if (gSndStream.channels == 1) {
@@ -82,6 +81,7 @@ void SndStreamUpdate(void) {
             REG_DMA2DAD = REG_ADDR_FIFO_B;
             REG_DMA2CNT = DMA_SOUND_FIFO;
         }
+
         REG_SOUNDBIAS = (REG_SOUNDBIAS & 0x3FFF) | SOUND_BIAS_RESOLUTION;
     }
 }
@@ -91,6 +91,7 @@ void SndStreamLock(u32 ch, u32 len, void** dst1, u32* len1, void** dst2,
     u32 avail;
 
     avail = gSndStream.bufferSize - gSndStream.writePos[ch];
+
     if (avail < len) {
         *dst1 = (u8*)gSndStream.buffers[ch] + gSndStream.writePos[ch];
         *len1 = avail;

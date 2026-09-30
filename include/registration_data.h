@@ -254,7 +254,6 @@ extern TaskDesc gTaskDescSrollBSecn;
 extern TaskDesc gTaskDescSrollBCrtn;
 extern TaskDesc gTaskDescSrollCChar;
 
-
 extern TaskDesc gTaskDescTinkerbellParticle;
 extern TaskDesc gTaskDescEventDebug;
 extern TaskDesc gTaskDescCardSora;

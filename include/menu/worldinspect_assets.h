@@ -3,7 +3,6 @@
 
 #include "jiminy_data.h"
 #include "jiminy_text_assets.h"
-
 #include "mode_jiminy.h"
 
 extern u8 gUnk_09A3CCBC[];

@@ -159,6 +159,7 @@ static inline s32 ReadBits(s32 n) {
         ShiftInByte();
         gAudioCodecBitCount += 16;
     }
+
     gAudioCodecBitCount -= n;
     return (gAudioCodecBitBuffer >> gAudioCodecBitCount) & ((1 << n) - 1);
 }
@@ -168,9 +169,9 @@ static inline s32 PeekByte(void) {
         ShiftInByte();
         gAudioCodecBitCount += 8;
     }
+
     return (gAudioCodecBitBuffer >> (gAudioCodecBitCount - 8)) & 0xFF;
 }
-
 
 static inline s32* AudioCodecSampleAtByteOffset(u32 offset, s32* base) {
     return (s32*)(offset + (u32)base);
@@ -502,5 +503,6 @@ s32 PeekAudioBits8(void) {
         ShiftInByte();
         gAudioCodecBitCount += 8;
     }
+
     return (gAudioCodecBitBuffer >> (gAudioCodecBitCount - 8)) & 0xFF;
 }

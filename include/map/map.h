@@ -6,25 +6,17 @@
 #include "card_def_data.h"
 #include "map_text_data.h"
 #include "registration_data.h"
-
 #include "map_room_data.h"
 #include "map_enemy_data.h"
-
 #include "field_state.h"
-
 #include "map_types.h"
 #include "map_room_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "msg_api.h"
 #include "task.h"
-
 #include "save_api.h"
-
 #include "player_progression.h"
-
 #include "m4a_song.h"
 #include "text.h"
 #include "btl_collision.h"

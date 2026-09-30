@@ -1,7 +1,6 @@
 #ifndef GUARD_ENGINE_H
 #define GUARD_ENGINE_H
 
-
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
@@ -24,7 +23,6 @@ typedef struct Dma3Request {
 } Dma3Request;
 
 #define BG_ENTRY_COUNT 4
-
 typedef struct BgEntry {
     u8 dirty;
     u8 unk_01[3];
@@ -85,7 +83,6 @@ typedef struct Dma3Queue {
     vu16 lz77RequestCount;
     u32 transferredBytes;
 } Dma3Queue;
-
 
 typedef struct SpriteWork SpriteWork;
 extern SpriteWork* gSpriteWork;

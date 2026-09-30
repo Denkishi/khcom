@@ -4,24 +4,16 @@
 #include "task_descriptors.h"
 #include "registration_data.h"
 #include "system_state.h"
-
 #include "bg_animation_data.h"
-
 #include "field_state.h"
-
 #include "fld_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "ms_api.h"
 #include "msg_api.h"
 #include "mode_chkbtl_api.h"
-
 #include "card_battle.h"
-
 #include "save_api.h"
-
 #include "display.h"
 #include "anim.h"
 #include "btl_effect.h"

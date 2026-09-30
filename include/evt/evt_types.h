@@ -31,7 +31,6 @@ typedef char EvtAnimDef_size[(sizeof(EvtAnimDef) == 12) ? 1 : -1];
 typedef char EvtObjAnim_size[(sizeof(EvtObjAnim) == 16) ? 1 : -1];
 typedef char EvtObjResTable_size[(sizeof(EvtObjResTable) == 16) ? 1 : -1];
 
-
 struct EvtObj;
 struct Task;
 

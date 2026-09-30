@@ -32,7 +32,6 @@
 #include "card_deck.h"
 #include "jiminy_data.h"
 #include "common_text.h"
-
 #include "deck_equip_suffix.inc"
 
 void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
@@ -65,6 +64,7 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->x = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
 #ifdef VERSION_EU
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
+
     if (gLanguage - 1 <= 1) {
         w->y = 66;
         w->y2 = 82;
@@ -83,6 +83,7 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->active = a;
     *a = 1;
 }
+
 void DeckErrorCpInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
@@ -275,6 +276,7 @@ void Deck_Yes_No_0(DeckConfirmWork* w, u8* a) {
     w->active = a;
     a[0] = 1;
 }
+
 s32 DeckConfirmYesNoUpdate(void) {
     if ((GetKeysPressed() & A_BUTTON) || (GetKeysPressed() & B_BUTTON)) {
         return 0;
@@ -282,6 +284,7 @@ s32 DeckConfirmYesNoUpdate(void) {
 
     return 1;
 }
+
 void Deck_Clear_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
@@ -357,6 +360,7 @@ void CopyMapCardInventory(SaveSmallSlice* p) {
         p->unk_000[i] = gMapCardCounts[i];
     }
 }
+
 void RestoreMapCardInventory(SaveSmallSlice* p) {
     u16 i;
 
@@ -427,6 +431,7 @@ TaskDesc gTaskDescDeckErrorDeckFull = {
     (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
+
 #ifdef VERSION_EU
 u8* gUnkEu_09F73464[5] = { gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5 };
 #endif

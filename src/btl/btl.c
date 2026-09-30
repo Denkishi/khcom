@@ -282,6 +282,7 @@ void SelectLockonTarget(void) {
                 (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
                 continue;
             }
+
             gBtlWork->actor2 = e;
             min = p->x - e->x;
         }
@@ -299,6 +300,7 @@ void SelectLockonTarget(void) {
                     (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
                     continue;
                 }
+
                 gBtlWork->actor2 = e;
                 min = e->x - p->x;
             }
@@ -313,6 +315,7 @@ void SelectLockonTarget(void) {
                 (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
                 continue;
             }
+
             gBtlWork->actor2 = e;
             min = e->x - p->x;
         }
@@ -330,6 +333,7 @@ void SelectLockonTarget(void) {
                     (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
                     continue;
                 }
+
                 gBtlWork->actor2 = e;
                 min = p->x - e->x;
             }
@@ -353,6 +357,7 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
     if (work->unk_024 != 0) {
         work->unk_024--;
     }
+
     return 1;
 }
 
@@ -362,6 +367,7 @@ void task_btl_lockon_2(BtlLockonWork* work) {
     s16 y;
 
     e = gBtlWork->actor2;
+
     if (e != NULL) {
         WorldToScreen(&x, &y, e->x + (e->centerOffsetX << 8), e->y,
                       e->z - (e->centerHeight << 8));
@@ -402,6 +408,7 @@ u8 task_btl_area_1(BtlAreaWork* work) {
     if (work->timer > 0) {
         work->timer--;
     }
+
     return 1;
 }
 
@@ -522,14 +529,19 @@ u16 GetBtlSoraComboType(BtlSoraWork* work) {
     if (a->z - b->z > 0x2000) {
         return 2;
     }
+
     d = b->x - a->x;
+
     if (d >= 0 ? d > 0x2800 : a->x - b->x > 0x2800) {
         return 1;
     }
+
     d = b->y - a->y;
+
     if (d >= 0 ? d > 0xC00 : a->y - b->y > 0xC00) {
         return 4;
     }
+
     return 0;
 }
 
@@ -542,13 +554,16 @@ void FocusBtlSoraCameraOnTarget(BtlSoraWork* work) {
     if (work->mainSide == 0) {
         return;
     }
+
     c = work->actor.btl->actor2;
+
     if (c != NULL) {
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
             x = (work->actor.x + c->x) >> 1;
             x = (work->actor.x + x) >> 1;
             y = work->actor.y;
             z = work->actor.z;
+
             if (z < -0x3200) {
                 z = -0x3200;
             }
@@ -557,6 +572,7 @@ void FocusBtlSoraCameraOnTarget(BtlSoraWork* work) {
             y = (work->actor.y + c->y) >> 1;
             z = (work->actor.z + c->z) >> 1;
         }
+
         BtlMapFollowPosition(x, y, z);
     } else {
         BtlMapFollowPosition(work->actor.x, work->actor.y, work->actor.z);
@@ -614,6 +630,7 @@ void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 a, u16 b) {
         idx = 4;
         break;
     }
+
     e = &sBtlSoraDirAnimDefs[a][idx];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles, e->tiles);
@@ -633,6 +650,7 @@ void ReleaseBtlSoraPalette(BtlSoraWork* work) {
     if (work->palette != NULL) {
         ReleaseObjPalette(work->palette);
     }
+
     work->tiles = 0;
     work->palette = 0;
 }
@@ -686,17 +704,20 @@ void UpdateBtlSoraWalk(BtlSoraWork* work, u16 a) {
     if (a & 0xF0) {
         if (p->btl->hcEffect == 50) {
             work->speed += 256;
+
             if (work->speed > 1024) {
                 work->speed = 1024;
             }
         } else {
             work->speed += 128;
+
             if (work->speed > 614) {
                 work->speed = 614;
             }
         }
     } else {
         work->speed -= 128;
+
         if (work->speed < 0) {
             work->speed = 0;
         }
@@ -917,6 +938,7 @@ void StartBtlSoraCombo(BtlSoraWork* work) {
             work->attacks[2] = &sUnk_0813C21C;
             break;
         }
+
         work->state = 16;
         work->steps = 0;
         work->stateTimer = 0;
@@ -955,18 +977,24 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
         if (e->hp <= 0) {
             return 0;
         }
+
         return e;
     }
+
     n = 0;
     e = ListPoolFirst(&gBtlWork->pool);
+
     if (e != NULL) {
         list[0] = e;
         n = 1;
+
         do {
             e = ListPoolNext(&e->node);
+
             if (e == NULL) {
                 break;
             }
+
             list[n] = e;
             n++;
         } while (n <= 9);
@@ -975,6 +1003,7 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     if (n == 0) {
         return 0;
     }
+
     e = list[GetRandom() % n];
     return e;
 }
@@ -988,11 +1017,13 @@ u16 SwapBtlSoraKeyBits(u16 a, u16 b, u16 c) {
         if ((a & c) == 0) {
             a &= ~b;
         }
+
         a |= c;
     } else if (a & c) {
         a &= ~c;
         a |= d;
     }
+
     return a;
 }
 
@@ -1012,6 +1043,7 @@ BtlObj* GetBtlSoraActiveOpponent(BtlSoraWork* work) {
             return gBtlWork->actor3;
         }
     }
+
     return 0;
 }
 
@@ -1134,6 +1166,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
             }
         }
+
         break;
     case 23: {
         u16 hp;
@@ -1163,11 +1196,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->btl->hcEffectCount--;
             }
         }
+
         break;
     }
     case 24: {
         BtlObj* e;
         u16 hp;
+
         if (work->frameCount % 20 == 0) {
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
                 if (work->mainSide != 0) {
@@ -1195,6 +1230,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
         }
+
         break;
     }
     }
@@ -2256,6 +2292,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     }
 
@@ -2286,6 +2323,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 work->steps++;
             }
+
             break;
         }
 
@@ -2321,6 +2359,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         }
 
@@ -2355,6 +2394,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
+
                 break;
             }
         } else if (pressed & DPAD_RIGHT) {
@@ -2371,6 +2411,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
+
                 break;
             }
         }
@@ -2393,6 +2434,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
         }
     }
+
         break;
     case 19:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
@@ -2433,10 +2475,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         work->vz = -1344;
         p->btl->flags |= BTL_FLAG_PLAYER_AIRBORNE;
         work->speed <<= 1;
     }
+
         break;
     case 20:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
@@ -2574,6 +2618,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
+
                 break;
             }
         } else if (pressed & DPAD_RIGHT) {
@@ -2590,6 +2635,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     work->steps = 0;
                     work->stateTimer = 0;
                 }
+
                 break;
             }
         }
@@ -2610,6 +2656,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     }
     case 15:
@@ -2623,6 +2670,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->angle = 64;
             p->x += 614;
         }
+
         break;
     case 28:
         if ((s16)work->stateTimer == 0) {
@@ -2634,6 +2682,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 29:
         if (work->flags & BTL_SORA_FLAG_HIDDEN) {
@@ -2656,6 +2705,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 22:
         if (!(p->btl->flags & BTL_FLAG_SUMMON_ACTIVE)) {
@@ -2735,6 +2785,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 33:
         FocusBtlSoraCameraOnTarget(work);
@@ -2751,6 +2802,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 10:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -2795,6 +2847,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->hp += 450;
                     break;
                 }
+
                 break;
             case 38:
                 switch (work->variant[0]) {
@@ -2808,6 +2861,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->hp += 390;
                     break;
                 }
+
                 break;
             default:
                 switch (work->variant[0]) {
@@ -2821,6 +2875,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->hp += 300;
                     break;
                 }
+
                 break;
             }
 
@@ -2863,6 +2918,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     t = p->x + 12800;
                 }
+
                 t2 = p->y;
                 t3 = p->z - 4096;
             }
@@ -2892,6 +2948,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer++;
         }
     }
+
         break;
     case 12:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -2917,6 +2974,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuPotion();
                 }
+
                 break;
             case 1:
                 if (work->mainSide != 0) {
@@ -2924,6 +2982,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuHiPotion();
                 }
+
                 break;
             case 2:
                 if (work->mainSide != 0) {
@@ -2931,6 +2990,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuMegaPotion();
                 }
+
                 break;
             case 3:
                 if (work->mainSide != 0) {
@@ -2938,6 +2998,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuEther();
                 }
+
                 break;
             case 4:
                 if (work->mainSide != 0) {
@@ -2945,6 +3006,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuMegaEther();
                 }
+
                 break;
             case 5:
                 if (work->mainSide != 0) {
@@ -2952,6 +3014,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuElixir();
                 }
+
                 break;
             default:
                 if (work->mainSide != 0) {
@@ -2959,6 +3022,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     RequestRikuMegalixir();
                 }
+
                 break;
             }
 
@@ -3034,6 +3098,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 5120, p->y,
                                           p->z - 7168, 40, 16, 44);
                     }
+
                     break;
                 case 12:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3043,6 +3108,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 8192, p->y,
                                           p->z, 28, 20, 32);
                     }
+
                     break;
                 default:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3052,6 +3118,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 9216, p->y,
                                           p->z, 32, 12, 32);
                     }
+
                     break;
                 }
             } else {
@@ -3073,6 +3140,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 5120, p->y, p->z - 7168, 28, 16, 44);
                     }
+
                     break;
                 case 12:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3080,6 +3148,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 8192, p->y, p->z, 16, 20, 32);
                     }
+
                     break;
                 default:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3087,6 +3156,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 9216, p->y, p->z, 20, 12, 32);
                     }
+
                     break;
                 }
             }
@@ -3325,6 +3395,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 77:
@@ -3356,6 +3427,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 86:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3422,6 +3494,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 y = p->y;
                 z = p->groundZ;
             }
+
             BgFxStartHoly(x, y, z, 112);
 
             m4aSongNumStart(SONG_EF_HOLLY);
@@ -3562,6 +3635,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 74:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3588,6 +3662,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
             m4aSongNumStart(SONG_EF_TELEP);
         }
+
         break;
     case 75:
         if ((s16)work->stateTimer == 0) {
@@ -3621,6 +3696,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 72:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -3706,6 +3782,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
     }
+
         break;
     case 9:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -4049,6 +4126,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
     }
+
         break;
     case 5: {
         s32 uv;
@@ -4202,6 +4280,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
     }
+
         break;
     case 23:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -4270,6 +4349,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 25:
         if ((s16)work->stateTimer == 0) {
@@ -4338,6 +4418,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 27: {
         u16 uv;
@@ -4361,6 +4442,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = uv + 1;
         }
     }
+
         break;
     case 38: {
         u16 uv;
@@ -4404,6 +4486,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 13:
@@ -4454,6 +4537,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 82:
         if (AnimIsFinished(&work->anim) != 0) {
@@ -4461,6 +4545,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 84:
         st = work->stateTimer;
@@ -4536,6 +4621,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 87:
@@ -4561,6 +4647,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
             work->state = 88;
         }
+
         break;
     case 88:
         uv = work->stateTimer;
@@ -4576,6 +4663,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 89:
         if ((s16)work->stateTimer == 0) {
@@ -4593,6 +4681,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = 1;
             work->stateTimer = 0;
         }
+
         break;
     case 14:
         FocusBtlSoraCameraOnTarget(work);
@@ -4622,6 +4711,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else if (p->vx < 0) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
+
             break;
         }
 
@@ -4630,6 +4720,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (work->vz > 0) {
             work->vz = 0;
         }
+
         break;
     case 50: {
         u16 uv;
@@ -4744,6 +4835,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 work->stateTimer = uv + 1;
             }
+
             break;
         }
     }
@@ -4776,6 +4868,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 ApplyAttackBox(107, p->x + 32768, p->y, p->z, 160, 256, 256);
             }
+
             break;
         case 40:
             MakeOpponentsHittable();
@@ -4807,6 +4900,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     ApplyAttackBox(108, p->x + 32768, p->y, p->z, 160, 256, 256);
                 }
             }
+
             break;
         }
 
@@ -4818,6 +4912,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 56:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -4841,6 +4936,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     p->x += 2560;
                 }
+
                 break;
             case 5:
                 if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -4848,6 +4944,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     p->x -= 1024;
                 }
+
                 break;
             case 6:
                 if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -4855,6 +4952,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     p->x -= 1024;
                 }
+
                 break;
             }
         }
@@ -4926,6 +5024,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 58:
@@ -4962,6 +5061,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 59:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -4985,6 +5085,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->x -= 768;
                 }
             }
+
             break;
         case 2:
         case 3:
@@ -4995,6 +5096,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->x -= 512;
                 }
             }
+
             break;
         case 4:
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -5004,6 +5106,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 s32 t = p->x - 16384;
                 p->x += (p->originX - t) >> 4;
             }
+
             break;
         }
 
@@ -5013,6 +5116,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 60:
         FocusBtlSoraCameraOnTarget(work);
@@ -5073,6 +5177,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 52:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5143,6 +5248,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->unk_194 -= 5120;
             }
+
             break;
         case 2:
         case 3:
@@ -5173,12 +5279,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                 }
             }
+
             break;
         case 7:
             if (p->z < p->groundZ) {
                 work->anim.timer = 0;
                 work->anim.frame--;
             }
+
             break;
         }
 
@@ -5276,6 +5384,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         work->stateTimer++;
     }
+
         break;
     case 45:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5291,6 +5400,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 46:
         FocusBtlSoraCamera(work);
@@ -5316,6 +5426,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 47:
         FocusBtlSoraCamera(work);
@@ -5339,6 +5450,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 48: {
         u16 uv;
@@ -5402,12 +5514,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 49: {
         FocusBtlSoraCamera(work);
         SetBtlSoraAnimation(work, 67, 0);
         work->vz = 0;
+
         {
             s16* sine = gSineTable;
             u16 uv = work->unk_158;
@@ -5429,6 +5543,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     case 64:
@@ -5445,6 +5560,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 65:
         FocusBtlSoraCamera(work);
@@ -5470,6 +5586,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 66:
         FocusBtlSoraCamera(work);
@@ -5493,6 +5610,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 67: {
         s32 t;
@@ -5524,6 +5642,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         t = p->x;
         t2 = p->y;
         t3 = p->z;
+
         {
             s16* sine = gSineTable;
             u16 uv = work->unk_158;
@@ -5545,7 +5664,6 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         ClampBattlePosition(&p->x, &p->y, -16, 0);
         BgFxAddPosition(p->x - t, p->y - t2, p->z - t3);
-
 #endif
 
         if (BgFxIsActive() == 0) {
@@ -5555,6 +5673,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer++;
         }
     }
+
         break;
     case 63:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5586,6 +5705,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     ApplyAttackBox(97, p->x + 12288, p->y, p->z, 40, 40, 50);
                 }
+
                 break;
             }
         }
@@ -5595,6 +5715,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 55:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5626,6 +5747,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 } else {
                     ApplyAttackBox(92, p->x, p->y, p->z, 64, 64, 100);
                 }
+
                 break;
             }
         }
@@ -5636,6 +5758,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 71:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5673,6 +5796,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 83:
         st = work->stateTimer;
@@ -5721,6 +5845,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 39:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5749,6 +5874,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 40: {
         s32 t;
@@ -5811,6 +5937,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer++;
         }
     }
+
         break;
     case 41:
         FocusBtlSoraCamera(work);
@@ -5839,6 +5966,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 42:
         if ((s16)work->stateTimer == 0) {
@@ -5860,6 +5988,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 31:
         if ((p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) || p->z < p->groundZ) {
@@ -5924,6 +6053,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         }
+
         break;
     case 43:
         FocusBtlSoraCamera(work);
@@ -5938,6 +6068,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 34:
         FocusBtlSoraCamera(work);
@@ -5965,6 +6096,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 36:
         FocusBtlSoraCameraOnTarget(work);
@@ -5996,6 +6128,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 37:
         FocusBtlSoraCameraOnTarget(work);
@@ -6026,6 +6159,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 35:
         p->flags &= ~BTLOBJ_FLAG_HURT;
@@ -6320,6 +6454,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
         attr2 = (-0x1004 - ((p->y >> 8) << 2)) | 1;
         p->shadowPriority = 0xEFFF;
     }
+
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 
     if (StepHitFlash(p) != 0) {
@@ -6338,6 +6473,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
             LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
         }
     }
+
 #ifdef VERSION_EU
     if (p->btl->hcEffect == 19) {
         if (work->mainSide != 0) {
@@ -6349,6 +6485,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
         }
     }
 #endif
+
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, attr2);
     TaskPoolDraw(&work->tasks);
 }
@@ -6366,6 +6503,7 @@ void task_btl_sora_3(BtlSoraWork* work) {
             gGameState.hp = p->hp;
         }
     }
+
     ColliderUnregister(&p->collider);
     ReleaseBtlSoraPalette(work);
     TaskPoolDestroy(&work->tasks);
@@ -6408,14 +6546,19 @@ u16 GetBtlRikuComboType(BtlRikuWork* work) {
     if (a->z - b->z > 0x2000) {
         return 2;
     }
+
     d = b->x - a->x;
+
     if (d >= 0 ? d > 0x2800 : a->x - b->x > 0x2800) {
         return 1;
     }
+
     d = b->y - a->y;
+
     if (d >= 0 ? d > 0xC00 : a->y - b->y > 0xC00) {
         return 4;
     }
+
     return 0;
 }
 
@@ -6425,7 +6568,9 @@ void FocusBtlRikuCameraOnTarget(BtlRikuWork* work) {
     if (work->mainSide == 0) {
         return;
     }
+
     c = work->actor.btl->actor2;
+
     if (c != NULL) {
         BtlMapFollowPosition((work->actor.x + c->x) >> 1, (work->actor.y + c->y) >> 1,
                       (work->actor.z + c->z) >> 1);
@@ -6458,6 +6603,7 @@ void SaveBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     } else {
         out->flags &= ~BTL_DRAW_INFO_FLAG_FACING_LEFT;
     }
+
     out->anim = work->anim;
     out->tileSrc = work->tiles2->src;
     out->scale = gBtlWork->scale;
@@ -6491,6 +6637,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
         q = p;
     } else {
         p = out->scale;
+
         if (p == 256) {
             q = p;
             flags |= SPRITE_FLAG_HFLIP;
@@ -6508,6 +6655,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     } else {
         affine = AllocObjAffine(0, q, p, 1);
     }
+
     z = 0xFFF0;
     WorldToScreen(&x, &y, out->x, out->y, out->z);
     SetObjTileSource(work->tiles, out->tileSrc);
@@ -6548,6 +6696,7 @@ void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 a, u16 b) {
         idx = 4;
         break;
     }
+
     e = &sBtlRikuDirAnimDefs[a][idx];
     AnimChangeWithTables(&work->anim, e->animId, b, e->anims, e->gfxTable);
     SetObjTileSource(work->tiles2, e->tiles);
@@ -6711,17 +6860,20 @@ void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 a) {
     if (a & 0xF0) {
         if (p->btl->hcEffect == 50) {
             work->speed += 256;
+
             if (work->speed > 768) {
                 work->speed = 768;
             }
         } else {
             work->speed += 128;
+
             if (work->speed > 640) {
                 work->speed = 640;
             }
         }
     } else {
         work->speed -= 128;
+
         if (work->speed < 0) {
             work->speed = 0;
         }
@@ -6941,6 +7093,7 @@ void StartBtlRikuCombo(BtlRikuWork* work) {
             work->attacks[2] = &sUnk_0813C73C;
             break;
         }
+
         work->state = 9;
         work->steps = 0;
         work->stateTimer = 0;
@@ -6972,6 +7125,7 @@ BtlObj* GetBtlRikuActiveOpponent(BtlRikuWork* work) {
             return gBtlWork->actor3;
         }
     }
+
     return 0;
 }
 
@@ -6984,16 +7138,20 @@ BtlObj* FindHighestEnemy(BtlRikuWork* work) {
     min = 0x10000;
     best = 0;
     e = ListPoolFirst(&gBtlWork->pool);
+
     while (e != NULL) {
         if (!(e->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             d = e->z - (e->centerHeight << 8);
+
             if (min > d) {
                 best = e;
                 min = d;
             }
         }
+
         e = ListPoolNext(&e->node);
     }
+
     return best;
 }
 
@@ -7016,18 +7174,24 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
         if (e->hp <= 0) {
             return 0;
         }
+
         return e;
     }
+
     n = 0;
     e = ListPoolFirst(&gBtlWork->pool);
+
     if (e != NULL) {
         list[0] = e;
         n = 1;
+
         do {
             e = ListPoolNext(&e->node);
+
             if (e == NULL) {
                 break;
             }
+
             list[n] = e;
             n++;
         } while (n <= 9);
@@ -7036,6 +7200,7 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     if (n == 0) {
         return 0;
     }
+
     e = list[GetRandom() % n];
     return e;
 }
@@ -7049,11 +7214,13 @@ u16 SwapBtlRikuKeyBits(u16 a, u16 b, u16 c) {
         if ((a & c) == 0) {
             a &= ~b;
         }
+
         a |= c;
     } else if (a & c) {
         a &= ~c;
         a |= d;
     }
+
     return a;
 }
 
@@ -7070,7 +7237,9 @@ void AddDarkPoints(s16 a) {
     if (gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) {
         return;
     }
+
     gBtlWork->darkPoints += a;
+
     if (gBtlWork->darkPoints < 0) {
         gBtlWork->darkPoints = 0;
     } else if (gBtlWork->darkPoints > 999) {
@@ -7123,6 +7292,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->x = p->originX;
             p->y = p->originY;
             p->z = p->originZ;
+
 #ifndef VERSION_EU
             p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             CreateBtlPopTask(p, 9);
@@ -7138,6 +7308,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuState(work, 3);
             }
+
             break;
         default:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -7145,6 +7316,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuState(work, 18);
             }
+
             break;
         }
 
@@ -7217,6 +7389,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
             }
         }
+
         break;
     case 23: {
         u16 hp;
@@ -7241,6 +7414,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             p->btl->hcEffectCount--;
         }
+
         break;
     }
     case 24:
@@ -7277,6 +7451,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 }
             }
         }
+
         break;
     }
 
@@ -7323,6 +7498,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         case BTL_REACTION_DEFEATED:
         case BTL_REACTION_GRAVITY_DEFEATED:
@@ -7338,6 +7514,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         case BTL_REACTION_HEALED:
             p->flags &= ~BTLOBJ_FLAG_HURT;
@@ -7482,6 +7659,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     StartBtlRikuCombo(work);
                 }
+
                 break;
             default:
                 if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -7489,6 +7667,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     SetBtlRikuState(work, 1);
                 }
+
                 break;
             }
 
@@ -7533,6 +7712,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         case BTL_REACTION_CARD_BROKEN:
             switch (work->state) {
@@ -7573,6 +7753,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         case BTL_REACTION_STUNNED:
         case BTL_REACTION_WARPED:
@@ -7589,6 +7770,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         case BTL_REACTION_STOPPED:
             if (work->state != 17) {
@@ -7599,6 +7781,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->steps = 0;
                 work->stateTimer = 0;
             }
+
             break;
         }
     }
@@ -7675,6 +7858,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 51:
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -7863,12 +8047,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (work->anim.timer == 0) {
                 work->vz = -972;
             }
+
             break;
         case 2:
         case 3:
             if (ApplyAttackBox(7, p->x, p->y, p->z - 12288, 24, 20, 16) != 0) {
                 m4aSongNumStart(SONG_BTL_RK_HIT00);
             }
+
             break;
         case 4:
             if (work->anim.timer == 0) {
@@ -7888,12 +8074,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
                 }
             }
+
             break;
         case 5:
             if (p->z < p->groundZ) {
                 work->anim.timer = 0;
                 work->anim.frame--;
             }
+
             break;
         }
 
@@ -8096,6 +8284,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     p->x += 256;
                 }
+
                 break;
             }
         }
@@ -8358,6 +8547,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 p->y += ((p->originY + ey) - p->y) >> 4;
             }
+
             break;
         }
 
@@ -8596,6 +8786,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 46: {
         BtlObj* e;
@@ -8951,6 +9142,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 31:
         if (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) {
@@ -9102,6 +9294,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->stateTimer = 0;
             break;
         }
+
         work->stateTimer++;
         break;
     case 0:
@@ -9261,6 +9454,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 3:
         FocusBtlRikuCameraOnTarget(work);
@@ -9407,6 +9601,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->angle = 64;
             p->x += 512;
         }
+
         break;
     case 10:
         if ((s16)work->stateTimer == 0) {
@@ -9499,6 +9694,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
                 work->targetY = p->y;
             }
+
             work->vz = -1152;
         }
 
@@ -9783,6 +9979,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuPotion();
                 }
+
                 break;
             case 1:
                 if (work->mainSide != 0) {
@@ -9790,6 +9987,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuHiPotion();
                 }
+
                 break;
             case 2:
                 if (work->mainSide != 0) {
@@ -9797,6 +9995,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuMegaPotion();
                 }
+
                 break;
             case 3:
                 if (work->mainSide != 0) {
@@ -9804,6 +10003,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuEther();
                 }
+
                 break;
             case 4:
                 if (work->mainSide != 0) {
@@ -9811,6 +10011,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuMegaEther();
                 }
+
                 break;
             case 5:
                 if (work->mainSide != 0) {
@@ -9818,6 +10019,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuElixir();
                 }
+
                 break;
             default:
                 if (work->mainSide != 0) {
@@ -9825,6 +10027,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 } else {
                     RequestRikuMegalixir();
                 }
+
                 break;
             }
 
@@ -9897,6 +10100,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 5120, p->y, p->z - 7168, 40, 24, 44);
                     }
+
                     break;
                 case 3:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -9904,6 +10108,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 8192, p->y, p->z, 32, 35, 32);
                     }
+
                     break;
                 default:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -9911,6 +10116,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 9216, p->y, p->z, 32, 20, 32);
                     }
+
                     break;
                 }
             } else {
@@ -9932,6 +10138,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 5120, p->y, p->z - 7168, 28, 20, 44);
                     }
+
                     break;
                 case 3:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -9939,6 +10146,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 8192, p->y, p->z, 20, 26, 32);
                     }
+
                     break;
                 default:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -9946,6 +10154,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     } else {
                         d = ApplyAttackBox(t, p->x + 9216, p->y, p->z, 20, 16, 32);
                     }
+
                     break;
                 }
 
@@ -10086,6 +10295,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     case 25:
         if ((s16)work->stateTimer == 0) {
@@ -10103,6 +10313,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuDirAnimation(work, 2, 0);
             }
+
             break;
         case 10:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -10110,6 +10321,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuDirAnimation(work, 3, 0);
             }
+
             break;
         }
 
@@ -10170,6 +10382,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 27:
         if ((s16)work->stateTimer == 0) {
@@ -10183,6 +10396,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuDirAnimation(work, 3, 0);
             }
+
             break;
         case 10:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -10190,6 +10404,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuDirAnimation(work, 4, 0);
             }
+
             break;
         case 18:
             ColliderSetDisabled(&p->collider, 0);
@@ -10233,6 +10448,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 SetBtlRikuState(work, 1);
             }
+
             break;
         }
 
@@ -10278,6 +10494,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 16: {
@@ -10320,6 +10537,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 6:
@@ -10377,6 +10595,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 18:
         if (AnimIsFinished(&work->anim) != 0) {
@@ -10384,6 +10603,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 20:
         if ((s16)work->stateTimer == 0) {
@@ -10448,6 +10668,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer = uv + 1;
         }
+
         break;
     }
     case 7:
@@ -10477,6 +10698,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->vz = 0;
             }
         }
+
         break;
     case 17:
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -10491,6 +10713,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 13:
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -10518,6 +10741,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 62:
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -10545,6 +10769,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
+
         break;
     case 14:
         p->flags &= ~BTLOBJ_FLAG_HURT;
@@ -10847,6 +11072,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         attr2 = (-0x1004 - ((p->y >> 8) << 2)) | 1;
         p->shadowPriority = 0xEFFF;
     }
+
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 
     if (StepHitFlash(p) != 0) {
@@ -10865,6 +11091,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
             LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
         }
     }
+
     DrawSprite(x, y, work->gfx, work->tiles2, work->palette, affine, attr, attr2);
 
     if (work->flags & BTL_RIKU_FLAG_AFTERIMAGE) {
@@ -10876,8 +11103,10 @@ void task_btl_riku_2(BtlRikuWork* work) {
             DrawBtlRikuAfterimage(work, &work->drawInfo[6]);
             break;
         }
+
         work->drawCount++;
     }
+
     work->drawInfo[6] = work->drawInfo[5];
     work->drawInfo[5] = work->drawInfo[4];
     work->drawInfo[4] = work->drawInfo[3];
@@ -10898,6 +11127,7 @@ void task_btl_riku_3(BtlRikuWork* work) {
     } else {
         gGameState.hp = p->hp;
     }
+
     ColliderUnregister(&p->collider);
     ReleaseBtlRikuPalette(work);
     ReleaseObjTiles(work->tiles);

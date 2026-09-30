@@ -37,6 +37,7 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     work->shared = arg;
     anim = &work->anim;
     AnimInit(anim, gUnk_09EFABA4, gUnk_09EFAB68);
+
     if (work->shared->inEvent == 1) {
         work->acdOff = 1;
         AnimStart(anim, 1, 0);
@@ -54,19 +55,23 @@ u8 task_bos_pc_acd_1(PcAcdWork* work) {
     FadeSetPaletteExcluded(work->palette->index + 18, 0);
     anim = &work->anim;
     AnimUpdate(anim);
+
     if (gBtlWork->actor->z >= 0) {
         if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) == 0 ||
             (gBtlWork->flags & BTL_FLAG_SUMMON_ACTIVE) == 0) {
             if (work->x < 0 || AnimIsFinished(anim) == 1) {
                 v = 0;
+
                 if (work->acdOff == 1) {
                     v = 1;
                 }
+
                 AnimReset(anim);
                 AnimStart(anim, v, 0);
             }
         }
     }
+
     return 1;
 }
 
@@ -89,42 +94,53 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     ox = 0;
     oy = 0;
     shared = work->shared;
+
     if (shared->inEvent == 1) {
         ox = gEventState->shakeX << 8;
         oy = gEventState->shakeY << 8;
     }
+
     work->x = pos->x;
     work->y = pos->y - 0x400;
     work->unk_014 = 0;
+
     if (shared->unk_04 == 1) {
         tbl = gUnk_09EFAB68;
         ofs = AnimGetGfxIndex(&work->anim) + 5;
         gfx = tbl[ofs];
+
         if ((*gp)->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
         } else {
             WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
         }
+
         DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
                    (u16)((-0x1004 - ((work->y >> 8) << 2)) | 3));
     } else if (pos->z >= 0) {
         if (((*gp)->flags & BTL_FLAG_PLAYER_CARD_ACTION) && ((*gp)->flags & BTL_FLAG_SUMMON_ACTIVE)) {
             return;
         }
+
         anim = &work->anim;
+
         if (AnimGetId(anim) == 1) {
             (*gp)->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
+
             if ((*gp)->actor->flags & BTLOBJ_FLAG_HIT_LOCKED) {
                 return;
             }
+
             tbl = gUnk_09EFAB68;
             ofs = AnimGetGfxIndex(anim) + 5;
             gfx = tbl[ofs];
+
             if ((*gp)->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
             } else {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
             }
+
             DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
                        (u16)((-0x1004 - ((work->y >> 8) << 2)) | 3));
         } else {

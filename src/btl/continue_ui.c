@@ -27,7 +27,6 @@ static const s32 sContinueCursorY[2] = {
 };
 
 #ifdef VERSION_EU
-
 static void* sContinueLanguageBgTiles[5] = {
     gUnk_0941A418,
     gUnkEu_0954C7B4,
@@ -94,6 +93,7 @@ void ContinueSora_0(ContinueWork* p) {
     p->unk_58 = -2048;
     p->unk_5C = 0xA000;
     p->steps = 16;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -119,9 +119,11 @@ void ContinueSora_0(ContinueWork* p) {
     for (i = 0; i < 5; i++) {
         FadeSetPaletteExcluded(p->palette->index + i, 0);
     }
+
     p->blendAlpha = 0x1000;
     p->state = 0;
 }
+
 void ContinueRiku_0(ContinueWork* p) {
     u8 i;
 
@@ -161,6 +163,7 @@ void ContinueRiku_0(ContinueWork* p) {
     p->unk_58 = -2048;
     p->unk_5C = 0xA000;
     p->steps = 16;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -186,9 +189,11 @@ void ContinueRiku_0(ContinueWork* p) {
     for (i = 0; i < 5; i++) {
         FadeSetPaletteExcluded(p->palette->index + i, 0);
     }
+
     p->blendAlpha = 0x1000;
     p->state = 0;
 }
+
 static s32 Continue_1(ContinueWork* p) {
     const s32* t;
 
@@ -274,10 +279,12 @@ static s32 Continue_1(ContinueWork* p) {
     p->y += (t[p->cursor] - p->y) >> 3;
     p->unk_64 += 4;
 }
+
 static void Continue_2(ContinueWork* p) {
     DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, SPRITE_FLAG_BLEND, 100);
     DrawSprite(120, 120, p->gfx2, p->tiles2, p->palette2, 0, 0, 100);
 }
+
 static void Continue_3(ContinueWork* p) {
     DisableBg(0);
     DisableBg(2);
@@ -291,6 +298,7 @@ static void Continue_3(ContinueWork* p) {
     ReleaseObjPalette(p->palette3);
     gBldCnt = 0;
 }
+
 TaskDesc gTaskDescContinueSora = {
     "Continue",
     (TaskInitFunc)ContinueSora_0,

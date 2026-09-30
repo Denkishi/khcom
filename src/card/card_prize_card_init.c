@@ -707,6 +707,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (GetRandom() % 100 < 20) {
                         *(PrizeCardArgs*)args = w->args;
+
 #ifdef VERSION_EU
                         if (CountRegularMapCards() <= 98) {
                             args[8] = CARD_ID(CARD_GRAVITY, GetRandom() % 10);
@@ -897,6 +898,7 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
 void PrizeCardInitDraw(PrizeCardInitWork* w) {
     TaskPoolDraw(&w->tasks);
 }
+
 void PrizeCardInitDestroy(PrizeCardInitWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
@@ -992,6 +994,7 @@ void CreatePrizeCardTask(TaskPool* pool, struct BtlPrizeSrc* src) {
 void CreateBossPrizeCardTask(void* a, void* b) {
     TaskCreate(a, &gTaskDescPrizeCardInitBoss, b);
 }
+
 void DispCardname_0(DispCardnameWork* work, u16* a) {
     ObjPalette* p;
     s32 v;
@@ -1010,6 +1013,7 @@ void DispCardname_0(DispCardnameWork* work, u16* a) {
 #endif
     work->x = v;
 }
+
 s32 DispCardname_1(void) {
     return 1;
 }
@@ -1032,24 +1036,30 @@ void DispCardname_3(DispCardnameWork* work) {
 void CreateCardNameDisplay(void* a, void* b) {
     TaskCreate(a, &gTaskDescDispCardname, b);
 }
+
 void Version_0(VersionWork* work) {
     work->tiles = LoadSmallFontTiles();
     work->palette = LoadSmallFontPalette();
     work->textLength = EncodeSmallFontString(gVersionString, work->text);
 }
+
 s32 Version_1(void) {
     return 1;
 }
+
 void Version_2(VersionWork* work) {
     DrawSmallFontString(0, 152, work->text, work->tiles, work->palette, 0,
                   work->textLength);
 }
+
 void Version_3(VersionWork* work) {
     FreeSmallFontResources(work->tiles, work->palette);
 }
+
 Task* CreateVersionDisplay(TaskPool* pool) {
     return TaskCreate(pool, &gTaskDescVersion, 0);
 }
+
 static void PrizeCard_0(PrizeMapCardWork* w, s32* args) {
     Collider* p;
 
@@ -1092,6 +1102,7 @@ static void PrizeCard_0(PrizeMapCardWork* w, s32* args) {
     TaskPoolInit(&w->tasks, 1);
     gBtlWork->prizeCount++;
 }
+
 static u8 PrizeCard_1(PrizeMapCardWork* w, void* a) {
     s16 x;
     s16 y;
@@ -1223,6 +1234,7 @@ u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* w, void* a) {
     UpdatePrizeMapCardScale(w);
     return 1;
 }
+
 u8 UpdatePrizeMapCardShow(PrizeMapCardWork* w, void* a) {
     s32 v;
     s16 lim;
@@ -1361,6 +1373,7 @@ void UpdatePrizeMapCardScale(PrizeMapCardWork* w) {
         w->scaleY = 2;
     }
 }
+
 #ifndef VERSION_EU
 void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* w) {
     u8* p;
@@ -1368,7 +1381,6 @@ void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* w) {
     u8 k;
     u8 v;
     u8 z;
-
     v = gPrizeMapCardBackAnim[w->backAnimStep].sprite;
     q = &w->backFrame;
     z = 0;
@@ -1389,6 +1401,7 @@ void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* w) {
     w->backAnimTimer++;
 }
 #endif
+
 void CreatePrizeMapCardTask(TaskPool* pool, s32* args) {
     TaskCreate(pool, &gTaskDescPrizeMapCard, args);
 }
@@ -1446,11 +1459,14 @@ s32 UpdateSpotLightFadeOut(SpotlightWork* w) {
     gBldAlpha = v;
     return 1;
 }
+
 void SpotLight_2(void) {
 }
+
 void SpotLight_3(void) {
     FadeSetPaletteExcluded(13, 0);
 }
+
 void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     s32 zero;
     s32 i;
@@ -1513,6 +1529,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[2].sprite);
     SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[3].sprite);
 }
+
 s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     s32 i;
     EventKey* r;
@@ -1564,6 +1581,7 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     work->pulseAngle += 8;
     return 1;
 }
+
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work) {
     u8* a;
     u8* b;
@@ -1583,6 +1601,7 @@ s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work) {
     SetObjMosaicSize(*a, *b);
     return 1;
 }
+
 void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
     s32 i;
 
@@ -1624,6 +1643,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                 DrawLayeredCardSprite(&work->cards[i].sprite, 0x808);
             }
         }
+
         break;
     }
 
@@ -1637,6 +1657,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
 
     DrawSprite(120, 42, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_MOSAIC, 10);
 }
+
 void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     s32 i;
 
@@ -1736,6 +1757,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
+
         break;
     case 2:
         if (key->value <= 9) {
@@ -1752,6 +1774,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
+
         break;
     case 3:
         if (key->value <= 9) {
@@ -1768,6 +1791,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
+
         break;
     case 4:
         if (key->value <= 9) {
@@ -2044,11 +2068,10 @@ TaskDesc gTaskDescSpotLight = {
     (TaskDestroyFunc)SpotLight_3,
     sizeof(SpotlightWork),
 };
+
 #ifdef VERSION_EU
 void* gSelmapEventKeyTitleAnimsByLanguage[5] = { gUnk_09EF1224, gUnkEu_09F7C438, gUnkEu_09F7C450, gUnkEu_09F7C448, gUnkEu_09F7C440 };
-
 void* gSelmapEventKeyTitleFramesByLanguage[5] = { gUnk_09EF1220, gUnkEu_09F7C434, gUnkEu_09F7C44C, gUnkEu_09F7C444, gUnkEu_09F7C43C };
-
 void* gSelmapEventKeyTitleTilesByLanguage[5] = { gUnk_093F6ACC, gUnkEu_094C7CCE, gUnkEu_094C9180, gUnkEu_094C8946, gUnkEu_094C8288 };
 #endif
 

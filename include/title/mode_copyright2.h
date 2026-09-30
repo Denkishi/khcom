@@ -2,7 +2,6 @@
 #define GUARD_MODE_COPYRIGHT2_H
 
 #include "registration_data.h"
-
 #include "types.h"
 #include "game_state.h"
 #include "mode.h"

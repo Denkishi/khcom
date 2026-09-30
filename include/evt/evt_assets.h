@@ -2,7 +2,6 @@
 #define GUARD_EVT_ASSETS_H
 
 #include "anim.h"
-
 #include "types.h"
 
 extern u8 gSoraPalette[];

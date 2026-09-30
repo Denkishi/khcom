@@ -17,5 +17,4 @@ typedef struct CardHelpDef {
     u8 unk_05[3];
 } CardHelpDef;
 
-
 #endif

@@ -3,15 +3,10 @@
 
 #include "task_descriptors.h"
 #include "registration_data.h"
-
 #include "hum_types.h"
-
 #include "enemy_types.h"
-
 #include "chara_types.h"
-
 #include "card_api.h"
-
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"

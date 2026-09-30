@@ -56,6 +56,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     if (arg != NULL) {
         w->flags = TM_FLAG_IN_EVENT;
     }
+
     TaskPoolInit(&gBosTmTaskPool, 4);
 
     if (w->flags & TM_FLAG_IN_EVENT) {
@@ -70,6 +71,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
         gBtlWork->bossY = 0x156 << 8;
         gBtlWork->bossZ = (s16)w->z << 8;
     }
+
     w->baseX = (s16)w->x << 8;
     w->baseY = (s16)w->y << 8;
     w->baseZ = (s16)w->z << 8;
@@ -126,6 +128,7 @@ u8 task_bos_tm_1(TmWork* w) {
                 w->step = 0;
             }
         }
+
         break;
     case 12:
         w->step++;
@@ -134,6 +137,7 @@ u8 task_bos_tm_1(TmWork* w) {
         if ((s16)t == 1) {
             w->hitCount = t + 1;
         }
+
         break;
     case 4:
     case 5:
@@ -149,6 +153,7 @@ u8 task_bos_tm_1(TmWork* w) {
                 w->step = 0;
             }
         }
+
         break;
     case 13:
         if (w->step != 0) {
@@ -173,6 +178,7 @@ u8 task_bos_tm_1(TmWork* w) {
             w->flags &= ~TM_FLAG_HURT;
             w->step++;
         }
+
         break;
     case 2:
     case 3:
@@ -183,6 +189,7 @@ u8 task_bos_tm_1(TmWork* w) {
     case 17:
         break;
     }
+
     gBosTmActorY = gBtlWork->actor->y >> 8;
     gUnk_0203AB40 = gBtlWork->actor->originZ >> 8;
     gBosTmActorZ = gBtlWork->actor->z >> 8;
@@ -201,6 +208,7 @@ u8 task_bos_tm_1(TmWork* w) {
             gBtlWork->bossPriorityOffset = 10;
         }
     }
+
     TaskPoolUpdate(&gBosTmTaskPool);
     BosTmSetArmPositions(w);
     w->stateTimer++;

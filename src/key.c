@@ -419,7 +419,7 @@ void UpdateKeyState(void) {
     if (gKeyHoldStart == 1 || gKeyHoldStart == 32) {
         gKeysRepeat |= START_BUTTON;
     }
-    
+
     if (gKeyHoldSelect == 1 || gKeyHoldSelect == 32) {
         gKeysRepeat |= SELECT_BUTTON;
     }

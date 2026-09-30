@@ -60,6 +60,7 @@ void eu_08009E10(void) {
         if (!FadeIsActive()) {
             gLangWork->state = 1;
         }
+
         break;
     case 1:
         if (GetKeysRepeat() & DPAD_UP) {
@@ -86,6 +87,7 @@ void eu_08009E10(void) {
             gLangWork->state = 3;
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
+
         break;
     case 2:
         if (gLangWork->timer == 0) {
@@ -128,6 +130,7 @@ void eu_08009E10(void) {
         } else {
             gLangWork->timer++;
         }
+
         break;
     case 3:
         if (gLangWork->timer == 0) {
@@ -139,6 +142,7 @@ void eu_08009E10(void) {
         } else {
             gLangWork->timer++;
         }
+
         break;
     }
 
@@ -316,6 +320,7 @@ void mode_battle_0(u32 mode) {
             } else {
                 m4aSongNumStart(SONG_BGM_PINOCCHIO_BTL);
             }
+
             break;
         case BATTLE_STAGE_OLYMPUS_COLISEUM:
             m4aSongNumStart(SONG_BGM_HERCULES_BATTLE);
@@ -572,5 +577,4 @@ void mode_battle_2(void) {
 #ifdef VERSION_EU
 Mode gModeLang = { "mode_lang", eu_08009CD0, eu_08009E10, eu_0800A0DC };
 #endif
-
 Mode gModeBattle = { "mode_battle", (ModeInitFunc)mode_battle_0, mode_battle_1, mode_battle_2 };

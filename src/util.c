@@ -130,12 +130,14 @@ u16 KeyReadChord(KeyState* k, u16 a, u16 b) {
             r = b;
         }
     }
+
     return r;
 }
 
 void KeyStateUpdate(KeyState* k, u16 keys) {
     k->trg = keys & ~k->held;
     k->held = keys;
+
     if (k->held & DPAD_LEFT) {
         k->on[0]++;
         k->off[0] = 0;
@@ -285,6 +287,7 @@ void KeyStateUpdate(KeyState* k, u16 keys) {
             k->off[9]++;
         }
     }
+
     k->rep = 0;
 
     if (k->on[0] == 1 || k->on[0] == 32) {
@@ -391,6 +394,7 @@ u8 IsSongPlaying(u16 songNum) {
     if (header == info->songHeader) {
         r = (u16)info->status != 0;
     }
+
     return r;
 }
 

@@ -132,7 +132,6 @@ u8 task_lockon_1(LockonWork* w) {
             (v) = (dest); \
         } \
     } while (0)
-
 void task_lockon_2(LockonWork* w) {
     FldObj* obj;
     s32 x;
@@ -162,6 +161,7 @@ void task_lockon_2(LockonWork* w) {
 
     x2.counter = w->timer++;
     y2.counter = x2.counter;
+
     if (y2.counter > 10) {
         w->timer = 0;
     }
@@ -188,7 +188,6 @@ void task_lockon_2(LockonWork* w) {
 }
 
 #undef CLAMP_LABEL
-
 void task_lockon_3(LockonWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -512,17 +511,21 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
         DebugTextPrintFont2(x, y, (u16*)s);
         return;
     }
+
     if (gDebugTextLineCount > 19) {
         return;
     }
+
     while (*s != 0) {
         character = *(const u16*)s;
         character = (character >> 8) | (character << 8);
+
         switch (character & 0xFF00) {
         case 0x8100:
             if (character > 0x8146) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8146 + (0x42 >> shift);
             }
+
             switch (character) {
             case 0x8140:
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = 0;
@@ -623,57 +626,73 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = 31;
                 break;
             }
+
             break;
         case 0x8200:
             if ((u16)(character - 0x824F) <= 9) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x824F + (0x80 >> shift);
             }
+
             if ((u16)(character - 0x8260) <= 25) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8260 + (0xC0 >> shift);
             }
+
             if ((u16)(character - 0x8281) <= 25) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8281 + (0x100 >> shift);
             }
+
             if ((u16)(character - 0x829F) <= 31) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x829F + (0x140 >> shift);
             }
+
             if ((u16)(character - 0x82BF) <= 31) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82BF + (0x180 >> shift);
             }
+
             if ((u16)(character - 0x82DF) <= 31) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82DF + (0x1C0 >> shift);
             }
+
             break;
         case 0x8300:
             if ((u16)(character - 0x8340) <= 31) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8340 + ((0x200 - shift * 192) >> shift);
             }
+
             if ((u16)(character - 0x8360) <= 30) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8360 + ((0x240 - shift * 192) >> shift);
             }
+
             if (character == 0x8380) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = ((0x25F - shift * 192) >> shift);
             }
+
             if ((u16)(character - 0x8381) <= 21) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8381 + ((0x280 - shift * 192) >> shift);
             }
+
             if ((u16)(character - 0x83BF) <= 1) {
                 gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x83BF + (0x40 >> shift);
             }
+
             break;
         }
+
         i++;
         s += 2;
+
         if (i > 59) {
             break;
         }
     }
+
     gDebugTextLines[gDebugTextLineCount].x = x;
     gDebugTextLines[gDebugTextLineCount].y = y;
     gDebugTextLines[gDebugTextLineCount].length = i;
     gDebugTextLines[gDebugTextLineCount].font = c;
     gDebugTextLineCount++;
 }
+
 void func_08060470(u8 bg) {
     u8 n;
     u8 i;
@@ -731,14 +750,17 @@ void DebugTextDraw(u8 bg) {
     charBase = GetBgCharBase(bg);
     gDebugTextTileDest = charBase;
     screen = GetBgScreenBase(bg);
+
     for (n = 0; n < gDebugTextLineCount; n++) {
         tileX = gDebugTextLines[n].x >> 3;
         tileY = gDebugTextLines[n].y >> 3;
         offsetX = gDebugTextLines[n].x - tileX * 8;
         offsetY = gDebugTextLines[n].y - tileY * 8;
         gDebugTextTileDest = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
+
         for (i = 0; i < gDebugTextLines[n].length; i++) {
             destination = gDebugTextTileDest + i * 32;
+
             switch (gDebugTextLines[n].font) {
             case 0:
                 font = gUnk_0941BEB8 + gDebugTextLines[n].glyphs[i] * 32;
@@ -753,6 +775,7 @@ void DebugTextDraw(u8 bg) {
                 height = 8;
                 break;
             }
+
             for (row = offsetY, sourceRow = 0; row < offsetY + height; row++, sourceRow++) {
                 if (offsetX == 0) {
                     if (gDebugTextLines[n].font != 2) {

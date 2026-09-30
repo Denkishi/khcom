@@ -47,6 +47,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* w) {
 
     r = 1;
     y = (w->y >> 8) - (*w->scrollY >> 8);
+
     if (y <= -32) {
         r = 0;
     }
@@ -63,6 +64,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* w) {
             AnimUpdate(&w->anim2);
         }
     }
+
     w->unk_00++;
     return r;
 }

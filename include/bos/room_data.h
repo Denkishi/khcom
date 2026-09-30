@@ -20,5 +20,4 @@ typedef struct GaEntryDef {
     u16 unk_22;
 } GaEntryDef;
 
-
 #endif

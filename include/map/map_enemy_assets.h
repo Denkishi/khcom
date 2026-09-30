@@ -2,7 +2,6 @@
 #define GUARD_MAP_ENEMY_ASSETS_H
 
 #include "types.h"
-
 #include "anim.h"
 #include "taskpool.h"
 #include "map.h"

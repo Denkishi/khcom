@@ -26,7 +26,6 @@ static s8 gPcmOutputBufferB[0x2C0];
 
 #define DMA_SOUND_FIFO                                                        \
     ((DMA_START_SPECIAL | DMA_32BIT | DMA_REPEAT | DMA_DEST_FIXED) << 16)
-
 u8 LookupPcmPlaybackConfig(u32 sampleRate, u16* timerReload, u32* samplesPerBuffer) {
     s32 i = 0;
 
@@ -36,8 +35,10 @@ u8 LookupPcmPlaybackConfig(u32 sampleRate, u16* timerReload, u32* samplesPerBuff
             *samplesPerBuffer = sPcmPlaybackConfigs[i].samplesPerBuffer;
             return 1;
         }
+
         i++;
     } while (sPcmPlaybackConfigs[i].sampleRate != 0);
+
     return 0;
 }
 
@@ -48,6 +49,7 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     if (!LookupPcmPlaybackConfig(sampleRate, &timerReload, (u32*)&gPcmSamplesPerBuffer)) {
         return 0;
     }
+
     REG_SOUNDCNT_H = (SOUND_CGB_MIX_FULL | SOUND_A_MIX_FULL | SOUND_A_RIGHT_OUTPUT | SOUND_A_LEFT_OUTPUT | SOUND_A_FIFO_RESET);
     REG_SOUNDCNT_X = SOUND_MASTER_ENABLE;
     REG_DMA1DAD = (s32)&REG_FIFO_A;
@@ -57,6 +59,7 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     for (i = 0; i < gPcmSamplesPerBuffer; i++) {
         gPcmOutputBufferA[i] = gPcmOutputBufferB[i] = 0;
     }
+
     gPcmActiveBufferIndex = 1;
     REG_DMA1SAD = (s32)gPcmOutputBufferA;
     return 1;
@@ -92,6 +95,7 @@ void PcmPlaybackUpdate(void) {
             dst[i] = src[pos] >> 8;
             pos++;
         }
+
         SetDecodedAudioReadPosition(pos);
     } else {
         for (i = 0; i < 0x800 - pos; i++) {
@@ -101,6 +105,7 @@ void PcmPlaybackUpdate(void) {
         for (; i < gPcmSamplesPerBuffer; i++) {
             dst[i] = src[pos + i - 0x800] >> 8;
         }
+
         SetDecodedAudioReadPosition(pos + gPcmSamplesPerBuffer - 0x800);
     }
 }

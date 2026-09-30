@@ -271,6 +271,7 @@ void task_btl_map_0(BtlMapWork* work) {
             break;
         }
     }
+
     gBtlWork->scale = 0x100;
     gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0x10000;
@@ -309,6 +310,7 @@ void BtlMapUpdateShake(void) {
     if (gBtlMapShakeActive != 0) {
         gBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)gBtlMapShakeStep] << 12) - gBtlMapShakeOffset) >> 3;
         gBtlMapShakeStep++;
+
         if (gBtlMapShakeStep > 0x1F) {
             gBtlMapShakeActive = 0;
             gBtlMapShakeOffset = 0;
@@ -341,6 +343,7 @@ void BtlMapFollowPosition(s32 a, s32 b, s32 c) {
     } else if (y - b > 0x3000) {
         y = b + 0x3000;
     }
+
     gBtlWork->x2 = x;
     gBtlWork->y2 = y + c;
 }
@@ -367,6 +370,7 @@ s32 task_btl_map_1(BtlMapWork* work) {
             ApproachValueHalfSteps(&work->yMin, 0x9000, gBtlWork->zoomSteps);
             ApproachValueHalfSteps(&work->yMax, 0x1E800, gBtlWork->zoomSteps);
         }
+
         gBtlWork->zoomSteps--;
     } else if (gBtlWork->scale == 0x100) {
         dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
@@ -383,9 +387,11 @@ s32 task_btl_map_1(BtlMapWork* work) {
         } else if (dy < -0x400) {
             dy = -0x400;
         }
+
         gBtlWork->x += dx;
         gBtlWork->y += dy;
     }
+
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
@@ -404,6 +410,7 @@ s32 task_btl_map_1(BtlMapWork* work) {
     } else if (gBtlWork->viewY + 0x5000 > work->yMax) {
         gBtlWork->viewY = work->yMax - 0x5000;
     }
+
     SetBgAffine(gBtlWork->mapBg, gBtlWork->rotation, gBtlWork->scale,
                   gBtlWork->scale, gBtlWork->viewX,
                   gBtlWork->viewY + 0x2800);

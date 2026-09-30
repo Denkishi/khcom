@@ -48,11 +48,13 @@ void task_sroll_a_name_0(SrollANameWork* w, SrollANameArg* a) {
             anim = &w->anim;
             AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
         }
+
         AnimStart(anim, 2, 0);
         gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0);
         gBldAlpha = 0;
         break;
     }
+
     w->palette = LoadObjPalette(gUnk_09D6CD74, 64);
 }
 
@@ -67,11 +69,13 @@ u8 task_sroll_a_name_1(SrollANameWork* w) {
                 gBldCnt = 0;
                 gBldAlpha = 0;
             }
+
             AnimUpdate(&w->anim);
         }
     } else {
         AnimUpdate(&w->anim);
     }
+
     return 1;
 }
 
@@ -96,6 +100,7 @@ void task_sroll_a_name_2(SrollANameWork* w) {
         ofs = AnimGetFrame(&w->anim) * 32 + 32;
         LoadPalette(&gUnk_09D6CD74[ofs], (u8*)0x05000220 + ((w->palette->index & 15) * 32), 32);
     }
+
     DrawSprite(x >> 8, y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, flags,
                0xFF0 - w->kind);
 }

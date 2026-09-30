@@ -30,6 +30,7 @@ s32 BosLstLsrSqrt(s32 n) {
 
     x = 1;
     g = n;
+
     while (x < g) {
         x <<= 1;
         g >>= 1;
@@ -134,19 +135,23 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
         break;
     case 1:
         work->delay--;
+
         if (work->delay > 0) {
             break;
         }
+
         work->state = 2;
         work->delay = 0;
     case 2:
         work->timer++;
+
         if (work->timer >= work->duration) {
             work->state = 3;
             work->timer = 0;
             AnimReset(&work->anim);
             AnimChange(&work->anim, 6, ANIM_FLAG_LOOP);
         }
+
         break;
     case 3:
         if (work->timer > 15) {
@@ -155,9 +160,11 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             AnimChange(&work->anim, 4, 0);
         } else {
             ApplyAttackBox(0x10D, work->pos2.x, work->pos2.y, work->pos2.z, 8, 8, 8);
+
             if ((work->timer & 3) == 0) {
                 BosLstLsrSpawnFal(work);
             }
+
             if (abs(work->pos2.x - gBtlWork->actor->x) < 384) {
                 work->pos2.x = gBtlWork->actor->x;
             } else if (work->pos2.x > gBtlWork->actor->x) {
@@ -165,6 +172,7 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             } else if (work->pos2.x < gBtlWork->actor->x) {
                 work->pos2.x = work->pos2.x + 384;
             }
+
             if (abs(work->pos2.y - gBtlWork->actor->y) < 384) {
                 work->pos2.y = gBtlWork->actor->y;
             } else if (work->pos2.y > gBtlWork->actor->y) {
@@ -172,8 +180,10 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             } else if (work->pos2.y < gBtlWork->actor->y) {
                 work->pos2.y = work->pos2.y + 384;
             }
+
             work->timer++;
         }
+
         break;
     }
 

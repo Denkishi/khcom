@@ -48,6 +48,7 @@ s32 BosLstCtrSqrt(s32 n) {
 
     x = 1;
     g = n;
+
     while (x < g) {
         x <<= 1;
         g >>= 1;
@@ -101,6 +102,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         c = (u16)work->timer + 1;
         work->timer = c;
         work->delay--;
+
         if (work->delay <= 0) {
             p = gBtlWork->actor;
             work->x2 = work->curX - (work->curX - p->x) / 4;
@@ -120,24 +122,29 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->offsetZ =
                 ((gSineTable[(sBosLstCtrAngles[work->count][work->index] + c) & 0xFF] * 3 >> 5) - 4) << 8;
         }
+
         break;
     case 1:
         work->curX = work->x - (work->x - work->x2) * work->timer / work->duration;
         work->curY = work->y + (work->y2 - work->y) * work->timer / work->duration;
         work->curZ = work->z + (work->z2 - work->z) * work->timer / work->duration;
         work->timer++;
+
         if (work->timer >= work->duration) {
             work->state = 2;
             work->unk_00A = 0;
             work->timer = 0;
             work->delay = 0;
         }
+
         if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 1, 4) != 0) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
+
         break;
     case 2:
         work->timer++;
+
         if (work->timer > 2) {
             work->state = 3;
             work->unk_00A = 0;
@@ -149,11 +156,13 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             AnimStart(&work->anim, 1, 0);
             m4aSongNumStart(SONG_SND_710);
         }
+
         break;
     case 3:
         if (work->x > work->x2) {
             work->unk_010 = 0;
             work->curX = work->curX - 0x600;
+
             if (work->curX < 0x6000) {
                 work->state = 4;
                 work->unk_00A = 0;
@@ -163,6 +172,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
         } else {
             work->unk_010 = 0x80;
             work->curX = work->curX + 0x600;
+
             if (work->curX > 0x19000) {
                 work->state = 4;
                 work->unk_00A = 0;
@@ -170,10 +180,13 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
                 work->delay = 0;
             }
         }
+
         work->curZ = work->z2 - ((work->timer >> 2) << 8);
+
         if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 4, 4) != 0) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
+
         work->timer++;
         break;
     case 4:
@@ -204,12 +217,15 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     switch (work->state) {
     case 0:
         d = work->timer - work->index * 8;
+
         if (d <= 0) {
             return;
         }
+
         if (d <= 15) {
             affine = AllocObjAffine(0, 0x100, d * 16, 0);
         }
+
         break;
     case 1:
         affine = AllocObjAffine(0, 0x100 - work->timer * 4, 0x100 - work->timer * 4, 1);
@@ -222,6 +238,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
         if (work->curX + work->offsetX > work->x2) {
             prio |= 1;
         }
+
         break;
     }
 

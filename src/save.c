@@ -58,7 +58,7 @@ u16 SaveChecksum(u16* data, int size) {
 
     len = size;
     sum = 0;
-    
+
     while (len > 1) {
         sum += *data++;
         len -= 2;
@@ -67,7 +67,7 @@ u16 SaveChecksum(u16* data, int size) {
     if (len > 0) {
         sum += *(u8*)data;
     }
-    
+
     sum = (sum & 0xFFFF) + (sum >> 16);
     return ~(sum + (sum >> 16));
 }
@@ -77,7 +77,7 @@ int SaveVerifyBlock(u8* sram, u8* hdr, u8* buf, s16 size) {
 
     ZeroFill(buf, size);
     ReadSramFast(sram, buf, size);
-    
+
     if (BytesEqual(hdr, gSaveSignature, SAVE_SIGNATURE_SIZE)) {
         ret = (SaveChecksum((u16*)buf, size) == 0) ? SAVE_OK : SAVE_BAD_CHECKSUM;
     } else {
@@ -288,7 +288,7 @@ int SaveRepairSystem(void) {
         EwramFree(buf);
         ret = SAVE_OK;
     }
-    
+
     return ret;
 }
 
@@ -533,7 +533,7 @@ void SaveClearFileSmall(u16 file) {
         dst = SRAM_FILE_SMALL + i * SAVE_FILE_SMALL_SIZE;
         WriteAndVerifySramFast(buf, dst + off, SAVE_FILE_SMALL_SIZE);
     }
-    
+
     EwramFree(buf);
 }
 
@@ -690,9 +690,11 @@ void ShowSramErrorScreen(void) {
     *dispstat |= DISPSTAT_VBLANK_INTR;
     *ime = 1;
     p = (vu16*)REG_ADDR_BG0CNT;
+
     do {
         *p = 0x88;
     } while (0);
+
     p += 0x24;
     *p = 0x3FBF;
     p += 2;
@@ -741,6 +743,7 @@ void WaitSramErrorInput(void) {
     prev = 0;
     j = 0;
     bldy = (vu16*)REG_ADDR_BLDY;
+
     do {
         VBlankIntrWait();
         *bldy = 16 - j;
@@ -749,6 +752,7 @@ void WaitSramErrorInput(void) {
 
     if (i <= 19) {
         dma = (vu32*)REG_ADDR_DMA3;
+
         do {
             ReadKeysRaw();
 
@@ -760,6 +764,7 @@ void WaitSramErrorInput(void) {
             if (prev != 0 && cur - prev <= 3) {
                 ok = 1;
             }
+
             i++;
             VBlankIntrWait();
             dma[0] = (u32)gSramErrorTilemapBuf;
@@ -771,6 +776,7 @@ void WaitSramErrorInput(void) {
 
     j = 0;
     bldy2 = (vu16*)REG_ADDR_BLDY;
+
     do {
         VBlankIntrWait();
         *bldy2 = j;

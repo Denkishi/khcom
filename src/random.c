@@ -50,16 +50,19 @@ u16 GetRandom(void) {
     if (gRandomState[0] & 0x80000000) {
         x++;
     }
+
     x <<= 1;
 
     if (gRandomState[0] & 0x40000000) {
         x++;
     }
+
     gRandomState[3] <<= 1;
 
     if (gRandomState[2] & 0x80000000) {
         gRandomState[3]++;
     }
+
     x ^= gRandomState[3];
     gRandomState[3] = gRandomState[2];
     gRandomState[2] = gRandomState[1];
@@ -111,9 +114,11 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
             break;
         }
     }
+
     SetBgSize(bg, b);
     DisableBg(bg);
 }
+
 void BgAnimSetPosition(s16 x, s16 y) {
     if (gBgAnimAffine != 0) {
         gBgAnimScrollX = -x;
@@ -139,6 +144,7 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     } else {
         gBgAnimFrameBytes = a->tilesPerFrame << 5;
     }
+
     gBgAnimFramesPerChunk = 0x8000 / gBgAnimFrameBytes;
     gBgAnimLoopStartFrame = -1;
     gBgAnimStopFrame = -1;
@@ -152,11 +158,13 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
         gBgAnimScaleY = 0x100;
         gBgAnimRotation = 0;
     }
+
     PushPaletteEffect(0);
     LoadBgPalette(gBgAnimBg, a->palette, a->paletteSize);
     PopPaletteEffect();
     LoadBgMap(gBgAnimBg, a->tilemap, gBgAnimMapSize);
 }
+
 void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) {
     BgAffineSrcData src;
     BgAffineDstData dst;
@@ -189,6 +197,7 @@ void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) 
         break;
     }
 }
+
 void BgAnimUpdate(void) {
     u8* src;
     u16 q;
@@ -208,6 +217,7 @@ void BgAnimUpdate(void) {
         } else {
             BgAnimStop();
         }
+
         return;
     }
 
@@ -216,6 +226,7 @@ void BgAnimUpdate(void) {
         vis = 1;
     } else {
         SetBgScroll(gBgAnimBg, (u16)gBgAnimScrollX, (u16)gBgAnimScrollY);
+
         if (gBgAnimScrollX > -256 && gBgAnimScrollX < 128 && gBgAnimScrollY < 128 && gBgAnimScrollY > -256) {
             vis = 1;
         } else {
@@ -243,6 +254,7 @@ void BgAnimUpdate(void) {
     } else {
         DisableBg(gBgAnimBg);
     }
+
     gBgAnimFrameTimer++;
 
     if (gBgAnimFrameTimer >= gBgAnimFrameDuration) {

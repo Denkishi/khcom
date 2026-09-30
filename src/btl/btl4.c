@@ -50,6 +50,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             work->gfx = gUnkEu_08B4AC2C;
             break;
         }
+
         break;
     case LANGUAGE_SPANISH:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B52782);
@@ -87,6 +88,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             work->gfx = gUnkEu_08B52768;
             break;
         }
+
         break;
     case LANGUAGE_ITALIAN:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B533BE);
@@ -124,6 +126,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             work->gfx = gUnkEu_08B533A4;
             break;
         }
+
         break;
     case LANGUAGE_GERMAN:
     default:
@@ -162,6 +165,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             work->gfx = gUnkEu_08B53FE0;
             break;
         }
+
         break;
     }
 #else
@@ -239,6 +243,7 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
         if (leading != 0) {
             return gUnk_08B25E6E;
         }
+
         break;
     case 1:
         return gUnk_08B25E78;
@@ -259,6 +264,7 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
     case 9:
         return gUnk_08B25EC8;
     }
+
     return 0;
 }
 
@@ -336,6 +342,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 
     if (work->level < gGameState.progression.level) {
         BtlExpSetNumber(work, gGameState.progression.level);
+
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -368,6 +375,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         if (work->lastExp < gGameState.progression.exp) {
             work->gainedExp += gGameState.progression.exp - work->lastExp;
             BtlExpSetNumber(work, work->gainedExp);
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -406,6 +414,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             } else {
                 work->state = 2;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
+
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
@@ -429,11 +438,13 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->gfx = gUnk_08B25E5E;
 #endif
             }
+
             work->timer = 0;
             work->gainedExp = 0;
         } else {
             work->timer++;
         }
+
         break;
     case 1:
         if (work->timer > 60) {
@@ -442,6 +453,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             } else {
                 work->state = 2;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
+
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
@@ -465,11 +477,13 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->gfx = gUnk_08B25E5E;
 #endif
             }
+
             work->timer = 0;
             work->gainedExp = 0;
         } else {
             work->timer++;
         }
+
         break;
     case 2:
         if (work->timer > 100) {
@@ -478,6 +492,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     }
 
@@ -561,6 +576,7 @@ void task_btl_vslockon_2(BtlVslockonWork* work) {
     BtlObj* p;
 
     p = gBtlWork->actor2;
+
     if (p != NULL) {
         WorldToScreen(&x, &y, p->x, p->y, p->z - (p->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 0x100);
@@ -657,6 +673,7 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
             AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         }
+
         work->gfx3 = 0;
     } else {
         AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
@@ -701,6 +718,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     u32 state;
 
     actor = gRikuBtlWork->actor;
+
     if (actor == NULL) {
         return 0;
     }
@@ -733,11 +751,13 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         work->displayHp = actor->hp;
     } else if (work->displayHp < actor->hp) {
         work->displayHp += 3;
+
         if (work->displayHp > actor->hp) {
             work->displayHp = actor->hp;
         }
     } else if (work->displayHp > actor->hp) {
         work->displayHp -= 3;
+
         if (work->displayHp < actor->hp) {
             work->displayHp = actor->hp;
         }
@@ -878,6 +898,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
             scale = work->hpRatio;
             break;
         }
+
         break;
     case 1:
     default:
@@ -905,6 +926,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
             scale = work->hpRatio;
             break;
         }
+
         break;
     }
 

@@ -49,6 +49,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
     switch (work->state) {
     case 0:
         work->delay--;
+
         if (work->delay <= 0) {
             work->state = 1;
             work->unk_002 = 0;
@@ -57,6 +58,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
             AnimReset(&work->anim);
             AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         }
+
         break;
     case 1:
         work->x -= 0x80;
@@ -64,12 +66,14 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
         work->wobbleX = -gSineTable[((work->timer * 8) & 0xFF) + 0x40];
         work->wobbleY = gSineTable[(work->timer * 2) & 0xFF];
         work->timer++;
+
         if ((work->y >> 8) > 0xA8) {
             work->state = 2;
             work->unk_002 = 0;
             work->timer = 0;
             work->delay = 0;
         }
+
         break;
     case 2:
         AnimReset(&work->anim);

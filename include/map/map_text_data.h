@@ -13,7 +13,6 @@ typedef LocalizedText MapNameText;
 
 extern MapNameText* gRoomNames[28];
 
-
 #ifdef VERSION_EU
 
 extern const LocalizedText gMapNameEu_08893370;

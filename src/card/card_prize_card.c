@@ -89,6 +89,7 @@ static void PrizeCard_0(PrizeCardWork* w, PrizeCardTaskArgs* p) {
     w->holdTimer = 0;
     TaskPoolInit(&w->tasks, 1);
 }
+
 static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
     s32 k = 112;
     s16 x;
@@ -163,6 +164,7 @@ static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
 
     return 1;
 }
+
 void AimFieldPrizeCardAtCenter(PrizeCardWork* w) {
     s32 cx = 0x7800;
     s32 cy = 0x5000;
@@ -176,6 +178,7 @@ void AimFieldPrizeCardAtCenter(PrizeCardWork* w) {
     w->speed = 0x300;
     w->vz = 2;
 }
+
 u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a) {
     s32 v[2];
 
@@ -221,6 +224,7 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a) {
     s32 v;
 
@@ -264,6 +268,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w) {
     w->rotation += 32;
     w->targetX = (gFieldState->actor.fieldPosition.x >> 8) - (gFieldState->x >> 8);
@@ -280,6 +285,7 @@ u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w) {
 
     return 0;
 }
+
 static void PrizeCard_2(PrizeCardWork* w) {
     u16 pal;
     ObjAffine* affine;
@@ -364,6 +370,7 @@ void SpawnRandomFieldPrizeCard(TaskPool* pool, s32 x, s32 y, s32 z) {
     args.cardId = PickPrizeMapCardForWorld(gGameState.world, 0);
     CreateFieldPrizeCardTask(pool, &args);
 }
+
 void SpawnFieldPrizeCard(TaskPool* pool, s32 x, s32 y, s32 z, s32 cardId) {
     PrizeCardTaskArgs args;
 

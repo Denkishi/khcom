@@ -3,13 +3,9 @@
 
 #include "task_descriptors.h"
 #include "registration_data.h"
-
 #include "poo_data.h"
-
 #include "pooh_actor_types.h"
-
 #include "prize_types.h"
-
 #include "m4a_song.h"
 #include "btl_collision.h"
 #include "obj_api.h"

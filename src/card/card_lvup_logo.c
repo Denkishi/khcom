@@ -38,6 +38,7 @@ void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->y[0] = a->y;
     w->targetY = a->y;
     w->target = a->target;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -85,9 +86,11 @@ s32 Lvup_Logo_1(LevelUpEffectWork* w) {
 
     return 1;
 }
+
 void Lvup_Logo_2(LevelUpEffectWork* w) {
     DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->frame], w->tiles, w->palette, 0, 0, 10);
 }
+
 void Lvup_Logo_3(LevelUpEffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -143,6 +146,7 @@ void ReleaseEventMapObjectGfx(EventMapObjectWork* w) {
         }
     }
 }
+
 void Ev_mapObj_0(EventMapObjectWork* w, u8* a) {
     EventBackgroundDef* t;
 

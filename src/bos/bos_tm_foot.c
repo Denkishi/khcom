@@ -368,6 +368,7 @@ void BosTmFootResetPose(TmFootWork* work) {
         work->body4.z = work->tm->baseZ + 0x2B00;
     }
 }
+
 void func_080BA2B0(TmFootWork* work) {
     SetObjTileSource(work->tiles2, gUnk_09654C04);
     SetObjTileSource(work->tiles3, gUnk_09654C04);
@@ -446,6 +447,7 @@ void BosTmFootSetWalkPose(TmFootWork* work) {
         work->body4.z = work->tm->z2 + 0x3200;
     }
 }
+
 void BosTmFootWalk(TmFootWork* work) {
     if (work->tm->stepTimer != 0) {
         return;
@@ -551,6 +553,7 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
                       f, 7);
     }
 }
+
 u8 task_bos_tm_foot_1(TmFootWork* work) {
     u16 n;
     TmFootStep* e;
@@ -580,6 +583,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         } else {
             BosTmFootResetPose(work);
         }
+
         break;
     case 4:
     case 5:
@@ -590,12 +594,14 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         } else {
             BosTmFootSetWalkPose(work);
         }
+
         break;
     case 1:
     case 10:
         if (work->tm->stateTimer == 0) {
             BosTmFootResetPose(work);
         }
+
         break;
     case 2:
     case 3:
@@ -613,10 +619,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             } else {
                 break;
             }
-
         } else {
             BosTmFootResetPose(work);
         }
+
         break;
     case 11:
         if (work->tm->stateTimer != 0) {
@@ -633,10 +639,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             } else {
                 break;
             }
-
         } else {
             BosTmFootResetPose(work);
         }
+
         break;
     case 9:
         if (work->tm->stateTimer != 0) {
@@ -650,10 +656,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             } else {
                 break;
             }
-
         } else {
             BosTmFootResetPose(work);
         }
+
         break;
     case 12:
         if (work->tm->hitCount == 1) {
@@ -684,6 +690,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             work->body.z -= e->dz << 8;
             work->body2.z -= e->dz2 << 8;
         }
+
         break;
     case 14:
         if (work->tm->stateTimer == 0) {
@@ -695,11 +702,13 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 BosTmFootResetPose(work);
             }
         }
+
         break;
     case 13:
         if (work->tm->step == 0) {
             func_080BA2B0(work);
         }
+
         break;
     case 8:
     case 16:
@@ -710,6 +719,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
 
     return 1;
 }
+
 void task_bos_tm_foot_2(TmFootWork* work) {
     void* pal;
     s32 flag;
@@ -723,6 +733,7 @@ void task_bos_tm_foot_2(TmFootWork* work) {
 
     flag = work->tm->flags & TM_FLAG_FACING_LEFT;
     mode = 0x801;
+
     if (flag != 0) {
         mode = 0x800;
     }
@@ -869,6 +880,7 @@ u8 task_bos_tm_clb_1(TmClbWork* work) {
 
     return 1;
 }
+
 void task_bos_tm_clb_2(TmClbWork* work) {
     ObjAffine* p;
     s16 x;
@@ -919,6 +931,7 @@ void BosTmArmUpdateArm1Tip(TmArmWork* work) {
     d->z = s->curY + -gSineTable[s->angle + 0x40] * 12 + work->src->z;
     d->y = work->src->y;
 }
+
 void BosTmArmUpdateArm0Tip(TmArmWork* work) {
     TmArmJoint* s = &work->joints.all[3];
     TmArmPos* d = &work->tips[1];
@@ -950,6 +963,7 @@ void BosTmArmComputeJointPositions(TmArmJoint* joints) {
     p->x = x;
     p->y = y;
 }
+
 void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a) {
     s32 i;
     u8* q;
@@ -1067,6 +1081,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     gUnk_0203AC6C = 0;
     gUnk_0203AC68 = 0;
 }
+
 void BosTmArmUpdateArm1(TmArmWork* work) {
     TmArmJoint* j;
     TmArmJoint* j2;
@@ -1109,6 +1124,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             } else {
                 BosTmClbThrow(&work->clb2, &work->tips[0], -0x380);
             }
+
             break;
         }
 
@@ -1226,6 +1242,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             }
         } else if (work->timer > 50) {
             v = BgFxIsActive();
+
             if (v == 0) {
                 j2 = &work->joints.all[3];
                 y2 = work->src->y2;
@@ -1279,6 +1296,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 3:
         if (work->timer == 0) {
@@ -1322,6 +1340,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 11:
         if (work->timer == 0) {
@@ -1365,6 +1384,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 9:
         if (work->timer == 0) {
@@ -1718,6 +1738,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             work->frame = 0;
             work->state = 3;
         }
+
         break;
     case 0:
         if (work->gimmickPlayed == 0) {
@@ -1729,6 +1750,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             work->tm->tableState = 1;
             work->gimmickPlayed = 0;
         }
+
         break;
     case 2:
         switch (work->frame) {
@@ -1775,6 +1797,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             work->height += 3;
             work->frame++;
         }
+
         break;
     case 3:
         switch (work->frame) {
@@ -1816,6 +1839,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         } else {
             work->frame++;
         }
+
         break;
     }
 

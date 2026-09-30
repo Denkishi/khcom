@@ -152,6 +152,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
             work->vy = (gBtlWork->targetY - work->y) / 15;
             work->state++;
         }
+
         break;
     case 3:
         BosDsdEnergy1UpdateArc(work);
@@ -319,6 +320,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 1:
         BgFxAddPosition(work->vx, work->vy, work->vz);
@@ -330,6 +332,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         if (work->z <= -0xF000) {
             work->state++;
         }
+
         break;
     case 2:
         BgFxStartMahluxiaGround(work->x, work->y, work->z, 0x103);
@@ -343,6 +346,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         if (BgFxIsActive() == 0) {
             work->state++;
         }
+
         break;
     case 4:
         FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -401,6 +405,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         } else {
             work->timer++;
         }
+
         break;
     default:
         return 0;

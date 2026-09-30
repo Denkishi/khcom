@@ -43,6 +43,7 @@ void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
         }
     }
 }
+
 s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
     s32 ret = 0;
 
@@ -51,6 +52,7 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
     if (gVsKeyReleaseL[i] == 2) {
         gVsKeyChordLatch[i] &= ~L_BUTTON;
     }
+
     if (gVsKeyReleaseR[i] == 2) {
         gVsKeyChordLatch[i] &= ~R_BUTTON;
     }
@@ -73,8 +75,10 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
             ret = R_BUTTON;
         }
     }
+
     return ret;
 }
+
 void VsBtlWorkInit(void) {
     s32 a;
     s32 b;
@@ -101,6 +105,7 @@ void VsBtlWorkInit(void) {
     gUnk_020348E0 = 0;
     gUnk_020348E2 = 0;
 }
+
 void HandleVsRikuCardInput(void) {
     BtlWork* w;
     BtlObj* o;
@@ -136,6 +141,7 @@ void HandleVsRikuCardInput(void) {
         if (--gRikuBtlWork->listSwitchTimer == 0) {
             RequestSwitchRikuCardList();
         }
+
         return;
     }
 
@@ -188,6 +194,7 @@ void HandleVsRikuCardInput(void) {
     if (w->rHeldFrames > 32) {
         RequestRikuPrevCard();
     }
+
     o = w->actor;
 
     if (o->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
@@ -264,6 +271,7 @@ void HandleVsSoraCardInput(void) {
         if (--gBtlWork->listSwitchTimer == 0) {
             RequestSwitchSoraCardList();
         }
+
         return;
     }
 
@@ -364,6 +372,7 @@ void VsEndCardPlay(void) {
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
     }
+
     gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
@@ -375,11 +384,13 @@ void VsBattleUpdate(void) {
     s32 i;
     s32 busy;
     u8 rank;
+
     if (gBtlWork->hcEffect == 53 || gRikuBtlWork->hcEffect == 53) {
         gBtlWork->gravity = 38;
     } else {
         gBtlWork->gravity = 66;
     }
+
     switch ((u32)gBtlWork->phase) {
     case 1:
     case 2:
@@ -390,14 +401,18 @@ void VsBattleUpdate(void) {
             HandleVsRikuCardInput();
             HandleVsSoraCardInput();
         }
+
         break;
     }
+
     TaskPoolUpdate(&gBtlWork->taskPools[1]);
+
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
         gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         gBtlWork->phase = 1;
+
         if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
             other->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
@@ -407,13 +422,16 @@ void VsBattleUpdate(void) {
             player->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             FadeFromAmount(FADE_MODE_RED, 10, 4);
         }
+
         MosaicStartIn(16, 15);
         SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
         gBtlWork->phaseStep = 0;
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_START) {
         entered = 1;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
+
         if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
@@ -421,15 +439,18 @@ void VsBattleUpdate(void) {
             gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_ACTION;
             other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
         }
+
         gBtlWork->phase = 2;
         gBtlWork->phaseStep = 0;
     } else {
         entered = 0;
     }
+
     if ((gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) && gBtlWork->phase != 4) {
         gBtlWork->phase = 4;
         gBtlWork->phaseStep = 0;
     }
+
     switch ((u32)gBtlWork->phase) {
     case 1:
         break;
@@ -438,18 +459,24 @@ void VsBattleUpdate(void) {
             gBtlWork->task = 0;
             gBtlWork->phaseStep = 1;
         }
+
         if (FadeIsActive()) return;
+
         if (gBtlWork->phaseStep == 1) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) FadeSetPaletteExcluded(i, 1);
             }
+
             gBtlWork->phaseStep = 2;
         }
+
         if (IsTaskActive(gBtlWork->task)) return;
+
         if (gBtlWork->phaseStep == 2) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpoth, 0);
+
             if (gBtlWork->flags & BTL_FLAG_VS_LINK_PARENT) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
@@ -457,6 +484,7 @@ void VsBattleUpdate(void) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
             }
+
             RequestOpenCards();
             func_080838E8();
             gBtlWork->phaseStep = 3;
@@ -464,6 +492,7 @@ void VsBattleUpdate(void) {
             gBtlWork->phase = 1;
             gBtlWork->phaseStep = 0;
         }
+
         break;
     case 4:
         if (gBtlWork->phaseStep == 0) {
@@ -476,6 +505,7 @@ void VsBattleUpdate(void) {
             gBtlWork->hcEffect = 0;
             gRikuBtlWork->hcEffect = 0;
         }
+
         if (gBtlWork->phaseStep == 140) {
             FadeStartOut(FADE_MODE_WHITE, 100);
             FadeLock();
@@ -483,29 +513,41 @@ void VsBattleUpdate(void) {
             gBtlWork->hitStop = 100;
         } else if (gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
+
             if (player->hp <= 0) ModeRequest(&gModeSioBtlCardget, 1);
             else ModeRequest(&gModeSioBtlCardget, 0);
+
             return;
         }
+
         gBtlWork->phaseStep++;
         break;
     case 2:
         if (entered) return;
+
         busy = 0;
+
         if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
+
         if (other->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
+
         if (busy) return;
+
         rank = GetStockMoveCount();
         gBtlWork->phaseStep = 0;
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (gBtlWork->stockMove >= (s8)rank) gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
+
             if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();
         } else {
             if (gRikuBtlWork->stockMove >= (s8)rank) gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
+
             if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();
         }
+
         break;
     }
 }

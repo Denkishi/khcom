@@ -49,7 +49,6 @@ enum RoomFlag {
 
 #define ROOM_FLAG_DOOR(side) (0x1000000 << (side))
 #define ROOM_FLAG_FIXED_ROOM 0x80000000
-
 enum MapCellFlag {
     MAP_CELL_FLAG_EDGE_LEFT = 0x4,
     MAP_CELL_FLAG_EDGE_RIGHT = 0x8,

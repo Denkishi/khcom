@@ -129,10 +129,13 @@ u8 FldSoraCheckBlocked(FldPos* p) {
     b.y += 1536;
 
     v1 = GetFldPosGround(&a);
+
     if (v1 > a.ground) {
         a.ground = v1;
     }
+
     v2 = GetFldPosGround(&b);
+
     if (v2 > b.ground) {
         b.ground = v2;
     }
@@ -144,6 +147,7 @@ u8 FldSoraCheckBlocked(FldPos* p) {
     if (IsFldPosBlocked(&b) != 0) {
         return 1;
     }
+
     p->ground = v2 > v1 ? v1 : v2;
     return 0;
 }
@@ -160,9 +164,11 @@ s32 FldSoraProbeGround(FldPos* p) {
     b.y += 1536;
     v1 = GetFldPosGround(&a);
     v2 = GetFldPosGround(&b);
+
     if (v2 > v1) {
         v2 = v1;
     }
+
     return v2;
 }
 
@@ -177,17 +183,21 @@ u8 FldSoraCheckClimb(FldPos* p, FldWork* work) {
     b.y += 1536;
 
     r = _080DFE1C(&a);
+
     if (r != 0) {
         work->targetX = a.x;
         work->targetY = a.y;
         return r;
     }
+
     r = _080DFE1C(&b);
+
     if (r != 0) {
         work->targetX = b.x;
         work->targetY = b.y;
         return r;
     }
+
     return 0;
 }
 
@@ -201,6 +211,7 @@ u8 FldSoraCheckDoorAhead(FldActor* act) {
     if (MapFindOpenDoor(&a) != 0) {
         return 1;
     }
+
     return 0;
 }
 
@@ -239,6 +250,7 @@ void FldSoraTurn(FldActor* act) {
         } else {
             v = act->speed >> 1;
         }
+
         act->speed = v;
     }
 }
@@ -287,6 +299,7 @@ void FldSoraSetAnim(FldWork* work, s32 a, s32 b) {
     if (work->animAction == a) {
         flags |= ANIM_FLAG_KEEP_FRAME;
     }
+
     work->animAction = a;
 
     e = &sFldSoraAnimDefs[a][idx];
@@ -371,6 +384,7 @@ void task_fld_sora_0(FldWork* work) {
     ColliderInit(&work->collider, 1, 4, 32);
     ColliderSetPosition(&work->collider, act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
 }
+
 u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
     FldActor* act;
     s16* p;
@@ -410,6 +424,7 @@ u8 FldSoraWaitRoomCreate(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 FldSoraGmkJump(FldWork* work, void* task) {
     FldActor* act;
     s32 x;
@@ -469,6 +484,7 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldSoraJump(FldWork* work, void* task) {
     FldPos p1;
     FldPos p2;
@@ -713,6 +729,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
             }
+
             break;
         }
     }
@@ -751,6 +768,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
             } else {
                 act->speed = 230 * act->speed >> 8;
             }
+
             break;
         }
     }
@@ -768,6 +786,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 FldSoraClimb(FldWork* work, void* task) {
     FldActor* act;
     FldPos p;
@@ -910,6 +929,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldSoraLedgeInput(FldWork* work, void* task) {
     FldActor* act;
 
@@ -942,6 +962,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
 
     return 0;
 }
+
 u8 FldSoraHangLedge(FldWork* work, void* task) {
     FldActor* act;
     FldPos p;
@@ -1014,6 +1035,7 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldSoraWalkOut(FldWork* work, void* task) {
     FldActor* act;
 
@@ -1166,6 +1188,7 @@ u8 FldSoraWalkOut(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldSoraAttack(FldWork* work, void* task) {
     FldActor* act;
     s32 x;
@@ -1406,6 +1429,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 task_fld_sora_1(FldWork* work, void* task) {
     FldPos p1;
     FldPos p2;
@@ -1545,6 +1569,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                     act->fieldPosition.x += work->collider.pushX;
                     act->fieldPosition.y += work->collider.pushY;
                 }
+
                 break;
             }
         }
@@ -2070,6 +2095,7 @@ void task_fld_riku_0(FldWork* work) {
     ColliderInit(&work->collider, 1, 4, 32);
     ColliderSetPosition(&work->collider, act->fieldPosition.x, act->fieldPosition.y, act->fieldPosition.z);
 }
+
 u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
     FldActor* act;
     s16* p;
@@ -2109,6 +2135,7 @@ u8 FldRikuWaitRoomCreate(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 FldRikuGmkJump(FldWork* work, void* task) {
     FldActor* act;
     s32 x;
@@ -2169,6 +2196,7 @@ u8 FldRikuGmkJump(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldRikuJump(FldWork* work, void* task) {
     FldPos p1;
     FldPos p2;
@@ -2412,6 +2440,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
                 act->fieldPosition.x += work->collider.pushX;
                 act->fieldPosition.y += work->collider.pushY;
             }
+
             break;
         }
     }
@@ -2450,6 +2479,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
             } else {
                 act->speed = 230 * act->speed >> 8;
             }
+
             break;
         }
     }
@@ -2466,6 +2496,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 FldRikuClimb(FldWork* work, void* task) {
     FldActor* act;
     FldPos p;
@@ -2608,6 +2639,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldRikuLedgeInput(FldWork* work, void* task) {
     FldActor* act;
 
@@ -2640,6 +2672,7 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
 
     return 0;
 }
+
 u8 FldRikuHangLedge(FldWork* work, void* task) {
     FldActor* act;
     FldPos p;
@@ -2712,6 +2745,7 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldRikuWalkOut(FldWork* work, void* task) {
     FldActor* act;
 
@@ -2859,6 +2893,7 @@ u8 FldRikuWalkOut(FldWork* work, void* task) {
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
+
 u8 FldRikuAttack(FldWork* work, void* task) {
     FldActor* act;
     s32 x;
@@ -3100,6 +3135,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
 
     return 1;
 }
+
 u8 task_fld_riku_1(FldWork* work, void* task) {
     FldPos p1;
     FldPos p2;
@@ -3238,6 +3274,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                     act->fieldPosition.x += work->collider.pushX;
                     act->fieldPosition.y += work->collider.pushY;
                 }
+
                 break;
             }
         }

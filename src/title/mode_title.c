@@ -84,6 +84,7 @@ void TitleShowLogo(u16 a) {
         LoadBgPalette(1, gUnk_0984A418, 0x200);
         TitleCopyToPaletteBuffer(0, gUnk_0984A418, 0x200);
     }
+
     EnableBg(0);
     DisableBg(1);
     DisableBg(2);
@@ -95,6 +96,7 @@ void TitleShowLogo(u16 a) {
     if (IsTaskActive(gTitleObjTask) == 0) {
         gTitleObjTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleObj, 0);
     }
+
     FadeStartIn(FADE_MODE_ADD_WHITE, a);
 }
 
@@ -116,6 +118,7 @@ void TitleFinishIntro(void) {
         break;
     }
 #endif
+
     SetBgBlend(0, 5, 16);
     EnableBg(1);
     m4aSongNumStart(SONG_BGM_TITLE);
@@ -153,6 +156,7 @@ void mode_title_0(void) {
         LoadBgMap(0, gUnk_0983E398, 0x800);
 #endif
     }
+
     DisableBg(0);
     SetupBg(1, 0, 0x1E, 0);
     SetBgPriority(1, 3);
@@ -174,6 +178,7 @@ void mode_title_0(void) {
         LoadBgMap(1, gUnk_0983EB98, 0x800);
 #endif
     }
+
     DisableBg(1);
     BackdropFadeReset();
     BackdropFadeSetColor(0, 0, 0);
@@ -205,10 +210,12 @@ void mode_title_1(void) {
 
         if (gTitleTimer != 0) {
             gTitleTimer--;
+
             if (gTitleTimer != 0) {
                 break;
             }
         }
+
         gTitleState = 1;
         gTitleTimer = 100;
         break;
@@ -218,10 +225,12 @@ void mode_title_1(void) {
         } else {
             ApproachValue(&gTitleBgX, 0xB0C1, gTitleTimer);
         }
+
         ApproachValue(&gTitleBgY, 0x6A37, gTitleTimer);
         ApproachValue(&gTitleBgScale, 0xBD0, gTitleTimer);
         SetBgAffine(2, 0, gTitleBgScale / 16, gTitleBgScale / 16, gTitleBgX, gTitleBgY);
         gTitleTimer--;
+
         if (gTitleTimer == 0x46) {
             BackdropFadeStartOut(1, 0x46);
 
@@ -234,15 +243,19 @@ void mode_title_1(void) {
             gTitleState = 2;
             gTitleTimer = 2;
         }
+
         break;
     case 2:
         if (FadeIsActive()) {
             break;
         }
+
         gTitleTimer--;
+
         if (gTitleTimer != 0) {
             break;
         }
+
         TitleShowLogo(15);
         gTitleState = 3;
         gTitleTimer = 0x28;
@@ -256,6 +269,7 @@ void mode_title_1(void) {
             gTitleTimer--;
             break;
         }
+
         gTitleState = 4;
         gTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
@@ -268,6 +282,7 @@ void mode_title_1(void) {
             gTitleTimer--;
             break;
         }
+
         gTitleTimer = 4;
         gTitleBlendStep++;
         gBldAlpha = (gTitleBlendStep << 8) | (16 - gTitleBlendStep);
@@ -277,6 +292,7 @@ void mode_title_1(void) {
             TitleFinishIntro();
             gTitleState = 5;
         }
+
         break;
     case 5:
         if (!IsTitleObjSlideDone()) {
@@ -286,6 +302,7 @@ void mode_title_1(void) {
         if (!(GetKeysPressed() & START_BUTTON) && !(GetKeysPressed() & A_BUTTON)) {
             break;
         }
+
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (SaveRepairSystem() == SAVE_OK) {
@@ -298,6 +315,7 @@ void mode_title_1(void) {
         } else {
             gTitleMenuChoice = 0;
         }
+
         TaskKill(&gTitleTaskPool, gTitleLogoTask);
         TaskKill(&gTitleTaskPool, gTitleObjTask);
         gTitleMenuTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleMenu, &gTitleMenuChoice);
@@ -313,6 +331,7 @@ void mode_title_1(void) {
             gTitleTimer--;
             break;
         }
+
         gTitleTimer = 4;
         gTitleBlendStep++;
         gBldAlpha = ((16 - gTitleBlendStep) << 8) | gTitleBlendStep;
@@ -321,12 +340,14 @@ void mode_title_1(void) {
             gBldCnt = 0;
             gTitleState = 8;
         }
+
         break;
     case 7:
         if (gTitleTimer != 0) {
             gTitleTimer--;
             break;
         }
+
         gTitleTimer = 1;
         gTitleBlendStep--;
         gBldAlpha = ((16 - gTitleBlendStep) << 8) | gTitleBlendStep;
@@ -339,6 +360,7 @@ void mode_title_1(void) {
             EnableBg(0);
             gTitleState = 5;
         }
+
         break;
     case 8:
         if ((GetKeysPressed() & START_BUTTON) || (GetKeysPressed() & A_BUTTON)) {
@@ -352,23 +374,27 @@ void mode_title_1(void) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             }
+
             TitleFadeOut();
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             gTitleCancelled = 1;
             TitleFadeOut();
         }
+
         break;
     case 9:
         if (!FadeIsActive()) {
             TitleExitToChoice();
         }
+
         break;
     }
 
     if (!FadeIsActive() && gTitleState != 6) {
         TaskPoolUpdate(&gTitleTaskPool);
     }
+
     TaskPoolDraw(&gTitleTaskPool);
     BackdropFadeUpdate();
 
@@ -378,6 +404,7 @@ void mode_title_1(void) {
         if (gTitleState <= 3) {
             TitleShowLogo(2);
         }
+
         TitleFinishIntro();
         gTitleState = 5;
     }
@@ -397,6 +424,7 @@ u8 IsTitleLogoShown(void) {
     if (gTitleState > 2) {
         return 1;
     }
+
     return 0;
 }
 
@@ -404,6 +432,7 @@ u8 IsTitleIntroDone(void) {
     if (gTitleState > 4) {
         return 1;
     }
+
     return 0;
 }
 
@@ -420,6 +449,7 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
         work->sprites[1].gfx = gUnk_09EF65A4;
         work->sprites[1].palette = LoadObjPalette(gUnk_0984A6D8, 0x20);
     }
+
     work->sprites[2].tiles = LoadObjTiles(gUnk_0976ED5A, 0x380);
     work->sprites[2].gfx = gUnk_09EF65AC;
     work->sprites[3].tiles = LoadObjTiles(gUnk_0976F0F6, 0xC0);

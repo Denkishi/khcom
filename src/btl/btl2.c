@@ -25,6 +25,7 @@ void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
         work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
         work->gfx = gUnk_08B22BA8;
     }
+
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 }
 
@@ -48,11 +49,14 @@ void task_btl_shadow_2(BtlShadowWork* work) {
             } else {
                 s32 sc = 0x100 - (actor->groundZ - actor->z) / 128;
                 sc = (gBtlWork->scale * sc) >> 8;
+
                 if (sc <= 127) {
                     sc = 128;
                 }
+
                 aff = AllocObjAffine(0, sc, sc, sc > 0x100);
             }
+
             WorldToScreen(&x, &y, actor->x, actor->y, actor->groundZ);
             DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim, actor->shadowPriority);
         }
@@ -157,6 +161,7 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
             AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
             break;
         }
+
         work->gfx3 = 0;
     } else {
         AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
@@ -203,6 +208,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     s32 flag;
 
     actor = gBtlWork->actor;
+
     if (actor == NULL) {
         return 0;
     }
@@ -235,11 +241,13 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         work->displayHp = actor->hp;
     } else if (work->displayHp < actor->hp) {
         work->displayHp += 3;
+
         if (work->displayHp > actor->hp) {
             work->displayHp = actor->hp;
         }
     } else if (work->displayHp > actor->hp) {
         work->displayHp -= 3;
+
         if (work->displayHp < actor->hp) {
             work->displayHp = actor->hp;
         }
@@ -392,6 +400,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
             v = work->hpRatio;
             break;
         }
+
         break;
     case 1:
     default:
@@ -421,6 +430,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
             v = work->hpRatio;
             break;
         }
+
         break;
     }
 
@@ -482,8 +492,10 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
             if (work->visible != 0) {
                 work->visible = 0;
             }
+
             return 1;
         }
+
         work->visible = 1;
         actor = gBtlWork->actor2;
     }
@@ -515,11 +527,13 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         }
     } else if (work->displayHp < actor->hp) {
         work->displayHp += 5;
+
         if (work->displayHp > actor->hp) {
             work->displayHp = actor->hp;
         }
     } else if (work->displayHp > actor->hp) {
         work->displayHp -= 5;
+
         if (work->displayHp < actor->hp) {
             work->displayHp = actor->hp;
         }
@@ -551,6 +565,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         } else {
             work->hpRatio = (work->displayHp << 8) / 560;
         }
+
         break;
     }
 
@@ -586,6 +601,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             gfx = gBHpgagEFrame40Eu;
             break;
         }
+
         bar = gBHpgagEFrame9Eu;
 #else
         gfx = gBHpgagEFrame12;
@@ -610,6 +626,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             gfx = gBHpgagEFrame39Eu;
             break;
         }
+
         bar = gBHpgagEFrame8Eu;
 #else
         gfx = gBHpgagEFrame11;
@@ -634,6 +651,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             gfx = gBHpgagEFrame38Eu;
             break;
         }
+
         bar = gBHpgagEFrame7Eu;
 #else
         gfx = gBHpgagEFrame10;
@@ -668,6 +686,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 gfx = gBHpgagEFrame6Eu;
                 break;
             }
+
             break;
         case LANGUAGE_SPANISH:
             switch (work->gaugeSize) {
@@ -692,6 +711,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 gfx = gBHpgagEFrame19Eu;
                 break;
             }
+
             break;
         case LANGUAGE_ITALIAN:
             switch (work->gaugeSize) {
@@ -716,6 +736,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 gfx = gBHpgagEFrame28Eu;
                 break;
             }
+
             break;
         case LANGUAGE_GERMAN:
         default:
@@ -741,8 +762,10 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 gfx = gBHpgagEFrame37Eu;
                 break;
             }
+
             break;
         }
+
         bar = gBHpgagEFrame0Eu;
 #else
         switch (work->gaugeSize) {
@@ -769,6 +792,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             gfx = gBHpgagEFrame6;
             break;
         }
+
         bar = gBHpgagEFrame0;
 #endif
         break;
@@ -818,6 +842,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         } else {
             aff = AllocObjAffine(0, v, 0x100, 0);
         }
+
         DrawSprite(217, 6, bar, work->tiles2, work->palette, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
     }
 }
@@ -842,6 +867,7 @@ void task_btl_pause_0(BtlPauseWork* work) {
         work->tiles = LoadObjTiles(gUnkEu_08B51BA8, 0x180);
         p = gUnkEu_09F5C1FC;
     }
+
     work->gfx = p[0];
     work->gfx2 = p[1];
 #else
@@ -866,6 +892,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
     }
 
     paused = gBtlWork->paused;
+
     if (paused != 0) {
         if (work->visible == 0) {
             FadeSetPaused(1);
@@ -976,6 +1003,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnkEu_09F5BE10, gUnkEu_09F5BE0C);
             break;
         }
+
         break;
     case LANGUAGE_FRENCH:
         switch (src->kind) {
@@ -1000,6 +1028,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnkEu_09F5C1E0, gUnkEu_09F5C1DC);
             break;
         }
+
         break;
     case LANGUAGE_GERMAN:
         switch (src->kind) {
@@ -1024,6 +1053,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnkEu_09F5C1F8, gUnkEu_09F5C1F4);
             break;
         }
+
         break;
     case LANGUAGE_ITALIAN:
         switch (src->kind) {
@@ -1048,6 +1078,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnkEu_09F5C1F0, gUnkEu_09F5C1EC);
             break;
         }
+
         break;
     case LANGUAGE_SPANISH:
     default:
@@ -1073,6 +1104,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnkEu_09F5C1E8, gUnkEu_09F5C1E4);
             break;
         }
+
         break;
     }
 
@@ -1152,6 +1184,7 @@ s32 task_btl_pop_1(BtlPopWork* work) {
     if (work->timer > 49) {
         return 0;
     }
+
     work->timer++;
     work->gfx = AnimUpdate(&work->anim);
     return 1;
@@ -1259,6 +1292,7 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     }
 
     actor = gBtlWork->actor;
+
     if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         WorldToScreen(&x, &y, actor->x - 768, actor->y, actor->z - 10240);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 2);
@@ -1269,11 +1303,13 @@ void task_btl_escape_2(BtlEscapeWork* work) {
 
     if (work->progressRatio > 0) {
         v = work->progressRatio * 2;
+
         if (v > 256) {
             aff = AllocObjAffine(0, v, 256, 1);
         } else {
             aff = AllocObjAffine(0, v, 256, 0);
         }
+
         DrawSprite(x, y, work->gfx3, work->tiles, work->palette, aff, 0, 1);
     }
 }
@@ -1394,7 +1430,6 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
 }
 
 #define DIST(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
-
 s32 task_btl_prize_1(BtlPrizeWork* work) {
     s32 hit;
     s32 near;
@@ -1544,6 +1579,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     if (work->actor->hp > work->actor->maxHp) {
                         work->actor->hp = work->actor->maxHp;
                     }
+
                     gGameState.progression.exp += work->exp;
                 }
 
@@ -1585,6 +1621,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
         if (work->timer > 60) {
             return 0;
         }
+
         work->timer++;
     }
 
@@ -1645,6 +1682,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     if (src->noTimeout != 0) {
         work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
     }
+
     work->bounceSpeed = 0x400;
     spd = 384;
     work->collected = 0;

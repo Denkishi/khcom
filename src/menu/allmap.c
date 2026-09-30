@@ -136,6 +136,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     } else {
         pal = gUnk_0984A0F8 + GetAllmapRoomPaletteOffset(work->room);
     }
+
     work->palette = LoadObjPalette(pal, 32);
 }
 
@@ -159,6 +160,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
         if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) != 0) {
             return;
         }
+
         x = work->x;
         y = work->y;
         g = 0;
@@ -222,6 +224,7 @@ u8 func_080D3A70(u8 a, u8 b) {
     if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) != 0) {
         return func_080D3564(a, b);
     }
+
     return 0;
 }
 
@@ -234,6 +237,7 @@ u8 func_080D3AB8(u8 a, u8 b) {
         if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 0;
         }
+
         if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 0;
         }
@@ -280,9 +284,11 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work) {
         work->gfx = gUnk_09EF64B4[0];
         return 1;
     }
+
     work->gfx = AnimUpdate(&work->anim);
     x = (work->pos.x * 24 + 16 - gAllmapCameraX) << 8;
     y = (work->pos.y * 24 + 11 - gAllmapCameraY) << 8;
+
     if (x != work->x || y != work->y) {
         work->x = x;
         work->y = y;
@@ -294,6 +300,7 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work) {
         ApproachValue(&work->drawY, work->y, work->moveSteps);
         work->moveSteps--;
     }
+
     return 1;
 }
 
@@ -312,6 +319,7 @@ void task_allmap_cursor_2(AllmapCursorWork* work) {
         x = work->drawX >> 8;
         y = work->drawY >> 8;
     }
+
     DrawSprite(x - 15, y - 22, work->gfx, work->tiles, work->palette, 0, 0, 49);
 }
 
@@ -332,6 +340,7 @@ s16 AllmapDrawRoomnameFrame(u16 a) {
     if (v < 0) {
         v = 0;
     }
+
     q = v / 8;
     base = GetBgScreenBase(2);
     dst = base + 28;
@@ -345,6 +354,7 @@ s16 AllmapDrawRoomnameFrame(u16 a) {
     RequestDma3Copy(p, dst, 32);
     return v - v % 8 / 2;
 }
+
 s32 GetAllmapRoomnamePaletteOffset(u8 a) {
     switch (GetRoomCardBackIndex(a)) {
     case 1:
@@ -413,6 +423,7 @@ void AllmapBarStartClose(AllmapBarWork* work) {
     if (work->steps == 0) {
         work->steps = 16;
     }
+
     LoadBgMap(3, gUnk_0983AD98, 0x500);
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
@@ -453,14 +464,17 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             work->steps = 16;
             work->state = 1;
         }
+
         break;
     case 1:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
 #ifdef VERSION_EU
             LoadBgMap(3, sUnkEu_09F80138[gLanguage], 0x500);
@@ -470,30 +484,37 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
             work->state = 2;
             gAllmapModeState = 2;
         }
+
         break;
     case 3:
         ApproachValue(&work->x, work->targetX, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             work->steps = 16;
             work->state = 4;
         }
+
         break;
     case 4:
         if (FadeIsActive() == 0 && work->fadeStarted == 0) {
             for (i = 0; i < 32; i++) {
                 FadeSetPaletteExcluded(i, 0);
             }
+
             AllmapBarFadeOut(work);
             work->fadeStarted = 1;
         }
+
         ApproachValue(&work->y, work->targetY, work->steps);
         ApproachValue(&work->y2, work->targetY2, work->steps);
         work->steps--;
+
         if (work->steps == 0) {
             gAllmapModeState = 0;
             return 0;
         }
+
         break;
     case 2:
         if (work->closing != 0) {
@@ -520,8 +541,10 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
             AllmapClearRoomnameFrame();
             SetAllmapReturnToMenu(1);
         }
+
         break;
     }
+
     return 1;
 }
 
@@ -529,6 +552,7 @@ void task_allmap_bar_2(AllmapBarWork* work) {
     if (work->state == 2) {
         return;
     }
+
 #ifdef VERSION_EU
     DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, 0,
         SPRITE_PRIORITY(3), 1000);
@@ -555,6 +579,7 @@ u8 AllmapHasDoorInfo(AllmapCursorPos a) {
         p.x = a.x + sAllmapDirDeltas[i][0];
         p.y = a.y + sAllmapDirDeltas[i][1];
         r = GetAllmapRoomAt(p);
+
         if (r != 255) {
             if (GetEventRoomKind(GetAllmapRoomAt(a)) == 2) {
                 v = func_080D3AB8(r, sAllmapReverseDoors[i]);
@@ -567,6 +592,7 @@ u8 AllmapHasDoorInfo(AllmapCursorPos a) {
             }
         }
     }
+
     return 0;
 }
 
@@ -683,6 +709,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
     for (i = 0; i < 32; i++) {
         FadeSetPaletteExcluded(i, 0);
     }
+
     work->palette2 = EwramAlloc(sizeof(ObjPalette));
     work->pos = *arg;
     work->room = GetAllmapRoomAt(*arg);
@@ -697,6 +724,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
         work->targetY = 0x4200;
         AllmapDoorinfoLoadDoors(work);
     }
+
     work->steps = 8;
     work->x = work->roomX << 8;
     work->y = work->roomY << 8;
@@ -723,6 +751,7 @@ s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
     if (work->closing != 0 && work->steps == 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -742,6 +771,7 @@ void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
             DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].sprite.gfx2, work->doors[i].sprite.tiles2, work->doors[i].sprite.palette2, 0, 0, i + 30);
         }
     }
+
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
 }
 
@@ -753,6 +783,7 @@ void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work) {
             DrawLayeredCardSprite(&work->doors[i].sprite, 0);
         }
     }
+
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
 }
 
@@ -770,6 +801,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
     if (work->closing == 0) {
         FadeToOriginal(FADE_MODE_BLACK, 8);
     }
+
     ReleaseObjTiles(work->tiles2);
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4 || GetEventRoomKind(work->room) == 2) {
@@ -793,6 +825,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
     for (i = 0; i < 32; i++) {
         FadeSetPaletteExcluded(i, 1);
     }
+
     FadeSetPaletteExcluded(10, 0);
     EwramFree(work->palette2);
 }
@@ -815,6 +848,7 @@ s32 task_allmap_pusha_1(AllmapPushaWork* work) {
         m4aSongNumStart(SONG_SYS_KETTEI);
         work->task = TaskCreate(&work->tasks, &gTaskDescAllmapDoorinfo, &work->cursor->pos);
     }
+
     work->y2 = gSineTable[(u8)work->angle] >> 8;
     work->angle += 16;
     TaskPoolUpdate(&work->tasks);
@@ -842,6 +876,7 @@ u8 IsStockMesDispActive(void) {
     if (gStockMesDispWork == NULL || IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task) == 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -865,6 +900,7 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
     } else {
         map = gAllmapBg1Map;
     }
+
     x8 = (a * 24 - ((AllmapState*)gUnk_0203C4B4)->originX) / 8;
     y8 = (b * 24 - ((AllmapState*)gUnk_0203C4B4)->originY) / 8;
     p.x = a;
@@ -894,6 +930,7 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
         }
     }
 }
+
 void InitAllmap(void) {
     s32 i;
     s32 j;
@@ -942,6 +979,7 @@ void InitAllmap(void) {
     ((AllmapState*)gUnk_0203C4B4)->cursorTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapCursor, &arg);
     func_080D53F8();
 }
+
 void AllmapUpdateCamera(AllmapState* s) {
     s32 tx;
     s32 ty;
@@ -966,6 +1004,7 @@ void AllmapUpdateCamera(AllmapState* s) {
     } else if (dy < -0x800) {
         dy = -0x800;
     }
+
     px = sAllmapCameraFixedX;
     py = sAllmapCameraFixedY;
     sAllmapCameraFixedX += dx;
@@ -978,9 +1017,11 @@ void AllmapUpdateCamera(AllmapState* s) {
     if ((py - sAllmapCameraFixedY >= 0 ? py - sAllmapCameraFixedY : sAllmapCameraFixedY - py) <= 7) {
         sAllmapCameraFixedY = ty;
     }
+
     gAllmapCameraX = sAllmapCameraFixedX >> 8;
     gAllmapCameraY = sAllmapCameraFixedY >> 8;
 }
+
 void UpdateAllmap(void) {
     s16 x;
     s16 y;
@@ -1027,6 +1068,7 @@ u16 func_080D53C4(void) {
     if ((GetKeysHeld() & R_BUTTON) != 0) {
         return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 7;
     }
+
     return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 8;
 }
 
@@ -1059,11 +1101,13 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
     for (i = 0; i < 32; i++) {
         if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomTasks[i]) != 0) {
             w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[i]->work;
+
             if (a.x == w->x && a.y == w->y) {
                 return i;
             }
         }
     }
+
     return MAP_ROOM_NONE;
 }
 
@@ -1072,6 +1116,7 @@ void AllmapCenterOnRoom(void) {
 
     w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[gAllmapCursorRoom]->work;
     ((AllmapState*)gUnk_0203C4B4)->scrollY = w->y * 24 - ((AllmapState*)gUnk_0203C4B4)->originY - 69;
+
     if (((AllmapState*)gUnk_0203C4B4)->scrollY < 0 || ((AllmapState*)gUnk_0203C4B4)->height <= 159) {
         ((AllmapState*)gUnk_0203C4B4)->scrollY = 0;
     } else if (((AllmapState*)gUnk_0203C4B4)->scrollY > ((AllmapState*)gUnk_0203C4B4)->height - 160) {
@@ -1081,7 +1126,9 @@ void AllmapCenterOnRoom(void) {
     if ((s16)(w->y * 24 - ((AllmapState*)gUnk_0203C4B4)->originY) <= 15) {
         ((AllmapState*)gUnk_0203C4B4)->scrollY -= 16;
     }
+
     ((AllmapState*)gUnk_0203C4B4)->scrollX = w->x * 24 - ((AllmapState*)gUnk_0203C4B4)->originX - 104;
+
     if (((AllmapState*)gUnk_0203C4B4)->scrollX < 0 || ((AllmapState*)gUnk_0203C4B4)->width <= 239) {
         ((AllmapState*)gUnk_0203C4B4)->scrollX = 0;
     } else if (((AllmapState*)gUnk_0203C4B4)->scrollX > ((AllmapState*)gUnk_0203C4B4)->width - 240) {
@@ -1122,15 +1169,19 @@ void AllmapHandleInput(void) {
         moved = 1;
         break;
     }
+
     r = GetAllmapRoomAt(p);
+
     if (r == 255) {
         return;
     }
+
     c->pos = p;
 
     if (((AllmapState*)gUnk_0203C4B4)->lastRoom == r) {
         return;
     }
+
     ((AllmapState*)gUnk_0203C4B4)->lastRoom = r;
     gAllmapCursorRoom = r;
 
@@ -1142,7 +1193,9 @@ void AllmapHandleInput(void) {
     if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomnameTask) != 0) {
         TaskKill(gUnk_0203C4B4, ((AllmapState*)gUnk_0203C4B4)->roomnameTask);
     }
+
     d = GetMapFloorRoom(r);
+
     if (d->nameId != 26 && (TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
         ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoomname, &d->nameId);
     } else {
@@ -1185,6 +1238,7 @@ void AllmapAddRoom(u8 a, u16 b, u16 c) {
     if (((AllmapState*)gUnk_0203C4B4)->minY > c) {
         ((AllmapState*)gUnk_0203C4B4)->minY = c;
     }
+
     arg.x = b;
     arg.y = c;
     arg.room = a;
@@ -1192,21 +1246,25 @@ void AllmapAddRoom(u8 a, u16 b, u16 c) {
     ((AllmapState*)gUnk_0203C4B4)->roomTasks[a] = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoom, &arg);
 
     room = d[0];
+
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, b + 1, c - 1);
     }
 
     room = d[1];
+
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, b - 1, c + 1);
     }
 
     room = d[2];
+
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, b + 1, c + 1);
     }
 
     room = d[3];
+
     if ((u8)(room + 3) > 2) {
         AllmapAddRoom(room, b - 1, c - 1);
     }
@@ -1217,17 +1275,21 @@ void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d) {
     u16 dy;
 
     ((AllmapState*)gUnk_0203C4B4)->height = (d - c) * 24 + 32;
+
     if (((AllmapState*)gUnk_0203C4B4)->height <= 159) {
         dy = (160 - ((AllmapState*)gUnk_0203C4B4)->height) / 2;
     } else {
         dy = 0;
     }
+
     ((AllmapState*)gUnk_0203C4B4)->width = (b - a) * 24 + 32;
+
     if (((AllmapState*)gUnk_0203C4B4)->width <= 239) {
         dx = (240 - ((AllmapState*)gUnk_0203C4B4)->width) / 2;
     } else {
         dx = 0;
     }
+
     ((AllmapState*)gUnk_0203C4B4)->originX = a * 24 - dx;
     ((AllmapState*)gUnk_0203C4B4)->originY = c * 24 - dy;
     AllmapCenterOnRoom();

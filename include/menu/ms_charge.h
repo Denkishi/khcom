@@ -2,7 +2,6 @@
 #define GUARD_MS_CHARGE_H
 
 #include "card_def_data.h"
-
 #include "registration_data.h"
 #include "map_card_data.h"
 #include "obj.h"
@@ -12,16 +11,11 @@
 #include "game_state.h"
 #include "anim.h"
 #include "mode.h"
-
 #include "card_description_data.h"
-
 #include "card_types.h"
-
 #include "ms_charge_api.h"
-
 #include "display.h"
 #include "engine_math.h"
-
 #include "text.h"
 #include "obj_api.h"
 #include "types.h"

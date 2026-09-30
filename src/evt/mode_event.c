@@ -7,7 +7,6 @@
 #include "player_progression.h"
 #include "songs.h"
 
-
 TaskPool gEventTaskPool;
 u8 gEventPaused;
 u32 gEventId;
@@ -83,6 +82,7 @@ void Event_0(s32 arg) {
     ResetMessageWindowFlags();
     gEventEndStep = 0;
 }
+
 void EventDebugUpdate(void) {
     if (gEventState == NULL) {
         ModeRequest(&gModeEventselect, 0);
@@ -119,29 +119,37 @@ void EventUpdate(void) {
     UpdatePlayTime();
     TaskPoolUpdate(&gEventTaskPool);
     TaskPoolDraw(&gEventTaskPool);
+
     if (gEventState->running != 0) {
         return;
     }
+
     if (gEventEndStep == 0) {
         ShowEventEndMessage();
         gEventEndStep = 1;
     }
+
     if (gEventEndStep != 1) {
         return;
     }
+
     if (IsMessageWindowOpen() != 0) {
         return;
     }
+
     func_08062D3C();
+
     if (IsMessageWindowAnswerYes() == 1) {
         func_0806250C();
         SaveAfterEvent();
         return;
     }
+
     func_08061FC8();
     func_0806250C();
     func_080629F8();
     func_08062D20();
+
     if (gEventState->askedYesNo != 0) {
         if (gEventState->answerYes == 0) {
             if (func_080629CC() == 0) {
@@ -151,8 +159,10 @@ void EventUpdate(void) {
         } else {
             func_0806297C();
         }
+
         return;
     }
+
     if (p->unk_1A != 0) {
 #ifdef VERSION_EU
         if (gEventId == 148) {
@@ -164,8 +174,10 @@ void EventUpdate(void) {
             AdvanceFloorStory();
             RequestMapMode();
         }
+
         return;
     }
+
     if (p->nextEvent != 0xFFFF) {
         switch (p->nextEvent) {
         case 12:
@@ -211,8 +223,10 @@ void EventUpdate(void) {
             ModeRequest(&gModeEvent, p->nextEvent);
             break;
         }
+
         return;
     }
+
     if (p->startsBattle != 0) {
         if (p->battleId == 122) {
             gGameState.battleStage = BATTLE_STAGE_HALLOWEEN_TOWN;
@@ -225,23 +239,28 @@ void EventUpdate(void) {
         } else if (p->battleId == 124) {
             gGameState.battleStage = BATTLE_STAGE_AGRABAH;
         }
+
         ModeRequest(&gModeBattle, p->battleId);
         return;
     }
+
     if (p->toTitle != 0) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
+
     if (p->toCopyright != 0) {
         ModeRequest(&gModeCopyright1, 0);
         return;
     }
+
     if (p->unk_1E != 0) {
         AdvanceFloorStory();
         ModeRequest(&gModeMapFld, 0);
         return;
     }
+
     if (p->unk_28 != 0xFFFF) {
         switch (p->unk_28) {
         case 2:
@@ -276,8 +295,10 @@ void EventUpdate(void) {
             ModeRequest(&gModeDummy, p->unk_28);
             break;
         }
+
         return;
     }
+
     if (p->unk_2A != 0) {
         AdvanceFloorStory();
         RequestMapMode();
@@ -553,6 +574,7 @@ void ShowEventEndMessage(void) {
         break;
     }
 }
+
 void func_08061FC8(void) {
     switch (gEventId) {
     case 0:
@@ -690,6 +712,7 @@ void func_08061FC8(void) {
         break;
     }
 }
+
 void func_0806250C(void) {
     switch (gEventId) {
     case 0:
@@ -800,6 +823,7 @@ void func_0806250C(void) {
         break;
     }
 }
+
 void func_0806297C(void) {
     EventSequenceDef* m = gEventSequenceDefs[gEventId];
 
@@ -814,6 +838,7 @@ void func_0806297C(void) {
         break;
     }
 }
+
 u8 func_080629CC(void) {
     switch (gEventId) {
     case 0x44:
@@ -822,8 +847,10 @@ u8 func_080629CC(void) {
         RequestMapMode();
         return 1;
     }
+
     return 0;
 }
+
 void func_080629F8(void) {
     switch (gEventId) {
     case 2:
@@ -902,10 +929,12 @@ void SaveAfterEvent(void) {
         } else {
             SaveWriteFileLarge(0);
         }
+
         EnterExitHall();
         break;
     }
 }
+
 void func_08062D20(void) {
     switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
@@ -918,6 +947,7 @@ void func_08062D20(void) {
         break;
     }
 }
+
 void func_08062D3C(void) {
     switch (gEventId) {
     case 0x43:

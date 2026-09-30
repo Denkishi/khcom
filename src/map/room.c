@@ -133,43 +133,54 @@ u8 task_room_name_1(RoomNameWork* work) {
     switch (work->state) {
     case 0:
         work->timer++;
+
         if (work->timer > 0x27) {
             work->timer = 0;
             work->state++;
         }
+
         break;
     case 1:
         work->timer++;
+
         if (work->timer > 1) {
             work->timer = 0;
             work->y2 -= 0x99;
             work->scaleY += 0x19;
+
             if (work->scaleY > 0xFF) {
                 work->scaleY = 0x100;
                 work->state++;
             }
         }
+
         break;
     case 2:
         work->timer++;
+
         if (work->timer > 0xB3) {
             work->timer = 0;
             work->state++;
         }
+
         break;
     case 3:
         work->timer++;
+
         if (work->timer > 1) {
             work->timer = 0;
             work->y2 += 0x99;
             work->scaleY -= 0x19;
+
             if (work->scaleY <= 0x19) {
                 work->scaleY = 0x19;
                 return 0;
             }
         }
+
         break;
     }
+
     return 1;
 }
 

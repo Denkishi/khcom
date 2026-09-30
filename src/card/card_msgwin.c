@@ -197,6 +197,7 @@ u8 UpdateCardMsgwinLoadText(CardMsgWinWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* w, void* a) {
     CardMessageDef* sel;
     const MsgFaceAnim* e;
@@ -222,6 +223,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* w, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinOpen);
     return 1;
 }
+
 static void msgwin_2(CardMsgWinWork* w) {
     void** p;
 
@@ -338,14 +340,17 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
     const MsgFaceAnim* e;
     u8* pal;
 
     w->gfx2 = AnimUpdate(&w->anim2);
     w->gfx = AnimUpdate(&w->anim);
+
     if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_KETTEI);
+
         if (w->nextText != NULL) {
 #ifdef VERSION_JP
             *((u8*)w + offsetof(CardMsgWinWork, charCount)) = LayoutCardMsgGlyphsPageSjis(gMsgwinTextX[w->messageDef->positionIndex],
@@ -359,9 +364,11 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
             w->charTimer = 0;
             w->shownChars = 0;
             e = gMsgFaceAnims[w->messageDef->portraitId];
+
             if (e[w->messageDef->expressionId].animCount > 1) {
                 AnimStart(&w->anim, 1, e[w->messageDef->expressionId].animFlags);
             }
+
             w->waitIconVisible = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinTyping);
         } else if (!(w->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
@@ -398,6 +405,7 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinChoice);
         }
     }
+
     return 1;
 }
 
@@ -484,11 +492,11 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* w, void* a) {
 
     return 1;
 }
+
 u8 UpdateCardMsgwinPersistent(CardMsgWinWork* w, void* a) {
 #ifndef VERSION_JP
     TextChar** p;
 #endif
-
     w->gfx = AnimUpdate(&w->anim);
 
     if (w->keepOpen == 0) {

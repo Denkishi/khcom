@@ -2,9 +2,7 @@
 #define GUARD_MODE_COPYRIGHT1_H
 
 #include "registration_data.h"
-
 #include "save_api.h"
-
 #include "display.h"
 #include "types.h"
 #include "save.h"

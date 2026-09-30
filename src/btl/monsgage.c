@@ -92,6 +92,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             if (gBtlWork->flags & BTL_FLAG_ENEMY_DEFEATED) {
                 gBtlWork->flags &= ~BTL_FLAG_ENEMY_DEFEATED;
                 work->value += 20;
+
                 if (work->value > 255) {
                     work->value = 256;
                     work->state = 2;
@@ -103,6 +104,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
                 work->timer = 0;
                 break;
             }
+
             work->timer++;
 #else
             if (work->timer > 120) {
@@ -112,6 +114,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
                 work->timer++;
             }
 #endif
+
             break;
         case 1:
             if (work->timer == 0) {
@@ -126,6 +129,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
 
             if ((work->timer % 4) == 0) {
                 work->value--;
+
                 if (work->value < 0) {
                     work->value = 0;
                 }
@@ -139,6 +143,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
 #else
                 work->value += 25;
 #endif
+
                 if (work->value <= 255) {
                     work->state = 0;
                 } else {
@@ -148,6 +153,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             } else {
                 work->timer++;
             }
+
             break;
         case 2:
             if (work->timer == 0) {
@@ -166,11 +172,14 @@ s32 task_monsgage_1(MonsgageWork* work) {
             if (work->timer > 99 && gBtlWork->enemyCount == 0) {
                 gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
             }
+
             work->timer++;
             break;
         }
+
         work->shownValue += (work->value - work->shownValue) >> 2;
     }
+
     return 1;
 }
 
@@ -187,6 +196,7 @@ void task_monsgage_2(MonsgageWork* work) {
                 } else {
                     affine = AllocObjAffine(0, work->shownValue * 2, 256, 0);
                 }
+
                 DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
             }
         }

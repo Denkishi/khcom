@@ -338,7 +338,6 @@ static const BattleAttackDef sBattleAttackDefs[330] = {
     { 384, 307, 256, 12, BgFxStartEnemyHit, ATTACK_FLAG_INFLICT_STUN | ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_ELEMENT_PHYSICAL },
 };
 
-
 static ListPool gUnk_020348E8;
 static ListPool gUnk_020348F8;
 static ListPool gUnk_02034908;
@@ -358,27 +357,35 @@ u8 CanAttackBoxHitBtlObj(BtlObj* p, s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     if (f & (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_UNHITTABLE)) {
         return 0;
     }
+
     if (x - (a << 8) > p->x + (p->radiusX << 8)) {
         return 0;
     }
+
     if (x + (a << 8) < p->x - (p->radiusX << 8)) {
         return 0;
     }
+
     if (y - (b << 8) > p->y + (p->radiusY << 8)) {
         return 0;
     }
+
     if (y + (b << 8) < p->y - (p->radiusY << 8)) {
         return 0;
     }
+
     if (z - (c << 8) > p->z) {
         return 0;
     }
+
     if (z + (c << 8) < p->z - (p->height << 8)) {
         return 0;
     }
+
     if (q->invincibleTimer > 0) {
         return 0;
     }
+
     return 1;
 }
 
@@ -393,23 +400,29 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     s32 scale = gBtlWork->damageScale;
     BtlObj* target;
     BtlObj* source;
+
     if (hit->parent != NULL) {
         target = hit->parent;
     } else {
         target = hit;
     }
+
     target->hitFlags = attack->flags;
     target->hitAttack = index;
+
     if (attack->flags & ATTACK_FLAG_WARP_AWAY) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
             CreateBtlPopTask(hit, 0);
             hit->invincibleTimer = 30;
             return 2;
         }
+
         if (attack->flags & ATTACK_FLAG_NO_EXP) target->exp = 0;
+
         target->flags |= BTLOBJ_FLAG_WARP_PENDING;
         return 0;
     }
+
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) source = gBtlWork->actor;
         else source = gRikuBtlWork->actor;
@@ -420,63 +433,85 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) source = gBtlWork->actor;
         else source = gBtlWork->actor3;
     }
+
     if (source->btl != NULL) {
         switch (source->btl->hcEffect) {
         case 35:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) != ATTACK_FLAG_KIND_WEAPON) break;
+
             if (hit->flags & BTLOBJ_FLAG_INVULNERABLE) break;
+
             if ((attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) && (hit->flags & BTLOBJ_FLAG_GUARD_PHYSICAL)) break;
+
             if ((attack->flags & ATTACK_FLAG_ELEMENT_NEUTRAL) && (hit->flags & BTLOBJ_FLAG_GUARD_NEUTRAL)) break;
+
             if ((attack->flags & ATTACK_FLAG_ELEMENT_FIRE) && (hit->flags & BTLOBJ_FLAG_IMMUNE_FIRE)) break;
+
             if ((attack->flags & ATTACK_FLAG_ELEMENT_BLIZZARD) && (hit->flags & BTLOBJ_FLAG_IMMUNE_BLIZZARD)) break;
+
             if ((attack->flags & ATTACK_FLAG_ELEMENT_THUNDER) && (hit->flags & BTLOBJ_FLAG_IMMUNE_THUNDER)) break;
+
             if (hit->badStatus == BAD_STATUS_STOP) break;
+
             {
                 s16 drain = target->hp >> 3;
+
                 if (drain <= 0) drain = 1;
                 else if (drain > 20) drain = 20;
+
                 source->hp += drain;
                 target->hp -= drain;
+
                 if (target->hp <= 0) target->hp = 1;
+
                 if (source->hp > source->maxHp) source->hp = source->maxHp;
+
                 CreateBtlPopTask(source, 10);
                 target->exp -= target->exp >> 2;
             }
+
             break;
         case 43:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
+
             break;
         case 8:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON && source->hp < (source->maxHp >> 2)) {
                 scale = scale != 0 ? (scale * 512) >> 8 : 512;
             }
+
             break;
         case 4:
             if (attack->flags & ATTACK_FLAG_ELEMENT_FIRE) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
+
             break;
         case 11:
             if (attack->flags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
+
             break;
         case 12:
             if (attack->flags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 scale = scale != 0 ? (scale * 384) >> 8 : 384;
             }
+
             break;
         case 38:
             if (attack->flags & ATTACK_FLAG_KIND_MAGIC) {
                 scale = scale != 0 ? (scale * 332) >> 8 : 332;
             }
+
             break;
         case 39:
             if (attack->flags & ATTACK_FLAG_KIND_SUMMON) {
                 scale = scale != 0 ? (scale * 332) >> 8 : 332;
             }
+
             break;
         case 36:
             if ((attack->flags & (ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_IS_SLEIGHT)) == ATTACK_FLAG_KIND_WEAPON) {
@@ -488,9 +523,11 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
                     scale = scale != 0 ? (scale * 512) >> 8 : 512;
                 }
             }
+
             break;
         }
     }
+
     if (target->btl != NULL) {
         switch (target->btl->hcEffect) {
         case 14:
@@ -498,18 +535,22 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
                 CreateBtlPopTask(hit, 0);
                 scale = scale != 0 ? (scale * 128) >> 8 : 128;
             }
+
             break;
         case 46:
             target->btl->hcEffectCount--;
+
 #ifdef VERSION_EU
             if (attack->flags & ATTACK_FLAG_KIND_MAGIC)
 #endif
             {
                 scale = scale != 0 ? (scale * 128) >> 8 : 128;
             }
+
             break;
         }
     }
+
     if (attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) {
         if (hit->flags & BTLOBJ_FLAG_GUARD_PHYSICAL) {
             switch ((u32)hit->kind) {
@@ -523,6 +564,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
                 m4aSongNumStart(SONG_BTL_RB_GARD);
                 break;
             }
+
             hit->invincibleTimer = 30;
             CreateBtlPopTask(hit, 0);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
@@ -548,6 +590,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
                 m4aSongNumStart(SONG_BTL_RB_GARD);
                 break;
             }
+
             hit->invincibleTimer = 30;
             CreateBtlPopTask(hit, 0);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
@@ -566,6 +609,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             AbsorbAttack(target, source, attack);
             return 1;
         }
+
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_FIRE) {
             CreateBtlPopTask(hit, 0);
             hit->invincibleTimer = 30;
@@ -584,6 +628,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             AbsorbAttack(target, source, attack);
             return 1;
         }
+
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BLIZZARD) {
             CreateBtlPopTask(hit, 0);
             hit->invincibleTimer = 30;
@@ -602,6 +647,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             AbsorbAttack(target, source, attack);
             return 1;
         }
+
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_THUNDER) {
             CreateBtlPopTask(hit, 0);
             hit->invincibleTimer = 30;
@@ -621,19 +667,24 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         }
+
         hit->flags |= BTLOBJ_FLAG_STOP_PENDING;
+
         if (scale == 0) hit->damage = ((u32)attack->power * 15) >> 6;
         else hit->damage = (((attack->power * 60) >> 8) * scale) >> 8;
+
         gBtlWork->pendingHitStop = (u8)attack->hitStop;
         hit->invincibleTimer = 30;
         return 1;
     }
+
     if (hit->flags & BTLOBJ_FLAG_INVULNERABLE) {
         CreateBtlPopTask(hit, 0);
         hit->invincibleTimer = 30;
         gBtlWork->hitStop = (u8)attack->hitStop;
         return 1;
     }
+
     if (attack->flags & ATTACK_FLAG_INFLICT_STUN) {
         target->flags |= BTLOBJ_FLAG_STUN_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_TERROR) {
@@ -642,6 +693,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         }
+
         target->flags |= BTLOBJ_FLAG_TERROR_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_CONFUSE) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_CONFUSE) {
@@ -649,6 +701,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         }
+
         target->flags |= BTLOBJ_FLAG_CONFUSE_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_BIND) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BIND) {
@@ -656,21 +709,26 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             hit->invincibleTimer = 30;
             return 2;
         }
+
         target->flags |= BTLOBJ_FLAG_BIND_PENDING;
     }
+
     if (attack->flags & ATTACK_FLAG_INFLICT_GRAVITY) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_GRAVITY) {
             CreateBtlPopTask(hit, 0);
             hit->invincibleTimer = 30;
             return 2;
         }
+
         target->flags |= BTLOBJ_FLAG_GRAVITY_PENDING;
+
         if (attack->flags & ATTACK_FLAG_ELEMENT_NEUTRAL) {
             if (scale == 0) target->damage = (source->attack * attack->power) >> 8;
             else target->damage = (((source->attack * attack->power) >> 8) * scale) >> 8;
         } else {
             if (scale == 0) target->damage = (target->hp * attack->power) >> 8;
             else target->damage = (((target->hp * attack->power) >> 8) * scale) >> 8;
+
             if (target->flags & BTLOBJ_FLAG_PLAYER) {
                 target->damage = (target->damage * 76) >> 8;
             }
@@ -678,8 +736,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else {
         if (scale == 0) target->damage = (source->attack * attack->power) >> 8;
         else target->damage = (((source->attack * attack->power) >> 8) * scale) >> 8;
+
         if (target->damage == 0 && attack->power > 0) target->damage = 1;
     }
+
     if (target->btl != NULL && target->btl->hcEffect == 26) {
         if (target->hp > 1 && target->hp - target->damage <= 0) {
             target->damage = target->hp - 1;
@@ -688,10 +748,12 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             target->btl->hcEffectCount--;
         }
     }
+
     target->flags |= BTLOBJ_FLAG_DAMAGE_PENDING;
     gBtlWork->pendingHitStop = (u8)attack->hitStop;
     target->knockbackSpeed = attack->knockbackSpeed;
     target->knockbackLift = attack->knockbackLift;
+
     if (attack->flags & ATTACK_FLAG_FORWARD_KNOCKBACK) {
         if (source->flags & BTLOBJ_FLAG_FACING_LEFT) target->angle = 192;
         else target->angle = 64;
@@ -700,8 +762,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else {
         target->angle = GetAngle(source->x, source->y, target->x, target->y);
     }
+
     return 1;
 }
+
 u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     BtlObj* o;
 
@@ -719,6 +783,7 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
         } else {
             o = gBtlWork->actor;
         }
+
         if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
             return 1;
         }
@@ -729,15 +794,19 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
             if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
                 return 1;
             }
+
             o = ListPoolNext(&o->node);
         }
+
         return 0;
     } else {
         o = gBtlWork->actor;
+
         if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
             return 1;
         }
     }
+
     return 0;
 }
 
@@ -774,6 +843,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
         } else {
             o = gBtlWork->actor;
         }
+
         if (CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
             res = ResolveAttackHit(o, a);
 
@@ -782,6 +852,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
                     t->hitEffect(o->x, o->y, o->z);
                 }
             }
+
             return res;
         }
     } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
@@ -795,6 +866,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
                 o = ListPoolNext(&o->node);
                 continue;
             }
+
             r2 = ResolveAttackHit(o, a);
 
             if (r2 == 1) {
@@ -826,10 +898,12 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
                 sz /= n;
                 t->hitEffect(sx, sy, sz);
             }
+
             return 1;
         }
     } else {
         o = gBtlWork->actor;
+
         if (CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
             res = ResolveAttackHit(o, a);
 
@@ -838,6 +912,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
                     t->hitEffect(o->x, o->y, o->z);
                 }
             }
+
             return res;
         }
     }
@@ -886,6 +961,7 @@ void* ColliderGetPool(u32 type) {
     case 12:
         return &gUnk_02034908;
     }
+
     return &gUnk_02034918;
 }
 
@@ -915,12 +991,14 @@ void ColliderInit(Collider* p, u32 type, u16 r, u16 h) {
         p->flags |= COLLIDER_FLAG_IS_PLATFORM;
         break;
     }
+
     ListNodeInit(&p->node, pool, p);
     ListPoolAppend(&p->node, pool);
 }
 
 void ColliderUnregister(Collider* p) {
     Collider* q = p->self;
+
     if (q == p) {
         ListPoolRemove(&q->node, ColliderGetPool(q->type));
     }
@@ -934,6 +1012,7 @@ void ColliderSetPosition(Collider* p, s32 a, s32 b, s32 c) {
 
 void ColliderClearPoolContacts(ListPool* pool) {
     Collider* p = ListPoolFirst(pool);
+
     while (p != NULL) {
         p->colliding = 0;
         p->touchedTypes = 0;
@@ -1097,5 +1176,6 @@ u8 ColliderIsTouchingType(Collider* p, s32 bit) {
     if (p->touchedTypes & (1 << bit)) {
         return 1;
     }
+
     return 0;
 }

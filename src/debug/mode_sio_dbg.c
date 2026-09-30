@@ -211,6 +211,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgLevel1P++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x24, 2, gSioDbgLevel1P);
         break;
     case 1:
@@ -225,6 +226,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C4 += 15;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x2D, 2, gUnk_0203C3C4);
         break;
     case 2:
@@ -239,6 +241,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgCp += 25;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x36, 2, gSioDbgCp);
         break;
     case 3:
@@ -253,6 +256,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3CC++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x3F, 2, gUnk_0203C3CC);
         break;
     case 4:
@@ -267,6 +271,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgLoseCount1P++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x48, 2, gSioDbgLoseCount1P);
         break;
     case 6:
@@ -281,6 +286,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgLevel2P++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x5A, 2, gSioDbgLevel2P);
         break;
     case 7:
@@ -295,6 +301,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgHp2P += 15;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x63, 2, gSioDbgHp2P);
         break;
     case 8:
@@ -309,6 +316,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C8 += 25;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x6C, 2, gUnk_0203C3C8);
         break;
     case 9:
@@ -323,6 +331,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgWinCount2P++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x75, 2, gSioDbgWinCount2P);
         break;
     case 10:
@@ -337,6 +346,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3D4++;
             }
         }
+
         DebugTextPrintNumber(0x78, 0x7E, 2, gUnk_0203C3D4);
         break;
 #else
@@ -352,6 +362,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C8++;
             }
         }
+
         DebugTextPrintNumber(0x64, 0x24, 2, gUnk_0203C3C8);
         break;
     case 1:
@@ -366,6 +377,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3CC += 5;
             }
         }
+
         DebugTextPrintNumber(0x64, 0x2D, 2, gUnk_0203C3CC);
         break;
     case 2:
@@ -380,6 +392,7 @@ void mode_sio_dbg_flg_1(void) {
                 gSioDbgCp += 5;
             }
         }
+
         DebugTextPrintNumber(0x64, 0x36, 2, gSioDbgCp);
         break;
     case 3:

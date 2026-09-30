@@ -5,11 +5,9 @@
 #include "battle_localized_data.h"
 #include "battle_localized_assets.h"
 #include "system_state.h"
-
 #include "map_api.h"
 #include "msg_api.h"
 #include "mode.h"
-
 #include "text.h"
 #include "monsgage.h"
 #include "obj_api.h"

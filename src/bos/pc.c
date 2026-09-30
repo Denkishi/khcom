@@ -14,6 +14,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
 
     if (!(gBtlWork->flags & 0x100000)) {
         obj = work->actor;
+
         if (obj->z >= 0) {
             work->grounded = 1;
 
@@ -21,6 +22,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
                 if (work->groundFrames % 60 == 0) {
                     obj->flags |= BTLOBJ_FLAG_HAZARD_PENDING;
                 }
+
                 work->groundFrames++;
             } else {
                 work->timer--;
@@ -37,6 +39,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
             }
         }
     }
+
     return 1;
 }
 
@@ -49,6 +52,7 @@ void CloudJumpOffset(CloudWork* work, s16 a, s32 b) {
     } else {
         work->base.targetX = obj->x + (a << 8);
     }
+
     w->base.targetY = obj->y;
     w->base.state = 0x19;
     w->base.stateTimer = 0;
@@ -95,9 +99,11 @@ s32 CloudTryJumpAway(CloudWork* work) {
             } else {
                 CloudJumpOffset(work, -0x50, 0x500);
             }
+
             return 1;
         }
     }
+
     return 0;
 }
 

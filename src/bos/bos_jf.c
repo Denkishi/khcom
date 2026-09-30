@@ -121,6 +121,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
         q->bossZ = sub->z;
     }
 }
+
 u8 task_bos_jf_1(JfWork* work) {
     BtlObj* sub = &work->sub;
     BtlWork* q;
@@ -264,6 +265,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (x > lo) {
                 if (*a <= v2) {
                     *out = v2;
+
                     if (x > hi - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -274,6 +276,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             } else {
                 if (*a <= v1) {
                     *out = v1;
+
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -290,6 +293,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (x <= lo) {
                 if (*a <= v1) {
                     *out = v1;
+
                     if (x > lo - 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -305,6 +309,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
                 if (*a <= v3) {
                     *out = v3;
+
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -324,6 +329,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
             if (*a <= v1) {
                 *out = v1;
+
                 if (x > lo - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
@@ -352,6 +358,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
             if (*a <= v2) {
                 *out = v2;
+
                 if ((x < lo + 0x1000) || (x > hi - 0x1000))
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
@@ -378,6 +385,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (x < hi) {
                 if (*a <= v2) {
                     *out = v2;
+
                     if (x < lo + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -388,6 +396,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             } else {
                 if (*a <= v3) {
                     *out = v3;
+
                     if (x < hi + 0x1000)
                         gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
@@ -407,6 +416,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
             if (*a <= v2) {
                 *out = v2;
+
                 if (x < lo + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
@@ -428,6 +438,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
             if (*a <= v2) {
                 *out = v2;
+
                 if (x > hi - 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
@@ -447,6 +458,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
 
             if (*a <= v3) {
                 *out = v3;
+
                 if (x < hi + 0x1000)
                     gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
@@ -612,6 +624,7 @@ void BosJfDrawPillars(void) {
     RequestMapRowsCopy(gBosJfPillarMaps[0][gBosJfRightPillarLevel], gBosJfMapBuffer + 0x268, 7, 0x17);
     SetBgMapBlocks(0, gBosJfMapBlocks, 2, 2);
 }
+
 void BosJfStartShake(s16 a) {
     gBosJfShakeActive = 1;
     gBosJfShakeStep = 0;
@@ -668,6 +681,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, &(arg = work->jf)->sub);
 }
+
 u8 task_bos_jf_lamp_1(JfLampWork* work) {
     BtlObj* sub = &work->jf->sub;
     JfWork* jf = work->jf;
@@ -812,6 +826,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 work->state = 2;
             }
         }
+
         break;
     case 5:
         break;
@@ -906,6 +921,7 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
             } else {
                 r = 0x21800;
             }
+
             break;
         case 0:
         case 2:
@@ -940,6 +956,7 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
         } else {
             r = 0x1F400;
         }
+
         break;
     case 1:
     case 4:

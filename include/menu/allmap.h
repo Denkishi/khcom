@@ -2,22 +2,14 @@
 #define GUARD_ALLMAP_H
 
 #include "registration_data.h"
-
 #include "poo_api.h"
-
 #include "obj.h"
-
 #include "field_state.h"
-
 #include "allmap_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "task.h"
-
 #include "save_api.h"
-
 #include "text.h"
 #include "obj_api.h"
 #include "display.h"

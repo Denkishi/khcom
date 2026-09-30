@@ -2,7 +2,6 @@
 #define GUARD_MODE_MOVIE_H
 
 #include "registration_data.h"
-
 #include "movie.h"
 #include "movie_text.h"
 #include "msg_api.h"
@@ -41,6 +40,7 @@ extern MovieSub* volatile gMovieSubLower;
 extern MovieSub* gMovieSubs;
 extern volatile s16 gMovieSubUpperTimer;
 extern volatile u16 gMovieSubUpperLength;
+
 enum MovieFlag {
     MOVIE_FLAG_UPPER_SUB_PENDING = 0x1,
     MOVIE_FLAG_LOWER_SUB_PENDING = 0x2,

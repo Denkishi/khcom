@@ -116,34 +116,47 @@ u8 LevelUp(void) {
         return 0;
     }
 }
+
 s32 LevelUpMaxHp(void) {
     gGameState.progression.maxHp += 15;
+
     if (gGameState.progression.maxHp > 560) {
         gGameState.progression.maxHp = 560;
     }
+
     return 15;
 }
+
 s32 LevelUpCp(void) {
     gGameState.progression.cp += 25;
+
     if (gGameState.progression.cp > 9999) {
         gGameState.progression.cp = 9999;
     }
+
     return 25;
 }
+
 s32 LevelUpDp(void) {
     gGameState.progression.dp += 2;
+
     if (gGameState.progression.dp > 999) {
         gGameState.progression.dp = 999;
     }
+
     return 2;
 }
+
 s32 LevelUpAp(void) {
     gGameState.progression.ap += 1;
+
     if (gGameState.progression.ap > 999) {
         gGameState.progression.ap = 999;
     }
+
     return 1;
 }
+
 void AddExp(u16 a) {
     PlayerProgression* p = &gGameState.progression;
 
@@ -156,6 +169,7 @@ u8 CanLevelUp(void) {
     if (p->exp >= p->nextExp) {
         return 1;
     }
+
     return 0;
 }
 
@@ -163,6 +177,7 @@ const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
     if (i > 0x35) {
         return 0;
     }
+
     return &sEnemyBaseStats[i];
 }
 
@@ -205,10 +220,13 @@ u8 IsStockLearned(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.learnedStocks2);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -224,6 +242,7 @@ u8 IsCardKindObtained(s32 a) {
     if (gGameState.progression.obtainedCardKinds & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -239,10 +258,13 @@ u8 IsLinkStockLearned(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkLearnedStocks2);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -258,10 +280,13 @@ u8 IsLinkPartnerStockLearned(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, linkPartnerLearnedStocks2);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -277,10 +302,13 @@ u8 IsStockNew(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.newStocks2);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -301,6 +329,7 @@ void ClearStockNew(u32 a) {
             q = (u8*)&gGameState;
             q += offsetof(GameState, progression.newStocks2);
         }
+
         p = (u64*)q;
         *p &= ~(1LL << a);
     }
@@ -321,9 +350,11 @@ void SetJiminyFlag(u32 a) {
         state->progression.jiminyFlags[7] = -1;
         return;
     }
+
     if (IsJiminyFlagSet(a)) {
         return;
     }
+
     if (a <= 0x3F) {
         state = &gGameState;
         state->progression.jiminyFlags[0] |= 1ULL << a;
@@ -366,10 +397,13 @@ u8 IsJiminyFlagSet(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[3]);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -393,10 +427,13 @@ u8 IsJiminyFlagNew(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[7]);
     }
+
     p = (u64*)q;
+
     if (*p & (1LL << a)) {
         return 1;
     }
+
     return 0;
 }
 
@@ -430,6 +467,7 @@ void ClearJiminyFlagNew(u32 a) {
         q = (u8*)&gGameState;
         q += offsetof(GameState, progression.jiminyFlags[7]);
     }
+
     p = (u64*)q;
     *p &= ~(1LL << a);
 }

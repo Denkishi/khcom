@@ -119,9 +119,11 @@ s32 HandleMovieFrame(s32 arg) {
             gMovieSubLowerTimer--;
         }
     }
+
     gMovieFrame++;
     return 0;
 }
+
 void MovieVBlankIntr(void) {
     u16* oam;
 #ifndef VERSION_JP
@@ -135,6 +137,7 @@ void MovieVBlankIntr(void) {
     if (gMovieFlags & MOVIE_FLAG_PLAYING) {
         REG_DISPCNT = (DISPCNT_MODE_3 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON);
         MovieUpdate();
+
         if (gMovieSubs != NULL) {
             if (gMovieFlags & MOVIE_FLAG_UPPER_SUB_PENDING) {
                 gMovieFlags &= ~MOVIE_FLAG_UPPER_SUB_PENDING;
@@ -145,6 +148,7 @@ void MovieVBlankIntr(void) {
                 CopyLatinGlyphsToVram(gMovieSubUpper->text, gMovieSubUpperWidths, 0);
 #endif
             }
+
             if (gMovieFlags & MOVIE_FLAG_LOWER_SUB_PENDING) {
                 gMovieFlags &= ~MOVIE_FLAG_LOWER_SUB_PENDING;
                 gMovieSubLowerAlpha = 0;
@@ -154,10 +158,12 @@ void MovieVBlankIntr(void) {
                 CopyLatinGlyphsToVram(gMovieSubLower->text, gMovieSubLowerWidths, 0x100);
 #endif
             }
+
             if (gMovieSubUpperTimer > 0 || gMovieSubUpperAlpha != 0 ||
                 gMovieSubLowerTimer > 0 || gMovieSubLowerAlpha != 0) {
                 REG_DISPCNT |= DISPCNT_OBJ_ON;
                 REG_BLDCNT = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
+
                 if (gMovieSubUpperAlpha < 16) {
                     if (gMovieSubUpperAlpha == 0) {
                         attr0 = OAM_DISABLE;
@@ -168,6 +174,7 @@ void MovieVBlankIntr(void) {
                 } else {
                     attr0 = 0;
                 }
+
                 if (gMovieSubLowerAlpha < 16) {
                     if (gMovieSubLowerAlpha == 0) {
                         attr1 = OAM_DISABLE;
@@ -178,16 +185,20 @@ void MovieVBlankIntr(void) {
                 } else {
                     attr1 = 0;
                 }
+
                 oam = (u16*)0x07000000;
+
 #ifndef VERSION_JP
                 x = 0;
                 y = 0;
+
                 if (gMovieSubUpperLength != 0) {
                     x = gMovieSubUpper->x;
                     x += GetCenteredTextX(gMovieSubUpperWidths, gMovieSubUpperLength);
                     y = 0x74;
                 }
 #endif
+
                 for (i = 0; i < gMovieSubUpperLength; i++) {
                     u16 tile;
                     u16 palette;
@@ -214,6 +225,7 @@ void MovieVBlankIntr(void) {
                     x += gMovieSubUpperWidths[i];
 #endif
                 }
+
 #ifndef VERSION_JP
                 if (gMovieSubLowerLength != 0) {
                     x = gMovieSubLower->x;
@@ -221,6 +233,7 @@ void MovieVBlankIntr(void) {
                     y = 0x84;
                 }
 #endif
+
                 for (i = 0; i < gMovieSubLowerLength; i++) {
                     u16 tile;
                     u16 palette;
@@ -247,6 +260,7 @@ void MovieVBlankIntr(void) {
                     x += gMovieSubLowerWidths[i];
 #endif
                 }
+
                 for (i = gMovieSubUpperLength + gMovieSubLowerLength;
 #ifdef VERSION_JP
                      i < 48;
@@ -259,22 +273,26 @@ void MovieVBlankIntr(void) {
                     oam[0] = OAM_DISABLE;
                     oam += 4;
                 }
+
                 if (gMovieSubUpperTimer > 0) {
                     if (gMovieSubUpperAlpha < 16) {
                         gMovieSubUpperAlpha += 4;
                     }
                 } else if (gMovieSubUpperAlpha != 0) {
                     gMovieSubUpperAlpha -= 4;
+
                     if (gMovieSubUpperAlpha == 0) {
                         gMovieSubUpperLength = 0;
                     }
                 }
+
                 if (gMovieSubLowerTimer > 0) {
                     if (gMovieSubLowerAlpha < 16) {
                         gMovieSubLowerAlpha += 4;
                     }
                 } else if (gMovieSubLowerAlpha != 0) {
                     gMovieSubLowerAlpha -= 4;
+
                     if (gMovieSubLowerAlpha == 0) {
                         gMovieSubLowerLength = 0;
                     }
@@ -284,6 +302,7 @@ void MovieVBlankIntr(void) {
             }
         }
     }
+
     *(vu16*)0x03007FF8 |= 1;
 }
 
@@ -318,6 +337,7 @@ void mode_movie_1(void) {
         switch (gMovieId) {
         case 1:
             p = gUnk_0815C3EC;
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -359,6 +379,7 @@ void mode_movie_1(void) {
             break;
         case 4:
             p = gUnk_0855CCB4;
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -397,6 +418,7 @@ void mode_movie_1(void) {
 #endif
         case 5:
             p = gUnk_086FBA14;
+
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
@@ -503,6 +525,7 @@ void mode_movie_1(void) {
                 break;
             }
         }
+
         gMovieModeState++;
         break;
     }

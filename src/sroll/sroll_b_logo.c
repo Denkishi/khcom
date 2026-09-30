@@ -38,6 +38,7 @@ u8 task_sroll_b_logo_1(SrollBLogoWork* w) {
     if ((s16)((w->y >> 8) - (*w->scrollY >> 8)) <= -32) {
         r = 0;
     }
+
     AnimUpdate(&w->anim);
     return r;
 }

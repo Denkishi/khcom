@@ -57,6 +57,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
             w->offsetX = sSoraReloadChildOffsetX[3] << 8;
             w->offsetY = sReloadChildOffsetY[3] << 8;
         }
+
         break;
     case 2:
         if ((s8)w->args.index <= 3) {
@@ -66,6 +67,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
             w->offsetX = sRikuReloadChildOffsetX[3] << 8;
             w->offsetY = sReloadChildOffsetY[3] << 8;
         }
+
         break;
     }
 
@@ -193,6 +195,7 @@ void RELOAD_CHILDREN_3(ReloadChildWork* w) {
         ReleaseObjTiles(w->tiles2);
     }
 }
+
 void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
     vu32 zero;
     s16* count;
@@ -521,10 +524,12 @@ u8 UpdateReloadSlideOut(ReloadWork* w) {
 void RELOAD_2(ReloadWork* w) {
     DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 10);
 }
+
 void RELOAD_3(ReloadWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
+
 void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
     CardDef* def;
     CardBack* back;
@@ -569,37 +574,46 @@ void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
     TaskPoolInit(&w->tasks, 10);
     gBtlWork->prizeCount++;
 }
+
 u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
     s16 x;
     s16 y;
+
     if (w->posZ < 0) {
         w->posZ += 51;
         SpawnBossPrizeCardEffects(w);
     }
+
     if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 30);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
+
     ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
     WorldToScreen(&w->x, &w->y, w->posX, w->posY, w->posZ);
     WorldToScreen(&w->x2, &w->y2, w->posX, w->posY, w->groundZ);
     w->priority = -0x1004 - (w->posY >> 8) * 4;
     UpdateBossPrizeScale(w);
     w->flipAngleX += 2;
+
     if (w->timer == 60) {
         ColliderSetDisabled(&w->collider, 0);
     }
+
     if (w->timer <= 59) {
         w->timer++;
     }
+
     if (w->collider.colliding != 0) {
         w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         ObtainCard(w->cardId);
+
         if (gGameState.flags & GAME_FLAG_RIKU) {
             InitRikuDeckForWorld(gGameState.world);
         }
+
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeFlight);
         WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
         w->posX = x << 8;
@@ -609,6 +623,7 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
         w->priority = 50;
         AimBossPrizeAtCenter(w);
     }
+
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
@@ -923,15 +938,19 @@ void scrollbar_0(ScrollBarWork* w, u16* args) {
 u8 scrollbar_1(ScrollBarWork* w) {
     return w->active;
 }
+
 void scrollbar_2(void) {
 }
+
 void scrollbar_3(void) {
 }
+
 void ScrollbarRequestClose(ScrollBarWork* w) {
     if (w != NULL) {
         w->active = 0;
     }
 }
+
 void ScrollbarAdvance(ScrollBarWork* w) {
     if (w != NULL) {
         if (w->remaining != 0) {
@@ -943,6 +962,7 @@ void ScrollbarAdvance(ScrollBarWork* w) {
         }
     }
 }
+
 void ScrollbarRetreat(ScrollBarWork* w) {
     if (w != NULL) {
         if (w->position != 0) {
@@ -954,22 +974,26 @@ void ScrollbarRetreat(ScrollBarWork* w) {
         }
     }
 }
+
 void ScrollbarDecrementCount(ScrollBarWork* w) {
     if (w != NULL) {
         w->count--;
     }
 }
+
 void ScrollbarIncrementCount(ScrollBarWork* w) {
     if (w != NULL) {
         w->count++;
     }
 }
+
 void func_08099FE8(ScrollBarWork* w, u16 b, u8 c) {
     if (w != NULL) {
         w->unk_0E = b;
         w->unk_17 = c;
     }
 }
+
 ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
     u16 args[5];
 

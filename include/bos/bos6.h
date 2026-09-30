@@ -3,9 +3,7 @@
 
 #include "task_descriptors.h"
 #include "registration_data.h"
-
 #include "battle_actor_types.h"
-
 #include "battle_bg_types.h"
 #include "evt_types.h"
 #include "card_api.h"
@@ -180,7 +178,6 @@ typedef struct PcGfxSet {
     u8 unk_0E[0x02];
 } PcGfxSet;
 
-
 typedef struct PcShot {
     s32 targetX;
     s32 targetY;
@@ -188,9 +185,6 @@ typedef struct PcShot {
     u8 unk_0A[0x2];
     s32 unk_0C;
 } PcShot;
-
-
-
 
 typedef struct PcShared {
     s16 hpRatio;
@@ -473,7 +467,6 @@ typedef struct PcFltFrameDef {
     u16 nextAnim;
 } PcFltFrameDef;
 
-
 extern u8 gUnk_05000220[];
 
 void BosPcStopPaletteCycle(PcWork* work);
@@ -489,7 +482,6 @@ u8 BosPcIsAnimDone(PcWork* work);
 s32 BosLstApproachValue(s32 a, s32 b, s32 c, s32 d, s32 e);
 u8 BosPcUpdateReaction(PcWork* work, Task* task);
 u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx);
-
 
 u8 BosPcUpdateBreak(PcWork* work, Task* task);
 void BosLstTickCardDelay(BosLstWork* work);
@@ -551,7 +543,6 @@ typedef struct LstAnimDef {
     u8 unk_2A[0x2];
 } LstAnimDef;
 
-
 void task_bos_lst_2(BosLstWork* work);
 u8 BosLstUpdateDefeat(BosLstWork* work);
 
@@ -606,7 +597,6 @@ u8 BosLstSpawnFal(BosLstWork* work, s32 a);
 u8 BosPcUpdateDefeat(PcWork* work, Task* task);
 
 u8 BosPcUpdateHurt(PcWork* work, Task* task);
-
 
 typedef struct LstSpawn3 {
     s32 x;

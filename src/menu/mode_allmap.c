@@ -113,14 +113,18 @@ void AllmapCyclePalette(void) {
 
     memcpy(t, sAllmapPalSteps, sizeof(t));
     gAllmapPalTimer++;
+
     if (gAllmapPalTimer < t[gAllmapPalStep].duration) {
         return;
     }
+
     gAllmapPalTimer = 0;
     gAllmapPalStep++;
+
     if (t[gAllmapPalStep].palette == 0xFF) {
         gAllmapPalStep = 0;
     }
+
     LoadPalette(&gUnk_0984A138[t[gAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
 }
 
@@ -149,6 +153,7 @@ void AllmapLoadFloorTiles(void) {
         src = &gUnk_097B7218[gGameState.floor * 0x140];
 #endif
     }
+
     RequestDma3Copy(src, dst, 0x140);
     dst = (u8*)GetBgScreenBase(2) + 0x480;
     src = gUnk_0983BC18;
@@ -164,6 +169,7 @@ void mode_allmap_0(s32 a) {
     if (a == 1) {
         gAllmapLowerBgm = a;
     }
+
     SetObjPaletteRange(0, 14);
     ClearStockMesDispWork();
     SetBgMode0();
@@ -205,6 +211,7 @@ void mode_allmap_0(s32 a) {
     if (gAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
+
     gAllmapScrollInTimer = 30;
     gAllmapCursorDropTimer = 30;
     gAllmapPalTimer = 0;
@@ -244,6 +251,7 @@ void mode_allmap_1(void) {
             if (gAllmapBlendTimer == 16) {
                 AllmapDimPalette10();
             }
+
             gAllmapBlendTimer--;
             AllmapSetBlend(gAllmapBlendTimer);
 
@@ -256,6 +264,7 @@ void mode_allmap_1(void) {
             gAllmapModeState = 3;
         }
     }
+
     AllmapCyclePalette();
 
     if (gAllmapModeState == 2 || gAllmapModeState == 3) {
@@ -280,6 +289,7 @@ void mode_allmap_2(void) {
     if (gAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     }
+
     EwramFree(gAllmapBg0Map);
     EwramFree(gAllmapBg1Map);
 }
@@ -290,25 +300,31 @@ void SetAllmapReturnToMenu(u8 a) {
 
 u8 func_080D3538(u8 a, u8 b) {
     u8* p = GetMapRoomLinks(a);
+
     if ((u8)(p[b] + 3) <= 1) {
         return 1;
     }
+
     return 0;
 }
 
 u8 func_080D3564(u8 a, u8 b) {
     u16 v = GetMapDoorFlags(a, b);
+
     if (v == 0 || (v & 8) != 0) {
         return 0;
     }
+
     return 1;
 }
 
 u8 func_080D358C(u8 a, u8 b) {
     u16 v = GetMapDoorFlags(a, b);
+
     if ((v & 2) != 0) {
         return 1;
     }
+
     return 0;
 }
 
@@ -341,6 +357,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
         if (func_080D3564(work->room, i) == 0) {
             continue;
         }
+
         mask += 1 << i;
 
         if (func_080D3538(work->room, i) != 0) {
@@ -365,6 +382,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
             }
         }
     }
+
     return order.shapes[mask] + 1;
 }
 
@@ -374,5 +392,6 @@ s32 GetAllmapRoomPaletteOffset(u8 a) {
     if (GetEventRoomKind(a) == 1 || GetEventRoomKind(a) == 4) {
         r = 1;
     }
+
     return r << 5;
 }

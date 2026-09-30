@@ -56,6 +56,7 @@ static const MessageScriptEntry sEvent000Script[42] = {
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBDF74, MSG_SCRIPT_FLAG_END, 3540 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent000Script[42] = {
     { 24, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA745C, 0, 560 },
@@ -513,13 +514,13 @@ const EventSequenceDef gEvent000 = {
 
 #ifdef VERSION_US
 #include "event_001_text.inc"
-
 static const MessageScriptEntry sEvent001Script[3] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0CDC, 0, 190 },
     { 3, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0CF2, 0, 230 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC0D80, MSG_SCRIPT_FLAG_END, 650 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent001Script[3] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA9E20, 0, 190 },
@@ -632,7 +633,6 @@ const EventSequenceDef gEvent001 = {
 
 #ifdef VERSION_US
 #include "event_002_text.inc"
-
 static const MessageScriptEntry sEvent002Script[8] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC13EC, 0, 250 },
     { 3, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC1452, 0, 370 },
@@ -644,6 +644,7 @@ static const MessageScriptEntry sEvent002Script[8] = {
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC1622, MSG_SCRIPT_FLAG_END, 1080 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent002Script[7] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAA624, 0, 250 },
@@ -799,7 +800,6 @@ const EventSequenceDef gEvent002 = {
 
 #ifdef VERSION_US
 #include "event_003_text.inc"
-
 static const MessageScriptEntry sEvent003Script[24] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC22F8, 0, 90 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC2350, 0, 120 },
@@ -827,6 +827,7 @@ static const MessageScriptEntry sEvent003Script[24] = {
     { 62, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC2C20, MSG_SCRIPT_FLAG_END, 1644 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent003Script[24] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAB8B0, 0, 90 },
@@ -1036,7 +1037,6 @@ const EventSequenceDef gEvent003 = {
 
 #ifdef VERSION_US
 #include "event_004_text.inc"
-
 static const MessageScriptEntry sEvent004Script[38] = {
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC3C20, 0, 260 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC3C80, 0, 740 },
@@ -1078,6 +1078,7 @@ static const MessageScriptEntry sEvent004Script[38] = {
     { 31, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC4A60, MSG_SCRIPT_FLAG_END, 3244 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent004Script[38] = {
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FACF80, 0, 260 },
@@ -1386,7 +1387,6 @@ const EventSequenceDef gEvent004 = {
 
 #ifdef VERSION_US
 #include "event_005_text.inc"
-
 static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC63D0, 0, 100 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC641E, 0, 130 },
@@ -1394,6 +1394,7 @@ static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC650E, MSG_SCRIPT_FLAG_END, 280 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent005Script[4] = {
     { 31, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAE60C, 0, 100 },
@@ -1499,7 +1500,6 @@ const EventSequenceDef gEvent005 = {
 
 #ifdef VERSION_US
 #include "event_006_text.inc"
-
 static const MessageScriptEntry sEvent006Script[29] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC6A08, 0, 470 },
     { 32, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC6A66, 0, 660 },
@@ -1532,6 +1532,7 @@ static const MessageScriptEntry sEvent006Script[29] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC784A, MSG_SCRIPT_FLAG_END, 2240 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent006Script[30] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FAF2F4, 0, 470 },
@@ -1747,7 +1748,6 @@ const EventSequenceDef gEvent006 = {
 
 #ifdef VERSION_US
 #include "event_007_text.inc"
-
 static const MessageScriptEntry sEvent007Script[16] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC8768, 0, 290 },
     { 33, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC87A8, 0, 400 },
@@ -1767,6 +1767,7 @@ static const MessageScriptEntry sEvent007Script[16] = {
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC8D44, MSG_SCRIPT_FLAG_END, 1330 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent007Script[16] = {
     { 33, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB0360, 0, 290 },
@@ -1933,11 +1934,13 @@ static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC8768, MSG_SCRIPT_FLAG_END, 9999 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB0360, MSG_SCRIPT_FLAG_END, 9999 },
 };
 #endif
+
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent008Script[1] = {
     { 33, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F63660, MSG_SCRIPT_FLAG_END, 9999 },
@@ -2010,7 +2013,6 @@ const EventSequenceDef gEvent008 = {
 
 #ifdef VERSION_US
 #include "event_009_text.inc"
-
 static const MessageScriptEntry sEvent009Script[38] = {
     { 37, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC9A48, 0, 80 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FC9A80, 0, 130 },
@@ -2052,6 +2054,7 @@ static const MessageScriptEntry sEvent009Script[38] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCA760, MSG_SCRIPT_FLAG_END, 2950 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent009Script[38] = {
     { 37, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB188C, 0, 80 },
@@ -2336,7 +2339,6 @@ const EventSequenceDef gEvent009 = {
 
 #ifdef VERSION_US
 #include "event_010_text.inc"
-
 static const MessageScriptEntry sEvent010Script[14] = {
     { 3, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCBDC0, 0, 230 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCBE22, 0, 260 },
@@ -2354,6 +2356,7 @@ static const MessageScriptEntry sEvent010Script[14] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCC158, MSG_SCRIPT_FLAG_END, 1500 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent010Script[14] = {
     { 3, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB2E5C, 0, 230 },
@@ -2555,7 +2558,6 @@ const EventSequenceDef gEvent010 = {
 
 #ifdef VERSION_US
 #include "event_011_text.inc"
-
 static const MessageScriptEntry sEvent011Script[27] = {
     { 62, 0, 3, 1, { 0, 0, 0 }, (u32)gCardMessageTextUs_09041CD6, 0, 2 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCD028, 0, 100 },
@@ -2586,6 +2588,7 @@ static const MessageScriptEntry sEvent011Script[27] = {
     { 20, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCD7E6, MSG_SCRIPT_FLAG_END, 1432 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent011Script[27] = {
     { 62, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB42A8, 0, 2 },
@@ -2808,7 +2811,6 @@ const EventSequenceDef gEvent011 = {
 
 #ifdef VERSION_US
 #include "event_012_text.inc"
-
 static const MessageScriptEntry sEvent012Script[18] = {
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCE81C, 0, 290 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCE826, 0, 320 },
@@ -2830,6 +2832,7 @@ static const MessageScriptEntry sEvent012Script[18] = {
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCED62, MSG_SCRIPT_FLAG_END, 1450 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent012Script[18] = {
     { 6, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB54B0, 0, 290 },
@@ -2984,7 +2987,6 @@ const EventSequenceDef gEvent012 = {
 
 #ifdef VERSION_US
 #include "event_013_text.inc"
-
 static const MessageScriptEntry sEvent013Script[17] = {
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCF724, 0, 395 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCF74A, 0, 495 },
@@ -3005,6 +3007,7 @@ static const MessageScriptEntry sEvent013Script[17] = {
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FCFD7C, MSG_SCRIPT_FLAG_END, 1880 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent013Script[17] = {
     { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85940, 0, 395 },
@@ -3248,7 +3251,6 @@ const EventSequenceDef gEvent014 = {
 
 #ifdef VERSION_US
 #include "event_015_text.inc"
-
 static const MessageScriptEntry sEvent015Script[26] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD0B94, 0, 240 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD0C34, 0, 270 },
@@ -3278,6 +3280,7 @@ static const MessageScriptEntry sEvent015Script[26] = {
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD150E, MSG_SCRIPT_FLAG_END, 1700 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent015Script[26] = {
     { 1, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB74FC, 0, 240 },
@@ -3501,7 +3504,6 @@ const EventSequenceDef gEvent015 = {
 
 #ifdef VERSION_US
 #include "event_016_text.inc"
-
 static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD267C, 0, 260 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD26AE, 0, 300 },
@@ -3515,6 +3517,7 @@ static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD2A4E, MSG_SCRIPT_FLAG_END, 460 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent016Script[10] = {
     { 1, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB86A8, 0, 260 },
@@ -3630,7 +3633,6 @@ const EventSequenceDef gEvent016 = {
 
 #ifdef VERSION_US
 #include "event_017_text.inc"
-
 static const MessageScriptEntry sEvent017Script[11] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3090, 0, 150 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD30FE, 0, 180 },
@@ -3645,6 +3647,7 @@ static const MessageScriptEntry sEvent017Script[11] = {
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD35AC, MSG_SCRIPT_FLAG_END, 550 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent017Script[11] = {
     { 54, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB8F60, 0, 150 },
@@ -3738,7 +3741,6 @@ const EventSequenceDef gEvent017 = {
 
 #ifdef VERSION_US
 #include "event_018_text.inc"
-
 static const MessageScriptEntry sEvent018Script[16] = {
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD39A4, 0, 210 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3A2A, 0, 230 },
@@ -3758,6 +3760,7 @@ static const MessageScriptEntry sEvent018Script[16] = {
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD3E1C, MSG_SCRIPT_FLAG_END, 1660 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent018Script[16] = {
     { 1, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FB9598, 0, 210 },
@@ -3959,7 +3962,6 @@ const EventSequenceDef gEvent018 = {
 
 #ifdef VERSION_US
 #include "event_019_text.inc"
-
 static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4CD0, 0, 250 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4D3A, 0, 350 },
@@ -3971,6 +3973,7 @@ static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD4EA6, MSG_SCRIPT_FLAG_END, 900 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent019Script[8] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBA460, 0, 250 },
@@ -4151,7 +4154,6 @@ const EventSequenceDef gEvent020 = {
 
 #ifdef VERSION_US
 #include "event_021_text.inc"
-
 static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD561C, 0, 380 },
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD5634, 0, 520 },
@@ -4172,6 +4174,7 @@ static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD5BF6, MSG_SCRIPT_FLAG_END, 1160 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent021Script[17] = {
     { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBAF68, 0, 380 },
@@ -4351,7 +4354,6 @@ const EventSequenceDef gEvent021 = {
 
 #ifdef VERSION_US
 #include "event_022_text.inc"
-
 static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD695C, 0, 250 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD69D2, 0, 270 },
@@ -4380,6 +4382,7 @@ static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 1, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD6F98, MSG_SCRIPT_FLAG_END, 955 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent022Script[25] = {
     { 1, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBC2DC, 0, 250 },
@@ -4542,7 +4545,6 @@ const EventSequenceDef gEvent022 = {
 
 #ifdef VERSION_US
 #include "event_023_text.inc"
-
 static const MessageScriptEntry sEvent023Script[14] = {
     { 54, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD794C, 0, 100 },
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD79D2, 0, 140 },
@@ -4560,6 +4562,7 @@ static const MessageScriptEntry sEvent023Script[14] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD7E6C, MSG_SCRIPT_FLAG_END, 1020 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent023Script[14] = {
     { 54, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBCD80, 0, 100 },
@@ -4684,7 +4687,6 @@ const EventSequenceDef gEvent023 = {
 
 #ifdef VERSION_US
 #include "event_024_text.inc"
-
 static const MessageScriptEntry sEvent024Script[4] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8524, 0, 220 },
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8590, 0, 230 },
@@ -4692,6 +4694,7 @@ static const MessageScriptEntry sEvent024Script[4] = {
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD86D6, MSG_SCRIPT_FLAG_END, 270 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent024Script[4] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBD3A4, 0, 220 },
@@ -4782,7 +4785,6 @@ const EventSequenceDef gEvent024 = {
 
 #ifdef VERSION_US
 #include "event_025_text.inc"
-
 static const MessageScriptEntry sEvent025Script[11] = {
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8AB0, 0, 350 },
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8AEC, 0, 370 },
@@ -4797,6 +4799,7 @@ static const MessageScriptEntry sEvent025Script[11] = {
     { 54, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD8EA2, MSG_SCRIPT_FLAG_END, 662 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent025Script[11] = {
     { 1, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBDA34, 0, 350 },
@@ -4966,7 +4969,6 @@ const EventSequenceDef gEvent025 = {
 
 #ifdef VERSION_US
 #include "event_026_text.inc"
-
 static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD9BFC, 0, 145 },
     { 0, 6, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FD9C54, 0, 165 },
@@ -4990,6 +4992,7 @@ static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDA12A, MSG_SCRIPT_FLAG_END, 1027 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent026Script[20] = {
     { 54, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBEB0C, 0, 145 },
@@ -5176,7 +5179,6 @@ const EventSequenceDef gEvent026 = {
 
 #ifdef VERSION_US
 #include "event_027_text.inc"
-
 static const MessageScriptEntry sEvent027Script[10] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDADB8, 0, 150 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDAE4A, 0, 170 },
@@ -5190,6 +5192,7 @@ static const MessageScriptEntry sEvent027Script[10] = {
     { 0, 5, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDB15C, MSG_SCRIPT_FLAG_END, 650 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent027Script[10] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FBF7C8, 0, 150 },
@@ -5341,7 +5344,6 @@ const EventSequenceDef gEvent027 = {
 
 #ifdef VERSION_US
 #include "event_028_text.inc"
-
 static const MessageScriptEntry sEvent028Script[20] = {
     { 54, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDBAE0, 0, 160 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDBB52, 0, 180 },
@@ -5365,6 +5367,7 @@ static const MessageScriptEntry sEvent028Script[20] = {
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDC2E6, MSG_SCRIPT_FLAG_END, 950 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent028Script[20] = {
     { 54, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC05FC, 0, 160 },
@@ -5518,7 +5521,6 @@ const EventSequenceDef gEvent028 = {
 
 #ifdef VERSION_US
 #include "event_029_text.inc"
-
 static const MessageScriptEntry sEvent029Script[6] = {
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCB60, 0, 130 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCB82, 0, 180 },
@@ -5528,6 +5530,7 @@ static const MessageScriptEntry sEvent029Script[6] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDCD34, MSG_SCRIPT_FLAG_END, 570 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent029Script[6] = {
     { 1, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC0E64, 0, 130 },
@@ -5641,7 +5644,6 @@ const EventSequenceDef gEvent029 = {
 
 #ifdef VERSION_US
 #include "event_030_text.inc"
-
 static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDD468, 0, 200 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDD482, 0, 300 },
@@ -5670,6 +5672,7 @@ static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDDC34, MSG_SCRIPT_FLAG_END, 1225 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent030Script[25] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC1B30, 0, 200 },
@@ -5841,11 +5844,11 @@ const EventSequenceDef gEvent030 = {
 
 #ifdef VERSION_US
 #include "event_031_text.inc"
-
 static const MessageScriptEntry sEvent031Script[1] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE5E8, MSG_SCRIPT_FLAG_END, 415 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent031Script[1] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC22A0, MSG_SCRIPT_FLAG_END, 415 },
@@ -5934,7 +5937,6 @@ const EventSequenceDef gEvent031 = {
 
 #ifdef VERSION_US
 #include "event_032_text.inc"
-
 static const MessageScriptEntry sEvent032Script[30] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE97C, 0, 125 },
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDE9A6, 0, 547 },
@@ -5968,6 +5970,7 @@ static const MessageScriptEntry sEvent032Script[30] = {
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FDF3AA, MSG_SCRIPT_FLAG_END, 2350 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent032Script[30] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC2DBC, 0, 125 },
@@ -6189,7 +6192,6 @@ const EventSequenceDef gEvent032 = {
 
 #ifdef VERSION_US
 #include "event_033_text.inc"
-
 static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE0464, 0, 295 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE04B6, 0, 450 },
@@ -6212,6 +6214,7 @@ static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE0BBA, MSG_SCRIPT_FLAG_END, 2045 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent033Script[19] = {
     { 27, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC40D4, 0, 295 },
@@ -6390,7 +6393,6 @@ const EventSequenceDef gEvent033 = {
 
 #ifdef VERSION_US
 #include "event_034_text.inc"
-
 static const MessageScriptEntry sEvent034Script[10] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE1830, 0, 100 },
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE183C, 0, 160 },
@@ -6404,6 +6406,7 @@ static const MessageScriptEntry sEvent034Script[10] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE1B34, MSG_SCRIPT_FLAG_END, 830 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent034Script[10] = {
     { 27, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC4E30, 0, 100 },
@@ -6512,13 +6515,13 @@ const EventSequenceDef gEvent034 = {
 
 #ifdef VERSION_US
 #include "event_035_text.inc"
-
 static const MessageScriptEntry sEvent035Script[3] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE2010, 0, 340 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE205C, 0, 450 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE20CA, MSG_SCRIPT_FLAG_END, 520 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent035Script[3] = {
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC52B4, 0, 340 },
@@ -6599,7 +6602,6 @@ const EventSequenceDef gEvent035 = {
 
 #ifdef VERSION_US
 #include "event_036_text.inc"
-
 static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE23B4, 0, 200 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE23BE, 0, 260 },
@@ -6617,6 +6619,7 @@ static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 4, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE285A, MSG_SCRIPT_FLAG_END, 682 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent036Script[14] = {
     { 0, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78204, 0, 200 },
@@ -6754,13 +6757,13 @@ const EventSequenceDef gEvent036 = {
 
 #ifdef VERSION_US
 #include "event_037_text.inc"
-
 static const MessageScriptEntry sEvent037Script[3] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE306C, 0, 260 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE30D6, 0, 280 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE3138, MSG_SCRIPT_FLAG_END, 330 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent037Script[3] = {
     { 1, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC5FE8, 0, 260 },
@@ -6870,7 +6873,6 @@ const EventSequenceDef gEvent037 = {
 
 #ifdef VERSION_US
 #include "event_038_text.inc"
-
 static const MessageScriptEntry sEvent038Script[32] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE37FC, 0, 150 },
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE388E, 0, 170 },
@@ -6906,6 +6908,7 @@ static const MessageScriptEntry sEvent038Script[32] = {
     { 60, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE42C4, MSG_SCRIPT_FLAG_END, 1960 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent038Script[32] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC6E90, 0, 150 },
@@ -7099,7 +7102,6 @@ const EventSequenceDef gEvent038 = {
 
 #ifdef VERSION_US
 #include "event_039_text.inc"
-
 static const MessageScriptEntry sEvent039Script[10] = {
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE4D50, 0, 305 },
     { 6, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE4DB0, 0, 330 },
@@ -7113,6 +7115,7 @@ static const MessageScriptEntry sEvent039Script[10] = {
     { 6, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE5162, MSG_SCRIPT_FLAG_END, 780 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent039Script[10] = {
     { 1, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC7948, 0, 305 },
@@ -7232,7 +7235,6 @@ const EventSequenceDef gEvent039 = {
 
 #ifdef VERSION_US
 #include "event_040_text.inc"
-
 static const MessageScriptEntry sEvent040Script[12] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE57C8, 0, 335 },
     { 38, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE57E4, 0, 365 },
@@ -7248,6 +7250,7 @@ static const MessageScriptEntry sEvent040Script[12] = {
     { 38, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE5AD0, MSG_SCRIPT_FLAG_END, 852 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent040Script[12] = {
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73088, 0, 335 },
@@ -7389,7 +7392,6 @@ const EventSequenceDef gEvent040 = {
 
 #ifdef VERSION_US
 #include "event_041_text.inc"
-
 static const MessageScriptEntry sEvent041Script[9] = {
     { 38, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE63B0, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6410, 0, 130 },
@@ -7402,6 +7404,7 @@ static const MessageScriptEntry sEvent041Script[9] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6658, MSG_SCRIPT_FLAG_END, 690 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent041Script[9] = {
     { 38, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC8B24, 0, 100 },
@@ -7527,7 +7530,6 @@ const EventSequenceDef gEvent041 = {
 
 #ifdef VERSION_US
 #include "event_042_text.inc"
-
 static const MessageScriptEntry sEvent042Script[7] = {
     { 54, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6D18, 0, 100 },
     { 54, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE6DBE, 0, 130 },
@@ -7538,6 +7540,7 @@ static const MessageScriptEntry sEvent042Script[7] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE701A, MSG_SCRIPT_FLAG_END, 540 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent042Script[7] = {
     { 54, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC92D8, 0, 100 },
@@ -7628,12 +7631,12 @@ const EventSequenceDef gEvent042 = {
 
 #ifdef VERSION_US
 #include "event_043_text.inc"
-
 static const MessageScriptEntry sEvent043Script[2] = {
     { 6, 1, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7390, 0, 210 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7436, MSG_SCRIPT_FLAG_END, 250 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent043Script[2] = {
     { 6, 1, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FC9624, 0, 210 },
@@ -7733,7 +7736,6 @@ const EventSequenceDef gEvent043 = {
 
 #ifdef VERSION_US
 #include "event_044_text.inc"
-
 static const MessageScriptEntry sEvent044Script[22] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7918, 0, 620 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE7950, 0, 650 },
@@ -7759,6 +7761,7 @@ static const MessageScriptEntry sEvent044Script[22] = {
     { 0, 5, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE80D4, MSG_SCRIPT_FLAG_END, 2570 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent044Script[22] = {
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCA0BC, 0, 620 },
@@ -7997,7 +8000,6 @@ const EventSequenceDef gEvent044 = {
 
 #ifdef VERSION_US
 #include "event_045_text.inc"
-
 static const MessageScriptEntry sEvent045Script[26] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE93B0, 0, 515 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE93D6, 0, 725 },
@@ -8027,6 +8029,7 @@ static const MessageScriptEntry sEvent045Script[26] = {
     { 0, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FE9E6C, MSG_SCRIPT_FLAG_END, 1949 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent045Script[26] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85940, 0, 515 },
@@ -8216,7 +8219,6 @@ const EventSequenceDef gEvent045 = {
 
 #ifdef VERSION_US
 #include "event_046_text.inc"
-
 static const MessageScriptEntry sEvent046Script[19] = {
     { 38, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEAB94, 0, 100 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEAC5E, 0, 230 },
@@ -8239,6 +8241,7 @@ static const MessageScriptEntry sEvent046Script[19] = {
     { 20, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEB344, MSG_SCRIPT_FLAG_END, 1195 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent046Script[19] = {
     { 38, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCC898, 0, 100 },
@@ -8405,7 +8408,6 @@ const EventSequenceDef gEvent046 = {
 
 #ifdef VERSION_US
 #include "event_048_text.inc"
-
 static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEBD7C, 0, 350 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEBDF6, 0, 370 },
@@ -8430,6 +8432,7 @@ static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEC46E, MSG_SCRIPT_FLAG_END, 1160 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent048Script[21] = {
     { 27, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCD66C, 0, 350 },
@@ -8604,7 +8607,6 @@ const EventSequenceDef gEvent048 = {
 
 #ifdef VERSION_US
 #include "event_049_text.inc"
-
 static const MessageScriptEntry sEvent049Script[4] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FECF68, 0, 430 },
     { 1, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FECF74, 0, 690 },
@@ -8612,6 +8614,7 @@ static const MessageScriptEntry sEvent049Script[4] = {
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED03C, MSG_SCRIPT_FLAG_END, 1090 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent049Script[4] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCE020, 0, 430 },
@@ -8750,7 +8753,6 @@ const EventSequenceDef gEvent049 = {
 
 #ifdef VERSION_US
 #include "event_050_text.inc"
-
 static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED910, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FED968, 0, 320 },
@@ -8773,6 +8775,7 @@ static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEE020, MSG_SCRIPT_FLAG_END, 1150 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent050Script[19] = {
     { 1, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCEDDC, 0, 200 },
@@ -8941,7 +8944,6 @@ const EventSequenceDef gEvent050 = {
 
 #ifdef VERSION_US
 #include "event_047_text.inc"
-
 static const MessageScriptEntry sEvent047Script[15] = {
     { 54, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEEC10, 0, 130 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEEC7A, 0, 160 },
@@ -8960,6 +8962,7 @@ static const MessageScriptEntry sEvent047Script[15] = {
     { 60, 5, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF1EA, MSG_SCRIPT_FLAG_END, 1200 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent047Script[15] = {
     { 54, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCFC10, 0, 130 },
@@ -9090,7 +9093,6 @@ const EventSequenceDef gEvent047 = {
 
 #ifdef VERSION_US
 #include "event_051_text.inc"
-
 static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF820, 0, 280 },
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEF854, 0, 430 },
@@ -9106,6 +9108,7 @@ static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FEFB22, MSG_SCRIPT_FLAG_END, 1154 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent051Script[12] = {
     { 20, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD03C4, 0, 280 },
@@ -9216,12 +9219,12 @@ const EventSequenceDef gEvent051 = {
 
 #ifdef VERSION_US
 #include "event_052_text.inc"
-
 static const MessageScriptEntry sEvent052Script[2] = {
     { 6, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF0078, 0, 200 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF00DE, MSG_SCRIPT_FLAG_END, 265 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent052Script[2] = {
     { 6, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD07FC, 0, 200 },
@@ -9306,7 +9309,6 @@ const EventSequenceDef gEvent052 = {
 
 #ifdef VERSION_US
 #include "event_053_text.inc"
-
 static const MessageScriptEntry sEvent053Script[26] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF04DC, 0, 495 },
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF0552, 0, 765 },
@@ -9336,6 +9338,7 @@ static const MessageScriptEntry sEvent053Script[26] = {
     { 40, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF0C9E, MSG_SCRIPT_FLAG_END, 2230 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent053Script[26] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD11FC, 0, 495 },
@@ -9560,7 +9563,6 @@ const EventSequenceDef gEvent053 = {
 
 #ifdef VERSION_US
 #include "event_054_text.inc"
-
 static const MessageScriptEntry sEvent054Script[18] = {
     { 26, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF1E54, 0, 250 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF1E94, 0, 280 },
@@ -9582,6 +9584,7 @@ static const MessageScriptEntry sEvent054Script[18] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF239C, MSG_SCRIPT_FLAG_END, 1322 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent054Script[18] = {
     { 26, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD25BC, 0, 250 },
@@ -9732,11 +9735,11 @@ const EventSequenceDef gEvent054 = {
 
 #ifdef VERSION_US
 #include "event_055_text.inc"
-
 static const MessageScriptEntry sEvent055Script[1] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2D30, MSG_SCRIPT_FLAG_END, 115 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent055Script[1] = {
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD2DDC, MSG_SCRIPT_FLAG_END, 115 },
@@ -9799,7 +9802,6 @@ const EventSequenceDef gEvent055 = {
 
 #ifdef VERSION_US
 #include "event_056_text.inc"
-
 static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2EA0, 0, 100 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF2ED2, 0, 245 },
@@ -9837,6 +9839,7 @@ static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF3876, MSG_SCRIPT_FLAG_END, 2252 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent056Script[34] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD37A4, 0, 100 },
@@ -10079,13 +10082,13 @@ const EventSequenceDef gEvent056 = {
 
 #ifdef VERSION_US
 #include "event_057_text.inc"
-
 static const MessageScriptEntry sEvent057Script[3] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4A7C, 0, 150 },
     { 0, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4A86, 0, 335 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4B04, MSG_SCRIPT_FLAG_END, 635 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent057Script[3] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD46C0, 0, 150 },
@@ -10166,7 +10169,6 @@ const EventSequenceDef gEvent057 = {
 
 #ifdef VERSION_US
 #include "event_058_text.inc"
-
 static const MessageScriptEntry sEvent058Script[12] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4EF8, 0, 160 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF4F08, 0, 450 },
@@ -10182,6 +10184,7 @@ static const MessageScriptEntry sEvent058Script[12] = {
     { 27, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF5244, MSG_SCRIPT_FLAG_END, 814 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent058Script[12] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD4D08, 0, 160 },
@@ -10307,7 +10310,6 @@ const EventSequenceDef gEvent058 = {
 
 #ifdef VERSION_US
 #include "event_059_text.inc"
-
 static const MessageScriptEntry sEvent059Script[61] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF59AC, 0, 100 },
     { 27, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF59B8, 0, 140 },
@@ -10372,6 +10374,7 @@ static const MessageScriptEntry sEvent059Script[61] = {
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF6E88, MSG_SCRIPT_FLAG_END, 4045 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent059Script[61] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FCE020, 0, 100 },
@@ -10720,7 +10723,6 @@ const EventSequenceDef gEvent059 = {
 
 #ifdef VERSION_US
 #include "event_060_text.inc"
-
 static const MessageScriptEntry sEvent060Script[53] = {
     { 54, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF8788, 0, 100 },
     { 54, 4, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF87F0, 0, 102 },
@@ -10777,6 +10779,7 @@ static const MessageScriptEntry sEvent060Script[53] = {
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FF9A92, MSG_SCRIPT_FLAG_END, 4100 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent060Script[53] = {
     { 54, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FD84D0, 0, 100 },
@@ -11144,7 +11147,6 @@ const EventSequenceDef gEvent060 = {
 
 #ifdef VERSION_US
 #include "event_061_text.inc"
-
 static const MessageScriptEntry sEvent061Script[18] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFB9C8, 0, 250 },
     { 0, 5, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFBA04, 0, 430 },
@@ -11166,6 +11168,7 @@ static const MessageScriptEntry sEvent061Script[18] = {
     { 1, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFBE8A, MSG_SCRIPT_FLAG_END, 1230 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent061Script[18] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDA368, 0, 250 },
@@ -11413,7 +11416,6 @@ const EventSequenceDef gEvent062 = {
 
 #ifdef VERSION_US
 #include "event_063_text.inc"
-
 static const MessageScriptEntry sEvent063Script[15] = {
     { 58, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCBCC, 0, 260 },
     { 20, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFCC42, 0, 280 },
@@ -11432,6 +11434,7 @@ static const MessageScriptEntry sEvent063Script[15] = {
     { 20, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD1AE, MSG_SCRIPT_FLAG_END, 700 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent063Script[15] = {
     { 58, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDB364, 0, 260 },
@@ -11552,7 +11555,6 @@ const EventSequenceDef gEvent063 = {
 
 #ifdef VERSION_US
 #include "event_064_text.inc"
-
 static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD77C, 0, 150 },
     { 20, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFD7CA, 0, 152 },
@@ -11572,6 +11574,7 @@ static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFDC3E, MSG_SCRIPT_FLAG_END, 830 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent064Script[16] = {
     { 20, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDBBCC, 0, 150 },
@@ -11719,7 +11722,6 @@ const EventSequenceDef gEvent064 = {
 
 #ifdef VERSION_US
 #include "event_065_text.inc"
-
 static const MessageScriptEntry sEvent065Script[4] = {
     { 20, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE3EC, 0, 140 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE47E, 0, 160 },
@@ -11727,6 +11729,7 @@ static const MessageScriptEntry sEvent065Script[4] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFE504, MSG_SCRIPT_FLAG_END, 440 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent065Script[4] = {
     { 20, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDC280, 0, 140 },
@@ -11842,7 +11845,6 @@ const EventSequenceDef gEvent065 = {
 
 #ifdef VERSION_US
 #include "event_066_text.inc"
-
 static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFEB0C, 0, 200 },
     { 58, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFEB74, 0, 202 },
@@ -11887,6 +11889,7 @@ static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FFF928, MSG_SCRIPT_FLAG_END, 1700 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent066Script[41] = {
     { 58, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDD344, 0, 200 },
@@ -12190,7 +12193,6 @@ const EventSequenceDef gEvent066 = {
 
 #ifdef VERSION_US
 #include "event_067_text.inc"
-
 static const MessageScriptEntry sEvent067Script[14] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09001060, 0, 130 },
     { 58, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_09001080, 0, 250 },
@@ -12208,6 +12210,7 @@ static const MessageScriptEntry sEvent067Script[14] = {
     { 27, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_09001316, MSG_SCRIPT_FLAG_END, 1470 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent067Script[14] = {
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDE8C4, 0, 130 },
@@ -12398,12 +12401,12 @@ const EventSequenceDef gEvent067 = {
 
 #ifdef VERSION_US
 #include "event_068_text.inc"
-
 static const MessageScriptEntry sEvent068Script[2] = {
     { 1, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002100, 0, 100 },
     { 2, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002148, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 130 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent068Script[2] = {
     { 1, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDF5A0, 0, 100 },
@@ -12587,11 +12590,11 @@ const EventSequenceDef gEvent069 = {
 
 #ifdef VERSION_US
 #include "event_070_text.inc"
-
 static const MessageScriptEntry sEvent070Script[1] = {
     { 58, 1, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002750, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent070Script[1] = {
     { 58, 1, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FDFB84, MSG_SCRIPT_FLAG_END, 300 },
@@ -12773,7 +12776,6 @@ const EventSequenceDef gEvent071 = {
 
 #ifdef VERSION_US
 #include "event_072_text.inc"
-
 static const MessageScriptEntry sEvent072Script[44] = {
     { 0, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002F30, 0, 330 },
     { 27, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09002F58, 0, 360 },
@@ -12821,6 +12823,7 @@ static const MessageScriptEntry sEvent072Script[44] = {
     { 60, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_09003D30, MSG_SCRIPT_FLAG_END, 3440 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent072Script[44] = {
     { 0, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE0E5C, 0, 330 },
@@ -13087,7 +13090,6 @@ const EventSequenceDef gEvent072 = {
 
 #ifdef VERSION_US
 #include "event_073_text.inc"
-
 static const MessageScriptEntry sEvent073Script[30] = {
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_09005068, 0, 270 },
     { 60, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_090050D0, 0, 310 },
@@ -13121,6 +13123,7 @@ static const MessageScriptEntry sEvent073Script[30] = {
     { 60, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_09005B14, MSG_SCRIPT_FLAG_END, 2152 },
 };
 #endif
+
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent073Script[30] = {
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FE252C, 0, 270 },

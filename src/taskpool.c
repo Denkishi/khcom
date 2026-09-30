@@ -28,6 +28,7 @@ vu8 gModeFlags;
 u16 gModeBlankColor;
 void (*gModeTransitionCallback)(void);
 void (*gModeVBlankCallback)(void);
+
 #ifdef VERSION_EU
 u32 gUnkEu_030074AC;
 #endif
@@ -246,8 +247,8 @@ void ModeInit(void) {
     gModeFlags = (MODE_FLAG_BLANK_PENDING | MODE_FLAG_DISPLAY_HELD);
     gModeBlankColor = 0;
     gDebugModeIndex = 0;
-#ifdef VERSION_EU
 
+#ifdef VERSION_EU
     if (a) {
         ModeStart(&gModeCopyright1, 0);
     } else {
@@ -260,6 +261,7 @@ void ModeInit(void) {
     gModeTransitionCallback = 0;
     gModeVBlankCallback = 0;
 }
+
 void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
     if (a != NULL) {
         a();
@@ -367,6 +369,7 @@ void ModeUpdate(void) {
         }
     }
 }
+
 void SetModeUpdate(void (*fn)(void)) {
     gCurrentModeUpdate = fn;
 }

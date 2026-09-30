@@ -56,6 +56,7 @@ extern vu16 gSystemFlags;
 extern u8 gUnk_03006C7A[6];
 extern u8 gIntrHandler[0x800];
 extern vu32 gFrameCounter;
+
 #ifdef VERSION_EU
 enum Language {
     LANGUAGE_ENGLISH,

@@ -283,6 +283,7 @@ u8 IsMooglePackBought(u16 a, u16 b, u16 c) {
     if (v <= 0x1FF) {
         return gMooglePackBoughtFlags[v >> 4] >> (v & 15) & 1;
     }
+
     return 0;
 }
 
@@ -604,6 +605,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 } else {
                     sMooglePackCards[i].state = 2;
                 }
+
                 if (i <= 3) {
                     sMooglePackCards[i + 1].timer = 15;
                 } else {
@@ -613,6 +615,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                             break;
                         }
                     }
+
                     if (j == 5) {
                         sMooglePackCards[0].timer = 8;
                     }
@@ -634,6 +637,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                     sMooglePackCards[i].revealed = 1;
                 }
             }
+
             break;
         case 3:
             d = 0x80 - sMooglePackCards[i].flipAngle;
@@ -666,6 +670,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                             break;
                         }
                     }
+
                     if (j == 5) {
                         sMooglePackCards[0].timer = 60;
                     }
@@ -711,6 +716,7 @@ u8 UpdateMooglePackOpening(u16 a) {
         case 7:
             ApproachValue(&sMooglePackCards[i].y, 0x4600, sMooglePackCards[i].timer);
             f = gFrameCounter & 0x1F;
+
             if (f == 0) {
                 arg0.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                 arg0.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
@@ -730,6 +736,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                         break;
                     }
                 }
+
                 if (j == 5) {
                     sMooglePackCards[0].timer = 60;
                 }
@@ -739,6 +746,7 @@ u8 UpdateMooglePackOpening(u16 a) {
         case 8:
             if (sMooglePackCards[i].premium != 0) {
                 g = gFrameCounter & 0x1F;
+
                 if (g == 0) {
                     arg1.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                     arg1.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
@@ -774,6 +782,7 @@ u8 UpdateMooglePackOpening(u16 a) {
         case 9:
             if (sMooglePackCards[i].premium != 0) {
                 h = gFrameCounter & 0x1F;
+
                 if (h == 0) {
                     arg2.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                     arg2.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
@@ -792,11 +801,13 @@ u8 UpdateMooglePackOpening(u16 a) {
                 result = 0;
             } else if (keys & DPAD_LEFT) {
                 sMooglePackCardCursor--;
+
                 if (sMooglePackCardCursor < 0) {
                     sMooglePackCardCursor = 4;
                 }
             } else if (keys & DPAD_RIGHT) {
                 sMooglePackCardCursor++;
+
                 if (sMooglePackCardCursor > 4) {
                     sMooglePackCardCursor = 0;
                 }
@@ -1103,6 +1114,7 @@ void MoogleShopDraw(void) {
             ApproachValueHalf(&sMoogleShopCursorY, sMoogleShopRowCursor * 6144 + 0x800);
             DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, SPRITE_PRIORITY(1), 0x3E8);
         }
+
         break;
     case 3:
         ApproachValueHalf(&sMoogleShopCursorX, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
@@ -1192,6 +1204,7 @@ void mode_ms_shop_1(void) {
                 sMoogleShopState = 1;
             }
         }
+
         break;
     case 1:
         MoogleShopHandleSoldOutInput();
@@ -1217,6 +1230,7 @@ void mode_ms_shop_1(void) {
                 if (sMoogleShopRowCategory[sMoogleShopRowCursor] < 0) {
                     do {
                         sMoogleShopRowCursor--;
+
                         if (sMoogleShopRowCursor <= 0) {
                             break;
                         }
@@ -1230,16 +1244,18 @@ void mode_ms_shop_1(void) {
             if (sMoogleShopHasPacks != 0) {
                 for (; sMoogleShopPackCursor > 0 && sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0] < 0; sMoogleShopPackCursor--) {
                 }
+
                 LoadMooglePackSelectionTilemap(sMoogleShopPackCursor);
             } else {
                 DisableBg(1);
             }
-            
+
             LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A18D7C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             DisableBg(3);
             FadeToOriginal(FADE_MODE_BLACK, 8);
             sMoogleShopState = sMoogleShopHasPacks != 0 ? 3 : 1;
         }
+
         break;
     case 5:
         if (FadeIsActive() == 0) {
@@ -1249,6 +1265,7 @@ void mode_ms_shop_1(void) {
                 RequestMapMode();
             }
         }
+
         break;
     }
 

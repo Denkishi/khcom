@@ -15,7 +15,6 @@ typedef struct StaffRollLabelArg {
     s32 y;
 } StaffRollLabelArg;
 
-
 typedef struct StaffRollTaskArg {
     u16 kind;
     u16 unk_02;

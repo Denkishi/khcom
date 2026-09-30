@@ -44,6 +44,7 @@ u16 IsVBlankIntrLive(void) {
             }
         }
     }
+
     return 0;
 }
 
@@ -195,11 +196,13 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
                     gSioAutoStartDone = -1;
                 }
             }
+
             break;
         case 1:
             if (gSioWork.isParent != 0 && gSioWork.playerCount == 2) {
                 gSioWork.startPending = 1;
             }
+
             gSioAutoStartDone = -1;
             break;
         case 2:
@@ -207,6 +210,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
             REG_SIOMLT_SEND = 0;
             break;
         }
+
         break;
     case 3:
         SioInitTimer();
@@ -215,6 +219,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
         if (gSioWork.paused == 0) {
             SioQueueSendFrame(b);
         }
+
         SioReadRecvFrame(c);
         break;
     }
@@ -225,6 +230,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
     if (gSioWork.isParent == 8) {
         r |= 0x20;
     }
+
     t0 = gSioWork.recvEmpty << 8;
     t1 = gSioWork.unk_11 << 9;
     t2 = gSioWork.hardwareError << 16;
@@ -237,11 +243,13 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
     } else {
         v = r | t0 | t1 | t2 | t3 | t4 | t5;
     }
+
     w = v;
 
     if (gSioWork.playerId > 1) {
         w |= 0x400000;
     }
+
     return w;
 }
 
@@ -255,6 +263,7 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
         if (gSioWork.paused == 0) {
             SioQueueSendFrame(b);
         }
+
         SioReadRecvFrame(c);
     }
 
@@ -263,6 +272,7 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
     if (gSioWork.isParent == 8) {
         r |= 0x20;
     }
+
     t0 = gSioWork.recvEmpty << 8;
     t1 = gSioWork.unk_11 << 9;
     t2 = gSioWork.hardwareError << 16;
@@ -275,11 +285,13 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
     } else {
         v = r | t0 | t1 | t2 | t3 | t4 | t5;
     }
+
     w = v;
 
     if (gSioWork.playerId > 1) {
         w |= 0x400000;
     }
+
     return w;
 }
 
@@ -311,6 +323,7 @@ void SioQueueSendFrame(u16* frame) {
 
     if (gSioWork.sendCount < 32) {
         idx = gSioWork.sendCount + gSioWork.sendReadIdx;
+
         if (idx > 31) {
             idx -= 32;
         }
@@ -329,6 +342,7 @@ void SioQueueSendFrame(u16* frame) {
         gSioWork.sendCount++;
         gSioSendNonzero = 0;
     }
+
     REG_IME = gSioSavedIme;
     gSioLastSendCount = gSioWork.sendCount;
 }
@@ -346,6 +360,7 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
                 frame[i][j] = 0;
             }
         }
+
         gSioWork.recvEmpty = 1;
     } else {
         for (i = 0; i < 4; i++) {
@@ -353,22 +368,28 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
                 frame[i][j] = gSioWork.recvBuf[j][i][gSioWork.recvReadIdx];
             }
         }
+
         gSioWork.recvCount--;
         gSioWork.recvReadIdx++;
+
         if (gSioWork.recvReadIdx > 31) {
             gSioWork.recvReadIdx = 0;
         }
+
         gSioWork.recvEmpty = 0;
     }
+
     REG_IME = gSioSavedIme;
 }
 
 void SioVBlankUpdate(void) {
     if (gSioWork.paused != 0) {
         gSioPauseTimer--;
+
         if (gSioPauseTimer != 0) {
             return;
         }
+
         gSioWork.paused = 0;
     }
 
@@ -389,6 +410,7 @@ void SioVBlankUpdate(void) {
         }
     } else if (gSioWork.state == 4 || gSioWork.state == 2) {
         gSioIdleVBlanks++;
+
         if (gSioIdleVBlanks > 6) {
             if (gSioWork.state == 4) {
                 gSioWork.timeout = 2;
@@ -419,6 +441,7 @@ void SioSerialIntr(void) {
         if (cnt & SIO_ERROR) {
             gSioWork.hardwareError = 1;
         }
+
         SioRecvWord();
         SioSendWord();
         SioFinishTransfer();
@@ -432,8 +455,10 @@ void SioSerialIntr(void) {
                 gSioWork.state = 4;
             }
         }
+
         break;
     }
+
     gSioWork.transferCount++;
     gSioIdleVBlanks = 0;
 
@@ -459,6 +484,7 @@ u8 SioHandshake(void) {
     } else {
         REG_SIOMLT_SEND = 0xD5E0;
     }
+
     gSioWork.startPending = 0;
     *(u64*)gSioWork.recv = *(u64*)REG_ADDR_SIOMULTI0;
 
@@ -478,7 +504,9 @@ u8 SioHandshake(void) {
             break;
         }
     }
+
     gSioWork.playerCount = count;
+
     if (gSioWork.playerCount == 2) {
         if (gSioWork.playerCount == gSioPrevPlayerCount && gSioWork.recv[0] == 0x8FFF) {
             return 1;
@@ -492,6 +520,7 @@ u8 SioHandshake(void) {
     } else {
         gSioWork.unk_11 = 0;
     }
+
     gSioPrevPlayerCount = gSioWork.playerCount;
     return 0;
 }
@@ -509,10 +538,12 @@ void SioRecvWord(void) {
                 gSioWork.checksumError = 1;
             }
         }
+
         gSioWork.checksum = 0;
         gSioChecksumReady = 1;
     } else {
         idx = gSioWork.recvReadIdx + gSioWork.recvCount;
+
         if (idx > 31) {
             idx -= 32;
         }
@@ -531,7 +562,9 @@ void SioRecvWord(void) {
         } else {
             gSioWork.queueFull |= 2;
         }
+
         gSioWork.recvWordIdx++;
+
         if (gSioWork.recvWordIdx == 4 && gSioRecvNonzero != 0) {
             gSioWork.recvCount++;
             gSioRecvNonzero = 0;
@@ -546,6 +579,7 @@ void SioSendWord(void) {
         if (gSioSendEmpty == 0) {
             gSioWork.sendCount--;
             gSioWork.sendReadIdx++;
+
             if (gSioWork.sendReadIdx > 31) {
                 gSioWork.sendReadIdx = 0;
             }
@@ -566,6 +600,7 @@ void SioSendWord(void) {
         if (gSioWork.paused == 0 && gSioWork.sendWordIdx == 0 && gSioWork.recvCount > 3) {
             REG_SIOMLT_SEND |= 0x1000;
         }
+
         gSioWork.sendWordIdx++;
     }
 }
@@ -646,5 +681,6 @@ u8 SioIsConnected(void) {
     if (gSioWork.state == 4) {
         return 1;
     }
+
     return 0;
 }

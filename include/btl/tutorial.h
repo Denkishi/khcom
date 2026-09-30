@@ -2,12 +2,9 @@
 #define GUARD_TUTORIAL_H
 
 #include "battle_localized_data.h"
-
 #include "card_api.h"
-
 #include "movie_text.h"
 #include "card_battle.h"
-
 #include "obj_api.h"
 #include "btl_effect.h"
 #include "display.h"

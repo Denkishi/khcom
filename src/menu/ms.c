@@ -26,6 +26,7 @@ s32 task_ms_shop_hosi_1(MsShopHosiWork* work) {
     if (--work->timer <= 0) {
         work->timer = work->frameDuration;
         work->frame++;
+
         if (work->frame > 5) {
             result = 0;
         }

@@ -2,9 +2,7 @@
 #define GUARD_MODE_CHKSND_H
 
 #include "registration_data.h"
-
 #include "card_api.h"
-
 #include "types.h"
 #include "taskpool.h"
 #include "main.h"

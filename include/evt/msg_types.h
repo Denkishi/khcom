@@ -34,7 +34,6 @@ enum EventCameraKeyframeFlag {
 };
 
 #define CAMERA_KEYFRAME_MODE_MASK 0xF
-
 typedef struct EventCameraKeyframe {
     s32 frame;
     s32 x;
@@ -95,7 +94,6 @@ enum EventCharaKeyframeFlag {
 };
 
 #define CHARA_KEYFRAME_MOTION_MASK 0xF
-
 typedef struct EventCharaKeyframe {
     u32 anim;
     u16 frame;

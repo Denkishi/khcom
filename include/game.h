@@ -2,7 +2,6 @@
 #define GUARD_GAME_H
 
 #include "map_text_data.h"
-
 #include "obj_api.h"
 #include "btl_collision.h"
 #include "battle_actor.h"

@@ -7,23 +7,14 @@
 #include "card_def_data.h"
 #include "registration_data.h"
 #include "system_state.h"
-
 #include "msg_types.h"
-
 #include "field_state.h"
-
 #include "continue_types.h"
-
 #include "fld_types.h"
-
 #include "evt_types.h"
-
 #include "card_types.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
-
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -99,7 +90,6 @@ typedef struct FrdPoohArgs {
 } FrdPoohArgs;
 
 extern u8 gPoohPalette[];
-
 #endif
 
 typedef struct LockonWork {

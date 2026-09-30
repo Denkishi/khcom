@@ -232,6 +232,7 @@ void BackdropFadeUpdate(void) {
             if ((s16)b < 0) {
                 b = 0;
             }
+
             break;
         case 1:
             if ((s16)r < amt) {
@@ -245,6 +246,7 @@ void BackdropFadeUpdate(void) {
             if ((s16)b < amt) {
                 b = amt;
             }
+
             break;
         case 3:
             r = amt + r;
@@ -262,6 +264,7 @@ void BackdropFadeUpdate(void) {
             if ((s16)b < 0) {
                 b = 0;
             }
+
             break;
         case 5:
             r -= amt;
@@ -279,6 +282,7 @@ void BackdropFadeUpdate(void) {
             if ((s16)b < 0) {
                 b = 0;
             }
+
             break;
         case 4:
             r -= amt;
@@ -296,6 +300,7 @@ void BackdropFadeUpdate(void) {
             if ((s16)b > 31) {
                 b = 31;
             }
+
             break;
         default:
             r = amt + r;
@@ -313,8 +318,10 @@ void BackdropFadeUpdate(void) {
             if ((s16)b > 31) {
                 b = 31;
             }
+
             break;
         }
+
         SetBackdropColor(r, g, b);
     }
 
@@ -387,17 +394,23 @@ u8 PooAttackHitsCollider(Collider* p) {
 
     lim = p->radius + 0x1400;
     dx = sPooAttackX - p->x;
+
     if (dx < 0) {
         dx = p->x - sPooAttackX;
     }
+
     dy = sPooAttackY - p->y;
+
     if (dy < 0) {
         dy = p->y - sPooAttackY;
     }
+
     dz = sPooAttackZ - p->z;
+
     if (dx < lim && dy < lim && dz <= 0x1FFF && -dz < p->height) {
         return 1;
     }
+
     return 0;
 }
 
@@ -540,6 +553,7 @@ void mode_pooh_1(void) {
         } else {
             RequestEventMode(sModePoohExitEvent);
         }
+
         return;
     }
 
@@ -609,6 +623,7 @@ void ExitPoohMode(u32 a) {
         for (i = 0; i <= 31; i++) {
             FadeSetPaletteExcluded(i, 0);
         }
+
         FadeStartOut(FADE_MODE_BLACK, 16);
         BackdropFadeStartOut(0, 16);
         sModePoohExiting = 1;
@@ -621,6 +636,7 @@ void OpenPoohModeMessage(u16 a) {
     if (a == 0xFFFD || a == 0xFFFE) {
         a = 0x45;
     }
+
     CreateCardMessageTask(&sModePoohMessageTasks, 0, a);
 }
 
@@ -646,6 +662,7 @@ u16 SpawnPooPrizes(u8 kind, u8 count, s32 x, s32 y, s32 z) {
             }
         }
     }
+
     return made;
 }
 
@@ -660,6 +677,7 @@ u16 CountPooPrizes(void) {
             n++;
         }
     }
+
     return n;
 }
 
@@ -836,6 +854,7 @@ u8 IsAngleFacingRight(u8 a) {
     case 7:
         return 0;
     }
+
     return 0;
 }
 
@@ -847,9 +866,11 @@ u8 GetPoohLookColumn(PoohWork* w) {
     memcpy(tbl, sPoohLookOffsets, sizeof(tbl));
     row = (u32)((w->angle + 16) & 0xFF) >> 5;
     col = (u32)((w->lookAngle + 16) & 0xFF) >> 5;
+
     if ((s8)tbl[row][col] == 3) {
         return w->lookColumn;
     }
+
     return tbl[row][col] + 2;
 }
 
@@ -863,6 +884,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     if (w->animAction == anim) {
         flags = ANIM_FLAG_KEEP_FRAME;
     }
+
     w->animAction = anim;
 
     switch (anim) {
@@ -909,6 +931,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         } else {
             e = &sPooh07Anim1Defs[w->dirIndex];
         }
+
         break;
     case 36:
         w->flipped = 0;
@@ -1023,6 +1046,7 @@ u8 IsWithinPoohRadius(u16 x, u16 y, u16 px, u16 py) {
         y - gPoohHitBox.radius < py && py < y + gPoohHitBox.radius) {
         return 1;
     }
+
     return 0;
 }
 
@@ -1031,13 +1055,17 @@ s32 GetPooManhattanDistance(PooPos* a, PooPos* b) {
     s32 dy;
 
     dx = a->x - b->x;
+
     if (dx < 0) {
         dx = b->x - a->x;
     }
+
     dy = a->y - b->y;
+
     if (dy < 0) {
         dy = b->y - a->y;
     }
+
     return dx + dy;
 }
 

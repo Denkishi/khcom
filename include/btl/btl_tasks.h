@@ -10,7 +10,6 @@ struct BtlRikuWork;
 struct BtlSoraWork;
 struct BtlTaskArg;
 
-
 void task_btl_lockon_0(struct BtlLockonWork* work);
 u8 task_btl_lockon_1(struct BtlLockonWork* work);
 void task_btl_lockon_2(struct BtlLockonWork* work);

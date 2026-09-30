@@ -81,10 +81,12 @@ u8 task_btl_form_1(BtlFormWork* work) {
 
     if (work->flags & BTL_FORM_FLAG_WAIT_NEXT_ENTRY) {
         list = work->list;
+
         if (list->threshold >= work->nextTileCount + gBtlWork->enemyTileCount) {
             if (work->nextTileCount == 0) {
                 return 0;
             }
+
             work->entry = list->entries[work->entryIndex];
             work->timer = work->entry->delay;
             work->stepTimer = 0;
@@ -105,6 +107,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
                 work->nextTileCount = 0;
                 return 0;
             }
+
             work->nextTileCount = GetBtlFormEntryTileCount(work->list->entries[work->entryIndex]);
         }
     } else {
@@ -130,15 +133,19 @@ u8 task_btl_form_1(BtlFormWork* work) {
                         work->flags &= ~BTL_FORM_FLAG_MIRROR_X;
                     }
                 }
+
                 work->timer = 0xFFFF;
             }
+
             step = &work->entry->steps[work->stepIndex];
+
             if (work->stepTimer >= step->delay) {
                 if (work->flags & BTL_FORM_FLAG_MIRROR_X) {
                     x = work->x - (step->x << 8);
                 } else {
                     x = work->x + (step->x << 8);
                 }
+
                 y = work->y + (step->y << 8);
                 z = work->z + (step->z << 8);
                 SpawnEnemy(step->id, x, y, z);
@@ -322,6 +329,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         } else {
             work->angle = 64;
         }
+
         work->timer = 0;
         work->unk_5A = GetRandom() % 5 + 0xFFFE;
         break;
@@ -334,6 +342,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         } else {
             work->angle = 64;
         }
+
         work->timer = 0;
         work->steps = 0;
         break;
@@ -385,6 +394,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     case 4:
         work->x += gSineTable[(u8)work->angle] * 5;
         work->z += -gSineTable[(u8)work->angle + 64] * 5;
+
         if (work->z > 0) {
             work->z = 0;
         }
@@ -418,6 +428,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 3:
         work->x += gSineTable[(u8)work->angle] * 8;
@@ -449,6 +460,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
                 work->timer = 0;
                 break;
             }
+
             work->unk_5A = GetRandom() % 5 + 0xFFFE;
         }
 
@@ -458,13 +470,16 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         if (work->timer == 0) {
             work->steps = 16;
         }
+
         ApproachValue(&work->x, work->actor->x, work->steps);
         ApproachValue(&work->y, work->actor->y, work->steps);
         ApproachValue(&work->z, work->actor->z - 0x1000, work->steps);
         work->steps--;
+
         if (work->steps <= 3) {
             return 0;
         }
+
         work->timer++;
         break;
     case 0:
@@ -496,6 +511,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
                 BgAnimStop();
                 break;
             }
+
             return 0;
         }
 
@@ -507,6 +523,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             work->bounceVx = work->vx;
             break;
         }
+
         work->timer--;
         break;
     case 1:
@@ -530,6 +547,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         } else {
             work->steps--;
         }
+
         break;
     case 2:
         if (work->timer == 0) {
@@ -548,6 +566,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         if (work->steps > 0) {
             ApproachValue(&work->scale, 25, work->steps);
             work->steps--;
+
             if (work->steps <= 0) {
                 work->flags &= ~BTL_RAID_FLAG_BLADE_VISIBLE;
             }
@@ -729,10 +748,12 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
         if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
+
             if (count > 9) {
                 break;
             }
         }
+
         p = ListPoolNext(&p->node);
     }
 
@@ -771,14 +792,17 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     while (p != NULL) {
         if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             d = work->body.z - p->z;
+
             if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {
                 list[count] = p;
                 count++;
+
                 if (count > 9) {
                     break;
                 }
             }
         }
+
         p = ListPoolNext(&p->node);
     }
 

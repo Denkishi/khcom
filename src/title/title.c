@@ -65,12 +65,14 @@ u8 task_title_logo_1(TitleLogoWork* work) {
     if (IsTitleLogoShown() && gTitleLogoScaleDone == 0) {
         work->unk_48 -= 76;
         work->scale += 6;
+
         if (work->scale > 255) {
             work->scale = 0x100;
             work->unk_48 = 0;
             gTitleLogoScaleDone = 1;
         }
     }
+
     return 1;
 }
 
@@ -92,6 +94,7 @@ void task_title_logo_2(TitleLogoWork* work) {
         } else {
             x = 0x50;
         }
+
         y = 70;
 
         if (i == 0) {
@@ -102,6 +105,7 @@ void task_title_logo_2(TitleLogoWork* work) {
             if (work->scale == 0) {
                 continue;
             }
+
             affine = AllocObjAffine(0, 0x100, work->scale, 0);
 
             if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
@@ -113,6 +117,7 @@ void task_title_logo_2(TitleLogoWork* work) {
         } else {
             affine = 0;
         }
+
         DrawSprite(x, y, work->sprites[i].gfx, work->sprites[i].tiles, work->sprites[i].palette, affine, 0, i + 20);
     }
 }
@@ -145,6 +150,7 @@ void task_title_obj_0(TitleObjWork* work) {
     t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
 #ifdef VERSION_EU
     work->sprites[0].palette = LoadObjPalette(gUnk_0984A718, 0x20);
+
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_09750AF8, 0x3C0);
@@ -191,6 +197,7 @@ void task_title_obj_0(TitleObjWork* work) {
         work->sprites[0].x = 0x3D00;
         work->sprites[0].y = 0x77;
     }
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -219,6 +226,7 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[1].x = -0x7800;
     work->sprites[1].targetX = 0x7C00;
     work->sprites[1].y = 0xA0;
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -272,11 +280,13 @@ u8 task_title_obj_1(TitleObjWork* work) {
             ApproachValue(&work->sprites[1].x, work->sprites[1].targetX, work->slideTimer);
             ApproachValue(&work->sprites[2].x, work->sprites[2].targetX, work->slideTimer);
             work->slideTimer--;
+
             if (work->slideTimer == 0) {
                 gTitleObjSlideDone = 1;
             }
         }
     }
+
     return 1;
 }
 
@@ -332,6 +342,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     } else {
         work->layout = 0;
     }
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -364,6 +375,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     TitleCopyToPaletteBuffer(work->palette->index + 16, gUnk_0984A7F8, 0x20);
 #ifdef VERSION_EU
     work->tiles2[0] = LoadObjTiles(gUnkEu_0973F058, 0x280);
+
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         work->tiles2[1] = LoadObjTiles(gUnkEu_09741E9A, 0xB20);
@@ -384,6 +396,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     case 6:
         break;
     }
+
     work->tiles2[2] = LoadObjTiles(gUnkEu_09745B92, 0x700);
 #else
     work->tiles2[0] = LoadObjTiles(gUnk_09771DC0, 0x280);
@@ -408,6 +421,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #endif
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -429,6 +443,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     case 6:
         break;
     }
+
     work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
@@ -450,6 +465,7 @@ s16 TitleMenuChoiceRow(s16 a) {
     if (i > 3) {
         i = 0;
     }
+
     return i;
 }
 
@@ -459,6 +475,7 @@ void TitleMenuMoveBasic(s16* p) {
 
     max = (gGameState.flags & GAME_FLAG_SORA_CLEAR) ? 2 : 1;
     keys = GetKeysPressed() & DPAD_UP;
+
     if (keys != 0) {
         m4aSongNumStart(SONG_SYS_CLICK);
         (*p)--;
@@ -469,6 +486,7 @@ void TitleMenuMoveBasic(s16* p) {
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
         *p = *p + 1;
+
         if (*p > max) {
             *p = 0;
         }
@@ -482,6 +500,7 @@ void TitleMenuMoveOrdered(s16* p, s16 count) {
         m4aSongNumStart(SONG_SYS_CLICK);
         i = TitleMenuChoiceRow(*p);
         i--;
+
         if (i < 0) {
             i = count;
         }
@@ -489,12 +508,14 @@ void TitleMenuMoveOrdered(s16* p, s16 count) {
         m4aSongNumStart(SONG_SYS_CLICK);
         i = TitleMenuChoiceRow(*p);
         i++;
+
         if (i > count) {
             i = 0;
         }
     } else {
         return;
     }
+
     *p = sTitleMenuChoiceOrder[i];
 }
 
@@ -506,6 +527,7 @@ u8 task_title_menu_1(TitleMenuWork* work) {
     } else if (work->layout == 4) {
         TitleMenuMoveOrdered(work->choice, 1);
     }
+
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
@@ -563,6 +585,7 @@ void TitleMenuDrawFull(TitleMenuWork* work) {
 #endif
         y += 24;
     }
+
     y = TitleMenuChoiceRow(work->choice[0]) * 24 + 16;
 
     for (i = 0; i < 3; i++) {
@@ -586,6 +609,7 @@ void TitleMenuDrawNewGame(TitleMenuWork* work) {
 #endif
         y += 24;
     }
+
     y = TitleMenuChoiceRow(work->choice[0]) * 24 + 48;
 
     for (i = 0; i < 3; i++) {
@@ -598,6 +622,7 @@ void TitleMenuDrawSingle(TitleMenuWork* work) {
     s16 y;
 
     y = 56;
+
 #ifdef VERSION_EU
     {
         void** spr = (void**)sTitleMenuEntrySpritesEu[gLanguage];
@@ -615,6 +640,7 @@ void TitleMenuDrawSingle(TitleMenuWork* work) {
 
 void task_title_menu_2(TitleMenuWork* work) {
     work->gfx[0] = AnimUpdate(&work->anim);
+
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -636,6 +662,7 @@ void task_title_menu_2(TitleMenuWork* work) {
     case 6:
         break;
     }
+
     work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
@@ -657,6 +684,7 @@ void task_title_menu_2(TitleMenuWork* work) {
     } else {
         TitleMenuDrawSingle(work);
     }
+
     TaskPoolDraw(&work->tasks);
 }
 
@@ -670,6 +698,7 @@ void task_title_menu_3(TitleMenuWork* work) {
         ReleaseObjTiles(work->tiles2[i]);
         ReleaseObjPalette(work->palette2[i]);
     }
+
     TaskPoolDestroy(&work->tasks);
 }
 
@@ -747,6 +776,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
                 break;
             }
         }
+
         break;
     case L_BUTTON:
         for (j = 2; j > -1; j--) {
@@ -756,6 +786,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
                 break;
             }
         }
+
         break;
     }
 
@@ -763,6 +794,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
         SetPaletteEffect(v);
         TitleLoadPaletteBuffer();
     }
+
     return 1;
 }
 
@@ -772,6 +804,7 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
     s16 x;
 
     v = GetPaletteEffect();
+
 #ifdef VERSION_EU
     {
         void** a = (void**)gTitleLumiSpritesEu[gLanguage];
@@ -790,6 +823,7 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
     } else if (v > 0) {
         work->gfx = tbl[2];
     }
+
     x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 240 : 0;
     DrawSprite(x, 0x8F, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 100);
 }

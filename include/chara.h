@@ -2,13 +2,9 @@
 #define GUARD_CHARA_H
 
 #include "registration_data.h"
-
 #include "chara_types.h"
-
 #include "card_api.h"
-
 #include "chara_api.h"
-
 #include "sio_api.h"
 #include "util.h"
 #include "m4a_song.h"

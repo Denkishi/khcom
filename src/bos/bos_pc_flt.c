@@ -84,9 +84,11 @@ u8 BosPcFltIsSubmerged(Task* task) {
     PcFltWork* work;
 
     work = task->work;
+
     if (work->state == 8 && AnimGetGfxIndex(&work->anim) == 0) {
         return 1;
     }
+
     return 0;
 }
 
@@ -96,9 +98,11 @@ u8 BosPcFltIsPlayerOn(Task* task) {
 
     work = task->work;
     r = 0;
+
     if (IsPlayerOnPlatform(&work->collider) == 1) {
         r = 1;
     }
+
     return r;
 }
 
@@ -106,14 +110,18 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
     AnimState* anim;
 
     work->z = work->baseZ;
+
     if (work->shared->unk_02 == 0) {
         if (IsPlayerOnPlatform(&work->collider) == 1) {
             work->z += 0x200;
+
             if (work->playerOnPlatform != 1) {
                 work->playerOnPlatform = 1;
                 AnimChange(&work->anim, 8, 0);
             }
+
             work->sinkTimer -= 2;
+
             if (work->sinkTimer < 0) {
                 work->state = 1;
                 work->playerOnPlatform = 0;
@@ -127,10 +135,12 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
                 AnimChange(&work->anim, 1, 0);
             } else {
                 work->sinkTimer += 1;
+
                 if (work->sinkTimer > 720) {
                     work->sinkTimer = 720;
                 }
             }
+
             work->playerOnPlatform = 0;
         }
     } else {
@@ -146,6 +156,7 @@ void BosPcFltUpdateSink(PcFltWork* work) {
 
     work->z = work->baseZ;
     anim = &work->anim;
+
     if (AnimIsFinished(anim) == 1) {
         work->state = 2;
         work->timer = 0;
@@ -156,6 +167,7 @@ void BosPcFltUpdateSink(PcFltWork* work) {
 
 void BosPcFltUpdateSinkEnd(PcFltWork* work) {
     work->z = work->baseZ;
+
     if (AnimIsFinished(&work->anim) == 1) {
         work->state = 3;
         work->playerOnPlatform = 0;
@@ -166,6 +178,7 @@ void BosPcFltUpdateSinkEnd(PcFltWork* work) {
 void BosPcFltUpdateSubmerged(PcFltWork* work) {
     work->z = work->baseZ + 0x1000;
     work->timer -= 1;
+
     if (work->timer < 0) {
         if (work->shared->unk_02 == 0) {
             work->state = 4;
@@ -184,6 +197,7 @@ void BosPcFltUpdateRise(PcFltWork* work) {
 
     work->z = work->baseZ;
     anim = &work->anim;
+
     if (AnimIsFinished(anim) == 1) {
         work->state = 0;
         AnimReset(anim);
@@ -196,6 +210,7 @@ void func_0810B9DC(PcFltWork* work) {
 
     work->z = work->baseZ;
     anim = &work->anim;
+
     if (AnimIsFinished(anim) == 1) {
         work->state = 6;
         work->timer = 0;
@@ -206,6 +221,7 @@ void func_0810B9DC(PcFltWork* work) {
 
 void func_0810BA14(PcFltWork* work) {
     work->z = work->baseZ;
+
     if (work->shared->unk_02 == 0) {
         work->state = 7;
         work->timer = 0;
@@ -218,6 +234,7 @@ void func_0810BA3C(PcFltWork* work) {
 
     work->z = work->baseZ;
     anim = &work->anim;
+
     if (AnimIsFinished(anim) == 1) {
         work->state = 0;
         work->timer = 0;
@@ -232,11 +249,14 @@ void BosPcFltUpdateGimmick(PcFltWork* work) {
     u16 id;
 
     work->z = work->baseZ;
+
     if (work->timer == 0) {
         anim = &work->anim;
         fin = AnimIsFinished(anim);
+
         if (fin == 1) {
             id = AnimGetGfxIndex(anim);
+
             if (id != 0) {
                 AnimReset(anim);
                 AnimChange(anim, sBosPcFltFrameDefs[id].nextAnim, 0);
@@ -260,22 +280,27 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
     } else {
         f = work->unk_007;
     }
+
     if (work->state != 8 && work->shared->gimmickTimer > 0x257) {
         work->state = 8;
         work->playerOnPlatform = 0;
         work->timer = 0;
         work->sinkTimer = 360;
     }
+
     if (work->shared->unk_02 == 0) {
         if (work->centerX > 0xF400) {
             work->centerX -= 32;
         }
+
         if (work->centerY > 0x15400) {
             work->centerY -= 32;
         }
+
         if (work->radiusX <= 0x3FFF) {
             work->radiusX += 64;
         }
+
         if (work->radiusY <= 0x1FFF) {
             work->radiusY += 32;
         }
@@ -283,21 +308,26 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         if (work->centerX <= 0x103FF) {
             work->centerX += 32;
         }
+
         if (work->centerY <= 0x153FF) {
             work->centerY += 32;
         }
+
         if (work->radiusX > 0x3400) {
             work->radiusX -= 64;
         }
+
         if (work->radiusY > 0x1E00) {
             work->radiusY -= 32;
         }
     }
+
     if (f >= 0) {
         work->x = (((sBosPcFltCosine[work->orbitAngle >> 8] * (work->radiusX >> 8)) >> 8) + (work->centerX >> 8)) << 8;
         work->y = (((sBosPcFltSine[work->orbitAngle >> 8] * (work->radiusY >> 8)) >> 8) + (work->centerY >> 8)) << 8;
         work->orbitAngle = work->orbitAngle - (((work->shared->hpRatio * 3) << 4) / 256 - 112);
     }
+
     switch (work->state) {
     case 0:
         BosPcFltUpdateFloat(work);
@@ -327,6 +357,7 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         BosPcFltUpdateGimmick(work);
         break;
     }
+
     if (IsPlayerOnPlatform(&work->collider) == 1) {
         work->playerOnPlatform = 1;
     }
@@ -338,6 +369,7 @@ void BosPcFltSyncCollider(PcFltWork* work) {
     p = &work->collider;
     ColliderSetPosition(p, work->x, work->y + 0x200, 0);
     ColliderSetHeight(p, -work->z >> 8);
+
     if (work->z > 0) {
         ColliderSetDisabled(p, 1);
     } else {
@@ -382,12 +414,14 @@ u8 task_bos_pc_flt_1(PcFltWork* work) {
     anim = &work->anim;
     AnimUpdate(anim);
     id = AnimGetGfxIndex(anim);
+
     if (id == 0) {
         work->z += 0x1000;
     } else {
         work->z += sBosPcFltFrameDefs[id].z << 8;
         ColliderSetRadius(&work->collider, sBosPcFltFrameDefs[id].radius);
     }
+
     BosPcFltSyncCollider(work);
     work->unk_007 = work->shared->hpRatio & 1;
     return 1;
@@ -404,6 +438,7 @@ void task_bos_pc_flt_2(PcFltWork* work) {
         id = AnimGetGfxIndex(&work->anim);
         WorldToScreen(&sx, &sy, work->x,
             work->y + (sBosPcFltFrameDefs[id].drawY << 8), work->z);
+
         if (gBtlWork->platform != NULL) {
             g = GetBattleSpritePriorityFlags(work->y + (sBosPcFltFrameDefs[id].drawY << 8));
             h = (-0x1004 - ((work->y >> 8) << 2)) | 3;
@@ -411,6 +446,7 @@ void task_bos_pc_flt_2(PcFltWork* work) {
             g = GetBattleSpritePriorityFlags(work->y);
             h = -0x1004 - ((work->y >> 8) << 2);
         }
+
         DrawSprite(sx, sy, AnimGetGfx(&work->anim), work->tiles,
                    work->palette, 0, g, h);
     }

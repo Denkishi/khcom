@@ -43,6 +43,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             TaskCreate(&work->tasks, &gTaskDescSpotLight, &work->spotLightEnd);
             gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
+
         steps = 30 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->frontX, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.y, work->frontY, steps);
@@ -58,6 +59,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
                           (gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + work->y2 + work->z2) / 2);
             work->timer++;
         }
+
         break;
     case 1:
         if (work->timer > 0) {
@@ -83,6 +85,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             work->timer = 0;
             break;
         }
+
         break;
     case 3:
         if (work->timer == 0) {
@@ -95,6 +98,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             for (i = 0; i <= 31; i++) {
                 FadeSetPaletteExcluded(i, 0);
             }
+
             work->timer++;
         } else if (work->timer <= 19) {
             work->timer++;
@@ -108,6 +112,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             work->timer = 0;
             work->state = 4;
         }
+
         break;
     case 4:
         if (work->timer == 16) {
@@ -125,6 +130,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 5:
         if (work->timer > 60) {
@@ -133,12 +139,14 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 2:
         if (work->timer == 0) {
             work->spotLightEnd = 1;
             gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
+
         steps = 30 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.y, work->y, steps);
@@ -152,6 +160,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             SetBgPriority(1, 1);
             return 0;
         }
+
         work->timer++;
         MapSetCameraTarget((gFieldState->actor.fieldPosition.x + work->x2) / 2,
                       (gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + work->y2 + work->z2) / 2);
@@ -160,6 +169,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         if (work->timer == 0) {
             gFieldState->flags |= FIELD_FLAG_AUTO_WALK;
         }
+
         steps = 40 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x2, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.y, work->y2, steps);
@@ -168,10 +178,12 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         if (IsAtTargetDoor(&gFieldState->actor.fieldPosition)) {
             gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
         }
+
         break;
     case 7:
         break;
     }
+
     TaskPoolUpdate(&work->tasks);
     return 1;
 }

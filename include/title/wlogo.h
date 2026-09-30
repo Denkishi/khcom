@@ -2,11 +2,8 @@
 #define GUARD_WLOGO_H
 
 #include "registration_data.h"
-
 #include "animation_resource_assets.h"
-
 #include "obj.h"
-
 #include "chara_api.h"
 #include "pallet.h"
 #include "obj_api.h"
@@ -436,6 +433,7 @@ typedef struct WlogoMonsWork {
     u8 blend;
     u8 unk_02F;
 } WlogoMonsWork;
+
 extern s32 gWlogoTtSkew;
 extern const WlogoPooObjStep gWlogoPooObjSteps[5][5];
 extern u8 gUnk_0961AA92[];

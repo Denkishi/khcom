@@ -6,25 +6,17 @@
 #include "msg_portrait_data.h"
 #include "event_background_types.h"
 #include "registration_data.h"
-
 #include "bg_animation_data.h"
-
 #include "obj.h"
-
 #include "msg_types.h"
-
 #include "evt_types.h"
 #include "event_chara_types.h"
 #include "evt_data.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
 #include "msg_api.h"
-
 #include "pallet.h"
 #include "save_api.h"
-
 #include "m4a_song.h"
 #include "battle_actor.h"
 #include "text.h"

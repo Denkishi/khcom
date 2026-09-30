@@ -4,11 +4,8 @@
 #include "task_descriptors.h"
 #include "registration_data.h"
 #include "system_state.h"
-
 #include "mode_chkbtl_api.h"
-
 #include "mode_battle_api.h"
-
 #include "display.h"
 #include "battle_actor.h"
 #include "btl_collision.h"
@@ -21,7 +18,6 @@
 #include "engine.h"
 #include "m4a.h"
 #include "btl_effect.h"
-
 #include "formation_data.h"
 #ifdef VERSION_EU
 #include "save_api.h"

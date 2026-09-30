@@ -2,11 +2,8 @@
 #define GUARD_MODE_WORLDWARP_H
 
 #include "obj.h"
-
 #include "card_api.h"
-
 #include "map_api.h"
-
 #include "text.h"
 #include "fade.h"
 #include "obj_api.h"

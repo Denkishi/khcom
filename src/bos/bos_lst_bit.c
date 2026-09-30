@@ -52,6 +52,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
 
     if ((s16)*work->falCount <= 31) {
         arg.kind = 0;
+
         if (kind == 1) {
             arg.x = work->targetX;
             arg.y = work->targetY;
@@ -61,6 +62,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
             arg.y = work->y;
             arg.z = work->z;
         }
+
         arg.facing = *work->facing;
         arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
@@ -102,7 +104,6 @@ u8 BosLstBitHasShots(Task* task) {
 u8 eu_0810F08C(Task* task) {
     LstState* s;
     u8 result;
-
     s = task->work;
     result = BosLstBitIsAlive(task);
 
@@ -157,6 +158,7 @@ void BosLstBitStartReturn(Task* task) {
     u16 zero;
 
     s = task->work;
+
 #ifdef VERSION_EU
     if ((u16)(s->state - 5) > 1) {
 #endif
@@ -229,18 +231,21 @@ s32 BosLstBitAtanLookup(s32 a, s32 b) {
     }
 
     v = (b << 8) / a;
+
     if (v <= sBosLstBitTanTable[0]) {
         return 0;
     }
 
     step = 8;
     i = 16;
+
     while (step != 0 && v != sBosLstBitTanTable[i]) {
         if (v < sBosLstBitTanTable[i]) {
             i -= step;
         } else {
             i += step;
         }
+
         step /= 2;
     }
 
@@ -284,13 +289,16 @@ s32 BosLstBitAngleDiff(u8 a, u8 b) {
 
     if (a > b) {
         d = a - b;
+
         if (d > 128) {
             d = d - 256;
         }
+
         return -d;
     }
 
     d = b - a;
+
     if (d > 128) {
         d = d - 256;
     }
@@ -418,6 +426,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             work->scaleX = 0x100;
             work->scaleY = 0x100;
         }
+
         break;
     case 1:
         if (work->timer == 0) {
@@ -485,6 +494,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             AnimReset(&work->anim);
             AnimChange(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
         }
+
         break;
     case 3:
         if (work->timer == 0) {
@@ -519,6 +529,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
                 }
             }
         }
+
         break;
     case 4:
         if (work->timer > 14) {
@@ -566,6 +577,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
             work->timer = 0;
             work->unk_008 = 0;
         }
+
         break;
     case 6:
         work->scaleX = 0x100;
@@ -670,6 +682,7 @@ void task_bos_lst_bit_2(LstState* work) {
     }
 
     pal = work->palette;
+
     if ((work->hurtTimer & 1) != 0) {
         pal = work->palette2;
     }

@@ -293,6 +293,7 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
             k = 0xFFFF;
             *q = k;
         }
+
         break;
     case 1:
         if (n != 0) {
@@ -327,6 +328,7 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
             k = 0xFFFF;
             *q = k;
         }
+
         break;
     }
 }
@@ -651,6 +653,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
 
     gSoraSelectedCard->priority = 50;
 }
+
 void SelectNextSoraCard(CardBattleWork* w, u8 b) {
     CardDisplayArgs args;
     CardDisplayWork* p;
@@ -793,6 +796,7 @@ void TrySoraCardBreak(CardBattleWork* w) {
     s8 n;
     u8 skip;
     u8 i;
+
 #ifdef VERSION_EU
     s32 j;
     s32 k;
@@ -932,20 +936,27 @@ s32 UseSoraCard(CardBattleWork* w) {
 
     b = gBtlWorkAlias;
     flags = b->flags;
+
     if ((flags & BTL_FLAG_CARD_ACTIVE) == 0) {
         gCardBattleState->activeCards[0] = gSoraSelectedCard;
+
         if (b->hcEffect == 1) {
             gCardBattleState->activeValue = gSoraSelectedCard->value + 1;
+
             if (gSoraSelectedCard->value < 9) {
                 TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &gSoraSelectedCard->cardDef);
             }
+
             gSoraSelectedCard->value++;
+
             if (gSoraSelectedCard->value > 9) {
                 gSoraSelectedCard->value = 9;
             }
+
             if ((s16)gCardBattleState->activeValue > 9) {
                 gCardBattleState->activeValue = 9;
             }
+
             gSoraSelectedCard->valueModified = 1;
         } else if (b->hcEffect == 21) {
             if (gSoraSelectedCard->value != 0) {
@@ -959,6 +970,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         } else {
             gCardBattleState->activeValue = gSoraSelectedCard->value;
         }
+
         gCardBattleState->activeCardCount = 1;
         gSoraSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
         gBtlWork->soraOwnsPlay = 1;
@@ -969,35 +981,45 @@ s32 UseSoraCard(CardBattleWork* w) {
         if (b->soraOwnsPlay == 1) {
             return 1;
         }
+
         if ((flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
             TrySoraCardBreak(w);
         } else {
             TrySoraCardBreak(w);
         }
+
         gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_BUSY;
     }
+
     w->cardsLeft[w->listIndex]--;
+
     if (w->cardsLeft[w->listIndex] == 1) {
         gSoraSelectedCard->args.slot->unk_0B = 1;
     }
+
     if ((gSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_ITEM) && (gSoraSelectedCard->flags & CARD_DISP_FLAG_IN_PLAY)) {
         gSoraSelectedCard->args.slot->removed = 1;
     }
+
     if (gSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
         gSoraSelectedCard->args.slot->removed = 1;
     }
+
     if (gSoraSelectedCard->premium == 1) {
         gSoraSelectedCard->args.slot->removed = 1;
+
         if (CountRemainingAttackCards(w, 0) == 0) {
             gSoraSelectedCard->args.slot->removed = 0;
         }
     }
+
     w->playedCards[0] = gSoraSelectedCard;
     gSoraSelectedCard->command = 5;
     gSoraSelectedCard->priority = 50;
     gSoraSelectedCard->args.slot->used = 1;
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
     TickSoraHcEffectOnCardUse();
+
     if (gBtlWork->hcEffect == 37) {
         u16 v = GetRandomHcEffect();
         func_0807B45C(w);
@@ -1006,6 +1028,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         ApplySoraHcEffect(w);
         gBtlWork->hcEffectCount = gHcEffectDefs[gBtlWork->hcEffect].count;
     }
+
     other = 0xFF;
     id = other;
     found = 0;
@@ -1085,6 +1108,7 @@ s32 UseSoraCard(CardBattleWork* w) {
     }
 
     gSoraSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
+
     if (gBtlWork->hcEffect == 40 && (gSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->cardsLeft[w->listIndex] == 1) {
         RemoveSoraCardDisplays(w);
         gSoraSelectedCard = 0;
@@ -1092,10 +1116,12 @@ s32 UseSoraCard(CardBattleWork* w) {
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
+
         if (FadeGetAmount() == 0) {
             FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
+
     return 1;
 }
 
@@ -1125,11 +1151,13 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
         ApplySoraHcEffect(w);
         gCardBattleState->soraHcEffectReplaced = 1;
     }
+
     gSoraSelectedCard->args.slot->removed = 1;
     gSoraSelectedCard->command = 10;
     gSoraSelectedCard->args.slot->used = 1;
     gSoraSelectedCard->priority = 50;
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
+
     if (w->stockValue != 0) {
         UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((w->stockValue - 1) << 7));
         w->unk_C4[3] = 8;
@@ -1231,6 +1259,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
     gSoraSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
     return 1;
 }
+
 s32 UseSoraGimmickCard(CardBattleWork* w) {
     CardDisplayArgs args;
     u16 id;
@@ -1334,6 +1363,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
     gCardBattleState->gimmickCardCount--;
     return 1;
 }
+
 s32 StockSoraCard(CardBattleWork* w) {
     CardDisplayArgs args;
     u16 id;
@@ -1348,13 +1378,16 @@ s32 StockSoraCard(CardBattleWork* w) {
     if (!(gSoraSelectedCard->flags & CARD_DISP_FLAG_SETTLED)) {
         return 1;
     }
+
     if ((u16)(gSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_GIMMICK)) {
         m4aSongNumStart(SONG_SYS_BEEP);
         return 1;
     }
+
     if (gCardBattleState->unk_0B4 == 112 || gCardBattleState->unk_0B4 == 109) {
         return 1;
     }
+
     w->unk_C4[1] = 0;
     gCardBattleState->soraStockNameShown = 0;
     m4aSongNumStart(SONG_SYS_KETEI2);
@@ -1367,13 +1400,17 @@ s32 StockSoraCard(CardBattleWork* w) {
     gCardBattleState->unk_018[gCardBattleState->unk_0DE] = gSoraSelectedCard;
     gSoraSelectedCard->args.slot->stocked = active = 1;
     gSoraSelectedCard->args.slot->used = active;
+
     if (gBtlWork->hcEffect == 1) {
         n = gSoraSelectedCard->value + 1;
+
         if (n > 9) {
             n = 9;
         }
+
         gSoraSelectedCard->valueModified = active;
         gSoraSelectedCard->value = n;
+
         if (gSoraSelectedCard->value < 9) {
             TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &gSoraSelectedCard->cardDef);
         }
@@ -1389,17 +1426,22 @@ s32 StockSoraCard(CardBattleWork* w) {
     } else {
         n = gSoraSelectedCard->value;
     }
+
     w->stockValue += n;
     w->stockCount++;
     gCardBattleState->unk_0DE++;
+
     if (w->stockValue != 0) {
         UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((w->stockValue - 1) << 7));
         w->unk_C4[3] = 8;
     }
+
     w->cardsLeft[w->listIndex]--;
+
     if (gSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
         gSoraSelectedCard->args.slot->removed = 1;
     }
+
     if (gBtlWork->hcEffect == 37) {
         u16 v = GetRandomHcEffect();
         func_0807B45C(w);
@@ -1408,6 +1450,7 @@ s32 StockSoraCard(CardBattleWork* w) {
         ApplySoraHcEffect(w);
         gBtlWork->hcEffectCount = gHcEffectDefs[gBtlWork->hcEffect].count;
     }
+
     other = 0xFF;
     id = other;
     found = 0;
@@ -1487,16 +1530,19 @@ s32 StockSoraCard(CardBattleWork* w) {
     }
 
     gSoraSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
+
     if (gBtlWork->hcEffect == 40 && (gSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->cardsLeft[w->listIndex] == 1) {
         RemoveSoraCardDisplays(w);
         gSoraSelectedCard = 0;
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
+
         if (FadeGetAmount() == 0) {
             FadeFromAmount(FADE_MODE_ADD_WHITE, 16, 20);
         }
     }
+
     return 1;
 }
 
@@ -1744,6 +1790,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
             }
         }
 #endif
+
         return;
     }
 
@@ -2167,6 +2214,7 @@ void ApplySoraHcEffect(CardBattleWork* w) {
                 gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
             }
 #endif
+
             gCardBattleState->rikuHcEffect = 0;
             gRikuBtlWork->hcEffect = 0;
             gRikuBtlWork->hcEffectCount = 0;
@@ -2523,6 +2571,7 @@ void TickSoraHcEffectOnCardUse(void) {
         gBtlWork->hcEffectCount--;
     }
 }
+
 void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     vu32 zero;
     u16 v;
@@ -2591,6 +2640,7 @@ void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
     LinkSoraCardDisplay(p);
 }
+
 u8 SoraCardUpdate(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
 
@@ -2849,6 +2899,7 @@ u8 func_0807C3E8(CardDisplayWork* p, void* a) {
 u8 func_0807C4BC(CardDisplayWork* p, void* a) {
     ApproachValue(&p->x, 0x7800, p->timer);
     ApproachValue(&p->y, 0x8400, p->timer);
+
     if ((s16)p->timer > 0) {
         p->timer--;
     } else {
@@ -2886,18 +2937,22 @@ u8 func_0807C4BC(CardDisplayWork* p, void* a) {
 
     return 1;
 }
+
 u8 func_0807C5D8(CardDisplayWork* w, void* a) {
     ApproachValue(&w->unk_8C, gPlayedCardCenter[0], w->timer);
     ApproachValue(&w->unk_90, gPlayedCardCenter[1], w->timer);
     ApproachValue(&w->unk_84, w->unk_88, w->timer);
     ApproachValue(&w->scaleX, 0x100, w->timer);
     ApproachValue(&w->scaleY, 0x100, w->timer);
+
     if ((s16)w->timer > 0) {
         w->timer--;
     } else {
         w->timer = 0;
     }
+
     func_0807D0F4(w);
+
     switch (w->stockIndex) {
     case 0:
         w->priority = 50;
@@ -2909,6 +2964,7 @@ u8 func_0807C5D8(CardDisplayWork* w, void* a) {
         w->priority = 60;
         break;
     }
+
     if (w->flags & CARD_DISP_FLAG_BROKEN) {
         w->priority -= 4;
         w->unk_84 = 0x500;
@@ -2918,22 +2974,27 @@ u8 func_0807C5D8(CardDisplayWork* w, void* a) {
         gCardBattleState->soraStockActive = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0807D3A0);
     }
+
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         w->timer = 8;
         w->unk_9E = 8;
         gCardBattleState->activeCardCount--;
         gCardBattleState->activeValue = 0;
+
         if (gCardBattleState->activeCardCount == 0) {
             gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
             gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
             TickSoraHcEffectOnPlayEnd();
         }
+
         gCardBattleState->soraStockActive = 0;
         gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_BUSY;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE04);
     }
+
     return 1;
 }
+
 u8 func_0807C75C(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
 
@@ -2992,6 +3053,7 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
                 p->y = gSoraCardLayout[3 - p->stockIndex][1] - 0x200;
                 p->unk_A2 = 1;
             }
+
             break;
         case 1:
             p->y += 0x200;
@@ -3001,6 +3063,7 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
                 p->unk_A2 = 0;
                 p->timer = 16;
             }
+
             break;
         }
     } else {
@@ -3011,6 +3074,7 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
     p->bobAngle += 4;
     return 1;
 }
+
 u8 func_0807C934(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
     u16 t;
@@ -3225,6 +3289,7 @@ void UpdateCardDisplayFlip(CardDisplayWork* p) {
 
 u8 func_0807CE04(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
+
     if ((s16)p->timer > 0) {
         p->timer--;
     } else {
@@ -3365,6 +3430,7 @@ void func_0807D0F4(CardDisplayWork* p) {
     p->x = gSineTable[(p->unk_7C >> 8) & 0xFF] * (p->unk_84 >> 8) + p->unk_8C;
     p->y = -gSineTable[((p->unk_7C >> 8) & 0xFF) + 64] * (p->unk_84 >> 8) + p->unk_90;
 }
+
 u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
     switch (w->command) {
     case 5:
@@ -3372,6 +3438,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
             LoadCardDisplayGfx(w);
             w->flags |= CARD_DISP_FLAG_GFX_LOADED;
         }
+
         UpdateSoraCardRingPosition(w);
         w->timer = 10;
         w->priority -= 4;
@@ -3383,6 +3450,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
             LoadCardDisplayGfx(w);
             w->flags |= CARD_DISP_FLAG_GFX_LOADED;
         }
+
         w->timer = 8;
         w->priority -= 4;
         LoadSoraCardDisplayGfx2(w);
@@ -3417,6 +3485,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)func_0807D584);
         return 1;
     }
+
     UpdateSoraCardValue(w);
     return 1;
 }
@@ -3445,6 +3514,7 @@ void LinkSoraCardDisplay(CardDisplayWork* p) {
     ListNodeInit(&p->node, p->args.pool, p);
     ListPoolAppend(&p->node, p->args.pool);
 }
+
 u8 func_0807D3A0(CardDisplayWork* p, void* a) {
     p->command = 0;
     p->y -= p->unk_84;
@@ -3487,6 +3557,7 @@ u8 func_0807D3A0(CardDisplayWork* p, void* a) {
 
     return 1;
 }
+
 void LoadSoraCardDisplayGfx2(CardDisplayWork* p) {
     void* tiles;
     void* pal;
@@ -3648,6 +3719,7 @@ u8 func_0807D810(CardDisplayWork* p) {
 
     return 1;
 }
+
 void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
     vu32 zero;
     vu32 zero2;
@@ -3772,6 +3844,7 @@ void SetSoraReloadCounterAnim(ReloadGauge* p, s32 a) {
 
     p->gfx3 = gfx;
 }
+
 void LoadSoraReloadCardGfx(CardDisplayWork* p) {
     ReloadGauge* d;
 
@@ -3793,6 +3866,7 @@ void LoadSoraReloadCardGfx(CardDisplayWork* p) {
     AnimStart(&d->anim3, gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP);
     d->gfx2 = gRiCardF0RedFrames[gCardBattleState->soraGaugeFullFrame + 2];
 }
+
 void card_reload_2(CardDisplayWork* p) {
     ReloadGauge* w;
     s16 y;
@@ -3834,6 +3908,7 @@ void card_reload_2(CardDisplayWork* p) {
         }
     }
 }
+
 void card_reload_3(CardDisplayWork* p) {
     ReleaseCardDisplayGfx(p);
     EwramFree(p->reloadGauge);
@@ -3842,6 +3917,7 @@ void card_reload_3(CardDisplayWork* p) {
         gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
     }
 }
+
 void AdvanceSoraReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
     if (gCardBattleState->soraGaugeAnim <= 7) {
         gCardBattleState->soraGaugeAnim++;
@@ -3849,18 +3925,22 @@ void AdvanceSoraReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
 
     AnimStart(&p->anim3, (u16)gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
+
 void ResetSoraReloadGaugeAnim(ReloadGauge* p) {
     gCardBattleState->soraGaugeAnim = 2;
     AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
+
 void func_0807DDCC(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = gRiCardF0RedFrames[3];
     p->gfx2 = gRiCardF0RedFrames[gCardBattleState->soraGaugeFullFrame + 2];
 }
+
 void func_0807DDF4(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = AnimUpdate(&p->anim2);
     p->gfx2 = AnimUpdate(&p->anim3);
 }
+
 void UpdateSoraReloadGauge(CardDisplayWork* p) {
     ReloadGauge* w = p->reloadGauge;
     u8 v = 0;
@@ -3957,38 +4037,49 @@ void UpdateSoraCardValue(CardDisplayWork* w) {
     } else if (gBtlWork->hcEffect == 31) {
         w->valueModified = 1;
         w->value = 10 - w->cardDef->value;
+
         if (w->value == 10) {
             w->value = 0;
         }
     } else {
         w->value = w->cardDef->value;
+
         switch (gGameState.roomEffect) {
         case 7:
             if (w->cardDef->category == 1) {
                 w->value += 2;
+
                 if (w->value > 9) {
                     w->value = 9;
                 }
+
                 w->valueModified = 1;
             }
+
             break;
         case 8:
             if (w->cardDef->category == 2 && (w->cardDef->flags & CARD_DEF_FLAG_ITEM)) {
                 w->value += 2;
+
                 if (w->value > 9) {
                     w->value = 9;
                 }
+
                 w->valueModified = 1;
             }
+
             break;
         case 9:
             if (w->cardDef->category == 0) {
                 w->value += 2;
+
                 if (w->value > 9) {
                     w->value = 9;
                 }
+
                 w->valueModified = 1;
             }
+
             break;
         default:
             w->valueModified = 0;
@@ -3997,6 +4088,7 @@ void UpdateSoraCardValue(CardDisplayWork* w) {
         }
     }
 }
+
 void TickSoraHcEffectOnPlayEnd(void) {
     BtlWork* p;
 
@@ -4010,29 +4102,37 @@ void TickSoraHcEffectOnPlayEnd(void) {
         break;
     }
 }
+
 void TickSoraHcEffectOnAttackEnd(void) {
     if (gBtlWork->hcEffect == 2) {
         gBtlWork->hcEffectCount--;
     }
 }
+
 void RequestRikuPotion(void) {
     gRikuCardReloadRequest = 17;
 }
+
 void RequestRikuHiPotion(void) {
     gRikuCardReloadRequest = 18;
 }
+
 void RequestRikuMegaPotion(void) {
     gRikuCardReloadRequest = 19;
 }
+
 void RequestRikuEther(void) {
     gRikuCardReloadRequest = 21;
 }
+
 void RequestRikuMegaEther(void) {
     gRikuCardReloadRequest = 22;
 }
+
 void RequestRikuElixir(void) {
     gRikuCardReloadRequest = 23;
 }
+
 void RequestRikuMegalixir(void) {
     gRikuCardReloadRequest = 24;
 }

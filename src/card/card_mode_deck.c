@@ -48,6 +48,7 @@ void Mode_DeckExchange_0(void) {
     TaskPoolInit(&gModeDeckExchangeTasks, 1);
     TaskCreate(&gModeDeckExchangeTasks, &gTaskDescDeckexchange, &gModeDeckExchangeResult);
 }
+
 void Mode_DeckExchange_1(void) {
     if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioChgCardRecvSlotIds();
@@ -62,16 +63,19 @@ void Mode_DeckExchange_1(void) {
         ModeRequest(&gModeSioChgCard, gSioTradeCardId);
     }
 }
+
 void Mode_DeckExchange_2(void) {
     TaskPoolDestroy(&gModeDeckExchangeTasks);
 }
 #endif
+
 void DarkPoint_0(DarkPointWork* w) {
     w->tiles = LoadObjTiles(gUnk_093FB6C4, 576);
     w->slideTimer = 8;
     w->x = -0x2000;
     SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
 }
+
 s32 DarkPoint_1(DarkPointWork* w) {
     SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
 
@@ -82,6 +86,7 @@ s32 DarkPoint_1(DarkPointWork* w) {
 
     return 1;
 }
+
 void DarkPoint_2(DarkPointWork* w) {
     DrawSprite(w->x >> 8, 27, gUnk_09EF1298[0], w->tiles, gCardBattleState->palette, 0, 0, 30);
 
@@ -96,6 +101,7 @@ void DarkPoint_2(DarkPointWork* w) {
         DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, 0, 0, 29);
     }
 }
+
 void DarkPoint_3(DarkPointWork* w) {
     ReleaseObjTiles(w->tiles);
 }
@@ -108,6 +114,7 @@ void AddCardToDeckViaActive(u8 a, u16 b) {
     AddCardToActiveDeck(b);
     SetActiveDeckIndex(saved);
 }
+
 void FillDebugCardCollection(void) {
 #ifdef VERSION_EU
     u16 i;
@@ -177,6 +184,7 @@ void FillDebugCardCollection(void) {
     }
 #endif
 }
+
 void func_080AB22C(u8 a) {
     AddCardToDeckViaActive(a, 0);
     AddCardToDeckViaActive(a, 1);

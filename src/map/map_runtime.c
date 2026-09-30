@@ -230,6 +230,7 @@ u16 GetMapDoorFlags(u8 a, u8 b) {
 
     return r;
 }
+
 void UpdateGameWorld(void) {
     u16 t;
 
@@ -291,6 +292,7 @@ void UpdateGameWorld(void) {
         break;
     }
 }
+
 void SetWorldJiminyFlags(void) {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.world) {
@@ -394,6 +396,7 @@ void SetWorldJiminyFlags(void) {
         }
     }
 }
+
 void SetFloorJiminyFlags(void) {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.floor) {
@@ -448,6 +451,7 @@ void SetFloorJiminyFlags(void) {
         }
     }
 }
+
 void AdvanceFloorStory(void) {
     u8* e = GetMapRoomEvent(gMapFloorState.eventStep);
     MapEventDoor* p;
@@ -816,6 +820,7 @@ void EnterExitHall(void) {
         RequestMapMode();
     }
 }
+
 void InitMapFloorState(u8 a, u8 b) {
     s32 i;
     u16 t;
@@ -1056,6 +1061,7 @@ u8 MapFindOpenDoor(FldPos* p) {
 
     return r;
 }
+
 u8 IsAtTargetDoor(FldPos* p) {
     s32 i;
     u16 a;

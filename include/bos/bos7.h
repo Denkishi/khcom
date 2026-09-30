@@ -3,9 +3,7 @@
 
 #include "registration_data.h"
 #include "battle_actor_types.h"
-
 #include "gba/syscall.h"
-
 #include "m4a_song.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -238,7 +236,6 @@ extern const EmyKind gBosLstCtrEmyKind;
 extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_09C5C4E2[];
 extern u8 gUnk_09C5C704[];
-
 
 void BosLstFldUpdateShake(void);
 void BosLstFldResetShake(void);

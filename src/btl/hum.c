@@ -624,6 +624,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
     switch (_0800E434(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
+
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
@@ -632,6 +633,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             } else {
                 work->base.state = 19;
             }
+
             break;
         case 37:
         case 39:
@@ -640,6 +642,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             } else {
                 work->base.state = 20;
             }
+
             break;
         case 0xEB3ACEB3:
             work->base.state = 31;
@@ -648,11 +651,13 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.state = 28;
             break;
         }
+
         break;
     case 4:
         work->nextState = 0;
         break;
     }
+
     if (HumChooseCardAction(&work->base, 8, 32, 32, 24)) {
         if (GetRandom() % 2) {
             work->base.stockMoves = sHumCloudStockMoves[0];
@@ -660,6 +665,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.stockMoves = sHumCloudStockMoves[1];
         }
     }
+
     switch (work->base.state) {
     case 12:
     case 18:
@@ -667,11 +673,13 @@ u8 task_hum_cloud_1(CloudWork* work) {
         break;
     case 17: {
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
             }
         }
+
         if ((act->x - x >= 0) ? act->x - x <= 0x4FFF : x - act->x <= 0x4FFF) {
             if (x <= 0xFFFF) {
                 CloudLeapTo(w, (gBtlWork->xMax - 40) << 8,
@@ -681,23 +689,28 @@ u8 task_hum_cloud_1(CloudWork* work) {
                     (gBtlWork->yMin + gBtlWork->yMax) << 7);
             }
         }
+
         break;
     }
     case 0:
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
+
         if (func_08081828()) {
             break;
         }
+
         if ((u16)(GetRandom() % 60) == 0) {
             work->base.state = 8;
             work->base.stateTimer = 0;
             break;
         }
+
         if (HumIsNearAreaEdge(&work->base, 40)) {
             CloudLeapTo(w, 0x10000,
                 (gBtlWork->yMin + gBtlWork->yMax) << 7);
             break;
         }
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
@@ -705,23 +718,27 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             HumFaceTarget(&work->base, 30);
         }
+
         work->base.stateTimer++;
         break;
     case 8: {
         AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
+
         if (HumMoveToward(&work->base, work->base.targetX, y, 0x133)) {
             work->base.state = 0;
             work->base.stateTimer = 0;
             break;
         }
+
         if ((u16)(GetRandom() % 150) == 0) {
             if ((act->x - x >= 0) ? act->x - x > 70 : x - act->x > 70) {
                 CloudJumpTo(w, x, y);
                 break;
             }
         }
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if ((u8)CloudTryJumpAway(w)) {
                 break;
@@ -729,6 +746,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             HumFaceTarget(&work->base, 30);
         }
+
         work->base.stateTimer++;
         break;
     }
@@ -746,6 +764,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             m4aSongNumStart(SONG_VO_MKU_ATTACK00);
             MakeOpponentsHittable();
         }
+
         if (AnimGetFrame(&work->base.anim) == 6) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x11A, act->x - 9216, act->y, act->z, 24, 16, 50)
@@ -758,6 +777,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 20:
@@ -767,6 +787,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             m4aSongNumStart(SONG_VO_MKU_ATTACK01);
             MakeOpponentsHittable();
         }
+
         if (AnimGetFrame(&work->base.anim) == 6) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x11A, act->x - 8192, act->y, act->z, 22, 16, 50)
@@ -779,12 +800,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 25:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         }
+
         if (work->base.stateTimer > 3) {
             work->base.stateTimer = 0;
             work->base.state = 26;
@@ -792,6 +815,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26: {
         s32 d;
@@ -799,6 +823,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         act->x += ((s32)work->base.targetX - act->x) >> 4;
         act->y += ((s32)work->base.targetY - act->y) >> 4;
         d = work->base.vz;
+
         if (d < 0) {
             if (d <= -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -810,6 +835,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
+
         if (act->z >= 0) {
             work->base.stateTimer = 0;
             work->base.state = 27;
@@ -817,18 +843,21 @@ u8 task_hum_cloud_1(CloudWork* work) {
             HumFaceTarget(&work->base, 1);
             work->base.stateTimer++;
         }
+
         break;
     }
     case 27:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = w->nextState;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 33: {
         s32 d;
@@ -836,7 +865,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x500;
         }
+
         d = work->base.vz;
+
         if (d < 0) {
             if (d > -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
@@ -844,12 +875,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
         }
+
         if ((s32)work->base.vz > 0) {
             work->base.stateTimer = 0;
             work->base.state = 34;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 34: {
@@ -860,35 +893,45 @@ u8 task_hum_cloud_1(CloudWork* work) {
             w->unk_188 = 0;
             work->base.targetZ = act->z;
         }
+
         ret = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->unk_188);
+
         if (ret) {
             work->base.state = 26;
             w->nextState = 0;
             work->base.stateTimer = 0;
         } else {
             w->unk_188 += 76;
+
             if ((s32)w->unk_188 > 0x800) {
                 w->unk_188 = 0x800;
             }
+
             d = ((s32)work->base.targetX - act->x) >> 3;
+
             if (d < 0) {
                 d = -d;
             }
+
             if (d < (s32)w->unk_188) {
                 w->unk_188 = d;
             }
+
             {
                 s32 v = work->base.targetZ + gSineTable[(gFrameCounter * 4) & 0xFF] * 12;
             work->base.vz = 0;
             act->z += (v - act->z) >> 3;
             }
+
             if (act->x < (s32)work->base.targetX) {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
+
             work->base.stateTimer++;
         }
+
         break;
     }
     case 21: {
@@ -898,7 +941,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
+
         act->z += (gSineTable[gFrameCounter % 256] * 10 - (d = act->z + 0x2C00)) >> 3;
+
         if (act->x < x) {
             s32 d = act->x + 0x2100;
             act->x += (x - d) >> 3;
@@ -906,21 +951,26 @@ u8 task_hum_cloud_1(CloudWork* work) {
             s32 d = act->x - 0x2100;
             act->x += (x - d) >> 3;
         }
+
         act->y += (y - act->y) >> 4;
         work->base.vz = 0;
+
         if (work->base.stateTimer > 30) {
             work->base.state = 22;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 22:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
         }
+
         work->base.vz = 0;
+
         if (work->base.stateTimer > 8) {
             work->base.vz = 0x500;
             work->base.state = 23;
@@ -928,27 +978,32 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
         }
+
         if (act->z >= 0) {
             work->base.state = 24;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 24:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
         }
+
         if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
             ? ApplyAttackBox(0x11A, act->x - 0x2000, act->y, act->z, 22, 16, 30)
             : ApplyAttackBox(0x11A, act->x + 0x2000, act->y, act->z, 22, 16, 30)) {
             m4aSongNumStart(SONG_EF_KU_ATT02);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -956,6 +1011,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 31:
         if (act->z >= act->groundZ) {
@@ -967,9 +1023,11 @@ u8 task_hum_cloud_1(CloudWork* work) {
             w->unk_188 = -0x500;
             w->nextState = 32;
         }
+
         break;
     case 32: {
         s32 d;
+
         if (work->base.stateTimer == 0) {
             w->unk_18E = 0;
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 18, 0, w->base.tiles);
@@ -983,7 +1041,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         HumFaceTarget(&work->base, 1);
+
         if (work->base.anim.timer == 0) {
             if ((s16)w->unk_18E == 0) {
                 switch (AnimGetFrame(&work->base.anim)) {
@@ -996,12 +1056,14 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
                         }
                     }
+
                     break;
                 case 7:
                     SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
@@ -1014,17 +1076,20 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 switch (AnimGetFrame(&work->base.anim)) {
                 case 0:
                     MakeOpponentsHittable();
+
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11B, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
+
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
                         }
                     }
+
                     break;
                 case 1:
                     SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
@@ -1034,17 +1099,20 @@ u8 task_hum_cloud_1(CloudWork* work) {
                     break;
                 case 5:
                     MakeOpponentsHittable();
+
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11C, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11C, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(FADE_MODE_ADD_WHITE, 50);
+
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x200, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x200, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
                         }
                     }
+
                     break;
                 case 6:
                     SetBattleZoom(6, 0x100, gBtlWork->x2, gBtlWork->y2);
@@ -1052,6 +1120,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 }
             }
         }
+
         work->base.stateTimer++;
         break;
     }
@@ -1061,7 +1130,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
         if (work->base.stateTimer == 0) {
             work->base.vz = -0x500;
         }
+
         d = work->base.vz;
+
         if (d < 0) {
             if (d > -0x200) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
@@ -1069,6 +1140,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
         }
+
         if ((s32)work->base.vz > 0) {
             work->base.stateTimer = 0;
             work->base.state = 29;
@@ -1076,41 +1148,52 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 29: {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             w->unk_188 = 0;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.targetX = (gBtlWork->xMin + 50) << 8;
             } else {
                 work->base.targetX = (gBtlWork->xMax - 50) << 8;
             }
+
             work->base.targetY = act->y;
             work->base.targetZ = -0xC800;
         }
+
         work->base.vz = 0;
         act->x += ((s32)work->base.targetX - act->x) >> 4;
         act->y += ((s32)work->base.targetY - act->y) >> 4;
+
         {
             s32 v;
         v = (work->base.targetZ - act->z) >> 3;
+
         if (v > (s32)w->unk_188) {
             v = w->unk_188;
         }
+
         if (v < -(s32)w->unk_188) {
             v = -w->unk_188;
         }
+
         act->z += v;
         }
+
         w->unk_188 += 0x80;
+
         if ((act->z - work->base.targetZ >= 0) ? act->z - work->base.targetZ <= 0xFFF : work->base.targetZ - act->z <= 0xFFF) {
             work->base.state = 30;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 30:
@@ -1119,6 +1202,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.targetY = y;
             work->base.targetZ = z - 0x1000;
             MakeOpponentsHittable();
+
             switch ((s16)w->state) {
             case 0:
                 m4aSongNumStart(SONG_VO_MKU_ATTACK00);
@@ -1134,16 +1218,19 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 17, 0, w->base.tiles);
                 break;
             }
+
             if (act->x < (s32)work->base.targetX) {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
         }
+
         work->base.vz = 0;
         act->x += ((s32)work->base.targetX - act->x) >> 3;
         act->y += ((s32)work->base.targetY - act->y) >> 3;
         act->z += (work->base.targetZ - act->z) >> 3;
+
         if (work->base.anim.timer == 0) {
             switch ((s16)w->state) {
             case 0:
@@ -1155,10 +1242,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             case 1:
                 if (AnimGetFrame(&work->base.anim) == 3) {
                     MakeOpponentsHittable();
+
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
@@ -1166,11 +1255,13 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             case 2:
             default:
                 if (AnimGetFrame(&work->base.anim) == 3) {
                     MakeOpponentsHittable();
+
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
@@ -1178,12 +1269,15 @@ u8 task_hum_cloud_1(CloudWork* work) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 20);
                     }
                 }
+
                 break;
             }
         }
+
         if (work->base.stateTimer > 23 && AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             w->state++;
+
             if ((s16)w->state > 2) {
                 ClearBtlObjActionFlags(act);
                 work->base.state = 26;
@@ -1194,8 +1288,10 @@ u8 task_hum_cloud_1(CloudWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
+
     return HumUpdate(&work->base);
 }
 
@@ -1216,6 +1312,7 @@ void HookJumpOffset(CloudWork* work, s16 a, s32 b) {
     } else {
         work->base.targetX = act->x + (a << 8);
     }
+
     w->targetY = act->y;
     w->state = 0x16;
     w->stateTimer = 0;
@@ -1251,8 +1348,10 @@ u8 HookTryJumpAway(CloudWork* work) {
         } else {
             HookJumpOffset(work, -80, 0x500);
         }
+
         return 1;
     }
+
     return 0;
 }
 
@@ -1266,6 +1365,7 @@ void task_hum_hook_0(HookWork* work, void* arg) {
     } else {
         work->base.stockMoves = sHumHookStockMovesB;
     }
+
     work->base.flags |= HUM_FLAG_BOSS_DEATH;
     work->unk_188 = 0;
     work->playerSlide = 0;
@@ -1341,6 +1441,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 break;
             }
         }
+
         d = act->x - x;
 
         if ((d >= 0) ? d <= 0x3FFF : (d = x - act->x) <= 0x3FFF) {
@@ -1352,6 +1453,7 @@ u8 task_hum_hook_1(HookWork* work) {
                     (gBtlWork->yMin + gBtlWork->yMax) << 7);
             }
         }
+
         break;
     }
     case 0:
@@ -1380,6 +1482,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             HumFaceTarget(&work->base, 8);
         }
+
         work->base.stateTimer++;
         break;
     case 8:
@@ -1400,6 +1503,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             HumFaceTarget(&work->base, 8);
         }
+
         work->base.stateTimer++;
         break;
     case 3:
@@ -1426,6 +1530,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.targetX = (gBtlWork->xMin + 40) << 8;
         }
+
         work->base.targetY = (gBtlWork->yMin + gBtlWork->yMax) << 7;
         work->base.state = 23;
         work->base.stateTimer = 0;
@@ -1435,6 +1540,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 11, ANIM_FLAG_LOOP, w->base.tiles);
         }
+
         BtlMapFollowPosition(act->x, act->y, act->z);
         HumFaceTarget(&work->base, 1);
 
@@ -1445,6 +1551,7 @@ u8 task_hum_hook_1(HookWork* work) {
             s32 d = act->x + 0x1000;
             act->x += (x - d) >> 4;
         }
+
         act->y += (y - act->y) >> 4;
 
         if (work->base.anim.timer == 0) {
@@ -1459,6 +1566,7 @@ u8 task_hum_hook_1(HookWork* work) {
                     : ApplyAttackBox(280, act->x + 0x1400, act->y, act->z, 20, 20, 50)) {
                     m4aSongNumStart(SONG_BTL_MON_SWORD00);
                 }
+
                 break;
             }
         }
@@ -1469,6 +1577,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 27:
         BtlMapFollowPosition(act->x, act->y, act->z);
@@ -1476,6 +1585,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
+
         HumFaceTarget(&work->base, 1);
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1485,6 +1595,7 @@ u8 task_hum_hook_1(HookWork* work) {
             s32 d = act->x + 0x1000;
             act->x += (x - d) >> 4;
         }
+
         act->y += (y - act->y) >> 4;
 
         if (work->base.anim.timer == 0 && AnimGetFrame(&work->base.anim) == 3) {
@@ -1503,6 +1614,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         BtlMapFollowPosition(act->x, act->y, act->z);
@@ -1531,6 +1643,7 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.unk_12 = 0;
                     args.unk_14 = 1;
                 }
+
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->bombTask2 = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->bombTask3 = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -1557,6 +1670,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 25:
         if (work->base.stateTimer == 0) {
@@ -1581,6 +1695,7 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.unk_12 = 0;
                     args.unk_14 = 0;
                 }
+
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->flags |= HOOK_FLAG_BOMB_THROWN;
             }
@@ -1603,6 +1718,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 29:
         if (work->base.stateTimer == 0) {
@@ -1612,6 +1728,7 @@ u8 task_hum_hook_1(HookWork* work) {
             w->flags &= ~HOOK_FLAG_BOMB_THROWN;
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
+
         HumFaceTarget(&work->base, 1);
 
         if ((w->flags & HOOK_FLAG_BOMB_THROWN) == 0) {
@@ -1629,6 +1746,7 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.unk_12 = 0;
                     args.unk_14 = 2;
                 }
+
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->flags |= HOOK_FLAG_BOMB_THROWN;
             }
@@ -1649,12 +1767,14 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 20:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
+
         f = AnimGetFrame(&work->base.anim);
 
         if (f > 1) {
@@ -1679,6 +1799,7 @@ u8 task_hum_hook_1(HookWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 19:
@@ -1686,6 +1807,7 @@ u8 task_hum_hook_1(HookWork* work) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_HO_VOICE01);
         }
+
         f = AnimGetFrame(&work->base.anim);
 
         if (f >= 3 && f <= 5) {
@@ -1706,6 +1828,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 : ApplyAttackBox(0x115, act->x + 0x4400, act->y, act->z, 20, 16, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
             }
+
             break;
         }
 
@@ -1716,11 +1839,13 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
+
         HumFaceTarget(&work->base, 1);
         f = AnimGetFrame(&work->base.anim);
 
@@ -1733,11 +1858,13 @@ u8 task_hum_hook_1(HookWork* work) {
                 } else {
                     m4aSongNumStart(SONG_VO_HO_VOICE01);
                 }
+
                 a = GetAngle(act->x, act->y, x, y);
                 work->base.targetX = act->x + gSineTable[a] * 50;
                 work->base.targetY = act->y + -gSineTable[a + 64] * 50;
                 MakeOpponentsHittable();
             }
+
             act->x += ((s32)work->base.targetX - act->x) >> 3;
             act->y += ((s32)work->base.targetY - act->y) >> 3;
 
@@ -1746,6 +1873,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 : ApplyAttackBox(278, act->x + 0x1000, act->y, act->z, 32, 24, 70)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD01);
             }
+
             break;
         }
 
@@ -1756,6 +1884,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
@@ -1769,6 +1898,7 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23: {
         s32 d;
@@ -1796,6 +1926,7 @@ u8 task_hum_hook_1(HookWork* work) {
             HumFaceTarget(&work->base, 1);
             work->base.stateTimer++;
         }
+
         break;
     }
     case 24:
@@ -1809,11 +1940,13 @@ u8 task_hum_hook_1(HookWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
     if (act->hp > 0) {
         gBtlWork->rotation = (gSineTable[(w->angle / 2) & 0xFF] * sHumHookRollAmplitudes[w->rollLevel]) >> 8;
+
         {
             s32 t;
 
@@ -1845,6 +1978,7 @@ u8 task_hum_hook_1(HookWork* work) {
             w->slide = 0;
         }
     }
+
     TaskPoolUpdate(&w->tasks);
     return HumUpdate(&work->base);
 }
@@ -1893,20 +2027,25 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
     DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
     DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
     v = FadeGetAmount();
+
     if (v != 0) {
         switch (FadeGetColor()) {
         case 0:
             t = 9 - v;
+
             if ((s16)t < 0) {
                 t = 0;
             }
+
             SetBackdropColor(0, 0, t);
             break;
         case 0x7FFF:
             t = v + 9;
+
             if ((s16)t > 31) {
                 t = 31;
             }
+
             SetBackdropColor(v, v, t);
             break;
         case 31:
@@ -1914,15 +2053,18 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
             break;
         case 0x7C00:
             t = v + 9;
+
             if ((s16)t > 31) {
                 t = 31;
             }
+
             SetBackdropColor(0, 0, t);
             break;
         case 0x3E0:
             SetBackdropColor(0, v, 9);
             break;
         }
+
         work->backdropSet = 1;
     } else if (work->backdropSet != 0) {
         SetBackdropColor(0, 0, 9);
@@ -1941,6 +2083,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     } else {
         work->facingLeft = 0;
     }
+
     work->palette = LoadObjPalette(gPBakudanPalette, 0x20);
     work->tiles = AllocObjTiles(0x280, gPBakudanTiles);
     AnimInit(&work->anim, gPBakudanAnims, gPBakudanFrames);
@@ -1974,6 +2117,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
         work->state = 0;
         break;
     }
+
     work->tiles2 = LoadObjTiles(gUnk_08B22CE4, 0x200);
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
     work->visible = 1;
@@ -1999,6 +2143,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
                 work->state = 1;
                 break;
             }
+
             work->vz = -(GetRandom() % 0x301 + 0x200);
 
             if (work->variant == 0) {
@@ -2007,6 +2152,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
             } else {
                 work->angle = GetRandom();
             }
+
             work->bounceCount++;
         }
 
@@ -2015,6 +2161,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
             work->state = 1;
             break;
         }
+
         work->timer++;
         break;
     default:
@@ -2047,12 +2194,15 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
         if (work->timer > 17 && BgFxIsActive() == 0) {
             return 0;
         }
+
         work->timer++;
         break;
     }
+
     if (ClampBattlePosition(&work->x, &work->y, 0, 0)) {
         work->angle = (u8)(work->angle + 118) + GetRandom() % 21;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -2066,12 +2216,14 @@ void task_hum_hook_bomb_2(HookBombWork* work) {
     if (work->visible == 0) {
         return;
     }
+
     gfx = AnimGetGfx(&work->anim);
     attr = GetBattleSpritePriorityFlags(work->y);
 
     if (work->facingLeft == 0) {
         attr |= 1;
     }
+
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
         -0x1004 - ((work->y + 0x800) >> 8) * 4);
@@ -2105,6 +2257,7 @@ void AnsemPlaceSub(AnsemWork* work) {
     } else {
         work->subOffsetX += (-0x1800 - work->subOffsetX) >> 3;
     }
+
     work->subOffsetZ += (-0x1200 - work->subOffsetZ) >> 3;
     work->sub.x = act->x + work->subOffsetX;
     work->sub.y = act->y;
@@ -2158,6 +2311,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->repeatCount = 0;
             break;
         }
+
         break;
     case 4:
         act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
@@ -2210,6 +2364,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         HumFaceTarget(&work->base, 3);
         work->base.stateTimer++;
         break;
@@ -2242,6 +2397,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         HumFaceTarget(&work->base, 1);
         work->base.stateTimer++;
         break;
@@ -2266,6 +2422,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (!(GetRandom() % 2)) {
             break;
         }
+
         work->base.state = 29;
         work->base.stateTimer = 0;
         break;
@@ -2284,6 +2441,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             s32 d = act->x + 0x2800;
             act->x = act->x + ((x - d) >> 4);
         }
+
         act->y += (y - act->y) >> 4;
 
         switch (AnimGetFrame(&w->sub.anim)) {
@@ -2296,6 +2454,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             } else {
                 act->x += 0x100;
             }
+
             break;
         case 4:
             w->sub.flags |= HUM_SUB_FLAG_IN_FRONT;
@@ -2305,6 +2464,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 : ApplyAttackBox(0x140, act->x + 0x2000, act->y, act->z, 20, 12, 24)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT06);
             }
+
             break;
         }
 
@@ -2316,6 +2476,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -2349,12 +2510,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAnsemAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 5, 0, w->base.sub->tiles);
         }
+
         w->subRiseSpeed += 25;
         w->sub.z -= w->subRiseSpeed;
 
@@ -2363,6 +2526,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 23:
@@ -2383,6 +2547,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             if (w->sub.anim.timer == 4) {
                 m4aSongNumStart(SONG_EF_BOSS_DEADL);
             }
+
             break;
         case 6:
             w->subRiseSpeed += 25;
@@ -2401,24 +2566,28 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                     w->sub.z - 0x800, 20, 16, 8)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT06);
             }
+
             break;
         case 4:
             if (ApplyAttackBox(0x141, w->sub.x, w->sub.y,
                     w->sub.z - 0x1000, 20, 16, 16)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT00);
             }
+
             break;
         case 5:
             if (ApplyAttackBox(0x141, w->sub.x, w->sub.y,
                     w->sub.z - 0x2000, 20, 16, 32)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT00);
             }
+
             break;
         case 6:
             if (ApplyAttackBox(0x141, w->sub.x, w->sub.y,
                     w->sub.z - 0x3000, 20, 16, 48)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT00);
             }
+
             break;
         }
 
@@ -2430,10 +2599,12 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 work->base.state = 24;
                 break;
             }
+
             work->base.state = 23;
             w->repeatCount++;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 24:
@@ -2447,6 +2618,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         } else {
             ApproachValueHalfSteps(&w->sub.x, act->x - 0x1800, w->steps);
         }
+
         ApproachValueHalfSteps(&w->sub.y, act->y, w->steps);
         ApproachValueHalfSteps(&w->sub.z, act->z, w->steps);
         w->steps--;
@@ -2459,6 +2631,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 29:
         if (work->base.stateTimer == 0) {
@@ -2468,6 +2641,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             act->originX = act->x;
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
+
         HumFaceTarget(&work->base, 1);
 
         if (AnimGetFrame(&w->sub.anim) != 0) {
@@ -2480,6 +2654,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 s32 d = act->x + 0x1000;
                 act->x = act->x + ((act->originX - d) >> 2);
             }
+
             w->subOffsetX += (0 - w->subOffsetX) >> 2;
             w->subOffsetZ += (0 - w->subOffsetZ) >> 2;
             w->sub.x = act->x + w->subOffsetX;
@@ -2498,6 +2673,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.state = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 26:
@@ -2513,6 +2689,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             work->base.state = 27;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 27:
@@ -2524,6 +2701,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 work->base.targetX = (gBtlWork->xMin + 48) << 8;
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
+
             work->base.targetY = y;
             AnimReset(&work->base.anim);
             AnimReset(&w->sub.anim);
@@ -2534,6 +2712,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             func_080169A0(w->sub.x, w->sub.y,
                 w->sub.z - 0x2100, act->flags & BTLOBJ_FLAG_FACING_LEFT);
         }
+
         a = w->sub.x;
         b = w->sub.y;
         c = w->sub.z;
@@ -2542,6 +2721,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             ApproachValue(&act->x, work->base.targetX, w->steps);
             ApproachValueHalfSteps(&act->y, work->base.targetY, w->steps);
         }
+
         w->steps--;
 
         if (work->base.stateTimer > 5) {
@@ -2552,6 +2732,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             } else {
                 w->subOffsetX += (0x2200 - w->subOffsetX) >> 3;
             }
+
             w->subOffsetZ += (0 - w->subOffsetZ) >> 3;
             w->sub.x = act->x + w->subOffsetX;
             w->sub.y = act->y;
@@ -2564,6 +2745,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 w->sub.z, 32, 16, 32)) {
             m4aSongNumStart(SONG_BTL_MON_HIT02);
         }
+
         BgFxAddPosition(w->sub.x - a, w->sub.y - b, w->sub.z - c);
 
         if (w->steps <= 0) {
@@ -2574,11 +2756,13 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 work->base.state = 28;
                 break;
             }
+
             work->base.state = 27;
             w->repeatCount++;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         if (work->base.stateTimer == 0) {
@@ -2590,6 +2774,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (!AnimIsFinished(&work->base.anim)) {
             break;
         }
+
         ClearBtlObjActionFlags(act);
         work->base.state = 0;
         work->base.stateTimer = 0;
@@ -2627,6 +2812,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 ApproachValueHalfSteps(&w->sub.z, act->z - 0x3000, w->steps);
                 w->steps--;
             }
+
             break;
         case 6:
             if (w->sub.anim.timer == 0) {
@@ -2637,6 +2823,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 ApproachValueHalfSteps(&w->sub.z, act->z - 0x1000, w->steps);
                 w->steps--;
             }
+
             break;
         }
 
@@ -2649,6 +2836,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     }
@@ -2669,6 +2857,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         AnsemPlaceSub(w);
         break;
     }
+
     return HumUpdate(&work->base);
 }
 
@@ -2702,6 +2891,7 @@ void HadesEndAttack(HadesWork* work) {
     } else {
         work->angryAttacks++;
     }
+
     ClearBtlObjActionFlags(act);
 }
 
@@ -2756,6 +2946,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 work->base.state = 20;
             }
+
             break;
         case 37:
         case 39:
@@ -2764,6 +2955,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 work->base.state = 20;
             }
+
             break;
         case 0xEE5B96E5:
         case 0xEEFB96EF:
@@ -2772,8 +2964,10 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 work->base.state = 19;
             }
+
             break;
         }
+
         break;
     case 4:
         work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
@@ -2786,6 +2980,7 @@ u8 task_hum_hades_1(HadesWork* work) {
     } else {
         HumChooseCardAction(&work->base, 15, 40, 40, 24);
     }
+
     w->hoverZ = -0xA00;
 
     switch (work->base.state) {
@@ -2805,6 +3000,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x140);
         }
+
         HumFaceTarget(&work->base, 5);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -2822,6 +3018,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 }
             }
         }
+
         work->base.stateTimer++;
         break;
     case 1:
@@ -2839,6 +3036,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 0, 0, w->base.sub->tiles);
             w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
         }
+
         w->sub.x = act->x;
         w->sub.y = act->y;
         w->sub.z = act->z;
@@ -2863,6 +3061,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
@@ -2873,6 +3072,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             m4aSongNumStart(SONG_VO_HA_ATTACK00);
             m4aSongNumStart(SONG_BTL_HA_FIREENTRY);
         }
+
         w->sub.x = act->x;
         w->sub.y = act->y;
         w->sub.z = act->z;
@@ -2883,6 +3083,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         if (work->base.stateTimer == 0) {
@@ -2893,6 +3094,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 w->sub.x += 0xA00;
             }
+
             w->sub.z -= 0x4E00;
             w->subVz = 0;
             m4aSongNumStart(SONG_BTL_HA_BALLSHOT);
@@ -2903,6 +3105,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             w->sub.x += 0x700;
         }
+
         w->sub.y += (y - w->sub.y) >> 4;
         w->sub.z += w->subVz;
         w->subVz += 89;
@@ -2924,10 +3127,12 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 24:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
+
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 8) {
                 act->btl->hcEffectCount--;
@@ -2941,6 +3146,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 25:
         if (work->base.stateTimer == 0) {
@@ -2964,8 +3170,10 @@ u8 task_hum_hades_1(HadesWork* work) {
                 w->sub2[1].y = w->sub2[1].y2 = w->sub2[1].y3 = act->y;
                 w->sub2[1].z = w->sub2[1].z2 = w->sub2[1].z3 = act->z - 0x3400;
             }
+
             m4aSongNumStart(SONG_BTL_LEC_ROCKB1);
         }
+
         w->hoverZ = 0;
 
         if (work->base.steps > 0) {
@@ -2974,6 +3182,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 ApproachValue(&w->scale, 0x100, (u16)work->base.steps);
             }
+
             work->base.steps--;
         }
 
@@ -2981,6 +3190,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             w->flags |= HADES_FLAG_FLAMES_ENDING;
             work->base.steps = 8;
         }
+
         HumFaceTarget(&work->base, 8);
         act->y += (y - act->y) >> 4;
         act->x += gSineTable[(u8)work->base.stateTimer];
@@ -3047,10 +3257,12 @@ u8 task_hum_hades_1(HadesWork* work) {
                 w->sub2[0].x += (act->x + (p << 8) - w->sub2[0].x) >> 1;
                 w->sub2[1].x += (act->x + (r << 8) - w->sub2[1].x) >> 1;
             }
+
             w->sub2[0].y += (act->y - w->sub2[0].y) >> 1;
             w->sub2[1].y += (act->y - w->sub2[1].y) >> 1;
             w->sub2[0].z += (act->z + (q << 8) - w->sub2[0].z) >> 1;
             w->sub2[1].z += (act->z + (s << 8) - w->sub2[1].z) >> 1;
+
             {
                 s32 v = w->scale;
                 p = p + (v * 14 >> 8);
@@ -3066,10 +3278,12 @@ u8 task_hum_hades_1(HadesWork* work) {
                 w->sub2[0].x2 += (act->x + (p << 8) - w->sub2[0].x2) >> 3;
                 w->sub2[1].x2 += (act->x + (r << 8) - w->sub2[1].x2) >> 3;
             }
+
             w->sub2[0].y2 += (act->y - w->sub2[0].y2) >> 3;
             w->sub2[1].y2 += (act->y - w->sub2[1].y2) >> 3;
             w->sub2[0].z2 += (act->z + (q << 8) - w->sub2[0].z2) >> 3;
             w->sub2[1].z2 += (act->z + (s << 8) - w->sub2[1].z2) >> 3;
+
             {
                 s32 v = w->scale;
                 p = p + (v * 24 >> 8);
@@ -3085,6 +3299,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 w->sub2[0].x3 += (act->x + (p << 8) - w->sub2[0].x3) >> 4;
                 w->sub2[1].x3 += (act->x + (r << 8) - w->sub2[1].x3) >> 4;
             }
+
             w->sub2[0].y3 += (act->y - w->sub2[0].y3) >> 4;
             w->sub2[1].y3 += (act->y - w->sub2[1].y3) >> 4;
             w->sub2[0].z3 += (act->z + (q << 8) - w->sub2[0].z3) >> 4;
@@ -3106,6 +3321,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 m4aSongNumStart(SONG_EF_FIRE01);
             }
         }
+
 #ifndef VERSION_EU
         gBtlWork->damageScale = 0;
 #endif
@@ -3117,6 +3333,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -3130,6 +3347,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -3137,12 +3355,14 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 1, 0, w->base.sub->tiles);
             w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
+
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 8) {
                 act->btl->hcEffectCount--;
             }
 #endif
         }
+
         w->sub.x = act->x;
         w->sub.y = act->y;
         w->sub.z = act->z;
@@ -3164,6 +3384,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 : ApplyAttackBox(0x11F, act->x + 0x1E00, act->y, act->z, 30, 16, 60)) {
                 m4aSongNumStart(SONG_EF_FIRE01);
             }
+
 #ifndef VERSION_EU
             gBtlWork->damageScale = 0;
 #endif
@@ -3178,6 +3399,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 20:
         if (work->base.stateTimer == 0) {
@@ -3189,6 +3411,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             w->sub.y = act->y;
             w->sub.z = act->z;
             m4aSongNumStart(SONG_VO_HA_ATTACK01);
+
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 8) {
                 act->btl->hcEffectCount--;
@@ -3201,6 +3424,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             if (w->sub.anim.timer == 0) {
                 m4aSongNumStart(SONG_EF_HA_FINGFIRE);
             }
+
             break;
         case 2:
 #ifndef VERSION_EU
@@ -3214,6 +3438,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             } else {
                 ApplyAttackBox(0x11E, act->x + 0x2000, act->y, act->z, 24, 16, 60);
             }
+
 #ifndef VERSION_EU
             gBtlWork->damageScale = 0;
 #endif
@@ -3228,6 +3453,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -3240,6 +3466,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         AnimUpdate(&w->anim2);
         AnimUpdate(&w->anim3);
     }
+
     ret = HumUpdate(&work->base);
     return ret;
 }
@@ -3260,6 +3487,7 @@ void task_hum_hades_2(HadesWork* work) {
     if ((work->flags & HADES_FLAG_FLAMES_ACTIVE) == 0) {
         return;
     }
+
     act = &work->base.actor;
 
     for (i = 0; i < 2; i++) {
@@ -3270,6 +3498,7 @@ void task_hum_hades_2(HadesWork* work) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
                 attr |= 1;
             }
+
             sx = work->scale;
         } else {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
@@ -3278,6 +3507,7 @@ void task_hum_hades_2(HadesWork* work) {
                 sx = -work->scale;
             }
         }
+
         affine = AllocObjAffine(0, sx, work->scale, 0);
         gfx = AnimGetGfx(&work->anim);
         WorldToScreen(&x, &y, e->x, e->y, e->z);
@@ -3314,6 +3544,7 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
     } else {
         w->targetX = act->x + (a << 8);
     }
+
     w->state = 20;
     w->stateTimer = 0;
     work->hoverZ = -0x300;
@@ -3352,8 +3583,10 @@ u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
         } else {
             MahluxiaJumpOffset(work, -128);
         }
+
         return 1;
     }
+
     return 0;
 }
 
@@ -3369,6 +3602,7 @@ void MahluxiaSaveAfterimage(MahluxiaWork* work, RikuSpawn* dst) {
     } else {
         dst->flags &= ~RIKU_SPAWN_FLAG_FACING_LEFT;
     }
+
     dst->anim = work->base.anim;
     dst->tileSrc = work->base.tiles->src;
     dst->scale = gBtlWork->scale;
@@ -3417,6 +3651,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
     } else {
         affine = AllocObjAffine(0, sx, sy, 1);
     }
+
     pri = 0xFFF0;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
     SetObjTileSource(sub->tiles, p->tileSrc);
@@ -3510,6 +3745,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.state = 22;
             break;
         }
+
         break;
     case 4:
         w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
@@ -3545,6 +3781,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 MahluxiaSwingTo(w, (gBtlWork->xMin + 60) << 8, 48);
             }
         }
+
         break;
     case 0:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
@@ -3574,6 +3811,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         } else {
             HumFaceTarget(&work->base, 8);
         }
+
         work->base.stateTimer++;
         break;
     case 8:
@@ -3594,6 +3832,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         } else {
             HumFaceTarget(&work->base, 30);
         }
+
         work->base.stateTimer++;
         break;
     case 1:
@@ -3617,6 +3856,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.state = 0;
             break;
         }
+
         HumFaceTarget(&work->base, 1);
         MahluxiaSpawnFlower(w);
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
@@ -3633,6 +3873,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             } else {
                 w->flags |= MAHLUXIA_FLAG_SWING_DOWN;
             }
+
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         }
 
@@ -3645,8 +3886,10 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             } else {
                 act->y = w->swingBaseY - gSineTable[(u8)w->angle] * w->swingAmplitude;
             }
+
             w->steps--;
         }
+
         MahluxiaSpawnFlower(w);
 
         if ((s16)w->steps <= 0) {
@@ -3654,6 +3897,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.state = 0;
             break;
         }
+
         HumFaceTarget(&work->base, 3);
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
         work->base.stateTimer++;
@@ -3662,12 +3906,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (!AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer++;
             break;
         }
+
         work->base.state = 23;
         work->base.stateTimer = 0;
         break;
@@ -3675,6 +3921,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
         }
+
         act->y += (y - act->y) >> 2;
         n = (u16)work->base.stateTimer;
 
@@ -3683,18 +3930,21 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer = n + 1;
         break;
     case 24:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (!AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer++;
             break;
         }
+
         work->base.state = 25;
         work->base.stateTimer = 0;
         break;
@@ -3703,6 +3953,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK00);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         switch (AnimGetFrame(&work->base.anim)) {
@@ -3711,6 +3962,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 HumFaceTarget(&work->base, 1);
                 BgFxStartKama(act->x, act->y, act->z, x - act->x, 316);
             }
+
             break;
         case 2:
             if (work->base.anim.timer == 0) {
@@ -3720,6 +3972,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                     m4aSongNumStart(SONG_EF_KU_ATT02);
                 }
             }
+
             break;
         }
 
@@ -3731,6 +3984,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     case 28:
@@ -3738,6 +3992,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3751,6 +4006,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 29:
@@ -3770,6 +4026,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 ApplyAttackBox(0x13F, act->x - 0x2800, act->y, 0, 40, 16, 40);
             }
         }
+
         n = (u16)work->base.stateTimer;
 
         if ((s16)n > 60) {
@@ -3777,12 +4034,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer = n + 1;
         break;
     case 30:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -3791,6 +4050,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 26:
@@ -3799,6 +4059,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             w->flags &= ~MAHLUXIA_FLAG_EFFECT_LAUNCHED;
             m4aSongNumStart(SONG_VO_MARL_ATTACK01);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (AnimGetFrame(&work->base.anim) == 4) {
@@ -3820,6 +4081,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     case 27:
@@ -3827,6 +4089,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
         }
+
         w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         switch (AnimGetFrame(&work->base.anim)) {
@@ -3840,11 +4103,13 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                     BgFxStartMahluxiaGround(act->x - 0x1700, act->y, 0, 0x13D);
                 }
             }
+
             break;
         case 5:
             if (work->base.anim.timer == 0) {
                 m4aSongNumStart(SONG_EF_MARL_GROUND);
             }
+
             break;
         }
 
@@ -3856,6 +4121,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     case 21:
@@ -3868,6 +4134,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             } else {
                 w->sub.x = act->x + 0x4600;
             }
+
             w->sub.z = 0;
             w->subSpeed = 0;
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
@@ -3896,6 +4163,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                     m4aSongNumStart(SONG_EF_KU_ATT02);
                 }
             }
+
             MahluxiaSpawnFlower(w);
             break;
         case 5:
@@ -3922,11 +4190,13 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 if (ApplyAttackBox(0x13B, w->sub.x, w->sub.y, w->sub.z, 8, 4, 64)) {
                     m4aSongNumStart(SONG_EF_MLC_SNICHIT);
                 }
+
                 break;
             default:
                 if (ApplyAttackBox(0x13B, w->sub.x, w->sub.y, w->sub.z, 16, 4, 20)) {
                     m4aSongNumStart(SONG_EF_MLC_SNICHIT);
                 }
+
                 break;
             }
 
@@ -3939,6 +4209,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     }
@@ -3948,6 +4219,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             MahluxiaHover(&work->base, w->hoverZ);
         }
     }
+
     TaskPoolUpdate(&w->tasks);
     return HumUpdate(&work->base);
 }
@@ -3978,8 +4250,10 @@ void task_hum_mahluxia_2(MahluxiaWork* work) {
             MahluxiaDrawAfterimage(work, &work->spawns[8]);
             break;
         }
+
         work->unk_1D8++;
     }
+
     work->spawns[8] = work->spawns[7];
     work->spawns[7] = work->spawns[6];
     work->spawns[6] = work->spawns[5];
@@ -4020,6 +4294,7 @@ void CreateHumLaxeneKnfTask(LaxeneWork* work, s16 a, s16 b) {
         args.x = act->x - (a << 8);
         args.unk_12 = 0;
     }
+
     args.z = act->z + (b << 8);
     args.y = act->y;
     TaskCreate(&work->tasks, &sTaskDescHumLaxeneKnf, &args);
@@ -4067,6 +4342,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             } else {
                 work->base.state = 22;
             }
+
             break;
         case 0xF49D2735:
             work->base.state = 25;
@@ -4077,6 +4353,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             m4aSongNumStart(SONG_SND_284);
             break;
         }
+
         break;
     case 4:
         m4aSongNumStop(SONG_EF_RAC_BEEM);
@@ -4117,6 +4394,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 work->base.stateTimer++;
             }
         }
+
         break;
     case 8:
         if (work->base.stateTimer == 0) {
@@ -4130,10 +4408,12 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             } else {
                 work->base.steps = 25;
             }
+
             w->hoverZ = 0;
         } else if (AnimIsFinished(&work->base.anim)) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         }
+
         ApproachValue(&act->x, work->base.targetX, (u16)work->base.steps);
         ApproachValue(&act->y, work->base.targetY, (u16)work->base.steps);
         ApproachValue(&act->z, work->base.targetZ, (u16)work->base.steps);
@@ -4145,6 +4425,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             w->hoverZ = act->z;
             break;
         }
+
         work->base.vz = 0;
 
         if (act->x < (s32)work->base.targetX) {
@@ -4152,6 +4433,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
+
         work->base.stateTimer++;
         break;
     case 1:
@@ -4174,6 +4456,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -4194,11 +4477,13 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer = 0;
             work->base.state = 27;
         }
+
         break;
     case 27:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
         }
+
         HumFaceTarget(&work->base, 1);
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -4207,6 +4492,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         if (work->base.stateTimer == 0) {
@@ -4219,6 +4505,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 BgFxStartLaxeneBeam(act->x + 0x1000, act->y, act->z - 0x3000, 0, 310);
             }
         }
+
         u = (y - act->y) >> 3;
         act->y += u;
         BgFxAddPosition(0, u, 0);
@@ -4230,6 +4517,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer = 0;
             work->base.state = 29;
         }
+
         break;
     case 29:
         if (work->base.stateTimer == 0) {
@@ -4243,6 +4531,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
@@ -4257,6 +4546,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         if (work->base.stateTimer == 0) {
@@ -4275,6 +4565,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.stateTimer = 0;
             work->base.state = 24;
         }
+
         break;
     case 24:
         if (work->base.stateTimer == 0) {
@@ -4288,6 +4579,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 30:
         if (work->base.stateTimer == 0) {
@@ -4297,6 +4589,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             w->hoverZ = 0;
             work->base.vz = 0x400;
         }
+
         MakeOpponentsHittable();
 
         switch (work->base.stateTimer) {
@@ -4328,6 +4621,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -4338,6 +4632,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             } else {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
+
             w->hoverZ = 0;
             w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
         }
@@ -4393,6 +4688,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
                     w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
+
                 break;
             case 8:
                 MakeOpponentsHittable();
@@ -4403,6 +4699,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
                     w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
+
                 break;
             }
         }
@@ -4420,6 +4717,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 31:
         if (work->base.stateTimer == 0) {
@@ -4430,6 +4728,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             } else {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             }
+
             w->hoverZ = 0;
             w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
             act->originX = act->x;
@@ -4492,6 +4791,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                         BgFxStartThunderStrike(x, y, 0, 0x137);
                     }
                 }
+
                 break;
             case 8:
                 MakeOpponentsHittable();
@@ -4507,6 +4807,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                         BgFxStartThunderStrike(x, y, z, 0x137);
                     }
                 }
+
                 break;
             }
         }
@@ -4529,6 +4830,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 32:
         if (work->base.stateTimer == 0) {
@@ -4541,10 +4843,12 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 s32 t = ((GetRandom() % 57) << 8) + 0x1800;
                 act->x = x - t;
             }
+
             {
                 s32 t = ((GetRandom() % 27) << 8) - 0xD00;
                 act->y = y + t;
             }
+
             act->z = 0;
             AnimReset(&work->base.anim);
 
@@ -4553,6 +4857,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             } else {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             }
+
             w->hoverZ = 0;
             w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
             w->scaleSteps = 8;
@@ -4611,6 +4916,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
                     w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
+
                 break;
             case 8:
                 MakeOpponentsHittable();
@@ -4621,6 +4927,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
                     w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
+
                 break;
             }
         }
@@ -4642,6 +4949,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 33:
         if (work->base.stateTimer == 0) {
@@ -4655,10 +4963,12 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 s32 t = ((GetRandom() % 41) << 8) + 0x5000;
                 act->x = x - t;
             }
+
             {
                 s32 t = ((GetRandom() % 49) << 8) - 0x1800;
                 act->y = y + t;
             }
+
             act->z = 0;
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
@@ -4669,6 +4979,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             work->base.scaleX = 5;
             work->base.scaleY = 384;
         }
+
         MakeOpponentsHittable();
 
         switch (work->base.stateTimer) {
@@ -4699,12 +5010,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
     if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         LaxeneHover(&work->base, w->hoverZ);
     }
+
     TaskPoolUpdate(&w->tasks);
 
     if ((s16)w->scaleSteps > 0) {
@@ -4738,6 +5051,7 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
     } else {
         work->facingLeft = 0;
     }
+
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -4775,13 +5089,16 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
             } else {
                 work->x = work->x + work->vx;
             }
+
             work->timer++;
         }
+
         break;
     case 1:
         if ((s16)work->timer == 0) {
             AnimStart(&work->anim, 1, 0);
         }
+
         c = gBtlWork->actor;
         work->x += c->x - work->playerPrevX;
         work->y += c->y - work->playerPrevY;
@@ -4790,9 +5107,11 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
         if ((s16)work->timer > 30) {
             return 0;
         }
+
         work->timer++;
         break;
     }
+
     AnimUpdate(&work->anim);
     work->playerPrevX = gBtlWork->actor->x;
     work->playerPrevY = gBtlWork->actor->y;
@@ -4813,6 +5132,7 @@ void task_hum_laxene_knf_2(LaxeneKnfWork* work) {
     } else {
         attr = GetBattleSpritePriorityFlags(work->y) | 1;
     }
+
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
         -0x1004 - (work->y >> 8) * 4);
@@ -4892,9 +5212,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     sub2 = &work->sub2;
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, 0);
+
     switch (_0800E434(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
+
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
@@ -4912,6 +5234,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.state = 26;
             break;
         }
+
         w->targetScaleX = work->base.scaleX = 0x100;
         w->targetScaleY = work->base.scaleY = 0x100;
         break;
@@ -4927,6 +5250,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         m4aSongNumStop(SONG_EF_AKL_FIREWALL);
         break;
     }
+
     if (gBtlWork->battleId == 162) {
         if (HumChooseCardAction(&work->base, 20, 40, 40, 24)) {
             work->base.stockMoves = sHumAxcelStockMoves[0];
@@ -4938,6 +5262,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.stockMoves = sHumAxcelStockMoves[1];
         }
     }
+
     switch (work->base.state) {
     case 12:
     case 18:
@@ -4949,18 +5274,22 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 0:
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         w->hoverZ = -0x300;
+
         if (func_08081828()) {
             break;
         }
+
         if ((u16)(GetRandom() % 80) == 0) {
             work->base.state = 8;
             work->base.stateTimer = 0;
             break;
         }
+
         if (HumIsNearAreaEdge(&work->base, 40)) {
             AxcelMoveTo(&w->base, 0x10000, act->y);
             break;
         }
+
         HumFaceTarget(&work->base, 8);
         work->base.stateTimer++;
         break;
@@ -4970,6 +5299,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.targetY = y + (((u16)(GetRandom() % 65) - 32) << 8);
             work->base.state = 19;
         }
+
         break;
     case 1:
         if (work->base.stateTimer == 0) {
@@ -4994,6 +5324,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->targetScaleX = work->base.scaleX = 0x100;
             w->targetScaleY = work->base.scaleY = 0x100;
         }
+
         w->hoverZ = 0;
         AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         break;
@@ -5002,20 +5333,24 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.steps = 10;
         }
+
         if (act->x < x) {
             work->base.targetX = x - 0x6E00;
         } else {
             work->base.targetX = x + 0x6E00;
         }
+
         ApproachValueHalfSteps(&act->x, work->base.targetX, (u16)work->base.steps);
         work->base.steps--;
         HumFaceTarget(&work->base, 1);
+
         if (work->base.steps <= 0) {
             work->base.state = 23;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         if (work->base.stateTimer == 0) {
@@ -5024,14 +5359,17 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.targetX = x * 2 - act->x;
             work->base.targetY = y * 2 - act->y;
         }
+
         HumFaceTarget(&work->base, 1);
         BtlMapFollowPosition(act->x, act->y, act->z);
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 24;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 24:
         if (work->base.stateTimer == 0) {
@@ -5041,38 +5379,46 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             sub->flags &= ~HUM_SUB_FLAG_HIDDEN;
             m4aSongNumStart(SONG_BTL_AKL_WTHR);
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x2000;
             } else {
                 sub->x = act->x + 0x2000;
             }
+
             sub->y = act->y;
             sub->z = act->z - 0x2000;
             HumFaceTarget(&work->base, 1);
             w->steps = 30;
         }
+
         ApproachValue(&sub->x, work->base.targetX, w->steps);
         ApproachValue(&sub->y, work->base.targetY, w->steps);
         w->steps--;
         BtlMapFollowPosition(sub->x, sub->y, sub->z);
+
         if (ApplyAttackBox(302, sub->x, sub->y, sub->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_BTL_MON_SWORD01);
         }
+
         if ((s16)w->steps == 19) {
             AxcelScaleTo(w, 12, 0x200, 8);
         }
+
         if ((s16)w->steps == 11) {
             act->x = work->base.targetX;
             act->y = work->base.targetY;
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             AxcelScaleTo(w, 0x100, 0x100, 8);
         }
+
         if ((s16)w->steps <= 4) {
             work->base.state = 25;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 25:
         if (work->base.stateTimer == 0) {
@@ -5080,7 +5426,9 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
             sub->flags &= ~HUM_SUB_FLAG_OWN_DEPTH;
         }
+
         BtlMapFollowPosition(act->x, act->y, act->z);
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -5088,6 +5436,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -5103,8 +5452,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub2->flags &= ~HUM_SUB_FLAG_IN_FRONT;
             w->hoverZ = 0;
         }
+
         HumFaceTarget(&work->base, 1);
         work->base.vz = 0;
+
         if (work->base.anim.timer == 0) {
             switch (AnimGetFrame(&work->base.anim)) {
             case 3:
@@ -5124,6 +5475,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 break;
             }
         }
+
         switch (AnimGetFrame(&work->base.anim)) {
         case 3:
         case 4:
@@ -5132,6 +5484,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 s32 t = act->z + 0x1000;
                 act->z += (act->originZ - t) >> 4;
             }
+
             break;
         case 6:
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -5145,12 +5498,15 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 act->x += (act->originX - t) >> 3;
             }
             }
+
             {
                 s32 t = act->z + 0x1400;
                 act->z += (act->originZ - t) >> 3;
             }
+
             break;
         }
+
         act->y += (((gBtlWork->yMin + gBtlWork->yMax + 32) << 7) - act->y) >> 3;
         sub->x = act->x;
         sub->y = act->y;
@@ -5158,6 +5514,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         sub2->x = act->x;
         sub2->y = act->y;
         sub2->z = act->z;
+
         if (AnimIsFinished(&work->base.anim)) {
             if (act->hp < act->maxHp / 2) {
                 work->base.state = 31;
@@ -5166,19 +5523,23 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             } else {
                 work->base.state = 27;
             }
+
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 27: {
         s32 t;
+
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5186,12 +5547,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 sub->x = act->x + 0x3700;
                 sub2->x = act->x + 0x5700;
             }
+
             sub->y = act->y + 0xA00;
             sub->z = act->z - 0x1E00;
             sub2->y = act->y - 0xA00;
             sub2->z = act->z - 0x1400;
             w->hoverZ = act->z;
         }
+
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 d = (work->base.stateTimer << 9) + 0x5A00;
             t = act->x - d;
@@ -5199,29 +5562,37 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             s32 d = (work->base.stateTimer << 9) + 0x5A00;
             t = act->x + d;
         }
+
         sub->x += (t - sub->x) >> 3;
         sub2->x += (t - sub2->x) >> 3;
         sub->y += (act->y + gSineTable[((u16)work->base.stateTimer * 4) & 255] * 55 - sub->y) >> 2;
         sub2->y += (act->y - gSineTable[((u16)work->base.stateTimer * 4) & 255] * 55 - sub2->y) >> 2;
+
         {
             s32* ground = &gBtlWork->targetZ;
+
             {
                 s32 t = sub->z + 0x1800;
                 sub->z += (*ground - t) >> 2;
             }
+
             {
                 s32 t = sub2->z + 0x1800;
                 sub2->z += (*ground - t) >> 3;
             }
         }
+
         if (ApplyAttackBox(304, sub->x, sub->y, sub->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
+
         if (ApplyAttackBox(304, sub2->x, sub2->y, sub2->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
+
         AxcelSpawnParticle(w, sub);
         AxcelSpawnParticle(w, sub2);
+
         if (sub->x > ((gBtlWork->xMax + 32) << 8) ||
             sub->x < ((gBtlWork->xMin - 32) << 8)) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
@@ -5231,6 +5602,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 29: {
@@ -5238,12 +5610,14 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         s32 dx;
         s32 dy;
         HumFaceTarget(&work->base, 1);
+
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5251,6 +5625,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 sub->x = act->x + 0x3700;
                 sub2->x = act->x + 0x5700;
             }
+
             sub->y = act->y + 0xA00;
             sub->z = act->z - 0x1E00;
             sub2->y = act->y - 0xA00;
@@ -5260,6 +5635,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->orbitRadius = 0x5A00;
             m4aSongNumStart(SONG_BTL_AKL_FIRETHR);
         }
+
         angle = (u16)work->base.stateTimer * 4;
         ApproachValue(&w->orbitRadius, 0x2800, w->steps);
         w->steps--;
@@ -5271,26 +5647,32 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         sub2->y += (y - dy - sub2->y) >> 4;
         sub->z += (-0x1800 - sub->z) >> 3;
         sub2->z += (-0x1800 - sub2->z) >> 3;
+
         if (ApplyAttackBox(304, sub->x, sub->y, sub->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
+
         if (ApplyAttackBox(304, sub2->x, sub2->y, sub2->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
+
         AxcelSpawnParticle(w, sub);
         AxcelSpawnParticle(w, sub2);
+
         if ((s16)w->steps <= 0) {
             work->base.stateTimer = 0;
             work->base.state = 30;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 30:
         if (work->base.stateTimer == 0) {
             w->steps = 20;
         }
+
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             ApproachValue(&sub->x, (gBtlWork->xMin - 32) << 8, w->steps);
             ApproachValue(&sub2->x, (gBtlWork->xMin - 32) << 8, w->steps);
@@ -5298,9 +5680,11 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             ApproachValue(&sub->x, (gBtlWork->xMax + 32) << 8, w->steps);
             ApproachValue(&sub2->x, (gBtlWork->xMax + 32) << 8, w->steps);
         }
+
         ApproachValue(&sub->z, -0x5A00, w->steps);
         ApproachValue(&sub2->z, -0x5A00, w->steps);
         w->steps--;
+
         if ((s16)w->steps <= 0) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
             sub2->flags |= HUM_SUB_FLAG_HIDDEN;
@@ -5309,15 +5693,18 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 31:
         HumFaceTarget(&work->base, 1);
+
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5325,6 +5712,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 sub->x = act->x + 0x3700;
                 sub2->x = act->x + 0x5700;
             }
+
             sub->y = act->y + 0xA00;
             sub->z = act->z - 0x1E00;
             sub2->y = act->y - 0xA00;
@@ -5333,6 +5721,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->subAngle = GetAngle(sub->x, sub->y, x, y);
             w->sub2Angle = GetAngle(sub2->x, sub2->y, x, y);
         }
+
         sub->x += gSineTable[(u8)w->subAngle] * 6;
         sub->y -= gSineTable[(u8)w->subAngle + 64] * 4;
         sub2->x += gSineTable[(u8)w->sub2Angle] * 6;
@@ -5341,33 +5730,41 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         sub2->z += (-0x1000 - sub2->z) >> 3;
         w->subAngle += 2;
         w->sub2Angle -= 2;
+
         if (ClampBattlePosition(&sub->x, &sub->y, 0, 0)) {
             w->subAngle += 128;
         }
+
         if (ClampBattlePosition(&sub2->x, &sub2->y, 0, 0)) {
             w->sub2Angle += 128;
         }
+
         if (ApplyAttackBox(304, sub->x, sub->y, sub->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
             w->subAngle += 128;
         }
+
         if (ApplyAttackBox(304, sub2->x, sub2->y, sub2->z, 8, 8, 2)) {
             m4aSongNumStart(SONG_EF_FIRE01);
             w->sub2Angle += 128;
         }
+
         AxcelSpawnParticle(w, sub);
         AxcelSpawnParticle(w, sub2);
+
         if (work->base.stateTimer > 300) {
             work->base.stateTimer = 0;
             work->base.state = 30;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.stateTimer = 0;
@@ -5375,6 +5772,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 20:
         if (work->base.stateTimer == 0) {
@@ -5383,6 +5781,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->hoverZ = 0;
             w->flags &= ~AXCEL_FLAG_ATTACK_HIT;
         }
+
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
         case 2:
@@ -5394,10 +5793,13 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 s32 t = act->x - 0x3000;
                 act->x += (act->originX - t) >> 3;
             }
+
             break;
         }
+
         if (AnimGetFrame(&work->base.anim) == 2 && work->base.anim.timer == 0) {
             MakeOpponentsHittable();
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                 ApplyAttackBox(300, act->x - 0x2000, act->y, act->z, 20, 24, 50) :
                 ApplyAttackBox(300, act->x + 0x2000, act->y, act->z, 20, 24, 50)) {
@@ -5405,6 +5807,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 w->flags |= AXCEL_FLAG_ATTACK_HIT;
             }
         }
+
         if (w->flags & AXCEL_FLAG_ATTACK_HIT) {
             work->base.state = 21;
             work->base.stateTimer = 0;
@@ -5415,6 +5818,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -5422,6 +5826,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->hoverZ = 0;
             w->flags &= ~AXCEL_FLAG_ATTACK_HIT;
         }
+
         if (AnimGetFrame(&work->base.anim) == 1) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x2800;
@@ -5431,8 +5836,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 act->x += (act->originX - t) >> 3;
             }
         }
+
         if (AnimGetFrame(&work->base.anim) == 2 && work->base.anim.timer == 0) {
             MakeOpponentsHittable();
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                 ApplyAttackBox(301, act->x - 0x2000, act->y, act->z, 24, 24, 50) :
                 ApplyAttackBox(301, act->x + 0x2000, act->y, act->z, 24, 24, 50)) {
@@ -5440,6 +5847,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 w->flags |= AXCEL_FLAG_ATTACK_HIT;
             }
         }
+
         if (work->base.steps <= 1 && (w->flags & AXCEL_FLAG_ATTACK_HIT) && AnimGetFrame(&work->base.anim) > 2) {
             work->base.state = 20;
             work->base.stateTimer = 0;
@@ -5451,6 +5859,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 32:
         if (work->base.stateTimer == 0) {
@@ -5458,36 +5867,45 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->hoverZ = 0;
             m4aSongNumStart(SONG_SND_289);
         }
+
         HumFaceTarget(&work->base, 1);
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 33;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 33: {
         s32 a, b, c;
+
         if (work->base.stateTimer == 0) {
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartAxcelFireWall(act->x, 1, 303);
             } else {
                 BgFxStartAxcelFireWall(act->x, 0, 303);
             }
+
             work->base.flags |= HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
             act->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
             m4aSongNumStart(SONG_EF_AKL_FIREWALL);
         }
+
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             BgFxAddPosition(-76, 0, 0);
         } else {
             BgFxAddPosition(76, 0, 0);
         }
+
         BgFxGetPosition(&a, &b, &c);
+
         if (!BgFxIsActive() || a < ((gBtlWork->xMin - 64) << 8) || a > ((gBtlWork->xMax + 64) << 8)) {
             m4aSongNumStop(SONG_EF_AKL_FIREWALL);
             work->base.state = 34;
@@ -5497,6 +5915,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 34:
@@ -5504,6 +5923,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
             w->hoverZ = 0;
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.flags &= ~HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
@@ -5514,35 +5934,42 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             AxcelScaleTo(w, 12, 512, 8);
         }
+
         if (work->base.stateTimer > 6) {
             if (work->base.stateTimer == 7) {
                 act->x = work->base.targetX;
                 act->y = work->base.targetY;
                 AxcelScaleTo(w, 256, 256, 8);
             }
+
             if (AnimIsFinished(&work->base.anim)) {
                 work->base.state = 0;
                 work->base.stateTimer = 0;
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     }
+
     if (act->badStatus != BAD_STATUS_STOP) {
         AxcelHover(&work->base, w->hoverZ);
     }
+
     if ((s16)w->scaleSteps > 0) {
         ApproachValue(&work->base.scaleX, w->targetScaleX, w->scaleSteps);
         ApproachValue(&work->base.scaleY, w->targetScaleY, w->scaleSteps);
         w->scaleSteps--;
     }
+
     TaskPoolUpdate(&w->tasks);
     return HumUpdate(&work->base);
 }
@@ -5559,16 +5986,20 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
             affine = 0;
         } else {
             scale = 0x100 - (-sub->z) / 128;
+
             if (scale <= 127) {
                 scale = 128;
             }
+
             f = 0;
 
             if (scale > 0x100) {
                 f = 1;
             }
+
             affine = AllocObjAffine(0, scale, scale, f);
         }
+
         WorldToScreen(&x, &y, sub->x, sub->y, 0);
         DrawSprite(x, y, gUnk_08B22BA8, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFE);
     }
@@ -5614,6 +6045,7 @@ u8 task_hum_axcel_ptc_1(AxcelPtcWork* work) {
     if (AnimIsFinished(&work->anim)) {
         return 0;
     }
+
     work->gfx = AnimUpdate(&work->anim);
     return 1;
 }
@@ -5736,6 +6168,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             work->base.state = 23;
             break;
         }
+
         break;
     case 4:
         m4aSongNumStop(SONG_BTL_VIC_ICEFALL);
@@ -5746,6 +6179,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             w->base.state = 37;
             w->base.stateTimer = 0;
         }
+
         break;
     }
 
@@ -5754,6 +6188,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (HumChooseCardAction(&w->base, 30, 40, 40, 24)) {
             w->base.stockMoves = sHumVixenStockMovesA;
         }
+
         break;
     case 175:
         if (HumChooseCardAction(&w->base, 5, 40, 40, 24)) {
@@ -5769,6 +6204,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 break;
             }
         }
+
         break;
     case 176:
     default:
@@ -5785,6 +6221,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 break;
             }
         }
+
         break;
     }
 
@@ -5812,6 +6249,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 w->base.stateTimer++;
             }
         }
+
         break;
     case 8:
         if (w->base.stateTimer == 0) {
@@ -5825,8 +6263,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 w->base.targetX = (gBtlWork->xMin + 48) << 8;
             }
+
             work->slideSpeed = 0;
         }
+
         work->slideSpeed += 17;
 
         if (work->slideSpeed > 0x199) {
@@ -5848,6 +6288,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             act->y -= work->slideSpeed;
         }
+
         d = act->x - (s32)w->base.targetX;
 
         if ((d >= 0) ? d <= 0xBFF : (s32)w->base.targetX - act->x <= 0xBFF) {
@@ -5856,6 +6297,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 1:
     case 3:
@@ -5893,6 +6335,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 37:
         if (w->base.stateTimer == 0) {
@@ -5913,6 +6356,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 22:
         if (w->base.stateTimer == 0) {
@@ -5937,6 +6381,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 23:
         if (w->base.stateTimer == 0) {
@@ -5951,6 +6396,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 24:
         if (w->base.stateTimer == 0) {
@@ -5963,6 +6409,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 25:
         if (w->base.stateTimer == 0) {
@@ -5975,6 +6422,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 26:
         if (w->base.stateTimer == 0) {
@@ -5987,6 +6435,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 work->needleX = act->x + 0x2000;
                 work->angle = 64;
             }
+
             work->needleY = act->y;
             m4aSongNumStart(SONG_VO_VIC_ATTACK01);
             InitObjTilesAtSlot(&work->needleTiles, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenE1Tiles, 0x7E0);
@@ -6019,6 +6468,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 27:
         if (w->base.stateTimer > 70) {
@@ -6028,6 +6478,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 28:
         if (w->base.stateTimer == 0) {
@@ -6061,6 +6512,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 29:
         if (w->base.stateTimer == 0) {
@@ -6074,6 +6526,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 30:
         if (w->base.stateTimer == 0) {
@@ -6086,6 +6539,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 31:
         if (w->base.stateTimer == 0) {
@@ -6098,6 +6552,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 32:
         if (w->base.stateTimer == 0) {
@@ -6116,6 +6571,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 33:
         if (w->base.stateTimer == 0) {
@@ -6129,6 +6585,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 34:
         if (w->base.stateTimer == 0) {
@@ -6141,6 +6598,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 35:
         if (w->base.stateTimer == 0) {
@@ -6154,6 +6612,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     case 36:
         if (w->base.stateTimer == 0) {
@@ -6176,12 +6635,14 @@ u8 task_hum_vixen_1(VixenWork* work) {
         } else {
             w->base.stateTimer++;
         }
+
         break;
     }
 
     if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         VixenHover(&w->base, work->hoverZ);
     }
+
     r = HumUpdate(&w->base);
     cx = gBtlWork->actor->x;
     ax = act->x;
@@ -6191,6 +6652,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
     } else {
         act->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
+
     TaskPoolUpdate(&work->tasks);
     return r;
 }
@@ -6204,6 +6666,7 @@ void task_hum_vixen_3(VixenWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         ReleaseObjTiles(gBtlWork->tiles2);
     }
+
     HumReleaseResources(&work->base);
     TaskPoolDestroy(&work->tasks);
 }
@@ -6244,12 +6707,14 @@ u8 task_hum_vixen_ndl_1(VixenNdlWork* work) {
                 ApplyAttackBox(0x13A, work->x, work->y, 0, 4, 4, 16);
             }
         }
+
         break;
     }
 
     if (gBtlWork->actor->flags & BTLOBJ_FLAG_HURT) {
         work->hitDone = 1;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -6266,6 +6731,7 @@ void task_hum_vixen_ndl_2(VixenNdlWork* work) {
     if (work->flipped != 0) {
         attr |= 1;
     }
+
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
         -0x1004 - (work->y >> 8) * 4);
@@ -6293,6 +6759,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
             work->sub->pending = 0;
             ColliderSetDisabled(&work->collider, 1);
         }
+
         return 1;
     }
 
@@ -6322,14 +6789,17 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
             work->steps = 30;
             work->stateTimer++;
         }
+
         ApproachValue(&work->scale, work->targetScale, work->steps);
         work->steps--;
+
         if ((s16)work->steps <= 0) {
             ColliderSetDisabled(&work->collider, 0);
             work->state = 1;
             work->stateTimer = 0;
             work->lifetime = GetRandom() % 0x259 + 600;
         }
+
         break;
     case 1:
         if (work->stateTimer == 0) {
@@ -6341,6 +6811,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
             work->state = 2;
             work->stateTimer = 0;
         }
+
         break;
     case 2:
         if (work->stateTimer == 0) {
@@ -6352,6 +6823,7 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
             work->state = 1;
             work->stateTimer = 0;
         }
+
         break;
     }
 
@@ -6360,14 +6832,17 @@ u8 task_hum_vixen_ice_1(VixenIceWork* work) {
     case 2:
         ApproachValue(&work->scale, 10, work->lifetime);
         work->lifetime--;
+
         if ((s16)work->lifetime <= 0) {
             work->sub->active = 0;
             work->sub->pending = 1;
         }
+
         ColliderSetRadius(&work->collider, work->scale * 27 >> 8);
         ColliderSetPosition(&work->collider, work->sub->x, work->sub->y, 0);
         break;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -6383,11 +6858,13 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
         gfx = AnimGetGfx(&work->anim);
         WorldToScreen(&x, &y, work->sub->x, work->sub->y, 0);
         s = work->scale * gBtlWork->scale >> 8;
+
         if (gBtlWork->rotation != 0 || s > 0x100) {
             affine = AllocObjAffine(gBtlWork->rotation, s, s, 1);
         } else {
             affine = AllocObjAffine(gBtlWork->rotation, s, s, 0);
         }
+
         DrawSprite(x, y, gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFF);
     }
 }
@@ -6411,6 +6888,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     } else {
         work->variant = 0;
     }
+
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
@@ -6420,6 +6898,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     } else {
         work->flipped = 1;
     }
+
     m4aSongNumStart(SONG_EF_BURIZA02);
     work->x = args->x;
     work->y = args->y;
@@ -6449,6 +6928,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
                 break;
             }
         }
+
         work->x = gBtlWork->actor->x;
         work->y = gBtlWork->actor->y;
         work->z = gBtlWork->actor->z;
@@ -6459,6 +6939,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 2:
         if (work->timer == 0) {
@@ -6474,6 +6955,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
                 break;
             }
         }
+
         work->x = gBtlWork->actor->x;
         work->y = gBtlWork->actor->y;
         work->z = gBtlWork->actor->z;
@@ -6484,6 +6966,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 3:
         if (work->timer == 0) {
@@ -6499,6 +6982,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
                 break;
             }
         }
+
         work->x = gBtlWork->actor->x;
         work->y = gBtlWork->actor->y;
         work->z = gBtlWork->actor->z;
@@ -6513,6 +6997,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 0:
         if (!AnimIsFinished(&work->anim)) {
@@ -6531,6 +7016,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
             work->state = 4;
             work->timer = 0;
         }
+
         break;
     case 4:
         if (work->timer == 0) {
@@ -6543,6 +7029,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 5:
         if (work->timer == 0) {
@@ -6559,14 +7046,17 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 6:
         if (work->timer > 80) {
             return 0;
         }
+
         work->timer++;
         break;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -6616,6 +7106,7 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
         e->vx = gSineTable[a] * b >> 8;
         e->vy = -gSineTable[a + 64] * (b >> 1) >> 8;
     }
+
     m4aSongNumStart(SONG_EF_VIC_ICEBREAK);
 }
 
@@ -6640,9 +7131,12 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
             e->vx = e->vx >> 1;
             e->vy = e->vy >> 1;
         }
+
         ClampBattlePosition(&e->x, &e->y, 0, 0);
     }
+
     work->timer++;
+
     if (work->timer == 50) {
         work->blinking = 1;
     }
@@ -6650,6 +7144,7 @@ u8 task_hum_vixen_frg_1(VixenFrgWork* work) {
     if (work->timer > 70) {
         return 0;
     }
+
     return 1;
 }
 
@@ -6665,6 +7160,7 @@ void task_hum_vixen_frg_2(VixenFrgWork* work) {
             return;
         }
     }
+
     p = work->sub;
 
     for (i = 0; i < 15; i++) {
@@ -6741,6 +7237,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             work->base.state = 25;
             break;
         }
+
         break;
     case 4:
         work->base.scaleX = work->targetScaleX = 0x100;
@@ -6751,8 +7248,10 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             work->targetTilt = 0;
             work->tiltSteps = 420;
         }
+
         break;
     }
+
     HumChooseCardAction(&work->base, 3, 40, 40, 20);
     w->hoverZ = 0;
 
@@ -6778,6 +7277,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 break;
             }
         }
+
         HumFaceTarget(&work->base, 10);
         work->base.stateTimer++;
         break;
@@ -6794,6 +7294,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 break;
             }
         }
+
         HumFaceTarget(&work->base, 10);
         work->base.stateTimer++;
         break;
@@ -6804,6 +7305,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (work->base.stateTimer > 5) {
             break;
         }
+
         work->base.stateTimer = 6;
         act->invincibleTimer = 30;
         break;
@@ -6825,6 +7327,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (work->base.anim.timer == 0) {
                 m4aSongNumStart(SONG_BTL_LEC_ROCKB2);
             }
+
             break;
         case 3:
             if (work->base.anim.timer == 0) {
@@ -6835,10 +7338,12 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                     a1.x = act->x + 0x2000;
                     a1.unk_12 = 0;
                 }
+
                 a1.y = act->y;
                 a1.z = 0;
                 w->task = TaskCreate(&w->tasks, &sTaskDescHumLexRock, &a1);
             }
+
             break;
         }
 
@@ -6848,6 +7353,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -6862,6 +7368,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (!AnimIsFinished(&work->base.anim)) {
             break;
         }
+
         work->base.stateTimer = 0;
         work->base.state = 0;
         ClearBtlObjActionFlags(act);
@@ -6884,6 +7391,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                     a1.x = act->x + 0x1800;
                     a1.unk_12 = 0;
                 }
+
                 a1.y = act->y;
                 a1.z = act->z - 0x6000;
                 w->flags |= LEXCEUS_FLAG_WEAPON_THROWN;
@@ -6898,6 +7406,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 break;
             }
         }
+
         work->base.stateTimer++;
         break;
     case 24:
@@ -6914,6 +7423,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                     a2.x = act->x + 0x700;
                     a2.unk_12 = 0;
                 }
+
                 a2.y = act->y;
                 a2.z = act->z;
                 TaskCreate(&w->tasks, &sTaskDescHumLexTmh0, &a2);
@@ -6926,6 +7436,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             work->base.stateTimer = 0;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 21:
@@ -6934,6 +7445,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             w->flags &= ~(LEXCEUS_FLAG_ATTACK_HIT | LEXCEUS_FLAG_COMBO_FOLLOWUP);
+
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 49) {
                 act->btl->hcEffectCount--;
@@ -6971,6 +7483,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 } else {
                     act->x = act->x + (dx << 8);
                 }
+
                 act->y = act->y + (dy << 8);
             }
 
@@ -7007,6 +7520,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
@@ -7014,6 +7528,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             w->flags &= ~LEXCEUS_FLAG_ATTACK_HIT;
+
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 49) {
                 act->btl->hcEffectCount--;
@@ -7049,6 +7564,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 act->x = act->x + 0x1900;
             }
+
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
             work->base.stateTimer = 0;
             ClearBtlObjActionFlags(act);
@@ -7056,6 +7572,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 27:
         if (work->base.stateTimer == 0) {
@@ -7087,6 +7604,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 } else {
                     w->targetTilt = 0x800;
                 }
+
                 w->tiltSteps = 10;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -7101,6 +7619,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 gBtlWork->y2 = w->cameraBaseY + 0x4000;
             }
+
             break;
         case 6:
             if (work->base.stateTimer % 6 <= 2) {
@@ -7108,6 +7627,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 gBtlWork->y2 = w->cameraBaseY + 0x3000;
             }
+
             break;
         case 7:
             if (work->base.stateTimer % 6 <= 2) {
@@ -7115,6 +7635,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 gBtlWork->y2 = w->cameraBaseY + 0x2000;
             }
+
             break;
         case 8:
             if (work->base.stateTimer % 6 <= 2) {
@@ -7122,6 +7643,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             } else {
                 gBtlWork->y2 = w->cameraBaseY + 0x1000;
             }
+
             break;
         }
 
@@ -7134,6 +7656,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -7147,6 +7670,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         ApproachValue(&w->tilt, w->targetTilt, w->tiltSteps);
         w->tiltSteps--;
     }
+
     gBtlWork->rotation = w->tilt >> 8;
 
     if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != BAD_STATUS_STOP && !(p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
@@ -7155,6 +7679,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     } else {
         w->tiltSlide = 0;
     }
+
     TaskPoolUpdate(&w->tasks);
     return HumUpdate(&work->base);
 }
@@ -7167,6 +7692,7 @@ void task_hum_lexceus_2(LexceusWork* work) {
         ApproachValue(&work->base.scaleY, work->targetScaleY, work->scaleSteps);
         work->scaleSteps--;
     }
+
     TaskPoolDraw(&work->tasks);
 }
 
@@ -7186,6 +7712,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     } else {
         work->facingLeft = 0;
     }
+
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -7227,6 +7754,7 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 1:
         if (work->timer == 0) {
@@ -7249,6 +7777,7 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
         } else {
             work->x += 0x400;
         }
+
         work->y += (gBtlWork->targetY - work->y) >> 4;
         work->z += work->vz;
         work->vz += 64;
@@ -7262,9 +7791,11 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
             work->vz = -work->vz >> 1;
             work->z = 0;
         }
+
         work->timer++;
         break;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -7284,6 +7815,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     } else {
         attr = GetBattleSpritePriorityFlags(work->y) | 1;
     }
+
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
         -0x1004 - (work->y >> 8) * 4);
@@ -7292,11 +7824,14 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
         affine = 0;
     } else {
         scale = 0x100 - (-work->z) / 256;
+
         if (scale <= 75) {
             scale = 76;
         }
+
         affine = AllocObjAffine(0, scale, scale, 0);
     }
+
     WorldToScreen(&x, &y, work->x, work->y, 0);
     DrawSprite(x, y, gUnk_08B22BA8, work->tiles2, work->palette2, affine, attr, 0xFFF0);
 }
@@ -7319,6 +7854,7 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
     } else {
         work->facingLeft = 0;
     }
+
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -7336,6 +7872,7 @@ u8 task_hum_lex_tmh0_1(LexTmh0Work* work) {
             return 1;
         }
     }
+
     return 0;
 }
 
@@ -7351,10 +7888,12 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
     gfx = AnimGetGfx(&work->anim);
     attr = GetBattleSpritePriorityFlags(work->y);
     h = work->scale;
+
     if (h == 0x100) {
         if (work->facingLeft == 0) {
             attr |= 1;
         }
+
         sx = h;
     } else {
         if (work->facingLeft != 0) {
@@ -7363,6 +7902,7 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
             sx = -h;
         }
     }
+
     affine = AllocObjAffine(0, sx, 0x100, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gfx, work->tiles, work->palette, affine, attr,
@@ -7380,6 +7920,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     } else {
         work->facingLeft = 0;
     }
+
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
@@ -7413,6 +7954,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         if (!AnimIsFinished(&work->anim[0])) {
             break;
         }
+
         work->state++;
         break;
     case 2:
@@ -7431,11 +7973,13 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             m4aSongNumStart(SONG_BTL_LEC_JMPKUEIKU);
             work->state += 2;
         }
+
         break;
     case 4:
         if (!AnimIsFinished(&work->anim[0])) {
             break;
         }
+
         work->state++;
         break;
     case 5:
@@ -7453,6 +7997,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             } else {
                 e->vx = GetRandom() % 0x501 + 0x300;
             }
+
             e->vy = GetRandom() % 0x801 - 0x400;
             e->x = work->x + ((GetRandom() % 17 - 8) << 8);
             e->y = work->y + ((GetRandom() % 17 - 8) << 8);
@@ -7465,6 +8010,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
                 e->vz = GetRandom() % 1 + 0x300;
             }
         }
+
         work->state++;
         work->timer = 0;
         break;
@@ -7483,6 +8029,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
                     e->z = 0;
                     e->vz = -(e->vz >> 1);
                 }
+
                 v = ClampBattlePosition(&e->x, &e->y, 0, 0);
 
                 switch (v) {
@@ -7512,6 +8059,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         if (work->timer > 100) {
             return 0;
         }
+
         work->timer++;
         break;
     }
@@ -7519,6 +8067,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
     for (i = 0; i < work->rockCount; i++) {
         AnimUpdate(&work->anim[i]);
     }
+
     return 1;
 }
 
@@ -7542,6 +8091,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
         } else {
             attr = GetBattleSpritePriorityFlags(work->y) | 1;
         }
+
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         DrawSprite(x, y, gfx, work->tiles2[0], work->palette2, 0, attr,
             -0x1006 - (work->y >> 8) * 4);
@@ -7555,6 +8105,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
             } else {
                 attr = GetBattleSpritePriorityFlags(e->y) | 1;
             }
+
             WorldToScreen(&x, &y, e->x, e->y,
                 e->z);
             DrawSprite(x, y, gfx, work->tiles2[i], work->palette2, 0, attr,
@@ -7599,14 +8150,17 @@ u8 task_hum_mahluxia_flw_1(MahluxiaFlwWork* work) {
         work->x += work->vx;
         work->z += work->vz;
         work->vz += 17;
+
         if (work->vz > 0x1CC) {
             work->state = 1;
         }
+
         break;
     case 1:
         work->x += work->vx;
         work->z += work->vz;
         work->vz -= 12;
+
         if (work->vz < 0) {
             work->vz = GetRandom() % 181 + 204;
 
@@ -7620,8 +8174,10 @@ u8 task_hum_mahluxia_flw_1(MahluxiaFlwWork* work) {
         if (work->z >= 0) {
             return 0;
         }
+
         break;
     }
+
     AnimUpdate(&work->anim);
     return 1;
 }
@@ -7651,6 +8207,7 @@ void RikuJumpOffset(RikuWork* work, s16 a, s32 b) {
     } else {
         work->base.targetX = act->x + (a << 8);
     }
+
     w->targetY = act->y;
     w->state = 19;
     w->stateTimer = 0;
@@ -7689,9 +8246,11 @@ u8 RikuTryJumpAway(RikuWork* work) {
             } else {
                 RikuJumpOffset(work, -80, 0x500);
             }
+
             return 1;
         }
     }
+
     return 0;
 }
 
@@ -7707,6 +8266,7 @@ void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst) {
     } else {
         dst->flags &= ~RIKU_SPAWN_FLAG_FACING_LEFT;
     }
+
     dst->anim = work->base.anim;
     dst->tileSrc = work->base.tiles->src;
     dst->scale = gBtlWork->scale;
@@ -7755,6 +8315,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
     } else {
         affine = AllocObjAffine(0, sx, sy, 1);
     }
+
     pri = 0xFFF0;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
     SetObjTileSource(sub->tiles, p->tileSrc);
@@ -7772,6 +8333,7 @@ void task_hum_riku_0(RikuWork* work) {
     if (gBtlWork->battleId != 0xA1) {
         work->base.stockMoves = sHumRikuStockMoves[0];
     }
+
     RikuSaveAfterimage(work, &work->spawns[0]);
     work->spawns[1] = work->spawns[0];
     work->spawns[2] = work->spawns[0];
@@ -7794,9 +8356,11 @@ u8 task_hum_riku_1(RikuWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
     work->flags &= ~RIKU_FLAG_AFTERIMAGE;
+
     switch (_0800E434(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
+
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
             work->base.state = 24;
@@ -7817,12 +8381,14 @@ u8 task_hum_riku_1(RikuWork* work) {
             work->base.state = 30;
             break;
         }
+
         break;
     case 4:
         work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
         work->base.scaleX = 256;
         break;
     }
+
     switch (gBtlWork->battleId) {
     case 161:
         HumChooseCardAction(&work->base, 20, 40, 40, 20);
@@ -7832,11 +8398,13 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (HumChooseCardAction(&work->base, 15, 40, 40, 20)) {
             work->base.stockMoves = sHumRikuStockMoves[0];
         }
+
         break;
     case 169:
         if (HumChooseCardAction(&work->base, 10, 40, 40, 20)) {
             work->base.stockMoves = sHumRikuStockMoves[0];
         }
+
         break;
     case 170:
     case 172:
@@ -7847,8 +8415,10 @@ u8 task_hum_riku_1(RikuWork* work) {
                 work->base.stockMoves = sHumRikuStockMoves[1];
             }
         }
+
         break;
     }
+
     switch (work->base.state) {
     case 12:
     case 18:
@@ -7856,9 +8426,11 @@ u8 task_hum_riku_1(RikuWork* work) {
         break;
     case 17:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
+
         if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && RikuTryJumpAway(w)) {
             break;
         }
+
         if ((act->x - x >= 0 ? act->x - x : x - act->x) <= 0x4FFF) {
             if (x < 0x10000) {
                 RikuJumpTo(w, (gBtlWork->xMax - 40) << 8, (gBtlWork->yMin + gBtlWork->yMax) << 7);
@@ -7866,21 +8438,26 @@ u8 task_hum_riku_1(RikuWork* work) {
                 RikuJumpTo(w, (gBtlWork->xMin + 40) << 8, (gBtlWork->yMin + gBtlWork->yMax) << 7);
             }
         }
+
         break;
     case 0:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+
         if (func_08081828()) {
             break;
         }
+
         if (AnimIsFinished(&work->base.anim) && (u16)(GetRandom() % 60) == 0) {
             work->base.state = 8;
             work->base.stateTimer = 0;
             break;
         }
+
         if (HumIsNearAreaEdge(&work->base, 40)) {
             RikuJumpTo(w, 0x10000, (gBtlWork->yMin + gBtlWork->yMax) << 7);
             break;
         }
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (RikuTryJumpAway(w)) {
                 break;
@@ -7888,21 +8465,25 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             HumFaceTarget(&work->base, 60);
         }
+
         work->base.stateTimer++;
         break;
     case 8:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         work->base.targetX = x;
         work->base.targetY = y;
+
         if (HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 512) && AnimIsFinished(&work->base.anim)) {
             work->base.state = 0;
             work->base.stateTimer = 0;
             break;
         }
+
         if ((u16)(GetRandom() % 500) == 0 && (act->x - x >= 0 ? act->x - x : x - act->x) > 70) {
             RikuJumpTo(w, x, y);
             break;
         }
+
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (RikuTryJumpAway(w)) {
                 break;
@@ -7910,6 +8491,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             HumFaceTarget(&work->base, 1);
         }
+
         work->base.stateTimer++;
         break;
     case 3:
@@ -7920,6 +8502,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         break;
     case 1:
         AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+
         if (work->base.stateTimer == 3) {
             switch ((s32)(u16)(GetRandom() % 3)) {
             case 0:
@@ -7934,6 +8517,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             }
         }
+
         break;
     case 30:
         if (work->base.stateTimer == 0) {
@@ -7942,27 +8526,32 @@ u8 task_hum_riku_1(RikuWork* work) {
             m4aSongNumStart(SONG_BTL_AN_STANDENTRY);
             FadeStartOut(FADE_MODE_DARK_MAGENTA, 80);
         }
+
         work->base.vz = 0;
         act->z += (-0x2800 - act->z) >> 5;
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 31;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 31: {
-
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 15, 0, w->base.tiles);
         }
+
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
         case 2:
             work->base.vz -= 179;
             break;
         }
+
         w->flags |= RIKU_FLAG_AFTERIMAGE;
+
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t = act->x - 0x3000;
             act->x += (act->originX - t) >> 3;
@@ -7970,12 +8559,14 @@ u8 task_hum_riku_1(RikuWork* work) {
             s32 t = act->x + 0x3000;
             act->x += (act->originX - t) >> 3;
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 32;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
     case 32:
@@ -7983,13 +8574,16 @@ u8 task_hum_riku_1(RikuWork* work) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 16, 0, w->base.tiles);
             work->base.flags |= HUM_FLAG_IGNORE_BOUNDS;
         }
+
         work->base.vz = 0;
         w->flags |= RIKU_FLAG_AFTERIMAGE;
+
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= 0xC00;
         } else {
             act->x += 0xC00;
         }
+
         if (act->x < ((gBtlWork->xMin - 48) << 8) ||
             act->x > ((gBtlWork->xMax + 48) << 8)) {
             work->base.state = 33;
@@ -7998,40 +8592,50 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 33:
         if (work->base.stateTimer == 0) {
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
+
             switch ((u16)(GetRandom() % 3)) {
             case 0:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 17, ANIM_FLAG_LOOP, w->base.tiles);
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 184;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 56;
                 }
+
                 act->y = y + (((u16)(GetRandom() % 33) - 16) << 8);
                 break;
             case 1:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 18, ANIM_FLAG_LOOP, w->base.tiles);
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 203;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 37;
                 }
+
                 act->y = y + (((u16)(GetRandom() % 17) + 16) << 8);
                 break;
             case 2:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 19, ANIM_FLAG_LOOP, w->base.tiles);
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 165;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 75;
                 }
+
                 act->y = y - (((u16)(GetRandom() % 17) + 16) << 8);
                 break;
             }
+
             act->z = -0x1000;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x = x + 0x6300;
                 BgFxStartRikuLimit(act->x, act->y, act->z, 192);
@@ -8039,34 +8643,42 @@ u8 task_hum_riku_1(RikuWork* work) {
                 act->x = x - 0x6300;
                 BgFxStartRikuLimit(act->x, act->y, act->z, 64);
             }
+
             m4aSongNumStart(SONG_BTL_RK_LIMITENTRY);
             work->base.steps = 10;
             work->base.scaleX = 10;
         }
+
         work->base.vz = 0;
         BtlMapFollowPosition(gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
         ApproachValue(&work->base.scaleX, 256, (u16)work->base.steps);
         work->base.steps--;
+
         if (work->base.steps <= 0) {
             work->base.state = 34;
             work->base.stateTimer = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 34:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_EF_RK_LIMITMOV);
             MakeOpponentsHittable();
         }
+
         w->flags |= RIKU_FLAG_AFTERIMAGE;
         act->x += gSineTable[(u8)w->unk_1C4] * 12;
         act->y += -gSineTable[(u8)w->unk_1C4 + 64] * 12;
+
         if (ApplyAttackBox(295, act->x, act->y, act->z, 24, 16, 24)) {
             m4aSongNumStart(SONG_BTL_RK_HIT03);
         }
+
         work->base.vz = 0;
         BtlMapFollowPosition(gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
+
         if (work->base.stateTimer == 15 && (s16)w->dashCount > 4) {
             work->base.state = 35;
             work->base.stateTimer = 0;
@@ -8077,21 +8689,25 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 35:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 20, 0, w->base.tiles);
             work->base.steps = 40;
         }
+
         if (work->base.steps > 0) {
             ApproachValue(&act->x, act->originX, (u16)work->base.steps);
             ApproachValue(&act->y, act->originY, (u16)work->base.steps);
             ApproachValue(&act->z, act->originZ, (u16)work->base.steps);
             work->base.steps--;
+
             if (work->base.steps <= 0) {
                 BgFxStartRikuLimitFinish(act->x, act->y - 0x2000, 0);
             }
         }
+
         if (!BgFxIsActive() && work->base.steps <= 0 && AnimIsFinished(&work->base.anim)) {
             work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(act);
@@ -8101,12 +8717,14 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 24:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
         }
+
         if (work->base.anim.timer == 0) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 1:
@@ -8114,19 +8732,21 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 4:
                 work->base.vz = 0x1000;
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(293, act->x - 0x2000, act->y, act->z, 28, 16, 16) :
                     ApplyAttackBox(293, act->x + 0x2000, act->y, act->z, 28, 16, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
                 }
+
                 break;
             }
         }
+
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
         case 2:
         case 3: {
-
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x3200;
                 act->x += (act->originX - t) >> 3;
@@ -8134,9 +8754,11 @@ u8 task_hum_riku_1(RikuWork* work) {
                 s32 t = act->x - 0x3200;
                 act->x += (act->originX - t) >> 3;
             }
+
             break;
         }
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -8144,6 +8766,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 29:
         if (work->base.stateTimer == 0) {
@@ -8152,10 +8775,13 @@ u8 task_hum_riku_1(RikuWork* work) {
             w->flags &= ~RIKU_FLAG_FIRE_LAUNCHED;
             HumFaceTarget(&work->base, 1);
         }
+
         if (w->flags & RIKU_FLAG_FIRE_LAUNCHED) {
             BtlObj* p = gBtlWork->actor;
+
             if (p != NULL) {
                 s32 follow = 0;
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (p->x < act->x - 0x2000) {
                         follow = 1;
@@ -8165,14 +8791,17 @@ u8 task_hum_riku_1(RikuWork* work) {
                         follow = 1;
                     }
                 }
+
                 if (follow) {
                     BgFxSetTarget(p->x, p->y, p->z - (p->centerHeight << 8));
                 }
             }
         }
+
         if (!(w->flags & RIKU_FLAG_FIRE_LAUNCHED) && work->base.anim.timer == 0) {
             s16 d = 0;
             s32 spawn = 0;
+
             switch (AnimGetFrame(&work->base.anim)) {
             case 0:
                 d = -10;
@@ -8191,13 +8820,16 @@ u8 task_hum_riku_1(RikuWork* work) {
                 spawn = 1;
                 break;
             }
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
+
             if (spawn) {
                 w->flags |= RIKU_FLAG_FIRE_LAUNCHED;
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFire(3, act->x - 0x4A00, act->y, act->z - 0x1800,
                         act->originX - 0xC800, act->originY, act->z - 0x1800, 1, 296);
@@ -8207,9 +8839,11 @@ u8 task_hum_riku_1(RikuWork* work) {
                 }
             }
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
         }
+
         if (AnimIsFinished(&work->base.anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -8217,15 +8851,18 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
+
         if (work->base.anim.timer == 0) {
             s32 d = 0;
             s32 hit = 0;
+
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
                 d = 4;
@@ -8252,13 +8889,16 @@ u8 task_hum_riku_1(RikuWork* work) {
                 d = 2;
                 break;
             }
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
+
             if (hit) {
                 MakeOpponentsHittable();
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(292, act->x - 0x1400, act->y, act->z, 30, 16, 16) :
                     ApplyAttackBox(292, act->x + 0x1400, act->y, act->z, 30, 16, 16)) {
@@ -8266,6 +8906,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 }
             }
         }
+
         switch (AnimGetFrame(&work->base.anim)) {
         case 2:
         case 3:
@@ -8279,8 +8920,10 @@ u8 task_hum_riku_1(RikuWork* work) {
             } else {
                 act->x += 256;
             }
+
             break;
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -8288,15 +8931,17 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
-        if (AnimGetGfxIndex(&work->base.anim) == 6) {
 
+        if (AnimGetGfxIndex(&work->base.anim) == 6) {
             w->flags |= RIKU_FLAG_AFTERIMAGE;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x5800;
                 act->x += (act->originX - t) >> 2;
@@ -8305,10 +8950,12 @@ u8 task_hum_riku_1(RikuWork* work) {
                 act->x += (act->originX - t) >> 2;
             }
         }
+
         if (work->base.anim.timer == 0) {
             s16 d = 0;
             s32 hit = 0;
             s32 attack = 290;
+
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 1:
                 d = 15;
@@ -8339,19 +8986,24 @@ u8 task_hum_riku_1(RikuWork* work) {
                 d = 1;
                 break;
             }
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
+
             if (hit) {
                 MakeOpponentsHittable();
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(attack, act->x - 0x1400, act->y, act->z, 20, 8, 16) :
                     ApplyAttackBox(attack, act->x + 0x1400, act->y, act->z, 20, 8, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
+
                     if (attack == 291) {
                         FadeStartIn(FADE_MODE_ADD_WHITE, 45);
+
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 332, act->x - 0x2000, (act->y - 0x1800) + act->z);
                         } else {
@@ -8361,9 +9013,11 @@ u8 task_hum_riku_1(RikuWork* work) {
                 }
             }
         }
+
         if (work->base.anim.timer == 2 && AnimGetGfxIndex(&work->base.anim) == 6) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -8371,15 +9025,18 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 25:
         if (act->z < act->groundZ) {
             break;
         }
+
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = 26;
@@ -8387,10 +9044,12 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         act->x += (x - act->x) >> 4;
         act->y += (y - act->y) >> 4;
+
         if ((s32)work->base.vz < 0) {
             if ((s32)work->base.vz > -0x200) {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
@@ -8402,6 +9061,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             work->base.state = 27;
             break;
         }
+
         work->base.stateTimer++;
         break;
     case 27:
@@ -8409,32 +9069,39 @@ u8 task_hum_riku_1(RikuWork* work) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
             w->flags &= ~RIKU_FLAG_DIVE_HIT;
         }
+
         act->x += (x - act->x) >> 4;
         act->y += (y - act->y) >> 4;
+
         if (AnimGetFrame(&work->base.anim) > 1) {
             if (ApplyAttackBox(294, act->x, act->y, act->z, 10, 10, 4)) {
                 m4aSongNumStart(SONG_BTL_RK_HIT02);
                 w->flags |= RIKU_FLAG_DIVE_HIT;
             }
         }
+
         if ((w->flags & RIKU_FLAG_DIVE_HIT) || act->z >= act->groundZ) {
             work->base.stateTimer = 0;
             work->base.state = 28;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             work->base.vz = -0x400;
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.targetX = act->x + 0x3000;
             } else {
                 work->base.targetX = act->x - 0x3000;
             }
         }
+
         act->x += ((s32)work->base.targetX - act->x) >> 3;
+
         if (AnimIsFinished(&work->base.anim) && act->z >= act->groundZ) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -8442,11 +9109,13 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = 20;
@@ -8454,10 +9123,12 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 20:
         act->x += ((s32)work->base.targetX - act->x) >> 4;
         act->y += ((s32)work->base.targetY - act->y) >> 4;
+
         if ((s32)work->base.vz < 0) {
             if ((s32)work->base.vz <= -0x200) {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -8469,11 +9140,13 @@ u8 task_hum_riku_1(RikuWork* work) {
         } else {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
+
         if (act->z >= 0) {
             work->base.stateTimer = 0;
             work->base.state = 21;
             break;
         }
+
         HumFaceTarget(&work->base, 1);
         work->base.stateTimer++;
         break;
@@ -8481,14 +9154,17 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = 0;
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
+
     return HumUpdate(&work->base);
 }
 
@@ -8504,8 +9180,10 @@ void task_hum_riku_2(RikuWork* work) {
             RikuDrawAfterimage(work, &work->spawns[4]);
             break;
         }
+
         work->unk_1CC++;
     }
+
     work->spawns[4] = work->spawns[3];
     work->spawns[3] = work->spawns[2];
     work->spawns[2] = work->spawns[1];
@@ -8551,6 +9229,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         work->base.stateTimer = 0;
         break;
     }
+
     HumFaceTarget(&work->base, 1);
 
     switch (work->base.state) {
@@ -8580,6 +9259,7 @@ u8 task_hum_leon_1(LeonWork* work) {
                 work->base.stateTimer = 0;
             }
         }
+
         break;
     case 1:
         if (work->base.stateTimer == 0) {
@@ -8587,6 +9267,7 @@ u8 task_hum_leon_1(LeonWork* work) {
             AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             work->base.stateTimer = 8;
         }
+
         break;
     case 2:
         if (gBtlWork->flags & 0x100000) {
@@ -8595,6 +9276,7 @@ u8 task_hum_leon_1(LeonWork* work) {
                 work->base.stateTimer = 0;
             }
         }
+
         break;
     case 20:
         if (work->base.stateTimer > 10) {
@@ -8604,6 +9286,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         if (work->base.stateTimer > 80) {
@@ -8613,6 +9296,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     default:
         AnimChangeWithDef(sHumLeonAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -8626,6 +9310,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     } else {
         act->flags &= ~BTLOBJ_FLAG_HURT;
     }
+
     x = act->x;
     y = act->y;
     z = act->z;
@@ -8672,6 +9357,7 @@ u8 task_hum_robe_1(RobeWork* work) {
         AnimChangeWithDef(sHumRobeAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
         work->idleAnim = 1;
     }
+
     HumFaceTarget(&work->base, 1);
     x = act->x;
     y = act->y;

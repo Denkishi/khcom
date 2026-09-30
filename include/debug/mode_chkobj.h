@@ -2,9 +2,7 @@
 #define GUARD_MODE_CHKOBJ_H
 
 #include "registration_data.h"
-
 #include "card_api.h"
-
 #include "display.h"
 #include "anim.h"
 #include "obj_api.h"

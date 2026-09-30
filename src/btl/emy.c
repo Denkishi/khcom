@@ -878,6 +878,7 @@ u8 task_emy_00_1(EmyWork* work) {
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
+
         break;
     case 20:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
@@ -902,6 +903,7 @@ u8 task_emy_00_1(EmyWork* work) {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
+
         break;
     case 22:
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 3, 0, work->tiles);
@@ -932,13 +934,13 @@ u8 task_emy_00_1(EmyWork* work) {
         if (AnimIsFinished(&w->anim)) {
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             w->state = 18;
-
 #ifdef VERSION_EU
             w->stateTimer = 0;
 #endif
         } else {
             w->stateTimer++;
         }
+
         break;
     case 18:
         if (w->stateTimer == 0) {
@@ -1115,6 +1117,7 @@ u8 task_emy_01_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     case 0x13: {
@@ -1143,6 +1146,7 @@ u8 task_emy_01_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     }
@@ -1212,6 +1216,7 @@ u8 task_emy_02_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     case 0x13: {
@@ -1240,6 +1245,7 @@ u8 task_emy_02_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     }
@@ -1294,6 +1300,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         if (EmyLungeAttack(&work->base, 0x11, 0x17, 0x0A, 0xAB, 0x50, SONG_BTL_YELLOW_HIT, 0, 0, 0x0A) == 2) {
             BgAnimStop();
         }
+
         break;
     case 0x13:
         if (work->base.stateTimer == 0) {
@@ -1312,6 +1319,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -1395,6 +1403,7 @@ u8 task_emy_04_1(Emy04Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -1476,6 +1485,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -1516,6 +1526,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -1576,6 +1587,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 work->base.state = 20;
                 work->base.stateTimer = 0;
             }
+
             break;
         case 22:
             w->unk_186 = 0;
@@ -1585,6 +1597,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 work->base.state = 20;
                 work->base.stateTimer = 0;
             }
+
             break;
         case 23:
             w->unk_186 = 1;
@@ -1594,6 +1607,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 work->base.state = 20;
                 work->base.stateTimer = 0;
             }
+
             break;
         }
 
@@ -1632,6 +1646,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
@@ -1642,6 +1657,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 4, ANIM_FLAG_LOOP, w->base.tiles);
@@ -1652,6 +1668,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 23:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
@@ -1662,6 +1679,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 20:
         if (w->unk_186 != 0) {
@@ -1700,6 +1718,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             }
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -1723,6 +1742,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -1736,6 +1756,7 @@ u8 task_emy_07_1(Emy07Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 25;
         }
+
         break;
     case 25:
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
@@ -1748,6 +1769,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             return 0;
         }
+
         break;
     }
 
@@ -1803,6 +1825,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
             work->base.stateTimer = 0;
         }
+
         break;
     case 22:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -1816,6 +1839,7 @@ u8 task_emy_08_1(Emy08Work* work) {
             work->base.stateTimer = 0;
             work->base.state = work->base.idleState;
         }
+
         break;
     case 23:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
@@ -1829,6 +1853,7 @@ u8 task_emy_08_1(Emy08Work* work) {
             work->base.stateTimer = 0;
             work->base.state = work->base.idleState;
         }
+
         break;
     case 18:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -1882,6 +1907,7 @@ u8 task_emy_08_1(Emy08Work* work) {
                 } else {
                     w->flags &= ~EMY08_FLAG_ATTACK_HIT;
                 }
+
                 break;
             }
 
@@ -1893,6 +1919,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
             act->y -= dy << 8;
         }
+
         break;
     case 20:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
@@ -1904,6 +1931,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -1915,6 +1943,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -1939,6 +1968,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -2035,6 +2065,7 @@ u8 task_emy_15_1(EmyWork* work) {
             work->state = 0x13;
             work->stateTimer = 0x1E;
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 1, 0, w->tiles);
@@ -2057,6 +2088,7 @@ u8 task_emy_15_1(EmyWork* work) {
             work->state = 0x14;
             work->stateTimer = 0;
         }
+
         break;
     case 0x14:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 2, 0, w->tiles);
@@ -2064,6 +2096,7 @@ u8 task_emy_15_1(EmyWork* work) {
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         }
+
         break;
     case 0x15:
         if (work->stateTimer == 0) {
@@ -2077,6 +2110,7 @@ u8 task_emy_15_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 0x16:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 4, 0, w->tiles);
@@ -2156,6 +2190,7 @@ u8 task_emy_16_1(Emy16Work* work) {
                 EmyReturnToIdle(&work->base);
             }
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -2179,6 +2214,7 @@ u8 task_emy_16_1(Emy16Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     }
 
@@ -2243,6 +2279,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             work->state = 1;
             work->timer = 0;
         }
+
         break;
     case 1:
         if (work->timer == 0) {
@@ -2260,6 +2297,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 2:
         if (work->timer != 0) {
@@ -2290,6 +2328,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     }
 
@@ -2462,6 +2501,7 @@ u8 task_emy_18_1(Emy18Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 22;
         }
+
         break;
     case 22:
         work->base.vz = 0;
@@ -2497,6 +2537,7 @@ u8 task_emy_18_1(Emy18Work* work) {
 
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -2513,6 +2554,7 @@ u8 task_emy_18_1(Emy18Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 7;
         }
+
         break;
     case 18:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -2528,6 +2570,7 @@ u8 task_emy_18_1(Emy18Work* work) {
                 == 1) {
             w->unk_184 = work->base.stateTimer;
         }
+
         break;
     case 19:
         AnimChangeWithDef(sEmy18AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -2547,6 +2590,7 @@ u8 task_emy_18_1(Emy18Work* work) {
                 == 1) {
             w->unk_184 = work->base.stateTimer;
         }
+
         break;
     }
 
@@ -2595,6 +2639,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             work->base.state = 0x13;
             work->base.stateTimer = 0;
         }
+
         break;
     case 0x13:
         if (work->base.stateTimer == 0) {
@@ -2612,6 +2657,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x14:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
@@ -2634,6 +2680,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x15:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -2644,6 +2691,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             work->base.state = 0x16;
             work->base.stateTimer = 0;
         }
+
         break;
     case 0x16:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -2651,6 +2699,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     case 0x17:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -2660,6 +2709,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             if (work->base.anim.timer == 0) {
                 w->dashSpeed = 0x400;
             }
+
             break;
         case 4:
             if (work->base.anim.timer == 0) {
@@ -2671,6 +2721,7 @@ u8 task_emy_19_1(Emy19Work* work) {
                     : ApplyAttackBox(0xBC, act->x + 0x1000, act->y, act->z, 16, 16, 32) != 0) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD02);
             }
+
             break;
         }
 
@@ -2680,6 +2731,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     }
 
@@ -2733,6 +2785,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x13: {
         u16 t;
@@ -2768,6 +2821,7 @@ u8 task_emy_21_1(Emy21Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 0x15;
         }
+
         break;
     case 0x15:
         if (work->base.stateTimer == 0) {
@@ -2789,6 +2843,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x16:
         AnimChangeWithDef(sEmy21AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -2883,6 +2938,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         if (work->base.stateTimer == 0) {
             w->counterPending = 1;
         }
+
         break;
     case 7:
         if (w->counterPending != 0 && work->base.stateTimer == 0) {
@@ -2890,6 +2946,7 @@ u8 task_emy_22_1(Emy22Work* work) {
             work->base.stateTimer = 0;
             w->counterPending = 0;
         }
+
         break;
     case 18:
         if (work->base.stateTimer == 0) {
@@ -2976,6 +3033,7 @@ u8 task_emy_22_1(Emy22Work* work) {
 
             CreateBtlPopTask(act, 10);
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -3060,12 +3118,14 @@ u8 task_emy_23_1(Emy23Work* work) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
                 work->base.vz = -0x466;
             }
+
             break;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy23AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -3084,6 +3144,7 @@ u8 task_emy_23_1(Emy23Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     }
 
@@ -3153,6 +3214,7 @@ u8 task_emy_25_1(EmyWork* work) {
                             0x10, 0x10, 0x20)) {
                     m4aSongNumStart(SONG_BTL_HANE_HIT);
                 }
+
                 break;
             case 4:
                 dx = 5;
@@ -3180,6 +3242,7 @@ u8 task_emy_25_1(EmyWork* work) {
 
             act->y -= (s16)dy << 8;
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy25AnimDefs, &w->anim, 1, 0, w->tiles);
@@ -3240,6 +3303,7 @@ u8 task_emy_25_1(EmyWork* work) {
                 }
             }
         }
+
         break;
     }
 
@@ -3294,6 +3358,7 @@ u8 task_emy_26_1(EmyWork* work) {
             if (work->anim.timer == 0) {
                 work->vz = 0x300;
             }
+
             break;
         case 0:
         case 1:
@@ -3331,6 +3396,7 @@ u8 task_emy_26_1(EmyWork* work) {
 
                 work->stateTimer++;
             }
+
             break;
         case 2:
             AnimChange(&work->anim, 1, 0);
@@ -3338,6 +3404,7 @@ u8 task_emy_26_1(EmyWork* work) {
             if (AnimIsFinished(&work->anim)) {
                 work->stateTimer++;
             }
+
             break;
         case 3:
             AnimChange(&work->anim, 1, 0);
@@ -3345,8 +3412,10 @@ u8 task_emy_26_1(EmyWork* work) {
             if (AnimIsFinished(&work->anim)) {
                 EmyReturnToIdle(work);
             }
+
             break;
         }
+
         break;
     }
 
@@ -3438,6 +3507,7 @@ u8 task_emy_27_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -3504,6 +3574,7 @@ u8 task_emy_28_1(Emy28Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 22;
         }
+
         break;
     case 22:
         work->base.vz = 0;
@@ -3539,6 +3610,7 @@ u8 task_emy_28_1(Emy28Work* work) {
 
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -3555,6 +3627,7 @@ u8 task_emy_28_1(Emy28Work* work) {
             work->base.stateTimer = 0;
             work->base.state = 7;
         }
+
         break;
     case 18:
         AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -3574,6 +3647,7 @@ u8 task_emy_28_1(Emy28Work* work) {
                 == 1) {
             w->unk_184 = work->base.stateTimer;
         }
+
         break;
     case 19:
         AnimChangeWithDef(sEmy28AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -3599,6 +3673,7 @@ u8 task_emy_28_1(Emy28Work* work) {
                 == 1) {
             w->unk_184 = work->base.stateTimer;
         }
+
         break;
     }
 
@@ -3669,6 +3744,7 @@ u8 task_emy_29_1(Emy29Work* work) {
         if (EmyLungeAttack(&work->base, 0x16, 0x64, 0x18, 0xCB, 0xB4, SONG_BTL_KAMITUKI, 0, 0, 0x0C) == 1) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     case 0x13:
         c = work->base.stateTimer;
@@ -3719,6 +3795,7 @@ u8 task_emy_29_1(Emy29Work* work) {
                 : ApplyAttackBox(0xCC, act->x, act->y, act->z, 0x0C, 0x0C, 0x0C)) {
             m4aSongNumStart(SONG_BTL_MON_HIT01);
         }
+
         break;
     }
 
@@ -3785,6 +3862,7 @@ u8 task_emy_30_1(EmyWork* work) {
             work->stateTimer = 0;
             work->state = 26;
         }
+
         break;
     case 26:
         work->vz = 0;
@@ -3816,6 +3894,7 @@ u8 task_emy_30_1(EmyWork* work) {
                 work->stateTimer++;
             }
         }
+
         break;
     case 25:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 1, 0, w->tiles);
@@ -3832,6 +3911,7 @@ u8 task_emy_30_1(EmyWork* work) {
             work->stateTimer = 0;
             work->state = 7;
         }
+
         break;
     case 18: {
     s32 currentX;
@@ -3858,6 +3938,7 @@ u8 task_emy_30_1(EmyWork* work) {
             work->state = 19;
             work->stateTimer = 0;
         }
+
         break;
     }
     case 19: {
@@ -3890,6 +3971,7 @@ u8 task_emy_30_1(EmyWork* work) {
                 if (ApplyAttackBox(0xCD, act->x, act->y, act->z, 12, 12, 12)) {
                     m4aSongNumStart(SONG_BTL_KAMITUKI);
                 }
+
                 break;
             }
         }
@@ -3900,6 +3982,7 @@ u8 task_emy_30_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
     case 20:
@@ -3909,6 +3992,7 @@ u8 task_emy_30_1(EmyWork* work) {
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         }
+
         break;
     case 21:
         work->vz = 0;
@@ -3936,6 +4020,7 @@ u8 task_emy_30_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     case 22:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 6, ANIM_FLAG_LOOP, w->tiles);
@@ -3967,6 +4052,7 @@ u8 task_emy_30_1(EmyWork* work) {
                 work->stateTimer = 0;
             }
         }
+
         break;
     case 23:
         AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 7, 0, w->tiles);
@@ -3986,6 +4072,7 @@ u8 task_emy_30_1(EmyWork* work) {
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         }
+
         break;
     }
 
@@ -4047,12 +4134,14 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         case 1:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 1, 0);
 
                 y = act->y;
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0xC800;
                     BgFxStartFire(1, act->x - 0x4000, y, act->z,
@@ -4070,6 +4159,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         case 3:
             if (work->base.stateTimer == 0) {
@@ -4087,8 +4177,10 @@ u8 task_emy_31_1(Emy31Work* work) {
                 w->state = 0;
                 EmyReturnToIdle(&work->base);
             }
+
             break;
         }
+
         break;
     }
     case 19: {
@@ -4109,12 +4201,14 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         case 1:
             if (work->base.stateTimer == 0) {
                 AnimStart(&work->base.anim, 1, ANIM_FLAG_LOOP);
 
                 y = act->y;
+
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0x6400;
                     BgFxStartBlizzard(1, act->x - 0x4600, y, act->z,
@@ -4132,6 +4226,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         case 2:
             if (work->base.stateTimer == 0) {
@@ -4149,8 +4244,10 @@ u8 task_emy_31_1(Emy31Work* work) {
                 w->state = 0;
                 EmyReturnToIdle(&work->base);
             }
+
             break;
         }
+
         break;
     }
     case 20:
@@ -4170,6 +4267,7 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         case 1:
             if (work->base.stateTimer == 0) {
@@ -4198,6 +4296,7 @@ u8 task_emy_31_1(Emy31Work* work) {
                     break;
                 }
             }
+
             work->base.stateTimer++;
             break;
         case 2:
@@ -4211,8 +4310,10 @@ u8 task_emy_31_1(Emy31Work* work) {
             } else {
                 work->base.stateTimer++;
             }
+
             break;
         }
+
         break;
     }
 
@@ -4267,6 +4368,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 29:
         if (work->base.stateTimer == 0) {
@@ -4288,6 +4390,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 30:
         if (work->base.stateTimer == 0) {
@@ -4326,6 +4429,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 28:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 10, 0, w->base.tiles);
@@ -4336,6 +4440,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 9, 0, w->base.tiles);
@@ -4346,6 +4451,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
+
         break;
     case 20:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
@@ -4409,6 +4515,7 @@ u8 task_emy_37_1(Emy37Work* work) {
                 work->base.stateTimer++;
             }
         }
+
         break;
     case 21:
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
@@ -4424,6 +4531,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 26:
         if (work->base.stateTimer == 0) {
@@ -4437,6 +4545,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 27:
         if (work->base.stateTimer == 0) {
@@ -4449,6 +4558,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 18:
         if (work->base.stateTimer == 0) {
@@ -4470,6 +4580,7 @@ u8 task_emy_37_1(Emy37Work* work) {
                 work->base.x = (act->attackOffset
                     + (-act->attackRangeX + GetRandom() % (act->attackRangeX - -act->attackRangeX + 1))) * 256;
             }
+
             break;
         } else if ((u16)(GetRandom() % 100U) == 0) {
             work->base.state = 19;
@@ -4605,6 +4716,7 @@ u8 task_emy_38_1(EmyWork* work) {
         if (work->stateTimer == 0x1E) {
             work->vz = -0x300;
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy38AnimDefs, &w->anim, 1, 0, w->tiles);
@@ -4620,6 +4732,7 @@ u8 task_emy_38_1(EmyWork* work) {
         } else {
             work->stateTimer++;
         }
+
         break;
     }
 
@@ -4698,6 +4811,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x13:
         c = work->base.stateTimer;
@@ -4723,6 +4837,7 @@ u8 task_emy_39_1(Emy39Work* work) {
             if (work->base.anim.timer == 0) {
                 w->dashSpeed = 0x200;
             }
+
             break;
         case 3:
             p = 24;
@@ -4739,6 +4854,7 @@ u8 task_emy_39_1(Emy39Work* work) {
             if (work->base.anim.timer == 0) {
                 w->dashSpeed = 0x200;
             }
+
             break;
         case 6:
             p = 48;
@@ -4772,6 +4888,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -4856,6 +4973,7 @@ u8 task_emy_41_1(Emy41Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -4911,12 +5029,14 @@ u8 task_emy_44_1(EmyWork* work) {
                         0x10, 0x28)) {
                 m4aSongNumStart(SONG_BTL_DF_HIT);
             }
+
             break;
         }
 
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 1, 0, w->tiles);
@@ -4934,6 +5054,7 @@ u8 task_emy_44_1(EmyWork* work) {
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         }
+
         break;
     }
 
@@ -5008,6 +5129,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             work->base.stateTimer = 0;
             w->speedX = 0;
         }
+
         break;
     case 20:
         AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
@@ -5028,6 +5150,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 21:
         if (work->base.stateTimer == 0) {
@@ -5040,6 +5163,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         }
 
         work->base.vz = 0;
+
         {
             s32 sample = gSineTable[((u16)work->base.stateTimer * 4) & 0xFF] * 10;
             s32 current = act->z;
@@ -5087,6 +5211,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 22:
         AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -5096,6 +5221,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             work->base.state = work->base.idleState;
             work->base.stateTimer = 0;
         }
+
         break;
     case 18:
         if (work->base.stateTimer == 0) {
@@ -5135,6 +5261,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             if (work->base.anim.timer == 0) {
                 work->base.vz = -0x400;
             }
+
             break;
         case 3:
             hitX = EmyFacingX(act, 0x1600);
@@ -5142,6 +5269,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             if (ApplyAttackBox(0xDC, hitX, act->y, act->z + 0x800, 10, 10, 10)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT04);
             }
+
             break;
         }
 
@@ -5150,6 +5278,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 19:
         if (work->base.stateTimer == 0) {
@@ -5197,6 +5326,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -5258,6 +5388,7 @@ u8 task_emy_82_1(Emy82Work* work) {
 
     w = work;
     act = &work->base.actor;
+
     if (_0800CBDC(&work->base)) {
         switch ((u16)(GetRandom() % 3U)) {
         case 0:
@@ -5269,6 +5400,7 @@ u8 task_emy_82_1(Emy82Work* work) {
             } else {
                 work->base.state = 18;
             }
+
             break;
         case 2:
             work->base.state = 20;
@@ -5281,15 +5413,19 @@ u8 task_emy_82_1(Emy82Work* work) {
         if (work->base.stateTimer == 0) {
             m4aSongNumStop(SONG_EF_RAPPA_CALL);
         }
+
         break;
     case 22:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
+
         if (act->z < act->groundZ && (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED)) {
             act->x += gSineTable[work->base.angle] * work->base.speed >> 8;
             act->y += -gSineTable[work->base.angle + 64] * work->base.speed >> 8;
+
             if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
                 s32 x;
                 GetEnemyTargetPosition(act, &x, 0, 0);
+
                 if (act->x > x) {
                     act->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
@@ -5302,6 +5438,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                 if (work->base.anim.timer > 2 && (u16)(GetRandom() % 15U) == 0) {
                     work->base.state = work->base.idleState;
                 }
+
                 break;
             case 1:
                 if (work->base.anim.timer == 0) {
@@ -5309,35 +5446,43 @@ u8 task_emy_82_1(Emy82Work* work) {
                     TryEnemyCardUse(act);
                     work->base.vz = -0x3CC;
                 }
+
                 break;
             }
         }
+
         break;
     case 21:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
+
         if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
             s32 x;
             GetEnemyTargetPosition(act, &x, 0, 0);
+
             if (act->x > x) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
+
         switch (AnimGetGfxIndex(&work->base.anim)) {
         case 0:
             if (work->base.anim.timer == 5 && (u16)((u32)GetRandom() % work->base.def->moveInterval) == 0) {
                 work->base.state = 22;
                 work->base.angle = GetEmyApproachAngle(&work->base);
             }
+
             break;
         case 2:
             if (work->base.anim.timer == 0 && act->z >= act->groundZ) {
                 work->base.vz = -0x4C0;
                 TryEnemyCardUse(act);
             }
+
             break;
         }
+
         break;
     case 18:
         {
@@ -5346,10 +5491,12 @@ u8 task_emy_82_1(Emy82Work* work) {
             s32 targetX;
             u32 frame;
             s32 hitX;
+
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
                 work->base.vz = -0x400;
             }
+
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = 0x3000;
                 currentX = act->x;
@@ -5359,21 +5506,25 @@ u8 task_emy_82_1(Emy82Work* work) {
                 currentX = act->x;
                 d = currentX + targetX;
             }
+
             targetX = act->originX;
             targetX -= d;
             targetX >>= 4;
             currentX += targetX;
             act->x = currentX;
             frame = AnimGetFrame(&work->base.anim);
+
             if (frame > 3) {
                 work->base.vz = 0;
             }
+
             if (frame == 4) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     hitX = act->x - 0x1400;
                 } else {
                     hitX = act->x + 0x1400;
                 }
+
                 if (ApplyAttackBox(0xDE, hitX, act->y, act->z + 0x800, 10, 10, 20)) {
                     m4aSongNumStart(SONG_BTL_MON_HIT00);
                 }
@@ -5383,27 +5534,34 @@ u8 task_emy_82_1(Emy82Work* work) {
                 } else {
                     hitX = act->x + 0x1800;
                 }
+
                 if (ApplyAttackBox(0xDE, hitX, act->y, act->z - 0x2300, 10, 10, 10)) {
                     m4aSongNumStart(SONG_BTL_MON_HIT00);
                 }
             }
+
             if (AnimIsFinished(&work->base.anim)) {
                 work->base.state = 23;
             } else {
                 work->base.stateTimer++;
             }
         }
+
         break;
     case 19:
         {
             u32 frame;
+
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
+
             frame = AnimGetFrame(&work->base.anim);
+
             if (frame > 1) {
                 work->base.vz = 0;
             }
+
             if (work->base.anim.timer == 0) {
                 switch (frame) {
                 case 1:
@@ -5415,6 +5573,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                         BtlObj* best = 0;
                         BtlObj* actor;
                         s16 missing = 0;
+
                         for (actor = ListPoolFirst(&gBtlWork->pool); actor;
                              actor = ListPoolNext(&actor->node)) {
                             if (actor != act && !(actor->flags & BTLOBJ_FLAG_INTANGIBLE)) {
@@ -5424,6 +5583,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                                 }
                             }
                         }
+
                         if (best) {
                             m4aSongNumStart(SONG_EF_CAREL00);
                             best->flags |= BTLOBJ_FLAG_HEAL_PENDING;
@@ -5432,26 +5592,33 @@ u8 task_emy_82_1(Emy82Work* work) {
                             CreateBtlPopTask(act, 2);
                         }
                     }
+
                     break;
                 }
             }
+
             if (AnimIsFinished(&work->base.anim)) {
                 work->base.state = 23;
             } else {
                 work->base.stateTimer++;
             }
         }
+
         break;
     case 20:
         {
             u32 frame;
+
             if (work->base.stateTimer == 0) {
                 AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             }
+
             frame = AnimGetFrame(&work->base.anim);
+
             if ((u16)(frame - 2) <= 21) {
                 work->base.vz = 0;
             }
+
             if (work->base.anim.timer == 0) {
                 switch (frame) {
                 case 1:
@@ -5460,10 +5627,12 @@ u8 task_emy_82_1(Emy82Work* work) {
                     break;
                 case 24:
                     work->base.vz = -0x380;
+
                     if (gBtlWork->enemyCount <= 3 && (s16)w->spawnCount <= 2) {
                         u32 spawnFailure = 0;
                         s32 x;
                         s32 offset;
+
                         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             x = act->x;
                             offset = 0x2000;
@@ -5471,8 +5640,10 @@ u8 task_emy_82_1(Emy82Work* work) {
                             x = act->x;
                             offset = -0x2000;
                         }
+
                         x += offset;
                         offset = act->y;
+
                         if (SpawnEnemy(9, x, offset, act->z - 0xC00) != spawnFailure) {
                             gBtlWork->pendingEnemies++;
                             w->spawnCount++;
@@ -5482,39 +5653,50 @@ u8 task_emy_82_1(Emy82Work* work) {
                     } else {
                         CreateBtlPopTask(act, 2);
                     }
+
                     break;
                 }
             }
+
             if (AnimIsFinished(&work->base.anim)) {
                 work->base.state = 23;
             } else {
                 work->base.stateTimer++;
             }
         }
+
         break;
     case 23:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
+
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 24;
         }
+
         break;
     case 24:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+
         if (act->z >= act->groundZ) {
             work->base.state = 25;
         }
+
         break;
     case 25:
         AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
+
         if (AnimGetFrame(&work->base.anim) == 1 && work->base.anim.timer == 0) {
             work->base.vz = -0x333;
         }
+
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     }
+
     return _0800CDF0(&work->base);
 }
 
@@ -5574,6 +5756,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
+
         break;
     case 0x12:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
@@ -5596,6 +5779,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         if (AnimIsFinished(&work->base.anim) && !IsTaskActiveNamed(w->task, sTaskDescEmy83B.name)) {
             EmyReturnToIdle(&work->base);
         }
+
         break;
     case 0x13:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -5603,6 +5787,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 0x14;
         }
+
         break;
     case 0x14:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
@@ -5633,6 +5818,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     case 0x15:
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
@@ -5642,6 +5828,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         } else {
             work->base.stateTimer++;
         }
+
         break;
     }
 
@@ -5696,6 +5883,7 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 1:
         if (work->timer == 0) {
@@ -5714,6 +5902,7 @@ u8 task_emy_83_b_1(Emy83bWork* work) {
         } else {
             work->timer++;
         }
+
         break;
     case 2:
     default:
@@ -5894,6 +6083,7 @@ u8 task_emy_trump_s_1(EmyWork* work) {
         if (work->stateTimer == 0x14) {
             work->vz = -0x480;
         }
+
         break;
     case 0x12:
         if (work->stateTimer == 0) {

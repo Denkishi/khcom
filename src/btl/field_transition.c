@@ -23,6 +23,7 @@ void FieldTransitionInit(void) {
 
 void FieldTransitionUpdate(void) {
     void* gfx;
+
     if (IsModeStarted()) {
         ReleaseObjTiles(gFieldTransitionWork->tiles);
         ReleaseObjPalette(gFieldTransitionWork->palette);
@@ -30,13 +31,17 @@ void FieldTransitionUpdate(void) {
         ModeClearTransitionCallback();
         return;
     }
+
     REG_DISPCNT |= DISPCNT_OBJ_ON;
     gSystemFlags |= SYSTEM_FLAG_DMA3_IMMEDIATE;
+
     if (gFieldTransitionWork->initialized == 0) {
         gFieldTransitionWork->tiles = AllocObjTiles(0xA00, 0);
+
         if (gGameState.flags & GAME_FLAG_RIKU) {
             gFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
             AnimInit(&gFieldTransitionWork->anim, 0, 0);
+
             switch (gGameState.fieldAngle) {
             case 0:
                 AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF514, gUnk_09EDF4F4);
@@ -77,6 +82,7 @@ void FieldTransitionUpdate(void) {
         } else {
             gFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
             AnimInit(&gFieldTransitionWork->anim, 0, 0);
+
             switch (gGameState.fieldAngle) {
             case 0:
                 AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bb01Anims, gSor1bb01Frames);
@@ -115,17 +121,22 @@ void FieldTransitionUpdate(void) {
                 break;
             }
         }
+
         gFieldTransitionWork->initialized++;
     }
+
     gfx = AnimUpdate(&gFieldTransitionWork->anim);
+
     if (gFieldTransitionWork->flipped != 0) {
         DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, SPRITE_FLAG_HFLIP, 0);
     } else {
         DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 0, 0);
     }
+
     gSystemFlags &= ~SYSTEM_FLAG_DMA3_IMMEDIATE;
     UpdateSpriteOam();
 }
+
 void StartFieldTransition(void) {
     ModeSetTransitionCallback(FieldTransitionInit, FieldTransitionUpdate);
 }
@@ -137,9 +148,11 @@ u8 ClampBosBoogieBounds(s32* a, s32* b, s32* c, s32* d) {
             *b = 0x24000;
             return 1;
         }
+
         *d = -0x2000;
     } else {
         *d = 0;
     }
+
     return 0;
 }

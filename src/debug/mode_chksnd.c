@@ -651,7 +651,6 @@ void mode_chksnd_0(void) {
 
 #ifdef VERSION_EU
 static const char sChkSndBlankText[0x20] = "                              ";
-
 static const char sChkSndSeparatorText[4] = ": ";
 #endif
 

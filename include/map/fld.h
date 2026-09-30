@@ -2,13 +2,9 @@
 #define GUARD_FLD_H
 
 #include "task_descriptors.h"
-
 #include "field_state.h"
-
 #include "map_types.h"
-
 #include "map_api.h"
-
 #include "m4a_song.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -21,10 +17,6 @@
 #include "game.h"
 #include "fld_types.h"
 #include "bos4_api.h"
-
-
-
-
 
 typedef struct FldShadowWork {
     s32 x;

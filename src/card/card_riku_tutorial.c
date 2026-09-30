@@ -70,6 +70,7 @@ void RikuTutorialModeInit(s32 a) {
     TaskPoolInit(&gRikuTutorialTasks, 1);
     gRikuDeckTutorialState = 0;
 }
+
 void Mode_riku_btlTutorial_1(void) {
     u16 t;
 
@@ -88,12 +89,14 @@ void Mode_riku_deckTutorial_1(void) {
                 CreateSysmsgwinTask(&gRikuTutorialTasks, 0xB1);
                 gRikuDeckTutorialState = 1;
             }
+
             break;
         case 1:
             if (!IsMessageWindowOpen()) {
                 gGameState.progression.unk_82 |= 0x800;
                 ModeRequest(&gModeDeck, gRikuTutorialModeArg);
             }
+
             break;
         }
     }
@@ -121,6 +124,7 @@ s32 ResolveActiveCardsMove(s32* out) {
     arr = gUnk_09045188;
     flag = 0;
     memset(buf, 0, 6);
+
 #ifdef VERSION_EU
     f = 0;
     out[0] = -1;
@@ -228,8 +232,8 @@ s32 ResolveActiveCardsMove(s32* out) {
                     out[3] = out[0];
                     out[4] = out[1];
                     out[5] = out[2];
-#ifdef VERSION_EU
 
+#ifdef VERSION_EU
                     for (j = 0; j < 5; j++) {
                         if (out[j] == -1) {
                             out[j] = out[j + 1];
@@ -252,6 +256,7 @@ s32 ResolveActiveCardsMove(s32* out) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 }
+
 #ifndef VERSION_EU
             }
 #endif
@@ -276,6 +281,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
     memset(&arr, 0, sizeof(arr));
     flag = 0;
     memset(buf, 0, 6);
+
 #ifdef VERSION_EU
     f = 0;
     out[0] = -1;
@@ -400,8 +406,8 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
                     out[3] = out[0];
                     out[4] = out[1];
                     out[5] = out[2];
-#ifdef VERSION_EU
 
+#ifdef VERSION_EU
                     for (j = 0; j < 5; j++) {
                         if (out[j] == -1) {
                             t = out[j];
@@ -425,6 +431,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
                         gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 }
+
 #ifndef VERSION_EU
             }
 #endif
@@ -448,7 +455,6 @@ u8 GetStockMoveCount(void) {
         a[i] = key; \
         b[i] = 1; \
         break;
-
 u8 FindStockPairsInCombo(s32* a, u8* b) {
     u32 v[6];
     u32 key;
@@ -851,6 +857,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
             arr->unk_00[0] = 51;
             return 51;
         }
+
         break;
     case 0xCAB2ACAB:
         return 7;
@@ -900,26 +907,31 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
         if (IsStockLearned(39) != 0) {
             return 53;
         }
+
         break;
     case 0xCE734CDD:
         if (IsStockLearned(38) != 0) {
             return 54;
         }
+
         break;
     case 0xCE72ACB5:
         if (IsStockLearned(34) != 0) {
             return 65;
         }
+
         break;
     case 0xCAB2AD37:
         if (IsStockLearned(32) != 0) {
             return 70;
         }
+
         break;
     case 0xCE734CC9:
         if (IsStockLearned(43) != 0) {
             return 77;
         }
+
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -935,6 +947,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
                 return 84;
             }
         }
+
         break;
     case 0xF21C8721:
         return 85;
@@ -1217,6 +1230,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
             arr->unk_00[0] = 51;
             return 51;
         }
+
         break;
     case 0xCAB2ACAB:
         return 7;
@@ -1266,26 +1280,31 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
         if (IsLinkSideStockLearned(39, b) != 0) {
             return 53;
         }
+
         break;
     case 0xCE734CDD:
         if (IsLinkSideStockLearned(38, b) != 0) {
             return 54;
         }
+
         break;
     case 0xCE72ACB5:
         if (IsLinkSideStockLearned(34, b) != 0) {
             return 65;
         }
+
         break;
     case 0xCAB2AD37:
         if (IsLinkSideStockLearned(32, b) != 0) {
             return 70;
         }
+
         break;
     case 0xCE734CC9:
         if (IsLinkSideStockLearned(43, b) != 0) {
             return 77;
         }
+
         break;
     case 0xE95A5695:
         if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -1301,6 +1320,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
                 return 84;
             }
         }
+
         break;
     case 0xF21C8721:
         return 85;
@@ -1653,6 +1673,7 @@ s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b) {
 
     return 0;
 }
+
 #ifndef VERSION_EU
 s32 func_080ADF30(CardDisplayWork** p, u8 b) {
     u16 c0;
@@ -1672,6 +1693,7 @@ s32 func_080ADF30(CardDisplayWork** p, u8 b) {
     return 0;
 }
 #endif
+
 s32 func_080ADF60(CardDisplayWork** p, u8 b) {
     u16 c0;
     u16 c1;
@@ -1911,6 +1933,7 @@ u8 IsLinkSideStockLearned(s32 a, s32 b) {
 
     return r;
 }
+
 s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
     u32 v[6];
 
@@ -2023,17 +2046,22 @@ void eu_080AB9FC(void) {
     TaskPoolInit(&gTextCheckTasks, 1);
     CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
 }
+
 void eu_080ABA38(void) {
     if (IsMessageWindowOpen() == 0) {
         gTextCheckMessageId++;
+
         if (gTextCheckMessageId == 179) {
             gTextCheckMessageId = 0;
         }
+
         CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
     }
+
     TaskPoolUpdate(&gTextCheckTasks);
     TaskPoolDraw(&gTextCheckTasks);
 }
+
 void eu_080ABA7C(void) {
     TaskPoolDestroy(&gTextCheckTasks);
 }
@@ -2056,6 +2084,7 @@ Mode gModeRikuDeckTutorial = {
 const UnkStruct_080ABA80 gUnk_09045188 = {
     { -1, -1, -1, -1, -1, -1 },
 };
+
 #ifdef VERSION_EU
 Mode gModeTextCheck = {
     "Mode_textcheck",

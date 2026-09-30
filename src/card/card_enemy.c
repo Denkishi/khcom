@@ -65,6 +65,7 @@ void LookupEnemyCardDef(CardDisplayArgs* a, CardDef** b, u8 c) {
         }
     }
 }
+
 void LinkEnemyCardDisplay(CardDisplayWork* p) {
     ListNodeInit(&p->node, p->args.pool, p);
     ListPoolAppend(&p->node, p->args.pool);
@@ -159,6 +160,7 @@ void EnemyCardDraw(CardDisplayWork* p) {
         }
     }
 }
+
 void EnemyCardDestroy(CardDisplayWork* p) {
     if (p->tiles != NULL) {
         ReleaseCardDisplayGfx(p);
@@ -289,6 +291,7 @@ void UpdateEnemyCardRingPosition(CardDisplayWork* p) {
 
 u8 func_08090940(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
+
     if ((s16)p->timer > 0) {
         p->timer--;
     } else {
@@ -451,6 +454,7 @@ u8 func_08090C3C(CardDisplayWork* p, void* a) {
     p->bobAngle += 4;
     return 1;
 }
+
 u8 func_08090DB0(CardDisplayWork* p, void* a) {
     p->command = 0;
     p->y -= p->unk_84;
@@ -493,6 +497,7 @@ u8 func_08090DB0(CardDisplayWork* p, void* a) {
 
     return 1;
 }
+
 void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
@@ -548,6 +553,7 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->priority -= 4;
     LoadCardDisplayGfx(p);
     p->value = p->cardDef->value;
+
     switch (gGameState.roomEffect) {
     case 1:
         p->value += 2;
@@ -564,6 +570,7 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
         } else {
             p->value = 1;
         }
+
         p->valueModified = 1;
         break;
     default:
@@ -616,6 +623,7 @@ void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
     p->priority -= 4;
     p->value = p->cardDef->value;
 }
+
 void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
@@ -826,8 +834,8 @@ void UseEnemyCard(u16 arg) {
                     }
                 }
             }
-
 #endif
+
             if (gBtlWork->hcEffect == 20) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
@@ -869,8 +877,8 @@ void UseEnemyCard(u16 arg) {
                     gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
                     gCardBattleState->activeCards[0] = p;
-#ifdef VERSION_EU
 
+#ifdef VERSION_EU
                     if (gBtlWork->hcEffect == 48) {
                         if (p->value != 0) {
                             gCardBattleState->activeValue = p->value - gCardBattleState->activeValue;
@@ -998,6 +1006,7 @@ void func_08091978(u16 a, u8 b) {
     p->flags |= CARD_DISP_FLAG_SELECTED;
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
 }
+
 void ResetBossCardValue(void) {
     gBossCardValue = -1;
 }
@@ -1005,6 +1014,7 @@ void ResetBossCardValue(void) {
 void SetBossCardValue(u16 a) {
     gBossCardValue = a;
 }
+
 u16 GetBossCardValue(void) {
     if (gBossCardValue != -1) {
         return gBossCardValue;

@@ -207,6 +207,7 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* w) {
         FadeToOriginal(FADE_MODE_BLACK, v);
     }
 }
+
 void EV_BG_EFFECT_0(EventBgEffectWork* w, u8* b) {
     u8 t;
     u8 z;
@@ -218,6 +219,7 @@ void EV_BG_EFFECT_0(EventBgEffectWork* w, u8* b) {
     w->animating = z;
     w->entries = gEventSequenceDefs[w->eventId]->bgEffects;
 }
+
 u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
     const EventBgEffectEntry* e;
     const EventBgEffectEntry* cur;
@@ -320,8 +322,10 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* w) {
 
 void EV_BG_EFFECT_2(void) {
 }
+
 void EV_BG_EFFECT_3(void) {
 }
+
 void CreateEVBGEFFECTTask(u8* work) {
     TaskCreate(&work[0x10], &gTaskDescEVBGEFFECT, work);
 }

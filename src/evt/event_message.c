@@ -2670,7 +2670,6 @@ void event_seq_0(EventSeqWork* work, u8* a) {
 #ifdef VERSION_EU
     EventBackgroundDef* u;
 #endif
-
     gEventSoundMix = NULL;
     gBtlWork = NULL;
     work->task = NULL;
@@ -2682,6 +2681,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
     gEventState->skipHoldTime = 0;
     work->ending = 0;
     work->hasBoss = 0;
+
 #ifdef VERSION_EU
     work->hasMapAnim = 0;
     work->bg3MapUnpacked = 0;
@@ -2702,6 +2702,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
         gEventState->answerYes = 0;
         gEventState->askedYesNo = 0;
         gEventState->endRequest = 0;
+
 #ifndef VERSION_EU
         RequestDma3Clear(GetBgCharBase(1), 0x8000);
 #endif
@@ -2710,8 +2711,10 @@ void event_seq_0(EventSeqWork* work, u8* a) {
             SetBackdropColor(31, 31, 31);
             FadeStartIn(FADE_MODE_WHITE, 0x40);
         }
+
 #ifdef VERSION_EU
         u = gEventBackgroundDefs[work->eventId];
+
         if (u != NULL) {
             if (u->tiles2 != NULL) {
                 if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
@@ -2726,20 +2729,24 @@ void event_seq_0(EventSeqWork* work, u8* a) {
                     SetupBg(3, 0, 23, 0);
                 }
             }
+
             if (u->isAffine != 0) {
                 if (u->compression[0] == 1 || u->compression[0] == 3) {
                     eu_080059D4(2, u->tiles);
                 } else {
                     LoadBgTiles(2, u->tiles, u->tilesSize);
                 }
+
                 LoadBgPalette(2, u->palette, u->paletteSize);
                 SetBgColorMode(2, BGCNT_256COLOR);
                 SetBgSize(2, 0x8000);
+
                 if (u->compression[0] == 2 || u->compression[0] == 3) {
                     eu_080059F4(2, (void*)*u->maps);
                 } else {
                     LoadBgMap(2, (void*)*u->maps, 0x1000);
                 }
+
                 SetBgAffine(2, 0, 256, 256, 0, 0);
             } else {
                 eu_0806C734(work);
@@ -2747,11 +2754,13 @@ void event_seq_0(EventSeqWork* work, u8* a) {
                 eu_0806C848(work);
             }
         }
+
         if ((work->seqDef->keyframes->flags & 0xFF0) == 0) {
             FadeStartIn(FADE_MODE_BLACK, 64);
         } else if ((work->seqDef->keyframes->flags & 0xFF0) == CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             FadeStartIn(FADE_MODE_WHITE, 120);
         }
+
         work->timer = 0;
         eu_0806C974(work);
 #endif
@@ -2761,13 +2770,16 @@ void event_seq_0(EventSeqWork* work, u8* a) {
 #ifdef VERSION_EU
 u8 eu_0806C734(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
+
     if (u != NULL) {
         if (u->compression[0] == 1 || u->compression[0] == 3) {
             eu_080059D4(3, u->tiles);
         } else {
             LoadBgTiles(3, u->tiles, u->tilesSize);
         }
+
         LoadBgPalette(3, u->palette, u->paletteSize);
+
         if (u->maps != NULL) {
             if (u->compression[0] == 2 || u->compression[0] == 3) {
                 work->bg3MapUnpacked = 1;
@@ -2776,13 +2788,17 @@ u8 eu_0806C734(EventSeqWork* work) {
                 work->bg3MapUnpacked = 0;
                 SetBgMapBlocks(3, u->maps, u->mapWidth, u->mapHeight);
             }
+
             RedrawBgMapAt(3, 0, 0);
         }
     }
+
     return 1;
 }
+
 u8 eu_0806C7C8(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
+
     if (u != NULL) {
         if (u->maps2 != NULL) {
             if (u->compression[0] == 2 || u->compression[0] == 3) {
@@ -2792,16 +2808,20 @@ u8 eu_0806C7C8(EventSeqWork* work) {
                 work->bg2MapUnpacked = 0;
                 SetBgMapBlocks(2, u->maps2, u->mapWidth, u->mapHeight);
             }
+
             RedrawBgMapAt(2, 0, 0);
             gEventState->hasBg2Map = 1;
         } else {
             DisableBg(2);
         }
     }
+
     return 1;
 }
+
 u8 eu_0806C848(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
+
     if (u != NULL) {
         if (u->tiles2 != NULL) {
             if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
@@ -2812,6 +2832,7 @@ u8 eu_0806C848(EventSeqWork* work) {
                 LoadBgTiles(1, u->tiles2, u->tilesSize2);
             }
         }
+
         if (u->maps3 != NULL) {
             if ((u->flags & EVENT_BG_FLAG_ALPHA_BLEND) != 0) {
                 gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
@@ -2823,6 +2844,7 @@ u8 eu_0806C848(EventSeqWork* work) {
                 gEventState->bldCnt = 0;
                 gEventState->bldAlpha = 0;
             }
+
             if (u->compression[0] == 2 || u->compression[0] == 3) {
                 work->bg1MapUnpacked = 1;
                 eu_08005A1C(1, u->maps3, u->mapWidth, u->mapHeight);
@@ -2830,14 +2852,17 @@ u8 eu_0806C848(EventSeqWork* work) {
                 work->bg1MapUnpacked = 0;
                 SetBgMapBlocks(1, u->maps3, u->mapWidth, u->mapHeight);
             }
+
             RedrawBgMapAt(1, 0, 0);
             gEventState->hasBg1Map = 1;
         } else {
             DisableBg(1);
         }
     }
+
     return 1;
 }
+
 u8 eu_0806C974(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
     const EventCameraKeyframe* q = work->seqDef->keyframes;
@@ -2856,6 +2881,7 @@ u8 eu_0806C974(EventSeqWork* work) {
     gEventState->msgWaitActive = 0;
     gEventState->unk_7E = 0;
     gEventState->bossChara = 0;
+
     // @bug u is NULL for events without a background (NULL read).
     if (u->mapAnim != 5) {
         gEventState->mapAnim = u->mapAnim;
@@ -2863,12 +2889,15 @@ u8 eu_0806C974(EventSeqWork* work) {
     } else {
         gEventState->mapAnim = u->mapAnim;
     }
+
     for (i = 0; i < 16; i++) {
         gEventState->charaObjs[i] = NULL;
     }
+
     return 1;
 }
 #endif
+
 u8 event_seq_1(EventSeqWork* work, void* a) {
     EventSeqArg arg;
 #ifndef VERSION_EU
@@ -2886,8 +2915,8 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     flag = 0;
 #endif
     u = gEventBackgroundDefs[work->eventId];
-#ifndef VERSION_EU
 
+#ifndef VERSION_EU
     if (u != NULL) {
         if (u->tiles2 != NULL) {
             if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
@@ -3045,6 +3074,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventSeq);
     return 1;
 }
+
 u8 UpdateEventSeqSkip(void) {
     u8 r = FadeIsActive();
     u8 v;
@@ -3056,8 +3086,10 @@ u8 UpdateEventSeqSkip(void) {
         m4aMPlayAllStop();
         v = 0;
     }
+
     return v;
 }
+
 u8 UpdateEventSeq(EventSeqWork* p, void* a) {
     EventSequenceDef* t;
     u8 i;
@@ -3090,6 +3122,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         for (i = 0; i < 32; i++) {
             FadeSetPaletteExcluded(i, 0);
         }
+
         return 1;
     }
 
@@ -3103,8 +3136,10 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         } else if (t == 128) {
             FadeStartIn(FADE_MODE_WHITE, 120);
         }
+
         p->timer++;
     }
+
     TaskPoolUpdate(&p->tasks);
     TaskPoolUpdate(&p->tasks2);
 
@@ -3123,6 +3158,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         if (gEventState->unk_7F == 0) {
             FadeStartOut(FADE_MODE_BLACK, 64);
         }
+
         p->ending = 1;
         gEventState->ending = 1;
     }
@@ -3137,22 +3173,27 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
             return 0;
         }
     }
+
     return 1;
 }
+
 void event_seq_2(EventSeqWork* p) {
     TaskPoolDraw(&p->tasks2);
 
     if (p->hasBoss != 0) {
         TaskPoolDraw(&gBtlWork->taskPools[0]);
     }
+
     TaskPoolDraw(&p->tasks);
 }
+
 void event_seq_3(EventSeqWork* p) {
     TaskPoolDestroy(&p->tasks);
 
     if (p->task != NULL) {
         TaskPoolDestroy(&p->tasks2);
     }
+
 #ifdef VERSION_EU
     if (p->bg3MapUnpacked != 0) {
         eu_08005ADC(3);
@@ -3167,6 +3208,7 @@ void event_seq_3(EventSeqWork* p) {
     }
 #endif
 }
+
 void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
     s32 v0;
     s32 v1;
@@ -3405,6 +3447,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         ApplyEventCharaDrawFlags(p);
     }
 }
+
 u8 event_chara_1(EventCharaWork* p, void* a) {
     u8 t;
     s32 v0;
@@ -3415,6 +3458,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
     if (p->hasObj != 0) {
         UpdateEventCharaMotion(p);
     }
+
     PlayEventCharaAnimSounds(p);
 
     if (t != 0) {
@@ -3443,6 +3487,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         p->speed = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
     }
+
     TaskPoolUpdate(&p->tasks);
 
     if (p->usesBtlWork != 0) {
@@ -3497,8 +3542,10 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
             gBldAlpha = ((16 - v) << 8) | v;
         }
     }
+
     return 1;
 }
+
 static inline s16 GetEventCharaScreenX(EventCharaWork* p) {
     return (p->unk_180 >> 8) - (gEventState->x >> 8);
 }
@@ -3535,12 +3582,15 @@ void event_chara_2(EventCharaWork* p) {
         } else {
             h |= SPRITE_FLAG_HFLIP;
         }
+
         x = GetEventCharaScreenX(p);
         y = (p->unk_184 >> 8) + gEventCharaParams[p->arg.chara].spriteYOffset - (gEventState->y >> 8);
         DrawSprite(x, y, p->gfx, p->tiles, p->palette, 0, h, 50);
     }
+
     p->obj.z = save;
 }
+
 void event_chara_3(EventCharaWork* p) {
     TaskPoolDestroy(&p->tasks);
 
@@ -3550,6 +3600,7 @@ void event_chara_3(EventCharaWork* p) {
         EwramFree(gBtlWork);
     }
 }
+
 u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     const EventCharaKeyframe* e = &p->keyframes[p->keyframe];
     u16 v;
@@ -3614,6 +3665,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
 
     return 0;
 }
+
 void UpdateEventCharaMotion(EventCharaWork* p) {
     const EventCharaKeyframe* e = &p->keyframes[p->keyframe];
     BtlObj* t;
@@ -3641,6 +3693,7 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
                 SetEventCharaEndAnim(p);
             }
         }
+
         break;
     case CHARA_MOTION_WALK:
         if ((e->flags & CHARA_KEYFRAME_FLAG_FAST) == 0) {
@@ -3657,6 +3710,7 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
             p->obj.x += (gSineTable[e->unk_14 & 0xFF] * p->speed) >> 8;
             p->obj.y += (-gSineTable[(e->unk_14 & 0xFF) + 64] * p->speed) >> 8;
         }
+
         break;
     }
 
@@ -3690,6 +3744,7 @@ u8 _0806E9DC(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EA28);
     return 1;
 }
+
 u8 func_0806EA28(EventCharaWork* p, void* a) {
     u16 x;
     u16 y;
@@ -3707,6 +3762,7 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
         p->unk_18C += 51;
     } else {
         p->unk_1A8--;
+
         if (p->unk_1A8 == 0) {
             if (p->arg.chara == 10) {
                 m4aSongNumStart(SONG_SND_324);
@@ -3738,9 +3794,11 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806EB94(EventCharaWork* p, void* a) {
     p->unk_188 = 0xC00;
     p->unk_18C = 0;
@@ -3750,6 +3808,7 @@ u8 func_0806EB94(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EBE0);
     return 1;
 }
+
 u8 func_0806EBE0(EventCharaWork* p, void* a) {
     u8 t;
 
@@ -3788,9 +3847,11 @@ u8 func_0806EBE0(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806ECE0(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
@@ -3800,6 +3861,7 @@ u8 func_0806ECE0(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806ED2C);
     return 1;
 }
+
 u8 func_0806ED2C(EventCharaWork* p, void* a) {
     u8 t;
 
@@ -3838,9 +3900,11 @@ u8 func_0806ED2C(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806EE20(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
@@ -3850,6 +3914,7 @@ u8 func_0806EE20(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806EE6C);
     return 1;
 }
+
 u8 func_0806EE6C(EventCharaWork* p, void* a) {
     u8 t;
 
@@ -3884,9 +3949,11 @@ u8 func_0806EE6C(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 EventCharaFadeOut(void* work, void* a) {
     EventCharaWork* p = work;
     const EventCharaKeyframe* e;
@@ -3907,6 +3974,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -3918,22 +3986,27 @@ u8 EventCharaFadeOut(void* work, void* a) {
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
+
         if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
             m4aSongNumStart(SONG_EV_WARPIN);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 != 0) {
             p->unk_1A9--;
         }
     }
+
     gBldAlpha = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
@@ -3951,6 +4024,7 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
         } else {
             p->callbackActive = 0;
         }
+
         {
             u16 z = p->obj.drawFlags;
 
@@ -3958,9 +4032,11 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
             EvtObjSetDrawFlags(&p->obj, z);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 EventCharaFadeIn(void* work, void* a) {
     EventCharaWork* p = work;
     const EventCharaKeyframe* e;
@@ -3981,6 +4057,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -3992,22 +4069,27 @@ u8 EventCharaFadeIn(void* work, void* a) {
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
+
         if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
             m4aSongNumStart(SONG_EV_WARPOUT);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 <= 15) {
             p->unk_1A9++;
         }
     }
+
     gBldAlpha = ((16 - p->unk_1A9) << 8) | p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
@@ -4025,6 +4107,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
         } else {
             p->callbackActive = 0;
         }
+
         {
             u16 z = p->obj.drawFlags;
 
@@ -4032,9 +4115,11 @@ u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
             EvtObjSetDrawFlags(&p->obj, z);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F2EC(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
@@ -4054,6 +4139,7 @@ u8 func_0806F2EC(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -4065,15 +4151,18 @@ u8 func_0806F2EC(void* work, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F3A8(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 <= 15) {
             p->unk_1A9++;
         }
     }
+
     gBldAlpha = (p->unk_1A9 << 8) | 16;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
@@ -4092,9 +4181,11 @@ u8 func_0806F3A8(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F47C(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
@@ -4114,6 +4205,7 @@ u8 func_0806F47C(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -4125,15 +4217,18 @@ u8 func_0806F47C(void* work, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F53C(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 != 0) {
             p->unk_1A9--;
         }
     }
+
     gBldAlpha = (p->unk_1A9 << 8) | 16;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
@@ -4152,9 +4247,11 @@ u8 func_0806F53C(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F610(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
@@ -4163,6 +4260,7 @@ u8 func_0806F610(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F64C);
     return 1;
 }
+
 u8 func_0806F64C(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
@@ -4188,9 +4286,11 @@ u8 func_0806F64C(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F734(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
@@ -4199,6 +4299,7 @@ u8 func_0806F734(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F770);
     return 1;
 }
+
 u8 func_0806F770(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
@@ -4224,9 +4325,11 @@ u8 func_0806F770(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806F858(EventCharaWork* p, void* a) {
     p->unk_18C = 1;
     p->unk_198 = 0;
@@ -4235,6 +4338,7 @@ u8 func_0806F858(EventCharaWork* p, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)func_0806F898);
     return 1;
 }
+
 u8 func_0806F898(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
@@ -4261,9 +4365,11 @@ u8 func_0806F898(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 void ApplyEventCharaDrawFlags(EventCharaWork* p) {
     u16 z;
 
@@ -4312,6 +4418,7 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
         }
     }
 }
+
 u8 func_0806FA84(EventCharaWork* p, void* a) {
     p->unk_1AA = 0;
     p->unk_1A9 = 0;
@@ -4319,12 +4426,14 @@ u8 func_0806FA84(EventCharaWork* p, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806FAB8(EventCharaWork* p, void* a) {
     u16 buf[2];
 
     memcpy(buf, sUnk_09033C8C, 4);
     EvtObjSetAnim(&p->obj, buf[p->unk_1A9]);
     p->unk_1AA++;
+
     if (p->unk_1AA == 12) {
         p->unk_1AA = 0;
         p->unk_1A9 ^= 1;
@@ -4338,6 +4447,7 @@ u8 func_0806FAB8(EventCharaWork* p, void* a) {
         if (p->palette != NULL) {
             ReleaseObjPalette(p->palette);
         }
+
         p->tiles = NULL;
         p->palette = NULL;
 
@@ -4347,9 +4457,11 @@ u8 func_0806FAB8(EventCharaWork* p, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806FB6C(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
@@ -4369,6 +4481,7 @@ u8 func_0806FB6C(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -4380,15 +4493,18 @@ u8 func_0806FB6C(void* work, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806FC28(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 != 0) {
             p->unk_1A9--;
         }
     }
+
     gBldAlpha = p->unk_1A9;
 
     if (AdvanceEventCharaKeyframe(p) != 0) {
@@ -4407,9 +4523,11 @@ u8 func_0806FC28(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806FCF4(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
@@ -4429,6 +4547,7 @@ u8 func_0806FCF4(void* work, void* a) {
             p->callbackActive = 0;
         }
     }
+
     z = p->obj.drawFlags;
     z |= 4;
     EvtObjSetDrawFlags(&p->obj, z);
@@ -4440,15 +4559,18 @@ u8 func_0806FCF4(void* work, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 func_0806FDB0(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
+
     if (p->unk_1AA % 2 == 0) {
         if (p->unk_1A9 != 0) {
             p->unk_1A9--;
         }
     }
+
     gBldAlpha = (16 - p->unk_1A9) | (p->unk_1A9 << 8);
     gBldAlpha = (p->unk_1A9 << 8) | 16;
 
@@ -4468,9 +4590,11 @@ u8 func_0806FDB0(EventCharaWork* p, void* a) {
             p->callbackActive = 0;
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 void ReadEventCharaDpadAngle(EventCharaWork* p) {
     u16 keys = GetKeysHeld();
 
@@ -4483,6 +4607,7 @@ void ReadEventCharaDpadAngle(EventCharaWork* p) {
         } else {
             p->angle = 0;
         }
+
         break;
     case DPAD_DOWN:
         if (GetKeyReleaseTime(DPAD_LEFT) <= 4) {
@@ -4492,6 +4617,7 @@ void ReadEventCharaDpadAngle(EventCharaWork* p) {
         } else {
             p->angle = 128;
         }
+
         break;
     case DPAD_LEFT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
@@ -4501,6 +4627,7 @@ void ReadEventCharaDpadAngle(EventCharaWork* p) {
         } else {
             p->angle = 192;
         }
+
         break;
     case DPAD_RIGHT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
@@ -4510,6 +4637,7 @@ void ReadEventCharaDpadAngle(EventCharaWork* p) {
         } else {
             p->angle = 64;
         }
+
         break;
     case (DPAD_RIGHT | DPAD_UP):
         p->angle = 45;
@@ -4566,8 +4694,10 @@ void SetEventCharaMoveAnim(EventCharaWork* p, s32 a) {
         EvtObjSetAnim(&p->obj, a);
         p->animId = a;
     }
+
     EvtObjSetDrawFlags(&p->obj, f);
 }
+
 u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
     u16 keys;
     s32 v;
@@ -4584,6 +4714,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 10);
         }
+
         break;
     case 0x80:
         if ((keys & A_BUTTON) != 0) {
@@ -4593,6 +4724,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 11);
         }
+
         break;
     case 0xC0:
         if ((keys & A_BUTTON) != 0) {
@@ -4602,6 +4734,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 13);
         }
+
         break;
     case 0x40:
         if ((keys & A_BUTTON) != 0) {
@@ -4611,6 +4744,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 13);
         }
+
         break;
     case 0xD3:
         if ((keys & A_BUTTON) != 0) {
@@ -4620,6 +4754,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 14);
         }
+
         break;
     case 0x2D:
         if ((keys & A_BUTTON) != 0) {
@@ -4629,6 +4764,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 14);
         }
+
         break;
     case 0xAD:
         if ((keys & A_BUTTON) != 0) {
@@ -4638,6 +4774,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 12);
         }
+
         break;
     case 0x53:
         if ((keys & A_BUTTON) != 0) {
@@ -4647,6 +4784,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             p->unk_1AD = 2;
             SetEventCharaMoveAnim(p, 12);
         }
+
         break;
     }
 
@@ -4659,11 +4797,13 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
             if (v > gEventCharaParams[p->arg.chara].slowSpeed) {
                 p->speed = gEventCharaParams[p->arg.chara].slowSpeed;
             }
+
             break;
         case 2:
             if (v > gEventCharaParams[p->arg.chara].fastSpeed) {
                 p->speed = gEventCharaParams[p->arg.chara].fastSpeed;
             }
+
             break;
         }
     } else {
@@ -4724,6 +4864,7 @@ u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
     u16 keys = GetKeysHeld();
 
@@ -4771,6 +4912,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
         } else {
             p->unk_1A8++;
         }
+
         break;
     case 1:
         UpdateEventCharaAngle(p);
@@ -4815,6 +4957,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
             p->jumpPhase = 2;
             p->unk_1A8 = 0;
         }
+
         break;
     case 2:
         UpdateEventCharaAngle(p);
@@ -4859,6 +5002,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
             p->jumpPhase = 3;
             p->unk_1A8 = 0;
         }
+
         break;
     case 3:
         UpdateEventCharaAngle(p);
@@ -4899,6 +5043,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
             p->jumpPhase = 4;
             p->unk_1A8 = 0;
         }
+
         break;
     case 4:
         UpdateEventCharaAngle(p);
@@ -4940,6 +5085,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
             p->jumpPhase = 5;
             p->unk_1A8 = 0;
         }
+
         break;
     case 5:
         switch (p->angle) {
@@ -4980,6 +5126,7 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
         } else {
             p->unk_1A8++;
         }
+
         break;
     }
 
@@ -5011,12 +5158,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                     m4aSongNumStart(SONG_SND_958);
                     SetEventSoundPosition(SONG_SND_958, x, y);
                 }
+
                 if (p->obj.anim->frame == 6) {
                     m4aSongNumStart(SONG_SND_959);
                     SetEventSoundPosition(SONG_SND_959, x, y);
                 }
             }
         }
+
         break;
     case 0x2E6:
         if (p->obj.anim->timer == 0) {
@@ -5024,11 +5173,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
+
         break;
     case 0x375:
         if (p->obj.anim->timer == 1) {
@@ -5036,11 +5187,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0x398:
         if (p->obj.anim->timer == 0) {
@@ -5049,6 +5202,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_SND_373, x, y);
             }
         }
+
         break;
     case 0x399:
         if (p->obj.anim->timer == 0) {
@@ -5057,6 +5211,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_SND_374, x, y);
             }
         }
+
         break;
     case 0x5E:
         if (p->obj.anim->timer == 9) {
@@ -5064,6 +5219,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_EV01_01);
             }
         }
+
         break;
     case 0x1C2:
         if (p->obj.anim->timer == 0) {
@@ -5071,11 +5227,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
+
         break;
     case 0x1C0:
     case 0x1C1:
@@ -5084,11 +5242,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
+
         break;
     case 0x34B:
     case 0x34C:
@@ -5097,11 +5257,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0x2B2:
         if (p->obj.anim->timer == 1) {
@@ -5109,11 +5271,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0x204:
     case 0x206:
@@ -5134,6 +5298,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                     SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
+
             if (p->obj.anim->frame == 7) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
@@ -5144,6 +5309,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
         }
+
         break;
     case 0x2C5:
     case 0x2C6:
@@ -5157,6 +5323,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                     SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
+
             if (p->obj.anim->frame == 5) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
@@ -5167,6 +5334,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
         }
+
         break;
     case 0x371:
     case 0x372:
@@ -5175,11 +5343,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0x1EE:
     case 0x1F6:
@@ -5188,11 +5358,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0x345:
         if (p->obj.anim->timer == 1) {
@@ -5200,11 +5372,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x344:
         if (p->obj.anim->timer == 0) {
@@ -5212,11 +5386,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x341:
         if (p->obj.anim->timer == 0) {
@@ -5224,11 +5400,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x30C:
     case 0x30D:
@@ -5240,11 +5418,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x275:
     case 0x276:
@@ -5253,11 +5433,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
         }
+
         break;
     case 0x277:
         if (p->obj.anim->timer == 0) {
@@ -5265,11 +5447,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
+
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
         }
+
         break;
     case 0x2A5:
         if (p->obj.anim->timer == 0) {
@@ -5277,11 +5461,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN2_DIRTL, x, y);
             }
+
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN2_DIRTR, x, y);
             }
         }
+
         break;
     case 0x2A8:
         if (p->obj.anim->timer == 0) {
@@ -5289,11 +5475,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
         }
+
         break;
     case 0x271:
         if (p->obj.anim->timer == 0) {
@@ -5301,11 +5489,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0x241:
         if (p->obj.anim->timer == 0) {
@@ -5313,11 +5503,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLEL);
                 SetEventSoundPosition(SONG_EV_MAN_MARBLEL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLER);
                 SetEventSoundPosition(SONG_EV_MAN_MARBLER, x, y);
             }
         }
+
         break;
     case 0x17A:
         if (p->obj.anim->timer == 0) {
@@ -5325,11 +5517,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0x178:
     case 0x179:
@@ -5338,11 +5532,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0x19C:
     case 0x19D:
@@ -5351,11 +5547,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0x14A:
     case 0x14B:
@@ -5364,11 +5562,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTL);
                 SetEventSoundPosition(SONG_EV_WOMAN2_DIRTL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTR);
                 SetEventSoundPosition(SONG_EV_WOMAN2_DIRTR, x, y);
             }
         }
+
         break;
     case 0x157:
         if (p->obj.anim->timer == 0) {
@@ -5376,11 +5576,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_WOODL);
                 SetEventSoundPosition(SONG_EV_MAN_WOODL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_WOODR);
                 SetEventSoundPosition(SONG_EV_MAN_WOODR, x, y);
             }
         }
+
         break;
     case 0x23E:
         if (p->obj.anim->timer == 0) {
@@ -5388,11 +5590,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
                 SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLER);
                 SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
             }
         }
+
         break;
     case 0x16C:
     case 0x16E:
@@ -5401,11 +5605,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
         }
+
         break;
     case 0x122:
     case 0x123:
@@ -5416,11 +5622,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0xDF:
     case 0xE0:
@@ -5436,6 +5644,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                     SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
+
             if (p->obj.anim->frame == 5) {
                 if (p->arg.eventId == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
@@ -5446,6 +5655,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
         }
+
         break;
     case 0xD6:
     case 0xD9:
@@ -5454,11 +5664,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0xCA:
     case 0xCB:
@@ -5467,11 +5679,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SND_954);
                 SetEventSoundPosition(SONG_SND_954, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_955);
                 SetEventSoundPosition(SONG_SND_955, x, y);
             }
         }
+
         break;
     case 0xD3:
     case 0xD4:
@@ -5480,11 +5694,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SND_956);
                 SetEventSoundPosition(SONG_SND_956, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_957);
                 SetEventSoundPosition(SONG_SND_957, x, y);
             }
         }
+
         break;
     case 0x10A:
     case 0x10B:
@@ -5493,11 +5709,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x83:
     case 0x88:
@@ -5507,6 +5725,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_EV01_03, x, y);
             }
         }
+
         break;
     case 0x12:
     case 0x13:
@@ -5517,6 +5736,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_EV01_01, x, y);
             }
         }
+
         break;
     case 0x5:
     case 0x6:
@@ -5528,11 +5748,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 if (p->obj.anim->frame == 1) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
                 }
+
                 if (p->obj.anim->frame == 5) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
                 }
             }
         }
+
         break;
     case 0x75:
     case 0x77:
@@ -5543,11 +5765,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 if (p->obj.anim->frame == 2) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
                 }
+
                 if (p->obj.anim->frame == 6) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
                 }
             }
         }
+
         break;
     case 0x78:
     case 0x79:
@@ -5558,11 +5782,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 if (p->obj.anim->frame == 3) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
                 }
+
                 if (p->obj.anim->frame == 7) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
                 }
             }
         }
+
         break;
     case 0x95:
     case 0x97:
@@ -5576,11 +5802,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 if (p->obj.anim->frame == 3) {
                     PlayGoofyFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
                 }
+
                 if (p->obj.anim->frame == 7) {
                     PlayGoofyFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
                 }
             }
         }
+
         break;
     case 0xA:
     case 0xB:
@@ -5592,11 +5820,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 if (p->obj.anim->frame == 3) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
                 }
+
                 if (p->obj.anim->frame == 7) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
                 }
             }
         }
+
         break;
     case 0xB8:
     case 0xBA:
@@ -5605,11 +5835,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0xBB:
         if (p->obj.anim->timer == 0) {
@@ -5618,6 +5850,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_EV34_00, x, y);
             }
         }
+
         break;
     case 0xC1:
         if (p->obj.anim->timer == 0) {
@@ -5626,6 +5859,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
         }
+
         break;
     case 0xE9:
     case 0xEA:
@@ -5635,6 +5869,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_SND_324, x, y);
             }
         }
+
         break;
     case 0xF2:
     case 0xF3:
@@ -5647,11 +5882,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
+
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
         }
+
         break;
     case 0xF5:
     case 0xF6:
@@ -5664,11 +5901,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
         }
+
         break;
     case 0x280:
     case 0x281:
@@ -5677,11 +5916,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0x18D:
     case 0x18E:
@@ -5690,11 +5931,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0x18F:
         if (p->obj.anim->timer == 0) {
@@ -5702,6 +5945,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_BTL_GMIC_OK);
             }
         }
+
         break;
     case 0x159:
     case 0x15D:
@@ -5710,11 +5954,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
+
         break;
     case 0x15E:
         if (p->obj.anim->timer == 0) {
@@ -5723,6 +5969,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
         }
+
         break;
     case 0x185:
     case 0x186:
@@ -5731,11 +5978,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0x187:
         if (p->obj.anim->timer == 0) {
@@ -5743,11 +5992,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
+
         break;
     case 0x2E7:
     case 0x2E8:
@@ -5757,6 +6008,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_GE_ENTRY, x, y);
             }
         }
+
         break;
     case 0x2AE:
     case 0x2AF:
@@ -5765,11 +6017,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
+
         break;
     case 0x1C5:
     case 0x1C6:
@@ -5778,11 +6032,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
+
         break;
     case 0x27A:
     case 0x27D:
@@ -5791,11 +6047,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
+
         break;
     case 0x10F:
     case 0x11B:
@@ -5804,11 +6062,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x110:
     case 0x11C:
@@ -5817,11 +6077,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
+
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
+
         break;
     case 0x118:
         if (p->obj.anim->timer == 1) {
@@ -5830,6 +6092,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_EV_AL_LAND, x, y);
             }
         }
+
         break;
     case 0x29E:
         if (p->obj.anim->timer == 0) {
@@ -5838,6 +6101,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_VO_GE_ATTACK02, x, y);
             }
         }
+
         break;
     case 0x2A2:
         if (p->obj.anim->timer == 0) {
@@ -5845,6 +6109,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 m4aSongNumStart(SONG_EV_GE_FOOTUP);
             }
         }
+
         break;
     case 0x1DE:
         if (p->obj.anim->timer == 1) {
@@ -5853,6 +6118,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 SetEventSoundPosition(SONG_BTL_DARKDEAD, x, y);
             }
         }
+
         break;
     }
 }
@@ -5873,6 +6139,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_SR_DIRTR);
             SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
         }
+
         break;
     case 1:
         if (flag == 0) {
@@ -5882,6 +6149,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_SR_STONEL);
             SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
         }
+
         break;
     case 2:
         if ((p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (p->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
@@ -5909,6 +6177,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_SR_MUDR, x, y);
             }
         }
+
         break;
     case 3:
         if (flag != 0) {
@@ -5918,6 +6187,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_SR_STONER);
             SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
         }
+
         break;
     }
 }
@@ -5938,6 +6208,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_DL_DIRTR);
             SetEventSoundPosition(SONG_EV_DL_DIRTR, x, y);
         }
+
         break;
     case 1:
         if (flag == 0) {
@@ -5947,6 +6218,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_DL_STONE_L);
             SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
         }
+
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
@@ -5966,6 +6238,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_DL_MUDR, x, y);
             }
         }
+
         break;
     case 3:
         if (flag != 0) {
@@ -5975,6 +6248,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_DL_STONE_R);
             SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
         }
+
         break;
     }
 }
@@ -5995,6 +6269,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_GF_DIRTR);
             SetEventSoundPosition(SONG_EV_GF_DIRTR, x, y);
         }
+
         break;
     case 1:
         if (flag == 0) {
@@ -6004,6 +6279,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_GF_STONE_L);
             SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
         }
+
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
@@ -6023,6 +6299,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_GF_MUDR, x, y);
             }
         }
+
         break;
     case 3:
         if (flag != 0) {
@@ -6032,6 +6309,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
             m4aSongNumStart(SONG_EV_GF_STONE_R);
             SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
         }
+
         break;
     }
 }
@@ -6096,6 +6374,7 @@ static void msgwin_0(MsgWinWork* p, u8* arg) {
     } else {
         p->bg = 2;
     }
+
     LoadBgTiles(p->bg, gUnk_094233B8, 0x500);
     LoadBgPalette(p->bg, gUnk_096148D8, 32);
     LoadBgMap(p->bg, gUnk_08125E24, 0x800);
@@ -6151,6 +6430,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                     if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                         FadeSetPaletteExcluded(15, 1);
                     }
+
                     gEventState->unk_81 = 1;
 
                     switch (e->positionIndex) {
@@ -6171,6 +6451,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                             FadeSetPaletteExcluded(p->palette->index + 16, 1);
                         }
                     }
+
                     RequestMsgfaceSlideIn(&p->face);
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
                     gEventState->unk_8B = 1;
@@ -6187,6 +6468,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                         ReleaseObjPalette(p->palette);
                         p->palette = NULL;
                     }
+
                     gEventState->unk_8B = 0;
                 }
             }
@@ -6204,6 +6486,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
             if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                 FadeSetPaletteExcluded(15, 1);
             }
+
             gEventState->unk_81 = 1;
 
             switch (e->positionIndex) {
@@ -6224,6 +6507,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                 FadeSetPaletteExcluded(p->palette->index + 16, 1);
                 }
             }
+
             RequestMsgfaceSlideIn(&p->face);
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
             gEventState->unk_8B = 1;
@@ -6240,6 +6524,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                 ReleaseObjPalette(p->palette);
                 p->palette = NULL;
             }
+
             gEventState->unk_8B = 0;
         }
         }
@@ -6252,9 +6537,11 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
         FadeSetPaletteExcluded(p->unk_1C + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 MsgwinContinueUpdate(MsgWinWork* p, void* a) {
     if (p->textLoaded == 0) {
         if (gEventState->unk_80 == 0) {
@@ -6289,9 +6576,11 @@ u8 MsgwinContinueUpdate(MsgWinWork* p, void* a) {
         FadeSetPaletteExcluded(p->unk_1C + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 static void msgwin_2(MsgWinWork* p) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
@@ -6300,15 +6589,19 @@ static void msgwin_2(MsgWinWork* p) {
     } else {
         DrawMsgGlyphsWithPalette(p->shownChars, p->palette);
     }
+
     TaskPoolDraw(&p->tasks);
 }
+
 static void msgwin_3(MsgWinWork* p) {
     if (p->palette != NULL) {
         ReleaseObjPalette(p->palette);
     }
+
     FreeMsgGlyphSprites();
     TaskPoolDestroy(&p->tasks);
 }
+
 u8 MsgwinOpenUpdate(MsgWinWork* p, void* a) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
@@ -6326,11 +6619,14 @@ u8 MsgwinOpenUpdate(MsgWinWork* p, void* a) {
         if ((e->flags & 0xF) == 0) {
             gEventState->talking = 1;
         }
+
         SetTaskUpdate(a, (TaskUpdateFunc)MsgwinTypeUpdate);
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
@@ -6380,11 +6676,14 @@ u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
                 p->face.unk_08 = 0;
             }
         }
+
         p->waitCreated = 0;
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
@@ -6404,6 +6703,7 @@ u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
         if ((gEventState->flags & EVENT_FLAG_PLAYER_CONTROL) == 0) {
             gEventState->flags &= ~EVENT_FLAG_PAUSED;
         }
+
         gEventState->unk_7C = 0;
 
         if ((e->flags & MSG_SCRIPT_FLAG_END) == 0) {
@@ -6413,9 +6713,11 @@ u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
         }
     }
+
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
+
 void MsgwinLoadEntry(MsgWinWork* p) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
     s32 n;
@@ -6432,6 +6734,7 @@ void MsgwinLoadEntry(MsgWinWork* p) {
     } else {
         p->face.unk_03 = 0;
     }
+
     SetMsgfacePortrait(&p->face, e->portraitId, e->expressionId, p->position);
 
 #ifdef VERSION_JP
@@ -6455,6 +6758,7 @@ void MsgwinLoadEntry(MsgWinWork* p) {
         }
     }
 #endif
+
     p->charTimer = 0;
     p->shownChars = 0;
     p->textLoaded = 1;
@@ -6487,14 +6791,17 @@ void MsgwinTypeStep(MsgWinWork* p) {
                         TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &v);
                     }
                 }
+
                 p->waitCreated = 1;
             }
         }
+
         p->charTimer = 0;
     } else {
         p->charTimer++;
     }
 }
+
 void MsgwinCheckStart(MsgWinWork* p) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
@@ -6514,6 +6821,7 @@ void MsgwinCheckStart(MsgWinWork* p) {
         }
     }
 }
+
 void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl) {
     const MsgFaceAnim* anim;
     u32 n;
@@ -6555,6 +6863,7 @@ void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl) {
         p->gfx = AnimGetGfx(&p->anim);
     }
 }
+
 u8 msgface_1(MsgFaceWork* p, void* a) {
     const MsgFaceAnim* anim = NULL;
     u32 n;
@@ -6572,6 +6881,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
             p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
             p->y = gMsgfaceY[n];
         }
+
         p->steps = 8;
 
         if (anim != NULL) {
@@ -6633,16 +6943,19 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     p->gfx = AnimUpdate(&p->anim);
     return 1;
 }
+
 void msgface_2(MsgFaceWork* p) {
     ObjAffine* t;
     u8 v;
 
     if (p->visible != 0) {
         t = AllocObjAffine(0, p->scaleX, 256, 0);
+
         if (t != NULL) {
             DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, 0, 50);
         } else {
             v = p->flipX;
+
             if (v != 0) {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, SPRITE_FLAG_HFLIP, 50);
             } else {
@@ -6651,29 +6964,37 @@ void msgface_2(MsgFaceWork* p) {
         }
     }
 }
+
 void msgface_3(MsgFaceWork* p) {
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
 }
+
 u8 MsgfaceSlideInUpdate(MsgFaceWork* p, void* a) {
     ApproachValue(&p->x, gMsgfaceShownX[p->face->positionIndex], p->steps);
     p->steps--;
+
     if (p->steps == 0) {
         p->face->command = 0;
         p->unk_31 = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
+
     return 1;
 }
+
 u8 MsgfaceSlideOutUpdate(MsgFaceWork* p, void* a) {
     ApproachValue(&p->x, gMsgfaceHiddenX[p->face->positionIndex], p->steps);
     p->steps--;
+
     if (p->steps == 0) {
         p->face->command = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
+
     return 1;
 }
+
 u8 MsgfaceChangeUpdate(MsgFaceWork* p, void* a) {
     const MsgFaceAnim* t;
     s32 n;
@@ -6703,6 +7024,7 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* p, void* a) {
         p->steps = 8;
         p->face->command = 0;
     }
+
     p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
     p->y = gMsgfaceY[n];
     p->scaleX = 256;
@@ -6719,6 +7041,7 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* p, void* a) {
     } else {
         ApproachValue(&p->scaleX, 2, p->steps);
     }
+
     p->steps--;
 
     if (p->steps == 0) {
@@ -6743,8 +7066,10 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* p, void* a) {
             p->unk_31 = 0;
             p->steps = 8;
         }
+
         SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceFlipInUpdate);
     }
+
     return 1;
 }
 
@@ -6754,15 +7079,19 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* p, void* a) {
     } else {
         ApproachValue(&p->scaleX, 256, p->steps);
     }
+
     p->steps--;
+
     if (p->steps == 0) {
         p->unk_31 = 1;
         p->face->command = 0;
         p->scaleX = 256;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
+
     return 1;
 }
+
 void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c) {
     p->portraitId = a;
     p->expressionId = b;
@@ -6781,8 +7110,10 @@ void SetMsgfacePortrait(MsgFaceControl* p, u8 a, u8 b, u8 c) {
         if (p->expressionId == b && p->positionIndex == c) {
             return;
         }
+
         v = 4;
     }
+
     p->command = v;
     p->portraitId = a;
     p->expressionId = b;
@@ -6792,9 +7123,11 @@ void SetMsgfacePortrait(MsgFaceControl* p, u8 a, u8 b, u8 c) {
 void RequestMsgfaceSlideIn(MsgFaceControl* p) {
     p->command = 1;
 }
+
 void RequestMsgfaceSlideOut(MsgFaceControl* p) {
     p->command = 2;
 }
+
 void msgwait_0(MsgWaitWork* p, u8* arg) {
     p->unk_103 = arg[0];
     p->tiles = AllocObjTiles(64, 0);
@@ -6807,6 +7140,7 @@ void msgwait_0(MsgWaitWork* p, u8* arg) {
     p->timer = 0;
     gEventState->msgWaitActive = 1;
 }
+
 u8 msgwait_1(MsgWaitWork* p, void* a) {
     p->gfx = AnimUpdate(&p->anim);
 
@@ -6822,21 +7156,26 @@ u8 msgwait_1(MsgWaitWork* p, void* a) {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
     }
+
     return 1;
 }
+
 u8 UpdateMsgwaitClosing(MsgWaitWork* p) {
     u8 r;
 
     p->gfx = AnimUpdate(&p->anim);
     p->timer++;
+
     if (p->timer <= 15) {
         r = 1;
     } else {
         gEventState->msgWaitActive = 0;
         r = 0;
     }
+
     return r;
 }
+
 void msgwait_2(MsgWaitWork* p) {
     u8 v = gEventState->unk_8B;
 
@@ -6849,11 +7188,13 @@ void msgwait_2(MsgWaitWork* p) {
                    p->palette, 0, 0, 0);
     }
 }
+
 void msgwait_3(MsgWaitWork* p) {
     FadeSetPaletteExcluded(p->palette->index + 16, 0);
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
 }
+
 void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     p->unk_103 = *a;
     p->tiles = AllocObjTiles(64, 0);
@@ -6894,6 +7235,7 @@ void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     gEventState->answerYes = 0;
     p->choiceShown = 0;
 }
+
 u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
     switch (GetKeysPressed()) {
     case DPAD_UP:
@@ -6901,6 +7243,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
             p->cursor--;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
+
         p->timer = 1;
         break;
     case DPAD_DOWN:
@@ -6908,6 +7251,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
             p->cursor++;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
+
         p->timer = 1;
         break;
     case A_BUTTON:
@@ -6922,6 +7266,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
                 gEventState->skipHoldTime = 255;
             }
         }
+
         m4aSongNumStart(SONG_SYS_KETTEI);
         gEventState->msgWaitActive = 0;
         return 0;
@@ -6932,6 +7277,7 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
             gEventState->endRequest = 1;
             gEventState->skipHoldTime = 255;
         }
+
         m4aSongNumStart(SONG_SYS_KETTEI);
         gEventState->msgWaitActive = 0;
         return 0;
@@ -6941,9 +7287,11 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
         ApproachValue(&p->y, gMsgwaitYesnoCursorY[p->cursor], p->timer);
         p->timer--;
     }
+
     p->gfx = AnimUpdate(&p->anim);
     return 1;
 }
+
 u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
     p->gfx = AnimUpdate(&p->anim);
 
@@ -6953,8 +7301,10 @@ u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);
     }
+
     return 1;
 }
+
 void msgwait_yesno_2(MsgWaitWork* p) {
     switch (p->choiceShown) {
     case 0:
@@ -6963,6 +7313,7 @@ void msgwait_yesno_2(MsgWaitWork* p) {
         } else {
             DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, 0, 0, 0);
         }
+
         break;
     case 1:
         DrawSprite(120, 80, gUnk_09EF126C[1], p->tiles3, p->palette3, 0, 0, 10);
@@ -6972,6 +7323,7 @@ void msgwait_yesno_2(MsgWaitWork* p) {
         break;
     }
 }
+
 void msgwait_yesno_3(MsgWaitWork* p) {
     ReleaseObjTiles(p->tiles2);
     ReleaseObjTiles(p->tiles3);
@@ -6981,6 +7333,7 @@ void msgwait_yesno_3(MsgWaitWork* p) {
     FreeTextSlots(p->textSlots, 10);
     FreeTextSlots(p->textSlots2, 10);
 }
+
 void HBlankIntrEventScanlineScroll(void) {
     vu16 v;
 
@@ -6994,10 +7347,12 @@ void HBlankIntrEventScanlineScroll(void) {
         }
     }
 }
+
 void HBlankIntrEventBgWave(void) {
     gIntrCheck |= 2;
     HBlankIntrEventScanlineScroll();
 }
+
 void view_0(EventCameraWork* p, u8* arg) {
     EventSequenceDef* t;
     EventBackgroundDef* u;
@@ -7028,6 +7383,7 @@ void view_0(EventCameraWork* p, u8* arg) {
         p->targetX = q->x;
         p->targetY = q->y;
     }
+
     gEventState->cameraX = p->targetX - 0x7800;
     gEventState->cameraY = p->targetY - 0x5000;
     gEventState->centerX = p->targetX;
@@ -7337,8 +7693,10 @@ u8 view_1(EventCameraWork* p, Task* task) {
     UpdateEventScanlineWave(p);
     return 1;
 }
+
 void view_2(void) {
 }
+
 void view_3(void) {
 }
 
@@ -7356,6 +7714,7 @@ void EventCameraFollow(EventCameraWork* a) {
     x = gEventState->centerX - 0x7800;
     y = gEventState->centerY - 0x5000;
     e = &a->keyframes[a->keyframe];
+
     if (e->flags & (CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_KEYFRAME_FLAG_SHAKE_SMALL)) {
         gEventState->cameraX = x;
         gEventState->cameraY = y;
@@ -7363,6 +7722,7 @@ void EventCameraFollow(EventCameraWork* a) {
         gEventState->cameraX += (x - gEventState->cameraX) >> 3;
         gEventState->cameraY += (y - gEventState->cameraY) >> 3;
     }
+
     gEventState->x = gEventState->cameraX + (gEventState->shakeX << 8);
     gEventState->y = gEventState->cameraY + (gEventState->shakeY << 8);
 }
@@ -7394,6 +7754,7 @@ void EventCameraApproach(EventCameraWork* a) {
         gEventState->cameraX = x;
         gEventState->cameraY = y;
     }
+
     gEventState->x = gEventState->cameraX + (gEventState->shakeX << 8);
     gEventState->y = gEventState->cameraY + (gEventState->shakeY << 8);
 }
@@ -7410,6 +7771,7 @@ u8 FindEventCameraTarget(EventCameraWork* p) {
             return i;
         }
     }
+
     return 0xFF;
 }
 
@@ -7424,6 +7786,7 @@ u8 FindEventCharaTrack(EventCameraWork* p, u8 v) {
             return i;
         }
     }
+
     return 0xFF;
 }
 
@@ -7466,6 +7829,7 @@ u8 _08074EC8(EventCameraWork* p) {
         ScrollBgMapTo(0, (gEventState->cameraX >> 8) + 8, (gEventState->cameraY >> 8) + 40);
         ScrollBgMapTo(1, gEventState->cameraX >> 8, gEventState->cameraY >> 8);
     }
+
     return 1;
 }
 
@@ -7477,6 +7841,7 @@ void UpdateEventScanlineWave(EventCameraWork* p) {
         for (i = 0; i < 160; i++) {
             p->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + p->wavePhase) * 2) & 0xFF]) / 32;
         }
+
         p->wavePhase++;
     }
 }

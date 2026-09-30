@@ -3,11 +3,8 @@
 
 #include "task_descriptors.h"
 #include "battle_localized_data.h"
-
 #include "card_api.h"
-
 #include "card_battle.h"
-
 #include "m4a_song.h"
 #include "btl_effect.h"
 #include "btl_collision.h"

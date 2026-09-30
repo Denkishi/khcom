@@ -9,11 +9,8 @@
 #include "key.h"
 #include "mode.h"
 #include "m4a.h"
-
 #include "obj.h"
-
 #include "map_api.h"
-
 #include "game_state.h"
 #include "text.h"
 #include "obj_api.h"

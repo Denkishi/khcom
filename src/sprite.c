@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include "gba/io_reg.h"
 #include <stddef.h>
+#include "gba/oam.h"
 
 static const u8 sSpriteHeapName[8] = "SPRITE";
 
@@ -25,25 +26,25 @@ void SpriteFree(void) {
 }
 
 u16 GetObjTileCount(u16 a, u16 b) {
-    switch ((((u32)b << 16) | a) & 0xC000C000) {
-    case 0x00000000:
+    switch ((((u32)b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         return 1;
-    case 0x80000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
         return 0x10;
-    case 0xC0000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
         return 0x40;
-    case 0x00004000:
-    case 0x00008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 0):
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 0):
         return 2;
-    case 0x40000000:
-    case 0x40004000:
-    case 0x40008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 1):
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 1):
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 1):
         return 4;
-    case 0x80004000:
-    case 0x80008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 2):
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 2):
         return 8;
-    case 0xC0004000:
-    case 0xC0008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 3):
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
         return 0x20;
     }
     return 0;

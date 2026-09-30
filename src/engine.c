@@ -14,6 +14,7 @@
 #include "types.h"
 #include "system_state.h"
 #include "gba/io_reg.h"
+#include "gba/oam.h"
 
 u16 gLastBackdropColor IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);
@@ -594,48 +595,48 @@ void SortSprites(void) {
     } while (0)
 
 static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
-    switch ((((u32)b << 16) | a) & 0xC000C000) {
-    case 0x00000000:
+    switch ((((u32)b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         ENGINE_SET_SQUARE_SIZE(w, h, 8);
         break;
-    case 0x40000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 1):
         ENGINE_SET_SQUARE_SIZE(w, h, 16);
         break;
-    case 0x80000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
         ENGINE_SET_SQUARE_SIZE(w, h, 32);
         break;
-    case 0xC0000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
         ENGINE_SET_SQUARE_SIZE(w, h, 64);
         break;
-    case 0x00004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 0):
         *w = 16;
         *h = 8;
         break;
-    case 0x40004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 1):
         *w = 32;
         *h = 8;
         break;
-    case 0x80004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 2):
         *w = 32;
         *h = 16;
         break;
-    case 0xC0004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 3):
         *w = 64;
         *h = 32;
         break;
-    case 0x00008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 0):
         *w = 8;
         *h = 16;
         break;
-    case 0x40008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 1):
         *w = 8;
         *h = 32;
         break;
-    case 0x80008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 2):
         *w = 16;
         *h = 32;
         break;
-    case 0xC0008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
         *w = 32;
         *h = 64;
         break;
@@ -916,54 +917,54 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
         pw = &w;
         ph = &h;
 
-    switch (((attr1 << 16) | attr0) & 0xC000C000) {
-    case 0x00000000:
+    switch (((attr1 << 16) | attr0) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         *pw = 8;
         *ph = 8;
         break;
-    case 0x40000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 1):
         *pw = 16;
         *ph = 16;
         break;
-    case 0x80000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
         do {
             *pw = 32;
             *ph = 32;
         } while (0);
         break;
-    case 0xC0000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
         *pw = 64;
         *ph = 64;
         break;
-    case 0x00004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 0):
         *pw = 16;
         *ph = 8;
         break;
-    case 0x40004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 1):
         *pw = 32;
         *ph = 8;
         break;
-    case 0x80004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 2):
         *pw = 32;
         *ph = 16;
         break;
-    case 0xC0004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 3):
         *pw = 64;
         *ph = 32;
         break;
-    case 0x00008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 0):
         *pw = 8;
         *ph = 16;
         break;
-    case 0x40008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 1):
         *pw = 8;
         *ph = 32;
         break;
-    case 0x80008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 2):
         *pw = 16;
         *ph = 32;
         break;
-    case 0xC0008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
         *pw = 32;
         *ph = 64;
         break;
@@ -1192,52 +1193,52 @@ u8 CanAllocObjPalette(u16 n) {
     return 0;
 }
 void GetObjSize(u16 a, u16 b, u16* w, u16* h) {
-    switch (((b << 16) | a) & 0xC000C000) {
-    case 0x00000000:
+    switch (((b << 16) | a) & OAM_SHAPE_SIZE(OAM_SHAPE_MASK, 3)) {
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 0):
         *w = 8;
         *h = 8;
         break;
-    case 0x40000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 1):
         *w = 16;
         *h = 16;
         break;
-    case 0x80000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
         *w = 32;
         *h = 32;
         break;
-    case 0xC0000000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 3):
         *w = 64;
         *h = 64;
         break;
-    case 0x00004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 0):
         *w = 16;
         *h = 8;
         break;
-    case 0x40004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 1):
         *w = 32;
         *h = 8;
         break;
-    case 0x80004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 2):
         *w = 32;
         *h = 16;
         break;
-    case 0xC0004000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_HORIZONTAL, 3):
         *w = 64;
         *h = 32;
         break;
-    case 0x00008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 0):
         *w = 8;
         *h = 16;
         break;
-    case 0x40008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 1):
         *w = 8;
         *h = 32;
         break;
-    case 0x80008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 2):
         *w = 16;
         *h = 32;
         break;
-    case 0xC0008000:
+    case OAM_SHAPE_SIZE(OAM_SHAPE_VERTICAL, 3):
         *w = 32;
         *h = 64;
         break;

@@ -17,6 +17,7 @@ struct MapcardWork;
 struct EventKey;
 struct SaveLargeSlice;
 struct SaveSmallSlice;
+struct BtlPrizeSrc;
 
 void Mapcard_2(struct MapcardWork* w);
 void Level_Up_3(struct LevelUpWork* w);
@@ -61,6 +62,7 @@ u16 CountRegularMapCards(void);
 void InitMapCardInventory(void);
 void ResetSelectedMapCard(void);
 void* GetRoomName(u16 a);
+void CreatePrizeCardTask(struct TaskPool* pool, struct BtlPrizeSrc* src);
 void CreateBossPrizeCardTask(void* a, void* b);
 void DrawLayeredCardSprite(struct LayeredCardSprite* p, u16 a);
 void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* p);

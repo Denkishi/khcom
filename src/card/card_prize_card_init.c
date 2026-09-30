@@ -985,8 +985,8 @@ u16 PickPrizeMapCardForWorld(u16 a, s32 b) {
     return base + off;
 }
 
-void CreatePrizeCardTask(void* a, void* b) {
-    TaskCreate(a, &gTaskDescPrizeCardInit, b);
+void CreatePrizeCardTask(TaskPool* pool, struct BtlPrizeSrc* src) {
+    TaskCreate(pool, &gTaskDescPrizeCardInit, src);
 }
 
 void CreateBossPrizeCardTask(void* a, void* b) {

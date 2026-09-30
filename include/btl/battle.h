@@ -137,7 +137,6 @@ void HandleSoraCardInput(void);
 void HandleTutorialCardInput(void);
 void SetEnemyKindFlags(BtlObj* p);
 void CreateHeartlessCardTask(void* p, s16 x, s16 y, s16 z, u16 n);
-void CreatePrizeCardTask(void* p, BtlPrizeSrc* v);
 void BgFxReset(void);
 void BgFxUpdateBase(void);
 void FieldTransitionInit(void);

@@ -777,7 +777,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     e->badStatusTimer = 0;
     e->floorZ = 0;
     e->parent = 0;
-    e->badStatus = 0;
+    e->badStatus = BAD_STATUS_NONE;
     e->popCooldown = 0;
     e->vx = e->vy = 0;
 
@@ -1151,7 +1151,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     n = 1;
                 }
 
-                if (p->badStatus != 2) {
+                if (p->badStatus != BAD_STATUS_STOP) {
                     t = n + hp;
                     p->hp = t;
                 }
@@ -1178,7 +1178,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 hp = e->hp;
 
-                if ((s16)hp > 1 && e->badStatus != 2) {
+                if ((s16)hp > 1 && e->badStatus != BAD_STATUS_STOP) {
                     e->hp = hp - 1;
                 }
             } else {
@@ -1187,7 +1187,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 while (e != NULL) {
                     hp = e->hp;
 
-                    if ((s16)hp > 1 && e->badStatus != 2) {
+                    if ((s16)hp > 1 && e->badStatus != BAD_STATUS_STOP) {
                         e->hp = hp - 1;
                     }
 
@@ -1245,7 +1245,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
     }
 
-    if (p->badStatus == 3) {
+    if (p->badStatus == BAD_STATUS_CONFUSE) {
         held = SwapBtlSoraKeyBits(held, 32, 16);
         held = SwapBtlSoraKeyBits(held, 64, 128);
         pressed = SwapBtlSoraKeyBits(pressed, 32, 16);
@@ -2230,8 +2230,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FadeStartIn(2, 20);
         gBtlWork->hitStop = 15;
 
-        if (p->badStatus != 1) {
-            p->badStatus = 1;
+        if (p->badStatus != BAD_STATUS_STUN) {
+            p->badStatus = BAD_STATUS_STUN;
             p->badStatusTimer = 360;
         }
 
@@ -3220,7 +3220,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
                 e = gRikuBtlWork->actor;
 
-                if (e->badStatus != 2) {
+                if (e->badStatus != BAD_STATUS_STOP) {
                     CreateBtlPopTask(e, 10);
                     e->hp += 50;
 
@@ -3232,7 +3232,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 e = ListPoolFirst(&gBtlWork->pool);
 
                 while (e != NULL) {
-                    if (e->badStatus != 2 && e->parent == NULL) {
+                    if (e->badStatus != BAD_STATUS_STOP && e->parent == NULL) {
                         CreateBtlPopTask(e, 10);
                         e->hp += 50;
 
@@ -5929,7 +5929,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCamera(work);
         work->vz = 0;
 
-        if (p->badStatus != 2) {
+        if (p->badStatus != BAD_STATUS_STOP) {
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5959,7 +5959,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->badStatusTimer -= 1;
         }
 
-        if (p->badStatus != 1) {
+        if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -6050,7 +6050,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->tapTimers[0]--;
     }
 
-    if (p->badStatus == 5) {
+    if (p->badStatus == BAD_STATUS_BIND) {
         work->tapTimers[0] = 0;
         work->tapTimers[1] = 0;
         work->speed = 0;
@@ -6233,7 +6233,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->z = p->originZ;
     }
 
-    if (p->badStatus != 2) {
+    if (p->badStatus != BAD_STATUS_STOP) {
         work->gfx = AnimUpdate(&work->anim);
     }
 
@@ -6800,7 +6800,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     e->badStatusTimer = 0;
     e->floorZ = 0;
     e->parent = 0;
-    e->badStatus = 0;
+    e->badStatus = BAD_STATUS_NONE;
     e->popCooldown = 0;
     e->vx = e->vy = 0;
 
@@ -7293,7 +7293,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         pressed = GetKeysPressed();
     }
 
-    if (p->badStatus == 3) {
+    if (p->badStatus == BAD_STATUS_CONFUSE) {
         held = SwapBtlRikuKeyBits(held, 0x20, 0x10);
         held = SwapBtlRikuKeyBits(held, 0x40, 0x80);
         pressed = SwapBtlRikuKeyBits(pressed, 0x20, 0x10);
@@ -10482,7 +10482,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         BtlMapFollowPosition(p->x, p->y, p->z);
         work->vz = 0;
 
-        if (p->badStatus != 2) {
+        if (p->badStatus != BAD_STATUS_STOP) {
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -10512,7 +10512,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->badStatusTimer -= 1;
         }
 
-        if (p->badStatus != 1) {
+        if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -10539,7 +10539,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->badStatusTimer -= 1;
         }
 
-        if (p->badStatus != 1) {
+        if (p->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->steps = 0;
@@ -10585,7 +10585,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->tapTimers[3]--;
     }
 
-    if (p->badStatus != 5) {
+    if (p->badStatus != BAD_STATUS_BIND) {
         p->x += gSineTable[work->angle] * work->speed >> 8;
         p->y += -gSineTable[work->angle + 64] * (work->speed >> 1) >> 8;
     }
@@ -10761,7 +10761,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
     }
 
-    if (p->badStatus != 2) {
+    if (p->badStatus != BAD_STATUS_STOP) {
         work->gfx = AnimUpdate(&work->anim);
     }
 

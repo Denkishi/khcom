@@ -1014,7 +1014,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
             p->flags |= BTLOBJ_FLAG_INTANGIBLE;
             p->flags &= ~(BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_STUN_PENDING);
             p->flags |= BTLOBJ_FLAG_DEFEATED;
-            p->badStatus = 0;
+            p->badStatus = BAD_STATUS_NONE;
             p->badStatusTimer = 0;
 
             if (p->hitFlags & 0x20000) {
@@ -1035,7 +1035,7 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
             p->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = 0;
+            p->badStatus = BAD_STATUS_NONE;
             p->badStatusTimer = 0;
             return 7;
         }
@@ -1043,8 +1043,8 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->flags & BTLOBJ_FLAG_STUN_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
 
-            if (p->badStatus != 1) {
-                p->badStatus = 1;
+            if (p->badStatus != BAD_STATUS_STUN) {
+                p->badStatus = BAD_STATUS_STUN;
                 p->badStatusTimer = 240;
             }
             return 6;
@@ -1052,14 +1052,14 @@ s32 ApplyBtlObjHit(BtlObj* p) {
 
         if (p->flags & BTLOBJ_FLAG_TERROR_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = 4;
+            p->badStatus = BAD_STATUS_TERROR;
             p->badStatusTimer = 300;
             return 12;
         }
 
         if (p->flags & BTLOBJ_FLAG_CONFUSE_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = 3;
+            p->badStatus = BAD_STATUS_CONFUSE;
             p->badStatusTimer = 300;
             return 1;
         }
@@ -1067,13 +1067,13 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         if (p->flags & BTLOBJ_FLAG_BIND_PENDING) {
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
 
-            if (p->badStatus != 5) {
-                p->badStatus = 5;
+            if (p->badStatus != BAD_STATUS_BIND) {
+                p->badStatus = BAD_STATUS_BIND;
                 p->badStatusTimer = 600;
             }
             return 1;
         }
-        p->badStatus = 0;
+        p->badStatus = BAD_STATUS_NONE;
         p->badStatusTimer = 0;
         return 1;
     }
@@ -1100,8 +1100,8 @@ s32 ApplyBtlObjHit(BtlObj* p) {
         ClearBtlObjActionFlags(p);
         p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
 
-        if (p->badStatus != 2) {
-            p->badStatus = 2;
+        if (p->badStatus != BAD_STATUS_STOP) {
+            p->badStatus = BAD_STATUS_STOP;
             p->badStatusTimer = p->damage;
         }
         return 10;
@@ -1128,7 +1128,7 @@ s32 UpdateBtlObjReaction(BtlObj* p) {
     u16 u;
     u16 v;
 
-    if (p->badStatus == 2) {
+    if (p->badStatus == BAD_STATUS_STOP) {
         if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
             p->flags &= ~(BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
             p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
@@ -1485,7 +1485,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     p->delayedDamage = 0;
     p->shadowPriority = 0xFFF1;
     p->btl = 0;
-    p->badStatus = 0;
+    p->badStatus = BAD_STATUS_NONE;
     p->badStatusTimer = 0;
     p->unk_0F0 = gBtlWork->actor->x;
     p->unk_0F4 = gBtlWork->actor->y;
@@ -2260,7 +2260,7 @@ u8 ApplyBattleBounds(s32* a, s32* b, s32* c, s32* d) {
 void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
     u16 n;
 
-    if (a->badStatus == 3) {
+    if (a->badStatus == BAD_STATUS_CONFUSE) {
         if (b != NULL) {
             *b = a->unk_0F0;
         }

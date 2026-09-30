@@ -665,7 +665,7 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
     obj->badStatusTimer--;
 
     if (obj->badStatusTimer <= 0) {
-        obj->badStatus = 0;
+        obj->badStatus = BAD_STATUS_NONE;
         work->status = 0;
     }
 
@@ -681,7 +681,7 @@ void task_btl_badstatus_2(BtlBadStatusWork* work) {
 
     obj = work->actor;
 
-    if (obj->badStatus != 0) {
+    if (obj->badStatus != BAD_STATUS_NONE) {
         flags = GetBattleSpritePriorityFlags(obj->y);
 
         if (gBtlWork->paused != 0) {

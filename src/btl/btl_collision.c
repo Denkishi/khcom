@@ -430,7 +430,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             if ((attack->flags & 0x10000000) && (hit->flags & BTLOBJ_FLAG_IMMUNE_FIRE)) break;
             if ((attack->flags & 0x20000000) && (hit->flags & BTLOBJ_FLAG_IMMUNE_BLIZZARD)) break;
             if ((attack->flags & 0x40000000) && (hit->flags & BTLOBJ_FLAG_IMMUNE_THUNDER)) break;
-            if (hit->badStatus == 2) break;
+            if (hit->badStatus == BAD_STATUS_STOP) break;
             {
                 s16 drain = target->hp >> 3;
                 if (drain <= 0) drain = 1;

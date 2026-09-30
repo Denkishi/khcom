@@ -1829,7 +1829,7 @@ u8 task_hum_hook_1(HookWork* work) {
             }
         }
 
-        if (c->z >= c->groundZ && c->hp > 0 && c->badStatus != 2 &&
+        if (c->z >= c->groundZ && c->hp > 0 && c->badStatus != BAD_STATUS_STOP &&
             !(c->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
             w->playerSlide += ((GetAngleDiff(0, gBtlWork->rotation) << 6) - w->playerSlide) >> 4;
             c->x -= w->playerSlide;
@@ -1837,7 +1837,7 @@ u8 task_hum_hook_1(HookWork* work) {
             w->playerSlide = 0;
         }
 
-        if (act->z >= act->groundZ && act->hp > 0 && act->badStatus != 2 &&
+        if (act->z >= act->groundZ && act->hp > 0 && act->badStatus != BAD_STATUS_STOP &&
             !(act->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
             w->slide += ((GetAngleDiff(0, gBtlWork->rotation) << 6) - w->slide) >> 4;
             act->x -= w->slide;
@@ -2653,7 +2653,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     }
 
-    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         AnsemHover(&work->base, w->hoverZ);
     }
 
@@ -3231,7 +3231,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         break;
     }
 
-    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         HadesHover(&work->base, w->hoverZ);
     }
 
@@ -3944,7 +3944,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     }
 
     if (!(act->flags & BTLOBJ_FLAG_HURT)) {
-        if (act->badStatus != 2) {
+        if (act->badStatus != BAD_STATUS_STOP) {
             MahluxiaHover(&work->base, w->hoverZ);
         }
     }
@@ -4702,7 +4702,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     }
 
-    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         LaxeneHover(&work->base, w->hoverZ);
     }
     TaskPoolUpdate(&w->tasks);
@@ -5535,7 +5535,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         work->base.stateTimer++;
         break;
     }
-    if (act->badStatus != 2) {
+    if (act->badStatus != BAD_STATUS_STOP) {
         AxcelHover(&work->base, w->hoverZ);
     }
     if ((s16)w->scaleSteps > 0) {
@@ -6179,7 +6179,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     }
 
-    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != BAD_STATUS_STOP) {
         VixenHover(&w->base, work->hoverZ);
     }
     r = HumUpdate(&w->base);
@@ -7138,7 +7138,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     }
 
     if (!(act->flags & BTLOBJ_FLAG_HURT)) {
-        if (act->badStatus != 2) {
+        if (act->badStatus != BAD_STATUS_STOP) {
             LexceusHover(&work->base, w->hoverZ);
         }
     }
@@ -7149,7 +7149,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     }
     gBtlWork->rotation = w->tilt >> 8;
 
-    if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != 2 && !(p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
+    if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != BAD_STATUS_STOP && !(p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         w->tiltSlide += (GetAngleDiff(0, gBtlWork->rotation) * 64 - w->tiltSlide) >> 4;
         p->x -= w->tiltSlide;
     } else {

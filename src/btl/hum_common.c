@@ -117,8 +117,8 @@ s32 _0800E434(HumWork* work) {
         FadeStartIn(2, 20);
         gBtlWork->hitStop = 15;
 
-        if (actor->badStatus != 1) {
-            actor->badStatus = 1;
+        if (actor->badStatus != BAD_STATUS_STUN) {
+            actor->badStatus = BAD_STATUS_STUN;
             actor->badStatusTimer = 0x168;
         }
 
@@ -283,7 +283,7 @@ s32 HumUpdate(HumWork* work) {
         if (GetRandom() % 3 == 0) {
             actor->badStatusTimer -= 6;
         }
-        if (actor->badStatus != 1) {
+        if (actor->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(actor);
             work->state = 0;
             work->stateTimer = 0;
@@ -356,7 +356,7 @@ s32 HumUpdate(HumWork* work) {
         }
         break;
     case 13:
-        if (actor->badStatus != 2) {
+        if (actor->badStatus != BAD_STATUS_STOP) {
             work->state = 0;
             ClearBtlObjActionFlags(actor);
         }
@@ -472,7 +472,7 @@ s32 HumUpdate(HumWork* work) {
         break;
     }
 
-    if (actor->badStatus != 2) {
+    if (actor->badStatus != BAD_STATUS_STOP) {
         actor->z += work->vz;
         work->vz += gBtlWork->gravity;
 
@@ -532,13 +532,13 @@ s32 HumUpdate(HumWork* work) {
         }
     }
 
-    if (actor->badStatus != 2) {
+    if (actor->badStatus != BAD_STATUS_STOP) {
         work->gfx = AnimUpdate(&work->anim);
         HumSubUpdateAnimation(work->sub);
         HumSubUpdateAnimation(work->sub2);
     }
 
-    if (actor->badStatus == 5) {
+    if (actor->badStatus == BAD_STATUS_BIND) {
         actor->x = actor->prevX;
         actor->y = actor->prevY;
     }

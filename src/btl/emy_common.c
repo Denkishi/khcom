@@ -103,7 +103,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
                 v = actor->originX + (e << 8);
             }
 
-            if (actor->badStatus != 5) {
+            if (actor->badStatus != BAD_STATUS_BIND) {
                 ApproachValueHalfSteps(&actor->x, v, steps);
                 ApproachValueHalfSteps(&actor->y, target, steps);
             }
@@ -407,7 +407,7 @@ s32 _0800CDF0(EmyWork* work) {
             } else {
                 actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
-            if (actor->badStatus != 4) {
+            if (actor->badStatus != BAD_STATUS_TERROR) {
                 work->state = work->idleState;
                 work->stateTimer = 0;
             } else {
@@ -488,7 +488,7 @@ s32 _0800CDF0(EmyWork* work) {
         }
         break;
     case 12:
-        if (actor->badStatus != 2) {
+        if (actor->badStatus != BAD_STATUS_STOP) {
             work->state = work->idleState;
             ClearBtlObjActionFlags(actor);
         }
@@ -506,7 +506,7 @@ s32 _0800CDF0(EmyWork* work) {
         if (GetRandom() % 10 == 0) {
             actor->badStatusTimer--;
         }
-        if (actor->badStatus != 1) {
+        if (actor->badStatus != BAD_STATUS_STUN) {
             ClearBtlObjActionFlags(actor);
             work->state = work->idleState;
             work->stateTimer = 0;
@@ -725,7 +725,7 @@ s32 _0800CDF0(EmyWork* work) {
         break;
     }
 
-    if (actor->badStatus != 2) {
+    if (actor->badStatus != BAD_STATUS_STOP) {
         actor->z += work->vz;
         work->vz += gBtlWork->gravity;
 
@@ -785,7 +785,7 @@ s32 _0800CDF0(EmyWork* work) {
 
     if (actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
         work->gfx = AnimUpdate(&work->anim);
-    } else if (actor->badStatus != 2) {
+    } else if (actor->badStatus != BAD_STATUS_STOP) {
         if (gBtlWork->flags & BTL_FLAG_ENEMY_FRAME_CHANGED) {
             if (!AnimIsFrameEnding(&work->anim)) {
                 work->gfx = AnimUpdate(&work->anim);
@@ -798,7 +798,7 @@ s32 _0800CDF0(EmyWork* work) {
         }
     }
 
-    if (actor->badStatus == 5) {
+    if (actor->badStatus == BAD_STATUS_BIND) {
         actor->x = actor->prevX;
         actor->y = actor->prevY;
     }

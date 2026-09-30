@@ -6,7 +6,7 @@ void MapDonaldCheckTalk(MapDonaldWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
 
-        if ((s8)gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
+        if (gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
             CreateCardMessageTask(&w->tasks, 0, 24);
         } else {
             CreateCardMessageTask(&w->tasks, 0, gDonaldTalkMessages[gMapFloorState.progress]);
@@ -27,7 +27,7 @@ void Task_MapDonald_0(MapDonaldWork* w) {
     FldObj* e = &w->obj;
 
     if (gMapFloorState.room != 0xFE) {
-        if ((s8)gGameState.floor == 12) {
+        if (gGameState.floor == 12) {
             w->obj.fieldPosition.x = 0x22300;
             w->obj.fieldPosition.y = 0xE600;
         } else {
@@ -35,7 +35,7 @@ void Task_MapDonald_0(MapDonaldWork* w) {
             w->obj.fieldPosition.y = 0x10000;
         }
     } else {
-        if ((s8)gGameState.floor != 0) {
+        if (gGameState.floor != 0) {
             w->obj.fieldPosition.x = 0x25000;
             w->obj.fieldPosition.y = 0x11000;
         } else {

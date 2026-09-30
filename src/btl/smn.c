@@ -2211,7 +2211,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         body->z += (body->groundZ - height - body->z) >> 3;
         if ((s16)work->stateTimer > 10) {
             work->target = SmnGenieNextTarget(work);
-            if (work->target == NULL || (s16)work->attacksLeft-- <= 0) {
+            if (work->target == NULL || work->attacksLeft-- <= 0) {
                 work->state = 1;
                 work->stateTimer = 0;
             } else {

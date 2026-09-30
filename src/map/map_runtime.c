@@ -61,7 +61,7 @@ void MarkEventRoomDone(MapEventDoor* p) {
 
 void SetHallDefaultSpawn(void) {
     if (gGameState.flags & 8) {
-        switch ((s8)gGameState.floor) {
+        switch (gGameState.floor) {
         case 1:
         case 5:
         case 8:
@@ -72,7 +72,7 @@ void SetHallDefaultSpawn(void) {
             break;
         }
     } else {
-        if ((s8)gGameState.floor != 12) {
+        if (gGameState.floor != 12) {
             gMapFloorState.entrySide = 5;
         }
     }
@@ -81,7 +81,7 @@ void SetHallDefaultSpawn(void) {
 void UpdateWorldFriendFlags(void) {
     u16 t;
 
-    if ((s8)gGameState.floor != GetProgressFloor() || gMapFloorState.room == 0xFE
+    if (gGameState.floor != GetProgressFloor() || gMapFloorState.room == 0xFE
             || gMapFloorState.room == 0xFD) {
         if ((gGameState.flags & 0x80) == 0) {
             gGameState.flags |= 0x80;
@@ -147,18 +147,18 @@ MapFloorDef* GetMapFloorDef(u8 a) {
 
 u8* GetMapRoomLinks(u8 a) {
     if (gGameState.flags & 8) {
-        return gUnk_0984CBD0[(s8)gGameState.floor].links + a * 4;
+        return gUnk_0984CBD0[gGameState.floor].links + a * 4;
     }
 
-    return gUnk_0984C868[(s8)gGameState.floor].links + a * 4;
+    return gUnk_0984C868[gGameState.floor].links + a * 4;
 }
 
 MapEventDoor* GetMapEventDoor(u8 a) {
     if (gGameState.flags & 8) {
-        return gUnk_0984CBD0[(s8)gGameState.floor].eventDoors + a;
+        return gUnk_0984CBD0[gGameState.floor].eventDoors + a;
     }
 
-    return gUnk_0984C868[(s8)gGameState.floor].eventDoors + a;
+    return gUnk_0984C868[gGameState.floor].eventDoors + a;
 }
 
 MapFloorRoom* GetMapFloorRoom(u8 index) {
@@ -396,7 +396,7 @@ void SetWorldJiminyFlags(void) {
 }
 void SetFloorJiminyFlags(void) {
     if ((gGameState.flags & 8) != 0) {
-        switch ((s8)gGameState.floor) {
+        switch (gGameState.floor) {
         case 0:
             SetJiminyFlag(1);
             break;
@@ -425,7 +425,7 @@ void SetFloorJiminyFlags(void) {
             break;
         }
     } else {
-        switch ((s8)gGameState.floor) {
+        switch (gGameState.floor) {
         case 0:
             SetJiminyFlag(0);
             SetJiminyFlag(0x26);
@@ -461,17 +461,17 @@ void AdvanceFloorStory(void) {
         gMapFloorState.flags = t;
 
         if ((gGameState.flags & 8) != 0) {
-            if ((s8)gGameState.floor == 0x0A) {
+            if (gGameState.floor == 0x0A) {
                 gMapFloorState.progress++;
             }
         } else {
-            if ((s8)gGameState.floor == 0) {
+            if (gGameState.floor == 0) {
                 gMapFloorState.room = 0xFC;
                 gMapFloorState.entrySide = 5;
                 return;
             }
 
-            if ((s8)gGameState.floor == 0x0C) {
+            if (gGameState.floor == 0x0C) {
                 gMapFloorState.progress++;
             }
         }
@@ -789,9 +789,9 @@ void EnterExitHall(void) {
         v = 0xFF;
     } else {
         if ((gGameState.flags & 8) != 0) {
-            v = sRikuWorldExitEvents[(s8)gGameState.floor];
+            v = sRikuWorldExitEvents[gGameState.floor];
         } else {
-            v = sSoraWorldExitEvents[(s8)gGameState.floor];
+            v = sSoraWorldExitEvents[gGameState.floor];
         }
     }
 
@@ -820,9 +820,9 @@ void InitMapFloorState(u8 a, u8 b) {
     s32 i;
     u16 t;
 
-    gMapFloorState.flags = gGameState.floors[(s8)gGameState.floor].flags;
-    gMapFloorState.world = gGameState.floors[(s8)gGameState.floor].world;
-    gMapFloorState.eventStep = gGameState.floors[(s8)gGameState.floor].eventStep;
+    gMapFloorState.flags = gGameState.floors[gGameState.floor].flags;
+    gMapFloorState.world = gGameState.floors[gGameState.floor].world;
+    gMapFloorState.eventStep = gGameState.floors[gGameState.floor].eventStep;
     gMapFloorState.room = a;
     gMapFloorState.entrySide = b;
 
@@ -883,7 +883,7 @@ void WarpToFloor(u8 a) {
 
 void SetFloorWorld(u8 a) {
     gMapFloorState.world = a;
-    gGameState.floors[(s8)gGameState.floor].world = a;
+    gGameState.floors[gGameState.floor].world = a;
 }
 
 void EnterFloorWorld(void) {
@@ -891,7 +891,7 @@ void EnterFloorWorld(void) {
     MapFloorRoom* p;
     u16 t;
 
-    if ((s8)gGameState.floor == 13) {
+    if (gGameState.floor == 13) {
         gGameState.floor = 0;
     }
 
@@ -913,9 +913,9 @@ void EnterFloorWorld(void) {
 }
 
 void StoreMapFloorState(void) {
-    gGameState.floors[(s8)gGameState.floor].flags = gMapFloorState.flags;
-    gGameState.floors[(s8)gGameState.floor].world = gMapFloorState.world;
-    gGameState.floors[(s8)gGameState.floor].eventStep = gMapFloorState.eventStep;
+    gGameState.floors[gGameState.floor].flags = gMapFloorState.flags;
+    gGameState.floors[gGameState.floor].world = gMapFloorState.world;
+    gGameState.floors[gGameState.floor].eventStep = gMapFloorState.eventStep;
 }
 
 void InitStartFloor(u8 a, u8 b) {
@@ -982,7 +982,7 @@ u8 GetMapWalkOutMode(void) {
             return 2;
         }
 
-        if ((gGameState.flags & 8) == 0 && (s8)gGameState.floor == 12) {
+        if ((gGameState.flags & 8) == 0 && gGameState.floor == 12) {
             SetFloorWorld(12);
             return 2;
         }
@@ -1063,7 +1063,7 @@ u8 IsAtTargetDoor(FldPos* p) {
     MapDoor* e;
 
     if ((s32)gMapRoomState->flags < 0) {
-        return (u32)gMapRoomState->flags >> 9 & 1;
+        return gMapRoomState->flags >> 9 & 1;
     }
 
     if (p->z != p->ground) {

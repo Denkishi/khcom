@@ -166,11 +166,11 @@ u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u1
     if (gSpriteWork->entryCount <= 127 && obj != NULL) {
         switch (((ObjTiles*)obj)->type) {
         case 0:
-            return DrawSpriteSharedTiles((s16)x, (s16)y, c, obj, e, f, g, h);
+            return DrawSpriteSharedTiles(x, y, c, obj, e, f, g, h);
         case 1:
-            return DrawSpriteAllocatedTiles((s16)x, (s16)y, c, obj, e, f, g, h);
+            return DrawSpriteAllocatedTiles(x, y, c, obj, e, f, g, h);
         case 2:
-            return DrawSpriteFrameTiles((s16)x, (s16)y, obj, e, f, g, h);
+            return DrawSpriteFrameTiles(x, y, obj, e, f, g, h);
         }
     }
     return 0;
@@ -868,11 +868,11 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d) {
         return 1;
     }
 
-    if ((s16)y + (s16)bottom < 0) {
+    if (y + (s16)bottom < 0) {
         return 1;
     }
 
-    if ((s16)y - (s16)top > 0xA0) {
+    if (y - (s16)top > 0xA0) {
         return 1;
     }
     return 0;
@@ -2669,7 +2669,7 @@ void LoadPalette(void* src, void* dst, u16 size) {
     s32 i;
 
     base = gFadeWork->slots;
-    count = (u16)size / 32;
+    count = size / 32;
     idx = ((s32)dst - 0x05000000) / 32;
     src = LoadPaletteWithEffect(src, dst, size);
 

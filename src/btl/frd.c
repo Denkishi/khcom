@@ -1680,7 +1680,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
 void FrdPanSpawnSparkle(FrdPanWork* work) {
     BtlObj sub;
 
-    if ((s16)work->stateTimer % 3 == 0) {
+    if (work->stateTimer % 3 == 0) {
         sub.x = work->body.x;
         sub.y = work->body.y;
         sub.z = work->body.z;

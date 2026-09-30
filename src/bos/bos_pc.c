@@ -5271,7 +5271,7 @@ void BosPcDraw(PcWork* work) {
                 t |= -256;
             }
 
-            y = (s16)t;
+            y = t;
             y = (s16)(y + cmd->y);
             y = (s16)(y + sy);
             if ((u16)(y + 7) <= 0xAE) {

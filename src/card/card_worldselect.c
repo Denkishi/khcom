@@ -488,10 +488,10 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         break;
     case A_BUTTON:
-        n = (u8)DoorAcceptsMapCard((struct MapCardAttributes*)&gMapCardDefs[w->card->args.baseCardId + (s16)sel].kind);
+        n = DoorAcceptsMapCard((struct MapCardAttributes*)&gMapCardDefs[w->card->args.baseCardId + sel].kind);
 
         if (n == 1) {
-            if (gMapCardCounts[w->card->args.baseCardId + (s16)sel] != 0) {
+            if (gMapCardCounts[w->card->args.baseCardId + sel] != 0) {
                 if (w->isEventDoor == 1) {
                     m4aSongNumStart(SONG_SYS_KETEI2);
 
@@ -502,7 +502,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
 
                     RemoveMapCard(w->card->args.baseCardId + sel);
 
-                    if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gMapCardDefs[w->card->args.baseCardId + (s16)sel].kind) == 1) {
+                    if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gMapCardDefs[w->card->args.baseCardId + sel].kind) == 1) {
                         w->remainingKeys = CountRemainingEventKeys();
                         w->eventKey->paidCount++;
                         w->eventKey->slideSteps = 8;
@@ -668,7 +668,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* w, void* a) {
     case A_BUTTON:
         if (w->card != NULL) {
             if (w->card->args.baseCardId >= 220) {
-                if ((u8)DoorAcceptsMapCard((struct MapCardAttributes*)&gMapCardDefs[w->card->args.baseCardId + 1].kind) == 1) {
+                if (DoorAcceptsMapCard((struct MapCardAttributes*)&gMapCardDefs[w->card->args.baseCardId + 1].kind) == 1) {
                     if (gMapCardCounts[w->card->args.baseCardId + 1] != 0) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(w->card->args.baseCardId + 1);
@@ -823,7 +823,7 @@ void MapSelect_2(MapSelectWork* w) {
             break;
         }
     }
-    if ((u8)IsMessageWindowOpen() == 0) {
+    if (IsMessageWindowOpen() == 0) {
         DrawSprite((s16)((w->x >> 8) - 23), (s16)((w->y >> 8) - 27), w->gfx, w->tiles, w->palette2, 0, 0, 41);
         DrawSprite((s16)((w->x2 >> 8) - 16), (s16)((w->y2 >> 8) - 12), w->gfx2, w->tiles5, w->palette3, 0, 0, 40);
     }

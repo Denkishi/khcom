@@ -79,7 +79,7 @@ s32 CloudTryJumpAway(CloudWork* work) {
 
     obj = gBtlWork->actor;
 
-    if ((u16)GetRandom() % 60 == 0) {
+    if (GetRandom() % 60 == 0) {
         GetEnemyTargetPosition(&work->base.actor, &x, &y, 0);
         HumFaceTarget(&work->base, 1);
 

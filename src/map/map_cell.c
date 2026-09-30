@@ -3148,7 +3148,7 @@ void MapFixCreateGimmicks(void* a) {
         return;
     }
 
-    if ((gGameState.flags & 8) || (s8)gGameState.floor != 0) {
+    if ((gGameState.flags & 8) || gGameState.floor != 0) {
         v.x = 0x18000;
         x = 0x11000;
     } else {
@@ -3167,7 +3167,7 @@ void MapFixCreateGimmicks(void* a) {
     e++;
 
     if (GetProgressFloor() != 0) {
-        if ((gGameState.flags & 8) || (s8)gGameState.floor != 0) {
+        if ((gGameState.flags & 8) || gGameState.floor != 0) {
             v.x = 0x1F000;
             x = 0x14000;
         } else {

@@ -376,7 +376,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             n = old + 1;
             count++;
         }
-        if ((s16)n >= (s16)w->slotCounts[slot]) {
+        if ((s16)n >= w->slotCounts[slot]) {
             n = 0;
         }
         c = FindNextAvailableSlot(w, slot, &n);
@@ -603,7 +603,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                     IncrementReloadCount(w);
                     if (gBtlWork->hcEffect == 10) {
                         w->reloadCounts[w->listIndex] -= 2;
-                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                        if (w->reloadCounts[w->listIndex] < 0) {
                             w->reloadCounts[w->listIndex] = 0;
                         }
                     }
@@ -623,7 +623,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                     IncrementReloadCount(w);
                     if (gBtlWork->hcEffect == 10) {
                         w->reloadCounts[w->listIndex] -= 2;
-                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                        if (w->reloadCounts[w->listIndex] < 0) {
                             w->reloadCounts[w->listIndex] = 0;
                         }
                     }
@@ -1075,7 +1075,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 IncrementReloadCount(w);
                 if (gBtlWork->hcEffect == 10) {
                     w->reloadCounts[w->listIndex] -= 2;
-                    if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                    if (w->reloadCounts[w->listIndex] < 0) {
                         w->reloadCounts[w->listIndex] = 0;
                     }
                 }

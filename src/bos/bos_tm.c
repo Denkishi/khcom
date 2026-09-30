@@ -118,11 +118,11 @@ u8 task_bos_tm_1(TmWork* w) {
     case 15:
         w->stepTimer++;
 
-        if ((s16)w->stepTimer > 8) {
+        if (w->stepTimer > 8) {
             w->stepTimer = 0;
             w->step++;
 
-            if ((s16)w->step > 7) {
+            if (w->step > 7) {
                 w->step = 0;
             }
         }
@@ -141,17 +141,17 @@ u8 task_bos_tm_1(TmWork* w) {
     case 7:
         w->stepTimer++;
 
-        if ((s16)w->stepTimer > 6) {
+        if (w->stepTimer > 6) {
             w->stepTimer = 0;
             w->step++;
 
-            if ((s16)w->step > 9) {
+            if (w->step > 9) {
                 w->step = 0;
             }
         }
         break;
     case 13:
-        if ((s16)w->step != 0) {
+        if (w->step != 0) {
             if (!CharaObjUpdateDefeat2()) {
                 EndBossDefeat();
                 return 0;

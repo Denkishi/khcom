@@ -115,7 +115,7 @@ void HumDraw(HumWork* work) {
     }
 
     if (work->state == 17) {
-        idx = ((s16)work->stateTimer >> 2) % 8;
+        idx = (work->stateTimer >> 2) % 8;
 
         if (work->stateTimer & 1) {
             work->flags |= 2;
@@ -432,7 +432,7 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             gBtlWork->rikuKeys |= 0x10;
             return 1;
         }
-    } else if ((u16)GetRandom() % 2 == 0) {
+    } else if (GetRandom() % 2 == 0) {
         if (count <= 1 && cards != 0) {
             gBtlWork->rikuKeys |= 0x10;
             return 1;

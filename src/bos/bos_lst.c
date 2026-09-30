@@ -2346,8 +2346,8 @@ void task_bos_lst_2(BosLstWork* work) {
     }
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
     DrawSprite(sx + sLstAnimDefs[anim].spriteX, sy + sLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, 0,
-               GetBattleSpritePriorityFlags(work->y + work->offsetY + ((s16)gBtlWork->bossPriorityOffset << 8)),
-               (u16)(-0x1004 - (((work->y + work->offsetY + ((s16)gBtlWork->bossPriorityOffset << 8)) >> 8) << 2)));
+               GetBattleSpritePriorityFlags(work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)),
+               (u16)(-0x1004 - (((work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)) >> 8) << 2)));
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
     k = idx;
     v = work->sub[k].hurtTimer;

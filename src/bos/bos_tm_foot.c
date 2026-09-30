@@ -567,8 +567,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 break;
             }
 
-            work->footFrame = sBosTmFootIdleFrames[(s16)work->tm->step];
-            work->footFrame2 = sBosTmFootIdleFrames[((s16)work->tm->step + 4) & 7];
+            work->footFrame = sBosTmFootIdleFrames[work->tm->step];
+            work->footFrame2 = sBosTmFootIdleFrames[(work->tm->step + 4) & 7];
             work->gfx = gUnk_09EF39DC[(s8)work->footFrame];
             work->gfx2 = gUnk_09EF39DC[(s8)work->footFrame2];
             work->body3.z =
@@ -602,8 +602,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
-            if ((s16)work->tm->step <= 3) {
-                BosTmFootApplyThrowStep(work, (s16)work->tm->step);
+            if (work->tm->step <= 3) {
+                BosTmFootApplyThrowStep(work, work->tm->step);
             } else if (n >= 66 && n <= 74) {
                 n -= 62;
                 BosTmFootApplyThrowStep(work, (s16)n);
@@ -622,8 +622,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
-            if ((s16)work->tm->step <= 3) {
-                BosTmFootApplyThrowStep(work, (s16)work->tm->step);
+            if (work->tm->step <= 3) {
+                BosTmFootApplyThrowStep(work, work->tm->step);
             } else if (n >= 96 && n <= 104) {
                 n -= 92;
                 BosTmFootApplyThrowStep(work, (s16)n);
@@ -642,8 +642,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         if (work->tm->stateTimer != 0) {
             n = work->tm->step;
 
-            if ((s16)work->tm->step <= 2) {
-                func_080BA8C8(work, (s16)work->tm->step);
+            if (work->tm->step <= 2) {
+                func_080BA8C8(work, work->tm->step);
             } else if (n >= 41 && n <= 46) {
                 n -= 38;
                 func_080BA8C8(work, (s16)n);
@@ -662,19 +662,19 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             work->gfx = gUnk_09EF39DC[1];
             work->gfx2 = gUnk_09EF39DC[1];
             work->body.z = work->tm->baseZ +
-                            ((sBosTmFootSteps[(s16)work->tm->step].dz - 4) << 8);
+                            ((sBosTmFootSteps[work->tm->step].dz - 4) << 8);
             work->body2.z = work->tm->baseZ +
-                            ((sBosTmFootSteps[(s16)work->tm->step].dz2 - 4) << 8);
+                            ((sBosTmFootSteps[work->tm->step].dz2 - 4) << 8);
             work->body3.z = work->tm->baseZ + 0x2800;
             work->body4.z = work->tm->baseZ + 0x2800;
             break;
         }
 
-        if ((s16)work->tm->step <= 2) {
-            work->gfx = gUnk_09EF39DC[sBosTmFootSteps[(s16)work->tm->step].gfxIndex];
-            work->gfx2 = gUnk_09EF39DC[sBosTmFootSteps[(s16)work->tm->step].gfx2Index];
-            work->body.z += sBosTmFootSteps[(s16)work->tm->step].dz << 8;
-            work->body2.z += sBosTmFootSteps[(s16)work->tm->step].dz2 << 8;
+        if (work->tm->step <= 2) {
+            work->gfx = gUnk_09EF39DC[sBosTmFootSteps[work->tm->step].gfxIndex];
+            work->gfx2 = gUnk_09EF39DC[sBosTmFootSteps[work->tm->step].gfx2Index];
+            work->body.z += sBosTmFootSteps[work->tm->step].dz << 8;
+            work->body2.z += sBosTmFootSteps[work->tm->step].dz2 << 8;
         }
 
         if (work->tm->hurtTimer <= 2) {
@@ -697,7 +697,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
         break;
     case 13:
-        if ((s16)work->tm->step == 0) {
+        if (work->tm->step == 0) {
             func_080BA2B0(work);
         }
         break;

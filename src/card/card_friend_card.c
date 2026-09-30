@@ -249,7 +249,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if ((u8)ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
+    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
                           &w->floor) != 0) {
         w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
@@ -355,7 +355,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if ((u8)ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
+    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
                           &w->floor) != 0) {
         w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
@@ -759,9 +759,9 @@ void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
     if (gCardBattleState != NULL) {
         if (gCardBattleState->addedFriendCards[0] <= 4) {
             if (gCardBattleState->friendCardCount == 0) {
-                args[0] = (s16)x << 8;
-                args[1] = (s16)y << 8;
-                args[2] = (s16)z << 8;
+                args[0] = x << 8;
+                args[1] = y << 8;
+                args[2] = z << 8;
                 args[3] = sFriendCardIds[idx] + GetRandom() % 9;
                 TaskCreate(pool, &gTaskDescFriendCard, args);
                 gCardBattleState->friendCardCount++;
@@ -787,9 +787,9 @@ void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
 
     if (gCardBattleState != NULL && gCardBattleState->gimmickCardCount == 0) {
         gCardBattleState->gimmickCardCount++;
-        args[0] = (s16)a << 8;
-        args[1] = (s16)b << 8;
-        args[2] = (s16)c << 8;
+        args[0] = a << 8;
+        args[1] = b << 8;
+        args[2] = c << 8;
         args[3] = d;
         TaskCreate(pool, &gTaskDescGimmickCard, args);
     }

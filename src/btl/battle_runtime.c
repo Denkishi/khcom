@@ -696,7 +696,7 @@ void _08019CB4(void) {
     }
     switch ((u32)gBtlWork->phase) {
     case 0:
-        if ((s16)gBtlWork->phaseStep == 0) {
+        if (gBtlWork->phaseStep == 0) {
             if (!(gBtlWork->flags & 0x800000000ULL)) {
                 gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, 0);
             }
@@ -705,7 +705,7 @@ void _08019CB4(void) {
         if (FadeIsActive()) {
             break;
         }
-        if ((s16)gBtlWork->phaseStep == 1) {
+        if (gBtlWork->phaseStep == 1) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) {
                     FadeSetPaletteExcluded(i, 1);
@@ -716,7 +716,7 @@ void _08019CB4(void) {
         if (IsTaskActiveNamed(gBtlWork->task, gTaskDescBtlStart.name)) {
             break;
         }
-        if ((s16)gBtlWork->phaseStep == 2) {
+        if (gBtlWork->phaseStep == 2) {
             gBtlWork->flags |= 0x40000ULL;
             gBtlWork->flags &= ~0x4000000ULL;
             TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, 0);
@@ -759,7 +759,7 @@ void _08019CB4(void) {
             RequestOpenCards();
             func_080838E8();
             gBtlWork->phaseStep = 3;
-        } else if ((s16)gBtlWork->phaseStep == 3) {
+        } else if (gBtlWork->phaseStep == 3) {
             gBtlWork->phase = 1;
             gBtlWork->phaseStep = 0;
             if (gGameState.roomEffect == 5) {
@@ -770,7 +770,7 @@ void _08019CB4(void) {
     case 1:
         break;
     case 4:
-        if ((s16)gBtlWork->phaseStep == 0) {
+        if (gBtlWork->phaseStep == 0) {
             RequestCloseCards();
             RequestBossCardClose();
             gBtlWork->flags &= ~0x40000ULL;
@@ -784,7 +784,7 @@ void _08019CB4(void) {
             gBtlWork->phaseStep = 1;
             gBtlWork->hcEffect = 0;
             gBtlWork->flags |= 0x100000000000000ULL;
-        } else if ((s16)gBtlWork->phaseStep == 1) {
+        } else if (gBtlWork->phaseStep == 1) {
             gBtlWork->phaseStep = 2;
         } else {
             if (BgFxIsActive()) {
@@ -797,7 +797,7 @@ void _08019CB4(void) {
                 break;
             }
             if (gBtlWork->flags & 0x8000000000000ULL) {
-                if ((s16)gBtlWork->phaseStep == 2) {
+                if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescPremireChance, 0);
                     gBtlWork->flags |= 0x4000000ULL;
@@ -813,7 +813,7 @@ void _08019CB4(void) {
                 break;
             }
             if (gBtlWork->pendingLevelUps != 0) {
-                if ((s16)gBtlWork->phaseStep == 2) {
+                if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, 0);
                     gBtlWork->flags |= 0x4000000ULL;
@@ -822,7 +822,7 @@ void _08019CB4(void) {
                 }
                 break;
             }
-            if ((s16)gBtlWork->phaseStep == -1) {
+            if (gBtlWork->phaseStep == -1) {
                 if (!IsTaskActive(gBtlWork->task)) {
                     BtlObj* healed;
                     gBtlWork->phaseStep = 2;
@@ -832,11 +832,11 @@ void _08019CB4(void) {
                 }
                 break;
             }
-            if ((s16)gBtlWork->phaseStep == 2 && !FadeIsActive()) {
+            if (gBtlWork->phaseStep == 2 && !FadeIsActive()) {
                 gBtlWork->flags |= 0x4000000ULL;
                 gBtlWork->hitStop = 99;
                 gBtlWork->phaseStep = 3;
-            } else if ((s16)gBtlWork->phaseStep == 3) {
+            } else if (gBtlWork->phaseStep == 3) {
                 SetBackdropColor(0, 0, 0);
                 FadeStartOut(0, 15);
                 FadeLock();
@@ -847,7 +847,7 @@ void _08019CB4(void) {
         }
         break;
     case 3:
-        if ((s16)gBtlWork->phaseStep == 0) {
+        if (gBtlWork->phaseStep == 0) {
             RequestCloseCards();
             RequestBossCardClose();
             gBtlWork->flags &= ~0x40000ULL;
@@ -855,13 +855,13 @@ void _08019CB4(void) {
             gBtlWork->actor2 = 0;
             gBtlWork->pendingEnemies = 0;
         }
-        if ((s16)gBtlWork->phaseStep == 140) {
+        if (gBtlWork->phaseStep == 140) {
             FadeStartOut(1, 100);
             FadeLock();
             gBtlWork->flags |= 0x4000000ULL;
             gBtlWork->flags |= 0x400000ULL;
             gBtlWork->hitStop = 100;
-        } else if ((s16)gBtlWork->phaseStep > 140 && !FadeIsActive()) {
+        } else if (gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
             if (gDebugFlags & 1) {
                 ModeRequest(&gModeChkbtl, 0);

@@ -680,7 +680,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
             args[8] = 2;
             CreatePrizeMapCardTask(&w->tasks, args);
             gGameState.progression.unk_82 |= 0x20;
-        } else if ((s8)gGameState.floor == 0) {
+        } else if (gGameState.floor == 0) {
             if (CountZeroValueMapCards() == 0) {
                 *(PrizeCardArgs*)args = w->args;
                 args[8] = PickPrizeMapCardKindForWorld(gGameState.world, 1);
@@ -1114,7 +1114,7 @@ static u8 PrizeCard_1(PrizeMapCardWork* w, void* a) {
     if (w->posZ - 8 > w->groundZ) {
         w->posZ = w->groundZ - 8;
         w->vz = -((w->vz * 217) >> 8);
-        w->moveAngle = (u8)GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
+        w->moveAngle = GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
         w->moveAngle += GetRandom() % 65 - 32;
 
         if (w->vz > -0x200) {

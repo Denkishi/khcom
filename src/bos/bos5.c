@@ -981,9 +981,9 @@ u8 BosGaUpdateAssemble(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i != 1) {
-                    if ((s16)e->unk_15C > 0) {
+                    if (e->unk_15C > 0) {
                         e->unk_15C--;
-                    } else if ((s16)e->unk_15C == 0) {
+                    } else if (e->unk_15C == 0) {
                         e->baseX += e->baseVx;
                         e->baseY += e->baseVy;
                         e->baseZ += e->baseVz;
@@ -4203,7 +4203,7 @@ u8 task_bos_md_fire_1(MdFireWork* work) {
     BosMdFireHandleReaction(work);
     result = BosMdFireUpdateMotion(work);
 
-    if ((s16)work->flashTimer > 0) {
+    if (work->flashTimer > 0) {
         work->flashTimer--;
     }
 

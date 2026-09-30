@@ -332,7 +332,7 @@ void SoundInit(SoundInfo* soundInfo) {
     soundInfo->CgbSound = DummyFunc;
     soundInfo->CgbOscOff = (CgbOscOffFunc)DummyFunc;
     soundInfo->MidiKeyToCgbFreq = (MidiKeyToCgbFreqFunc)DummyFunc;
-    soundInfo->ExtVolPit = (ExtVolPitFunc)DummyFunc;
+    soundInfo->ExtVolPit = DummyFunc;
 
     MPlayJumpTableCopy(gMPlayJumpTable);
 
@@ -643,7 +643,7 @@ void FadeOutBody(MusicPlayerInfo* mplayInfo) {
     mplayInfo->fadeOC = mplayInfo->fadeOI;
 
     if (mplayInfo->fadeOV & FADE_IN) {
-        if ((u16)(mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT)) {
+        if ((mplayInfo->fadeOV += (4 << FADE_VOL_SHIFT)) >= (64 << FADE_VOL_SHIFT)) {
             mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT);
             mplayInfo->fadeOI = 0;
         }

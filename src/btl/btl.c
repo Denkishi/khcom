@@ -435,7 +435,7 @@ void task_btl_area_2(BtlAreaWork* work) {
                   gBtlWork->z3 + (gBtlWork->areaHalfZ << 8));
     DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 2, 0x101);
 
-    if ((u8)gBtlWork->soraOwnsPlay != 0) {
+    if (gBtlWork->soraOwnsPlay != 0) {
         e = ListPoolFirst(&gBtlWork->pool);
 
         while (e != NULL) {
@@ -749,7 +749,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
         e->maxHp = gGameState.progression.maxHp;
         e->hp = gGameState.hp;
 
-        if ((s16)e->hp > (s16)e->maxHp) {
+        if (e->hp > e->maxHp) {
             e->hp = e->maxHp;
         }
     }
@@ -1145,7 +1145,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             max = p->maxHp;
 
             if ((s16)hp < (s16)max && work->frameCount % 120 == 0) {
-                n = ((s16)p->maxHp - (s16)p->hp) << 13 >> 16;
+                n = (p->maxHp - p->hp) << 13 >> 16;
 
                 if (n <= 0) {
                     n = 1;
@@ -1156,7 +1156,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->hp = t;
                 }
 
-                if ((s16)p->hp > (s16)max) {
+                if (p->hp > (s16)max) {
                     p->hp = max;
                 }
 
@@ -2824,7 +2824,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 break;
             }
 
-            if ((s16)p->hp > (s16)p->maxHp) {
+            if (p->hp > p->maxHp) {
                 p->hp = p->maxHp;
             }
 
@@ -4179,7 +4179,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 uv = (u16)p->maxHp;
                 p->hp = ((s16)uv >> 2) + p->hp;
 
-                if ((s16)p->hp > (s16)uv) {
+                if (p->hp > (s16)uv) {
                     p->hp = uv;
                 }
             }
@@ -4495,7 +4495,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeStartIn(2, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
-            p->hp = (s16)p->maxHp / 4;
+            p->hp = p->maxHp / 4;
             p->flags &= ~0x100;
             ClearBtlObjActionFlags(p);
             CreateBtlPopTask(p, 10);
@@ -4566,7 +4566,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 44) {
-            if ((s16)p->hp <= 0) {
+            if (p->hp <= 0) {
                 work->state = 14;
             } else {
                 work->state = 89;
@@ -6772,7 +6772,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         e->maxHp = gGameState.progression.maxHp;
         e->hp = gGameState.hp;
 
-        if ((s16)e->hp > (s16)e->maxHp) {
+        if (e->hp > e->maxHp) {
             e->hp = e->maxHp;
         }
     }
@@ -7226,7 +7226,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         hp = p->hp;
 
         if ((s16)hp > 0 && (s16)hp < (s16)(max = p->maxHp) && work->frameCount % 120 == 0) {
-            n = ((s16)p->maxHp - (s16)p->hp) << 13 >> 16;
+            n = (p->maxHp - p->hp) << 13 >> 16;
 
             if (n <= 0) {
                 n = 1;
@@ -7257,7 +7257,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 uv = e->hp;
 
-                if ((s16)e->hp > 1) {
+                if (e->hp > 1) {
                     e->hp = uv - 1;
                 }
             } else {
@@ -7269,7 +7269,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 while (e != NULL) {
                     uv = e->hp;
 
-                    if ((s16)e->hp > 1) {
+                    if (e->hp > 1) {
                         e->hp = uv - 1;
                     }
 
@@ -9235,7 +9235,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 uv = p->hp;
 
-                if ((s16)p->hp > 1) {
+                if (p->hp > 1) {
                     p->hp = uv - 1;
                 }
             }
@@ -10250,7 +10250,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
             uv = p->hp;
 
-            if ((s16)p->hp > 1) {
+            if (p->hp > 1) {
                 p->hp = uv - 1;
             }
 
@@ -10292,7 +10292,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
             uv = p->hp;
 
-            if ((s16)p->hp > 1) {
+            if (p->hp > 1) {
                 p->hp = uv - 1;
             }
 
@@ -10414,7 +10414,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             FadeStartIn(2, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
-            p->hp = (s16)p->maxHp / 4;
+            p->hp = p->maxHp / 4;
             p->flags &= 0xFFFFFFFFFFFFFEFFLL;
             ClearBtlObjActionFlags(p);
             CreateBtlPopTask(p, 10);

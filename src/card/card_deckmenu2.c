@@ -648,7 +648,7 @@ s16 CountActiveDeckCards(s32 index) {
     case 0:
         for (i = 0; i <= 98; i++) {
             if (cards[i] != 0xFFFF) {
-                if ((u8)gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category <= 2) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category <= 2) {
                     count = ((count << 16) + 0x10000) >> 16;
                 }
             }
@@ -657,7 +657,7 @@ s16 CountActiveDeckCards(s32 index) {
     case 1:
         for (i = 0; i <= 98; i++) {
             if (cards[i] != 0xFFFF) {
-                if ((u8)gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == 3) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == 3) {
                     count = ((count << 16) + 0x10000) >> 16;
                 }
             }
@@ -1285,7 +1285,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* w, void* a) {
         w->step++;
         break;
     case 4:
-        DrawDeckEquipMarker((u8)GetActiveDeckIndex());
+        DrawDeckEquipMarker(GetActiveDeckIndex());
         DrawCardTotals();
         w->x2 = 0x4800;
         w->y2 = 0x2800;
@@ -1370,7 +1370,7 @@ u8 UpdateDeckMenuEnterDeckGrid(DeckMenuWork* w, void* a) {
 u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim2);
     w->gfx2 = AnimUpdate(&w->anim3);
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         TaskPoolUpdate(&w->taskpool);
         return 1;
     }
@@ -1405,14 +1405,14 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
             w->exitRequested = 0;
         }
     }
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_UP:
         if (w->cursorRow > 0) {
             w->cursorRow--;
             w->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         } else {
-            if ((u8)ScrollGridUp(w, 1) == 0) {
+            if (ScrollGridUp(w, 1) == 0) {
                 if (w->holding == 0) {
                     w->cursorCol = w->categoryFilter;
                     w->timer = 1;
@@ -1479,7 +1479,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
         }
         break;
     }
-    switch ((u16)GetKeysPressed()) {
+    switch (GetKeysPressed()) {
     case B_BUTTON:
         if (w->holding == 0) {
             w->cursorCol = 0;
@@ -1510,7 +1510,7 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
             w->y3 = gDeckGridRowY[w->heldRow] << 8;
             AnimStart(&w->anim2, 4, 1);
         } else {
-            if ((u8)SwapHeldDeckCard(w) != 0) {
+            if (SwapHeldDeckCard(w) != 0) {
                 m4aSongNumStart(SONG_SYS_KETEI2);
                 w->holding = 0;
                 AnimStart(&w->anim2, 0, 1);
@@ -1888,7 +1888,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
             return 1;
         }
 
-        if ((u8)CheckCardDeletable(w) == 0) {
+        if (CheckCardDeletable(w) == 0) {
             return 1;
         }
 
@@ -2003,7 +2003,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim2);
     w->gfx2 = AnimUpdate(&w->anim3);
 
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_LEFT:
     case (DPAD_LEFT | DPAD_UP):
     case (DPAD_LEFT | DPAD_DOWN):
@@ -2070,7 +2070,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
         break;
     }
 
-    switch ((u16)GetKeysPressed()) {
+    switch (GetKeysPressed()) {
     case B_BUTTON:
         SetDeckMenuFrameCursor(w, 0);
         n = w->savedCol;
@@ -2086,7 +2086,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case A_BUTTON:
-        if ((u16)GetDeckCardCount(w->deckIndex) <= 98) {
+        if (GetDeckCardCount(w->deckIndex) <= 98) {
             AddSelectedValueCardToDeck(w);
             DrawDeckCardCount(w->deckIndex);
             DrawDeckCpCost(w->deckIndex);
@@ -2438,7 +2438,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
             w->exitRequested = 0;
         }
     }
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_UP:
         if (w->cursorRow > 0) {
             w->cursorRow--;
@@ -2486,7 +2486,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CANSEL);
         return 1;
     }
-    switch ((u16)GetKeysPressed()) {
+    switch (GetKeysPressed()) {
     case A_BUTTON:
         w->timer = 1;
         w->prevView = w->view;
@@ -2917,16 +2917,16 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
         }
     }
     if (w->step == 0) {
-        switch ((u16)GetKeysRepeat()) {
+        switch (GetKeysRepeat()) {
         case DPAD_UP:
             if (w->cursorRow > 0) {
-                if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
                     w->cursorRow--;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                 }
             } else {
-                if ((u8)ScrollGridUp(w, 1) == 0) {
+                if (ScrollGridUp(w, 1) == 0) {
                     w->cursorCol = w->categoryFilter;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -2942,13 +2942,13 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
             break;
         case DPAD_DOWN:
             if (w->cursorRow <= 2) {
-                if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
                     w->cursorRow++;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                 }
             } else {
-                if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
                     ScrollGridDown(w);
                 }
             }
@@ -2956,7 +2956,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
             break;
         case DPAD_LEFT:
             if (w->cursorCol > 0) {
-                if ((u8)IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
+                if (IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
                     w->cursorCol--;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -2969,7 +2969,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
                 w->timer = 1;
                 return 1;
             }
-            if ((u8)IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
+            if (IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
                 w->cursorCol++;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -2977,7 +2977,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
             ShowCollectionCardPreview(w);
             break;
         }
-        switch ((u16)GetKeysPressed()) {
+        switch (GetKeysPressed()) {
         case A_BUTTON:
             if ((u8)IsCardAtCursor(w) != 0) {
                 w->savedCol = w->cursorCol;
@@ -3262,7 +3262,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
             w->cursorRow--;
             w->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-        } else if ((u8)ScrollGridUp(w, 1) == 0) {
+        } else if (ScrollGridUp(w, 1) == 0) {
             v = w->categoryFilter;
             w->cursorCol = v;
             w->timer = 1;
@@ -3518,16 +3518,16 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
             w->exitRequested = 0;
         }
     }
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_UP:
         if (w->cursorRow > 0) {
-            if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
                 w->cursorRow--;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if ((u8)ScrollGridUp(w, 1) == 0) {
+            if (ScrollGridUp(w, 1) == 0) {
                 w->cursorCol = w->categoryFilter;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3543,13 +3543,13 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
         break;
     case DPAD_DOWN:
         if (w->cursorRow <= 2) {
-            if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
                 w->cursorRow++;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if ((u8)IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
                 ScrollGridDown(w);
             }
         }
@@ -3557,7 +3557,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
         break;
     case DPAD_LEFT:
         if (w->cursorCol > 0) {
-            if ((u8)IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
+            if (IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
                 w->cursorCol--;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3570,7 +3570,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
             w->timer = 1;
             return 1;
         }
-        if ((u8)IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
+        if (IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
             w->cursorCol++;
             w->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3578,7 +3578,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
         ShowCollectionCardPreview(w);
         break;
     }
-    switch ((u16)GetKeysPressed()) {
+    switch (GetKeysPressed()) {
     case A_BUTTON:
         if ((u8)IsCardAtCursor(w) != 0) {
             w->savedCol = w->cursorCol;
@@ -6408,7 +6408,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
         InitTextSlots(w->textSlots6, 8);
         CopyDeckNameToBuffer(w);
         w->textSlotCount6 = LoadTextSlots(w->nameBuffer, w->textSlots6);
-        w->x10 = ((s16)GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
+        w->x10 = (GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
         break;
     case 1:
 #ifdef VERSION_JP
@@ -6568,19 +6568,19 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
 #endif
     w->gfx9 = AnimUpdate(&w->anim4);
     w->gfx = AnimUpdate(&w->anim2);
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_LEFT:
         w->keyCursorSteps = 1;
         w->cursor.parts.x--;
         switch (w->keyboardPage) {
         case 0:
         case 1:
-            if ((u8)WrapKanaKeyboardCursor(w, 32) != 0) {
+            if (WrapKanaKeyboardCursor(w, 32) != 0) {
                 AnimStart(&w->anim4, 0, 1);
             }
             break;
         case 2:
-            if ((u8)WrapKeyboardCursor(w, 32) != 0) {
+            if (WrapKeyboardCursor(w, 32) != 0) {
                 AnimStart(&w->anim4, 0, 1);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
@@ -6604,12 +6604,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         switch (w->keyboardPage) {
         case 0:
         case 1:
-            if ((u8)WrapKanaKeyboardCursor(w, 16) != 0) {
+            if (WrapKanaKeyboardCursor(w, 16) != 0) {
                 AnimStart(&w->anim4, 0, 1);
             }
             break;
         case 2:
-            if ((u8)WrapKeyboardCursor(w, 16) != 0) {
+            if (WrapKeyboardCursor(w, 16) != 0) {
                 AnimStart(&w->anim4, 0, 1);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
@@ -6642,12 +6642,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         switch (w->keyboardPage) {
         case 0:
         case 1:
-            if ((u8)WrapKanaKeyboardCursor(w, 64) != 0) {
+            if (WrapKanaKeyboardCursor(w, 64) != 0) {
                 AnimStart(&w->anim4, 0, 1);
             }
             break;
         case 2:
-            if ((u8)WrapKeyboardCursor(w, 64) != 0) {
+            if (WrapKeyboardCursor(w, 64) != 0) {
                 AnimStart(&w->anim4, 0, 1);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
@@ -6671,12 +6671,12 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         switch (w->keyboardPage) {
         case 0:
         case 1:
-            if ((u8)WrapKanaKeyboardCursor(w, 128) != 0) {
+            if (WrapKanaKeyboardCursor(w, 128) != 0) {
                 AnimStart(&w->anim4, 0, 1);
             }
             break;
         case 2:
-            if ((u8)WrapKeyboardCursor(w, 128) != 0) {
+            if (WrapKeyboardCursor(w, 128) != 0) {
                 AnimStart(&w->anim4, 0, 1);
 #ifdef VERSION_EU
                 w->onEndKey = 0;
@@ -6695,11 +6695,11 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         break;
     }
-    switch ((u16)GetKeysPressed()) {
+    switch (GetKeysPressed()) {
     case B_BUTTON:
         DeleteLastNameChar(w);
         w->textSlotCount6 = LoadTextSlots(w->nameBuffer, w->textSlots6);
-        w->x10 = ((s16)GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
+        w->x10 = (GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
         break;
     case A_BUTTON:
 #ifdef VERSION_EU
@@ -6714,7 +6714,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         } else {
             if ((u8)AppendKeyboardChar(w) != 0) {
                 w->textSlotCount6 = LoadTextSlots(w->nameBuffer, w->textSlots6);
-                w->x10 = ((s16)GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
+                w->x10 = (GetTextSlotsWidth(w->textSlots6, w->textSlotCount6) << 8) + 0x8300;
             } else {
                 w->cursor.parts.x = 14;
 #ifdef VERSION_EU

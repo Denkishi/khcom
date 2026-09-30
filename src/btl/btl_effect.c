@@ -3822,7 +3822,7 @@ void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w) {
     gBgFx->flags |= 8;
 }
 void BgFxUpdateKama(void) {
-    if ((s16)gBtlWork->hitStop != 0) {
+    if (gBtlWork->hitStop != 0) {
         BgFxUpdateBase();
         return;
     }

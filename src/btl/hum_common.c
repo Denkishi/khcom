@@ -385,7 +385,7 @@ s32 HumUpdate(HumWork* work) {
         break;
     case 4:
         if (work->stateTimer == 0) {
-            BgFxStartHumDefeat(actor->x, actor->y + actor->z - ((s16)actor->centerHeight << 8));
+            BgFxStartHumDefeat(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
@@ -419,7 +419,7 @@ s32 HumUpdate(HumWork* work) {
         break;
     case 6:
         if (work->stateTimer == 0) {
-            BgFxStartBossDeath(actor->x, actor->y + actor->z - ((s16)actor->centerHeight << 8));
+            BgFxStartBossDeath(actor->x, actor->y + actor->z - (actor->centerHeight << 8));
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
         BtlMapFollowPosition(actor->x, actor->y, actor->z);

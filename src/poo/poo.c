@@ -6339,7 +6339,7 @@ void PooPrizeUpdateBounce(PooPrizeWork* w) {
             m4aSongNumStart(SONG_SYS_POWER_GET);
             gGameState.hp += w->amount;
 
-            if (gGameState.hp > (s16)gGameState.progression.maxHp) {
+            if (gGameState.hp > gGameState.progression.maxHp) {
                 gGameState.hp = gGameState.progression.maxHp;
             }
             break;
@@ -8101,8 +8101,8 @@ TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",
     (TaskInitFunc)task_poo_mapanime_0,
     (TaskUpdateFunc)task_poo_mapanime_1,
-    (TaskDrawFunc)task_poo_mapanime_2,
-    (TaskDestroyFunc)task_poo_mapanime_3,
+    task_poo_mapanime_2,
+    task_poo_mapanime_3,
     sizeof(PooMapAnimeWork),
 };
 

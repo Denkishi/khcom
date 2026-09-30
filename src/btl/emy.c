@@ -3625,9 +3625,9 @@ void task_emy_29_0(Emy29Work* work, void* obj) {
 void Emy29MoveToPose(Emy29Work* work, s16 anim, s16 dx, s16 dy, s16 dz) {
     if (work->steps > 0) {
         AnimChange(&work->base.anim, anim, 0);
-        ApproachValue(&work->base.actor.x, work->base.actor.originX + ((s16)dx << 8), work->steps);
-        ApproachValue(&work->base.actor.y, work->base.actor.originY + ((s16)dy << 8), work->steps);
-        ApproachValue(&work->base.actor.z, (s16)dz << 8, work->steps);
+        ApproachValue(&work->base.actor.x, work->base.actor.originX + (dx << 8), work->steps);
+        ApproachValue(&work->base.actor.y, work->base.actor.originY + (dy << 8), work->steps);
+        ApproachValue(&work->base.actor.z, dz << 8, work->steps);
         work->steps--;
     } else {
         work->steps = 8;

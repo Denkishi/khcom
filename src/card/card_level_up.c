@@ -552,7 +552,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     }
                     w->state = 1;
                     if (!(gGameState.flags & 8)) {
-                        if ((s16)gGameState.progression.maxHp > 559) {
+                        if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -592,7 +592,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[5] = 0;
 #endif
                             w->optionEnabled[2] = 0;
-                        } else if ((u8)IsLevelUpStockUnlocked() == 0) {
+                        } else if (IsLevelUpStockUnlocked() == 0) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -611,7 +611,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         w->palette = LoadObjPalette(gUnk_09613F98, 32);
                         w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
                     } else {
-                        if ((s16)gGameState.progression.maxHp > 559) {
+                        if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -627,7 +627,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
 #endif
                         }
-                        if ((s16)gGameState.progression.ap > 29) {
+                        if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -651,7 +651,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
 #endif
                         }
-                        if ((s16)gGameState.progression.dp > 299) {
+                        if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1487,7 +1487,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
         }
         w->state = 1;
         if (!(gGameState.flags & 8)) {
-            if ((s16)gGameState.progression.maxHp > 559) {
+            if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1527,7 +1527,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[5] = 0;
 #endif
                 w->optionEnabled[2] = 0;
-            } else if ((u8)IsLevelUpStockUnlocked() == 0) {
+            } else if (IsLevelUpStockUnlocked() == 0) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1546,7 +1546,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->palette = LoadObjPalette(gUnk_09613F98, 32);
             w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
         } else {
-            if ((s16)gGameState.progression.maxHp > 559) {
+            if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1562,7 +1562,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
 #endif
             }
-            if ((s16)gGameState.progression.ap > 29) {
+            if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1586,7 +1586,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
 #endif
             }
-            if ((s16)gGameState.progression.dp > 299) {
+            if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else

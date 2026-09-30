@@ -504,20 +504,20 @@ void AddPickedCardToSoraDeck(CardBattleWork* w) {
     c = w->slots[0];
 
     if (gCardBattleState->pickedGimmickCardId == 0x28F) {
-        c[(s16)w->slotCounts[0] - 5].cardId = 0x28F;
-        c[(s16)w->slotCounts[0] - 5].index = (s16)w->slotCounts[0] - 5;
-        c[(s16)w->slotCounts[0] - 5].unk_06 = 0;
-        c[(s16)w->slotCounts[0] - 5].stocked = 0;
-        c[(s16)w->slotCounts[0] - 5].removed = 0;
-        c[(s16)w->slotCounts[0] - 5].used = 0;
+        c[w->slotCounts[0] - 5].cardId = 0x28F;
+        c[w->slotCounts[0] - 5].index = w->slotCounts[0] - 5;
+        c[w->slotCounts[0] - 5].unk_06 = 0;
+        c[w->slotCounts[0] - 5].stocked = 0;
+        c[w->slotCounts[0] - 5].removed = 0;
+        c[w->slotCounts[0] - 5].used = 0;
         gCardBattleState->pickedGimmickCardId = 0x3B6;
     } else {
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].cardId = gCardBattleState->pickedFriendCardId;
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].index = gCardBattleState->addedFriendCards[0] + ((s16)w->slotCounts[0] - 14);
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].unk_06 = 0;
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].stocked = 0;
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].removed = 0;
-        c[(s16)w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].used = 0;
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].cardId = gCardBattleState->pickedFriendCardId;
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].index = gCardBattleState->addedFriendCards[0] + (w->slotCounts[0] - 14);
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].unk_06 = 0;
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].stocked = 0;
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].removed = 0;
+        c[w->slotCounts[0] - 14 + gCardBattleState->addedFriendCards[0]].used = 0;
         gCardBattleState->pickedFriendCardId = 0x3B6;
         gCardBattleState->addedFriendCards[0]++;
     }
@@ -679,7 +679,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
     cur = (s16)gSoraSelectedCard->args.index;
     n = cur + 1;
 
-    if ((s16)n >= (s16)w->slotCounts[b]) {
+    if ((s16)n >= w->slotCounts[b]) {
         n = 0;
     }
 
@@ -988,7 +988,7 @@ s32 UseSoraCard(CardBattleWork* w) {
     }
     if (gSoraSelectedCard->premium == 1) {
         gSoraSelectedCard->args.slot->removed = 1;
-        if ((u16)CountRemainingAttackCards(w, 0) == 0) {
+        if (CountRemainingAttackCards(w, 0) == 0) {
             gSoraSelectedCard->args.slot->removed = 0;
         }
     }
@@ -1048,7 +1048,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         prev = gSoraSelectedCard->args.index;
         id = prev + 1;
 
-        if (id >= (s16)w->slotCounts[w->listIndex]) {
+        if (id >= w->slotCounts[w->listIndex]) {
             id = 0;
         }
 
@@ -1092,7 +1092,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        if ((u16)FadeGetAmount() == 0) {
+        if (FadeGetAmount() == 0) {
             FadeFromAmount(2, 16, 20);
         }
     }
@@ -1192,7 +1192,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
         prev = gSoraSelectedCard->args.index;
         id = prev + 1;
 
-        if (id >= (s16)w->slotCounts[w->listIndex]) {
+        if (id >= w->slotCounts[w->listIndex]) {
             id = 0;
         }
 
@@ -1294,7 +1294,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
         prev = gSoraSelectedCard->args.index;
         id = prev + 1;
 
-        if (id >= (s16)w->slotCounts[w->listIndex]) {
+        if (id >= w->slotCounts[w->listIndex]) {
             id = 0;
         }
 
@@ -1450,7 +1450,7 @@ s32 StockSoraCard(CardBattleWork* w) {
         prev = gSoraSelectedCard->args.index;
         id = prev + 1;
 
-        if (id >= (s16)w->slotCounts[w->listIndex]) {
+        if (id >= w->slotCounts[w->listIndex]) {
             id = 0;
         }
 
@@ -1493,7 +1493,7 @@ s32 StockSoraCard(CardBattleWork* w) {
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        if ((u16)FadeGetAmount() == 0) {
+        if (FadeGetAmount() == 0) {
             FadeFromAmount(2, 16, 20);
         }
     }
@@ -2461,9 +2461,9 @@ void RemoveItemCards(CardBattleWork* w) {
 u8 AddBreakDarkPoints(void) {
     if (gGameState.flags & 8) {
         if (!(gBtlWork->flags & 0x800000000000)) {
-            gBtlWork->darkPoints += (s8)gBtlWork->breakDifference;
-        } else if ((s8)gBtlWork->breakDifference < 0) {
-            gBtlWork->darkPoints += (s8)gBtlWork->breakDifference;
+            gBtlWork->darkPoints += gBtlWork->breakDifference;
+        } else if (gBtlWork->breakDifference < 0) {
+            gBtlWork->darkPoints += gBtlWork->breakDifference;
         }
 
         if (gBtlWork->darkPoints > 999) {
@@ -3615,7 +3615,7 @@ u8 func_0807D68C(CardDisplayWork* p, void* a) {
 }
 
 u8 func_0807D7B0(CardDisplayWork* p) {
-    if ((s16)gBtlWork->hitStop == 0) {
+    if (gBtlWork->hitStop == 0) {
         FadeStartIn(7, 8);
         FadeLock();
         gBtlWork->flags &= ~0x200000000000000;

@@ -282,7 +282,7 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
     s16 count;
 
     count = 0;
-    if (w->cursors[slot] != 0xFFFF && (s16)w->slotCounts[slot] > 0) {
+    if (w->cursors[slot] != 0xFFFF && w->slotCounts[slot] > 0) {
         id = w->cursors[slot];
         card = FindNextAvailableSlot(w, slot, &id);
         if (card != NULL) {
@@ -440,7 +440,7 @@ u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind) {
         if (ids[i] != 0xFFFF) {
             switch (kind) {
             case 0:
-                if ((u8)gCardDefs[ids[i] & CARD_ID_MASK].category <= 2) {
+                if (gCardDefs[ids[i] & CARD_ID_MASK].category <= 2) {
                     out[count].unk_06 = kind;
                     out[count].stocked = kind;
                     out[count].removed = kind;
@@ -450,7 +450,7 @@ u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind) {
                 }
                 break;
             case 3:
-                if ((u8)gCardDefs[ids[i] & CARD_ID_MASK].category == 3) {
+                if (gCardDefs[ids[i] & CARD_ID_MASK].category == 3) {
                     out[count].unk_06 = 0;
                     out[count].stocked = 0;
                     out[count].removed = 0;
@@ -770,7 +770,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                     if (gRikuBtlWork->hcEffect == 10) {
                         w->reloadCounts[w->listIndex] -= 2;
 
-                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                        if (w->reloadCounts[w->listIndex] < 0) {
                             w->reloadCounts[w->listIndex] = 0;
                         }
                     }
@@ -794,7 +794,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                     if (gRikuBtlWork->hcEffect == 10) {
                         w->reloadCounts[w->listIndex] -= 2;
 
-                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                        if (w->reloadCounts[w->listIndex] < 0) {
                             w->reloadCounts[w->listIndex] = 0;
                         }
                     }
@@ -1192,7 +1192,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                 if (gRikuBtlWork->hcEffect == 10) {
                     w->reloadCounts[w->listIndex] -= 2;
 
-                    if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                    if (w->reloadCounts[w->listIndex] < 0) {
                         w->reloadCounts[w->listIndex] = 0;
                     }
                 }
@@ -1213,7 +1213,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         }
     }
 
-    if (w->unk_C4[1] == 0 && (u8)AreCardsSettled(w->stock, w->stockCount) != 0) {
+    if (w->unk_C4[1] == 0 && AreCardsSettled(w->stock, w->stockCount) != 0) {
         arr = sUnk_090352FC;
 
         if (!(gBtlWork->flags & 0x4000)) {
@@ -1429,7 +1429,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
             gRikuSelectedCard->timer = 4;
             v = gRikuSelectedCard->args.index + 1;
 
-            if ((s16)v >= (s16)w->slotCounts[n]) {
+            if ((s16)v >= w->slotCounts[n]) {
                 v = 0;
             }
 
@@ -1751,7 +1751,7 @@ void TryRikuCardBreak(CardBattleWork* w) {
         } else {
             gBtlWork->breakDifference = (u8)gCardBattleState->activeValue - n;
 
-            if ((s8)gBtlWork->breakDifference < -9) {
+            if (gBtlWork->breakDifference < -9) {
                 gBtlWork->breakDifference = -9;
             }
         }
@@ -1852,7 +1852,7 @@ u8 UseRikuCard(CardBattleWork* w) {
     if (gRikuSelectedCard->premium == 1) {
         gRikuSelectedCard->args.slot->removed = 1;
 
-        if ((u16)CountRemainingAttackCards(w, 0) == 0) {
+        if (CountRemainingAttackCards(w, 0) == 0) {
             gRikuSelectedCard->args.slot->removed = 0;
         }
     }
@@ -1863,7 +1863,7 @@ u8 UseRikuCard(CardBattleWork* w) {
     gRikuSelectedCard->args.slot->used = 1;
     v = gRikuSelectedCard->args.index + 1;
 
-    if ((s16)v >= (s16)w->slotCounts[w->listIndex]) {
+    if ((s16)v >= w->slotCounts[w->listIndex]) {
         v = 0;
     }
 
@@ -2060,7 +2060,7 @@ u8 StockRikuCard(CardBattleWork* w) {
     gRikuSelectedCard->args.slot->used = 1;
     v = gRikuSelectedCard->args.index + 1;
 
-    if ((s16)v >= (s16)w->slotCounts[w->listIndex]) {
+    if ((s16)v >= w->slotCounts[w->listIndex]) {
         v = 0;
     }
 
@@ -2182,12 +2182,12 @@ void TryRikuStockBreak(CardBattleWork* w) {
     if ((s16)gCardBattleState->activeValue != n) {
         if (n == 0) {
             gBtlWork->breakDifference = -(u8)gCardBattleState->activeValue;
-            if ((s8)gBtlWork->breakDifference < -9) {
+            if (gBtlWork->breakDifference < -9) {
                 gBtlWork->breakDifference = -9;
             }
         } else {
             gBtlWork->breakDifference = (u8)gCardBattleState->activeValue - n;
-            if ((s8)gBtlWork->breakDifference < -9) {
+            if (gBtlWork->breakDifference < -9) {
                 gBtlWork->breakDifference = -9;
             }
         }
@@ -2397,7 +2397,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
         q = gRikuSelectedCard;
         v = q->args.index + 1;
 
-        if ((s16)v >= (s16)w->slotCounts[w->listIndex]) {
+        if ((s16)v >= w->slotCounts[w->listIndex]) {
             v = 0;
         }
 

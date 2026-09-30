@@ -933,7 +933,7 @@ s32 Task_MapEnm01_1(MapEnmWork* p) {
     }
 
     if (p->update != NULL) {
-        ((void (*)(MapEnmWork*))p->update)(q);
+        (p->update)(q);
 
         if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
@@ -984,7 +984,7 @@ s32 Task_MapEnm02_1(MapEnmWork* p) {
     }
 
     if (w->update != NULL) {
-        ((void (*)(MapEnmWork*))w->update)(w);
+        (w->update)(w);
 
         if (w->update != NULL) {
             ColliderSetPosition(&w->collider, q->x, q->y, q->z);
@@ -1207,7 +1207,7 @@ s32 Task_MapEnm03_1(MapEnmWork* p) {
     }
 
     if (w->update != NULL) {
-        ((void (*)(MapEnmWork*))w->update)(w);
+        (w->update)(w);
 
         if (w->update != NULL) {
             ColliderSetPosition(&w->collider, q->x, q->y, q->z);
@@ -1473,7 +1473,7 @@ s32 Task_MapEnm04_1(MapEnmWork* p) {
     }
 
     if (p->update != NULL) {
-        ((void (*)(MapEnmWork*))p->update)(q);
+        (p->update)(q);
 
         if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
@@ -1591,7 +1591,7 @@ s32 Task_MapEnm05_1(MapEnmWork* p) {
     }
 
     if (p->update != NULL) {
-        ((void (*)(MapEnmWork*))p->update)(q);
+        (p->update)(q);
 
         if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
@@ -1709,7 +1709,7 @@ s32 Task_MapEnm06_1(MapEnmWork* p) {
     }
 
     if (p->update != NULL) {
-        ((void (*)(MapEnmWork*))p->update)(q);
+        (p->update)(q);
 
         if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
@@ -1729,7 +1729,7 @@ void Task_MapEnm06_3(MapEnmWork* p) {
 }
 
 s32 GetMapRoomDebugCode(MapFloorRoom* p) {
-    return ((s8)gGameState.floor << 28) + (p->roomType << 20) + (p->cardValue << 16) + (gMapFloorState.room << 8) + (gMapFloorState.eventStep << 4) + gMapFloorState.world;
+    return (gGameState.floor << 28) + (p->roomType << 20) + (p->cardValue << 16) + (gMapFloorState.room << 8) + (gMapFloorState.eventStep << 4) + gMapFloorState.world;
 }
 
 void MapDbgWaitInput(MapDbgWork* w) {
@@ -3467,7 +3467,7 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* w) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, p);
 
         if (r <= 5999) {
-            if ((u8)TryCreateRandomPrzCard(0, p->x, p->y, p->z) != 1) {
+            if (TryCreateRandomPrzCard(0, p->x, p->y, p->z) != 1) {
                 MapGmkBarrelDropPrizes(p);
             }
         } else if (r <= 9999) {
@@ -3482,7 +3482,7 @@ u8 MapGmkBarrelWaitHit(MapGmkBarrelWork* w) {
         return 1;
     }
 
-    if ((u8)FldObjIsOutOfView(&w->obj) != 0) {
+    if (FldObjIsOutOfView(&w->obj) != 0) {
         ColliderSetDisabled(&w->collider, 1);
     } else {
         ColliderSetDisabled(&w->collider, 0);
@@ -3680,7 +3680,7 @@ void MapGmk05CheckTalk(MapGmk05Work* w) {
 void MapGmk05EnterShop(MapGmk05Work* w) {
     MapFloorRoom* e;
 
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return;
     }
     e = GetMapFloorRoom(gMapFloorState.room);
@@ -3901,7 +3901,7 @@ void MapPrizeBounce(MapPrizeWork* w) {
             gGameState.hp += w->amount;
             t = gGameState.progression.maxHp;
 
-            if ((s16)gGameState.hp > (s16)t) {
+            if (gGameState.hp > (s16)t) {
                 gGameState.hp = t;
             }
             break;

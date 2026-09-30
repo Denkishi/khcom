@@ -233,7 +233,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
     if (work->state == 1 && work->timer != 0) {
-        work->targetAngle = (u8)GetAngle(p->x, p->z,
+        work->targetAngle = GetAngle(p->x, p->z,
             gBtlWork->actor->x, gBtlWork->actor->z);
         ApproachAngle(&work->angle, work->targetAngle, 4);
         p->x += gSineTable[(u8)work->angle] * work->speed >> 8;

@@ -202,10 +202,10 @@ void SaveSetHeaderState(s16 slot, s16 state) {
 
     hdr = EwramAlloc(SAVE_HEADER_SIZE);
     ZeroFill(hdr, SAVE_HEADER_SIZE);
-    SaveVerifyBlock(SRAM_HEADER + (s16)slot * SAVE_HEADER_SIZE, (u8*)hdr, (u8*)hdr,
+    SaveVerifyBlock(SRAM_HEADER + slot * SAVE_HEADER_SIZE, (u8*)hdr, (u8*)hdr,
                     SAVE_HEADER_SIZE);
 
-    switch ((s16)state) {
+    switch (state) {
     case SAVE_BAD_SIGNATURE:
         hdr->signature[0] = 0;
         break;
@@ -221,7 +221,7 @@ void SaveSetHeaderState(s16 slot, s16 state) {
         break;
     }
 
-    WriteAndVerifySramFast((u8*)hdr, SRAM_HEADER + (s16)slot * SAVE_HEADER_SIZE,
+    WriteAndVerifySramFast((u8*)hdr, SRAM_HEADER + slot * SAVE_HEADER_SIZE,
                            SAVE_HEADER_SIZE);
     EwramFree(hdr);
 }
@@ -338,10 +338,10 @@ void SaveSetSystemState(s16 slot, s16 state) {
 
     blk = EwramAlloc(SAVE_SYSTEM_SIZE);
     ZeroFill(blk, SAVE_SYSTEM_SIZE);
-    SaveVerifyBlock(SRAM_SYSTEM + (s16)slot * SAVE_SYSTEM_SIZE, (u8*)blk, (u8*)blk,
+    SaveVerifyBlock(SRAM_SYSTEM + slot * SAVE_SYSTEM_SIZE, (u8*)blk, (u8*)blk,
                     SAVE_SYSTEM_SIZE);
 
-    switch ((s16)state) {
+    switch (state) {
     case SAVE_BAD_SIGNATURE:
         blk->signature[0] = 0;
         break;
@@ -357,7 +357,7 @@ void SaveSetSystemState(s16 slot, s16 state) {
         break;
     }
 
-    WriteAndVerifySramFast((u8*)blk, SRAM_SYSTEM + (s16)slot * SAVE_SYSTEM_SIZE,
+    WriteAndVerifySramFast((u8*)blk, SRAM_SYSTEM + slot * SAVE_SYSTEM_SIZE,
                            SAVE_SYSTEM_SIZE);
     EwramFree(blk);
 }
@@ -492,11 +492,11 @@ void SaveSetFileLargeState(s16 file, s16 slot, s16 state) {
 
     blk = EwramAlloc(SAVE_FILE_LARGE_SIZE);
     ZeroFill(blk, SAVE_FILE_LARGE_SIZE);
-    SaveVerifyBlock(gSramFileLarge + (s16)file * (SAVE_FILE_LARGE_SIZE * 2)
-                        + (s16)slot * SAVE_FILE_LARGE_SIZE,
+    SaveVerifyBlock(gSramFileLarge + file * (SAVE_FILE_LARGE_SIZE * 2)
+                        + slot * SAVE_FILE_LARGE_SIZE,
                     (u8*)blk, (u8*)blk, SAVE_FILE_LARGE_SIZE);
 
-    switch ((s16)state) {
+    switch (state) {
     case SAVE_BAD_SIGNATURE:
         blk->signature[0] = 0;
         break;
@@ -512,8 +512,8 @@ void SaveSetFileLargeState(s16 file, s16 slot, s16 state) {
         break;
     }
 
-    WriteAndVerifySramFast((u8*)blk, gSramFileLarge + (s16)file * (SAVE_FILE_LARGE_SIZE * 2)
-                               + (s16)slot * SAVE_FILE_LARGE_SIZE,
+    WriteAndVerifySramFast((u8*)blk, gSramFileLarge + file * (SAVE_FILE_LARGE_SIZE * 2)
+                               + slot * SAVE_FILE_LARGE_SIZE,
                            SAVE_FILE_LARGE_SIZE);
     EwramFree(blk);
 }
@@ -648,11 +648,11 @@ void SaveSetFileSmallState(s16 file, s16 slot, s16 state) {
 
     blk = EwramAlloc(SAVE_FILE_SMALL_SIZE);
     ZeroFill(blk, SAVE_FILE_SMALL_SIZE);
-    SaveVerifyBlock(SRAM_FILE_SMALL + (s16)file * (SAVE_FILE_SMALL_SIZE * 2)
-                        + (s16)slot * SAVE_FILE_SMALL_SIZE,
+    SaveVerifyBlock(SRAM_FILE_SMALL + file * (SAVE_FILE_SMALL_SIZE * 2)
+                        + slot * SAVE_FILE_SMALL_SIZE,
                     (u8*)blk, (u8*)blk, SAVE_FILE_SMALL_SIZE);
 
-    switch ((s16)state) {
+    switch (state) {
     case SAVE_BAD_SIGNATURE:
         blk->signature[0] = 0;
         break;
@@ -668,8 +668,8 @@ void SaveSetFileSmallState(s16 file, s16 slot, s16 state) {
         break;
     }
 
-    WriteAndVerifySramFast((u8*)blk, SRAM_FILE_SMALL + (s16)file * (SAVE_FILE_SMALL_SIZE * 2)
-                               + (s16)slot * SAVE_FILE_SMALL_SIZE,
+    WriteAndVerifySramFast((u8*)blk, SRAM_FILE_SMALL + file * (SAVE_FILE_SMALL_SIZE * 2)
+                               + slot * SAVE_FILE_SMALL_SIZE,
                            SAVE_FILE_SMALL_SIZE);
     EwramFree(blk);
 }

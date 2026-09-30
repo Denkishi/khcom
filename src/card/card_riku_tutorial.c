@@ -772,7 +772,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     }
 
     if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
-        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->darkPoints > 29) {
+        if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;
         }
@@ -842,12 +842,12 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && (u8)IsStockLearned(0) != 0) {
+        if ((u16)(kind - 10) <= 5 && IsStockLearned(0) != 0) {
             arr->unk_00[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)IsStockLearned(2) != 0) {
+        if ((u16)(kind - 20) <= 3 && IsStockLearned(2) != 0) {
             arr->unk_00[0] = 51;
             return 51;
         }
@@ -897,27 +897,27 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     case 0xE9FA7E9F:
         return 42;
     case 0xCE739CDD:
-        if ((u8)IsStockLearned(39) != 0) {
+        if (IsStockLearned(39) != 0) {
             return 53;
         }
         break;
     case 0xCE734CDD:
-        if ((u8)IsStockLearned(38) != 0) {
+        if (IsStockLearned(38) != 0) {
             return 54;
         }
         break;
     case 0xCE72ACB5:
-        if ((u8)IsStockLearned(34) != 0) {
+        if (IsStockLearned(34) != 0) {
             return 65;
         }
         break;
     case 0xCAB2AD37:
-        if ((u8)IsStockLearned(32) != 0) {
+        if (IsStockLearned(32) != 0) {
             return 70;
         }
         break;
     case 0xCE734CC9:
-        if ((u8)IsStockLearned(43) != 0) {
+        if (IsStockLearned(43) != 0) {
             return 77;
         }
         break;
@@ -981,132 +981,132 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     }
 
     if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
-        if ((u8)IsStockLearned(42) != 0) {
+        if (IsStockLearned(42) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && (u8)IsStockLearned(41) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && IsStockLearned(41) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)IsStockLearned(27) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && IsStockLearned(27) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)IsStockLearned(28) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && IsStockLearned(28) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)IsStockLearned(29) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && IsStockLearned(29) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)IsStockLearned(23) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && IsStockLearned(23) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)IsStockLearned(24) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && IsStockLearned(24) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)IsStockLearned(25) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && IsStockLearned(25) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)IsStockLearned(26) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && IsStockLearned(26) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)IsStockLearned(46) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && IsStockLearned(46) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)IsStockLearned(58) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && IsStockLearned(58) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && (u8)IsStockLearned(44) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && IsStockLearned(44) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && (u8)IsStockLearned(31) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && IsStockLearned(31) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)IsStockLearned(35) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && IsStockLearned(35) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)IsStockLearned(50) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && IsStockLearned(50) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && (u8)IsStockLearned(56) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && IsStockLearned(56) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && (u8)IsStockLearned(30) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && IsStockLearned(30) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)IsStockLearned(33) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && IsStockLearned(33) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)IsStockLearned(40) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && IsStockLearned(40) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)IsStockLearned(36) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && IsStockLearned(36) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)IsStockLearned(37) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && IsStockLearned(37) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)IsStockLearned(45) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && IsStockLearned(45) != 0) {
         return 81;
     }
 
     if ((u8)func_080ADD04(cards, count) != 0) {
-        if ((u16)(kind - 10) <= 5 && (u8)IsStockLearned(1) != 0) {
+        if ((u16)(kind - 10) <= 5 && IsStockLearned(1) != 0) {
             arr->unk_00[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)IsStockLearned(5) != 0) {
+        if ((u16)(kind - 20) <= 3 && IsStockLearned(5) != 0) {
             arr->unk_00[0] = 5;
             return 5;
         }
     }
 
     if ((u8)func_080ADD58(cards, count) != 0) {
-        if ((u16)(kind - 1) <= 5 && (u8)IsStockLearned(6) != 0) {
+        if ((u16)(kind - 1) <= 5 && IsStockLearned(6) != 0) {
             arr->unk_00[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && (u8)IsStockLearned(4) != 0) {
+        if ((u16)(kind - 24) <= 2 && IsStockLearned(4) != 0) {
             arr->unk_00[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && (u8)IsStockLearned(7) != 0) {
+        if ((u16)(kind - 7) <= 2 && IsStockLearned(7) != 0) {
             arr->unk_00[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
-            if ((u8)IsStockLearned(3) != 0) {
+            if (IsStockLearned(3) != 0) {
                 arr->unk_00[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)IsStockLearned(8) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && IsStockLearned(8) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }
@@ -1138,7 +1138,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     }
 
     if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
-        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->darkPoints > 29) {
+        if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;
         }
@@ -1208,12 +1208,12 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && (u8)IsLinkSideStockLearned(0, b) != 0) {
+        if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(0, b) != 0) {
             arr->unk_00[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)IsLinkSideStockLearned(2, b) != 0) {
+        if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(2, b) != 0) {
             arr->unk_00[0] = 51;
             return 51;
         }
@@ -1263,27 +1263,27 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     case 0xE9FA7E9F:
         return 42;
     case 0xCE739CDD:
-        if ((u8)IsLinkSideStockLearned(39, b) != 0) {
+        if (IsLinkSideStockLearned(39, b) != 0) {
             return 53;
         }
         break;
     case 0xCE734CDD:
-        if ((u8)IsLinkSideStockLearned(38, b) != 0) {
+        if (IsLinkSideStockLearned(38, b) != 0) {
             return 54;
         }
         break;
     case 0xCE72ACB5:
-        if ((u8)IsLinkSideStockLearned(34, b) != 0) {
+        if (IsLinkSideStockLearned(34, b) != 0) {
             return 65;
         }
         break;
     case 0xCAB2AD37:
-        if ((u8)IsLinkSideStockLearned(32, b) != 0) {
+        if (IsLinkSideStockLearned(32, b) != 0) {
             return 70;
         }
         break;
     case 0xCE734CC9:
-        if ((u8)IsLinkSideStockLearned(43, b) != 0) {
+        if (IsLinkSideStockLearned(43, b) != 0) {
             return 77;
         }
         break;
@@ -1347,132 +1347,132 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     }
 
     if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
-        if ((u8)IsLinkSideStockLearned(42, b) != 0) {
+        if (IsLinkSideStockLearned(42, b) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && (u8)IsLinkSideStockLearned(41, b) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && IsLinkSideStockLearned(41, b) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)IsLinkSideStockLearned(27, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && IsLinkSideStockLearned(27, b) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)IsLinkSideStockLearned(28, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && IsLinkSideStockLearned(28, b) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)IsLinkSideStockLearned(29, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && IsLinkSideStockLearned(29, b) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)IsLinkSideStockLearned(23, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && IsLinkSideStockLearned(23, b) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)IsLinkSideStockLearned(24, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && IsLinkSideStockLearned(24, b) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)IsLinkSideStockLearned(25, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && IsLinkSideStockLearned(25, b) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)IsLinkSideStockLearned(26, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && IsLinkSideStockLearned(26, b) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)IsLinkSideStockLearned(46, b) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && IsLinkSideStockLearned(46, b) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)IsLinkSideStockLearned(58, b) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && IsLinkSideStockLearned(58, b) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && (u8)IsLinkSideStockLearned(44, b) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && IsLinkSideStockLearned(44, b) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && (u8)IsLinkSideStockLearned(31, b) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && IsLinkSideStockLearned(31, b) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)IsLinkSideStockLearned(35, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && IsLinkSideStockLearned(35, b) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)IsLinkSideStockLearned(50, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && IsLinkSideStockLearned(50, b) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && (u8)IsLinkSideStockLearned(56, b) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && IsLinkSideStockLearned(56, b) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && (u8)IsLinkSideStockLearned(30, b) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && IsLinkSideStockLearned(30, b) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)IsLinkSideStockLearned(33, b) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && IsLinkSideStockLearned(33, b) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)IsLinkSideStockLearned(40, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && IsLinkSideStockLearned(40, b) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)IsLinkSideStockLearned(36, b) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && IsLinkSideStockLearned(36, b) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)IsLinkSideStockLearned(37, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && IsLinkSideStockLearned(37, b) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)IsLinkSideStockLearned(45, b) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && IsLinkSideStockLearned(45, b) != 0) {
         return 81;
     }
 
     if ((u8)func_080ADD04(cards, count) != 0) {
-        if ((u16)(kind - 10) <= 5 && (u8)IsLinkSideStockLearned(1, b) != 0) {
+        if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(1, b) != 0) {
             arr->unk_00[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)IsLinkSideStockLearned(5, b) != 0) {
+        if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(5, b) != 0) {
             arr->unk_00[0] = 5;
             return 5;
         }
     }
 
     if ((u8)func_080ADD58(cards, count) != 0) {
-        if ((u16)(kind - 1) <= 5 && (u8)IsLinkSideStockLearned(6, b) != 0) {
+        if ((u16)(kind - 1) <= 5 && IsLinkSideStockLearned(6, b) != 0) {
             arr->unk_00[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && (u8)IsLinkSideStockLearned(4, b) != 0) {
+        if ((u16)(kind - 24) <= 2 && IsLinkSideStockLearned(4, b) != 0) {
             arr->unk_00[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && (u8)IsLinkSideStockLearned(7, b) != 0) {
+        if ((u16)(kind - 7) <= 2 && IsLinkSideStockLearned(7, b) != 0) {
             arr->unk_00[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
-            if ((u8)IsLinkSideStockLearned(3, b) != 0) {
+            if (IsLinkSideStockLearned(3, b) != 0) {
                 arr->unk_00[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)IsLinkSideStockLearned(8, b) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && IsLinkSideStockLearned(8, b) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }

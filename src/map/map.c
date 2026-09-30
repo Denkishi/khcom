@@ -2924,20 +2924,20 @@ MapFixedDef* GetMapFixedDef(void) {
             return gMapFixedDefs[2];
         }
         if (gMapFloorState.room == 0xFE) {
-            if ((s8)gGameState.floor != 0) {
+            if (gGameState.floor != 0) {
                 return gMapFixedDefs[1];
             }
             return gMapFixedDefs[5];
         }
     }
     if (gMapFloorState.room == 0xFD) {
-        if ((s8)gGameState.floor != 12) {
+        if (gGameState.floor != 12) {
             return gMapFixedDefs[2];
         }
         return gMapFixedDefs[3];
     }
     if (gMapFloorState.room == 0xFE) {
-        if ((s8)gGameState.floor != 0) {
+        if (gGameState.floor != 0) {
             return gMapFixedDefs[1];
         }
         return gMapFixedDefs[0];
@@ -2972,20 +2972,20 @@ void MapFixCreateCharaTasks(void) {
     switch (gMapFloorState.progress) {
     case 23:
     case 24:
-        if ((s8)gGameState.floor == 11) {
+        if (gGameState.floor == 11) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
         break;
     case 25:
     case 26:
-        if ((s8)gGameState.floor == 11 && gGameState.floors[12].eventStep == 0) {
+        if (gGameState.floor == 11 && gGameState.floors[12].eventStep == 0) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
         break;
     case 27:
-        if ((s8)gGameState.floor == 12) {
+        if (gGameState.floor == 12) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
@@ -3034,9 +3034,9 @@ u8 GetFloorEventId(void) {
         return 0xFF;
     }
     if (gGameState.flags & 8) {
-        return gRikuFloorEvents[(s8)gGameState.floor];
+        return gRikuFloorEvents[gGameState.floor];
     }
-    return gSoraFloorEvents[(s8)gGameState.floor];
+    return gSoraFloorEvents[gGameState.floor];
 }
 
 void MapFixMain(void) {
@@ -3089,7 +3089,7 @@ void func_080EA5CC(void) {
         return;
     }
     if (gMapRoomState->flags & 0x200) {
-        if ((s8)gGameState.floor == GetProgressFloor()) {
+        if (gGameState.floor == GetProgressFloor()) {
             gGameState.flags &= ~0x80;
             gGameState.progression.friendFlags = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
         }
@@ -3611,7 +3611,7 @@ void NewGameSlotMenuSlideOut(NewGameSlotMenuWork* w) {
 }
 
 void NewGameSlotMenuExit(NewGameSlotMenuWork* w) {
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return;
     }
 
@@ -4192,7 +4192,7 @@ void LoadGameMenuExit(LoadGameMenuWork* work) {
     SaveFileSummary* e = &gGameState.fileSummaries[work->selectedSlot];
 #endif
 
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return;
     }
 

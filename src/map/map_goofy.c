@@ -22,7 +22,7 @@ void MapGoofyCheckTalk(MapGoofyWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
 
-        if ((s8)gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
+        if (gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
             CreateCardMessageTask(&w->tasks, 0, 49);
         } else {
             CreateCardMessageTask(&w->tasks, 0, gGoofyTalkMessages[gMapFloorState.progress]);
@@ -43,7 +43,7 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
     FldObj* e = &w->obj;
 
     if (gMapFloorState.room != 0xFE) {
-        if ((s8)gGameState.floor == 12) {
+        if (gGameState.floor == 12) {
             w->obj.fieldPosition.x = 0x25000;
             w->obj.fieldPosition.y = 0x10A00;
         } else {
@@ -51,7 +51,7 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
             w->obj.fieldPosition.y = 0xB000;
         }
     } else {
-        if ((s8)gGameState.floor != 0) {
+        if (gGameState.floor != 0) {
             w->obj.fieldPosition.x = 0x1E800;
             w->obj.fieldPosition.y = 0xD000;
         } else {
@@ -948,7 +948,7 @@ void Task_MapFaint_2(MapFaintWork* w) {
     u16 y;
 
     x = (e->fieldPosition.x >> 8) - (gFieldState->x >> 8);
-    y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - ((s16)e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
+    y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - (e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, -0x1005 - (e->fieldPosition.y >> 8) * 4);
 }
 

@@ -333,7 +333,7 @@ void MsChargeDrawValueCounts(void) {
         LoadPalette(gUnk_09A3DD7C + card->category * 0x20, (void*)0x050000E0, 0x0C);
     }
 
-    if ((s16)sMsChargeMenuState == 1) {
+    if (sMsChargeMenuState == 1) {
         for (i = 0; i < 10; i++) {
             LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
             LoadPalette(gUnk_09A3DE08, (void*)(0x050000EC + i * 2), 2);
@@ -958,7 +958,7 @@ void MsChargeDraw(void) {
     s32 i;
     s32 j;
 
-    if ((s16)sMsChargeMenuState != 1) {
+    if (sMsChargeMenuState != 1) {
         DrawSprite(16, 60, AnimUpdate(&gUnk_02035C50), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7D0);
     }
     t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
@@ -971,7 +971,7 @@ void MsChargeDraw(void) {
     DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, 0x801, 0x834);
 
     if (sMsChargeState == 1) {
-        switch ((s16)sMsChargeMenuState) {
+        switch (sMsChargeMenuState) {
         case 1:
             sMsChargeCursorX = sMsChargeTab * 3584 + 0xAC00;
             sMsChargeCursorY = 0x1000;
@@ -1034,7 +1034,7 @@ void MsChargeDraw(void) {
         }
     }
 
-    if ((s16)sMsChargeMenuState != 1) {
+    if (sMsChargeMenuState != 1) {
         if (sMsChargeCardSprite != NULL) {
             DrawSprite(24, 92, sMsChargeCardSprite, sMsChargeCardTiles, sMsChargeCardPalette, 0, 0x800, 0x848);
         }

@@ -228,7 +228,7 @@ void BosDsdEnergy1UpdateArc(DsdEnergy1Work* work) {
     work->z += work->vz;
     BgFxAddPosition(work->vx, work->vy, work->vz);
 
-    if ((s16)work->timer > 15) {
+    if (work->timer > 15) {
         work->state++;
     } else {
         work->timer++;

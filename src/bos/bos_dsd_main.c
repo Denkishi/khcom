@@ -191,18 +191,18 @@ void BosDsdMainUpdateDrift(DsdMainWork* work) {
             gBtlWork->actor->x += work->dsd->driftX;
         }
 
-        if (work->lastBreakDifference != (s8)gBtlWork->breakDifference) {
-            if ((s8)gBtlWork->breakDifference > 0) {
+        if (work->lastBreakDifference != gBtlWork->breakDifference) {
+            if (gBtlWork->breakDifference > 0) {
                 work->dsd->flags |= 0x40;
 
-                if ((s8)gBtlWork->breakDifference > 14) {
+                if (gBtlWork->breakDifference > 14) {
                     work->dsd->driftX = 0x180;
                 } else {
-                    work->dsd->driftX = ((s8)gBtlWork->breakDifference << 8) / 10;
+                    work->dsd->driftX = (gBtlWork->breakDifference << 8) / 10;
                 }
-            } else if ((s8)gBtlWork->breakDifference < 0) {
+            } else if (gBtlWork->breakDifference < 0) {
                 work->dsd->flags |= 0x40;
-                work->dsd->driftX = ((s8)gBtlWork->breakDifference << 9) / 10;
+                work->dsd->driftX = (gBtlWork->breakDifference << 9) / 10;
             } else {
                 work->dsd->flags &= ~0x40;
             }

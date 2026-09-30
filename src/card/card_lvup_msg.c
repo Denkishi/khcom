@@ -52,13 +52,13 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 #endif
     w->amount = a->amount;
     w->active = a->done;
-    if (args.flags & 0x8000) {
+    if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A09A), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A09A, w->textSlots);
 #endif
-    } else if (args.flags & 0x4000) {
+    } else if (args.flags & STAT_INCREASE_FLAG_DP) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A198), w->textSlots);
 #else
@@ -79,7 +79,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     }
     w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
 #ifdef VERSION_EU
-    if ((args.flags & 0x8000) && gLanguage == 4) {
+    if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == 4) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), w->textSlots3);
     } else {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnk_0815A0A0), w->textSlots3);

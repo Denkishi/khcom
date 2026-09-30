@@ -865,7 +865,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                 w->messageActive = 1;
                 args.amount = amount;
                 args.done = &w->messageActive;
-                args.flags = 0x8000;
+                args.flags = STAT_INCREASE_FLAG_MAX_HP;
                 TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
                 break;
             }
@@ -899,7 +899,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                     w->messageActive = 1;
                     args.amount = amount;
                     args.done = &w->messageActive;
-                    args.flags = 0x4000;
+                    args.flags = STAT_INCREASE_FLAG_DP;
                     TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
                 }
                 break;

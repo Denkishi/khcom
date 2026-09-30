@@ -61,7 +61,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
     CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
-    if (w->messageDef->flags & 4) {
+    if (w->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
         w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 1);
     } else {
         w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
@@ -220,7 +220,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
                                            w->nextText, &w->nextText);
 #endif
             w->unk_138[1] = w->unk_138[3];
-        } else if (!(w->messageDef->flags & 1)) {
+        } else if (!(w->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
             AnimStart(&w->anim2, 3, ANIM_FLAG_LOOP);
             w->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);

@@ -123,7 +123,7 @@ u8 DeckCard2_1(DeckCard2Work* n) {
 }
 
 void DeckCard2_2(DeckCard2Work* n) {
-    if (!(n->flags & 1)) {
+    if (!(n->flags & DECK_CARD2_FLAG_GFX_LOADED)) {
         return;
     }
 
@@ -150,7 +150,7 @@ void DeckCard2LoadGfx(DeckCard2Work* n) {
         return;
     }
 
-    if (n->flags & 1) {
+    if (n->flags & DECK_CARD2_FLAG_GFX_LOADED) {
         return;
     }
 
@@ -160,17 +160,17 @@ void DeckCard2LoadGfx(DeckCard2Work* n) {
     n->tiles2 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
 
     if (n->tiles != NULL && n->palette != NULL) {
-        n->flags |= 1;
+        n->flags |= DECK_CARD2_FLAG_GFX_LOADED;
     }
 }
 
 void DeckCard2ReleaseGfx(DeckCard2Work* node) {
-    if (node->flags & 1) {
+    if (node->flags & DECK_CARD2_FLAG_GFX_LOADED) {
         ReleaseObjPalette(node->palette2);
         ReleaseObjTiles(node->tiles);
         ReleaseObjPalette(node->palette);
         ReleaseObjTiles(node->tiles2);
-        node->flags &= 0xFFFE;
+        node->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
         node->tiles = 0;
         node->palette = 0;
         node->tiles2 = 0;

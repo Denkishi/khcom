@@ -401,6 +401,10 @@ typedef struct DeckCard2Args {
     u16* slot;
 } DeckCard2Args;
 
+enum DeckCard2Flag {
+    DECK_CARD2_FLAG_GFX_LOADED = 0x1
+};
+
 typedef struct DeckCard2Work {
     u8 unk_00[0x04];
     ObjPalette* palette2;
@@ -853,6 +857,11 @@ typedef struct StockNameWork {
     u8 unk_32[2];
 } StockNameWork;
 
+enum ReloadChildFlag {
+    RELOAD_CHILD_FLAG_SHIFTED = 0x1,
+    RELOAD_CHILD_FLAG_IDLE = 0x2
+};
+
 typedef struct ReloadChildArgs {
     ListPool* pool;
     s32* parentX;
@@ -957,6 +966,16 @@ typedef struct MapcardArgs {
 } MapcardArgs;
 
 typedef char MapcardArgs_size[(sizeof(MapcardArgs) == 0x18) ? 1 : -1];
+
+enum MapcardFlag {
+    MAPCARD_FLAG_GFX_LOADED = 0x1,
+    MAPCARD_FLAG_RAISED = 0x2,
+    MAPCARD_FLAG_CHOSEN = 0x40,
+    MAPCARD_FLAG_DELIVERED = 0x80,
+    MAPCARD_FLAG_CURSOR = 0x100,
+    MAPCARD_FLAG_OPENED = 0x200,
+    MAPCARD_FLAG_REMOVED = 0x400
+};
 
 typedef struct MapcardWork {
     void* tiles;
@@ -2112,6 +2131,11 @@ typedef struct LevelUpWork {
     u8 applied;
     u8 optionEnabled[3];
 } LevelUpWork;
+
+enum StatIncreaseFlag {
+    STAT_INCREASE_FLAG_DP = 0x4000,
+    STAT_INCREASE_FLAG_MAX_HP = 0x8000
+};
 
 typedef struct StatIncreaseDisplayArgs {
     u8* done;

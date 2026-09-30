@@ -5505,12 +5505,12 @@ void ResetGridScroll(DeckMenuWork* w) {
         node->args.row = y;
         x++;
 
-        if (node->flags & 1) {
+        if (node->flags & DECK_CARD2_FLAG_GFX_LOADED) {
             ReleaseObjPalette(node->palette2);
             ReleaseObjTiles(node->tiles);
             ReleaseObjPalette(node->palette);
             ReleaseObjTiles(node->tiles2);
-            node->flags &= ~1;
+            node->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
             node->tiles = 0;
             node->palette = 0;
             node->tiles2 = 0;

@@ -77,7 +77,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
 u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
     u8 (*fn)(ReloadChildWork*, void*);
 
-    if (w->args.flags & 2) {
+    if (w->args.flags & RELOAD_CHILD_FLAG_IDLE) {
         w->retractTimer++;
 
         if (w->retractTimer == 30) {
@@ -88,9 +88,9 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
         }
     }
 
-    if (w->args.flags & 1) {
+    if (w->args.flags & RELOAD_CHILD_FLAG_SHIFTED) {
         w->steps = 8;
-        w->args.flags &= ~1;
+        w->args.flags &= ~RELOAD_CHILD_FLAG_SHIFTED;
     }
 
     if (w->args.index <= 3) {
@@ -125,7 +125,7 @@ u8 UpdateReloadChildRetracted(ReloadChildWork* w, void* a) {
     u8 (*f)(ReloadChildWork*, void*);
     u16 v;
 
-    v = w->args.flags & 2;
+    v = w->args.flags & RELOAD_CHILD_FLAG_IDLE;
 
     if (v == 0) {
         w->steps = 8;

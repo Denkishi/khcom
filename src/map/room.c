@@ -105,7 +105,7 @@ void task_room_name_0(RoomNameWork* work, s32 arg) {
     work->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
     work->palette = LoadObjPalette(gUnk_099910C4, 0x20);
     work->gfx = gUnk_09EF8DA4[0];
-    work->unk_30 = arg;
+    work->nameId = arg;
     work->x2 = 0x5C00;
     work->y2 = 0x8A00;
     work->x = 0x7800;
@@ -117,11 +117,11 @@ void task_room_name_0(RoomNameWork* work, s32 arg) {
     work->state = 0;
     work->scaleY = 0x19;
     InitTextSlots(work->textSlots, 0x24);
-    work->palette2 = _08066468(1);
+    work->palette2 = LoadTextPalette(1);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(gRoomNames[work->unk_30]), work->textSlots);
+    work->textSlotCount = LoadTextSlots(eu_0805E924(gRoomNames[work->nameId]), work->textSlots);
 #else
-    work->textSlotCount = LoadTextSlots(gRoomNames[work->unk_30], work->textSlots);
+    work->textSlotCount = LoadTextSlots(gRoomNames[work->nameId], work->textSlots);
 #endif
 }
 

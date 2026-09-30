@@ -103,22 +103,22 @@ void task_btl_shadow_2(BtlShadowWork* work) {
     u16 anim;
     ObjAffine* aff;
 
-    if (actor->unk_0CC != 0) {
+    if (actor->shadowPriority != 0) {
         if (!(actor->flags & 0x0000000402000000)) {
             anim = GetBattleSpritePriorityFlags(actor->y);
 
             if (actor->z >= 0 && gBtlWork->scale == 0x100) {
                 aff = 0;
             } else {
-                s32 sc = 0x100 - (actor->unk_010 - actor->z) / 128;
+                s32 sc = 0x100 - (actor->groundZ - actor->z) / 128;
                 sc = (gBtlWork->scale * sc) >> 8;
                 if (sc <= 127) {
                     sc = 128;
                 }
                 aff = AllocObjAffine(0, sc, sc, sc > 0x100);
             }
-            WorldToScreen(&x, &y, actor->x, actor->y, actor->unk_010);
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim, actor->unk_0CC);
+            WorldToScreen(&x, &y, actor->x, actor->y, actor->groundZ);
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim, actor->shadowPriority);
         }
     }
 }
@@ -149,55 +149,55 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
     AnimInit(&work->anim2, gBHpgagAnims, gBHpgagFrames);
     AnimStart(&work->anim, 0, 1);
 
-    if (gBtlWork->actor->unk_02E <= 40) {
-        work->unk_64 = 0;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 80) {
-        work->unk_64 = 1;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 120) {
-        work->unk_64 = 2;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 160) {
-        work->unk_64 = 3;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 200) {
-        work->unk_64 = 4;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 240) {
-        work->unk_64 = 5;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 280) {
-        work->unk_64 = 6;
-        work->unk_68 = 0;
-    } else if (gBtlWork->actor->unk_02E <= 320) {
-        work->unk_64 = 0;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 360) {
-        work->unk_64 = 1;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 400) {
-        work->unk_64 = 2;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 440) {
-        work->unk_64 = 3;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 480) {
-        work->unk_64 = 4;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 520) {
-        work->unk_64 = 5;
-        work->unk_68 = 1;
-    } else if (gBtlWork->actor->unk_02E <= 560) {
-        work->unk_64 = 6;
-        work->unk_68 = 1;
+    if (gBtlWork->actor->maxHp <= 40) {
+        work->gaugeSize = 0;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 80) {
+        work->gaugeSize = 1;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 120) {
+        work->gaugeSize = 2;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 160) {
+        work->gaugeSize = 3;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 200) {
+        work->gaugeSize = 4;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 240) {
+        work->gaugeSize = 5;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 280) {
+        work->gaugeSize = 6;
+        work->gaugeMode = 0;
+    } else if (gBtlWork->actor->maxHp <= 320) {
+        work->gaugeSize = 0;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 360) {
+        work->gaugeSize = 1;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 400) {
+        work->gaugeSize = 2;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 440) {
+        work->gaugeSize = 3;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 480) {
+        work->gaugeSize = 4;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 520) {
+        work->gaugeSize = 5;
+        work->gaugeMode = 1;
+    } else if (gBtlWork->actor->maxHp <= 560) {
+        work->gaugeSize = 6;
+        work->gaugeMode = 1;
     } else {
-        work->unk_64 = 6;
-        work->unk_68 = 1;
+        work->gaugeSize = 6;
+        work->gaugeMode = 1;
     }
 
-    if (work->unk_68 == 0) {
-        switch (work->unk_64) {
+    if (work->gaugeMode == 0) {
+        switch (work->gaugeSize) {
         case 0:
         case 1:
             AnimStart(&work->anim2, 1, 1);
@@ -225,7 +225,7 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
     } else {
         AnimStart(&work->anim2, 11, 1);
 
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
             work->gfx3 = gBHpgagFrame19;
             break;
@@ -253,13 +253,13 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
         }
     }
 
-    work->unk_00 = 0x100;
-    work->unk_04 = 1;
+    work->hpRatio = 0x100;
+    work->firstUpdate = 1;
     work->unk_5C = 1;
     work->timer = 0;
-    work->unk_60 = 0;
-    work->unk_62 = 0;
-    work->unk_5D = 0;
+    work->prevHp = 0;
+    work->displayHp = 0;
+    work->alarmPlaying = 0;
 }
 
 s32 task_btl_hpply_1(BtlHpplyWork* work) {
@@ -275,13 +275,13 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         return 0;
     }
 
-    if (work->unk_68 != 1 && work->unk_00 <= 63) {
+    if (work->gaugeMode != 1 && work->hpRatio <= 63) {
         flag = 1;
     } else {
         flag = 0;
     }
 
-    if (actor->unk_02C < work->unk_60) {
+    if (actor->hp < work->prevHp) {
         work->timer = 44;
     }
 
@@ -294,51 +294,51 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         AnimChange(&work->anim, 0, 1);
     }
 
-    if (work->unk_04 != 0) {
-        work->unk_04 = 0;
-        work->unk_62 = actor->unk_02C;
-    } else if (work->unk_62 < actor->unk_02C) {
-        work->unk_62 += 3;
-        if (work->unk_62 > actor->unk_02C) {
-            work->unk_62 = actor->unk_02C;
+    if (work->firstUpdate != 0) {
+        work->firstUpdate = 0;
+        work->displayHp = actor->hp;
+    } else if (work->displayHp < actor->hp) {
+        work->displayHp += 3;
+        if (work->displayHp > actor->hp) {
+            work->displayHp = actor->hp;
         }
-    } else if (work->unk_62 > actor->unk_02C) {
-        work->unk_62 -= 3;
-        if (work->unk_62 < actor->unk_02C) {
-            work->unk_62 = actor->unk_02C;
-        }
-    }
-
-    if (work->unk_68 == 1) {
-        if (work->unk_62 <= 280) {
-            work->unk_68 = 2;
-        }
-    } else if (work->unk_68 == 2) {
-        if (work->unk_62 > 280) {
-            work->unk_68 = 1;
+    } else if (work->displayHp > actor->hp) {
+        work->displayHp -= 3;
+        if (work->displayHp < actor->hp) {
+            work->displayHp = actor->hp;
         }
     }
 
-    switch (work->unk_68) {
+    if (work->gaugeMode == 1) {
+        if (work->displayHp <= 280) {
+            work->gaugeMode = 2;
+        }
+    } else if (work->gaugeMode == 2) {
+        if (work->displayHp > 280) {
+            work->gaugeMode = 1;
+        }
+    }
+
+    switch (work->gaugeMode) {
     case 0:
-        work->unk_00 = (work->unk_62 << 8) / actor->unk_02E;
+        work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         break;
     case 1:
-        work->unk_00 = ((work->unk_62 - 280) << 8) / (actor->unk_02E - 280);
+        work->hpRatio = ((work->displayHp - 280) << 8) / (actor->maxHp - 280);
         break;
     case 2:
-        work->unk_00 = (work->unk_62 << 8) / 280;
+        work->hpRatio = (work->displayHp << 8) / 280;
         break;
     }
 
     if (flag != 0) {
-        if (work->unk_5D == 0) {
-            work->unk_5D = 1;
+        if (work->alarmPlaying == 0) {
+            work->alarmPlaying = 1;
             m4aSongNumStart(SONG_SYS_ALART);
         }
 
-        if (work->unk_68 == 0) {
-            switch (work->unk_64) {
+        if (work->gaugeMode == 0) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 AnimChange(&work->anim2, 2, 1);
@@ -366,8 +366,8 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             AnimChange(&work->anim2, 12, 1);
         }
     } else {
-        if (work->unk_68 == 0) {
-            switch (work->unk_64) {
+        if (work->gaugeMode == 0) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 AnimChange(&work->anim2, 1, 1);
@@ -395,15 +395,15 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             AnimChange(&work->anim2, 11, 1);
         }
 
-        if (work->unk_5D != 0) {
-            work->unk_5D = 0;
+        if (work->alarmPlaying != 0) {
+            work->alarmPlaying = 0;
             m4aSongNumStop(SONG_SYS_ALART);
         }
     }
 
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
-    work->unk_60 = actor->unk_02C;
+    work->prevHp = actor->hp;
     return 1;
 }
 
@@ -413,7 +413,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
 
     DrawSprite(4, 2, work->gfx, work->tiles, work->palette, 0, 0x410, 1);
 
-    switch (work->unk_68) {
+    switch (work->gaugeMode) {
     case 0:
         DrawSprite(4, 2, work->gfx2, work->tiles2, work->palette2, 0, 0x410, 4);
         break;
@@ -427,62 +427,62 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
         break;
     }
 
-    switch (work->unk_68) {
+    switch (work->gaugeMode) {
     case 2:
-        v = work->unk_00;
+        v = work->hpRatio;
         break;
     case 0:
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
         case 1:
-            v = (work->unk_00 * 72) >> 8;
+            v = (work->hpRatio * 72) >> 8;
             break;
         case 2:
-            v = (work->unk_00 * 109) >> 8;
+            v = (work->hpRatio * 109) >> 8;
             break;
         case 3:
-            v = (work->unk_00 * 146) >> 8;
+            v = (work->hpRatio * 146) >> 8;
             break;
         case 4:
-            v = (work->unk_00 * 182) >> 8;
+            v = (work->hpRatio * 182) >> 8;
             break;
         case 5:
-            v = (work->unk_00 * 219) >> 8;
+            v = (work->hpRatio * 219) >> 8;
             break;
         case 6:
-            v = work->unk_00;
+            v = work->hpRatio;
             break;
         default:
-            v = work->unk_00;
+            v = work->hpRatio;
             break;
         }
         break;
     case 1:
     default:
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
-            v = (work->unk_00 * 36) >> 8;
+            v = (work->hpRatio * 36) >> 8;
             break;
         case 1:
-            v = (work->unk_00 * 72) >> 8;
+            v = (work->hpRatio * 72) >> 8;
             break;
         case 2:
-            v = (work->unk_00 * 109) >> 8;
+            v = (work->hpRatio * 109) >> 8;
             break;
         case 3:
-            v = (work->unk_00 * 146) >> 8;
+            v = (work->hpRatio * 146) >> 8;
             break;
         case 4:
-            v = (work->unk_00 * 182) >> 8;
+            v = (work->hpRatio * 182) >> 8;
             break;
         case 5:
-            v = (work->unk_00 * 219) >> 8;
+            v = (work->hpRatio * 219) >> 8;
             break;
         case 6:
-            v = work->unk_00;
+            v = work->hpRatio;
             break;
         default:
-            v = work->unk_00;
+            v = work->hpRatio;
             break;
         }
         break;
@@ -490,7 +490,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
 
     v *= 2;
 
-    if (work->unk_62 > 0) {
+    if (work->displayHp > 0) {
         if (v <= 9) {
             v = 10;
         }
@@ -501,7 +501,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
             aff = AllocObjAffine(0, v, 0x100, 0);
         }
 
-        if (work->unk_68 == 1) {
+        if (work->gaugeMode == 1) {
             DrawSprite(31, 9, gBHpgagFrame26, work->tiles4, work->palette2, aff, 0x410, 2);
         } else {
             DrawSprite(31, 6, gBHpgagFrame0, work->tiles4, work->palette2, aff, 0x410, 2);
@@ -524,96 +524,96 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles2 = AllocObjTiles(0x80, gBHpgagETiles);
     work->tiles3 = AllocObjTiles(0x20, gBHpgagETiles);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->unk_14 = 0;
-    work->unk_10 = 0x100;
+    work->visible = 0;
+    work->hpRatio = 0x100;
     work->actor = 0;
-    work->unk_1C = 0;
-    work->unk_20 = 0;
+    work->gaugeSize = 0;
+    work->gaugeLayer = 0;
 }
 
 s32 task_btl_hpenm_1(BtlHpenmWork* work) {
     BtlObj* actor;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         return 0;
     }
 
     if (gBtlWork->flags & 0x800) {
         actor = gRikuBtlWork->actor;
-        work->unk_14 = 1;
+        work->visible = 1;
     } else {
         if (gBtlWork->actor2 == 0) {
-            if (work->unk_14 != 0) {
-                work->unk_14 = 0;
+            if (work->visible != 0) {
+                work->visible = 0;
             }
             return 1;
         }
-        work->unk_14 = 1;
+        work->visible = 1;
         actor = gBtlWork->actor2;
     }
 
-    if (actor->unk_0D8 != 0) {
-        actor = actor->unk_0D8;
+    if (actor->parent != 0) {
+        actor = actor->parent;
     }
 
     if (work->actor != actor) {
         work->actor = actor;
-        work->unk_1E = actor->unk_02C;
+        work->displayHp = actor->hp;
 
-        if (actor->unk_02E <= 80) {
-            work->unk_1C = 0;
-        } else if (actor->unk_02E <= 160) {
-            work->unk_1C = 1;
-        } else if (actor->unk_02E <= 240) {
-            work->unk_1C = 2;
-        } else if (actor->unk_02E <= 320) {
-            work->unk_1C = 3;
-        } else if (actor->unk_02E <= 400) {
-            work->unk_1C = 4;
-        } else if (actor->unk_02E <= 480) {
-            work->unk_1C = 5;
-        } else if (actor->unk_02E <= 560) {
-            work->unk_1C = 6;
+        if (actor->maxHp <= 80) {
+            work->gaugeSize = 0;
+        } else if (actor->maxHp <= 160) {
+            work->gaugeSize = 1;
+        } else if (actor->maxHp <= 240) {
+            work->gaugeSize = 2;
+        } else if (actor->maxHp <= 320) {
+            work->gaugeSize = 3;
+        } else if (actor->maxHp <= 400) {
+            work->gaugeSize = 4;
+        } else if (actor->maxHp <= 480) {
+            work->gaugeSize = 5;
+        } else if (actor->maxHp <= 560) {
+            work->gaugeSize = 6;
         } else {
-            work->unk_1C = 7;
+            work->gaugeSize = 7;
         }
-    } else if (work->unk_1E < actor->unk_02C) {
-        work->unk_1E += 5;
-        if (work->unk_1E > actor->unk_02C) {
-            work->unk_1E = actor->unk_02C;
+    } else if (work->displayHp < actor->hp) {
+        work->displayHp += 5;
+        if (work->displayHp > actor->hp) {
+            work->displayHp = actor->hp;
         }
-    } else if (work->unk_1E > actor->unk_02C) {
-        work->unk_1E -= 5;
-        if (work->unk_1E < actor->unk_02C) {
-            work->unk_1E = actor->unk_02C;
+    } else if (work->displayHp > actor->hp) {
+        work->displayHp -= 5;
+        if (work->displayHp < actor->hp) {
+            work->displayHp = actor->hp;
         }
     }
 
-    if (work->unk_1E <= 560) {
-        work->unk_20 = 0;
-    } else if (work->unk_1E <= 1120) {
-        work->unk_20 = 1;
-    } else if (work->unk_1E <= 1680) {
-        work->unk_20 = 2;
+    if (work->displayHp <= 560) {
+        work->gaugeLayer = 0;
+    } else if (work->displayHp <= 1120) {
+        work->gaugeLayer = 1;
+    } else if (work->displayHp <= 1680) {
+        work->gaugeLayer = 2;
     } else {
-        work->unk_20 = 3;
+        work->gaugeLayer = 3;
     }
 
-    switch (work->unk_20) {
+    switch (work->gaugeLayer) {
     case 3:
-        work->unk_10 = ((work->unk_1E - 1680) << 8) / 560;
+        work->hpRatio = ((work->displayHp - 1680) << 8) / 560;
         break;
     case 2:
-        work->unk_10 = ((work->unk_1E - 1120) << 8) / 560;
+        work->hpRatio = ((work->displayHp - 1120) << 8) / 560;
         break;
     case 1:
-        work->unk_10 = ((work->unk_1E - 560) << 8) / 560;
+        work->hpRatio = ((work->displayHp - 560) << 8) / 560;
         break;
     case 0:
-        if (work->unk_1C <= 6) {
-            work->unk_10 = (work->unk_1E << 8) / actor->unk_02E;
+        if (work->gaugeSize <= 6) {
+            work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         } else {
-            work->unk_10 = (work->unk_1E << 8) / 560;
+            work->hpRatio = (work->displayHp << 8) / 560;
         }
         break;
     }
@@ -627,11 +627,11 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     s32 v;
     ObjAffine* aff;
 
-    if (work->unk_14 == 0) {
+    if (work->visible == 0) {
         return;
     }
 
-    switch (work->unk_20) {
+    switch (work->gaugeLayer) {
     case 3:
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -710,7 +710,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         switch (gLanguage) {
         case 0:
         case 1:
-            switch (work->unk_1C) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 gfx = gBHpgagEFrame1Eu;
@@ -734,7 +734,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             }
             break;
         case 4:
-            switch (work->unk_1C) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 gfx = gBHpgagEFrame14Eu;
@@ -758,7 +758,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             }
             break;
         case 3:
-            switch (work->unk_1C) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 gfx = gBHpgagEFrame23Eu;
@@ -783,7 +783,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
             break;
         case 2:
         default:
-            switch (work->unk_1C) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 gfx = gBHpgagEFrame32Eu;
@@ -809,7 +809,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         }
         bar = gBHpgagEFrame0Eu;
 #else
-        switch (work->unk_1C) {
+        switch (work->gaugeSize) {
         case 0:
         case 1:
             gfx = gBHpgagEFrame1;
@@ -845,34 +845,34 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     DrawSprite(236, 2, gBHpgagEFrame13, work->tiles3, work->palette, 0, 0x410, 1);
 #endif
 
-    switch (work->unk_1C) {
+    switch (work->gaugeSize) {
     case 0:
     case 1:
-        v = (work->unk_10 * 72) >> 8;
+        v = (work->hpRatio * 72) >> 8;
         break;
     case 2:
-        v = (work->unk_10 * 109) >> 8;
+        v = (work->hpRatio * 109) >> 8;
         break;
     case 3:
-        v = (work->unk_10 * 146) >> 8;
+        v = (work->hpRatio * 146) >> 8;
         break;
     case 4:
-        v = (work->unk_10 * 182) >> 8;
+        v = (work->hpRatio * 182) >> 8;
         break;
     case 5:
-        v = (work->unk_10 * 219) >> 8;
+        v = (work->hpRatio * 219) >> 8;
         break;
     case 6:
-        v = work->unk_10;
+        v = work->hpRatio;
         break;
     default:
-        v = work->unk_10;
+        v = work->hpRatio;
         break;
     }
 
     v *= 2;
 
-    if (work->unk_1E > 0) {
+    if (work->displayHp > 0) {
         if (v <= 9) {
             v = 10;
         }
@@ -914,8 +914,8 @@ void task_btl_pause_0(BtlPauseWork* work) {
     work->gfx = gUnk_09EE115C[0];
     work->gfx2 = gUnk_09EE115C[1];
 #endif
-    work->unk_10 = 0;
-    work->unk_24 = 0;
+    work->visible = 0;
+    work->steps = 0;
     work->unk_26 = 0;
     gBtlWork->flags |= 0x04000000;
 }
@@ -925,76 +925,76 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 
     if (GetKeysPressed() & START_BUTTON) {
         if (!(gBtlWork->flags & 0x04000000)) {
-            gBtlWork->unk_070 = gBtlWork->unk_070 == 0 ? 1 : 0;
+            gBtlWork->paused = gBtlWork->paused == 0 ? 1 : 0;
         }
     }
 
-    paused = gBtlWork->unk_070;
+    paused = gBtlWork->paused;
     if (paused != 0) {
-        if (work->unk_10 == 0) {
+        if (work->visible == 0) {
             FadeSetPaused(1);
-            work->unk_10 = 1;
+            work->visible = 1;
             work->x = -0x4000;
             work->y = 0x5000;
             work->x2 = 0x13000;
             work->y2 = 0x5000;
-            work->unk_24 = 14;
+            work->steps = 14;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
-        m4aMPlayVolumeControl(&gUnk_0203DC90, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DCD0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DEE0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DE50, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DA10, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DAD0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DC50, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DEA0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DA90, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DD10, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DF20, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DDD0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DA50, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DE10, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DC10, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203D990, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DB50, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DBD0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DD90, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203D9D0, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DB90, 0xFF, 0);
-        m4aMPlayVolumeControl(&gUnk_0203DD50, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo1, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo2, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo3, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo4, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo5, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo6, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo7, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo8, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo9, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo10, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo11, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo12, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo16, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo17, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo18, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo19, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo20, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo21, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo22, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo23, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo24, 0xFF, 0);
+        m4aMPlayVolumeControl(&gMPlayInfo25, 0xFF, 0);
         } else {
-            ApproachValue(&work->x, 0x7800, work->unk_24);
-            ApproachValue(&work->x2, 0x7800, work->unk_24);
+            ApproachValue(&work->x, 0x7800, work->steps);
+            ApproachValue(&work->x2, 0x7800, work->steps);
 
-            if (work->unk_24 > 1) {
-                work->unk_24--;
+            if (work->steps > 1) {
+                work->steps--;
             }
         }
-    } else if (work->unk_10 != 0) {
+    } else if (work->visible != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DC90, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DCD0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DEE0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DE50, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DA10, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DAD0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DC50, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DEA0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DA90, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DD10, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DF20, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DDD0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DA50, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DE10, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DC10, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203D990, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DB50, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DBD0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DD90, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203D9D0, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DB90, 0xFF, 0x100);
-        m4aMPlayVolumeControl(&gUnk_0203DD50, 0xFF, 0x100);
-        work->unk_10 = paused;
+        m4aMPlayVolumeControl(&gMPlayInfo1, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo2, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo3, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo4, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo5, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo6, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo7, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo8, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo9, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo10, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo11, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo12, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo16, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo17, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo18, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo19, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo20, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo21, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo22, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo23, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo24, 0xFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo25, 0xFF, 0x100);
+        work->visible = paused;
         FadeSetPaused(0);
     }
 
@@ -1002,7 +1002,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 }
 
 void task_btl_pause_2(BtlPauseWork* work) {
-    if (work->unk_10 != 0) {
+    if (work->visible != 0) {
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 0);
         DrawSprite(work->x2 >> 8, work->y2 >> 8, work->gfx2, work->tiles, work->palette, 0, 0, 0);
     }
@@ -1018,7 +1018,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        switch (src->unk_12) {
+        switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B4A794, 0x100);
             AnimInit(&work->anim, gUnk_09EE11C0, gUnk_09EE11BC);
@@ -1042,7 +1042,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         }
         break;
     case 1:
-        switch (src->unk_12) {
+        switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B51368, 0x100);
             AnimInit(&work->anim, gUnkEu_09F5C1C0, gUnkEu_09F5C1BC);
@@ -1066,7 +1066,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         }
         break;
     case 2:
-        switch (src->unk_12) {
+        switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B516A4, 0x100);
             AnimInit(&work->anim, gUnkEu_09F5C1D8, gUnkEu_09F5C1D4);
@@ -1090,7 +1090,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         }
         break;
     case 3:
-        switch (src->unk_12) {
+        switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B51590, 0x100);
             AnimInit(&work->anim, gUnkEu_09F5C1D0, gUnkEu_09F5C1CC);
@@ -1115,7 +1115,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         break;
     case 4:
     default:
-        switch (src->unk_12) {
+        switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B5147C, 0x100);
             AnimInit(&work->anim, gUnkEu_09F5C1C8, gUnkEu_09F5C1C4);
@@ -1142,7 +1142,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
 
     AnimStart(&work->anim, 0, 1);
 #else
-    switch (src->unk_12) {
+    switch (src->kind) {
     case 0:
         work->tiles = LoadObjTiles(gUnk_08B1F020, 0x100);
         AnimInit(&work->anim, gUnk_09EE11D0, gUnk_09EE11CC);
@@ -1237,7 +1237,7 @@ void task_btl_pop_3(BtlPopWork* work) {
 void task_btl_escape_0(BtlEscapeWork* work) {
     void** p;
 
-    work->unk_18 = 0x5A00;
+    work->progressMax = 0x5A00;
 #ifdef VERSION_EU
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 
@@ -1272,9 +1272,9 @@ void task_btl_escape_0(BtlEscapeWork* work) {
     work->gfx = p[0];
     work->gfx2 = p[2];
     work->gfx3 = p[1];
-    work->unk_14 = 0;
-    work->unk_1C = 0;
-    work->unk_22 = 0;
+    work->progressRatio = 0;
+    work->progress = 0;
+    work->visible = 0;
     work->timer = 0;
 }
 
@@ -1284,26 +1284,26 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
     }
 
     if (!(gBtlWork->flags & 8)) {
-        if (work->unk_22 != 0) {
-            work->unk_1C = 0;
-            work->unk_22 = 0;
+        if (work->visible != 0) {
+            work->progress = 0;
+            work->visible = 0;
             work->timer = 0;
         }
     } else {
         if (work->timer <= 15) {
             work->timer++;
-            work->unk_22 = 0;
+            work->visible = 0;
         } else {
-            work->unk_22 = 1;
-            work->unk_14 = (work->unk_1C << 8) / work->unk_18;
+            work->visible = 1;
+            work->progressRatio = (work->progress << 8) / work->progressMax;
 
-            if (work->unk_1C >= work->unk_18) {
+            if (work->progress >= work->progressMax) {
                 gGameState.flags |= 0x40;
                 gBtlWork->flags |= 0x10;
                 gBtlWork->flags |= 0x0000000200000000;
-                work->unk_22 = 0;
+                work->visible = 0;
             } else {
-                work->unk_1C += 256;
+                work->progress += 256;
             }
         }
     }
@@ -1318,7 +1318,7 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     s32 v;
     ObjAffine* aff;
 
-    if (work->unk_22 == 0) {
+    if (work->visible == 0) {
         return;
     }
 
@@ -1331,8 +1331,8 @@ void task_btl_escape_2(BtlEscapeWork* work) {
         DrawSprite(x, y, work->gfx2, work->tiles, work->palette, 0, 0, 2);
     }
 
-    if (work->unk_14 > 0) {
-        v = work->unk_14 * 2;
+    if (work->progressRatio > 0) {
+        v = work->progressRatio * 2;
         if (v > 256) {
             aff = AllocObjAffine(0, v, 256, 1);
         } else {
@@ -1354,10 +1354,10 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     work->x = src->x;
     work->y = src->y;
     work->z = src->z;
-    work->unk_0C = 0;
+    work->groundZ = 0;
 
     if (gBtlWork->boundsCallback != 0) {
-        gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->unk_0C);
+        gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
     }
 
     work->vz = -(GetRandom() % 897 + 768);
@@ -1365,83 +1365,83 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
 
     work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->unk_28 = 0;
+    work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;
     work->flags = 3;
 
-    if (src->unk_14 != 0) {
+    if (src->noTimeout != 0) {
         work->flags = 11;
     }
 
-    switch (src->unk_12) {
+    switch (src->kind) {
     case 0:
         work->gfx = gBPuraizuFrame1;
-        work->unk_3A = 0;
-        work->unk_38 = 1400;
-        work->unk_24 = 1280;
+        work->healAmount = 0;
+        work->exp = 1400;
+        work->bounceSpeed = 1280;
         spd = 384;
         break;
     case 1:
         work->gfx = gBPuraizuFrame2;
-        work->unk_3A = 3;
-        work->unk_38 = 0;
-        work->unk_24 = 0x300;
+        work->healAmount = 3;
+        work->exp = 0;
+        work->bounceSpeed = 0x300;
         spd = 76;
         break;
     case 2:
         work->gfx = gBPuraizuFrame3;
-        work->unk_3A = 10;
-        work->unk_38 = 0;
-        work->unk_24 = 0x300;
+        work->healAmount = 10;
+        work->exp = 0;
+        work->bounceSpeed = 0x300;
         spd = 76;
         break;
     case 3:
         work->gfx = gBPuraizuFrame4;
-        work->unk_3A = 0;
-        work->unk_38 = 1;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 1;
+        work->bounceSpeed = 0x400;
         spd = 128;
         break;
     case 4:
         work->gfx = gBPuraizuFrame5;
-        work->unk_3A = 0;
-        work->unk_38 = 10;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 10;
+        work->bounceSpeed = 0x400;
         spd = 128;
         break;
     case 5:
         work->gfx = gBPuraizuFrame6;
-        work->unk_3A = 0;
-        work->unk_38 = 60;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 60;
+        work->bounceSpeed = 0x400;
         spd = 128;
         break;
     case 6:
         work->gfx = gBPuraizuFrame7;
-        work->unk_3A = 0;
-        work->unk_38 = 5;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 5;
+        work->bounceSpeed = 0x400;
         spd = 179;
         break;
     case 7:
         work->gfx = gBPuraizuFrame8;
-        work->unk_3A = 0;
-        work->unk_38 = 30;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 30;
+        work->bounceSpeed = 0x400;
         spd = 179;
         break;
     case 8:
     default:
         work->gfx = gBPuraizuFrame9;
-        work->unk_3A = 0;
-        work->unk_38 = 199;
-        work->unk_24 = 0x400;
+        work->healAmount = 0;
+        work->exp = 199;
+        work->bounceSpeed = 0x400;
         spd = 179;
         break;
     }
 
-    work->unk_30 = 0;
-    work->unk_34 = 0x100;
+    work->collected = 0;
+    work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * spd) >> 8;
     work->vy = (-gSineTable[angle + 64] * spd) >> 8;
@@ -1476,15 +1476,15 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
         return 0;
     }
 
-    if (work->unk_30 == 0) {
+    if (work->collected == 0) {
         if (!(work->flags & 4)) {
             if (gBtlWork->boundsCallback != 0) {
-                gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->unk_0C);
+                gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
 
             work->z += work->vz;
             vz = work->vz - 15;
-            work->vz = vz + gBtlWork->unk_12C;
+            work->vz = vz + gBtlWork->gravity;
 
             switch (ClampBattlePosition(&work->x, &work->y, 0, 0)) {
             case 1:
@@ -1500,10 +1500,10 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
             work->x += work->vx;
             work->y += work->vy;
 
-            if (work->z > work->unk_0C) {
+            if (work->z > work->groundZ) {
                 work->flags &= ~2;
-                work->z = work->unk_0C;
-                work->vz = -((work->unk_24 >> 1) + GetRandom() % (work->unk_24 - (work->unk_24 >> 1) + 1));
+                work->z = work->groundZ;
+                work->vz = -((work->bounceSpeed >> 1) + GetRandom() % (work->bounceSpeed - (work->bounceSpeed >> 1) + 1));
             } else {
                 work->flags |= 2;
             }
@@ -1529,7 +1529,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 }
 
                 if (near) {
-                    if (gRikuBtlWork->unk_0F4 == 6) {
+                    if (gRikuBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2800;
@@ -1541,7 +1541,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
-                        if (gBtlWork->unk_0F4 == 6) {
+                        if (gBtlWork->hcEffect == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2800;
@@ -1554,7 +1554,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         }
                     }
                 } else {
-                    if (gBtlWork->unk_0F4 == 6) {
+                    if (gBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2800;
@@ -1565,7 +1565,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
                         hit = 1;
                     } else {
-                        if (gRikuBtlWork->unk_0F4 == 6) {
+                        if (gRikuBtlWork->hcEffect == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2800;
@@ -1580,7 +1580,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     }
                 }
             } else {
-                if (gBtlWork->unk_0F4 == 6) {
+                if (gBtlWork->hcEffect == 6) {
                     range = 0x10000;
                 } else {
                     range = 0x2800;
@@ -1597,59 +1597,59 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 m4aSongNumStart(SONG_SYS_POWER_GET);
 
                 if (gBtlWork->flags & 0x4000) {
-                    work->actor->unk_02C += work->unk_3A;
+                    work->actor->hp += work->healAmount;
 
-                    if (work->actor->unk_02C > work->actor->unk_02E) {
-                        work->actor->unk_02C = work->actor->unk_02E;
+                    if (work->actor->hp > work->actor->maxHp) {
+                        work->actor->hp = work->actor->maxHp;
                     }
                 } else {
-                    work->actor->unk_02C += work->unk_3A;
+                    work->actor->hp += work->healAmount;
 
-                    if (work->actor->unk_02C > work->actor->unk_02E) {
-                        work->actor->unk_02C = work->actor->unk_02E;
+                    if (work->actor->hp > work->actor->maxHp) {
+                        work->actor->hp = work->actor->maxHp;
                     }
-                    gGameState.progression.exp += work->unk_38;
+                    gGameState.progression.exp += work->exp;
                 }
 
-                work->unk_30 = 1;
-                work->unk_28 = 0;
+                work->collected = 1;
+                work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
                 work->flags &= ~2;
                 work->flags |= 1;
-                work->unk_2A = GetRandom() % 6 + 5;
+                work->spinSpeed = GetRandom() % 6 + 5;
                 return 1;
             }
 
             if (!(work->flags & 8)) {
-                if (work->unk_28 > 360 && (work->unk_28 & 3) == 0) {
+                if (work->timer > 360 && (work->timer & 3) == 0) {
                     work->flags ^= 1;
                 }
 
-                if (work->unk_28 > 420) {
+                if (work->timer > 420) {
                     return 0;
                 }
             }
         } else {
-            if (work->unk_28 > 10) {
+            if (work->timer > 10) {
                 work->flags |= 16;
             }
         }
 
-        work->unk_28++;
+        work->timer++;
     } else {
-        tx = work->actor->x + ((gSineTable[work->angle] * (work->unk_34 << 5)) >> 8);
-        ty = work->actor->y + ((-gSineTable[work->angle + 64] * (work->unk_34 << 4)) >> 8);
-        tz = work->actor->z - ((work->unk_28 >> 1) << 8);
-        work->angle += work->unk_2A;
+        tx = work->actor->x + ((gSineTable[work->angle] * (work->orbitRadius << 5)) >> 8);
+        ty = work->actor->y + ((-gSineTable[work->angle + 64] * (work->orbitRadius << 4)) >> 8);
+        tz = work->actor->z - ((work->timer >> 1) << 8);
+        work->angle += work->spinSpeed;
         work->x += (tx - work->x) >> 2;
         work->y += (ty - work->y) >> 2;
         work->z += (tz - work->z) >> 2;
-        work->unk_34 -= 2;
+        work->orbitRadius -= 2;
 
-        if (work->unk_28 > 60) {
+        if (work->timer > 60) {
             return 0;
         }
-        work->unk_28++;
+        work->timer++;
     }
 
     return 1;
@@ -1669,7 +1669,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
                    (u16)(-4100 - (work->y >> 8) * 4));
 
         if (work->flags & 2) {
-            WorldToScreen(&x, &y, work->x, work->y, work->unk_0C);
+            WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
             DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, pri, 0xFFFF);
         }
     }
@@ -1688,10 +1688,10 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->x = src->x;
     work->y = src->y;
     work->z = src->z;
-    work->unk_0C = 0;
+    work->groundZ = 0;
 
     if (gBtlWork->boundsCallback != 0) {
-        gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->unk_0C);
+        gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
     }
 
     work->vz = -(GetRandom() % 897 + 768);
@@ -1702,17 +1702,17 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     AnimInit(&work->anim, gBPuraizuAnims, gBPuraizuFrames);
     AnimStart(&work->anim, 10, 1);
     work->gfx = AnimGetGfx(&work->anim);
-    work->unk_28 = 0;
+    work->timer = 0;
     work->gfx2 = gBPuraizuFrame0;
     work->flags = 3;
 
-    if (src->unk_14 != 0) {
+    if (src->noTimeout != 0) {
         work->flags = 11;
     }
-    work->unk_24 = 0x400;
+    work->bounceSpeed = 0x400;
     spd = 384;
-    work->unk_30 = 0;
-    work->unk_34 = 0x100;
+    work->collected = 0;
+    work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * spd) >> 8;
     work->vy = (-gSineTable[angle + 64] * spd) >> 8;
@@ -1732,15 +1732,15 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
         return 0;
     }
 
-    if (work->unk_30 == 0) {
+    if (work->collected == 0) {
         if (!(work->flags & 4)) {
             if (gBtlWork->boundsCallback != 0) {
-                gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->unk_0C);
+                gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
 
             work->z += work->vz;
             vz = work->vz - 15;
-            work->vz = vz + gBtlWork->unk_12C;
+            work->vz = vz + gBtlWork->gravity;
 
             switch (ClampBattlePosition(&work->x, &work->y, 0, 0)) {
             case 1:
@@ -1756,10 +1756,10 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             work->x += work->vx;
             work->y += work->vy;
 
-            if (work->z > work->unk_0C) {
+            if (work->z > work->groundZ) {
                 work->flags &= ~2;
-                work->z = work->unk_0C;
-                work->vz = -((work->unk_24 >> 1) + GetRandom() % (work->unk_24 - (work->unk_24 >> 1) + 1));
+                work->z = work->groundZ;
+                work->vz = -((work->bounceSpeed >> 1) + GetRandom() % (work->bounceSpeed - (work->bounceSpeed >> 1) + 1));
             } else {
                 work->flags |= 2;
             }
@@ -1771,7 +1771,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
             if (f & 0x4000) {
                 if (f & 0x1000) {
-                    if (gRikuBtlWork->unk_0F4 == 6) {
+                    if (gRikuBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2000;
@@ -1783,7 +1783,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         work->actor = gRikuBtlWork->actor;
                         hit = 1;
                     } else {
-                        if (gBtlWork->unk_0F4 == 6) {
+                        if (gBtlWork->hcEffect == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2000;
@@ -1796,7 +1796,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         }
                     }
                 } else {
-                    if (gBtlWork->unk_0F4 == 6) {
+                    if (gBtlWork->hcEffect == 6) {
                         range = 0x10000;
                     } else {
                         range = 0x2000;
@@ -1807,7 +1807,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
                         hit = 1;
                     } else {
-                        if (gRikuBtlWork->unk_0F4 == 6) {
+                        if (gRikuBtlWork->hcEffect == 6) {
                             range = 0x10000;
                         } else {
                             range = 0x2000;
@@ -1822,7 +1822,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                     }
                 }
             } else {
-                if (gBtlWork->unk_0F4 == 6) {
+                if (gBtlWork->hcEffect == 6) {
                     range = 0x10000;
                 } else {
                     range = 0x2000;
@@ -1838,48 +1838,48 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
             if (hit) {
                 m4aSongNumStart(SONG_SYS_POWER_GET);
                 gBtlWork->flags |= 0x0008000000000000;
-                work->unk_28 = 0;
-                work->unk_30 = 1;
-                work->unk_28 = 0;
+                work->timer = 0;
+                work->collected = 1;
+                work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
                 work->flags &= ~2;
                 work->flags |= 1;
-                work->unk_2A = GetRandom() % 6 + 5;
+                work->spinSpeed = GetRandom() % 6 + 5;
                 work->gfx = AnimUpdate(&work->anim);
                 return 1;
             }
 
             if (!(work->flags & 8)) {
-                if (work->unk_28 > 360 && (work->unk_28 & 3) == 0) {
+                if (work->timer > 360 && (work->timer & 3) == 0) {
                     work->flags ^= 1;
                 }
 
-                if (work->unk_28 > 420) {
+                if (work->timer > 420) {
                     return 0;
                 }
             }
         } else {
-            if (work->unk_28 > 10) {
+            if (work->timer > 10) {
                 work->flags |= 16;
             }
         }
 
-        work->unk_28++;
+        work->timer++;
     } else {
-        tx = work->actor->x + ((gSineTable[work->angle] * (work->unk_34 << 5)) >> 8);
-        ty = work->actor->y + ((-gSineTable[work->angle + 64] * (work->unk_34 << 4)) >> 8);
-        tz = work->actor->z - ((work->unk_28 >> 1) << 8);
-        work->angle += work->unk_2A;
+        tx = work->actor->x + ((gSineTable[work->angle] * (work->orbitRadius << 5)) >> 8);
+        ty = work->actor->y + ((-gSineTable[work->angle + 64] * (work->orbitRadius << 4)) >> 8);
+        tz = work->actor->z - ((work->timer >> 1) << 8);
+        work->angle += work->spinSpeed;
         work->x += (tx - work->x) >> 2;
         work->y += (ty - work->y) >> 2;
         work->z += (tz - work->z) >> 2;
-        work->unk_34 -= 2;
+        work->orbitRadius -= 2;
 
-        if (work->unk_28 > 60) {
+        if (work->timer > 60) {
             return 0;
         }
 
-        work->unk_28++;
+        work->timer++;
     }
 
     work->gfx = AnimUpdate(&work->anim);
@@ -1900,7 +1900,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
                    (u16)(-4100 - (work->y >> 8) * 4));
 
         if (work->flags & 2) {
-            WorldToScreen(&x, &y, work->x, work->y, work->unk_0C);
+            WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
             DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, anim, 0xFFFF);
         }
     }
@@ -1913,24 +1913,24 @@ void task_btl_premire_3(BtlPremireWork* work) {
 }
 
 void task_btl_start_0(BtlStartWork* work) {
-    BgAnimStart(&gUnk_09EDA918, 120, 72);
+    BgAnimStart(&gBgAnimDefBtlStart, 120, 72);
     BgAnimSetTransform(0, 0x200, 0x200);
     SetBgBlend(gBtlWork->bg, 16, 16);
-    func_08019050(1, 0x200, 0x10000, 0x14000);
+    SetBattleZoom(1, 0x200, 0x10000, 0x14000);
     FadeStartIn(0, 60);
-    work->unk_00 = 0;
+    work->timer = 0;
     m4aSongNumStart(SONG_SYS_ENCOUNT);
     SetBgPriority(gBtlWork->bg, 0);
 }
 
 s32 task_btl_start_1(BtlStartWork* work) {
-    if (work->unk_00 <= 20) {
+    if (work->timer <= 20) {
         FadeStartIn(0, 40);
     }
 
-    switch (work->unk_00) {
+    switch (work->timer) {
     case 34:
-        func_08019050(35, 0x100, gBtlWork->x2, gBtlWork->y2);
+        SetBattleZoom(35, 0x100, gBtlWork->x2, gBtlWork->y2);
         break;
     case 43:
         FadeStartIn(2, 30);
@@ -1939,7 +1939,7 @@ s32 task_btl_start_1(BtlStartWork* work) {
         return 0;
     }
 
-    work->unk_00++;
+    work->timer++;
     return 1;
 }
 

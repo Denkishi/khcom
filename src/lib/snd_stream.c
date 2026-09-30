@@ -26,16 +26,16 @@ void SndStreamInit(u32 rate, u32 channels) {
     gSndStream.channels = channels;
     gSndStream.playing = 0;
     gSndStream.dmaOffset = 0;
-    gSndStream.unk_2C = 0;
+    gSndStream.playedTotal = 0;
 
     for (i = 0; i < channels; i++) {
         gSndStream.buffers[i] =
             gSndStream.alloc((gSndStream.bufferSize + 3) & ~3);
         memset(gSndStream.buffers[i], 0, gSndStream.bufferSize);
         gSndStream.writePos[i] = 0;
-        gSndStream.unk_10[i] = 0;
-        gSndStream.unk_18[i] = 0;
-        gSndStream.unk_20[i] = 0;
+        gSndStream.totalWritten[i] = 0;
+        gSndStream.lockPos[i] = 0;
+        gSndStream.lockTotal[i] = 0;
     }
 
     if (channels == 1) {
@@ -62,7 +62,7 @@ void SndStreamUpdate(void) {
         if (gSndStream.dmaOffset == gSndStream.bufferSize) {
             gSndStream.dmaOffset = 0;
         }
-        gSndStream.unk_2C += gSndStream.samplesPerFrame;
+        gSndStream.playedTotal += gSndStream.samplesPerFrame;
 
         if (gSndStream.channels == 1) {
             REG_DMA1CNT = 0;
@@ -96,27 +96,27 @@ void SndStreamLock(u32 ch, u32 len, void** dst1, u32* len1, void** dst2,
         *len1 = avail;
         *dst2 = gSndStream.buffers[ch];
         *len2 = len - avail;
-        gSndStream.unk_18[ch] = len - avail;
-        gSndStream.unk_20[ch] += len;
+        gSndStream.lockPos[ch] = len - avail;
+        gSndStream.lockTotal[ch] += len;
     } else {
         *dst1 = (u8*)gSndStream.buffers[ch] + gSndStream.writePos[ch];
         *len1 = len;
         *dst2 = 0;
         *len2 = 0;
-        gSndStream.unk_18[ch] += len;
-        gSndStream.unk_20[ch] += len;
+        gSndStream.lockPos[ch] += len;
+        gSndStream.lockTotal[ch] += len;
     }
 
-    if (gSndStream.unk_18[ch] == gSndStream.bufferSize) {
-        gSndStream.unk_18[ch] = 0;
+    if (gSndStream.lockPos[ch] == gSndStream.bufferSize) {
+        gSndStream.lockPos[ch] = 0;
     }
 }
 
 void SndStreamSetCallbacks(void* (*a)(u32), void* (*b)(u32), void (*c)(void*),
                    void (*d)(void*)) {
-    gSndStream.unk_48 = a;
+    gSndStream.iwramAlloc = a;
     gSndStream.alloc = b;
-    gSndStream.unk_50 = c;
+    gSndStream.iwramFree = c;
     gSndStream.free = d;
 }
 
@@ -151,6 +151,6 @@ void SndStreamStop(void) {
 }
 
 void SndStreamUnlock(u32 ch) {
-    gSndStream.writePos[ch] = gSndStream.unk_18[ch];
-    gSndStream.unk_10[ch] = gSndStream.unk_20[ch];
+    gSndStream.writePos[ch] = gSndStream.lockPos[ch];
+    gSndStream.totalWritten[ch] = gSndStream.lockTotal[ch];
 }

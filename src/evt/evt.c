@@ -28,40 +28,40 @@ void EvtObjSetPos(EvtObj* obj, s32 a, s32 b, s32 c) {
     obj->z = c;
 }
 
-void func_0801CD94(EvtObj* obj, s32 a) {
-    obj->unk_10 = a;
+void EvtObjSetGroundZ(EvtObj* obj, s32 a) {
+    obj->groundZ = a;
 }
 
 void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
     EvtObjParam param;
 
-    param.res = &gUnk_0813B09C[res].res;
+    param.res = &gEvtObjResources[res].res;
     param.obj = obj;
     EvtObjSetAnim(obj, anim);
     EvtObjSetPos(obj, a, b, c);
     obj->flags = 0;
-    obj->unk_10 = 0;
-    obj->unk_16 = 0x800;
+    obj->groundZ = 0;
+    obj->drawFlags = 0x800;
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;
     TaskCreate(pool, &gTaskDescEvtObj, &param);
 }
 
-void func_0801CE00(EvtObj* obj, u16 a) {
-    obj->unk_16 = a;
+void EvtObjSetDrawFlags(EvtObj* obj, u16 a) {
+    obj->drawFlags = a;
 }
 
-Task* func_0801CE04(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
+Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, s32 c) {
     EvtObjParam param;
 
-    param.res = &gUnk_0813B09C[res].res;
+    param.res = &gEvtObjResources[res].res;
     param.obj = obj;
     EvtObjSetAnim(obj, anim);
     EvtObjSetPos(obj, a, b, c);
     obj->flags = 0;
-    obj->unk_10 = 0;
-    obj->unk_16 = 0x800;
+    obj->groundZ = 0;
+    obj->drawFlags = 0x800;
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;
@@ -90,7 +90,7 @@ void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
     work->palette = LoadObjPalette(res->palette, 32);
     AnimInit(&work->anim, 0, 0);
     work->obj->anim = &work->anim;
-    work->obj->unk_1C = work->palette->index;
+    work->obj->paletteIndex = work->palette->index;
     EvtObjChangeAnim(work);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescEvtShadow, work->obj);
@@ -123,7 +123,7 @@ void task_evt_obj_2(EvtObjWork* work) {
     y = (obj->y >> 8) + (obj->z >> 8) - (gEventState->y >> 8);
     gfx = AnimGetGfx(&work->anim);
     DrawSprite(x, y, gfx, work->tiles, work->palette,
-        AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->unk_16,
+        AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->drawFlags,
         (u16)(-0x1002 - (obj->y >> 8) * 4));
     TaskPoolDraw(&work->tasks);
 }
@@ -172,10 +172,10 @@ void task_evt_shadow_2(EvtShadowWork* work) {
         vram = work->tiles;
     }
 
-    if (obj->z >= obj->unk_10) {
+    if (obj->z >= obj->groundZ) {
         sprite = 0;
     } else {
-        size = 0x100 - (obj->unk_10 - obj->z) / 128;
+        size = 0x100 - (obj->groundZ - obj->z) / 128;
 
         if (size <= 0x18) {
             size = 0x19;
@@ -185,8 +185,8 @@ void task_evt_shadow_2(EvtShadowWork* work) {
     }
 
     x = (obj->x >> 8) - (gEventState->x >> 8);
-    y = (obj->y >> 8) + (obj->unk_10 >> 8) - (gEventState->y >> 8);
-    DrawSprite(x, y, gfx, vram, work->palette, sprite, obj->unk_16, 0xFFF0);
+    y = (obj->y >> 8) + (obj->groundZ >> 8) - (gEventState->y >> 8);
+    DrawSprite(x, y, gfx, vram, work->palette, sprite, obj->drawFlags, 0xFFF0);
 }
 
 void task_evt_shadow_3(EvtShadowWork* work) {

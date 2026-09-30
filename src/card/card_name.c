@@ -41,22 +41,22 @@
 #include "sprites_card.h"
 #include "premium_card_effect.h"
 
-UnkStruct_02034AD4* gUnk_02034AD4;
+PrintLine* gPrintLines;
 
-u8 gUnk_02034AD8;
+u8 gPrintLineCount;
 
-u8 gUnk_02034AD9;
+u8 gPrintBg;
 
 u8 gUnk_02034ADA[6];
 
-void func_0809D124(PremiumCardEffectWork* w);
-void func_0809D1B0(PremiumCardEffectWork* w);
-void func_0809D160(PremiumCardEffectWork* w);
+void PremireEffectSetOrbitPos(PremiumCardEffectWork* w);
+void PremireEffectMoveToCenter(PremiumCardEffectWork* w);
+void PremireEffectMoveFalling(PremiumCardEffectWork* w);
 
 #include "premium_message.inc"
 
 void CardName_0(CardNameWork* w) {
-    UnkStruct_0809C534* q = gCardListWork->selectedCard;
+    PremireChanceCardWork* q = gCardListWork->selectedCard;
     ObjPalette* pal;
     s32 v;
     s16 t;
@@ -68,7 +68,7 @@ void CardName_0(CardNameWork* w) {
 #else
     InitTextSlots(w->textSlots3, 2);
 #endif
-    w->unk_218 = _08066468(1);
+    w->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
     w->textSlotCount = LoadTextSlots(eu_0805E924(q->cardDef->name), w->textSlots);
     w->textSlotCount2 = LoadTextSlots((u16*)gUnkEu_09F6602C.strings[gLanguage], w->textSlots2);
@@ -91,28 +91,28 @@ void CardName_0(CardNameWork* w) {
     case 3:
         w->textSlotCount3 = 0;
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->unk_220 = v;
-        t = (u16)w->unk_220 + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-        w->unk_224 = t;
+        w->nameX = v;
+        t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
+        w->suffixX = t;
         v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->unk_222 = v;
+        w->messageX = v;
         break;
     case 1:
         w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, w->textSlots3);
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->unk_220 = v;
-        t = (u16)w->unk_220 + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-        w->unk_224 = t;
+        w->nameX = v;
+        t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
+        w->suffixX = t;
         v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->unk_222 = v;
+        w->messageX = v;
         break;
     case 4:
         w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF64D, w->textSlots3);
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->unk_220 = v;
-        w->unk_224 = v - 3;
+        w->nameX = v;
+        w->suffixX = v - 3;
         v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->unk_222 = v;
+        w->messageX = v;
         break;
     default:
         w->textSlotCount3 = 0;
@@ -120,17 +120,17 @@ void CardName_0(CardNameWork* w) {
     }
 #else
     v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-    w->unk_220 = v;
-    t = (u16)w->unk_220 + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-    w->unk_224 = t;
+    w->nameX = v;
+    t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
+    w->suffixX = t;
     v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-    w->unk_222 = v;
+    w->messageX = v;
 #endif
     w->tiles = LoadObjTiles(&gUnk_093F8C8E[0xC1E], 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
-    w->unk_04 = pal;
+    w->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, 1);
-    FadeSetPaletteExcluded(w->unk_218->index + 16, 1);
+    FadeSetPaletteExcluded(w->textPalette->index + 16, 1);
 }
 s32 CardName_1(void) {
     return 1;
@@ -138,16 +138,16 @@ s32 CardName_1(void) {
 void CardName_2(CardNameWork* w) {
     void** p = &gUnk_09EF1278[2];
 
-    DrawSprite(120, 126, *p, w->tiles, w->unk_04, 0, 0, 50);
+    DrawSprite(120, 126, *p, w->tiles, w->palette2, 0, 0, 50);
 #ifdef VERSION_JP
-    DrawTextSlots(w->unk_220, 115, w->textSlots, w->unk_218, 30, w->textSlotCount);
+    DrawTextSlots(w->nameX, 115, w->textSlots, w->textPalette, 30, w->textSlotCount);
 #else
-    DrawTextSlots(w->unk_220, 115, w->textSlots, w->palette, 30, w->textSlotCount);
+    DrawTextSlots(w->nameX, 115, w->textSlots, w->palette, 30, w->textSlotCount);
 #endif
 #ifndef VERSION_US
-    DrawTextSlots(w->unk_224, 115, w->textSlots3, w->unk_218, 30, w->textSlotCount3);
+    DrawTextSlots(w->suffixX, 115, w->textSlots3, w->textPalette, 30, w->textSlotCount3);
 #endif
-    DrawTextSlots(w->unk_222, 130, w->textSlots2, w->unk_218, 30, w->textSlotCount2);
+    DrawTextSlots(w->messageX, 130, w->textSlots2, w->textPalette, 30, w->textSlotCount2);
 }
 void CardName_3(CardNameWork* w) {
     FreeTextSlots(w->textSlots, 32);
@@ -155,67 +155,67 @@ void CardName_3(CardNameWork* w) {
 #ifdef VERSION_EU
     FreeTextSlots(w->textSlots3, 32);
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->unk_218);
-    ReleaseObjPalette(w->unk_04);
+    ReleaseObjPalette(w->textPalette);
+    ReleaseObjPalette(w->palette2);
     ReleaseObjPalette(w->palette);
 #else
     FreeTextSlots(w->textSlots3, 2);
     ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->unk_218);
-    ReleaseObjPalette(w->unk_04);
+    ReleaseObjPalette(w->textPalette);
+    ReleaseObjPalette(w->palette2);
 #ifndef VERSION_JP
     ReleaseObjPalette(w->palette);
 #endif
 #endif
 }
 
-void func_0809CE88(PremiumCardEffectWork* w, s16* a) {
+void PremireEffectInit(PremiumCardEffectWork* w, s16* a) {
     w->tiles = AllocObjTiles(128, 0);
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
     AnimStart(&w->anim, GetRandom() % 3, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_24 = a[1] << 8;
-    w->unk_28 = a[2] << 8;
-    w->unk_2C = 0;
-    w->unk_40 = a[0] << 8;
+    w->centerX = a[1] << 8;
+    w->centerY = a[2] << 8;
+    w->fallY = 0;
+    w->radius = a[0] << 8;
     w->angle = a[3];
-    w->unk_4C = GetRandom() % 0x181 + 0x100;
+    w->speed = GetRandom() % 0x181 + 0x100;
     w->x = 0;
     w->y = 0;
     w->unk_38 = 0;
-    w->unk_50 = -(GetRandom() % 0x81 + 0x200);
+    w->fallSpeed = -(GetRandom() % 0x81 + 0x200);
     gCardListWork->effectCount++;
 }
 
-void func_0809CF64(PremiumCardEffectWork* w, s16* a) {
+void PremireEffectConvergeInit(PremiumCardEffectWork* w, s16* a) {
     w->tiles = AllocObjTiles(128, 0);
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
     AnimStart(&w->anim, GetRandom() % 3, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_24 = a[1] << 8;
-    w->unk_28 = a[2] << 8;
-    w->unk_2C = 0;
-    w->unk_40 = a[0] << 8;
+    w->centerX = a[1] << 8;
+    w->centerY = a[2] << 8;
+    w->fallY = 0;
+    w->radius = a[0] << 8;
     w->angle = a[3];
-    w->unk_4C = GetRandom() % 0x81 + 0x200;
+    w->speed = GetRandom() % 0x81 + 0x200;
     w->x = 0;
     w->y = 0;
     w->unk_38 = 0;
-    w->unk_50 = -(GetRandom() % 0x81 + 0x200);
-    func_0809D124(w);
+    w->fallSpeed = -(GetRandom() % 0x81 + 0x200);
+    PremireEffectSetOrbitPos(w);
     gCardListWork->effectCount++;
 }
 
-s32 func_0809D040(PremiumCardEffectWork* w) {
-    func_0809D124(w);
+s32 PremireEffectSpiralUpdate(PremiumCardEffectWork* w) {
+    PremireEffectSetOrbitPos(w);
     w->angle += 8;
 
-    if (w->unk_40 > 0) {
-        w->unk_40 += -0x180;
+    if (w->radius > 0) {
+        w->radius += -0x180;
         w->gfx = AnimUpdate(&w->anim);
         return 1;
     }
@@ -223,7 +223,7 @@ s32 func_0809D040(PremiumCardEffectWork* w) {
     return 0;
 }
 s32 Premire_EFFECT2_1(PremiumCardEffectWork* w) {
-    func_0809D160(w);
+    PremireEffectMoveFalling(w);
     w->gfx = AnimUpdate(&w->anim);
 
     if (w->y > 0xB400) {
@@ -232,59 +232,59 @@ s32 Premire_EFFECT2_1(PremiumCardEffectWork* w) {
 
     return 1;
 }
-s32 func_0809D09C(PremiumCardEffectWork* w) {
-    func_0809D1B0(w);
+s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* w) {
+    PremireEffectMoveToCenter(w);
     w->angle += 8;
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->unk_40 <= 0x800) {
+    if (w->radius <= 0x800) {
         return 0;
     }
 
     return 1;
 }
-void func_0809D0CC(PremiumCardEffectWork* w) {
+void PremireEffectDraw(PremiumCardEffectWork* w) {
     DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 0);
 }
-void func_0809D0FC(PremiumCardEffectWork* w) {
+void PremireEffectDestroy(PremiumCardEffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
     gCardListWork->effectCount--;
 }
 
-void func_0809D124(PremiumCardEffectWork* w) {
-    w->x = gSineTable[w->angle & 0xFF] * (w->unk_40 >> 8) + w->unk_24;
-    w->y = -gSineTable[(w->angle & 0xFF) + 64] * (w->unk_40 >> 8) + w->unk_28;
+void PremireEffectSetOrbitPos(PremiumCardEffectWork* w) {
+    w->x = gSineTable[w->angle & 0xFF] * (w->radius >> 8) + w->centerX;
+    w->y = -gSineTable[(w->angle & 0xFF) + 64] * (w->radius >> 8) + w->centerY;
 }
 
-void func_0809D160(PremiumCardEffectWork* w) {
-    w->unk_50 += 30;
-    w->unk_2C += w->unk_50;
-    w->unk_24 += gSineTable[w->angle & 0xFF] * (w->unk_4C >> 8);
-    w->unk_28 += -gSineTable[(w->angle & 0xFF) + 64] * (w->unk_4C >> 8);
-    w->x = w->unk_24;
-    w->y = w->unk_28 + w->unk_2C;
+void PremireEffectMoveFalling(PremiumCardEffectWork* w) {
+    w->fallSpeed += 30;
+    w->fallY += w->fallSpeed;
+    w->centerX += gSineTable[w->angle & 0xFF] * (w->speed >> 8);
+    w->centerY += -gSineTable[(w->angle & 0xFF) + 64] * (w->speed >> 8);
+    w->x = w->centerX;
+    w->y = w->centerY + w->fallY;
 }
 
-void func_0809D1B0(PremiumCardEffectWork* w) {
+void PremireEffectMoveToCenter(PremiumCardEffectWork* w) {
     s32 v;
     s32 d;
 
-    w->vx = w->unk_24 - w->x;
-    w->vy = w->unk_28 - w->y;
-    w->unk_40 = NormalizeVector2D8(&w->vx, &w->vy);
-    v = w->unk_4C;
+    w->vx = w->centerX - w->x;
+    w->vy = w->centerY - w->y;
+    w->radius = NormalizeVector2D8(&w->vx, &w->vy);
+    v = w->speed;
     d = v >> 8;
     w->x += w->vx * d;
     w->y += w->vy * d;
 
-    if (w->unk_40 > 0) {
-        w->unk_4C = v - 2;
+    if (w->radius > 0) {
+        w->speed = v - 2;
     }
 }
 
-void func_0809D1FC(u8 bg) {
-    UnkStruct_02034AD4** p;
+void InitPrintLayer(u8 bg) {
+    PrintLine** p;
 
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
@@ -292,16 +292,16 @@ void func_0809D1FC(u8 bg) {
     LoadBgMap(bg, gUnk_08125E24, 0x800);
     LoadBgPalette(bg, gUnk_09036300, 0x80);
     EnableBg(bg);
-    gUnk_02034AD9 = bg;
-    p = &gUnk_02034AD4;
-    *p = EwramAlloc(sizeof(UnkStruct_02034AD4) * 32);
+    gPrintBg = bg;
+    p = &gPrintLines;
+    *p = EwramAlloc(sizeof(PrintLine) * 32);
 }
 
-void func_0809D26C(void) {
-    EwramFree(gUnk_02034AD4);
+void FreePrintLayer(void) {
+    EwramFree(gPrintLines);
 }
 
-u8 func_0809D280(u8* p) {
+u8 GetStringLength(u8* p) {
     u8 n;
 
     n = 0;
@@ -319,53 +319,53 @@ u8 func_0809D280(u8* p) {
     return n + 1;
 }
 
-void func_0809D2B0(u8 a, u8 b, u8 c, u8* s) {
+void PrintString(u8 a, u8 b, u8 c, u8* s) {
     u8 n;
     u8 i;
 
-    if (gUnk_02034AD8 < 32) {
-        n = func_0809D280(s);
+    if (gPrintLineCount < 32) {
+        n = GetStringLength(s);
 
         if (n > 32) {
             n = 32;
         }
 
         for (i = 0; i < n; i++) {
-            gUnk_02034AD4[gUnk_02034AD8].unk_04[i] = s[i];
-            gUnk_02034AD4[gUnk_02034AD8].unk_04[i] |= c << 12;
+            gPrintLines[gPrintLineCount].tilemap[i] = s[i];
+            gPrintLines[gPrintLineCount].tilemap[i] |= c << 12;
         }
 
-        gUnk_02034AD4[gUnk_02034AD8].unk_01 = a;
-        gUnk_02034AD4[gUnk_02034AD8].unk_02 = b;
-        gUnk_02034AD4[gUnk_02034AD8].unk_03 = c;
-        gUnk_02034AD4[gUnk_02034AD8].unk_00 = n;
-        RequestTilemapRectCopy(gUnk_02034AD4[gUnk_02034AD8].unk_04, (void*)GetBgScreenBase(gUnk_02034AD9), 0, 0,
-                      gUnk_02034AD4[gUnk_02034AD8].unk_01,
-                      gUnk_02034AD4[gUnk_02034AD8].unk_02,
-                      (s8)gUnk_02034AD4[gUnk_02034AD8].unk_00, 1);
-        gUnk_02034AD8++;
+        gPrintLines[gPrintLineCount].x = a;
+        gPrintLines[gPrintLineCount].y = b;
+        gPrintLines[gPrintLineCount].palette = c;
+        gPrintLines[gPrintLineCount].length = n;
+        RequestTilemapRectCopy(gPrintLines[gPrintLineCount].tilemap, (void*)GetBgScreenBase(gPrintBg), 0, 0,
+                      gPrintLines[gPrintLineCount].x,
+                      gPrintLines[gPrintLineCount].y,
+                      (s8)gPrintLines[gPrintLineCount].length, 1);
+        gPrintLineCount++;
     }
 }
 
-void func_0809D3F0(void) {
-    gUnk_02034AD8 = 0;
+void ResetPrintLines(void) {
+    gPrintLineCount = 0;
 }
 
-void func_0809D3FC(void) {
+void ClearPrintLines(void) {
     s16 i;
 
-    for (i = 0; i < gUnk_02034AD8; i++) {
-        gUnk_02034AD4[i].unk_00 = 0;
-        gUnk_02034AD4[i].unk_01 = 0;
-        gUnk_02034AD4[i].unk_02 = 0;
-        gUnk_02034AD4[i].unk_03 = 0;
-        gUnk_02034AD4[i].unk_04[0] = 0;
+    for (i = 0; i < gPrintLineCount; i++) {
+        gPrintLines[i].length = 0;
+        gPrintLines[i].x = 0;
+        gPrintLines[i].y = 0;
+        gPrintLines[i].palette = 0;
+        gPrintLines[i].tilemap[0] = 0;
     }
 
-    gUnk_02034AD8 = 0;
+    gPrintLineCount = 0;
 }
 
-void func_0809D458(u16 x, u16 y, u16 color, s32 value) {
+void PrintNumber(u16 x, u16 y, u16 color, s32 value) {
     s32 digits[8];
     u8 text[10];
     s32 i;
@@ -400,7 +400,7 @@ void func_0809D458(u16 x, u16 y, u16 color, s32 value) {
             } while (text[i] <= '0');
         }
 
-        func_0809D2B0(x, y, color, &text[i]);
+        PrintString(x, y, color, &text[i]);
     } else {
         digits[0] = value / -10000000;
         digits[1] = value / -1000000 - 10 * digits[0];
@@ -433,11 +433,11 @@ void func_0809D458(u16 x, u16 y, u16 color, s32 value) {
         }
 
         text[--i] = '-';
-        func_0809D2B0(x, y, color, &text[i]);
+        PrintString(x, y, color, &text[i]);
     }
 }
 
-void func_0809D87C(u16 a, u16 b, u16 c, u16 bits) {
+void PrintBinary16(u16 a, u16 b, u16 c, u16 bits) {
     u16 v[16];
     u8 s[17];
     u16 i;
@@ -449,10 +449,10 @@ void func_0809D87C(u16 a, u16 b, u16 c, u16 bits) {
     }
 
     s[16] = 0;
-    func_0809D2B0(a, b, c, s);
+    PrintString(a, b, c, s);
 }
 
-void func_0809D900(u16 a, u16 b, u16 c, u32 v) {
+void PrintHex32(u16 a, u16 b, u16 c, u32 v) {
     u8 s[11];
     s32 i;
 
@@ -472,7 +472,7 @@ void func_0809D900(u16 a, u16 b, u16 c, u32 v) {
     }
 
     s[10] = 0;
-    func_0809D2B0(a, b, c, s);
+    PrintString(a, b, c, s);
 }
 
 TaskDesc gTaskDescCardName = {
@@ -484,29 +484,29 @@ TaskDesc gTaskDescCardName = {
     sizeof(CardNameWork),
 };
 
-TaskDesc gUnk_09EE784C = {
+TaskDesc gTaskDescPremireEFFECTSpiral = {
     "Premire_EFFECT",
-    (TaskInitFunc)func_0809CE88,
-    (TaskUpdateFunc)func_0809D040,
-    (TaskDrawFunc)func_0809D0CC,
-    (TaskDestroyFunc)func_0809D0FC,
+    (TaskInitFunc)PremireEffectInit,
+    (TaskUpdateFunc)PremireEffectSpiralUpdate,
+    (TaskDrawFunc)PremireEffectDraw,
+    (TaskDestroyFunc)PremireEffectDestroy,
     sizeof(PremiumCardEffectWork),
 };
 
 TaskDesc gTaskDescPremireEFFECT2 = {
     "Premire_EFFECT2",
-    (TaskInitFunc)func_0809CE88,
+    (TaskInitFunc)PremireEffectInit,
     (TaskUpdateFunc)Premire_EFFECT2_1,
-    (TaskDrawFunc)func_0809D0CC,
-    (TaskDestroyFunc)func_0809D0FC,
+    (TaskDrawFunc)PremireEffectDraw,
+    (TaskDestroyFunc)PremireEffectDestroy,
     sizeof(PremiumCardEffectWork),
 };
 
-TaskDesc gUnk_09EE787C = {
+TaskDesc gTaskDescPremireEFFECTConverge = {
     "Premire_EFFECT",
-    (TaskInitFunc)func_0809CF64,
-    (TaskUpdateFunc)func_0809D09C,
-    (TaskDrawFunc)func_0809D0CC,
-    (TaskDestroyFunc)func_0809D0FC,
+    (TaskInitFunc)PremireEffectConvergeInit,
+    (TaskUpdateFunc)PremireEffectConvergeUpdate,
+    (TaskDrawFunc)PremireEffectDraw,
+    (TaskDestroyFunc)PremireEffectDestroy,
     sizeof(PremiumCardEffectWork),
 };

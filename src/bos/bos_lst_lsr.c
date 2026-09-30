@@ -11,15 +11,15 @@ TaskDesc gTaskDescBosLstLsr = {
     sizeof(LstLsrWork),
 };
 
-s32 func_0811156C(s32 x) {
+s32 BosLstLsrSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08111574(s32 x) {
+s32 BosLstLsrSquare2(s32 x) {
     return x * x;
 }
 
-s32 func_0811157C(s32 n) {
+s32 BosLstLsrSqrt(s32 n) {
     s32 x;
     s32 g;
 
@@ -42,7 +42,7 @@ s32 func_0811157C(s32 n) {
     return g;
 }
 
-u8 func_081115B4(Task* task) {
+u8 BosLstLsrIsFiring(Task* task) {
     LstLsrWork* s;
     u8 result;
 
@@ -59,7 +59,7 @@ u8 func_081115B4(Task* task) {
     return result;
 }
 
-void func_081115CC(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
+void BosLstLsrFire(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
     LstLsrWork* s;
     s16 x1;
     s16 y1;
@@ -69,46 +69,46 @@ void func_081115CC(Task* task, Vec3* a, Vec3* b, s32 c, u16 d) {
     s = task->work;
     s->state = 1;
     s->angle = c;
-    s->unk_012 = d;
+    s->delay = d;
     s->pos = *a;
     s->pos2 = *b;
     WorldToScreen(&x1, &y1, s->pos.x, s->pos.y, s->pos.z);
     WorldToScreen(&x2, &y2, s->pos2.x, s->pos2.y, s->pos2.z);
-    s->unk_014 = (s16)func_0811157C((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;
+    s->duration = (s16)BosLstLsrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 16;
 
-    if (s->unk_014 <= 1) {
-        s->unk_014 = 2;
+    if (s->duration <= 1) {
+        s->duration = 2;
     }
 
-    s->unk_010 = 0;
+    s->timer = 0;
 }
 
-void func_08111660(Task* task) {
+void BosLstLsrStop(Task* task) {
     LstLsrWork* w;
 
     w = task->work;
     w->state = 0;
-    w->unk_010 = 0;
+    w->timer = 0;
     AnimStart(&w->anim, 4, 0);
 }
 
-u8 func_08111678(LstLsrWork* work) {
+u8 BosLstLsrSpawnFal(LstLsrWork* work) {
     LstFalArg arg;
     u8 result;
 
     result = 0;
 
-    if (work->unk_004 != 0) {
+    if (work->kind != 0) {
         return 0;
     }
 
-    if ((s16)*work->unk_00C <= 31) {
-        arg.unk_00 = 0;
+    if ((s16)*work->falCount <= 31) {
+        arg.kind = 0;
         arg.x = work->pos2.x;
         arg.y = work->pos2.y;
         arg.z = work->pos2.z;
-        arg.unk_12 = *work->unk_008;
-        arg.unk_14 = work->unk_00C;
+        arg.facing = *work->facing;
+        arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
         result = 1;
     }
@@ -117,9 +117,9 @@ u8 func_08111678(LstLsrWork* work) {
 }
 
 void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
-    work->unk_004 = arg->unk_00;
-    work->unk_008 = arg->unk_04;
-    work->unk_00C = arg->unk_08;
+    work->kind = arg->kind;
+    work->facing = arg->facing;
+    work->falCount = arg->falCount;
     work->state = 0;
     work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
@@ -132,30 +132,30 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
     case 0:
         break;
     case 1:
-        work->unk_012--;
-        if (work->unk_012 > 0) {
+        work->delay--;
+        if (work->delay > 0) {
             break;
         }
         work->state = 2;
-        work->unk_012 = 0;
+        work->delay = 0;
     case 2:
-        work->unk_010++;
-        if (work->unk_010 >= work->unk_014) {
+        work->timer++;
+        if (work->timer >= work->duration) {
             work->state = 3;
-            work->unk_010 = 0;
+            work->timer = 0;
             AnimReset(&work->anim);
             AnimChange(&work->anim, 6, 1);
         }
         break;
     case 3:
-        if (work->unk_010 > 15) {
+        if (work->timer > 15) {
             work->state = 0;
-            work->unk_010 = 0;
+            work->timer = 0;
             AnimChange(&work->anim, 4, 0);
         } else {
-            func_08011F78(0x10D, work->pos2.x, work->pos2.y, work->pos2.z, 8, 8, 8);
-            if ((work->unk_010 & 3) == 0) {
-                func_08111678(work);
+            ApplyAttackBox(0x10D, work->pos2.x, work->pos2.y, work->pos2.z, 8, 8, 8);
+            if ((work->timer & 3) == 0) {
+                BosLstLsrSpawnFal(work);
             }
             if (abs(work->pos2.x - gBtlWork->actor->x) < 384) {
                 work->pos2.x = gBtlWork->actor->x;
@@ -171,7 +171,7 @@ u8 task_bos_lst_lsr_1(LstLsrWork* work) {
             } else if (work->pos2.y < gBtlWork->actor->y) {
                 work->pos2.y = work->pos2.y + 384;
             }
-            work->unk_010++;
+            work->timer++;
         }
         break;
     }
@@ -200,8 +200,8 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         z = -0x1004 - (work->pos2.y >> 8) * 4;
         WorldToScreen(&x2, &y2, work->pos.x, work->pos.y, work->pos.z);
         oam = AllocObjAffineAngle(work->angle, 1);
-        x = x2 + (x1 - x2) * work->unk_010 / work->unk_014;
-        y = y2 + (y1 - y2) * work->unk_010 / work->unk_014;
+        x = x2 + (x1 - x2) * work->timer / work->duration;
+        y = y2 + (y1 - y2) * work->timer / work->duration;
         DrawSprite(x, y, gUnk_09EFBEC4[13], work->tiles, work->palette,
                    oam, prio, z);
         break;
@@ -209,7 +209,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         WorldToScreen(&x1, &y1, work->pos2.x, work->pos2.y, work->pos2.z);
         prio = GetBattleSpritePriorityFlags(work->pos2.y);
         z = -0x1004 - (work->pos2.y >> 8) * 4;
-        oam = AllocObjAffine(0, 0x100 - work->unk_010 * 8, work->unk_010 * 16 + 0x100, 1);
+        oam = AllocObjAffine(0, 0x100 - work->timer * 8, work->timer * 16 + 0x100, 1);
         gfx = AnimGetGfx(&work->anim);
         DrawSprite(x1, y1, gfx, work->tiles, work->palette,
                    oam, prio | 4, z);

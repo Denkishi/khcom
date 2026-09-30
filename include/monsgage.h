@@ -7,14 +7,14 @@ typedef struct MonsgageWork {
     void* tiles;
     void* tiles2;
     void* palette;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 value;
+    s32 shownValue;
     void* gfx;
     void* gfx2;
-    s16 unk_1C;
+    s16 timer;
     u8 unk_1E[0x2];
     u32 state;
-    u8 unk_24;
+    u8 visible;
     u8 unk_25[0x3];
 } MonsgageWork;
 

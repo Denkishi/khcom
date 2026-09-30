@@ -10,7 +10,7 @@
 #include "game_state.h"
 #include "bos4_api.h"
 
-void func_0801CCB4(void);
-void func_0801CD20(void);
+void SetupRikuNewGame(void);
+void SetupSoraNewGame(void);
 
 #endif /* GUARD_TASK_H */

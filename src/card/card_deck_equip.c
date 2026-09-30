@@ -102,10 +102,10 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
 #endif
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     *a = 1;
 }
-void func_080A2980(DeckConfirmWork* w, u8* a) {
+void DeckErrorCpInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     w->textSlotCount3 = 0;
@@ -135,11 +135,11 @@ void func_080A2980(DeckConfirmWork* w, u8* a) {
 #endif
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
 
-void func_080A2A80(DeckConfirmWork* w, u8* a) {
+void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     InitTextSlots(w->textSlots, 0x50);
@@ -168,7 +168,7 @@ void func_080A2A80(DeckConfirmWork* w, u8* a) {
     w->y2 = 62;
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
 #ifdef VERSION_JP
@@ -176,7 +176,7 @@ extern u8 gUnk_0814FBB0[];
 extern u8 gUnk_0814FBBC[];
 extern u8 gUnk_0814FBD4[];
 #endif
-void func_080A2BA4(DeckConfirmWork* w, u8* a) {
+void DeckErrorLastAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     InitTextSlots(w->textSlots, 0x50);
@@ -203,11 +203,11 @@ void func_080A2BA4(DeckConfirmWork* w, u8* a) {
 #endif
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
 
-void func_080A2CC4(DeckConfirmWork* w, u8* a) {
+void DeckErrorDeckFullInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
     InitTextSlots(w->textSlots, 0x50);
@@ -234,11 +234,11 @@ void func_080A2CC4(DeckConfirmWork* w, u8* a) {
 #endif
     w->unk_7A4 = 0;
     w->unk_790 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
 
-s32 func_080A2DE4(void) {
+s32 DeckConfirmUpdate(void) {
     if ((GetKeysPressed() & A_BUTTON) || (GetKeysPressed() & START_BUTTON) ||
         (GetKeysPressed() & B_BUTTON)) {
         return 0;
@@ -247,21 +247,21 @@ s32 func_080A2DE4(void) {
     return 1;
 }
 
-void func_080A2E14(DeckConfirmWork* w) {
+void DeckConfirmDraw(DeckConfirmWork* w) {
     DrawTextSlots(w->x, w->y, w->textSlots, w->palette, 1, w->textSlotCount);
     DrawTextSlots(w->x2, w->y2, w->textSlots2, w->palette, 1, w->textSlotCount2);
     DrawTextSlots(w->x3, w->y3, w->textSlots3, w->palette, 1, w->textSlotCount3);
     DrawSprite(120, 80, gUnk_09EF1278[0], w->tiles, w->palette2, 0, 0, 2);
 }
 
-void func_080A2EF8(DeckConfirmWork* w) {
+void DeckConfirmDestroy(DeckConfirmWork* w) {
     FreeTextSlots(w->textSlots, 80);
     FreeTextSlots(w->textSlots2, 80);
     FreeTextSlots(w->textSlots3, 80);
     ReleaseObjPalette(w->palette);
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette2);
-    w->unk_7A0[0] = 0;
+    w->active[0] = 0;
 }
 #ifdef VERSION_JP
 #define DECK_PROMPT_LEFT_DX 30
@@ -298,10 +298,10 @@ void Deck_Yes_No_0(DeckConfirmWork* w, u8* a) {
     w->y3 = 88;
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
-s32 func_080A30C0(void) {
+s32 DeckConfirmYesNoUpdate(void) {
     if ((GetKeysPressed() & A_BUTTON) || (GetKeysPressed() & B_BUTTON)) {
         return 0;
     }
@@ -334,30 +334,30 @@ void Deck_Clear_0(DeckConfirmWork* w, u8* a) {
     w->y = DECK_CLEAR_TEXT_Y;
     w->unk_790 = 0;
     w->unk_7A4 = 0;
-    w->unk_7A0 = a;
+    w->active = a;
     a[0] = 1;
 }
 
-void func_080A324C(UnkStruct_080A324C* p) {
+void WriteCardSaveSlice(CardSaveSlice* p) {
     s32 i;
 
     for (i = 0; i < 270; i++) {
-        p->unk_001[i] = gUnk_0203A8C0[i];
+        p->mapCardCounts[i] = gMapCardCounts[i];
     }
 
     for (i = 0; i < 999; i++) {
-        p->unk_110[i] = gCardCollection[i];
+        p->cards[i] = gCardCollection[i];
     }
 
     for (i = 0; i < 3; i++) {
-        memcpy(&p->unk_8E0[i], &gDecks[i], sizeof(Deck));
+        memcpy(&p->decks[i], &gDecks[i], sizeof(Deck));
     }
 
-    p->unk_8DE = gCardCount;
-    p->unk_000 = GetActiveDeckIndex();
+    p->cardCount = gCardCount;
+    p->activeDeck = GetActiveDeckIndex();
 }
 
-void func_080A32DC(u8* p) {
+void ReadCardSaveSlice(u8* p) {
     u16 i;
     u8* src;
     u8* dst;
@@ -368,7 +368,7 @@ void func_080A32DC(u8* p) {
     Deck* d;
 
     for (i = 0; i < 0x10E; i++) {
-        dst = gUnk_0203A8C0;
+        dst = gMapCardCounts;
         src = &p[1];
         dst[i] = src[i];
     }
@@ -394,77 +394,77 @@ void CopyMapCardInventory(u8* p) {
     s32 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        p[i] = gUnk_0203A8C0[i];
+        p[i] = gMapCardCounts[i];
     }
 }
 void RestoreMapCardInventory(u8* p) {
     u16 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        gUnk_0203A8C0[i] = p[i];
+        gMapCardCounts[i] = p[i];
     }
 }
 
 TaskDesc gTaskDescDeckEquip = {
     "Deck Equip",
     (TaskInitFunc)Deck_Equip_0,
-    (TaskUpdateFunc)func_080A2DE4,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskUpdateFunc)DeckConfirmUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
 TaskDesc gTaskDescDeckYesNo = {
     "Deck_Yes_No",
     (TaskInitFunc)Deck_Yes_No_0,
-    (TaskUpdateFunc)func_080A30C0,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskUpdateFunc)DeckConfirmYesNoUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
 TaskDesc gTaskDescDeckClear = {
     "Deck_Clear",
     (TaskInitFunc)Deck_Clear_0,
-    (TaskUpdateFunc)func_080A30C0,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskUpdateFunc)DeckConfirmYesNoUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
-TaskDesc gUnk_09EE7FA8 = {
+TaskDesc gTaskDescDeckErrorCp = {
     "Deck Error",
-    (TaskInitFunc)func_080A2980,
-    (TaskUpdateFunc)func_080A2DE4,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskInitFunc)DeckErrorCpInit,
+    (TaskUpdateFunc)DeckConfirmUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
-TaskDesc gUnk_09EE7FC0 = {
+TaskDesc gTaskDescDeckErrorNoAttackCard = {
     "Deck Error",
-    (TaskInitFunc)func_080A2A80,
-    (TaskUpdateFunc)func_080A2DE4,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskInitFunc)DeckErrorNoAttackCardInit,
+    (TaskUpdateFunc)DeckConfirmUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
-TaskDesc gUnk_09EE7FD8 = {
+TaskDesc gTaskDescDeckErrorLastAttackCard = {
     "Deck Error",
-    (TaskInitFunc)func_080A2BA4,
-    (TaskUpdateFunc)func_080A2DE4,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskInitFunc)DeckErrorLastAttackCardInit,
+    (TaskUpdateFunc)DeckConfirmUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 
-TaskDesc gUnk_09EE7FF0 = {
+TaskDesc gTaskDescDeckErrorDeckFull = {
     "Deck Error",
-    (TaskInitFunc)func_080A2CC4,
-    (TaskUpdateFunc)func_080A2DE4,
-    (TaskDrawFunc)func_080A2E14,
-    (TaskDestroyFunc)func_080A2EF8,
+    (TaskInitFunc)DeckErrorDeckFullInit,
+    (TaskUpdateFunc)DeckConfirmUpdate,
+    (TaskDrawFunc)DeckConfirmDraw,
+    (TaskDestroyFunc)DeckConfirmDestroy,
     sizeof(DeckConfirmWork),
 };
 #ifdef VERSION_EU

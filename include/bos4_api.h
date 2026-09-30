@@ -4,51 +4,51 @@
 #include "types.h"
 #include "map_runtime.h"
 
-typedef struct UnkStruct_096FE034Entry {
-    u16 unk_00;
-    u16 unk_02;
-} UnkStruct_096FE034Entry;
+typedef struct BosMapanimeFrame {
+    u16 duration;
+    u16 frame;
+} BosMapanimeFrame;
 
-typedef struct UnkStruct_096FE034 {
-    const UnkStruct_096FE034Entry* unk_00;
-    u16 unk_04;
+typedef struct BosMapanimeDef {
+    const BosMapanimeFrame* frames;
+    u16 frameCount;
     u16 unk_06;
-    void* unk_08;
-    u16 unk_0C;
-    u16 unk_0E;
-    u16 unk_10;
+    void* tiles;
+    u16 destOffset;
+    u16 copySize;
+    u16 frameSize;
     u16 unk_12;
     s32 bg;
-} UnkStruct_096FE034;
+} BosMapanimeDef;
 
-typedef struct UnkStruct_080DDDDC {
-    u16 unk_00;
-    u16 unk_02;
-    u8 unk_04;
+typedef struct BosMapanimeState {
+    u16 timer;
+    u16 frameIndex;
+    u8 uploadPending;
     u8 unk_05[0x03];
-    const UnkStruct_096FE034* unk_08;
-} UnkStruct_080DDDDC;
+    const BosMapanimeDef* def;
+} BosMapanimeState;
 
-void func_080DDDDC(struct UnkStruct_080DDDDC* p, const struct UnkStruct_096FE034* q);
-u8 func_080DDDEC(struct UnkStruct_080DDDDC* p, const struct UnkStruct_096FE034* q, u8 a);
-void func_080DDEA4(void);
-void func_080DDEB0(void* state);
-void func_080DDEBC(const void* state);
+void BosMapanimeInit(struct BosMapanimeState* p, const struct BosMapanimeDef* q);
+u8 BosMapanimeUpdate(struct BosMapanimeState* p, const struct BosMapanimeDef* q, u8 a);
+void ResetPooState(void);
+void SavePooState(void* state);
+void LoadPooState(const void* state);
 
 struct BtlObj;
 
-extern u16 gUnk_0203C554;
-extern u8 gUnk_0203C558;
-extern struct BtlObj* gUnk_0203C55C;
-extern u16 gUnk_0203C560;
-extern u8 gUnk_0203C564;
-extern u8 gUnk_0203C568;
-extern u8 gUnk_0203C56C;
-extern u8 gUnk_0203C570;
-extern u8 gUnk_0203C574;
-extern u8 gUnk_0203C578;
-extern u8 gUnk_0203C57C;
-extern s32 gUnk_0203C580;
-extern u8 gUnk_0203C584;
+extern u16 gBosBoogieSakuOpenTime;
+extern u8 gBosBoogieDiceFace;
+extern struct BtlObj* gBosBoogieActor;
+extern u16 gBosBoogieDiceBreakCount;
+extern u8 gBosBoogieDiceFaceReady;
+extern u8 gBosBoogieGimmickCardDropped;
+extern u8 gBosBoogieAttackHit;
+extern u8 gBosBoogieTaskKnockedDown;
+extern u8 gBosBoogieKnivesRetract;
+extern u8 gBosBoogieKnivesMoveRight;
+extern u8 gBosUrsulaActive;
+extern s32 gBosUrsulaBaseZ;
+extern u8 gMapChkUseParams;
 
 #endif

@@ -7,9 +7,9 @@
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);
 
-const u8 gUnk_08133E54[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
+const u8 gHumReloadPaletteCycle[8] = { 0, 1, 2, 3, 4, 3, 2, 1 };
 
-void func_0800EEBC(HumWork* p, HumSub* s) {
+void HumDrawSub(HumWork* p, HumSub* s) {
     s16 x;
     s16 y;
     BtlObj* c;
@@ -62,7 +62,7 @@ void func_0800EEBC(HumWork* p, HumSub* s) {
     DrawSprite(x, y, s->gfx, s->tiles, s->palette2, affine, attr, prio);
 }
 
-void func_0800EFE8(HumWork* work) {
+void HumDraw(HumWork* work) {
     s16 x;
     s16 y;
     BtlObj* c = &work->actor;
@@ -80,7 +80,7 @@ void func_0800EFE8(HumWork* work) {
     }
     WorldToScreen(&x, &y, c->x, c->y, c->z);
 
-    if (work->unk_168 == 0x100 && work->unk_16C == 0x100) {
+    if (work->scaleX == 0x100 && work->scaleY == 0x100) {
         if (c->flags & 4) {
             sy = gBtlWork->scale;
             sx = sy;
@@ -96,13 +96,13 @@ void func_0800EFE8(HumWork* work) {
         }
     } else {
         if (c->flags & 4) {
-            sx = (gBtlWork->scale * work->unk_168 >> 8);
+            sx = (gBtlWork->scale * work->scaleX >> 8);
             g = gBtlWork->scale;
-            sy = g * work->unk_16C >> 8;
+            sy = g * work->scaleY >> 8;
         } else {
-            sx = -(gBtlWork->scale * work->unk_168 >> 8);
+            sx = -(gBtlWork->scale * work->scaleX >> 8);
             g = gBtlWork->scale;
-            sy = g * work->unk_16C >> 8;
+            sy = g * work->scaleY >> 8;
         }
     }
 
@@ -114,29 +114,29 @@ void func_0800EFE8(HumWork* work) {
         affine = AllocObjAffine(0, sx, sy, 1);
     }
 
-    if (work->unk_170 == 17) {
-        idx = ((s16)work->unk_150 >> 2) % 8;
+    if (work->state == 17) {
+        idx = ((s16)work->stateTimer >> 2) % 8;
 
-        if (work->unk_150 & 1) {
+        if (work->stateTimer & 1) {
             work->flags |= 2;
-            LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 32 + gUnk_08133E54[idx] * 32);
+            LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 32 + gHumReloadPaletteCycle[idx] * 32);
         } else {
             work->flags &= ~2;
-            LoadObjPaletteBank(work->palette->index, work->unk_178);
+            LoadObjPaletteBank(work->palette->index, work->paletteData);
         }
-    } else if (func_0801CA00(c)) {
+    } else if (StepHitFlash(c)) {
         work->flags |= 2;
         LoadObjPaletteBank(work->palette->index, gUnk_08F69BC4);
     } else if (work->flags & 2) {
         work->flags &= ~2;
-        LoadObjPaletteBank(work->palette->index, work->unk_178);
+        LoadObjPaletteBank(work->palette->index, work->paletteData);
     }
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, (-0x1004 - (c->y >> 8) * 4) | 3);
-    func_0800EEBC(work, work->sub);
-    func_0800EEBC(work, work->sub2);
+    HumDrawSub(work, work->sub);
+    HumDrawSub(work, work->sub2);
     TaskPoolDraw(&work->tasks);
 }
-void func_0800F230(void) {
+void HandleRikuAiCardInput(void) {
     BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
     u16 t;
@@ -144,29 +144,29 @@ void func_0800F230(void) {
     if (gRikuBtlWork->flags & 0x1000000) {
         return;
     }
-    t = gRikuBtlWork->unk_1CC;
+    t = gRikuBtlWork->listSwitchTimer;
 
     if ((s16)t > 0) {
-        gRikuBtlWork->unk_1CC = t - 1;
+        gRikuBtlWork->listSwitchTimer = t - 1;
 
-        if (gRikuBtlWork->unk_1CC == 0) {
-            func_0807E260();
+        if (gRikuBtlWork->listSwitchTimer == 0) {
+            RequestSwitchRikuCardList();
         }
         return;
     }
-    keys = gBtlWork->unk_0EF;
-    gBtlWork->unk_0EF = 0;
+    keys = gBtlWork->rikuKeys;
+    gBtlWork->rikuKeys = 0;
 
     if (keys & 1) {
-        func_0807E1F4();
+        RequestRikuNextCard();
     }
 
     if (keys & 2) {
-        func_0807E200();
+        RequestRikuPrevCard();
     }
 
     if (keys & 4) {
-        func_0807E260();
+        RequestSwitchRikuCardList();
     }
 
     if (c->flags & 0x200) {
@@ -190,18 +190,18 @@ void func_0800F230(void) {
     }
 
     if (keys & 0x10) {
-        if (func_0807B3F8() > 2) {
-            func_0807E224();
+        if (GetRikuStockCount() > 2) {
+            RequestRikuStockUse();
         } else {
-            func_0807E218();
+            RequestRikuCardStock();
         }
     }
 
     if (keys & 0x20) {
-        func_0807E20C();
+        RequestRikuCardUse();
 
-        if (func_08081838() == 3 && !func_0807E34C()) {
-            gRikuBtlWork->unk_1CC = 15;
+        if (GetRikuCardListIndex() == 3 && !IsRikuSelectionEmpty()) {
+            gRikuBtlWork->listSwitchTimer = 15;
         }
     }
 }
@@ -211,8 +211,8 @@ void eu_08013190(void) {
     BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
 
-    keys = gBtlWork->unk_0EF;
-    gBtlWork->unk_0EF = 0;
+    keys = gBtlWork->rikuKeys;
+    gBtlWork->rikuKeys = 0;
     if (c->flags & 0x200) {
         return;
     }
@@ -229,14 +229,14 @@ void eu_08013190(void) {
         return;
     }
     if (keys & 0x20) {
-        func_0807E20C();
+        RequestRikuCardUse();
     }
 }
 #endif
 
-void func_0800F368(HumWork* p, u16 n) {
+void HumFaceTarget(HumWork* p, u16 n) {
     s32 v;
-    func_0801C700(&p->actor, &v, 0, 0);
+    GetEnemyTargetPosition(&p->actor, &v, 0, 0);
 
     if (GetRandom() % n == 0) {
         if (p->actor.x > v) {
@@ -247,7 +247,7 @@ void func_0800F368(HumWork* p, u16 n) {
     }
 }
 
-u8 func_0800F3BC(HumWork* p, s32 x, s32 y, s32 spd) {
+u8 HumMoveToward(HumWork* p, s32 x, s32 y, s32 spd) {
     u8 ang = GetAngle(p->actor.x, p->actor.y, x, y);
 
     p->actor.x += gSineTable[ang] * spd >> 8;
@@ -263,7 +263,7 @@ u8 func_0800F3BC(HumWork* p, s32 x, s32 y, s32 spd) {
     return 1;
 }
 
-u8 func_0800F440(HumWork* p, s16 a, u16 b, u16 r) {
+u8 HumIsTargetInReach(HumWork* p, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
     BtlObj* c = &p->actor;
@@ -272,7 +272,7 @@ u8 func_0800F440(HumWork* p, s16 a, u16 b, u16 r) {
     s32 bb;
     s32 rr;
 
-    func_0801C700(c, &v0, &v1, 0);
+    GetEnemyTargetPosition(c, &v0, &v1, 0);
     rr = r << 8;
     d = c->y - v1;
 
@@ -306,18 +306,18 @@ u8 func_0800F440(HumWork* p, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 func_0800F4C8(HumWork* p, u16 b) {
-    if (p->actor.x < (gBtlWork->unk_0DA + b) << 8) {
+u8 HumIsNearAreaEdge(HumWork* p, u16 b) {
+    if (p->actor.x < (gBtlWork->xMin + b) << 8) {
         return 1;
     }
 
-    if (p->actor.x > (gBtlWork->unk_0DC - b) << 8) {
+    if (p->actor.x > (gBtlWork->xMax - b) << 8) {
         return 1;
     }
     return 0;
 }
 
-u8 func_0800F504(HumWork* p, s16 a, u16 b, u16 r) {
+u8 HumIsInPlayerReach(HumWork* p, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
     BtlObj* c = &p->actor;
@@ -327,7 +327,7 @@ u8 func_0800F504(HumWork* p, s16 a, u16 b, u16 r) {
     s32 bb;
     s32 rr;
 
-    func_0801C700(c, &v0, &v1, 0);
+    GetEnemyTargetPosition(c, &v0, &v1, 0);
     rr = r << 8;
     d = c->y - v1;
 
@@ -361,7 +361,7 @@ u8 func_0800F504(HumWork* p, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) {
+u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) {
     u32 value;
     u32 cards;
     u32 id;
@@ -371,16 +371,16 @@ u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) 
     if (gBtlWork->flags & 0x40) {
         return 0;
     }
-    if ((s16)gRikuBtlWork->unk_1CC > 0) {
+    if ((s16)gRikuBtlWork->listSwitchTimer > 0) {
         return 0;
     }
     if ((u16)((u32)GetRandom() % interval) != 0) {
         return 0;
     }
-    value = func_08081870();
-    cards = func_0807B3F8();
-    id = func_0807E2BC();
-    count = func_0807E33C();
+    value = GetRikuSelectedCardValue();
+    cards = GetRikuStockCount();
+    id = GetRikuSelectedMove();
+    count = GetRikuCardsLeft();
     switch (id) {
     case 47:
     case 48:
@@ -394,73 +394,73 @@ u8 func_0800F5A4(HumWork* work, u16 interval, u16 offset, u16 width, u16 depth) 
             n = 1;
         }
         if (GetRandom() % n == 0) {
-            gBtlWork->unk_0EF |= 0x20;
+            gBtlWork->rikuKeys |= 0x20;
         } else {
-            gBtlWork->unk_0EF |= 1;
+            gBtlWork->rikuKeys |= 1;
         }
         return 0;
     }
-    if (func_0807E29C()) {
+    if (IsRikuReloadCardSelected()) {
         if (count > 1 && (u16)(GetRandom() % 20U) == 0) {
-            gBtlWork->unk_0EF |= 1;
+            gBtlWork->rikuKeys |= 1;
         }
         return 0;
     }
-    if (func_08081838() == 3) {
+    if (GetRikuCardListIndex() == 3) {
         if ((GetRandom() & 3) == 0) {
             if (count <= 0) {
                 work->flags |= 0x10;
-                gBtlWork->unk_0EF |= 4;
+                gBtlWork->rikuKeys |= 4;
             } else {
-                gBtlWork->unk_0EF |= 0x20;
+                gBtlWork->rikuKeys |= 0x20;
                 if (count == 1) {
                     work->flags |= 0x10;
                 }
             }
         } else if (count > 1) {
-            gBtlWork->unk_0EF |= 1;
+            gBtlWork->rikuKeys |= 1;
         }
         return 0;
     }
-    if (!(work->flags & 0x10) && gRikuBtlWork->unk_0F4 == 0
+    if (!(work->flags & 0x10) && gRikuBtlWork->hcEffect == 0
         && (u16)(GetRandom() % 60U) == 0) {
-        gBtlWork->unk_0EF |= 4;
+        gBtlWork->rikuKeys |= 4;
         return 0;
     }
     if (cards > 2) {
         if ((u16)(GetRandom() % 6U) == 0) {
-            gBtlWork->unk_0EF |= 0x10;
+            gBtlWork->rikuKeys |= 0x10;
             return 1;
         }
     } else if ((u16)GetRandom() % 2 == 0) {
         if (count <= 1 && cards != 0) {
-            gBtlWork->unk_0EF |= 0x10;
+            gBtlWork->rikuKeys |= 0x10;
             return 1;
         }
         // @bug unk_184 is NULL for humanoid bosses without a card table (NULL read).
-        if (value == 0 || work->unk_184[cards] != id) {
-            gBtlWork->unk_0EF |= 1;
+        if (value == 0 || work->stockMoves[cards] != id) {
+            gBtlWork->rikuKeys |= 1;
         } else {
-            gBtlWork->unk_0EF |= 0x10;
+            gBtlWork->rikuKeys |= 0x10;
         }
         return 0;
     }
     if (gBtlWork->flags & 0x20000000) {
-        if (func_0800F440(work, (s16)offset, width, depth)) {
-            if (func_08081848() <= value || value == 0) {
-                gBtlWork->unk_0EF |= 0x20;
+        if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
+            if (GetActiveCardValue() <= value || value == 0) {
+                gBtlWork->rikuKeys |= 0x20;
             }
-        } else if (func_08081848() == value) {
-            gBtlWork->unk_0EF |= 0x20;
+        } else if (GetActiveCardValue() == value) {
+            gBtlWork->rikuKeys |= 0x20;
         }
-    } else if (func_0800F440(work, (s16)offset, width, depth)) {
-        gBtlWork->unk_0EF |= 0x20;
+    } else if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
+        gBtlWork->rikuKeys |= 0x20;
     }
     return 0;
 }
-s32 _0800F84C(HumWork* work) {
+s32 HumResolveCardMove(HumWork* work) {
     s32 buf[6];
-    s32 id = func_080ABA80(buf);
+    s32 id = ResolveActiveCardsMove(buf);
 
     if (id == 145) {
         if (!(gRikuBtlWork->flags & 2)) {
@@ -470,36 +470,36 @@ s32 _0800F84C(HumWork* work) {
         id = buf[gRikuBtlWork->stockMove];
         gRikuBtlWork->stockMove++;
     }
-    work->unk_150 = 0;
+    work->stateTimer = 0;
 
     switch (id) {
     case 47:
-        work->unk_170 = 18;
-        work->unk_17E = 0;
+        work->state = 18;
+        work->itemIndex = 0;
         break;
     case 48:
-        work->unk_170 = 18;
-        work->unk_17E = 1;
+        work->state = 18;
+        work->itemIndex = 1;
         break;
     case 49:
-        work->unk_170 = 18;
-        work->unk_17E = 2;
+        work->state = 18;
+        work->itemIndex = 2;
         break;
     case 50:
-        work->unk_170 = 18;
-        work->unk_17E = 3;
+        work->state = 18;
+        work->itemIndex = 3;
         break;
     case 51:
-        work->unk_170 = 18;
-        work->unk_17E = 4;
+        work->state = 18;
+        work->itemIndex = 4;
         break;
     case 52:
-        work->unk_170 = 18;
-        work->unk_17E = 5;
+        work->state = 18;
+        work->itemIndex = 5;
         break;
     case 53:
-        work->unk_170 = 18;
-        work->unk_17E = 6;
+        work->state = 18;
+        work->itemIndex = 6;
         break;
     }
     return id;

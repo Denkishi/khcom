@@ -24,7 +24,7 @@ extern const u16 gUnk_090356B2;
 extern const u16 gUnk_090356B4;
 extern const u16 gUnk_090356B6;
 extern const u16 gUnk_090356B8;
-extern const u16 gUnk_090356BA[12];
-extern const u16 gUnk_090356D2[12];
+extern const u16 gRikuDeckCardCounts[12];
+extern const u16 gRikuDeckEnemyCardCounts[12];
 
 #endif

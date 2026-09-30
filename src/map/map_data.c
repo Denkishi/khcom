@@ -11,7 +11,7 @@
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
 
-UnkStruct_09EF70D0* gUnk_09EF70D0[14] = {
+MapRoomDef* gMapRoomDefs[14] = {
     &gUnk_0984D2D8,
     &gUnk_0984DFD8,
     &gUnk_0984E734,
@@ -366,7 +366,7 @@ const void* gUnk_09EF8358[6] = {
     gUnk_095C4AB8,
 };
 
-UnkStruct_09EF8370* gUnk_09EF8370[6] = {
+MapFixedDef* gMapFixedDefs[6] = {
     &gUnk_09856C90,
     &gUnk_09856D34,
     &gUnk_09856DE4,
@@ -375,52 +375,52 @@ UnkStruct_09EF8370* gUnk_09EF8370[6] = {
     &gUnk_09856F64,
 };
 
-UnkStruct_080E8E74* gUnk_09EF8388[14] = {
+PrzCardChance* gWorldPrzCardChances[14] = {
     gUnk_09857B44,
-    gUnk_09857BBC,
-    gUnk_09857DBC,
-    gUnk_09857CEC,
-    gUnk_09857D54,
-    gUnk_09857C84,
-    gUnk_09857C1C,
-    gUnk_09857E44,
-    gUnk_09857EC4,
-    gUnk_09858004,
-    gUnk_09857B7C,
-    gUnk_09857F3C,
-    gUnk_09858084,
+    gPrzCardChancesAgrabah,
+    gPrzCardChancesAtlantica,
+    gPrzCardChancesOlympusColiseum,
+    gPrzCardChancesWonderland,
+    gPrzCardChancesMonstro,
+    gPrzCardChancesHalloweenTown,
+    gPrzCardChancesNeverLand,
+    gPrzCardChancesHollowBastion,
+    gPrzCardChancesDestinyIslands,
+    gPrzCardChancesTraverseTown,
+    gPrzCardChancesTwilightTown,
+    gPrzCardChancesCastleOblivion,
     gUnk_09857B44,
 };
 
-UnkStruct_080E8E24* gUnk_09EF83C0[14] = {
+UnkStruct_080E8E24* gWorldPrizeLists[14] = {
     gUnk_0985824C,
-    gUnk_09858258,
-    gUnk_09858294,
-    gUnk_0985827C,
-    gUnk_09858288,
-    gUnk_09858270,
-    gUnk_09858264,
-    gUnk_098582A4,
-    gUnk_098582B4,
-    gUnk_098582D0,
-    gUnk_09858250,
-    gUnk_098582C4,
-    gUnk_098582DC,
+    gPrizeListAgrabah,
+    gPrizeListAtlantica,
+    gPrizeListOlympusColiseum,
+    gPrizeListWonderland,
+    gPrizeListMonstro,
+    gPrizeListHalloweenTown,
+    gPrizeListNeverLand,
+    gPrizeListHollowBastion,
+    gPrizeListDestinyIslands,
+    gPrizeListTraverseTown,
+    gPrizeListTwilightTown,
+    gPrizeListCastleOblivion,
     gUnk_0985824C,
 };
 
-const UnkStruct_0984BC9C* gUnk_09EF83F8[7] = {
-    &gUnk_0984BC9C,
-    &gUnk_0984BD24,
-    &gUnk_0984BD8C,
-    &gUnk_0984BE14,
-    &gUnk_0984BE9C,
-    &gUnk_0984BF44,
-    &gUnk_0984BFEC,
+const MapEnmDef* gMapEnmDefs[7] = {
+    &gMapEnm00Def,
+    &gMapEnm01Def,
+    &gMapEnm02Def,
+    &gMapEnm03Def,
+    &gMapEnm04Def,
+    &gMapEnm05Def,
+    &gMapEnm06Def,
 };
 
 #if defined(VERSION_US)
-const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
+const MapGmkDef gMapGmkDefs[67] = {
     { gUnk_09991344 + 0x1C0, gUnk_0986EA98, 0x800, 0, 0, &gUnk_09EF8624, &gUnk_09EF8628, 0, 9, 0, 0, 0, 16, 88, 117, 0, &gTaskDescMapGmk00 },
     { gUnk_09991344 + 0x1E0, gUnk_0986F38A, 0xB60, 0, 0, &gUnk_09EF8630, &gUnk_09EF8658, 0, 9, 0, 0, 0, 32, 24, 117, 0, &gTaskDescMapGmkGP09 },
     { gUnk_09991344 + 0x80, gUnk_0985E64C, 0x800, 0, 0, &gUnk_09EF84D4, &gUnk_09EF84D8, 0, 1, 0, 0, 0, 32, 32, 117, 0, &gTaskDescMapGmk00 },
@@ -490,7 +490,7 @@ const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
     { gUnk_09991344 + 0x560, gUnk_098A2DB2, 0x880, 0, 0, &gUnk_09EF8C68, &gUnk_09EF8C6C, 0, 9, 0, 0, 0, 32, 32, 117, 0, &gTaskDescMapGmk00 },
 };
 #elif defined(VERSION_JP)
-const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
+const MapGmkDef gMapGmkDefs[67] = {
     { gUnk_09991344 + 0x1C0, gUnkJp_098235AC, 0x800, 0, 0, &gUnk_09EF8624, &gUnk_09EF8628, 0, 9, 0, 0, 0, 16, 88, 117, 0, &gTaskDescMapGmk00 },
     { gUnk_09991344 + 0x1E0, gUnkJp_09823E9E, 0xB60, 0, 0, &gUnk_09EF8630, &gUnk_09EF8658, 0, 9, 0, 0, 0, 32, 24, 117, 0, &gTaskDescMapGmkGP09 },
     { gUnk_09991344 + 0x80, gUnkJp_09813160, 0x800, 0, 0, &gUnk_09EF84D4, &gUnk_09EF84D8, 0, 1, 0, 0, 0, 32, 32, 117, 0, &gTaskDescMapGmk00 },
@@ -560,7 +560,7 @@ const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
     { gUnk_09991344 + 0x560, gUnkJp_098578C6, 0x880, 0, 0, &gUnk_09EF8C68, &gUnk_09EF8C6C, 0, 9, 0, 0, 0, 32, 32, 117, 0, &gTaskDescMapGmk00 },
 };
 #elif defined(VERSION_EU)
-const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
+const MapGmkDef gMapGmkDefs[67] = {
     { gUnk_09991344 + 0x1C0, gUnkEu_0984B484, 0x800, 0, 0, &gUnk_09EF8624, &gUnk_09EF8628, 0, 9, 0, 0, 0, 16, 88, 117, 0, &gTaskDescMapGmk00 },
     { gUnk_09991344 + 0x1E0, gUnkEu_0984BD76, 0xB60, 0, 0, &gUnk_09EF8630, &gUnk_09EF8658, 0, 9, 0, 0, 0, 32, 24, 117, 0, &gTaskDescMapGmkGP09 },
     { gUnk_09991344 + 0x80, gUnkEu_0983B038, 0x800, 0, 0, &gUnk_09EF84D4, &gUnk_09EF84D8, 0, 1, 0, 0, 0, 32, 32, 117, 0, &gTaskDescMapGmk00 },
@@ -632,7 +632,7 @@ const UnkStruct_080E7D80 gUnk_09856FB4[67] = {
 #endif
 
 #if defined(VERSION_US)
-const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
+const MapGmkDef gWorldMapGmkDefs[7] = {
     { gUnk_09991344 + 0x4E0, gUnk_0989E688, 0x800, 0, 0, &gUnk_09EF8BE8, &gUnk_09EF8BF8, 1, 0, 0, 0, 0, 28, 32, 144, 0, &gTaskDescMapGmkGP01 },
     { gUnk_09991344 + 0x100, gUnk_09868896, 0x420, 0, 0, &gUnk_09EF859C, &gUnk_09EF85A8, 1, 0, 0, 0, 0, 12, 36, 221, 0, &gTaskDescMapGmkGP03 },
     { gUnk_09991344 + 0x200, gUnk_09870126, 0x720, 0, 0, &gUnk_09EF8660, &gUnk_09EF869C, 1, 0, 0, 0, 0, 16, 8, 208, 0, &gTaskDescMapGmkGP03 },
@@ -642,7 +642,7 @@ const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
     { gUnk_09991344 + 0x560, gUnk_098A141E, 0x440, 0, 0, &gUnk_09EF8C28, &gUnk_09EF8C50, 1, 0, 0, 0, 0, 16, 26, 219, 0, &gTaskDescMapGmkGP01 },
 };
 #elif defined(VERSION_JP)
-const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
+const MapGmkDef gWorldMapGmkDefs[7] = {
     { gUnk_09991344 + 0x4E0, gUnkJp_0985319C, 0x800, 0, 0, &gUnk_09EF8BE8, &gUnk_09EF8BF8, 1, 0, 0, 0, 0, 28, 32, 144, 0, &gTaskDescMapGmkGP01 },
     { gUnk_09991344 + 0x100, gUnkJp_0981D3AA, 0x420, 0, 0, &gUnk_09EF859C, &gUnk_09EF85A8, 1, 0, 0, 0, 0, 12, 36, 221, 0, &gTaskDescMapGmkGP03 },
     { gUnk_09991344 + 0x200, gUnkJp_09824C3A, 0x720, 0, 0, &gUnk_09EF8660, &gUnk_09EF869C, 1, 0, 0, 0, 0, 16, 8, 208, 0, &gTaskDescMapGmkGP03 },
@@ -652,7 +652,7 @@ const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
     { gUnk_09991344 + 0x560, gUnkJp_09855F32, 0x440, 0, 0, &gUnk_09EF8C28, &gUnk_09EF8C50, 1, 0, 0, 0, 0, 16, 26, 219, 0, &gTaskDescMapGmkGP01 },
 };
 #elif defined(VERSION_EU)
-const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
+const MapGmkDef gWorldMapGmkDefs[7] = {
     { gUnk_09991344 + 0x4E0, gUnkEu_0987B074, 0x800, 0, 0, &gUnk_09EF8BE8, &gUnk_09EF8BF8, 1, 0, 0, 0, 0, 28, 32, 144, 0, &gTaskDescMapGmkGP01 },
     { gUnk_09991344 + 0x100, gUnkEu_09845282, 0x420, 0, 0, &gUnk_09EF859C, &gUnk_09EF85A8, 1, 0, 0, 0, 0, 12, 36, 221, 0, &gTaskDescMapGmkGP03 },
     { gUnk_09991344 + 0x200, gUnkEu_0984CB12, 0x720, 0, 0, &gUnk_09EF8660, &gUnk_09EF869C, 1, 0, 0, 0, 0, 16, 8, 208, 0, &gTaskDescMapGmkGP03 },
@@ -663,7 +663,7 @@ const UnkStruct_080E7D80 gUnk_09857A2C[7] = {
 };
 #endif
 
-const UnkStruct_080E8E74 gUnk_09857B44[7] = {
+const PrzCardChance gUnk_09857B44[7] = {
     { 0, 0, 2500, 2500, { 0, 0 } },
     { 20, 0, 500, 500, { 0, 0 } },
     { 17, 0, 1500, 1500, { 0, 0 } },
@@ -673,7 +673,7 @@ const UnkStruct_080E8E74 gUnk_09857B44[7] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857B7C[8] = {
+const PrzCardChance gPrzCardChancesTraverseTown[8] = {
     { 0, 0, 5000, 1000, { 0, 0 } },
     { 9, 0, 1200, 1000, { 0, 0 } },
     { 14, 0, 300, 500, { 0, 0 } },
@@ -684,7 +684,7 @@ const UnkStruct_080E8E74 gUnk_09857B7C[8] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857BBC[12] = {
+const PrzCardChance gPrzCardChancesAgrabah[12] = {
     { 0, 0, 3000, 0, { 0, 0 } },
     { 2, 0, 2000, 1500, { 0, 0 } },
     { 14, 0, 300, 500, { 0, 0 } },
@@ -699,7 +699,7 @@ const UnkStruct_080E8E74 gUnk_09857BBC[12] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857C1C[13] = {
+const PrzCardChance gPrzCardChancesHalloweenTown[13] = {
     { 0, 0, 3000, 0, { 0, 0 } },
     { 4, 0, 2000, 1500, { 0, 0 } },
     { 14, 0, 300, 500, { 0, 0 } },
@@ -715,7 +715,7 @@ const UnkStruct_080E8E74 gUnk_09857C1C[13] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857C84[13] = {
+const PrzCardChance gPrzCardChancesMonstro[13] = {
     { 0, 0, 3000, 0, { 0, 0 } },
     { 6, 0, 2000, 1500, { 0, 0 } },
     { 14, 0, 300, 500, { 0, 0 } },
@@ -731,7 +731,7 @@ const UnkStruct_080E8E74 gUnk_09857C84[13] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857CEC[13] = {
+const PrzCardChance gPrzCardChancesOlympusColiseum[13] = {
     { 0, 0, 2000, 0, { 0, 0 } },
     { 8, 0, 1000, 500, { 0, 0 } },
     { 1, 0, 2000, 1000, { 0, 0 } },
@@ -747,7 +747,7 @@ const UnkStruct_080E8E74 gUnk_09857CEC[13] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857D54[13] = {
+const PrzCardChance gPrzCardChancesWonderland[13] = {
     { 0, 0, 3000, 0, { 0, 0 } },
     { 10, 0, 2000, 1500, { 0, 0 } },
     { 14, 0, 300, 500, { 0, 0 } },
@@ -763,7 +763,7 @@ const UnkStruct_080E8E74 gUnk_09857D54[13] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857DBC[17] = {
+const PrzCardChance gPrzCardChancesAtlantica[17] = {
     { 0, 0, 2000, 0, { 0, 0 } },
     { 3, 0, 2000, 1500, { 0, 0 } },
     { 7, 0, 0, 500, { 0, 0 } },
@@ -783,7 +783,7 @@ const UnkStruct_080E8E74 gUnk_09857DBC[17] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857E44[16] = {
+const PrzCardChance gPrzCardChancesNeverLand[16] = {
     { 0, 0, 2000, 0, { 0, 0 } },
     { 5, 0, 2000, 1500, { 0, 0 } },
     { 7, 0, 0, 500, { 0, 0 } },
@@ -802,7 +802,7 @@ const UnkStruct_080E8E74 gUnk_09857E44[16] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857EC4[15] = {
+const PrzCardChance gPrzCardChancesHollowBastion[15] = {
     { 0, 0, 2000, 0, { 0, 0 } },
     { 7, 0, 0, 500, { 0, 0 } },
     { 8, 0, 200, 0, { 0, 0 } },
@@ -820,7 +820,7 @@ const UnkStruct_080E8E74 gUnk_09857EC4[15] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09857F3C[25] = {
+const PrzCardChance gPrzCardChancesTwilightTown[25] = {
     { 0, 0, 1500, 0, { 0, 0 } },
     { 7, 0, 1500, 500, { 0, 0 } },
     { 8, 0, 1500, 0, { 0, 0 } },
@@ -848,7 +848,7 @@ const UnkStruct_080E8E74 gUnk_09857F3C[25] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09858004[16] = {
+const PrzCardChance gPrzCardChancesDestinyIslands[16] = {
     { 0, 0, 1000, 0, { 0, 0 } },
     { 12, 0, 1500, 1000, { 0, 0 } },
     { 13, 0, 1500, 1000, { 0, 0 } },
@@ -867,7 +867,7 @@ const UnkStruct_080E8E74 gUnk_09858004[16] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E74 gUnk_09858084[25] = {
+const PrzCardChance gPrzCardChancesCastleOblivion[25] = {
     { 0, 0, 500, 0, { 0, 0 } },
     { 7, 0, 1000, 500, { 0, 0 } },
     { 8, 0, 1000, 500, { 0, 0 } },
@@ -895,7 +895,7 @@ const UnkStruct_080E8E74 gUnk_09858084[25] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E24 gUnk_0985814C[40] = {
+const UnkStruct_080E8E24 gPrzCardKinds[40] = {
     { { 0, 0 }, CARD_ID(CARD_KINGDOM_KEY, 0) },
     { { 8, 0 }, CARD_ID(CARD_OLYMPIA, 0) },
     { { 1, 0 }, CARD_ID(CARD_THREE_WISHES, 0) },
@@ -938,7 +938,7 @@ const UnkStruct_080E8E24 gUnk_0985814C[40] = {
     { { 56, 0 }, CARD_ANSEM_9 },
 };
 
-const UnkStruct_080E8E24 gUnk_098581EC[19] = {
+const UnkStruct_080E8E24 gPrzStocks[19] = {
     { { 25, 0 }, 140 },
     { { 44, 0 }, 141 },
     { { 26, 0 }, 142 },
@@ -960,80 +960,80 @@ const UnkStruct_080E8E24 gUnk_098581EC[19] = {
     { { 28, 0 }, 158 },
 };
 
-const u16 gUnk_09858238[10] = { 500, 1500, 1500, 1600, 1400, 1000, 1000, 600, 500, 400 };
+const u16 gCardValueWeights[10] = { 500, 1500, 1500, 1600, 1400, 1000, 1000, 600, 500, 400 };
 
 const UnkStruct_080E8E24 gUnk_0985824C[1] = {
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858250[2] = {
+const UnkStruct_080E8E24 gPrizeListTraverseTown[2] = {
     { { 2, 9 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858258[3] = {
+const UnkStruct_080E8E24 gPrizeListAgrabah[3] = {
     { { 0, 21 }, 0 },
     { { 3, 10 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858264[3] = {
+const UnkStruct_080E8E24 gPrizeListHalloweenTown[3] = {
     { { 1, 1 }, 0 },
     { { 3, 2 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858270[3] = {
+const UnkStruct_080E8E24 gPrizeListMonstro[3] = {
     { { 1, 3 }, 0 },
     { { 3, 4 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_0985827C[3] = {
+const UnkStruct_080E8E24 gPrizeListOlympusColiseum[3] = {
     { { 1, 5 }, 0 },
     { { 2, 8 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858288[3] = {
+const UnkStruct_080E8E24 gPrizeListWonderland[3] = {
     { { 0, 22 }, 0 },
     { { 3, 6 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_09858294[4] = {
+const UnkStruct_080E8E24 gPrizeListAtlantica[4] = {
     { { 1, 7 }, 0 },
     { { 1, 8 }, 0 },
     { { 3, 9 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_098582A4[4] = {
+const UnkStruct_080E8E24 gPrizeListNeverLand[4] = {
     { { 1, 12 }, 0 },
     { { 1, 11 }, 0 },
     { { 3, 0 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_098582B4[4] = {
+const UnkStruct_080E8E24 gPrizeListHollowBastion[4] = {
     { { 1, 14 }, 0 },
     { { 1, 15 }, 0 },
     { { 2, 29 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_098582C4[3] = {
+const UnkStruct_080E8E24 gPrizeListTwilightTown[3] = {
     { { 1, 16 }, 0 },
     { { 3, 17 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_098582D0[3] = {
+const UnkStruct_080E8E24 gPrizeListDestinyIslands[3] = {
     { { 1, 18 }, 0 },
     { { 2, 37 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gUnk_098582DC[1] = {
+const UnkStruct_080E8E24 gPrizeListCastleOblivion[1] = {
     { { 4, 0 }, 0 },
 };

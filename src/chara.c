@@ -9,47 +9,47 @@
 #include "gba/keys.h"
 #include "system_state.h"
 
-u32 gUnk_0203BD10[100] EWRAM_COMMON(16);
-u32 gUnk_0203BEA0 EWRAM_COMMON(4);
-s16 gUnk_0203BEA4 EWRAM_COMMON(4);
-s16 gUnk_0203BEA8 EWRAM_COMMON(4);
-void (*gUnk_0203BEAC)(void) EWRAM_COMMON(4);
-u32 gUnk_0203BEB0 EWRAM_COMMON(4);
-s16 gUnk_0203BEB8 EWRAM_COMMON(8);
-u32 gUnk_0203BEBC EWRAM_COMMON(4);
-u32 gUnk_0203BEC0[100] EWRAM_COMMON(16);
-u32 gUnk_0203C050[100] EWRAM_COMMON(16);
-u32 gUnk_0203C1E0[100] EWRAM_COMMON(16);
-u16 gUnk_0203C370 EWRAM_COMMON(4);
-s8 gUnk_0203C374 EWRAM_COMMON(4);
-u16 gUnk_0203C378 EWRAM_COMMON(4);
-Deck* gUnk_0203C37C EWRAM_COMMON(4);
-s8 gUnk_0203C380 EWRAM_COMMON(4);
-s8 gUnk_0203C384 EWRAM_COMMON(4);
-u16 gUnk_0203C388 EWRAM_COMMON(4);
-s8 gUnk_0203C38C EWRAM_COMMON(4);
-u16* gUnk_0203C390 EWRAM_COMMON(4);
+u32 gDebugLogC[100] EWRAM_COMMON(16);
+u32 gVBlankTimerElapsed EWRAM_COMMON(4);
+s16 gSioCancelTimer EWRAM_COMMON(4);
+s16 gSioAutoConnectTimer EWRAM_COMMON(4);
+void (*gSioCancelCallback)(void) EWRAM_COMMON(4);
+u32 gVBlankTimerBase EWRAM_COMMON(4);
+s16 gSioAutoConnectState EWRAM_COMMON(8);
+u32 gDebugLogSeq EWRAM_COMMON(4);
+u32 gDebugLogB[100] EWRAM_COMMON(16);
+u32 gDebugLogA[100] EWRAM_COMMON(16);
+u32 gDebugLogD[100] EWRAM_COMMON(16);
+u16 gDebugLogIndex EWRAM_COMMON(4);
+s8 gLinkDecksAllocated EWRAM_COMMON(4);
+u16 gSioExchangeSeqEnd EWRAM_COMMON(4);
+Deck* gSioSendDeck EWRAM_COMMON(4);
+s8 gSioHandshakeDone EWRAM_COMMON(4);
+s8 gSioHandshakeConfirm EWRAM_COMMON(4);
+u16 gSioRelayKeysB EWRAM_COMMON(4);
+s8 gSioConnectRetries EWRAM_COMMON(4);
+u16* gSioExchangeSendData EWRAM_COMMON(4);
 #ifdef VERSION_EU
-u16 gUnkEu_0203C964 EWRAM_COMMON(4);
+u16 gRandomPartnerATimer EWRAM_COMMON(4);
 #endif
-u16 gUnk_0203C394 EWRAM_COMMON(4);
-Deck* gUnk_0203C398 EWRAM_COMMON(4);
+u16 gSioExchangeSeq EWRAM_COMMON(4);
+Deck* gSioRecvDeck EWRAM_COMMON(4);
 #ifdef VERSION_EU
-u16 gUnkEu_0203C970 EWRAM_COMMON(4);
+u16 gRandomPartnerDpadTimer EWRAM_COMMON(4);
 #endif
-u16* gUnk_0203C39C EWRAM_COMMON(4);
-s8 gUnk_0203C3A0 EWRAM_COMMON(4);
+u16* gSioExchangeRecvData EWRAM_COMMON(4);
+s8 gSioConnectAccepted EWRAM_COMMON(4);
 #ifdef VERSION_EU
-u16 gUnkEu_0203C97C EWRAM_COMMON(4);
+u16 gRandomPartnerDpad EWRAM_COMMON(4);
 #endif
-s8 gUnk_0203C3A4 EWRAM_COMMON(4);
-s8 gUnk_0203C3A8 EWRAM_COMMON(4);
-void (*gUnk_0203C3AC)(void) EWRAM_COMMON(4);
-u16 gUnk_0203C3B0 EWRAM_COMMON(4);
-u16 gUnk_0203C3B4 EWRAM_COMMON(4);
+s8 gSioHandshakeAck EWRAM_COMMON(4);
+s8 gSioConnected EWRAM_COMMON(4);
+void (*gSioConnectCallback)(void) EWRAM_COMMON(4);
+u16 gSioConnectId EWRAM_COMMON(4);
+u16 gSioRelayKeysA EWRAM_COMMON(4);
 u16 gUnk_0203C3B8 EWRAM_COMMON(4);
 
-u8 gUnk_09EF2F08[1440] = {
+u8 gMaskFadeTileMasks[1440] = {
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
     0xFF, 0x0F, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xF0, 0xFF, 0xFF, 0xFF,
@@ -148,14 +148,14 @@ static TaskPool gCharaTaskPool;
 void task_chara_mask_fade_0(MaskFadeWork* work, MaskFadeArgs* args) {
     s32 i;
 
-    work->unk_000 = args->unk_00;
-    work->unk_004 = args->unk_04;
-    work->unk_00A = 0;
-    work->unk_008 = 1;
-    work->unk_006 = args->unk_06;
+    work->tiles = args->tiles;
+    work->tileCount = args->tileCount;
+    work->timer = 0;
+    work->step = 1;
+    work->stepDelay = args->stepDelay;
 
-    for (i = 0; i < work->unk_004; i++) {
-        work->unk_04C[i] = GetRandom() % 5;
+    for (i = 0; i < work->tileCount; i++) {
+        work->patterns[i] = GetRandom() % 5;
     }
 }
 
@@ -163,20 +163,20 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
     s32 i;
     s32 j;
 
-    if (++work->unk_00A > work->unk_006) {
-        work->unk_00A = 0;
+    if (++work->timer > work->stepDelay) {
+        work->timer = 0;
 
-        for (i = 0; i < work->unk_004; i++) {
-            CpuFastSet(work->unk_000 + i * 32, work->unk_00C, 8);
+        for (i = 0; i < work->tileCount; i++) {
+            CpuFastSet(work->tiles + i * 32, work->tileBuffer, 8);
 
             for (j = 0; j <= 31; j++) {
-                work->unk_02C[j] = work->unk_00C[j] & gUnk_09EF2F08[j + work->unk_008 * 32 + work->unk_04C[i] * 288];
+                work->maskedTile[j] = work->tileBuffer[j] & gMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
             }
-            CpuFastSet(work->unk_02C, work->unk_000 + i * 32, 8);
+            CpuFastSet(work->maskedTile, work->tiles + i * 32, 8);
         }
-        work->unk_008++;
-        if (work->unk_008 > 8) {
-            work->unk_008 = 0;
+        work->step++;
+        if (work->step > 8) {
+            work->step = 0;
             return 0;
         }
     }
@@ -193,25 +193,25 @@ void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* param) {
     s32 x;
     s32 y;
 
-    work->unk_08 = param->unk_00;
-    work->unk_0C = param->unk_04;
-    work->unk_10 = param->unk_08;
-    work->unk_14 = param->unk_0C;
-    work->unk_18 = param->unk_10;
-    work->unk_1C = param->unk_14;
-    work->unk_20 = param->unk_18;
-    work->unk_24 = param->unk_1C;
-    work->unk_28 = param->unk_20;
-    work->unk_2C = 0x100;
-    work->unk_2A = 0;
-    work->unk_2B = 0;
-    work->unk_34 = 0x300;
-    work->unk_30 = 2;
-    x = work->unk_20 - *work->unk_08;
-    y = work->unk_24 - *work->unk_0C;
-    work->unk_40 = NormalizeVector2D8(&x, &y);
-    work->unk_38 = -x;
-    work->unk_3C = -y;
+    work->x = param->x;
+    work->y = param->y;
+    work->scaleX = param->scaleX;
+    work->scaleY = param->scaleY;
+    work->angle = param->angle;
+    work->visible = param->visible;
+    work->targetX = param->targetX;
+    work->targetY = param->targetY;
+    work->delay = param->delay;
+    work->scale = 0x100;
+    work->flipAngleY = 0;
+    work->flipAngleX = 0;
+    work->speed = 0x300;
+    work->decel = 2;
+    x = work->targetX - *work->x;
+    y = work->targetY - *work->y;
+    work->distance = NormalizeVector2D8(&x, &y);
+    work->dirX = -x;
+    work->dirY = -y;
     work->timer = 0;
     work->unk_02 = 0;
     work->state = 0;
@@ -220,7 +220,7 @@ void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* param) {
 static inline u8 ChgCardRotation(ChgCardObjWork* work, u8 rotation) {
     u8 phase;
 
-    if (work->unk_2C < 0) {
+    if (work->scale < 0) {
         phase = -rotation;
     } else {
         phase = rotation;
@@ -239,7 +239,7 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->timer >= work->unk_28) {
+        if (work->timer >= work->delay) {
             work->timer = 0;
             work->state++;
         } else {
@@ -247,21 +247,21 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
         }
         break;
     case 1:
-        *work->unk_08 += (work->unk_38 * work->unk_34) >> 8;
-        *work->unk_0C += (work->unk_3C * work->unk_34) >> 8;
-        *work->unk_18 += 32;
-        angleA = work->unk_2A + ((64 - work->unk_2A) >> 4);
+        *work->x += (work->dirX * work->speed) >> 8;
+        *work->y += (work->dirY * work->speed) >> 8;
+        *work->angle += 32;
+        angleA = work->flipAngleY + ((64 - work->flipAngleY) >> 4);
         zero = 0;
-        work->unk_2A = angleA;
-        work->unk_2B = zero;
-        work->unk_40 = VectorLength2D(work->unk_20 - *work->unk_08, work->unk_24 - *work->unk_0C);
-        work->unk_34 -= work->unk_30;
-        work->unk_30 += 2;
+        work->flipAngleY = angleA;
+        work->flipAngleX = zero;
+        work->distance = VectorLength2D(work->targetX - *work->x, work->targetY - *work->y);
+        work->speed -= work->decel;
+        work->decel += 2;
         phase = ChgCardRotation(work, 128);
-        p10 = work->unk_10;
-        *p10 = (-gSineTable[((work->unk_2B + phase) & 0xFF) + 64] * work->unk_2C) >> 8;
-        p14 = work->unk_14;
-        *p14 = (-gSineTable[((work->unk_2A + 128) & 0xFF) + 64] * work->unk_2C) >> 8;
+        p10 = work->scaleX;
+        *p10 = (-gSineTable[((work->flipAngleX + phase) & 0xFF) + 64] * work->scale) >> 8;
+        p14 = work->scaleY;
+        *p14 = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
 
         if (*p10 >= -2 && *p10 <= 2) {
             *p10 = 2;
@@ -271,16 +271,16 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
             *p14 = 2;
         }
 
-        if (work->unk_34 < 0) {
-            x = work->unk_20 - *work->unk_08;
-            y = work->unk_24 - *work->unk_0C;
+        if (work->speed < 0) {
+            x = work->targetX - *work->x;
+            y = work->targetY - *work->y;
             NormalizeVector2D8(&x, &y);
-            work->unk_38 = -x;
-            work->unk_3C = -y;
+            work->dirX = -x;
+            work->dirY = -y;
 
-            if (work->unk_40 <= 0x7FF) {
+            if (work->distance <= 0x7FF) {
                 m4aSongNumStart(SONG_SYS_ITEMGET);
-                *work->unk_1C = zero;
+                *work->visible = zero;
                 return 0;
             }
         }
@@ -295,133 +295,133 @@ void task_chgCardObj_2(void) {
 void task_chgCardObj_3(void) {
 }
 
-u8 func_080C54B4(void) {
+u8 SioConnectUpdate(void) {
     u32* p;
 
     p = &gSioStatus;
-    *p = func_08006ED4(&gUnk_0203982C, gUnk_02039B68, gUnk_020397E0);
+    *p = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
-    gUnk_020397FC = (gSioStatus & 0x1C) >> 2;
+    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
 
     if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
-        func_080C5AA4();
+        SioConnectSend();
 
         if ((gSioStatus & 0x100) == 0) {
-            gUnk_02039B60 = func_080C5B50();
+            gSioLinkResult = SioConnectRecv();
         }
 
         if (gSioStatus & 0x7F0000) {
-            if (gUnk_0203C3A8 == 1) {
-                gUnk_020397D4++;
-                if (gUnk_020397D4 > 180) {
-                    gUnk_02039B60 = 1;
+            if (gSioConnected == 1) {
+                gSioErrorFrameCount++;
+                if (gSioErrorFrameCount > 180) {
+                    gSioLinkResult = 1;
                 }
             }
         }
 
-        if (gUnk_02039B60 == 1) {
+        if (gSioLinkResult == 1) {
             gSystemFlags &= 0xFFFE;
-            gUnk_020397F0 = gSioStatus;
+            gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
-            return gUnk_02039B60;
+            return gSioLinkResult;
         }
     } else {
         if (GetKeysPressed() & B_BUTTON) {
-            gUnk_0203BEA4 = 10;
+            gSioCancelTimer = 10;
         }
 
-        if (gUnk_0203BEA4 > 0) {
-            gUnk_0203BEA4--;
-            if (gUnk_0203BEA4 == 0) {
-                func_080078A4();
+        if (gSioCancelTimer > 0) {
+            gSioCancelTimer--;
+            if (gSioCancelTimer == 0) {
+                SioShutdown();
 
-                if (gUnk_0203BEAC != 0) {
-                    gUnk_0203BEAC();
+                if (gSioCancelCallback != 0) {
+                    gSioCancelCallback();
                 }
             }
         }
     }
-    return gUnk_02039B60;
+    return gSioLinkResult;
 }
 
-u8 func_080C55DC(void) {
+u8 SioLinkUpdate(void) {
     u32* p;
 
     p = &gSioStatus;
-    *p = func_0800702C(&gUnk_0203982C, gUnk_02039B68, gUnk_020397E0);
+    *p = SioTransferFrames(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
-    gUnk_020397FC = (gSioStatus & 0x1C) >> 2;
+    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
 
     if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
-        if (gUnk_020397F8 != 0) {
-            gUnk_02039B60 = gUnk_020397F8();
+        if (gSioLinkRecvCallback != 0) {
+            gSioLinkResult = gSioLinkRecvCallback();
         }
 
-        if (gUnk_02039804 != 0) {
-            gUnk_02039804();
+        if (gSioLinkSendCallback != 0) {
+            gSioLinkSendCallback();
         }
 
         if (gSioStatus & 0x7F0000) {
-            if (gUnk_0203C3A8 == 1) {
-                gUnk_020397D4++;
-                if (gUnk_020397D4 > 180) {
+            if (gSioConnected == 1) {
+                gSioErrorFrameCount++;
+                if (gSioErrorFrameCount > 180) {
                     gSystemFlags &= 0xFFFE;
-                    gUnk_020397F0 = gSioStatus;
+                    gSioErrorStatus = gSioStatus;
                     ModeRequest(&gModeSioError, 0);
-                    gUnk_02039B60 = 1;
+                    gSioLinkResult = 1;
                 }
             }
         }
     }
-    return gUnk_02039B60;
+    return gSioLinkResult;
 }
 
 
-u8 func_080C56BC(void) {
+u8 SioConnectUpdateAuto(void) {
     u32* p;
 
     p = &gSioStatus;
-    *p = func_08006ED4(&gUnk_0203982C, gUnk_02039B68, gUnk_020397E0);
+    *p = SioRunStateMachine(&gSioHandshakeRequest, gSioSendFrame, gSioRecvFrame);
     gSioPlayerId = gSioStatus & 3;
-    gUnk_020397FC = (gSioStatus & 0x1C) >> 2;
+    gSioPlayerCount = (gSioStatus & 0x1C) >> 2;
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
 
     if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
-        func_080C5C24();
+        SioConnectSendAuto();
 
         if ((gSioStatus & 0x100) == 0) {
-            gUnk_02039B60 = func_080C5C7C();
+            gSioLinkResult = SioConnectRecvAuto();
         }
 
         if (gSioStatus & 0x7F0000) {
-            if (gUnk_0203C3A8 == 1) {
-                gUnk_020397D4++;
-                if (gUnk_020397D4 > 180) {
-                    gUnk_02039B60 = 1;
+            if (gSioConnected == 1) {
+                gSioErrorFrameCount++;
+                if (gSioErrorFrameCount > 180) {
+                    gSioLinkResult = 1;
                 }
             }
         }
 
-        if (gUnk_02039B60 == 1) {
+        if (gSioLinkResult == 1) {
             gSystemFlags &= 0xFFFE;
-            gUnk_020397F0 = gSioStatus;
+            gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
-            return gUnk_02039B60;
+            return gSioLinkResult;
         }
     }
-    return gUnk_02039B60;
+    return gSioLinkResult;
 }
 
-void func_080C57A4(void) {
-    func_08083D68();
-    func_08083DD4();
+void FreeLinkDecks(void) {
+    FreeLinkSendDeck();
+    FreeLinkPartnerDeck();
 }
 
-void func_080C57B4(void) {
+void SioLinkClose(void) {
     if (gSystemFlags & 1) {
-        func_080078A4();
+        SioShutdown();
         gSystemFlags &= 0xFFFE;
     }
 
@@ -429,91 +429,91 @@ void func_080C57B4(void) {
         gSystemFlags &= 0xFFEF;
     }
 
-    if (gUnk_0203C374 == 1) {
-        func_080C57A4();
-        gUnk_0203C374 = 0;
+    if (gLinkDecksAllocated == 1) {
+        FreeLinkDecks();
+        gLinkDecksAllocated = 0;
     }
 }
 
-void func_080C5808(void) {
+void DebugLogClear(void) {
     s32 i;
 
     for (i = 0; i < 100; i++) {
-        gUnk_0203C050[i] = 0;
-        gUnk_0203BEC0[i] = 0;
-        gUnk_0203BD10[i] = 0;
-        gUnk_0203C1E0[i] = 0;
+        gDebugLogA[i] = 0;
+        gDebugLogB[i] = 0;
+        gDebugLogC[i] = 0;
+        gDebugLogD[i] = 0;
     }
-    gUnk_0203C370 = 0;
-    gUnk_0203BEBC = 0;
+    gDebugLogIndex = 0;
+    gDebugLogSeq = 0;
 }
 
-void func_080C5850(u16 a, u16 b, u16 c, u16 d) {
-    gUnk_0203C050[gUnk_0203C370] = (gUnk_0203BEBC << 24) | a;
-    gUnk_0203BEC0[gUnk_0203C370] = (gUnk_0203BEBC << 24) | b;
-    gUnk_0203BD10[gUnk_0203C370] = (gUnk_0203BEBC << 24) | c;
-    gUnk_0203C1E0[gUnk_0203C370] = (gUnk_0203BEBC << 24) | d;
-    gUnk_0203C370++;
-    if (gUnk_0203C370 > 99) {
-        gUnk_0203C370 = 0;
+void DebugLogAdd(u16 a, u16 b, u16 c, u16 d) {
+    gDebugLogA[gDebugLogIndex] = (gDebugLogSeq << 24) | a;
+    gDebugLogB[gDebugLogIndex] = (gDebugLogSeq << 24) | b;
+    gDebugLogC[gDebugLogIndex] = (gDebugLogSeq << 24) | c;
+    gDebugLogD[gDebugLogIndex] = (gDebugLogSeq << 24) | d;
+    gDebugLogIndex++;
+    if (gDebugLogIndex > 99) {
+        gDebugLogIndex = 0;
     }
-    func_080C58DC();
+    DebugLogNextSeq();
 }
 
-void func_080C58D0(void) {
-    gUnk_0203BEBC = 0;
+void DebugLogResetSeq(void) {
+    gDebugLogSeq = 0;
 }
 
-void func_080C58DC(void) {
-    gUnk_0203BEBC = (gUnk_0203BEBC + 1) & 0xFF;
+void DebugLogNextSeq(void) {
+    gDebugLogSeq = (gDebugLogSeq + 1) & 0xFF;
 }
 
-void func_080C58F0(void) {
-    gUnk_0203BEA0 = 0;
-    gUnk_0203BEB0 = gVBlankCounter;
+void VBlankTimerStart(void) {
+    gVBlankTimerElapsed = 0;
+    gVBlankTimerBase = gVBlankCounter;
 }
 
-void func_080C590C(void) {
-    gUnk_0203BEA0 = (gVBlankCounter - gUnk_0203BEB0) & 0xFFFF;
+void VBlankTimerUpdate(void) {
+    gVBlankTimerElapsed = (gVBlankCounter - gVBlankTimerBase) & 0xFFFF;
 }
 
-u8 func_080C5930(void) {
+u8 SioHasError(void) {
     if (gSioStatus & 0x7F0000) {
         return 1;
     }
     return 0;
 }
 
-void func_080C594C(void) {
+void SioAutoConnectStart(void) {
     SioReset();
-    func_080C5A3C(func_080C5A30, 0, 0);
-    gUnk_0203BEB8 = 0;
-    gUnk_0203BEA8 = 0;
+    SioConnectInit(SioAutoConnectOnConnect, 0, 0);
+    gSioAutoConnectState = 0;
+    gSioAutoConnectTimer = 0;
 }
 
-u8 func_080C5978(void) {
-    switch (gUnk_0203BEB8) {
+u8 SioAutoConnectUpdate(void) {
+    switch (gSioAutoConnectState) {
     case 0:
-        func_080C56BC();
+        SioConnectUpdateAuto();
         break;
     case 1:
-        gUnk_0203BEA8++;
-        if (gUnk_0203BEA8 > 4) {
-            gUnk_0203BEA8 = 0;
-            func_080C5DC0(func_080C5E58, func_080C5ECC);
+        gSioAutoConnectTimer++;
+        if (gSioAutoConnectTimer > 4) {
+            gSioAutoConnectTimer = 0;
+            SioSetLinkCallbacks(SioKeySyncSend, SioKeySyncRecv);
             gSystemFlags |= 1;
             gSystemFlags &= 0xFFEF;
-            gUnk_0203BEB8++;
+            gSioAutoConnectState++;
         }
         break;
     case 2:
-        gUnk_0203BEA8++;
-        if (gUnk_0203BEA8 > 4) {
-            gUnk_02039B68[1] = 0x2811;
+        gSioAutoConnectTimer++;
+        if (gSioAutoConnectTimer > 4) {
+            gSioSendFrame[1] = 0x2811;
 
-            if (gUnk_020397E0[1][0] == 0x2811 && gUnk_020397E0[1][1] == gUnk_020397E0[1][0]) {
-                gUnk_0203BEA8 = 0;
-                gUnk_0203BEB8++;
+            if (gSioRecvFrame[1][0] == 0x2811 && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
+                gSioAutoConnectTimer = 0;
+                gSioAutoConnectState++;
             }
         }
         break;
@@ -523,95 +523,95 @@ u8 func_080C5978(void) {
     return 0;
 }
 
-void func_080C5A30(void) {
-    gUnk_0203BEB8 = 1;
+void SioAutoConnectOnConnect(void) {
+    gSioAutoConnectState = 1;
 }
 
-void func_080C5A3C(void (*a)(void), void (*b)(void), u8 c) {
+void SioConnectInit(void (*a)(void), void (*b)(void), u8 c) {
 #ifdef VERSION_JP
-    gUnk_0203C3B0 = (c & 0xF) | 0xC0F0;
+    gSioConnectId = (c & 0xF) | 0xC0F0;
 #else
 #ifdef VERSION_EU
-    gUnk_0203C3B0 = (c & 0xF) | 0xC2F0;
+    gSioConnectId = (c & 0xF) | 0xC2F0;
 #else
-    gUnk_0203C3B0 = (c & 0xF) | 0xC1F0;
+    gSioConnectId = (c & 0xF) | 0xC1F0;
 #endif
 #endif
-    gUnk_0203C3A0 = 0;
-    gUnk_0203C3A8 = 0;
-    gUnk_0203C38C = 0;
-    gUnk_0203C3AC = a;
-    gUnk_0203BEAC = b;
-    gUnk_0203BEA4 = 0;
-    gUnk_02039B68[0] = 0xDDDD;
-    gUnk_02039B68[1] = 0xDDDD;
+    gSioConnectAccepted = 0;
+    gSioConnected = 0;
+    gSioConnectRetries = 0;
+    gSioConnectCallback = a;
+    gSioCancelCallback = b;
+    gSioCancelTimer = 0;
+    gSioSendFrame[0] = 0xDDDD;
+    gSioSendFrame[1] = 0xDDDD;
 }
 
-s32 func_080C5AA4(void) {
+s32 SioConnectSend(void) {
     u16* param;
     u16* send;
     s32 i;
 
-    if (gUnk_0203C3A8 == 0) {
-        if (gUnk_0203C3A0 == 0) {
+    if (gSioConnected == 0) {
+        if (gSioConnectAccepted == 0) {
             if (GetKeysPressed() & A_BUTTON) {
-                gUnk_02039B68[0] = 0xFEFE;
-                send = gUnk_02039B68;
-                param = &gUnk_0203C3B0;
+                gSioSendFrame[0] = 0xFEFE;
+                send = gSioSendFrame;
+                param = &gSioConnectId;
             } else if (GetKeysPressed() & B_BUTTON) {
-                gUnk_02039B68[0] = 0xAFAF;
-                send = gUnk_02039B68;
-                param = &gUnk_0203C3B0;
+                gSioSendFrame[0] = 0xAFAF;
+                send = gSioSendFrame;
+                param = &gSioConnectId;
             } else {
-                send = gUnk_02039B68;
-                param = &gUnk_0203C3B0;
+                send = gSioSendFrame;
+                param = &gSioConnectId;
 
                 for (i = 0; i < 4; i++) {
-                    gUnk_02039B68[i] = 0;
+                    gSioSendFrame[i] = 0;
                 }
             }
             send[1] = *param;
         } else {
-            gUnk_02039B68[0] = 0xECEC;
+            gSioSendFrame[0] = 0xECEC;
         }
     } else {
         for (i = 0; i < 4; i++) {
-            gUnk_02039B68[i] = 0;
+            gSioSendFrame[i] = 0;
         }
     }
     return 0;
 }
-s32 func_080C5B50(void) {
+s32 SioConnectRecv(void) {
     u16 c;
     u16 v;
 
-    if (gUnk_0203C3A8 == 0) {
-        if (gUnk_0203C3A0 == 0) {
-            if (gUnk_020397E0[0][0] == 0xFEFE || gUnk_020397E0[0][1] == 0xFEFE) {
-                if (gUnk_020397E0[1][0] == gUnk_0203C3B0 && gUnk_020397E0[1][1] == gUnk_020397E0[1][0]) {
-                    gUnk_0203C3A0 = 1;
+    if (gSioConnected == 0) {
+        if (gSioConnectAccepted == 0) {
+            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+                if (gSioRecvFrame[1][0] == gSioConnectId && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
+                    gSioConnectAccepted = 1;
                 }
             } else {
                 c = 0xAFAF;
-                if (gUnk_020397E0[0][0] == c || gUnk_020397E0[0][1] == c) {
-                    func_080078A4();
-                    v = gSioPlayerId == 0 ? gUnk_020397E0[0][0] : gUnk_020397E0[0][1];
+                if (gSioRecvFrame[0][0] == c || gSioRecvFrame[0][1] == c) {
+                    SioShutdown();
+                    v = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
                     if (v == c) {
-                        if (gUnk_0203BEAC != 0) {
-                            gUnk_0203BEAC();
+                        if (gSioCancelCallback != 0) {
+                            gSioCancelCallback();
                         }
                     }
                 }
             }
-        } else if (gUnk_020397E0[0][0] == 0xECEC) {
-            gUnk_0203C3A8 = 1;
+        } else if (gSioRecvFrame[0][0] == 0xECEC) {
+            gSioConnected = 1;
 
-            if (gUnk_0203C3AC != 0) {
-                gUnk_0203C3AC();
+            if (gSioConnectCallback != 0) {
+                gSioConnectCallback();
             }
         } else {
-            gUnk_0203C38C++;
-            if (gUnk_0203C38C > 10) {
+            gSioConnectRetries++;
+            if (gSioConnectRetries > 10) {
                 return 1;
             }
         }
@@ -619,38 +619,38 @@ s32 func_080C5B50(void) {
     return 0;
 }
 
-s32 func_080C5C24(void) {
+s32 SioConnectSendAuto(void) {
     s32 i;
 
-    if (gUnk_0203C3A8 == 0) {
-        if (gUnk_0203C3A0 == 0) {
-            gUnk_02039B68[0] = 0xFEFE;
+    if (gSioConnected == 0) {
+        if (gSioConnectAccepted == 0) {
+            gSioSendFrame[0] = 0xFEFE;
         } else {
-            gUnk_02039B68[0] = 0xECEC;
+            gSioSendFrame[0] = 0xECEC;
         }
     } else {
         for (i = 0; i < 4; i++) {
-            gUnk_02039B68[i] = 0;
+            gSioSendFrame[i] = 0;
         }
     }
     return 0;
 }
 
-s32 func_080C5C7C(void) {
-    if (gUnk_0203C3A8 == 0) {
-        if (gUnk_0203C3A0 == 0) {
-            if (gUnk_020397E0[0][0] == 0xFEFE || gUnk_020397E0[0][1] == 0xFEFE) {
-                gUnk_0203C3A0 = 1;
+s32 SioConnectRecvAuto(void) {
+    if (gSioConnected == 0) {
+        if (gSioConnectAccepted == 0) {
+            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+                gSioConnectAccepted = 1;
             }
-        } else if (gUnk_020397E0[0][0] == 0xECEC) {
-            gUnk_0203C3A8 = 1;
+        } else if (gSioRecvFrame[0][0] == 0xECEC) {
+            gSioConnected = 1;
 
-            if (gUnk_0203C3AC != 0) {
-                gUnk_0203C3AC();
+            if (gSioConnectCallback != 0) {
+                gSioConnectCallback();
             }
         } else {
-            gUnk_0203C38C++;
-            if (gUnk_0203C38C > 10) {
+            gSioConnectRetries++;
+            if (gSioConnectRetries > 10) {
                 return 1;
             }
         }
@@ -658,59 +658,59 @@ s32 func_080C5C7C(void) {
     return 0;
 }
 
-void func_080C5D00(void) {
-    func_080C5D10();
-    func_080C5D24();
+void SioCommandReset(void) {
+    SioCommandClearSend();
+    SioCommandClearRecv();
 }
 
-void func_080C5D10(void) {
+void SioCommandClearSend(void) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        gUnk_02039B58[i] = 0;
+        gSioCommandSend[i] = 0;
     }
 }
 
-void func_080C5D24(void) {
+void SioCommandClearRecv(void) {
     s32 i;
     s32 j;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 2; j++) {
-            gUnk_02039810[i][j] = 0;
+            gSioCommandRecv[i][j] = 0;
         }
     }
 }
 
 
-s32 func_080C5D50(void) {
-    gUnk_02039B58[0] = 0xACD;
-    gUnk_02039B68[0] = gUnk_02039B58[0];
-    gUnk_02039B68[1] = gUnk_02039B58[1];
-    gUnk_02039B68[2] = gUnk_02039B58[2];
-    gUnk_02039B68[3] = gUnk_02039B58[3];
-    func_080C5D10();
+s32 SioCommandSend(void) {
+    gSioCommandSend[0] = 0xACD;
+    gSioSendFrame[0] = gSioCommandSend[0];
+    gSioSendFrame[1] = gSioCommandSend[1];
+    gSioSendFrame[2] = gSioCommandSend[2];
+    gSioSendFrame[3] = gSioCommandSend[3];
+    SioCommandClearSend();
     return 0;
 }
 
-s32 func_080C5D80(void) {
-    if (gUnk_020397E0[0][0] == 0xACD) {
-        gUnk_02039810[0][0] = gUnk_020397E0[0][0];
-        gUnk_02039810[1][0] = gUnk_020397E0[1][0];
-        gUnk_02039810[2][0] = gUnk_020397E0[2][0];
-        gUnk_02039810[3][0] = gUnk_020397E0[3][0];
+s32 SioCommandRecv(void) {
+    if (gSioRecvFrame[0][0] == 0xACD) {
+        gSioCommandRecv[0][0] = gSioRecvFrame[0][0];
+        gSioCommandRecv[1][0] = gSioRecvFrame[1][0];
+        gSioCommandRecv[2][0] = gSioRecvFrame[2][0];
+        gSioCommandRecv[3][0] = gSioRecvFrame[3][0];
     }
 
-    if (gUnk_020397E0[0][1] == 0xACD) {
-        gUnk_02039810[0][1] = gUnk_020397E0[0][1];
-        gUnk_02039810[1][1] = gUnk_020397E0[1][1];
-        gUnk_02039810[2][1] = gUnk_020397E0[2][1];
-        gUnk_02039810[3][1] = gUnk_020397E0[3][1];
+    if (gSioRecvFrame[0][1] == 0xACD) {
+        gSioCommandRecv[0][1] = gSioRecvFrame[0][1];
+        gSioCommandRecv[1][1] = gSioRecvFrame[1][1];
+        gSioCommandRecv[2][1] = gSioRecvFrame[2][1];
+        gSioCommandRecv[3][1] = gSioRecvFrame[3][1];
     }
     return 0;
 }
 
-void func_080C5DC0(s32 (*a)(void), s32 (*b)(void)) {
+void SioSetLinkCallbacks(s32 (*a)(void), s32 (*b)(void)) {
     s32 i;
     s32 j;
     s32 (**pb)(void);
@@ -718,21 +718,21 @@ void func_080C5DC0(s32 (*a)(void), s32 (*b)(void)) {
     u16* p2;
     s32 (**pa)(void);
 
-    gUnk_0203C38C = 0;
-    gUnk_020397F0 = 0;
-    gUnk_02039B60 = 0;
-    pa = &gUnk_02039804;
-    pb = &gUnk_020397F8;
-    p1 = &gUnk_0203C3B4;
-    p2 = &gUnk_0203C388;
+    gSioConnectRetries = 0;
+    gSioErrorStatus = 0;
+    gSioLinkResult = 0;
+    pa = &gSioLinkSendCallback;
+    pb = &gSioLinkRecvCallback;
+    p1 = &gSioRelayKeysA;
+    p2 = &gSioRelayKeysB;
 
     for (i = 0; i < 4; i++) {
-        gUnk_02039B68[i] = 0;
+        gSioSendFrame[i] = 0;
     }
 
     for (i = 0; i < 2; i++) {
         for (j = 0; j < 4; j++) {
-            gUnk_020397E0[j][i] = 0;
+            gSioRecvFrame[j][i] = 0;
         }
     }
 
@@ -743,42 +743,42 @@ void func_080C5DC0(s32 (*a)(void), s32 (*b)(void)) {
 }
 
 
-s32 func_080C5E58(void) {
+s32 SioKeySyncSend(void) {
     if (gSioPlayerId == 0) {
-        gUnk_02039B68[0] = 0xACD;
-        gUnk_02039B68[1] = GetKeysHeld() & KEYS_MASK;
-        gUnk_02039B68[2] = gUnk_0203C3B4;
-        gUnk_02039B68[3] = gUnk_0203C388;
+        gSioSendFrame[0] = 0xACD;
+        gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
+        gSioSendFrame[2] = gSioRelayKeysA;
+        gSioSendFrame[3] = gSioRelayKeysB;
     } else {
-        gUnk_02039B68[0] = 0xACD;
-        gUnk_02039B68[1] = GetKeysHeld() & KEYS_MASK;
-        gUnk_02039B68[2] = 0x1234;
-        gUnk_02039B68[3] = 0x3456;
+        gSioSendFrame[0] = 0xACD;
+        gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
+        gSioSendFrame[2] = 0x1234;
+        gSioSendFrame[3] = 0x3456;
     }
     return 0;
 }
 
-s32 func_080C5ECC(void) {
+s32 SioKeySyncRecv(void) {
     if (gSioPlayerId == 0) {
-        if (gUnk_020397E0[0][0] == 0xACD && gUnk_020397E0[0][1] == gUnk_020397E0[0][0]) {
-            gUnk_0203C3B4 = gUnk_020397E0[1][0];
-            gUnk_0203C388 = gUnk_020397E0[1][1];
+        if (gSioRecvFrame[0][0] == 0xACD && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
+            gSioRelayKeysA = gSioRecvFrame[1][0];
+            gSioRelayKeysB = gSioRecvFrame[1][1];
             gSioStatus &= ~0x100;
         } else {
             gSioStatus |= 0x100;
         }
 
-        if (gUnk_020397E0[0][0] == 0xACD) {
-            SioKeyStateUpdateA(gUnk_020397E0[2][0]);
-            SioKeyStateUpdateB(gUnk_020397E0[3][0]);
+        if (gSioRecvFrame[0][0] == 0xACD) {
+            SioKeyStateUpdateA(gSioRecvFrame[2][0]);
+            SioKeyStateUpdateB(gSioRecvFrame[3][0]);
             gSioStatus &= ~0x100;
         } else {
             gSioStatus |= 0x100;
         }
     } else {
-        if (gUnk_020397E0[0][0] == 0xACD) {
-            SioKeyStateUpdateA(gUnk_020397E0[2][0]);
-            SioKeyStateUpdateB(gUnk_020397E0[3][0]);
+        if (gSioRecvFrame[0][0] == 0xACD) {
+            SioKeyStateUpdateA(gSioRecvFrame[2][0]);
+            SioKeyStateUpdateB(gSioRecvFrame[3][0]);
             gSioStatus &= ~0x100;
         } else {
             gSioStatus |= 0x100;
@@ -788,88 +788,88 @@ s32 func_080C5ECC(void) {
 }
 
 
-void func_080C5F94(void) {
+void SioPrepareDeckExchange(void) {
     Deck* a;
     Deck* b;
 
-    a = func_08083C94();
-    gUnk_0203C37C = a;
-    b = func_08083D7C();
-    gUnk_0203C398 = b;
-    gUnk_0203C374 = 1;
-    gUnk_0203C378 = 59;
-    gUnk_0203C394 = 1;
-    gUnk_0203C3A4 = 0;
-    gUnk_0203C380 = 0;
-    gUnk_0203C384 = 0;
+    a = CreateLinkSendDeck();
+    gSioSendDeck = a;
+    b = CreateLinkPartnerDeck();
+    gSioRecvDeck = b;
+    gLinkDecksAllocated = 1;
+    gSioExchangeSeqEnd = 59;
+    gSioExchangeSeq = 1;
+    gSioHandshakeAck = 0;
+    gSioHandshakeDone = 0;
+    gSioHandshakeConfirm = 0;
     gUnk_0203C3B8 = 0;
-    gUnk_0203C390 = (u16*)gUnk_0203C37C;
-    gUnk_0203C39C = (u16*)gUnk_0203C398;
+    gSioExchangeSendData = (u16*)gSioSendDeck;
+    gSioExchangeRecvData = (u16*)gSioRecvDeck;
 }
 
 
-s32 func_080C6008(void) {
+s32 SioExchangeSend(void) {
     u16 n;
 
-    if (gUnk_0203C380 == 0) {
-        if (gUnk_0203C3A4 == 0) {
-            gUnk_02039B68[0] = 0x1BFE;
+    if (gSioHandshakeDone == 0) {
+        if (gSioHandshakeAck == 0) {
+            gSioSendFrame[0] = 0x1BFE;
         } else {
-            gUnk_02039B68[0] = 0xC5A0;
+            gSioSendFrame[0] = 0xC5A0;
         }
     } else {
-        if (gUnk_0203C394 <= 3) {
-            gUnk_02039B68[0] = 0xACD;
-            gUnk_02039B68[1] = 0xDDDD;
-            gUnk_02039B68[2] = 0xDDDD;
-            gUnk_02039B68[3] = 0xDDDD;
-        } else if (gUnk_0203C394 <= gUnk_0203C378) {
-            n = gUnk_0203C394 - 3;
-            gUnk_02039B68[0] = 0xACD;
-            gUnk_02039B68[1] = gUnk_0203C394;
-            gUnk_02039B68[2] = gUnk_0203C390[n * 2 - 2];
-            gUnk_02039B68[3] = gUnk_0203C390[n * 2 - 1];
+        if (gSioExchangeSeq <= 3) {
+            gSioSendFrame[0] = 0xACD;
+            gSioSendFrame[1] = 0xDDDD;
+            gSioSendFrame[2] = 0xDDDD;
+            gSioSendFrame[3] = 0xDDDD;
+        } else if (gSioExchangeSeq <= gSioExchangeSeqEnd) {
+            n = gSioExchangeSeq - 3;
+            gSioSendFrame[0] = 0xACD;
+            gSioSendFrame[1] = gSioExchangeSeq;
+            gSioSendFrame[2] = gSioExchangeSendData[n * 2 - 2];
+            gSioSendFrame[3] = gSioExchangeSendData[n * 2 - 1];
         } else {
-            gUnk_02039B68[0] = 0xACD;
-            gUnk_02039B68[1] = gUnk_0203C394;
-            gUnk_02039B68[2] = 0;
-            gUnk_02039B68[3] = 0;
+            gSioSendFrame[0] = 0xACD;
+            gSioSendFrame[1] = gSioExchangeSeq;
+            gSioSendFrame[2] = 0;
+            gSioSendFrame[3] = 0;
         }
-        gUnk_0203C394++;
+        gSioExchangeSeq++;
     }
     return 0;
 }
 
 
-s32 func_080C60D8(void) {
+s32 SioExchangeRecv(void) {
     u16 n;
 
-    if (gUnk_0203C380 == 0) {
-        if (gUnk_0203C3A4 == 0) {
-            if (gUnk_020397E0[0][0] == 0x1BFE || gUnk_020397E0[0][1] == 0x1BFE) {
-                gUnk_0203C3A4 = 1;
+    if (gSioHandshakeDone == 0) {
+        if (gSioHandshakeAck == 0) {
+            if (gSioRecvFrame[0][0] == 0x1BFE || gSioRecvFrame[0][1] == 0x1BFE) {
+                gSioHandshakeAck = 1;
             }
-        } else if (gUnk_020397E0[0][0] == 0xC5A0 && gUnk_020397E0[0][1] == gUnk_020397E0[0][0]) {
-            gUnk_0203C380 = 1;
-            gUnk_0203C394 = 1;
+        } else if (gSioRecvFrame[0][0] == 0xC5A0 && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
+            gSioHandshakeDone = 1;
+            gSioExchangeSeq = 1;
         }
     } else if (gSioPlayerId == 0) {
-        if (gUnk_020397E0[1][1] != 0xDDDD && gUnk_020397E0[1][1] > 3) {
-            if (gUnk_020397E0[1][1] > gUnk_0203C378) {
+        if (gSioRecvFrame[1][1] != 0xDDDD && gSioRecvFrame[1][1] > 3) {
+            if (gSioRecvFrame[1][1] > gSioExchangeSeqEnd) {
                 return 2;
             }
-            n = gUnk_020397E0[1][1] - 3;
-            gUnk_0203C39C[n * 2 - 2] = gUnk_020397E0[2][1];
-            gUnk_0203C39C[n * 2 - 1] = gUnk_020397E0[3][1];
+            n = gSioRecvFrame[1][1] - 3;
+            gSioExchangeRecvData[n * 2 - 2] = gSioRecvFrame[2][1];
+            gSioExchangeRecvData[n * 2 - 1] = gSioRecvFrame[3][1];
         }
     } else {
-        if (gUnk_020397E0[1][0] != 0xDDDD && gUnk_020397E0[1][0] > 3) {
-            if (gUnk_020397E0[1][0] > gUnk_0203C378) {
+        if (gSioRecvFrame[1][0] != 0xDDDD && gSioRecvFrame[1][0] > 3) {
+            if (gSioRecvFrame[1][0] > gSioExchangeSeqEnd) {
                 return 2;
             }
-            n = gUnk_020397E0[1][0] - 3;
-            gUnk_0203C39C[n * 2 - 2] = gUnk_020397E0[2][0];
-            gUnk_0203C39C[n * 2 - 1] = gUnk_020397E0[3][0];
+            n = gSioRecvFrame[1][0] - 3;
+            gSioExchangeRecvData[n * 2 - 2] = gSioRecvFrame[2][0];
+            gSioExchangeRecvData[n * 2 - 1] = gSioRecvFrame[3][0];
         }
     }
     return 0;
@@ -883,85 +883,85 @@ void eu_080C24D8(void) {
 
     count = 112;
     for (i = 0; i < count; i++) {
-        gUnk_0203C39C[i] = gUnk_0203C390[i];
+        gSioExchangeRecvData[i] = gSioExchangeSendData[i];
     }
 }
 #endif
 
-void func_080C61D4(void) {
+void SioPrepareCharaLinkExchange(void) {
     s32 i;
     CharaLinkData* send;
     u16* recv;
 
-    send = &gUnk_0203AAC0;
-    recv = (u16*)&gUnk_0203AA10;
-    send->unk_00 = gGameState.hp;
-    gUnk_0203AAC0.unk_02 = gGameState.progression.maxHp;
-    gUnk_0203AAC0.unk_04 = gGameState.progression.level;
-    gUnk_0203AAC0.unk_06 = gUnk_0203A9EC;
-    gUnk_0203AAC0.unk_08 = gUnk_0203A9F0;
-    gUnk_0203AAC0.unk_0A = gGameState.progression.ap;
-    gUnk_0203AAC0.unk_0C = gGameState.progression.unk_14;
-    gUnk_0203AAC0.unk_14 = gGameState.progression.unk_1C;
-    gUnk_0203AAC0.unk_1C = 0;
+    send = &gCharaLinkSend;
+    recv = (u16*)&gCharaLinkRecv;
+    send->hp = gGameState.hp;
+    gCharaLinkSend.maxHp = gGameState.progression.maxHp;
+    gCharaLinkSend.level = gGameState.progression.level;
+    gCharaLinkSend.winCount = gSioWinCount;
+    gCharaLinkSend.loseCount = gSioLoseCount;
+    gCharaLinkSend.ap = gGameState.progression.ap;
+    gCharaLinkSend.learnedStocks = gGameState.progression.learnedStocks;
+    gCharaLinkSend.learnedStocks2 = gGameState.progression.learnedStocks2;
+    gCharaLinkSend.worldFlags = 0;
 
     for (i = 0; i < 13; i++) {
         if ((u8)(gGameState.floors[i].world - 1) <= 11) {
-            gUnk_0203AAC0.unk_1C |= 1 << gGameState.floors[i].world;
+            gCharaLinkSend.worldFlags |= 1 << gGameState.floors[i].world;
         }
     }
 
     if (gSioPlayerId == 0) {
         SeedRandom(gFrameCounter & 0xFFFF);
-        gUnk_0203AAC0.unk_1E = GetRandom() % 0xFFFF;
+        gCharaLinkSend.seed = GetRandom() % 0xFFFF;
     } else {
-        gUnk_0203AAC0.unk_1E = 0;
+        gCharaLinkSend.seed = 0;
     }
-    gUnk_0203C378 = 11;
-    gUnk_0203C394 = 1;
-    gUnk_0203C3A4 = 0;
-    gUnk_0203C380 = 0;
-    gUnk_0203C384 = 0;
-    gUnk_0203C390 = (u16*)send;
-    gUnk_0203C39C = recv;
+    gSioExchangeSeqEnd = 11;
+    gSioExchangeSeq = 1;
+    gSioHandshakeAck = 0;
+    gSioHandshakeDone = 0;
+    gSioHandshakeConfirm = 0;
+    gSioExchangeSendData = (u16*)send;
+    gSioExchangeRecvData = recv;
 }
 
-void func_080C62F0(void (*a)(void)) {
-    gUnk_0203C3A4 = 0;
-    gUnk_0203C380 = 0;
-    gUnk_0203C384 = 0;
-    gUnk_0203C3AC = a;
+void SioSyncInit(void (*a)(void)) {
+    gSioHandshakeAck = 0;
+    gSioHandshakeDone = 0;
+    gSioHandshakeConfirm = 0;
+    gSioConnectCallback = a;
 }
 
-s32 func_080C6314(void) {
-    if (gUnk_0203C380 == 0) {
-        if (gUnk_0203C3A4 == 0) {
-            gUnk_02039B68[0] = 0xFEFE;
-        } else if (gUnk_0203C384 == 0) {
-            gUnk_02039B68[0] = 0xECEC;
+s32 SioSyncSend(void) {
+    if (gSioHandshakeDone == 0) {
+        if (gSioHandshakeAck == 0) {
+            gSioSendFrame[0] = 0xFEFE;
+        } else if (gSioHandshakeConfirm == 0) {
+            gSioSendFrame[0] = 0xECEC;
         } else {
-            gUnk_02039B68[0] = 0xDF89;
+            gSioSendFrame[0] = 0xDF89;
         }
     }
     return 0;
 }
 
-s32 func_080C6378(void) {
-    if (gUnk_0203C380 == 0) {
-        if (gUnk_0203C3A4 == 0) {
-            if (gUnk_020397E0[0][0] == 0xFEFE || gUnk_020397E0[0][1] == 0xFEFE) {
-                gUnk_0203C3A4 = 1;
+s32 SioSyncRecv(void) {
+    if (gSioHandshakeDone == 0) {
+        if (gSioHandshakeAck == 0) {
+            if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
+                gSioHandshakeAck = 1;
             }
-        } else if (gUnk_020397E0[0][0] != 0xDF89) {
-            if (gSioPlayerId == 0 && gUnk_020397E0[0][0] == 0xECEC &&
-                gUnk_020397E0[0][1] == gUnk_020397E0[0][0]) {
-                gUnk_0203C384 = 1;
+        } else if (gSioRecvFrame[0][0] != 0xDF89) {
+            if (gSioPlayerId == 0 && gSioRecvFrame[0][0] == 0xECEC &&
+                gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
+                gSioHandshakeConfirm = 1;
             }
         } else {
-            if (gUnk_0203C3AC != 0) {
-                gUnk_0203C3AC();
+            if (gSioConnectCallback != 0) {
+                gSioConnectCallback();
             }
-            gUnk_0203C380 = 1;
+            gSioHandshakeDone = 1;
         }
     }
     return 0;
@@ -980,46 +980,46 @@ s32 eu_080C2740(void) {
     held = GetKeysHeld() & KEYS_MASK;
     keys = 0;
 
-    if (gUnkEu_0203C970 != 0) {
-        keys = gUnkEu_0203C97C;
-        gUnkEu_0203C970--;
+    if (gRandomPartnerDpadTimer != 0) {
+        keys = gRandomPartnerDpad;
+        gRandomPartnerDpadTimer--;
     } else {
-        gUnkEu_0203C970 = GetRandom() % 91 + 30;
+        gRandomPartnerDpadTimer = GetRandom() % 91 + 30;
 
         r = GetRandom();
         switch (r & 7) {
         case 0:
-            gUnkEu_0203C97C = 0x10;
+            gRandomPartnerDpad = 0x10;
             break;
         case 1:
-            gUnkEu_0203C97C = 0x20;
+            gRandomPartnerDpad = 0x20;
             break;
         case 2:
-            gUnkEu_0203C97C = 0x40;
+            gRandomPartnerDpad = 0x40;
             break;
         case 3:
-            gUnkEu_0203C97C = 0x80;
+            gRandomPartnerDpad = 0x80;
             break;
         case 4:
-            gUnkEu_0203C97C = 0x50;
+            gRandomPartnerDpad = 0x50;
             break;
         case 5:
-            gUnkEu_0203C97C = 0x90;
+            gRandomPartnerDpad = 0x90;
             break;
         case 6:
-            gUnkEu_0203C97C = 0x60;
+            gRandomPartnerDpad = 0x60;
             break;
         case 7:
-            gUnkEu_0203C97C = 0xA0;
+            gRandomPartnerDpad = 0xA0;
             break;
         }
     }
 
-    if (gUnkEu_0203C964 != 0) {
+    if (gRandomPartnerATimer != 0) {
         keys |= 1;
-        gUnkEu_0203C964--;
+        gRandomPartnerATimer--;
     } else {
-        gUnkEu_0203C964 = GetRandom() % 61 + 60;
+        gRandomPartnerATimer = GetRandom() % 61 + 60;
     }
 
     if ((u16)(GetRandom() % 30) == 0) {
@@ -1035,179 +1035,179 @@ s32 eu_080C2740(void) {
 }
 #endif
 
-void func_080C640C(CharaObjParam2* param) {
+void CharaObjInitDefeat2(CharaObjParam2* param) {
     s32 i;
 
     gCharaObj = EwramAlloc(sizeof(CharaObj));
-    gCharaObj->unk_0C = param->unk_00;
-    gCharaObj->unk_10 = param->unk_04;
-    gCharaObj->unk_24 = param->unk_08;
-    gCharaObj->unk_28 = param->unk_0C;
-    gCharaObj->x = param->unk_10;
-    gCharaObj->y = param->unk_14;
-    gCharaObj->z = param->unk_18;
-    gCharaObj->unk_3A = 0;
-    gCharaObj->unk_3C = -76;
-    gCharaObj->unk_40 = 0;
-    gCharaObj->unk_42 = 0;
-    gCharaObj->unk_44 = 0;
-    gCharaObj->unk_1048 = param->unk_1C;
-    gCharaObj->unk_2C = 0;
-    gCharaObj->unk_30 = 0;
-    gCharaObj->unk_34 = 0;
-    gCharaObj->unk_38 = 0;
-    gCharaObj->unk_104C = param->unk_20;
+    gCharaObj->tilesAddr = param->tilesAddr;
+    gCharaObj->tileCount = param->tileCount;
+    gCharaObj->paletteAddr = param->paletteAddr;
+    gCharaObj->paletteSize = param->paletteSize;
+    gCharaObj->x = param->x;
+    gCharaObj->y = param->y;
+    gCharaObj->z = param->z;
+    gCharaObj->fadeLevel = 0;
+    gCharaObj->bgFxVz = -76;
+    gCharaObj->fadeTick = 0;
+    gCharaObj->timer = 0;
+    gCharaObj->state = 0;
+    gCharaObj->callback = param->callback;
+    gCharaObj->tilesAddr4 = 0;
+    gCharaObj->tileCount4 = 0;
+    gCharaObj->paletteAddr2 = 0;
+    gCharaObj->paletteSize2 = 0;
+    gCharaObj->prizeObj = param->prizeObj;
 
     for (i = 0; i < 32; i++) {
-        gCharaObj->unk_1050[i] = 0;
+        gCharaObj->bankFadeEnabled[i] = 0;
     }
     TaskPoolInit(&gCharaTaskPool, 2);
 }
 
-u8 func_080C64A4(void) {
+u8 CharaObjUpdateDefeat2(void) {
     CharaPrizeArgs prize;
     MaskFadeArgs fade;
 
-    switch (gCharaObj->unk_44) {
+    switch (gCharaObj->state) {
     case 0:
-        if (!func_080128EC()) {
-            gCharaObj->unk_44++;
+        if (!BgFxIsActive()) {
+            gCharaObj->state++;
         }
         break;
     case 1:
-        if (++gCharaObj->unk_42 > 59) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 59) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 2:
-        CpuSet((void*)0x05000000, gCharaObj->unk_46, 0x200);
-        func_080149BC(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+        CpuSet((void*)0x05000000, gCharaObj->savedPalette, 0x200);
+        BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
-        gCharaObj->unk_44++;
+        gCharaObj->state++;
         break;
     case 3:
-        gCharaObj->unk_3A++;
-        FadePaletteToBlack(gCharaObj->unk_46, (u16*)0x05000000, 320, gCharaObj->unk_3A);
-        if (++gCharaObj->unk_42 > 9) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        gCharaObj->fadeLevel++;
+        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+        if (++gCharaObj->timer > 9) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 4:
-        gCharaObj->unk_3A = 0;
-        CpuSet((void*)0x05000000, gCharaObj->unk_846, 0x200);
-        gCharaObj->unk_44++;
+        gCharaObj->fadeLevel = 0;
+        CpuSet((void*)0x05000000, gCharaObj->fadedPalette, 0x200);
+        gCharaObj->state++;
         break;
     case 5:
-        if (++gCharaObj->unk_42 > 89) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 89) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 6:
-        if (gCharaObj->unk_40 > 1) {
-            gCharaObj->unk_40 = 0;
-            gCharaObj->unk_3A++;
+        if (gCharaObj->fadeTick > 1) {
+            gCharaObj->fadeTick = 0;
+            gCharaObj->fadeLevel++;
         }
-        gCharaObj->unk_40++;
-        if (gCharaObj->unk_28 != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->unk_24, (u16*)gCharaObj->unk_24, gCharaObj->unk_28, gCharaObj->unk_3A);
+        gCharaObj->fadeTick++;
+        if (gCharaObj->paletteSize != 0) {
+            FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
         }
-        if (gCharaObj->unk_42 == 20) {
+        if (gCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
-            fade.unk_00 = (u8*)gCharaObj->unk_0C;
-            fade.unk_04 = gCharaObj->unk_10;
-            fade.unk_06 = 1;
+            fade.tiles = (u8*)gCharaObj->tilesAddr;
+            fade.tileCount = gCharaObj->tileCount;
+            fade.stepDelay = 1;
             TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade);
         }
-        if (++gCharaObj->unk_42 > 39) {
-            gCharaObj->unk_42 = 0;
+        if (++gCharaObj->timer > 39) {
+            gCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
-            gCharaObj->unk_44++;
+            gCharaObj->state++;
         }
         break;
     case 7:
-        gCharaObj->unk_3A = 0;
-        gCharaObj->unk_40 = 0;
+        gCharaObj->fadeLevel = 0;
+        gCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
         FadeStartOut(2, 20);
         FadeLock();
-        gCharaObj->unk_44++;
+        gCharaObj->state++;
         break;
     case 8:
-        if (gCharaObj->unk_40 > 1) {
-            gCharaObj->unk_40 = 0;
-            gCharaObj->unk_3A++;
+        if (gCharaObj->fadeTick > 1) {
+            gCharaObj->fadeTick = 0;
+            gCharaObj->fadeLevel++;
         }
-        gCharaObj->unk_40++;
-        if (++gCharaObj->unk_42 > 37) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        gCharaObj->fadeTick++;
+        if (++gCharaObj->timer > 37) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 9:
-        if (++gCharaObj->unk_42 > 20) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 20) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 10:
-        gCharaObj->unk_40 = 0;
-        if (gCharaObj->unk_1048 != 0) {
-            gCharaObj->unk_1048();
+        gCharaObj->fadeTick = 0;
+        if (gCharaObj->callback != 0) {
+            gCharaObj->callback();
         }
-        gCharaObj->unk_44++;
+        gCharaObj->state++;
         break;
     case 11:
-        gCharaObj->unk_3A -= 2;
-        FadePaletteToWhite(gCharaObj->unk_846, (u16*)0x05000000, 1024, gCharaObj->unk_3A);
-        if (++gCharaObj->unk_42 > 8) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        gCharaObj->fadeLevel -= 2;
+        FadePaletteToWhite(gCharaObj->fadedPalette, (u16*)0x05000000, 1024, gCharaObj->fadeLevel);
+        if (++gCharaObj->timer > 8) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 12:
-        func_08014B30(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+        BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         prize.x = gCharaObj->x;
         prize.y = gCharaObj->y;
         prize.z = gCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        func_0801B918(gCharaObj->unk_104C);
-        gCharaObj->unk_44++;
+        DropBossPrizes(gCharaObj->prizeObj);
+        gCharaObj->state++;
         break;
     case 13:
-        BgFxAddPosition(76, 0, gCharaObj->unk_3C);
-        if (++gCharaObj->unk_42 > 79) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+        if (++gCharaObj->timer > 79) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 14:
-        gCharaObj->unk_3C = 0;
-        gCharaObj->unk_44++;
+        gCharaObj->bgFxVz = 0;
+        gCharaObj->state++;
         break;
     case 15:
-        BgFxAddPosition(0, 0, gCharaObj->unk_3C);
-        gCharaObj->unk_3C -= 25;
-        if (++gCharaObj->unk_42 > 39) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
+        gCharaObj->bgFxVz -= 25;
+        if (++gCharaObj->timer > 39) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 16:
         BgAnimStop();
-        gCharaObj->unk_3A = 11;
-        gCharaObj->unk_44++;
+        gCharaObj->fadeLevel = 11;
+        gCharaObj->state++;
         break;
     case 17:
-        gCharaObj->unk_3A--;
-        FadePaletteToBlack(gCharaObj->unk_46, (u16*)0x05000000, 320, gCharaObj->unk_3A);
-        if (++gCharaObj->unk_42 > 10) {
-            gCharaObj->unk_42 = 0;
+        gCharaObj->fadeLevel--;
+        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+        if (++gCharaObj->timer > 10) {
+            gCharaObj->timer = 0;
             CharaObjFree();
-            gCharaObj->unk_44++;
+            gCharaObj->state++;
         }
         break;
     default:
@@ -1223,58 +1223,58 @@ void CharaObjFree(void) {
     TaskPoolDestroy(&gCharaTaskPool);
 }
 
-void func_080C6894(CharaObjParam* param) {
+void CharaObjInitDefeat(CharaObjParam* param) {
     s32 i;
     u16 idx;
 
     gCharaObj = EwramAlloc(sizeof(CharaObj));
-    gCharaObj->unk_1090 = 0;
-    gCharaObj->unk_0C = param->unk_00;
-    gCharaObj->unk_10 = param->unk_04;
-    gCharaObj->unk_14 = param->unk_08;
-    gCharaObj->unk_18 = param->unk_0C;
-    gCharaObj->unk_1C = param->unk_10;
-    gCharaObj->unk_20 = param->unk_14;
-    gCharaObj->unk_24 = param->unk_18;
-    gCharaObj->unk_28 = param->unk_1C;
-    gCharaObj->unk_2C = param->unk_20;
-    gCharaObj->unk_30 = param->unk_24;
-    gCharaObj->unk_34 = param->unk_28;
-    gCharaObj->unk_38 = param->unk_2C;
-    gCharaObj->x = param->unk_30;
-    gCharaObj->y = param->unk_34;
-    gCharaObj->z = param->unk_38;
-    gCharaObj->unk_3A = 0;
-    gCharaObj->unk_3C = -76;
-    gCharaObj->unk_40 = 0;
-    gCharaObj->unk_42 = 0;
-    gCharaObj->unk_44 = 0;
-    gCharaObj->unk_1048 = param->unk_3C;
-    gCharaObj->unk_104C = param->unk_40;
-    gCharaObj->unk_1090 = param->unk_44;
+    gCharaObj->flags = 0;
+    gCharaObj->tilesAddr = param->tilesAddr;
+    gCharaObj->tileCount = param->tileCount;
+    gCharaObj->tilesAddr2 = param->tilesAddr2;
+    gCharaObj->tileCount2 = param->tileCount2;
+    gCharaObj->tilesAddr3 = param->tilesAddr3;
+    gCharaObj->tileCount3 = param->tileCount3;
+    gCharaObj->paletteAddr = param->paletteAddr;
+    gCharaObj->paletteSize = param->paletteSize;
+    gCharaObj->tilesAddr4 = param->tilesAddr4;
+    gCharaObj->tileCount4 = param->tileCount4;
+    gCharaObj->paletteAddr2 = param->paletteAddr2;
+    gCharaObj->paletteSize2 = param->paletteSize2;
+    gCharaObj->x = param->x;
+    gCharaObj->y = param->y;
+    gCharaObj->z = param->z;
+    gCharaObj->fadeLevel = 0;
+    gCharaObj->bgFxVz = -76;
+    gCharaObj->fadeTick = 0;
+    gCharaObj->timer = 0;
+    gCharaObj->state = 0;
+    gCharaObj->callback = param->callback;
+    gCharaObj->prizeObj = param->prizeObj;
+    gCharaObj->flags = param->flags;
 
     for (i = 0; i < 10; i++) {
-        gCharaObj->unk_1050[i] = 1;
+        gCharaObj->bankFadeEnabled[i] = 1;
     }
 
     for (i = 10; i < 32; i++) {
-        gCharaObj->unk_1050[i] = 0;
+        gCharaObj->bankFadeEnabled[i] = 0;
     }
-    idx = gCharaObj->unk_24 >> 5;
+    idx = gCharaObj->paletteAddr >> 5;
 
-    if (gCharaObj->unk_28 == 32) {
-        gCharaObj->unk_1050[(s16)idx] = 1;
+    if (gCharaObj->paletteSize == 32) {
+        gCharaObj->bankFadeEnabled[(s16)idx] = 1;
     }
     TaskPoolInit(&gCharaTaskPool, 4);
 }
 
-void func_080C6990(u16 a, u8 b) {
+void CharaObjSetBankFadeEnabled(u16 a, u8 b) {
     if (a <= 31) {
-        gCharaObj->unk_1050[a] = b;
+        gCharaObj->bankFadeEnabled[a] = b;
     }
 }
 
-u8 func_080C69B4(void) {
+u8 CharaObjUpdateDefeat(void) {
     s32 i;
     CharaPrizeArgs prize;
     MaskFadeArgs fade0;
@@ -1282,141 +1282,141 @@ u8 func_080C69B4(void) {
     MaskFadeArgs fade2;
     MaskFadeArgs fade3;
 
-    switch (gCharaObj->unk_44) {
+    switch (gCharaObj->state) {
     case 0:
-        if (!func_080128EC()) {
-            gCharaObj->unk_44++;
+        if (!BgFxIsActive()) {
+            gCharaObj->state++;
         }
         break;
     case 1:
-        if (++gCharaObj->unk_42 > 59) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 59) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 2:
-        func_080149BC(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+        BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
         for (i = 0; i < 32; i++) {
-            SetPaletteBankFadeEnabled(i, gCharaObj->unk_1050[i]);
+            SetPaletteBankFadeEnabled(i, gCharaObj->bankFadeEnabled[i]);
         }
-        gCharaObj->unk_44++;
+        gCharaObj->state++;
         break;
     case 3:
-        CpuSet((void*)0x05000000, gCharaObj->unk_46, 0x200);
-        gCharaObj->unk_44++;
+        CpuSet((void*)0x05000000, gCharaObj->savedPalette, 0x200);
+        gCharaObj->state++;
         break;
     case 4:
-        gCharaObj->unk_3A++;
-        FadeAllPalettesToBlack(gCharaObj->unk_46, gCharaObj->unk_3A);
-        if (++gCharaObj->unk_42 > 9) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        gCharaObj->fadeLevel++;
+        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        if (++gCharaObj->timer > 9) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 5:
-        gCharaObj->unk_3A = 0;
-        gCharaObj->unk_44++;
+        gCharaObj->fadeLevel = 0;
+        gCharaObj->state++;
         break;
     case 6:
-        if (++gCharaObj->unk_42 > 89) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 89) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 7:
-        if (gCharaObj->unk_40 > 1) {
-            gCharaObj->unk_40 = 0;
-            gCharaObj->unk_3A++;
+        if (gCharaObj->fadeTick > 1) {
+            gCharaObj->fadeTick = 0;
+            gCharaObj->fadeLevel++;
         }
-        gCharaObj->unk_40++;
-        if (gCharaObj->unk_42 == 20) {
+        gCharaObj->fadeTick++;
+        if (gCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
-            fade0.unk_00 = (u8*)gCharaObj->unk_0C;
-            fade0.unk_04 = gCharaObj->unk_10;
-            fade0.unk_06 = 1;
-            if (fade0.unk_04 != 0) {
+            fade0.tiles = (u8*)gCharaObj->tilesAddr;
+            fade0.tileCount = gCharaObj->tileCount;
+            fade0.stepDelay = 1;
+            if (fade0.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade0);
             }
-            fade1.unk_00 = (u8*)gCharaObj->unk_14;
-            fade1.unk_04 = gCharaObj->unk_18;
-            fade1.unk_06 = 1;
-            if (fade1.unk_04 != 0) {
+            fade1.tiles = (u8*)gCharaObj->tilesAddr2;
+            fade1.tileCount = gCharaObj->tileCount2;
+            fade1.stepDelay = 1;
+            if (fade1.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade1);
             }
-            fade2.unk_00 = (u8*)gCharaObj->unk_1C;
-            fade2.unk_04 = gCharaObj->unk_20;
-            fade2.unk_06 = 1;
-            if (fade2.unk_04 != 0) {
+            fade2.tiles = (u8*)gCharaObj->tilesAddr3;
+            fade2.tileCount = gCharaObj->tileCount3;
+            fade2.stepDelay = 1;
+            if (fade2.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade2);
             }
-            fade3.unk_00 = (u8*)gCharaObj->unk_2C;
-            fade3.unk_04 = gCharaObj->unk_30;
-            fade3.unk_06 = 1;
-            if (fade3.unk_04 != 0) {
+            fade3.tiles = (u8*)gCharaObj->tilesAddr4;
+            fade3.tileCount = gCharaObj->tileCount4;
+            fade3.stepDelay = 1;
+            if (fade3.tileCount != 0) {
                 TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade3);
             }
         }
-        if (gCharaObj->unk_28 != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->unk_24, (u16*)gCharaObj->unk_24, gCharaObj->unk_28, gCharaObj->unk_3A);
+        if (gCharaObj->paletteSize != 0) {
+            FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
         }
-        if (gCharaObj->unk_38 != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->unk_34, (u16*)gCharaObj->unk_34, gCharaObj->unk_38, gCharaObj->unk_3A);
+        if (gCharaObj->paletteSize2 != 0) {
+            FadePaletteToWhite((u16*)gCharaObj->paletteAddr2, (u16*)gCharaObj->paletteAddr2, gCharaObj->paletteSize2, gCharaObj->fadeLevel);
         }
-        if (++gCharaObj->unk_42 > 39) {
-            gCharaObj->unk_42 = 0;
+        if (++gCharaObj->timer > 39) {
+            gCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
-            gCharaObj->unk_44++;
+            gCharaObj->state++;
         }
         break;
     case 8:
-        gCharaObj->unk_3A = 0;
-        gCharaObj->unk_40 = 0;
+        gCharaObj->fadeLevel = 0;
+        gCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
         FadeStartOut(2, 20);
         FadeLock();
-        gCharaObj->unk_44++;
+        gCharaObj->state++;
         break;
     case 9:
-        if (gCharaObj->unk_40 > 1) {
-            gCharaObj->unk_40 = 0;
-            gCharaObj->unk_3A++;
+        if (gCharaObj->fadeTick > 1) {
+            gCharaObj->fadeTick = 0;
+            gCharaObj->fadeLevel++;
         }
-        gCharaObj->unk_40++;
-        if (++gCharaObj->unk_42 > 37) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        gCharaObj->fadeTick++;
+        if (++gCharaObj->timer > 37) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 10:
-        if (++gCharaObj->unk_42 > 20) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        if (++gCharaObj->timer > 20) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 11:
-        gCharaObj->unk_40 = 0;
-        if (gCharaObj->unk_1048 != 0) {
-            gCharaObj->unk_1048();
+        gCharaObj->fadeTick = 0;
+        if (gCharaObj->callback != 0) {
+            gCharaObj->callback();
         }
-        gCharaObj->unk_3A = 32;
-        gCharaObj->unk_44++;
+        gCharaObj->fadeLevel = 32;
+        gCharaObj->state++;
         break;
     case 12:
-        FadeAllPalettesToWhite(gCharaObj->unk_46, gCharaObj->unk_3A);
-        if ((gCharaObj->unk_3A -= 2) <= 0) {
-            gCharaObj->unk_3A = 0;
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        FadeAllPalettesToWhite(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        if ((gCharaObj->fadeLevel -= 2) <= 0) {
+            gCharaObj->fadeLevel = 0;
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 13:
-        FadeAllPalettesToBlack(gCharaObj->unk_46, gCharaObj->unk_3A);
-        if ((gCharaObj->unk_3A += 2) > 11) {
-            gCharaObj->unk_3A = 12;
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        if ((gCharaObj->fadeLevel += 2) > 11) {
+            gCharaObj->fadeLevel = 12;
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 14:
@@ -1424,49 +1424,49 @@ u8 func_080C69B4(void) {
         prize.y = gCharaObj->y;
         prize.z = gCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        func_0801B918(gCharaObj->unk_104C);
-        if ((gCharaObj->unk_1090 & 1) == 0) {
-            func_08014B30(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        DropBossPrizes(gCharaObj->prizeObj);
+        if ((gCharaObj->flags & 1) == 0) {
+            BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         } else {
-            gCharaObj->unk_3A = 12;
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44 = 19;
+            gCharaObj->fadeLevel = 12;
+            gCharaObj->timer = 0;
+            gCharaObj->state = 19;
         }
         break;
     case 15:
-        BgFxAddPosition(76, 0, gCharaObj->unk_3C);
-        if (++gCharaObj->unk_42 > 79) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+        if (++gCharaObj->timer > 79) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 16:
-        gCharaObj->unk_3C = 0;
-        gCharaObj->unk_44++;
+        gCharaObj->bgFxVz = 0;
+        gCharaObj->state++;
         break;
     case 17:
-        BgFxAddPosition(0, 0, gCharaObj->unk_3C);
-        gCharaObj->unk_3C -= 25;
-        if (++gCharaObj->unk_42 > 39) {
-            gCharaObj->unk_42 = 0;
-            gCharaObj->unk_44++;
+        BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
+        gCharaObj->bgFxVz -= 25;
+        if (++gCharaObj->timer > 39) {
+            gCharaObj->timer = 0;
+            gCharaObj->state++;
         }
         break;
     case 18:
         BgAnimStop();
-        gCharaObj->unk_3A = 12;
-        gCharaObj->unk_44++;
+        gCharaObj->fadeLevel = 12;
+        gCharaObj->state++;
         break;
     case 19:
-        gCharaObj->unk_3A--;
-        FadeAllPalettesToBlack(gCharaObj->unk_46, gCharaObj->unk_3A);
-        if (gCharaObj->unk_3A <= 0) {
-            gCharaObj->unk_3A = 0;
-            gCharaObj->unk_42 = 0;
+        gCharaObj->fadeLevel--;
+        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        if (gCharaObj->fadeLevel <= 0) {
+            gCharaObj->fadeLevel = 0;
+            gCharaObj->timer = 0;
             CharaObjFree();
-            gCharaObj->unk_44++;
+            gCharaObj->state++;
         }
         break;
     default:
@@ -1477,7 +1477,7 @@ u8 func_080C69B4(void) {
     return 1;
 }
 
-void func_080C6E7C(u8* src, u8* dst, u16 size, s16 count) {
+void RequestTileRowsCopy(u8* src, u8* dst, u16 size, s16 count) {
     s32 i;
     s32 n;
 
@@ -1488,7 +1488,7 @@ void func_080C6E7C(u8* src, u8* dst, u16 size, s16 count) {
     }
 }
 
-void func_080C6EB0(u8* src, u8* dst, u16 size, s16 count) {
+void RequestMapRowsCopy(u8* src, u8* dst, u16 size, s16 count) {
     s32 i;
     s32 n;
 

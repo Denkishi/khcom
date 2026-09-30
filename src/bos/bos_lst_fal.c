@@ -13,11 +13,11 @@ TaskDesc gTaskDescBosLstFal = {
     sizeof(LstFalWork),
 };
 
-s32 func_08111BF4(s32 x) {
+s32 BosLstFalSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08111BFC(s32 x) {
+s32 BosLstFalSquare2(s32 x) {
     return x * x;
 }
 
@@ -25,20 +25,20 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
     u16 anim;
 
     anim = gBosLstFalAnims[GetRandom() & 7].anim;
-    work->unk_000 = arg->unk_00;
+    work->kind = arg->kind;
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
-    work->vx = (GetRandom() % 0x181 + 0x80) * arg->unk_12;
+    work->vx = (GetRandom() % 0x181 + 0x80) * arg->facing;
     work->vz = GetRandom() % 0xC1 + 0x40;
-    work->unk_018 = GetRandom() % 0x81 + 0x80;
+    work->lift = GetRandom() % 0x81 + 0x80;
 
-    switch (arg->unk_00) {
+    switch (arg->kind) {
     case 1:
         if ((GetRandom() & 1) != 0) {
             work->vx = work->vx * 512 >> 8;
             work->vz = work->vz * 384 >> 8;
-            work->unk_018 = GetRandom() % 0x81 + 0x380;
+            work->lift = GetRandom() % 0x81 + 0x380;
         }
         break;
     case 2:
@@ -54,7 +54,7 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
     case 5:
         work->vx = GetRandom() % 0x201 - 0x100;
         work->vz = GetRandom() % 0xC1 + 0xC0;
-        work->unk_018 = GetRandom() % 0x381 + 0x80;
+        work->lift = GetRandom() % 0x381 + 0x80;
         break;
     }
 
@@ -66,8 +66,8 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
         break;
     }
 
-    work->unk_01C = arg->unk_14;
-    (*work->unk_01C)++;
+    work->falCount = arg->falCount;
+    (*work->falCount)++;
     work->tiles = LoadObjTiles(gUnk_09CD1074, 0x700);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBFC4, gUnk_09EFBF64);
@@ -84,16 +84,16 @@ u8 task_bos_lst_fal_1(LstFalWork* work) {
     work->x += work->vx;
     work->z += work->vz;
 
-    if (work->unk_000 != 4) {
-        if (work->unk_018 > 0) {
+    if (work->kind != 4) {
+        if (work->lift > 0) {
             d = 512;
-            if (work->unk_018 <= 512) {
-                d = work->unk_018;
+            if (work->lift <= 512) {
+                d = work->lift;
             }
             work->z -= d;
-            work->unk_018 = work->unk_018 - 25;
+            work->lift = work->lift - 25;
         } else {
-            work->unk_018 = GetRandom() % 0x41 + 0x40;
+            work->lift = GetRandom() % 0x41 + 0x40;
         }
     }
 
@@ -128,5 +128,5 @@ void task_bos_lst_fal_3(LstFalWork* work) {
     if (work->palette != 0) {
         ReleaseObjPalette(work->palette);
     }
-    (*work->unk_01C)--;
+    (*work->falCount)--;
 }

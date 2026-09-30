@@ -16,12 +16,12 @@
 
 typedef struct ChkEffWork {
     TaskPool pool;
-    s16 unk_14;
+    s16 effectIndex;
     u8 paused;
     u8 unk_17;
     u16 scrollX;
     u16 scrollY;
-    u8 unk_1C;
+    u8 rotation;
     u8 unk_1D[0x03];
     s32 scale;
     u16 alphaA;
@@ -31,14 +31,14 @@ typedef struct ChkEffWork {
 void mode_chkeff_0(void);
 void mode_chkeff_1(void);
 void mode_chkeff_2(void);
-extern const char gUnk_081309E0[];
-extern const char gUnk_081309E8[];
-extern const char gUnk_081309F0[];
-extern const char gUnk_08130A18[];
-extern const char gUnk_08130A20[];
-extern const char gUnk_08130A28[];
-extern const char gUnk_08130A30[];
-extern const char gUnk_08130A34[];
-extern const char gUnk_08130A38[];
+extern const char gChkEffPauseText[];
+extern const char gChkEffPauseBlankText[];
+extern const char gChkEffBlankLineText[];
+extern const char gChkEffAlphaALabel[];
+extern const char gChkEffAlphaBLabel[];
+extern const char gChkEffScaleLabel[];
+extern const char gChkEffNumLabel[];
+extern const char gChkEffPicLabel[];
+extern const char gChkEffFrameLabel[];
 
 #endif /* GUARD_MODE_CHKEFF_H */

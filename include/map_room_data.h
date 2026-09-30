@@ -3,6 +3,6 @@
 
 #include "map_rooms.h"
 
-extern UnkStruct_09EF70D0* gUnk_09EF70D0[14];
+extern MapRoomDef* gMapRoomDefs[14];
 
 #endif

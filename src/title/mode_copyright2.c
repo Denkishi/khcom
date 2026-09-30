@@ -2,7 +2,7 @@
 #include "mode_copyright2.h"
 #include "copyright_screens.h"
 
-u16 gUnk_02034EDC __attribute__((aligned(4)));
+u16 gCopyright2Timer __attribute__((aligned(4)));
 
 void mode_copyright2_0(s32 arg) {
     SetBgMode0();
@@ -18,13 +18,13 @@ void mode_copyright2_0(s32 arg) {
         FadeStartIn(1, 0x43);
     }
 
-    gUnk_02034EDC = 60;
+    gCopyright2Timer = 60;
 }
 
 void mode_copyright2_1(void) {
     if (!FadeIsActive()) {
-        if (gUnk_02034EDC != 0) {
-            if (--gUnk_02034EDC == 0) {
+        if (gCopyright2Timer != 0) {
+            if (--gCopyright2Timer == 0) {
                 FadeStartOut(0, 0x43);
             }
         } else {
@@ -36,7 +36,7 @@ void mode_copyright2_1(void) {
 void mode_copyright2_2(void) {
 }
 
-u8* func_080D728C(u8* dst, s32 value, u16 digits) {
+u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
     u16 buf[6];
     s32 scale;
     s32 i;
@@ -70,30 +70,30 @@ u8* func_080D728C(u8* dst, s32 value, u16 digits) {
     return dst;
 }
 
-void func_080D733C(void) {
+void LoadStatusNumberTiles(void) {
     u8* p;
 
     p = GetBgCharBase(2) + 0x40;
-    p = func_080D728C(p, gGameState.progression.level, 2);
-    p = func_080D728C(p, gGameState.hp, 3);
-    p = func_080D728C(p, gGameState.progression.maxHp, 3);
+    p = CopyNumberTiles(p, gGameState.progression.level, 2);
+    p = CopyNumberTiles(p, gGameState.hp, 3);
+    p = CopyNumberTiles(p, gGameState.progression.maxHp, 3);
 
     if (gGameState.flags & 8) {
         p += 0x80;
     } else {
-        p = func_080D728C(p, gGameState.progression.cp, 4);
+        p = CopyNumberTiles(p, gGameState.progression.cp, 4);
     }
 
-    p = func_080D728C(p, gGameState.progression.exp, 6);
-    p = func_080D728C(p, gGameState.progression.nextExp, 6);
+    p = CopyNumberTiles(p, gGameState.progression.exp, 6);
+    p = CopyNumberTiles(p, gGameState.progression.nextExp, 6);
 
     if (gGameState.flags & 8) {
         p += 0xC0;
-        p = func_080D728C(p, gGameState.progression.ap, 2);
-        func_080D728C(p, gGameState.progression.dp, 3);
+        p = CopyNumberTiles(p, gGameState.progression.ap, 2);
+        CopyNumberTiles(p, gGameState.progression.dp, 3);
     } else {
         p += 0x20;
-        func_080D728C(p, gGameState.progression.mooglePoints, 5);
+        CopyNumberTiles(p, gGameState.progression.mooglePoints, 5);
     }
 }
 

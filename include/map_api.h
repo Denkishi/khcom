@@ -5,40 +5,40 @@
 #include "map_types.h"
 
 struct EventKey;
-struct UnkStruct_080E8D64;
+struct MapCardAttributes;
 struct UnkStruct_080E8E24;
 struct MapCell;
-struct UnkStruct_080E92B8;
+struct MapProgress;
 
-s32 func_080DFF1C(FldPos* p);
-void func_080DFF4C(FldPos* p);
-s32 func_080DFF94(s32 x, s32 y, s32 z);
-void func_080E0298(s32 x, s32 y);
-void func_080E02A8(s32 dx, s32 dy);
-void func_080E02C0(s32 x, s32 y, s32 z);
-void func_080E0418(void);
-FldObj* func_080E04E0(void);
-void func_080E04EC(void);
-void func_080E052C(u8 a);
+s32 GetFldPosGround(FldPos* p);
+void FldPosInitGround(FldPos* p);
+s32 GetLedgeAngleAt(s32 x, s32 y, s32 z);
+void MapSetCameraTarget(s32 x, s32 y);
+void MapMoveCameraTarget(s32 dx, s32 dy);
+void SetMapAttackBox(s32 x, s32 y, s32 z);
+void MapFreezeBg1(void);
+FldObj* GetMapRoomDoor(void);
+void RequestMapMode(void);
+void ReturnToMap(u8 a);
 struct MapCell* MapCellAt(s16 x, s16 y);
-u8* func_080E54B8(u8 a);
-void func_080E5510(u8 a);
-UnkStruct_080DFB7C* func_080E5590(u8 a);
-struct MapCell* func_080E58F8(s16 a, s16 b);
-u8 func_080E86C8(struct MapCell* p, s32 x, s32 y);
+u8* GetMapRoomEvent(u8 a);
+void LoadMapForm(u8 a);
+MapDoor* MapGetDoor(u8 a);
+struct MapCell* MapFixCellAt(s16 a, s16 b);
+u8 MapCellMaskBitAt(struct MapCell* p, s32 x, s32 y);
 u8 SelectEventDoor(u8 a, u8 b);
 u8 CountRemainingEventKeys(void);
 struct EventKey* GetEventKey(u8 a);
-u8 DoorAcceptsMapCard(struct UnkStruct_080E8D64* p);
+u8 DoorAcceptsMapCard(struct MapCardAttributes* p);
 s32 PayEventKey(struct UnkStruct_080E8E24* p);
-u8 func_080E924C(void);
-void func_080E92B8(struct UnkStruct_080E92B8* p);
-void func_080E92F8(struct UnkStruct_080E92B8* p);
+u8 AreWorldPrizesCollected(void);
+void CopyMapProgress(struct MapProgress* p);
+void RestoreMapProgress(struct MapProgress* p);
 
-struct UnkStruct_0203C7B8;
+struct MapGmkPlacement;
 
-extern UnkStruct_0203C7AC* gUnk_0203C7AC;
-extern UnkStruct_0203C7B0 gUnk_0203C7B0;
-extern struct UnkStruct_0203C7B8* gUnk_0203C7B8;
+extern MapRoomState* gMapRoomState;
+extern MapFormDef gMapForm;
+extern struct MapGmkPlacement* gMapGmkPlacements;
 
 #endif

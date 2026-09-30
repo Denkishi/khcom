@@ -19,32 +19,32 @@
 #include "m4a.h"
 
 typedef struct MovieSub {
-    s16 unk_00;
-    s16 unk_02;
-    u16* unk_04;
-    u8 unk_08;
+    s16 frame;
+    s16 x;
+    u16* text;
+    u8 line;
     u8 unk_09;
-    u16 unk_0A;
-    u16 unk_0C;
+    u16 duration;
+    u16 palette;
     u16 unk_0E;
 } MovieSub;
 
-extern vu16 gUnk_02034938;
-extern s32 gUnk_0203493C;
+extern vu16 gMovieModeState;
+extern s32 gMovieId;
 extern u16 gUnk_02034940;
-extern volatile s16 gUnk_02034942;
-extern volatile s16 gUnk_02034944;
-extern volatile u16 gUnk_02034946;
-extern MovieSub* volatile gUnk_02034948;
-extern MovieSub* volatile gUnk_0203494C;
-extern void* gUnk_02034950;
-extern volatile s16 gUnk_02034954;
-extern volatile u16 gUnk_02034956;
-extern volatile u16 gUnk_02034958;
-extern volatile u16 gUnk_0203495A;
-extern volatile s16 gUnk_0203495C;
-extern volatile u16 gUnk_0203495E;
-extern volatile u16 gUnk_02034960;
+extern volatile s16 gMovieFrame;
+extern volatile s16 gMovieSubIndex;
+extern volatile u16 gMovieSubCount;
+extern MovieSub* volatile gMovieSubUpper;
+extern MovieSub* volatile gMovieSubLower;
+extern void* gMovieSubs;
+extern volatile s16 gMovieSubUpperTimer;
+extern volatile u16 gMovieSubUpperLength;
+extern volatile u16 gMovieFlags;
+extern volatile u16 gMovieSubUpperAlpha;
+extern volatile s16 gMovieSubLowerTimer;
+extern volatile u16 gMovieSubLowerLength;
+extern volatile u16 gMovieSubLowerAlpha;
 extern void* gVBlankHandlerOverride;
 extern u8 gUnk_0815C3EC[];
 extern u8 gUnk_084E0F34[];
@@ -59,14 +59,14 @@ extern u8 gUnk_09614718[];
 
 void* GetIwramHeapStart(void);
 u32 GetIwramHeapSize(void);
-void func_0805EA90(void);
-s32 func_0805E93C(s32 arg);
+void MovieVBlankIntr(void);
+s32 HandleMovieFrame(s32 arg);
 
-s32 func_0806C490(void* str);
-s32 func_0806C81C(void* str, u16 tile);
-u8 func_0806CBAC(void* str, u16* widths, u16 tile);
+s32 CopySjisGlyphsToVram(void* str);
+s32 CopySjisGlyphsToVramAt(void* str, u16 tile);
+u8 CopyLatinGlyphsToVram(void* str, u16* widths, u16 tile);
 #ifndef VERSION_JP
-extern u16 gUnk_02034968[];
-extern u16 gUnk_020349B8[];
+extern u16 gMovieSubUpperWidths[];
+extern u16 gMovieSubLowerWidths[];
 #endif
 #endif

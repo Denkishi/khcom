@@ -39,7 +39,7 @@
 #include "poo_api.h"
 #include "btl_api.h"
 
-typedef struct GaEntryDesc {
+typedef struct MdFrameSprite {
     u16 x;
     u16 y;
     u16 z;
@@ -47,25 +47,25 @@ typedef struct GaEntryDesc {
     void* src;
     u32 unk_0C;
     void* sprite;
-} GaEntryDesc;
+} MdFrameSprite;
 
-typedef struct GaEntryPos {
+typedef struct MdFramePos {
     s16 x;
     s16 y;
     s16 z;
     u16 unk_06;
-} GaEntryPos;
+} MdFramePos;
 
-typedef struct GaEntry {
-    u16 unk_00;
-    u16 unk_02;
+typedef struct MdFrameDef {
+    u16 bgOffsetX;
+    u16 bgOffsetY;
     void* tiles;
     u16 tilesSize;
     u16 unk_0A;
     const void* blocks[4];
-    GaEntryDesc desc[2];
-    GaEntryPos pos[1];
-} GaEntry;
+    MdFrameSprite desc[2];
+    MdFramePos pos[1];
+} MdFrameDef;
 
 typedef struct MdAnimFrame {
     u16 gfxIndex;
@@ -119,30 +119,30 @@ typedef struct MdDaiWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_00C;
-    s16 unk_010;
+    s32 dropZ;
+    s16 dropSteps;
     u8 unk_012[0x2];
     ObjPalette* palette;
     ObjTiles* tiles;
     Collider collider;
     u16* flags;
-    s16 unk_07C;
+    s16 level;
     u16 state;
     TaskPool* pool;
 } MdDaiWork;
 
 typedef struct MdFireWork {
-    u32 unk_000;
-    s16 unk_004;
-    s16 unk_006;
-    s16 unk_008;
+    u32 state;
+    s16 timer;
+    s16 flashTimer;
+    s16 contactCooldown;
     u8 unk_00A[0x2];
     ObjPalette* palette;
     ObjPalette* palette2;
     ObjTiles* tiles;
     AnimState anim;
     u32 scale;
-    s16 unk_034;
+    s16 scaleSteps;
     u8 unk_036[0x2];
     BtlObj sub;
     s32 x;
@@ -150,69 +150,69 @@ typedef struct MdFireWork {
     s32 z;
     s32 vx;
     s32 vy;
-    s16 unk_15C;
-    s16 unk_15E;
-    s16 unk_160;
+    s16 motion;
+    s16 pattern;
+    s16 index;
     u8 angle;
     u8 unk_163;
-    u32 unk_164;
-    u32 unk_168;
+    u32 centerX;
+    u32 centerY;
     u16* flags;
 } MdFireWork;
 
 typedef struct MdFireArg {
     TaskPool* pool;
-    s16 unk_04;
-    u16 unk_06;
+    s16 pattern;
+    u16 index;
     u16* flags;
 } MdFireArg;
 
 typedef struct MdFirePoint {
     s16 x;
     s16 y;
-    u16 unk_04;
+    u16 delay;
     u16 unk_06;
 } MdFirePoint;
 
 typedef struct MdFireDef {
     const MdFirePoint* points;
-    s16 unk_04;
+    s16 count;
     u16 unk_06;
 } MdFireDef;
 
-typedef struct MdModel {
-    u16 unk_00;
-    s16 unk_02;
-    s16 unk_04;
-    s16 unk_06;
-    void* unk_08;
-    void* unk_0C;
-    void* unk_10;
-    void* unk_14;
+typedef struct WorldselectWorldDef {
+    u16 worldBit;
+    s16 world;
+    s16 eventId;
+    s16 rikuEventId;
+    void* palette;
+    void* tiles;
+    void* gfx;
+    void* nameTiles;
 #ifdef VERSION_EU
-    u16 unkEu_18;
+    u16 nameTilesOffset;
     u16 unkEu_1A;
 #endif
-} MdModel;
+} WorldselectWorldDef;
 
-typedef struct MdSlot {
-    s16 unk_00;
+typedef struct WorldselectSlot {
+    s16 listIndex;
     u8 unk_02[0x6];
-    u8 unk_08;
+    u8 angle;
     u8 unk_09[0x3];
     void* palette;
     void* tiles;
     void* gfx;
-} MdSlot;
+} WorldselectSlot;
 
 typedef struct WorldselectTileSizes {
     u16 sizes[5];
 } WorldselectTileSizes;
 
 #ifdef VERSION_EU
-extern const WorldselectTileSizes gUnkEu_099991E0;
+extern const WorldselectTileSizes gWorldselectTitleTileSizes;
 #endif
-extern const MdModel gMdModels[13];
+extern const WorldselectWorldDef gWorldselectWorldDefs[13];
 
 typedef struct MdGfx {
     void* tiles;
@@ -225,39 +225,39 @@ typedef struct MdGfx {
 } MdGfx;
 
 typedef struct MdWork {
-    u32 unk_000;
-    u32 unk_004;
-    u32 unk_008;
-    u16 unk_00C;
+    u32 state;
+    u32 nextState;
+    u32 statePhase;
+    u16 step;
     u16 unk_00E;
-    u32 unk_010[1];
-    u16 unk_014;
-    s16 unk_016;
+    u32 hurtState[1];
+    u16 flags;
+    s16 timer;
     u16 unk_018;
-    s16 unk_01A;
-    u8 unk_01C;
+    s16 hurtTimer;
+    u8 bgVisible;
     u8 unk_01D[0x3];
     ObjPalette* palette;
     ObjPalette* palette2;
-    void* unk_028;
+    void* bgPalette;
     TaskPool tasks;
     TaskPool tasks2;
     TaskPool tasks3;
     BtlObj sub[1];
-    u16 unk_178;
-    u16 unk_17A;
+    u16 bgOffsetX;
+    u16 bgOffsetY;
     MdGfx gfx[2];
     MdAnim anim;
-    u16 unk_1B4;
+    u16 signals;
     u8 unk_1B6[0x2];
 } MdWork;
 
 extern u8 gUnk_09A3C9BC[];
 
-void func_080FCC14(MdFireWork* work);
-u8 func_080FCCB4(MdFireWork* work);
+void BosMdFireHandleReaction(MdFireWork* work);
+u8 BosMdFireUpdateMotion(MdFireWork* work);
 
-extern const GaEntry gGaEntries[41];
+extern const MdFrameDef gMdFrameDefs[41];
 
 s32 task_bos_md_hahen_1(MdHahenWork* work);
 void task_bos_md_hahen_2(MdHahenWork* work);
@@ -266,9 +266,9 @@ void task_bos_md_hahen_0(MdHahenWork* work, s32* src);
 u8 task_bos_md_fire_1(MdFireWork* work);
 void task_bos_md_fire_2(MdFireWork* work);
 void task_bos_md_3(MdWork* work);
-void func_080FD9B8(s16 model, s16 slot);
-void func_080FDA28(s16 model, s16 slot);
-s16 func_080FDA98(s16 model, s16 slot);
+void WorldselectLoadSlotPalette(s16 model, s16 slot);
+void WorldselectLoadSlotTiles(s16 model, s16 slot);
+s16 WorldselectSetSlotGfx(s16 model, s16 slot);
 
 extern GaWork* gGaWork;
 
@@ -277,8 +277,8 @@ void task_bos_ga_3(GaWork* work);
 void task_bos_md_hahen_3(MdHahenWork* work);
 void task_bos_md_fire_3(MdFireWork* work);
 void task_bos_md_dai_3(MdDaiWork* work);
-void func_080FB8E8(MdWork* work, u16 index);
-void func_080FB908(MdWork* work, u16 index);
+void BosMdSetBgMap(MdWork* work, u16 index);
+void BosMdLoadBgTiles(MdWork* work, u16 index);
 
 typedef struct MdMapData {
     void* tiles;
@@ -297,7 +297,7 @@ typedef struct MdMapWork {
 void task_bos_ga_0(GaWork* work, s32 arg);
 s32 task_bos_md_dai_1(MdDaiWork* work);
 void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg);
-void func_080FCF78(MdFireWork* work);
+void BosMdFirePlace(MdFireWork* work);
 extern const MdFirePoint gUnk_09992E98[4];
 extern const MdFirePoint gUnk_09992EB8[4];
 extern const MdFirePoint gUnk_09992ED8[4];
@@ -306,59 +306,59 @@ extern const EmyKind gBosMdFireEmyKind;
 extern u8 gUnk_09A3C99C[];
 void task_bos_md_dai_2(MdDaiWork* work);
 u8 task_bos_ga_1(GaWork* work);
-u16 func_080F7DD8(s32 a);
-s32 func_080F7E0C(s32 x0, s32 y0, s32 x1, s32 y1);
-void func_080F7E84(GaEntryWork* e);
-void func_080F7F54(GaWork* work, s32 state);
-s32 func_080F7F70(GaWork* work, s16 i);
-s32 func_080F7F94(GaWork* work, s16 i);
-s32 func_080F7FAC(GaWork* work, s16 i);
-s32 func_080F7FC8(GaWork* work, s16 i);
-s32 func_080F7FE4(GaWork* work, s16 i);
-void func_080F800C(GaWork* work, s32 i);
-void func_080F80C0(GaWork* work);
-void func_080F80FC(GaWork* work, u32 i, s32 c);
-void func_080F8374(GaEntryWork* e);
-void func_080F83BC(void);
-void func_080F83E0(GaWork* work, GaEntryWork* e);
-u8 func_080F854C(GaWork* work);
-u8 func_080F8958(GaWork* work);
-u8 func_080F8AC8(GaWork* work);
-u8 func_080F8F9C(GaWork* work);
-u8 func_080F9744(GaWork* work);
-u8 func_080F99C0(GaWork* work);
-u8 func_080F9C2C(GaWork* work);
-u8 func_080F9EDC(GaWork* work);
-u8 func_080FA2B4(GaWork* work);
-u8 func_080FA644(GaWork* work);
-u8 func_080FAA18(GaWork* work);
-u8 func_080FABE4(GaWork* work);
-void func_080FB000(GaWork* work, GaEntryWork* p);
+u16 Bos5Atan(s32 a);
+s32 Bos5GetAngle(s32 x0, s32 y0, s32 x1, s32 y1);
+void BosGaEntryUpdateFall(GaEntryWork* e);
+void BosGaRequestState(GaWork* work, s32 state);
+s32 BosGaEntryOffsetX(GaWork* work, s16 i);
+s32 BosGaEntryOffsetY(GaWork* work, s16 i);
+s32 BosGaEntryHomeX(GaWork* work, s16 i);
+s32 BosGaEntryHomeY(GaWork* work, s16 i);
+s32 BosGaEntryHomeZ(GaWork* work, s16 i);
+void BosGaEntryResetHome(GaWork* work, s32 i);
+void BosGaUpdateFacing(GaWork* work);
+void BosGaEntryInit(GaWork* work, u32 i, s32 c);
+void BosGaEntryRelease(GaEntryWork* e);
+void BosGaReleaseBody(void);
+void BosGaEntryDraw(GaWork* work, GaEntryWork* e);
+u8 BosGaUpdateAssemble(GaWork* work);
+u8 BosGaUpdateIdle(GaWork* work);
+u8 BosGaUpdateWalk(GaWork* work);
+u8 BosGaUpdateStomp(GaWork* work);
+u8 BosGaUpdateThrust(GaWork* work);
+u8 BosGaUpdateOrbit(GaWork* work);
+u8 BosGaUpdateJump(GaWork* work);
+u8 BosGaUpdateBodyChase(GaWork* work);
+u8 BosGaUpdateBodyDash(GaWork* work);
+u8 BosGaUpdateBodyJump(GaWork* work);
+u8 BosGaUpdateGimmick(GaWork* work);
+u8 BosGaUpdateDefeat(GaWork* work);
+void BosGaEntryUpdate(GaWork* work, GaEntryWork* p);
 extern u8 gBoss01objPalette[];
-void func_080FB930(MdWork* work, u16 id);
-void func_080FB8DC(MdWork* work, s32 state);
+void BosMdSetFrame(MdWork* work, u16 id);
+void BosMdRequestState(MdWork* work, s32 state);
 void MdAnimStart(MdWork* work, s16 id);
-u8 func_080FBA9C(MdWork* work);
-u8 func_080FBAB8(MdWork* work);
-u8 func_080FBC4C(MdWork* work);
-u8 func_080FBDD4(MdWork* work);
-u8 func_080FBFA8(MdWork* work);
+u8 BosMdAnimIsLastFrame(MdWork* work);
+u8 BosMdUpdateIdle(MdWork* work);
+u8 BosMdUpdateBite(MdWork* work);
+u8 BosMdUpdateQuake(MdWork* work);
+u8 BosMdUpdateFireBreath(MdWork* work);
 s32 task_bos_md_1(MdWork* work);
 void task_bos_md_0(MdWork* work, void* arg);
-void func_080FE854(void);
+void WorldselectSetBgMode0(void);
 void mode_worldselect_1(void);
-void func_080FDC04(void);
-void func_080FE47C(void);
+void WorldselectHandleInput(void);
+void WorldselectDraw(void);
 void mode_worldselect_0(void);
 extern u8 gUnk_09A3C9DC[];
 extern u8 gUnk_09A3CC5C[];
 extern u8 gUnk_09A3CC7C[];
 
-void func_080FDB1C(s16 model, s16 n);
+void WorldselectDrawName(s16 model, s16 n);
 void mode_worldselect_2(void);
-void func_080FE89C(void);
+void WorldselectSetBgMode1(void);
 
-void func_080FE900(void);
+void WorldselectCyclePalette(void);
 extern const MdMapData gMdMapData;
 extern u8 gUnk_09A3C8BC[];
 extern const EmyKind gBosMdEmyKind;
@@ -366,11 +366,11 @@ void MdAnimUpdate(MdWork* work);
 extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_09A3C97C[];
 void task_bos_md_2(MdWork* work);
-void func_080FC3FC(MdWork* work);
-void func_080FC360(MdWork* work);
+void BosMdEndHurt(MdWork* work);
+void BosMdHandleReaction(MdWork* work);
 
-u8 func_080FC17C(MdWork* work);
-void func_080FC29C(MdWork* work);
+u8 BosMdUpdateDefeat(MdWork* work);
+void BosMdChooseAttack(MdWork* work);
 void task_bos_md_map_0(MdMapWork* work, MdMapData* p);
 s32 task_bos_md_map_1(MdMapWork* work);
 

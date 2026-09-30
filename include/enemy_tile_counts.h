@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-extern u16 gUnk_09EDA4EC[54];
+extern u16 gEnemyTileCounts[54];
 
 #endif

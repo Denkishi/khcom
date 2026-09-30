@@ -3,9 +3,9 @@
 
 #include "types.h"
 
-void func_081025AC(void);
-void func_081025D4(void* a);
-void func_08102610(void* a);
-void func_08102F30(void);
+void MoogleShopClearFlags(void);
+void MoogleShopSaveFlags(void* a);
+void MoogleShopLoadFlags(void* a);
+void DrawMooglePackOpening(void);
 
 #endif

@@ -40,35 +40,35 @@
 #include "bos4_api.h"
 #include "sprites_card_pictures.h"
 
-s16 gUnk_02034AB4;
+s16 gBossCardValue;
 
 u8 gUnk_02034AB6[2];
 #ifdef VERSION_EU
 u8 gUnkEu_02034AD4[4];
 #endif
 
-u8 func_0807CE68(CardDisplayWork* p);
-void func_0807C39C(CardDisplayWork* p);
-void func_0807C33C(CardDisplayWork* p);
-void func_0807CD48(CardDisplayWork* p);
+u8 IsCardDisplayOffScreen(CardDisplayWork* p);
+void ReleaseCardDisplayGfx(CardDisplayWork* p);
+void LoadCardDisplayGfx(CardDisplayWork* p);
+void UpdateCardDisplayFlip(CardDisplayWork* p);
 u8 func_0807CF4C(CardDisplayWork* p, void* a);
 u8 func_0809075C(CardDisplayWork* p, void* a);
 u8 func_08090808(CardDisplayWork* p, void* a);
 u8 func_08090940(CardDisplayWork* p);
 u8 EnemyUsecard_1(CardDisplayWork* p, void* a);
-u8 func_0807BA54(void);
-void func_0807C33C(CardDisplayWork* p);
-void func_0807C39C(CardDisplayWork* p);
-void func_0807CD48(CardDisplayWork* p);
-u8 func_0807CE68(CardDisplayWork* p);
+u8 AddBreakDarkPoints(void);
+void LoadCardDisplayGfx(CardDisplayWork* p);
+void ReleaseCardDisplayGfx(CardDisplayWork* p);
+void UpdateCardDisplayFlip(CardDisplayWork* p);
+u8 IsCardDisplayOffScreen(CardDisplayWork* p);
 u8 func_0807CF4C(CardDisplayWork* p, void* a);
 u8 func_0807CFA8(CardDisplayWork* p, void* a);
 
-const s32 gUnk_09035978[10] = {
+const s32 gEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,
 };
 
-void func_080901E0(CardDisplayArgs* a, CardDef** b, u8 c) {
+void LookupEnemyCardDef(CardDisplayArgs* a, CardDef** b, u8 c) {
     CardSlot* t;
     s32 v;
     s32 id;
@@ -77,7 +77,7 @@ void func_080901E0(CardDisplayArgs* a, CardDef** b, u8 c) {
     v = a->unk_08;
 
     if (v != -1) {
-        ((CardDisplayWork*)((u8*)b - offsetof(CardDisplayWork, cardDef)))->unk_5C = v;
+        ((CardDisplayWork*)((u8*)b - offsetof(CardDisplayWork, cardDef)))->enemyKind = v;
     }
 
     if (t != 0) {
@@ -88,7 +88,7 @@ void func_080901E0(CardDisplayArgs* a, CardDef** b, u8 c) {
         }
     }
 }
-void func_08090224(CardDisplayWork* p) {
+void LinkEnemyCardDisplay(CardDisplayWork* p) {
     ListNodeInit(&p->node, p->args.pool, p);
     ListPoolAppend(&p->node, p->args.pool);
 }
@@ -98,47 +98,47 @@ void card_enemy_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->tiles2 = 0;
     p->tiles3 = 0;
     p->palette = 0;
-    p->unk_A1 = 0;
+    p->command = 0;
     p->args = *a;
-    p->unk_78 = 0;
-    p->unk_A0 = 0x50;
-    p->unk_9C = 0;
-    func_080901E0(&p->args, &p->cardDef, p->args.index);
-    p->unk_54 = 0x100;
-    p->unk_58 = 0x100;
-    p->unk_5F = GetRandom();
-    p->unk_5E = 0;
+    p->flags = 0;
+    p->priority = 0x50;
+    p->timer = 0;
+    LookupEnemyCardDef(&p->args, &p->cardDef, p->args.index);
+    p->scaleX = 0x100;
+    p->scaleY = 0x100;
+    p->bobAngle = GetRandom();
+    p->angle = 0;
     p->unk_84 = 0;
     p->unk_88 = 0x2400;
-    p->unk_8C = gUnk_09035978[0];
-    p->unk_90 = gUnk_09035978[1];
+    p->unk_8C = gEnemyCardLayout[0];
+    p->unk_90 = gEnemyCardLayout[1];
     p->x = 0xDC00;
     p->y = 0x8400;
-    p->unk_A5 = p->cardDef->unk_20;
-    func_08090224(p);
+    p->value = p->cardDef->value;
+    LinkEnemyCardDisplay(p);
 }
 
 u8 card_enemy_1(CardDisplayWork* p, void* a) {
-    if (!(p->unk_78 & 0x800)) {
-        if (p->unk_78 & 0x80) {
-            func_0807C39C(p);
-            p->unk_78 &= ~0x80;
-            p->unk_78 |= 1;
+    if (!(p->flags & 0x800)) {
+        if (p->flags & 0x80) {
+            ReleaseCardDisplayGfx(p);
+            p->flags &= ~0x80;
+            p->flags |= 1;
         }
     }
 
-    func_0807CD48(p);
+    UpdateCardDisplayFlip(p);
 
-    if (p->unk_78 & 0x10) {
-        p->unk_9C = 8;
+    if (p->flags & 0x10) {
+        p->timer = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)func_0809075C);
-    } else if (!(p->unk_78 & 0x1000)) {
-        func_08090864(p);
-        p->unk_5F += 4;
-        func_08090B50(p, a);
+    } else if (!(p->flags & 0x1000)) {
+        UpdateEnemyCardRingPosition(p);
+        p->bobAngle += 4;
+        DispatchEnemyCardCommand(p, a);
 
-        if (!(p->unk_78 & 0x20)) {
-            p->unk_78 &= ~0x40;
+        if (!(p->flags & 0x20)) {
+            p->flags &= ~0x40;
             SetTaskUpdate(a, (TaskUpdateFunc)func_08090808);
         }
     }
@@ -146,66 +146,66 @@ u8 card_enemy_1(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-void func_08090374(CardDisplayWork* p) {
+void EnemyCardDraw(CardDisplayWork* p) {
     void* gfx;
     ObjAffine* affine;
     u16 flags;
 
     gfx = p->cardDef->gfx;
 
-    if (p->unk_78 & 0x800) {
-        if (!(p->unk_78 & 1)) {
-            if (p->unk_78 & 0x80) {
-                if ((p->unk_78 & 8) == 0) {
-                    affine = AllocObjAffine(p->unk_5E, p->unk_54, p->unk_58, 0);
+    if (p->flags & 0x800) {
+        if (!(p->flags & 1)) {
+            if (p->flags & 0x80) {
+                if ((p->flags & 8) == 0) {
+                    affine = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 0);
                 } else {
-                    affine = AllocObjAffine(p->unk_5E, p->unk_54, p->unk_58, 1);
+                    affine = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 1);
                 }
 
                 flags = 0x410;
-                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                           gUnk_08F70A28[0].gfx, gCardBattleState->tiles[p->cardDef->unk_2A],
-                           gCardBattleState->palette, affine, flags, (u16)(p->unk_A0 - 1));
-                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                           gfx, p->tiles, p->palette, affine, flags, p->unk_A0);
+                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
+                           gEnemyCardBacks[0].gfx, gCardBattleState->tiles[p->cardDef->category],
+                           gCardBattleState->palette, affine, flags, (u16)(p->priority - 1));
+                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
+                           gfx, p->tiles, p->palette, affine, flags, p->priority);
 
-                if (p->unk_A7 != 0) {
-                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                               gUnk_09EE981C[p->unk_A5], gCardBattleState->tiles7,
-                               gCardBattleState->palette2, affine, flags, (u16)(p->unk_A0 - 2));
+                if (p->valueModified != 0) {
+                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
+                               gUnk_09EE981C[p->value], gCardBattleState->tiles7,
+                               gCardBattleState->palette2, affine, flags, (u16)(p->priority - 2));
                 } else {
-                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->unk_5F] >> 8),
-                               gUnk_09EE981C[p->unk_A5], gCardBattleState->tiles5,
-                               gCardBattleState->palette, affine, flags, (u16)(p->unk_A0 - 2));
+                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
+                               gUnk_09EE981C[p->value], gCardBattleState->tiles5,
+                               gCardBattleState->palette, affine, flags, (u16)(p->priority - 2));
                 }
             }
         }
     }
 }
-void func_08090530(CardDisplayWork* p) {
+void EnemyCardDestroy(CardDisplayWork* p) {
     if (p->tiles != 0) {
-        func_0807C39C(p);
+        ReleaseCardDisplayGfx(p);
     }
 
-    if (p->unk_18 != 0) {
-        ReleaseObjPalette(p->unk_18);
+    if (p->palette2 != 0) {
+        ReleaseObjPalette(p->palette2);
     }
 }
 
 u8 func_08090550(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & 0x20) {
-        p->unk_9C = 8;
+        p->timer = 8;
         p->unk_9E = 8;
-        gCardBattleState->unk_0D0 = 0;
-        gCardBattleState->unk_0C2 = 0;
+        gCardBattleState->activeCardCount = 0;
+        gCardBattleState->activeValue = 0;
         gBtlWork->flags &= ~0x20;
         gBtlWork->flags &= ~0x80;
         gBtlWork->flags &= ~0x10000000;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090940);
-    } else if (p->unk_78 & 0x200000) {
-        p->unk_A0 -= 4;
+    } else if (p->flags & 0x200000) {
+        p->priority -= 4;
         p->unk_84 = 0x500;
-        p->unk_9C = 0x100;
+        p->timer = 0x100;
         p->unk_7C = (u16)(GetRandom() % 33) - 16;
         p->unk_9E = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090DB0);
@@ -215,32 +215,32 @@ u8 func_08090550(CardDisplayWork* p, void* a) {
 }
 
 u8 EnemyUsecard_1(CardDisplayWork* p, void* a) {
-    p->unk_A0 = 80;
-    ApproachValue(&p->x, 0x7800, p->unk_9C);
-    ApproachValue(&p->y, 0x8400, p->unk_9C);
+    p->priority = 80;
+    ApproachValue(&p->x, 0x7800, p->timer);
+    ApproachValue(&p->y, 0x8400, p->timer);
 
-    if ((s16)p->unk_9C > 0) {
-        p->unk_9C--;
+    if ((s16)p->timer > 0) {
+        p->timer--;
     }
 
     if (gBtlWork->flags & 0x80) {
-        if (p->unk_78 & 0x2000) {
-            if ((s16)p->unk_9C == 0) {
+        if (p->flags & 0x2000) {
+            if ((s16)p->timer == 0) {
                 SetTaskUpdate(a, (TaskUpdateFunc)func_08090550);
             }
-        } else if ((s16)p->unk_9C <= 2) {
-            p->unk_A0 -= 4;
+        } else if ((s16)p->timer <= 2) {
+            p->priority -= 4;
             p->unk_84 = 0x500;
-            p->unk_9C = 0x100;
+            p->timer = 0x100;
             p->unk_7C = (u16)(GetRandom() % 33) - 16;
             p->unk_9E = GetRandom() % 5 + 254;
             SetTaskUpdate(a, (TaskUpdateFunc)func_080909A4);
             return 1;
         }
-    } else if ((s16)p->unk_9C <= 2) {
-        p->unk_A0 -= 4;
+    } else if ((s16)p->timer <= 2) {
+        p->priority -= 4;
         p->unk_84 = 0x500;
-        p->unk_9C = 0x100;
+        p->timer = 0x100;
         p->unk_7C = (u16)(GetRandom() % 33) - 16;
         p->unk_9E = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)func_080909A4);
@@ -250,15 +250,15 @@ u8 EnemyUsecard_1(CardDisplayWork* p, void* a) {
 }
 
 u8 func_0809075C(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->x, gSineTable[((p->unk_7C >> 8) - 32) & 0xFF] * (p->unk_84 >> 8) + gUnk_09035978[0],
-                  p->unk_9C);
-    ApproachValue(&p->y, -gSineTable[(((p->unk_7C >> 8) - 32) & 0xFF) + 0x40] * (p->unk_84 >> 8) + gUnk_09035978[1],
-                  p->unk_9C);
-    p->unk_9C--;
+    ApproachValue(&p->x, gSineTable[((p->unk_7C >> 8) - 32) & 0xFF] * (p->unk_84 >> 8) + gEnemyCardLayout[0],
+                  p->timer);
+    ApproachValue(&p->y, -gSineTable[(((p->unk_7C >> 8) - 32) & 0xFF) + 0x40] * (p->unk_84 >> 8) + gEnemyCardLayout[1],
+                  p->timer);
+    p->timer--;
 
-    if ((s16)p->unk_9C <= 1) {
-        p->unk_9C = 0;
-        p->unk_78 &= ~0x10;
+    if ((s16)p->timer <= 1) {
+        p->timer = 0;
+        p->flags &= ~0x10;
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
@@ -266,22 +266,22 @@ u8 func_0809075C(CardDisplayWork* p, void* a) {
 }
 
 u8 func_08090808(CardDisplayWork* p, void* a) {
-    if (p->unk_A1 == 7) {
+    if (p->command == 7) {
         return 0;
     }
 
     p->unk_84 += -p->unk_84 >> 1;
-    p->x += (gUnk_09035978[8] - p->x) >> 1;
-    p->y += (gUnk_09035978[9] - p->y) >> 1;
+    p->x += (gEnemyCardLayout[8] - p->x) >> 1;
+    p->y += (gEnemyCardLayout[9] - p->y) >> 1;
 
-    if (p->unk_78 & 0x20) {
+    if (p->flags & 0x20) {
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
     return 1;
 }
 
-void func_08090864(CardDisplayWork* p) {
+void UpdateEnemyCardRingPosition(CardDisplayWork* p) {
     s32 t;
 
     if (p->unk_80 - p->unk_7C > 0x7F00) {
@@ -294,16 +294,16 @@ void func_08090864(CardDisplayWork* p) {
         p->unk_7C = t;
     }
 
-    p->unk_94 += (p->unk_98 - p->unk_94) >> 2;
+    p->swingAngle += (p->swingAngleTarget - p->swingAngle) >> 2;
     p->unk_84 += (p->unk_88 - p->unk_84) >> 1;
-    ApproachValue(&p->unk_7C, p->unk_80, p->unk_9C);
-    p->unk_9C--;
+    ApproachValue(&p->unk_7C, p->unk_80, p->timer);
+    p->timer--;
 
-    if ((s16)p->unk_9C <= 1) {
-        p->unk_9C = 0;
-        p->unk_78 |= 0x40;
+    if ((s16)p->timer <= 1) {
+        p->timer = 0;
+        p->flags |= 0x40;
     } else {
-        p->unk_78 &= ~0x40;
+        p->flags &= ~0x40;
     }
 
     p->x = gSineTable[((p->unk_7C >> 8) - 32) & 0xFF] * (p->unk_84 >> 8) + p->unk_8C;
@@ -311,40 +311,40 @@ void func_08090864(CardDisplayWork* p) {
 }
 
 u8 func_08090940(CardDisplayWork* p) {
-    ApproachValue(&p->y, 0x8200, p->unk_9C);
-    *(u16*)&p->unk_9C =
-        *(s16*)&p->unk_9C > 0 ? p->unk_9C - 1 : 0;
+    ApproachValue(&p->y, 0x8200, p->timer);
+    *(u16*)&p->timer =
+        *(s16*)&p->timer > 0 ? p->timer - 1 : 0;
 
-    if (*(s16*)&p->unk_9C == 0) {
-        *(u16*)&p->unk_9C = 0;
-        p->unk_5E += p->unk_9E;
+    if (*(s16*)&p->timer == 0) {
+        *(u16*)&p->timer = 0;
+        p->angle += p->unk_9E;
         p->unk_9E++;
 
-        if (p->unk_54 <= 25) {
+        if (p->scaleX <= 25) {
             return 0;
         }
 
-        p->unk_54 -= 25;
-        p->unk_58 -= 25;
+        p->scaleX -= 25;
+        p->scaleY -= 25;
     }
 
     return 1;
 }
 
 u8 func_080909A4(CardDisplayWork* p) {
-    p->unk_A1 = 0;
+    p->command = 0;
     p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->unk_9C;
-    p->unk_9C++;
+    p->unk_84 -= (s16)p->timer;
+    p->timer++;
     p->x -= gSineTable[(p->unk_7C & 0xFF) + 0x40];
-    p->unk_5E += p->unk_9E;
-    p->unk_54 -= 5;
-    p->unk_58 -= 5;
+    p->angle += p->unk_9E;
+    p->scaleX -= 5;
+    p->scaleY -= 5;
 
-    if (func_0807CE68(p)) {
-        p->unk_78 &= ~0x800;
-        func_0807C39C(p);
-        p->unk_78 &= ~0x80;
+    if (IsCardDisplayOffScreen(p)) {
+        p->flags &= ~0x800;
+        ReleaseCardDisplayGfx(p);
+        p->flags &= ~0x80;
         gBtlWork->flags &= ~0x10000000;
         return 0;
     }
@@ -354,73 +354,73 @@ u8 func_080909A4(CardDisplayWork* p) {
 
 void func_08090A54(CardDisplayWork* p, void* a) {
     p->x -= gSineTable[p->unk_9E] * 3;
-    func_0807CD48(p);
+    UpdateCardDisplayFlip(p);
 
     if (p->unk_9E != 0) {
         p->unk_9E -= 8;
     } else {
         p->unk_9E = 0;
-        p->unk_78 &= ~0x800;
+        p->flags &= ~0x800;
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
-    if (!(p->unk_78 & 0x20)) {
-        p->unk_78 &= ~0x40;
+    if (!(p->flags & 0x20)) {
+        p->flags &= ~0x40;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090808);
     }
 }
 
 void func_08090ACC(CardDisplayWork* p, void* a) {
     p->x += gSineTable[p->unk_9E] * 3;
-    func_0807CD48(p);
+    UpdateCardDisplayFlip(p);
 
     if ((s8)p->unk_9E >= 0) {
         p->unk_9E += 8;
     } else {
         p->unk_9E = 0x80;
-        p->unk_78 &= ~4;
-        p->unk_A0 = 100;
+        p->flags &= ~4;
+        p->priority = 100;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090A54);
     }
 
-    if (!(p->unk_78 & 0x20)) {
-        p->unk_78 &= ~0x40;
+    if (!(p->flags & 0x20)) {
+        p->flags &= ~0x40;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090808);
     }
 }
 
-void func_08090B50(CardDisplayWork* p, void* a) {
-    switch (p->unk_A1) {
+void DispatchEnemyCardCommand(CardDisplayWork* p, void* a) {
+    switch (p->command) {
     case 5:
-        p->unk_9C = 16;
-        p->unk_A0 -= 4;
+        p->timer = 16;
+        p->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyUsecard_1);
         break;
     case 6:
-        p->unk_9C = 8;
-        p->unk_A0 -= 4;
+        p->timer = 8;
+        p->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090C3C);
         break;
     case 8:
-        p->unk_A0 -= 4;
+        p->priority -= 4;
         p->unk_84 = 0x500;
-        p->unk_9C = 0x100;
+        p->timer = 0x100;
         p->unk_7C = (u16)(GetRandom() % 33) - 16;
         p->unk_9E = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)func_080909A4);
         break;
     case 7:
         p->unk_84 = 0x500;
-        p->unk_9C = 0x100;
+        p->timer = 0x100;
         p->unk_7C = (u16)(GetRandom() % 33) - 16;
         p->unk_9E = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)func_080909A4);
         break;
     case 9:
         p->unk_9E = 0;
-        p->unk_A0 -= 4;
+        p->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090ACC);
-        p->unk_A1 = 0;
+        p->command = 0;
         break;
     }
 }
@@ -428,39 +428,39 @@ void func_08090B50(CardDisplayWork* p, void* a) {
 u8 func_08090C3C(CardDisplayWork* p, void* a) {
     s32 (*tbl)[2]; s32* q;
 
-    if (gBtlWork->unk_070 == 1) {
+    if (gBtlWork->paused == 1) {
         return 1;
     }
 
-    func_0807CD48(p);
+    UpdateCardDisplayFlip(p);
 
-    if (p->unk_78 & 0x20) {
-        q = &p->x; tbl = (s32 (*)[2])gUnk_09035978; ApproachValue(q, tbl[3 - p->unk_9F][0], p->unk_9C); ApproachValue(&p->y, ((s32 (*)[2])gUnk_09035978)[3 - p->unk_9F][1], p->unk_9C);
+    if (p->flags & 0x20) {
+        q = &p->x; tbl = (s32 (*)[2])gEnemyCardLayout; ApproachValue(q, tbl[3 - p->stockIndex][0], p->timer); ApproachValue(&p->y, ((s32 (*)[2])gEnemyCardLayout)[3 - p->stockIndex][1], p->timer);
     } else {
-        ApproachValue(&p->x, gUnk_09035978[8], p->unk_9C);
-        ApproachValue(&p->y, gUnk_09035978[9], p->unk_9C);
+        ApproachValue(&p->x, gEnemyCardLayout[8], p->timer);
+        ApproachValue(&p->y, gEnemyCardLayout[9], p->timer);
     }
 
-    if ((s16)p->unk_9C > 0) {
-        p->unk_9C--;
-        p->unk_78 &= ~0x40;
+    if ((s16)p->timer > 0) {
+        p->timer--;
+        p->flags &= ~0x40;
     } else {
-        p->unk_9C = 0;
-        p->unk_78 |= 0x40;
+        p->timer = 0;
+        p->flags |= 0x40;
     }
 
-    if (p->unk_A1 == 5) {
-        if (!(gBtlWork->flags & 0x80) && p->unk_9F == 0) {
+    if (p->command == 5) {
+        if (!(gBtlWork->flags & 0x80) && p->stockIndex == 0) {
             gBtlWork->flags |= 0x80;
         }
 
-        if (p->unk_78 & 0x8000) {
+        if (p->flags & 0x8000) {
             SetTaskUpdate(a, (TaskUpdateFunc)func_0807CF4C);
         } else {
-            p->unk_9C = 15;
+            p->timer = 15;
             p->unk_88 = 0x800;
             p->unk_84 = 0;
-            p->unk_80 = gUnk_09034054[p->unk_9F] * 2;
+            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
             p->unk_7C = 0;
             p->unk_8C = p->x;
             p->unk_90 = p->y;
@@ -468,45 +468,45 @@ u8 func_08090C3C(CardDisplayWork* p, void* a) {
         }
     }
 
-    p->unk_5F += 4;
+    p->bobAngle += 4;
     return 1;
 }
 u8 func_08090DB0(CardDisplayWork* p, void* a) {
-    p->unk_A1 = 0;
+    p->command = 0;
     p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->unk_9C >> 1;
-    p->unk_9C++;
+    p->unk_84 -= (s16)p->timer >> 1;
+    p->timer++;
     p->x += 0x200;
-    p->unk_5E += 16;
+    p->angle += 16;
 
-    if (!(p->unk_78 & 0x400000)) {
-        p->unk_54 -= 20;
+    if (!(p->flags & 0x400000)) {
+        p->scaleX -= 20;
 
-        if (p->unk_54 >= -2 && p->unk_54 <= 2) {
-            p->unk_54 = -20;
+        if (p->scaleX >= -2 && p->scaleX <= 2) {
+            p->scaleX = -20;
         }
 
-        if (p->unk_54 <= -0x100) {
-            p->unk_54 = -0x100;
-            p->unk_78 |= 0x400000;
+        if (p->scaleX <= -0x100) {
+            p->scaleX = -0x100;
+            p->flags |= 0x400000;
         }
     } else {
-        p->unk_54 -= 20;
+        p->scaleX -= 20;
 
-        if (p->unk_54 >= -2 && p->unk_54 <= 2) {
-            p->unk_54 = 20;
+        if (p->scaleX >= -2 && p->scaleX <= 2) {
+            p->scaleX = 20;
         }
 
-        if (p->unk_54 >= 0x100) {
-            p->unk_54 = 0x100;
-            p->unk_78 &= ~0x400000;
+        if (p->scaleX >= 0x100) {
+            p->scaleX = 0x100;
+            p->flags &= ~0x400000;
         }
     }
 
-    if (func_0807CE68(p)) {
-        p->unk_78 &= ~0x800;
-        func_0807C39C(p);
-        p->unk_78 &= ~0x80;
+    if (IsCardDisplayOffScreen(p)) {
+        p->flags &= ~0x800;
+        ReleaseCardDisplayGfx(p);
+        p->flags &= ~0x80;
         gBtlWork->flags &= ~0x10000000;
         return 0;
     }
@@ -523,17 +523,17 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->tiles3 = 0;
     p->tiles4 = 0;
     p->tiles5 = 0;
-    p->unk_18 = 0;
+    p->palette2 = 0;
     p->palette = 0;
-    p->unk_1C = 0;
-    p->unk_A1 = 0;
+    p->children = 0;
+    p->command = 0;
     p->args = *a;
-    p->unk_78 = 0;
-    p->unk_A0 = 50;
-    p->unk_9C = 0;
-    tbl = gUnk_09EE275C[p->args.unk_08];
-    n = gUnk_08F7DAC4[p->args.unk_08];
-    p->unk_5C = p->args.unk_08;
+    p->flags = 0;
+    p->priority = 50;
+    p->timer = 0;
+    tbl = gEnemyCardIds[p->args.unk_08];
+    n = gEnemyCardCounts[p->args.unk_08];
+    p->enemyKind = p->args.unk_08;
 
     if (n == 1) {
         id = tbl[0];
@@ -544,54 +544,54 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
             id = tbl[(s16)p->args.index - 1];
         }
     } else {
-        if (gCardBattleState->unk_0D7 > n) {
-            gCardBattleState->unk_0D7 = n;
+        if (gCardBattleState->nextEnemyCardIndex > n) {
+            gCardBattleState->nextEnemyCardIndex = n;
         }
 
-        id = tbl[gCardBattleState->unk_0D7];
-        gCardBattleState->unk_0D7 = GetRandom() % n;
+        id = tbl[gCardBattleState->nextEnemyCardIndex];
+        gCardBattleState->nextEnemyCardIndex = GetRandom() % n;
     }
 
     p->cardDef = &gCardDefs[id];
-    p->unk_54 = 0x100;
-    p->unk_58 = 0x100;
-    p->unk_5F = GetRandom();
-    p->unk_5E = 0;
+    p->scaleX = 0x100;
+    p->scaleY = 0x100;
+    p->bobAngle = GetRandom();
+    p->angle = 0;
     p->unk_84 = 0;
     p->unk_88 = 0x2400;
-    p->unk_78 |= 0x804;
+    p->flags |= 0x804;
     p->unk_8C = 0xDC00;
     p->unk_90 = 0x8800;
     p->x = 0xDC00;
     p->y = 0x8800;
-    p->unk_9C = 10;
-    p->unk_A0 -= 4;
-    func_0807C33C(p);
-    p->unk_A5 = p->cardDef->unk_20;
-    switch (gGameState.unk_1B8) {
+    p->timer = 10;
+    p->priority -= 4;
+    LoadCardDisplayGfx(p);
+    p->value = p->cardDef->value;
+    switch (gGameState.roomEffect) {
     case 1:
-        p->unk_A5 += 2;
+        p->value += 2;
 
-        if (p->unk_A5 > 9) {
-            p->unk_A5 = 9;
+        if (p->value > 9) {
+            p->value = 9;
         }
 
-        p->unk_A7 = 1;
+        p->valueModified = 1;
         break;
     case 2:
-        if (p->unk_A5 > 2) {
-            p->unk_A5 -= 2;
+        if (p->value > 2) {
+            p->value -= 2;
         } else {
-            p->unk_A5 = 1;
+            p->value = 1;
         }
-        p->unk_A7 = 1;
+        p->valueModified = 1;
         break;
     default:
-        p->unk_A7 = 0;
+        p->valueModified = 0;
         break;
     }
 
-    p->unk_78 |= 0x80;
+    p->flags |= 0x80;
 }
 
 void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
@@ -603,14 +603,14 @@ void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
     p->tiles2 = 0;
     p->tiles3 = 0;
     p->palette = 0;
-    p->unk_A1 = 0;
+    p->command = 0;
     p->args = *a;
-    p->unk_78 = 0;
-    p->unk_A0 = 50;
-    p->unk_9C = 0;
-    tbl = gUnk_09EE275C[p->args.unk_08];
-    n = gUnk_08F7DAC4[p->args.unk_08];
-    p->unk_5C = p->args.unk_08;
+    p->flags = 0;
+    p->priority = 50;
+    p->timer = 0;
+    tbl = gEnemyCardIds[p->args.unk_08];
+    n = gEnemyCardCounts[p->args.unk_08];
+    p->enemyKind = p->args.unk_08;
 
     if (n == 1) {
         id = tbl[0];
@@ -621,20 +621,20 @@ void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
     }
 
     p->cardDef = &gCardDefs[id];
-    p->unk_54 = 0x100;
-    p->unk_58 = 0x100;
-    p->unk_5F = GetRandom();
-    p->unk_5E = 0;
+    p->scaleX = 0x100;
+    p->scaleY = 0x100;
+    p->bobAngle = GetRandom();
+    p->angle = 0;
     p->unk_84 = 0;
     p->unk_88 = 0x2400;
-    p->unk_78 |= 0x801;
+    p->flags |= 0x801;
     p->unk_8C = 0x10000;
     p->unk_90 = 0x8800;
     p->x = 0x10000;
     p->y = 0x8800;
-    p->unk_9C = 0x10;
-    p->unk_A0 -= 4;
-    p->unk_A5 = p->cardDef->unk_20;
+    p->timer = 0x10;
+    p->priority -= 4;
+    p->value = p->cardDef->value;
 }
 void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
     const s32* tbl;
@@ -645,14 +645,14 @@ void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
     p->tiles2 = 0;
     p->tiles3 = 0;
     p->palette = 0;
-    p->unk_A1 = 0;
+    p->command = 0;
     p->args = *a;
-    p->unk_78 = 0;
-    p->unk_A0 = 50;
-    p->unk_9C = 0;
-    tbl = gUnk_09EE275C[p->args.unk_08];
-    n = gUnk_08F7DAC4[p->args.unk_08];
-    p->unk_5C = p->args.unk_08;
+    p->flags = 0;
+    p->priority = 50;
+    p->timer = 0;
+    tbl = gEnemyCardIds[p->args.unk_08];
+    n = gEnemyCardCounts[p->args.unk_08];
+    p->enemyKind = p->args.unk_08;
 
     if (n == 1) {
         id = tbl[0];
@@ -663,23 +663,23 @@ void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
     }
 
     p->cardDef = &gCardDefs[id];
-    p->unk_54 = 0x100;
-    p->unk_58 = 0x100;
-    p->unk_5F = GetRandom();
-    p->unk_5E = 0;
+    p->scaleX = 0x100;
+    p->scaleY = 0x100;
+    p->bobAngle = GetRandom();
+    p->angle = 0;
     p->unk_84 = 0;
     p->unk_88 = 0x2400;
-    p->unk_78 |= 0x801;
+    p->flags |= 0x801;
     p->unk_8C = 0x10000;
     p->unk_90 = 0x8800;
     p->x = 0x10000;
     p->y = 0x8800;
-    p->unk_9C = 0x10;
-    p->unk_A0 -= 4;
-    p->unk_A5 = p->cardDef->unk_20;
+    p->timer = 0x10;
+    p->priority -= 4;
+    p->value = p->cardDef->value;
 }
 
-void func_08091234(u16 arg) {
+void UseEnemyCard(u16 arg) {
     CardDisplayArgs args;
     CardDisplayWork* p;
     u8 i;
@@ -693,36 +693,36 @@ void func_08091234(u16 arg) {
     args.pool = 0;
     args.slot = 0;
     args.unk_08 = arg;
-    args.index = gUnk_02034AB4;
-    args.unk_0E = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B58, &args)->work;
+    args.index = gBossCardValue;
+    args.listIndex = 0;
+    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
     gBtlWork->flags |= 0x10000000;
-    gCardBattleState->unk_0E0 = 1;
+    gCardBattleState->enemyCardUsed = 1;
 
     if ((gBtlWork->flags & 0x80) == 0) {
-        p->unk_78 |= 0x2000;
-        gCardBattleState->unk_000[0] = p;
-        gCardBattleState->unk_0C2 = p->unk_A5;
-        gCardBattleState->unk_0D0 = 1;
-        gBtlWork->unk_0A4 = 0;
+        p->flags |= 0x2000;
+        gCardBattleState->activeCards[0] = p;
+        gCardBattleState->activeValue = p->value;
+        gCardBattleState->activeCardCount = 1;
+        gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if ((gBtlWork->flags & 0x20) == 0) {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if ((s16)gCardBattleState->activeValue <= p->value || p->value == 0) {
 #else
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
+        if ((s16)gCardBattleState->activeValue <= p->value) {
 #endif
             found = 0;
 
-            if (gBtlWork->unk_0F4 == 2) {
+            if (gBtlWork->hcEffect == 2) {
 #ifdef VERSION_EU
-                if (gCardBattleState->unk_000[0]->cardDef->unk_2A == 0 && gCardBattleState->unk_0E1 == 0) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && gCardBattleState->soraStockActive == 0) {
                     found = 1;
                 }
 #else
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 0) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
                         found = 1;
                         break;
                     }
@@ -730,16 +730,16 @@ void func_08091234(u16 arg) {
 #endif
             }
 
-            if (gBtlWork->unk_0F4 == 20) {
+            if (gBtlWork->hcEffect == 20) {
 #ifdef VERSION_EU
-                for (j = 0; j < gCardBattleState->unk_0D0; j++) {
-                    if (gCardBattleState->unk_000[j]->cardDef->unk_24 == 22) {
+                for (j = 0; j < gCardBattleState->activeCardCount; j++) {
+                    if (gCardBattleState->activeCards[j]->cardDef->move == 22) {
                         found = 1;
                     }
                 }
 #else
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_24 == 22) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
                         found = 1;
                         break;
                     }
@@ -747,16 +747,16 @@ void func_08091234(u16 arg) {
 #endif
             }
 
-            if (gBtlWork->unk_0F4 == 29) {
+            if (gBtlWork->hcEffect == 29) {
 #ifdef VERSION_EU
-                for (k = 0; k < gCardBattleState->unk_0D0; k++) {
-                    if (gCardBattleState->unk_000[k]->cardDef->unk_2A == 2 && !(gCardBattleState->unk_000[k]->cardDef->flags & 8)) {
+                for (k = 0; k < gCardBattleState->activeCardCount; k++) {
+                    if (gCardBattleState->activeCards[k]->cardDef->category == 2 && !(gCardBattleState->activeCards[k]->cardDef->flags & 8)) {
                         found = 1;
                     }
                 }
 #else
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
                         found = 1;
                         break;
                     }
@@ -767,69 +767,69 @@ void func_08091234(u16 arg) {
             if (found == 0) {
                 gBtlWork->flags |= 0x800000;
 
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    gCardBattleState->activeCards[i]->flags |= 0x200000;
                 }
 
-                if ((s16)gCardBattleState->unk_0C2 != p->unk_A5) {
-                    if (p->unk_A5 == 0) {
-                        gBtlWork->unk_1CA = -(s8)gCardBattleState->unk_0C2;
+                if ((s16)gCardBattleState->activeValue != p->value) {
+                    if (p->value == 0) {
+                        gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
-                        gBtlWork->unk_1CA = gCardBattleState->unk_0C2 - p->unk_A5;
+                        gBtlWork->breakDifference = gCardBattleState->activeValue - p->value;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= 0x400;
                     gBtlWork->flags |= 0x80;
                     gBtlWork->flags &= ~0x20;
-                    gCardBattleState->unk_000[0] = p;
+                    gCardBattleState->activeCards[0] = p;
 
-                    if (gBtlWork->unk_0F4 == 48) {
-                        if (p->unk_A5 != 0) {
-                            gCardBattleState->unk_0C2 = p->unk_A5 - gCardBattleState->unk_0C2;
-                            p->unk_A5 = gCardBattleState->unk_0C2;
+                    if (gBtlWork->hcEffect == 48) {
+                        if (p->value != 0) {
+                            gCardBattleState->activeValue = p->value - gCardBattleState->activeValue;
+                            p->value = gCardBattleState->activeValue;
                         } else {
-                            gCardBattleState->unk_0C2 = 0;
+                            gCardBattleState->activeValue = 0;
                         }
 
-                        if ((s16)gCardBattleState->unk_0C2 < 0) {
-                            gCardBattleState->unk_0C2 = 0;
+                        if ((s16)gCardBattleState->activeValue < 0) {
+                            gCardBattleState->activeValue = 0;
                         }
 
-                        gBtlWork->unk_0F8--;
+                        gBtlWork->hcEffectCount--;
                     } else {
-                        gCardBattleState->unk_0C2 = p->unk_A5;
+                        gCardBattleState->activeValue = p->value;
                     }
 
-                    gCardBattleState->unk_0D0 = 1;
-                    gBtlWork->unk_0A4 = 0;
-                    p->unk_78 |= 0x2000;
-                    func_0807BA54();
+                    gCardBattleState->activeCardCount = 1;
+                    gBtlWork->soraOwnsPlay = 0;
+                    p->flags |= 0x2000;
+                    AddBreakDarkPoints();
                 } else {
                     m4aSongNumStart(SONG_SYS_DROW);
                     gBtlWork->flags &= ~0x80;
                     gBtlWork->flags &= ~0x20;
                     gBtlWork->flags &= ~0x400;
-                    gBtlWork->unk_0A4 = 0;
+                    gBtlWork->soraOwnsPlay = 0;
                 }
             }
         }
     } else {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5 || p->unk_A5 == 0) {
+        if ((s16)gCardBattleState->activeValue <= p->value || p->value == 0) {
 #else
-        if ((s16)gCardBattleState->unk_0C2 <= p->unk_A5) {
+        if ((s16)gCardBattleState->activeValue <= p->value) {
 #endif
             flag = 0;
 
-            if (gBtlWork->unk_0F4 == 2) {
+            if (gBtlWork->hcEffect == 2) {
 #ifdef VERSION_EU
-                if (gCardBattleState->unk_000[0]->cardDef->unk_2A == 0 && gCardBattleState->unk_0E1 == 0) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && gCardBattleState->soraStockActive == 0) {
                     flag = 1;
                 }
 #else
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 0) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
                         flag = 1;
                         break;
                     }
@@ -838,9 +838,9 @@ void func_08091234(u16 arg) {
             }
 
 #ifndef VERSION_EU
-            if (gBtlWork->unk_0F4 == 54) {
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 1) {
+            if (gBtlWork->hcEffect == 54) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 1) {
                         flag = 1;
                         break;
                     }
@@ -848,21 +848,21 @@ void func_08091234(u16 arg) {
             }
 
 #endif
-            if (gBtlWork->unk_0F4 == 20) {
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_24 == 22) {
+            if (gBtlWork->hcEffect == 20) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    if (gCardBattleState->activeCards[i]->cardDef->move == 22) {
                         flag = 1;
                         break;
                     }
                 }
             }
 
-            if (gBtlWork->unk_0F4 == 29) {
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
+            if (gBtlWork->hcEffect == 29) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
 #ifdef VERSION_EU
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2 && !(gCardBattleState->unk_000[i]->cardDef->flags & 8)) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 2 && !(gCardBattleState->activeCards[i]->cardDef->flags & 8)) {
 #else
-                    if (gCardBattleState->unk_000[i]->cardDef->unk_2A == 2) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
 #endif
                         flag = 1;
                         break;
@@ -873,60 +873,60 @@ void func_08091234(u16 arg) {
             if (flag == 0) {
                 gBtlWork->flags |= 0x800000;
 
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    gCardBattleState->activeCards[i]->flags |= 0x200000;
                 }
 
-                if ((s16)gCardBattleState->unk_0C2 != p->unk_A5) {
-                    if (p->unk_A5 == 0) {
-                        gBtlWork->unk_1CA = -(s8)gCardBattleState->unk_0C2;
+                if ((s16)gCardBattleState->activeValue != p->value) {
+                    if (p->value == 0) {
+                        gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
-                        gBtlWork->unk_1CA = gCardBattleState->unk_0C2 - p->unk_A5;
+                        gBtlWork->breakDifference = gCardBattleState->activeValue - p->value;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= 0x400;
                     gBtlWork->flags |= 0x80;
                     gBtlWork->flags &= ~0x20;
-                    gCardBattleState->unk_000[0] = p;
+                    gCardBattleState->activeCards[0] = p;
 #ifdef VERSION_EU
 
-                    if (gBtlWork->unk_0F4 == 48) {
-                        if (p->unk_A5 != 0) {
-                            gCardBattleState->unk_0C2 = p->unk_A5 - gCardBattleState->unk_0C2;
-                            p->unk_A5 = gCardBattleState->unk_0C2;
+                    if (gBtlWork->hcEffect == 48) {
+                        if (p->value != 0) {
+                            gCardBattleState->activeValue = p->value - gCardBattleState->activeValue;
+                            p->value = gCardBattleState->activeValue;
                         } else {
-                            gCardBattleState->unk_0C2 = 0;
+                            gCardBattleState->activeValue = 0;
                         }
 
-                        if ((s16)gCardBattleState->unk_0C2 < 0) {
-                            gCardBattleState->unk_0C2 = 0;
+                        if ((s16)gCardBattleState->activeValue < 0) {
+                            gCardBattleState->activeValue = 0;
                         }
 
-                        gBtlWork->unk_0F8--;
+                        gBtlWork->hcEffectCount--;
                     } else {
-                        gCardBattleState->unk_0C2 = p->unk_A5;
+                        gCardBattleState->activeValue = p->value;
                     }
 
 #else
-                    gCardBattleState->unk_0C2 = p->unk_A5;
+                    gCardBattleState->activeValue = p->value;
 #endif
-                    gCardBattleState->unk_0D0 = 1;
-                    gBtlWork->unk_0A4 = 0;
-                    p->unk_78 |= 0x2000;
-                    func_0807BA54();
+                    gCardBattleState->activeCardCount = 1;
+                    gBtlWork->soraOwnsPlay = 0;
+                    p->flags |= 0x2000;
+                    AddBreakDarkPoints();
                 } else {
                     m4aSongNumStart(SONG_SYS_DROW);
                     gBtlWork->flags &= ~0x80;
                     gBtlWork->flags &= ~0x20;
                     gBtlWork->flags &= ~0x400;
-                    gBtlWork->unk_0A4 = 0;
+                    gBtlWork->soraOwnsPlay = 0;
                 }
             }
         }
     }
 
-    p->unk_78 = (p->unk_78 | 4) & ~0x40;
+    p->flags = (p->flags | 4) & ~0x40;
 }
 
 void func_080917C8(u16 a, u8 b) {
@@ -938,40 +938,40 @@ void func_080917C8(u16 a, u8 b) {
     arg.slot = 0;
     arg.unk_08 = a;
     arg.index = b;
-    arg.unk_0E = 0;
+    arg.listIndex = 0;
     p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B70, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {
-        p->unk_78 |= 0x2000;
-        gCardBattleState->unk_000[0] = p;
-        gCardBattleState->unk_0C2 = p->cardDef->unk_20;
-        gCardBattleState->unk_0D0 = 1;
-        gBtlWork->unk_0A4 = 0;
+        p->flags |= 0x2000;
+        gCardBattleState->activeCards[0] = p;
+        gCardBattleState->activeValue = p->cardDef->value;
+        gCardBattleState->activeCardCount = 1;
+        gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if ((gBtlWork->flags & 0x20) == 0) {
-        if (gCardBattleState->unk_0CC != 2) {
-            if ((s16)gCardBattleState->unk_0C2 < p->cardDef->unk_20) {
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
+        if (gCardBattleState->soraHcEffect != 2) {
+            if ((s16)gCardBattleState->activeValue < p->cardDef->value) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    gCardBattleState->activeCards[i]->flags |= 0x200000;
                 }
 
                 m4aSongNumStart(SONG_SYS_CARDLOSE);
                 gBtlWork->flags |= 0x800000;
                 gBtlWork->flags |= 0x400;
                 gBtlWork->flags |= 0x80;
-                gCardBattleState->unk_000[0] = p;
-                gCardBattleState->unk_0C2 = p->cardDef->unk_20;
-                gCardBattleState->unk_0D0 = 1;
-                gBtlWork->unk_0A4 = 0;
-                p->unk_78 |= 0x2000;
+                gCardBattleState->activeCards[0] = p;
+                gCardBattleState->activeValue = p->cardDef->value;
+                gCardBattleState->activeCardCount = 1;
+                gBtlWork->soraOwnsPlay = 0;
+                p->flags |= 0x2000;
             }
         }
     }
 
-    p->unk_78 |= 4;
-    p->unk_78 &= ~0x40;
+    p->flags |= 4;
+    p->flags &= ~0x40;
 }
 
 void func_08091978(u16 a, u8 b) {
@@ -983,71 +983,71 @@ void func_08091978(u16 a, u8 b) {
     arg.slot = 0;
     arg.unk_08 = a;
     arg.index = b;
-    arg.unk_0E = 0;
+    arg.listIndex = 0;
     p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B88, &arg)->work;
     gBtlWork->flags |= 0x10000000;
 
     if ((gBtlWork->flags & 0x80) == 0) {
-        p->unk_78 |= 0x2000;
-        gCardBattleState->unk_000[0] = p;
-        gCardBattleState->unk_0C2 = p->cardDef->unk_20;
-        gCardBattleState->unk_0D0 = 1;
-        gBtlWork->unk_0A4 = 0;
+        p->flags |= 0x2000;
+        gCardBattleState->activeCards[0] = p;
+        gCardBattleState->activeValue = p->cardDef->value;
+        gCardBattleState->activeCardCount = 1;
+        gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= 0x400;
         gBtlWork->flags |= 0x80;
     } else if (gBtlWork->flags & 0x20) {
-        if (gBtlWork->unk_0F4 == 2) {
-            if ((s16)gCardBattleState->unk_0C2 < p->cardDef->unk_20) {
-                for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-                    gCardBattleState->unk_000[i]->unk_78 |= 0x200000;
+        if (gBtlWork->hcEffect == 2) {
+            if ((s16)gCardBattleState->activeValue < p->cardDef->value) {
+                for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+                    gCardBattleState->activeCards[i]->flags |= 0x200000;
                 }
 
                 m4aSongNumStart(SONG_SYS_CARDLOSE);
                 gBtlWork->flags |= 0x800000;
                 gBtlWork->flags |= 0x400;
                 gBtlWork->flags |= 0x80;
-                gCardBattleState->unk_000[0] = p;
-                gCardBattleState->unk_0C2 = p->cardDef->unk_20;
-                gCardBattleState->unk_0D0 = 1;
-                gBtlWork->unk_0A4 = 0;
-                p->unk_78 |= 0x2000;
+                gCardBattleState->activeCards[0] = p;
+                gCardBattleState->activeValue = p->cardDef->value;
+                gCardBattleState->activeCardCount = 1;
+                gBtlWork->soraOwnsPlay = 0;
+                p->flags |= 0x2000;
             }
         }
     }
 
-    p->unk_78 |= 4;
-    p->unk_78 &= ~0x40;
+    p->flags |= 4;
+    p->flags &= ~0x40;
 }
-void func_08091B28(void) {
-    gUnk_02034AB4 = -1;
+void ResetBossCardValue(void) {
+    gBossCardValue = -1;
 }
 
-void func_08091B38(u16 a) {
-    gUnk_02034AB4 = a;
+void SetBossCardValue(u16 a) {
+    gBossCardValue = a;
 }
-u16 func_08091B44(void) {
-    if (gUnk_02034AB4 != -1) {
-        return gUnk_02034AB4;
+u16 GetBossCardValue(void) {
+    if (gBossCardValue != -1) {
+        return gBossCardValue;
     }
 
-    return gCardBattleState->unk_0D7;
+    return gCardBattleState->nextEnemyCardIndex;
 }
 
 TaskDesc gTaskDescCardEnemy = {
     "card_enemy",
     (TaskInitFunc)card_enemy_0,
     (TaskUpdateFunc)card_enemy_1,
-    (TaskDrawFunc)func_08090374,
-    (TaskDestroyFunc)func_08090530,
+    (TaskDrawFunc)EnemyCardDraw,
+    (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };
 
-TaskDesc gUnk_09EE4B58 = {
+TaskDesc gTaskDescEnemyUsecard = {
     "EnemyUsecard",
     (TaskInitFunc)func_08090EA0,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskDrawFunc)func_08090374,
-    (TaskDestroyFunc)func_08090530,
+    (TaskDrawFunc)EnemyCardDraw,
+    (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };
 
@@ -1055,8 +1055,8 @@ TaskDesc gUnk_09EE4B70 = {
     "EnemyUsecard",
     (TaskInitFunc)func_08091048,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskDrawFunc)func_08090374,
-    (TaskDestroyFunc)func_08090530,
+    (TaskDrawFunc)EnemyCardDraw,
+    (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };
 
@@ -1064,7 +1064,7 @@ TaskDesc gUnk_09EE4B88 = {
     "EnemyUsecard",
     (TaskInitFunc)func_08091138,
     (TaskUpdateFunc)EnemyUsecard_1,
-    (TaskDrawFunc)func_08090374,
-    (TaskDestroyFunc)func_08090530,
+    (TaskDrawFunc)EnemyCardDraw,
+    (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };

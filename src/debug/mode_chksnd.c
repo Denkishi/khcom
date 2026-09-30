@@ -3,7 +3,7 @@
 #include "gba/keys.h"
 
 TaskPool gChkSndPool;
-s16 gUnk_020348B4;
+s16 gChkSndIndex;
 
 ChkSndEntry gChkSndEntries[] = {
     { "BGM_ALICE_BTL", SONG_BGM_ALICE_BTL },
@@ -643,15 +643,15 @@ ChkSndEntry gChkSndEntries[] = {
 
 void mode_chksnd_0(void) {
     SetBgMode0();
-    gUnk_020348B4 = 0;
+    gChkSndIndex = 0;
     TaskPoolInit(&gChkSndPool, 10);
     TaskCreate(&gChkSndPool, &gTaskDescPrint, 0);
 }
 
 #ifdef VERSION_EU
-const char gUnkEu_0812F5E4[0x20] = "                              ";
+const char gChkSndBlankText[0x20] = "                              ";
 
-const char gUnkEu_0812F604[4] = ": ";
+const char gChkSndSeparatorText[4] = ": ";
 #endif
 
 void mode_chksnd_1(void) {
@@ -663,47 +663,47 @@ void mode_chksnd_1(void) {
         ModeRequest(&gModeDebug, 0);
     } else {
         if (GetKeysRepeat() & DPAD_LEFT) {
-            gUnk_020348B4--;
+            gChkSndIndex--;
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            gUnk_020348B4++;
+            gChkSndIndex++;
         }
 
 #ifdef VERSION_EU
-        if (gUnk_020348B4 < 0) {
-            gUnk_020348B4 = 632;
+        if (gChkSndIndex < 0) {
+            gChkSndIndex = 632;
         }
 
-        if ((u16)gUnk_020348B4 > 632) {
-            gUnk_020348B4 = 0;
+        if ((u16)gChkSndIndex > 632) {
+            gChkSndIndex = 0;
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(gChkSndEntries[gUnk_020348B4].songNum);
+            m4aSongNumStart(gChkSndEntries[gChkSndIndex].songNum);
         }
 
-        func_0809D2B0(0, 0, 0, gUnkEu_0812F5E4);
-        func_0809D458(0, 0, 0, gChkSndEntries[gUnk_020348B4].songNum);
-        func_0809D2B0(5, 0, 0, gUnkEu_0812F604);
+        PrintString(0, 0, 0, gChkSndBlankText);
+        PrintNumber(0, 0, 0, gChkSndEntries[gChkSndIndex].songNum);
+        PrintString(5, 0, 0, gChkSndSeparatorText);
 #else
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(gChkSndEntries[gUnk_020348B4].songNum);
+            m4aSongNumStart(gChkSndEntries[gChkSndIndex].songNum);
         }
 
-        if (gUnk_020348B4 < 0) {
-            gUnk_020348B4 = 632;
+        if (gChkSndIndex < 0) {
+            gChkSndIndex = 632;
         }
 
-        if ((u16)gUnk_020348B4 > 632) {
-            gUnk_020348B4 = 0;
+        if ((u16)gChkSndIndex > 632) {
+            gChkSndIndex = 0;
         }
 
-        func_0809D2B0(0, 0, 0, "                              ");
-        func_0809D458(0, 0, 0, gChkSndEntries[gUnk_020348B4].songNum);
-        func_0809D2B0(5, 0, 0, ": ");
+        PrintString(0, 0, 0, "                              ");
+        PrintNumber(0, 0, 0, gChkSndEntries[gChkSndIndex].songNum);
+        PrintString(5, 0, 0, ": ");
 #endif
-        func_0809D2B0(7, 0, 0, gChkSndEntries[gUnk_020348B4].name);
+        PrintString(7, 0, 0, gChkSndEntries[gChkSndIndex].name);
         TaskPoolUpdate(&gChkSndPool);
         TaskPoolDraw(&gChkSndPool);
     }

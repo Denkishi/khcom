@@ -134,22 +134,22 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_163 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
-        work->unk_163 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->unk_014;
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C;
-    body->unk_010 = obj->unk_01C;
+    body->x = obj->originX;
+    body->y = obj->originY;
+    body->z = obj->originZ;
+    body->groundZ = obj->originZ;
 
     if (obj->flags & 4) {
         body->flags = 4;
@@ -157,22 +157,22 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
         body->flags = 0;
     }
 
-    work->unk_162 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gCroudPalette, 32);
     work->unk_15C = 0;
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
-    work->unk_034 = 0;
-    work->unk_148 = 0;
-    work->unk_14C = 0;
+    work->state = 0;
+    work->stateTimer = 0;
+    work->speed = 0;
     work->unk_158 = 0;
-    work->unk_150 = 10;
-    work->unk_154 = 10;
-    work->unk_164 = 0;
+    work->scaleX = 10;
+    work->scaleY = 10;
+    work->animating = 0;
     work->unk_160 = 0;
     work->target = 0;
-    work->unk_17C = 0;
-    work->unk_16C = 0;
+    work->attackCount = 0;
+    work->targetIndex = 0;
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -184,74 +184,74 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     s32 dz;
     s32 targetZ;
     s32 pixelX;
-    owner = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     if (owner->flags & 0x40000000) return 0;
-    if (work->unk_034 == 4) func_0802F284(body->x, body->y, body->z + 0x2000);
-    else func_0802F284(body->x, body->y, body->z);
-    switch (work->unk_034) {
+    if (work->state == 4) BtlMapFollowPosition(body->x, body->y, body->z + 0x2000);
+    else BtlMapFollowPosition(body->x, body->y, body->z);
+    switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 12;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 12;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
-        ApproachValue(&work->unk_150, 256, work->unk_14A);
-        work->unk_154 = work->unk_150;
-        if (work->unk_14A <= 0) {
-            work->unk_148 = 0;
-            switch (work->unk_162) {
+        ApproachValue(&work->scaleX, 256, work->steps);
+        work->scaleY = work->scaleX;
+        if (work->steps <= 0) {
+            work->stateTimer = 0;
+            switch (work->variant) {
             case 0:
-                work->unk_034 = 2;
-                work->unk_164 = 1;
+                work->state = 2;
+                work->animating = 1;
                 break;
             case 1:
-                work->unk_034 = 1;
-                work->unk_164 = 1;
+                work->state = 1;
+                work->animating = 1;
                 break;
             case 2:
-                work->unk_034 = 3;
-                work->unk_164 = 1;
+                work->state = 3;
+                work->animating = 1;
                 break;
             default:
-                work->unk_034 = 6;
+                work->state = 6;
                 break;
             }
         } else {
-            work->unk_148++;
-            work->unk_14A--;
+            work->stateTimer++;
+            work->steps--;
         }
         break;
     case 5:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
-        ApproachValue(&work->unk_150, 25, work->unk_14A);
-        work->unk_154 = work->unk_150;
-        if (work->unk_14A <= 0) return 0;
-        work->unk_148++;
-        work->unk_14A--;
+        ApproachValue(&work->scaleX, 25, work->steps);
+        work->scaleY = work->scaleX;
+        if (work->steps <= 0) return 0;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 6:
-        if (work->unk_148 == 0) work->unk_14A = 8;
-        ApproachValue(&work->unk_150, 10, work->unk_14A);
-        ApproachValue(&work->unk_154, 512, work->unk_14A);
-        if (--work->unk_14A <= 0) {
-            work->unk_034 = 7;
-            work->unk_148 = 0;
+        if (work->stateTimer == 0) work->steps = 8;
+        ApproachValue(&work->scaleX, 10, work->steps);
+        ApproachValue(&work->scaleY, 512, work->steps);
+        if (--work->steps <= 0) {
+            work->state = 7;
+            work->stateTimer = 0;
             m4aSongNumStart(SONG_EF_TELEP);
-        } else work->unk_148++;
+        } else work->stateTimer++;
         break;
     case 7: {
         BtlObj* target;
-        if (work->unk_148 == 0) {
-            target = func_08040D54(work);
-            work->unk_14A = 8;
+        if (work->stateTimer == 0) {
+            target = SmnCloudPickTeleportTarget(work);
+            work->steps = 8;
             if (target != 0) {
                 body->y = target->y;
-                body->z = target->unk_010;
-                body->unk_010 = target->unk_010;
+                body->z = target->groundZ;
+                body->groundZ = target->groundZ;
                 if (target->flags & 4) {
                     body->x = target->x + 0x2000;
                     body->flags |= 4;
@@ -261,24 +261,24 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 }
             }
         }
-        ApproachValue(&work->unk_150, 256, work->unk_14A);
-        ApproachValue(&work->unk_154, 256, work->unk_14A);
-        if (--work->unk_14A <= 0) {
-            work->unk_164 = 1;
-            work->unk_034 = 1;
-            work->unk_148 = 0;
-        } else work->unk_148++;
+        ApproachValue(&work->scaleX, 256, work->steps);
+        ApproachValue(&work->scaleY, 256, work->steps);
+        if (--work->steps <= 0) {
+            work->animating = 1;
+            work->state = 1;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     }
     case 1:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
         } else if ((s16)work->unk_160 == 0 && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 1, 0, work->tiles);
             work->unk_160++;
         } else if (AnimIsFinished(&work->anim)) {
-            work->unk_034 = 5;
-            work->unk_148 = 0;
+            work->state = 5;
+            work->stateTimer = 0;
             break;
         }
         if (work->anim.timer == 0) {
@@ -288,18 +288,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
                     break;
                 case 6:
-                    if (body->flags & 4 ? func_08011F78(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : func_08011F78(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
                         if (body->flags & 4) {
-                            func_08019050(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            func_08019050(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
                     break;
                 case 7:
-                    func_08019050(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 9:
                     m4aSongNumStart(SONG_VO_KU_ATTACK01);
@@ -308,52 +308,52 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             } else {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
-                    func_08019A30();
-                    if (body->flags & 4 ? func_08011F78(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : func_08011F78(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    MakeOpponentsHittable();
+                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
                         if (body->flags & 4) {
-                            func_08019050(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            func_08019050(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
                     break;
                 case 1:
-                    func_08019050(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 4:
                     m4aSongNumStart(SONG_VO_KU_ATTACK02);
                     break;
                 case 5:
-                    func_08019A30();
-                    if (body->flags & 4 ? func_08011F78(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : func_08011F78(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    MakeOpponentsHittable();
+                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(2, 50);
                         if (body->flags & 4) {
-                            func_08019050(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            func_08019050(6, 512, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 512, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
                     break;
                 case 6:
-                    func_08019050(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
                     break;
                 }
             }
         }
-        work->unk_148++;
+        work->stateTimer++;
         break;
     case 2:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 6, 0, work->tiles);
         } else if ((s16)work->unk_160 == 0 && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 7, 0, work->tiles);
             work->unk_160++;
         } else if (AnimIsFinished(&work->anim)) {
-            work->unk_034 = 5;
-            work->unk_148 = 0;
+            work->state = 5;
+            work->stateTimer = 0;
             break;
         }
         if (work->anim.timer == 0) {
@@ -363,18 +363,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
                     break;
                 case 6:
-                    if (body->flags & 4 ? func_08011F78(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : func_08011F78(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
                         if (body->flags & 4) {
-                            func_08019050(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            func_08019050(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
                     break;
                 case 7:
-                    func_08019050(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
                     break;
                 case 9:
                     m4aSongNumStart(SONG_VO_KU_ATTACK01);
@@ -383,60 +383,60 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             } else {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
-                    func_08019A30();
-                    if (body->flags & 4 ? func_08011F78(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : func_08011F78(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    MakeOpponentsHittable();
+                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
                         if (body->flags & 4) {
-                            func_08019050(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
-                            func_08019050(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
+                            SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
                         }
                     }
                     break;
                 case 1:
-                    func_08019050(6, 256, gBtlWork->x2, gBtlWork->y2);
+                    SetBattleZoom(6, 256, gBtlWork->x2, gBtlWork->y2);
                     break;
                 }
             }
         }
-        work->unk_148++;
+        work->stateTimer++;
         break;
     case 3:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 2, 1, work->tiles);
-            work->unk_14C = 0;
+            work->speed = 0;
         }
-        if (body->flags & 4) pixelX = gBtlWork->unk_0DA + 50;
-        else pixelX = gBtlWork->unk_0DC - 50;
+        if (body->flags & 4) pixelX = gBtlWork->xMin + 50;
+        else pixelX = gBtlWork->xMax - 50;
         x = pixelX * 256;
         targetZ = -0xC800;
         body->x += (x - body->x) >> 4;
         dz = (targetZ - body->z) >> 3;
-        if (dz > work->unk_14C) dz = work->unk_14C;
-        if (dz < -work->unk_14C) dz = -work->unk_14C;
+        if (dz > work->speed) dz = work->speed;
+        if (dz < -work->speed) dz = -work->speed;
         body->z += dz;
-        work->unk_14C += 128;
+        work->speed += 128;
         if ((body->z - targetZ >= 0 ? body->z - targetZ : targetZ - body->z) < 0x1000) {
-            work->unk_034 = 4;
-            work->unk_148 = 0;
-        } else work->unk_148++;
+            work->state = 4;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     case 4: {
         BtlObj* target;
-        if (work->unk_148 == 0) {
-            target = func_08040C8C(work);
+        if (work->stateTimer == 0) {
+            target = SmnCloudNextTarget(work);
             work->target = target;
             if (target == 0) {
-                work->unk_034 = 5;
-                work->unk_148 = 0;
+                work->state = 5;
+                work->stateTimer = 0;
                 break;
             }
-            work->unk_170 = target->x;
-            work->unk_174 = target->y;
-            work->unk_178 = target->z - 0x1000;
-            func_08019A30();
-            switch ((s16)work->unk_17C) {
+            work->targetX = target->x;
+            work->targetY = target->y;
+            work->targetZ = target->z - 0x1000;
+            MakeOpponentsHittable();
+            switch ((s16)work->attackCount) {
             case 0:
                 m4aSongNumStart(SONG_VO_KU_ATTACK00);
                 AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 3, 0, work->tiles);
@@ -451,17 +451,17 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 AnimChangeWithDef(gSmnCloudAnimDefs, &work->anim, 5, 0, work->tiles);
                 break;
             }
-            if (body->x < work->unk_170) body->flags &= ~4ULL;
+            if (body->x < work->targetX) body->flags &= ~4ULL;
             else body->flags |= 4;
         }
-        body->x += (work->unk_170 - body->x) >> 3;
-        body->y += (work->unk_174 - body->y) >> 3;
-        body->z += (work->unk_178 - body->z) >> 3;
+        body->x += (work->targetX - body->x) >> 3;
+        body->y += (work->targetY - body->y) >> 3;
+        body->z += (work->targetZ - body->z) >> 3;
         if (work->anim.timer == 0) {
-            switch ((s16)work->unk_17C) {
+            switch ((s16)work->attackCount) {
             case 0:
                 if (AnimGetFrame(&work->anim) == 4) {
-                    if (body->flags & 4 ? func_08011F78(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : func_08011F78(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
                     }
@@ -469,8 +469,8 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 break;
             case 1:
                 if (AnimGetFrame(&work->anim) == 3) {
-                    func_08019A30();
-                    if (body->flags & 4 ? func_08011F78(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : func_08011F78(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    MakeOpponentsHittable();
+                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
                     }
@@ -479,8 +479,8 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             case 2:
             default:
                 if (AnimGetFrame(&work->anim) == 3) {
-                    func_08019A30();
-                    if (body->flags & 4 ? func_08011F78(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : func_08011F78(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    MakeOpponentsHittable();
+                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(2, 20);
                     }
@@ -488,18 +488,18 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 break;
             }
         }
-        if (work->unk_148 > 23 && AnimIsFinished(&work->anim)) {
-            work->unk_148 = 0;
-            if ((s16)++work->unk_17C > 2) work->unk_034 = 5;
-            else work->unk_034 = 3;
-        } else work->unk_148++;
+        if (work->stateTimer > 23 && AnimIsFinished(&work->anim)) {
+            work->stateTimer = 0;
+            if ((s16)++work->attackCount > 2) work->state = 5;
+            else work->state = 3;
+        } else work->stateTimer++;
         break;
     }
     }
-    body->unk_010 = 0;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    if (body->z > body->unk_010) body->z = body->unk_010;
-    if (work->unk_164 != 0) AnimUpdate(&work->anim);
+    body->groundZ = 0;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    if (body->z > body->groundZ) body->z = body->groundZ;
+    if (work->animating != 0) AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
@@ -519,11 +519,11 @@ void task_smn_cloud_2(SmnCloudWork* work) {
     flags = GetBattleSpritePriorityFlags(body->y);
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
-    if (work->unk_150 == 256 && work->unk_154 == work->unk_150) {
+    if (work->scaleX == 256 && work->scaleY == work->scaleX) {
         if (body->flags & 4) {
             sclY = gBtlWork->scale;
             sclX = sclY;
-        } else if (gBtlWork->scale == work->unk_154) {
+        } else if (gBtlWork->scale == work->scaleY) {
             sclY = gBtlWork->scale;
             sclX = sclY;
             flags |= 1;
@@ -532,11 +532,11 @@ void task_smn_cloud_2(SmnCloudWork* work) {
             sclX = -sclY;
         }
     } else if (body->flags & 4) {
-        sclX = gBtlWork->scale * work->unk_150 >> 8;
-        sclY = gBtlWork->scale * work->unk_154 >> 8;
+        sclX = gBtlWork->scale * work->scaleX >> 8;
+        sclY = gBtlWork->scale * work->scaleY >> 8;
     } else {
-        sclX = -(gBtlWork->scale * work->unk_150 >> 8);
-        sclY = gBtlWork->scale * work->unk_154 >> 8;
+        sclX = -(gBtlWork->scale * work->scaleX >> 8);
+        sclY = gBtlWork->scale * work->scaleY >> 8;
     }
 
     if (sclY == 256 && sclX == sclY) {
@@ -549,25 +549,25 @@ void task_smn_cloud_2(SmnCloudWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_cloud_3(SmnCloudWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_08041D64(SmnBambiWork* work) {
-    work->unk_170 = work->body.x + gSineTable[work->angle] * 80;
-    work->unk_174 = work->body.y + -gSineTable[work->angle + 0x40] * 40;
+void SmnBambiPickHopTarget(SmnBambiWork* work) {
+    work->targetX = work->body.x + gSineTable[work->angle] * 80;
+    work->targetY = work->body.y + -gSineTable[work->angle + 0x40] * 40;
     work->angle += GetRandom() % 0x21 + 0x20;
 
-    if (work->unk_170 - work->body.x > 0) {
+    if (work->targetX - work->body.x > 0) {
         work->body.flags |= 4;
     } else {
         work->body.flags &= 0xFFFFFFFFFFFFFFFB;
@@ -580,24 +580,24 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_163 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_163 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    body->x = (gBtlWork->unk_0DA
-                    + GetRandom() % (gBtlWork->unk_0DC - gBtlWork->unk_0DA + 1)) << 8;
-    body->y = (gBtlWork->unk_0DE
-                    + GetRandom() % (gBtlWork->unk_0E0 - gBtlWork->unk_0DE + 1)) << 8;
-    body->z = obj->unk_01C;
-    body->unk_010 = obj->unk_01C;
+    body->x = (gBtlWork->xMin
+                    + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
+    body->y = (gBtlWork->yMin
+                    + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
+    body->z = obj->originZ;
+    body->groundZ = obj->originZ;
 
     if (obj->flags & 4) {
         body->flags = 0;
@@ -607,57 +607,57 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
         work->angle = 0x40;
     }
 
-    work->unk_162 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gBanbPalette, 32);
-    work->unk_15C = 0;
+    work->vz = 0;
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(&gSmnBambiAnimDef, &work->anim, 0, 0, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->unk_14C = 0;
     work->unk_150 = 0;
-    work->unk_154 = 10;
-    work->unk_164 = 0;
+    work->scale = 10;
+    work->animating = 0;
     work->unk_160 = 0;
     work->target = 0;
-    work->unk_16C = 0;
+    work->targetIndex = 0;
     m4aSongNumStart(SONG_VO_SR_SUMMON00);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
 
-u8 func_08041FCC(SmnBambiWork* work) {
+u8 SmnBambiApplyGravity(SmnBambiWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    body->unk_010 = 0;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_15C;
-    work->unk_15C += 0x33;
+    body->groundZ = 0;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_15C = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
     return 0;
 }
 
-BtlObj* func_08042018(SmnBambiWork* work) {
+BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
 
     if (gBtlWork->flags & 0x4000) {
-        if (work->unk_163 != 0) {
+        if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
 
-        if (p->unk_02C <= 0) {
+        if (p->hp <= 0) {
             return 0;
         }
 
@@ -682,8 +682,8 @@ BtlObj* func_08042018(SmnBambiWork* work) {
         return 0;
     }
 
-    p = list[work->unk_16C % count];
-    work->unk_16C++;
+    p = list[work->targetIndex % count];
+    work->targetIndex++;
     return p;
 }
 u8 task_smn_bambi_1(SmnBambiWork* work) {
@@ -692,7 +692,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
     SmnPrizeArgs args;
 
     body = &work->body;
-    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -700,84 +700,84 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->unk_163 != 0) {
-            func_0802F284(body->x, body->y, body->z);
+        if (work->mainSide != 0) {
+            BtlMapFollowPosition(body->x, body->y, body->z);
         }
 
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->unk_154, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->steps);
 
-        if (work->unk_14A > 0) {
-            work->unk_148++;
-            work->unk_14A--;
+        if (work->steps > 0) {
+            work->stateTimer++;
+            work->steps--;
         } else {
-            if (work->unk_162 == 3) {
+            if (work->variant == 3) {
                 work->state = 2;
             } else {
                 work->state = 1;
             }
 
-            work->unk_148 = 0;
-            work->unk_164 = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         }
         break;
     case 3:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
         do {
-            ApproachValue(&work->unk_154, 25, work->unk_14A);
+            ApproachValue(&work->scale, 25, work->steps);
         } while (0);
 
-        if (work->unk_14A <= 0) {
+        if (work->steps <= 0) {
             return 0;
         }
 
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 2:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimStart(&work->anim, 0, 0);
-            work->unk_15C = -0x480;
+            work->vz = -0x480;
             m4aSongNumStart(SONG_BTL_BBI_JUMP);
-            work->target = func_08042018(work);
-            work->unk_14A = 0;
+            work->target = SmnBambiNextTarget(work);
+            work->steps = 0;
         }
 
-        if (work->unk_15C > 0) {
-            func_08019A30();
+        if (work->vz > 0) {
+            MakeOpponentsHittable();
 
-            if (func_08011F78(0x76, body->x, body->y, body->z - 0x400, 8, 8, 2) != 0) {
-                func_0801416C(body->x, body->y, body->z);
+            if (ApplyAttackBox(0x76, body->x, body->y, body->z - 0x400, 8, 8, 2) != 0) {
+                BgFxStartFriendHit(body->x, body->y, body->z);
                 AnimStart(&work->anim, 0, 0);
-                work->unk_15C = -0x400;
+                work->vz = -0x400;
                 m4aSongNumStart(SONG_BTL_BBI_JUMP);
                 m4aSongNumStart(SONG_BTL_BANBIHIT);
-                work->target = func_08042018(work);
-                work->unk_14A++;
+                work->target = SmnBambiNextTarget(work);
+                work->steps++;
             }
         }
 
-        if (func_08041FCC(work)) {
+        if (SmnBambiApplyGravity(work)) {
             AnimStart(&work->anim, 0, 0);
-            work->unk_15C = -0x480;
+            work->vz = -0x480;
             m4aSongNumStart(SONG_BTL_BBI_JUMP);
-            work->target = func_08042018(work);
-            work->unk_14A++;
+            work->target = SmnBambiNextTarget(work);
+            work->steps++;
         }
 
-        if ((work->unk_15C > 0 && work->unk_14A > 7) || work->target == 0) {
+        if ((work->vz > 0 && work->steps > 7) || work->target == 0) {
             work->state = 3;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
             if (body->x < work->target->x) {
                 body->flags |= 4;
@@ -788,65 +788,65 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             body->x += (work->target->x - body->x) >> 4;
             body->y += (work->target->y - body->y) >> 4;
             ClampBattlePosition(&body->x, &body->y, -16, 0);
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 1:
         if (work->unk_14C == 0) {
             AnimStart(&work->anim, 0, 0);
-            func_08041D64(work);
-            work->unk_14A = 30;
+            SmnBambiPickHopTarget(work);
+            work->steps = 30;
         }
 
-        if (work->unk_162 == 2) {
-            func_08011F78(0x75, body->x, body->y, body->z, 8, 8, 8);
+        if (work->variant == 2) {
+            ApplyAttackBox(0x75, body->x, body->y, body->z, 8, 8, 8);
         } else {
-            func_08011F78(0x74, body->x, body->y, body->z, 8, 8, 8);
+            ApplyAttackBox(0x74, body->x, body->y, body->z, 8, 8, 8);
         }
 
         if (work->unk_14C > 4) {
             if (work->unk_14C == 5) {
-                work->unk_15C = -0x300;
+                work->vz = -0x300;
                 m4aSongNumStart(SONG_BTL_BBI_JUMP);
             }
 
-            if (work->unk_14A > 0) {
-                ApproachValueHalfSteps(&body->x, work->unk_170, work->unk_14A);
-                ApproachValueHalfSteps(&body->y, work->unk_174, work->unk_14A);
-                work->unk_14A--;
+            if (work->steps > 0) {
+                ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
+                ApproachValueHalfSteps(&body->y, work->targetY, work->steps);
+                work->steps--;
             }
         }
 
-        func_08041FCC(work);
+        SmnBambiApplyGravity(work);
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
         if (AnimIsFinished(&work->anim)) {
             work->unk_14C = 0;
-            work->unk_148++;
+            work->stateTimer++;
             args.x = body->x;
             args.y = body->y;
             args.z = body->z;
 
-            if (work->unk_162 == 0) {
-                args.unk_12 = 1;
+            if (work->variant == 0) {
+                args.kind = 1;
             } else {
-                args.unk_12 = 2;
+                args.kind = 2;
             }
 
-            args.unk_14 = 0;
+            args.noTimeout = 0;
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, &args);
         } else {
             work->unk_14C++;
         }
 
-        if (work->unk_148 > 4) {
+        if (work->stateTimer > 4) {
             work->state = 3;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         }
         break;
     }
 
-    if (work->unk_164 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
 
@@ -871,8 +871,8 @@ void task_smn_bambi_2(SmnBambiWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_154 == gBtlWork->scale) {
-        sclY = work->unk_154;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -880,8 +880,8 @@ void task_smn_bambi_2(SmnBambiWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_154 >> 8;
-    sclY = sclY * work->unk_154 >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -893,14 +893,14 @@ void task_smn_bambi_2(SmnBambiWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_bambi_3(SmnBambiWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_163 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -913,25 +913,25 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_153 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_153 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    body->x = obj->unk_014;
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C - 0x3000;
+    body->x = obj->originX;
+    body->y = obj->originY;
+    body->z = obj->originZ - 0x3000;
 #ifdef VERSION_EU
-    body->unk_010 = 0;
+    body->groundZ = 0;
 #else
-    body->unk_010 = obj->unk_01C;
+    body->groundZ = obj->originZ;
 #endif
 
     if (obj->flags & 4) {
@@ -940,60 +940,60 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
         body->flags = 0x80000;
     }
 
-    work->unk_152 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gTinkPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnTinkAnimDefs, &work->anim, 0, 1, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
-    work->unk_14C = 10;
-    work->unk_154 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->scale = 10;
+    work->animating = 0;
     work->unk_150 = 0;
-    work->unk_16C = 0;
-    work->unk_170 = 0;
+    work->flyAngle = 0;
+    work->frameCount = 0;
 
-    if (work->unk_153 != 0) {
+    if (work->mainSide != 0) {
         work->actor = gBtlWork->actor;
     } else {
         work->actor = gRikuBtlWork->actor;
     }
 
     m4aSongNumStart(SONG_VO_SR_SUMMON00);
-    work->unk_178 = work->actor->unk_02C << 8;
+    work->healHp = work->actor->hp << 8;
 
-    switch (args->unk_00) {
+    switch (args->variant) {
     case 0:
         t = 0x4C;
-        work->unk_16E = 0xB4;
+        work->healFrames = 0xB4;
         break;
     case 1:
         t = 0x99;
-        work->unk_16E = 0x12C;
+        work->healFrames = 0x12C;
         break;
     case 2:
     default:
         t = 0x100;
-        work->unk_16E = 0x1A4;
+        work->healFrames = 0x1A4;
         break;
     }
 
-    if (work->actor->btl->unk_0F4 == 0x27) {
+    if (work->actor->btl->hcEffect == 0x27) {
         t = 332 * t >> 8;
     }
 
-    work->unk_174 = work->actor->unk_02E * t + work->unk_178;
+    work->healTarget = work->actor->maxHp * t + work->healHp;
 
-    if (work->unk_174 > work->actor->unk_02E << 8) {
-        work->unk_174 = work->actor->unk_02E << 8;
+    if (work->healTarget > work->actor->maxHp << 8) {
+        work->healTarget = work->actor->maxHp << 8;
     }
 
     TaskPoolInit(&work->tasks, 15);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
 
-void func_080428E8(SmnTinkWork* work) {
-    if (work->unk_170 % 3 == 0) {
+void SmnTinkSpawnSparkle(SmnTinkWork* work) {
+    if (work->frameCount % 3 == 0) {
         TaskCreate(&work->tasks, &gTaskDescSmnTinkeff, &work->body);
     }
 }
@@ -1007,67 +1007,67 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
     s32 t;
 
     body = &work->body;
-    if ((work->unk_153 != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
         return 0;
     }
 
-    if (work->unk_16E <= 0) {
+    if (work->healFrames <= 0) {
         if (work->state != 1) {
             work->state = 1;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         }
     } else {
-        ApproachValue(&work->unk_178, work->unk_174, work->unk_16E);
-        work->actor->unk_02C = work->unk_178 >> 8;
-        work->unk_16E--;
+        ApproachValue(&work->healHp, work->healTarget, work->healFrames);
+        work->actor->hp = work->healHp >> 8;
+        work->healFrames--;
     }
 
     switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->unk_14C, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->steps);
 
-        if (work->unk_14A <= 0) {
+        if (work->steps <= 0) {
             work->state = 2;
-            work->unk_148 = 0;
-            work->unk_154 = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
             m4aSongNumStart(SONG_EF_TINK_LOOP);
         } else {
-            work->unk_148++;
-            work->unk_14A--;
+            work->stateTimer++;
+            work->steps--;
         }
         break;
     case 1:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 20;
+        if (work->stateTimer == 0) {
+            work->steps = 20;
             m4aSongNumStop(SONG_EF_TINK_LOOP);
-            func_080140E0(body->x, body->y, body->z);
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->unk_14C, 25, work->unk_14A);
+        ApproachValue(&work->scale, 25, work->steps);
 
-        if (work->unk_14A <= 0) {
+        if (work->steps <= 0) {
             return 0;
         }
 
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 2:
-        func_080428E8(work);
+        SmnTinkSpawnSparkle(work);
 
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnTinkAnimDefs, &work->anim, 0, 1, work->tiles);
-            work->unk_160 = body->z;
-            work->unk_14A = 30;
+            work->hoverZ = body->z;
+            work->steps = 30;
         } else {
-            body->z += (work->unk_160 + gSineTable[work->unk_148 & 0xFF] * 12
+            body->z += (work->hoverZ + gSineTable[work->stateTimer & 0xFF] * 12
                              - body->z) >> 2;
         }
 
@@ -1077,24 +1077,24 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             body->flags &= 0xFFFFFFFFFFFFFFFB;
         }
 
-        if (work->unk_14A-- <= 0) {
-            work->unk_148 = 0;
+        if (work->steps-- <= 0) {
+            work->stateTimer = 0;
             work->state = 3;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 3:
-        func_080428E8(work);
+        SmnTinkSpawnSparkle(work);
 
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnTinkAnimDefs, &work->anim, 1, 1, work->tiles);
         }
 
         p = work->actor;
-        x = p->x + gSineTable[((u16)work->unk_148 * 4) & 0xFF] * 32;
-        y = p->y + gSineTable[(((u16)work->unk_148 * 4) & 0xFF) + 64] * -16;
-        z = (p->z - 0x1E00) + gSineTable[(u16)work->unk_148 * 2 & 0xFF] * 16;
+        x = p->x + gSineTable[((u16)work->stateTimer * 4) & 0xFF] * 32;
+        y = p->y + gSineTable[(((u16)work->stateTimer * 4) & 0xFF) + 64] * -16;
+        z = (p->z - 0x1E00) + gSineTable[(u16)work->stateTimer * 2 & 0xFF] * 16;
 
         if (x < body->x) {
             body->flags |= 4;
@@ -1121,68 +1121,68 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
 
         body->y += d;
         body->z += (z - body->z) >> 3;
-        t = work->unk_148 % 60;
+        t = work->stateTimer % 60;
 
         if (t == 0) {
             switch (GetRandom() % 3) {
             case 0:
-                work->unk_168 = 0x280;
+                work->speed = 0x280;
                 work->state = 4;
-                work->unk_148 = t;
+                work->stateTimer = t;
                 break;
             case 1:
                 work->state = 2;
-                work->unk_148 = t;
+                work->stateTimer = t;
                 break;
             case 2:
             default:
-                work->unk_148++;
+                work->stateTimer++;
                 break;
             }
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 4:
-        func_080428E8(work);
+        SmnTinkSpawnSparkle(work);
 
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnTinkAnimDefs, &work->anim, 2, 0, work->tiles);
 
             if (body->flags & 4) {
-                work->unk_16C = 0xC0;
+                work->flyAngle = 0xC0;
             } else {
-                work->unk_16C = 0x40;
+                work->flyAngle = 0x40;
             }
         }
 
-        body->x += gSineTable[(u8)work->unk_16C] * work->unk_168 >> 8;
-        body->z += -gSineTable[(u8)work->unk_16C + 0x40] * work->unk_168 >> 8;
+        body->x += gSineTable[(u8)work->flyAngle] * work->speed >> 8;
+        body->z += -gSineTable[(u8)work->flyAngle + 0x40] * work->speed >> 8;
 
         if (body->flags & 4) {
-            work->unk_16C += 7;
+            work->flyAngle += 7;
         } else {
-            work->unk_16C -= 7;
+            work->flyAngle -= 7;
         }
 
         if (AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(gSmnTinkAnimDefs, &work->anim, 1, 1, work->tiles);
             work->state = 3;
-            work->unk_148 = 1;
+            work->stateTimer = 1;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
 
     ClampBattlePosition(&body->x, &body->y, -16, 0);
 
-    if (work->unk_154 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
 
     TaskPoolUpdate(&work->tasks);
-    work->unk_170++;
+    work->frameCount++;
     return 1;
 }
 
@@ -1203,8 +1203,8 @@ void task_smn_tink_2(SmnTinkWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_14C == gBtlWork->scale) {
-        sclY = work->unk_14C;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -1212,8 +1212,8 @@ void task_smn_tink_2(SmnTinkWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_14C >> 8;
-    sclY = sclY * work->unk_14C >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -1225,14 +1225,14 @@ void task_smn_tink_2(SmnTinkWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_tink_3(SmnTinkWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     m4aSongNumStop(SONG_EF_TINK_LOOP);
     ReleaseObjPalette(work->palette);
@@ -1298,22 +1298,22 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_155 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
-        work->unk_155 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->unk_014;
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C;
-    body->unk_010 = obj->unk_01C;
+    body->x = obj->originX;
+    body->y = obj->originY;
+    body->z = obj->originZ;
+    body->groundZ = obj->originZ;
 
     if (obj->flags & 4) {
         body->flags = 0x20004;
@@ -1321,16 +1321,16 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
         body->flags = 0x20000;
     }
 
-    work->unk_154 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gShinbaPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(&gSmnSimbaAnimDef, &work->anim, 0, 0, work->tiles);
-    work->unk_034 = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
+    work->state = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->unk_14C = 0;
-    work->unk_150 = 10;
-    work->unk_156 = 0;
+    work->scale = 10;
+    work->animating = 0;
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -1340,7 +1340,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     BtlWork* obj;
 
     body = &work->body;
-    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         do {
@@ -1348,56 +1348,56 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         } while (0);
     }
 
-    func_0802F284(body->x, body->y, body->z);
+    BtlMapFollowPosition(body->x, body->y, body->z);
 
-    switch (work->unk_034) {
+    switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->unk_150, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->steps);
 
-        if (work->unk_14A > 0) {
-            work->unk_148++;
-            work->unk_14A--;
+        if (work->steps > 0) {
+            work->stateTimer++;
+            work->steps--;
         } else {
-            work->unk_034 = 1;
-            work->unk_148 = 0;
-            work->unk_156 = 1;
+            work->state = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         }
         break;
     case 2:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->unk_150, 25, work->unk_14A);
+        ApproachValue(&work->scale, 25, work->steps);
 
-        if (work->unk_14A <= 0) {
+        if (work->steps <= 0) {
             return 0;
         }
 
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 1:
-        switch (work->unk_148) {
+        switch (work->stateTimer) {
         case 0:
             if (body->flags & 4) {
-                func_08019050(30, 0x133, body->x - 0x1400,
+                SetBattleZoom(30, 0x133, body->x - 0x1400,
                               body->y + body->z - 0x1400);
             } else {
-                func_08019050(30, 0x133, body->x + 0x1400,
+                SetBattleZoom(30, 0x133, body->x + 0x1400,
                               body->y + body->z - 0x1400);
             }
             break;
         case 50:
-            switch (work->unk_154) {
+            switch (work->variant) {
             case 0:
                 m4aSongNumStart(SONG_BTL_SIMBA_ROA0);
                 break;
@@ -1410,42 +1410,42 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 break;
             }
 
-            func_0802F1E8();
+            BtlMapStartShake();
             FadeFromAmount(5, 8, 20);
-            func_08019050(30, 0xCC, 0x10000, 0x15E00);
+            SetBattleZoom(30, 0xCC, 0x10000, 0x15E00);
 
             if (body->flags & 4) {
-                func_08014FDC(body->x - 0x1400, body->y + body->z - 0x1400, 1);
+                BgFxStartShockwave(body->x - 0x1400, body->y + body->z - 0x1400, 1);
             } else {
-                func_08014FDC(body->x + 0x1400, body->y + body->z - 0x1400, 0);
+                BgFxStartShockwave(body->x + 0x1400, body->y + body->z - 0x1400, 0);
             }
 
-            switch (work->unk_154) {
+            switch (work->variant) {
             case 0:
                 if (body->flags & 4) {
-                    func_08011F78(0x99, body->x - 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x99, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
-                    func_08011F78(0x99, body->x + 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x99, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
                 break;
             case 1:
                 if (body->flags & 4) {
-                    func_08011F78(0x9A, body->x - 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x9A, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
-                    func_08011F78(0x9A, body->x + 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x9A, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
                 break;
             case 2:
             default:
                 if (body->flags & 4) {
-                    func_08011F78(0x9B, body->x - 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x9B, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
-                    func_08011F78(0x9B, body->x + 0x8000, body->y, body->z,
+                    ApplyAttackBox(0x9B, body->x + 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 }
                 break;
@@ -1454,23 +1454,23 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         }
 
         if (AnimIsFinished(&work->anim)) {
-            func_08019050(8, 256, gBtlWork->x2, gBtlWork->y2);
-            work->unk_034 = 2;
-            work->unk_148 = 0;
+            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            work->state = 2;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
 
-    if (work->unk_156 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
 
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -1494,8 +1494,8 @@ void task_smn_simba_2(SmnSimbaWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_150 == gBtlWork->scale) {
-        sclY = work->unk_150;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -1503,8 +1503,8 @@ void task_smn_simba_2(SmnSimbaWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_150 >> 8;
-    sclY = sclY * work->unk_150 >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -1516,14 +1516,14 @@ void task_smn_simba_2(SmnSimbaWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_simba_3(SmnSimbaWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1535,13 +1535,13 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_153 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_153 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
@@ -1550,7 +1550,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     body->x = obj->x;
     body->y = obj->y;
     body->z = obj->z - 0x2200;
-    body->unk_010 = obj->unk_010;
+    body->groundZ = obj->groundZ;
 
     if (obj->flags & 4) {
         body->flags = 4;
@@ -1558,18 +1558,18 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
         body->flags = 0;
     }
 
-    work->unk_152 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gMushuPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnMushuAnimDefs, &work->anim, 0, 1, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
+    work->stateTimer = 0;
     work->unk_14A = 0;
-    work->unk_14C = 10;
-    work->unk_154 = 0;
+    work->scale = 10;
+    work->animating = 0;
     work->unk_150 = 0;
 
-    if (work->unk_153 != 0) {
+    if (work->mainSide != 0) {
         work->actor = gBtlWork->actor;
     } else {
         work->actor = gRikuBtlWork->actor;
@@ -1593,7 +1593,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     u16 v2;
 
     body = &work->body;
-    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -1614,37 +1614,37 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->unk_14C, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->unk_14A);
 
         if (work->unk_14A > 0) {
-            work->unk_148++;
+            work->stateTimer++;
             work->unk_14A--;
         } else {
             work->state = 3;
-            work->unk_148 = 0;
-            work->unk_154 = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         }
         break;
     case 1:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->unk_14C, 25, work->unk_14A);
+        ApproachValue(&work->scale, 25, work->unk_14A);
 
         if (work->unk_14A <= 0) {
             return 0;
         }
 
-        work->unk_148++;
+        work->stateTimer++;
         work->unk_14A--;
         break;
     case 3:
@@ -1652,14 +1652,14 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 2;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         }
         break;
     case 2:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnMushuAnimDefs, &work->anim, 3, 1, work->tiles);
 
-            switch (work->unk_152) {
+            switch (work->variant) {
             case 0:
                 work->unk_14A = 0x78;
                 break;
@@ -1683,7 +1683,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             y = body->y;
             z = 0;
 
-            switch (work->unk_152) {
+            switch (work->variant) {
             case 0:
                 n = 0x9D;
                 break;
@@ -1696,14 +1696,14 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
                 break;
             }
 
-            func_08019A30();
+            MakeOpponentsHittable();
             m4aSongNumStart(SONG_EF_MU_FIRE);
 
             if (body->flags & 4) {
-                func_08012E44(0, body->x - 0x3800, body->y, body->z - 0x800,
+                BgFxStartFire(0, body->x - 0x3800, body->y, body->z - 0x800,
                               x, y, z, 1, n);
             } else {
-                func_08012E44(0, body->x + 0x3800, body->y, body->z - 0x800,
+                BgFxStartFire(0, body->x + 0x3800, body->y, body->z - 0x800,
                               x, y, z, 0, n);
             }
         }
@@ -1714,16 +1714,16 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             BgFxAddPosition(body->x - px, body->y - py, body->z - pz);
         }
 
-        if (work->unk_148 > work->unk_14A) {
+        if (work->stateTimer > work->unk_14A) {
             work->state = 1;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
 
-    if (work->unk_154 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
 
@@ -1748,8 +1748,8 @@ void task_smn_mushu_2(SmnMushuWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_14C == gBtlWork->scale) {
-        sclY = work->unk_14C;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -1757,8 +1757,8 @@ void task_smn_mushu_2(SmnMushuWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_14C >> 8;
-    sclY = sclY * work->unk_14C >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -1776,7 +1776,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
 void task_smn_mushu_3(SmnMushuWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_153 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1788,22 +1788,22 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_155 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
-        work->unk_155 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->unk_014;
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C;
-    body->unk_010 = obj->unk_01C;
+    body->x = obj->originX;
+    body->y = obj->originY;
+    body->z = obj->originZ;
+    body->groundZ = obj->originZ;
 
     if (obj->flags & 4) {
         body->flags = 0x20004;
@@ -1811,16 +1811,16 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
         body->flags = 0x20000;
     }
 
-    work->unk_154 = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gDamboPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->unk_14C = 0;
-    work->unk_150 = 10;
-    work->unk_156 = 0;
+    work->scale = 10;
+    work->animating = 0;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -1830,105 +1830,105 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
     BtlWork* obj;
 
     body = &work->body;
-    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
     }
 
-    func_0802F284(body->x, body->y, body->z);
+    BtlMapFollowPosition(body->x, body->y, body->z);
 
     switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->unk_150, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->steps);
 
-        if (work->unk_14A > 0) {
-            work->unk_148++;
-            work->unk_14A--;
+        if (work->steps > 0) {
+            work->stateTimer++;
+            work->steps--;
         } else {
             work->state = 2;
-            work->unk_148 = 0;
-            work->unk_156 = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         }
         break;
     case 1:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->unk_150, 25, work->unk_14A);
+        ApproachValue(&work->scale, 25, work->steps);
 
-        if (work->unk_14A <= 0) {
+        if (work->steps <= 0) {
             return 0;
         }
 
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 2:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 3;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 3:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnDumboAnimDefs, &work->anim, 1, 1, work->tiles);
 
             if (body->flags & 4) {
-                func_08015B50(work->unk_154, body->x - 0x1C00, body->y,
+                BgFxStartDumboSplash(work->variant, body->x - 0x1C00, body->y,
                               body->z - 0x1B00, 0, 0x9C);
             } else {
-                func_08015B50(work->unk_154, body->x + 0x1C00, body->y,
+                BgFxStartDumboSplash(work->variant, body->x + 0x1C00, body->y,
                               body->z - 0x1B00, 1, 0x9C);
             }
 
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);
-        } else if (func_080128EC() == 0) {
+        } else if (BgFxIsActive() == 0) {
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
             work->state = 4;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
             break;
         }
 
-        work->unk_148++;
+        work->stateTimer++;
         break;
     case 4:
-        if (work->unk_148 == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gSmnDumboAnimDefs, &work->anim, 2, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 1;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
 
-    if (work->unk_156 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
 
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -1952,8 +1952,8 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_150 == gBtlWork->scale) {
-        sclY = work->unk_150;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -1961,8 +1961,8 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_150 >> 8;
-    sclY = sclY * work->unk_150 >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -1974,14 +1974,14 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_dumbo_3(SmnDumboWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_155 != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
     ReleaseObjPalette(work->palette);
@@ -1994,13 +1994,13 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_151 = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
-        work->unk_151 = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
@@ -2008,58 +2008,58 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
 
     if (obj->flags & 4) {
         body->flags = 0x20004;
-        body->x = obj->unk_014 + 0x3700;
+        body->x = obj->originX + 0x3700;
     } else {
         body->flags = 0x20000;
-        body->x = obj->unk_014 - 0x3700;
+        body->x = obj->originX - 0x3700;
     }
 
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C - 0x2800;
-    body->unk_010 = obj->unk_01C;
-    work->unk_150 = args->unk_00;
+    body->y = obj->originY;
+    body->z = obj->originZ - 0x2800;
+    body->groundZ = obj->originZ;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gGeniePalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
-    work->unk_14C = 10;
-    work->unk_152 = 0;
-    work->unk_160 = 0;
-    work->unk_164 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->scale = 10;
+    work->animating = 0;
+    work->speedX = 0;
+    work->speedY = 0;
 
-    switch (args->unk_00) {
+    switch (args->variant) {
     case 0:
-        work->unk_15A = 1;
+        work->attacksLeft = 1;
         break;
     case 1:
-        work->unk_15A = 2;
+        work->attacksLeft = 2;
         break;
     case 2:
     default:
-        work->unk_15A = 3;
+        work->attacksLeft = 3;
         break;
     }
 
-    work->unk_158 = 0;
+    work->targetIndex = 0;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
 
-BtlObj* func_08044450(SmnGenieWork* work) {
+BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
 
     if (gBtlWork->flags & 0x4000) {
-        if (work->unk_151 != 0) {
+        if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
 
-        if (p->unk_02C <= 0) {
+        if (p->hp <= 0) {
             return 0;
         }
 
@@ -2084,12 +2084,12 @@ BtlObj* func_08044450(SmnGenieWork* work) {
         return 0;
     }
 
-    p = list[work->unk_158 % count];
-    work->unk_158++;
+    p = list[work->targetIndex % count];
+    work->targetIndex++;
     return p;
 }
 
-void func_08044518(SmnGenieWork* work) {
+void SmnGenieFollowTarget(SmnGenieWork* work) {
     BtlObj* body;
     BtlObj* obj;
     s32 tx;
@@ -2118,36 +2118,36 @@ void func_08044518(SmnGenieWork* work) {
     }
 
     ty = obj->y;
-    zt = body->unk_010 - 0x200;
+    zt = body->groundZ - 0x200;
     v = (tx - body->x) >> 3;
-    lim = work->unk_160;
+    lim = work->speedX;
 
     if (v > lim) {
         v = lim;
-        work->unk_160 = lim + 0x4C;
+        work->speedX = lim + 0x4C;
     } else if (v < -lim) {
         v = -lim;
-        work->unk_160 = lim + 0x4C;
+        work->speedX = lim + 0x4C;
     } else {
-        work->unk_160 = abs(v);
+        work->speedX = abs(v);
     }
 
     body->x += v;
     v = (ty - body->y) >> 3;
-    lim = work->unk_164;
+    lim = work->speedY;
 
     if (v > lim) {
         v = lim;
-        work->unk_164 = lim + 0x4C;
+        work->speedY = lim + 0x4C;
     } else if (v < -lim) {
         v = -lim;
-        work->unk_164 = lim + 0x4C;
+        work->speedY = lim + 0x4C;
     } else {
-        work->unk_164 = abs(v);
+        work->speedY = abs(v);
     }
 
     body->y += v;
-    body->z += (zt - gSineTable[(work->unk_148 * 2) & 0xFF] * 8 - body->z) >> 3;
+    body->z += (zt - gSineTable[(work->stateTimer * 2) & 0xFF] * 8 - body->z) >> 3;
 }
 u8 task_smn_genie_1(SmnGenieWork* work) {
     BtlObj* body = &work->body;
@@ -2155,72 +2155,72 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
     s32 x;
     s32 y;
     s32 z;
-    if ((work->unk_151 != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) {
         return 0;
     }
-    func_0802F284(body->x, body->y, body->z);
+    BtlMapFollowPosition(body->x, body->y, body->z);
     if (gBtlWork->boundsCallback != 0) {
-        gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &body->unk_010);
-        if (body->z > body->unk_010) {
-            body->z = body->unk_010;
+        gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &body->groundZ);
+        if (body->z > body->groundZ) {
+            body->z = body->groundZ;
         }
     }
     switch (work->state) {
     case 0:
-        if ((s16)work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if ((s16)work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
-        ApproachValue(&work->unk_14C, 256, work->unk_14A);
-        if (work->unk_14A <= 0) {
+        ApproachValue(&work->scale, 256, work->steps);
+        if (work->steps <= 0) {
             work->state = 2;
-            work->unk_148 = 0;
-            work->unk_152 = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         } else {
-            work->unk_148++;
-            work->unk_14A--;
+            work->stateTimer++;
+            work->steps--;
         }
         break;
     case 1:
-        if ((s16)work->unk_148 == 0) {
+        if ((s16)work->stateTimer == 0) {
             AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
-        ApproachValue(&work->unk_14C, 25, work->unk_14A);
-        if (work->unk_14A <= 0) {
+        ApproachValue(&work->scale, 25, work->steps);
+        if (work->steps <= 0) {
             return 0;
         }
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 2:
-        if ((s16)work->unk_148 == 0) {
+        if ((s16)work->stateTimer == 0) {
             gBtlWork->flags |= 0x40000;
             AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         }
-        height = ((u32)gSineTable[(work->unk_148 * 2) & 255] << 3) + 0xC00;
-        body->z += (body->unk_010 - height - body->z) >> 3;
-        if ((s16)work->unk_148 > 10) {
-            work->target = func_08044450(work);
-            if (work->target == 0 || (s16)work->unk_15A-- <= 0) {
+        height = ((u32)gSineTable[(work->stateTimer * 2) & 255] << 3) + 0xC00;
+        body->z += (body->groundZ - height - body->z) >> 3;
+        if ((s16)work->stateTimer > 10) {
+            work->target = SmnGenieNextTarget(work);
+            if (work->target == 0 || (s16)work->attacksLeft-- <= 0) {
                 work->state = 1;
-                work->unk_148 = 0;
+                work->stateTimer = 0;
             } else {
                 work->state = 3;
-                work->unk_148 = 0;
+                work->stateTimer = 0;
             }
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 3:
         AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
-        func_08044518(work);
-        if ((s16)work->unk_148 > 40) {
-            work->unk_15C = 0;
+        SmnGenieFollowTarget(work);
+        if ((s16)work->stateTimer > 40) {
+            work->fired = 0;
             switch ((u16)(GetRandom() % 3)) {
             case 0:
                 work->state = 4;
@@ -2234,18 +2234,18 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 break;
             }
             gBtlWork->flags &= ~0x40000ULL;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 4:
-        if ((s16)work->unk_148 == 0) {
+        if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK00);
             AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
-        if (work->unk_15C == 0) {
-            func_08044518(work);
+        if (work->fired == 0) {
+            SmnGenieFollowTarget(work);
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
                 if (work->target != 0) {
                     x = work->target->x;
@@ -2261,29 +2261,29 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     z = 0;
                 }
                 if (body->flags & 4) {
-                    func_08015834(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
+                    BgFxStartThunder(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 } else {
-                    func_08015834(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
+                    BgFxStartThunder(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 }
-                work->unk_15C = 1;
+                work->fired = 1;
             }
         } else {
             BgAnimIsStopped();
         }
-        if (work->unk_15C != 0 && !func_080128EC()) {
+        if (work->fired != 0 && !BgFxIsActive()) {
             work->state = 2;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 5:
-        if ((s16)work->unk_148 == 0) {
+        if ((s16)work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_GE_ATTACK01);
             AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
-        if (work->unk_15C == 0) {
-            func_08044518(work);
+        if (work->fired == 0) {
+            SmnGenieFollowTarget(work);
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
                 if (work->target != 0) {
                     x = work->target->x;
@@ -2299,36 +2299,36 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     z = 0;
                 }
                 if (body->flags & 4) {
-                    func_08014D78(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
+                    BgFxStartGravity(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
                 } else {
-                    func_08014D78(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
+                    BgFxStartGravity(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
                 }
-                work->unk_15C = 1;
+                work->fired = 1;
                 FadeStartOut(6, 8);
             }
         } else {
             BgAnimIsStopped();
         }
-        if (work->unk_15C != 0 && !func_080128EC()) {
+        if (work->fired != 0 && !BgFxIsActive()) {
             FadeStartIn(6, 8);
             work->state = 2;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     case 6:
-        if ((s16)work->unk_148 == 0) {
+        if ((s16)work->stateTimer == 0) {
             AnimChangeWithDef(gSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
             m4aSongNumStart(SONG_VO_GE_ATTACK02);
         }
-        if (work->unk_15C == 0) {
-            func_08044518(work);
+        if (work->fired == 0) {
+            SmnGenieFollowTarget(work);
             if (AnimIsFinished(&work->anim)) {
                 if (work->target != 0) {
                     x = work->target->x;
                     y = work->target->y;
-                    z = work->target->z - work->target->unk_0A2 * 256;
+                    z = work->target->z - work->target->centerHeight * 256;
                 } else {
                     if (body->flags & 4) {
                         x = body->x - 0x5000;
@@ -2338,20 +2338,20 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = body->y;
                     z = -0x1000;
                 }
-                func_080148E0(1, x, y, z, 147);
-                work->unk_15C = 1;
+                BgFxStartStop(1, x, y, z, 147);
+                work->fired = 1;
             }
         }
-        if (work->unk_15C != 0 && !func_080128EC()) {
+        if (work->fired != 0 && !BgFxIsActive()) {
             work->state = 2;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
     ClampBattlePosition(&body->x, &body->y, 0, -10);
-    if (work->unk_152 != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
     TaskPoolUpdate(&work->tasks);
@@ -2375,8 +2375,8 @@ void task_smn_genie_2(SmnGenieWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_14C == gBtlWork->scale) {
-        sclY = work->unk_14C;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -2384,8 +2384,8 @@ void task_smn_genie_2(SmnGenieWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_14C >> 8;
-    sclY = sclY * work->unk_14C >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -2397,14 +2397,14 @@ void task_smn_genie_2(SmnGenieWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_genie_3(SmnGenieWork* work) {
     gBtlWork->flags |= 0x40000;
 
-    if (work->unk_151 != 0) {
+    if (work->mainSide != 0) {
         gBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
     } else {
         gRikuBtlWork->flags &= 0xFFFFFFFFFFDFFFFF;
@@ -2420,49 +2420,49 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_15D = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         obj = gBtlWork->actor;
         work->tiles = gBtlWork->tiles;
     } else {
-        work->unk_15D = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         obj = gRikuBtlWork->actor;
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    body->x = obj->unk_014;
-    body->y = obj->unk_018;
-    body->z = obj->unk_01C - 0x4000;
-    body->unk_010 = 0;
+    body->x = obj->originX;
+    body->y = obj->originY;
+    body->z = obj->originZ - 0x4000;
+    body->groundZ = 0;
     body->flags = obj->flags & 4;
-    work->unk_15C = args->unk_00;
+    work->variant = args->variant;
     work->palette = LoadObjPalette(gMickeyPalette, 32);
-    work->unk_158 = 0;
+    work->vz = 0;
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gSmnKingAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
-    work->unk_148 = 0;
-    work->unk_14A = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->unk_14C = 0;
-    work->unk_154 = 10;
-    work->unk_15E = 0;
+    work->scale = 10;
+    work->animating = 0;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
 
-u8 func_08044F98(SmnKingWork* work) {
+u8 SmnKingApplyGravity(SmnKingWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_158;
-    work->unk_158 += 0x33;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_158 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
@@ -2472,96 +2472,96 @@ u8 func_08044F98(SmnKingWork* work) {
 u8 task_smn_king_1(SmnKingWork* work) {
     BtlObj* body = &work->body;
     BtlWork* obj;
-    obj = work->unk_15D != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     if (obj->flags & 0x40000000) {
         return 0;
     }
-    func_0802F284(body->x, body->y, body->z);
+    BtlMapFollowPosition(body->x, body->y, body->z);
     switch (work->state) {
     case 0:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
-        ApproachValue(&work->unk_154, 256, work->unk_14A);
-        if (work->unk_14A <= 0) {
+        ApproachValue(&work->scale, 256, work->steps);
+        if (work->steps <= 0) {
             work->state = 2;
-            work->unk_148 = 0;
-            work->unk_15E = 1;
+            work->stateTimer = 0;
+            work->animating = 1;
         } else {
-            work->unk_148++;
-            work->unk_14A--;
+            work->stateTimer++;
+            work->steps--;
         }
         break;
     case 1:
-        if (work->unk_148 == 0) {
-            work->unk_14A = 30;
-            func_080140E0(body->x, body->y, body->z);
+        if (work->stateTimer == 0) {
+            work->steps = 30;
+            BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
-        ApproachValue(&work->unk_154, 25, work->unk_14A);
-        if (work->unk_14A <= 0) {
+        ApproachValue(&work->scale, 25, work->steps);
+        if (work->steps <= 0) {
             return 0;
         }
-        work->unk_148++;
-        work->unk_14A--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 2:
         AnimChangeWithDef(gSmnKingAnimDefs, &work->anim, 1, 0, work->tiles);
-        if (func_08044F98(work)) {
+        if (SmnKingApplyGravity(work)) {
             work->state = 4;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
         break;
     case 4:
         AnimChangeWithDef(gSmnKingAnimDefs, &work->anim, 2, 0, work->tiles);
         if (AnimGetFrame(&work->anim) == 5 && work->anim.timer == 3) {
-            func_08013480(body->x, body->y, body->z - 0x1300);
-            func_08011F78(3, body->x, body->y, body->z, 256, 256, 256);
+            BgFxStartFlash(body->x, body->y, body->z - 0x1300);
+            ApplyAttackBox(3, body->x, body->y, body->z, 256, 256, 256);
             m4aSongNumStart(SONG_EF_TLIMIT01);
-            switch (work->unk_15C) {
+            switch (work->variant) {
             case 0:
-                gBtlWork->actor->unk_02C += gBtlWork->actor->unk_02E / 5;
+                gBtlWork->actor->hp += gBtlWork->actor->maxHp / 5;
                 func_08076284();
                 break;
             case 1:
-                gBtlWork->actor->unk_02C += gBtlWork->actor->unk_02E / 2;
+                gBtlWork->actor->hp += gBtlWork->actor->maxHp / 2;
                 func_08076290();
                 break;
             case 2:
             default:
-                gBtlWork->actor->unk_02C += gBtlWork->actor->unk_02E;
+                gBtlWork->actor->hp += gBtlWork->actor->maxHp;
                 func_0807629C();
                 break;
             }
-            func_08019190(gBtlWork->actor, 10);
-            if (gBtlWork->actor->unk_02C > gBtlWork->actor->unk_02E) {
-                gBtlWork->actor->unk_02C = gBtlWork->actor->unk_02E;
+            CreateBtlPopTask(gBtlWork->actor, 10);
+            if (gBtlWork->actor->hp > gBtlWork->actor->maxHp) {
+                gBtlWork->actor->hp = gBtlWork->actor->maxHp;
             }
         }
-        func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
+        ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
         if (AnimIsFinished(&work->anim)) {
             work->state = 5;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         }
         break;
     case 5:
-        func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-        if (work->unk_148 > 60) {
+        ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+        if (work->stateTimer > 60) {
             FadeToOriginal(0, 8);
             work->state = 1;
-            work->unk_148 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_148++;
+            work->stateTimer++;
         }
         break;
     }
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
     }
-    if (work->unk_15E != 0) {
+    if (work->animating != 0) {
         AnimUpdate(&work->anim);
     }
     TaskPoolUpdate(&work->tasks);
@@ -2585,8 +2585,8 @@ void task_smn_king_2(SmnKingWork* work) {
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
         sclX = sclY;
-    } else if (gBtlWork->scale == 256 && work->unk_154 == gBtlWork->scale) {
-        sclY = work->unk_154;
+    } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
+        sclY = work->scale;
         sclX = sclY;
         flags |= 1;
     } else {
@@ -2594,8 +2594,8 @@ void task_smn_king_2(SmnKingWork* work) {
         sclY = gBtlWork->scale;
     }
 
-    sclX = sclX * work->unk_154 >> 8;
-    sclY = sclY * work->unk_154 >> 8;
+    sclX = sclX * work->scale >> 8;
+    sclY = sclY * work->scale >> 8;
 
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
@@ -2607,37 +2607,37 @@ void task_smn_king_2(SmnKingWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_smn_king_3(SmnKingWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_15D != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_0804544C(FrdDonaldWork* work) {
+u8 FrdDonaldApplyGravity(FrdDonaldWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_154;
-    work->unk_154 += 0x33;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_154 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
     return 0;
 }
 
-void func_08045494(BtlObj* body, u8 a, s16 b, s16 c) {
+void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
     s32 x;
     s32 y;
     s32 z;
@@ -2660,10 +2660,10 @@ void func_08045494(BtlObj* body, u8 a, s16 b, s16 c) {
     }
 
     BgFxSetPosition(x, y, z);
-    func_080147C8(t, w);
+    BgFxSetScale(t, w);
 
     if (a != 0) {
-        if (gBtlWork->unk_10C == 0x98) {
+        if (gBtlWork->battleId == 0x98) {
             p = 0x20;
             q = 0x20;
             r = 0x30;
@@ -2673,7 +2673,7 @@ void func_08045494(BtlObj* body, u8 a, s16 b, s16 c) {
             r = 0x0A;
         }
 
-        if (func_08011F78(0x84, x, y, z, p, q, r) != 0) {
+        if (ApplyAttackBox(0x84, x, y, z, p, q, r) != 0) {
             m4aSongNumStart(SONG_EF_FIRE01);
         }
     }

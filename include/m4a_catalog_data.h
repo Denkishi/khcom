@@ -29,28 +29,28 @@ extern MusicPlayerTrack gMPlayTracks25[];
 
 #ifndef M4A_CATALOG_NO_PLAYER_EXTERNS
 extern MusicPlayerInfo gMPlayInfo_BGM;
-extern MusicPlayerInfo gUnk_0203D990;
-extern MusicPlayerInfo gUnk_0203D9D0;
-extern MusicPlayerInfo gUnk_0203DA10;
-extern MusicPlayerInfo gUnk_0203DA50;
-extern MusicPlayerInfo gUnk_0203DA90;
-extern MusicPlayerInfo gUnk_0203DAD0;
-extern MusicPlayerInfo gUnk_0203DB50;
-extern MusicPlayerInfo gUnk_0203DB90;
-extern MusicPlayerInfo gUnk_0203DBD0;
-extern MusicPlayerInfo gUnk_0203DC10;
-extern MusicPlayerInfo gUnk_0203DC50;
-extern MusicPlayerInfo gUnk_0203DC90;
-extern MusicPlayerInfo gUnk_0203DCD0;
-extern MusicPlayerInfo gUnk_0203DD10;
-extern MusicPlayerInfo gUnk_0203DD50;
-extern MusicPlayerInfo gUnk_0203DD90;
-extern MusicPlayerInfo gUnk_0203DDD0;
-extern MusicPlayerInfo gUnk_0203DE10;
-extern MusicPlayerInfo gUnk_0203DE50;
-extern MusicPlayerInfo gUnk_0203DEA0;
-extern MusicPlayerInfo gUnk_0203DEE0;
-extern MusicPlayerInfo gUnk_0203DF20;
+extern MusicPlayerInfo gMPlayInfo19;
+extern MusicPlayerInfo gMPlayInfo23;
+extern MusicPlayerInfo gMPlayInfo5;
+extern MusicPlayerInfo gMPlayInfo16;
+extern MusicPlayerInfo gMPlayInfo9;
+extern MusicPlayerInfo gMPlayInfo6;
+extern MusicPlayerInfo gMPlayInfo20;
+extern MusicPlayerInfo gMPlayInfo24;
+extern MusicPlayerInfo gMPlayInfo21;
+extern MusicPlayerInfo gMPlayInfo18;
+extern MusicPlayerInfo gMPlayInfo7;
+extern MusicPlayerInfo gMPlayInfo1;
+extern MusicPlayerInfo gMPlayInfo2;
+extern MusicPlayerInfo gMPlayInfo10;
+extern MusicPlayerInfo gMPlayInfo25;
+extern MusicPlayerInfo gMPlayInfo22;
+extern MusicPlayerInfo gMPlayInfo12;
+extern MusicPlayerInfo gMPlayInfo17;
+extern MusicPlayerInfo gMPlayInfo4;
+extern MusicPlayerInfo gMPlayInfo8;
+extern MusicPlayerInfo gMPlayInfo3;
+extern MusicPlayerInfo gMPlayInfo11;
 #endif
 
 #endif

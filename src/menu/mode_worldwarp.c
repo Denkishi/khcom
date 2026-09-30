@@ -48,41 +48,41 @@ extern u8 gUnkEu_099AC468[];
 extern u8 gUnkEu_099AC9F0[];
 #endif
 
-static s16 gUnk_020354E8;
-static s16 gUnk_020354EA;
-static s16 gUnk_020354F0[13];
-static s16 gUnk_0203550A;
-static void* gUnk_0203550C;
-static struct ObjTiles* gUnk_02035510;
-static struct ObjPalette* gUnk_02035514;
+static s16 sWorldWarpCursor;
+static s16 sWorldWarpFloorCount;
+static s16 sWorldWarpFloorWorlds[13];
+static s16 sWorldWarpTarget;
+static void* sWorldWarpTilemap;
+static struct ObjTiles* sWorldWarpBarTiles;
+static struct ObjPalette* sWorldWarpBarPalette;
 static struct ObjTiles* gUnk_02035518;
 static struct ObjPalette* gUnk_0203551C;
-static AnimState gUnk_02035520;
+static AnimState sWorldWarpHighlightAnim;
 static AnimState gUnk_02035538;
-static struct ObjTiles* gUnk_02035550;
-static struct ObjPalette* gUnk_02035554;
-static AnimState gUnk_02035558;
-static void* gUnk_02035570[14];
-static void* gUnk_020355A8[14];
-static void* gUnk_020355E0[14];
+static struct ObjTiles* sWorldWarpCursorTiles;
+static struct ObjPalette* sWorldWarpCursorPalette;
+static AnimState sWorldWarpCursorAnim;
+static void* sWorldWarpIconTiles[14];
+static void* sWorldWarpIconPalettes[14];
+static void* sWorldWarpIconSprites[14];
 #ifdef VERSION_EU
-static TextSlot gUnk_02035618[48];
+static TextSlot sWorldWarpCurrentName[48];
 #else
-static TextSlot gUnk_02035618[24];
+static TextSlot sWorldWarpCurrentName[24];
 #endif
-static u8 gUnk_020356D8;
+static u8 sWorldWarpCurrentNameCount;
 #ifdef VERSION_EU
-static TextSlot gUnk_020356E0[48];
+static TextSlot sWorldWarpSelectedName[48];
 #else
-static TextSlot gUnk_020356E0[24];
+static TextSlot sWorldWarpSelectedName[24];
 #endif
-static u8 gUnk_020357A0;
-static s16 gUnk_020357A2;
-static s16 gUnk_020357A4;
-static s32 gUnk_020357A8[2];
-static s32 gUnk_020357B0;
-static s32 gUnk_020357B4;
-static s32 gUnk_020357B8;
+static u8 sWorldWarpSelectedNameCount;
+static s16 sWorldWarpState;
+static s16 sWorldWarpSteps;
+static s32 sWorldWarpBarY[2];
+static s32 sWorldWarpBarX;
+static s32 sWorldWarpCursorX;
+static s32 sWorldWarpCursorY;
 
 extern u8 gUnk_0999F400[];
 extern u8 gUnk_0999F416[];
@@ -221,29 +221,29 @@ void WorldWarpCopyTilemapRect(s16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, 
     }
 }
 
-u8 func_08100608(s16 a) {
+u8 WorldWarpLoadCurrentName(s16 a) {
     if (a <= 0) {
         return 0;
     }
 #ifdef VERSION_EU
-    return LoadTextSlots(eu_0805E924(gWorldSelectDefs[a].name), gUnk_02035618);
+    return LoadTextSlots(eu_0805E924(gWorldSelectDefs[a].name), sWorldWarpCurrentName);
 #else
-    return LoadTextSlots(gWorldSelectDefs[a].name, gUnk_02035618);
+    return LoadTextSlots(gWorldSelectDefs[a].name, sWorldWarpCurrentName);
 #endif
 }
 
-u8 func_0810063C(s16 a) {
+u8 WorldWarpLoadSelectedName(s16 a) {
     if (a <= 0) {
         return 0;
     }
 #ifdef VERSION_EU
-    return LoadTextSlots(eu_0805E924(gWorldSelectDefs[a].name), gUnk_020356E0);
+    return LoadTextSlots(eu_0805E924(gWorldSelectDefs[a].name), sWorldWarpSelectedName);
 #else
-    return LoadTextSlots(gWorldSelectDefs[a].name, gUnk_020356E0);
+    return LoadTextSlots(gWorldSelectDefs[a].name, sWorldWarpSelectedName);
 #endif
 }
 
-void func_08100670(s16 a, u8* b, void* c) {
+void WorldWarpLoadFloorTiles(s16 a, u8* b, void* c) {
     RequestDma3Copy(b + a * 256, c, 0x100);
 }
 
@@ -255,120 +255,120 @@ u16 WorldWarpReadMenuKeys(void) {
     return keys;
 }
 
-void func_081006AC(void) {
+void WorldWarpHandleInput(void) {
     s16 prev;
     u16 keys;
 
-    prev = gUnk_020354E8;
+    prev = sWorldWarpCursor;
     keys = WorldWarpReadMenuKeys();
 
     if (keys & A_BUTTON) {
-        if (gUnk_020354E8 == gGameState.floor) {
-            gUnk_0203550A = -1;
+        if (sWorldWarpCursor == gGameState.floor) {
+            sWorldWarpTarget = -1;
             LoadBgMap(0, gUnk_09A35A1C, 0x500);
-            gUnk_020357A4 = 16;
-            gUnk_020357A2 = 3;
+            sWorldWarpSteps = 16;
+            sWorldWarpState = 3;
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else {
-            if (gUnk_020354F0[gUnk_020354E8] >= 0) {
-                gUnk_0203550A = gUnk_020354E8;
+            if (sWorldWarpFloorWorlds[sWorldWarpCursor] >= 0) {
+                sWorldWarpTarget = sWorldWarpCursor;
                 LoadBgMap(0, gUnk_09A35A1C, 0x500);
-                gUnk_020357A4 = 16;
-                gUnk_020357A2 = 3;
+                sWorldWarpSteps = 16;
+                sWorldWarpState = 3;
                 m4aSongNumStart(SONG_SYS_WORLDSTART);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
         }
     } else if (keys & B_BUTTON) {
-        gUnk_0203550A = -1;
+        sWorldWarpTarget = -1;
         LoadBgMap(0, gUnk_09A35A1C, 0x500);
-        gUnk_020357A4 = 16;
-        gUnk_020357A2 = 3;
+        sWorldWarpSteps = 16;
+        sWorldWarpState = 3;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (keys & DPAD_UP) {
         do {
-            gUnk_020354E8 = gWarpIcons[gUnk_020354E8].up;
-            if (gUnk_020354E8 == prev) {
+            sWorldWarpCursor = gWarpIcons[sWorldWarpCursor].up;
+            if (sWorldWarpCursor == prev) {
                 break;
             }
-        } while (gUnk_020354F0[gUnk_020354E8] == -1);
+        } while (sWorldWarpFloorWorlds[sWorldWarpCursor] == -1);
     } else if (keys & DPAD_DOWN) {
         do {
-            gUnk_020354E8 = gWarpIcons[gUnk_020354E8].down;
-            if (gUnk_020354E8 == prev) {
+            sWorldWarpCursor = gWarpIcons[sWorldWarpCursor].down;
+            if (sWorldWarpCursor == prev) {
                 break;
             }
-        } while (gUnk_020354F0[gUnk_020354E8] == -1);
+        } while (sWorldWarpFloorWorlds[sWorldWarpCursor] == -1);
     } else if (keys & DPAD_LEFT) {
         do {
-            gUnk_020354E8 = gWarpIcons[gUnk_020354E8].left;
-            if (gUnk_020354E8 == prev) {
+            sWorldWarpCursor = gWarpIcons[sWorldWarpCursor].left;
+            if (sWorldWarpCursor == prev) {
                 break;
             }
-        } while (gUnk_020354F0[gUnk_020354E8] == -1);
+        } while (sWorldWarpFloorWorlds[sWorldWarpCursor] == -1);
     } else if (keys & DPAD_RIGHT) {
         do {
-            gUnk_020354E8 = gWarpIcons[gUnk_020354E8].right;
-            if (gUnk_020354E8 == prev) {
+            sWorldWarpCursor = gWarpIcons[sWorldWarpCursor].right;
+            if (sWorldWarpCursor == prev) {
                 break;
             }
-        } while (gUnk_020354F0[gUnk_020354E8] == -1);
+        } while (sWorldWarpFloorWorlds[sWorldWarpCursor] == -1);
     }
 
-    if (gUnk_020354E8 != prev) {
+    if (sWorldWarpCursor != prev) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
             if ((gGameState.flags & 8) == 0) {
-                func_08100670(gUnk_020354E8, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                func_08100670(gUnk_020354E8, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
         case 1:
             if ((gGameState.flags & 8) == 0) {
-                func_08100670(gUnk_020354E8, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                func_08100670(gUnk_020354E8, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
         case 4:
             if ((gGameState.flags & 8) == 0) {
-                func_08100670(gUnk_020354E8, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                func_08100670(gUnk_020354E8, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
         case 3:
             if ((gGameState.flags & 8) == 0) {
-                func_08100670(gUnk_020354E8, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                func_08100670(gUnk_020354E8, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
         case 2:
         default:
             if ((gGameState.flags & 8) == 0) {
-                func_08100670(gUnk_020354E8, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                func_08100670(gUnk_020354E8, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
         }
 #else
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gUnk_020354E8, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gUnk_020354E8, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
         }
 #endif
-        gUnk_020357A0 = func_0810063C(gUnk_020354F0[gUnk_020354E8]);
+        sWorldWarpSelectedNameCount = WorldWarpLoadSelectedName(sWorldWarpFloorWorlds[sWorldWarpCursor]);
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
 
-void func_08100980(void) {
+void WorldWarpDraw(void) {
     s32 i;
 #ifdef VERSION_EU
     u8* tile0;
@@ -404,71 +404,71 @@ void func_08100980(void) {
         break;
     }
 
-    DrawSprite(gUnk_020357B0 >> 8, 0, tile0, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB8);
-    if (gUnk_020357A2 != 2) {
-        DrawSprite(0x80, gUnk_020357A8[0] >> 8, tile1, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB9);
-        DrawSprite(0x80, gUnk_020357A8[1] >> 8, tile2, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB9);
+    DrawSprite(sWorldWarpBarX >> 8, 0, tile0, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB8);
+    if (sWorldWarpState != 2) {
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, tile1, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, tile2, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
     }
 #else
-    if (gUnk_020357A2 != 2) {
-        DrawSprite(gUnk_020357B0 >> 8, 0, gUnk_0999F400, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB8);
-        DrawSprite(0x80, gUnk_020357A8[0] >> 8, gUnk_0999F416, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB9);
-        DrawSprite(0x80, gUnk_020357A8[1] >> 8, gUnk_0999F44A, gUnk_02035510, gUnk_02035514, 0, 0xC00, 0xBB9);
+    if (sWorldWarpState != 2) {
+        DrawSprite(sWorldWarpBarX >> 8, 0, gUnk_0999F400, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB8);
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gUnk_0999F416, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gUnk_0999F44A, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
     }
 #endif
 
-    if (gUnk_020357A2 == 2) {
-        DrawSprite((s16)(gWarpIcons[gUnk_020354E8].x * 8 + 22),
-            (s16)(gWarpIcons[gUnk_020354E8].y * 8 + 12),
-            AnimUpdate(&gUnk_02035520), gUnk_02035518, gUnk_0203551C, 0, 0x800, 0x898);
-        ApproachValueHalf(&gUnk_020357B4, (gWarpIcons[gUnk_020354E8].x << 11) + 0x2000);
-        ApproachValueHalf(&gUnk_020357B8, (gWarpIcons[gUnk_020354E8].y << 11) + 0xFFFFFA00);
-        DrawSprite(gUnk_020357B4 >> 8, gUnk_020357B8 >> 8, AnimUpdate(&gUnk_02035558),
-            gUnk_02035550, gUnk_02035554, 0, 0x800, 0x7D0);
+    if (sWorldWarpState == 2) {
+        DrawSprite((s16)(gWarpIcons[sWorldWarpCursor].x * 8 + 22),
+            (s16)(gWarpIcons[sWorldWarpCursor].y * 8 + 12),
+            AnimUpdate(&sWorldWarpHighlightAnim), gUnk_02035518, gUnk_0203551C, 0, 0x800, 0x898);
+        ApproachValueHalf(&sWorldWarpCursorX, (gWarpIcons[sWorldWarpCursor].x << 11) + 0x2000);
+        ApproachValueHalf(&sWorldWarpCursorY, (gWarpIcons[sWorldWarpCursor].y << 11) + 0xFFFFFA00);
+        DrawSprite(sWorldWarpCursorX >> 8, sWorldWarpCursorY >> 8, AnimUpdate(&sWorldWarpCursorAnim),
+            sWorldWarpCursorTiles, sWorldWarpCursorPalette, 0, 0x800, 0x7D0);
     }
 
     for (i = 0; i <= 12; i++) {
-        if (gUnk_020355E0[i] != 0) {
+        if (sWorldWarpIconSprites[i] != 0) {
             DrawSprite((s16)(gWarpIcons[i].x * 8 + 16), (s16)(gWarpIcons[i].y * 8 + 16),
-                gUnk_020355E0[i], gUnk_02035570[i], gUnk_020355A8[i], 0, 0x800, (u16)(i + 0x834));
+                sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, 0x800, (u16)(i + 0x834));
         }
     }
 
-    if (gUnk_020355E0[gGameState.floor] != 0) {
+    if (sWorldWarpIconSprites[gGameState.floor] != 0) {
 #ifdef VERSION_EU
-        DrawSprite(0x66, 0x10, gUnk_020355E0[gGameState.floor], gUnk_02035570[gGameState.floor],
-            gUnk_020355A8[gGameState.floor], 0, 0, 2);
+        DrawSprite(0x66, 0x10, sWorldWarpIconSprites[gGameState.floor], sWorldWarpIconTiles[gGameState.floor],
+            sWorldWarpIconPalettes[gGameState.floor], 0, 0, 2);
 #else
-        DrawSprite(0x70, 0x10, gUnk_020355E0[gGameState.floor], gUnk_02035570[gGameState.floor],
-            gUnk_020355A8[gGameState.floor], 0, 0, 2);
+        DrawSprite(0x70, 0x10, sWorldWarpIconSprites[gGameState.floor], sWorldWarpIconTiles[gGameState.floor],
+            sWorldWarpIconPalettes[gGameState.floor], 0, 0, 2);
 #endif
     }
 
-    if (gUnk_020356D8 != 0) {
+    if (sWorldWarpCurrentNameCount != 0) {
 #ifdef VERSION_EU
-        DrawTextSlots(0x78, 0x0C, gUnk_02035618, gUnk_0203551C, 0, gUnk_020356D8);
+        DrawTextSlots(0x78, 0x0C, sWorldWarpCurrentName, gUnk_0203551C, 0, sWorldWarpCurrentNameCount);
 #else
-        DrawTextSlots(0x80, 0x0C, gUnk_02035618, gUnk_0203551C, 0, gUnk_020356D8);
+        DrawTextSlots(0x80, 0x0C, sWorldWarpCurrentName, gUnk_0203551C, 0, sWorldWarpCurrentNameCount);
 #endif
     }
 
     DrawSprite(0xB0, 0x1A, AnimUpdate(&gUnk_02035538), gUnk_02035518, gUnk_0203551C, 0, 0, 2);
 
-    if (gUnk_020355E0[gUnk_020354E8] != 0) {
+    if (sWorldWarpIconSprites[sWorldWarpCursor] != 0) {
 #ifdef VERSION_EU
-        DrawSprite(0x66, 0x30, gUnk_020355E0[gUnk_020354E8], gUnk_02035570[gUnk_020354E8],
-            gUnk_020355A8[gUnk_020354E8], 0, 0, 2);
+        DrawSprite(0x66, 0x30, sWorldWarpIconSprites[sWorldWarpCursor], sWorldWarpIconTiles[sWorldWarpCursor],
+            sWorldWarpIconPalettes[sWorldWarpCursor], 0, 0, 2);
 #else
-        DrawSprite(0x70, 0x30, gUnk_020355E0[gUnk_020354E8], gUnk_02035570[gUnk_020354E8],
-            gUnk_020355A8[gUnk_020354E8], 0, 0, 2);
+        DrawSprite(0x70, 0x30, sWorldWarpIconSprites[sWorldWarpCursor], sWorldWarpIconTiles[sWorldWarpCursor],
+            sWorldWarpIconPalettes[sWorldWarpCursor], 0, 0, 2);
 #endif
     }
 
-    if (gUnk_020357A0 != 0) {
+    if (sWorldWarpSelectedNameCount != 0) {
 #ifdef VERSION_EU
-        DrawTextSlots(0x78, 0x2C, gUnk_020356E0, gUnk_02035554, 0, gUnk_020357A0);
+        DrawTextSlots(0x78, 0x2C, sWorldWarpSelectedName, sWorldWarpCursorPalette, 0, sWorldWarpSelectedNameCount);
 #else
-        DrawTextSlots(0x80, 0x2C, gUnk_020356E0, gUnk_02035554, 0, gUnk_020357A0);
+        DrawTextSlots(0x80, 0x2C, sWorldWarpSelectedName, sWorldWarpCursorPalette, 0, sWorldWarpSelectedNameCount);
 #endif
     }
 }
@@ -478,8 +478,8 @@ void mode_worldwarp_0(void) {
     void** p;
     vu32* dma;
 
-    gUnk_020354EA = func_080DF750() + 1;
-    p = &gUnk_0203550C;
+    sWorldWarpFloorCount = GetProgressFloor() + 1;
+    p = &sWorldWarpTilemap;
     *p = EwramAlloc(0x500);
     SpriteReset();
     FadeStartIn(0, 16);
@@ -492,35 +492,35 @@ void mode_worldwarp_0(void) {
     SetBgPriority(1, 2);
     SetBgPriority(2, 1);
     SetBgPriority(3, 0);
-    gUnk_020354E8 = gGameState.floor;
-    gUnk_0203550A = -1;
+    sWorldWarpCursor = gGameState.floor;
+    sWorldWarpTarget = -1;
 
     for (i = 0; i <= 12; i++) {
-        if (i < gUnk_020354EA) {
-            gUnk_020354F0[i] = gGameState.floors[i].world;
+        if (i < sWorldWarpFloorCount) {
+            sWorldWarpFloorWorlds[i] = gGameState.floors[i].world;
         } else {
-            gUnk_020354F0[i] |= 0xFFFFu;
+            sWorldWarpFloorWorlds[i] |= 0xFFFFu;
         }
     }
 
-    gUnk_020357A2 = 0;
-    gUnk_020357A4 = 16;
-    gUnk_020357A8[0] = -0x800;
-    gUnk_020357A8[1] = 0xA800;
-    gUnk_020357B0 = -0x8000;
-    gUnk_020357B4 = (gWarpIcons[gUnk_020354E8].x << 11) + 0x2000;
-    gUnk_020357B8 = (gWarpIcons[gUnk_020354E8].y << 11) - 0x600;
+    sWorldWarpState = 0;
+    sWorldWarpSteps = 16;
+    sWorldWarpBarY[0] = -0x800;
+    sWorldWarpBarY[1] = 0xA800;
+    sWorldWarpBarX = -0x8000;
+    sWorldWarpCursorX = (gWarpIcons[sWorldWarpCursor].x << 11) + 0x2000;
+    sWorldWarpCursorY = (gWarpIcons[sWorldWarpCursor].y << 11) - 0x600;
     LoadBgPalette(0, gUnk_09A3D37C, 0x200);
 
     for (i = 0; i <= 12; i++) {
-        if (gUnk_020354F0[i] > 0) {
-            gUnk_020355A8[i] = LoadObjPalette(gWorldSelectDefs[gUnk_020354F0[i]].palette, gWorldSelectDefs[gUnk_020354F0[i]].paletteSize);
-            gUnk_02035570[i] = LoadObjTiles(gWorldSelectDefs[gUnk_020354F0[i]].tiles, gWorldSelectDefs[gUnk_020354F0[i]].tilesSize);
-            gUnk_020355E0[i] = gWorldSelectDefs[gUnk_020354F0[i]].sprite;
+        if (sWorldWarpFloorWorlds[i] > 0) {
+            sWorldWarpIconPalettes[i] = LoadObjPalette(gWorldSelectDefs[sWorldWarpFloorWorlds[i]].palette, gWorldSelectDefs[sWorldWarpFloorWorlds[i]].paletteSize);
+            sWorldWarpIconTiles[i] = LoadObjTiles(gWorldSelectDefs[sWorldWarpFloorWorlds[i]].tiles, gWorldSelectDefs[sWorldWarpFloorWorlds[i]].tilesSize);
+            sWorldWarpIconSprites[i] = gWorldSelectDefs[sWorldWarpFloorWorlds[i]].sprite;
         } else {
-            gUnk_020355A8[i] = 0;
-            gUnk_02035570[i] = 0;
-            gUnk_020355E0[i] = 0;
+            sWorldWarpIconPalettes[i] = 0;
+            sWorldWarpIconTiles[i] = 0;
+            sWorldWarpIconSprites[i] = 0;
         }
     }
 
@@ -562,155 +562,155 @@ void mode_worldwarp_0(void) {
     LoadBgMap(0, gUnk_09A35A1C, 0x500);
     dma = (vu32*)REG_ADDR_DMA3;
     dma[0] = (u32)gUnk_09A3641C;
-    dma[1] = (u32)gUnk_0203550C;
+    dma[1] = (u32)sWorldWarpTilemap;
     dma[2] = (DMA_ENABLE << 16) | 0x280;
     dma[2];
 
     for (i = 0; i <= 12; i++) {
-        if (gUnk_020354F0[i] >= 0) {
-            WorldWarpCopyTilemapRect(7, 4, gUnk_09A3691C, 0, 0, gUnk_0203550C, gWarpIcons[i].x, gWarpIcons[i].y);
+        if (sWorldWarpFloorWorlds[i] >= 0) {
+            WorldWarpCopyTilemapRect(7, 4, gUnk_09A3691C, 0, 0, sWorldWarpTilemap, gWarpIcons[i].x, gWarpIcons[i].y);
         }
     }
 
-    for (i = 0; i < gUnk_020354EA - 1; i++) {
-        if (gUnk_020354F0[i] >= 0 && gUnk_020354F0[i + 1] >= 0) {
+    for (i = 0; i < sWorldWarpFloorCount - 1; i++) {
+        if (sWorldWarpFloorWorlds[i] >= 0 && sWorldWarpFloorWorlds[i + 1] >= 0) {
             WorldWarpCopyTilemapRect(gWarpRects[gWarpIcons[i].rect].width, gWarpRects[gWarpIcons[i].rect].height,
                 gUnk_09A3691C, gWarpRects[gWarpIcons[i].rect].x,
-                gWarpRects[gWarpIcons[i].rect].y, gUnk_0203550C,
+                gWarpRects[gWarpIcons[i].rect].y, sWorldWarpTilemap,
                 gWarpIcons[i].x2, gWarpIcons[i].y2);
         }
     }
 
-    for (i = 0; i < gUnk_020354EA; i++) {
-        if (gUnk_020354F0[i] >= 0) {
+    for (i = 0; i < sWorldWarpFloorCount; i++) {
+        if (sWorldWarpFloorWorlds[i] >= 0) {
             if ((gGameState.flags & 8) == 0) {
                 if (i <= 8) {
-                    WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, i * 3, 9, gUnk_0203550C,
+                    WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, i * 3, 9, sWorldWarpTilemap,
                         gWarpIcons[i].x + 3, gWarpIcons[i].y + 2);
                 } else {
-                    WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, (i - 9) * 4, 10, gUnk_0203550C,
+                    WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, (i - 9) * 4, 10, sWorldWarpTilemap,
                         gWarpIcons[i].x + 3, gWarpIcons[i].y + 2);
                 }
             } else if (i <= 2) {
-                WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, i * 4, 21, gUnk_0203550C,
+                WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, i * 4, 21, sWorldWarpTilemap,
                     gWarpIcons[i].x + 3, gWarpIcons[i].y + 2);
             } else {
-                WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, (i - 3) * 3, 22, gUnk_0203550C,
+                WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, (i - 3) * 3, 22, sWorldWarpTilemap,
                     gWarpIcons[i].x + 3, gWarpIcons[i].y + 2);
             }
         }
     }
 
-    for (i = 0; i < gUnk_020354EA; i++) {
-        if (gUnk_020354E8 == i) {
-            WorldWarpSetTilemapRectPalette(3, 7, 4, gUnk_0203550C, gWarpIcons[i].x, gWarpIcons[i].y);
+    for (i = 0; i < sWorldWarpFloorCount; i++) {
+        if (sWorldWarpCursor == i) {
+            WorldWarpSetTilemapRectPalette(3, 7, 4, sWorldWarpTilemap, gWarpIcons[i].x, gWarpIcons[i].y);
         } else {
-            WorldWarpSetTilemapRectPalette(2, 7, 4, gUnk_0203550C, gWarpIcons[i].x, gWarpIcons[i].y);
+            WorldWarpSetTilemapRectPalette(2, 7, 4, sWorldWarpTilemap, gWarpIcons[i].x, gWarpIcons[i].y);
         }
     }
 
-    LoadBgMap(1, gUnk_0203550C, 0x500);
+    LoadBgMap(1, sWorldWarpTilemap, 0x500);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
     case 1:
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gGameState.floor, gUnkEu_09A56780, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A56780, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gGameState.floor, gUnkEu_09A5CF80, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5CF80, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
     case 4:
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gGameState.floor, gUnkEu_09A57480, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A57480, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gGameState.floor, gUnkEu_09A5DC80, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5DC80, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
     case 3:
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gGameState.floor, gUnkEu_09A58180, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58180, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gGameState.floor, gUnkEu_09A5E980, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5E980, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
     case 2:
     default:
         if ((gGameState.flags & 8) == 0) {
-            func_08100670(gGameState.floor, gUnkEu_09A58E80, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58E80, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            func_08100670(gGameState.floor, gUnkEu_09A5F680, (u8*)GetBgCharBase(0) + 0x120);
-            func_08100670(gUnk_020354E8, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5F680, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
     }
 #else
     if ((gGameState.flags & 8) == 0) {
-        func_08100670(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
-        func_08100670(gUnk_020354E8, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+        WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
+        WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
     } else {
-        func_08100670(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
-        func_08100670(gUnk_020354E8, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+        WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
+        WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
     }
 #endif
-    gUnk_02035514 = LoadObjPalette(gUnk_09A3D57C, 32);
+    sWorldWarpBarPalette = LoadObjPalette(gUnk_09A3D57C, 32);
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        gUnk_02035510 = LoadObjTiles(gUnkEu_099AAC2C, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AAC2C, 0x500);
         break;
     case 1:
-        gUnk_02035510 = LoadObjTiles(gUnkEu_099ABA18, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABA18, 0x500);
         break;
     case 4:
-        gUnk_02035510 = LoadObjTiles(gUnkEu_099ABFA0, 0x440);
+        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABFA0, 0x440);
         break;
     case 3:
-        gUnk_02035510 = LoadObjTiles(gUnkEu_099AC468, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC468, 0x500);
         break;
     case 2:
     default:
-        gUnk_02035510 = LoadObjTiles(gUnkEu_099AC9F0, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC9F0, 0x500);
         break;
     }
 #else
-    gUnk_02035510 = LoadObjTiles(gUnk_0999F488, 0x500);
+    sWorldWarpBarTiles = LoadObjTiles(gUnk_0999F488, 0x500);
 #endif
     gUnk_0203551C = LoadObjPalette(gUnk_09A3D59C, 32);
     gUnk_02035518 = LoadObjTiles(gUnk_0999FA20, 0x680);
-    AnimInit(&gUnk_02035520, gUnk_09EF9898, gUnk_09EF9870);
-    AnimStart(&gUnk_02035520, 0, 1);
+    AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
+    AnimStart(&sWorldWarpHighlightAnim, 0, 1);
     AnimInit(&gUnk_02035538, gUnk_09EF9898, gUnk_09EF9870);
     AnimStart(&gUnk_02035538, 1, 1);
-    gUnk_02035554 = LoadObjPalette(gUnk_09A3D5BC, 32);
-    gUnk_02035550 = LoadObjTiles(gUnk_099A012C, 192);
-    AnimInit(&gUnk_02035558, gUnk_09EF98B0, gUnk_09EF98A0);
-    AnimStart(&gUnk_02035558, 0, 1);
+    sWorldWarpCursorPalette = LoadObjPalette(gUnk_09A3D5BC, 32);
+    sWorldWarpCursorTiles = LoadObjTiles(gUnk_099A012C, 192);
+    AnimInit(&sWorldWarpCursorAnim, gUnk_09EF98B0, gUnk_09EF98A0);
+    AnimStart(&sWorldWarpCursorAnim, 0, 1);
 #ifdef VERSION_EU
-    InitTextSlots(gUnk_02035618, 48);
-    InitTextSlots(gUnk_020356E0, 48);
+    InitTextSlots(sWorldWarpCurrentName, 48);
+    InitTextSlots(sWorldWarpSelectedName, 48);
 #else
-    InitTextSlots(gUnk_02035618, 24);
-    InitTextSlots(gUnk_020356E0, 24);
+    InitTextSlots(sWorldWarpCurrentName, 24);
+    InitTextSlots(sWorldWarpSelectedName, 24);
 #endif
-    gUnk_020356D8 = func_08100608(gUnk_020354F0[gGameState.floor]);
-    gUnk_020357A0 = func_0810063C(gUnk_020354F0[gUnk_020354E8]);
+    sWorldWarpCurrentNameCount = WorldWarpLoadCurrentName(sWorldWarpFloorWorlds[gGameState.floor]);
+    sWorldWarpSelectedNameCount = WorldWarpLoadSelectedName(sWorldWarpFloorWorlds[sWorldWarpCursor]);
     EnableBg(0);
     EnableBg(1);
     DisableBg(2);
@@ -720,88 +720,88 @@ void mode_worldwarp_0(void) {
 void mode_worldwarp_1(void) {
     UpdatePlayTime();
 
-    switch (gUnk_020357A2) {
+    switch (sWorldWarpState) {
     case 0:
-        ApproachValue(&gUnk_020357A8[0], 0, gUnk_020357A4);
-        ApproachValue(&gUnk_020357A8[1], 0x9800, gUnk_020357A4);
+        ApproachValue(&sWorldWarpBarY[0], 0, sWorldWarpSteps);
+        ApproachValue(&sWorldWarpBarY[1], 0x9800, sWorldWarpSteps);
 
-        if (--gUnk_020357A4 <= 0) {
-            gUnk_020357A4 = 16;
-            gUnk_020357A2 = 1;
+        if (--sWorldWarpSteps <= 0) {
+            sWorldWarpSteps = 16;
+            sWorldWarpState = 1;
         }
         break;
     case 1:
-        ApproachValue(&gUnk_020357B0, 0, gUnk_020357A4);
+        ApproachValue(&sWorldWarpBarX, 0, sWorldWarpSteps);
 
-        if (--gUnk_020357A4 <= 0) {
+        if (--sWorldWarpSteps <= 0) {
             LoadBgMap(0, gUnk_09A35F1C, 0x500);
-            gUnk_020357A2 = 2;
+            sWorldWarpState = 2;
         }
         break;
     case 2:
-        func_081006AC();
+        WorldWarpHandleInput();
         break;
     case 3:
-        ApproachValue(&gUnk_020357B0, -0x8000, gUnk_020357A4);
+        ApproachValue(&sWorldWarpBarX, -0x8000, sWorldWarpSteps);
 
-        if (--gUnk_020357A4 <= 0) {
-            gUnk_020357A4 = 16;
-            gUnk_020357A2 = 4;
+        if (--sWorldWarpSteps <= 0) {
+            sWorldWarpSteps = 16;
+            sWorldWarpState = 4;
         }
         break;
     case 4:
-        ApproachValue(&gUnk_020357A8[0], -0x800, gUnk_020357A4);
-        ApproachValue(&gUnk_020357A8[1], 0xA800, gUnk_020357A4);
+        ApproachValue(&sWorldWarpBarY[0], -0x800, sWorldWarpSteps);
+        ApproachValue(&sWorldWarpBarY[1], 0xA800, sWorldWarpSteps);
 
-        if (--gUnk_020357A4 <= 0) {
-            gUnk_020357A4 = 16;
+        if (--sWorldWarpSteps <= 0) {
+            sWorldWarpSteps = 16;
             FadeStartOut(0, 16);
-            gUnk_020357A2 = 5;
+            sWorldWarpState = 5;
         }
         break;
     case 5:
         if (!FadeIsActive()) {
-            if (gUnk_0203550A >= 0) {
-                func_080DF9E0(gUnk_0203550A);
+            if (sWorldWarpTarget >= 0) {
+                WarpToFloor(sWorldWarpTarget);
             } else {
-                func_080E04EC();
+                RequestMapMode();
             }
         }
         break;
     }
-    func_08100980();
+    WorldWarpDraw();
 }
 
 void mode_worldwarp_2(void) {
     s32 i;
 
-    ReleaseObjPalette(gUnk_02035514);
-    ReleaseObjTiles(gUnk_02035510);
+    ReleaseObjPalette(sWorldWarpBarPalette);
+    ReleaseObjTiles(sWorldWarpBarTiles);
     ReleaseObjPalette(gUnk_0203551C);
     ReleaseObjTiles(gUnk_02035518);
-    ReleaseObjPalette(gUnk_02035554);
-    ReleaseObjTiles(gUnk_02035550);
+    ReleaseObjPalette(sWorldWarpCursorPalette);
+    ReleaseObjTiles(sWorldWarpCursorTiles);
 
     for (i = 0; i <= 12; i++) {
-        if (gUnk_020355A8[i] != 0) {
-            ReleaseObjPalette(gUnk_020355A8[i]);
+        if (sWorldWarpIconPalettes[i] != 0) {
+            ReleaseObjPalette(sWorldWarpIconPalettes[i]);
         }
 
-        if (gUnk_02035570[i] != 0) {
-            ReleaseObjTiles(gUnk_02035570[i]);
+        if (sWorldWarpIconTiles[i] != 0) {
+            ReleaseObjTiles(sWorldWarpIconTiles[i]);
         }
     }
 #ifdef VERSION_EU
-    FreeTextSlots(gUnk_02035618, 48);
+    FreeTextSlots(sWorldWarpCurrentName, 48);
 #else
-    FreeTextSlots(gUnk_02035618, 24);
+    FreeTextSlots(sWorldWarpCurrentName, 24);
 #endif
 #ifdef VERSION_EU
-    FreeTextSlots(gUnk_020356E0, 48);
+    FreeTextSlots(sWorldWarpSelectedName, 48);
 #else
-    FreeTextSlots(gUnk_020356E0, 24);
+    FreeTextSlots(sWorldWarpSelectedName, 24);
 #endif
-    EwramFree(gUnk_0203550C);
+    EwramFree(sWorldWarpTilemap);
 }
 
 Mode gModeWorldwarp = {

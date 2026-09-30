@@ -3,22 +3,22 @@
 #include "sprites_bos2.h"
 #include "system_state.h"
 
-s16 gUnk_0203AC80 EWRAM_COMMON(8);
+s16 gBosJfActorX EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);
-s16 gUnk_0203ACB0 EWRAM_COMMON(4);
-s16 gUnk_0203ACB4 EWRAM_COMMON(4);
-s16 gUnk_0203ACC0 EWRAM_COMMON(16);
-s16 gUnk_0203ACC4 EWRAM_COMMON(4);
-s16 gUnk_0203ACC8 EWRAM_COMMON(4);
-s16 gUnk_0203ACCC EWRAM_COMMON(4);
-s8 gUnk_0203ACD0 EWRAM_COMMON(4);
-s16 gUnk_0203ACD4 EWRAM_COMMON(4);
-void* gUnk_0203ACD8 EWRAM_COMMON(4);
+s16 gBosJfActorY EWRAM_COMMON(4);
+s16 gBosJfActorZ EWRAM_COMMON(4);
+s16 gBosJfRightPillarLevel EWRAM_COMMON(16);
+s16 gBosJfLeftPillarLevel EWRAM_COMMON(4);
+s16 gBosJfShakeTimer EWRAM_COMMON(4);
+s16 gBosJfShakeDuration EWRAM_COMMON(4);
+s8 gBosJfShakeActive EWRAM_COMMON(4);
+s16 gBosJfMiddlePillarLevel EWRAM_COMMON(4);
+void* gBosJfMapBlocks EWRAM_COMMON(4);
 u32 gUnk_0203ACDC EWRAM_COMMON(4);
-u8 gUnk_0203ACE0[0x800] EWRAM_COMMON(16);
-s16 gUnk_0203B4E0 EWRAM_COMMON(4);
-s16 gUnk_0203B4E4 EWRAM_COMMON(4);
-s32 gUnk_0203B4E8 EWRAM_COMMON(4);
+u8 gBosJfMapBuffer[0x800] EWRAM_COMMON(16);
+s16 gBosJfShakeStep EWRAM_COMMON(4);
+s16 gBosJfPillarShape EWRAM_COMMON(4);
+s32 gBosJfShakeOffset EWRAM_COMMON(4);
 u32 gUnk_0203B4EC EWRAM_COMMON(4);
 
 void task_bos_jf_0(JfWork* work, s32 a) {
@@ -27,25 +27,25 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     s32 v1;
     s32 v2;
 
-    gUnk_0203AC80 = 0;
-    gUnk_0203ACB0 = 0;
-    gUnk_0203ACB4 = 0;
+    gBosJfActorX = 0;
+    gBosJfActorY = 0;
+    gBosJfActorZ = 0;
     work->flags = 0;
 
     if (a != 0) {
         work->flags = 8;
     }
 
-    gUnk_0203ACC4 = 7;
-    gUnk_0203ACD4 = 0;
-    gUnk_0203ACC0 = 0;
+    gBosJfLeftPillarLevel = 7;
+    gBosJfMiddlePillarLevel = 0;
+    gBosJfRightPillarLevel = 0;
     gJfMapArg.tiles = gUnk_0965DC04;
     gJfMapArg.tilesSize = 0x8000;
     gJfMapArg.palette = gUnk_096FB404;
     gJfMapArg.paletteSize = 128;
     gJfMapArg.maps[0] = gUnk_096C4C64;
     gJfMapArg.maps[1] = gUnk_096C5464;
-    gJfMapArg.maps[2] = gUnk_0203ACE0;
+    gJfMapArg.maps[2] = gBosJfMapBuffer;
     gJfMapArg.maps[3] = gUnk_096C6464;
     TaskPoolInit(&work->tasks, 4);
 
@@ -60,62 +60,62 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     v1 = work->flags & 8;
 
     if (v1 != 0) {
-        work->unk_238 = 10;
-        work->unk_23C = 10;
+        work->state = 10;
+        work->attackState = 10;
     } else {
-        work->unk_238 = 0;
-        work->unk_23C = 0;
+        work->state = 0;
+        work->attackState = 0;
     }
 
     work->unk_240 = 0;
-    work->unk_242 = 0;
-    work->unk_244 = 0;
+    work->hurtTimer = 0;
+    work->stateStep = 0;
     work->unk_246 = 0;
-    work->unk_248 = 8;
-    work->unk_24A = 12;
-    work->unk_24E = 0;
-    work->unk_250 = 0;
+    work->bgFrame = 8;
+    work->bgFrameTimer = 12;
+    work->pillarPhase = 0;
+    work->gimmickTimer = 0;
     v2 = work->flags & 8;
 
     if (v2 != 0) {
-        work->unk_22C = 0x2A200;
-        work->unk_230 = 0x15E00;
-        work->unk_234 = -0x3800;
-        func_0801B37C(&work->body, &gUnk_0961A668, work->unk_22C, work->unk_230, work->unk_234);
+        work->bodyX = 0x2A200;
+        work->bodyY = 0x15E00;
+        work->bodyZ = -0x3800;
+        InitEnemyBtlObj(&work->body, &gBosJfEmyKind, work->bodyX, work->bodyY, work->bodyZ);
         work->body.flags |= 4;
         TaskCreate(&work->tasks, &gTaskDescBosJfMajin, work);
     } else {
-        work->unk_220 = 0x29600;
-        work->unk_224 = 0x15400;
-        work->unk_228 = -0xB400;
+        work->subX = 0x29600;
+        work->subY = 0x15400;
+        work->subZ = -0xB400;
         sub = &work->sub;
-        func_0801B37C(sub, &gUnk_0961A668, work->unk_220, work->unk_224, work->unk_228);
+        InitEnemyBtlObj(sub, &gBosJfEmyKind, work->subX, work->subY, work->subZ);
         sub->flags |= 0x400;
         sub->flags |= 0x200000000000;
         sub->flags &= ~4;
-        sub->unk_024 = v2;
-        work->sub.unk_0A2 = 4;
-        work->unk_22C = 0x2A200;
-        work->unk_230 = 0x15E00;
-        work->unk_234 = -0x3800;
-        func_0801B37C(&work->body, &gUnk_0961A668, work->unk_22C, work->unk_230, work->unk_234);
+        sub->hitFlags = v2;
+        work->sub.centerHeight = 4;
+        work->bodyX = 0x2A200;
+        work->bodyY = 0x15E00;
+        work->bodyZ = -0x3800;
+        InitEnemyBtlObj(&work->body, &gBosJfEmyKind, work->bodyX, work->bodyY, work->bodyZ);
         work->body.flags |= 4;
         work->body.flags |= 0x8000;
         work->body.flags |= 0x100000000;
-        work->body.unk_09E = 32;
-        work->body.unk_0A0 = 40;
-        work->body.unk_09C = 28;
-        func_0801BDD4(&work->body, sub);
-        gBtlWork->unk_0D8 = 0xFF00;
-        func_0801C298(0, 1);
+        work->body.radiusX = 32;
+        work->body.radiusY = 40;
+        work->body.height = 28;
+        SetBtlObjParent(&work->body, sub);
+        gBtlWork->bossPriorityOffset = 0xFF00;
+        SetBtlPaletteFadeExcluded(0, 1);
         SetBattleActorPosition(0x23E00, 0x16800, -0x4000);
-        func_0801C274(0x20600, 0x16800, -0x800);
+        SetGimmickTarget(0x20600, 0x16800, -0x800);
         TaskCreate(&work->tasks, &gTaskDescBosJfLamp, work);
         TaskCreate(&work->tasks, &gTaskDescBosJfMajin, work);
         q = gBtlWork;
-        q->unk_0CC = sub->x;
-        q->unk_0D0 = sub->y;
-        q->unk_0D4 = sub->z;
+        q->bossX = sub->x;
+        q->bossY = sub->y;
+        q->bossZ = sub->z;
     }
 }
 u8 task_bos_jf_1(JfWork* work) {
@@ -128,68 +128,68 @@ u8 task_bos_jf_1(JfWork* work) {
         return 1;
     }
 
-    switch (func_0801ADAC(sub)) {
+    switch (UpdateBtlObjReaction(sub)) {
     case 5:
-        work->unk_238 = work->unk_23C;
-        work->unk_244 = 0;
+        work->state = work->attackState;
+        work->stateStep = 0;
         break;
     case 1:
     case 6:
     case 7:
         work->flags |= 1;
-        work->unk_242 = 20;
+        work->hurtTimer = 20;
         break;
     case 3:
     case 8:
-        work->unk_238 = 9;
-        work->unk_244 = 0;
+        work->state = 9;
+        work->stateStep = 0;
         break;
     case 4:
         if (gGameState.flags & 8) {
-            if (work->unk_250 == 0) {
+            if (work->gimmickTimer == 0) {
                 if (GetRandom() % 100 <= 19) {
                     _0801C1F8(0, sub->x, sub->y, sub->z);
                 }
             }
         }
 
-        work->unk_238 = 7;
-        work->unk_244 = 0;
+        work->state = 7;
+        work->stateStep = 0;
         break;
     }
 
     if (work->flags & 1) {
-        if (--work->unk_242 <= 0) {
+        if (--work->hurtTimer <= 0) {
             work->unk_240 = 0;
             work->flags &= ~1;
             LoadPaletteWithEffect(gUnk_096FB584, (void*)0x05000000, 32);
-            func_0801AF08(sub);
+            ClearBtlObjActionFlags(sub);
 
-            if (sub->unk_02C > 0) {
-                if (work->unk_238 != 1 && work->unk_238 != 6 && work->unk_238 != 7 &&
-                    work->unk_238 != 11) {
-                    work->unk_238 = 0;
-                    work->unk_244 = 0;
+            if (sub->hp > 0) {
+                if (work->state != 1 && work->state != 6 && work->state != 7 &&
+                    work->state != 11) {
+                    work->state = 0;
+                    work->stateStep = 0;
                 }
             }
         }
     }
 
     if ((gGameState.flags & 8) == 0) {
-        if (sub->unk_024 & 0x20000000) {
-            sub->unk_024 &= ~0x20000000;
+        if (sub->hitFlags & 0x20000000) {
+            sub->hitFlags &= ~0x20000000;
 
             if ((work->flags & 1) == 0) {
-                if (work->unk_250 == 0) {
+                if (work->gimmickTimer == 0) {
                     _0801C1F8(0, sub->x, sub->y, sub->z);
                 }
             }
         }
     }
 
-    if (func_0801C1C0(0)) {
-        work->unk_244 = 0;
-        work->unk_238 = 11;
+    if (ConsumeGimmickFlag(0)) {
+        work->stateStep = 0;
+        work->state = 11;
         work->flags |= 4;
 
         if (gBtlWork->flags & 0x40) {
@@ -197,25 +197,25 @@ u8 task_bos_jf_1(JfWork* work) {
         }
     }
 
-    t = work->unk_250;
+    t = work->gimmickTimer;
 
     if ((s16)t > 0) {
-        work->unk_250 = t - 1;
+        work->gimmickTimer = t - 1;
     }
 
     TaskPoolUpdate(&work->tasks);
     q = gBtlWork;
-    q->unk_0CC = sub->x;
-    q->unk_0D0 = sub->y;
-    q->unk_0D4 = sub->z;
+    q->bossX = sub->x;
+    q->bossY = sub->y;
+    q->bossZ = sub->z;
 
     if (work->flags & 2) {
         return 0;
     }
 
-    gUnk_0203AC80 = q->actor->x >> 8;
-    gUnk_0203ACB0 = q->actor->y >> 8;
-    gUnk_0203ACB4 = q->actor->z >> 8;
+    gBosJfActorX = q->actor->x >> 8;
+    gBosJfActorY = q->actor->y >> 8;
+    gBosJfActorZ = q->actor->z >> 8;
     return 1;
 }
 
@@ -225,14 +225,14 @@ void task_bos_jf_2(JfWork* work) {
 
 void task_bos_jf_3(JfWork* work) {
     if ((work->flags & 8) == 0) {
-        func_0801B7D8(&work->sub);
-        func_0801B7D8(&work->body);
+        ReleaseEnemyBtlObj(&work->sub);
+        ReleaseEnemyBtlObj(&work->body);
     }
 
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
+u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -240,17 +240,17 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
     s32 hi;
     s32 x;
 
-    v1 = -((gUnk_0203ACC4 + 1) << 11);
-    v2 = -((gUnk_0203ACD4 + 1) << 11);
-    v3 = -((gUnk_0203ACC0 + 1) << 11);
+    v1 = -((gBosJfLeftPillarLevel + 1) << 11);
+    v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
+    v3 = -((gBosJfRightPillarLevel + 1) << 11);
     gBtlWork->actor->flags &= ~0x2000000;
 
-    if (gUnk_0203ACC4 > gUnk_0203ACD4) {
+    if (gBosJfLeftPillarLevel > gBosJfMiddlePillarLevel) {
         lo = 0x1F600;
 
-        if (gUnk_0203ACD4 > gUnk_0203ACC0) {
+        if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gUnk_0203B4E4 = 0;
+            gBosJfPillarShape = 0;
             x = *p;
 
             if (x > hi) {
@@ -279,9 +279,9 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                     return 1;
                 }
             }
-        } else if (gUnk_0203ACD4 < gUnk_0203ACC0) {
+        } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gUnk_0203B4E4 = 1;
+            gBosJfPillarShape = 1;
             x = *p;
 
             if (x <= lo) {
@@ -311,7 +311,7 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 }
             }
         } else {
-            gUnk_0203B4E4 = 2;
+            gBosJfPillarShape = 2;
             x = *p;
 
             if (x > lo) {
@@ -329,12 +329,12 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 return 1;
             }
         }
-    } else if (gUnk_0203ACC4 < gUnk_0203ACD4) {
+    } else if (gBosJfLeftPillarLevel < gBosJfMiddlePillarLevel) {
         lo = 0x1DA00;
 
-        if (gUnk_0203ACD4 > gUnk_0203ACC0) {
+        if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gUnk_0203B4E4 = 3;
+            gBosJfPillarShape = 3;
             x = *p;
 
             if (x < lo) {
@@ -362,9 +362,9 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 *p = hi;
                 return 1;
             }
-        } else if (gUnk_0203ACD4 < gUnk_0203ACC0) {
+        } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gUnk_0203B4E4 = 4;
+            gBosJfPillarShape = 4;
             x = *p;
 
             if (x < lo) {
@@ -394,7 +394,7 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 }
             }
         } else {
-            gUnk_0203B4E4 = 5;
+            gBosJfPillarShape = 5;
             x = *p;
 
             if (x < lo) {
@@ -413,9 +413,9 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
             }
         }
     } else {
-        if (gUnk_0203ACD4 > gUnk_0203ACC0) {
+        if (gBosJfMiddlePillarLevel > gBosJfRightPillarLevel) {
             hi = 0x22E00;
-            gUnk_0203B4E4 = 6;
+            gBosJfPillarShape = 6;
             x = *p;
 
             if (x > hi) {
@@ -432,9 +432,9 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 *p = hi;
                 return 1;
             }
-        } else if (gUnk_0203ACD4 < gUnk_0203ACC0) {
+        } else if (gBosJfMiddlePillarLevel < gBosJfRightPillarLevel) {
             hi = 0x21200;
-            gUnk_0203B4E4 = 7;
+            gBosJfPillarShape = 7;
             x = *p;
 
             if (x < hi) {
@@ -452,7 +452,7 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
                 return 1;
             }
         } else {
-            gUnk_0203B4E4 = 8;
+            gBosJfPillarShape = 8;
             v1 = v2;
             *out = v1;
             return 0;
@@ -462,14 +462,14 @@ u8 func_080BD4A8(s32* p, s32* b, s32* a, s32* out) {
     return 0;
 }
 
-u8 func_080BD7F8(s32* p, s32* a, s32* b, s32* out) {
+u8 BosJfGetGroundZ(s32* p, s32* a, s32* b, s32* out) {
     s32 v1;
     s32 v2;
     s32 v3;
 
-    v1 = -((gUnk_0203ACC4 + 1) << 11);
-    v2 = -((gUnk_0203ACD4 + 1) << 11);
-    v3 = -((gUnk_0203ACC0 + 1) << 11);
+    v1 = -((gBosJfLeftPillarLevel + 1) << 11);
+    v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
+    v3 = -((gBosJfRightPillarLevel + 1) << 11);
 
     if (*p <= 0x259FF) {
         if (*p <= 0x221FF) {
@@ -525,52 +525,52 @@ u8 func_080BD7F8(s32* p, s32* a, s32* b, s32* out) {
 }
 
 void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
-    RequestDma3Copy(gUnk_096C5C64, gUnk_0203ACE0, 0x800);
-    gUnk_0203ACD8 = arg->maps;
-    func_080BDAAC();
+    RequestDma3Copy(gUnk_096C5C64, gBosJfMapBuffer, 0x800);
+    gBosJfMapBlocks = arg->maps;
+    BosJfDrawPillars();
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     gBtlWork->scale = 0x100;
-    gBtlWork->unk_028 = 0x100;
+    gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0x23E00;
     gBtlWork->y = 0x12800;
-    gBtlWork->unk_000 = 0x23E00;
-    gBtlWork->unk_004 = 0x12800;
+    gBtlWork->viewX = 0x23E00;
+    gBtlWork->viewY = 0x12800;
     gBtlWork->x2 = 0x23E00;
     gBtlWork->y2 = 0x12800;
-    gBtlWork->unk_01C = 0x23E00;
-    gBtlWork->unk_020 = 0x12800;
-    gBtlWork->unk_01A = 0xF;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
-    ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
-    work->unk_00 = 0;
-    work->unk_02 = 0;
-    gUnk_0203ACD0 = 0;
-    gUnk_0203B4E0 = 0;
-    gUnk_0203ACC8 = 0;
-    gUnk_0203ACCC = 0;
-    gUnk_0203B4E8 = 0;
+    gBtlWork->zoomX = 0x23E00;
+    gBtlWork->zoomY = 0x12800;
+    gBtlWork->zoomSteps = 0xF;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
+    ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
+    work->paletteTimer = 0;
+    work->paletteFrame = 0;
+    gBosJfShakeActive = 0;
+    gBosJfShakeStep = 0;
+    gBosJfShakeTimer = 0;
+    gBosJfShakeDuration = 0;
+    gBosJfShakeOffset = 0;
 }
 
 u8 task_bos_jf_map_1(JfMapWork* work) {
     s32 dx;
     s32 dy;
 
-    work->unk_00++;
+    work->paletteTimer++;
 
-    if (work->unk_00 > 14) {
-        work->unk_00 = 0;
-        work->unk_02++;
+    if (work->paletteTimer > 14) {
+        work->paletteTimer = 0;
+        work->paletteFrame++;
 
-        if (work->unk_02 > 7) {
-            work->unk_02 = 0;
+        if (work->paletteFrame > 7) {
+            work->paletteFrame = 0;
         }
 
-        LoadPalette(gUnk_096FB484 + work->unk_02 * 32, (void*)0x05000020, 0x20);
+        LoadPalette(gUnk_096FB484 + work->paletteFrame * 32, (void*)0x05000020, 0x20);
     }
 
-    func_0802F208();
+    BtlMapUpdateShake();
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
@@ -582,59 +582,59 @@ u8 task_bos_jf_map_1(JfMapWork* work) {
 
     gBtlWork->x += dx;
     gBtlWork->y += dy;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->unk_000 < (gBtlWork->unk_0DA + 0x14) << 8) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 0x14) << 8;
-    } else if (gBtlWork->unk_000 > (gBtlWork->unk_0DC - 0x1C) << 8) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 0x1C) << 8;
+    if (gBtlWork->viewX < (gBtlWork->xMin + 0x14) << 8) {
+        gBtlWork->viewX = (gBtlWork->xMin + 0x14) << 8;
+    } else if (gBtlWork->viewX > (gBtlWork->xMax - 0x1C) << 8) {
+        gBtlWork->viewX = (gBtlWork->xMax - 0x1C) << 8;
     }
 
-    if (gBtlWork->unk_004 < (gBtlWork->unk_0DE - 0x90) << 8) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0DE - 0x90) << 8;
-    } else if (gBtlWork->unk_004 > (gBtlWork->unk_0E0 - 0x48) << 8) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0E0 - 0x48) << 8;
+    if (gBtlWork->viewY < (gBtlWork->yMin - 0x90) << 8) {
+        gBtlWork->viewY = (gBtlWork->yMin - 0x90) << 8;
+    } else if (gBtlWork->viewY > (gBtlWork->yMax - 0x48) << 8) {
+        gBtlWork->viewY = (gBtlWork->yMax - 0x48) << 8;
     }
 
-    gBtlWork->unk_004 += func_0802F268() + func_080BDB58();
-    ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (gBtlWork->unk_004 >> 8) + 0x28);
+    gBtlWork->viewY += BtlMapGetShake() + BosJfUpdateShake();
+    ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (gBtlWork->viewY >> 8) + 0x28);
 
     return 1;
 }
 
-void func_080BDAAC(void) {
-    func_080C6EB0(gUnk_09EF275C[0][gUnk_0203ACC4], gUnk_0203ACE0 + 0x24c, 7, 0x17);
-    func_080C6EB0(gUnk_09EF275C[1][gUnk_0203ACD4], gUnk_0203ACE0 + 0x25a, 7, 0x17);
-    func_080C6EB0(gUnk_09EF275C[0][gUnk_0203ACC0], gUnk_0203ACE0 + 0x268, 7, 0x17);
-    SetBgMapBlocks(0, gUnk_0203ACD8, 2, 2);
+void BosJfDrawPillars(void) {
+    RequestMapRowsCopy(gBosJfPillarMaps[0][gBosJfLeftPillarLevel], gBosJfMapBuffer + 0x24c, 7, 0x17);
+    RequestMapRowsCopy(gBosJfPillarMaps[1][gBosJfMiddlePillarLevel], gBosJfMapBuffer + 0x25a, 7, 0x17);
+    RequestMapRowsCopy(gBosJfPillarMaps[0][gBosJfRightPillarLevel], gBosJfMapBuffer + 0x268, 7, 0x17);
+    SetBgMapBlocks(0, gBosJfMapBlocks, 2, 2);
 }
-void func_080BDB28(s16 a) {
-    gUnk_0203ACD0 = 1;
-    gUnk_0203B4E0 = 0;
-    gUnk_0203ACC8 = 0;
-    gUnk_0203ACCC = a;
-    gUnk_0203B4E8 = 0;
+void BosJfStartShake(s16 a) {
+    gBosJfShakeActive = 1;
+    gBosJfShakeStep = 0;
+    gBosJfShakeTimer = 0;
+    gBosJfShakeDuration = a;
+    gBosJfShakeOffset = 0;
 }
 
-s32 func_080BDB58(void) {
-    if (gUnk_0203ACD0 == 1) {
-        gUnk_0203ACC8++;
+s32 BosJfUpdateShake(void) {
+    if (gBosJfShakeActive == 1) {
+        gBosJfShakeTimer++;
 
-        if (gUnk_0203ACC8 < gUnk_0203ACCC) {
-            if (gUnk_0203B4E0 % 4 == 0) {
-                gUnk_0203B4E8 = 0x200;
-            } else if (gUnk_0203B4E0 % 4 == 2) {
-                gUnk_0203B4E8 = -0x200;
+        if (gBosJfShakeTimer < gBosJfShakeDuration) {
+            if (gBosJfShakeStep % 4 == 0) {
+                gBosJfShakeOffset = 0x200;
+            } else if (gBosJfShakeStep % 4 == 2) {
+                gBosJfShakeOffset = -0x200;
             }
 
-            gUnk_0203B4E0++;
+            gBosJfShakeStep++;
         } else {
-            gUnk_0203ACD0 = 0;
+            gBosJfShakeActive = 0;
         }
     }
 
-    return gUnk_0203B4E8;
+    return gBosJfShakeOffset;
 }
 
 void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
@@ -643,7 +643,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     speed.integer = 0;
     speed.fraction = 0x80;
     work->jf = arg;
-    work->unk_28 = speed.integer * 256 + speed.fraction;
+    work->vx = speed.integer * 256 + speed.fraction;
     work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->gfx = gUnk_09EF3A48[12];
     work->tiles2 = LoadObjTiles(gUnk_09682AA4, 0x2800);
@@ -651,16 +651,16 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
-    work->unk_2E = 0;
-    work->unk_1C = 0;
-    work->unk_1E = 0;
-    work->unk_20 = GetRandom() % 0x79 + 0x1E0;
-    work->unk_22 = 0;
+    work->moveSteps = 0;
+    work->tiles2Frame = 0;
+    work->tiles2Timer = 0;
+    work->voiceInterval = GetRandom() % 0x79 + 0x1E0;
+    work->voiceTimer = 0;
     work->unk_24 = 1;
-    work->unk_2D = 1;
+    work->onFlatGround = 1;
     work->state = 0;
-    work->unk_34 = 0;
-    work->unk_38 = 0;
+    work->stateTimer = 0;
+    work->targetX = 0;
     work->angle = 0;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, &(arg = work->jf)->sub);
@@ -671,23 +671,23 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
     ObjTiles* p;
     s32 d;
 
-    if (jf->unk_238 <= 3) {
-        if (++work->unk_22 > work->unk_20) {
-            work->unk_22 = 0;
+    if (jf->state <= 3) {
+        if (++work->voiceTimer > work->voiceInterval) {
+            work->voiceTimer = 0;
             m4aSongNumStart(SONG_VO_EG_DAMAGE00);
-            work->unk_20 = GetRandom() % 121 + 480;
+            work->voiceInterval = GetRandom() % 121 + 480;
         }
     }
 
-    if (work->jf->unk_238 == 9) {
+    if (work->jf->state == 9) {
         work->state = 5;
     }
 
     switch (work->state) {
     case 0:
-        if (work->unk_34 == 0) {
-            work->unk_38 = func_080BE278(work);
-            d = (s16)((work->unk_38 >> 8) - (sub->x >> 8));
+        if (work->stateTimer == 0) {
+            work->targetX = BosJfLampChooseTargetX(work);
+            d = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
             if (d > 0) {
                 sub->flags &= ~4;
@@ -695,13 +695,13 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 sub->flags |= 4;
             }
 
-            work->unk_2E = 200;
-            work->unk_34++;
-        } else if (work->unk_2E > 0) {
-            ApproachValue(&sub->x, work->unk_38, work->unk_2E);
-            work->unk_2E--;
+            work->moveSteps = 200;
+            work->stateTimer++;
+        } else if (work->moveSteps > 0) {
+            ApproachValue(&sub->x, work->targetX, work->moveSteps);
+            work->moveSteps--;
         } else {
-            work->unk_34 = 0;
+            work->stateTimer = 0;
             work->state = 1;
         }
 
@@ -709,7 +709,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         work->angle += 2;
         break;
     case 1:
-        if (work->unk_34 == 0) {
+        if (work->stateTimer == 0) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
             if (d > 0) {
@@ -718,26 +718,26 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 sub->flags |= 4;
             }
 
-            work->unk_34++;
-        } else if (work->unk_34 > 60) {
-            work->unk_34 = 0;
+            work->stateTimer++;
+        } else if (work->stateTimer > 60) {
+            work->stateTimer = 0;
             work->state = 2;
         } else {
-            work->unk_34++;
+            work->stateTimer++;
         }
 
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
     case 2:
-        if (work->unk_34 == 0) {
+        if (work->stateTimer == 0) {
             if (jf->body.flags & 4) {
-                work->unk_38 = 0x27800;
+                work->targetX = 0x27800;
             } else {
-                work->unk_38 = 0x19400;
+                work->targetX = 0x19400;
             }
 
-            d = (s16)((work->unk_38 >> 8) - (sub->x >> 8));
+            d = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
             if (d > 0) {
                 sub->flags &= ~4;
@@ -745,14 +745,14 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 sub->flags |= 4;
             }
 
-            work->unk_2E = 200;
-            work->unk_34++;
-        } else if (work->unk_2E > 0) {
-            ApproachValue(&sub->x, work->unk_38, work->unk_2E);
-            ApproachValue(&sub->z, -0xB400, work->unk_2E);
-            work->unk_2E--;
+            work->moveSteps = 200;
+            work->stateTimer++;
+        } else if (work->moveSteps > 0) {
+            ApproachValue(&sub->x, work->targetX, work->moveSteps);
+            ApproachValue(&sub->z, -0xB400, work->moveSteps);
+            work->moveSteps--;
         } else {
-            work->unk_34 = 0;
+            work->stateTimer = 0;
             work->state = 3;
         }
 
@@ -760,7 +760,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         work->angle += 2;
         break;
     case 3:
-        if (work->unk_34 == 0) {
+        if (work->stateTimer == 0) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
             if (d > 0) {
@@ -769,43 +769,43 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 sub->flags |= 4;
             }
 
-            work->unk_34++;
-        } else if (work->unk_34 > 60) {
-            work->unk_34 = 0;
+            work->stateTimer++;
+        } else if (work->stateTimer > 60) {
+            work->stateTimer = 0;
             work->state = 0;
         } else {
-            work->unk_34++;
+            work->stateTimer++;
         }
 
         sub->z = gSineTable[(u8)work->angle] * 20 - 0xB400;
         work->angle += 2;
         break;
     case 4:
-        if (work->unk_34 == 0) {
-            work->unk_2E = 20;
+        if (work->stateTimer == 0) {
+            work->moveSteps = 20;
             sub->flags |= 4;
-            work->unk_28 = -204;
-            work->unk_34++;
+            work->vx = -204;
+            work->stateTimer++;
         } else {
-            if (work->unk_2E > 0) {
-                ApproachValue(&sub->z, -0xA000, work->unk_2E);
-                work->unk_2E--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&sub->z, -0xA000, work->moveSteps);
+                work->moveSteps--;
             } else {
                 if (sub->x <= 0x19400) {
                     sub->flags &= ~4;
-                    work->unk_28 = 204;
+                    work->vx = 204;
                 }
 
                 if (sub->x > 0x277FF) {
                     sub->flags |= 4;
-                    work->unk_28 = -204;
+                    work->vx = -204;
                 }
 
-                sub->x += work->unk_28;
+                sub->x += work->vx;
             }
 
-            if (work->jf->unk_250 == 0) {
-                work->unk_34 = 0;
+            if (work->jf->gimmickTimer == 0) {
+                work->stateTimer = 0;
                 work->state = 2;
             }
         }
@@ -814,25 +814,25 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         break;
     }
 
-    if (work->jf->unk_24E == 2) {
-        work->unk_34 = 0;
+    if (work->jf->pillarPhase == 2) {
+        work->stateTimer = 0;
         work->state = 4;
     }
 
-    if (work->unk_1E > 3) {
-        work->unk_1E = 0;
-        work->unk_1C++;
+    if (work->tiles2Timer > 3) {
+        work->tiles2Timer = 0;
+        work->tiles2Frame++;
 
-        if (work->unk_1C > 5) {
-            work->unk_1C = 0;
+        if (work->tiles2Frame > 5) {
+            work->tiles2Frame = 0;
         }
 
         p = work->tiles2;
-        RequestDma3Copy(gUnk_09685DA4 + (work->unk_1C << 9), gUnk_06010000 + (p->index << 5), 512);
+        RequestDma3Copy(gUnk_09685DA4 + (work->tiles2Frame << 9), gUnk_06010000 + (p->index << 5), 512);
     }
 
-    work->unk_1E++;
-    work->unk_2D = func_080BD7F8(&sub->x, &sub->y, &sub->z, &sub->unk_010);
+    work->tiles2Timer++;
+    work->onFlatGround = BosJfGetGroundZ(&sub->x, &sub->y, &sub->z, &sub->groundZ);
     ColliderSetPosition(&sub->collider, sub->x, sub->y, sub->z);
     TaskPoolUpdate(&work->tasks);
 
@@ -854,7 +854,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
         mode |= 1;
     }
 
-    if (gBtlWork->unk_070 == 0 && (work->jf->flags & 1) && (gFrameCounter & 1)) {
+    if (gBtlWork->paused == 0 && (work->jf->flags & 1) && (gFrameCounter & 1)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -865,7 +865,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
     DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, 0, mode,
                (u16)(-4101 - (sub->y >> 8) * 4));
 
-    if (work->unk_2D == 1) {
+    if (work->onFlatGround == 1) {
         TaskPoolDraw(&work->tasks);
     }
 }
@@ -878,12 +878,12 @@ void task_bos_jf_lamp_3(JfLampWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-s32 func_080BE278(JfLampWork* work) {
+s32 BosJfLampChooseTargetX(JfLampWork* work) {
     s16 v;
     s32 r;
 
     if (work->jf->body.flags & 4) {
-        switch (gUnk_0203B4E4) {
+        switch (gBosJfPillarShape) {
         case 5:
         case 6:
             r = 0x27800;
@@ -917,7 +917,7 @@ s32 func_080BE278(JfLampWork* work) {
         return r;
     }
 
-    switch (gUnk_0203B4E4) {
+    switch (gBosJfPillarShape) {
     case 0:
     case 2:
         r = 0x1F400;
@@ -951,7 +951,7 @@ s32 func_080BE278(JfLampWork* work) {
     return r;
 }
 
-const EmyKind gUnk_0961A668 = { 33, 1000, 16, 16, 24, 60, 0 };
+const EmyKind gBosJfEmyKind = { 33, 1000, 16, 16, 24, 60, 0 };
 
 TaskDesc gTaskDescBosJf = {
     "task_bos_jf",
@@ -962,7 +962,7 @@ TaskDesc gTaskDescBosJf = {
     sizeof(JfWork),
 };
 
-void* gUnk_09EF275C[2][15] = {
+void* gBosJfPillarMaps[2][15] = {
     {
         gUnk_096C6C64,
         gUnk_096C6C64 + 14,

@@ -75,7 +75,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     case 1:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B4AC46);
 
-        switch (src->unk_12) {
+        switch (src->number) {
         case 0:
             work->gfx = gUnkEu_08B4AB9C;
             break;
@@ -112,7 +112,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     case 4:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B52782);
 
-        switch (src->unk_12) {
+        switch (src->number) {
         case 0:
             work->gfx = gUnkEu_08B526D8;
             break;
@@ -149,7 +149,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     case 3:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B533BE);
 
-        switch (src->unk_12) {
+        switch (src->number) {
         case 0:
             work->gfx = gUnkEu_08B53314;
             break;
@@ -187,7 +187,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     default:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B53FFA);
 
-        switch (src->unk_12) {
+        switch (src->number) {
         case 0:
             work->gfx = gUnkEu_08B53F50;
             break;
@@ -226,7 +226,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     work->tiles = AllocObjTiles(0x200, gUnk_08B1FD66);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 
-    switch (src->unk_12) {
+    switch (src->number) {
     case 0:
         work->gfx = gUnk_08B1FCBC;
         break;
@@ -291,7 +291,7 @@ void task_btl_pop_cb_3(BtlPopCbWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void* func_0805CDC8(s32 digit, u8 leading) {
+void* GetExpDigitGfx(s32 digit, u8 leading) {
     switch (digit) {
     case 0:
         if (leading != 0) {
@@ -320,19 +320,19 @@ void* func_0805CDC8(s32 digit, u8 leading) {
     return 0;
 }
 
-void func_0805CE60(BtlExpWork* work, u32 value) {
+void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     void* d0;
     void* d1;
     void* d2;
     void* d3;
     u8 flag;
 
-    d0 = func_0805CDC8(value / 10000, 0);
+    d0 = GetExpDigitGfx(value / 10000, 0);
     work->gfx2[0] = d0;
     value %= 10000;
     flag = d0 != 0;
 
-    d1 = func_0805CDC8(value / 1000, flag);
+    d1 = GetExpDigitGfx(value / 1000, flag);
     work->gfx2[1] = d1;
     value %= 1000;
 
@@ -340,7 +340,7 @@ void func_0805CE60(BtlExpWork* work, u32 value) {
         flag = 1;
     }
 
-    d2 = func_0805CDC8(value / 100, flag);
+    d2 = GetExpDigitGfx(value / 100, flag);
     work->gfx2[2] = d2;
     value %= 100;
 
@@ -348,7 +348,7 @@ void func_0805CE60(BtlExpWork* work, u32 value) {
         flag = 1;
     }
 
-    d3 = func_0805CDC8(value / 10, flag);
+    d3 = GetExpDigitGfx(value / 10, flag);
     work->gfx2[3] = d3;
     value %= 10;
 
@@ -381,10 +381,10 @@ void task_btl_exp_0(BtlExpWork* work) {
     }
 
     work->timer = 0;
-    work->unk_3E = gGameState.progression.level;
-    work->unk_44 = gGameState.progression.exp;
+    work->level = gGameState.progression.level;
+    work->lastExp = gGameState.progression.exp;
     work->state = 0;
-    work->unk_40 = 0;
+    work->gainedExp = 0;
 }
 
 s32 task_btl_exp_1(BtlExpWork* work) {
@@ -392,8 +392,8 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         return 0;
     }
 
-    if (work->unk_3E < gGameState.progression.level) {
-        func_0805CE60(work, gGameState.progression.level);
+    if (work->level < gGameState.progression.level) {
+        BtlExpSetNumber(work, gGameState.progression.level);
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
@@ -418,14 +418,14 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #endif
         work->timer = 0;
         work->state = 3;
-        work->unk_3E = gGameState.progression.level;
-        work->unk_40 = 0;
+        work->level = gGameState.progression.level;
+        work->gainedExp = 0;
     }
 
     if (work->state != 3) {
-        if (work->unk_44 < gGameState.progression.exp) {
-            work->unk_40 += gGameState.progression.exp - work->unk_44;
-            func_0805CE60(work, work->unk_40);
+        if (work->lastExp < gGameState.progression.exp) {
+            work->gainedExp += gGameState.progression.exp - work->lastExp;
+            BtlExpSetNumber(work, work->gainedExp);
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
@@ -450,7 +450,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #endif
             work->timer = 0;
             work->state = 1;
-            work->unk_44 = gGameState.progression.exp;
+            work->lastExp = gGameState.progression.exp;
         }
     }
 
@@ -463,7 +463,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->state = 0;
             } else {
                 work->state = 2;
-                func_0805CE60(work, gGameState.progression.nextExp - gGameState.progression.exp);
+                BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case 0:
@@ -488,7 +488,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #endif
             }
             work->timer = 0;
-            work->unk_40 = 0;
+            work->gainedExp = 0;
         } else {
             work->timer++;
         }
@@ -499,7 +499,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->state = 0;
             } else {
                 work->state = 2;
-                func_0805CE60(work, gGameState.progression.nextExp - gGameState.progression.exp);
+                BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case 0:
@@ -524,7 +524,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #endif
             }
             work->timer = 0;
-            work->unk_40 = 0;
+            work->gainedExp = 0;
         } else {
             work->timer++;
         }
@@ -597,13 +597,13 @@ void task_btl_vslockon_0(BtlVslockonWork* work) {
 }
 
 s32 task_btl_vslockon_1(BtlVslockonWork* work) {
-    if (gBtlWork->unk_0F4 == 19) {
+    if (gBtlWork->hcEffect == 19) {
         gRikuBtlWork->actor2 = 0;
     } else {
         gRikuBtlWork->actor2 = gBtlWork->actor;
     }
 
-    if (gRikuBtlWork->unk_0F4 == 19) {
+    if (gRikuBtlWork->hcEffect == 19) {
         gBtlWork->actor2 = 0;
     } else {
         gBtlWork->actor2 = gRikuBtlWork->actor;
@@ -620,7 +620,7 @@ void task_btl_vslockon_2(BtlVslockonWork* work) {
 
     p = gBtlWork->actor2;
     if (p != 0) {
-        WorldToScreen(&x, &y, p->x, p->y, p->z - (p->unk_0A2 << 8));
+        WorldToScreen(&x, &y, p->x, p->y, p->z - (p->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 0x100);
     }
 }
@@ -643,55 +643,55 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
     AnimInit(&work->anim2, gBHpgagAnims, gBHpgagFrames);
     AnimStart(&work->anim, 0, 1);
 
-    if (gRikuBtlWork->actor->unk_02E <= 40) {
-        work->unk_64 = 0;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 80) {
-        work->unk_64 = 1;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 120) {
-        work->unk_64 = 2;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 160) {
-        work->unk_64 = 3;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 200) {
-        work->unk_64 = 4;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 240) {
-        work->unk_64 = 5;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 280) {
-        work->unk_64 = 6;
-        work->unk_68 = 0;
-    } else if (gRikuBtlWork->actor->unk_02E <= 320) {
-        work->unk_64 = 0;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 360) {
-        work->unk_64 = 1;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 400) {
-        work->unk_64 = 2;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 440) {
-        work->unk_64 = 3;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 480) {
-        work->unk_64 = 4;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 520) {
-        work->unk_64 = 5;
-        work->unk_68 = 1;
-    } else if (gRikuBtlWork->actor->unk_02E <= 560) {
-        work->unk_64 = 6;
-        work->unk_68 = 1;
+    if (gRikuBtlWork->actor->maxHp <= 40) {
+        work->gaugeSize = 0;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 80) {
+        work->gaugeSize = 1;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 120) {
+        work->gaugeSize = 2;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 160) {
+        work->gaugeSize = 3;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 200) {
+        work->gaugeSize = 4;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 240) {
+        work->gaugeSize = 5;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 280) {
+        work->gaugeSize = 6;
+        work->gaugeMode = 0;
+    } else if (gRikuBtlWork->actor->maxHp <= 320) {
+        work->gaugeSize = 0;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 360) {
+        work->gaugeSize = 1;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 400) {
+        work->gaugeSize = 2;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 440) {
+        work->gaugeSize = 3;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 480) {
+        work->gaugeSize = 4;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 520) {
+        work->gaugeSize = 5;
+        work->gaugeMode = 1;
+    } else if (gRikuBtlWork->actor->maxHp <= 560) {
+        work->gaugeSize = 6;
+        work->gaugeMode = 1;
     } else {
-        work->unk_64 = 6;
-        work->unk_68 = 1;
+        work->gaugeSize = 6;
+        work->gaugeMode = 1;
     }
 
-    if (work->unk_68 == 0) {
-        switch (work->unk_64) {
+    if (work->gaugeMode == 0) {
+        switch (work->gaugeSize) {
         case 0:
         case 1:
             AnimStart(&work->anim2, 1, 1);
@@ -719,7 +719,7 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
     } else {
         AnimStart(&work->anim2, 11, 1);
 
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
             work->gfx3 = gBHpgagFrame19;
             break;
@@ -745,12 +745,12 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
         }
     }
 
-    work->unk_00 = 0x100;
-    work->unk_04 = 1;
+    work->hpRatio = 0x100;
+    work->firstUpdate = 1;
     work->unk_5C = 1;
     work->timer = 0;
-    work->unk_60 = 0;
-    work->unk_62 = 0;
+    work->prevHp = 0;
+    work->displayHp = 0;
 }
 
 s32 task_btl_hpoth_1(BtlHpothWork* work) {
@@ -767,13 +767,13 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         return 0;
     }
 
-    if (work->unk_68 != 1 && work->unk_00 < 64) {
+    if (work->gaugeMode != 1 && work->hpRatio < 64) {
         flag = 1;
     } else {
         flag = 0;
     }
 
-    if (actor->unk_02C < work->unk_60) {
+    if (actor->hp < work->prevHp) {
         work->timer = 44;
     }
 
@@ -786,48 +786,48 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         AnimChange(&work->anim, 0, 1);
     }
 
-    if (work->unk_04 != 0) {
-        work->unk_04 = 0;
-        work->unk_62 = actor->unk_02C;
-    } else if (work->unk_62 < actor->unk_02C) {
-        work->unk_62 += 3;
-        if (work->unk_62 > actor->unk_02C) {
-            work->unk_62 = actor->unk_02C;
+    if (work->firstUpdate != 0) {
+        work->firstUpdate = 0;
+        work->displayHp = actor->hp;
+    } else if (work->displayHp < actor->hp) {
+        work->displayHp += 3;
+        if (work->displayHp > actor->hp) {
+            work->displayHp = actor->hp;
         }
-    } else if (work->unk_62 > actor->unk_02C) {
-        work->unk_62 -= 3;
-        if (work->unk_62 < actor->unk_02C) {
-            work->unk_62 = actor->unk_02C;
-        }
-    }
-
-    if (work->unk_68 == 1) {
-        if (work->unk_62 <= 280) {
-            work->unk_68 = 2;
-        }
-    } else if (work->unk_68 == 2) {
-        if (work->unk_62 > 280) {
-            work->unk_68 = 1;
+    } else if (work->displayHp > actor->hp) {
+        work->displayHp -= 3;
+        if (work->displayHp < actor->hp) {
+            work->displayHp = actor->hp;
         }
     }
 
-    state = work->unk_68;
+    if (work->gaugeMode == 1) {
+        if (work->displayHp <= 280) {
+            work->gaugeMode = 2;
+        }
+    } else if (work->gaugeMode == 2) {
+        if (work->displayHp > 280) {
+            work->gaugeMode = 1;
+        }
+    }
+
+    state = work->gaugeMode;
 
     switch (state) {
     case 0:
-        work->unk_00 = (work->unk_62 << 8) / actor->unk_02E;
+        work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         break;
     case 1:
-        work->unk_00 = ((work->unk_62 - 280) << 8) / (actor->unk_02E - 280);
+        work->hpRatio = ((work->displayHp - 280) << 8) / (actor->maxHp - 280);
         break;
     case 2:
-        work->unk_00 = (work->unk_62 << 8) / 280;
+        work->hpRatio = (work->displayHp << 8) / 280;
         break;
     }
 
     if (flag != 0) {
         if (state == 0) {
-            switch (work->unk_64) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 AnimChange(&work->anim2, 2, 1);
@@ -856,7 +856,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         }
     } else {
         if (state == 0) {
-            switch (work->unk_64) {
+            switch (work->gaugeSize) {
             case 0:
             case 1:
                 AnimChange(&work->anim2, 1, 1);
@@ -885,7 +885,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
 
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
-    work->unk_60 = actor->unk_02C;
+    work->prevHp = actor->hp;
     return 1;
 }
 
@@ -895,7 +895,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
 
     DrawSprite(236, 2, work->gfx, work->tiles, work->palette, 0, 0x411, 1);
 
-    switch (work->unk_68) {
+    switch (work->gaugeMode) {
     case 0:
         DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, 0x411, 4);
         break;
@@ -909,58 +909,58 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
         break;
     }
 
-    switch (work->unk_68) {
+    switch (work->gaugeMode) {
     case 2:
-        scale = work->unk_00;
+        scale = work->hpRatio;
         break;
     case 0:
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
         case 1:
-            scale = work->unk_00 * 72 >> 8;
+            scale = work->hpRatio * 72 >> 8;
             break;
         case 2:
-            scale = work->unk_00 * 109 >> 8;
+            scale = work->hpRatio * 109 >> 8;
             break;
         case 3:
-            scale = work->unk_00 * 146 >> 8;
+            scale = work->hpRatio * 146 >> 8;
             break;
         case 4:
-            scale = work->unk_00 * 182 >> 8;
+            scale = work->hpRatio * 182 >> 8;
             break;
         case 5:
-            scale = work->unk_00 * 219 >> 8;
+            scale = work->hpRatio * 219 >> 8;
             break;
         case 6:
         default:
-            scale = work->unk_00;
+            scale = work->hpRatio;
             break;
         }
         break;
     case 1:
     default:
-        switch (work->unk_64) {
+        switch (work->gaugeSize) {
         case 0:
-            scale = work->unk_00 * 36 >> 8;
+            scale = work->hpRatio * 36 >> 8;
             break;
         case 1:
-            scale = work->unk_00 * 72 >> 8;
+            scale = work->hpRatio * 72 >> 8;
             break;
         case 2:
-            scale = work->unk_00 * 109 >> 8;
+            scale = work->hpRatio * 109 >> 8;
             break;
         case 3:
-            scale = work->unk_00 * 146 >> 8;
+            scale = work->hpRatio * 146 >> 8;
             break;
         case 4:
-            scale = work->unk_00 * 182 >> 8;
+            scale = work->hpRatio * 182 >> 8;
             break;
         case 5:
-            scale = work->unk_00 * 219 >> 8;
+            scale = work->hpRatio * 219 >> 8;
             break;
         case 6:
         default:
-            scale = work->unk_00;
+            scale = work->hpRatio;
             break;
         }
         break;
@@ -968,7 +968,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
 
     scale *= 2;
 
-    if (work->unk_62 > 0) {
+    if (work->displayHp > 0) {
         if (scale < 10) {
             scale = 10;
         }
@@ -979,7 +979,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
             affine = AllocObjAffine(0, scale, 256, 0);
         }
 
-        if (work->unk_68 == 1) {
+        if (work->gaugeMode == 1) {
             DrawSprite(209, 9, gBHpgagFrame29, work->tiles4, work->palette2, affine, 0x410, 2);
         } else {
             DrawSprite(209, 6, gBHpgagFrame28, work->tiles4, work->palette2, affine, 0x410, 2);
@@ -996,52 +996,52 @@ void task_btl_hpoth_3(BtlHpothWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void func_0805DA64(u16 a) {
+void TutorialOpenMessage(u16 a) {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
     CreateCardMessageTask(&gBtlWork->taskPools[1], 0, a);
 }
 
-void func_0805DA98(u16 a) {
-    func_080A41F0(&gBtlWork->taskPools[1], a);
+void TutorialOpenPersistentMessage(u16 a) {
+    CreatePersistentSysmsgwinTask(&gBtlWork->taskPools[1], a);
 }
 
-void func_0805DAB4(void) {
+void TutorialRestoreBgMode(void) {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
-void func_0805DACC(TutorialWork* p, u16 b, u32 c) {
-    p->unk_00C = 0;
-    p->unk_004 = 1;
-    p->unk_008 = c;
-    p->unk_002 = b;
+void TutorialQueueMessage(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 1;
+    p->nextState = c;
+    p->message = b;
 }
 
-void func_0805DADC(TutorialWork* p, u16 b, u32 c) {
-    p->unk_00C = 0;
-    p->unk_004 = 3;
-    p->unk_008 = c;
-    p->unk_002 = b;
+void TutorialQueuePersistentMessage(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 3;
+    p->nextState = c;
+    p->message = b;
 }
 
-void func_0805DAEC(void) {
-    func_080A42E0();
+void TutorialCloseMessage(void) {
+    CloseMessageWindow();
 }
 
-void func_0805DAF8(TutorialWork* p, u16 b, u32 c) {
-    p->unk_00C = 0;
-    p->unk_004 = 0;
-    p->unk_008 = c;
+void TutorialWait(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 0;
+    p->nextState = c;
     p->unk_00E = b;
 }
 
-void func_0805DB04(TutorialWork* p, u16 b, u16 c, u16 d) {
+void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d) {
     p->flags |= 4;
-    p->unk_012 = b;
-    p->unk_014 = c;
+    p->arrowX = b;
+    p->arrowY = c;
     AnimStart(&p->anim, d, 1);
 }
 
-void func_0805DB28(TutorialWork* p) {
+void TutorialHideArrow(TutorialWork* p) {
     p->flags &= ~4;
 }
 

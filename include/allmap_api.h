@@ -4,6 +4,6 @@
 #include "types.h"
 
 void ClearStockMesDispWork(void);
-u8 func_080D5944(u8 a, u16 b);
+u8 TestAllmapRoomFlag(u8 a, u16 b);
 
 #endif

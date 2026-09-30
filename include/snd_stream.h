@@ -6,20 +6,20 @@
 typedef struct {
     void* buffers[2];
     u32 writePos[2];
-    u32 unk_10[2];
-    u32 unk_18[2];
-    u32 unk_20[2];
+    u32 totalWritten[2];
+    u32 lockPos[2];
+    u32 lockTotal[2];
     u32 dmaOffset;
-    u32 unk_2C;
+    u32 playedTotal;
     u32 samplesPerFrame;
     u32 bufferSize;
     u32 sampleRate;
     u32 timerReload;
     u32 channels;
     u32 playing;
-    void* (*unk_48)(u32);
+    void* (*iwramAlloc)(u32);
     void* (*alloc)(u32);
-    void (*unk_50)(void*);
+    void (*iwramFree)(void*);
     void (*free)(void*);
 } SoundStream;
 

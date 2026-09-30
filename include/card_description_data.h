@@ -11,8 +11,8 @@ typedef u8 CardDescriptionText;
 typedef LocalizedText CardDescriptionText;
 #endif
 
-extern CardDescriptionText* gUnk_09EE8F48[];
-extern CardDescriptionText* gUnk_09EE90D0[];
-extern CardDescriptionText* gUnk_09EE9138[];
+extern CardDescriptionText* gCardKindDescriptions[];
+extern CardDescriptionText* gMapCardDescriptions[];
+extern CardDescriptionText* gWorldDescriptions[];
 
 #endif

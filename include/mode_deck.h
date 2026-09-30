@@ -8,11 +8,11 @@ typedef struct MenuWork {
     void* palette;
     s32 x;
     s32 y;
-    u8 unk_10;
-    u8 unk_11;
+    u8 state;
+    u8 cursor;
     u8 unk_12[0x02];
 } MenuWork;
 
-extern Mode gUnk_09EE2704;
+extern Mode gModeDeck;
 
 #endif

@@ -24,7 +24,7 @@ void KeyStateClear(KeyState* k) {
     k->held = 0;
     k->trg = 0;
     k->rep = 0;
-    k->unk_6 = 0;
+    k->chordLatch = 0;
     k->on[0] = 0;
     k->on[1] = 0;
     k->on[2] = 0;
@@ -103,29 +103,29 @@ u16 KeyReadChord(KeyState* k, u16 a, u16 b) {
     u8 cb = KeyGetOffFrames(k, b);
 
     if (ca == 2) {
-        k->unk_6 &= ~a;
+        k->chordLatch &= ~a;
     }
 
     if (cb == 2) {
-        k->unk_6 &= ~b;
+        k->chordLatch &= ~b;
     }
 
     if (((KeyGetPressed(k) & a) && (KeyGetHeld(k) & b)) ||
         ((KeyGetPressed(k) & b) && (KeyGetHeld(k) & a))) {
-        k->unk_6 |= a | b;
+        k->chordLatch |= a | b;
         r = a | b;
     }
 
-    if (!(k->unk_6 & a)) {
+    if (!(k->chordLatch & a)) {
         if (KeyGetHoldFrames(k, a) == 5 || ca == 1) {
-            k->unk_6 |= a;
+            k->chordLatch |= a;
             r = a;
         }
     }
 
-    if (!(k->unk_6 & b)) {
+    if (!(k->chordLatch & b)) {
         if (KeyGetHoldFrames(k, b) == 5 || cb == 1) {
-            k->unk_6 |= b;
+            k->chordLatch |= b;
             r = b;
         }
     }

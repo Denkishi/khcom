@@ -9,12 +9,12 @@ void task_sroll_b_secn_0(SrollBSecnWork* w, SrollBSecnArg* a) {
     u32 i;
 
     w->unk_00 = 0;
-    w->unk_04 = a->unk_04;
-    w->unk_08 = a->unk_08;
-    w->unk_0C = a->unk_0C;
-    w->unk_10 = a->unk_10;
+    w->x = a->x;
+    w->y = a->y;
+    w->scrollY = a->scrollY;
+    w->scrollSpeed = a->scrollSpeed;
 
-    if (a->unk_00 < 0) {
+    if (a->index < 0) {
 #ifdef VERSION_JP
         w->tiles = LoadObjTiles(gUnk_09C87A10, 590 * 32);
 #else
@@ -26,11 +26,11 @@ void task_sroll_b_secn_0(SrollBSecnWork* w, SrollBSecnArg* a) {
         AnimInit(&w->anim2, gUnk_09EFB834, gUnk_09EFB828);
         AnimStart(&w->anim2, 0, 0);
     } else {
-        w->tiles = LoadObjTiles(gUnk_09A54374[a->unk_00][0], *(u16*)&gUnk_09A54374[a->unk_00][1]);
+        w->tiles = LoadObjTiles(gSrollSecnSprites[a->index][0], *(u16*)&gSrollSecnSprites[a->index][1]);
         w->palette = LoadObjPalette(gUnk_09D6BE74, 256);
-        AnimInit(&w->anim, gUnk_09A54374[a->unk_00][2], gUnk_09A54374[a->unk_00][3]);
+        AnimInit(&w->anim, gSrollSecnSprites[a->index][2], gSrollSecnSprites[a->index][3]);
         AnimStart(&w->anim, 0, 0);
-        AnimInit(&w->anim2, gUnk_09A54374[a->unk_00][2], gUnk_09A54374[a->unk_00][3]);
+        AnimInit(&w->anim2, gSrollSecnSprites[a->index][2], gSrollSecnSprites[a->index][3]);
         AnimStart(&w->anim2, 1, 0);
     }
 
@@ -44,19 +44,19 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* w) {
     s16 y;
 
     r = 1;
-    y = (w->unk_08 >> 8) - (*w->unk_0C >> 8);
+    y = (w->y >> 8) - (*w->scrollY >> 8);
     if (y <= -32) {
         r = 0;
     }
 
     if (y <= 159) {
-        ApproachValueHalfSteps(&w->unk_04, 0x7800, 20);
+        ApproachValueHalfSteps(&w->x, 0x7800, 20);
 
-        if (abs(w->unk_04 - 0x7800) <= 255) {
-            w->unk_04 = 0x7800;
+        if (abs(w->x - 0x7800) <= 255) {
+            w->x = 0x7800;
         }
 
-        if (w->unk_04 == 0x7800) {
+        if (w->x == 0x7800) {
             AnimUpdate(&w->anim);
             AnimUpdate(&w->anim2);
         }
@@ -68,7 +68,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* w) {
 void task_sroll_b_secn_2(SrollBSecnWork* w) {
     u16 y;
 
-    y = (w->unk_08 >> 8) - (*w->unk_0C >> 8);
+    y = (w->y >> 8) - (*w->scrollY >> 8);
     DrawSprite(120, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0, 0xEF0);
     DrawSprite(120, y, AnimGetGfx(&w->anim2), w->tiles, w->palette, 0, 0, 0xEE0);
 }
@@ -78,7 +78,7 @@ void task_sroll_b_secn_3(SrollBSecnWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void* const gUnk_09A54374[][4] = {
+void* const gSrollSecnSprites[][4] = {
 #if defined(VERSION_US)
     { gUnk_09C5D922, (void*)(27 * 32), gUnkUs_09EFAF98, gUnkUs_09EFAF78 },
     { gUnk_09C5DD46, (void*)(24 * 32), gUnkUs_09EFAFC0, gUnkUs_09EFAFA0 },

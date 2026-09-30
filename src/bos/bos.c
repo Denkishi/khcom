@@ -8,20 +8,20 @@ void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     SetBgMapBlocks(0, cfg->maps, 2, 2);
 
     gBtlWork->scale = 0x100;
-    gBtlWork->unk_028 = 0x100;
+    gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x14000;
-    gBtlWork->unk_000 = 0x10000;
-    gBtlWork->unk_004 = 0x14000;
+    gBtlWork->viewX = 0x10000;
+    gBtlWork->viewY = 0x14000;
     gBtlWork->x2 = 0x10000;
     gBtlWork->y2 = 0x14000;
-    gBtlWork->unk_01C = 0x10000;
-    gBtlWork->unk_020 = 0x14000;
-    gBtlWork->unk_01A = 15;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
+    gBtlWork->zoomX = 0x10000;
+    gBtlWork->zoomY = 0x14000;
+    gBtlWork->zoomSteps = 15;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
 
-    ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
+    ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 
 s32 task_bos_map_1(void) {
@@ -29,7 +29,7 @@ s32 task_bos_map_1(void) {
     s32 dy;
     s32 y;
 
-    func_0802F208();
+    BtlMapUpdateShake();
 
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
@@ -42,24 +42,24 @@ s32 task_bos_map_1(void) {
 
     gBtlWork->x += dx;
     gBtlWork->y += dy;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->unk_000 - 0x7800 < (gBtlWork->unk_0DA << 8)) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 0x78) << 8;
-    } else if (gBtlWork->unk_000 + 0x7800 > (gBtlWork->unk_0DC << 8)) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 0x78) << 8;
+    if (gBtlWork->viewX - 0x7800 < (gBtlWork->xMin << 8)) {
+        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
+    } else if (gBtlWork->viewX + 0x7800 > (gBtlWork->xMax << 8)) {
+        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
     }
 
-    if (gBtlWork->unk_004 + 0x5000 < (gBtlWork->unk_0DE << 8)) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0DE - 0x50) << 8;
-    } else if (gBtlWork->unk_004 + 0x5000 > (gBtlWork->unk_0E0 << 8)) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0E0 - 0x50) << 8;
+    if (gBtlWork->viewY + 0x5000 < (gBtlWork->yMin << 8)) {
+        gBtlWork->viewY = (gBtlWork->yMin - 0x50) << 8;
+    } else if (gBtlWork->viewY + 0x5000 > (gBtlWork->yMax << 8)) {
+        gBtlWork->viewY = (gBtlWork->yMax - 0x50) << 8;
     }
 
-    y = gBtlWork->unk_004 + func_0802F268();
-    gBtlWork->unk_004 = y;
-    ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (y >> 8) + 0x28);
+    y = gBtlWork->viewY + BtlMapGetShake();
+    gBtlWork->viewY = y;
+    ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (y >> 8) + 0x28);
 
     return 1;
 }
@@ -88,7 +88,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
     flip = 0;
     gfx = gUnk_08B22BA8;
     frame = GetBattleSpritePriorityFlags(obj->y);
-    size = 0x100 - ((obj->unk_010 - obj->z) >> 7);
+    size = 0x100 - ((obj->groundZ - obj->z) >> 7);
 
     if (size <= 0xB2) {
         size = 0xB3;
@@ -100,7 +100,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
     }
 
     sprite = AllocObjAffine(0, size, size, flip);
-    WorldToScreen(&x, &y, obj->x, obj->y, obj->unk_010);
+    WorldToScreen(&x, &y, obj->x, obj->y, obj->groundZ);
     DrawSprite(x, y, gfx, work->tiles, work->palette, sprite, frame, 0xFFF0);
 }
 

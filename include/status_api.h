@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-u16 func_080D8B84(void** a, void** b, void** c);
+u16 LoadFriendCardSprites(void** a, void** b, void** c);
 
 #endif

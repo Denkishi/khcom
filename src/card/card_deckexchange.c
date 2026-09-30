@@ -41,72 +41,72 @@
 #include "sprites_deck_menu.h"
 
 #ifndef VERSION_EU
-u16 gUnk_0203A9DC EWRAM_COMMON(4);
+u16 gSioTradeCardId EWRAM_COMMON(4);
 #endif
 
-u16 func_080857D4(u8 slot);
-u8 func_080A8C20(DeckExchangeWork* w);
-u8 func_080A86F4(DeckExchangeWork* w, void* a);
-u8 func_080A7C80(DeckExchangeWork* w, void* a);
-u8 func_080A8BD8(DeckExchangeWork* w, void* a);
-void func_0808CC58(u16 a, u8 b);
-u8 func_080A8430(DeckExchangeWork* w, void* a);
-void func_08090170(DeckCard2Work* node);
-void func_080A9968(DeckExchangeWork* w);
-void func_080AA6D4(u8 a);
-void func_080AAEB0(DeckExchangeWork* w, u16 index);
-void func_080AAEEC(DeckExchangeWork* w, s16 n);
-u8 func_080A7914(DeckExchangeWork* w, void* a);
-void func_0808DD20(u8 a, u16 b);
-s32 func_080AAB08(DeckExchangeWork* w);
-void func_0808CBB4(u8 a, u8 b);
-void func_080A9F08(u8 a);
-void func_080AA1F8(void);
-u8 func_080A82E0(DeckExchangeWork* w, void* a);
+u16 CountActiveDeckCardsOfCategory(u8 slot);
+u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* w);
+u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a);
+u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a);
+u8 UpdateDeckExchangeClose(DeckExchangeWork* w, void* a);
+void DrawCollectionCategoryCount(u16 a, u8 b);
+u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a);
+void DeckCard2ReleaseGfx(DeckCard2Work* node);
+void ClearDeckExchangeCardGrid(DeckExchangeWork* w);
+void DrawDeckExchangeCpCost(u8 a);
+void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* w, u16 index);
+void SetDeckExchangeGridRowCount(DeckExchangeWork* w, s16 n);
+u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a);
+void DrawValueCount(u8 a, u16 b);
+s32 TakeTradeCard(DeckExchangeWork* w);
+void DrawDeckCategoryCount(u8 a, u8 b);
+void DrawDeckExchangeEquipMarker(u8 a);
+void DrawDeckExchangeCardTotals(void);
+u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
-void func_08084D78(UnkStruct_08084D78* out, u8 deck, u8 mode, u16 n, void* p);
-u16 func_08084E50(UnkStruct_08084D78* out, u8 deck, u8 mode, u16 n, void* p);
-void func_0808500C(u8 mode, u16* out);
+void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p);
+u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p);
+void CountCardsNotInDeckByCategory(u8 mode, u16* out);
 void ClearCardCollectionSlot(u16* p);
 Deck* GetDeck(u8 index);
 u16 GetDeckCpCost(u8 index);
 u8* GetDeckName(u8 index);
-u16 func_080857D4(u8 slot);
+u16 CountActiveDeckCardsOfCategory(u8 slot);
 u16 GetDeckCardCount(u8 index);
 u8 GetActiveDeckIndex(void);
-void func_0808CBB4(u8 a, u8 b);
-void func_0808CC58(u16 a, u8 b);
-void func_0808DD20(u8 a, u16 b);
-void func_08090170(DeckCard2Work* node);
-void func_080A968C(DeckExchangeWork* w, u8 kind);
-s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c);
-s32 func_080A993C(s32 a);
-void func_080AA450(DeckExchangeWork* w);
-void func_080AA634(DeckExchangeWork* w);
-void func_080AA680(DeckExchangeWork* w);
-s32 func_080AA77C(DeckExchangeWork* w, u16 key);
-void func_080AAA38(DeckExchangeWork* w);
-s32 func_080AAC40(DeckExchangeWork* w);
-u8 func_080AAC8C(DeckExchangeWork* w);
-void func_080AACC8(DeckExchangeWork* w);
-u8 func_080AAD2C(DeckExchangeWork* w);
-u8 func_080AAD84(DeckExchangeWork* w, s16 x, s16 y);
-void func_080AAF20(DeckExchangeWork* w);
+void DrawDeckCategoryCount(u8 a, u8 b);
+void DrawCollectionCategoryCount(u16 a, u8 b);
+void DrawValueCount(u8 a, u16 b);
+void DeckCard2ReleaseGfx(DeckCard2Work* node);
+void CreateDeckExchangeDeckGridCards(DeckExchangeWork* w, u8 kind);
+s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* w, u8 kind, u8 c);
+s32 GetCardIdForKind(s32 a);
+void ShowDeckExchangeCardPreview(DeckExchangeWork* w);
+void ReleaseDeckExchangeCardPreview(DeckExchangeWork* w);
+void DrawDeckExchangeValueCpCost(DeckExchangeWork* w);
+s32 MoveDeckExchangeValueCursor(DeckExchangeWork* w, u16 key);
+void FreeDeckExchangeCollectionEntries(DeckExchangeWork* w);
+s32 CheckDeckExchangeCpCost(DeckExchangeWork* w);
+u8 CheckDeckExchangeHasAttackCard(DeckExchangeWork* w);
+void ResetDeckExchangeGridScroll(DeckExchangeWork* w);
+u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* w);
+u8 IsDeckExchangeCardAt(DeckExchangeWork* w, s16 x, s16 y);
+void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* w);
 #ifndef VERSION_EU
-const s16 gUnk_09041F04[3] = { 116, 116, 116 };
+const s16 gDeckExchangeTabPointerX[3] = { 116, 116, 116 };
 
-const s16 gUnk_09041F0A[3] = { 56, 104, 148 };
+const s16 gDeckExchangeTabPointerY[3] = { 56, 104, 148 };
 
 const s16 gUnk_09041F10[5] = { 12, 28, 42, 56, 70 };
 
-const s16 gUnk_09041F1A[6] = { 172, 172, 188, 202, 216, 230 };
+const s16 gDeckExchangeFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
 
 const s16 gUnk_09041F26[5] = { 64, 82, 100, 118, 136 };
 
-const s16 gUnk_09041F30[2] = { 80, 128 };
+const s16 gDeckExchangeValueGridX[2] = { 80, 128 };
 
-const s16 gUnk_09041F34[5] = { 80, 88, 96, 104, 112 };
+const s16 gDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
 
 const u16 gUnk_09041F3E[4] = { 45, 93, 141, 30 };
 
@@ -128,8 +128,8 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     w->palette4 = 0;
     w->unk_4C0 = 0;
     w->unk_4C4 = 0;
-    w->unk_4CC = 0;
-    w->unk_6FC = a;
+    w->entries = 0;
+    w->resultOut = a;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 3, 31, 0);
@@ -143,38 +143,38 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     ListPoolInit(&w->pool);
     TaskPoolInit(&w->tasks, 99);
     TaskPoolInit(&w->tasks2, 1);
-    w->unk_700 = GetActiveDeckIndex();
-    func_080A968C(w, 0);
+    w->deckIndex = GetActiveDeckIndex();
+    CreateDeckExchangeDeckGridCards(w, 0);
     w->tiles = AllocObjTiles(0x120, 0);
     SetObjTileSource(w->tiles, gUnk_090A4664);
     AnimInit(&w->anim, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->x2 = gUnk_09041F04[0] << 8;
-    w->y2 = gUnk_09041F0A[0] << 8;
-    w->unk_6CE = 0;
+    w->x2 = gDeckExchangeTabPointerX[0] << 8;
+    w->y2 = gDeckExchangeTabPointerY[0] << 8;
+    w->handFlags = 0;
     w->tiles3 = LoadObjTiles(gUnk_090A44C4, 32);
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles2 = AllocObjTiles(0x280, 0);
-    func_080AAA8C(w, 0);
+    SetDeckExchangeFrameCursor(w, 0);
     w->palette4 = LoadObjPalette(gUnk_09614438, 32);
-    w->unk_715 = 0;
-    w->unk_6D0 = 0;
-    w->unk_6D2 = 0;
+    w->step = 0;
+    w->cursorCol = 0;
+    w->cursorRow = 0;
     w->unk_6F2 = 0;
     w->unk_6F3 = 0;
-    w->unk_6F6 = 4;
+    w->timer = 4;
     w->unk_707 = 0;
-    w->unk_706 = 0;
-    w->unk_6F0 = 0;
-    w->unk_6F7 = func_080857D4(0);
-    w->unk_6F8 = func_080857D4(1);
-    w->unk_6F9 = func_080857D4(2);
-    w->unk_6FA = func_080857D4(3);
-    w->unk_701 = 0;
-    w->unk_6E0 = 0;
-    w->unk_70D = 0;
-    w->unk_710 = 0;
+    w->mode = 0;
+    w->view = 0;
+    w->deckAttackCount = CountActiveDeckCardsOfCategory(0);
+    w->deckMagicCount = CountActiveDeckCardsOfCategory(1);
+    w->deckItemCount = CountActiveDeckCardsOfCategory(2);
+    w->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
+    w->categoryFilter = 0;
+    w->entryCount = 0;
+    w->popupActive = 0;
+    w->exitRequested = 0;
     w->unk_711 = 16;
     w->unk_712 = 16;
     w->unk_6A4 = 0;
@@ -182,15 +182,15 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     w->unk_6A8 = 0;
     w->unk_6B0 = 0xA000;
     w->unk_6B4 = -0x8000;
-    w->unk_714 = 0;
+    w->holding = 0;
     w->x7 = 8;
     w->y7 = 113;
     w->textSlotCount5 = 0;
     w->unk_6C4 = 79;
-    n = gUnk_09041F3E[w->unk_700];
+    n = gUnk_09041F3E[w->deckIndex];
     w->unk_6C6 = n;
     w->unk_6C8 = 225;
-    n = gUnk_09041F3E[w->unk_700];
+    n = gUnk_09041F3E[w->deckIndex];
     w->unk_6CA = n;
     w->unk_70F = 0;
     w->unk_713 = 0;
@@ -207,7 +207,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
 u8 deckexchange_1(DeckExchangeWork* w, void* a) {
     FadeStartIn(0, 16);
 
-    switch (w->unk_715) {
+    switch (w->step) {
     case 0:
         RequestDma3Clear(GetBgCharBase(0), 0x1000);
         break;
@@ -255,18 +255,18 @@ u8 deckexchange_1(DeckExchangeWork* w, void* a) {
         break;
     case 15:
         RequestDma3Clear(GetBgCharBase(3) + 0x3000, 0x1000);
-        w->unk_715 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A7914);
+        w->step = 0;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeLoadBgs);
         return 1;
     }
 
-    w->unk_715++;
+    w->step++;
 }
 
-u8 func_080A7914(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a) {
     FadeStartIn(0, 16);
 
-    switch (w->unk_715) {
+    switch (w->step) {
     case 0:
         LoadBgTiles(3, gUnk_09402F78, 0x2000);
         break;
@@ -304,23 +304,23 @@ u8 func_080A7914(DeckExchangeWork* w, void* a) {
         LoadBgMap(2, gUnk_08125E24, 0x800);
         break;
     case 12:
-        w->unk_715 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A7ABC);
+        w->step = 0;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeLoadDeckInfo);
         return 1;
     }
 
-    w->unk_715++;
+    w->step++;
     SetBgScroll(0, (u16)-88, (u16)-16);
     SetBgScroll(1, (u16)-88, (u16)-64);
     SetBgScroll(2, (u16)-88, (u16)-112);
     return 1;
 }
-u8 func_080A7ABC(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* w, void* a) {
     s32 v;
 
     FadeStartIn(0, 16);
 
-    switch (w->unk_715) {
+    switch (w->step) {
     case 1:
         LoadBgMap(0, &gUnk_095192B8[0x800], 0x180);
         break;
@@ -331,69 +331,69 @@ u8 func_080A7ABC(DeckExchangeWork* w, void* a) {
         LoadBgMap(2, &gUnk_095192B8[0x1800], 0x180);
         break;
     case 4:
-        func_0808CBB4(w->unk_6F7, 0);
+        DrawDeckCategoryCount(w->deckAttackCount, 0);
         break;
     case 5:
-        func_0808CBB4(w->unk_6F8, 1);
+        DrawDeckCategoryCount(w->deckMagicCount, 1);
         break;
     case 6:
-        func_0808CBB4(w->unk_6F9, 2);
+        DrawDeckCategoryCount(w->deckItemCount, 2);
         break;
     case 7:
-        func_0808CBB4(w->unk_6FA, 3);
+        DrawDeckCategoryCount(w->deckEnemyCount, 3);
         break;
     case 8:
-        func_080A9B84(w, w->unk_700);
+        HighlightDeckExchangeDeckTab(w, w->deckIndex);
         break;
     case 9:
-        func_080A9E40(0);
-        func_080A9E40(1);
-        func_080A9E40(2);
+        DrawDeckExchangeDeckCardCount(0);
+        DrawDeckExchangeDeckCardCount(1);
+        DrawDeckExchangeDeckCardCount(2);
         break;
     case 10:
-        func_080A9F08(GetActiveDeckIndex());
-        func_080AA1F8();
+        DrawDeckExchangeEquipMarker(GetActiveDeckIndex());
+        DrawDeckExchangeCardTotals();
         w->x = 0x4800;
         w->y = 0x2800;
-        v = w->unk_700;
-        w->unk_6D2 = v;
-        ApproachValue(&w->x2, gUnk_09041F04[w->unk_6D0] << 8, w->unk_6F6);
-        ApproachValue(&w->y2, gUnk_09041F0A[w->unk_6D2] << 8, w->unk_6F6);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A82E0);
-        w->unk_6F0 = 1;
-        func_080A9AE8(w);
-        func_080AA328(w);
+        v = w->deckIndex;
+        w->cursorRow = v;
+        ApproachValue(&w->x2, gDeckExchangeTabPointerX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, gDeckExchangeTabPointerY[w->cursorRow] << 8, w->timer);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
+        w->view = 1;
+        SetDeckExchangeHandAnim(w);
+        LoadDeckExchangeDeckNameTexts(w);
         break;
     }
 
-    w->unk_715++;
+    w->step++;
     return 1;
 }
 
-u8 func_080A7C80(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
     u8 n;
     s32 m;
 
-    if (w->unk_70D != 0) {
+    if (w->popupActive != 0) {
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
 
         if (GetKeysPressed() & START_BUTTON) {
-            w->unk_710 = 1;
+            w->exitRequested = 1;
         }
 
         return 1;
     }
 
-    if (w->unk_710 != 0) {
-        if ((u8)func_080AAC40(w) != 0 && (u8)func_080AAC8C(w) != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+    if (w->exitRequested != 0) {
+        if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(0, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
 
-        w->unk_710 = 0;
+        w->exitRequested = 0;
     }
 
     w->gfx = AnimUpdate(&w->anim);
@@ -401,94 +401,94 @@ u8 func_080A7C80(DeckExchangeWork* w, void* a) {
 
     switch (GetKeysRepeat()) {
     case DPAD_LEFT:
-        if (w->unk_6D0 > 0) {
-            w->unk_6D0--;
-            w->unk_6F6 = 4;
+        if (w->cursorCol > 0) {
+            w->cursorCol--;
+            w->timer = 4;
 
-            if ((u8)func_080AA77C(w, 32) != 0) {
+            if ((u8)MoveDeckExchangeValueCursor(w, 32) != 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
-        func_080AA680(w);
+        DrawDeckExchangeValueCpCost(w);
         break;
     case DPAD_RIGHT:
-        if (w->unk_6D0 <= 0) {
-            w->unk_6D0++;
-            w->unk_6F6 = 4;
+        if (w->cursorCol <= 0) {
+            w->cursorCol++;
+            w->timer = 4;
 
-            if ((u8)func_080AA77C(w, 16) != 0) {
+            if ((u8)MoveDeckExchangeValueCursor(w, 16) != 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
-        func_080AA680(w);
+        DrawDeckExchangeValueCpCost(w);
         break;
     case DPAD_UP:
-        n = w->unk_6D2;
+        n = w->cursorRow;
 
-        if (w->unk_6D2 > 0) {
-            w->unk_6D2--;
+        if (w->cursorRow > 0) {
+            w->cursorRow--;
         }
 
-        w->unk_6F6 = 4;
-        func_080AA77C(w, 64);
+        w->timer = 4;
+        MoveDeckExchangeValueCursor(w, 64);
 
-        if ((s8)n != w->unk_6D2) {
+        if ((s8)n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        func_080AA680(w);
+        DrawDeckExchangeValueCpCost(w);
         break;
     case DPAD_DOWN:
-        n = w->unk_6D2;
+        n = w->cursorRow;
 
-        if (w->unk_6D2 <= 3) {
-            w->unk_6D2++;
+        if (w->cursorRow <= 3) {
+            w->cursorRow++;
         }
 
-        w->unk_6F6 = 4;
-        func_080AA77C(w, 128);
+        w->timer = 4;
+        MoveDeckExchangeValueCursor(w, 128);
 
-        if ((s8)n != w->unk_6D2) {
+        if ((s8)n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        func_080AA680(w);
+        DrawDeckExchangeValueCpCost(w);
         break;
     }
 
     switch (GetKeysPressed()) {
     case B_BUTTON:
-        func_080AAA8C(w, 0);
-        m = (s8)w->unk_6F4;
-        w->unk_6D0 = m;
-        m = (s8)w->unk_6F5;
-        w->unk_6D2 = m;
-        w->x2 = gUnk_0903595E[w->unk_6D0] << 8;
-        w->y2 = gUnk_09035964[w->unk_6D2] << 8;
-        func_080AA450(w);
-        w->unk_6F0 = 9;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A86F4);
+        SetDeckExchangeFrameCursor(w, 0);
+        m = (s8)w->savedCol;
+        w->cursorCol = m;
+        m = (s8)w->savedRow;
+        w->cursorRow = m;
+        w->x2 = gCollectionGridColumnX[w->cursorCol] << 8;
+        w->y2 = gCollectionGridRowY[w->cursorRow] << 8;
+        ShowDeckExchangeCardPreview(w);
+        w->view = 9;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
         return 1;
     case A_BUTTON:
-        if ((u8)func_080AAB08(w) == 0) {
+        if ((u8)TakeTradeCard(w) == 0) {
             return 1;
         }
 
-        func_080AA1F8();
-        func_0808500C(3, w->unk_6E2);
-        func_0808CC58(w->unk_6E2[0], 0);
-        func_0808CC58(w->unk_6E2[1], 1);
-        func_0808CC58(w->unk_6E2[2], 2);
-        func_0808CC58(w->unk_6E2[3], 3);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A8BD8);
-        func_080AA680(w);
-        w->unk_6F6 = 4;
+        DrawDeckExchangeCardTotals();
+        CountCardsNotInDeckByCategory(3, w->collectionCategoryCounts);
+        DrawCollectionCategoryCount(w->collectionCategoryCounts[0], 0);
+        DrawCollectionCategoryCount(w->collectionCategoryCounts[1], 1);
+        DrawCollectionCategoryCount(w->collectionCategoryCounts[2], 2);
+        DrawCollectionCategoryCount(w->collectionCategoryCounts[3], 3);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
+        DrawDeckExchangeValueCpCost(w);
+        w->timer = 4;
         break;
     case START_BUTTON:
-        if ((u8)func_080AAC40(w) != 0 && (u8)func_080AAC8C(w) != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+        if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(0, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
@@ -496,10 +496,10 @@ u8 func_080A7C80(DeckExchangeWork* w, void* a) {
         return 1;
     }
 
-    if (w->unk_6F6 != 0) {
-        ApproachValue(&w->x2, gUnk_09041F30[w->unk_6D0] << 8, w->unk_6F6);
-        ApproachValue(&w->y2, (gUnk_09041F34[w->unk_6D2] - 16) << 8, w->unk_6F6);
-        w->unk_6F6--;
+    if (w->timer != 0) {
+        ApproachValue(&w->x2, gDeckExchangeValueGridX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, (gDeckExchangeValueGridY[w->cursorRow] - 16) << 8, w->timer);
+        w->timer--;
     }
 
     TaskPoolUpdate(&w->tasks);
@@ -507,90 +507,90 @@ u8 func_080A7C80(DeckExchangeWork* w, void* a) {
     return 1;
 }
 
-u8 func_080A8020(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* w, void* a) {
     s32 i;
 
     w->gfx = AnimUpdate(&w->anim);
     switch (GetKeysRepeat()) {
     case DPAD_LEFT:
-        if (w->unk_6D0 > 1) {
-            w->unk_6D0--;
-            w->unk_6F6 = 4;
+        if (w->cursorCol > 1) {
+            w->cursorCol--;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICK);
-            w->unk_701 = w->unk_6D0;
-            func_080AA148(w->unk_701, w->unk_706);
-            func_080A9968(w);
-            w->unk_716 = func_080A97D4(w, w->unk_701, 1);
+            w->categoryFilter = w->cursorCol;
+            DrawDeckExchangeCollectionFilterTab(w->categoryFilter, w->mode);
+            ClearDeckExchangeCardGrid(w);
+            w->gridEntryCount = CreateDeckExchangeCollectionGridCards(w, w->categoryFilter, 1);
         }
         for (i = 0; i < 10; i++) {
-            func_0808DD20(0, i);
+            DrawValueCount(0, i);
         }
         break;
     case DPAD_RIGHT:
-        if (w->unk_6D0 < 5) {
-            w->unk_6D0++;
-            w->unk_6F6 = 4;
+        if (w->cursorCol < 5) {
+            w->cursorCol++;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICK);
-            w->unk_701 = w->unk_6D0;
-            func_080AA148(w->unk_701, w->unk_706);
-            func_080A9968(w);
-            w->unk_716 = func_080A97D4(w, w->unk_701, 1);
+            w->categoryFilter = w->cursorCol;
+            DrawDeckExchangeCollectionFilterTab(w->categoryFilter, w->mode);
+            ClearDeckExchangeCardGrid(w);
+            w->gridEntryCount = CreateDeckExchangeCollectionGridCards(w, w->categoryFilter, 1);
         }
         for (i = 0; i < 10; i++) {
-            func_0808DD20(0, i);
+            DrawValueCount(0, i);
         }
         break;
     case DPAD_DOWN:
-        if (w->unk_716 != 0) {
-            w->unk_6D0 = 0;
-            w->unk_6D2 = 0;
-            w->unk_6F6 = 4;
+        if (w->gridEntryCount != 0) {
+            w->cursorCol = 0;
+            w->cursorRow = 0;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-            func_080AA450(w);
-            w->unk_6F0 = 9;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A86F4);
+            ShowDeckExchangeCardPreview(w);
+            w->view = 9;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
             w->x = 0xA000;
             w->y = 0x2800;
-            w->unk_6EC = 4;
+            w->scrollRowEnd = 4;
             return 1;
         }
         m4aSongNumStart(SONG_SYS_BEEP);
         break;
     case B_BUTTON:
-        if (w->unk_716 != 0) {
-            w->unk_6D0 = 0;
-            w->unk_6D2 = 0;
-            w->unk_6F6 = 4;
+        if (w->gridEntryCount != 0) {
+            w->cursorCol = 0;
+            w->cursorRow = 0;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-            func_080AA450(w);
-            w->unk_6F0 = 9;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A86F4);
+            ShowDeckExchangeCardPreview(w);
+            w->view = 9;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
             w->x = 0xA000;
             w->y = 0x2800;
-            w->unk_6EC = 4;
+            w->scrollRowEnd = 4;
             return 1;
         }
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A8BD8);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
-        if ((u8)func_080AAC40(w) != 0 && (u8)func_080AAC8C(w) != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+        if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(0, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
         return 1;
     }
-    if (w->unk_6F6 != 0) {
-        ApproachValue(&w->x2, gUnk_09041F1A[w->unk_6D0] << 8, w->unk_6F6);
-        ApproachValue(&w->y2, 0x1E00, w->unk_6F6);
-        w->unk_6F6--;
+    if (w->timer != 0) {
+        ApproachValue(&w->x2, gDeckExchangeFilterTabX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, 0x1E00, w->timer);
+        w->timer--;
     }
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&w->tasks2);
     return 1;
 }
-u8 func_080A82E0(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a) {
     FadeStartIn(0, 4);
     SetupBg(3, 0, 30, 0);
     SetupBg(2, 0, 15, 0);
@@ -603,16 +603,16 @@ u8 func_080A82E0(DeckExchangeWork* w, void* a) {
     LoadBgMap(2, gUnk_095182B8, 0x800);
     LoadBgMap(1, gUnk_09514AB8, 0x800);
     DisableBg(0);
-    func_0808500C(3, w->unk_6E2);
-    func_0808CC58(w->unk_6E2[0], 0);
-    func_0808CC58(w->unk_6E2[1], 1);
-    func_0808CC58(w->unk_6E2[2], 2);
-    func_0808CC58(w->unk_6E2[3], 3);
-    w->unk_6F0 = 9;
-    func_080AAA8C(w, 0);
-    func_080A9968(w);
-    w->unk_715 = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_080A8430);
+    CountCardsNotInDeckByCategory(3, w->collectionCategoryCounts);
+    DrawCollectionCategoryCount(w->collectionCategoryCounts[0], 0);
+    DrawCollectionCategoryCount(w->collectionCategoryCounts[1], 1);
+    DrawCollectionCategoryCount(w->collectionCategoryCounts[2], 2);
+    DrawCollectionCategoryCount(w->collectionCategoryCounts[3], 3);
+    w->view = 9;
+    SetDeckExchangeFrameCursor(w, 0);
+    ClearDeckExchangeCardGrid(w);
+    w->step = 0;
+    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeBuildList);
     w->unk_6C4 = 0xFFFE;
     w->unk_6C6 = 142;
     w->unk_6C8 = 142;
@@ -621,34 +621,34 @@ u8 func_080A82E0(DeckExchangeWork* w, void* a) {
     TaskPoolUpdate(&w->tasks2);
     return 1;
 }
-u8 func_080A8430(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a) {
     u32 zero;
     u16 i;
     u16 j;
     u16 n;
 
     FadeStartIn(0, 16);
-    switch (w->unk_715) {
+    switch (w->step) {
     case 0:
-        w->unk_6E0 = 286;
-        w->unk_4D0 = EwramAlloc(w->unk_6E0 * sizeof(UnkStruct_08084D78));
+        w->entryCount = 286;
+        w->kindEntries = EwramAlloc(w->entryCount * sizeof(CardKindEntry));
         zero = 0;
-        CpuSet(&zero, w->unk_4D0, CPU_SET_SRC_FIXED | CPU_SET_32BIT | w->unk_6E0 * (sizeof(UnkStruct_08084D78) / 4));
+        CpuSet(&zero, w->kindEntries, CPU_SET_SRC_FIXED | CPU_SET_32BIT | w->entryCount * (sizeof(CardKindEntry) / 4));
         break;
     case 1:
-        func_08084D78(w->unk_4D0, w->unk_700, 0, w->unk_6E0, w->unk_4F4);
+        CountCardsNotInDeckByKind(w->kindEntries, w->deckIndex, 0, w->entryCount, w->unk_4F4);
         break;
     case 2:
-        w->unk_6E0 = func_08084E50(w->unk_4D0, w->unk_700, 0, w->unk_6E0, w->unk_4F4);
+        w->entryCount = ListCardsNotInDeckByKind(w->kindEntries, w->deckIndex, 0, w->entryCount, w->unk_4F4);
         break;
     case 3:
-        w->unk_4CC = EwramAlloc(w->unk_6E0 * sizeof(UnkStruct_08084D78));
+        w->entries = EwramAlloc(w->entryCount * sizeof(CardKindEntry));
         for (i = 0, n = 0; i < 286; i++) {
-            if (w->unk_4D0[i].unk_16 != 0) {
-                w->unk_4CC[n] = w->unk_4D0[i];
-                w->unk_4CC[n].unk_1C = EwramAlloc(w->unk_4D0[i].unk_18 * 2);
-                for (j = 0; j < w->unk_4D0[i].unk_18; j++) {
-                    w->unk_4CC[n].unk_1C[j] = w->unk_4D0[i].unk_1C[j];
+            if (w->kindEntries[i].count != 0) {
+                w->entries[n] = w->kindEntries[i];
+                w->entries[n].indices = EwramAlloc(w->kindEntries[i].indexCount * 2);
+                for (j = 0; j < w->kindEntries[i].indexCount; j++) {
+                    w->entries[n].indices[j] = w->kindEntries[i].indices[j];
                 }
                 n++;
             }
@@ -656,188 +656,188 @@ u8 func_080A8430(DeckExchangeWork* w, void* a) {
         break;
     case 4:
         for (i = 0; i < 286; i++) {
-            if (w->unk_4D0[i].unk_16 != 0) {
-                EwramFree(w->unk_4D0[i].unk_1C);
+            if (w->kindEntries[i].count != 0) {
+                EwramFree(w->kindEntries[i].indices);
             }
         }
-        EwramFree(w->unk_4D0);
+        EwramFree(w->kindEntries);
         break;
     case 5:
-        w->unk_701 = 5;
-        w->unk_716 = func_080A97D4(w, 5, 1);
-        func_080A9AE8(w);
-        w->x2 = gUnk_0903595E[0] << 8;
-        w->y2 = gUnk_09035964[0] << 8;
-        w->unk_706 = 2;
-        w->unk_6D0 = 0;
-        w->unk_6D2 = 0;
-        func_080AA450(w);
-        if (w->unk_716 != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A86F4);
+        w->categoryFilter = 5;
+        w->gridEntryCount = CreateDeckExchangeCollectionGridCards(w, 5, 1);
+        SetDeckExchangeHandAnim(w);
+        w->x2 = gCollectionGridColumnX[0] << 8;
+        w->y2 = gCollectionGridRowY[0] << 8;
+        w->mode = 2;
+        w->cursorCol = 0;
+        w->cursorRow = 0;
+        ShowDeckExchangeCardPreview(w);
+        if (w->gridEntryCount != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
         } else {
-            w->unk_6D0 = w->unk_701;
-            w->unk_6F6 = 4;
-            w->unk_6F0 = 10;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8020);
+            w->cursorCol = w->categoryFilter;
+            w->timer = 4;
+            w->view = 10;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
         }
         break;
     }
-    w->unk_715++;
+    w->step++;
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&w->tasks2);
     return 1;
 }
-u8 func_080A86F4(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
     s32 i;
 
     w->gfx = AnimUpdate(&w->anim);
     w->gfx2 = AnimUpdate(&w->anim2);
-    if (w->unk_70D != 0) {
+    if (w->popupActive != 0) {
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         if (GetKeysPressed() & START_BUTTON) {
-            w->unk_710 = 1;
+            w->exitRequested = 1;
         }
         return 1;
     }
-    if (w->unk_710 != 0) {
-        if ((u8)func_080AAC40(w) != 0 && (u8)func_080AAC8C(w) != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+    if (w->exitRequested != 0) {
+        if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(0, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
-        w->unk_710 = 0;
+        w->exitRequested = 0;
     }
     switch (GetKeysRepeat()) {
     case DPAD_UP:
-        if (w->unk_6D2 > 0) {
-            if ((u8)func_080AAD84(w, w->unk_6D0, (s16)(w->unk_6D2 - 1)) != 0) {
-                w->unk_6D2--;
-                w->unk_6F6 = 4;
+        if (w->cursorRow > 0) {
+            if ((u8)IsDeckExchangeCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
+                w->cursorRow--;
+                w->timer = 4;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if (func_080A9A38(w) == 0) {
-                func_080AAF20(w);
-                w->unk_6D0 = w->unk_701;
-                w->unk_6F6 = 4;
+            if (ScrollDeckExchangeGridUp(w) == 0) {
+                UpdateDeckExchangeGridScrollBar(w);
+                w->cursorCol = w->categoryFilter;
+                w->timer = 4;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
-                w->unk_6F0 = 10;
+                w->view = 10;
                 for (i = 0; i < 10; i++) {
-                    func_0808DD20(0, i);
+                    DrawValueCount(0, i);
                 }
-                SetTaskUpdate(a, (TaskUpdateFunc)func_080A8020);
+                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
                 return 1;
             }
-            func_080AAF20(w);
+            UpdateDeckExchangeGridScrollBar(w);
         }
-        func_080AA450(w);
+        ShowDeckExchangeCardPreview(w);
         break;
     case DPAD_DOWN:
-        if (w->unk_6D2 < 3) {
-            if ((u8)func_080AAD84(w, w->unk_6D0, (s16)(w->unk_6D2 + 1)) != 0) {
-                w->unk_6D2++;
-                w->unk_6F6 = 4;
+        if (w->cursorRow < 3) {
+            if ((u8)IsDeckExchangeCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+                w->cursorRow++;
+                w->timer = 4;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
-        } else if ((u8)func_080AAD84(w, w->unk_6D0, (s16)(w->unk_6D2 + 1)) != 0) {
-            func_080A99A0(w);
-            func_080AAF20(w);
+        } else if ((u8)IsDeckExchangeCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+            ScrollDeckExchangeGridDown(w);
+            UpdateDeckExchangeGridScrollBar(w);
         }
-        func_080AA450(w);
+        ShowDeckExchangeCardPreview(w);
         break;
     case DPAD_LEFT:
-        if (w->unk_6D0 > 0 && (u8)func_080AAD84(w, (s16)(w->unk_6D0 - 1), w->unk_6D2) != 0) {
-            w->unk_6D0--;
-            w->unk_6F6 = 4;
+        if (w->cursorCol > 0 && (u8)IsDeckExchangeCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
+            w->cursorCol--;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
-        func_080AA450(w);
+        ShowDeckExchangeCardPreview(w);
         break;
     case DPAD_RIGHT:
-        if (w->unk_6D0 > 1) {
-            w->unk_6F6 = 4;
+        if (w->cursorCol > 1) {
+            w->timer = 4;
             return 1;
         }
-        if ((u8)func_080AAD84(w, (s16)(w->unk_6D0 + 1), w->unk_6D2) != 0) {
-            w->unk_6D0++;
-            w->unk_6F6 = 4;
+        if ((u8)IsDeckExchangeCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
+            w->cursorCol++;
+            w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
-        func_080AA450(w);
+        ShowDeckExchangeCardPreview(w);
         break;
     }
     switch (GetKeysPressed()) {
     case A_BUTTON:
-        if ((u8)func_080AAD2C(w) != 0) {
-            w->unk_6F4 = w->unk_6D0;
-            w->unk_6F5 = w->unk_6D2;
-            w->unk_6D0 = 0;
-            w->unk_6D2 = 0;
-            func_080AAA8C(w, 1);
-            w->unk_6F0 = 11;
+        if ((u8)IsDeckExchangeCardAtCursor(w) != 0) {
+            w->savedCol = w->cursorCol;
+            w->savedRow = w->cursorRow;
+            w->cursorCol = 0;
+            w->cursorRow = 0;
+            SetDeckExchangeFrameCursor(w, 1);
+            w->view = 11;
             m4aSongNumStart(SONG_SYS_KETTEI);
-            if ((u8)func_080AA77C(w, 0) != 0) {
-                func_080AA680(w);
-                w->x2 = gUnk_09041F30[w->unk_6D0] << 8;
-                w->y2 = (gUnk_09041F34[w->unk_6D2] - 16) << 8;
-                SetTaskUpdate(a, (TaskUpdateFunc)func_080A7C80);
+            if ((u8)MoveDeckExchangeValueCursor(w, 0) != 0) {
+                DrawDeckExchangeValueCpCost(w);
+                w->x2 = gDeckExchangeValueGridX[w->cursorCol] << 8;
+                w->y2 = (gDeckExchangeValueGridY[w->cursorRow] - 16) << 8;
+                SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeValueSelect);
                 return 1;
             }
-            w->unk_6D0 = (s8)w->unk_6F4;
-            w->unk_6D2 = (s8)w->unk_6F5;
-            func_080AAA8C(w, 0);
-            w->unk_6F0 = 9;
+            w->cursorCol = (s8)w->savedCol;
+            w->cursorRow = (s8)w->savedRow;
+            SetDeckExchangeFrameCursor(w, 0);
+            w->view = 9;
             m4aSongNumStart(SONG_SYS_BEEP);
             return 1;
         }
         m4aSongNumStart(SONG_SYS_BEEP);
         return 1;
     case B_BUTTON:
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A8BD8);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeClose);
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
-        if ((u8)func_080AAC40(w) != 0 && (u8)func_080AAC8C(w) != 0) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+        if ((u8)CheckDeckExchangeCpCost(w) != 0 && (u8)CheckDeckExchangeHasAttackCard(w) != 0) {
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(0, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
         }
         return 1;
     }
     if (GetKeysPressed() & SELECT_BUTTON) {
-        func_080AACC8(w);
-        w->unk_6D0 = w->unk_701;
-        w->unk_6F6 = 4;
+        ResetDeckExchangeGridScroll(w);
+        w->cursorCol = w->categoryFilter;
+        w->timer = 4;
         w->x = 0xA000;
         w->y = 0x2800;
-        w->unk_6EC = 4;
+        w->scrollRowEnd = 4;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
-        w->unk_6F0 = 10;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A8020);
+        w->view = 10;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeCollectionFilter);
         return 1;
     }
-    if (w->unk_6F6 != 0) {
-        ApproachValue(&w->x2, gUnk_0903595E[w->unk_6D0] << 8, w->unk_6F6);
-        ApproachValue(&w->y2, gUnk_09035964[w->unk_6D2] << 8, w->unk_6F6);
-        w->unk_6F6--;
+    if (w->timer != 0) {
+        ApproachValue(&w->x2, gCollectionGridColumnX[w->cursorCol] << 8, w->timer);
+        ApproachValue(&w->y2, gCollectionGridRowY[w->cursorRow] << 8, w->timer);
+        w->timer--;
     }
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&w->tasks2);
     return 1;
 }
-u8 func_080A8BD8(DeckExchangeWork* w, void* a) {
+u8 UpdateDeckExchangeClose(DeckExchangeWork* w, void* a) {
     FadeStartOut(0, 16);
-    w->unk_701 = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_080A8C20);
+    w->categoryFilter = 0;
+    SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&w->tasks2);
     return 1;
 }
-u8 func_080A8C20(DeckExchangeWork* w) {
+u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* w) {
     if (FadeIsActive() == 0) {
-        func_080A9968(w);
+        ClearDeckExchangeCardGrid(w);
         return 0;
     }
 
@@ -846,9 +846,9 @@ u8 func_080A8C20(DeckExchangeWork* w) {
     return 1;
 }
 
-void func_080A8C58(DeckExchangeWork* w, u8 b) {
+void DrawDeckExchangeDeckNames(DeckExchangeWork* w, u8 b) {
     if (b == 0) {
-        switch (w->unk_700) {
+        switch (w->deckIndex) {
         case 0:
             DrawTextSlots(w->x4, w->y4, w->textSlots, w->palette, 20, w->textSlotCount);
             DrawTextSlots(w->x5, w->y5, w->textSlots2, w->palette4, 20, w->textSlotCount2);
@@ -866,7 +866,7 @@ void func_080A8C58(DeckExchangeWork* w, u8 b) {
             break;
         }
     } else {
-        switch (w->unk_700) {
+        switch (w->deckIndex) {
         case 0:
             DrawTextSlots(w->x4, w->y4, w->textSlots, w->palette, 20, w->textSlotCount);
             break;
@@ -880,30 +880,30 @@ void func_080A8C58(DeckExchangeWork* w, u8 b) {
     }
 }
 
-void func_080A8EE4(DeckExchangeWork* w) {
+void DrawDeckExchangeCardDescription(DeckExchangeWork* w) {
     DrawTextSlots(w->x7, w->y7, w->textSlots5, w->palette, 20, w->textSlotCount5);
 }
 void deckexchange_2(DeckExchangeWork* w) {
-    if (w->unk_70D == 0) {
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->unk_6CE, 3);
+    if (w->popupActive == 0) {
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 3);
     }
     DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEB000, w->tiles3, w->palette, 0, 0x800, 10);
-    switch (w->unk_6F0) {
+    switch (w->view) {
     case 0:
-        if (w->unk_714 != 0) {
+        if (w->holding != 0) {
             DrawSprite((w->x3 >> 8) - 16, (w->y3 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         }
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
     case 1:
     case 2:
     case 3:
-        func_080A8C58(w, 0);
+        DrawDeckExchangeDeckNames(w, 0);
         break;
     case 4:
-        func_080A8C58(w, 1);
+        DrawDeckExchangeDeckNames(w, 1);
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         if (w->tiles4 != 0) {
-            if (w->unk_70D == 0) {
+            if (w->popupActive == 0) {
                 DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
             }
             DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
@@ -912,7 +912,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         }
         break;
     case 7:
-        func_080A8C58(w, 1);
+        DrawDeckExchangeDeckNames(w, 1);
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         if (w->tiles4 != 0) {
             DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
@@ -925,7 +925,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 5:
         DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        func_080A8C58(w, 1);
+        DrawDeckExchangeDeckNames(w, 1);
         if (w->tiles4 != 0) {
             DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
@@ -933,7 +933,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         }
         break;
     case 6:
-        func_080A8C58(w, 1);
+        DrawDeckExchangeDeckNames(w, 1);
         if (w->tiles4 != 0) {
             DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
@@ -941,7 +941,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         }
         break;
     case 8:
-        func_080A8C58(w, 1);
+        DrawDeckExchangeDeckNames(w, 1);
         if (w->tiles4 != 0) {
             DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
@@ -953,7 +953,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 9:
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        func_080A8EE4(w);
+        DrawDeckExchangeCardDescription(w);
         if (w->tiles4 != 0) {
             DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
@@ -962,7 +962,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 11:
         DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        func_080A8EE4(w);
+        DrawDeckExchangeCardDescription(w);
         if (w->tiles4 != 0) {
             DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
@@ -1002,7 +1002,7 @@ void deckexchange_3(DeckExchangeWork* w) {
         ReleaseObjPalette(*p);
     }
 
-    func_080AA634(w);
+    ReleaseDeckExchangeCardPreview(w);
     ReleaseObjTiles(w->tiles);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles3);
@@ -1015,17 +1015,17 @@ void deckexchange_3(DeckExchangeWork* w) {
     ReleaseObjPalette(*p);
     TaskPoolDestroy(&w->tasks);
     TaskPoolDestroy(&w->tasks2);
-    func_080AAA38(w);
-    *w->unk_6FC = 6;
+    FreeDeckExchangeCollectionEntries(w);
+    *w->resultOut = 6;
 }
-void func_080A968C(DeckExchangeWork* w, u8 kind) {
+void CreateDeckExchangeDeckGridCards(DeckExchangeWork* w, u8 kind) {
     DeckCard2Args args;
     u16* cards;
     u8 i;
     s8 x;
     s8 y;
 
-    cards = GetDeck(w->unk_700)->cards;
+    cards = GetDeck(w->deckIndex)->cards;
     x = 0;
     y = 0;
     for (i = 0; i < DECK_SIZE; i++) {
@@ -1035,16 +1035,16 @@ void func_080A968C(DeckExchangeWork* w, u8 kind) {
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
                 args.col = x;
                 args.row = y;
-                args.unk_0A = 0;
+                args.panel = 0;
                 args.slot = &cards[i];
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
-            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].unk_2A == kind - 1) {
+            } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == kind - 1) {
                 args.pool = &w->pool;
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
                 args.col = x;
                 args.row = y;
-                args.unk_0A = 0;
+                args.panel = 0;
                 args.slot = &cards[i];
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1057,11 +1057,11 @@ void func_080A968C(DeckExchangeWork* w, u8 kind) {
     }
     w->x = 0x4800;
     w->y = 0x2800;
-    w->unk_6EC = 4;
-    func_080AAEEC(w, y * 3 + x);
+    w->scrollRowEnd = 4;
+    SetDeckExchangeGridRowCount(w, y * 3 + x);
 }
 
-s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c) {
+s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* w, u8 kind, u8 c) {
     DeckCard2Args args;
     u16 i;
     s8 x;
@@ -1070,26 +1070,26 @@ s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c) {
     x = 0;
     y = 0;
 
-    for (i = 0; i < w->unk_6E0; i++) {
+    for (i = 0; i < w->entryCount; i++) {
         if (kind == 5) {
-            if (w->unk_4CC[i].unk_14 <= 77) {
+            if (w->entries[i].kind <= 77) {
                 args.pool = &w->pool;
-                args.cardId = func_080A993C(w->unk_4CC[i].unk_14);
+                args.cardId = GetCardIdForKind(w->entries[i].kind);
                 args.col = x;
                 args.row = y;
-                args.unk_0A = 1;
+                args.panel = 1;
                 args.slot = 0;
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
             }
         } else {
             args.pool = &w->pool;
-            args.cardId = func_080A993C(w->unk_4CC[i].unk_14);
+            args.cardId = GetCardIdForKind(w->entries[i].kind);
 
-            if (gCardDefs[args.cardId].unk_2A == kind - 1 && w->unk_4CC[i].unk_14 <= 77) {
+            if (gCardDefs[args.cardId].category == kind - 1 && w->entries[i].kind <= 77) {
                 args.col = x;
                 args.row = y;
-                args.unk_0A = 1;
+                args.panel = 1;
                 args.slot = 0;
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
@@ -1104,39 +1104,39 @@ s32 func_080A97D4(DeckExchangeWork* w, u8 kind, u8 c) {
 
     w->x = 0xA000;
     w->y = 0x2800;
-    w->unk_6EC = 4;
-    func_080AAEEC(w, y * 3 + x);
+    w->scrollRowEnd = 4;
+    SetDeckExchangeGridRowCount(w, y * 3 + x);
 }
 
-s32 func_080A993C(s32 a) {
+s32 GetCardIdForKind(s32 a) {
     u32 i;
 
     for (i = 0; i < 950; i++) {
-        if (gCardDefs[i].unk_1C == a) {
+        if (gCardDefs[i].kind == a) {
             return i;
         }
     }
 }
 
-void func_080A9968(DeckExchangeWork* w) {
+void ClearDeckExchangeCardGrid(DeckExchangeWork* w) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        node->unk_4A = 1;
+        node->done = 1;
         node = ListPoolNext(&node->node);
     }
 
     TaskPoolUpdate(&w->tasks);
 }
 
-void func_080A99A0(DeckExchangeWork* w) {
+void ScrollDeckExchangeGridDown(DeckExchangeWork* w) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
 
-    if (w->unk_6EC == 33) {
+    if (w->scrollRowEnd == 33) {
         return;
     }
 
@@ -1145,26 +1145,26 @@ void func_080A99A0(DeckExchangeWork* w) {
 
         if (node->args.row < 0) {
             node->y = 0x20000;
-            func_08090170(node);
+            DeckCard2ReleaseGfx(node);
         }
 
         node = ListPoolNext(&node->node);
     }
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    w->unk_6EC++;
+    w->scrollRowEnd++;
     w->y += 0x300;
 
     if (w->y > 0x7C00) {
         w->y = 0x7C00;
     }
 
-    if (w->unk_714 != 0) {
-        w->unk_6C2--;
+    if (w->holding != 0) {
+        w->heldRow--;
     }
 }
 
-u8 func_080A9A38(DeckExchangeWork* w) {
+u8 ScrollDeckExchangeGridUp(DeckExchangeWork* w) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
@@ -1189,14 +1189,14 @@ u8 func_080A9A38(DeckExchangeWork* w) {
 
         if (node->args.row > 3) {
             node->y = 0x20000;
-            func_08090170(node);
+            DeckCard2ReleaseGfx(node);
         }
 
         node = ListPoolNext(&node->node);
     } while (node != 0);
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    w->unk_6EC--;
+    w->scrollRowEnd--;
     w->y -= 0x300;
 
     if (w->y < 0x2800) {
@@ -1206,10 +1206,10 @@ u8 func_080A9A38(DeckExchangeWork* w) {
     return 1;
 }
 
-void func_080A9AE8(DeckExchangeWork* w) {
+void SetDeckExchangeHandAnim(DeckExchangeWork* w) {
     u16 t;
 
-    switch (w->unk_6F0) {
+    switch (w->view) {
     case 0:
     case 2:
     case 4:
@@ -1221,18 +1221,18 @@ void func_080A9AE8(DeckExchangeWork* w) {
     case 10:
     case 11:
         AnimStart(&w->anim, 0, 1);
-        w->unk_6CE &= ~1;
+        w->handFlags &= ~1;
         break;
     case 1:
     case 3:
         AnimStart(&w->anim, 2, 1);
-        t = w->unk_6CE | 1;
-        w->unk_6CE = t;
+        t = w->handFlags | 1;
+        w->handFlags = t;
         break;
     }
 }
 
-void func_080A9B84(DeckExchangeWork* w, u8 b) {
+void HighlightDeckExchangeDeckTab(DeckExchangeWork* w, u8 b) {
     u16* pal;
 
     switch (b) {
@@ -1299,7 +1299,7 @@ void func_080A9B84(DeckExchangeWork* w, u8 b) {
     }
 }
 
-void func_080A9E40(u8 deck) {
+void DrawDeckExchangeDeckCardCount(u8 deck) {
     u8 d[2];
     u8 e[2];
     u8* base;
@@ -1330,7 +1330,7 @@ void func_080A9E40(u8 deck) {
     RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
 }
 
-void func_080A9F08(u8 mode) {
+void DrawDeckExchangeEquipMarker(u8 mode) {
     u8* bg0;
     u8* bg1;
     u8* bg2;
@@ -1357,7 +1357,7 @@ void func_080A9F08(u8 mode) {
         break;
     }
 }
-void func_080A9FF4(u8 kind) {
+void DrawDeckExchangeDeckCpCost(u8 kind) {
     u8 d[3];
     u8 e[3];
     u8* base;
@@ -1394,7 +1394,7 @@ void func_080A9FF4(u8 kind) {
     RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], base + 0x140, 32);
 }
 
-void func_080AA148(u8 kind, u8 slot) {
+void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
     u8* dst;
 
     dst = (u8*)GetBgScreenBase(3) + 0xA8;
@@ -1423,7 +1423,7 @@ void func_080AA148(u8 kind, u8 slot) {
     }
 }
 
-void func_080AA1F8(void) {
+void DrawDeckExchangeCardTotals(void) {
     u8 d1[3];
     u8 d2[3];
     u16 a;
@@ -1449,7 +1449,7 @@ void func_080AA1F8(void) {
     RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x340, 32);
 }
 
-void func_080AA328(DeckExchangeWork* w) {
+void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* w) {
     InitTextSlots(w->textSlots, 8);
     InitTextSlots(w->textSlots2, 8);
     InitTextSlots(w->textSlots3, 8);
@@ -1458,13 +1458,13 @@ void func_080AA328(DeckExchangeWork* w) {
     w->textSlotCount3 = LoadTextSlots(GetDeckName(2), w->textSlots3);
 }
 
-void func_080AA3A0(DeckExchangeWork* w, s32 id) {
+void LoadDeckExchangeCardNameText(DeckExchangeWork* w, s32 id) {
     CardDef* def;
 
     def = &gCardDefs[id];
     w->textSlotCount4 = LoadTextSlots(def->name, w->textSlots4);
 
-    switch (def->unk_2A) {
+    switch (def->category) {
     case 0:
         LoadPalette(gUnk_09614458, (void*)(w->palette4->index * 32 + 0x05000200),
                     (u16)(w->palette4->count << 5));
@@ -1484,7 +1484,7 @@ void func_080AA3A0(DeckExchangeWork* w, s32 id) {
     }
 }
 
-void func_080AA450(DeckExchangeWork* w) {
+void ShowDeckExchangeCardPreview(DeckExchangeWork* w) {
     DeckCard2Work* node;
     CardDef* def;
     s32 id;
@@ -1496,7 +1496,7 @@ void func_080AA450(DeckExchangeWork* w) {
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        if (node->args.row == w->unk_6D2 && node->args.col == w->unk_6D0) {
+        if (node->args.row == w->cursorRow && node->args.col == w->cursorCol) {
             id = node->args.cardId;
             break;
         }
@@ -1504,51 +1504,51 @@ void func_080AA450(DeckExchangeWork* w) {
         node = ListPoolNext(&node->node);
     }
 
-    func_080AA634(w);
+    ReleaseDeckExchangeCardPreview(w);
 
     if (id != 0xFFFF) {
         def = &gCardDefs[id & CARD_ID_MASK];
-        w->tiles4 = LoadObjTiles(gUnk_08F709B0[def->unk_2A].tiles, 0x300);
+        w->tiles4 = LoadObjTiles(gCardBacks[def->category].tiles, 0x300);
         w->tiles5 = LoadObjTiles(def->tiles, 0x200);
         w->palette3 = LoadObjPalette(def->palette, 32);
         w->palette2 = LoadObjPalette(gCard00Palette, 32);
-        w->gfx3 = gUnk_08F709B0[def->unk_2A].gfx;
+        w->gfx3 = gCardBacks[def->category].gfx;
         w->gfx4 = def->gfx;
 
-        for (i = 0; i < w->unk_6E0; i++) {
-            if (w->unk_4CC[i].unk_14 == def->unk_1C) {
+        for (i = 0; i < w->entryCount; i++) {
+            if (w->entries[i].kind == def->kind) {
                 break;
             }
         }
 
-        w->unk_6CC = i;
+        w->entryIndex = i;
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614118[def->unk_2A * 32 + 0x200], dst, 32);
+        LoadPalette(&gUnk_09614118[def->category * 32 + 0x200], dst, 32);
 
         for (j = 0; j < 10; j++) {
-            func_0808DD20(w->unk_4CC[i].unk_00[j], j);
+            DrawValueCount(w->entries[i].valueCounts[j], j);
         }
 
-        func_080AA3A0(w, id);
-        func_080AAEB0(w, id);
+        LoadDeckExchangeCardNameText(w, id);
+        LoadDeckExchangeCardDescriptionText(w, id);
 
-        if (def->unk_1C > 46) {
+        if (def->kind > 46) {
             LoadBgMap(2, gUnk_09518AB8, 0x800);
-            func_080AA6D4(0);
+            DrawDeckExchangeCpCost(0);
         } else {
             LoadBgMap(2, gUnk_095182B8, 0x800);
-            func_080AA6D4(0);
+            DrawDeckExchangeCpCost(0);
         }
     } else {
         for (j = 0; j < 10; j++) {
-            func_0808DD20(0, j);
+            DrawValueCount(0, j);
         }
 
-        func_080AA6D4(0);
+        DrawDeckExchangeCpCost(0);
     }
 }
 
-void func_080AA634(DeckExchangeWork* w) {
+void ReleaseDeckExchangeCardPreview(DeckExchangeWork* w) {
     if (w->tiles7 != 0) {
         ReleaseObjTiles(w->tiles7);
         w->tiles7 = 0;
@@ -1572,13 +1572,13 @@ void func_080AA634(DeckExchangeWork* w) {
     }
 }
 
-void func_080AA680(DeckExchangeWork* w) {
-    func_080AA6D4(GetCardCpCost(
-        func_080A993C(w->unk_4CC[w->unk_6CC].unk_14) +
-        w->unk_6D0 * 5 + (u16)w->unk_6D2));
+void DrawDeckExchangeValueCpCost(DeckExchangeWork* w) {
+    DrawDeckExchangeCpCost(GetCardCpCost(
+        GetCardIdForKind(w->entries[w->entryIndex].kind) +
+        w->cursorCol * 5 + (u16)w->cursorRow));
 }
 
-void func_080AA6D4(u8 a) {
+void DrawDeckExchangeCpCost(u8 a) {
     u8 d[2];
     u8* base;
 
@@ -1595,7 +1595,7 @@ void func_080AA6D4(u8 a) {
     }
 }
 
-u32 func_080AA764(u16* data) {
+u32 SumDeckExchangeValueCounts(u16* data) {
     u32 sum;
     u16* p;
     s32 i;
@@ -1611,7 +1611,7 @@ u32 func_080AA764(u16* data) {
     return sum;
 }
 
-s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
+s32 MoveDeckExchangeValueCursor(DeckExchangeWork* w, u16 key) {
     u8* tbl;
     u8 idx;
     u8 r0;
@@ -1625,11 +1625,11 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
     s32 k;
     u8* p;
 
-    idx = w->unk_6D0 * 5 + (u8)w->unk_6D2;
-    tbl = (u8*)&w->unk_4CC[w->unk_6CC];
-    row0 = w->unk_6D0;
-    r0 = w->unk_6D0;
-    c0 = w->unk_6D2;
+    idx = w->cursorCol * 5 + (u8)w->cursorRow;
+    tbl = (u8*)&w->entries[w->entryIndex];
+    row0 = w->cursorCol;
+    r0 = w->cursorCol;
+    c0 = w->cursorRow;
 
     if (*(u16*)&tbl[idx << 1] != 0) {
         return 1;
@@ -1638,38 +1638,38 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
     switch (key) {
     case 0x40:
         do {
-            if (w->unk_6D2 > 0) {
-                w->unk_6D2 = w->unk_6D2 - 1;
+            if (w->cursorRow > 0) {
+                w->cursorRow = w->cursorRow - 1;
             } else {
-                w->unk_6D2 = 4;
+                w->cursorRow = 4;
             }
 
-            idx = w->unk_6D0 * 5 + (u8)w->unk_6D2;
+            idx = w->cursorCol * 5 + (u8)w->cursorRow;
 
-            if (w->unk_6D0 == r0 && w->unk_6D2 == c0) {
+            if (w->cursorCol == r0 && w->cursorRow == c0) {
                 return 0;
             }
         } while (*(u16*)&tbl[idx << 1] == 0);
         break;
     case 0x80:
         do {
-            if (w->unk_6D2 <= 3) {
-                w->unk_6D2 = w->unk_6D2 + 1;
+            if (w->cursorRow <= 3) {
+                w->cursorRow = w->cursorRow + 1;
             } else {
-                w->unk_6D2 = 0;
+                w->cursorRow = 0;
             }
 
-            idx = w->unk_6D0 * 5 + (u8)w->unk_6D2;
+            idx = w->cursorCol * 5 + (u8)w->cursorRow;
 
-            if (w->unk_6D0 == r0 && w->unk_6D2 == c0) {
+            if (w->cursorCol == r0 && w->cursorRow == c0) {
                 return 0;
             }
         } while (*(u16*)&tbl[idx << 1] == 0);
         break;
     case 0x20:
-        if (*(u16*)&tbl[w->unk_6D2 << 1] != 0) {
+        if (*(u16*)&tbl[w->cursorRow << 1] != 0) {
             if ((s16)row0 > 0) {
-                w->unk_6D0 = row0 - 1;
+                w->cursorCol = row0 - 1;
             }
 
             return 1;
@@ -1682,11 +1682,11 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
         }
 
         if (sum == 0) {
-            w->unk_6D0 = 1;
+            w->cursorCol = 1;
             return 0;
         }
 
-        p = (u8*)&w->unk_6D2;
+        p = (u8*)&w->cursorRow;
         d = -1;
         k = *p + d;
 
@@ -1717,12 +1717,12 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
             k = *p + d;
         }
 
-        w->unk_6D2 = n;
+        w->cursorRow = n;
         break;
     case 0x10:
-        if (*(u16*)&tbl[(w->unk_6D2 + 5) << 1] != 0) {
+        if (*(u16*)&tbl[(w->cursorRow + 5) << 1] != 0) {
             if ((s16)row0 <= 0) {
-                w->unk_6D0 = row0 + 1;
+                w->cursorCol = row0 + 1;
             }
 
             return 1;
@@ -1735,11 +1735,11 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
         }
 
         if (sum == 0) {
-            w->unk_6D0 = 0;
+            w->cursorCol = 0;
             return 0;
         }
 
-        p = (u8*)&w->unk_6D2;
+        p = (u8*)&w->cursorRow;
         d = -1;
         k = *p + d;
 
@@ -1771,26 +1771,26 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
             k = *p + d;
         }
 
-        w->unk_6D2 = n;
+        w->cursorRow = n;
         break;
     case 0:
         do {
-            if (w->unk_6D2 <= 3) {
-                w->unk_6D2 = w->unk_6D2 + 1;
+            if (w->cursorRow <= 3) {
+                w->cursorRow = w->cursorRow + 1;
             } else {
-                w->unk_6D2 = 0;
+                w->cursorRow = 0;
             }
 
-            idx = w->unk_6D0 * 5 + (u8)w->unk_6D2;
+            idx = w->cursorCol * 5 + (u8)w->cursorRow;
 
-            if (w->unk_6D0 == r0 && w->unk_6D2 == c0) {
-                if (w->unk_6D0 <= 0) {
-                    w->unk_6D0 = w->unk_6D0 + 1;
+            if (w->cursorCol == r0 && w->cursorRow == c0) {
+                if (w->cursorCol <= 0) {
+                    w->cursorCol = w->cursorCol + 1;
                 } else {
-                    w->unk_6D0 = 0;
+                    w->cursorCol = 0;
                 }
 
-                if (func_080AA764((u16*)tbl) == 0) {
+                if (SumDeckExchangeValueCounts((u16*)tbl) == 0) {
                     return 0;
                 }
             }
@@ -1801,20 +1801,20 @@ s32 func_080AA77C(DeckExchangeWork* w, u16 key) {
     return 1;
 }
 
-void func_080AAA38(DeckExchangeWork* w) {
+void FreeDeckExchangeCollectionEntries(DeckExchangeWork* w) {
     u16 i;
 
-    if (w->unk_4CC != 0) {
-        for (i = 0; i < w->unk_6E0; i++) {
-            EwramFree(w->unk_4CC[i].unk_1C);
+    if (w->entries != 0) {
+        for (i = 0; i < w->entryCount; i++) {
+            EwramFree(w->entries[i].indices);
         }
 
-        EwramFree(w->unk_4CC);
-        w->unk_4CC = 0;
+        EwramFree(w->entries);
+        w->entries = 0;
     }
 }
 
-void func_080AAA8C(DeckExchangeWork* w, u8 kind) {
+void SetDeckExchangeFrameCursor(DeckExchangeWork* w, u8 kind) {
     switch (kind) {
     case 0:
         SetObjTileSource(w->tiles2, gUnk_090A4A0C);
@@ -1831,44 +1831,44 @@ void func_080AAA8C(DeckExchangeWork* w, u8 kind) {
     }
 }
 
-s32 func_080AAB08(DeckExchangeWork* w) {
+s32 TakeTradeCard(DeckExchangeWork* w) {
     u16 idx;
-    UnkStruct_08084D78* e;
+    CardKindEntry* e;
     u16 i;
     s32 card;
     u16 id;
     CardDef* def;
     u16 kind;
 
-    idx = w->unk_6D0 * 5 + w->unk_6D2;
-    e = &w->unk_4CC[w->unk_6CC];
-    if (e->unk_00[idx] == 0) {
+    idx = w->cursorCol * 5 + w->cursorRow;
+    e = &w->entries[w->entryIndex];
+    if (e->valueCounts[idx] == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         return 1;
     }
-    for (i = 0; i < e->unk_16; i++) {
-        card = e->unk_1C[i];
+    for (i = 0; i < e->count; i++) {
+        card = e->indices[i];
         if (card != 0xFFFF) {
             id = gCardCollection[card] & CARD_ID_MASK;
             def = &gCardDefs[id];
             if (id > 0x1C1) {
                 if (idx == 0) {
-                    gUnk_0203A9DC = gCardCollection[card] & CARD_ID_MASK;
+                    gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    e->unk_1C[i] = 0xFFFF;
-                    e->unk_00[0]--;
-                    func_0808DD20(e->unk_00[0], 0);
+                    e->indices[i] = 0xFFFF;
+                    e->valueCounts[0]--;
+                    DrawValueCount(e->valueCounts[0], 0);
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     return 1;
                 }
             } else {
-                kind = def->unk_20;
+                kind = def->value;
                 if (kind == idx) {
-                    gUnk_0203A9DC = gCardCollection[card] & CARD_ID_MASK;
+                    gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    e->unk_1C[i] = 0xFFFF;
-                    e->unk_00[kind]--;
-                    func_0808DD20(e->unk_00[kind], kind);
+                    e->indices[i] = 0xFFFF;
+                    e->valueCounts[kind]--;
+                    DrawValueCount(e->valueCounts[kind], kind);
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     return 1;
                 }
@@ -1879,9 +1879,9 @@ s32 func_080AAB08(DeckExchangeWork* w) {
     return 1;
 }
 
-s32 func_080AAC40(DeckExchangeWork* w) {
+s32 CheckDeckExchangeCpCost(DeckExchangeWork* w) {
     if (GetDeckCpCost(GetActiveDeckIndex()) > gGameState.progression.cp) {
-        TaskCreate(&w->tasks2, &gUnk_09EE7FA8, &w->unk_70D);
+        TaskCreate(&w->tasks2, &gTaskDescDeckErrorCp, &w->popupActive);
         m4aSongNumStart(SONG_SYS_BEEP);
 
         return 0;
@@ -1890,17 +1890,17 @@ s32 func_080AAC40(DeckExchangeWork* w) {
     return 1;
 }
 
-u8 func_080AAC8C(DeckExchangeWork* w) {
-    if (func_080857D4(0) == 0) {
+u8 CheckDeckExchangeHasAttackCard(DeckExchangeWork* w) {
+    if (CountActiveDeckCardsOfCategory(0) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        TaskCreate(&w->tasks2, &gUnk_09EE7FC0, &w->unk_70D);
+        TaskCreate(&w->tasks2, &gTaskDescDeckErrorNoAttackCard, &w->popupActive);
         return 0;
     }
 
     return 1;
 }
 
-void func_080AACC8(DeckExchangeWork* w) {
+void ResetDeckExchangeGridScroll(DeckExchangeWork* w) {
     DeckCard2Work* node;
     s16 x;
     s16 y;
@@ -1923,17 +1923,17 @@ void func_080AACC8(DeckExchangeWork* w) {
     }
 
     w->y = 0x2800;
-    w->unk_6EC = 4;
+    w->scrollRowEnd = 4;
 }
 
-u8 func_080AAD2C(DeckExchangeWork* w) {
+u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* w) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
 
     while (node != 0) {
-        if (node->args.col == w->unk_6D0 &&
-            node->args.row == w->unk_6D2) {
+        if (node->args.col == w->cursorCol &&
+            node->args.row == w->cursorRow) {
             return 1;
         }
 
@@ -1943,7 +1943,7 @@ u8 func_080AAD2C(DeckExchangeWork* w) {
     return 0;
 }
 
-u8 func_080AAD84(DeckExchangeWork* w, s16 x, s16 y) {
+u8 IsDeckExchangeCardAt(DeckExchangeWork* w, s16 x, s16 y) {
     DeckCard2Work* node;
 
     node = ListPoolFirst(&w->pool);
@@ -1959,7 +1959,7 @@ u8 func_080AAD84(DeckExchangeWork* w, s16 x, s16 y) {
     return 0;
 }
 
-u8 func_080AADD4(DeckExchangeWork* w, s16 x, s16 y, u16 dir) {
+u8 FindDeckExchangeCardInDirection(DeckExchangeWork* w, s16 x, s16 y, u16 dir) {
     DeckCard2Work* n;
 
     for (n = ListPoolFirst(&w->pool); n != 0; n = ListPoolNext(&n->node)) {
@@ -1970,38 +1970,38 @@ u8 func_080AADD4(DeckExchangeWork* w, s16 x, s16 y, u16 dir) {
 
     switch (dir) {
     case 0x40:
-        return func_080AADD4(w, x, y - 1, 0x40);
+        return FindDeckExchangeCardInDirection(w, x, y - 1, 0x40);
     case 0x80:
-        return func_080AADD4(w, x, y + 1, 0x80);
+        return FindDeckExchangeCardInDirection(w, x, y + 1, 0x80);
     case 0x20:
-        return func_080AADD4(w, x - 1, y, 0x20);
+        return FindDeckExchangeCardInDirection(w, x - 1, y, 0x20);
     case 0x10:
-        return func_080AADD4(w, x + 1, y, 0x10);
+        return FindDeckExchangeCardInDirection(w, x + 1, y, 0x10);
     }
 
     return 0;
 }
 
-void func_080AAEB0(DeckExchangeWork* w, u16 index) {
+void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* w, u16 index) {
     CardDef* d;
 
     d = &gCardDefs[index];
-    w->textSlotCount5 = LoadTextSlots((void*)gUnk_09EE8F48[d->unk_1C], w->textSlots5);
+    w->textSlotCount5 = LoadTextSlots((void*)gCardKindDescriptions[d->kind], w->textSlots5);
 }
 
-void func_080AAEEC(DeckExchangeWork* w, s16 n) {
-    w->unk_6EE = n / 3;
+void SetDeckExchangeGridRowCount(DeckExchangeWork* w, s16 n) {
+    w->rowCount = n / 3;
 
     if (n % 3 != 0) {
-        w->unk_6EE = n / 3 + 1;
+        w->rowCount = n / 3 + 1;
     }
 }
 
-void func_080AAF20(DeckExchangeWork* w) {
+void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* w) {
     s32 t;
 
-    t = 0x5400 / (w->unk_6EE - 4);
-    w->y = t * (w->unk_6EC - 4) + 0x2800;
+    t = 0x5400 / (w->rowCount - 4);
+    w->y = t * (w->scrollRowEnd - 4) + 0x2800;
 
     if (w->y > 0x7C00) {
         w->y = 0x7C00;

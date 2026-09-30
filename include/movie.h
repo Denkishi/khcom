@@ -16,9 +16,9 @@ typedef struct MovieHeap {
 } MovieHeap;
 
 typedef struct MoviePlayer {
-    void* unk_00;
-    void* unk_04;
-    void* unk_08;
+    void* videoCodecCode;
+    void* deltaCodecCode;
+    void* audioCodecCode;
     void* data;
     u8* videoData;
     u8* videoPos;
@@ -37,7 +37,7 @@ typedef struct MoviePlayer {
     u32 audioCodecId;
     u8* frameTypes;
     u16* frameSizes;
-    u8* unk_54;
+    u8* audioBlockTypes;
     u16* audioBlockSizes;
     void* decodeBuf;
     u32 frameIndex;
@@ -47,12 +47,12 @@ typedef struct MoviePlayer {
     float secondsPerFrame;
     u32 frameDecoded;
     u32 framePresent;
-    void (*unk_7C)(void*, u32, u32, void*);
-    void (*unk_80)(void*, u32, u32);
-    void (*unk_84)(void*, void*, void*);
-    void (*unk_88)(void*, void*, s32);
+    void (*decodeKeyFrame)(void*, u32, u32, void*);
+    void (*postProcessFrame)(void*, u32, u32);
+    void (*decodeDeltaFrame)(void*, void*, void*);
+    void (*decodeAudio)(void*, void*, s32);
     u8 videoDone;
-    u8 unk_8D;
+    u8 audioDone;
 } MoviePlayer;
 
 extern MoviePlayer* gMoviePlayer;

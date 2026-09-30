@@ -8,7 +8,7 @@ typedef struct KeyState {
     u16 held;
     u16 trg;
     u16 rep;
-    u16 unk_6;
+    u16 chordLatch;
     u8 on[10];
     u8 off[10];
 } KeyState;

@@ -3,15 +3,15 @@
 
 #include "anim.h"
 
-struct UnkStruct_0984BC9C;
+struct MapEnmDef;
 
-extern const struct UnkStruct_0984BC9C* gUnk_09EF83F8[7];
-extern const struct UnkStruct_0984BC9C gUnk_0984BC9C;
-extern const struct UnkStruct_0984BC9C gUnk_0984BD24;
-extern const struct UnkStruct_0984BC9C gUnk_0984BD8C;
-extern const struct UnkStruct_0984BC9C gUnk_0984BE14;
-extern const struct UnkStruct_0984BC9C gUnk_0984BE9C;
-extern const struct UnkStruct_0984BC9C gUnk_0984BF44;
-extern const struct UnkStruct_0984BC9C gUnk_0984BFEC;
+extern const struct MapEnmDef* gMapEnmDefs[7];
+extern const struct MapEnmDef gMapEnm00Def;
+extern const struct MapEnmDef gMapEnm01Def;
+extern const struct MapEnmDef gMapEnm02Def;
+extern const struct MapEnmDef gMapEnm03Def;
+extern const struct MapEnmDef gMapEnm04Def;
+extern const struct MapEnmDef gMapEnm05Def;
+extern const struct MapEnmDef gMapEnm06Def;
 
 #endif

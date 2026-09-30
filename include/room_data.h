@@ -6,11 +6,11 @@
 #include "battle_actor_types.h"
 #include "boss_background_types.h"
 
-typedef struct RoomTableEntry {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
+typedef struct GaEntryDef {
+    s32 hpScale;
+    s32 offsetX;
+    s32 offsetY;
+    s32 offsetZ;
     u16 x2;
     u16 y2;
     void* owner;
@@ -18,11 +18,11 @@ typedef struct RoomTableEntry {
     void** gfxTable;
     u16 spriteCount;
     u16 unk_22;
-} RoomTableEntry;
+} GaEntryDef;
 
-extern const EmyKind gUnk_09991F44;
-extern const RoomTableEntry gRoomTableEntries[];
+extern const EmyKind gBosGaEmyKind;
+extern const GaEntryDef gGaEntryDefs[];
 extern const BosMapConfig gBosMapConfig;
-extern const s32 gUnk_0999204C[];
+extern const s32 gBos5TanTable[];
 
 #endif

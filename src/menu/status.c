@@ -11,12 +11,12 @@
 #include "card_ids.h"
 
 #ifdef VERSION_EU
-extern void* gUnkEu_09F80288[5];
-extern void** gUnkEu_09F8029C[5];
-extern void* gUnkEu_09F802C8[5];
-extern void** gUnkEu_09F802DC[5];
-extern void* gUnkEu_09F80350[5];
-extern void* gUnkEu_09F80364[5];
+extern void* gStatusBarTiles[5];
+extern void** gStatusBarSprites[5];
+extern void* gStatusTabTiles[5];
+extern void** gStatusTabSprites[5];
+extern void* gStatusNewMarkTiles[5];
+extern void* gStatusNewMarkSprites[5];
 #endif
 
 TaskDesc gTaskDescStatus = {
@@ -29,11 +29,11 @@ TaskDesc gTaskDescStatus = {
 };
 
 #ifdef VERSION_EU
-const u16 gUnkEu_096CB088[5] = {736, 608, 736, 640, 704};
+const u16 gStatusBarTileSizes[5] = {736, 608, 736, 640, 704};
 #endif
 
 #ifdef VERSION_EU
-void* gUnkEu_09F80288[5] = {
+void* gStatusBarTiles[5] = {
     gUnk_097A18EC,
     gUnkEu_0977DE68,
     gUnk_097A18EC,
@@ -41,7 +41,7 @@ void* gUnkEu_09F80288[5] = {
     gUnkEu_0977E14A,
 };
 
-void** gUnkEu_09F8029C[5] = {
+void** gStatusBarSprites[5] = {
     gUnkEu_09F81EC8,
     gUnkEu_09F81ED8,
     gUnkEu_09F81EC8,
@@ -60,7 +60,7 @@ TaskDesc gTaskDescStatusBar = {
 };
 
 #ifdef VERSION_EU
-void* gUnkEu_09F802C8[5] = {
+void* gStatusTabTiles[5] = {
     gUnkEu_0977E746,
     gUnkEu_0977EFAE,
     gUnkEu_0977EB7A,
@@ -68,7 +68,7 @@ void* gUnkEu_09F802C8[5] = {
     gUnkEu_0977EB7A,
 };
 
-void** gUnkEu_09F802DC[5] = {
+void** gStatusTabSprites[5] = {
     gUnkEu_09F81F08,
     gUnkEu_09F81F30,
     gUnkEu_09F81F1C,
@@ -104,7 +104,7 @@ TaskDesc gTaskDescStatusDeckname = {
     sizeof(StatusDecknameWork),
 };
 
-const s32 gUnk_096FDD8C[4] = {-1536, 2816, 6912, 10240};
+const s32 gStatusTabCursorX[4] = {-1536, 2816, 6912, 10240};
 
 TaskDesc gTaskDescStatusCursor = {
     "task_status_cursor",
@@ -116,11 +116,11 @@ TaskDesc gTaskDescStatusCursor = {
 };
 
 #ifdef VERSION_EU
-const u16 gUnkEu_096CB104[5] = {64, 128, 64, 128, 128};
+const u16 gStatusNewMarkTileSizes[5] = {64, 128, 64, 128, 128};
 #endif
 
 #ifdef VERSION_EU
-void* gUnkEu_09F80350[5] = {
+void* gStatusNewMarkTiles[5] = {
     gUnkEu_0977F7F8,
     gUnkEu_0977F84C,
     gUnkEu_0977FA08,
@@ -128,7 +128,7 @@ void* gUnkEu_09F80350[5] = {
     gUnkEu_0977F8E0,
 };
 
-void* gUnkEu_09F80364[5] = {
+void* gStatusNewMarkSprites[5] = {
     gUnkEu_0977F7E4,
     gUnkEu_0977F838,
     gUnkEu_0977F9F4,
@@ -194,128 +194,128 @@ const StatusFriendTable gStatusFriendTable = {{
 }};
 
 static StatusWork* gStatusWork;
-static u8 gUnk_02034F00;
-static s16 gUnk_02034F02;
+static u8 sStatusMesWindowOpen;
+static s16 sStatusSelectedIndex;
 static StatusStocklistWork* gStatusStocklistWork;
 
-s32 gUnk_0203C550 EWRAM_COMMON(4);
+s32 gStatusBarState EWRAM_COMMON(4);
 
 void task_status_0(StatusWork* work) {
     gStatusWork = work;
-    work->unk_14 = 0;
-    gUnk_02034F00 = 0;
-    work->unk_1A = 0;
-    work->unk_1C = 0;
+    work->tab = 0;
+    sStatusMesWindowOpen = 0;
+    work->cursor = 0;
+    work->scroll = 0;
     TaskPoolInit(&work->pool, 9);
     TaskCreate(&work->pool, &gTaskDescStatusFriend, 0);
     TaskCreate(&work->pool, &gTaskDescStatusSora, 0);
 
     if (!(gGameState.flags & 8)) {
-        TaskCreate(&work->pool, &gTaskDescStatusTab, &work->unk_14);
-        TaskCreate(&work->pool, &gTaskDescStatusDeckname, &gUnk_02034F00);
+        TaskCreate(&work->pool, &gTaskDescStatusTab, &work->tab);
+        TaskCreate(&work->pool, &gTaskDescStatusDeckname, &sStatusMesWindowOpen);
     }
-    TaskCreate(&work->pool, &gTaskDescStatusStocklist, &work->unk_14);
-    TaskCreate(&work->pool, &gTaskDescStatusScrollcursor, &work->unk_1C);
-    TaskCreate(&work->pool, &gTaskDescStatusMeswindow, &gUnk_02034F00);
+    TaskCreate(&work->pool, &gTaskDescStatusStocklist, &work->tab);
+    TaskCreate(&work->pool, &gTaskDescStatusScrollcursor, &work->scroll);
+    TaskCreate(&work->pool, &gTaskDescStatusMeswindow, &sStatusMesWindowOpen);
 
-    if (func_080D82D4() == 0) {
-        work->unk_1A = ~work->unk_14;
+    if (GetStatusVisibleRowCount() == 0) {
+        work->cursor = ~work->tab;
     } else {
-        work->unk_1A = 0;
+        work->cursor = 0;
     }
-    TaskCreate(&work->pool, &gTaskDescStatusCursor, &work->unk_1A);
-    gUnk_02034F02 = work->unk_1A + work->unk_1C;
+    TaskCreate(&work->pool, &gTaskDescStatusCursor, &work->cursor);
+    sStatusSelectedIndex = work->cursor + work->scroll;
 }
 
-void func_080D764C(StatusWork* work) {
+void StatusHandleInput(StatusWork* work) {
     u16 keys;
 
     keys = GetKeysRepeat() & DPAD_UP;
     if (keys != 0) {
-        if (work->unk_1A > 0) {
-            work->unk_1A--;
+        if (work->cursor > 0) {
+            work->cursor--;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-        } else if (work->unk_1C > 0) {
-            work->unk_1C--;
-            func_080D83F4();
+        } else if (work->scroll > 0) {
+            work->scroll--;
+            StatusStocklistScrollUp();
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-        } else if (work->unk_1A == 0) {
+        } else if (work->cursor == 0) {
             if (!(gGameState.flags & 8)) {
-                work->unk_1A = ~work->unk_14;
+                work->cursor = ~work->tab;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
-                gUnk_02034F00 = 0;
+                sStatusMesWindowOpen = 0;
             }
         }
     } else if (GetKeysRepeat() & DPAD_DOWN) {
-        if (work->unk_1A < func_080D82D4() - 1) {
-            if (work->unk_1A >= 0) {
-                work->unk_1A++;
+        if (work->cursor < GetStatusVisibleRowCount() - 1) {
+            if (work->cursor >= 0) {
+                work->cursor++;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
-            } else if (func_080D82D4() != 0) {
-                work->unk_1A = 0;
+            } else if (GetStatusVisibleRowCount() != 0) {
+                work->cursor = 0;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
-        } else if (work->unk_1C < func_080D8308()) {
-            work->unk_1C++;
-            func_080D8374();
+        } else if (work->scroll < GetStatusMaxScroll()) {
+            work->scroll++;
+            StatusStocklistScrollDown();
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
     } else if ((GetKeysRepeat() & DPAD_LEFT) && !(gGameState.flags & 8)) {
-        if (work->unk_14 != 0) {
-            work->unk_14--;
+        if (work->tab != 0) {
+            work->tab--;
 
-            if (work->unk_1A < 0 || func_080D82D4() == 0) {
-                work->unk_1A = ~work->unk_14;
-                gUnk_02034F00 = 0;
+            if (work->cursor < 0 || GetStatusVisibleRowCount() == 0) {
+                work->cursor = ~work->tab;
+                sStatusMesWindowOpen = 0;
             } else {
-                work->unk_1A = 0;
+                work->cursor = 0;
             }
-            work->unk_1C = 0;
-            func_080D8474(0);
+            work->scroll = 0;
+            StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     } else if ((GetKeysRepeat() & DPAD_RIGHT) && !(gGameState.flags & 8)) {
-        if (work->unk_14 <= 2) {
-            work->unk_14++;
+        if (work->tab <= 2) {
+            work->tab++;
 
-            if (work->unk_1A < 0 || func_080D82D4() == 0) {
-                work->unk_1A = ~work->unk_14;
-                gUnk_02034F00 = 0;
+            if (work->cursor < 0 || GetStatusVisibleRowCount() == 0) {
+                work->cursor = ~work->tab;
+                sStatusMesWindowOpen = 0;
             } else {
-                work->unk_1A = 0;
+                work->cursor = 0;
             }
-            work->unk_1C = 0;
-            func_080D8474(0);
+            work->scroll = 0;
+            StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     } else if (GetKeysPressed() & SELECT_BUTTON) {
-        if (work->unk_1A >= 0) {
-            work->unk_1A = ~work->unk_14;
-            work->unk_1C = 0;
-            func_080D8474(0);
+        if (work->cursor >= 0) {
+            work->cursor = ~work->tab;
+            work->scroll = 0;
+            StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICKI04B);
 #ifdef VERSION_EU
-            gUnk_02034F00 = 0;
+            sStatusMesWindowOpen = 0;
 #endif
         }
-    } else if ((GetKeysPressed() & A_BUTTON) && func_080D8340() && gUnk_02034F00 == 0 && work->unk_1A >= 0) {
-        gUnk_02034F00 = 1;
+    } else if ((GetKeysPressed() & A_BUTTON) && StatusTabHasItems() && sStatusMesWindowOpen == 0 && work->cursor >= 0) {
+        sStatusMesWindowOpen = 1;
         m4aSongNumStart(SONG_SYS_KETTEI);
-    } else if (gUnk_02034F00 != 0) {
-        if ((GetKeysPressed() & B_BUTTON) || !func_080D8340()) {
-            gUnk_02034F00 = 0;
+    } else if (sStatusMesWindowOpen != 0) {
+        if ((GetKeysPressed() & B_BUTTON) || !StatusTabHasItems()) {
+            sStatusMesWindowOpen = 0;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
     }
 }
 
 u8 task_status_1(StatusWork* work) {
-    if (func_080D7B94()) {
-        func_080D764C(work);
+    if (IsStatusBarIdle()) {
+        StatusHandleInput(work);
     }
-    gUnk_02034F02 = work->unk_1A + work->unk_1C;
+    sStatusSelectedIndex = work->cursor + work->scroll;
     TaskPoolUpdate(&work->pool);
     return 1;
 }
@@ -328,29 +328,29 @@ void task_status_3(StatusWork* work) {
     TaskPoolDestroy(&work->pool);
 }
 
-u8 func_080D7890(void) {
-    return gUnk_02034F00;
+u8 IsStatusMesWindowOpen(void) {
+    return sStatusMesWindowOpen;
 }
 
-s16 func_080D789C(void) {
-    return gUnk_02034F02;
+s16 GetStatusSelectedIndex(void) {
+    return sStatusSelectedIndex;
 }
 
-s16 func_080D78A8(void) {
-    return gStatusWork->unk_1C;
+s16 GetStatusScroll(void) {
+    return gStatusWork->scroll;
 }
 
-void func_080D78B8(StatusBarWork* work) {
-    work->unk_24 = 1;
+void StatusBarStartClose(StatusBarWork* work) {
+    work->closing = 1;
 
-    if (gUnk_0203C550 == 0) {
-        gUnk_0203C550 = 4;
+    if (gStatusBarState == 0) {
+        gStatusBarState = 4;
     } else {
-        gUnk_0203C550 = 3;
+        gStatusBarState = 3;
     }
 
-    if (work->unk_08 == 0) {
-        work->unk_08 = 16;
+    if (work->steps == 0) {
+        work->steps = 16;
     }
     LoadBgMap(3, gUnk_09848198, 0x500);
     work->targetY = -0x800;
@@ -360,74 +360,74 @@ void func_080D78B8(StatusBarWork* work) {
 
 void task_status_bar_0(StatusBarWork* work) {
 #ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gUnkEu_09F80288[gLanguage], gUnkEu_096CB088[gLanguage]);
+    work->tiles = LoadObjTiles(gStatusBarTiles[gLanguage], gStatusBarTileSizes[gLanguage]);
 #else
     work->tiles = LoadObjTiles(gUnk_097A18EC, 0x2E0);
 #endif
     work->palette = LoadObjPalette(gUnk_0984B1B8, 0x20);
-    work->unk_08 = 16;
-    gUnk_0203C550 = 0;
+    work->steps = 16;
+    gStatusBarState = 0;
     work->y = -0x800;
     work->y2 = 0xA000;
     work->x = -0x8000;
     work->targetY = 0;
     work->targetY2 = 0x9800;
     work->targetX = 0;
-    work->unk_24 = 0;
-    work->unk_25 = 0;
+    work->closing = 0;
+    work->fadeStarted = 0;
 }
 
 u8 task_status_bar_1(StatusBarWork* work) {
-    switch (gUnk_0203C550) {
+    switch (gStatusBarState) {
     case 0:
-        ApproachValue(&work->y, work->targetY, work->unk_08);
-        ApproachValue(&work->y2, work->targetY2, work->unk_08);
-        work->unk_08--;
-        if (work->unk_08 == 0) {
-            work->unk_08 = 16;
-            gUnk_0203C550 = 1;
+        ApproachValue(&work->y, work->targetY, work->steps);
+        ApproachValue(&work->y2, work->targetY2, work->steps);
+        work->steps--;
+        if (work->steps == 0) {
+            work->steps = 16;
+            gStatusBarState = 1;
         }
         break;
     case 1:
-        ApproachValue(&work->x, work->targetX, work->unk_08);
-        work->unk_08--;
-        if (work->unk_08 == 0) {
+        ApproachValue(&work->x, work->targetX, work->steps);
+        work->steps--;
+        if (work->steps == 0) {
             LoadBgMap(3, gUnk_09848698, 0x500);
-            gUnk_0203C550 = 2;
+            gStatusBarState = 2;
         }
         break;
     case 3:
-        ApproachValue(&work->x, work->targetX, work->unk_08);
-        work->unk_08--;
-        if (work->unk_08 == 0) {
-            work->unk_08 = 16;
-            gUnk_0203C550 = 4;
+        ApproachValue(&work->x, work->targetX, work->steps);
+        work->steps--;
+        if (work->steps == 0) {
+            work->steps = 16;
+            gStatusBarState = 4;
         }
         break;
     case 4:
-        if (!FadeIsActive() && work->unk_25 == 0) {
+        if (!FadeIsActive() && work->fadeStarted == 0) {
             FadeStartOut(0, 16);
-            work->unk_25 = 1;
+            work->fadeStarted = 1;
         }
-        ApproachValue(&work->y, work->targetY, work->unk_08);
-        ApproachValue(&work->y2, work->targetY2, work->unk_08);
-        work->unk_08--;
-        if (work->unk_08 == 0) {
+        ApproachValue(&work->y, work->targetY, work->steps);
+        ApproachValue(&work->y2, work->targetY2, work->steps);
+        work->steps--;
+        if (work->steps == 0) {
             return 0;
         }
         break;
     case 2:
-        if (work->unk_24 == 0) {
+        if (work->closing == 0) {
             if (GetKeysPressed() & START_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 FadeStartOut(0, 16);
-                func_080D7568(0);
-                gUnk_0203C550 = 5;
+                SetStatusReturnToMenu(0);
+                gStatusBarState = 5;
             } else if (GetKeysPressed() & B_BUTTON) {
-                if (!func_080D7890()) {
+                if (!IsStatusMesWindowOpen()) {
                     m4aSongNumStart(SONG_SYS_CLOSE);
-                    func_080D78B8(work);
-                    func_080D7568(1);
+                    StatusBarStartClose(work);
+                    SetStatusReturnToMenu(1);
                 }
             }
         }
@@ -443,17 +443,17 @@ u8 task_status_bar_1(StatusBarWork* work) {
 
 void task_status_bar_2(StatusBarWork* work) {
 #ifdef VERSION_EU
-    DrawSprite(work->x >> 8, 0, ((void**)gUnkEu_09F8029C[gLanguage])[2], work->tiles,
+    DrawSprite(work->x >> 8, 0, ((void**)gStatusBarSprites[gLanguage])[2], work->tiles,
         work->palette, 0, 0xC00, 29);
 #else
     DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, 0, 0xC00, 29);
 #endif
 
-    if (gUnk_0203C550 != 2) {
+    if (gStatusBarState != 2) {
 #ifdef VERSION_EU
-        DrawSprite(128, work->y >> 8, ((void**)gUnkEu_09F8029C[gLanguage])[0], work->tiles,
+        DrawSprite(128, work->y >> 8, ((void**)gStatusBarSprites[gLanguage])[0], work->tiles,
             work->palette, 0, 0xC00, 30);
-        DrawSprite(128, work->y2 >> 8, ((void**)gUnkEu_09F8029C[gLanguage])[1], work->tiles,
+        DrawSprite(128, work->y2 >> 8, ((void**)gStatusBarSprites[gLanguage])[1], work->tiles,
             work->palette, 0, 0xC00, 31);
 #else
         DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, 0, 0xC00, 30);
@@ -467,39 +467,39 @@ void task_status_bar_3(StatusBarWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-u8 func_080D7B94(void) {
-    if (gUnk_0203C550 == 2) {
+u8 IsStatusBarIdle(void) {
+    if (gStatusBarState == 2) {
         return 1;
     }
     return 0;
 }
 
 void task_status_tab_0(StatusTabWork* work, s32* arg) {
-    work->unk_18 = arg;
+    work->tab = arg;
 #ifdef VERSION_EU
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnkEu_09F802DC[gLanguage], 4),
-        gUnkEu_09F802C8[gLanguage]);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabSprites[gLanguage], 4),
+        gStatusTabTiles[gLanguage]);
 #else
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6920, 4), gUnk_097A24A6);
 #endif
     work->palette = LoadObjPalette(gUnk_0984B218, 0x20);
 #ifdef VERSION_EU
-    work->gfx = ((void**)gUnkEu_09F802DC[gLanguage])[*work->unk_18];
+    work->gfx = ((void**)gStatusTabSprites[gLanguage])[*work->tab];
 #else
-    work->gfx = gUnk_09EF6920[*work->unk_18];
+    work->gfx = gUnk_09EF6920[*work->tab];
 #endif
     work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6934, 4), gUnk_097A28DA);
     work->palette2 = LoadObjPalette(gUnk_0984B238, 0x20);
-    work->gfx2 = gUnk_09EF6934[*work->unk_18];
+    work->gfx2 = gUnk_09EF6934[*work->tab];
 }
 
 u8 task_status_tab_1(StatusTabWork* work) {
 #ifdef VERSION_EU
-    work->gfx = ((void**)gUnkEu_09F802DC[gLanguage])[*work->unk_18];
+    work->gfx = ((void**)gStatusTabSprites[gLanguage])[*work->tab];
 #else
-    work->gfx = gUnk_09EF6920[*work->unk_18];
+    work->gfx = gUnk_09EF6920[*work->tab];
 #endif
-    work->gfx2 = gUnk_09EF6934[*work->unk_18];
+    work->gfx2 = gUnk_09EF6934[*work->tab];
     return 1;
 }
 
@@ -557,7 +557,7 @@ void task_status_sora_3(StatusSoraWork* work) {
 
 void task_status_deckname_0(StatusDecknameWork* work, u8* arg) {
     InitTextSlots(work->textSlots, 10);
-    work->unk_58 = arg;
+    work->mesWindowOpen = arg;
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
 }
@@ -567,7 +567,7 @@ u8 task_status_deckname_1(StatusDecknameWork* work) {
 }
 
 void task_status_deckname_2(StatusDecknameWork* work) {
-    if (*work->unk_58 == 0) {
+    if (*work->mesWindowOpen == 0) {
         DrawTextSlots(144, 142, work->textSlots, work->palette, 4, work->textSlotCount);
     }
 }
@@ -578,7 +578,7 @@ void task_status_deckname_3(StatusDecknameWork* work) {
 }
 
 void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
-    work->unk_48 = arg;
+    work->cursor = arg;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68F0, 5), gUnk_097A1C54);
     work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
     AnimInit(&work->anim[0], gUnk_09EF6904, gUnk_09EF68F0);
@@ -589,16 +589,16 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
     AnimInit(&work->anim[1], gUnk_09EF691C, gUnk_09EF6908);
     AnimStart(&work->anim[1], 0, 1);
     work->gfx[1] = AnimGetGfx(&work->anim[1]);
-    work->unk_4C = *work->unk_48;
-    if (work->unk_4C < 0) {
-        work->x = gUnk_096FDD8C[~work->unk_4C];
+    work->lastCursor = *work->cursor;
+    if (work->lastCursor < 0) {
+        work->x = gStatusTabCursorX[~work->lastCursor];
         work->targetX = work->x;
         work->y = 0x1000;
         work->targetY = 0x1000;
     } else {
         work->x = 0x1800;
         work->targetX = 0x1800;
-        work->y = *work->unk_48 * 3072 + 0x2400;
+        work->y = *work->cursor * 3072 + 0x2400;
         work->targetY = work->y;
     }
     work->unk_4E = 0;
@@ -607,16 +607,16 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
 u8 task_status_cursor_1(StatusCursorWork* work) {
     s32 i;
 
-    if (work->unk_4C != *work->unk_48) {
-        work->unk_4C = *work->unk_48;
+    if (work->lastCursor != *work->cursor) {
+        work->lastCursor = *work->cursor;
         work->unk_4E = 4;
 
-        if (work->unk_4C < 0) {
-            work->targetX = gUnk_096FDD8C[~work->unk_4C];
+        if (work->lastCursor < 0) {
+            work->targetX = gStatusTabCursorX[~work->lastCursor];
             work->targetY = 0x1000;
         } else {
             work->targetX = 0x1800;
-            work->targetY = *work->unk_48 * 3072 + 0x2400;
+            work->targetY = *work->cursor * 3072 + 0x2400;
         }
     }
     ApproachValueHalf(&work->y, work->targetY);
@@ -630,10 +630,10 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
 
 void task_status_cursor_2(StatusCursorWork* work) {
     if (FadeIsActive() == 0) {
-        if (!(gGameState.flags & 8) || func_080D8340()) {
+        if (!(gGameState.flags & 8) || StatusTabHasItems()) {
             DrawSprite(work->x >> 8, (work->y >> 8) - 16, work->gfx[1], work->tiles2, work->palette2, 0, 0, 0);
 
-            if (work->unk_4C >= 0) {
+            if (work->lastCursor >= 0) {
                 DrawSprite(1, (work->y >> 8) + 3, work->gfx[0], work->tiles, work->palette, 0, 0, 1);
             }
         }
@@ -652,7 +652,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     StatusEntry* e;
 
     gStatusStocklistWork = work;
-    work->unk_4C0 = arg;
+    work->tab = arg;
     e = work->entries;
 
     for (i = 0; i < 4; i++) {
@@ -662,15 +662,15 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
 
     if (gGameState.flags & 8) {
         for (i = 66; i <= 69; i++) {
-            if (func_0800FBCC(i)) {
+            if (IsStockLearned(i)) {
                 StatusEntryAppend(work->entries, i);
             }
         }
     } else {
         for (i = 0; i <= 65; i++) {
-            if (func_0800FBCC(i)) {
+            if (IsStockLearned(i)) {
                 StatusEntryAppend(work->entries, i);
-                StatusEntryAppend(&work->entries[func_080D85A8(i)], i);
+                StatusEntryAppend(&work->entries[GetStatusItemTab(i)], i);
             }
         }
     }
@@ -678,27 +678,27 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     for (i = 0; i < 8; i++) {
         work->tiles2[i] = 0;
     }
-    func_080D8474(0);
+    StatusStocklistLoadRows(0);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 #ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gUnkEu_09F80350[gLanguage], gUnkEu_096CB104[gLanguage]);
+    work->tiles = LoadObjTiles(gStatusNewMarkTiles[gLanguage], gStatusNewMarkTileSizes[gLanguage]);
 #else
     work->tiles = LoadObjTiles(gUnk_097A2E16, 0xC0);
 #endif
     work->palette2 = LoadObjPalette(gUnk_0984B278, 0x20);
 #ifdef VERSION_EU
-    work->gfx = gUnkEu_09F80364[gLanguage];
+    work->gfx = gStatusNewMarkSprites[gLanguage];
 #else
     work->gfx = gUnk_097A2DF8;
 #endif
     work->timer = 0;
-    work->unk_4C8 = 0;
+    work->blink = 0;
 }
 
 u8 task_status_stocklist_1(StatusStocklistWork* work) {
     work->timer++;
     if (work->timer > 24) {
-        work->unk_4C8 = (work->unk_4C8 == 0) ? 1 : 0;
+        work->blink = (work->blink == 0) ? 1 : 0;
         work->timer = 0;
     }
     return 1;
@@ -712,8 +712,8 @@ void task_status_stocklist_2(StatusStocklistWork* work) {
 
     for (i = 0; i < 8; i++) {
         if (work->tiles2[i] != 0) {
-            if (work->unk_4C8 != 0) {
-                if (func_0800FD20(func_080D855C(func_080D78A8() + i))) {
+            if (work->blink != 0) {
+                if (IsStockNew(GetStatusListItem(GetStatusScroll() + i))) {
                     DrawSprite(0, y, work->gfx, work->tiles, work->palette2, 0, 0x800, i + 13);
                 }
             }
@@ -736,29 +736,29 @@ void task_status_stocklist_3(StatusStocklistWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-u16 func_080D82D4(void) {
-    if (gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].count <= 7) {
-        return gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].count;
+u16 GetStatusVisibleRowCount(void) {
+    if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count <= 7) {
+        return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count;
     }
     return 8;
 }
 
-u16 func_080D8308(void) {
-    s16 v = gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].count - 8;
+u16 GetStatusMaxScroll(void) {
+    s16 v = gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - 8;
     if (v <= 0) {
         return 0;
     }
     return v;
 }
 
-u8 func_080D8340(void) {
-    if (gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].count == 0) {
+u8 StatusTabHasItems(void) {
+    if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count == 0) {
         return 0;
     }
     return 1;
 }
 
-void func_080D8374(void) {
+void StatusStocklistScrollDown(void) {
     s32 i;
 
     ReleaseObjTiles(gStatusStocklistWork->tiles2[0]);
@@ -766,11 +766,11 @@ void func_080D8374(void) {
     for (i = 0; i < 7; i++) {
         gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i + 1];
     }
-    gStatusStocklistWork->unk_4C4++;
-    gStatusStocklistWork->tiles2[7] = func_080D85C0(func_080D85F8(gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].unk_000[gStatusStocklistWork->unk_4C4 + 7]));
+    gStatusStocklistWork->scroll++;
+    gStatusStocklistWork->tiles2[7] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll + 7]));
 }
 
-void func_080D83F4(void) {
+void StatusStocklistScrollUp(void) {
     s32 i;
 
     ReleaseObjTiles(gStatusStocklistWork->tiles2[7]);
@@ -778,11 +778,11 @@ void func_080D83F4(void) {
     for (i = 7; i > 0; i--) {
         gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i - 1];
     }
-    gStatusStocklistWork->unk_4C4--;
-    gStatusStocklistWork->tiles2[0] = func_080D85C0(func_080D85F8(gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].unk_000[gStatusStocklistWork->unk_4C4]));
+    gStatusStocklistWork->scroll--;
+    gStatusStocklistWork->tiles2[0] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll]));
 }
 
-void func_080D8474(u16 a) {
+void StatusStocklistLoadRows(u16 a) {
     s32 i;
 
     for (i = 0; i <= 7; i++) {
@@ -791,15 +791,15 @@ void func_080D8474(u16 a) {
             gStatusStocklistWork->tiles2[i] = 0;
         }
     }
-    gStatusStocklistWork->unk_4C4 = a;
+    gStatusStocklistWork->scroll = a;
 
-    for (i = 0; i < gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].count - a && i <= 7; i++) {
-        gStatusStocklistWork->tiles2[i] = func_080D85C0(func_080D85F8(gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].unk_000[a + i]));
+    for (i = 0; i < gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - a && i <= 7; i++) {
+        gStatusStocklistWork->tiles2[i] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[a + i]));
     }
 }
 
-s32 func_080D855C(s16 a) {
-    return gStatusStocklistWork->entries[*gStatusStocklistWork->unk_4C0].unk_000[a];
+s32 GetStatusListItem(s16 a) {
+    return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[a];
 }
 
 void StatusEntryClear(StatusEntry* e) {
@@ -807,11 +807,11 @@ void StatusEntryClear(StatusEntry* e) {
 }
 
 void StatusEntryAppend(StatusEntry* e, s32 v) {
-    e->unk_000[e->count] = v;
+    e->items[e->count] = v;
     e->count++;
 }
 
-s32 func_080D85A8(u32 a) {
+s32 GetStatusItemTab(u32 a) {
     if (a <= 8) {
         return 1;
     }
@@ -822,11 +822,11 @@ s32 func_080D85A8(u32 a) {
     return 3;
 }
 
-void* func_080D85C0(u16 a) {
+void* LoadStockNameTiles(u16 a) {
     SpriteFrameResourceDef* d;
     void* t;
 
-    d = &gUnk_08F7CF18[a];
+    d = &gStockNameSprites[a];
     t = AllocSpriteFrameTiles(d->tilesSize);
 #ifdef VERSION_EU
     UpdateSpriteFrameTiles(t, d->sprites[gLanguage][d->spriteIndex],
@@ -837,7 +837,7 @@ void* func_080D85C0(u16 a) {
     return t;
 }
 
-s32 func_080D85F8(s32 a) {
+s32 GetStatusItemStockIndex(s32 a) {
     switch (a) {
     case 1:
         return 46;
@@ -988,28 +988,28 @@ s32 func_080D85F8(s32 a) {
     }
 }
 
-s16 func_080D885C(StatusScrollcursorWork* work) {
-    if (func_080D8308() == 0) {
+s16 GetStatusScrollcursorY(StatusScrollcursorWork* work) {
+    if (GetStatusMaxScroll() == 0) {
         return 40;
     }
-    return *work->unk_0C * 84 / func_080D8308() + 40;
+    return *work->scroll * 84 / GetStatusMaxScroll() + 40;
 }
 
 void task_status_scrollcursor_0(StatusScrollcursorWork* work, u16* arg) {
-    work->unk_0C = arg;
+    work->scroll = arg;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6908, 4), gUnk_097A2394);
     work->palette = LoadObjPalette(gUnk_0984B1F8, 0x20);
     work->gfx = gUnk_09EF6908[4];
-    work->y = func_080D885C(work);
+    work->y = GetStatusScrollcursorY(work);
 }
 
 u8 task_status_scrollcursor_1(StatusScrollcursorWork* work) {
-    work->y = func_080D885C(work);
+    work->y = GetStatusScrollcursorY(work);
     return 1;
 }
 
 void task_status_scrollcursor_2(StatusScrollcursorWork* work) {
-    if (func_080D8340()) {
+    if (StatusTabHasItems()) {
         DrawSprite(84, work->y, work->gfx, work->tiles, work->palette, 0, 0x800, 6);
     }
 }
@@ -1020,30 +1020,30 @@ void task_status_scrollcursor_3(StatusScrollcursorWork* work) {
 }
 
 void task_status_meswindow_0(StatusMeswindowWork* work, u8* arg) {
-    work->unk_1C = arg;
-    work->unk_18 = 72;
+    work->open = arg;
+    work->item = 72;
     TaskPoolInit(&work->pool, 2);
     work->task = 0;
-    work->unk_20 = 0;
+    work->textIndex = 0;
 }
 
 u8 task_status_meswindow_1(StatusMeswindowWork* work) {
     s32 v;
     s16 idx;
 
-    if (*work->unk_1C != 0) {
-        idx = func_080D789C();
+    if (*work->open != 0) {
+        idx = GetStatusSelectedIndex();
         if (idx >= 0) {
-            v = func_080D855C(func_080D789C());
-            if (work->unk_18 != v) {
-                work->unk_18 = v;
+            v = GetStatusListItem(GetStatusSelectedIndex());
+            if (work->item != v) {
+                work->item = v;
 
                 if (work->task != 0) {
-                    work->unk_20 = GetStockMesDispTextIndex(work->task);
-                    func_08000DE8(&work->pool, work->task);
+                    work->textIndex = GetStockMesDispTextIndex(work->task);
+                    TaskKill(&work->pool, work->task);
                 }
-                work->task = CreateStockMesDispTask(&work->pool, func_080D85F8(work->unk_18), work->unk_20, 88, 98);
-                func_0800FD68(work->unk_18);
+                work->task = CreateStockMesDispTask(&work->pool, GetStatusItemStockIndex(work->item), work->textIndex, 88, 98);
+                ClearStockNew(work->item);
             }
             TaskPoolUpdate(&work->pool);
         }
@@ -1052,7 +1052,7 @@ u8 task_status_meswindow_1(StatusMeswindowWork* work) {
 }
 
 void task_status_meswindow_2(StatusMeswindowWork* work) {
-    if (*work->unk_1C == 0) {
+    if (*work->open == 0) {
         DisableBg(0);
     } else {
         EnableBg(0);
@@ -1067,7 +1067,7 @@ void task_status_meswindow_3(StatusMeswindowWork* work) {
 void task_status_message_0(StatusMessageWork* work, StatusMessageParam* arg) {
     InitTextSlots(work->textSlots, 100);
     work->param = *arg;
-    work->textSlotCount = LoadTextSlots(work->param.unk_00, work->textSlots);
+    work->textSlotCount = LoadTextSlots(work->param.text, work->textSlots);
     work->palette = LoadObjPalette(gUnk_0984B1B8, 0x20);
 }
 
@@ -1089,12 +1089,12 @@ Task* CreateStatusMessageTask(void* pool, s16 x, s16 y, void* p) {
 
     param.x = x;
     param.y = y;
-    param.unk_00 = p;
+    param.text = p;
     return TaskCreate(pool, &gTaskDescStatusMessage, &param);
 }
 
 void task_status_friend_0(StatusFriendWork* work) {
-    work->unk_24 = func_080D8B84(work->tiles, work->palette, work->gfx);
+    work->count = LoadFriendCardSprites(work->tiles, work->palette, work->gfx);
 }
 
 u8 task_status_friend_1(StatusFriendWork* work) {
@@ -1107,7 +1107,7 @@ void task_status_friend_2(StatusFriendWork* work) {
 
     x = (gGameState.flags & 8) ? 216 : 186;
 
-    for (i = 0; i < work->unk_24; i++) {
+    for (i = 0; i < work->count; i++) {
         DrawSprite(x, 45, work->gfx[i], work->tiles[i], work->palette[i], 0, 0x800, i + 7);
         x += 20;
     }
@@ -1116,13 +1116,13 @@ void task_status_friend_2(StatusFriendWork* work) {
 void task_status_friend_3(StatusFriendWork* work) {
     s32 i;
 
-    for (i = 0; i < work->unk_24; i++) {
+    for (i = 0; i < work->count; i++) {
         ReleaseObjTiles(work->tiles[i]);
         ReleaseObjPalette(work->palette[i]);
     }
 }
 
-u16 func_080D8B84(void** a, void** b, void** c) {
+u16 LoadFriendCardSprites(void** a, void** b, void** c) {
     StatusFriendTable table;
     CardDef* card;
     const void* data;
@@ -1144,8 +1144,8 @@ u16 func_080D8B84(void** a, void** b, void** c) {
 
     for (index = 0; index <= 7; index++) {
         data = &table.entries[index];
-        source = &gGameState.progression.unk_84;
-        if (*(const u16*)source & ((const StatusFriendEntry*)data)->unk_00) {
+        source = &gGameState.progression.friendFlags;
+        if (*(const u16*)source & ((const StatusFriendEntry*)data)->flag) {
             card = &gCardDefs[((const StatusFriendEntry*)data)->cardId];
             a[count] = LoadObjTiles(card->tiles2, 0x100);
             b[count] = LoadObjPalette(card->palette2, 0x20);
@@ -1167,7 +1167,7 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     if (work->textIndex >= work->textCount - 1) {
         work->textIndex = work->textCount - 1;
     }
-    work->tiles = func_080D85C0(work->helpIndex);
+    work->tiles = LoadStockNameTiles(work->helpIndex);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     TaskPoolInit(&work->tasks, 1);
     work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16,
@@ -1178,7 +1178,7 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     work->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6948, 2), gUnk_097A2CF6);
     work->palette3 = LoadObjPalette(gUnk_0984B258, 0x20);
     work->gfx2 = gUnk_09EF6948[1];
-    work->unk_20 = 0;
+    work->frame = 0;
 }
 u8 stock_mes_disp_1(StockMesDispWork* work) {
     u8 changed = 0;
@@ -1197,7 +1197,7 @@ u8 stock_mes_disp_1(StockMesDispWork* work) {
 
     if (changed) {
         m4aSongNumStart(SONG_SYS_CANSEL);
-        func_08000DE8(&work->tasks, work->task);
+        TaskKill(&work->tasks, work->task);
         work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16, GetCardHelpText(work->helpIndex, work->textIndex));
     }
 
@@ -1209,14 +1209,14 @@ void stock_mes_disp_2(StockMesDispWork* work) {
     DrawSprite(work->x + 14, work->y - 4, 0, work->tiles, work->palette, 0, 0, 5);
 
     if (work->textIndex != 0) {
-        DrawSprite(work->x - (work->unk_20 / 8) % 4, work->y, work->gfx, work->tiles2, work->palette2, 0, 0, 2);
+        DrawSprite(work->x - (work->frame / 8) % 4, work->y, work->gfx, work->tiles2, work->palette2, 0, 0, 2);
     }
 
     if (work->textIndex < work->textCount - 1) {
-        DrawSprite(work->x + ((work->unk_20 / 8) % 4 + 136), work->y, work->gfx2, work->tiles3, work->palette3, 0, 0, 3);
+        DrawSprite(work->x + ((work->frame / 8) % 4 + 136), work->y, work->gfx2, work->tiles3, work->palette3, 0, 0, 3);
     }
     TaskPoolDraw(&work->tasks);
-    work->unk_20++;
+    work->frame++;
 }
 
 void stock_mes_disp_3(StockMesDispWork* work) {

@@ -21,24 +21,24 @@
 #include "gba/io_reg.h"
 
 typedef struct WlogoWonEntry {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    u16 unk_0C;
-    u16 unk_0E;
-    u16 unk_10;
-    u16 unk_12;
+    s32 x;
+    s32 y;
+    s32 speedX;
+    u16 delay;
+    u16 duration;
+    u16 priority;
+    u16 scaleIndex;
 } WlogoWonEntry;
 
 typedef struct WlogoAgrEntry {
-    s16 unk_00;
-    s16 unk_02;
-    s16 unk_04;
-    u8 unk_06;
+    s16 smokeX;
+    s16 smokeY;
+    s16 time;
+    u8 smokeAnimId;
     u8 unk_07;
-    u16 unk_08;
-    u16 unk_0A;
-    u8 unk_0C;
+    u16 flashX;
+    u16 flashY;
+    u8 flashAnimId;
     u8 unk_0D[0x3];
 } WlogoAgrEntry;
 
@@ -50,10 +50,10 @@ typedef struct WlogoTtMotion {
 typedef struct WlogoTtWork {
     u8 state;
     u8 unk_001;
-    u16 unk_002;
-    u16 unk_004;
-    u8 unk_006;
-    u8 unk_007;
+    u16 timer;
+    u16 subStep;
+    u8 blend;
+    u8 paletteStep;
     void* tiles;
     void* tiles2;
     void* tiles3;
@@ -72,10 +72,10 @@ typedef struct WlogoTtWork {
     u8 unk_0D0[0x1C];
     u16 unk_0EC;
     u8 unk_0EE[0x12];
-    s8 unk_100[0x8];
-    s32 unk_108;
-    s32 unk_10C;
-    s32 unk_110;
+    s8 visible[0x8];
+    s32 scaleX;
+    s32 scaleX2;
+    s32 scrollSpeed;
     TaskPool tasks;
 } WlogoTtWork;
 
@@ -84,10 +84,10 @@ typedef struct WlogoBksObjWork {
     void* palette;
     void* gfx;
     u8 unk_00C[0x18];
-    s16 unk_024;
-    s16 unk_026;
+    s16 holdTimer;
+    s16 moveTimer;
     s8 state;
-    s8 unk_029;
+    s8 id;
     u8 unk_02A[0x2];
     s32 x;
     s32 y;
@@ -97,31 +97,31 @@ typedef struct WlogoBksObjWork {
     s32 scaleY;
     u8 unk_044;
     u8 unk_045;
-    s16 unk_046;
-    u16 unk_048;
+    s16 scaleIndex;
+    u16 priority;
     u8 unk_04A[0x2];
 } WlogoBksObjWork;
 
 typedef struct WlogoBksWork {
-    u8 unk_000;
+    u8 state;
     u8 unk_001;
-    u16 unk_002;
-    u16 unk_004;
+    u16 timer;
+    u16 paletteStep;
     u8 unk_006;
     u8 unk_007;
     u16 unk_008;
-    u8 unk_00A;
+    u8 blend;
     u8 unk_00B;
     void* tiles;
     void* palette;
     void* gfx;
     AnimState anim;
-    s8 unk_030;
+    s8 visible;
     u8 unk_031;
-    u16 unk_032;
-    u16 unk_034;
-    u8 unk_036;
-    u8 unk_037;
+    u16 frameCount;
+    u16 waveTimer;
+    u8 waveAmplitude;
+    u8 waveFrequency;
     u16 unk_038;
     u8 unk_03A[0x2];
     TaskPool tasks;
@@ -146,8 +146,8 @@ typedef struct WlogoTtObjWork {
 } WlogoTtObjWork;
 
 typedef struct WlogoTtLineWork {
-    s16 unk_000;
-    s16 unk_002;
+    s16 timer;
+    s16 index;
     s8 state;
     u8 unk_005[0x3];
     TaskPool tasks;
@@ -156,21 +156,21 @@ typedef struct WlogoTtLineWork {
 typedef struct WlogoPooWork {
     u8 state;
     u8 unk_001;
-    u16 unk_002;
+    u16 timer;
     u8 unk_004;
     u8 unk_005;
     u16 unk_006;
-    u8 unk_008;
+    u8 blend;
     u8 unk_009[0x3];
 } WlogoPooWork;
 
 typedef struct WlogoPooObjStep {
-    s16 unk_00;
+    s16 duration;
     u8 unk_02[0x2];
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 vx;
+    s32 vy;
+    s32 ax;
+    s32 ay;
 } WlogoPooObjStep;
 
 typedef struct WlogoPooObjWork {
@@ -182,14 +182,14 @@ typedef struct WlogoPooObjWork {
     s32 y;
     s32 vx;
     s32 vy;
-    s32 unk_034;
-    s32 unk_038;
-    u16 unk_03C;
-    u16 unk_03E;
-    u8 unk_040;
-    u8 unk_041;
-    u8 unk_042;
-    u8 unk_043;
+    s32 ax;
+    s32 ay;
+    u16 step;
+    u16 stepTimer;
+    u8 done;
+    u8 id;
+    u8 visible;
+    u8 animId;
 } WlogoPooObjWork;
 
 typedef struct WlogoTvtWork {
@@ -199,13 +199,13 @@ typedef struct WlogoTvtWork {
     s16 y;
     void* gfx;
     AnimState anim;
-    u8 unk_028;
+    u8 visible;
     u8 state;
-    u16 unk_02A;
-    u8 unk_02C;
+    u16 timer;
+    u8 tileFrame;
     u8 unk_02D;
-    u16 unk_02E;
-    u8 unk_030;
+    u16 tileFrameTimer;
+    u8 blend;
     u8 unk_031[0x3];
 } WlogoTvtWork;
 
@@ -217,7 +217,7 @@ typedef struct WlogoAgrSmokeWork {
     s32 x;
     s32 y;
     s32 unk_02C;
-    u8 unk_030;
+    u8 animId;
     u8 unk_031;
     u16 unk_032;
     u16 unk_034;
@@ -231,7 +231,7 @@ typedef struct WlogoAgrFlashWork {
     AnimState anim;
     s16 x;
     s16 y;
-    u8 unk_028;
+    u8 animId;
     u8 unk_029[0x3];
 } WlogoAgrFlashWork;
 
@@ -241,11 +241,11 @@ typedef struct WlogoAgrWork {
     void* gfx;
     s16 x;
     s16 y;
-    u8 unk_010;
+    u8 visible;
     u8 state;
-    s16 unk_012;
-    s16 unk_014;
-    u8 unk_016;
+    s16 timer;
+    s16 entryIndex;
+    u8 blend;
     u8 unk_017;
 } WlogoAgrWork;
 
@@ -255,12 +255,12 @@ typedef struct WlogoDilWork {
     void* gfx;
     u8 state;
     u8 unk_00D;
-    u16 unk_00E;
-    u8 unk_010;
+    u16 timer;
+    u8 blend;
     u8 unk_011;
     s16 x;
     s16 y;
-    u8 unk_016;
+    u8 visible;
     u8 unk_017;
 } WlogoDilWork;
 
@@ -273,27 +273,27 @@ typedef struct WlogoColWork {
     AnimState anim;
     u8 state;
     u8 unk_029;
-    u16 unk_02A;
-    u8 unk_02C;
+    u16 timer;
+    u8 tileFrame;
     u8 unk_02D;
-    u16 unk_02E;
-    u8 unk_030;
-    u8 unk_031;
+    u16 tileFrameTimer;
+    u8 blend;
+    u8 visible;
     u8 unk_032[0x2];
 } WlogoColWork;
 
 typedef struct WlogoHlwWork {
     u8 state;
     u8 unk_001;
-    u16 unk_002;
-    u8 unk_004;
+    u16 timer;
+    u8 blend;
     u8 unk_005[0x3];
 } WlogoHlwWork;
 
 typedef struct WlogoNvlObjArg {
     s32 x;
     s32 y;
-    s32 unk_08;
+    s32 animId;
 } WlogoNvlObjArg;
 
 typedef struct WlogoNvlMovWork {
@@ -301,21 +301,21 @@ typedef struct WlogoNvlMovWork {
     s32 y;
     s32 vx;
     s32 vy;
-    s32 unk_010;
-    s32 unk_014;
-    u8 unk_018;
+    s32 ax;
+    s32 ay;
+    u8 done;
     u8 unk_019;
-    u16 unk_01A;
-    u16 unk_01C;
-    u16 unk_01E;
-    u8 unk_020;
+    u16 stepTimer;
+    u16 step;
+    u16 frameCount;
+    u8 trailAnimId;
     u8 unk_021[0x3];
     void* tiles;
     void* palette;
     void* gfx;
     AnimState anim;
     u8 animId;
-    u8 unk_049;
+    u8 visible;
     u8 unk_04A[0x2];
 } WlogoNvlMovWork;
 
@@ -326,50 +326,50 @@ typedef struct WlogoNvlObjWork {
     AnimState anim;
     s32 x;
     s32 y;
-    u8 unk_02C;
+    u8 animId;
     u8 unk_02D[0x3];
 } WlogoNvlObjWork;
 
 typedef struct WlogoNvlWork {
     u8 state;
     u8 unk_001;
-    u16 unk_002;
-    s8 unk_004;
+    u16 timer;
+    s8 tileFrame;
     u8 unk_005;
-    u16 unk_006;
-    u16 unk_008;
-    u8 unk_00A;
+    u16 tileFrameTimer;
+    u16 frameCount;
+    u8 blend;
     u8 unk_00B;
 } WlogoNvlWork;
 
 typedef struct WlogoAtlWork {
     u8 state;
     u8 unk_001;
-    u16 unk_002;
-    u8 unk_004;
+    u16 timer;
+    u8 tileFrame;
     u8 unk_005;
-    u16 unk_006;
-    u8 unk_008;
-    u8 unk_009;
-    u16 unk_00A;
+    u16 tileFrameTimer;
+    u8 blend;
+    u8 waveAmplitude;
+    u16 waveTimer;
 } WlogoAtlWork;
 
 typedef struct WlogoWonWork {
     void* tiles;
     void* palette;
-    u16 unk_008;
+    u16 timer;
     u8 angle;
     u8 unk_00B;
     s32 x[10];
     s32 y[10];
-    s32 unk_05C[10];
+    s32 speedX[10];
     void* gfx[10];
-    u16 unk_0AC[10];
-    u8 unk_0C0[10];
-    u16 unk_0CA[10];
-    u16 unk_0DE[10];
+    u16 cardTimers[10];
+    u8 cardPhases[10];
+    u16 scaleIndex[10];
+    u16 scaleTicks[10];
     u8 state;
-    u8 unk_0F3;
+    u8 blend;
     u8 unk_0F4[0x14];
 } WlogoWonWork;
 
@@ -382,13 +382,13 @@ typedef struct WlogoHwtObjA {
 } WlogoHwtObjA;
 
 typedef struct WlogoHwtObjB {
-    s16 unk_00;
+    s16 duration;
     u8 unk_02[0x2];
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
-    u8 unk_14;
+    s32 vx;
+    s32 vy;
+    s32 ax;
+    s32 ay;
+    u8 isLast;
     u8 unk_15[0x3];
 } WlogoHwtObjB;
 
@@ -401,23 +401,23 @@ typedef struct WlogoHwtObjWork {
     s32 y;
     s32 vx;
     s32 vy;
-    s32 unk_034;
-    s32 unk_038;
-    u16 unk_03C;
-    u16 unk_03E;
+    s32 ax;
+    s32 ay;
+    u16 step;
+    u16 stepTimer;
     u8 unk_040;
     u8 unk_041[0x3];
     s32 unk_044;
     u8 unk_048[0x2];
-    u8 unk_04A;
+    u8 id;
     u8 unk_04B;
 } WlogoHwtObjWork;
 
 typedef struct WlogoHwtWork {
     u16 unk_000;
-    u16 unk_002;
+    u16 timer;
     u8 state;
-    u8 unk_005;
+    u8 blend;
     u8 unk_006[0x2];
 } WlogoHwtWork;
 
@@ -428,14 +428,14 @@ typedef struct WlogoMonsWork {
     s16 y;
     void* gfx;
     AnimState anim;
-    u16 unk_028;
-    u16 unk_02A;
+    u16 paletteStep;
+    u16 timer;
     u8 state;
-    u8 unk_02D;
-    u8 unk_02E;
+    u8 visible;
+    u8 blend;
     u8 unk_02F;
 } WlogoMonsWork;
-extern s32 gUnk_0203AB38;
+extern s32 gWlogoTtSkew;
 extern const WlogoPooObjStep gWlogoPooObjSteps[5][5];
 extern u8 gUnk_0961AA92[];
 extern u8 gUnk_0961B072[];
@@ -470,7 +470,7 @@ void task_wlogo_bks_0(WlogoBksWork* work);
 u8 task_wlogo_bks_1(WlogoBksWork* work);
 void task_wlogo_bks_2(WlogoBksWork* work);
 void task_wlogo_bks_3(WlogoBksWork* work);
-void func_080B7C7C(void);
+void WlogoBksHBlankIntr(void);
 void task_wlogo_tt_obj_0(WlogoTtObjWork* work, WlogoTtObjArg* arg);
 u8 task_wlogo_tt_obj_1(WlogoTtObjWork* work);
 void task_wlogo_tt_obj_2(WlogoTtObjWork* work);
@@ -535,7 +535,7 @@ void task_wlogo_atl_0(WlogoAtlWork* work);
 u8 task_wlogo_atl_1(WlogoAtlWork* work);
 void task_wlogo_atl_2(WlogoAtlWork* work);
 void task_wlogo_atl_3(WlogoAtlWork* work);
-void func_080B5444(void);
+void WlogoAtlHBlankIntr(void);
 void WlogoEnableHBlank(void);
 void WlogoHBlankIntr(void);
 void WlogoDisableHBlank(void);

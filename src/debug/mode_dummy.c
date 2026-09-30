@@ -5,7 +5,7 @@
 #include "mode_dummy.h"
 #include "sprites_mode_debug.h"
 
-u16 gUnk_020348BC;
+u16 gDummyEntryIndex;
 
 const DummyEntry gDummyEntries[10] = {
     { "\x83\x49\x81\x5b\x83\x76\x83\x6a\x83\x93\x83\x4f", "\x83\x80\x81\x5b\x83\x72\x81\x5b\x81\x40\x91\x90\x8c\xb4\x81\x60\x8f\xe9\x8a\x4f\x8a\xcf", 0 },
@@ -27,8 +27,8 @@ void mode_dummy_0(u32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
-    func_0805FA8C(0, 0x5400, 0x500);
-    func_0805FA60(0, gWhitePalette, 0x20, 0x0F);
+    DebugTextInit(0, 0x5400, 0x500);
+    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
     SetupBg(1, 1, 0x0C, 8);
 #ifdef VERSION_EU
     eu_080059D4(1, gUnk_08C6B0C4);
@@ -40,54 +40,54 @@ void mode_dummy_0(u32 arg) {
     LoadBgMap(1, gUnk_08EEE384, 0x800);
 #endif
     EnableBg(1);
-    gUnk_020348BC = arg;
+    gDummyEntryIndex = arg;
 
     if (arg > 9) {
-        gUnk_020348BC = 0;
-        func_0805FCB0(0, 0, 2, "\x83\x47\x83\x89\x81\x5b\x81\x46\x96\xb3\x8c\xf8\x82\xc8\x88\xf8\x90\x94");
+        gDummyEntryIndex = 0;
+        DebugTextPrint(0, 0, 2, "\x83\x47\x83\x89\x81\x5b\x81\x46\x96\xb3\x8c\xf8\x82\xc8\x88\xf8\x90\x94");
     } else {
-        gUnk_020348BC = arg;
+        gDummyEntryIndex = arg;
         entry = &gDummyEntries[arg];
-        func_0805FCB0(0, 0, 2, entry->name);
-        func_0805FCB0(0x10, 0x18, 2, entry->desc);
+        DebugTextPrint(0, 0, 2, entry->name);
+        DebugTextPrint(0x10, 0x18, 2, entry->desc);
     }
 }
 
-void func_0800C064(void) {
+void DummyUpdateExit(void) {
     const DummyEntry* entry;
 
     if (!FadeIsActive()) {
-        entry = &gDummyEntries[gUnk_020348BC];
+        entry = &gDummyEntries[gDummyEntryIndex];
 
-        switch (entry->unk_08) {
+        switch (entry->action) {
         case 0:
             ModeRequestHeapReset(&gModeMovie, 1);
             break;
         case 1:
-            gGameState.unk_180 = 0x200;
+            gGameState.availableWorlds = 0x200;
             ModeRequest(&gModeWorldselect, 0);
             break;
         case 2:
-            func_080DF380();
-            func_080E04EC();
+            AdvanceFloorStory();
+            RequestMapMode();
             break;
         case 3:
-            func_0806180C(6);
+            RequestEventMode(6);
             break;
         case 4:
-            func_0806180C(0x14);
+            RequestEventMode(0x14);
             break;
         case 5:
-            func_0806180C(0x1C);
+            RequestEventMode(0x1C);
             break;
         case 6:
-            func_0806180C(0x2C);
+            RequestEventMode(0x2C);
             break;
         case 7:
-            func_0806180C(0x3D);
+            RequestEventMode(0x3D);
             break;
         case 8:
-            func_0806180C(0x49);
+            RequestEventMode(0x49);
             break;
         case 9:
         default:
@@ -99,8 +99,8 @@ void func_0800C064(void) {
             break;
         }
     } else {
-        func_080605A4(0);
-        func_08060598();
+        DebugTextDraw(0);
+        DebugTextClear();
         SetBgScroll(1, (gFrameCounter << 14) >> 16, 0);
         UpdatePlayTime();
     }
@@ -109,17 +109,17 @@ void func_0800C064(void) {
 void mode_dummy_1(void) {
     if (!FadeIsActive() && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
         FadeStartOut(0, 0x10);
-        SetModeUpdate(func_0800C064);
+        SetModeUpdate(DummyUpdateExit);
     }
 
-    func_080605A4(0);
-    func_08060598();
+    DebugTextDraw(0);
+    DebugTextClear();
     SetBgScroll(1, (gFrameCounter << 14) >> 16, 0);
     UpdatePlayTime();
 }
 
 void mode_dummy_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
 }
 
 Mode gModeDummy = { "mode_dummy", (ModeInitFunc)mode_dummy_0, mode_dummy_1, mode_dummy_2 };

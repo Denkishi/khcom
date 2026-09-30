@@ -1946,15 +1946,15 @@ CardHelpText* gUnk_09EE7D64[] = {
 };
 #endif
 
-const u16 gUnk_0903BFBC[12] = {
+const u16 gLevelUpStockHelpIndices[12] = {
     50, 51, 6, 46, 5, 52, 79, 47, 66, 48, 70, 0xFFFF,
 };
 
-const u16 gUnk_0903BFD4[12] = {
+const u16 gLevelUpStockLevels[12] = {
     2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 999,
 };
 
-s32 func_080A22A4(StockInfoWork* w);
+s32 UpdateStockInfoMessage(StockInfoWork* w);
 
 void StockInfo_0(StockInfoWork* w, u8* active) {
     u8 i;
@@ -1972,39 +1972,39 @@ void StockInfo_0(StockInfoWork* w, u8* active) {
     w->y = 0xBC00;
     w->timer = 16;
 
-    switch (gGameState.progression.unk_80) {
+    switch (gGameState.progression.levelMilestone) {
     case 0:
-        func_0800FB2C(0);
+        LearnStock(0);
         break;
     case 1:
-        func_0800FB2C(2);
+        LearnStock(2);
         break;
     case 2:
-        func_0800FB2C(4);
+        LearnStock(4);
         break;
     case 3:
-        func_0800FB2C(1);
+        LearnStock(1);
         break;
     case 4:
-        func_0800FB2C(5);
+        LearnStock(5);
         break;
     case 5:
-        func_0800FB2C(3);
+        LearnStock(3);
         break;
     case 6:
-        func_0800FB2C(36);
+        LearnStock(36);
         break;
     case 7:
-        func_0800FB2C(6);
+        LearnStock(6);
         break;
     case 8:
-        func_0800FB2C(46);
+        LearnStock(46);
         break;
     case 9:
-        func_0800FB2C(7);
+        LearnStock(7);
         break;
     case 10:
-        func_0800FB2C(32);
+        LearnStock(32);
         break;
     }
 }
@@ -2015,14 +2015,14 @@ u8 StockInfo_1(StockInfoWork* w, void* a) {
         w->timer--;
     } else {
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        CreateStockMesDispTask(&w->tasks, gUnk_0903BFBC[gGameState.progression.unk_80], 0, 0, 0x50);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080A22A4);
+        CreateStockMesDispTask(&w->tasks, gLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateStockInfoMessage);
     }
 
     return 1;
 }
 
-s32 func_080A22A4(StockInfoWork* w) {
+s32 UpdateStockInfoMessage(StockInfoWork* w) {
     if (*w->active == 0) {
         return 0;
     }
@@ -2037,7 +2037,7 @@ void StockInfo_2(StockInfoWork* w) {
 void StockInfo_3(StockInfoWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gGameState.progression.unk_80++;
+    gGameState.progression.levelMilestone++;
     TaskPoolDestroy(&w->tasks);
 }
 
@@ -2052,8 +2052,8 @@ void* GetCardHelpText(u16 a, u8 b) {
 u8 GetCardHelpTextCount(u16 a) {
     return gCardHelpDefs[a]->textCount;
 }
-u8 func_080A2370(void) {
-    if (gGameState.progression.level >= gUnk_0903BFD4[gGameState.progression.unk_80]) {
+u8 IsLevelUpStockUnlocked(void) {
+    if (gGameState.progression.level >= gLevelUpStockLevels[gGameState.progression.levelMilestone]) {
         return 1;
     }
 

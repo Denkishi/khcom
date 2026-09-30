@@ -52,15 +52,15 @@ void task_btl_form_0(BtlFormWork* work, const BtlFormList* list) {
     work->list = list;
     work->entry = list->entries[0];
     work->timer = work->entry->delay;
-    work->unk_10 = 1;
-    work->unk_02 = 0;
-    work->unk_04 = 0;
-    work->unk_22 = 0;
-    work->unk_24 = 100;
-    gBtlWork->unk_120 = 0;
+    work->entryIndex = 1;
+    work->stepTimer = 0;
+    work->stepIndex = 0;
+    work->nextTileCount = 0;
+    work->waitTimer = 100;
+    gBtlWork->pendingEnemies = 0;
 
     for (i = 0; i < list->count; i++) {
-        gBtlWork->unk_120 += list->entries[i]->count;
+        gBtlWork->pendingEnemies += list->entries[i]->count;
     }
 }
 
@@ -78,31 +78,31 @@ u8 task_btl_form_1(BtlFormWork* work) {
 
     if (work->flags & 2) {
         list = work->list;
-        if (list->threshold >= work->unk_22 + gBtlWork->unk_0EC) {
-            if (work->unk_22 == 0) {
+        if (list->threshold >= work->nextTileCount + gBtlWork->enemyTileCount) {
+            if (work->nextTileCount == 0) {
                 return 0;
             }
-            work->entry = list->entries[work->unk_10];
+            work->entry = list->entries[work->entryIndex];
             work->timer = work->entry->delay;
-            work->unk_02 = 0;
-            work->unk_04 = 0;
+            work->stepTimer = 0;
+            work->stepIndex = 0;
             work->flags &= ~2;
-            work->unk_10++;
-            work->unk_24 = 100;
+            work->entryIndex++;
+            work->waitTimer = 100;
         }
-    } else if (work->entry->count <= work->unk_04) {
-        if (work->unk_24-- <= 0) {
+    } else if (work->entry->count <= work->stepIndex) {
+        if (work->waitTimer-- <= 0) {
             work->flags |= 2;
 
-            if (gGameState.unk_1B8 != 4) {
+            if (gGameState.roomEffect != 4) {
                 gGameState.flags &= ~4;
             }
 
-            if (work->unk_10 >= work->list->count) {
-                work->unk_22 = 0;
+            if (work->entryIndex >= work->list->count) {
+                work->nextTileCount = 0;
                 return 0;
             }
-            work->unk_22 = func_0803FDC8(work->list->entries[work->unk_10]);
+            work->nextTileCount = GetBtlFormEntryTileCount(work->list->entries[work->entryIndex]);
         }
     } else {
         if (work->timer > 0) {
@@ -129,8 +129,8 @@ u8 task_btl_form_1(BtlFormWork* work) {
                 }
                 work->timer = 0xFFFF;
             }
-            step = &work->entry->steps[work->unk_04];
-            if (work->unk_02 >= step->delay) {
+            step = &work->entry->steps[work->stepIndex];
+            if (work->stepTimer >= step->delay) {
                 if (work->flags & 1) {
                     x = work->x - (step->x << 8);
                 } else {
@@ -138,10 +138,10 @@ u8 task_btl_form_1(BtlFormWork* work) {
                 }
                 y = work->y + (step->y << 8);
                 z = work->z + (step->z << 8);
-                func_0801BDDC(step->id, x, y, z);
-                work->unk_04++;
+                SpawnEnemy(step->id, x, y, z);
+                work->stepIndex++;
             } else {
-                work->unk_02++;
+                work->stepTimer++;
             }
         }
     }
@@ -155,45 +155,45 @@ void task_btl_form_3(void) {
 
 void task_btl_born_0(BtlBornWork* work, BtlBornArgs* args) {
     work->pos = args->pos;
-    work->unk_0C = args->unk_00;
-    work->unk_10 = args->unk_10;
-    work->unk_12 = args->unk_12;
+    work->desc = args->desc;
+    work->flags = args->flags;
+    work->tileCount = args->tileCount;
 }
 
 u8 task_btl_born_1(BtlBornWork* work) {
-    if (func_080128EC() == 0) {
+    if (BgFxIsActive() == 0) {
         ClampBattlePosition(&work->pos.x, &work->pos.y, -24, -12);
 
         if (IsSongPlaying(SONG_EF_MON_UP) == 0) {
             m4aSongNumStart(SONG_EF_MON_UP);
         }
 
-        if (CanAllocObjTiles(work->unk_12) == 0) {
-            gBtlWork->unk_120--;
+        if (CanAllocObjTiles(work->tileCount) == 0) {
+            gBtlWork->pendingEnemies--;
             return 0;
         }
 
         if (CanAllocObjPalette(1) == 0) {
-            gBtlWork->unk_120--;
+            gBtlWork->pendingEnemies--;
             return 0;
         }
 
-        if (work->unk_10 & 1) {
-            func_08013EDC(work->pos.x, work->pos.y,
+        if (work->flags & 1) {
+            BgFxStartEnemySpawn(work->pos.x, work->pos.y,
                           work->pos.z - 0x1000, 0x200);
         } else {
-            func_08013EDC(work->pos.x, work->pos.y,
+            BgFxStartEnemySpawn(work->pos.x, work->pos.y,
                           work->pos.z - 0x800, 0x100);
         }
 
-        TaskCreate(&gBtlWork->taskPools[0], work->unk_0C, work);
+        TaskCreate(&gBtlWork->taskPools[0], work->desc, work);
         return 0;
     }
 
     return 1;
 }
 
-void func_08040150(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ) {
+void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ) {
     s16 dx;
     s16 dz;
 
@@ -231,7 +231,7 @@ void func_08040150(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ) {
         break;
     }
 
-    if (work->unk_3C == 0) {
+    if (work->facingLeft == 0) {
         dx = -dx;
     }
 
@@ -245,21 +245,21 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     s32 y;
     s32 z;
 
-    work->unk_48 = args->unk_1C;
+    work->variant = args->variant;
 
-    if (args->unk_12 != 0) {
-        work->unk_3C = 1;
+    if (args->facingLeft != 0) {
+        work->facingLeft = 1;
     } else {
-        work->unk_3C = 0;
+        work->facingLeft = 0;
     }
 
-    if (args->unk_14 != 0) {
-        work->unk_3D = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gBtlWork->actor;
         work->palette = LoadObjPalette(gSoraPalette, 32);
     } else {
-        work->unk_3D = 0;
+        work->mainSide = 0;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gRikuBtlWork->actor;
         work->palette = LoadObjPalette(gUnk_096FAC64, 32);
@@ -271,68 +271,68 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
-    work->unk_38 = 100;
+    work->timer = 100;
     work->state = 0;
-    work->unk_44 = 256;
+    work->scale = 256;
     work->vx = 0x800;
-    work->unk_54 = 10;
+    work->hitHalfSize = 10;
     work->flags = 2;
     work->song = 568;
 
-    switch (work->unk_48) {
+    switch (work->variant) {
     case 0:
-        work->unk_4C = 86;
+        work->attack = 86;
         break;
     case 1:
-        work->unk_4C = 100;
+        work->attack = 100;
         break;
     case 2:
-        work->unk_4C = 101;
-        func_08040150(work, &x, &y, &z);
-        func_08017260(x, y, z, 332);
-        work->unk_54 = 16;
+        work->attack = 101;
+        BtlRaidGetEffectPosition(work, &x, &y, &z);
+        BgFxStartFlame(x, y, z, 332);
+        work->hitHalfSize = 16;
         work->song = 505;
         break;
     case 3:
-        work->unk_4C = 102;
-        func_08040150(work, &x, &y, &z);
-        func_080172F8(x, y, z, 332);
-        work->unk_54 = 16;
+        work->attack = 102;
+        BtlRaidGetEffectPosition(work, &x, &y, &z);
+        BgFxStartFrost(x, y, z, 332);
+        work->hitHalfSize = 16;
         work->song = 509;
         break;
     case 4:
-        work->unk_4C = 103;
+        work->attack = 103;
         work->flags |= 1;
-        work->unk_54 = 8;
+        work->hitHalfSize = 8;
         break;
     case 5:
-        work->unk_4C = 104;
+        work->attack = 104;
         work->flags |= 1;
-        work->unk_54 = 8;
+        work->hitHalfSize = 8;
         break;
     case 6:
-        work->unk_4C = 105;
+        work->attack = 105;
         work->state = 3;
 
-        if (work->unk_3C != 0) {
+        if (work->facingLeft != 0) {
             work->angle = 192;
         } else {
             work->angle = 64;
         }
-        work->unk_38 = 0;
+        work->timer = 0;
         work->unk_5A = GetRandom() % 5 + 0xFFFE;
         break;
     case 7:
-        work->unk_4C = 111;
+        work->attack = 111;
         work->state = 4;
 
-        if (work->unk_3C != 0) {
+        if (work->facingLeft != 0) {
             work->angle = 192;
         } else {
             work->angle = 64;
         }
-        work->unk_38 = 0;
-        work->unk_3A = 0;
+        work->timer = 0;
+        work->steps = 0;
         break;
     }
 
@@ -341,17 +341,17 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     m4aSongNumStart(SONG_BTL_LT2_SW);
 }
 
-BtlObj* func_08040458(BtlRaidWork* work) {
+BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
     BtlObj* obj;
 
     if (gBtlWork->flags & 0x4000) {
-        if (work->unk_3D != 0) {
+        if (work->mainSide != 0) {
             obj = gRikuBtlWork->actor;
         } else {
             obj = gBtlWork->actor;
         }
 
-        if (obj->unk_02C <= 0) {
+        if (obj->hp <= 0) {
             return 0;
         }
 
@@ -372,11 +372,11 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     s32 y;
     s32 z;
 
-    if ((work->unk_3D != 0 ? gBtlWork : gRikuBtlWork)->flags & 0x40000000) {
+    if ((work->mainSide != 0 ? gBtlWork : gRikuBtlWork)->flags & 0x40000000) {
         return 0;
     }
 
-    func_0802F284(work->x, work->y, work->z + 0x1800);
+    BtlMapFollowPosition(work->x, work->y, work->z + 0x1800);
 
     switch (work->state) {
     case 4:
@@ -386,34 +386,34 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             work->z = 0;
         }
 
-        obj = func_08040458(work);
+        obj = BtlRaidGetTarget(work);
 
         if (obj != 0) {
-            if (work->unk_3A <= 0) {
+            if (work->steps <= 0) {
                 ApproachAngle(&work->angle,
                               (u8)GetAngle(work->x, work->z, obj->x,
-                                            obj->z - (obj->unk_0A2 << 8)),
+                                            obj->z - (obj->centerHeight << 8)),
                               2);
             } else {
-                work->unk_3A--;
+                work->steps--;
             }
 
             work->y += (obj->y - work->y) >> 3;
 
-            if (func_08011F78(work->unk_4C, work->x, work->y, work->z, 8, 8, 8) != 0) {
+            if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 8) != 0) {
                 m4aSongNumStart(work->song);
 
                 if (obj->flags & 2) {
-                    work->unk_3A = 20;
+                    work->steps = 20;
                 }
             }
         }
 
-        if (obj == 0 || work->unk_38 > 180) {
+        if (obj == 0 || work->timer > 180) {
             work->state = 5;
-            work->unk_38 = 0;
+            work->timer = 0;
         } else {
-            work->unk_38++;
+            work->timer++;
         }
         break;
     case 3:
@@ -436,58 +436,58 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             break;
         }
 
-        if (func_08011F78(work->unk_4C, work->x, work->y, work->z, 8, 8, 32) != 0) {
+        if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 32) != 0) {
             m4aSongNumStart(work->song);
         }
 
         if (hit != 0) {
-            if (work->unk_38 > 180) {
+            if (work->timer > 180) {
                 work->state = 5;
-                work->unk_38 = 0;
+                work->timer = 0;
                 break;
             }
             work->unk_5A = GetRandom() % 5 + 0xFFFE;
         }
 
-        work->unk_38++;
+        work->timer++;
         break;
     case 5:
-        if (work->unk_38 == 0) {
-            work->unk_3A = 16;
+        if (work->timer == 0) {
+            work->steps = 16;
         }
-        ApproachValue(&work->x, work->actor->x, work->unk_3A);
-        ApproachValue(&work->y, work->actor->y, work->unk_3A);
-        ApproachValue(&work->z, work->actor->z - 0x1000, work->unk_3A);
-        work->unk_3A--;
-        if (work->unk_3A <= 3) {
+        ApproachValue(&work->x, work->actor->x, work->steps);
+        ApproachValue(&work->y, work->actor->y, work->steps);
+        ApproachValue(&work->z, work->actor->z - 0x1000, work->steps);
+        work->steps--;
+        if (work->steps <= 3) {
             return 0;
         }
-        work->unk_38++;
+        work->timer++;
         break;
     case 0:
-        ApproachValue(&work->vx, -0x800, work->unk_38);
+        ApproachValue(&work->vx, -0x800, work->timer);
 
-        if (work->unk_3C != 0) {
+        if (work->facingLeft != 0) {
             work->x = work->x - work->vx;
         } else {
             work->x = work->x + work->vx;
         }
 
         if (work->flags & 1) {
-            if (func_08011E3C(work->x, work->y, work->z, work->unk_54, work->unk_54, 32) != 0) {
+            if (TestAttackBox(work->x, work->y, work->z, work->hitHalfSize, work->hitHalfSize, 32) != 0) {
                 work->state = 2;
-                work->unk_38 = 0;
+                work->timer = 0;
                 break;
             }
         } else {
-            if (func_08011F78(work->unk_4C, work->x, work->y, work->z,
-                              work->unk_54, work->unk_54, 32) != 0) {
+            if (ApplyAttackBox(work->attack, work->x, work->y, work->z,
+                              work->hitHalfSize, work->hitHalfSize, 32) != 0) {
                 m4aSongNumStart(work->song);
             }
         }
 
-        if (work->unk_38 <= 0) {
-            switch (work->unk_48) {
+        if (work->timer <= 0) {
+            switch (work->variant) {
             case 2:
             case 3:
                 BgAnimStop();
@@ -500,68 +500,68 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         case 1:
         case 2:
             work->state = 1;
-            work->unk_3A = work->unk_38 >> 2;
-            work->unk_34 = work->vx;
+            work->steps = work->timer >> 2;
+            work->bounceVx = work->vx;
             break;
         }
-        work->unk_38--;
+        work->timer--;
         break;
     case 1:
-        ApproachValue(&work->vx, -work->unk_34, work->unk_3A);
+        ApproachValue(&work->vx, -work->bounceVx, work->steps);
 
-        if (work->unk_3C != 0) {
+        if (work->facingLeft != 0) {
             work->x = work->x - work->vx;
         } else {
             work->x = work->x + work->vx;
         }
 
-        if (func_08011F78(work->unk_4C, work->x, work->y, work->z,
-                          work->unk_54, work->unk_54, 32) != 0) {
+        if (ApplyAttackBox(work->attack, work->x, work->y, work->z,
+                          work->hitHalfSize, work->hitHalfSize, 32) != 0) {
             m4aSongNumStart(work->song);
         }
 
-        if (work->unk_3A <= 0) {
-            work->unk_38 = 100 - work->unk_38;
-            func_08019A30();
+        if (work->steps <= 0) {
+            work->timer = 100 - work->timer;
+            MakeOpponentsHittable();
             work->state = 0;
         } else {
-            work->unk_3A--;
+            work->steps--;
         }
         break;
     case 2:
-        if (work->unk_38 == 0) {
-            work->unk_3A = 30;
+        if (work->timer == 0) {
+            work->steps = 30;
 
-            switch (work->unk_48) {
+            switch (work->variant) {
             case 4:
-                func_080155BC(work->x, work->y, 0, work->unk_4C);
+                BgFxStartThunderStrike(work->x, work->y, 0, work->attack);
                 break;
             case 5:
-                func_08014EC0(work->x, work->y, 0, work->unk_4C);
+                BgFxStartGravityStrike(work->x, work->y, 0, work->attack);
                 break;
             }
         }
 
-        if (work->unk_3A > 0) {
-            ApproachValue(&work->unk_44, 25, work->unk_3A);
-            work->unk_3A--;
-            if (work->unk_3A <= 0) {
+        if (work->steps > 0) {
+            ApproachValue(&work->scale, 25, work->steps);
+            work->steps--;
+            if (work->steps <= 0) {
                 work->flags &= ~2;
             }
         }
 
-        if (!(work->flags & 2) && func_080128EC() == 0) {
+        if (!(work->flags & 2) && BgFxIsActive() == 0) {
             return 0;
         }
 
-        work->unk_38++;
+        work->timer++;
         break;
     }
 
-    switch (work->unk_48) {
+    switch (work->variant) {
     case 2:
     case 3:
-        func_08040150(work, &x, &y, &z);
+        BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxSetPosition(x, y, z);
         break;
     }
@@ -580,16 +580,16 @@ void task_btl_raid_2(BtlRaidWork* work) {
     if (work->flags & 2) {
         flags = GetBattleSpritePriorityFlags(work->y);
         WorldToScreen(&sx, &sy, work->x, work->y, work->z);
-        scale = gBtlWork->scale * work->unk_44 >> 8;
+        scale = gBtlWork->scale * work->scale >> 8;
 
         if (scale == 256) {
             affine = 0;
 
-            if (work->unk_3C == 0) {
+            if (work->facingLeft == 0) {
                 flags |= 1;
             }
         } else {
-            if (work->unk_3C == 0) {
+            if (work->facingLeft == 0) {
                 affine = AllocObjAffine(0, -scale, scale, 1);
             } else {
                 affine = AllocObjAffine(0, scale, scale, 1);
@@ -610,7 +610,7 @@ void task_btl_raid_3(BtlRaidWork* work) {
 }
 
 void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
-    work->unk_28 = 0;
+    work->status = 0;
     work->actor = obj;
     work->tiles = AllocObjTiles(128, 0);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
@@ -625,14 +625,14 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
     u32 state;
 
     obj = work->actor;
-    state = obj->unk_0E8;
+    state = obj->badStatus;
 
     if (state == 0) {
         return 1;
     }
 
-    if (state != work->unk_28) {
-        work->unk_28 = state;
+    if (state != work->status) {
+        work->status = state;
 
         switch (state) {
         case 2:
@@ -659,11 +659,11 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
         }
     }
 
-    obj->unk_0EC--;
+    obj->badStatusTimer--;
 
-    if (obj->unk_0EC <= 0) {
-        obj->unk_0E8 = 0;
-        work->unk_28 = 0;
+    if (obj->badStatusTimer <= 0) {
+        obj->badStatus = 0;
+        work->status = 0;
     }
 
     return 1;
@@ -678,17 +678,17 @@ void task_btl_badstatus_2(BtlBadStatusWork* work) {
 
     obj = work->actor;
 
-    if (obj->unk_0E8 != 0) {
+    if (obj->badStatus != 0) {
         flags = GetBattleSpritePriorityFlags(obj->y);
 
-        if (gBtlWork->unk_070 != 0) {
+        if (gBtlWork->paused != 0) {
             gfx = AnimGetGfx(&work->anim);
         } else {
             gfx = AnimUpdate(&work->anim);
         }
 
         WorldToScreen(&sx, &sy, obj->x, obj->y,
-                      obj->z - ((obj->unk_09C + 8) << 8));
+                      obj->z - ((obj->height + 8) << 8));
         DrawSprite(sx, sy, gfx, work->tiles, work->palette3, 0, flags,
                    -4101 - ((obj->y >> 8) * 4));
     }
@@ -700,19 +700,19 @@ void task_btl_badstatus_3(BtlBadStatusWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-BtlObj* func_08040C8C(SmnCloudWork* work) {
+BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
 
     if (gBtlWork->flags & 0x4000) {
-        if (work->unk_163 != 0) {
+        if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
 
-        if (p->unk_02C <= 0) {
+        if (p->hp <= 0) {
             return 0;
         }
 
@@ -737,25 +737,25 @@ BtlObj* func_08040C8C(SmnCloudWork* work) {
         return 0;
     }
 
-    p = list[work->unk_16C % count];
-    work->unk_16C++;
+    p = list[work->targetIndex % count];
+    work->targetIndex++;
     return p;
 }
 
-BtlObj* func_08040D54(SmnCloudWork* work) {
+BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     BtlObj* list[10];
     BtlObj* p;
     s16 count;
     s32 d;
 
     if (gBtlWork->flags & 0x4000) {
-        if (work->unk_163 != 0) {
+        if (work->mainSide != 0) {
             p = gRikuBtlWork->actor;
         } else {
             p = gBtlWork->actor;
         }
 
-        if (p->unk_02C <= 0) {
+        if (p->hp <= 0) {
             return 0;
         }
 

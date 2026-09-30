@@ -29,8 +29,8 @@ typedef struct TitleObjSprite {
 typedef struct TitleObjWork {
     TitleObjSprite sprites[3];
     AnimState anim;
-    u16 unk_60;
-    u16 unk_62;
+    u16 slideTimer;
+    u16 slideDelay;
 } TitleObjWork;
 
 typedef struct TitleMenuWork {
@@ -40,9 +40,9 @@ typedef struct TitleMenuWork {
     ObjPalette* palette2[3];
     void* gfx[3];
     AnimState anim;
-    s16* unk_44;
+    s16* choice;
     TaskPool tasks;
-    s32 unk_5C;
+    s32 layout;
     s16 x;
     u16 unk_62;
 } TitleMenuWork;
@@ -53,31 +53,31 @@ typedef struct TitleLumiChangeWork {
     void* gfx;
 } TitleLumiChangeWork;
 
-extern u8 gUnk_02034ECC;
+extern u8 gTitleLogoScaleDone;
 
-u8 func_080D6280(void);
-u8 func_080D6294(void);
-void func_080D62A8(TitleLogoWork* work);
+u8 IsTitleLogoShown(void);
+u8 IsTitleIntroDone(void);
+void TitleLogoLoadSprites(TitleLogoWork* work);
 
 void task_title_logo_0(TitleLogoWork* work);
 u8 task_title_logo_1(TitleLogoWork* work);
 void task_title_logo_2(TitleLogoWork* work);
 void task_title_logo_3(TitleLogoWork* work);
 void func_080D6548(u8* src, u16* dst, u16 size);
-u8 func_080D6574(void);
+u8 IsTitleLogoScaleDone(void);
 void task_title_obj_0(TitleObjWork* work);
 u8 task_title_obj_1(TitleObjWork* work);
 void task_title_obj_2(TitleObjWork* work);
 void task_title_obj_3(TitleObjWork* work);
 void task_title_menu_0(TitleMenuWork* work, s16* arg);
-s16 func_080D6908(s16 a);
-void func_080D6944(s16* p);
-void func_080D69AC(s16* p, s16 count);
+s16 TitleMenuChoiceRow(s16 a);
+void TitleMenuMoveBasic(s16* p);
+void TitleMenuMoveOrdered(s16* p, s16 count);
 u8 task_title_menu_1(TitleMenuWork* work);
-void func_080D6A64(TitleMenuWork* work);
-void func_080D6B7C(TitleMenuWork* work);
-void func_080D6C54(TitleMenuWork* work);
-void func_080D6D2C(TitleMenuWork* work);
+void TitleMenuDrawBasic(TitleMenuWork* work);
+void TitleMenuDrawFull(TitleMenuWork* work);
+void TitleMenuDrawNewGame(TitleMenuWork* work);
+void TitleMenuDrawSingle(TitleMenuWork* work);
 void task_title_menu_2(TitleMenuWork* work);
 void task_title_menu_3(TitleMenuWork* work);
 void task_title_lumichange_0(TitleLumiChangeWork* work);

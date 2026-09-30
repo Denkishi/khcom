@@ -39,30 +39,30 @@
 #include "enemy_tile_counts.h"
 
 typedef struct VsTaskArg {
-    s32 unk_00;
-    u32 unk_04 : 8;
+    s32 side;
+    u32 mainSide : 8;
 } VsTaskArg;
 
-extern u16 gUnk_02039B88;
-extern u16 gUnk_02039B8C;
-extern u16 gUnk_02039B90;
+extern u16 gVsBattleMinY;
+extern u16 gVsBattleMaxY;
+extern u16 gVsBattleHalfWidth;
 extern u8 gUnk_02039B98;
 extern u8 gUnk_08F69BC4[];
 
-void func_08010CC8(void);
-void func_0801071C(void);
+void VsBattleUpdate(void);
+void VsBtlWorkInit(void);
 
-void func_0807E2F4(void);
+void SetRikuReloadCharging(void);
 
 void mode_vsbattle_0(u32 mode);
 void mode_vsbattle_1(void);
 void mode_vsbattle_2(void);
 void func_0800C6B0(void);
 void func_0800C6B4(void);
-void func_0800C6B8(void);
-void func_0800CB78(EmyWork* work);
+void PlayVsBattleBgm(void);
+void EmyStartKnockback(EmyWork* work);
 void HumSubReleaseGraphics(HumSub* sub);
-void func_0800E3D0(HumWork* work);
+void HumStartKnockback(HumWork* work);
 void HumSubUpdateAnimation(HumSub* sub);
 
 #endif

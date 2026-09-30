@@ -4,14 +4,14 @@
 
 const EmyKind gBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 
-const s32 gUnk_09A4FD5C[32] = {
+const s32 gBosLstBitTanTable[32] = {
     6, 12, 18, 25, 31, 37, 44, 50, 57, 64, 70, 77, 84, 91, 98, 106,
     113, 121, 128, 136, 145, 153, 162, 171, 180, 189, 199, 210, 220, 232, 243, 256,
 };
 
-const s32 gUnk_09A4FDDC[3] = { 0, -8, 8 };
+const s32 gBosLstBitHoverY[3] = { 0, -8, 8 };
 
-const s32 gUnk_09A4FDE8[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
+const s32 gBosLstBitBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
 
 LstAnimSet gLstAnimSets[4] = {
     { 5, 0, 4, 5 },
@@ -29,37 +29,37 @@ TaskDesc gTaskDescBosLstBit = {
     sizeof(LstState),
 };
 
-s32 func_0811089C(s32 x) {
+s32 BosLstBitSquare(s32 x) {
     return x * x;
 }
 
-s32 func_081108A4(s32 x) {
+s32 BosLstBitSquare2(s32 x) {
     return x * x;
 }
 
-u8 func_081108AC(LstState* work, s32 kind) {
+u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
     LstFalArg arg;
     u8 result;
 
     result = 0;
 
-    if (work->unk_00E != 0) {
+    if (work->kind != 0) {
         return 0;
     }
 
-    if ((s16)*work->unk_020 <= 31) {
-        arg.unk_00 = 0;
+    if ((s16)*work->falCount <= 31) {
+        arg.kind = 0;
         if (kind == 1) {
-            arg.x = work->unk_050;
-            arg.y = work->unk_054;
-            arg.z = work->unk_058;
+            arg.x = work->targetX;
+            arg.y = work->targetY;
+            arg.z = work->targetZ;
         } else {
-            arg.x = work->unk_028;
-            arg.y = work->unk_02C;
-            arg.z = work->unk_030;
+            arg.x = work->x;
+            arg.y = work->y;
+            arg.z = work->z;
         }
-        arg.unk_12 = *work->unk_01C;
-        arg.unk_14 = work->unk_020;
+        arg.facing = *work->facing;
+        arg.falCount = work->falCount;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFal, &arg);
         result = 1;
     }
@@ -67,28 +67,28 @@ u8 func_081108AC(LstState* work, s32 kind) {
     return result;
 }
 
-u8 func_08110918(Task* task) {
+u8 BosLstBitIsAlive(Task* task) {
     LstState* s;
     u8 result;
 
     s = task->work;
     result = 1;
 
-    if (s->obj.unk_02C <= 0 || s->unk_002 == 6) {
+    if (s->obj.hp <= 0 || s->state == 6) {
         result = 0;
     }
 
     return result;
 }
 
-u8 func_08110938(Task* task) {
+u8 BosLstBitHasShots(Task* task) {
     LstState* s;
     u8 result;
 
     s = task->work;
-    result = func_08110918(task);
+    result = BosLstBitIsAlive(task);
 
-    if (result == 1 && s->unk_012 <= 0) {
+    if (result == 1 && s->shots <= 0) {
         result = 0;
     }
 
@@ -101,7 +101,7 @@ u8 eu_0810F08C(Task* task) {
     u8 result;
 
     s = task->work;
-    result = func_08110918(task);
+    result = BosLstBitIsAlive(task);
 
     if (result == 1 && (s->scaleX == 0x100 || s->scaleY == 0x100)) {
         result = 0;
@@ -111,112 +111,112 @@ u8 eu_0810F08C(Task* task) {
 }
 #endif
 
-s16 func_0811095C(Task* task, s16 a) {
+s16 BosLstBitMarkFirstAlive(Task* task, s16 a) {
     LstState* s;
 
     s = task->work;
 
-    if (func_08110918(task) == 1 && a == 0) {
-        s->unk_010 = a;
+    if (BosLstBitIsAlive(task) == 1 && a == 0) {
+        s->index = a;
         a = 1;
     }
 
     return a;
 }
 
-void func_08110984(Task* task) {
+void BosLstBitStartHover(Task* task) {
     LstState* s;
     u16 zero;
 
     s = task->work;
     zero = 0;
-    s->unk_002 = 1;
+    s->state = 1;
     s->unk_004 = zero;
-    s->unk_006 = zero;
+    s->timer = zero;
     s->unk_008 = zero;
 }
 
-void func_08110994(Task* task, s16 a) {
+void BosLstBitStartFiring(Task* task, s16 a) {
     LstState* s;
     u16 zero;
 
     s = task->work;
     zero = 0;
-    s->unk_002 = 2;
+    s->state = 2;
     s->unk_004 = zero;
-    s->unk_006 = zero;
+    s->timer = zero;
     s->unk_008 = zero;
-    s->unk_012 = a;
+    s->shots = a;
 }
 
-void func_081109A8(Task* task) {
+void BosLstBitStartReturn(Task* task) {
     LstState* s;
     u16 zero;
 
     s = task->work;
 #ifdef VERSION_EU
-    if ((u16)(s->unk_002 - 5) > 1) {
+    if ((u16)(s->state - 5) > 1) {
 #endif
         zero = 0;
-        s->unk_002 = 5;
+        s->state = 5;
         s->unk_004 = zero;
-        s->unk_006 = zero;
+        s->timer = zero;
         s->unk_008 = zero;
 #ifdef VERSION_EU
     }
 #endif
 }
 
-u8 func_081109B8(Task* task, u8 a) {
+u8 BosLstBitInterrupt(Task* task, u8 a) {
     LstState* s;
     u8 result;
 
     s = task->work;
     result = 0;
-    func_08111660(s->unk_1C4);
-    func_08111660(s->unk_1C8);
-    func_08111660(s->unk_1CC);
-    s->unk_012 = 0;
+    BosLstLsrStop(s->lsrTask);
+    BosLstLsrStop(s->lsrTask2);
+    BosLstLsrStop(s->lsrTask3);
+    s->shots = 0;
 
-    if (s->unk_002 >= 5 && s->unk_002 <= 6) {
+    if (s->state >= 5 && s->state <= 6) {
         return 0;
     }
 
-    if (a == 1 && s->unk_010 == 0) {
-        s->obj.unk_02C = 0;
-        func_0801C2DC(&s->obj, 1);
-        func_081108AC(s, 0);
-        func_081108AC(s, 0);
+    if (a == 1 && s->index == 0) {
+        s->obj.hp = 0;
+        SetBtlObjUnhittable(&s->obj, 1);
+        BosLstBitSpawnFal(s, 0);
+        BosLstBitSpawnFal(s, 0);
         result = 1;
     }
 
 #ifdef VERSION_EU
     AnimReset(&s->anim);
-    AnimChange(&s->anim, gLstAnimSets[s->unk_000].unk_00, 1);
+    AnimChange(&s->anim, gLstAnimSets[s->animSet].idleAnim, 1);
 
-    if (s->unk_002 != 0 && s->unk_002 != 5) {
-        s->unk_002 = 7;
+    if (s->state != 0 && s->state != 5) {
+        s->state = 7;
         s->unk_004 = 0;
-        s->unk_006 = 0;
+        s->timer = 0;
         s->unk_008 = 0;
 
         if (gBtlWork->actor->z > -0xC000) {
-            s->unk_058 = -0x6000;
+            s->targetZ = -0x6000;
         } else {
-            s->unk_058 = gBtlWork->unk_0D4 - 0x5000;
+            s->targetZ = gBtlWork->bossZ - 0x5000;
         }
     }
 #else
-    s->unk_002 = 7;
+    s->state = 7;
     s->unk_004 = 0;
-    s->unk_006 = 0;
+    s->timer = 0;
     s->unk_008 = 0;
 #endif
 
     return result;
 }
 
-s32 func_08110A38(s32 a, s32 b) {
+s32 BosLstBitAtanLookup(s32 a, s32 b) {
     s32 v;
     s32 step;
     s32 i;
@@ -226,14 +226,14 @@ s32 func_08110A38(s32 a, s32 b) {
     }
 
     v = (b << 8) / a;
-    if (v <= gUnk_09A4FD5C[0]) {
+    if (v <= gBosLstBitTanTable[0]) {
         return 0;
     }
 
     step = 8;
     i = 16;
-    while (step != 0 && v != gUnk_09A4FD5C[i]) {
-        if (v < gUnk_09A4FD5C[i]) {
+    while (step != 0 && v != gBosLstBitTanTable[i]) {
+        if (v < gBosLstBitTanTable[i]) {
             i -= step;
         } else {
             i += step;
@@ -244,7 +244,7 @@ s32 func_08110A38(s32 a, s32 b) {
     return i;
 }
 
-s32 func_08110A98(s32 x0, s32 y0, s32 x1, s32 y1) {
+s32 BosLstBitAngleBetween(s32 x0, s32 y0, s32 x1, s32 y1) {
     s32 dx;
     s32 dy;
     s32 a;
@@ -253,9 +253,9 @@ s32 func_08110A98(s32 x0, s32 y0, s32 x1, s32 y1) {
     dy = y0 - y1;
 
     if (abs(dx) >= abs(dy)) {
-        a = func_08110A38(abs(dx), abs(dy));
+        a = BosLstBitAtanLookup(abs(dx), abs(dy));
     } else {
-        a = 63 - func_08110A38(abs(dy), abs(dx));
+        a = 63 - BosLstBitAtanLookup(abs(dy), abs(dx));
     }
 
     if (dx >= 0) {
@@ -276,7 +276,7 @@ s32 func_08110A98(s32 x0, s32 y0, s32 x1, s32 y1) {
     return a & 255;
 }
 
-s32 func_08110B10(u8 a, u8 b) {
+s32 BosLstBitAngleDiff(u8 a, u8 b) {
     s32 d;
 
     if (a > b) {
@@ -300,77 +300,77 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     BtlObj* p;
     TaskPool* pool;
 
-    work->unk_000 = 0;
-    work->unk_002 = 0;
+    work->animSet = 0;
+    work->state = 0;
     work->unk_004 = 0;
-    work->unk_006 = 0;
+    work->timer = 0;
     work->unk_008 = 0;
-    work->unk_00A = 0;
-    work->unk_00C = 0;
-    work->unk_00E = arg->unk_00;
-    work->unk_010 = arg->unk_04;
-    work->unk_012 = 0;
-    work->unk_014 = GetRandom() % 32;
-    work->unk_01C = arg->unk_08;
-    work->unk_020 = arg->unk_0C;
+    work->hurtTimer = 0;
+    work->bobFrame = 0;
+    work->kind = arg->kind;
+    work->index = arg->index;
+    work->shots = 0;
+    work->falTimer = GetRandom() % 32;
+    work->facing = arg->facing;
+    work->falCount = arg->falCount;
     work->unk_024 = arg->unk_10;
-    work->unk_028 = arg->x;
-    work->unk_02C = arg->y;
-    work->unk_030 = arg->z;
-    work->unk_044 = arg->x;
-    work->unk_048 = arg->y;
-    work->unk_04C = arg->z;
-    work->unk_040 = 0;
-    work->unk_050 = arg->unk_20;
-    work->unk_054 = arg->y2;
-    work->unk_058 = arg->unk_28;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->z = arg->z;
+    work->startX = arg->x;
+    work->startY = arg->y;
+    work->startZ = arg->z;
+    work->bobZ = 0;
+    work->targetX = arg->x2;
+    work->targetY = arg->y2;
+    work->targetZ = arg->z2;
     p = gBtlWork->actor;
-    work->unk_068 = p->x;
-    work->unk_06C = p->y;
-    work->unk_070 = p->z;
-    work->angle = arg->unk_04 << 7;
+    work->actorX = p->x;
+    work->actorY = p->y;
+    work->actorZ = p->z;
+    work->angle = arg->index << 7;
     work->scaleX = 2;
     work->scaleY = 2;
     work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
-    AnimStart(&work->anim, gLstAnimSets[work->unk_000].unk_00, 1);
-    func_0801B37C(&work->obj, &gBosLstBitEmyKind, work->unk_028, work->unk_02C, work->unk_030);
+    AnimStart(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
+    InitEnemyBtlObj(&work->obj, &gBosLstBitEmyKind, work->x, work->y, work->z);
     pool = &work->tasks;
     TaskPoolInit(pool, 4);
-    sub.unk_00 = work->unk_00E;
-    sub.unk_04 = work->unk_01C;
-    sub.unk_08 = work->unk_020;
-    work->unk_1C4 = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
-    work->unk_1C8 = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
-    work->unk_1CC = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
+    sub.kind = work->kind;
+    sub.facing = work->facing;
+    sub.falCount = work->falCount;
+    work->lsrTask = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
+    work->lsrTask2 = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
+    work->lsrTask3 = TaskCreate(pool, &gTaskDescBosLstLsr, &sub);
 }
 
-void func_08110C9C(LstState* work) {
+void BosLstBitHandleHit(LstState* work) {
     BtlObj* obj;
 
     obj = &work->obj;
 
-    switch (func_0801ADAC(obj)) {
+    switch (UpdateBtlObjReaction(obj)) {
     case 1:
     case 6:
     case 7:
-        work->unk_00A = 20;
-        func_081108AC(work, 0);
-        func_0801AF08(obj);
+        work->hurtTimer = 20;
+        BosLstBitSpawnFal(work, 0);
+        ClearBtlObjActionFlags(obj);
         break;
     case 3:
-        func_0801C2DC(&work->obj, 1);
-        func_081108AC(work, 0);
-        func_081108AC(work, 0);
-        func_0801AF08(obj);
+        SetBtlObjUnhittable(&work->obj, 1);
+        BosLstBitSpawnFal(work, 0);
+        BosLstBitSpawnFal(work, 0);
+        ClearBtlObjActionFlags(obj);
         break;
     case 5:
-        func_0801AF08(obj);
+        ClearBtlObjActionFlags(obj);
         break;
     case 4:
-        func_0801AF08(obj);
+        ClearBtlObjActionFlags(obj);
         break;
     case 2:
         break;
@@ -391,176 +391,176 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
     obj = &work->obj;
 
-    if (obj->unk_02C <= 0) {
-        func_0801C2DC(obj, 1);
+    if (obj->hp <= 0) {
+        SetBtlObjUnhittable(obj, 1);
         return 1;
     }
 
-    func_08110C9C(work);
+    BosLstBitHandleHit(work);
 
-    switch (work->unk_002) {
+    switch (work->state) {
     case 0:
-        ApproachValueHalfSteps(&work->unk_028, work->unk_050, 20);
-        ApproachValueHalfSteps(&work->unk_02C, work->unk_054, 20);
-        ApproachValueHalfSteps(&work->unk_030, work->unk_058, 20);
+        ApproachValueHalfSteps(&work->x, work->targetX, 20);
+        ApproachValueHalfSteps(&work->y, work->targetY, 20);
+        ApproachValueHalfSteps(&work->z, work->targetZ, 20);
         ApproachValueHalfSteps(&work->scaleX, 0x100, 32);
         ApproachValueHalfSteps(&work->scaleY, 0x100, 32);
-        work->unk_006++;
+        work->timer++;
 
-        if (work->unk_006 > 29) {
-            work->unk_002 = 1;
+        if (work->timer > 29) {
+            work->state = 1;
             work->unk_004 = 0;
-            work->unk_006 = 0;
+            work->timer = 0;
             work->unk_008 = 0;
             work->scaleX = 0x100;
             work->scaleY = 0x100;
         }
         break;
     case 1:
-        if (work->unk_006 == 0) {
+        if (work->timer == 0) {
             if (gBtlWork->flags & 0x2000000000000) {
-                work->unk_050 = (GetRandom() % 113 << 8) + 0xC000;
+                work->targetX = (GetRandom() % 113 << 8) + 0xC000;
 #ifndef VERSION_EU
-                work->unk_054 = gBtlWork->actor->y;
+                work->targetY = gBtlWork->actor->y;
 #endif
-            } else if (work->unk_00E == 0) {
-                work->unk_050 = (GetRandom() % 113 << 8) + 0xC000;
-                work->unk_054 = gBtlWork->actor->y + (gUnk_09A4FDDC[work->unk_010] << 8);
+            } else if (work->kind == 0) {
+                work->targetX = (GetRandom() % 113 << 8) + 0xC000;
+                work->targetY = gBtlWork->actor->y + (gBosLstBitHoverY[work->index] << 8);
             } else {
-                work->unk_050 = gBtlWork->actor->x;
-                work->unk_054 = gBtlWork->actor->y;
+                work->targetX = gBtlWork->actor->x;
+                work->targetY = gBtlWork->actor->y;
             }
 
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->unk_000].unk_00, 1);
+            AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
         }
 
         if (!(gBtlWork->flags & 0x2000000000000)) {
             if (gBtlWork->actor->z > -0xC000) {
-                work->unk_058 = -0x6000;
+                work->targetZ = -0x6000;
             } else {
-                work->unk_058 = gBtlWork->unk_0D4 - 0x5000;
+                work->targetZ = gBtlWork->bossZ - 0x5000;
             }
         }
 
-        work->unk_006++;
+        work->timer++;
 
-        if ((work->unk_014 & 31) == 0) {
-            func_081108AC(work, 0);
+        if ((work->falTimer & 31) == 0) {
+            BosLstBitSpawnFal(work, 0);
         }
 
-        ApproachValueHalfSteps(&work->unk_028, work->unk_050, 20);
-        ApproachValueHalfSteps(&work->unk_02C, work->unk_054, 20);
-        ApproachValueHalfSteps(&work->unk_030, work->unk_058, 20);
+        ApproachValueHalfSteps(&work->x, work->targetX, 20);
+        ApproachValueHalfSteps(&work->y, work->targetY, 20);
+        ApproachValueHalfSteps(&work->z, work->targetZ, 20);
         break;
     case 2:
-        if (work->unk_006 == 0) {
-            work->unk_050 = gBtlWork->actor->x;
-            work->unk_054 = gBtlWork->actor->y;
+        if (work->timer == 0) {
+            work->targetX = gBtlWork->actor->x;
+            work->targetY = gBtlWork->actor->y;
 
             if (gBtlWork->actor->z > -0xC000) {
-                work->unk_058 = 0;
+                work->targetZ = 0;
             } else {
-                work->unk_058 = gBtlWork->unk_0D4;
+                work->targetZ = gBtlWork->bossZ;
             }
 
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->unk_000].unk_02, 0);
+            AnimChange(&work->anim, gLstAnimSets[work->animSet].chargeAnim, 0);
         }
 
-        work->unk_006++;
+        work->timer++;
 
-        if (AnimGetId(&work->anim) == (s16)gLstAnimSets[work->unk_000].unk_02 && AnimIsFinished(&work->anim) == 1) {
-            work->unk_002 = 3;
-            work->unk_006 = 0;
+        if (AnimGetId(&work->anim) == (s16)gLstAnimSets[work->animSet].chargeAnim && AnimIsFinished(&work->anim) == 1) {
+            work->state = 3;
+            work->timer = 0;
             work->unk_018 = 1;
-            work->unk_01A = work->unk_01B;
-            work->unk_05C = work->unk_028 + work->unk_034;
-            work->unk_060 = work->unk_02C + work->unk_038;
-            work->unk_064 = work->unk_030 + work->unk_03C;
+            work->fireAngle = work->aimAngle;
+            work->fireX = work->x + work->orbitX;
+            work->fireY = work->y + work->orbitY;
+            work->fireZ = work->z + work->orbitZ;
             m4aSongNumStart(SONG_SND_708);
             AnimReset(&work->anim);
-            AnimChange(&work->anim, gLstAnimSets[work->unk_000].unk_00, 1);
+            AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
         }
         break;
     case 3:
-        if (work->unk_006 == 0) {
-            if (func_081115B4(work->unk_1C4) == 0) {
-                a.x = work->unk_05C;
-                a.y = work->unk_060;
-                a.z = work->unk_064;
-                b.x = work->unk_050;
-                b.y = work->unk_054;
-                b.z = work->unk_058;
-                func_081115CC(work->unk_1C4, &a, &b, work->unk_01A, 0);
+        if (work->timer == 0) {
+            if (BosLstLsrIsFiring(work->lsrTask) == 0) {
+                a.x = work->fireX;
+                a.y = work->fireY;
+                a.z = work->fireZ;
+                b.x = work->targetX;
+                b.y = work->targetY;
+                b.z = work->targetZ;
+                BosLstLsrFire(work->lsrTask, &a, &b, work->fireAngle, 0);
             }
 
-            work->unk_006++;
+            work->timer++;
         } else {
-            work->unk_050 = gBtlWork->actor->x;
-            work->unk_054 = gBtlWork->actor->y;
+            work->targetX = gBtlWork->actor->x;
+            work->targetY = gBtlWork->actor->y;
 
             if (gBtlWork->actor->z > -0xC000) {
-                work->unk_058 = 0;
+                work->targetZ = 0;
             } else {
-                work->unk_058 = gBtlWork->unk_0D4;
+                work->targetZ = gBtlWork->bossZ;
             }
 
-            if (func_081115B4(work->unk_1C4) == 0) {
-                if (work->unk_012 > 1) {
-                    work->unk_002 = 2;
-                    work->unk_006 = 0;
-                    work->unk_012--;
+            if (BosLstLsrIsFiring(work->lsrTask) == 0) {
+                if (work->shots > 1) {
+                    work->state = 2;
+                    work->timer = 0;
+                    work->shots--;
                 } else {
-                    work->unk_012 = 0;
+                    work->shots = 0;
                 }
             }
         }
         break;
     case 4:
-        if (work->unk_006 > 14) {
+        if (work->timer > 14) {
             break;
         }
 
-        func_08011F78(0x10D, work->unk_050, work->unk_054, work->unk_058, 8, 8, 8);
+        ApplyAttackBox(0x10D, work->targetX, work->targetY, work->targetZ, 8, 8, 8);
 
-        if ((work->unk_006 & 3) == 0) {
-            func_081108AC(work, 1);
+        if ((work->timer & 3) == 0) {
+            BosLstBitSpawnFal(work, 1);
         }
 
-        if (abs(work->unk_050 - gBtlWork->actor->x) < 0x180) {
-            work->unk_050 = gBtlWork->actor->x;
-        } else if (work->unk_050 > gBtlWork->actor->x) {
-            work->unk_050 = work->unk_050 - 0x180;
-        } else if (work->unk_050 < gBtlWork->actor->x) {
-            work->unk_050 = work->unk_050 + 0x180;
+        if (abs(work->targetX - gBtlWork->actor->x) < 0x180) {
+            work->targetX = gBtlWork->actor->x;
+        } else if (work->targetX > gBtlWork->actor->x) {
+            work->targetX = work->targetX - 0x180;
+        } else if (work->targetX < gBtlWork->actor->x) {
+            work->targetX = work->targetX + 0x180;
         }
 
-        if (abs(work->unk_054 - gBtlWork->actor->y) < 0x180) {
-            work->unk_054 = gBtlWork->actor->y;
-        } else if (work->unk_054 > gBtlWork->actor->y) {
-            work->unk_054 = work->unk_054 - 0x180;
-        } else if (work->unk_054 < gBtlWork->actor->y) {
-            work->unk_054 = work->unk_054 + 0x180;
+        if (abs(work->targetY - gBtlWork->actor->y) < 0x180) {
+            work->targetY = gBtlWork->actor->y;
+        } else if (work->targetY > gBtlWork->actor->y) {
+            work->targetY = work->targetY - 0x180;
+        } else if (work->targetY < gBtlWork->actor->y) {
+            work->targetY = work->targetY + 0x180;
         }
 
-        work->unk_006++;
+        work->timer++;
         break;
     case 5:
-        work->unk_050 = gBtlWork->unk_0CC;
-        work->unk_054 = gBtlWork->unk_0D0 - 0x1400;
-        work->unk_058 = gBtlWork->unk_0D4;
-        ApproachValueHalfSteps(&work->unk_028, work->unk_050, 16);
-        ApproachValueHalfSteps(&work->unk_02C, work->unk_054, 16);
-        ApproachValueHalfSteps(&work->unk_030, work->unk_058, 16);
+        work->targetX = gBtlWork->bossX;
+        work->targetY = gBtlWork->bossY - 0x1400;
+        work->targetZ = gBtlWork->bossZ;
+        ApproachValueHalfSteps(&work->x, work->targetX, 16);
+        ApproachValueHalfSteps(&work->y, work->targetY, 16);
+        ApproachValueHalfSteps(&work->z, work->targetZ, 16);
         ApproachValueHalfSteps(&work->scaleX, 0x200, 16);
         ApproachValueHalfSteps(&work->scaleY, 2, 16);
-        work->unk_006++;
+        work->timer++;
 
-        if (work->unk_006 > 59) {
-            work->unk_002 = 6;
+        if (work->timer > 59) {
+            work->state = 6;
             work->unk_004 = 0;
-            work->unk_006 = 0;
+            work->timer = 0;
             work->unk_008 = 0;
         }
         break;
@@ -571,23 +571,23 @@ u8 task_bos_lst_bit_1(LstState* work) {
         AnimChange(&work->anim, 4, 1);
         break;
     case 7:
-        AnimChange(&work->anim, gLstAnimSets[work->unk_000].unk_00, 1);
+        AnimChange(&work->anim, gLstAnimSets[work->animSet].idleAnim, 1);
         break;
     }
 
-    WorldToScreen(&x1, &y1, work->unk_028 + work->unk_034, work->unk_02C + work->unk_038,
-                  work->unk_030 + work->unk_03C);
+    WorldToScreen(&x1, &y1, work->x + work->orbitX, work->y + work->orbitY,
+                  work->z + work->orbitZ);
 
     if (gBtlWork->flags & 0x2000000000000) {
-        WorldToScreen(&x2, &y2, work->unk_068, work->unk_06C, work->unk_070);
+        WorldToScreen(&x2, &y2, work->actorX, work->actorY, work->actorZ);
         work->angle += 2;
     } else {
-        if (work->unk_00E == 0) {
-            switch (work->unk_002) {
+        if (work->kind == 0) {
+            switch (work->state) {
             case 2:
             case 3:
                 work->angle += 2;
-                WorldToScreen(&x2, &y2, work->unk_050, work->unk_054, work->unk_058);
+                WorldToScreen(&x2, &y2, work->targetX, work->targetY, work->targetZ);
                 break;
             default:
                 work->angle += 2;
@@ -596,12 +596,12 @@ u8 task_bos_lst_bit_1(LstState* work) {
                 break;
             }
         } else {
-            switch (work->unk_002) {
+            switch (work->state) {
             case 2:
             case 3:
             case 4:
                 work->angle += 6;
-                WorldToScreen(&x2, &y2, work->unk_050, work->unk_054, work->unk_058);
+                WorldToScreen(&x2, &y2, work->targetX, work->targetY, work->targetZ);
                 break;
             default:
                 work->angle += 2;
@@ -611,44 +611,44 @@ u8 task_bos_lst_bit_1(LstState* work) {
             }
         }
 
-        work->unk_068 = gBtlWork->actor->x;
-        work->unk_06C = gBtlWork->actor->y;
-        work->unk_070 = gBtlWork->actor->z;
+        work->actorX = gBtlWork->actor->x;
+        work->actorY = gBtlWork->actor->y;
+        work->actorZ = gBtlWork->actor->z;
     }
 
     work->angle &= 0xFF;
 
-    if (work->unk_00E == 0) {
-        work->unk_034 = (-gSineTable[(work->angle & 0xFF) + 64] * 3 >> 6) << 8;
-        work->unk_038 = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
-        work->unk_03C = work->unk_03C / 2;
-    } else if (work->unk_010 == 0) {
-        work->unk_034 = work->unk_034 / 2;
-        work->unk_038 = work->unk_038 / 2;
-        work->unk_03C = work->unk_03C / 2;
+    if (work->kind == 0) {
+        work->orbitX = (-gSineTable[(work->angle & 0xFF) + 64] * 3 >> 6) << 8;
+        work->orbitY = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
+        work->orbitZ = work->orbitZ / 2;
+    } else if (work->index == 0) {
+        work->orbitX = work->orbitX / 2;
+        work->orbitY = work->orbitY / 2;
+        work->orbitZ = work->orbitZ / 2;
     } else {
-        work->unk_034 = (-gSineTable[(work->angle & 0xFF) + 64] >> 3) << 8;
-        work->unk_038 = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
-        work->unk_03C = 0x800;
+        work->orbitX = (-gSineTable[(work->angle & 0xFF) + 64] >> 3) << 8;
+        work->orbitY = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
+        work->orbitZ = 0x800;
     }
 
-    work->unk_040 = gUnk_09A4FDE8[(work->unk_00C >> 2) & 15] << 8;
-    dir = func_08110A98(x2, y2, x1, y1);
-    d = func_08110B10(work->unk_01B, dir);
+    work->bobZ = gBosLstBitBobZ[(work->bobFrame >> 2) & 15] << 8;
+    dir = BosLstBitAngleBetween(x2, y2, x1, y1);
+    d = BosLstBitAngleDiff(work->aimAngle, dir);
 
     if (abs(d) <= 1) {
-        work->unk_01B = dir;
+        work->aimAngle = dir;
     } else {
-        work->unk_01B += d / 2;
+        work->aimAngle += d / 2;
     }
 
-    obj->x = work->unk_028 + work->unk_034;
-    obj->y = work->unk_02C + work->unk_038;
-    obj->z = work->unk_030 + work->unk_03C + work->unk_040;
+    obj->x = work->x + work->orbitX;
+    obj->y = work->y + work->orbitY;
+    obj->z = work->z + work->orbitZ + work->bobZ;
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
-    work->unk_014++;
-    work->unk_00C++;
+    work->falTimer++;
+    work->bobFrame++;
 
     return 1;
 }
@@ -662,31 +662,31 @@ void task_bos_lst_bit_2(LstState* work) {
     u16 z;
     void* gfx;
 
-    if (work->obj.unk_02C <= 0) {
+    if (work->obj.hp <= 0) {
         return;
     }
 
     pal = work->palette;
-    if ((work->unk_00A & 1) != 0) {
+    if ((work->hurtTimer & 1) != 0) {
         pal = work->palette2;
     }
 
-    if (work->unk_00A > 0) {
-        work->unk_00A = work->unk_00A - 1;
+    if (work->hurtTimer > 0) {
+        work->hurtTimer = work->hurtTimer - 1;
     }
 
-    WorldToScreen(&x, &y, work->unk_028 + work->unk_034, work->unk_02C + work->unk_038,
-                  work->unk_030 + work->unk_03C + work->unk_040);
-    prio = GetBattleSpritePriorityFlags(work->unk_02C);
-    z = -0x1004 - (work->unk_02C >> 8) * 4;
-    affine = AllocObjAffine(work->unk_01B, work->scaleX, work->scaleY, 0);
+    WorldToScreen(&x, &y, work->x + work->orbitX, work->y + work->orbitY,
+                  work->z + work->orbitZ + work->bobZ);
+    prio = GetBattleSpritePriorityFlags(work->y);
+    z = -0x1004 - (work->y >> 8) * 4;
+    affine = AllocObjAffine(work->aimAngle, work->scaleX, work->scaleY, 0);
     gfx = AnimGetGfx(&work->anim);
     DrawSprite(x, y, gfx, work->tiles, pal, affine, prio, z);
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_lst_bit_3(LstBitWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);

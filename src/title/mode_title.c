@@ -11,57 +11,57 @@ s32 gTitleBgScale EWRAM_COMMON(4);
 s32 gTitleBgX EWRAM_COMMON(4);
 s32 gTitleBgY EWRAM_COMMON(4);
 
-u32 gUnk_02034E98;
+u32 gTitleState;
 u32 gUnk_02034E9C;
 TaskPool gTitleTaskPool __attribute__((aligned(8)));
 Task* gTitleMenuTask;
 Task* gTitleLogoTask;
 Task* gTitleObjTask;
-u16 gUnk_02034EC0;
-s16 gUnk_02034EC2;
-u8* gUnk_02034EC4;
-u16 gUnk_02034EC8;
-u8 gUnk_02034ECA;
+u16 gTitleTimer;
+s16 gTitleMenuChoice;
+u8* gTitlePaletteBuffer;
+u16 gTitleBlendStep;
+u8 gTitleCancelled;
 u8 gUnk_02034ECB;
-u8 gUnk_02034ECC;
+u8 gTitleLogoScaleDone;
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_09814E40[];
 #endif
 
-void func_080D5978(u16 a, void* b, u16 c) {
-    RequestDma3Copy(b, gUnk_02034EC4 + a * 32, c);
+void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
+    RequestDma3Copy(b, gTitlePaletteBuffer + a * 32, c);
 }
 
-void func_080D5998(void) {
-    LoadPalette(gUnk_02034EC4, (void*)0x05000000, 0x400);
+void TitleLoadPaletteBuffer(void) {
+    LoadPalette(gTitlePaletteBuffer, (void*)0x05000000, 0x400);
 }
 
-void func_080D59B4(void) {
-    if (gUnk_02034ECA != 0) {
+void TitleExitToChoice(void) {
+    if (gTitleCancelled != 0) {
         ModeRequest(&gModeTitle, 0);
         return;
     }
 
-    switch (gUnk_02034EC2) {
+    switch (gTitleMenuChoice) {
     case 3:
         SaveLoadSystem();
         SaveClearSystem();
-        func_080E04EC();
+        RequestMapMode();
         return;
     case 1:
         ModeRequest(&gModeMenuLoad, 0);
         return;
     case 2:
-        func_080AEB94();
+        ClearSioBattleFileLoaded();
         ModeRequest(&gModeSioBattle, 0);
         return;
     case 4:
-        func_0801CD20();
+        SetupSoraNewGame();
         ModeRequest(&gModeMenuNew, 0);
         return;
     case 5:
-        func_0801CCB4();
+        SetupRikuNewGame();
         ModeRequest(&gModeMenuNew, 0);
         return;
     case 0:
@@ -71,13 +71,13 @@ void func_080D59B4(void) {
     }
 }
 
-void func_080D5A4C(u16 a) {
+void TitleShowLogo(u16 a) {
     if ((gGameState.flags & 0x200) != 0) {
         LoadBgPalette(1, gUnk_0984A818, 0x200);
-        func_080D5978(0, gUnk_0984A818, 0x200);
+        TitleCopyToPaletteBuffer(0, gUnk_0984A818, 0x200);
     } else {
         LoadBgPalette(1, gUnk_0984A418, 0x200);
-        func_080D5978(0, gUnk_0984A418, 0x200);
+        TitleCopyToPaletteBuffer(0, gUnk_0984A418, 0x200);
     }
     EnableBg(0);
     DisableBg(1);
@@ -93,7 +93,7 @@ void func_080D5A4C(u16 a) {
     FadeStartIn(2, a);
 }
 
-void func_080D5B04(void) {
+void TitleFinishIntro(void) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
@@ -116,21 +116,21 @@ void func_080D5B04(void) {
     m4aSongNumStart(SONG_BGM_TITLE);
 }
 
-void func_080D5B30(void) {
+void TitleFadeOut(void) {
     m4aMPlayFadeOut(gMPlayTable[gSongTable[6].ms].info, 5);
     FadeStartOut(0, 90);
-    func_080C75A4(0, 90);
-    gUnk_02034E98 = 9;
+    BackdropFadeStartOut(0, 90);
+    gTitleState = 9;
 }
 
 void mode_title_0(void) {
-    gUnk_02034ECA = 0;
-    func_0801CB44();
+    gTitleCancelled = 0;
+    ResetGameState();
     SaveLoadHeader();
     InitMapCardInventory();
-    func_08093C04();
-    gUnk_02034EC2 = 0;
-    gUnk_02034EC4 = EwramAlloc(0x400);
+    ResetSelectedMapCard();
+    gTitleMenuChoice = 0;
+    gTitlePaletteBuffer = EwramAlloc(0x400);
     SetBgMode1();
     SetupBg(0, 0, 0x1D, 0);
     SetBgPriority(0, 3);
@@ -170,8 +170,8 @@ void mode_title_0(void) {
 #endif
     }
     DisableBg(1);
-    func_080C736C();
-    func_080C73A4(0, 0, 0);
+    BackdropFadeReset();
+    BackdropFadeSetColor(0, 0, 0);
     SetupBg(2, 2, 0x1F, 0xB);
     SetBgSize(2, 0x4000);
     SetBgPriority(2, 2);
@@ -186,95 +186,95 @@ void mode_title_0(void) {
     gTitleLogoTask = 0;
     gTitleObjTask = 0;
     FadeStartIn(0, 0x4C);
-    gUnk_02034E98 = 0;
+    gTitleState = 0;
     m4aSongNumStart(0);
-    gUnk_02034EC0 = 0x1E;
+    gTitleTimer = 0x1E;
 }
 
 void mode_title_1(void) {
-    switch (gUnk_02034E98) {
+    switch (gTitleState) {
     case 0:
         if (FadeIsActive()) {
             break;
         }
 
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
-            if (gUnk_02034EC0 != 0) {
+        if (gTitleTimer != 0) {
+            gTitleTimer--;
+            if (gTitleTimer != 0) {
                 break;
             }
         }
-        gUnk_02034E98 = 1;
-        gUnk_02034EC0 = 100;
+        gTitleState = 1;
+        gTitleTimer = 100;
         break;
     case 1:
         if (gGameState.flags & 0x200) {
-            ApproachValue(&gTitleBgX, 0x3F3F, gUnk_02034EC0);
+            ApproachValue(&gTitleBgX, 0x3F3F, gTitleTimer);
         } else {
-            ApproachValue(&gTitleBgX, 0xB0C1, gUnk_02034EC0);
+            ApproachValue(&gTitleBgX, 0xB0C1, gTitleTimer);
         }
-        ApproachValue(&gTitleBgY, 0x6A37, gUnk_02034EC0);
-        ApproachValue(&gTitleBgScale, 0xBD0, gUnk_02034EC0);
+        ApproachValue(&gTitleBgY, 0x6A37, gTitleTimer);
+        ApproachValue(&gTitleBgScale, 0xBD0, gTitleTimer);
         SetBgAffine(2, 0, gTitleBgScale / 16, gTitleBgScale / 16, gTitleBgX, gTitleBgY);
-        gUnk_02034EC0--;
-        if (gUnk_02034EC0 == 0x46) {
-            func_080C75A4(1, 0x46);
+        gTitleTimer--;
+        if (gTitleTimer == 0x46) {
+            BackdropFadeStartOut(1, 0x46);
 
-            if (gUnk_02034EC0 == 0x46) {
+            if (gTitleTimer == 0x46) {
                 FadeStartOut(1, 0x46);
             }
         }
 
-        if (gUnk_02034EC0 == 0) {
-            gUnk_02034E98 = 2;
-            gUnk_02034EC0 = 2;
+        if (gTitleTimer == 0) {
+            gTitleState = 2;
+            gTitleTimer = 2;
         }
         break;
     case 2:
         if (FadeIsActive()) {
             break;
         }
-        gUnk_02034EC0--;
-        if (gUnk_02034EC0 != 0) {
+        gTitleTimer--;
+        if (gTitleTimer != 0) {
             break;
         }
-        func_080D5A4C(15);
-        gUnk_02034E98 = 3;
-        gUnk_02034EC0 = 0x28;
+        TitleShowLogo(15);
+        gTitleState = 3;
+        gTitleTimer = 0x28;
         break;
     case 3:
         if (FadeIsActive()) {
             break;
         }
 
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
+        if (gTitleTimer != 0) {
+            gTitleTimer--;
             break;
         }
-        gUnk_02034E98 = 4;
-        gUnk_02034EC8 = 0;
+        gTitleState = 4;
+        gTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
         gBldAlpha = 0x10;
-        gUnk_02034EC0 = 4;
+        gTitleTimer = 4;
         EnableBg(1);
         break;
     case 4:
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
+        if (gTitleTimer != 0) {
+            gTitleTimer--;
             break;
         }
-        gUnk_02034EC0 = 4;
-        gUnk_02034EC8++;
-        gBldAlpha = (gUnk_02034EC8 << 8) | (16 - gUnk_02034EC8);
+        gTitleTimer = 4;
+        gTitleBlendStep++;
+        gBldAlpha = (gTitleBlendStep << 8) | (16 - gTitleBlendStep);
 
-        if (gUnk_02034EC8 > 15) {
+        if (gTitleBlendStep > 15) {
             gBldCnt = 0;
-            func_080D5B04();
-            gUnk_02034E98 = 5;
+            TitleFinishIntro();
+            gTitleState = 5;
         }
         break;
     case 5:
-        if (!func_080D6790()) {
+        if (!IsTitleObjSlideDone()) {
             break;
         }
 
@@ -284,60 +284,60 @@ void mode_title_1(void) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
         if (SaveRepairSystem() == 2) {
-            gUnk_02034EC2 = 3;
+            gTitleMenuChoice = 3;
         } else if (SaveRepairFileLarge(0) == 2 || SaveRepairFileLarge(1) == 2) {
-            gUnk_02034EC2 = 1;
+            gTitleMenuChoice = 1;
         } else if ((gGameState.flags & 0x20) &&
                    (SaveRepairFileSmall(0) == 2 || SaveRepairFileSmall(1) == 2)) {
-            gUnk_02034EC2 = 1;
+            gTitleMenuChoice = 1;
         } else {
-            gUnk_02034EC2 = 0;
+            gTitleMenuChoice = 0;
         }
-        func_08000DE8(&gTitleTaskPool, gTitleLogoTask);
-        func_08000DE8(&gTitleTaskPool, gTitleObjTask);
-        gTitleMenuTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleMenu, &gUnk_02034EC2);
+        TaskKill(&gTitleTaskPool, gTitleLogoTask);
+        TaskKill(&gTitleTaskPool, gTitleObjTask);
+        gTitleMenuTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleMenu, &gTitleMenuChoice);
         DisableBg(0);
-        gUnk_02034E98 = 6;
-        gUnk_02034EC8 = 0;
+        gTitleState = 6;
+        gTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1);
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
-        gUnk_02034EC0 = 4;
+        gBldAlpha = ((16 - gTitleBlendStep) << 8) | gTitleBlendStep;
+        gTitleTimer = 4;
         break;
     case 6:
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
+        if (gTitleTimer != 0) {
+            gTitleTimer--;
             break;
         }
-        gUnk_02034EC0 = 4;
-        gUnk_02034EC8++;
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
+        gTitleTimer = 4;
+        gTitleBlendStep++;
+        gBldAlpha = ((16 - gTitleBlendStep) << 8) | gTitleBlendStep;
 
-        if (gUnk_02034EC8 > 15) {
+        if (gTitleBlendStep > 15) {
             gBldCnt = 0;
-            gUnk_02034E98 = 8;
+            gTitleState = 8;
         }
         break;
     case 7:
-        if (gUnk_02034EC0 != 0) {
-            gUnk_02034EC0--;
+        if (gTitleTimer != 0) {
+            gTitleTimer--;
             break;
         }
-        gUnk_02034EC0 = 1;
-        gUnk_02034EC8--;
-        gBldAlpha = ((16 - gUnk_02034EC8) << 8) | gUnk_02034EC8;
+        gTitleTimer = 1;
+        gTitleBlendStep--;
+        gBldAlpha = ((16 - gTitleBlendStep) << 8) | gTitleBlendStep;
 
-        if (gUnk_02034EC8 > 15) {
+        if (gTitleBlendStep > 15) {
             gBldCnt = 0;
-            func_08000DE8(&gTitleTaskPool, gTitleMenuTask);
+            TaskKill(&gTitleTaskPool, gTitleMenuTask);
             gTitleLogoTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleLogo, 0);
             gTitleObjTask = TaskCreate(&gTitleTaskPool, &gTaskDescTitleObj, 0);
             EnableBg(0);
-            gUnk_02034E98 = 5;
+            gTitleState = 5;
         }
         break;
     case 8:
         if ((GetKeysPressed() & START_BUTTON) || (GetKeysPressed() & A_BUTTON)) {
-            switch (gUnk_02034EC2) {
+            switch (gTitleMenuChoice) {
             case 0:
             case 4:
             case 5:
@@ -347,34 +347,34 @@ void mode_title_1(void) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             }
-            func_080D5B30();
+            TitleFadeOut();
         } else if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            gUnk_02034ECA = 1;
-            func_080D5B30();
+            gTitleCancelled = 1;
+            TitleFadeOut();
         }
         break;
     case 9:
         if (!FadeIsActive()) {
-            func_080D59B4();
+            TitleExitToChoice();
         }
         break;
     }
 
-    if (!FadeIsActive() && gUnk_02034E98 != 6) {
+    if (!FadeIsActive() && gTitleState != 6) {
         TaskPoolUpdate(&gTitleTaskPool);
     }
     TaskPoolDraw(&gTitleTaskPool);
-    func_080C73D8();
+    BackdropFadeUpdate();
 
-    if (gUnk_02034E98 <= 4 && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
+    if (gTitleState <= 4 && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
         m4aSongNumStart(SONG_SYS_CLICK);
 
-        if (gUnk_02034E98 <= 3) {
-            func_080D5A4C(2);
+        if (gTitleState <= 3) {
+            TitleShowLogo(2);
         }
-        func_080D5B04();
-        gUnk_02034E98 = 5;
+        TitleFinishIntro();
+        gTitleState = 5;
     }
 }
 
@@ -385,24 +385,24 @@ void mode_title_2(void) {
     REG_DISPSTAT &= ~DISPSTAT_VCOUNT_INTR;
     REG_IME = 1;
     ResetVCountCallback();
-    EwramFree(gUnk_02034EC4);
+    EwramFree(gTitlePaletteBuffer);
 }
 
-u8 func_080D6280(void) {
-    if (gUnk_02034E98 > 2) {
+u8 IsTitleLogoShown(void) {
+    if (gTitleState > 2) {
         return 1;
     }
     return 0;
 }
 
-u8 func_080D6294(void) {
-    if (gUnk_02034E98 > 4) {
+u8 IsTitleIntroDone(void) {
+    if (gTitleState > 4) {
         return 1;
     }
     return 0;
 }
 
-void func_080D62A8(TitleLogoWork* work) {
+void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->sprites[0].tiles = LoadObjTiles(gUnk_0976E9F4, 0x240);
     work->sprites[0].gfx = gUnk_09EF659C;
 
@@ -431,7 +431,7 @@ void func_080D62A8(TitleLogoWork* work) {
     work->scale = 0;
     work->unk_48 = 0xC00;
     work->unk_50 = 0;
-    gUnk_02034ECC = 0;
+    gTitleLogoScaleDone = 0;
 }
 
 Mode gModeTitle = {

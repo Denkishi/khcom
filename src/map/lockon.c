@@ -9,10 +9,10 @@
 #include "sprites_mode_test.h"
 #include "debug_font.h"
 
-u8* gUnk_02034A14;
-u8 gUnk_02034A18;
-UnkStruct_02034A1C* gUnk_02034A1C;
-u8 gUnk_02034A20;
+u8* gDebugTextTileDest;
+u8 gDebugTextPaletteBank;
+DebugTextLine* gDebugTextLines;
+u8 gDebugTextLineCount;
 u8 gUnk_02034A21;
 s32 gUnk_02034A24;
 s32 gUnk_02034A28;
@@ -21,7 +21,7 @@ void* gUnk_02034A2C;
 void task_lockon_0(LockonWork* w) {
     s32 i;
 
-    gUnk_02039DC4 = EwramAlloc(12);
+    gLockonDoorPosition = EwramAlloc(12);
     w->tiles = AllocObjTiles(0x80, 0);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     SetObjTileSource(w->tiles, gUnk_090D7C84);
@@ -30,12 +30,12 @@ void task_lockon_0(LockonWork* w) {
     w->gfx = AnimGetGfx(&w->anim);
 
     for (i = 0; i < 8; i++) {
-        w->unk_0C[i] = 0;
+        w->targets[i] = 0;
     }
 
-    w->unk_2C = 0;
-    w->unk_2D = -1;
-    w->unk_2F = 0;
+    w->targetCount = 0;
+    w->selected = -1;
+    w->timer = 0;
     w->unk_30 = 0;
     w->unk_4C = 0;
 }
@@ -57,13 +57,13 @@ u8 task_lockon_1(LockonWork* w) {
     o = ListPoolFirst(&gFieldState->actor.pool);
 
     if (gFieldState->flags & 1) {
-        gFieldState->unk_68 = 0;
+        gFieldState->lockonTarget = 0;
         return 1;
     }
 
-    func_0805F66C(w);
+    LockonClearTargets(w);
 
-    if (w->unk_2E != w->unk_2D) {
+    if (w->prevSelected != w->selected) {
         w->unk_30 = 0;
     }
 
@@ -78,16 +78,16 @@ u8 task_lockon_1(LockonWork* w) {
             dx = px - ox;
             dy = py - oy;
 
-            if (VectorLength2D(dx, dy) <= 0x3000 && (dx > -0x8000 && dx < 0x8000) && (dy > -0x8000 && dy < 0x8000) && o->fieldPosition.unk_0C == gFieldState->actor.fieldPosition.unk_0C) {
-                if (o->unk_30 == 3) {
-                    gUnk_02039DC4[0] = o->fieldPosition.x;
-                    gUnk_02039DC4[1] = o->fieldPosition.y;
-                    gUnk_02039DC4[2] = o->fieldPosition.z;
-                    w->unk_0C[count++] = o;
-                    w->unk_2C++;
+            if (VectorLength2D(dx, dy) <= 0x3000 && (dx > -0x8000 && dx < 0x8000) && (dy > -0x8000 && dy < 0x8000) && o->fieldPosition.ground == gFieldState->actor.fieldPosition.ground) {
+                if (o->kind == 3) {
+                    gLockonDoorPosition[0] = o->fieldPosition.x;
+                    gLockonDoorPosition[1] = o->fieldPosition.y;
+                    gLockonDoorPosition[2] = o->fieldPosition.z;
+                    w->targets[count++] = o;
+                    w->targetCount++;
                 } else {
-                    w->unk_0C[count++] = o;
-                    w->unk_2C++;
+                    w->targets[count++] = o;
+                    w->targetCount++;
                 }
             }
 
@@ -98,30 +98,30 @@ u8 task_lockon_1(LockonWork* w) {
             o = ListPoolNext(&o->node);
         }
 
-        if (w->unk_2C != 0) {
+        if (w->targetCount != 0) {
             nsel = 0;
 
-            for (i = 0; i < w->unk_2C; i++) {
-                if (func_0805F6B4(gFieldState->actor.angle, px, py, w->unk_0C[i])) {
-                    w->unk_2D = i;
+            for (i = 0; i < w->targetCount; i++) {
+                if (LockonIsInFront(gFieldState->actor.angle, px, py, w->targets[i])) {
+                    w->selected = i;
                     list[nsel++] = i;
                 }
             }
 
             if (nsel > 1) {
-                w->unk_2D = func_0805F5D8(px, py, w, nsel, list);
+                w->selected = LockonPickNearest(px, py, w, nsel, list);
             }
         }
     }
 
-    if (w->unk_2D >= 0) {
-        gFieldState->unk_68 = w->unk_0C[w->unk_2D];
+    if (w->selected >= 0) {
+        gFieldState->lockonTarget = w->targets[w->selected];
     } else {
-        gFieldState->unk_68 = 0;
+        gFieldState->lockonTarget = 0;
         w->unk_30 = 0;
     }
 
-    w->unk_2E = w->unk_2D;
+    w->prevSelected = w->selected;
     w->gfx = AnimUpdate(&w->anim);
     return 1;
 }
@@ -146,44 +146,44 @@ void task_lockon_2(LockonWork* w) {
         return;
     }
 
-    obj = w->unk_0C[w->unk_2D];
+    obj = w->targets[w->selected];
 
-    if (obj->unk_30 == 2) {
+    if (obj->kind == 2) {
         return;
     }
 
     x = (obj->fieldPosition.x >> 8) - (gFieldState->x >> 8);
     x2.coord = x + 12;
-    y = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->unk_1A;
+    y = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height;
     y2.coord = y - 8;
 
     CLAMP_LABEL(x2.coord, x + 60, 240, 192);
     CLAMP_LABEL(y2.coord, y, 160, 152);
 
-    x2.counter = w->unk_2F++;
+    x2.counter = w->timer++;
     y2.counter = x2.counter;
     if (y2.counter > 10) {
-        w->unk_2F = 0;
+        w->timer = 0;
     }
 
-    if (gFieldState->unk_68 == 0) {
+    if (gFieldState->lockonTarget == 0) {
         return;
     }
 
-    if (w->unk_2D < 0) {
+    if (w->selected < 0) {
         return;
     }
 
 #ifdef VERSION_EU
     {
-        FldObj* obj = w->unk_0C[w->unk_2D];
+        FldObj* obj = w->targets[w->selected];
         s32 projectedY = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->unk_1A + 40, w->gfx, w->tiles, w->palette, 0, 0x400, (u16)(-0x100E - (((s16)projectedY >> 8) << 2)));
+        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, 0, 0x400, (u16)(-0x100E - (((s16)projectedY >> 8) << 2)));
     }
 #else
-    obj = w->unk_0C[w->unk_2D];
-    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->unk_1A + 40, w->gfx, w->tiles, w->palette, 0, 0, (u16)(-0x100E - ((w->unk_0C[w->unk_2D]->fieldPosition.y >> 8) << 2)));
+    obj = w->targets[w->selected];
+    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height + 40, w->gfx, w->tiles, w->palette, 0, 0, (u16)(-0x100E - ((w->targets[w->selected]->fieldPosition.y >> 8) << 2)));
 #endif
 }
 
@@ -192,9 +192,9 @@ void task_lockon_2(LockonWork* w) {
 void task_lockon_3(LockonWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gFieldState->unk_68 = 0;
-    EwramFree(gUnk_02039DC4);
-    gUnk_02039DC4 = 0;
+    gFieldState->lockonTarget = 0;
+    EwramFree(gLockonDoorPosition);
+    gLockonDoorPosition = 0;
 }
 
 s32 VectorLength2D(s32 a, s32 b) {
@@ -212,7 +212,7 @@ s32 NormalizeVector2D8(s32* x, s32* y) {
     return d;
 }
 
-s8 func_0805F5D8(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
+s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     s8 i;
     s8 best;
     s32 bestDist;
@@ -225,7 +225,7 @@ s8 func_0805F5D8(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     bestDist = 0x10000;
 
     for (i = 0; i < n; i++) {
-        o = w->unk_0C[list[i]];
+        o = w->targets[list[i]];
 
         if (o != 0) {
             dx = o->fieldPosition.x;
@@ -246,21 +246,21 @@ s8 func_0805F5D8(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     return best;
 }
 
-void func_0805F66C(LockonWork* w) {
+void LockonClearTargets(LockonWork* w) {
     s8 i;
 
     if ((gFieldState->flags & 2) == 0) {
-        w->unk_2D = -1;
+        w->selected = -1;
 
         for (i = 0; i < 8; i++) {
-            w->unk_0C[i] = 0;
+            w->targets[i] = 0;
         }
 
-        w->unk_2C = 0;
+        w->targetCount = 0;
     }
 }
 
-u8 func_0805F6B4(u16 a, s32 b, s32 c, FldObj* d) {
+u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
     s32 x;
     s32 y;
     s32 sn;
@@ -275,7 +275,7 @@ u8 func_0805F6B4(u16 a, s32 b, s32 c, FldObj* d) {
         NormalizeVector2D8(&x, &y);
         dot = (sn * x >> 8) + (y * cs >> 8);
 
-        if (d->unk_30 == 3) {
+        if (d->kind == 3) {
             if (dot > 99) {
                 return 1;
             }
@@ -290,16 +290,16 @@ u8 func_0805F6B4(u16 a, s32 b, s32 c, FldObj* d) {
 }
 
 void func_0805F728(s32* x, s32* y) {
-    if (gUnk_02039DC4 != 0) {
-        *x = (gUnk_02039DC4[0] >> 8) - (gFieldState->x >> 8);
-        *y = (gUnk_02039DC4[1] >> 8) + (gUnk_02039DC4[2] >> 8) - (gFieldState->y >> 8) - 24;
+    if (gLockonDoorPosition != 0) {
+        *x = (gLockonDoorPosition[0] >> 8) - (gFieldState->x >> 8);
+        *y = (gLockonDoorPosition[1] >> 8) + (gLockonDoorPosition[2] >> 8) - (gFieldState->y >> 8) - 24;
     } else {
         *x = 0;
         *y = 0;
     }
 }
 
-void func_0805F770(void) {
+void DebugTextClearBg(void) {
     s32 a;
     s32 b;
     void* charBase = GetBgCharBase(0);
@@ -316,14 +316,14 @@ void func_0805F7B0(s32 a) {
 }
 
 void func_0805F7BC(void) {
-    func_0805F770();
+    DebugTextClearBg();
 }
 
 void func_0805F7C8(u8 a) {
     gUnk_02034A2C = (u8*)GetBgCharBase(0) + (a << 12);
 }
 
-void func_0805F7E8(u8 x, u8 y, u16* s) {
+void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
     u8 i;
     u16 c;
 
@@ -333,31 +333,31 @@ void func_0805F7E8(u8 x, u8 y, u16* s) {
 
         switch (c & 0xFF00) {
         case 0x8100:
-            gUnk_02034A1C[gUnk_02034A20].unk_00[i] = c + 0x7EC0;
+            gDebugTextLines[gDebugTextLineCount].glyphs[i] = c + 0x7EC0;
             break;
         case 0x8200:
-            gUnk_02034A1C[gUnk_02034A20].unk_00[i] = (c + 0x7DC0) | 0x400;
+            gDebugTextLines[gDebugTextLineCount].glyphs[i] = (c + 0x7DC0) | 0x400;
             break;
         }
     }
 
-    gUnk_02034A1C[gUnk_02034A20].unk_7A = x;
-    gUnk_02034A1C[gUnk_02034A20].unk_7B = y;
-    gUnk_02034A1C[gUnk_02034A20].unk_7D = i;
-    gUnk_02034A20++;
+    gDebugTextLines[gDebugTextLineCount].x = x;
+    gDebugTextLines[gDebugTextLineCount].y = y;
+    gDebugTextLines[gDebugTextLineCount].length = i;
+    gDebugTextLineCount++;
 }
 
 u8 func_0805F8F0(u8 a) {
     return a * 4 % 32;
 }
 
-void func_0805F904(void) {
+void DebugTextClearLines(void) {
     u8 i;
     u8 j;
 
     for (i = 0; i <= 19; i++) {
         for (j = 0; j <= 60; j++) {
-            gUnk_02034A1C[i].unk_00[j] = 0;
+            gDebugTextLines[i].glyphs[j] = 0;
         }
     }
 }
@@ -378,7 +378,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     s32 n;
 
     j = 0;
-    gUnk_02034A14 = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
+    gDebugTextTileDest = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
     b = ((b + d) >> 3) + 1;
     n = (s8)d + b;
     d = n;
@@ -391,7 +391,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
             ko = k * 4;
             co = col * 4;
             ko4 = ko + 4;
-            p = gUnk_02034A14 + i * 32 + j * 1024;
+            p = gDebugTextTileDest + i * 32 + j * 1024;
             dst = (u32*)(p + ko + co);
             src = (u32*)(p + ko4 + co);
 
@@ -419,15 +419,15 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     return 1;
 }
 
-void func_0805FA60(s32 a, void* b, s32 c, u8 d) {
+void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d) {
     if (b != 0) {
         LoadPalette(b, (void*)(d * 32 + 0x05000000), 32);
     }
 
-    gUnk_02034A18 = d;
+    gDebugTextPaletteBank = d;
 }
 
-void func_0805FA8C(u8 bg, u16 b, u16 c) {
+void DebugTextInit(u8 bg, u16 b, u16 c) {
     s32 fillA;
     s32 fillB;
     u8 i;
@@ -440,23 +440,23 @@ void func_0805FA8C(u8 bg, u16 b, u16 c) {
     fillB = 0;
     CpuSet(&fillB, screenBase, (c >> 2) | CPU_SET_32BIT | CPU_SET_SRC_FIXED);
 
-    gUnk_02034A1C = EwramAlloc(sizeof(UnkStruct_02034A1C) * 20);
-    gUnk_02034A20 = 0;
+    gDebugTextLines = EwramAlloc(sizeof(DebugTextLine) * 20);
+    gDebugTextLineCount = 0;
 
     for (i = 0; i <= 19; i++) {
         for (j = 0; j <= 60; j++) {
-            gUnk_02034A1C[i].unk_00[j] = 0;
+            gDebugTextLines[i].glyphs[j] = 0;
         }
 
-        gUnk_02034A1C[i].unk_7A = 0;
-        gUnk_02034A1C[i].unk_7B = 0;
-        gUnk_02034A1C[i].unk_7C = 0;
-        gUnk_02034A1C[i].unk_7D = 0;
+        gDebugTextLines[i].x = 0;
+        gDebugTextLines[i].y = 0;
+        gDebugTextLines[i].unk_7C = 0;
+        gDebugTextLines[i].length = 0;
     }
 
     func_0805F7B0(0);
     gUnk_02034A21 = 0;
-    gUnk_02034A18 = 0;
+    gDebugTextPaletteBank = 0;
     EnableBg(bg);
 }
 
@@ -476,10 +476,10 @@ void func_0805FB84(u8 x, u8 y, u32 c, u8 v) {
     buf[4] = 0x82;
     buf[5] += 0x4F;
     buf[6] = 0;
-    func_0805FCB0(x, y, c, buf);
+    DebugTextPrint(x, y, c, buf);
 }
 
-void func_0805FC04(u8 x, u8 y, u32 c, u16 v) {
+void DebugTextPrintNumber(u8 x, u8 y, u32 c, u16 v) {
     u8 buf[8];
 
     buf[1] = v / 100;
@@ -492,10 +492,10 @@ void func_0805FC04(u8 x, u8 y, u32 c, u16 v) {
     buf[4] = 0x82;
     buf[5] += 0x4F;
     buf[6] = 0;
-    func_0805FCB0(x, y, c, buf);
+    DebugTextPrint(x, y, c, buf);
 }
 
-void func_0805FCB0(u8 x, u8 y, u32 c, const char* s) {
+void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
     u8 i = 0;
     s32 shift = 0;
     u16 character;
@@ -508,11 +508,11 @@ void func_0805FCB0(u8 x, u8 y, u32 c, const char* s) {
         shift = 0;
         break;
     case 2:
-        gUnk_02034A1C[gUnk_02034A20].unk_80 = c;
-        func_0805F7E8(x, y, (u16*)s);
+        gDebugTextLines[gDebugTextLineCount].font = c;
+        DebugTextPrintFont2(x, y, (u16*)s);
         return;
     }
-    if (gUnk_02034A20 > 19) {
+    if (gDebugTextLineCount > 19) {
         return;
     }
     while (*s != 0) {
@@ -521,144 +521,144 @@ void func_0805FCB0(u8 x, u8 y, u32 c, const char* s) {
         switch (character & 0xFF00) {
         case 0x8100:
             if (character > 0x8146) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8146 + (0x42 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8146 + (0x42 >> shift);
             }
             switch (character) {
             case 0x8140:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 0;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 0;
                 break;
             case 0x815E:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 1;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 1;
                 break;
             case 0x815B:
             case 0x815C:
             case 0x815D:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 2;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 2;
                 break;
             case 0x8151:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 3;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 3;
                 break;
             case 0x8144:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 4;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 4;
                 break;
             case 0x817B:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 5;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 5;
                 break;
             case 0x8149:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 6;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 6;
                 break;
             case 0x8148:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 7;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 7;
                 break;
             case 0x8194:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 8;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 8;
                 break;
             case 0x8193:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 9;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 9;
                 break;
             case 0x818D:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 10;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 10;
                 break;
             case 0x818B:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 11;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 11;
                 break;
             case 0x8196:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 12;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 12;
                 break;
             case 0x8168:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 13;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 13;
                 break;
             case 0x8190:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 14;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 14;
                 break;
             case 0x8195:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 15;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 15;
                 break;
             case 0x8166:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 16;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 16;
                 break;
             case 0x8169:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 17;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 17;
                 break;
             case 0x816A:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 18;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 18;
                 break;
             case 0x8181:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 19;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 19;
                 break;
             case 0x8160:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 20;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 20;
                 break;
             case 0x8162:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 21;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 21;
                 break;
             case 0x8197:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 22;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 22;
                 break;
             case 0x8165:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 23;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 23;
                 break;
             case 0x8175:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 24;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 24;
                 break;
             case 0x8176:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 25;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 25;
                 break;
             case 0x816F:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 26;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 26;
                 break;
             case 0x8170:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 27;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 27;
                 break;
             case 0x8141:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 28;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 28;
                 break;
             case 0x8142:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 29;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 29;
                 break;
             case 0x8183:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 30;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 30;
                 break;
             case 0x8184:
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = 31;
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 31;
                 break;
             }
             break;
         case 0x8200:
             if ((u16)(character - 0x824F) <= 9) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x824F + (0x80 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x824F + (0x80 >> shift);
             }
             if ((u16)(character - 0x8260) <= 25) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8260 + (0xC0 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8260 + (0xC0 >> shift);
             }
             if ((u16)(character - 0x8281) <= 25) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8281 + (0x100 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8281 + (0x100 >> shift);
             }
             if ((u16)(character - 0x829F) <= 31) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x829F + (0x140 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x829F + (0x140 >> shift);
             }
             if ((u16)(character - 0x82BF) <= 31) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x82BF + (0x180 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82BF + (0x180 >> shift);
             }
             if ((u16)(character - 0x82DF) <= 31) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x82DF + (0x1C0 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82DF + (0x1C0 >> shift);
             }
             break;
         case 0x8300:
             if ((u16)(character - 0x8340) <= 31) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8340 + ((0x200 - shift * 192) >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8340 + ((0x200 - shift * 192) >> shift);
             }
             if ((u16)(character - 0x8360) <= 30) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8360 + ((0x240 - shift * 192) >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8360 + ((0x240 - shift * 192) >> shift);
             }
             if (character == 0x8380) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = ((0x25F - shift * 192) >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = ((0x25F - shift * 192) >> shift);
             }
             if ((u16)(character - 0x8381) <= 21) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x8381 + ((0x280 - shift * 192) >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8381 + ((0x280 - shift * 192) >> shift);
             }
             if ((u16)(character - 0x83BF) <= 1) {
-                gUnk_02034A1C[gUnk_02034A20].unk_00[i] = character - 0x83BF + (0x40 >> shift);
+                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x83BF + (0x40 >> shift);
             }
             break;
         }
@@ -668,11 +668,11 @@ void func_0805FCB0(u8 x, u8 y, u32 c, const char* s) {
             break;
         }
     }
-    gUnk_02034A1C[gUnk_02034A20].unk_7A = x;
-    gUnk_02034A1C[gUnk_02034A20].unk_7B = y;
-    gUnk_02034A1C[gUnk_02034A20].unk_7D = i;
-    gUnk_02034A1C[gUnk_02034A20].unk_80 = c;
-    gUnk_02034A20++;
+    gDebugTextLines[gDebugTextLineCount].x = x;
+    gDebugTextLines[gDebugTextLineCount].y = y;
+    gDebugTextLines[gDebugTextLineCount].length = i;
+    gDebugTextLines[gDebugTextLineCount].font = c;
+    gDebugTextLineCount++;
 }
 void func_08060470(u8 bg) {
     u8 n;
@@ -686,13 +686,13 @@ void func_08060470(u8 bg) {
 
     screen = GetBgScreenBase(bg);
 
-    for (n = 0; n < gUnk_02034A20; n++) {
+    for (n = 0; n < gDebugTextLineCount; n++) {
         tiles = (u32*)((u8*)GetBgCharBase(bg) + (n * 0x1000 + 0x2000));
-        x = gUnk_02034A1C[n].unk_7A;
-        y = gUnk_02034A1C[n].unk_7B;
+        x = gDebugTextLines[n].x;
+        y = gDebugTextLines[n].y;
 
-        for (i = 0; i < gUnk_02034A1C[n].unk_7D; i++) {
-            src = (u32*)&gUnk_0941DD38[gUnk_02034A1C[n].unk_00[i] * 32];
+        for (i = 0; i < gDebugTextLines[n].length; i++) {
+            src = (u32*)&gUnk_0941DD38[gDebugTextLines[n].glyphs[i] * 32];
 
             for (k = 0; k < 8; k++) {
                 tiles[k] = src[0];
@@ -707,11 +707,11 @@ void func_08060470(u8 bg) {
     }
 }
 
-void func_08060598(void) {
-    gUnk_02034A20 = 0;
+void DebugTextClear(void) {
+    gDebugTextLineCount = 0;
 }
 
-void func_080605A4(u8 bg) {
+void DebugTextDraw(u8 bg) {
     void* charBase;
     u32 v;
     u32 mapRow;
@@ -729,73 +729,73 @@ void func_080605A4(u8 bg) {
     u8 sourceRow;
 
     charBase = GetBgCharBase(bg);
-    gUnk_02034A14 = charBase;
+    gDebugTextTileDest = charBase;
     screen = GetBgScreenBase(bg);
-    for (n = 0; n < gUnk_02034A20; n++) {
-        tileX = gUnk_02034A1C[n].unk_7A >> 3;
-        tileY = gUnk_02034A1C[n].unk_7B >> 3;
-        offsetX = gUnk_02034A1C[n].unk_7A - tileX * 8;
-        offsetY = gUnk_02034A1C[n].unk_7B - tileY * 8;
-        gUnk_02034A14 = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
-        for (i = 0; i < gUnk_02034A1C[n].unk_7D; i++) {
-            destination = gUnk_02034A14 + i * 32;
-            switch (gUnk_02034A1C[n].unk_80) {
+    for (n = 0; n < gDebugTextLineCount; n++) {
+        tileX = gDebugTextLines[n].x >> 3;
+        tileY = gDebugTextLines[n].y >> 3;
+        offsetX = gDebugTextLines[n].x - tileX * 8;
+        offsetY = gDebugTextLines[n].y - tileY * 8;
+        gDebugTextTileDest = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
+        for (i = 0; i < gDebugTextLines[n].length; i++) {
+            destination = gDebugTextTileDest + i * 32;
+            switch (gDebugTextLines[n].font) {
             case 0:
-                font = gUnk_0941BEB8 + gUnk_02034A1C[n].unk_00[i] * 32;
+                font = gUnk_0941BEB8 + gDebugTextLines[n].glyphs[i] * 32;
                 height = 8;
                 break;
             case 1:
-                font = gUnk_0941DD38 + gUnk_02034A1C[n].unk_00[i] * 32;
+                font = gUnk_0941DD38 + gDebugTextLines[n].glyphs[i] * 32;
                 height = 10;
                 break;
             case 2:
-                font = gUnk_09EE26EC[gUnk_02034A1C[n].unk_00[i] >> 10];
+                font = gDebugFont2Banks[gDebugTextLines[n].glyphs[i] >> 10];
                 height = 8;
                 break;
             }
             for (row = offsetY, sourceRow = 0; row < offsetY + height; row++, sourceRow++) {
                 if (offsetX == 0) {
-                    if (gUnk_02034A1C[n].unk_80 != 2) {
+                    if (gDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gUnk_02034A1C[n].unk_00[i] & 0x3FF) * 32);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
                     }
                 } else if (i != 0 || gUnk_02034A28 == 1) {
                     v = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
 
-                    if (gUnk_02034A1C[n].unk_80 != 2) {
+                    if (gDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) >> (32 - offsetX * 4);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (gUnk_02034A1C[n].unk_00[i] & 0x3FF) * 32) << (offsetX * 4);
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gUnk_02034A1C[n].unk_00[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
                     }
                 } else {
-                    if (gUnk_02034A1C[n].unk_80 != 2) {
+                    if (gDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) >> (32 - offsetX * 4);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gUnk_02034A1C[n].unk_00[i] & 0x3FF) * 32) << (offsetX * 4);
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gUnk_02034A1C[n].unk_00[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
                     }
                 }
 
                 mapRow = (tileY + (u8)(row >> 3)) * 32;
-                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2) = (tileX + 1 + i + mapRow) | (gUnk_02034A18 << 12);
-                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2 + 2) = (tileX + 2 + i + mapRow) | (gUnk_02034A18 << 12);
+                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2) = (tileX + 1 + i + mapRow) | (gDebugTextPaletteBank << 12);
+                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2 + 2) = (tileX + 2 + i + mapRow) | (gDebugTextPaletteBank << 12);
             }
         }
     }
 
-    func_0805F904();
+    DebugTextClearLines();
 }
 
-void func_0806098C(void) {
-    EwramFree(gUnk_02034A1C);
+void DebugTextFree(void) {
+    EwramFree(gDebugTextLines);
 }
 
-void func_080609A0(void) {
-    func_0806098C();
+void DebugTextDestroy(void) {
+    DebugTextFree();
 }
 
 u16 GetCardCpCost(u16 a) {
@@ -804,24 +804,24 @@ u16 GetCardCpCost(u16 a) {
     CardStat* stat;
 
     if (a & 0x8000) {
-        return gCardDefs[a & 0x0FFF].unk_2C;
+        return gCardDefs[a & 0x0FFF].cpCost;
     }
 
     if ((a & 0x0FFF) <= 0x1C1) {
-        stat = (CardStat*)&gCardDefs[a & 0x0FFF].unk_1C;
-        n = stat->unk_04;
+        stat = (CardStat*)&gCardDefs[a & 0x0FFF].kind;
+        n = stat->value;
 
         if (n == 0) {
             n = 10;
         }
 
         n--;
-        v = stat->unk_10;
+        v = stat->cpCost;
         v += (v / 10) * n;
         return v;
     }
 
-    return gCardDefs[a & 0x0FFF].unk_2C;
+    return gCardDefs[a & 0x0FFF].cpCost;
 }
 
 u16 GetCardMooglePointValue(u16 a) {
@@ -845,8 +845,8 @@ TaskDesc gTaskDescLockon = {
     sizeof(LockonWork),
 };
 
-u8* gUnk_09EE26EC[2] = { gUnk_08F6E190, gUnk_08F6F190 };
-u8* gUnk_09EE26F4 = gUnk_08F70AAC;
-u8* gUnk_09EE26F8 = gUnk_08F70AA8;
-u8* gUnk_09EE26FC = gUnk_08F70AA4;
-u8* gUnk_09EE2700 = gUnk_08F70AA0;
+u8* gDebugFont2Banks[2] = { gUnk_08F6E190, gUnk_08F6F190 };
+u8* gUnk_09EE26F4 = gWhiteStarText;
+u8* gUnk_09EE26F8 = gBlackStarText;
+u8* gUnk_09EE26FC = gWhiteCircleText;
+u8* gUnk_09EE2700 = gBlackCircleText;

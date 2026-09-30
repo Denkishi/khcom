@@ -4,7 +4,7 @@
 #include "types.h"
 
 typedef struct ChkBtlWork {
-    s8 unk_00;
+    s8 cursor;
     s8 bg;
     s16 enemy;
     s8 floor;

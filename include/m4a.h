@@ -265,7 +265,7 @@ typedef struct MusicPlayerInfo {
     u8 trackCount;
     u8 priority;
     u8 cmd;
-    u8 unk_B;
+    u8 checkSongPriority;
     u32 clock;
     u8 gap[8];
     u8* memAccArea;
@@ -287,7 +287,7 @@ typedef struct MusicPlayer {
     MusicPlayerInfo* info;
     MusicPlayerTrack* track;
     u8 numTracks;
-    u16 unk_A;
+    u16 checkSongPriority;
 } MusicPlayer;
 
 typedef struct Song {

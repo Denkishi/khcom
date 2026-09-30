@@ -3,7 +3,7 @@
 
 #include "battle_actor_types.h"
 
-s32 func_08011F78(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r);
+s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r);
 void ColliderPoolsInit(void);
 void ColliderInit(Collider* p, u32 type, u16 r, u16 h);
 void ColliderUnregister(Collider* p);
@@ -16,8 +16,8 @@ u8 ColliderIsTouchingType(Collider* p, s32 bit);
 
 struct FldObj;
 
-u8 func_08011E3C(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c);
-s32 func_08011F68(s32 a, BtlObj* b);
+u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c);
+s32 ApplyAttackToBtlObj(s32 a, BtlObj* b);
 void FldObjRegister(struct FldObj* p);
 void FldObjUnregister(struct FldObj* p);
 

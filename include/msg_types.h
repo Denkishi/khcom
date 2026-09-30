@@ -10,83 +10,83 @@ typedef u16 MsgLatinChar;
 #endif
 
 typedef struct EventCameraKeyframe {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
-    u8 unk_10;
+    s32 frame;
+    s32 x;
+    s32 y;
+    s32 yOffset;
+    u8 target;
     u8 unk_11[3];
-    u32 unk_14;
-    u16 unk_18;
+    u32 flags;
+    u16 duration;
     u8 unk_1A[2];
-    void* unk_1C;
+    void* callback;
 } EventCameraKeyframe;
 
 typedef struct MessageScriptEntry {
     u32 portraitId;
     u32 expressionId;
     u32 positionIndex;
-    u8 unk_0C;
+    u8 charDelay;
     u8 unk_0D[3];
-    u32 unk_10;
+    u32 text;
     u16 flags;
-    u16 unk_16;
+    u16 frame;
 } MessageScriptEntry;
 
 typedef void (*EventCharaKeyframeFunc)(void*);
 
 typedef struct EventCharaKeyframe {
-    u32 unk_00;
-    u16 unk_04;
+    u32 anim;
+    u16 frame;
     u8 unk_06[2];
-    s32 unk_08;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 x;
+    s32 y;
+    s32 z;
     u16 unk_14;
     u8 unk_16[2];
-    u32 unk_18;
-    void* unk_1C;
-    EventCharaKeyframeFunc unk_20;
+    u32 flags;
+    void* update;
+    EventCharaKeyframeFunc callback;
 } EventCharaKeyframe;
 
 typedef struct EventCharaTrack {
     const EventCharaKeyframe* keyframes;
-    u8 unk_04;
+    u8 chara;
     u8 unk_05[3];
 } EventCharaTrack;
 
 typedef struct EvSoundCue {
-    u16 unk_00;
-    u16 unk_02;
+    u16 song;
+    u16 frame;
     u16 flags;
     u16 unk_06;
 } EvSoundCue;
 
 typedef struct EventBgEffectEntry {
-    u8 unk_00[0x02];
-    u16 unk_02;
-    s32 unk_04;
-    s32 unk_08;
+    u8 frame[0x02];
+    u16 effect;
+    s32 x;
+    s32 y;
     u8 flags[0x04];
 } EventBgEffectEntry;
 
 typedef struct EventSequenceDef {
-    u8 unk_00;
+    u8 charaCount;
     u8 unk_01[3];
     const EventCharaTrack* charaTracks;
     const EventCameraKeyframe* keyframes;
     const MessageScriptEntry* script;
     const EvSoundCue* soundCues;
     const EventBgEffectEntry* bgEffects;
-    u16 unk_18;
+    u16 endFrame;
     u8 unk_1A;
-    u8 unk_1B;
-    u8 unk_1C;
-    u8 unk_1D;
+    u8 startsBattle;
+    u8 toTitle;
+    u8 toCopyright;
     u8 unk_1E;
     u8 unk_1F;
-    u16 unk_20;
-    u16 unk_22;
+    u16 battleId;
+    u16 nextEvent;
     u16 unk_24;
     u8 unk_26[2];
     u16 unk_28;
@@ -95,7 +95,7 @@ typedef struct EventSequenceDef {
     u8 unk_2C;
 } EventSequenceDef;
 
-extern EventSequenceDef* gUnk_09EE3FB4[];
+extern EventSequenceDef* gEventSequenceDefs[];
 
 typedef struct MsgFaceControl {
     u8 portraitId;

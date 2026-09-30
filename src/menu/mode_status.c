@@ -15,7 +15,7 @@ extern u8 gUnkEu_097DA700[];
 
 TaskPool gStatusTaskPool __attribute__((aligned(8)));
 Task* gStatusBarTask;
-u8 gUnk_02034EF8;
+u8 gStatusReturnToMenu;
 
 void mode_status_0(void) {
     BgReset();
@@ -60,7 +60,7 @@ void mode_status_0(void) {
 
     LoadBgMap(0, gUnk_09848B98, 0x500);
     DisableBg(0);
-    func_080D733C();
+    LoadStatusNumberTiles();
     TaskPoolInit(&gStatusTaskPool, 4);
     gStatusBarTask = TaskCreate(&gStatusTaskPool, &gTaskDescStatusBar, 0);
     TaskCreate(&gStatusTaskPool, &gTaskDescStatus, 0);
@@ -73,7 +73,7 @@ void mode_status_1(void) {
     TaskPoolDraw(&gStatusTaskPool);
 
     if (!IsTaskActive(gStatusBarTask) && !FadeIsActive()) {
-        func_080E052C(gUnk_02034EF8);
+        ReturnToMap(gStatusReturnToMenu);
     }
 }
 
@@ -81,8 +81,8 @@ void mode_status_2(void) {
     TaskPoolDestroy(&gStatusTaskPool);
 }
 
-void func_080D7568(u8 a) {
-    gUnk_02034EF8 = a;
+void SetStatusReturnToMenu(u8 a) {
+    gStatusReturnToMenu = a;
 }
 
 Mode gModeStatus = {

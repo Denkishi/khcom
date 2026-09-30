@@ -4,7 +4,7 @@
 #include "types.h"
 #include "battle_bg_types.h"
 
-extern const BattleBackgroundDef gUnk_09619C68;
+extern const BattleBackgroundDef gBosTmBattleBackgroundDef;
 extern u8 gBoss03objPalette[];
 extern u8 gUnk_08F69BC4[];
 

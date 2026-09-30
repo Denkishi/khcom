@@ -6,7 +6,7 @@
 #include "msg_types.h"
 #include "event_text.h"
 
-extern EventBackgroundDef* gUnk_09EE3CA0[];
+extern EventBackgroundDef* gEventBackgroundDefs[];
 extern const char* gEventNames[];
 
 #endif

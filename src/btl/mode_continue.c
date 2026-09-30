@@ -10,29 +10,29 @@
 
 
 TaskPool gContinueTaskPool;
-Task* gUnk_02034A5C;
+Task* gContinueTask;
 
 static void Continue_0(void) {
     TaskPoolInit(&gContinueTaskPool, 2);
 
     if ((gGameState.flags & 8) == 0) {
-        gUnk_02034A5C = TaskCreate(&gContinueTaskPool, &gUnk_09EE2834, 0);
+        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueSora, 0);
     } else {
-        gUnk_02034A5C = TaskCreate(&gContinueTaskPool, &gUnk_09EE284C, 0);
+        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueRiku, 0);
     }
 }
 
-void func_08060F1C(void) {
+void ContinueModeUpdate(void) {
     ContinueWork* w;
 
     TaskPoolUpdate(&gContinueTaskPool);
     TaskPoolDraw(&gContinueTaskPool);
-    w = gUnk_02034A5C->work;
+    w = gContinueTask->work;
 
-    if (w->unk_6A == 3) {
-        switch (w->unk_60) {
+    if (w->state == 3) {
+        switch (w->cursor) {
         case 0:
-            func_080E04EC();
+            RequestMapMode();
             break;
         case 1:
 #ifdef VERSION_EU
@@ -52,6 +52,6 @@ static void Continue_2(void) {
 Mode gModeContinue = {
     "Continue",
     (ModeInitFunc)Continue_0,
-    func_08060F1C,
+    ContinueModeUpdate,
     Continue_2,
 };

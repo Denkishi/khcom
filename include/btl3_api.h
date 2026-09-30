@@ -6,7 +6,7 @@
 struct SmnCloudWork;
 struct BtlObj;
 
-struct BtlObj* func_08040C8C(struct SmnCloudWork* work);
-struct BtlObj* func_08040D54(struct SmnCloudWork* work);
+struct BtlObj* SmnCloudNextTarget(struct SmnCloudWork* work);
+struct BtlObj* SmnCloudPickTeleportTarget(struct SmnCloudWork* work);
 
 #endif

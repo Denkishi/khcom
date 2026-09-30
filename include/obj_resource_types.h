@@ -3,11 +3,11 @@
 
 #include "types.h"
 
-typedef struct UnkStruct_080038C8 {
+typedef struct ObjPaletteHeader {
     u8* src;
     u8 unk_04[0x02];
     u16 index;
     u16 count;
-} UnkStruct_080038C8;
+} ObjPaletteHeader;
 
 #endif

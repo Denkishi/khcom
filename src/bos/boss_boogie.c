@@ -25,7 +25,7 @@ extern u8 gUnk_08F69BC4[];
 static BoogieWork* gBoogieWork;
 
 #if defined(VERSION_US)
-const StatusAnimDef gUnk_096FDE54[9] = {
+const StatusAnimDef gBosBoogieAnimDefs[9] = {
     { gUnkUs_09EF66C4, gUnkUs_09EF66A8, gUnk_0977A53C, 0, 0 },
     { gUnkUs_09EF66E8, gUnkUs_09EF66C8, gUnk_0977F7B4, 0, 0 },
     { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 0, 0 },
@@ -37,7 +37,7 @@ const StatusAnimDef gUnk_096FDE54[9] = {
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
 };
 #elif defined(VERSION_JP)
-const StatusAnimDef gUnk_096FDE54[9] = {
+const StatusAnimDef gBosBoogieAnimDefs[9] = {
     { gUnkJp_09ECDAB0, gUnkJp_09ECDA94, gUnk_0977A53C, 0, 0 },
     { gUnkJp_09ECDAD4, gUnkJp_09ECDAB4, gUnk_0977F7B4, 0, 0 },
     { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 0, 0 },
@@ -49,7 +49,7 @@ const StatusAnimDef gUnk_096FDE54[9] = {
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
 };
 #elif defined(VERSION_EU)
-const StatusAnimDef gUnk_096FDE54[9] = {
+const StatusAnimDef gBosBoogieAnimDefs[9] = {
     { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0, 0 },
     { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0, 0 },
     { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 0, 0 },
@@ -63,7 +63,7 @@ const StatusAnimDef gUnk_096FDE54[9] = {
 #endif
 
 #if defined(VERSION_US)
-const StatusObjDef gUnk_096FDEE4[6] = {
+const StatusObjDef gBosBoogieSpriteDefs[6] = {
     { gUnkUs_09EF66A8, 7, 0 },
     { gUnkUs_09EF66C8, 8, 0 },
     { gUnkUs_09EF66EC, 9, 0 },
@@ -72,7 +72,7 @@ const StatusObjDef gUnk_096FDEE4[6] = {
     { gUnkUs_09EF6754, 6, 0 },
 };
 #elif defined(VERSION_JP)
-const StatusObjDef gUnk_096FDEE4[6] = {
+const StatusObjDef gBosBoogieSpriteDefs[6] = {
     { gUnkJp_09ECDA94, 7, 0 },
     { gUnkJp_09ECDAB4, 8, 0 },
     { gUnkJp_09ECDAD8, 9, 0 },
@@ -81,7 +81,7 @@ const StatusObjDef gUnk_096FDEE4[6] = {
     { gUnkJp_09ECDB40, 6, 0 },
 };
 #elif defined(VERSION_EU)
-const StatusObjDef gUnk_096FDEE4[6] = {
+const StatusObjDef gBosBoogieSpriteDefs[6] = {
     { gUnkEu_09F81C90, 7, 0 },
     { gUnkEu_09F81CB0, 8, 0 },
     { gUnkEu_09F81CD4, 9, 0 },
@@ -91,53 +91,53 @@ const StatusObjDef gUnk_096FDEE4[6] = {
 };
 #endif
 
-const EmyKind gUnk_096FDF14 = { 39, 0, 68, 16, 32, 0, 4 };
+const EmyKind gBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, 4 };
 
 #if defined(VERSION_US)
-const BattleBackgroundDef gUnk_096FDF24 = {
+const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnk_0984AE38, 0x140, { 0, 0 },
     { gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x1000, gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x800 },
 };
 #elif defined(VERSION_JP)
-const BattleBackgroundDef gUnk_096FDF24 = {
+const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkJp_097FFB0C, 0x140, { 0, 0 },
     { gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x1000, gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x800 },
 };
 #elif defined(VERSION_EU)
-const BattleBackgroundDef gUnk_096FDF24 = {
+const BattleBackgroundDef gBosBoogieBattleBackgroundDef = {
     gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkEu_0981F4E0, 0x140, { 0, 0 },
     { gBossMapBlockEu_08124944, gUnk_09841F98 + 0x1000, gBossMapBlockEu_08124944, gUnk_09841F98 + 0x800 },
 };
 #endif
 
-void func_080D8F14(BoogieWork* work) {
-    if (gUnk_0203C560 <= 2) {
-        gUnk_0203C56C = 0;
-        gUnk_0203C570 = 0;
+void BosBoogieApplyDiceFace(BoogieWork* work) {
+    if (gBosBoogieDiceBreakCount <= 2) {
+        gBosBoogieAttackHit = 0;
+        gBosBoogieTaskKnockedDown = 0;
 
-        if (gUnk_0203C558 == 0) {
-            work->unk_000 = 8;
+        if (gBosBoogieDiceFace == 0) {
+            work->state = 8;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieDisk, &work->actor);
-        } else if (gUnk_0203C558 == 1) {
-            work->unk_000 = 6;
+        } else if (gBosBoogieDiceFace == 1) {
+            work->state = 6;
             work->timer = 0;
-            func_0801BDDC(18, 0xA000, 0x24000, 0);
-            func_0801BDDC(18, 0x15000, 0x24000, 0);
-        } else if (gUnk_0203C558 == 2) {
-            work->unk_000 = 6;
+            SpawnEnemy(18, 0xA000, 0x24000, 0);
+            SpawnEnemy(18, 0x15000, 0x24000, 0);
+        } else if (gBosBoogieDiceFace == 2) {
+            work->state = 6;
             work->timer = 0;
-            func_0801BDDC(17, 0xA000, 0x24000, 0);
-            func_0801BDDC(17, 0x15000, 0x24000, 0);
-        } else if (gUnk_0203C558 == 3) {
-            work->unk_000 = 8;
+            SpawnEnemy(17, 0xA000, 0x24000, 0);
+            SpawnEnemy(17, 0x15000, 0x24000, 0);
+        } else if (gBosBoogieDiceFace == 3) {
+            work->state = 8;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, 0);
-        } else if (gUnk_0203C558 == 4) {
-            work->unk_000 = 6;
+        } else if (gBosBoogieDiceFace == 4) {
+            work->state = 6;
             work->timer = 0;
-            func_0801BDDC(15, 0xA000, 0x24000, 0);
-            func_0801BDDC(15, 0x15000, 0x24000, 0);
+            SpawnEnemy(15, 0xA000, 0x24000, 0);
+            SpawnEnemy(15, 0x15000, 0x24000, 0);
         } else {
-            work->unk_000 = 8;
+            work->state = 8;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKaihuku, work);
         }
     }
@@ -146,8 +146,8 @@ void func_080D8F14(BoogieWork* work) {
 void SetBoogieAnimation(BoogieWork* work, s32 a, u16 b) {
     if (work->animationIndex != a) {
         work->animationIndex = a;
-        AnimChangeWithTables(&work->anim, gUnk_096FDE54[a].animId, b, gUnk_096FDE54[a].anims, gUnk_096FDE54[a].gfxTable);
-        SetObjTileSource(work->tiles, gUnk_096FDE54[a].tiles);
+        AnimChangeWithTables(&work->anim, gBosBoogieAnimDefs[a].animId, b, gBosBoogieAnimDefs[a].anims, gBosBoogieAnimDefs[a].gfxTable);
+        SetObjTileSource(work->tiles, gBosBoogieAnimDefs[a].tiles);
     }
 }
 
@@ -184,29 +184,29 @@ void task_bos_boogie_0(BoogieWork* work) {
     u16 t;
 
     gBoogieWork = work;
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&gUnk_096FDF24);
-    work->unk_000 = 0;
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&gBosBoogieBattleBackgroundDef);
+    work->state = 0;
     work->timer = 0;
-    gUnk_0203C564 = 0;
-    gUnk_0203C568 = 0;
-    gUnk_0203C554 = 0;
-    work->unk_174 = 0;
-    gUnk_0203C55C = &work->actor;
-    gUnk_0203C560 = 0;
+    gBosBoogieDiceFaceReady = 0;
+    gBosBoogieGimmickCardDropped = 0;
+    gBosBoogieSakuOpenTime = 0;
+    work->cardRequested = 0;
+    gBosBoogieActor = &work->actor;
+    gBosBoogieDiceBreakCount = 0;
     SetBattleBounds(128, 368, 576, 632);
-    func_0801B37C(&work->actor, &gUnk_096FDF14, 0x15000, 0x22800, -0x2000);
-    work->actor.unk_010 = -0x2000;
+    InitEnemyBtlObj(&work->actor, &gBosBoogieEmyKind, 0x15000, 0x22800, -0x2000);
+    work->actor.groundZ = -0x2000;
     work->actor.flags |= 4;
-    func_0801C2DC(&work->actor, 1);
-    work->unk_150 = 0;
-    work->unk_154 = 0;
-    work->unk_158 = 0;
+    SetBtlObjUnhittable(&work->actor, 1);
+    work->vx = 0;
+    work->vy = 0;
+    work->vz = 0;
     work->palette = LoadObjPalette(gBoss02objPalette, 0x20);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     sz = 0;
 
     for (i = 0; i <= 5; i++) {
-        t = GetMaxSpriteTileBytes(gUnk_096FDEE4[i].sprites, gUnk_096FDEE4[i].spriteCount);
+        t = GetMaxSpriteTileBytes(gBosBoogieSpriteDefs[i].sprites, gBosBoogieSpriteDefs[i].spriteCount);
         if (sz < t) {
             sz = t;
         }
@@ -223,9 +223,9 @@ void task_bos_boogie_0(BoogieWork* work) {
     work->task = 0;
     work->dice2 = 0;
     work->dice3 = 0;
-    gBtlWork->unk_0CC = work->actor.x;
-    gBtlWork->unk_0D0 = work->actor.y;
-    gBtlWork->unk_0D4 = work->actor.z;
+    gBtlWork->bossX = work->actor.x;
+    gBtlWork->bossY = work->actor.y;
+    gBtlWork->bossZ = work->actor.z;
 }
 
 u8 task_bos_boogie_1(BoogieWork* work) {
@@ -233,73 +233,73 @@ u8 task_bos_boogie_1(BoogieWork* work) {
     PrizeCardArg fx;
     u16 random;
 
-    switch (func_0801ADAC(a)) {
+    switch (UpdateBtlObjReaction(a)) {
     case 5:
-        work->unk_000 = 1;
+        work->state = 1;
         work->timer = 0;
         break;
     case 1:
     case 6:
     case 7:
-        work->unk_000 = 3;
+        work->state = 3;
         work->timer = 0;
         break;
     case 3:
     case 8:
-        if (work->unk_000 != 4) {
-            work->unk_000 = 4;
-            work->unk_170 = 0;
+        if (work->state != 4) {
+            work->state = 4;
+            work->defeatStep = 0;
             work->timer = 0;
         }
         break;
     case 4:
-        work->unk_000 = 2;
+        work->state = 2;
         work->timer = 0;
         break;
     default:
-        if (gUnk_0203C564 != 0 && work->unk_000 != 4) {
-            work->unk_000 = 5;
+        if (gBosBoogieDiceFaceReady != 0 && work->state != 4) {
+            work->state = 5;
             work->timer = 0;
         }
         break;
     }
 
-    switch (work->unk_000) {
+    switch (work->state) {
     case 3:
         if (work->timer == 0) {
             AnimReset(&work->anim);
             SetBoogieAnimation(work, 4, 1);
-            work->unk_158 = -((a->unk_0AC << 9) >> 8);
-            work->unk_150 = ((gSineTable[a->angle] * 375) >> 8) * a->unk_0A8 >> 8;
-            work->unk_154 = ((-gSineTable[a->angle + 64] * 375) >> 8) * a->unk_0A8 >> 8;
+            work->vz = -((a->knockbackLift << 9) >> 8);
+            work->vx = ((gSineTable[a->angle] * 375) >> 8) * a->knockbackSpeed >> 8;
+            work->vy = ((-gSineTable[a->angle + 64] * 375) >> 8) * a->knockbackSpeed >> 8;
             work->timer++;
         }
         if (AnimIsFinished(&work->anim)) {
-            func_0801AF08(a);
-            work->unk_000 = 0;
+            ClearBtlObjActionFlags(a);
+            work->state = 0;
             work->timer = 0;
         }
         break;
     case 4:
         SetBoogieAnimation(work, 8, 0);
-        switch (work->unk_170) {
+        switch (work->defeatStep) {
         case 0:
             if (work->timer <= 1) {
                 work->timer++;
             } else {
-                work->unk_170 = 1;
+                work->defeatStep = 1;
             }
             break;
         case 1:
-            func_0801AF4C(a);
-            work->unk_170 = 2;
+            BeginBossDefeat(a);
+            work->defeatStep = 2;
             break;
         case 2:
             if (FadeIsActive() == 0) {
-                func_08014AAC(a->x, a->y + a->z - ((s16)gUnk_096FDF14.unk_0A << 8));
-                func_0801C298(work->palette->index + 16, 0);
+                BgFxStartBossDeath(a->x, a->y + a->z - ((s16)gBosBoogieEmyKind.centerHeight << 8));
+                SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
                 FadeToAmount(0, gBtlWork->fadeAmount, 8);
-                work->unk_170 = 3;
+                work->defeatStep = 3;
                 work->timer = 0;
             }
             break;
@@ -307,18 +307,18 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             if (work->timer <= 119) {
                 work->timer++;
             } else {
-                work->unk_170 = 4;
-                func_0801536C();
+                work->defeatStep = 4;
+                BgFxStartBossDeathFlash();
             }
             break;
         case 4:
-            if (func_080128EC() == 0) {
+            if (BgFxIsActive() == 0) {
                 fx.x = a->x;
                 fx.y = 0x24000;
                 fx.z = -0x6400;
                 CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &fx);
-                func_0801B008();
-                func_0801B918(a);
+                EndBossDefeat();
+                DropBossPrizes(a);
                 return 0;
             }
             break;
@@ -329,10 +329,10 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         if (AnimIsFinished(&work->anim)) {
             random = GetRandom();
             if ((random & 15) <= 7 && FadeIsActive() == 0) {
-                work->unk_000 = 11;
-                if (work->unk_174 != 0) {
-                    func_08083914();
-                    work->unk_174 = 0;
+                work->state = 11;
+                if (work->cardRequested != 0) {
+                    RequestBossCardRandom();
+                    work->cardRequested = 0;
                 }
                 work->timer = 0;
                 SetBoogieAnimation(work, 1, 1);
@@ -344,49 +344,49 @@ u8 task_bos_boogie_1(BoogieWork* work) {
     case 11:
         SetBoogieAnimation(work, 1, 1);
         work->timer++;
-        if (gUnk_0203C560 <= 2 && !IsTaskActive(work->dice) &&
+        if (gBosBoogieDiceBreakCount <= 2 && !IsTaskActive(work->dice) &&
             !IsTaskActive(work->dice2) && !IsTaskActive(work->dice3) &&
-            !IsTaskActive(work->task) && gBtlWork->unk_0EC <= 0 && work->unk_174 == 0) {
+            !IsTaskActive(work->task) && gBtlWork->enemyTileCount <= 0 && work->cardRequested == 0) {
             random = GetRandom() % 100;
             if (random == 0) {
-                func_08083900(8);
-                work->unk_174 = 1;
+                RequestBossCardValue(8);
+                work->cardRequested = 1;
                 work->timer = 0;
             }
         }
         if (func_08083920() == 8) {
-            if (work->unk_174 != 0) {
+            if (work->cardRequested != 0) {
 #ifdef VERSION_EU
-                if (func_0801C1C0(0)) {
-                    func_080D9A58();
+                if (ConsumeGimmickFlag(0)) {
+                    BosBoogieApplyGimmick();
                     break;
                 }
 #endif
-                func_08083914();
-                work->unk_174 = 0;
-                work->unk_175 = 0;
+                RequestBossCardRandom();
+                work->cardRequested = 0;
+                work->diceFollower = 0;
                 work->dice = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
-                work->unk_175 = 1;
+                work->diceFollower = 1;
                 work->dice2 = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
                 work->dice3 = TaskCreate(&work->tasks, &gTaskDescBosBoogieDice, work);
                 SetBoogieAnimation(work, 2, 1);
                 m4aSongNumStart(SONG_VO_BO_ATTACK00);
-                work->unk_000 = 9;
+                work->state = 9;
                 work->timer = 0;
 #ifndef VERSION_EU
-                if (func_0801C1C0(0)) {
-                    gUnk_0203C568 = 0;
+                if (ConsumeGimmickFlag(0)) {
+                    gBosBoogieGimmickCardDropped = 0;
                 }
 #endif
                 break;
             }
-        } else if (work->unk_174 != 0 && work->timer > 10) {
-            func_08083914();
-            work->unk_174 = 0;
+        } else if (work->cardRequested != 0 && work->timer > 10) {
+            RequestBossCardRandom();
+            work->cardRequested = 0;
         }
         random = GetRandom();
-        if ((random & 255) == 0 && work->unk_174 == 0) {
-            work->unk_000 = 0;
+        if ((random & 255) == 0 && work->cardRequested == 0) {
+            work->state = 0;
             work->timer = 0;
         } else if (a->flags & 4) {
             a->x -= 256;
@@ -403,39 +403,39 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
         break;
     case 5:
-        gUnk_0203C564 = 0;
+        gBosBoogieDiceFaceReady = 0;
         SetBoogieAnimation(work, 6, 0);
-        if (func_0801C1C0(0)) {
-            func_080D9A58();
-            work->unk_000 = 0;
+        if (ConsumeGimmickFlag(0)) {
+            BosBoogieApplyGimmick();
+            work->state = 0;
             work->timer = 0;
         } else if (AnimIsFinished(&work->anim)) {
-            func_080D8F14(work);
+            BosBoogieApplyDiceFace(work);
         }
         break;
     case 6:
         if (work->timer > 29) {
-            work->unk_000 = 7;
+            work->state = 7;
         } else {
             work->timer++;
         }
         break;
     case 8:
-        if (gUnk_0203C56C != 0) {
-            work->unk_000 = 10;
+        if (gBosBoogieAttackHit != 0) {
+            work->state = 10;
             work->timer = 0;
-        } else if (gUnk_0203C570 != 0) {
-            work->unk_000 = 0;
+        } else if (gBosBoogieTaskKnockedDown != 0) {
+            work->state = 0;
             work->timer = 0;
         } else if (!IsTaskActive(work->task)) {
-            work->unk_000 = 7;
+            work->state = 7;
             work->timer = 0;
         }
         break;
     case 7:
         SetBoogieAnimation(work, 7, 0);
         if (AnimIsFinished(&work->anim)) {
-            work->unk_000 = 0;
+            work->state = 0;
             work->timer = 0;
         }
         break;
@@ -446,61 +446,61 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
         work->timer++;
         if (AnimIsFinished(&work->anim)) {
-            work->unk_000 = 0;
+            work->state = 0;
             work->timer = 0;
         }
         break;
     case 10:
-        gUnk_0203C56C = 0;
+        gBosBoogieAttackHit = 0;
         SetBoogieAnimation(work, 5, 1);
         if (AnimIsFinished(&work->anim)) {
-            work->unk_000 = 0;
+            work->state = 0;
             work->timer = 0;
         }
         break;
     }
     AnimUpdate(&work->anim);
-    a->z += work->unk_158;
-    work->unk_158 += 66;
+    a->z += work->vz;
+    work->vz += 66;
     if (a->z > -0x2000) {
         a->z = -0x2000;
-        work->unk_158 = 0;
+        work->vz = 0;
     }
-    if (work->unk_150 > 0) {
-        a->x += work->unk_150;
-        work->unk_150 -= 17;
-        if (work->unk_150 < 0) {
-            work->unk_150 = 0;
+    if (work->vx > 0) {
+        a->x += work->vx;
+        work->vx -= 17;
+        if (work->vx < 0) {
+            work->vx = 0;
         }
-    } else if (work->unk_150 < 0) {
-        a->x += work->unk_150;
-        work->unk_150 += 17;
-        if (work->unk_150 > 0) {
-            work->unk_150 = 0;
+    } else if (work->vx < 0) {
+        a->x += work->vx;
+        work->vx += 17;
+        if (work->vx > 0) {
+            work->vx = 0;
         }
     }
-    if (work->unk_154 > 0) {
-        a->y += work->unk_154 / 2;
-        work->unk_154 -= 17;
-        if (work->unk_154 < 0) {
-            work->unk_154 = 0;
+    if (work->vy > 0) {
+        a->y += work->vy / 2;
+        work->vy -= 17;
+        if (work->vy < 0) {
+            work->vy = 0;
         }
-    } else if (work->unk_154 < 0) {
-        a->y += work->unk_154 / 2;
-        work->unk_154 += 17;
-        if (work->unk_154 > 0) {
-            work->unk_154 = 0;
+    } else if (work->vy < 0) {
+        a->y += work->vy / 2;
+        work->vy += 17;
+        if (work->vy > 0) {
+            work->vy = 0;
         }
     }
     ClampBoogiePosition(&a->x, &a->y);
     ColliderSetPosition(&a->collider, a->x, a->y, a->z);
     TaskPoolUpdate(&work->tasks);
-    if (func_0801C1C0(0)) {
-        func_080D9A58();
+    if (ConsumeGimmickFlag(0)) {
+        BosBoogieApplyGimmick();
     }
-    gBtlWork->unk_0CC = a->x;
-    gBtlWork->unk_0D0 = a->y;
-    gBtlWork->unk_0D4 = a->z;
+    gBtlWork->bossX = a->x;
+    gBtlWork->bossY = a->y;
+    gBtlWork->bossZ = a->z;
     return 1;
 }
 
@@ -518,7 +518,7 @@ void task_bos_boogie_2(BoogieWork* work) {
         f |= 1;
     }
 
-    if (func_0801CA00(a) && work->unk_000 != 4) {
+    if (StepHitFlash(a) && work->state != 4) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -529,33 +529,33 @@ void task_bos_boogie_2(BoogieWork* work) {
 }
 
 void task_bos_boogie_3(BoogieWork* work) {
-    func_0801B7D8(&work->actor);
+    ReleaseEnemyBtlObj(&work->actor);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_080D9A14(void) {
+void BosBoogieRemoveOtherEnemies(void) {
     BtlObj* t;
 
     t = ListPoolFirst(&gBtlWork->pool);
     while (t != 0) {
-        if (t->unk_000 != 39) {
+        if (t->kind != 39) {
             t->flags |= 0x40;
-            t->unk_024 = 0;
+            t->hitFlags = 0;
         }
         t = ListPoolNext(&t->node);
     }
 }
 
-void func_080D9A58(void) {
-    func_080D9A14();
-    gUnk_0203C568 = 0;
+void BosBoogieApplyGimmick(void) {
+    BosBoogieRemoveOtherEnemies();
+    gBosBoogieGimmickCardDropped = 0;
 
-    if (gUnk_0203C560 <= 2) {
-        gUnk_0203C560 = 3;
-        gUnk_0203C554 += 540;
+    if (gBosBoogieDiceBreakCount <= 2) {
+        gBosBoogieDiceBreakCount = 3;
+        gBosBoogieSakuOpenTime += 540;
     }
 }
 

@@ -25,19 +25,19 @@
 
 typedef struct BtlFormWork {
     s16 timer;
-    s16 unk_02;
-    s16 unk_04;
+    s16 stepTimer;
+    s16 stepIndex;
     u8 unk_06[0x02];
     const BtlFormList* list;
     const BtlFormEntry* entry;
-    s16 unk_10;
+    s16 entryIndex;
     u8 unk_12[0x02];
     s32 x;
     s32 y;
     s32 z;
     u16 flags;
-    u16 unk_22;
-    s16 unk_24;
+    u16 nextTileCount;
+    s16 waitTimer;
     u8 unk_26[0x02];
 } BtlFormWork;
 
@@ -49,16 +49,16 @@ typedef struct BtlVec {
 
 typedef struct BtlBornWork {
     BtlVec pos;
-    void* unk_0C;
-    u16 unk_10;
-    u16 unk_12;
+    void* desc;
+    u16 flags;
+    u16 tileCount;
 } BtlBornWork;
 
 typedef struct BtlBornArgs {
-    void* unk_00;
+    void* desc;
     BtlVec pos;
-    u16 unk_10;
-    u16 unk_12;
+    u16 flags;
+    u16 tileCount;
 } BtlBornArgs;
 
 typedef struct BtlRaidWork {
@@ -70,19 +70,19 @@ typedef struct BtlRaidWork {
     s32 y;
     s32 z;
     s32 vx;
-    s32 unk_34;
-    s16 unk_38;
-    s16 unk_3A;
-    u8 unk_3C;
-    u8 unk_3D;
+    s32 bounceVx;
+    s16 timer;
+    s16 steps;
+    u8 facingLeft;
+    u8 mainSide;
     u8 unk_3E[0x02];
     u32 state;
-    s32 unk_44;
-    u16 unk_48;
+    s32 scale;
+    u16 variant;
     u8 unk_4A[0x02];
-    s32 unk_4C;
+    s32 attack;
     s32 unk_50;
-    s16 unk_54;
+    s16 hitHalfSize;
     u16 flags;
     u16 angle;
     u16 unk_5A;
@@ -98,10 +98,10 @@ typedef struct BtlRaidArgs {
     s32 y;
     s32 z;
     u8 unk_0C[0x06];
-    s16 unk_12;
-    s16 unk_14;
+    s16 facingLeft;
+    s16 mainSide;
     u8 unk_16[0x06];
-    u16 unk_1C;
+    u16 variant;
     u8 unk_1E[0x02];
 } BtlRaidArgs;
 
@@ -111,7 +111,7 @@ typedef struct BtlBadStatusWork {
     void* palette2;
     AnimState anim;
     BtlObj* actor;
-    u32 unk_28;
+    u32 status;
     void* palette3;
 } BtlBadStatusWork;
 
@@ -121,7 +121,7 @@ extern u8 gBStatesPalette[];
 extern u8 gCard00Palette[];
 extern u8 gUnk_096FAC64[];
 
-void func_08040150(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ);
-BtlObj* func_08040458(BtlRaidWork* work);
+void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ);
+BtlObj* BtlRaidGetTarget(BtlRaidWork* work);
 
 #endif /* GUARD_BTL3_H */

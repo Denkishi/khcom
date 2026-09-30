@@ -74,7 +74,7 @@ void HeapInit(void* addr, u32 size, Heap* heap) {
     first->next = tail;
     first->name = name;
     first->self = first;
-    heap->unk_08 = 0;
+    heap->allocFlag = 0;
 }
 
 void EwramHeapInit(void* addr, u32 size) {
@@ -121,10 +121,10 @@ void* HeapAlloc(u32 size, Heap* heap) {
     b->prevFree = 0;
     b->nextFree = 0;
 
-    if (heap->unk_08 != 0) {
-        b->unk_14 = 1;
+    if (heap->allocFlag != 0) {
+        b->allocFlag = 1;
     } else {
-        b->unk_14 = 0;
+        b->allocFlag = 0;
     }
 
     b->name = heap->name;
@@ -267,12 +267,12 @@ void func_08000A80(void) {
     func_08000A60(&gIwramHeap);
 }
 
-void func_08000A90(u8 v) {
-    gEwramHeap.unk_08 = v;
+void SetEwramHeapAllocFlag(u8 v) {
+    gEwramHeap.allocFlag = v;
 }
 
-void func_08000A9C(u8 v) {
-    gIwramHeap.unk_08 = v;
+void SetIwramHeapAllocFlag(u8 v) {
+    gIwramHeap.allocFlag = v;
 }
 
 void func_08000AA8(Heap* heap) {

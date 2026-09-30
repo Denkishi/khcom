@@ -20,9 +20,9 @@
 vu16 gFrameSyncFlags;
 u16 gVBlankEndVCount;
 u32 gUnk_03006C04[3];
-u32 gUnk_03006C10;
+u32 gDebugFlags;
 IntrFunc* gIntrTableSerial;
-u32 gUnk_03006C18[2];
+u32 gSoftResetMarker[2];
 IntrFunc gIntrTable[14];
 IntrFunc* gIntrTableVCount;
 IntrFunc* gIntrTableVBlank;
@@ -113,7 +113,7 @@ void InitSystem(void) {
 #ifdef VERSION_EU
     u32 flag;
 
-    if (gUnk_03006C18[0] == 0xFEDCBA98) {
+    if (gSoftResetMarker[0] == 0xFEDCBA98) {
         ClearSystemMemory();
         flag = 1;
     } else {
@@ -186,7 +186,7 @@ void AgbMain(void) {
     gFrameCounter = 0;
     gVBlankCounter = 0;
     gSystemFlags = 0;
-    gUnk_03006C10 = 0;
+    gDebugFlags = 0;
     gSioPlayerId = 0;
     gSioStatus = 0;
     InitSystem();
@@ -195,7 +195,7 @@ void AgbMain(void) {
     for (;;) {
         UpdateKeyState();
         if (gSystemFlags & 1) {
-            func_080C55DC();
+            SioLinkUpdate();
             if (!(gSioStatus & 0x100)) {
                 u16 flags = gFrameSyncFlags;
                 set = 4;
@@ -294,7 +294,7 @@ void VBlankIntrSio(void) {
         return;
     }
     gFrameSyncFlags |= 2;
-    func_08007318();
+    SioVBlankUpdate();
 
     if (!(gFrameSyncFlags & 1)) {
         m4aSoundVSync();

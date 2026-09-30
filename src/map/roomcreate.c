@@ -6,12 +6,12 @@
 void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;
 
-    func_08093C04();
+    ResetSelectedMapCard();
     gFieldState->flags |= 0x40000;
     gFieldState->flags |= 2;
-    work->unk_29 = 0;
-    work->unk_28 = 0;
-    work->unk_26 = 0;
+    work->mapSelectStatus = 0;
+    work->spotLightEnd = 0;
+    work->timer = 0;
     work->state = 0;
     SetBgPriority(0, 2);
     SetBgPriority(1, 2);
@@ -19,15 +19,15 @@ void task_roomcreate_0(RoomCreateWork* work) {
     work->x = gFieldState->actor.fieldPosition.x;
     work->y = gFieldState->actor.fieldPosition.y;
     work->z = gFieldState->actor.fieldPosition.z;
-    obj = gFieldState->unk_68;
+    obj = gFieldState->lockonTarget;
     work->x2 = obj->fieldPosition.x;
     work->y2 = obj->fieldPosition.y;
     work->z2 = obj->fieldPosition.z;
     work->angle = obj->angle;
-    work->unk_18 = work->x2 + gSineTable[work->angle] * 50;
-    work->unk_1C = work->y2 + -gSineTable[work->angle + 0x40] * 50;
-    work->unk_20 = work->z2;
-    work->unk_25 = gFieldState->actor.angle;
+    work->frontX = work->x2 + gSineTable[work->angle] * 50;
+    work->frontY = work->y2 + -gSineTable[work->angle + 0x40] * 50;
+    work->frontZ = work->z2;
+    work->playerAngle = gFieldState->actor.angle;
 }
 
 u8 task_roomcreate_1(RoomCreateWork* work) {
@@ -36,134 +36,134 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->unk_26 == 0) {
+        if (work->timer == 0) {
             gFieldState->actor.angle = work->angle + 0x80;
-            TaskCreate(&work->tasks, &gTaskDescSpotLight, &work->unk_28);
+            TaskCreate(&work->tasks, &gTaskDescSpotLight, &work->spotLightEnd);
             gFieldState->flags |= 0x80000;
         }
-        steps = 30 - work->unk_26;
-        ApproachValue(&gFieldState->actor.fieldPosition.x, work->unk_18, steps);
-        ApproachValue(&gFieldState->actor.fieldPosition.y, work->unk_1C, steps);
-        ApproachValue(&gFieldState->actor.fieldPosition.z, work->unk_20, steps);
+        steps = 30 - work->timer;
+        ApproachValue(&gFieldState->actor.fieldPosition.x, work->frontX, steps);
+        ApproachValue(&gFieldState->actor.fieldPosition.y, work->frontY, steps);
+        ApproachValue(&gFieldState->actor.fieldPosition.z, work->frontZ, steps);
 
         if (steps <= 1) {
-            func_080E0418();
+            MapFreezeBg1();
             work->state = 1;
             gFieldState->flags &= ~0x80000;
-            work->unk_26 = 8;
+            work->timer = 8;
         } else {
-            func_080E0298((gFieldState->actor.fieldPosition.x + work->x2) / 2,
+            MapSetCameraTarget((gFieldState->actor.fieldPosition.x + work->x2) / 2,
                           (gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + work->y2 + work->z2) / 2);
-            work->unk_26++;
+            work->timer++;
         }
         break;
     case 1:
-        if (work->unk_26 > 0) {
-            ApproachValue(&gFieldState->x, gFieldState->x2 - 0x7800, work->unk_26);
-            ApproachValue(&gFieldState->y, gFieldState->y2 - 0x6000, work->unk_26);
-            work->unk_26--;
-        } else if (work->unk_26 == 0) {
+        if (work->timer > 0) {
+            ApproachValue(&gFieldState->x, gFieldState->x2 - 0x7800, work->timer);
+            ApproachValue(&gFieldState->y, gFieldState->y2 - 0x6000, work->timer);
+            work->timer--;
+        } else if (work->timer == 0) {
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
-            CreateMapCardSelection(&work->tasks, &work->unk_29);
+            CreateMapCardSelection(&work->tasks, &work->mapSelectStatus);
             SetBgPriority(1, 1);
-            work->unk_26--;
+            work->timer--;
         }
 
-        switch (work->unk_29) {
+        switch (work->mapSelectStatus) {
         case 1:
             work->state = 2;
-            work->unk_26 = 0;
-            func_080E042C();
+            work->timer = 0;
+            MapRestoreBg1();
             SetBgPriority(1, 2);
             break;
         case 2:
             work->state = 3;
-            work->unk_26 = 0;
+            work->timer = 0;
             break;
         }
         break;
     case 3:
-        if (work->unk_26 == 0) {
+        if (work->timer == 0) {
             gFieldState->flags |= 0x100000;
             DisableBg(2);
             DisableBg(3);
             FadeStartIn(0, 1);
-            work->unk_26++;
-        } else if (work->unk_26 == 1) {
+            work->timer++;
+        } else if (work->timer == 1) {
             for (i = 0; i <= 31; i++) {
                 FadeSetPaletteExcluded(i, 0);
             }
-            work->unk_26++;
-        } else if (work->unk_26 <= 19) {
-            work->unk_26++;
-        } else if (work->unk_26 == 20) {
+            work->timer++;
+        } else if (work->timer <= 19) {
+            work->timer++;
+        } else if (work->timer == 20) {
             m4aSongNumStart(SONG_SYS_DOOR0);
             TaskCreate(&work->tasks, &gTaskDescRomcriEff2, (void*)(u32)work->angle);
-            work->unk_26++;
+            work->timer++;
         }
 
-        if (work->unk_29 == 1) {
-            work->unk_26 = 0;
+        if (work->mapSelectStatus == 1) {
+            work->timer = 0;
             work->state = 4;
         }
         break;
     case 4:
-        if (work->unk_26 == 16) {
+        if (work->timer == 16) {
             TaskCreate(&work->tasks, &gTaskDescRomcriEff, (void*)(u32)work->angle);
         }
 
-        if (work->unk_26 == 40) {
+        if (work->timer == 40) {
             gFieldState->flags |= 0x200000;
         }
 
-        if (work->unk_26 > 60) {
-            work->unk_26 = 0;
+        if (work->timer > 60) {
+            work->timer = 0;
             work->state = 6;
             gFieldState->flags &= ~0x100000;
         } else {
-            work->unk_26++;
+            work->timer++;
         }
         break;
     case 5:
-        if (work->unk_26 > 60) {
-            work->unk_26 = 0;
+        if (work->timer > 60) {
+            work->timer = 0;
             work->state = 6;
         } else {
-            work->unk_26++;
+            work->timer++;
         }
         break;
     case 2:
-        if (work->unk_26 == 0) {
-            work->unk_28 = 1;
+        if (work->timer == 0) {
+            work->spotLightEnd = 1;
             gFieldState->flags |= 0x80000;
         }
-        steps = 30 - work->unk_26;
+        steps = 30 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.y, work->y, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.z, work->z, steps);
 
         if (steps <= 1) {
-            gFieldState->actor.angle = work->unk_25;
+            gFieldState->actor.angle = work->playerAngle;
             gFieldState->flags &= ~0x40000;
             gFieldState->flags &= ~2;
             DisableBg(0);
             SetBgPriority(1, 1);
             return 0;
         }
-        work->unk_26++;
-        func_080E0298((gFieldState->actor.fieldPosition.x + work->x2) / 2,
+        work->timer++;
+        MapSetCameraTarget((gFieldState->actor.fieldPosition.x + work->x2) / 2,
                       (gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + work->y2 + work->z2) / 2);
         break;
     case 6:
-        if (work->unk_26 == 0) {
+        if (work->timer == 0) {
             gFieldState->flags |= 0x80000;
         }
-        steps = 40 - work->unk_26;
+        steps = 40 - work->timer;
         ApproachValue(&gFieldState->actor.fieldPosition.x, work->x2, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.y, work->y2, steps);
         ApproachValue(&gFieldState->actor.fieldPosition.z, work->z2, steps);
 
-        if (func_080DFD84(&gFieldState->actor.fieldPosition)) {
+        if (IsAtTargetDoor(&gFieldState->actor.fieldPosition)) {
             gFieldState->flags |= 0x10;
         }
         break;

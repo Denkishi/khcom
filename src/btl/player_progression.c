@@ -81,34 +81,34 @@ void InitPlayerProgression(void) {
     p->ap = 10;
     p->exp = 0;
     p->level = 1;
-    p->unk_14 = 0;
-    p->unk_1C = 0;
-    p->unk_24 = 0;
-    p->unk_2C = 0;
-    p->unk_34 = 0;
-    p->unk_3C[0] = 0;
-    p->unk_3C[1] = 0;
-    p->unk_3C[2] = 0;
-    p->unk_3C[3] = 0;
-    p->unk_3C[4] = 0;
-    p->unk_3C[5] = 0;
-    p->unk_3C[6] = 0;
-    p->unk_3C[7] = 0;
+    p->learnedStocks = 0;
+    p->learnedStocks2 = 0;
+    p->newStocks = 0;
+    p->newStocks2 = 0;
+    p->obtainedCardKinds = 0;
+    p->jiminyFlags[0] = 0;
+    p->jiminyFlags[1] = 0;
+    p->jiminyFlags[2] = 0;
+    p->jiminyFlags[3] = 0;
+    p->jiminyFlags[4] = 0;
+    p->jiminyFlags[5] = 0;
+    p->jiminyFlags[6] = 0;
+    p->jiminyFlags[7] = 0;
     p->mooglePoints = 0;
-    p->unk_80 = 0;
+    p->levelMilestone = 0;
     p->unk_82 = 0;
-    p->unk_84 = 0;
+    p->friendFlags = 0;
     p->nextExp = 0x19;
     func_080C6FF8();
-    func_080DDEA4();
-    func_08109620();
+    ResetPooState();
+    ClearMoogleShopFlags();
 }
 
 u8 LevelUp(void) {
     PlayerProgression* p = &gGameState.progression;
 
-    if (p->level + gBtlWork->unk_0FA + 1 <= 99) {
-        gBtlWork->unk_0FA++;
+    if (p->level + gBtlWork->pendingLevelUps + 1 <= 99) {
+        gBtlWork->pendingLevelUps++;
         p->level++;
         AdvanceLevelExpThreshold(p);
         return 1;
@@ -166,44 +166,44 @@ const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
     return &gEnemyBaseStats[i];
 }
 
-void func_0800FB2C(u32 a) {
+void LearnStock(u32 a) {
     u8* q;
     u8* z;
 
     if (a == 72) {
         z = (u8*)&gGameState;
-        *(u64*)(z + offsetof(GameState, progression.unk_14)) = -1;
-        *(u64*)(z + offsetof(GameState, progression.unk_1C)) = -1;
+        *(u64*)(z + offsetof(GameState, progression.learnedStocks)) = -1;
+        *(u64*)(z + offsetof(GameState, progression.learnedStocks2)) = -1;
         return;
     }
 
-    if (func_0800FBCC(a)) {
+    if (IsStockLearned(a)) {
         return;
     }
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        *(u64*)(q + offsetof(GameState, progression.unk_14)) |= 1LL << a;
-        *(u64*)(q + offsetof(GameState, progression.unk_24)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.learnedStocks)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.newStocks)) |= 1LL << a;
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        *(u64*)(q + offsetof(GameState, progression.unk_1C)) |= 1LL << a;
-        *(u64*)(q + offsetof(GameState, progression.unk_2C)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.learnedStocks2)) |= 1LL << a;
+        *(u64*)(q + offsetof(GameState, progression.newStocks2)) |= 1LL << a;
     }
 }
 
-u8 func_0800FBCC(u32 a) {
+u8 IsStockLearned(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_14);
+        q += offsetof(GameState, progression.learnedStocks);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_1C);
+        q += offsetof(GameState, progression.learnedStocks2);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -212,32 +212,32 @@ u8 func_0800FBCC(u32 a) {
     return 0;
 }
 
-void func_0800FC14(s32 a) {
+void SetCardKindObtained(s32 a) {
     if (a == 0x3A) {
-        gGameState.progression.unk_34 = -1;
+        gGameState.progression.obtainedCardKinds = -1;
     } else {
-        gGameState.progression.unk_34 |= 1LL << a;
+        gGameState.progression.obtainedCardKinds |= 1LL << a;
     }
 }
 
-u8 func_0800FC5C(s32 a) {
-    if (gGameState.progression.unk_34 & (1LL << a)) {
+u8 IsCardKindObtained(s32 a) {
+    if (gGameState.progression.obtainedCardKinds & (1LL << a)) {
         return 1;
     }
     return 0;
 }
 
-u8 func_0800FC90(u32 a) {
+u8 IsLinkStockLearned(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, unk_1E8);
+        q += offsetof(GameState, linkLearnedStocks);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, unk_1F0);
+        q += offsetof(GameState, linkLearnedStocks2);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -246,17 +246,17 @@ u8 func_0800FC90(u32 a) {
     return 0;
 }
 
-u8 func_0800FCD8(u32 a) {
+u8 IsLinkPartnerStockLearned(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, unk_200);
+        q += offsetof(GameState, linkPartnerLearnedStocks);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, unk_208);
+        q += offsetof(GameState, linkPartnerLearnedStocks2);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -265,17 +265,17 @@ u8 func_0800FCD8(u32 a) {
     return 0;
 }
 
-u8 func_0800FD20(u32 a) {
+u8 IsStockNew(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x1E) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_24);
+        q += offsetof(GameState, progression.newStocks);
     } else {
         a -= 0x1F;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_2C);
+        q += offsetof(GameState, progression.newStocks2);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -284,87 +284,87 @@ u8 func_0800FD20(u32 a) {
     return 0;
 }
 
-void func_0800FD68(u32 a) {
+void ClearStockNew(u32 a) {
     u64* p;
     u8* q;
 
     if (a == 0x48) {
         GameState* s = &gGameState;
-        s->progression.unk_24 = 0;
-        s->progression.unk_2C = 0;
+        s->progression.newStocks = 0;
+        s->progression.newStocks2 = 0;
     } else {
         if (a <= 0x1E) {
             q = (u8*)&gGameState;
-            q += offsetof(GameState, progression.unk_24);
+            q += offsetof(GameState, progression.newStocks);
         } else {
             a -= 0x1F;
             q = (u8*)&gGameState;
-            q += offsetof(GameState, progression.unk_2C);
+            q += offsetof(GameState, progression.newStocks2);
         }
         p = (u64*)q;
         *p &= ~(1LL << a);
     }
 }
 
-void func_0800FDD0(u32 a) {
+void SetJiminyFlag(u32 a) {
     GameState* state;
 
     if (a == 250) {
         GameState* state = &gGameState;
-        state->progression.unk_3C[0] = -1;
-        state->progression.unk_3C[1] = -1;
-        state->progression.unk_3C[2] = -1;
-        state->progression.unk_3C[3] = -1;
-        state->progression.unk_3C[4] = -1;
-        state->progression.unk_3C[5] = -1;
-        state->progression.unk_3C[6] = -1;
-        state->progression.unk_3C[7] = -1;
+        state->progression.jiminyFlags[0] = -1;
+        state->progression.jiminyFlags[1] = -1;
+        state->progression.jiminyFlags[2] = -1;
+        state->progression.jiminyFlags[3] = -1;
+        state->progression.jiminyFlags[4] = -1;
+        state->progression.jiminyFlags[5] = -1;
+        state->progression.jiminyFlags[6] = -1;
+        state->progression.jiminyFlags[7] = -1;
         return;
     }
-    if (func_0800FF00(a)) {
+    if (IsJiminyFlagSet(a)) {
         return;
     }
     if (a <= 0x3F) {
         state = &gGameState;
-        state->progression.unk_3C[0] |= 1ULL << a;
-        state->progression.unk_3C[4] |= 1ULL << a;
+        state->progression.jiminyFlags[0] |= 1ULL << a;
+        state->progression.jiminyFlags[4] |= 1ULL << a;
     } else if (a <= 0x7F) {
         a -= 0x40;
         state = &gGameState;
-        state->progression.unk_3C[1] |= 1ULL << a;
-        state->progression.unk_3C[5] |= 1ULL << a;
+        state->progression.jiminyFlags[1] |= 1ULL << a;
+        state->progression.jiminyFlags[5] |= 1ULL << a;
     } else if (a <= 0xBF) {
         a -= 0x80;
         state = &gGameState;
-        state->progression.unk_3C[2] |= 1ULL << a;
-        state->progression.unk_3C[6] |= 1ULL << a;
+        state->progression.jiminyFlags[2] |= 1ULL << a;
+        state->progression.jiminyFlags[6] |= 1ULL << a;
     } else {
         a -= 0xC0;
         state = &gGameState;
-        state->progression.unk_3C[3] |= 1ULL << a;
-        state->progression.unk_3C[7] |= 1ULL << a;
+        state->progression.jiminyFlags[3] |= 1ULL << a;
+        state->progression.jiminyFlags[7] |= 1ULL << a;
     }
 }
 
-u8 func_0800FF00(u32 a) {
+u8 IsJiminyFlagSet(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[0]);
+        q += offsetof(GameState, progression.jiminyFlags[0]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[1]);
+        q += offsetof(GameState, progression.jiminyFlags[1]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[2]);
+        q += offsetof(GameState, progression.jiminyFlags[2]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[3]);
+        q += offsetof(GameState, progression.jiminyFlags[3]);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -373,25 +373,25 @@ u8 func_0800FF00(u32 a) {
     return 0;
 }
 
-u8 func_0800FF70(u32 a) {
+u8 IsJiminyFlagNew(u32 a) {
     u64* p;
     u8* q;
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[4]);
+        q += offsetof(GameState, progression.jiminyFlags[4]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[5]);
+        q += offsetof(GameState, progression.jiminyFlags[5]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[6]);
+        q += offsetof(GameState, progression.jiminyFlags[6]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[7]);
+        q += offsetof(GameState, progression.jiminyFlags[7]);
     }
     p = (u64*)q;
     if (*p & (1LL << a)) {
@@ -400,35 +400,35 @@ u8 func_0800FF70(u32 a) {
     return 0;
 }
 
-void func_0800FFE0(u32 a) {
+void ClearJiminyFlagNew(u32 a) {
     u64* p;
     u8* q;
     u8* z;
 
     if (a == 250) {
         z = (u8*)&gGameState;
-        *(u64*)(z + offsetof(GameState, progression.unk_3C[4])) = 0;
-        *(u64*)(z + offsetof(GameState, progression.unk_3C[5])) = 0;
-        *(u64*)(z + offsetof(GameState, progression.unk_3C[6])) = 0;
-        *(u64*)(z + offsetof(GameState, progression.unk_3C[7])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.jiminyFlags[4])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.jiminyFlags[5])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.jiminyFlags[6])) = 0;
+        *(u64*)(z + offsetof(GameState, progression.jiminyFlags[7])) = 0;
         return;
     }
 
     if (a <= 0x3F) {
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[4]);
+        q += offsetof(GameState, progression.jiminyFlags[4]);
     } else if (a <= 0x7F) {
         a -= 0x40;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[5]);
+        q += offsetof(GameState, progression.jiminyFlags[5]);
     } else if (a <= 0xBF) {
         a -= 0x80;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[6]);
+        q += offsetof(GameState, progression.jiminyFlags[6]);
     } else {
         a -= 0xC0;
         q = (u8*)&gGameState;
-        q += offsetof(GameState, progression.unk_3C[7]);
+        q += offsetof(GameState, progression.jiminyFlags[7]);
     }
     p = (u64*)q;
     *p &= ~(1LL << a);

@@ -42,143 +42,143 @@
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 
-extern void* gUnk_09EE7698[];
-extern void* gUnk_09EE76C0[];
-extern void** gUnk_09EE76D0[];
-extern void* gUnk_09EE7708[];
-extern AnimHeader** gUnk_09EE7714[];
-extern void** gUnk_09EE7720[];
+extern void* gReloadChildTiles[];
+extern void* gRevCountTileSources[];
+extern void** gRevCountSprites[];
+extern void* gReloadTiles[];
+extern AnimHeader** gReloadAnims[];
+extern void** gReloadFrames[];
 void CreateCardNameDisplay(void* a, void* b);
-s32 func_08098BA4(ReloadChildWork* w);
-u8 func_08099330(ReloadWork* w);
-s16 func_08084458(u16 cardId);
-void _08085D04(u8 a);
+s32 UpdateReloadChildAbsorb(ReloadChildWork* w);
+u8 UpdateReloadSlideOut(ReloadWork* w);
+s16 ObtainCard(u16 cardId);
+void InitRikuDeckForWorld(u8 a);
 void CreateCardNameDisplay(void* a, void* b);
 
-const s16 gUnk_090361B0[4] = { 16, 29, 42, 51 };
+const s16 gSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 
-const s16 gUnk_090361B8[4] = { -16, -29, -42, -51 };
+const s16 gRikuReloadChildOffsetX[4] = { -16, -29, -42, -51 };
 
-const s16 gUnk_090361C0[4] = { 0, 0, 0, 24 };
+const s16 gReloadChildOffsetY[4] = { 0, 0, 0, 24 };
 
 void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
     w->args = *a;
-    w->tiles = LoadObjTiles(gUnk_09EE7698[w->args.unk_0D], 128);
+    w->tiles = LoadObjTiles(gReloadChildTiles[w->args.listIndex], 128);
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->tiles2 = 0;
 
-    switch (w->args.unk_0E) {
+    switch (w->args.side) {
     case 1:
-        if ((s8)w->args.unk_0C <= 3) {
-            w->unk_20 = gUnk_090361B0[(s8)w->args.unk_0C] << 8;
-            w->unk_24 = gUnk_090361C0[(s8)w->args.unk_0C] << 8;
+        if ((s8)w->args.index <= 3) {
+            w->offsetX = gSoraReloadChildOffsetX[(s8)w->args.index] << 8;
+            w->offsetY = gReloadChildOffsetY[(s8)w->args.index] << 8;
         } else {
-            w->unk_20 = gUnk_090361B0[3] << 8;
-            w->unk_24 = gUnk_090361C0[3] << 8;
+            w->offsetX = gSoraReloadChildOffsetX[3] << 8;
+            w->offsetY = gReloadChildOffsetY[3] << 8;
         }
         break;
     case 2:
-        if ((s8)w->args.unk_0C <= 3) {
-            w->unk_20 = gUnk_090361B8[(s8)w->args.unk_0C] << 8;
-            w->unk_24 = gUnk_090361C0[(s8)w->args.unk_0C] << 8;
+        if ((s8)w->args.index <= 3) {
+            w->offsetX = gRikuReloadChildOffsetX[(s8)w->args.index] << 8;
+            w->offsetY = gReloadChildOffsetY[(s8)w->args.index] << 8;
         } else {
-            w->unk_20 = gUnk_090361B8[3] << 8;
-            w->unk_24 = gUnk_090361C0[3] << 8;
+            w->offsetX = gRikuReloadChildOffsetX[3] << 8;
+            w->offsetY = gReloadChildOffsetY[3] << 8;
         }
         break;
     }
 
-    ListNodeInit(&w->node, w->args.unk_00, w);
-    ListPoolAppend(&w->node, w->args.unk_00);
-    w->unk_46 = 0;
+    ListNodeInit(&w->node, w->args.pool, w);
+    ListPoolAppend(&w->node, w->args.pool);
+    w->retractTimer = 0;
 }
 
 u8 RELOAD_CHILDREN_1(ReloadChildWork* w, void* a) {
     u8 (*fn)(ReloadChildWork*, void*);
 
-    if (w->args.unk_10 & 2) {
-        w->unk_46++;
+    if (w->args.flags & 2) {
+        w->retractTimer++;
 
-        if (w->unk_46 == 30) {
-            w->unk_44 = 8;
-            fn = func_08098AE4;
+        if (w->retractTimer == 30) {
+            w->steps = 8;
+            fn = UpdateReloadChildRetracted;
             SetTaskUpdate(a, (TaskUpdateFunc)fn);
             return fn(w, a);
         }
     }
 
-    if (w->args.unk_10 & 1) {
-        w->unk_44 = 8;
-        w->args.unk_10 &= ~1;
+    if (w->args.flags & 1) {
+        w->steps = 8;
+        w->args.flags &= ~1;
     }
 
-    if (w->args.unk_0C <= 3) {
-        switch (w->args.unk_0E) {
+    if (w->args.index <= 3) {
+        switch (w->args.side) {
         case 1:
-            ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->args.unk_0C] << 8, w->unk_44);
+            ApproachValue(&w->offsetX, gSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
             break;
         case 2:
-            ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->args.unk_0C] << 8, w->unk_44);
+            ApproachValue(&w->offsetX, gRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
             break;
         }
 
-        ApproachValue(&w->unk_24, gUnk_090361C0[(s8)w->args.unk_0C] << 8, w->unk_44);
-    } else if ((s8)w->args.unk_0C < 0) {
-        ListPoolRemove(&w->node, w->args.unk_00);
-        w->tiles2 = LoadObjTiles(gUnk_08F709B0[w->args.unk_0D].tiles2, 0xD00);
-        w->unk_44 = 8;
+        ApproachValue(&w->offsetY, gReloadChildOffsetY[(s8)w->args.index] << 8, w->steps);
+    } else if ((s8)w->args.index < 0) {
+        ListPoolRemove(&w->node, w->args.pool);
+        w->tiles2 = LoadObjTiles(gCardBacks[w->args.listIndex].tiles2, 0xD00);
+        w->steps = 8;
         w->scale = 0x66;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08098BA4);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadChildAbsorb);
         return 1;
     }
 
-    if (w->unk_44 != 0) {
-        w->unk_44--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
     w->angle += 8;
     return 1;
 }
 
-u8 func_08098AE4(ReloadChildWork* w, void* a) {
+u8 UpdateReloadChildRetracted(ReloadChildWork* w, void* a) {
     u8 (*f)(ReloadChildWork*, void*);
     u16 v;
 
-    v = w->args.unk_10 & 2;
+    v = w->args.flags & 2;
 
     if (v == 0) {
-        w->unk_44 = 8;
+        w->steps = 8;
         f = RELOAD_CHILDREN_1;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
-        w->unk_46 = 0;
+        w->retractTimer = 0;
         return f(w, a);
     }
 
-    switch (w->args.unk_0E) {
+    switch (w->args.side) {
     case 1:
-        ApproachValue(&w->unk_20, gUnk_090361B0[(s8)w->args.unk_0C] << 8, w->unk_44);
+        ApproachValue(&w->offsetX, gSoraReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
         break;
     case 2:
-        ApproachValue(&w->unk_20, gUnk_090361B8[(s8)w->args.unk_0C] << 8, w->unk_44);
+        ApproachValue(&w->offsetX, gRikuReloadChildOffsetX[(s8)w->args.index] << 8, w->steps);
         break;
     }
 
-    ApproachValue(&w->unk_24, gUnk_090361C0[3] << 8, w->unk_44);
+    ApproachValue(&w->offsetY, gReloadChildOffsetY[3] << 8, w->steps);
 
-    if (w->unk_44 != 0) {
-        w->unk_44--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
     return 1;
 }
 
-s32 func_08098BA4(ReloadChildWork* w) {
-    ApproachValue(&w->unk_20, 0, w->unk_44);
-    ApproachValue(&w->unk_24, 0, w->unk_44);
-    ApproachValue(&w->scale, 256, w->unk_44);
+s32 UpdateReloadChildAbsorb(ReloadChildWork* w) {
+    ApproachValue(&w->offsetX, 0, w->steps);
+    ApproachValue(&w->offsetY, 0, w->steps);
+    ApproachValue(&w->scale, 256, w->steps);
 
-    if (w->unk_44 != 0) {
-        w->unk_44--;
+    if (w->steps != 0) {
+        w->steps--;
         return 1;
     }
 
@@ -190,17 +190,17 @@ void RELOAD_CHILDREN_2(ReloadChildWork* w) {
     s16 y;
     ObjAffine* aff;
 
-    if (w->args.unk_0C <= 3) {
-        x = (w->unk_20 + *w->args.unk_04) >> 8;
-        y = (w->unk_24 + *w->args.unk_08) >> 8;
+    if (w->args.index <= 3) {
+        x = (w->offsetX + *w->args.parentX) >> 8;
+        y = (w->offsetY + *w->args.parentY) >> 8;
         DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_09EEA344[0], w->tiles, w->palette, 0, 0, 50);
     }
 
-    if ((s8)w->args.unk_0C < 0) {
-        x = (w->unk_20 + *w->args.unk_04) >> 8;
-        y = (w->unk_24 + *w->args.unk_08) >> 8;
+    if ((s8)w->args.index < 0) {
+        x = (w->offsetX + *w->args.parentX) >> 8;
+        y = (w->offsetY + *w->args.parentY) >> 8;
         aff = AllocObjAffine(0, w->scale, w->scale, 0);
-        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_08F709B0[w->args.unk_0D].gfx2, w->tiles2, w->palette, aff, 0, 49);
+        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gCardBacks[w->args.listIndex].gfx2, w->tiles2, w->palette, aff, 0, 49);
     }
 }
 
@@ -222,40 +222,40 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
     zero = 0;
     CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(RevCountWork) / 4);
     w->args = *a;
-    idx = w->args.unk_0C;
-    w->unk_24 = idx;
+    idx = w->args.list;
+    w->list = idx;
     w->tiles = AllocSpriteFrameTiles(320);
     w->palette = LoadObjPalette(gCard00Palette, 32);
 
-    if (w->unk_24 == 0) {
-        count = (s16*)w->args.unk_04;
+    if (w->list == 0) {
+        count = (s16*)w->args.count;
 
         if (*count >= 2 && *count <= 100) {
-            row = gUnk_09EE76D0[w->unk_24];
-            UpdateSpriteFrameTiles(w->tiles, row[*count - 2], gUnk_09EE76C0[w->unk_24]);
+            row = gRevCountSprites[w->list];
+            UpdateSpriteFrameTiles(w->tiles, row[*count - 2], gRevCountTileSources[w->list]);
         } else if (*count > 100) {
-            row = gUnk_09EE76D0[w->unk_24];
-            UpdateSpriteFrameTiles(w->tiles, row[98], gUnk_09EE76C0[w->unk_24]);
+            row = gRevCountSprites[w->list];
+            UpdateSpriteFrameTiles(w->tiles, row[98], gRevCountTileSources[w->list]);
         } else {
-            row = gUnk_09EE76D0[w->unk_24];
-            UpdateSpriteFrameTiles(w->tiles, row[0], gUnk_09EE76C0[w->unk_24]);
+            row = gRevCountSprites[w->list];
+            UpdateSpriteFrameTiles(w->tiles, row[0], gRevCountTileSources[w->list]);
         }
     } else {
-        count2 = (s16*)w->args.unk_04;
+        count2 = (s16*)w->args.count;
 
         if (*count2 >= 1 && *count2 <= 99) {
-            row = gUnk_09EE76D0[w->unk_24];
-            UpdateSpriteFrameTiles(w->tiles, row[*count2 - 1], gUnk_09EE76C0[w->unk_24]);
+            row = gRevCountSprites[w->list];
+            UpdateSpriteFrameTiles(w->tiles, row[*count2 - 1], gRevCountTileSources[w->list]);
         } else {
-            row = gUnk_09EE76D0[w->unk_24];
-            UpdateSpriteFrameTiles(w->tiles, row[0], gUnk_09EE76C0[w->unk_24]);
+            row = gRevCountSprites[w->list];
+            UpdateSpriteFrameTiles(w->tiles, row[0], gRevCountTileSources[w->list]);
         }
     }
 
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_26 = *(u16*)w->args.unk_04;
+    w->shownCount = *(u16*)w->args.count;
 
-    switch (w->args.unk_0D) {
+    switch (w->args.side) {
     case 1:
         w->x = -0x2000;
         w->y = 0x9800;
@@ -266,133 +266,133 @@ void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
         break;
     }
 
-    w->unk_28 = 8;
+    w->steps = 8;
 }
 
 u8 REV_COUNT_1(RevCountWork* w, void* a) {
     s16* count;
     void** row;
 
-    count = (s16*)w->args.unk_04;
+    count = (s16*)w->args.count;
 
-    if (*count != (s16)w->unk_26) {
-        if (w->unk_24 == 0) {
+    if (*count != (s16)w->shownCount) {
+        if (w->list == 0) {
             if (*count >= 2 && *count <= 100) {
-                row = gUnk_09EE76D0[w->unk_24];
+                row = gRevCountSprites[w->list];
                 UpdateSpriteFrameTiles(w->tiles, row[*count - 2],
-                              gUnk_09EE76C0[w->unk_24]);
+                              gRevCountTileSources[w->list]);
             } else {
                 u8 (*f)(RevCountWork*, void*);
 
-                w->unk_28 = 8;
-                f = func_080990CC;
+                w->steps = 8;
+                f = UpdateRevCountEmpty;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->unk_26 = *(u16*)w->args.unk_04;
+                w->shownCount = *(u16*)w->args.count;
                 return f(w, a);
             }
         } else {
             if (*count >= 1 && *count <= 99) {
-                row = gUnk_09EE76D0[w->unk_24];
+                row = gRevCountSprites[w->list];
                 UpdateSpriteFrameTiles(w->tiles, row[*count - 1],
-                              gUnk_09EE76C0[w->unk_24]);
+                              gRevCountTileSources[w->list]);
             } else {
                 u8 (*f)(RevCountWork*, void*);
 
-                w->unk_28 = 8;
-                f = func_080990CC;
+                w->steps = 8;
+                f = UpdateRevCountEmpty;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->unk_26 = *(u16*)w->args.unk_04;
+                w->shownCount = *(u16*)w->args.count;
                 return f(w, a);
             }
         }
 
-        w->unk_26 = *(u16*)w->args.unk_04;
+        w->shownCount = *(u16*)w->args.count;
     } else if (*count <= 0) {
         u8 (*f)(RevCountWork*, void*);
 
-        w->unk_28 = 8;
-        f = func_080990CC;
+        w->steps = 8;
+        f = UpdateRevCountEmpty;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
-        w->unk_26 = *(u16*)w->args.unk_04;
+        w->shownCount = *(u16*)w->args.count;
         return f(w, a);
     }
 
-    switch (w->args.unk_0D) {
+    switch (w->args.side) {
     case 1:
-        ApproachValue(&w->x, 0, w->unk_28);
+        ApproachValue(&w->x, 0, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0xD800, w->unk_28);
+        ApproachValue(&w->x, 0xD800, w->steps);
         break;
     }
 
-    if (w->unk_28 != 0) {
-        w->unk_28--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
-    if (w->args.unk_0C != *(u8*)w->args.unk_00) {
+    if (w->args.list != *(u8*)w->args.shownList) {
         u8 (*f)(RevCountWork*, void*);
 
-        f = (u8 (*)(RevCountWork*, void*))func_08098FDC;
+        f = (u8 (*)(RevCountWork*, void*))UpdateRevCountListChanged;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
-        w->unk_28 = 8;
+        w->steps = 8;
         return f(w, a);
     }
 
-    if (gBtlWork->unk_0A0 == 4) {
-        w->unk_28 = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08099048);
+    if (gBtlWork->phase == 4) {
+        w->steps = 8;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
     }
 
-    if (*(u8*)w->args.unk_08 == 0) {
-        w->unk_28 = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08099048);
+    if (*(u8*)w->args.visible == 0) {
+        w->steps = 8;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateRevCountHidden);
     }
 
     return 1;
 }
 
-u8 func_08098FDC(RevCountWork* w) {
-    switch (w->args.unk_0D) {
+u8 UpdateRevCountListChanged(RevCountWork* w) {
+    switch (w->args.side) {
     case 1:
-        ApproachValue(&w->x, -0x2000, w->unk_28);
+        ApproachValue(&w->x, -0x2000, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0x11000, w->unk_28);
+        ApproachValue(&w->x, 0x11000, w->steps);
         break;
     }
 
-    if (w->unk_28 != 0) {
-        w->unk_28--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
-    if (w->args.unk_0C == *(u8*)w->args.unk_00 && *(s16*)w->args.unk_04 > 0) {
+    if (w->args.list == *(u8*)w->args.shownList && *(s16*)w->args.count > 0) {
         return 0;
     }
 
     return 1;
 }
 
-u8 func_08099048(RevCountWork* w, void* a) {
+u8 UpdateRevCountHidden(RevCountWork* w, void* a) {
     u8 (*f)(RevCountWork*, void*);
 
-    switch (w->args.unk_0D) {
+    switch (w->args.side) {
     case 1:
-        ApproachValue(&w->x, -0x2000, w->unk_28);
+        ApproachValue(&w->x, -0x2000, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0x11000, w->unk_28);
+        ApproachValue(&w->x, 0x11000, w->steps);
         break;
     }
 
-    if (w->unk_28 == 0) {
+    if (w->steps == 0) {
         return 0;
     }
 
-    w->unk_28--;
+    w->steps--;
 
-    if (*(u8*)w->args.unk_08 == 1) {
-        w->unk_28 = 8;
+    if (*(u8*)w->args.visible == 1) {
+        w->steps = 8;
         f = REV_COUNT_1;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
         return f(w, a);
@@ -401,35 +401,35 @@ u8 func_08099048(RevCountWork* w, void* a) {
     return 1;
 }
 
-u8 func_080990CC(RevCountWork* w, void* a) {
+u8 UpdateRevCountEmpty(RevCountWork* w, void* a) {
     u8 (*f)(RevCountWork*, void*);
 
-    switch (w->args.unk_0D) {
+    switch (w->args.side) {
     case 1:
-        ApproachValue(&w->x, -0x2000, w->unk_28);
+        ApproachValue(&w->x, -0x2000, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0x11000, w->unk_28);
+        ApproachValue(&w->x, 0x11000, w->steps);
         break;
     }
 
-    if (w->unk_28 != 0) {
-        w->unk_28--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
     do {
-        if (w->unk_24 == 0) {
-            if (*(s16*)w->args.unk_04 > 1) {
+        if (w->list == 0) {
+            if (*(s16*)w->args.count > 1) {
                 f = REV_COUNT_1;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->unk_28 = 8;
+                w->steps = 8;
                 return f(w, a);
             }
         } else {
-            if (*(s16*)w->args.unk_04 > 0) {
+            if (*(s16*)w->args.count > 0) {
                 f = REV_COUNT_1;
                 SetTaskUpdate(a, (TaskUpdateFunc)f);
-                w->unk_28 = 8;
+                w->steps = 8;
                 return f(w, a);
             }
         }
@@ -457,11 +457,11 @@ void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d) {
     RevCountArgs args;
 
     c[0] = 1;
-    args.unk_00 = a;
-    args.unk_04 = b;
-    args.unk_08 = c;
-    args.unk_0C = a[0];
-    args.unk_0D = d;
+    args.shownList = a;
+    args.count = b;
+    args.visible = c;
+    args.list = a[0];
+    args.side = d;
     TaskCreate(pool, &gTaskDescREVCOUNT, &args);
 }
 
@@ -469,8 +469,8 @@ void RELOAD_0(ReloadWork* w, ReloadArgs* a) {
     w->tiles = AllocObjTiles(0xA0, 0);
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->args = *a;
-    SetObjTileSource(w->tiles, gUnk_09EE7708[w->args.slot]);
-    AnimInit(&w->anim, gUnk_09EE7714[w->args.slot], gUnk_09EE7720[w->args.slot]);
+    SetObjTileSource(w->tiles, gReloadTiles[w->args.slot]);
+    AnimInit(&w->anim, gReloadAnims[w->args.slot], gReloadFrames[w->args.slot]);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
 
@@ -485,7 +485,7 @@ void RELOAD_0(ReloadWork* w, ReloadArgs* a) {
         break;
     }
 
-    w->unk_34 = 6;
+    w->steps = 6;
 }
 
 u8 RELOAD_1(ReloadWork* w, void* a) {
@@ -493,44 +493,44 @@ u8 RELOAD_1(ReloadWork* w, void* a) {
 
     switch (w->args.mode) {
     case 1:
-        ApproachValue(&w->x, 0x1800, w->unk_34);
+        ApproachValue(&w->x, 0x1800, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0xD800, w->unk_34);
+        ApproachValue(&w->x, 0xD800, w->steps);
         break;
     }
 
-    if (w->unk_34 != 0) {
-        w->unk_34--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
     if (*w->args.state == 0) {
-        w->unk_34 = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08099330);
+        w->steps = 8;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadSlideOut);
     }
 
-    if (gBtlWork->unk_0A0 == 4) {
-        w->unk_34 = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08099330);
+    if (gBtlWork->phase == 4) {
+        w->steps = 8;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadSlideOut);
     }
 
     return 1;
 }
 
-u8 func_08099330(ReloadWork* w) {
+u8 UpdateReloadSlideOut(ReloadWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
     switch (w->args.mode) {
     case 1:
-        ApproachValue(&w->x, -0x3000, w->unk_34);
+        ApproachValue(&w->x, -0x3000, w->steps);
         break;
     case 2:
-        ApproachValue(&w->x, 0x12000, w->unk_34);
+        ApproachValue(&w->x, 0x12000, w->steps);
         break;
     }
 
-    if (w->unk_34 != 0) {
-        w->unk_34--;
+    if (w->steps != 0) {
+        w->steps--;
         return 1;
     }
 
@@ -553,37 +553,37 @@ void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
     def = &gCardDefs[args->cardId];
     w->tiles = LoadObjTiles(def->tiles, 0x300);
     w->palette = LoadObjPalette(def->palette, 32);
-    w->stat = *(CardStat*)&def->unk_1C;
-    back = &gUnk_08F709B0[def->unk_2A];
+    w->stat = *(CardStat*)&def->kind;
+    back = &gCardBacks[def->category];
     w->tiles2 = LoadObjTiles(back->tiles, 0x280);
     w->tiles3 = LoadObjTiles(back->tiles3, 0x600);
     w->palette2 = LoadObjPalette(gCard00Palette, 32);
     w->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     w->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    w->unk_A8 = args->x;
-    w->unk_AC = args->y;
-    w->unk_B0 = args->z;
-    w->unk_B4 = 0;
-    w->unk_E6 = 24;
-    w->unk_BC = -(GetRandom() % 129 + 0x300);
-    w->unk_C0 = GetRandom() % 129 + 0x80;
+    w->posX = args->x;
+    w->posY = args->y;
+    w->posZ = args->z;
+    w->groundZ = 0;
+    w->rotation = 24;
+    w->vz = -(GetRandom() % 129 + 0x300);
+    w->speed = GetRandom() % 129 + 0x80;
     w->unk_E4 = GetRandom() % 256;
-    w->unk_D0 = 0x80;
-    w->unk_D2 = 0x80;
-    w->unk_E2 = 0x80;
-    w->unk_E8 = 0;
-    w->unk_E9 = 0;
+    w->scaleX = 0x80;
+    w->scaleY = 0x80;
+    w->scale = 0x80;
+    w->flipAngleY = 0;
+    w->flipAngleX = 0;
     p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetDisabled(p, 1);
-    ColliderSetPosition(p, w->unk_A8, w->unk_AC, w->unk_B0);
-    w->unk_EA = 0;
-    w->unk_ED = 0;
-    w->unk_EB = 0;
-    w->unk_EC = 0;
-    w->unk_EE = 0;
-    w->unk_EF = 0;
+    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
+    w->timer = 0;
+    w->collected = 0;
+    w->steps = 0;
+    w->holdTimer = 0;
+    w->effectCount = 0;
+    w->effectTimer = 0;
     m4aSongNumStart(SONG_EF_BOSS_DEAD4);
     TaskPoolInit(&w->tasks, 10);
     gBtlWork->prizeCount++;
@@ -591,42 +591,42 @@ void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
 u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
     s16 x;
     s16 y;
-    if (w->unk_B0 < 0) {
-        w->unk_B0 += 51;
-        func_08099CDC(w);
+    if (w->posZ < 0) {
+        w->posZ += 51;
+        SpawnBossPrizeCardEffects(w);
     }
-    if (gBtlWork->unk_0F4 == 6) {
+    if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 30);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
-    ColliderSetPosition(&w->collider, w->unk_A8, w->unk_AC, w->unk_B0);
-    WorldToScreen(&w->x, &w->y, w->unk_A8, w->unk_AC, w->unk_B0);
-    WorldToScreen(&w->x2, &w->y2, w->unk_A8, w->unk_AC, w->unk_B4);
-    w->priority = -0x1004 - (w->unk_AC >> 8) * 4;
-    func_08099928(w);
-    w->unk_E9 += 2;
-    if (w->unk_EA == 60) {
+    ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
+    WorldToScreen(&w->x, &w->y, w->posX, w->posY, w->posZ);
+    WorldToScreen(&w->x2, &w->y2, w->posX, w->posY, w->groundZ);
+    w->priority = -0x1004 - (w->posY >> 8) * 4;
+    UpdateBossPrizeScale(w);
+    w->flipAngleX += 2;
+    if (w->timer == 60) {
         ColliderSetDisabled(&w->collider, 0);
     }
-    if (w->unk_EA <= 59) {
-        w->unk_EA++;
+    if (w->timer <= 59) {
+        w->timer++;
     }
-    if (w->collider.unk_2C != 0) {
-        w->unk_ED = 1;
+    if (w->collider.colliding != 0) {
+        w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        func_08084458(*(u16*)&w->cardId);
+        ObtainCard(*(u16*)&w->cardId);
         if (gGameState.flags & 8) {
-            _08085D04(gGameState.world);
+            InitRikuDeckForWorld(gGameState.world);
         }
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08099A18);
-        WorldToScreen(&x, &y, w->unk_A8, w->unk_AC, w->unk_B0);
-        w->unk_A8 = x << 8;
-        w->unk_AC = y << 8;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeFlight);
+        WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
+        w->posX = x << 8;
+        w->posY = y << 8;
         ColliderSetDisabled(&w->collider, 1);
-        w->unk_EB = 16;
+        w->steps = 16;
         w->priority = 50;
-        func_080999A4(w);
+        AimBossPrizeAtCenter(w);
     }
     TaskPoolUpdate(&w->tasks);
     return 1;
@@ -640,23 +640,23 @@ void PrizeBoss_2(BossPrizeWork* w) {
     CardDef* def;
     s16 v;
 
-    pal = w->unk_ED == 0 ? GetBattleSpritePriorityFlags(w->unk_AC) : 0;
-    affine = AllocObjAffine(w->unk_E6, w->unk_D0, w->unk_D2, 1);
+    pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;
+    affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     def = &gCardDefs[w->cardId];
     DrawSprite(w->x, (u16)w->y - 8, def->gfx, w->tiles, w->palette, affine, pal,
                (u16)(w->priority + 1));
-    back = &gUnk_08F709B0[w->stat.unk_0E];
+    back = &gCardBacks[w->stat.category];
     DrawSprite(w->x, (u16)w->y - 8, back->gfx, w->tiles2, w->palette2, affine, pal,
                w->priority);
-    gfx = gUnk_09EE981C[w->stat.unk_04];
+    gfx = gUnk_09EE981C[w->stat.value];
 
-    if (def->unk_2A != 3) {
+    if (def->category != 3) {
         DrawSprite(w->x, (u16)w->y - 8, gfx, w->tiles4, w->palette2, affine, pal,
                    (u16)(w->priority - 1));
     }
 
-    if (w->unk_ED == 0) {
-        v = 204 - ((w->unk_B4 - w->unk_B0) >> 7);
+    if (w->collected == 0) {
+        v = 204 - ((w->groundZ - w->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
@@ -685,20 +685,20 @@ void PrizeBoss_3(BossPrizeWork* w) {
     gBtlWork->prizeCount--;
 }
 
-void func_08099928(BossPrizeWork* w) {
-    w->unk_D0 = (-gSineTable[((w->unk_E9 + 0x80) & 0xFF) + 0x40] * w->unk_E2) >> 8;
-    w->unk_D2 = (-gSineTable[((w->unk_E8 + 0x80) & 0xFF) + 0x40] * w->unk_E2) >> 8;
+void UpdateBossPrizeScale(BossPrizeWork* w) {
+    w->scaleX = (-gSineTable[((w->flipAngleX + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
+    w->scaleY = (-gSineTable[((w->flipAngleY + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
 
-    if ((u16)(w->unk_D0 + 2) <= 4) {
-        w->unk_D0 = 2;
+    if ((u16)(w->scaleX + 2) <= 4) {
+        w->scaleX = 2;
     }
 
-    if ((u16)(w->unk_D2 + 2) <= 4) {
-        w->unk_D2 = 2;
+    if ((u16)(w->scaleY + 2) <= 4) {
+        w->scaleY = 2;
     }
 }
 
-void func_080999A4(BossPrizeWork* w) {
+void AimBossPrizeAtCenter(BossPrizeWork* w) {
     s16 x;
     s16 y;
     s32 dx;
@@ -709,16 +709,16 @@ void func_080999A4(BossPrizeWork* w) {
     WorldToScreen(&x, &y, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
     tx = 0x7800;
     ty = 0x5000;
-    dx = tx - w->unk_A8;
-    dy = ty - w->unk_AC;
-    w->unk_CC = NormalizeVector2D8(&dx, &dy);
-    w->unk_C4 = -dx;
-    w->unk_C8 = -dy;
-    w->unk_C0 = 0x300;
-    w->unk_BC = 2;
+    dx = tx - w->posX;
+    dy = ty - w->posY;
+    w->distance = NormalizeVector2D8(&dx, &dy);
+    w->dirX = -dx;
+    w->dirY = -dy;
+    w->speed = 0x300;
+    w->vz = 2;
 }
 
-u8 func_08099A18(BossPrizeWork* w, void* a) {
+u8 UpdateBossPrizeFlight(BossPrizeWork* w, void* a) {
     s32 dx;
     s32 dy;
     u8 z;
@@ -728,17 +728,17 @@ u8 func_08099A18(BossPrizeWork* w, void* a) {
     s16* q1;
     s16* q2;
 
-    if (w->unk_C0 < 0) {
-        dx = 0x7800 - w->unk_A8;
-        dy = 0x5000 - w->unk_AC;
+    if (w->speed < 0) {
+        dx = 0x7800 - w->posX;
+        dy = 0x5000 - w->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->unk_C4 = -dx;
-        w->unk_C8 = -dy;
+        w->dirX = -dx;
+        w->dirY = -dy;
 
-        if (w->unk_CC <= 0x7FF) {
-            w->unk_EB = 0;
-            w->unk_E6 = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_08099B60);
+        if (w->distance <= 0x7FF) {
+            w->steps = 0;
+            w->rotation = 0;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShow);
 #ifdef VERSION_EU
             CreateCardNameDisplay(&w->tasks, eu_0805E924(gCardDefs[w->cardId].name));
 #else
@@ -747,71 +747,71 @@ u8 func_08099A18(BossPrizeWork* w, void* a) {
         }
     }
 
-    w->unk_A8 += (w->unk_C4 * w->unk_C0) >> 8;
-    w->unk_AC += (w->unk_C8 * w->unk_C0) >> 8;
-    t = w->unk_E6 + 32;
+    w->posX += (w->dirX * w->speed) >> 8;
+    w->posY += (w->dirY * w->speed) >> 8;
+    t = w->rotation + 32;
     z = 0;
-    w->unk_E6 = t;
-    w->unk_E8 += (64 - w->unk_E8) >> 4;
-    w->unk_E9 = z;
-    w->unk_CC = VectorLength2D(0x7800 - w->unk_A8, 0x5000 - w->unk_AC);
-    w->unk_C0 -= w->unk_BC;
-    w->unk_BC += 2;
+    w->rotation = t;
+    w->flipAngleY += (64 - w->flipAngleY) >> 4;
+    w->flipAngleX = z;
+    w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
+    w->speed -= w->vz;
+    w->vz += 2;
 
-    if (w->unk_E2 <= 0xFF) {
-        w->unk_E2 += 3;
+    if (w->scale <= 0xFF) {
+        w->scale += 3;
     }
 
-    x = w->unk_A8 >> 8;
+    x = w->posX >> 8;
     q1 = &w->x;
     *q1 = x;
-    y = w->unk_AC >> 8;
+    y = w->posY >> 8;
     q2 = &w->y;
     *q2 = y;
-    func_08099928(w);
+    UpdateBossPrizeScale(w);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-u8 func_08099B60(BossPrizeWork* w, void* a) {
+u8 UpdateBossPrizeShow(BossPrizeWork* w, void* a) {
     s32 v;
     u16 t;
     s32 c;
 
-    v = w->unk_E6 << 8;
-    ApproachValue((s32*)&w->unk_E8, 0, w->unk_EB);
-    ApproachValue(&v, 0, w->unk_EB);
-    ApproachValue(&w->unk_A8, 0x7800, w->unk_EB);
-    ApproachValue(&w->unk_AC, 0x5800, w->unk_EB);
-    w->unk_E6 = v >> 8;
+    v = w->rotation << 8;
+    ApproachValue((s32*)&w->flipAngleY, 0, w->steps);
+    ApproachValue(&v, 0, w->steps);
+    ApproachValue(&w->posX, 0x7800, w->steps);
+    ApproachValue(&w->posY, 0x5800, w->steps);
+    w->rotation = v >> 8;
 
-    if (w->unk_EB != 0) {
-        w->unk_EB--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
-    t = w->unk_E2;
+    t = w->scale;
 
     if ((s16)t <= 0xFF) {
-        w->unk_E2 = t + 2;
+        w->scale = t + 2;
     } else {
         c = 0x100;
-        w->unk_E2 = c;
+        w->scale = c;
     }
 
-    w->x = w->unk_A8 >> 8;
-    w->y = w->unk_AC >> 8;
-    func_08099928(w);
-    w->unk_EC++;
+    w->x = w->posX >> 8;
+    w->y = w->posY >> 8;
+    UpdateBossPrizeScale(w);
+    w->holdTimer++;
 
     if ((u32)w->cardId > 0x1C2) {
-        if (w->unk_EC == 120) {
-            w->unk_EC = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_08099C4C);
+        if (w->holdTimer == 120) {
+            w->holdTimer = 0;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShrink);
         }
     } else {
-        if (w->unk_EC == 30) {
-            w->unk_EC = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_08099C4C);
+        if (w->holdTimer == 30) {
+            w->holdTimer = 0;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShrink);
         }
     }
 
@@ -819,15 +819,15 @@ u8 func_08099B60(BossPrizeWork* w, void* a) {
     return 1;
 }
 
-u8 func_08099C4C(BossPrizeWork* w) {
-    w->unk_E6 += 32;
+u8 UpdateBossPrizeShrink(BossPrizeWork* w) {
+    w->rotation += 32;
     WorldToScreen(&w->x3, &w->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
     w->x += (w->x3 - w->x) >> 3;
     w->y += (w->y3 - w->y) >> 3;
-    w->unk_D0 -= 10;
-    w->unk_D2 -= 10;
+    w->scaleX -= 10;
+    w->scaleY -= 10;
 
-    if (w->unk_D0 <= 10) {
+    if (w->scaleX <= 10) {
         return 0;
     }
 
@@ -835,38 +835,38 @@ u8 func_08099C4C(BossPrizeWork* w) {
     return 1;
 }
 
-void func_08099CDC(BossPrizeWork* w) {
+void SpawnBossPrizeCardEffects(BossPrizeWork* w) {
     CardEffectArgs args;
 
-    if (w->unk_ED == 0) {
-        if (w->unk_EF == 8) {
-            if (w->unk_EE <= 3) {
-                args.unk_00 = w->unk_A8;
-                args.unk_04 = w->unk_AC;
-                args.unk_08 = w->unk_B0;
-                args.unk_0C = w->unk_ED;
-                args.count = &w->unk_EE;
+    if (w->collected == 0) {
+        if (w->effectTimer == 8) {
+            if (w->effectCount <= 3) {
+                args.x = w->posX;
+                args.y = w->posY;
+                args.z = w->posZ;
+                args.screenSpace = w->collected;
+                args.count = &w->effectCount;
                 TaskCreate(&w->tasks, &gTaskDescCardEFFECT, &args);
             }
 
-            w->unk_EF = 0;
+            w->effectTimer = 0;
         } else {
-            w->unk_EF++;
+            w->effectTimer++;
         }
     } else {
-        if (w->unk_EF == 8) {
-            if (w->unk_EE <= 7) {
-                args.unk_00 = w->unk_A8;
-                args.unk_04 = w->unk_AC;
-                args.unk_08 = w->unk_B0;
-                args.unk_0C = w->unk_ED;
-                args.count = &w->unk_EE;
+        if (w->effectTimer == 8) {
+            if (w->effectCount <= 7) {
+                args.x = w->posX;
+                args.y = w->posY;
+                args.z = w->posZ;
+                args.screenSpace = w->collected;
+                args.count = &w->effectCount;
                 TaskCreate(&w->tasks, &gTaskDescCardEFFECT, &args);
             }
 
-            w->unk_EF = 0;
+            w->effectTimer = 0;
         } else {
-            w->unk_EF++;
+            w->effectTimer++;
         }
     }
 }
@@ -874,14 +874,14 @@ void func_08099CDC(BossPrizeWork* w) {
 void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
     w->args = *a;
 
-    if (w->args.unk_0C == 0) {
-        w->unk_24 = a->unk_00 + ((GetRandom() % 9 - 4) << 8);
-        w->unk_28 = a->unk_04;
-        w->unk_2C = a->unk_08 - 0x800;
+    if (w->args.screenSpace == 0) {
+        w->posX = a->x + ((GetRandom() % 9 - 4) << 8);
+        w->posY = a->y;
+        w->posZ = a->z - 0x800;
     } else {
-        w->unk_24 = a->unk_00 + ((GetRandom() % 33 - 16) << 8);
-        w->unk_28 = a->unk_04 - 0x1000;
-        w->unk_2C = 0;
+        w->posX = a->x + ((GetRandom() % 33 - 16) << 8);
+        w->posY = a->y - 0x1000;
+        w->posZ = 0;
     }
 
     w->tiles = AllocObjTiles(0x80, 0);
@@ -896,13 +896,13 @@ void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
 u8 Card_EFFECT_1(CardEffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->args.unk_0C == 0) {
-        WorldToScreen(&w->x, &w->y, w->unk_24, w->unk_28, w->unk_2C);
-        w->unk_2C -= 0x100;
+    if (w->args.screenSpace == 0) {
+        WorldToScreen(&w->x, &w->y, w->posX, w->posY, w->posZ);
+        w->posZ -= 0x100;
     } else {
-        w->x = w->unk_24 >> 8;
-        w->y = w->unk_28 >> 8;
-        w->unk_28 -= 0x100;
+        w->x = w->posX >> 8;
+        w->y = w->posY >> 8;
+        w->posY -= 0x100;
     }
 
     if (AnimIsFinished(&w->anim)) {
@@ -932,15 +932,15 @@ void scrollbar_0(ScrollBarWork* w, u16* args) {
     w->unk_08 = args[0];
     w->unk_0A = args[1];
     w->unk_0C = args[2];
-    w->unk_10 = args[3];
-    w->unk_12 = args[4];
-    w->unk_16 = 1;
+    w->position = args[3];
+    w->remaining = args[4];
+    w->active = 1;
     w->unk_0E = 0;
     w->unk_17 = 0;
 }
 
 u8 scrollbar_1(ScrollBarWork* w) {
-    return w->unk_16;
+    return w->active;
 }
 void scrollbar_2(void) {
 }
@@ -948,39 +948,39 @@ void scrollbar_3(void) {
 }
 void ScrollbarRequestClose(ScrollBarWork* w) {
     if (w != 0) {
-        w->unk_16 = 0;
+        w->active = 0;
     }
 }
 void ScrollbarAdvance(ScrollBarWork* w) {
     if (w != 0) {
-        if (w->unk_12 != 0) {
-            w->unk_10++;
-            w->unk_12--;
+        if (w->remaining != 0) {
+            w->position++;
+            w->remaining--;
         } else {
-            w->unk_12 = w->unk_14 - 1;
-            w->unk_10 = 0;
+            w->remaining = w->count - 1;
+            w->position = 0;
         }
     }
 }
 void ScrollbarRetreat(ScrollBarWork* w) {
     if (w != 0) {
-        if (w->unk_10 != 0) {
-            w->unk_10--;
-            w->unk_12++;
+        if (w->position != 0) {
+            w->position--;
+            w->remaining++;
         } else {
-            w->unk_10 = w->unk_14 - 1;
-            w->unk_12 = 0;
+            w->position = w->count - 1;
+            w->remaining = 0;
         }
     }
 }
-void func_08099FC8(ScrollBarWork* w) {
+void ScrollbarDecrementCount(ScrollBarWork* w) {
     if (w != 0) {
-        w->unk_14--;
+        w->count--;
     }
 }
-void func_08099FD8(ScrollBarWork* w) {
+void ScrollbarIncrementCount(ScrollBarWork* w) {
     if (w != 0) {
-        w->unk_14++;
+        w->count++;
     }
 }
 void func_08099FE8(ScrollBarWork* w, u16 b, u8 c) {
@@ -1000,7 +1000,7 @@ ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
     return TaskCreate(pool, &gTaskDescScrollbar, args)->work;
 }
 
-void* gUnk_09EE7698[4] = {
+void* gReloadChildTiles[4] = {
     gUnk_090994A4,
     gUnk_0909937C,
     gUnk_09099410,
@@ -1016,14 +1016,14 @@ TaskDesc gTaskDescReloadChildren = {
     sizeof(ReloadChildWork),
 };
 
-void* gUnk_09EE76C0[4] = {
+void* gRevCountTileSources[4] = {
     gUnk_0909D2AC,
     gUnk_0909D2AC,
     gUnk_0909D2AC,
     gUnk_0909D2AC,
 };
 
-void** gUnk_09EE76D0[4] = {
+void** gRevCountSprites[4] = {
     gUnk_09EEA5C4,
     gUnk_09EEA5C4,
     gUnk_09EEA5C4,
@@ -1047,19 +1047,19 @@ TaskDesc gTaskDescREVCOUNT = {
     sizeof(RevCountWork),
 };
 
-void* gUnk_09EE7708[3] = {
+void* gReloadTiles[3] = {
     gUnk_0909885E,
     gUnk_09098E0E,
     gUnk_09098B36,
 };
 
-AnimHeader** gUnk_09EE7714[3] = {
+AnimHeader** gReloadAnims[3] = {
     gUnk_09EEA304,
     gUnk_09EEA32C,
     gUnk_09EEA318,
 };
 
-void** gUnk_09EE7720[3] = {
+void** gReloadFrames[3] = {
     gUnk_09EEA2F4,
     gUnk_09EEA31C,
     gUnk_09EEA308,

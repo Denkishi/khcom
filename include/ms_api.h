@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-void func_08109620(void);
-void func_0810962C(void* a);
-void func_08109638(void* a);
+void ClearMoogleShopFlags(void);
+void SaveMoogleShopFlags(void* a);
+void LoadMoogleShopFlags(void* a);
 
 #endif

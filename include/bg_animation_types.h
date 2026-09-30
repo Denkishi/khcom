@@ -15,8 +15,8 @@ typedef struct BgAnimationDef {
     void* palette;
     u16 paletteSize;
     u16 tilesPerFrame;
-    u16 unk_10;
-    u16 unk_12;
+    u16 originX;
+    u16 originY;
     u16 frameCount;
     u16 frameDuration;
 } BgAnimationDef;

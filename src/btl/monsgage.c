@@ -66,110 +66,110 @@ void task_monsgage_0(MonsgageWork* work) {
     work->tiles = AllocObjTiles(0x200, gUnk_08B255B4);
     work->tiles2 = AllocObjTiles(0x80, gUnk_08B255B4);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    work->unk_10 = 0;
-    work->unk_0C = 0;
+    work->shownValue = 0;
+    work->value = 0;
     work->gfx = gUnk_08B2556C;
     work->gfx2 = gUnk_08B2557C;
-    work->unk_1C = 0;
+    work->timer = 0;
     work->state = 0;
-    work->unk_24 = 1;
+    work->visible = 1;
 }
 
 s32 task_monsgage_1(MonsgageWork* work) {
-    if (gBtlWork->unk_0A0 != 0) {
-        if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase != 0) {
+        if (gBtlWork->phase == 4) {
             return 0;
         }
 
         switch (work->state) {
         case 0:
-            if (work->unk_1C == 0) {
-                work->unk_24 = 1;
+            if (work->timer == 0) {
+                work->visible = 1;
                 work->gfx2 = gUnk_08B2557C;
             }
 
 #ifdef VERSION_EU
             if (gBtlWork->flags & 0x10000) {
                 gBtlWork->flags &= ~0x10000;
-                work->unk_0C += 20;
-                if (work->unk_0C > 255) {
-                    work->unk_0C = 256;
+                work->value += 20;
+                if (work->value > 255) {
+                    work->value = 256;
                     work->state = 2;
-                    work->unk_1C = 0;
+                    work->timer = 0;
                     break;
                 }
-            } else if (work->unk_1C > 120) {
+            } else if (work->timer > 120) {
                 work->state = 1;
-                work->unk_1C = 0;
+                work->timer = 0;
                 break;
             }
-            work->unk_1C++;
+            work->timer++;
 #else
-            if (work->unk_1C > 120) {
+            if (work->timer > 120) {
                 work->state = 1;
-                work->unk_1C = 0;
+                work->timer = 0;
             } else {
-                work->unk_1C++;
+                work->timer++;
             }
 #endif
             break;
         case 1:
-            if (work->unk_1C == 0) {
+            if (work->timer == 0) {
                 work->gfx2 = gUnk_08B25586;
             }
 
-            if (work->unk_1C % 8 < 4) {
-                work->unk_24 = 1;
+            if (work->timer % 8 < 4) {
+                work->visible = 1;
             } else {
-                work->unk_24 = 0;
+                work->visible = 0;
             }
 
-            if ((work->unk_1C % 4) == 0) {
-                work->unk_0C--;
-                if (work->unk_0C < 0) {
-                    work->unk_0C = 0;
+            if ((work->timer % 4) == 0) {
+                work->value--;
+                if (work->value < 0) {
+                    work->value = 0;
                 }
             }
 
             if (gBtlWork->flags & 0x10000) {
                 gBtlWork->flags &= ~0x10000;
-                work->unk_1C = 0;
+                work->timer = 0;
 #ifdef VERSION_EU
-                work->unk_0C += 20;
+                work->value += 20;
 #else
-                work->unk_0C += 25;
+                work->value += 25;
 #endif
-                if (work->unk_0C <= 255) {
+                if (work->value <= 255) {
                     work->state = 0;
                 } else {
-                    work->unk_0C = 256;
+                    work->value = 256;
                     work->state = 2;
                 }
             } else {
-                work->unk_1C++;
+                work->timer++;
             }
             break;
         case 2:
-            if (work->unk_1C == 0) {
+            if (work->timer == 0) {
                 work->gfx2 = gUnk_08B25590;
                 work->gfx = gUnk_08B2559A;
                 gBtlWork->flags |= 0x0100000000000000;
                 gBtlWork->flags |= 0x100000;
             }
 
-            if (work->unk_1C % 8 < 4) {
-                work->unk_24 = 1;
+            if (work->timer % 8 < 4) {
+                work->visible = 1;
             } else {
-                work->unk_24 = 0;
+                work->visible = 0;
             }
 
-            if (work->unk_1C > 99 && gBtlWork->unk_0EE == 0) {
+            if (work->timer > 99 && gBtlWork->enemyCount == 0) {
                 gBtlWork->flags |= 0x200000000;
             }
-            work->unk_1C++;
+            work->timer++;
             break;
         }
-        work->unk_10 += (work->unk_0C - work->unk_10) >> 2;
+        work->shownValue += (work->value - work->shownValue) >> 2;
     }
     return 1;
 }
@@ -177,15 +177,15 @@ s32 task_monsgage_1(MonsgageWork* work) {
 void task_monsgage_2(MonsgageWork* work) {
     ObjAffine* affine;
 
-    if (gBtlWork->unk_0A0 != 0) {
+    if (gBtlWork->phase != 0) {
         DrawSprite(172, 12, work->gfx, work->tiles, work->palette, 0, 0x410, 3);
 
-        if (work->unk_24 != 0) {
-            if (work->unk_10 * 2 > 4) {
-                if (work->unk_10 * 2 > 256) {
-                    affine = AllocObjAffine(0, work->unk_10 * 2, 256, 1);
+        if (work->visible != 0) {
+            if (work->shownValue * 2 > 4) {
+                if (work->shownValue * 2 > 256) {
+                    affine = AllocObjAffine(0, work->shownValue * 2, 256, 1);
                 } else {
-                    affine = AllocObjAffine(0, work->unk_10 * 2, 256, 0);
+                    affine = AllocObjAffine(0, work->shownValue * 2, 256, 0);
                 }
                 DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, 0x410, 2);
             }

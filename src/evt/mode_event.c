@@ -2,9 +2,9 @@
 
 
 TaskPool gEventTaskPool;
-u8 gUnk_02034A74;
-u32 gUnk_02034A78;
-u8 gUnk_02034A7C;
+u8 gEventPaused;
+u32 gEventId;
+u8 gEventEndStep;
 
 #include "msg.h"
 #include "card_ids.h"
@@ -14,14 +14,14 @@ void Event_0(s32 arg) {
     EventBackgroundDef* e;
 
     gEventState = EwramAlloc(sizeof(EventState));
-    e = gUnk_09EE3CA0[arg & 0x7FFF];
+    e = gEventBackgroundDefs[arg & 0x7FFF];
     gBldCnt = 0;
     gBldAlpha = 0;
-    gUnk_02034A78 = arg;
-    gUnk_02034A74 = 0;
+    gEventId = arg;
+    gEventPaused = 0;
 
     if (e != 0) {
-        if (e->unk_24 != 0) {
+        if (e->isAffine != 0) {
             SetBgMode1();
             SetupBg(0, 3, 31, 14);
             SetupBg(1, 0, 16, 0);
@@ -60,8 +60,8 @@ void Event_0(s32 arg) {
         DisableBg(2);
     }
 
-    cfg.unk_00 = arg;
-    gEventState->unk_74 = arg & 0x7FFF;
+    cfg.eventId = arg;
+    gEventState->eventId = arg & 0x7FFF;
 
     if (arg & 0x8000) {
         cfg.unk_08 = 0;
@@ -69,21 +69,21 @@ void Event_0(s32 arg) {
         cfg.unk_08 = 1;
     }
 
-    if (gUnk_09EE3FB4[gUnk_02034A78 & 0x8000]->keyframes->unk_14 & 0x80) {
+    if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & 0x80) {
         FadeStartIn(1, 999);
     }
 
     TaskPoolInit(&gEventTaskPool, 2);
     TaskCreate(&gEventTaskPool, &gTaskDescEventSeq, &cfg);
-    func_080A42B4();
-    gUnk_02034A7C = 0;
+    ResetMessageWindowFlags();
+    gEventEndStep = 0;
 }
-void func_0806119C(void) {
+void EventDebugUpdate(void) {
     if (gEventState == 0) {
         ModeRequest(&gModeEventselect, 0);
     }
 
-    if (gUnk_02034A74 == 0) {
+    if (gEventPaused == 0) {
         TaskPoolUpdate(&gEventTaskPool);
     } else if (GetKeysRepeat() & SELECT_BUTTON) {
         TaskPoolUpdate(&gEventTaskPool);
@@ -91,57 +91,57 @@ void func_0806119C(void) {
 
     TaskPoolDraw(&gEventTaskPool);
 
-    if (gEventState->unk_7A == 0) {
-        if (gUnk_02034A7C == 0) {
-            func_08061824();
-            gUnk_02034A7C = 1;
+    if (gEventState->running == 0) {
+        if (gEventEndStep == 0) {
+            ShowEventEndMessage();
+            gEventEndStep = 1;
         }
 
-        if (gUnk_02034A7C == 1) {
-            if (func_080A42C8() == 0) {
+        if (gEventEndStep == 1) {
+            if (IsMessageWindowOpen() == 0) {
                 ModeRequest(&gModeEventselect, 0);
             }
         }
     }
 
     if (GetKeysPressed() & START_BUTTON) {
-        gUnk_02034A74 = 0;
+        gEventPaused = 0;
     }
 }
 
-void func_08061248(void) {
-    EventSequenceDef* p = gUnk_09EE3FB4[gUnk_02034A78];
+void EventUpdate(void) {
+    EventSequenceDef* p = gEventSequenceDefs[gEventId];
     UpdatePlayTime();
     TaskPoolUpdate(&gEventTaskPool);
     TaskPoolDraw(&gEventTaskPool);
-    if (gEventState->unk_7A != 0) {
+    if (gEventState->running != 0) {
         return;
     }
-    if (gUnk_02034A7C == 0) {
-        func_08061824();
-        gUnk_02034A7C = 1;
+    if (gEventEndStep == 0) {
+        ShowEventEndMessage();
+        gEventEndStep = 1;
     }
-    if (gUnk_02034A7C != 1) {
+    if (gEventEndStep != 1) {
         return;
     }
-    if (func_080A42C8() != 0) {
+    if (IsMessageWindowOpen() != 0) {
         return;
     }
     func_08062D3C();
-    if (func_080A42D4() == 1) {
+    if (IsMessageWindowAnswerYes() == 1) {
         func_0806250C();
-        func_08062CE4();
+        SaveAfterEvent();
         return;
     }
     func_08061FC8();
     func_0806250C();
     func_080629F8();
     func_08062D20();
-    if (gEventState->unk_85 != 0) {
-        if (gEventState->unk_84 == 0) {
+    if (gEventState->askedYesNo != 0) {
+        if (gEventState->answerYes == 0) {
             if (func_080629CC() == 0) {
-                func_080DF380();
-                func_080E04EC();
+                AdvanceFloorStory();
+                RequestMapMode();
             }
         } else {
             func_0806297C();
@@ -150,19 +150,19 @@ void func_08061248(void) {
     }
     if (p->unk_1A != 0) {
 #ifdef VERSION_EU
-        if (gUnk_02034A78 == 148) {
+        if (gEventId == 148) {
 #else
-        if (gUnk_02034A78 == 150) {
+        if (gEventId == 150) {
 #endif
             ModeRequest(&gModeWorldselect, 0);
         } else {
-            func_080DF380();
-            func_080E04EC();
+            AdvanceFloorStory();
+            RequestMapMode();
         }
         return;
     }
-    if (p->unk_22 != 0xFFFF) {
-        switch (p->unk_22) {
+    if (p->nextEvent != 0xFFFF) {
+        switch (p->nextEvent) {
         case 12:
         case 14:
         case 17:
@@ -195,45 +195,45 @@ void func_08061248(void) {
         case 184:
         case 191:
 #endif
-            func_080DF380();
-            func_080E04EC();
+            AdvanceFloorStory();
+            RequestMapMode();
             break;
         case 61:
-            func_080DF480();
-            func_080E04EC();
+            AdvanceToExitHall();
+            RequestMapMode();
             break;
         default:
-            ModeRequest(&gUnk_09EE274C, p->unk_22);
+            ModeRequest(&gModeEvent, p->nextEvent);
             break;
         }
         return;
     }
-    if (p->unk_1B != 0) {
-        if (p->unk_20 == 122) {
-            gGameState.unk_00D = 7;
-        } else if (p->unk_20 == 120) {
-            gGameState.unk_00D = 1;
-        } else if (p->unk_20 == 121) {
-            gGameState.unk_00D = 5;
-        } else if (p->unk_20 == 123) {
-            gGameState.unk_00D = 3;
-        } else if (p->unk_20 == 124) {
-            gGameState.unk_00D = 3;
+    if (p->startsBattle != 0) {
+        if (p->battleId == 122) {
+            gGameState.battleStage = 7;
+        } else if (p->battleId == 120) {
+            gGameState.battleStage = 1;
+        } else if (p->battleId == 121) {
+            gGameState.battleStage = 5;
+        } else if (p->battleId == 123) {
+            gGameState.battleStage = 3;
+        } else if (p->battleId == 124) {
+            gGameState.battleStage = 3;
         }
-        ModeRequest(&gModeBattle, p->unk_20);
+        ModeRequest(&gModeBattle, p->battleId);
         return;
     }
-    if (p->unk_1C != 0) {
+    if (p->toTitle != 0) {
         FadeStartOut(0, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
-    if (p->unk_1D != 0) {
+    if (p->toCopyright != 0) {
         ModeRequest(&gModeCopyright1, 0);
         return;
     }
     if (p->unk_1E != 0) {
-        func_080DF380();
+        AdvanceFloorStory();
         ModeRequest(&gModeMapFld, 0);
         return;
     }
@@ -249,7 +249,7 @@ void func_08061248(void) {
             ModeRequestHeapReset(&gModeMovie, 4);
             break;
         case 1:
-            gGameState.unk_180 = 512;
+            gGameState.availableWorlds = 512;
             ModeRequest(&gModeWorldselect, 0);
             break;
         case 10:
@@ -264,8 +264,8 @@ void func_08061248(void) {
         case 3:
         case 5:
         case 6:
-            func_080DF380();
-            func_080E04EC();
+            AdvanceFloorStory();
+            RequestMapMode();
             break;
         default:
             ModeRequest(&gModeDummy, p->unk_28);
@@ -274,14 +274,14 @@ void func_08061248(void) {
         return;
     }
     if (p->unk_2A != 0) {
-        func_080DF380();
-        func_080E04EC();
+        AdvanceFloorStory();
+        RequestMapMode();
     } else if (p->unk_2B != 255) {
-        func_080DF380();
-        func_080E04EC();
+        AdvanceFloorStory();
+        RequestMapMode();
     } else if (p->unk_2C != 255) {
         if (p->unk_2C == 0) {
-            func_080DF380();
+            AdvanceFloorStory();
             ModeRequest(&gModePooh, 0);
         } else if (p->unk_2C <= 6) {
             ModeRequest(&gModePooh, 1);
@@ -295,8 +295,8 @@ void Event_2(void) {
     gEventState = 0;
 }
 
-void func_0806180C(u16 a) {
-    ModeRequest(&gUnk_09EE274C, a);
+void RequestEventMode(u16 a) {
+    ModeRequest(&gModeEvent, a);
 }
 #ifdef VERSION_EU
 #define MSG_CODE(n) ((n) - 2)
@@ -304,10 +304,10 @@ void func_0806180C(u16 a) {
 #define MSG_CODE(n) (n)
 #endif
 
-void func_08061824(void) {
+void ShowEventEndMessage(void) {
     SetBackdropColor(0, 0, 0);
 
-    switch (gUnk_02034A78 & 0x7FFF) {
+    switch (gEventId & 0x7FFF) {
     case 41:
     case 49:
     case MSG_CODE(176):
@@ -549,168 +549,168 @@ void func_08061824(void) {
     }
 }
 void func_08061FC8(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 0:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 94:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 74:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 88:
-        gGameState.progression.unk_84 = 19;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
-        func_0800FB2C(62);
+        gGameState.progression.friendFlags = 19;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
+        LearnStock(62);
         break;
     case 93:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 107:
-        gGameState.progression.unk_84 = 7;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
-        func_0800FB2C(61);
+        gGameState.progression.friendFlags = 7;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
+        LearnStock(61);
         break;
     case 114:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 103:
-        gGameState.progression.unk_84 = 11;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
-        func_0800FB2C(63);
+        gGameState.progression.friendFlags = 11;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
+        LearnStock(63);
         break;
     case 106:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case MSG_CODE(131):
-        gGameState.progression.unk_84 = 67;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
-        func_0800FB2C(65);
+        gGameState.progression.friendFlags = 67;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
+        LearnStock(65);
         break;
     case MSG_CODE(133):
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 117:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 116:
     case 118:
-        gGameState.progression.unk_84 = 35;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
-        func_0800FB2C(64);
+        gGameState.progression.friendFlags = 35;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
+        LearnStock(64);
         break;
     case 119:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 120:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 44:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 59:
-        gGameState.progression.unk_84 = 3;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 3;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case 52:
     case MSG_CODE(149):
-        gGameState.progression.unk_84 = 0;
-        func_0800FB2C(57);
-        func_0800FB2C(59);
-        func_0800FB2C(60);
+        gGameState.progression.friendFlags = 0;
+        LearnStock(57);
+        LearnStock(59);
+        LearnStock(60);
         break;
     case MSG_CODE(155):
-        gGameState.progression.unk_84 = 128;
-        func_0800FB2C(69);
+        gGameState.progression.friendFlags = 128;
+        LearnStock(69);
         break;
     case MSG_CODE(174):
     case MSG_CODE(186):
-        gGameState.progression.unk_84 = 0;
+        gGameState.progression.friendFlags = 0;
         break;
     case MSG_CODE(185):
     case MSG_CODE(190):
-        gGameState.progression.unk_84 = 128;
+        gGameState.progression.friendFlags = 128;
         break;
     case MSG_CODE(156):
         gGameState.flags &= ~0x100;
-        func_0800FB2C(66);
-        func_0800FB2C(67);
-        func_0800FB2C(68);
+        LearnStock(66);
+        LearnStock(67);
+        LearnStock(68);
         break;
     }
 }
 void func_0806250C(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 0:
-        gGameState.unk_180 = 0x200;
+        gGameState.availableWorlds = 0x200;
         break;
     case 5:
-        func_08084458(CARD_ID(CARD_SIMBA, 6));
+        ObtainCard(CARD_ID(CARD_SIMBA, 6));
         break;
     case 11:
-        gGameState.unk_180 = 61;
+        gGameState.availableWorlds = 61;
         break;
     case 27:
-        gGameState.unk_180 = 0x4C2;
+        gGameState.availableWorlds = 0x4C2;
         break;
     case 41:
-        gGameState.unk_180 = 0x800;
+        gGameState.availableWorlds = 0x800;
         break;
     case 49:
-        gGameState.unk_180 = 256;
+        gGameState.availableWorlds = 256;
         break;
     case 60:
-        gGameState.unk_180 = 0x1000;
-        func_08084458(CARD_ID(CARD_OBLIVION, 6));
+        gGameState.availableWorlds = 0x1000;
+        ObtainCard(CARD_ID(CARD_OBLIVION, 6));
         break;
     case 57:
-        func_08084458(CARD_ID(CARD_OATHKEEPER, 4));
+        ObtainCard(CARD_ID(CARD_OATHKEEPER, 4));
         break;
     case 3:
     case 44:
@@ -757,124 +757,124 @@ void func_0806250C(void) {
         AddMapCard(241);
         break;
     case 114:
-        func_08084458(CARD_ID(CARD_GENIE, 6));
+        ObtainCard(CARD_ID(CARD_GENIE, 6));
         break;
     case 119:
-        func_08084458(CARD_ID(CARD_TINKER_BELL, 4));
+        ObtainCard(CARD_ID(CARD_TINKER_BELL, 4));
         break;
     case 126:
-        func_08084458(CARD_ID(CARD_CLOUD, 4));
+        ObtainCard(CARD_ID(CARD_CLOUD, 4));
         break;
     case MSG_CODE(137):
-        func_08084458(CARD_ID(CARD_SPELLBINDER, 4));
+        ObtainCard(CARD_ID(CARD_SPELLBINDER, 4));
         break;
     case MSG_CODE(139):
-        func_08084458(CARD_ID(CARD_ELIXIR, 1));
+        ObtainCard(CARD_ID(CARD_ELIXIR, 1));
         break;
     case MSG_CODE(143):
     case MSG_CODE(144):
-        func_08084458(CARD_ID(CARD_BAMBI, 5));
+        ObtainCard(CARD_ID(CARD_BAMBI, 5));
         break;
     case MSG_CODE(149):
-        gGameState.unk_180 = 128;
+        gGameState.availableWorlds = 128;
         break;
     case MSG_CODE(156):
-        gGameState.unk_180 = 593;
+        gGameState.availableWorlds = 593;
         break;
     case MSG_CODE(166):
-        gGameState.unk_180 = 46;
+        gGameState.availableWorlds = 46;
         break;
     case MSG_CODE(176):
-        gGameState.unk_180 = 256;
+        gGameState.availableWorlds = 256;
         break;
     case MSG_CODE(185):
-        gGameState.unk_180 = 0x800;
+        gGameState.availableWorlds = 0x800;
         break;
     case MSG_CODE(191):
-        gGameState.unk_180 = 0x1000;
+        gGameState.availableWorlds = 0x1000;
         break;
     }
 }
 void func_0806297C(void) {
-    EventSequenceDef* m = gUnk_09EE3FB4[gUnk_02034A78];
+    EventSequenceDef* m = gEventSequenceDefs[gEventId];
 
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 68:
-        ModeRequest(&gUnk_09EE274C, 69);
+        ModeRequest(&gModeEvent, 69);
         break;
     case 83:
     case 84:
-        gGameState.unk_00D = 5;
-        ModeRequest(&gModeBattle, m->unk_20);
+        gGameState.battleStage = 5;
+        ModeRequest(&gModeBattle, m->battleId);
         break;
     }
 }
 u8 func_080629CC(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 0x44:
     case 0x53:
     case 0x54:
-        func_080E04EC();
+        RequestMapMode();
         return 1;
     }
     return 0;
 }
 void func_080629F8(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 2:
-        func_0800FC14(0);
+        SetCardKindObtained(0);
         break;
     case MSG_CODE(136):
-        func_0800FB2C(41);
+        LearnStock(41);
         break;
     case MSG_CODE(140):
-        func_0800FB2C(40);
+        LearnStock(40);
         break;
     case MSG_CODE(141):
-        func_0800FB2C(50);
+        LearnStock(50);
         break;
     case MSG_CODE(142):
-        func_0800FB2C(43);
+        LearnStock(43);
         break;
     case 34:
-        func_0800FB2C(38);
+        LearnStock(38);
         break;
     case 88:
-        func_0800FB2C(42);
+        LearnStock(42);
         break;
     case 108:
-        func_0800FC14(1);
+        SetCardKindObtained(1);
         break;
     case 74:
-        func_0800FC14(5);
+        SetCardKindObtained(5);
         break;
     case 120:
-        func_0800FC14(8);
+        SetCardKindObtained(8);
         break;
     case 94:
-        func_0800FC14(10);
+        SetCardKindObtained(10);
         break;
     case 101:
-        func_0800FC14(2);
+        SetCardKindObtained(2);
         break;
     case 115:
-        func_0800FC14(4);
+        SetCardKindObtained(4);
         break;
     case MSG_CODE(129):
-        func_0800FC14(11);
+        SetCardKindObtained(11);
         break;
     case 87:
-        func_0800FC14(3);
+        SetCardKindObtained(3);
         break;
     case 59:
-        func_0800FC14(13);
+        SetCardKindObtained(13);
         break;
     case 61:
-        func_0800FB2C(8);
+        LearnStock(8);
         break;
     case 67:
-        func_0800FC14(15);
-        func_0800FC14(16);
+        SetCardKindObtained(15);
+        SetCardKindObtained(16);
         break;
     }
 }
@@ -884,8 +884,8 @@ void func_080629F8(void) {
 #define MSG_SAVE_ID_LO 0x8F
 #endif
 
-void func_08062CE4(void) {
-    switch (gUnk_02034A78) {
+void SaveAfterEvent(void) {
+    switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
     case MSG_SAVE_ID_LO + 2:
@@ -897,43 +897,43 @@ void func_08062CE4(void) {
         } else {
             SaveWriteFileLarge(0);
         }
-        func_080DF828();
+        EnterExitHall();
         break;
     }
 }
 void func_08062D20(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
     case MSG_SAVE_ID_LO + 2:
     case MSG_SAVE_ID_LO + 3:
     case MSG_SAVE_ID_LO + 4:
     case MSG_SAVE_ID_LO + 5:
-        func_080DF828();
+        EnterExitHall();
         break;
     }
 }
 void func_08062D3C(void) {
-    switch (gUnk_02034A78) {
+    switch (gEventId) {
     case 0x43:
-        func_0800FDD0(16);
+        SetJiminyFlag(16);
         break;
     case 0x3F:
-        func_0800FDD0(41);
+        SetJiminyFlag(41);
         break;
     }
 }
 
-Mode gUnk_09EE273C = {
+Mode gModeEventDebug = {
     "Event",
     Event_0,
-    func_0806119C,
+    EventDebugUpdate,
     Event_2,
 };
 
-Mode gUnk_09EE274C = {
+Mode gModeEvent = {
     "Event",
     Event_0,
-    func_08061248,
+    EventUpdate,
     Event_2,
 };

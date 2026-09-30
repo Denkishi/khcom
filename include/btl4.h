@@ -18,7 +18,7 @@ typedef struct BtlPopSrc {
     s32 y;
     s32 z;
     u8 unk_0C[0x06];
-    s16 unk_12;
+    s16 number;
 } BtlPopSrc;
 
 typedef struct BtlPopCbWork {
@@ -39,11 +39,11 @@ typedef struct BtlExpWork {
     void* gfx;
     void* gfx2[6];
     s16 timer;
-    u8 unk_3E;
+    u8 level;
     u8 unk_3F;
-    u16 unk_40;
+    u16 gainedExp;
     u8 unk_42[0x02];
-    u32 unk_44;
+    u32 lastExp;
     u32 state;
 } BtlExpWork;
 
@@ -55,8 +55,8 @@ typedef struct BtlVslockonWork {
 } BtlVslockonWork;
 
 typedef struct BtlHpothWork {
-    s32 unk_00;
-    u8 unk_04;
+    s32 hpRatio;
+    u8 firstUpdate;
     u8 unk_05[0x03];
     void* palette2;
     void* palette;
@@ -72,11 +72,11 @@ typedef struct BtlHpothWork {
     u8 unk_5C;
     u8 unk_5D;
     s16 timer;
-    s16 unk_60;
-    s16 unk_62;
-    s16 unk_64;
+    s16 prevHp;
+    s16 displayHp;
+    s16 gaugeSize;
     u8 unk_66[0x02];
-    u32 unk_68;
+    u32 gaugeMode;
 } BtlHpothWork;
 
 extern u8 gUnk_08B1D8BC[];
@@ -95,14 +95,14 @@ extern u8 gUnk_08B25EF0[];
 extern u8 gBStatesPalette[];
 extern u8 gUnk_096FAC64[];
 
-void func_080A41F0(void* a, u16 b);
+void CreatePersistentSysmsgwinTask(void* a, u16 b);
 
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src);
 s32 task_btl_pop_cb_1(BtlPopCbWork* work);
 void task_btl_pop_cb_2(BtlPopCbWork* work);
 void task_btl_pop_cb_3(BtlPopCbWork* work);
-void* func_0805CDC8(s32 digit, u8 leading);
-void func_0805CE60(BtlExpWork* work, u32 value);
+void* GetExpDigitGfx(s32 digit, u8 leading);
+void BtlExpSetNumber(BtlExpWork* work, u32 value);
 void task_btl_exp_0(BtlExpWork* work);
 s32 task_btl_exp_1(BtlExpWork* work);
 void task_btl_exp_2(BtlExpWork* work);

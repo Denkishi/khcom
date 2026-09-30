@@ -15,7 +15,7 @@ typedef struct CardMessageDef {
     s32 portraitId;
     s32 positionIndex;
     u16 expressionId;
-    u8 unk_0A;
+    u8 charDelay;
     u8 unk_0B;
     const CardMessageText* text;
     u16 flags;

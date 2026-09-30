@@ -5,27 +5,27 @@
 #include "sio_types.h"
 
 void SioReset(void);
-u32 func_08006ED4(u8* a, u16* b, u16 (*c)[2]);
-u32 func_0800702C(u8* a, u16* b, u16 (*c)[2]);
-void func_080078A4(void);
-u8 func_080078E8(void);
+u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]);
+u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]);
+void SioShutdown(void);
+u8 SioIsConnected(void);
 
-extern u8 gUnk_020397D0;
-extern s16 gUnk_020397D4;
-extern u16 gUnk_020397E0[4][2];
-extern u32 gUnk_020397F0;
-extern s32 (*gUnk_020397F8)(void);
-extern u8 gUnk_020397FC;
-extern u8 gUnk_02039800;
-extern s32 (*gUnk_02039804)(void);
-extern u16 gUnk_02039810[4][2];
+extern u8 gSioLastSendCount;
+extern s16 gSioErrorFrameCount;
+extern u16 gSioRecvFrame[4][2];
+extern u32 gSioErrorStatus;
+extern s32 (*gSioLinkRecvCallback)(void);
+extern u8 gSioPlayerCount;
+extern u8 gSioLastRecvCount;
+extern s32 (*gSioLinkSendCallback)(void);
+extern u16 gSioCommandRecv[4][2];
 extern u32 gSioStatus;
 extern u8 gUnk_02039824;
 extern u32 gSioPlayerId;
-extern u8 gUnk_0203982C;
+extern u8 gSioHandshakeRequest;
 extern SioWork gSioWork;
-extern u16 gUnk_02039B58[4];
-extern u8 gUnk_02039B60;
-extern u16 gUnk_02039B68[4];
+extern u16 gSioCommandSend[4];
+extern u8 gSioLinkResult;
+extern u16 gSioSendFrame[4];
 
 #endif

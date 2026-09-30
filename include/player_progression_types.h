@@ -12,17 +12,17 @@ typedef struct PlayerProgression {
     u32 nextExp;
     u8 level;
     u8 unk_11[0x03];
-    u64 unk_14;
-    u64 unk_1C;
-    u64 unk_24;
-    u64 unk_2C;
-    u64 unk_34;
-    u64 unk_3C[8];
+    u64 learnedStocks;
+    u64 learnedStocks2;
+    u64 newStocks;
+    u64 newStocks2;
+    u64 obtainedCardKinds;
+    u64 jiminyFlags[8];
     u32 mooglePoints;
-    u16 unk_80;
+    u16 levelMilestone;
     u16 unk_82;
-    u16 unk_84;
-    u16 unk_86;
+    u16 friendFlags;
+    u16 savedFriendFlags;
 } PlayerProgression;
 
 typedef char PlayerProgression_size[(sizeof(PlayerProgression) == 0x88) ? 1 : -1];

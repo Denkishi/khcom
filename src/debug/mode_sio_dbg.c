@@ -18,19 +18,19 @@ s8 gUnk_0203C3C4 EWRAM_COMMON(4);
 #endif
 u16 gUnk_0203C3C8 EWRAM_COMMON(4);
 u16 gUnk_0203C3CC EWRAM_COMMON(4);
-u16 gUnk_0203C3D0 EWRAM_COMMON(4);
+u16 gSioDbgCp EWRAM_COMMON(4);
 #ifdef VERSION_EU
 u16 gUnk_0203C3D4 EWRAM_COMMON(4);
-u16 gUnkEu_0203C9B4 EWRAM_COMMON(4);
-u16 gUnkEu_0203C9B8 EWRAM_COMMON(4);
-u16 gUnkEu_0203C9BC EWRAM_COMMON(4);
-u16 gUnkEu_0203C9C0 EWRAM_COMMON(4);
-u16 gUnkEu_0203C9C4 EWRAM_COMMON(4);
+u16 gSioDbgLevel1P EWRAM_COMMON(4);
+u16 gSioDbgLoseCount1P EWRAM_COMMON(4);
+u16 gSioDbgWinCount2P EWRAM_COMMON(4);
+u16 gSioDbgHp2P EWRAM_COMMON(4);
+u16 gSioDbgLevel2P EWRAM_COMMON(4);
 #else
 s8 gUnk_0203C3D4 EWRAM_COMMON(4);
 #endif
 
-const char* gUnk_09EF34F0[] = {
+const char* gSioDbgRowNames[] = {
 #ifdef VERSION_EU
     "\x82\x50\x82\x6f\x81\x40\x82\x6b\x82\x64\x82\x75\x82\x64\x82\x6b\x81\x40\x81\x40\x81\x40\x81\x46",
     "\x82\x50\x82\x6f\x81\x40\x82\x67\x82\x6f\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x46",
@@ -54,17 +54,17 @@ const char* gUnk_09EF34F0[] = {
 };
 
 #ifndef VERSION_EU
-const char* gUnk_09EF3504[] = {
+const char* gSioDbgModeNames[] = {
     "\x82\x60\x82\x6b\x82\x6b\x81\x40\x81\x40\x81\x40",
     "\x82\x6d\x82\x6e\x82\x71\x82\x6c\x82\x60\x82\x6b",
 };
 #endif
 
-const char gUnk_0961A9C8[] = "\x81\x84";
+const char gSioDbgCursorText[] = "\x81\x84";
 
-const char gUnk_0961A9CC[] = "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x82\x62\x82\x6e\x82\x6d\x82\x65\x82\x68\x82\x66";
+const char gSioDbgTitleText[] = "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x82\x62\x82\x6e\x82\x6d\x82\x65\x82\x68\x82\x66";
 
-const char gUnk_0961A9E8[] = "\x81\x40";
+const char gSioDbgCursorBlankText[] = "\x81\x40";
 
 Mode gModeSioDbgFlg = {
     "mode_sio_dbg_flg",
@@ -73,8 +73,8 @@ Mode gModeSioDbgFlg = {
     mode_sio_dbg_flg_2,
 };
 
-static s8 gUnk_02034CF4;
-static s8 gUnk_02034CF5;
+static s8 sSioDbgCursor;
+static s8 sSioDbgRowCount;
 
 void mode_sio_dbg_flg_0(s32 arg) {
 #ifdef VERSION_EU
@@ -86,132 +86,132 @@ void mode_sio_dbg_flg_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
-    func_0805FA8C(0, 0x5400, 0x500);
-    func_0805FA60(0, gWhitePalette, 0x20, 0x0F);
-    gUnk_02034CF4 = 0;
+    DebugTextInit(0, 0x5400, 0x500);
+    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    sSioDbgCursor = 0;
 #ifdef VERSION_EU
     zero = 0;
 #endif
-    func_0805FCB0(8, 0x24, 2, gUnk_0961A9C8);
+    DebugTextPrint(8, 0x24, 2, gSioDbgCursorText);
 #ifdef VERSION_EU
-    gUnk_02034CF5 = 10;
+    sSioDbgRowCount = 10;
 #else
-    gUnk_02034CF5 = 5;
+    sSioDbgRowCount = 5;
 #endif
-    func_0805FCB0(0x0C, 0x12, 2, gUnk_0961A9CC);
+    DebugTextPrint(0x0C, 0x12, 2, gSioDbgTitleText);
 
 #ifdef VERSION_EU
-    func_0805FCB0(0x14, 0x24, 2, gUnk_09EF34F0[0]);
-    func_0805FCB0(0x14, 0x2D, 2, gUnk_09EF34F0[1]);
-    func_0805FCB0(0x14, 0x36, 2, gUnk_09EF34F0[2]);
-    func_0805FCB0(0x14, 0x3F, 2, gUnk_09EF34F0[3]);
-    func_0805FCB0(0x14, 0x48, 2, gUnk_09EF34F0[4]);
-    func_0805FCB0(0x14, 0x5A, 2, gUnk_09EF34F0[5]);
-    func_0805FCB0(0x14, 0x63, 2, gUnk_09EF34F0[6]);
-    func_0805FCB0(0x14, 0x6C, 2, gUnk_09EF34F0[7]);
-    func_0805FCB0(0x14, 0x75, 2, gUnk_09EF34F0[8]);
-    func_0805FCB0(0x14, 0x7E, 2, gUnk_09EF34F0[9]);
-    gUnkEu_0203C9B4 = 1;
+    DebugTextPrint(0x14, 0x24, 2, gSioDbgRowNames[0]);
+    DebugTextPrint(0x14, 0x2D, 2, gSioDbgRowNames[1]);
+    DebugTextPrint(0x14, 0x36, 2, gSioDbgRowNames[2]);
+    DebugTextPrint(0x14, 0x3F, 2, gSioDbgRowNames[3]);
+    DebugTextPrint(0x14, 0x48, 2, gSioDbgRowNames[4]);
+    DebugTextPrint(0x14, 0x5A, 2, gSioDbgRowNames[5]);
+    DebugTextPrint(0x14, 0x63, 2, gSioDbgRowNames[6]);
+    DebugTextPrint(0x14, 0x6C, 2, gSioDbgRowNames[7]);
+    DebugTextPrint(0x14, 0x75, 2, gSioDbgRowNames[8]);
+    DebugTextPrint(0x14, 0x7E, 2, gSioDbgRowNames[9]);
+    gSioDbgLevel1P = 1;
     gUnk_0203C3C4 = 80;
-    gUnk_0203C3D0 = 275;
+    gSioDbgCp = 275;
     gUnk_0203C3CC = zero;
-    gUnkEu_0203C9B8 = zero;
-    gUnkEu_0203C9C4 = 1;
-    gUnkEu_0203C9C0 = 80;
+    gSioDbgLoseCount1P = zero;
+    gSioDbgLevel2P = 1;
+    gSioDbgHp2P = 80;
     gUnk_0203C3C8 = 275;
-    gUnkEu_0203C9BC = zero;
+    gSioDbgWinCount2P = zero;
     gUnk_0203C3D4 = zero;
-    func_0805FC04(0x78, 0x24, 2, gUnkEu_0203C9B4);
-    func_0805FC04(0x78, 0x2D, 2, gUnk_0203C3C4);
-    func_0805FC04(0x78, 0x36, 2, gUnk_0203C3D0);
-    func_0805FC04(0x78, 0x3F, 2, gUnk_0203C3CC);
-    func_0805FC04(0x78, 0x48, 2, gUnkEu_0203C9B8);
-    func_0805FC04(0x78, 0x5A, 2, gUnkEu_0203C9C4);
-    func_0805FC04(0x78, 0x63, 2, gUnkEu_0203C9C0);
-    func_0805FC04(0x78, 0x6C, 2, gUnk_0203C3C8);
-    func_0805FC04(0x78, 0x75, 2, gUnkEu_0203C9BC);
-    func_0805FC04(0x78, 0x7E, 2, gUnk_0203C3D4);
+    DebugTextPrintNumber(0x78, 0x24, 2, gSioDbgLevel1P);
+    DebugTextPrintNumber(0x78, 0x2D, 2, gUnk_0203C3C4);
+    DebugTextPrintNumber(0x78, 0x36, 2, gSioDbgCp);
+    DebugTextPrintNumber(0x78, 0x3F, 2, gUnk_0203C3CC);
+    DebugTextPrintNumber(0x78, 0x48, 2, gSioDbgLoseCount1P);
+    DebugTextPrintNumber(0x78, 0x5A, 2, gSioDbgLevel2P);
+    DebugTextPrintNumber(0x78, 0x63, 2, gSioDbgHp2P);
+    DebugTextPrintNumber(0x78, 0x6C, 2, gUnk_0203C3C8);
+    DebugTextPrintNumber(0x78, 0x75, 2, gSioDbgWinCount2P);
+    DebugTextPrintNumber(0x78, 0x7E, 2, gUnk_0203C3D4);
 #else
-    for (i = 0; i < gUnk_02034CF5; i++) {
-        func_0805FCB0(0x14, i * 9 + 0x24, 2, gUnk_09EF34F0[i]);
+    for (i = 0; i < sSioDbgRowCount; i++) {
+        DebugTextPrint(0x14, i * 9 + 0x24, 2, gSioDbgRowNames[i]);
     }
 
     gUnk_0203C3C8 = 50;
     gUnk_0203C3CC = 500;
-    gUnk_0203C3D0 = 500;
+    gSioDbgCp = 500;
     gUnk_0203C3C4 = 0;
     gUnk_0203C3D4 = 0;
-    func_0805FC04(0x64, 0x24, 2, gUnk_0203C3C8);
-    func_0805FC04(0x64, 0x2D, 2, gUnk_0203C3CC);
-    func_0805FC04(0x64, 0x36, 2, gUnk_0203C3D0);
-    func_0805FCB0(0x64, 0x3F, 2, gUnk_09EF3504[gUnk_0203C3C4]);
-    func_0805FCB0(0x64, 0x48, 2, gUnk_09EF3504[gUnk_0203C3D4]);
+    DebugTextPrintNumber(0x64, 0x24, 2, gUnk_0203C3C8);
+    DebugTextPrintNumber(0x64, 0x2D, 2, gUnk_0203C3CC);
+    DebugTextPrintNumber(0x64, 0x36, 2, gSioDbgCp);
+    DebugTextPrint(0x64, 0x3F, 2, gSioDbgModeNames[gUnk_0203C3C4]);
+    DebugTextPrint(0x64, 0x48, 2, gSioDbgModeNames[gUnk_0203C3D4]);
 #endif
 }
 
 void mode_sio_dbg_flg_1(void) {
     u8 prev;
 
-    prev = gUnk_02034CF4;
+    prev = sSioDbgCursor;
 
 #ifdef VERSION_EU
     if (GetKeysRepeat() & DPAD_UP) {
-        if (gUnk_02034CF4 == 0) {
-            gUnk_02034CF4 = 10;
-        } else if (gUnk_02034CF4 == 6) {
-            gUnk_02034CF4 = 4;
+        if (sSioDbgCursor == 0) {
+            sSioDbgCursor = 10;
+        } else if (sSioDbgCursor == 6) {
+            sSioDbgCursor = 4;
         } else {
-            gUnk_02034CF4--;
+            sSioDbgCursor--;
         }
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        if (gUnk_02034CF4 == 10) {
-            gUnk_02034CF4 = 0;
-        } else if (gUnk_02034CF4 == 4) {
-            gUnk_02034CF4 = 6;
+        if (sSioDbgCursor == 10) {
+            sSioDbgCursor = 0;
+        } else if (sSioDbgCursor == 4) {
+            sSioDbgCursor = 6;
         } else {
-            gUnk_02034CF4++;
+            sSioDbgCursor++;
         }
     }
 #else
     if (GetKeysRepeat() & DPAD_UP) {
-        gUnk_02034CF4--;
+        sSioDbgCursor--;
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        gUnk_02034CF4++;
+        sSioDbgCursor++;
     }
 #endif
 
-    if (prev != gUnk_02034CF4) {
+    if (prev != sSioDbgCursor) {
 #ifndef VERSION_EU
-        if (gUnk_02034CF4 < 0) {
-            gUnk_02034CF4 = gUnk_02034CF5 - 1;
-        } else if (gUnk_02034CF4 >= gUnk_02034CF5) {
-            gUnk_02034CF4 = 0;
+        if (sSioDbgCursor < 0) {
+            sSioDbgCursor = sSioDbgRowCount - 1;
+        } else if (sSioDbgCursor >= sSioDbgRowCount) {
+            sSioDbgCursor = 0;
         }
 #endif
 
-        func_0805FCB0(8, (prev + 4) * 9, 2, gUnk_0961A9E8);
-        func_0805FCB0(8, (gUnk_02034CF4 + 4) * 9, 2, gUnk_0961A9C8);
+        DebugTextPrint(8, (prev + 4) * 9, 2, gSioDbgCursorBlankText);
+        DebugTextPrint(8, (sSioDbgCursor + 4) * 9, 2, gSioDbgCursorText);
     }
 
-    switch (gUnk_02034CF4) {
+    switch (sSioDbgCursor) {
 #ifdef VERSION_EU
     case 0:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnkEu_0203C9B4 > 1) {
-                gUnkEu_0203C9B4--;
+            if (gSioDbgLevel1P > 1) {
+                gSioDbgLevel1P--;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnkEu_0203C9B4 <= 98) {
-                gUnkEu_0203C9B4++;
+            if (gSioDbgLevel1P <= 98) {
+                gSioDbgLevel1P++;
             }
         }
-        func_0805FC04(0x78, 0x24, 2, gUnkEu_0203C9B4);
+        DebugTextPrintNumber(0x78, 0x24, 2, gSioDbgLevel1P);
         break;
     case 1:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -225,21 +225,21 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C4 += 15;
             }
         }
-        func_0805FC04(0x78, 0x2D, 2, gUnk_0203C3C4);
+        DebugTextPrintNumber(0x78, 0x2D, 2, gUnk_0203C3C4);
         break;
     case 2:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnk_0203C3D0 > 275) {
-                gUnk_0203C3D0 -= 25;
+            if (gSioDbgCp > 275) {
+                gSioDbgCp -= 25;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnk_0203C3D0 <= 974) {
-                gUnk_0203C3D0 += 25;
+            if (gSioDbgCp <= 974) {
+                gSioDbgCp += 25;
             }
         }
-        func_0805FC04(0x78, 0x36, 2, gUnk_0203C3D0);
+        DebugTextPrintNumber(0x78, 0x36, 2, gSioDbgCp);
         break;
     case 3:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -253,49 +253,49 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3CC++;
             }
         }
-        func_0805FC04(0x78, 0x3F, 2, gUnk_0203C3CC);
+        DebugTextPrintNumber(0x78, 0x3F, 2, gUnk_0203C3CC);
         break;
     case 4:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnkEu_0203C9B8 > 1) {
-                gUnkEu_0203C9B8--;
+            if (gSioDbgLoseCount1P > 1) {
+                gSioDbgLoseCount1P--;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnkEu_0203C9B8 <= 998) {
-                gUnkEu_0203C9B8++;
+            if (gSioDbgLoseCount1P <= 998) {
+                gSioDbgLoseCount1P++;
             }
         }
-        func_0805FC04(0x78, 0x48, 2, gUnkEu_0203C9B8);
+        DebugTextPrintNumber(0x78, 0x48, 2, gSioDbgLoseCount1P);
         break;
     case 6:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnkEu_0203C9C4 > 1) {
-                gUnkEu_0203C9C4--;
+            if (gSioDbgLevel2P > 1) {
+                gSioDbgLevel2P--;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnkEu_0203C9C4 <= 98) {
-                gUnkEu_0203C9C4++;
+            if (gSioDbgLevel2P <= 98) {
+                gSioDbgLevel2P++;
             }
         }
-        func_0805FC04(0x78, 0x5A, 2, gUnkEu_0203C9C4);
+        DebugTextPrintNumber(0x78, 0x5A, 2, gSioDbgLevel2P);
         break;
     case 7:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnkEu_0203C9C0 > 80) {
-                gUnkEu_0203C9C0 -= 15;
+            if (gSioDbgHp2P > 80) {
+                gSioDbgHp2P -= 15;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnkEu_0203C9C0 <= 559) {
-                gUnkEu_0203C9C0 += 15;
+            if (gSioDbgHp2P <= 559) {
+                gSioDbgHp2P += 15;
             }
         }
-        func_0805FC04(0x78, 0x63, 2, gUnkEu_0203C9C0);
+        DebugTextPrintNumber(0x78, 0x63, 2, gSioDbgHp2P);
         break;
     case 8:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -309,21 +309,21 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C8 += 25;
             }
         }
-        func_0805FC04(0x78, 0x6C, 2, gUnk_0203C3C8);
+        DebugTextPrintNumber(0x78, 0x6C, 2, gUnk_0203C3C8);
         break;
     case 9:
         if (GetKeysRepeat() & DPAD_LEFT) {
-            if (gUnkEu_0203C9BC > 1) {
-                gUnkEu_0203C9BC--;
+            if (gSioDbgWinCount2P > 1) {
+                gSioDbgWinCount2P--;
             }
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            if (gUnkEu_0203C9BC <= 998) {
-                gUnkEu_0203C9BC++;
+            if (gSioDbgWinCount2P <= 998) {
+                gSioDbgWinCount2P++;
             }
         }
-        func_0805FC04(0x78, 0x75, 2, gUnkEu_0203C9BC);
+        DebugTextPrintNumber(0x78, 0x75, 2, gSioDbgWinCount2P);
         break;
     case 10:
         if (GetKeysRepeat() & DPAD_LEFT) {
@@ -337,7 +337,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3D4++;
             }
         }
-        func_0805FC04(0x78, 0x7E, 2, gUnk_0203C3D4);
+        DebugTextPrintNumber(0x78, 0x7E, 2, gUnk_0203C3D4);
         break;
 #else
     case 0:
@@ -352,7 +352,7 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3C8++;
             }
         }
-        func_0805FC04(0x64, 0x24, 2, gUnk_0203C3C8);
+        DebugTextPrintNumber(0x64, 0x24, 2, gUnk_0203C3C8);
         break;
     case 1:
         if (GetKeysHeld() & DPAD_LEFT) {
@@ -366,21 +366,21 @@ void mode_sio_dbg_flg_1(void) {
                 gUnk_0203C3CC += 5;
             }
         }
-        func_0805FC04(0x64, 0x2D, 2, gUnk_0203C3CC);
+        DebugTextPrintNumber(0x64, 0x2D, 2, gUnk_0203C3CC);
         break;
     case 2:
         if (GetKeysHeld() & DPAD_LEFT) {
-            if (gUnk_0203C3D0 > 5) {
-                gUnk_0203C3D0 -= 5;
+            if (gSioDbgCp > 5) {
+                gSioDbgCp -= 5;
             }
         }
 
         if (GetKeysHeld() & DPAD_RIGHT) {
-            if (gUnk_0203C3D0 <= 994) {
-                gUnk_0203C3D0 += 5;
+            if (gSioDbgCp <= 994) {
+                gSioDbgCp += 5;
             }
         }
-        func_0805FC04(0x64, 0x36, 2, gUnk_0203C3D0);
+        DebugTextPrintNumber(0x64, 0x36, 2, gSioDbgCp);
         break;
     case 3:
         break;
@@ -390,44 +390,44 @@ void mode_sio_dbg_flg_1(void) {
     }
 
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON | START_BUTTON)) {
-        gUnk_0203A9E4 = 1;
-        func_08085CB0();
+        gSioDebugMode = 1;
+        InitDebugDecks();
         ModeRequest(&gModeSioBtlConnect, 0);
     } else {
-        func_080605A4(0);
-        func_08060598();
+        DebugTextDraw(0);
+        DebugTextClear();
     }
 }
 
 void mode_sio_dbg_flg_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
 }
 
 #ifdef VERSION_EU
-void func_080C7350(void) {
-    gUnk_0203AAC0.unk_04 = gUnkEu_0203C9B4;
-    gUnk_0203AAC0.unk_02 = gUnk_0203AAC0.unk_00 = gUnk_0203C3C4;
-    gGameState.progression.cp = gUnk_0203C3D0;
-    gUnk_0203AAC0.unk_06 = gUnk_0203C3CC;
-    gUnk_0203AAC0.unk_08 = gUnkEu_0203C9B8;
-    gUnk_0203AAC0.unk_0C = -1;
-    gUnk_0203AAC0.unk_14 = -1;
-    gUnk_0203AAC0.unk_0A = 4;
-    gUnk_0203AAC0.unk_1E = 0x1234;
-    gUnk_0203AAC0.unk_1C = 0x1FFE;
-    gUnk_0203AA10.unk_04 = gUnkEu_0203C9C4;
-    gUnk_0203AA10.unk_02 = gUnk_0203AA10.unk_00 = gUnkEu_0203C9C0;
-    gUnk_0203AA10.unk_06 = gUnkEu_0203C9BC;
-    gUnk_0203AA10.unk_08 = gUnk_0203C3D4;
-    gUnk_0203AA10.unk_0C = -1;
-    gUnk_0203AA10.unk_14 = -1;
-    gUnk_0203AA10.unk_0A = 4;
-    gUnk_0203AA10.unk_1E = 0x1234;
-    gUnk_0203AA10.unk_1C = 0x1FFE;
+void SioDbgApplySettings(void) {
+    gCharaLinkSend.level = gSioDbgLevel1P;
+    gCharaLinkSend.maxHp = gCharaLinkSend.hp = gUnk_0203C3C4;
+    gGameState.progression.cp = gSioDbgCp;
+    gCharaLinkSend.winCount = gUnk_0203C3CC;
+    gCharaLinkSend.loseCount = gSioDbgLoseCount1P;
+    gCharaLinkSend.learnedStocks = -1;
+    gCharaLinkSend.learnedStocks2 = -1;
+    gCharaLinkSend.ap = 4;
+    gCharaLinkSend.seed = 0x1234;
+    gCharaLinkSend.worldFlags = 0x1FFE;
+    gCharaLinkRecv.level = gSioDbgLevel2P;
+    gCharaLinkRecv.maxHp = gCharaLinkRecv.hp = gSioDbgHp2P;
+    gCharaLinkRecv.winCount = gSioDbgWinCount2P;
+    gCharaLinkRecv.loseCount = gUnk_0203C3D4;
+    gCharaLinkRecv.learnedStocks = -1;
+    gCharaLinkRecv.learnedStocks2 = -1;
+    gCharaLinkRecv.ap = 4;
+    gCharaLinkRecv.seed = 0x1234;
+    gCharaLinkRecv.worldFlags = 0x1FFE;
 }
 #else
-void func_080C7350(void) {
-    gUnk_0203AAC0.unk_04 = gUnk_0203C3C8;
-    gUnk_0203AAC0.unk_02 = gUnk_0203C3CC;
+void SioDbgApplySettings(void) {
+    gCharaLinkSend.level = gUnk_0203C3C8;
+    gCharaLinkSend.maxHp = gUnk_0203C3CC;
 }
 #endif

@@ -46,53 +46,53 @@
 #include "gba/io_reg.h"
 #include "card_ids.h"
 
-extern UnkStruct_09EE752C gUnk_09EE752C[7];
+extern PrizeMapCardBackAnimStep gPrizeMapCardBackAnim[7];
 #ifdef VERSION_EU
-extern void* gUnkEu_09F72A3C[5];
-extern void* gUnkEu_09F72A50[5];
-extern void* gUnkEu_09F72A64[5];
+extern void* gSelmapEventKeyTitleAnimsByLanguage[5];
+extern void* gSelmapEventKeyTitleFramesByLanguage[5];
+extern void* gSelmapEventKeyTitleTilesByLanguage[5];
 #endif
-u16 func_08093B08(u16 a);
-u16 func_08096C38(const UnkStruct_08096C38* tbl, u16 n);
-u16 func_08096CCC(void);
+u16 CountMapCardsOfKind(u16 a);
+u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n);
+u16 PickPrizeMapCardValue(void);
 void CreateCardNameDisplay(void* a, void* b);
-u16 func_08096D0C(u16 a, s32 b);
-u16 func_08096D48(u16 a, s32 b);
-void func_0809797C(TaskPool* pool, s32* args);
-s32 func_08097A80(SpotlightWork* w);
-s32 func_08097DE4(SelmapEventKeyWork* work);
-u8 func_0808510C(u16 id);
+u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
+u16 PickPrizeMapCardForWorld(u16 a, s32 b);
+void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
+s32 UpdateSpotLightFadeOut(SpotlightWork* w);
+s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
+u8 CollectionHasCard(u16 id);
 s32 AddMapCard(u16 a);
-u16 func_08093B08(u16 a);
-u16 func_08093B38(void);
-u16 func_08093B58(void);
+u16 CountMapCardsOfKind(u16 a);
+u16 CountRegularMapCards(void);
+u16 CountZeroValueMapCards(void);
 void* GetRoomName(u16 a);
 u8 HasMapCard(u16 a);
 
-const u16 gUnk_090359FC[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
+const u16 gPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-const UnkStruct_08096C38_Item gUnk_09035A10[1] = {
+const PrizeMapCardEntry gUnk_09035A10[1] = {
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A14[4] = {
+const PrizeMapCardEntry gUnk_09035A14[4] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
     { CARD_ID(CARD_CRABCLAW, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035A24[2] = {
+const PrizeMapCardGroup gUnk_09035A24[2] = {
     { gUnk_09035A10, 1, 30 },
     { gUnk_09035A14, 4, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A34[2] = {
+const PrizeMapCardEntry gUnk_09035A34[2] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A3C[7] = {
+const PrizeMapCardEntry gUnk_09035A3C[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -102,7 +102,7 @@ const UnkStruct_08096C38_Item gUnk_09035A3C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A58[8] = {
+const PrizeMapCardEntry gUnk_09035A58[8] = {
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -113,18 +113,18 @@ const UnkStruct_08096C38_Item gUnk_09035A58[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035A78[3] = {
+const PrizeMapCardGroup gUnk_09035A78[3] = {
     { gUnk_09035A34, 2, 40 },
     { gUnk_09035A3C, 7, 85 },
     { gUnk_09035A58, 8, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A90[2] = {
+const PrizeMapCardEntry gUnk_09035A90[2] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035A98[7] = {
+const PrizeMapCardEntry gUnk_09035A98[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -134,7 +134,7 @@ const UnkStruct_08096C38_Item gUnk_09035A98[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035AB4[8] = {
+const PrizeMapCardEntry gUnk_09035AB4[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
@@ -145,18 +145,18 @@ const UnkStruct_08096C38_Item gUnk_09035AB4[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035AD4[3] = {
+const PrizeMapCardGroup gUnk_09035AD4[3] = {
     { gUnk_09035A90, 2, 40 },
     { gUnk_09035A98, 7, 85 },
     { gUnk_09035AB4, 8, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035AEC[2] = {
+const PrizeMapCardEntry gUnk_09035AEC[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035AF4[7] = {
+const PrizeMapCardEntry gUnk_09035AF4[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -166,7 +166,7 @@ const UnkStruct_08096C38_Item gUnk_09035AF4[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035B10[7] = {
+const PrizeMapCardEntry gUnk_09035B10[7] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -176,18 +176,18 @@ const UnkStruct_08096C38_Item gUnk_09035B10[7] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035B2C[3] = {
+const PrizeMapCardGroup gUnk_09035B2C[3] = {
     { gUnk_09035AEC, 2, 40 },
     { gUnk_09035AF4, 7, 85 },
     { gUnk_09035B10, 7, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035B44[2] = {
+const PrizeMapCardEntry gUnk_09035B44[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035B4C[7] = {
+const PrizeMapCardEntry gUnk_09035B4C[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -197,7 +197,7 @@ const UnkStruct_08096C38_Item gUnk_09035B4C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035B68[8] = {
+const PrizeMapCardEntry gUnk_09035B68[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -208,18 +208,18 @@ const UnkStruct_08096C38_Item gUnk_09035B68[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035B88[3] = {
+const PrizeMapCardGroup gUnk_09035B88[3] = {
     { gUnk_09035B44, 2, 40 },
     { gUnk_09035B4C, 7, 85 },
     { gUnk_09035B68, 8, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035BA0[2] = {
+const PrizeMapCardEntry gUnk_09035BA0[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035BA8[7] = {
+const PrizeMapCardEntry gUnk_09035BA8[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -229,7 +229,7 @@ const UnkStruct_08096C38_Item gUnk_09035BA8[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035BC4[8] = {
+const PrizeMapCardEntry gUnk_09035BC4[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
@@ -240,17 +240,17 @@ const UnkStruct_08096C38_Item gUnk_09035BC4[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035BE4[3] = {
+const PrizeMapCardGroup gUnk_09035BE4[3] = {
     { gUnk_09035BA0, 2, 40 },
     { gUnk_09035BA8, 7, 85 },
     { gUnk_09035BC4, 8, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035BFC[1] = {
+const PrizeMapCardEntry gUnk_09035BFC[1] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035C00[5] = {
+const PrizeMapCardEntry gUnk_09035C00[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -258,7 +258,7 @@ const UnkStruct_08096C38_Item gUnk_09035C00[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035C14[9] = {
+const PrizeMapCardEntry gUnk_09035C14[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -270,17 +270,17 @@ const UnkStruct_08096C38_Item gUnk_09035C14[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035C38[3] = {
+const PrizeMapCardGroup gUnk_09035C38[3] = {
     { gUnk_09035BFC, 1, 20 },
     { gUnk_09035C00, 5, 80 },
     { gUnk_09035C14, 9, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035C50[1] = {
+const PrizeMapCardEntry gUnk_09035C50[1] = {
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035C54[5] = {
+const PrizeMapCardEntry gUnk_09035C54[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -288,7 +288,7 @@ const UnkStruct_08096C38_Item gUnk_09035C54[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035C68[9] = {
+const PrizeMapCardEntry gUnk_09035C68[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -300,17 +300,17 @@ const UnkStruct_08096C38_Item gUnk_09035C68[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035C8C[3] = {
+const PrizeMapCardGroup gUnk_09035C8C[3] = {
     { gUnk_09035C50, 1, 20 },
     { gUnk_09035C54, 5, 80 },
     { gUnk_09035C68, 9, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035CA4[1] = {
+const PrizeMapCardEntry gUnk_09035CA4[1] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035CA8[5] = {
+const PrizeMapCardEntry gUnk_09035CA8[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -318,7 +318,7 @@ const UnkStruct_08096C38_Item gUnk_09035CA8[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035CBC[9] = {
+const PrizeMapCardEntry gUnk_09035CBC[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -330,17 +330,17 @@ const UnkStruct_08096C38_Item gUnk_09035CBC[9] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035CE0[3] = {
+const PrizeMapCardGroup gUnk_09035CE0[3] = {
     { gUnk_09035CA4, 1, 20 },
     { gUnk_09035CA8, 5, 80 },
     { gUnk_09035CBC, 9, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035CF8[1] = {
+const PrizeMapCardEntry gUnk_09035CF8[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035CFC[6] = {
+const PrizeMapCardEntry gUnk_09035CFC[6] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -349,7 +349,7 @@ const UnkStruct_08096C38_Item gUnk_09035CFC[6] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035D14[8] = {
+const PrizeMapCardEntry gUnk_09035D14[8] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
@@ -360,24 +360,24 @@ const UnkStruct_08096C38_Item gUnk_09035D14[8] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035D34[3] = {
+const PrizeMapCardGroup gUnk_09035D34[3] = {
     { gUnk_09035CF8, 1, 20 },
     { gUnk_09035CFC, 6, 80 },
     { gUnk_09035D14, 8, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035D4C[1] = {
+const PrizeMapCardEntry gUnk_09035D4C[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035D50[4] = {
+const PrizeMapCardEntry gUnk_09035D50[4] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035D60[5] = {
+const PrizeMapCardEntry gUnk_09035D60[5] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
@@ -385,13 +385,13 @@ const UnkStruct_08096C38_Item gUnk_09035D60[5] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035D74[3] = {
+const PrizeMapCardGroup gUnk_09035D74[3] = {
     { gUnk_09035D4C, 1, 30 },
     { gUnk_09035D50, 4, 80 },
     { gUnk_09035D60, 5, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035D8C[9] = {
+const PrizeMapCardEntry gUnk_09035D8C[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FIRE, 0), 0 },
@@ -403,18 +403,18 @@ const UnkStruct_08096C38_Item gUnk_09035D8C[9] = {
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035DB0[3] = {
+const PrizeMapCardEntry gUnk_09035DB0[3] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035DBC[2] = {
+const PrizeMapCardGroup gUnk_09035DBC[2] = {
     { gUnk_09035D8C, 9, 85 },
     { gUnk_09035DB0, 3, 100 },
 };
 
-const UnkStruct_09035DCC gUnk_09035DCC[14] = {
+const PrizeMapCardGroupList gSoraPrizeMapCardGroups[14] = {
     { gUnk_09035A24, 2 },
     { gUnk_09035A78, 3 },
     { gUnk_09035C38, 3 },
@@ -433,7 +433,7 @@ const UnkStruct_09035DCC gUnk_09035DCC[14] = {
 
 const u16 gUnk_09035E3C[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-const UnkStruct_08096C38_Item gUnk_09035E50[11] = {
+const PrizeMapCardEntry gUnk_09035E50[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -447,11 +447,11 @@ const UnkStruct_08096C38_Item gUnk_09035E50[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035E7C[1] = {
+const PrizeMapCardGroup gUnk_09035E7C[1] = {
     { gUnk_09035E50, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035E84[11] = {
+const PrizeMapCardEntry gUnk_09035E84[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -465,11 +465,11 @@ const UnkStruct_08096C38_Item gUnk_09035E84[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035EB0[1] = {
+const PrizeMapCardGroup gUnk_09035EB0[1] = {
     { gUnk_09035E84, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035EB8[11] = {
+const PrizeMapCardEntry gUnk_09035EB8[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -483,11 +483,11 @@ const UnkStruct_08096C38_Item gUnk_09035EB8[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035EE4[1] = {
+const PrizeMapCardGroup gUnk_09035EE4[1] = {
     { gUnk_09035EB8, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035EEC[11] = {
+const PrizeMapCardEntry gUnk_09035EEC[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -501,11 +501,11 @@ const UnkStruct_08096C38_Item gUnk_09035EEC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035F18[1] = {
+const PrizeMapCardGroup gUnk_09035F18[1] = {
     { gUnk_09035EEC, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035F20[11] = {
+const PrizeMapCardEntry gUnk_09035F20[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -519,11 +519,11 @@ const UnkStruct_08096C38_Item gUnk_09035F20[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035F4C[1] = {
+const PrizeMapCardGroup gUnk_09035F4C[1] = {
     { gUnk_09035F20, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035F54[11] = {
+const PrizeMapCardEntry gUnk_09035F54[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -537,11 +537,11 @@ const UnkStruct_08096C38_Item gUnk_09035F54[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035F80[1] = {
+const PrizeMapCardGroup gUnk_09035F80[1] = {
     { gUnk_09035F54, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035F88[11] = {
+const PrizeMapCardEntry gUnk_09035F88[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -555,11 +555,11 @@ const UnkStruct_08096C38_Item gUnk_09035F88[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035FB4[1] = {
+const PrizeMapCardGroup gUnk_09035FB4[1] = {
     { gUnk_09035F88, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09035FBC[11] = {
+const PrizeMapCardEntry gUnk_09035FBC[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -573,12 +573,12 @@ const UnkStruct_08096C38_Item gUnk_09035FBC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09035FE8[1] = {
+const PrizeMapCardGroup gUnk_09035FE8[1] = {
     { gUnk_09035FBC, 11, 100 },
 };
 
 #ifdef VERSION_EU
-const UnkStruct_08096C38_Item gUnk_09035FF0[9] = {
+const PrizeMapCardEntry gUnk_09035FF0[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -590,7 +590,7 @@ const UnkStruct_08096C38_Item gUnk_09035FF0[9] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 #else
-const UnkStruct_08096C38_Item gUnk_09035FF0[10] = {
+const PrizeMapCardEntry gUnk_09035FF0[10] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -605,16 +605,16 @@ const UnkStruct_08096C38_Item gUnk_09035FF0[10] = {
 #endif
 
 #ifdef VERSION_EU
-const UnkStruct_08096C38 gUnk_09036018[1] = {
+const PrizeMapCardGroup gUnk_09036018[1] = {
     { gUnk_09035FF0, 9, 100 },
 };
 #else
-const UnkStruct_08096C38 gUnk_09036018[1] = {
+const PrizeMapCardGroup gUnk_09036018[1] = {
     { gUnk_09035FF0, 10, 100 },
 };
 #endif
 
-const UnkStruct_08096C38_Item gUnk_09036020[11] = {
+const PrizeMapCardEntry gUnk_09036020[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -628,11 +628,11 @@ const UnkStruct_08096C38_Item gUnk_09036020[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_0903604C[1] = {
+const PrizeMapCardGroup gUnk_0903604C[1] = {
     { gUnk_09036020, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09036054[11] = {
+const PrizeMapCardEntry gUnk_09036054[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -646,11 +646,11 @@ const UnkStruct_08096C38_Item gUnk_09036054[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_09036080[1] = {
+const PrizeMapCardGroup gUnk_09036080[1] = {
     { gUnk_09036054, 11, 100 },
 };
 
-const UnkStruct_08096C38_Item gUnk_09036088[11] = {
+const PrizeMapCardEntry gUnk_09036088[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -664,11 +664,11 @@ const UnkStruct_08096C38_Item gUnk_09036088[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-const UnkStruct_08096C38 gUnk_090360B4[1] = {
+const PrizeMapCardGroup gUnk_090360B4[1] = {
     { gUnk_09036088, 11, 100 },
 };
 
-const UnkStruct_09035DCC gUnk_090360BC[14] = {
+const PrizeMapCardGroupList gRikuPrizeMapCardGroups[14] = {
     { gUnk_09035E7C, 1 },
     { gUnk_09035EB0, 1 },
     { gUnk_09035FB4, 1 },
@@ -687,8 +687,8 @@ const UnkStruct_09035DCC gUnk_090360BC[14] = {
 
 const u16 gUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
 
-void func_08096714(PrizeCardInitWork* w, PrizeCardArgs* args) {
-    w->unk_14 = 0;
+void PrizeCardInitInit(PrizeCardInitWork* w, PrizeCardArgs* args) {
+    w->spawned = 0;
     w->args = *args;
     TaskPoolInit(&w->tasks, 1);
 }
@@ -697,41 +697,41 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
     s32 args[9];
     s32 v;
 
-    if (w->unk_14 == 0) {
+    if (w->spawned == 0) {
         if ((gGameState.progression.unk_82 & 0x20) == 0) {
             *(PrizeCardArgs*)args = w->args;
             args[8] = 2;
-            func_0809797C(&w->tasks, args);
+            CreatePrizeMapCardTask(&w->tasks, args);
             gGameState.progression.unk_82 |= 0x20;
         } else if ((s8)gGameState.floor == 0) {
-            if (func_08093B58() == 0) {
+            if (CountZeroValueMapCards() == 0) {
                 *(PrizeCardArgs*)args = w->args;
-                args[8] = func_08096D0C(gGameState.world, 1);
+                args[8] = PickPrizeMapCardKindForWorld(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(&w->tasks, args);
+                    CreatePrizeMapCardTask(&w->tasks, args);
                 } else {
                     return 0;
                 }
             } else {
                 *(PrizeCardArgs*)args = w->args;
-                args[8] = func_08096D48(gGameState.world, 1);
+                args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(&w->tasks, args);
+                    CreatePrizeMapCardTask(&w->tasks, args);
                 } else {
                     return 0;
                 }
             }
         } else {
-            v = gBtlWork->unk_10C;
+            v = gBtlWork->battleId;
 
             if (v >= 125 && v <= 127) {
                 if ((gGameState.flags & 8) == 0) {
                     if (GetRandom() % 100 < 20) {
                         *(PrizeCardArgs*)args = w->args;
 #ifdef VERSION_EU
-                        if (func_08093B38() <= 98) {
+                        if (CountRegularMapCards() <= 98) {
                             args[8] = CARD_ID(CARD_GRAVITY, GetRandom() % 10);
                         } else {
                             args[8] = 0xFFFF;
@@ -741,70 +741,70 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
 #endif
                     } else {
                         *(PrizeCardArgs*)args = w->args;
-                        args[8] = func_08096D48(gGameState.world, 1);
+                        args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                     }
 
                     if (args[8] != 0xFFFF) {
-                        func_0809797C(&w->tasks, args);
+                        CreatePrizeMapCardTask(&w->tasks, args);
                     } else {
                         return 0;
                     }
                 } else {
                     *(PrizeCardArgs*)args = w->args;
-                    args[8] = func_08096D48(gGameState.world, 1);
+                    args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
                     if (args[8] != 0xFFFF) {
-                        func_0809797C(&w->tasks, args);
+                        CreatePrizeMapCardTask(&w->tasks, args);
                     } else {
                         return 0;
                     }
                 }
             } else if (v >= 131 && v <= 133) {
 #ifdef VERSION_EU
-                if (func_08093B38() <= 98) {
+                if (CountRegularMapCards() <= 98) {
                     *(PrizeCardArgs*)args = w->args;
                     args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                    func_0809797C(&w->tasks, args);
+                    CreatePrizeMapCardTask(&w->tasks, args);
                 }
 #else
                 *(PrizeCardArgs*)args = w->args;
                 args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                func_0809797C(&w->tasks, args);
+                CreatePrizeMapCardTask(&w->tasks, args);
 #endif
             } else {
                 *(PrizeCardArgs*)args = w->args;
 
                 if ((gGameState.flags & 8) == 0) {
                     if (HasMapCard(0xFB) == 0) {
-                        if (func_080E924C() == 0) {
+                        if (AreWorldPrizesCollected() == 0) {
                             if (gUnk_0903612C[gGameState.world] != 0) {
                                 if (GetRandom() % 100 <= gUnk_0903612C[gGameState.world]) {
                                     args[8] = 0xFB;
                                 } else {
-                                    args[8] = func_08096D48(gGameState.world, 1);
+                                    args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                                 }
                             } else {
-                                args[8] = func_08096D48(gGameState.world, 1);
+                                args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                             }
                         } else {
-                            args[8] = func_08096D48(gGameState.world, 1);
+                            args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                         }
                     } else {
-                        args[8] = func_08096D48(gGameState.world, 1);
+                        args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                     }
                 } else {
-                    args[8] = func_08096D48(gGameState.world, 1);
+                    args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                 }
 
                 if (args[8] != 0xFFFF) {
-                    func_0809797C(&w->tasks, args);
+                    CreatePrizeMapCardTask(&w->tasks, args);
                 } else {
                     return 0;
                 }
             }
         }
 
-        w->unk_14 = 1;
+        w->spawned = 1;
     }
 
     TaskPoolUpdate(&w->tasks);
@@ -814,10 +814,10 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
 s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
     PrizeCardTaskArgs args;
 
-    if (w->unk_14 == 0) {
+    if (w->spawned == 0) {
         *(PrizeCardArgs*)&args = w->args;
 
-        switch (gBtlWork->unk_10C) {
+        switch (gBtlWork->battleId) {
         case 148:
             args.cardId = CARD_GUARD_ARMOR_1;
             break;
@@ -898,50 +898,50 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
             args.cardId = CARD_LEXAEUS_9;
             break;
         default:
-            w->unk_14 = 1;
+            w->spawned = 1;
             return 1;
         }
 
-        if (gBtlWork->unk_10C != 121) {
-            if (func_0808510C(args.cardId) == 0) {
+        if (gBtlWork->battleId != 121) {
+            if (CollectionHasCard(args.cardId) == 0) {
                 TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
             }
         } else {
             TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
         }
 
-        w->unk_14 = 1;
+        w->spawned = 1;
     }
 
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-void func_08096C20(PrizeCardInitWork* w) {
+void PrizeCardInitDraw(PrizeCardInitWork* w) {
     TaskPoolDraw(&w->tasks);
 }
-void func_08096C2C(PrizeCardInitWork* w) {
+void PrizeCardInitDestroy(PrizeCardInitWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-u16 func_08096C38(const UnkStruct_08096C38* tbl, u16 n) {
+u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
     s32 i;
-    const UnkStruct_08096C38_Item* arr;
+    const PrizeMapCardEntry* arr;
     u16 cnt;
     u16 v;
     u16 card;
 
     i = 0;
 
-    if (func_08093B38() <= 98) {
+    if (CountRegularMapCards() <= 98) {
         while (i < n) {
-            arr = tbl[i].unk_00;
-            cnt = tbl[i].unk_04;
+            arr = tbl[i].entries;
+            cnt = tbl[i].count;
             v = GetRandom() % 100;
 
-            if (v <= tbl[i].unk_06) {
-                card = arr[GetRandom() % cnt].unk_00;
-                v = func_08093B08(card);
+            if (v <= tbl[i].chance) {
+                card = arr[GetRandom() % cnt].cardId;
+                v = CountMapCardsOfKind(card);
 
                 if (v <= 89) {
                     return card;
@@ -959,50 +959,50 @@ u16 func_08096C38(const UnkStruct_08096C38* tbl, u16 n) {
     }
 }
 
-u16 func_08096CCC(void) {
+u16 PickPrizeMapCardValue(void) {
     u16 i;
 
     do {
         i = GetRandom() % 10;
-    } while (gUnk_090359FC[i] <= GetRandom() % 100);
+    } while (gPrizeMapCardValueChances[i] <= GetRandom() % 100);
 
     return i;
 }
 
-u16 func_08096D0C(u16 a, s32 b) {
-    const UnkStruct_08096C38* tiles;
+u16 PickPrizeMapCardKindForWorld(u16 a, s32 b) {
+    const PrizeMapCardGroup* tiles;
     u16 n;
 
     if (gGameState.flags & 8) {
-        tiles = gUnk_090360BC[a].data;
-        n = gUnk_090360BC[a].size;
+        tiles = gRikuPrizeMapCardGroups[a].data;
+        n = gRikuPrizeMapCardGroups[a].size;
     } else {
-        tiles = gUnk_09035DCC[a].data;
-        n = gUnk_09035DCC[a].size;
+        tiles = gSoraPrizeMapCardGroups[a].data;
+        n = gSoraPrizeMapCardGroups[a].size;
     }
 
-    return func_08096C38(tiles, n);
+    return PickPrizeMapCardKind(tiles, n);
 }
 
-u16 func_08096D48(u16 a, s32 b) {
-    const UnkStruct_08096C38* tiles;
+u16 PickPrizeMapCardForWorld(u16 a, s32 b) {
+    const PrizeMapCardGroup* tiles;
     u16 base;
     u16 off;
 
     off = 0;
 
     if (gGameState.flags & 8) {
-        tiles = gUnk_090360BC[a].data;
-        base = func_08096C38(tiles, gUnk_090360BC[a].size);
+        tiles = gRikuPrizeMapCardGroups[a].data;
+        base = PickPrizeMapCardKind(tiles, gRikuPrizeMapCardGroups[a].size);
     } else {
-        tiles = gUnk_09035DCC[a].data;
-        base = func_08096C38(tiles, gUnk_09035DCC[a].size);
+        tiles = gSoraPrizeMapCardGroups[a].data;
+        base = PickPrizeMapCardKind(tiles, gSoraPrizeMapCardGroups[a].size);
     }
 
     if (base != 0xFFFF) {
         do {
-            off = func_08096CCC();
-        } while (gUnk_0203A8C0[base + off] == 9);
+            off = PickPrizeMapCardValue();
+        } while (gMapCardCounts[base + off] == 9);
     }
 
     return base + off;
@@ -1020,8 +1020,8 @@ void DispCardname_0(DispCardnameWork* work, u16* a) {
     s32 v;
 
     InitTextSlots(work->textSlots, 32);
-    p = _08066468(1);
-    work->unk_104 = p;
+    p = LoadTextPalette(1);
+    work->textPalette = p;
     FadeSetPaletteExcluded(p->index + 16, 1);
     work->textSlotCount = LoadTextSlots(a, work->textSlots);
     work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
@@ -1038,7 +1038,7 @@ s32 DispCardname_1(void) {
 }
 
 void DispCardname_2(DispCardnameWork* work) {
-    DrawTextSlots(work->x, 120, work->textSlots, work->unk_104, 50,
+    DrawTextSlots(work->x, 120, work->textSlots, work->textPalette, 50,
                   work->textSlotCount);
     DrawSprite(120, 125, gUnk_09EF126C[0], work->tiles,
                work->palette, 0, 0, 55);
@@ -1047,8 +1047,8 @@ void DispCardname_2(DispCardnameWork* work) {
 void DispCardname_3(DispCardnameWork* work) {
     FreeTextSlots(work->textSlots, 32);
     ReleaseObjTiles(work->tiles);
-    FadeSetPaletteExcluded(work->unk_104->index + 16, 0);
-    ReleaseObjPalette(work->unk_104);
+    FadeSetPaletteExcluded(work->textPalette->index + 16, 0);
+    ReleaseObjPalette(work->textPalette);
     ReleaseObjPalette(work->palette);
 }
 
@@ -1058,7 +1058,7 @@ void CreateCardNameDisplay(void* a, void* b) {
 void Version_0(VersionWork* work) {
     work->tiles = LoadSmallFontTiles();
     work->palette = LoadSmallFontPalette();
-    work->textLength = EncodeSmallFontString(gUnk_081283C0, work->text);
+    work->textLength = EncodeSmallFontString(gVersionString, work->text);
 }
 s32 Version_1(void) {
     return 1;
@@ -1073,111 +1073,111 @@ void Version_3(VersionWork* work) {
 Task* CreateVersionDisplay(TaskPool* pool) {
     return TaskCreate(pool, &gTaskDescVersion, 0);
 }
-static void PrizeCard_0(UnkStruct_08096F94* w, s32* args) {
+static void PrizeCard_0(PrizeMapCardWork* w, s32* args) {
     Collider* p;
 
-    w->unk_B0 = args[8];
-    w->cardDef = &gUnk_09EE4C80[args[8]];
-    w->cardBack = &gUnk_09EE4BF4[w->cardDef->backIndex];
+    w->cardId = args[8];
+    w->cardDef = &gMapCardDefs[args[8]];
+    w->cardBack = &gMapCardBackDefs[w->cardDef->backIndex];
     w->tiles = LoadObjTiles(w->cardDef->tiles, 0x300);
     w->palette = LoadObjPalette(w->cardDef->palette, 32);
-    *(u64*)&w->unk_3C = *(u64*)&w->cardDef->unk_20;
+    *(u64*)&w->kind = *(u64*)&w->cardDef->kind;
     w->tiles2 = LoadObjTiles(w->cardBack->tiles, w->cardBack->tilesSize);
     w->tiles3 = LoadObjTiles(w->cardBack->tiles, w->cardBack->tilesSize);
     w->palette2 = LoadObjPalette(w->cardBack->palette, w->cardBack->paletteSize);
     w->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     w->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
-    w->unk_A0 = args[0];
-    w->unk_A4 = args[1];
-    w->unk_A8 = 0;
-    w->unk_AC = 0;
-    w->unk_DE = 24;
-    w->unk_B4 = -(GetRandom() % 129 + 0x300);
-    w->unk_B8 = GetRandom() % 129 + 0x80;
-    w->unk_DC = GetRandom() % 256;
+    w->posX = args[0];
+    w->posY = args[1];
+    w->posZ = 0;
+    w->groundZ = 0;
+    w->rotation = 24;
+    w->vz = -(GetRandom() % 129 + 0x300);
+    w->speed = GetRandom() % 129 + 0x80;
+    w->moveAngle = GetRandom() % 256;
     w->scaleX = 0x80;
     w->scaleY = 0x80;
-    w->unk_DA = 0x80;
-    w->unk_DF = 0;
-    w->unk_E0 = 0;
+    w->scale = 0x80;
+    w->flipAngleY = 0;
+    w->flipAngleX = 0;
     p = &w->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetDisabled(p, 1);
-    ColliderSetPosition(p, w->unk_A0, w->unk_A4, w->unk_A8);
-    w->unk_E6 = 0;
-    w->unk_E7 = 0;
-    w->unk_E8 = 0;
-    w->unk_E1 = 0;
-    w->unk_E5 = 0;
-    w->unk_E2 = 0;
-    w->unk_E3 = 0;
+    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
+    w->backAnimTimer = 0;
+    w->backAnimStep = 0;
+    w->backFrame = 0;
+    w->timer = 0;
+    w->collected = 0;
+    w->steps = 0;
+    w->holdTimer = 0;
     TaskPoolInit(&w->tasks, 1);
     gBtlWork->prizeCount++;
 }
-static u8 PrizeCard_1(UnkStruct_08096F94* w, void* a) {
+static u8 PrizeCard_1(PrizeMapCardWork* w, void* a) {
     s16 x;
     s16 y;
 
-    w->unk_B4 += 56;
-    w->unk_A8 += w->unk_B4;
-    w->unk_A0 += (gSineTable[(u8)w->unk_DC] * w->unk_B8) >> 8;
-    w->unk_A4 += (-gSineTable[(u8)w->unk_DC + 64] * w->unk_B8) >> 8;
+    w->vz += 56;
+    w->posZ += w->vz;
+    w->posX += (gSineTable[(u8)w->moveAngle] * w->speed) >> 8;
+    w->posY += (-gSineTable[(u8)w->moveAngle + 64] * w->speed) >> 8;
 
-    if (ClampBattlePosition(&w->unk_A0, &w->unk_A4, -10, -10)) {
-        w->unk_DC += GetRandom() % 57 + 100;
+    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10)) {
+        w->moveAngle += GetRandom() % 57 + 100;
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
+    if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 50);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if (w->unk_A8 - 8 > w->unk_AC) {
-        w->unk_A8 = w->unk_AC - 8;
-        w->unk_B4 = -((w->unk_B4 * 217) >> 8);
-        w->unk_DC = (u8)GetAngle(w->unk_A0, w->unk_A4, gBtlWork->actor->x, gBtlWork->actor->y);
-        w->unk_DC += GetRandom() % 65 - 32;
+    if (w->posZ - 8 > w->groundZ) {
+        w->posZ = w->groundZ - 8;
+        w->vz = -((w->vz * 217) >> 8);
+        w->moveAngle = (u8)GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
+        w->moveAngle += GetRandom() % 65 - 32;
 
-        if (w->unk_B4 > -0x200) {
-            w->unk_B4 = -0x200;
+        if (w->vz > -0x200) {
+            w->vz = -0x200;
         }
     }
 
-    if (w->collider.unk_2C != 0) {
-        w->unk_E5 = 1;
+    if (w->collider.colliding != 0) {
+        w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        AddMapCard(w->unk_B0);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08097404);
-        WorldToScreen(&x, &y, w->unk_A0, w->unk_A4, w->unk_A8);
-        w->unk_A0 = x << 8;
-        w->unk_A4 = y << 8;
+        AddMapCard(w->cardId);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardFlight);
+        WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
+        w->posX = x << 8;
+        w->posY = y << 8;
         ColliderSetDisabled(&w->collider, 1);
-        w->unk_CC = 50;
-        func_08097390(w);
+        w->priority = 50;
+        AimPrizeMapCardAtCenter(w);
         return 1;
     } else {
-        ColliderSetPosition(&w->collider, w->unk_A0, w->unk_A4, w->unk_A8);
-        WorldToScreen(&w->x, &w->y2, w->unk_A0, w->unk_A4, w->unk_A8);
-        WorldToScreen(&w->x2, &w->y, w->unk_A0, w->unk_A4, w->unk_AC);
-        w->unk_CC = -0x1004 - (w->unk_A4 >> 8) * 4;
-        func_080978B0(w);
-        w->unk_E0 += 2;
+        ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
+        WorldToScreen(&w->x, &w->y2, w->posX, w->posY, w->posZ);
+        WorldToScreen(&w->x2, &w->y, w->posX, w->posY, w->groundZ);
+        w->priority = -0x1004 - (w->posY >> 8) * 4;
+        UpdatePrizeMapCardScale(w);
+        w->flipAngleX += 2;
 
-        if (w->unk_E1 == 20) {
+        if (w->timer == 20) {
             ColliderSetDisabled(&w->collider, 0);
         }
 
-        if (w->unk_E1 <= 59) {
-            w->unk_E1++;
+        if (w->timer <= 59) {
+            w->timer++;
         }
     }
 
     return 1;
 }
 
-void func_08097390(UnkStruct_08096F94* w) {
+void AimPrizeMapCardAtCenter(PrizeMapCardWork* w) {
     s16 x;
     s16 y;
     s32 dx;
@@ -1188,16 +1188,16 @@ void func_08097390(UnkStruct_08096F94* w) {
     WorldToScreen(&x, &y, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
     tx = 0x7800;
     ty = 0x5000;
-    dx = tx - w->unk_A0;
-    dy = ty - w->unk_A4;
-    w->unk_C4 = NormalizeVector2D8(&dx, &dy);
-    w->unk_BC = -dx;
-    w->unk_C0 = -dy;
-    w->unk_B8 = 0x300;
-    w->unk_B4 = 2;
+    dx = tx - w->posX;
+    dy = ty - w->posY;
+    w->distance = NormalizeVector2D8(&dx, &dy);
+    w->dirX = -dx;
+    w->dirY = -dy;
+    w->speed = 0x300;
+    w->vz = 2;
 }
 
-u8 func_08097404(UnkStruct_08096F94* w, void* a) {
+u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* w, void* a) {
     s32 dx;
     s32 dy;
     u8 z;
@@ -1207,90 +1207,90 @@ u8 func_08097404(UnkStruct_08096F94* w, void* a) {
     s16* q1;
     s16* q2;
 
-    if (w->unk_B8 < 0) {
-        dx = 0x7800 - w->unk_A0;
-        dy = 0x5000 - w->unk_A4;
+    if (w->speed < 0) {
+        dx = 0x7800 - w->posX;
+        dy = 0x5000 - w->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->unk_BC = -dx;
-        w->unk_C0 = -dy;
+        w->dirX = -dx;
+        w->dirY = -dy;
 
-        if (w->unk_C4 <= 0x7FF) {
-            w->unk_E2 = 0;
-            w->unk_DE = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0809753C);
-            CreateCardNameDisplay(&w->tasks, GetRoomName(w->cardDef->unk_20));
+        if (w->distance <= 0x7FF) {
+            w->steps = 0;
+            w->rotation = 0;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardShow);
+            CreateCardNameDisplay(&w->tasks, GetRoomName(w->cardDef->kind));
         }
     }
 
-    w->unk_A0 += (w->unk_BC * w->unk_B8) >> 8;
-    w->unk_A4 += (w->unk_C0 * w->unk_B8) >> 8;
-    t = w->unk_DE + 32;
+    w->posX += (w->dirX * w->speed) >> 8;
+    w->posY += (w->dirY * w->speed) >> 8;
+    t = w->rotation + 32;
     z = 0;
-    w->unk_DE = t;
-    w->unk_DF += (64 - w->unk_DF) >> 4;
-    w->unk_E0 = z;
-    w->unk_C4 = VectorLength2D(0x7800 - w->unk_A0, 0x5000 - w->unk_A4);
-    w->unk_B8 -= w->unk_B4;
-    w->unk_B4 += 2;
+    w->rotation = t;
+    w->flipAngleY += (64 - w->flipAngleY) >> 4;
+    w->flipAngleX = z;
+    w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
+    w->speed -= w->vz;
+    w->vz += 2;
 
-    if (w->unk_DA <= 0xFF) {
-        w->unk_DA += 3;
+    if (w->scale <= 0xFF) {
+        w->scale += 3;
     }
 
-    x = w->unk_A0 >> 8;
+    x = w->posX >> 8;
     q1 = &w->x;
     *q1 = x;
-    y = w->unk_A4 >> 8;
+    y = w->posY >> 8;
     q2 = &w->y2;
     *q2 = y;
-    func_080978B0(w);
+    UpdatePrizeMapCardScale(w);
     return 1;
 }
-u8 func_0809753C(UnkStruct_08096F94* w, void* a) {
+u8 UpdatePrizeMapCardShow(PrizeMapCardWork* w, void* a) {
     s32 v;
     s16 lim;
     s32 x;
     s16* q;
 
-    v = w->unk_DE << 8;
-    ApproachValue((s32*)&w->unk_DF, 0, w->unk_E2);
-    ApproachValue(&v, 0, w->unk_E2);
-    ApproachValue(&w->unk_A0, 0x7800, w->unk_E2);
-    ApproachValue(&w->unk_A4, 0x5800, w->unk_E2);
-    w->unk_DE = v >> 8;
+    v = w->rotation << 8;
+    ApproachValue((s32*)&w->flipAngleY, 0, w->steps);
+    ApproachValue(&v, 0, w->steps);
+    ApproachValue(&w->posX, 0x7800, w->steps);
+    ApproachValue(&w->posY, 0x5800, w->steps);
+    w->rotation = v >> 8;
 
-    if (w->unk_E2 != 0) {
-        w->unk_E2--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
     lim = 0x100;
 
-    if (w->unk_DA < 0x100) {
-        w->unk_DA += 2;
+    if (w->scale < 0x100) {
+        w->scale += 2;
     } else {
-        w->unk_DA = lim;
+        w->scale = lim;
     }
 
-    x = w->unk_A0 >> 8;
+    x = w->posX >> 8;
     q = &w->x;
     *q = x;
-    x = w->unk_A4 >> 8;
+    x = w->posY >> 8;
     q = &w->y2;
     *q = x;
-    func_080978B0(w);
-    w->unk_E3++;
+    UpdatePrizeMapCardScale(w);
+    w->holdTimer++;
 
-    if (w->unk_E3 == 30) {
-        w->unk_E3 = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08097600);
+    if (w->holdTimer == 30) {
+        w->holdTimer = 0;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardShrink);
     }
 
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
 
-u8 func_08097600(UnkStruct_08096F94* w) {
-    w->unk_DE += 32;
+u8 UpdatePrizeMapCardShrink(PrizeMapCardWork* w) {
+    w->rotation += 32;
     WorldToScreen(&w->x3, &w->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
     w->x += (w->x3 - w->x) >> 3;
     w->y2 += (w->y3 - w->y2) >> 3;
@@ -1304,44 +1304,44 @@ u8 func_08097600(UnkStruct_08096F94* w) {
     return 1;
 }
 
-static void PrizeCard_2(UnkStruct_08096F94* w) {
+static void PrizeCard_2(PrizeMapCardWork* w) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
     s16 v;
 
-    pal = w->unk_E5 == 0 ? GetBattleSpritePriorityFlags(w->unk_A4) : 0;
+    pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;
 
-    if (w->scaleX == 0x100 && w->unk_DE == 0) {
+    if (w->scaleX == 0x100 && w->rotation == 0) {
         affine = 0;
     } else {
-        affine = AllocObjAffine(w->unk_DE, w->scaleX, w->scaleY, 1);
+        affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     }
 
     DrawSprite(w->x, (u16)w->y2 - 8,
                *w->cardDef->sprites,
                w->tiles, w->palette, affine, pal,
-               (u16)(w->unk_CC + 1));
+               (u16)(w->priority + 1));
 
     if (w->cardDef->backIndex == 4) {
-        gfx = w->cardBack->sprites[w->unk_E8];
+        gfx = w->cardBack->sprites[w->backFrame];
     } else {
         gfx = w->cardBack->sprites[0];
     }
 
     DrawSprite(w->x, (u16)w->y2 - 8, gfx,
                w->tiles2, w->palette2, affine, pal,
-               w->unk_CC);
+               w->priority);
 
     if (w->cardDef->backIndex != 4) {
-        gfx = gUnk_09EE981C[w->unk_3E];
+        gfx = gUnk_09EE981C[w->value];
         DrawSprite(w->x, (u16)w->y2 - 8, gfx,
                    w->tiles4, w->palette2, affine, pal,
-                   (u16)(w->unk_CC - 1));
+                   (u16)(w->priority - 1));
     }
 
-    if (w->unk_E5 == 0) {
-        v = 204 - ((w->unk_AC - w->unk_A8) >> 7);
+    if (w->collected == 0) {
+        v = 204 - ((w->groundZ - w->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
@@ -1350,13 +1350,13 @@ static void PrizeCard_2(UnkStruct_08096F94* w) {
         DrawSprite(w->x2, w->y, gUnk_09EE1380[0],
                    w->tiles5, w->palette3,
                    AllocObjAffine(0, v, v, 0), pal,
-                   (u16)(w->unk_CC + 2));
+                   (u16)(w->priority + 2));
     }
 
     TaskPoolDraw(&w->tasks);
 }
 
-static void PrizeCard_3(UnkStruct_08096F94* w) {
+static void PrizeCard_3(PrizeMapCardWork* w) {
     FadeSetPaletteExcluded(w->palette2->index + 16, 0);
     FadeSetPaletteExcluded(w->palette->index + 16, 0);
     ColliderUnregister(&w->collider);
@@ -1372,9 +1372,9 @@ static void PrizeCard_3(UnkStruct_08096F94* w) {
     gBtlWork->prizeCount--;
 }
 
-void func_080978B0(UnkStruct_08096F94* w) {
-    w->scaleX = (-gSineTable[((w->unk_E0 + 0x80) & 0xFF) + 0x40] * w->unk_DA) >> 8;
-    w->scaleY = (-gSineTable[((w->unk_DF + 0x80) & 0xFF) + 0x40] * w->unk_DA) >> 8;
+void UpdatePrizeMapCardScale(PrizeMapCardWork* w) {
+    w->scaleX = (-gSineTable[((w->flipAngleX + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
+    w->scaleY = (-gSineTable[((w->flipAngleY + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -1385,43 +1385,43 @@ void func_080978B0(UnkStruct_08096F94* w) {
     }
 }
 #ifndef VERSION_EU
-void func_0809792C(UnkStruct_08096F94* w) {
+void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* w) {
     u8* p;
     u8* q;
     u8 k;
     u8 v;
     u8 z;
 
-    v = gUnk_09EE752C[w->unk_E7].unk_00;
-    q = &w->unk_E8;
+    v = gPrizeMapCardBackAnim[w->backAnimStep].sprite;
+    q = &w->backFrame;
     z = 0;
     *q = v;
-    p = &w->unk_E6;
-    k = w->unk_E7;
+    p = &w->backAnimTimer;
+    k = w->backAnimStep;
 
-    if (*p == gUnk_09EE752C[k].unk_01) {
-        w->unk_E7 = k + 1;
+    if (*p == gPrizeMapCardBackAnim[k].duration) {
+        w->backAnimStep = k + 1;
 
-        if (w->unk_E7 == 7) {
-            w->unk_E7 = z;
+        if (w->backAnimStep == 7) {
+            w->backAnimStep = z;
         }
 
         *p = z;
     }
 
-    w->unk_E6++;
+    w->backAnimTimer++;
 }
 #endif
-void func_0809797C(TaskPool* pool, s32* args) {
-    TaskCreate(pool, &gUnk_09EE7650, args);
+void CreatePrizeMapCardTask(TaskPool* pool, s32* args) {
+    TaskCreate(pool, &gTaskDescPrizeMapCard, args);
 }
 
 void SpotLight_0(SpotlightWork* w, u8* src) {
     if (src != 0) {
-        w->unk_10 = src;
+        w->endFlag = src;
     } else {
-        w->unk_10 = &w->unk_14;
-        w->unk_14 = 0;
+        w->endFlag = &w->ownEndFlag;
+        w->ownEndFlag = 0;
     }
 
     LoadBgTiles(0, gUnk_09501778, 0xCA0);
@@ -1429,43 +1429,43 @@ void SpotLight_0(SpotlightWork* w, u8* src) {
     FadeSetPaletteExcluded(13, 1);
     LoadBgMap(0, gUnk_0960F2B8, 0x800);
     SetBgScroll(0, 0, 0);
-    w->unk_00 = 30;
-    w->unk_04 = 0x1000;
-    w->unk_08 = 0;
+    w->steps = 30;
+    w->blendB = 0x1000;
+    w->blendA = 0;
     FadeStartOut(0, 30);
     gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
 }
 
 u8 SpotLight_1(SpotlightWork* w, void* a) {
-    ApproachValue(&w->unk_08, 0x1000, w->unk_00);
+    ApproachValue(&w->blendA, 0x1000, w->steps);
 
-    if (w->unk_00 != 0) {
-        w->unk_00--;
-        w->unk_0C = ((w->unk_04 >> 8) << 8) | (w->unk_08 >> 8);
-        gBldAlpha = w->unk_0C;
+    if (w->steps != 0) {
+        w->steps--;
+        w->bldAlpha = ((w->blendB >> 8) << 8) | (w->blendA >> 8);
+        gBldAlpha = w->bldAlpha;
     }
 
-    if (*w->unk_10 == 1) {
+    if (*w->endFlag == 1) {
         FadeStartIn(0, 30);
-        w->unk_00 = 30;
+        w->steps = 30;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08097A80);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSpotLightFadeOut);
     }
 
     return 1;
 }
 
-s32 func_08097A80(SpotlightWork* w) {
+s32 UpdateSpotLightFadeOut(SpotlightWork* w) {
     s32 v;
 
-    ApproachValue(&w->unk_08, 0, w->unk_00);
+    ApproachValue(&w->blendA, 0, w->steps);
 
-    if (w->unk_00 != 0) {
-        w->unk_00--;
+    if (w->steps != 0) {
+        w->steps--;
     }
 
-    v = ((w->unk_04 >> 8) << 8) | (w->unk_08 >> 8);
-    w->unk_0C = v;
+    v = ((w->blendB >> 8) << 8) | (w->blendA >> 8);
+    w->bldAlpha = v;
     gBldAlpha = v;
     return 1;
 }
@@ -1502,8 +1502,8 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
 
 #ifdef VERSION_EU
     work->tiles = AllocObjTiles(0x800, 0);
-    SetObjTileSource(work->tiles, gUnkEu_09F72A64[gLanguage]);
-    AnimInit(&work->anim, gUnkEu_09F72A3C[gLanguage], gUnkEu_09F72A50[gLanguage]);
+    SetObjTileSource(work->tiles, gSelmapEventKeyTitleTilesByLanguage[gLanguage]);
+    AnimInit(&work->anim, gSelmapEventKeyTitleAnimsByLanguage[gLanguage], gSelmapEventKeyTitleFramesByLanguage[gLanguage]);
 #else
 #ifdef VERSION_JP
     work->tiles = AllocObjTiles(0x480, 0);
@@ -1519,23 +1519,23 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     work->palette = work->args->palette;
     work->unk_11C = 0;
     work->unk_11D = 0;
-    work->unk_11E = 8;
-    work->unk_11F = 8;
-    work->unk_120 = 0;
+    work->mosaicX = 8;
+    work->mosaicY = 8;
+    work->mosaicTimer = 0;
     work->unk_123 = 0;
-    SetObjMosaicSize(work->unk_11E, work->unk_11F);
-    work->unk_FC = 0x7800;
-    work->unk_100 = 0x4000;
+    SetObjMosaicSize(work->mosaicX, work->mosaicY);
+    work->rowX = 0x7800;
+    work->rowY = 0x4000;
     work->unk_114 = 0x100;
     work->unk_116 = 0x100;
     work->unk_11B = 0;
     work->paidCount = 0;
-    work->unk_11A = 8;
-    work->unk_118 = 0;
-    func_08098598(0x10000, work->unk_100, &work->cards[0].sprite);
-    func_08098598(0x10000, work->unk_100, &work->cards[1].sprite);
-    func_08098598(0x10000, work->unk_100, &work->cards[2].sprite);
-    func_08098598(0x10000, work->unk_100, &work->cards[3].sprite);
+    work->slideSteps = 8;
+    work->pulseAngle = 0;
+    SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[0].sprite);
+    SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[1].sprite);
+    SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[2].sprite);
+    SetLayeredCardSpritePos(0x10000, work->rowY, &work->cards[3].sprite);
 }
 s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     s32 i;
@@ -1543,36 +1543,36 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     u8 n;
 
     work->gfx = AnimUpdate(&work->anim);
-    work->unk_104 = ((240 - (work->keyCount - work->paidCount) * 32) << 7) + 0x1000;
-    ApproachValue(&work->unk_FC, work->unk_104, work->unk_11A);
+    work->rowTargetX = ((240 - (work->keyCount - work->paidCount) * 32) << 7) + 0x1000;
+    ApproachValue(&work->rowX, work->rowTargetX, work->slideSteps);
 
-    if (work->unk_11A != 0) {
-        work->unk_11A--;
+    if (work->slideSteps != 0) {
+        work->slideSteps--;
     }
 
     for (i = work->paidCount; i < work->keyCount; i++) {
-        func_08098598(work->unk_FC + ((i - work->paidCount) << 13), work->unk_100, &work->cards[i].sprite);
+        SetLayeredCardSpritePos(work->rowX + ((i - work->paidCount) << 13), work->rowY, &work->cards[i].sprite);
     }
 
-    SetObjMosaicSize(work->unk_11E, work->unk_11F);
+    SetObjMosaicSize(work->mosaicX, work->mosaicY);
 
-    if (work->unk_120 == 2) {
-        if (work->unk_11E != 0) {
-            work->unk_11E--;
+    if (work->mosaicTimer == 2) {
+        if (work->mosaicX != 0) {
+            work->mosaicX--;
         }
 
-        if (work->unk_11F != 0) {
-            work->unk_11F--;
+        if (work->mosaicY != 0) {
+            work->mosaicY--;
         }
 
-        work->unk_120 = 0;
+        work->mosaicTimer = 0;
     }
 
-    work->unk_120++;
+    work->mosaicTimer++;
     work->unk_11D++;
 
-    if (work->args->unk_08 != 0) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08097DE4);
+    if (work->args->closeMode != 0) {
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateSelmapEventKeyClose);
     }
 
     if (work->cards[work->paidCount].total != 0) {
@@ -1585,20 +1585,20 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
         }
     }
 
-    work->unk_118 += 8;
+    work->pulseAngle += 8;
     return 1;
 }
-s32 func_08097DE4(SelmapEventKeyWork* work) {
+s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work) {
     u8* a;
     u8* b;
 
-    a = &work->unk_11E;
+    a = &work->mosaicX;
 
     if (*a <= 14) {
         (*a)++;
     }
 
-    b = &work->unk_11F;
+    b = &work->mosaicY;
 
     if (*b <= 14) {
         (*b)++;
@@ -1610,21 +1610,21 @@ s32 func_08097DE4(SelmapEventKeyWork* work) {
 void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
     s32 i;
 
-    switch (work->args->unk_08) {
+    switch (work->args->closeMode) {
     case 0:
     case 2:
-        if (work->unk_11E == 15) {
+        if (work->mosaicX == 15) {
             return;
         }
 
-        if (work->unk_11F == 15) {
+        if (work->mosaicY == 15) {
             break;
         }
 
         for (i = work->paidCount; i < work->keyCount; i++) {
             if (i == work->paidCount) {
-                func_080985A0(&work->cards[i].sprite, 0x808, 0,
-                              (gSineTable[(u8)work->unk_118] >> 8) * 8 + 256);
+                DrawLayeredCardSpriteScaled(&work->cards[i].sprite, 0x808, 0,
+                              (gSineTable[(u8)work->pulseAngle] >> 8) * 8 + 256);
 
                 switch (work->cards[i].color) {
                 case 2:
@@ -1645,17 +1645,17 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                     break;
                 }
             } else {
-                func_08098670(&work->cards[i].sprite, 0x808);
+                DrawLayeredCardSprite(&work->cards[i].sprite, 0x808);
             }
         }
         break;
     }
 
-    if (work->unk_11E == 15) {
+    if (work->mosaicX == 15) {
         return;
     }
 
-    if (work->unk_11F == 15) {
+    if (work->mosaicY == 15) {
         return;
     }
 
@@ -1665,7 +1665,7 @@ void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     s32 i;
 
     for (i = 0; i < work->keyCount; i++) {
-        func_08098778(&work->cards[i].sprite);
+        ReleaseLayeredCardSprite(&work->cards[i].sprite);
     }
 
     ReleaseObjTiles(work->tiles);
@@ -1686,8 +1686,8 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     CpuSet((void*)&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(EventKeyCard) / 4);
 
     if (key->kind != 255) {
-        c = &gUnk_09EE4C80[key->kind * 10];
-        b = &gUnk_09EE4BF4[c->backIndex];
+        c = &gMapCardDefs[key->kind * 10];
+        b = &gMapCardBackDefs[c->backIndex];
         work->sprite.tiles = LoadObjTiles(c->tiles, c->tilesSize);
         work->sprite.palette = LoadObjPalette(c->palette, c->paletteSize);
         work->sprite.gfx = *c->sprites;
@@ -1711,7 +1711,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
         work->sprite.palette2 = 0;
         work->sprite.gfx2 = 0;
     } else {
-        d = &gUnk_09EE4BF4[key->color];
+        d = &gMapCardBackDefs[key->color];
         work->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
         work->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
         work->sprite.gfx2 = *d->sprites2;
@@ -1819,7 +1819,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     work->sprite.palette3 = LoadObjPalette(gUnk_09618D38, 32);
 
     if (work->sprite.tiles2 == 0) {
-        cb = &gUnk_08F709B0[4];
+        cb = &gCardBacks[4];
         work->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
         work->sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
         work->sprite.gfx2 = cb->gfx2;
@@ -1845,12 +1845,12 @@ void UpdateEventKeyTotal(EventKeyCard* w) {
     w->drawnTotal = w->total;
 }
 
-void func_08098598(s32 x, s32 y, UnkStruct_08098670* p) {
+void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* p) {
     p->x = x;
     p->y = y;
 }
 
-void func_080985A0(UnkStruct_08098670* w, u16 b, s16 c, s16 d) {
+void DrawLayeredCardSpriteScaled(LayeredCardSprite* w, u16 b, s16 c, s16 d) {
     ObjAffine* aff;
 
     aff = AllocObjAffine(0, d, d, 1);
@@ -1868,7 +1868,7 @@ void func_080985A0(UnkStruct_08098670* w, u16 b, s16 c, s16 d) {
     }
 }
 
-void func_08098670(UnkStruct_08098670* p, u16 a) {
+void DrawLayeredCardSprite(LayeredCardSprite* p, u16 a) {
     if (p->tiles != 0) {
         DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, a, 10);
     }
@@ -1882,7 +1882,7 @@ void func_08098670(UnkStruct_08098670* p, u16 a) {
     }
 }
 
-ObjTiles* func_080986FC(u8 a) {
+ObjTiles* AllocKeyValueTiles(u8 a) {
     ObjTiles* obj;
 
     if (a != 0) {
@@ -1898,7 +1898,7 @@ ObjTiles* func_080986FC(u8 a) {
     return obj;
 }
 
-void func_08098778(UnkStruct_08098670* p) {
+void ReleaseLayeredCardSprite(LayeredCardSprite* p) {
     if (p->tiles != 0) {
         ReleaseObjTiles(p->tiles);
     }
@@ -1924,7 +1924,7 @@ void func_08098778(UnkStruct_08098670* p) {
     }
 }
 
-u8 func_080987C0(u16 n) {
+u8 GetRoomCardBackIndex(u16 n) {
     u8 idx;
 
     idx = 0;
@@ -2012,24 +2012,24 @@ u8 func_080987C0(u16 n) {
         break;
     }
 
-    return gUnk_09EE4C80[idx].backIndex;
+    return gMapCardDefs[idx].backIndex;
 }
 
 TaskDesc gTaskDescPrizeCardInit = {
     "PrizeCardInit",
-    (TaskInitFunc)func_08096714,
+    (TaskInitFunc)PrizeCardInitInit,
     (TaskUpdateFunc)PrizeCardInit_1,
-    (TaskDrawFunc)func_08096C20,
-    (TaskDestroyFunc)func_08096C2C,
+    (TaskDrawFunc)PrizeCardInitDraw,
+    (TaskDestroyFunc)PrizeCardInitDestroy,
     sizeof(PrizeCardInitWork),
 };
 
 TaskDesc gTaskDescPrizeCardInitBoss = {
     "PrizeCardInit_Boss",
-    (TaskInitFunc)func_08096714,
+    (TaskInitFunc)PrizeCardInitInit,
     (TaskUpdateFunc)PrizeCardInit_Boss_1,
-    (TaskDrawFunc)func_08096C20,
-    (TaskDestroyFunc)func_08096C2C,
+    (TaskDrawFunc)PrizeCardInitDraw,
+    (TaskDestroyFunc)PrizeCardInitDestroy,
     sizeof(PrizeCardInitWork),
 };
 
@@ -2051,13 +2051,13 @@ TaskDesc gTaskDescVersion = {
     sizeof(VersionWork),
 };
 
-TaskDesc gUnk_09EE7650 = {
+TaskDesc gTaskDescPrizeMapCard = {
     "PrizeCard",
     (TaskInitFunc)PrizeCard_0,
     (TaskUpdateFunc)PrizeCard_1,
     (TaskDrawFunc)PrizeCard_2,
     (TaskDestroyFunc)PrizeCard_3,
-    sizeof(UnkStruct_08096F94),
+    sizeof(PrizeMapCardWork),
 };
 
 TaskDesc gTaskDescSpotLight = {
@@ -2069,11 +2069,11 @@ TaskDesc gTaskDescSpotLight = {
     sizeof(SpotlightWork),
 };
 #ifdef VERSION_EU
-void* gUnkEu_09F72A3C[5] = { gUnk_09EF1224, gUnkEu_09F7C438, gUnkEu_09F7C450, gUnkEu_09F7C448, gUnkEu_09F7C440 };
+void* gSelmapEventKeyTitleAnimsByLanguage[5] = { gUnk_09EF1224, gUnkEu_09F7C438, gUnkEu_09F7C450, gUnkEu_09F7C448, gUnkEu_09F7C440 };
 
-void* gUnkEu_09F72A50[5] = { gUnk_09EF1220, gUnkEu_09F7C434, gUnkEu_09F7C44C, gUnkEu_09F7C444, gUnkEu_09F7C43C };
+void* gSelmapEventKeyTitleFramesByLanguage[5] = { gUnk_09EF1220, gUnkEu_09F7C434, gUnkEu_09F7C44C, gUnkEu_09F7C444, gUnkEu_09F7C43C };
 
-void* gUnkEu_09F72A64[5] = { gUnk_093F6ACC, gUnkEu_094C7CCE, gUnkEu_094C9180, gUnkEu_094C8946, gUnkEu_094C8288 };
+void* gSelmapEventKeyTitleTilesByLanguage[5] = { gUnk_093F6ACC, gUnkEu_094C7CCE, gUnkEu_094C9180, gUnkEu_094C8946, gUnkEu_094C8288 };
 #endif
 
 TaskDesc gTaskDescSELMAPEVKEY = {

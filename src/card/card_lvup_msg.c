@@ -40,7 +40,7 @@
 #include "bos4_api.h"
 #include "sprites_card.h"
 
-u8 func_080A25E0(LvupMsgWork* w, void* a);
+u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a);
 void Lvup_msg_3(LvupMsgWork* w);
 extern u8 gUnk_0815A09A[];
 extern u8 gUnk_0815A198[];
@@ -52,9 +52,9 @@ extern u8 gUnkEu_08895EDC[];
 #endif
 
 #ifdef VERSION_EU
-const u8 gUnk_0903BFF8[] = ".";
+const u8 gLvupMsgPeriod[] = ".";
 #elif defined(VERSION_US)
-const u16 gUnk_0903BFF8[2] = { '.', 0 };
+const u16 gLvupMsgPeriod[2] = { '.', 0 };
 #endif
 
 void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
@@ -65,10 +65,10 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     InitTextSlots(w->textSlots3, 20);
 #ifndef VERSION_JP
     InitTextSlots(w->textSlots4, 20);
-    w->textSlotCount4 = LoadTextSlots((u16*)gUnk_0903BFF8, w->textSlots4);
+    w->textSlotCount4 = LoadTextSlots((u16*)gLvupMsgPeriod, w->textSlots4);
 #endif
-    w->unk_28C = a->amount;
-    w->unk_2B4 = a->done;
+    w->amount = a->amount;
+    w->active = a->done;
     if (args.flags & 0x8000) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A09A), w->textSlots);
@@ -94,7 +94,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
         w->textSlotCount = LoadTextSlots(gUnk_0815A152, w->textSlots);
 #endif
     }
-    w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->unk_28C, w->textSlots2);
+    w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
 #ifdef VERSION_EU
     if ((args.flags & 0x8000) && gLanguage == 4) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08895EDC), w->textSlots3);
@@ -104,8 +104,8 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 #else
     w->textSlotCount3 = LoadTextSlots(gUnk_0815A0A0, w->textSlots3);
 #endif
-    w->unk_280 = _08066468(1);
-    FadeSetPaletteExcluded(w->unk_280->index + 16, 1);
+    w->textPalette = LoadTextPalette(1);
+    FadeSetPaletteExcluded(w->textPalette->index + 16, 1);
     w->x = 0x1000;
     w->x2 = 0x3000;
     w->x3 = 0x4200;
@@ -113,7 +113,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     w->y3 = 0xC800;
     w->y4 = 0xC800;
     w->y = 0xCE00;
-    w->unk_2AC = 14;
+    w->slideSteps = 14;
     w->unk_2B1 = 0;
     w->x = ((144 - (GetTextSlotsWidth(w->textSlots, w->textSlotCount)
 #ifndef VERSION_JP
@@ -131,12 +131,12 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 }
 
 s32 Lvup_msg_1(LvupMsgWork* w, void* a) {
-    SetTaskUpdate(a, (TaskUpdateFunc)func_080A25E0);
+    SetTaskUpdate(a, (TaskUpdateFunc)UpdateLvupMsgSlideIn);
     w->unk_2B1++;
     return 1;
 }
-u8 func_080A25E0(LvupMsgWork* w, void* a) {
-    s8* counter = &w->unk_2AC;
+u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a) {
+    s8* counter = &w->slideSteps;
 
     if (*counter > 0) {
         ApproachValue(&w->y, 0x6C00, *counter);
@@ -146,10 +146,10 @@ u8 func_080A25E0(LvupMsgWork* w, void* a) {
         (*counter)--;
     } else if (*counter == 0) {
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        w->unk_2AC = -1;
+        w->slideSteps = -1;
     }
 
-    if (*w->unk_2B4 == 0) {
+    if (*w->active == 0) {
         return 0;
     }
     return 1;
@@ -164,13 +164,13 @@ void Lvup_msg_2(LvupMsgWork* w) {
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
-                      w->textSlots4, w->unk_280, 40, w->textSlotCount4);
+                      w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
     case 1:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
-                      w->textSlots4, w->unk_280, 40, w->textSlotCount4);
+                      w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
     case 2:
         w->x2 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
@@ -180,13 +180,13 @@ void Lvup_msg_2(LvupMsgWork* w) {
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
-                      w->textSlots4, w->unk_280, 40, w->textSlotCount4);
+                      w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
     case 4:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
-                      w->textSlots4, w->unk_280, 40, w->textSlotCount4);
+                      w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
     }
 #else
@@ -198,12 +198,12 @@ void Lvup_msg_2(LvupMsgWork* w) {
 #else
     DrawSprite(72, w->y >> 8, gUnk_09EF126C[0], w->tiles, w->palette, 0, 0, 41);
 #endif
-    DrawTextSlots(w->x >> 8, w->y2 >> 8, w->textSlots, w->unk_280, 40, w->textSlotCount);
-    DrawTextSlots(w->x2 >> 8, w->y3 >> 8, w->textSlots2, w->unk_280, 40, w->textSlotCount2);
-    DrawTextSlots(w->x3 >> 8, w->y4 >> 8, w->textSlots3, w->unk_280, 40, w->textSlotCount3);
+    DrawTextSlots(w->x >> 8, w->y2 >> 8, w->textSlots, w->textPalette, 40, w->textSlotCount);
+    DrawTextSlots(w->x2 >> 8, w->y3 >> 8, w->textSlots2, w->textPalette, 40, w->textSlotCount2);
+    DrawTextSlots(w->x3 >> 8, w->y4 >> 8, w->textSlots3, w->textPalette, 40, w->textSlotCount3);
 #ifdef VERSION_US
     DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
-                  w->textSlots4, w->unk_280, 40, w->textSlotCount4);
+                  w->textSlots4, w->textPalette, 40, w->textSlotCount4);
 #endif
 }
 void Lvup_msg_3(LvupMsgWork* w) {
@@ -213,7 +213,7 @@ void Lvup_msg_3(LvupMsgWork* w) {
 #ifndef VERSION_JP
     FreeTextSlots(w->textSlots4, 20);
 #endif
-    ReleaseObjPalette(w->unk_280);
+    ReleaseObjPalette(w->textPalette);
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }

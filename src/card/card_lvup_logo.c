@@ -48,13 +48,13 @@ extern u8 gUnkEu_09170202[];
 extern u8 gUnkEu_0916FDCA[];
 #endif
 extern EventState* gEventState;
-void func_080A1554(LevelUpEffectWork* w);
+void TrackLevelUpEffectTarget(LevelUpEffectWork* w);
 
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->x[0] = a->x;
-    w->unk_64 = a->x;
+    w->targetX = a->x;
     w->y[0] = a->y;
-    w->unk_68 = a->y;
+    w->targetY = a->y;
     w->target = a->target;
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -84,38 +84,38 @@ void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->tiles = a->tiles;
     w->palette = a->palette;
     FadeSetPaletteExcluded(a->palette->index + 16, 1);
-    w->unk_94 = 0;
-    w->unk_95 = 0;
-    w->unk_6C[0] = -0x280;
+    w->frame = 0;
+    w->timer = 0;
+    w->vy[0] = -0x280;
     m4aSongNumStart(SONG_BTL_LVUP);
 }
 
 s32 Lvup_Logo_1(LevelUpEffectWork* w) {
-    w->y[0] += w->unk_6C[0];
-    w->unk_6C[0] += 25;
-    func_080A1554(w);
-    w->x[0] = w->unk_64 << 8;
-    w->unk_95++;
+    w->y[0] += w->vy[0];
+    w->vy[0] += 25;
+    TrackLevelUpEffectTarget(w);
+    w->x[0] = w->targetX << 8;
+    w->timer++;
 
-    if ((s8)w->unk_95 == 60) {
+    if ((s8)w->timer == 60) {
         return 0;
     }
 
     return 1;
 }
 void Lvup_Logo_2(LevelUpEffectWork* w) {
-    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->unk_94], w->tiles, w->palette, 0, 0, 10);
+    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->frame], w->tiles, w->palette, 0, 0, 10);
 }
 void Lvup_Logo_3(LevelUpEffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gUnk_02034AF8 = 0;
+    gLvupLogoActive = 0;
 }
 
-u8 func_080A1B4C(BtlObj* p, TaskPool* pool) {
+u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
     LevelUpEffectArgs args;
 
-    gUnk_02034AF8 = 0;
+    gLvupLogoActive = 0;
 
     if (gBtlWork->flags & 0x20000) {
         return 0;
@@ -130,7 +130,7 @@ u8 func_080A1B4C(BtlObj* p, TaskPool* pool) {
     return 1;
 }
 
-void func_080A1BB8(EventMapObjectWork* w, EventBackgroundDef* t) {
+void LoadEventMapObjectGfx(EventMapObjectWork* w, EventBackgroundDef* t) {
     EventMapObjectDef* q;
     EventMapObjectPlacement* entries;
     u8 i;
@@ -151,7 +151,7 @@ void func_080A1BB8(EventMapObjectWork* w, EventBackgroundDef* t) {
     }
 }
 
-void func_080A1C48(EventMapObjectWork* w) {
+void ReleaseEventMapObjectGfx(EventMapObjectWork* w) {
     u8 i;
 
     for (i = 0; i <= 9; i++) {
@@ -165,10 +165,10 @@ void Ev_mapObj_0(EventMapObjectWork* w, u8* a) {
     EventBackgroundDef* t;
 
     w->background = a[0];
-    t = gUnk_09EE3CA0[w->background];
+    t = gEventBackgroundDefs[w->background];
 
     if (t->mapObjects != 0) {
-        func_080A1BB8(w, t);
+        LoadEventMapObjectGfx(w, t);
         w->definition = t->mapObjects;
     }
 }
@@ -204,7 +204,7 @@ void Ev_mapObj_2(EventMapObjectWork* w) {
 }
 
 void Ev_mapObj_3(EventMapObjectWork* w) {
-    func_080A1C48(w);
+    ReleaseEventMapObjectGfx(w);
 }
 
 TaskDesc gTaskDescLvupLogo = {
@@ -225,4 +225,4 @@ TaskDesc gTaskDescEvMapObj = {
     sizeof(EventMapObjectWork),
 };
 
-void* gUnk_09EE7998[7] = { gUnk_0951F2B8, gUnk_0951FAB8, gUnk_095202B8, gUnk_095212B8, gUnk_09520AB8, gUnk_09521AB8, gUnk_095222B8 };
+void* gEventBgEffectMaps[7] = { gUnk_0951F2B8, gUnk_0951FAB8, gUnk_095202B8, gUnk_095212B8, gUnk_09520AB8, gUnk_09521AB8, gUnk_095222B8 };

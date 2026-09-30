@@ -11,8 +11,8 @@ void task_sroll_b_logo_0(SrollBLogoWork* w, SrollBLogoArg* a) {
 
     w->x = a->x;
     w->y = a->y;
-    w->unk_08 = a->unk_08;
-    w->unk_0C = a->unk_0C;
+    w->scrollY = a->scrollY;
+    w->scrollSpeed = a->scrollSpeed;
 #ifdef VERSION_EU
     w->palette = LoadObjPalette(gUnk_09D6BE34, 64);
     w->tiles = LoadObjTiles(gUnk_09C5CC7C, 94 * 32);
@@ -34,7 +34,7 @@ u8 task_sroll_b_logo_1(SrollBLogoWork* w) {
 
     r = 1;
 
-    if ((s16)((w->y >> 8) - (*w->unk_08 >> 8)) <= -32) {
+    if ((s16)((w->y >> 8) - (*w->scrollY >> 8)) <= -32) {
         r = 0;
     }
     AnimUpdate(&w->anim);
@@ -44,7 +44,7 @@ u8 task_sroll_b_logo_1(SrollBLogoWork* w) {
 void task_sroll_b_logo_2(SrollBLogoWork* w) {
     u16 y;
 
-    y = (w->y >> 8) - (*w->unk_08 >> 8);
+    y = (w->y >> 8) - (*w->scrollY >> 8);
     DrawSprite(w->x >> 8, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0, 0xFF0);
 }
 

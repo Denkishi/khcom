@@ -12,6 +12,6 @@ void HumInit(struct HumWork* work, const struct HumDef* def);
 void HumSubInit(struct HumWork* work, struct HumSub* sub, const struct HumSubDef* def);
 void HumReleaseResources(struct HumWork* work);
 s32 _0800E434(struct HumWork* work);
-s32 func_0800E5F0(struct HumWork* work);
+s32 HumUpdate(struct HumWork* work);
 
 #endif

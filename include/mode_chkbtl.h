@@ -26,8 +26,8 @@
 typedef struct ChkBtlEntry {
     u8 world;
     u8 unk_01[0x03];
-    s32 unk_04;
-    s32 unk_08;
+    s32 kind;
+    s32 battleId;
     TaskDesc* taskDesc;
     const char* name;
 } ChkBtlEntry;
@@ -39,14 +39,14 @@ typedef struct ChkBtlPos {
 } ChkBtlPos;
 
 typedef struct ChkBtlWorld {
-    u8 unk_00;
+    u8 world;
     u8 unk_01[0x03];
     const char* name;
 } ChkBtlWorld;
 
-extern u16 gUnk_02039B88;
-extern u16 gUnk_02039B8C;
-extern u16 gUnk_02039B90;
+extern u16 gVsBattleMinY;
+extern u16 gVsBattleMaxY;
+extern u16 gVsBattleHalfWidth;
 extern const ChkBtlEntry gChkBtlEntries[];
 extern const ChkBtlWorld gChkBtlWorlds[];
 extern ChkBtlWork* gChkBtlWork;

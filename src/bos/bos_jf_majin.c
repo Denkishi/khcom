@@ -3,47 +3,47 @@
 #include "sprites_bos2.h"
 #include "system_state.h"
 
-void* gUnk_0203B4F0[4] EWRAM_COMMON(16);
-void* gUnk_0203B500 EWRAM_COMMON(4);
+void* gBosJfMajinMapBlockTable[4] EWRAM_COMMON(16);
+void* gBosJfMajinMapBlocks EWRAM_COMMON(4);
 u8 gUnk_0203B504[12] EWRAM_COMMON(4);
-u8 gUnk_0203B510[0x800] EWRAM_COMMON(16);
+u8 gBosJfMajinMapBuffer[0x800] EWRAM_COMMON(16);
 
-void func_080BE380(u8 a, u16 b, JfMajinWork* work) {
-    func_080BE3DC(a, work);
-    SetBgMapBlocks(1, gUnk_0203B500, 2, 2);
-    LoadBgTiles(1, gUnk_09EF28D0[a], b * 32);
+void BosJfMajinSetBgFrame(u8 a, u16 b, JfMajinWork* work) {
+    BosJfMajinCopyBgMap(a, work);
+    SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
+    LoadBgTiles(1, gBosJfMajinFrameTiles[a], b * 32);
     work->jf->flags &= ~0x10;
 }
-void func_080BE3DC(u8 a, JfMajinWork* work) {
+void BosJfMajinCopyBgMap(u8 a, JfMajinWork* work) {
     s16 n;
 
     if (work->jf->body.z < -0x8000) {
-        RequestDma3Copy(gUnk_09EF280C[a], gUnk_0203B510, 0x800);
+        RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, 0x800);
     } else {
-        n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->unk_6A;
+        n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->extraClipRows;
 
         if (n > 0x20) {
-            RequestDma3Clear(gUnk_0203B510, 0x800);
+            RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
         } else {
-            RequestDma3Copy(gUnk_09EF280C[a], gUnk_0203B510, (0x20 - n) * 64);
-            RequestDma3Clear(gUnk_0203B510 + (0x20 - n) * 64, n * 64);
+            RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, (0x20 - n) * 64);
+            RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
         }
     }
 }
-void func_080BE478(u8 a, JfMajinWork* work) {
+void BosJfMajinUpdateBgClip(u8 a, JfMajinWork* work) {
     s16 n;
 
     if (work->jf->body.z >= -0x8000) {
-        n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->unk_6A;
+        n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->extraClipRows;
 
         if (n > 0x20) {
-            RequestDma3Clear(gUnk_0203B510, 0x800);
+            RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
         } else {
-            RequestDma3Copy(gUnk_09EF280C[a], gUnk_0203B510, (0x20 - n) * 64);
-            RequestDma3Clear(gUnk_0203B510 + (0x20 - n) * 64, n * 64);
+            RequestDma3Copy(gBosJfMajinFrameMaps[a], gBosJfMajinMapBuffer, (0x20 - n) * 64);
+            RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
         }
 
-        SetBgMapBlocks(1, gUnk_0203B500, 2, 2);
+        SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     }
 }
 
@@ -64,47 +64,47 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
 
     work->jf = arg;
     GET_ACTOR_POSITION(&arg->body, x, y.coordinate, z);
-    work->unk_48 = 0;
-    work->unk_46 = 0;
-    work->unk_44 = 0;
+    work->step = 0;
+    work->stepTimer = 0;
+    work->moveSteps = 0;
     work->x = x;
     work->y2 = y.coordinate;
     work->z = z;
-    work->unk_5C = 0;
-    work->unk_5E = gUnk_0203ACC4;
-    work->unk_60 = gUnk_0203ACD4;
-    work->unk_62 = gUnk_0203ACC0;
-    work->unk_64 = gUnk_0203ACC4;
-    work->unk_66 = gUnk_0203ACD4;
-    work->unk_68 = gUnk_0203ACC0;
-    work->unk_49 = 0;
-    work->unk_4A = 0;
-    work->unk_4C = 0x133;
-    work->unk_6A = 0;
-    gUnk_0203B4F0[0] = gUnk_08125E24;
-    gUnk_0203B4F0[1] = gUnk_08125E24;
-    gUnk_0203B4F0[2] = gUnk_08125E24;
-    gUnk_0203B4F0[3] = gUnk_0203B510;
-    RequestDma3Copy(gUnk_096CAC64, gUnk_0203B510, 0x800);
-    gUnk_0203B500 = gUnk_0203B4F0;
+    work->baseFrame = 0;
+    work->leftLevel = gBosJfLeftPillarLevel;
+    work->middleLevel = gBosJfMiddlePillarLevel;
+    work->rightLevel = gBosJfRightPillarLevel;
+    work->leftTarget = gBosJfLeftPillarLevel;
+    work->middleTarget = gBosJfMiddlePillarLevel;
+    work->rightTarget = gBosJfRightPillarLevel;
+    work->beamAngle = 0;
+    work->beamLength = 0;
+    work->beamScale = 0x133;
+    work->extraClipRows = 0;
+    gBosJfMajinMapBlockTable[0] = gUnk_08125E24;
+    gBosJfMajinMapBlockTable[1] = gUnk_08125E24;
+    gBosJfMajinMapBlockTable[2] = gUnk_08125E24;
+    gBosJfMajinMapBlockTable[3] = gBosJfMajinMapBuffer;
+    RequestDma3Copy(gUnk_096CAC64, gBosJfMajinMapBuffer, 0x800);
+    gBosJfMajinMapBlocks = gBosJfMajinMapBlockTable;
     LoadBgPalette(1, gUnk_096FB584, 32);
     LoadBgTiles(1, gUnk_09665C04, 0x2700);
-    SetBgMapBlocks(1, gUnk_0203B500, 2, 2);
+    SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    work->unk_2C = 1;
+    work->spriteVisible = 1;
     work->unk_30 = 0x2A200;
     work->unk_34 = 0x12600;
     work->y = 0;
-    work->unk_3C = 0;
+    work->idleStep = 0;
     x = 0x308;
     AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
     AnimStart(&work->anim, 1, 1);
     work->gfx = AnimGetGfx(&work->anim);
     y.bounds = gBtlWork;
-    ScrollBgMapTo(1, ((y.bounds->unk_000 - arg->body.x) >> 8) + x,
-                  ((z = y.bounds->unk_004 - (arg->body.y + arg->body.z)) >> 8) + 0x126);
+    ScrollBgMapTo(1, ((y.bounds->viewX - arg->body.x) >> 8) + x,
+                  ((z = y.bounds->viewY - (arg->body.y + arg->body.z)) >> 8) + 0x126);
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBosJfBorderline, work->jf);
 }
@@ -116,42 +116,42 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
 
     jf->flags |= 0x10;
 
-    switch (work->jf->unk_238) {
+    switch (work->jf->state) {
     case 0:
-        func_080BE9A0(work);
+        BosJfMajinUpdateIdle(work);
         break;
     case 1:
-        func_080BEAE8(work);
+        BosJfMajinUpdateSwitchSide(work);
         break;
     case 2:
-        func_080BEDF4(work);
+        BosJfMajinUpdateRockAttack(work);
         break;
     case 3:
-        func_080BF160(work);
+        BosJfMajinUpdateSlam(work);
         break;
     case 4:
-        func_080BF4F4(work);
+        BosJfMajinUpdateBeam(work);
         break;
     case 5:
-        func_080BF8C4(work);
+        BosJfMajinUpdateSweepBeam(work);
         break;
     case 8:
         func_080BFDD4(work);
         break;
     case 6:
-        func_080C02AC(work);
+        BosJfMajinUpdatePillars(work);
         break;
     case 7:
-        func_080BFDD8(work);
+        BosJfMajinUpdateBreak(work);
         break;
     case 9:
-        func_080BFFF8(work);
+        BosJfMajinUpdateDefeat(work);
         break;
     case 10:
-        func_080C0624(work);
+        BosJfMajinUpdateEventIdle(work);
         break;
     case 11:
-        func_080BFEF0(work);
+        BosJfMajinUpdateGimmick(work);
         break;
     }
 
@@ -159,8 +159,8 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
     TaskPoolUpdate(&work->tasks);
 
     if (work->jf->flags & 0x10) {
-        if (work->jf->unk_238 != 6) {
-            func_080BE478(work->jf->unk_248, work);
+        if (work->jf->state != 6) {
+            BosJfMajinUpdateBgClip(work->jf->bgFrame, work);
         }
     }
 
@@ -174,7 +174,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     s16 x;
     s16 y;
 
-    if (gBtlWork->unk_070 == 0) {
+    if (gBtlWork->paused == 0) {
         if (jf->flags & 1) {
             if (gFrameCounter & 1) {
                 LoadPaletteWithEffect(gUnk_08F69BC4, (void*)0x05000000, 32);
@@ -191,10 +191,10 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
         gfx = work->palette;
     }
 
-    ScrollBgMapTo(1, ((gBtlWork->unk_000 - jf->body.x) >> 8) + 776,
-                  ((gBtlWork->unk_004 - (jf->body.y + jf->body.z)) >> 8) + 294);
+    ScrollBgMapTo(1, ((gBtlWork->viewX - jf->body.x) >> 8) + 776,
+                  ((gBtlWork->viewY - (jf->body.y + jf->body.z)) >> 8) + 294);
 
-    if (work->unk_2C == 1) {
+    if (work->spriteVisible == 1) {
         if (jf->body.flags & 4) {
             pal = GetBattleSpritePriorityFlags(jf->body.y);
         } else {
@@ -216,7 +216,7 @@ void task_bos_jf_majin_3(JfMajinWork* work) {
     ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
-s32 func_080BE910(void) {
+s32 BosJfGetActorPillar(void) {
     s32 v = gBtlWork->actor->x;
 
     if (v < 0x1EA00) {
@@ -230,7 +230,7 @@ s32 func_080BE910(void) {
     return 2;
 }
 
-s32 func_080BE940(JfMajinWork* work) {
+s32 BosJfMajinGetActorPillarDistance(JfMajinWork* work) {
     s32 v;
 
     if (work->jf->body.flags & 4) {
@@ -260,388 +260,388 @@ s32 func_080BE940(JfMajinWork* work) {
     return 0;
 }
 
-void func_080BE9A0(JfMajinWork* work) {
+void BosJfMajinUpdateIdle(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 8;
-            work->unk_5C = 8;
+            jf->bgFrame = 8;
+            work->baseFrame = 8;
         } else {
-            jf->unk_248 = 28;
-            work->unk_5C = 28;
+            jf->bgFrame = 28;
+            work->baseFrame = 28;
         }
 
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_3C = 0;
-        work->unk_2C = 1;
-        work->jf->unk_244++;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->idleStep = 0;
+        work->spriteVisible = 1;
+        work->jf->stateStep++;
     } else {
-        if (jf->unk_24A >= gUnk_0961A6A8[jf->unk_248]) {
-            jf->unk_24A = 0;
-            work->jf->unk_248++;
-            work->unk_3C++;
+        if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
+            jf->bgFrameTimer = 0;
+            work->jf->bgFrame++;
+            work->idleStep++;
 
-            if (work->jf->unk_248 > work->unk_5C + 5) {
-                work->jf->unk_248 = work->unk_5C;
-                work->unk_3C = 0;
+            if (work->jf->bgFrame > work->baseFrame + 5) {
+                work->jf->bgFrame = work->baseFrame;
+                work->idleStep = 0;
             }
 
-            func_080BE380(work->jf->unk_248, 0x80, work);
+            BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         }
 
-        work->jf->unk_24A++;
+        work->jf->bgFrameTimer++;
         work->gfx = AnimUpdate(&work->anim);
-        work->y = gUnk_0961A70A[work->unk_3C];
+        work->y = gBosJfMajinIdleOffsets[work->idleStep];
 
-        if (gBtlWork->unk_0A0 != 0) {
+        if (gBtlWork->phase != 0) {
             if (GetRandom() % 80 == 0) {
-                func_080C0714(work);
-                work->jf->unk_244 = 0;
+                BosJfMajinChooseAttack(work);
+                work->jf->stateStep = 0;
             }
         }
     }
 }
 
-void func_080BEAE8(JfMajinWork* work) {
+void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 0;
+            jf->bgFrame = 0;
         } else {
-            jf->unk_248 = 7;
+            jf->bgFrame = 7;
         }
 
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0xA0, work);
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_2C = 0;
-        work->jf->unk_244++;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
+        work->step = 0;
+        work->stepTimer = 0;
+        work->spriteVisible = 0;
+        work->jf->stateStep++;
     } else {
-        switch (work->unk_48) {
+        switch (work->step) {
         case 0:
-            if (jf->unk_24A >= gUnk_0961A6A8[jf->unk_248]) {
-                jf->unk_24A = 0;
+            if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
+                jf->bgFrameTimer = 0;
 
                 if (jf->body.flags & 4) {
-                    work->jf->unk_248++;
+                    work->jf->bgFrame++;
 
-                    if (work->jf->unk_248 > 7) {
-                        work->jf->unk_248 = 0;
+                    if (work->jf->bgFrame > 7) {
+                        work->jf->bgFrame = 0;
                     }
                 } else {
-                    work->jf->unk_248--;
+                    work->jf->bgFrame--;
 
-                    if (work->jf->unk_248 < 0) {
-                        work->jf->unk_248 = 7;
+                    if (work->jf->bgFrame < 0) {
+                        work->jf->bgFrame = 7;
                     }
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            work->jf->unk_24A++;
+            work->jf->bgFrameTimer++;
             jf->body.z += 0x400;
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 40) {
-                work->unk_46 = 0;
-                work->unk_48++;
+            if (work->stepTimer > 40) {
+                work->stepTimer = 0;
+                work->step++;
             }
 
-            if (work->unk_46 == 21) {
+            if (work->stepTimer == 21) {
                 jf->body.flags |= 0x1000000;
             }
             break;
         case 1:
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 60) {
-                work->unk_46 = 0;
-                work->jf->unk_24A = 0;
+            if (work->stepTimer > 60) {
+                work->stepTimer = 0;
+                work->jf->bgFrameTimer = 0;
 
                 if (jf->body.flags & 4) {
                     jf->body.flags &= ~4;
                     jf->body.x = 0x16A00;
-                    work->jf->unk_248 = 3;
+                    work->jf->bgFrame = 3;
                 } else {
                     jf->body.flags |= 4;
                     jf->body.x = 0x2A200;
-                    work->jf->unk_248 = 3;
+                    work->jf->bgFrame = 3;
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
                 m4aSongNumStart(SONG_BTL_JF_UP);
-                work->unk_48++;
+                work->step++;
             }
             break;
         case 2:
-            if (jf->unk_24A >= gUnk_0961A6A8[jf->unk_248]) {
-                jf->unk_24A = 0;
+            if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
+                jf->bgFrameTimer = 0;
 
                 if (jf->body.flags & 4) {
-                    work->jf->unk_248++;
+                    work->jf->bgFrame++;
 
-                    if (work->jf->unk_248 > 7) {
-                        work->jf->unk_248 = 0;
+                    if (work->jf->bgFrame > 7) {
+                        work->jf->bgFrame = 0;
                     }
                 } else {
-                    work->jf->unk_248--;
+                    work->jf->bgFrame--;
 
-                    if (work->jf->unk_248 < 0) {
-                        work->jf->unk_248 = 7;
+                    if (work->jf->bgFrame < 0) {
+                        work->jf->bgFrame = 7;
                     }
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            work->jf->unk_24A++;
+            work->jf->bgFrameTimer++;
             jf->body.z -= 0x400;
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 40) {
-                work->unk_46 = 0;
-                work->unk_48++;
+            if (work->stepTimer > 40) {
+                work->stepTimer = 0;
+                work->step++;
             }
 
-            if (work->unk_46 == 22) {
+            if (work->stepTimer == 22) {
                 jf->body.flags &= ~0x1000000;
             }
             break;
         default:
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 0;
+            work->jf->stateStep = 0;
+            work->jf->state = 0;
             break;
         }
     }
 }
-void func_080BEDF4(JfMajinWork* work) {
+void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 0;
-            work->unk_5C = 14;
+            jf->bgFrame = 0;
+            work->baseFrame = 14;
         } else {
-            jf->unk_248 = 7;
-            work->unk_5C = 34;
+            jf->bgFrame = 7;
+            work->baseFrame = 34;
         }
 
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0xA0, work);
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_2C = 0;
-        work->jf->unk_244++;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
+        work->step = 0;
+        work->stepTimer = 0;
+        work->spriteVisible = 0;
+        work->jf->stateStep++;
     } else {
-        switch (work->unk_48) {
+        switch (work->step) {
         case 0:
-            if (work->jf->unk_24A >= gUnk_0961A6A8[work->jf->unk_248]) {
-                work->jf->unk_24A = 0;
+            if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
+                work->jf->bgFrameTimer = 0;
 
                 if (jf->body.flags & 4) {
-                    work->jf->unk_248++;
+                    work->jf->bgFrame++;
 
-                    if (work->jf->unk_248 > 7) {
-                        work->jf->unk_248 = 0;
+                    if (work->jf->bgFrame > 7) {
+                        work->jf->bgFrame = 0;
                     }
                 } else {
-                    work->jf->unk_248--;
+                    work->jf->bgFrame--;
 
-                    if (work->jf->unk_248 < 0) {
-                        work->jf->unk_248 = 7;
+                    if (work->jf->bgFrame < 0) {
+                        work->jf->bgFrame = 7;
                     }
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            work->jf->unk_24A++;
+            work->jf->bgFrameTimer++;
             jf->body.z += 0x400;
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 60) {
-                work->unk_46 = 0;
-                work->unk_48++;
+            if (work->stepTimer > 60) {
+                work->stepTimer = 0;
+                work->step++;
             }
 
-            if (work->unk_46 == 23) {
+            if (work->stepTimer == 23) {
                 jf->body.flags |= 0x1000000;
             }
             break;
         case 1:
             if (jf->body.flags & 4) {
-                work->jf->unk_248 = 14;
-                work->z = -0x2000 - ((gUnk_0203ACC0 + 1) << 11);
+                work->jf->bgFrame = 14;
+                work->z = -0x2000 - ((gBosJfRightPillarLevel + 1) << 11);
             } else {
-                work->jf->unk_248 = 34;
-                work->z = -0x2000 - ((gUnk_0203ACC4 + 1) << 11);
+                work->jf->bgFrame = 34;
+                work->z = -0x2000 - ((gBosJfLeftPillarLevel + 1) << 11);
             }
 
-            work->jf->unk_24A = 0;
+            work->jf->bgFrameTimer = 0;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosJfRock, work->jf);
-            func_080BE380(work->jf->unk_248, 0xA0, work);
-            work->unk_44 = 120;
-            work->unk_48++;
+            BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
+            work->moveSteps = 120;
+            work->step++;
             break;
         case 2:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
 
-                if (work->unk_44 == 30) {
+                if (work->moveSteps == 30) {
                     jf->body.flags &= ~0x1000000;
                 }
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         case 3:
-            if (work->jf->unk_24A >= gUnk_0961A6A8[work->jf->unk_248]) {
-                work->jf->unk_24A = 0;
-                work->jf->unk_248++;
+            if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
+                work->jf->bgFrameTimer = 0;
+                work->jf->bgFrame++;
 
-                if (work->jf->unk_248 > work->unk_5C + 4) {
+                if (work->jf->bgFrame > work->baseFrame + 4) {
                     if (jf->body.flags & 4) {
-                        work->jf->unk_248 = 8;
+                        work->jf->bgFrame = 8;
                     } else {
-                        work->jf->unk_248 = 28;
+                        work->jf->bgFrame = 28;
                     }
 
-                    work->unk_2C = 1;
-                    work->unk_48++;
+                    work->spriteVisible = 1;
+                    work->step++;
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            work->jf->unk_24A++;
+            work->jf->bgFrameTimer++;
             break;
         case 4:
             if (IsTaskActive(work->task) == 0) {
                 work->z = -0x3800;
-                work->unk_44 = 10;
-                work->unk_48++;
+                work->moveSteps = 10;
+                work->step++;
             }
             break;
         case 5:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         default:
-            func_0801AF08(q);
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 6;
+            ClearBtlObjActionFlags(q);
+            work->jf->stateStep = 0;
+            work->jf->state = 6;
             break;
         }
     }
 }
-void func_080BF160(JfMajinWork* work) {
+void BosJfMajinUpdateSlam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 19;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 19;
+            jf->bgFrame = 19;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 19;
             work->x = 0x27A00;
-            work->z = -0x5200 - ((gUnk_0203ACC0 + 1) << 11);
+            work->z = -0x5200 - ((gBosJfRightPillarLevel + 1) << 11);
         } else {
-            jf->unk_248 = 39;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 39;
+            jf->bgFrame = 39;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 39;
             work->x = 0x19200;
-            work->z = -0x5200 - ((gUnk_0203ACC4 + 1) << 11);
+            work->z = -0x5200 - ((gBosJfLeftPillarLevel + 1) << 11);
         }
 
-        func_080BE380(work->jf->unk_248, 0xA0, work);
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_44 = 40;
-        work->unk_2C = 0;
-        work->jf->unk_244++;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
+        work->step = 0;
+        work->stepTimer = 0;
+        work->moveSteps = 40;
+        work->spriteVisible = 0;
+        work->jf->stateStep++;
     } else {
-        switch (work->unk_48) {
+        switch (work->step) {
         case 0:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
 
-                if (work->jf->unk_24A >= gUnk_0961A6A8[work->jf->unk_248]) {
-                    work->jf->unk_24A = 0;
-                    work->jf->unk_248++;
+                if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
+                    work->jf->bgFrameTimer = 0;
+                    work->jf->bgFrame++;
 
-                    if (work->jf->unk_248 >= work->unk_5C + 1) {
-                        work->jf->unk_248 = work->unk_5C + 1;
+                    if (work->jf->bgFrame >= work->baseFrame + 1) {
+                        work->jf->bgFrame = work->baseFrame + 1;
                     }
 
-                    func_080BE380(work->jf->unk_248, 0xA0, work);
+                    BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
                 }
 
-                work->jf->unk_24A++;
+                work->jf->bgFrameTimer++;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         case 1:
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 20) {
-                work->unk_46 = 0;
-                work->unk_6A = 1;
-                work->unk_48++;
+            if (work->stepTimer > 20) {
+                work->stepTimer = 0;
+                work->extraClipRows = 1;
+                work->step++;
             }
             break;
         case 2:
             jf->body.z += 0xA00;
 
-            if (work->jf->unk_24A >= gUnk_0961A6A8[work->jf->unk_248]) {
-                work->jf->unk_24A = 0;
-                work->jf->unk_248++;
+            if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
+                work->jf->bgFrameTimer = 0;
+                work->jf->bgFrame++;
 
-                if (work->jf->unk_248 == work->unk_5C + 4) {
-                    work->unk_6A = 0;
-                    work->unk_48++;
+                if (work->jf->bgFrame == work->baseFrame + 4) {
+                    work->extraClipRows = 0;
+                    work->step++;
                 }
 
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            work->jf->unk_24A++;
+            work->jf->bgFrameTimer++;
             break;
         case 3:
             if (jf->body.flags & 4) {
-                func_080147D8(jf->body.x - 0x3000, jf->body.y + jf->body.z + 0x1800);
-                func_08011F78(0xE8, jf->body.x - 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
+                BgFxStartGroundImpact(jf->body.x - 0x3000, jf->body.y + jf->body.z + 0x1800);
+                ApplyAttackBox(0xE8, jf->body.x - 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
             } else {
-                func_080147D8(jf->body.x + 0x3000, jf->body.y + jf->body.z + 0x1800);
-                func_08011F78(0xE8, jf->body.x + 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
+                BgFxStartGroundImpact(jf->body.x + 0x3000, jf->body.y + jf->body.z + 0x1800);
+                ApplyAttackBox(0xE8, jf->body.x + 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
             }
 
-            func_0802F1E8();
+            BtlMapStartShake();
             m4aSongNumStart(SONG_BTL_LB_RUMB);
-            work->unk_46 = 0;
-            work->unk_48++;
+            work->stepTimer = 0;
+            work->step++;
             break;
         case 4:
-            if (work->unk_46 == 10) {
-                work->jf->unk_248 = work->unk_5C + 5;
-                func_080BE380(work->jf->unk_248, 0xA0, work);
+            if (work->stepTimer == 10) {
+                work->jf->bgFrame = work->baseFrame + 5;
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0xA0, work);
             }
 
-            if (work->unk_46 > 20) {
-                work->unk_46 = 0;
+            if (work->stepTimer > 20) {
+                work->stepTimer = 0;
 
                 if (jf->body.flags & 4) {
                     work->x = 0x2A200;
@@ -650,62 +650,62 @@ void func_080BF160(JfMajinWork* work) {
                 }
 
                 work->z = -0x3800;
-                work->unk_44 = 10;
-                work->unk_48++;
+                work->moveSteps = 10;
+                work->step++;
             }
 
-            work->unk_46++;
+            work->stepTimer++;
             break;
         case 5:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         default:
-            func_0801AF08(q);
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 6;
+            ClearBtlObjActionFlags(q);
+            work->jf->stateStep = 0;
+            work->jf->state = 6;
             break;
         }
     }
 }
-void func_080BF4F4(JfMajinWork* work) {
+void BosJfMajinUpdateBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 25;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 25;
+            jf->bgFrame = 25;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 25;
             work->x = 0x2A200;
-            work->z = -0x2400 - ((gUnk_0203ACC0 + 1) << 11);
+            work->z = -0x2400 - ((gBosJfRightPillarLevel + 1) << 11);
         } else {
-            jf->unk_248 = 45;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 45;
+            jf->bgFrame = 45;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 45;
             work->x = 0x16A00;
-            work->z = -0x2400 - ((gUnk_0203ACC4 + 1) << 11);
+            work->z = -0x2400 - ((gBosJfLeftPillarLevel + 1) << 11);
         }
 
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_44 = 40;
-        work->unk_2C = 0;
-        work->jf->unk_244++;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->step = 0;
+        work->stepTimer = 0;
+        work->moveSteps = 40;
+        work->spriteVisible = 0;
+        work->jf->stateStep++;
     } else {
-        switch (work->unk_48) {
+        switch (work->step) {
         case 0:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         case 1:
@@ -715,39 +715,39 @@ void func_080BF4F4(JfMajinWork* work) {
                 jf->body.x -= 0x100;
             }
 
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 20) {
-                work->unk_46 = 0;
-                work->jf->unk_248 = work->unk_5C + 1;
-                func_080BE380(work->jf->unk_248, 0x80, work);
-                work->unk_44 = 2;
-                work->unk_48++;
+            if (work->stepTimer > 20) {
+                work->stepTimer = 0;
+                work->jf->bgFrame = work->baseFrame + 1;
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+                work->moveSteps = 2;
+                work->step++;
             }
             break;
         case 2:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
-                work->unk_44 = 0;
+                work->step++;
+                work->moveSteps = 0;
             }
             break;
         case 3:
             if (jf->body.flags & 4) {
-                func_08016C40(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 160, 45);
+                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 160, 45);
             } else {
-                func_08016C40(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 96, 45);
+                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 96, 45);
             }
 
             m4aSongNumStart(SONG_EF_JF_BEEM);
-            jf->body.x = (work->x - 0x100) + (work->unk_44++ % 2) * 0x200;
-            work->unk_46 = 0;
-            work->unk_48++;
+            jf->body.x = (work->x - 0x100) + (work->moveSteps++ % 2) * 0x200;
+            work->stepTimer = 0;
+            work->step++;
             break;
         case 4:
-            jf->body.x = (work->x - 0x100) + (work->unk_44++ % 2) * 0x200;
+            jf->body.x = (work->x - 0x100) + (work->moveSteps++ % 2) * 0x200;
 
             if (jf->body.flags & 4) {
                 BgFxSetPosition(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100);
@@ -755,80 +755,80 @@ void func_080BF4F4(JfMajinWork* work) {
                 BgFxSetPosition(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100);
             }
 
-            if (work->unk_46 > 10 && work->unk_46 % 10 == 9) {
+            if (work->stepTimer > 10 && work->stepTimer % 10 == 9) {
                 if (jf->body.flags & 4) {
-                    func_08011F78(0xE9, jf->body.x - 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
+                    ApplyAttackBox(0xE9, jf->body.x - 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
                 } else {
-                    func_08011F78(0xE9, jf->body.x + 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
+                    ApplyAttackBox(0xE9, jf->body.x + 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
                 }
             }
 
-            if (work->unk_46 > 80) {
-                work->unk_46 = 0;
+            if (work->stepTimer > 80) {
+                work->stepTimer = 0;
                 work->z = -0x3800;
-                work->unk_44 = 10;
-                work->jf->unk_248 = work->unk_5C + 2;
-                func_080BE380(work->jf->unk_248, 0x80, work);
-                work->unk_48++;
+                work->moveSteps = 10;
+                work->jf->bgFrame = work->baseFrame + 2;
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+                work->step++;
             }
 
-            work->unk_46++;
+            work->stepTimer++;
             break;
         case 5:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         default:
-            func_0801AF08(q);
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 6;
+            ClearBtlObjActionFlags(q);
+            work->jf->stateStep = 0;
+            work->jf->state = 6;
             break;
         }
     }
 }
-void func_080BF8C4(JfMajinWork* work) {
+void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 25;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 25;
+            jf->bgFrame = 25;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 25;
             work->x = 0x2A200;
             work->y2 = gBtlWork->actor->y - 0x1400;
-            work->z = -0x2400 - ((gUnk_0203ACC0 + 1) << 11);
+            work->z = -0x2400 - ((gBosJfRightPillarLevel + 1) << 11);
         } else {
-            jf->unk_248 = 45;
-            work->jf->unk_24A = 0;
-            work->unk_5C = 45;
+            jf->bgFrame = 45;
+            work->jf->bgFrameTimer = 0;
+            work->baseFrame = 45;
             work->x = 0x16A00;
             work->y2 = gBtlWork->actor->y - 0x1400;
-            work->z = -0x2400 - ((gUnk_0203ACC4 + 1) << 11);
+            work->z = -0x2400 - ((gBosJfLeftPillarLevel + 1) << 11);
         }
 
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_44 = 40;
-        work->unk_2C = 0;
-        work->jf->unk_244++;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->step = 0;
+        work->stepTimer = 0;
+        work->moveSteps = 40;
+        work->spriteVisible = 0;
+        work->jf->stateStep++;
     } else {
-        switch (work->unk_48) {
+        switch (work->step) {
         case 0:
-            func_0802F274(jf->body.x, jf->body.y + jf->body.z);
+            BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.y, work->y2, work->unk_44);
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.y, work->y2, work->moveSteps);
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         case 1:
@@ -838,105 +838,105 @@ void func_080BF8C4(JfMajinWork* work) {
                 jf->body.x -= 0x100;
             }
 
-            work->unk_46++;
+            work->stepTimer++;
 
-            if (work->unk_46 > 20) {
-                work->unk_46 = 0;
-                work->jf->unk_248 = work->unk_5C + 1;
-                func_080BE380(work->jf->unk_248, 0x80, work);
-                work->unk_44 = 2;
-                work->unk_48++;
+            if (work->stepTimer > 20) {
+                work->stepTimer = 0;
+                work->jf->bgFrame = work->baseFrame + 1;
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+                work->moveSteps = 2;
+                work->step++;
             }
             break;
         case 2:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
-                work->unk_44 = 0;
+                work->step++;
+                work->moveSteps = 0;
             }
             break;
         case 3:
             if (jf->body.flags & 4) {
-                work->unk_49 = 148;
-                work->unk_4C = 0x100;
-                func_08016C40(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->unk_49, 45);
-                func_080147C8(0x133, 0x100);
+                work->beamAngle = 148;
+                work->beamScale = 0x100;
+                BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->beamAngle, 45);
+                BgFxSetScale(0x133, 0x100);
             } else {
-                work->unk_49 = 108;
-                work->unk_4C = 0x133;
-                func_08016C40(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->unk_49, 45);
-                func_080147C8(0x133, 0x100);
+                work->beamAngle = 108;
+                work->beamScale = 0x133;
+                BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->beamAngle, 45);
+                BgFxSetScale(0x133, 0x100);
             }
 
             m4aSongNumStart(SONG_EF_JF_BEEM);
-            jf->body.x = (work->x - 0x100) + (work->unk_44++ % 2) * 0x200;
-            work->unk_46 = 0;
-            work->unk_4A = 0;
-            work->unk_48++;
+            jf->body.x = (work->x - 0x100) + (work->moveSteps++ % 2) * 0x200;
+            work->stepTimer = 0;
+            work->beamLength = 0;
+            work->step++;
             break;
         case 4:
-            work->unk_44++;
+            work->moveSteps++;
 
             if (jf->body.flags & 4) {
-                jf->body.x = (work->x - 0x100) + (work->unk_44 % 2) * 0x200;
+                jf->body.x = (work->x - 0x100) + (work->moveSteps % 2) * 0x200;
                 BgFxSetPosition(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100);
 
-                if (work->unk_49 <= 173 && work->unk_44 % 2 == 0) {
-                    work->unk_49++;
-                    func_080147B8(work->unk_49);
-                    work->unk_4A++;
-                    work->unk_4C = gUnk_09EF2994[work->unk_4A];
-                    func_080147C8(0x133, work->unk_4C);
+                if (work->beamAngle <= 173 && work->moveSteps % 2 == 0) {
+                    work->beamAngle++;
+                    BgFxSetAngle(work->beamAngle);
+                    work->beamLength++;
+                    work->beamScale = gBosJfMajinBeamScales[work->beamLength];
+                    BgFxSetScale(0x133, work->beamScale);
                 }
             } else {
-                jf->body.x = (work->x - 0x100) + (work->unk_44 % 2) * 0x200;
+                jf->body.x = (work->x - 0x100) + (work->moveSteps % 2) * 0x200;
                 BgFxSetPosition(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100);
 
-                if (work->unk_49 > 82 && work->unk_44 % 2 == 0) {
-                    work->unk_49--;
-                    func_080147B8(work->unk_49);
-                    work->unk_4A++;
-                    work->unk_4C = gUnk_09EF2994[work->unk_4A];
-                    func_080147C8(0x133, work->unk_4C);
+                if (work->beamAngle > 82 && work->moveSteps % 2 == 0) {
+                    work->beamAngle--;
+                    BgFxSetAngle(work->beamAngle);
+                    work->beamLength++;
+                    work->beamScale = gBosJfMajinBeamScales[work->beamLength];
+                    BgFxSetScale(0x133, work->beamScale);
                 }
             }
 
-            if (work->unk_46 >= 11 && work->unk_46 <= 50) {
+            if (work->stepTimer >= 11 && work->stepTimer <= 50) {
                 if (jf->body.flags & 4) {
-                    func_08011F78(0xEA, jf->body.x - 0x3200 - work->unk_4A * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
+                    ApplyAttackBox(0xEA, jf->body.x - 0x3200 - work->beamLength * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
                 } else {
-                    func_08011F78(0xEA, jf->body.x + 0x3200 + work->unk_4A * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
+                    ApplyAttackBox(0xEA, jf->body.x + 0x3200 + work->beamLength * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
                 }
             }
 
-            if (work->unk_46 > 80) {
-                work->unk_46 = 0;
+            if (work->stepTimer > 80) {
+                work->stepTimer = 0;
                 work->y2 = 0x15E00;
                 work->z = -0x3800;
-                work->unk_44 = 10;
-                work->jf->unk_248 = work->unk_5C + 2;
-                func_080BE380(work->jf->unk_248, 0x80, work);
-                work->unk_48++;
+                work->moveSteps = 10;
+                work->jf->bgFrame = work->baseFrame + 2;
+                BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+                work->step++;
             } else {
-                work->unk_46++;
+                work->stepTimer++;
             }
             break;
         case 5:
-            if (work->unk_44 > 0) {
-                ApproachValue(&jf->body.x, work->x, work->unk_44);
-                ApproachValue(&jf->body.y, work->y2, work->unk_44);
-                ApproachValue(&jf->body.z, work->z, work->unk_44);
-                work->unk_44--;
+            if (work->moveSteps > 0) {
+                ApproachValue(&jf->body.x, work->x, work->moveSteps);
+                ApproachValue(&jf->body.y, work->y2, work->moveSteps);
+                ApproachValue(&jf->body.z, work->z, work->moveSteps);
+                work->moveSteps--;
             } else {
-                work->unk_48++;
+                work->step++;
             }
             break;
         default:
-            func_0801AF08(q);
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 6;
+            ClearBtlObjActionFlags(q);
+            work->jf->stateStep = 0;
+            work->jf->state = 6;
             break;
         }
     }
@@ -944,95 +944,95 @@ void func_080BF8C4(JfMajinWork* work) {
 
 void func_080BFDD4(JfMajinWork* work) {
 }
-void func_080BFDD8(JfMajinWork* work) {
+void BosJfMajinUpdateBreak(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
             jf->body.x = 0x2A200;
-            jf->unk_248 = 8;
+            jf->bgFrame = 8;
         } else {
             jf->body.x = 0x16A00;
-            jf->unk_248 = 28;
+            jf->bgFrame = 28;
         }
 
         jf->body.y = 0x15E00;
         jf->body.z = -0x3800;
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_3C = 0;
-        work->unk_2C = 1;
-        work->unk_6A = 0;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->idleStep = 0;
+        work->spriteVisible = 1;
+        work->extraClipRows = 0;
         jf->body.flags &= ~0x1000000;
-        func_08019190(&jf->body, 9);
-        work->jf->unk_244++;
-    } else if (jf->unk_244 > 60) {
-        func_0801AF08(q);
-        work->jf->unk_244 = 0;
+        CreateBtlPopTask(&jf->body, 9);
+        work->jf->stateStep++;
+    } else if (jf->stateStep > 60) {
+        ClearBtlObjActionFlags(q);
+        work->jf->stateStep = 0;
 
         if (jf->body.flags & 4) {
-            work->jf->unk_248 = 8;
+            work->jf->bgFrame = 8;
         } else {
-            work->jf->unk_248 = 28;
+            work->jf->bgFrame = 28;
         }
 
-        work->jf->unk_24A = 0;
-        work->jf->unk_238 = 6;
+        work->jf->bgFrameTimer = 0;
+        work->jf->state = 6;
     } else {
-        work->jf->unk_244++;
+        work->jf->stateStep++;
     }
 }
 
-void func_080BFEF0(JfMajinWork* work) {
+void BosJfMajinUpdateGimmick(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
             jf->body.x = 0x2A200;
-            jf->unk_248 = 8;
+            jf->bgFrame = 8;
         } else {
             jf->body.x = 0x16A00;
-            jf->unk_248 = 28;
+            jf->bgFrame = 28;
         }
 
         jf->body.y = 0x15E00;
         jf->body.z = -0x3800;
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_3C = 0;
-        work->unk_2C = 1;
-        work->unk_6A = 0;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->idleStep = 0;
+        work->spriteVisible = 1;
+        work->extraClipRows = 0;
         jf->body.flags &= ~0x1000000;
-        work->jf->unk_244++;
+        work->jf->stateStep++;
     } else {
-        func_0801AF08(q);
-        work->jf->unk_244 = 0;
+        ClearBtlObjActionFlags(q);
+        work->jf->stateStep = 0;
 
         if (jf->body.flags & 4) {
-            work->jf->unk_248 = 8;
+            work->jf->bgFrame = 8;
         } else {
-            work->jf->unk_248 = 28;
+            work->jf->bgFrame = 28;
         }
 
-        work->jf->unk_24A = 0;
-        work->jf->unk_238 = 6;
+        work->jf->bgFrameTimer = 0;
+        work->jf->state = 6;
     }
 }
 
-void func_080BFFF8(JfMajinWork* work) {
+void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* q = &jf->sub;
     PrizeCardArg fx;
     s32 v;
 
-    if (jf->unk_244 == 0) {
+    if (jf->stateStep == 0) {
         if (jf->body.flags & 4) {
-            jf->unk_248 = 8;
+            jf->bgFrame = 8;
             v = 0x2A200;
         } else {
-            jf->unk_248 = 28;
+            jf->bgFrame = 28;
             v = 0x16A00;
         }
 
@@ -1040,55 +1040,55 @@ void func_080BFFF8(JfMajinWork* work) {
 
         jf->body.y = 0x15E00;
         jf->body.z = -0x3800;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_2C = 1;
-        func_0802F274(jf->body.x, jf->body.y + jf->body.z);
-        func_0801AF4C(&jf->body);
-        work->unk_48 = 0;
-        work->unk_44 = 0;
-        work->jf->unk_244++;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->spriteVisible = 1;
+        BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
+        BeginBossDefeat(&jf->body);
+        work->step = 0;
+        work->moveSteps = 0;
+        work->jf->stateStep++;
         return;
     }
 
-    switch (work->unk_48) {
+    switch (work->step) {
     case 0:
-        func_0802F274(jf->body.x, jf->body.y + jf->body.z);
+        BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
-        if (work->unk_44 > 1) {
-            work->unk_44 = 0;
-            work->unk_48++;
+        if (work->moveSteps > 1) {
+            work->moveSteps = 0;
+            work->step++;
         } else {
-            work->unk_44++;
+            work->moveSteps++;
         }
         break;
     case 1:
-        func_0802F274(jf->body.x, jf->body.y + jf->body.z);
+        BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
         if (FadeIsActive() != 0) {
             break;
         }
 
         if (jf->body.flags & 4) {
-            func_08014AAC(jf->body.x - 0x800, jf->body.y + jf->body.z - 0x800);
+            BgFxStartBossDeath(jf->body.x - 0x800, jf->body.y + jf->body.z - 0x800);
         } else {
-            func_08014AAC(jf->body.x + 0x800, jf->body.y + jf->body.z - 0x800);
+            BgFxStartBossDeath(jf->body.x + 0x800, jf->body.y + jf->body.z - 0x800);
         }
 
         FadeToAmount(0, gBtlWork->fadeAmount, 8);
-        work->unk_48++;
+        work->step++;
         break;
     case 2:
-        func_0802F274(jf->body.x, jf->body.y + jf->body.z);
+        BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
-        if (work->unk_44 <= 119) {
-            work->unk_44++;
+        if (work->moveSteps <= 119) {
+            work->moveSteps++;
         } else {
-            func_0801536C();
-            work->unk_48++;
+            BgFxStartBossDeathFlash();
+            work->step++;
         }
         break;
     case 3:
-        if (func_080128EC() == 0) {
+        if (BgFxIsActive() == 0) {
             if (q->x < 0x1B200) {
                 q->x = 0x1BA00;
             }
@@ -1102,31 +1102,31 @@ void func_080BFFF8(JfMajinWork* work) {
             fx.z = -0x7800;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &fx);
 #ifdef VERSION_EU
-            func_0801B918(q);
+            DropBossPrizes(q);
 #else
-            func_0801B918(&jf->body);
+            DropBossPrizes(&jf->body);
 #endif
-            gUnk_0203ACC4 = 0;
-            gUnk_0203ACD4 = 0;
-            gUnk_0203ACC0 = 0;
-            func_080BDAAC();
+            gBosJfLeftPillarLevel = 0;
+            gBosJfMiddlePillarLevel = 0;
+            gBosJfRightPillarLevel = 0;
+            BosJfDrawPillars();
             jf->body.x = 0;
             jf->body.y = 0;
             jf->body.z = 0;
-            ScrollBgMapTo(1, (gBtlWork->unk_000 >> 8) + 776, (gBtlWork->unk_004 >> 8) + 294);
-            work->unk_48++;
+            ScrollBgMapTo(1, (gBtlWork->viewX >> 8) + 776, (gBtlWork->viewY >> 8) + 294);
+            work->step++;
         } else {
-            func_0802F274(jf->body.x, jf->body.y + jf->body.z);
+            BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
         }
         break;
     default:
-        func_0801B008();
+        EndBossDefeat();
         work->jf->flags |= 2;
         break;
     }
 }
 
-u8 func_080C0258(u16* p, s16 b, u8 c, u8 d) {
+u8 BosJfStepPillarLevel(u16* p, s16 b, u8 c, u8 d) {
     if ((s16)*p == b) {
         return 1;
     }
@@ -1152,40 +1152,40 @@ u8 func_080C0258(u16* p, s16 b, u8 c, u8 d) {
     return 0;
 }
 
-void func_080C02AC(JfMajinWork* work) {
+void BosJfMajinUpdatePillars(JfMajinWork* work) {
     JfWork* jf = work->jf;
     BtlObj* s = &work->jf->sub;
     s16 n = 0;
     s16 m;
     u8 v;
 
-    if (jf->unk_250 > 0) {
-        jf->unk_244 = 0;
-        work->jf->unk_238 = 0;
+    if (jf->gimmickTimer > 0) {
+        jf->stateStep = 0;
+        work->jf->state = 0;
         return;
     }
 
-    switch (jf->unk_244) {
+    switch (jf->stateStep) {
     case 0:
         if (jf->body.flags & 4) {
-            jf->unk_248 = 8;
-            work->unk_5C = 8;
+            jf->bgFrame = 8;
+            work->baseFrame = 8;
         } else {
-            jf->unk_248 = 28;
-            work->unk_5C = 28;
+            jf->bgFrame = 28;
+            work->baseFrame = 28;
         }
 
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_3C = 0;
-        work->unk_2C = 1;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->idleStep = 0;
+        work->spriteVisible = 1;
 
         if (work->jf->flags & 4) {
             work->jf->flags &= ~4;
-            work->jf->unk_24E = 2;
+            work->jf->pillarPhase = 2;
             m = 14;
-        } else if (s->unk_02C < s->unk_02E / 2) {
-            switch (work->jf->unk_24E) {
+        } else if (s->hp < s->maxHp / 2) {
+            switch (work->jf->pillarPhase) {
             case 0:
                 m = GetRandom() & 1;
                 break;
@@ -1200,209 +1200,209 @@ void func_080C02AC(JfMajinWork* work) {
                 m = 0;
                 break;
             }
-        } else if (work->jf->unk_24E == 0) {
+        } else if (work->jf->pillarPhase == 0) {
             m = GetRandom() % 6 + 8;
         } else {
             m = GetRandom() % 8;
         }
 
-        work->unk_5E = gUnk_0203ACC4;
-        work->unk_60 = gUnk_0203ACD4;
-        work->unk_62 = gUnk_0203ACC0;
-        work->unk_64 = gUnk_0961A710[m][0];
-        work->unk_66 = gUnk_0961A710[m][1];
-        work->unk_68 = gUnk_0961A710[m][2];
-        work->unk_48 = 0;
-        work->unk_46 = 0;
-        work->unk_44 = 0;
-        func_080BDB28(60);
-        work->jf->unk_244++;
+        work->leftLevel = gBosJfLeftPillarLevel;
+        work->middleLevel = gBosJfMiddlePillarLevel;
+        work->rightLevel = gBosJfRightPillarLevel;
+        work->leftTarget = gBosJfPillarPatterns[m][0];
+        work->middleTarget = gBosJfPillarPatterns[m][1];
+        work->rightTarget = gBosJfPillarPatterns[m][2];
+        work->step = 0;
+        work->stepTimer = 0;
+        work->moveSteps = 0;
+        BosJfStartShake(60);
+        work->jf->stateStep++;
         break;
     case 1:
-        work->unk_46++;
+        work->stepTimer++;
 
-        if (work->unk_46 > 80) {
-            work->unk_46 = 0;
+        if (work->stepTimer > 80) {
+            work->stepTimer = 0;
             m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
-            work->jf->unk_244++;
+            work->jf->stateStep++;
         }
         break;
     default:
-        work->unk_46++;
+        work->stepTimer++;
 
-        if (work->unk_46 <= 1) {
+        if (work->stepTimer <= 1) {
             return;
         }
 
-        work->unk_46 = 0;
-        v = func_080BE910();
-        n += (s8)func_080C0258(&work->unk_5E, work->unk_64, v, 0);
-        n += (s8)func_080C0258(&work->unk_60, work->unk_66, v, 1);
-        n += (s8)func_080C0258(&work->unk_62, work->unk_68, v, 2);
+        work->stepTimer = 0;
+        v = BosJfGetActorPillar();
+        n += (s8)BosJfStepPillarLevel(&work->leftLevel, work->leftTarget, v, 0);
+        n += (s8)BosJfStepPillarLevel(&work->middleLevel, work->middleTarget, v, 1);
+        n += (s8)BosJfStepPillarLevel(&work->rightLevel, work->rightTarget, v, 2);
 
         if (n == 3) {
-            if (s->unk_02C < s->unk_02E / 2) {
-                switch (work->jf->unk_24E) {
+            if (s->hp < s->maxHp / 2) {
+                switch (work->jf->pillarPhase) {
                 case 0:
-                    work->jf->unk_24E = 3;
+                    work->jf->pillarPhase = 3;
                     break;
                 case 1:
-                    work->jf->unk_24E = 0;
+                    work->jf->pillarPhase = 0;
                     break;
                 case 2:
-                    work->jf->unk_24E = 0;
-                    work->jf->unk_250 = 300;
+                    work->jf->pillarPhase = 0;
+                    work->jf->gimmickTimer = 300;
                     break;
                 case 3:
-                    work->jf->unk_24E = 1;
+                    work->jf->pillarPhase = 1;
                     break;
                 }
             } else {
-                switch (work->jf->unk_24E) {
+                switch (work->jf->pillarPhase) {
                 case 0:
-                    work->jf->unk_24E = 1;
+                    work->jf->pillarPhase = 1;
                     break;
                 case 1:
-                    work->jf->unk_24E = 0;
+                    work->jf->pillarPhase = 0;
                     break;
                 case 2:
-                    work->jf->unk_24E = 0;
-                    work->jf->unk_250 = 300;
+                    work->jf->pillarPhase = 0;
+                    work->jf->gimmickTimer = 300;
                     break;
                 }
             }
 
-            work->jf->unk_244 = 0;
-            work->jf->unk_238 = 0;
+            work->jf->stateStep = 0;
+            work->jf->state = 0;
         } else {
-            gUnk_0203ACC4 = work->unk_5E;
-            gUnk_0203ACD4 = work->unk_60;
-            gUnk_0203ACC0 = work->unk_62;
-            func_080BDAAC();
+            gBosJfLeftPillarLevel = work->leftLevel;
+            gBosJfMiddlePillarLevel = work->middleLevel;
+            gBosJfRightPillarLevel = work->rightLevel;
+            BosJfDrawPillars();
         }
         break;
     }
 }
 
-void func_080C0624(JfMajinWork* work) {
-    if (work->jf->unk_244 == 0) {
-        work->jf->unk_248 = 8;
-        work->unk_5C = 8;
-        work->jf->unk_24A = 0;
-        func_080BE380(work->jf->unk_248, 0x80, work);
-        work->unk_3C = 0;
-        work->unk_2C = 1;
-        work->jf->unk_244++;
+void BosJfMajinUpdateEventIdle(JfMajinWork* work) {
+    if (work->jf->stateStep == 0) {
+        work->jf->bgFrame = 8;
+        work->baseFrame = 8;
+        work->jf->bgFrameTimer = 0;
+        BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
+        work->idleStep = 0;
+        work->spriteVisible = 1;
+        work->jf->stateStep++;
     } else {
-        if (work->jf->unk_24A >= gUnk_0961A6A8[work->jf->unk_248]) {
-            work->jf->unk_24A = 0;
-            work->jf->unk_248++;
-            work->unk_3C++;
+        if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
+            work->jf->bgFrameTimer = 0;
+            work->jf->bgFrame++;
+            work->idleStep++;
 
-            if (work->jf->unk_248 > work->unk_5C + 5) {
-                work->jf->unk_248 = work->unk_5C;
-                work->unk_3C = 0;
+            if (work->jf->bgFrame > work->baseFrame + 5) {
+                work->jf->bgFrame = work->baseFrame;
+                work->idleStep = 0;
             }
 
-            func_080BE380(work->jf->unk_248, 0x80, work);
+            BosJfMajinSetBgFrame(work->jf->bgFrame, 0x80, work);
         }
 
-        work->jf->unk_24A++;
+        work->jf->bgFrameTimer++;
         work->gfx = AnimUpdate(&work->anim);
-        work->y = gUnk_0961A70A[work->unk_3C];
+        work->y = gBosJfMajinIdleOffsets[work->idleStep];
     }
 }
 
-void func_080C0714(JfMajinWork* work) {
+void BosJfMajinChooseAttack(JfMajinWork* work) {
     BtlObj* s = &work->jf->sub;
     u8 v;
     s32 r;
 
-    if (s->unk_02C < s->unk_02E / 2) {
+    if (s->hp < s->maxHp / 2) {
         if (GetRandom() % 100 <= 9) {
-            func_08083900(1);
+            RequestBossCardValue(1);
         } else if (GetRandom() % 90 <= 19) {
-            func_08083900(GetRandom() % 2 + 7);
+            RequestBossCardValue(GetRandom() % 2 + 7);
         } else {
-            func_08083900(GetRandom() % 4 + 3);
+            RequestBossCardValue(GetRandom() % 4 + 3);
         }
 
-        if (gUnk_0203ACC4 == gUnk_0203ACD4 && gUnk_0203ACC4 == gUnk_0203ACC0 && GetRandom() % 100 <= 79) {
-            func_0801BCD4(s);
-            work->jf->unk_23C = 5;
+        if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 79) {
+            RequestEnemyCardUse(s);
+            work->jf->attackState = 5;
         } else {
-            v = func_080BE940(work);
+            v = BosJfMajinGetActorPillarDistance(work);
 
             switch (v) {
             case 0:
-                func_0801BCD4(s);
+                RequestEnemyCardUse(s);
                 r = (s16)(GetRandom() % 100);
 
                 if (r <= 39) {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 3;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 3;
                 } else if (r <= 79) {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 4;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 4;
                 } else {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 2;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 2;
                 }
                 break;
             case 1:
-                func_0801BCD4(s);
-                work->jf->unk_23C = 2;
+                RequestEnemyCardUse(s);
+                work->jf->attackState = 2;
                 break;
             case 2:
                 if (GetRandom() % 100 <= 49) {
-                    work->jf->unk_238 = 1;
+                    work->jf->state = 1;
                 } else {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 2;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 2;
                 }
                 break;
             }
         }
     } else {
         if (GetRandom() % 100 <= 29) {
-            func_08083900(GetRandom() % 3 + 6);
+            RequestBossCardValue(GetRandom() % 3 + 6);
         } else {
-            func_08083900(GetRandom() % 6 + 1);
+            RequestBossCardValue(GetRandom() % 6 + 1);
         }
 
-        if (gUnk_0203ACC4 == gUnk_0203ACD4 && gUnk_0203ACC4 == gUnk_0203ACC0 && GetRandom() % 100 <= 19) {
-            func_0801BCD4(s);
-            work->jf->unk_23C = 5;
+        if (gBosJfLeftPillarLevel == gBosJfMiddlePillarLevel && gBosJfLeftPillarLevel == gBosJfRightPillarLevel && GetRandom() % 100 <= 19) {
+            RequestEnemyCardUse(s);
+            work->jf->attackState = 5;
         } else {
-            v = func_080BE940(work);
+            v = BosJfMajinGetActorPillarDistance(work);
 
             switch (v) {
             case 0:
-                func_0801BCD4(s);
+                RequestEnemyCardUse(s);
 
                 if (GetRandom() % 100 <= 59) {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 3;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 3;
                 } else {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 4;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 4;
                 }
                 break;
             case 1:
                 if (GetRandom() % 100 <= 79) {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 2;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 2;
                 } else {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 4;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 4;
                 }
                 break;
             case 2:
                 if (GetRandom() % 100 <= 69) {
-                    work->jf->unk_238 = 1;
+                    work->jf->state = 1;
                 } else {
-                    func_0801BCD4(s);
-                    work->jf->unk_23C = 2;
+                    RequestEnemyCardUse(s);
+                    work->jf->attackState = 2;
                 }
                 break;
             }
@@ -1414,47 +1414,47 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->body.x = arg->body.x;
     work->body.y = arg->body.y + 0x500;
     work->body.z = arg->body.z - 0x4800;
-    work->body.unk_010 = 0;
-    work->body.unk_0CC = 0xFE00;
+    work->body.groundZ = 0;
+    work->body.shadowPriority = 0xFE00;
     work->body.flags = 0x20000;
-    work->unk_13C = 0;
-    work->unk_140 = 0;
-    work->unk_144 = 0;
+    work->targetX = 0;
+    work->targetY = 0;
+    work->targetZ = 0;
     work->vx = 0;
     work->vy = 0;
     work->vz = 0;
-    work->unk_154 = 0;
-    work->unk_028 = 0;
-    work->unk_02A = 0;
-    work->unk_194 = 0;
+    work->accelZ = 0;
+    work->paletteFrame = 0;
+    work->paletteTimer = 0;
+    work->shadowVisible = 0;
 
     if (arg->body.flags & 4) {
         work->x2 = arg->body.x + 0x2000;
         work->y2 = arg->body.y + 0xA00;
         work->z2 = arg->body.z - 0x1900;
-        work->unk_144 = -((gUnk_0203ACC0 + 1) << 11) - 0x2000;
+        work->targetZ = -((gBosJfRightPillarLevel + 1) << 11) - 0x2000;
     } else {
         work->x2 = arg->body.x - 0x2000;
         work->y2 = arg->body.y + 0xA00;
         work->z2 = arg->body.z - 0x1900;
-        work->unk_144 = -0x2000 - ((gUnk_0203ACC4 + 1) << 11);
+        work->targetZ = -0x2000 - ((gBosJfLeftPillarLevel + 1) << 11);
     }
 
-    work->unk_17C = 0;
-    work->unk_17E = 0;
-    work->unk_15A = 0;
-    work->unk_158 = 0;
-    work->unk_15C = 120;
-    work->unk_15E = 0;
+    work->visible2 = 0;
+    work->gfx2Index = 0;
+    work->visible = 0;
+    work->animIndex = 0;
+    work->riseSteps = 120;
+    work->throwTimer = 0;
     work->state = 0;
     work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
-    AnimStart(&work->anim, gUnk_09EF2A38[work->unk_158], 0);
+    AnimStart(&work->anim, gBosJfRockAnims[work->animIndex], 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->tiles2 = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->palette2 = LoadObjPalette(gUnk_096FB5A4, 0x60);
-    work->gfx2 = gUnk_09EF3A48[gUnk_09EF2A42[work->unk_17E]];
+    work->gfx2 = gUnk_09EF3A48[gBosJfRockGfx2Frames[work->gfx2Index]];
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->body);
 }
@@ -1465,98 +1465,98 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->unk_15C > 40) {
-            func_0802F274(work->body.x, work->body.y + work->body.z - 0x2000);
+        if (work->riseSteps > 40) {
+            BtlMapSetCameraTarget(work->body.x, work->body.y + work->body.z - 0x2000);
         }
 
-        work->unk_02A++;
+        work->paletteTimer++;
 
-        if (work->unk_02A > 2) {
-            work->unk_02A = 0;
-            work->unk_028++;
+        if (work->paletteTimer > 2) {
+            work->paletteTimer = 0;
+            work->paletteFrame++;
 
-            if (work->unk_028 > 8) {
-                work->unk_028 = 0;
+            if (work->paletteFrame > 8) {
+                work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
         }
 
-        if (work->unk_15C > 0) {
-            ApproachValue(&work->body.z, work->unk_144 - 0x4800, work->unk_15C);
-            ApproachValue(&work->z2, work->unk_144 - 0x1C00, work->unk_15C);
-            work->unk_15C--;
+        if (work->riseSteps > 0) {
+            ApproachValue(&work->body.z, work->targetZ - 0x4800, work->riseSteps);
+            ApproachValue(&work->z2, work->targetZ - 0x1C00, work->riseSteps);
+            work->riseSteps--;
 
             if (work->body.z <= -0xC00) {
-                work->unk_158 = 8;
-                work->unk_15A = 1;
+                work->animIndex = 8;
+                work->visible = 1;
             } else {
                 n = 8 - ((work->body.z >> 8) + 12) / 8;
 
                 if (n < 0) {
-                    work->unk_158 = 0;
-                    work->unk_15A = 0;
+                    work->animIndex = 0;
+                    work->visible = 0;
                 } else {
-                    work->unk_158 = n;
-                    work->unk_15A = 1;
+                    work->animIndex = n;
+                    work->visible = 1;
                 }
             }
 
-            AnimStart(&work->anim, gUnk_09EF2A38[work->unk_158], 0);
+            AnimStart(&work->anim, gBosJfRockAnims[work->animIndex], 0);
             work->gfx = AnimGetGfx(&work->anim);
 
             if (work->z2 <= -0x1000) {
-                work->unk_17E = 11;
-                work->unk_17C = 1;
+                work->gfx2Index = 11;
+                work->visible2 = 1;
             } else {
                 n = 11 - ((work->z2 >> 8) + 16) / 8;
 
                 if (n < 0) {
-                    work->unk_17E = 0;
-                    work->unk_17C = 0;
+                    work->gfx2Index = 0;
+                    work->visible2 = 0;
                 } else {
-                    work->unk_17E = n;
-                    work->unk_17C = 1;
+                    work->gfx2Index = n;
+                    work->visible2 = 1;
                 }
             }
 
-            work->gfx2 = gUnk_09EF3A48[gUnk_09EF2A42[work->unk_17E]];
+            work->gfx2 = gUnk_09EF3A48[gBosJfRockGfx2Frames[work->gfx2Index]];
         } else {
-            work->unk_13C = (b = gBtlWork->actor)->x;
-            work->unk_140 = b->y;
-            work->unk_144 = b->z;
-            work->vx = (work->unk_13C - work->body.x) / 40;
-            work->vy = (work->unk_140 - work->body.y) / 40;
+            work->targetX = (b = gBtlWork->actor)->x;
+            work->targetY = b->y;
+            work->targetZ = b->z;
+            work->vx = (work->targetX - work->body.x) / 40;
+            work->vy = (work->targetY - work->body.y) / 40;
             work->vz = 0;
-            work->unk_154 = (work->unk_144 - work->body.z) / 820;
+            work->accelZ = (work->targetZ - work->body.z) / 820;
             work->state++;
         }
 
-        if (work->jf->unk_238 == 7 || work->jf->unk_238 == 11) {
+        if (work->jf->state == 7 || work->jf->state == 11) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->unk_17C = 0;
-            work->unk_15C = 0;
+            work->visible2 = 0;
+            work->riseSteps = 0;
             work->state = 5;
         }
         break;
     case 1:
-        work->unk_02A++;
+        work->paletteTimer++;
 
-        if (work->unk_02A > 2) {
-            work->unk_02A = 0;
-            work->unk_028++;
+        if (work->paletteTimer > 2) {
+            work->paletteTimer = 0;
+            work->paletteFrame++;
 
-            if (work->unk_028 > 8) {
-                work->unk_028 = 0;
+            if (work->paletteFrame > 8) {
+                work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
         }
 
-        work->unk_15E++;
+        work->throwTimer++;
 
-        if (work->unk_15E > 3) {
-            work->unk_15E = 0;
+        if (work->throwTimer > 3) {
+            work->throwTimer = 0;
 
             if (jf->body.flags & 4) {
                 work->x2 = jf->body.x + 0x1000;
@@ -1570,76 +1570,76 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
 
             work->gfx2 = gUnk_09EF3A48[15];
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
-            work->unk_194 = 1;
+            work->shadowVisible = 1;
             work->state++;
         }
 
-        if (work->jf->unk_238 == 7 || work->jf->unk_238 == 11) {
+        if (work->jf->state == 7 || work->jf->state == 11) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->unk_17C = 0;
-            work->unk_194 = 0;
-            work->unk_15C = 0;
+            work->visible2 = 0;
+            work->shadowVisible = 0;
+            work->riseSteps = 0;
             work->state = 5;
         }
         break;
     case 2:
-        work->unk_02A++;
+        work->paletteTimer++;
 
-        if (work->unk_02A > 2) {
-            work->unk_02A = 0;
-            work->unk_028++;
+        if (work->paletteTimer > 2) {
+            work->paletteTimer = 0;
+            work->paletteFrame++;
 
-            if (work->unk_028 > 8) {
-                work->unk_028 = 0;
+            if (work->paletteFrame > 8) {
+                work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->unk_028 << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
         }
 
         work->body.x += work->vx;
         work->body.y += work->vy;
         work->body.z += work->vz;
-        work->vz += work->unk_154;
+        work->vz += work->accelZ;
 
-        if (work->unk_15E == 7) {
-            work->unk_17C = 0;
+        if (work->throwTimer == 7) {
+            work->visible2 = 0;
         }
 
-        if (func_08011F78(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == 1) {
+        if (ApplyAttackBox(231, work->body.x, work->body.y, work->body.z - 0x2000, 28, 28, 28) == 1) {
             m4aSongNumStart(SONG_EF_JF_BALLHIT);
-            func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
-            work->unk_194 = 0;
+            BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
+            work->shadowVisible = 0;
             work->state = 3;
         }
 
-        if (work->jf->unk_238 == 7 || work->jf->unk_238 == 11) {
+        if (work->jf->state == 7 || work->jf->state == 11) {
             m4aSongNumStart(SONG_EF_FIRE01);
-            work->unk_17C = 0;
-            work->unk_194 = 0;
-            work->unk_15C = 0;
+            work->visible2 = 0;
+            work->shadowVisible = 0;
+            work->riseSteps = 0;
             work->state = 5;
         }
 
-        switch ((s8)func_080C1370(work->body.x, work->body.y, work->body.z - 0x2000)) {
+        switch ((s8)BosJfRockTestPillars(work->body.x, work->body.y, work->body.z - 0x2000)) {
         case 1:
             m4aSongNumStart(SONG_EF_FIRE01);
-            func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
-            work->unk_194 = 0;
+            BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
+            work->shadowVisible = 0;
             work->state = 3;
             break;
         case 2:
-            work->unk_194 = 0;
+            work->shadowVisible = 0;
             work->state = 4;
             break;
         }
 
-        work->unk_15E++;
+        work->throwTimer++;
         break;
     case 5:
         if (MosaicIsActive() == 0) {
-            if (work->unk_15C == 0) {
-                func_08014020(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
-                work->unk_15C++;
+            if (work->riseSteps == 0) {
+                BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
+                work->riseSteps++;
             } else {
                 if (AnimIsFinished(&work->anim)) {
                     return 0;
@@ -1660,7 +1660,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         return 0;
     }
 
-    func_080BD7F8(&work->body.x, &work->body.y, &work->body.z, &work->body.unk_010);
+    BosJfGetGroundZ(&work->body.x, &work->body.y, &work->body.z, &work->body.groundZ);
     TaskPoolUpdate(&work->tasks);
 
     return 1;
@@ -1673,7 +1673,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
     s16 x;
     s16 y;
 
-    if (work->unk_15A == 1) {
+    if (work->visible == 1) {
         if (jf->body.flags & 4) {
             if (work->body.x <= 0x259FF) {
                 pal = GetBattleSpritePriorityFlags(work->body.y);
@@ -1694,7 +1694,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, pal, prio);
     }
 
-    if (work->unk_17C == 1) {
+    if (work->visible2 == 1) {
         if (jf->body.flags & 4) {
             pal = 0x400;
         } else {
@@ -1706,7 +1706,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, 0, pal, 0xFFF2);
     }
 
-    if (work->unk_194 == 1) {
+    if (work->shadowVisible == 1) {
         TaskPoolDraw(&work->tasks);
     }
 }
@@ -1719,10 +1719,10 @@ void task_bos_jf_rock_3(JfRockWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080C1370(s32 a, s32 b, s32 c) {
-    s32 t0 = -((gUnk_0203ACC4 + 1) << 11);
-    s32 t1 = -((gUnk_0203ACD4 + 1) << 11);
-    s32 t2 = -((gUnk_0203ACC0 + 1) << 11);
+u8 BosJfRockTestPillars(s32 a, s32 b, s32 c) {
+    s32 t0 = -((gBosJfLeftPillarLevel + 1) << 11);
+    s32 t1 = -((gBosJfMiddlePillarLevel + 1) << 11);
+    s32 t2 = -((gBosJfRightPillarLevel + 1) << 11);
     s32 hi = a + 0x1C00;
     s32 lo = a - 0x1C00;
     s32 zh = c + 0x1C00;
@@ -1749,16 +1749,16 @@ u8 func_080C1370(s32 a, s32 b, s32 c) {
 
 void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     work->jf = arg;
-    func_080C1A48(work);
-    work->unk_0A8 = 0xA00;
-    work->unk_0AC = 0x3600;
-    work->x = arg->body.x + work->unk_0A4;
-    work->y = arg->body.y + work->unk_0A8;
-    work->z = arg->body.z + work->unk_0AC;
+    BosJfBorderlineUpdateLayout(work);
+    work->offsetY = 0xA00;
+    work->offsetZ = 0x3600;
+    work->x = arg->body.x + work->offsetX;
+    work->y = arg->body.y + work->offsetY;
+    work->z = arg->body.z + work->offsetZ;
     work->unk_0B0 = 0;
     work->unk_0B2 = 0;
     work->unk_0B4 = 0;
-    work->unk_0B5 = 0;
+    work->wide = 0;
     work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
     work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
     AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
@@ -1776,15 +1776,15 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     AnimInit(&work->anim5, gUnk_09EF3B40, gUnk_09EF3A48);
     AnimStart(&work->anim5, 6, 1);
     work->gfx5 = AnimGetGfx(&work->anim5);
-    func_0801C298(work->palette->index + 16, 0);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
 }
 
 u8 task_bos_jf_borderline_1(JfBorderlineWork* work) {
     JfWork* p = work->jf;
 
-    func_080C1A48(work);
-    work->x = p->body.x + work->unk_0A4;
-    work->y = p->body.y + work->unk_0A8;
+    BosJfBorderlineUpdateLayout(work);
+    work->x = p->body.x + work->offsetX;
+    work->y = p->body.y + work->offsetY;
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
     work->gfx3 = AnimUpdate(&work->anim3);
@@ -1800,7 +1800,7 @@ void task_bos_jf_borderline_2(JfBorderlineWork* work) {
 
     WorldToScreen(&sx, &sy, work->x, work->y, work->z);
 
-    switch (work->unk_0B5) {
+    switch (work->wide) {
     case 0:
         DrawSprite(sx - 16, sy - 1, work->gfx, work->tiles, work->palette, 0, 0x400,
             0xFFF0);
@@ -1863,10 +1863,10 @@ void task_bos_jf_borderline_3(JfBorderlineWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void func_080C1A48(JfBorderlineWork* work) {
+void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
     JfWork* jf = work->jf;
 
-    switch (jf->unk_238) {
+    switch (jf->state) {
     case 0:
     case 6:
     case 7:
@@ -1875,46 +1875,46 @@ void func_080C1A48(JfBorderlineWork* work) {
     case 10:
     case 11:
         if (jf->body.flags & 4) {
-            work->unk_0A4 = -0x500;
+            work->offsetX = -0x500;
         } else {
-            work->unk_0A4 = 0x500;
+            work->offsetX = 0x500;
         }
         break;
     case 3:
         if (jf->body.flags & 4) {
-            work->unk_0A4 = -0x100;
+            work->offsetX = -0x100;
         } else {
-            work->unk_0A4 = 0x100;
+            work->offsetX = 0x100;
         }
         break;
     case 4:
     case 5:
         if (jf->body.flags & 4) {
-            work->unk_0A4 = 0x1000;
+            work->offsetX = 0x1000;
         } else {
-            work->unk_0A4 = -0x1000;
+            work->offsetX = -0x1000;
         }
         break;
     case 1:
     case 2:
         if (jf->body.flags & 4) {
-            work->unk_0A4 = -0xA00;
+            work->offsetX = -0xA00;
         } else {
-            work->unk_0A4 = 0xA00;
+            work->offsetX = 0xA00;
         }
 
-        work->unk_0B5 = 1;
+        work->wide = 1;
         return;
     default:
         if (jf->body.flags & 4) {
-            work->unk_0A4 = -0x500;
+            work->offsetX = -0x500;
         } else {
-            work->unk_0A4 = 0x500;
+            work->offsetX = 0x500;
         }
         break;
     }
 
-    work->unk_0B5 = 0;
+    work->wide = 0;
 }
 
 void task_bos_dsd_0(DsdWork* work, void* arg) {
@@ -1942,71 +1942,71 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->unk_392 = 0;
 
     if (work->flags & 16) {
-        work->unk_334 = 9;
+        work->state = 9;
     } else {
-        work->unk_334 = 1;
+        work->state = 1;
     }
 
-    work->unk_338 = 1;
-    work->unk_330 = 1;
-    work->unk_33C = 0;
+    work->attackState = 1;
+    work->lastState = 1;
+    work->attackCycle = 0;
     work->unk_34C = 0;
     work->timer = 0;
-    work->unk_350 = 0;
+    work->stateStep = 0;
     work->unk_352 = 0;
-    work->unk_354 = 0;
-    work->unk_356 = 0;
-    work->unk_35A = 0;
-    work->unk_35C = -51;
+    work->bgFrame = 0;
+    work->bgFrameTimer = 0;
+    work->hpPhase = 0;
+    work->driftX = -51;
     v = (s16)(work->flags & 16);
 
     if (v != 0) {
-        work->unk_340 = 0xDC00;
-        work->unk_344 = 0x16800;
-        work->unk_348 = -0x6400;
+        work->bodyX = 0xDC00;
+        work->bodyY = 0x16800;
+        work->bodyZ = -0x6400;
         w = work;
-        func_0801B37C(&w->body[0], &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
+        InitEnemyBtlObj(&w->body[0], &gBosDsdEmyKind, work->bodyX, work->bodyY, work->bodyZ);
         p1 = &w->body[1];
-        func_0801B37C(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
+        InitEnemyBtlObj(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
         p2 = &w->body[2];
-        func_0801B37C(p2, &gBosDsdEmyKind, 0x9000, 0x16800, 0);
+        InitEnemyBtlObj(p2, &gBosDsdEmyKind, 0x9000, 0x16800, 0);
         TaskCreate(&w->tasks, &gTaskDescBosDsdMain, w);
     } else {
-        work->unk_340 = 0xDC00;
-        work->unk_344 = 0x16800;
-        work->unk_348 = -0x6400;
+        work->bodyX = 0xDC00;
+        work->bodyY = 0x16800;
+        work->bodyZ = -0x6400;
         w = work;
-        func_0801B37C(&w->body[0], &gBosDsdEmyKind, work->unk_340, work->unk_344, work->unk_348);
+        InitEnemyBtlObj(&w->body[0], &gBosDsdEmyKind, work->bodyX, work->bodyY, work->bodyZ);
         w->body[0].flags |= 0x1000000;
         w->body[0].flags |= 4;
         p1 = &w->body[1];
-        func_0801B37C(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
+        InitEnemyBtlObj(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
         p1->flags |= 4;
         p1->flags |= 0x400;
-        p1->unk_0A2 = v;
-        p1->unk_09E = 16;
-        p1->unk_0A0 = 16;
-        p1->unk_09C = 16;
+        p1->centerHeight = v;
+        p1->radiusX = 16;
+        p1->radiusY = 16;
+        p1->height = 16;
         p2 = &w->body[2];
-        func_0801B37C(p2, &gBosDsdEmyKind, 0x9000, 0x16800, v);
+        InitEnemyBtlObj(p2, &gBosDsdEmyKind, 0x9000, 0x16800, v);
         p2->flags |= 0x003C000001000004ULL;
-        p2->unk_0A2 = v;
-        p2->unk_09E = 16;
-        p2->unk_0A0 = 16;
-        p2->unk_09C = 32;
+        p2->centerHeight = v;
+        p2->radiusX = 16;
+        p2->radiusY = 16;
+        p2->height = 32;
         ColliderInit(&p2->collider, 7, 16, 32);
         ColliderSetPosition(&p2->collider, p2->x, p2->y, p2->z);
         ColliderSetDisabled(&p2->collider, 1);
-        func_0801BDD4(p2, p1);
-        gBtlWork->unk_0D8 = v;
-        func_0801C298(0, 1);
+        SetBtlObjParent(p2, p1);
+        gBtlWork->bossPriorityOffset = v;
+        SetBtlPaletteFadeExcluded(0, 1);
         SetBattleActorPosition(0x6400, 0x16800, 0);
-        func_0801C274(0x2800, 0x16800, 0);
+        SetGimmickTarget(0x2800, 0x16800, 0);
         TaskCreate(&w->tasks, &gTaskDescBosDsdMain, w);
         btl = gBtlWork;
-        btl->unk_0CC = w->body[0].x;
-        btl->unk_0D0 = w->body[0].y;
-        btl->unk_0D4 = w->body[0].z;
+        btl->bossX = w->body[0].x;
+        btl->bossY = w->body[0].y;
+        btl->bossZ = w->body[0].z;
     }
 }
 u8 task_bos_dsd_1(DsdWork* work) {
@@ -2019,11 +2019,11 @@ u8 task_bos_dsd_1(DsdWork* work) {
         return 1;
     }
 
-    switch (func_0801ADAC(b)) {
+    switch (UpdateBtlObjReaction(b)) {
     case 5:
-        work->unk_334 = 2;
+        work->state = 2;
         b->flags |= 0x1000000;
-        work->unk_350 = 0;
+        work->stateStep = 0;
         break;
     case 1:
     case 6:
@@ -2033,12 +2033,12 @@ u8 task_bos_dsd_1(DsdWork* work) {
         break;
     case 3:
     case 8:
-        work->unk_334 = 11;
-        work->unk_350 = 0;
+        work->state = 11;
+        work->stateStep = 0;
         break;
     case 4:
-        work->unk_334 = 8;
-        work->unk_350 = 0;
+        work->state = 8;
+        work->stateStep = 0;
         break;
     }
 
@@ -2049,10 +2049,10 @@ u8 task_bos_dsd_1(DsdWork* work) {
             work->unk_34C = 0;
             work->flags &= ~1;
             LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
-            func_0801AF08(b);
+            ClearBtlObjActionFlags(b);
 
-            if (b->unk_02C > 0) {
-                switch (work->unk_334) {
+            if (b->hp > 0) {
+                switch (work->state) {
                 case 0:
                 case 1:
                 case 4:
@@ -2060,34 +2060,34 @@ u8 task_bos_dsd_1(DsdWork* work) {
                 case 8:
                     break;
                 default:
-                    work->unk_334 = 0;
-                    work->unk_350 = 0;
+                    work->state = 0;
+                    work->stateStep = 0;
                     break;
                 }
             }
         }
     }
 
-    if (func_0801C1C0(0)) {
+    if (ConsumeGimmickFlag(0)) {
         work->flags |= 8;
         TaskCreate(&work->tasks, &gTaskDescBosDsdIta, work);
     }
 
-    if (work->unk_334 == 4) {
+    if (work->state == 4) {
         if (gBtlWork->actor->z <= -0x1000) {
-            gBtlWork->unk_0D8 = -30;
+            gBtlWork->bossPriorityOffset = -30;
         } else {
-            gBtlWork->unk_0D8 = 0;
+            gBtlWork->bossPriorityOffset = 0;
         }
     } else {
-        gBtlWork->unk_0D8 = 0;
+        gBtlWork->bossPriorityOffset = 0;
     }
 
     TaskPoolUpdate(&work->tasks);
     q = gBtlWork;
-    q->unk_0CC = a->x;
-    q->unk_0D0 = a->y;
-    q->unk_0D4 = a->z;
+    q->bossX = a->x;
+    q->bossY = a->y;
+    q->bossZ = a->z;
 
     if (work->flags & 2) {
         return 0;
@@ -2108,21 +2108,21 @@ void task_bos_dsd_3(DsdWork* work) {
     b = &work->body[2];
     TaskPoolDestroy(&work->tasks);
     ColliderUnregister(&work->body[2].collider);
-    func_0801B7D8(&work->body[0]);
-    func_0801B7D8(a);
-    func_0801B7D8(b);
+    ReleaseEnemyBtlObj(&work->body[0]);
+    ReleaseEnemyBtlObj(a);
+    ReleaseEnemyBtlObj(b);
 }
 
-const s16 gUnk_0961A6A8[49] = {
+const s16 gBosJfMajinFrameDurations[49] = {
     9, 9, 8, 8, 8, 8, 8, 8, 30, 6, 6, 12, 6, 6, 2, 8,
     8, 8, 8, 12, 2, 2, 2, 2, 12, 12, 12, 12, 30, 6, 6, 12,
     6, 6, 2, 8, 8, 8, 8, 12, 2, 2, 2, 2, 12, 12, 12, 12,
     0,
 };
 
-const s8 gUnk_0961A70A[6] = { 0, -1, -2, -2, -1, 0 };
+const s8 gBosJfMajinIdleOffsets[6] = { 0, -1, -2, -2, -1, 0 };
 
-const u16 gUnk_0961A710[16][3] = {
+const u16 gBosJfPillarPatterns[16][3] = {
     { 0, 0, 0 },
     { 7, 7, 7 },
     { 7, 0, 0 },
@@ -2141,7 +2141,7 @@ const u16 gUnk_0961A710[16][3] = {
     { 0, 0, 0 },
 };
 
-void* gUnk_09EF280C[48] __attribute__((aligned(4))) = {
+void* gBosJfMajinFrameMaps[48] __attribute__((aligned(4))) = {
     gUnk_096D5C64,
     gUnk_096D6464,
     gUnk_096D6C64,
@@ -2194,7 +2194,7 @@ void* gUnk_09EF280C[48] __attribute__((aligned(4))) = {
 
 const u16* gUnk_09EF28CC __attribute__((aligned(4))) = gUnk_08125E24;
 
-void* gUnk_09EF28D0[48] __attribute__((aligned(4))) = {
+void* gBosJfMajinFrameTiles[48] __attribute__((aligned(4))) = {
     gUnk_09671DE4,
     gUnk_09672CE4,
     gUnk_09673964,
@@ -2247,7 +2247,7 @@ void* gUnk_09EF28D0[48] __attribute__((aligned(4))) = {
 
 void* gUnk_09EF2990 __attribute__((aligned(4))) = 0;
 
-u32 gUnk_09EF2994[27] __attribute__((aligned(4))) = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
+u32 gBosJfMajinBeamScales[27] __attribute__((aligned(4))) = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
 
 u32 gUnk_09EF2A00 __attribute__((aligned(4))) = 578;
 
@@ -2274,11 +2274,11 @@ TaskDesc gTaskDescBosJfMajin = {
     sizeof(JfMajinWork),
 };
 
-s8 gUnk_09EF2A38[9] __attribute__((aligned(1))) = { 9, 10, 11, 12, 13, 14, 15, 26, 0 };
+s8 gBosJfRockAnims[9] __attribute__((aligned(1))) = { 9, 10, 11, 12, 13, 14, 15, 26, 0 };
 
 s8 gUnk_09EF2A41 __attribute__((aligned(1))) = -1;
 
-s16 gUnk_09EF2A42[12] __attribute__((aligned(2))) = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 55 };
+s16 gBosJfRockGfx2Frames[12] __attribute__((aligned(2))) = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 55 };
 
 TaskDesc gTaskDescBosJfRock = {
     "task_bos_jf_rock",

@@ -5,7 +5,7 @@
 
 struct FrdDonaldWork;
 
-u8 func_0804544C(struct FrdDonaldWork* work);
-void func_08045494(BtlObj* body, u8 a, s16 b, s16 c);
+u8 FrdDonaldApplyGravity(struct FrdDonaldWork* work);
+void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c);
 
 #endif

@@ -115,44 +115,44 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
 
     body = &work->body;
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
-    work->unk_150 = 0;
-    work->unk_154 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->vz = 0;
 
     if (work->actor->flags & 4) {
         work->unk_158 = work->actor->x - 0x3000;
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 4;
     } else {
         work->unk_158 = work->actor->x + 0x3000;
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
     }
 
     body->y = work->actor->y;
     body->z = -0x5000;
-    body->unk_010 = 0;
+    body->groundZ = 0;
     work->palette = LoadObjPalette(gDonaldPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
 
-    switch (args->unk_00) {
+    switch (args->variant) {
     case 0:
-        work->unk_160 = 1;
+        work->repeatsLeft = 1;
 #ifdef VERSION_EU
         if (gLanguage == 3) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -164,7 +164,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
 #endif
         break;
     case 1:
-        work->unk_160 = 1;
+        work->repeatsLeft = 1;
 #ifdef VERSION_EU
         if (gLanguage == 3) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -176,7 +176,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
 #endif
         break;
     case 2:
-        work->unk_160 = 1;
+        work->repeatsLeft = 1;
 #ifdef VERSION_EU
         if (gLanguage == 3) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
@@ -189,8 +189,8 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
         break;
     default:
         m4aSongNumStart(SONG_VO_DL_ATTACK00);
-        func_08017260(0, 0, 0, 0x180);
-        func_08045494(body, 0, 8, 8);
+        BgFxStartFlame(0, 0, 0, 0x180);
+        UpdateDonaldFlame(body, 0, 8, 8);
         break;
     }
 
@@ -203,7 +203,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     BtlWork* owner;
     BtlObj* target;
     s32 angle;
-    if (work->unk_14C != 0) {
+    if (work->mainSide != 0) {
         owner = gBtlWork;
         target = owner->actor2;
     } else {
@@ -213,16 +213,16 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     if (owner->flags & 0x40000000) return 0;
     switch (work->state) {
     case 0:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
-            work->unk_14E++;
+            work->stateTimer++;
         }
         body->x += (work->unk_158 - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
-        if (work->unk_14D == 3) func_08045494(body, 0, 8, 8);
-        if (func_0804544C(work)) {
-            work->unk_14E = 0;
-            if (work->unk_14D == 3) work->state = 8;
+        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+        if (FrdDonaldApplyGravity(work)) {
+            work->stateTimer = 0;
+            if (work->variant == 3) work->state = 8;
             else {
                 work->state = 1;
                 m4aSongNumStart(SONG_VO_DL_ATTACK00);
@@ -230,9 +230,9 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         }
         break;
     case 1:
-        if (work->unk_14E == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
-            func_0801D288();
+            SelectLockonTarget();
             if (gBtlWork->flags & 0x800000000ULL) work->state = 4;
             else {
                 u16 spell = GetRandom();
@@ -252,12 +252,12 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
-            work->unk_14E = 0;
-        } else work->unk_14E++;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     case 2:
-        if (work->unk_160 > 0) {
-            func_0801D288();
+        if (work->repeatsLeft > 0) {
+            SelectLockonTarget();
             if (gBtlWork->flags & 0x800000000ULL) work->state = 4;
             else {
                 u16 spell = GetRandom();
@@ -277,36 +277,36 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     break;
                 }
             }
-            work->unk_14E = 0;
-            work->unk_160--;
+            work->stateTimer = 0;
+            work->repeatsLeft--;
         } else {
-            if (work->unk_14E == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+            if (work->stateTimer == 0) AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
-                work->unk_14E = 0;
-            } else work->unk_14E++;
+                work->stateTimer = 0;
+            } else work->stateTimer++;
         }
         break;
     case 3:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
-            if (!(body->flags & 4)) work->unk_158 = (gBtlWork->unk_0DA - 64) * 256;
-            else work->unk_158 = (gBtlWork->unk_0DC + 64) * 256;
-            work->unk_154 = -0x500;
-            work->unk_150 = 30;
+            if (!(body->flags & 4)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
+            else work->unk_158 = (gBtlWork->xMax + 64) * 256;
+            work->vz = -0x500;
+            work->steps = 30;
         }
-        ApproachValue(&body->x, work->unk_158, work->unk_150);
-        if (work->unk_14D == 3) func_08045494(body, 0, 8, 8);
-        func_0804544C(work);
-        if (work->unk_150 <= 0) {
-            if (work->unk_14D == 3) BgAnimStop();
+        ApproachValue(&body->x, work->unk_158, work->steps);
+        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+        FrdDonaldApplyGravity(work);
+        if (work->steps <= 0) {
+            if (work->variant == 3) BgAnimStop();
             return 0;
         }
-        work->unk_14E++;
-        work->unk_150--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 8:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             if (body->flags & 4) angle = GetRandom() % 2 ? 0xAD : 0xD3;
             else angle = GetRandom() % 2 ? 0x53 : 0x2D;
             work->unk_158 = gSineTable[angle] * 3;
@@ -318,8 +318,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         else body->flags &= ~4ULL;
         body->x += work->unk_158;
         body->y += work->unk_15C;
-        func_0804544C(work);
-        func_08045494(body, 1, 2, 8);
+        FrdDonaldApplyGravity(work);
+        UpdateDonaldFlame(body, 1, 2, 8);
         switch (ClampBattlePosition(&body->x, &body->y, 0, 0)) {
         case 1:
         case 2:
@@ -330,15 +330,15 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             work->unk_15C = -work->unk_15C;
             break;
         }
-        if (work->unk_14E > 179) {
-            work->unk_14E = 0;
+        if (work->stateTimer > 179) {
+            work->stateTimer = 0;
             work->state = 3;
-        } else work->unk_14E++;
+        } else work->stateTimer++;
         break;
     case 4:
         {
             s32 x,y,z;
-            if (work->unk_14E == 0) {
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
@@ -346,11 +346,11 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     else body->flags &= ~4ULL;
                 }
             }
-            if (work->unk_14E == 40) {
+            if (work->stateTimer == 40) {
                 if (target != 0) {
                     x = target->x;
                     y = target->y;
-                    z = target->z - target->unk_0A2 * 256;
+                    z = target->z - target->centerHeight * 256;
                     if (x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 } else {
@@ -359,37 +359,37 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     y = body->y;
                     z = body->z - 0x800;
                 }
-                switch (work->unk_14D) {
+                switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) func_08012E44(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
-                    else func_08012E44(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
+                    if (body->flags & 4) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
+                    else BgFxStartFire(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
                     break;
                 case 1:
-                    if (body->flags & 4) func_08012E44(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
-                    else func_08012E44(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
+                    if (body->flags & 4) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
+                    else BgFxStartFire(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) func_08012E44(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
-                    else func_08012E44(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
+                    if (body->flags & 4) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
+                    else BgFxStartFire(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
                     break;
                 }
             }
-            if (work->unk_14E > 40) {
-                if (!func_080128EC()) {
+            if (work->stateTimer > 40) {
+                if (!BgFxIsActive()) {
                     work->state = 2;
-                    work->unk_14E = 0;
+                    work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) func_080147A8(target->x, target->y, target->z - target->unk_0A2 * 256);
+                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
-            work->unk_14E++;
+            work->stateTimer++;
             break;
         }
     case 5:
         {
             s32 x,y,z;
-            if (work->unk_14E == 0) {
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
@@ -397,11 +397,11 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     else body->flags &= ~4ULL;
                 }
             }
-            if (work->unk_14E == 40) {
+            if (work->stateTimer == 40) {
                 if (target != 0) {
                     x = target->x;
                     y = target->y;
-                    z = target->z - target->unk_0A2 * 256;
+                    z = target->z - target->centerHeight * 256;
                     if (x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 } else {
@@ -410,35 +410,35 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     y = body->y;
                     z = body->z - 0x800;
                 }
-                switch (work->unk_14D) {
+                switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) func_08013308(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
-                    else func_08013308(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
+                    if (body->flags & 4) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
+                    else BgFxStartBlizzard(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
                     break;
                 case 1:
-                    if (body->flags & 4) func_08013308(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
-                    else func_08013308(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
+                    if (body->flags & 4) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
+                    else BgFxStartBlizzard(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) func_08013308(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
-                    else func_08013308(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
+                    if (body->flags & 4) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
+                    else BgFxStartBlizzard(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
                     break;
                 }
             }
-            if (work->unk_14E > 40) {
-                if (!func_080128EC()) {
+            if (work->stateTimer > 40) {
+                if (!BgFxIsActive()) {
                     work->state = 2;
-                    work->unk_14E = 0;
+                    work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) func_080147A8(target->x, target->y, target->z - target->unk_0A2 * 256);
+                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
-            work->unk_14E++;
+            work->stateTimer++;
             break;
         }
     case 6:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != 0) {
@@ -446,103 +446,103 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 else body->flags &= ~4ULL;
             }
         }
-        if (work->unk_14E == 40) {
-            switch (work->unk_14D) {
+        if (work->stateTimer == 40) {
+            switch (work->variant) {
             case 0:
                 {
                     s32 x,y,z;
                     if (target != 0) {
                         x=target->x;
                         y=target->y;
-                        z=target->unk_010;
+                        z=target->groundZ;
                     } else {
                         if (body->flags & 4) x=body->x-0x5000;
                         else x=body->x+0x5000;
                         y=body->y;
                         z=0;
                     }
-                    func_08015834(0, body->x, body->y, body->z-0x4000, x,y,z,129);
+                    BgFxStartThunder(0, body->x, body->y, body->z-0x4000, x,y,z,129);
                     break;
                 }
             case 1:
-                func_08013CB4(1,body->x,body->y,body->z-0x4000,body->unk_010,130);
+                BgFxStartWideThunder(1,body->x,body->y,body->z-0x4000,body->groundZ,130);
                 break;
             case 2:
             default:
-                func_08013CB4(2,body->x,body->y,body->z-0x4000,body->unk_010,131);
+                BgFxStartWideThunder(2,body->x,body->y,body->z-0x4000,body->groundZ,131);
                 break;
             }
         }
-        if (work->unk_14E == 60) func_08019050(15,148,0x10000,0x12C00);
-        if (work->unk_14E > 40 && !func_080128EC()) {
+        if (work->stateTimer == 60) SetBattleZoom(15,148,0x10000,0x12C00);
+        if (work->stateTimer > 40 && !BgFxIsActive()) {
             work->state=2;
-            func_08019050(15,256,gBtlWork->x2,gBtlWork->y2);
-            work->unk_14E=0;
-        } else work->unk_14E++;
+            SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+            work->stateTimer=0;
+        } else work->stateTimer++;
         break;
     case 7:
         {
-            BtlObj* ally=work->unk_14C != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
-            if (work->unk_14E == 0) {
+            BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
                 AnimReset(&work->anim);
                 if (ally->x < body->x) body->flags |= 4;
                 else body->flags &= ~4ULL;
             }
-            if (work->unk_14E == 40) {
-                switch (work->unk_14D) {
+            if (work->stateTimer == 40) {
+                switch (work->variant) {
                 case 0:
-                    func_08012AAC(0,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 case 1:
-                    func_08012AAC(1,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(1,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 case 2:
-                    func_08012AAC(2,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(2,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 default:
-                    func_08012AAC(0,ally->x,ally->y,ally->z-0x2C00);
+                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
                     break;
                 }
             }
-            if (work->unk_14E > 40) {
-                if (func_080128EC()) {
+            if (work->stateTimer > 40) {
+                if (BgFxIsActive()) {
                     BgFxSetPosition(ally->x,ally->y,ally->z-0x2C00);
                 } else {
-                    if (ally->btl->unk_0F4 == 13) {
-                        switch (work->unk_14D) {
+                    if (ally->btl->hcEffect == 13) {
+                        switch (work->variant) {
                         case 0:
-                            ally->unk_02C+=75;
+                            ally->hp+=75;
                             break;
                         case 1:
-                            ally->unk_02C+=225;
+                            ally->hp+=225;
                             break;
                         case 2:
-                            ally->unk_02C+=450;
+                            ally->hp+=450;
                             break;
                         }
                     } else {
-                        switch (work->unk_14D) {
+                        switch (work->variant) {
                         case 0:
-                            ally->unk_02C+=50;
+                            ally->hp+=50;
                             break;
                         case 1:
-                            ally->unk_02C+=150;
+                            ally->hp+=150;
                             break;
                         case 2:
-                            ally->unk_02C+=300;
+                            ally->hp+=300;
                             break;
                         }
                     }
-                    if (ally->unk_02C > ally->unk_02E) ally->unk_02C=ally->unk_02E;
-                    func_08019190(ally,10);
+                    if (ally->hp > ally->maxHp) ally->hp=ally->maxHp;
+                    CreateBtlPopTask(ally,10);
                     work->state=2;
-                    func_08019050(15,256,gBtlWork->x2,gBtlWork->y2);
-                    work->unk_14E=0;
+                    SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+                    work->stateTimer=0;
                     break;
                 }
             }
-            work->unk_14E++;
+            work->stateTimer++;
             break;
         }
     }
@@ -589,30 +589,30 @@ void task_frd_donald_2(FrdDonaldWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_donald_3(FrdDonaldWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080465F0(FrdGoofyWork* work) {
+u8 FrdGoofyApplyGravity(FrdGoofyWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_154;
-    work->unk_154 += 0x33;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_154 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
@@ -633,37 +633,37 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     m4aSongNumStart(SONG_VO_SR_SUMMON03);
 #endif
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
-    work->unk_150 = 0;
-    work->unk_154 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->vz = 0;
 
     if (work->actor->flags & 4) {
-        work->unk_158 = work->actor->x - 0x3000;
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        work->targetX = work->actor->x - 0x3000;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 4;
     } else {
-        work->unk_158 = work->actor->x + 0x3000;
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        work->targetX = work->actor->x + 0x3000;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
     }
 
     body->y = work->actor->y;
     body->z = -0x5000;
-    body->unk_010 = 0;
+    body->groundZ = 0;
     work->palette = LoadObjPalette(gGoofyPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
@@ -677,7 +677,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
     s32 t;
 
     body = &work->body;
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -685,27 +685,27 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
 
     switch (work->state) {
     case 0:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
-            work->unk_14E++;
+            work->stateTimer++;
         }
 
-        body->x += (work->unk_158 - body->x) >> 4;
+        body->x += (work->targetX - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
-        if (func_080465F0(work)) {
+        if (FrdGoofyApplyGravity(work)) {
             work->state = 1;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_GF_ATTACK00);
         }
         break;
     case 1:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
-            switch (work->unk_14D) {
+            switch (work->variant) {
             case 0:
             case 1:
                 work->state = 4;
@@ -715,123 +715,123 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
                 break;
             }
 
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 2:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 3;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 3:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
 
             if (body->flags & 4) {
-                work->unk_158 = (gBtlWork->unk_0DA - 0x40) << 8;
+                work->targetX = (gBtlWork->xMin - 0x40) << 8;
             } else {
-                work->unk_158 = (gBtlWork->unk_0DC + 0x40) << 8;
+                work->targetX = (gBtlWork->xMax + 0x40) << 8;
             }
 
-            work->unk_154 = -0x500;
-            work->unk_150 = 30;
+            work->vz = -0x500;
+            work->steps = 30;
         }
 
-        ApproachValue(&body->x, work->unk_158, work->unk_150);
-        func_080465F0(work);
+        ApproachValue(&body->x, work->targetX, work->steps);
+        FrdGoofyApplyGravity(work);
 
-        if (work->unk_150 <= 0) {
+        if (work->steps <= 0) {
             return 0;
         }
 
-        work->unk_14E++;
-        work->unk_150--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 4:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 2, 0, work->tiles);
 
             if (body->flags & 4) {
-                work->unk_158 = body->x - 0x8500;
+                work->targetX = body->x - 0x8500;
             } else {
-                work->unk_158 = body->x + 0x8500;
+                work->targetX = body->x + 0x8500;
             }
         }
 
-        if (work->unk_14E == 40) {
-            work->unk_15C = work->actor->y;
+        if (work->stateTimer == 40) {
+            work->targetY = work->actor->y;
         }
 
-        if (work->unk_14E > 39) {
-            body->x += (work->unk_158 - body->x) >> 4;
-            body->y += (work->unk_15C - body->y) >> 4;
+        if (work->stateTimer > 39) {
+            body->x += (work->targetX - body->x) >> 4;
+            body->y += (work->targetY - body->y) >> 4;
 
             if (body->flags & 4
-                    ? func_08011F78(work->unk_14D + 120, body->x - 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)
-                    : func_08011F78(work->unk_14D + 120, body->x + 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)) {
+                    ? ApplyAttackBox(work->variant + 120, body->x - 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)
+                    : ApplyAttackBox(work->variant + 120, body->x + 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)) {
                 m4aSongNumStart(SONG_EF_GFHIT);
             }
 
             ClampBattlePosition(&body->x, &body->y, -16, 0);
         }
 
-        func_080465F0(work);
+        FrdGoofyApplyGravity(work);
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 2;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 5:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 3, 0, work->tiles);
         }
 
-        func_080465F0(work);
+        FrdGoofyApplyGravity(work);
 
         if (AnimIsFinished(&work->anim)) {
             work->state = 6;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 6:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdGoofyAnimDefs, &work->anim, 4, 1, work->tiles);
             work->angle = GetRandom();
         }
 
-        work->unk_158 = work->actor->x + (gSineTable[work->angle] << 6);
-        work->unk_15C = work->actor->y - (gSineTable[work->angle + 0x40] << 5);
-        body->x += (work->unk_158 - body->x) >> 3;
-        body->y += (work->unk_15C - body->y) >> 3;
+        work->targetX = work->actor->x + (gSineTable[work->angle] << 6);
+        work->targetY = work->actor->y - (gSineTable[work->angle + 0x40] << 5);
+        body->x += (work->targetX - body->x) >> 3;
+        body->y += (work->targetY - body->y) >> 3;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
         work->angle += 4;
 
-        if (func_08011F78(0x7A, body->x, body->y, body->z, 0x23, 0x1C, 0x30)) {
+        if (ApplyAttackBox(0x7A, body->x, body->y, body->z, 0x23, 0x1C, 0x30)) {
             m4aSongNumStart(SONG_EF_GFHIT);
         }
 
-        func_080465F0(work);
+        FrdGoofyApplyGravity(work);
 
-        if (work->unk_14E > 179) {
+        if (work->stateTimer > 179) {
             work->state = 2;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         }
 
-        work->unk_14E++;
+        work->stateTimer++;
         break;
     }
 
@@ -878,14 +878,14 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_goofy_3(FrdGoofyWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -897,33 +897,33 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON10);
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
+    work->stateTimer = 0;
 
     if (work->actor->flags & 4) {
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 4;
     } else {
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
     }
 
     body->y = work->actor->y;
-    body->unk_010 = 0;
-    work->unk_154 = -0x1000;
+    body->groundZ = 0;
+    work->hoverZ = -0x1000;
     body->z = -0x1000;
     work->palette = LoadObjPalette(gArielPalette, 32);
     AnimInit(&work->anim, 0, 0);
@@ -931,19 +931,19 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
-    switch (args->unk_00) {
+    switch (args->variant) {
     case 0:
-        work->unk_15C = 0x500;
-        work->unk_158 = 0;
+        work->passSpeed = 0x500;
+        work->passesLeft = 0;
         break;
     case 1:
-        work->unk_15C = 0x800;
-        work->unk_158 = 1;
+        work->passSpeed = 0x800;
+        work->passesLeft = 1;
         break;
     case 2:
     default:
-        work->unk_15C = 0xC00;
-        work->unk_158 = 4;
+        work->passSpeed = 0xC00;
+        work->passesLeft = 4;
         break;
     }
 }
@@ -959,35 +959,35 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
         return 0;
     }
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
     }
 
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
 
     switch (work->state) {
     case 0:
         if (body->flags & 4) {
-            t = gBtlWork->unk_0DC - 0x30;
+            t = gBtlWork->xMax - 0x30;
         } else {
-            t = gBtlWork->unk_0DA + 0x30;
+            t = gBtlWork->xMin + 0x30;
         }
 
         body->x += ((t << 8) - body->x) >> 3;
 
-        if (work->unk_14E > 20) {
-            work->unk_14E = 0;
+        if (work->stateTimer > 20) {
+            work->stateTimer = 0;
             work->state = 1;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 1:
-        if (work->unk_14E == 0) {
-            work->unk_160 = 0;
-            work->unk_150 = 12;
+        if (work->stateTimer == 0) {
+            work->speed = 0;
+            work->steps = 12;
             AnimChangeWithDef(gFrdArielAnimDefs, &work->anim, 2, 0, work->tiles);
         }
 
@@ -998,73 +998,73 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
             break;
         case 3:
         default:
-            if (work->unk_150 > 0) {
-                ApproachValue(&work->unk_160, work->unk_15C, work->unk_150);
-                work->unk_150--;
+            if (work->steps > 0) {
+                ApproachValue(&work->speed, work->passSpeed, work->steps);
+                work->steps--;
             }
 
             if (body->flags & 4) {
-                body->x -= work->unk_160;
+                body->x -= work->speed;
             } else {
-                body->x += work->unk_160;
+                body->x += work->speed;
             }
             break;
         }
 
-        if (work->unk_150 <= 0 && AnimIsFinished(&work->anim)) {
-            work->unk_14E = 0;
+        if (work->steps <= 0 && AnimIsFinished(&work->anim)) {
+            work->stateTimer = 0;
             work->state = 2;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 2:
         AnimChangeWithDef(gFrdArielAnimDefs, &work->anim, 0, 1, work->tiles);
 
         if (body->flags & 4
-                ? func_08011F78(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)
-                : func_08011F78(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)) {
+                ? ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)
+                : ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)) {
             m4aSongNumStart(SONG_BTL_AR_PUNCHHIT);
         }
 
         if (body->flags & 4) {
-            body->x -= work->unk_15C;
+            body->x -= work->passSpeed;
 
-            if (body->x < (gBtlWork->unk_0DA - 0x30) << 8) {
-                if (work->unk_158 == 0) {
+            if (body->x < (gBtlWork->xMin - 0x30) << 8) {
+                if (work->passesLeft == 0) {
                     return 0;
                 }
 
-                work->unk_158--;
+                work->passesLeft--;
                 body->flags &= 0xFFFFFFFFFFFFFFFB;
-                work->unk_14E = 0;
+                work->stateTimer = 0;
                 body->y = work->actor->y;
-                func_08019A30();
+                MakeOpponentsHittable();
             }
         } else {
-            body->x += work->unk_15C;
+            body->x += work->passSpeed;
 
-            if (body->x > (gBtlWork->unk_0DC + 0x30) << 8) {
-                if (work->unk_158 == 0) {
+            if (body->x > (gBtlWork->xMax + 0x30) << 8) {
+                if (work->passesLeft == 0) {
                     return 0;
                 }
 
-                work->unk_158--;
+                work->passesLeft--;
                 body->flags |= 4;
-                work->unk_14E = 0;
+                work->stateTimer = 0;
                 body->y = work->actor->y;
-                func_08019A30();
+                MakeOpponentsHittable();
             }
         }
 
-        body->z = work->unk_154 + (gSineTable[((u16)work->unk_14E * 8) & 0xFF] << 3);
+        body->z = work->hoverZ + (gSineTable[((u16)work->stateTimer * 8) & 0xFF] << 3);
         body->y += (work->actor->y - body->y) >> 4;
 
-        if (work->unk_14E == 20) {
+        if (work->stateTimer == 20) {
             m4aSongNumStart(SONG_VO_AR_ATTACK00);
         }
 
-        work->unk_14E++;
+        work->stateTimer++;
         break;
     }
 
@@ -1111,30 +1111,30 @@ void task_frd_ariel_2(FrdArielWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_ariel_3(FrdArielWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080474A8(FrdJackWork* work) {
+u8 FrdJackApplyGravity(FrdJackWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_154;
-    work->unk_154 += 0x33;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_154 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
@@ -1147,52 +1147,52 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON07);
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
-    work->unk_150 = 0;
-    work->unk_154 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->vz = 0;
 
     if (work->actor->flags & 4) {
-        work->unk_158 = work->actor->x - 0x3000;
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        work->targetX = work->actor->x - 0x3000;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 4;
     } else {
-        work->unk_158 = work->actor->x + 0x3000;
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        work->targetX = work->actor->x + 0x3000;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
     }
 
     body->y = work->actor->y;
     body->z = -0x5000;
-    body->unk_010 = 0;
-    work->unk_160 = 0;
+    body->groundZ = 0;
+    work->rotation = 0;
     work->palette = LoadObjPalette(gJackPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
 
-    switch (args->unk_00) {
+    switch (args->variant) {
     case 0:
-        work->unk_168 = 0;
+        work->repeatsLeft = 0;
         break;
     case 1:
-        work->unk_168 = 1;
+        work->repeatsLeft = 1;
         break;
     case 2:
     default:
-        work->unk_168 = 2;
+        work->repeatsLeft = 2;
         break;
     }
 
@@ -1205,7 +1205,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     BtlWork* owner;
     BtlObj* target;
     if (gGameState.world != WORLD_HALLOWEEN_TOWN) return 0;
-    if (work->unk_14C != 0) {
+    if (work->mainSide != 0) {
         owner = gBtlWork;
         target = owner->actor2;
     } else {
@@ -1215,23 +1215,23 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     if (owner->flags & 0x40000000) return 0;
     switch (work->state) {
     case 0:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
-            work->unk_14E++;
+            work->stateTimer++;
         }
-        body->x += (work->unk_158 - body->x) >> 4;
+        body->x += (work->targetX - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
-        if (func_080474A8(work)) {
+        if (FrdJackApplyGravity(work)) {
             work->state = 1;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
         }
         break;
     case 1:
-        if (work->unk_14E == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
-            func_0801D288();
+            SelectLockonTarget();
             spell = GetRandom();
             spell &= 3;
             switch (spell) {
@@ -1248,87 +1248,87 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 work->state = 7;
                 break;
             }
-            work->unk_14E = 0;
-        } else work->unk_14E++;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     case 2:
-        if (work->unk_168 > 0) {
+        if (work->repeatsLeft > 0) {
             work->state = 8;
-            work->unk_14E = 0;
-            work->unk_168--;
+            work->stateTimer = 0;
+            work->repeatsLeft--;
         } else {
-            if (work->unk_14E == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+            if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
             if (AnimIsFinished(&work->anim)) {
                 work->state = 3;
-                work->unk_14E = 0;
-            } else work->unk_14E++;
+                work->stateTimer = 0;
+            } else work->stateTimer++;
         }
         break;
     case 3:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
-            if (!(body->flags & 4)) work->unk_158 = (gBtlWork->unk_0DA - 64) * 256;
-            else work->unk_158 = (gBtlWork->unk_0DC + 64) * 256;
-            work->unk_154 = -0x500;
-            work->unk_150 = 30;
+            if (!(body->flags & 4)) work->targetX = (gBtlWork->xMin - 64) * 256;
+            else work->targetX = (gBtlWork->xMax + 64) * 256;
+            work->vz = -0x500;
+            work->steps = 30;
         }
-        ApproachValue(&body->x, work->unk_158, work->unk_150);
-        func_080474A8(work);
-        if (work->unk_150 <= 0) return 0;
-        work->unk_14E++;
-        work->unk_150--;
+        ApproachValue(&body->x, work->targetX, work->steps);
+        FrdJackApplyGravity(work);
+        if (work->steps <= 0) return 0;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 8:
-        if (work->unk_14E == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 4, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             work->state = 9;
             GetRandom();
             m4aSongNumStart(SONG_VO_JC_ATTACK00);
-            work->unk_14E = 0;
-        } else work->unk_14E++;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     case 9:
-        if (work->unk_14E == 0) {
-            if (work->actor->flags & 4) work->unk_158 = work->actor->x - 0x2D00;
-            else work->unk_158 = work->actor->x + 0x2D00;
-            work->unk_15C = work->actor->y;
-            work->unk_154 = -0x500;
-            work->unk_150 = 45;
-            if (work->unk_158 > body->x) {
+        if (work->stateTimer == 0) {
+            if (work->actor->flags & 4) work->targetX = work->actor->x - 0x2D00;
+            else work->targetX = work->actor->x + 0x2D00;
+            work->targetY = work->actor->y;
+            work->vz = -0x500;
+            work->steps = 45;
+            if (work->targetX > body->x) {
                 if (body->flags & 4) {
-                    work->unk_164 = 256;
+                    work->rotationTarget = 256;
                 } else {
-                    work->unk_164 = -256;
+                    work->rotationTarget = -256;
                 }
             } else {
                 if (body->flags & 4) {
-                    work->unk_164 = -256;
+                    work->rotationTarget = -256;
                 } else {
-                    work->unk_164 = 256;
+                    work->rotationTarget = 256;
                 }
             }
-            work->unk_14E++;
+            work->stateTimer++;
         }
-        func_080474A8(work);
-        if (work->unk_154 > 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
+        FrdJackApplyGravity(work);
+        if (work->vz > 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 1, 0, work->tiles);
         else AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
-        if (work->unk_150 > 0) {
-            ApproachValueHalfSteps(&body->x, work->unk_158, work->unk_150);
-            ApproachValueHalfSteps(&body->y, work->unk_15C, work->unk_150);
-            if (work->unk_150 <= 39) ApproachValueHalfSteps(&work->unk_160, work->unk_164, work->unk_150);
-            work->unk_150--;
+        if (work->steps > 0) {
+            ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
+            ApproachValueHalfSteps(&body->y, work->targetY, work->steps);
+            if (work->steps <= 39) ApproachValueHalfSteps(&work->rotation, work->rotationTarget, work->steps);
+            work->steps--;
         }
-        if (body->z >= body->unk_010 && work->unk_150 <= 0) {
-            work->unk_14E = 0;
-            work->unk_160 = 0;
+        if (body->z >= body->groundZ && work->steps <= 0) {
+            work->stateTimer = 0;
+            work->rotation = 0;
             work->state = 10;
         }
         break;
     case 10:
-        if (work->unk_14E == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
+        if (work->stateTimer == 0) AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 2, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             u16 spell;
-            func_0801D288();
+            SelectLockonTarget();
             spell = GetRandom();
             spell &= 3;
             switch (spell) {
@@ -1345,13 +1345,13 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 work->state = 7;
                 break;
             }
-            work->unk_14E = 0;
-        } else work->unk_14E++;
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     case 4:
         {
             s32 x, y, z;
-            if (work->unk_14E == 0) {
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
@@ -1359,11 +1359,11 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     else body->flags &= ~4ULL;
                 }
             }
-            if (work->unk_14E == 44) {
+            if (work->stateTimer == 44) {
                 if (target != 0) {
                     x = target->x;
                     y = target->y;
-                    z = target->z - target->unk_0A2 * 256;
+                    z = target->z - target->centerHeight * 256;
                     if (x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 } else {
@@ -1372,37 +1372,37 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     y = body->y;
                     z = body->z - 0x1800;
                 }
-                switch (work->unk_14D) {
+                switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) func_08012E44(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
-                    else func_08012E44(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 133);
+                    if (body->flags & 4) BgFxStartFire(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
+                    else BgFxStartFire(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 133);
                     break;
                 case 1:
-                    if (body->flags & 4) func_08012E44(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
-                    else func_08012E44(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 134);
+                    if (body->flags & 4) BgFxStartFire(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
+                    else BgFxStartFire(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 134);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) func_08012E44(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
-                    else func_08012E44(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 135);
+                    if (body->flags & 4) BgFxStartFire(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
+                    else BgFxStartFire(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 135);
                     break;
                 }
             }
-            if (work->unk_14E > 44) {
-                if (!func_080128EC()) {
+            if (work->stateTimer > 44) {
+                if (!BgFxIsActive()) {
                     work->state = 2;
-                    work->unk_14E = 0;
+                    work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) func_080147A8(target->x, target->y, target->z - target->unk_0A2 * 256);
+                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
-            work->unk_14E++;
+            work->stateTimer++;
             break;
         }
     case 7:
         {
             s32 x, y, z;
-            if (work->unk_14E == 0) {
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
@@ -1411,46 +1411,46 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 }
                 FadeToAmount(2, 13, 60);
             }
-            if (work->unk_14E == 44) {
+            if (work->stateTimer == 44) {
                 if (target != 0) {
                     x = target->x;
                     y = target->y;
-                    z = target->unk_010;
+                    z = target->groundZ;
                     if (x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 } else {
                     if (body->flags & 4) x = body->x - 0x4000;
                     else x = body->x + 0x4000;
                     y = body->y;
-                    z = body->unk_010;
+                    z = body->groundZ;
                 }
-                switch (work->unk_14D) {
+                switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) func_08014D78(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
-                    else func_08014D78(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 142);
+                    if (body->flags & 4) BgFxStartGravity(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
+                    else BgFxStartGravity(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 142);
                     break;
                 case 1:
-                    if (body->flags & 4) func_08014D78(1, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
-                    else func_08014D78(1, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 143);
+                    if (body->flags & 4) BgFxStartGravity(1, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
+                    else BgFxStartGravity(1, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 143);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) func_08014D78(2, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
-                    else func_08014D78(2, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 144);
+                    if (body->flags & 4) BgFxStartGravity(2, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
+                    else BgFxStartGravity(2, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 144);
                     break;
                 }
             }
-            if (work->unk_14E > 44 && !func_080128EC()) {
+            if (work->stateTimer > 44 && !BgFxIsActive()) {
                 FadeToOriginal(2, 20);
                 work->state = 2;
-                work->unk_14E = 0;
-            } else work->unk_14E++;
+                work->stateTimer = 0;
+            } else work->stateTimer++;
             break;
         }
     case 5:
         {
             s32 x, y, z;
-            if (work->unk_14E == 0) {
+            if (work->stateTimer == 0) {
                 AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != 0) {
@@ -1458,11 +1458,11 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     else body->flags &= ~4ULL;
                 }
             }
-            if (work->unk_14E == 44) {
+            if (work->stateTimer == 44) {
                 if (target != 0) {
                     x = target->x;
                     y = target->y;
-                    z = target->z - target->unk_0A2 * 256;
+                    z = target->z - target->centerHeight * 256;
                     if (x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 } else {
@@ -1471,35 +1471,35 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     y = body->y;
                     z = body->z - 0x1800;
                 }
-                switch (work->unk_14D) {
+                switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) func_08013308(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
-                    else func_08013308(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 136);
+                    if (body->flags & 4) BgFxStartBlizzard(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
+                    else BgFxStartBlizzard(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 136);
                     break;
                 case 1:
-                    if (body->flags & 4) func_08013308(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
-                    else func_08013308(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 137);
+                    if (body->flags & 4) BgFxStartBlizzard(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
+                    else BgFxStartBlizzard(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 137);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) func_08013308(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
-                    else func_08013308(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 138);
+                    if (body->flags & 4) BgFxStartBlizzard(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
+                    else BgFxStartBlizzard(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 138);
                     break;
                 }
             }
-            if (work->unk_14E > 44) {
-                if (!func_080128EC()) {
+            if (work->stateTimer > 44) {
+                if (!BgFxIsActive()) {
                     work->state = 2;
-                    work->unk_14E = 0;
+                    work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) func_080147A8(target->x, target->y, target->z - target->unk_0A2 * 256);
+                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
-            work->unk_14E++;
+            work->stateTimer++;
             break;
         }
     case 6:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != 0) {
@@ -1507,42 +1507,42 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 else body->flags &= ~4ULL;
             }
         }
-        if (work->unk_14E == 44) {
-            switch (work->unk_14D) {
+        if (work->stateTimer == 44) {
+            switch (work->variant) {
             case 0:
                 {
                     s32 x, y, z;
                     if (target != 0) {
                         x = target->x;
                         y = target->y;
-                        z = target->unk_010;
+                        z = target->groundZ;
                     } else {
                         if (body->flags & 4) x = body->x - 0x5000;
                         else x = body->x + 0x5000;
                         y = body->y;
                         z = 0;
                     }
-                    if (body->flags & 4) func_08015834(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
-                    else func_08015834(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
+                    if (body->flags & 4) BgFxStartThunder(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
+                    else BgFxStartThunder(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
                     break;
                 }
             case 1:
-                if (body->flags & 4) func_08013CB4(1, body->x - 0x2800, body->y, body->z - 0x1800, body->unk_010, 140);
-                else func_08013CB4(1, body->x + 0x2800, body->y, body->z - 0x1800, body->unk_010, 140);
+                if (body->flags & 4) BgFxStartWideThunder(1, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
+                else BgFxStartWideThunder(1, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
                 break;
             case 2:
             default:
-                if (body->flags & 4) func_08013CB4(2, body->x - 0x2800, body->y, body->z - 0x1800, body->unk_010, 141);
-                else func_08013CB4(2, body->x + 0x2800, body->y, body->z - 0x1800, body->unk_010, 141);
+                if (body->flags & 4) BgFxStartWideThunder(2, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
+                else BgFxStartWideThunder(2, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
                 break;
             }
         }
-        if (work->unk_14E == 64) func_08019050(15, 148, 0x10000, 0x12C00);
-        if (work->unk_14E > 44 && !func_080128EC()) {
+        if (work->stateTimer == 64) SetBattleZoom(15, 148, 0x10000, 0x12C00);
+        if (work->stateTimer > 44 && !BgFxIsActive()) {
             work->state = 2;
-            func_08019050(15, 256, gBtlWork->x2, gBtlWork->y2);
-            work->unk_14E = 0;
-        } else work->unk_14E++;
+            SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
+            work->stateTimer = 0;
+        } else work->stateTimer++;
         break;
     }
     AnimUpdate(&work->anim);
@@ -1564,7 +1564,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     body = &work->body;
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
-    angle = work->unk_160;
+    angle = work->rotation;
 
     if (body->flags & 4) {
         sclY = gBtlWork->scale;
@@ -1598,14 +1598,14 @@ void task_frd_jack_2(FrdJackWork* work) {
 
     sy = sy + (-gSineTable[((u16)(angle + 128) & 0xFF) + 64] * 5 >> 5) - 40;
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags, -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_jack_3(FrdJackWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
@@ -1617,40 +1617,40 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON08);
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
-    work->unk_150 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->unk_158 = 0;
 
     if (work->actor->flags & 4) {
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 0x20004;
-        work->unk_168 = -0x800;
-        work->unk_16C = 0;
+        work->vx = -0x800;
+        work->flyLeft = 0;
     } else {
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0x20000;
-        work->unk_168 = 0x800;
-        work->unk_16C = 1;
+        work->vx = 0x800;
+        work->flyLeft = 1;
     }
 
-    work->unk_15C = 0x10000;
+    work->targetX = 0x10000;
     body->y = work->actor->y;
-    body->unk_010 = 0;
-    work->unk_164 = -0x2000;
+    body->groundZ = 0;
+    work->hoverZ = -0x2000;
     body->z = -0x2000;
     work->palette = LoadObjPalette(gPeterPalette, 32);
     AnimInit(&work->anim, 0, 0);
@@ -1658,24 +1658,24 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     TaskPoolInit(&work->tasks, 15);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
-    switch (work->unk_14D) {
+    switch (work->variant) {
     case 0:
-        work->unk_152 = 0x78;
+        work->duration = 0x78;
         break;
     case 1:
-        work->unk_152 = 0xF0;
+        work->duration = 0xF0;
         break;
     case 2:
     default:
-        work->unk_152 = 0x1E0;
+        work->duration = 0x1E0;
         break;
     }
 }
 
-void func_08048980(FrdPanWork* work) {
+void FrdPanSpawnSparkle(FrdPanWork* work) {
     BtlObj sub;
 
-    if ((s16)work->unk_14E % 3 == 0) {
+    if ((s16)work->stateTimer % 3 == 0) {
         sub.x = work->body.x;
         sub.y = work->body.y;
         sub.z = work->body.z;
@@ -1711,11 +1711,11 @@ void func_08048980(FrdPanWork* work) {
     }
 }
 
-void func_08048A68(FrdPanWork* work) {
+void FrdPanHover(FrdPanWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    body->z += ((work->unk_164 + (gSineTable[((u16)work->unk_14E * 2) & 0xFF] << 4)) - body->z) >> 2;
+    body->z += ((work->hoverZ + (gSineTable[((u16)work->stateTimer * 2) & 0xFF] << 4)) - body->z) >> 2;
 }
 
 u8 task_frd_pan_1(FrdPanWork* work) {
@@ -1728,88 +1728,88 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     if (gGameState.world != WORLD_NEVER_LAND) {
         return 0;
     }
-    owner = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    owner = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     target = owner->actor2;
     if (owner->flags & 0x40000000) {
         return 0;
     }
     if (gBtlWork->boundsCallback != 0) {
-        ground = body->unk_010;
+        ground = body->groundZ;
         gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &ground);
-        if (ground != body->unk_010) {
-            work->unk_164 = body->unk_010 - 0x1000;
-            body->unk_010 = ground;
+        if (ground != body->groundZ) {
+            work->hoverZ = body->groundZ - 0x1000;
+            body->groundZ = ground;
         }
     }
     switch (work->state) {
     case 0:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
-            work->unk_150 = 30;
+            work->steps = 30;
         }
-        ApproachValueHalfSteps(&body->x, work->unk_15C, work->unk_150);
-        func_08048A68(work);
-        if (work->unk_150 <= 0) {
+        ApproachValueHalfSteps(&body->x, work->targetX, work->steps);
+        FrdPanHover(work);
+        if (work->steps <= 0) {
             work->state = 3;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
-            work->unk_150--;
+            work->stateTimer++;
+            work->steps--;
         }
         break;
     case 1:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
         }
-        func_08048A68(work);
+        FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             work->state = 2;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 2:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
             if (!(body->flags & 4)) {
-                work->unk_15C = (gBtlWork->unk_0DA - 64) * 256;
+                work->targetX = (gBtlWork->xMin - 64) * 256;
             } else {
-                work->unk_15C = (gBtlWork->unk_0DC + 64) * 256;
+                work->targetX = (gBtlWork->xMax + 64) * 256;
             }
-            work->unk_150 = 30;
+            work->steps = 30;
         }
-        work->unk_164 -= 0x400;
-        ApproachValue(&body->x, work->unk_15C, work->unk_150);
-        func_08048A68(work);
-        if (work->unk_150 <= 0) {
+        work->hoverZ -= 0x400;
+        ApproachValue(&body->x, work->targetX, work->steps);
+        FrdPanHover(work);
+        if (work->steps <= 0) {
             return 0;
         }
-        work->unk_14E++;
-        work->unk_150--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 3:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 1, 0, work->tiles);
         }
-        func_08048A68(work);
+        FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             work->state = 4;
             m4aSongNumStart(SONG_VO_PP_ATTACK00);
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 4:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 2, 1, work->tiles);
-            work->unk_150 = 70;
+            work->steps = 70;
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
-        func_0801D288();
+        SelectLockonTarget();
         if (gBtlWork->flags & 0x4000) {
-            BtlObj* other = work->unk_14C != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
+            BtlObj* other = work->mainSide != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
             y = other->y;
             z = other->z;
         } else if (target != 0) {
@@ -1820,54 +1820,54 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             z = work->actor->z;
         }
         body->y += (y - body->y) >> 5;
-        work->unk_164 += (z - work->unk_164) >> 5;
-        func_08048A68(work);
-        if (work->unk_16C != 0) {
-            ApproachValue(&work->unk_168, -0x800, work->unk_150);
+        work->hoverZ += (z - work->hoverZ) >> 5;
+        FrdPanHover(work);
+        if (work->flyLeft != 0) {
+            ApproachValue(&work->vx, -0x800, work->steps);
         } else {
-            ApproachValue(&work->unk_168, 0x800, work->unk_150);
+            ApproachValue(&work->vx, 0x800, work->steps);
         }
-        body->x += work->unk_168;
-        if (--work->unk_150 <= 0) {
-            work->unk_150 = 70;
-            work->unk_16C = !work->unk_16C;
+        body->x += work->vx;
+        if (--work->steps <= 0) {
+            work->steps = 70;
+            work->flyLeft = !work->flyLeft;
         }
-        if (work->unk_168 < 0) {
+        if (work->vx < 0) {
             body->flags |= 4;
         } else {
             body->flags &= ~4ULL;
         }
         if (body->flags & 4) {
-            if (func_08011F78(150, body->x - 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
+            if (ApplyAttackBox(150, body->x - 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
                 m4aSongNumStart(SONG_BTL_PP_SWORDHIT);
             }
         } else {
-            if (func_08011F78(150, body->x + 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
+            if (ApplyAttackBox(150, body->x + 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
                 m4aSongNumStart(SONG_BTL_PP_SWORDHIT);
             }
         }
-        if (work->unk_14E > work->unk_152) {
-            work->unk_14E = 0;
+        if (work->stateTimer > work->duration) {
+            work->stateTimer = 0;
             work->state = 5;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 5:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdPanAnimDefs, &work->anim, 3, 0, work->tiles);
         }
-        func_08048A68(work);
+        FrdPanHover(work);
         if (AnimIsFinished(&work->anim)) {
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             work->state = 1;
             FadeToOriginal(0, 8);
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     }
-    func_08048980(work);
+    FrdPanSpawnSparkle(work);
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
     return 1;
@@ -1911,35 +1911,35 @@ void task_frd_pan_2(FrdPanWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_pan_3(FrdPanWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080490FC(FrdAladdinWork* work) {
+u8 FrdAladdinApplyGravity(FrdAladdinWork* work) {
     BtlObj* body;
 
     body = &work->body;
 
-    if (func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010)) {
-        body->z += work->unk_154;
-        work->unk_154 = -0x200;
+    if (ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ)) {
+        body->z += work->vz;
+        work->vz = -0x200;
     } else {
-        body->z += work->unk_154;
-        work->unk_154 += 0x33;
+        body->z += work->vz;
+        work->vz += 0x33;
     }
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_154 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
@@ -1952,53 +1952,53 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     body = &work->body;
     m4aSongNumStart(SONG_VO_SR_SUMMON11);
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
     }
 
-    work->unk_14D = args->unk_00;
+    work->variant = args->variant;
     work->state = 0;
-    work->unk_14E = 0;
-    work->unk_150 = 0;
-    work->unk_154 = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->vz = 0;
 
     if (work->actor->flags & 4) {
-        work->unk_158 = work->actor->x - 0x3000;
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        work->targetX = work->actor->x - 0x3000;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 4;
     } else {
-        work->unk_158 = work->actor->x + 0x3000;
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        work->targetX = work->actor->x + 0x3000;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
     }
 
     body->y = work->actor->y;
     body->z = -0x5000;
-    body->unk_010 = 0;
+    body->groundZ = 0;
     work->palette = LoadObjPalette(gAladdinPalette, 32);
     AnimInit(&work->anim, 0, 0);
     AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 
-    switch (work->unk_14D) {
+    switch (work->variant) {
     case 0:
-        work->unk_152 = 0x78;
+        work->duration = 0x78;
         break;
     case 1:
-        work->unk_152 = 0xF0;
+        work->duration = 0xF0;
         break;
     case 2:
     default:
-        work->unk_152 = 0x1E0;
+        work->duration = 0x1E0;
         break;
     }
 }
@@ -2013,56 +2013,56 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     if (gGameState.world != WORLD_AGRABAH) {
         return 0;
     }
-    if ((work->unk_14C ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) return 0;
+    if ((work->mainSide ? gBtlWork->flags : gRikuBtlWork->flags) & 0x40000000) return 0;
     switch (work->state) {
     case 0:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
-            work->unk_14E++;
+            work->stateTimer++;
         }
-        body->x += (work->unk_158 - body->x) >> 4;
+        body->x += (work->targetX - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
-        if (func_080490FC(work)) {
+        if (FrdAladdinApplyGravity(work)) {
             work->state = 1;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
             m4aSongNumStart(SONG_VO_AD_ATTACK00);
         }
         break;
     case 1:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 1, 0, work->tiles);
         }
         if (AnimIsFinished(&work->anim)) {
             work->state = 3;
-            work->unk_14E = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     case 2:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
             if (!(body->flags & 4)) {
-                work->unk_158 = (gBtlWork->unk_0DA - 64) << 8;
+                work->targetX = (gBtlWork->xMin - 64) << 8;
             } else {
-                work->unk_158 = (gBtlWork->unk_0DC + 64) << 8;
+                work->targetX = (gBtlWork->xMax + 64) << 8;
             }
-            work->unk_154 = -0x500;
-            work->unk_150 = 30;
+            work->vz = -0x500;
+            work->steps = 30;
         }
-        ApproachValue(&body->x, work->unk_158, work->unk_150);
-        func_080490FC(work);
-        if (work->unk_150 <= 0) {
+        ApproachValue(&body->x, work->targetX, work->steps);
+        FrdAladdinApplyGravity(work);
+        if (work->steps <= 0) {
             return 0;
         }
-        work->unk_14E++;
-        work->unk_150--;
+        work->stateTimer++;
+        work->steps--;
         break;
     case 3:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdAladdinAnimDefs, &work->anim, 2, 1, work->tiles);
         }
-        func_0801D288();
+        SelectLockonTarget();
         if (work->actor->flags & 4) {
             body->flags |= 4;
             x = work->actor->x - 0x2800;
@@ -2091,19 +2091,19 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
             case 1:
             case 5:
             case 6:
-                if ((body->flags & 4) ? func_08011F78(0x95, body->x - 0x1E00, body->y, body->z, 20, 20, 50) : func_08011F78(0x95, body->x + 0x1E00, body->y, body->z, 20, 20, 50)) {
+                if ((body->flags & 4) ? ApplyAttackBox(0x95, body->x - 0x1E00, body->y, body->z, 20, 20, 50) : ApplyAttackBox(0x95, body->x + 0x1E00, body->y, body->z, 20, 20, 50)) {
                     m4aSongNumStart(SONG_BTL_AD_SWORDHIT);
                 }
                 break;
             }
         }
-        func_080490FC(work);
+        FrdAladdinApplyGravity(work);
         ClampBattlePosition(&body->x, &body->y, -16, 0);
-        if (work->unk_14E > work->unk_152) {
-            work->unk_14E = 0;
+        if (work->stateTimer > work->duration) {
+            work->stateTimer = 0;
             work->state = 2;
         } else {
-            work->unk_14E++;
+            work->stateTimer++;
         }
         break;
     }
@@ -2150,30 +2150,30 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_aladdin_3(FrdAladdinWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080497E8(FrdBeastWork* work) {
+u8 FrdBeastApplyGravity(FrdBeastWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->unk_010);
-    body->z += work->unk_158;
-    work->unk_158 += 0x33;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
 
-    if (body->z > body->unk_010) {
-        body->z = body->unk_010;
-        work->unk_158 = 0;
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
         return 1;
     }
 
@@ -2195,57 +2195,57 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     m4aSongNumStart(SONG_VO_SR_SUMMON09);
 #endif
 
-    if (args->unk_02 != 0) {
-        work->unk_14C = 1;
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
         gBtlWork->flags |= 0x200000;
         work->actor = gBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
         obj = gBtlWork->actor2;
     } else {
-        work->unk_14C = args->unk_02;
+        work->mainSide = args->mainSide;
         gRikuBtlWork->flags |= 0x200000;
         work->actor = gRikuBtlWork->actor;
         work->tiles = gBtlWork->tiles2;
         obj = gRikuBtlWork->actor2;
     }
 
-    work->unk_14D = args->unk_00;
-    work->unk_14E = 0;
-    work->unk_158 = 0;
+    work->variant = args->variant;
+    work->stateTimer = 0;
+    work->vz = 0;
 
     if (obj != 0) {
-        work->unk_150 = obj->x;
-        work->unk_154 = obj->y;
+        work->targetX = obj->x;
+        work->targetY = obj->y;
     } else {
-        work->unk_150 = 0x10000;
-        work->unk_154 = work->actor->y;
+        work->targetX = 0x10000;
+        work->targetY = work->actor->y;
     }
 
     if (work->actor->flags & 4) {
-        body->x = (gBtlWork->unk_0DC + 0x30) << 8;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = 0x20004;
     } else {
-        body->x = (gBtlWork->unk_0DA - 0x30) << 8;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0x20000;
     }
 
-    body->y = work->unk_154;
+    body->y = work->targetY;
     body->z = 0;
-    body->unk_010 = 0;
+    body->groundZ = 0;
 
-    switch (work->unk_14D) {
+    switch (work->variant) {
     case 0:
         work->state = 1;
-        work->unk_15C = 0xA0;
+        work->attack = 0xA0;
         break;
     case 1:
         work->state = 1;
-        work->unk_15C = 0xA1;
+        work->attack = 0xA1;
         break;
     case 2:
     default:
         work->state = 2;
-        work->unk_15C = 0xA1;
+        work->attack = 0xA1;
         break;
     }
 
@@ -2266,7 +2266,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         return 0;
     }
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & 0x40000000) {
         return 0;
@@ -2274,43 +2274,43 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
 
     switch (work->state) {
     case 2:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(SONG_VO_BE_ATTACK00);
         }
 
         if (work->anim.timer == 0 && AnimGetFrame(&work->anim) == 2) {
-            work->unk_158 = -0x400;
+            work->vz = -0x400;
             m4aSongNumStart(SONG_BTL_BE_ATT02);
         }
 
-        if (body->z < body->unk_010) {
-            body->x += (work->unk_150 - body->x) >> 4;
-            body->y += (work->unk_154 - body->y) >> 4;
+        if (body->z < body->groundZ) {
+            body->x += (work->targetX - body->x) >> 4;
+            body->y += (work->targetY - body->y) >> 4;
         }
 
-        if (work->unk_158 > 0) {
-            if (gBtlWork->unk_10C == 0x99) {
-                func_08011F78(0xA3, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);
+        if (work->vz > 0) {
+            if (gBtlWork->battleId == 0x99) {
+                ApplyAttackBox(0xA3, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);
             } else {
-                func_08011F78(0xA2, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);
+                ApplyAttackBox(0xA2, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);
             }
         }
 
-        if (func_080497E8(work) && AnimIsFinished(&work->anim)) {
+        if (FrdBeastApplyGravity(work) && AnimIsFinished(&work->anim)) {
             work->state = 1;
-            work->unk_15C = 0xA1;
-            work->unk_14E = 0;
-            func_0802F1E8();
+            work->attack = 0xA1;
+            work->stateTimer = 0;
+            BtlMapStartShake();
             break;
         }
 
-        work->unk_14E++;
+        work->stateTimer++;
         break;
     case 1:
-        if (work->unk_14E == 0) {
+        if (work->stateTimer == 0) {
             AnimChangeWithDef(gFrdBeastAnimDefs, &work->anim, 1, 1, work->tiles);
 
-            if (work->unk_14D != 2) {
+            if (work->variant != 2) {
                 m4aSongNumStart(SONG_VO_BE_ATTACK00);
             }
         }
@@ -2318,23 +2318,23 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         if (body->flags & 4) {
             body->x -= 0x380;
 
-            if (body->x < (gBtlWork->unk_0DA - 0x28) << 8) {
+            if (body->x < (gBtlWork->xMin - 0x28) << 8) {
                 return 0;
             }
         } else {
             body->x += 0x380;
 
-            if (body->x > (gBtlWork->unk_0DC + 0x28) << 8) {
+            if (body->x > (gBtlWork->xMax + 0x28) << 8) {
                 return 0;
             }
         }
 
-        if (func_08011F78(work->unk_15C, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10)) {
+        if (ApplyAttackBox(work->attack, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10)) {
             m4aSongNumStart(SONG_BTL_BE_ATT01);
         }
 
-        func_080497E8(work);
-        work->unk_14E++;
+        FrdBeastApplyGravity(work);
+        work->stateTimer++;
         break;
     }
 
@@ -2381,14 +2381,14 @@ void task_frd_beast_2(FrdBeastWork* work) {
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
                -4100 - ((body->y >> 8) * 4));
-    body->unk_0CC = (-4100 - ((body->y >> 8) * 4)) | 2;
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }
 
 void task_frd_beast_3(FrdBeastWork* work) {
     BtlWork* obj;
 
-    obj = work->unk_14C != 0 ? gBtlWork : gRikuBtlWork;
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
     obj->flags &= 0xFFFFFFFFFFDFFFFF;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);

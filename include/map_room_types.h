@@ -3,31 +3,31 @@
 
 #include "types.h"
 
-typedef struct UnkStruct_080E56B4 {
-    u8 unk_00;
+typedef struct MapFixedGmk {
+    u8 defIndex;
     u8 unk_01[0x03];
-    s32 unk_04;
-    s32 unk_08;
-} UnkStruct_080E56B4;
+    s32 x;
+    s32 y;
+} MapFixedGmk;
 
-typedef struct UnkStruct_080EC760Entry {
-    u16 unk_00;
+typedef struct MapFixedCollider {
+    u16 radius;
     u8 unk_02[0x02];
-    s32 unk_04;
-    s32 unk_08;
-} UnkStruct_080EC760Entry;
+    s32 x;
+    s32 y;
+} MapFixedCollider;
 
-typedef struct UnkStruct_080E8864 {
-    const u8* unk_00;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
+typedef struct MapDecorRule {
+    const u8* pattern;
+    u8 width;
+    u8 height;
+    u8 chance;
     u8 unk_07;
-    const u8* unk_08;
-    u16* unk_0C;
-} UnkStruct_080E8864;
+    const u8* pieces;
+    u16* tilemap;
+} MapDecorRule;
 
-typedef struct UnkStruct_09EF70D0 {
+typedef struct MapRoomDef {
     void* palette;
     u16 paletteSize;
     u8 unk_06[0x02];
@@ -40,15 +40,15 @@ typedef struct UnkStruct_09EF70D0 {
     u16* map3;
     u16* map2;
     u16* map;
-    UnkStruct_080E8864* unk_24;
-    UnkStruct_080E8864* unk_28;
-    void* unk_2C;
-    s32* unk_30;
-    s32* unk_34;
+    MapDecorRule* layer1DecorRules;
+    MapDecorRule* layer2DecorRules;
+    void* tileAnims;
+    s32* soraEvents;
+    s32* rikuEvents;
     u16 song;
-} UnkStruct_09EF70D0;
+} MapRoomDef;
 
-typedef struct UnkStruct_09EF8370 {
+typedef struct MapFixedDef {
     void* palette;
     u16 paletteSize;
     u8 unk_06[0x02];
@@ -64,20 +64,20 @@ typedef struct UnkStruct_09EF8370 {
     u8 mapWidth;
     u8 mapHeight;
     u8 unk_26[0x02];
-    const u8* unk_28;
-    struct UnkStruct_080E56B4* unk_2C;
-    struct UnkStruct_080EC760Entry* unk_30;
+    const u8* cellTypes;
+    struct MapFixedGmk* gimmicks;
+    struct MapFixedCollider* colliders;
     u16 song;
     u8 unk_36[0x02];
-    s32 unk_38;
-    s32 unk_3C;
-    s32 unk_40;
-    s32 unk_44;
-    s32 unk_48;
-    s32 unk_4C;
+    s32 stairX;
+    s32 stairY;
+    s32 stair2X;
+    s32 stair2Y;
+    s32 spawnX;
+    s32 spawnY;
 #ifdef VERSION_EU
     u8 unk_50;
 #endif
-} UnkStruct_09EF8370;
+} MapFixedDef;
 
 #endif

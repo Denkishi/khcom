@@ -16,7 +16,7 @@ typedef struct PoohPrizeArgs {
     s32 y;
     s32 z;
     s32 unk_10;
-    u16 unk_14;
+    u16 kind;
 } PoohPrizeArgs;
 
 #endif

@@ -20,9 +20,9 @@ typedef struct ObjDef {
 
 typedef struct ChkObjWork {
     TaskPool pool;
-    s16 unk_14;
+    s16 defIndex;
     s16 animId;
-    s16 unk_18;
+    s16 category;
     u8 unk_1A[0x02];
     void* tiles;
     void* palette;
@@ -31,7 +31,7 @@ typedef struct ChkObjWork {
     u8 paused;
     u8 unk_41;
     u16 angle;
-    s16 unk_44;
+    s16 maxTiles;
     s16 y;
 } ChkObjWork;
 

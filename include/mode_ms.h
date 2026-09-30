@@ -110,36 +110,36 @@ typedef struct MooglePackCardWork {
     u8 revealed;
 } MooglePackCardWork;
 
-void func_08102688(u16 a, u16 b, u16 c);
-u8 func_081026C4(u16 a, u16 b, u16 c);
-void func_08102704(u16 a);
-void func_08102728(u16 a);
-u8 func_0810274C(u16 a);
-void func_08102774(void);
-u8 func_081027B4(s16 a);
+void ClearMooglePackBought(u16 a, u16 b, u16 c);
+u8 IsMooglePackBought(u16 a, u16 b, u16 c);
+void SetMoogleFreePackFlag(u16 a);
+void ClearMoogleFreePackFlag(u16 a);
+u8 GetMoogleFreePackFlag(u16 a);
+void ClearMoogleRoomFlags(void);
+u8 BuildMooglePackList(s16 a);
 s32 MoogleShopReadMenuKeys(void);
-u16 func_08103F3C(void);
-void func_08102984(s16 a);
-void func_08103CD8(s16 a);
-void func_08102DC8(void);
+u16 RollMoogleCardValue(void);
+void DrawMoogleShopPacks(s16 a);
+void DrawMoogleShopCategoryLabels(s16 a);
+void ReleaseMooglePackOpening(void);
 void mode_ms_shop_1(void);
-void func_08104404(void);
+void MoogleShopDraw(void);
 void mode_ms_shop_0(void);
-void func_081041B4(void);
+void MoogleShopHandlePackInput(void);
 void mode_ms_shop_2(void);
 void LoadMooglePackSelectionTilemap(s16 a);
-void func_08103D7C(void);
-void func_08103DE8(void);
+void MoogleShopHandleSoldOutInput(void);
+void MoogleShopHandleRowInput(void);
 
-void func_080A4234(void* pool, u32 a, u16 b);
+void ShowPersistentCardMessage(void* pool, u32 a, u16 b);
 
-void func_0810264C(u16 a, u16 b, u16 c);
-u8 func_0810329C(u16 a);
-void func_08102AB4(s16 x, s16 y);
-void func_08103F94(s16 a, s16 b);
+void SetMooglePackBought(u16 a, u16 b, u16 c);
+u8 UpdateMooglePackOpening(u16 a);
+void InitMooglePackOpening(s16 x, s16 y);
+void RollMooglePackCards(s16 a, s16 b);
 void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, s16 dx, s16 dy);
 
-extern u8 gUnk_0203C590[];
+extern u8 gMapFloorState[];
 
 extern u8 gSoraPalette[];
 extern u8 gSor1ll00Tiles[];

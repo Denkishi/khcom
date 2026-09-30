@@ -8,17 +8,17 @@ void AdvanceLevelExpThreshold(PlayerProgression* p);
 void InitPlayerProgression(void);
 
 u8 CanLevelUp(void);
-void func_0800FDD0(u32 a);
-u8 func_0800FC90(u32 a);
-u8 func_0800FCD8(u32 a);
-u8 func_0800FD20(u32 a);
-void func_0800FB2C(u32 a);
-u8 func_0800FF00(u32 a);
-void func_0800FFE0(u32 a);
+void SetJiminyFlag(u32 a);
+u8 IsLinkStockLearned(u32 a);
+u8 IsLinkPartnerStockLearned(u32 a);
+u8 IsStockNew(u32 a);
+void LearnStock(u32 a);
+u8 IsJiminyFlagSet(u32 a);
+void ClearJiminyFlagNew(u32 a);
 u8 LevelUp(void);
-void func_0800FD68(u32 a);
-u8 func_0800FBCC(u32 a);
-void func_0800FC14(s32 a);
-u8 func_0800FC5C(s32 a);
+void ClearStockNew(u32 a);
+u8 IsStockLearned(u32 a);
+void SetCardKindObtained(s32 a);
+u8 IsCardKindObtained(s32 a);
 
 #endif

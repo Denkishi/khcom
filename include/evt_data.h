@@ -3,8 +3,8 @@
 
 #include "evt_types.h"
 
-extern const EvtAnimDef gUnk_08135EFC[500];
+extern const EvtAnimDef gEvtAnimDefs[500];
 extern const EvtObjAnim gEvtObjAnims[931];
-extern const EvtObjResTable gUnk_0813B09C[94];
+extern const EvtObjResTable gEvtObjResources[94];
 
 #endif

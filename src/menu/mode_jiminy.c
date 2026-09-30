@@ -12,33 +12,33 @@
 #include "sprites_card.h"
 #include "hum.h"
 
-const JiminyEntry gUnk_08155554[21] = {
-    { gUnk_08F62384, gUnk_09EDDECC, 3, -1, gUnk_0815552E, 0, 0 },
-    { gUnk_08F61384, gUnk_09EDDED8, 17, 0, 0, gUnk_081552B0, 1 },
-    { gUnk_08F5E384, gUnk_09EDDF1C, 7, 0, gUnk_0815553A, 0, 0 },
-    { gUnk_08F5F384, gUnk_09EDDF38, 3, 0, gUnk_08155534, 0, 0 },
-    { gUnk_08F5E384, gUnk_09EDDF44, 17, 2, 0, gUnk_0815539A, 2 },
-    { gUnk_08F5E384, gUnk_09EDDF88, 14, 2, 0, gUnk_081553BC, 3 },
-    { gUnk_08F5E384, gUnk_09EDDFC0, 7, 2, 0, gUnk_081553D8, 4 },
-    { gUnk_08F5E384, gUnk_09EDDFDC, 7, 2, 0, gUnk_081553E6, 5 },
-    { gUnk_08F5E384, gUnk_09EDDFF8, 49, 2, 0, gUnk_081553F4, 6 },
-    { gUnk_08F5E384, gUnk_09EDE0BC, 26, 2, 0, gUnk_08155456, 7 },
-    { gUnk_08F5E384, gUnk_09EDE124, 1, 2, 0, gUnk_0815548A, 8 },
-    { gUnk_08F5F384, gUnk_09EDE128, 25, 3, 0, gUnk_081552D2, 9 },
-    { gUnk_08F5F384, gUnk_09EDE18C, 40, 3, 0, gUnk_08155304, 10 },
-    { gUnk_08F5F384, gUnk_09EDE22C, 35, 3, 0, gUnk_08155354, 11 },
-    { gUnk_08F62384, gUnk_09EDDECC, 3, -1, gUnk_08155548, 0, 0 },
-    { gUnk_08F61384, gUnk_09EDE2B8, 6, 14, 0, gUnk_0815548C, 12 },
-    { gUnk_08F5E384, gUnk_09EDE3A4, 22, 14, 0, gUnk_08155498, 13 },
-    { gUnk_08F5F384, gUnk_09EDDF38, 3, 14, gUnk_0815554E, 0, 0 },
-    { gUnk_08F5F384, gUnk_09EDE2D0, 14, 17, 0, gUnk_081554C4, 14 },
-    { gUnk_08F5F384, gUnk_09EDE308, 6, 17, 0, gUnk_081554E0, 15 },
-    { gUnk_08F5F384, gUnk_09EDE320, 33, 17, 0, gUnk_081554EC, 16 },
+const JiminyEntry gJiminyEntries[21] = {
+    { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, 0, 0 },
+    { gUnk_08F61384, gJiminyEntry01Names, 17, 0, 0, gJiminyEntry01Flags, 1 },
+    { gUnk_08F5E384, gJiminyEntry02Names, 7, 0, gJiminyEntry02Children, 0, 0 },
+    { gUnk_08F5F384, gUnk_09EDDF38, 3, 0, gJiminyEntry03Children, 0, 0 },
+    { gUnk_08F5E384, gJiminyEntry04Names, 17, 2, 0, gJiminyEntry04Flags, 2 },
+    { gUnk_08F5E384, gJiminyEntry05Names, 14, 2, 0, gJiminyEntry05Flags, 3 },
+    { gUnk_08F5E384, gJiminyEntry06Names, 7, 2, 0, gJiminyEntry06Flags, 4 },
+    { gUnk_08F5E384, gJiminyEntry07Names, 7, 2, 0, gJiminyEntry07Flags, 5 },
+    { gUnk_08F5E384, gJiminyEntry08Names, 49, 2, 0, gJiminyEntry08Flags, 6 },
+    { gUnk_08F5E384, gJiminyEntry09Names, 26, 2, 0, gJiminyEntry09Flags, 7 },
+    { gUnk_08F5E384, gJiminyEntry10Names, 1, 2, 0, gJiminyEntry10Flags, 8 },
+    { gUnk_08F5F384, gJiminyEntry11Names, 25, 3, 0, gJiminyEntry11Flags, 9 },
+    { gUnk_08F5F384, gJiminyEntry12Names, 40, 3, 0, gJiminyEntry12Flags, 10 },
+    { gUnk_08F5F384, gJiminyEntry13Names, 35, 3, 0, gJiminyEntry13Flags, 11 },
+    { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry14Children, 0, 0 },
+    { gUnk_08F61384, gJiminyEntry15Names, 6, 14, 0, gJiminyEntry15Flags, 12 },
+    { gUnk_08F5E384, gJiminyEntry16Names, 22, 14, 0, gJiminyEntry16Flags, 13 },
+    { gUnk_08F5F384, gUnk_09EDDF38, 3, 14, gJiminyEntry17Children, 0, 0 },
+    { gUnk_08F5F384, gJiminyEntry18Names, 14, 17, 0, gJiminyEntry18Flags, 14 },
+    { gUnk_08F5F384, gJiminyEntry19Names, 6, 17, 0, gJiminyEntry19Flags, 15 },
+    { gUnk_08F5F384, gJiminyEntry20Names, 33, 17, 0, gJiminyEntry20Flags, 16 },
 };
 
 #if defined(VERSION_US)
 
-const JiminyDetail gUnk_0815574C[17] = {
+const JiminyDetail gJiminyEntry01Details[17] = {
     { gUnk_0815B502, gUnk_09EDB7EC, 22, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815B51E, gUnk_09EDB844, 19, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815B53C, gUnk_09EDD46C, 18, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -58,7 +58,7 @@ const JiminyDetail gUnk_0815574C[17] = {
     { gUnk_0815A64A, gUnk_09EDDE38, 24, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155B04[6] = {
+const JiminyDetail gJiminyEntry15Details[6] = {
     { gUnk_0815C01E, gUnk_09EDD698, 41, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C03A, gUnk_09EDBB1C, 26, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C058, gUnk_09EDBB84, 20, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -67,7 +67,7 @@ const JiminyDetail gUnk_08155B04[6] = {
     { gUnk_0815C0B2, gUnk_09EDD78C, 31, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155C54[17] = {
+const JiminyDetail gJiminyEntry04Details[17] = {
     { gUnk_0815A66A, gUnk_09EDD928, 12, 0, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A682, gUnk_09EDD958, 11, 0, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A69C, gUnk_09EDD984, 12, 0, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -87,7 +87,7 @@ const JiminyDetail gUnk_08155C54[17] = {
     { gUnk_0815A7A2, gUnk_09EDDE98, 10, 0, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815600C[14] = {
+const JiminyDetail gJiminyEntry05Details[14] = {
     { gUnk_0815A7FA, gUnk_09EDCCAC, 4, 0, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A804, gUnk_09EDCCBC, 4, 0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A816, gUnk_09EDCCCC, 5, 0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -104,7 +104,7 @@ const JiminyDetail gUnk_0815600C[14] = {
     { gUnk_0815A8A8, gUnk_09EDCDA0, 4, 0, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815631C[7] = {
+const JiminyDetail gJiminyEntry06Details[7] = {
     { gUnk_0815A8B4, gUnk_09EDCDB0, 5, 0, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A8C2, gUnk_09EDCDC4, 5, 0, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A8D6, gUnk_09EDCDD8, 6, 0, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -114,7 +114,7 @@ const JiminyDetail gUnk_0815631C[7] = {
     { gUnk_0815A91E, gUnk_09EDCE2C, 6, 0, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081564A4[7] = {
+const JiminyDetail gJiminyEntry07Details[7] = {
     { gUnk_0815A932, gUnk_09EDCE44, 5, 0, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A94A, gUnk_09EDCE58, 4, 0, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A956, gUnk_09EDCE68, 5, 0, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -124,7 +124,7 @@ const JiminyDetail gUnk_081564A4[7] = {
     { gUnk_0815A990, gUnk_09EDCEB4, 5, 0, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815662C[49] = {
+const JiminyDetail gJiminyEntry08Details[49] = {
     { gUnk_0815A9A4, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9B2, gUnk_09EDCEDC, 5, 0, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9EC, gUnk_09EDCEF0, 6, 0, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -176,7 +176,7 @@ const JiminyDetail gUnk_0815662C[49] = {
     { gUnk_0815ADAA, gUnk_09EDDC54, 7, 0, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081570E4[26] = {
+const JiminyDetail gJiminyEntry09Details[26] = {
     { gUnk_0815ADF4, gUnk_09EDD26C, 2, 0, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815ADD2, gUnk_09EDDCBC, 4, 0, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815AE9E, gUnk_09EDD294, 3, 0, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -205,11 +205,11 @@ const JiminyDetail gUnk_081570E4[26] = {
     { gUnk_0815B0CA, gUnk_09EDD374, 2, 0, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157694[1] = {
+const JiminyDetail gJiminyEntry10Details[1] = {
     { gUnk_0815C10E, gUnk_09EDDCF4, 17, 0, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081576CC[22] = {
+const JiminyDetail gJiminyEntry16Details[22] = {
     { gUnk_0815C372, gUnk_09EDBC30, 4, 0, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815C360, gUnk_09EDDD38, 4, 0, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnk_0815A9A4, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -234,7 +234,7 @@ const JiminyDetail gUnk_081576CC[22] = {
     { gUnk_0815AD9A, gUnk_09EDD37C, 14, 0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157B9C[25] = {
+const JiminyDetail gJiminyEntry11Details[25] = {
     { gUnk_0815B0E8, gUnk_09EDBC40, 15, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { gUnk_0815A932, gUnk_09EDBC7C, 16, 0, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { gUnk_0815A94A, gUnk_09EDBCBC, 12, 0, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -262,7 +262,7 @@ const JiminyDetail gUnk_08157B9C[25] = {
     { gUnk_0815AD4C, gUnk_09EDBF84, 10, 0, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gUnk_08158114[40] = {
+const JiminyDetail gJiminyEntry12Details[40] = {
     { gUnk_0815B296, gUnk_09EDC1E0, 11, 0, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { gUnk_0815B2A2, gUnk_09EDC20C, 8, 0, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { gUnk_0815B2CA, gUnk_09EDC22C, 7, 0, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -305,7 +305,7 @@ const JiminyDetail gUnk_08158114[40] = {
     { gUnk_0815B3C6, gUnk_09EDC4BC, 9, 0, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gUnk_081589D4[35] = {
+const JiminyDetail gJiminyEntry13Details[35] = {
     { gUnk_0815A9A4, gUnk_09EDC540, 9, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnk_0815A9B2, gUnk_09EDC564, 7, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnk_0815A9EC, gUnk_09EDC580, 10, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -343,7 +343,7 @@ const JiminyDetail gUnk_081589D4[35] = {
     { gUnk_0815ACFA, gUnk_09EDD67C, 7, 0, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815917C[14] = {
+const JiminyDetail gJiminyEntry18Details[14] = {
     { gUnk_0815B0F2, gUnk_09EDD808, 24, 0, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { gUnk_0815C360, gUnk_09EDD868, 15, 0, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { gUnk_0815B0E8, gUnk_09EDC91C, 13, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -360,7 +360,7 @@ const JiminyDetail gUnk_0815917C[14] = {
     { gUnk_0815C0EA, gUnk_09EDCB38, 11, 0, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gUnk_0815948C[6] = {
+const JiminyDetail gJiminyEntry19Details[6] = {
     { gUnk_0815B356, gUnk_09EDCB64, 13, 0, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { gUnk_0815B1FE, gUnk_09EDCB98, 8, 0, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { gUnk_0815AC88, gUnk_09EDCBB8, 9, 0, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -369,7 +369,7 @@ const JiminyDetail gUnk_0815948C[6] = {
     { gUnk_0815B340, gUnk_09EDCC1C, 6, 0, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gUnk_081595DC[33] = {
+const JiminyDetail gJiminyEntry20Details[33] = {
     { gUnk_0815A9A4, gUnk_09EDC540, 9, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnk_0815A9B2, gUnk_09EDC564, 7, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnk_0815A9EC, gUnk_09EDC580, 10, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -407,7 +407,7 @@ const JiminyDetail gUnk_081595DC[33] = {
 
 #elif defined(VERSION_JP)
 
-const JiminyDetail gUnk_0815574C[17] = {
+const JiminyDetail gJiminyEntry01Details[17] = {
     { gUnkJp_0814F25C, gUnk_09EDB7EC, 12, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F270, gUnk_09EDB844, 14, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F284, gUnk_09EDD46C, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -427,7 +427,7 @@ const JiminyDetail gUnk_0815574C[17] = {
     { gUnkJp_0814E658, gUnk_09EDDE38, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155B04[6] = {
+const JiminyDetail gJiminyEntry15Details[6] = {
     { gUnkJp_0814FA18, gUnk_09EDD698, 28, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814FA2C, gUnk_09EDBB1C, 16, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814FA40, gUnk_09EDBB84, 13, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -436,7 +436,7 @@ const JiminyDetail gUnk_08155B04[6] = {
     { gUnkJp_0814FA7C, gUnk_09EDD78C, 23, 0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155C54[17] = {
+const JiminyDetail gJiminyEntry04Details[17] = {
     { gUnkJp_0814E664, gUnk_09EDD928, 11, 0, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E678, gUnk_09EDD958, 11, 0, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E68C, gUnk_09EDD984, 13, 0, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -456,7 +456,7 @@ const JiminyDetail gUnk_08155C54[17] = {
     { gUnkJp_0814E76C, gUnk_09EDDE98, 10, 0, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815600C[14] = {
+const JiminyDetail gJiminyEntry05Details[14] = {
     { gUnkJp_0814E7A0, gUnk_09EDCCAC, 5, 0, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E7AC, gUnk_09EDCCBC, 5, 0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E7B8, gUnk_09EDCCCC, 5, 0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -473,7 +473,7 @@ const JiminyDetail gUnk_0815600C[14] = {
     { gUnkJp_0814E834, gUnk_09EDCDA0, 3, 0, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815631C[7] = {
+const JiminyDetail gJiminyEntry06Details[7] = {
     { gUnkJp_0814E840, gUnk_09EDCDB0, 5, 0, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E84C, gUnk_09EDCDC4, 5, 0, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E85C, gUnk_09EDCDD8, 6, 0, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -483,7 +483,7 @@ const JiminyDetail gUnk_0815631C[7] = {
     { gUnkJp_0814E894, gUnk_09EDCE2C, 6, 0, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081564A4[7] = {
+const JiminyDetail gJiminyEntry07Details[7] = {
     { gUnkJp_0814E8A8, gUnk_09EDCE44, 5, 0, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E8B8, gUnk_09EDCE58, 4, 0, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E8DC, gUnk_09EDCE68, 4, 0, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -493,7 +493,7 @@ const JiminyDetail gUnk_081564A4[7] = {
     { gUnkJp_0814E910, gUnk_09EDCEB4, 3, 0, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815662C[49] = {
+const JiminyDetail gJiminyEntry08Details[49] = {
     { gUnkJp_0814E9EC, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E9F8, gUnk_09EDCEDC, 5, 0, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814EA28, gUnk_09EDCEF0, 6, 0, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -545,7 +545,7 @@ const JiminyDetail gUnk_0815662C[49] = {
     { gUnkJp_0814EE94, gUnk_09EDDC54, 9, 0, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081570E4[26] = {
+const JiminyDetail gJiminyEntry09Details[26] = {
     { gUnkJp_0814F364, gUnk_09EDD26C, 2, 0, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F358, gUnk_09EDDCBC, 5, 0, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814F3A8, gUnk_09EDD294, 2, 0, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -574,11 +574,11 @@ const JiminyDetail gUnk_081570E4[26] = {
     { gUnkJp_0814F4F8, gUnk_09EDD374, 2, 0, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157694[1] = {
+const JiminyDetail gJiminyEntry10Details[1] = {
     { gUnkJp_0814FAB8, gUnk_09EDDCF4, 13, 0, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081576CC[22] = {
+const JiminyDetail gJiminyEntry16Details[22] = {
     { gUnkJp_0814EEA8, gUnk_09EDBC30, 3, 0, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814EEA0, gUnk_09EDDD38, 4, 0, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { gUnkJp_0814E9EC, gUnk_09EDCEC8, 5, 0, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -603,7 +603,7 @@ const JiminyDetail gUnk_081576CC[22] = {
     { gUnkJp_0814EE88, gUnk_09EDD37C, 11, 0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157B9C[25] = {
+const JiminyDetail gJiminyEntry11Details[25] = {
     { gUnkJp_0814E91C, gUnk_09EDBC40, 8, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { gUnkJp_0814E8A8, gUnk_09EDBC7C, 10, 0, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { gUnkJp_0814E8B8, gUnk_09EDBCBC, 9, 0, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -631,7 +631,7 @@ const JiminyDetail gUnk_08157B9C[25] = {
     { gUnkJp_0814E9D0, gUnk_09EDBF84, 6, 0, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gUnk_08158114[40] = {
+const JiminyDetail gJiminyEntry12Details[40] = {
     { gUnkJp_0814ED50, gUnk_09EDC1E0, 8, 0, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { gUnkJp_0814ED58, gUnk_09EDC20C, 6, 0, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { gUnkJp_0814ED68, gUnk_09EDC22C, 4, 0, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -674,7 +674,7 @@ const JiminyDetail gUnk_08158114[40] = {
     { gUnkJp_0814EE3C, gUnk_09EDC4BC, 6, 0, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gUnk_081589D4[35] = {
+const JiminyDetail gJiminyEntry13Details[35] = {
     { gUnkJp_0814E9EC, gUnk_09EDC540, 7, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnkJp_0814E9F8, gUnk_09EDC564, 5, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnkJp_0814EA28, gUnk_09EDC580, 8, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -712,7 +712,7 @@ const JiminyDetail gUnk_081589D4[35] = {
     { gUnkJp_0814EC70, gUnk_09EDD67C, 6, 0, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815917C[14] = {
+const JiminyDetail gJiminyEntry18Details[14] = {
     { gUnkJp_0814E924, gUnk_09EDD808, 11, 0, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { gUnkJp_0814EEA0, gUnk_09EDD868, 7, 0, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { gUnkJp_0814E91C, gUnk_09EDC91C, 7, 0, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -729,7 +729,7 @@ const JiminyDetail gUnk_0815917C[14] = {
     { gUnkJp_0814FAA0, gUnk_09EDCB38, 7, 0, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gUnk_0815948C[6] = {
+const JiminyDetail gJiminyEntry19Details[6] = {
     { gUnkJp_0814EDF0, gUnk_09EDCB64, 6, 0, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { gUnkJp_0814ECF4, gUnk_09EDCB98, 6, 0, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { gUnkJp_0814EC28, gUnk_09EDCBB8, 6, 0, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -738,7 +738,7 @@ const JiminyDetail gUnk_0815948C[6] = {
     { gUnkJp_0814EDE0, gUnk_09EDCC1C, 4, 0, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gUnk_081595DC[33] = {
+const JiminyDetail gJiminyEntry20Details[33] = {
     { gUnkJp_0814E9EC, gUnk_09EDC540, 7, 0, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { gUnkJp_0814E9F8, gUnk_09EDC564, 5, 0, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { gUnkJp_0814EA28, gUnk_09EDC580, 8, 0, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -776,7 +776,7 @@ const JiminyDetail gUnk_081595DC[33] = {
 
 #elif defined(VERSION_EU)
 
-const JiminyDetail gUnk_0815574C[17] = {
+const JiminyDetail gJiminyEntry01Details[17] = {
     { &gUnkEu_08892450, &gUnkEu_0883FB1C, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_088924BC, &gUnkEu_088402A4, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0889252C, &gUnkEu_08840A14, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -796,7 +796,7 @@ const JiminyDetail gUnk_0815574C[17] = {
     { &gUnkEu_0888E804, &gUnkEu_08848808, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155B04[6] = {
+const JiminyDetail gJiminyEntry15Details[6] = {
     { &gUnkEu_088954F4, &gUnkEu_08849768, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08895560, &gUnkEu_0884A1C8, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_088955D0, &gUnkEu_0884AA20, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -805,7 +805,7 @@ const JiminyDetail gUnk_08155B04[6] = {
     { &gUnkEu_08895710, &gUnkEu_0884C7C0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08155C54[17] = {
+const JiminyDetail gJiminyEntry04Details[17] = {
     { &gUnkEu_0888E860, &gUnkEu_0884CB9C, gCardWep01Frame0, gCardWep01Palette, gCardWep01Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888E8B4, &gUnkEu_0884CF0C, gCardWep04Frame0, gCardWep04Palette, gCardWep04Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888E904, &gUnkEu_0884D304, gCardWep05Frame0, gCardWep05Palette, gCardWep05Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
@@ -825,7 +825,7 @@ const JiminyDetail gUnk_08155C54[17] = {
     { &gUnkEu_0888ECE8, &gUnkEu_08850724, gCardWep16Frame0, gCardWep16Palette, gCardWep16Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815600C[14] = {
+const JiminyDetail gJiminyEntry05Details[14] = {
     { &gUnkEu_0888EDE0, &gUnkEu_088508FC, gCardMgc01Frame0, gCardMgc01Palette, gCardMgc01Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888EE18, &gUnkEu_08850AE0, gCardMgc02Frame0, gCardMgc02Palette, gCardMgc02Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888EE50, &gUnkEu_08850CD0, gCardMgc03Frame0, gCardMgc03Palette, gCardMgc03Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
@@ -842,7 +842,7 @@ const JiminyDetail gUnk_0815600C[14] = {
     { &gUnkEu_0888F0A4, &gUnkEu_08852574, gCardSmn09Frame0, gCardSmn09Palette, gCardSmn09Tiles, gUnk_09059E94, gCard00Palette, gUnk_09059EAE, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815631C[7] = {
+const JiminyDetail gJiminyEntry06Details[7] = {
     { &gUnkEu_0888F0DC, &gUnkEu_088527E4, gCardItm01Frame0, gCardItm01Palette, gCardItm01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F128, &gUnkEu_08852A50, gCardItm02Frame0, gCardItm02Palette, gCardItm02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F178, &gUnkEu_08852D50, gCardItm03Frame0, gCardItm03Palette, gCardItm03Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -852,7 +852,7 @@ const JiminyDetail gUnk_0815631C[7] = {
     { &gUnkEu_0888F278, &gUnkEu_08853754, gCardItm07Frame0, gCardItm07Palette, gCardItm07Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081564A4[7] = {
+const JiminyDetail gJiminyEntry07Details[7] = {
     { &gUnkEu_0888F2C0, &gUnkEu_08853980, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F2F4, &gUnkEu_08853B98, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F394, &gUnkEu_08853DAC, gCardSmn10Frame0, gAladdinPalette, gCardSmn10Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
@@ -862,7 +862,7 @@ const JiminyDetail gUnk_081564A4[7] = {
     { &gUnkEu_0888F484, &gUnkEu_088545F8, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815662C[49] = {
+const JiminyDetail gJiminyEntry08Details[49] = {
     { &gUnkEu_0888F880, &gUnkEu_0885479C, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F8C4, &gUnkEu_08855548, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F9AC, &gUnkEu_08857454, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -914,7 +914,7 @@ const JiminyDetail gUnk_0815662C[49] = {
     { &gUnkEu_08890FB0, &gUnkEu_0885AF84, gCardBos18Frame0, gCardBos18Palette, gCardBos18Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081570E4[26] = {
+const JiminyDetail gJiminyEntry09Details[26] = {
     { &gUnkEu_088929B0, &gUnkEu_0885BB4C, gCardRoom02Frame0, gCardRoom02Palette, gCardRoom02Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0889294C, &gUnkEu_0885BA50, gCardRoom01Frame0, gCardRoom01Palette, gCardRoom01Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08892BB0, &gUnkEu_0885C230, gCardRoom07Frame0, gCardRoom07Palette, gCardRoom07Tiles, gUnk_093F5EFC, gUnk_09618D78, gUnk_093F5F16, 0, 0, 0, 0, 0, 0, 0 },
@@ -943,11 +943,11 @@ const JiminyDetail gUnk_081570E4[26] = {
     { &gUnkEu_08893310, &gUnkEu_0885DC30, gCardRoom23Frame0, gCardRoom23Palette, gCardRoom23Tiles, gUnk_093F6434, gUnk_09618D78, gUnk_093F644E, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157694[1] = {
+const JiminyDetail gJiminyEntry10Details[1] = {
     { &gUnkEu_08895850, &gUnkEu_0885E1D8, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_081576CC[22] = {
+const JiminyDetail gJiminyEntry16Details[22] = {
     { &gUnkEu_0889103C, &gUnkEu_0885B6AC, gCardWep20Frame0, gCardWep20Palette, gCardWep20Tiles, gUnk_0905A668, gCard00Palette, gUnk_0905A682, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_08890FEC, &gUnkEu_0885B870, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, gUnk_0905A3CC, gCard00Palette, gUnk_0905A3E6, 0, 0, 0, 0, 0, 0, 0 },
     { &gUnkEu_0888F880, &gUnkEu_0885479C, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
@@ -972,7 +972,7 @@ const JiminyDetail gUnk_081576CC[22] = {
     { &gUnkEu_08890F7C, &gUnkEu_0885ACC0, gCardBos17Frame0, gCardBos17Palette, gCardBos17Tiles, gUnk_0905A130, gCard00Palette, gUnk_0905A14A, 0, 0, 0, 0, 0, 0, 0 },
 };
 
-const JiminyDetail gUnk_08157B9C[25] = {
+const JiminyDetail gJiminyEntry11Details[25] = {
     { &gUnkEu_0888F4FC, &gUnkEu_0885E7B8, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
     { &gUnkEu_0888F2C0, &gUnkEu_0885ED64, gDonaFl00Frame0, gDonaldPalette, gDonaFl00Tiles, gCardSmn02Frame0, gDonaldPalette, gCardSmn02Tiles, 0, 0, 0, 0, 0, 0, -9 },
     { &gUnkEu_0888F2F4, &gUnkEu_0885F1AC, gGoofyFl00Frame0, gGoofyPalette, gGoofyFl00Tiles, gCardSmn01Frame0, gGoofyPalette, gCardSmn01Tiles, 0, 0, 0, 0, 0, 0, 0 },
@@ -1000,7 +1000,7 @@ const JiminyDetail gUnk_08157B9C[25] = {
     { &gUnkEu_0888F7E8, &gUnkEu_08864A34, gMaruxha2Fl00Frame0, gMaruxhaPalette, gMaruxha2Fl00Tiles, gCardBos16Frame0, gCardBos16Palette, gCardBos16Tiles, 0, 0, 0, 0, 0, -3, 6 },
 };
 
-const JiminyDetail gUnk_08158114[40] = {
+const JiminyDetail gJiminyEntry12Details[40] = {
     { &gUnkEu_088908E4, &gUnkEu_088683FC, gAliceFl00Frame0, gAlicePalette, gAliceFl00Tiles, gCardNpcAw01Frame0, gCardNpcAw01Palette, gCardNpcAw01Tiles, 0, 0, 0, 0, 0, -1, -1 },
     { &gUnkEu_08890950, &gUnkEu_0886871C, gQenF00Frame0, gQeenPalette, gQenF00Tiles, gCardNpcAw02Frame0, gCardNpcAw02Palette, gCardNpcAw02Tiles, 0, 0, 0, 0, 0, -3, 4 },
     { &gUnkEu_088909B4, &gUnkEu_08868954, gUsagif00Frame0, gUsagi00Palette, gUsagif00Tiles, gCardNpcAw05Frame0, gCardNpcAw05Palette, gCardNpcAw05Tiles, 0, 0, 0, 0, 0, 0, -10 },
@@ -1043,7 +1043,7 @@ const JiminyDetail gUnk_08158114[40] = {
     { &gUnkEu_08890DF4, &gUnkEu_0886CF18, gRabbitFl00Frame0, gRabbitPalette, gRabbitFl00Tiles, gCardNpcPo05Frame0, gCardNpcPo05Palette, gCardNpcPo05Tiles, 0, 0, 0, 0, 0, -1, -3 },
 };
 
-const JiminyDetail gUnk_081589D4[35] = {
+const JiminyDetail gJiminyEntry13Details[35] = {
     { &gUnkEu_0888F880, &gUnkEu_0886DF4C, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { &gUnkEu_0888F8C4, &gUnkEu_0886E1FC, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { &gUnkEu_0888F9AC, &gUnkEu_0886E5EC, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -1081,7 +1081,7 @@ const JiminyDetail gUnk_081589D4[35] = {
     { &gUnkEu_08890484, &gUnkEu_0886DBF8, 0, 0, 0, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
 };
 
-const JiminyDetail gUnk_0815917C[14] = {
+const JiminyDetail gJiminyEntry18Details[14] = {
     { &gUnkEu_0888F52C, &gUnkEu_08874658, gRikuFl00Frame0, gRikuPalette, gRikuFl00Tiles, gCardNpcEx03Frame0, gCardNpcEx03Palette, gCardNpcEx03Tiles, 0, 0, 0, 0, 0, -3, 0 },
     { &gUnkEu_08890FEC, &gUnkEu_08874BC8, gMickeyFl00Frame0, gMickeyPalette, gMickeyFl00Tiles, gCardSmn15Frame0, gMickeyPalette, gCardSmn15Tiles, 0, 0, 0, 0, 0, -2, -6 },
     { &gUnkEu_0888F4FC, &gUnkEu_088750B8, gSor1fl00Frame0, gSoraPalette, gSor1fl00Tiles, gCardNpcEx00Frame0, gCardNpcEx00Palette, gCardNpcEx00Tiles, 0, 0, 0, 0, 0, -3, -3 },
@@ -1098,7 +1098,7 @@ const JiminyDetail gUnk_0815917C[14] = {
     { &gUnkEu_08895784, &gUnkEu_08878F40, gDizFl00Frame0, gDizPalette, gDizFl00Tiles, gCardNpcCom03Frame0, gCardNpcCom03Palette, gCardNpcCom03Tiles, 0, 0, 0, 0, 0, -2, 8 },
 };
 
-const JiminyDetail gUnk_0815948C[6] = {
+const JiminyDetail gJiminyEntry19Details[6] = {
     { &gUnkEu_08890C48, &gUnkEu_088793FC, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, 0, 0, 0, 0, 0, -12, 16 },
     { &gUnkEu_08890700, &gUnkEu_08879700, 0, 0, 0, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
     { &gUnkEu_08890300, &gUnkEu_08879A6C, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, 0, 0, 0, 0, 0, -3, 6 },
@@ -1107,7 +1107,7 @@ const JiminyDetail gUnk_0815948C[6] = {
     { &gUnkEu_08890BD0, &gUnkEu_0887A250, gHookF00Frame0, gHookPalette, gHookF00Tiles, gCardBos10Frame0, gCardBos10Palette, gCardBos10Tiles, 0, 0, 0, 0, 0, -1, 17 },
 };
 
-const JiminyDetail gUnk_081595DC[33] = {
+const JiminyDetail gJiminyEntry20Details[33] = {
     { &gUnkEu_0888F880, &gUnkEu_0886DF4C, gEmy00L00Frame0, gEmy00Palette, gEmy00L00Tiles, gCardEmy00Frame0, gEmy00Palette, gCardEmy00Tiles, 0, 0, 0, 0, 0, 2, -12 },
     { &gUnkEu_0888F8C4, &gUnkEu_0886E1FC, gEmy14Ll01Frame1, gEmy14Palette, gEmy14Ll01Tiles, gCardEmy14Frame0, gEmy14Palette, gCardEmy14Tiles, 0, 0, 0, 0, 0, -8, 2 },
     { &gUnkEu_0888F9AC, &gUnkEu_0886E5EC, gEmy3800Frame0, gEmy38Palette, gEmy3800Tiles, gCardEmy38Frame0, gEmy38Palette, gCardEmy38Tiles, 0, 0, 0, 0, 0, -6, 6 },
@@ -1149,12 +1149,12 @@ const JiminyDetail gUnk_081595DC[33] = {
 
 JiminyWork* gJiminyWork;
 
-void func_0805A484(void) {
+void JiminyFreeRows(void) {
     s32 i;
     s32 j;
 
     for (i = 0; i < 8; i++) {
-        gJiminyWork->unk_C68[i] = 0;
+        gJiminyWork->rowStates[i] = 0;
         FreeTextSlots(gJiminyWork->lines[i].textSlots, 48);
 
         for (j = 0; j < 48; j++) {
@@ -1165,24 +1165,24 @@ void func_0805A484(void) {
     }
 }
 
-void func_0805A4D8(s16 a, s16 b, s16 c) {
-    gJiminyWork->unk_CC0 = 0;
+void JiminyInitCursor(s16 a, s16 b, s16 c) {
+    gJiminyWork->moveDelay = 0;
     gJiminyWork->x4 = a << 8;
-    gJiminyWork->y5 = (b + gJiminyWork->unk_C74 * c) << 8;
+    gJiminyWork->y5 = (b + gJiminyWork->cursorRow * c) << 8;
 }
 
-void func_0805A514(s16 a, s16 b, s16 c) {
+void JiminyUpdateCursor(s16 a, s16 b, s16 c) {
     s32 v;
 
-    v = (b + gJiminyWork->unk_C74 * c) << 8;
+    v = (b + gJiminyWork->cursorRow * c) << 8;
     ApproachValueHalf(&gJiminyWork->y5, v);
 
-    if (gJiminyWork->unk_CC0 > 0) {
-        gJiminyWork->unk_CC0--;
+    if (gJiminyWork->moveDelay > 0) {
+        gJiminyWork->moveDelay--;
     }
 }
 
-u16 func_0805A55C(u16* p) {
+u16 GetJiminyTextLength(u16* p) {
     s32 n;
     u16* q;
 
@@ -1205,7 +1205,7 @@ u16 func_0805A55C(u16* p) {
     }
 }
 
-s32 func_0805A574(s32 idx) {
+s32 GetJiminyEntryState(s32 idx) {
     JiminyEntry* e;
     s32 a;
     s32 b;
@@ -1213,17 +1213,17 @@ s32 func_0805A574(s32 idx) {
     s32 d;
     s32 i;
 
-    e = &gUnk_08155554[idx];
+    e = &gJiminyEntries[idx];
     if (e->flags != 0) {
         a = 1;
         b = 1;
 
         for (i = 0; i < (u16)e->count; i++) {
-            if (func_0800FF70(e->flags[i])) {
+            if (IsJiminyFlagNew(e->flags[i])) {
                 return 1;
             }
 
-            if (func_0800FF00(e->flags[i]) == 0) {
+            if (IsJiminyFlagSet(e->flags[i]) == 0) {
                 a = 0;
             } else {
                 b = 0;
@@ -1247,7 +1247,7 @@ s32 func_0805A574(s32 idx) {
     d = 1;
 
     for (i = 0; i < (u16)e->count; i++) {
-        switch (func_0805A574(e->children[i])) {
+        switch (GetJiminyEntryState(e->children[i])) {
         case 1:
             return 1;
         case 0:
@@ -1273,10 +1273,10 @@ s32 func_0805A574(s32 idx) {
     return 0;
 }
 
-void func_0805A638(s32 a, u16** b) {
+void JiminyLoadHiddenRow(s32 a, u16** b) {
     s16 t;
 
-    t = func_0805A55C(b[a]);
+    t = GetJiminyTextLength(b[a]);
     t--;
     if (t < 0) {
         t = 0;
@@ -1285,10 +1285,10 @@ void func_0805A638(s32 a, u16** b) {
     if (t > 12) {
         t = 12;
     }
-    gJiminyWork->textSlotCounts[a] = LoadTextSlots(gUnk_09EDE3FC[t], gJiminyWork->lines[a].textSlots);
+    gJiminyWork->textSlotCounts[a] = LoadTextSlots(gJiminyHiddenTexts[t], gJiminyWork->lines[a].textSlots);
 }
 
-void func_0805A698(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
     s16 n;
     s32 i;
 
@@ -1297,9 +1297,9 @@ void func_0805A698(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16
     if (c == 0) {
         for (i = 0; i < n; i++) {
             if (e != 0) {
-                gJiminyWork->unk_C68[i] = func_0805A574(e[i]);
-                if (gJiminyWork->unk_C68[i] == 3) {
-                    func_0805A638(i, d);
+                gJiminyWork->rowStates[i] = GetJiminyEntryState(e[i]);
+                if (gJiminyWork->rowStates[i] == 3) {
+                    JiminyLoadHiddenRow(i, d);
                 } else {
                     gJiminyWork->textSlotCounts[i] =
                         LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
@@ -1311,144 +1311,144 @@ void func_0805A698(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16
         }
     } else {
         for (i = 0; i < n; i++) {
-            if (func_0800FF00(c[i])) {
+            if (IsJiminyFlagSet(c[i])) {
                 gJiminyWork->textSlotCounts[i] =
                     LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
 
-                if (func_0800FF70(c[i])) {
-                    gJiminyWork->unk_C68[i] = 1;
+                if (IsJiminyFlagNew(c[i])) {
+                    gJiminyWork->rowStates[i] = 1;
                 }
             } else {
-                func_0805A638(i, d);
+                JiminyLoadHiddenRow(i, d);
             }
         }
     }
 }
 
-void func_0805A7D0(void) {
+void JiminyReloadRows(void) {
     s16 t;
 
-    t = gJiminyWork->unk_C72 - gJiminyWork->unk_C74;
-    func_0805A484();
+    t = gJiminyWork->cursor - gJiminyWork->cursorRow;
+    JiminyFreeRows();
 
-    if (gJiminyWork->unk_CB8 != 0) {
-        func_0805A698(gJiminyWork->unk_C78, gJiminyWork->unk_C76,
-            gJiminyWork->unk_CB4 + t, gJiminyWork->unk_CB8 + t, 0,
-            gJiminyWork->unk_CAE, gJiminyWork->unk_CB0, gJiminyWork->unk_CB2);
+    if (gJiminyWork->itemFlags != 0) {
+        JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
+            gJiminyWork->itemTexts + t, gJiminyWork->itemFlags + t, 0,
+            gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
     } else {
-        func_0805A698(gJiminyWork->unk_C78, gJiminyWork->unk_C76,
-            gJiminyWork->unk_CB4 + t, 0, gJiminyWork->unk_CBC + t,
-            gJiminyWork->unk_CAE, gJiminyWork->unk_CB0, gJiminyWork->unk_CB2);
+        JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
+            gJiminyWork->itemTexts + t, 0, gJiminyWork->itemChildren + t,
+            gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
     }
 }
 
-void func_0805A8D0(void) {
+void JiminyReloadPlainRows(void) {
     s16 t;
 
-    t = gJiminyWork->unk_C72 - gJiminyWork->unk_C74;
-    func_0805A484();
-    func_0805A698(gJiminyWork->unk_C78, gJiminyWork->unk_C76,
-        gJiminyWork->unk_CB4 + t, 0, 0,
-        gJiminyWork->unk_CAE, gJiminyWork->unk_CB0, gJiminyWork->unk_CB2);
+    t = gJiminyWork->cursor - gJiminyWork->cursorRow;
+    JiminyFreeRows();
+    JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
+        gJiminyWork->itemTexts + t, 0, 0,
+        gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
 }
 
-void func_0805A95C(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
 #ifdef VERSION_EU
     s32 i;
 #endif
 
-    gJiminyWork->unk_CAE = f;
-    gJiminyWork->unk_CB0 = g;
-    gJiminyWork->unk_CB2 = h;
-    gJiminyWork->unk_C76 = b;
-    gJiminyWork->unk_C78 = a;
+    gJiminyWork->listX = f;
+    gJiminyWork->listY = g;
+    gJiminyWork->rowHeight = h;
+    gJiminyWork->itemCount = b;
+    gJiminyWork->visibleRows = a;
 #ifdef VERSION_EU
 
     for (i = 0; i < b; i++) {
-        gJiminyWork->unk_D40[i] = eu_0805E924(c[i]);
+        gJiminyWork->resolvedTexts[i] = eu_0805E924(c[i]);
     }
 
-    gJiminyWork->unk_CB4 = gJiminyWork->unk_D40;
+    gJiminyWork->itemTexts = gJiminyWork->resolvedTexts;
 #else
-    gJiminyWork->unk_CB4 = c;
+    gJiminyWork->itemTexts = c;
 #endif
-    gJiminyWork->unk_CB8 = d;
-    gJiminyWork->unk_CBC = e;
+    gJiminyWork->itemFlags = d;
+    gJiminyWork->itemChildren = e;
     gJiminyWork->x = f + 56;
     gJiminyWork->x2 = f + 56;
     gJiminyWork->y = g - 10;
     gJiminyWork->y2 = g + h * (a - 1) + 12;
     gJiminyWork->flags = (gJiminyWork->flags & 0xFFE5) | 4;
-    gJiminyWork->unk_C70 = 0;
-    func_0805A4D8(gJiminyWork->unk_CAE - 24, gJiminyWork->unk_CB0 - 4,
-        gJiminyWork->unk_CB2);
-    func_0805A7D0();
-    gJiminyWork->unk_D3E = 0;
+    gJiminyWork->shownChars = 0;
+    JiminyInitCursor(gJiminyWork->listX - 24, gJiminyWork->listY - 4,
+        gJiminyWork->rowHeight);
+    JiminyReloadRows();
+    gJiminyWork->frame = 0;
 }
 
-u8 func_0805AA9C(void) {
+u8 JiminyHandleListInput(void) {
     if (FadeIsActive()) {
         return 1;
     }
 
-    if (gJiminyWork->unk_C70 < gJiminyWork->unk_C71) {
+    if (gJiminyWork->shownChars < gJiminyWork->charCount) {
         AnimChange(&gJiminyWork->anim, 1, 1);
 
         if (!FadeIsActive()) {
-            if (gJiminyWork->unk_048 % 5 == 0) {
-                gJiminyWork->unk_C70++;
+            if (gJiminyWork->stateTimer % 5 == 0) {
+                gJiminyWork->shownChars++;
             }
         }
     } else {
         AnimChange(&gJiminyWork->anim, 0, 1);
     }
 
-    if (gJiminyWork->unk_C74 < gJiminyWork->unk_C72) {
+    if (gJiminyWork->cursorRow < gJiminyWork->cursor) {
         gJiminyWork->flags |= 8;
     } else {
         gJiminyWork->flags &= 0xFFF7;
     }
 
-    if (gJiminyWork->unk_C78 - gJiminyWork->unk_C74 <
-        gJiminyWork->unk_C76 - gJiminyWork->unk_C72) {
+    if (gJiminyWork->visibleRows - gJiminyWork->cursorRow <
+        gJiminyWork->itemCount - gJiminyWork->cursor) {
         gJiminyWork->flags |= 0x10;
     } else {
         gJiminyWork->flags &= 0xFFEF;
     }
 
-    if (gJiminyWork->unk_CC0 <= 0) {
+    if (gJiminyWork->moveDelay <= 0) {
         if (GetKeysRepeat() & DPAD_UP) {
-            if (gJiminyWork->unk_C72 > 0) {
-                gJiminyWork->unk_CC0 = 1;
-                gJiminyWork->unk_C72--;
+            if (gJiminyWork->cursor > 0) {
+                gJiminyWork->moveDelay = 1;
+                gJiminyWork->cursor--;
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (gJiminyWork->unk_C74 > 0) {
-                    gJiminyWork->unk_C74--;
+                if (gJiminyWork->cursorRow > 0) {
+                    gJiminyWork->cursorRow--;
                 } else {
-                    func_0805A7D0();
+                    JiminyReloadRows();
                 }
             }
         } else if (GetKeysRepeat() & DPAD_DOWN) {
-            if (gJiminyWork->unk_C72 < gJiminyWork->unk_C76 - 1) {
-                gJiminyWork->unk_CC0 = 1;
-                gJiminyWork->unk_C72++;
+            if (gJiminyWork->cursor < gJiminyWork->itemCount - 1) {
+                gJiminyWork->moveDelay = 1;
+                gJiminyWork->cursor++;
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (gJiminyWork->unk_C74 < gJiminyWork->unk_C78 - 1) {
-                    gJiminyWork->unk_C74++;
+                if (gJiminyWork->cursorRow < gJiminyWork->visibleRows - 1) {
+                    gJiminyWork->cursorRow++;
                 } else {
-                    func_0805A7D0();
+                    JiminyReloadRows();
                 }
             }
         }
     }
-    func_0805A514(gJiminyWork->unk_CAE - 24, gJiminyWork->unk_CB0 - 4,
-        gJiminyWork->unk_CB2);
+    JiminyUpdateCursor(gJiminyWork->listX - 24, gJiminyWork->listY - 4,
+        gJiminyWork->rowHeight);
 
     if (GetKeysPressed() & START_BUTTON) {
-        gJiminyWork->unk_048 = 0;
-        gJiminyWork->unk_000 = 5;
+        gJiminyWork->stateTimer = 0;
+        gJiminyWork->state = 5;
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     }
@@ -1519,11 +1519,11 @@ void mode_jiminy_0(void) {
     gJiminyWork->x3 = -0x8000;
     gJiminyWork->y3 = -0x800;
     gJiminyWork->y4 = 0xA000;
-    gJiminyWork->unk_000 = 0;
-    gJiminyWork->unk_048 = 0;
-    gJiminyWork->unk_C70 = 0;
-    gJiminyWork->unk_C72 = 0;
-    gJiminyWork->unk_C74 = 0;
+    gJiminyWork->state = 0;
+    gJiminyWork->stateTimer = 0;
+    gJiminyWork->shownChars = 0;
+    gJiminyWork->cursor = 0;
+    gJiminyWork->cursorRow = 0;
 
     if (gGameState.flags & 8) {
         gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
@@ -1560,30 +1560,30 @@ void mode_jiminy_0(void) {
         InitTextSlots(gJiminyWork->lines[i].textSlots, 0x30);
     }
 
-    func_08064B80(0);
+    InitMsgGlyphSprites(0);
 #ifdef VERSION_JP
-    gJiminyWork->unk_C71 = func_080653D4(0x400, 0x2600, gUnk_08159FE0);
+    gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #elif defined(VERSION_EU)
-    gJiminyWork->unk_C71 = func_08065170(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
+    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
 #else
-    gJiminyWork->unk_C71 = func_08065170(0x200, 0x2400, gUnk_08159FE0);
+    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
 
     for (j = 0; j <= 0x14; j++) {
-        gJiminyWork->pairs[j].unk_00 = 0;
-        gJiminyWork->pairs[j].unk_02 = 0;
+        gJiminyWork->pairs[j].cursor = 0;
+        gJiminyWork->pairs[j].cursorRow = 0;
     }
 
     if (gGameState.flags & 8) {
-        gJiminyWork->unk_D2C = 14;
-        e = gUnk_08155554;
+        gJiminyWork->entry = 14;
+        e = gJiminyEntries;
         e += 14;
-        func_0805A95C(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
+        JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         gJiminyWork->flags = 2;
     } else {
-        gJiminyWork->unk_D2C = 0;
-        e = gUnk_08155554;
-        func_0805A95C(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
+        gJiminyWork->entry = 0;
+        e = gJiminyEntries;
+        JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         gJiminyWork->flags = 3;
     }
 }
@@ -1597,139 +1597,139 @@ void mode_jiminy_1(void) {
     JiminyEntry* e2;
     JiminyPair* p2;
 
-    switch (gJiminyWork->unk_000) {
+    switch (gJiminyWork->state) {
     case 0:
-        if (gJiminyWork->unk_048 == 0) {
-            gJiminyWork->unk_04A = 16;
+        if (gJiminyWork->stateTimer == 0) {
+            gJiminyWork->steps = 16;
         }
-        ApproachValue(&gJiminyWork->y3, 0, gJiminyWork->unk_04A);
-        ApproachValue(&gJiminyWork->y4, 0x9800, gJiminyWork->unk_04A);
-        gJiminyWork->unk_04A--;
-        if (gJiminyWork->unk_04A <= 0) {
-            gJiminyWork->unk_000 = 1;
-            gJiminyWork->unk_048 = 0;
+        ApproachValue(&gJiminyWork->y3, 0, gJiminyWork->steps);
+        ApproachValue(&gJiminyWork->y4, 0x9800, gJiminyWork->steps);
+        gJiminyWork->steps--;
+        if (gJiminyWork->steps <= 0) {
+            gJiminyWork->state = 1;
+            gJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->unk_048++;
+            gJiminyWork->stateTimer++;
         }
         break;
     case 1:
-        if (gJiminyWork->unk_048 == 0) {
-            gJiminyWork->unk_04A = 16;
+        if (gJiminyWork->stateTimer == 0) {
+            gJiminyWork->steps = 16;
         }
-        ApproachValue(&gJiminyWork->x3, 0, gJiminyWork->unk_04A);
-        gJiminyWork->unk_04A--;
-        if (gJiminyWork->unk_04A <= 0) {
-            gJiminyWork->unk_000 = 6;
-            gJiminyWork->unk_048 = 0;
+        ApproachValue(&gJiminyWork->x3, 0, gJiminyWork->steps);
+        gJiminyWork->steps--;
+        if (gJiminyWork->steps <= 0) {
+            gJiminyWork->state = 6;
+            gJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->unk_048++;
+            gJiminyWork->stateTimer++;
         }
         break;
     case 2:
-        if (gJiminyWork->unk_048 == 0) {
+        if (gJiminyWork->stateTimer == 0) {
             c = gJiminyWork->flags | 2;
             gJiminyWork->flags = c & 0xFFFB;
-            gJiminyWork->unk_04A = 16;
+            gJiminyWork->steps = 16;
             LoadBgMap(1, gUnk_08F61B84, 0x800);
         }
-        ApproachValue(&gJiminyWork->x3, -0x8000, gJiminyWork->unk_04A);
-        gJiminyWork->unk_04A--;
-        if (gJiminyWork->unk_04A <= 0) {
-            gJiminyWork->unk_000 = 3;
-            gJiminyWork->unk_048 = 0;
+        ApproachValue(&gJiminyWork->x3, -0x8000, gJiminyWork->steps);
+        gJiminyWork->steps--;
+        if (gJiminyWork->steps <= 0) {
+            gJiminyWork->state = 3;
+            gJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->unk_048++;
+            gJiminyWork->stateTimer++;
         }
         break;
     case 3:
-        if (gJiminyWork->unk_048 == 0) {
-            gJiminyWork->unk_04A = 16;
+        if (gJiminyWork->stateTimer == 0) {
+            gJiminyWork->steps = 16;
         }
-        ApproachValue(&gJiminyWork->y3, -0x800, gJiminyWork->unk_04A);
-        ApproachValue(&gJiminyWork->y4, 0xA000, gJiminyWork->unk_04A);
-        gJiminyWork->unk_04A--;
-        if (gJiminyWork->unk_04A <= 0) {
-            gJiminyWork->unk_000 = 4;
-            gJiminyWork->unk_048 = 0;
+        ApproachValue(&gJiminyWork->y3, -0x800, gJiminyWork->steps);
+        ApproachValue(&gJiminyWork->y4, 0xA000, gJiminyWork->steps);
+        gJiminyWork->steps--;
+        if (gJiminyWork->steps <= 0) {
+            gJiminyWork->state = 4;
+            gJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->unk_048++;
+            gJiminyWork->stateTimer++;
         }
         break;
     case 4:
-        if (gJiminyWork->unk_048 == 0) {
+        if (gJiminyWork->stateTimer == 0) {
             FadeStartOut(0, 16);
             FadeLock();
         }
 
         if (FadeGetAmount() > 30) {
-            func_080E052C(1);
+            ReturnToMap(1);
         }
         break;
     case 5:
-        if (gJiminyWork->unk_048 == 0) {
+        if (gJiminyWork->stateTimer == 0) {
             FadeStartOut(0, 16);
             FadeLock();
         }
 
         if (FadeGetAmount() > 30) {
-            func_080E052C(0);
+            ReturnToMap(0);
         }
         break;
     case 6:
-        e = &gUnk_08155554[gJiminyWork->unk_D2C];
-        p = &gJiminyWork->pairs[gJiminyWork->unk_D2C];
+        e = &gJiminyEntries[gJiminyWork->entry];
+        p = &gJiminyWork->pairs[gJiminyWork->entry];
 #ifdef VERSION_JP
-        gJiminyWork->unk_C71 = func_080653D4(0x400, 0x2600, gUnk_08159FE0);
+        gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #else
 #ifdef VERSION_EU
-        gJiminyWork->unk_C71 = func_08065170(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
+        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
 #else
-        gJiminyWork->unk_C71 = func_08065170(0x200, 0x2400, gUnk_08159FE0);
+        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
 #endif
         DisableBg(3);
         DisableBg(0);
-        gJiminyWork->unk_C72 = p->unk_00;
-        gJiminyWork->unk_C74 = p->unk_02;
+        gJiminyWork->cursor = p->cursor;
+        gJiminyWork->cursorRow = p->cursorRow;
 
-        if (gJiminyWork->unk_D2C == 0 || gJiminyWork->unk_D2C == 14) {
+        if (gJiminyWork->entry == 0 || gJiminyWork->entry == 14) {
             if (gGameState.flags & 8) {
                 LoadBgMap(1, gUnk_08F62B84, 0x800);
             } else {
                 LoadBgMap(1, e->map, 0x800);
             }
             LoadObjPaletteBank(gJiminyWork->palette3->index, gUnk_08F6DD84);
-            func_0805A95C(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
+            JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         } else {
             LoadBgMap(1, e->map, 0x800);
             LoadObjPaletteBank(gJiminyWork->palette3->index, gUnk_08F6DDC4);
 #ifdef VERSION_JP
-            func_0805A95C(8, e->count, e->names, e->flags, e->children, 0x70, 0x1A, 0x10);
+            JiminyOpenList(8, e->count, e->names, e->flags, e->children, 0x70, 0x1A, 0x10);
 #else
-            func_0805A95C(4, e->count, e->names, e->flags, e->children, 0x70, 0x3A, 0x10);
+            JiminyOpenList(4, e->count, e->names, e->flags, e->children, 0x70, 0x3A, 0x10);
 #endif
         }
 
-        gJiminyWork->unk_000 = 7;
+        gJiminyWork->state = 7;
     case 7:
-        e2 = &gUnk_08155554[gJiminyWork->unk_D2C];
-        p2 = &gJiminyWork->pairs[gJiminyWork->unk_D2C];
+        e2 = &gJiminyEntries[gJiminyWork->entry];
+        p2 = &gJiminyWork->pairs[gJiminyWork->entry];
 
-        if (func_0805AA9C() != 0) {
+        if (JiminyHandleListInput() != 0) {
             break;
         }
 
-        p2->unk_00 = gJiminyWork->unk_C72;
-        p2->unk_02 = gJiminyWork->unk_C74;
+        p2->cursor = gJiminyWork->cursor;
+        p2->cursorRow = gJiminyWork->cursorRow;
 
         if (GetKeysPressed() & B_BUTTON) {
-            gJiminyWork->unk_048 = 0;
+            gJiminyWork->stateTimer = 0;
 
             if (e2->parent == -1) {
-                gJiminyWork->unk_000 = 2;
+                gJiminyWork->state = 2;
             } else {
-                gJiminyWork->unk_000 = 6;
-                gJiminyWork->unk_D2C = e2->parent;
+                gJiminyWork->state = 6;
+                gJiminyWork->entry = e2->parent;
                 FadeStartIn(0, 5);
                 FadeLock();
             }
@@ -1743,9 +1743,9 @@ void mode_jiminy_1(void) {
             ok = 1;
 
             if (e2->flags != 0) {
-                ok = func_0800FF00(e2->flags[gJiminyWork->unk_C72]) != 0;
+                ok = IsJiminyFlagSet(e2->flags[gJiminyWork->cursor]) != 0;
             } else {
-                if (gJiminyWork->unk_C68[gJiminyWork->unk_C74] == 3) {
+                if (gJiminyWork->rowStates[gJiminyWork->cursorRow] == 3) {
                     ok = 0;
                 }
             }
@@ -1754,36 +1754,36 @@ void mode_jiminy_1(void) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
 
                 if (e2->children != 0) {
-                    gJiminyWork->unk_000 = 6;
-                    gJiminyWork->unk_D2C = e2->children[gJiminyWork->unk_C72];
-                    gJiminyWork->unk_048 = 0;
+                    gJiminyWork->state = 6;
+                    gJiminyWork->entry = e2->children[gJiminyWork->cursor];
+                    gJiminyWork->stateTimer = 0;
                     FadeStartIn(0, 5);
                     FadeLock();
                     break;
                 } else {
                     FadeStartIn(0, 5);
                     FadeLock();
-                    gJiminyWork->unk_048 = 0;
-                    gJiminyWork->unk_000 = 8;
-                    gJiminyWork->unk_CD2 = gJiminyWork->unk_C72;
-                    gJiminyWork->unk_D34 = e2->detail;
-                    SetModeUpdate(func_0805BAE4);
+                    gJiminyWork->stateTimer = 0;
+                    gJiminyWork->state = 8;
+                    gJiminyWork->detailIndex = gJiminyWork->cursor;
+                    gJiminyWork->detailTable = e2->detail;
+                    SetModeUpdate(JiminyDetailUpdate);
                     break;
                 }
             }
         }
 
-        gJiminyWork->unk_048++;
+        gJiminyWork->stateTimer++;
         break;
     }
 
-    t = abs(gSineTable[(gJiminyWork->unk_D3E * 2) & 0xFF]) * 15 >> 8;
+    t = abs(gSineTable[(gJiminyWork->frame * 2) & 0xFF]) * 15 >> 8;
     gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     SetBlendAlpha(t, 16 - t);
 
     if (gJiminyWork->flags & 1) {
         EnableBg(2);
-        func_080658B8(gJiminyWork->unk_C70);
+        DrawMsgGlyphs(gJiminyWork->shownChars);
         DrawSprite(0x23, 0x76, AnimUpdate(&gJiminyWork->anim), gJiminyWork->tiles3,
             gJiminyWork->palette4, 0, 0, 0);
     } else {
@@ -1791,50 +1791,50 @@ void mode_jiminy_1(void) {
     }
 
     for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0; i++) {
-        if (i >= gJiminyWork->unk_C78) {
+        if (i >= gJiminyWork->visibleRows) {
             break;
         }
-        DrawTextSlots(gJiminyWork->unk_CAE, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i,
+        DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
             gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
 
-        if (gJiminyWork->unk_000 == 7) {
-            switch (gJiminyWork->unk_C68[i]) {
+        if (gJiminyWork->state == 7) {
+            switch (gJiminyWork->rowStates[i]) {
             case 1:
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case 0:
-                    DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnk_08C6A6A4,
+                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
                     break;
                 case 1:
-                    DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnkEu_08C9BD82,
+                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
                     break;
                 case 4:
-                    DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnkEu_08C9BD8C,
+                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
                     break;
                 case 3:
-                    DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnkEu_08C9BD9C,
+                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
                     break;
                 case 2:
                 default:
-                    DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnkEu_08C9BDAC,
+                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
                     break;
                 }
 #else
-                DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i, gUnk_08C6A6A4,
+                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
                     gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0);
 #endif
                 break;
             case 2:
 #ifdef VERSION_EU
-                DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i - 2, gUnk_08C6A69A,
+                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
                     gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
 #else
-                DrawSprite(0xD9, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i - 2, gUnk_08C6A69A,
+                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
                     gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0);
 #endif
                 break;
@@ -1933,20 +1933,20 @@ void mode_jiminy_1(void) {
 #endif
     }
 
-    if (gJiminyWork->unk_000 == 7) {
+    if (gJiminyWork->state == 7) {
         if (gJiminyWork->flags & 8) {
-            DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->unk_D3E >> 3) & 3),
+            DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3),
                 gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
         }
 
         if (gJiminyWork->flags & 0x10) {
-            DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->unk_D3E >> 3) & 3),
+            DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
                 gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
         }
 
         if (FadeIsActive() == 0) {
             if (gJiminyWork->flags & 4) {
-                if (gJiminyWork->unk_CC0 <= 0) {
+                if (gJiminyWork->moveDelay <= 0) {
                     DrawSprite(gJiminyWork->x4 >> 8, gJiminyWork->y5 >> 8,
                         AnimUpdate(&gJiminyWork->anim2), gJiminyWork->tiles4,
                         gJiminyWork->palette5, 0, 0, 0);
@@ -1954,7 +1954,7 @@ void mode_jiminy_1(void) {
                     DrawSprite(gJiminyWork->x4 >> 8, gJiminyWork->y5 >> 8, gUnk_08C6A8F8,
                         gJiminyWork->tiles4, gJiminyWork->palette5, 0, 0, 0);
 
-                    if (gJiminyWork->unk_CC0 == 1) {
+                    if (gJiminyWork->moveDelay == 1) {
                         AnimReset(&gJiminyWork->anim2);
                     }
                 }
@@ -1963,25 +1963,25 @@ void mode_jiminy_1(void) {
     }
 
     UpdatePlayTime();
-    gJiminyWork->unk_D3E++;
+    gJiminyWork->frame++;
 }
 
-void func_0805B9D0(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f) {
-    gJiminyWork->unk_CAE = d;
-    gJiminyWork->unk_CB0 = e;
-    gJiminyWork->unk_CB2 = f;
-    gJiminyWork->unk_C76 = b;
-    gJiminyWork->unk_C78 = a;
-    gJiminyWork->unk_CB4 = c;
+void JiminyOpenPlainList(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f) {
+    gJiminyWork->listX = d;
+    gJiminyWork->listY = e;
+    gJiminyWork->rowHeight = f;
+    gJiminyWork->itemCount = b;
+    gJiminyWork->visibleRows = a;
+    gJiminyWork->itemTexts = c;
     gJiminyWork->x = d + 0x38;
     gJiminyWork->x2 = d + 0x38;
     gJiminyWork->y = e - 10;
     gJiminyWork->y2 = e + f * (a - 1) + 12;
-    gJiminyWork->unk_C72 = 0;
-    gJiminyWork->unk_C74 = 0;
-    gJiminyWork->unk_CC0 = 0;
-    gJiminyWork->unk_D3E = 0;
-    func_0805A8D0();
+    gJiminyWork->cursor = 0;
+    gJiminyWork->cursorRow = 0;
+    gJiminyWork->moveDelay = 0;
+    gJiminyWork->frame = 0;
+    JiminyReloadPlainRows();
 }
 
 void SplitThreeDecimalDigits(s16 a, u8* out) {
@@ -1990,7 +1990,7 @@ void SplitThreeDecimalDigits(s16 a, u8* out) {
     out[2] = a % 10;
 }
 
-void func_0805BAE4(void) {
+void JiminyDetailUpdate(void) {
     s32 count;
     JiminyDetail* entries;
     s16 i;
@@ -2007,152 +2007,152 @@ void func_0805BAE4(void) {
     s32 wide = 0;
 #endif
 
-    switch ((u32)gJiminyWork->unk_000) {
+    switch ((u32)gJiminyWork->state) {
     case 8:
-        switch ((u32)gJiminyWork->unk_D34) {
+        switch ((u32)gJiminyWork->detailTable) {
         case 1:
             count = 17;
-            entries = gUnk_0815574C;
+            entries = gJiminyEntry01Details;
             gJiminyWork->unk_D30 = 0;
             break;
         case 2:
             count = 17;
-            entries = gUnk_08155C54;
+            entries = gJiminyEntry04Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 3:
             count = 14;
-            entries = gUnk_0815600C;
+            entries = gJiminyEntry05Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 4:
             count = 7;
-            entries = gUnk_0815631C;
+            entries = gJiminyEntry06Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 5:
             count = 7;
-            entries = gUnk_081564A4;
+            entries = gJiminyEntry07Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 6:
             count = 49;
-            entries = gUnk_0815662C;
+            entries = gJiminyEntry08Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 7:
             count = 26;
-            entries = gUnk_081570E4;
+            entries = gJiminyEntry09Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 8:
             count = 1;
-            entries = gUnk_08157694;
+            entries = gJiminyEntry10Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 9:
             count = 25;
-            entries = gUnk_08157B9C;
+            entries = gJiminyEntry11Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 10:
             count = 40;
-            entries = gUnk_08158114;
+            entries = gJiminyEntry12Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 11:
             count = 35;
-            entries = gUnk_081589D4;
+            entries = gJiminyEntry13Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 12:
             count = 6;
-            entries = gUnk_08155B04;
+            entries = gJiminyEntry15Details;
             gJiminyWork->unk_D30 = 0;
             break;
         case 13:
             count = 22;
-            entries = gUnk_081576CC;
+            entries = gJiminyEntry16Details;
             gJiminyWork->unk_D30 = 1;
             break;
         case 14:
             count = 14;
-            entries = gUnk_0815917C;
+            entries = gJiminyEntry18Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 15:
             count = 6;
-            entries = gUnk_0815948C;
+            entries = gJiminyEntry19Details;
             gJiminyWork->unk_D30 = 2;
             break;
         case 16:
             count = 33;
-            entries = gUnk_081595DC;
+            entries = gJiminyEntry20Details;
             gJiminyWork->unk_D30 = 2;
             break;
         default:
             count = 25;
-            entries = gUnk_08157B9C;
+            entries = gJiminyEntry11Details;
             gJiminyWork->unk_D30 = 2;
             break;
         }
-        gJiminyWork->unk_CD0 = count;
-        if (gJiminyWork->unk_CD2 >= (s16)count) {
-            gJiminyWork->unk_CD2 = 0;
+        gJiminyWork->detailCount = count;
+        if (gJiminyWork->detailIndex >= (s16)count) {
+            gJiminyWork->detailIndex = 0;
         }
-        gJiminyWork->detail = &entries[gJiminyWork->unk_CD2];
-        if (gJiminyWork->unk_CB8 != 0) {
-            func_0800FFE0(gJiminyWork->unk_CB8[gJiminyWork->unk_CD2]);
+        gJiminyWork->detail = &entries[gJiminyWork->detailIndex];
+        if (gJiminyWork->itemFlags != 0) {
+            ClearJiminyFlagNew(gJiminyWork->itemFlags[gJiminyWork->detailIndex]);
             unlocked = 0;
             selected = 0;
             for (i = 0; i < count; i++) {
-                if (func_0800FF00(gJiminyWork->unk_CB8[i])) {
-                    if (gJiminyWork->unk_CD2 == i) {
+                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
+                    if (gJiminyWork->detailIndex == i) {
                         selected = unlocked;
                     }
                     unlocked++;
                 }
             }
-            gJiminyWork->unk_CD4 = gJiminyWork->unk_CD2;
-            gJiminyWork->unk_CD6 = gJiminyWork->unk_CD2;
-            i = gJiminyWork->unk_CD2 + 1;
+            gJiminyWork->nextDetail = gJiminyWork->detailIndex;
+            gJiminyWork->prevDetail = gJiminyWork->detailIndex;
+            i = gJiminyWork->detailIndex + 1;
             for (;;) {
                 if (i >= count) {
                     i = 0;
                 }
-                if (i == gJiminyWork->unk_CD2) {
+                if (i == gJiminyWork->detailIndex) {
                     break;
                 }
-                if (func_0800FF00(gJiminyWork->unk_CB8[i])) {
-                    gJiminyWork->unk_CD4 = i;
+                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
+                    gJiminyWork->nextDetail = i;
                     break;
                 }
                 i++;
             }
-            i = gJiminyWork->unk_CD2 - 1;
+            i = gJiminyWork->detailIndex - 1;
             for (;;) {
                 if (i < 0) {
                     i = count - 1;
                 }
-                if (i == gJiminyWork->unk_CD2) {
+                if (i == gJiminyWork->detailIndex) {
                     break;
                 }
-                if (func_0800FF00(gJiminyWork->unk_CB8[i])) {
-                    gJiminyWork->unk_CD6 = i;
+                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
+                    gJiminyWork->prevDetail = i;
                     break;
                 }
                 i--;
             }
         } else {
             unlocked = count;
-            selected = gJiminyWork->unk_CD2;
-            gJiminyWork->unk_CD4 = gJiminyWork->unk_CD2 + 1;
-            if (gJiminyWork->unk_CD4 >= count) {
-                gJiminyWork->unk_CD4 = 0;
+            selected = gJiminyWork->detailIndex;
+            gJiminyWork->nextDetail = gJiminyWork->detailIndex + 1;
+            if (gJiminyWork->nextDetail >= count) {
+                gJiminyWork->nextDetail = 0;
             }
-            gJiminyWork->unk_CD6 = gJiminyWork->unk_CD2 - 1;
-            if (gJiminyWork->unk_CD6 < 0) {
-                gJiminyWork->unk_CD6 = count - 1;
+            gJiminyWork->prevDetail = gJiminyWork->detailIndex - 1;
+            if (gJiminyWork->prevDetail < 0) {
+                gJiminyWork->prevDetail = count - 1;
             }
         }
         switch (gJiminyWork->unk_D30) {
@@ -2160,22 +2160,22 @@ void func_0805BAE4(void) {
             map0 = gUnk_08F64384;
             map1 = gUnk_08F60384;
 #ifdef VERSION_JP
-            gJiminyWork->unk_C71 = func_080653D4(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
                 0x1800, gJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->unk_C71 = func_08065170(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, eu_0805E924(gJiminyWork->detail->name));
 #else
-            gJiminyWork->unk_C71 = func_08065170(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            func_0805B9D0(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
+            JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            func_0805B9D0(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
+            JiminyOpenPlainList(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2183,22 +2183,22 @@ void func_0805BAE4(void) {
             map0 = gUnk_08F64384;
             map1 = gUnk_08F5EB84;
 #ifdef VERSION_JP
-            gJiminyWork->unk_C71 = func_080653D4(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
                 0x1800, gJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->unk_C71 = func_08065170(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, eu_0805E924(gJiminyWork->detail->name));
 #else
-            gJiminyWork->unk_C71 = func_08065170(0x400,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            func_0805B9D0(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
+            JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            func_0805B9D0(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
+            JiminyOpenPlainList(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2207,19 +2207,19 @@ void func_0805BAE4(void) {
             map0 = gUnk_08F63384;
             map1 = gUnk_08F5FB84;
 #ifdef VERSION_JP
-            gJiminyWork->unk_C71 = func_080653D4(0x2800,
+            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x2800,
                 0x1800, gJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->unk_C71 = func_08065170(0x2800,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
                 0x1600, eu_0805E924(gJiminyWork->detail->name));
 #else
-            gJiminyWork->unk_C71 = func_08065170(0x2800,
+            gJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            func_0805B9D0(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
-            func_0805B9D0(
+            JiminyOpenPlainList(
 #ifdef VERSION_JP
                 6,
 #else
@@ -2257,7 +2257,7 @@ void func_0805BAE4(void) {
         }
         if (gJiminyWork->unk_D30 < 2) {
 #ifdef VERSION_JP
-            switch (gJiminyWork->unk_C71) {
+            switch (gJiminyWork->charCount) {
             case 1: source += 0xC0; break;
             case 2: source += 0x240; break;
             case 3: source += 0x300; break;
@@ -2271,7 +2271,7 @@ void func_0805BAE4(void) {
             default: source += 0x320; break;
             }
 #else
-            width = func_08064DD4(
+            width = GetMsgTextWidth(
 #ifdef VERSION_EU
                 eu_0805E924(gJiminyWork->detail->name)
 #else
@@ -2304,9 +2304,9 @@ void func_0805BAE4(void) {
 #endif
         } else {
 #ifdef VERSION_JP
-            width = gJiminyWork->unk_C71;
+            width = gJiminyWork->charCount;
 #else
-            width = (s16)func_08064DD4(
+            width = (s16)GetMsgTextWidth(
 #ifdef VERSION_EU
                 eu_0805E924(gJiminyWork->detail->name)
 #else
@@ -2367,7 +2367,7 @@ void func_0805BAE4(void) {
         RequestDma3Copy(source + digits[1] * 0x20, dest, 0x20);
         dest = (u8*)GetBgCharBase(0) + 0xC0;
         RequestDma3Copy(source + digits[2] * 0x20, dest, 0x20);
-        gJiminyWork->unk_000 = 9;
+        gJiminyWork->state = 9;
         DisableBg(2);
         if (gJiminyWork->detail->bgTiles != 0) {
             EnableBg(3);
@@ -2395,12 +2395,12 @@ void func_0805BAE4(void) {
         gJiminyWork->unk_D3C = 5;
         SetBlendAlpha(0, 16);
     case 9:
-        if (gJiminyWork->unk_C72 > 0) {
+        if (gJiminyWork->cursor > 0) {
             gJiminyWork->flags |= 8;
         } else {
             gJiminyWork->flags &= ~8;
         }
-        if (gJiminyWork->unk_C78 < gJiminyWork->unk_C76 - gJiminyWork->unk_C72) {
+        if (gJiminyWork->visibleRows < gJiminyWork->itemCount - gJiminyWork->cursor) {
             gJiminyWork->flags |= 0x10;
         } else {
             gJiminyWork->flags &= ~0x10;
@@ -2408,80 +2408,80 @@ void func_0805BAE4(void) {
         if (FadeIsActive() != 0) {
             break;
         }
-        if (gJiminyWork->unk_CC0 <= 0) {
+        if (gJiminyWork->moveDelay <= 0) {
             if (GetKeysRepeat() & DPAD_UP) {
-                if (gJiminyWork->unk_C72 > 0) {
-                    gJiminyWork->unk_CC0 = 1;
-                    gJiminyWork->unk_C72--;
+                if (gJiminyWork->cursor > 0) {
+                    gJiminyWork->moveDelay = 1;
+                    gJiminyWork->cursor--;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
-                    func_0805A8D0();
+                    JiminyReloadPlainRows();
                 }
             } else if (GetKeysRepeat() & DPAD_DOWN) {
-                if (gJiminyWork->unk_C78 < gJiminyWork->unk_C76 - gJiminyWork->unk_C72) {
-                    gJiminyWork->unk_CC0 = 1;
-                    gJiminyWork->unk_C72++;
+                if (gJiminyWork->visibleRows < gJiminyWork->itemCount - gJiminyWork->cursor) {
+                    gJiminyWork->moveDelay = 1;
+                    gJiminyWork->cursor++;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
-                    func_0805A8D0();
+                    JiminyReloadPlainRows();
                 }
             }
         } else {
-            gJiminyWork->unk_CC0 = 0;
+            gJiminyWork->moveDelay = 0;
         }
-        if (gJiminyWork->unk_CD2 != gJiminyWork->unk_CD4) {
+        if (gJiminyWork->detailIndex != gJiminyWork->nextDetail) {
             if (GetKeysRepeat() & L_BUTTON) {
-                gJiminyWork->unk_000 = 8;
-                gJiminyWork->unk_048 = 0;
-                gJiminyWork->unk_CD2 = gJiminyWork->unk_CD6;
+                gJiminyWork->state = 8;
+                gJiminyWork->stateTimer = 0;
+                gJiminyWork->detailIndex = gJiminyWork->prevDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             } else if (GetKeysRepeat() & R_BUTTON) {
-                gJiminyWork->unk_000 = 8;
-                gJiminyWork->unk_048 = 0;
-                gJiminyWork->unk_CD2 = gJiminyWork->unk_CD4;
+                gJiminyWork->state = 8;
+                gJiminyWork->stateTimer = 0;
+                gJiminyWork->detailIndex = gJiminyWork->nextDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             }
         }
         if (GetKeysPressed() & B_BUTTON) {
-            gJiminyWork->unk_048 = 0;
-            gJiminyWork->unk_000 = 6;
+            gJiminyWork->stateTimer = 0;
+            gJiminyWork->state = 6;
             FadeStartIn(0, 5);
             FadeLock();
             SetModeUpdate(mode_jiminy_1);
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else if (GetKeysPressed() & START_BUTTON) {
-            gJiminyWork->unk_048 = 0;
-            gJiminyWork->unk_000 = 5;
+            gJiminyWork->stateTimer = 0;
+            gJiminyWork->state = 5;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
         break;
     case 5:
-        if (gJiminyWork->unk_048 == 0) {
+        if (gJiminyWork->stateTimer == 0) {
             FadeStartOut(0, 16);
             FadeLock();
         }
         if (FadeGetAmount() > 30) {
-            func_080E052C(0);
+            ReturnToMap(0);
         }
         break;
     }
-    func_080658B8(gJiminyWork->unk_C71);
-    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0 && i < gJiminyWork->unk_C78; i++) {
-        DrawTextSlots(gJiminyWork->unk_CAE, gJiminyWork->unk_CB0 + gJiminyWork->unk_CB2 * i,
+    DrawMsgGlyphs(gJiminyWork->charCount);
+    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0 && i < gJiminyWork->visibleRows; i++) {
+        DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
             gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
     }
     if (gJiminyWork->flags & 8) {
-        DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->unk_D3E >> 3) & 3) + 4,
+        DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3) + 4,
             gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
     }
     if (gJiminyWork->flags & 0x10) {
-        DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->unk_D3E >> 3) & 3),
+        DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
             gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
     }
-    if (gJiminyWork->unk_CD2 != gJiminyWork->unk_CD4) {
-        DrawSprite(-((gJiminyWork->unk_D3E >> 3) & 3) + 0x9A, 5, gUnk_08C6A530,
+    if (gJiminyWork->detailIndex != gJiminyWork->nextDetail) {
+        DrawSprite(-((gJiminyWork->frame >> 3) & 3) + 0x9A, 5, gUnk_08C6A530,
             gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
-        DrawSprite(0xE0 + ((gJiminyWork->unk_D3E >> 3) & 3), 5, gUnk_08C6A53A,
+        DrawSprite(0xE0 + ((gJiminyWork->frame >> 3) & 3), 5, gUnk_08C6A53A,
             gJiminyWork->tiles5, gJiminyWork->palette6, 0, 0, 0);
     }
     switch (gJiminyWork->unk_D30) {
@@ -2516,11 +2516,11 @@ void func_0805BAE4(void) {
         gJiminyWork->unk_D3C--;
     }
     UpdatePlayTime();
-    gJiminyWork->unk_D3E++;
+    gJiminyWork->frame++;
 }
 
 void mode_jiminy_2(void) {
-    func_08065940();
+    FreeMsgGlyphSprites();
     ReleaseObjTiles(gJiminyWork->tiles);
     ReleaseObjPalette(gJiminyWork->palette);
     ReleaseObjTiles(gJiminyWork->tiles2);
@@ -2538,7 +2538,7 @@ void mode_jiminy_2(void) {
     ReleaseObjPalette(gJiminyWork->palette8);
     ReleaseObjTiles(gJiminyWork->tiles8);
     ReleaseObjPalette(gJiminyWork->palette9);
-    func_0805A484();
+    JiminyFreeRows();
     EwramFree(gJiminyWork);
 }
 

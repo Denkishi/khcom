@@ -25,10 +25,10 @@
 #include "battle_actor.h"
 #include "gba/io_reg.h"
 
-void func_080D5A4C(u16 a);
-void func_080D5B04(void);
-void func_080D5B30(void);
-void func_080D59B4(void);
+void TitleShowLogo(u16 a);
+void TitleFinishIntro(void);
+void TitleFadeOut(void);
+void TitleExitToChoice(void);
 
 extern s32 gTitleBgScale;
 extern s32 gTitleBgX;

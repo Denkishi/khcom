@@ -9,7 +9,7 @@
 #include "taskpool.h"
 
 typedef struct StaffRollLabelArg {
-    u16 unk_00;
+    u16 kind;
     u16 unk_02;
     s32 x;
     s32 y;
@@ -17,9 +17,9 @@ typedef struct StaffRollLabelArg {
 
 
 typedef struct StaffRollTaskArg {
-    u16 unk_00;
+    u16 kind;
     u16 unk_02;
-    u16 unk_04;
+    u16 nameIndex;
     u16 unk_06;
     s32 x;
     s32 y;
@@ -28,19 +28,19 @@ typedef struct StaffRollTaskArg {
 } StaffRollTaskArg;
 
 typedef struct StaffRollLogoArg {
-    s32 unk_00;
-    s32 unk_04;
-    s32* unk_08;
-    s32* unk_0C;
-    u16 unk_10;
+    s32 x;
+    s32 y;
+    s32* scrollY;
+    s32* scrollSpeed;
+    u16 animId;
 } StaffRollLogoArg;
 
 typedef struct StaffRollSecnArg {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32* unk_0C;
-    s32* unk_10;
+    s32 index;
+    s32 x;
+    s32 y;
+    s32* scrollY;
+    s32* scrollSpeed;
 } StaffRollSecnArg;
 
 typedef struct StaffRollWork {
@@ -49,48 +49,48 @@ typedef struct StaffRollWork {
     u16 flags;
     u16 unk_004;
     u16 unk_006;
-    s32 unk_008;
-    s32 unk_00C;
-    s32 unk_010;
-    s32 unk_014;
+    s32 phase;
+    s32 phaseTimer;
+    s32 musicFrames;
+    s32 secnCount;
     u8 unk_018[0x60];
-    s32 unk_078;
-    s32 unk_07C;
-    s32 unk_080;
-    s32 unk_084;
-    s32 unk_088;
-    s32 unk_08C;
-    s32 unk_090;
-    s32 unk_094;
-    s32 unk_098;
+    s32 blendMode;
+    s32 blendDuration;
+    s32 blendTimer;
+    s32 sceneState;
+    s32 sceneTimer;
+    s32 sceneStep;
+    s32 sceneIndex;
+    s32 nextScene;
+    s32 sceneScroll;
     StaffRollScene* scene;
-    u8 unk_0A0;
+    u8 creditsEnded;
     u8 unk_0A1[0x3];
-    s32 unk_0A4;
-    s32 unk_0A8;
+    s32 creditsState;
+    s32 creditsTimer;
     s32 unk_0AC;
-    s32 unk_0B0;
-    s32 unk_0B4;
-    s32 unk_0B8;
-    s32 unk_0BC;
-    s32 unk_0C0;
-    s32 unk_0C4;
-    s32 unk_0C8;
-    const s32* unk_0CC;
-    s32 unk_0D0;
-    s32 unk_0D4;
-    s32 unk_0D8;
-    s32 unk_0DC;
-    s32 unk_0E0;
-    s32 unk_0E4;
-    s32 unk_0E8;
-    s32 unk_0EC;
-    s32 unk_0F0;
-    s32 unk_0F4;
+    s32 lastRow;
+    s32 scrollSpeed;
+    s32 scrollY;
+    s32 imageState;
+    s32 imageTimer;
+    s32 endState;
+    s32 endTimer;
+    const s32* script;
+    s32 scriptPos;
+    s32 scriptFrame;
+    s32 activeOp;
+    s32 moveObj;
+    s32 opTimer;
+    s32 moveStartX;
+    s32 moveStartY;
+    s32 moveEndX;
+    s32 moveEndY;
+    s32 opDuration;
     ObjPalette* palette;
     TaskPool tasks;
     TaskPool tasks2;
-    Task* unk_124[6];
+    Task* subTasks[6];
     EvtObj objs[3];
     SrollWork text;
 } StaffRollWork;

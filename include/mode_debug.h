@@ -25,8 +25,8 @@
 #include "m4a.h"
 #include "battle_actor.h"
 typedef struct DebugWork {
-    s8 unk_00;
-    s8 unk_01;
+    s8 cursor;
+    s8 page;
     u8 unk_02[0x02];
     void* tiles;
     void* palette;

@@ -12,13 +12,13 @@
 #include "world_types.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
-s32* gUnk_02039DC4 EWRAM_COMMON(4);
+s32* gLockonDoorPosition EWRAM_COMMON(4);
 
-void func_08019050(u16 a, s32 b, s32 c, s32 d) {
-    gBtlWork->unk_028 = b;
-    gBtlWork->unk_01A = a;
-    gBtlWork->unk_01C = c;
-    gBtlWork->unk_020 = d;
+void SetBattleZoom(u16 a, s32 b, s32 c, s32 d) {
+    gBtlWork->zoomScale = b;
+    gBtlWork->zoomSteps = a;
+    gBtlWork->zoomX = c;
+    gBtlWork->zoomY = d;
 }
 
 void AnimChangeWithDef(const AnimDef* tbl, void* a, u16 i, u16 j, void* obj) {
@@ -38,18 +38,18 @@ void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
     s32 v;
 
     if (gBtlWork->scale == 0x100) {
-        x = (px >> 8) - (gBtlWork->unk_000 >> 8);
-        y = ((py >> 8) + (pz >> 8)) - (gBtlWork->unk_004 >> 8);
+        x = (px >> 8) - (gBtlWork->viewX >> 8);
+        y = ((py >> 8) + (pz >> 8)) - (gBtlWork->viewY >> 8);
     } else {
-        x = (((px >> 8) - (gBtlWork->unk_000 >> 8)) * gBtlWork->scale) >> 8;
-        y = ((((py >> 8) + (pz >> 8)) - (gBtlWork->unk_004 >> 8)) * gBtlWork->scale) >> 8;
+        x = (((px >> 8) - (gBtlWork->viewX >> 8)) * gBtlWork->scale) >> 8;
+        y = ((((py >> 8) + (pz >> 8)) - (gBtlWork->viewY >> 8)) * gBtlWork->scale) >> 8;
     }
 
-    if (gBtlWork->unk_018 == 0) {
+    if (gBtlWork->rotation == 0) {
         *a = x + 120;
         *b = y + 80;
     } else {
-        ang = -gBtlWork->unk_018;
+        ang = -gBtlWork->rotation;
         sine = gSineTable;
         c = ang + 64;
         idx = c & 255;
@@ -61,15 +61,15 @@ void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
         *b = (v >> 8) + 80;
     }
 }
-void func_08019190(BtlObj* p, s16 b) {
-    UnkStruct_0801B8A8 a;
+void CreateBtlPopTask(BtlObj* p, s16 b) {
+    BtlPrizeSrc a;
     s16* t;
 
     if (b != 9) {
-        if (p->unk_0D8 != 0) {
-            t = &p->unk_0D8->unk_104;
+        if (p->parent != 0) {
+            t = &p->parent->popCooldown;
         } else {
-            t = &p->unk_104;
+            t = &p->popCooldown;
         }
 
         if (*t > 0) {
@@ -79,18 +79,18 @@ void func_08019190(BtlObj* p, s16 b) {
     }
     a.x = p->x;
     a.y = p->y;
-    a.z = p->z - ((p->unk_09C / 2) << 8);
+    a.z = p->z - ((p->height / 2) << 8);
     if (gGameState.flags & 8) {
         if (b == 9) {
-            a.unk_12 = abs(gBtlWork->unk_1CA);
+            a.kind = abs(gBtlWork->breakDifference);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &a);
             return;
         }
-        a.unk_12 = b;
+        a.kind = b;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
         return;
     }
-    a.unk_12 = b;
+    a.kind = b;
 
     if (b == 9) {
         if (p->flags & 0x200000000000) {
@@ -107,11 +107,11 @@ void BtlWorkInit(void) {
     u8* d;
     u8* p;
     CpuSet(&zero, gBtlWork, 0x05000074);
-    gBtlWork->unk_0A0 = 0;
-    gBtlWork->unk_0FC = 0xFFFF0000;
-    gBtlWork->unk_12C = 0x42;
+    gBtlWork->phase = 0;
+    gBtlWork->fadeExcludedPalettes = 0xFFFF0000;
+    gBtlWork->gravity = 0x42;
     gBtlWork->fadeAmount = 10;
-    d = gBtlWork->unk_13C;
+    d = gBtlWork->savedProgression;
     p = (u8*)&gGameState;
     p += offsetof(GameState, progression);
     memcpy(d, p, 0x88);
@@ -119,7 +119,7 @@ void BtlWorkInit(void) {
     ListPoolInit(&gBtlWork->pool2);
 }
 
-void func_080192E0(void) {
+void UpdateEnemyCardUse(void) {
     BtlObj* p;
 
     if (gBtlWork->flags & 0x40) {
@@ -139,10 +139,10 @@ void func_080192E0(void) {
         return;
     }
     gBtlWork->actor3 = p;
-    func_08091234(p->unk_000);
+    UseEnemyCard(p->kind);
 }
 
-void func_08019350(void) {
+void HandleSoraCardInput(void) {
     BtlObj* p;
     u16 t;
     u16 a;
@@ -150,13 +150,13 @@ void func_08019350(void) {
     if (gBtlWork->flags & 0x20000000000000) {
         return;
     }
-    t = gBtlWork->unk_1CC;
+    t = gBtlWork->listSwitchTimer;
 
     if ((s16)t > 0) {
-        gBtlWork->unk_1CC = t - 1;
+        gBtlWork->listSwitchTimer = t - 1;
 
-        if (gBtlWork->unk_1CC == 0) {
-            func_08076394();
+        if (gBtlWork->listSwitchTimer == 0) {
+            RequestSwitchSoraCardList();
         }
         return;
     }
@@ -165,7 +165,7 @@ void func_08019350(void) {
         if (!(gGameState.flags & 8)) {
             if (GetKeysHeld() & A_BUTTON) {
                 if (!(GetKeysHeld() & (L_BUTTON | R_BUTTON))) {
-                    func_080763F0();
+                    SetSoraReloadCharging();
                 }
             }
         }
@@ -178,44 +178,44 @@ void func_08019350(void) {
 
     switch (a) {
     case L_BUTTON:
-        func_08076318();
+        RequestSoraNextCard();
         break;
     case R_BUTTON:
-        func_08076324();
+        RequestSoraPrevCard();
         break;
     }
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        func_08076394();
+        RequestSwitchSoraCardList();
     }
 
-    if (func_080763D0() != 0) {
-        gBtlWork->unk_0E2 = 0;
-        gBtlWork->unk_0E3 = 0;
+    if (IsSoraReloadCardSelected() != 0) {
+        gBtlWork->lHeldFrames = 0;
+        gBtlWork->rHeldFrames = 0;
     } else {
         if ((GetKeysHeld() & L_BUTTON) && !(GetKeysHeld() & R_BUTTON)) {
-            if (gBtlWork->unk_0E2 < 255) {
-                gBtlWork->unk_0E2++;
+            if (gBtlWork->lHeldFrames < 255) {
+                gBtlWork->lHeldFrames++;
             }
         } else {
-            gBtlWork->unk_0E2 = 0;
+            gBtlWork->lHeldFrames = 0;
         }
 
         if ((GetKeysHeld() & R_BUTTON) && !(GetKeysHeld() & L_BUTTON)) {
-            if (gBtlWork->unk_0E3 < 255) {
-                gBtlWork->unk_0E3++;
+            if (gBtlWork->rHeldFrames < 255) {
+                gBtlWork->rHeldFrames++;
             }
         } else {
-            gBtlWork->unk_0E3 = 0;
+            gBtlWork->rHeldFrames = 0;
         }
     }
 
-    if (gBtlWork->unk_0E2 > 32) {
-        func_08076318();
+    if (gBtlWork->lHeldFrames > 32) {
+        RequestSoraNextCard();
     }
 
-    if (gBtlWork->unk_0E3 > 32) {
-        func_08076324();
+    if (gBtlWork->rHeldFrames > 32) {
+        RequestSoraPrevCard();
     }
     p = gBtlWork->actor;
 
@@ -236,25 +236,25 @@ void func_08019350(void) {
     }
 
     if (a == (L_BUTTON | R_BUTTON)) {
-        if (func_0807B3E0() > 2) {
-            func_08076348();
+        if (GetSoraStockCount() > 2) {
+            RequestSoraStockUse();
         } else {
-            func_0807633C();
+            RequestSoraCardStock();
         }
     }
 
     if (GetKeysPressed() & A_BUTTON) {
-        func_08076330();
+        RequestSoraCardUse();
 
-        if (func_0807B3C8() == 3) {
-            if (func_0807643C() == 0) {
-                gBtlWork->unk_1CC = 15;
+        if (GetSoraCardListIndex() == 3) {
+            if (IsSoraSelectionEmpty() == 0) {
+                gBtlWork->listSwitchTimer = 15;
             }
         }
     }
 }
 
-void func_080195A8(void) {
+void HandleRikuCardInput(void) {
     BtlObj* p;
     u16 t;
     u16 a;
@@ -262,13 +262,13 @@ void func_080195A8(void) {
     if (gRikuBtlWork->flags & 0x1000000) {
         return;
     }
-    t = gRikuBtlWork->unk_1CC;
+    t = gRikuBtlWork->listSwitchTimer;
 
     if ((s16)t > 0) {
-        gRikuBtlWork->unk_1CC = t - 1;
+        gRikuBtlWork->listSwitchTimer = t - 1;
 
-        if (gRikuBtlWork->unk_1CC == 0) {
-            func_0807E260();
+        if (gRikuBtlWork->listSwitchTimer == 0) {
+            RequestSwitchRikuCardList();
         }
         return;
     }
@@ -277,44 +277,44 @@ void func_080195A8(void) {
 
     switch (a) {
     case L_BUTTON:
-        func_0807E1F4();
+        RequestRikuNextCard();
         break;
     case R_BUTTON:
-        func_0807E200();
+        RequestRikuPrevCard();
         break;
     }
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        func_0807E260();
+        RequestSwitchRikuCardList();
     }
 
-    if (func_0807E29C() != 0) {
-        gBtlWork->unk_0E2 = 0;
-        gBtlWork->unk_0E3 = 0;
+    if (IsRikuReloadCardSelected() != 0) {
+        gBtlWork->lHeldFrames = 0;
+        gBtlWork->rHeldFrames = 0;
     } else {
         if ((GetKeysHeld() & L_BUTTON) && !(GetKeysHeld() & R_BUTTON)) {
-            if (gBtlWork->unk_0E2 < 255) {
-                gBtlWork->unk_0E2++;
+            if (gBtlWork->lHeldFrames < 255) {
+                gBtlWork->lHeldFrames++;
             }
         } else {
-            gBtlWork->unk_0E2 = 0;
+            gBtlWork->lHeldFrames = 0;
         }
 
         if ((GetKeysHeld() & R_BUTTON) && !(GetKeysHeld() & L_BUTTON)) {
-            if (gBtlWork->unk_0E3 < 255) {
-                gBtlWork->unk_0E3++;
+            if (gBtlWork->rHeldFrames < 255) {
+                gBtlWork->rHeldFrames++;
             }
         } else {
-            gBtlWork->unk_0E3 = 0;
+            gBtlWork->rHeldFrames = 0;
         }
     }
 
-    if (gBtlWork->unk_0E2 > 32) {
-        func_0807E1F4();
+    if (gBtlWork->lHeldFrames > 32) {
+        RequestRikuNextCard();
     }
 
-    if (gBtlWork->unk_0E3 > 32) {
-        func_0807E200();
+    if (gBtlWork->rHeldFrames > 32) {
+        RequestRikuPrevCard();
     }
     p = gRikuBtlWork->actor;
 
@@ -335,25 +335,25 @@ void func_080195A8(void) {
     }
 
     if (a == (L_BUTTON | R_BUTTON)) {
-        if (func_0807B3F8() > 2) {
-            func_0807E224();
+        if (GetRikuStockCount() > 2) {
+            RequestRikuStockUse();
         } else {
-            func_0807E218();
+            RequestRikuCardStock();
         }
     }
 
     if (GetKeysPressed() & A_BUTTON) {
-        func_0807E20C();
+        RequestRikuCardUse();
 
-        if (func_08081838() == 3) {
-            if (func_0807E34C() == 0) {
-                gRikuBtlWork->unk_1CC = 15;
+        if (GetRikuCardListIndex() == 3) {
+            if (IsRikuSelectionEmpty() == 0) {
+                gRikuBtlWork->listSwitchTimer = 15;
             }
         }
     }
 }
 
-void func_080197AC(void) {
+void HandleTutorialCardInput(void) {
     BtlObj* p;
     u16 a;
     u16 pressed;
@@ -364,7 +364,7 @@ void func_080197AC(void) {
             if (!(gGameState.flags & 8)) {
                 if (GetKeysHeld() & A_BUTTON) {
                     if (!(GetKeysHeld() & (L_BUTTON | R_BUTTON))) {
-                        func_080763F0();
+                        SetSoraReloadCharging();
                     }
                 }
             }
@@ -381,49 +381,49 @@ void func_080197AC(void) {
     if (!(gBtlWork->flags & 0x4000000000)) {
         switch (a) {
         case L_BUTTON:
-            func_08076318();
+            RequestSoraNextCard();
             break;
         case R_BUTTON:
-            func_08076324();
+            RequestSoraPrevCard();
             break;
         }
     }
 
     if (!(gBtlWork->flags & 0x10000000000)) {
         if (pressed & SELECT_BUTTON) {
-            func_08076394();
+            RequestSwitchSoraCardList();
         }
     }
 
     if (!(gBtlWork->flags & 0x4000000000)) {
-        if (func_080763D0() != 0) {
-            gBtlWork->unk_0E2 = 0;
-            gBtlWork->unk_0E3 = 0;
+        if (IsSoraReloadCardSelected() != 0) {
+            gBtlWork->lHeldFrames = 0;
+            gBtlWork->rHeldFrames = 0;
         } else {
             if ((held & L_BUTTON) && !(held & R_BUTTON)) {
-                if (gBtlWork->unk_0E2 < 255) {
-                    gBtlWork->unk_0E2++;
+                if (gBtlWork->lHeldFrames < 255) {
+                    gBtlWork->lHeldFrames++;
                 }
             } else {
-                gBtlWork->unk_0E2 = 0;
+                gBtlWork->lHeldFrames = 0;
             }
 
             if ((held & R_BUTTON) && !(held & L_BUTTON)) {
-                if (gBtlWork->unk_0E3 < 255) {
-                    gBtlWork->unk_0E3++;
+                if (gBtlWork->rHeldFrames < 255) {
+                    gBtlWork->rHeldFrames++;
                 }
             } else {
-                gBtlWork->unk_0E3 = 0;
+                gBtlWork->rHeldFrames = 0;
             }
         }
     }
 
-    if (gBtlWork->unk_0E2 > 32) {
-        func_08076318();
+    if (gBtlWork->lHeldFrames > 32) {
+        RequestSoraNextCard();
     }
 
-    if (gBtlWork->unk_0E3 > 32) {
-        func_08076324();
+    if (gBtlWork->rHeldFrames > 32) {
+        RequestSoraPrevCard();
     }
     p = gBtlWork->actor;
 
@@ -444,24 +444,24 @@ void func_080197AC(void) {
     }
 
     if (a == (L_BUTTON | R_BUTTON)) {
-        if (func_0807B3E0() > 2) {
+        if (GetSoraStockCount() > 2) {
             if (!(gBtlWork->flags & 0x4000000000000)) {
-                func_08076348();
+                RequestSoraStockUse();
             }
         } else {
             if (!(gBtlWork->flags & 0x8000000000)) {
-                func_0807633C();
+                RequestSoraCardStock();
             }
         }
     }
 
     if (!(gBtlWork->flags & 0x2000000000)) {
         if (pressed & A_BUTTON) {
-            func_08076330();
+            RequestSoraCardUse();
         }
     }
 }
-void func_08019A30(void) {
+void MakeOpponentsHittable(void) {
     BtlWork* w = gBtlWork;
     BtlObj* p;
 
@@ -476,7 +476,7 @@ void func_08019A30(void) {
 
         while (p != 0) {
             p->flags &= ~0x80;
-            p->unk_0E2 = 0;
+            p->invincibleTimer = 0;
             p = ListPoolNext(&p->node);
         }
         return;
@@ -485,11 +485,11 @@ void func_08019A30(void) {
     p->flags &= ~0x80;
 }
 
-void func_08019ACC(s32 a, s32 b, s32 c) {
+void DropFriendCard(s32 a, s32 b, s32 c) {
     u16 flags;
     s16 v;
 
-    flags = gGameState.progression.unk_84;
+    flags = gGameState.progression.friendFlags;
 
     if (gBtlWork->flags & 0x800000000LL) {
         return;
@@ -497,8 +497,8 @@ void func_08019ACC(s32 a, s32 b, s32 c) {
 
     if (gGameState.flags & 8) {
         if (flags & 0x80) {
-            func_0800FDD0(244);
-            func_0809B644(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
+            SetJiminyFlag(244);
+            CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
         }
         return;
     }
@@ -510,31 +510,31 @@ void func_08019ACC(s32 a, s32 b, s32 c) {
         case WORLD_AGRABAH:
             if (flags & 4) {
                 v = 2;
-                func_0800FDD0(159);
+                SetJiminyFlag(159);
             }
             break;
         case WORLD_ATLANTICA:
             if (flags & 8) {
                 v = 3;
-                func_0800FDD0(160);
+                SetJiminyFlag(160);
             }
             break;
         case WORLD_HALLOWEEN_TOWN:
             if (flags & 0x10) {
                 v = 4;
-                func_0800FDD0(161);
+                SetJiminyFlag(161);
             }
             break;
         case WORLD_NEVER_LAND:
             if (flags & 0x20) {
                 v = 5;
-                func_0800FDD0(162);
+                SetJiminyFlag(162);
             }
             break;
         case WORLD_HOLLOW_BASTION:
             if (flags & 0x40) {
                 v = 6;
-                func_0800FDD0(163);
+                SetJiminyFlag(163);
             }
             break;
         }
@@ -544,23 +544,23 @@ void func_08019ACC(s32 a, s32 b, s32 c) {
         if (GetRandom() % 2 != 0) {
             if (flags & 1) {
                 v = 0;
-                func_0800FDD0(158);
+                SetJiminyFlag(158);
             }
         } else {
             if (flags & 2) {
                 v = 1;
-                func_0800FDD0(157);
+                SetJiminyFlag(157);
             }
         }
     }
 
     if (v != -1) {
-        func_0809B644(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, v);
+        CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, v);
     }
 }
 
-void func_08019C5C(void) {
-    gBtlWork->unk_0A0 = 1;
+void EndCardPlay(void) {
+    gBtlWork->phase = 1;
 
     if (!(gBtlWork->flags & 0x800000)) {
         gBtlWork->flags |= 0x20;
@@ -578,39 +578,39 @@ void _08019CB4(void) {
     BtlPrizeArgs pos;
 
     player = gBtlWork->actor;
-    if (gBtlWork->unk_0F4 == 53) {
-        gBtlWork->unk_12C = 38;
+    if (gBtlWork->hcEffect == 53) {
+        gBtlWork->gravity = 38;
     } else {
-        gBtlWork->unk_12C = 66;
+        gBtlWork->gravity = 66;
     }
-    if (gBtlWork->unk_0F4 == 19) {
+    if (gBtlWork->hcEffect == 19) {
         if (!(gBtlWork->flags & 0x40) && gFrameCounter % 30 == 0) {
-            gBtlWork->unk_130 = (gBtlWork->unk_0DA + GetRandom() % (gBtlWork->unk_0DC - gBtlWork->unk_0DA + 1)) * 256;
-            gBtlWork->unk_134 = (gBtlWork->unk_0DE + GetRandom() % (gBtlWork->unk_0E0 - gBtlWork->unk_0DE + 1)) * 256;
-            gBtlWork->unk_138 = 0;
+            gBtlWork->targetX = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) * 256;
+            gBtlWork->targetY = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) * 256;
+            gBtlWork->targetZ = 0;
         }
     } else {
-        gBtlWork->unk_130 = gBtlWork->actor->x;
-        gBtlWork->unk_134 = gBtlWork->actor->y;
-        gBtlWork->unk_138 = gBtlWork->actor->z;
+        gBtlWork->targetX = gBtlWork->actor->x;
+        gBtlWork->targetY = gBtlWork->actor->y;
+        gBtlWork->targetZ = gBtlWork->actor->z;
     }
     gBtlWork->flags &= ~1ULL;
-    switch ((u32)gBtlWork->unk_0A0) {
+    switch ((u32)gBtlWork->phase) {
     case 1:
     case 2:
         if (gBtlWork->flags & 0x800000000ULL) {
-            func_080197AC();
+            HandleTutorialCardInput();
 #ifdef VERSION_EU
             eu_08013190();
 #else
-            func_0800F230();
+            HandleRikuAiCardInput();
 #endif
         } else if (gBtlWork->flags & 0x800) {
-            func_08019350();
-            func_0800F230();
+            HandleSoraCardInput();
+            HandleRikuAiCardInput();
         } else {
-            func_080192E0();
-            func_08019350();
+            UpdateEnemyCardUse();
+            HandleSoraCardInput();
         }
         break;
     }
@@ -622,8 +622,8 @@ void _08019CB4(void) {
         if (gBtlWork->flags & 0x800) {
             gRikuBtlWork->flags &= ~2ULL;
         }
-        gBtlWork->unk_0A0 = 1;
-        if (gBtlWork->unk_0A4) {
+        gBtlWork->phase = 1;
+        if (gBtlWork->soraOwnsPlay) {
             BtlObj* obj;
             gBtlWork->flags &= ~0x40ULL;
             obj = gBtlWork->actor3;
@@ -637,13 +637,13 @@ void _08019CB4(void) {
             FadeFromAmount(3, 10, 4);
         }
         MosaicStartIn(16, 15);
-        func_08019050(1, 256, gBtlWork->x2, gBtlWork->y2);
-        gBtlWork->unk_0E4 = 0;
+        SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
+        gBtlWork->phaseStep = 0;
     }
     if (gBtlWork->flags & 0x400) {
         changed = 1;
         gBtlWork->flags &= ~0x400ULL;
-        if (gBtlWork->unk_0A4) {
+        if (gBtlWork->soraOwnsPlay) {
             gBtlWork->flags |= 0x20000000ULL;
             player->flags |= 1;
         } else {
@@ -654,32 +654,32 @@ void _08019CB4(void) {
                 obj->flags |= 1;
             }
         }
-        gBtlWork->unk_0A0 = 2;
-        gBtlWork->unk_0E4 = 0;
+        gBtlWork->phase = 2;
+        gBtlWork->phaseStep = 0;
     } else {
         changed = 0;
     }
     if (gBtlWork->flags & 0x400000000000ULL) {
-        if (gBtlWork->unk_0A0 != 3) {
-            gBtlWork->unk_0A0 = 3;
-            gBtlWork->unk_0E4 = 0;
+        if (gBtlWork->phase != 3) {
+            gBtlWork->phase = 3;
+            gBtlWork->phaseStep = 0;
         }
     } else if (gBtlWork->flags & 0x200000000ULL) {
-        if (gBtlWork->unk_0A0 != 4) {
-            gBtlWork->unk_0A0 = 4;
-            gBtlWork->unk_0E4 = 0;
-            switch ((u32)gBtlWork->unk_10C) {
+        if (gBtlWork->phase != 4) {
+            gBtlWork->phase = 4;
+            gBtlWork->phaseStep = 0;
+            switch ((u32)gBtlWork->battleId) {
             case 120:
             case 124:
                 pos.x = 0x10000;
-                pos.y = (gBtlWork->unk_0DE + gBtlWork->unk_0E0) * 128;
+                pos.y = (gBtlWork->yMin + gBtlWork->yMax) * 128;
                 pos.z = -0x4600;
                 CreateBossPrizeCardTask(gBtlWork->taskPools, &pos);
                 break;
             case 121:
                 if (gBtlWork->flags & 0x100000) {
                     pos.x = 0x10000;
-                    pos.y = (gBtlWork->unk_0DE + gBtlWork->unk_0E0) * 128;
+                    pos.y = (gBtlWork->yMin + gBtlWork->yMax) * 128;
                     pos.z = -0x4600;
                     CreateBossPrizeCardTask(gBtlWork->taskPools, &pos);
                 }
@@ -687,29 +687,29 @@ void _08019CB4(void) {
             }
         }
     }
-    switch ((u32)gBtlWork->unk_0A0) {
+    switch ((u32)gBtlWork->phase) {
     case 0:
-        if ((s16)gBtlWork->unk_0E4 == 0) {
+        if ((s16)gBtlWork->phaseStep == 0) {
             if (!(gBtlWork->flags & 0x800000000ULL)) {
                 gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, 0);
             }
-            gBtlWork->unk_0E4 = 1;
+            gBtlWork->phaseStep = 1;
         }
         if (FadeIsActive()) {
             break;
         }
-        if ((s16)gBtlWork->unk_0E4 == 1) {
+        if ((s16)gBtlWork->phaseStep == 1) {
             for (i = 0; i < 32; i++) {
-                if (gBtlWork->unk_0FC & (s32)(1U << i)) {
+                if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) {
                     FadeSetPaletteExcluded(i, 1);
                 }
             }
-            gBtlWork->unk_0E4 = 2;
+            gBtlWork->phaseStep = 2;
         }
         if (IsTaskActiveNamed(gBtlWork->task, gTaskDescBtlStart.name)) {
             break;
         }
-        if ((s16)gBtlWork->unk_0E4 == 2) {
+        if ((s16)gBtlWork->phaseStep == 2) {
             gBtlWork->flags |= 0x40000ULL;
             gBtlWork->flags &= ~0x4000000ULL;
             TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, 0);
@@ -719,7 +719,7 @@ void _08019CB4(void) {
             }
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlExp, 0);
             if (!(gBtlWork->flags & 4) && !(gBtlWork->flags & 0x800)) {
-                switch ((u32)gBtlWork->unk_10C) {
+                switch ((u32)gBtlWork->battleId) {
                 case 120:
                 case 122:
                 case 123:
@@ -733,7 +733,7 @@ void _08019CB4(void) {
                 case 184:
                     break;
                 default:
-                    if (gUnk_03006C10 & 1) {
+                    if (gDebugFlags & 1) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
                     } else if (gGameState.progression.unk_82 & 0x20) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
@@ -743,44 +743,44 @@ void _08019CB4(void) {
             }
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
             if (gBtlWork->flags & 0x800000000ULL) {
-                if (gBtlWork->unk_10C == 179) {
+                if (gBtlWork->battleId == 179) {
                     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
                 }
             } else if (gBtlWork->flags & 0x800) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
             }
-            func_08076360();
+            RequestOpenCards();
             func_080838E8();
-            gBtlWork->unk_0E4 = 3;
-        } else if ((s16)gBtlWork->unk_0E4 == 3) {
-            gBtlWork->unk_0A0 = 1;
-            gBtlWork->unk_0E4 = 0;
-            if (gGameState.unk_1B8 == 5) {
-                func_08019ACC(0x10000, gBtlWork->actor->y, gBtlWork->actor->z - 0x7800);
+            gBtlWork->phaseStep = 3;
+        } else if ((s16)gBtlWork->phaseStep == 3) {
+            gBtlWork->phase = 1;
+            gBtlWork->phaseStep = 0;
+            if (gGameState.roomEffect == 5) {
+                DropFriendCard(0x10000, gBtlWork->actor->y, gBtlWork->actor->z - 0x7800);
             }
         }
         break;
     case 1:
         break;
     case 4:
-        if ((s16)gBtlWork->unk_0E4 == 0) {
-            func_08076374();
-            func_080838EC();
+        if ((s16)gBtlWork->phaseStep == 0) {
+            RequestCloseCards();
+            RequestBossCardClose();
             gBtlWork->flags &= ~0x40000ULL;
             if (gBtlWork->flags & 0x200000) {
                 gBtlWork->flags |= 0x40000000ULL;
                 FadeToOriginal(0, 8);
             }
-            func_08019050(8, 256, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= 0x20;
             gBtlWork->actor2 = 0;
-            gBtlWork->unk_0E4 = 1;
-            gBtlWork->unk_0F4 = 0;
+            gBtlWork->phaseStep = 1;
+            gBtlWork->hcEffect = 0;
             gBtlWork->flags |= 0x100000000000000ULL;
-        } else if ((s16)gBtlWork->unk_0E4 == 1) {
-            gBtlWork->unk_0E4 = 2;
+        } else if ((s16)gBtlWork->phaseStep == 1) {
+            gBtlWork->phaseStep = 2;
         } else {
-            if (func_080128EC()) {
+            if (BgFxIsActive()) {
                 break;
             }
             if (gBtlWork->flags & 0x80000) {
@@ -790,88 +790,88 @@ void _08019CB4(void) {
                 break;
             }
             if (gBtlWork->flags & 0x8000000000000ULL) {
-                if ((s16)gBtlWork->unk_0E4 == 2) {
-                    func_0801C104();
-                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gUnk_09EE7804, 0);
+                if ((s16)gBtlWork->phaseStep == 2) {
+                    ReleaseBattleTiles();
+                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescPremireChance, 0);
                     gBtlWork->flags |= 0x4000000ULL;
                     gBtlWork->flags |= 0x2000ULL;
-                    gBtlWork->unk_0E4 = -1;
+                    gBtlWork->phaseStep = -1;
                 } else {
-                    if (IsTaskActiveNamed(gBtlWork->task, *(const char**)&gUnk_09EE7804)) {
+                    if (IsTaskActiveNamed(gBtlWork->task, *(const char**)&gTaskDescPremireChance)) {
                         break;
                     }
                     gBtlWork->flags &= ~0x8000000000000ULL;
-                    gBtlWork->unk_0E4 = 2;
+                    gBtlWork->phaseStep = 2;
                 }
                 break;
             }
-            if (gBtlWork->unk_0FA != 0) {
-                if ((s16)gBtlWork->unk_0E4 == 2) {
-                    func_0801C104();
+            if (gBtlWork->pendingLevelUps != 0) {
+                if ((s16)gBtlWork->phaseStep == 2) {
+                    ReleaseBattleTiles();
                     gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, 0);
                     gBtlWork->flags |= 0x4000000ULL;
                     gBtlWork->flags |= 0x2000ULL;
-                    gBtlWork->unk_0E4 = -1;
+                    gBtlWork->phaseStep = -1;
                 }
                 break;
             }
-            if ((s16)gBtlWork->unk_0E4 == -1) {
+            if ((s16)gBtlWork->phaseStep == -1) {
                 if (!IsTaskActive(gBtlWork->task)) {
                     BtlObj* healed;
-                    gBtlWork->unk_0E4 = 2;
+                    gBtlWork->phaseStep = 2;
                     healed = gBtlWork->actor;
-                    healed->unk_02C = gGameState.progression.maxHp;
-                    healed->unk_02E = gGameState.progression.maxHp;
+                    healed->hp = gGameState.progression.maxHp;
+                    healed->maxHp = gGameState.progression.maxHp;
                 }
                 break;
             }
-            if ((s16)gBtlWork->unk_0E4 == 2 && !FadeIsActive()) {
+            if ((s16)gBtlWork->phaseStep == 2 && !FadeIsActive()) {
                 gBtlWork->flags |= 0x4000000ULL;
-                gBtlWork->unk_072 = 99;
-                gBtlWork->unk_0E4 = 3;
-            } else if ((s16)gBtlWork->unk_0E4 == 3) {
+                gBtlWork->hitStop = 99;
+                gBtlWork->phaseStep = 3;
+            } else if ((s16)gBtlWork->phaseStep == 3) {
                 SetBackdropColor(0, 0, 0);
                 FadeStartOut(0, 15);
                 FadeLock();
-                gBtlWork->unk_0E4 = 4;
+                gBtlWork->phaseStep = 4;
             } else if (!FadeIsActive()) {
-                func_0801C314();
+                ExitBattle();
             }
         }
         break;
     case 3:
-        if ((s16)gBtlWork->unk_0E4 == 0) {
-            func_08076374();
-            func_080838EC();
+        if ((s16)gBtlWork->phaseStep == 0) {
+            RequestCloseCards();
+            RequestBossCardClose();
             gBtlWork->flags &= ~0x40000ULL;
             gBtlWork->flags |= 0x20;
             gBtlWork->actor2 = 0;
-            gBtlWork->unk_120 = 0;
+            gBtlWork->pendingEnemies = 0;
         }
-        if ((s16)gBtlWork->unk_0E4 == 140) {
+        if ((s16)gBtlWork->phaseStep == 140) {
             FadeStartOut(1, 100);
             FadeLock();
             gBtlWork->flags |= 0x4000000ULL;
             gBtlWork->flags |= 0x400000ULL;
-            gBtlWork->unk_072 = 100;
-        } else if ((s16)gBtlWork->unk_0E4 > 140 && !FadeIsActive()) {
+            gBtlWork->hitStop = 100;
+        } else if ((s16)gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
-            if (gUnk_03006C10 & 1) {
+            if (gDebugFlags & 1) {
                 ModeRequest(&gModeChkbtl, 0);
             } else {
                 GameState* state = &gGameState;
-                memcpy(&state->progression.maxHp, gBtlWork->unk_13C, 0x88);
+                memcpy(&state->progression.maxHp, gBtlWork->savedProgression, 0x88);
                 state->flags |= 0x40;
-                switch ((u32)gBtlWork->unk_10C) {
+                switch ((u32)gBtlWork->battleId) {
                 case 166:
-                    state->progression.unk_84 = 0;
+                    state->progression.friendFlags = 0;
                     break;
                 case 174:
-                    state->progression.unk_84 &= ~3;
+                    state->progression.friendFlags &= ~3;
                     break;
 #ifdef VERSION_EU
                 case 158:
-                    state->progression.unk_84 &= ~0x20;
+                    state->progression.friendFlags &= ~0x20;
                     break;
 #endif
                 }
@@ -879,7 +879,7 @@ void _08019CB4(void) {
             }
             break;
         }
-        gBtlWork->unk_0E4++;
+        gBtlWork->phaseStep++;
         break;
     case 2: {
         BtlObj* obj;
@@ -905,7 +905,7 @@ void _08019CB4(void) {
             break;
         }
         count = GetStockMoveCount();
-        gBtlWork->unk_0E4 = 0;
+        gBtlWork->phaseStep = 0;
         if (gBtlWork->flags & 0x800) {
             if (gBtlWork->flags & 0x20000000) {
                 if (gBtlWork->stockMove >= (s8)count) {
@@ -914,7 +914,7 @@ void _08019CB4(void) {
                 if (gBtlWork->flags & 2) {
                     player->flags |= 1;
                 } else {
-                    func_08019C5C();
+                    EndCardPlay();
                 }
             } else {
                 if (gRikuBtlWork->stockMove >= (s8)count) {
@@ -923,7 +923,7 @@ void _08019CB4(void) {
                 if (gRikuBtlWork->flags & 2) {
                     gRikuBtlWork->actor->flags |= 1;
                 } else {
-                    func_08019C5C();
+                    EndCardPlay();
                 }
             }
         } else {
@@ -933,7 +933,7 @@ void _08019CB4(void) {
             if (gBtlWork->flags & 2) {
                 player->flags |= 1;
             } else {
-                func_08019C5C();
+                EndCardPlay();
             }
         }
         break;
@@ -946,23 +946,23 @@ u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY) {
     u16 ry = radiusY;
     u8 r = 0;
 
-    if (*py < (gBtlWork->unk_0DE - (s16)ry) << 8) {
-        *py = (gBtlWork->unk_0DE - (s16)ry) << 8;
+    if (*py < (gBtlWork->yMin - (s16)ry) << 8) {
+        *py = (gBtlWork->yMin - (s16)ry) << 8;
         r = 3;
     }
 
-    if (*py > (gBtlWork->unk_0E0 + (s16)ry) << 8) {
-        *py = (gBtlWork->unk_0E0 + (s16)ry) << 8;
+    if (*py > (gBtlWork->yMax + (s16)ry) << 8) {
+        *py = (gBtlWork->yMax + (s16)ry) << 8;
         r = 4;
     }
 
-    if (*px < (gBtlWork->unk_0DA - (s16)rx) << 8) {
-        *px = (gBtlWork->unk_0DA - (s16)rx) << 8;
+    if (*px < (gBtlWork->xMin - (s16)rx) << 8) {
+        *px = (gBtlWork->xMin - (s16)rx) << 8;
         r = 1;
     }
 
-    if (*px > (gBtlWork->unk_0DC + (s16)rx) << 8) {
-        *px = (gBtlWork->unk_0DC + (s16)rx) << 8;
+    if (*px > (gBtlWork->xMax + (s16)rx) << 8) {
+        *px = (gBtlWork->xMax + (s16)rx) << 8;
         r = 2;
     }
     return r;
@@ -974,18 +974,18 @@ void SetBattleBounds(s32 xMin, s32 xMax, s32 yMin, s32 yMax) {
     u16 c = yMin;
     u16 d = yMax;
 
-    gBtlWork->unk_0DA = a;
-    gBtlWork->unk_0DC = b;
-    gBtlWork->unk_0DE = c;
-    gBtlWork->unk_0E0 = d;
-    func_0801C274(((s16)a + (s16)b) << 7, ((s16)c + (s16)d) << 7, -0x2000);
+    gBtlWork->xMin = a;
+    gBtlWork->xMax = b;
+    gBtlWork->yMin = c;
+    gBtlWork->yMax = d;
+    SetGimmickTarget(((s16)a + (s16)b) << 7, ((s16)c + (s16)d) << 7, -0x2000);
 }
 
-s32 func_0801A978(BtlObj* p) {
+s32 ApplyBtlObjHit(BtlObj* p) {
     if (p->flags & 0x40) {
         p->flags &= ~0x40;
 
-        if (p->unk_024 & 0x20000) {
+        if (p->hitFlags & 0x20000) {
             p->flags |= 0x800000000;
         }
         return 11;
@@ -993,24 +993,24 @@ s32 func_0801A978(BtlObj* p) {
 
     if (p->flags & 2) {
         p->flags &= ~3;
-        p->unk_02C -= p->unk_020;
+        p->hp -= p->damage;
 
-        if (p->unk_02C < 0) {
-            p->unk_02C = 0;
+        if (p->hp < 0) {
+            p->hp = 0;
         }
         p->flags &= ~1;
-        gBtlWork->unk_072 = gBtlWork->unk_076;
+        gBtlWork->hitStop = gBtlWork->pendingHitStop;
         p->flags |= 0x2280;
-        p->unk_106 = 0;
+        p->hitFlashFrames = 0;
 
-        if (p->unk_02C <= 0) {
+        if (p->hp <= 0) {
             p->flags |= 0x100;
             p->flags &= ~0x4020;
             p->flags |= 0x1000000000;
-            p->unk_0E8 = 0;
-            p->unk_0EC = 0;
+            p->badStatus = 0;
+            p->badStatusTimer = 0;
 
-            if (p->unk_024 & 0x20000) {
+            if (p->hitFlags & 0x20000) {
                 p->flags |= 0x800000000;
             }
 
@@ -1021,53 +1021,53 @@ s32 func_0801A978(BtlObj* p) {
             return 3;
         }
 
-        if (p->unk_000 != 55 && GetRandom() % 8 == 0) {
-            func_08019ACC(p->x, p->y, p->z - 0x7800);
+        if (p->kind != 55 && GetRandom() % 8 == 0) {
+            DropFriendCard(p->x, p->y, p->z - 0x7800);
         }
 
         if (p->flags & 0x40000) {
             p->flags &= ~0x40000;
             p->flags &= ~0x52000004800;
-            p->unk_0E8 = 0;
-            p->unk_0EC = 0;
+            p->badStatus = 0;
+            p->badStatusTimer = 0;
             return 7;
         }
 
         if (p->flags & 0x4000) {
             p->flags &= ~0x52000004800;
 
-            if (p->unk_0E8 != 1) {
-                p->unk_0E8 = 1;
-                p->unk_0EC = 240;
+            if (p->badStatus != 1) {
+                p->badStatus = 1;
+                p->badStatusTimer = 240;
             }
             return 6;
         }
 
         if (p->flags & 0x2000000000) {
             p->flags &= ~0x52000004800;
-            p->unk_0E8 = 4;
-            p->unk_0EC = 300;
+            p->badStatus = 4;
+            p->badStatusTimer = 300;
             return 12;
         }
 
         if (p->flags & 0x10000000000) {
             p->flags &= ~0x52000004800;
-            p->unk_0E8 = 3;
-            p->unk_0EC = 300;
+            p->badStatus = 3;
+            p->badStatusTimer = 300;
             return 1;
         }
 
         if (p->flags & 0x40000000000) {
             p->flags &= ~0x52000004800;
 
-            if (p->unk_0E8 != 5) {
-                p->unk_0E8 = 5;
-                p->unk_0EC = 600;
+            if (p->badStatus != 5) {
+                p->badStatus = 5;
+                p->badStatusTimer = 600;
             }
             return 1;
         }
-        p->unk_0E8 = 0;
-        p->unk_0EC = 0;
+        p->badStatus = 0;
+        p->badStatusTimer = 0;
         return 1;
     }
 
@@ -1080,8 +1080,8 @@ s32 func_0801A978(BtlObj* p) {
     if (p->flags & 0x20000000) {
         p->flags &= ~0x20000000;
 
-        if (p->unk_02C > 0) {
-            func_0801AF08(p);
+        if (p->hp > 0) {
+            ClearBtlObjActionFlags(p);
             return 9;
         }
         return 0;
@@ -1089,103 +1089,103 @@ s32 func_0801A978(BtlObj* p) {
 
     if (p->flags & 0x800) {
         p->flags &= ~0x52000004800;
-        gBtlWork->unk_072 = gBtlWork->unk_076;
-        func_0801AF08(p);
+        gBtlWork->hitStop = gBtlWork->pendingHitStop;
+        ClearBtlObjActionFlags(p);
         p->flags |= 0x200;
 
-        if (p->unk_0E8 != 2) {
-            p->unk_0E8 = 2;
-            p->unk_0EC = p->unk_020;
+        if (p->badStatus != 2) {
+            p->badStatus = 2;
+            p->badStatusTimer = p->damage;
         }
         return 10;
     }
     return 0;
 }
 
-u8 func_0801AD68(BtlObj* p) {
+u8 TryStartCardAction(BtlObj* p) {
     u64 f = p->flags;
 
     if (f & 1) {
         p->flags &= ~0x46023;
         p->flags |= 0x90;
-        p->unk_014 = p->x;
-        p->unk_018 = p->y;
-        p->unk_01C = p->z;
+        p->originX = p->x;
+        p->originY = p->y;
+        p->originZ = p->z;
         return 1;
     }
     return 0;
 }
 
-s32 func_0801ADAC(BtlObj* p) {
+s32 UpdateBtlObjReaction(BtlObj* p) {
     u16 t;
     u16 u;
     u16 v;
 
-    if (p->unk_0E8 == 2) {
+    if (p->badStatus == 2) {
         if (p->flags & 2) {
             p->flags &= ~0x40002;
             p->flags &= ~0x52000004800;
-            gBtlWork->unk_072 = gBtlWork->unk_076;
-            p->unk_0E2 = 30;
-            p->unk_0E0 += p->unk_020;
+            gBtlWork->hitStop = gBtlWork->pendingHitStop;
+            p->invincibleTimer = 30;
+            p->delayedDamage += p->damage;
         }
     } else {
-        t = p->unk_0E0;
+        t = p->delayedDamage;
 
-        if ((s16)p->unk_0E0 > 0) {
-            p->unk_020 = t;
-            p->unk_0E0 = 0;
-            gBtlWork->unk_076 = 0;
+        if ((s16)p->delayedDamage > 0) {
+            p->damage = t;
+            p->delayedDamage = 0;
+            gBtlWork->pendingHitStop = 0;
             p->flags &= ~0x52000004800;
             p->flags |= 2;
-            p->unk_024 = 0;
-            p->unk_0A8 = 0;
-            p->unk_0AC = 0;
+            p->hitFlags = 0;
+            p->knockbackSpeed = 0;
+            p->knockbackLift = 0;
         }
     }
-    u = p->unk_0E2;
+    u = p->invincibleTimer;
 
-    if (p->unk_0E2 > 0) {
-        p->unk_0E2 = u - 1;
+    if (p->invincibleTimer > 0) {
+        p->invincibleTimer = u - 1;
     }
-    v = p->unk_104;
+    v = p->popCooldown;
 
-    if (p->unk_104 > 0) {
-        p->unk_104 = v - 1;
+    if (p->popCooldown > 0) {
+        p->popCooldown = v - 1;
     }
 
     if (p->flags & 0x10000) {
         p->flags &= ~0x10003;
-        func_0801AF08(p);
+        ClearBtlObjActionFlags(p);
         p->flags |= 0x200;
-        func_08019190(p, 9);
-        gBtlWork->unk_072 = 12;
+        CreateBtlPopTask(p, 9);
+        gBtlWork->hitStop = 12;
         return 4;
     }
-    if (func_0801AD68(p)) {
+    if (TryStartCardAction(p)) {
         return 5;
     }
-    return func_0801A978(p);
+    return ApplyBtlObjHit(p);
 }
 
-void func_0801AF08(BtlObj* p) {
+void ClearBtlObjActionFlags(BtlObj* p) {
     p->flags &= ~0x2290;
 }
 
 u16 GetBattleSpritePriorityFlags(s32 a) {
-    if (a < gBtlWork->unk_0D0 + (gBtlWork->unk_0D8 << 8)) {
+    if (a < gBtlWork->bossY + (gBtlWork->bossPriorityOffset << 8)) {
         return 0x800;
     }
     return 0x400;
 }
 
-void func_0801AF4C(BtlObj* actor) {
+void BeginBossDefeat(BtlObj* actor) {
     BtlObj* p;
 
     gBtlWork->flags |= 0x80000;
     gBtlWork->flags |= 0x40000000;
     gBtlWork->flags |= 0x200000000;
-    func_0801C830(actor);
+    SetEnemyJiminyFlag(actor);
     m4aMPlayFadeOut(gMPlayTable[gSongTable[3].ms].info, 12);
     FadeStartIn(2, 20);
     FadeLock();
@@ -1195,15 +1195,15 @@ void func_0801AF4C(BtlObj* actor) {
         p->node.flags |= 2;
         p = ListPoolNext(&p->node);
     }
-    gBtlWork->unk_0EE = 0;
+    gBtlWork->enemyCount = 0;
 }
 
-void func_0801B008(void) {
+void EndBossDefeat(void) {
     gBtlWork->flags &= ~0x80000;
 }
 
-void func_0801B024(BtlObj* p) {
-    switch (p->unk_000) {
+void SetEnemyKindFlags(BtlObj* p) {
+    switch (p->kind) {
     case 1:
         p->flags |= 0x10800000100000;
         break;
@@ -1300,7 +1300,7 @@ void func_0801B024(BtlObj* p) {
     }
 }
 
-void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
+void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     const EnemyBaseStats* e;
     enum EmyId {
         EMY_ID_32 = 32,
@@ -1324,10 +1324,10 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     s32 b;
     s32 c;
 
-    e = GetEnemyBaseStats(d->unk_00);
+    e = GetEnemyBaseStats(d->id);
 
     if (e != 0) {
-        v = d->unk_00;
+        v = d->id;
 
         switch (v) {
         case EMY_ID_45:
@@ -1337,99 +1337,99 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
         case EMY_ID_51:
         case EMY_ID_52:
         case EMY_ID_53:
-            switch (gBtlWork->unk_10C) {
+            switch (gBtlWork->battleId) {
             case 161:
-                p->unk_02E = 1120;
-                p->unk_030 = 5;
-                p->unk_0B4 = 2775;
+                p->maxHp = 1120;
+                p->attack = 5;
+                p->exp = 2775;
                 break;
             case 168:
-                p->unk_02E = 1120;
-                p->unk_030 = 5;
-                p->unk_0B4 = 3225;
+                p->maxHp = 1120;
+                p->attack = 5;
+                p->exp = 3225;
                 break;
             case 169:
-                p->unk_02E = 1120;
-                p->unk_030 = 8;
-                p->unk_0B4 = 5700;
+                p->maxHp = 1120;
+                p->attack = 8;
+                p->exp = 5700;
                 break;
             case 170:
-                p->unk_02E = 1680;
-                p->unk_030 = 10;
-                p->unk_0B4 = 6825;
+                p->maxHp = 1680;
+                p->attack = 10;
+                p->exp = 6825;
                 break;
             case 171:
-                p->unk_02E = 1120;
-                p->unk_030 = 5;
-                p->unk_0B4 = 1875;
+                p->maxHp = 1120;
+                p->attack = 5;
+                p->exp = 1875;
                 break;
             case 172:
-                p->unk_02E = 1680;
-                p->unk_030 = 10;
-                p->unk_0B4 = 5700;
+                p->maxHp = 1680;
+                p->attack = 10;
+                p->exp = 5700;
                 break;
             case 162:
-                p->unk_02E = 320;
-                p->unk_030 = 2;
-                p->unk_0B4 = 75;
+                p->maxHp = 320;
+                p->attack = 2;
+                p->exp = 75;
                 break;
             case 173:
-                p->unk_02E = 1680;
-                p->unk_030 = 15;
-                p->unk_0B4 = 6825;
+                p->maxHp = 1680;
+                p->attack = 15;
+                p->exp = 6825;
                 break;
             case 163:
-                p->unk_02E = 1120;
-                p->unk_030 = 5;
-                p->unk_0B4 = 2325;
+                p->maxHp = 1120;
+                p->attack = 5;
+                p->exp = 2325;
                 break;
             case 174:
-                p->unk_02E = 1680;
-                p->unk_030 = 15;
-                p->unk_0B4 = 6263;
+                p->maxHp = 1680;
+                p->attack = 15;
+                p->exp = 6263;
                 break;
             case 164:
-                p->unk_02E = 1120;
-                p->unk_030 = 15;
-                p->unk_0B4 = 4125;
+                p->maxHp = 1120;
+                p->attack = 15;
+                p->exp = 4125;
                 break;
             case 175:
-                p->unk_02E = 1120;
-                p->unk_030 = 20;
-                p->unk_0B4 = 5700;
+                p->maxHp = 1120;
+                p->attack = 20;
+                p->exp = 5700;
                 break;
             case 176:
-                p->unk_02E = 1120;
-                p->unk_030 = 3;
-                p->unk_0B4 = 975;
+                p->maxHp = 1120;
+                p->attack = 3;
+                p->exp = 975;
                 break;
             case 166:
-                p->unk_02E = 400;
-                p->unk_030 = 3;
-                p->unk_0B4 = 133;
+                p->maxHp = 400;
+                p->attack = 3;
+                p->exp = 133;
                 break;
             case 177:
-                p->unk_02E = 2240;
-                p->unk_030 = 25;
-                p->unk_0B4 = 0;
+                p->maxHp = 2240;
+                p->attack = 25;
+                p->exp = 0;
                 break;
             case 167:
-                p->unk_02E = 1680;
-                p->unk_030 = 15;
-                p->unk_0B4 = 6517;
+                p->maxHp = 1680;
+                p->attack = 15;
+                p->exp = 6517;
                 break;
             default:
-                p->unk_02E = 2240;
-                p->unk_030 = 27;
-                p->unk_0B4 = 13131;
+                p->maxHp = 2240;
+                p->attack = 27;
+                p->exp = 13131;
                 break;
             }
             break;
         case EMY_ID_37:
             if (gGameState.flags & 8) {
-                p->unk_02E = 300;
-                p->unk_030 = 4;
-                p->unk_0B4 = 150;
+                p->maxHp = 300;
+                p->attack = 4;
+                p->exp = 150;
                 break;
             }
         default:
@@ -1442,50 +1442,50 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 b = 76;
                 c = 640;
             }
-            p->unk_02E = ((gGameState.floor * a + 256) * e->hp) >> 8;
-            p->unk_030 = ((gGameState.floor * b + 256) * e->attack) >> 8;
-            p->unk_0B4 = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
+            p->maxHp = ((gGameState.floor * a + 256) * e->hp) >> 8;
+            p->attack = ((gGameState.floor * b + 256) * e->attack) >> 8;
+            p->exp = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
             break;
         }
     } else {
-        p->unk_02E = d->unk_04;
-        p->unk_030 = 0;
-        p->unk_0B4 = 1;
-        v = d->unk_00;
+        p->maxHp = d->maxHp;
+        p->attack = 0;
+        p->exp = 1;
+        v = d->id;
     }
-    p->unk_0CE = 80;
-    p->unk_0D0 = 32;
-    p->unk_0D2 = 32;
-    p->unk_0B2 = 100;
-    p->unk_02C = p->unk_02E;
-    p->unk_0DC = p;
+    p->attackOffset = 80;
+    p->attackRangeX = 32;
+    p->attackRangeY = 32;
+    p->cardInterval = 100;
+    p->hp = p->maxHp;
+    p->self = p;
     p->x = x;
     p->y = y;
     p->z = z;
-    p->unk_010 = 0;
+    p->groundZ = 0;
     p->flags = 0;
-    p->unk_03C = d->unk_0E;
-    p->unk_09C = d->unk_06;
-    p->unk_0A2 = d->unk_0A;
-    p->unk_0A4 = 0;
-    p->unk_09E = d->unk_08;
-    p->unk_0A0 = d->unk_08 >> 1;
-    p->unk_000 = v;
-    p->unk_020 = 0;
-    p->unk_0D4 = 0;
-    p->unk_0D8 = 0;
-    p->unk_0E2 = 0;
-    p->unk_0E0 = 0;
-    p->unk_0CC = 0xFFF1;
+    p->kindFlags = d->flags;
+    p->height = d->height;
+    p->centerHeight = d->centerHeight;
+    p->centerOffsetX = 0;
+    p->radiusX = d->radius;
+    p->radiusY = d->radius >> 1;
+    p->kind = v;
+    p->damage = 0;
+    p->floorZ = 0;
+    p->parent = 0;
+    p->invincibleTimer = 0;
+    p->delayedDamage = 0;
+    p->shadowPriority = 0xFFF1;
     p->btl = 0;
-    p->unk_0E8 = 0;
-    p->unk_0EC = 0;
+    p->badStatus = 0;
+    p->badStatusTimer = 0;
     p->unk_0F0 = gBtlWork->actor->x;
     p->unk_0F4 = gBtlWork->actor->y;
     p->unk_0F8 = gBtlWork->actor->z;
     p->vx = 0;
     p->vy = 0;
-    p->unk_104 = 0;
+    p->popCooldown = 0;
 
     switch (v) {
     case EMY_ID_32:
@@ -1497,49 +1497,49 @@ void func_0801B37C(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     case EMY_ID_38:
     case EMY_ID_39:
     case EMY_ID_40:
-        if (!(d->unk_0E & 1)) {
-            ColliderInit(&p->collider, 8, d->unk_08, d->unk_06);
+        if (!(d->flags & 1)) {
+            ColliderInit(&p->collider, 8, d->radius, d->height);
         }
         p->flags |= 0xAC280000000;
         p->flags |= 0x40000000;
         break;
     default:
-        if (!(d->unk_0E & 1)) {
-            if (d->unk_0E & 8) {
-                ColliderInit(&p->collider, 11, d->unk_08, d->unk_06);
+        if (!(d->flags & 1)) {
+            if (d->flags & 8) {
+                ColliderInit(&p->collider, 11, d->radius, d->height);
             } else {
-                ColliderInit(&p->collider, 3, d->unk_08, d->unk_06);
+                ColliderInit(&p->collider, 3, d->radius, d->height);
             }
         }
     }
-    func_0801B024(p);
+    SetEnemyKindFlags(p);
 
-    if (d->unk_0E & 4) {
+    if (d->flags & 4) {
         p->flags |= 0x20000;
     }
     ListNodeInit(&p->node, &gBtlWork->pool, p);
     ListPoolAppend(&p->node, &gBtlWork->pool);
-    gBtlWork->unk_0EE++;
+    gBtlWork->enemyCount++;
 }
 
-void func_0801B7D8(BtlObj* obj) {
-    BtlObj* p = obj->unk_0DC;
+void ReleaseEnemyBtlObj(BtlObj* obj) {
+    BtlObj* p = obj->self;
     if (p == obj) {
         ListPoolRemove(&p->node, &gBtlWork->pool);
 
-        if (!(p->unk_03C & 1)) {
+        if (!(p->kindFlags & 1)) {
             ColliderUnregister(&p->collider);
         }
-        gBtlWork->unk_0EE--;
+        gBtlWork->enemyCount--;
     }
 }
 
-u8 func_0801B818(UnkStruct_0801B8A8* p, u16 b, s16 c, s16* n, s16* cnt) {
+u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* p, u16 b, s16 c, s16* n, s16* cnt) {
     s16 i;
     s16 lim;
 
     lim = *n / c;
-    p->unk_12 = b;
+    p->kind = b;
 
     for (i = 0; i < lim; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, p);
@@ -1552,25 +1552,25 @@ u8 func_0801B818(UnkStruct_0801B8A8* p, u16 b, s16 c, s16* n, s16* cnt) {
     return 0;
 }
 
-void CreateBtlPrizeTasks(UnkStruct_0801B8A8* p, u16 b, s16 c, s16* n) {
+void CreateBtlPrizeTasks(BtlPrizeSrc* p, u16 b, s16 c, s16* n) {
     s16 i;
     s16 lim;
     lim = *n / c;
-    p->unk_12 = b;
+    p->kind = b;
 
     for (i = 0; i < lim; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, p);
     }
     *n = *n % c;
 }
-void func_0801B918(BtlObj* p) {
-    UnkStruct_0801B8A8 a;
+void DropBossPrizes(BtlObj* p) {
+    BtlPrizeSrc a;
     s16 n;
     a.x = p->x;
     a.y = p->y;
     a.z = p->z;
-    a.unk_14 = 1;
-    n = p->unk_0B4;
+    a.noTimeout = 1;
+    n = p->exp;
     CreateBtlPrizeTasks(&a, 0, 0x578, &n);
     CreateBtlPrizeTasks(&a, 8, 199, &n);
     CreateBtlPrizeTasks(&a, 5, 60, &n);
@@ -1580,9 +1580,9 @@ void func_0801B918(BtlObj* p) {
     CreateBtlPrizeTasks(&a, 3, 1, &n);
 }
 
-void func_0801B994(BtlObj* p) {
-    UnkStruct_0801B8A8 a;
-    UnkStruct_0801B8A8 b;
+void DropEnemyPrizes(BtlObj* p) {
+    BtlPrizeSrc a;
+    BtlPrizeSrc b;
     s16 n;
     s16 cnt;
     s32 flag;
@@ -1596,15 +1596,15 @@ void func_0801B994(BtlObj* p) {
     a.x = p->x;
     a.y = p->y;
     a.z = p->z;
-    a.unk_14 = 0;
-    n = p->unk_0B4;
+    a.noTimeout = 0;
+    n = p->exp;
     cnt = 0;
 
-    if (gBtlWork->unk_0EE == 1 && gBtlWork->unk_120 <= 0) {
-        if (func_08093B38() <= 4) {
+    if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
+        if (CountRegularMapCards() <= 4) {
             flag = 0;
         } else {
-            switch (p->unk_000) {
+            switch (p->kind) {
             case 10:
             case 15:
             case 25:
@@ -1652,7 +1652,7 @@ void func_0801B994(BtlObj* p) {
             } else if (v == 0) {
                 flag = 0;
             } else {
-                if (gGameState.unk_1B8 == 1 || gGameState.unk_1B8 == 10) {
+                if (gGameState.roomEffect == 1 || gGameState.roomEffect == 10) {
                     v = (v * 5 * 128) >> 8;
                 }
                 v = 100 / v;
@@ -1670,9 +1670,9 @@ void func_0801B994(BtlObj* p) {
             flag = 0;
         }
 
-        if (gBtlWork->unk_10C != 120 && gBtlWork->unk_10C != 124) {
+        if (gBtlWork->battleId != 120 && gBtlWork->battleId != 124) {
             if (flag != 0) {
-                CreateHeartlessCardTask(&gBtlWork->taskPools[0], p->x >> 8, p->y >> 8, p->z >> 8, p->unk_000);
+                CreateHeartlessCardTask(&gBtlWork->taskPools[0], p->x >> 8, p->y >> 8, p->z >> 8, p->kind);
             } else {
                 b.x = p->x;
                 b.y = p->y;
@@ -1682,34 +1682,34 @@ void func_0801B994(BtlObj* p) {
         }
     }
 
-    if (func_0801B818(&a, 0, 0x578, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 0, 0x578, &n, &cnt)) {
         return;
     }
-    if (func_0801B818(&a, 8, 199, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 8, 199, &n, &cnt)) {
         return;
     }
-    if (func_0801B818(&a, 5, 60, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 5, 60, &n, &cnt)) {
         return;
     }
-    if (func_0801B818(&a, 7, 30, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 7, 30, &n, &cnt)) {
         return;
     }
-    if (func_0801B818(&a, 4, 10, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 4, 10, &n, &cnt)) {
         return;
     }
-    if (func_0801B818(&a, 6, 5, &n, &cnt)) {
+    if (CreateBtlPrizeTasksCapped(&a, 6, 5, &n, &cnt)) {
         return;
     }
-    func_0801B818(&a, 3, 1, &n, &cnt);
+    CreateBtlPrizeTasksCapped(&a, 3, 1, &n, &cnt);
 }
 
-void func_0801BBF0(BtlObj* p) {
-    UnkStruct_0801B8A8 a;
+void TryDropPremireCard(BtlObj* p) {
+    BtlPrizeSrc a;
 
     if (gGameState.flags & 8) {
         return;
     }
-    if (func_08085BAC()) {
+    if (IsActiveDeckAllPremium()) {
         return;
     }
     if (gBtlWork->flags & 0x400000000) {
@@ -1728,12 +1728,12 @@ void func_0801BBF0(BtlObj* p) {
     a.x = p->x;
     a.y = p->y;
     a.z = p->z;
-    a.unk_14 = 0;
+    a.noTimeout = 0;
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &a);
 }
 
-u8 func_0801BCA8(Collider* a) {
-    if (a == gBtlWork->unk_0F0) {
+u8 IsPlayerOnPlatform(Collider* a) {
+    if (a == gBtlWork->platform) {
         return 1;
     } else {
         return 0;
@@ -1746,13 +1746,13 @@ void SetBattleActorPosition(s32 a, s32 b, s32 c) {
     gBtlWork->actor->z = c;
 }
 
-void func_0801BCD4(BtlObj* p) {
+void RequestEnemyCardUse(BtlObj* p) {
     if (!(p->flags & 0x7202)) {
         gBtlWork->actor4 = p;
     }
 }
 
-void func_0801BCF8(BtlObj* p) {
+void TryEnemyCardUse(BtlObj* p) {
     s32 x;
     s32 y;
     s32 cx;
@@ -1764,30 +1764,30 @@ void func_0801BCF8(BtlObj* p) {
     if (p->flags & 0x7202) {
         return;
     }
-    if (GetRandom() % (p->unk_0B2 * gBtlWork->unk_0EE) != 0) {
+    if (GetRandom() % (p->cardInterval * gBtlWork->enemyCount) != 0) {
         return;
     }
-    func_0801C700(p, &x, &y, 0);
+    GetEnemyTargetPosition(p, &x, &y, 0);
 
-    if (p->unk_0D0 == 0) {
+    if (p->attackRangeX == 0) {
         gBtlWork->actor4 = p;
         return;
     }
 
     if (p->flags & 4) {
-        cx = p->x - ((s16)(x1 = p->unk_0CE) * 256);
-        x1 = p->unk_0D0;
+        cx = p->x - ((s16)(x1 = p->attackOffset) * 256);
+        x1 = p->attackRangeX;
     } else {
-        x1 = p->unk_0CE;
+        x1 = p->attackOffset;
         cx = p->x + (s16)x1 * 256;
-        x1 = p->unk_0D0;
+        x1 = p->attackRangeX;
     }
 
     x1 -= 4;
     x0 = cx - (x1 *= 256);
-    y0 = p->y - (p->unk_0D2 * 256);
-    x1 = x0 + ((p->unk_0D0 + 4) * 512);
-    y1 = y0 + ((p->unk_0D2 + 4) * 512);
+    y0 = p->y - (p->attackRangeY * 256);
+    x1 = x0 + ((p->attackRangeX + 4) * 512);
+    y1 = y0 + ((p->attackRangeY + 4) * 512);
 
     if (x0 > x) {
         return;
@@ -1804,16 +1804,16 @@ void func_0801BCF8(BtlObj* p) {
     gBtlWork->actor4 = p;
 }
 
-void func_0801BDD4(BtlObj* p, BtlObj* v) {
-    p->unk_0D8 = v;
+void SetBtlObjParent(BtlObj* p, BtlObj* v) {
+    p->parent = v;
 }
 
-u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z) {
+u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
     EnemySpawnRequest s;
     s32 born;
 
     born = 1;
-    s.unk_10 = 0;
+    s.flags = 0;
 
     switch (id) {
     case 0:
@@ -1870,26 +1870,26 @@ u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z) {
         break;
     case 18:
         s.desc = &gTaskDescEmy26;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 19:
         s.desc = &gTaskDescEmy27;
         break;
     case 20:
         s.desc = &gTaskDescEmy28;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 21:
         s.desc = &gTaskDescEmy29;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 22:
         s.desc = &gTaskDescEmy30;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 23:
         s.desc = &gTaskDescEmy31;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 24:
         s.desc = &gTaskDescEmy37;
@@ -1897,19 +1897,19 @@ u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z) {
         break;
     case 25:
         s.desc = &gTaskDescEmy38;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 26:
         s.desc = &gTaskDescEmy39;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 27:
         s.desc = &gTaskDescEmy41;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 28:
         s.desc = &gTaskDescEmy44;
-        s.unk_10 |= 1;
+        s.flags |= 1;
         break;
     case 29:
         s.desc = &gTaskDescEmy81;
@@ -1935,13 +1935,13 @@ u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z) {
     s.x = x;
     s.y = y;
     s.z = z;
-    s.unk_12 = gUnk_09EDA4EC[id];
+    s.tileCount = gEnemyTileCounts[id];
 
     if (born != 0) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlBorn, &s);
     } else {
-        if (CanAllocObjTiles(s.unk_12) == 0 || CanAllocObjPalette(1) == 0) {
-            gBtlWork->unk_120--;
+        if (CanAllocObjTiles(s.tileCount) == 0 || CanAllocObjPalette(1) == 0) {
+            gBtlWork->pendingEnemies--;
             return 0;
         }
         TaskCreate(&gBtlWork->taskPools[0], s.desc, &s.x);
@@ -1949,7 +1949,7 @@ u8 func_0801BDDC(s32 id, s32 x, s32 y, s32 z) {
     return 1;
 }
 
-void func_0801C068(void) {
+void AllocBattleTiles(void) {
     if (gGameState.flags & 8) {
         gBtlWork->tiles = AllocObjTiles(0x840, 0);
     } else {
@@ -1963,7 +1963,7 @@ void func_0801C068(void) {
     gBtlWork->flags |= 0x1000000000000;
 }
 
-void func_0801C104(void) {
+void ReleaseBattleTiles(void) {
     if (gBtlWork->flags & 0x1000000000000) {
         if (gGameState.flags & 8) {
             ReleaseObjTiles(gBtlWork->tiles);
@@ -1979,21 +1979,21 @@ void func_0801C104(void) {
     }
 }
 
-void func_0801C1A0(u8 a) {
+void SetGimmickFlag(u8 a) {
     if (a <= 4) {
-        gBtlWork->unk_0FB |= 1 << a;
+        gBtlWork->gimmickFlags |= 1 << a;
     }
 }
 
-u8 func_0801C1C0(u8 a) {
+u8 ConsumeGimmickFlag(u8 a) {
     u8 m;
 
     if (a > 4) {
         return 0;
     }
     m = 1 << a;
-    if (gBtlWork->unk_0FB & m) {
-        gBtlWork->unk_0FB &= ~m;
+    if (gBtlWork->gimmickFlags & m) {
+        gBtlWork->gimmickFlags &= ~m;
         return 1;
     }
     return 0;
@@ -2024,23 +2024,23 @@ void _0801C1F8(u8 a, s32 x, s32 y, s32 z) {
     CreateGimmickCardTask(&gBtlWork->taskPools[0], x >> 8, y >> 8, z >> 8, id);
 }
 
-void func_0801C274(s32 a, s32 b, s32 c) {
-    gBtlWork->unk_100 = a;
-    gBtlWork->unk_104 = b;
-    gBtlWork->unk_108 = c;
+void SetGimmickTarget(s32 a, s32 b, s32 c) {
+    gBtlWork->gimmickX = a;
+    gBtlWork->gimmickY = b;
+    gBtlWork->gimmickZ = c;
 }
 
-void func_0801C298(u8 a, u8 b) {
+void SetBtlPaletteFadeExcluded(u8 a, u8 b) {
     if (a <= 0x1F) {
         if (b != 0) {
-            gBtlWork->unk_0FC |= 1 << a;
+            gBtlWork->fadeExcludedPalettes |= 1 << a;
         } else {
-            gBtlWork->unk_0FC &= ~(1 << a);
+            gBtlWork->fadeExcludedPalettes &= ~(1 << a);
         }
     }
 }
 
-void func_0801C2DC(BtlObj* p, u8 f) {
+void SetBtlObjUnhittable(BtlObj* p, u8 f) {
     if (f) {
         p->flags |= 0x1000000;
     } else {
@@ -2048,194 +2048,194 @@ void func_0801C2DC(BtlObj* p, u8 f) {
     }
 }
 
-void func_0801C314(void) {
+void ExitBattle(void) {
     m4aMPlayAllStop();
-    if (gUnk_03006C10 & 1) {
+    if (gDebugFlags & 1) {
         ModeRequest(&gModeChkbtl, 0);
         return;
     }
     if (gGameState.flags & 8) {
-        switch (gBtlWork->unk_10C) {
+        switch (gBtlWork->battleId) {
         case 166:
 #ifdef VERSION_EU
-            func_0806180C(154);
+            RequestEventMode(154);
 #else
-            func_0806180C(156);
+            RequestEventMode(156);
 #endif
             return;
         case 176:
 #ifdef VERSION_EU
-            func_0806180C(159);
+            RequestEventMode(159);
 #else
-            func_0806180C(161);
+            RequestEventMode(161);
 #endif
             return;
         case 171:
 #ifdef VERSION_EU
-            func_0806180C(162);
+            RequestEventMode(162);
 #else
-            func_0806180C(164);
+            RequestEventMode(164);
 #endif
             return;
         case 167:
 #ifdef VERSION_EU
-            func_0806180C(170);
+            RequestEventMode(170);
 #else
-            func_0806180C(172);
+            RequestEventMode(172);
 #endif
             return;
         case 154:
 #ifdef VERSION_EU
-            func_0806180C(179);
+            RequestEventMode(179);
 #else
-            func_0806180C(181);
+            RequestEventMode(181);
 #endif
             return;
         case 172:
 #ifdef VERSION_EU
-            func_0806180C(186);
+            RequestEventMode(186);
 #else
-            func_0806180C(188);
+            RequestEventMode(188);
 #endif
             return;
         case 177:
             gGameState.flags |= 0x800;
             SaveWriteHeader(-1);
 #ifdef VERSION_EU
-            func_0806180C(192);
+            RequestEventMode(192);
 #else
-            func_0806180C(194);
+            RequestEventMode(194);
 #endif
             return;
         default:
             if (gBtlWork->flags & 4) {
-                func_080DF380();
-                func_080E04EC();
+                AdvanceFloorStory();
+                RequestMapMode();
             } else if (gBtlWork->flags & 0x800) {
-                func_080DF380();
-                func_080E04EC();
+                AdvanceFloorStory();
+                RequestMapMode();
             } else {
-                func_080E04EC();
+                RequestMapMode();
             }
             return;
         }
     } else {
-        switch (gBtlWork->unk_10C) {
+        switch (gBtlWork->battleId) {
         case 120:
-            func_0806180C(96);
+            RequestEventMode(96);
             return;
         case 121:
             if (gBtlWork->flags & 0x10) {
-                func_0806180C(84);
+                RequestEventMode(84);
             } else if (gBtlWork->flags & 0x100000) {
-                func_0806180C(82);
+                RequestEventMode(82);
             } else {
-                func_0806180C(83);
+                RequestEventMode(83);
             }
             return;
         case 122:
-            func_0806180C(88);
+            RequestEventMode(88);
             return;
         case 123:
-            func_0806180C(108);
+            RequestEventMode(108);
             return;
         case 124:
-            func_0806180C(111);
+            RequestEventMode(111);
             return;
         case 148:
-            func_0806180C(9);
+            RequestEventMode(9);
             return;
         case 149:
-            func_0806180C(114);
+            RequestEventMode(114);
             return;
         case 150:
-            func_0806180C(100);
+            RequestEventMode(100);
             return;
         case 151:
-            func_0806180C(106);
+            RequestEventMode(106);
             return;
         case 152:
-            func_0806180C(78);
+            RequestEventMode(78);
             return;
         case 153:
 #ifdef VERSION_EU
-            func_0806180C(131);
+            RequestEventMode(131);
 #else
-            func_0806180C(133);
+            RequestEventMode(133);
 #endif
             return;
         case 154:
-            func_0806180C(56);
+            RequestEventMode(56);
             return;
         case 155:
-            func_0806180C(93);
+            RequestEventMode(93);
             return;
         case 156:
             gGameState.flags |= 0x20;
             SaveWriteHeader(-1);
-            func_0806180C(71);
+            RequestEventMode(71);
             return;
         case 157:
-            func_0806180C(6);
+            RequestEventMode(6);
             return;
         case 158:
-            func_0806180C(119);
+            RequestEventMode(119);
             return;
         case 159:
-            func_0806180C(123);
+            RequestEventMode(123);
             return;
         case 160:
-            func_0806180C(126);
+            RequestEventMode(126);
             return;
         case 161:
-            func_0806180C(31);
+            RequestEventMode(31);
             return;
         case 162:
-            func_0806180C(11);
+            RequestEventMode(11);
             return;
         case 163:
-            func_0806180C(27);
+            RequestEventMode(27);
             return;
         case 164:
-            func_0806180C(41);
+            RequestEventMode(41);
             return;
         case 165:
-            func_0806180C(67);
+            RequestEventMode(67);
             return;
         case 168:
-            func_0806180C(34);
+            RequestEventMode(34);
             return;
         case 169:
-            func_0806180C(49);
+            RequestEventMode(49);
             return;
         case 173:
-            func_0806180C(65);
+            RequestEventMode(65);
             return;
         case 174:
-            func_0806180C(60);
+            RequestEventMode(60);
             return;
         case 175:
-            func_0806180C(46);
+            RequestEventMode(46);
             return;
         case 178:
-            func_0806180C(3);
+            RequestEventMode(3);
             return;
         case 179:
-            func_0806180C(5);
+            RequestEventMode(5);
             return;
         case 170:
-            func_080DF380();
-            func_080E04EC();
+            AdvanceFloorStory();
+            RequestMapMode();
             return;
         default:
             if (gBtlWork->flags & 4) {
-                func_080DF380();
-                func_080E04EC();
+                AdvanceFloorStory();
+                RequestMapMode();
             } else if (gBtlWork->flags & 0x800) {
-                func_080DF380();
-                func_080E04EC();
+                AdvanceFloorStory();
+                RequestMapMode();
             } else {
-                func_080E04EC();
+                RequestMapMode();
             }
             return;
         }
@@ -2243,17 +2243,17 @@ void func_0801C314(void) {
 }
 
 
-u8 func_0801C6D4(s32* a, s32* b, s32* c, s32* d) {
+u8 ApplyBattleBounds(s32* a, s32* b, s32* c, s32* d) {
     if (gBtlWork->boundsCallback != 0) {
         return gBtlWork->boundsCallback(a, b, c, d);
     }
     return 0;
 }
 
-void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d) {
+void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
     u16 n;
 
-    if (a->unk_0E8 == 3) {
+    if (a->badStatus == 3) {
         if (b != 0) {
             *b = a->unk_0F0;
         }
@@ -2267,10 +2267,10 @@ void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d) {
 
         if (n == 0) {
             if (b != 0) {
-                *b = (gBtlWork->unk_0DA + GetRandom() % (gBtlWork->unk_0DC - gBtlWork->unk_0DA + 1)) << 8;
+                *b = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
             }
             if (c != 0) {
-                *c = (gBtlWork->unk_0DE + GetRandom() % (gBtlWork->unk_0E0 - gBtlWork->unk_0DE + 1)) << 8;
+                *c = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
             }
             if (d != 0) {
                 *d = n;
@@ -2278,141 +2278,141 @@ void func_0801C700(BtlObj* a, s32* b, s32* c, s32* d) {
         }
     } else {
         if (b != 0) {
-            *b = gBtlWork->unk_130;
+            *b = gBtlWork->targetX;
         }
         if (c != 0) {
-            *c = gBtlWork->unk_134;
+            *c = gBtlWork->targetY;
         }
         if (d != 0) {
-            *d = gBtlWork->unk_138;
+            *d = gBtlWork->targetZ;
         }
     }
 }
 
-void func_0801C7FC(BtlObj* a, s32 id, s32 c) {
+void SetEnemyHpFromStats(BtlObj* a, s32 id, s32 c) {
     u16 b = id;
     const EnemyBaseStats* e = GetEnemyBaseStats(b);
     if (e != 0) {
-        a->unk_02E = (e->hp * c) >> 8;
-        if (a->unk_02E <= 0) {
-            a->unk_02E = 1;
+        a->maxHp = (e->hp * c) >> 8;
+        if (a->maxHp <= 0) {
+            a->maxHp = 1;
         }
-        a->unk_02C = a->unk_02E;
+        a->hp = a->maxHp;
     }
 }
 
-void func_0801C830(BtlObj* p) {
-    switch (p->unk_000) {
+void SetEnemyJiminyFlag(BtlObj* p) {
+    switch (p->kind) {
     case 0:
-        func_0800FDD0(84);
+        SetJiminyFlag(84);
         break;
     case 1:
-        func_0800FDD0(87);
+        SetJiminyFlag(87);
         break;
     case 2:
-        func_0800FDD0(88);
+        SetJiminyFlag(88);
         break;
     case 3:
-        func_0800FDD0(89);
+        SetJiminyFlag(89);
         break;
     case 4:
-        func_0800FDD0(90);
+        SetJiminyFlag(90);
         break;
     case 5:
-        func_0800FDD0(98);
+        SetJiminyFlag(98);
         break;
     case 6:
-        func_0800FDD0(110);
+        SetJiminyFlag(110);
         break;
     case 7:
-        func_0800FDD0(111);
+        SetJiminyFlag(111);
         break;
     case 9:
-        func_0800FDD0(85);
+        SetJiminyFlag(85);
         break;
     case 10:
-        func_0800FDD0(91);
+        SetJiminyFlag(91);
         break;
     case 11:
-        func_0800FDD0(92);
+        SetJiminyFlag(92);
         break;
     case 12:
-        func_0800FDD0(93);
+        SetJiminyFlag(93);
         break;
     case 13:
-        func_0800FDD0(94);
+        SetJiminyFlag(94);
         break;
     case 14:
-        func_0800FDD0(96);
+        SetJiminyFlag(96);
         break;
     case 15:
-        func_0800FDD0(97);
+        SetJiminyFlag(97);
         break;
     case 16:
-        func_0800FDD0(99);
+        SetJiminyFlag(99);
         break;
     case 17:
-        func_0800FDD0(101);
+        SetJiminyFlag(101);
         break;
     case 18:
-        func_0800FDD0(102);
+        SetJiminyFlag(102);
         break;
     case 19:
-        func_0800FDD0(103);
+        SetJiminyFlag(103);
         break;
     case 20:
-        func_0800FDD0(104);
+        SetJiminyFlag(104);
         break;
     case 21:
-        func_0800FDD0(105);
+        SetJiminyFlag(105);
         break;
     case 22:
-        func_0800FDD0(107);
+        SetJiminyFlag(107);
         break;
     case 23:
-        func_0800FDD0(108);
+        SetJiminyFlag(108);
         break;
     case 24:
-        func_0800FDD0(109);
+        SetJiminyFlag(109);
         break;
     case 25:
-        func_0800FDD0(86);
+        SetJiminyFlag(86);
         break;
     case 26:
-        func_0800FDD0(95);
+        SetJiminyFlag(95);
         break;
     case 27:
-        func_0800FDD0(100);
+        SetJiminyFlag(100);
         break;
     case 28:
-        func_0800FDD0(106);
+        SetJiminyFlag(106);
         break;
     case 29:
-        func_0800FDD0(113);
+        SetJiminyFlag(113);
         break;
     case 30:
-        func_0800FDD0(114);
+        SetJiminyFlag(114);
         break;
     case 31:
-        func_0800FDD0(112);
+        SetJiminyFlag(112);
         break;
     case 32:
-        func_0800FDD0(115);
+        SetJiminyFlag(115);
         break;
     case 34:
-        func_0800FDD0(117);
+        SetJiminyFlag(117);
         break;
     case 36:
-        func_0800FDD0(116);
+        SetJiminyFlag(116);
         break;
     case 38:
-        func_0800FDD0(118);
+        SetJiminyFlag(118);
         break;
     }
 }
 
-u8 func_0801CA00(BtlObj* p) {
-    if (gBtlWork->unk_070 == 1) {
+u8 StepHitFlash(BtlObj* p) {
+    if (gBtlWork->paused == 1) {
         return 0;
     }
 
@@ -2420,18 +2420,18 @@ u8 func_0801CA00(BtlObj* p) {
         return 0;
     }
 
-    if (p->unk_106 > 0x17) {
+    if (p->hitFlashFrames > 0x17) {
         return 0;
     }
-    p->unk_106++;
-    if (p->unk_106 & 1) {
+    p->hitFlashFrames++;
+    if (p->hitFlashFrames & 1) {
         return 1;
     }
     return 0;
 }
 
-u8 func_0801CA48(BtlObj* p) {
-    if (gBtlWork->unk_070 == 1) {
+u8 StepHitFlashSolid(BtlObj* p) {
+    if (gBtlWork->paused == 1) {
         return 0;
     }
 
@@ -2439,41 +2439,41 @@ u8 func_0801CA48(BtlObj* p) {
         return 0;
     }
 
-    if (p->unk_106 > 0x17) {
+    if (p->hitFlashFrames > 0x17) {
         return 0;
     }
-    p->unk_106++;
+    p->hitFlashFrames++;
     return 1;
 }
 
-void func_0801CA88(void) {
+void InitGameState(void) {
     s32 zero = 0;
     CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
 
-    if (gUnk_03006C10 & 0x800) {
+    if (gDebugFlags & 0x800) {
         gGameState.flags |= 8;
         gGameState.flags |= 0x20;
     }
     gGameState.world = WORLD_WONDERLAND;
-    gGameState.unk_00D = 1;
+    gGameState.battleStage = 1;
     InitPlayerProgression();
-    gGameState.unk_180 = 0xFFFF;
-    func_080DFB2C();
+    gGameState.availableWorlds = 0xFFFF;
+    ResetMapFloors();
     gGameState.hp = gGameState.progression.maxHp;
-    gGameState.unk_024 = 0x2D;
-    gGameState.unk_1B8 = 0;
+    gGameState.fieldAngle = 0x2D;
+    gGameState.roomEffect = 0;
 }
 
-void func_0801CB00(void) {
-    gGameState.unk_000 = 0;
+void ClearFieldResume(void) {
+    gGameState.fieldResume = 0;
 }
 
-void func_0801CB0C(void) {
-    gGameState.unk_000 = 1;
+void RequestFieldResume(void) {
+    gGameState.fieldResume = 1;
 }
 
-void func_0801CB18(void) {
-    if (gGameState.unk_000 != 0) {
+void SeedGameRandom(void) {
+    if (gGameState.fieldResume != 0) {
         SeedRandom(gGameState.randomSeed);
     } else {
         gGameState.randomSeed = GetRandom();
@@ -2481,13 +2481,13 @@ void func_0801CB18(void) {
     }
 }
 
-void func_0801CB44(void) {
+void ResetGameState(void) {
     SeedRandom(gFrameCounter);
-    func_0801CA88();
-    func_0801CB00();
-    func_0800ABD8();
+    InitGameState();
+    ClearFieldResume();
+    ChkBtlReset();
     gUnk_02039DC0 = 0;
 #ifdef VERSION_EU
-    gUnk_03006C10 &= 0xFFFF7FFF;
+    gDebugFlags &= 0xFFFF7FFF;
 #endif
 }

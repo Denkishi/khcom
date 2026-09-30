@@ -10,18 +10,18 @@ TaskDesc gTaskDescBosPcAcd = {
     sizeof(PcAcdWork),
 };
 
-s32 func_0810BF14(s32 x) {
+s32 BosPcAcdSquare(s32 x) {
     return x * x;
 }
 
-s32 func_0810BF1C(s32 x) {
+s32 BosPcAcdSquare2(s32 x) {
     return x * x;
 }
 
-void func_0810BF24(Task* task, u8 v) {
+void BosPcAcdSetOff(Task* task, u8 v) {
     PcAcdWork* work = task->work;
 
-    work->unk_018 = v;
+    work->acdOff = v;
 }
 
 void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
@@ -36,11 +36,11 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     work->shared = arg;
     anim = &work->anim;
     AnimInit(anim, gUnk_09EFABA4, gUnk_09EFAB68);
-    if (work->shared->unk_05 == 1) {
-        work->unk_018 = 1;
+    if (work->shared->inEvent == 1) {
+        work->acdOff = 1;
         AnimStart(anim, 1, 0);
     } else {
-        work->unk_018 = 0;
+        work->acdOff = 0;
         AnimStart(anim, 0, 0);
     }
 }
@@ -58,7 +58,7 @@ u8 task_bos_pc_acd_1(PcAcdWork* work) {
             (gBtlWork->flags & 0x200000) == 0) {
             if (work->x < 0 || AnimIsFinished(anim) == 1) {
                 v = 0;
-                if (work->unk_018 == 1) {
+                if (work->acdOff == 1) {
                     v = 1;
                 }
                 AnimReset(anim);
@@ -88,9 +88,9 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     ox = 0;
     oy = 0;
     shared = work->shared;
-    if (shared->unk_05 == 1) {
-        ox = gEventState->unk_68 << 8;
-        oy = gEventState->unk_6A << 8;
+    if (shared->inEvent == 1) {
+        ox = gEventState->shakeX << 8;
+        oy = gEventState->shakeY << 8;
     }
     work->x = pos->x;
     work->y = pos->y - 0x400;

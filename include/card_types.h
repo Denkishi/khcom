@@ -8,9 +8,9 @@
 
 typedef struct Deck {
     u16 cards[DECK_SIZE];
-    u8 unk_C6[0x14];
-    u16 unk_DA;
-    u16 unk_DC;
+    u8 name[0x14];
+    u16 cpCost;
+    u16 cardCount;
     u16 unk_DE;
 } Deck;
 
@@ -22,15 +22,15 @@ typedef struct CardDef {
     void* gfx2;
     void* tiles2;
     void* palette2;
-    u16 unk_1C;
+    u16 kind;
     u16 flags;
-    u8 unk_20;
+    u8 value;
     u8 unk_21[0x03];
-    u32 unk_24;
+    u32 move;
     u16 unk_28;
-    u8 unk_2A;
+    u8 category;
     u8 unk_2B;
-    u16 unk_2C;
+    u16 cpCost;
     u8 unk_2E[0x06];
 } CardDef;
 
@@ -46,13 +46,13 @@ typedef struct CardBack {
 typedef struct CardStat {
     u16 unk_00;
     u16 unk_02;
-    u8 unk_04;
+    u8 value;
     u8 unk_05[0x03];
     u32 unk_08;
     u16 unk_0C;
-    u8 unk_0E;
+    u8 category;
     u8 unk_0F;
-    u16 unk_10;
+    u16 cpCost;
     u8 unk_12[0x06];
 } CardStat;
 

@@ -173,8 +173,8 @@ void mode_battle_0(u32 mode) {
     gBtlWork = EwramAlloc(sizeof(BtlWork));
     gRikuBtlWork = 0;
     BtlWorkInit();
-    func_0801C068();
-    gBtlWork->unk_10C = mode;
+    AllocBattleTiles();
+    gBtlWork->battleId = mode;
     gGameState.flags &= ~0x40;
 
     switch (mode) {
@@ -248,17 +248,17 @@ void mode_battle_0(u32 mode) {
     } else if (gBtlWork->flags & 0x800000000) {
         m4aSongNumStart(SONG_BGM_EVENT2);
         gBtlWork->bg = 3;
-        gBtlWork->unk_1C6 = 2;
+        gBtlWork->mapBg = 2;
         SetBgMode2();
-        SetupBg(gBtlWork->unk_1C6, 0, 12, 0);
+        SetupBg(gBtlWork->mapBg, 0, 12, 0);
         SetupBg(gBtlWork->bg, 2, 28, 10);
-        SetBgPriority(gBtlWork->unk_1C6, 2);
+        SetBgPriority(gBtlWork->mapBg, 2);
         SetBgPriority(gBtlWork->bg, 0);
-        SetBgOverflow(gBtlWork->unk_1C6, 1);
+        SetBgOverflow(gBtlWork->mapBg, 1);
         SetBgOverflow(gBtlWork->bg, 0);
     } else if (gBtlWork->flags & 0x800) {
         gBtlWork->bg = 2;
-        gBtlWork->unk_1C6 = 3;
+        gBtlWork->mapBg = 3;
 
         switch (mode) {
         case 0xA1:
@@ -293,9 +293,9 @@ void mode_battle_0(u32 mode) {
         SetBgOverflow(2, 0);
     } else {
         gBtlWork->bg = 2;
-        gBtlWork->unk_1C6 = 3;
+        gBtlWork->mapBg = 3;
 
-        switch (gGameState.unk_00D) {
+        switch (gGameState.battleStage) {
         case 1:
         case 2:
             m4aSongNumStart(SONG_BGM_ALICE_BTL);
@@ -407,13 +407,13 @@ void mode_battle_0(u32 mode) {
         case 0x9B:
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosBoogie, 0);
-            gBtlWork->boundsCallback = &func_0801050C;
+            gBtlWork->boundsCallback = &ClampBosBoogieBounds;
             gBtlWork->fadeAmount = 5;
             break;
         default:
             SetBattleBounds(0x1A4, 0x264, 0x148, 0x180);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosJf, 0);
-            gBtlWork->boundsCallback = &func_080BD4A8;
+            gBtlWork->boundsCallback = &ClampBosJfBounds;
             gBtlWork->fadeAmount = 10;
             break;
         }
@@ -428,7 +428,7 @@ void mode_battle_0(u32 mode) {
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, (void*)1);
         }
 
-        gGameState.unk_00D = 11;
+        gGameState.battleStage = 11;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
     } else if (gBtlWork->flags & 0x800) {
         gBtlWork->flags |= 0x400000000;
@@ -490,9 +490,9 @@ void mode_battle_0(u32 mode) {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
         if (mode <= 0x92) {
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlForm, (void*)gUnk_09EDA2A0[mode]);
-        } else if (gUnk_03006C10 & 1) {
-            func_0800AB8C();
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlForm, (void*)gBtlFormListByBattleId[mode]);
+        } else if (gDebugFlags & 1) {
+            ChkBtlSpawnEnemy();
         }
 
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
@@ -509,25 +509,25 @@ void mode_battle_0(u32 mode) {
     }
 
     FadeStartIn(0, 60);
-    gGameState.unk_010++;
+    gGameState.battleCount++;
 }
 
 void mode_battle_1(void) {
     TaskPoolUpdate(&gBtlWork->taskPools[2]);
     TaskPoolDraw(&gBtlWork->taskPools[2]);
 
-    if (gBtlWork->unk_074 > 0) {
+    if (gBtlWork->freezeTimer > 0) {
         TaskPoolDraw(&gBtlWork->taskPools[1]);
         TaskPoolDraw(&gBtlWork->taskPools[0]);
-        gBtlWork->unk_074--;
+        gBtlWork->freezeTimer--;
     } else {
-        if (gBtlWork->unk_070 == 0) {
+        if (gBtlWork->paused == 0) {
             _08019CB4();
 
-            if (gBtlWork->unk_072 <= 0) {
+            if (gBtlWork->hitStop <= 0) {
                 TaskPoolUpdate(&gBtlWork->taskPools[0]);
             } else {
-                gBtlWork->unk_072--;
+                gBtlWork->hitStop--;
             }
 
             if (!(gBtlWork->flags & 0x200000000000000)) {
@@ -556,7 +556,7 @@ void mode_battle_2(void) {
     TaskPoolDestroy(&gBtlWork->taskPools[2]);
     TaskPoolDestroy(&gBtlWork->taskPools[1]);
     TaskPoolDestroy(&gBtlWork->taskPools[0]);
-    func_0801C104();
+    ReleaseBattleTiles();
 
     if (gBtlWork->flags & 0x800) {
         EwramFree(gRikuBtlWork);

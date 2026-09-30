@@ -19,11 +19,11 @@
 #include "chara_types.h"
 #include "chara_api.h"
 
-const EmyKind gUnk_09991F44 =
+const EmyKind gBosGaEmyKind =
 {32, 100, 16, 16, 0, 100, 1}
 ;
 
-const RoomTableEntry gRoomTableEntries[6] = {
+const GaEntryDef gGaEntryDefs[6] = {
 #if defined(VERSION_US)
     {256, 0, 0, -15872, 0, 0, gRoomAssetUs_099939FA, gUnk_09EF96A4, gUnk_09EF9684, 8, 0},
     {256, -2560, 2048, -25088, 0, 0, gRoomAssetUs_09995E9C, gUnk_09EF96C8, gUnk_09EF96B0, 6, 0},
@@ -58,7 +58,7 @@ const BosMapConfig gBosMapConfig =
 #endif
 ;
 
-const s32 gUnk_0999204C[32] = {
+const s32 gBos5TanTable[32] = {
     6,
     12,
     18,
@@ -108,7 +108,7 @@ const MdMapData gMdMapData = {
     gUnk_099AC97C, 32768, { 0, 0 }, gUnk_09A3C8BC, 192, { 0, 0 }, { gUnk_09A208DC, gUnk_09A210DC, gUnk_09A218DC, gUnk_09A220DC }
 };
 
-const GaEntry gGaEntries[41] = {
+const MdFrameDef gMdFrameDefs[41] = {
     {
         32, 0, gUnk_099B497C, 16864, 0,
         { gUnk_08125E24, gUnk_08125E24, gUnk_08125E24, gUnk_09A228DC },
@@ -456,7 +456,7 @@ TaskDesc gTaskDescBosMdHahen = {
 };
 
 #ifdef VERSION_EU
-void* gUnkEu_09F847D4[5] = {
+void* gWorldselectBg1Maps[5] = {
     gUnk_09A31FDC,
     gUnkEu_09A840A0,
     gUnkEu_09A84FA0,
@@ -464,7 +464,7 @@ void* gUnkEu_09F847D4[5] = {
     gUnkEu_09A845A0,
 };
 
-void* gUnkEu_09F847E8[5] = {
+void* gWorldselectNameTileData[5] = {
     gUnk_099F4D3C,
     gUnkEu_09A0A480,
     gUnkEu_09A1DC80,
@@ -472,7 +472,7 @@ void* gUnkEu_09F847E8[5] = {
     gUnkEu_09A10C80,
 };
 
-void* gUnkEu_09F847FC[5] = {
+void* gWorldselectTitleGfx[5] = {
     gUnk_0999CB90,
     gUnkEu_099A31F4,
     gUnkEu_099A3DF4,
@@ -480,7 +480,7 @@ void* gUnkEu_09F847FC[5] = {
     gUnkEu_099A35E0,
 };
 
-void* gUnkEu_09F84810[5] = {
+void* gWorldselectTitleTileData[5] = {
     gUnk_0999CBB6,
     gUnkEu_099A3220,
     gUnkEu_099A3E1A,
@@ -490,7 +490,7 @@ void* gUnkEu_09F84810[5] = {
 
 #endif
 
-void* gUnk_09EF8F24[30] = {
+void* gWorldselectPaletteCycle[30] = {
     gUnk_09A3CA3C,
     gUnk_09A3CA5C,
     gUnk_09A3CA7C,
@@ -524,72 +524,72 @@ void* gUnk_09EF8F24[30] = {
 };
 
 #ifdef VERSION_EU
-const WorldselectTileSizes gUnkEu_099991E0 = { { 896, 960, 1024, 1024, 960 } };
+const WorldselectTileSizes gWorldselectTitleTileSizes = { { 896, 960, 1024, 1024, 960 } };
 #endif
 
-const MdModel gMdModels[13] = {
+const WorldselectWorldDef gWorldselectWorldDefs[13] = {
 #ifdef VERSION_EU
-    { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gUnkEu_09F847E8, 8192, 0 },
+    { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gWorldselectNameTileData, 8192, 0 },
 #else
     { 1, 1, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gUnk_099F6D3C },
 #endif
 #ifdef VERSION_EU
-    { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gUnkEu_09F847E8, 12288, 0 },
+    { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gWorldselectNameTileData, 12288, 0 },
 #else
     { 2, 2, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gUnk_099F7D3C },
 #endif
 #ifdef VERSION_EU
-    { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gUnkEu_09F847E8, 6144, 0 },
+    { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gWorldselectNameTileData, 6144, 0 },
 #else
     { 4, 3, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gUnk_099F653C },
 #endif
 #ifdef VERSION_EU
-    { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gUnkEu_09F847E8, 0, 0 },
+    { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gWorldselectNameTileData, 0, 0 },
 #else
     { 8, 4, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gUnk_099F4D3C },
 #endif
 #ifdef VERSION_EU
-    { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gUnkEu_09F847E8, 10240, 0 },
+    { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gWorldselectNameTileData, 10240, 0 },
 #else
     { 16, 5, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gUnk_099F753C },
 #endif
 #ifdef VERSION_EU
-    { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gUnkEu_09F847E8, 14336, 0 },
+    { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gWorldselectNameTileData, 14336, 0 },
 #else
     { 32, 6, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gUnk_099F853C },
 #endif
 #ifdef VERSION_EU
-    { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gUnkEu_09F847E8, 16384, 0 },
+    { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gWorldselectNameTileData, 16384, 0 },
 #else
     { 64, 7, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gUnk_099F8D3C },
 #endif
 #ifdef VERSION_EU
-    { 128, 8, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gUnkEu_09F847E8, 20480, 0 },
+    { 128, 8, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gWorldselectNameTileData, 20480, 0 },
 #else
     { 128, 8, 129, 151, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gUnk_099F9D3C },
 #endif
 #ifdef VERSION_EU
-    { 256, 9, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gUnkEu_09F847E8, 2048, 0 },
+    { 256, 9, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gWorldselectNameTileData, 2048, 0 },
 #else
     { 256, 9, 53, 177, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gUnk_099F553C },
 #endif
 #ifdef VERSION_EU
-    { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gUnkEu_09F847E8, 4096, 0 },
+    { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gWorldselectNameTileData, 4096, 0 },
 #else
     { 512, 10, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gUnk_099F5D3C },
 #endif
 #ifdef VERSION_EU
-    { 2048, 11, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gUnkEu_09F847E8, 22528, 0 },
+    { 2048, 11, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gWorldselectNameTileData, 22528, 0 },
 #else
     { 2048, 11, 44, 186, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gUnk_099FA53C },
 #endif
 #ifdef VERSION_EU
-    { 4096, 12, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gUnkEu_09F847E8, 24576, 0 },
+    { 4096, 12, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gWorldselectNameTileData, 24576, 0 },
 #else
     { 4096, 12, 61, 192, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gUnk_099FAD3C },
 #endif
 #ifdef VERSION_EU
-    { 1024, 13, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gUnkEu_09F847E8, 18432, 0 },
+    { 1024, 13, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gWorldselectNameTileData, 18432, 0 },
 #else
     { 1024, 13, 134, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gUnk_099F953C },
 #endif
@@ -604,39 +604,39 @@ Mode gModeWorldselect = {
 
 GaWork* gGaWork;
 u32 gUnk_02034FEC;
-s16 gUnk_02034FF0;
+s16 gWorldselectCursor;
 u32 gUnk_02034FF4;
-MdSlot gMdSlots[5];
-s16 gUnk_02035070[14];
-u32 gUnk_0203508C;
-s16 gUnk_02035090;
-s16 gUnk_02035092;
+WorldselectSlot gWorldselectSlots[5];
+s16 gWorldselectWorlds[14];
+u32 gWorldselectRotation;
+s16 gWorldselectSlotCount;
+s16 gWorldselectWorldCount;
 u32 gUnk_02035094;
-void* gUnk_02035098[2];
-void* gUnk_020350A0[2];
-struct ObjTiles* gUnk_020350A8;
-struct ObjPalette* gUnk_020350AC;
-struct ObjTiles* gUnk_020350B0;
-u8 gUnk_020350B4;
-s16 gUnk_020350B6;
-s16 gUnk_020350B8;
-s16 gUnk_020350BA;
-void* gUnk_020350BC;
-s16 gUnk_020350C0;
-s16 gUnk_020350C2;
+void* gWorldselectCardTiles[2];
+void* gWorldselectCardPalettes[2];
+struct ObjTiles* gWorldselectTitleTiles;
+struct ObjPalette* gWorldselectOverlayPalette;
+struct ObjTiles* gWorldselectFrameTiles;
+u8 gWorldselectBobPhase;
+s16 gWorldselectNameMode;
+s16 gWorldselectNameWidth;
+s16 gWorldselectNameWorld;
+void* gWorldselectNameBuffer;
+s16 gWorldselectStep;
+s16 gWorldselectTimer;
 u32 gUnk_020350C4;
-s32 gUnk_020350C8[2];
-s32 gUnk_020350D0;
+s32 gWorldselectFrameY[2];
+s32 gWorldselectTitleX;
 u32 gUnk_020350D4;
 TaskPool gWorldselectTaskPool;
-s16 gUnk_020350EC;
-u8 gUnk_020350EE;
-u8 gUnk_020350EF;
-u8 gUnk_020350F0;
-s16 gUnk_020350F2;
-u16 gUnk_020350F4;
+s16 gWorldselectTutorialStep;
+u8 gWorldselectFirstVisit;
+u8 gWorldselectBgAnimActive;
+u8 gWorldselectCancelled;
+s16 gWorldselectPaletteTimer;
+u16 gWorldselectPaletteFrame;
 
-u16 func_080F7DD8(s32 a) {
+u16 Bos5Atan(s32 a) {
     u16 i;
 
     if (a == 0x100) {
@@ -644,18 +644,18 @@ u16 func_080F7DD8(s32 a) {
     }
     i = 0;
 
-    if (a >= gUnk_0999204C[0]) {
+    if (a >= gBos5TanTable[0]) {
         do {
             i++;
             if (i > 0x3F) {
                 break;
             }
-        } while (a >= gUnk_0999204C[i]);
+        } while (a >= gBos5TanTable[i]);
     }
     return i;
 }
 
-s32 func_080F7E0C(s32 x0, s32 y0, s32 x1, s32 y1) {
+s32 Bos5GetAngle(s32 x0, s32 y0, s32 x1, s32 y1) {
     s32 dx;
     s32 dy;
     s32 tmp;
@@ -690,18 +690,18 @@ s32 func_080F7E0C(s32 x0, s32 y0, s32 x1, s32 y1) {
             return 0;
         }
         dx <<= 8;
-        t = 0x40 - func_080F7DD8(dx / dy);
+        t = 0x40 - Bos5Atan(dx / dy);
     } else {
         if (dx == 0) {
             return 0;
         }
         dy <<= 8;
-        t = func_080F7DD8(dy / dx);
+        t = Bos5Atan(dy / dx);
     }
     return (t + (q << 6) + 0x40) & 0xFF;
 }
 
-void func_080F7E84(GaEntryWork* e) {
+void BosGaEntryUpdateFall(GaEntryWork* e) {
     e->vz += 0x4C;
     e->actor.z += e->vz;
     if (e->actor.z > 0) {
@@ -712,144 +712,144 @@ void func_080F7E84(GaEntryWork* e) {
         e->vz = -e->vz / 2;
     }
 
-    if (e->unk_164 > 0) {
-        e->actor.x += e->unk_164;
-        e->unk_164 -= 0x11;
-        if (e->unk_164 < 0) {
-            e->unk_164 = 0;
+    if (e->vx > 0) {
+        e->actor.x += e->vx;
+        e->vx -= 0x11;
+        if (e->vx < 0) {
+            e->vx = 0;
         }
-    } else if (e->unk_164 < 0) {
-        e->actor.x += e->unk_164;
-        e->unk_164 += 0x11;
-        if (e->unk_164 > 0) {
-            e->unk_164 = 0;
+    } else if (e->vx < 0) {
+        e->actor.x += e->vx;
+        e->vx += 0x11;
+        if (e->vx > 0) {
+            e->vx = 0;
         }
     }
 
-    if (e->unk_168 > 0) {
-        e->actor.y += e->unk_168 / 2;
-        e->unk_168 -= 0x11;
-        if (e->unk_168 < 0) {
-            e->unk_168 = 0;
+    if (e->vy > 0) {
+        e->actor.y += e->vy / 2;
+        e->vy -= 0x11;
+        if (e->vy < 0) {
+            e->vy = 0;
         }
-    } else if (e->unk_168 < 0) {
-        e->actor.y += e->unk_168 / 2;
-        e->unk_168 += 0x11;
-        if (e->unk_168 > 0) {
-            e->unk_168 = 0;
+    } else if (e->vy < 0) {
+        e->actor.y += e->vy / 2;
+        e->vy += 0x11;
+        if (e->vy > 0) {
+            e->vy = 0;
         }
     }
     ClampBattlePosition(&e->actor.x, &e->actor.y, -0x18, -0x0C);
 }
 
-void func_080F7F54(GaWork* work, s32 state) {
-    if (work->unk_004 != 11 && work->unk_000 != 11) {
-        work->unk_004 = state;
+void BosGaRequestState(GaWork* work, s32 state) {
+    if (work->nextState != 11 && work->state != 11) {
+        work->nextState = state;
         work->flags |= 1;
     }
 }
 
-s32 func_080F7F70(GaWork* work, s16 i) {
+s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
     s32 v;
 
-    v = gRoomTableEntries[i].unk_04;
+    v = gGaEntryDefs[i].offsetX;
 
-    if (work->unk_018 != 0) {
+    if (work->flipped != 0) {
         v = -v;
     }
     return v;
 }
 
-s32 func_080F7F94(GaWork* work, s16 i) {
-    return gRoomTableEntries[i].unk_08;
+s32 BosGaEntryOffsetY(GaWork* work, s16 i) {
+    return gGaEntryDefs[i].offsetY;
 }
 
-s32 func_080F7FAC(GaWork* work, s16 i) {
-    return func_080F7F70(work, i) + gBtlWork->unk_0CC;
+s32 BosGaEntryHomeX(GaWork* work, s16 i) {
+    return BosGaEntryOffsetX(work, i) + gBtlWork->bossX;
 }
 
-s32 func_080F7FC8(GaWork* work, s16 i) {
-    return func_080F7F94(work, i) + gBtlWork->unk_0D0;
+s32 BosGaEntryHomeY(GaWork* work, s16 i) {
+    return BosGaEntryOffsetY(work, i) + gBtlWork->bossY;
 }
 
-s32 func_080F7FE4(GaWork* work, s16 i) {
-    return gRoomTableEntries[i].unk_0C + gBtlWork->unk_0D4;
+s32 BosGaEntryHomeZ(GaWork* work, s16 i) {
+    return gGaEntryDefs[i].offsetZ + gBtlWork->bossZ;
 }
 
-void func_080F800C(GaWork* work, s32 i) {
+void BosGaEntryResetHome(GaWork* work, s32 i) {
     GaEntryWork* e;
     s32 v;
 
     e = &work->entries[i];
 
-    if (work->unk_018 == 0) {
+    if (work->flipped == 0) {
         e->actor.flags |= 4;
     } else {
         e->actor.flags &= ~4;
     }
-    e->unk_140 = func_080F7F70(work, i);
-    e->unk_144 = func_080F7F94(work, i);
-    e->unk_124 = func_080F7FAC(work, i);
-    e->unk_128 = func_080F7FC8(work, i);
-    e->unk_12C = func_080F7FE4(work, i);
-    v = gRoomTableEntries[i].x2;
+    e->offsetX = BosGaEntryOffsetX(work, i);
+    e->offsetY = BosGaEntryOffsetY(work, i);
+    e->baseX = BosGaEntryHomeX(work, i);
+    e->baseY = BosGaEntryHomeY(work, i);
+    e->baseZ = BosGaEntryHomeZ(work, i);
+    v = gGaEntryDefs[i].x2;
 
-    if (work->unk_018 != 0) {
+    if (work->flipped != 0) {
         v = -v;
     }
     e->x2 = v;
-    e->y2 = gRoomTableEntries[i].y2;
+    e->y2 = gGaEntryDefs[i].y2;
 }
 
-void func_080F80C0(GaWork* work) {
+void BosGaUpdateFacing(GaWork* work) {
     s32 flip;
     u32 i;
 
     flip = 0;
 
-    if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+    if (gBtlWork->bossX <= gBtlWork->actor->x) {
         flip = 1;
     }
 
-    if (work->unk_018 != flip) {
-        work->unk_018 = flip;
+    if (work->flipped != flip) {
+        work->flipped = flip;
 
         for (i = 0; i <= 5; i++) {
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
     }
 }
 
-void func_080F80FC(GaWork* work, u32 i, s32 c) {
+void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     GaEntryWork* e;
     void* p;
 
     e = &work->entries[i];
-    e->unk_1A0 = i;
-    e->unk_13C = 0;
-    e->unk_158 = GetRandom();
-    e->unk_11C = 0;
+    e->index = i;
+    e->bobZ = 0;
+    e->bobAngle = GetRandom();
+    e->mode = 0;
     e->vz = 0;
-    e->unk_112 = 0;
-    e->unk_15A = 0;
+    e->rotation = 0;
+    e->flags = 0;
     e->unk_15C = 0;
-    e->unk_164 = e->unk_168 = 0;
-    func_080F800C(work, i);
+    e->vx = e->vy = 0;
+    BosGaEntryResetHome(work, i);
     e->unk_130 = 0;
     e->unk_134 = 0;
     e->unk_138 = 0;
-    e->unk_1A4 = 0;
+    e->orbitAngle = 0;
 
     if (c != 0) {
         if (i != 1) {
-            e->unk_124 -= (GetRandom() & 0x1F) << 8;
-            e->unk_128 -= (GetRandom() & 0x1F) << 8;
+            e->baseX -= (GetRandom() & 0x1F) << 8;
+            e->baseY -= (GetRandom() & 0x1F) << 8;
         }
-        e->unk_12C -= 0xA000;
+        e->baseZ -= 0xA000;
     }
-    func_0801B37C(&e->actor, &gUnk_09991F44, e->unk_124, e->unk_128, e->unk_12C);
-    func_0801C7FC(&e->actor, gUnk_09991F44.unk_00, gRoomTableEntries[i].unk_00);
-    e->actor.unk_0A0 = 0x10;
+    InitEnemyBtlObj(&e->actor, &gBosGaEmyKind, e->baseX, e->baseY, e->baseZ);
+    SetEnemyHpFromStats(&e->actor, gBosGaEmyKind.id, gGaEntryDefs[i].hpScale);
+    e->actor.radiusY = 0x10;
 
     if (i == 0) {
         e->actor.flags |= 0x400;
@@ -861,14 +861,14 @@ void func_080F80FC(GaWork* work, u32 i, s32 c) {
     switch (i) {
     case 4:
     case 5:
-        e->unk_15A |= 1;
+        e->flags |= 1;
         break;
     }
     TaskPoolInit(&e->tasks, 1);
     TaskCreate(&e->tasks, &gTaskDescBtlShadow, &e->actor);
-    p = gRoomTableEntries[i].gfxTable;
-    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, gRoomTableEntries[i].spriteCount), gRoomTableEntries[i].owner);
-    AnimInit(&e->anim, gRoomTableEntries[i].anims, p);
+    p = gGaEntryDefs[i].gfxTable;
+    e->tiles = AllocObjTiles(GetMaxSpriteTileBytes(p, gGaEntryDefs[i].spriteCount), gGaEntryDefs[i].owner);
+    AnimInit(&e->anim, gGaEntryDefs[i].anims, p);
     AnimStart(&e->anim, 0, 1);
     e->gfx = AnimGetGfx(&e->anim);
 
@@ -881,22 +881,22 @@ void func_080F80FC(GaWork* work, u32 i, s32 c) {
     ColliderInit(&e->actor.collider, 8, 8, 0x10);
 }
 
-void func_080F8374(GaEntryWork* e) {
-    if (!(e->unk_15A & 0x10)) {
+void BosGaEntryRelease(GaEntryWork* e) {
+    if (!(e->flags & 0x10)) {
         ColliderUnregister(&e->actor.collider);
         ReleaseObjTiles(e->tiles);
-        func_0801B7D8(&e->actor);
+        ReleaseEnemyBtlObj(&e->actor);
         TaskPoolDestroy(&e->tasks);
-        e->unk_15A |= 0x10;
+        e->flags |= 0x10;
     }
 }
 
-void func_080F83BC(void) {
-    func_080F8374(&gGaWork->entries[1]);
-    func_080F8374(&gGaWork->entries[0]);
+void BosGaReleaseBody(void) {
+    BosGaEntryRelease(&gGaWork->entries[1]);
+    BosGaEntryRelease(&gGaWork->entries[0]);
 }
 
-void func_080F83E0(GaWork* work, GaEntryWork* e) {
+void BosGaEntryDraw(GaWork* work, GaEntryWork* e) {
     ObjAffine* f;
     u16 g;
     void* pal;
@@ -904,18 +904,18 @@ void func_080F83E0(GaWork* work, GaEntryWork* e) {
     u16 sy;
     GaEntryWork* q;
 
-    if (e->unk_15A & 0x10) {
+    if (e->flags & 0x10) {
         return;
     }
-    f = AllocObjAffineAngle(e->unk_112, 1);
+    f = AllocObjAffineAngle(e->rotation, 1);
     q = e;
     g = GetBattleSpritePriorityFlags(e->actor.y);
 
-    if (work->unk_018 == 1) {
+    if (work->flipped == 1) {
         g |= 1;
     }
 
-    if (func_0801CA00(&e->actor)) {
+    if (StepHitFlash(&e->actor)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -924,50 +924,50 @@ void func_080F83E0(GaWork* work, GaEntryWork* e) {
     DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), e->gfx, e->tiles, pal, f, g,
                0xEFFC - ((q->actor.y >> 8) << 2));
 
-    if (e->unk_1A0 == 0 && work->unk_000 != 7 && work->unk_000 != 8 && work->unk_000 != 9) {
+    if (e->index == 0 && work->state != 7 && work->state != 8 && work->state != 9) {
         DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), work->gfx, work->tiles, pal, f, g,
                    0xEFFC - ((q->actor.y >> 8) << 2));
     }
     TaskPoolDraw(&e->tasks);
 }
 
-u8 func_080F854C(GaWork* work) {
+u8 BosGaUpdateAssemble(GaWork* work) {
     u32 i = 0;
     GaEntryWork* e;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
-        work->unk_010 = 60;
-        work->unk_00C = i;
-        work->unk_008 = 1;
+        work->timer = 60;
+        work->step = i;
+        work->statePhase = 1;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
-            work->unk_010--;
-            if (work->unk_010 <= 0) {
-                work->unk_00C = 1;
+            work->timer--;
+            if (work->timer <= 0) {
+                work->step = 1;
             }
             break;
         case 1:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                e->unk_148 = 0;
-                e->unk_14C = 0;
-                e->unk_150 = 1;
+                e->baseVx = 0;
+                e->baseVy = 0;
+                e->baseVz = 1;
                 e->unk_15C = i * 8;
                 if (i == 1) {
-                    e->unk_112 = 0;
+                    e->rotation = 0;
                 } else {
-                    e->unk_112 = GetRandom() % 100;
+                    e->rotation = GetRandom() % 100;
                 }
             }
-            gBtlWork->unk_0D4 = -0x2000;
-            work->unk_010 = 5;
-            work->unk_00C = 2;
+            gBtlWork->bossZ = -0x2000;
+            work->timer = 5;
+            work->step = 2;
             break;
         case 2:
             for (i = 0; i <= 5; i++) {
@@ -976,35 +976,35 @@ u8 func_080F854C(GaWork* work) {
                     if ((s16)e->unk_15C > 0) {
                         e->unk_15C--;
                     } else if ((s16)e->unk_15C == 0) {
-                        e->unk_124 += e->unk_148;
-                        e->unk_128 += e->unk_14C;
-                        e->unk_12C += e->unk_150;
-                        if (e->unk_150 > 0) {
-                            e->unk_150 += 76;
-                            if (e->unk_12C > -0x800) {
-                                s32 t = func_080F7FE4(work, i);
-                                e->unk_150 = (t - e->unk_12C) / 15;
-                                e->unk_154 = -((t - e->unk_12C) * 2) / 900;
-                                e->unk_148 = (func_080F7FAC(work, i) - e->unk_124) / 30;
-                                e->unk_14C = (func_080F7FC8(work, i) - e->unk_128) / 30;
-                                e->unk_118 = e->unk_112 << 8;
-                                e->unk_114 = 30;
+                        e->baseX += e->baseVx;
+                        e->baseY += e->baseVy;
+                        e->baseZ += e->baseVz;
+                        if (e->baseVz > 0) {
+                            e->baseVz += 76;
+                            if (e->baseZ > -0x800) {
+                                s32 t = BosGaEntryHomeZ(work, i);
+                                e->baseVz = (t - e->baseZ) / 15;
+                                e->baseAccelZ = -((t - e->baseZ) * 2) / 900;
+                                e->baseVx = (BosGaEntryHomeX(work, i) - e->baseX) / 30;
+                                e->baseVy = (BosGaEntryHomeY(work, i) - e->baseY) / 30;
+                                e->rotationFixed = e->rotation << 8;
+                                e->landSteps = 30;
                                 m4aSongNumStart(SONG_SND_388);
                             }
                         } else {
-                            ApproachValue(&e->unk_118, 0x10000, e->unk_114);
-                            e->unk_112 = e->unk_118 >> 8;
-                            e->unk_150 += e->unk_154;
-                            e->unk_114--;
-                            if ((s16)e->unk_114 <= 0) {
-                                func_080F800C(work, i);
-                                e->unk_112 = 0;
-                                e->unk_150 = 0;
+                            ApproachValue(&e->rotationFixed, 0x10000, e->landSteps);
+                            e->rotation = e->rotationFixed >> 8;
+                            e->baseVz += e->baseAccelZ;
+                            e->landSteps--;
+                            if ((s16)e->landSteps <= 0) {
+                                BosGaEntryResetHome(work, i);
+                                e->rotation = 0;
+                                e->baseVz = 0;
                                 e->unk_15C = -1;
-                                work->unk_010--;
-                                if (work->unk_010 <= 0) {
-                                    work->unk_010 = 60;
-                                    work->unk_00C = 3;
+                                work->timer--;
+                                if (work->timer <= 0) {
+                                    work->timer = 60;
+                                    work->step = 3;
                                 }
                             }
                         }
@@ -1013,18 +1013,18 @@ u8 func_080F854C(GaWork* work) {
             }
             break;
         case 3:
-            ApproachValue(&gBtlWork->unk_0D4, 0, work->unk_010);
+            ApproachValue(&gBtlWork->bossZ, 0, work->timer);
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i != 1) {
-                    ApproachValue(&e->unk_12C, func_080F7FE4(work, i), work->unk_010);
+                    ApproachValue(&e->baseZ, BosGaEntryHomeZ(work, i), work->timer);
                 }
             }
-            work->unk_010--;
-            if (work->unk_010 <= 0) {
-                work->unk_010 = 0;
-                work->unk_A40 = 256;
-                work->unk_00C = 4;
+            work->timer--;
+            if (work->timer <= 0) {
+                work->timer = 0;
+                work->vz = 256;
+                work->step = 4;
             }
             break;
         case 4:
@@ -1033,18 +1033,18 @@ u8 func_080F854C(GaWork* work) {
                 case 0:
                 case 2:
                 case 3:
-                    work->entries[i].unk_12C += work->unk_A40;
+                    work->entries[i].baseZ += work->vz;
                     break;
                 }
             }
-            work->unk_A40 -= 10;
-            if (work->unk_A40 > 0) {
-                work->unk_010++;
+            work->vz -= 10;
+            if (work->vz > 0) {
+                work->timer++;
             } else {
-                work->unk_010--;
-                if (work->unk_010 <= 0) {
-                    work->unk_010 = 60;
-                    work->unk_00C = 5;
+                work->timer--;
+                if (work->timer <= 0) {
+                    work->timer = 60;
+                    work->step = 5;
                 }
             }
             break;
@@ -1052,12 +1052,12 @@ u8 func_080F854C(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i == 1) {
-                    ApproachValue(&e->unk_12C, func_080F7FE4(work, i), work->unk_010);
+                    ApproachValue(&e->baseZ, BosGaEntryHomeZ(work, i), work->timer);
                 }
             }
-            work->unk_010--;
-            if (work->unk_010 <= 0) {
-                work->unk_00C = 6;
+            work->timer--;
+            if (work->timer <= 0) {
+                work->step = 6;
             }
             break;
         }
@@ -1065,89 +1065,89 @@ u8 func_080F854C(GaWork* work) {
     case 2:
         break;
     }
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F8958(GaWork* work) {
+u8 BosGaUpdateIdle(GaWork* work) {
     s32 d;
     s32 dx;
     s32 dy;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
-        work->unk_010 = 15;
+        work->timer = 15;
         break;
     case 1:
-        if (gBtlWork->unk_0A0 == 0) {
+        if (gBtlWork->phase == 0) {
             break;
         }
-        work->unk_010--;
-        if (work->unk_010 > 0) {
+        work->timer--;
+        if (work->timer > 0) {
             break;
         }
-        dx = gBtlWork->actor->x - gBtlWork->unk_0CC;
+        dx = gBtlWork->actor->x - gBtlWork->bossX;
         dx = (dx * dx) >> 8;
-        dy = gBtlWork->actor->y - gBtlWork->unk_0D0;
+        dy = gBtlWork->actor->y - gBtlWork->bossY;
         dy = (dy * dy) >> 8;
         d = (dx + dy) >> 8;
         if (d <= 0xE0F) {
-            if (work->unk_A4C == 0) {
+            if (work->attackToggle == 0) {
                 if (GetRandom() % 3 != 0) {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 }
             } else {
                 if (GetRandom() % 3 != 0) {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 } else {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 }
             }
         } else if (d <= 0x270F) {
-            if (work->unk_A4C == 0) {
+            if (work->attackToggle == 0) {
                 if (GetRandom() & 1) {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 }
             } else {
                 if (GetRandom() & 1) {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 } else {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 }
             }
         } else {
-            if (work->unk_A4C == 0) {
+            if (work->attackToggle == 0) {
                 if (GetRandom() % 3 != 0) {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 } else {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 }
             } else {
                 if (GetRandom() % 3 != 0) {
-                    func_080F7F54(work, 1);
-                    func_0801BCD4(&work->entries[0].actor);
+                    BosGaRequestState(work, 1);
+                    RequestEnemyCardUse(&work->entries[0].actor);
                 } else {
-                    func_080F7F54(work, 2);
+                    BosGaRequestState(work, 2);
                 }
             }
         }
@@ -1156,38 +1156,38 @@ u8 func_080F8958(GaWork* work) {
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F8AC8(GaWork* work) {
+u8 BosGaUpdateWalk(GaWork* work) {
     u32 i;
     GaEntryWork* e;
     s32 x, y;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
-        switch (work->unk_008) {
+        switch (work->statePhase) {
         case 0: {
             s32 d;
-            if (e->unk_1A0 != 0) {
+            if (e->index != 0) {
                 break;
             }
             x = gBtlWork->actor->x;
             y = gBtlWork->actor->y;
-            if (work->unk_A4C == 0) {
-                if (x > e->unk_124) {
+            if (work->attackToggle == 0) {
+                if (x > e->baseX) {
                     x -= 0x2800;
                     if (x < 0) {
                         x += 0x5000;
@@ -1199,7 +1199,7 @@ u8 func_080F8AC8(GaWork* work) {
                     }
                 }
             } else {
-                if (x > e->unk_124) {
+                if (x > e->baseX) {
                     x -= 0x6400;
                     if (x < 0) {
                         x += 0xC800;
@@ -1212,206 +1212,206 @@ u8 func_080F8AC8(GaWork* work) {
                 }
                 y = ((GetRandom() & 80) + 296) << 8;
             }
-            work->unk_A38 = ((x - e->unk_124) * (x - e->unk_124)) >> 8;
-            work->unk_A3C = ((y - e->unk_128) * (y - e->unk_128)) >> 8;
-            d = (work->unk_A38 + work->unk_A3C) >> 8;
-            work->unk_010 = 15;
-            work->unk_012 = d / 4900 + 2;
-            work->unk_A40 = 768;
-            work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-            work->angle = func_080F7E0C(e->unk_124, e->unk_128, x, y);
-            work->unk_A38 = (x - e->unk_124) / ((work->unk_012 - 1) * work->unk_010 * 2);
-            if (work->unk_A38 > 640) {
-                work->unk_A38 = 640;
-            } else if (work->unk_A38 < -640) {
-                work->unk_A38 = -640;
+            work->vx = ((x - e->baseX) * (x - e->baseX)) >> 8;
+            work->vy = ((y - e->baseY) * (y - e->baseY)) >> 8;
+            d = (work->vx + work->vy) >> 8;
+            work->timer = 15;
+            work->stepsLeft = d / 4900 + 2;
+            work->vz = 768;
+            work->vzDelta = work->vz * 2 / work->timer;
+            work->angle = Bos5GetAngle(e->baseX, e->baseY, x, y);
+            work->vx = (x - e->baseX) / ((work->stepsLeft - 1) * work->timer * 2);
+            if (work->vx > 640) {
+                work->vx = 640;
+            } else if (work->vx < -640) {
+                work->vx = -640;
             }
-            work->unk_A3C = (y - e->unk_128) / ((work->unk_012 - 1) * work->unk_010 * 2);
-            if (work->unk_A3C > 640) {
-                work->unk_A3C = 640;
-            } else if (work->unk_A3C < -640) {
-                work->unk_A3C = -640;
+            work->vy = (y - e->baseY) / ((work->stepsLeft - 1) * work->timer * 2);
+            if (work->vy > 640) {
+                work->vy = 640;
+            } else if (work->vy < -640) {
+                work->vy = -640;
             }
-            if (work->unk_A3C >= 0) {
-                work->entries[4].unk_15A |= 8;
-                work->entries[5].unk_15A &= 0xFFF7;
+            if (work->vy >= 0) {
+                work->entries[4].flags |= 8;
+                work->entries[5].flags &= 0xFFF7;
             } else {
-                work->entries[4].unk_15A &= 0xFFF7;
-                work->entries[5].unk_15A |= 8;
+                work->entries[4].flags &= 0xFFF7;
+                work->entries[5].flags |= 8;
             }
-            func_080F80C0(work);
+            BosGaUpdateFacing(work);
             break;
         }
         case 1:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 4:
             case 5: {
                 s32 velocity;
-                if (!(e->unk_15A & 8)) {
+                if (!(e->flags & 8)) {
                     break;
                 }
-                velocity = work->unk_A38;
-                e->unk_124 += velocity;
+                velocity = work->vx;
+                e->baseX += velocity;
                 if (velocity < 0) {
-                    if (e->unk_124 < 0) {
-                        e->unk_124 = 0;
+                    if (e->baseX < 0) {
+                        e->baseX = 0;
                     }
                 } else if (velocity > 0) {
-                    if (e->unk_124 > 0x10000) {
-                        e->unk_124 = 0x10000;
+                    if (e->baseX > 0x10000) {
+                        e->baseX = 0x10000;
                     }
                 }
-                velocity = work->unk_A3C;
-                e->unk_128 += velocity;
+                velocity = work->vy;
+                e->baseY += velocity;
                 if (velocity < 0) {
-                    if (e->unk_128 < 0x12800) {
-                        e->unk_128 = 0x12800;
+                    if (e->baseY < 0x12800) {
+                        e->baseY = 0x12800;
                     }
                 } else if (velocity > 0) {
-                    if (e->unk_128 > 0x17800) {
-                        e->unk_128 = 0x17800;
+                    if (e->baseY > 0x17800) {
+                        e->baseY = 0x17800;
                     }
                 }
-                e->unk_12C -= work->unk_A40;
-                work->unk_A40 -= work->unk_A44;
-                work->unk_010--;
-                if (work->unk_010 <= 0) {
-                    if (!(e->unk_15A & 4)) {
-                        if (e->unk_1A0 == 4) {
+                e->baseZ -= work->vz;
+                work->vz -= work->vzDelta;
+                work->timer--;
+                if (work->timer <= 0) {
+                    if (!(e->flags & 4)) {
+                        if (e->index == 4) {
                             m4aSongNumStart(SONG_BTL_IRON_FOOTL);
-                        } else if (e->unk_1A0 == 5) {
+                        } else if (e->index == 5) {
                             m4aSongNumStart(SONG_BTL_IRON_FOOTR);
                         }
                     }
-                    work->unk_012--;
-                    e->unk_12C = func_080F7FE4(work, i);
-                    if (work->unk_012 > 0) {
-                        if (work->unk_012 == 1) {
-                            work->unk_010 = 15;
+                    work->stepsLeft--;
+                    e->baseZ = BosGaEntryHomeZ(work, i);
+                    if (work->stepsLeft > 0) {
+                        if (work->stepsLeft == 1) {
+                            work->timer = 15;
                         } else {
-                            work->unk_010 = 30;
+                            work->timer = 30;
                         }
-                        work->unk_A40 = 768;
-                        work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                        work->entries[5].unk_15A ^= 8;
-                        work->entries[4].unk_15A ^= 8;
+                        work->vz = 768;
+                        work->vzDelta = work->vz * 2 / work->timer;
+                        work->entries[5].flags ^= 8;
+                        work->entries[4].flags ^= 8;
                     } else {
-                        func_080F7F54(work, 1);
+                        BosGaRequestState(work, 1);
                     }
                 }
                 break;
             }
             case 0: {
                 s32 a, b, d;
-                a = work->entries[4].unk_124 - work->entries[4].unk_140;
-                b = work->entries[5].unk_124 - work->entries[5].unk_140;
+                a = work->entries[4].baseX - work->entries[4].offsetX;
+                b = work->entries[5].baseX - work->entries[5].offsetX;
                 d = a - b >= 0 ? a - b : b - a;
-                e->unk_124 = (a < b ? d + 1 : d) ? a : b;
-                gBtlWork->unk_0CC = e->unk_124;
-                a = work->entries[4].unk_128 - work->entries[4].unk_144;
-                b = work->entries[5].unk_128 - work->entries[5].unk_144;
+                e->baseX = (a < b ? d + 1 : d) ? a : b;
+                gBtlWork->bossX = e->baseX;
+                a = work->entries[4].baseY - work->entries[4].offsetY;
+                b = work->entries[5].baseY - work->entries[5].offsetY;
                 d = a - b >= 0 ? a - b : b - a;
-                e->unk_128 = (a < b ? d + 1 : d) ? a : b;
-                gBtlWork->unk_0D0 = e->unk_128;
+                e->baseY = (a < b ? d + 1 : d) ? a : b;
+                gBtlWork->bossY = e->baseY;
                 break;
             }
             default:
-                func_080F800C(work, i);
+                BosGaEntryResetHome(work, i);
                 break;
             }
             break;
         case 2:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 4:
             case 5:
-                e->unk_15A &= 0xFFF7;
+                e->flags &= 0xFFF7;
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
             break;
         }
     }
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
-u8 func_080F8F9C(GaWork* work) {
+u8 BosGaUpdateStomp(GaWork* work) {
     u32 i = 0;
     GaEntryWork* e;
     s32 velocity;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
             for (; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
-                    e->unk_15A |= 8;
+                    e->flags |= 8;
                     break;
                 case 5:
-                    e->unk_15A &= 0xFFF7;
+                    e->flags &= 0xFFF7;
                     break;
                 case 0:
-                    work->unk_010 = 10;
-                    work->unk_012 = 5;
-                    work->unk_A40 = 1024;
-                    work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                    work->unk_00C = 0;
-                    func_080F80C0(work);
+                    work->timer = 10;
+                    work->stepsLeft = 5;
+                    work->vz = 1024;
+                    work->vzDelta = work->vz * 2 / work->timer;
+                    work->step = 0;
+                    BosGaUpdateFacing(work);
                     break;
                 }
             }
             break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
                 case 5:
-                    if (!(e->unk_15A & 8)) {
+                    if (!(e->flags & 8)) {
                         break;
                     }
-                    e->unk_12C -= work->unk_A40;
-                    work->unk_A40 -= work->unk_A44;
-                    work->unk_010--;
-                    if (work->unk_010 <= 0) {
-                        if (!(e->unk_15A & 4)) {
-                            if (e->unk_1A0 == 4) {
+                    e->baseZ -= work->vz;
+                    work->vz -= work->vzDelta;
+                    work->timer--;
+                    if (work->timer <= 0) {
+                        if (!(e->flags & 4)) {
+                            if (e->index == 4) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTL);
-                            } else if (e->unk_1A0 == 5) {
+                            } else if (e->index == 5) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTR);
                             }
                         }
-                        work->unk_012--;
-                        e->unk_12C = func_080F7FE4(work, i);
-                        if (work->unk_012 > 0) {
-                            if (work->unk_012 == 1) {
-                                work->unk_010 = 10;
+                        work->stepsLeft--;
+                        e->baseZ = BosGaEntryHomeZ(work, i);
+                        if (work->stepsLeft > 0) {
+                            if (work->stepsLeft == 1) {
+                                work->timer = 10;
                             } else {
-                                work->unk_010 = 20;
+                                work->timer = 20;
                             }
-                            work->unk_A40 = 896;
-                            work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                            work->entries[5].unk_15A ^= 8;
-                            work->entries[4].unk_15A ^= 8;
+                            work->vz = 896;
+                            work->vzDelta = work->vz * 2 / work->timer;
+                            work->entries[5].flags ^= 8;
+                            work->entries[4].flags ^= 8;
                         } else {
-                            work->unk_00C = 1;
+                            work->step = 1;
                         }
                     }
                     break;
                 default:
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                     break;
                 }
             }
@@ -1419,35 +1419,35 @@ u8 func_080F8F9C(GaWork* work) {
         case 1:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 0:
-                    work->unk_00C = 2;
+                    work->step = 2;
                     break;
                 case 4:
                 case 5:
-                    e->unk_15A &= 0xFFF7;
+                    e->flags &= 0xFFF7;
                     break;
                 }
-                func_080F800C(work, i);
+                BosGaEntryResetHome(work, i);
             }
             break;
         case 2:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
-                    e->unk_15A |= 8;
+                    e->flags |= 8;
                     break;
                 case 5:
-                    e->unk_15A &= 0xFFF7;
+                    e->flags &= 0xFFF7;
                     break;
                 case 0:
-                    work->unk_010 = 10;
-                    work->unk_012 = 5;
-                    work->unk_A40 = 1024;
-                    work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                    work->angle = func_080F7E0C(e->unk_124, e->unk_128, gBtlWork->actor->x, gBtlWork->actor->y);
-                    work->unk_00C = 3;
+                    work->timer = 10;
+                    work->stepsLeft = 5;
+                    work->vz = 1024;
+                    work->vzDelta = work->vz * 2 / work->timer;
+                    work->angle = Bos5GetAngle(e->baseX, e->baseY, gBtlWork->actor->x, gBtlWork->actor->y);
+                    work->step = 3;
                     break;
                 }
             }
@@ -1455,61 +1455,61 @@ u8 func_080F8F9C(GaWork* work) {
         case 3:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
                 case 5:
-                    if (!(e->unk_15A & 8)) {
+                    if (!(e->flags & 8)) {
                         break;
                     }
                     velocity = gSineTable[work->angle] * 972 >> 8;
-                    e->unk_124 += velocity;
+                    e->baseX += velocity;
                     if (velocity < 0) {
-                        if (e->unk_124 < 0) {
-                            e->unk_124 = 0;
+                        if (e->baseX < 0) {
+                            e->baseX = 0;
                         }
                     } else if (velocity > 0) {
-                        if (e->unk_124 > 0x10000) {
-                            e->unk_124 = 0x10000;
+                        if (e->baseX > 0x10000) {
+                            e->baseX = 0x10000;
                         }
                     }
                     velocity = -gSineTable[work->angle + 64] * 972 >> 8;
-                    e->unk_128 += velocity;
+                    e->baseY += velocity;
                     if (velocity < 0) {
-                        if (e->unk_128 < 0x12800) {
-                            e->unk_128 = 0x12800;
+                        if (e->baseY < 0x12800) {
+                            e->baseY = 0x12800;
                         }
                     } else if (velocity > 0) {
-                        if (e->unk_128 > 0x17800) {
-                            e->unk_128 = 0x17800;
+                        if (e->baseY > 0x17800) {
+                            e->baseY = 0x17800;
                         }
                     }
-                    e->unk_12C -= work->unk_A40;
-                    work->unk_A40 -= work->unk_A44;
-                    work->unk_010--;
-                    if (work->unk_010 <= 0) {
-                        if (!(e->unk_15A & 4)) {
-                            if (func_08011F78(226, e->actor.x, e->actor.y, e->actor.z, 16, 16, 16)) {
+                    e->baseZ -= work->vz;
+                    work->vz -= work->vzDelta;
+                    work->timer--;
+                    if (work->timer <= 0) {
+                        if (!(e->flags & 4)) {
+                            if (ApplyAttackBox(226, e->actor.x, e->actor.y, e->actor.z, 16, 16, 16)) {
                                 m4aSongNumStart(SONG_BTL_IRON_HIT00);
-                            } else if (e->unk_1A0 == 4) {
+                            } else if (e->index == 4) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTL);
-                            } else if (e->unk_1A0 == 5) {
+                            } else if (e->index == 5) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTR);
                             }
                         }
-                        work->unk_012--;
-                        e->unk_12C = func_080F7FE4(work, i);
-                        if (work->unk_012 > 0) {
-                            if (work->unk_012 == 1) {
-                                work->unk_010 = 10;
+                        work->stepsLeft--;
+                        e->baseZ = BosGaEntryHomeZ(work, i);
+                        if (work->stepsLeft > 0) {
+                            if (work->stepsLeft == 1) {
+                                work->timer = 10;
                             } else {
-                                work->unk_010 = 20;
+                                work->timer = 20;
                             }
-                            work->unk_A40 = 896;
-                            work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                            work->entries[5].unk_15A ^= 8;
-                            work->entries[4].unk_15A ^= 8;
+                            work->vz = 896;
+                            work->vzDelta = work->vz * 2 / work->timer;
+                            work->entries[5].flags ^= 8;
+                            work->entries[4].flags ^= 8;
                         } else {
-                            work->unk_00C = 4;
+                            work->step = 4;
                         }
                     }
                     break;
@@ -1517,23 +1517,23 @@ u8 func_080F8F9C(GaWork* work) {
             }
             break;
         case 4:
-            work->unk_010 = 20;
-            work->unk_012 = 6;
-            work->unk_A40 = 1024;
-            work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-            work->unk_00C = 5;
+            work->timer = 20;
+            work->stepsLeft = 6;
+            work->vz = 1024;
+            work->vzDelta = work->vz * 2 / work->timer;
+            work->step = 5;
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
-                    e->unk_15A |= 8;
-                    e->unk_148 = (func_080F7FAC(work, i) - e->unk_124) / (work->unk_012 * work->unk_010 / 2);
-                    e->unk_14C = (func_080F7FC8(work, i) - e->unk_128) / (work->unk_012 * work->unk_010 / 2);
+                    e->flags |= 8;
+                    e->baseVx = (BosGaEntryHomeX(work, i) - e->baseX) / (work->stepsLeft * work->timer / 2);
+                    e->baseVy = (BosGaEntryHomeY(work, i) - e->baseY) / (work->stepsLeft * work->timer / 2);
                     break;
                 case 5:
-                    e->unk_15A &= 0xFFF7;
-                    e->unk_148 = (func_080F7FAC(work, i) - e->unk_124) / (work->unk_012 * work->unk_010 / 2);
-                    e->unk_14C = (func_080F7FC8(work, i) - e->unk_128) / (work->unk_012 * work->unk_010 / 2);
+                    e->flags &= 0xFFF7;
+                    e->baseVx = (BosGaEntryHomeX(work, i) - e->baseX) / (work->stepsLeft * work->timer / 2);
+                    e->baseVy = (BosGaEntryHomeY(work, i) - e->baseY) / (work->stepsLeft * work->timer / 2);
                     break;
                 }
             }
@@ -1541,53 +1541,53 @@ u8 func_080F8F9C(GaWork* work) {
         case 5:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 4:
                 case 5:
-                    if (!(e->unk_15A & 8)) {
+                    if (!(e->flags & 8)) {
                         break;
                     }
-                    e->unk_124 += e->unk_148;
-                    if (e->unk_148 < 0) {
-                        if (e->unk_124 < 0) {
-                            e->unk_124 = 0;
+                    e->baseX += e->baseVx;
+                    if (e->baseVx < 0) {
+                        if (e->baseX < 0) {
+                            e->baseX = 0;
                         }
-                    } else if (e->unk_148 > 0) {
-                        if (e->unk_124 > 0x10000) {
-                            e->unk_124 = 0x10000;
-                        }
-                    }
-                    e->unk_128 += e->unk_14C;
-                    if (e->unk_14C < 0) {
-                        if (e->unk_128 < 0x12800) {
-                            e->unk_128 = 0x12800;
-                        }
-                    } else if (e->unk_14C > 0) {
-                        if (e->unk_128 > 0x17800) {
-                            e->unk_128 = 0x17800;
+                    } else if (e->baseVx > 0) {
+                        if (e->baseX > 0x10000) {
+                            e->baseX = 0x10000;
                         }
                     }
-                    e->unk_12C -= work->unk_A40;
-                    work->unk_A40 -= work->unk_A44;
-                    work->unk_010--;
-                    if (work->unk_010 <= 0) {
-                        if (!(e->unk_15A & 4)) {
-                            if (e->unk_1A0 == 4) {
+                    e->baseY += e->baseVy;
+                    if (e->baseVy < 0) {
+                        if (e->baseY < 0x12800) {
+                            e->baseY = 0x12800;
+                        }
+                    } else if (e->baseVy > 0) {
+                        if (e->baseY > 0x17800) {
+                            e->baseY = 0x17800;
+                        }
+                    }
+                    e->baseZ -= work->vz;
+                    work->vz -= work->vzDelta;
+                    work->timer--;
+                    if (work->timer <= 0) {
+                        if (!(e->flags & 4)) {
+                            if (e->index == 4) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTL);
-                            } else if (e->unk_1A0 == 5) {
+                            } else if (e->index == 5) {
                                 m4aSongNumStart(SONG_BTL_IRON_FOOTR);
                             }
                         }
-                        work->unk_012--;
-                        e->unk_12C = func_080F7FE4(work, i);
-                        if (work->unk_012 > 0) {
-                            work->unk_010 = 20;
-                            work->unk_A40 = 896;
-                            work->unk_A44 = work->unk_A40 * 2 / work->unk_010;
-                            work->entries[5].unk_15A ^= 8;
-                            work->entries[4].unk_15A ^= 8;
+                        work->stepsLeft--;
+                        e->baseZ = BosGaEntryHomeZ(work, i);
+                        if (work->stepsLeft > 0) {
+                            work->timer = 20;
+                            work->vz = 896;
+                            work->vzDelta = work->vz * 2 / work->timer;
+                            work->entries[5].flags ^= 8;
+                            work->entries[4].flags ^= 8;
                         } else {
-                            func_080F7F54(work, 1);
+                            BosGaRequestState(work, 1);
                         }
                     }
                     break;
@@ -1599,260 +1599,260 @@ u8 func_080F8F9C(GaWork* work) {
     case 2:
         for (; i <= 5; i++) {
             e = &work->entries[i];
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 0:
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
                 break;
             case 4:
             case 5:
-                e->unk_15A &= 0xFFF7;
+                e->flags &= 0xFFF7;
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
         break;
     }
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F9744(GaWork* work) {
+u8 BosGaUpdateThrust(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
 
-        switch (work->unk_008) {
+        switch (work->statePhase) {
         case 0:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 0:
-                work->unk_010 = 0;
-                work->unk_00C = 0;
+                work->timer = 0;
+                work->step = 0;
                 break;
             case 2:
             case 3:
-                e->unk_15A |= 1;
+                e->flags |= 1;
                 break;
             }
             break;
         case 1:
-            switch (work->unk_00C) {
+            switch (work->step) {
             case 0:
-                if (e->unk_1A0 == 3) {
-                    e->unk_124 = e->unk_124 + (work->unk_018 == 0 ? 0x80 : -0x80);
-                    work->unk_010++;
-                    if (work->unk_010 > 30) {
-                        work->unk_010 = 0;
-                        work->unk_00C = 1;
+                if (e->index == 3) {
+                    e->baseX = e->baseX + (work->flipped == 0 ? 0x80 : -0x80);
+                    work->timer++;
+                    if (work->timer > 30) {
+                        work->timer = 0;
+                        work->step = 1;
                     }
                 } else {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
                 break;
             case 1:
-                if (e->unk_1A0 == 3) {
-                    e->unk_124 = e->unk_124 + (work->unk_018 == 0 ? -0x300 : 0x300);
-                    e->unk_128 += 0x133;
+                if (e->index == 3) {
+                    e->baseX = e->baseX + (work->flipped == 0 ? -0x300 : 0x300);
+                    e->baseY += 0x133;
 
-                    if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
+                    if (!(e->flags & 4)) {
+                        if (ApplyAttackBox(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
-                    work->unk_010++;
-                    if (work->unk_010 > 15) {
-                        work->unk_010 = 0;
-                        work->unk_00C = 2;
+                    work->timer++;
+                    if (work->timer > 15) {
+                        work->timer = 0;
+                        work->step = 2;
                     }
                 } else {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
                 break;
             case 2:
-                if (e->unk_1A0 == 2) {
-                    e->unk_124 = e->unk_124 + (work->unk_018 == 0 ? 0x80 : -0x80);
-                    work->unk_010++;
-                    if (work->unk_010 > 30) {
-                        work->unk_010 = 0;
-                        work->unk_00C = 3;
+                if (e->index == 2) {
+                    e->baseX = e->baseX + (work->flipped == 0 ? 0x80 : -0x80);
+                    work->timer++;
+                    if (work->timer > 30) {
+                        work->timer = 0;
+                        work->step = 3;
                     }
                 } else {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
                 break;
             case 3:
-                if (e->unk_1A0 == 2) {
-                    e->unk_124 = e->unk_124 + (work->unk_018 == 0 ? -0x300 : 0x300);
-                    e->unk_128 -= 0x133;
+                if (e->index == 2) {
+                    e->baseX = e->baseX + (work->flipped == 0 ? -0x300 : 0x300);
+                    e->baseY -= 0x133;
 
-                    if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
+                    if (!(e->flags & 4)) {
+                        if (ApplyAttackBox(0xE3, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
-                    work->unk_010++;
-                    if (work->unk_010 > 15) {
-                        func_080F7F54(work, 1);
+                    work->timer++;
+                    if (work->timer > 15) {
+                        BosGaRequestState(work, 1);
                     }
                 } else {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
                 break;
             }
             break;
         case 2:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 0:
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
                 break;
             case 2:
             case 3:
-                e->unk_15A &= 0xFFFE;
+                e->flags &= 0xFFFE;
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
             break;
         }
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F99C0(GaWork* work) {
+u8 BosGaUpdateOrbit(GaWork* work) {
     GaEntryWork* e;
     u32 i;
     s32 t;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
     for (i = 0; i <= 5; i++) {
         e = &work->entries[i];
 
-        switch (work->unk_008) {
+        switch (work->statePhase) {
         case 0:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 0:
-                work->unk_00C = 0;
-                work->unk_010 = 0;
-                work->unk_A48 = 0x1E00;
+                work->step = 0;
+                work->timer = 0;
+                work->orbitRadius = 0x1E00;
                 break;
             case 2:
-                e->unk_1A4 = 0x80;
+                e->orbitAngle = 0x80;
                 AnimStart(&e->anim, 1, 1);
                 break;
             case 3:
-                e->unk_1A4 = work->unk_018 == 0 ? 0xC0 : 0x40;
+                e->orbitAngle = work->flipped == 0 ? 0xC0 : 0x40;
                 AnimStart(&e->anim, 1, 1);
                 break;
             }
             break;
         case 1:
-            switch (work->unk_00C) {
+            switch (work->step) {
             case 0:
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 0:
-                    work->unk_010++;
-                    if (work->unk_010 > 31) {
-                        work->unk_010 = 0;
-                        work->unk_00C = 1;
+                    work->timer++;
+                    if (work->timer > 31) {
+                        work->timer = 0;
+                        work->step = 1;
                     }
                     break;
                 case 2:
-                    t = e->unk_1A4;
-                    e->unk_1A4 = work->unk_018 == 0 ? t - 1 : t + 1;
-                    e->unk_124 = (gSineTable[e->unk_1A4] * work->unk_A48 >> 8) + work->entries[0].unk_124;
-                    e->unk_128 = (-gSineTable[e->unk_1A4 + 0x40] * work->unk_A48 >> 8) + work->entries[0].unk_128;
+                    t = e->orbitAngle;
+                    e->orbitAngle = work->flipped == 0 ? t - 1 : t + 1;
+                    e->baseX = (gSineTable[e->orbitAngle] * work->orbitRadius >> 8) + work->entries[0].baseX;
+                    e->baseY = (-gSineTable[e->orbitAngle + 0x40] * work->orbitRadius >> 8) + work->entries[0].baseY;
                     break;
                 case 3:
-                    t = e->unk_1A4;
-                    e->unk_1A4 = work->unk_018 == 0 ? t + 1 : t - 1;
-                    e->unk_124 = (gSineTable[e->unk_1A4] * work->unk_A48 >> 8) + work->entries[0].unk_124;
-                    e->unk_128 = (-gSineTable[e->unk_1A4 + 0x40] * work->unk_A48 >> 8) + work->entries[0].unk_128;
+                    t = e->orbitAngle;
+                    e->orbitAngle = work->flipped == 0 ? t + 1 : t - 1;
+                    e->baseX = (gSineTable[e->orbitAngle] * work->orbitRadius >> 8) + work->entries[0].baseX;
+                    e->baseY = (-gSineTable[e->orbitAngle + 0x40] * work->orbitRadius >> 8) + work->entries[0].baseY;
                     break;
                 default:
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                     break;
                 }
                 break;
             case 1:
-                switch (e->unk_1A0) {
+                switch (e->index) {
                 case 0:
-                    work->unk_A48 += 0x59;
-                    work->unk_010++;
-                    if (work->unk_010 > 0x7F) {
-                        func_080F7F54(work, 1);
+                    work->orbitRadius += 0x59;
+                    work->timer++;
+                    if (work->timer > 0x7F) {
+                        BosGaRequestState(work, 1);
                     }
                     break;
                 case 2:
                 case 3:
-                    e->unk_1A4 = e->unk_1A4 + 4;
+                    e->orbitAngle = e->orbitAngle + 4;
 
-                    if (!(e->unk_15A & 4)) {
-                        if (func_08011F78(0xE4, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
+                    if (!(e->flags & 4)) {
+                        if (ApplyAttackBox(0xE4, e->actor.x, e->actor.y, e->actor.z, 0x10, 0x10, 0x20)) {
                             m4aSongNumStart(SONG_BTL_IRON_HIT00);
                         }
                     }
-                    e->unk_124 = (gSineTable[e->unk_1A4] * work->unk_A48 >> 8) + work->entries[0].unk_124;
-                    e->unk_128 = (-gSineTable[e->unk_1A4 + 0x40] * work->unk_A48 >> 8) + work->entries[0].unk_128;
+                    e->baseX = (gSineTable[e->orbitAngle] * work->orbitRadius >> 8) + work->entries[0].baseX;
+                    e->baseY = (-gSineTable[e->orbitAngle + 0x40] * work->orbitRadius >> 8) + work->entries[0].baseY;
                     break;
                 default:
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                     break;
                 }
                 break;
             }
             break;
         case 2:
-            switch (e->unk_1A0) {
+            switch (e->index) {
             case 0:
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
                 break;
             case 2:
             case 3:
                 AnimStart(&e->anim, 0, 1);
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
             break;
         }
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F9C2C(GaWork* work) {
+u8 BosGaUpdateJump(GaWork* work) {
     GaEntryWork* e;
     u32 i;
     s32 t;
@@ -1860,84 +1860,84 @@ u8 func_080F9C2C(GaWork* work) {
     e = 0;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            e->unk_15A |= 1;
+            e->flags |= 1;
 
             if (i == 0) {
                 AnimStart(&work->anim, 1, 1);
                 AnimStart(&e->anim, 2, 1);
             }
         }
-        work->unk_00C = 0;
+        work->step = 0;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
-            gBtlWork->unk_0D4 += 0x33;
-            if (gBtlWork->unk_0D4 > 0x1800) {
-                work->unk_00C = 1;
+            gBtlWork->bossZ += 0x33;
+            if (gBtlWork->bossZ > 0x1800) {
+                work->step = 1;
             }
 
             for (i = 0; i <= 5; i++) {
                 if (i <= 3) {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
             }
             break;
         case 1:
-            gBtlWork->unk_0D4 = 0;
-            work->unk_A38 = (gBtlWork->actor->x - gBtlWork->unk_0CC) / 60;
-            work->unk_A3C = (gBtlWork->actor->y - gBtlWork->unk_0D0) / 60;
-            work->unk_A40 = 0x600;
-            work->unk_00C = 2;
+            gBtlWork->bossZ = 0;
+            work->vx = (gBtlWork->actor->x - gBtlWork->bossX) / 60;
+            work->vy = (gBtlWork->actor->y - gBtlWork->bossY) / 60;
+            work->vz = 0x600;
+            work->step = 2;
             break;
         case 2:
-            gBtlWork->unk_0CC += work->unk_A38;
-            gBtlWork->unk_0D0 += work->unk_A3C;
-            gBtlWork->unk_0D4 -= work->unk_A40;
-            work->unk_A40 -= 0x33;
+            gBtlWork->bossX += work->vx;
+            gBtlWork->bossY += work->vy;
+            gBtlWork->bossZ -= work->vz;
+            work->vz -= 0x33;
 
-            if (gBtlWork->unk_0D4 > 0) {
-                func_0802F1E8();
+            if (gBtlWork->bossZ > 0) {
+                BtlMapStartShake();
                 m4aSongNumStart(SONG_BTL_IRON_RUMB);
-                func_08011F78(0xE5, gBtlWork->unk_000, gBtlWork->unk_004, 0, 0x140, 0xF0, 1);
-                work->unk_00C = 3;
+                ApplyAttackBox(0xE5, gBtlWork->viewX, gBtlWork->viewY, 0, 0x140, 0xF0, 1);
+                work->step = 3;
             }
 
             for (i = 0; i <= 5; i++) {
-                func_080F800C(work, i);
+                BosGaEntryResetHome(work, i);
             }
             break;
         case 3:
-            gBtlWork->unk_0D4 = 0;
-            work->unk_A40 = 0x100;
-            work->unk_00C = 4;
+            gBtlWork->bossZ = 0;
+            work->vz = 0x100;
+            work->step = 4;
             break;
         case 4:
-            gBtlWork->unk_0D4 += work->unk_A40;
-            t = work->unk_A40 - 7;
-            work->unk_A40 = t;
+            gBtlWork->bossZ += work->vz;
+            t = work->vz - 7;
+            work->vz = t;
 
-            if (gBtlWork->unk_0D4 <= 0 && t < 0) {
-                func_080F7F54(work, 1);
+            if (gBtlWork->bossZ <= 0 && t < 0) {
+                BosGaRequestState(work, 1);
             }
 
             for (i = 0; i <= 5; i++) {
                 if (i <= 3) {
-                    func_080F800C(work, i);
+                    BosGaEntryResetHome(work, i);
                 }
             }
             break;
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = 0;
+        gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -1946,135 +1946,135 @@ u8 func_080F9C2C(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
             default:
-                e->unk_15A &= 0xFFFE;
+                e->flags &= 0xFFFE;
                 break;
             case 4:
             case 5:
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080F9EDC(GaWork* work) {
+u8 BosGaUpdateBodyChase(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
     e = 0;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            e->unk_15A |= 1;
+            e->flags |= 1;
 
             switch (i) {
             case 0:
                 AnimStart(&e->anim, 1, 1);
                 break;
             case 1:
-                e->unk_124 = gBtlWork->unk_0CC;
-                e->unk_128 = gBtlWork->unk_0D0 + 0x100;
+                e->baseX = gBtlWork->bossX;
+                e->baseY = gBtlWork->bossY + 0x100;
                 break;
             }
         }
-        work->unk_00C = 0;
+        work->step = 0;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
-            gBtlWork->unk_0D4 += 0x66;
-            if (gBtlWork->unk_0D4 > 0x25FF) {
-                work->unk_00C = 1;
+            gBtlWork->bossZ += 0x66;
+            if (gBtlWork->bossZ > 0x25FF) {
+                work->step = 1;
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         case 1:
-            work->unk_A38 = 0;
-            work->unk_A3C = 0;
-            work->unk_010 = 0x12C;
-            work->unk_00C = 2;
-            func_080F80C0(work);
+            work->vx = 0;
+            work->vy = 0;
+            work->timer = 0x12C;
+            work->step = 2;
+            BosGaUpdateFacing(work);
             break;
         case 2:
-            work->angle = func_080F7E0C(gBtlWork->unk_0CC, gBtlWork->unk_0D0, gBtlWork->actor->x, gBtlWork->actor->y);
-            work->unk_A38 += gSineTable[work->angle] * 5 >> 8;
-            if (work->unk_A38 > 0x200) {
-                work->unk_A38 = 0x200;
-            } else if (work->unk_A38 < -0x200) {
-                work->unk_A38 = -0x200;
+            work->angle = Bos5GetAngle(gBtlWork->bossX, gBtlWork->bossY, gBtlWork->actor->x, gBtlWork->actor->y);
+            work->vx += gSineTable[work->angle] * 5 >> 8;
+            if (work->vx > 0x200) {
+                work->vx = 0x200;
+            } else if (work->vx < -0x200) {
+                work->vx = -0x200;
             }
 
-            gBtlWork->unk_0CC += work->unk_A38;
-            if (work->unk_A38 < 0) {
-                if (gBtlWork->unk_0CC < 0) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0;
-                    func_080F80C0(work);
+            gBtlWork->bossX += work->vx;
+            if (work->vx < 0) {
+                if (gBtlWork->bossX < 0) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0;
+                    BosGaUpdateFacing(work);
                 }
-            } else if (work->unk_A38 > 0) {
-                if (gBtlWork->unk_0CC > 0x10000) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0x10000;
-                    func_080F80C0(work);
-                }
-            }
-
-            work->unk_A3C += -gSineTable[work->angle + 0x40] * 5 >> 8;
-            if (work->unk_A3C > 0x200) {
-                work->unk_A3C = 0x200;
-            } else if (work->unk_A3C < -0x200) {
-                work->unk_A3C = -0x200;
-            }
-
-            gBtlWork->unk_0D0 += work->unk_A3C;
-            if (work->unk_A3C < 0) {
-                if (gBtlWork->unk_0D0 <= 0x127FF) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x12800;
-                    func_080F80C0(work);
-                }
-            } else if (work->unk_A3C > 0) {
-                if (gBtlWork->unk_0D0 > 0x17800) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x17800;
-                    func_080F80C0(work);
+            } else if (work->vx > 0) {
+                if (gBtlWork->bossX > 0x10000) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0x10000;
+                    BosGaUpdateFacing(work);
                 }
             }
 
-            if (func_08011F78(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
+            work->vy += -gSineTable[work->angle + 0x40] * 5 >> 8;
+            if (work->vy > 0x200) {
+                work->vy = 0x200;
+            } else if (work->vy < -0x200) {
+                work->vy = -0x200;
+            }
+
+            gBtlWork->bossY += work->vy;
+            if (work->vy < 0) {
+                if (gBtlWork->bossY <= 0x127FF) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x12800;
+                    BosGaUpdateFacing(work);
+                }
+            } else if (work->vy > 0) {
+                if (gBtlWork->bossY > 0x17800) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x17800;
+                    BosGaUpdateFacing(work);
+                }
+            }
+
+            if (ApplyAttackBox(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
-                work->unk_00C = 3;
+                work->step = 3;
             }
 
-            work->unk_010--;
-            if (work->unk_010 < 0) {
-                work->unk_00C = 3;
+            work->timer--;
+            if (work->timer < 0) {
+                work->step = 3;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -2082,36 +2082,36 @@ u8 func_080F9EDC(GaWork* work) {
 
                 switch (i) {
                 case 0:
-                    e->unk_124 = gBtlWork->unk_0CC;
-                    e->unk_128 = gBtlWork->unk_0D0;
+                    e->baseX = gBtlWork->bossX;
+                    e->baseY = gBtlWork->bossY;
                     break;
                 case 1:
-                    e->unk_124 = gBtlWork->unk_0CC;
-                    e->unk_128 = gBtlWork->unk_0D0 + 0x100;
+                    e->baseX = gBtlWork->bossX;
+                    e->baseY = gBtlWork->bossY + 0x100;
                     break;
                 }
             }
             break;
         case 3:
-            work->unk_00C = 4;
+            work->step = 4;
             break;
         case 4:
-            gBtlWork->unk_0D4 -= 0x33;
-            if (gBtlWork->unk_0D4 <= 0) {
-                func_080F7F54(work, 1);
+            gBtlWork->bossZ -= 0x33;
+            if (gBtlWork->bossZ <= 0) {
+                BosGaRequestState(work, 1);
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = 0;
+        gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2120,121 +2120,121 @@ u8 func_080F9EDC(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
             default:
-                e->unk_15A &= 0xFFFE;
+                e->flags &= 0xFFFE;
                 break;
             case 4:
             case 5:
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080FA2B4(GaWork* work) {
+u8 BosGaUpdateBodyDash(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
     e = 0;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            e->unk_15A |= 1;
+            e->flags |= 1;
 
             switch (i) {
             case 0:
                 AnimStart(&e->anim, 1, 1);
                 break;
             case 1:
-                e->unk_124 = gBtlWork->unk_0CC;
-                e->unk_128 = gBtlWork->unk_0D0 + 0x100;
+                e->baseX = gBtlWork->bossX;
+                e->baseY = gBtlWork->bossY + 0x100;
                 break;
             }
         }
-        work->unk_00C = 0;
+        work->step = 0;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
-            gBtlWork->unk_0D4 += 0x66;
-            if (gBtlWork->unk_0D4 > 0x25FF) {
-                work->unk_00C = 1;
+            gBtlWork->bossZ += 0x66;
+            if (gBtlWork->bossZ > 0x25FF) {
+                work->step = 1;
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         case 1:
-            work->angle = func_080F7E0C(gBtlWork->unk_0CC, gBtlWork->unk_0D0, gBtlWork->actor->x, gBtlWork->actor->y);
-            work->unk_A38 = gSineTable[work->angle] * 4;
-            work->unk_A3C = -gSineTable[work->angle + 0x40] * 4;
-            work->unk_010 = 0x12C;
-            work->unk_00C = 2;
-            func_080F80C0(work);
+            work->angle = Bos5GetAngle(gBtlWork->bossX, gBtlWork->bossY, gBtlWork->actor->x, gBtlWork->actor->y);
+            work->vx = gSineTable[work->angle] * 4;
+            work->vy = -gSineTable[work->angle + 0x40] * 4;
+            work->timer = 0x12C;
+            work->step = 2;
+            BosGaUpdateFacing(work);
             break;
         case 2:
-            gBtlWork->unk_0CC += work->unk_A38;
-            if (work->unk_A38 < 0) {
-                if (gBtlWork->unk_0CC < 0) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0;
-                    func_080F80C0(work);
+            gBtlWork->bossX += work->vx;
+            if (work->vx < 0) {
+                if (gBtlWork->bossX < 0) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0;
+                    BosGaUpdateFacing(work);
                 }
-            } else if (work->unk_A38 > 0) {
-                if (gBtlWork->unk_0CC > 0x10000) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0x10000;
-                    func_080F80C0(work);
-                }
-            }
-
-            gBtlWork->unk_0D0 += work->unk_A3C;
-            if (work->unk_A3C < 0) {
-                if (gBtlWork->unk_0D0 <= 0x127FF) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x12800;
-                    func_080F80C0(work);
-                }
-            } else if (work->unk_A3C > 0) {
-                if (gBtlWork->unk_0D0 > 0x17800) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x17800;
-                    func_080F80C0(work);
+            } else if (work->vx > 0) {
+                if (gBtlWork->bossX > 0x10000) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0x10000;
+                    BosGaUpdateFacing(work);
                 }
             }
 
-            if (func_08011F78(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
+            gBtlWork->bossY += work->vy;
+            if (work->vy < 0) {
+                if (gBtlWork->bossY <= 0x127FF) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x12800;
+                    BosGaUpdateFacing(work);
+                }
+            } else if (work->vy > 0) {
+                if (gBtlWork->bossY > 0x17800) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x17800;
+                    BosGaUpdateFacing(work);
+                }
+            }
+
+            if (ApplyAttackBox(0xE6, work->entries[0].actor.x, work->entries[0].actor.y, work->entries[0].actor.z, 0x10, 0x10, 0x18)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
-                work->unk_00C = 3;
+                work->step = 3;
             }
 
-            work->unk_010--;
-            if (work->unk_010 < 0) {
-                work->unk_00C = 3;
+            work->timer--;
+            if (work->timer < 0) {
+                work->step = 3;
             }
 
             for (i = 0; i <= 5; i++) {
@@ -2242,36 +2242,36 @@ u8 func_080FA2B4(GaWork* work) {
 
                 switch (i) {
                 case 0:
-                    e->unk_124 = gBtlWork->unk_0CC;
-                    e->unk_128 = gBtlWork->unk_0D0;
+                    e->baseX = gBtlWork->bossX;
+                    e->baseY = gBtlWork->bossY;
                     break;
                 case 1:
-                    e->unk_124 = gBtlWork->unk_0CC;
-                    e->unk_128 = gBtlWork->unk_0D0 + 0x100;
+                    e->baseX = gBtlWork->bossX;
+                    e->baseY = gBtlWork->bossY + 0x100;
                     break;
                 }
             }
             break;
         case 3:
-            work->unk_00C = 4;
+            work->step = 4;
             break;
         case 4:
-            gBtlWork->unk_0D4 -= 0x33;
-            if (gBtlWork->unk_0D4 <= 0) {
-                func_080F7F54(work, 1);
+            gBtlWork->bossZ -= 0x33;
+            if (gBtlWork->bossZ <= 0) {
+                BosGaRequestState(work, 1);
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = 0;
+        gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2280,127 +2280,127 @@ u8 func_080FA2B4(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
             default:
-                e->unk_15A &= 0xFFFE;
+                e->flags &= 0xFFFE;
                 break;
             case 4:
             case 5:
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080FA644(GaWork* work) {
+u8 BosGaUpdateBodyJump(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
     e = 0;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            e->unk_15A |= 1;
+            e->flags |= 1;
 
             switch (i) {
             case 0:
                 AnimStart(&e->anim, 1, 1);
                 break;
             case 1:
-                e->unk_124 = gBtlWork->unk_0CC;
-                e->unk_128 = gBtlWork->unk_0D0 + 0x100;
+                e->baseX = gBtlWork->bossX;
+                e->baseY = gBtlWork->bossY + 0x100;
                 break;
             }
         }
-        work->unk_00C = 0;
+        work->step = 0;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
-            gBtlWork->unk_0D4 += 0x66;
-            if (gBtlWork->unk_0D4 > 0x25FF) {
-                gBtlWork->unk_0D4 = 0x2600;
-                work->unk_010 = 3;
-                work->unk_00C = 1;
+            gBtlWork->bossZ += 0x66;
+            if (gBtlWork->bossZ > 0x25FF) {
+                gBtlWork->bossZ = 0x2600;
+                work->timer = 3;
+                work->step = 1;
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         case 1:
-            work->unk_A38 = (gBtlWork->actor->x - gBtlWork->unk_0CC) / 60;
-            work->unk_A3C = (gBtlWork->actor->y - gBtlWork->unk_0D0) / 60;
-            work->unk_A40 = -0x400;
-            work->unk_A44 = 0x22;
-            work->unk_00C = 2;
-            func_080F80C0(work);
+            work->vx = (gBtlWork->actor->x - gBtlWork->bossX) / 60;
+            work->vy = (gBtlWork->actor->y - gBtlWork->bossY) / 60;
+            work->vz = -0x400;
+            work->vzDelta = 0x22;
+            work->step = 2;
+            BosGaUpdateFacing(work);
             break;
         case 2:
-            gBtlWork->unk_0CC += work->unk_A38;
-            if (work->unk_A38 < 0) {
-                if (gBtlWork->unk_0CC < 0) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0;
-                    func_080F80C0(work);
+            gBtlWork->bossX += work->vx;
+            if (work->vx < 0) {
+                if (gBtlWork->bossX < 0) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0;
+                    BosGaUpdateFacing(work);
                 }
-            } else if (work->unk_A38 > 0) {
-                if (gBtlWork->unk_0CC > 0x10000) {
-                    work->unk_A38 = -work->unk_A38;
-                    gBtlWork->unk_0CC = 0x10000;
-                    func_080F80C0(work);
-                }
-            }
-
-            gBtlWork->unk_0D0 += work->unk_A3C;
-            if (work->unk_A3C < 0) {
-                if (gBtlWork->unk_0D0 <= 0x127FF) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x12800;
-                    func_080F80C0(work);
-                }
-            } else if (work->unk_A3C > 0) {
-                if (gBtlWork->unk_0D0 > 0x17800) {
-                    work->unk_A3C = -work->unk_A3C;
-                    gBtlWork->unk_0D0 = 0x17800;
-                    func_080F80C0(work);
+            } else if (work->vx > 0) {
+                if (gBtlWork->bossX > 0x10000) {
+                    work->vx = -work->vx;
+                    gBtlWork->bossX = 0x10000;
+                    BosGaUpdateFacing(work);
                 }
             }
 
-            gBtlWork->unk_0D4 += work->unk_A40;
-            work->unk_A40 += work->unk_A44;
-            if (gBtlWork->unk_0D4 > 0x2600) {
-                gBtlWork->unk_0D4 = 0x2600;
-                func_0802F1E8();
+            gBtlWork->bossY += work->vy;
+            if (work->vy < 0) {
+                if (gBtlWork->bossY <= 0x127FF) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x12800;
+                    BosGaUpdateFacing(work);
+                }
+            } else if (work->vy > 0) {
+                if (gBtlWork->bossY > 0x17800) {
+                    work->vy = -work->vy;
+                    gBtlWork->bossY = 0x17800;
+                    BosGaUpdateFacing(work);
+                }
+            }
+
+            gBtlWork->bossZ += work->vz;
+            work->vz += work->vzDelta;
+            if (gBtlWork->bossZ > 0x2600) {
+                gBtlWork->bossZ = 0x2600;
+                BtlMapStartShake();
                 m4aSongNumStart(SONG_BTL_IRON_RUMB);
-                func_08011F78(0xE5, gBtlWork->unk_000, gBtlWork->unk_004, 0, 0x140, 0xF0, 1);
-                work->unk_010--;
-                if (work->unk_010 > 0) {
-                    work->unk_00C = 1;
+                ApplyAttackBox(0xE5, gBtlWork->viewX, gBtlWork->viewY, 0, 0x140, 0xF0, 1);
+                work->timer--;
+                if (work->timer > 0) {
+                    work->step = 1;
                 } else {
-                    work->unk_00C = 3;
+                    work->step = 3;
                 }
             }
 
@@ -2409,36 +2409,36 @@ u8 func_080FA644(GaWork* work) {
 
                 switch (i) {
                 case 0:
-                    func_080F800C(work, 0);
+                    BosGaEntryResetHome(work, 0);
                     break;
                 case 1:
-                    e->unk_124 = gBtlWork->unk_0CC;
-                    e->unk_128 = gBtlWork->unk_0D0 + 0x100;
-                    e->unk_12C = func_080F7FE4(work, 1);
+                    e->baseX = gBtlWork->bossX;
+                    e->baseY = gBtlWork->bossY + 0x100;
+                    e->baseZ = BosGaEntryHomeZ(work, 1);
                     break;
                 }
             }
             break;
         case 3:
-            work->unk_00C = 4;
+            work->step = 4;
             break;
         case 4:
-            gBtlWork->unk_0D4 -= 0x33;
-            if (gBtlWork->unk_0D4 <= 0) {
-                func_080F7F54(work, 1);
+            gBtlWork->bossZ -= 0x33;
+            if (gBtlWork->bossZ <= 0) {
+                BosGaRequestState(work, 1);
             }
 
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i <= 1) {
-                    e->unk_12C = func_080F7FE4(work, i);
+                    e->baseZ = BosGaEntryHomeZ(work, i);
                 }
             }
             break;
         }
         break;
     case 2:
-        gBtlWork->unk_0D4 = 0;
+        gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
@@ -2447,32 +2447,32 @@ u8 func_080FA644(GaWork* work) {
             case 0:
                 AnimStart(&work->anim, 0, 1);
                 AnimStart(&e->anim, 0, 1);
-                func_0801AF08(&e->actor);
+                ClearBtlObjActionFlags(&e->actor);
             default:
-                e->unk_15A &= 0xFFFE;
+                e->flags &= 0xFFFE;
                 break;
             case 4:
             case 5:
                 break;
             }
-            func_080F800C(work, i);
+            BosGaEntryResetHome(work, i);
         }
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080FAA18(GaWork* work) {
+u8 BosGaUpdateGimmick(GaWork* work) {
     GaEntryWork* e;
     u32 i;
     s32 t;
@@ -2480,20 +2480,20 @@ u8 func_080FAA18(GaWork* work) {
     e = 0;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
-        work->unk_010 = 0x12C;
+        work->timer = 0x12C;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            if (!(e->unk_15A & 4)) {
+            if (!(e->flags & 4)) {
                 e->vz = -gSineTable[((GetRandom() % 0x20) & 0xFF) + 0x40] * -3;
-                e->unk_164 = gSineTable[(GetRandom() % 0x100) & 0xFF] * 0x233 >> 8;
-                e->unk_168 = -gSineTable[((GetRandom() % 0x100) & 0xFF) + 0x40] * 0x233 >> 8;
-                e->unk_11C = 1;
+                e->vx = gSineTable[(GetRandom() % 0x100) & 0xFF] * 0x233 >> 8;
+                e->vy = -gSineTable[((GetRandom() % 0x100) & 0xFF) + 0x40] * 0x233 >> 8;
+                e->mode = 1;
 
                 if (i == 0) {
                     AnimStart(&work->anim, 1, 1);
@@ -2502,96 +2502,96 @@ u8 func_080FAA18(GaWork* work) {
             }
         }
         m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
-        func_0802F1E8();
+        BtlMapStartShake();
         break;
     case 1:
-        work->unk_010--;
-        if (work->unk_010 > 0) {
+        work->timer--;
+        if (work->timer > 0) {
             break;
         }
-        func_080F7F54(work, 1);
+        BosGaRequestState(work, 1);
         break;
     case 2:
-        gBtlWork->unk_0D4 = 0;
+        gBtlWork->bossZ = 0;
 
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            t = e->unk_15A & 4;
+            t = e->flags & 4;
             if (t == 0) {
                 if (i == 0) {
                     AnimStart(&work->anim, 0, 1);
                     AnimStart(&e->anim, 0, 1);
                 }
-                e->unk_11C = t;
-                func_080F800C(work, i);
+                e->mode = t;
+                BosGaEntryResetHome(work, i);
             }
         }
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return 1;
 }
 
-u8 func_080FABE4(GaWork* work) {
+u8 BosGaUpdateDefeat(GaWork* work) {
     CharaObjParam param;
     u32 i;
     GaEntryWork* e;
     u8 result = 1;
 
     if (work->flags & 1) {
-        work->unk_008 = 2;
+        work->statePhase = 2;
     }
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         for (i = 0; i <= 5; i++) {
             e = &work->entries[i];
-            e->unk_15A |= 1;
+            e->flags |= 1;
             switch (i) {
             case 0:
                 AnimStart(&work->anim, 1, 0);
                 AnimStart(&e->anim, 2, 0);
-                e->unk_150 = 0;
+                e->baseVz = 0;
                 break;
             case 1:
-                e->unk_150 = 0;
+                e->baseVz = 0;
                 break;
             }
         }
-        work->unk_010 = 3;
-        work->unk_00C = 0;
+        work->timer = 3;
+        work->step = 0;
         break;
     case 1:
-        switch (work->unk_00C) {
+        switch (work->step) {
         case 0:
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 switch (i) {
                 case 0:
-                    e->unk_12C += e->unk_150;
-                    e->unk_150 += 128;
-                    if (e->unk_12C > -0x1800) {
+                    e->baseZ += e->baseVz;
+                    e->baseVz += 128;
+                    if (e->baseZ > -0x1800) {
                         m4aSongNumStart(SONG_SND_389);
-                        e->unk_12C = -0x1800;
-                        e->unk_150 = -(e->unk_150 / 2);
-                        work->entries[1].unk_150 = -(work->entries[1].unk_150 / 2);
-                        work->unk_010--;
-                        if (work->unk_010 <= 0) {
-                            work->unk_00C = 1;
+                        e->baseZ = -0x1800;
+                        e->baseVz = -(e->baseVz / 2);
+                        work->entries[1].baseVz = -(work->entries[1].baseVz / 2);
+                        work->timer--;
+                        if (work->timer <= 0) {
+                            work->step = 1;
                         }
                     }
                     break;
                 case 1:
-                    e->unk_12C += e->unk_150;
-                    e->unk_150 += 128;
+                    e->baseZ += e->baseVz;
+                    e->baseVz += 128;
                     break;
                 }
             }
@@ -2600,10 +2600,10 @@ u8 func_080FABE4(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i == 1) {
-                    work->unk_010 = 20;
-                    e->unk_148 = (work->unk_018 == 0 ? -0xA00 : 0xA00) / work->unk_010;
-                    e->unk_14C = 0x600 / work->unk_010;
-                    work->unk_00C = 2;
+                    work->timer = 20;
+                    e->baseVx = (work->flipped == 0 ? -0xA00 : 0xA00) / work->timer;
+                    e->baseVy = 0x600 / work->timer;
+                    work->step = 2;
                 }
             }
             break;
@@ -2611,11 +2611,11 @@ u8 func_080FABE4(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i == 1) {
-                    e->unk_124 += e->unk_148;
-                    e->unk_128 += e->unk_14C;
-                    work->unk_010--;
-                    if (work->unk_010 <= 0) {
-                        work->unk_00C = 3;
+                    e->baseX += e->baseVx;
+                    e->baseY += e->baseVy;
+                    work->timer--;
+                    if (work->timer <= 0) {
+                        work->step = 3;
                     }
                 }
             }
@@ -2624,9 +2624,9 @@ u8 func_080FABE4(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i == 1) {
-                    e->unk_150 = 0;
-                    work->unk_010 = 3;
-                    work->unk_00C = 4;
+                    e->baseVz = 0;
+                    work->timer = 3;
+                    work->step = 4;
                 }
             }
             break;
@@ -2634,15 +2634,15 @@ u8 func_080FABE4(GaWork* work) {
             for (i = 0; i <= 5; i++) {
                 e = &work->entries[i];
                 if (i == 1) {
-                    e->unk_12C += e->unk_150;
-                    e->unk_150 += 128;
-                    if (e->unk_12C > -0x800) {
+                    e->baseZ += e->baseVz;
+                    e->baseVz += 128;
+                    if (e->baseZ > -0x800) {
                         m4aSongNumStart(SONG_BTL_IRON_FOOTR);
-                        e->unk_12C = -0x800;
-                        e->unk_150 = -(e->unk_150 / 2);
-                        work->unk_010--;
-                        if (work->unk_010 <= 0) {
-                            work->unk_00C = 5;
+                        e->baseZ = -0x800;
+                        e->baseVz = -(e->baseVz / 2);
+                        work->timer--;
+                        if (work->timer <= 0) {
+                            work->step = 5;
                         }
                     }
                 }
@@ -2653,34 +2653,34 @@ u8 func_080FABE4(GaWork* work) {
                 e = &work->entries[i];
                 switch (i) {
                 case 0:
-                    param.unk_00 = 0x06010000 + (e->tiles->index << 5);
-                    param.unk_04 = e->tiles->count;
-                    param.unk_08 = 0x06010000 + (work->tiles->index << 5);
-                    param.unk_0C = work->tiles->count;
-                    param.unk_30 = e->unk_124 + (work->unk_018 == 0 ? -0x700 : 0x700);
-                    param.unk_34 = e->unk_128;
-                    param.unk_38 = e->unk_12C + 0x1000;
-                    param.unk_40 = &e->actor;
+                    param.tilesAddr = 0x06010000 + (e->tiles->index << 5);
+                    param.tileCount = e->tiles->count;
+                    param.tilesAddr2 = 0x06010000 + (work->tiles->index << 5);
+                    param.tileCount2 = work->tiles->count;
+                    param.x = e->baseX + (work->flipped == 0 ? -0x700 : 0x700);
+                    param.y = e->baseY;
+                    param.z = e->baseZ + 0x1000;
+                    param.prizeObj = &e->actor;
                     break;
                 case 1:
-                    param.unk_10 = 0x06010000 + (e->tiles->index << 5);
-                    param.unk_14 = e->tiles->count;
+                    param.tilesAddr3 = 0x06010000 + (e->tiles->index << 5);
+                    param.tileCount3 = e->tiles->count;
                     break;
                 }
             }
-            param.unk_18 = 0x05000200 + (work->palette->index << 5);
-            param.unk_1C = work->palette->count << 5;
-            param.unk_20 = 0;
-            param.unk_24 = 0;
-            param.unk_28 = 0;
-            param.unk_2C = 0;
-            param.unk_3C = func_080F83BC;
-            func_080C6894(&param);
-            work->unk_00C = 6;
+            param.paletteAddr = 0x05000200 + (work->palette->index << 5);
+            param.paletteSize = work->palette->count << 5;
+            param.tilesAddr4 = 0;
+            param.tileCount4 = 0;
+            param.paletteAddr2 = 0;
+            param.paletteSize2 = 0;
+            param.callback = BosGaReleaseBody;
+            CharaObjInitDefeat(&param);
+            work->step = 6;
             break;
         case 6:
-            if (func_080C69B4() == 0) {
-                func_0801B008();
+            if (CharaObjUpdateDefeat() == 0) {
+                EndBossDefeat();
                 result = 0;
             }
             break;
@@ -2689,175 +2689,175 @@ u8 func_080FABE4(GaWork* work) {
     case 2:
         break;
     }
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
         work->flags &= 0xFFFE;
     }
     return result;
 }
 
-void func_080FB000(GaWork* work, GaEntryWork* e) {
+void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
     s32 d1;
     s32 d2;
     s32 flag;
     s32 v;
     u16 t;
 
-    if (e->unk_15A & 0x10) {
+    if (e->flags & 0x10) {
         return;
     }
 
-    switch (func_0801ADAC(&e->actor)) {
+    switch (UpdateBtlObjReaction(&e->actor)) {
     case 5:
-        work->unk_A52 = 1;
+        work->cardActionSeen = 1;
 
-        if (work->unk_000 == 10 || work->unk_004 == 10) {
-            func_0801AF08(&e->actor);
+        if (work->state == 10 || work->nextState == 10) {
+            ClearBtlObjActionFlags(&e->actor);
         } else {
-            d1 = gBtlWork->actor->x - e->unk_124;
+            d1 = gBtlWork->actor->x - e->baseX;
             d1 = (d1 * d1) >> 8;
-            d2 = gBtlWork->actor->y - e->unk_128;
+            d2 = gBtlWork->actor->y - e->baseY;
             d2 = (d2 * d2) >> 8;
 
-            if (work->entries[2].unk_15A & work->entries[3].unk_15A & work->entries[4].unk_15A & work->entries[5].unk_15A & 4) {
+            if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & 4) {
                 switch (GetRandom() % 3) {
                 case 0:
-                    func_080F7F54(work, 7);
+                    BosGaRequestState(work, 7);
                     break;
                 case 1:
-                    func_080F7F54(work, 8);
+                    BosGaRequestState(work, 8);
                     break;
                 case 2:
-                    func_080F7F54(work, 9);
+                    BosGaRequestState(work, 9);
                     break;
                 }
             } else if (d1 + d2 <= 0xE0FFF) {
                 if (GetRandom() % 100 < 70) {
-                    if ((work->entries[2].unk_15A & work->entries[3].unk_15A & 4) == 0) {
+                    if ((work->entries[2].flags & work->entries[3].flags & 4) == 0) {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     }
                 } else {
-                    if ((work->entries[4].unk_15A & work->entries[5].unk_15A & 4) == 0) {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                    if ((work->entries[4].flags & work->entries[5].flags & 4) == 0) {
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     } else {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     }
                 }
             } else if (d1 + d2 <= 0x270FFF) {
                 if (GetRandom() % 100 < 50) {
-                    if ((work->entries[2].unk_15A & work->entries[3].unk_15A & 4) == 0) {
+                    if ((work->entries[2].flags & work->entries[3].flags & 4) == 0) {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     }
                 } else {
-                    if ((work->entries[4].unk_15A & work->entries[5].unk_15A & 4) == 0) {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                    if ((work->entries[4].flags & work->entries[5].flags & 4) == 0) {
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     } else {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     }
                 }
             } else {
                 if (GetRandom() % 100 < 30) {
-                    if ((work->entries[2].unk_15A & work->entries[3].unk_15A & 4) == 0) {
+                    if ((work->entries[2].flags & work->entries[3].flags & 4) == 0) {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     }
                 } else {
-                    if ((work->entries[4].unk_15A & work->entries[5].unk_15A & 4) == 0) {
-                        if (work->unk_A4C == 0) {
-                            func_080F7F54(work, 6);
+                    if ((work->entries[4].flags & work->entries[5].flags & 4) == 0) {
+                        if (work->attackToggle == 0) {
+                            BosGaRequestState(work, 6);
                         } else {
-                            func_080F7F54(work, 3);
+                            BosGaRequestState(work, 3);
                         }
                     } else {
                         flag = 0;
 
-                        if (gBtlWork->unk_0CC <= gBtlWork->actor->x) {
+                        if (gBtlWork->bossX <= gBtlWork->actor->x) {
                             flag = 1;
                         }
 
-                        if (work->unk_018 == flag) {
-                            func_080F7F54(work, 4);
+                        if (work->flipped == flag) {
+                            BosGaRequestState(work, 4);
                         } else {
-                            func_080F7F54(work, 5);
+                            BosGaRequestState(work, 5);
                         }
                     }
                 }
@@ -2865,135 +2865,135 @@ void func_080FB000(GaWork* work, GaEntryWork* e) {
         }
 
         if (GetRandom() % 3 != 0) {
-            if (work->unk_A4C == 0) {
-                work->unk_A4C = 1;
+            if (work->attackToggle == 0) {
+                work->attackToggle = 1;
             } else {
-                work->unk_A4C = 0;
+                work->attackToggle = 0;
             }
         }
         break;
     case 1:
     case 6:
     case 7:
-        e->unk_15A |= 2;
-        e->unk_1A6 = 0;
+        e->flags |= 2;
+        e->flashTimer = 0;
 
-        if (e->unk_1A0 == 0) {
-            work->entries[1].unk_15A |= 2;
-            work->entries[1].unk_1A6 = 0;
+        if (e->index == 0) {
+            work->entries[1].flags |= 2;
+            work->entries[1].flashTimer = 0;
         }
         break;
     case 3:
     case 8:
-        func_0801C2DC(&e->actor, 1);
-        e->unk_15A |= 4;
+        SetBtlObjUnhittable(&e->actor, 1);
+        e->flags |= 4;
 
-        if (e->unk_1A0 == 0) {
-            func_0801AF4C(&e->actor);
-            e->unk_11C = 0;
+        if (e->index == 0) {
+            BeginBossDefeat(&e->actor);
+            e->mode = 0;
             e->unk_15C = 0;
-            work->entries[1].unk_11C = 0;
+            work->entries[1].mode = 0;
             work->entries[1].unk_15C = 0;
-            func_080F7F54(work, 11);
+            BosGaRequestState(work, 11);
         } else {
-            e->unk_11C = 3;
+            e->mode = 3;
             e->unk_15C = 0;
 
-            if (work->unk_000 != 10 && work->unk_004 != 10) {
-                if (work->unk_A52 != 0) {
-                    func_0801AF08(&work->entries[0].actor);
+            if (work->state != 10 && work->nextState != 10) {
+                if (work->cardActionSeen != 0) {
+                    ClearBtlObjActionFlags(&work->entries[0].actor);
                 }
-                func_080F7F54(work, 1);
+                BosGaRequestState(work, 1);
             }
         }
         break;
     case 4:
-        if (work->unk_000 != 10 && work->unk_004 != 10) {
+        if (work->state != 10 && work->nextState != 10) {
             if (GetRandom() % 100 < 30) {
-                _0801C1F8(0, e->unk_124, e->unk_128, e->unk_12C);
+                _0801C1F8(0, e->baseX, e->baseY, e->baseZ);
             }
-            func_080F7F54(work, 1);
+            BosGaRequestState(work, 1);
         }
-        func_0801AF08(&e->actor);
+        ClearBtlObjActionFlags(&e->actor);
         break;
     }
 
-    switch ((u32)e->unk_11C) {
+    switch ((u32)e->mode) {
     case 0:
-        v = (e->unk_124 - e->actor.x) >> 1;
+        v = (e->baseX - e->actor.x) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
         e->actor.x += v;
-        v = (e->unk_128 - e->actor.y) >> 1;
+        v = (e->baseY - e->actor.y) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
         e->actor.y += v;
-        v = ((e->unk_12C + e->unk_13C) - e->actor.z) >> 1;
+        v = ((e->baseZ + e->bobZ) - e->actor.z) >> 1;
         if (v > 0x600) {
             v = 0x600;
         } else if (v < -0x600) {
             v = -0x600;
         }
         e->actor.z += v;
-        t = e->unk_112;
+        t = e->rotation;
         ApproachAngle(&t, 0, 3);
-        e->unk_112 = t;
+        e->rotation = t;
 
-        if (e->unk_15A & 1) {
+        if (e->flags & 1) {
             break;
         }
-        e->unk_13C = gSineTable[e->unk_158] << 2;
-        e->unk_158 += 4;
+        e->bobZ = gSineTable[e->bobAngle] << 2;
+        e->bobAngle += 4;
         break;
     case 1:
-        func_080F7E84(e);
+        BosGaEntryUpdateFall(e);
         break;
     case 3:
         if (e->unk_15C == 0) {
-            e->unk_15A |= 2;
-            e->unk_1A6 = 0;
+            e->flags |= 2;
+            e->flashTimer = 0;
 
-            if (!func_080128EC()) {
-                func_08013DB8(e->actor.x, e->actor.y + e->actor.z, 0, 0x100);
+            if (!BgFxIsActive()) {
+                BgFxStartEnemyDeath(e->actor.x, e->actor.y + e->actor.z, 0, 0x100);
                 e->unk_15C++;
             }
         } else if (e->unk_15C > 0) {
-            if (work->entries[2].unk_15A & work->entries[3].unk_15A & work->entries[4].unk_15A & work->entries[5].unk_15A & 4) {
-                func_0801C2DC(&work->entries[0].actor, 0);
+            if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & 4) {
+                SetBtlObjUnhittable(&work->entries[0].actor, 0);
             }
-            func_0801AF08(&e->actor);
-            func_080F8374(e);
+            ClearBtlObjActionFlags(&e->actor);
+            BosGaEntryRelease(e);
             return;
         }
-        func_080F7E84(e);
+        BosGaEntryUpdateFall(e);
         break;
     }
 
-    if (e->unk_15A & 2) {
-        e->unk_1A6++;
-        if (e->unk_1A6 > 30) {
-            func_0801AF08(&e->actor);
-            e->unk_15A &= 0xFFFD;
-            e->unk_1A6 = 0;
+    if (e->flags & 2) {
+        e->flashTimer++;
+        if (e->flashTimer > 30) {
+            ClearBtlObjActionFlags(&e->actor);
+            e->flags &= 0xFFFD;
+            e->flashTimer = 0;
         }
     }
     e->gfx = AnimUpdate(&e->anim);
 
-    if (e->unk_1A0 == 0) {
+    if (e->index == 0) {
         work->gfx = AnimUpdate(&work->anim);
     }
 
-    if (e->actor.collider.unk_2C != 0) {
-        e->actor.x += e->actor.collider.unk_38;
-        e->actor.y += e->actor.collider.unk_3C;
+    if (e->actor.collider.colliding != 0) {
+        e->actor.x += e->actor.collider.pushX;
+        e->actor.y += e->actor.collider.pushY;
     }
-    ColliderSetPosition(&e->actor.collider, e->actor.x, e->actor.y, e->actor.z + e->unk_13C);
+    ColliderSetPosition(&e->actor.collider, e->actor.x, e->actor.y, e->actor.z + e->bobZ);
     TaskPoolUpdate(&e->tasks);
 }
 
@@ -3004,39 +3004,39 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     gGaWork = work;
 
     if (arg == 0) {
-        work->unk_000 = 1;
+        work->state = 1;
     } else {
-        work->unk_000 = 0;
+        work->state = 0;
     }
 
-    work->unk_004 = work->unk_000;
+    work->nextState = work->state;
     work->flags = 0;
-    work->unk_008 = 0;
-    work->unk_010 = 0;
-    work->unk_012 = 0;
+    work->statePhase = 0;
+    work->timer = 0;
+    work->stepsLeft = 0;
     work->unk_014 = 0;
-    work->unk_018 = 0;
+    work->flipped = 0;
     work->angle = 0;
-    work->unk_A4C = 0;
-    work->unk_A50 = 60;
+    work->attackToggle = 0;
+    work->cardTimer = 60;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, &gBosMapConfig);
-    gBtlWork->unk_0CC = 0xE200;
-    gBtlWork->unk_0D0 = 0x15E00;
-    gBtlWork->unk_0D4 = 0;
+    gBtlWork->bossX = 0xE200;
+    gBtlWork->bossY = 0x15E00;
+    gBtlWork->bossZ = 0;
     SetBattleActorPosition(0x8200, 0x15E00, 0);
     p = work->entries;
 
     for (i = 0; i <= 5; i++) {
-        func_080F80FC(work, i, arg);
+        BosGaEntryInit(work, i, arg);
     }
 
-    func_0801C2DC(&p->actor, 1);
-    func_0801C2DC(&work->entries[1].actor, 1);
+    SetBtlObjUnhittable(&p->actor, 1);
+    SetBtlObjUnhittable(&work->entries[1].actor, 1);
     work->palette = LoadObjPalette(gBoss01objPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    func_0801C298(work->palette->index + 16, 1);
-    func_0801C298(work->palette2->index + 16, 1);
-    func_08083900(GetRandom() % 4 + 1);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette2->index + 16, 1);
+    RequestBossCardValue(GetRandom() % 4 + 1);
 }
 u8 task_bos_ga_1(GaWork* work) {
     u8 result;
@@ -3045,69 +3045,69 @@ u8 task_bos_ga_1(GaWork* work) {
     u32 i;
 
     result = 1;
-    work->unk_A50--;
+    work->cardTimer--;
 
-    if (work->unk_A50 <= 0) {
-        func_08083900(GetRandom() % 7 + 1);
-        work->unk_A50 = 60;
+    if (work->cardTimer <= 0) {
+        RequestBossCardValue(GetRandom() % 7 + 1);
+        work->cardTimer = 60;
     }
 
-    work->unk_A52 = 0;
+    work->cardActionSeen = 0;
     i = 0;
     p = work->entries;
 
     do {
-        func_080FB000(work, p);
+        BosGaEntryUpdate(work, p);
         p++;
         i++;
     } while (i <= 5);
 
-    switch (work->unk_000) {
+    switch (work->state) {
     case 0:
-        result = func_080F854C(work);
+        result = BosGaUpdateAssemble(work);
         break;
     case 1:
-        result = func_080F8958(work);
+        result = BosGaUpdateIdle(work);
         break;
     case 2:
-        result = func_080F8AC8(work);
+        result = BosGaUpdateWalk(work);
         break;
     case 3:
-        result = func_080F8F9C(work);
+        result = BosGaUpdateStomp(work);
         break;
     case 4:
-        result = func_080F9744(work);
+        result = BosGaUpdateThrust(work);
         break;
     case 5:
-        result = func_080F99C0(work);
+        result = BosGaUpdateOrbit(work);
         break;
     case 6:
-        result = func_080F9C2C(work);
+        result = BosGaUpdateJump(work);
         break;
     case 7:
-        result = func_080F9EDC(work);
+        result = BosGaUpdateBodyChase(work);
         break;
     case 8:
-        result = func_080FA2B4(work);
+        result = BosGaUpdateBodyDash(work);
         break;
     case 9:
-        result = func_080FA644(work);
+        result = BosGaUpdateBodyJump(work);
         break;
     case 10:
-        result = func_080FAA18(work);
+        result = BosGaUpdateGimmick(work);
         break;
     case 11:
-        result = func_080FABE4(work);
+        result = BosGaUpdateDefeat(work);
         break;
     }
 
-    if (func_0801C1C0(0)) {
-        func_080F7F54(work, 10);
+    if (ConsumeGimmickFlag(0)) {
+        BosGaRequestState(work, 10);
     }
 
     anim = &work->entries[1].anim;
 
-    if (AnimIsFinished(anim) && GetRandom() % 100 == 0 && work->unk_000 != 11) {
+    if (AnimIsFinished(anim) && GetRandom() % 100 == 0 && work->state != 11) {
         AnimStart(anim, 1, 0);
     }
 
@@ -3122,7 +3122,7 @@ void task_bos_ga_2(GaWork* work) {
     p = work->entries;
 
     do {
-        func_080F83E0(work, p);
+        BosGaEntryDraw(work, p);
         p++;
         i++;
     } while (i <= 5);
@@ -3136,7 +3136,7 @@ void task_bos_ga_3(GaWork* work) {
     p = work->entries;
 
     do {
-        func_080F8374(p);
+        BosGaEntryRelease(p);
         p++;
         i++;
     } while (i <= 5);
@@ -3146,45 +3146,45 @@ void task_bos_ga_3(GaWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-void func_080FB8DC(MdWork* work, s32 state) {
+void BosMdRequestState(MdWork* work, s32 state) {
     u16 t;
 
-    work->unk_004 = state;
-    t = work->unk_014 | 1;
-    work->unk_014 = t;
+    work->nextState = state;
+    t = work->flags | 1;
+    work->flags = t;
 }
 
-void func_080FB8E8(MdWork* work, u16 index) {
-    SetBgMapBlocks(1, (void*)gGaEntries[index].blocks, 2, 2);
+void BosMdSetBgMap(MdWork* work, u16 index) {
+    SetBgMapBlocks(1, (void*)gMdFrameDefs[index].blocks, 2, 2);
 }
 
-void func_080FB908(MdWork* work, u16 index) {
-    LoadBgTiles(1, gGaEntries[index].tiles, gGaEntries[index].tilesSize);
+void BosMdLoadBgTiles(MdWork* work, u16 index) {
+    LoadBgTiles(1, gMdFrameDefs[index].tiles, gMdFrameDefs[index].tilesSize);
 }
 
-void func_080FB930(MdWork* work, u16 id) {
+void BosMdSetFrame(MdWork* work, u16 id) {
     s32 n;
 
-    if (work->unk_01C == 0) {
+    if (work->bgVisible == 0) {
         return;
     }
 
-    func_080FB908(work, id);
-    func_080FB8E8(work, id);
-    work->unk_178 = gGaEntries[id].unk_00;
-    work->unk_17A = gGaEntries[id].unk_02;
+    BosMdLoadBgTiles(work, id);
+    BosMdSetBgMap(work, id);
+    work->bgOffsetX = gMdFrameDefs[id].bgOffsetX;
+    work->bgOffsetY = gMdFrameDefs[id].bgOffsetY;
 
     for (n = 0; n < 2; n++) {
-        work->gfx[n].sprite = gGaEntries[id].desc[n].sprite;
+        work->gfx[n].sprite = gMdFrameDefs[id].desc[n].sprite;
 
-        if (work->gfx[n].src != gGaEntries[id].desc[n].src && n == 0) {
-            work->gfx[n].src = gGaEntries[id].desc[n].src;
+        if (work->gfx[n].src != gMdFrameDefs[id].desc[n].src && n == 0) {
+            work->gfx[n].src = gMdFrameDefs[id].desc[n].src;
             UpdateSpriteFrameTiles(work->gfx[n].tiles, work->gfx[n].sprite, work->gfx[n].src);
         }
 
-        work->gfx[n].x = gGaEntries[id].desc[n].x;
-        work->gfx[n].y = gGaEntries[id].desc[n].y;
-        work->gfx[n].z = gGaEntries[id].desc[n].z;
+        work->gfx[n].x = gMdFrameDefs[id].desc[n].x;
+        work->gfx[n].y = gMdFrameDefs[id].desc[n].y;
+        work->gfx[n].z = gMdFrameDefs[id].desc[n].z;
     }
 }
 
@@ -3203,7 +3203,7 @@ void MdAnimStart(MdWork* work, s16 id) {
     a->frameCount = d->frameCount;
     a->frame = 0;
     a->timer = f->duration;
-    func_080FB930(work, f->gfxIndex);
+    BosMdSetFrame(work, f->gfxIndex);
 }
 void MdAnimUpdate(MdWork* work) {
     MdAnim* a;
@@ -3219,10 +3219,10 @@ void MdAnimUpdate(MdWork* work) {
         }
 
         a->timer = a->frames[a->frame].duration;
-        func_080FB930(work, a->frames[a->frame].gfxIndex);
+        BosMdSetFrame(work, a->frames[a->frame].gfxIndex);
     }
 }
-u8 func_080FBA9C(MdWork* work) {
+u8 BosMdAnimIsLastFrame(MdWork* work) {
     MdAnim* a;
 
     a = &work->anim;
@@ -3233,12 +3233,12 @@ u8 func_080FBA9C(MdWork* work) {
 
     return 0;
 }
-u8 func_080FBAB8(MdWork* work) {
-    if (work->unk_014 & 1) {
-        work->unk_008 = 2;
+u8 BosMdUpdateIdle(MdWork* work) {
+    if (work->flags & 1) {
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
     case 0:
         if (gBtlWork->actor->x > 0x8000) {
             MdAnimStart(work, 1);
@@ -3247,24 +3247,24 @@ u8 func_080FBAB8(MdWork* work) {
         }
 
         if (gBtlWork->flags & 0x100000) {
-            work->unk_016 = ((GetRandom() & 3) + (GetRandom() & 3)) / 2 * 20 + 60;
-        } else if (work->sub[0].unk_02C * 10 / work->sub[0].unk_02E > 4) {
-            work->unk_016 = (GetRandom() % 5 + GetRandom() % 5) / 2 * 30 + 30;
+            work->timer = ((GetRandom() & 3) + (GetRandom() & 3)) / 2 * 20 + 60;
+        } else if (work->sub[0].hp * 10 / work->sub[0].maxHp > 4) {
+            work->timer = (GetRandom() % 5 + GetRandom() % 5) / 2 * 30 + 30;
         } else {
-            work->unk_016 = (GetRandom() % 6 + GetRandom() % 6) / 2 * 10 + 30;
+            work->timer = (GetRandom() % 6 + GetRandom() % 6) / 2 * 10 + 30;
         }
         break;
     case 1:
-        if (func_080FBA9C(work) != 0 && gBtlWork->actor->x > 0x8000) {
+        if (BosMdAnimIsLastFrame(work) != 0 && gBtlWork->actor->x > 0x8000) {
             MdAnimStart(work, 1);
         }
 
-        if (gBtlWork->unk_0A0 != 0) {
-            work->unk_016--;
+        if (gBtlWork->phase != 0) {
+            work->timer--;
 
-            if (work->unk_016 <= 0) {
-                func_0801BCD4(&work->sub[0]);
-                func_080FB8DC(work, 0);
+            if (work->timer <= 0) {
+                RequestEnemyCardUse(&work->sub[0]);
+                BosMdRequestState(work, 0);
             }
         }
         break;
@@ -3272,27 +3272,27 @@ u8 func_080FBAB8(MdWork* work) {
         break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
-        work->unk_014 &= 0xFFFE;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
+        work->flags &= 0xFFFE;
     }
 
     return 1;
 }
-u8 func_080FBC4C(MdWork* work) {
+u8 BosMdUpdateBite(MdWork* work) {
     s32 d;
     u16 r;
 
-    if (work->unk_014 & 1) {
-        work->unk_008 = 2;
+    if (work->flags & 1) {
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
         case 0:
             d = gBtlWork->actor->x;
 
@@ -3348,42 +3348,42 @@ u8 func_080FBC4C(MdWork* work) {
             case 34:
             case 36:
             case 37:
-                if (func_08011F78(251, work->sub[0].x, work->sub[0].y,
+                if (ApplyAttackBox(251, work->sub[0].x, work->sub[0].y,
                                   work->sub[0].z, 40, 20, 24) != 0) {
                     m4aSongNumStart(SONG_BTL_DRGN_BITE);
                 }
                 break;
             }
 
-            if (func_080FBA9C(work) != 0) {
-                func_080FB8DC(work, 0);
+            if (BosMdAnimIsLastFrame(work) != 0) {
+                BosMdRequestState(work, 0);
             }
             break;
         case 2:
-            func_0801AF08(&work->sub[0]);
+            ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
-        work->unk_014 &= 0xFFFE;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
+        work->flags &= 0xFFFE;
     }
 
     return 1;
 }
-u8 func_080FBDD4(MdWork* work) {
+u8 BosMdUpdateQuake(MdWork* work) {
     s32 v;
 
-    if (work->unk_014 & 1) {
-        work->unk_008 = 2;
+    if (work->flags & 1) {
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
         case 0:
             if (gBtlWork->actor->x > 0xA800) {
                 if (GetRandom() % 100 <= 59) {
@@ -3399,205 +3399,205 @@ u8 func_080FBDD4(MdWork* work) {
                 }
             }
 
-            work->unk_00C = 0;
+            work->step = 0;
             break;
         case 1:
-            switch (work->unk_00C) {
+            switch (work->step) {
             case 0:
                 v = (s16)work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 18) {
-                    func_08011F78(252, gBtlWork->unk_000, gBtlWork->unk_004, 0,
+                    ApplyAttackBox(252, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
-                    func_0802F1E8();
-                    work->unk_1B4 |= 1;
-                    work->unk_00C = 1;
+                    BtlMapStartShake();
+                    work->signals |= 1;
+                    work->step = 1;
                 } else if (v == 28) {
-                    func_08011F78(254, gBtlWork->unk_000, gBtlWork->unk_004, 0,
+                    ApplyAttackBox(254, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
-                    func_0802F1E8();
-                    work->unk_1B4 |= 1;
-                    work->unk_00C = 2;
+                    BtlMapStartShake();
+                    work->signals |= 1;
+                    work->step = 2;
                 }
                 break;
             case 1:
                 v = (s16)work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 22) {
-                    func_08019A30();
-                    func_08011F78(252, gBtlWork->unk_000, gBtlWork->unk_004, 0,
+                    MakeOpponentsHittable();
+                    ApplyAttackBox(252, gBtlWork->viewX, gBtlWork->viewY, 0,
                                   256, 256, 1);
                     m4aSongNumStart(SONG_BTL_DRGN_RUMB);
-                    func_0802F1E8();
-                    work->unk_1B4 |= 1;
-                    work->unk_00C = 2;
+                    BtlMapStartShake();
+                    work->signals |= 1;
+                    work->step = 2;
                 }
                 break;
             }
 
-            if (func_080FBA9C(work) != 0) {
-                func_080FB8DC(work, 0);
+            if (BosMdAnimIsLastFrame(work) != 0) {
+                BosMdRequestState(work, 0);
             }
             break;
         case 2:
-            func_0801AF08(&work->sub[0]);
+            ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
-        work->unk_014 &= 0xFFFE;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
+        work->flags &= 0xFFFE;
     }
 
     return 1;
 }
-u8 func_080FBFA8(MdWork* work) {
+u8 BosMdUpdateFireBreath(MdWork* work) {
     MdFireArg a;
 
-    if (work->unk_014 & 1) {
-        work->unk_008 = 2;
+    if (work->flags & 1) {
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
         case 0:
-            work->unk_1B4 = work->unk_1B4 | 2;
+            work->signals = work->signals | 2;
             MdAnimStart(work, 2);
-            work->unk_00C = 0;
+            work->step = 0;
             break;
         case 1:
-            switch (work->unk_00C) {
+            switch (work->step) {
                 case 0:
-                    if (func_080FBA9C(work) != 0) {
+                    if (BosMdAnimIsLastFrame(work) != 0) {
                         MdAnimStart(work, 3);
-                        func_0801853C(work->sub[0].x, work->sub[0].y,
+                        BgFxStartDragonFire(work->sub[0].x, work->sub[0].y,
                                       work->sub[0].z + 0x1200, 512);
                         m4aSongNumStart(SONG_EF_DRGN_FIRE);
-                        work->unk_00C = 1;
+                        work->step = 1;
                     }
                     break;
                 case 1:
-                    if (func_08011F78(253, work->sub[0].x,
+                    if (ApplyAttackBox(253, work->sub[0].x,
                                       work->sub[0].y + 0x1800, 0, 72, 48, 1) != 0) {
                         m4aSongNumStart(SONG_SND_714);
                     }
 
-                    if (func_080128EC() == 0) {
-                        work->unk_1B4 &= 0xFFFD;
+                    if (BgFxIsActive() == 0) {
+                        work->signals &= 0xFFFD;
                         a.pool = &work->tasks;
-                        a.unk_06 = 0;
-                        a.flags = &work->unk_1B4;
+                        a.index = 0;
+                        a.flags = &work->signals;
 
-                        if (work->sub[0].unk_02C * 10 / work->sub[0].unk_02E > 4) {
+                        if (work->sub[0].hp * 10 / work->sub[0].maxHp > 4) {
                             switch (GetRandom() % 3) {
                             case 0:
-                                a.unk_04 = 0;
+                                a.pattern = 0;
                                 break;
                             case 1:
-                                a.unk_04 = 1;
+                                a.pattern = 1;
                                 break;
                             case 2:
-                                a.unk_04 = 2;
+                                a.pattern = 2;
                                 break;
                             }
                         } else {
                             switch (GetRandom() % 3) {
                             case 0:
-                                a.unk_04 = 3;
+                                a.pattern = 3;
                                 break;
                             case 1:
-                                a.unk_04 = 4;
+                                a.pattern = 4;
                                 break;
                             case 2:
-                                a.unk_04 = 5;
+                                a.pattern = 5;
                                 break;
                             }
                         }
 
                         TaskCreate(&work->tasks, &gTaskDescBosMdFire, &a);
                         MdAnimStart(work, 4);
-                        work->unk_00C = 2;
+                        work->step = 2;
                     }
                     break;
                 case 2:
-                    if (func_080FBA9C(work) != 0) {
-                        func_080FB8DC(work, 0);
+                    if (BosMdAnimIsLastFrame(work) != 0) {
+                        BosMdRequestState(work, 0);
                     }
                     break;
             }
             break;
         case 2:
-            func_0801AF08(&work->sub[0]);
+            ClearBtlObjActionFlags(&work->sub[0]);
             break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
-        work->unk_014 &= 0xFFFE;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
+        work->flags &= 0xFFFE;
     }
 
     return 1;
 }
-u8 func_080FC17C(MdWork* work) {
+u8 BosMdUpdateDefeat(MdWork* work) {
     u8 result;
     PrizeCardArg arg;
 
     result = 1;
 
-    if (work->unk_014 & 1) {
-        work->unk_008 = 2;
+    if (work->flags & 1) {
+        work->statePhase = 2;
     }
 
-    switch (work->unk_008) {
+    switch (work->statePhase) {
         case 0:
             MdAnimStart(work, 10);
-            func_0801AF4C(&work->sub[0]);
-            work->unk_1B4 |= 2;
-            work->unk_00C = 0;
+            BeginBossDefeat(&work->sub[0]);
+            work->signals |= 2;
+            work->step = 0;
             break;
         case 1:
-            switch (work->unk_00C) {
+            switch (work->step) {
             case 0:
                 if (FadeIsActive() == 0) {
-                    func_08014AAC(work->sub[0].x,
+                    BgFxStartBossDeath(work->sub[0].x,
                                   work->sub[0].y + work->sub[0].z);
                     FadeToAmount(0, gBtlWork->fadeAmount, 8);
-                    work->unk_016 = 120;
-                    work->unk_00C = 1;
+                    work->timer = 120;
+                    work->step = 1;
                 }
                 break;
             case 1:
-                work->unk_016--;
+                work->timer--;
 
-                if (work->unk_016 <= 0) {
-                    func_0801536C();
-                    work->unk_00C = 2;
+                if (work->timer <= 0) {
+                    BgFxStartBossDeathFlash();
+                    work->step = 2;
                 }
                 break;
             case 2:
-                if (work->unk_01C != 0 && FadeGetAmount() == 31) {
+                if (work->bgVisible != 0 && FadeGetAmount() == 31) {
                     DisableBg(1);
-                    work->unk_01C = 0;
+                    work->bgVisible = 0;
                 }
 
-                if (func_080128EC() == 0) {
+                if (BgFxIsActive() == 0) {
                     arg.x = work->sub[0].x;
                     arg.y = work->sub[0].y;
                     arg.z = work->sub[0].z;
                     CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg);
-                    func_0801B918(&work->sub[0]);
-                    func_0801B008();
+                    DropBossPrizes(&work->sub[0]);
+                    EndBossDefeat();
                     result = 0;
                 }
                 break;
@@ -3607,19 +3607,19 @@ u8 func_080FC17C(MdWork* work) {
             break;
     }
 
-    if (work->unk_008 == 0) {
-        work->unk_008 = 1;
+    if (work->statePhase == 0) {
+        work->statePhase = 1;
     }
 
-    if (work->unk_008 == 2) {
-        work->unk_000 = work->unk_004;
-        work->unk_008 = 0;
-        work->unk_014 &= 0xFFFE;
+    if (work->statePhase == 2) {
+        work->state = work->nextState;
+        work->statePhase = 0;
+        work->flags &= 0xFFFE;
     }
 
     return result;
 }
-void func_080FC29C(MdWork* work) {
+void BosMdChooseAttack(MdWork* work) {
     s32 d;
     u16 r;
 
@@ -3629,81 +3629,81 @@ void func_080FC29C(MdWork* work) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            func_080FB8DC(work, 2);
+            BosMdRequestState(work, 2);
         } else if (r <= 89) {
-            func_080FB8DC(work, 3);
+            BosMdRequestState(work, 3);
         } else {
-            func_080FB8DC(work, 1);
+            BosMdRequestState(work, 1);
         }
     } else if (d > 0x7000) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            func_080FB8DC(work, 1);
+            BosMdRequestState(work, 1);
         } else if (r <= 89) {
-            func_080FB8DC(work, 3);
+            BosMdRequestState(work, 3);
         } else {
-            func_080FB8DC(work, 2);
+            BosMdRequestState(work, 2);
         }
     } else if (d > 0x3800) {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            func_080FB8DC(work, 1);
+            BosMdRequestState(work, 1);
         } else if (r <= 89) {
-            func_080FB8DC(work, 3);
+            BosMdRequestState(work, 3);
         } else {
-            func_080FB8DC(work, 2);
+            BosMdRequestState(work, 2);
         }
     } else {
         r = GetRandom() % 100;
 
         if (r <= 59) {
-            func_080FB8DC(work, 2);
+            BosMdRequestState(work, 2);
         } else if (r <= 89) {
-            func_080FB8DC(work, 3);
+            BosMdRequestState(work, 3);
         } else {
-            func_080FB8DC(work, 1);
+            BosMdRequestState(work, 1);
         }
     }
 }
-void func_080FC360(MdWork* work) {
+void BosMdHandleReaction(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
         BtlObj* e = &work->sub[i];
 
-        switch (func_0801ADAC(e)) {
+        switch (UpdateBtlObjReaction(e)) {
         case 5:
-            func_080FC29C(work);
+            BosMdChooseAttack(work);
             break;
         case 1:
         case 6:
         case 7:
-            work->unk_01A = 30;
-            work->unk_010[i] = 2;
+            work->hurtTimer = 30;
+            work->hurtState[i] = 2;
             break;
         case 3:
         case 8:
-            func_0801C2DC(e, 1);
-            func_080FB8DC(work, 4);
+            SetBtlObjUnhittable(e, 1);
+            BosMdRequestState(work, 4);
             break;
         case 4:
-            func_080FB8DC(work, 0);
-            func_0801AF08(e);
+            BosMdRequestState(work, 0);
+            ClearBtlObjActionFlags(e);
             break;
         }
     }
 }
-void func_080FC3FC(MdWork* work) {
+void BosMdEndHurt(MdWork* work) {
     s16 i;
 
     for (i = 0; i < 1; i++) {
         BtlObj* e = &work->sub[i];
 
-        if (work->unk_010[i] == 2 && work->unk_01A == 0) {
-            work->unk_010[i] = 0;
-            func_0801AF08(e);
+        if (work->hurtState[i] == 2 && work->hurtTimer == 0) {
+            work->hurtState[i] = 0;
+            ClearBtlObjActionFlags(e);
         }
     }
 }
@@ -3712,18 +3712,18 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMdMap, (void*)&gMdMapData);
     gBtlWork->flags &= 0xFFFFFFFFFFEFFFFF;
-    work->unk_000 = 0;
-    work->unk_004 = 0;
-    work->unk_014 = 0;
-    work->unk_008 = 0;
-    work->unk_016 = 0;
+    work->state = 0;
+    work->nextState = 0;
+    work->flags = 0;
+    work->statePhase = 0;
+    work->timer = 0;
     work->unk_018 = 0;
-    work->unk_01A = 0;
-    work->unk_1B4 = 0;
-    work->unk_01C = 1;
+    work->hurtTimer = 0;
+    work->signals = 0;
+    work->bgVisible = 1;
 
     for (i = 0; i < 1; i++) {
-        work->unk_010[i] = 0;
+        work->hurtState[i] = 0;
     }
 
     for (i = 0; i < 2; i++) {
@@ -3736,14 +3736,14 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     work->gfx[0].tiles = AllocSpriteFrameTiles(2432);
     work->gfx[1].tiles = LoadObjTiles(gUnk_099D42FC, 0x12A0);
-    gBtlWork->unk_0CC = 0x11000;
-    gBtlWork->unk_0D0 = 0x15000;
-    gBtlWork->unk_0D4 = 0;
-    SetBattleActorPosition(0x7800, gBtlWork->unk_0D0, 0);
+    gBtlWork->bossX = 0x11000;
+    gBtlWork->bossY = 0x15000;
+    gBtlWork->bossZ = 0;
+    SetBattleActorPosition(0x7800, gBtlWork->bossY, 0);
 
     for (i = 0; i < 1; i++) {
-        func_0801B37C(&work->sub[i], &gBosMdEmyKind, gBtlWork->unk_0CC,
-                      gBtlWork->unk_0D0, gBtlWork->unk_0D4);
+        InitEnemyBtlObj(&work->sub[i], &gBosMdEmyKind, gBtlWork->bossX,
+                      gBtlWork->bossY, gBtlWork->bossZ);
 #ifdef VERSION_EU
         ColliderInit(&work->sub[i].collider, 8, 16, 24);
 #else
@@ -3759,20 +3759,20 @@ void task_bos_md_0(MdWork* work, void* arg) {
         work->sub[i].flags |= 4;
     }
 
-    func_080FB930(work, 0);
+    BosMdSetFrame(work, 0);
     MdAnimStart(work, 0);
     LoadPalette(gUnk_09A3C97C, (void*)0x05000000, 32);
-    func_0801C298(0, 1);
-    work->unk_028 = gUnk_09A3C97C;
+    SetBtlPaletteFadeExcluded(0, 1);
+    work->bgPalette = gUnk_09A3C97C;
     work->palette = LoadObjPalette(gUnk_09A3C97C, 32);
-    func_0801C298(work->palette->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, 1);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    func_0801C298(work->palette2->index + 16, 1);
+    SetBtlPaletteFadeExcluded(work->palette2->index + 16, 1);
     TaskPoolInit(&work->tasks, 6);
     TaskPoolInit(&work->tasks2, 1);
     TaskPoolInit(&work->tasks3, 8);
-    ScrollBgMapTo(1, (gBtlWork->unk_000 >> 8) + 72 - work->unk_178,
-                  (gBtlWork->unk_004 >> 8) + 48 - work->unk_17A);
+    ScrollBgMapTo(1, (gBtlWork->viewX >> 8) + 72 - work->bgOffsetX,
+                  (gBtlWork->viewY >> 8) + 48 - work->bgOffsetY);
 }
 
 s32 task_bos_md_1(MdWork* work) {
@@ -3781,49 +3781,49 @@ s32 task_bos_md_1(MdWork* work) {
     s16 i;
 
     result = 1;
-    func_080FC360(work);
+    BosMdHandleReaction(work);
 
-    switch (work->unk_000) {
+    switch (work->state) {
     case 0:
-        result = func_080FBAB8(work);
+        result = BosMdUpdateIdle(work);
         break;
     case 1:
-        result = func_080FBC4C(work);
+        result = BosMdUpdateBite(work);
         break;
     case 2:
-        result = func_080FBDD4(work);
+        result = BosMdUpdateQuake(work);
         break;
     case 3:
-        result = func_080FBFA8(work);
+        result = BosMdUpdateFireBreath(work);
         break;
     case 4:
-        result = func_080FC17C(work);
+        result = BosMdUpdateDefeat(work);
         break;
     }
 
-    func_080FC3FC(work);
+    BosMdEndHurt(work);
 
-    if (func_0801C1C0(0) != 0) {
+    if (ConsumeGimmickFlag(0) != 0) {
         args[0] = &work->tasks3;
-        args[1] = &work->unk_1B4;
+        args[1] = &work->signals;
         TaskCreate(&work->tasks2, &gTaskDescBosMdDai, args);
     }
 
     MdAnimUpdate(work);
 
-    if (work->unk_01A > 0) {
-        work->unk_01A--;
+    if (work->hurtTimer > 0) {
+        work->hurtTimer--;
     }
 
     for (i = 0; i < 1; i++) {
-        work->sub[i].x = gBtlWork->unk_0CC
-            + gGaEntries[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+        work->sub[i].x = gBtlWork->bossX
+            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].x * 256;
-        work->sub[i].y = gBtlWork->unk_0D0
-            + gGaEntries[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+        work->sub[i].y = gBtlWork->bossY
+            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].y * 256;
-        work->sub[i].z = gBtlWork->unk_0D4
-            + gGaEntries[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+        work->sub[i].z = gBtlWork->bossZ
+            + gMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].z * 256;
         ColliderSetPosition(&work->sub[i].collider, work->sub[i].x, work->sub[i].y,
                       work->sub[i].z);
@@ -3844,28 +3844,28 @@ void task_bos_md_2(MdWork* work) {
     void* p0;
     s32 i;
 
-    if (work->unk_01C == 0) {
+    if (work->bgVisible == 0) {
         return;
     }
 
-    if (func_0801CA00(&work->sub[0]) != 0) {
-        if (work->unk_028 != gUnk_08F69BC4) {
+    if (StepHitFlash(&work->sub[0]) != 0) {
+        if (work->bgPalette != gUnk_08F69BC4) {
             LoadPalette(gUnk_08F69BC4, (void*)0x05000000, 32);
-            work->unk_028 = gUnk_08F69BC4;
+            work->bgPalette = gUnk_08F69BC4;
         }
 
         pal = work->palette2;
     } else {
-        if (work->unk_028 != gUnk_09A3C97C) {
+        if (work->bgPalette != gUnk_09A3C97C) {
             LoadPalette(gUnk_09A3C97C, (void*)0x05000000, 32);
-            work->unk_028 = gUnk_09A3C97C;
+            work->bgPalette = gUnk_09A3C97C;
         }
 
         pal = work->palette;
     }
 
-    x = (gBtlWork->unk_000 >> 8) - (work->unk_178 - 72);
-    y = (gBtlWork->unk_004 >> 8) - (work->unk_17A - 48);
+    x = (gBtlWork->viewX >> 8) - (work->bgOffsetX - 72);
+    y = (gBtlWork->viewY >> 8) - (work->bgOffsetY - 48);
     ScrollBgMapTo(1, x, y);
     p0 = &work->tasks;
     p1 = &work->tasks2;
@@ -3899,7 +3899,7 @@ void task_bos_md_3(MdWork* work) {
 
     for (i = 0; i < 1; i++) {
         ColliderUnregister(&work->sub[i].collider);
-        func_0801B7D8(&work->sub[i]);
+        ReleaseEnemyBtlObj(&work->sub[i]);
     }
 
     q = &work->tasks;
@@ -3924,25 +3924,25 @@ void task_bos_md_map_0(MdMapWork* work, MdMapData* p) {
     LoadBgPalette(0, p->palette, p->paletteSize);
     SetBgMapBlocks(0, &p->map, 2, 2);
     gBtlWork->scale = 256;
-    gBtlWork->unk_028 = 256;
+    gBtlWork->zoomScale = 256;
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x14000;
-    gBtlWork->unk_000 = 0x10000;
-    gBtlWork->unk_004 = 0x14000;
+    gBtlWork->viewX = 0x10000;
+    gBtlWork->viewY = 0x14000;
     gBtlWork->x2 = 0x10000;
     gBtlWork->y2 = 0x14000;
-    gBtlWork->unk_01C = 0x10000;
-    gBtlWork->unk_020 = 0x14000;
-    gBtlWork->unk_01A = 15;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
-    ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
+    gBtlWork->zoomX = 0x10000;
+    gBtlWork->zoomY = 0x14000;
+    gBtlWork->zoomSteps = 15;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
+    ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 s32 task_bos_md_map_1(MdMapWork* work) {
     s32 dx;
     s32 dy;
 
-    func_0802F208();
+    BtlMapUpdateShake();
     dx = (gBtlWork->x2 - gBtlWork->x) >> 3;
     dy = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
@@ -3954,36 +3954,36 @@ s32 task_bos_md_map_1(MdMapWork* work) {
 
     gBtlWork->x += dx;
     gBtlWork->y += dy;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->unk_000 - 30720 < gBtlWork->unk_0DA * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 120) * 256;
-    } else if (gBtlWork->unk_000 + 30720 > (gBtlWork->unk_0DC + 96) * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 24) * 256;
+    if (gBtlWork->viewX - 30720 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + 120) * 256;
+    } else if (gBtlWork->viewX + 30720 > (gBtlWork->xMax + 96) * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - 24) * 256;
     }
 
-    if (gBtlWork->unk_004 + 20480 < gBtlWork->unk_0DE * 256) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0DE - 80) * 256;
-    } else if (gBtlWork->unk_004 + 20480 > gBtlWork->unk_0E0 * 256) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0E0 - 80) * 256;
+    if (gBtlWork->viewY + 20480 < gBtlWork->yMin * 256) {
+        gBtlWork->viewY = (gBtlWork->yMin - 80) * 256;
+    } else if (gBtlWork->viewY + 20480 > gBtlWork->yMax * 256) {
+        gBtlWork->viewY = (gBtlWork->yMax - 80) * 256;
     }
 
-    gBtlWork->unk_004 += func_0802F268();
-    ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (gBtlWork->unk_004 >> 8) + 40);
+    gBtlWork->viewY += BtlMapGetShake();
+    ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (gBtlWork->viewY >> 8) + 40);
     return 1;
 }
-void func_080FCC14(MdFireWork* work) {
+void BosMdFireHandleReaction(MdFireWork* work) {
     BtlObj* e;
 
     e = &work->sub;
 
-    switch (func_0801ADAC(e)) {
+    switch (UpdateBtlObjReaction(e)) {
     case 1:
     case 6:
     case 7:
-        work->unk_006 = 30;
-        work->unk_000 = 3;
+        work->flashTimer = 30;
+        work->state = 3;
         break;
     case 3:
     case 8:
@@ -3993,13 +3993,13 @@ void func_080FCC14(MdFireWork* work) {
             }
         }
 
-        func_0801C2DC(e, 1);
-        work->unk_034 = 30;
-        work->unk_000 = 4;
+        SetBtlObjUnhittable(e, 1);
+        work->scaleSteps = 30;
+        work->state = 4;
         break;
     }
 }
-u8 func_080FCCB4(MdFireWork* work) {
+u8 BosMdFireUpdateMotion(MdFireWork* work) {
     u8 result;
     BtlObj* e;
     u8 a;
@@ -4007,46 +4007,46 @@ u8 func_080FCCB4(MdFireWork* work) {
     result = 1;
     e = &work->sub;
 
-    if ((*work->flags & 2) && work->unk_000 != 4) {
-        func_0801C2DC(e, 1);
-        work->unk_034 = 30;
-        work->unk_000 = 4;
+    if ((*work->flags & 2) && work->state != 4) {
+        SetBtlObjUnhittable(e, 1);
+        work->scaleSteps = 30;
+        work->state = 4;
     }
 
-    switch (work->unk_000) {
+    switch (work->state) {
         case 0:
-            work->unk_034--;
+            work->scaleSteps--;
 
-            if (work->unk_034 <= 0) {
-                func_0801C2DC(e, 0);
-                work->unk_000 = 1;
+            if (work->scaleSteps <= 0) {
+                SetBtlObjUnhittable(e, 0);
+                work->state = 1;
             }
             break;
         case 1:
-            switch (work->unk_15C) {
+            switch (work->motion) {
                 case 0:
-                    if (work->unk_004 > 0) {
-                        work->unk_004--;
+                    if (work->timer > 0) {
+                        work->timer--;
 
-                        if (work->unk_004 <= 0) {
-                            switch (work->unk_15E) {
+                        if (work->timer <= 0) {
+                            switch (work->pattern) {
                             case 0:
                             case 1:
                             case 2:
                             case 4:
-                                a = func_080F7E0C(work->x, work->y,
+                                a = Bos5GetAngle(work->x, work->y,
                                                   gBtlWork->actor->x,
                                                   gBtlWork->actor->y);
                                 work->vx = gSineTable[a] * 3;
                                 work->vy = -gSineTable[a + 0x40] * 3;
-                                work->unk_004 = 90;
-                                work->unk_15C = 1;
+                                work->timer = 90;
+                                work->motion = 1;
                                 break;
                             case 3:
-                                work->unk_15C = 2;
+                                work->motion = 2;
                                 break;
                             case 5:
-                                work->unk_15C = 3;
+                                work->motion = 3;
                                 break;
                             }
                         }
@@ -4055,49 +4055,49 @@ u8 func_080FCCB4(MdFireWork* work) {
                 case 1:
                     work->x += work->vx;
                     work->y += work->vy;
-                    work->unk_004--;
+                    work->timer--;
 
 #ifdef VERSION_EU
-                    if (work->unk_004 <= 0 || work->y <= 0x12FFF) {
+                    if (work->timer <= 0 || work->y <= 0x12FFF) {
 #else
-                    if (work->unk_004 <= 0 || work->y <= 0x117FF) {
+                    if (work->timer <= 0 || work->y <= 0x117FF) {
 #endif
-                        func_0801C2DC(e, 1);
-                        work->unk_034 = 30;
-                        work->unk_000 = 4;
+                        SetBtlObjUnhittable(e, 1);
+                        work->scaleSteps = 30;
+                        work->state = 4;
                     }
                     break;
                 case 2:
                     work->angle++;
-                    work->x = gSineTable[work->angle] * 40 + work->unk_164;
-                    work->y = -gSineTable[work->angle + 0x40] * 40 + work->unk_168;
+                    work->x = gSineTable[work->angle] * 40 + work->centerX;
+                    work->y = -gSineTable[work->angle + 0x40] * 40 + work->centerY;
                     break;
                 case 3:
                     work->angle++;
-                    work->x = gSineTable[work->angle] * 32 + work->unk_164;
+                    work->x = gSineTable[work->angle] * 32 + work->centerX;
                     break;
             }
 
-            if (work->unk_008 > 0) {
-                work->unk_008--;
+            if (work->contactCooldown > 0) {
+                work->contactCooldown--;
             } else if (ColliderIsTouchingType(&work->sub.collider, 1) != 0) {
                 m4aSongNumStart(SONG_SND_714);
                 gBtlWork->actor->flags |= 0x20000000;
-                work->unk_008 = 60;
+                work->contactCooldown = 60;
             }
             break;
         case 2:
             break;
         case 3:
-            if (work->unk_006 == 0) {
-                work->unk_000 = 1;
-                func_0801AF08(e);
+            if (work->flashTimer == 0) {
+                work->state = 1;
+                ClearBtlObjActionFlags(e);
             }
             break;
         case 4:
-            work->unk_034--;
+            work->scaleSteps--;
 
-            if (work->unk_034 <= 0) {
+            if (work->scaleSteps <= 0) {
                 result = 0;
             }
             break;
@@ -4105,41 +4105,41 @@ u8 func_080FCCB4(MdFireWork* work) {
 
     return result;
 }
-void func_080FCF78(MdFireWork* work) {
+void BosMdFirePlace(MdFireWork* work) {
     const MdFirePoint* p;
 
-    switch (work->unk_15E) {
+    switch (work->pattern) {
     case 0:
     case 1:
     case 2:
-        p = gMdFireDefs[work->unk_15E].points + work->unk_160;
+        p = gMdFireDefs[work->pattern].points + work->index;
         work->x = p->x * 256;
         work->y = p->y * 256;
-        work->unk_004 = p->unk_04;
-        work->unk_15C = 0;
+        work->timer = p->delay;
+        work->motion = 0;
         break;
     case 3:
-        work->angle = work->unk_160 * 256 / 6;
-        work->unk_164 = 0x8000;
-        work->unk_168 = 0x14800;
-        work->x = gSineTable[work->angle] * 40 + work->unk_164;
-        work->y = -gSineTable[work->angle + 0x40] * 40 + work->unk_168;
-        work->unk_004 = 60;
-        work->unk_15C = 0;
+        work->angle = work->index * 256 / 6;
+        work->centerX = 0x8000;
+        work->centerY = 0x14800;
+        work->x = gSineTable[work->angle] * 40 + work->centerX;
+        work->y = -gSineTable[work->angle + 0x40] * 40 + work->centerY;
+        work->timer = 60;
+        work->motion = 0;
         break;
     case 4:
         work->x = GetRandom() % 96 * 256 + 0x9800;
-        work->y = work->unk_160 * 4096 + 0x11800;
-        work->unk_004 = work->unk_160 * 60 + 240;
-        work->unk_15C = 0;
+        work->y = work->index * 4096 + 0x11800;
+        work->timer = work->index * 60 + 240;
+        work->motion = 0;
         break;
     case 5:
         work->angle = 0;
-        work->unk_164 = 0x9800;
-        work->x = gSineTable[work->angle] * 32 + work->unk_164;
-        work->y = work->unk_160 * 4096 + 0x11800;
-        work->unk_004 = work->unk_160 * 256 / 6 + 60;
-        work->unk_15C = 0;
+        work->centerX = 0x9800;
+        work->x = gSineTable[work->angle] * 32 + work->centerX;
+        work->y = work->index * 4096 + 0x11800;
+        work->timer = work->index * 256 / 6 + 60;
+        work->motion = 0;
         break;
     }
 }
@@ -4148,42 +4148,42 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     s16 i;
     s16 n;
 
-    work->unk_006 = 0;
-    work->unk_008 = 0;
+    work->flashTimer = 0;
+    work->contactCooldown = 0;
     work->scale = 25;
-    work->unk_034 = 30;
-    work->unk_000 = 0;
+    work->scaleSteps = 30;
+    work->state = 0;
     work->z = 0;
-    work->unk_15E = arg->unk_04;
-    work->unk_160 = arg->unk_06;
+    work->pattern = arg->pattern;
+    work->index = arg->index;
     work->flags = arg->flags;
-    func_080FCF78(work);
-    func_0801B37C(&work->sub, &gBosMdFireEmyKind, work->x, work->y, work->z);
+    BosMdFirePlace(work);
+    InitEnemyBtlObj(&work->sub, &gBosMdFireEmyKind, work->x, work->y, work->z);
     ColliderInit(&work->sub.collider, 3, 16, 16);
     ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
     work->sub.flags |= 0x1000;
-    work->sub.unk_02C = 20;
-    work->sub.unk_02E = 20;
-    func_0801C2DC(&work->sub, 1);
+    work->sub.hp = 20;
+    work->sub.maxHp = 20;
+    SetBtlObjUnhittable(&work->sub, 1);
     work->palette = LoadObjPalette(gUnk_09A3C99C, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->tiles = LoadObjTiles(gUnk_099E367C, 0x800);
     AnimInit(&work->anim, gUnk_09EF9BC0, gUnk_09EF9BB0);
     AnimStart(&work->anim, 0, 1);
     a.pool = 0;
-    a.unk_04 = arg->unk_04;
+    a.pattern = arg->pattern;
     a.flags = arg->flags;
 
     if (arg->pool != 0) {
-        if (work->unk_15E <= 2) {
-            n = gMdFireDefs[work->unk_15E].unk_04;
+        if (work->pattern <= 2) {
+            n = gMdFireDefs[work->pattern].count;
         } else {
             n = 6;
         }
 
         for (i = 1; i < n; i++) {
-            a.unk_06 = i;
+            a.index = i;
             TaskCreate(arg->pool, &gTaskDescBosMdFire, &a);
         }
     }
@@ -4192,11 +4192,11 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
 u8 task_bos_md_fire_1(MdFireWork* work) {
     u8 result;
 
-    func_080FCC14(work);
-    result = func_080FCCB4(work);
+    BosMdFireHandleReaction(work);
+    result = BosMdFireUpdateMotion(work);
 
-    if ((s16)work->unk_006 > 0) {
-        work->unk_006--;
+    if ((s16)work->flashTimer > 0) {
+        work->flashTimer--;
     }
 
     work->sub.x = work->x;
@@ -4214,7 +4214,7 @@ void task_bos_md_fire_2(MdFireWork* work) {
     ObjAffine* sprite;
     u16 frame;
 
-    if (work->unk_006 > 0 && (gFrameCounter & 1)) {
+    if (work->flashTimer > 0 && (gFrameCounter & 1)) {
         gfx = work->palette2;
     } else {
         gfx = work->palette;
@@ -4223,11 +4223,11 @@ void task_bos_md_fire_2(MdFireWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->unk_000 == 0) {
-        ApproachValue(&work->scale, 0x100, work->unk_034);
+    if (work->state == 0) {
+        ApproachValue(&work->scale, 0x100, work->scaleSteps);
         sprite = AllocObjAffine(0, work->scale, work->scale, 0);
-    } else if (work->unk_000 == 4) {
-        ApproachValue(&work->scale, 25, work->unk_034);
+    } else if (work->state == 4) {
+        ApproachValue(&work->scale, 25, work->scaleSteps);
         sprite = AllocObjAffine(0, work->scale, work->scale, 0);
     } else {
         sprite = 0;
@@ -4239,7 +4239,7 @@ void task_bos_md_fire_2(MdFireWork* work) {
 
 void task_bos_md_fire_3(MdFireWork* work) {
     ColliderUnregister(&work->sub.collider);
-    func_0801B7D8(&work->sub);
+    ReleaseEnemyBtlObj(&work->sub);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
     ReleaseObjTiles(work->tiles);
@@ -4251,13 +4251,13 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     gBtlWork->flags |= 0x100000;
     work->flags = args[1];
     work->pool = args[0];
-    work->unk_07C = 0;
+    work->level = 0;
     work->state = 0;
     work->x = 0x8000;
     work->y = 0x14F00;
     work->z = 0;
-    work->unk_010 = 20;
-    work->unk_00C = -40960;
+    work->dropSteps = 20;
+    work->dropZ = -40960;
     p = &work->collider;
     ColliderInit(p, 7, 24, 24);
     ColliderSetPosition(p, work->x, work->y, work->z);
@@ -4276,42 +4276,42 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
 
     switch (work->state) {
     case 0:
-        ApproachValue(&work->unk_00C, 0, work->unk_010);
-        work->unk_010--;
+        ApproachValue(&work->dropZ, 0, work->dropSteps);
+        work->dropSteps--;
 
-        if (work->unk_010 <= 0) {
+        if (work->dropSteps <= 0) {
             ColliderSetDisabled(&work->collider, 0);
             ColliderSetHeight(&work->collider, 8);
-            work->unk_00C = work->z - 0xA000;
+            work->dropZ = work->z - 0xA000;
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
-            work->unk_07C = 1;
-            work->unk_010 = 20;
+            work->level = 1;
+            work->dropSteps = 20;
             work->state = 1;
         }
         break;
     case 1:
-        ApproachValue(&work->unk_00C, -3584, work->unk_010);
-        work->unk_010--;
+        ApproachValue(&work->dropZ, -3584, work->dropSteps);
+        work->dropSteps--;
 
-        if (work->unk_010 <= 0) {
+        if (work->dropSteps <= 0) {
             ColliderSetDisabled(&work->collider, 0);
             ColliderSetHeight(&work->collider, 16);
-            work->unk_00C = work->z - 0xA000;
+            work->dropZ = work->z - 0xA000;
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
-            work->unk_07C = 2;
-            work->unk_010 = 20;
+            work->level = 2;
+            work->dropSteps = 20;
             work->state = 2;
         }
         break;
     case 2:
-        ApproachValue(&work->unk_00C, -7168, work->unk_010);
-        work->unk_010--;
+        ApproachValue(&work->dropZ, -7168, work->dropSteps);
+        work->dropSteps--;
 
-        if (work->unk_010 <= 0) {
+        if (work->dropSteps <= 0) {
             ColliderSetDisabled(&work->collider, 0);
             ColliderSetHeight(&work->collider, 24);
             m4aSongNumStart(SONG_BTL_DRGN_GIMIC);
-            work->unk_07C = 3;
+            work->level = 3;
             *work->flags &= 0xFFFE;
             work->state = 3;
         }
@@ -4321,20 +4321,20 @@ s32 task_bos_md_dai_1(MdDaiWork* work) {
             *work->flags &= 0xFFFE;
             args[0] = work->x;
             args[1] = work->y;
-            args[2] = -((work->unk_07C - 1) * 7 << 9);
+            args[2] = -((work->level - 1) * 7 << 9);
             n = GetRandom() % 3 + 3;
 
             for (i = 0; i < n; i++) {
                 TaskCreate(work->pool, &gTaskDescBosMdHahen, args);
             }
 
-            work->unk_07C--;
+            work->level--;
 
-            if (work->unk_07C <= 0) {
+            if (work->level <= 0) {
                 ColliderSetDisabled(&work->collider, 1);
                 result = 0;
             } else {
-                ColliderSetHeight(&work->collider, work->unk_07C * 8);
+                ColliderSetHeight(&work->collider, work->level * 8);
             }
         }
         break;
@@ -4347,7 +4347,7 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     s16 y;
     u16 frame;
 
-    WorldToScreen(&x, &y, work->x, work->y, work->z + work->unk_00C);
+    WorldToScreen(&x, &y, work->x, work->y, work->z + work->dropZ);
     frame = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state <= 2) {
@@ -4362,8 +4362,8 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->unk_07C > 0) {
-        DrawSprite(x, y, gUnk_09EF9740[work->unk_07C + 1], work->tiles,
+    if (work->level > 0) {
+        DrawSprite(x, y, gUnk_09EF9740[work->level + 1], work->tiles,
                       work->palette, 0, frame,
                       (u16)(-4100 - (work->y >> 8) * 4));
     }
@@ -4448,42 +4448,42 @@ void task_bos_md_hahen_3(MdHahenWork* work) {
     ReleaseObjTiles(work->tiles);
 }
 
-void func_080FD9B8(s16 model, s16 slot) {
+void WorldselectLoadSlotPalette(s16 model, s16 slot) {
     void* src;
     s32 size;
 
-    if (gMdModels[model].unk_02 == 13 && func_080D2DD8()) {
+    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
         src = gUnk_09A3CDDC;
         size = 0x40;
     } else {
-        src = gMdModels[model].unk_08;
+        src = gWorldselectWorldDefs[model].palette;
         size = 0x20;
     }
 
-    gMdSlots[slot].palette = LoadObjPalette(src, size);
+    gWorldselectSlots[slot].palette = LoadObjPalette(src, size);
 }
 
-void func_080FDA28(s16 model, s16 slot) {
+void WorldselectLoadSlotTiles(s16 model, s16 slot) {
     void* src;
 
-    if (gMdModels[model].unk_02 == 13 && func_080D2DD8()) {
+    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
         src = gUnk_099EDE7C;
     } else {
-        src = gMdModels[model].unk_0C;
+        src = gWorldselectWorldDefs[model].tiles;
     }
 
-    gMdSlots[slot].tiles = LoadObjTiles(src, 0x1000);
+    gWorldselectSlots[slot].tiles = LoadObjTiles(src, 0x1000);
 }
 
-s16 func_080FDA98(s16 model, s16 slot) {
-    if (gMdModels[model].unk_02 == 13 && func_080D2DD8()) {
-        gMdSlots[slot].gfx = gUnk_099A8914;
+s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
+    if (gWorldselectWorldDefs[model].world == 13 && func_080D2DD8()) {
+        gWorldselectSlots[slot].gfx = gUnk_099A8914;
     } else {
-        gMdSlots[slot].gfx = gMdModels[model].unk_10;
+        gWorldselectSlots[slot].gfx = gWorldselectWorldDefs[model].gfx;
     }
 }
 
-void func_080FDB1C(s16 model, s16 n) {
+void WorldselectDrawName(s16 model, s16 n) {
     vu32* dma;
     u16 zero;
     u8* src;
@@ -4496,26 +4496,26 @@ void func_080FDB1C(s16 model, s16 n) {
     zero = 0;
     dma = (vu32*)REG_ADDR_DMA3;
     dma[0] = (vu32)zp;
-    dma[1] = (vu32)gUnk_020350BC;
+    dma[1] = (vu32)gWorldselectNameBuffer;
     dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x360;
     dma[2];
 
     if (n > 0) {
 #ifdef VERSION_EU
-        src = ((u8**)gMdModels[model].unk_14)[gLanguage];
-        src += gMdModels[model].unkEu_18;
+        src = ((u8**)gWorldselectWorldDefs[model].nameTiles)[gLanguage];
+        src += gWorldselectWorldDefs[model].nameTilesOffset;
 #else
-        src = gMdModels[model].unk_14;
+        src = gWorldselectWorldDefs[model].nameTiles;
 #endif
         dma[0] = (vu32)src;
-        dst = (u8*)gUnk_020350BC + (9 - n) * 32;
+        dst = (u8*)gWorldselectNameBuffer + (9 - n) * 32;
         dma[1] = (vu32)dst;
         ctrl = (n << 4) | (DMA_ENABLE << 16);
         dma[2] = ctrl;
         dma[2];
         src2 = src + (18 - n) * 32;
         dma[0] = (vu32)src2;
-        dma[1] = (vu32)((u8*)gUnk_020350BC + 288);
+        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 288);
         dma[2] = ctrl;
         dma[2];
         dma[0] = (vu32)(src + 576);
@@ -4523,7 +4523,7 @@ void func_080FDB1C(s16 model, s16 n) {
         dma[2] = ctrl;
         dma[2];
         dma[0] = (vu32)(src2 + 576);
-        dma[1] = (vu32)((u8*)gUnk_020350BC + 864);
+        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 864);
         dma[2] = ctrl;
         dma[2];
         src += 1152;
@@ -4534,244 +4534,244 @@ void func_080FDB1C(s16 model, s16 n) {
         dma[2];
         src2 += 1152;
         dma[0] = (vu32)src2;
-        dma[1] = (vu32)((u8*)gUnk_020350BC + 1440);
+        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 1440);
         dma[2] = ctrl;
         dma[2];
     }
 
-    RequestDma3Copy(gUnk_020350BC, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
+    RequestDma3Copy(gWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
 }
 
-void func_080FDC04(void) {
+void WorldselectHandleInput(void) {
     s16 i;
     s16 j;
     s16 k;
     u8 step;
 
-    switch (gUnk_0203508C) {
+    switch (gWorldselectRotation) {
     case 0:
         if (GetKeysPressed() & A_BUTTON) {
             BgAnimInit(2, 0x8000, 128);
-            BgAnimStart(&gUnk_09EDABB8, 112, 126);
+            BgAnimStart(&gBgAnimDefWorldStart, 112, 126);
             SetBgPriority(2, 1);
             gBldCnt |= BLDCNT_TGT2_OBJ;
-            gUnk_020350EF = 1;
+            gWorldselectBgAnimActive = 1;
             m4aSongNumStart(SONG_SYS_WORLDSTART);
-            gUnk_020350F0 = 0;
-            gUnk_020350C0 = 4;
-        } else if ((GetKeysPressed() & B_BUTTON) && gUnk_020350EE == 0) {
+            gWorldselectCancelled = 0;
+            gWorldselectStep = 4;
+        } else if ((GetKeysPressed() & B_BUTTON) && gWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             LoadBgMap(0, gUnk_09A310DC, 0x500);
             LoadBgMap(1, gUnk_09A31ADC, 0x500);
-            gUnk_020350F0 = 1;
-            gUnk_020350C2 = 16;
-            gUnk_020350C0 = 5;
-        } else if (gUnk_02035090 > 1) {
+            gWorldselectCancelled = 1;
+            gWorldselectTimer = 16;
+            gWorldselectStep = 5;
+        } else if (gWorldselectSlotCount > 1) {
             if (GetKeysHeld() & DPAD_LEFT) {
-                j = gUnk_02034FF0 - gUnk_02035090 / 2;
+                j = gWorldselectCursor - gWorldselectSlotCount / 2;
 
                 while (j < 0) {
-                    j += gUnk_02035090;
+                    j += gWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(gMdSlots[j].palette);
-                ReleaseObjTiles(gMdSlots[j].tiles);
-                k = gMdSlots[gUnk_02034FF0].unk_00 - gUnk_02035090 / 2;
+                ReleaseObjPalette(gWorldselectSlots[j].palette);
+                ReleaseObjTiles(gWorldselectSlots[j].tiles);
+                k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
 
                 while (k < 0) {
-                    k += gUnk_02035092;
+                    k += gWorldselectWorldCount;
                 }
 
-                gMdSlots[j].unk_00 = k;
-                func_080FD9B8(gUnk_02035070[k], j);
-                func_080FDA28(gUnk_02035070[k], j);
-                func_080FDA98(gUnk_02035070[k], j);
-                gUnk_02034FF0--;
+                gWorldselectSlots[j].listIndex = k;
+                WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+                WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+                WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+                gWorldselectCursor--;
 
-                if (gUnk_02034FF0 < 0) {
-                    gUnk_02034FF0 = gUnk_02035090 - 1;
+                if (gWorldselectCursor < 0) {
+                    gWorldselectCursor = gWorldselectSlotCount - 1;
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                gUnk_020350B6 = 2;
-                gUnk_0203508C = 2;
+                gWorldselectNameMode = 2;
+                gWorldselectRotation = 2;
             } else if (GetKeysHeld() & DPAD_RIGHT) {
-                j = gUnk_02034FF0 + gUnk_02035090 / 2;
+                j = gWorldselectCursor + gWorldselectSlotCount / 2;
 
-                while (j >= gUnk_02035090) {
-                    j -= gUnk_02035090;
+                while (j >= gWorldselectSlotCount) {
+                    j -= gWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(gMdSlots[j].palette);
-                ReleaseObjTiles(gMdSlots[j].tiles);
-                k = gMdSlots[gUnk_02034FF0].unk_00 + gUnk_02035090 / 2;
+                ReleaseObjPalette(gWorldselectSlots[j].palette);
+                ReleaseObjTiles(gWorldselectSlots[j].tiles);
+                k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
 
-                while (k >= gUnk_02035092) {
-                    k -= gUnk_02035092;
+                while (k >= gWorldselectWorldCount) {
+                    k -= gWorldselectWorldCount;
                 }
 
-                gMdSlots[j].unk_00 = k;
-                func_080FD9B8(gUnk_02035070[k], j);
-                func_080FDA28(gUnk_02035070[k], j);
-                func_080FDA98(gUnk_02035070[k], j);
-                gUnk_02034FF0++;
+                gWorldselectSlots[j].listIndex = k;
+                WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+                WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+                WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+                gWorldselectCursor++;
 
-                if (gUnk_02034FF0 >= gUnk_02035090) {
-                    gUnk_02034FF0 = 0;
+                if (gWorldselectCursor >= gWorldselectSlotCount) {
+                    gWorldselectCursor = 0;
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                gUnk_020350B6 = 2;
-                gUnk_0203508C = 1;
+                gWorldselectNameMode = 2;
+                gWorldselectRotation = 1;
             }
         }
         break;
     case 1:
         if (GetKeysHeld() & DPAD_LEFT) {
-            j = gUnk_02034FF0 - gUnk_02035090 / 2;
+            j = gWorldselectCursor - gWorldselectSlotCount / 2;
 
             while (j < 0) {
-                j += gUnk_02035090;
+                j += gWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(gMdSlots[j].palette);
-            ReleaseObjTiles(gMdSlots[j].tiles);
-            k = gMdSlots[gUnk_02034FF0].unk_00 - gUnk_02035090 / 2;
+            ReleaseObjPalette(gWorldselectSlots[j].palette);
+            ReleaseObjTiles(gWorldselectSlots[j].tiles);
+            k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
 
             while (k < 0) {
-                k += gUnk_02035092;
+                k += gWorldselectWorldCount;
             }
 
-            gMdSlots[j].unk_00 = k;
-            func_080FD9B8(gUnk_02035070[k], j);
-            func_080FDA28(gUnk_02035070[k], j);
-            func_080FDA98(gUnk_02035070[k], j);
-            gUnk_02034FF0--;
+            gWorldselectSlots[j].listIndex = k;
+            WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+            WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+            WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+            gWorldselectCursor--;
 
-            if (gUnk_02034FF0 < 0) {
-                gUnk_02034FF0 = gUnk_02035090 - 1;
+            if (gWorldselectCursor < 0) {
+                gWorldselectCursor = gWorldselectSlotCount - 1;
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            gUnk_0203508C = 2;
+            gWorldselectRotation = 2;
         } else {
-            for (i = 0; i < gUnk_02035090; i++) {
-                gMdSlots[i].unk_08 -= 2;
+            for (i = 0; i < gWorldselectSlotCount; i++) {
+                gWorldselectSlots[i].angle -= 2;
             }
 
-            if (gMdSlots[gUnk_02034FF0].unk_08 <= 128) {
+            if (gWorldselectSlots[gWorldselectCursor].angle <= 128) {
                 if (GetKeysHeld() & DPAD_RIGHT) {
-                    j = gUnk_02034FF0 + gUnk_02035090 / 2;
+                    j = gWorldselectCursor + gWorldselectSlotCount / 2;
 
-                    while (j >= gUnk_02035090) {
-                        j -= gUnk_02035090;
+                    while (j >= gWorldselectSlotCount) {
+                        j -= gWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(gMdSlots[j].palette);
-                    ReleaseObjTiles(gMdSlots[j].tiles);
-                    k = gMdSlots[gUnk_02034FF0].unk_00 + gUnk_02035090 / 2;
+                    ReleaseObjPalette(gWorldselectSlots[j].palette);
+                    ReleaseObjTiles(gWorldselectSlots[j].tiles);
+                    k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
 
-                    while (k >= gUnk_02035092) {
-                        k -= gUnk_02035092;
+                    while (k >= gWorldselectWorldCount) {
+                        k -= gWorldselectWorldCount;
                     }
 
-                    gMdSlots[j].unk_00 = k;
-                    func_080FD9B8(gUnk_02035070[k], j);
-                    func_080FDA28(gUnk_02035070[k], j);
-                    func_080FDA98(gUnk_02035070[k], j);
-                    gUnk_02034FF0++;
+                    gWorldselectSlots[j].listIndex = k;
+                    WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+                    WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+                    WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+                    gWorldselectCursor++;
 
-                    if (gUnk_02034FF0 >= gUnk_02035090) {
-                        gUnk_02034FF0 = 0;
+                    if (gWorldselectCursor >= gWorldselectSlotCount) {
+                        gWorldselectCursor = 0;
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    gUnk_0203508C = 1;
+                    gWorldselectRotation = 1;
                 } else {
-                    step = 128 - gMdSlots[gUnk_02034FF0].unk_08;
+                    step = 128 - gWorldselectSlots[gWorldselectCursor].angle;
 
-                    for (i = 0; i < gUnk_02035090; i++) {
-                        gMdSlots[i].unk_08 += step;
+                    for (i = 0; i < gWorldselectSlotCount; i++) {
+                        gWorldselectSlots[i].angle += step;
                     }
 
-                    gUnk_020350B6 = 1;
-                    gUnk_020350BA = gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00];
-                    gUnk_0203508C = 0;
+                    gWorldselectNameMode = 1;
+                    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
+                    gWorldselectRotation = 0;
                 }
             }
         }
         break;
     case 2:
         if (GetKeysHeld() & DPAD_RIGHT) {
-            j = gUnk_02034FF0 + gUnk_02035090 / 2;
+            j = gWorldselectCursor + gWorldselectSlotCount / 2;
 
-            while (j >= gUnk_02035090) {
-                j -= gUnk_02035090;
+            while (j >= gWorldselectSlotCount) {
+                j -= gWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(gMdSlots[j].palette);
-            ReleaseObjTiles(gMdSlots[j].tiles);
-            k = gMdSlots[gUnk_02034FF0].unk_00 + gUnk_02035090 / 2;
+            ReleaseObjPalette(gWorldselectSlots[j].palette);
+            ReleaseObjTiles(gWorldselectSlots[j].tiles);
+            k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
 
-            while (k >= gUnk_02035092) {
-                k -= gUnk_02035092;
+            while (k >= gWorldselectWorldCount) {
+                k -= gWorldselectWorldCount;
             }
 
-            gMdSlots[j].unk_00 = k;
-            func_080FD9B8(gUnk_02035070[k], j);
-            func_080FDA28(gUnk_02035070[k], j);
-            func_080FDA98(gUnk_02035070[k], j);
-            gUnk_02034FF0++;
+            gWorldselectSlots[j].listIndex = k;
+            WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+            WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+            WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+            gWorldselectCursor++;
 
-            if (gUnk_02034FF0 >= gUnk_02035090) {
-                gUnk_02034FF0 = 0;
+            if (gWorldselectCursor >= gWorldselectSlotCount) {
+                gWorldselectCursor = 0;
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            gUnk_0203508C = 1;
+            gWorldselectRotation = 1;
         } else {
-            for (i = 0; i < gUnk_02035090; i++) {
-                gMdSlots[i].unk_08 += 2;
+            for (i = 0; i < gWorldselectSlotCount; i++) {
+                gWorldselectSlots[i].angle += 2;
             }
 
-            if ((s8)gMdSlots[gUnk_02034FF0].unk_08 < 0) {
+            if ((s8)gWorldselectSlots[gWorldselectCursor].angle < 0) {
                 if (GetKeysHeld() & DPAD_LEFT) {
-                    j = gUnk_02034FF0 - gUnk_02035090 / 2;
+                    j = gWorldselectCursor - gWorldselectSlotCount / 2;
 
                     while (j < 0) {
-                        j += gUnk_02035090;
+                        j += gWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(gMdSlots[j].palette);
-                    ReleaseObjTiles(gMdSlots[j].tiles);
-                    k = gMdSlots[gUnk_02034FF0].unk_00 - gUnk_02035090 / 2;
+                    ReleaseObjPalette(gWorldselectSlots[j].palette);
+                    ReleaseObjTiles(gWorldselectSlots[j].tiles);
+                    k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
 
                     while (k < 0) {
-                        k += gUnk_02035092;
+                        k += gWorldselectWorldCount;
                     }
 
-                    gMdSlots[j].unk_00 = k;
-                    func_080FD9B8(gUnk_02035070[k], j);
-                    func_080FDA28(gUnk_02035070[k], j);
-                    func_080FDA98(gUnk_02035070[k], j);
-                    gUnk_02034FF0--;
+                    gWorldselectSlots[j].listIndex = k;
+                    WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
+                    WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
+                    WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
+                    gWorldselectCursor--;
 
-                    if (gUnk_02034FF0 < 0) {
-                        gUnk_02034FF0 = gUnk_02035090 - 1;
+                    if (gWorldselectCursor < 0) {
+                        gWorldselectCursor = gWorldselectSlotCount - 1;
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    gUnk_0203508C = 2;
+                    gWorldselectRotation = 2;
                 } else {
-                    step = gMdSlots[gUnk_02034FF0].unk_08 + 128;
+                    step = gWorldselectSlots[gWorldselectCursor].angle + 128;
 
-                    for (i = 0; i < gUnk_02035090; i++) {
-                        gMdSlots[i].unk_08 -= step;
+                    for (i = 0; i < gWorldselectSlotCount; i++) {
+                        gWorldselectSlots[i].angle -= step;
                     }
 
-                    gUnk_020350B6 = 1;
-                    gUnk_020350BA = gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00];
-                    gUnk_0203508C = 0;
+                    gWorldselectNameMode = 1;
+                    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
+                    gWorldselectRotation = 0;
                 }
             }
         }
@@ -4779,7 +4779,7 @@ void func_080FDC04(void) {
     }
 }
 
-void func_080FE47C(void) {
+void WorldselectDraw(void) {
     s16 i;
     ObjAffine* sprite;
     s16 x;
@@ -4796,24 +4796,24 @@ void func_080FE47C(void) {
     void* tiles;
     void* pal;
 
-    if (gUnk_020350C0 < 2 || gUnk_020350C0 > 4) {
-        DrawSprite(gUnk_020350D0 >> 8, 0,
+    if (gWorldselectStep < 2 || gWorldselectStep > 4) {
+        DrawSprite(gWorldselectTitleX >> 8, 0,
 #ifdef VERSION_EU
-                      gUnkEu_09F847FC[gLanguage],
+                      gWorldselectTitleGfx[gLanguage],
 #else
                       gUnk_0999CB90,
 #endif
-                      gUnk_020350A8, gUnk_020350AC, 0, 0x400,
+                      gWorldselectTitleTiles, gWorldselectOverlayPalette, 0, 0x400,
                       0x3E8);
-        DrawSprite(120, gUnk_020350C8[0] >> 8, gUnk_0999C394, gUnk_020350B0, gUnk_020350AC, 0,
+        DrawSprite(120, gWorldselectFrameY[0] >> 8, gUnk_0999C394, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
                       0x400, 0x3E9);
-        DrawSprite(120, gUnk_020350C8[1] >> 8, gUnk_0999C3C8, gUnk_020350B0, gUnk_020350AC, 0,
+        DrawSprite(120, gWorldselectFrameY[1] >> 8, gUnk_0999C3C8, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
                       0xC00, 0xBBA);
     }
 
-    for (i = 0; i < gUnk_02035090; i++) {
-        ang = gMdSlots[i].unk_08;
-        s = -gSineTable[((256 / gUnk_02035090 * i + gUnk_020350B4) & 0xFF) + 64];
+    for (i = 0; i < gWorldselectSlotCount; i++) {
+        ang = gWorldselectSlots[i].angle;
+        s = -gSineTable[((256 / gWorldselectSlotCount * i + gWorldselectBobPhase) & 0xFF) + 64];
         t = (s * 3 >> 7) + ang;
 
         if ((u8)(t - 62) > 2 && (u8)(t + 64) > 2) {
@@ -4827,27 +4827,27 @@ void func_080FE47C(void) {
 
             if ((u8)(t - 121) <= 14) {
                 sprite = 0;
-                tiles = gUnk_02035098[0];
-                pal = gUnk_020350A0[0];
+                tiles = gWorldselectCardTiles[0];
+                pal = gWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
 
-                if (gUnk_020350C0 > 3 && gUnk_020350F0 == 0) {
+                if (gWorldselectStep > 3 && gWorldselectCancelled == 0) {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
             } else if (t <= 61) {
                 sprite = 0;
-                tiles = gUnk_02035098[1];
-                pal = gUnk_020350A0[1];
+                tiles = gWorldselectCardTiles[1];
+                pal = gWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(62 - t) / 13];
             } else if (t > 194) {
                 sprite = 0;
-                tiles = gUnk_02035098[1];
-                pal = gUnk_020350A0[1];
+                tiles = gWorldselectCardTiles[1];
+                pal = gWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(t - 194) / 13];
             } else {
                 sprite = AllocObjAffine(0, w, d, 0);
-                tiles = gUnk_02035098[0];
-                pal = gUnk_020350A0[0];
+                tiles = gWorldselectCardTiles[0];
+                pal = gWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
             }
 
@@ -4855,43 +4855,43 @@ void func_080FE47C(void) {
                           ang > 128 ? (u16)(ang * 2 + 0x6D1) : (u16)((128 - ang) * 2 + 0x7D1));
 
             if ((u8)(t - 65) <= 126) {
-                DrawSprite(x, y, gMdSlots[i].gfx, gMdSlots[i].tiles,
-                              gMdSlots[i].palette, sprite, 0x800,
+                DrawSprite(x, y, gWorldselectSlots[i].gfx, gWorldselectSlots[i].tiles,
+                              gWorldselectSlots[i].palette, sprite, 0x800,
                               ang > 128 ? (u16)(ang * 2 + 0x6D0)
                                         : (u16)((128 - ang) * 2 + 0x7D0));
             }
         }
     }
 
-    switch (gUnk_020350B6) {
+    switch (gWorldselectNameMode) {
     case 1:
-        func_080FDB1C(gUnk_020350BA, gUnk_020350B8);
+        WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
 
-        if (gUnk_020350B8 <= 8) {
-            gUnk_020350B8++;
+        if (gWorldselectNameWidth <= 8) {
+            gWorldselectNameWidth++;
         } else {
-            gUnk_020350B6 = 0;
+            gWorldselectNameMode = 0;
         }
         break;
     case 2:
-        func_080FDB1C(gUnk_020350BA, gUnk_020350B8);
+        WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
 
-        if (gUnk_020350B8 > 0) {
-            gUnk_020350B8--;
+        if (gWorldselectNameWidth > 0) {
+            gWorldselectNameWidth--;
         } else {
-            gUnk_020350B6 = 0;
+            gWorldselectNameMode = 0;
         }
         break;
     }
 
-    if (gUnk_020350EF != 0) {
+    if (gWorldselectBgAnimActive != 0) {
         BgAnimUpdate();
     }
 
     TaskPoolDraw(&gWorldselectTaskPool);
 }
 
-void func_080FE854(void) {
+void WorldselectSetBgMode0(void) {
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -4900,7 +4900,7 @@ void func_080FE854(void) {
     SetBgPriority(1, 1);
     SetBgPriority(2, 0);
 }
-void func_080FE89C(void) {
+void WorldselectSetBgMode1(void) {
     SetBgMode1();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -4911,18 +4911,18 @@ void func_080FE89C(void) {
     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1);
     gBldAlpha = 0x1010;
 }
-void func_080FE900(void) {
-    gUnk_020350F2++;
+void WorldselectCyclePalette(void) {
+    gWorldselectPaletteTimer++;
 
-    if (gUnk_020350F2 > 6) {
-        gUnk_020350F2 = 0;
-        gUnk_020350F4++;
+    if (gWorldselectPaletteTimer > 6) {
+        gWorldselectPaletteTimer = 0;
+        gWorldselectPaletteFrame++;
 
-        if (gUnk_020350F4 > 29) {
-            gUnk_020350F4 = 0;
+        if (gWorldselectPaletteFrame > 29) {
+            gWorldselectPaletteFrame = 0;
         }
 
-        LoadPalette(gUnk_09EF8F24[(s16)gUnk_020350F4], (void*)0x05000040, 32);
+        LoadPalette(gWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)0x05000040, 32);
     }
 }
 
@@ -4932,94 +4932,94 @@ void mode_worldselect_0(void) {
     void** p;
 
     SpriteReset();
-    gUnk_020350EE = (gGameState.progression.unk_82 ^ 1) & 1;
-    gUnk_020350EF = 0;
-    gUnk_020350F0 = 0;
+    gWorldselectFirstVisit = (gGameState.progression.unk_82 ^ 1) & 1;
+    gWorldselectBgAnimActive = 0;
+    gWorldselectCancelled = 0;
     FadeStartIn(2, 16);
 
-    if (gUnk_020350EE != 0) {
-        func_080FE854();
+    if (gWorldselectFirstVisit != 0) {
+        WorldselectSetBgMode0();
     } else {
-        func_080FE89C();
+        WorldselectSetBgMode1();
     }
 
-    gUnk_02034FF0 = 0;
-    gUnk_0203508C = 0;
+    gWorldselectCursor = 0;
+    gWorldselectRotation = 0;
     j = 0;
 
     for (i = 0; i <= 12; i++) {
-        if (gGameState.unk_180 & gMdModels[i].unk_00) {
-            gUnk_02035070[j] = i;
+        if (gGameState.availableWorlds & gWorldselectWorldDefs[i].worldBit) {
+            gWorldselectWorlds[j] = i;
             j++;
         }
     }
 
-    gUnk_02035092 = j;
-    gUnk_02035090 = j > 5 ? 5 : j;
+    gWorldselectWorldCount = j;
+    gWorldselectSlotCount = j > 5 ? 5 : j;
     j = 0;
 
-    for (i = 0; i < gUnk_02035090; i++, j++) {
-        if (j >= gUnk_02035092) {
+    for (i = 0; i < gWorldselectSlotCount; i++, j++) {
+        if (j >= gWorldselectWorldCount) {
             j = 0;
         }
 
-        if (i == gUnk_02035090 - 1 && gUnk_02035090 > 2) {
-            j = gUnk_02035092 - 1;
+        if (i == gWorldselectSlotCount - 1 && gWorldselectSlotCount > 2) {
+            j = gWorldselectWorldCount - 1;
         }
 
-        gMdSlots[i].unk_00 = j;
-        gMdSlots[i].unk_08 = 256 / gUnk_02035090 * i - 128;
-        func_080FD9B8(gUnk_02035070[j], i);
-        func_080FDA28(gUnk_02035070[j], i);
-        func_080FDA98(gUnk_02035070[j], i);
+        gWorldselectSlots[i].listIndex = j;
+        gWorldselectSlots[i].angle = 256 / gWorldselectSlotCount * i - 128;
+        WorldselectLoadSlotPalette(gWorldselectWorlds[j], i);
+        WorldselectLoadSlotTiles(gWorldselectWorlds[j], i);
+        WorldselectSetSlotGfx(gWorldselectWorlds[j], i);
     }
 
-    gUnk_020350B4 = 0;
-    gUnk_020350B6 = 1;
-    gUnk_020350B8 = 0;
-    gUnk_020350BA = gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00];
-    p = &gUnk_020350BC;
+    gWorldselectBobPhase = 0;
+    gWorldselectNameMode = 1;
+    gWorldselectNameWidth = 0;
+    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
+    p = &gWorldselectNameBuffer;
     *p = EwramAlloc(0x6C0);
-    gUnk_020350F2 = 0;
-    gUnk_020350F4 = 0;
-    gUnk_020350C0 = 0;
-    gUnk_020350C2 = 16;
-    gUnk_020350C8[0] = -2048;
-    gUnk_020350C8[1] = 0xA800;
-    gUnk_020350D0 = -32768;
+    gWorldselectPaletteTimer = 0;
+    gWorldselectPaletteFrame = 0;
+    gWorldselectStep = 0;
+    gWorldselectTimer = 16;
+    gWorldselectFrameY[0] = -2048;
+    gWorldselectFrameY[1] = 0xA800;
+    gWorldselectTitleX = -32768;
     LoadBgPalette(0, gUnk_09A3C9DC, 96);
 #ifdef VERSION_EU
     LoadBgTiles(0, gUnk_099F1E7C, 16000);
 #else
     LoadBgTiles(0, gUnk_099F1E7C, 11968);
 #endif
-    func_080FDB1C(gUnk_020350BA, gUnk_020350B8);
+    WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
     LoadBgMap(0, gUnk_09A310DC, 0x500);
     LoadBgMap(1, gUnk_09A31ADC, 0x500);
 
-    if (gUnk_020350EE == 0) {
+    if (gWorldselectFirstVisit == 0) {
         BgAnimInit(2, 0x8000, 128);
-        BgAnimStart(&gUnk_09EDABA0, 120, 110);
+        BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
         BgAnimSetLoopStartFrame(0);
-        gUnk_020350EF = 1;
+        gWorldselectBgAnimActive = 1;
     }
 
-    gUnk_020350A0[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
-    gUnk_02035098[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
-    gUnk_020350A0[1] = LoadObjPalette(gUnk_09A3CC5C, 32);
-    gUnk_02035098[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
-    gUnk_020350AC = LoadObjPalette(gUnk_09A3CC7C, 32);
+    gWorldselectCardPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
+    gWorldselectCardTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
+    gWorldselectCardPalettes[1] = LoadObjPalette(gUnk_09A3CC5C, 32);
+    gWorldselectCardTiles[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
+    gWorldselectOverlayPalette = LoadObjPalette(gUnk_09A3CC7C, 32);
 #ifdef VERSION_EU
-    gUnk_020350A8 = LoadObjTiles(gUnkEu_09F84810[gLanguage], gUnkEu_099991E0.sizes[gLanguage]);
+    gWorldselectTitleTiles = LoadObjTiles(gWorldselectTitleTileData[gLanguage], gWorldselectTitleTileSizes.sizes[gLanguage]);
 #else
-    gUnk_020350A8 = LoadObjTiles(gUnk_0999CBB6, 0x380);
+    gWorldselectTitleTiles = LoadObjTiles(gUnk_0999CBB6, 0x380);
 #endif
-    gUnk_020350B0 = LoadObjTiles(gUnk_0999C410, 0x780);
+    gWorldselectFrameTiles = LoadObjTiles(gUnk_0999C410, 0x780);
     TaskPoolInit(&gWorldselectTaskPool, 1);
     EnableBg(0);
     EnableBg(1);
 
-    if (gUnk_020350EE != 0) {
+    if (gWorldselectFirstVisit != 0) {
         DisableBg(2);
     } else {
         EnableBg(2);
@@ -5031,163 +5031,163 @@ void mode_worldselect_1(void) {
     s16 b;
 
     UpdatePlayTime();
-    gUnk_020350B4 += 2;
+    gWorldselectBobPhase += 2;
 
-    switch (gUnk_020350C0) {
+    switch (gWorldselectStep) {
     case 0:
-        ApproachValue(&gUnk_020350C8[0], 0, gUnk_020350C2);
-        ApproachValue(&gUnk_020350C8[1], 0x9800, gUnk_020350C2);
-        gUnk_020350C2--;
+        ApproachValue(&gWorldselectFrameY[0], 0, gWorldselectTimer);
+        ApproachValue(&gWorldselectFrameY[1], 0x9800, gWorldselectTimer);
+        gWorldselectTimer--;
 
-        if (gUnk_020350C2 <= 0) {
-            gUnk_020350C2 = 16;
-            gUnk_020350C0 = 1;
+        if (gWorldselectTimer <= 0) {
+            gWorldselectTimer = 16;
+            gWorldselectStep = 1;
         }
         break;
     case 1:
-        ApproachValue(&gUnk_020350D0, 0, gUnk_020350C2);
-        gUnk_020350C2--;
+        ApproachValue(&gWorldselectTitleX, 0, gWorldselectTimer);
+        gWorldselectTimer--;
 
-        if (gUnk_020350C2 <= 0) {
-            if (gUnk_020350EE != 0) {
-                gUnk_020350EC = 0;
+        if (gWorldselectTimer <= 0) {
+            if (gWorldselectFirstVisit != 0) {
+                gWorldselectTutorialStep = 0;
                 CreateCardMessageTask(&gWorldselectTaskPool, 2, 70);
-                gUnk_020350C0 = 2;
+                gWorldselectStep = 2;
             } else {
-                gUnk_020350C0 = 3;
+                gWorldselectStep = 3;
             }
 
             LoadBgMap(0, gUnk_09A315DC, 0x500);
 #ifdef VERSION_EU
-            LoadBgMap(1, gUnkEu_09F847D4[gLanguage], 0x500);
+            LoadBgMap(1, gWorldselectBg1Maps[gLanguage], 0x500);
 #else
             LoadBgMap(1, gUnk_09A31FDC, 0x500);
 #endif
         }
         break;
     case 2:
-        if (func_080A42C8() == 0) {
-            if (gUnk_020350EC == 0) {
+        if (IsMessageWindowOpen() == 0) {
+            if (gWorldselectTutorialStep == 0) {
                 CreateCardMessageTask(&gWorldselectTaskPool, 2, 71);
-                gUnk_020350EC++;
+                gWorldselectTutorialStep++;
             } else {
                 gGameState.progression.unk_82 |= 1;
-                func_080FE89C();
+                WorldselectSetBgMode1();
                 BgAnimInit(2, 0x8000, 128);
-                BgAnimStart(&gUnk_09EDABA0, 120, 110);
+                BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
                 BgAnimSetLoopStartFrame(0);
-                gUnk_020350EF = 1;
-                gUnk_020350C0 = 3;
+                gWorldselectBgAnimActive = 1;
+                gWorldselectStep = 3;
             }
         }
         break;
     case 3:
-        func_080FDC04();
+        WorldselectHandleInput();
         break;
     case 4:
         if (BgAnimIsStopped() != 0) {
             LoadBgMap(0, gUnk_09A310DC, 0x500);
             LoadBgMap(1, gUnk_09A31ADC, 0x500);
-            gUnk_020350C2 = 16;
-            gUnk_020350C0 = 5;
+            gWorldselectTimer = 16;
+            gWorldselectStep = 5;
         }
         break;
     case 5:
-        ApproachValue(&gUnk_020350D0, -32768, gUnk_020350C2);
-        gUnk_020350C2--;
+        ApproachValue(&gWorldselectTitleX, -32768, gWorldselectTimer);
+        gWorldselectTimer--;
 
-        if (gUnk_020350C2 <= 0) {
-            gUnk_020350C2 = 16;
-            gUnk_020350C0 = 6;
+        if (gWorldselectTimer <= 0) {
+            gWorldselectTimer = 16;
+            gWorldselectStep = 6;
         }
         break;
     case 6:
-        ApproachValue(&gUnk_020350C8[0], -2048, gUnk_020350C2);
-        ApproachValue(&gUnk_020350C8[1], 0xA800, gUnk_020350C2);
-        gUnk_020350C2--;
+        ApproachValue(&gWorldselectFrameY[0], -2048, gWorldselectTimer);
+        ApproachValue(&gWorldselectFrameY[1], 0xA800, gWorldselectTimer);
+        gWorldselectTimer--;
 
-        if (gUnk_020350C2 <= 0) {
-            gUnk_020350C0 = 7;
+        if (gWorldselectTimer <= 0) {
+            gWorldselectStep = 7;
         }
         break;
     case 7:
         FadeLock();
 
-        if (gUnk_020350F0 != 0) {
+        if (gWorldselectCancelled != 0) {
             FadeStartOut(0, 16);
         } else {
             FadeStartOut(2, 16);
         }
 
-        gUnk_020350C0 = 8;
+        gWorldselectStep = 8;
         break;
     case 8:
         if (FadeIsActive() == 0) {
-            if (gUnk_020350F0 != 0) {
-                func_080E04EC();
+            if (gWorldselectCancelled != 0) {
+                RequestMapMode();
             } else {
-                gUnk_020350C2 = 60;
-                gUnk_020350C0 = 9;
+                gWorldselectTimer = 60;
+                gWorldselectStep = 9;
             }
         }
         break;
     case 9:
-        gUnk_020350C2--;
+        gWorldselectTimer--;
 
-        if (gUnk_020350C2 <= 0) {
-            a = gMdModels[gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00]].unk_02;
+        if (gWorldselectTimer <= 0) {
+            a = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].world;
 
             if ((gGameState.flags & 8) == 0) {
-                b = gMdModels[gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00]].unk_04;
+                b = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].eventId;
             } else {
-                b = gMdModels[gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00]].unk_06;
+                b = gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].rikuEventId;
             }
 
-            gGameState.unk_180 &=
-                ~gMdModels[gUnk_02035070[gMdSlots[gUnk_02034FF0].unk_00]].unk_00;
-            func_080DFA18(a);
+            gGameState.availableWorlds &=
+                ~gWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].worldBit;
+            SetFloorWorld(a);
 
             if (b >= 0) {
-                func_0806180C(b);
+                RequestEventMode(b);
             } else {
                 if (gGameState.flags & 8) {
                     AddMapCard(221);
                 }
 
-                func_080DFA3C();
-                func_080E04EC();
+                EnterFloorWorld();
+                RequestMapMode();
             }
         }
         break;
     }
 
-    func_080FE900();
+    WorldselectCyclePalette();
 
     if (FadeIsActive() != 0) {
         FadeGetAmount();
     }
 
     TaskPoolUpdate(&gWorldselectTaskPool);
-    func_080FE47C();
+    WorldselectDraw();
 }
 
 void mode_worldselect_2(void) {
     s16 i;
 
-    EwramFree(gUnk_020350BC);
+    EwramFree(gWorldselectNameBuffer);
 
-    for (i = 0; i < gUnk_02035090; i++) {
-        ReleaseObjPalette(gMdSlots[i].palette);
-        ReleaseObjTiles(gMdSlots[i].tiles);
+    for (i = 0; i < gWorldselectSlotCount; i++) {
+        ReleaseObjPalette(gWorldselectSlots[i].palette);
+        ReleaseObjTiles(gWorldselectSlots[i].tiles);
     }
 
     for (i = 0; i < 2; i++) {
-        ReleaseObjPalette(gUnk_020350A0[i]);
-        ReleaseObjTiles(gUnk_02035098[i]);
+        ReleaseObjPalette(gWorldselectCardPalettes[i]);
+        ReleaseObjTiles(gWorldselectCardTiles[i]);
     }
 
-    ReleaseObjPalette(gUnk_020350AC);
-    ReleaseObjTiles(gUnk_020350A8);
-    ReleaseObjTiles(gUnk_020350B0);
+    ReleaseObjPalette(gWorldselectOverlayPalette);
+    ReleaseObjTiles(gWorldselectTitleTiles);
+    ReleaseObjTiles(gWorldselectFrameTiles);
     TaskPoolDestroy(&gWorldselectTaskPool);
 }

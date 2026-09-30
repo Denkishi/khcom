@@ -43,29 +43,29 @@
 #include "sprites_btl_hud.h"
 #include "sprites_card.h"
 
-TaskPool gUnk_02034AE0;
+TaskPool gModePremireTasks;
 #ifndef VERSION_EU
 u8 gUnk_02034AF4[4];
 #endif
 
 #ifdef VERSION_EU
-extern void** gUnkEu_09F72CC4[];
-extern void* gUnkEu_09F72CB0[];
+extern void** gHcEffectCountUnitSpritesByLanguage[];
+extern void* gHcEffectCountUnitTilesByLanguage[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) (x)
 #endif
 u8 HCEffectName_1(HcEffectNameWork* w, void* a);
-u8 func_0809DE18(HcEffectNameWork* w);
-u8 func_0809DE30(HcEffectNameWork* w, void* a);
-u16 func_080792D0(u16* p);
-void func_08085C3C(void);
+u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
+u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a);
+u16 GetNextRandomHcEffect(u16* p);
+void InitSoraDecks(void);
 void func_08085FB0(void);
 
 void Mode_Premire_0(void) {
     func_08085FB0();
-    func_08085C3C();
+    InitSoraDecks();
     SetBgMode2();
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
@@ -80,18 +80,18 @@ void Mode_Premire_0(void) {
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
-    TaskPoolInit(&gUnk_02034AE0, 1);
-    TaskCreate(&gUnk_02034AE0, &gTaskDescLevelUp, 0);
+    TaskPoolInit(&gModePremireTasks, 1);
+    TaskCreate(&gModePremireTasks, &gTaskDescLevelUp, 0);
 }
 
 void Mode_Premire_1(void) {
-    TaskPoolUpdate(&gUnk_02034AE0);
-    TaskPoolDraw(&gUnk_02034AE0);
+    TaskPoolUpdate(&gModePremireTasks);
+    TaskPoolDraw(&gModePremireTasks);
 }
 void Mode_Premire_2(void) {
-    TaskPoolDestroy(&gUnk_02034AE0);
+    TaskPoolDestroy(&gModePremireTasks);
 }
-u8 func_0809DA64(HcEffectNameWork* w, u16 n) {
+u8 GetHcEffectCountUnit(HcEffectNameWork* w, u16 n) {
     switch (n) {
     case 0:
     case 1:
@@ -150,224 +150,224 @@ u8 func_0809DA64(HcEffectNameWork* w, u16 n) {
 void HCEffectName_0(HcEffectNameWork* w, u8* a) {
     void** tiles;
 
-    w->unk_19 = a[0];
+    w->side = a[0];
     w->timer = 0;
-    w->unk_1C = 32;
+    w->blinkInterval = 32;
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     w->tiles2 = AllocSpriteFrameTiles(0x3C0);
     w->tiles3 = AllocSpriteFrameTiles(32);
-    w->unk_20 = 0;
-    w->unk_27 = 1;
+    w->randomIndex = 0;
+    w->visible = 1;
 
-    switch (w->unk_19) {
+    switch (w->side) {
     case 1:
         w->x = 48;
-        w->unk_1E = gCardBattleState->unk_0CC;
+        w->effect = gCardBattleState->soraHcEffect;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
+        w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->soraHcEffect);
 #endif
-        tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_08);
-        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_0C], LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_00));
+        tiles = LANGSTR(gHcEffectDefs[gCardBattleState->soraHcEffect].sprites);
+        UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[gCardBattleState->soraHcEffect].spriteIndex], LANGSTR(gHcEffectDefs[gCardBattleState->soraHcEffect].tiles));
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
+        UpdateSpriteFrameTiles(w->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][w->countUnit], gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
-        UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
+        w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->soraHcEffect);
+        UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->countUnit], gUnk_093FB954);
 #endif
 
-        if (gCardBattleState->unk_0CC == 0) {
-            w->unk_27 = 0;
+        if (gCardBattleState->soraHcEffect == 0) {
+            w->visible = 0;
         }
         break;
     case 2:
         w->x = 162;
-        w->unk_1E = gCardBattleState->unk_0CE;
+        w->effect = gCardBattleState->rikuHcEffect;
 #ifdef VERSION_EU
-        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
+        w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->rikuHcEffect);
 #endif
-        tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_08);
-        UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_0C], LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_00));
+        tiles = LANGSTR(gHcEffectDefs[gCardBattleState->rikuHcEffect].sprites);
+        UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[gCardBattleState->rikuHcEffect].spriteIndex], LANGSTR(gHcEffectDefs[gCardBattleState->rikuHcEffect].tiles));
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26], gUnkEu_09F72CB0[gLanguage]);
+        UpdateSpriteFrameTiles(w->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][w->countUnit], gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
-        w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
-        UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
+        w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->rikuHcEffect);
+        UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->countUnit], gUnk_093FB954);
 #endif
 
-        if (gCardBattleState->unk_0CE == 0) {
-            w->unk_27 = 0;
+        if (gCardBattleState->rikuHcEffect == 0) {
+            w->visible = 0;
         }
         break;
     }
 
     w->tiles = LoadObjTiles(gUnk_08B25ADE, 0x360);
-    w->unk_22 = 0;
-    w->unk_23 = 0;
-    w->unk_24 = 0;
-    w->unk_25 = 0;
+    w->countThousands = 0;
+    w->countHundreds = 0;
+    w->countTens = 0;
+    w->countOnes = 0;
 }
 u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
     u8 done;
     s32 div;
     CardBattleState* d;
 
-    done = func_0809DE18(w);
+    done = IsHcEffectNameShuffling(w);
 
     if (done != 0) {
 #ifdef VERSION_EU
-        func_0806BA0C((s16)gBtlWork->unk_0F8, &w->unk_22);
+        SplitFourDigits((s16)gBtlWork->hcEffectCount, &w->countThousands);
 #endif
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809DE30);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdateHcEffectNameShuffle);
         return 1;
     }
 
-    switch (w->unk_19) {
+    switch (w->side) {
     case 1:
-        div = gUnk_08F7CBA8[gBtlWork->unk_0F4].unk_0E << 8;
-        w->unk_1C = (u32)(((s16)gBtlWork->unk_0F8 << 16) / div) >> 3;
+        div = gHcEffectDefs[gBtlWork->hcEffect].count << 8;
+        w->blinkInterval = (u32)(((s16)gBtlWork->hcEffectCount << 16) / div) >> 3;
         d = gCardBattleState;
 
-        if (d->unk_0CC == 0) {
-            d->unk_0EB = 0;
+        if (d->soraHcEffect == 0) {
+            d->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->unk_0CC != w->unk_1E) {
-            d->unk_0EB = 0;
+        if (d->soraHcEffect != w->effect) {
+            d->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->unk_0EB == 1) {
-            d->unk_0EB = 0;
+        if (d->soraHcEffectReplaced == 1) {
+            d->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        if ((s16)gBtlWork->unk_0F8 <= 0) {
-            d->unk_0CC = 0;
-            gBtlWork->unk_0F4 = 0;
-            d->unk_0EB = 0;
+        if ((s16)gBtlWork->hcEffectCount <= 0) {
+            d->soraHcEffect = 0;
+            gBtlWork->hcEffect = 0;
+            d->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        func_0806BA0C((s16)gBtlWork->unk_0F8, &w->unk_22);
+        SplitFourDigits((s16)gBtlWork->hcEffectCount, &w->countThousands);
         break;
     case 2:
-        div = gUnk_08F7CBA8[gRikuBtlWork->unk_0F4].unk_0E << 8;
-        w->unk_1C = (u32)(((s16)gRikuBtlWork->unk_0F8 << 16) / div) >> 3;
+        div = gHcEffectDefs[gRikuBtlWork->hcEffect].count << 8;
+        w->blinkInterval = (u32)(((s16)gRikuBtlWork->hcEffectCount << 16) / div) >> 3;
         d = gCardBattleState;
 
-        if (d->unk_0CE == 0) {
-            d->unk_0EC = 0;
+        if (d->rikuHcEffect == 0) {
+            d->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->unk_0CE != w->unk_1E) {
-            d->unk_0EC = 0;
+        if (d->rikuHcEffect != w->effect) {
+            d->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->unk_0EC == 1) {
-            d->unk_0EC = 0;
+        if (d->rikuHcEffectReplaced == 1) {
+            d->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        if ((s16)gRikuBtlWork->unk_0F8 <= 0) {
-            d->unk_0CE = 0;
-            gRikuBtlWork->unk_0F4 = 0;
-            d->unk_0EC = 0;
+        if ((s16)gRikuBtlWork->hcEffectCount <= 0) {
+            d->rikuHcEffect = 0;
+            gRikuBtlWork->hcEffect = 0;
+            d->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        func_0806BA0C((s16)gRikuBtlWork->unk_0F8, &w->unk_22);
+        SplitFourDigits((s16)gRikuBtlWork->hcEffectCount, &w->countThousands);
         break;
     }
 
     w->timer++;
 
-    if ((s16)w->unk_1C <= 2) {
-        w->unk_1C = 2;
+    if ((s16)w->blinkInterval <= 2) {
+        w->blinkInterval = 2;
     }
 
-    if ((s16)w->timer >= (s16)w->unk_1C) {
-        w->unk_27 ^= 1;
+    if ((s16)w->timer >= (s16)w->blinkInterval) {
+        w->visible ^= 1;
         w->timer = 0;
     }
 
     return 1;
 }
-u8 func_0809DE18(HcEffectNameWork* w) {
-    if (w->unk_19 != 1) {
-        if (w->unk_19 != 2) {
+u8 IsHcEffectNameShuffling(HcEffectNameWork* w) {
+    if (w->side != 1) {
+        if (w->side != 2) {
             return 0;
         }
     }
 
-    if (w->unk_1E != 37) {
+    if (w->effect != 37) {
         return 0;
     }
 
     return 1;
 }
-u8 func_0809DE30(HcEffectNameWork* w, void* a) {
+u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a) {
     void** tiles;
 
-    switch (w->unk_19) {
+    switch (w->side) {
     case 1:
-        if (gCardBattleState->unk_0CC != 37) {
-            w->unk_1E = gCardBattleState->unk_0CC;
-            if (gCardBattleState->unk_0CC == 0) {
-                gCardBattleState->unk_0EB = 0;
+        if (gCardBattleState->soraHcEffect != 37) {
+            w->effect = gCardBattleState->soraHcEffect;
+            if (gCardBattleState->soraHcEffect == 0) {
+                gCardBattleState->soraHcEffectReplaced = 0;
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
+            w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->soraHcEffect);
 #endif
-            tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CC].unk_00));
+            tiles = LANGSTR(gHcEffectDefs[gCardBattleState->soraHcEffect].sprites);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[gCardBattleState->soraHcEffect].spriteIndex],
+                         LANGSTR(gHcEffectDefs[gCardBattleState->soraHcEffect].tiles));
 #ifdef VERSION_EU
-            UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
-                         gUnkEu_09F72CB0[gLanguage]);
+            UpdateSpriteFrameTiles(w->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][w->countUnit],
+                         gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CC);
-            UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
+            w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->soraHcEffect);
+            UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->countUnit], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
         } else {
-            u16 id = func_080792D0(&w->unk_20);
-            w->unk_1E = id;
-            tiles = LANGSTR(gUnk_08F7CBA8[id].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[id].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[id].unk_00));
+            u16 id = GetNextRandomHcEffect(&w->randomIndex);
+            w->effect = id;
+            tiles = LANGSTR(gHcEffectDefs[id].sprites);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[id].spriteIndex],
+                         LANGSTR(gHcEffectDefs[id].tiles));
         }
         break;
     case 2:
-        if (gCardBattleState->unk_0CE != 37) {
-            w->unk_1E = gCardBattleState->unk_0CE;
-            if (gCardBattleState->unk_0CE == 0) {
-                gCardBattleState->unk_0EB = 0;
+        if (gCardBattleState->rikuHcEffect != 37) {
+            w->effect = gCardBattleState->rikuHcEffect;
+            if (gCardBattleState->rikuHcEffect == 0) {
+                gCardBattleState->soraHcEffectReplaced = 0;
                 return 0;
             }
 #ifdef VERSION_EU
-            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
+            w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->rikuHcEffect);
 #endif
-            tiles = LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[gCardBattleState->unk_0CE].unk_00));
+            tiles = LANGSTR(gHcEffectDefs[gCardBattleState->rikuHcEffect].sprites);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[gCardBattleState->rikuHcEffect].spriteIndex],
+                         LANGSTR(gHcEffectDefs[gCardBattleState->rikuHcEffect].tiles));
 #ifdef VERSION_EU
-            UpdateSpriteFrameTiles(w->tiles3, gUnkEu_09F72CC4[gLanguage][w->unk_26],
-                         gUnkEu_09F72CB0[gLanguage]);
+            UpdateSpriteFrameTiles(w->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][w->countUnit],
+                         gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
-            w->unk_26 = func_0809DA64(w, gCardBattleState->unk_0CE);
-            UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->unk_26], gUnk_093FB954);
+            w->countUnit = GetHcEffectCountUnit(w, gCardBattleState->rikuHcEffect);
+            UpdateSpriteFrameTiles(w->tiles3, gUnk_09EF12C8[w->countUnit], gUnk_093FB954);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
         } else {
-            u16 id = func_080792D0(&w->unk_20);
-            w->unk_1E = id;
-            tiles = LANGSTR(gUnk_08F7CBA8[id].unk_08);
-            UpdateSpriteFrameTiles(w->tiles2, tiles[gUnk_08F7CBA8[id].unk_0C],
-                         LANGSTR(gUnk_08F7CBA8[id].unk_00));
+            u16 id = GetNextRandomHcEffect(&w->randomIndex);
+            w->effect = id;
+            tiles = LANGSTR(gHcEffectDefs[id].sprites);
+            UpdateSpriteFrameTiles(w->tiles2, tiles[gHcEffectDefs[id].spriteIndex],
+                         LANGSTR(gHcEffectDefs[id].tiles));
         }
         break;
     }
@@ -378,21 +378,21 @@ void HCEffectName_2(HcEffectNameWork* w) {
 #ifdef VERSION_EU
     s32 pri;
 
-    if (w->unk_27 == 1) {
+    if (w->visible == 1) {
         pri = 0x410;
         DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, pri, 10);
         DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->unk_24 + 4], w->tiles, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->unk_25 + 4], w->tiles, w->palette, 0, pri, 10);
+        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, pri, 10);
+        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, pri, 10);
         DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, pri, 10);
         DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, pri, 10);
     }
 #else
-    if (w->unk_27 == 1) {
+    if (w->visible == 1) {
         DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, 0x400, 10);
         DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->unk_24 + 4], w->tiles, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->unk_25 + 4], w->tiles, w->palette, 0, 0x400, 10);
+        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, 0x400, 10);
+        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, 0x400, 10);
         DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, 0x400, 10);
         DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, 0x400, 10);
     }
@@ -413,28 +413,28 @@ void NumberPlus_0(NumberPlusWork* w, NumberPlusArgs* args) {
     w->args = *args;
     w->tiles = LoadObjTiles(gUnk_090451C0, 128);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->unk_24 = w->args.unk_04 >> 8;
-    w->unk_26 = (w->args.unk_08 >> 8) - 20;
-    w->unk_28 = 16;
+    w->x = w->args.x >> 8;
+    w->y = (w->args.y >> 8) - 20;
+    w->steps = 16;
     w->unk_29 = 0;
 }
 
 s32 NumberPlus_1(NumberPlusWork* w) {
     s32 v;
 
-    v = w->unk_26 << 8;
+    v = w->y << 8;
 
-    if (w->unk_28 != 0) {
-        ApproachValue(&v, w->args.unk_08 - 0x2800, w->unk_28);
-        w->unk_26 = v >> 8;
-        w->unk_28--;
+    if (w->steps != 0) {
+        ApproachValue(&v, w->args.y - 0x2800, w->steps);
+        w->y = v >> 8;
+        w->steps--;
         return 1;
     }
 
     return 0;
 }
 void NumberPlus_2(NumberPlusWork* w) {
-    DrawSprite(w->unk_24, w->unk_26, gUnk_09EE91A8[0], w->tiles, w->palette, 0, 16, 0);
+    DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, 0, 16, 0);
 }
 void NumberPlus_3(NumberPlusWork* w) {
     ReleaseObjTiles(w->tiles);
@@ -448,9 +448,9 @@ Mode gModePremire = {
     Mode_Premire_2,
 };
 #ifdef VERSION_EU
-void* gUnkEu_09F72CB0[5] = { gUnk_093FB954, gUnkEu_094CE490, gUnkEu_094CE820, gUnkEu_094CE6F0, gUnkEu_094CE5C0 };
+void* gHcEffectCountUnitTilesByLanguage[5] = { gUnk_093FB954, gUnkEu_094CE490, gUnkEu_094CE820, gUnkEu_094CE6F0, gUnkEu_094CE5C0 };
 
-void** gUnkEu_09F72CC4[5] = { gUnk_09EF12C8, gUnkEu_09F7C55C, gUnkEu_09F7C57C, gUnkEu_09F7C59C, gUnkEu_09F7C5BC };
+void** gHcEffectCountUnitSpritesByLanguage[5] = { gUnk_09EF12C8, gUnkEu_09F7C55C, gUnkEu_09F7C57C, gUnkEu_09F7C59C, gUnkEu_09F7C5BC };
 #endif
 
 TaskDesc gTaskDescHCEffectName = {

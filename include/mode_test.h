@@ -46,15 +46,15 @@
 #include "bos4_api.h"
 #include "btl_api.h"
 
-typedef struct UnkStruct_02034A1C {
-    u16 unk_00[61];
-    u8 unk_7A;
-    u8 unk_7B;
+typedef struct DebugTextLine {
+    u16 glyphs[61];
+    u8 x;
+    u8 y;
     u8 unk_7C;
-    u8 unk_7D;
+    u8 length;
     u8 unk_7E[2];
-    u32 unk_80;
-} UnkStruct_02034A1C;
+    u32 font;
+} DebugTextLine;
 
 typedef struct CharTile {
     u32 rows[8];
@@ -104,7 +104,7 @@ typedef struct FrdPoohArgs {
 } FrdPoohArgs;
 
 extern u8 gPoohPalette[];
-extern const AnimDef gUnkEu_08896524[];
+extern const AnimDef gFrdPoohAnimDefsEu[];
 
 #endif
 
@@ -112,11 +112,11 @@ typedef struct LockonWork {
     void* tiles;
     void* palette;
     void* gfx;
-    FldObj* unk_0C[8];
-    u8 unk_2C;
-    s8 unk_2D;
-    s8 unk_2E;
-    u8 unk_2F;
+    FldObj* targets[8];
+    u8 targetCount;
+    s8 selected;
+    s8 prevSelected;
+    u8 timer;
     u8 unk_30;
     u8 unk_31[3];
     AnimState anim;
@@ -125,7 +125,7 @@ typedef struct LockonWork {
 } LockonWork;
 
 s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e);
-void func_080B0754(void);
+void SioBtlOptionRecvSettings(void);
 
 #ifndef VERSION_EU
 extern Mode gModeTest;
@@ -133,33 +133,33 @@ extern Mode gModeTest;
 void mode_test_0(void);
 void mode_test_1(void);
 void mode_test_2(void);
-void func_0805F66C(LockonWork* w);
+void LockonClearTargets(LockonWork* w);
 void func_0805F728(s32* x, s32* y);
-void func_0805F770(void);
+void DebugTextClearBg(void);
 void func_0805F7B0(s32 a);
 void func_0805F7BC(void);
 void func_0805F7C8(u8 a);
 u8 func_0805F8F0(u8 a);
-void func_0805F904(void);
+void DebugTextClearLines(void);
 void func_0805FB78(s32 a);
 void func_0805FB84(u8 x, u8 y, u32 c, u8 v);
 void task_lockon_0(LockonWork* w);
-s8 func_0805F5D8(s32 a, s32 b, LockonWork* w, s8 n, s8* list);
-u8 func_0805F6B4(u16 a, s32 b, s32 c, FldObj* d);
+s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list);
+u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d);
 u8 task_lockon_1(LockonWork* w);
 void task_lockon_2(LockonWork* w);
 void task_lockon_3(LockonWork* w);
-void func_0805F7E8(u8 x, u8 y, u16* s);
+void DebugTextPrintFont2(u8 x, u8 y, u16* s);
 void func_08060470(u8 bg);
-void func_0806098C(void);
+void DebugTextFree(void);
 
-extern u8* gUnk_09EE26EC[2];
+extern u8* gDebugFont2Banks[2];
 extern u8* gUnk_09EE26F4;
 extern u8* gUnk_09EE26F8;
 extern u8* gUnk_09EE26FC;
 extern u8* gUnk_09EE2700;
 
-extern s32* gUnk_02039DC4;
+extern s32* gLockonDoorPosition;
 extern EventState* gEventState;
 
 extern Mode gModeChkbtl;

@@ -8,8 +8,8 @@ typedef struct MsgFaceAnim {
     void* palette;
     void** gfxTable;
     AnimHeader** anims;
-    u8 unk_10;
-    u8 unk_11;
+    u8 animCount;
+    u8 animFlags;
     u8 unk_12[2];
 } MsgFaceAnim;
 

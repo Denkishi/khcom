@@ -9,30 +9,30 @@ char SoundMainRAM_Buffer[0x400];
 SoundInfo gSoundInfo EWRAM_COMMON(16);
 MPlayFunc gMPlayJumpTable[36] EWRAM_COMMON(16);
 CgbChannel gCgbChans[4] EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203D990 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203D9D0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DA10 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DA50 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DA90 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DAD0 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo19 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo23 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo5 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo16 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo9 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo6 EWRAM_COMMON(16);
 MusicPlayerInfo gMPlayInfo_BGM EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DB50 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DB90 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DBD0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DC10 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DC50 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DC90 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DCD0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DD10 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DD50 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DD90 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DDD0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DE10 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DE50 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo20 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo24 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo21 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo18 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo7 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo1 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo2 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo10 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo25 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo22 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo12 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo17 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo4 EWRAM_COMMON(16);
 u8 gMPlayMemAccArea[16] EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DEA0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DEE0 EWRAM_COMMON(16);
-MusicPlayerInfo gUnk_0203DF20 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo8 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo3 EWRAM_COMMON(16);
+MusicPlayerInfo gMPlayInfo11 EWRAM_COMMON(16);
 
 
 u32 MidiKeyToFreq(WaveData* wav, u8 key, u8 fineAdjust) {
@@ -91,7 +91,7 @@ void m4aSoundInit(void) {
         MusicPlayerInfo* mplayInfo = gMPlayTable[i].info;
         MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].numTracks);
         // @bug Entries 13-15 of gMPlayTable have no player (NULL write).
-        mplayInfo->unk_B = gMPlayTable[i].unk_A;
+        mplayInfo->checkSongPriority = gMPlayTable[i].checkSongPriority;
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
 }
@@ -561,7 +561,7 @@ void MPlayStart(MusicPlayerInfo* mplayInfo, SongHeader* songHeader) {
         return;
 
     mplayInfo->ident++;
-    unk_B = mplayInfo->unk_B;
+    unk_B = mplayInfo->checkSongPriority;
 
     if (!unk_B
         || ((!mplayInfo->songHeader || !(mplayInfo->tracks[0].flags & MPT_FLG_START))

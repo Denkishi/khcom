@@ -5,9 +5,9 @@
 
 typedef struct PcSpriteDef {
     u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
+    u16 attr0;
+    u16 attr1;
+    u16 attr2;
 } PcSpriteDef;
 
 typedef char PcSpriteDef_size[(sizeof(PcSpriteDef) == 8) ? 1 : -1];

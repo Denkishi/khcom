@@ -11,14 +11,14 @@ typedef struct AllmapRoomWork {
     void* tiles2[4];
     void* gfx[4];
     AnimState anim[4];
-    s16 unk_08C;
-    s16 unk_08E;
+    s16 x;
+    s16 y;
     s32 unk_090;
     s32 unk_094;
-    u8 unk_098;
+    u8 room;
     u8 unk_099;
-    u16 unk_09A;
-    u16 unk_09C;
+    u16 shape;
+    u16 asSprite;
     u8 unk_09E[0x02];
 } AllmapRoomWork;
 

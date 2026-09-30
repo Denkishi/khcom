@@ -25,8 +25,8 @@ Mode* gPendingMode;
 s32 gPendingModeArg;
 vu8 gModeFlags;
 u16 gModeBlankColor;
-void (*gUnk_030074A0)(void);
-void (*gUnk_030074A4)(void);
+void (*gModeTransitionCallback)(void);
+void (*gModeVBlankCallback)(void);
 #ifdef VERSION_EU
 u32 gUnkEu_030074AC;
 #endif
@@ -35,15 +35,15 @@ Mode* gDebugModes[] = {
     &gModeDebug,
     &gModeJiminy,
 #ifndef VERSION_EU
-    &gUnk_09EE8F20,
+    &gModeDeckExchange,
 #endif
     &gModePremire,
     &gModeWORLDSELECT,
-    &gUnk_09EE2704,
+    &gModeDeck,
     &gModeRikuBtlTutorial,
     &gModeRikuDeckTutorial,
 #ifdef VERSION_EU
-    &gUnkEu_09F74600,
+    &gModeTextCheck,
 #endif
     &gModeWLogo,
     &gModeSioBattle,
@@ -91,7 +91,7 @@ Task* TaskDestroy(TaskPool* a, Task* t) {
     return ListPoolRelease(&t->node, a);
 }
 
-void func_08000DE8(TaskPool* a, Task* t) {
+void TaskKill(TaskPool* a, Task* t) {
     if (t->desc->destroy != 0) {
         t->desc->destroy(t->work);
     }
@@ -270,29 +270,29 @@ void ModeInit(void) {
     ModeStart(&gModeCopyright1, 0);
 #endif
     gPendingMode = 0;
-    gUnk_030074A0 = 0;
-    gUnk_030074A4 = 0;
+    gModeTransitionCallback = 0;
+    gModeVBlankCallback = 0;
 }
-void func_08001058(void (*a)(void), void (*b)(void)) {
+void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
     if (a != 0) {
         a();
     }
 
-    gUnk_030074A0 = b;
+    gModeTransitionCallback = b;
     gModeFlags |= 4;
 }
 
-void func_08001080(void) {
+void ModeClearTransitionCallback(void) {
     gModeFlags &= ~4;
-    gUnk_030074A0 = 0;
+    gModeTransitionCallback = 0;
 }
 
 void ModeSetVBlankCallback(void (*fn)(void)) {
-    gUnk_030074A4 = fn;
+    gModeVBlankCallback = fn;
 }
 
 void ModeClearVBlankCallback(void) {
-    gUnk_030074A4 = 0;
+    gModeVBlankCallback = 0;
 }
 
 u8 IsModeStarted(void) {
@@ -316,9 +316,9 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 
 #ifdef VERSION_EU
 void eu_0800115C(void) {
-    extern u32 gUnk_03006C18[2];
+    extern u32 gSoftResetMarker[2];
 
-    gUnk_03006C18[0] = 0xFEDCBA98;
+    gSoftResetMarker[0] = 0xFEDCBA98;
     SoftReset(0xFD);
 }
 #endif
@@ -331,8 +331,8 @@ void ModeUpdate(void) {
             ((GetKeysHeld() & START_BUTTON) && (GetKeysPressed() & SELECT_BUTTON) && (GetKeysHeld() & A_BUTTON) &&
                 (GetKeysHeld() & B_BUTTON))) &&
         !(gSystemFlags & 0x20)) {
-        if (func_080078E8()) {
-            func_080C57B4();
+        if (SioIsConnected()) {
+            SioLinkClose();
         }
 
         m4aMPlayAllStop();
@@ -399,18 +399,18 @@ void ModeFlushDisplay(void) {
             FlushDma3Queue();
         }
 
-        func_08002F50();
+        UpdateSpriteOam();
         CommitDisplayRegs();
     }
 }
 
 void ModeRunVBlankCallbacks(void) {
-    if ((gModeFlags & 2) && gUnk_030074A0 != 0) {
-        gUnk_030074A0();
+    if ((gModeFlags & 2) && gModeTransitionCallback != 0) {
+        gModeTransitionCallback();
     }
 
-    if (gUnk_030074A4 != 0) {
-        gUnk_030074A4();
+    if (gModeVBlankCallback != 0) {
+        gModeVBlankCallback();
     }
 }
 

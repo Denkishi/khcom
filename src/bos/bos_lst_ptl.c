@@ -11,15 +11,15 @@ TaskDesc gTaskDescBosLstPtl = {
     sizeof(LstPtlWork),
 };
 
-s32 func_081119F8(s32 x) {
+s32 BosLstPtlSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08111A00(s32 x) {
+s32 BosLstPtlSquare2(s32 x) {
     return x * x;
 }
 
-u8 func_08111A08(Task* task) {
+u8 BosLstPtlIsActive(Task* task) {
     LstPtlWork* s;
 
     s = task->work;
@@ -29,12 +29,12 @@ u8 func_08111A08(Task* task) {
 void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
     work->state = 0;
     work->unk_002 = 0;
-    work->unk_004 = 0;
-    work->unk_006 = arg->unk_00;
-    work->unk_008 = arg->unk_04;
-    work->unk_00C = arg->unk_08;
-    work->unk_010 = 0;
-    work->unk_014 = 0;
+    work->timer = 0;
+    work->delay = arg->delay;
+    work->x = arg->x;
+    work->y = arg->y;
+    work->wobbleX = 0;
+    work->wobbleY = 0;
     work->tiles = LoadObjTiles(gUnk_09CD0C34, 0x200);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFBF54, gUnk_09EFBF40);
@@ -48,27 +48,27 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
 
     switch (work->state) {
     case 0:
-        work->unk_006--;
-        if (work->unk_006 <= 0) {
+        work->delay--;
+        if (work->delay <= 0) {
             work->state = 1;
             work->unk_002 = 0;
-            work->unk_004 = 0;
-            work->unk_006 = 0;
+            work->timer = 0;
+            work->delay = 0;
             AnimReset(&work->anim);
             AnimChange(&work->anim, 1, 1);
         }
         break;
     case 1:
-        work->unk_008 -= 0x80;
-        work->unk_00C += 0x100;
-        work->unk_010 = -gSineTable[((work->unk_004 * 8) & 0xFF) + 0x40];
-        work->unk_014 = gSineTable[(work->unk_004 * 2) & 0xFF];
-        work->unk_004++;
-        if ((work->unk_00C >> 8) > 0xA8) {
+        work->x -= 0x80;
+        work->y += 0x100;
+        work->wobbleX = -gSineTable[((work->timer * 8) & 0xFF) + 0x40];
+        work->wobbleY = gSineTable[(work->timer * 2) & 0xFF];
+        work->timer++;
+        if ((work->y >> 8) > 0xA8) {
             work->state = 2;
             work->unk_002 = 0;
-            work->unk_004 = 0;
-            work->unk_006 = 0;
+            work->timer = 0;
+            work->delay = 0;
         }
         break;
     case 2:
@@ -89,8 +89,8 @@ void task_bos_lst_ptl_2(LstPtlWork* work) {
     void* gfx;
     u16 z;
 
-    x = (work->unk_008 >> 8) + (work->unk_010 * 12 >> 8);
-    y = (work->unk_00C >> 8) + (work->unk_014 * 6 >> 8);
+    x = (work->x >> 8) + (work->wobbleX * 12 >> 8);
+    y = (work->y >> 8) + (work->wobbleY * 6 >> 8);
     prio = GetBattleSpritePriorityFlags(0x20100);
     z = 0xE7F8;
     gfx = AnimGetGfx(&work->anim);

@@ -31,25 +31,25 @@
 #include "mode.h"
 #include "anim.h"
 
-typedef struct UnkStruct_02039DD0 {
+typedef struct EventSoundMix {
     s16 pan;
     u16 volume;
-} UnkStruct_02039DD0;
+} EventSoundMix;
 
 typedef struct DownWork {
-    s32 unk_00[8];
-    s32 unk_20[8];
-    u8 unk_40[8];
+    s32 x[8];
+    s32 y[8];
+    u8 wobble[8];
     u16 angle[8];
 } DownWork;
 
 typedef struct EvSoundWork {
     const EvSoundCue* soundCues;
-    u8 unk_04;
-    u8 unk_05;
+    u8 eventId;
+    u8 cue;
     u8 unk_06;
-    u8 unk_07;
-    s32 unk_08;
+    u8 fadeMode;
+    s32 volume;
 } EvSoundWork;
 
 typedef struct EventDebugWork {
@@ -72,9 +72,9 @@ typedef struct EffectWork {
     s32 z2;
     s32 vx;
     s32 vz;
-    u16 unk_44;
-    u16 unk_46;
-    u8 unk_48;
+    u16 timer;
+    u16 age;
+    u8 followFlip;
     u8 state;
     u8 unk_4A[0x02];
     TaskPool tasks;
@@ -83,7 +83,7 @@ typedef struct EffectWork {
 extern EventState* gEventState;
 extern u8 gMaruxhaBtEffPalette[];
 extern u8 gMaruxhaBtEff2Tiles[];
-extern const EventCharaParams gUnk_0903380C[];
+extern const EventCharaParams gEventCharaParams[];
 extern const char gUnk_08F70990[];
 #ifdef VERSION_EU
 #endif
@@ -102,16 +102,16 @@ void Hanabira_c_3(EffectWork* w);
 void smoke_0(EffectWork* w, EventCharaWork* chara);
 void Exclamation_0(EffectWork* w, EventCharaWork* chara);
 void balloon_0(EffectWork* w, EventCharaWork* chara);
-s32 func_08075720(EffectWork* w);
+s32 EffectUpdateObj(EffectWork* w);
 s32 Exclamation_1(EffectWork* w);
 void EffectDrawObj(EffectWork* w);
 void EffectReleaseObj(EffectWork* w);
 void Question_0(EffectWork* w, EventCharaWork* chara);
-void func_080758D0(EffectWork* w, EventCharaWork* chara);
+void TinkerbellParticleInit(EffectWork* w, EventCharaWork* chara);
 s32 Question_1(EffectWork* w);
-s32 func_080759B0(EffectWork* w);
-void func_080759E0(EffectWork* w);
-void func_08075A54(EffectWork* w);
+s32 TinkerbellParticleUpdate(EffectWork* w);
+void TinkerbellParticleDraw(EffectWork* w);
+void TinkerbellParticleDestroy(EffectWork* w);
 void GlowNose_0(EffectWork* w, EventCharaWork* chara);
 s32 GlowNose_1(EffectWork* w);
 void GlowNose2_0(EffectWork* w, EventCharaWork* chara);
@@ -136,7 +136,7 @@ void EV_SOUND_0(EvSoundWork* w, u8* arg);
 s32 EV_SOUND_1(EvSoundWork* w);
 void EV_SOUND_2(void);
 void EV_SOUND_3(void);
-void func_080760D8(EvSoundWork* w);
+void EvSoundUpdateFadeIn(EvSoundWork* w);
 void Event_Debug_0(EventDebugWork* work);
 s32 Event_Debug_1(EventDebugWork* work);
 void Event_Debug_2(EventDebugWork* work);

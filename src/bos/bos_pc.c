@@ -6,7 +6,7 @@
 
 void task_bos_pc_3(PcWork* work);
 
-PcSpriteCmd* gUnk_09EF9C34[96] = {
+PcSpriteCmd* gBosPcSpriteCmdLists[96] = {
     gUnk_09A42BD8,
     gUnk_09A410FC,
     gUnk_09A41360,
@@ -105,8 +105,8 @@ PcSpriteCmd* gUnk_09EF9C34[96] = {
     gUnk_09A4AAD4,
 };
 
-PcAnimStep* gUnk_09EF9DB4[14] = {
-    gUnk_09A4AF34,
+PcAnimStep* gBosPcAnims[14] = {
+    gBosPcIdleAnim,
     gUnk_09A4B174,
     gUnk_09A4B3B4,
     gUnk_09A4B5F4,
@@ -117,12 +117,12 @@ PcAnimStep* gUnk_09EF9DB4[14] = {
     gUnk_09A4C278,
     gUnk_09A4C470,
     gUnk_09A4C5B4,
-    gUnk_09A4C6F8,
+    gBosPcDefeatAnim,
     gUnk_09A4C818,
     gUnk_09A4C860,
 };
 
-const EmyKind gUnk_09A3DEFC = { 36, 256, 16, 8, 0, 128, 0 };
+const EmyKind gBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
 
 const PcBattleBackgroundDef gBosPcBattleBackgroundDef = {
     gUnk_09C91754, 0x3340, { 0, 0 }, gBosPcBgPalette, 0x100, { 0, 0 },
@@ -4843,7 +4843,7 @@ const PcGfxSet gPcGfxSets[43] = {
     { gUnk_09CB7814, 3232, { 0, 0 }, gUnk_09D4AA74, 2048, { 0, 0 } },
 };
 
-const PcAnimStep gUnk_09A4AF34[16] = {
+const PcAnimStep gBosPcIdleAnim[16] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 15, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 16, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 17, 8 },
@@ -5045,7 +5045,7 @@ const PcAnimStep gUnk_09A4C5B4[9] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C6F8[8] = {
+const PcAnimStep gBosPcDefeatAnim[8] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 15, 89, 12 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 16, 90, 16 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 17, 91, 40 },
@@ -5075,9 +5075,9 @@ const PcAnimStep gUnk_09A4C860[11] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const u16 gUnk_09A4C9EC[3] = { 1, 2, 0 };
+const u16 gBosPcPaletteCycleNext[3] = { 1, 2, 0 };
 
-const s16 gUnk_09A4C9F2[3] = { 6, 6, 6 };
+const s16 gBosPcPaletteCycleFrames[3] = { 6, 6, 6 };
 
 const PcShot gPcShots[9] = {
     { 32768, 79104, 48, { 0, 0 }, 512 },
@@ -5104,81 +5104,81 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-PcAnimStep* func_08109EB0(PcWork* work) {
-    return work->animSteps != 0 ? &work->animSteps[work->unk_032] : gUnk_09A4AF34;
+PcAnimStep* BosPcGetAnimStep(PcWork* work) {
+    return work->animSteps != 0 ? &work->animSteps[work->animFrame] : gBosPcIdleAnim;
 }
 
-PcSpriteCmd* func_08109ECC(PcWork* work) {
+PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
     PcAnimStep* step;
 
     if (work->animSteps == 0) {
         return gUnk_09A3DF34;
     }
-    step = &work->animSteps[work->unk_032];
-    return gUnk_09EF9C34[step->unk_20];
+    step = &work->animSteps[work->animFrame];
+    return gBosPcSpriteCmdLists[step->cmdList];
 }
 
-void func_08109EF8(PcWork* work, s32 a) {
-    if (work->animSteps != gUnk_09EF9DB4[a]) {
-        work->animSteps = gUnk_09EF9DB4[a];
-        work->unk_030 = 0;
-        work->unk_034 = 0;
-        work->unk_032 = 0;
-        work->unk_036 = -1;
+void BosPcSetAnim(PcWork* work, s32 a) {
+    if (work->animSteps != gBosPcAnims[a]) {
+        work->animSteps = gBosPcAnims[a];
+        work->animIndex = 0;
+        work->animTimer = 0;
+        work->animFrame = 0;
+        work->bgFrame = -1;
     }
 }
 
-void func_08109F20(PcWork* work) {
+void BosPcUpdateAnim(PcWork* work) {
     PcAnimStep* step;
     s32 cont;
     s32 v;
 
-    cont = work->unk_034 >= 0;
+    cont = work->animTimer >= 0;
     while (cont) {
-        step = &work->animSteps[work->unk_030];
-        switch (step->unk_00) {
+        step = &work->animSteps[work->animIndex];
+        switch (step->op) {
         case 0:
-            work->unk_034++;
-            if (work->unk_034 > step->unk_22) {
-                work->unk_030++;
+            work->animTimer++;
+            if (work->animTimer > step->duration) {
+                work->animIndex++;
                 do {
-                    work->unk_034 = 0;
+                    work->animTimer = 0;
                 } while (0);
             } else {
-                work->unk_032 = work->unk_030;
+                work->animFrame = work->animIndex;
                 cont = 0;
             }
             break;
         case 1:
-            work->unk_030 = 0;
-            work->unk_034 = 0;
+            work->animIndex = 0;
+            work->animTimer = 0;
             break;
         case 2:
-            work->unk_034 = 0xFFFF;
+            work->animTimer = 0xFFFF;
             cont = 0;
             break;
         }
     }
-    step = &work->animSteps[work->unk_032];
-    if (step->unk_00 == 0) {
-        if (work->unk_034 == 0) {
-            v = work->shared.unk_00;
+    step = &work->animSteps[work->animFrame];
+    if (step->op == 0) {
+        if (work->animTimer == 0) {
+            v = work->shared.hpRatio;
             if (v < 0x20) {
-                work->unk_034 += step->unk_22 / 2;
+                work->animTimer += step->duration / 2;
             } else if (v < 0x40) {
-                work->unk_034 += step->unk_22 / 4;
+                work->animTimer += step->duration / 4;
             } else if (v < 0x80) {
-                work->unk_034 += step->unk_22 / 8;
+                work->animTimer += step->duration / 8;
             }
         }
     }
 }
 
-u16 func_08109FF0(PcWork* work, s32 a) {
+u16 BosPcGetSpritePriority(PcWork* work, s32 a) {
     return GetBattleSpritePriorityFlags(a);
 }
 
-u16 func_0810A000(PcWork* work, s32 a, s32 b) {
+u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b) {
     return (0xEFFC - ((a >> 8) << 2)) | b;
 }
 
@@ -5191,7 +5191,7 @@ static inline s32 PcLayerDepth(s32 index) {
     return index * 1024 - 0x3300;
 }
 
-void func_0810A018(PcWork* work) {
+void BosPcDraw(PcWork* work) {
     PcAnimStep* step;
     PcSpriteCmd* cmd;
     PcSpriteCmd* cmds;
@@ -5213,40 +5213,40 @@ void func_0810A018(PcWork* work) {
     if (work->animSteps == 0) {
         return;
     }
-    step = &work->animSteps[work->unk_032];
-    if (step->unk_00 != 0) {
+    step = &work->animSteps[work->animFrame];
+    if (step->op != 0) {
         return;
     }
     ox = 0;
     oy = 0;
 
-    if (work->shared.unk_05 == 1) {
-        ox = gEventState->unk_68;
-        oy = gEventState->unk_6A;
+    if (work->shared.inEvent == 1) {
+        ox = gEventState->shakeX;
+        oy = gEventState->shakeY;
     }
     gfx = work->palette;
 
-    if (work->unk_018 == 0) {
-        if (func_0801CA00(&work->body)) {
+    if (work->defeated == 0) {
+        if (StepHitFlash(&work->body)) {
             gfx = work->palette2;
-            work->unk_00A = 1;
+            work->flash = 1;
         } else {
-            work->unk_00A = 0;
+            work->flash = 0;
         }
     } else {
-        work->unk_00A = 0;
+        work->flash = 0;
     }
 
-    if (work->unk_00A != work->unk_00C) {
-        if (work->unk_00A == 0) {
+    if (work->flash != work->prevFlash) {
+        if (work->flash == 0) {
             LoadPalette(gBosPcBgPalette, (void*)0x05000000, 32);
         } else {
             LoadPalette(gUnk_08F69BC4, (void*)0x05000000, 32);
         }
-        work->unk_00C = work->unk_00A;
+        work->prevFlash = work->flash;
     }
-    WorldToScreen(&sx, &sy, work->unk_020 - ox * 256, work->unk_024 - oy * 256, work->unk_028);
-    cmds = gUnk_09EF9C34[step->unk_20];
+    WorldToScreen(&sx, &sy, work->x - ox * 256, work->y - oy * 256, work->z);
+    cmds = gBosPcSpriteCmdLists[step->cmdList];
 
     for (j = 0; j < 24; j++) {
         work->oam[j].count = 0;
@@ -5255,15 +5255,15 @@ void func_0810A018(PcWork* work) {
     for (j = 0; !(cmds[j].flags & 0x80); j++) {
         cmd = &cmds[j];
         if (cmd->flags & 1) {
-            DrawSprite(sx + cmd->x, sy + cmd->y, gUnk_09EFAB18[cmd->unk_01],
+            DrawSprite(sx + cmd->x, sy + cmd->y, gUnk_09EFAB18[cmd->gfxIndex],
                 work->tiles2[j], gfx, 0,
-                func_08109FF0(work, work->unk_024 + PcLayerDepth(cmd->unk_02)),
-                func_0810A000(work, work->unk_024 + PcLayerDepth(cmd->unk_02), 1));
+                BosPcGetSpritePriority(work, work->y + PcLayerDepth(cmd->layer)),
+                BosPcGetSpriteDepth(work, work->y + PcLayerDepth(cmd->layer), 1));
         } else {
-            def = gUnk_09EFBB18[cmd->unk_01];
-            oam = &work->oam[cmd->unk_02];
+            def = gUnk_09EFBB18[cmd->gfxIndex];
+            oam = &work->oam[cmd->layer];
             mask = 0xFF;
-            t = (u8)def->unk_02;
+            t = (u8)def->attr0;
             if (t & 0x80) {
                 t |= -256;
             }
@@ -5272,9 +5272,9 @@ void func_0810A018(PcWork* work) {
             y = (s16)(y + cmd->y);
             y = (s16)(y + sy);
             if ((u16)(y + 7) <= 0xAE) {
-                oam->attr[oam->count * 3 + 1] = (def->unk_02 & 0xFF00) | (((u16)(def->unk_02 + 0x40) + cmd->y) & mask);
-                oam->attr[oam->count * 3 + 2] = (def->unk_04 & 0xFE00) | ((def->unk_04 + cmd->x) & 0x1FF);
-                oam->attr[oam->count * 3 + 3] = def->unk_06;
+                oam->attr[oam->count * 3 + 1] = (def->attr0 & 0xFF00) | (((u16)(def->attr0 + 0x40) + cmd->y) & mask);
+                oam->attr[oam->count * 3 + 2] = (def->attr1 & 0xFE00) | ((def->attr1 + cmd->x) & 0x1FF);
+                oam->attr[oam->count * 3 + 3] = def->attr2;
                 oam->count++;
             }
         }
@@ -5286,72 +5286,72 @@ void func_0810A018(PcWork* work) {
             layer = i * 0x400 - 0x3400;
             attributes = PcOamGfx(&work->oam[i]);
             DrawSprite(sx, sy - 0x40, attributes, work->tiles, gfx, 0,
-                func_08109FF0(work, work->unk_024 + layer),
-                func_0810A000(work, work->unk_024 + layer, 1));
+                BosPcGetSpritePriority(work, work->y + layer),
+                BosPcGetSpriteDepth(work, work->y + layer, 1));
         }
     }
 
     if (work->animSteps == gUnk_09A4C278) {
-        gBtlWork->unk_0D8 = i;
+        gBtlWork->bossPriorityOffset = i;
     } else {
-        gBtlWork->unk_0D8 = 0xFFF6;
+        gBtlWork->bossPriorityOffset = 0xFFF6;
     }
-    WorldToScreen(&sx, &sy, work->unk_020 + ((-0x70 - ox) * 256), work->unk_024 + ((-0x64 - oy) * 256), work->unk_028);
+    WorldToScreen(&sx, &sy, work->x + ((-0x70 - ox) * 256), work->y + ((-0x64 - oy) * 256), work->z);
 
-    if (work->unk_032 != work->unk_036) {
-        LoadBgTiles(1, gPcGfxSets[step->unk_1E].tiles, gPcGfxSets[step->unk_1E].tilesSize);
-        LoadBgMap(1, gPcGfxSets[step->unk_1E].map, gPcGfxSets[step->unk_1E].mapSize);
-        work->unk_036 = work->unk_032;
+    if (work->animFrame != work->bgFrame) {
+        LoadBgTiles(1, gPcGfxSets[step->gfxSet].tiles, gPcGfxSets[step->gfxSet].tilesSize);
+        LoadBgMap(1, gPcGfxSets[step->gfxSet].map, gPcGfxSets[step->gfxSet].mapSize);
+        work->bgFrame = work->animFrame;
     }
     SetBgScroll(1, (u16)(-sx + 0x50), (u16)(-sy + 8));
 }
 
-u8 func_0810A424(PcWork* work) {
+u8 BosPcIsAnimDone(PcWork* work) {
     PcAnimStep* step;
 
     if (work->animSteps != 0) {
-        step = &work->animSteps[work->unk_030];
-        if (step->unk_00 != 2) {
+        step = &work->animSteps[work->animIndex];
+        if (step->op != 2) {
             return 0;
         }
     }
     return 1;
 }
 
-void func_0810A444(PcWork* work) {
-    work->unk_038 = 1;
-    work->unk_03A = 0;
-    work->unk_03C = 0;
+void BosPcStartPaletteCycle(PcWork* work) {
+    work->paletteCycle = 1;
+    work->paletteIndex = 0;
+    work->paletteTimer = 0;
 }
 
-void func_0810A454(PcWork* work) {
-    if (work->unk_038 != 0) {
-        if (work->unk_03C > gUnk_09A4C9F2[work->unk_03A]) {
-            work->unk_03A = gUnk_09A4C9EC[work->unk_03A];
-            work->unk_03C = 0;
+void BosPcUpdatePaletteCycle(PcWork* work) {
+    if (work->paletteCycle != 0) {
+        if (work->paletteTimer > gBosPcPaletteCycleFrames[work->paletteIndex]) {
+            work->paletteIndex = gBosPcPaletteCycleNext[work->paletteIndex];
+            work->paletteTimer = 0;
         }
-        work->unk_03C++;
+        work->paletteTimer++;
     }
 }
 
-void func_0810A498(PcWork* work) {
-    if (work->unk_038 != 0) {
-        LoadPalette(&gUnk_09D69374[work->unk_03A * 32], gUnk_05000080, 32);
+void BosPcLoadPaletteCycle(PcWork* work) {
+    if (work->paletteCycle != 0) {
+        LoadPalette(&gUnk_09D69374[work->paletteIndex * 32], gUnk_05000080, 32);
     }
 }
 
-void func_0810A4C4(PcWork* work) {
-    work->unk_038 = 0;
+void BosPcStopPaletteCycle(PcWork* work) {
+    work->paletteCycle = 0;
 }
 
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e) {
     PcFltInit arg;
 
-    arg.unk_00 = e;
-    arg.unk_02 = a << 8;
-    arg.unk_04 = b;
-    arg.unk_08 = c;
-    arg.unk_0C = d;
+    arg.index = e;
+    arg.angle = a << 8;
+    arg.x = b;
+    arg.y = c;
+    arg.z = d;
     arg.shared = &work->shared;
     work->flt[e] = TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPcFlt, &arg);
 }
@@ -5378,38 +5378,38 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
 
     work->fld = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosPcFld, (void*)&gBosPcBattleBackgroundDef);
     work->state = 0;
-    work->unk_002 = 0;
-    work->unk_004 = 600;
-    work->unk_006 = 0;
-    work->unk_008 = 0;
-    work->unk_018 = 0;
-    work->unk_01C = 0x15000;
-    work->unk_020 = 0x17000;
-    work->unk_024 = 0x15400;
-    work->unk_028 = -0x800;
+    work->step = 0;
+    work->cardDelay = 600;
+    work->hurtTimer = 0;
+    work->reactionAnim = 0;
+    work->defeated = 0;
+    work->actorMaxX = 0x15000;
+    work->x = 0x17000;
+    work->y = 0x15400;
+    work->z = -0x800;
     work->animSteps = 0;
-    work->unk_030 = 0;
-    work->unk_034 = 0;
-    work->shared.unk_00 = 0;
+    work->animIndex = 0;
+    work->animTimer = 0;
+    work->shared.hpRatio = 0;
     work->shared.unk_02 = 0;
     work->shared.unk_03 = 0;
     work->shared.unk_04 = 0;
-    work->shared.unk_08 = 0;
-    work->shared.unk_0C = 0;
-    work->unk_00A = 0;
-    work->unk_00C = 0xFFFF;
-    func_08109EF8(work, 0);
-    func_08109F20(work);
-    func_0810A444(work);
-    func_0810A454(work);
+    work->shared.fltStopTimer = 0;
+    work->shared.gimmickTimer = 0;
+    work->flash = 0;
+    work->prevFlash = 0xFFFF;
+    BosPcSetAnim(work, 0);
+    BosPcUpdateAnim(work);
+    BosPcStartPaletteCycle(work);
+    BosPcUpdatePaletteCycle(work);
     p = &work->body;
-    func_0801B37C(p, &gUnk_09A3DEFC, work->unk_020, work->unk_024, work->unk_028);
+    InitEnemyBtlObj(p, &gBosPcEmyKind, work->x, work->y, work->z);
     work->body.flags |= 0x400;
     work->body.flags |= 4;
     q = &work->body2;
-    func_0801B37C(q, &gUnk_09A3DEFC, work->unk_020, work->unk_024, work->unk_028 - 0x1000);
+    InitEnemyBtlObj(q, &gBosPcEmyKind, work->x, work->y, work->z - 0x1000);
     work->body2.flags |= 4;
-    func_0801BDD4(q, p);
+    SetBtlObjParent(q, p);
     ColliderInit(&work->collider, 8, 32, 56);
     LoadBgMap(1, gUnk_09D34A74, 0x1000);
     work->tiles = LoadObjTiles(gUnk_09CB84B4, 0xAA0);
@@ -5417,20 +5417,20 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->tiles2[1] = AllocObjTiles(0x400, gUnk_09C448D2);
     work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
-    func_0801C298(0, 1);
+    SetBtlPaletteFadeExcluded(0, 1);
     work->flt[0] = 0;
     work->flt[1] = 0;
     work->flt[2] = 0;
     work->flt[3] = 0;
     zero = 0;
     if (pool == 0) {
-        work->shared.unk_05 = 0;
+        work->shared.inEvent = 0;
     } else {
         work->state = 7;
-        work->shared.unk_0C = 0x34BC0;
+        work->shared.gimmickTimer = 0x34BC0;
         work->shared.unk_04 = 1;
-        work->shared.unk_05 = 1;
-        func_08109EF8(work, 12);
+        work->shared.inEvent = 1;
+        BosPcSetAnim(work, 12);
     }
     if ((s32)pool < 0x2000000) {
         CreateBosPcFltTask(work, zero, 0xB800, 0x13800, -0x800, 0);
@@ -5439,17 +5439,17 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
         CreateBosPcFltTask(work, zero, 0x11000, 0x17000, -0x800, 3);
     }
     // @bug flt[0] is NULL when no floats were created (NULL read).
-    func_0810B7E8(work->flt[0], &x, &y, &z);
+    BosPcFltGetPosition(work->flt[0], &x, &y, &z);
     SetBattleActorPosition(x, y, z - 0x400);
     CreateBosPcAcdTask(work, pool);
     g = gBtlWork;
-    g->unk_0CC = work->body.x;
-    g->unk_0D0 = work->body.y;
-    g->unk_0D4 = work->body.z;
-    g->unk_0D8 = -10;
+    g->bossX = work->body.x;
+    g->bossY = work->body.y;
+    g->bossZ = work->body.z;
+    g->bossPriorityOffset = -10;
 }
 
-void func_0810A850(PcWork* work) {
+void BosPcPlaceBodies(PcWork* work) {
     PcSpriteCmd* step;
     PcAnimStep* anim;
     BtlObj* p;
@@ -5459,7 +5459,7 @@ void func_0810A850(PcWork* work) {
 
     p = &work->body;
     q = &work->body2;
-    step = func_08109ECC(work);
+    step = BosPcGetSpriteCmds(work);
     x = 0;
     y = 6;
     if ((step->flags & 0x80) == 0) {
@@ -5473,47 +5473,47 @@ void func_0810A850(PcWork* work) {
     }
     x /= 2;
     y /= 2;
-    p->x = work->unk_020 + (x << 8);
-    p->y = work->unk_024;
-    p->z = work->unk_028 + (y << 8);
-    anim = func_08109EB0(work);
-    if ((anim->unk_04 | anim->unk_06 | anim->unk_08) != 0) {
-        q->x = work->unk_020 + (anim->unk_04 << 8);
-        q->y = work->unk_024 + (anim->unk_06 << 8);
-        q->z = work->unk_028 + (anim->unk_08 << 8);
+    p->x = work->x + (x << 8);
+    p->y = work->y;
+    p->z = work->z + (y << 8);
+    anim = BosPcGetAnimStep(work);
+    if ((anim->body2X | anim->body2Y | anim->body2Z) != 0) {
+        q->x = work->x + (anim->body2X << 8);
+        q->y = work->y + (anim->body2Y << 8);
+        q->z = work->z + (anim->body2Z << 8);
     } else {
-        q->x = work->unk_020;
-        q->y = work->unk_024;
-        q->z = work->unk_028 - 0xC00;
+        q->x = work->x;
+        q->y = work->y;
+        q->z = work->z - 0xC00;
     }
 }
 
-u8 func_0810A914(PcWork* work, Task* task) {
+u8 BosPcUpdateIdle(PcWork* work, Task* task) {
     s32 u;
     s16 t;
 
-    func_08109EF8(work, 0);
-    work->unk_004 -= 1;
-    if (work->unk_004 < 0) {
+    BosPcSetAnim(work, 0);
+    work->cardDelay -= 1;
+    if (work->cardDelay < 0) {
         if ((gBtlWork->flags & 0x20000000) == 0) {
-            func_0801BCD4(&work->body);
-            u = work->shared.unk_00;
-            work->unk_004 = ((u >> 6) + 6) * 60;
+            RequestEnemyCardUse(&work->body);
+            u = work->shared.hpRatio;
+            work->cardDelay = ((u >> 6) + 6) * 60;
         } else {
-            work->unk_004 = 4;
+            work->cardDelay = 4;
         }
-    } else if (work->unk_004 % (work->shared.unk_00 >> 4) == 0) {
+    } else if (work->cardDelay % (work->shared.hpRatio >> 4) == 0) {
         if (gBtlWork->flags & 0x20000000) {
-            t = (((s32)work->shared.unk_00 * 5) >> 3) + 96;
+            t = (((s32)work->shared.hpRatio * 5) >> 3) + 96;
             if (GetRandom() >> 7 > t) {
-                func_0801BCD4(&work->body);
+                RequestEnemyCardUse(&work->body);
             }
         }
     }
     return 1;
 }
 
-u8 func_0810A9CC(PcWork* work, Task* task) {
+u8 BosPcUpdateAttack(PcWork* work, Task* task) {
     BtlObj* p;
     PcAnimStep* anim;
     PcSpriteCmd* steps;
@@ -5526,13 +5526,13 @@ u8 func_0810A9CC(PcWork* work, Task* task) {
     s32 dy;
 
     p = &work->body;
-    if (work->unk_002 == 0) {
+    if (work->step == 0) {
         x = gBtlWork->actor->x >> 8;
         y = gBtlWork->actor->y >> 8;
         if (x <= 0x109) {
             sel = (y >= 0x144 && y <= 0x162 && x > 175 && (GetRandom() & 0x300)) ? 8 : 7;
         } else {
-            if ((GetRandom() & 3) == 3 && work->shared.unk_02 == 0 && work->shared.unk_0C <= 0) {
+            if ((GetRandom() & 3) == 3 && work->shared.unk_02 == 0 && work->shared.gimmickTimer <= 0) {
                 sel = 6;
             } else if (y > 0x161) {
                 sel = 10;
@@ -5540,45 +5540,45 @@ u8 func_0810A9CC(PcWork* work, Task* task) {
                 sel = y > 0x143 ? 9 : 5;
             }
         }
-        func_08109EF8(work, sel);
-        work->unk_002 += 1;
-    } else if (func_0810A424(work) != 0) {
-        func_0801AF08(p);
+        BosPcSetAnim(work, sel);
+        work->step += 1;
+    } else if (BosPcIsAnimDone(work) != 0) {
+        ClearBtlObjActionFlags(p);
         work->state = 0;
-        work->unk_002 = 0;
-        func_0810A914(work, task);
+        work->step = 0;
+        BosPcUpdateIdle(work, task);
     } else {
-        anim = func_08109EB0(work);
-        if ((anim->unk_14 | anim->unk_16 | anim->unk_18) != 0) {
-            k = anim->unk_0C;
-            steps = func_08109ECC(work);
-            func_08011F78(0xF6, work->unk_020 + ((anim->unk_0E + steps[k].x) << 8),
-                          work->unk_024 + ((anim->unk_10 + steps[k].y + steps[k].unk_08) << 8),
-                          (anim->unk_12 - steps[k].unk_08) << 8, anim->unk_14, anim->unk_16, anim->unk_18);
+        anim = BosPcGetAnimStep(work);
+        if ((anim->hitHalfX | anim->hitHalfY | anim->hitHalfZ) != 0) {
+            k = anim->anchorCmd;
+            steps = BosPcGetSpriteCmds(work);
+            ApplyAttackBox(0xF6, work->x + ((anim->hitX + steps[k].x) << 8),
+                          work->y + ((anim->hitY + steps[k].y + steps[k].unk_08) << 8),
+                          (anim->hitZ - steps[k].unk_08) << 8, anim->hitHalfX, anim->hitHalfY, anim->hitHalfZ);
         }
-        switch (anim->unk_1C) {
+        switch (anim->event) {
         case 1:
-            if (func_0810B49C() == 0) {
+            if (BosPcFldGetShake() == 0) {
                 m4aSongNumStart(SONG_BTL_LB_RUMB);
-                func_0810B40C(1);
-                k = anim->unk_0C;
-                steps = func_08109ECC(work);
-                func_080147D8(work->unk_020 + ((anim->unk_0E + steps[k].x) << 8),
-                              work->unk_024 + ((anim->unk_10 + steps[k].y + steps[k].unk_08 - 24) << 8));
+                BosPcFldStartShake(1);
+                k = anim->anchorCmd;
+                steps = BosPcGetSpriteCmds(work);
+                BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
+                              work->y + ((anim->hitY + steps[k].y + steps[k].unk_08 - 24) << 8));
             }
             break;
         case 2:
-            if (func_0810B49C() == 0) {
+            if (BosPcFldGetShake() == 0) {
                 m4aSongNumStart(SONG_BTL_LB_RUMB);
-                func_0810B40C(0);
-                k = anim->unk_0C;
-                steps = func_08109ECC(work);
-                func_080147D8(work->unk_020 + ((anim->unk_0E + steps[k].x) << 8),
-                              work->unk_024 + ((anim->unk_10 + steps[k].y + steps[k].unk_08 - 24) << 8));
+                BosPcFldStartShake(0);
+                k = anim->anchorCmd;
+                steps = BosPcGetSpriteCmds(work);
+                BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
+                              work->y + ((anim->hitY + steps[k].y + steps[k].unk_08 - 24) << 8));
             }
             break;
         case 3:
-            if (work->shared.unk_0C <= 0) {
+            if (work->shared.gimmickTimer <= 0) {
                 work->shared.unk_02 = 1;
             }
             break;
@@ -5600,14 +5600,14 @@ u8 func_0810A9CC(PcWork* work, Task* task) {
                     idx += 6;
                 }
             }
-            func_080154F4(p->x - 0xC00, p->y, p->z, gPcShots[idx].unk_00,
-                          gPcShots[idx].unk_04, -0x1000, 0xF7, gPcShots[idx].unk_08,
+            BgFxStartPcShot(p->x - 0xC00, p->y, p->z, gPcShots[idx].targetX,
+                          gPcShots[idx].targetY, -0x1000, 0xF7, gPcShots[idx].unk_08,
                           gPcShots[idx].unk_0C);
             m4aSongNumStart(SONG_BTL_PK_BEEM);
             break;
         case 5:
-            func_08109EB0(work);
-            if (func_08011F78(0xF8, work->body2.x - 0x2000, work->body2.y, work->body2.z, 20, 16, 24) != 0) {
+            BosPcGetAnimStep(work);
+            if (ApplyAttackBox(0xF8, work->body2.x - 0x2000, work->body2.y, work->body2.z, 20, 16, 24) != 0) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
             break;
@@ -5619,37 +5619,37 @@ u8 func_0810A9CC(PcWork* work, Task* task) {
     return 1;
 }
 
-u8 func_0810ACB8(PcWork* work, Task* task) {
+u8 BosPcUpdateHurt(PcWork* work, Task* task) {
     BtlObj* p;
 
     p = &work->body;
-    if (work->unk_002 == 0) {
-        work->unk_010 = p->unk_028;
-        work->unk_014 = p->unk_024;
+    if (work->step == 0) {
+        work->hitAttack = p->hitAttack;
+        work->hitFlags = p->hitFlags;
     }
-    work->unk_002 += 1;
-    if (work->unk_002 > 15) {
-        func_0801AF08(p);
-        if (work->unk_014 & 0x10000000) {
-            switch (work->unk_010) {
+    work->step += 1;
+    if (work->step > 15) {
+        ClearBtlObjActionFlags(p);
+        if (work->hitFlags & 0x10000000) {
+            switch (work->hitAttack) {
             case 67:
-                work->unk_008 = 2;
+                work->reactionAnim = 2;
                 work->state = 5;
-                work->unk_002 = 0;
+                work->step = 0;
                 return 1;
             case 68:
-                work->unk_008 = 3;
+                work->reactionAnim = 3;
                 work->state = 5;
-                work->unk_002 = 0;
+                work->step = 0;
                 return 1;
             default:
-                work->unk_008 = 1;
+                work->reactionAnim = 1;
                 work->state = 5;
-                work->unk_002 = 0;
+                work->step = 0;
                 return 1;
             }
         } else {
-            switch (work->unk_010) {
+            switch (work->hitAttack) {
             case 2:
             case 14:
             case 17:
@@ -5669,18 +5669,18 @@ u8 func_0810ACB8(PcWork* work, Task* task) {
             case 59:
             case 62:
             case 65:
-                if (work->shared.unk_0C <= 0) {
+                if (work->shared.gimmickTimer <= 0) {
                     if ((GetRandom() & 0x300) == 0x300) {
-                        work->unk_008 = 1;
+                        work->reactionAnim = 1;
                         work->state = 5;
-                        work->unk_002 = 0;
+                        work->step = 0;
                         break;
                     }
                 }
             default:
-                work->unk_004 = work->unk_004 / 4;
+                work->cardDelay = work->cardDelay / 4;
                 work->state = 0;
-                work->unk_002 = 0;
+                work->step = 0;
                 break;
             }
         }
@@ -5688,50 +5688,50 @@ u8 func_0810ACB8(PcWork* work, Task* task) {
     return 1;
 }
 
-u8 func_0810AE74(PcWork* work, Task* task) {
+u8 BosPcUpdateReaction(PcWork* work, Task* task) {
     BtlObj* p;
 
     p = &work->body;
-    func_08109EF8(work, work->unk_008);
-    if (func_0810A424(work) != 0) {
-        work->unk_004 = 180;
-        if (work->unk_006 > 0) {
-            func_0801AF08(p);
-            work->unk_006 = 0;
+    BosPcSetAnim(work, work->reactionAnim);
+    if (BosPcIsAnimDone(work) != 0) {
+        work->cardDelay = 180;
+        if (work->hurtTimer > 0) {
+            ClearBtlObjActionFlags(p);
+            work->hurtTimer = 0;
         }
         work->state = 0;
-        work->unk_002 = 0;
+        work->step = 0;
     } else {
-        if (work->unk_006 == 1) {
-            func_0801AF08(p);
+        if (work->hurtTimer == 1) {
+            ClearBtlObjActionFlags(p);
         }
-        if (work->unk_006 > 0) {
-            work->unk_006 -= 1;
+        if (work->hurtTimer > 0) {
+            work->hurtTimer -= 1;
         }
     }
     return 1;
 }
 
-u8 func_0810AED4(PcWork* work, Task* task) {
+u8 BosPcUpdateBreak(PcWork* work, Task* task) {
     BtlObj* p;
 
     p = &work->body;
-    work->shared.unk_08 = 240;
+    work->shared.fltStopTimer = 240;
     if (gGameState.flags & 8) {
-        if (work->shared.unk_0C <= 0) {
+        if (work->shared.gimmickTimer <= 0) {
             if (GetRandom() % 0xA01 > 0x800) {
-                _0801C1F8(0, work->unk_020, work->unk_024, work->unk_028);
+                _0801C1F8(0, work->x, work->y, work->z);
             }
         }
     }
-    work->unk_002 += 1;
-    func_0801AF08(p);
+    work->step += 1;
+    ClearBtlObjActionFlags(p);
     work->state = 0;
-    work->unk_002 = 0;
+    work->step = 0;
     return 1;
 }
 
-u8 func_0810AF44(PcWork* work, Task* task) {
+u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     PrizeCardArg args;
     BtlObj* p;
     s16 s;
@@ -5739,29 +5739,29 @@ u8 func_0810AF44(PcWork* work, Task* task) {
     s32 i;
 
     p = &work->body;
-    s = work->unk_002;
+    s = work->step;
     switch (s) {
     case 0:
-        func_0801AF4C(p);
+        BeginBossDefeat(p);
         ReleaseObjPalette(work->palette2);
         work->palette2 = 0;
-        func_0801C2DC(p, 1);
-        func_0801C2DC(&work->body2, 1);
+        SetBtlObjUnhittable(p, 1);
+        SetBtlObjUnhittable(&work->body2, 1);
         gBtlWork->flags |= 0x100000;
         work->shared.unk_03 = 255;
-        work->shared.unk_0C = 0x34BC0;
-        func_08109EF8(work, 11);
+        work->shared.gimmickTimer = 0x34BC0;
+        BosPcSetAnim(work, 11);
         m4aSongNumStart(SONG_EV_FLASH00);
         m4aSongNumStart(SONG_SND_717);
-        work->unk_002 += 1;
+        work->step += 1;
         break;
     case 1:
         n = 0;
         for (i = 0; i <= 3; i++) {
             if (work->flt[i] == 0) {
                 n++;
-            } else if (func_0810B800(work->flt[i]) == 1) {
-                func_08000DE8(&gBtlWork->taskPools[0], work->flt[i]);
+            } else if (BosPcFltIsSubmerged(work->flt[i]) == 1) {
+                TaskKill(&gBtlWork->taskPools[0], work->flt[i]);
                 work->flt[i] = 0;
             }
         }
@@ -5770,17 +5770,17 @@ u8 func_0810AF44(PcWork* work, Task* task) {
             args.y = 0x15300;
             args.z = -0x5C00;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &args);
-            func_0801B918(p);
-            func_0810B378(work->fld, 1);
-            work->unk_002 += 1;
+            DropBossPrizes(p);
+            BosPcFldEnableObject(work->fld, 1);
+            work->step += 1;
         }
         break;
     case 2:
-        work->unk_018 = 1;
-        work->unk_002 += 1;
+        work->defeated = 1;
+        work->step += 1;
         break;
     default:
-        func_0801B008();
+        EndBossDefeat();
         break;
     }
     return 1;
@@ -5794,103 +5794,103 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
 
     p = &work->body;
     r = 1;
-    func_08109F20(work);
-    func_0810A454(work);
-    if (func_0801C1C0(0) == 1) {
+    BosPcUpdateAnim(work);
+    BosPcUpdatePaletteCycle(work);
+    if (ConsumeGimmickFlag(0) == 1) {
         work->shared.unk_02 = 0;
-        work->shared.unk_0C = 0x259;
+        work->shared.gimmickTimer = 0x259;
     }
-    if (work->shared.unk_08 > 0) {
-        work->shared.unk_08 -= 1;
+    if (work->shared.fltStopTimer > 0) {
+        work->shared.fltStopTimer -= 1;
     }
-    if (work->shared.unk_0C > 0) {
-        func_0810BF24(work->acd, 1);
+    if (work->shared.gimmickTimer > 0) {
+        BosPcAcdSetOff(work->acd, 1);
         gBtlWork->flags |= 0x100000;
-        if (work->shared.unk_0C < 0x34BBF) {
-            work->shared.unk_0C -= 1;
+        if (work->shared.gimmickTimer < 0x34BBF) {
+            work->shared.gimmickTimer -= 1;
         }
     } else {
-        func_0810BF24(work->acd, 0);
+        BosPcAcdSetOff(work->acd, 0);
         gBtlWork->flags &= ~0x100000;
     }
     pos = gBtlWork->actor;
     if ((pos->flags & 0x800000) == 0) {
-        if (pos->x > work->unk_01C) {
-            pos->x = work->unk_01C;
+        if (pos->x > work->actorMaxX) {
+            pos->x = work->actorMaxX;
         }
     }
-    switch (func_0801ADAC(p)) {
+    switch (UpdateBtlObjReaction(p)) {
     case 5:
         work->state = 1;
-        work->unk_002 = 0;
+        work->step = 0;
         break;
     case 1:
     case 6:
     case 7:
         if (work->state == 5) {
-            work->unk_006 = 16;
-            if (work->shared.unk_0C <= 0) {
+            work->hurtTimer = 16;
+            if (work->shared.gimmickTimer <= 0) {
                 if (GetRandom() & 0x300) {
-                    _0801C1F8(0, work->unk_020, work->unk_024, work->unk_028);
+                    _0801C1F8(0, work->x, work->y, work->z);
                 }
             }
         } else {
             work->state = 3;
-            work->unk_002 = 0;
+            work->step = 0;
         }
         break;
     case 3:
         work->state = 4;
-        work->unk_002 = 0;
+        work->step = 0;
         break;
     case 4:
         work->state = 2;
-        work->unk_002 = 0;
+        work->step = 0;
         break;
     }
     switch (work->state) {
     case 0:
-        r = func_0810A914(work, task);
+        r = BosPcUpdateIdle(work, task);
         break;
     case 1:
-        r = func_0810A9CC(work, task);
+        r = BosPcUpdateAttack(work, task);
         break;
     case 3:
-        r = func_0810ACB8(work, task);
+        r = BosPcUpdateHurt(work, task);
         break;
     case 5:
-        r = func_0810AE74(work, task);
+        r = BosPcUpdateReaction(work, task);
         break;
     case 2:
-        r = func_0810AED4(work, task);
+        r = BosPcUpdateBreak(work, task);
         break;
     case 4:
-        r = func_0810AF44(work, task);
+        r = BosPcUpdateDefeat(work, task);
         break;
     case 6:
     case 7:
     default:
         break;
     }
-    func_0810A850(work);
+    BosPcPlaceBodies(work);
     ColliderSetPosition(&p->collider, p->x, p->y, p->z);
-    ColliderSetPosition(&work->collider, work->body2.x, work->body2.y, work->unk_028 + 0x800);
+    ColliderSetPosition(&work->collider, work->body2.x, work->body2.y, work->z + 0x800);
     g = gBtlWork;
-    g->unk_0CC = p->x;
-    g->unk_0D0 = p->y;
-    g->unk_0D4 = p->z;
-    work->shared.unk_00 = (work->body.unk_02C << 8) / work->body.unk_02E;
+    g->bossX = p->x;
+    g->bossY = p->y;
+    g->bossZ = p->z;
+    work->shared.hpRatio = (work->body.hp << 8) / work->body.maxHp;
     return r;
 }
 
 void task_bos_pc_2(PcWork* work) {
-    func_0810A018(work);
-    func_0810A498(work);
+    BosPcDraw(work);
+    BosPcLoadPaletteCycle(work);
 }
 
 void task_bos_pc_3(PcWork* work) {
-    func_0801B7D8(&work->body);
-    func_0801B7D8(&work->body2);
+    ReleaseEnemyBtlObj(&work->body);
+    ReleaseEnemyBtlObj(&work->body2);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
     ReleaseObjTiles(work->tiles2[0]);
@@ -5899,5 +5899,5 @@ void task_bos_pc_3(PcWork* work) {
     if (work->palette2 != 0) {
         ReleaseObjPalette(work->palette2);
     }
-    func_0810A4C4(work);
+    BosPcStopPaletteCycle(work);
 }

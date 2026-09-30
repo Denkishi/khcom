@@ -48,7 +48,7 @@
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 
 #ifdef VERSION_EU
-extern void** gUnkEu_09F72BFC[5];
+extern void** gPremireChanceTitles[5];
 #endif
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_0908BB80[];
@@ -66,15 +66,15 @@ extern u8 gUnkEu_09162C8C[];
 #define LANGSTR(x) (x)
 #endif
 void CreateCardNameDisplay(void* a, void* b);
-u8 func_0809BE80(UnkStruct_0809BB4C* w, void* a);
-void func_0809C294(UnkStruct_0809BB4C* w);
+u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a);
+void CreatePremireChanceCardTasks(PremireChanceWork* w);
 void ConvertActiveDeckCardToPremium(u16 index);
-s16 func_08084458(u16 cardId);
+s16 ObtainCard(u16 cardId);
 void ConvertActiveDeckCardToPremium(u16 index);
 Deck* GetActiveDeck(void);
 void CreateCardNameDisplay(void* a, void* b);
 
-const u32 gUnk_09036210[8] = {
+const u32 gFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),
     CARD_ID(CARD_DONALD_DUCK, 0),
     CARD_ID(CARD_ALADDIN, 0),
@@ -85,34 +85,34 @@ const u32 gUnk_09036210[8] = {
     CARD_ID(CARD_THE_KING, 0),
 };
 
-void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
+void Friend_card_0(PickupCardWork* w, s32* args) {
     Collider* p;
 
     w->cardId = args[3];
-    w->unk_38 = args[0];
-    w->unk_3C = args[1];
-    w->unk_40 = args[2];
-    w->unk_44 = 0;
-    w->unk_1C6 = GetRandom();
+    w->posX = args[0];
+    w->posY = args[1];
+    w->posZ = args[2];
+    w->floor = 0;
+    w->moveAngle = GetRandom();
     w->unk_1A4 = -(GetRandom() % 129 + 0x300);
-    w->unk_1A8 = GetRandom() % 129 + 0x80;
-    w->unk_1C7 = 0;
-    w->unk_1C8 = 0;
-    w->unk_1C9 = 24;
+    w->speed = GetRandom() % 129 + 0x80;
+    w->flipAngleX = 0;
+    w->flipAngleY = 0;
+    w->angle = 24;
     w->scaleX = 0x80;
     w->scaleY = 0x80;
-    w->unk_1BC = 0x80;
-    w->unk_1CA = 0;
+    w->scale = 0x80;
+    w->screenSpace = 0;
     w->unk_1CB = 0;
     w->unk_1CC = 0;
-    w->unk_1C4 = 0;
-    w->unk_1CD = 1;
+    w->timer = 0;
+    w->visible = 1;
     w->cardDef = &gCardDefs[args[3]];
 
     if (w->cardDef->flags & 8) {
-        w->unk_1CE = 3;
+        w->backCategory = 3;
     } else {
-        w->unk_1CE = w->cardDef->unk_2A;
+        w->backCategory = w->cardDef->category;
     }
 
     w->palette = LoadObjPalette(gCard00Palette, 32);
@@ -123,42 +123,42 @@ void Friend_card_0(UnkStruct_0809A02C* w, s32* args) {
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &w->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
+    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
     TaskPoolInit(&w->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
+void Heartless_card_0(PickupCardWork* w, s32* args) {
     Collider* p;
 
     w->cardId = args[3];
-    w->unk_38 = args[0];
-    w->unk_3C = args[1];
-    w->unk_40 = args[2];
-    w->unk_44 = 0;
-    w->unk_1C6 = GetRandom();
+    w->posX = args[0];
+    w->posY = args[1];
+    w->posZ = args[2];
+    w->floor = 0;
+    w->moveAngle = GetRandom();
     w->unk_1A4 = -(GetRandom() % 129 + 0x300);
-    w->unk_1A8 = GetRandom() % 129 + 0x80;
-    w->unk_1C7 = 0;
-    w->unk_1C8 = 0;
-    w->unk_1C9 = 24;
+    w->speed = GetRandom() % 129 + 0x80;
+    w->flipAngleX = 0;
+    w->flipAngleY = 0;
+    w->angle = 24;
     w->scaleX = 0x80;
     w->scaleY = 0x80;
-    w->unk_1BC = 0x80;
-    w->unk_1CA = 0;
+    w->scale = 0x80;
+    w->screenSpace = 0;
     w->unk_1CB = 0;
     w->unk_1CC = 0;
-    w->unk_1C4 = 0;
-    w->unk_1CD = 1;
+    w->timer = 0;
+    w->visible = 1;
     w->cardDef = &gCardDefs[args[3]];
 
     if (w->cardDef->flags & 8) {
-        w->unk_1CE = 3;
+        w->backCategory = 3;
     } else {
-        w->unk_1CE = w->cardDef->unk_2A;
+        w->backCategory = w->cardDef->category;
     }
 
-    w->tiles = LoadObjTiles(gUnk_08F709B0[w->unk_1CE].tiles, 0x280);
+    w->tiles = LoadObjTiles(gCardBacks[w->backCategory].tiles, 0x280);
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     w->tiles2 = LoadObjTiles(w->cardDef->tiles, 0x300);
@@ -167,35 +167,35 @@ void Heartless_card_0(UnkStruct_0809A02C* w, s32* args) {
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &w->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
+    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
     TaskPoolInit(&w->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
+void Gimmick_card_0(PickupCardWork* w, GimmickCardArgs* args) {
     Collider* p;
 
     w->cardId = args->cardId;
-    w->unk_38 = args->unk_00;
-    w->unk_3C = args->unk_04;
-    w->unk_40 = args->unk_08;
-    w->unk_44 = 0;
-    w->unk_1C6 = GetRandom();
+    w->posX = args->x;
+    w->posY = args->y;
+    w->posZ = args->z;
+    w->floor = 0;
+    w->moveAngle = GetRandom();
     w->unk_1A4 = -((u16)(GetRandom() % 129) + 0x300);
-    w->unk_1A8 = (u16)(GetRandom() % 129) + 0x80;
-    w->unk_1C7 = 0;
-    w->unk_1C8 = 0;
-    w->unk_1C9 = 24;
+    w->speed = (u16)(GetRandom() % 129) + 0x80;
+    w->flipAngleX = 0;
+    w->flipAngleY = 0;
+    w->angle = 24;
     w->scaleX = 0x80;
     w->scaleY = 0x80;
-    w->unk_1BC = 0x80;
-    w->unk_1CA = 0;
+    w->scale = 0x80;
+    w->screenSpace = 0;
     w->unk_1CB = 0;
     w->unk_1CC = 0;
-    w->unk_1C4 = 0;
-    w->unk_1CD = 1;
+    w->timer = 0;
+    w->visible = 1;
     w->cardDef = &gCardDefs[args->cardId];
-    w->unk_1CE = w->cardDef->unk_2A;
+    w->backCategory = w->cardDef->category;
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     w->tiles2 = LoadObjTiles(w->cardDef->tiles, 0x300);
@@ -204,12 +204,12 @@ void Gimmick_card_0(UnkStruct_0809A02C* w, GimmickCardArgs* args) {
     w->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &w->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->unk_38, w->unk_3C, w->unk_40);
+    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
     TaskPoolInit(&w->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void func_0809A4E0(UnkStruct_0809A02C* w, u8 kind) {
+void StartPickupCardFlight(PickupCardWork* w, u8 kind) {
     s32 dx;
     s32 dy;
     s32 tx;
@@ -223,89 +223,89 @@ void func_0809A4E0(UnkStruct_0809A02C* w, u8 kind) {
         ty = 0xA000;
     }
 
-    dx = tx - w->unk_38;
-    dy = ty - w->unk_3C;
-    w->unk_1AC = NormalizeVector2D8(&dx, &dy);
-    w->unk_1B0 = -dx;
-    w->unk_1B4 = -dy;
-    w->unk_1A8 = 0x300;
+    dx = tx - w->posX;
+    dy = ty - w->posY;
+    w->distance = NormalizeVector2D8(&dx, &dy);
+    w->dirX = -dx;
+    w->dirY = -dy;
+    w->speed = 0x300;
     w->unk_1A4 = 2;
 }
 
-s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
+s32 Friend_card_1(PickupCardWork* w, void* a) {
     s16 sx;
     s32 t;
     u16 n;
     s16 sy;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         return 0;
     }
 
-    w->unk_1A4 += gBtlWork->unk_12C;
-    w->unk_40 += w->unk_1A4;
-    w->unk_38 += (gSineTable[w->unk_1C6] * w->unk_1A8) >> 8;
-    w->unk_3C += (-gSineTable[w->unk_1C6 + 64] * w->unk_1A8) >> 8;
+    w->unk_1A4 += gBtlWork->gravity;
+    w->posZ += w->unk_1A4;
+    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
+    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
-    if (ClampBattlePosition(&w->unk_38, &w->unk_3C, -10, -10) != 0) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
+    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
+        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->unk_40 - 0x800 > w->unk_44) {
-        w->unk_40 = w->unk_44 - 0x800;
+    if (w->posZ - 0x800 > w->floor) {
+        w->posZ = w->floor - 0x800;
         w->unk_1A4 = -((204 * w->unk_1A4) >> 8);
-        w->unk_1C6 = GetAngle(w->unk_38, w->unk_3C,
+        w->moveAngle = GetAngle(w->posX, w->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
-        w->unk_1C6 = (u8)(w->unk_1C6 + 224) + GetRandom() % 65;
+        w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
 
         if (w->unk_1A4 > -0x200) {
             w->unk_1A4 = -0x200;
         }
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
+    if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 50);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if ((u8)func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40,
-                          &w->unk_44) != 0) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
+    if ((u8)ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
+                          &w->floor) != 0) {
+        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.unk_2C != 0) {
+    if (w->collider.colliding != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
-        w->unk_1C2 = 10;
+        w->priority = 10;
 #endif
 
         if (gCardBattleState != 0) {
-            WorldToScreen(&sx, &sy, w->unk_38, w->unk_3C,
-                          w->unk_40);
-            w->unk_38 = sx << 8;
-            w->unk_3C = sy << 8;
-            w->unk_1CA = 1;
+            WorldToScreen(&sx, &sy, w->posX, w->posY,
+                          w->posZ);
+            w->posX = sx << 8;
+            w->posY = sy << 8;
+            w->screenSpace = 1;
             ColliderSetDisabled(&w->collider, 1);
-            func_0809A4E0(w, 0);
+            StartPickupCardFlight(w, 0);
 #ifdef VERSION_EU
-            w->unk_1CD = 1;
+            w->visible = 1;
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0809AB2C);
+            SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
 
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C,
-                  w->unk_40);
+    ColliderSetPosition(&w->collider, w->posX, w->posY,
+                  w->posZ);
     w->scaleX =
-        (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] *
-         w->unk_1BC) >> 8;
+        (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] *
+         w->scale) >> 8;
     w->scaleY =
-        (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] *
-         w->unk_1BC) >> 8;
+        (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] *
+         w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -315,103 +315,103 @@ s32 Friend_card_1(UnkStruct_0809A02C* w, void* a) {
         w->scaleY = 2;
     }
 
-    w->unk_1C7 += 2;
-    w->unk_1C2 = -0x1004 - (w->unk_3C >> 8) * 4;
+    w->flipAngleX += 2;
+    w->priority = -0x1004 - (w->posY >> 8) * 4;
     TaskPoolUpdate(&w->tasks);
 
     if (gBtlWork->flags & 0x800000000) {
         return 1;
     }
 
-    n = w->unk_1C4;
+    n = w->timer;
 
     if (n > 359) {
         return 0;
     }
 
     t = n + 1;
-    w->unk_1C4 = t;
+    w->timer = t;
 
-    if (w->unk_1C4 > 279 && t % 4 == 0) {
-        w->unk_1CD ^= 1;
+    if (w->timer > 279 && t % 4 == 0) {
+        w->visible ^= 1;
     }
 
     return 1;
 }
-s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
+s32 Gimmick_card_1(PickupCardWork* w, void* a) {
     s16 sx;
     s32 t;
     u16 n;
     s16 sy;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         return 0;
     }
 
     w->unk_1A4 += 56;
-    w->unk_40 += w->unk_1A4;
-    w->unk_38 += (gSineTable[w->unk_1C6] * w->unk_1A8) >> 8;
-    w->unk_3C += (-gSineTable[w->unk_1C6 + 64] * w->unk_1A8) >> 8;
+    w->posZ += w->unk_1A4;
+    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
+    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
-    if (ClampBattlePosition(&w->unk_38, &w->unk_3C, -10, -10) != 0) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
+    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
+        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->unk_40 - 0x800 > w->unk_44) {
-        w->unk_40 = w->unk_44 - 0x800;
+    if (w->posZ - 0x800 > w->floor) {
+        w->posZ = w->floor - 0x800;
         w->unk_1A4 = -((204 * w->unk_1A4) >> 8);
-        w->unk_1C6 = GetAngle(w->unk_38, w->unk_3C,
+        w->moveAngle = GetAngle(w->posX, w->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
-        w->unk_1C6 = (u8)(w->unk_1C6 + 224) + GetRandom() % 65;
+        w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
 
         if (w->unk_1A4 > -0x200) {
             w->unk_1A4 = -0x200;
         }
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
+    if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 50);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if ((u8)func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40,
-                          &w->unk_44) != 0) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 112) + GetRandom() % 33;
+    if ((u8)ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
+                          &w->floor) != 0) {
+        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.unk_2C != 0) {
+    if (w->collider.colliding != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
-        w->unk_1C2 = 10;
+        w->priority = 10;
 #endif
 
         if (gCardBattleState != 0) {
-            WorldToScreen(&sx, &sy, w->unk_38, w->unk_3C,
-                          w->unk_40);
-            w->unk_38 = sx << 8;
-            w->unk_3C = sy << 8;
-            w->unk_1CA = 1;
+            WorldToScreen(&sx, &sy, w->posX, w->posY,
+                          w->posZ);
+            w->posX = sx << 8;
+            w->posY = sy << 8;
+            w->screenSpace = 1;
             ColliderSetDisabled(&w->collider, 1);
-            func_0809A4E0(w, 0);
+            StartPickupCardFlight(w, 0);
 #ifdef VERSION_EU
-            w->unk_1CD = 1;
+            w->visible = 1;
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0809AB2C);
+            SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
 
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C,
-                  w->unk_40);
+    ColliderSetPosition(&w->collider, w->posX, w->posY,
+                  w->posZ);
     w->scaleX =
-        (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] *
-         w->unk_1BC) >> 8;
+        (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] *
+         w->scale) >> 8;
     w->scaleY =
-        (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] *
-         w->unk_1BC) >> 8;
+        (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] *
+         w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -421,69 +421,69 @@ s32 Gimmick_card_1(UnkStruct_0809A02C* w, void* a) {
         w->scaleY = 2;
     }
 
-    w->unk_1C7 += 2;
-    w->unk_1C2 = -0x1004 - (w->unk_3C >> 8) * 4;
+    w->flipAngleX += 2;
+    w->priority = -0x1004 - (w->posY >> 8) * 4;
     TaskPoolUpdate(&w->tasks);
 
-    n = w->unk_1C4;
+    n = w->timer;
 
     if (n > 359) {
-        *(u8*)&gCardBattleState->unk_0DC -= 1;
+        *(u8*)&gCardBattleState->gimmickCardCount -= 1;
         return 0;
     }
 
     t = n + 1;
-    w->unk_1C4 = t;
+    w->timer = t;
 
-    if (w->unk_1C4 > 279 && t % 4 == 0) {
-        w->unk_1CD ^= 1;
+    if (w->timer > 279 && t % 4 == 0) {
+        w->visible ^= 1;
     }
 
     return 1;
 }
-u8 func_0809AB2C(UnkStruct_0809A02C* w) {
+u8 FlyPickupCardToDeck(PickupCardWork* w) {
     s32 dx;
     s32 dy;
     u16 t;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         return 0;
     }
 
-    if (w->unk_1A8 < 0) {
-        dx = -w->unk_38;
-        dy = 0xA000 - w->unk_3C;
+    if (w->speed < 0) {
+        dx = -w->posX;
+        dy = 0xA000 - w->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->unk_1B0 = -dx;
-        w->unk_1B4 = -dy;
+        w->dirX = -dx;
+        w->dirY = -dy;
 
-        if (w->unk_1AC < 0x800) {
+        if (w->distance < 0x800) {
             if (w->cardId >= 655 && w->cardId <= 659) {
-                gCardBattleState->unk_0BC = w->cardId;
+                gCardBattleState->pickedGimmickCardId = w->cardId;
             } else {
-                gCardBattleState->unk_0B8 = w->cardId;
+                gCardBattleState->pickedFriendCardId = w->cardId;
             }
 
             return 0;
         }
     }
 
-    w->unk_38 += (w->unk_1B0 * w->unk_1A8) >> 8;
-    w->unk_3C += (w->unk_1B4 * w->unk_1A8) >> 8;
-    w->unk_1C9 += 32;
-    w->unk_1C8 += (64 - w->unk_1C8) >> 4;
-    w->unk_1C7 = 0;
-    w->unk_1AC = VectorLength2D(-w->unk_38, 0xA000 - w->unk_3C);
-    w->unk_1A8 -= w->unk_1A4;
+    w->posX += (w->dirX * w->speed) >> 8;
+    w->posY += (w->dirY * w->speed) >> 8;
+    w->angle += 32;
+    w->flipAngleY += (64 - w->flipAngleY) >> 4;
+    w->flipAngleX = 0;
+    w->distance = VectorLength2D(-w->posX, 0xA000 - w->posY);
+    w->speed -= w->unk_1A4;
     w->unk_1A4 += 2;
-    t = w->unk_1BC;
+    t = w->scale;
 
     if ((s16)t <= 255) {
-        w->unk_1BC = t + 3;
+        w->scale = t + 3;
     }
 
-    w->scaleX = (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
-    w->scaleY = (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
+    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
+    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -497,14 +497,14 @@ u8 func_0809AB2C(UnkStruct_0809A02C* w) {
     return 1;
 }
 
-u8 func_0809ACDC(UnkStruct_0809A02C* w) {
+u8 FlyHeartlessCardToPlayer(PickupCardWork* w) {
     s16 x;
     s16 y;
 
-    w->unk_1C9 += 32;
+    w->angle += 32;
     WorldToScreen(&x, &y, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    w->unk_38 += ((x << 8) - w->unk_38) >> 3;
-    w->unk_3C += ((y << 8) - w->unk_3C) >> 3;
+    w->posX += ((x << 8) - w->posX) >> 3;
+    w->posY += ((y << 8) - w->posY) >> 3;
     w->scaleX -= 10;
     w->scaleY -= 10;
 
@@ -515,35 +515,35 @@ u8 func_0809ACDC(UnkStruct_0809A02C* w) {
     return 1;
 }
 
-s32 func_0809AD60(UnkStruct_0809A02C* w, void* a) {
-    w->unk_1C4 += 1;
+s32 WaitHeartlessCardName(PickupCardWork* w, void* a) {
+    w->timer += 1;
 
-    if (w->unk_1C4 == 60) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809ACDC);
+    if (w->timer == 60) {
+        SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToPlayer);
     }
 
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
-s32 func_0809AD98(UnkStruct_0809A02C* w, void* a) {
+s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
     s32 dx = 0;
     s32 dy = 0;
     s32 v;
     u16 t;
 
-    if (w->unk_1A8 < 0) {
-        dx = 0x7800 - w->unk_38;
-        dy = 0x5000 - w->unk_3C;
+    if (w->speed < 0) {
+        dx = 0x7800 - w->posX;
+        dy = 0x5000 - w->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->unk_1B0 = -dx;
-        w->unk_1B4 = -dy;
+        w->dirX = -dx;
+        w->dirY = -dy;
 
-        if (w->unk_1AC < 0x800) {
-            w->unk_1C8 = 0;
-            w->unk_1C9 = 0;
-            w->unk_1C7 = 0;
-            w->unk_38 = 0x7800;
-            w->unk_3C = 0x5000;
+        if (w->distance < 0x800) {
+            w->flipAngleY = 0;
+            w->angle = 0;
+            w->flipAngleX = 0;
+            w->posX = 0x7800;
+            w->posY = 0x5000;
             *(u16*)&w->scaleX = v = 0x100;
             *(u16*)&w->scaleY = v;
 #ifdef VERSION_EU
@@ -551,29 +551,29 @@ s32 func_0809AD98(UnkStruct_0809A02C* w, void* a) {
 #else
             CreateCardNameDisplay(&w->tasks, gCardDefs[w->cardId].name);
 #endif
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0809AD60);
-            w->unk_1C4 = 0;
-            w->unk_1C2 = 50;
+            SetTaskUpdate(a, (TaskUpdateFunc)WaitHeartlessCardName);
+            w->timer = 0;
+            w->priority = 50;
             return 1;
         }
     }
 
-    w->unk_38 += (w->unk_1B0 * w->unk_1A8) >> 8;
-    w->unk_3C += (w->unk_1B4 * w->unk_1A8) >> 8;
-    w->unk_1C9 += 32;
-    w->unk_1C8 += (64 - w->unk_1C8) >> 4;
-    w->unk_1C7 = 0;
-    w->unk_1AC = VectorLength2D(0x7800 - w->unk_38, 0x5000 - w->unk_3C);
-    w->unk_1A8 -= w->unk_1A4;
+    w->posX += (w->dirX * w->speed) >> 8;
+    w->posY += (w->dirY * w->speed) >> 8;
+    w->angle += 32;
+    w->flipAngleY += (64 - w->flipAngleY) >> 4;
+    w->flipAngleX = 0;
+    w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
+    w->speed -= w->unk_1A4;
     w->unk_1A4 += 2;
-    t = w->unk_1BC;
+    t = w->scale;
 
     if ((s16)t <= 255) {
-        w->unk_1BC = t + 3;
+        w->scale = t + 3;
     }
 
-    w->scaleX = (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
-    w->scaleY = (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
+    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
+    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -586,59 +586,59 @@ s32 func_0809AD98(UnkStruct_0809A02C* w, void* a) {
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
-s32 Heartless_card_1(UnkStruct_0809A02C* w, void* a) {
+s32 Heartless_card_1(PickupCardWork* w, void* a) {
     s16 x;
     s16 y;
 
     w->unk_1A4 += 0x38;
-    w->unk_40 += w->unk_1A4;
-    w->unk_38 += (gSineTable[w->unk_1C6] * w->unk_1A8) >> 8;
-    w->unk_3C += (-gSineTable[w->unk_1C6 + 64] * w->unk_1A8) >> 8;
+    w->posZ += w->unk_1A4;
+    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
+    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
-    if (ClampBattlePosition(&w->unk_38, &w->unk_3C, -10, -10) != 0) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 0x70) + GetRandom() % 33;
+    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
+        w->moveAngle = (u8)(w->moveAngle + 0x70) + GetRandom() % 33;
     }
 
-    if (w->unk_40 - 0x800 > w->unk_44) {
-        w->unk_40 = w->unk_44 - 0x800;
+    if (w->posZ - 0x800 > w->floor) {
+        w->posZ = w->floor - 0x800;
         w->unk_1A4 = -((w->unk_1A4 * 204) >> 8);
-        w->unk_1C6 = GetAngle(w->unk_38, w->unk_3C, gBtlWork->actor->x, gBtlWork->actor->y);
-        w->unk_1C6 = (u8)(w->unk_1C6 + 0xE0) + GetRandom() % 65;
+        w->moveAngle = GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
+        w->moveAngle = (u8)(w->moveAngle + 0xE0) + GetRandom() % 65;
 
         if (w->unk_1A4 > -0x200) {
             w->unk_1A4 = -0x200;
         }
     }
 
-    if (gBtlWork->unk_0F4 == 6) {
+    if (gBtlWork->hcEffect == 6) {
         ColliderSetRadius(&w->collider, 50);
     } else {
         ColliderSetRadius(&w->collider, 10);
     }
 
-    if (func_0801C6D4(&w->unk_38, &w->unk_3C, &w->unk_40, &w->unk_44)) {
-        w->unk_1C6 = (u8)(w->unk_1C6 + 0x70) + GetRandom() % 33;
+    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ, &w->floor)) {
+        w->moveAngle = (u8)(w->moveAngle + 0x70) + GetRandom() % 33;
     }
 
-    if (w->collider.unk_2C != 0) {
+    if (w->collider.colliding != 0) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
-        w->unk_1C2 = 10;
+        w->priority = 10;
 #endif
-        func_08084458(w->cardId);
-        WorldToScreen(&x, &y, w->unk_38, w->unk_3C, w->unk_40);
-        w->unk_38 = x << 8;
-        w->unk_3C = y << 8;
-        w->unk_1CA = 1;
+        ObtainCard(w->cardId);
+        WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
+        w->posX = x << 8;
+        w->posY = y << 8;
+        w->screenSpace = 1;
         ColliderSetDisabled(&w->collider, 1);
-        func_0809A4E0(w, 1);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809AD98);
+        StartPickupCardFlight(w, 1);
+        SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToCenter);
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->unk_38, w->unk_3C, w->unk_40);
-    w->scaleX = (-gSineTable[((w->unk_1C7 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
-    w->scaleY = (-gSineTable[((w->unk_1C8 + 128) & 0xFF) + 64] * w->unk_1BC) >> 8;
+    ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
+    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
+    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
 
     if ((u16)(w->scaleX + 2) <= 4) {
         w->scaleX = 2;
@@ -648,109 +648,109 @@ s32 Heartless_card_1(UnkStruct_0809A02C* w, void* a) {
         w->scaleY = 2;
     }
 
-    w->unk_1C7 += 2;
-    w->unk_1C2 = -0x1004 - ((w->unk_3C >> 8) << 2);
+    w->flipAngleX += 2;
+    w->priority = -0x1004 - ((w->posY >> 8) << 2);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
-void func_0809B200(UnkStruct_0809A02C* w) {
+void PickupCardDraw(PickupCardWork* w) {
     s16 x;
     s16 y;
     ObjAffine* affine;
     s16 v;
     u8 kind;
 
-    if (w->unk_1CD != 0) {
-        if (w->unk_1CA == 0) {
-            w->unk_1D0 = GetBattleSpritePriorityFlags(w->unk_3C);
-            WorldToScreen(&x, &y, w->unk_38, w->unk_3C,
-                          w->unk_40);
+    if (w->visible != 0) {
+        if (w->screenSpace == 0) {
+            w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
+            WorldToScreen(&x, &y, w->posX, w->posY,
+                          w->posZ);
         } else {
-            w->unk_1D0 = 0;
-            x = w->unk_38 >> 8;
-            y = w->unk_3C >> 8;
+            w->spriteFlags = 0;
+            x = w->posX >> 8;
+            y = w->posY >> 8;
         }
 
-        affine = AllocObjAffine(w->unk_1C9, w->scaleX,
+        affine = AllocObjAffine(w->angle, w->scaleX,
                                 w->scaleY, 0);
         DrawSprite(x, (u16)y - 8,
-                   gUnk_08F709B0[w->cardDef->unk_2A].gfx,
-                   gCardBattleState->tiles[w->cardDef->unk_2A],
+                   gCardBacks[w->cardDef->category].gfx,
+                   gCardBattleState->tiles[w->cardDef->category],
                    w->palette, affine,
-                   w->unk_1D0, w->unk_1C2);
+                   w->spriteFlags, w->priority);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
-                   w->unk_1D0, (u16)(w->unk_1C2 + 1));
-        kind = w->cardDef->unk_20;
+                   w->spriteFlags, (u16)(w->priority + 1));
+        kind = w->cardDef->value;
         DrawSprite(x, (u16)y - 8, gUnk_09EE981C[kind],
                    w->tiles3, w->palette, affine,
-                   w->unk_1D0, (u16)(w->unk_1C2 - 2));
-        v = 204 - ((w->unk_44 - w->unk_40) >> 7);
+                   w->spriteFlags, (u16)(w->priority - 2));
+        v = 204 - ((w->floor - w->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        if (w->unk_1CA == 0) {
+        if (w->screenSpace == 0) {
             WorldToScreen(&w->x, &w->y,
-                          w->unk_38, w->unk_3C,
-                          w->unk_44);
+                          w->posX, w->posY,
+                          w->floor);
             DrawSprite(w->x, w->y,
                        gUnk_09EE1380[0], w->tiles4,
                        w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->unk_1D0, (u16)(w->unk_1C2 + 2));
+                       w->spriteFlags, (u16)(w->priority + 2));
         }
 
         TaskPoolDraw(&w->tasks);
     }
 }
-void Heartless_card_2(UnkStruct_0809A02C* w) {
+void Heartless_card_2(PickupCardWork* w) {
     s16 x;
     s16 y;
     ObjAffine* affine;
     s16 v;
 
-    if (w->unk_1CD != 0) {
-        if (w->unk_1CA == 0) {
-            w->unk_1D0 = GetBattleSpritePriorityFlags(w->unk_3C);
-            WorldToScreen(&x, &y, w->unk_38, w->unk_3C,
-                          w->unk_40);
+    if (w->visible != 0) {
+        if (w->screenSpace == 0) {
+            w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
+            WorldToScreen(&x, &y, w->posX, w->posY,
+                          w->posZ);
         } else {
-            w->unk_1D0 = 0;
-            x = w->unk_38 >> 8;
-            y = w->unk_3C >> 8;
+            w->spriteFlags = 0;
+            x = w->posX >> 8;
+            y = w->posY >> 8;
         }
 
-        affine = AllocObjAffine(w->unk_1C9, w->scaleX,
+        affine = AllocObjAffine(w->angle, w->scaleX,
                                 w->scaleY, 0);
         DrawSprite(x, (u16)y - 8,
-                   gUnk_08F709B0[w->cardDef->unk_2A].gfx,
+                   gCardBacks[w->cardDef->category].gfx,
                    w->tiles, w->palette, affine,
-                   w->unk_1D0, w->unk_1C2);
+                   w->spriteFlags, w->priority);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
-                   w->unk_1D0, (u16)(w->unk_1C2 + 1));
-        v = 204 - ((w->unk_44 - w->unk_40) >> 7);
+                   w->spriteFlags, (u16)(w->priority + 1));
+        v = 204 - ((w->floor - w->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        if (w->unk_1CA == 0) {
+        if (w->screenSpace == 0) {
             WorldToScreen(&w->x, &w->y,
-                          w->unk_38, w->unk_3C,
-                          w->unk_44);
+                          w->posX, w->posY,
+                          w->floor);
             DrawSprite(w->x, w->y,
                        gUnk_09EE1380[0], w->tiles4,
                        w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->unk_1D0, (u16)(w->unk_1C2 + 2));
+                       w->spriteFlags, (u16)(w->priority + 2));
         }
 
         TaskPoolDraw(&w->tasks);
     }
 }
 
-void func_0809B59C(UnkStruct_0809A02C* w) {
+void PickupCardDestroy(PickupCardWork* w) {
     ReleaseObjPalette(w->palette);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjPalette(w->palette2);
@@ -759,11 +759,11 @@ void func_0809B59C(UnkStruct_0809A02C* w) {
     ColliderUnregister(&w->collider);
     TaskPoolDestroy(&w->tasks);
     // @bug Leaving a battle frees gCardBattleState before this card is destroyed (NULL write).
-    gCardBattleState->unk_0D6 = 0;
+    gCardBattleState->friendCardCount = 0;
     gBtlWork->prizeCount--;
 }
 
-void Heartless_card_3(UnkStruct_0809A02C* w) {
+void Heartless_card_3(PickupCardWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
     ReleaseObjTiles(w->tiles2);
@@ -775,18 +775,18 @@ void Heartless_card_3(UnkStruct_0809A02C* w) {
     gBtlWork->prizeCount--;
 }
 
-void func_0809B644(void* pool, s16 x, s16 y, s16 z, u8 idx) {
+void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
     s32 args[4];
 
     if (gCardBattleState != 0) {
-        if (gCardBattleState->unk_0DA[0] <= 4) {
-            if (gCardBattleState->unk_0D6 == 0) {
+        if (gCardBattleState->addedFriendCards[0] <= 4) {
+            if (gCardBattleState->friendCardCount == 0) {
                 args[0] = (s16)x << 8;
                 args[1] = (s16)y << 8;
                 args[2] = (s16)z << 8;
-                args[3] = gUnk_09036210[idx] + GetRandom() % 9;
+                args[3] = gFriendCardIds[idx] + GetRandom() % 9;
                 TaskCreate(pool, &gTaskDescFriendCard, args);
-                gCardBattleState->unk_0D6++;
+                gCardBattleState->friendCardCount++;
             }
         }
     }
@@ -796,7 +796,7 @@ void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     s32 args[4];
     const s32* t;
 
-    t = gUnk_09EE275C[d];
+    t = gEnemyCardIds[d];
     args[0] = a << 8;
     args[1] = b << 8;
     args[2] = c << 8;
@@ -807,8 +807,8 @@ void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     s32 args[4];
 
-    if (gCardBattleState != 0 && gCardBattleState->unk_0DC == 0) {
-        gCardBattleState->unk_0DC++;
+    if (gCardBattleState != 0 && gCardBattleState->gimmickCardCount == 0) {
+        gCardBattleState->gimmickCardCount++;
         args[0] = (s16)a << 8;
         args[1] = (s16)b << 8;
         args[2] = (s16)c << 8;
@@ -817,7 +817,7 @@ void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     }
 }
 
-void func_0809B76C(StockNameWork* w, const s32* src) {
+void StockNameSora_0(StockNameWork* w, const s32* src) {
     u8 i;
     s32* dst;
     s32* q;
@@ -829,86 +829,86 @@ void func_0809B76C(StockNameWork* w, const s32* src) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = w->unk_18;
+            dst = w->stockNames;
             q = &dst[i];
             *q = s[i];
         }
 
-        w->unk_30 = 1;
+        w->cycling = 1;
     } else {
-        w->unk_30 = 0;
+        w->cycling = 0;
     }
 
     z = 0;
-    w->unk_11 = z;
+    w->stockNameIndex = z;
     w->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
     w->tiles = obj;
 
-    if (w->unk_30 == 0) {
+    if (w->cycling == 0) {
 #ifdef VERSION_EU
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C4].sprites);
-        u = LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C4].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gCardBattleState->unk_0C4].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].sprites);
+        u = LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[gCardBattleState->soraStockName].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gCardBattleState->unk_0C4].sprites[gUnk_08F7CF18[gCardBattleState->unk_0C4].spriteIndex], gUnk_08F7CF18[gCardBattleState->unk_0C4].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[gCardBattleState->soraStockName].sprites[gStockNameSprites[gCardBattleState->soraStockName].spriteIndex], gStockNameSprites[gCardBattleState->soraStockName].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[0]].sprites);
-        u = LANGSTR(gUnk_08F7CF18[w->unk_18[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[w->stockNames[0]].sprites);
+        u = LANGSTR(gStockNameSprites[w->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[w->stockNames[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[w->unk_18[0]].sprites[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], gUnk_08F7CF18[w->unk_18[0]].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[w->stockNames[0]].sprites[gStockNameSprites[w->stockNames[0]].spriteIndex], gStockNameSprites[w->stockNames[0]].tiles);
 #endif
     }
 
     w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->unk_31 = 1;
-    w->unk_14 = gCardBattleState->unk_0C4;
+    w->visible = 1;
+    w->stockName = gCardBattleState->soraStockName;
 }
 
-u8 func_0809B840(StockNameWork* w) {
+u8 StockNameSora_1(StockNameWork* w) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].sprites);
-    void* u = LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
+    void** t = (void**)LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites);
+    void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
 
-    if (gCardBattleState->unk_0E3 == 0 || gCardBattleState->unk_0C4 != w->unk_14) {
+    if (gCardBattleState->soraStockNameShown == 0 || gCardBattleState->soraStockName != w->stockName) {
         return 0;
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        w->unk_31 = 1;
+        w->visible = 1;
     } else {
-        w->unk_31 = 0;
+        w->visible = 0;
     }
 
-    if (w->unk_30 == 1 && w->unk_31 != 0) {
-        w->unk_11++;
+    if (w->cycling == 1 && w->visible != 0) {
+        w->stockNameIndex++;
 
-        if (w->unk_18[w->unk_11] == -1) {
-            w->unk_11 = 0;
+        if (w->stockNames[w->stockNameIndex] == -1) {
+            w->stockNameIndex = 0;
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles, t[gUnk_08F7CF18[w->unk_18[w->unk_11]].spriteIndex], u);
+        UpdateSpriteFrameTiles(w->tiles, t[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(w->tiles, gUnk_08F7CF18[w->unk_18[w->unk_11]].sprites[gUnk_08F7CF18[w->unk_18[w->unk_11]].spriteIndex], gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
+        UpdateSpriteFrameTiles(w->tiles, gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
     }
 
     return 1;
 }
 
-void func_0809B8F0(StockNameWork* w) {
-    if (w->unk_31 != 0) {
+void StockNameSora_2(StockNameWork* w) {
+    if (w->visible != 0) {
         DrawSprite(64, 14, 0, w->tiles, w->palette, 0,
 #ifdef VERSION_EU
                    0x410,
@@ -918,7 +918,7 @@ void func_0809B8F0(StockNameWork* w) {
                    10);
     }
 }
-void func_0809B920(StockNameWork* w, const s32* src) {
+void StockNameRiku_0(StockNameWork* w, const s32* src) {
     u8 i;
     s32* dst;
     s32* q;
@@ -930,105 +930,105 @@ void func_0809B920(StockNameWork* w, const s32* src) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = w->unk_18;
+            dst = w->stockNames;
             q = &dst[i];
             *q = s[i];
         }
 
-        w->unk_30 = 1;
+        w->cycling = 1;
     } else {
-        w->unk_30 = 0;
+        w->cycling = 0;
     }
 
     z = 0;
-    w->unk_11 = z;
+    w->stockNameIndex = z;
     w->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
     w->tiles = obj;
 
-    if (w->unk_30 == 0) {
+    if (w->cycling == 0) {
 #ifdef VERSION_EU
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C6].sprites);
-        u = LANGSTR(gUnk_08F7CF18[gCardBattleState->unk_0C6].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[gCardBattleState->unk_0C6].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].sprites);
+        u = LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[gCardBattleState->rikuStockName].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[gCardBattleState->unk_0C6].sprites[gUnk_08F7CF18[gCardBattleState->unk_0C6].spriteIndex], gUnk_08F7CF18[gCardBattleState->unk_0C6].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[gCardBattleState->rikuStockName].sprites[gStockNameSprites[gCardBattleState->rikuStockName].spriteIndex], gStockNameSprites[gCardBattleState->rikuStockName].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[0]].sprites);
-        u = LANGSTR(gUnk_08F7CF18[w->unk_18[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[w->stockNames[0]].sprites);
+        u = LANGSTR(gStockNameSprites[w->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[w->stockNames[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gUnk_08F7CF18[w->unk_18[0]].sprites[gUnk_08F7CF18[w->unk_18[0]].spriteIndex], gUnk_08F7CF18[w->unk_18[0]].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[w->stockNames[0]].sprites[gStockNameSprites[w->stockNames[0]].spriteIndex], gStockNameSprites[w->stockNames[0]].tiles);
 #endif
     }
 
     w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->unk_31 = 1;
-    w->unk_14 = gCardBattleState->unk_0C6;
+    w->visible = 1;
+    w->stockName = gCardBattleState->rikuStockName;
 }
 
-u8 func_0809B9F4(StockNameWork* w) {
+u8 StockNameRiku_1(StockNameWork* w) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].sprites);
-    void* u = LANGSTR(gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
+    void** t = (void**)LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites);
+    void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
 
-    if (gCardBattleState->unk_0E4 == 0 || gCardBattleState->unk_0C6 != w->unk_14) {
+    if (gCardBattleState->rikuStockNameShown == 0 || gCardBattleState->rikuStockName != w->stockName) {
         return 0;
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        w->unk_31 = 0;
+        w->visible = 0;
     } else {
-        w->unk_31 = 1;
+        w->visible = 1;
     }
 
-    if (w->unk_30 == 1 && w->unk_31 != 0) {
-        w->unk_11++;
+    if (w->cycling == 1 && w->visible != 0) {
+        w->stockNameIndex++;
 
-        if (w->unk_18[w->unk_11] == -1) {
-            w->unk_11 = 0;
+        if (w->stockNames[w->stockNameIndex] == -1) {
+            w->stockNameIndex = 0;
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles, t[gUnk_08F7CF18[w->unk_18[w->unk_11]].spriteIndex], u);
+        UpdateSpriteFrameTiles(w->tiles, t[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(w->tiles, gUnk_08F7CF18[w->unk_18[w->unk_11]].sprites[gUnk_08F7CF18[w->unk_18[w->unk_11]].spriteIndex], gUnk_08F7CF18[w->unk_18[w->unk_11]].tiles);
+        UpdateSpriteFrameTiles(w->tiles, gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
     }
 
     return 1;
 }
 
-void func_0809BAA4(StockNameWork* w) {
-    if (gRikuBtlWork->unk_0F4 != 28 && w->unk_31 != 0) {
+void StockNameRiku_2(StockNameWork* w) {
+    if (gRikuBtlWork->hcEffect != 28 && w->visible != 0) {
         DrawSprite(120, 14, 0, w->tiles, w->palette, 0, 0, 10);
     }
 }
-void func_0809BAE4(StockNameWork* w) {
+void StockNameRiku_3(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
     gCardBattleState->unk_0D9 = 0;
-    w->unk_31 = 0;
+    w->visible = 0;
     gCardBattleState->unk_0CA = 256;
 }
-void func_0809BB18(StockNameWork* w) {
+void StockNameSora_3(StockNameWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
     gCardBattleState->unk_0D8 = 0;
-    w->unk_31 = 0;
+    w->visible = 0;
     gCardBattleState->unk_0C8 = 256;
 }
 
-void func_0809BB4C(UnkStruct_0809BB4C* w) {
+void Premire_Chance_0(PremireChanceWork* w) {
     u8 n = 0;
     u8 i;
     s32 j;
@@ -1037,7 +1037,7 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
     u32 zero1;
     u32 zero2;
 
-    CpuSet(&zero0, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(UnkStruct_0809BB4C) / 4);
+    CpuSet(&zero0, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(PremireChanceWork) / 4);
     gCardListWork = EwramAlloc(sizeof(CardListWork));
     w->slots = EwramAlloc(sizeof(CardSlot) * 100);
     zero1 = 0;
@@ -1098,12 +1098,12 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
 #endif
         if (cards[i] != 0xFFFF) {
             if (!(gCardCollection[cards[i]] & 0x8000)) {
-                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].unk_2A != 3) {
-                    if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].unk_2A != 2) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 3) {
+                    if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 2) {
                         w->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
-                        w->slots[n].unk_04 = i;
+                        w->slots[n].index = i;
                         w->slots[n].unk_06 = n;
-                        w->slots[n].unk_07 = 0;
+                        w->slots[n].stocked = 0;
                         n++;
                     }
                 }
@@ -1117,12 +1117,12 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
         do {
             if (cards[j] != 0xFFFF) {
                 if (!(gCardCollection[cards[j]] & 0x8000)) {
-                    if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].unk_2A != 3) {
-                        if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].unk_2A != 2) {
+                    if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 3) {
+                        if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 2) {
                             w->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;
-                            w->slots[n].unk_04 = j;
+                            w->slots[n].index = j;
                             w->slots[n].unk_06 = n;
-                            w->slots[n].unk_07 = 0;
+                            w->slots[n].stocked = 0;
                             n++;
                         }
                     }
@@ -1137,98 +1137,98 @@ void func_0809BB4C(UnkStruct_0809BB4C* w) {
         } while (n < 10);
     }
 
-    w->unk_50 = n;
-    TaskPoolInit(&w->tasks, w->unk_50 + 1);
+    w->cardCount = n;
+    TaskPoolInit(&w->tasks, w->cardCount + 1);
     ListPoolInit(&gCardListWork->cards);
     gCardListWork->selectedCard = 0;
     gCardListWork->effectCount = 0;
     TaskPoolInit(&gCardListWork->effectTasks, 24);
-    func_0809C294(w);
-    w->unk_51 = 10;
-    w->unk_52 = 0;
-    w->unk_84 = 0;
-    w->unk_85 = 1;
-    w->unk_86 = 1;
+    CreatePremireChanceCardTasks(w);
+    w->spinDelay = 10;
+    w->advanced = 0;
+    w->stopped = 0;
+    w->inputEnabled = 1;
+    w->resultPending = 1;
     w->unk_87 = 0;
-    w->unk_8A = 0;
-    w->unk_8B = 16;
-    w->unk_8C = 16;
-    w->unk_30 = -0x80;
-    w->unk_34 = -0x800;
-    w->unk_38 = 0xA000;
+    w->stopTimer = 0;
+    w->titleSteps = 16;
+    w->slideSteps = 16;
+    w->titleX = -0x80;
+    w->topY = -0x800;
+    w->bottomY = 0xA000;
 }
 
-u8 func_0809BE80(UnkStruct_0809BB4C* w, void* a) {
-    UnkStruct_0809C534* n;
+u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
+    PremireChanceCardWork* n;
     s32 t;
     s32 z;
 
-    if (w->unk_85 != 0) {
-        if ((GetKeysPressed() & A_BUTTON) && w->unk_84 == 0) {
-            w->unk_84 = 1;
+    if (w->inputEnabled != 0) {
+        if ((GetKeysPressed() & A_BUTTON) && w->stopped == 0) {
+            w->stopped = 1;
             m4aSongNumStart(SONG_SYS_ITEMGET);
         }
 
-        if ((GetKeysPressed() & B_BUTTON) && w->unk_84 != 1) {
+        if ((GetKeysPressed() & B_BUTTON) && w->stopped != 1) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            w->unk_8B = 16;
-            w->unk_8C = 16;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0809C4B0);
-            n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
+            w->titleSteps = 16;
+            w->slideSteps = 16;
+            SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
+            n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
             while (n != 0) {
-                n->unk_55 |= 0xFF;
-                w->unk_86 = 0;
-                n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
+                n->state |= 0xFF;
+                w->resultPending = 0;
+                n = (PremireChanceCardWork*)ListPoolNext(&n->node);
             }
 
             TaskPoolUpdate(&w->tasks);
             TaskPoolUpdate(&gCardListWork->effectTasks);
             z = 0;
             w->unk_87 = 1;
-            w->unk_85 = z;
+            w->inputEnabled = z;
             return 1;
         }
     }
 
-    n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
+    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
-    if (w->unk_84 == 0) {
+    if (w->stopped == 0) {
         while (n != 0) {
-            t = n->unk_53;
+            t = n->steps;
 
             if (t == 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (n->unk_52 < w->unk_50 - 1) {
-                    n->unk_52++;
+                if (n->position < w->cardCount - 1) {
+                    n->position++;
                 } else {
-                    n->unk_52 = t;
+                    n->position = t;
                 }
 
-                n->unk_53 = w->unk_51;
-                w->unk_52 = 1;
+                n->steps = w->spinDelay;
+                w->advanced = 1;
             }
 
-            n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
+            n = (PremireChanceCardWork*)ListPoolNext(&n->node);
         }
     } else {
         w->unk_87 = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809C2D0);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceStop);
     }
 
-    if (w->unk_51 == 4 || w->unk_51 == 10) {
-        w->unk_85 = 1;
+    if (w->spinDelay == 4 || w->spinDelay == 10) {
+        w->inputEnabled = 1;
     } else {
-        w->unk_85 = 0;
+        w->inputEnabled = 0;
     }
 
-    if (w->unk_52 != 0) {
-        if (w->unk_51 > 4) {
-            w->unk_51--;
+    if (w->advanced != 0) {
+        if (w->spinDelay > 4) {
+            w->spinDelay--;
         }
 
-        w->unk_52 = 0;
+        w->advanced = 0;
     }
 
     w->gfx = AnimUpdate(&w->anim);
@@ -1238,27 +1238,27 @@ u8 func_0809BE80(UnkStruct_0809BB4C* w, void* a) {
     return 1;
 }
 
-u8 func_0809C078(UnkStruct_0809BB4C* w, void* a) {
+u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
     s32 v;
     u8* p;
-    UnkStruct_0809C534* n;
+    PremireChanceCardWork* n;
 
-    n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
+    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
-    if (n != 0 && n->unk_55 == 1) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809BE80);
+    if (n != 0 && n->state == 1) {
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
-    p = &w->unk_8C;
+    p = &w->slideSteps;
 
     if (*p != 0) {
-        ApproachValue(&w->unk_34, 0, *p);
-        ApproachValue(&w->unk_38, 0x9800, *p);
+        ApproachValue(&w->topY, 0, *p);
+        ApproachValue(&w->bottomY, 0x9800, *p);
     } else {
-        v = w->unk_30 << 8;
-        p = &w->unk_8B;
+        v = w->titleX << 8;
+        p = &w->titleSteps;
         ApproachValue(&v, 0, *p);
-        w->unk_30 = v >> 8;
+        w->titleX = v >> 8;
     }
 
     (*p)--;
@@ -1267,28 +1267,28 @@ u8 func_0809C078(UnkStruct_0809BB4C* w, void* a) {
     return 1;
 }
 
-void func_0809C110(UnkStruct_0809BB4C* w) {
+void Premire_Chance_2(PremireChanceWork* w) {
     if (w->unk_87 == 0) {
         DrawSprite(62, 50, w->gfx, w->tiles2, w->palette2, 0, 0, 0);
         DrawSprite(53, 64, w->gfx2, w->tiles3, w->palette3, 0, 0, 0);
     }
 
-    if (w->unk_85 != 0) {
+    if (w->inputEnabled != 0) {
         DrawSprite(88, 70, gUnk_09EE98EC[0], w->tiles4, w->palette4, 0, 0, 0);
     }
 
 #ifdef VERSION_EU
-    DrawSprite(w->unk_30, 0, gUnkEu_09F72BFC[gLanguage][0], w->tiles, w->palette, 0, 0, 0);
+    DrawSprite(w->titleX, 0, gPremireChanceTitles[gLanguage][0], w->tiles, w->palette, 0, 0, 0);
 #else
-    DrawSprite(w->unk_30, 0, gUnk_09EEA16C[0], w->tiles, w->palette, 0, 0, 0);
+    DrawSprite(w->titleX, 0, gUnk_09EEA16C[0], w->tiles, w->palette, 0, 0, 0);
 #endif
-    DrawSprite(120, w->unk_34 >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, 0, 0, 60);
-    DrawSprite(120, w->unk_38 >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, 0, 0, 60);
+    DrawSprite(120, w->topY >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, 0, 0, 60);
+    DrawSprite(120, w->bottomY >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, 0, 0, 60);
     TaskPoolDraw(&w->tasks);
     TaskPoolDraw(&gCardListWork->effectTasks);
 }
 
-void func_0809C1EC(UnkStruct_0809BB4C* w) {
+void Premire_Chance_3(PremireChanceWork* w) {
     TaskPoolDestroy(&gCardListWork->effectTasks);
     EwramFree(w->slots);
     EwramFree(gCardListWork);
@@ -1305,50 +1305,50 @@ void func_0809C1EC(UnkStruct_0809BB4C* w) {
     ReleaseObjPalette(w->palette3);
     ReleaseObjPalette(w->palette4);
     ReleaseObjPalette(w->palette);
-    func_0800FDD0(0xF5);
+    SetJiminyFlag(0xF5);
     TaskPoolDestroy(&w->tasks);
 }
 
-void func_0809C294(UnkStruct_0809BB4C* w) {
+void CreatePremireChanceCardTasks(PremireChanceWork* w) {
     u8 i;
 
-    for (i = 0; i < w->unk_50; i++) {
+    for (i = 0; i < w->cardCount; i++) {
         w->slots[i].unk_06 = i;
-        TaskCreate(&w->tasks, &gUnk_09EE781C, &w->slots[i]);
+        TaskCreate(&w->tasks, &gTaskDescPremireChanceCard, &w->slots[i]);
     }
 }
-u8 func_0809C2D0(UnkStruct_0809BB4C* w, void* a) {
-    UnkStruct_0809C534* n;
+u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
+    PremireChanceCardWork* n;
     TaskPool* pool;
     u8 z;
     u8 t;
     u8* q;
 
-    n = (UnkStruct_0809C534*)ListPoolFirst(&gCardListWork->cards);
+    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
     w->gfx = AnimUpdate(&w->anim);
     w->gfx2 = AnimUpdate(&w->anim2);
-    w->unk_51 = 0;
-    w->unk_8A++;
-    w->unk_85 = 0;
+    w->spinDelay = 0;
+    w->stopTimer++;
+    w->inputEnabled = 0;
 
-    if (w->unk_86 != 0) {
+    if (w->resultPending != 0) {
         while (n != 0) {
-            if (n->unk_53 == 0) {
-                if (n->unk_52 == 3) {
-                    n->unk_55 = 2;
-                    ConvertActiveDeckCardToPremium(n->unk_48);
+            if (n->steps == 0) {
+                if (n->position == 3) {
+                    n->state = 2;
+                    ConvertActiveDeckCardToPremium(n->deckIndex);
                 } else {
-                    n->unk_55 = 3;
+                    n->state = 3;
                 }
 
-                w->unk_86 = 0;
+                w->resultPending = 0;
             }
 
-            n = (UnkStruct_0809C534*)ListPoolNext(&n->node);
+            n = (PremireChanceCardWork*)ListPoolNext(&n->node);
         }
     }
 
-    t = w->unk_8A;
+    t = w->stopTimer;
     pool = &w->tasks;
 
     if (t == 30) {
@@ -1357,9 +1357,9 @@ u8 func_0809C2D0(UnkStruct_0809BB4C* w, void* a) {
         *q = 1;
         SetBgPriority(2, 0);
         BgAnimInit(2, 0x8000, 0x80);
-        BgAnimStart(&gUnk_09EDA9A8, 120, 60);
-        w->unk_88 = BgAnimGetDuration(&gUnk_09EDA9A8);
-        w->unk_89 = z;
+        BgAnimStart(&gBgAnimDefPremireChance, 120, 60);
+        w->bgAnimDuration = BgAnimGetDuration(&gBgAnimDefPremireChance);
+        w->resultTimer = z;
         gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         gBldAlpha = 0x1010;
         BgAnimUpdate();
@@ -1370,7 +1370,7 @@ u8 func_0809C2D0(UnkStruct_0809BB4C* w, void* a) {
         FadeSetPaletteExcluded(14, 1);
         FadeSetPaletteExcluded(15, 1);
         TaskCreate(pool, &gTaskDescCardName, 0);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809C448);
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceResult);
     }
 
     TaskPoolUpdate(pool);
@@ -1378,7 +1378,7 @@ u8 func_0809C2D0(UnkStruct_0809BB4C* w, void* a) {
     return 1;
 }
 
-u8 func_0809C448(UnkStruct_0809BB4C* w, void* a) {
+u8 UpdatePremireChanceResult(PremireChanceWork* w, void* a) {
     ListPoolFirst(&gCardListWork->cards);
     BgAnimUpdate();
     w->gfx = AnimUpdate(&w->anim);
@@ -1388,42 +1388,42 @@ u8 func_0809C448(UnkStruct_0809BB4C* w, void* a) {
 
     if ((GetKeysPressed() & A_BUTTON)
 #ifdef VERSION_EU
-        && w->unk_89 > 8
+        && w->resultTimer > 8
 #endif
     ) {
-        w->unk_8B = 16;
-        w->unk_8C = 16;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0809C4B0);
+        w->titleSteps = 16;
+        w->slideSteps = 16;
+        SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
     }
 
 #ifdef VERSION_EU
-    if (w->unk_89 <= 254) {
-        w->unk_89++;
+    if (w->resultTimer <= 254) {
+        w->resultTimer++;
     }
 #endif
 
     return 1;
 }
 
-u8 func_0809C4B0(UnkStruct_0809BB4C* w, void* a) {
+u8 UpdatePremireChanceClose(PremireChanceWork* w, void* a) {
     s32 v;
     u8* p;
 
-    p = &w->unk_8B;
+    p = &w->titleSteps;
 
     if (*p != 0) {
-        v = w->unk_30 << 8;
+        v = w->titleX << 8;
         ApproachValue(&v, -0x8000, *p);
-        w->unk_30 = v >> 8;
+        w->titleX = v >> 8;
     } else {
-        p = &w->unk_8C;
+        p = &w->slideSteps;
 
         if (*p == 0) {
             return 0;
         }
 
-        ApproachValue(&w->unk_34, -0x800, *p);
-        ApproachValue(&w->unk_38, 0xA000, *p);
+        ApproachValue(&w->topY, -0x800, *p);
+        ApproachValue(&w->bottomY, 0xA000, *p);
     }
 
     (*p)--;
@@ -1432,16 +1432,16 @@ u8 func_0809C4B0(UnkStruct_0809BB4C* w, void* a) {
     return 1;
 }
 
-struct UnkStruct_0809BB4C;
-void func_0809BB4C(struct UnkStruct_0809BB4C* w);
+struct PremireChanceWork;
+void Premire_Chance_0(struct PremireChanceWork* w);
 
 TaskDesc gTaskDescFriendCard = {
     "Friend card",
     (TaskInitFunc)Friend_card_0,
     (TaskUpdateFunc)Friend_card_1,
-    (TaskDrawFunc)func_0809B200,
-    (TaskDestroyFunc)func_0809B59C,
-    sizeof(UnkStruct_0809A02C),
+    (TaskDrawFunc)PickupCardDraw,
+    (TaskDestroyFunc)PickupCardDestroy,
+    sizeof(PickupCardWork),
 };
 
 TaskDesc gTaskDescHeartlessCard = {
@@ -1450,44 +1450,44 @@ TaskDesc gTaskDescHeartlessCard = {
     (TaskUpdateFunc)Heartless_card_1,
     (TaskDrawFunc)Heartless_card_2,
     (TaskDestroyFunc)Heartless_card_3,
-    sizeof(UnkStruct_0809A02C),
+    sizeof(PickupCardWork),
 };
 
 TaskDesc gTaskDescGimmickCard = {
     "Gimmick card",
     (TaskInitFunc)Gimmick_card_0,
     (TaskUpdateFunc)Gimmick_card_1,
-    (TaskDrawFunc)func_0809B200,
-    (TaskDestroyFunc)func_0809B59C,
-    sizeof(UnkStruct_0809A02C),
+    (TaskDrawFunc)PickupCardDraw,
+    (TaskDestroyFunc)PickupCardDestroy,
+    sizeof(PickupCardWork),
 };
 
-TaskDesc gUnk_09EE77D4 = {
+TaskDesc gTaskDescStockNameSora = {
     "StockName",
-    (TaskInitFunc)func_0809B76C,
-    (TaskUpdateFunc)func_0809B840,
-    (TaskDrawFunc)func_0809B8F0,
-    (TaskDestroyFunc)func_0809BB18,
+    (TaskInitFunc)StockNameSora_0,
+    (TaskUpdateFunc)StockNameSora_1,
+    (TaskDrawFunc)StockNameSora_2,
+    (TaskDestroyFunc)StockNameSora_3,
     sizeof(StockNameWork),
 };
 
-TaskDesc gUnk_09EE77EC = {
+TaskDesc gTaskDescStockNameRiku = {
     "StockName",
-    (TaskInitFunc)func_0809B920,
-    (TaskUpdateFunc)func_0809B9F4,
-    (TaskDrawFunc)func_0809BAA4,
-    (TaskDestroyFunc)func_0809BAE4,
+    (TaskInitFunc)StockNameRiku_0,
+    (TaskUpdateFunc)StockNameRiku_1,
+    (TaskDrawFunc)StockNameRiku_2,
+    (TaskDestroyFunc)StockNameRiku_3,
     sizeof(StockNameWork),
 };
 #ifdef VERSION_EU
-void** gUnkEu_09F72BFC[5] = { gUnk_09EEA16C, &gUnkEu_09F75FB4, &gUnkEu_09F75FCC, &gUnkEu_09F75FC4, &gUnkEu_09F75FBC };
+void** gPremireChanceTitles[5] = { gUnk_09EEA16C, &gUnkEu_09F75FB4, &gUnkEu_09F75FCC, &gUnkEu_09F75FC4, &gUnkEu_09F75FBC };
 #endif
 
-TaskDesc gUnk_09EE7804 = {
+TaskDesc gTaskDescPremireChance = {
     "Premire Chance",
-    (TaskInitFunc)func_0809BB4C,
-    (TaskUpdateFunc)func_0809C078,
-    (TaskDrawFunc)func_0809C110,
-    (TaskDestroyFunc)func_0809C1EC,
-    sizeof(UnkStruct_0809BB4C),
+    (TaskInitFunc)Premire_Chance_0,
+    (TaskUpdateFunc)Premire_Chance_1,
+    (TaskDrawFunc)Premire_Chance_2,
+    (TaskDestroyFunc)Premire_Chance_3,
+    sizeof(PremireChanceWork),
 };

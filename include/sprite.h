@@ -33,8 +33,8 @@ struct SpriteWork {
     u16 sortLo;
     ObjAffine affine[32];
     u16 affineCount;
-    u8 unk_2BAE;
-    u8 unk_2BAF;
+    u8 oamUpdatesPaused;
+    u8 mosaicEnabled;
 };
 
 typedef char SpriteWork_size[(sizeof(SpriteWork) == 0x2BB0) ? 1 : -1];

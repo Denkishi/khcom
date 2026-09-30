@@ -68,7 +68,7 @@ void eu_08005ADC(s32 bg);
 struct BgWork;
 struct FadeWork;
 
-extern u16 gUnk_030074CC;
+extern u16 gLastBackdropColor;
 extern u8 gBgPaletteBank[4];
 extern struct BgWork* gBgWork;
 extern u16 gBackdropColor;

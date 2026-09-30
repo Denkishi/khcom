@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-extern const s32* gUnk_09EE275C[];
-extern const u8 gUnk_08F7DAC4[];
+extern const s32* gEnemyCardIds[];
+extern const u8 gEnemyCardCounts[];
 
 #endif

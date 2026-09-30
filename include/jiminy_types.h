@@ -26,8 +26,8 @@ typedef char JiminyLocalizedText_size[(sizeof(JiminyLocalizedText) == 32) ? 1 : 
 #endif
 
 typedef struct JiminyPair {
-    u16 unk_00;
-    u16 unk_02;
+    u16 cursor;
+    u16 cursorRow;
 } JiminyPair;
 
 typedef struct JiminyDetail {
@@ -67,7 +67,7 @@ typedef struct JiminyEntry {
 } JiminyEntry;
 
 typedef struct JiminyWork {
-    s32 unk_000;
+    s32 state;
     void* tiles;
     ObjPalette* palette;
     void* tiles2;
@@ -85,8 +85,8 @@ typedef struct JiminyWork {
     ObjPalette* palette8;
     void* tiles8;
     ObjPalette* palette9;
-    s16 unk_048;
-    s16 unk_04A;
+    s16 stateTimer;
+    s16 steps;
     s32 x3;
     s32 y3;
     s32 y4;
@@ -94,43 +94,43 @@ typedef struct JiminyWork {
     s32 y5;
     JiminyLine lines[8];
     u8 textSlotCounts[8];
-    u8 unk_C68[8];
-    u8 unk_C70;
-    u8 unk_C71;
-    s16 unk_C72;
-    s16 unk_C74;
-    s16 unk_C76;
-    s16 unk_C78;
+    u8 rowStates[8];
+    u8 shownChars;
+    u8 charCount;
+    s16 cursor;
+    s16 cursorRow;
+    s16 itemCount;
+    s16 visibleRows;
     u8 unk_C7A[0x02];
     AnimState anim;
     AnimState anim2;
     u16 flags;
-    s16 unk_CAE;
-    s16 unk_CB0;
-    s16 unk_CB2;
-    u16** unk_CB4;
-    const u16* unk_CB8;
-    const u16* unk_CBC;
-    s16 unk_CC0;
+    s16 listX;
+    s16 listY;
+    s16 rowHeight;
+    u16** itemTexts;
+    const u16* itemFlags;
+    const u16* itemChildren;
+    s16 moveDelay;
     s16 x;
     s16 y;
     s16 x2;
     s16 y2;
     u8 unk_CCA[0x02];
     JiminyDetail* detail;
-    u16 unk_CD0;
-    s16 unk_CD2;
-    s16 unk_CD4;
-    s16 unk_CD6;
+    u16 detailCount;
+    s16 detailIndex;
+    s16 nextDetail;
+    s16 prevDetail;
     JiminyPair pairs[21];
-    s32 unk_D2C;
+    s32 entry;
     u32 unk_D30;
-    s32 unk_D34;
+    s32 detailTable;
     s32 unk_D38;
     u16 unk_D3C;
-    u16 unk_D3E;
+    u16 frame;
 #ifdef VERSION_EU
-    u16* unk_D40[100];
+    u16* resolvedTexts[100];
 #endif
 } JiminyWork;
 

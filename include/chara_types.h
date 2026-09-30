@@ -4,57 +4,57 @@
 #include "types.h"
 
 typedef struct CharaObjParam {
-    u32 unk_00;
-    u16 unk_04;
+    u32 tilesAddr;
+    u16 tileCount;
     u8 unk_06[0x02];
-    u32 unk_08;
-    u16 unk_0C;
+    u32 tilesAddr2;
+    u16 tileCount2;
     u8 unk_0E[0x02];
-    u32 unk_10;
-    u16 unk_14;
+    u32 tilesAddr3;
+    u16 tileCount3;
     u8 unk_16[0x02];
-    u32 unk_18;
-    u16 unk_1C;
+    u32 paletteAddr;
+    u16 paletteSize;
     u8 unk_1E[0x02];
-    u32 unk_20;
-    u16 unk_24;
+    u32 tilesAddr4;
+    u16 tileCount4;
     u8 unk_26[0x02];
-    u32 unk_28;
-    u16 unk_2C;
+    u32 paletteAddr2;
+    u16 paletteSize2;
     u8 unk_2E[0x02];
-    u32 unk_30;
-    u32 unk_34;
-    u32 unk_38;
-    void (*unk_3C)(void);
-    struct BtlObj* unk_40;
-    u16 unk_44;
+    u32 x;
+    u32 y;
+    u32 z;
+    void (*callback)(void);
+    struct BtlObj* prizeObj;
+    u16 flags;
 } CharaObjParam;
 
 typedef struct CharaObjParam2 {
-    u32 unk_00;
-    u16 unk_04;
+    u32 tilesAddr;
+    u16 tileCount;
     u8 unk_06[0x02];
-    u32 unk_08;
-    u16 unk_0C;
+    u32 paletteAddr;
+    u16 paletteSize;
     u8 unk_0E[0x02];
-    u32 unk_10;
-    u32 unk_14;
-    u32 unk_18;
-    void (*unk_1C)(void);
-    struct BtlObj* unk_20;
+    u32 x;
+    u32 y;
+    u32 z;
+    void (*callback)(void);
+    struct BtlObj* prizeObj;
 } CharaObjParam2;
 
 typedef struct CharaLinkData {
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
-    u16 unk_08;
-    u16 unk_0A;
-    u64 unk_0C;
-    u64 unk_14;
-    u16 unk_1C;
-    u16 unk_1E;
+    u16 hp;
+    u16 maxHp;
+    u16 level;
+    u16 winCount;
+    u16 loseCount;
+    u16 ap;
+    u64 learnedStocks;
+    u64 learnedStocks2;
+    u16 worldFlags;
+    u16 seed;
 } CharaLinkData;
 
 #endif

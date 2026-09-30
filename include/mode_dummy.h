@@ -17,13 +17,13 @@
 typedef struct DummyEntry {
     const char* name;
     const char* desc;
-    u16 unk_08;
+    u16 action;
 } DummyEntry;
 
 extern const DummyEntry gDummyEntries[];
 
 void mode_dummy_0(u32 arg);
-void func_0800C064(void);
+void DummyUpdateExit(void);
 void mode_dummy_1(void);
 void mode_dummy_2(void);
 

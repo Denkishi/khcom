@@ -137,13 +137,13 @@ void SpriteReset(void) {
     gSpriteWork->affineCount = 0;
     gSpriteWork->sortLo = 0;
     SetObjMosaicSize(0, 0);
-    gSpriteWork->unk_2BAE = 0;
-    gSpriteWork->unk_2BAF = 0;
+    gSpriteWork->oamUpdatesPaused = 0;
+    gSpriteWork->mosaicEnabled = 0;
     SetObjTileRange(0, 0x400);
     SetObjPaletteRange(0, 0x10);
 }
 
-u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
     if (e != 0 && c != 0) {

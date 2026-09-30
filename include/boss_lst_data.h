@@ -4,8 +4,8 @@
 #include "types.h"
 
 typedef struct LstAnimSet {
-    u16 unk_00;
-    u16 unk_02;
+    u16 idleAnim;
+    u16 chargeAnim;
     u16 unk_04;
     u16 unk_06;
 } LstAnimSet;
@@ -13,7 +13,7 @@ typedef struct LstAnimSet {
 extern const s8 gUnk_09A4FBF4[];
 extern const s8 gUnk_09A4FC15[];
 
-extern const s32 gUnk_09A4FC20[];
+extern const s32 gBosLstFldFadeLevels[];
 extern const s32 gUnk_09A4FD20;
 
 #endif

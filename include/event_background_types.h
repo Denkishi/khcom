@@ -17,13 +17,13 @@ typedef struct EventBackgroundDef {
     u16 paletteSize;
     u8 mapWidth;
     u8 mapHeight;
-    s32 unk_20;
-    u8 unk_24;
+    s32 mapAnim;
+    u8 isAffine;
     u8 unk_25[3];
     struct EventMapObjectDef* mapObjects;
-    u8 unk_2C;
+    u8 groundType;
     u8 flags;
-    u8 unk_2E[2];
+    u8 compression[2];
 } EventBackgroundDef;
 
 #endif

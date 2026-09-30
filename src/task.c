@@ -64,31 +64,31 @@ void UpdatePlayTime(void) {
     }
 }
 
-void func_0801CCB4(void) {
-    func_080DFAF4(0, 0);
+void SetupRikuNewGame(void) {
+    InitStartFloor(0, 0);
     gGameState.progression.unk_82 = 0xE7FF;
-    gGameState.progression.unk_84 = 0x80;
-    _08085D04(0);
+    gGameState.progression.friendFlags = 0x80;
+    InitRikuDeckForWorld(0);
     gGameState.flags |= 8;
     gGameState.flags |= 0x100;
-    func_0800FDD0(0);
-    func_0800FDD0(0x15);
-    func_0800FDD0(0xED);
-    func_0800FDD0(0x11);
-    func_0800FDD0(0x16);
-    func_0800FDD0(0xEF);
-    func_0800FDD0(0xF3);
+    SetJiminyFlag(0);
+    SetJiminyFlag(0x15);
+    SetJiminyFlag(0xED);
+    SetJiminyFlag(0x11);
+    SetJiminyFlag(0x16);
+    SetJiminyFlag(0xEF);
+    SetJiminyFlag(0xF3);
 }
 
-void func_0801CD20(void) {
-    gGameState.progression.unk_84 = 3;
-    func_08085C3C();
+void SetupSoraNewGame(void) {
+    gGameState.progression.friendFlags = 3;
+    InitSoraDecks();
     gGameState.flags &= ~8;
-    func_0800FDD0(0x11);
-    func_0800FDD0(0x12);
-    func_0800FDD0(0x13);
-    func_0800FDD0(0x14);
-    func_0800FDD0(0x15);
-    func_0800FDD0(0x16);
-    func_080DFAF4(0, 10);
+    SetJiminyFlag(0x11);
+    SetJiminyFlag(0x12);
+    SetJiminyFlag(0x13);
+    SetJiminyFlag(0x14);
+    SetJiminyFlag(0x15);
+    SetJiminyFlag(0x16);
+    InitStartFloor(0, 10);
 }

@@ -14,7 +14,7 @@
 #include "types.h"
 #include "system_state.h"
 
-u16 gUnk_030074CC IWRAM_DATA(4);
+u16 gLastBackdropColor IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);
 struct BgWork* gBgWork IWRAM_DATA(4);
 u16 gBackdropColor IWRAM_DATA(4);
@@ -93,12 +93,12 @@ const u8 sBgHeapName[] = "BG";
 
 const u8 sFadeHeapName[8] = "FADE";
 
-u32 gUnk_0203401C;
-u32 gUnk_02034020;
-u16 gUnk_02034024;
+u32 gMosaicSize;
+u32 gMosaicTarget;
+u16 gMosaicTimer;
 u8 gMosaicActive;
 
-u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
     SpriteWork* w;
     u16 n;
@@ -140,7 +140,7 @@ u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g,
     w->entryCount += 1;
     return 1;
 }
-u8 func_080022D4(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
+u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
     if (e == 0 || ((ObjTiles*)obj)->src == 0) {
@@ -165,17 +165,17 @@ u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u1
     if (gSpriteWork->entryCount <= 127 && obj != 0) {
         switch (((ObjTiles*)obj)->type) {
         case 0:
-            return func_08002060((s16)x, (s16)y, c, obj, e, f, g, h);
+            return DrawSpriteSharedTiles((s16)x, (s16)y, c, obj, e, f, g, h);
         case 1:
-            return func_0800216C((s16)x, (s16)y, c, obj, e, f, g, h);
+            return DrawSpriteAllocatedTiles((s16)x, (s16)y, c, obj, e, f, g, h);
         case 2:
-            return func_080022D4((s16)x, (s16)y, obj, e, f, g, h);
+            return DrawSpriteFrameTiles((s16)x, (s16)y, obj, e, f, g, h);
         }
     }
     return 0;
 }
 
-void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
+void DrawSpriteUnsorted(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
     SpriteWork* p;
     u32 z;
 
@@ -197,7 +197,7 @@ void func_08002488(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
     p->sortLo += 1;
 }
 
-void func_08002594(u16 a, u16 b, void* c, void* d, void* e, ObjAffine* f, u16 g) {
+void DrawSpriteUnsortedAffine(u16 a, u16 b, void* c, void* d, void* e, ObjAffine* f, u16 g) {
     SpriteWork* p;
     u32 z;
 
@@ -647,7 +647,7 @@ static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
 
 #undef ENGINE_SET_SQUARE_SIZE
 
-void func_08002F50(void) {
+void UpdateSpriteOam(void) {
     SpriteEntry** entries;
     SpriteEntry* entry;
     ObjAffine* affine;
@@ -677,7 +677,7 @@ void func_08002F50(void) {
     u32 flags;
     s16 yMask = 255;
 
-    if (gSpriteWork->unk_2BAE != 0) {
+    if (gSpriteWork->oamUpdatesPaused != 0) {
         return;
     }
     oam = (u16*)0x07000000;
@@ -697,7 +697,7 @@ void func_08002F50(void) {
     oam = (u16*)0x07000000;
     count = gSpriteWork->entryCount;
     entries = gSpriteWork->sortPtrs;
-    mosaic = gSpriteWork->unk_2BAF;
+    mosaic = gSpriteWork->mosaicEnabled;
     for (i = 0; i < count; i++) {
         entry = entries[i];
         parts = entry->sprite;
@@ -800,7 +800,7 @@ void func_08002F50(void) {
 }
 
 void SetSpriteMosaicEnabled(u8 a) {
-    gSpriteWork->unk_2BAF = a;
+    gSpriteWork->mosaicEnabled = a;
 }
 
 void SetObjMosaicSize(u8 a, u8 b) {
@@ -810,7 +810,7 @@ void SetObjMosaicSize(u8 a, u8 b) {
 }
 
 void SetSpriteOamUpdatesPaused(u8 a) {
-    gSpriteWork->unk_2BAE = a;
+    gSpriteWork->oamUpdatesPaused = a;
 }
 
 u16 GetMaxSpriteTileBytes(void** a, u16 n) {
@@ -877,7 +877,7 @@ u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d) {
     return 0;
 }
 
-u8 func_08003620(u16* oam, s16 x, s16 y) {
+u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
     u16 i;
     u16 n;
     u16 attr0;
@@ -1482,7 +1482,7 @@ void VTransReset(void) {
     q->callbackCount = 0;
     q->count = 0;
 #ifdef VERSION_EU
-    q->unk_10AA = 0;
+    q->lz77RequestCount = 0;
 #endif
     q->transferredBytes = 0;
 }
@@ -1520,15 +1520,15 @@ void LZ77UnCompVram(void* src, void* dst);
 u8 eu_080044C0(void* src, void* dst) {
     Dma3Queue* q = gDma3Requests;
     u16 flags;
-    if (q->unk_10AA > 31) {
+    if (q->lz77RequestCount > 31) {
         return 0;
     }
     flags = gSystemFlags & 8;
     if (flags == 0) {
-        q->unkEu_10A0[q->unk_10AA].src = src;
-        q->unkEu_10A0[q->unk_10AA].dst = dst;
-        q->unkEu_10A0[q->unk_10AA].size = flags;
-        q->unk_10AA++;
+        q->lz77Requests[q->lz77RequestCount].src = src;
+        q->lz77Requests[q->lz77RequestCount].dst = dst;
+        q->lz77Requests[q->lz77RequestCount].size = flags;
+        q->lz77RequestCount++;
     } else {
         LZ77UnCompVram(src, dst);
     }
@@ -1629,7 +1629,7 @@ void FlushDma3Queue(void) {
     cb = (void (**)(void))q->callbacks;
     pend = q->pending;
 #ifdef VERSION_EU
-    compressed = q->unkEu_10A0;
+    compressed = q->lz77Requests;
 #endif
     q->transferredBytes = 0;
     n = q->callbackCount;
@@ -1650,11 +1650,11 @@ void FlushDma3Queue(void) {
     }
     gDma3Requests->requestCount = 0;
 #ifdef VERSION_EU
-    n = gDma3Requests->unk_10AA;
+    n = gDma3Requests->lz77RequestCount;
     for (i = 0; i < n; i++) {
         LZ77UnCompVram(compressed[i].src, compressed[i].dst);
     }
-    gDma3Requests->unk_10AA = 0;
+    gDma3Requests->lz77RequestCount = 0;
 #endif
     n = gDma3Requests->fillCount;
 
@@ -1736,7 +1736,7 @@ void FlushDma3QueueWithCpu(void) {
     cb = (void (**)(void))q->callbacks;
     pend = q->pending;
 #ifdef VERSION_EU
-    compressed = q->unkEu_10A0;
+    compressed = q->lz77Requests;
 #endif
     q->transferredBytes = 0;
     n = q->callbackCount;
@@ -1761,7 +1761,7 @@ void FlushDma3QueueWithCpu(void) {
     }
     gDma3Requests->requestCount = 0;
 #ifdef VERSION_EU
-    n = gDma3Requests->unk_10AA;
+    n = gDma3Requests->lz77RequestCount;
     if (n != 0) {
         currentCompressed = compressed;
         i = n;
@@ -1770,7 +1770,7 @@ void FlushDma3QueueWithCpu(void) {
             currentCompressed++;
         } while (--i);
     }
-    gDma3Requests->unk_10AA = 0;
+    gDma3Requests->lz77RequestCount = 0;
 #endif
     n = gDma3Requests->fillCount;
 
@@ -2308,8 +2308,8 @@ void SetBackdropColor(u32 r, u32 g, u32 b) {
 
     green &= 0x1F;
     blue &= 0x1F;
-    gUnk_030074CC = (blue << 10) | (green << 5) | (red & 0x1F);
-    gBackdropColor = gUnk_030074CC;
+    gLastBackdropColor = (blue << 10) | (green << 5) | (red & 0x1F);
+    gBackdropColor = gLastBackdropColor;
 }
 
 void SetBgBlend(s32 a, u16 b, u16 c) {
@@ -2362,23 +2362,23 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
         return 0;
     }
     e = &gBgWork->entries[bg];
-    if (e->unkEu_10 != 0) {
+    if (e->decompressedMap != 0) {
         return 0;
     }
     count = w * h;
-    e->unkEu_10 = EwramAlloc(count * sizeof(void*));
-    if (e->unkEu_10 == 0) {
+    e->decompressedMap = EwramAlloc(count * sizeof(void*));
+    if (e->decompressedMap == 0) {
         return 0;
     }
     for (i = 0; i < count; i++) {
-        e->unkEu_10[i] = EwramAlloc(eu_08005A14(((u32**)src)[i]));
-        if (e->unkEu_10[i] == 0) {
+        e->decompressedMap[i] = EwramAlloc(eu_08005A14(((u32**)src)[i]));
+        if (e->decompressedMap[i] == 0) {
             return 0;
         }
-        LZ77UnCompWram(((u32**)src)[i], e->unkEu_10[i]);
+        LZ77UnCompWram(((u32**)src)[i], e->decompressedMap[i]);
     }
     EnableBg(bg);
-    e->map = e->unkEu_10;
+    e->map = e->decompressedMap;
     e->width = w;
     e->height = h;
     e->x = 0;
@@ -2391,13 +2391,13 @@ void eu_08005ADC(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
     s32 count;
     s32 i;
-    if (e->unkEu_10 != 0) {
+    if (e->decompressedMap != 0) {
         count = e->width * e->height;
         for (i = 0; i < count; i++) {
-            EwramFree(e->unkEu_10[i]);
+            EwramFree(e->decompressedMap[i]);
         }
-        EwramFree(e->unkEu_10);
-        e->unkEu_10 = 0;
+        EwramFree(e->decompressedMap);
+        e->decompressedMap = 0;
     }
 }
 #endif
@@ -2978,9 +2978,9 @@ void FadeSetPaused(u8 on) {
 }
 
 void MosaicReset(void) {
-    gUnk_0203401C = 0;
-    gUnk_02034020 = 0;
-    gUnk_02034024 = 0;
+    gMosaicSize = 0;
+    gMosaicTarget = 0;
+    gMosaicTimer = 0;
     gMosaicActive = 0;
 }
 
@@ -2988,9 +2988,9 @@ void MosaicUpdate(void) {
     s16 t;
     u8 v;
 
-    if (gUnk_02034024 != 0) {
-        ApproachValue((s32*)&gUnk_0203401C, gUnk_02034020, gUnk_02034024--);
-        t = gUnk_0203401C >> 8;
+    if (gMosaicTimer != 0) {
+        ApproachValue((s32*)&gMosaicSize, gMosaicTarget, gMosaicTimer--);
+        t = gMosaicSize >> 8;
         v = t;
         SetBgMosaicSize(v, v);
         SetObjMosaicSize(v, v);
@@ -3001,9 +3001,9 @@ void MosaicUpdate(void) {
 }
 
 void MosaicStartIn(u16 a, u16 b) {
-    gUnk_02034024 = a;
-    gUnk_0203401C = b << 8;
-    gUnk_02034020 = 0;
+    gMosaicTimer = a;
+    gMosaicSize = b << 8;
+    gMosaicTarget = 0;
     gMosaicActive = 1;
     SetBgMosaic(0, 1);
     SetBgMosaic(1, 1);
@@ -3013,9 +3013,9 @@ void MosaicStartIn(u16 a, u16 b) {
 }
 
 void MosaicStartOut(u16 a, u16 b) {
-    gUnk_02034024 = a;
-    gUnk_0203401C = 0;
-    gUnk_02034020 = b << 8;
+    gMosaicTimer = a;
+    gMosaicSize = 0;
+    gMosaicTarget = b << 8;
     gMosaicActive = 1;
     SetBgMosaic(0, 1);
     SetBgMosaic(1, 1);

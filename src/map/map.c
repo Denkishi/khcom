@@ -8,11 +8,11 @@
 #include "sprites_sora.h"
 #include "world_types.h"
 
-extern u8 gUnk_09EF6A34[];
-extern u8 gUnk_09EF6A42[];
-extern u8 (*gUnk_09EF6A50[])(FldPos*);
-extern u8 (*gUnk_09EF6A88[])(UnkStruct_080E8B1C*);
-extern u8 gUnk_09EF6AB0[];
+extern u8 gSoraWorldBattleBase[];
+extern u8 gRikuWorldBattleBase[];
+extern u8 (*gMapGmkSpotFuncs[])(FldPos*);
+extern u8 (*gMapAnmCmds[])(MapAnmSlot*);
+extern u8 gWorldEntryEvents[];
 
 #ifdef VERSION_EU
 extern void* gUnkEu_088927F4[];
@@ -60,72 +60,72 @@ extern u8 gUnkEu_09886FC8[];
 #define LANGSEL(x) (x)
 #endif
 
-u8 gUnk_02034F40;
-u8 gUnk_02034F41;
-u8 gUnk_02034F42;
+u8 gMapEnmCount;
+u8 gMapEnmTileCount;
+u8 gMapEnmSpawnTimer;
 u32 gUnk_02034F44;
-FldPos gUnk_02034F48[3];
-u8 gUnk_02034F78;
-u8 gUnk_02034F79;
-u16 gUnk_02034F7A;
+FldPos gMapEnmSpawnPositions[3];
+u8 gMapGmkCount;
+u8 gMapGmkPaletteCount;
+u16 gMapGmkTileCount;
 EventKeyList* gEventKeyList;
 EventKey gEventKey;
 EventKeyProgress* gEventKeyProgress;
-ModeFunc gUnk_02034F88;
+ModeFunc gMapDbgUpdate;
 u32 gUnk_02034F8C;
-TaskPool gUnk_02034F90;
-u8 gUnk_02034FA4;
-void* gUnk_02034FA8;
+TaskPool gMapDbgTasks;
+u8 gMapDbgEditing;
+void* gMapDbgAllmapRoomTask;
 u32 gUnk_02034FAC;
-ModeFunc gUnk_02034FB0;
-Task* gUnk_02034FB4;
-void* gUnk_02034FB8;
+ModeFunc gMapFldUpdate;
+Task* gMapFldWorldLogoTask;
+void* gMapFldAllmapRoomTask;
 u8 gUnk_02034FBC;
 u8 gUnk_02034FBD[0x17];
-ModeFunc gUnk_02034FD4;
-u8 gUnk_02034FD8;
+ModeFunc gMapFixUpdate;
+u8 gMapFixEventDelay;
 NewGameSlotMenuWork* gNewGameSlotMenuWork;
 LoadGameMenuWork* gLoadGameMenuWork;
-UnkStruct_02034FE4* gUnk_02034FE4;
+MenuMsgWork* gMenuMsgWork;
 
-void func_080E590C(UnkStruct_080E5B90* p) {
-    FldPos* q = &p->unk_08;
+void MapEnmPlaceInView(MapEnmArgs* p) {
+    FldPos* q = &p->pos;
     s32 t;
 
-    func_080E5354(q, &q->y);
+    MapPickFreeFloorPosInView(q, &q->y);
     q->z = 0;
-    t = func_080DFF30(q);
-    q->unk_0C = t;
+    t = GetFldPosFloor(q);
+    q->ground = t;
     q->y -= t;
     q->z = t;
 }
 
-void func_080E5938(UnkStruct_080E5B90* p) {
-    FldPos* q = &p->unk_08;
+void MapEnmPlaceInViewAbove(MapEnmArgs* p) {
+    FldPos* q = &p->pos;
     s32 t;
 
-    func_080E5354(q, &q->y);
+    MapPickFreeFloorPosInView(q, &q->y);
     q->z = 0;
-    t = func_080DFF30(q);
-    q->unk_0C = t;
+    t = GetFldPosFloor(q);
+    q->ground = t;
     q->y -= t;
     q->z = -0xA000;
 }
 
-s32 func_080E5968(UnkStruct_080E5B90* p) {
-    FldPos* q = &p->unk_08;
+s32 MapEnmPlaceInRoom(MapEnmArgs* p) {
+    FldPos* q = &p->pos;
     s32 t;
     s32 i;
 
-    if (func_080E524C(q, &q->y) != 0) {
+    if (MapPickFreeFloorPos(q, &q->y) != 0) {
         q->z = 0;
-        t = func_080DFF30(q);
-        q->unk_0C = t;
+        t = GetFldPosFloor(q);
+        q->ground = t;
         q->z = t;
         q->y -= t;
 
-        for (i = 0; i < gUnk_02034F40; i++) {
-            if (gUnk_02034F48[i].x >> 8 == q->x >> 8 && gUnk_02034F48[i].y >> 8 == q->y >> 8) {
+        for (i = 0; i < gMapEnmCount; i++) {
+            if (gMapEnmSpawnPositions[i].x >> 8 == q->x >> 8 && gMapEnmSpawnPositions[i].y >> 8 == q->y >> 8) {
                 return 0;
             }
         }
@@ -134,30 +134,30 @@ s32 func_080E5968(UnkStruct_080E5B90* p) {
     return 0;
 }
 
-u8 func_080E59D8(UnkStruct_080E5B90* w) {
-    FldPos* d = &w->unk_08;
-    UnkStruct_02034F20* q = func_080E54A0(1);
-    u16 wd = q->unk_02 - q->unk_00 - 2;
-    u16 ht = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+u8 MapEnmPlaceAtStairs(MapEnmArgs* w) {
+    FldPos* d = &w->pos;
+    MapPlatform* q = GetMapPlatform(1);
+    u16 wd = q->right - q->left - 2;
+    u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s32 i;
 
     for (i = 0; i < ht; i++) {
-        s16 y = gUnk_0203C7AC->unk_08 + i;
+        s16 y = gMapRoomState->topRow + i;
         s32 j;
 
         for (j = 0; j < wd; j++) {
-            s32 x = (s16)(q->unk_00 + j);
+            s32 x = (s16)(q->left + j);
             MapCell* e = MapCellAt(x, y);
 
-            if (e->unk_0C == q->unk_04 && (e->unk_00 & 0x20)) {
+            if (e->lowerZ == q->z && (e->flags & 0x20)) {
                 s32 t;
                 s32 v;
 
-                if (e->unk_02 == 4) {
-                    w->unk_18 = 0x53;
+                if (e->type == 4) {
+                    w->angle = 0x53;
                     v = (x << 13) + 0x1800;
-                } else if (e->unk_02 == 6) {
-                    w->unk_18 = 0xAD;
+                } else if (e->type == 6) {
+                    w->angle = 0xAD;
                     v = (x << 13) + 0x800;
                 } else {
                     continue;
@@ -167,8 +167,8 @@ u8 func_080E59D8(UnkStruct_080E5B90* w) {
                 v = y << 12;
                 d->y = v + 0x1800;
                 d->z = 0;
-                t = func_080DFF30(d);
-                d->unk_0C = t;
+                t = GetFldPosFloor(d);
+                d->ground = t;
                 d->z = t;
                 d->y -= t;
                 return 1;
@@ -178,28 +178,28 @@ u8 func_080E59D8(UnkStruct_080E5B90* w) {
     return 0;
 }
 
-u8 func_080E5AC8(UnkStruct_080E5B90* w) {
-    FldPos* d = &w->unk_08;
-    UnkStruct_02034F20* q = func_080E54A0(0);
-    u16 wd = q->unk_02 - q->unk_00 - 2;
-    u16 ht = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+u8 MapEnmPlaceAboveGmk01(MapEnmArgs* w) {
+    FldPos* d = &w->pos;
+    MapPlatform* q = GetMapPlatform(0);
+    u16 wd = q->right - q->left - 2;
+    u16 ht = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s32 i;
 
     for (i = 0; i < ht; i++) {
-        s16 y = gUnk_0203C7AC->unk_08 + i;
+        s16 y = gMapRoomState->topRow + i;
         s32 j;
 
         for (j = 0; j < wd; j++) {
-            s32 x = (s16)(q->unk_00 + j);
+            s32 x = (s16)(q->left + j);
 
-            if (MapCellAt(x, y)->unk_00 & 0x80) {
+            if (MapCellAt(x, y)->flags & 0x80) {
                 s32 t;
 
                 d->x = x << 13;
                 d->y = y << 12;
                 d->z = 0;
-                t = func_080DFF30(d);
-                d->unk_0C = t;
+                t = GetFldPosFloor(d);
+                d->ground = t;
                 d->y -= t;
                 d->z = t - 0x2000;
                 return 1;
@@ -209,74 +209,74 @@ u8 func_080E5AC8(UnkStruct_080E5B90* w) {
     return 0;
 }
 
-void func_080E5B90(UnkStruct_080E5B90* p, const UnkStruct_0984BC9C* q) {
+void MapEnmSetupArgs(MapEnmArgs* p, const MapEnmDef* q) {
     if (q->flags & 4) {
-        func_080E5968(p);
+        MapEnmPlaceInRoom(p);
     } else if (q->flags & 2) {
-        func_080E5938(p);
+        MapEnmPlaceInViewAbove(p);
     } else {
-        func_080E590C(p);
+        MapEnmPlaceInView(p);
     }
     switch (GetRandom() % 4) {
     case 0:
-        p->unk_18 = 0xAD;
+        p->angle = 0xAD;
         break;
     case 1:
-        p->unk_18 = 0x53;
+        p->angle = 0x53;
         break;
     case 2:
-        p->unk_18 = 0xD3;
+        p->angle = 0xD3;
         break;
     default:
-        p->unk_18 = 0x2D;
+        p->angle = 0x2D;
         break;
     }
-    p->unk_1C = 0;
-    p->unk_00 = q;
-    p->unk_04 = 0;
+    p->speed = 0;
+    p->def = q;
+    p->update = 0;
 }
 
-void func_080E5C00(UnkStruct_080E5B90* w, u8 a, u8 b) {
+void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
     const u8* t;
-    UnkStruct_080DEE18* e;
-    const UnkStruct_0984BC9C* d;
+    MapFloorRoom* e;
+    const MapEnmDef* d;
     u8 ok;
 
-    t = gUnk_0984D134[gUnk_0203C7AC->unk_0D];
-    e = func_080DEE18(gUnk_0203C590.unk_06);
+    t = gUnk_0984D134[gMapRoomState->roomType];
+    e = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gUnk_02034F40 >= t[1]) {
+    if (gMapEnmCount >= t[1]) {
         return;
     }
-    if (e->unk_0B - gUnk_02034F40 <= 0) {
+    if (e->enemiesLeft - gMapEnmCount <= 0) {
         return;
     }
-    d = gUnk_09EF83F8[a];
+    d = gMapEnmDefs[a];
 
     switch (b) {
     case 2:
-        ok = func_080E59D8(w);
+        ok = MapEnmPlaceAtStairs(w);
         break;
     case 3:
-        ok = func_080E5AC8(w);
+        ok = MapEnmPlaceAboveGmk01(w);
         break;
     case 0:
     default:
-        ok = func_080E5968(w);
-        w->unk_18 = GetAngle(w->unk_08.x, w->unk_08.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
+        ok = MapEnmPlaceInRoom(w);
+        w->angle = GetAngle(w->pos.x, w->pos.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
         break;
     }
     if (ok) {
-        gUnk_02034F48[gUnk_02034F40] = w->unk_08;
-        w->unk_1C = 0;
-        w->unk_00 = d;
-        w->unk_04 = 0;
+        gMapEnmSpawnPositions[gMapEnmCount] = w->pos;
+        w->speed = 0;
+        w->def = d;
+        w->update = 0;
         TaskCreate(&gFieldState->tasks4, d->desc, w);
     }
 }
 
-void func_080E5CD4(MapEnmWork* p) {
-    switch (gUnk_0203C7AC->unk_0D) {
+void MapEnmApplyRoomFlags(MapEnmWork* p) {
+    switch (gMapRoomState->roomType) {
     case 4:
         p->flags |= 8;
         break;
@@ -296,8 +296,8 @@ void func_080E5CD4(MapEnmWork* p) {
     }
 }
 
-void func_080E5D6C(MapEnmWork* p, u8 n, u16 a) {
-    const AnimDef* q = p->unk_00->animDef;
+void MapEnmSetAnim(MapEnmWork* p, u8 n, u16 a) {
+    const AnimDef* q = p->def->animDef;
 
     switch (p->obj.angle >> 6) {
     case 0:
@@ -321,7 +321,7 @@ void func_080E5D6C(MapEnmWork* p, u8 n, u16 a) {
     SetObjTileSource(p->tiles, q->tiles);
 }
 
-void func_080E5DEC(MapEnmWork* p) {
+void MapEnmUpdateAnim(MapEnmWork* p) {
     if (gFieldState->flags & 0x10000) {
         if (AnimIsFrameEnding(&p->anim)) {
             return;
@@ -334,52 +334,52 @@ void func_080E5DEC(MapEnmWork* p) {
     p->gfx = AnimUpdate(&p->anim);
 }
 
-u8 func_080E5E44(void) {
-    const u8* q = gUnk_0984D134[gUnk_0203C7AC->unk_0D];
+u8 GetRandomBattleId(void) {
+    const u8* q = gUnk_0984D134[gMapRoomState->roomType];
     u8 v = q[3] + GetRandom() % (q[4] - q[3] + 1);
 
     if (gGameState.flags & 8) {
-        return v + gUnk_09EF6A42[gUnk_0203C590.unk_04];
+        return v + gRikuWorldBattleBase[gMapFloorState.world];
     }
-    return v + gUnk_09EF6A34[gUnk_0203C590.unk_04];
+    return v + gSoraWorldBattleBase[gMapFloorState.world];
 }
 
-void func_080E5EAC(MapEnmWork* p) {
+void MapEnmStartBattle(MapEnmWork* p) {
     gGameState.flags |= 2;
     ColliderSetDisabled(&p->collider, 1);
-    gUnk_0203C7AC->flags |= 2;
+    gMapRoomState->flags |= 2;
     gFieldState->flags |= 0x80;
     p->flags |= 4;
     if (p->flags & 0x40) {
         gGameState.flags |= 4;
     }
     if (p->flags & 0x100) {
-        gUnk_0203C7AC->unk_0E = GetRandom() % 3 + 128;
+        gMapRoomState->battleId = GetRandom() % 3 + 128;
     } else if (p->flags & 0x200) {
-        gUnk_0203C7AC->unk_0E = GetRandom() % 3 + 131;
+        gMapRoomState->battleId = GetRandom() % 3 + 131;
     } else {
-        gUnk_0203C7AC->unk_0E = func_080E5E44();
+        gMapRoomState->battleId = GetRandomBattleId();
     }
 }
 
-void func_080E5F50(MapEnmWork* p) {
-    if (p->collider.unk_2C != 0) {
-        if ((gUnk_0203C7AC->flags & 4) == 0 && ColliderIsTouchingType(&p->collider, 1)) {
-            func_080E5EAC(p);
+void MapEnmCheckContact(MapEnmWork* p) {
+    if (p->collider.colliding != 0) {
+        if ((gMapRoomState->flags & 4) == 0 && ColliderIsTouchingType(&p->collider, 1)) {
+            MapEnmStartBattle(p);
             return;
         }
 
         if (ColliderIsTouchingType(&p->collider, 6)) {
-            p->obj.fieldPosition.x += p->collider.unk_38;
-            p->obj.fieldPosition.y += p->collider.unk_3C;
+            p->obj.fieldPosition.x += p->collider.pushX;
+            p->obj.fieldPosition.y += p->collider.pushY;
         }
     }
 }
 
-s32 func_080E5FB4(MapEnmWork* p) {
-    if (func_080E02E0(&p->obj.fieldPosition, p->unk_C8 / 2, p->unk_CA / 2)) {
-        gUnk_0203C7AC->flags |= 0x80;
-        gUnk_0203C7AC->flags |= 4;
+s32 MapEnmCheckAttacked(MapEnmWork* p) {
+    if (IsHitByMapAttack(&p->obj.fieldPosition, p->radius / 2, p->height / 2)) {
+        gMapRoomState->flags |= 0x80;
+        gMapRoomState->flags |= 4;
         TaskCreate(&p->tasks, &gTaskDescMapSpark, &p->obj);
 
         if (gGameState.flags & 8) {
@@ -392,33 +392,33 @@ s32 func_080E5FB4(MapEnmWork* p) {
     return 0;
 }
 
-void func_080E6034(MapEnmWork* p) {
+void MapEnmSaveToCache(MapEnmWork* p) {
     MapEnmCache* q = ListPoolFirstFree(&gGameState.enemyCachePool);
 
     if (q != 0) {
-        q->unk_30 = p->unk_00;
-        q->unk_34 = p->update;
-        q->unk_00 = p->obj.fieldPosition;
-        q->unk_10 = p->obj.angle;
-        q->unk_14 = p->obj.unk_10;
+        q->def = p->def;
+        q->update = p->update;
+        q->pos = p->obj.fieldPosition;
+        q->angle = p->obj.angle;
+        q->speed = p->obj.speed;
         ListPoolActivate(&q->node, &gGameState.enemyCachePool);
     }
 }
 
-void func_080E607C(void) {
+void MapEnmRestoreFromCache(void) {
     MapEnmCache* q;
-    UnkStruct_080E5B90 w;
-    const UnkStruct_0984BC9C* d;
+    MapEnmArgs w;
+    const MapEnmDef* d;
     s32 i;
 
     q = ListPoolFirst(&gGameState.enemyCachePool);
     while (q != 0) {
-        d = q->unk_30;
-        w.unk_00 = d;
-        w.unk_04 = q->unk_34;
-        w.unk_08 = q->unk_00;
-        w.unk_18 = q->unk_10;
-        w.unk_1C = q->unk_14;
+        d = q->def;
+        w.def = d;
+        w.update = q->update;
+        w.pos = q->pos;
+        w.angle = q->angle;
+        w.speed = q->speed;
         TaskCreate(&gFieldState->tasks4, d->desc, &w);
         q = ListPoolNext(&q->node);
     }
@@ -429,63 +429,63 @@ void func_080E607C(void) {
     }
 }
 
-void func_080E6100(void) {
-    UnkStruct_080E5B90 w;
+void MapEnmSpawnRoomSet(void) {
+    MapEnmArgs w;
     s32 i;
 
-    switch (gUnk_0203C7AC->unk_0D) {
+    switch (gMapRoomState->roomType) {
     case 3:
-        func_080E5C00(&w, 3, 3);
-        func_080E5C00(&w, 2, 2);
+        MapEnmSpawnFixed(&w, 3, 3);
+        MapEnmSpawnFixed(&w, 2, 2);
         break;
     case 5:
         for (i = 0; i < 3; i++) {
-            if (gUnk_0203C590.unk_04 == 2) {
-                func_080E5C00(&w, 4, 0);
+            if (gMapFloorState.world == 2) {
+                MapEnmSpawnFixed(&w, 4, 0);
             } else if (GetRandom() % 2) {
-                func_080E5C00(&w, 0, 0);
+                MapEnmSpawnFixed(&w, 0, 0);
             } else {
-                func_080E5C00(&w, 1, 0);
+                MapEnmSpawnFixed(&w, 1, 0);
             }
         }
         break;
     }
 }
 
-void func_080E6178(void) {
+void MapEnmInitRoom(void) {
     MapEnmCache* q;
-    UnkStruct_080E5B90 w;
-    const UnkStruct_0984BC9C* d;
-    UnkStruct_080DEE18* e;
+    MapEnmArgs w;
+    const MapEnmDef* d;
+    MapFloorRoom* e;
     s32 i;
 
-    gUnk_02034F40 = 0;
-    gUnk_02034F41 = 0;
-    gUnk_02034F42 = 46;
+    gMapEnmCount = 0;
+    gMapEnmTileCount = 0;
+    gMapEnmSpawnTimer = 46;
 
-    if (gGameState.unk_000 != 0) {
+    if (gGameState.fieldResume != 0) {
         q = ListPoolFirst(&gGameState.enemyCachePool);
         while (q != 0) {
-            d = q->unk_30;
-            w.unk_00 = d;
-            w.unk_04 = q->unk_34;
-            w.unk_08 = q->unk_00;
-            w.unk_18 = q->unk_10;
-            w.unk_1C = q->unk_14;
+            d = q->def;
+            w.def = d;
+            w.update = q->update;
+            w.pos = q->pos;
+            w.angle = q->angle;
+            w.speed = q->speed;
             TaskCreate(&gFieldState->tasks4, d->desc, &w);
             q = ListPoolNext(&q->node);
         }
         if (gGameState.flags & 2) {
             gGameState.flags &= ~2;
             if ((gGameState.flags & 0x40) == 0) {
-                e = func_080DEE18(gUnk_0203C590.unk_06);
-                if (e->unk_0B != 0) {
-                    e->unk_0B--;
+                e = GetMapFloorRoom(gMapFloorState.room);
+                if (e->enemiesLeft != 0) {
+                    e->enemiesLeft--;
                 }
             }
         }
     } else {
-        func_080E6100();
+        MapEnmSpawnRoomSet();
     }
     ListPoolInit(&gGameState.enemyCachePool);
 
@@ -494,25 +494,25 @@ void func_080E6178(void) {
     }
 }
 
-void func_080E6264(void) {
+void MapEnmUpdateSpawner(void) {
     const u8* t;
-    UnkStruct_080DEE18* e;
-    const UnkStruct_0984BC9C* d;
-    UnkStruct_080E5B90 w;
+    MapFloorRoom* e;
+    const MapEnmDef* d;
+    MapEnmArgs w;
 
-    t = gUnk_0984D134[gUnk_0203C7AC->unk_0D];
+    t = gUnk_0984D134[gMapRoomState->roomType];
     gFieldState->flags &= ~0x10000;
 
-    if (gUnk_02034F42 != 0) {
-        gUnk_02034F42--;
+    if (gMapEnmSpawnTimer != 0) {
+        gMapEnmSpawnTimer--;
         return;
     }
-    e = func_080DEE18(gUnk_0203C590.unk_06);
+    e = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gUnk_02034F40 >= t[1]) {
+    if (gMapEnmCount >= t[1]) {
         return;
     }
-    if (e->unk_0B - gUnk_02034F40 <= 0) {
+    if (e->enemiesLeft - gMapEnmCount <= 0) {
         return;
     }
     if (gFieldState->flags & 0x40280) {
@@ -521,55 +521,55 @@ void func_080E6264(void) {
     if (GetRandom() % 10000 <= 7999) {
         return;
     }
-    switch (gUnk_0203C7AC->unk_0D) {
+    switch (gMapRoomState->roomType) {
     case 20:
-        d = gUnk_09EF83F8[5];
+        d = gMapEnmDefs[5];
         break;
     case 21:
-        d = gUnk_09EF83F8[6];
+        d = gMapEnmDefs[6];
         break;
     default:
-        if (gUnk_0203C590.unk_04 == 2) {
-            d = gUnk_09EF83F8[4];
+        if (gMapFloorState.world == 2) {
+            d = gMapEnmDefs[4];
         } else if (GetRandom() % 3) {
-            d = gUnk_09EF83F8[0];
+            d = gMapEnmDefs[0];
         } else {
-            d = gUnk_09EF83F8[1];
+            d = gMapEnmDefs[1];
         }
         break;
     }
-    if (gUnk_02034F41 + d->unk_08 > 256) {
+    if (gMapEnmTileCount + d->tileCount > 256) {
         return;
     }
-    gUnk_02034F42 = 30;
-    func_080E5B90(&w, d);
+    gMapEnmSpawnTimer = 30;
+    MapEnmSetupArgs(&w, d);
     TaskCreate(&gFieldState->tasks4, d->desc, &w);
 }
 
-void func_080E6394(MapEnmWork* p, UnkStruct_080E5B90* q) {
+void MapEnmInit(MapEnmWork* p, MapEnmArgs* q) {
     FldObj* e = &p->obj;
-    const UnkStruct_0984BC9C* d = q->unk_00;
+    const MapEnmDef* d = q->def;
 
-    p->unk_00 = d;
-    p->update = q->unk_04;
+    p->def = d;
+    p->update = q->update;
     p->flags = 0;
-    p->unk_E0 = 30;
-    e->fieldPosition = q->unk_08;
-    e->angle = q->unk_18;
-    e->unk_10 = q->unk_1C;
-    e->unk_1A = d->unk_0A;
+    p->colliderDelay = 30;
+    e->fieldPosition = q->pos;
+    e->angle = q->angle;
+    e->speed = q->speed;
+    e->height = d->height;
     e->unk_34 = 0;
-    e->unk_30 = 1;
-    p->unk_C8 = d->unk_0C;
-    p->unk_CA = d->unk_0A;
-    p->unk_D0 = 0;
+    e->kind = 1;
+    p->radius = d->radius;
+    p->height = d->height;
+    p->timer = 0;
     p->unk_D2 = 0;
-    p->unk_D4 = e->fieldPosition.x;
-    p->unk_D8 = e->fieldPosition.y;
-    p->unk_DC = e->fieldPosition.z;
-    gUnk_02034F40++;
-    gUnk_02034F41 += d->unk_08;
-    p->tiles = AllocObjTiles(d->unk_08 * 32, 0);
+    p->targetX = e->fieldPosition.x;
+    p->targetY = e->fieldPosition.y;
+    p->targetZ = e->fieldPosition.z;
+    gMapEnmCount++;
+    gMapEnmTileCount += d->tileCount;
+    p->tiles = AllocObjTiles(d->tileCount * 32, 0);
     p->palette = LoadObjPalette(d->palette, 32);
     p->gfx = 0;
     AnimInit(&p->anim, 0, 0);
@@ -581,16 +581,16 @@ void func_080E6394(MapEnmWork* p, UnkStruct_080E5B90* q) {
 
     if (d->flags & 8) {
         p->flags |= 2;
-        ColliderInit(&p->collider, 11, d->unk_0C, d->unk_0A);
+        ColliderInit(&p->collider, 11, d->radius, d->height);
     } else {
-        ColliderInit(&p->collider, 3, d->unk_0C, d->unk_0A);
+        ColliderInit(&p->collider, 3, d->radius, d->height);
     }
     ColliderSetPosition(&p->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     ColliderSetDisabled(&p->collider, 1);
-    func_080E5CD4(p);
+    MapEnmApplyRoomFlags(p);
 }
 
-void func_080E64D4(MapEnmWork* p) {
+void MapEnmDraw(MapEnmWork* p) {
     FldObj* q = &p->obj;
     u16 flags;
     u16 v;
@@ -613,8 +613,8 @@ void func_080E64D4(MapEnmWork* p) {
 
     k = q->fieldPosition.y >> 8;
     v = -0x1004 - k * 4;
-    q->unk_3C = q->fieldPosition.unk_0C;
-    q->unk_3A = v + 1;
+    q->shadowZ = q->fieldPosition.ground;
+    q->shadowPriority = v + 1;
     z = 0;
     x = (p->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
     t = flags;
@@ -623,33 +623,33 @@ void func_080E64D4(MapEnmWork* p) {
     TaskPoolDraw(&p->tasks);
 }
 
-void func_080E657C(MapEnmWork* p) {
+void MapEnmDestroy(MapEnmWork* p) {
     MapEnmCache* q;
 
-    if (gGameState.unk_000 != 0 && (p->flags & 4) == 0 &&
-        ((gUnk_0203C7AC->flags & 2) == 0 || (p->flags & 2))) {
+    if (gGameState.fieldResume != 0 && (p->flags & 4) == 0 &&
+        ((gMapRoomState->flags & 2) == 0 || (p->flags & 2))) {
         q = ListPoolFirstFree(&gGameState.enemyCachePool);
         if (q != 0) {
-            q->unk_30 = p->unk_00;
-            q->unk_34 = p->update;
-            q->unk_00 = p->obj.fieldPosition;
-            q->unk_10 = p->obj.angle;
-            q->unk_14 = p->obj.unk_10;
+            q->def = p->def;
+            q->update = p->update;
+            q->pos = p->obj.fieldPosition;
+            q->angle = p->obj.angle;
+            q->speed = p->obj.speed;
             ListPoolActivate(&q->node, &gGameState.enemyCachePool);
         }
     }
-    gUnk_02034F40--;
-    gUnk_02034F41 -= p->unk_00->unk_08;
+    gMapEnmCount--;
+    gMapEnmTileCount -= p->def->tileCount;
     ColliderUnregister(&p->collider);
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
     TaskPoolDestroy(&p->tasks);
 }
 
-u8 func_080E6634(u8 a) {
+u8 GetRandomMapGmkIndex(u8 a) {
     u8 r;
 
-    switch (gUnk_0203C590.unk_04) {
+    switch (gMapFloorState.world) {
     case 1:
         r = GetRandom() % 12 + 2;
         break;
@@ -706,13 +706,13 @@ u8 func_080E6634(u8 a) {
     return r;
 }
 
-MapCell* func_080E67D4(s32 x, s32 y) {
+MapCell* MapCellAtPos(s32 x, s32 y) {
     u16 a = x / 0x2000;
     u16 b = y / 0x1000;
     return MapCellAt(a, b);
 }
 
-s32 func_080E6804(s16 x, s16 y) {
+s32 MapGmkIsAreaSparse(s16 x, s16 y) {
     s32 i;
     u8 n;
     s16 cx;
@@ -720,9 +720,9 @@ s32 func_080E6804(s16 x, s16 y) {
 
     n = 0;
 
-    for (i = 0; i < gUnk_02034F78; i++) {
-        cx = (gUnk_0203C7B8[i].unk_04.x >> 8) / 32;
-        cy = ((gUnk_0203C7B8[i].unk_04.y + gUnk_0203C7B8[i].unk_04.z) >> 8) / 16;
+    for (i = 0; i < gMapGmkCount; i++) {
+        cx = (gMapGmkPlacements[i].pos.x >> 8) / 32;
+        cy = ((gMapGmkPlacements[i].pos.y + gMapGmkPlacements[i].pos.z) >> 8) / 16;
         if (cx > x - 9 && cx < x + 9 && cy > y - 11 && cy < y + 11) {
             n++;
             if (n > 2) {
@@ -733,22 +733,22 @@ s32 func_080E6804(s16 x, s16 y) {
     return 1;
 }
 
-u8 func_080E68A4(s16 x, s16 y, u8 n) {
+u8 MapCellIsFreeOfType(s16 x, s16 y, u8 n) {
     MapCell* p = MapCellAt(x, y);
 
-    if (p != 0 && p->unk_0C != 0x100000 && p->unk_02 == n && (p->unk_00 & 0x960) == 0) {
+    if (p != 0 && p->lowerZ != 0x100000 && p->type == n && (p->flags & 0x960) == 0) {
         return 1;
     }
     return 0;
 }
 
-s32 func_080E68E4(s16 x, s16 y, u8 w, u8 h, u8 n) {
+s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 n) {
     s32 i;
     s32 j;
 
     for (i = 0; i < w; i++) {
         for (j = 0; j < h; j++) {
-            if (func_080E68A4(x + i, y + j, n) == 0) {
+            if (MapCellIsFreeOfType(x + i, y + j, n) == 0) {
                 return 0;
             }
         }
@@ -759,32 +759,32 @@ s32 func_080E68E4(s16 x, s16 y, u8 w, u8 h, u8 n) {
 s32 func_080E6968(s16 a, s16 b, u8 c) {
     u16 d;
     MapCell* p = MapCellAt(a, b);
-    d = (p->unk_0C - p->unk_08) >> 8;
+    d = (p->lowerZ - p->upperZ) >> 8;
     return d > (c << 4);
 }
 
-void func_080E6998(s16 x, s16 y, u8 w, u8 h) {
+void MapReserveArea(s16 x, s16 y, u8 w, u8 h) {
     s32 i;
     s32 j;
 
     for (i = 0; i < w; i++) {
         for (j = 0; j < h; j++) {
-            MapCellAt(x + i, y + j)->unk_00 |= 0x100;
+            MapCellAt(x + i, y + j)->flags |= 0x100;
         }
     }
 }
 
 s16 func_080E6A14(s16 x, s16 y) {
-    u16 n = gUnk_0203C7AC->unk_06 - y;
+    u16 n = gMapRoomState->rows - y;
     s32 i;
 
     for (i = 0; i < n; i++) {
         MapCell* p = MapCellAt(x, y + i);
-        if (p->unk_00 & 0x100) {
+        if (p->flags & 0x100) {
             return 0;
         }
 
-        if (p->unk_02 == 0 || p->unk_02 == 4 || p->unk_02 == 2 || p->unk_02 == 6) {
+        if (p->type == 0 || p->type == 4 || p->type == 2 || p->type == 6) {
             return i;
         }
     }
@@ -798,15 +798,15 @@ s32 func_080E6A80(s16 x, s16 y, u16 n) {
     MapCell* q;
     s32 mask;
 
-    h = gUnk_0203C7AC->unk_06 - y;
+    h = gMapRoomState->rows - y;
 
     for (j = 0; j < n; j++) {
         for (i = 0; i < h; i++) {
             q = MapCellAt(x + j, y - i);
-            if (q->unk_00 & 0x100) {
+            if (q->flags & 0x100) {
                 return 0;
             }
-            if (q->unk_02 < 7 || q->unk_02 > 9) {
+            if (q->type < 7 || q->type > 9) {
                 break;
             }
         }
@@ -814,21 +814,21 @@ s32 func_080E6A80(s16 x, s16 y, u16 n) {
     return 1;
 }
 
-u8 func_080E6B24(FldPos* p) {
-    u16 w = gUnk_0203C7AC->unk_04 - 2;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+u8 MapGmkFindFloor2x2(FldPos* p) {
+    u16 w = gMapRoomState->cols - 2;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
     s32 i;
     s32 j;
 
     for (j = 0; j < h; j++) {
-        s16 sy = gUnk_0203C7AC->unk_08 + ry;
+        s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 2, 2, 0) != 0) {
-                func_080E6998(rx, sy, 2, 2);
-                func_080DFF5C(p, rx, sy, 2, 2);
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 2, 2, 0) != 0) {
+                MapReserveArea(rx, sy, 2, 2);
+                FldPosPlaceAtCell(p, rx, sy, 2, 2);
                 return 1;
             }
 
@@ -850,28 +850,28 @@ u8 func_080E6C2C(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 2;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+    w = gMapRoomState->cols - 2;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && func_080E68A4(rx, sy, 8) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 8) != 0) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (func_080E68A4(rx, y1, 4) != 0) {
+                if (MapCellIsFreeOfType(rx, y1, 4) != 0) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (func_080E68A4(rx, y2, 0) != 0) {
+                    if (MapCellIsFreeOfType(rx, y2, 0) != 0) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (func_080E68A4(x1, sy, 4) != 0 && func_080E68A4(x1, y1, 0) != 0 &&
-                            func_080E68A4(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
-                            func_080E6998(rx, sy, 2, 3);
-                            func_080DFF5C(p, rx, sy, 2, 3);
+                        if (MapCellIsFreeOfType(x1, sy, 4) != 0 && MapCellIsFreeOfType(x1, y1, 0) != 0 &&
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapReserveArea(rx, sy, 2, 3);
+                            FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
                         }
                     }
@@ -896,23 +896,23 @@ u8 func_080E6DB0(FldPos* p) {
     s32 i;
     s32 j;
 
-    n = gUnk_0203C7AC->unk_04 - 1;
-    m = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 4;
+    n = gMapRoomState->cols - 1;
+    m = gMapRoomState->bottomRow - gMapRoomState->topRow - 4;
     x = GetRandom() % n;
     y = GetRandom() % m;
 
     for (i = 0; i < m; i++) {
-        cy = gUnk_0203C7AC->unk_08 + y;
+        cy = gMapRoomState->topRow + y;
 
         for (j = 0; j < n; j++) {
-            if ((u8)func_080E6804(x, cy) != 0) {
-                if (func_080E68A4(x, cy, 4) != 0) {
-                    if (func_080E68A4(x, cy + 1, 0) != 0) {
-                        if (func_080E68A4(x, cy + 2, 0) != 0) {
-                            if (func_080E68A4(x, cy + 3, 0) != 0) {
+            if ((u8)MapGmkIsAreaSparse(x, cy) != 0) {
+                if (MapCellIsFreeOfType(x, cy, 4) != 0) {
+                    if (MapCellIsFreeOfType(x, cy + 1, 0) != 0) {
+                        if (MapCellIsFreeOfType(x, cy + 2, 0) != 0) {
+                            if (MapCellIsFreeOfType(x, cy + 3, 0) != 0) {
                                 if ((u8)func_080E6968(x, cy, 3) != 0) {
-                                    func_080E6998(x, cy, 1, 4);
-                                    func_080DFF5C(p, x, cy, 1, 4);
+                                    MapReserveArea(x, cy, 1, 4);
+                                    FldPosPlaceAtCell(p, x, cy, 1, 4);
                                     return 1;
                                 }
                             }
@@ -937,28 +937,28 @@ u8 func_080E6F04(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 2;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+    w = gMapRoomState->cols - 2;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && func_080E68A4(rx, sy, 6) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 6) != 0) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (func_080E68A4(rx, y1, 0) != 0) {
+                if (MapCellIsFreeOfType(rx, y1, 0) != 0) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (func_080E68A4(rx, y2, 0) != 0) {
+                    if (MapCellIsFreeOfType(rx, y2, 0) != 0) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (func_080E68A4(x1, sy, 9) != 0 && func_080E68A4(x1, y1, 6) != 0 &&
-                            func_080E68A4(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
-                            func_080E6998(rx, sy, 2, 3);
-                            func_080DFF5C(p, rx, sy, 2, 3);
+                        if (MapCellIsFreeOfType(x1, sy, 9) != 0 && MapCellIsFreeOfType(x1, y1, 6) != 0 &&
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapReserveArea(rx, sy, 2, 3);
+                            FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
                         }
                     }
@@ -983,16 +983,16 @@ u8 func_080E7088(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 3;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+    w = gMapRoomState->cols - 3;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 3, 3, 8) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 8) != 0) {
                 u16 a;
                 u16 b;
 
@@ -1004,8 +1004,8 @@ u8 func_080E7088(FldPos* p) {
                 b = func_080E6A14((s16)(rx + 2), sy);
 
                 if (a == b && a > 8) {
-                    func_080E6998(rx, sy, 3, 3);
-                    func_080DFF5C(p, rx, (s16)(a + sy), 3, 3);
+                    MapReserveArea(rx, sy, 3, 3);
+                    FldPosPlaceAtCell(p, rx, (s16)(a + sy), 3, 3);
                     p->z -= a << 12;
                     return 1;
                 }
@@ -1029,16 +1029,16 @@ u8 func_080E71F0(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 3;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+    w = gMapRoomState->cols - 3;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 3, 3, 9) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 9) != 0) {
                 u16 a;
                 u16 b;
 
@@ -1050,8 +1050,8 @@ u8 func_080E71F0(FldPos* p) {
                 b = func_080E6A14((s16)(rx + 2), (s16)(sy + 2));
 
                 if (a == b && a > 8) {
-                    func_080E6998(rx, sy, 3, 3);
-                    func_080DFF5C(p, rx, (s16)(a + sy), 3, 3);
+                    MapReserveArea(rx, sy, 3, 3);
+                    FldPosPlaceAtCell(p, rx, (s16)(a + sy), 3, 3);
                     p->z -= a << 12;
                     return 1;
                 }
@@ -1075,25 +1075,25 @@ u8 func_080E7358(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 2;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+    w = gMapRoomState->cols - 2;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && func_080E68A4(rx, sy, 0) != 0) {
-                if (func_080E68A4(rx, (s16)(sy + 1), 3) != 0) {
-                    if (func_080E68A4((s16)(rx + 1), sy, 3) != 0 &&
-                        func_080E68A4((s16)(rx + 1), (s16)(sy + 1), 8) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 0) != 0) {
+                if (MapCellIsFreeOfType(rx, (s16)(sy + 1), 3) != 0) {
+                    if (MapCellIsFreeOfType((s16)(rx + 1), sy, 3) != 0 &&
+                        MapCellIsFreeOfType((s16)(rx + 1), (s16)(sy + 1), 8) != 0) {
                         u16 a = func_080E6A14(rx, (s16)(sy + 1));
                         u16 b = func_080E6A14((s16)(rx + 1), sy);
 
                         if (a == b && a > 8) {
-                            func_080E6998(rx, sy, 2, 2);
-                            func_080DFF5C(p, rx, (s16)(a + sy), 2, 2);
+                            MapReserveArea(rx, sy, 2, 2);
+                            FldPosPlaceAtCell(p, rx, (s16)(a + sy), 2, 2);
                             p->z -= a << 12;
                             return 1;
                         }
@@ -1120,23 +1120,23 @@ u8 func_080E74D8(FldPos* p) {
     s32 i;
     s32 j;
 
-    n = gUnk_0203C7AC->unk_04 - 1;
-    m = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+    n = gMapRoomState->cols - 1;
+    m = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     x = GetRandom() % n;
     y = GetRandom() % m;
 
     for (i = 0; i < m; i++) {
-        cy = gUnk_0203C7AC->unk_08 + y;
+        cy = gMapRoomState->topRow + y;
 
         for (j = 0; j < n; j++) {
-            if ((u8)func_080E6804(x, cy) != 0) {
-                if (func_080E68A4(x, cy, 1) != 0) {
-                    if (func_080E68A4(x, cy + 1, 7) != 0) {
+            if ((u8)MapGmkIsAreaSparse(x, cy) != 0) {
+                if (MapCellIsFreeOfType(x, cy, 1) != 0) {
+                    if (MapCellIsFreeOfType(x, cy + 1, 7) != 0) {
                         h = func_080E6A14(x, cy);
 
                         if (h > 8) {
-                            func_080E6998(x, cy, 1, 2);
-                            func_080DFF5C(p, x, h + cy, 1, 2);
+                            MapReserveArea(x, cy, 1, 2);
+                            FldPosPlaceAtCell(p, x, h + cy, 1, 2);
                             p->z -= h << 12;
                             return 1;
                         }
@@ -1160,27 +1160,27 @@ u8 func_080E7620(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 2;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+    w = gMapRoomState->cols - 2;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && func_080E68A4(rx, sy, 5) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 5) != 0) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (func_080E68A4(rx, y1, 9) != 0) {
-                    if (func_080E68A4((s16)(rx + 1), sy, 0) != 0 &&
-                        func_080E68A4((s16)(rx + 1), y1, 5) != 0) {
+                if (MapCellIsFreeOfType(rx, y1, 9) != 0) {
+                    if (MapCellIsFreeOfType((s16)(rx + 1), sy, 0) != 0 &&
+                        MapCellIsFreeOfType((s16)(rx + 1), y1, 5) != 0) {
                         u16 a = func_080E6A14(rx, sy);
                         u16 b = func_080E6A14((s16)(rx + 1), y1);
 
                         if (a == b && a > 8) {
-                            func_080E6998(rx, sy, 2, 2);
-                            func_080DFF5C(p, rx, (s16)(a + sy), 2, 2);
+                            MapReserveArea(rx, sy, 2, 2);
+                            FldPosPlaceAtCell(p, rx, (s16)(a + sy), 2, 2);
                             p->z -= a << 12;
                             return 1;
                         }
@@ -1206,28 +1206,28 @@ u8 func_080E77A4(FldPos* p) {
     s32 i;
     s32 j;
 
-    w = gUnk_0203C7AC->unk_04 - 2;
-    h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+    w = gMapRoomState->cols - 2;
+    h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     rx = GetRandom() % w;
     ry = GetRandom() % h;
 
     for (j = 0; j < h; j++) {
-        sy = gUnk_0203C7AC->unk_08 + ry;
+        sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && func_080E68A4(rx, sy, 2) != 0) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 2) != 0) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (func_080E68A4(rx, y1, 0) != 0) {
+                if (MapCellIsFreeOfType(rx, y1, 0) != 0) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (func_080E68A4(rx, y2, 0) != 0) {
+                    if (MapCellIsFreeOfType(rx, y2, 0) != 0) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (func_080E68A4(x1, sy, 2) != 0 && func_080E68A4(x1, y1, 0) != 0 &&
-                            func_080E68A4(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
-                            func_080E6998(rx, sy, 2, 3);
-                            func_080DFF5C(p, rx, sy, 2, 3);
+                        if (MapCellIsFreeOfType(x1, sy, 2) != 0 && MapCellIsFreeOfType(x1, y1, 0) != 0 &&
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapReserveArea(rx, sy, 2, 3);
+                            FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
                         }
                     }
@@ -1243,21 +1243,21 @@ u8 func_080E77A4(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7928(FldPos* p) {
-    u16 w = gUnk_0203C7AC->unk_04 - 3;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 3;
+u8 MapGmkFindFloor3x3(FldPos* p) {
+    u16 w = gMapRoomState->cols - 3;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 3;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
     s32 i;
     s32 j;
 
     for (j = 0; j < h; j++) {
-        s16 sy = gUnk_0203C7AC->unk_08 + ry;
+        s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 3, 3, 0) != 0) {
-                func_080E6998(rx, sy, 3, 3);
-                func_080DFF5C(p, rx, sy, 3, 3);
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 0) != 0) {
+                MapReserveArea(rx, sy, 3, 3);
+                FldPosPlaceAtCell(p, rx, sy, 3, 3);
                 return 1;
             }
 
@@ -1270,21 +1270,21 @@ u8 func_080E7928(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7A30(FldPos* p) {
-    u16 w = gUnk_0203C7AC->unk_04 - 4;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 4;
+u8 MapGmkFindFloor4x4(FldPos* p) {
+    u16 w = gMapRoomState->cols - 4;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 4;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
     s32 i;
     s32 j;
 
     for (j = 0; j < h; j++) {
-        s16 sy = gUnk_0203C7AC->unk_08 + ry;
+        s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 4, 4, 0) != 0) {
-                func_080E6998(rx, sy, 4, 4);
-                func_080DFF5C(p, rx, sy, 4, 4);
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 4, 4, 0) != 0) {
+                MapReserveArea(rx, sy, 4, 4);
+                FldPosPlaceAtCell(p, rx, sy, 4, 4);
                 return 1;
             }
 
@@ -1297,21 +1297,21 @@ u8 func_080E7A30(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7B38(FldPos* p) {
-    u16 w = gUnk_0203C7AC->unk_04 - 5;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 5;
+u8 MapGmkFindFloor5x5(FldPos* p) {
+    u16 w = gMapRoomState->cols - 5;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 5;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
     s32 i;
     s32 j;
 
     for (j = 0; j < h; j++) {
-        s16 sy = gUnk_0203C7AC->unk_08 + ry;
+        s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)func_080E6804(rx, sy) != 0 && (u8)func_080E68E4(rx, sy, 5, 5, 0) != 0) {
-                func_080E6998(rx, sy, 5, 5);
-                func_080DFF5C(p, rx, sy, 5, 5);
+            if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && (u8)MapAreaIsFreeOfType(rx, sy, 5, 5, 0) != 0) {
+                MapReserveArea(rx, sy, 5, 5);
+                FldPosPlaceAtCell(p, rx, sy, 5, 5);
                 return 1;
             }
 
@@ -1325,23 +1325,23 @@ u8 func_080E7B38(FldPos* p) {
 }
 
 u8 func_080E7C40(FldPos* p) {
-    UnkStruct_02034F20* e = func_080E54A0(0);
-    u16 w = e->unk_02 - e->unk_00 - 2;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 - 2;
+    MapPlatform* e = GetMapPlatform(0);
+    u16 w = e->right - e->left - 2;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
     s16 rx = GetRandom() % w;
     s16 ry = GetRandom() % h;
     s32 i;
     s32 j;
 
     for (j = 0; j < h; j++) {
-        s16 sy = gUnk_0203C7AC->unk_08 + ry;
+        s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            s32 sx = (s16)(e->unk_00 + rx);
+            s32 sx = (s16)(e->left + rx);
 
-            if ((u8)func_080E68E4(sx, sy, 2, 2, 0) != 0 && e->unk_04 == MapCellAt(sx, sy)->unk_0C) {
-                func_080E6998(sx, sy, 2, 2);
-                func_080DFF5C(p, sx, sy, 2, 2);
+            if ((u8)MapAreaIsFreeOfType(sx, sy, 2, 2, 0) != 0 && e->z == MapCellAt(sx, sy)->lowerZ) {
+                MapReserveArea(sx, sy, 2, 2);
+                FldPosPlaceAtCell(p, sx, sy, 2, 2);
                 return 1;
             }
 
@@ -1354,241 +1354,241 @@ u8 func_080E7C40(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7D64(FldPos* a, u8 b) {
-    return gUnk_09EF6A50[b](a);
+u8 MapGmkFindSpot(FldPos* a, u8 b) {
+    return gMapGmkSpotFuncs[b](a);
 }
 
-s32 func_080E7D80(void* a) {
+s32 MapGmkIsPaletteUnused(void* a) {
     s32 i;
 
-    for (i = 0; i < gUnk_02034F78; i++) {
-        if (gUnk_0203C7B8[i].unk_14->palette == a) {
+    for (i = 0; i < gMapGmkCount; i++) {
+        if (gMapGmkPlacements[i].def->palette == a) {
             return 0;
         }
     }
     return 1;
 }
 
-s32 func_080E7DB8(u8 flag, void* a) {
+s32 MapGmkNeedsTiles(u8 flag, void* a) {
     s32 i;
 
     if (flag != 0) {
         return 1;
     }
 
-    for (i = 0; i < gUnk_02034F78; i++) {
-        if (gUnk_0203C7B8[i].unk_14->tiles == a) {
+    for (i = 0; i < gMapGmkCount; i++) {
+        if (gMapGmkPlacements[i].def->tiles == a) {
             return 0;
         }
     }
     return 1;
 }
 
-void func_080E7DF8(void) {
+void MapGmkReserveJump(void) {
     s32 i;
 
     for (i = 0; i < 12; i++) {
-        UnkStruct_02034F20* p = func_080E54A0(i);
-        if (p->unk_08 == 0 && p->unk_14 != 0x100000) {
-            gUnk_02034F7A += 0x4C;
-            gUnk_02034F79++;
+        MapPlatform* p = GetMapPlatform(i);
+        if (p->hasStairs == 0 && p->spotLowerZ != 0x100000) {
+            gMapGmkTileCount += 0x4C;
+            gMapGmkPaletteCount++;
             break;
         }
     }
 }
 
-void func_080E7E3C(void) {
+void MapGmkPlaceGmk01(void) {
     FldPos w;
-    UnkStruct_080DEE18* e;
-    const UnkStruct_080E7D80* q;
+    MapFloorRoom* e;
+    const MapGmkDef* q;
     s32 i;
 
-    e = func_080DEE18(gUnk_0203C590.unk_06);
+    e = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gUnk_0203C7AC->unk_0D == 10) {
+    if (gMapRoomState->roomType == 10) {
         u8* n;
 
-        q = &gUnk_0984C158;
-        n = &gUnk_02034F78;
+        q = &gMapGmk01Def;
+        n = &gMapGmkCount;
 
         for (i = 1; i >= 0; i--) {
             s32 size;
 
-            func_080E7D64(&w, q->unk_15);
+            MapGmkFindSpot(&w, q->spotFinder);
 
-            if (e->unk_00 & 0x10) {
-                gUnk_0203C7B8[*n].unk_00 = 10;
+            if (e->flags & 0x10) {
+                gMapGmkPlacements[*n].flags = 10;
             } else {
-                gUnk_0203C7B8[*n].unk_00 = 8;
+                gMapGmkPlacements[*n].flags = 8;
             }
 
-            gUnk_0203C7B8[*n].unk_14 = q;
-            gUnk_0203C7B8[*n].unk_04 = w;
-            gUnk_02034F7A += (size = q->tilesSize) / 32;
-            gUnk_02034F79++;
+            gMapGmkPlacements[*n].def = q;
+            gMapGmkPlacements[*n].pos = w;
+            gMapGmkTileCount += (size = q->tilesSize) / 32;
+            gMapGmkPaletteCount++;
             (*n)++;
         }
     }
 
-    if (gUnk_0203C7AC->unk_0D == 3 || gUnk_0203C7AC->unk_0D == 9 || gUnk_0203C7AC->unk_0D == 10 ||
-        gUnk_0203C7AC->unk_0D == 22) {
+    if (gMapRoomState->roomType == 3 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 10 ||
+        gMapRoomState->roomType == 22) {
         MapCell* p;
         u16 v;
 
-        q = &gUnk_0984C158;
-        func_080E7D64(&w, q->unk_15);
-        v = e->unk_00 & 0x10;
+        q = &gMapGmk01Def;
+        MapGmkFindSpot(&w, q->spotFinder);
+        v = e->flags & 0x10;
 
         if (v != 0) {
-            gUnk_0203C7B8[gUnk_02034F78].unk_00 = 2;
+            gMapGmkPlacements[gMapGmkCount].flags = 2;
         } else {
-            gUnk_0203C7B8[gUnk_02034F78].unk_00 = 0;
+            gMapGmkPlacements[gMapGmkCount].flags = 0;
         }
 
-        gUnk_0203C7B8[gUnk_02034F78].unk_14 = q;
-        gUnk_0203C7B8[gUnk_02034F78].unk_04 = w;
-        gUnk_02034F7A += q->tilesSize >> 5;
-        gUnk_02034F79++;
-        gUnk_02034F78++;
-        p = func_080E67D4(w.x, w.y + w.z);
-        p->unk_00 |= 0x80;
+        gMapGmkPlacements[gMapGmkCount].def = q;
+        gMapGmkPlacements[gMapGmkCount].pos = w;
+        gMapGmkTileCount += q->tilesSize >> 5;
+        gMapGmkPaletteCount++;
+        gMapGmkCount++;
+        p = MapCellAtPos(w.x, w.y + w.z);
+        p->flags |= 0x80;
     }
 }
 
-void func_080E7FCC(void) {
+void MapGmkPlaceGmk04(void) {
     FldPos w;
 
-    if (gUnk_0203C7AC->unk_0D == 6 || gUnk_0203C7AC->unk_0D == 0x17) {
-        func_080E7D64(&w, gUnk_0984C1CC.unk_15);
-        gUnk_0203C7B8[gUnk_02034F78].unk_00 = 0;
-        gUnk_0203C7B8[gUnk_02034F78].unk_14 = &gUnk_0984C1CC;
-        gUnk_0203C7B8[gUnk_02034F78].unk_04 = w;
-        gUnk_02034F7A += gUnk_0984C1CC.tilesSize >> 5;
-        gUnk_02034F79++;
-        gUnk_02034F78++;
+    if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 0x17) {
+        MapGmkFindSpot(&w, gMapGmk04Def.spotFinder);
+        gMapGmkPlacements[gMapGmkCount].flags = 0;
+        gMapGmkPlacements[gMapGmkCount].def = &gMapGmk04Def;
+        gMapGmkPlacements[gMapGmkCount].pos = w;
+        gMapGmkTileCount += gMapGmk04Def.tilesSize >> 5;
+        gMapGmkPaletteCount++;
+        gMapGmkCount++;
     }
 }
 
-void func_080E8058(void) {
+void MapGmkPlaceMoogle(void) {
     FldPos w;
 
-    if (gUnk_0203C7AC->unk_0D == 11) {
-        func_080E7D64(&w, gUnk_0984C204.unk_15);
-        gUnk_0203C7B8[gUnk_02034F78].unk_00 = 0;
-        gUnk_0203C7B8[gUnk_02034F78].unk_14 = &gUnk_0984C204;
-        gUnk_0203C7B8[gUnk_02034F78].unk_04 = w;
-        gUnk_02034F7A += gUnk_0984C204.tilesSize >> 5;
-        gUnk_02034F79++;
-        gUnk_02034F78++;
+    if (gMapRoomState->roomType == 11) {
+        MapGmkFindSpot(&w, gMapGmk05Def.spotFinder);
+        gMapGmkPlacements[gMapGmkCount].flags = 0;
+        gMapGmkPlacements[gMapGmkCount].def = &gMapGmk05Def;
+        gMapGmkPlacements[gMapGmkCount].pos = w;
+        gMapGmkTileCount += gMapGmk05Def.tilesSize >> 5;
+        gMapGmkPaletteCount++;
+        gMapGmkCount++;
     }
 }
 
-void func_080E80E0(void) {
+void MapGmkPlaceWorldGimmicks(void) {
     FldPos w;
-    const UnkStruct_080E7D80* t;
+    const MapGmkDef* t;
     s32 i;
     s32 f;
 
-    if (gUnk_0203C7AC->unk_0D == 6 || gUnk_0203C7AC->unk_0D == 9 || gUnk_0203C7AC->unk_0D == 11 ||
-        gUnk_0203C7AC->unk_0D == 22 || gUnk_0203C7AC->unk_0D == 23) {
+    if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 11 ||
+        gMapRoomState->roomType == 22 || gMapRoomState->roomType == 23) {
         return;
     }
 
-    for (i = gUnk_02034F78; i <= 15; i++) {
-        switch (gUnk_0203C590.unk_04) {
+    for (i = gMapGmkCount; i <= 15; i++) {
+        switch (gMapFloorState.world) {
         case 10:
-            t = &gUnk_09857A2C[0];
+            t = &gWorldMapGmkDefs[0];
             break;
         case 4:
-            t = &gUnk_09857A2C[1];
+            t = &gWorldMapGmkDefs[1];
             break;
         case 2:
-            t = &gUnk_09857A2C[2];
+            t = &gWorldMapGmkDefs[2];
             break;
         case 6:
-            t = &gUnk_09857A2C[3];
+            t = &gWorldMapGmkDefs[3];
             break;
         case 8:
-            t = GetRandom() % 2 ? &gUnk_09857A2C[4] : &gUnk_09857A2C[5];
+            t = GetRandom() % 2 ? &gWorldMapGmkDefs[4] : &gWorldMapGmkDefs[5];
             break;
         case 12:
-            t = &gUnk_09857A2C[6];
+            t = &gWorldMapGmkDefs[6];
             break;
         default:
-            t = &gUnk_0984C190;
+            t = &gMapGmkBarrelDef;
             break;
         }
 
-        if (gUnk_02034F7A + t->tilesSize / 32 > 0x200) {
+        if (gMapGmkTileCount + t->tilesSize / 32 > 0x200) {
             return;
         }
 
-        f = (u8)func_080E7D80(t->palette);
+        f = (u8)MapGmkIsPaletteUnused(t->palette);
 
-        if (f != 0 && gUnk_02034F79 > 5) {
+        if (f != 0 && gMapGmkPaletteCount > 5) {
             return;
         }
 
-        if (func_080E7D64(&w, t->unk_15) == 0) {
+        if (MapGmkFindSpot(&w, t->spotFinder) == 0) {
             return;
         }
 
-        gUnk_0203C7B8[gUnk_02034F78].unk_00 = 0;
-        gUnk_0203C7B8[gUnk_02034F78].unk_14 = t;
-        gUnk_0203C7B8[gUnk_02034F78].unk_04 = w;
-        gUnk_02034F7A += t->tilesSize >> 5;
-        gUnk_02034F78++;
+        gMapGmkPlacements[gMapGmkCount].flags = 0;
+        gMapGmkPlacements[gMapGmkCount].def = t;
+        gMapGmkPlacements[gMapGmkCount].pos = w;
+        gMapGmkTileCount += t->tilesSize >> 5;
+        gMapGmkCount++;
 
         if (f != 0) {
-            gUnk_02034F79++;
+            gMapGmkPaletteCount++;
         }
     }
 }
 
-void func_080E826C(void) {
+void MapGmkPlaceRandomGimmicks(void) {
     s32 i;
 
-    for (i = gUnk_02034F78; i < 16; i++) {
+    for (i = gMapGmkCount; i < 16; i++) {
         FldPos w;
-        const UnkStruct_080E7D80* e = &gUnk_09856FB4[func_080E6634(i)];
-        u8 f = func_080E7DB8(e->unk_14, e->tiles);
+        const MapGmkDef* e = &gMapGmkDefs[GetRandomMapGmkIndex(i)];
+        u8 f = MapGmkNeedsTiles(e->ownTiles, e->tiles);
         u8 g;
 
         if (f != 0) {
-            if ((e->tilesSize >> 5) + gUnk_02034F7A > 512) {
+            if ((e->tilesSize >> 5) + gMapGmkTileCount > 512) {
                 continue;
             }
         }
 
-        g = func_080E7D80(e->palette);
+        g = MapGmkIsPaletteUnused(e->palette);
 
         if (g != 0) {
-            if (gUnk_02034F79 > 5) {
+            if (gMapGmkPaletteCount > 5) {
                 continue;
             }
         }
 
-        if (func_080E7D64(&w, e->unk_15) == 0) {
+        if (MapGmkFindSpot(&w, e->spotFinder) == 0) {
             continue;
         }
 
-        gUnk_0203C7B8[gUnk_02034F78].unk_00 = 0;
-        gUnk_0203C7B8[gUnk_02034F78].unk_14 = e;
-        gUnk_0203C7B8[gUnk_02034F78].unk_04 = w;
-        gUnk_02034F78++;
+        gMapGmkPlacements[gMapGmkCount].flags = 0;
+        gMapGmkPlacements[gMapGmkCount].def = e;
+        gMapGmkPlacements[gMapGmkCount].pos = w;
+        gMapGmkCount++;
 
         if (f != 0) {
-            gUnk_02034F7A += e->tilesSize >> 5;
+            gMapGmkTileCount += e->tilesSize >> 5;
         }
 
         if (g != 0) {
-            gUnk_02034F79++;
+            gMapGmkPaletteCount++;
         }
     }
 }
 
-u8 func_080E8374(FldObj* p) {
-    s32 lim = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + 0x4000 + (p->unk_1A << 8);
+u8 FldObjIsOutOfView(FldObj* p) {
+    s32 lim = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z + 0x4000 + (p->height << 8);
 
     if (p->fieldPosition.x < gFieldState->x || p->fieldPosition.x > gFieldState->x + 0xF000 ||
         p->fieldPosition.y + p->fieldPosition.z < gFieldState->y || p->fieldPosition.y + p->fieldPosition.z > lim) {
@@ -1597,11 +1597,11 @@ u8 func_080E8374(FldObj* p) {
     return 0;
 }
 
-u16 func_080E83C4(void) {
-    return 512 - gUnk_02034F7A;
+u16 MapGmkGetFreeTiles(void) {
+    return 512 - gMapGmkTileCount;
 }
 
-void func_080E83DC(s32 a, s32 b, s32 c) {
+void CreateRandomMapPrizes(s32 a, s32 b, s32 c) {
     u16 r;
 
     if (gGameState.flags & 8) {
@@ -1633,68 +1633,68 @@ void func_080E83DC(s32 a, s32 b, s32 c) {
     }
 }
 
-void func_080E84DC(FldPos* p) {
+void DropMapGmkPrize(FldPos* p) {
     u16 r = GetRandom() % 10000;
 
     if (r <= 0x5DB) {
-        if (func_080E8FB8(0, p->x, p->y, p->z) != 1) {
-            func_080E83DC(p->x, p->y, p->z);
+        if (TryCreateRandomPrzCard(0, p->x, p->y, p->z) != 1) {
+            CreateRandomMapPrizes(p->x, p->y, p->z);
         }
     } else if (r <= 0x1D4B) {
-        func_080E83DC(p->x, p->y, p->z);
+        CreateRandomMapPrizes(p->x, p->y, p->z);
     }
 }
 
-void func_080E853C(void) {
-    if (gGameState.unk_000 == 0) {
-        gUnk_0203C7B8 = EwramAlloc(sizeof(UnkStruct_0203C7B8) * 16);
-        gUnk_02034F78 = 0;
-        gUnk_02034F79 = 0;
-        gUnk_02034F7A = 0;
-        func_080E7DF8();
-        func_080E7E3C();
-        func_080E7FCC();
-        func_080E8058();
-        func_080E826C();
-        func_080E80E0();
+void MapGmkInitRoom(void) {
+    if (gGameState.fieldResume == 0) {
+        gMapGmkPlacements = EwramAlloc(sizeof(MapGmkPlacement) * 16);
+        gMapGmkCount = 0;
+        gMapGmkPaletteCount = 0;
+        gMapGmkTileCount = 0;
+        MapGmkReserveJump();
+        MapGmkPlaceGmk01();
+        MapGmkPlaceGmk04();
+        MapGmkPlaceMoogle();
+        MapGmkPlaceRandomGimmicks();
+        MapGmkPlaceWorldGimmicks();
     }
-    func_080E8594();
+    MapGmkCreateTasks();
 }
 
-void func_080E8594(void) {
+void MapGmkCreateTasks(void) {
     s32 i;
-    UnkStruct_02034F20* p;
-    const UnkStruct_080E7D80* d;
+    MapPlatform* p;
+    const MapGmkDef* d;
 
     for (i = 0; i < 12; i++) {
-        p = func_080E54A0(i);
-        if (p->unk_08 == 0 && p->unk_14 != 0x100000) {
+        p = GetMapPlatform(i);
+        if (p->hasStairs == 0 && p->spotLowerZ != 0x100000) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkJump, p);
         }
     }
-    for (i = 0; i < gUnk_02034F78; i++) {
-        d = gUnk_0203C7B8[i].unk_14;
+    for (i = 0; i < gMapGmkCount; i++) {
+        d = gMapGmkPlacements[i].def;
 
-        if ((gUnk_0203C7B8[i].unk_00 & 1) == 0) {
-            TaskCreate(&gFieldState->tasks, d->desc, &gUnk_0203C7B8[i]);
+        if ((gMapGmkPlacements[i].flags & 1) == 0) {
+            TaskCreate(&gFieldState->tasks, d->desc, &gMapGmkPlacements[i]);
         }
     }
     TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkDmy, 0);
 }
 
-void func_080E8624(void) {
-    if (gGameState.unk_000 == 0) {
-        EwramFree(gUnk_0203C7B8);
+void MapGmkFree(void) {
+    if (gGameState.fieldResume == 0) {
+        EwramFree(gMapGmkPlacements);
     }
 }
 
-u8* func_080E8644(void* a, u16 b, u16 c) {
+u8* GetCellMaskBlock(void* a, u16 b, u16 c) {
     u8* p = a;
 
-    return gUnk_0984B860[p[(u8)(b >> 3) + (u8)(c >> 3) * 4]];
+    return gCellMasks[p[(u8)(b >> 3) + (u8)(c >> 3) * 4]];
 }
 
-void* func_080E8668(u8 a) {
+void* GetCellMaskTable(u8 a) {
     s32 i;
 
     switch (a) {
@@ -1721,10 +1721,10 @@ void* func_080E8668(u8 a) {
         i = 0;
         break;
     }
-    return &gUnk_0984B860[i + 10];
+    return &gCellMasks[i + 10];
 }
 
-u8 func_080E86C8(MapCell* p, s32 x, s32 y) {
+u8 MapCellMaskBitAt(MapCell* p, s32 x, s32 y) {
     u16 cx;
     u16 cy;
     u8 bx;
@@ -1736,13 +1736,13 @@ u8 func_080E86C8(MapCell* p, s32 x, s32 y) {
     }
     cx = (x >> 8) % 32;
     cy = (y >> 8) % 16;
-    t = func_080E8644(p->unk_10, cx, cy);
+    t = GetCellMaskBlock(p->maskTable, cx, cy);
     bx = cx & 7;
     by = cy & 7;
     return (t[by] >> (7 - bx)) & 1;
 }
 
-void func_080E8724(s16 x, s16 y, const u8* p, u16* base) {
+void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* p, u16* base) {
     s32 i;
     s32 j;
     s32 off;
@@ -1769,8 +1769,8 @@ void func_080E8724(s16 x, s16 y, const u8* p, u16* base) {
             }
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
             // @bug q is NULL where the pattern reaches past the room edge (NULL write).
-            q->unk_04 = 50;
-            q->unk_18 = base + off;
+            q->bg2Piece = 50;
+            q->bg2Map = base + off;
         }
     }
 }
@@ -1783,21 +1783,21 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
         // @bug MapCellAt returns NULL past the room edge (NULL read).
         q = MapCellAt(x + p->dx, y + p->dy);
 
-        if (q->unk_0C == 0x100000) {
+        if (q->lowerZ == 0x100000) {
             return 0;
         }
-        if (p->unk_04 != 7 && q->unk_03 != p->unk_04) {
+        if (p->unk_04 != 7 && q->bg3Piece != p->unk_04) {
             return 0;
         }
-        if (q->unk_04 != p->unk_05) {
+        if (q->bg2Piece != p->unk_05) {
             return 0;
         }
         v = 0x520;
 
-        if ((q->unk_00 & v) != 0) {
+        if ((q->flags & v) != 0) {
             return 0;
         }
-        v = q->unk_00 & 12;
+        v = q->flags & 12;
         v = v & ~p->unk_08;
 
         if (v != p->unk_06) {
@@ -1808,10 +1808,10 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
     return 1;
 }
 
-void func_080E8864(UnkStruct_080E8864* p) {
-    u16 w = gUnk_0203C7AC->unk_04 - p->unk_04 + 1;
-    u16 h = gUnk_0203C7AC->unk_0A - gUnk_0203C7AC->unk_08 + 7;
-    s16 y0 = gUnk_0203C7AC->unk_08 - 7;
+void MapApplyLayer1DecorRule(MapDecorRule* p) {
+    u16 w = gMapRoomState->cols - p->width + 1;
+    u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow + 7;
+    s16 y0 = gMapRoomState->topRow - 7;
     s32 i;
 
     for (i = 0; i < h; i++) {
@@ -1819,25 +1819,25 @@ void func_080E8864(UnkStruct_080E8864* p) {
         s16 j;
 
         for (j = 0; j < w; j++) {
-            if (MapPatternFits(j, y, (const MapCellPattern*)p->unk_00)) {
-                if (GetRandom() % 100 < p->unk_06) {
-                    func_080E8724(j, y, p->unk_08, p->unk_0C);
+            if (MapPatternFits(j, y, (const MapCellPattern*)p->pattern)) {
+                if (GetRandom() % 100 < p->chance) {
+                    MapPlaceLayer1DecorPiece(j, y, p->pieces, p->tilemap);
                 }
             }
         }
     }
 }
 
-void func_080E891C(UnkStruct_080E8864* p) {
+void MapApplyLayer1DecorRules(MapDecorRule* p) {
     if (p != 0) {
-        while (p->unk_00 != 0) {
-            func_080E8864(p);
+        while (p->pattern != 0) {
+            MapApplyLayer1DecorRule(p);
             p++;
         }
     }
 }
 
-void func_080E893C(s16 x, s16 y, const u8* p, u16* base) {
+void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* p, u16* base) {
     s32 i;
     s32 j;
     s32 off;
@@ -1853,15 +1853,15 @@ void func_080E893C(s16 x, s16 y, const u8* p, u16* base) {
             q = MapCellAt(x + j, y + i);
             off = (p[2] + i) * 64 + (p[1] + j) * 4;
             // @bug q is NULL where the pattern reaches past the room edge (NULL write).
-            q->unk_05 = 38;
-            q->unk_1C = base + off;
+            q->bg1Piece = 38;
+            q->bg1Map = base + off;
         }
     }
 }
 
-u8 func_080E89E4(s16 x, s16 y, const u8* p) {
+u8 MapDecorCheckFits(s16 x, s16 y, const u8* p) {
     while (p[0] != 0xFF) {
-        if (MapCellAt(p[0] + x, p[1] + y)->unk_05 != p[2]) {
+        if (MapCellAt(p[0] + x, p[1] + y)->bg1Piece != p[2]) {
             return 0;
         }
         p += 4;
@@ -1869,135 +1869,135 @@ u8 func_080E89E4(s16 x, s16 y, const u8* p) {
     return 1;
 }
 
-void func_080E8A24(UnkStruct_080E8864* p) {
+void MapApplyLayer2DecorRule(MapDecorRule* p) {
     s16 i;
     s16 j;
     u16 w;
     u16 h;
 
-    w = gUnk_0203C7AC->unk_04 - p->unk_04 + 1;
-    h = gUnk_0203C7AC->unk_06 - p->unk_05 + 1;
+    w = gMapRoomState->cols - p->width + 1;
+    h = gMapRoomState->rows - p->height + 1;
     for (j = 0; j < h; j++) {
         for (i = 0; i < w; i++) {
-            if (func_080E89E4(i, j, p->unk_00)) {
-                if (GetRandom() % 100 < p->unk_06) {
-                    func_080E893C(i, j, p->unk_08, p->unk_0C);
+            if (MapDecorCheckFits(i, j, p->pattern)) {
+                if (GetRandom() % 100 < p->chance) {
+                    MapPlaceLayer2DecorPiece(i, j, p->pieces, p->tilemap);
                 }
             }
         }
     }
 }
 
-void func_080E8AC8(UnkStruct_080E8864* p) {
+void MapApplyLayer2DecorRules(MapDecorRule* p) {
     if (p != 0) {
-        while (p->unk_00 != 0) {
-            func_080E8A24(p);
+        while (p->pattern != 0) {
+            MapApplyLayer2DecorRule(p);
             p++;
         }
     }
 }
 
-void func_080E8AE8(void) {
-    if (gGameState.unk_000 == 0) {
-        UnkStruct_09EF70D0* p = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+void MapApplyRoomDecor(void) {
+    if (gGameState.fieldResume == 0) {
+        MapRoomDef* p = gMapRoomDefs[gMapFloorState.world];
 
-        func_080E891C(p->unk_24);
-        func_080E8AC8(p->unk_28);
+        MapApplyLayer1DecorRules(p->layer1DecorRules);
+        MapApplyLayer2DecorRules(p->layer2DecorRules);
     }
 }
 
-void func_080E8B1C(UnkStruct_080E8B1C* p, const UnkStruct_080E7D80* q) {
-    p->unk_00 = q->tiles;
-    p->unk_04 = q->tilesSize;
-    p->unk_08 += q->unk_0A << 5;
-    p->unk_10 = 0;
-    p->unk_14 = q->palette;
-    p->unk_18 = q->palette;
+void MapAnmSetupSlot(MapAnmSlot* p, const MapGmkDef* q) {
+    p->tiles = q->tiles;
+    p->frameSize = q->tilesSize;
+    p->dest += q->unk_0A << 5;
+    p->timer = 0;
+    p->script = q->palette;
+    p->scriptPos = q->palette;
 }
 
-void func_080E8B40(UnkStruct_080E8B1C* p) {
+void MapAnmStepScript(MapAnmSlot* p) {
     s16* q;
-    u8 (*f)(UnkStruct_080E8B1C*);
+    u8 (*f)(MapAnmSlot*);
 
-    if (p->unk_14 == 0) {
+    if (p->script == 0) {
         return;
     }
 
     do {
-        q = p->unk_18;
+        q = p->scriptPos;
 
         if (*q & 0x8000) {
-            f = gUnk_09EF6A88[*(u8*)q];
+            f = gMapAnmCmds[*(u8*)q];
         } else {
-            f = func_080E8BE4;
+            f = MapAnmCmdFrame;
         }
     } while (f(p));
 }
 
-void func_080E8B84(UnkStruct_080E8B1C* p) {
-    if (p->unk_0C != 0) {
-        RequestDma3Copy(p->unk_0C, p->unk_08, p->unk_04);
-        p->unk_0C = 0;
+void MapAnmFlushSlot(MapAnmSlot* p) {
+    if (p->pending != 0) {
+        RequestDma3Copy(p->pending, p->dest, p->frameSize);
+        p->pending = 0;
     }
 }
 
-void func_080E8BA0(UnkStruct_080E8B1C* p) {
-    func_080E8B40(p);
-    func_080E8B84(p);
+void MapAnmUpdateSlot(MapAnmSlot* p) {
+    MapAnmStepScript(p);
+    MapAnmFlushSlot(p);
 }
 
-void func_080E8BB4(UnkStruct_080E8B1C* p) {
-    p->unk_00 = 0;
-    p->unk_08 = (u8*)GetBgCharBase(2) + 0x7800;
-    p->unk_0C = 0;
-    p->unk_10 = 0;
-    p->unk_14 = 0;
-    p->unk_18 = 0;
+void MapAnmResetSlot(MapAnmSlot* p) {
+    p->tiles = 0;
+    p->dest = (u8*)GetBgCharBase(2) + 0x7800;
+    p->pending = 0;
+    p->timer = 0;
+    p->script = 0;
+    p->scriptPos = 0;
 }
 
-u8 func_080E8BD8(UnkStruct_080E8B1C* p) {
-    p->unk_14 = 0;
-    p->unk_18 = 0;
+u8 MapAnmCmdEnd(MapAnmSlot* p) {
+    p->script = 0;
+    p->scriptPos = 0;
     return 0;
 }
 
-u8 func_080E8BE4(UnkStruct_080E8B1C* p) {
-    UnkStruct_080E8B1C* w = p;
+u8 MapAnmCmdFrame(MapAnmSlot* p) {
+    MapAnmSlot* w = p;
     s16* q;
     s16 n;
 
-    if (p->unk_10 == 0) {
-        p->unk_0C = (u8*)p->unk_00 + p->unk_04 * p->unk_18[1];
+    if (p->timer == 0) {
+        p->pending = (u8*)p->tiles + p->frameSize * p->scriptPos[1];
     }
 
-    q = w->unk_18;
+    q = w->scriptPos;
     n = *(u16*)q & 0x7FFF;
 
     if (n != 0) {
-        w->unk_10++;
+        w->timer++;
 
-        if (w->unk_10 >= n) {
-            w->unk_10 = 0;
-            w->unk_18 = q + 2;
+        if (w->timer >= n) {
+            w->timer = 0;
+            w->scriptPos = q + 2;
         }
     }
     return 0;
 }
 
-u8 func_080E8C30(UnkStruct_080E8B1C* p) {
-    p->unk_18 = p->unk_14;
+u8 MapAnmCmdLoop(MapAnmSlot* p) {
+    p->scriptPos = p->script;
     return 1;
 }
 
 u8 IsEventDoor(u8 a, u8 b) {
-    UnkStruct_080DEDD8* p;
+    MapEventDoor* p;
 
-    if ((s32)gUnk_0203C7AC->flags < 0) {
+    if ((s32)gMapRoomState->flags < 0) {
         return 0;
     }
-    p = func_080DEDD8(0);
-    while (p->unk_00 != 5) {
-        if (p->unk_01 != 0xFF && p->unk_02 == a && p->unk_03 == b) {
+    p = GetMapEventDoor(0);
+    while (p->kind != 5) {
+        if (p->keyList != 0xFF && p->room == a && p->side == b) {
             return 1;
         }
         p++;
@@ -2006,18 +2006,18 @@ u8 IsEventDoor(u8 a, u8 b) {
 }
 
 u8 SelectEventDoor(u8 a, u8 b) {
-    UnkStruct_080DEDD8* p;
+    MapEventDoor* p;
     u8 i;
 
-    if ((s32)gUnk_0203C7AC->flags < 0) {
+    if ((s32)gMapRoomState->flags < 0) {
         return 0;
     }
     i = 0;
-    p = func_080DEDD8(0);
-    while (p->unk_00 != 5) {
-        if (p->unk_01 != 0xFF && p->unk_02 == a && p->unk_03 == b) {
-            gEventKeyList = &gEventKeyLists[p->unk_01];
-            gEventKeyProgress = &gUnk_0203C590.eventKeyProgress[i];
+    p = GetMapEventDoor(0);
+    while (p->kind != 5) {
+        if (p->keyList != 0xFF && p->room == a && p->side == b) {
+            gEventKeyList = &gEventKeyLists[p->keyList];
+            gEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
             return 1;
         }
         i++;
@@ -2042,46 +2042,46 @@ EventKey* GetEventKey(u8 a) {
     return &gEventKey;
 }
 
-u8 DoorAcceptsMapCard(UnkStruct_080E8D64* p) {
+u8 DoorAcceptsMapCard(MapCardAttributes* p) {
     EventKey* q;
     u8 n;
 
-    if (IsEventDoor(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10) == 0) {
-        if (p->unk_00 > 21) {
+    if (IsEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide) == 0) {
+        if (p->kind > 21) {
             return 0;
         }
 
-        n = func_080DF548(gUnk_0203C590.unk_06);
+        n = GetMapRoomCardValue(gMapFloorState.room);
 
-        if (p->unk_02 == 0) {
+        if (p->value == 0) {
             return 1;
         }
-        return p->unk_02 > n;
+        return p->value > n;
     }
 
     q = GetEventKey(0);
 
     if (q->kind != 0xFF) {
-        if (q->kind != p->unk_00) {
+        if (q->kind != p->kind) {
             return 0;
         }
-    } else if (p->unk_00 > 21) {
+    } else if (p->kind > 21) {
         return 0;
     }
 
-    if (q->color != 0 && q->color != p->unk_04) {
+    if (q->color != 0 && q->color != p->color) {
         return 0;
     }
 
     switch (q->rule) {
     case 1:
-        return p->unk_02 >= q->value;
+        return p->value >= q->value;
     case 2:
-        return p->unk_02 <= q->value;
+        return p->value <= q->value;
     case 3:
-        return p->unk_02 == q->value;
+        return p->value == q->value;
     case 4:
-        return p->unk_02 != 0;
+        return p->value != 0;
     }
     return 1;
 }
@@ -2099,26 +2099,26 @@ s32 PayEventKey(UnkStruct_080E8E24* p) {
     return 1;
 }
 
-UnkStruct_080E8E24* func_080E8E74(u8 a) {
+UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
     u16 v = GetRandom() % 10000;
-    UnkStruct_080E8E74** t = gUnk_09EF8388;
-    UnkStruct_080E8E74* p = t[gGameState.world];
+    PrzCardChance** t = gWorldPrzCardChances;
+    PrzCardChance* p = t[gGameState.world];
 
-    while (p->unk_00 != 41) {
-        UnkStruct_080E8E24* q = &gUnk_0985814C[p->unk_00];
-        u16 n = a != 0 ? p->unk_04 : p->unk_02;
+    while (p->cardIndex != 41) {
+        UnkStruct_080E8E24* q = &gPrzCardKinds[p->cardIndex];
+        u16 n = a != 0 ? p->weight2 : p->weight;
 
         if (v < n) {
-            if (func_0800FC5C(q->unk_00[0])) {
+            if (IsCardKindObtained(q->unk_00[0])) {
                 return q;
             }
-            if (p->unk_00 <= 16) {
-                return &gUnk_0985814C[0];
+            if (p->cardIndex <= 16) {
+                return &gPrzCardKinds[0];
             }
-            if (p->unk_00 <= 30) {
-                return &gUnk_0985814C[20];
+            if (p->cardIndex <= 30) {
+                return &gPrzCardKinds[20];
             }
-            return &gUnk_0985814C[31];
+            return &gPrzCardKinds[31];
         }
         v -= n;
         p++;
@@ -2126,11 +2126,11 @@ UnkStruct_080E8E24* func_080E8E74(u8 a) {
     return 0;
 }
 
-u8 func_080E8F0C(void) {
+u8 RollCardValue(void) {
     u16 acc = 0;
     u16 r = GetRandom() % 10000;
     s32 i;
-    const u16* p = gUnk_09858238;
+    const u16* p = gCardValueWeights;
 
     for (i = 0; i < 10; i++) {
         acc += p[i];
@@ -2141,26 +2141,26 @@ u8 func_080E8F0C(void) {
     return 0;
 }
 
-s32 func_080E8F50(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
-    UnkStruct_080E8F50 w;
+s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
+    MapPrizeArgs w;
 
-    w.unk_00 = b;
-    w.unk_04 = c;
-    w.unk_08 = d;
-    w.unk_0C = e;
-    w.unk_14 = a->unk_02;
-    if (w.unk_14 <= 0x1B8) {
-        w.unk_14 += func_080E8F0C();
+    w.worldPrize = b;
+    w.x = c;
+    w.y = d;
+    w.z = e;
+    w.id = a->unk_02;
+    if (w.id <= 0x1B8) {
+        w.id += RollCardValue();
     }
 
-    if (CountCardsById(w.unk_14) <= 0x62) {
+    if (CountCardsById(w.id) <= 0x62) {
         TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzCard, &w);
         return 1;
     }
     return 0;
 }
 
-u8 func_080E8FB8(u8 a, s32 b, s32 c, s32 d) {
+u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
     UnkStruct_080E8E24* q;
 
     if (gGameState.flags & 8) {
@@ -2171,155 +2171,155 @@ u8 func_080E8FB8(u8 a, s32 b, s32 c, s32 d) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->flags & 0x20) {
+    if (gMapRoomState->flags & 0x20) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->flags & 0x10) {
+    if (gMapRoomState->flags & 0x10) {
         return 0;
     }
 
-    if (func_080DEE18(gUnk_0203C590.unk_06)->unk_0C == 0) {
+    if (GetMapFloorRoom(gMapFloorState.room)->przCardsLeft == 0) {
         return 0;
     }
-    q = func_080E8E74(a);
+    q = PickRandomPrzCard(a);
     if (q == 0) {
         return 0;
     }
-    return func_080E8F50(q, 0, b, c, d);
+    return CreateMapPrzCardTask(q, 0, b, c, d);
 }
 
 void CreateMapPrizeTasks(u8 a, u8 b, s32 c, s32 d, s32 e) {
-    UnkStruct_080E8F50 w;
+    MapPrizeArgs w;
     s32 i;
 
-    w.unk_04 = c;
-    w.unk_08 = d;
-    w.unk_0C = e;
-    w.unk_14 = a;
+    w.x = c;
+    w.y = d;
+    w.z = e;
+    w.id = a;
 
     for (i = 0; i < b; i++) {
         TaskCreate(&gFieldState->tasks3, &gTaskDescMapPrize, &w);
     }
 }
 
-void func_080E9078(s32 x, s32 y, s32 z) {
-    UnkStruct_080E8E24* p = gUnk_09EF83C0[gGameState.world];
+void CreateWorldPrize(s32 x, s32 y, s32 z) {
+    UnkStruct_080E8E24* p = gWorldPrizeLists[gGameState.world];
     UnkStruct_080E8E24* e;
 
     for (; p->unk_00[0] != 4; p++) {
         switch (p->unk_00[0]) {
         case 0:
-            if (gUnk_0203C7AC->unk_0D == 22) {
+            if (gMapRoomState->roomType == 22) {
                 break;
             }
 
-            e = &gUnk_0985814C[p->unk_00[1]];
+            e = &gPrzCardKinds[p->unk_00[1]];
 
-            if (func_0800FC5C(e->unk_00[0]) == 1) {
+            if (IsCardKindObtained(e->unk_00[0]) == 1) {
                 break;
             }
 
-            func_0800FC14(e->unk_00[0]);
-            func_080E8F50(e, 1, x, y, z);
+            SetCardKindObtained(e->unk_00[0]);
+            CreateMapPrzCardTask(e, 1, x, y, z);
             return;
         case 1:
-            if (gUnk_0203C7AC->unk_0D == 22) {
+            if (gMapRoomState->roomType == 22) {
                 break;
             }
 
-            e = &gUnk_098581EC[p->unk_00[1]];
+            e = &gPrzStocks[p->unk_00[1]];
 
-            if (func_0800FBCC(e->unk_00[0]) == 1) {
+            if (IsStockLearned(e->unk_00[0]) == 1) {
                 break;
             }
 
-            func_0800FB2C(e->unk_00[0]);
+            LearnStock(e->unk_00[0]);
             TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, e);
             return;
         case 2:
-            if (gUnk_0203C7AC->unk_0D != 22) {
+            if (gMapRoomState->roomType != 22) {
                 break;
             }
 
-            e = &gUnk_0985814C[p->unk_00[1]];
+            e = &gPrzCardKinds[p->unk_00[1]];
 
-            if (func_0800FC5C(e->unk_00[0]) == 1) {
+            if (IsCardKindObtained(e->unk_00[0]) == 1) {
                 break;
             }
 
-            func_0800FC14(e->unk_00[0]);
-            func_080E8F50(e, 1, x, y, z);
-            gUnk_0203C590.unk_02 |= 0x40;
+            SetCardKindObtained(e->unk_00[0]);
+            CreateMapPrzCardTask(e, 1, x, y, z);
+            gMapFloorState.flags |= 0x40;
             return;
         case 3:
-            if (gUnk_0203C7AC->unk_0D != 22) {
+            if (gMapRoomState->roomType != 22) {
                 break;
             }
 
-            e = &gUnk_098581EC[p->unk_00[1]];
+            e = &gPrzStocks[p->unk_00[1]];
 
-            if (func_0800FBCC(e->unk_00[0]) != 1) {
-                func_0800FB2C(e->unk_00[0]);
+            if (IsStockLearned(e->unk_00[0]) != 1) {
+                LearnStock(e->unk_00[0]);
                 TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, e);
-                gUnk_0203C590.unk_02 |= 0x40;
+                gMapFloorState.flags |= 0x40;
                 return;
             }
             break;
         }
     }
 
-    if ((gGameState.flags & 0x800) && gGameState.world == WORLD_CASTLE_OBLIVION && func_0800FC5C(16) != 0) {
-        e = &gUnk_0985814C[14];
+    if ((gGameState.flags & 0x800) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(16) != 0) {
+        e = &gPrzCardKinds[14];
 
-        if (func_0800FC5C(e->unk_00[0]) != 1) {
-            func_0800FC14(e->unk_00[0]);
-            func_080E8F50(e, 1, x, y, z);
+        if (IsCardKindObtained(e->unk_00[0]) != 1) {
+            SetCardKindObtained(e->unk_00[0]);
+            CreateMapPrzCardTask(e, 1, x, y, z);
             return;
         }
 
         e += 24;
 
-        if (func_0800FC5C(e->unk_00[0]) != 1) {
-            func_0800FC14(e->unk_00[0]);
-            func_080E8F50(e, 1, x, y, z);
+        if (IsCardKindObtained(e->unk_00[0]) != 1) {
+            SetCardKindObtained(e->unk_00[0]);
+            CreateMapPrzCardTask(e, 1, x, y, z);
             return;
         }
 
         e++;
 
-        if (func_0800FC5C(e->unk_00[0]) != 1) {
-            func_0800FC14(e->unk_00[0]);
-            func_080E8F50(e, 1, x, y, z);
+        if (IsCardKindObtained(e->unk_00[0]) != 1) {
+            SetCardKindObtained(e->unk_00[0]);
+            CreateMapPrzCardTask(e, 1, x, y, z);
             return;
         }
     }
 
-    e = func_080E8E74(1);
+    e = PickRandomPrzCard(1);
 
     if (e != 0) {
-        func_080E8F50(e, 1, x, y, z);
+        CreateMapPrzCardTask(e, 1, x, y, z);
     }
 }
 
-u8 func_080E924C(void) {
+u8 AreWorldPrizesCollected(void) {
     s32 i;
     u8* p;
 
     for (i = 1; i <= 11; i++) {
-        UnkStruct_080E8E24** t = gUnk_09EF83C0;
+        UnkStruct_080E8E24** t = gWorldPrizeLists;
 
         p = (u8*)t[i];
 
         while (p[0] != 4) {
             switch (p[0]) {
             case 2:
-                if (func_0800FC5C((gUnk_0985814C + p[1])->unk_00[0]) != 1) {
+                if (IsCardKindObtained((gPrzCardKinds + p[1])->unk_00[0]) != 1) {
                     return 0;
                 }
                 break;
             case 3:
-                if (func_0800FBCC((gUnk_098581EC + p[1])->unk_00[0]) != 1) {
+                if (IsStockLearned((gPrzStocks + p[1])->unk_00[0]) != 1) {
                     return 0;
                 }
                 break;
@@ -2330,14 +2330,14 @@ u8 func_080E924C(void) {
     return 1;
 }
 
-void func_080E92B8(UnkStruct_080E92B8* p) {
+void CopyMapProgress(MapProgress* p) {
     s32 i;
     u32* src;
     u32* dst;
 
-    p->unk_00 = gGameState.world;
-    p->unk_01 = gGameState.floor;
-    memcpy(p->unk_04, &gUnk_0203C590, 0x21C);
+    p->world = gGameState.world;
+    p->floor = gGameState.floor;
+    memcpy(p->unk_04, &gMapFloorState, 0x21C);
     src = (u32*)gGameState.floors;
     dst = (u32*)p->floors;
 
@@ -2346,14 +2346,14 @@ void func_080E92B8(UnkStruct_080E92B8* p) {
     }
 }
 
-void func_080E92F8(UnkStruct_080E92B8* p) {
+void RestoreMapProgress(MapProgress* p) {
     s32 i;
     u32* src;
     u32* dst;
 
-    gGameState.world = p->unk_00;
-    gGameState.floor = p->unk_01;
-    memcpy(&gUnk_0203C590, p->unk_04, 0x21C);
+    gGameState.world = p->world;
+    gGameState.floor = p->floor;
+    memcpy(&gMapFloorState, p->unk_04, 0x21C);
     src = (u32*)p->floors;
     dst = (u32*)gGameState.floors;
 
@@ -2362,16 +2362,16 @@ void func_080E92F8(UnkStruct_080E92B8* p) {
     }
 }
 
-void func_080E9338(ModeFunc a) {
-    gUnk_02034F88 = a;
+void MapDbgSetUpdate(ModeFunc a) {
+    gMapDbgUpdate = a;
 }
 
-void func_080E9344(ModeFunc a) {
-    func_080E9338(a);
-    gUnk_02034F88();
+void MapDbgSetUpdateAndRun(ModeFunc a) {
+    MapDbgSetUpdate(a);
+    gMapDbgUpdate();
 }
 
-void func_080E935C(void) {
+void MapDbgFreeCameraInput(void) {
     s32 y = 0;
     s32 x = 0;
     u16 m1 = 0x200;
@@ -2389,7 +2389,7 @@ void func_080E935C(void) {
     if (GetKeysHeld() & DPAD_DOWN) {
         y = 1024;
     }
-    func_080E02A8(x, y);
+    MapMoveCameraTarget(x, y);
     if (GetKeysPressed() & A_BUTTON) {
         (*(volatile u16*)&gDispCnt) = ((*(volatile u16*)&gDispCnt) & ~DISPCNT_BG1_ON) | (m1 & ~(*(volatile u16*)&gDispCnt));
     }
@@ -2398,120 +2398,120 @@ void func_080E935C(void) {
     }
 }
 
-void func_080E93FC(void) {
-    if (gUnk_0203C7AC->flags & 2) {
-        gUnk_0203C7AC->flags &= ~2;
-        gUnk_0203C7AC->flags &= ~4;
-        gUnk_0203C7AC->flags &= ~0x80;
+void MapDbgMain(void) {
+    if (gMapRoomState->flags & 2) {
+        gMapRoomState->flags &= ~2;
+        gMapRoomState->flags &= ~4;
+        gMapRoomState->flags &= ~0x80;
     }
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080E9344(func_080E9508);
+        MapDbgSetUpdateAndRun(MapDbgExitRoom);
         return;
     }
-    if (gUnk_0203C7AC->flags & 0x2000) {
-        func_08000DE8(&gFieldState->tasks, gUnk_02034FA8);
-        gUnk_02034FA8 = 0;
-        func_080E9344(func_080E95E8);
+    if (gMapRoomState->flags & 0x2000) {
+        TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
+        gMapDbgAllmapRoomTask = 0;
+        MapDbgSetUpdateAndRun(MapDbgWaitMenu);
         return;
     }
     if (gFieldState->flags & 0x40000) {
-        func_08000DE8(&gFieldState->tasks, gUnk_02034FA8);
-        gUnk_02034FA8 = 0;
-        func_080E9344(func_080E963C);
+        TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
+        gMapDbgAllmapRoomTask = 0;
+        MapDbgSetUpdateAndRun(MapDbgWaitRoomCreate);
         return;
     }
-    if (gUnk_02034FA4 != 0) {
-        func_080E9344(func_080E95C4);
+    if (gMapDbgEditing != 0) {
+        MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
-    func_080E0780();
-    func_080E0820();
+    UpdateMapField();
+    DrawMapField();
     ColliderUpdateAll();
-    func_080E6264();
+    MapEnmUpdateSpawner();
     if ((GetKeysHeld() & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON)) {
         return;
     }
     if (GetKeysPressed() & START_BUTTON) {
-        func_080E9338(func_080E9550);
+        MapDbgSetUpdate(MapDbgFreeCameraMode);
     }
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
     }
 }
 
-void func_080E9508(void) {
-    func_080E0820();
+void MapDbgExitRoom(void) {
+    DrawMapField();
     if (FadeIsActive() == 0) {
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
-        if (gUnk_0203C7AC->unk_0F != 0xFD && gUnk_0203C7AC->unk_0F != 0xFE) {
+        SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
+        if (gMapRoomState->doorRoom != 0xFD && gMapRoomState->doorRoom != 0xFE) {
             ModeRequest(&gModeMapDbg, 0);
         } else {
-            func_080E04EC();
+            RequestMapMode();
         }
     }
 }
 
-void func_080E9550(void) {
-    if (gUnk_02034FA4 != 0) {
-        func_080E9344(func_080E95C4);
+void MapDbgFreeCameraMode(void) {
+    if (gMapDbgEditing != 0) {
+        MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
-    func_080E935C();
+    MapDbgFreeCameraInput();
     TaskPoolUpdate(&gFieldState->tasks);
-    func_080E0820();
+    DrawMapField();
     if ((GetKeysHeld() & (L_BUTTON | R_BUTTON)) == (L_BUTTON | R_BUTTON)) {
         return;
     }
     if (GetKeysPressed() & START_BUTTON) {
-        func_080E9338(func_080E93FC);
+        MapDbgSetUpdate(MapDbgMain);
     }
     if (GetKeysPressed() & SELECT_BUTTON) {
         ModeRequest(&gModeMapChk, 0);
     }
 }
 
-void func_080E95C4(void) {
-    func_080E0820();
-    if (gUnk_02034FA4 == 0) {
+void MapDbgWaitEdit(void) {
+    DrawMapField();
+    if (gMapDbgEditing == 0) {
         ModeRequest(&gModeMapDbg, 0);
     }
 }
 
-void func_080E95E8(void) {
-    if ((gFieldState->flags & 0x2000) == 0 && (gUnk_0203C7AC->flags & 0x2000) == 0) {
-        gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E8594();
-        func_080E9344(func_080E93FC);
+void MapDbgWaitMenu(void) {
+    if ((gFieldState->flags & 0x2000) == 0 && (gMapRoomState->flags & 0x2000) == 0) {
+        gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        MapGmkCreateTasks();
+        MapDbgSetUpdateAndRun(MapDbgMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
-void func_080E963C(void) {
+void MapDbgWaitRoomCreate(void) {
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080E9344(func_080E9508);
+        MapDbgSetUpdateAndRun(MapDbgExitRoom);
     } else if ((gFieldState->flags & 0x40000) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
-        gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E8594();
-        func_080E607C();
-        func_080E9344(func_080E93FC);
+        gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        MapGmkCreateTasks();
+        MapEnmRestoreFromCache();
+        MapDbgSetUpdateAndRun(MapDbgMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
 void Mode_MapDbg_0(void) {
-    UnkStruct_09EF70D0* p;
+    MapRoomDef* p;
 
     gFieldState = EwramAlloc(sizeof(FieldState));
-    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
-    func_080DEF20();
+    gMapRoomState = EwramAlloc(sizeof(MapRoomState));
+    UpdateGameWorld();
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(2, 0, 29, 0);
@@ -2523,109 +2523,109 @@ void Mode_MapDbg_0(void) {
     SetBgPriority(0, 0);
     SetBackdropColor(6, 31, 31);
     SetBlendAlpha(6, 10);
-    func_080E0558();
+    InitFieldState();
     ColliderPoolsInit();
-    func_080E05E4();
-    func_080E853C();
-    func_080E6178();
-    func_080E8AE8();
-    func_080E062C();
+    CreateMapRndTask();
+    MapGmkInitRoom();
+    MapEnmInitRoom();
+    MapApplyRoomDecor();
+    SpawnMapPlayer();
 
-    p = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+    p = gMapRoomDefs[gMapFloorState.world];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, 0);
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->unk_2C);
-    gUnk_02034FA8 = CreateAllmapRoomTask(&gFieldState->tasks);
-    func_080E9338(func_080E93FC);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
+    gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+    MapDbgSetUpdate(MapDbgMain);
 
-    if (gGameState.unk_000 != 0) {
-        func_080E0298(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
+    if (gGameState.fieldResume != 0) {
+        MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
     } else {
-        func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
+        MapSetCameraTarget(gFieldState->spawnX, gFieldState->spawnY);
     }
 
-    func_080E0078();
-    func_0801CB00();
+    MapSnapCamera();
+    ClearFieldResume();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
-    TaskPoolInit(&gUnk_02034F90, 1);
-    TaskCreate(&gUnk_02034F90, &gTaskDescMapDbg, &gUnk_02034FA4);
+    TaskPoolInit(&gMapDbgTasks, 1);
+    TaskCreate(&gMapDbgTasks, &gTaskDescMapDbg, &gMapDbgEditing);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapDmg, 0);
     FadeStartIn(0, 16);
 }
 
 void Mode_MapDbg_1(void) {
-    TaskPoolUpdate(&gUnk_02034F90);
-    TaskPoolDraw(&gUnk_02034F90);
-    gUnk_02034F88();
+    TaskPoolUpdate(&gMapDbgTasks);
+    TaskPoolDraw(&gMapDbgTasks);
+    gMapDbgUpdate();
     UpdatePlayTime();
 }
 
 void Mode_MapDbg_2(void) {
-    func_080E0878();
-    func_080E8624();
+    DestroyMapField();
+    MapGmkFree();
     EwramFree(gFieldState);
-    EwramFree(gUnk_0203C7AC);
-    TaskPoolDestroy(&gUnk_02034F90);
+    EwramFree(gMapRoomState);
+    TaskPoolDestroy(&gMapDbgTasks);
 }
 
-void func_080E988C(ModeFunc a) {
-    gUnk_02034FB0 = a;
+void MapFldSetUpdate(ModeFunc a) {
+    gMapFldUpdate = a;
 }
 
-void func_080E9898(ModeFunc a) {
-    func_080E988C(a);
-    gUnk_02034FB0();
+void MapFldSetUpdateAndRun(ModeFunc a) {
+    MapFldSetUpdate(a);
+    gMapFldUpdate();
 }
 
-void func_080E98B0(void) {
-    switch (gUnk_0203C590.unk_04) {
+void MapFldCreateWorldLogo(void) {
+    switch (gMapFloorState.world) {
     case 2:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)2);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)2);
         break;
     case 6:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)6);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)6);
         break;
     case 5:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)5);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)5);
         break;
     case 7:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)7);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)7);
         break;
     case 3:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)3);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)3);
         break;
     case 8:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)8);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)8);
         break;
     case 9:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)9);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)9);
         break;
     case 1:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)1);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)1);
         break;
     case 10:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)10);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)10);
         break;
     case 11:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)11);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)11);
         break;
     case 12:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)12);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)12);
         break;
     default:
-        gUnk_02034FB4 = TaskCreate(&gUnk_0203C7AC->tasks, &gTaskDescWLogo, (void*)4);
+        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)4);
         break;
     }
 }
 
-void func_080E9A00(void) {
-    if (gUnk_02034FB8 != 0) {
-        func_08000DE8(&gFieldState->tasks, gUnk_02034FB8);
-        gUnk_02034FB8 = 0;
+void MapFldDestroyAllmapRoom(void) {
+    if (gMapFldAllmapRoomTask != 0) {
+        TaskKill(&gFieldState->tasks, gMapFldAllmapRoomTask);
+        gMapFldAllmapRoomTask = 0;
     }
 }
 
-void func_080E9A28(void) {
+void StartWorldBossBattle(void) {
     switch (gGameState.world) {
     case WORLD_TRAVERSE_TOWN:
         ModeRequest(&gModeBattle, 0x94);
@@ -2654,168 +2654,168 @@ void func_080E9A28(void) {
     }
 }
 
-void func_080E9AF0(void) {
-    u8 r = IsTaskActive(gUnk_02034FB4);
+void MapFldShowWorldLogo(void) {
+    u8 r = IsTaskActive(gMapFldWorldLogoTask);
 
     if (r != 0) {
-        TaskPoolUpdate(&gUnk_0203C7AC->tasks);
-        TaskPoolDraw(&gUnk_0203C7AC->tasks);
+        TaskPoolUpdate(&gMapRoomState->tasks);
+        TaskPoolDraw(&gMapRoomState->tasks);
         TaskPoolUpdate(&gFieldState->tasks);
-        func_080E0820();
+        DrawMapField();
     } else {
-        u16 t = gUnk_0203C590.unk_02 | 0x10;
-        gUnk_0203C590.unk_02 = t;
-        gUnk_02034FB4 = 0;
-        gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
+        u16 t = gMapFloorState.flags | 0x10;
+        gMapFloorState.flags = t;
+        gMapFldWorldLogoTask = 0;
+        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         gFieldState->flags &= ~0x200;
         gFieldState->flags &= ~1;
-        func_080E9898(func_080E9B7C);
+        MapFldSetUpdateAndRun(MapFldMain);
     }
 }
 
-void func_080E9B7C(void) {
-    if (gUnk_0203C7AC->flags & 2) {
+void MapFldMain(void) {
+    if (gMapRoomState->flags & 2) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898(func_080E9D94);
+        MapFldSetUpdateAndRun(MapFldStartBattle);
         return;
     }
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898(func_080E9CBC);
+        MapFldSetUpdateAndRun(MapFldExitRoom);
         return;
     }
     if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
-        (gFieldState->flags & 0x41000) == 0 && (gUnk_0203C7AC->flags & 4) == 0) {
+        (gFieldState->flags & 0x41000) == 0 && (gMapRoomState->flags & 4) == 0) {
         if (GetKeysPressed() & SELECT_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
             FadeStartOut(0, 16);
             FadeLock();
-            func_080E9898(func_080E9E04);
+            MapFldSetUpdateAndRun(MapFldOpenAllmap);
             return;
         }
         if (GetKeysPressed() & START_BUTTON) {
-            func_080E9A00();
+            MapFldDestroyAllmapRoom();
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080E9898(func_080E9E28);
+            MapFldSetUpdateAndRun(MapFldWaitMenu);
             return;
         }
     }
-    if (gUnk_0203C7AC->flags & 0x2000) {
-        func_080E9A00();
-        func_080E9898(func_080E9E28);
+    if (gMapRoomState->flags & 0x2000) {
+        MapFldDestroyAllmapRoom();
+        MapFldSetUpdateAndRun(MapFldWaitMenu);
         return;
     }
     if (gFieldState->flags & 0x40000) {
-        func_080E9A00();
-        func_080E9898(func_080E9E94);
+        MapFldDestroyAllmapRoom();
+        MapFldSetUpdateAndRun(MapFldWaitRoomCreate);
         return;
     }
-    func_080E0780();
-    func_080E0820();
+    UpdateMapField();
+    DrawMapField();
     ColliderUpdateAll();
-    func_080E6264();
+    MapEnmUpdateSpawner();
 }
 
-void func_080E9CBC(void) {
+void MapFldExitRoom(void) {
     u8 r;
     u8* e;
-    UnkStruct_080DEDD8* d;
+    MapEventDoor* d;
 
-    func_080E0820();
+    DrawMapField();
     r = FadeIsActive();
     if (r != 0) {
         return;
     }
-    if (gUnk_0203C7AC->unk_0F == 0xFE) {
-        func_080DF814();
+    if (gMapRoomState->doorRoom == 0xFE) {
+        EnterEntranceHall();
         return;
     }
-    if (gUnk_0203C7AC->unk_0F == 0xFD) {
-        func_080DF828();
+    if (gMapRoomState->doorRoom == 0xFD) {
+        EnterExitHall();
         return;
     }
 
-    e = func_080E54B8(gUnk_0203C590.unk_05);
+    e = GetMapRoomEvent(gMapFloorState.eventStep);
     if (e[0] == 0xFF) {
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
+        SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         return;
     }
 
-    d = func_080DEDD8(e[0]);
-    if (d->unk_02 != gUnk_0203C7AC->unk_0F || d->unk_03 != gUnk_0203C7AC->unk_10) {
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
+    d = GetMapEventDoor(e[0]);
+    if (d->room != gMapRoomState->doorRoom || d->side != gMapRoomState->doorSide) {
+        SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         return;
     }
 
-    gGameState.unk_1B8 = r;
+    gGameState.roomEffect = r;
 
-    switch (d->unk_00) {
+    switch (d->kind) {
     case 1:
     case 3:
         if (e[1] == 0x51 && (gGameState.flags & 0x400)) {
-            func_0806180C(0x55);
+            RequestEventMode(0x55);
         } else {
-            func_0806180C(e[1]);
+            RequestEventMode(e[1]);
         }
         break;
     case 2:
-        func_080DF730(gUnk_0203C7AC->unk_0F, gUnk_0203C7AC->unk_10);
+        SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
         ModeRequest(&gModeMapFld, 0);
         break;
     case 4:
-        func_080E9A28();
+        StartWorldBossBattle();
         break;
     }
 }
 
-void func_080E9D94(void) {
-    func_080E0820();
+void MapFldStartBattle(void) {
+    DrawMapField();
     if (FadeIsActive() == 0) {
-        func_0801CB0C();
+        RequestFieldResume();
         if (gGameState.flags & 8) {
             if (gGameState.progression.unk_82 & 0x1000) {
-                ModeRequest(&gModeBattle, gUnk_0203C7AC->unk_0E);
+                ModeRequest(&gModeBattle, gMapRoomState->battleId);
             } else {
-                ModeRequest(&gModeRikuBtlTutorial, gUnk_0203C7AC->unk_0E);
+                ModeRequest(&gModeRikuBtlTutorial, gMapRoomState->battleId);
             }
         } else {
-            ModeRequest(&gModeBattle, gUnk_0203C7AC->unk_0E);
+            ModeRequest(&gModeBattle, gMapRoomState->battleId);
         }
     }
 }
 
-void func_080E9E04(void) {
-    func_080E0820();
+void MapFldOpenAllmap(void) {
+    DrawMapField();
     if (FadeIsActive() == 0) {
-        func_0801CB0C();
+        RequestFieldResume();
         ModeRequest(&gModeAllmap, 1);
     }
 }
 
-void func_080E9E28(void) {
-    if ((gFieldState->flags & 0x2000) == 0 && (gUnk_0203C7AC->flags & 0x2000) == 0) {
+void MapFldWaitMenu(void) {
+    if ((gFieldState->flags & 0x2000) == 0 && (gMapRoomState->flags & 0x2000) == 0) {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
-        func_080E8594();
-        gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E9898(func_080E9B7C);
+        MapGmkCreateTasks();
+        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        MapFldSetUpdateAndRun(MapFldMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
-void func_080E9E94(void) {
+void MapFldWaitRoomCreate(void) {
     u16 t;
 
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
         FadeLock();
-        func_080E9898(func_080E9CBC);
+        MapFldSetUpdateAndRun(MapFldExitRoom);
         if ((gGameState.progression.unk_82 & 0x200) == 0) {
             t = gGameState.progression.unk_82 | 0x200;
             gGameState.progression.unk_82 = t;
@@ -2823,50 +2823,50 @@ void func_080E9E94(void) {
     } else if ((gFieldState->flags & 0x40000) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
-        func_080E8594();
-        func_080E607C();
-        gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E9898(func_080E9B7C);
+        MapGmkCreateTasks();
+        MapEnmRestoreFromCache();
+        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        MapFldSetUpdateAndRun(MapFldMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
 void func_080E9F30(void) {
-    func_080E0820();
+    DrawMapField();
     if (gUnk_02034FBC == 0) {
         ModeRequest(&gModeMapFld, 0);
     }
 }
 
 void Mode_MapFld_0(void) {
-    UnkStruct_09EF70D0* p;
+    MapRoomDef* p;
     u16 t;
 
-    if ((gUnk_0203C590.unk_02 & 0x10) && gGameState.unk_000 == 0) {
-        switch (gUnk_0203C590.unk_07) {
+    if ((gMapFloorState.flags & 0x10) && gGameState.fieldResume == 0) {
+        switch (gMapFloorState.entrySide) {
         case 0:
-            gGameState.unk_024 = 0xAD;
+            gGameState.fieldAngle = 0xAD;
             break;
         case 1:
-            gGameState.unk_024 = 0x2D;
+            gGameState.fieldAngle = 0x2D;
             break;
         case 2:
-            gGameState.unk_024 = 0xD3;
+            gGameState.fieldAngle = 0xD3;
             break;
         case 3:
-            gGameState.unk_024 = 0x53;
+            gGameState.fieldAngle = 0x53;
             break;
         }
-        func_080104F4();
+        StartFieldTransition();
     }
 
     gFieldState = EwramAlloc(sizeof(FieldState));
-    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
-    gUnk_02034FB4 = 0;
-    gUnk_02034FB8 = 0;
-    func_080DEF20();
+    gMapRoomState = EwramAlloc(sizeof(MapRoomState));
+    gMapFldWorldLogoTask = 0;
+    gMapFldAllmapRoomTask = 0;
+    UpdateGameWorld();
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(2, 0, 29, 0);
@@ -2877,106 +2877,106 @@ void Mode_MapFld_0(void) {
     SetBgPriority(1, 1);
     SetBgPriority(0, 0);
     SetBackdropColor(6, 31, 31);
-    func_080E0558();
+    InitFieldState();
     ColliderPoolsInit();
-    func_080E05E4();
-    func_080E853C();
-    func_080E6178();
-    func_080E8AE8();
-    func_080E062C();
+    CreateMapRndTask();
+    MapGmkInitRoom();
+    MapEnmInitRoom();
+    MapApplyRoomDecor();
+    SpawnMapPlayer();
 
-    p = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+    p = gMapRoomDefs[gMapFloorState.world];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, 0);
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->unk_2C);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
 
     if ((gGameState.progression.unk_82 & 0x20) == 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapTutorial, 0);
     }
 
-    if ((gUnk_0203C590.unk_02 & 0x10) == 0) {
-        func_080E988C(func_080E9AF0);
+    if ((gMapFloorState.flags & 0x10) == 0) {
+        MapFldSetUpdate(MapFldShowWorldLogo);
         gFieldState->flags |= 0x200;
         gFieldState->flags |= 1;
-        func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
-        func_080E98B0();
-    } else if (gGameState.unk_000 != 0) {
-        func_080E0298(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
-        if ((s8)gGameState.unk_00F != -1) {
+        MapSetCameraTarget(gFieldState->spawnX, gFieldState->spawnY);
+        MapFldCreateWorldLogo();
+    } else if (gGameState.fieldResume != 0) {
+        MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
+        if ((s8)gGameState.mapMenuCursor != -1) {
             t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
             (*(volatile u16*)&gDispCnt) = t;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080E988C(func_080E9E28);
+            MapFldSetUpdate(MapFldWaitMenu);
         } else {
-            gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-            func_080E988C(func_080E9B7C);
+            gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+            MapFldSetUpdate(MapFldMain);
         }
     } else {
-        gUnk_02034FB8 = CreateAllmapRoomTask(&gFieldState->tasks);
-        func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
-        func_080E988C(func_080E9B7C);
+        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        MapSetCameraTarget(gFieldState->spawnX, gFieldState->spawnY);
+        MapFldSetUpdate(MapFldMain);
     }
 
-    func_080E0078();
-    func_0801CB00();
+    MapSnapCamera();
+    ClearFieldResume();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
     FadeStartIn(0, 16);
 }
 
 void Mode_MapFld_1(void) {
-    gUnk_02034FB0();
+    gMapFldUpdate();
     UpdatePlayTime();
 }
 
 void Mode_MapFld_2(void) {
-    func_080E0878();
-    func_080E8624();
+    DestroyMapField();
+    MapGmkFree();
     EwramFree(gFieldState);
-    EwramFree(gUnk_0203C7AC);
+    EwramFree(gMapRoomState);
 }
 
-void func_080EA1E8(ModeFunc a) {
-    gUnk_02034FD4 = a;
+void MapFixSetUpdate(ModeFunc a) {
+    gMapFixUpdate = a;
 }
 
-void func_080EA1F4(ModeFunc a) {
-    func_080EA1E8(a);
-    gUnk_02034FD4();
+void MapFixSetUpdateAndRun(ModeFunc a) {
+    MapFixSetUpdate(a);
+    gMapFixUpdate();
 }
 
-UnkStruct_09EF8370* func_080EA20C(void) {
+MapFixedDef* GetMapFixedDef(void) {
     if (gGameState.flags & 8) {
-        if (gUnk_0203C590.unk_06 == 0xFD) {
-            return gUnk_09EF8370[2];
+        if (gMapFloorState.room == 0xFD) {
+            return gMapFixedDefs[2];
         }
-        if (gUnk_0203C590.unk_06 == 0xFE) {
+        if (gMapFloorState.room == 0xFE) {
             if ((s8)gGameState.floor != 0) {
-                return gUnk_09EF8370[1];
+                return gMapFixedDefs[1];
             }
-            return gUnk_09EF8370[5];
+            return gMapFixedDefs[5];
         }
     }
-    if (gUnk_0203C590.unk_06 == 0xFD) {
+    if (gMapFloorState.room == 0xFD) {
         if ((s8)gGameState.floor != 12) {
-            return gUnk_09EF8370[2];
+            return gMapFixedDefs[2];
         }
-        return gUnk_09EF8370[3];
+        return gMapFixedDefs[3];
     }
-    if (gUnk_0203C590.unk_06 == 0xFE) {
+    if (gMapFloorState.room == 0xFE) {
         if ((s8)gGameState.floor != 0) {
-            return gUnk_09EF8370[1];
+            return gMapFixedDefs[1];
         }
-        return gUnk_09EF8370[0];
+        return gMapFixedDefs[0];
     }
-    return gUnk_09EF8370[4];
+    return gMapFixedDefs[4];
 }
 
-void func_080EA2AC(void) {
-    if (gUnk_0203C590.unk_06 == 0xFC) {
+void MapFixCreateCharaTasks(void) {
+    if (gMapFloorState.room == 0xFC) {
         return;
     }
     if (gGameState.flags & 8) {
-        switch (gUnk_0203C590.unk_00) {
+        switch (gMapFloorState.progress) {
         case 20:
         case 22:
         case 23:
@@ -2986,16 +2986,16 @@ void func_080EA2AC(void) {
         }
         return;
     }
-    if (gGameState.progression.unk_84 & 2) {
+    if (gGameState.progression.friendFlags & 2) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapDonald, 0);
     }
-    if (gGameState.progression.unk_84 & 1) {
+    if (gGameState.progression.friendFlags & 1) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGoofy, 0);
     }
-    if (gUnk_0203C590.unk_06 != 0xFD) {
+    if (gMapFloorState.room != 0xFD) {
         return;
     }
-    switch (gUnk_0203C590.unk_00) {
+    switch (gMapFloorState.progress) {
     case 23:
     case 24:
         if ((s8)gGameState.floor == 11) {
@@ -3005,7 +3005,7 @@ void func_080EA2AC(void) {
         break;
     case 25:
     case 26:
-        if ((s8)gGameState.floor == 11 && gGameState.floors[12].unk_03 == 0) {
+        if ((s8)gGameState.floor == 11 && gGameState.floors[12].eventStep == 0) {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNamine, 0);
             TaskCreate(&gFieldState->tasks, &gTaskDescMapNiseriku, 0);
         }
@@ -3019,12 +3019,12 @@ void func_080EA2AC(void) {
     }
 }
 
-u8 func_080EA400(void) {
-    if (gUnk_0203C590.unk_02 & 2) {
+u8 GetWorldEntryEventId(void) {
+    if (gMapFloorState.flags & 2) {
         return 0xFF;
     }
     if (gGameState.flags & 8) {
-        switch (gUnk_0203C590.unk_04) {
+        switch (gMapFloorState.world) {
         case 8:
 #ifdef VERSION_EU
             return 0x95;
@@ -3052,93 +3052,93 @@ u8 func_080EA400(void) {
         }
         return 0xFF;
     }
-    return gUnk_09EF6AB0[gUnk_0203C590.unk_04];
+    return gWorldEntryEvents[gMapFloorState.world];
 }
 
-u8 func_080EA45C(void) {
-    if (gUnk_0203C590.unk_02 & 1) {
+u8 GetFloorEventId(void) {
+    if (gMapFloorState.flags & 1) {
         return 0xFF;
     }
     if (gGameState.flags & 8) {
-        return gUnk_0984B905[(s8)gGameState.floor];
+        return gRikuFloorEvents[(s8)gGameState.floor];
     }
-    return gUnk_0984B8F8[(s8)gGameState.floor];
+    return gSoraFloorEvents[(s8)gGameState.floor];
 }
 
-void func_080EA498(void) {
-    if (gUnk_0203C7AC->flags & 0x100) {
-        func_080EA1F4(func_080EA78C);
+void MapFixMain(void) {
+    if (gMapRoomState->flags & 0x100) {
+        MapFixSetUpdateAndRun(MapFixWaitWalkOut);
         return;
     }
-    if (gUnk_0203C7AC->flags & 0xE00) {
+    if (gMapRoomState->flags & 0xE00) {
         FadeStartOut(0, 16);
-        if (gUnk_0203C590.unk_06 == 0xFE) {
-            func_080EA1F4(func_080EA5CC);
+        if (gMapFloorState.room == 0xFE) {
+            MapFixSetUpdateAndRun(func_080EA5CC);
             return;
         }
-        if (gUnk_0203C590.unk_06 == 0xFD) {
-            func_080EA1F4(func_080EA694);
+        if (gMapFloorState.room == 0xFD) {
+            MapFixSetUpdateAndRun(func_080EA694);
             return;
         }
-        func_080EA1F4(func_080EA5A8);
+        MapFixSetUpdateAndRun(MapFixEnterMapFld);
         return;
     }
     if (gFieldState->flags & 0x40000) {
-        func_080EA1F4(func_080EA7FC);
+        MapFixSetUpdateAndRun(MapFixWaitRoomCreate);
         return;
     }
-    if (gUnk_0203C7AC->flags & 0x2000) {
-        func_080EA1F4(func_080EA730);
+    if (gMapRoomState->flags & 0x2000) {
+        MapFixSetUpdateAndRun(MapFixWaitMenu);
     } else if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
-               (gFieldState->flags & 0x41000) == 0 && (gUnk_0203C7AC->flags & 4) == 0 &&
+               (gFieldState->flags & 0x41000) == 0 && (gMapRoomState->flags & 4) == 0 &&
                (GetKeysPressed() & START_BUTTON) != 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-        func_080EA1F4(func_080EA730);
+        MapFixSetUpdateAndRun(MapFixWaitMenu);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
         ColliderUpdateAll();
     }
 }
 
-void func_080EA5A8(void) {
-    func_080E0820();
+void MapFixEnterMapFld(void) {
+    DrawMapField();
     if (FadeIsActive() == 0) {
-        func_080DFA3C();
+        EnterFloorWorld();
         ModeRequest(&gModeMapFld, 0);
     }
 }
 
 void func_080EA5CC(void) {
-    func_080E0820();
+    DrawMapField();
     if (FadeIsActive() != 0) {
         return;
     }
-    if (gUnk_0203C7AC->flags & 0x200) {
-        if ((s8)gGameState.floor == func_080DF750()) {
+    if (gMapRoomState->flags & 0x200) {
+        if ((s8)gGameState.floor == GetProgressFloor()) {
             gGameState.flags &= ~0x80;
-            gGameState.progression.unk_84 = (gGameState.progression.unk_84 & 0xFF83) | gGameState.progression.unk_86;
+            gGameState.progression.friendFlags = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
         }
-        if (gUnk_0203C590.unk_04 == 0) {
-            gUnk_0203C590.unk_07 = 0;
+        if (gMapFloorState.world == 0) {
+            gMapFloorState.entrySide = 0;
             ModeRequest(&gModeWorldselect, 0);
-        } else if (gUnk_0203C590.unk_04 == 13) {
+        } else if (gMapFloorState.world == 13) {
 #ifdef VERSION_EU
-            func_0806180C(0x85);
+            RequestEventMode(0x85);
 #else
-            func_0806180C(0x87);
+            RequestEventMode(0x87);
 #endif
-        } else if (func_080EA400() != 0xFF) {
-            gUnk_02034FD8 = 60;
-            func_080EA1F4(func_080EA7D8);
+        } else if (GetWorldEntryEventId() != 0xFF) {
+            gMapFixEventDelay = 60;
+            MapFixSetUpdateAndRun(MapFixWaitWorldEvent);
         } else {
-            func_080DFA3C();
-            func_080E04EC();
+            EnterFloorWorld();
+            RequestMapMode();
         }
     } else {
-        func_080DFAA8();
-        func_080DF9C4();
-        func_080E04EC();
+        StoreMapFloorState();
+        GoToPreviousFloor();
+        RequestMapMode();
     }
 }
 
@@ -3146,95 +3146,95 @@ void func_080EA694(void) {
     u8 v;
     u16 t;
 
-    func_080E0820();
+    DrawMapField();
     if (FadeIsActive() != 0) {
         return;
     }
-    if (gUnk_0203C7AC->flags & 0x200) {
-        if (gUnk_0203C590.unk_04 != 13) {
-            func_080DFA3C();
+    if (gMapRoomState->flags & 0x200) {
+        if (gMapFloorState.world != 13) {
+            EnterFloorWorld();
             ModeRequest(&gModeMapFld, 0);
         } else {
-            gUnk_0203C590.unk_07 = 1;
+            gMapFloorState.entrySide = 1;
             ModeRequest(&gModePooh, 2);
         }
         return;
     }
-    v = func_080EA45C();
+    v = GetFloorEventId();
     if (v != 0xFF) {
-        func_0806180C(v);
+        RequestEventMode(v);
         return;
     }
-    if ((gUnk_0203C590.unk_02 & 1) == 0) {
-        t = gUnk_0203C590.unk_02 | 1;
-        gUnk_0203C590.unk_02 = t;
-        func_080DF244();
-        gUnk_0203C590.unk_00++;
+    if ((gMapFloorState.flags & 1) == 0) {
+        t = gMapFloorState.flags | 1;
+        gMapFloorState.flags = t;
+        SetFloorJiminyFlags();
+        gMapFloorState.progress++;
     }
-    func_080DFAA8();
-    func_080DF9A8();
-    func_080E04EC();
+    StoreMapFloorState();
+    GoToNextFloor();
+    RequestMapMode();
 }
 
-void func_080EA730(void) {
-    if ((gFieldState->flags & 0x2000) == 0 && (gUnk_0203C7AC->flags & 0x2000) == 0) {
+void MapFixWaitMenu(void) {
+    if ((gFieldState->flags & 0x2000) == 0 && (gMapRoomState->flags & 0x2000) == 0) {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
-        func_080E56B4(func_080EA20C()->unk_2C);
-        func_080EA1F4(func_080EA498);
+        MapFixCreateGimmicks(GetMapFixedDef()->gimmicks);
+        MapFixSetUpdateAndRun(MapFixMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
-void func_080EA78C(void) {
-    if ((gUnk_0203C7AC->flags & 0x100) == 0) {
+void MapFixWaitWalkOut(void) {
+    if ((gMapRoomState->flags & 0x100) == 0) {
         FadeStartOut(2, 60);
         FadeLock();
-        gUnk_0203C7AC->flags |= 0x200;
-        func_080EA1F4(func_080EA5CC);
+        gMapRoomState->flags |= 0x200;
+        MapFixSetUpdateAndRun(func_080EA5CC);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
     }
 }
 
-void func_080EA7D8(void) {
-    if (gUnk_02034FD8 != 0) {
-        gUnk_02034FD8--;
+void MapFixWaitWorldEvent(void) {
+    if (gMapFixEventDelay != 0) {
+        gMapFixEventDelay--;
     } else {
-        func_0806180C(func_080EA400());
+        RequestEventMode(GetWorldEntryEventId());
     }
 }
 
-void func_080EA7FC(void) {
+void MapFixWaitRoomCreate(void) {
     if (gFieldState->flags & 0x10) {
         FadeStartOut(0, 16);
-        func_080EA1F4(func_080EA5A8);
+        MapFixSetUpdateAndRun(MapFixEnterMapFld);
     } else if ((gFieldState->flags & 0x40000) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
-        func_080E56B4(func_080EA20C()->unk_2C);
-        func_080EA1F4(func_080EA498);
+        MapFixCreateGimmicks(GetMapFixedDef()->gimmicks);
+        MapFixSetUpdateAndRun(MapFixMain);
     } else {
-        func_080E0780();
-        func_080E0820();
+        UpdateMapField();
+        DrawMapField();
         ColliderUpdateAll();
     }
 }
 
 void Mode_MapFix_0(void) {
-    UnkStruct_09EF8370* p;
+    MapFixedDef* p;
     u16 t;
 
     gFieldState = EwramAlloc(sizeof(FieldState));
-    gUnk_0203C7AC = EwramAlloc(sizeof(UnkStruct_0203C7AC));
-    gUnk_0203C7B8 = EwramAlloc(sizeof(UnkStruct_0203C7B8) * 16);
-    func_080DEF20();
+    gMapRoomState = EwramAlloc(sizeof(MapRoomState));
+    gMapGmkPlacements = EwramAlloc(sizeof(MapGmkPlacement) * 16);
+    UpdateGameWorld();
     SetBgMode0();
 
-    if (gUnk_0203C590.unk_06 == 0xFE) {
+    if (gMapFloorState.room == 0xFE) {
         SetupBg(3, 0, 28, 0);
         SetupBg(2, 0, 29, 0);
         SetupBg(1, 0, 30, 0);
@@ -3251,15 +3251,15 @@ void Mode_MapFix_0(void) {
     SetBgPriority(1, 1);
     SetBgPriority(0, 0);
     SetBackdropColor(0, 0, 0);
-    func_080E0558();
+    InitFieldState();
     ColliderPoolsInit();
-    gUnk_0203C7AC->flags |= 0x80000000;
-    gUnk_0203C7AC->unk_0C = 26;
-    gUnk_0203C7AC->unk_0D = 0;
+    gMapRoomState->flags |= 0x80000000;
+    gMapRoomState->nameId = 26;
+    gMapRoomState->roomType = 0;
 
-    p = func_080EA20C();
+    p = GetMapFixedDef();
     TaskCreate(&gFieldState->tasks, &gTaskDescMapFix, p);
-    func_080E56B4(p->unk_2C);
+    MapFixCreateGimmicks(p->gimmicks);
 
     if (gGameState.flags & 8) {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, 0);
@@ -3269,41 +3269,41 @@ void Mode_MapFix_0(void) {
 
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, 0);
 
-    if (gUnk_0203C590.unk_02 & 0x100) {
-        t = gUnk_0203C590.unk_02 & 0xFEFF;
-        gUnk_0203C590.unk_02 = t;
+    if (gMapFloorState.flags & 0x100) {
+        t = gMapFloorState.flags & 0xFEFF;
+        gMapFloorState.flags = t;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapFloor, 0);
     }
 
-    if (gUnk_0203C590.unk_06 == 0xFC) {
+    if (gMapFloorState.room == 0xFC) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkTutorial, 0);
     }
 
-    func_080EA2AC();
+    MapFixCreateCharaTasks();
 
-    if (gGameState.unk_000 != 0) {
-        func_080E0298(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
-        if ((s8)gGameState.unk_00F != -1) {
+    if (gGameState.fieldResume != 0) {
+        MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
+        if ((s8)gGameState.mapMenuCursor != -1) {
             t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
             (*(volatile u16*)&gDispCnt) = t;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
-            func_080EA1E8(func_080EA730);
+            MapFixSetUpdate(MapFixWaitMenu);
         } else {
-            func_080EA1E8(func_080EA498);
+            MapFixSetUpdate(MapFixMain);
         }
     } else {
-        func_080E0298(gFieldState->unk_DC, gFieldState->unk_E0);
-        func_080EA1E8(func_080EA498);
+        MapSetCameraTarget(gFieldState->spawnX, gFieldState->spawnY);
+        MapFixSetUpdate(MapFixMain);
     }
 
-    func_080E5800();
-    func_0801CB00();
+    MapFixSnapCamera();
+    ClearFieldResume();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
 
-    if (gUnk_0203C590.unk_02 & 0x80) {
-        t = gUnk_0203C590.unk_02 & 0xFF7F;
-        gUnk_0203C590.unk_02 = t;
+    if (gMapFloorState.flags & 0x80) {
+        t = gMapFloorState.flags & 0xFF7F;
+        gMapFloorState.flags = t;
         MosaicStartIn(16, 15);
         FadeStartIn(0, 16);
     } else {
@@ -3312,17 +3312,17 @@ void Mode_MapFix_0(void) {
 }
 
 void Mode_MapFix_1(void) {
-    gUnk_02034FD4();
+    gMapFixUpdate();
     UpdatePlayTime();
 }
 
 void Mode_MapFix_2(void) {
-    func_080E0878();
+    DestroyMapField();
     EwramFree(gFieldState);
-    EwramFree(gUnk_0203C7AC);
-    EwramFree(gUnk_0203C7B8);
+    EwramFree(gMapRoomState);
+    EwramFree(gMapGmkPlacements);
 }
-void func_080EAB20(u8 a, u8 b, u8 c) {
+void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     const u8* src;
 
     a &= 1;
@@ -3424,7 +3424,7 @@ void func_080EAB20(u8 a, u8 b, u8 c) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (a * 608 + 320), 320);
 }
 
-void func_080EABB8(u8 a, u16 v) {
+void NewGameSlotMenuLoadLevelTiles(u8 a, u16 v) {
     u16 d[4];
     s32 off;
     u16* q;
@@ -3445,7 +3445,7 @@ void func_080EABB8(u8 a, u16 v) {
     }
 }
 
-void func_080EAC60(u8 a, u32 b) {
+void NewGameSlotMenuLoadTimeTiles(u8 a, u32 b) {
     u16 d[6];
     s32 off;
     u16* q;
@@ -3474,40 +3474,40 @@ void func_080EAC60(u8 a, u32 b) {
     }
 }
 
-s32 func_080EAD3C(u8 i) {
+s32 NewGameSlotMenuShowSummary(u8 i) {
     SaveFileSummary* p = &gGameState.fileSummaries[i];
 
     if (p->level != 0) {
-        func_080EABB8(i, p->level);
-        func_080EAC60(i, p->playTime);
-        func_080EAB20(i, 0, p->floor);
+        NewGameSlotMenuLoadLevelTiles(i, p->level);
+        NewGameSlotMenuLoadTimeTiles(i, p->playTime);
+        NewGameSlotMenuLoadFloorTiles(i, 0, p->floor);
         return 1;
     }
-    func_080EAB20(i, 0, 13);
+    NewGameSlotMenuLoadFloorTiles(i, 0, 13);
     return 0;
 }
 
-void func_080EAD84(u8 a) {
+void NewGameSlotMenuSelectSlot(u8 a) {
     SaveFileSummary* e;
-    u8 i = gNewGameSlotMenuWork->unk_33D != 0 ? a + 2 : a;
+    u8 i = gNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
     e = &gGameState.fileSummaries[i];
 
     if (e->level != 0) {
-        func_080EAB20(i, 1, e->floor);
-        gNewGameSlotMenuWork->textSlotCount = LoadTextSlots(func_080DF804(e->world), gNewGameSlotMenuWork->textSlots);
+        NewGameSlotMenuLoadFloorTiles(i, 1, e->floor);
+        gNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gNewGameSlotMenuWork->textSlots);
 
-        if (gNewGameSlotMenuWork->unk_33D == 0) {
+        if (gNewGameSlotMenuWork->isRiku == 0) {
             LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, &gUnk_099910C4[0xB40]);
         } else {
             LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, &gUnk_099910C4[0xB80]);
         }
     } else {
-        func_080EAB20(i, 1, 13);
+        NewGameSlotMenuLoadFloorTiles(i, 1, 13);
         gNewGameSlotMenuWork->textSlotCount = 0;
     }
 
     if (gNewGameSlotMenuWork->selectedSlot == 0) {
-        if (gNewGameSlotMenuWork->unk_33D != 0) {
+        if (gNewGameSlotMenuWork->isRiku != 0) {
             LoadBgMap(1, &gUnk_09985F44[0x8800], 0x800);
         } else {
             LoadBgMap(1, &gUnk_09985F44[0x7800], 0x800);
@@ -3515,7 +3515,7 @@ void func_080EAD84(u8 a) {
 
         SetBgScroll(1, 0, (u16)-9);
     } else {
-        if (gNewGameSlotMenuWork->unk_33D != 0) {
+        if (gNewGameSlotMenuWork->isRiku != 0) {
             LoadBgMap(1, &gUnk_09985F44[0x9000], 0x800);
         } else {
             LoadBgMap(1, &gUnk_09985F44[0x8000], 0x800);
@@ -3525,20 +3525,20 @@ void func_080EAD84(u8 a) {
     }
 }
 
-void func_080EAEB0(u8 a) {
-    u8 idx = gNewGameSlotMenuWork->unk_33D != 0 ? a + 2 : a;
+void NewGameSlotMenuDeselectSlot(u8 a) {
+    u8 idx = gNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
     SaveFileSummary* e = &gGameState.fileSummaries[idx];
 
     if (e->level != 0) {
-        func_080EAB20(idx, 0, e->floor);
+        NewGameSlotMenuLoadFloorTiles(idx, 0, e->floor);
     } else {
-        func_080EAB20(idx, 0, 13);
+        NewGameSlotMenuLoadFloorTiles(idx, 0, 13);
     }
 
     gNewGameSlotMenuWork->textSlotCount = 0;
 }
 
-void func_080EAF10(void) {
+void NewGameSlotMenuDraw(void) {
     s32 t;
     s32 u;
 
@@ -3547,7 +3547,7 @@ void func_080EAF10(void) {
     DrawSprite(128, gNewGameSlotMenuWork->y2 >> 8, gUnk_09EF8D68[2], gNewGameSlotMenuWork->tiles2,
         gNewGameSlotMenuWork->palette2, 0, 0xC00, 90);
 
-    if (gNewGameSlotMenuWork->unk_33D == 0) {
+    if (gNewGameSlotMenuWork->isRiku == 0) {
         DrawSprite(56, 112, ((void**)gSor1ff00Frames)[0], gNewGameSlotMenuWork->tiles4,
             gNewGameSlotMenuWork->palette4, 0, 0x400, 80);
         DrawSprite(72, 96, gDona2Fl00Frames[0], gNewGameSlotMenuWork->tiles5, gNewGameSlotMenuWork->palette5, 0,
@@ -3562,17 +3562,17 @@ void func_080EAF10(void) {
     DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, gNewGameSlotMenuWork->tiles3, gNewGameSlotMenuWork->palette3, 0, 0x400, 90);
     t = 45;
     u = gNewGameSlotMenuWork->selectedSlot * t;
-    ApproachValueHalf(&gNewGameSlotMenuWork->y3, (gNewGameSlotMenuWork->unk_162 + u) << 8);
+    ApproachValueHalf(&gNewGameSlotMenuWork->y3, (gNewGameSlotMenuWork->slotBaseY + u) << 8);
     DrawSprite(76, gNewGameSlotMenuWork->y3 >> 8, AnimGetGfx(&gNewGameSlotMenuWork->anim),
         gNewGameSlotMenuWork->tiles, gNewGameSlotMenuWork->palette, 0, 0, 70);
-    DrawTextSlots(100, u + (gNewGameSlotMenuWork->unk_162 + 22), gNewGameSlotMenuWork->textSlots,
+    DrawTextSlots(100, u + (gNewGameSlotMenuWork->slotBaseY + 22), gNewGameSlotMenuWork->textSlots,
         gNewGameSlotMenuWork->palette8, 50, gNewGameSlotMenuWork->textSlotCount);
     DrawTextSlots(
         (240 - GetTextSlotsWidth(gNewGameSlotMenuWork->textSlots2, gNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
         gNewGameSlotMenuWork->textSlots2, gNewGameSlotMenuWork->palette9, 50, gNewGameSlotMenuWork->textSlotCount2);
 }
 
-void func_080EB12C(NewGameSlotMenuWork* w) {
+void NewGameSlotMenuMoveCursor(NewGameSlotMenuWork* w) {
     u8 prev = w->selectedSlot;
 
     if (GetKeysRepeat() & DPAD_UP) {
@@ -3586,23 +3586,23 @@ void func_080EB12C(NewGameSlotMenuWork* w) {
     }
 
     if (prev != w->selectedSlot) {
-        func_080EAEB0(prev);
-        func_080EAD84(w->selectedSlot);
+        NewGameSlotMenuDeselectSlot(prev);
+        NewGameSlotMenuSelectSlot(w->selectedSlot);
     }
 }
 
-void func_080EB1AC(NewGameSlotMenuWork* w) {
+void NewGameSlotMenuSlideIn(NewGameSlotMenuWork* w) {
     if (w->timer != 0) {
         ApproachValue(&w->y, 0, w->timer);
         ApproachValue(&w->y2, 0x9800, w->timer);
         w->timer--;
     } else {
-        w->update = func_080EB1F4;
+        w->update = NewGameSlotMenuInput;
     }
 }
 
-void func_080EB1F4(NewGameSlotMenuWork* w) {
-    func_080EB12C(w);
+void NewGameSlotMenuInput(NewGameSlotMenuWork* w) {
+    NewGameSlotMenuMoveCursor(w);
 
     if (GetKeysPressed() & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -3620,38 +3620,38 @@ void func_080EB1F4(NewGameSlotMenuWork* w) {
             break;
         }
         m4aSongNumStart(SONG_SYS_SAVELOAD);
-        w->unk_33C = 1;
+        w->confirmed = 1;
     }
     w->timer = 16;
-    w->update = func_080EB27C;
+    w->update = NewGameSlotMenuSlideOut;
 }
 
-void func_080EB27C(NewGameSlotMenuWork* w) {
+void NewGameSlotMenuSlideOut(NewGameSlotMenuWork* w) {
     if (w->timer != 0) {
         ApproachValue(&w->y, -0x800, w->timer);
         ApproachValue(&w->y2, 0xA000, w->timer);
         w->timer--;
     } else {
         FadeStartOut(0, 90);
-        w->update = func_080EB2D0;
+        w->update = NewGameSlotMenuExit;
     }
 }
 
-void func_080EB2D0(NewGameSlotMenuWork* w) {
+void NewGameSlotMenuExit(NewGameSlotMenuWork* w) {
     if ((u8)FadeIsActive() != 0) {
         return;
     }
 
-    if (w->unk_33C != 0) {
-        if (w->unk_33D != 0) {
-            func_0801CCB4();
+    if (w->confirmed != 0) {
+        if (w->isRiku != 0) {
+            SetupRikuNewGame();
 #ifdef VERSION_EU
-            func_0806180C(0x93);
+            RequestEventMode(0x93);
 #else
-            func_0806180C(0x95);
+            RequestEventMode(0x95);
 #endif
         } else {
-            func_0801CD20();
+            SetupSoraNewGame();
             ModeRequestHeapReset(&gModeMovie, 1);
         }
     } else {
@@ -3664,11 +3664,11 @@ void Mode_MenuNew_0(void) {
     u8 u;
 
     gNewGameSlotMenuWork = EwramAlloc(sizeof(NewGameSlotMenuWork));
-    gNewGameSlotMenuWork->unk_33C = 0;
-    gNewGameSlotMenuWork->unk_33D = (gGameState.flags >> 3) & 1;
-    gNewGameSlotMenuWork->unk_162 = 33;
+    gNewGameSlotMenuWork->confirmed = 0;
+    gNewGameSlotMenuWork->isRiku = (gGameState.flags >> 3) & 1;
+    gNewGameSlotMenuWork->slotBaseY = 33;
     gNewGameSlotMenuWork->timer = 16;
-    gNewGameSlotMenuWork->update = func_080EB1AC;
+    gNewGameSlotMenuWork->update = NewGameSlotMenuSlideIn;
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -3741,12 +3741,12 @@ void Mode_MenuNew_0(void) {
     gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, gNewGameSlotMenuWork->textSlots2);
 #endif
 
-    if (gNewGameSlotMenuWork->unk_33D != 0) {
-        v = func_080EAD3C(2);
-        u = func_080EAD3C(3);
+    if (gNewGameSlotMenuWork->isRiku != 0) {
+        v = NewGameSlotMenuShowSummary(2);
+        u = NewGameSlotMenuShowSummary(3);
     } else {
-        v = func_080EAD3C(0);
-        u = func_080EAD3C(1);
+        v = NewGameSlotMenuShowSummary(0);
+        u = NewGameSlotMenuShowSummary(1);
     }
 
     if (v != 0) {
@@ -3755,8 +3755,8 @@ void Mode_MenuNew_0(void) {
         gNewGameSlotMenuWork->selectedSlot = 0;
     }
 
-    func_080EAD84(gNewGameSlotMenuWork->selectedSlot);
-    gNewGameSlotMenuWork->y3 = (gNewGameSlotMenuWork->unk_162 + gNewGameSlotMenuWork->selectedSlot * 45) << 8;
+    NewGameSlotMenuSelectSlot(gNewGameSlotMenuWork->selectedSlot);
+    gNewGameSlotMenuWork->y3 = (gNewGameSlotMenuWork->slotBaseY + gNewGameSlotMenuWork->selectedSlot * 45) << 8;
     FadeStartIn(0, 8);
 }
 
@@ -3764,7 +3764,7 @@ void Mode_MenuNew_1(void) {
     if (gNewGameSlotMenuWork->update != 0) {
         gNewGameSlotMenuWork->update(gNewGameSlotMenuWork);
     }
-    func_080EAF10();
+    NewGameSlotMenuDraw();
 }
 
 void Mode_MenuNew_2(void) {
@@ -3789,7 +3789,7 @@ void Mode_MenuNew_2(void) {
     EwramFree(gNewGameSlotMenuWork);
 }
 
-s32 func_080EB7A0(u8 a) {
+s32 LoadGameMenuLoadFile(u8 a) {
     switch (a) {
     case 0:
         if (SaveRepairFileLarge(0) == 2) {
@@ -3806,14 +3806,14 @@ s32 func_080EB7A0(u8 a) {
     case 2:
         if (SaveRepairFileSmall(0) == 2) {
             SaveLoadFileSmall(0);
-            _08085D04(gGameState.world);
+            InitRikuDeckForWorld(gGameState.world);
             return 1;
         }
         break;
     case 3:
         if (SaveRepairFileSmall(1) == 2) {
             SaveLoadFileSmall(1);
-            _08085D04(gGameState.world);
+            InitRikuDeckForWorld(gGameState.world);
             return 1;
         }
         break;
@@ -3821,7 +3821,7 @@ s32 func_080EB7A0(u8 a) {
     return 0;
 }
 
-void func_080EB818(u8 a, u8 b, u8 c) {
+void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     const u8* src;
 
 #ifdef VERSION_EU
@@ -3921,7 +3921,7 @@ void func_080EB818(u8 a, u8 b, u8 c) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(1) + (a * 608 + 320), 320);
 }
 
-void func_080EB898(u8 a, u16 v) {
+void LoadGameMenuLoadLevelTiles(u8 a, u16 v) {
     u16 d[4];
     s32 off;
     u16* q;
@@ -3941,7 +3941,7 @@ void func_080EB898(u8 a, u16 v) {
     }
 }
 
-void func_080EB93C(u8 a, u32 v) {
+void LoadGameMenuLoadTimeTiles(u8 a, u32 v) {
     u16 d[6];
     s32 off;
     u16* q;
@@ -3969,24 +3969,24 @@ void func_080EB93C(u8 a, u32 v) {
     }
 }
 
-void func_080EBA14(u8 a) {
+void LoadGameMenuShowSummary(u8 a) {
     SaveFileSummary* e = &gGameState.fileSummaries[a];
 
     if (e->level != 0) {
-        func_080EB898(a, e->level);
-        func_080EB93C(a, e->playTime);
-        func_080EB818(a, 0, e->floor);
+        LoadGameMenuLoadLevelTiles(a, e->level);
+        LoadGameMenuLoadTimeTiles(a, e->playTime);
+        LoadGameMenuLoadFloorTiles(a, 0, e->floor);
     } else {
-        func_080EB818(a, 0, 13);
+        LoadGameMenuLoadFloorTiles(a, 0, 13);
     }
 }
 
-void func_080EBA58(u8 a) {
+void LoadGameMenuSelectSlot(u8 a) {
     SaveFileSummary* e = &gGameState.fileSummaries[a];
 
     if (e->level != 0) {
-        func_080EB818(a, 1, e->floor);
-        gLoadGameMenuWork->textSlotCount = LoadTextSlots(func_080DF804(e->world), gLoadGameMenuWork->textSlots);
+        LoadGameMenuLoadFloorTiles(a, 1, e->floor);
+        gLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gLoadGameMenuWork->textSlots);
 
         if (a <= 1) {
             LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, &gUnk_099910C4[0xB40]);
@@ -3994,23 +3994,23 @@ void func_080EBA58(u8 a) {
             LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, &gUnk_099910C4[0xB80]);
         }
     } else {
-        func_080EB818(a, 1, 13);
+        LoadGameMenuLoadFloorTiles(a, 1, 13);
         gLoadGameMenuWork->textSlotCount = 0;
     }
 }
 
-void func_080EBAE0(u8 a) {
+void LoadGameMenuDeselectSlot(u8 a) {
     SaveFileSummary* e = &gGameState.fileSummaries[a];
 
     if (e->level != 0) {
-        func_080EB818(a, 0, e->floor);
+        LoadGameMenuLoadFloorTiles(a, 0, e->floor);
     } else {
-        func_080EB818(a, 0, 13);
+        LoadGameMenuLoadFloorTiles(a, 0, 13);
     }
     gLoadGameMenuWork->textSlotCount = 0;
 }
 
-void func_080EBB24(void) {
+void LoadGameMenuDraw(void) {
     s32 t;
     s32 u;
 #ifdef VERSION_EU
@@ -4078,40 +4078,40 @@ void func_080EBB24(void) {
             0x400, 81);
     }
 
-    if (gLoadGameMenuWork->unk_180 != 0) {
+    if (gLoadGameMenuWork->showRikuSlots != 0) {
         t = 32;
     } else {
         t = 45;
     }
 
     u = t * gLoadGameMenuWork->selectedSlot;
-    ApproachValueHalf(&gLoadGameMenuWork->y3, (gLoadGameMenuWork->unk_15E + u) << 8);
+    ApproachValueHalf(&gLoadGameMenuWork->y3, (gLoadGameMenuWork->slotBaseY + u) << 8);
     DrawSprite(76, gLoadGameMenuWork->y3 >> 8, AnimGetGfx(&gLoadGameMenuWork->anim),
         gLoadGameMenuWork->tiles, gLoadGameMenuWork->palette, 0, 0x400, 70);
-    DrawTextSlots(100, u + (gLoadGameMenuWork->unk_15E + 22), gLoadGameMenuWork->textSlots,
+    DrawTextSlots(100, u + (gLoadGameMenuWork->slotBaseY + 22), gLoadGameMenuWork->textSlots,
         gLoadGameMenuWork->palette7, 50, gLoadGameMenuWork->textSlotCount);
 }
 
-void func_080EBD00(LoadGameMenuWork* w) {
+void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
     u8 old = w->selectedSlot;
 
     if (GetKeysRepeat() & DPAD_UP) {
-        w->selectedSlot = w->selectedSlot != 0 ? w->selectedSlot - 1 : w->unk_184;
+        w->selectedSlot = w->selectedSlot != 0 ? w->selectedSlot - 1 : w->lastSlot;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        w->selectedSlot = w->selectedSlot < w->unk_184 ? w->selectedSlot + 1 : 0;
+        w->selectedSlot = w->selectedSlot < w->lastSlot ? w->selectedSlot + 1 : 0;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (old != w->selectedSlot) {
-        func_080EBAE0(old);
-        func_080EBA58(w->selectedSlot);
+        LoadGameMenuDeselectSlot(old);
+        LoadGameMenuSelectSlot(w->selectedSlot);
 
         switch (w->selectedSlot) {
         case 0:
-            if (w->unk_180 != 0) {
+            if (w->showRikuSlots != 0) {
                 LoadBgMap(1, &gUnk_09985F44[0x3000], 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
@@ -4120,7 +4120,7 @@ void func_080EBD00(LoadGameMenuWork* w) {
             }
             break;
         case 1:
-            if (w->unk_180 != 0) {
+            if (w->showRikuSlots != 0) {
                 LoadBgMap(1, &gUnk_09985F44[0x3800], 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
@@ -4140,35 +4140,35 @@ void func_080EBD00(LoadGameMenuWork* w) {
     }
 }
 
-void func_080EBE44(LoadGameMenuWork* work) {
+void LoadGameMenuSlideInY(LoadGameMenuWork* work) {
     if (work->timer != 0) {
         ApproachValue(&work->y, 0, work->timer);
         ApproachValue(&work->y2, 0x9800, work->timer);
         work->timer--;
     } else {
         work->timer = 16;
-        work->update = func_080EBE90;
+        work->update = LoadGameMenuSlideInX;
     }
 }
 
-void func_080EBE90(LoadGameMenuWork* work) {
+void LoadGameMenuSlideInX(LoadGameMenuWork* work) {
     if (work->timer != 0) {
         ApproachValue(&work->x, 0, work->timer);
         work->timer--;
     } else {
-        work->update = func_080EBEC8;
+        work->update = LoadGameMenuInput;
     }
 }
 
-void func_080EBEC8(LoadGameMenuWork* work) {
-    func_080EBD00(work);
+void LoadGameMenuInput(LoadGameMenuWork* work) {
+    LoadGameMenuMoveCursor(work);
 
     if (GetKeysPressed() & B_BUTTON) {
         work->timer = 16;
-        work->update = func_080EBFB8;
+        work->update = LoadGameMenuSlideOutX;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-        if ((u8)func_080EB7A0(work->selectedSlot) != 0) {
+        if ((u8)LoadGameMenuLoadFile(work->selectedSlot) != 0) {
             switch (work->selectedSlot) {
             case 0:
                 gGameState.flags &= ~8;
@@ -4188,37 +4188,37 @@ void func_080EBEC8(LoadGameMenuWork* work) {
                 break;
             }
             m4aSongNumStart(SONG_SYS_SAVELOAD);
-            work->unk_182 = 1;
+            work->loaded = 1;
             work->timer = 16;
-            work->update = func_080EBFB8;
+            work->update = LoadGameMenuSlideOutX;
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
     }
 }
 
-void func_080EBFB8(LoadGameMenuWork* work) {
+void LoadGameMenuSlideOutX(LoadGameMenuWork* work) {
     if (work->timer != 0) {
         ApproachValue(&work->x, -0x8000, work->timer);
         work->timer--;
     } else {
         work->timer = 16;
-        work->update = func_080EBFF8;
+        work->update = LoadGameMenuSlideOutY;
     }
 }
 
-void func_080EBFF8(LoadGameMenuWork* work) {
+void LoadGameMenuSlideOutY(LoadGameMenuWork* work) {
     if (work->timer != 0) {
         ApproachValue(&work->y, -0x800, work->timer);
         ApproachValue(&work->y2, 0xA000, work->timer);
         work->timer--;
     } else {
         FadeStartOut(0, 16);
-        work->update = func_080EC04C;
+        work->update = LoadGameMenuExit;
     }
 }
 
-void func_080EC04C(LoadGameMenuWork* work) {
+void LoadGameMenuExit(LoadGameMenuWork* work) {
 #ifdef VERSION_EU
     SaveFileSummary* e = &gGameState.fileSummaries[work->selectedSlot];
 #endif
@@ -4227,19 +4227,19 @@ void func_080EC04C(LoadGameMenuWork* work) {
         return;
     }
 
-    if (work->unk_181 != 0) {
-        if (work->unk_182 != 0) {
+    if (work->forSioBattle != 0) {
+        if (work->loaded != 0) {
             ModeRequest(&gModeSioBattle, 1);
         } else {
             ModeRequest(&gModeSioBattle, 0);
         }
-    } else if (work->unk_182 != 0) {
+    } else if (work->loaded != 0) {
 #ifdef VERSION_EU
         if (e->world != WORLD_100_ACRE_WOOD) {
 #else
-        if (gUnk_0203C590.unk_04 != 13) {
+        if (gMapFloorState.world != 13) {
 #endif
-            func_080E04EC();
+            RequestMapMode();
         } else {
             ModeRequest(&gModePooh, 2);
         }
@@ -4252,29 +4252,29 @@ void Mode_MenuLoad_0(s32 arg) {
     s32 i;
 
     gLoadGameMenuWork = EwramAlloc(sizeof(LoadGameMenuWork));
-    gLoadGameMenuWork->unk_181 = arg != 0;
+    gLoadGameMenuWork->forSioBattle = arg != 0;
 
-    if (gLoadGameMenuWork->unk_181 != 0) {
-        gLoadGameMenuWork->unk_180 = 0;
+    if (gLoadGameMenuWork->forSioBattle != 0) {
+        gLoadGameMenuWork->showRikuSlots = 0;
     } else {
-        gLoadGameMenuWork->unk_180 = (gGameState.flags >> 5) & 1;
+        gLoadGameMenuWork->showRikuSlots = (gGameState.flags >> 5) & 1;
     }
 
-    gLoadGameMenuWork->unk_182 = 0;
+    gLoadGameMenuWork->loaded = 0;
     gLoadGameMenuWork->selectedSlot = 0;
 
-    if (gLoadGameMenuWork->unk_180 != 0) {
-        gLoadGameMenuWork->unk_184 = 3;
-        gLoadGameMenuWork->unk_15E = 17;
-        gLoadGameMenuWork->y3 = gLoadGameMenuWork->unk_15E << 8;
+    if (gLoadGameMenuWork->showRikuSlots != 0) {
+        gLoadGameMenuWork->lastSlot = 3;
+        gLoadGameMenuWork->slotBaseY = 17;
+        gLoadGameMenuWork->y3 = gLoadGameMenuWork->slotBaseY << 8;
     } else {
-        gLoadGameMenuWork->unk_184 = 1;
-        gLoadGameMenuWork->unk_15E = 43;
-        gLoadGameMenuWork->y3 = gLoadGameMenuWork->unk_15E << 8;
+        gLoadGameMenuWork->lastSlot = 1;
+        gLoadGameMenuWork->slotBaseY = 43;
+        gLoadGameMenuWork->y3 = gLoadGameMenuWork->slotBaseY << 8;
     }
 
     gLoadGameMenuWork->timer = 16;
-    gLoadGameMenuWork->update = func_080EBE44;
+    gLoadGameMenuWork->update = LoadGameMenuSlideInY;
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(2, 0, 29, 0);
@@ -4312,7 +4312,7 @@ void Mode_MenuLoad_0(s32 arg) {
     LoadBgPalette(1, gUnk_099919C4, 0x200);
 #endif
 
-    if (gLoadGameMenuWork->unk_180 != 0) {
+    if (gLoadGameMenuWork->showRikuSlots != 0) {
         LoadBgMap(1, gUnk_09988F44, 0x800);
         SetBgScroll(1, 0, 0xFFFF);
     } else {
@@ -4367,10 +4367,10 @@ void Mode_MenuLoad_0(s32 arg) {
     InitTextSlots(gLoadGameMenuWork->textSlots, 36);
 
     for (i = 0; i < 4; i++) {
-        func_080EBA14(i);
+        LoadGameMenuShowSummary(i);
     }
 
-    func_080EBA58(gLoadGameMenuWork->selectedSlot);
+    LoadGameMenuSelectSlot(gLoadGameMenuWork->selectedSlot);
     FadeStartIn(0, 16);
 }
 
@@ -4378,7 +4378,7 @@ void Mode_MenuLoad_1(void) {
     if (gLoadGameMenuWork->update != 0) {
         gLoadGameMenuWork->update(gLoadGameMenuWork);
     }
-    func_080EBB24();
+    LoadGameMenuDraw();
 }
 
 void Mode_MenuLoad_2(void) {
@@ -4399,22 +4399,22 @@ void Mode_MenuLoad_2(void) {
     EwramFree(gLoadGameMenuWork);
 }
 
-void func_080EC500(UnkStruct_02034FE4* w) {
-    if (func_080A42C8() == 0) {
-        if (w->unk_00 == 0) {
-            func_080C75A4(1, 16);
+void MenuMsgWaitMessage(MenuMsgWork* w) {
+    if (IsMessageWindowOpen() == 0) {
+        if (w->toTitle == 0) {
+            BackdropFadeStartOut(1, 16);
             FadeStartOut(1, 16);
         } else {
-            func_080C75A4(0, 16);
+            BackdropFadeStartOut(0, 16);
             FadeStartOut(0, 16);
         }
-        w->update = func_080EC544;
+        w->update = MenuMsgWaitFade;
     }
 }
 
-void func_080EC544(UnkStruct_02034FE4* w) {
+void MenuMsgWaitFade(MenuMsgWork* w) {
     if (FadeIsActive() == 0) {
-        if (w->unk_00 == 0) {
+        if (w->toTitle == 0) {
             ModeRequest(&gModeCopyright1, 0);
         } else {
             ModeRequest(&gModeTitle, 0);
@@ -4423,47 +4423,47 @@ void func_080EC544(UnkStruct_02034FE4* w) {
 }
 
 void Mode_MenuMsg_0(s32 arg) {
-    gUnk_02034FE4 = EwramAlloc(sizeof(UnkStruct_02034FE4));
-    gUnk_02034FE4->unk_00 = arg;
+    gMenuMsgWork = EwramAlloc(sizeof(MenuMsgWork));
+    gMenuMsgWork->toTitle = arg;
     SetBgMode0();
-    TaskPoolInit(&gUnk_02034FE4->tasks, 1);
+    TaskPoolInit(&gMenuMsgWork->tasks, 1);
 
-    if (gUnk_02034FE4->unk_00 == 0) {
-        CreateSysmsgwinTask(&gUnk_02034FE4->tasks, 0xB0);
-        func_080C736C();
-        func_080C73A4(0, 0, 0);
-        func_080C7568(1, 16);
+    if (gMenuMsgWork->toTitle == 0) {
+        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB0);
+        BackdropFadeReset();
+        BackdropFadeSetColor(0, 0, 0);
+        BackdropFadeStartIn(1, 16);
         FadeStartIn(1, 16);
         FadeLock();
     } else {
 #ifdef VERSION_EU
-        CreateSysmsgwinTask(&gUnk_02034FE4->tasks, 0xB2);
+        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB2);
 #else
-        CreateSysmsgwinTask(&gUnk_02034FE4->tasks, 0xB3);
+        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB3);
 #endif
-        func_080C736C();
-        func_080C73A4(0, 0, 0);
-        func_080C7568(0, 1);
+        BackdropFadeReset();
+        BackdropFadeSetColor(0, 0, 0);
+        BackdropFadeStartIn(0, 1);
         FadeStartIn(0, 1);
         FadeLock();
     }
-    gUnk_02034FE4->update = func_080EC500;
+    gMenuMsgWork->update = MenuMsgWaitMessage;
 }
 
 void Mode_MenuMsg_1(void) {
-    gUnk_02034FE4->update(gUnk_02034FE4);
-    TaskPoolUpdate(&gUnk_02034FE4->tasks);
-    TaskPoolDraw(&gUnk_02034FE4->tasks);
-    func_080C73D8();
+    gMenuMsgWork->update(gMenuMsgWork);
+    TaskPoolUpdate(&gMenuMsgWork->tasks);
+    TaskPoolDraw(&gMenuMsgWork->tasks);
+    BackdropFadeUpdate();
 }
 
 void Mode_MenuMsg_2(void) {
-    TaskPoolDestroy(&gUnk_02034FE4->tasks);
-    EwramFree(gUnk_02034FE4);
+    TaskPoolDestroy(&gMenuMsgWork->tasks);
+    EwramFree(gMenuMsgWork);
 }
 
 void Task_MapRnd_0(MapRndWork* w) {
-    UnkStruct_09EF70D0* r = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+    MapRoomDef* r = gMapRoomDefs[gMapFloorState.world];
     s32 i;
 
     TaskPoolInit(&w->tasks, 4);
@@ -4473,17 +4473,17 @@ void Task_MapRnd_0(MapRndWork* w) {
     LoadBgPalette(3, r->palette, r->paletteSize);
     LoadBgPalette(2, r->palette, r->paletteSize);
     LoadBgPalette(1, r->palette, r->paletteSize);
-    gUnk_0203C7AC->unk_04 = func_080E5564();
-    gUnk_0203C7AC->unk_06 = 64;
-    gFieldState->unk_10 = gUnk_0203C7AC->unk_04 * 4;
-    gFieldState->unk_12 = gUnk_0203C7AC->unk_06 * 2;
-    func_080E49DC(gUnk_0203C7AC->unk_04, gUnk_0203C7AC->unk_06);
+    gMapRoomState->cols = GetRandomMapWidth();
+    gMapRoomState->rows = 64;
+    gFieldState->tileCols = gMapRoomState->cols * 4;
+    gFieldState->tileRows = gMapRoomState->rows * 2;
+    MapGenerateRoom(gMapRoomState->cols, gMapRoomState->rows);
 
     for (i = 0; i < 4; i++) {
-        UnkStruct_080DFB7C* e = func_080DFB7C(i);
+        MapDoor* e = GetMapDoor(i);
 
-        if (e->unk_00 & 1) {
-            if ((e->unk_00 & 8) == 0) {
+        if (e->flags & 1) {
+            if ((e->flags & 8) == 0) {
                 TaskCreate(&w->tasks, &gTaskDescMapDoor, e);
             }
         }
@@ -4491,7 +4491,7 @@ void Task_MapRnd_0(MapRndWork* w) {
 }
 
 s32 Task_MapRnd_1(MapRndWork* w) {
-    func_080E00E4(gFieldState->x2, gFieldState->y2);
+    MapUpdateCamera(gFieldState->x2, gFieldState->y2);
     TaskPoolUpdate(&w->tasks);
     return 1;
 }
@@ -4502,22 +4502,22 @@ void Task_MapRnd_2(MapRndWork* w) {
 
 void Task_MapRnd_3(MapRndWork* w) {
     TaskPoolDestroy(&w->tasks);
-    func_080E4B34();
+    MapFreeRoom();
 }
 
-void func_080EC760(MapFixWork* p, UnkStruct_080EC760Entry* q) {
+void MapFixInitColliders(MapFixWork* p, MapFixedCollider* q) {
     s32 i;
 
-    p->unk_00 = 0;
+    p->colliderCount = 0;
 
     if (q != 0) {
         i = 0;
 
         do {
-            if (q->unk_00 != 0) {
-                ColliderInit(&p->colliders[i], 6, q->unk_00, 0xA0);
-                ColliderSetPosition(&p->colliders[i], q->unk_04, q->unk_08, 0);
-                p->unk_00++;
+            if (q->radius != 0) {
+                ColliderInit(&p->colliders[i], 6, q->radius, 0xA0);
+                ColliderSetPosition(&p->colliders[i], q->x, q->y, 0);
+                p->colliderCount++;
             } else {
                 break;
             }
@@ -4527,31 +4527,31 @@ void func_080EC760(MapFixWork* p, UnkStruct_080EC760Entry* q) {
     }
 }
 
-void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
+void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     FldObj v;
 
-    switch (gUnk_0203C590.unk_07) {
+    switch (gMapFloorState.entrySide) {
     case 0:
-        gFieldState->unk_E4 = 173;
-        gFieldState->unk_DC = p->unk_38 - 0xC00;
-        gFieldState->unk_E0 = p->unk_3C + 0x800;
+        gFieldState->spawnAngle = 173;
+        gFieldState->spawnX = p->stairX - 0xC00;
+        gFieldState->spawnY = p->stairY + 0x800;
         break;
     case 1:
-        gFieldState->unk_E4 = 45;
-        gFieldState->unk_DC = p->unk_40 + 0xC00;
-        gFieldState->unk_E0 = p->unk_44 - 0x800;
+        gFieldState->spawnAngle = 45;
+        gFieldState->spawnX = p->stair2X + 0xC00;
+        gFieldState->spawnY = p->stair2Y - 0x800;
         break;
     default:
-        gFieldState->unk_E4 = 45;
-        gFieldState->unk_DC = p->unk_48;
-        gFieldState->unk_E0 = p->unk_4C;
+        gFieldState->spawnAngle = 45;
+        gFieldState->spawnX = p->spawnX;
+        gFieldState->spawnY = p->spawnY;
         break;
     }
 
 #ifdef VERSION_EU
-    w->unk_1E6 = 0;
-    w->unk_1E5 = 0;
-    w->unk_1E4 = 0;
+    w->bg1MapLoaded = 0;
+    w->bg2MapLoaded = 0;
+    w->bg3MapLoaded = 0;
 
     if (p->unk_50 == 0) {
         eu_080059D4(3, p->tiles);
@@ -4564,7 +4564,7 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
     LoadBgPalette(3, p->palette, p->paletteSize);
 #ifdef VERSION_EU
     eu_08005A1C(3, p->map3, p->mapWidth, p->mapHeight);
-    w->unk_1E4 = 1;
+    w->bg3MapLoaded = 1;
 #else
     SetBgMapBlocks(3, p->map3, p->mapWidth, p->mapHeight);
 #endif
@@ -4582,7 +4582,7 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
         LoadBgPalette(2, p->palette, p->paletteSize);
 #ifdef VERSION_EU
         eu_08005A1C(2, p->map2, p->mapWidth, p->mapHeight);
-        w->unk_1E5 = 1;
+        w->bg2MapLoaded = 1;
 #else
         SetBgMapBlocks(2, p->map2, p->mapWidth, p->mapHeight);
 #endif
@@ -4603,7 +4603,7 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
         LoadBgPalette(1, p->palette, p->paletteSize);
 #ifdef VERSION_EU
         eu_08005A1C(1, p->map, p->mapWidth, p->mapHeight);
-        w->unk_1E6 = 1;
+        w->bg1MapLoaded = 1;
 #else
         SetBgMapBlocks(1, p->map, p->mapWidth, p->mapHeight);
 #endif
@@ -4611,25 +4611,25 @@ void Task_MapFix_0(MapFixWork* w, UnkStruct_09EF8370* p) {
         DisableBg(1);
     }
 
-    gFieldState->unk_10 = p->mapWidth * 32;
-    gFieldState->unk_12 = p->mapHeight * 32;
-    gUnk_0203C7AC->unk_04 = gFieldState->unk_10 / 4;
-    gUnk_0203C7AC->unk_06 = gFieldState->unk_12 / 2;
-    func_080E5868(p);
+    gFieldState->tileCols = p->mapWidth * 32;
+    gFieldState->tileRows = p->mapHeight * 32;
+    gMapRoomState->cols = gFieldState->tileCols / 4;
+    gMapRoomState->rows = gFieldState->tileRows / 2;
+    MapFixInitCells(p);
     TaskPoolInit(&w->tasks, 2);
-    v.fieldPosition.x = p->unk_38;
-    v.fieldPosition.y = p->unk_3C;
+    v.fieldPosition.x = p->stairX;
+    v.fieldPosition.y = p->stairY;
     v.angle = 45;
     TaskCreate(&w->tasks, &gTaskDescMapStair, &v);
 
-    if (p->unk_40 != 0 || p->unk_44 != 0) {
-        v.fieldPosition.x = p->unk_40;
-        v.fieldPosition.y = p->unk_44;
+    if (p->stair2X != 0 || p->stair2Y != 0) {
+        v.fieldPosition.x = p->stair2X;
+        v.fieldPosition.y = p->stair2Y;
         v.angle = 173;
         TaskCreate(&w->tasks, &gTaskDescMapStair, &v);
     }
 
-    func_080EC760(w, p->unk_30);
+    MapFixInitColliders(w, p->colliders);
 }
 
 s32 Task_MapFix_1(MapFixWork* w) {
@@ -4647,12 +4647,12 @@ s32 Task_MapFix_1(MapFixWork* w) {
         gFieldState->y = 0;
     }
 
-    if (gFieldState->x + 0xF000 > gFieldState->unk_10 << 11) {
-        gFieldState->x = (gFieldState->unk_10 << 11) - 0xF000;
+    if (gFieldState->x + 0xF000 > gFieldState->tileCols << 11) {
+        gFieldState->x = (gFieldState->tileCols << 11) - 0xF000;
     }
 
-    if (gFieldState->y + 0xA000 > gFieldState->unk_12 << 11) {
-        gFieldState->y = (gFieldState->unk_12 << 11) - 0xA000;
+    if (gFieldState->y + 0xA000 > gFieldState->tileRows << 11) {
+        gFieldState->y = (gFieldState->tileRows << 11) - 0xA000;
     }
     TaskPoolUpdate(&w->tasks);
     return 1;
@@ -4662,7 +4662,7 @@ void Task_MapFix_2(MapFixWork* w) {
     ScrollBgMapTo(3, gFieldState->x >> 8, gFieldState->y >> 8);
     ScrollBgMapTo(2, gFieldState->x >> 8, gFieldState->y >> 8);
 
-    if ((gUnk_0203C7AC->flags & 1) == 0) {
+    if ((gMapRoomState->flags & 1) == 0) {
         ScrollBgMapTo(1, gFieldState->x >> 8, gFieldState->y >> 8);
     }
     TaskPoolDraw(&w->tasks);
@@ -4671,58 +4671,58 @@ void Task_MapFix_2(MapFixWork* w) {
 void Task_MapFix_3(MapFixWork* w) {
     s32 i;
 
-    for (i = 0; i < w->unk_00; i++) {
+    for (i = 0; i < w->colliderCount; i++) {
         ColliderUnregister(&w->colliders[i]);
     }
 
 #ifdef VERSION_EU
-    if (w->unk_1E4 != 0) {
+    if (w->bg3MapLoaded != 0) {
         eu_08005ADC(3);
     }
 
-    if (w->unk_1E5 != 0) {
+    if (w->bg2MapLoaded != 0) {
         eu_08005ADC(2);
     }
 
-    if (w->unk_1E6 != 0) {
+    if (w->bg1MapLoaded != 0) {
         eu_08005ADC(1);
     }
 #endif
 
     TaskPoolDestroy(&w->tasks);
-    func_080E58E4();
+    MapFixFreeCells();
 }
 
-void func_080ECA88(MapDoorWork* p) {
-    UpdateSpriteFrameTiles(p->tiles, p->unk_4C, p->unk_54);
-    UpdateSpriteFrameTiles(p->tiles2, p->unk_60, p->unk_64);
+void MapDoorShowOpen(MapDoorWork* p) {
+    UpdateSpriteFrameTiles(p->tiles, p->sprite, p->openSrc);
+    UpdateSpriteFrameTiles(p->tiles2, p->sprite2, p->openSrc2);
 }
 
-void func_080ECAA8(MapDoorWork* p) {
-    UpdateSpriteFrameTiles(p->tiles, p->unk_4C, p->unk_50);
-    UpdateSpriteFrameTiles(p->tiles2, p->unk_60, p->unk_68);
+void MapDoorShowClosed(MapDoorWork* p) {
+    UpdateSpriteFrameTiles(p->tiles, p->sprite, p->closedSrc);
+    UpdateSpriteFrameTiles(p->tiles2, p->sprite2, p->closedSrc2);
 }
 
-u8 func_080ECAC8(MapDoorWork* p) {
-    UnkStruct_080DFB7C* flags = p->unk_00;
+u8 MapDoorWaitHit(MapDoorWork* p) {
+    MapDoor* flags = p->door;
     FldObj* e = &p->obj;
 
-    if (!(gFieldState->flags & 0x2000) && !(gUnk_0203C7AC->flags & 0x4004) &&
-        (u8)(flags->unk_07 + 3) > 1 && (flags->unk_00 & 0x12) != 0x12 &&
-        func_080E02E0(&e->fieldPosition, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
-        gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
+    if (!(gFieldState->flags & 0x2000) && !(gMapRoomState->flags & 0x4004) &&
+        (u8)(flags->room + 3) > 1 && (flags->flags & 0x12) != 0x12 &&
+        IsHitByMapAttack(&e->fieldPosition, 0, 8) != 0 && !(gFieldState->flags & 0x800000) &&
+        gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
         TaskPool* pool;
 
         m4aSongNumStart(SONG_SND_220);
         pool = &p->tasks;
         TaskCreate(pool, &gTaskDescMapSpark, e);
-        gUnk_0203C7AC->flags |= 0x80;
-        gFieldState->unk_68 = e;
-        gUnk_0203C7AC->unk_14 = e;
-        p->unk_71 = 1;
-        p->update = func_080ECBC8;
-        gUnk_0203C7AC->unk_0F = flags->unk_07;
-        gUnk_0203C7AC->unk_10 = flags->unk_06;
+        gMapRoomState->flags |= 0x80;
+        gFieldState->lockonTarget = e;
+        gMapRoomState->door = e;
+        p->triggered = 1;
+        p->update = MapDoorWaitCard;
+        gMapRoomState->doorRoom = flags->room;
+        gMapRoomState->doorSide = flags->side;
         FadeSetPaletteExcluded(p->palette->index + 16, 1);
         FadeSetPaletteExcluded(p->palette2->index + 16, 1);
         TaskCreate(pool, &gTaskDescRoomcreate, 0);
@@ -4730,123 +4730,123 @@ u8 func_080ECAC8(MapDoorWork* p) {
     return 1;
 }
 
-u8 func_080ECBC8(MapDoorWork* p) {
-    UnkStruct_080DFB7C* flags = p->unk_00;
-    void* t = func_08093BF8();
+u8 MapDoorWaitCard(MapDoorWork* p) {
+    MapDoor* flags = p->door;
+    void* t = GetSelectedMapCard();
 
     if (t != 0) {
-        if (flags->unk_00 & 0x10) {
-            func_080DF640(flags->unk_07, 0);
+        if (flags->flags & 0x10) {
+            CreateMapRoom(flags->room, 0);
         } else {
-            func_080DF640(flags->unk_07, t);
+            CreateMapRoom(flags->room, t);
         }
-        p->update = func_080ECC54;
+        p->update = MapDoorWaitOpen;
     }
 
     if (!(gFieldState->flags & 0x40000)) {
-        gUnk_0203C7AC->flags &= ~0x80;
+        gMapRoomState->flags &= ~0x80;
         FadeSetPaletteExcluded(p->palette->index + 16, 0);
         FadeSetPaletteExcluded(p->palette2->index + 16, 0);
-        p->update = func_080ECAC8;
+        p->update = MapDoorWaitHit;
     }
     return 1;
 }
 
-u8 func_080ECC54(MapDoorWork* p) {
-    UnkStruct_080DFB7C* flags = p->unk_00;
+u8 MapDoorWaitOpen(MapDoorWork* p) {
+    MapDoor* flags = p->door;
     u16 v;
 
     if (gFieldState->flags & 0x200000) {
-        func_080ECA88(p);
-        v = flags->unk_00 | 2;
-        flags->unk_00 = v;
-        p->update = func_080ECC8C;
+        MapDoorShowOpen(p);
+        v = flags->flags | 2;
+        flags->flags = v;
+        p->update = MapDoorIdle;
     }
 
     return 1;
 }
 
-u8 func_080ECC8C(MapDoorWork* p) {
+u8 MapDoorIdle(MapDoorWork* p) {
     return 1;
 }
 
-void Task_MapDoor_0(MapDoorWork* w, UnkStruct_080DFB7C* p) {
+void Task_MapDoor_0(MapDoorWork* w, MapDoor* p) {
     FldObj* e = &w->obj;
     FldPos* v = &e->fieldPosition;
-    const UnkStruct_0984B968* q = &gUnk_0984B968[gUnk_0203C590.unk_04];
+    const MapDoorGfx* q = &gWorldMapDoorGfx[gMapFloorState.world];
 
-    w->unk_00 = p;
-    w->unk_71 = 0;
-    w->unk_70 = 1;
+    w->door = p;
+    w->triggered = 0;
+    w->visible = 1;
 
-    switch (p->unk_06) {
+    switch (p->side) {
     case 0:
-        w->unk_4C = gMapUiSpriteUs_098A94A0;
-        w->unk_54 = q->unk_08;
-        w->unk_50 = q->unk_04;
+        w->sprite = gMapUiSpriteUs_098A94A0;
+        w->openSrc = q->unk_08;
+        w->closedSrc = q->unk_04;
         e->angle = 173;
-        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
-        e->fieldPosition.y = (p->unk_04 << 4) + 10;
+        w->obj.fieldPosition.x = (p->cellX << 5) + 16;
+        e->fieldPosition.y = (p->cellY << 4) + 10;
         break;
     case 1:
-        w->unk_4C = gMapUiSpriteUs_098A94B4;
-        w->unk_54 = q->unk_20;
-        w->unk_50 = q->unk_1C;
+        w->sprite = gMapUiSpriteUs_098A94B4;
+        w->openSrc = q->unk_20;
+        w->closedSrc = q->unk_1C;
         e->angle = 45;
-        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
-        e->fieldPosition.y = (p->unk_04 << 4) + 6;
+        w->obj.fieldPosition.x = (p->cellX << 5) + 16;
+        e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 2:
-        w->unk_4C = gMapUiSpriteUs_098A94C8;
-        w->unk_54 = q->unk_18;
-        w->unk_50 = q->unk_14;
+        w->sprite = gMapUiSpriteUs_098A94C8;
+        w->openSrc = q->unk_18;
+        w->closedSrc = q->unk_14;
         e->angle = 211;
-        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
-        e->fieldPosition.y = (p->unk_04 << 4) + 6;
+        w->obj.fieldPosition.x = (p->cellX << 5) + 16;
+        e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 3:
-        w->unk_4C = gMapUiSpriteUs_098A948C;
-        w->unk_54 = q->unk_10;
-        w->unk_50 = q->unk_0C;
+        w->sprite = gMapUiSpriteUs_098A948C;
+        w->openSrc = q->unk_10;
+        w->closedSrc = q->unk_0C;
         e->angle = 83;
-        w->obj.fieldPosition.x = (p->unk_02 << 5) + 16;
-        e->fieldPosition.y = (p->unk_04 << 4) + 10;
+        w->obj.fieldPosition.x = (p->cellX << 5) + 16;
+        e->fieldPosition.y = (p->cellY << 4) + 10;
         break;
     }
 
     v->x <<= 8;
     v->y <<= 8;
     v->z = 0;
-    v->z = v->unk_0C = func_080DFF30(v);
+    v->z = v->ground = GetFldPosFloor(v);
     v->y -= v->z;
-    e->unk_1A = 32;
-    e->unk_30 = 3;
+    e->height = 32;
+    e->kind = 3;
     w->tiles = AllocSpriteFrameTiles(0x400);
-    w->palette = LoadObjPalette(q->unk_00, 32);
+    w->palette = LoadObjPalette(q->palette, 32);
     w->palette2 = LoadObjPalette(gUnk_09991284, 32);
     w->tiles2 = AllocSpriteFrameTiles(0x100);
 
-    switch (p->unk_06) {
+    switch (p->side) {
     case 0:
     case 1:
-        w->unk_60 = gMapUiSpriteUs_098A94DC;
-        w->unk_64 = gUnk_09953864;
-        w->unk_68 = gUnk_09953864 + 0x200;
+        w->sprite2 = gMapUiSpriteUs_098A94DC;
+        w->openSrc2 = gUnk_09953864;
+        w->closedSrc2 = gUnk_09953864 + 0x200;
         break;
     case 2:
     case 3:
-        w->unk_60 = gMapUiSpriteUs_098A94FC;
-        w->unk_64 = gUnk_09953764;
-        w->unk_68 = gUnk_09953764 + 0x200;
+        w->sprite2 = gMapUiSpriteUs_098A94FC;
+        w->openSrc2 = gUnk_09953764;
+        w->closedSrc2 = gUnk_09953764 + 0x200;
         break;
     }
 
-    if (p->unk_00 & 2) {
-        w->update = func_080ECAC8;
-        func_080ECA88(w);
+    if (p->flags & 2) {
+        w->update = MapDoorWaitHit;
+        MapDoorShowOpen(w);
     } else {
-        w->update = func_080ECAC8;
-        func_080ECAA8(w);
+        w->update = MapDoorWaitHit;
+        MapDoorShowClosed(w);
     }
 
     TaskPoolInit(&w->tasks, 2);
@@ -4854,12 +4854,12 @@ void Task_MapDoor_0(MapDoorWork* w, UnkStruct_080DFB7C* p) {
 
 s32 Task_MapDoor_1(MapDoorWork* w) {
     if (gFieldState->flags & 0x40000) {
-        if (w->unk_71 == 0) {
-            w->unk_70 = 0;
+        if (w->triggered == 0) {
+            w->visible = 0;
         }
     } else {
-        w->unk_71 = 0;
-        w->unk_70 = 1;
+        w->triggered = 0;
+        w->visible = 1;
     }
 
     if (w->update != 0) {
@@ -4873,19 +4873,19 @@ s32 Task_MapDoor_1(MapDoorWork* w) {
 }
 
 void Task_MapDoor_2(MapDoorWork* p) {
-    UnkStruct_080DFB7C* f = p->unk_00;
+    MapDoor* f = p->door;
     u16 sx;
     u16 sy;
     u16 v;
     u16 t;
     s32 k;
 
-    if (p->unk_70 == 1) {
+    if (p->visible == 1) {
         sx = (p->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         k = p->obj.fieldPosition.y >> 8;
         sy = k + (p->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        switch (f->unk_06) {
+        switch (f->side) {
         case 0:
         case 3:
             v = -0xFE4 - (p->obj.fieldPosition.y >> 8) * 4;
@@ -4902,8 +4902,8 @@ void Task_MapDoor_2(MapDoorWork* p) {
         t = 0x800;
         DrawSprite(sx, sy, 0, p->tiles, p->palette, 0, t, v);
 
-        if (f->unk_00 & 0x10) {
-            switch (f->unk_06) {
+        if (f->flags & 0x10) {
+            switch (f->side) {
             case 0:
             case 2:
                 DrawSprite(sx, sy, 0, p->tiles2, p->palette2, 0, t, v - 1);
@@ -4927,7 +4927,7 @@ void Task_MapDoor_3(MapDoorWork* p) {
     TaskPoolDestroy(&p->tasks);
 }
 
-void func_080ECFE8(MapMenuWork* p, u8 a) {
+void MapMenuSetPanelPalettesExcluded(MapMenuWork* p, u8 a) {
     s32 i;
 
     FadeSetPaletteExcluded(p->palette3->index + 0x10, a);
@@ -4943,13 +4943,13 @@ void func_080ECFE8(MapMenuWork* p, u8 a) {
     }
 }
 
-void func_080ED06C(MapMenuWork* p, u8 a) {
+void MapMenuSetCharaPalettesExcluded(MapMenuWork* p, u8 a) {
     FadeSetPaletteExcluded(p->palette2->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette6->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette7->index + 0x10, a);
 }
 
-void func_080ED0B8(ObjTiles* p, u8 a, u16 v) {
+void MapMenuWriteDigits3(ObjTiles* p, u8 a, u16 v) {
     u16 d[3];
     u16* q;
     s32 i;
@@ -4964,7 +4964,7 @@ void func_080ED0B8(ObjTiles* p, u8 a, u16 v) {
     }
 }
 
-void func_080ED14C(ObjTiles* p, u8 a, u32 v) {
+void MapMenuWriteDigits5(ObjTiles* p, u8 a, u32 v) {
     u16 d[5];
     u16* q;
     s32 i;
@@ -4980,7 +4980,7 @@ void func_080ED14C(ObjTiles* p, u8 a, u32 v) {
         q++;
     }
 }
-void func_080ED250(MapMenuWork* w) {
+void MapMenuInitConfirm(MapMenuWork* w) {
     TextSlot* p1;
     TextSlot* p2;
     TextSlot* p3;
@@ -4990,7 +4990,7 @@ void func_080ED250(MapMenuWork* w) {
     LoadPalette(gCard00Palette, &gUnk_050001C0[0x20], 0x20);
     FadeSetPaletteExcluded(15, 1);
     SetBgScroll(0, 0, 0);
-    w->unk_17C = _08066468(1);
+    w->confirmPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
     p1 = w->textSlots2;
     InitTextSlots(p1, 66);
@@ -5013,10 +5013,10 @@ void func_080ED250(MapMenuWork* w) {
     w->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
 #endif
 }
-void func_080ED314(MapMenuWork* w) {
+void MapMenuFreeConfirm(MapMenuWork* w) {
     FadeSetPaletteExcluded(15, 0);
     DisableBg(0);
-    ReleaseObjPalette(w->unk_17C);
+    ReleaseObjPalette(w->confirmPalette);
 #ifdef VERSION_EU
     FreeTextSlots(w->textSlots2, 0x42);
     FreeTextSlots(w->textSlots3, 6);
@@ -5028,7 +5028,7 @@ void func_080ED314(MapMenuWork* w) {
 #endif
 }
 
-s32 func_080ED35C(MapMenuWork* w) {
+s32 MapMenuOpen(MapMenuWork* w) {
     w->palette2 = LoadObjPalette(gUnk_09991984, 32);
     w->tiles2 = LoadObjTiles(gUnk_09958124, 0x80);
     w->y = -0x800;
@@ -5042,33 +5042,33 @@ s32 func_080ED35C(MapMenuWork* w) {
 
     w->tiles7 = LoadObjTiles(gUnk_08B22BBC, 0x100);
     w->palette7 = LoadObjPalette(gUnk_08F69BE4, 32);
-    w->unk_150 = gFieldState->actor.fieldPosition.x - gFieldState->x;
-    w->unk_154 = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
-    w->x8 = w->unk_150;
-    w->y4 = w->unk_154;
-    w->unk_309 = gGameState.unk_00F;
-    w->unk_30A = 0;
-    w->unk_034 = 0;
-    w->unk_30E = 0;
-    w->unk_30C = w->unk_30F != 0 ? 1 : 16;
-    w->update = func_080ED498;
-    func_080ED06C(w, 1);
+    w->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
+    w->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
+    w->x8 = w->playerStartX;
+    w->y4 = w->playerStartY;
+    w->cursor = gGameState.mapMenuCursor;
+    w->confirmCursor = 0;
+    w->cursorVisible = 0;
+    w->panelsVisible = 0;
+    w->steps = w->reopened != 0 ? 1 : 16;
+    w->update = MapMenuSlideInY;
+    MapMenuSetCharaPalettesExcluded(w, 1);
 
-    if (w->unk_30F == 0) {
+    if (w->reopened == 0) {
         FadeToAmount(0, 16, 16);
     }
     return 1;
 }
 
-s32 func_080ED498(MapMenuWork* w) {
-    if (w->unk_30C != 0) {
-        ApproachValue(&w->y, 0, w->unk_30C);
-        ApproachValue(&w->y2, 0x9800, w->unk_30C);
-        w->unk_30C--;
+s32 MapMenuSlideInY(MapMenuWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->y, 0, w->steps);
+        ApproachValue(&w->y2, 0x9800, w->steps);
+        w->steps--;
     } else {
         s32 i;
 
-        gUnk_0203C7AC->flags |= 0x1000;
+        gMapRoomState->flags |= 0x1000;
         gFieldState->flags |= 0x100;
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -5096,14 +5096,14 @@ s32 func_080ED498(MapMenuWork* w) {
         w->x3 = 0x11800;
         w->x4 = 0xF000;
         w->x5 = 0x10000;
-        func_080ED0B8(w->tiles5, 0, gGameState.progression.level);
-        func_080ED0B8(w->tiles5, 6, gGameState.progression.maxHp);
-        func_080ED0B8(w->tiles5, 3, gGameState.hp);
+        MapMenuWriteDigits3(w->tiles5, 0, gGameState.progression.level);
+        MapMenuWriteDigits3(w->tiles5, 6, gGameState.progression.maxHp);
+        MapMenuWriteDigits3(w->tiles5, 3, gGameState.hp);
 
         if (gGameState.flags & 8) {
-            func_080ED0B8(w->tiles5, 9, gGameState.progression.dp);
+            MapMenuWriteDigits3(w->tiles5, 9, gGameState.progression.dp);
         } else {
-            func_080ED14C(w->tiles5, 9, gGameState.progression.mooglePoints);
+            MapMenuWriteDigits5(w->tiles5, 9, gGameState.progression.mooglePoints);
         }
 
         w->palette4 = LoadObjPalette(gUnk_09991964, 32);
@@ -5168,9 +5168,9 @@ s32 func_080ED498(MapMenuWork* w) {
             w->gfx[i] = 0;
         }
 
-        func_080D8B84(w->tiles9, (void**)w->palette9, w->gfx);
+        LoadFriendCardSprites(w->tiles9, (void**)w->palette9, w->gfx);
         InitTextSlots(w->textSlots, 24);
-        w->palette8 = _08066468(1);
+        w->palette8 = LoadTextPalette(1);
         w->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), w->textSlots);
 #ifdef VERSION_EU
         switch (gLanguage) {
@@ -5199,73 +5199,73 @@ s32 func_080ED498(MapMenuWork* w) {
         w->tiles4 = LoadObjTiles(gUnk_09957C24, 0x300);
 #endif
         w->x2 = 0xF800;
-        func_080ECFE8(w, 1);
-        w->unk_30E = 1;
-        w->unk_30C = w->unk_30F != 0 ? 1 : 16;
-        w->update = func_080ED6CC;
+        MapMenuSetPanelPalettesExcluded(w, 1);
+        w->panelsVisible = 1;
+        w->steps = w->reopened != 0 ? 1 : 16;
+        w->update = MapMenuSlideInX;
     }
 
     return 1;
 }
 
-s32 func_080ED6CC(MapMenuWork* w) {
-    if (w->unk_30C != 0) {
-        ApproachValue(&w->x, 0, w->unk_30C);
-        ApproachValue(&w->x6, 0x800, w->unk_30C);
-        ApproachValue(&w->x2, 0x7800, w->unk_30C);
-        ApproachValue(&w->x3, 0x9800, w->unk_30C);
-        ApproachValue(&w->x4, 0x7000, w->unk_30C);
-        ApproachValue(&w->x5, 0x8000, w->unk_30C);
-        ApproachValue(&w->x8, 0xAC00, w->unk_30C);
-        ApproachValue(&w->y4, 0x6000, w->unk_30C);
-        w->unk_30C--;
+s32 MapMenuSlideInX(MapMenuWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->x, 0, w->steps);
+        ApproachValue(&w->x6, 0x800, w->steps);
+        ApproachValue(&w->x2, 0x7800, w->steps);
+        ApproachValue(&w->x3, 0x9800, w->steps);
+        ApproachValue(&w->x4, 0x7000, w->steps);
+        ApproachValue(&w->x5, 0x8000, w->steps);
+        ApproachValue(&w->x8, 0xAC00, w->steps);
+        ApproachValue(&w->y4, 0x6000, w->steps);
+        w->steps--;
     } else {
-        w->unk_034 = 1;
-        w->y3 = (w->unk_309 * 19 + 16) << 8;
+        w->cursorVisible = 1;
+        w->y3 = (w->cursor * 19 + 16) << 8;
 
-        if (w->unk_30F != 0) {
-            w->unk_30F = 0;
+        if (w->reopened != 0) {
+            w->reopened = 0;
             FadeToAmount(0, 16, 1);
-            w->update = func_080EDD7C;
+            w->update = MapMenuResume;
         } else {
-            w->update = (gGameState.flags & 8) ? func_080ED91C : func_080ED7CC;
+            w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
         }
     }
 
     return 1;
 }
 
-s32 func_080ED7CC(MapMenuWork* w) {
+s32 MapMenuSoraInput(MapMenuWork* w) {
     if (GetKeysRepeat() & DPAD_UP) {
-        w->unk_309 = w->unk_309 != 0 ? w->unk_309 - 1 : 6;
+        w->cursor = w->cursor != 0 ? w->cursor - 1 : 6;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        w->unk_309 = w->unk_309 <= 5 ? w->unk_309 + 1 : 0;
+        w->cursor = w->cursor <= 5 ? w->cursor + 1 : 0;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysPressed() & (B_BUTTON | START_BUTTON)) {
-        w->unk_034 = 0;
-        w->unk_30C = 16;
-        w->update = func_080EDB4C;
+        w->cursorVisible = 0;
+        w->steps = 16;
+        w->update = MapMenuSlideOutX;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
-        switch (w->unk_309) {
+        switch (w->cursor) {
         case 0:
         case 2:
         case 3:
         case 4:
         case 5:
-            func_0801CB0C();
-            w->update = func_080EDA90;
+            RequestFieldResume();
+            w->update = MapMenuOpenSubMode;
             m4aSongNumStart(SONG_SYS_KETTEI);
             break;
         case 1:
-            if ((u8)(gUnk_0203C590.unk_06 + 4) > 2) {
-                func_0801CB0C();
-                w->update = func_080EDA90;
+            if ((u8)(gMapFloorState.room + 4) > 2) {
+                RequestFieldResume();
+                w->update = MapMenuOpenSubMode;
                 m4aSongNumStart(SONG_SYS_KETTEI);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
@@ -5273,62 +5273,62 @@ s32 func_080ED7CC(MapMenuWork* w) {
             break;
         case 6:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            func_080ED250(w);
-            w->unk_30A = 2;
+            MapMenuInitConfirm(w);
+            w->confirmCursor = 2;
             w->x7 = 0x8800;
-            w->update = func_080EDC94;
+            w->update = MapMenuConfirmInput;
             break;
         }
     }
     return 1;
 }
 
-s32 func_080ED91C(MapMenuWork* w) {
+s32 MapMenuRikuInput(MapMenuWork* w) {
     if (GetKeysRepeat() & DPAD_UP) {
-        w->unk_309 = w->unk_309 != 0 ? w->unk_309 - 1 : 6;
+        w->cursor = w->cursor != 0 ? w->cursor - 1 : 6;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        w->unk_309 = w->unk_309 <= 5 ? w->unk_309 + 1 : 0;
+        w->cursor = w->cursor <= 5 ? w->cursor + 1 : 0;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysPressed() & (B_BUTTON | START_BUTTON)) {
-        w->unk_034 = 0;
-        w->unk_30C = 16;
-        w->update = func_080EDB4C;
+        w->cursorVisible = 0;
+        w->steps = 16;
+        w->update = MapMenuSlideOutX;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
-        switch (w->unk_309) {
+        switch (w->cursor) {
         case 0:
         case 2:
         case 3:
         case 4:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            func_0801CB0C();
-            w->update = func_080EDA90;
+            RequestFieldResume();
+            w->update = MapMenuOpenSubMode;
             break;
         case 5:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            func_0801CB0C();
-            w->update = func_080EDA90;
+            RequestFieldResume();
+            w->update = MapMenuOpenSubMode;
             break;
         case 1:
-            if ((u8)(gUnk_0203C590.unk_06 + 4) > 2) {
+            if ((u8)(gMapFloorState.room + 4) > 2) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
-                func_0801CB0C();
-                w->update = func_080EDA90;
+                RequestFieldResume();
+                w->update = MapMenuOpenSubMode;
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
             break;
         case 6:
             m4aSongNumStart(SONG_SYS_KETTEI);
-            func_080ED250(w);
-            w->unk_30A = 2;
+            MapMenuInitConfirm(w);
+            w->confirmCursor = 2;
             w->x7 = 0x8800;
-            w->update = func_080EDC94;
+            w->update = MapMenuConfirmInput;
             break;
         }
     }
@@ -5336,19 +5336,19 @@ s32 func_080ED91C(MapMenuWork* w) {
     return 1;
 }
 
-s32 func_080EDA90(MapMenuWork* w) {
-    gGameState.unk_00F = w->unk_309;
+s32 MapMenuOpenSubMode(MapMenuWork* w) {
+    gGameState.mapMenuCursor = w->cursor;
 
-    switch (w->unk_309) {
+    switch (w->cursor) {
     case 0:
         if (gGameState.flags & 8) {
             if (gGameState.progression.unk_82 & 0x800) {
-                ModeRequest(&gUnk_09EE2704, 0);
+                ModeRequest(&gModeDeck, 0);
             } else {
                 ModeRequest(&gModeRikuDeckTutorial, 0);
             }
         } else {
-            ModeRequest(&gUnk_09EE2704, 0);
+            ModeRequest(&gModeDeck, 0);
         }
         break;
     case 1:
@@ -5373,73 +5373,73 @@ s32 func_080EDA90(MapMenuWork* w) {
     return 1;
 }
 
-s32 func_080EDB4C(MapMenuWork* w) {
-    if (w->unk_30C != 0) {
-        ApproachValue(&w->x, -0x8000, w->unk_30C);
-        ApproachValue(&w->x6, -0x7800, w->unk_30C);
-        ApproachValue(&w->x2, 0xF800, w->unk_30C);
-        ApproachValue(&w->x3, 0x11800, w->unk_30C);
-        ApproachValue(&w->x4, 0xF000, w->unk_30C);
-        ApproachValue(&w->x5, 0x10000, w->unk_30C);
-        ApproachValue(&w->x8, w->unk_150, w->unk_30C);
-        ApproachValue(&w->y4, w->unk_154, w->unk_30C);
-        w->unk_30C--;
+s32 MapMenuSlideOutX(MapMenuWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->x, -0x8000, w->steps);
+        ApproachValue(&w->x6, -0x7800, w->steps);
+        ApproachValue(&w->x2, 0xF800, w->steps);
+        ApproachValue(&w->x3, 0x11800, w->steps);
+        ApproachValue(&w->x4, 0xF000, w->steps);
+        ApproachValue(&w->x5, 0x10000, w->steps);
+        ApproachValue(&w->x8, w->playerStartX, w->steps);
+        ApproachValue(&w->y4, w->playerStartY, w->steps);
+        w->steps--;
     } else {
-        gUnk_0203C7AC->flags &= ~0x1000;
+        gMapRoomState->flags &= ~0x1000;
         gFieldState->flags &= ~0x100;
-        func_080ECFE8(w, 0);
+        MapMenuSetPanelPalettesExcluded(w, 0);
         FadeToOriginal(0, 16);
-        w->unk_30C = 16;
-        w->update = func_080EDC38;
+        w->steps = 16;
+        w->update = MapMenuSlideOutY;
     }
     return 1;
 }
 
-s32 func_080EDC38(MapMenuWork* w) {
-    if (w->unk_30C != 0) {
-        ApproachValue(&w->y, -0x800, w->unk_30C);
-        ApproachValue(&w->y2, 0xA000, w->unk_30C);
-        w->unk_30C--;
+s32 MapMenuSlideOutY(MapMenuWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->y, -0x800, w->steps);
+        ApproachValue(&w->y2, 0xA000, w->steps);
+        w->steps--;
         return 1;
     }
 
-    gGameState.unk_00F = 0xFF;
+    gGameState.mapMenuCursor = 0xFF;
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     return 0;
 }
 
-s32 func_080EDC94(MapMenuWork* w) {
+s32 MapMenuConfirmInput(MapMenuWork* w) {
     if (GetKeysPressed() & DPAD_LEFT) {
-        if (w->unk_30A != 1) {
-            w->unk_30A = 1;
+        if (w->confirmCursor != 1) {
+            w->confirmCursor = 1;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
     if (GetKeysPressed() & DPAD_RIGHT) {
-        if (w->unk_30A != 2) {
-            w->unk_30A = 2;
+        if (w->confirmCursor != 2) {
+            w->confirmCursor = 2;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
-    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && w->unk_30A == 2)) {
-        w->unk_30A = 0;
-        func_080ED314(w);
-        w->y3 = (w->unk_309 * 19 + 16) << 8;
-        w->update = (gGameState.flags & 8) ? func_080ED91C : func_080ED7CC;
+    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && w->confirmCursor == 2)) {
+        w->confirmCursor = 0;
+        MapMenuFreeConfirm(w);
+        w->y3 = (w->cursor * 19 + 16) << 8;
+        w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
         SaveWriteSystem();
-        w->update = func_080EDA90;
+        w->update = MapMenuOpenSubMode;
         m4aSongNumStart(SONG_SYS_KETTEI);
     }
     return 1;
 }
 
-s32 func_080EDD7C(MapMenuWork* w) {
+s32 MapMenuResume(MapMenuWork* w) {
     (*(volatile u16*)&gDispCnt) |= DISPCNT_OBJ_ON;
-    w->update = (gGameState.flags & 8) ? func_080ED91C : func_080ED7CC;
+    w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
     return 1;
 }
 
@@ -5457,25 +5457,25 @@ void Task_MapMenu_0(MapMenuWork* w) {
     }
 
     FadeSetPaletteExcluded(w->palette6->index + 0x10, 1);
-    v = gGameState.unk_00F;
+    v = gGameState.mapMenuCursor;
 
     if (v != -1) {
-        w->unk_30F = 1;
+        w->reopened = 1;
     } else {
-        gGameState.unk_00F = 0;
-        w->unk_30F = 0;
+        gGameState.mapMenuCursor = 0;
+        w->reopened = 0;
         m4aSongNumStart(SONG_SYS_CANSEL);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
-    w->update = func_080ED35C;
+    w->update = MapMenuOpen;
 }
 
 s32 Task_MapMenu_1(MapMenuWork* w) {
-    if (w->unk_30F != 0) {
+    if (w->reopened != 0) {
         FadeStartIn(0, 16);
     }
 
-    if (w->unk_30E != 0) {
+    if (w->panelsVisible != 0) {
         AnimUpdate(&w->anim);
     }
 
@@ -5499,9 +5499,9 @@ void Task_MapMenu_2(MapMenuWork* w) {
 
     if (
 #ifdef VERSION_EU
-        w->unk_30A == 0 &&
+        w->confirmCursor == 0 &&
 #endif
-        (gUnk_0203C7AC->flags & 0x1000)) {
+        (gMapRoomState->flags & 0x1000)) {
         if (gGameState.flags & 8) {
             DrawSprite(w->x8 >> 8, w->y4 >> 8, gRikuFf00Frames[0], w->tiles8, w->palette6,
                 0, 0x400, 80);
@@ -5514,7 +5514,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
             0x400, 81);
     }
 
-    if (w->unk_30E != 0) {
+    if (w->panelsVisible != 0) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 4:
@@ -5673,10 +5673,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
-            if (w->unk_034 != 0) {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[w->unk_309], w->tiles6, w->palette5, 0,
+            if (w->cursorVisible != 0) {
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[w->cursor], w->tiles6, w->palette5, 0,
                     0x400, 81);
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84678[w->unk_309], w->tiles6, w->palette4, 0,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84678[w->cursor], w->tiles6, w->palette4, 0,
                     0x400, 81);
             } else {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5684,10 +5684,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
             }
             break;
         case 1:
-            if (w->unk_034 != 0) {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[w->unk_309], w->tiles6, w->palette5, 0,
+            if (w->cursorVisible != 0) {
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[w->cursor], w->tiles6, w->palette5, 0,
                     0x400, 81);
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84698[w->unk_309], w->tiles6, w->palette4, 0,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84698[w->cursor], w->tiles6, w->palette4, 0,
                     0x400, 81);
             } else {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5695,10 +5695,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
             }
             break;
         case 4:
-            if (w->unk_034 != 0) {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[w->unk_309], w->tiles6, w->palette5, 0,
+            if (w->cursorVisible != 0) {
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[w->cursor], w->tiles6, w->palette5, 0,
                     0x400, 81);
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846B8[w->unk_309], w->tiles6, w->palette4, 0,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846B8[w->cursor], w->tiles6, w->palette4, 0,
                     0x400, 81);
             } else {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5706,10 +5706,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
             }
             break;
         case 3:
-            if (w->unk_034 != 0) {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[w->unk_309], w->tiles6, w->palette5, 0,
+            if (w->cursorVisible != 0) {
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[w->cursor], w->tiles6, w->palette5, 0,
                     0x400, 81);
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846D8[w->unk_309], w->tiles6, w->palette4, 0,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846D8[w->cursor], w->tiles6, w->palette4, 0,
                     0x400, 81);
             } else {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5718,10 +5718,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
             break;
         case 2:
         default:
-            if (w->unk_034 != 0) {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[w->unk_309], w->tiles6, w->palette5, 0,
+            if (w->cursorVisible != 0) {
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[w->cursor], w->tiles6, w->palette5, 0,
                     0x400, 81);
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846F8[w->unk_309], w->tiles6, w->palette4, 0,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846F8[w->cursor], w->tiles6, w->palette4, 0,
                     0x400, 81);
             } else {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5730,10 +5730,10 @@ void Task_MapMenu_2(MapMenuWork* w) {
             break;
         }
 #else
-        if (w->unk_034 != 0) {
-            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[w->unk_309], w->tiles6, w->palette5, 0,
+        if (w->cursorVisible != 0) {
+            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[w->cursor], w->tiles6, w->palette5, 0,
                 0x400, 81);
-            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E44[w->unk_309], w->tiles6, w->palette4, 0,
+            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E44[w->cursor], w->tiles6, w->palette4, 0,
                 0x400, 81);
         } else {
             DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[7], w->tiles6, w->palette5, 0, 0x400,
@@ -5741,8 +5741,8 @@ void Task_MapMenu_2(MapMenuWork* w) {
         }
 #endif
 
-        if (w->unk_034 != 0) {
-            switch (w->unk_30A) {
+        if (w->cursorVisible != 0) {
+            switch (w->confirmCursor) {
             case 1:
                 ApproachValueHalf(&w->x7, 0x4800);
                 DrawSprite(w->x7 >> 8, 80, AnimGetGfx(&w->anim), w->tiles, w->palette, 0,
@@ -5755,14 +5755,14 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 break;
             case 0:
             default:
-                ApproachValueHalf(&w->y3, (w->unk_309 * 19 + 16) << 8);
+                ApproachValueHalf(&w->y3, (w->cursor * 19 + 16) << 8);
                 DrawSprite(24, w->y3 >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, 0,
                     0x401, 60);
                 break;
             }
         }
 
-        if (w->unk_30A != 0) {
+        if (w->confirmCursor != 0) {
             DrawTextSlots(
 #ifdef VERSION_EU
                 120 - (GetTextSlotsWidth(w->textSlots2, w->textSlotCount2) >> 1),
@@ -5770,9 +5770,9 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2,
 #endif
                 64, w->textSlots2,
-                w->unk_17C, 70, w->textSlotCount2);
-            DrawTextSlots(80, 84, w->textSlots3, w->unk_17C, 70, w->textSlotCount3);
-            DrawTextSlots(144, 84, w->textSlots4, w->unk_17C, 70, w->textSlotCount4);
+                w->confirmPalette, 70, w->textSlotCount2);
+            DrawTextSlots(80, 84, w->textSlots3, w->confirmPalette, 70, w->textSlotCount3);
+            DrawTextSlots(144, 84, w->textSlots4, w->confirmPalette, 70, w->textSlotCount4);
         }
     }
 }
@@ -5780,8 +5780,8 @@ void Task_MapMenu_2(MapMenuWork* w) {
 void Task_MapMenu_3(MapMenuWork* w) {
     s32 i;
 
-    func_080ED06C(w, 0);
-    func_080ECFE8(w, 0);
+    MapMenuSetCharaPalettesExcluded(w, 0);
+    MapMenuSetPanelPalettesExcluded(w, 0);
     ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjTiles(w->tiles3);
@@ -5807,13 +5807,13 @@ void Task_MapMenu_3(MapMenuWork* w) {
 
     FreeTextSlots(w->textSlots, 24);
     ReleaseObjPalette(w->palette8);
-    gUnk_0203C7AC->flags &= ~0x80;
+    gMapRoomState->flags &= ~0x80;
     gFieldState->flags &= ~0x1000;
     gFieldState->flags &= ~0x80;
     gFieldState->flags &= ~0x2000;
 }
 
-void func_080EE50C(MapSaveWork* p, u8 a) {
+void MapSaveSetPanelPalettesExcluded(MapSaveWork* p, u8 a) {
     FadeSetPaletteExcluded(0x0B, a);
     FadeSetPaletteExcluded(0x0C, a);
     FadeSetPaletteExcluded(0x0D, a);
@@ -5824,14 +5824,14 @@ void func_080EE50C(MapSaveWork* p, u8 a) {
     FadeSetPaletteExcluded(p->palette8->index + 0x10, a);
 }
 
-void func_080EE580(MapSaveWork* p, u8 a) {
+void MapSaveSetCharaPalettesExcluded(MapSaveWork* p, u8 a) {
     FadeSetPaletteExcluded(p->palette2->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette5->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette6->index + 0x10, a);
     FadeSetPaletteExcluded(p->palette7->index + 0x10, a);
 }
 
-void func_080EE5E0(u8 a) {
+void MapSaveLoadFloorTiles(u8 a) {
     const u8* src;
 
 #ifdef VERSION_EU
@@ -5883,7 +5883,7 @@ void func_080EE5E0(u8 a) {
     RequestDma3Copy((void*)src, (u8*)GetBgCharBase(0) + 320, 320);
 }
 
-void func_080EE62C(u16 v) {
+void MapSaveLoadLevelTiles(u16 v) {
     u16 d[4];
     s32 off;
     u16* q;
@@ -5904,7 +5904,7 @@ void func_080EE62C(u16 v) {
     }
 }
 
-void func_080EE6AC(u32 t) {
+void MapSaveLoadTimeTiles(u32 t) {
     u16 d[6];
     s32 off;
     u16* q;
@@ -5931,49 +5931,49 @@ void func_080EE6AC(u32 t) {
     }
 }
 
-void func_080EE760(MapSaveWork* w, u8 i) {
+void MapSaveShowSummary(MapSaveWork* w, u8 i) {
     SaveFileSummary* e = &gGameState.fileSummaries[i];
 
     if (e->level == 0) {
         w->textSlotCount = 0;
     } else {
-        func_080EE5E0(e->floor);
-        func_080EE62C(e->level);
-        func_080EE6AC(e->playTime);
-        w->textSlotCount = LoadTextSlots(func_080DF804(e->world), w->textSlots);
+        MapSaveLoadFloorTiles(e->floor);
+        MapSaveLoadLevelTiles(e->level);
+        MapSaveLoadTimeTiles(e->playTime);
+        w->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), w->textSlots);
     }
 }
 
-s32 func_080EE7B0(MapSaveWork* w) {
-    if (w->unk_2F6 != 0) {
-        ApproachValue(&w->y, 0, w->unk_2F6);
-        ApproachValue(&w->y2, 0x9800, w->unk_2F6);
-        w->unk_2F6 -= 1;
+s32 MapSaveSlideInY(MapSaveWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->y, 0, w->steps);
+        ApproachValue(&w->y2, 0x9800, w->steps);
+        w->steps -= 1;
     } else {
-        gUnk_0203C7AC->flags |= 0x1000;
+        gMapRoomState->flags |= 0x1000;
         gFieldState->flags |= 0x100;
-        w->unk_2F6 = 16;
-        w->update = func_080EE824;
+        w->steps = 16;
+        w->update = MapSaveSlideInX;
     }
     return 1;
 }
 
-s32 func_080EE824(MapSaveWork* w) {
+s32 MapSaveSlideInX(MapSaveWork* w) {
     TextSlot* p1;
     TextSlot* p2;
     TextSlot* p3;
 
-    if (w->unk_2F6 != 0) {
-        ApproachValue(&w->x, 0, w->unk_2F6);
+    if (w->steps != 0) {
+        ApproachValue(&w->x, 0, w->steps);
 
         if (gGameState.flags & 8) {
-            ApproachValue(&w->x3, 0x3800, w->unk_2F6);
-            ApproachValue(&w->y3, 0x7000, w->unk_2F6);
+            ApproachValue(&w->x3, 0x3800, w->steps);
+            ApproachValue(&w->y3, 0x7000, w->steps);
         } else {
-            ApproachValue(&w->x3, 0x3800, w->unk_2F6);
-            ApproachValue(&w->y3, 0x7000, w->unk_2F6);
+            ApproachValue(&w->x3, 0x3800, w->steps);
+            ApproachValue(&w->y3, 0x7000, w->steps);
         }
-        w->unk_2F6 -= 1;
+        w->steps -= 1;
     } else {
         if (!(gGameState.flags & 8)) {
             w->palette4 = LoadObjPalette(gUnk_09991C04, 32);
@@ -6010,13 +6010,13 @@ s32 func_080EE824(MapSaveWork* w) {
                 LoadBgMap(0, gUnk_0998C744, 0x800);
 
                 if (SaveRepairFileSmall(1) == 2) {
-                    func_080EE760(w, 3);
+                    MapSaveShowSummary(w, 3);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998BF44, 0x800);
 
                 if (SaveRepairFileSmall(0) == 2) {
-                    func_080EE760(w, 2);
+                    MapSaveShowSummary(w, 2);
                 }
             }
         } else {
@@ -6024,13 +6024,13 @@ s32 func_080EE824(MapSaveWork* w) {
                 LoadBgMap(0, gUnk_0998B744, 0x800);
 
                 if (SaveRepairFileLarge(1) == 2) {
-                    func_080EE760(w, 1);
+                    MapSaveShowSummary(w, 1);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998AF44, 0x800);
 
                 if (SaveRepairFileLarge(0) == 2) {
-                    func_080EE760(w, 0);
+                    MapSaveShowSummary(w, 0);
                 }
             }
         }
@@ -6044,7 +6044,7 @@ s32 func_080EE824(MapSaveWork* w) {
         w->tiles = AllocObjTiles(0x120, gUnk_098A8628);
         AnimInit(&w->anim, gUnk_09EF8D58, gUnk_09EF8D48);
         AnimStart(&w->anim, 2, 1);
-        w->palette8 = _08066468(1);
+        w->palette8 = LoadTextPalette(1);
         p1 = w->textSlots2;
 #ifdef VERSION_EU
         InitTextSlots(p1, 54);
@@ -6064,36 +6064,36 @@ s32 func_080EE824(MapSaveWork* w) {
         w->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
         w->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
 #endif
-        func_080EE50C(w, 1);
-        w->unk_2F8 = 1;
-        w->unk_2F4 = 2;
+        MapSaveSetPanelPalettesExcluded(w, 1);
+        w->dialogVisible = 1;
+        w->confirmCursor = 2;
         w->x2 = 0xB000;
-        w->update = func_080EEB00;
+        w->update = MapSaveInput;
     }
     return 1;
 }
 
-s32 func_080EEB00(MapSaveWork* w) {
+s32 MapSaveInput(MapSaveWork* w) {
     if (GetKeysRepeat() & DPAD_LEFT) {
-        if (w->unk_2F4 != 1) {
-            w->unk_2F4 = 1;
+        if (w->confirmCursor != 1) {
+            w->confirmCursor = 1;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
     if (GetKeysRepeat() & DPAD_RIGHT) {
-        if (w->unk_2F4 != 2) {
-            w->unk_2F4 = 2;
+        if (w->confirmCursor != 2) {
+            w->confirmCursor = 2;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
-    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && w->unk_2F4 != 1)) {
+    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && w->confirmCursor != 1)) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        w->unk_2F4 = 0;
-        w->unk_2F8 = 0;
-        w->unk_2F6 = 16;
-        w->update = func_080EEC9C;
+        w->confirmCursor = 0;
+        w->dialogVisible = 0;
+        w->steps = 16;
+        w->update = MapSaveSlideOutX;
         DisableBg(0);
     } else if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_SAVELOAD);
@@ -6101,18 +6101,18 @@ s32 func_080EEB00(MapSaveWork* w) {
         if (gGameState.flags & 8) {
             if (gGameState.flags & 0x10) {
                 SaveWriteFileSmall(1);
-                func_080EE760(w, 3);
+                MapSaveShowSummary(w, 3);
             } else {
                 SaveWriteFileSmall(0);
-                func_080EE760(w, 2);
+                MapSaveShowSummary(w, 2);
             }
         } else {
             if (gGameState.flags & 0x10) {
                 SaveWriteFileLarge(1);
-                func_080EE760(w, 1);
+                MapSaveShowSummary(w, 1);
             } else {
                 SaveWriteFileLarge(0);
-                func_080EE760(w, 0);
+                MapSaveShowSummary(w, 0);
             }
         }
 
@@ -6123,47 +6123,47 @@ s32 func_080EEB00(MapSaveWork* w) {
 #endif
         w->textSlotCount3 = 0;
         w->textSlotCount4 = 0;
-        w->unk_2F4 = 0;
-        w->update = func_080EEC5C;
+        w->confirmCursor = 0;
+        w->update = MapSaveWaitClose;
     }
 
     return 1;
 }
 
-s32 func_080EEC5C(MapSaveWork* w) {
+s32 MapSaveWaitClose(MapSaveWork* w) {
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON)) {
-        w->unk_2F8 = 0;
+        w->dialogVisible = 0;
         DisableBg(0);
-        w->unk_2F6 = 16;
-        w->update = func_080EEC9C;
+        w->steps = 16;
+        w->update = MapSaveSlideOutX;
     }
 
     return 1;
 }
 
-s32 func_080EEC9C(MapSaveWork* w) {
-    if (w->unk_2F6 != 0) {
-        ApproachValue(&w->x, -0x8000, w->unk_2F6);
-        ApproachValue(&w->x3, w->unk_178, w->unk_2F6);
-        ApproachValue(&w->y3, w->unk_17C, w->unk_2F6);
-        w->unk_2F6--;
+s32 MapSaveSlideOutX(MapSaveWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->x, -0x8000, w->steps);
+        ApproachValue(&w->x3, w->playerStartX, w->steps);
+        ApproachValue(&w->y3, w->playerStartY, w->steps);
+        w->steps--;
     } else {
-        gUnk_0203C7AC->flags &= ~0x1000;
+        gMapRoomState->flags &= ~0x1000;
         gFieldState->flags &= ~0x100;
-        func_080EE50C(w, 0);
+        MapSaveSetPanelPalettesExcluded(w, 0);
         FadeToOriginal(0, 16);
-        w->unk_2F6 = 16;
-        w->update = func_080EED44;
+        w->steps = 16;
+        w->update = MapSaveSlideOutY;
     }
 
     return 1;
 }
 
-s32 func_080EED44(MapSaveWork* w) {
-    if (w->unk_2F6 != 0) {
-        ApproachValue(&w->y, -0x800, w->unk_2F6);
-        ApproachValue(&w->y2, 0xA000, w->unk_2F6);
-        w->unk_2F6--;
+s32 MapSaveSlideOutY(MapSaveWork* w) {
+    if (w->steps != 0) {
+        ApproachValue(&w->y, -0x800, w->steps);
+        ApproachValue(&w->y2, 0xA000, w->steps);
+        w->steps--;
         return 1;
     }
 
@@ -6173,7 +6173,7 @@ s32 func_080EED44(MapSaveWork* w) {
 void Task_MapSave_0(MapSaveWork* w) {
     gFieldState->flags |= 0x1000;
     gFieldState->flags |= 0x80;
-    gUnk_0203C7AC->flags |= 0x2000;
+    gMapRoomState->flags |= 0x2000;
     gGameState.hp = gGameState.progression.maxHp;
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -6213,16 +6213,16 @@ void Task_MapSave_0(MapSaveWork* w) {
 
     w->palette6 = LoadObjPalette(gDonaldPalette, 32);
     w->palette7 = LoadObjPalette(gGoofyPalette, 32);
-    w->unk_178 = gFieldState->actor.fieldPosition.x - gFieldState->x;
-    w->unk_17C = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
-    w->x3 = w->unk_178;
-    w->y3 = w->unk_17C;
-    w->unk_2F4 = 0;
-    w->unk_2F8 = 0;
-    w->unk_2F6 = 16;
-    w->update = func_080EE7B0;
+    w->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
+    w->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
+    w->x3 = w->playerStartX;
+    w->y3 = w->playerStartY;
+    w->confirmCursor = 0;
+    w->dialogVisible = 0;
+    w->steps = 16;
+    w->update = MapSaveSlideInY;
     TaskPoolInit(&w->tasks, 1);
-    func_080EE580(w, 1);
+    MapSaveSetCharaPalettesExcluded(w, 1);
     FadeToAmount(0, 16, 16);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
@@ -6230,7 +6230,7 @@ void Task_MapSave_0(MapSaveWork* w) {
 s32 Task_MapSave_1(MapSaveWork* w) {
     TaskPoolUpdate(&w->tasks);
 
-    if (w->unk_2F4 != 0) {
+    if (w->confirmCursor != 0) {
         AnimUpdate(&w->anim);
     }
 
@@ -6279,7 +6279,7 @@ void Task_MapSave_2(MapSaveWork* w) {
     DrawSprite(w->x >> 8, 0, gUnk_09EF8D8C[0], w->tiles2, w->palette2, 0, 0x400, 80);
 #endif
 
-    if (gUnk_0203C7AC->flags & 0x1000) {
+    if (gMapRoomState->flags & 0x1000) {
         if (gGameState.flags & 8) {
             DrawSprite(w->x3 >> 8, w->y3 >> 8, gRikuFf00Frames[0], w->tiles4, w->palette5,
                 0, 0x400, 80);
@@ -6289,7 +6289,7 @@ void Task_MapSave_2(MapSaveWork* w) {
         }
     }
 
-    if (w->unk_2F8 != 0) {
+    if (w->dialogVisible != 0) {
         if (!(gGameState.flags & 8)) {
             DrawSprite(72, 96, ((void**)gDonaFl00Frames)[0], w->tiles5, w->palette6, 0, 0x401, 81);
             DrawSprite(40, 96, ((void**)gGoofyFl00Frames)[0], w->tiles6, w->palette7, 0, 0x400, 81);
@@ -6298,7 +6298,7 @@ void Task_MapSave_2(MapSaveWork* w) {
         DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, w->tiles3, w->palette3, 0, 0x400, 90);
         DrawTextSlots(100, 59, w->textSlots, w->palette4, 50, w->textSlotCount);
 
-        if (w->unk_2F4 != 0) {
+        if (w->confirmCursor != 0) {
 #ifdef VERSION_EU
             DrawTextSlots(166 - (GetTextSlotsWidth(w->textSlots2, w->textSlotCount2) >> 1), 92, w->textSlots2, w->palette8, 50, w->textSlotCount2);
 #elif defined(VERSION_JP)
@@ -6318,7 +6318,7 @@ void Task_MapSave_2(MapSaveWork* w) {
 #endif
         }
 
-        switch (w->unk_2F4) {
+        switch (w->confirmCursor) {
         case 1:
             ApproachValueHalf(&w->x2, 0x7800);
             DrawSprite(w->x2 >> 8, 110, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 1,
@@ -6336,7 +6336,7 @@ void Task_MapSave_2(MapSaveWork* w) {
 void Task_MapSave_3(MapSaveWork* w) {
     u32 f;
 
-    func_080EE580(w, 0);
+    MapSaveSetCharaPalettesExcluded(w, 0);
     ReleaseObjPalette(w->palette2);
     ReleaseObjTiles(w->tiles2);
     ReleaseObjPalette(w->palette3);
@@ -6359,34 +6359,34 @@ void Task_MapSave_3(MapSaveWork* w) {
 #endif
     FreeTextSlots(w->textSlots3, 6);
     FreeTextSlots(w->textSlots4, 9);
-    f = gUnk_0203C7AC->flags & ~0x80;
-    gUnk_0203C7AC->flags = f;
+    f = gMapRoomState->flags & ~0x80;
+    gMapRoomState->flags = f;
     gFieldState->flags &= ~0x1000;
     gFieldState->flags &= ~0x80;
-    gUnk_0203C7AC->flags = f & ~0x2000;
+    gMapRoomState->flags = f & ~0x2000;
     TaskPoolDestroy(&w->tasks);
 }
 
 void Task_MapAnm_0(MapAnmWork* work, MapAnmEntry* list) {
-    UnkStruct_080E8B1C* e;
+    MapAnmSlot* e;
     s32 i;
 
-    e = work->unk_00;
+    e = work->slots;
 
     for (i = 0; i < 8; i++) {
-        func_080E8BB4(e);
+        MapAnmResetSlot(e);
         e++;
     }
 
     if (list != 0) {
-        if (list->unk_00 != 0) {
-            e = work->unk_00;
+        if (list->script != 0) {
+            e = work->slots;
 
             do {
-                func_080E8B1C(e, (const UnkStruct_080E7D80*)list);
+                MapAnmSetupSlot(e, (const MapGmkDef*)list);
                 e++;
                 list++;
-            } while (list->unk_00 != 0);
+            } while (list->script != 0);
         }
     }
 }
@@ -6395,8 +6395,8 @@ s32 Task_MapAnm_1(MapAnmWork* w) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        if (w->unk_00[i].unk_14 != 0) {
-            func_080E8BA0(&w->unk_00[i]);
+        if (w->slots[i].script != 0) {
+            MapAnmUpdateSlot(&w->slots[i]);
         }
     }
     return 1;
@@ -6408,7 +6408,7 @@ void Task_MapAnm_2(MapAnmWork* w) {
 void Task_MapAnm_3(MapAnmWork* w) {
 }
 
-const u8 gUnk_0984B860[16][8] = {
+const u8 gCellMasks[16][8] = {
     { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
     { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF },
     { 0x00, 0x00, 0x00, 0x00, 0x01, 0x07, 0x1F, 0x7F },
@@ -6431,12 +6431,12 @@ const char gModeNameMapDbg[] = "Mode_MapDbg";
 
 const char gModeNameMapFld[] = "Mode_MapFld";
 
-const u8 gUnk_0984B8F8[13] = { 12, 14, 17, 20, 23, 28, 32, 35, 38, 42, 50, 255, 68 };
+const u8 gSoraFloorEvents[13] = { 12, 14, 17, 20, 23, 28, 32, 35, 38, 42, 50, 255, 68 };
 
 #ifdef VERSION_EU
-const u8 gUnk_0984B905[13] = { 155, 157, 255, 160, 163, 165, 166, 167, 173, 182, 189, 255, 0 };
+const u8 gRikuFloorEvents[13] = { 155, 157, 255, 160, 163, 165, 166, 167, 173, 182, 189, 255, 0 };
 #else
-const u8 gUnk_0984B905[13] = { 157, 159, 255, 162, 165, 167, 168, 169, 175, 184, 191, 255, 0 };
+const u8 gRikuFloorEvents[13] = { 157, 159, 255, 162, 165, 167, 168, 169, 175, 184, 191, 255, 0 };
 #endif
 
 const char gModeNameMapFix[] = "Mode_MapFix";
@@ -6447,7 +6447,7 @@ const char gModeNameMenuLoad[] = "Mode_MenuLoad";
 
 const char gModeNameMenuMsg[] = "Mode_MenuMsg";
 
-u8 gUnk_09EF6A34[14] = {
+u8 gSoraWorldBattleBase[14] = {
     40,
     40,
     50,
@@ -6464,7 +6464,7 @@ u8 gUnk_09EF6A34[14] = {
     40,
 };
 
-u8 gUnk_09EF6A42[14] = {
+u8 gRikuWorldBattleBase[14] = {
     40,
     40,
     50,
@@ -6481,8 +6481,8 @@ u8 gUnk_09EF6A42[14] = {
     40,
 };
 
-u8 (*gUnk_09EF6A50[14])(FldPos*) = {
-    func_080E6B24,
+u8 (*gMapGmkSpotFuncs[14])(FldPos*) = {
+    MapGmkFindFloor2x2,
     func_080E6C2C,
     func_080E6F04,
     func_080E77A4,
@@ -6491,16 +6491,16 @@ u8 (*gUnk_09EF6A50[14])(FldPos*) = {
     func_080E7358,
     func_080E74D8,
     func_080E7620,
-    func_080E7928,
+    MapGmkFindFloor3x3,
     func_080E6DB0,
-    func_080E7A30,
-    func_080E7B38,
+    MapGmkFindFloor4x4,
+    MapGmkFindFloor5x5,
     func_080E7C40,
 };
 
-u8 (*gUnk_09EF6A88[2])(UnkStruct_080E8B1C*) = {
-    func_080E8BD8,
-    func_080E8C30,
+u8 (*gMapAnmCmds[2])(MapAnmSlot*) = {
+    MapAnmCmdEnd,
+    MapAnmCmdLoop,
 };
 
 Mode gModeMapDbg = {
@@ -6517,7 +6517,7 @@ Mode gModeMapFld = {
     Mode_MapFld_2,
 };
 
-u8 gUnk_09EF6AB0[14] = {
+u8 gWorldEntryEvents[14] = {
 #if defined(VERSION_US)
     255,
     107,
@@ -6612,7 +6612,7 @@ TaskDesc gTaskDescMapFix = {
     sizeof(MapFixWork),
 };
 
-const UnkStruct_0984B968 gUnk_0984B968[14] = {
+const MapDoorGfx gWorldMapDoorGfx[14] = {
     { gUnk_09991224, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
     { gUnk_09991104, gUnk_0993BF64, gUnk_0993C364, gUnk_0993B764, gUnk_0993BB64, gUnk_0993CF64, gUnk_0993D364, gUnk_0993C764, gUnk_0993CB64 },
     { gUnk_09991124, gUnk_0993DF64, gUnk_0993E364, gUnk_0993D764, gUnk_0993DB64, gUnk_0993EF64, gUnk_0993F364, gUnk_0993E764, gUnk_0993EB64 },

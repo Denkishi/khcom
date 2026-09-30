@@ -4,11 +4,11 @@
 #include "types.h"
 
 typedef struct StaffRollScene {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
+    u8 color256;
+    u8 fadeInBg;
+    u8 fadeOutBg;
     u8 unk_03;
-    s32 unk_04;
+    s32 duration;
     s32 x;
     s32 y;
     void* tiles;
@@ -23,7 +23,7 @@ typedef struct StaffRollScene {
     s32 targetX;
     s32 targetY;
     u16 unk_30;
-    u16 unk_32;
+    u16 nameIndex;
 } StaffRollScene;
 
 #endif

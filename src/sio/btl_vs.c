@@ -2,78 +2,78 @@
 #include "m4a_song.h"
 #include "battle.h"
 
-u16 gUnk_020348CC[2];
-u16 gUnk_020348D0[2];
-u16 gUnk_020348D4[2];
-u16 gUnk_020348D8[2];
-u16 gUnk_020348DC[2];
+u16 gVsKeyHoldL[2];
+u16 gVsKeyHoldR[2];
+u16 gVsKeyReleaseL[2];
+u16 gVsKeyReleaseR[2];
+u16 gVsKeyChordLatch[2];
 u16 gUnk_020348E0;
 u16 gUnk_020348E2;
 
-void func_08010548(u16 keys, s32 i) {
+void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
     if (keys & L_BUTTON) {
-        gUnk_020348CC[i]++;
-        gUnk_020348D4[i] = 0;
+        gVsKeyHoldL[i]++;
+        gVsKeyReleaseL[i] = 0;
 
-        if (gUnk_020348CC[i] > 32) {
-            gUnk_020348CC[i] = 29;
+        if (gVsKeyHoldL[i] > 32) {
+            gVsKeyHoldL[i] = 29;
         }
     } else {
-        gUnk_020348CC[i] = 0;
+        gVsKeyHoldL[i] = 0;
 
-        if (gUnk_020348D4[i] < 255) {
-            gUnk_020348D4[i]++;
+        if (gVsKeyReleaseL[i] < 255) {
+            gVsKeyReleaseL[i]++;
         }
     }
 
     if (keys & R_BUTTON) {
-        gUnk_020348D0[i]++;
-        gUnk_020348D8[i] = 0;
+        gVsKeyHoldR[i]++;
+        gVsKeyReleaseR[i] = 0;
 
-        if (gUnk_020348D0[i] > 32) {
-            gUnk_020348D0[i] = 29;
+        if (gVsKeyHoldR[i] > 32) {
+            gVsKeyHoldR[i] = 29;
         }
     } else {
-        gUnk_020348D0[i] = 0;
+        gVsKeyHoldR[i] = 0;
 
-        if (gUnk_020348D8[i] < 255) {
-            gUnk_020348D8[i]++;
+        if (gVsKeyReleaseR[i] < 255) {
+            gVsKeyReleaseR[i]++;
         }
     }
 }
-s32 func_08010600(u16 a, u16 b, s32 i) {
+s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
     s32 ret = 0;
 
-    func_08010548(a, i);
+    UpdateVsKeyHoldTimes(a, i);
 
-    if (gUnk_020348D4[i] == 2) {
-        gUnk_020348DC[i] &= ~L_BUTTON;
+    if (gVsKeyReleaseL[i] == 2) {
+        gVsKeyChordLatch[i] &= ~L_BUTTON;
     }
-    if (gUnk_020348D8[i] == 2) {
-        gUnk_020348DC[i] &= ~R_BUTTON;
+    if (gVsKeyReleaseR[i] == 2) {
+        gVsKeyChordLatch[i] &= ~R_BUTTON;
     }
 
     if (((b & L_BUTTON) && (a & R_BUTTON)) || ((b & R_BUTTON) && (a & L_BUTTON))) {
-        gUnk_020348DC[i] |= (L_BUTTON | R_BUTTON);
+        gVsKeyChordLatch[i] |= (L_BUTTON | R_BUTTON);
         ret = L_BUTTON | R_BUTTON;
     }
 
-    if (!(gUnk_020348DC[i] & L_BUTTON)) {
-        if (gUnk_020348CC[i] == 5 || gUnk_020348D4[i] == 1) {
-            gUnk_020348DC[i] |= L_BUTTON;
+    if (!(gVsKeyChordLatch[i] & L_BUTTON)) {
+        if (gVsKeyHoldL[i] == 5 || gVsKeyReleaseL[i] == 1) {
+            gVsKeyChordLatch[i] |= L_BUTTON;
             ret = L_BUTTON;
         }
     }
 
-    if (!(gUnk_020348DC[i] & R_BUTTON)) {
-        if (gUnk_020348D0[i] == 5 || gUnk_020348D8[i] == 1) {
-            gUnk_020348DC[i] |= R_BUTTON;
+    if (!(gVsKeyChordLatch[i] & R_BUTTON)) {
+        if (gVsKeyHoldR[i] == 5 || gVsKeyReleaseR[i] == 1) {
+            gVsKeyChordLatch[i] |= R_BUTTON;
             ret = R_BUTTON;
         }
     }
     return ret;
 }
-void func_0801071C(void) {
+void VsBtlWorkInit(void) {
     s32 a;
     s32 b;
 
@@ -81,25 +81,25 @@ void func_0801071C(void) {
     CpuSet(&a, gBtlWork, 0x05000074);
     b = 0;
     CpuSet(&b, gRikuBtlWork, 0x05000074);
-    gBtlWork->unk_0A0 = 0;
-    gBtlWork->unk_0FC = -0x10000;
-    gBtlWork->unk_12C = 66;
+    gBtlWork->phase = 0;
+    gBtlWork->fadeExcludedPalettes = -0x10000;
+    gBtlWork->gravity = 66;
     gBtlWork->fadeAmount = 10;
     gBtlWork->flags |= 0x4000;
-    gUnk_020348CC[0] = 0;
-    gUnk_020348D0[0] = 0;
-    gUnk_020348D4[0] = 0;
-    gUnk_020348D8[0] = 0;
-    gUnk_020348CC[1] = 0;
-    gUnk_020348D0[1] = 0;
-    gUnk_020348D4[1] = 0;
-    gUnk_020348D8[1] = 0;
-    gUnk_020348DC[0] = 0;
-    gUnk_020348DC[1] = 0;
+    gVsKeyHoldL[0] = 0;
+    gVsKeyHoldR[0] = 0;
+    gVsKeyReleaseL[0] = 0;
+    gVsKeyReleaseR[0] = 0;
+    gVsKeyHoldL[1] = 0;
+    gVsKeyHoldR[1] = 0;
+    gVsKeyReleaseL[1] = 0;
+    gVsKeyReleaseR[1] = 0;
+    gVsKeyChordLatch[0] = 0;
+    gVsKeyChordLatch[1] = 0;
     gUnk_020348E0 = 0;
     gUnk_020348E2 = 0;
 }
-void func_080107D4(void) {
+void HandleVsRikuCardInput(void) {
     BtlWork* w;
     BtlObj* o;
     u16 held;
@@ -120,7 +120,7 @@ void func_080107D4(void) {
     if (gRikuBtlWork->flags & 0x10000000000000) {
         if (held & A_BUTTON) {
             if (!(held & (L_BUTTON | R_BUTTON))) {
-                func_0807E2F4();
+                SetRikuReloadCharging();
             }
         }
     }
@@ -130,9 +130,9 @@ void func_080107D4(void) {
         return;
     }
 
-    if ((s16)gRikuBtlWork->unk_1CC > 0) {
-        if (--gRikuBtlWork->unk_1CC == 0) {
-            func_0807E260();
+    if ((s16)gRikuBtlWork->listSwitchTimer > 0) {
+        if (--gRikuBtlWork->listSwitchTimer == 0) {
+            RequestSwitchRikuCardList();
         }
         return;
     }
@@ -141,50 +141,50 @@ void func_080107D4(void) {
         gUnk_020348E2--;
     }
 
-    res = (u16)func_08010600(held, pressed, 1);
+    res = (u16)ReadVsKeyChord(held, pressed, 1);
 
     switch (res) {
     case L_BUTTON:
-        func_0807E1F4();
+        RequestRikuNextCard();
         break;
     case R_BUTTON:
-        func_0807E200();
+        RequestRikuPrevCard();
         break;
     }
 
     if (pressed & SELECT_BUTTON) {
-        func_0807E260();
+        RequestSwitchRikuCardList();
     }
 
-    f = func_0807E29C();
+    f = IsRikuReloadCardSelected();
 
     if (f != 0) {
-        w->unk_0E2 = 0;
-        w->unk_0E3 = 0;
+        w->lHeldFrames = 0;
+        w->rHeldFrames = 0;
     } else {
         if ((held & L_BUTTON) && !(held & R_BUTTON)) {
-            if (w->unk_0E2 <= 254) {
-                w->unk_0E2++;
+            if (w->lHeldFrames <= 254) {
+                w->lHeldFrames++;
             }
         } else {
-            w->unk_0E2 = f;
+            w->lHeldFrames = f;
         }
 
         if ((held & R_BUTTON) && !(held & L_BUTTON)) {
-            if (w->unk_0E3 <= 254) {
-                w->unk_0E3++;
+            if (w->rHeldFrames <= 254) {
+                w->rHeldFrames++;
             }
         } else {
-            w->unk_0E3 = 0;
+            w->rHeldFrames = 0;
         }
     }
 
-    if (w->unk_0E2 > 32) {
-        func_0807E1F4();
+    if (w->lHeldFrames > 32) {
+        RequestRikuNextCard();
     }
 
-    if (w->unk_0E3 > 32) {
-        func_0807E200();
+    if (w->rHeldFrames > 32) {
+        RequestRikuPrevCard();
     }
     o = w->actor;
 
@@ -209,25 +209,25 @@ void func_080107D4(void) {
     }
 
     if (res == 0x300) {
-        if (func_0807B3F8() > 2) {
-            func_0807E224();
+        if (GetRikuStockCount() > 2) {
+            RequestRikuStockUse();
         } else {
-            func_0807E218();
+            RequestRikuCardStock();
         }
     }
 
     if (pressed & A_BUTTON) {
-        func_0807E20C();
+        RequestRikuCardUse();
 
-        if (func_08081838() == 3) {
-            if (func_0807E34C() == 0) {
-                gRikuBtlWork->unk_1CC = 15;
+        if (GetRikuCardListIndex() == 3) {
+            if (IsRikuSelectionEmpty() == 0) {
+                gRikuBtlWork->listSwitchTimer = 15;
             }
         }
     }
 }
 
-void func_08010A24(void) {
+void HandleVsSoraCardInput(void) {
     BtlWork* w;
     BtlObj* o;
     u16 held;
@@ -248,7 +248,7 @@ void func_08010A24(void) {
     if (gBtlWork->flags & 0x10000000000000) {
         if (held & A_BUTTON) {
             if (!(held & (L_BUTTON | R_BUTTON))) {
-                func_080763F0();
+                SetSoraReloadCharging();
             }
         }
     }
@@ -258,9 +258,9 @@ void func_08010A24(void) {
         return;
     }
 
-    if ((s16)gBtlWork->unk_1CC > 0) {
-        if (--gBtlWork->unk_1CC == 0) {
-            func_08076394();
+    if ((s16)gBtlWork->listSwitchTimer > 0) {
+        if (--gBtlWork->listSwitchTimer == 0) {
+            RequestSwitchSoraCardList();
         }
         return;
     }
@@ -269,50 +269,50 @@ void func_08010A24(void) {
         gUnk_020348E0--;
     }
 
-    res = (u16)func_08010600(held, pressed, 0);
+    res = (u16)ReadVsKeyChord(held, pressed, 0);
 
     switch (res) {
     case L_BUTTON:
-        func_08076318();
+        RequestSoraNextCard();
         break;
     case R_BUTTON:
-        func_08076324();
+        RequestSoraPrevCard();
         break;
     }
 
     if (pressed & SELECT_BUTTON) {
-        func_08076394();
+        RequestSwitchSoraCardList();
     }
 
-    f = func_080763D0();
+    f = IsSoraReloadCardSelected();
 
     if (f != 0) {
-        w->unk_0E2 = 0;
-        w->unk_0E3 = 0;
+        w->lHeldFrames = 0;
+        w->rHeldFrames = 0;
     } else {
         if ((held & L_BUTTON) && !(held & R_BUTTON)) {
-            if (w->unk_0E2 <= 254) {
-                w->unk_0E2++;
+            if (w->lHeldFrames <= 254) {
+                w->lHeldFrames++;
             }
         } else {
-            w->unk_0E2 = f;
+            w->lHeldFrames = f;
         }
 
         if ((held & R_BUTTON) && !(held & L_BUTTON)) {
-            if (w->unk_0E3 <= 254) {
-                w->unk_0E3++;
+            if (w->rHeldFrames <= 254) {
+                w->rHeldFrames++;
             }
         } else {
-            w->unk_0E3 = 0;
+            w->rHeldFrames = 0;
         }
     }
 
-    if (w->unk_0E2 > 32) {
-        func_08076318();
+    if (w->lHeldFrames > 32) {
+        RequestSoraNextCard();
     }
 
-    if (w->unk_0E3 > 32) {
-        func_08076324();
+    if (w->rHeldFrames > 32) {
+        RequestSoraPrevCard();
     }
 
     o = w->actor;
@@ -338,26 +338,26 @@ void func_08010A24(void) {
     }
 
     if (res == 0x300) {
-        if (func_0807B3E0() > 2) {
-            func_08076348();
+        if (GetSoraStockCount() > 2) {
+            RequestSoraStockUse();
         } else {
-            func_0807633C();
+            RequestSoraCardStock();
         }
     }
 
     if (pressed & A_BUTTON) {
-        func_08076330();
+        RequestSoraCardUse();
 
-        if (func_0807B3C8() == 3) {
-            if (func_0807643C() == 0) {
-                gBtlWork->unk_1CC = 15;
+        if (GetSoraCardListIndex() == 3) {
+            if (IsSoraSelectionEmpty() == 0) {
+                gBtlWork->listSwitchTimer = 15;
             }
         }
     }
 }
 
-void func_08010C70(void) {
-    gBtlWork->unk_0A0 = 1;
+void VsEndCardPlay(void) {
+    gBtlWork->phase = 1;
 
     if (!(gBtlWork->flags & 0x800000)) {
         gBtlWork->flags |= 0x20;
@@ -366,27 +366,27 @@ void func_08010C70(void) {
     gBtlWork->flags &= ~0x20000000;
 }
 
-void func_08010CC8(void) {
+void VsBattleUpdate(void) {
     BtlObj* player = gBtlWork->actor;
     BtlObj* other = gRikuBtlWork->actor;
     s32 entered;
     s32 i;
     s32 busy;
     u8 rank;
-    if (gBtlWork->unk_0F4 == 53 || gRikuBtlWork->unk_0F4 == 53) {
-        gBtlWork->unk_12C = 38;
+    if (gBtlWork->hcEffect == 53 || gRikuBtlWork->hcEffect == 53) {
+        gBtlWork->gravity = 38;
     } else {
-        gBtlWork->unk_12C = 66;
+        gBtlWork->gravity = 66;
     }
-    switch ((u32)gBtlWork->unk_0A0) {
+    switch ((u32)gBtlWork->phase) {
     case 1:
     case 2:
         if (gBtlWork->flags & 0x1000) {
-            func_08010A24();
-            func_080107D4();
+            HandleVsSoraCardInput();
+            HandleVsRikuCardInput();
         } else {
-            func_080107D4();
-            func_08010A24();
+            HandleVsRikuCardInput();
+            HandleVsSoraCardInput();
         }
         break;
     }
@@ -395,8 +395,8 @@ void func_08010CC8(void) {
         gBtlWork->flags |= 0x400000;
         gBtlWork->flags &= ~2ULL;
         gRikuBtlWork->flags &= ~2ULL;
-        gBtlWork->unk_0A0 = 1;
-        if (gBtlWork->unk_0A4 != 0) {
+        gBtlWork->phase = 1;
+        if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags &= ~0x40ULL;
             other->flags |= 0x10000;
             FadeFromAmount(2, 10, 4);
@@ -406,45 +406,45 @@ void func_08010CC8(void) {
             FadeFromAmount(3, 10, 4);
         }
         MosaicStartIn(16, 15);
-        func_08019050(1, 256, gBtlWork->x2, gBtlWork->y2);
-        gBtlWork->unk_0E4 = 0;
+        SetBattleZoom(1, 256, gBtlWork->x2, gBtlWork->y2);
+        gBtlWork->phaseStep = 0;
     }
     if (gBtlWork->flags & 0x400) {
         entered = 1;
         gBtlWork->flags &= ~0x400ULL;
-        if (gBtlWork->unk_0A4 != 0) {
+        if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags |= 0x20000000;
             player->flags |= 1;
         } else {
             gBtlWork->flags |= 0x40;
             other->flags |= 1;
         }
-        gBtlWork->unk_0A0 = 2;
-        gBtlWork->unk_0E4 = 0;
+        gBtlWork->phase = 2;
+        gBtlWork->phaseStep = 0;
     } else {
         entered = 0;
     }
-    if ((gBtlWork->flags & 0x400000000000ULL) && gBtlWork->unk_0A0 != 4) {
-        gBtlWork->unk_0A0 = 4;
-        gBtlWork->unk_0E4 = 0;
+    if ((gBtlWork->flags & 0x400000000000ULL) && gBtlWork->phase != 4) {
+        gBtlWork->phase = 4;
+        gBtlWork->phaseStep = 0;
     }
-    switch ((u32)gBtlWork->unk_0A0) {
+    switch ((u32)gBtlWork->phase) {
     case 1:
         break;
     case 0:
-        if (gBtlWork->unk_0E4 == 0) {
+        if (gBtlWork->phaseStep == 0) {
             gBtlWork->task = 0;
-            gBtlWork->unk_0E4 = 1;
+            gBtlWork->phaseStep = 1;
         }
         if (FadeIsActive()) return;
-        if (gBtlWork->unk_0E4 == 1) {
+        if (gBtlWork->phaseStep == 1) {
             for (i = 0; i < 32; i++) {
-                if (gBtlWork->unk_0FC & (s32)(1U << i)) FadeSetPaletteExcluded(i, 1);
+                if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) FadeSetPaletteExcluded(i, 1);
             }
-            gBtlWork->unk_0E4 = 2;
+            gBtlWork->phaseStep = 2;
         }
         if (IsTaskActive((Task*)gBtlWork->task)) return;
-        if (gBtlWork->unk_0E4 == 2) {
+        if (gBtlWork->phaseStep == 2) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpoth, 0);
@@ -455,37 +455,37 @@ void func_08010CC8(void) {
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
                 TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
             }
-            func_08076360();
+            RequestOpenCards();
             func_080838E8();
-            gBtlWork->unk_0E4 = 3;
-        } else if (gBtlWork->unk_0E4 == 3) {
-            gBtlWork->unk_0A0 = 1;
-            gBtlWork->unk_0E4 = 0;
+            gBtlWork->phaseStep = 3;
+        } else if (gBtlWork->phaseStep == 3) {
+            gBtlWork->phase = 1;
+            gBtlWork->phaseStep = 0;
         }
         break;
     case 4:
-        if (gBtlWork->unk_0E4 == 0) {
-            func_08076374();
-            func_080838EC();
+        if (gBtlWork->phaseStep == 0) {
+            RequestCloseCards();
+            RequestBossCardClose();
             gBtlWork->flags |= 0x20;
             gRikuBtlWork->flags |= 0x40000000;
             gBtlWork->flags |= 0x40000000;
-            func_08019050(8, 256, gBtlWork->x2, gBtlWork->y2);
-            gBtlWork->unk_0F4 = 0;
-            gRikuBtlWork->unk_0F4 = 0;
+            SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
+            gBtlWork->hcEffect = 0;
+            gRikuBtlWork->hcEffect = 0;
         }
-        if (gBtlWork->unk_0E4 == 140) {
+        if (gBtlWork->phaseStep == 140) {
             FadeStartOut(1, 100);
             FadeLock();
             gBtlWork->flags |= 0x400000;
-            gBtlWork->unk_072 = 100;
-        } else if (gBtlWork->unk_0E4 > 140 && !FadeIsActive()) {
+            gBtlWork->hitStop = 100;
+        } else if (gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
-            if (player->unk_02C <= 0) ModeRequest(&gModeSioBtlCardget, 1);
+            if (player->hp <= 0) ModeRequest(&gModeSioBtlCardget, 1);
             else ModeRequest(&gModeSioBtlCardget, 0);
             return;
         }
-        gBtlWork->unk_0E4++;
+        gBtlWork->phaseStep++;
         break;
     case 2:
         if (entered) return;
@@ -494,15 +494,15 @@ void func_08010CC8(void) {
         if (other->flags & 0x10) busy = 1;
         if (busy) return;
         rank = GetStockMoveCount();
-        gBtlWork->unk_0E4 = 0;
+        gBtlWork->phaseStep = 0;
         if (gBtlWork->flags & 0x20000000) {
             if (gBtlWork->stockMove >= (s8)rank) gBtlWork->flags &= ~2ULL;
             if (gBtlWork->flags & 2) player->flags |= 1;
-            else func_08010C70();
+            else VsEndCardPlay();
         } else {
             if (gRikuBtlWork->stockMove >= (s8)rank) gRikuBtlWork->flags &= ~2ULL;
             if (gRikuBtlWork->flags & 2) other->flags |= 1;
-            else func_08010C70();
+            else VsEndCardPlay();
         }
         break;
     }

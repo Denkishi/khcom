@@ -40,7 +40,7 @@
 #include "m4a.h"
 
 typedef struct StatusEntry {
-    s32 unk_000[72];
+    s32 items[72];
     u16 count;
     u16 unk_122;
 } StatusEntry;
@@ -48,7 +48,7 @@ typedef struct StatusEntry {
 typedef struct StatusBarWork {
     void* tiles;
     void* palette;
-    u16 unk_08;
+    u16 steps;
     u16 unk_0A;
     s32 y;
     s32 targetY;
@@ -56,8 +56,8 @@ typedef struct StatusBarWork {
     s32 targetY2;
     s32 x;
     s32 targetX;
-    u8 unk_24;
-    u8 unk_25;
+    u8 closing;
+    u8 fadeStarted;
     u8 unk_26[0x6];
 } StatusBarWork;
 
@@ -68,7 +68,7 @@ typedef struct StatusTabWork {
     void* palette2;
     void* gfx;
     void* gfx2;
-    s32* unk_18;
+    s32* tab;
 } StatusTabWork;
 
 typedef struct StatusSoraWork {
@@ -83,7 +83,7 @@ typedef struct StatusDecknameWork {
     void* palette;
     u8 textSlotCount;
     u8 unk_55[0x3];
-    u8* unk_58;
+    u8* mesWindowOpen;
 } StatusDecknameWork;
 
 typedef struct StatusCursorWork {
@@ -93,8 +93,8 @@ typedef struct StatusCursorWork {
     void* palette2;
     void* gfx[2];
     AnimState anim[2];
-    s16* unk_48;
-    s16 unk_4C;
+    s16* cursor;
+    s16 lastCursor;
     u16 unk_4E;
     s32 y;
     s32 targetY;
@@ -106,7 +106,7 @@ typedef struct StatusScrollcursorWork {
     void* tiles;
     void* palette;
     void* gfx;
-    u16* unk_0C;
+    u16* scroll;
     u16 unk_10;
     s16 y;
 } StatusScrollcursorWork;
@@ -114,14 +114,14 @@ typedef struct StatusScrollcursorWork {
 typedef struct StatusMeswindowWork {
     TaskPool pool;
     void* task;
-    s32 unk_18;
-    u8* unk_1C;
-    u8 unk_20;
+    s32 item;
+    u8* open;
+    u8 textIndex;
     u8 unk_21[3];
 } StatusMeswindowWork;
 
 typedef struct StatusMessageParam {
-    void* unk_00;
+    void* text;
     s16 x;
     s16 y;
 } StatusMessageParam;
@@ -138,7 +138,7 @@ typedef struct StatusFriendWork {
     void* tiles[3];
     void* palette[3];
     void* gfx[3];
-    u16 unk_24;
+    u16 count;
     u16 unk_26;
 } StatusFriendWork;
 
@@ -151,7 +151,7 @@ typedef struct StatusMesParam {
 } StatusMesParam;
 
 typedef struct StatusFriendEntry {
-    u16 unk_00;
+    u16 flag;
     u16 cardId;
 } StatusFriendEntry;
 
@@ -168,7 +168,7 @@ typedef struct StockMesDispWork {
     void* palette3;
     void* gfx;
     void* gfx2;
-    u16 unk_20;
+    u16 frame;
     u16 unk_22;
     TaskPool tasks;
     void* task;
@@ -183,10 +183,10 @@ typedef struct StockMesDispWork {
 
 typedef struct StatusWork {
     TaskPool pool;
-    u32 unk_14;
+    u32 tab;
     u16 unk_18;
-    s16 unk_1A;
-    s16 unk_1C;
+    s16 cursor;
+    s16 scroll;
     u16 unk_1E;
 } StatusWork;
 
@@ -197,14 +197,14 @@ typedef struct StatusStocklistWork {
     void* tiles;
     void* palette2;
     void* gfx;
-    s32* unk_4C0;
-    u16 unk_4C4;
+    s32* tab;
+    u16 scroll;
     u16 timer;
-    u8 unk_4C8;
+    u8 blink;
     u8 unk_4C9[3];
 } StatusStocklistWork;
 
-extern s32 gUnk_0203C550;
+extern s32 gStatusBarState;
 
 extern u8 gBStatesPalette[];
 extern u8 gUnk_097A2CF6[];
@@ -223,29 +223,29 @@ extern u8 gSor1ll51Tiles[];
 extern u8 gUnk_097A1C54[];
 extern u8 gUnk_097A2394[];
 
-u8 func_080D7B94(void);
-void func_080D764C(StatusWork* work);
-s16 func_080D78A8(void);
-u16 func_080D82D4(void);
-u16 func_080D8308(void);
-u8 func_080D8340(void);
-void func_080D8474(u16 a);
-s32 func_080D855C(s16 a);
+u8 IsStatusBarIdle(void);
+void StatusHandleInput(StatusWork* work);
+s16 GetStatusScroll(void);
+u16 GetStatusVisibleRowCount(void);
+u16 GetStatusMaxScroll(void);
+u8 StatusTabHasItems(void);
+void StatusStocklistLoadRows(u16 a);
+s32 GetStatusListItem(s16 a);
 void StatusEntryClear(StatusEntry* e);
 void StatusEntryAppend(StatusEntry* e, s32 v);
-s32 func_080D85A8(u32 a);
+s32 GetStatusItemTab(u32 a);
 void* GetCardHelpText(u16 a, u8 b);
 u8 GetCardHelpTextCount(u16 a);
-void* func_080D85C0(u16 a);
-s32 func_080D85F8(s32 a);
-s16 func_080D885C(StatusScrollcursorWork* work);
-void func_080D8374(void);
+void* LoadStockNameTiles(u16 a);
+s32 GetStatusItemStockIndex(s32 a);
+s16 GetStatusScrollcursorY(StatusScrollcursorWork* work);
+void StatusStocklistScrollDown(void);
 void* CreateStockMesDispTask(void* a, u16 b, u8 c, u16 d, s32 e);
 u8 GetStockMesDispTextIndex(void* a);
 
-void func_080D78B8(StatusBarWork* work);
-u8 func_080D7890(void);
-void func_080D83F4(void);
+void StatusBarStartClose(StatusBarWork* work);
+u8 IsStatusMesWindowOpen(void);
+void StatusStocklistScrollUp(void);
 
 void task_status_0(StatusWork* work);
 u8 task_status_1(StatusWork* work);

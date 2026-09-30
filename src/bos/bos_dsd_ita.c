@@ -3,18 +3,18 @@
 
 void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->dsd = arg;
-    work->unk_074 = 0x1E;
-    work->unk_076 = 0;
-    work->unk_078 = 0;
+    work->moveSteps = 0x1E;
+    work->lifeTimer = 0;
+    work->offTimer = 0;
     work->state = 0;
     work->x = 0x12C00;
     work->y = 0x17C00;
     work->z = -0x7800;
     work->vz = 0x100;
-    work->unk_070 = 0x19;
+    work->gravity = 0x19;
     work->flags = 0;
-    work->unk_07E = 0;
-    work->unk_080 = 0;
+    work->dipStep = 0;
+    work->dipOffset = 0;
     ColliderInit(&work->collider, 7, 0x20, 3);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->gfx = gUnk_09EF3BF8[0];
@@ -24,14 +24,14 @@ void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
 u8 task_bos_dsd_ita_1(DsdItaWork* work) {
     BtlObj* a = &work->dsd->body[1];
 
-    func_080C427C(work);
+    BosDsdItaUpdateRider(work);
 
     switch (work->state) {
     case 0:
-        if (work->unk_074 > 0) {
-            ApproachValue(&work->x, 0x1400, work->unk_074);
-            ApproachValue(&work->z, -0x1400, work->unk_074);
-            work->unk_074--;
+        if (work->moveSteps > 0) {
+            ApproachValue(&work->x, 0x1400, work->moveSteps);
+            ApproachValue(&work->z, -0x1400, work->moveSteps);
+            work->moveSteps--;
         } else {
             work->state = 1;
         }
@@ -41,41 +41,41 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
             work->state = 2;
         }
 
-        func_080C4398(work);
+        BosDsdItaUpdateLifetime(work);
         break;
     case 2:
         if (work->dsd->flags & 32) {
-            func_080C43E4(&work->x, a->x - 12800);
-            func_080C43E4(&work->y, a->y);
-            func_080C43E4(&work->z, a->z + 0x500);
-        } else if (work->unk_078 > 49) {
+            BosDsdItaMoveToward(&work->x, a->x - 12800);
+            BosDsdItaMoveToward(&work->y, a->y);
+            BosDsdItaMoveToward(&work->z, a->z + 0x500);
+        } else if (work->offTimer > 49) {
             work->state = 3;
         } else {
-            work->unk_078++;
+            work->offTimer++;
         }
 
-        func_080C4398(work);
+        BosDsdItaUpdateLifetime(work);
         break;
     case 3:
         if (work->z < 0) {
             work->z += work->vz;
-            work->vz += work->unk_070;
+            work->vz += work->gravity;
         } else {
             work->z = 0;
         }
 
         if (work->dsd->flags & 32) {
-            work->unk_078 = 0;
+            work->offTimer = 0;
             work->state = 2;
         }
 
-        func_080C4398(work);
+        BosDsdItaUpdateLifetime(work);
         break;
     case 4:
-        if (work->unk_074 > 0) {
-            ApproachValue(&work->x, -0x5000, work->unk_074);
-            ApproachValue(&work->z, -0x1400, work->unk_074);
-            work->unk_074--;
+        if (work->moveSteps > 0) {
+            ApproachValue(&work->x, -0x5000, work->moveSteps);
+            ApproachValue(&work->z, -0x1400, work->moveSteps);
+            work->moveSteps--;
         } else {
             work->state++;
         }
@@ -136,60 +136,60 @@ void task_bos_dsd_ita_3(DsdItaWork* work) {
     ColliderUnregister(&work->collider);
 }
 
-void func_080C427C(DsdItaWork* work) {
+void BosDsdItaUpdateRider(DsdItaWork* work) {
     s32 v;
     s16 k;
 
-    if (gBtlWork->unk_0F0 == &work->collider) {
+    if (gBtlWork->platform == &work->collider) {
         v = work->dsd->flags & 32;
 
         if (v == 0) {
             work->flags |= 1;
             work->dsd->flags |= 32;
-            work->unk_07E = v;
+            work->dipStep = v;
         }
     } else if (work->dsd->flags & 32) {
         work->dsd->flags &= ~32;
         work->flags |= 2;
-        work->unk_07E = 0;
+        work->dipStep = 0;
     }
 
     if (work->flags & 2) {
-        k = gUnk_0961A860[work->unk_07E];
-        work->unk_080 -= k << 8;
+        k = gBosDsdItaDipSteps[work->dipStep];
+        work->dipOffset -= k << 8;
 
         if (k == 0) {
             work->flags &= 0xFFFD;
-            work->unk_080 = 0;
+            work->dipOffset = 0;
         } else {
-            work->unk_07E++;
+            work->dipStep++;
         }
     } else if (work->flags & 1) {
-        k = gUnk_0961A860[work->unk_07E];
-        work->unk_080 += k << 8;
+        k = gBosDsdItaDipSteps[work->dipStep];
+        work->dipOffset += k << 8;
 
         if (k == 0) {
             work->flags &= 0xFFFE;
         } else {
-            work->unk_07E++;
+            work->dipStep++;
         }
     }
 }
 
-void func_080C4398(DsdItaWork* work) {
-    if ((s16)work->unk_076 >= 600) {
-        work->unk_074 = 30;
+void BosDsdItaUpdateLifetime(DsdItaWork* work) {
+    if ((s16)work->lifeTimer >= 600) {
+        work->moveSteps = 30;
         work->state = 4;
     } else {
-        work->unk_076++;
+        work->lifeTimer++;
     }
 
-    if (work->dsd->unk_334 == 11) {
+    if (work->dsd->state == 11) {
         work->state = 4;
     }
 }
 
-void func_080C43E4(s32* p, s32 target) {
+void BosDsdItaMoveToward(s32* p, s32 target) {
     s32 cur;
     s32 delta;
 
@@ -216,32 +216,32 @@ void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {
     u8 ang;
 
     work->dsd = arg;
-    work->unk_20 = GetRandom() % 2;
+    work->front = GetRandom() % 2;
     work->gfx = gUnk_09EF3BF8[GetRandom() % 3 + 1];
 
-    if (work->dsd->unk_35C > 0) {
-        if (work->unk_20 != 0) {
+    if (work->dsd->driftX > 0) {
+        if (work->front != 0) {
             r = GetRandom() % 0x301 + 0x700;
             ang = GetRandom() % 13 + 58;
-            work->x = gBtlWork->unk_000 - 0x8800;
-            work->y = (gBtlWork->unk_0E0 - 140) << 8;
+            work->x = gBtlWork->viewX - 0x8800;
+            work->y = (gBtlWork->yMax - 140) << 8;
         } else {
             r = GetRandom() % 0x201 + 0x400;
             ang = -(GetRandom() % 13 + 58);
-            work->x = gBtlWork->unk_000 + 0x8800;
-            work->y = (gBtlWork->unk_0DE - 140) << 8;
+            work->x = gBtlWork->viewX + 0x8800;
+            work->y = (gBtlWork->yMin - 140) << 8;
         }
     } else {
-        if (work->unk_20 != 0) {
+        if (work->front != 0) {
             r = GetRandom() % 0x301 + 0x700;
             ang = -(GetRandom() % 13 + 58);
-            work->x = gBtlWork->unk_000 + 0x8800;
-            work->y = (gBtlWork->unk_0E0 - 140) << 8;
+            work->x = gBtlWork->viewX + 0x8800;
+            work->y = (gBtlWork->yMax - 140) << 8;
         } else {
             r = GetRandom() % 0x201 + 0x400;
             ang = GetRandom() % 13 + 58;
-            work->x = gBtlWork->unk_000 - 0x8800;
-            work->y = (gBtlWork->unk_0DE - 140) << 8;
+            work->x = gBtlWork->viewX - 0x8800;
+            work->y = (gBtlWork->yMin - 140) << 8;
         }
     }
 
@@ -259,7 +259,7 @@ u8 task_bos_dsd_rock_1(DsdRockWork* work) {
         work->z += work->vz;
     }
 
-    if (work->x > gBtlWork->unk_000 + 0x8800 || work->x < gBtlWork->unk_000 - 0x8800) {
+    if (work->x > gBtlWork->viewX + 0x8800 || work->x < gBtlWork->viewX - 0x8800) {
         return 0;
     }
 
@@ -272,7 +272,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
     s16 x;
     s16 y;
 
-    if (work->unk_20 != 0) {
+    if (work->front != 0) {
         affine = 0;
         h = 10;
         prio = 0x400;
@@ -289,7 +289,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
 void task_bos_dsd_rock_3(void) {
 }
 
-const s16 gUnk_0961A860[6] = { 3, 2, 1, 1, 0, 0 };
+const s16 gBosDsdItaDipSteps[6] = { 3, 2, 1, 1, 0, 0 };
 
 TaskDesc gTaskDescBosDsdIta = {
     "task_bos_dsd_ita",

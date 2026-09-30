@@ -23,8 +23,8 @@
 #include "btl_api.h"
 
 typedef struct FrdArgs {
-    u16 unk_00;
-    u8 unk_02;
+    u16 variant;
+    u8 mainSide;
     u8 unk_03;
 } FrdArgs;
 
@@ -36,15 +36,15 @@ typedef struct FrdDonaldWork {
     BtlObj body;
     AnimState anim;
     s32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
     u8 unk_152[0x02];
-    s32 unk_154;
+    s32 vz;
     s32 unk_158;
     s32 unk_15C;
-    s16 unk_160;
+    s16 repeatsLeft;
     u8 unk_162[0x02];
 } FrdDonaldWork;
 
@@ -56,14 +56,14 @@ typedef struct FrdGoofyWork {
     BtlObj body;
     AnimState anim;
     u32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
     u8 unk_152[0x02];
-    s32 unk_154;
-    s32 unk_158;
-    s32 unk_15C;
+    s32 vz;
+    s32 targetX;
+    s32 targetY;
     u8 angle;
     u8 unk_161[0x03];
 } FrdGoofyWork;
@@ -76,16 +76,16 @@ typedef struct FrdArielWork {
     BtlObj body;
     AnimState anim;
     u32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
     u8 unk_152[0x02];
-    s32 unk_154;
-    s16 unk_158;
+    s32 hoverZ;
+    s16 passesLeft;
     u8 unk_15A[0x02];
-    s32 unk_15C;
-    s32 unk_160;
+    s32 passSpeed;
+    s32 speed;
 } FrdArielWork;
 
 typedef struct FrdJackWork {
@@ -96,17 +96,17 @@ typedef struct FrdJackWork {
     BtlObj body;
     AnimState anim;
     s32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
     s16 unk_152;
-    s32 unk_154;
-    s32 unk_158;
-    s32 unk_15C;
-    s32 unk_160;
-    s32 unk_164;
-    s16 unk_168;
+    s32 vz;
+    s32 targetX;
+    s32 targetY;
+    s32 rotation;
+    s32 rotationTarget;
+    s16 repeatsLeft;
     u8 unk_16A[0x02];
 } FrdJackWork;
 
@@ -118,19 +118,19 @@ typedef struct FrdPanWork {
     BtlObj body;
     AnimState anim;
     u32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
-    s16 unk_152;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
+    s16 duration;
     s16 unk_154;
     s16 unk_156;
     s32 unk_158;
-    s32 unk_15C;
+    s32 targetX;
     s32 unk_160;
-    s32 unk_164;
-    s32 unk_168;
-    u8 unk_16C;
+    s32 hoverZ;
+    s32 vx;
+    u8 flyLeft;
     u8 unk_16D[0x03];
 } FrdPanWork;
 
@@ -142,13 +142,13 @@ typedef struct FrdAladdinWork {
     BtlObj body;
     AnimState anim;
     u32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s16 unk_150;
-    s16 unk_152;
-    s32 unk_154;
-    s32 unk_158;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s16 steps;
+    s16 duration;
+    s32 vz;
+    s32 targetX;
     u8 unk_15C[0x04];
 } FrdAladdinWork;
 
@@ -160,13 +160,13 @@ typedef struct FrdBeastWork {
     BtlObj body;
     AnimState anim;
     s32 state;
-    u8 unk_14C;
-    u8 unk_14D;
-    s16 unk_14E;
-    s32 unk_150;
-    s32 unk_154;
-    s32 unk_158;
-    s32 unk_15C;
+    u8 mainSide;
+    u8 variant;
+    s16 stateTimer;
+    s32 targetX;
+    s32 targetY;
+    s32 vz;
+    s32 attack;
 } FrdBeastWork;
 
 extern u8 gDonaldPalette[];
@@ -177,10 +177,10 @@ extern u8 gPeterPalette[];
 extern u8 gAladdinPalette[];
 extern u8 gBeastPalette[];
 
-u8 func_080474A8(FrdJackWork* work);
-void func_08048A68(FrdPanWork* work);
-void func_08048980(FrdPanWork* work);
-u8 func_080465F0(FrdGoofyWork* work);
-u8 func_080490FC(FrdAladdinWork* work);
+u8 FrdJackApplyGravity(FrdJackWork* work);
+void FrdPanHover(FrdPanWork* work);
+void FrdPanSpawnSparkle(FrdPanWork* work);
+u8 FrdGoofyApplyGravity(FrdGoofyWork* work);
+u8 FrdAladdinApplyGravity(FrdAladdinWork* work);
 
 #endif /* GUARD_FRD_H */

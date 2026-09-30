@@ -13,17 +13,17 @@ void mode_vsbattle_0(u32 mode) {
     *p = EwramAlloc(sizeof(BtlWork));
 
     if (gSioPlayerId == 0) {
-        SeedRandom(gUnk_0203AAC0.unk_1E);
+        SeedRandom(gCharaLinkSend.seed);
     } else {
-        SeedRandom(gUnk_0203AA10.unk_1E);
+        SeedRandom(gCharaLinkRecv.seed);
     }
 
-    func_0801071C();
-    func_0801C068();
-    func_0800C6B8();
+    VsBtlWorkInit();
+    AllocBattleTiles();
+    PlayVsBattleBgm();
     SetBgMode2();
     gBtlWork->bg = 2;
-    gBtlWork->unk_1C6 = 3;
+    gBtlWork->mapBg = 3;
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
     SetBgPriority(3, 2);
@@ -36,37 +36,37 @@ void mode_vsbattle_0(u32 mode) {
     ColliderPoolsInit();
 
     if (mode == 0) {
-        arg.unk_04 = 1;
-        arg.unk_00 = 0;
+        arg.mainSide = 1;
+        arg.side = 0;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
-        arg.unk_04 = 0;
-        arg.unk_00 = 1;
+        arg.mainSide = 0;
+        arg.side = 1;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg);
         gBtlWork->flags |= 0x1000;
     } else {
-        arg2.unk_04 = 0;
-        arg2.unk_00 = 0;
+        arg2.mainSide = 0;
+        arg2.side = 0;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
-        arg2.unk_04 = 1;
-        arg2.unk_00 = 1;
+        arg2.mainSide = 1;
+        arg2.side = 1;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, &arg2);
     }
 
-    SetBattleBounds((s16)(0x100 - gUnk_02039B90), (s16)(gUnk_02039B90 + 0x100),
-                  (s16)gUnk_02039B88, (s16)gUnk_02039B8C);
+    SetBattleBounds((s16)(0x100 - gVsBattleHalfWidth), (s16)(gVsBattleHalfWidth + 0x100),
+                  (s16)gVsBattleMinY, (s16)gVsBattleMaxY);
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
     gUnk_02039B98 = 0;
     FadeStartIn(0, 60);
 }
 
 void mode_vsbattle_1(void) {
-    if (gBtlWork->unk_070 == 0) {
-        func_08010CC8();
+    if (gBtlWork->paused == 0) {
+        VsBattleUpdate();
 
-        if (gBtlWork->unk_072 <= 0) {
+        if (gBtlWork->hitStop <= 0) {
             TaskPoolUpdate(&gBtlWork->taskPools[0]);
         } else {
-            gBtlWork->unk_072--;
+            gBtlWork->hitStop--;
         }
 
         BgFxUpdate();
@@ -85,7 +85,7 @@ void mode_vsbattle_2(void) {
     BgFxFree();
     TaskPoolDestroy(&gBtlWork->taskPools[1]);
     TaskPoolDestroy(&gBtlWork->taskPools[0]);
-    func_0801C104();
+    ReleaseBattleTiles();
     EwramFree(gRikuBtlWork);
     EwramFree(gBtlWork);
 }
@@ -96,8 +96,8 @@ void func_0800C6B0(void) {
 void func_0800C6B4(void) {
 }
 
-void func_0800C6B8(void) {
-    switch (gGameState.unk_00D) {
+void PlayVsBattleBgm(void) {
+    switch (gGameState.battleStage) {
     case 1:
         m4aSongNumStart(SONG_BGM_ALICE_BTL);
         break;

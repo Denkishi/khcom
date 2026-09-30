@@ -9,11 +9,11 @@
 DebugWork* gDebugWork;
 
 #ifdef VERSION_US
-const char gUnk_081283C0[12] = "N041001a";
+const char gVersionString[12] = "N041001a";
 #elif defined(VERSION_JP)
-const char gUnk_081283C0[12] = "J041001a";
+const char gVersionString[12] = "J041001a";
 #else
-const char gUnk_081283C0[12] = "E041220b";
+const char gVersionString[12] = "E041220b";
 #endif
 
 void mode_debug_0(void) {
@@ -23,9 +23,9 @@ void mode_debug_0(void) {
 #endif
     gDebugWork = EwramAlloc(sizeof(DebugWork));
     FadeStartIn(1, 16);
-    func_0801CB44();
+    ResetGameState();
 #ifdef VERSION_EU
-    gUnk_03006C10 |= 0x8000;
+    gDebugFlags |= 0x8000;
 #endif
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
@@ -44,30 +44,30 @@ void mode_debug_0(void) {
     EnableBg(1);
     SetBackdropColor(31, 31, 31);
     EnableBg(0);
-    func_0805FA8C(0, 0x5400, 0x500);
-    func_0805FA60(0, gUnk_08F68604, 0x20, 0x0F);
+    DebugTextInit(0, 0x5400, 0x500);
+    DebugTextLoadPalette(0, gUnk_08F68604, 0x20, 0x0F);
     gDebugWork->tiles = LoadObjTiles(gUnk_08950902, 0x2E0);
     gDebugWork->palette = LoadObjPalette(gUnk_08F685E4, 0x20);
     AnimInit(&gDebugWork->anim, gUnk_09EDF774, gUnk_09EDF764);
     AnimStart(&gDebugWork->anim, 0, 1);
 #ifdef VERSION_JP
-    func_0805FCB0(0, 0, 2, "\x82\x69\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
+    DebugTextPrint(0, 0, 2, "\x82\x69\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
 #elif defined(VERSION_EU)
-    func_0805FCB0(0, 0, 2, "\x82\x64\x82\x4f\x82\x53\x82\x50\x82\x51\x82\x51\x82\x4f\x82\x82");
+    DebugTextPrint(0, 0, 2, "\x82\x64\x82\x4f\x82\x53\x82\x50\x82\x51\x82\x51\x82\x4f\x82\x82");
 #else
-    func_0805FCB0(0, 0, 2, "\x82\x6d\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
+    DebugTextPrint(0, 0, 2, "\x82\x6d\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
 #endif
 
     if (GetPaletteEffect() < 0) {
-        func_0805FCB0(168, 150, 2, "\x82\x63\x82\x60\x82\x71\x82\x6a\x82\x64\x82\x71");
+        DebugTextPrint(168, 150, 2, "\x82\x63\x82\x60\x82\x71\x82\x6a\x82\x64\x82\x71");
     } else if (GetPaletteEffect() > 0) {
-        func_0805FCB0(168, 150, 2, "\x82\x6b\x82\x68\x82\x66\x82\x67\x82\x73\x82\x64\x82\x71");
+        DebugTextPrint(168, 150, 2, "\x82\x6b\x82\x68\x82\x66\x82\x67\x82\x73\x82\x64\x82\x71");
     } else {
-        func_0805FCB0(144, 150, 2, "\x82\x61\x82\x71\x82\x68\x82\x66\x82\x67\x82\x73\x82\x6d\x82\x64\x82\x72\x82\x72");
+        DebugTextPrint(144, 150, 2, "\x82\x61\x82\x71\x82\x68\x82\x66\x82\x67\x82\x73\x82\x6d\x82\x64\x82\x72\x82\x72");
     }
 
-    gDebugWork->unk_00 = 0;
-    gDebugWork->unk_01 = -1;
+    gDebugWork->cursor = 0;
+    gDebugWork->page = -1;
 }
 
 void mode_debug_1(void) {
@@ -95,20 +95,20 @@ void mode_debug_1(void) {
     }
 
     if (GetKeysRepeat() & DPAD_UP) {
-        gDebugWork->unk_00--;
+        gDebugWork->cursor--;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        gDebugWork->unk_00++;
+        gDebugWork->cursor++;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
-    switch (gDebugWork->unk_00) {
+    switch (gDebugWork->cursor) {
     case 0:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
 #ifdef VERSION_EU
-            gUnk_03006C10 &= ~0x8000;
+            gDebugFlags &= ~0x8000;
 #endif
             ModeRequest(&gModeCopyright1, 0);
             return;
@@ -123,7 +123,7 @@ void mode_debug_1(void) {
     case 2:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
 #ifdef VERSION_EU
-            gUnk_03006C10 &= ~0x8000;
+            gDebugFlags &= ~0x8000;
 #endif
             ModeRequest(&gModeMapChk, 0);
             return;
@@ -153,7 +153,7 @@ void mode_debug_1(void) {
             SaveLoadHeader();
 #endif
             func_08085FB0();
-            func_08085C3C();
+            InitSoraDecks();
             ModeRequest(&gModeSioBattle, 0);
             return;
         }
@@ -191,13 +191,13 @@ void mode_debug_1(void) {
         break;
     case 12:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            func_0800FDD0(0);
-            func_0800FDD0(17);
-            func_0800FDD0(18);
-            func_0800FDD0(19);
-            func_0800FDD0(20);
-            func_0800FDD0(21);
-            func_0800FDD0(22);
+            SetJiminyFlag(0);
+            SetJiminyFlag(17);
+            SetJiminyFlag(18);
+            SetJiminyFlag(19);
+            SetJiminyFlag(20);
+            SetJiminyFlag(21);
+            SetJiminyFlag(22);
             ModeRequest(&gModeBackupstat, 0);
         }
         break;
@@ -219,13 +219,13 @@ void mode_debug_1(void) {
         break;
     case 16:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            func_0800FDD0(250);
+            SetJiminyFlag(250);
             ModeRequest(&gModeJiminy, 0);
         }
         break;
     case 17:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            gGameState.unk_180 = 0xFFFF;
+            gGameState.availableWorlds = 0xFFFF;
             gGameState.progression.unk_82 = -1;
             ModeRequest(&gModeWorldselect, 0);
         }
@@ -236,10 +236,10 @@ void mode_debug_1(void) {
         }
         break;
     case 19:
-        gDebugWork->unk_00 = 0;
+        gDebugWork->cursor = 0;
         break;
     case -1:
-        gDebugWork->unk_00 = 18;
+        gDebugWork->cursor = 18;
         break;
 #else
     case 13:
@@ -268,83 +268,83 @@ void mode_debug_1(void) {
         }
         break;
     case 18:
-        gDebugWork->unk_00 = 0;
+        gDebugWork->cursor = 0;
         break;
     case -1:
-        gDebugWork->unk_00 = 17;
+        gDebugWork->cursor = 17;
         break;
 #endif
     }
 
-    old = gDebugWork->unk_01;
-    gDebugWork->unk_01 = gDebugWork->unk_00 / 9;
+    old = gDebugWork->page;
+    gDebugWork->page = gDebugWork->cursor / 9;
 
     if (GetKeysRepeat() & DPAD_LEFT) {
-        gDebugWork->unk_01--;
+        gDebugWork->page--;
 
-        if (gDebugWork->unk_01 < 0) {
-            gDebugWork->unk_01 = 2;
+        if (gDebugWork->page < 0) {
+            gDebugWork->page = 2;
         }
 
-        gDebugWork->unk_00 = gDebugWork->unk_01 * 9;
+        gDebugWork->cursor = gDebugWork->page * 9;
     } else if (GetKeysRepeat() & DPAD_RIGHT) {
-        gDebugWork->unk_01++;
+        gDebugWork->page++;
 
-        if (gDebugWork->unk_01 > 2) {
-            gDebugWork->unk_01 = 0;
+        if (gDebugWork->page > 2) {
+            gDebugWork->page = 0;
         }
 
-        gDebugWork->unk_00 = gDebugWork->unk_01 * 9;
+        gDebugWork->cursor = gDebugWork->page * 9;
     }
 
-    if (old != gDebugWork->unk_01) {
-        switch (gDebugWork->unk_01) {
+    if (old != gDebugWork->page) {
+        switch (gDebugWork->page) {
         case 0:
-            func_0805FCB0(24, 12, 2, "\x82\x6c\x82\x60\x82\x68\x82\x6d\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 28, 2, "\x82\x6e\x82\x61\x82\x69\x82\x64\x82\x62\x82\x73\x81\x40\x81\x40");
-            func_0805FCB0(24, 44, 2, "\x82\x6c\x82\x60\x82\x6f\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 60, 2, "\x82\x64\x82\x65\x82\x65\x82\x64\x82\x62\x82\x73\x81\x40\x81\x40");
-            func_0805FCB0(24, 76, 2, "\x82\x72\x82\x6e\x82\x74\x82\x6d\x82\x63\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 92, 2, "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 108, 2, "\x82\x6b\x82\x68\x82\x6d\x82\x6a\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 124, 2, "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x81\x40");
-            func_0805FCB0(24, 140, 2, "\x82\x6f\x82\x6e\x82\x6e\x82\x67\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 12, 2, "\x82\x6c\x82\x60\x82\x68\x82\x6d\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 28, 2, "\x82\x6e\x82\x61\x82\x69\x82\x64\x82\x62\x82\x73\x81\x40\x81\x40");
+            DebugTextPrint(24, 44, 2, "\x82\x6c\x82\x60\x82\x6f\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 60, 2, "\x82\x64\x82\x65\x82\x65\x82\x64\x82\x62\x82\x73\x81\x40\x81\x40");
+            DebugTextPrint(24, 76, 2, "\x82\x72\x82\x6e\x82\x74\x82\x6d\x82\x63\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 92, 2, "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 108, 2, "\x82\x6b\x82\x68\x82\x6d\x82\x6a\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 124, 2, "\x82\x61\x82\x60\x82\x73\x82\x73\x82\x6b\x82\x64\x81\x40\x81\x40");
+            DebugTextPrint(24, 140, 2, "\x82\x6f\x82\x6e\x82\x6e\x82\x67\x81\x40\x81\x40\x81\x40\x81\x40");
             break;
 #ifdef VERSION_EU
         case 1:
-            func_0805FCB0(24, 12, 2, "\x82\x65\x82\x6b\x82\x60\x82\x66\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 28, 2, "\x82\x6b\x82\x6e\x82\x66\x82\x6e\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 44, 2, "\x82\x63\x82\x64\x82\x6b\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
-            func_0805FCB0(24, 60, 2, "\x82\x6e\x82\x6f\x82\x64\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
-            func_0805FCB0(24, 76, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 92, 2, "\x82\x64\x82\x6d\x82\x63\x82\x71\x82\x6e\x82\x6b\x82\x6b\x81\x40");
-            func_0805FCB0(24, 108, 2, "\x82\x6b\x82\x60\x82\x6d\x82\x66\x82\x74\x82\x60\x82\x66\x82\x64");
-            func_0805FCB0(24, 124, 2, "\x82\x69\x82\x6e\x82\x74\x82\x71\x82\x6d\x82\x60\x82\x6b\x81\x40");
-            func_0805FCB0(24, 140, 2, "\x82\x76\x82\x6e\x82\x71\x82\x6b\x82\x63\x82\x72\x82\x64\x82\x6b");
+            DebugTextPrint(24, 12, 2, "\x82\x65\x82\x6b\x82\x60\x82\x66\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 28, 2, "\x82\x6b\x82\x6e\x82\x66\x82\x6e\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 44, 2, "\x82\x63\x82\x64\x82\x6b\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
+            DebugTextPrint(24, 60, 2, "\x82\x6e\x82\x6f\x82\x64\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
+            DebugTextPrint(24, 76, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 92, 2, "\x82\x64\x82\x6d\x82\x63\x82\x71\x82\x6e\x82\x6b\x82\x6b\x81\x40");
+            DebugTextPrint(24, 108, 2, "\x82\x6b\x82\x60\x82\x6d\x82\x66\x82\x74\x82\x60\x82\x66\x82\x64");
+            DebugTextPrint(24, 124, 2, "\x82\x69\x82\x6e\x82\x74\x82\x71\x82\x6d\x82\x60\x82\x6b\x81\x40");
+            DebugTextPrint(24, 140, 2, "\x82\x76\x82\x6e\x82\x71\x82\x6b\x82\x63\x82\x72\x82\x64\x82\x6b");
             break;
         case 2:
         default:
-            func_0805FCB0(24, 12, 2, "\x82\x62\x82\x6e\x82\x6d\x82\x73\x82\x68\x82\x6d\x82\x74\x82\x64");
-            func_0805FCB0(24, 28, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 44, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 60, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 76, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 92, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 108, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 124, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 140, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 12, 2, "\x82\x62\x82\x6e\x82\x6d\x82\x73\x82\x68\x82\x6d\x82\x74\x82\x64");
+            DebugTextPrint(24, 28, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 44, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 60, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 76, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 92, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 108, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 124, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 140, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
             break;
 #else
         default:
-            func_0805FCB0(24, 12, 2, "\x82\x65\x82\x6b\x82\x60\x82\x66\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 28, 2, "\x82\x6b\x82\x6e\x82\x66\x82\x6e\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(24, 44, 2, "\x82\x63\x82\x64\x82\x6b\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
-            func_0805FCB0(24, 60, 2, "\x82\x6e\x82\x6f\x82\x64\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
-            func_0805FCB0(24, 76, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x50\x81\x40\x81\x40");
-            func_0805FCB0(24, 92, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x51\x81\x40\x81\x40");
-            func_0805FCB0(24, 108, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x52\x81\x40\x81\x40");
-            func_0805FCB0(24, 124, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x53\x81\x40\x81\x40");
-            func_0805FCB0(24, 140, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x54\x81\x40\x81\x40");
+            DebugTextPrint(24, 12, 2, "\x82\x65\x82\x6b\x82\x60\x82\x66\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 28, 2, "\x82\x6b\x82\x6e\x82\x66\x82\x6e\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(24, 44, 2, "\x82\x63\x82\x64\x82\x6b\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
+            DebugTextPrint(24, 60, 2, "\x82\x6e\x82\x6f\x82\x64\x81\x40\x82\x72\x82\x60\x82\x75\x82\x64");
+            DebugTextPrint(24, 76, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x50\x81\x40\x81\x40");
+            DebugTextPrint(24, 92, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x51\x81\x40\x81\x40");
+            DebugTextPrint(24, 108, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x52\x81\x40\x81\x40");
+            DebugTextPrint(24, 124, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x53\x81\x40\x81\x40");
+            DebugTextPrint(24, 140, 2, "\x82\x6c\x82\x6e\x82\x75\x82\x68\x82\x64\x82\x54\x81\x40\x81\x40");
             break;
 #endif
         }
@@ -354,15 +354,15 @@ void mode_debug_1(void) {
         ModeRequest(&gModeDebflag, 0);
     }
 
-    func_080605A4(0);
-    func_08060598();
+    DebugTextDraw(0);
+    DebugTextClear();
     gfx = AnimUpdate(&gDebugWork->anim);
-    DrawSprite(9, gDebugWork->unk_00 % 9 * 16 + 13, gfx, gDebugWork->tiles,
+    DrawSprite(9, gDebugWork->cursor % 9 * 16 + 13, gfx, gDebugWork->tiles,
                gDebugWork->palette, 0, 0, 0);
 }
 
 void mode_debug_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
     ReleaseObjTiles(gDebugWork->tiles);
     ReleaseObjPalette(gDebugWork->palette);
     EwramFree(gDebugWork);

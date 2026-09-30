@@ -39,19 +39,19 @@
 #include "game.h"
 #include "bos4_api.h"
 
-TaskPool gUnk_02034B20;
+TaskPool gRikuTutorialTasks;
 
-s32 gUnk_02034B34;
+s32 gRikuTutorialModeArg;
 #ifdef VERSION_EU
-TaskPool gUnkEu_02034B38;
+TaskPool gTextCheckTasks;
 
-u32 gUnkEu_02034B4C;
+u32 gTextCheckMessageId;
 #endif
 
-u8 gUnk_0203A9E0 EWRAM_COMMON(4);
+u8 gRikuDeckTutorialState EWRAM_COMMON(4);
 
-u8 func_080ABEF8(s32* a, u8* b);
-s32 func_080AC140(s32 a);
+u8 FindStockPairsInCombo(s32* a, u8* b);
+s32 GetStockMove(s32 a);
 s32 func_080ADD04(CardDisplayWork** p, u8 b);
 s32 func_080ADD58(CardDisplayWork** p, u8 b);
 s32 func_080ADDA8(CardDisplayWork** p, u8 b);
@@ -70,53 +70,53 @@ s32 func_080AE134(CardDisplayWork** p, u8 b);
 s32 func_080AE168(CardDisplayWork** p, u8 b);
 s32 func_080AE1A8(CardDisplayWork** p, u8 b);
 s32 func_080AE1E8(CardDisplayWork** p, u8 b);
-u8 func_080AE274(s32 a, s32 b);
+u8 IsLinkSideStockLearned(s32 a, s32 b);
 void CreateSysmsgwinTask(void* pool, u16 b);
-u8 func_080A42C8(void);
+u8 IsMessageWindowOpen(void);
 
-void func_080AB96C(s32 a) {
+void RikuTutorialModeInit(s32 a) {
     FadeStartIn(0, 16);
-    gUnk_02034B34 = a;
-    TaskPoolInit(&gUnk_02034B20, 1);
-    gUnk_0203A9E0 = 0;
+    gRikuTutorialModeArg = a;
+    TaskPoolInit(&gRikuTutorialTasks, 1);
+    gRikuDeckTutorialState = 0;
 }
 void Mode_riku_btlTutorial_1(void) {
     u16 t;
 
     t = gGameState.progression.unk_82 | 0x1000;
     gGameState.progression.unk_82 = t;
-    ModeRequest(&gModeBattle, gUnk_02034B34);
-    TaskPoolUpdate(&gUnk_02034B20);
-    TaskPoolDraw(&gUnk_02034B20);
+    ModeRequest(&gModeBattle, gRikuTutorialModeArg);
+    TaskPoolUpdate(&gRikuTutorialTasks);
+    TaskPoolDraw(&gRikuTutorialTasks);
 }
 
 void Mode_riku_deckTutorial_1(void) {
     if (!FadeIsActive()) {
-        switch (gUnk_0203A9E0) {
+        switch (gRikuDeckTutorialState) {
         case 0:
-            if (!func_080A42C8() && gUnk_0203A9E0 == 0) {
-                CreateSysmsgwinTask(&gUnk_02034B20, 0xB1);
-                gUnk_0203A9E0 = 1;
+            if (!IsMessageWindowOpen() && gRikuDeckTutorialState == 0) {
+                CreateSysmsgwinTask(&gRikuTutorialTasks, 0xB1);
+                gRikuDeckTutorialState = 1;
             }
             break;
         case 1:
-            if (!func_080A42C8()) {
+            if (!IsMessageWindowOpen()) {
                 gGameState.progression.unk_82 |= 0x800;
-                ModeRequest(&gUnk_09EE2704, gUnk_02034B34);
+                ModeRequest(&gModeDeck, gRikuTutorialModeArg);
             }
             break;
         }
     }
 
-    TaskPoolUpdate(&gUnk_02034B20);
-    TaskPoolDraw(&gUnk_02034B20);
+    TaskPoolUpdate(&gRikuTutorialTasks);
+    TaskPoolDraw(&gRikuTutorialTasks);
 }
 
-void func_080ABA70(void) {
-    TaskPoolDestroy(&gUnk_02034B20);
+void RikuTutorialModeDestroy(void) {
+    TaskPoolDestroy(&gRikuTutorialTasks);
 }
 
-s32 func_080ABA80(s32* out) {
+s32 ResolveActiveCardsMove(s32* out) {
     UnkStruct_080ABA80 arr;
     u8 buf[6];
     u8 flag;
@@ -141,48 +141,48 @@ s32 func_080ABA80(s32* out) {
     out[5] = -1;
 #endif
 
-    for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-        arr.unk_00[i] = gCardBattleState->unk_000[i]->cardDef->unk_28;
+    for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+        arr.unk_00[i] = gCardBattleState->activeCards[i]->cardDef->unk_28;
 #ifdef VERSION_EU
-        out[i] = gCardBattleState->unk_000[i]->cardDef->unk_24;
+        out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
 
         if (out != 0) {
-            out[i] = gCardBattleState->unk_000[i]->cardDef->unk_24;
+            out[i] = gCardBattleState->activeCards[i]->cardDef->move;
         }
 #endif
     }
 
 #ifdef VERSION_EU
-    if (gCardBattleState->unk_0D0 == 1 && (f = gCardBattleState->unk_0E1) == 0) {
+    if (gCardBattleState->activeCardCount == 1 && (f = gCardBattleState->soraStockActive) == 0) {
 #else
-    if (gCardBattleState->unk_0D0 == 1) {
+    if (gCardBattleState->activeCardCount == 1) {
 #endif
         gCardBattleState->stockMoveCount = 1;
 
-        if ((gGameState.flags & 8) && gBtlWork->unk_0A4 == 1 && !(gBtlWork->flags & 0x800000000000)) {
-            if (gCardBattleState->unk_0EE == 1 || gBtlWork->unk_1C8 > 29) {
+        if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay == 1 && !(gBtlWork->flags & 0x800000000000)) {
+            if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
                 gCardBattleState->unk_0EE = 0;
                 return 46;
             }
         }
 
-        return gCardBattleState->unk_000[0]->cardDef->unk_24;
+        return gCardBattleState->activeCards[0]->cardDef->move;
 #ifdef VERSION_EU
-    } else if (gCardBattleState->unk_0D0 == 1 && (p = gBtlWork)->unk_0A4 == 1) {
-        if (p->unk_0F4 == 47) {
-            out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
+    } else if (gCardBattleState->activeCardCount == 1 && (p = gBtlWork)->soraOwnsPlay == 1) {
+        if (p->hcEffect == 47) {
+            out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
             gCardBattleState->stockMoveCount = 2;
             return 145;
         } else {
-            return gCardBattleState->unk_000[0]->cardDef->unk_24;
+            return gCardBattleState->activeCards[0]->cardDef->move;
         }
 #endif
-    } else if (gCardBattleState->unk_0D0 == 0) {
+    } else if (gCardBattleState->activeCardCount == 0) {
         gCardBattleState->stockMoveCount = 0;
         return -1;
     } else {
-        r = func_080AC5E8(gCardBattleState->unk_000, gCardBattleState->unk_0D0, gCardBattleState->unk_0C2, &arr, &flag);
+        r = LookupStockName(gCardBattleState->activeCards, gCardBattleState->activeCardCount, gCardBattleState->activeValue, &arr, &flag);
 
         switch (r) {
         case 108:
@@ -191,28 +191,28 @@ s32 func_080ABA80(s32* out) {
         default:
             p = gBtlWork;
 
-            if (p->unk_0A4 == 1) {
-                if (p->unk_0F4 == 47) {
-                    out[0] = out[1] = func_080AC140(r);
+            if (p->soraOwnsPlay == 1) {
+                if (p->hcEffect == 47) {
+                    out[0] = out[1] = GetStockMove(r);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return func_080AC140(r);
+                    return GetStockMove(r);
                 }
             } else {
-                if (gRikuBtlWork->unk_0F4 == 47) {
-                    out[0] = out[1] = func_080AC140(r);
+                if (gRikuBtlWork->hcEffect == 47) {
+                    out[0] = out[1] = GetStockMove(r);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return func_080AC140(r);
+                    return GetStockMove(r);
                 }
             }
         case 106:
 #ifndef VERSION_EU
             if (out != 0) {
 #endif
-                func_080ABEF8(arr.unk_00, buf);
+                FindStockPairsInCombo(arr.unk_00, buf);
 
                 if (buf[0] == 1) {
                     out[0] = arr.unk_00[0];
@@ -249,17 +249,17 @@ s32 func_080ABA80(s32* out) {
 #endif
                 }
 
-                if (gBtlWork->unk_0A4 == 1) {
-                    if (gBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
+                if (gBtlWork->soraOwnsPlay == 1) {
+                    if (gBtlWork->hcEffect == 47) {
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 } else {
-                    if (gRikuBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
+                    if (gRikuBtlWork->hcEffect == 47) {
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 }
 #ifndef VERSION_EU
@@ -271,7 +271,7 @@ s32 func_080ABA80(s32* out) {
     }
 }
 
-s32 func_080ABCA4(s32* out, s32 b) {
+s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
     UnkStruct_080ABA80 arr;
     u8 buf[6];
     u8 flag;
@@ -296,26 +296,26 @@ s32 func_080ABCA4(s32* out, s32 b) {
     out[5] = -1;
 #endif
 
-    for (i = 0; i < gCardBattleState->unk_0D0; i++) {
-        arr.unk_00[i] = gCardBattleState->unk_000[i]->cardDef->unk_28;
+    for (i = 0; i < gCardBattleState->activeCardCount; i++) {
+        arr.unk_00[i] = gCardBattleState->activeCards[i]->cardDef->unk_28;
 #ifdef VERSION_EU
-        out[i] = gCardBattleState->unk_000[i]->cardDef->unk_24;
+        out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
 
         if (out != 0) {
-            out[i] = gCardBattleState->unk_000[i]->cardDef->unk_24;
+            out[i] = gCardBattleState->activeCards[i]->cardDef->move;
         }
 #endif
     }
 
-    if (gCardBattleState->unk_0D0 == 1) {
+    if (gCardBattleState->activeCardCount == 1) {
 #ifdef VERSION_EU
         switch (b) {
         case 0:
-            f = gCardBattleState->unk_0E1;
+            f = gCardBattleState->soraStockActive;
             break;
         case 1:
-            f = gCardBattleState->unk_0E2;
+            f = gCardBattleState->rikuStockActive;
             break;
         }
 
@@ -323,68 +323,68 @@ s32 func_080ABCA4(s32* out, s32 b) {
 #endif
         gCardBattleState->stockMoveCount = 1;
 
-        if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
-            if (gCardBattleState->unk_0EE == 1 || gBtlWork->unk_1C8 > 29) {
+        if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+            if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
                 gCardBattleState->unk_0EE = 0;
                 return 46;
             }
         }
 
-        return gCardBattleState->unk_000[0]->cardDef->unk_24;
+        return gCardBattleState->activeCards[0]->cardDef->move;
 #ifdef VERSION_EU
         } else {
-            if (gBtlWork->unk_0A4 == 1) {
-                if (gBtlWork->unk_0F4 == 47) {
-                    out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
+            if (gBtlWork->soraOwnsPlay == 1) {
+                if (gBtlWork->hcEffect == 47) {
+                    out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return gCardBattleState->unk_000[0]->cardDef->unk_24;
+                    return gCardBattleState->activeCards[0]->cardDef->move;
                 }
             } else {
-                if (gRikuBtlWork->unk_0F4 == 47) {
-                    out[0] = out[1] = gCardBattleState->unk_000[0]->cardDef->unk_24;
+                if (gRikuBtlWork->hcEffect == 47) {
+                    out[0] = out[1] = gCardBattleState->activeCards[0]->cardDef->move;
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return gCardBattleState->unk_000[0]->cardDef->unk_24;
+                    return gCardBattleState->activeCards[0]->cardDef->move;
                 }
             }
         }
 #endif
-    } else if (gCardBattleState->unk_0D0 == 0) {
+    } else if (gCardBattleState->activeCardCount == 0) {
         gCardBattleState->stockMoveCount = 0;
         return -1;
     } else {
-        r = func_080AD144(gCardBattleState->unk_000, gCardBattleState->unk_0D0, gCardBattleState->unk_0C2, &arr, &flag, b);
+        r = LookupLinkStockName(gCardBattleState->activeCards, gCardBattleState->activeCardCount, gCardBattleState->activeValue, &arr, &flag, b);
 
         switch (r) {
         case 108:
             gCardBattleState->stockMoveCount = 1;
             return 46;
         default:
-            if (gBtlWork->unk_0A4 == 1) {
-                if (gBtlWork->unk_0F4 == 47) {
-                    out[0] = out[1] = func_080AC140(r);
+            if (gBtlWork->soraOwnsPlay == 1) {
+                if (gBtlWork->hcEffect == 47) {
+                    out[0] = out[1] = GetStockMove(r);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return func_080AC140(r);
+                    return GetStockMove(r);
                 }
             } else {
-                if (gRikuBtlWork->unk_0F4 == 47) {
-                    out[0] = out[1] = func_080AC140(r);
+                if (gRikuBtlWork->hcEffect == 47) {
+                    out[0] = out[1] = GetStockMove(r);
                     gCardBattleState->stockMoveCount = 2;
                     return 145;
                 } else {
-                    return func_080AC140(r);
+                    return GetStockMove(r);
                 }
             }
         case 106:
 #ifndef VERSION_EU
             if (out != 0) {
 #endif
-                func_080ABEF8(arr.unk_00, buf);
+                FindStockPairsInCombo(arr.unk_00, buf);
 
                 if (buf[0] == 1) {
                     out[0] = arr.unk_00[0];
@@ -422,17 +422,17 @@ s32 func_080ABCA4(s32* out, s32 b) {
 #endif
                 }
 
-                if (gBtlWork->unk_0A4 == 1) {
-                    if (gBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
+                if (gBtlWork->soraOwnsPlay == 1) {
+                    if (gBtlWork->hcEffect == 47) {
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 } else {
-                    if (gRikuBtlWork->unk_0F4 == 47) {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0 * 2;
+                    if (gRikuBtlWork->hcEffect == 47) {
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount * 2;
                     } else {
-                        gCardBattleState->stockMoveCount = gCardBattleState->unk_0D0;
+                        gCardBattleState->stockMoveCount = gCardBattleState->activeCardCount;
                     }
                 }
 #ifndef VERSION_EU
@@ -446,7 +446,7 @@ s32 func_080ABCA4(s32* out, s32 b) {
 
 u8 GetStockMoveCount(void) {
     // @bug Still called after the card battle frees gCardBattleState (NULL read).
-    if (gCardBattleState->unk_0E1 || gCardBattleState->unk_0E2) {
+    if (gCardBattleState->soraStockActive || gCardBattleState->rikuStockActive) {
         return gCardBattleState->stockMoveCount;
     }
 
@@ -459,12 +459,12 @@ u8 GetStockMoveCount(void) {
         b[i] = 1; \
         break;
 
-u8 func_080ABEF8(s32* a, u8* b) {
+u8 FindStockPairsInCombo(s32* a, u8* b) {
     u32 v[6];
     u32 key;
     s32 i = 0;
 
-    if (gCardBattleState->unk_0D0 <= 2) {
+    if (gCardBattleState->activeCardCount <= 2) {
         return 0;
     }
 
@@ -527,7 +527,7 @@ u8 func_080ABEF8(s32* a, u8* b) {
     }
 }
 
-s32 func_080AC140(s32 a) {
+s32 GetStockMove(s32 a) {
     switch (a) {
     case 0:
         return 0x8002ACAB;
@@ -744,7 +744,7 @@ s32 func_080AC140(s32 a) {
     }
 }
 
-u8 func_080AC5BC(CardDisplayWork** p, u8 a) {
+u8 AreThreeCardValuesEqual(CardDisplayWork** p, u8 a) {
     u8 x;
     u8 y;
     u8 z;
@@ -753,9 +753,9 @@ u8 func_080AC5BC(CardDisplayWork** p, u8 a) {
         return 0;
     }
 
-    x = p[0]->unk_A5;
-    y = p[1]->unk_A5;
-    z = p[2]->unk_A5;
+    x = p[0]->value;
+    y = p[1]->value;
+    z = p[2]->value;
 
     if (x != y) {
         return 0;
@@ -768,7 +768,7 @@ u8 func_080AC5BC(CardDisplayWork** p, u8 a) {
     return 1;
 }
 
-s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag) {
+s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -781,8 +781,8 @@ s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
         v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
-    if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
-        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->unk_1C8 > 29) {
+    if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;
         }
@@ -852,12 +852,12 @@ s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && (u8)func_0800FBCC(0) != 0) {
+        if ((u16)(kind - 10) <= 5 && (u8)IsStockLearned(0) != 0) {
             arr->unk_00[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)func_0800FBCC(2) != 0) {
+        if ((u16)(kind - 20) <= 3 && (u8)IsStockLearned(2) != 0) {
             arr->unk_00[0] = 51;
             return 51;
         }
@@ -907,27 +907,27 @@ s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     case 0xE9FA7E9F:
         return 42;
     case 0xCE739CDD:
-        if ((u8)func_0800FBCC(39) != 0) {
+        if ((u8)IsStockLearned(39) != 0) {
             return 53;
         }
         break;
     case 0xCE734CDD:
-        if ((u8)func_0800FBCC(38) != 0) {
+        if ((u8)IsStockLearned(38) != 0) {
             return 54;
         }
         break;
     case 0xCE72ACB5:
-        if ((u8)func_0800FBCC(34) != 0) {
+        if ((u8)IsStockLearned(34) != 0) {
             return 65;
         }
         break;
     case 0xCAB2AD37:
-        if ((u8)func_0800FBCC(32) != 0) {
+        if ((u8)IsStockLearned(32) != 0) {
             return 70;
         }
         break;
     case 0xCE734CC9:
-        if ((u8)func_0800FBCC(43) != 0) {
+        if ((u8)IsStockLearned(43) != 0) {
             return 77;
         }
         break;
@@ -991,132 +991,132 @@ s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     }
 
     if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
-        if ((u8)func_0800FBCC(42) != 0) {
+        if ((u8)IsStockLearned(42) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && (u8)func_0800FBCC(41) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && (u8)IsStockLearned(41) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)func_0800FBCC(27) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)IsStockLearned(27) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)func_0800FBCC(28) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)IsStockLearned(28) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)func_0800FBCC(29) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)IsStockLearned(29) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)func_0800FBCC(23) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)IsStockLearned(23) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)func_0800FBCC(24) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)IsStockLearned(24) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)func_0800FBCC(25) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)IsStockLearned(25) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)func_0800FBCC(26) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)IsStockLearned(26) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)func_0800FBCC(46) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)IsStockLearned(46) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)func_0800FBCC(58) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)IsStockLearned(58) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && (u8)func_0800FBCC(44) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && (u8)IsStockLearned(44) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && (u8)func_0800FBCC(31) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && (u8)IsStockLearned(31) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)func_0800FBCC(35) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)IsStockLearned(35) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)func_0800FBCC(50) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)IsStockLearned(50) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && (u8)func_0800FBCC(56) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && (u8)IsStockLearned(56) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && (u8)func_0800FBCC(30) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && (u8)IsStockLearned(30) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)func_0800FBCC(33) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)IsStockLearned(33) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)func_0800FBCC(40) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)IsStockLearned(40) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)func_0800FBCC(36) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)IsStockLearned(36) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)func_0800FBCC(37) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)IsStockLearned(37) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)func_0800FBCC(45) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)IsStockLearned(45) != 0) {
         return 81;
     }
 
     if ((u8)func_080ADD04(cards, count) != 0) {
-        if ((u16)(kind - 10) <= 5 && (u8)func_0800FBCC(1) != 0) {
+        if ((u16)(kind - 10) <= 5 && (u8)IsStockLearned(1) != 0) {
             arr->unk_00[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)func_0800FBCC(5) != 0) {
+        if ((u16)(kind - 20) <= 3 && (u8)IsStockLearned(5) != 0) {
             arr->unk_00[0] = 5;
             return 5;
         }
     }
 
     if ((u8)func_080ADD58(cards, count) != 0) {
-        if ((u16)(kind - 1) <= 5 && (u8)func_0800FBCC(6) != 0) {
+        if ((u16)(kind - 1) <= 5 && (u8)IsStockLearned(6) != 0) {
             arr->unk_00[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && (u8)func_0800FBCC(4) != 0) {
+        if ((u16)(kind - 24) <= 2 && (u8)IsStockLearned(4) != 0) {
             arr->unk_00[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && (u8)func_0800FBCC(7) != 0) {
+        if ((u16)(kind - 7) <= 2 && (u8)IsStockLearned(7) != 0) {
             arr->unk_00[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
-            if ((u8)func_0800FBCC(3) != 0) {
+            if ((u8)IsStockLearned(3) != 0) {
                 arr->unk_00[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)func_0800FBCC(8) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)IsStockLearned(8) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }
@@ -1134,7 +1134,7 @@ s32 func_080AC5E8(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     return 107;
 }
 
-s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag, s32 b) {
+s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag, s32 b) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -1147,8 +1147,8 @@ s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
         v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
-    if ((gGameState.flags & 8) && gBtlWork->unk_0A4 != 0 && !(gBtlWork->flags & 0x800000000000)) {
-        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->unk_1C8 > 29) {
+    if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+        if (gCardBattleState->unk_0EE == 1 || (s16)gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;
         }
@@ -1218,12 +1218,12 @@ s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     case 0xC8D2348D:
     case 0xC9725C97:
     case 0xCA1284A1:
-        if ((u16)(kind - 10) <= 5 && (u8)func_080AE274(0, b) != 0) {
+        if ((u16)(kind - 10) <= 5 && (u8)IsLinkSideStockLearned(0, b) != 0) {
             arr->unk_00[0] = 50;
             return 50;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)func_080AE274(2, b) != 0) {
+        if ((u16)(kind - 20) <= 3 && (u8)IsLinkSideStockLearned(2, b) != 0) {
             arr->unk_00[0] = 51;
             return 51;
         }
@@ -1273,27 +1273,27 @@ s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     case 0xE9FA7E9F:
         return 42;
     case 0xCE739CDD:
-        if ((u8)func_080AE274(39, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(39, b) != 0) {
             return 53;
         }
         break;
     case 0xCE734CDD:
-        if ((u8)func_080AE274(38, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(38, b) != 0) {
             return 54;
         }
         break;
     case 0xCE72ACB5:
-        if ((u8)func_080AE274(34, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(34, b) != 0) {
             return 65;
         }
         break;
     case 0xCAB2AD37:
-        if ((u8)func_080AE274(32, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(32, b) != 0) {
             return 70;
         }
         break;
     case 0xCE734CC9:
-        if ((u8)func_080AE274(43, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(43, b) != 0) {
             return 77;
         }
         break;
@@ -1357,132 +1357,132 @@ s32 func_080AD144(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80
     }
 
     if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
-        if ((u8)func_080AE274(42, b) != 0) {
+        if ((u8)IsLinkSideStockLearned(42, b) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && (u8)func_080AE274(41, b) != 0) {
+    if ((u8)func_080AE080(cards, count) != 0 && (u8)IsLinkSideStockLearned(41, b) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)func_080AE274(27, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 23, count) != 0 && (u8)IsLinkSideStockLearned(27, b) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)func_080AE274(28, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 24, count) != 0 && (u8)IsLinkSideStockLearned(28, b) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)func_080AE274(29, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 31, count) != 0 && (u8)IsLinkSideStockLearned(29, b) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)func_080AE274(23, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 18, count) != 0 && (u8)IsLinkSideStockLearned(23, b) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)func_080AE274(24, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 19, count) != 0 && (u8)IsLinkSideStockLearned(24, b) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)func_080AE274(25, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 20, count) != 0 && (u8)IsLinkSideStockLearned(25, b) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)func_080AE274(26, b) != 0) {
+    if ((u8)func_080ADEAC(cards, 22, count) != 0 && (u8)IsLinkSideStockLearned(26, b) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)func_080AE274(46, b) != 0) {
+    if ((u8)func_080AE0B4(cards, count) != 0 && (u8)IsLinkSideStockLearned(46, b) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)func_080AE274(58, b) != 0) {
+    if ((u8)func_080AE0F4(cards, count) != 0 && (u8)IsLinkSideStockLearned(58, b) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && (u8)func_080AE274(44, b) != 0) {
+    if ((u8)func_080AE014(cards, count) != 0 && (u8)IsLinkSideStockLearned(44, b) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && (u8)func_080AE274(31, b) != 0) {
+    if ((u8)func_080ADF60(cards, count) != 0 && (u8)IsLinkSideStockLearned(31, b) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)func_080AE274(35, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && (u8)IsLinkSideStockLearned(35, b) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)func_080AE274(50, b) != 0) {
+    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && (u8)IsLinkSideStockLearned(50, b) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && (u8)func_080AE274(56, b) != 0) {
+    if ((u8)func_080AE134(cards, count) != 0 && (u8)IsLinkSideStockLearned(56, b) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && (u8)func_080AE274(30, b) != 0) {
+    if ((u8)func_080AE168(cards, count) != 0 && (u8)IsLinkSideStockLearned(30, b) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)func_080AE274(33, b) != 0) {
+    if ((u8)func_080AE1A8(cards, count) != 0 && (u8)IsLinkSideStockLearned(33, b) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)func_080AE274(40, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && (u8)IsLinkSideStockLearned(40, b) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)func_080AE274(36, b) != 0) {
+    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && (u8)IsLinkSideStockLearned(36, b) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)func_080AE274(37, b) != 0) {
+    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && (u8)IsLinkSideStockLearned(37, b) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)func_080AE274(45, b) != 0) {
+    if ((u8)func_080AE1E8(cards, count) != 0 && (u8)IsLinkSideStockLearned(45, b) != 0) {
         return 81;
     }
 
     if ((u8)func_080ADD04(cards, count) != 0) {
-        if ((u16)(kind - 10) <= 5 && (u8)func_080AE274(1, b) != 0) {
+        if ((u16)(kind - 10) <= 5 && (u8)IsLinkSideStockLearned(1, b) != 0) {
             arr->unk_00[0] = 46;
             return 46;
         }
 
-        if ((u16)(kind - 20) <= 3 && (u8)func_080AE274(5, b) != 0) {
+        if ((u16)(kind - 20) <= 3 && (u8)IsLinkSideStockLearned(5, b) != 0) {
             arr->unk_00[0] = 5;
             return 5;
         }
     }
 
     if ((u8)func_080ADD58(cards, count) != 0) {
-        if ((u16)(kind - 1) <= 5 && (u8)func_080AE274(6, b) != 0) {
+        if ((u16)(kind - 1) <= 5 && (u8)IsLinkSideStockLearned(6, b) != 0) {
             arr->unk_00[0] = 47;
             return 47;
         }
 
-        if ((u16)(kind - 24) <= 2 && (u8)func_080AE274(4, b) != 0) {
+        if ((u16)(kind - 24) <= 2 && (u8)IsLinkSideStockLearned(4, b) != 0) {
             arr->unk_00[0] = 6;
             return 6;
         }
 
-        if ((u16)(kind - 7) <= 2 && (u8)func_080AE274(7, b) != 0) {
+        if ((u16)(kind - 7) <= 2 && (u8)IsLinkSideStockLearned(7, b) != 0) {
             arr->unk_00[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
-            if ((u8)func_080AE274(3, b) != 0) {
+            if ((u8)IsLinkSideStockLearned(3, b) != 0) {
                 arr->unk_00[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)func_080AE274(8, b) != 0) {
+    if ((u8)func_080ADDA8(cards, count) != 0 && (u8)IsLinkSideStockLearned(8, b) != 0) {
         arr->unk_00[0] = 49;
         return 49;
     }
@@ -1510,13 +1510,13 @@ s32 func_080ADD04(CardDisplayWork** p, u8 b) {
 
     if (b == 3) {
         d0 = p[0]->cardDef;
-        c0 = d0->unk_1C;
+        c0 = d0->kind;
         d1 = p[1]->cardDef;
-        c1 = d1->unk_1C;
+        c1 = d1->kind;
         d2 = p[2]->cardDef;
-        c2 = d2->unk_1C;
+        c2 = d2->kind;
 
-        if (d0->unk_2A == 0 && d1->unk_2A == 0 && d2->unk_2A == 0 &&
+        if (d0->category == 0 && d1->category == 0 && d2->category == 0 &&
             c0 != c1 && c0 != c2 && c1 != c2) {
             return 1;
         }
@@ -1535,8 +1535,8 @@ s32 func_080ADD58(CardDisplayWork** p, u8 b) {
         d1 = p[1]->cardDef;
         d2 = p[2]->cardDef;
 
-        if (d0->unk_24 != 18 && d1->unk_24 != 18 && d2->unk_24 != 18 &&
-            d0->unk_2A == 0 && d1->unk_2A == 0 && d2->unk_2A == 0) {
+        if (d0->move != 18 && d1->move != 18 && d2->move != 18 &&
+            d0->category == 0 && d1->category == 0 && d2->category == 0) {
             return 1;
         }
     }
@@ -1552,12 +1552,12 @@ s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
 
     if (b == 3) {
         d0 = p[0]->cardDef;
-        c0 = d0->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
-        c2 = p[2]->cardDef->unk_1C;
+        c0 = d0->kind;
+        c1 = p[1]->cardDef->kind;
+        c2 = p[2]->cardDef->kind;
 
         if (c0 != c1 && c1 != c2 && c2 != c0) {
-            if (d0->unk_2A == 0) {
+            if (d0->category == 0) {
                 if (c1 == 39 && c2 == 40) {
                     return 1;
                 }
@@ -1567,7 +1567,7 @@ s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
                 }
             }
 
-            if (p[1]->cardDef->unk_2A == 0) {
+            if (p[1]->cardDef->category == 0) {
                 if (c0 == 39 && c2 == 40) {
                     return 1;
                 }
@@ -1577,7 +1577,7 @@ s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
                 }
             }
 
-            if (p[2]->cardDef->unk_2A == 0) {
+            if (p[2]->cardDef->category == 0) {
                 if (c1 == 39 && c0 == 40) {
                     return 1;
                 }
@@ -1598,8 +1598,8 @@ s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
 #ifdef VERSION_EU
         b == 3 &&
 #endif
-        p[0]->cardDef->unk_1C == c && p[1]->cardDef->unk_1C == d &&
-        p[2]->cardDef->unk_2A == e && !(p[2]->cardDef->flags & 4)) {
+        p[0]->cardDef->kind == c && p[1]->cardDef->kind == d &&
+        p[2]->cardDef->category == e && !(p[2]->cardDef->flags & 4)) {
         return 1;
     }
 
@@ -1612,7 +1612,7 @@ s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d) {
 #ifdef VERSION_EU
         b == 3 &&
 #endif
-        p[0]->cardDef->unk_1C == c && p[1]->cardDef->unk_1C == d &&
+        p[0]->cardDef->kind == c && p[1]->cardDef->kind == d &&
         (p[2]->cardDef->flags & 4)) {
         return 1;
     }
@@ -1628,11 +1628,11 @@ s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
         d1 = p[1]->cardDef;
         d2 = p[2]->cardDef;
-        s1 = d1->unk_2A;
-        s2 = d2->unk_2A;
+        s1 = d1->category;
+        s2 = d2->category;
 
         if (s1 == 0 && s2 == 0 && c0 == c) {
             return 1;
@@ -1650,11 +1650,11 @@ s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
         d1 = p[1]->cardDef;
         d2 = p[2]->cardDef;
-        s1 = d1->unk_2A;
-        s2 = d2->unk_2A;
+        s1 = d1->category;
+        s2 = d2->category;
 
         if (c0 == c && s1 == e && s2 == s1) {
             return 1;
@@ -1670,9 +1670,9 @@ s32 func_080ADF30(CardDisplayWork** p, u8 b) {
     u16 c2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
-        c2 = p[2]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
+        c2 = p[2]->cardDef->kind;
 
         if (c1 == c2 && c1 == 26 && c0 != 26) {
             return 1;
@@ -1687,10 +1687,10 @@ s32 func_080ADF60(CardDisplayWork** p, u8 b) {
     u16 c1;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
 
-        if (c0 == 18 && c1 == 30 && p[2]->cardDef->unk_2A == 0) {
+        if (c0 == 18 && c1 == 30 && p[2]->cardDef->category == 0) {
             return 1;
         }
     }
@@ -1706,7 +1706,7 @@ s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c) {
         e0 = p[0]->cardDef->flags;
         e1 = p[1]->cardDef->flags;
 
-        if ((e0 & 4) && (e1 & 4) && p[2]->cardDef->unk_1C == c) {
+        if ((e0 & 4) && (e1 & 4) && p[2]->cardDef->kind == c) {
             return 1;
         }
     }
@@ -1720,13 +1720,13 @@ s32 func_080ADFD4(CardDisplayWork** p, u8 b) {
     u16 c1;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
 
         if (c0 == 25 && c1 == 30) {
             d2 = p[2]->cardDef;
 
-            if (d2->unk_2A == 2 && !(d2->flags & 8)) {
+            if (d2->category == 2 && !(d2->flags & 8)) {
                 return 1;
             }
         }
@@ -1745,13 +1745,13 @@ s32 func_080AE014(CardDisplayWork** p, u8 b) {
         d1 = p[1]->cardDef;
         e1 = d1->flags;
 
-        if ((e0 & 4) && e1 == 0 && d1->unk_2A == 1 &&
-            p[2]->cardDef->unk_1C == 43) {
+        if ((e0 & 4) && e1 == 0 && d1->category == 1 &&
+            p[2]->cardDef->kind == 43) {
             return 1;
         }
 
-        if (p[0]->cardDef->unk_1C == 27 && p[1]->cardDef->unk_1C == 19 &&
-            p[2]->cardDef->unk_2A == 2 && !(p[2]->cardDef->flags & 8)) {
+        if (p[0]->cardDef->kind == 27 && p[1]->cardDef->kind == 19 &&
+            p[2]->cardDef->category == 2 && !(p[2]->cardDef->flags & 8)) {
             return 1;
         }
     }
@@ -1765,8 +1765,8 @@ s32 func_080AE080(CardDisplayWork** p, u8 b) {
     u16 e2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
         e2 = p[2]->cardDef->flags;
 
         if (c0 == 26 && c1 == 29 && (e2 & 4)) {
@@ -1784,10 +1784,10 @@ s32 func_080AE0B4(CardDisplayWork** p, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
         d2 = p[2]->cardDef;
-        s2 = d2->unk_2A;
+        s2 = d2->category;
 
         if (c0 == 36 && c1 == 38 && s2 == 2 && !(d2->flags & 8)) {
             return 1;
@@ -1804,10 +1804,10 @@ s32 func_080AE0F4(CardDisplayWork** p, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
         d2 = p[2]->cardDef;
-        s2 = d2->unk_2A;
+        s2 = d2->category;
 
         if (c0 == 18 && c1 == 39 && s2 == 1 && !(d2->flags & 4)) {
             return 1;
@@ -1823,9 +1823,9 @@ s32 func_080AE134(CardDisplayWork** p, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
-        s2 = p[2]->cardDef->unk_2A;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
+        s2 = p[2]->cardDef->category;
 
         if (c0 == 31 && c1 == 23 && s2 == 0) {
             return 1;
@@ -1842,10 +1842,10 @@ s32 func_080AE168(CardDisplayWork** p, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
         d2 = p[2]->cardDef;
-        s2 = d2->unk_2A;
+        s2 = d2->category;
 
         if (c0 == 24 && c1 == 18 && s2 == 1 && !(d2->flags & 4)) {
             return 1;
@@ -1862,10 +1862,10 @@ s32 func_080AE1A8(CardDisplayWork** p, u8 b) {
     u8 s2;
 
     if (b == 3) {
-        c0 = p[0]->cardDef->unk_1C;
-        c1 = p[1]->cardDef->unk_1C;
+        c0 = p[0]->cardDef->kind;
+        c1 = p[1]->cardDef->kind;
         d2 = p[2]->cardDef;
-        s2 = d2->unk_2A;
+        s2 = d2->category;
 
         if (c0 == 24 && c1 == 19 && s2 == 1 && !(d2->flags & 4)) {
             return 1;
@@ -1888,14 +1888,14 @@ s32 func_080AE1E8(CardDisplayWork** p, u8 b) {
 
     if (b == 3) {
         d0 = p[0]->cardDef;
-        c0 = d0->unk_1C;
+        c0 = d0->kind;
         d1 = p[1]->cardDef;
-        c1 = d1->unk_1C;
+        c1 = d1->kind;
         d2 = p[2]->cardDef;
-        c2 = d2->unk_1C;
-        s0 = d0->unk_2A;
-        s1 = d1->unk_2A;
-        s2 = d2->unk_2A;
+        c2 = d2->kind;
+        s0 = d0->category;
+        s1 = d1->category;
+        s2 = d2->category;
 
         if (s0 == 1 && !(d0->flags & 4) && s1 == 1 && !(d1->flags & 4) &&
             c2 == 44) {
@@ -1910,18 +1910,18 @@ s32 func_080AE1E8(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-u8 func_080AE274(s32 a, s32 b) {
+u8 IsLinkSideStockLearned(s32 a, s32 b) {
     u8 r;
 
     if (b != 0) {
-        r = func_0800FCD8(a);
+        r = IsLinkPartnerStockLearned(a);
     } else {
-        r = func_0800FC90(a);
+        r = IsLinkStockLearned(a);
     }
 
     return r;
 }
-s32 func_080AE28C(UnkStruct_080ABA80* cards, u8* output, u8 count) {
+s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
     u32 v[6];
 
     v[0] = cards->unk_00[0];
@@ -2026,50 +2026,50 @@ s32 func_080AE28C(UnkStruct_080ABA80* cards, u8* output, u8 count) {
 }
 
 void CreateCardMessageTask(void* pool, u32 a, u16 b);
-u8 func_080A42C8(void);
+u8 IsMessageWindowOpen(void);
 #ifdef VERSION_EU
 void eu_080AB9FC(void) {
-    gUnkEu_02034B4C = 0;
+    gTextCheckMessageId = 0;
     SetBgMode0();
     SetupBg(0, 0, 28, 14);
-    TaskPoolInit(&gUnkEu_02034B38, 1);
-    CreateCardMessageTask(&gUnkEu_02034B38, 0, gUnkEu_02034B4C);
+    TaskPoolInit(&gTextCheckTasks, 1);
+    CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
 }
 void eu_080ABA38(void) {
-    if (func_080A42C8() == 0) {
-        gUnkEu_02034B4C++;
-        if (gUnkEu_02034B4C == 179) {
-            gUnkEu_02034B4C = 0;
+    if (IsMessageWindowOpen() == 0) {
+        gTextCheckMessageId++;
+        if (gTextCheckMessageId == 179) {
+            gTextCheckMessageId = 0;
         }
-        CreateCardMessageTask(&gUnkEu_02034B38, 0, gUnkEu_02034B4C);
+        CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
     }
-    TaskPoolUpdate(&gUnkEu_02034B38);
-    TaskPoolDraw(&gUnkEu_02034B38);
+    TaskPoolUpdate(&gTextCheckTasks);
+    TaskPoolDraw(&gTextCheckTasks);
 }
 void eu_080ABA7C(void) {
-    TaskPoolDestroy(&gUnkEu_02034B38);
+    TaskPoolDestroy(&gTextCheckTasks);
 }
 #endif
 
 Mode gModeRikuBtlTutorial = {
     "Mode_riku_btlTutorial",
-    func_080AB96C,
+    RikuTutorialModeInit,
     Mode_riku_btlTutorial_1,
-    func_080ABA70,
+    RikuTutorialModeDestroy,
 };
 
 Mode gModeRikuDeckTutorial = {
     "Mode_riku_deckTutorial",
-    func_080AB96C,
+    RikuTutorialModeInit,
     Mode_riku_deckTutorial_1,
-    func_080ABA70,
+    RikuTutorialModeDestroy,
 };
 
 const UnkStruct_080ABA80 gUnk_09045188 = {
     { -1, -1, -1, -1, -1, -1 },
 };
 #ifdef VERSION_EU
-Mode gUnkEu_09F74600 = {
+Mode gModeTextCheck = {
     "Mode_textcheck",
     (ModeInitFunc)eu_080AB9FC,
     eu_080ABA38,

@@ -3,26 +3,26 @@
 #include "copyright_screens.h"
 
 #ifndef VERSION_JP
-u8 gUnk_02034ED4 __attribute__((aligned(4)));
-u16 gUnk_02034ED6;
+u8 gCopyrightExtraScreen __attribute__((aligned(4)));
+u16 gCopyright1Timer;
 #else
-u16 gUnk_02034ED6 __attribute__((aligned(4)));
+u16 gCopyright1Timer __attribute__((aligned(4)));
 #endif
-u8 gUnk_02034ED8;
+u8 gCopyrightSaveCorrupted;
 
 void mode_copyright1_0(s32 arg) {
 #ifndef VERSION_JP
     if (arg == 0) {
-        gUnk_02034ED4 = 1;
+        gCopyrightExtraScreen = 1;
     } else {
-        gUnk_02034ED4 = 0;
+        gCopyrightExtraScreen = 0;
     }
 #endif
 
-    gUnk_02034ED8 = 0;
+    gCopyrightSaveCorrupted = 0;
 
     if (SaveRepairHeader() == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearHeader();
         SaveClearSystem();
         SaveClearFileLarge(0);
@@ -32,27 +32,27 @@ void mode_copyright1_0(s32 arg) {
     }
 
     if (SaveRepairFileLarge(0) == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearFileLarge(0);
     }
 
     if (SaveRepairFileLarge(1) == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearFileLarge(1);
     }
 
     if (SaveRepairFileSmall(0) == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearFileSmall(0);
     }
 
     if (SaveRepairFileSmall(1) == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearFileSmall(1);
     }
 
     if (SaveRepairSystem() == 1) {
-        gUnk_02034ED8 = 1;
+        gCopyrightSaveCorrupted = 1;
         SaveClearSystem();
     }
 
@@ -62,7 +62,7 @@ void mode_copyright1_0(s32 arg) {
     SetBgPriority(0, 3);
 
 #ifndef VERSION_JP
-    if (gUnk_02034ED4 != 0) {
+    if (gCopyrightExtraScreen != 0) {
 #ifdef VERSION_EU
         LoadBgTiles(0, gUnk_09801DD8, 0x7A0);
         LoadBgPalette(0, gUnk_0984B298, 0x20);
@@ -80,20 +80,20 @@ void mode_copyright1_0(s32 arg) {
     }
 
     FadeStartIn(1, 0x43);
-    gUnk_02034ED6 = 60;
+    gCopyright1Timer = 60;
 }
 
 void mode_copyright1_1(void) {
-    if (gUnk_02034ED8 != 0) {
+    if (gCopyrightSaveCorrupted != 0) {
         ModeRequest(&gModeMenuMsg, 0);
     } else if (!FadeIsActive()) {
-        if (gUnk_02034ED6 != 0) {
-            if (--gUnk_02034ED6 == 0) {
+        if (gCopyright1Timer != 0) {
+            if (--gCopyright1Timer == 0) {
                 FadeStartOut(1, 0x43);
             }
         } else
 #ifndef VERSION_JP
-        if (gUnk_02034ED4 != 0) {
+        if (gCopyrightExtraScreen != 0) {
             ModeRequest(&gModeCopyright1, 1);
         } else
 #endif

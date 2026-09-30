@@ -12,31 +12,31 @@
 extern MapNameText* gFloorNames[13];
 extern MapNameText* gBasementFloorNames[12];
 
-void func_080F5F88(MapGoofyWork* w) {
-    if (w->unk_0C0 != 0 && (GetKeysPressed() & A_BUTTON)) {
+void MapGoofyCheckTalk(MapGoofyWork* w) {
+    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
 
-        if ((s8)gGameState.floor == 12 && gUnk_0203C590.unk_06 == 0xFD) {
+        if ((s8)gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
             CreateCardMessageTask(&w->tasks, 0, 49);
         } else {
-            CreateCardMessageTask(&w->tasks, 0, gUnk_0984C310[gUnk_0203C590.unk_00]);
+            CreateCardMessageTask(&w->tasks, 0, gGoofyTalkMessages[gMapFloorState.progress]);
         }
 
-        w->update = func_080F6004;
+        w->update = MapGoofyWaitMessage;
     }
 }
 
-void func_080F6004(MapGoofyWork* w) {
-    if (func_080A42C8() == 0) {
+void MapGoofyWaitMessage(MapGoofyWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
-        w->update = func_080F5F88;
+        w->update = MapGoofyCheckTalk;
     }
 }
 
 void Task_MapGoofy_0(MapGoofyWork* w) {
     FldObj* e = &w->obj;
 
-    if (gUnk_0203C590.unk_06 != 0xFE) {
+    if (gMapFloorState.room != 0xFE) {
         if ((s8)gGameState.floor == 12) {
             w->obj.fieldPosition.x = 0x25000;
             w->obj.fieldPosition.y = 0x10A00;
@@ -55,14 +55,14 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
     }
 
     e->fieldPosition.z = 0;
-    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.unk_0C;
-    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
+    e->fieldPosition.z = e->fieldPosition.ground;
+    e->fieldPosition.y -= e->fieldPosition.ground;
     e->angle = 0x80;
-    e->unk_1A = 0x30;
-    e->unk_30 = 2;
-    w->unk_0C1 = 1;
-    w->update = func_080F5F88;
+    e->height = 0x30;
+    e->kind = 2;
+    w->visible = 1;
+    w->update = MapGoofyCheckTalk;
     w->tiles = AllocObjTiles(0x400, gGoofyFl00Tiles);
     w->palette = LoadObjPalette(gGoofyPalette, 32);
     AnimInit(&w->anim, gGoofyFl00Anims, gGoofyFl00Frames);
@@ -72,17 +72,17 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
     FldObjRegister(e);
     TaskPoolInit(&w->tasks, 2);
     TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
-    w->unk_0C0 = 0;
+    w->targeted = 0;
     TaskPoolInit(&w->tasks2, 1);
     TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapGoofy_1(MapGoofyWork* w) {
-    if ((u8)func_080E0390() != 0) {
-        w->unk_0C1 = 0;
+    if ((u8)IsMapInterrupted() != 0) {
+        w->visible = 0;
     } else {
-        w->unk_0C1 = 1;
-        w->unk_0C0 = func_080E03C0(&w->obj);
+        w->visible = 1;
+        w->targeted = IsFldObjTalkTarget(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -102,17 +102,17 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
     s16 x;
     s16 y;
 
-    if (w->unk_0C1 != 0) {
+    if (w->visible != 0) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
-        w->obj.unk_3C = p->unk_0C;
-        w->obj.unk_3A = v + 1;
+        w->obj.shadowZ = p->ground;
+        w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->unk_0C0 != 0) {
+        if (w->targeted != 0) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -127,39 +127,39 @@ void Task_MapGoofy_3(MapGoofyWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-void func_080F62B0(MapNamineWork* w) {
-    if (w->unk_0C1 != 0 && (GetKeysPressed() & A_BUTTON)) {
+void MapNamineCheckTalk(MapNamineWork* w) {
+    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
 
-        if (gUnk_0203C590.unk_00 == 27) {
+        if (gMapFloorState.progress == 27) {
             CreateCardMessageTask(&w->tasks, 0, 0x33);
         } else {
             CreateCardMessageTask(&w->tasks, 0, 0x32);
         }
-        w->update = func_080F6314;
+        w->update = MapNamineWaitMessage;
     }
 }
 
-void func_080F6314(MapNamineWork* w) {
-    if (func_080A42C8() == 0) {
+void MapNamineWaitMessage(MapNamineWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
-        w->update = func_080F62B0;
+        w->update = MapNamineCheckTalk;
     }
 }
 
 void Task_MapNamine_0(MapNamineWork* w) {
     FldObj* p = &w->obj;
 
-    switch (gUnk_0203C590.unk_00) {
+    switch (gMapFloorState.progress) {
     case 27:
         w->obj.fieldPosition.x = 0x20D00;
         w->obj.fieldPosition.y = 0xD500;
-        w->unk_0C4 = 0x800;
+        w->spriteFlags = 0x800;
         break;
     case 23:
         w->obj.fieldPosition.x = 0x27C00;
         w->obj.fieldPosition.y = 0xD400;
-        w->unk_0C4 = 0x800;
+        w->spriteFlags = 0x800;
         break;
     case 24:
     case 25:
@@ -167,19 +167,19 @@ void Task_MapNamine_0(MapNamineWork* w) {
     default:
         p->fieldPosition.x = 0x15200;
         p->fieldPosition.y = 0xF800;
-        w->unk_0C4 = 0x801;
+        w->spriteFlags = 0x801;
         break;
     }
 
     p->fieldPosition.z = 0;
-    p->fieldPosition.z = p->fieldPosition.unk_0C = func_080DFF30(&p->fieldPosition);
-    p->fieldPosition.y -= p->fieldPosition.unk_0C;
+    p->fieldPosition.z = p->fieldPosition.ground = GetFldPosFloor(&p->fieldPosition);
+    p->fieldPosition.y -= p->fieldPosition.ground;
     p->angle = 173;
-    p->unk_1A = 48;
-    p->unk_30 = 2;
-    w->unk_0C0 = gUnk_0203C590.unk_00 != 23;
-    w->unk_0C2 = 1;
-    w->update = func_080F62B0;
+    p->height = 48;
+    p->kind = 2;
+    w->registered = gMapFloorState.progress != 23;
+    w->visible = 1;
+    w->update = MapNamineCheckTalk;
     w->tiles = AllocObjTiles(0x300, gNamiF00Tiles);
     w->palette = LoadObjPalette(gNaminePalette, 32);
     AnimInit(&w->anim, gNamiF00Anims, gNamiF00Frames);
@@ -187,23 +187,23 @@ void Task_MapNamine_0(MapNamineWork* w) {
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
 
-    if (w->unk_0C0 != 0) {
+    if (w->registered != 0) {
         FldObjRegister(p);
     }
 
     TaskPoolInit(&w->tasks, 2);
     TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
-    w->unk_0C1 = 0;
+    w->targeted = 0;
     TaskPoolInit(&w->tasks2, 1);
     TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapNamine_1(MapNamineWork* w) {
-    if ((u8)func_080E0390() != 0) {
-        w->unk_0C2 = 0;
+    if ((u8)IsMapInterrupted() != 0) {
+        w->visible = 0;
     } else {
-        w->unk_0C2 = 1;
-        w->unk_0C1 = func_080E03C0(&w->obj);
+        w->visible = 1;
+        w->targeted = IsFldObjTalkTarget(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -223,17 +223,17 @@ void Task_MapNamine_2(MapNamineWork* w) {
     s16 x;
     s16 y;
 
-    if (w->unk_0C2 != 0) {
+    if (w->visible != 0) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->unk_0C4, v);
-        w->obj.unk_3C = p->unk_0C;
-        w->obj.unk_3A = v + 1;
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->spriteFlags, v);
+        w->obj.shadowZ = p->ground;
+        w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->unk_0C1 != 0) {
+        if (w->targeted != 0) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -244,7 +244,7 @@ void Task_MapNamine_3(MapNamineWork* w) {
     ReleaseObjPalette(w->palette);
     ColliderUnregister(&w->collider);
 
-    if (w->unk_0C0 != 0) {
+    if (w->registered != 0) {
         FldObjUnregister(&w->obj);
     }
 
@@ -252,22 +252,22 @@ void Task_MapNamine_3(MapNamineWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-void func_080F65EC(MapNiserikuWork* w) {
-    if (w->unk_0C1 != 0 && (GetKeysPressed() & A_BUTTON)) {
+void MapNiserikuCheckTalk(MapNiserikuWork* w) {
+    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
         CreateCardMessageTask(&w->tasks, 0, 0x34);
-        w->update = func_080F6634;
+        w->update = MapNiserikuWaitMessage;
     }
 }
 
-void func_080F6634(MapNiserikuWork* w) {
-    if (func_080A42C8() == 0) {
+void MapNiserikuWaitMessage(MapNiserikuWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
-        w->update = func_080F65EC;
+        w->update = MapNiserikuCheckTalk;
     }
 }
 
-void func_080F6668(MapNiserikuWork* w) {
+void MapNiserikuWaitApproach(MapNiserikuWork* w) {
     s32 dx;
     s32 dy;
 
@@ -287,14 +287,14 @@ void func_080F6668(MapNiserikuWork* w) {
         if (Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < 0x3000) {
             FadeStartOut(0, 16);
             gFieldState->flags |= 0x1000;
-            w->update = func_080F66E0;
+            w->update = MapNiserikuStartEvent;
         }
     }
 }
 
-void func_080F66E0(MapNiserikuWork* w) {
+void MapNiserikuStartEvent(MapNiserikuWork* w) {
     if (FadeIsActive() == 0) {
-        func_0806180C(0x3B);
+        RequestEventMode(0x3B);
         w->update = 0;
     }
 }
@@ -303,7 +303,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
     FldObj* e = &w->obj;
     s32 c;
 
-    switch (gUnk_0203C590.unk_00) {
+    switch (gMapFloorState.progress) {
     case 27:
         e->fieldPosition.x = 0x27C00;
         e->fieldPosition.y = 0x10700;
@@ -322,29 +322,29 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
     }
 
     e->fieldPosition.z = 0;
-    e->fieldPosition.z = e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
+    e->fieldPosition.z = e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
     e->fieldPosition.y -= e->fieldPosition.z;
     e->angle = 173;
-    e->unk_1A = 48;
-    e->unk_30 = 2;
+    e->height = 48;
+    e->kind = 2;
 
     c = 0;
 
-    if (gUnk_0203C590.unk_00 == 27) {
+    if (gMapFloorState.progress == 27) {
         c = 1;
     }
 
-    w->unk_0C0 = c;
+    w->registered = c;
 
-    w->unk_0C2 = 1;
-    w->unk_0C1 = 0;
+    w->visible = 1;
+    w->targeted = 0;
     TaskPoolInit(&w->tasks2, 1);
     TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
     TaskPoolInit(&w->tasks, 2);
 
-    switch (gUnk_0203C590.unk_00) {
+    switch (gMapFloorState.progress) {
     case 27:
-        w->update = func_080F65EC;
+        w->update = MapNiserikuCheckTalk;
         w->tiles = AllocObjTiles(0x680, gNiseFl00Tiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiseFl00Anims, gNiseFl00Frames);
@@ -354,7 +354,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
         break;
     case 23:
-        w->update = func_080F6668;
+        w->update = MapNiserikuWaitApproach;
         w->tiles = AllocObjTiles(0x320, gNiserikuHizaFTiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
@@ -377,17 +377,17 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         break;
     }
 
-    if (w->unk_0C0 != 0) {
+    if (w->registered != 0) {
         FldObjRegister(e);
     }
 }
 
 s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
-    if ((u8)func_080E0390() != 0) {
-        w->unk_0C2 = 0;
+    if ((u8)IsMapInterrupted() != 0) {
+        w->visible = 0;
     } else {
-        w->unk_0C2 = 1;
-        w->unk_0C1 = func_080E03C0(&w->obj);
+        w->visible = 1;
+        w->targeted = IsFldObjTalkTarget(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -407,17 +407,17 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
     s16 x;
     s16 y;
 
-    if (w->unk_0C2 != 0) {
+    if (w->visible != 0) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
         DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
-        w->obj.unk_3C = p->unk_0C;
-        w->obj.unk_3A = v + 1;
+        w->obj.shadowZ = p->ground;
+        w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->unk_0C1 != 0) {
+        if (w->targeted != 0) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -428,7 +428,7 @@ void Task_MapNiseriku_3(MapNiserikuWork* w) {
     ReleaseObjPalette(w->palette);
     ColliderUnregister(&w->collider);
 
-    if (w->unk_0C0 != 0) {
+    if (w->registered != 0) {
         FldObjUnregister(&w->obj);
     }
 
@@ -436,11 +436,11 @@ void Task_MapNiseriku_3(MapNiserikuWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-void func_080F6A60(MapMickeyWork* w) {
-    if (w->unk_0C0 != 0 && (GetKeysPressed() & A_BUTTON)) {
+void MapMickeyCheckTalk(MapMickeyWork* w) {
+    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= 0x1000;
 
-        switch (gUnk_0203C590.unk_00) {
+        switch (gMapFloorState.progress) {
         case 20:
             CreateCardMessageTask(&w->tasks, 0, 0x3F);
             break;
@@ -453,14 +453,14 @@ void func_080F6A60(MapMickeyWork* w) {
             break;
         }
 
-        w->update = func_080F6AD8;
+        w->update = MapMickeyWaitMessage;
     }
 }
 
-void func_080F6AD8(MapMickeyWork* w) {
-    if (func_080A42C8() == 0) {
+void MapMickeyWaitMessage(MapMickeyWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
-        w->update = func_080F6A60;
+        w->update = MapMickeyCheckTalk;
     }
 }
 
@@ -469,16 +469,16 @@ void Task_MapMickey_0(MapMickeyWork* w) {
 
     e->fieldPosition.x = 0x1C800;
     e->fieldPosition.y = 0xE000;
-    w->unk_0C2 = 0x801;
+    w->spriteFlags = 0x801;
     e->fieldPosition.z = 0;
-    e->fieldPosition.unk_0C = func_080DFF30(&e->fieldPosition);
-    e->fieldPosition.z = e->fieldPosition.unk_0C;
-    e->fieldPosition.y -= e->fieldPosition.unk_0C;
+    e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
+    e->fieldPosition.z = e->fieldPosition.ground;
+    e->fieldPosition.y -= e->fieldPosition.ground;
     e->angle = 0xAD;
-    e->unk_1A = 0x30;
-    e->unk_30 = 2;
-    w->unk_0C1 = 1;
-    w->update = func_080F6A60;
+    e->height = 0x30;
+    e->kind = 2;
+    w->visible = 1;
+    w->update = MapMickeyCheckTalk;
     w->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
     w->palette = LoadObjPalette(gMickeyPalette, 32);
     AnimInit(&w->anim, gMickeyFl00Anims, gMickeyFl00Frames);
@@ -488,17 +488,17 @@ void Task_MapMickey_0(MapMickeyWork* w) {
     FldObjRegister(e);
     TaskPoolInit(&w->tasks, 2);
     TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
-    w->unk_0C0 = 0;
+    w->targeted = 0;
     TaskPoolInit(&w->tasks2, 1);
     TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
 }
 
 s32 Task_MapMickey_1(MapMickeyWork* w) {
-    if ((u8)func_080E0390() != 0) {
-        w->unk_0C1 = 0;
+    if ((u8)IsMapInterrupted() != 0) {
+        w->visible = 0;
     } else {
-        w->unk_0C1 = 1;
-        w->unk_0C0 = func_080E03C0(&w->obj);
+        w->visible = 1;
+        w->targeted = IsFldObjTalkTarget(&w->obj);
         TaskPoolUpdate(&w->tasks);
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
@@ -518,17 +518,17 @@ void Task_MapMickey_2(MapMickeyWork* w) {
     s16 x;
     s16 y;
 
-    if (w->unk_0C1 != 0) {
+    if (w->visible != 0) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->unk_0C2, v);
-        w->obj.unk_3C = p->unk_0C;
-        w->obj.unk_3A = v + 1;
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->spriteFlags, v);
+        w->obj.shadowZ = p->ground;
+        w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->unk_0C0 != 0) {
+        if (w->targeted != 0) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -543,39 +543,39 @@ void Task_MapMickey_3(MapMickeyWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-void func_080F6D40(void) {
+void MapTutorialStartBattle(void) {
     gFieldState->flags |= 0x80;
-    gUnk_0203C7AC->unk_0E = 10;
-    gUnk_0203C7AC->flags &= ~0x4000;
-    gUnk_0203C7AC->flags |= 2;
+    gMapRoomState->battleId = 10;
+    gMapRoomState->flags &= ~0x4000;
+    gMapRoomState->flags |= 2;
 }
 
-void func_080F6D70(MapTutorialWork* w) {
+void MapTutorialWaitStart(MapTutorialWork* w) {
     u32 flags;
 
-    if (gFieldState->unk_68 == 0) {
+    if (gFieldState->lockonTarget == 0) {
         flags = gFieldState->flags;
 
-        if (!(flags & 0x2000) && !(gUnk_0203C7AC->flags & 0x2000) && (gGameState.progression.unk_82 & 0x10)) {
-            gUnk_0203C7AC->flags |= 0x4000;
+        if (!(flags & 0x2000) && !(gMapRoomState->flags & 0x2000) && (gGameState.progression.unk_82 & 0x10)) {
+            gMapRoomState->flags |= 0x4000;
             gFieldState->flags = flags | 0x1000;
             CreateCardMessageTask(&w->tasks, 0, 0x6A);
-            w->update = func_080F6DE8;
+            w->update = MapTutorialDropBarrel;
         }
     }
 }
 
-void func_080F6DE8(MapTutorialWork* w) {
-    if (func_080A42C8() == 0) {
+void MapTutorialDropBarrel(MapTutorialWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         AnimState* a;
 
-        func_080E5354(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
+        MapPickFreeFloorPosInView(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
         w->obj.fieldPosition.z = 0;
-        w->obj.fieldPosition.unk_0C = func_080DFF30(&w->obj.fieldPosition);
-        w->obj.fieldPosition.y -= w->obj.fieldPosition.unk_0C;
-        w->obj.fieldPosition.z = w->obj.fieldPosition.unk_0C - 0xA000;
-        w->obj.unk_1A = 24;
-        w->obj.unk_10 = 2;
+        w->obj.fieldPosition.ground = GetFldPosFloor(&w->obj.fieldPosition);
+        w->obj.fieldPosition.y -= w->obj.fieldPosition.ground;
+        w->obj.fieldPosition.z = w->obj.fieldPosition.ground - 0xA000;
+        w->obj.height = 24;
+        w->obj.speed = 2;
         w->tiles = AllocObjTiles(0x400, gUnk_09858B3C);
         w->palette = LoadObjPalette(&gUnk_099910C4[0x220], 32);
         a = &w->anim;
@@ -584,76 +584,76 @@ void func_080F6DE8(MapTutorialWork* w) {
         w->gfx = AnimGetGfx(a);
         ColliderInit(&w->collider, 6, 12, 24);
         ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
-        w->unk_0C1 = 1;
+        w->shadowVisible = 1;
         TaskCreate(&w->tasks2, &gTaskDescFldShadow, &w->obj);
-        w->unk_0C0 = 1;
-        w->update = func_080F6EBC;
+        w->visible = 1;
+        w->update = MapTutorialBarrelFall;
     }
 }
 
-void func_080F6EBC(MapTutorialWork* w) {
+void MapTutorialBarrelFall(MapTutorialWork* w) {
     MapTutorialWork* p = w;
 
-    w->obj.unk_10 += 0x38;
-    w->obj.fieldPosition.z += w->obj.unk_10;
+    w->obj.speed += 0x38;
+    w->obj.fieldPosition.z += w->obj.speed;
 
-    if (w->obj.fieldPosition.z > w->obj.fieldPosition.unk_0C) {
+    if (w->obj.fieldPosition.z > w->obj.fieldPosition.ground) {
         gFieldState->flags &= ~0x1000;
         m4aSongNumStart(SONG_SND_215);
-        w->obj.fieldPosition.z = w->obj.fieldPosition.unk_0C;
-        w->obj.unk_10 = 0;
-        w->unk_0C1 = 0;
-        w->update = func_080F6F1C;
+        w->obj.fieldPosition.z = w->obj.fieldPosition.ground;
+        w->obj.speed = 0;
+        w->shadowVisible = 0;
+        w->update = MapTutorialWaitBarrelHit;
     }
     ColliderSetPosition(&p->collider, p->obj.fieldPosition.x, p->obj.fieldPosition.y, p->obj.fieldPosition.z);
 }
 
-void func_080F6F1C(MapTutorialWork* w) {
-    if (func_080E02E0(&w->obj.fieldPosition, 8, 8)) {
+void MapTutorialWaitBarrelHit(MapTutorialWork* w) {
+    if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 8)) {
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
-        gUnk_0203C7AC->flags &= ~0x20;
-        func_080E8FB8(0, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
+        gMapRoomState->flags &= ~0x20;
+        TryCreateRandomPrzCard(0, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
         AnimStart(&w->anim, 1, 0);
-        w->update = func_080F6F90;
+        w->update = MapTutorialBarrelBreak;
         ColliderUnregister(&w->collider);
     }
 }
 
-void func_080F6F90(MapTutorialWork* w) {
+void MapTutorialBarrelBreak(MapTutorialWork* w) {
     if (AnimIsFinished(&w->anim)) {
-        w->update = func_080F6FC4;
+        w->update = MapTutorialWaitPrizeCard;
     } else {
         w->gfx = AnimUpdate(&w->anim);
     }
 }
 
-void func_080F6FC4(MapTutorialWork* w) {
-    if ((gUnk_0203C7AC->flags & 0x10) == 0) {
+void MapTutorialWaitPrizeCard(MapTutorialWork* w) {
+    if ((gMapRoomState->flags & 0x10) == 0) {
         gGameState.progression.unk_82 |= 0x2000;
         gFieldState->flags |= 0x1000;
         CreateCardMessageTask(&w->tasks, 0, 0x6B);
-        w->update = func_080F7024;
+        w->update = MapTutorialSpawnEnemy;
     }
 }
 
-void func_080F7024(MapTutorialWork* w) {
-    if (func_080A42C8() == 0) {
+void MapTutorialSpawnEnemy(MapTutorialWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         AnimState* a;
         u8 v;
 
-        func_080E5354(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
+        MapPickFreeFloorPosInView(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
         w->obj.fieldPosition.z = 0;
-        w->obj.fieldPosition.unk_0C = func_080DFF30(&w->obj.fieldPosition);
-        w->obj.fieldPosition.y -= w->obj.fieldPosition.unk_0C;
-        w->obj.fieldPosition.z = w->obj.fieldPosition.unk_0C;
-        w->obj.unk_1A = 16;
+        w->obj.fieldPosition.ground = GetFldPosFloor(&w->obj.fieldPosition);
+        w->obj.fieldPosition.y -= w->obj.fieldPosition.ground;
+        w->obj.fieldPosition.z = w->obj.fieldPosition.ground;
+        w->obj.height = 16;
         v = 0;
 
         if (gFieldState->actor.fieldPosition.x > w->obj.fieldPosition.x) {
             v = 1;
         }
-        w->unk_0C2 = v;
+        w->flip = v;
         w->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
         w->palette = LoadObjPalette(&gUnk_08F691E4[0x5C0], 32);
         a = &w->anim;
@@ -663,64 +663,64 @@ void func_080F7024(MapTutorialWork* w) {
         ColliderInit(&w->collider, 3, 8, 16);
         ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
         ColliderSetDisabled(&w->collider, 1);
-        w->update = func_080F70F4;
+        w->update = MapTutorialEnemyAppear;
     }
 }
 
-void func_080F70F4(MapTutorialWork* w) {
+void MapTutorialEnemyAppear(MapTutorialWork* w) {
     AnimState* a = &w->anim;
 
     if (AnimIsFinished(a)) {
         AnimChangeWithTables(a, 0, 1, gEmy00L00Anims, gEmy00L00Frames);
         SetObjTileSource(w->tiles, gEmy00L00Tiles);
         CreateCardMessageTask(&w->tasks, 0, 0x6C);
-        w->update = func_080F7160;
+        w->update = MapTutorialWaitEnemyMessage;
     } else {
         w->gfx = AnimUpdate(a);
     }
 }
 
-void func_080F7160(MapTutorialWork* w) {
+void MapTutorialWaitEnemyMessage(MapTutorialWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (func_080A42C8() == 0) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
         ColliderSetDisabled(&w->collider, 0);
-        w->update = func_080F71AC;
+        w->update = MapTutorialEnemyUpdate;
     }
 }
 
-void func_080F71AC(MapTutorialWork* w) {
+void MapTutorialEnemyUpdate(MapTutorialWork* w) {
     AnimState* a = &w->anim;
 
     w->gfx = AnimUpdate(a);
 
-    if (func_080E02E0(&w->obj.fieldPosition, 8, 16)) {
-        gUnk_0203C7AC->flags |= 0x80;
-        gUnk_0203C7AC->flags |= 4;
+    if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 16)) {
+        gMapRoomState->flags |= 0x80;
+        gMapRoomState->flags |= 4;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
         m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         AnimChangeWithTables(a, 0, 1, gEmy00L09Anims, gEmy00L09Frames);
         SetObjTileSource(w->tiles, gEmy00L09Tiles);
-        w->update = func_080F7284;
-    } else if (w->collider.unk_2C != 0) {
-        if (!(gUnk_0203C7AC->flags & 4) && w->collider.unk_34 == 1) {
+        w->update = MapTutorialEnemyHit;
+    } else if (w->collider.colliding != 0) {
+        if (!(gMapRoomState->flags & 4) && w->collider.otherType == 1) {
             ColliderSetDisabled(&w->collider, 1);
-            func_080F6D40();
+            MapTutorialStartBattle();
         } else {
-            w->obj.fieldPosition.x += w->collider.unk_38;
-            w->obj.fieldPosition.y += w->collider.unk_3C;
+            w->obj.fieldPosition.x += w->collider.pushX;
+            w->obj.fieldPosition.y += w->collider.pushY;
         }
     }
 }
 
-void func_080F7284(MapTutorialWork* w) {
+void MapTutorialEnemyHit(MapTutorialWork* w) {
     AnimState* a = &w->anim;
 
     if (AnimIsFinished(a)) {
         ColliderSetDisabled(&w->collider, 1);
         gGameState.flags |= 4;
-        func_080F6D40();
+        MapTutorialStartBattle();
     } else {
         w->gfx = AnimUpdate(a);
     }
@@ -731,22 +731,22 @@ void Task_MapTutorial_0(MapTutorialWork* w) {
 
     TaskPoolInit(&w->tasks, 1);
     TaskPoolInit(&w->tasks2, 1);
-    gUnk_0203C7AC->flags |= 0x20;
+    gMapRoomState->flags |= 0x20;
     w->tiles = 0;
     w->palette = 0;
-    w->unk_0C2 = 0;
+    w->flip = 0;
     t = gGameState.progression.unk_82 & 0x2000;
 
     if (t == 0) {
-        w->unk_0C1 = 0;
-        w->unk_0C0 = 0;
-        w->update = func_080F6D70;
+        w->shadowVisible = 0;
+        w->visible = 0;
+        w->update = MapTutorialWaitStart;
     } else {
         gFieldState->flags |= 0x1000;
         TaskCreate(&w->tasks2, &gTaskDescFldShadow, &w->obj);
-        w->unk_0C0 = 1;
-        w->unk_0C1 = 1;
-        w->update = func_080F7024;
+        w->visible = 1;
+        w->shadowVisible = 1;
+        w->update = MapTutorialSpawnEnemy;
     }
 }
 
@@ -774,12 +774,12 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
 
     TaskPoolDraw(&w->tasks);
 
-    if (w->unk_0C0 != 0) {
+    if (w->visible != 0) {
         x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         k = w->obj.fieldPosition.y >> 8;
         y = k + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        t = w->unk_0C2;
+        t = w->flip;
         flags = 0x800;
 
         if (t != 0) {
@@ -787,9 +787,9 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
         }
         DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, flags, v);
 
-        if (w->unk_0C1 != 0) {
-            w->obj.unk_3C = w->obj.fieldPosition.unk_0C;
-            w->obj.unk_3A = v + 1;
+        if (w->shadowVisible != 0) {
+            w->obj.shadowZ = w->obj.fieldPosition.ground;
+            w->obj.shadowPriority = v + 1;
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -804,7 +804,7 @@ void Task_MapTutorial_3(MapTutorialWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-s32 func_080F7488(FldPos* p, s32 lim) {
+s32 IsPlayerWithin(FldPos* p, s32 lim) {
     s32 dx;
     s32 dy;
 
@@ -824,12 +824,12 @@ s32 func_080F7488(FldPos* p, s32 lim) {
 }
 
 void func_080F74E8(MapStairWork* w) {
-    if ((u8)func_080F7488(&w->obj.fieldPosition, 0x800) != 0) {
-        if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
-            if (gUnk_0203C590.unk_06 == 0xFE) {
-                gUnk_0203C7AC->flags |= 0x100;
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800) != 0) {
+        if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
+            if (gMapFloorState.room == 0xFE) {
+                gMapRoomState->flags |= 0x100;
             } else {
-                gUnk_0203C7AC->flags |= 0x400;
+                gMapRoomState->flags |= 0x400;
             }
         }
     }
@@ -838,30 +838,30 @@ void func_080F74E8(MapStairWork* w) {
 void func_080F753C(MapStairWork* w) {
     s32 k = 0x800;
 
-    if ((u8)func_080F7488(&w->obj.fieldPosition, k) != 0) {
-        if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.unk_0C) {
-            if (gUnk_0203C590.unk_06 == 0xFE) {
-                gUnk_0203C7AC->flags |= k;
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k) != 0) {
+        if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
+            if (gMapFloorState.room == 0xFE) {
+                gMapRoomState->flags |= k;
             } else {
-                gUnk_0203C7AC->flags |= 0x200;
+                gMapRoomState->flags |= 0x200;
             }
         }
     }
 }
 
-void func_080F7594(MapStairWork* w) {
-    if ((u8)func_080F7488(&w->obj.fieldPosition, 0x3000) != 0) {
+void MapStairWaitApproach(MapStairWork* w) {
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x3000) != 0) {
         gFieldState->flags |= 0x1000;
-        gUnk_0203C7AC->flags |= 0x4000;
+        gMapRoomState->flags |= 0x4000;
         CreateCardMessageTask(&w->tasks, 0, 0xA7);
-        w->update = func_080F75E4;
+        w->update = MapStairWaitMessage;
     }
 }
 
-void func_080F75E4(MapStairWork* w) {
-    if (func_080A42C8() == 0) {
+void MapStairWaitMessage(MapStairWork* w) {
+    if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~0x1000;
-        gUnk_0203C7AC->flags &= ~0x4000;
+        gMapRoomState->flags &= ~0x4000;
         gGameState.progression.unk_82 |= 0x400;
         w->update = func_080F74E8;
     }
@@ -873,17 +873,17 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
     w->obj.angle = arg->angle;
     w->obj.fieldPosition.x = arg->fieldPosition.x;
     y = arg->fieldPosition.y;
-    w->obj.fieldPosition.unk_0C = 0;
+    w->obj.fieldPosition.ground = 0;
     w->obj.fieldPosition.z = 0;
     w->obj.fieldPosition.y = y;
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     w->tiles = LoadObjTiles(gUnk_08B1EA00, 0xE0);
-    w->unk_48 = 0;
+    w->visible = 0;
 
     switch (w->obj.angle) {
     case 0x2D:
-        if ((gGameState.progression.unk_82 & 0x400) == 0 && gUnk_0203C590.unk_06 == 0xFD) {
-            w->update = func_080F7594;
+        if ((gGameState.progression.unk_82 & 0x400) == 0 && gMapFloorState.room == 0xFD) {
+            w->update = MapStairWaitApproach;
         } else {
             w->update = func_080F74E8;
         }
@@ -910,7 +910,7 @@ void Task_MapStair_2(MapStairWork* w) {
 
     TaskPoolDraw(&w->tasks);
 
-    if (w->unk_48 == 1) {
+    if (w->visible == 1) {
         x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         y = (w->obj.fieldPosition.y >> 8) + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
         DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, 0x800, 0x101);
@@ -942,7 +942,7 @@ void Task_MapFaint_2(MapFaintWork* w) {
     u16 y;
 
     x = (e->fieldPosition.x >> 8) - (gFieldState->x >> 8);
-    y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - ((s16)e->unk_1A + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
+    y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - ((s16)e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, -0x1005 - (e->fieldPosition.y >> 8) * 4);
 }
 
@@ -954,25 +954,25 @@ void Task_MapFaint_3(MapFaintWork* w) {
 void Task_MapDmg_0(MapDmgWork* w) {
     s32 z = 0;
 
-    w->unk_08 = z;
+    w->visible = z;
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     w->tiles = LoadObjTiles(gUnk_08B1EA00, 224);
-    w->unk_0A = z;
-    w->unk_09 = 1;
+    w->timer = z;
+    w->enabled = 1;
 }
 
 s32 Task_MapDmg_1(MapDmgWork* w) {
-    if (w->unk_09 == 0) {
-        w->unk_08 = 0;
+    if (w->enabled == 0) {
+        w->visible = 0;
     } else {
-        if (gUnk_0203C7AC->unk_20 != 0 || (gUnk_0203C7AC->flags & 4)) {
-            w->unk_0A = 20;
+        if (gMapRoomState->attackActive != 0 || (gMapRoomState->flags & 4)) {
+            w->timer = 20;
         }
 
-        w->unk_08 = w->unk_0A != 0;
+        w->visible = w->timer != 0;
 
-        if (w->unk_0A != 0) {
-            w->unk_0A -= 1;
+        if (w->timer != 0) {
+            w->timer -= 1;
         }
     }
     return 1;
@@ -982,28 +982,28 @@ void Task_MapDmg_2(MapDmgWork* w) {
     s16 x;
     s16 y;
 
-    if (w->unk_08 == 0) {
+    if (w->visible == 0) {
         return;
     }
 
-    x = ((gUnk_0203C7AC->unk_24 - 0x1400) >> 8) - (gFieldState->x >> 8);
-    y = ((gUnk_0203C7AC->unk_28 - 0x1400) >> 8) + (gUnk_0203C7AC->unk_2C >> 8) - (gFieldState->y >> 8);
+    x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
+    y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, gUnk_08B1E974, w->tiles, w->palette, 0, 0x800, 0x101);
 
-    x = ((gUnk_0203C7AC->unk_24 + 0x1400) >> 8) - (gFieldState->x >> 8);
-    y = ((gUnk_0203C7AC->unk_28 - 0x1400) >> 8) + (gUnk_0203C7AC->unk_2C >> 8) - (gFieldState->y >> 8);
+    x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
+    y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, gUnk_08B1E97E, w->tiles, w->palette, 0, 0x800, 0x101);
 
-    x = ((gUnk_0203C7AC->unk_24 - 0x1400) >> 8) - (gFieldState->x >> 8);
-    y = ((gUnk_0203C7AC->unk_28 + 0x1400) >> 8) + (gUnk_0203C7AC->unk_2C >> 8) - (gFieldState->y >> 8);
+    x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
+    y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, gUnk_08B1E992, w->tiles, w->palette, 0, 0x800, 0x101);
 
-    x = ((gUnk_0203C7AC->unk_24 + 0x1400) >> 8) - (gFieldState->x >> 8);
-    y = ((gUnk_0203C7AC->unk_28 + 0x1400) >> 8) + (gUnk_0203C7AC->unk_2C >> 8) - (gFieldState->y >> 8);
+    x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
+    y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, gUnk_08B1E988, w->tiles, w->palette, 0, 0x800, 0x101);
 
-    x = ((gUnk_0203C7AC->unk_24) >> 8) - (gFieldState->x >> 8);
-    y = ((gUnk_0203C7AC->unk_28) >> 8) + (gUnk_0203C7AC->unk_2C >> 8) - (gFieldState->y >> 8);
+    x = ((gMapRoomState->attackX) >> 8) - (gFieldState->x >> 8);
+    y = ((gMapRoomState->attackY) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
     DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, 0x800, 0x101);
 }
 
@@ -1032,19 +1032,19 @@ void Task_MapFloor_0(MapFloorWork* w) {
     w->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
     w->palette = LoadObjPalette(gUnk_099910C4, 32);
     w->gfx = gUnk_09EF8DA4[0];
-    w->unk_0E = 120;
+    w->timer = 120;
 #ifdef VERSION_EU
     InitTextSlots(w->textSlots, 60);
 #else
     InitTextSlots(w->textSlots, 40);
 #endif
-    w->palette2 = _08066468(1);
+    w->palette2 = LoadTextPalette(1);
     w->textSlotCount = LoadTextSlots(GetFloorName(), w->textSlots);
-    w->unk_0C = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
+    w->textX = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
 }
 
 s32 Task_MapFloor_1(MapFloorWork* w) {
-    u16* p = &w->unk_0E;
+    u16* p = &w->timer;
 
     if (*p != 0) {
         (*p)--;
@@ -1055,7 +1055,7 @@ s32 Task_MapFloor_1(MapFloorWork* w) {
 
 void Task_MapFloor_2(MapFloorWork* w) {
     DrawSprite(120, 138, w->gfx, w->tiles, w->palette, 0, 0, 0x3C);
-    DrawTextSlots(w->unk_0C, 0x85, w->textSlots, w->palette2, 50, w->textSlotCount);
+    DrawTextSlots(w->textX, 0x85, w->textSlots, w->palette2, 50, w->textSlotCount);
 }
 
 void Task_MapFloor_3(MapFloorWork* w) {
@@ -1071,7 +1071,7 @@ void Task_MapFloor_3(MapFloorWork* w) {
     gFieldState->flags &= ~0x1000;
 }
 
-const u8 gUnk_0984C310[28] = {
+const u8 gGoofyTalkMessages[28] = {
     25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
     39, 40, 41, 42, 43, 44, 45, 46, 46, 46, 47, 47, 48, 48,
 };

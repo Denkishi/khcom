@@ -4,82 +4,82 @@
 
 void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
     work->dsd = arg;
-    work->x = (gUnk_0961A89E[0] << 8) + 0xDC00;
-    work->y = (gUnk_0961A8B0[0] << 8) + 0x16800;
+    work->x = (gBosDsdCircleOffsetsX[0] << 8) + 0xDC00;
+    work->y = (gBosDsdCircleOffsetsY[0] << 8) + 0x16800;
     work->z = 0;
-    work->unk_14 = 0;
-    work->unk_16 = 0;
-    work->unk_1A = 0;
-    work->unk_1C = 0;
-    work->unk_18 = 0;
+    work->paletteTimer = 0;
+    work->paletteFrame = 0;
+    work->frame = 0;
+    work->summonTimer = 0;
+    work->endTimer = 0;
     work->gfx = gUnk_09EF3C50[0];
 }
 
 u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
     DsdWork* d = work->dsd;
 
-    if (d->unk_334 == 8 || d->unk_334 == 0) {
-        if (work->unk_18 > 66) {
+    if (d->state == 8 || d->state == 0) {
+        if (work->endTimer > 66) {
             return 0;
         }
 
-        work->unk_18++;
+        work->endTimer++;
         return 1;
     }
 
-    switch (d->unk_350) {
+    switch (d->stateStep) {
     case 1:
-        work->unk_1A = work->dsd->unk_354 - 21;
-        work->gfx = gUnk_09EF3C50[work->unk_1A];
-        work->x = (gUnk_0961A89E[work->unk_1A] << 8) + 0xDC00;
-        work->y = (gUnk_0961A8B0[work->unk_1A] << 8) + 0x16800;
+        work->frame = work->dsd->bgFrame - 21;
+        work->gfx = gUnk_09EF3C50[work->frame];
+        work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
+        work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
     case 2:
         break;
     case 3:
-        work->unk_14++;
+        work->paletteTimer++;
 
-        if (work->unk_14 >= gUnk_0961A894[work->unk_16]) {
-            work->unk_14 = 0;
-            work->unk_16++;
+        if (work->paletteTimer >= gBosDsdCirclePaletteDurations[work->paletteFrame]) {
+            work->paletteTimer = 0;
+            work->paletteFrame++;
 
-            if (work->unk_16 > 7) {
-                work->unk_16 = 0;
+            if (work->paletteFrame > 7) {
+                work->paletteFrame = 0;
             }
 
             LoadObjPaletteBank(work->dsd->palette->index,
-                               &gUnk_096FB904[work->unk_16 * 32]);
+                               &gUnk_096FB904[work->paletteFrame * 32]);
         }
 
-        if (work->unk_1C == 60 || work->unk_1C == 110) {
-            func_0801BDDC(0, work->x + ((GetRandom() % 101 - 50) << 8),
+        if (work->summonTimer == 60 || work->summonTimer == 110) {
+            SpawnEnemy(0, work->x + ((GetRandom() % 101 - 50) << 8),
                           work->y + ((GetRandom() % 17 - 8) << 8), 0);
         }
 
-        work->unk_1C++;
+        work->summonTimer++;
         break;
     case 4:
         LoadObjPaletteBank(work->dsd->palette->index, gUnk_096FB904);
-        work->unk_1A = work->dsd->unk_354 - 21;
+        work->frame = work->dsd->bgFrame - 21;
         break;
     case 5:
-        work->unk_1A = work->dsd->unk_354 - 21;
-        work->gfx = gUnk_09EF3C50[work->unk_1A];
-        work->x = (gUnk_0961A89E[work->unk_1A] << 8) + 0xDC00;
-        work->y = (gUnk_0961A8B0[work->unk_1A] << 8) + 0x16800;
+        work->frame = work->dsd->bgFrame - 21;
+        work->gfx = gUnk_09EF3C50[work->frame];
+        work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
+        work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
     case 6:
-        work->unk_1A = 0;
-        work->gfx = gUnk_09EF3C50[work->unk_1A];
-        work->x = (gUnk_0961A89E[work->unk_1A] << 8) + 0xDC00;
-        work->y = (gUnk_0961A8B0[work->unk_1A] << 8) + 0x16800;
+        work->frame = 0;
+        work->gfx = gUnk_09EF3C50[work->frame];
+        work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
+        work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
     case 7:
         return 0;
     }
 
-    if (work->dsd->unk_334 == 11) {
-        if (func_080128EC() == 1) {
+    if (work->dsd->state == 11) {
+        if (BgFxIsActive() == 1) {
             BgAnimStop();
         }
 
@@ -109,52 +109,52 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
     work->unk_14 = 0;
     work->unk_18 = 0;
     work->angle = 0xF4;
-    work->unk_29 = 0xF4;
-    work->unk_2C = 0x800;
+    work->targetAngle = 0xF4;
+    work->speed = 0x800;
     work->unk_30 = 0x19;
     work->state = 0;
     work->unk_36 = 0;
-    work->unk_38 = 0;
-    work->unk_3C = 0xF;
+    work->timer = 0;
+    work->chargeTime = 0xF;
     work->unk_3A = 0x3C;
-    work->unk_48 = 0;
-    work->vx = gSineTable[work->angle] * work->unk_2C >> 8;
+    work->visible = 0;
+    work->vx = gSineTable[work->angle] * work->speed >> 8;
     work->vy = 0;
-    work->vz = -gSineTable[work->angle + 0x40] * work->unk_2C >> 8;
+    work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
     work->gfx = gUnk_08B22CBC;
 }
 
 u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
     switch (work->state) {
     case 0:
-        func_08013EDC(work->x, work->y, work->z, 0x100);
+        BgFxStartEnemySpawn(work->x, work->y, work->z, 0x100);
         work->state++;
         break;
     case 1:
-        if (func_080128EC() != 0) {
+        if (BgFxIsActive() != 0) {
             break;
         }
 
-        func_08014588(work->x, work->y, work->z, 0x100, work->unk_3C, 0);
+        BgFxStartDsdEnergy(work->x, work->y, work->z, 0x100, work->chargeTime, 0);
         m4aSongNumStart(SONG_SND_701);
         work->state++;
         break;
     case 2:
-        work->unk_38++;
+        work->timer++;
 
-        if (work->unk_38 >= work->unk_3C) {
-            work->unk_48 = 1;
-            work->unk_38 = 0;
+        if (work->timer >= work->chargeTime) {
+            work->visible = 1;
+            work->timer = 0;
             work->unk_36 = 10;
-            work->vy = (gBtlWork->unk_134 - work->y) / 15;
+            work->vy = (gBtlWork->targetY - work->y) / 15;
             work->state++;
         }
         break;
     case 3:
-        func_080C4C54(work);
+        BosDsdEnergy1UpdateArc(work);
         break;
     case 4:
-        func_080C4CCC(work);
+        BosDsdEnergy1UpdateHoming(work);
         break;
     case 5:
         BgFxAddPosition(work->vx, work->vy, work->vz);
@@ -164,17 +164,17 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         break;
     }
 
-    if (func_08011F78(0x102, work->x, work->y, work->z, 16, 16, 16) == 1) {
-        func_08014790(0);
+    if (ApplyAttackBox(0x102, work->x, work->y, work->z, 16, 16, 16) == 1) {
+        BgFxSignalEnd(0);
         m4aSongNumStart(SONG_EF_RAC_BEEMENTRY);
-        work->unk_48 = 0;
+        work->visible = 0;
         return 0;
     }
 
     if (work->z >= -0x800 || work->x <= -0x2000 || work->x > 0x11FFF ||
-        work->dsd->unk_334 == 8 || work->dsd->unk_334 == 11) {
-        func_08014790(0);
-        work->unk_48 = 0;
+        work->dsd->state == 8 || work->dsd->state == 11) {
+        BgFxSignalEnd(0);
+        work->visible = 0;
         return 0;
     }
 
@@ -188,7 +188,7 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
     s16 x;
     s16 y;
 
-    if (work->unk_48 == 1) {
+    if (work->visible == 1) {
         if (work->z >= 0 && gBtlWork->scale == 0x100) {
             affine = 0;
         } else {
@@ -215,38 +215,38 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
 void task_bos_dsd_energy1_3(void) {
 }
 
-void func_080C4C54(DsdEnergy1Work* work) {
-    work->vx = gSineTable[work->angle] * work->unk_2C >> 8;
-    work->vz = -gSineTable[work->angle + 0x40] * work->unk_2C >> 8;
-    work->unk_2C -= 76;
+void BosDsdEnergy1UpdateArc(DsdEnergy1Work* work) {
+    work->vx = gSineTable[work->angle] * work->speed >> 8;
+    work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
+    work->speed -= 76;
     work->angle -= 3;
     work->x += work->vx;
     work->y += work->vy;
     work->z += work->vz;
     BgFxAddPosition(work->vx, work->vy, work->vz);
 
-    if ((s16)work->unk_38 > 15) {
+    if ((s16)work->timer > 15) {
         work->state++;
     } else {
-        work->unk_38++;
+        work->timer++;
     }
 }
 
-void func_080C4CCC(DsdEnergy1Work* work) {
+void BosDsdEnergy1UpdateHoming(DsdEnergy1Work* work) {
     u16 d;
 
-    if (work->unk_40 > 0) {
-        work->unk_40 = 0;
-        work->unk_29 = GetAngle(work->x, work->z, gBtlWork->unk_130, gBtlWork->unk_138);
+    if (work->retargetTimer > 0) {
+        work->retargetTimer = 0;
+        work->targetAngle = GetAngle(work->x, work->z, gBtlWork->targetX, gBtlWork->targetZ);
 
-        if (work->unk_29 >= work->angle) {
-            d = work->unk_29 - work->angle;
+        if (work->targetAngle >= work->angle) {
+            d = work->targetAngle - work->angle;
 
             if ((s16)d > 10) {
                 d = 10;
             }
         } else {
-            d = work->unk_29 - work->angle;
+            d = work->targetAngle - work->angle;
 
             if ((s16)d < -10) {
                 d = -10;
@@ -254,13 +254,13 @@ void func_080C4CCC(DsdEnergy1Work* work) {
         }
 
         work->angle += d;
-        work->vx = gSineTable[work->angle] * work->unk_2C >> 8;
+        work->vx = gSineTable[work->angle] * work->speed >> 8;
         work->vy = 0;
-        work->vz = -gSineTable[work->angle + 0x40] * work->unk_2C >> 8;
+        work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
     }
 
-    work->unk_40++;
-    work->unk_2C += 25;
+    work->retargetTimer++;
+    work->speed += 25;
     BgFxAddPosition(work->vx, work->vy, work->vz);
     work->x += work->vx;
     work->y += work->vy;
@@ -274,29 +274,29 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     work->z = -0x2C00;
     work->state = 0;
     work->unk_2E = 0;
-    work->unk_30 = 0;
-    work->unk_32 = 0xF;
-    work->unk_10 = 0x80;
-    work->unk_14 = 0x80;
+    work->timer = 0;
+    work->chargeTime = 0xF;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
     work->vx = 0;
     work->vy = 0;
     work->vz = -0x500;
-    work->unk_34 = 0;
-    work->unk_3C = 0;
+    work->dropCount = 0;
+    work->visible = 0;
     work->gfx = gUnk_08B22CBC;
-    func_08014588(work->x, work->y, work->z, work->unk_10, work->unk_32, 0);
+    BgFxStartDsdEnergy(work->x, work->y, work->z, work->scaleX, work->chargeTime, 0);
     m4aSongNumStart(SONG_SND_704);
 
-    switch (work->dsd->unk_35A) {
+    switch (work->dsd->hpPhase) {
     case 1:
-        work->unk_35 = 5;
+        work->dropTotal = 5;
         break;
     case 2:
-        work->unk_35 = 7;
+        work->dropTotal = 7;
         break;
     case 0:
     default:
-        work->unk_35 = 3;
+        work->dropTotal = 3;
         break;
     }
 }
@@ -306,15 +306,15 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
 
     switch (work->state) {
     case 0:
-        func_080147C8(work->unk_10, work->unk_14);
-        work->unk_10 += 25;
-        work->unk_14 += 25;
+        BgFxSetScale(work->scaleX, work->scaleY);
+        work->scaleX += 25;
+        work->scaleY += 25;
 
-        if (work->unk_30 >= work->unk_32) {
-            func_0802F274(work->x, work->y + work->z);
+        if (work->timer >= work->chargeTime) {
+            BtlMapSetCameraTarget(work->x, work->y + work->z);
             work->state++;
         } else {
-            work->unk_30++;
+            work->timer++;
         }
         break;
     case 1:
@@ -322,22 +322,22 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->x += work->vx;
         work->y += work->vy;
         work->z += work->vz;
-        func_0802F274(work->x, work->y + work->z);
+        BtlMapSetCameraTarget(work->x, work->y + work->z);
 
         if (work->z <= -0xF000) {
             work->state++;
         }
         break;
     case 2:
-        func_08017F70(work->x, work->y, work->z, 0x103);
+        BgFxStartMahluxiaGround(work->x, work->y, work->z, 0x103);
         m4aSongNumStart(SONG_SND_705);
-        func_0802F274(work->x, work->y + work->z);
+        BtlMapSetCameraTarget(work->x, work->y + work->z);
         work->state++;
         break;
     case 3:
-        func_0802F274(work->x, work->y + work->z);
+        BtlMapSetCameraTarget(work->x, work->y + work->z);
 
-        if (func_080128EC() == 0) {
+        if (BgFxIsActive() == 0) {
             work->state++;
         }
         break;
@@ -355,34 +355,34 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         work->y = gBtlWork->actor->y - 0x2400 + GetRandom() % 0x4001;
         work->z = -0xF000;
         work->vz = 0x600;
-        func_08014588(work->x, work->y, work->z, 0x100, work->unk_32, 0);
-        work->unk_3C = 1;
-        work->unk_30 = 0;
+        BgFxStartDsdEnergy(work->x, work->y, work->z, 0x100, work->chargeTime, 0);
+        work->visible = 1;
+        work->timer = 0;
         work->state++;
         break;
     case 6:
         BgFxAddPosition(0, 0, work->vz);
         work->z += work->vz;
 
-        if (func_08011F78(0x104, work->x, work->y, work->z, 16, 16, 16) == 1) {
+        if (ApplyAttackBox(0x104, work->x, work->y, work->z, 16, 16, 16) == 1) {
             m4aSongNumStart(SONG_BTL_RK_LIMITENTRY);
-            func_08014790(0);
-            work->unk_3C = 0;
+            BgFxSignalEnd(0);
+            work->visible = 0;
             work->state = 7;
         }
 
         if (work->z >= -0x800) {
-            func_08014790(0);
+            BgFxSignalEnd(0);
             m4aSongNumStart(SONG_SND_703);
-            work->unk_3C = 0;
+            work->visible = 0;
             work->state = 7;
         }
 
-        work->unk_30++;
+        work->timer++;
         break;
     case 7:
-        if (work->unk_34 >= (s8)work->unk_35 - 1) {
-            if (func_080128EC() == 0) {
+        if (work->dropCount >= (s8)work->dropTotal - 1) {
+            if (BgFxIsActive() == 0) {
                 BgAnimStop();
                 FadeToOriginal(0, 8);
                 work->state++;
@@ -391,25 +391,25 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
             return 1;
         }
 
-        if (work->unk_30 > 49) {
-            work->unk_30 = 0;
-            work->unk_34++;
+        if (work->timer > 49) {
+            work->timer = 0;
+            work->dropCount++;
             work->state = 5;
         } else {
-            work->unk_30++;
+            work->timer++;
         }
         break;
     default:
         return 0;
     }
 
-    if (work->dsd->unk_334 == 8 || work->dsd->unk_334 == 11) {
-        if (func_080128EC() == 1) {
+    if (work->dsd->state == 8 || work->dsd->state == 11) {
+        if (BgFxIsActive() == 1) {
             BgAnimStop();
             FadeToOriginal(0, 8);
         }
 
-        work->unk_3C = 0;
+        work->visible = 0;
         return 0;
     }
 
@@ -423,7 +423,7 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
     s16 x;
     s16 y;
 
-    if (work->unk_3C == 1) {
+    if (work->visible == 1) {
         if (work->z >= 0 && gBtlWork->scale == 0x100) {
             affine = 0;
         } else {
@@ -450,11 +450,11 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
 void task_bos_dsd_energy2_3(void) {
 }
 
-const s8 gUnk_0961A894[10] = { 6, 12, 10, 9, 7, 8, 9, 10, 0, 0 };
+const s8 gBosDsdCirclePaletteDurations[10] = { 6, 12, 10, 9, 7, 8, 9, 10, 0, 0 };
 
-const s16 gUnk_0961A89E[9] = { -97, -98, -98, -94, -92, -88, -82, 0, 0 };
+const s16 gBosDsdCircleOffsetsX[9] = { -97, -98, -98, -94, -92, -88, -82, 0, 0 };
 
-const s16 gUnk_0961A8B0[10] = { 2, 2, 2, 0, 0, 0, -1, 0, 0, 0 };
+const s16 gBosDsdCircleOffsetsY[10] = { 2, 2, 2, 0, 0, 0, -1, 0, 0, 0 };
 
 TaskDesc gTaskDescBosDsdCircle = {
     "task_bos_dsd_circle",

@@ -40,7 +40,7 @@ typedef struct EvtShadowWork {
 extern u8 gUnk_08F69BE4[];
 extern EventState* gEventState;
 
-void func_0801CD94(EvtObj* obj, s32 a);
+void EvtObjSetGroundZ(EvtObj* obj, s32 a);
 void EvtObjChangeAnim(EvtObjWork* work);
 
 #endif /* GUARD_EVT_H */

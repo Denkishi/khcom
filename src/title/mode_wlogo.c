@@ -13,8 +13,8 @@
 #include "battle_backgrounds.h"
 #include "link_menus.h"
 
-void func_080B4154(void);
-void func_080B4210(u8 a);
+void WLogoInitWorldSelect(void);
+void WLogoStartLogo(u8 a);
 
 u8* gWorldNames[13] = {
 #if defined(VERSION_US)
@@ -62,7 +62,7 @@ u8* gWorldNames[13] = {
 #endif
 };
 
-u8 gUnk_09EF15FC[13] = {
+u8 gWLogoWorldIds[13] = {
     4,
     5,
     6,
@@ -78,55 +78,55 @@ u8 gUnk_09EF15FC[13] = {
     12,
 };
 
-static u8 gUnk_02034B58;
-static s8 gUnk_02034B59;
-static u8 gUnk_02034B5A;
-static u8 gUnk_02034B5B;
+static u8 sWLogoState;
+static s8 sWLogoWorld;
+static u8 sWLogoTimer;
+static u8 sWLogoNameLength;
 #ifdef VERSION_EU
-static TextSlot gUnk_02034B60[80];
+static TextSlot sWLogoNameSlots[80];
 #else
-static TextSlot gUnk_02034B60[20];
+static TextSlot sWLogoNameSlots[20];
 #endif
-static struct ObjPalette* gUnk_02034C00;
-static TaskPool gUnk_02034C08;
-static Task* gUnk_02034C1C;
-static TaskPool gUnk_02034C20;
-static Task* gUnk_02034C34;
+static struct ObjPalette* sWLogoNamePalette;
+static TaskPool sModeWLogoTasks;
+static Task* sModeWLogoTask;
+static TaskPool sTaskWLogoTasks;
+static Task* sTaskWLogoTask;
 
 void mode_wLogo_0(s32 arg) {
-    gUnk_02034B59 = arg;
-    func_080B4154();
+    sWLogoWorld = arg;
+    WLogoInitWorldSelect();
 }
 
 void mode_wLogo_1(void) {
     u8* p;
 
-    switch (gUnk_02034B58) {
+    switch (sWLogoState) {
     case 0:
-        DrawTextSlots(35, 75, gUnk_02034B60, gUnk_02034C00, 20, gUnk_02034B5B);
+        DrawTextSlots(35, 75, sWLogoNameSlots, sWLogoNamePalette, 20, sWLogoNameLength);
 
         if (GetKeysPressed() & DPAD_LEFT) {
-            gUnk_02034B59--;
-            if (gUnk_02034B59 < 0) {
-                gUnk_02034B59 = 12;
+            sWLogoWorld--;
+            if (sWLogoWorld < 0) {
+                sWLogoWorld = 12;
             }
 #ifdef VERSION_EU
-            gUnk_02034B5B = LoadTextSlots(eu_0805E924(gWorldNames[gUnk_02034B59]), gUnk_02034B60);
+            sWLogoNameLength = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-            gUnk_02034B5B = LoadTextSlots(gWorldNames[gUnk_02034B59], gUnk_02034B60);
+            sWLogoNameLength = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
         }
 
         if (GetKeysPressed() & DPAD_RIGHT) {
-            gUnk_02034B59++;
-            if (gUnk_02034B59 > 12) {
-                gUnk_02034B59 = 0;
+            sWLogoWorld++;
+            if (sWLogoWorld > 12) {
+                sWLogoWorld = 0;
             }
-            p = &gUnk_02034B5B;
+            p = &sWLogoNameLength;
 #ifdef VERSION_EU
-            *p = LoadTextSlots(eu_0805E924(gWorldNames[gUnk_02034B59]), gUnk_02034B60);
+            *p = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-            *p = LoadTextSlots(gWorldNames[gUnk_02034B59], gUnk_02034B60);
+            *p = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
         }
 
@@ -134,7 +134,7 @@ void mode_wLogo_1(void) {
             FadeStartOut(0, 16);
             DisableBg(0);
             DisableBg(1);
-            gUnk_02034B58++;
+            sWLogoState++;
         }
 
         if (GetKeysPressed() & B_BUTTON) {
@@ -142,38 +142,38 @@ void mode_wLogo_1(void) {
         }
         break;
     case 1:
-        func_080B4210(gUnk_09EF15FC[gUnk_02034B59]);
-        gUnk_02034B58++;
+        WLogoStartLogo(gWLogoWorldIds[sWLogoWorld]);
+        sWLogoState++;
         break;
     case 2:
-        if (IsTaskActive(gUnk_02034C1C)) {
-            TaskPoolUpdate(&gUnk_02034C08);
-            TaskPoolDraw(&gUnk_02034C08);
+        if (IsTaskActive(sModeWLogoTask)) {
+            TaskPoolUpdate(&sModeWLogoTasks);
+            TaskPoolDraw(&sModeWLogoTasks);
         } else {
-            gUnk_02034B58++;
+            sWLogoState++;
         }
         break;
     case 3:
-        gUnk_02034B5A++;
-        if (gUnk_02034B5A > 10) {
-            ModeRequest(&gModeWLogo, gUnk_02034B59);
+        sWLogoTimer++;
+        if (sWLogoTimer > 10) {
+            ModeRequest(&gModeWLogo, sWLogoWorld);
         }
         break;
     }
 }
 
 void mode_wLogo_2(void) {
-    FreeTextSlots(gUnk_02034B60, 20);
-    ReleaseObjPalette(gUnk_02034C00);
+    FreeTextSlots(sWLogoNameSlots, 20);
+    ReleaseObjPalette(sWLogoNamePalette);
 
-    if (gUnk_02034B58 != 0) {
-        if (gUnk_02034B58 == 3) {
-            TaskPoolDestroy(&gUnk_02034C08);
+    if (sWLogoState != 0) {
+        if (sWLogoState == 3) {
+            TaskPoolDestroy(&sModeWLogoTasks);
         }
     }
 }
 
-void func_080B4154(void) {
+void WLogoInitWorldSelect(void) {
     u8* p;
     FadeStartIn(0, 16);
     SetBgMode0();
@@ -184,19 +184,19 @@ void func_080B4154(void) {
     LoadBgMap(1, gUnk_096F5464, 0x800);
     DisableBg(0);
     EnableBg(1);
-    gUnk_02034B58 = 0;
-    gUnk_02034B5A = 0;
-    InitTextSlots(gUnk_02034B60, 20);
-    p = &gUnk_02034B5B;
+    sWLogoState = 0;
+    sWLogoTimer = 0;
+    InitTextSlots(sWLogoNameSlots, 20);
+    p = &sWLogoNameLength;
 #ifdef VERSION_EU
-    *p = LoadTextSlots(eu_0805E924(gWorldNames[gUnk_02034B59]), gUnk_02034B60);
+    *p = LoadTextSlots(eu_0805E924(gWorldNames[sWLogoWorld]), sWLogoNameSlots);
 #else
-    *p = LoadTextSlots(gWorldNames[gUnk_02034B59], gUnk_02034B60);
+    *p = LoadTextSlots(gWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
-    gUnk_02034C00 = LoadObjPalette(gUnk_096FBCC4, 32);
+    sWLogoNamePalette = LoadObjPalette(gUnk_096FBCC4, 32);
 }
 
-void func_080B4210(u8 a) {
+void WLogoStartLogo(u8 a) {
     FadeStartIn(0, 16);
     SetBgMode1();
     SetupBg(0, 0, 7, 14);
@@ -207,7 +207,7 @@ void func_080B4210(u8 a) {
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
     SetBgSize(2, 0x8000);
-    TaskPoolInit(&gUnk_02034C08, 2);
+    TaskPoolInit(&sModeWLogoTasks, 2);
 
     switch (a) {
     case 4:
@@ -218,7 +218,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF2384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoWon, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoWon, 0);
         break;
     case 5:
         LoadBgTiles(2, gUnk_08C8C824, 0x4000);
@@ -228,7 +228,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF4384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoMons, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoMons, 0);
         break;
     case 6:
         LoadBgTiles(2, gUnk_08C94824, 0x4000);
@@ -238,7 +238,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF6384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoHwt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHwt, 0);
         break;
     case 2:
         LoadBgTiles(2, gUnk_08C88824, 0x4000);
@@ -248,7 +248,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF3384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoAtl, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAtl, 0);
         break;
     case 7:
         LoadBgTiles(2, gUnk_08C98824, 0x3EC0);
@@ -258,7 +258,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF7384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoNvl, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoNvl, 0);
         break;
     case 3:
         LoadBgTiles(2, gUnk_08C7C824, 0x4000);
@@ -268,7 +268,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF0384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoCol, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoCol, 0);
         break;
     case 8:
         LoadBgTiles(2, gUnk_08CA06E4, 0x4000);
@@ -278,7 +278,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF9384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoHlw, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHlw, 0);
         break;
     case 9:
         LoadBgTiles(2, gUnk_08C9C6E4, 0x4000);
@@ -288,7 +288,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF8384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoDil, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoDil, 0);
         break;
     case 1:
         LoadBgTiles(2, gUnk_08C90824, 0x4000);
@@ -298,7 +298,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF5384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoAgr, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAgr, 0);
         break;
     case 10:
         LoadBgTiles(2, gUnk_08C78824, 0x4000);
@@ -308,7 +308,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EEF384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoTvt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTvt, 0);
         break;
     case 0:
         LoadBgTiles(2, gUnk_08C84824, 0x4000);
@@ -318,7 +318,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF2384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoPoo, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoPoo, 0);
         break;
     case 11:
         LoadBgTiles(2, gUnk_08CA46E4, 0x4000);
@@ -328,7 +328,7 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EFA384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoTt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTt, 0);
         break;
     case 12:
         LoadBgTiles(2, gUnk_08CA86E4, 0x4000);
@@ -338,86 +338,86 @@ void func_080B4210(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EFB384, 0x1000);
 #endif
-        gUnk_02034C1C = TaskCreate(&gUnk_02034C08, &gTaskDescWlogoBks, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoBks, 0);
         break;
     }
     SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
 }
 
 void task_wLogo_0(WLogoTaskWork* work, u8 arg) {
-    work->unk_00 = arg;
-    work->unk_04 = -0x5A00;
+    work->worldId = arg;
+    work->cameraOffsetY = -0x5A00;
     work->timer = 0;
-    TaskPoolInit(&gUnk_02034C20, 2);
+    TaskPoolInit(&sTaskWLogoTasks, 2);
 
-    switch (work->unk_00) {
+    switch (work->worldId) {
     case 4:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoWon, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, 0);
         break;
     case 5:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoMons, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoMons, 0);
         break;
     case 6:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoHwt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHwt, 0);
         break;
     case 2:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoAtl, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAtl, 0);
         break;
     case 7:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoNvl, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoNvl, 0);
         break;
     case 3:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoCol, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoCol, 0);
         break;
     case 8:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoHlw, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHlw, 0);
         break;
     case 1:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoAgr, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAgr, 0);
         break;
     case 9:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoDil, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoDil, 0);
         break;
     case 10:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoTvt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTvt, 0);
         break;
     case 0:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoPoo, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoPoo, 0);
         break;
     case 11:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoTt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTt, 0);
         break;
     case 12:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoBks, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoBks, 0);
         break;
     default:
-        gUnk_02034C34 = TaskCreate(&gUnk_02034C20, &gTaskDescWlogoWon, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, 0);
         break;
     }
 
-    if (work->unk_00 == 0) {
-        func_080CA6A8(0, work->unk_04);
+    if (work->worldId == 0) {
+        MovePooCamera(0, work->cameraOffsetY);
     } else {
-        func_080E02A8(0, work->unk_04);
+        MapMoveCameraTarget(0, work->cameraOffsetY);
     }
 }
 
 u8 task_wLogo_1(WLogoTaskWork* work) {
-    if (work->unk_00 == 0) {
+    if (work->worldId == 0) {
         work->timer++;
         if (work->timer <= 314) {
-            func_080CA6A8(0, 76);
+            MovePooCamera(0, 76);
         }
     } else {
         work->timer++;
         if (work->timer <= 314) {
-            func_080E02A8(0, 76);
+            MapMoveCameraTarget(0, 76);
         }
     }
 
-    if (IsTaskActive(gUnk_02034C34) != 0) {
-        TaskPoolUpdate(&gUnk_02034C20);
-        TaskPoolDraw(&gUnk_02034C20);
+    if (IsTaskActive(sTaskWLogoTask) != 0) {
+        TaskPoolUpdate(&sTaskWLogoTasks);
+        TaskPoolDraw(&sTaskWLogoTasks);
         return 1;
     }
     return 0;
@@ -427,7 +427,7 @@ void task_wLogo_2(WLogoTaskWork* work) {
 }
 
 void task_wLogo_3(WLogoTaskWork* work) {
-    TaskPoolDestroy(&gUnk_02034C20);
+    TaskPoolDestroy(&sTaskWLogoTasks);
     SetBgBlend(0, 0, 16);
 }
 

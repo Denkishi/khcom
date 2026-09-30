@@ -61,128 +61,128 @@ void* gUnkEu_09F84FE4[5] = {
 #endif
 
 static MsCard* gMsCards;
-static s16 gUnk_02035C14;
-static s16 gUnk_02035C16;
-static s16 gUnk_02035C18;
-static s16 gUnk_02035C20[4];
-static s16 gUnk_02035C28[4];
-static s16 gUnk_02035C30[4];
-static s16 gUnk_02035C38;
-static s16 gUnk_02035C3A;
-static u16 gUnk_02035C3C;
-static struct ObjTiles* gUnk_02035C40;
+static s16 sMsChargeState;
+static s16 sMsChargeMenuState;
+static s16 sMsChargeTab;
+static s16 sMsChargeCategoryStart[4];
+static s16 sMsChargeCategoryEntryCount[4];
+static s16 sMsChargeCategoryCardCount[4];
+static s16 sMsChargeDeckCardCount;
+static s16 sMsChargeCardTotal;
+static u16 sMsChargeCollectionCount;
+static struct ObjTiles* sMsChargeScrollbarTiles;
 static struct ObjPalette* gUnk_02035C44;
 static struct ObjTiles* gUnk_02035C48;
 static AnimState gUnk_02035C50;
-static AnimState gUnk_02035C68;
-static struct ObjPalette* gUnk_02035C80;
-static struct ObjTiles* gUnk_02035C84;
-static AnimState gUnk_02035C88;
-static AnimState gUnk_02035CA0;
-static u8 gUnk_02035CB8;
-static s16 gUnk_02035CBA;
-static s16 gUnk_02035CBC;
-static struct ObjPalette* gUnk_02035CC0;
-static struct ObjTiles* gUnk_02035CC4;
-static AnimState gUnk_02035CC8;
-static s16 gUnk_02035CE0;
-static s16 gUnk_02035CE2;
-static s16 gUnk_02035CE4;
-static void* gUnk_02035CE8[4][3];
-static void* gUnk_02035D18[4][3];
-static void* gUnk_02035D48[4][3];
-static u8 gUnk_02035D78[4][3];
-static struct ObjPalette* gUnk_02035D84;
-static struct ObjTiles* gUnk_02035D88;
-static void* gUnk_02035D8C;
+static AnimState sMsChargeHighlightAnim;
+static struct ObjPalette* sMsChargeMooglePalette;
+static struct ObjTiles* sMsChargeMoogleTiles;
+static AnimState sMsChargeCursorAnim;
+static AnimState sMsChargeMoogleAnim;
+static u8 sMsChargeBobPhase;
+static s16 sMsChargeMoogleAnimId;
+static s16 sMsChargeMoogleAnimTimer;
+static struct ObjPalette* sMsChargeConfirmCursorPalette;
+static struct ObjTiles* sMsChargeConfirmCursorTiles;
+static AnimState sMsChargeConfirmCursorAnim;
+static s16 sMsChargeGridCol;
+static s16 sMsChargeGridRow;
+static s16 sMsChargeGridScroll;
+static void* sMsChargeGridPalettes[4][3];
+static void* sMsChargeGridTiles[4][3];
+static void* sMsChargeGridSprites[4][3];
+static u8 sMsChargeGridPremium[4][3];
+static struct ObjPalette* sMsChargeCardPalette;
+static struct ObjTiles* sMsChargeCardTiles;
+static void* sMsChargeCardSprite;
 static struct ObjPalette* gUnk_02035D90;
 static struct ObjTiles* gUnk_02035D94;
 static void* gUnk_02035D98;
-static struct ObjTiles* gUnk_02035D9C;
-static AnimState gUnk_02035DA0;
-static struct ObjTiles* gUnk_02035DB8;
+static struct ObjTiles* sMsChargePremiumTiles;
+static AnimState sMsChargePremiumAnim;
+static struct ObjTiles* sMsChargeGridPremiumTiles;
 static u32 gUnk_02035DBC;
-static AnimState gUnk_02035DC0;
-static u8 gUnk_02035DD8;
-static TextSlot* gUnk_02035DDC;
-static u8 gUnk_02035DE0;
-static TextSlot* gUnk_02035DE4;
-static u8 gUnk_02035DE8;
-static TextSlot* gUnk_02035DEC;
-static u8 gUnk_02035DF0;
-static u16 gUnk_02035DF2;
-static TextSlot* gUnk_02035DF4;
-static u8 gUnk_02035DF8;
-static u16 gUnk_02035DFA;
-static TextSlot* gUnk_02035DFC;
-static u8 gUnk_02035E00;
-static u16 gUnk_02035E02;
-static TextSlot* gUnk_02035E04;
-static u8 gUnk_02035E08;
-static u16 gUnk_02035E0A;
-static s16 gUnk_02035E0C;
-static s16 gUnk_02035E0E;
-static s16 gUnk_02035E10;
-static u32 gUnk_02035E14;
-static s32 gUnk_02035E18;
-static s32 gUnk_02035E1C;
-static u8 gUnk_02035E20;
+static AnimState sMsChargeGridPremiumAnim;
+static u8 sMsChargeCardPremium;
+static TextSlot* sMsChargeNameText;
+static u8 sMsChargeNameTextCount;
+static TextSlot* sMsChargeDescText;
+static u8 sMsChargeDescTextCount;
+static TextSlot* sMsChargeConfirmText;
+static u8 sMsChargeConfirmTextCount;
+static u16 sMsChargeConfirmTextLength;
+static TextSlot* sMsChargeNoticeText;
+static u8 sMsChargeNoticeTextCount;
+static u16 sMsChargeNoticeTextLength;
+static TextSlot* sMsChargeYesText;
+static u8 sMsChargeYesTextCount;
+static u16 sMsChargeYesTextLength;
+static TextSlot* sMsChargeNoText;
+static u8 sMsChargeNoTextCount;
+static u16 sMsChargeNoTextLength;
+static s16 sMsChargeValueCol;
+static s16 sMsChargeValueRow;
+static s16 sMsChargeConfirmCursor;
+static u32 sMsChargeConfirmCursorX;
+static s32 sMsChargeCursorX;
+static s32 sMsChargeCursorY;
+static u8 sMsChargeBackToTop;
 
-s16 func_08104A84(s16 a) {
+s16 GetMsChargeTabStart(s16 a) {
     s16 v;
 
     if (a <= 3) {
-        v = gUnk_02035C20[a];
+        v = sMsChargeCategoryStart[a];
     } else {
         v = 0;
     }
     return v;
 }
 
-s16 func_08104AA4(s16 a) {
+s16 GetMsChargeTabCount(s16 a) {
     s16 v;
     s16 i;
 
     if (a <= 3) {
-        v = gUnk_02035C28[a];
+        v = sMsChargeCategoryEntryCount[a];
     } else {
         v = 0;
 
         for (i = 0; i < 4; i++) {
-            v += gUnk_02035C28[i];
+            v += sMsChargeCategoryEntryCount[i];
         }
     }
     return v;
 }
 
-s16 func_08104AEC(void) {
-    return func_08104A84(gUnk_02035C18) + (gUnk_02035CE4 + gUnk_02035CE2) * 3 + gUnk_02035CE0;
+s16 GetMsChargeSelectedIndex(void) {
+    return GetMsChargeTabStart(sMsChargeTab) + (sMsChargeGridScroll + sMsChargeGridRow) * 3 + sMsChargeGridCol;
 }
 
-MsCard* func_08104B2C(void) {
-    return gMsCards + func_08104AEC();
+MsCard* GetMsChargeSelectedCard(void) {
+    return gMsCards + GetMsChargeSelectedIndex();
 }
 
-void func_08104B48(void) {
+void MsChargeSelectFirstValue(void) {
     MsCard* card;
     s16 i;
 
-    card = func_08104B2C();
-    if (card->unk_00 != 0x8F) {
+    card = GetMsChargeSelectedCard();
+    if (card->kind != 0x8F) {
         for (i = 0; i < 10; i++) {
-            if (card->unk_06[i][0] > 0) {
+            if (card->values[i][0] > 0) {
                 break;
             }
         }
-        gUnk_02035E0C = i / 5;
-        gUnk_02035E0E = i % 5;
+        sMsChargeValueCol = i / 5;
+        sMsChargeValueRow = i % 5;
     } else {
-        gUnk_02035E0C = 0;
-        gUnk_02035E0E = 0;
+        sMsChargeValueCol = 0;
+        sMsChargeValueRow = 0;
     }
 }
 
-void func_08104BBC(void) {
+void MsChargeLoadGrid(void) {
     s16 i;
     s16 k;
     s16 idx;
@@ -190,131 +190,131 @@ void func_08104BBC(void) {
     s16 limit;
     s32 defIdx;
 
-    a = func_08104A84(gUnk_02035C18);
-    limit = func_08104AA4(gUnk_02035C18);
-    idx = gUnk_02035CE4 * 3;
+    a = GetMsChargeTabStart(sMsChargeTab);
+    limit = GetMsChargeTabCount(sMsChargeTab);
+    idx = sMsChargeGridScroll * 3;
 
     for (i = 0; i < 4; i++) {
         for (k = 0; k < 3; k++) {
-            if (gUnk_02035CE8[i][k] != 0) {
-                ReleaseObjPalette(gUnk_02035CE8[i][k]);
+            if (sMsChargeGridPalettes[i][k] != 0) {
+                ReleaseObjPalette(sMsChargeGridPalettes[i][k]);
             }
 
-            if (gUnk_02035D18[i][k] != 0) {
-                ReleaseObjTiles(gUnk_02035D18[i][k]);
+            if (sMsChargeGridTiles[i][k] != 0) {
+                ReleaseObjTiles(sMsChargeGridTiles[i][k]);
             }
 
             if (idx < limit) {
                 defIdx = gMsCards[a + idx].cardId;
-                gUnk_02035CE8[i][k] = LoadObjPalette(gCardDefs[defIdx].palette2, 0x20);
-                gUnk_02035D18[i][k] = LoadObjTiles(gCardDefs[defIdx].tiles2, 0x100);
-                gUnk_02035D48[i][k] = gCardDefs[defIdx].gfx2;
-                gUnk_02035D78[i][k] = gMsCards[a + idx].unk_2E;
+                sMsChargeGridPalettes[i][k] = LoadObjPalette(gCardDefs[defIdx].palette2, 0x20);
+                sMsChargeGridTiles[i][k] = LoadObjTiles(gCardDefs[defIdx].tiles2, 0x100);
+                sMsChargeGridSprites[i][k] = gCardDefs[defIdx].gfx2;
+                sMsChargeGridPremium[i][k] = gMsCards[a + idx].premium;
             } else {
-                gUnk_02035CE8[i][k] = 0;
-                gUnk_02035D18[i][k] = 0;
-                gUnk_02035D48[i][k] = 0;
-                gUnk_02035D78[i][k] = 0;
+                sMsChargeGridPalettes[i][k] = 0;
+                sMsChargeGridTiles[i][k] = 0;
+                sMsChargeGridSprites[i][k] = 0;
+                sMsChargeGridPremium[i][k] = 0;
             }
             idx++;
         }
     }
 }
 
-void func_08104D18(void) {
+void MsChargeLoadSelectedCard(void) {
     MsCard* card;
     u8* p;
     u8* q;
     s32 defIdx;
 
-    card = func_08104B2C();
+    card = GetMsChargeSelectedCard();
 
-    if (gUnk_02035D84 != 0) {
-        ReleaseObjPalette(gUnk_02035D84);
+    if (sMsChargeCardPalette != 0) {
+        ReleaseObjPalette(sMsChargeCardPalette);
     }
 
-    if (gUnk_02035D88 != 0) {
-        ReleaseObjTiles(gUnk_02035D88);
+    if (sMsChargeCardTiles != 0) {
+        ReleaseObjTiles(sMsChargeCardTiles);
     }
 
     if (gUnk_02035D94 != 0) {
         ReleaseObjTiles(gUnk_02035D94);
     }
 
-    if (card->unk_00 != 0x8F && func_08104AA4(gUnk_02035C18) > 0) {
+    if (card->kind != 0x8F && GetMsChargeTabCount(sMsChargeTab) > 0) {
         defIdx = card->cardId;
-        gUnk_02035D84 = LoadObjPalette(gCardDefs[defIdx].palette, 0x20);
-        gUnk_02035D88 = LoadObjTiles(gCardDefs[defIdx].tiles, 0x200);
-        gUnk_02035D8C = gCardDefs[defIdx].gfx;
-        gUnk_02035D94 = LoadObjTiles(gUnk_08F709B0[card->unk_04].tiles, 0x300);
-        gUnk_02035D98 = gUnk_08F709B0[card->unk_04].gfx;
-        gUnk_02035DD8 = card->unk_2E;
-        p = &gUnk_02035DE0;
+        sMsChargeCardPalette = LoadObjPalette(gCardDefs[defIdx].palette, 0x20);
+        sMsChargeCardTiles = LoadObjTiles(gCardDefs[defIdx].tiles, 0x200);
+        sMsChargeCardSprite = gCardDefs[defIdx].gfx;
+        gUnk_02035D94 = LoadObjTiles(gCardBacks[card->category].tiles, 0x300);
+        gUnk_02035D98 = gCardBacks[card->category].gfx;
+        sMsChargeCardPremium = card->premium;
+        p = &sMsChargeNameTextCount;
 #ifdef VERSION_EU
-        *p = LoadTextSlots(eu_0805E924(gCardDefs[defIdx].name), gUnk_02035DDC);
+        *p = LoadTextSlots(eu_0805E924(gCardDefs[defIdx].name), sMsChargeNameText);
 #else
-        *p = LoadTextSlots(gCardDefs[defIdx].name, gUnk_02035DDC);
+        *p = LoadTextSlots(gCardDefs[defIdx].name, sMsChargeNameText);
 #endif
-        q = &gUnk_02035DE8;
-        *q = LoadTextSlots((void*)LANGSTR(gUnk_09EE8F48[card->unk_00]), gUnk_02035DE4);
-        LoadObjPaletteBank(((u16*)gUnk_02035C44)[3], gUnk_09A3DE7C + card->unk_04 * 0x20);
+        q = &sMsChargeDescTextCount;
+        *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
+        LoadObjPaletteBank(((u16*)gUnk_02035C44)[3], gUnk_09A3DE7C + card->category * 0x20);
     } else {
-        gUnk_02035D84 = 0;
-        gUnk_02035D88 = 0;
-        gUnk_02035D8C = 0;
+        sMsChargeCardPalette = 0;
+        sMsChargeCardTiles = 0;
+        sMsChargeCardSprite = 0;
         gUnk_02035D94 = 0;
         gUnk_02035D98 = 0;
-        gUnk_02035DD8 = 0;
-        gUnk_02035DE0 = 0;
-        gUnk_02035DE8 = 0;
+        sMsChargeCardPremium = 0;
+        sMsChargeNameTextCount = 0;
+        sMsChargeDescTextCount = 0;
     }
 }
 
-s16 func_08104E9C(s16 a, s16 b) {
+s16 GetMsChargeValueIndex(s16 a, s16 b) {
     return b + a * 5;
 }
 
-s16 func_08104EB4(void) {
-    return func_08104E9C(gUnk_02035E0C, gUnk_02035E0E);
+s16 GetMsChargeSelectedValue(void) {
+    return GetMsChargeValueIndex(sMsChargeValueCol, sMsChargeValueRow);
 }
 
-u16 func_08104ED8(u16 index) {
+u16 GetMsChargeCardPoints(u16 index) {
     MsCard* card;
     u16 id;
 
     card = &gMsCards[index];
-    if (card->unk_00 != 0x8F) {
-        id = card->unk_06[func_08104EB4()][1];
-        return GetCardMooglePointValue(card->unk_2E != 0 ? id | 0x8000 : id);
+    if (card->kind != 0x8F) {
+        id = card->values[GetMsChargeSelectedValue()][1];
+        return GetCardMooglePointValue(card->premium != 0 ? id | 0x8000 : id);
     }
     return 0;
 }
 
-void func_08104F2C(void) {
+void MsChargeDrawPoints(void) {
     u32 v;
 
     v = GetMooglePoints();
     LoadDecimalDigitTiles(v, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 
-    if (gUnk_02035C16 >= 2 && gUnk_02035C16 <= 3) {
-        v = func_08104ED8(func_08104AEC());
+    if (sMsChargeMenuState >= 2 && sMsChargeMenuState <= 3) {
+        v = GetMsChargeCardPoints(GetMsChargeSelectedIndex());
     } else {
         v = 0;
     }
     LoadDecimalDigitTiles(v, gUnk_09A1DCDC, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
 }
 
-void func_08104FA4(void) {
-    LoadDecimalDigitTiles(gUnk_02035C38, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0xC0, 0x20, 3);
-    LoadDecimalDigitTiles(gUnk_02035C3C, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x120, 0x20, 3);
+void MsChargeDrawCardCounts(void) {
+    LoadDecimalDigitTiles(sMsChargeDeckCardCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0xC0, 0x20, 3);
+    LoadDecimalDigitTiles(sMsChargeCollectionCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x120, 0x20, 3);
 }
 
-void func_08104FF8(void) {
+void MsChargeDrawCategoryCounts(void) {
     s16 i;
     s32 v;
 
     for (i = 0; i < 4; i++) {
-        v = gUnk_02035C30[i];
+        v = sMsChargeCategoryCardCount[i];
         if (v != 0) {
             LoadDecimalDigitTiles(v, gUnk_09A1DE3C, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
         } else {
@@ -323,24 +323,24 @@ void func_08104FF8(void) {
     }
 }
 
-void func_08105090(void) {
+void MsChargeDrawValueCounts(void) {
     MsCard* card;
     s16 i;
     s32 v;
 
-    card = func_08104B2C();
+    card = GetMsChargeSelectedCard();
 
-    if (func_08104AA4(gUnk_02035C18) > 0) {
-        LoadPalette(gUnk_09A3DD7C + card->unk_04 * 0x20, (void*)0x050000E0, 0x0C);
+    if (GetMsChargeTabCount(sMsChargeTab) > 0) {
+        LoadPalette(gUnk_09A3DD7C + card->category * 0x20, (void*)0x050000E0, 0x0C);
     }
 
-    if ((s16)gUnk_02035C16 == 1) {
+    if ((s16)sMsChargeMenuState == 1) {
         for (i = 0; i < 10; i++) {
             LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
             LoadPalette(gUnk_09A3DE08, (void*)(0x050000EC + i * 2), 2);
         }
-    } else if (card->unk_04 == 3) {
-        if (func_08104AA4(gUnk_02035C18) > 0) {
+    } else if (card->category == 3) {
+        if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
             LoadBgMap(1, gUnkEu_09F84FE4[gLanguage], 0x500);
 #else
@@ -349,8 +349,8 @@ void func_08105090(void) {
         }
 
         for (i = 0; i < 10; i++) {
-            v = card->unk_06[i][0];
-            if (v != 0 && func_08104AA4(gUnk_02035C18) > 0) {
+            v = card->values[i][0];
+            if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
                 LoadPalette(gUnk_09A3DD88, (void*)0x050000EC, 2);
                 break;
@@ -362,7 +362,7 @@ void func_08105090(void) {
             LoadPalette(gUnk_09A3DE08, (void*)0x050000EC, 2);
         }
     } else {
-        if (func_08104AA4(gUnk_02035C18) > 0) {
+        if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
             LoadBgMap(1, gUnkEu_09F84FD0[gLanguage], 0x500);
 #else
@@ -371,8 +371,8 @@ void func_08105090(void) {
         }
 
         for (i = 0; i < 10; i++) {
-            v = card->unk_06[i][0];
-            if (v != 0 && func_08104AA4(gUnk_02035C18) > 0) {
+            v = card->values[i][0];
+            if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
                 LoadPalette(gUnk_09A3DD88, (void*)(0x050000EC + i * 2), 2);
             } else {
@@ -383,7 +383,7 @@ void func_08105090(void) {
     }
 }
 
-void func_081052C8(s16 a) {
+void MsChargeDrawTab(s16 a) {
     s16 t;
     void* base;
 
@@ -396,27 +396,27 @@ void func_081052C8(s16 a) {
 #endif
 }
 
-void func_08105334(void) {
+void MsChargeSellCard(void) {
     MsCard* card;
     u16 id;
     s16 i;
 
-    card = func_08104B2C();
+    card = GetMsChargeSelectedCard();
 
-    if (card->unk_06[func_08104EB4()][0] > 0) {
-        id = card->unk_06[func_08104EB4()][1];
+    if (card->values[GetMsChargeSelectedValue()][0] > 0) {
+        id = card->values[GetMsChargeSelectedValue()][1];
 
-        if (card->unk_2E != 0) {
+        if (card->premium != 0) {
             id |= 0x8000;
         }
 
         for (i = 0; i < gCardCount; i++) {
             if (gCardCollection[i] == id) {
-                AddMooglePoints(func_08104ED8(func_08104AEC()));
-                gUnk_02035C30[card->unk_04]--;
-                gUnk_02035C3A--;
-                gUnk_02035C3C--;
-                card->unk_06[func_08104EB4()][0]--;
+                AddMooglePoints(GetMsChargeCardPoints(GetMsChargeSelectedIndex()));
+                sMsChargeCategoryCardCount[card->category]--;
+                sMsChargeCardTotal--;
+                sMsChargeCollectionCount--;
+                card->values[GetMsChargeSelectedValue()][0]--;
                 ClearCardCollectionSlot(&gCardCollection[i]);
                 break;
             }
@@ -424,11 +424,11 @@ void func_08105334(void) {
     }
 }
 
-u8 func_08105404(MsCard* card) {
+u8 MsCardIsEmpty(MsCard* card) {
     s16 i;
 
     for (i = 0; i < 10; i++) {
-        if (card->unk_06[i][0] > 0) {
+        if (card->values[i][0] > 0) {
             break;
         }
     }
@@ -439,21 +439,21 @@ u8 func_08105404(MsCard* card) {
     return 0;
 }
 
-u8 func_08105440(MsCard* card) {
-    if (card->unk_06[func_08104EB4()][0] == 0) {
+u8 MsCardSelectedValueIsEmpty(MsCard* card) {
+    if (card->values[GetMsChargeSelectedValue()][0] == 0) {
         return 1;
     }
     return 0;
 }
 
-void func_08105464(MsCard* card) {
+void MsChargeSelectNextValue(MsCard* card) {
     s16 k;
     s16 n;
 
-    k = func_08104EB4();
+    k = GetMsChargeSelectedValue();
 
     for (n = 0; n < 10; n++) {
-        if (card->unk_06[k][0] > 0) {
+        if (card->values[k][0] > 0) {
             break;
         }
         k++;
@@ -461,11 +461,11 @@ void func_08105464(MsCard* card) {
             k = 0;
         }
     }
-    gUnk_02035E0C = k / 5;
-    gUnk_02035E0E = k % 5;
+    sMsChargeValueCol = k / 5;
+    sMsChargeValueRow = k % 5;
 }
 
-void func_081054D0(MsCard* card) {
+void MsChargeRemoveCard(MsCard* card) {
     vu32* dma;
     MsCard* last;
     u16* p;
@@ -473,11 +473,11 @@ void func_081054D0(MsCard* card) {
     u8 slot;
     s16 j;
 
-    slot = gCardDefs[card->cardId].unk_2A;
+    slot = gCardDefs[card->cardId].category;
     dma = (vu32*)REG_ADDR_DMA3;
     dma[0] = (u32)(card + 1);
     dma[1] = (u32)card;
-    dma[2] = ((285 - func_08104AEC()) * 26) | (DMA_ENABLE << 16);
+    dma[2] = ((285 - GetMsChargeSelectedIndex()) * 26) | (DMA_ENABLE << 16);
     dma[2];
     p = &zero;
     *p = 0;
@@ -486,44 +486,44 @@ void func_081054D0(MsCard* card) {
     dma[1] = (u32)last;
     dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x1A;
     dma[2];
-    last->unk_00 = 0x8F;
+    last->kind = 0x8F;
 
     for (j = slot + 1; j <= 3; j++) {
-        gUnk_02035C20[j]--;
+        sMsChargeCategoryStart[j]--;
     }
-    gUnk_02035C28[slot]--;
+    sMsChargeCategoryEntryCount[slot]--;
 
-    if (func_08104AEC() >= func_08104AA4(gUnk_02035C18)) {
-        gUnk_02035CE0--;
-        if (gUnk_02035CE0 < 0) {
-            gUnk_02035CE0 = 2;
-            gUnk_02035CE2--;
-            if (gUnk_02035CE2 < 0) {
-                gUnk_02035CE2 = 0;
-                gUnk_02035CE4--;
-                if (gUnk_02035CE4 < 0) {
-                    gUnk_02035CE0 = 0;
-                    gUnk_02035CE4 = 0;
+    if (GetMsChargeSelectedIndex() >= GetMsChargeTabCount(sMsChargeTab)) {
+        sMsChargeGridCol--;
+        if (sMsChargeGridCol < 0) {
+            sMsChargeGridCol = 2;
+            sMsChargeGridRow--;
+            if (sMsChargeGridRow < 0) {
+                sMsChargeGridRow = 0;
+                sMsChargeGridScroll--;
+                if (sMsChargeGridScroll < 0) {
+                    sMsChargeGridCol = 0;
+                    sMsChargeGridScroll = 0;
                 }
             }
         }
     }
-    gUnk_02035E0C = 0;
-    gUnk_02035E0E = 0;
+    sMsChargeValueCol = 0;
+    sMsChargeValueRow = 0;
 }
 
-s32 func_081055E8(u16 id, u8 flag, s16 count) {
+s32 FindMsCard(u16 id, u8 flag, s16 count) {
     s16 i;
 
     for (i = 0; i < count; i++) {
-        if (gMsCards[i].unk_00 == id && gMsCards[i].unk_2E == flag) {
+        if (gMsCards[i].kind == id && gMsCards[i].premium == flag) {
             return i;
         }
     }
     return -1;
 }
 
-void func_0810563C(void) {
+void MsChargeBuildCardList(void) {
     MsCard tmp;
     vu32* dma;
     u16* p;
@@ -550,65 +550,65 @@ void func_0810563C(void) {
     dma[2];
 
     for (n = 0; n <= 285; n++) {
-        gMsCards[n].unk_00 = 0x8F;
+        gMsCards[n].kind = 0x8F;
         gMsCards[n].cardId = 0x3B6;
-        gMsCards[n].unk_2E = 0;
+        gMsCards[n].premium = 0;
     }
     a = CountCollectionCards();
-    gUnk_02035C3C = a;
-    q = &gUnk_02035C38;
+    sMsChargeCollectionCount = a;
+    q = &sMsChargeDeckCardCount;
     *q = CountCardsInDecks();
 
     for (j = 0; j < 4; j++) {
-        gUnk_02035C20[j] = 0;
-        gUnk_02035C30[j] = 0;
-        gUnk_02035C28[j] = 0;
+        sMsChargeCategoryStart[j] = 0;
+        sMsChargeCategoryCardCount[j] = 0;
+        sMsChargeCategoryEntryCount[j] = 0;
     }
-    gUnk_02035C3A = 0;
+    sMsChargeCardTotal = 0;
     n = 0;
 
     for (i = 0; i < gCardCount; i++) {
         raw = gCardCollection[i];
         id = raw & CARD_ID_MASK;
         if (raw != CARD_ID_MASK && (raw & 0x7000) == 0 && id <= 0x21C) {
-            j = gCardDefs[id].unk_2A;
-            kind = gCardDefs[id].unk_1C;
+            j = gCardDefs[id].category;
+            kind = gCardDefs[id].kind;
             flags = raw & 0x8000;
             prem = flags != 0;
-            gUnk_02035C30[j]++;
-            gUnk_02035C3A++;
-            if ((idx = func_081055E8(kind, prem, n)) >= 0) {
-                gMsCards[idx].unk_06[raw = gCardDefs[id].unk_20][0]++;
-                gMsCards[idx].unk_06[raw][1] = id;
+            sMsChargeCategoryCardCount[j]++;
+            sMsChargeCardTotal++;
+            if ((idx = FindMsCard(kind, prem, n)) >= 0) {
+                gMsCards[idx].values[raw = gCardDefs[id].value][0]++;
+                gMsCards[idx].values[raw][1] = id;
             } else {
-                gMsCards[n].unk_00 = kind;
+                gMsCards[n].kind = kind;
                 gMsCards[n].cardId = gCardDefs[id].unk_28;
-                gMsCards[n].unk_04 = j;
-                raw = gCardDefs[id].unk_20;
-                gMsCards[n].unk_06[raw][0]++;
-                gMsCards[n].unk_06[raw][1] = id;
-                gMsCards[n].unk_2E = prem;
+                gMsCards[n].category = j;
+                raw = gCardDefs[id].value;
+                gMsCards[n].values[raw][0]++;
+                gMsCards[n].values[raw][1] = id;
+                gMsCards[n].premium = prem;
                 sortKey = 0x01000000;
 
                 if (prem != 0) {
                     sortKey = 0x03000000;
                 }
-                gMsCards[n].unk_30 = (sortKey << (gMsCards[n].unk_04 * 2)) | gMsCards[n].cardId;
-                gUnk_02035C28[j]++;
+                gMsCards[n].sortKey = (sortKey << (gMsCards[n].category * 2)) | gMsCards[n].cardId;
+                sMsChargeCategoryEntryCount[j]++;
                 n++;
             }
         }
     }
 
     for (j = 1; j < 4; j++) {
-        gUnk_02035C20[j] = gUnk_02035C20[j - 1] + gUnk_02035C28[j - 1];
+        sMsChargeCategoryStart[j] = sMsChargeCategoryStart[j - 1] + sMsChargeCategoryEntryCount[j - 1];
     }
 
     for (i = 1; i < n; i++) {
         tmp = gMsCards[i];
 
         for (j = i - 1; j >= 0; j--) {
-            if (gMsCards[j].unk_30 > tmp.unk_30) {
+            if (gMsCards[j].sortKey > tmp.sortKey) {
                 gMsCards[j + 1] = gMsCards[j];
             } else {
                 break;
@@ -625,161 +625,161 @@ s32 MsChargeReadMenuKeys(void) {
     return keys | (GetKeysRepeat() & (DPAD_ANY | L_BUTTON | R_BUTTON));
 }
 
-void func_0810594C(void) {
+void MsChargeHandleGridInput(void) {
     s16 oldCE0;
     s16 oldCE2;
     s16 oldCE4;
     u16 keys;
 
-    oldCE0 = gUnk_02035CE0;
-    oldCE2 = gUnk_02035CE2;
-    oldCE4 = gUnk_02035CE4;
+    oldCE0 = sMsChargeGridCol;
+    oldCE2 = sMsChargeGridRow;
+    oldCE4 = sMsChargeGridScroll;
     keys = MsChargeReadMenuKeys();
     if (keys & 1) {
-        func_08104B48();
+        MsChargeSelectFirstValue();
         m4aSongNumStart(SONG_SYS_KETTEI);
-        AnimStart(&gUnk_02035C68, 0, 1);
-        gUnk_02035CBA = 1;
-        gUnk_02035C16 = 2;
-        func_08104F2C();
+        AnimStart(&sMsChargeHighlightAnim, 0, 1);
+        sMsChargeMoogleAnimId = 1;
+        sMsChargeMenuState = 2;
+        MsChargeDrawPoints();
     } else if (keys & 2) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035E20 = 1;
+        sMsChargeBackToTop = 1;
         FadeStartOut(0, 0x10);
-        gUnk_02035C14 = 2;
+        sMsChargeState = 2;
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035E20 = 0;
+        sMsChargeBackToTop = 0;
         FadeStartOut(0, 0x10);
-        gUnk_02035C14 = 2;
+        sMsChargeState = 2;
     } else if (keys & 4) {
-        gUnk_02035CE0 = 0;
-        gUnk_02035CE2 = 0;
-        gUnk_02035CE4 = 0;
-        gUnk_02035CBA = 0;
+        sMsChargeGridCol = 0;
+        sMsChargeGridRow = 0;
+        sMsChargeGridScroll = 0;
+        sMsChargeMoogleAnimId = 0;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
-        gUnk_02035C16 = 1;
-        func_08105090();
+        sMsChargeMenuState = 1;
+        MsChargeDrawValueCounts();
     } else if (keys & 0x40) {
-        if (gUnk_02035CE2 > 0) {
-            gUnk_02035CE2--;
-        } else if (gUnk_02035CE4 > 0) {
-            gUnk_02035CE4--;
+        if (sMsChargeGridRow > 0) {
+            sMsChargeGridRow--;
+        } else if (sMsChargeGridScroll > 0) {
+            sMsChargeGridScroll--;
         } else {
-            gUnk_02035CBA = 0;
+            sMsChargeMoogleAnimId = 0;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
-            gUnk_02035C16 = 1;
-            func_08105090();
+            sMsChargeMenuState = 1;
+            MsChargeDrawValueCounts();
         }
     } else if (keys & 0x80) {
-        if ((gUnk_02035CE4 + gUnk_02035CE2 + 1) * 3 + gUnk_02035CE0 < func_08104AA4(gUnk_02035C18)) {
-            if (gUnk_02035CE2 <= 2) {
-                gUnk_02035CE2++;
+        if ((sMsChargeGridScroll + sMsChargeGridRow + 1) * 3 + sMsChargeGridCol < GetMsChargeTabCount(sMsChargeTab)) {
+            if (sMsChargeGridRow <= 2) {
+                sMsChargeGridRow++;
             } else {
-                gUnk_02035CE4++;
+                sMsChargeGridScroll++;
             }
-        } else if (gUnk_02035CE2 == 3) {
-            if ((gUnk_02035CE4 + gUnk_02035CE2 + 1) * 3 < func_08104AA4(gUnk_02035C18)) {
-                gUnk_02035CE0 = (func_08104AA4(gUnk_02035C18) - 1) % 3;
-                gUnk_02035CE4++;
+        } else if (sMsChargeGridRow == 3) {
+            if ((sMsChargeGridScroll + sMsChargeGridRow + 1) * 3 < GetMsChargeTabCount(sMsChargeTab)) {
+                sMsChargeGridCol = (GetMsChargeTabCount(sMsChargeTab) - 1) % 3;
+                sMsChargeGridScroll++;
             }
         }
     } else if (keys & 0x20) {
-        if (gUnk_02035CE0 > 0) {
-            gUnk_02035CE0--;
+        if (sMsChargeGridCol > 0) {
+            sMsChargeGridCol--;
         }
     } else if (keys & 0x10) {
-        if ((gUnk_02035CE4 + gUnk_02035CE2) * 3 + gUnk_02035CE0 + 1 < func_08104AA4(gUnk_02035C18)) {
-            if (gUnk_02035CE0 <= 1) {
-                gUnk_02035CE0++;
+        if ((sMsChargeGridScroll + sMsChargeGridRow) * 3 + sMsChargeGridCol + 1 < GetMsChargeTabCount(sMsChargeTab)) {
+            if (sMsChargeGridCol <= 1) {
+                sMsChargeGridCol++;
             }
         }
     }
 
-    if (gUnk_02035CE0 != oldCE0 || gUnk_02035CE2 != oldCE2 || gUnk_02035CE4 != oldCE4) {
-        func_08104B48();
-        func_08105090();
-        func_08104F2C();
-        func_08104D18();
+    if (sMsChargeGridCol != oldCE0 || sMsChargeGridRow != oldCE2 || sMsChargeGridScroll != oldCE4) {
+        MsChargeSelectFirstValue();
+        MsChargeDrawValueCounts();
+        MsChargeDrawPoints();
+        MsChargeLoadSelectedCard();
         m4aSongNumStart(SONG_SYS_CLICKI04B);
 
-        if (gUnk_02035CE4 != oldCE4) {
-            func_08104BBC();
+        if (sMsChargeGridScroll != oldCE4) {
+            MsChargeLoadGrid();
         }
     }
 }
 
-void func_08105BD8(void) {
+void MsChargeHandleTabInput(void) {
     s16 old;
     u16 keys;
 
-    old = gUnk_02035C18;
+    old = sMsChargeTab;
     keys = MsChargeReadMenuKeys();
     if ((keys & 1) == 0) {
         if (keys & 8) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            gUnk_02035E20 = 0;
+            sMsChargeBackToTop = 0;
             FadeStartOut(0, 0x10);
-            gUnk_02035C14 = 2;
+            sMsChargeState = 2;
         } else if (keys & 0x82) {
-            if (func_08104AA4(gUnk_02035C18) > 0) {
-                gUnk_02035CE0 = 0;
-                gUnk_02035CE2 = 0;
-                gUnk_02035CE4 = 0;
-                AnimStart(&gUnk_02035C68, 2, 1);
-                gUnk_02035CBA = 0;
+            if (GetMsChargeTabCount(sMsChargeTab) > 0) {
+                sMsChargeGridCol = 0;
+                sMsChargeGridRow = 0;
+                sMsChargeGridScroll = 0;
+                AnimStart(&sMsChargeHighlightAnim, 2, 1);
+                sMsChargeMoogleAnimId = 0;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
-                gUnk_02035C16 = 0;
-                func_08104B48();
-                func_08105090();
-                func_08104D18();
+                sMsChargeMenuState = 0;
+                MsChargeSelectFirstValue();
+                MsChargeDrawValueCounts();
+                MsChargeLoadSelectedCard();
             } else if (keys & 2) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
-                gUnk_02035E20 = 1;
+                sMsChargeBackToTop = 1;
                 FadeStartOut(0, 0x10);
-                gUnk_02035C14 = 2;
+                sMsChargeState = 2;
             } else if (keys & 0x80) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
         } else if (keys & 0x20) {
-            if (gUnk_02035C18 > 0) {
-                gUnk_02035C18--;
+            if (sMsChargeTab > 0) {
+                sMsChargeTab--;
             }
         } else if (keys & 0x10) {
-            if (gUnk_02035C18 <= 3) {
-                gUnk_02035C18++;
+            if (sMsChargeTab <= 3) {
+                sMsChargeTab++;
             }
         }
     }
 
-    if (gUnk_02035C18 != old) {
-        func_081052C8(gUnk_02035C18);
-        func_08104BBC();
+    if (sMsChargeTab != old) {
+        MsChargeDrawTab(sMsChargeTab);
+        MsChargeLoadGrid();
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
 
-s32 func_08105D24(MsCard* card, u16 col) {
+s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
     s16 base;
     s16 i;
     s32 r;
     s32 found;
 
     found = 0;
-    base = gUnk_02035E0E;
+    base = sMsChargeValueRow;
 
     for (i = 0; i <= 4; i++) {
         r = base - i;
-        if (r >= 0 && card->unk_06[func_08104E9C(col, r)][0] > 0) {
-            gUnk_02035E0C = col;
-            gUnk_02035E0E = r;
+        if (r >= 0 && card->values[GetMsChargeValueIndex(col, r)][0] > 0) {
+            sMsChargeValueCol = col;
+            sMsChargeValueRow = r;
             found = 1;
             break;
         }
         r = base + i;
-        if (r <= 4 && card->unk_06[func_08104E9C(col, r)][0] > 0) {
-            gUnk_02035E0C = col;
-            gUnk_02035E0E = r;
+        if (r <= 4 && card->values[GetMsChargeValueIndex(col, r)][0] > 0) {
+            sMsChargeValueCol = col;
+            sMsChargeValueRow = r;
             found = 1;
             break;
         }
@@ -787,168 +787,168 @@ s32 func_08105D24(MsCard* card, u16 col) {
     return found;
 }
 
-void func_08105DE0(void) {
+void MsChargeHandleValueInput(void) {
     MsCard* card;
     s16 oldCol;
     s16 oldRow;
     u16 keys;
     s16 i;
 
-    card = func_08104B2C();
-    oldCol = gUnk_02035E0C;
-    oldRow = gUnk_02035E0E;
+    card = GetMsChargeSelectedCard();
+    oldCol = sMsChargeValueCol;
+    oldRow = sMsChargeValueRow;
     keys = MsChargeReadMenuKeys();
     if (keys & 1) {
-        if (GetMooglePoints() + func_08104ED8(func_08104AEC()) > 99999) {
+        if (GetMooglePoints() + GetMsChargeCardPoints(GetMsChargeSelectedIndex()) > 99999) {
             m4aSongNumStart(SONG_SYS_BEEP);
-        } else if (gUnk_02035C3C <= 1) {
+        } else if (sMsChargeCollectionCount <= 1) {
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_CANSEL);
-            gUnk_02035C16 = 4;
+            sMsChargeMenuState = 4;
         } else {
-            gUnk_02035E10 = 0;
-            gUnk_02035E14 = 0x4800;
-            AnimStart(&gUnk_02035CC8, 0, 1);
+            sMsChargeConfirmCursor = 0;
+            sMsChargeConfirmCursorX = 0x4800;
+            AnimStart(&sMsChargeConfirmCursorAnim, 0, 1);
             EnableBg(2);
             m4aSongNumStart(SONG_SYS_CANSEL);
-            gUnk_02035C16 = 3;
+            sMsChargeMenuState = 3;
         }
     } else if (keys & 2) {
-        AnimStart(&gUnk_02035C68, 2, 1);
-        gUnk_02035CBA = 0;
+        AnimStart(&sMsChargeHighlightAnim, 2, 1);
+        sMsChargeMoogleAnimId = 0;
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035C16 = 0;
-        func_08104F2C();
+        sMsChargeMenuState = 0;
+        MsChargeDrawPoints();
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035E20 = 0;
+        sMsChargeBackToTop = 0;
         FadeStartOut(0, 0x10);
-        gUnk_02035C14 = 2;
+        sMsChargeState = 2;
     } else if (keys & 0x20) {
-        func_08105D24(card, 0);
+        MsChargeSelectValueInColumn(card, 0);
     } else if (keys & 0x10) {
-        func_08105D24(card, 1);
+        MsChargeSelectValueInColumn(card, 1);
     } else if (keys & 0x40) {
         for (i = 0; i <= 4; i++) {
-            gUnk_02035E0E--;
-            if (gUnk_02035E0E < 0) {
-                gUnk_02035E0E = 4;
+            sMsChargeValueRow--;
+            if (sMsChargeValueRow < 0) {
+                sMsChargeValueRow = 4;
             }
 
-            if (card->unk_06[func_08104EB4()][0] > 0) {
+            if (card->values[GetMsChargeSelectedValue()][0] > 0) {
                 break;
             }
         }
     } else if (keys & 0x80) {
         for (i = 0; i <= 4; i++) {
-            gUnk_02035E0E++;
-            if (gUnk_02035E0E > 4) {
-                gUnk_02035E0E = 0;
+            sMsChargeValueRow++;
+            if (sMsChargeValueRow > 4) {
+                sMsChargeValueRow = 0;
             }
 
-            if (card->unk_06[func_08104EB4()][0] > 0) {
+            if (card->values[GetMsChargeSelectedValue()][0] > 0) {
                 break;
             }
         }
     }
 
-    if (card->unk_04 == 3) {
-        gUnk_02035E0C = oldCol;
-        gUnk_02035E0E = oldRow;
+    if (card->category == 3) {
+        sMsChargeValueCol = oldCol;
+        sMsChargeValueRow = oldRow;
     }
 
-    if (gUnk_02035E0C != oldCol || gUnk_02035E0E != oldRow) {
-        func_08104F2C();
+    if (sMsChargeValueCol != oldCol || sMsChargeValueRow != oldRow) {
+        MsChargeDrawPoints();
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
 
-void func_0810601C(void) {
+void MsChargeHandleConfirmInput(void) {
     MsCard* card;
     s16 old;
     u16 keys;
 
-    card = func_08104B2C();
-    old = gUnk_02035E10;
+    card = GetMsChargeSelectedCard();
+    old = sMsChargeConfirmCursor;
     keys = MsChargeReadMenuKeys();
     if (keys & 1) {
         DisableBg(2);
 
-        if (gUnk_02035E10 == 0) {
-            gUnk_02035CBC = 180;
-            func_08105334();
+        if (sMsChargeConfirmCursor == 0) {
+            sMsChargeMoogleAnimTimer = 180;
+            MsChargeSellCard();
             m4aSongNumStart(SONG_SYS_KAIHUKU);
 
-            if (func_08105404(card)) {
-                func_081054D0(card);
-                func_08104BBC();
-                func_08104D18();
+            if (MsCardIsEmpty(card)) {
+                MsChargeRemoveCard(card);
+                MsChargeLoadGrid();
+                MsChargeLoadSelectedCard();
 
-                if (func_08104AA4(gUnk_02035C18) > 0) {
-                    AnimStart(&gUnk_02035C68, 2, 1);
-                    gUnk_02035CBA = 0;
-                    gUnk_02035C16 = 0;
+                if (GetMsChargeTabCount(sMsChargeTab) > 0) {
+                    AnimStart(&sMsChargeHighlightAnim, 2, 1);
+                    sMsChargeMoogleAnimId = 0;
+                    sMsChargeMenuState = 0;
                 } else {
-                    gUnk_02035CBA = 0;
-                    gUnk_02035C16 = 1;
+                    sMsChargeMoogleAnimId = 0;
+                    sMsChargeMenuState = 1;
                 }
             } else {
-                if (func_08105440(card)) {
-                    func_08105464(card);
+                if (MsCardSelectedValueIsEmpty(card)) {
+                    MsChargeSelectNextValue(card);
                 }
-                AnimStart(&gUnk_02035C68, 0, 1);
-                gUnk_02035CBA = 1;
-                gUnk_02035C16 = 2;
+                AnimStart(&sMsChargeHighlightAnim, 0, 1);
+                sMsChargeMoogleAnimId = 1;
+                sMsChargeMenuState = 2;
             }
-            func_08104F2C();
-            func_08105090();
-            func_08104FA4();
-            func_08104FF8();
+            MsChargeDrawPoints();
+            MsChargeDrawValueCounts();
+            MsChargeDrawCardCounts();
+            MsChargeDrawCategoryCounts();
         } else {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            AnimStart(&gUnk_02035C68, 0, 1);
-            gUnk_02035CBA = 1;
-            gUnk_02035C16 = 2;
+            AnimStart(&sMsChargeHighlightAnim, 0, 1);
+            sMsChargeMoogleAnimId = 1;
+            sMsChargeMenuState = 2;
         }
     } else if (keys & 2) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        AnimStart(&gUnk_02035C68, 0, 1);
-        gUnk_02035CBA = 1;
-        gUnk_02035C16 = 2;
+        AnimStart(&sMsChargeHighlightAnim, 0, 1);
+        sMsChargeMoogleAnimId = 1;
+        sMsChargeMenuState = 2;
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035E20 = 0;
+        sMsChargeBackToTop = 0;
         FadeStartOut(0, 0x10);
-        gUnk_02035C14 = 2;
+        sMsChargeState = 2;
     } else if (keys & 0x20) {
-        gUnk_02035E10 = 0;
+        sMsChargeConfirmCursor = 0;
     } else if (keys & 0x10) {
-        gUnk_02035E10 = 1;
+        sMsChargeConfirmCursor = 1;
     }
 
-    if (gUnk_02035E10 != old) {
+    if (sMsChargeConfirmCursor != old) {
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 }
 
-void func_081061DC(void) {
+void MsChargeHandleNoticeInput(void) {
     u16 keys;
 
     keys = MsChargeReadMenuKeys();
     if (keys & 3) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035C16 = 2;
+        sMsChargeMenuState = 2;
     } else if (keys & 8) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        gUnk_02035E20 = 0;
+        sMsChargeBackToTop = 0;
         FadeStartOut(0, 0x10);
-        gUnk_02035C14 = 2;
+        sMsChargeState = 2;
     }
 }
 
-void func_08106234(void) {
+void MsChargeDraw(void) {
     MsCard* card;
     void* anim;
     s32 sine;
@@ -959,101 +959,101 @@ void func_08106234(void) {
     s32 i;
     s32 j;
 
-    if ((s16)gUnk_02035C16 != 1) {
+    if ((s16)sMsChargeMenuState != 1) {
         DrawSprite(16, 60, AnimUpdate(&gUnk_02035C50), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7D0);
     }
-    t = (func_08104AA4(gUnk_02035C18) + 2) / 3 - 4;
-    if (gUnk_02035CE4 <= t) {
-        v = 84 * gUnk_02035CE4 / t;
+    t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
+    if (sMsChargeGridScroll <= t) {
+        v = 84 * sMsChargeGridScroll / t;
     } else {
         v = 0;
     }
-    DrawSprite(160, v + 40, gUnk_099A7C64, gUnk_02035C40, gUnk_02035D90, 0, 0x800, 0x898);
-    DrawSprite(24, 58, AnimUpdate(&gUnk_02035CA0), gUnk_02035C84, gUnk_02035C80, 0, 0x801, 0x834);
+    DrawSprite(160, v + 40, gUnk_099A7C64, sMsChargeScrollbarTiles, gUnk_02035D90, 0, 0x800, 0x898);
+    DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, 0x801, 0x834);
 
-    if (gUnk_02035C14 == 1) {
-        switch ((s16)gUnk_02035C16) {
+    if (sMsChargeState == 1) {
+        switch ((s16)sMsChargeMenuState) {
         case 1:
-            gUnk_02035E18 = gUnk_02035C18 * 3584 + 0xAC00;
-            gUnk_02035E1C = 0x1000;
-            DrawSprite(gUnk_02035E18 >> 8, (gUnk_02035E1C >> 8) + ((sine = gSineTable[gUnk_02035CB8]) >> 6), AnimUpdate(&gUnk_02035C88), gUnk_02035C84, gUnk_02035C80, 0, 0x801, 0x7D0);
+            sMsChargeCursorX = sMsChargeTab * 3584 + 0xAC00;
+            sMsChargeCursorY = 0x1000;
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, 0x801, 0x7D0);
             break;
         case 0:
-            ApproachValueHalf(&gUnk_02035E18, (gUnk_02035CE0 * 23 + 181) << 8);
-            ApproachValueHalf(&gUnk_02035E1C, (gUnk_02035CE2 * 26 + 40) << 8);
-            DrawSprite(gUnk_02035E18 >> 8, (gUnk_02035E1C >> 8) + ((sine = gSineTable[gUnk_02035CB8]) >> 6), AnimUpdate(&gUnk_02035C88), gUnk_02035C84, gUnk_02035C80, 0, 0x801, 0x7D0);
-            DrawSprite(gUnk_02035CE0 * 23 + 165, gUnk_02035CE2 * 26 + 27, AnimUpdate(&gUnk_02035C68), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7DA);
+            ApproachValueHalf(&sMsChargeCursorX, (sMsChargeGridCol * 23 + 181) << 8);
+            ApproachValueHalf(&sMsChargeCursorY, (sMsChargeGridRow * 26 + 40) << 8);
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, 0x801, 0x7D0);
+            DrawSprite(sMsChargeGridCol * 23 + 165, sMsChargeGridRow * 26 + 27, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7DA);
             break;
         case 2:
-            card = func_08104B2C();
-            if (card->unk_04 == 3) {
+            card = GetMsChargeSelectedCard();
+            if (card->category == 3) {
                 col = 0;
                 row = 0;
             } else {
-                col = gUnk_02035E0C;
-                row = gUnk_02035E0E;
+                col = sMsChargeValueCol;
+                row = sMsChargeValueRow;
             }
-            ApproachValueHalf(&gUnk_02035E18, (col * 48 + 64) << 8);
-            ApproachValueHalf(&gUnk_02035E1C, (row * 8 + 64) << 8);
-            DrawSprite(gUnk_02035E18 >> 8, (gUnk_02035E1C >> 8) + ((sine = gSineTable[gUnk_02035CB8]) >> 6), AnimUpdate(&gUnk_02035C88), gUnk_02035C84, gUnk_02035C80, 0, 0x801, 0x7D0);
-            DrawSprite(col * 48 + 53, row * 8 + 67, AnimUpdate(&gUnk_02035C68), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7DA);
+            ApproachValueHalf(&sMsChargeCursorX, (col * 48 + 64) << 8);
+            ApproachValueHalf(&sMsChargeCursorY, (row * 8 + 64) << 8);
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, 0x801, 0x7D0);
+            DrawSprite(col * 48 + 53, row * 8 + 67, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, 0, 0x800, 0x7DA);
             break;
         case 3:
-            ApproachValueHalf(&gUnk_02035E14, gUnk_02035E10 == 0 ? 0x4800 : 0x8800);
-            DrawSprite(gUnk_02035E14 >> 8, 98, AnimUpdate(&gUnk_02035CC8), gUnk_02035CC4, gUnk_02035CC0, 0, 1, 0);
+            ApproachValueHalf(&sMsChargeConfirmCursorX, sMsChargeConfirmCursor == 0 ? 0x4800 : 0x8800);
+            DrawSprite(sMsChargeConfirmCursorX >> 8, 98, AnimUpdate(&sMsChargeConfirmCursorAnim), sMsChargeConfirmCursorTiles, sMsChargeConfirmCursorPalette, 0, 1, 0);
 
-            if (gUnk_02035DF0 != 0) {
-                DrawTextSlots(120 - GetTextSlotsWidth(gUnk_02035DEC, gUnk_02035DF0) / 2, 60, gUnk_02035DEC, gUnk_02035C80, 1, gUnk_02035DF0);
+            if (sMsChargeConfirmTextCount != 0) {
+                DrawTextSlots(120 - GetTextSlotsWidth(sMsChargeConfirmText, sMsChargeConfirmTextCount) / 2, 60, sMsChargeConfirmText, sMsChargeMooglePalette, 1, sMsChargeConfirmTextCount);
             }
 
-            if (gUnk_02035E00 != 0) {
-                DrawTextSlots(80, 88, gUnk_02035DFC, gUnk_02035C80, 1, gUnk_02035E00);
+            if (sMsChargeYesTextCount != 0) {
+                DrawTextSlots(80, 88, sMsChargeYesText, sMsChargeMooglePalette, 1, sMsChargeYesTextCount);
             }
 
-            if (gUnk_02035E08 != 0) {
-                DrawTextSlots(144, 88, gUnk_02035E04, gUnk_02035C80, 1, gUnk_02035E08);
+            if (sMsChargeNoTextCount != 0) {
+                DrawTextSlots(144, 88, sMsChargeNoText, sMsChargeMooglePalette, 1, sMsChargeNoTextCount);
             }
             break;
         case 4:
-            if (gUnk_02035DF8 != 0) {
-                DrawTextSlots(120 - GetTextSlotsWidth(gUnk_02035DF4, gUnk_02035DF8) / 2, 74, gUnk_02035DF4, gUnk_02035C80, 1, gUnk_02035DF8);
+            if (sMsChargeNoticeTextCount != 0) {
+                DrawTextSlots(120 - GetTextSlotsWidth(sMsChargeNoticeText, sMsChargeNoticeTextCount) / 2, 74, sMsChargeNoticeText, sMsChargeMooglePalette, 1, sMsChargeNoticeTextCount);
             }
             break;
         }
     }
-    anim = AnimUpdate(&gUnk_02035DC0);
+    anim = AnimUpdate(&sMsChargeGridPremiumAnim);
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 3; j++) {
-            if (gUnk_02035D48[i][j] != 0) {
-                DrawSprite(j * 23 + 181, i * 26 + 47, gUnk_02035D48[i][j], gUnk_02035D18[i][j], gUnk_02035CE8[i][j], 0, 0x800, 0x83E);
+            if (sMsChargeGridSprites[i][j] != 0) {
+                DrawSprite(j * 23 + 181, i * 26 + 47, sMsChargeGridSprites[i][j], sMsChargeGridTiles[i][j], sMsChargeGridPalettes[i][j], 0, 0x800, 0x83E);
 
-                if (gUnk_02035D78[i][j] != 0) {
-                    DrawSprite(j * 23 + 181, i * 26 + 47, anim, gUnk_02035DB8, gUnk_02035D90, 0, 0x800, 0x834);
+                if (sMsChargeGridPremium[i][j] != 0) {
+                    DrawSprite(j * 23 + 181, i * 26 + 47, anim, sMsChargeGridPremiumTiles, gUnk_02035D90, 0, 0x800, 0x834);
                 }
             }
         }
     }
 
-    if ((s16)gUnk_02035C16 != 1) {
-        if (gUnk_02035D8C != 0) {
-            DrawSprite(24, 92, gUnk_02035D8C, gUnk_02035D88, gUnk_02035D84, 0, 0x800, 0x848);
+    if ((s16)sMsChargeMenuState != 1) {
+        if (sMsChargeCardSprite != 0) {
+            DrawSprite(24, 92, sMsChargeCardSprite, sMsChargeCardTiles, sMsChargeCardPalette, 0, 0x800, 0x848);
         }
 
         if (gUnk_02035D98 != 0) {
             DrawSprite(24, 92, gUnk_02035D98, gUnk_02035D94, gUnk_02035D90, 0, 0x800, 0x83E);
 
-            if (gUnk_02035DD8 != 0) {
-                DrawSprite(24, 92, AnimUpdate(&gUnk_02035DA0), gUnk_02035D9C, gUnk_02035D90, 0, 0x800, 0x834);
+            if (sMsChargeCardPremium != 0) {
+                DrawSprite(24, 92, AnimUpdate(&sMsChargePremiumAnim), sMsChargePremiumTiles, gUnk_02035D90, 0, 0x800, 0x834);
             }
         }
 
-        if (gUnk_02035DE0 != 0) {
-            DrawTextSlots(12, 115, gUnk_02035DDC, gUnk_02035C44, 1, gUnk_02035DE0);
+        if (sMsChargeNameTextCount != 0) {
+            DrawTextSlots(12, 115, sMsChargeNameText, gUnk_02035C44, 1, sMsChargeNameTextCount);
         }
 
-        if (gUnk_02035DE8 != 0) {
-            DrawTextSlots(6, 131, gUnk_02035DE4, gUnk_02035C80, 1, gUnk_02035DE8);
+        if (sMsChargeDescTextCount != 0) {
+            DrawTextSlots(6, 131, sMsChargeDescText, sMsChargeMooglePalette, 1, sMsChargeDescTextCount);
         }
     }
 }
@@ -1078,44 +1078,44 @@ void mode_ms_charge_0(void) {
     SetBgPriority(1, 2);
     SetBgPriority(2, 1);
     SetBgPriority(3, 0);
-    gUnk_02035C14 = 0;
-    gUnk_02035C18 = 4;
-    func_0810563C();
-    gUnk_02035CE0 = 0;
-    gUnk_02035CE2 = 0;
-    gUnk_02035CE4 = 0;
+    sMsChargeState = 0;
+    sMsChargeTab = 4;
+    MsChargeBuildCardList();
+    sMsChargeGridCol = 0;
+    sMsChargeGridRow = 0;
+    sMsChargeGridScroll = 0;
 
-    if (gUnk_02035C3A > 0) {
-        s32* position = &gUnk_02035E18;
+    if (sMsChargeCardTotal > 0) {
+        s32* position = &sMsChargeCursorX;
         s16 state = 0;
         *position = 0xB500;
-        gUnk_02035E1C = 0x2800;
-        gUnk_02035C16 = state;
+        sMsChargeCursorY = 0x2800;
+        sMsChargeMenuState = state;
     } else {
-        gUnk_02035E18 = gUnk_02035C18 * 3584 + 0xAC00;
-        gUnk_02035E1C = 0x1000;
-        gUnk_02035C16 = 1;
+        sMsChargeCursorX = sMsChargeTab * 3584 + 0xAC00;
+        sMsChargeCursorY = 0x1000;
+        sMsChargeMenuState = 1;
     }
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
-            gUnk_02035CE8[i][j] = 0;
-            gUnk_02035D18[i][j] = 0;
-            gUnk_02035D48[i][j] = 0;
-            gUnk_02035D78[i][j] = 0;
+            sMsChargeGridPalettes[i][j] = 0;
+            sMsChargeGridTiles[i][j] = 0;
+            sMsChargeGridSprites[i][j] = 0;
+            sMsChargeGridPremium[i][j] = 0;
         }
     }
-    gUnk_02035D84 = 0;
-    gUnk_02035D88 = 0;
-    gUnk_02035D8C = 0;
+    sMsChargeCardPalette = 0;
+    sMsChargeCardTiles = 0;
+    sMsChargeCardSprite = 0;
     gUnk_02035D94 = 0;
     gUnk_02035D98 = 0;
-    gUnk_02035DD8 = 0;
-    gUnk_02035E0C = 0;
-    gUnk_02035E0E = 0;
-    gUnk_02035CB8 = 0;
-    gUnk_02035CBA = -1;
-    gUnk_02035CBC = 0;
+    sMsChargeCardPremium = 0;
+    sMsChargeValueCol = 0;
+    sMsChargeValueRow = 0;
+    sMsChargeBobPhase = 0;
+    sMsChargeMoogleAnimId = -1;
+    sMsChargeMoogleAnimTimer = 0;
     LoadBgPalette(0, gUnk_09A3DBDC, 0x1A0);
     LoadBgTiles(0, gUnk_09A1913C,
 #ifdef VERSION_EU
@@ -1132,7 +1132,7 @@ void mode_ms_charge_0(void) {
 #endif
     , 0x500);
 
-    if (func_08104B2C()->unk_04 == 3) {
+    if (GetMsChargeSelectedCard()->category == 3) {
         LoadBgMap(1,
 #ifdef VERSION_EU
         gUnkEu_09F84FE4[gLanguage]
@@ -1149,67 +1149,67 @@ void mode_ms_charge_0(void) {
 #endif
     , 0x500);
     }
-    func_081052C8(gUnk_02035C18);
+    MsChargeDrawTab(sMsChargeTab);
     LoadBgMap(2,
         gUnk_09A3C25C
     , 0x500);
-    func_08104F2C();
-    func_08104FA4();
-    func_08104FF8();
-    func_08105090();
+    MsChargeDrawPoints();
+    MsChargeDrawCardCounts();
+    MsChargeDrawCategoryCounts();
+    MsChargeDrawValueCounts();
     gUnk_02035D90 = LoadObjPalette(gCard00Palette, 32);
-    gUnk_02035D9C = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
-    AnimInit(&gUnk_02035DA0, gUnk_09EEA164, gUnk_09EEA148);
-    AnimStart(&gUnk_02035DA0, 0, 1);
-    gUnk_02035DB8 = LoadObjTiles(gUnk_0908C3CE, 0x260);
-    AnimInit(&gUnk_02035DC0, gUnk_09EEA198, gUnk_09EEA180);
-    AnimStart(&gUnk_02035DC0, 0, 1);
-    gUnk_02035C40 = LoadObjTiles(gUnk_099A7C78, 32);
+    sMsChargePremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
+    AnimInit(&sMsChargePremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
+    AnimStart(&sMsChargePremiumAnim, 0, 1);
+    sMsChargeGridPremiumTiles = LoadObjTiles(gUnk_0908C3CE, 0x260);
+    AnimInit(&sMsChargeGridPremiumAnim, gUnk_09EEA198, gUnk_09EEA180);
+    AnimStart(&sMsChargeGridPremiumAnim, 0, 1);
+    sMsChargeScrollbarTiles = LoadObjTiles(gUnk_099A7C78, 32);
     gUnk_02035C44 = LoadObjPalette(gUnk_09A3DE7C, 32);
     gUnk_02035C48 = LoadObjTiles(gUnk_099A6C82, 0xFE0);
     AnimInit(&gUnk_02035C50, gUnk_09EF9AA4, gUnk_09EF9A68);
     AnimStart(&gUnk_02035C50, 1, 1);
-    AnimInit(&gUnk_02035C68, gUnk_09EF9AA4, gUnk_09EF9A68);
-    AnimStart(&gUnk_02035C68, 2, 1);
-    gUnk_02035C80 = LoadObjPalette(gMoguPalette, 32);
-    gUnk_02035C84 = LoadObjTiles(
+    AnimInit(&sMsChargeHighlightAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
+    AnimStart(&sMsChargeHighlightAnim, 2, 1);
+    sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
+    sMsChargeMoogleTiles = LoadObjTiles(
 #ifdef VERSION_EU
         gUnkEu_099AEE98
 #else
         gUnk_099A2194
 #endif
     , 0x940);
-    AnimInit(&gUnk_02035C88,
+    AnimInit(&sMsChargeCursorAnim,
         gUnk_09EF9978
     ,
         gUnk_09EF9928
     );
-    AnimStart(&gUnk_02035C88, 3, 1);
-    AnimInit(&gUnk_02035CA0,
+    AnimStart(&sMsChargeCursorAnim, 3, 1);
+    AnimInit(&sMsChargeMoogleAnim,
         gUnk_09EF9978
     ,
         gUnk_09EF9928
     );
-    AnimStart(&gUnk_02035CA0, 0, 1);
-    gUnk_02035CC0 = LoadObjPalette(gMoguPalette, 32);
-    gUnk_02035CC4 = LoadObjTiles(
+    AnimStart(&sMsChargeMoogleAnim, 0, 1);
+    sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, 32);
+    sMsChargeConfirmCursorTiles = LoadObjTiles(
 #ifdef VERSION_EU
         gUnkEu_092D1F74
 #else
         gMoguFl00Tiles
 #endif
     , 0xC00);
-    AnimInit(&gUnk_02035CC8, gMoguFl00Anims, gMoguFl00Frames);
+    AnimInit(&sMsChargeConfirmCursorAnim, gMoguFl00Anims, gMoguFl00Frames);
     {
-        TextSlot** dst = &gUnk_02035DDC;
+        TextSlot** dst = &sMsChargeNameText;
         *dst = EwramAlloc(36 * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035DDC, 36);
+    InitTextSlots(sMsChargeNameText, 36);
     {
-        TextSlot** dst = &gUnk_02035DE4;
+        TextSlot** dst = &sMsChargeDescText;
         *dst = EwramAlloc(90 * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035DE4, 90);
+    InitTextSlots(sMsChargeDescText, 90);
     length = GetTextLength(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890F40)
@@ -1217,20 +1217,20 @@ void mode_ms_charge_0(void) {
         gUnk_08159F38
 #endif
     );
-    gUnk_02035DF2 = length;
+    sMsChargeConfirmTextLength = length;
     {
-        TextSlot** dst = &gUnk_02035DEC;
-        *dst = EwramAlloc(gUnk_02035DF2 * sizeof(TextSlot));
+        TextSlot** dst = &sMsChargeConfirmText;
+        *dst = EwramAlloc(sMsChargeConfirmTextLength * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035DEC, gUnk_02035DF2);
-    pb = &gUnk_02035DF0;
+    InitTextSlots(sMsChargeConfirmText, sMsChargeConfirmTextLength);
+    pb = &sMsChargeConfirmTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890F40)
 #else
         gUnk_08159F38
 #endif
-    , gUnk_02035DEC);
+    , sMsChargeConfirmText);
     length = GetTextLength(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08895960)
@@ -1238,20 +1238,20 @@ void mode_ms_charge_0(void) {
         gUnk_0815C204
 #endif
     );
-    gUnk_02035DFA = length;
+    sMsChargeNoticeTextLength = length;
     {
-        TextSlot** dst = &gUnk_02035DF4;
-        *dst = EwramAlloc(gUnk_02035DFA * sizeof(TextSlot));
+        TextSlot** dst = &sMsChargeNoticeText;
+        *dst = EwramAlloc(sMsChargeNoticeTextLength * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035DF4, gUnk_02035DFA);
-    pb = &gUnk_02035DF8;
+    InitTextSlots(sMsChargeNoticeText, sMsChargeNoticeTextLength);
+    pb = &sMsChargeNoticeTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08895960)
 #else
         gUnk_0815C204
 #endif
-    , gUnk_02035DF4);
+    , sMsChargeNoticeText);
     length = GetTextLength(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890E1C)
@@ -1259,20 +1259,20 @@ void mode_ms_charge_0(void) {
         gUnk_08159E10
 #endif
     );
-    gUnk_02035E02 = length;
+    sMsChargeYesTextLength = length;
     {
-        TextSlot** dst = &gUnk_02035DFC;
-        *dst = EwramAlloc(gUnk_02035E02 * sizeof(TextSlot));
+        TextSlot** dst = &sMsChargeYesText;
+        *dst = EwramAlloc(sMsChargeYesTextLength * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035DFC, gUnk_02035E02);
-    pb = &gUnk_02035E00;
+    InitTextSlots(sMsChargeYesText, sMsChargeYesTextLength);
+    pb = &sMsChargeYesTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890E1C)
 #else
         gUnk_08159E10
 #endif
-    , gUnk_02035DFC);
+    , sMsChargeYesText);
     length = GetTextLength(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890E44)
@@ -1280,22 +1280,22 @@ void mode_ms_charge_0(void) {
         gUnk_08159E18
 #endif
     );
-    gUnk_02035E0A = length;
+    sMsChargeNoTextLength = length;
     {
-        TextSlot** dst = &gUnk_02035E04;
-        *dst = EwramAlloc(gUnk_02035E0A * sizeof(TextSlot));
+        TextSlot** dst = &sMsChargeNoText;
+        *dst = EwramAlloc(sMsChargeNoTextLength * sizeof(TextSlot));
     }
-    InitTextSlots(gUnk_02035E04, gUnk_02035E0A);
-    pb = &gUnk_02035E08;
+    InitTextSlots(sMsChargeNoText, sMsChargeNoTextLength);
+    pb = &sMsChargeNoTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
         eu_0805E924(gUnkEu_08890E44)
 #else
         gUnk_08159E18
 #endif
-    , gUnk_02035E04);
-    func_08104BBC();
-    func_08104D18();
+    , sMsChargeNoText);
+    MsChargeLoadGrid();
+    MsChargeLoadSelectedCard();
     EnableBg(0);
     EnableBg(1);
     DisableBg(2);
@@ -1304,65 +1304,65 @@ void mode_ms_charge_0(void) {
 
 void mode_ms_charge_1(void) {
     UpdatePlayTime();
-    gUnk_02035CB8 += 2;
+    sMsChargeBobPhase += 2;
 
-    switch (gUnk_02035C14) {
+    switch (sMsChargeState) {
     case 0:
         if (!FadeIsActive()) {
-            gUnk_02035C14 = 1;
+            sMsChargeState = 1;
         }
         break;
     case 1:
-        switch (gUnk_02035C16) {
+        switch (sMsChargeMenuState) {
         case 0:
-            func_0810594C();
+            MsChargeHandleGridInput();
             break;
         case 1:
-            func_08105BD8();
+            MsChargeHandleTabInput();
             break;
         case 2:
-            func_08105DE0();
+            MsChargeHandleValueInput();
             break;
         case 3:
-            func_0810601C();
+            MsChargeHandleConfirmInput();
             break;
         case 4:
-            func_081061DC();
+            MsChargeHandleNoticeInput();
             break;
         }
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (gUnk_02035E20 != 0) {
+            if (sMsChargeBackToTop != 0) {
                 ModeRequest(&gModeMsTop, 2);
             } else {
-                func_080E04EC();
+                RequestMapMode();
             }
         }
         break;
     }
 
-    if (gUnk_02035CBC > 0) {
-        if (AnimGetId(&gUnk_02035CA0) != 2) {
-            if (gUnk_02035CBA < 0) {
-                gUnk_02035CBA = AnimGetId(&gUnk_02035CA0);
+    if (sMsChargeMoogleAnimTimer > 0) {
+        if (AnimGetId(&sMsChargeMoogleAnim) != 2) {
+            if (sMsChargeMoogleAnimId < 0) {
+                sMsChargeMoogleAnimId = AnimGetId(&sMsChargeMoogleAnim);
             }
-            AnimStart(&gUnk_02035CA0, 2, 1);
+            AnimStart(&sMsChargeMoogleAnim, 2, 1);
         }
 
-        if (--gUnk_02035CBC <= 0) {
-            if (AnimGetId(&gUnk_02035CA0) != gUnk_02035CBA) {
-                AnimStart(&gUnk_02035CA0, gUnk_02035CBA, 1);
+        if (--sMsChargeMoogleAnimTimer <= 0) {
+            if (AnimGetId(&sMsChargeMoogleAnim) != sMsChargeMoogleAnimId) {
+                AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, 1);
             }
-            gUnk_02035CBA = -1;
+            sMsChargeMoogleAnimId = -1;
         }
-    } else if (gUnk_02035CBA >= 0) {
-        if (AnimGetId(&gUnk_02035CA0) != gUnk_02035CBA) {
-            AnimStart(&gUnk_02035CA0, gUnk_02035CBA, 1);
+    } else if (sMsChargeMoogleAnimId >= 0) {
+        if (AnimGetId(&sMsChargeMoogleAnim) != sMsChargeMoogleAnimId) {
+            AnimStart(&sMsChargeMoogleAnim, sMsChargeMoogleAnimId, 1);
         }
-        gUnk_02035CBA = -1;
+        sMsChargeMoogleAnimId = -1;
     }
-    func_08106234();
+    MsChargeDraw();
 }
 
 void mode_ms_charge_2(void) {
@@ -1370,51 +1370,51 @@ void mode_ms_charge_2(void) {
     s32 j;
 
     ReleaseObjPalette(gUnk_02035D90);
-    ReleaseObjTiles(gUnk_02035D9C);
-    ReleaseObjTiles(gUnk_02035DB8);
-    ReleaseObjTiles(gUnk_02035C40);
+    ReleaseObjTiles(sMsChargePremiumTiles);
+    ReleaseObjTiles(sMsChargeGridPremiumTiles);
+    ReleaseObjTiles(sMsChargeScrollbarTiles);
     ReleaseObjPalette(gUnk_02035C44);
     ReleaseObjTiles(gUnk_02035C48);
-    ReleaseObjPalette(gUnk_02035C80);
-    ReleaseObjTiles(gUnk_02035C84);
-    ReleaseObjPalette(gUnk_02035CC0);
-    ReleaseObjTiles(gUnk_02035CC4);
+    ReleaseObjPalette(sMsChargeMooglePalette);
+    ReleaseObjTiles(sMsChargeMoogleTiles);
+    ReleaseObjPalette(sMsChargeConfirmCursorPalette);
+    ReleaseObjTiles(sMsChargeConfirmCursorTiles);
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
-            if (gUnk_02035CE8[i][j] != 0) {
-                ReleaseObjPalette(gUnk_02035CE8[i][j]);
+            if (sMsChargeGridPalettes[i][j] != 0) {
+                ReleaseObjPalette(sMsChargeGridPalettes[i][j]);
             }
 
-            if (gUnk_02035D18[i][j] != 0) {
-                ReleaseObjTiles(gUnk_02035D18[i][j]);
+            if (sMsChargeGridTiles[i][j] != 0) {
+                ReleaseObjTiles(sMsChargeGridTiles[i][j]);
             }
         }
     }
 
-    if (gUnk_02035D84 != 0) {
-        ReleaseObjPalette(gUnk_02035D84);
+    if (sMsChargeCardPalette != 0) {
+        ReleaseObjPalette(sMsChargeCardPalette);
     }
 
-    if (gUnk_02035D88 != 0) {
-        ReleaseObjTiles(gUnk_02035D88);
+    if (sMsChargeCardTiles != 0) {
+        ReleaseObjTiles(sMsChargeCardTiles);
     }
 
     if (gUnk_02035D94 != 0) {
         ReleaseObjTiles(gUnk_02035D94);
     }
-    FreeTextSlots(gUnk_02035DDC, 36);
-    EwramFree(gUnk_02035DDC);
-    FreeTextSlots(gUnk_02035DE4, 90);
-    EwramFree(gUnk_02035DE4);
-    FreeTextSlots(gUnk_02035DEC, gUnk_02035DF2);
-    EwramFree(gUnk_02035DEC);
-    FreeTextSlots(gUnk_02035DF4, gUnk_02035DFA);
-    EwramFree(gUnk_02035DF4);
-    FreeTextSlots(gUnk_02035DFC, gUnk_02035E02);
-    EwramFree(gUnk_02035DFC);
-    FreeTextSlots(gUnk_02035E04, gUnk_02035E0A);
-    EwramFree(gUnk_02035E04);
+    FreeTextSlots(sMsChargeNameText, 36);
+    EwramFree(sMsChargeNameText);
+    FreeTextSlots(sMsChargeDescText, 90);
+    EwramFree(sMsChargeDescText);
+    FreeTextSlots(sMsChargeConfirmText, sMsChargeConfirmTextLength);
+    EwramFree(sMsChargeConfirmText);
+    FreeTextSlots(sMsChargeNoticeText, sMsChargeNoticeTextLength);
+    EwramFree(sMsChargeNoticeText);
+    FreeTextSlots(sMsChargeYesText, sMsChargeYesTextLength);
+    EwramFree(sMsChargeYesText);
+    FreeTextSlots(sMsChargeNoText, sMsChargeNoTextLength);
+    EwramFree(sMsChargeNoText);
     EwramFree(gMsCards);
 }
 

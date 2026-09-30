@@ -6,7 +6,7 @@
 void mode_sio_dbg_flg_0(s32 arg);
 void mode_sio_dbg_flg_1(void);
 void mode_sio_dbg_flg_2(void);
-void func_080C7350(void);
+void SioDbgApplySettings(void);
 
 #ifdef VERSION_EU
 extern u16 gUnk_0203C3C4;
@@ -15,14 +15,14 @@ extern s8 gUnk_0203C3C4;
 #endif
 extern u16 gUnk_0203C3C8;
 extern u16 gUnk_0203C3CC;
-extern u16 gUnk_0203C3D0;
+extern u16 gSioDbgCp;
 #ifdef VERSION_EU
 extern u16 gUnk_0203C3D4;
-extern u16 gUnkEu_0203C9B4;
-extern u16 gUnkEu_0203C9B8;
-extern u16 gUnkEu_0203C9BC;
-extern u16 gUnkEu_0203C9C0;
-extern u16 gUnkEu_0203C9C4;
+extern u16 gSioDbgLevel1P;
+extern u16 gSioDbgLoseCount1P;
+extern u16 gSioDbgWinCount2P;
+extern u16 gSioDbgHp2P;
+extern u16 gSioDbgLevel2P;
 #else
 extern s8 gUnk_0203C3D4;
 #endif

@@ -28,7 +28,7 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
 
     obj = work->actor;
 
-    if (obj->unk_0CC == 0) {
+    if (obj->shadowPriority == 0) {
         return;
     }
 
@@ -41,7 +41,7 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
     if (obj->z >= 0 && gBtlWork->scale == 0x100) {
         sprite = 0;
     } else {
-        size = 0x200 - ((obj->unk_010 - obj->z) / 128);
+        size = 0x200 - ((obj->groundZ - obj->z) / 128);
 
         if (size <= 127) {
             size = 128;
@@ -56,8 +56,8 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
         sprite = AllocObjAffine(0, size, size, flip);
     }
 
-    WorldToScreen(&x, &y, obj->x, obj->y, obj->unk_010);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, sprite, frame, obj->unk_0CC);
+    WorldToScreen(&x, &y, obj->x, obj->y, obj->groundZ);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, sprite, frame, obj->shadowPriority);
 }
 
 void task_bos_jf_shadow_3(JfShadowWork* work) {

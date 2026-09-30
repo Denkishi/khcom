@@ -4,12 +4,12 @@
 #include "gba/keys.h"
 #include "world_types.h"
 
-static ChkBtlWork gUnk_02034890;
+static ChkBtlWork sChkBtlWork;
 
 BtlWork* gBtlWork EWRAM_COMMON(4);
-u16 gUnk_02039B88 EWRAM_COMMON(4);
-u16 gUnk_02039B8C EWRAM_COMMON(4);
-u16 gUnk_02039B90 EWRAM_COMMON(4);
+u16 gVsBattleMinY EWRAM_COMMON(4);
+u16 gVsBattleMaxY EWRAM_COMMON(4);
+u16 gVsBattleHalfWidth EWRAM_COMMON(4);
 
 const ChkBtlEntry gChkBtlEntries[209] = {
     { WORLD_TRAVERSE_TOWN, { 0 }, 0, 10, 0, "\x82\x73\x82\x76\x82\x6d\x82\x4f" },
@@ -246,30 +246,30 @@ void mode_chkbtl_0(void) {
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
     EnableBg(0);
-    func_0805FA8C(0, 0x5400, 0x500);
-    func_0805FA60(0, gWhitePalette, 0x20, 0x0F);
-    func_0805FCB0(0, 0, 2, "\x82\x63\x82\x64\x82\x62\x82\x6a\x81\x7c\x82\x72\x82\x64\x82\x6b\x82\x64\x82\x62\x82\x73\x81\x40\x82\x61\x82\x74\x82\x73\x82\x73\x82\x6e\x82\x6d");
-    func_0805FCB0(24, 32, 2, "\x82\x64\x82\x6d\x82\x6c\x81\x46");
-    func_0805FCB0(24, 44, 2, "\x82\x61\x82\x66\x81\x40\x81\x46");
-    func_0805FCB0(24, 56, 2, "\x82\x65\x82\x6b\x81\x40\x81\x46");
-    func_0805FCB0(24, 68, 2, "\x82\x67\x82\x6f\x81\x40\x81\x46");
-    func_0805FCB0(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
+    DebugTextInit(0, 0x5400, 0x500);
+    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    DebugTextPrint(0, 0, 2, "\x82\x63\x82\x64\x82\x62\x82\x6a\x81\x7c\x82\x72\x82\x64\x82\x6b\x82\x64\x82\x62\x82\x73\x81\x40\x82\x61\x82\x74\x82\x73\x82\x73\x82\x6e\x82\x6d");
+    DebugTextPrint(24, 32, 2, "\x82\x64\x82\x6d\x82\x6c\x81\x46");
+    DebugTextPrint(24, 44, 2, "\x82\x61\x82\x66\x81\x40\x81\x46");
+    DebugTextPrint(24, 56, 2, "\x82\x65\x82\x6b\x81\x40\x81\x46");
+    DebugTextPrint(24, 68, 2, "\x82\x67\x82\x6f\x81\x40\x81\x46");
+    DebugTextPrint(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
 
-    if (gChkBtlEntries[gChkBtlWork->enemy].unk_04 == 2) {
-        func_0805FCB0(62, 44, 2, "\x81\x5c\x81\x5c");
+    if (gChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
+        DebugTextPrint(62, 44, 2, "\x81\x5c\x81\x5c");
     } else {
-        func_0805FCB0(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
+        DebugTextPrint(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
     }
 
-    func_0805FC04(62, 56, 2, gChkBtlWork->floor + 1);
-    func_0805FC04(62, 68, 2, gChkBtlWork->hp);
+    DebugTextPrintNumber(62, 56, 2, gChkBtlWork->floor + 1);
+    DebugTextPrintNumber(62, 68, 2, gChkBtlWork->hp);
 
-    if (!(gUnk_03006C10 & 1)) {
+    if (!(gDebugFlags & 1)) {
         func_08085FB0();
-        func_08085CB0();
+        InitDebugDecks();
         gGameState.progression.cp = 9999;
-        gUnk_03006C10 |= 1;
-        gGameState.progression.unk_84 = 0xFFFF;
+        gDebugFlags |= 1;
+        gGameState.progression.friendFlags = 0xFFFF;
     }
 }
 
@@ -277,20 +277,20 @@ void mode_chkbtl_1(void) {
     s32 i;
 
     if (GetKeysRepeat() & DPAD_UP) {
-        gChkBtlWork->unk_00--;
+        gChkBtlWork->cursor--;
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        gChkBtlWork->unk_00++;
+        gChkBtlWork->cursor++;
     }
 
     if (GetKeysRepeat() & (DPAD_UP | DPAD_DOWN)) {
         for (i = 0; i < 4; i++) {
-            func_0805FCB0(12, i * 12 + 32, 2, "\x81\x40");
+            DebugTextPrint(12, i * 12 + 32, 2, "\x81\x40");
         }
     }
 
-    switch (gChkBtlWork->unk_00) {
+    switch (gChkBtlWork->cursor) {
     case 0:
         if (GetKeysRepeat() & DPAD_LEFT) {
             gChkBtlWork->enemy--;
@@ -360,43 +360,43 @@ void mode_chkbtl_1(void) {
         }
         break;
     case 4:
-        gChkBtlWork->unk_00 = 0;
+        gChkBtlWork->cursor = 0;
         break;
     case -1:
-        gChkBtlWork->unk_00 = 3;
+        gChkBtlWork->cursor = 3;
         break;
     }
 
-    func_0805FCB0(12, gChkBtlWork->unk_00 * 12 + 32, 2, "\x81\x84");
+    DebugTextPrint(12, gChkBtlWork->cursor * 12 + 32, 2, "\x81\x84");
 
     if (GetKeysRepeat() & (DPAD_RIGHT | DPAD_LEFT)) {
-        switch (gChkBtlWork->unk_00) {
+        switch (gChkBtlWork->cursor) {
         case 0:
         case 1:
-            func_0805FCB0(62, 32, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
-            func_0805FCB0(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
-            func_0805FCB0(62, 44, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(62, 32, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
+            DebugTextPrint(62, 32, 2, gChkBtlEntries[gChkBtlWork->enemy].name);
+            DebugTextPrint(62, 44, 2, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40");
 
-            if (gChkBtlEntries[gChkBtlWork->enemy].unk_04 == 2) {
-                func_0805FCB0(62, 44, 2, "\x81\x5c\x81\x5c");
+            if (gChkBtlEntries[gChkBtlWork->enemy].kind == 2) {
+                DebugTextPrint(62, 44, 2, "\x81\x5c\x81\x5c");
             } else {
-                func_0805FCB0(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
+                DebugTextPrint(62, 44, 2, gChkBtlWorlds[gChkBtlWork->bg].name);
             }
             break;
         case 2:
-            func_0805FC04(62, 56, 2, gChkBtlWork->floor + 1);
+            DebugTextPrintNumber(62, 56, 2, gChkBtlWork->floor + 1);
             break;
         case 3:
-            func_0805FC04(62, 68, 2, gChkBtlWork->hp);
+            DebugTextPrintNumber(62, 68, 2, gChkBtlWork->hp);
             break;
         }
     }
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        ModeRequest(&gUnk_09EE2704, 0);
+        ModeRequest(&gModeDeck, 0);
     } else if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
         SeedRandom(gFrameCounter);
-        gGameState.unk_00D = gChkBtlWorlds[gChkBtlWork->bg].unk_00;
+        gGameState.battleStage = gChkBtlWorlds[gChkBtlWork->bg].world;
         gGameState.floor = gChkBtlWork->floor;
         gGameState.hp = gChkBtlWork->hp;
         gGameState.progression.maxHp = gChkBtlWork->hp;
@@ -409,30 +409,30 @@ void mode_chkbtl_1(void) {
         }
 
         if (gGameState.flags & 8) {
-            _08085D04(gChkBtlWork->floor);
+            InitRikuDeckForWorld(gChkBtlWork->floor);
         }
 
-        ModeRequest(&gModeBattle, gChkBtlEntries[gChkBtlWork->enemy].unk_08);
+        ModeRequest(&gModeBattle, gChkBtlEntries[gChkBtlWork->enemy].battleId);
     } else if (GetKeysPressed() & B_BUTTON) {
         ModeRequest(&gModeDebug, 0);
         return;
     }
 
-    func_080605A4(0);
-    func_08060598();
+    DebugTextDraw(0);
+    DebugTextClear();
 }
 
 void mode_chkbtl_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
 }
 
-void func_0800AB8C(void) {
+void ChkBtlSpawnEnemy(void) {
     ChkBtlEntry* entry;
     ChkBtlPos pos;
 
     entry = &gChkBtlEntries[gChkBtlWork->enemy];
 
-    if (entry->unk_08 == 0xB9) {
+    if (entry->battleId == 0xB9) {
         pos.x = 0x15000;
         pos.y = 0x16000;
         pos.z = 0;
@@ -440,18 +440,18 @@ void func_0800AB8C(void) {
     }
 }
 
-void func_0800ABD8(void) {
-    gChkBtlWork->unk_00 = 0;
+void ChkBtlReset(void) {
+    gChkBtlWork->cursor = 0;
     gChkBtlWork->bg = 0;
     gChkBtlWork->enemy = 0;
     gChkBtlWork->floor = 0;
     gChkBtlWork->hp = gGameState.progression.maxHp;
-    gUnk_03006C10 &= ~1;
-    gUnk_02039B90 = 0x98;
-    gUnk_02039B88 = 0x160;
-    gUnk_02039B8C = 0x1A2;
+    gDebugFlags &= ~1;
+    gVsBattleHalfWidth = 0x98;
+    gVsBattleMinY = 0x160;
+    gVsBattleMaxY = 0x1A2;
 }
 
-ChkBtlWork* gChkBtlWork = &gUnk_02034890;
+ChkBtlWork* gChkBtlWork = &sChkBtlWork;
 
 Mode gModeChkbtl = { "mode_chkbtl", mode_chkbtl_0, mode_chkbtl_1, mode_chkbtl_2 };

@@ -9,7 +9,7 @@
 
 #ifdef VERSION_EU
 
-MovieDebugWork* gUnkEu_020348C4;
+MovieDebugWork* gMovieDebugWorkEu;
 
 extern const char gMovieDebugTextEu_0812F6D4[];
 extern const char gMovieDebugTextEu_0812F6F4[];
@@ -17,11 +17,11 @@ extern const char gMovieDebugTextEu_0812F6F4[];
 extern const MovieDebugEntry gMovieDebugEntriesEu[5];
 
 void eu_0800C76C(s32 arg) {
-    gUnkEu_020348C4 = EwramAlloc(sizeof(MovieDebugWork));
+    gMovieDebugWorkEu = EwramAlloc(sizeof(MovieDebugWork));
     SetBgMode0();
-    gUnkEu_020348C4->index = 0;
-    TaskPoolInit(&gUnkEu_020348C4->pool, 10);
-    TaskCreate(&gUnkEu_020348C4->pool, &gTaskDescPrint, 0);
+    gMovieDebugWorkEu->index = 0;
+    TaskPoolInit(&gMovieDebugWorkEu->pool, 10);
+    TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, 0);
 }
 
 void eu_0800C7A0(void) {
@@ -33,37 +33,37 @@ void eu_0800C7A0(void) {
     }
 
     if (GetKeysRepeat() & DPAD_LEFT) {
-        gUnkEu_020348C4->index--;
+        gMovieDebugWorkEu->index--;
     }
 
     if (GetKeysRepeat() & DPAD_RIGHT) {
-        gUnkEu_020348C4->index++;
+        gMovieDebugWorkEu->index++;
     }
 
-    if (gUnkEu_020348C4->index < 0) {
-        gUnkEu_020348C4->index = 4;
+    if (gMovieDebugWorkEu->index < 0) {
+        gMovieDebugWorkEu->index = 4;
     }
 
-    if (gUnkEu_020348C4->index > 4) {
-        gUnkEu_020348C4->index = 0;
+    if (gMovieDebugWorkEu->index > 4) {
+        gMovieDebugWorkEu->index = 0;
     }
 
     if (GetKeysPressed() & A_BUTTON) {
-        ModeRequestHeapReset(&gModeMovie, gMovieDebugEntriesEu[gUnkEu_020348C4->index].movie);
+        ModeRequestHeapReset(&gModeMovie, gMovieDebugEntriesEu[gMovieDebugWorkEu->index].movie);
         return;
     }
 
-    func_0809D2B0(0, 0, 0, gMovieDebugTextEu_0812F6D4);
-    func_0809D458(0, 0, 0, gUnkEu_020348C4->index);
-    func_0809D2B0(5, 0, 0, gMovieDebugTextEu_0812F6F4);
-    func_0809D2B0(7, 0, 0, gMovieDebugEntriesEu[gUnkEu_020348C4->index].label);
-    TaskPoolUpdate(&gUnkEu_020348C4->pool);
-    TaskPoolDraw(&gUnkEu_020348C4->pool);
+    PrintString(0, 0, 0, gMovieDebugTextEu_0812F6D4);
+    PrintNumber(0, 0, 0, gMovieDebugWorkEu->index);
+    PrintString(5, 0, 0, gMovieDebugTextEu_0812F6F4);
+    PrintString(7, 0, 0, gMovieDebugEntriesEu[gMovieDebugWorkEu->index].label);
+    TaskPoolUpdate(&gMovieDebugWorkEu->pool);
+    TaskPoolDraw(&gMovieDebugWorkEu->pool);
 }
 
 void eu_0800C898(void) {
-    TaskPoolDestroy(&gUnkEu_020348C4->pool);
-    EwramFree(gUnkEu_020348C4);
+    TaskPoolDestroy(&gMovieDebugWorkEu->pool);
+    EwramFree(gMovieDebugWorkEu);
 }
 
 const MovieDebugEntry gMovieDebugEntriesEu[5] = {

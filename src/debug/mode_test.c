@@ -6,43 +6,43 @@
 #include "sprites_pooh.h"
 
 #ifndef VERSION_EU
-static struct ObjTiles* gUnk_02034A08;
-static struct ObjPalette* gUnk_02034A0C;
-static s32 gUnk_02034A10;
+static struct ObjTiles* sTestTiles;
+static struct ObjPalette* sTestPalette;
+static s32 sTestFrame;
 #endif
 
 #ifndef VERSION_EU
 void mode_test_0(void) {
-    gUnk_02034A10 = 0;
-    gUnk_02034A08 = LoadObjTiles(gBHpgagETiles, 0x7C0);
-    gUnk_02034A0C = LoadObjPalette(gBStatesPalette, 0x20);
+    sTestFrame = 0;
+    sTestTiles = LoadObjTiles(gBHpgagETiles, 0x7C0);
+    sTestPalette = LoadObjPalette(gBStatesPalette, 0x20);
 }
 #endif
 
 #ifndef VERSION_EU
 void mode_test_1(void) {
     if (GetKeysRepeat() & DPAD_LEFT) {
-        gUnk_02034A10--;
+        sTestFrame--;
     } else if (GetKeysRepeat() & DPAD_RIGHT) {
-        gUnk_02034A10++;
+        sTestFrame++;
     }
 
-    if (gUnk_02034A10 < 0) {
-        gUnk_02034A10 = 0;
+    if (sTestFrame < 0) {
+        sTestFrame = 0;
     }
 
-    if (gUnk_02034A10 > 13) {
-        gUnk_02034A10 = 13;
+    if (sTestFrame > 13) {
+        sTestFrame = 13;
     }
 
-    DrawSprite(120, 80, gBHpgagEFrames[gUnk_02034A10], gUnk_02034A08, gUnk_02034A0C, 0, 0, 0);
+    DrawSprite(120, 80, gBHpgagEFrames[sTestFrame], sTestTiles, sTestPalette, 0, 0, 0);
 }
 #endif
 
 #ifndef VERSION_EU
 void mode_test_2(void) {
-    ReleaseObjTiles(gUnk_02034A08);
-    ReleaseObjPalette(gUnk_02034A0C);
+    ReleaseObjTiles(sTestTiles);
+    ReleaseObjPalette(sTestPalette);
 }
 #endif
 
@@ -51,7 +51,7 @@ void ApproachValueHalf(s32* p, s32 v) {
 }
 
 #ifdef VERSION_EU
-const AnimDef gUnkEu_08896524[18] = {
+const AnimDef gFrdPoohAnimDefsEu[18] = {
     { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 0, { 0, 0, 0 } },
     { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 0, { 0, 0, 0 } },
     { gPoohRr01Frames, gPoohRr01Anims, gPoohRr01Tiles, 0, { 0, 0, 0 } },
@@ -76,7 +76,7 @@ u8 eu_08060C44(FrdPoohWork* work) {
     FrdPoohBody* body;
 
     body = &work->body;
-    func_0801C6D4(&body->x, &body->y, &body->z, &body->ground);
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->ground);
     body->z += work->velocity;
     work->velocity += 0x33;
     if (body->z > body->ground) {
@@ -106,10 +106,10 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     work->counter = 0;
     work->velocity = 0;
     if (work->actor->flags & 4) {
-        body->x = (gBtlWork->unk_0DC + 48) * 256;
+        body->x = (gBtlWork->xMax + 48) * 256;
         body->flags = 4;
     } else {
-        body->x = (gBtlWork->unk_0DA - 48) * 256;
+        body->x = (gBtlWork->xMin - 48) * 256;
         body->flags = 0;
     }
     body->y = work->actor->y;
@@ -120,7 +120,7 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     work->targetY = work->actor->y;
     work->palette = LoadObjPalette(gPoohPalette, 32);
     AnimInit(&work->anim, 0, 0);
-    AnimChangeWithDef(gUnkEu_08896524, &work->anim, 0, 0, work->tiles);
+    AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 0, 0, work->tiles);
     ColliderInit(body->particles, 3, 10, 32);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -135,42 +135,42 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     if (battle->flags & 0x40000000) {
         return 0;
     }
-    func_0802F284(body->x, body->y, body->z);
+    BtlMapFollowPosition(body->x, body->y, body->z);
     switch (work->state) {
     case 0: {
         s32 flip = 0;
         u8 angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
         switch (((angle + 16) & 255) >> 5) {
         case 0:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 4, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 4, 1, work->tiles);
             flip = 1;
             break;
         case 1:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 3, 1, work->tiles);
             flip = 1;
             break;
         case 2:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 2, 1, work->tiles);
             flip = 1;
             break;
         case 3:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 1, 1, work->tiles);
             flip = 1;
             break;
         case 4:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 0, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 0, 1, work->tiles);
             flip = 0;
             break;
         case 5:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 1, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 1, 1, work->tiles);
             flip = 0;
             break;
         case 6:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 2, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 2, 1, work->tiles);
             flip = 0;
             break;
         case 7:
-            AnimChangeWithDef(gUnkEu_08896524, &work->anim, 3, 1, work->tiles);
+            AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 3, 1, work->tiles);
             flip = 0;
             break;
         }
@@ -178,11 +178,11 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         else body->flags &= ~4ULL;
         body->x += gSineTable[angle] * 128 >> 8;
         body->y += -gSineTable[angle + 64] * 128 >> 8;
-        func_08011F78(110, body->x, body->y, body->z, 20, 10, 64);
+        ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
         if ((body->x - work->targetX >= 0 ? body->x - work->targetX : work->targetX - body->x) < 0x800 &&
             (body->y - work->targetY >= 0 ? body->y - work->targetY : work->targetY - body->y) < 0x800) {
-            work->targetX = (gBtlWork->unk_0DA + GetRandom() % (gBtlWork->unk_0DC - gBtlWork->unk_0DA + 1)) * 256;
-            work->targetY = (gBtlWork->unk_0DE + GetRandom() % (gBtlWork->unk_0E0 - gBtlWork->unk_0DE + 1)) * 256;
+            work->targetX = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) * 256;
+            work->targetY = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) * 256;
         }
         if ((u16)(GetRandom() % 300u) == 0) work->state = 1;
         break;
@@ -191,13 +191,13 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         u8 angle;
         work->targetX = work->actor->x;
         work->targetY = work->actor->y;
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, 5, 1, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 5, 1, work->tiles);
         angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
         if (work->targetX < body->x) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x += gSineTable[angle] * 0x133 >> 8;
         body->y += -gSineTable[angle + 64] * 0x133 >> 8;
-        func_08011F78(110, body->x, body->y, body->z, 20, 10, 64);
+        ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
         if (ColliderIsTouchingType(body->particles, 1)) {
             work->state = 2;
             ColliderSetDisabled(body->particles, 1);
@@ -206,7 +206,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     }
     case 2:
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, 6, 0, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 6, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
             if (work->actor->flags & 4) body->flags |= 4;
             else body->flags &= ~4ULL;
@@ -219,7 +219,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         work->bob += (-0x1C00 - work->bob) >> 3;
         break;
     case 5:
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, 9, 0, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 9, 0, work->tiles);
         if (work->actor->flags & 4) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x = work->actor->x;
@@ -230,7 +230,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
             work->counter = 120;
             work->animcounter = 0;
             work->scale = 0;
-            func_08016C40(body->x, body->y, body->z - 0x1A00, 0x180, 0x80, 80);
+            BgFxStartJfMajinBeam(body->x, body->y, body->z - 0x1A00, 0x180, 0x80, 80);
         } else work->counter++;
         break;
     case 6: {
@@ -241,10 +241,10 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         body->y = work->actor->y + 0x800;
         body->z = work->actor->z + work->bob - 0xC00;
         frame = (work->animcounter >> 8) & 7;
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, frame + 10, 0, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, frame + 10, 0, work->tiles);
         ApproachValue(&work->animcounter, 0x800, work->counter);
         ApproachValue(&work->scale, 0x10000, work->counter);
-        func_080147B8(-(work->scale >> 8) - 128);
+        BgFxSetAngle(-(work->scale >> 8) - 128);
         BgFxSetPosition(body->x, body->y, body->z - 0x1A00);
         if (--work->counter <= 0) {
             work->state = 3;
@@ -256,7 +256,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     }
     case 3:
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, 7, 0, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 7, 0, work->tiles);
         if (body->flags & 4) body->x -= work->speed;
         else body->x += work->speed;
         work->speed -= 0x33;
@@ -269,12 +269,12 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         }
         if (eu_08060C44(work) && !work->bounce) {
             work->bounce = 1;
-            func_0802F1E8();
+            BtlMapStartShake();
         }
-        func_08011F78(162, body->x, body->y, body->z, 30, 25, 10);
+        ApplyAttackBox(162, body->x, body->y, body->z, 30, 25, 10);
         break;
     case 4:
-        AnimChangeWithDef(gUnkEu_08896524, &work->anim, 8, 0, work->tiles);
+        AnimChangeWithDef(gFrdPoohAnimDefsEu, &work->anim, 8, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) work->state = 0;
         break;
     }

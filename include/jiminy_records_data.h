@@ -4,22 +4,22 @@
 #include "jiminy_types.h"
 #include "jiminy_records_index_data.h"
 
-extern const JiminyEntry gUnk_08155554[21];
-extern const JiminyDetail gUnk_0815574C[17];
-extern const JiminyDetail gUnk_08155B04[6];
-extern const JiminyDetail gUnk_08155C54[17];
-extern const JiminyDetail gUnk_0815600C[14];
-extern const JiminyDetail gUnk_0815631C[7];
-extern const JiminyDetail gUnk_081564A4[7];
-extern const JiminyDetail gUnk_0815662C[49];
-extern const JiminyDetail gUnk_081570E4[26];
-extern const JiminyDetail gUnk_08157694[1];
-extern const JiminyDetail gUnk_081576CC[22];
-extern const JiminyDetail gUnk_08157B9C[25];
-extern const JiminyDetail gUnk_08158114[40];
-extern const JiminyDetail gUnk_081589D4[35];
-extern const JiminyDetail gUnk_0815917C[14];
-extern const JiminyDetail gUnk_0815948C[6];
-extern const JiminyDetail gUnk_081595DC[33];
+extern const JiminyEntry gJiminyEntries[21];
+extern const JiminyDetail gJiminyEntry01Details[17];
+extern const JiminyDetail gJiminyEntry15Details[6];
+extern const JiminyDetail gJiminyEntry04Details[17];
+extern const JiminyDetail gJiminyEntry05Details[14];
+extern const JiminyDetail gJiminyEntry06Details[7];
+extern const JiminyDetail gJiminyEntry07Details[7];
+extern const JiminyDetail gJiminyEntry08Details[49];
+extern const JiminyDetail gJiminyEntry09Details[26];
+extern const JiminyDetail gJiminyEntry10Details[1];
+extern const JiminyDetail gJiminyEntry16Details[22];
+extern const JiminyDetail gJiminyEntry11Details[25];
+extern const JiminyDetail gJiminyEntry12Details[40];
+extern const JiminyDetail gJiminyEntry13Details[35];
+extern const JiminyDetail gJiminyEntry18Details[14];
+extern const JiminyDetail gJiminyEntry19Details[6];
+extern const JiminyDetail gJiminyEntry20Details[33];
 
 #endif

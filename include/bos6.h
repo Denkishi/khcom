@@ -10,27 +10,27 @@
 #include "prize_types.h"
 
 typedef struct PcAnimStep {
-    u16 unk_00;
+    u16 op;
     u8 unk_02[0x2];
-    s16 unk_04;
-    s16 unk_06;
-    s16 unk_08;
+    s16 body2X;
+    s16 body2Y;
+    s16 body2Z;
     u8 unk_0A[0x2];
-    u16 unk_0C;
-    s16 unk_0E;
-    s16 unk_10;
-    s16 unk_12;
-    s16 unk_14;
-    s16 unk_16;
-    s16 unk_18;
+    u16 anchorCmd;
+    s16 hitX;
+    s16 hitY;
+    s16 hitZ;
+    s16 hitHalfX;
+    s16 hitHalfY;
+    s16 hitHalfZ;
     u8 unk_1A[0x2];
-    u16 unk_1C;
-    s16 unk_1E;
-    s16 unk_20;
-    s16 unk_22;
+    u16 event;
+    s16 gfxSet;
+    s16 cmdList;
+    s16 duration;
 } PcAnimStep;
 
-extern const PcAnimStep gUnk_09A4AF34[];
+extern const PcAnimStep gBosPcIdleAnim[];
 extern const PcAnimStep gUnk_09A4B174[];
 extern const PcAnimStep gUnk_09A4B3B4[];
 extern const PcAnimStep gUnk_09A4B5F4[];
@@ -41,14 +41,14 @@ extern const PcAnimStep gUnk_09A4BEAC[];
 extern const PcAnimStep gUnk_09A4C278[];
 extern const PcAnimStep gUnk_09A4C470[];
 extern const PcAnimStep gUnk_09A4C5B4[];
-extern const PcAnimStep gUnk_09A4C6F8[];
+extern const PcAnimStep gBosPcDefeatAnim[];
 extern const PcAnimStep gUnk_09A4C818[];
 extern const PcAnimStep gUnk_09A4C860[];
 
 typedef struct PcSpriteCmd {
     u8 flags;
-    u8 unk_01;
-    s16 unk_02;
+    u8 gfxIndex;
+    s16 layer;
     s16 x;
     s16 y;
     s16 unk_08;
@@ -164,22 +164,22 @@ typedef struct PcGfxSet {
 extern const PcGfxSet gPcGfxSets[];
 
 typedef struct PcShot {
-    s32 unk_00;
-    s32 unk_04;
+    s32 targetX;
+    s32 targetY;
     u16 unk_08;
     u8 unk_0A[0x2];
     s32 unk_0C;
 } PcShot;
 
-extern const u16 gUnk_09A4C9EC[];
-extern const s16 gUnk_09A4C9F2[];
+extern const u16 gBosPcPaletteCycleNext[];
+extern const s16 gBosPcPaletteCycleFrames[];
 extern const PcShot gPcShots[];
 
 extern const s8 gUnk_09A4CA94[];
 extern const s8 gUnk_09A4CAB5[];
 
-extern const u16 gUnk_09A4CABE[];
-extern const s16 gUnk_09A4CAC4[];
+extern const u16 gBosPcFldPaletteCycleNext[];
+extern const s16 gBosPcFldPaletteCycleFrames[];
 
 #include "battle_bg_types.h"
 
@@ -210,14 +210,14 @@ extern const s16 gUnk_09A4CAC4[];
 #include "btl_api.h"
 
 typedef struct PcShared {
-    s16 unk_00;
+    s16 hpRatio;
     u8 unk_02;
     u8 unk_03;
     u8 unk_04;
-    u8 unk_05;
+    u8 inEvent;
     u8 unk_06[0x2];
-    s32 unk_08;
-    s32 unk_0C;
+    s32 fltStopTimer;
+    s32 gimmickTimer;
 } PcShared;
 
 typedef struct PcOam {
@@ -227,30 +227,30 @@ typedef struct PcOam {
 
 typedef struct PcWork {
     s16 state;
-    s16 unk_002;
-    s16 unk_004;
-    s16 unk_006;
-    s16 unk_008;
-    s16 unk_00A;
-    s16 unk_00C;
+    s16 step;
+    s16 cardDelay;
+    s16 hurtTimer;
+    s16 reactionAnim;
+    s16 flash;
+    s16 prevFlash;
     u8 unk_00E[0x2];
-    s32 unk_010;
-    s32 unk_014;
-    u8 unk_018;
+    s32 hitAttack;
+    s32 hitFlags;
+    u8 defeated;
     u8 unk_019[0x3];
-    s32 unk_01C;
-    s32 unk_020;
-    s32 unk_024;
-    s32 unk_028;
+    s32 actorMaxX;
+    s32 x;
+    s32 y;
+    s32 z;
     PcAnimStep* animSteps;
-    s16 unk_030;
-    s16 unk_032;
-    s16 unk_034;
-    s16 unk_036;
-    u8 unk_038;
+    s16 animIndex;
+    s16 animFrame;
+    s16 animTimer;
+    s16 bgFrame;
+    u8 paletteCycle;
     u8 unk_039;
-    s16 unk_03A;
-    s16 unk_03C;
+    s16 paletteIndex;
+    s16 paletteTimer;
     u8 unk_03E[0x2];
     void* tiles;
     void* tiles2[2];
@@ -269,8 +269,8 @@ typedef struct PcWork {
 
 extern u8 gBosPcBgPalette[];
 
-u16 func_08109FF0(PcWork* work, s32 a);
-u16 func_0810A000(PcWork* work, s32 a, s32 b);
+u16 BosPcGetSpritePriority(PcWork* work, s32 a);
+u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b);
 
 typedef struct PcAcdWork {
     u32 unk_000;
@@ -279,30 +279,30 @@ typedef struct PcAcdWork {
     s32 x;
     s32 y;
     s32 unk_014;
-    u8 unk_018;
+    u8 acdOff;
     u8 unk_019[0x3];
     PcShared* shared;
     AnimState anim;
 } PcAcdWork;
 
 typedef struct PcFltWork {
-    u16 unk_000;
+    u16 playerOnPlatform;
     s16 timer;
-    u8 unk_004;
-    u8 unk_005;
+    u8 index;
+    u8 state;
     u8 unk_006;
     u8 unk_007;
-    u16 unk_008;
+    u16 orbitAngle;
     u8 unk_00A[0x2];
-    u32 unk_00C;
-    u32 unk_010;
-    u16 unk_014;
-    u16 unk_016;
-    s16 unk_018;
+    u32 centerX;
+    u32 centerY;
+    u16 radiusX;
+    u16 radiusY;
+    s16 sinkTimer;
     u8 unk_01A[0x2];
-    u32 unk_01C;
-    u32 unk_020;
-    u32 unk_024;
+    u32 baseX;
+    u32 baseY;
+    u32 baseZ;
     s32 x;
     s32 y;
     s32 z;
@@ -314,10 +314,10 @@ typedef struct PcFltWork {
 } PcFltWork;
 
 typedef struct PcFldWork {
-    u8 unk_000;
+    u8 paletteCycle;
     u8 unk_001;
-    s16 unk_002;
-    s16 unk_004;
+    s16 paletteIndex;
+    s16 paletteTimer;
     u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
@@ -325,15 +325,15 @@ typedef struct PcFldWork {
 } PcFldWork;
 
 typedef struct LstSub {
-    u8 unk_000;
+    u8 defeated;
     u8 unk_001;
-    u8 unk_002;
+    u8 restartAnim;
     u8 unk_003;
-    s16 unk_004;
+    s16 state;
     s16 timer;
-    s16 unk_008;
-    s16 unk_00A;
-    s16 unk_00C;
+    s16 hurtTimer;
+    s16 animId;
+    s16 curAnimId;
     u8 unk_00E[0x2];
     ObjTiles* tiles;
     u8 unk_014[0x4];
@@ -342,80 +342,80 @@ typedef struct LstSub {
 } LstSub;
 
 typedef struct BosLstWork {
-    u8 unk_000;
-    u8 unk_001;
-    u8 unk_002;
+    u8 inEvent;
+    u8 eventStep;
+    u8 hidden;
     u8 unk_003;
     s16 unk_004;
-    s16 unk_006;
-    s16 unk_008;
-    s16 unk_00A;
-    s16 unk_00C;
-    s16 unk_00E;
-    s16 unk_010;
-    s16 unk_012;
-    u16 unk_014;
-    u16 unk_016;
-    s32 unk_018;
-    u8 unk_01C;
+    s16 subsDefeated;
+    s16 state;
+    s16 step;
+    s16 moveMode;
+    s16 attackKind;
+    s16 bodyCycle;
+    s16 facing;
+    u16 flash;
+    u16 prevFlash;
+    s32 hpRatio;
+    u8 turned;
     u8 unk_01D;
-    s16 unk_01E;
-    u16 unk_020;
-    u16 unk_022;
-    u16 unk_024;
-    s16 unk_026;
+    s16 animId;
+    u16 animFlags;
+    u16 animFacing;
+    u16 bgFrame;
+    s16 hittableTimer;
     ObjTiles* tiles;
     AnimState anim;
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_050;
-    s32 unk_054;
-    s32 unk_058;
-    s32 unk_05C;
-    s32 unk_060;
-    s32 unk_064;
-    s16 unk_068;
-    s16 unk_06A;
-    u16 unk_06C;
-    s16 unk_06E;
-    u16 unk_070;
-    s16 unk_072;
-    u16 unk_074;
+    s32 offsetX;
+    s32 offsetY;
+    s32 offsetZ;
+    s32 actorX;
+    s32 actorY;
+    s32 actorZ;
+    s16 timer;
+    s16 bobFrame;
+    u16 frameCount;
+    s16 platformTimer;
+    u16 cardRequests;
+    s16 breakCount;
+    u16 falCount;
     u16 unk_076;
     u16 unk_078;
-    s16 unk_07A;
-    s32 unk_07C;
-    s16 unk_080;
-    s16 unk_082;
-    s32 unk_084;
-    s32 unk_088;
-    s16 unk_08C;
-    s16 unk_08E;
-    s32 unk_090;
+    s16 defeatTimer;
+    s32 cardDelay;
+    s16 groundStep;
+    s16 groundCount;
+    s32 groundVz;
+    s32 groundTargetX;
+    s16 kamaStep;
+    s16 kamaCount;
+    s32 kamaStartX;
     s32 unk_094;
     s32 unk_098;
-    s32 unk_09C;
-    s32 unk_0A0;
-    s32 unk_0A4;
-    s16 unk_0A8;
-    s16 unk_0AA;
+    s32 kamaTargetX;
+    s32 kamaTargetY;
+    s32 kamaTargetZ;
+    s16 dashStep;
+    s16 dashCount;
     s16 unk_0AC;
     u8 unk_0AE[0x2];
-    s32 unk_0B0;
-    s32 unk_0B4;
-    s32 unk_0B8;
-    s16 unk_0BC;
-    s16 unk_0BE;
-    s16 unk_0C0;
+    s32 dashSpeed;
+    s32 dashVz;
+    s32 ctrCount;
+    s16 bitStep;
+    s16 bitRound;
+    s16 bitAttackStarted;
     u16 unk_0C2;
-    s32 unk_0C4;
+    s32 lstTaskCount;
     u8 unk_0C8[0xC];
-    u8 unk_0D4;
+    u8 playerOnPlatform;
     u8 unk_0D5;
-    s16 unk_0D6;
+    s16 platformStep;
     u8 unk_0D8[0x4];
-    s32 unk_0DC;
+    s32 platformSpeed;
     ObjPalette* palette;
     BtlObj body;
     LstSub sub[2];
@@ -425,124 +425,124 @@ typedef struct BosLstWork {
     Task* task;
     Task* lstTasks[0x20];
     TaskPool tasks;
-    u8 unk_8A4[0x280];
+    u8 bgMap[0x280];
     u8 unk_B24[0x24];
     u8 unk_B48[0x55C];
 } BosLstWork;
 
 extern u8 gUnk_05000080[];
 
-void func_0810A018(PcWork* work);
-void func_0810A498(PcWork* work);
+void BosPcDraw(PcWork* work);
+void BosPcLoadPaletteCycle(PcWork* work);
 
-s32 func_0810B49C(void);
-void func_0810B4A8(PcFldWork* work);
-void func_0810B51C(PcFldWork* work);
-void func_0810BF24(Task* task, u8 v);
-void func_0810C2CC(BosLstWork* work, u16 a, u16 b);
-void func_0810C2E0(BosLstWork* work);
+s32 BosPcFldGetShake(void);
+void BosPcFldResetPaletteCycle(PcFldWork* work);
+void BosPcFldStopPaletteCycle(PcFldWork* work);
+void BosPcAcdSetOff(Task* task, u8 v);
+void BosLstSetMode(BosLstWork* work, u16 a, u16 b);
+void BosLstRequestCardUse(BosLstWork* work);
 void task_bos_pc_2(PcWork* work);
 void task_bos_pc_acd_3(PcAcdWork* work);
 void task_bos_pc_flt_3(PcFltWork* work);
 void task_bos_pc_fld_3(PcFldWork* work);
-void func_0810B4F4(PcFldWork* work);
-s32 func_0810B7D8(s32 x);
-s32 func_0810B7E0(s32 x);
-s32 func_0810BF14(s32 x);
-s32 func_0810BF1C(s32 x);
-s32 func_0810C2B4(s32 x);
-s32 func_0810C2BC(s32 x);
+void BosPcFldLoadPaletteCycle(PcFldWork* work);
+s32 BosPcFltSquare(s32 x);
+s32 BosPcFltSquare2(s32 x);
+s32 BosPcAcdSquare(s32 x);
+s32 BosPcAcdSquare2(s32 x);
+s32 BosLstSquare(s32 x);
+s32 BosLstSquare2(s32 x);
 
-void func_0810B370(Task* task, u8 v);
+void BosPcFldSetPaletteCycle(Task* task, u8 v);
 
-void func_08109EF8(PcWork* work, s32 a);
-void func_08109F20(PcWork* work);
-u8 func_0810B800(Task* task);
-u8 func_0810B824(Task* task);
-void func_0810B7E8(Task* task, s32* a, s32* b, s32* c);
+void BosPcSetAnim(PcWork* work, s32 a);
+void BosPcUpdateAnim(PcWork* work);
+u8 BosPcFltIsSubmerged(Task* task);
+u8 BosPcFltIsPlayerOn(Task* task);
+void BosPcFltGetPosition(Task* task, s32* a, s32* b, s32* c);
 
-void func_0810C2F8(BosLstWork* work);
-s16 func_0810C630(BosLstWork* work);
-u8 func_0810D364(BosLstWork* work);
-void func_0810D3A8(BosLstWork* work);
-void func_0810D478(BosLstWork* work);
+void BosLstDestroyTasks(BosLstWork* work);
+s16 BosLstFindActiveSub(BosLstWork* work);
+u8 BosLstAnyBitAlive(BosLstWork* work);
+void BosLstHoverBits(BosLstWork* work);
+void BosLstReturnBits(BosLstWork* work);
 
-void func_0810B3E4(void);
-void func_0810B40C(s16 a);
-void func_0810B434(void);
-void func_0810B4B4(PcFldWork* work);
+void BosPcFldResetShake(void);
+void BosPcFldStartShake(s16 a);
+void BosPcFldUpdateShake(void);
+void BosPcFldUpdatePaletteCycle(PcFldWork* work);
 
-void func_0810B930(PcFltWork* work);
-void func_0810B9A8(PcFltWork* work);
+void BosPcFltUpdateSinkEnd(PcFltWork* work);
+void BosPcFltUpdateRise(PcFltWork* work);
 void func_0810BA14(PcFltWork* work);
 
-void func_0810B8F8(PcFltWork* work);
-void func_0810B95C(PcFltWork* work);
+void BosPcFltUpdateSink(PcFltWork* work);
+void BosPcFltUpdateSubmerged(PcFltWork* work);
 void func_0810B9DC(PcFltWork* work);
 void func_0810BA3C(PcFltWork* work);
-void func_0810BA74(PcFltWork* work);
-void func_0810BCD4(PcFltWork* work);
+void BosPcFltUpdateGimmick(PcFltWork* work);
+void BosPcFltSyncCollider(PcFltWork* work);
 
-typedef struct UnkStruct_09A4CEDC {
-    s16 unk_00;
-    s16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
-} UnkStruct_09A4CEDC;
+typedef struct PcFltFrameDef {
+    s16 drawY;
+    s16 z;
+    u16 radius;
+    u16 nextAnim;
+} PcFltFrameDef;
 
-extern const UnkStruct_09A4CEDC gUnk_09A4CEDC[12];
+extern const PcFltFrameDef gBosPcFltFrameDefs[12];
 
 extern u8 gUnk_05000220[];
 
-void func_0810A4C4(PcWork* work);
-void func_0810C494(BosLstWork* work, u16 a, u16 b, u8 c);
+void BosPcStopPaletteCycle(PcWork* work);
+void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c);
 
-void func_0810B378(Task* task, u8 a);
-u8 func_0810E950(BosLstWork* work);
+void BosPcFldEnableObject(Task* task, u8 a);
+u8 BosLstUpdateHurt(BosLstWork* work);
 u8 func_0810E984(BosLstWork* work);
-void func_0810D4B0(BosLstWork* work);
+void BosLstInterruptBits(BosLstWork* work);
 
-u8 func_0810A424(PcWork* work);
+u8 BosPcIsAnimDone(PcWork* work);
 
-s32 func_0810CC14(s32 a, s32 b, s32 c, s32 d, s32 e);
-u8 func_0810AE74(PcWork* work, Task* task);
-u8 func_0810D304(BosLstWork* work, s32 idx);
+s32 BosLstApproachValue(s32 a, s32 b, s32 c, s32 d, s32 e);
+u8 BosPcUpdateReaction(PcWork* work, Task* task);
+u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx);
 
-extern const s32 gUnk_09A4D154[16];
+extern const s32 gBosLstBobZ[16];
 
-u8 func_0810AED4(PcWork* work, Task* task);
-void func_0810C754(BosLstWork* work);
-void func_0810C7C4(BosLstWork* work);
-void func_0810CC68(BosLstWork* work);
+u8 BosPcUpdateBreak(PcWork* work, Task* task);
+void BosLstTickCardDelay(BosLstWork* work);
+void BosLstUpdateBob(BosLstWork* work);
+void BosLstMoveMode0(BosLstWork* work);
 
-s32 func_0810D70C(BosLstWork* work);
+s32 BosLstGetPlatformY(BosLstWork* work);
 
-u8 func_0810D3E0(BosLstWork* work, s32 idx, s16 a);
+u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a);
 u8 task_bos_pc_flt_1(PcFltWork* work);
-void func_0810BAE4(PcFltWork* work);
+void BosPcFltUpdateMotion(PcFltWork* work);
 
-extern const u8 gUnk_09A4D14C[8];
+extern const u8 gBosLstAnimSheets[8];
 extern u8 gUnk_09C4B012[];
 extern u8 gUnk_09C51CBC[];
 
-void func_0810CE1C(BosLstWork* work);
-void func_0810C57C(BosLstWork* work, s16 a);
+void BosLstMoveMode2(BosLstWork* work);
+void BosLstSetFacing(BosLstWork* work, s16 a);
 
 void task_bos_pc_fld_2(PcFldWork* work);
 
 extern u8 gUnk_09C489E4[];
 
-PcAnimStep* func_08109EB0(PcWork* work);
-void func_0810A454(PcWork* work);
-u8 func_0810A9CC(PcWork* work, Task* task);
+PcAnimStep* BosPcGetAnimStep(PcWork* work);
+void BosPcUpdatePaletteCycle(PcWork* work);
+u8 BosPcUpdateAttack(PcWork* work, Task* task);
 u8 task_bos_pc_1(PcWork* work, Task* task);
 void task_bos_pc_0(PcWork* work, TaskPool* pool);
-void func_0810A444(PcWork* work);
+void BosPcStartPaletteCycle(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
 
 extern const PcBattleBackgroundDef gBosPcBattleBackgroundDef;
-extern const EmyKind gUnk_09A3DEFC;
+extern const EmyKind gBosPcEmyKind;
 extern u8 gUnk_08F69BC4[];
 extern const BattleBackgroundDef gBosLstBattleBackgroundDef;
 extern const EmyKind gBosLstEmyKind;
@@ -553,52 +553,52 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool);
 u8 task_bos_lst_1(BosLstWork* work);
 
 typedef struct LstAnimDef {
-    void* unk_00;
-    u16 unk_04;
-    u16 unk_06;
+    void* bgMap;
+    u16 spriteX;
+    u16 spriteY;
     u8 unk_08[0x4];
-    u16 unk_0C;
-    u16 unk_0E;
+    u16 subSpriteX;
+    u16 subSpriteY;
     u8 unk_10[0x2];
-    s16 unk_12;
-    s16 unk_14;
-    s16 unk_16;
-    u16 unk_18;
-    u16 unk_1A;
+    s16 subX;
+    s16 subY;
+    s16 subZ;
+    u16 sub2SpriteX;
+    u16 sub2SpriteY;
     u8 unk_1C[0x2];
-    s16 unk_1E;
-    s16 unk_20;
-    s16 unk_22;
-    s16 unk_24;
-    s16 unk_26;
-    s16 unk_28;
+    s16 sub2X;
+    s16 sub2Y;
+    s16 sub2Z;
+    s16 bgX;
+    s16 bgY;
+    s16 bgZ;
     u8 unk_2A[0x2];
 } LstAnimDef;
 
-extern void* const gUnk_09A4D194[18][2];
+extern void* const gBosLstBgFrames[18][2];
 
 void task_bos_lst_2(BosLstWork* work);
-u8 func_0810EBA0(BosLstWork* work);
+u8 BosLstUpdateDefeat(BosLstWork* work);
 
 extern EventState* gEventState;
 void task_bos_pc_acd_2(PcAcdWork* work);
 
-extern const u16 gUnk_09A4D0EC[48];
+extern const u16 gBosLstBodyFrames[48];
 extern const LstAnimDef gLstAnimDefs[8];
-PcSpriteCmd* func_08109ECC(PcWork* work);
+PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work);
 
-void func_0810A850(PcWork* work);
+void BosPcPlaceBodies(PcWork* work);
 void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg);
 u8 task_bos_pc_acd_1(PcAcdWork* work);
 void task_bos_lst_3(BosLstWork* work);
 
 typedef struct PcFltInit {
-    u8 unk_00;
+    u8 index;
     u8 unk_01;
-    u16 unk_02;
-    u32 unk_04;
-    u32 unk_08;
-    u32 unk_0C;
+    u16 angle;
+    u32 x;
+    u32 y;
+    u32 z;
     PcShared* shared;
 } PcFltInit;
 
@@ -609,45 +609,45 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg);
 
 u8 task_bos_pc_fld_1(PcFldWork* work);
 
-u8 func_0810C65C(BosLstWork* work, u16 a);
-u8 func_0810DB40(BosLstWork* work);
-void func_0810CD00(BosLstWork* work);
-void func_0810CEC8(BosLstWork* work);
-void func_0810D4F8(BosLstWork* work);
-void func_0810D77C(BosLstWork* work);
+u8 BosLstSetSubAnim(BosLstWork* work, u16 a);
+u8 BosLstUpdateMove(BosLstWork* work);
+void BosLstMoveMode1(BosLstWork* work);
+void BosLstMoveDash(BosLstWork* work);
+void BosLstMoveBits(BosLstWork* work);
+void BosLstMovePlatform(BosLstWork* work);
 
-u8 func_0810EF94(BosLstWork* work);
-u8 func_0810E844(BosLstWork* work);
-u8 func_0810DC28(BosLstWork* work);
-u8 func_0810DE04(BosLstWork* work);
-u8 func_0810E210(BosLstWork* work);
-u8 func_0810E32C(BosLstWork* work);
-u8 func_0810E524(BosLstWork* work);
-u8 func_0810E73C(BosLstWork* work);
+u8 BosLstUpdateEvent(BosLstWork* work);
+u8 BosLstUpdateAttack(BosLstWork* work);
+u8 BosLstAttackGround(BosLstWork* work);
+u8 BosLstAttackKama(BosLstWork* work);
+u8 BosLstAttackDash(BosLstWork* work);
+u8 BosLstAttackCtr(BosLstWork* work);
+u8 BosLstAttackBits(BosLstWork* work);
+u8 BosLstAttackHanabira(BosLstWork* work);
 
-u8 func_0810A914(PcWork* work, Task* task);
-void func_0810B844(PcFltWork* work);
+u8 BosPcUpdateIdle(PcWork* work, Task* task);
+void BosPcFltUpdateFloat(PcFltWork* work);
 
-u8 func_0810C32C(BosLstWork* work, s32 a);
+u8 BosLstSpawnFal(BosLstWork* work, s32 a);
 
-u8 func_0810AF44(PcWork* work, Task* task);
+u8 BosPcUpdateDefeat(PcWork* work, Task* task);
 
-u8 func_0810ACB8(PcWork* work, Task* task);
+u8 BosPcUpdateHurt(PcWork* work, Task* task);
 
-extern const s16 gUnk_09A4CCDC[256];
-extern const s16 gUnk_09A4CADC[256];
+extern const s16 gBosPcFltCosine[256];
+extern const s16 gBosPcFltSine[256];
 
 typedef struct LstSpawn3 {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
+    s32 x;
+    s32 y;
+    s32 z;
     u8 unk_0C[0x6];
-    s16 unk_12;
+    s16 kind;
     u8 unk_14[0xC];
 } LstSpawn3;
 
-void func_0810F064(BosLstWork* work, LstSub* p);
+void BosLstUpdateSub(BosLstWork* work, LstSub* p);
 
-u8 func_0810E99C(BosLstWork* work);
+u8 BosLstUpdateBreak(BosLstWork* work);
 
 #endif /* GUARD_BOS6_H */

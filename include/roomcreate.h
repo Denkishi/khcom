@@ -28,14 +28,14 @@ typedef struct RoomCreateWork {
     s32 x2;
     s32 y2;
     s32 z2;
-    s32 unk_18;
-    s32 unk_1C;
-    s32 unk_20;
+    s32 frontX;
+    s32 frontY;
+    s32 frontZ;
     u8 angle;
-    u8 unk_25;
-    s16 unk_26;
-    u8 unk_28;
-    u8 unk_29;
+    u8 playerAngle;
+    s16 timer;
+    u8 spotLightEnd;
+    u8 mapSelectStatus;
     u8 unk_2A[0x02];
     TaskPool tasks;
     s32 state;
@@ -45,6 +45,6 @@ typedef struct RoomCreateWork {
 struct Task;
 
 void CreateMapCardSelection(TaskPool* pool, u8* p);
-void func_080E042C(void);
+void MapRestoreBg1(void);
 
 #endif /* GUARD_ROOMCREATE_H */

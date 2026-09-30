@@ -4,11 +4,11 @@
 #include "types.h"
 
 struct EventCharaWork;
-struct UnkStruct_02039DD0;
+struct EventSoundMix;
 
-extern struct UnkStruct_02039DD0* gUnk_02039DD0;
+extern struct EventSoundMix* gEventSoundMix;
 
-void func_08076110(u16 song, s16 x, s16 y);
+void SetEventSoundPosition(u16 song, s16 x, s16 y);
 void CreateTinkerbellTask(struct EventCharaWork* p);
 void CreateDownTask(struct EventCharaWork* p);
 void CreateSmokeTask(struct EventCharaWork* p);

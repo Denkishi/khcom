@@ -7,9 +7,9 @@
 extern vu16 gFrameSyncFlags;
 extern u16 gVBlankEndVCount;
 extern u32 gUnk_03006C04[3];
-extern u32 gUnk_03006C10;
+extern u32 gDebugFlags;
 extern IntrFunc* gIntrTableSerial;
-extern u32 gUnk_03006C18[2];
+extern u32 gSoftResetMarker[2];
 extern IntrFunc gIntrTable[14];
 extern IntrFunc* gIntrTableVCount;
 extern IntrFunc* gIntrTableVBlank;

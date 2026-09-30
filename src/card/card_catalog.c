@@ -8,7 +8,7 @@
 #include "card_label_language_data.h"
 #include "mode_test_assets.h"
 
-const CardBack gUnk_08F709B0[5] = {
+const CardBack gCardBacks[5] = {
     {
         gUnk_0905A668, gUnk_0905D564, gUnk_09047A10, gUnk_0905A682, gUnk_0905D64E, gUnk_09047A2A,
     },
@@ -26,7 +26,7 @@ const CardBack gUnk_08F709B0[5] = {
     },
 };
 
-const CardBack gUnk_08F70A28[5] = {
+const CardBack gEnemyCardBacks[5] = {
     {
         gUnk_0905A130, gUnk_0905B98C, gUnk_0904A190, gUnk_0905A14A, gUnk_0905BA76, gUnk_0904A1AA,
     },
@@ -44,13 +44,13 @@ const CardBack gUnk_08F70A28[5] = {
     },
 };
 
-const u8 gUnk_08F70AA0[3] = "\x81\x9C";
+const u8 gBlackCircleText[3] = "\x81\x9C";
 
-const u8 gUnk_08F70AA4[3] = "\x81\x9B";
+const u8 gWhiteCircleText[3] = "\x81\x9B";
 
-const u8 gUnk_08F70AA8[3] = "\x81\x9A";
+const u8 gBlackStarText[3] = "\x81\x9A";
 
-const u8 gUnk_08F70AAC[3] = "\x81\x99";
+const u8 gWhiteStarText[3] = "\x81\x99";
 
 const CardDef gCardDefs[950] = {
     {
@@ -9555,7 +9555,7 @@ const CardDef gCardDefs[950] = {
     },
 };
 
-const UnkStruct_08F7CBA8 gUnk_08F7CBA8[55] = {
+const HcEffectDef gHcEffectDefs[55] = {
     {
 #ifdef VERSION_EU
         gUnkEu_09F5D574,
@@ -11101,7 +11101,7 @@ const UnkStruct_08F7CBA8 gUnk_08F7CBA8[55] = {
     },
 };
 
-const SpriteFrameResourceDef gUnk_08F7CF18[106] = {
+const SpriteFrameResourceDef gStockNameSprites[106] = {
     {
 #ifdef VERSION_EU
         gUnkEu_09F5D5C4,

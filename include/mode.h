@@ -16,9 +16,9 @@ typedef struct Mode {
 void ModeRequest(Mode* mode, s32 arg);
 void ModeUpdate(void);
 void ModeRequestHeapReset(Mode* mode, s32 arg);
-void func_0805FA60(s32 a, void* b, s32 c, u8 d);
-void func_08060598(void);
-void func_080609A0(void);
+void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d);
+void DebugTextClear(void);
+void DebugTextDestroy(void);
 
 extern Mode gModeDebug;
 extern Mode gModeChkobj;
@@ -28,12 +28,12 @@ extern Mode gModeDebflag;
 extern Mode gModeVsbattle;
 
 u8 IsModeStarted(void);
-void func_08001080(void);
+void ModeClearTransitionCallback(void);
 void SetModeUpdate(void (*fn)(void));
 #ifdef VERSION_EU
 void eu_0800115C(void);
 #endif
-void func_08001058(void (*a)(void), void (*b)(void));
+void ModeSetTransitionCallback(void (*a)(void), void (*b)(void));
 void ModeFlushDisplay(void);
 void ModeRunVBlankCallbacks(void);
 

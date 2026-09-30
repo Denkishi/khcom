@@ -3,8 +3,8 @@
 
 #include "card_ui_types.h"
 
-extern MapCardBackDef gUnk_09EE4BF4[];
-extern MapCardDef gUnk_09EE4C80[];
-extern s16 gUnk_09EE7520[6];
+extern MapCardBackDef gMapCardBackDefs[];
+extern MapCardDef gMapCardDefs[];
+extern s16 gMapcardSlotX[6];
 
 #endif

@@ -41,33 +41,33 @@
 #include "sprites_boss_tm.h"
 #include "link_menus.h"
 
-s8 gUnk_0203A9E4 EWRAM_COMMON(4);
+s8 gSioDebugMode EWRAM_COMMON(4);
 
-u8 gUnk_0203A9E8 EWRAM_COMMON(4);
+u8 gSioBattleFileLoaded EWRAM_COMMON(4);
 
-static void** gUnk_02034B38;
+static void** sSioBattleWork;
 
-void func_0809D1FC(u8 bg);
-void func_0809D26C(void);
-void func_0809D3F0(void);
+void InitPrintLayer(u8 bg);
+void FreePrintLayer(void);
+void ResetPrintLines(void);
 void task_print_0(void) {
-    func_0809D1FC(0);
+    InitPrintLayer(0);
 }
 s32 task_print_1(void) {
     return 1;
 }
 void task_print_2(void) {
-    func_0809D3F0();
+    ResetPrintLines();
 }
 void task_print_3(void) {
-    func_0809D26C();
+    FreePrintLayer();
 }
 void mode_sio_battle_0(s32 a) {
-    UnkStruct_02034B38* w;
+    SioBattleWork* w;
     void* gfx;
     s32 i;
 
-    gUnk_02034B38 = EwramAlloc(sizeof(UnkStruct_02034B38));
+    sSioBattleWork = EwramAlloc(sizeof(SioBattleWork));
     FadeStartIn(0, 16);
     SetBgMode0();
     SetupBg(0, 0, 7, 0);
@@ -76,243 +76,243 @@ void mode_sio_battle_0(s32 a) {
     LoadBgPalette(1, gUnk_096FBA04, 64);
     LoadBgMap(1, gUnk_096F5464, 0x800);
     EnableBg(1);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 0;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 = 0;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 = 0;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->x = -0x8000;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->y = -0x800;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->y2 = 0xA000;
-    ((UnkStruct_02034B38*)gUnk_02034B38)->tiles = LoadObjTiles(gUnk_0962AD62, 0x240);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette = LoadObjPalette(gUnk_096FBA44, 32);
+    ((SioBattleWork*)sSioBattleWork)->state = 0;
+    ((SioBattleWork*)sSioBattleWork)->slideTimer = 0;
+    ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
+    ((SioBattleWork*)sSioBattleWork)->x = -0x8000;
+    ((SioBattleWork*)sSioBattleWork)->y = -0x800;
+    ((SioBattleWork*)sSioBattleWork)->y2 = 0xA000;
+    ((SioBattleWork*)sSioBattleWork)->tiles = LoadObjTiles(gUnk_0962AD62, 0x240);
+    ((SioBattleWork*)sSioBattleWork)->palette = LoadObjPalette(gUnk_096FBA44, 32);
 
     for (i = 0; i < 3; i++) {
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx2[i] = gUnk_09EF3884[i];
+        ((SioBattleWork*)sSioBattleWork)->gfx2[i] = gUnk_09EF3884[i];
     }
 
 #ifdef VERSION_EU
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    ((SioBattleWork*)sSioBattleWork)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
+    ((SioBattleWork*)sSioBattleWork)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 
     switch (gLanguage) {
     case 0:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnkEu_095EDAAA, 0x600);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnkEu_095EE0E2, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EDAAA, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EE0E2, 0x600);
         break;
     case 3:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
         break;
     case 1:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
         break;
     case 4:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
         break;
     case 2:
     default:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
+        ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
         break;
     }
 #else
-    ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    ((SioBattleWork*)sSioBattleWork)->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
+    ((SioBattleWork*)sSioBattleWork)->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
+    ((SioBattleWork*)sSioBattleWork)->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
+    ((SioBattleWork*)sSioBattleWork)->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 #endif
-    ((UnkStruct_02034B38*)gUnk_02034B38)->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
-    ((UnkStruct_02034B38*)gUnk_02034B38)->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
-    AnimInit(&((UnkStruct_02034B38*)gUnk_02034B38)->anim, gUnk_09EF38B4, gUnk_09EF3894);
-    AnimStart(&((UnkStruct_02034B38*)gUnk_02034B38)->anim, 1, 1);
-    gfx = AnimGetGfx(&((UnkStruct_02034B38*)gUnk_02034B38)->anim);
-    w = (UnkStruct_02034B38*)gUnk_02034B38;
+    ((SioBattleWork*)sSioBattleWork)->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
+    ((SioBattleWork*)sSioBattleWork)->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
+    AnimInit(&((SioBattleWork*)sSioBattleWork)->anim, gUnk_09EF38B4, gUnk_09EF3894);
+    AnimStart(&((SioBattleWork*)sSioBattleWork)->anim, 1, 1);
+    gfx = AnimGetGfx(&((SioBattleWork*)sSioBattleWork)->anim);
+    w = (SioBattleWork*)sSioBattleWork;
     w->gfx = gfx;
-    w->unk_68 = a;
+    w->modeArg = a;
 
-    switch (w->unk_68) {
+    switch (w->modeArg) {
     case 0:
     case 1:
-        if (w->unk_68 == 0) {
-            if (gUnk_0203A9E8 != 1) {
-                gUnk_0203A9E8 = 0;
-                w->unk_00 = 1;
+        if (w->modeArg == 0) {
+            if (gSioBattleFileLoaded != 1) {
+                gSioBattleFileLoaded = 0;
+                w->cursor = 1;
             } else {
-                gUnk_0203A9E8 = 1;
-                w->unk_00 = 0;
+                gSioBattleFileLoaded = 1;
+                w->cursor = 0;
             }
         } else {
-            gUnk_0203A9E8 = 1;
-            w->unk_00 = 0;
+            gSioBattleFileLoaded = 1;
+            w->cursor = 0;
         }
 
 #ifdef VERSION_EU
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
 
         switch (gLanguage) {
         case 0:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB38[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB44[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 3:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB80[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB8C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 1:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB50[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB5C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 4:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB68[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB74[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 2:
         default:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB98[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EBA4[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         }
 #else
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnk_09EF38BC[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnk_09EF38C8[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
+        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
-        gUnk_0203A9E8 = 1;
-        w->unk_00 = 0;
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        gSioBattleFileLoaded = 1;
+        w->cursor = 0;
 
         switch (gLanguage) {
         case 0:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB38[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB44[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 3:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB80[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB8C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 1:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB50[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB5C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 4:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB68[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB74[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 2:
         default:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB98[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EBA4[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         }
 #else
-        w->unk_00 = 0;
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnk_09EF38BC[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnk_09EF38C8[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
-        gUnk_0203A9E8 = 1;
+        w->cursor = 0;
+        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        gSioBattleFileLoaded = 1;
 #endif
         break;
     case 3:
-        w->unk_00 = 0;
+        w->cursor = 0;
 #ifdef VERSION_EU
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
-        gUnk_0203A9E8 = 1;
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        gSioBattleFileLoaded = 1;
 
         switch (gLanguage) {
         case 0:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB38[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB44[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 3:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB80[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB8C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 1:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB50[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB5C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 4:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB68[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB74[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 2:
         default:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB98[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EBA4[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         }
 #else
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnk_09EF38BC[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnk_09EF38C8[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 = ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 0x1C00 + 0x3300;
-        gUnk_0203A9E8 = 1;
+        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->cursorY = ((SioBattleWork*)sSioBattleWork)->cursor * 0x1C00 + 0x3300;
+        gSioBattleFileLoaded = 1;
 #endif
         break;
     case 0xFFFF:
         break;
     }
 
-    gUnk_0203C374 = 0;
-    gUnk_0203A9E4 = 0;
+    gLinkDecksAllocated = 0;
+    gSioDebugMode = 0;
 }
 
 void mode_sio_battle_1(void) {
-    switch ((s8)((UnkStruct_02034B38*)gUnk_02034B38)->unk_01) {
+    switch ((s8)((SioBattleWork*)sSioBattleWork)->state) {
     case 0:
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 == 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 = 16;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
+            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
         }
 
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->y, 0, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->y2, 0x9800, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02--;
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y, 0, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y2, 0x9800, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
 
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 > 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04++;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
+            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
         } else {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 1;
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 = 0;
+            ((SioBattleWork*)sSioBattleWork)->state = 1;
+            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
         }
         break;
     case 1:
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 == 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 = 16;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
+            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
         }
 
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->x, 0, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02--;
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->x, 0, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
 
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 > 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04++;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
+            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
         } else {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 5;
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 = 0;
+            ((SioBattleWork*)sSioBattleWork)->state = 5;
+            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
         }
         break;
     case 5:
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 6;
+        ((SioBattleWork*)sSioBattleWork)->state = 6;
         break;
     case 6:
-        if (gUnk_0203A9E8 == 1) {
+        if (gSioBattleFileLoaded == 1) {
             if (GetKeysPressed() & DPAD_UP) {
                 m4aSongNumStart(SONG_SYS_CLICK);
-                ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00--;
+                ((SioBattleWork*)sSioBattleWork)->cursor--;
 
-                if (((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 < 0) {
-                    ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 = 1;
+                if (((SioBattleWork*)sSioBattleWork)->cursor < 0) {
+                    ((SioBattleWork*)sSioBattleWork)->cursor = 1;
                 }
             }
 
             if (GetKeysPressed() & DPAD_DOWN) {
                 m4aSongNumStart(SONG_SYS_CLICK);
-                ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00++;
+                ((SioBattleWork*)sSioBattleWork)->cursor++;
 
-                if (((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 > 1) {
-                    ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 = 0;
+                if (((SioBattleWork*)sSioBattleWork)->cursor > 1) {
+                    ((SioBattleWork*)sSioBattleWork)->cursor = 0;
                 }
             }
         } else {
@@ -324,36 +324,36 @@ void mode_sio_battle_1(void) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB38[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB44[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB38[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB44[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 3:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB80[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB8C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB80[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB8C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 1:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB50[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB5C[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB50[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB5C[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 4:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB68[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EB74[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB68[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EB74[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         case 2:
         default:
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnkEu_09F7EB98[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-            ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnkEu_09F7EBA4[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+            ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnkEu_09F7EB98[((SioBattleWork*)sSioBattleWork)->cursor];
+            ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnkEu_09F7EBA4[((SioBattleWork*)sSioBattleWork)->cursor];
             break;
         }
 #else
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3 = gUnk_09EF38BC[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
-        ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4 = gUnk_09EF38C8[((UnkStruct_02034B38*)gUnk_02034B38)->unk_00];
+        ((SioBattleWork*)sSioBattleWork)->gfx3 = gUnk_09EF38BC[((SioBattleWork*)sSioBattleWork)->cursor];
+        ((SioBattleWork*)sSioBattleWork)->gfx4 = gUnk_09EF38C8[((SioBattleWork*)sSioBattleWork)->cursor];
 #endif
 
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             m4aSongNumStart(SONG_SYS_KETTEI);
 
-            switch (((UnkStruct_02034B38*)gUnk_02034B38)->unk_00) {
+            switch (((SioBattleWork*)sSioBattleWork)->cursor) {
             case 0:
                 ModeRequest(&gModeSioBtlConnect, 0);
                 break;
@@ -365,35 +365,35 @@ void mode_sio_battle_1(void) {
 
         if (GetKeysPressed() & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 2;
+            ((SioBattleWork*)sSioBattleWork)->state = 2;
         }
         break;
     case 2:
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 == 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 = 16;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
+            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
         }
 
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->x, -0x8000, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02--;
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->x, -0x8000, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
 
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 > 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04++;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
+            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
         } else {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_01 = 3;
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 = 0;
+            ((SioBattleWork*)sSioBattleWork)->state = 3;
+            ((SioBattleWork*)sSioBattleWork)->stateFrames = 0;
         }
         break;
     case 3:
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_04 == 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 = 16;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->stateFrames == 0) {
+            ((SioBattleWork*)sSioBattleWork)->slideTimer = 16;
         }
 
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->y, -0x800, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ApproachValue(&((UnkStruct_02034B38*)gUnk_02034B38)->y2, 0xA000, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02);
-        ((UnkStruct_02034B38*)gUnk_02034B38)->unk_02--;
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y, -0x800, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ApproachValue(&((SioBattleWork*)sSioBattleWork)->y2, 0xA000, ((SioBattleWork*)sSioBattleWork)->slideTimer);
+        ((SioBattleWork*)sSioBattleWork)->slideTimer--;
 
-        if ((s16)((UnkStruct_02034B38*)gUnk_02034B38)->unk_02 > 0) {
-            ((UnkStruct_02034B38*)gUnk_02034B38)->unk_04++;
+        if ((s16)((SioBattleWork*)sSioBattleWork)->slideTimer > 0) {
+            ((SioBattleWork*)sSioBattleWork)->stateFrames++;
         } else {
             ModeRequest(&gModeTitle, 0);
             return;
@@ -401,30 +401,30 @@ void mode_sio_battle_1(void) {
         break;
     }
 
-    ((UnkStruct_02034B38*)gUnk_02034B38)->gfx = AnimUpdate(&((UnkStruct_02034B38*)gUnk_02034B38)->anim);
-    DrawSprite(((UnkStruct_02034B38*)gUnk_02034B38)->x >> 8, 0, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx2[0], ((UnkStruct_02034B38*)gUnk_02034B38)->tiles, ((UnkStruct_02034B38*)gUnk_02034B38)->palette, 0, 0x400, -16);
-    DrawSprite(128, ((UnkStruct_02034B38*)gUnk_02034B38)->y >> 8, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx2[1], ((UnkStruct_02034B38*)gUnk_02034B38)->tiles, ((UnkStruct_02034B38*)gUnk_02034B38)->palette, 0, 0x400, -1);
-    DrawSprite(128, ((UnkStruct_02034B38*)gUnk_02034B38)->y2 >> 8, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx2[2], ((UnkStruct_02034B38*)gUnk_02034B38)->tiles, ((UnkStruct_02034B38*)gUnk_02034B38)->palette, 0, 0x400, -1);
-    DrawSprite(72, 48, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx3, ((UnkStruct_02034B38*)gUnk_02034B38)->tiles2, ((UnkStruct_02034B38*)gUnk_02034B38)->palette2, 0, 0x400, -32);
-    DrawSprite(72, 48, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx4, ((UnkStruct_02034B38*)gUnk_02034B38)->tiles3, ((UnkStruct_02034B38*)gUnk_02034B38)->palette3, 0, 0x400, -32);
-    ApproachValueHalf(&((UnkStruct_02034B38*)gUnk_02034B38)->unk_64, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_00 * 7 * 1024 + 0x3300);
-    DrawSprite(64, ((UnkStruct_02034B38*)gUnk_02034B38)->unk_64 >> 8, ((UnkStruct_02034B38*)gUnk_02034B38)->gfx, ((UnkStruct_02034B38*)gUnk_02034B38)->tiles4, ((UnkStruct_02034B38*)gUnk_02034B38)->palette4, 0, 0x400, -48);
+    ((SioBattleWork*)sSioBattleWork)->gfx = AnimUpdate(&((SioBattleWork*)sSioBattleWork)->anim);
+    DrawSprite(((SioBattleWork*)sSioBattleWork)->x >> 8, 0, ((SioBattleWork*)sSioBattleWork)->gfx2[0], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -16);
+    DrawSprite(128, ((SioBattleWork*)sSioBattleWork)->y >> 8, ((SioBattleWork*)sSioBattleWork)->gfx2[1], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -1);
+    DrawSprite(128, ((SioBattleWork*)sSioBattleWork)->y2 >> 8, ((SioBattleWork*)sSioBattleWork)->gfx2[2], ((SioBattleWork*)sSioBattleWork)->tiles, ((SioBattleWork*)sSioBattleWork)->palette, 0, 0x400, -1);
+    DrawSprite(72, 48, ((SioBattleWork*)sSioBattleWork)->gfx3, ((SioBattleWork*)sSioBattleWork)->tiles2, ((SioBattleWork*)sSioBattleWork)->palette2, 0, 0x400, -32);
+    DrawSprite(72, 48, ((SioBattleWork*)sSioBattleWork)->gfx4, ((SioBattleWork*)sSioBattleWork)->tiles3, ((SioBattleWork*)sSioBattleWork)->palette3, 0, 0x400, -32);
+    ApproachValueHalf(&((SioBattleWork*)sSioBattleWork)->cursorY, ((SioBattleWork*)sSioBattleWork)->cursor * 7 * 1024 + 0x3300);
+    DrawSprite(64, ((SioBattleWork*)sSioBattleWork)->cursorY >> 8, ((SioBattleWork*)sSioBattleWork)->gfx, ((SioBattleWork*)sSioBattleWork)->tiles4, ((SioBattleWork*)sSioBattleWork)->palette4, 0, 0x400, -48);
 }
 
 void mode_sio_battle_2(void) {
-    ReleaseObjTiles(gUnk_02034B38[5]);
-    ReleaseObjPalette(gUnk_02034B38[6]);
-    ReleaseObjTiles(gUnk_02034B38[10]);
-    ReleaseObjPalette(gUnk_02034B38[11]);
-    ReleaseObjTiles(gUnk_02034B38[13]);
-    ReleaseObjPalette(gUnk_02034B38[14]);
-    ReleaseObjTiles(gUnk_02034B38[16]);
-    ReleaseObjPalette(gUnk_02034B38[17]);
-    EwramFree(gUnk_02034B38);
+    ReleaseObjTiles(sSioBattleWork[5]);
+    ReleaseObjPalette(sSioBattleWork[6]);
+    ReleaseObjTiles(sSioBattleWork[10]);
+    ReleaseObjPalette(sSioBattleWork[11]);
+    ReleaseObjTiles(sSioBattleWork[13]);
+    ReleaseObjPalette(sSioBattleWork[14]);
+    ReleaseObjTiles(sSioBattleWork[16]);
+    ReleaseObjPalette(sSioBattleWork[17]);
+    EwramFree(sSioBattleWork);
 }
 
-void func_080AEB94(void) {
-    gUnk_0203A9E8 = 0;
+void ClearSioBattleFileLoaded(void) {
+    gSioBattleFileLoaded = 0;
 }
 
 TaskDesc gTaskDescPrint = {

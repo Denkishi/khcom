@@ -9,7 +9,7 @@ typedef struct HeapBlock {
     struct HeapBlock* nextFree;
     struct HeapBlock* prev;
     struct HeapBlock* next;
-    u32 unk_14;
+    u32 allocFlag;
     const void* name;
     struct HeapBlock* self;
 } HeapBlock;
@@ -17,7 +17,7 @@ typedef struct HeapBlock {
 typedef struct Heap {
     HeapBlock* start;
     HeapBlock* end;
-    u8 unk_08;
+    u8 allocFlag;
     const void* name;
 } Heap;
 

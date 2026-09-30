@@ -1,11 +1,11 @@
 #include "audio_block_codec.h"
 
-u8* gUnk_02038628;
-s32 gUnk_0203862C;
-s32 gUnk_02038630;
-s32* gUnk_02038634;
-s32 gUnk_02038638[8];
-s32 gUnk_02038658[16];
+u8* gAudioCodecSrc;
+s32 gAudioCodecBitBuffer;
+s32 gAudioCodecBitCount;
+s32* gAudioCodecSamples;
+s32 gAudioCodecResiduals[8];
+s32 gAudioCodecTransformBuf[16];
 
 const s32 gUnk_09C43688[8] = {
     13, 13, 13, 13, 13, 13, 13, 13,
@@ -153,26 +153,26 @@ void func_081213CC(s32* a, s32* b);
 void func_081213D4(s32* a, s32* b);
 
 static inline void ShiftInByte(void) {
-    gUnk_0203862C = (u32)gUnk_0203862C << 8;
-    gUnk_0203862C |= *gUnk_02038628++;
+    gAudioCodecBitBuffer = (u32)gAudioCodecBitBuffer << 8;
+    gAudioCodecBitBuffer |= *gAudioCodecSrc++;
 }
 
 static inline s32 ReadBits(s32 n) {
-    if (gUnk_02038630 < n) {
+    if (gAudioCodecBitCount < n) {
         ShiftInByte();
         ShiftInByte();
-        gUnk_02038630 += 16;
+        gAudioCodecBitCount += 16;
     }
-    gUnk_02038630 -= n;
-    return (gUnk_0203862C >> gUnk_02038630) & ((1 << n) - 1);
+    gAudioCodecBitCount -= n;
+    return (gAudioCodecBitBuffer >> gAudioCodecBitCount) & ((1 << n) - 1);
 }
 
 static inline s32 PeekByte(void) {
-    if (gUnk_02038630 < 8) {
+    if (gAudioCodecBitCount < 8) {
         ShiftInByte();
-        gUnk_02038630 += 8;
+        gAudioCodecBitCount += 8;
     }
-    return (gUnk_0203862C >> (gUnk_02038630 - 8)) & 0xFF;
+    return (gAudioCodecBitBuffer >> (gAudioCodecBitCount - 8)) & 0xFF;
 }
 
 
@@ -191,62 +191,62 @@ void _08117284(s32 p) {
     s32 mask;
 
     n = ReadBits(6);
-    gUnk_02038638[1] = 0;
-    gUnk_02038638[2] = 0;
-    gUnk_02038638[3] = 0;
-    gUnk_02038638[4] = 0;
-    gUnk_02038638[5] = 0;
-    gUnk_02038638[6] = 0;
-    gUnk_02038638[7] = 0;
+    gAudioCodecResiduals[1] = 0;
+    gAudioCodecResiduals[2] = 0;
+    gAudioCodecResiduals[3] = 0;
+    gAudioCodecResiduals[4] = 0;
+    gAudioCodecResiduals[5] = 0;
+    gAudioCodecResiduals[6] = 0;
+    gAudioCodecResiduals[7] = 0;
     c = PeekByte();
 
     if (c & 0x80) {
-        gUnk_02038630 -= 1;
+        gAudioCodecBitCount -= 1;
         c = 0;
     } else {
-        gUnk_02038630 -= 3;
+        gAudioCodecBitCount -= 3;
         c = ((c >> 5) & 3) + 1;
     }
 
-    gUnk_02038638[0] = (s32)((u32)ReadBits(4) << 28) >> 28;
+    gAudioCodecResiduals[0] = (s32)((u32)ReadBits(4) << 28) >> 28;
 
     if (c > 0) {
         if (ReadBits(1)) {
             t = (s32)((u32)ReadBits(4) << 28) >> 28;
-            gUnk_02038638[1] = t;
+            gAudioCodecResiduals[1] = t;
 
             if (t >= 0) {
-                gUnk_02038638[1] = t + 1;
+                gAudioCodecResiduals[1] = t + 1;
             }
         }
 
         if (c > 1) {
             if (ReadBits(1)) {
                 t = (s32)((u32)ReadBits(3) << 29) >> 29;
-                gUnk_02038638[2] = t;
+                gAudioCodecResiduals[2] = t;
 
                 if (t >= 0) {
-                    gUnk_02038638[2] = t + 1;
+                    gAudioCodecResiduals[2] = t + 1;
                 }
             }
 
             if (c > 2) {
                 if (ReadBits(1)) {
                     t = (s32)((u32)ReadBits(3) << 29) >> 29;
-                    gUnk_02038638[3] = t;
+                    gAudioCodecResiduals[3] = t;
 
                     if (t >= 0) {
-                        gUnk_02038638[3] = t + 1;
+                        gAudioCodecResiduals[3] = t + 1;
                     }
                 }
 
                 if (c > 3) {
                     if (ReadBits(1)) {
                         t = (s32)((u32)ReadBits(3) << 29) >> 29;
-                        gUnk_02038638[4] = t;
+                        gAudioCodecResiduals[4] = t;
 
                         if (t >= 0) {
-                            gUnk_02038638[4] = t + 1;
+                            gAudioCodecResiduals[4] = t + 1;
                         }
                     }
                 }
@@ -254,7 +254,7 @@ void _08117284(s32 p) {
         }
     }
 
-    func_081213C4(gUnk_02038638, gUnk_02038638, gUnk_09C43688);
+    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, gUnk_09C43688);
 
     i = 0;
     t = p - 72;
@@ -272,13 +272,13 @@ void _08117284(s32 p) {
         a &= mask;
         c &= mask;
         d &= mask;
-        *AudioCodecSampleAtByteOffset(destOffset, gUnk_02038634) =
-            gUnk_02038638[i] + gUnk_02038634[a] + gUnk_02038634[c] - gUnk_02038634[d];
+        *AudioCodecSampleAtByteOffset(destOffset, gAudioCodecSamples) =
+            gAudioCodecResiduals[i] + gAudioCodecSamples[a] + gAudioCodecSamples[c] - gAudioCodecSamples[d];
     }
 
     if (p <= 15) {
         for (i = 0; i <= 7; i++) {
-            gUnk_02038634[p + i + 0x800] = gUnk_02038634[p + i];
+            gAudioCodecSamples[p + i + 0x800] = gAudioCodecSamples[p + i];
         }
     }
 }
@@ -290,62 +290,62 @@ void _08117674(s32 p) {
     s32 i;
 
     n = ReadBits(6);
-    gUnk_02038638[1] = 0;
-    gUnk_02038638[2] = 0;
-    gUnk_02038638[3] = 0;
-    gUnk_02038638[4] = 0;
-    gUnk_02038638[5] = 0;
-    gUnk_02038638[6] = 0;
-    gUnk_02038638[7] = 0;
+    gAudioCodecResiduals[1] = 0;
+    gAudioCodecResiduals[2] = 0;
+    gAudioCodecResiduals[3] = 0;
+    gAudioCodecResiduals[4] = 0;
+    gAudioCodecResiduals[5] = 0;
+    gAudioCodecResiduals[6] = 0;
+    gAudioCodecResiduals[7] = 0;
     v = PeekByte();
 
     if (v & 0x80) {
-        gUnk_02038630 -= 1;
+        gAudioCodecBitCount -= 1;
         v = 0;
     } else {
-        gUnk_02038630 -= 3;
+        gAudioCodecBitCount -= 3;
         v = ((v >> 5) & 3) + 1;
     }
 
-    gUnk_02038638[0] = (ReadBits(4) << 28) >> 28;
+    gAudioCodecResiduals[0] = (ReadBits(4) << 28) >> 28;
 
     if (v > 0) {
         if (ReadBits(1)) {
             t = (ReadBits(4) << 28) >> 28;
-            gUnk_02038638[1] = t;
+            gAudioCodecResiduals[1] = t;
 
             if (t >= 0) {
-                gUnk_02038638[1] = t + 1;
+                gAudioCodecResiduals[1] = t + 1;
             }
         }
 
         if (v > 1) {
             if (ReadBits(1)) {
                 t = (ReadBits(3) << 29) >> 29;
-                gUnk_02038638[2] = t;
+                gAudioCodecResiduals[2] = t;
 
                 if (t >= 0) {
-                    gUnk_02038638[2] = t + 1;
+                    gAudioCodecResiduals[2] = t + 1;
                 }
             }
 
             if (v > 2) {
                 if (ReadBits(1)) {
                     t = (ReadBits(3) << 29) >> 29;
-                    gUnk_02038638[3] = t;
+                    gAudioCodecResiduals[3] = t;
 
                     if (t >= 0) {
-                        gUnk_02038638[3] = t + 1;
+                        gAudioCodecResiduals[3] = t + 1;
                     }
                 }
 
                 if (v > 3) {
                     if (ReadBits(1)) {
                         t = (ReadBits(3) << 29) >> 29;
-                        gUnk_02038638[4] = t;
+                        gAudioCodecResiduals[4] = t;
 
                         if (t >= 0) {
-                            gUnk_02038638[4] = t + 1;
+                            gAudioCodecResiduals[4] = t + 1;
                         }
                     }
                 }
@@ -354,18 +354,18 @@ void _08117674(s32 p) {
     }
 
     n = (n - 72 + p) & 0x7FF;
-    func_081213CC(&gUnk_02038634[n], gUnk_02038658);
-    gUnk_02038658[0] += gUnk_02038638[0];
-    gUnk_02038658[1] += gUnk_02038638[1];
-    gUnk_02038658[2] += gUnk_02038638[2];
-    gUnk_02038658[3] += gUnk_02038638[3];
-    gUnk_02038658[4] += gUnk_02038638[4];
-    gUnk_02038658[5] += gUnk_02038638[5];
-    func_081213D4(gUnk_02038658, &gUnk_02038634[p]);
+    func_081213CC(&gAudioCodecSamples[n], gAudioCodecTransformBuf);
+    gAudioCodecTransformBuf[0] += gAudioCodecResiduals[0];
+    gAudioCodecTransformBuf[1] += gAudioCodecResiduals[1];
+    gAudioCodecTransformBuf[2] += gAudioCodecResiduals[2];
+    gAudioCodecTransformBuf[3] += gAudioCodecResiduals[3];
+    gAudioCodecTransformBuf[4] += gAudioCodecResiduals[4];
+    gAudioCodecTransformBuf[5] += gAudioCodecResiduals[5];
+    func_081213D4(gAudioCodecTransformBuf, &gAudioCodecSamples[p]);
 
     if (p <= 15) {
         for (i = 0; i <= 7; i++) {
-            gUnk_02038634[p + i + 0x800] = gUnk_02038634[p + i];
+            gAudioCodecSamples[p + i + 0x800] = gAudioCodecSamples[p + i];
         }
     }
 }
@@ -379,62 +379,62 @@ void _08117A4C(s32 p) {
     s32 left;
 
     n = ReadBits(10);
-    gUnk_02038638[1] = 0;
-    gUnk_02038638[2] = 0;
-    gUnk_02038638[3] = 0;
-    gUnk_02038638[4] = 0;
-    gUnk_02038638[5] = 0;
-    gUnk_02038638[6] = 0;
-    gUnk_02038638[7] = 0;
+    gAudioCodecResiduals[1] = 0;
+    gAudioCodecResiduals[2] = 0;
+    gAudioCodecResiduals[3] = 0;
+    gAudioCodecResiduals[4] = 0;
+    gAudioCodecResiduals[5] = 0;
+    gAudioCodecResiduals[6] = 0;
+    gAudioCodecResiduals[7] = 0;
     c = PeekByte();
 
     if (c & 0x80) {
-        gUnk_02038630 -= 1;
+        gAudioCodecBitCount -= 1;
         c = 0;
     } else {
-        gUnk_02038630 -= 3;
+        gAudioCodecBitCount -= 3;
         c = ((c >> 5) & 3) + 1;
     }
 
-    gUnk_02038638[0] = (s32)((u32)ReadBits(4) << 28) >> 28;
+    gAudioCodecResiduals[0] = (s32)((u32)ReadBits(4) << 28) >> 28;
 
     if (c > 0) {
         if (ReadBits(1)) {
             t = (s32)((u32)ReadBits(4) << 28) >> 28;
-            gUnk_02038638[1] = t;
+            gAudioCodecResiduals[1] = t;
 
             if (t >= 0) {
-                gUnk_02038638[1] = t + 1;
+                gAudioCodecResiduals[1] = t + 1;
             }
         }
 
         if (c > 1) {
             if (ReadBits(1)) {
                 t = (s32)((u32)ReadBits(4) << 28) >> 28;
-                gUnk_02038638[2] = t;
+                gAudioCodecResiduals[2] = t;
 
                 if (t >= 0) {
-                    gUnk_02038638[2] = t + 1;
+                    gAudioCodecResiduals[2] = t + 1;
                 }
             }
 
             if (c > 2) {
                 if (ReadBits(1)) {
                     t = (s32)((u32)ReadBits(4) << 28) >> 28;
-                    gUnk_02038638[3] = t;
+                    gAudioCodecResiduals[3] = t;
 
                     if (t >= 0) {
-                        gUnk_02038638[3] = t + 1;
+                        gAudioCodecResiduals[3] = t + 1;
                     }
                 }
 
                 if (c > 3) {
                     if (ReadBits(1)) {
                         t = (s32)((u32)ReadBits(4) << 28) >> 28;
-                        gUnk_02038638[4] = t;
+                        gAudioCodecResiduals[4] = t;
 
                         if (t >= 0) {
-                            gUnk_02038638[4] = t + 1;
+                            gAudioCodecResiduals[4] = t + 1;
                         }
                     }
                 }
@@ -442,7 +442,7 @@ void _08117A4C(s32 p) {
         }
     }
 
-    func_081213C4(gUnk_02038638, gUnk_02038638, gUnk_09C436A8);
+    func_081213C4(gAudioCodecResiduals, gAudioCodecResiduals, gUnk_09C436A8);
     i = 0;
     t = p - 1040;
     left = p - 1;
@@ -457,18 +457,18 @@ void _08117A4C(s32 p) {
         a &= 0x7FF;
         c &= 0x7FF;
         d &= 0x7FF;
-        gUnk_02038634[p + i] = gUnk_02038634[a] + gUnk_02038634[c] -
-                               gUnk_02038634[d] + gUnk_02038638[i >> 1];
+        gAudioCodecSamples[p + i] = gAudioCodecSamples[a] + gAudioCodecSamples[c] -
+                               gAudioCodecSamples[d] + gAudioCodecResiduals[i >> 1];
     }
 
     if (p <= 15) {
         for (i = 0; i <= 15; i++) {
-            gUnk_02038634[p + i + 0x800] = gUnk_02038634[p + i];
+            gAudioCodecSamples[p + i + 0x800] = gAudioCodecSamples[p + i];
         }
     }
 }
 
-void func_08117E44(s32 p) {
+void DecodeAudioSubblock(s32 p) {
     if (ReadBits(1) != 0) {
         _08117A4C(p);
     } else {
@@ -487,24 +487,24 @@ void func_08117E44(s32 p) {
 }
 
 void DecodeAudioBlock(u8* src, s32* a1, s32 dst) {
-    u8** p = &gUnk_02038628;
+    u8** p = &gAudioCodecSrc;
     s32 i;
 
-    gUnk_02038634 = a1;
-    gUnk_0203862C = *src;
+    gAudioCodecSamples = a1;
+    gAudioCodecBitBuffer = *src;
     *p = src + 1;
-    gUnk_02038630 = 8;
+    gAudioCodecBitCount = 8;
 
     for (i = 31; i >= 0; i--) {
-        func_08117E44(dst);
+        DecodeAudioSubblock(dst);
         dst += 0x10;
     }
 }
 
 s32 PeekAudioBits8(void) {
-    if (gUnk_02038630 < 8) {
+    if (gAudioCodecBitCount < 8) {
         ShiftInByte();
-        gUnk_02038630 += 8;
+        gAudioCodecBitCount += 8;
     }
-    return (gUnk_0203862C >> (gUnk_02038630 - 8)) & 0xFF;
+    return (gAudioCodecBitBuffer >> (gAudioCodecBitCount - 8)) & 0xFF;
 }

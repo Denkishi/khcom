@@ -11,17 +11,17 @@
 #include "enemy_tile_counts.h"
 
 typedef struct RomcriEffWork {
-    s16 unk_00;
+    s16 timer;
     u8 angle;
     u8 unk_03;
 } RomcriEffWork;
 
 typedef struct RomcriEff2Work {
-    s16 unk_00;
+    s16 timer;
     u8 angle;
-    u8 unk_03;
+    u8 frame;
 } RomcriEff2Work;
 
-u16 func_0803FDC8(const BtlFormEntry* list);
+u16 GetBtlFormEntryTileCount(const BtlFormEntry* list);
 
 #endif /* GUARD_ROMCRI_H */

@@ -31,8 +31,8 @@
 #include "btl_api.h"
 
 typedef struct BtlSpawnArgs {
-    u32 unk_00 : 16;
-    u32 unk_02 : 8;
+    u32 variant : 16;
+    u32 mainSide : 8;
     u32 unk_03 : 8;
 } BtlSpawnArgs;
 
@@ -41,11 +41,11 @@ typedef struct BtlTaskArgs {
     s32 y;
     s32 z;
     u8 unk_0C[0x6];
-    s16 unk_12;
-    u16 unk_14;
+    s16 facingLeft;
+    u16 mainSide;
     u16 unk_16;
     void* unk_18;
-    u16 unk_1C;
+    u16 variant;
     u8 unk_1E[0x2];
 } BtlTaskArgs;
 
@@ -56,8 +56,8 @@ typedef struct BtlDrawInfo {
     u16 flags;
     u8 unk_0E[0x2];
     AnimState anim;
-    void* unk_28;
-    s32 unk_2C;
+    void* tileSrc;
+    s32 scale;
 } BtlDrawInfo;
 
 typedef struct BtlLockonWork {
@@ -72,8 +72,8 @@ typedef struct BtlLockonWork {
 typedef struct BtlAreaWork {
     void* palette;
     void* tiles;
-    u8 unk_008;
-    u8 unk_009;
+    u8 visible;
+    u8 enabled;
     s16 timer;
 } BtlAreaWork;
 
@@ -82,7 +82,7 @@ typedef struct SoraAttackDef {
     const s32* attackIds;
     u16 swingSound;
     u16 hitSound;
-    s32 unk_0C;
+    s32 vz;
     u16 flags;
     u16 unk_12;
     const struct SoraAttackDef* next;
@@ -95,7 +95,7 @@ typedef struct RikuAttackDef {
     const s32* attackIds;
     u16 unk_0C;
     u16 song;
-    s32 unk_10;
+    s32 vz;
     u16 flags;
     u16 unk_16;
     const struct RikuAttackDef* next;
@@ -107,38 +107,38 @@ typedef struct BtlSoraWork {
     void* gfx;
     AnimState anim;
     TaskPool tasks;
-    u32 unk_038;
-    u32 unk_03C;
+    u32 state;
+    u32 nextState;
     BtlObj actor;
-    s32 unk_150;
-    u16 unk_154;
-    u16 unk_156;
+    s32 vz;
+    u16 stateTimer;
+    u16 steps;
     u16 unk_158;
-    u16 unk_15A;
-    s32 unk_15C;
+    u16 flags;
+    s32 speed;
     u8 angle;
-    u8 unk_161;
-    u8 unk_162[0x2];
+    u8 comboCount;
+    u8 variant[0x2];
     const SoraAttackDef* attacks[3];
-    u8 unk_170[0x2];
-    u8 unk_172;
-    u8 unk_173;
-    u16 unk_174;
+    u8 tapTimers[0x2];
+    u8 mainSide;
+    u8 sioKeysA;
+    u16 platformPriority;
     u8 unk_176[0x2];
-    s32 unk_178;
-    s32 unk_17C;
-    s32 unk_180;
-    const u16* unk_184;
+    s32 platformX;
+    s32 platformY;
+    s32 platformZ;
+    const u16* groundSongs;
     Task* task;
-    TaskDesc* unk_18C;
-    u8 unk_190;
+    TaskDesc* summonDesc;
+    u8 swingSpeed;
     u8 unk_191[0x3];
     s32 unk_194;
     s32 unk_198;
-    s32 unk_19C;
-    s32 unk_1A0;
-    BtlObj* unk_1A4;
-    u16 unk_1A8;
+    s32 scaleX;
+    s32 scaleY;
+    BtlObj* target;
+    u16 frameCount;
     u8 unk_1AA[0x2];
 } BtlSoraWork;
 
@@ -149,42 +149,42 @@ typedef struct BtlRikuWork {
     void* gfx;
     AnimState anim;
     TaskPool tasks;
-    u32 unk_03C;
+    u32 state;
     u32 unk_040;
     BtlObj actor;
-    s32 unk_154;
-    u16 unk_158;
-    u16 unk_15A;
+    s32 vz;
+    u16 stateTimer;
+    u16 steps;
     u16 unk_15C;
-    u16 unk_15E;
-    s32 unk_160;
-    u8 unk_164;
-    u8 unk_165;
-    u8 unk_166[0x2];
+    u16 flags;
+    s32 speed;
+    u8 angle;
+    u8 comboCount;
+    u8 variant[0x2];
     const RikuAttackDef* attacks[3];
-    u8 unk_174[0x4];
-    u8 unk_178;
-    u8 unk_179;
-    u16 unk_17A;
-    s32 unk_17C;
-    s32 unk_180;
-    s32 unk_184;
-    const u16* unk_188;
+    u8 tapTimers[0x4];
+    u8 mainSide;
+    u8 sioKeysA;
+    u16 platformPriority;
+    s32 platformX;
+    s32 platformY;
+    s32 platformZ;
+    const u16* groundSongs;
     u32 unk_18C;
-    TaskDesc* unk_190;
+    TaskDesc* summonDesc;
     s32 unk_194;
     u8 unk_198[0x4];
-    s32 unk_19C;
-    s32 unk_1A0;
-    BtlObj* unk_1A4;
-    u16 unk_1A8;
+    s32 scaleX;
+    s32 scaleY;
+    BtlObj* target;
+    u16 frameCount;
     u8 unk_1AA[0x2];
-    void* unk_1AC;
+    void* paletteData;
     u16 unk_1B0;
     u8 unk_1B2[0x2];
-    s32 unk_1B4;
-    s32 unk_1B8;
-    s16 unk_1BC;
+    s32 targetX;
+    s32 targetY;
+    s16 drawCount;
     u8 unk_1BE[0x2];
     BtlDrawInfo drawInfo[9];
     BtlObj* actor2;
@@ -207,22 +207,22 @@ extern u8 gUnk_096FAC64[];
 extern u8 gRikuPalette[];
 extern u8 gBStatesPalette[];
 
-void func_0801DEB8(BtlSoraWork* work);
-void func_0801DC5C(BtlSoraWork* work);
+void LoadBtlSoraPalette(BtlSoraWork* work);
+void DisableBtlSoraPassThrough(BtlSoraWork* work);
 void func_080137C8(s32 x, s32 y, s32 z, u8 f);
-void func_080161F8(s32 x, s32 y, s32 z, u8 f);
-s32 func_080ABCA4(s32* out, s32 b);
+void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f);
+s32 ResolveLinkActiveCardsMove(s32* out, s32 b);
 
 typedef struct BtlMapWork {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
-    s32 unk_0C;
+    s32 xMin;
+    s32 xMax;
+    s32 yMin;
+    s32 yMax;
 } BtlMapWork;
 
 typedef struct BtlTaskArg {
-    s32 unk_00;
-    u8 unk_04;
+    s32 side;
+    u8 mainSide;
 } BtlTaskArg;
 
 #endif /* GUARD_BTL_H */

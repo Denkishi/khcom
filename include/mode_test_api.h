@@ -3,10 +3,10 @@
 
 #include "types.h"
 
-void func_0805FCB0(u8 x, u8 y, u32 c, const char* s);
-void func_080605A4(u8 bg);
-void func_0805FA8C(u8 bg, u16 b, u16 c);
-void func_0805FC04(u8 x, u8 y, u32 c, u16 v);
+void DebugTextPrint(u8 x, u8 y, u32 c, const char* s);
+void DebugTextDraw(u8 bg);
+void DebugTextInit(u8 bg, u16 b, u16 c);
+void DebugTextPrintNumber(u8 x, u8 y, u32 c, u16 v);
 s32 VectorLength2D(s32 a, s32 b);
 s32 NormalizeVector2D8(s32* x, s32* y);
 u16 GetCardMooglePointValue(u16 a);

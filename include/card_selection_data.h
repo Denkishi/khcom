@@ -4,7 +4,7 @@
 #include "types.h"
 
 #ifdef VERSION_EU
-extern const u16 gUnkEu_090CED64[5];
+extern const u16 gMapCardUiExtraTileSizes[5];
 #endif
 
 #endif

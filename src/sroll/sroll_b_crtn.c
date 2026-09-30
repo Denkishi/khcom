@@ -15,8 +15,8 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a) {
     s32 t;
 
     w->timer = 0;
-    w->unk_04 = a->unk_00;
-    switch (w->unk_04) {
+    w->kind = a->kind;
+    switch (w->kind) {
     case 0:
     case 1:
     case 5:
@@ -26,7 +26,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a) {
         w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
         anim = &w->anim;
         AnimInit(anim, gFEventAnims, gFEventFrames);
-        AnimStart(anim, w->unk_04, 0);
+        AnimStart(anim, w->kind, 0);
         break;
     case 3:
         w->x = a->x;
@@ -46,7 +46,7 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* w, SrollBCrtnArg* a) {
         w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
         anim = &w->anim;
         AnimInit(anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
-        AnimStart(anim, w->unk_04, 0);
+        AnimStart(anim, w->kind, 0);
         break;
     }
     FadeSetPaletteExcluded((w->palette->index & 15) + 16, 0);
@@ -59,7 +59,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
     AnimUpdate(&w->anim);
     w->timer++;
 
-    switch (w->unk_04) {
+    switch (w->kind) {
     case 1:
         if (w->timer > 120) {
             r = 0;

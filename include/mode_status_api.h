@@ -3,6 +3,6 @@
 
 #include "types.h"
 
-void func_080D7568(u8 a);
+void SetStatusReturnToMenu(u8 a);
 
 #endif

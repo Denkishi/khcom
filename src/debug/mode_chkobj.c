@@ -23,7 +23,7 @@
 
 ChkObjWork* gChkObjWork;
 
-ObjDef gUnk_09ECEB74[] = {
+ObjDef gChkObjSoraDefs[] = {
     { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 2, 0, gSoraPalette, "sor1ff00.aob", "sora.acl", 32, 0 },
     { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 8, 0, gSoraPalette, "sor1fl00.aob", "sora.acl", 32, 0 },
     { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 1, 0, gSoraPalette, "sor1ll00.aob", "sora.acl", 32, 0 },
@@ -89,7 +89,7 @@ ObjDef gUnk_09ECEB74[] = {
     { gSor1ll75Frames, gSor1ll75Anims, gSor1ll75Tiles, 3, 0, gSoraPalette, "sor1ll75.aob", "sora.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ECF354[] = {
+ObjDef gChkObjEnemyDefs[] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 1, 0, gEmy00Palette, "emy_00_l_00.aob", "emy_00.acl", 32, 0 },
     { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 1, 0, gEmy00Palette, "emy_00_l_02.aob", "emy_00.acl", 32, 0 },
     { gEmy00L04Frames, gEmy00L04Anims, gEmy00L04Tiles, 1, 0, gEmy00Palette, "emy_00_l_04.aob", "emy_00.acl", 32, 0 },
@@ -255,7 +255,7 @@ ObjDef gUnk_09ECF354[] = {
     { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 1, 0, gTrumpSPalette, "trump_S_10.aob", "trump_S.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED07B4[] = {
+ObjDef gChkObjSummonDefs[] = {
     { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 3, 0, gGoofyPalette, "goofy_05.aob", "goofy.acl", 32, 0 },
     { gGoofy14Frames, gGoofy14Anims, gGoofy14Tiles, 1, 0, gGoofyPalette, "goofy_14.aob", "goofy.acl", 32, 0 },
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 2, 0, gGoofyPalette, "goofy_16.aob", "goofy.acl", 32, 0 },
@@ -276,7 +276,7 @@ ObjDef gUnk_09ED07B4[] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 3, 0, gMickeyPalette, "mickey_10.aob", "mickey.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED09F4[] = {
+ObjDef gChkObjHumBossDefs[] = {
     { gRexeusIdlFrames, gRexeusIdlAnims, gRexeusIdlTiles, 1, 0, gRexeusPalette, "rexeus_idl.aob", "rexeus.acl", 32, 0 },
     { gRexeusMovFrames, gRexeusMovAnims, gRexeusMovTiles, 1, 0, gRexeusPalette, "rexeus_mov.aob", "rexeus.acl", 32, 0 },
     { gRexeusDmgFrames, gRexeusDmgAnims, gRexeusDmgTiles, 1, 0, gRexeusPalette, "rexeus_dmg.aob", "rexeus.acl", 32, 0 },
@@ -387,7 +387,7 @@ ObjDef gUnk_09ED09F4[] = {
     { gHadesFramespreadHiFrames, gHadesFramespreadHiAnims, gHadesFramespreadHiTiles, 3, 0, gBStatesPalette, "hades_framespread_hi.aob", "b_states.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED1774[] = {
+ObjDef gChkObjEventDefs[] = {
     { gFEventFrames, gFEventAnims, gFEventTiles, 10, 0, gBStatesPalette, "f_event.aob", "b_states.acl", 32, 0 },
     { gXexionFl00Frames, gXexionFl00Anims, gXexionFl00Tiles, 15, 0, gXexionPalette, "xexion_fl00.aob", "xexion.acl", 32, 0 },
     { gXexionBl00Frames, gXexionBl00Anims, gXexionBl00Tiles, 3, 0, gXexionPalette, "xexion_bl00.aob", "xexion.acl", 32, 0 },
@@ -780,7 +780,7 @@ ObjDef gUnk_09ED1774[] = {
     { gMickey08Frames, gMickey08Anims, gMickey08Tiles, 1, 0, gMickeyPalette, "mickey_08.aob", "mickey.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED4834[] = {
+ObjDef gChkObjFaceDefs[] = {
     { gTalk0000Frames, gTalk0000Anims, gTalk0000Tiles, 4, 0, gTalk0000Palette, "talk_00_00.aob", "talk_00_00.acl", 32, 0 },
     { gTalk0001Frames, gTalk0001Anims, gTalk0001Tiles, 2, 0, gTalk0000Palette, "talk_00_01.aob", "talk_00_00.acl", 32, 0 },
     { gTalk0002Frames, gTalk0002Anims, gTalk0002Tiles, 2, 0, gTalk0000Palette, "talk_00_02.aob", "talk_00_00.acl", 32, 0 },
@@ -951,7 +951,7 @@ ObjDef gUnk_09ED4834[] = {
     { gTalk6100Frames, gTalk6100Anims, gTalk6100Tiles, 6, 0, gTalk6100Palette, "talk_61_00.aob", "talk_61_00.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED5D34[] = {
+ObjDef gChkObjCardDefs[] = {
     { gRiCardF0RedFrames, gRiCardF0RedAnims, gRiCardF0RedTiles, 9, 0, gCard00Palette, "ri_card_f0_red.aob", "card_00.acl", 32, 0 },
     { gCardItm01Frames, gCardItm01Anims, gCardItm01Tiles, 1, 0, gCardItm01Palette, "card_itm01.aob", "card_itm01.acl", 32, 0 },
     { gCardItm02Frames, gCardItm02Anims, gCardItm02Tiles, 1, 0, gCardItm02Palette, "card_itm02.aob", "card_itm02.acl", 32, 0 },
@@ -1160,7 +1160,7 @@ ObjDef gUnk_09ED5D34[] = {
     { gCardEve02Frames, gCardEve02Anims, gCardEve02Tiles, 1, 0, gCardEve02Palette, "card_eve02.aob", "card_eve02.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED76F4[] = {
+ObjDef gChkObjEtcDefs[] = {
     { gKaifukuFrames, gKaifukuAnims, gKaifukuTiles, 1, 0, gKaifukuPalette, "kaifuku.aob", "kaifuku.acl", 32, 0 },
     { gNokogiriFrames, gNokogiriAnims, gNokogiriTiles, 1, 0, gKaifukuPalette, "nokogiri.aob", "kaifuku.acl", 32, 0 },
     { gKnifeFrames, gKnifeAnims, gKnifeTiles, 1, 0, gKnifePalette, "knife.aob", "knife.acl", 32, 0 },
@@ -1172,7 +1172,7 @@ ObjDef gUnk_09ED76F4[] = {
 #endif
 };
 
-ObjDef gUnk_09ED77D4[] = {
+ObjDef gChkObjPoohGameDefs[] = {
     { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 1, 0, gPoohPalette, "pooh_ff01.aob", "pooh.acl", 32, 0 },
     { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 1, 0, gPoohPalette, "pooh_fr01.aob", "pooh.acl", 32, 0 },
     { gPoohRr01Frames, gPoohRr01Anims, gPoohRr01Tiles, 1, 0, gPoohPalette, "pooh_rr01.aob", "pooh.acl", 32, 0 },
@@ -1263,7 +1263,7 @@ ObjDef gUnk_09ED77D4[] = {
     { gRoFootmarkFrames, gRoFootmarkAnims, gRoFootmarkTiles, 2, 0, gRoFootmarkPalette, "ro_footmark.aob", "ro_footmark.acl", 32, 0 },
 };
 
-ObjDef gUnk_09ED82D4[] = {
+ObjDef gChkObjRikuDefs[] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 1, 0, gRikuPalette, "riku_bt00.aob", "riku.acl", 32, 0 },
     { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 2, 0, gRikuPalette, "riku_bt02.aob", "riku.acl", 32, 0 },
     { gRikuBt04Frames, gRikuBt04Anims, gRikuBt04Tiles, 1, 0, gRikuPalette, "riku_bt04.aob", "riku.acl", 32, 0 },
@@ -1300,19 +1300,19 @@ ObjDef gUnk_09ED82D4[] = {
 #endif
 
 const ChkObjEntry gChkObjEntries[10] = {
-    { gUnk_09ECEB74, 0x3F, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60" },
-    { gUnk_09ED82D4, 0x1B, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74" },
-    { gUnk_09ECF354, 0xA3, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78" },
-    { gUnk_09ED07B4, 0x12, 0, "\x81\x40\x81\x40\x81\x40\x82\x72\x82\x74\x82\x6c\x82\x6c\x82\x6e\x82\x6d" },
-    { gUnk_09ED09F4, 0x6C, 0, "\x81\x40\x81\x40\x82\x67\x82\x74\x82\x6c\x82\x61\x82\x6e\x82\x72\x82\x72" },
-    { gUnk_09ED1774, 0x186, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73" },
-    { gUnk_09ED4834, 0xA8, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x65\x82\x60\x82\x62\x82\x64" },
-    { gUnk_09ED5D34, 0xCE, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x62\x82\x60\x82\x71\x82\x63" },
-    { gUnk_09ED76F4, CHKOBJ_ETC_COUNT, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x73\x82\x62" },
-    { gUnk_09ED77D4, 0x58, 0, "\x81\x40\x82\x6f\x82\x6e\x82\x6e\x82\x67\x82\x66\x82\x60\x82\x6c\x82\x64" },
+    { gChkObjSoraDefs, 0x3F, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60" },
+    { gChkObjRikuDefs, 0x1B, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74" },
+    { gChkObjEnemyDefs, 0xA3, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78" },
+    { gChkObjSummonDefs, 0x12, 0, "\x81\x40\x81\x40\x81\x40\x82\x72\x82\x74\x82\x6c\x82\x6c\x82\x6e\x82\x6d" },
+    { gChkObjHumBossDefs, 0x6C, 0, "\x81\x40\x81\x40\x82\x67\x82\x74\x82\x6c\x82\x61\x82\x6e\x82\x72\x82\x72" },
+    { gChkObjEventDefs, 0x186, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73" },
+    { gChkObjFaceDefs, 0xA8, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x65\x82\x60\x82\x62\x82\x64" },
+    { gChkObjCardDefs, 0xCE, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x62\x82\x60\x82\x71\x82\x63" },
+    { gChkObjEtcDefs, CHKOBJ_ETC_COUNT, 0, "\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x82\x64\x82\x73\x82\x62" },
+    { gChkObjPoohGameDefs, 0x58, 0, "\x81\x40\x82\x6f\x82\x6e\x82\x6e\x82\x67\x82\x66\x82\x60\x82\x6c\x82\x64" },
 };
 
-void func_0800B30C(ObjDef* def) {
+void ChkObjLoadDef(ObjDef* def) {
     AnimChangeWithTables(&gChkObjWork->anim, gChkObjWork->animId, 0, def->anims, def->gfxTable);
     SetObjTileSource(gChkObjWork->tiles, def->tiles);
     ReleaseObjPalette(gChkObjWork->palette);
@@ -1324,22 +1324,22 @@ void mode_chkobj_0(void) {
     gChkObjWork = EwramAlloc(sizeof(ChkObjWork));
     TaskPoolInit(&gChkObjWork->pool, 1);
     TaskCreate(&gChkObjWork->pool, &gTaskDescPrint, 0);
-    gChkObjWork->unk_14 = 0;
+    gChkObjWork->defIndex = 0;
     gChkObjWork->animId = 0;
-    gChkObjWork->unk_18 = 0;
+    gChkObjWork->category = 0;
     gChkObjWork->tiles = AllocObjTiles(0x2000, 0);
     gChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
     gChkObjWork->gfx = gSor1ff00Frame0;
     gChkObjWork->paused = 0;
     gChkObjWork->angle = 0x80A0;
-    gChkObjWork->unk_44 = 0;
+    gChkObjWork->maxTiles = 0;
     gChkObjWork->y = 0;
-    func_0800B30C(gChkObjEntries[0].defs);
+    ChkObjLoadDef(gChkObjEntries[0].defs);
     SetupBg(1, 0, 15, 0);
     EnableBg(0);
-    func_0805FA8C(1, 0x5400, 0x500);
-    func_0805FA60(1, gWhitePalette, 0x20, 0x0F);
-    func_0805FCB0(166, 0, 2, gChkObjEntries[0].name);
+    DebugTextInit(1, 0x5400, 0x500);
+    DebugTextLoadPalette(1, gWhitePalette, 0x20, 0x0F);
+    DebugTextPrint(166, 0, 2, gChkObjEntries[0].name);
 }
 
 void mode_chkobj_1(void) {
@@ -1369,46 +1369,46 @@ void mode_chkobj_1(void) {
 
             gChkObjWork->y = 0;
             gChkObjWork->paused = 0;
-            gChkObjWork->unk_44 = 0;
-            def = &gChkObjEntries[gChkObjWork->unk_18].defs[gChkObjWork->unk_14];
+            gChkObjWork->maxTiles = 0;
+            def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
 
             if (gChkObjWork->animId < 0) {
-                gChkObjWork->unk_14--;
+                gChkObjWork->defIndex--;
 
-                if (gChkObjWork->unk_14 < 0) {
-                    gChkObjWork->unk_18--;
+                if (gChkObjWork->defIndex < 0) {
+                    gChkObjWork->category--;
 
-                    if (gChkObjWork->unk_18 < 0) {
-                        gChkObjWork->unk_18 = 9;
+                    if (gChkObjWork->category < 0) {
+                        gChkObjWork->category = 9;
                     }
 
-                    gChkObjWork->unk_14 = gChkObjEntries[gChkObjWork->unk_18].count - 1;
+                    gChkObjWork->defIndex = gChkObjEntries[gChkObjWork->category].count - 1;
                 }
 
-                def = &gChkObjEntries[gChkObjWork->unk_18].defs[gChkObjWork->unk_14];
+                def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
                 gChkObjWork->animId = def->animCount - 1;
-                func_0800B30C(def);
+                ChkObjLoadDef(def);
             } else if (gChkObjWork->animId >= def->animCount) {
-                gChkObjWork->unk_14++;
+                gChkObjWork->defIndex++;
 
-                if (gChkObjWork->unk_14 >= gChkObjEntries[gChkObjWork->unk_18].count) {
-                    gChkObjWork->unk_18++;
+                if (gChkObjWork->defIndex >= gChkObjEntries[gChkObjWork->category].count) {
+                    gChkObjWork->category++;
 
-                    if ((u16)gChkObjWork->unk_18 > 9) {
-                        gChkObjWork->unk_18 = 0;
+                    if ((u16)gChkObjWork->category > 9) {
+                        gChkObjWork->category = 0;
                     }
 
-                    gChkObjWork->unk_14 = 0;
+                    gChkObjWork->defIndex = 0;
                 }
 
-                def = &gChkObjEntries[gChkObjWork->unk_18].defs[gChkObjWork->unk_14];
+                def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
                 gChkObjWork->animId = 0;
-                func_0800B30C(def);
+                ChkObjLoadDef(def);
             } else {
                 AnimStart(&gChkObjWork->anim, gChkObjWork->animId, 0);
             }
 
-            func_0805FCB0(166, 0, 2, gChkObjEntries[gChkObjWork->unk_18].name);
+            DebugTextPrint(166, 0, 2, gChkObjEntries[gChkObjWork->category].name);
         }
 
         keys = GetKeysHeld() & SELECT_BUTTON;
@@ -1424,27 +1424,27 @@ void mode_chkobj_1(void) {
         } else if (GetKeysRepeat() & (L_BUTTON | R_BUTTON)) {
             gChkObjWork->y = 0;
             gChkObjWork->paused = 0;
-            gChkObjWork->unk_44 = 0;
+            gChkObjWork->maxTiles = 0;
 
             if (GetKeysRepeat() & L_BUTTON) {
-                gChkObjWork->unk_18--;
+                gChkObjWork->category--;
             }
 
             if (GetKeysRepeat() & R_BUTTON) {
-                gChkObjWork->unk_18++;
+                gChkObjWork->category++;
             }
 
-            if (gChkObjWork->unk_18 < 0) {
-                gChkObjWork->unk_18 = 9;
-            } else if ((u16)gChkObjWork->unk_18 > 9) {
-                gChkObjWork->unk_18 = 0;
+            if (gChkObjWork->category < 0) {
+                gChkObjWork->category = 9;
+            } else if ((u16)gChkObjWork->category > 9) {
+                gChkObjWork->category = 0;
             }
 
             gChkObjWork->animId = 0;
-            gChkObjWork->unk_14 = 0;
-            def = gChkObjEntries[gChkObjWork->unk_18].defs;
-            func_0800B30C(def);
-            func_0805FCB0(166, 0, 2, gChkObjEntries[gChkObjWork->unk_18].name);
+            gChkObjWork->defIndex = 0;
+            def = gChkObjEntries[gChkObjWork->category].defs;
+            ChkObjLoadDef(def);
+            DebugTextPrint(166, 0, 2, gChkObjEntries[gChkObjWork->category].name);
         }
 
         SetBackdropColor((u16)abs(gSineTable[gChkObjWork->angle & 0xFF] * 5 >> 6),
@@ -1467,46 +1467,46 @@ void mode_chkobj_1(void) {
         gChkObjWork->gfx = AnimGetGfx(&gChkObjWork->anim);
 
         if (gChkObjWork->paused != 0) {
-            func_0809D2B0(0, 1, 0, "PAUSE");
+            PrintString(0, 1, 0, "PAUSE");
         } else {
-            func_0809D2B0(0, 1, 0, "     ");
+            PrintString(0, 1, 0, "     ");
         }
 
-        def = &gChkObjEntries[gChkObjWork->unk_18].defs[gChkObjWork->unk_14];
-        func_0809D2B0(0, 12, 0, "                                      ");
-        func_0809D2B0(0, 13, 0, "                                      ");
-        func_0809D2B0(0, 14, 0, "                                      ");
-        func_0809D2B0(0, 15, 0, "                                      ");
-        func_0809D2B0(0, 16, 0, "                                      ");
-        func_0809D2B0(0, 17, 0, "                                      ");
-        func_0809D2B0(0, 18, 0, "                                      ");
-        func_0809D2B0(0, 19, 0, "                                      ");
-        func_0809D2B0(0, 0, 0, "    ");
-        func_0809D458(0, 0, 0, gChkObjWork->unk_14);
-        func_0809D2B0(0, 12, 0, def->aobName);
-        func_0809D2B0(0, 13, 0, "aob");
-        func_0809D458(6, 13, 0, AnimGetGfxIndex(&gChkObjWork->anim));
-        func_0809D2B0(0, 14, 0, def->aclName);
-        func_0809D2B0(0, 15, 0, "anime");
-        func_0809D458(6, 15, 0, gChkObjWork->animId);
-        func_0809D2B0(0, 16, 0, "pic");
-        func_0809D458(6, 16, 0, gChkObjWork->anim.frame);
-        func_0809D2B0(0, 17, 0, "frame");
-        func_0809D458(6, 17, 0, gChkObjWork->anim.timer);
+        def = &gChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+        PrintString(0, 12, 0, "                                      ");
+        PrintString(0, 13, 0, "                                      ");
+        PrintString(0, 14, 0, "                                      ");
+        PrintString(0, 15, 0, "                                      ");
+        PrintString(0, 16, 0, "                                      ");
+        PrintString(0, 17, 0, "                                      ");
+        PrintString(0, 18, 0, "                                      ");
+        PrintString(0, 19, 0, "                                      ");
+        PrintString(0, 0, 0, "    ");
+        PrintNumber(0, 0, 0, gChkObjWork->defIndex);
+        PrintString(0, 12, 0, def->aobName);
+        PrintString(0, 13, 0, "aob");
+        PrintNumber(6, 13, 0, AnimGetGfxIndex(&gChkObjWork->anim));
+        PrintString(0, 14, 0, def->aclName);
+        PrintString(0, 15, 0, "anime");
+        PrintNumber(6, 15, 0, gChkObjWork->animId);
+        PrintString(0, 16, 0, "pic");
+        PrintNumber(6, 16, 0, gChkObjWork->anim.frame);
+        PrintString(0, 17, 0, "frame");
+        PrintNumber(6, 17, 0, gChkObjWork->anim.timer);
         v = GetSpriteTileBytes(gChkObjWork->gfx) >> 5;
-        func_0809D2B0(0, 18, 0, "chara");
-        func_0809D458(6, 18, 0, v);
+        PrintString(0, 18, 0, "chara");
+        PrintNumber(6, 18, 0, v);
 
-        if (gChkObjWork->unk_44 < v) {
-            gChkObjWork->unk_44 = v;
+        if (gChkObjWork->maxTiles < v) {
+            gChkObjWork->maxTiles = v;
         }
 
-        func_0809D2B0(0, 19, 0, "maxChr");
-        func_0809D458(6, 19, 0, gChkObjWork->unk_44);
+        PrintString(0, 19, 0, "maxChr");
+        PrintNumber(6, 19, 0, gChkObjWork->maxTiles);
         DrawSprite(120, gChkObjWork->y + 96, gChkObjWork->gfx, gChkObjWork->tiles,
                    gChkObjWork->palette, 0, 0, 0);
-        func_080605A4(1);
-        func_08060598();
+        DebugTextDraw(1);
+        DebugTextClear();
     }
 }
 
@@ -1515,7 +1515,7 @@ void mode_chkobj_2(void) {
     ReleaseObjTiles(gChkObjWork->tiles);
     ReleaseObjPalette(gChkObjWork->palette);
     EwramFree(gChkObjWork);
-    func_080609A0();
+    DebugTextDestroy();
 }
 
 Mode gModeChkobj = { "mode_chkobj", (ModeInitFunc)mode_chkobj_0, mode_chkobj_1, mode_chkobj_2 };

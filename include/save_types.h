@@ -14,13 +14,13 @@
 
 typedef struct SaveCommon {
     u32 flags;
-    u8 unk_04[0x88];
-    u16 unk_8C;
-    u16 unk_8E;
-    u8 unk_90;
-    u8 unk_91;
+    u8 progression[0x88];
+    u16 availableWorlds;
+    u16 hp;
+    u8 floor;
+    u8 world;
     u8 unk_92[0x02];
-    u32 unk_94;
+    u32 playTime;
 } SaveCommon;
 
 typedef struct SaveFileSummary {
@@ -33,7 +33,7 @@ typedef struct SaveFileSummary {
 
 typedef struct SaveHeaderData {
     u16 flags;
-    u16 unk_02;
+    u16 language;
     SaveFileSummary files[SAVE_FILES];
 } SaveHeaderData;
 
@@ -46,8 +46,8 @@ typedef struct SaveSharedSlice {
 } SaveSharedSlice;
 
 typedef struct SaveLargeSlice {
-    u8 unk_000;
-    u8 unk_001[0x10E];
+    u8 activeDeck;
+    u8 mapCardCounts[0x10E];
     u8 unk_10F;
     u16 cards[SAVE_CARDS];
     u16 cardCount;
@@ -74,8 +74,8 @@ typedef struct SaveFileLarge {
     SaveSharedSlice shared;
     SaveLargeSlice large;
     SaveSliceE6C unk_E6C;
-    u8 unk_E70[0x044];
-    SaveSliceEB4 unk_EB4;
+    u8 pooState[0x044];
+    SaveSliceEB4 moogleShop;
 } SaveFileLarge;
 
 typedef struct SaveFileSmall {

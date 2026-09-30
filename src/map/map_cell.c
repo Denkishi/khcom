@@ -1,77 +1,77 @@
 #include "macros.h"
 #include "map.h"
 
-UnkStruct_0203C7AC* gUnk_0203C7AC EWRAM_COMMON(4);
-UnkStruct_0203C7B0 gUnk_0203C7B0 EWRAM_COMMON(8);
-struct UnkStruct_0203C7B8* gUnk_0203C7B8 EWRAM_COMMON(4);
+MapRoomState* gMapRoomState EWRAM_COMMON(4);
+MapFormDef gMapForm EWRAM_COMMON(8);
+struct MapGmkPlacement* gMapGmkPlacements EWRAM_COMMON(4);
 
 MapCell* gMapCells;
-UnkStruct_02034F20* gUnk_02034F20;
-UnkStruct_080DFB7C* gUnk_02034F24;
+MapPlatform* gMapPlatforms;
+MapDoor* gMapDoors;
 u16 gMapCols;
 u16 gMapRows;
-u16 gUnk_02034F2C;
-u16 gUnk_02034F2E;
-void* gUnk_02034F30;
-UnkStruct_09EF70D0* gUnk_02034F34;
-MapCell* gUnk_02034F38;
+u16 gMapTopRow;
+u16 gMapBottomRow;
+void* gMapBgBuffer;
+MapRoomDef* gMapRoomDef;
+MapCell* gMapFixCells;
 #ifndef VERSION_EU
 u8 gUnk_02034F3C[4];
 #endif
 
-s32 func_080DFEBC(s32 x, s32 y, s32 z) {
-    MapCell* p = func_080DFB8C(x, y);
+s32 FieldGroundAt(s32 x, s32 y, s32 z) {
+    MapCell* p = FieldCellAt(x, y);
     s32 r;
 
     if (p == 0) {
         return 0;
     }
-    if (p->unk_08 < z) {
-        if (p->unk_02 == 4 || p->unk_02 == 6) {
-            if (func_080E86C8(p, x, y)) {
-                r = p->unk_08;
+    if (p->upperZ < z) {
+        if (p->type == 4 || p->type == 6) {
+            if (MapCellMaskBitAt(p, x, y)) {
+                r = p->upperZ;
             } else {
-                r = p->unk_0C;
+                r = p->lowerZ;
             }
         } else {
-            r = p->unk_08;
+            r = p->upperZ;
         }
     } else {
-        if (p->unk_02 == 3 || p->unk_02 == 5) {
-            if (func_080E86C8(p, x, y)) {
-                r = p->unk_0C;
+        if (p->type == 3 || p->type == 5) {
+            if (MapCellMaskBitAt(p, x, y)) {
+                r = p->lowerZ;
             } else {
-                r = p->unk_08;
+                r = p->upperZ;
             }
         } else {
-            r = p->unk_0C;
+            r = p->lowerZ;
         }
     }
     return r;
 }
 
-s32 func_080DFF1C(FldPos* p) {
-    return func_080DFEBC(p->x, p->y + p->unk_0C, p->unk_0C);
+s32 GetFldPosGround(FldPos* p) {
+    return FieldGroundAt(p->x, p->y + p->ground, p->ground);
 }
 
-s32 func_080DFF30(FldPos* p) {
-    return func_080DFEBC(p->x, p->y + p->z, -0x100000);
+s32 GetFldPosFloor(FldPos* p) {
+    return FieldGroundAt(p->x, p->y + p->z, -0x100000);
 }
 
-void func_080DFF4C(FldPos* p) {
-    p->unk_0C = func_080DFF30(p);
+void FldPosInitGround(FldPos* p) {
+    p->ground = GetFldPosFloor(p);
 }
 
-void func_080DFF5C(FldPos* p, s16 x, s16 y, u8 a, u8 b) {
+void FldPosPlaceAtCell(FldPos* p, s16 x, s16 y, u8 a, u8 b) {
     p->x = (x << 13) + (a << 12);
     p->y = (y << 12) + (b << 11);
     p->z = 0;
-    p->z = p->unk_0C = func_080DFF30(p);
-    p->y -= p->unk_0C;
+    p->z = p->ground = GetFldPosFloor(p);
+    p->y -= p->ground;
 }
 
-s32 func_080DFF94(s32 x, s32 y, s32 z) {
-    switch (func_080DFB8C(x, y + z)->unk_02) {
+s32 GetLedgeAngleAt(s32 x, s32 y, s32 z) {
+    switch (FieldCellAt(x, y + z)->type) {
     case 1:
     case 2:
     case 7:
@@ -88,18 +88,18 @@ s32 func_080DFF94(s32 x, s32 y, s32 z) {
     return 0x80;
 }
 
-void func_080DFFEC(FldPos* p) {
-    func_080E524C(p, &p->y);
+void FldPosPlaceOnFreeFloor(FldPos* p) {
+    MapPickFreeFloorPos(p, &p->y);
     p->z = 0;
-    p->z = p->unk_0C = func_080DFF30(p);
-    p->y -= p->unk_0C;
+    p->z = p->ground = GetFldPosFloor(p);
+    p->y -= p->ground;
 }
 
-s32 func_080E0010(s32 x) {
+s32 MapClampCameraX(s32 x) {
     s32 lim;
 
     x -= 0x7800;
-    lim = (gFieldState->unk_10 << 11) - 0xF000;
+    lim = (gFieldState->tileCols << 11) - 0xF000;
 
     if (x < 0) {
         x = 0;
@@ -109,11 +109,11 @@ s32 func_080E0010(s32 x) {
     return x;
 }
 
-s32 func_080E0044(s32 y) {
+s32 MapClampCameraY(s32 y) {
     s32 lim;
 
     y -= 0x6000;
-    lim = (gFieldState->unk_12 << 11) - 0xA000;
+    lim = (gFieldState->tileRows << 11) - 0xA000;
 
     if (y < 0) {
         y = 0;
@@ -123,21 +123,21 @@ s32 func_080E0044(s32 y) {
     return y;
 }
 
-void func_080E0078(void) {
+void MapSnapCamera(void) {
     s16 sx;
     s16 sy;
 
-    gFieldState->x = func_080E0010(gFieldState->x2);
-    gFieldState->y = func_080E0044(gFieldState->y2);
+    gFieldState->x = MapClampCameraX(gFieldState->x2);
+    gFieldState->y = MapClampCameraY(gFieldState->y2);
     sx = gFieldState->x >> 8;
     sy = gFieldState->y >> 8;
-    func_080E4B78(sx / 8, sy / 8);
+    MapDrawBgs(sx / 8, sy / 8);
     SetBgScroll(3, (u16)sx, (u16)sy);
     SetBgScroll(2, (u16)sx, (u16)sy);
     SetBgScroll(1, (u16)sx, (u16)sy);
 }
 
-void func_080E00E4(s32 a, s32 b) {
+void MapUpdateCamera(s32 a, s32 b) {
     s32 x;
     s32 y;
     s32 dx;
@@ -147,8 +147,8 @@ void func_080E00E4(s32 a, s32 b) {
     u8* p;
 
     if ((gFieldState->flags & 0x40000) == 0) {
-        x = func_080E0010(a);
-        y = func_080E0044(b);
+        x = MapClampCameraX(a);
+        y = MapClampCameraY(b);
     } else {
         x = a - 0x7800;
         y = b - 0x6000;
@@ -182,99 +182,99 @@ void func_080E00E4(s32 a, s32 b) {
     gFieldState->y += dy;
     sx = gFieldState->x / 0x800;
     sy = gFieldState->y / 0x800;
-    p = func_080E5504();
+    p = GetMapBgBuffer();
 
     if (dx > 0) {
-        func_080E4FF0(p, sx + 30, sy - 1);
+        MapDrawBgColumn(p, sx + 30, sy - 1);
     } else if (dx < 0) {
-        func_080E4FF0(p, sx - 1, sy - 1);
+        MapDrawBgColumn(p, sx - 1, sy - 1);
     }
 
     p += 0xC0;
 
     if (dy > 0) {
-        func_080E51C0(p, sx - 1, sy + 20);
+        MapDrawBgRow(p, sx - 1, sy + 20);
     } else if (dy < 0) {
-        func_080E51C0(p, sx - 1, sy - 1);
+        MapDrawBgRow(p, sx - 1, sy - 1);
     }
 
     SetBgScroll(3, (u16)(gFieldState->x >> 8), (u16)(gFieldState->y >> 8));
     SetBgScroll(2, (u16)(gFieldState->x >> 8), (u16)(gFieldState->y >> 8));
 
-    if (!(gUnk_0203C7AC->flags & 1)) {
+    if (!(gMapRoomState->flags & 1)) {
         SetBgScroll(1, (u16)(gFieldState->x >> 8), (u16)(gFieldState->y >> 8));
     }
 }
 
-void func_080E0298(s32 x, s32 y) {
+void MapSetCameraTarget(s32 x, s32 y) {
     gFieldState->x2 = x;
     gFieldState->y2 = y;
 }
 
-void func_080E02A8(s32 dx, s32 dy) {
+void MapMoveCameraTarget(s32 dx, s32 dy) {
     gFieldState->x2 += dx;
     gFieldState->y2 += dy;
 }
 
-void func_080E02C0(s32 x, s32 y, s32 z) {
-    gUnk_0203C7AC->unk_20 = 1;
-    gUnk_0203C7AC->unk_24 = x;
-    gUnk_0203C7AC->unk_28 = y;
-    gUnk_0203C7AC->unk_2C = z;
+void SetMapAttackBox(s32 x, s32 y, s32 z) {
+    gMapRoomState->attackActive = 1;
+    gMapRoomState->attackX = x;
+    gMapRoomState->attackY = y;
+    gMapRoomState->attackZ = z;
 }
 
-u8 func_080E02E0(FldPos* p, s16 a, s16 b) {
-    if (gUnk_0203C7AC->unk_20 == 0) {
+u8 IsHitByMapAttack(FldPos* p, s16 a, s16 b) {
+    if (gMapRoomState->attackActive == 0) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->flags & 0x80) {
+    if (gMapRoomState->flags & 0x80) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_24 - 0x1400 > p->x + (a << 8)) {
+    if (gMapRoomState->attackX - 0x1400 > p->x + (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_24 + 0x1400 < p->x - (a << 8)) {
+    if (gMapRoomState->attackX + 0x1400 < p->x - (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_28 - 0x1400 > p->y + (a << 8)) {
+    if (gMapRoomState->attackY - 0x1400 > p->y + (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_28 + 0x1400 < p->y - (a << 8)) {
+    if (gMapRoomState->attackY + 0x1400 < p->y - (a << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_2C - 0x2000 > p->z) {
+    if (gMapRoomState->attackZ - 0x2000 > p->z) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_2C + 0x800 < p->z - (b << 8)) {
+    if (gMapRoomState->attackZ + 0x800 < p->z - (b << 8)) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->unk_2C <= p->unk_0C) {
+    if (gMapRoomState->attackZ <= p->ground) {
         return 1;
     }
     return 0;
 }
 
-u8 func_080E0378(void) {
-    return func_080DF548(gUnk_0203C590.unk_06);
+u8 GetCurrentRoomCardValue(void) {
+    return GetMapRoomCardValue(gMapFloorState.room);
 }
 
-s32 func_080E0390(void) {
-    if ((gFieldState->flags & 0x42000) || (gUnk_0203C7AC->flags & 0x2000)) {
+s32 IsMapInterrupted(void) {
+    if ((gFieldState->flags & 0x42000) || (gMapRoomState->flags & 0x2000)) {
         return 1;
     }
     return 0;
 }
 
-s32 func_080E03C0(FldObj* obj) {
-    if (func_080A42C8()) {
+s32 IsFldObjTalkTarget(FldObj* obj) {
+    if (IsMessageWindowOpen()) {
         return 0;
     }
 
@@ -282,57 +282,57 @@ s32 func_080E03C0(FldObj* obj) {
         return 0;
     }
 
-    if (gUnk_0203C7AC->flags & 0x84) {
+    if (gMapRoomState->flags & 0x84) {
         return 0;
     }
 
-    if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.unk_0C) {
+    if (gFieldState->actor.fieldPosition.z != gFieldState->actor.fieldPosition.ground) {
         return 0;
     }
-    return gFieldState->unk_68 == obj;
+    return gFieldState->lockonTarget == obj;
 }
 
-void func_080E0418(void) {
-    gUnk_0203C7AC->flags |= 1;
+void MapFreezeBg1(void) {
+    gMapRoomState->flags |= 1;
 }
 
-void func_080E042C(void) {
-    UnkStruct_09EF8370* p;
-    UnkStruct_09EF70D0* q;
+void MapRestoreBg1(void) {
+    MapFixedDef* p;
+    MapRoomDef* q;
     s16 x;
     s16 y;
 
-    if ((s32)gUnk_0203C7AC->flags < 0) {
-        p = gUnk_09EF8370[4];
+    if ((s32)gMapRoomState->flags < 0) {
+        p = gMapFixedDefs[4];
         LoadBgTiles(1, p->tiles2, p->tilesSize2);
         LoadBgPalette(1, p->palette, p->paletteSize);
         SetBgMapBlocks(1, p->map, p->mapWidth, p->mapHeight);
-        gUnk_0203C7AC->flags &= ~1;
+        gMapRoomState->flags &= ~1;
     } else {
-        q = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+        q = gMapRoomDefs[gMapFloorState.world];
         LoadBgTiles(1, q->tiles2, q->tilesSize2);
         LoadBgPalette(1, q->palette, q->paletteSize);
         x = gFieldState->x >> 8;
         y = gFieldState->y >> 8;
-        func_080E4D68(x / 8, y / 8);
+        MapDrawBg1(x / 8, y / 8);
         SetBgScroll(1, (u16)x, (u16)y);
-        gUnk_0203C7AC->flags &= ~1;
+        gMapRoomState->flags &= ~1;
     }
 }
 
-FldObj* func_080E04E0(void) {
-    return gUnk_0203C7AC->unk_14;
+FldObj* GetMapRoomDoor(void) {
+    return gMapRoomState->door;
 }
 
-void func_080E04EC(void) {
-    switch (gUnk_0203C590.unk_06) {
+void RequestMapMode(void) {
+    switch (gMapFloorState.room) {
     case 0xFC:
     case 0xFD:
     case 0xFE:
         ModeRequest(&gModeMapFix, 0);
         break;
     default:
-        if (gUnk_0203C590.unk_04 != 13) {
+        if (gMapFloorState.world != 13) {
             ModeRequest(&gModeMapFld, 0);
         } else {
             ModeRequest(&gModePooh, 1);
@@ -341,23 +341,23 @@ void func_080E04EC(void) {
     }
 }
 
-void func_080E052C(u8 a) {
+void ReturnToMap(u8 a) {
     if (a != 1) {
-        gGameState.unk_00F = 0xFF;
+        gGameState.mapMenuCursor = 0xFF;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     }
-    func_080E04EC();
+    RequestMapMode();
 }
 
-void func_080E0558(void) {
+void InitFieldState(void) {
     gFieldState->x = 0;
     gFieldState->y = 0;
     gFieldState->x2 = 0;
     gFieldState->y2 = 0;
-    gFieldState->unk_10 = 32;
-    gFieldState->unk_12 = 32;
-    gFieldState->unk_68 = 0;
-    gFieldState->unk_6C = 60;
+    gFieldState->tileCols = 32;
+    gFieldState->tileRows = 32;
+    gFieldState->lockonTarget = 0;
+    gFieldState->lockonDelay = 60;
     gFieldState->flags = 0;
     gFieldState->unk_74 = 0;
     TaskPoolInit(&gFieldState->tasks, 50);
@@ -366,57 +366,57 @@ void func_080E0558(void) {
     TaskPoolInit(&gFieldState->tasks3, 25);
     TaskPoolInit(&gFieldState->tasks5, 1);
     TaskPoolInit(&gFieldState->tasks4, 8);
-    gUnk_0203C7AC->flags = 0;
-    gUnk_0203C7AC->unk_18 = 0;
-    gUnk_0203C7AC->unk_1C = 0;
-    gUnk_0203C7AC->unk_20 = 0;
-    TaskPoolInit(&gUnk_0203C7AC->tasks, 1);
+    gMapRoomState->flags = 0;
+    gMapRoomState->jumpGmkAngle = 0;
+    gMapRoomState->jumpGmkHeight = 0;
+    gMapRoomState->attackActive = 0;
+    TaskPoolInit(&gMapRoomState->tasks, 1);
 }
 
-void func_080E05E4(void) {
-    func_080DF6D0(gUnk_0203C7AC, gUnk_0203C590.unk_06);
+void CreateMapRndTask(void) {
+    LoadMapRoomState(gMapRoomState, gMapFloorState.room);
 
-    if (gUnk_0203C7AC->unk_0D == 5) {
+    if (gMapRoomState->roomType == 5) {
         gFieldState->flags |= 0x200;
     }
     TaskCreate(&gFieldState->tasks, &gTaskDescMapRnd, 0);
 }
 
-void func_080E062C(void) {
-    UnkStruct_080DFB7C* e;
+void SpawnMapPlayer(void) {
+    MapDoor* e;
     s32 x;
     s32 y;
 
-    if (gUnk_0203C590.unk_07 <= 3) {
-        e = func_080DFB7C(gUnk_0203C590.unk_07);
-        x = (e->unk_02 << 5) + 16;
-        y = (e->unk_04 << 4) + 10;
+    if (gMapFloorState.entrySide <= 3) {
+        e = GetMapDoor(gMapFloorState.entrySide);
+        x = (e->cellX << 5) + 16;
+        y = (e->cellY << 4) + 10;
 
-        switch (gUnk_0203C590.unk_07) {
+        switch (gMapFloorState.entrySide) {
         case 0:
-            gFieldState->unk_DC = (x << 8) - 0xC00;
-            gFieldState->unk_E0 = (y << 8) + 0x800;
-            gFieldState->unk_E4 = 0xAD;
+            gFieldState->spawnX = (x << 8) - 0xC00;
+            gFieldState->spawnY = (y << 8) + 0x800;
+            gFieldState->spawnAngle = 0xAD;
             break;
         case 1:
-            gFieldState->unk_DC = (x << 8) + 0xC00;
-            gFieldState->unk_E0 = (y << 8) - 0x800;
-            gFieldState->unk_E4 = 0x2D;
+            gFieldState->spawnX = (x << 8) + 0xC00;
+            gFieldState->spawnY = (y << 8) - 0x800;
+            gFieldState->spawnAngle = 0x2D;
             break;
         case 2:
-            gFieldState->unk_DC = (x << 8) - 0xC00;
-            gFieldState->unk_E0 = (y << 8) - 0x800;
-            gFieldState->unk_E4 = 0xD3;
+            gFieldState->spawnX = (x << 8) - 0xC00;
+            gFieldState->spawnY = (y << 8) - 0x800;
+            gFieldState->spawnAngle = 0xD3;
             break;
         case 3:
-            gFieldState->unk_DC = (x << 8) + 0xC00;
-            gFieldState->unk_E0 = (y << 8) + 0x800;
-            gFieldState->unk_E4 = 0x53;
+            gFieldState->spawnX = (x << 8) + 0xC00;
+            gFieldState->spawnY = (y << 8) + 0x800;
+            gFieldState->spawnAngle = 0x53;
             break;
         }
     } else {
-        func_080E524C((FldPos*)&gFieldState->unk_DC, &gFieldState->unk_E0);
-        gFieldState->unk_E4 = 0x80;
+        MapPickFreeFloorPos((FldPos*)&gFieldState->spawnX, &gFieldState->spawnY);
+        gFieldState->spawnAngle = 0x80;
     }
 
     if (gGameState.flags & 8) {
@@ -426,18 +426,18 @@ void func_080E062C(void) {
     }
 }
 
-void func_080E0780(void) {
-    if (gFieldState->unk_6C > 0) {
+void UpdateMapField(void) {
+    if (gFieldState->lockonDelay > 0) {
         gFieldState->flags |= 1;
-        gFieldState->unk_6C--;
+        gFieldState->lockonDelay--;
     } else {
         gFieldState->flags &= ~1;
     }
-    gUnk_0203C7AC->unk_1C = 0;
+    gMapRoomState->jumpGmkHeight = 0;
     TaskPoolUpdate(&gFieldState->tasks);
-    gUnk_0203C7AC->unk_20 = 0;
+    gMapRoomState->attackActive = 0;
 
-    if ((gFieldState->flags & 0x1000) == 0 && (gUnk_0203C7AC->flags & 4) == 0) {
+    if ((gFieldState->flags & 0x1000) == 0 && (gMapRoomState->flags & 4) == 0) {
         TaskPoolUpdate(&gFieldState->tasks2);
     }
     if ((gFieldState->flags & 0x80) == 0) {
@@ -447,10 +447,10 @@ void func_080E0780(void) {
     TaskPoolUpdate(&gFieldState->tasks5);
 }
 
-void func_080E0820(void) {
+void DrawMapField(void) {
     TaskPoolDraw(&gFieldState->tasks);
 
-    if ((gUnk_0203C7AC->flags & 0x1000) == 0) {
+    if ((gMapRoomState->flags & 0x1000) == 0) {
         TaskPoolDraw(&gFieldState->tasks2);
     }
 
@@ -461,13 +461,13 @@ void func_080E0820(void) {
     TaskPoolDraw(&gFieldState->tasks5);
 }
 
-void func_080E0878(void) {
+void DestroyMapField(void) {
     TaskPoolDestroy(&gFieldState->tasks);
     TaskPoolDestroy(&gFieldState->tasks2);
     TaskPoolDestroy(&gFieldState->tasks3);
     TaskPoolDestroy(&gFieldState->tasks5);
     TaskPoolDestroy(&gFieldState->tasks4);
-    TaskPoolDestroy(&gUnk_0203C7AC->tasks);
+    TaskPoolDestroy(&gMapRoomState->tasks);
 }
 
 MapCell* MapGetCell(s16 x, s16 y) {
@@ -481,38 +481,38 @@ MapCell* MapGetCell(s16 x, s16 y) {
     return &gMapCells[gMapCols * y + x];
 }
 
-void func_080E0900(MapCell* p, s32 a, s32 b) {
+void MapCellSetType(MapCell* p, s32 a, s32 b) {
     if (p != 0) {
-        p->unk_02 = a;
-        p->unk_10 = func_080E8668(a);
-        p->unk_08 = b;
+        p->type = a;
+        p->maskTable = GetCellMaskTable(a);
+        p->upperZ = b;
     }
 }
 
-u8 func_080E0920(FldPos* p, u16 a) {
-    u16 d = (p->unk_0C - p->z) >> 8;
+u8 FldPosHeightExceeds(FldPos* p, u16 a) {
+    u16 d = (p->ground - p->z) >> 8;
 
     return d > a * 16;
 }
 
-u8 func_080E0938(u8 a) {
+u8 GetRandomPieceVariant(u8 a) {
     const u8* p = gUnk_0984D32C[a];
     return GetRandom() % p[3];
 }
 
-void func_080E0960(MapCell* p, s32 n) {
+void MapCellSetBg3Piece(MapCell* p, s32 n) {
     if (p != 0) {
-        u16* base = gUnk_02034F34->map3;
+        u16* base = gMapRoomDef->map3;
         const u8* q = gUnk_0984D314[n];
         u8 m = GetRandom() % q[3];
         s32 u = ((m & 7) + q[1]) * 4;
         s32 v = (m >> 3) + q[2];
-        p->unk_03 = n;
-        p->unk_14 = base + (v * 64 + u);
+        p->bg3Piece = n;
+        p->bg3Map = base + (v * 64 + u);
     }
 }
 
-void func_080E09B4(MapCell* p, u8 n, u8 v) {
+void MapCellSetBg2Piece(MapCell* p, u8 n, u8 v) {
     if (p != 0) {
         const u8* q = gUnk_0984D32C[n];
         u16* base;
@@ -520,34 +520,34 @@ void func_080E09B4(MapCell* p, u8 n, u8 v) {
 
         switch (q[0]) {
         case 1:
-            base = gUnk_02034F34->map2;
+            base = gMapRoomDef->map2;
             break;
         case 0:
         default:
-            base = gUnk_02034F34->map3;
+            base = gMapRoomDef->map3;
             break;
         }
         t = ((v & 7) + q[1]) * 4 + ((v >> 3) + q[2]) * 64;
 
-        if (p->unk_00 & 4) {
+        if (p->flags & 4) {
             t = t + q[3] * 4;
         }
 
-        if (p->unk_00 & 8) {
+        if (p->flags & 8) {
             t = t + q[3] * 8;
         }
-        p->unk_04 = n;
-        p->unk_18 = base + t;
+        p->bg2Piece = n;
+        p->bg2Map = base + t;
     }
 }
 
-void func_080E0A38(MapCell* p) {
-    if (p->unk_00 & 1) {
-        func_080E0960(p, 1);
-    } else if (p->unk_00 & 2) {
-        func_080E0960(p, 2);
+void MapCellSetFloorBg3Piece(MapCell* p) {
+    if (p->flags & 1) {
+        MapCellSetBg3Piece(p, 1);
+    } else if (p->flags & 2) {
+        MapCellSetBg3Piece(p, 2);
     } else {
-        func_080E0960(p, 0);
+        MapCellSetBg3Piece(p, 0);
     }
 }
 
@@ -561,25 +561,25 @@ void func_080E0A70(MapCell* p, s32 n) {
     if (p == 0) {
         return;
     }
-    if ((p->unk_00 & 0x0C) == 0) {
-        p->unk_04 = n;
+    if ((p->flags & 0x0C) == 0) {
+        p->bg2Piece = n;
         return;
     }
-    base = gUnk_02034F34->map3;
+    base = gMapRoomDef->map3;
     t = gUnk_0984D32C[n];
     r = GetRandom() % t[3];
     off = (r % 8 + t[1]) * 4 + (r / 8 + t[2]) * 64;
 
-    if (p->unk_00 & 8) {
+    if (p->flags & 8) {
         step = t[3] * 4;
         off += step;
 
-        if (p->unk_00 & 4) {
+        if (p->flags & 4) {
             off += step;
         }
     }
-    p->unk_04 = n;
-    p->unk_18 = base + off;
+    p->bg2Piece = n;
+    p->bg2Map = base + off;
 }
 
 void sub_080E0B00(MapCell* p, s32 n) {
@@ -592,7 +592,7 @@ void sub_080E0B00(MapCell* p, s32 n) {
     }
     t = gUnk_0984D32C[n];
     off = t[1] * 4 + t[2] * 64;
-    base = gUnk_02034F34->map2;
+    base = gMapRoomDef->map2;
 
     switch (n) {
     case 26:
@@ -601,7 +601,7 @@ void sub_080E0B00(MapCell* p, s32 n) {
     case 29:
     case 30:
     case 31:
-        if (p->unk_00 & 8) {
+        if (p->flags & 8) {
             off += t[3] * 4;
         }
         break;
@@ -611,18 +611,18 @@ void sub_080E0B00(MapCell* p, s32 n) {
     case 32:
     case 33:
     case 34:
-        if (p->unk_00 & 4) {
+        if (p->flags & 4) {
             off += t[3] * 4;
         }
         break;
     }
-    p->unk_04 = n;
-    p->unk_18 = base + off;
+    p->bg2Piece = n;
+    p->bg2Map = base + off;
 }
 
-void func_080E0B98(MapCell* p, s32 n, u8 v) {
+void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v) {
     if (p != 0) {
-        u16* base = gUnk_02034F34->map2;
+        u16* base = gMapRoomDef->map2;
         const u8* q = gUnk_0984D32C[n];
         s32 t;
 
@@ -630,19 +630,19 @@ void func_080E0B98(MapCell* p, s32 n, u8 v) {
             v = GetRandom() % q[3];
         }
         t = ((v & 7) + q[1]) * 4 + ((v >> 3) + q[2]) * 64;
-        p->unk_04 = n;
-        p->unk_18 = base + t;
+        p->bg2Piece = n;
+        p->bg2Map = base + t;
     }
 }
 
 void func_080E0BF4(s16 x, s16 y, s32 a, s32 b) {
     MapCell* p = MapGetCell(x, y);
 
-    func_080E0960(p, a);
+    MapCellSetBg3Piece(p, a);
     sub_080E0B00(p, b);
 }
 
-void func_080E0C1C(u16 x, u16 y) {
+void MapBuildStairs(u16 x, u16 y) {
     MapCell* e;
     u8 v;
     s32 go;
@@ -652,61 +652,61 @@ void func_080E0C1C(u16 x, u16 y) {
     while (go) {
         e = MapGetCell((s16)x, (s16)y);
 
-        switch (e->unk_02) {
+        switch (e->type) {
         case 3:
-            MapGetCell((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
-            MapGetCell((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
-            MapGetCell((s16)(x - 1), (s16)(y - 1))->unk_00 |= 0x800;
-            v = func_080E0938(38);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 38, v);
+            MapGetCell((s16)x, (s16)(y - 1))->flags |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)y)->flags |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)(y - 1))->flags |= 0x800;
+            v = GetRandomPieceVariant(38);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 38, v);
             y++;
             e = MapGetCell((s16)x, (s16)y);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 39, v);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 39, v);
             break;
         case 5:
-            MapGetCell((s16)x, (s16)(y - 1))->unk_00 |= 0x800;
-            MapGetCell((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
-            MapGetCell((s16)(x + 1), (s16)(y - 1))->unk_00 |= 0x800;
-            v = func_080E0938(43);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 43, v);
+            MapGetCell((s16)x, (s16)(y - 1))->flags |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)y)->flags |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)(y - 1))->flags |= 0x800;
+            v = GetRandomPieceVariant(43);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 43, v);
             y++;
             e = MapGetCell((s16)x, (s16)y);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 44, v);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 44, v);
             break;
         case 8:
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 37, 0xFF);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 37, 0xFF);
             break;
         case 9:
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 42, 0xFF);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 42, 0xFF);
             break;
         case 4:
-            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
-            MapGetCell((s16)(x + 1), (s16)y)->unk_00 |= 0x800;
-            MapGetCell((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x800;
-            v = func_080E0938(40);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 40, v);
+            MapGetCell((s16)x, (s16)(y + 1))->flags |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)y)->flags |= 0x800;
+            MapGetCell((s16)(x + 1), (s16)(y + 1))->flags |= 0x800;
+            v = GetRandomPieceVariant(40);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 40, v);
             e = MapGetCell((s16)x, (s16)(y - 1));
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 41, v);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 41, v);
             go = 0;
             break;
         case 6:
-            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x800;
-            MapGetCell((s16)(x - 1), (s16)y)->unk_00 |= 0x800;
-            MapGetCell((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x800;
-            v = func_080E0938(45);
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 45, v);
+            MapGetCell((s16)x, (s16)(y + 1))->flags |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)y)->flags |= 0x800;
+            MapGetCell((s16)(x - 1), (s16)(y + 1))->flags |= 0x800;
+            v = GetRandomPieceVariant(45);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 45, v);
             e = MapGetCell((s16)x, (s16)(y - 1));
-            e->unk_00 |= 0x20;
-            func_080E0B98(e, 46, v);
+            e->flags |= 0x20;
+            MapCellSetBg2PieceVariant(e, 46, v);
             go = 0;
             break;
         }
@@ -714,7 +714,7 @@ void func_080E0C1C(u16 x, u16 y) {
     }
 }
 
-void func_080E0ED4(UnkStruct_02034F20* p) {
+void MapMarkJumpSpot(MapPlatform* p) {
     s32 go = 1;
     u16 x = p->x;
     u16 y = p->y;
@@ -723,21 +723,21 @@ void func_080E0ED4(UnkStruct_02034F20* p) {
         s16 cy = (s16)y;
         MapCell* c = MapGetCell((s16)x, cy);
 
-        switch (c->unk_02) {
+        switch (c->type) {
         case 4:
-            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
-            MapGetCell((s16)(x + 1), cy)->unk_00 |= 0x40;
-            MapGetCell((s16)(x + 1), (s16)(y + 1))->unk_00 |= 0x40;
-            c->unk_00 |= 0x40;
+            MapGetCell((s16)x, (s16)(y + 1))->flags |= 0x40;
+            MapGetCell((s16)(x + 1), cy)->flags |= 0x40;
+            MapGetCell((s16)(x + 1), (s16)(y + 1))->flags |= 0x40;
+            c->flags |= 0x40;
             p->x = x + 1;
             p->y = y + 1;
             go = 0;
             break;
         case 6:
-            MapGetCell((s16)x, (s16)(y + 1))->unk_00 |= 0x40;
-            MapGetCell((s16)(x - 1), cy)->unk_00 |= 0x40;
-            MapGetCell((s16)(x - 1), (s16)(y + 1))->unk_00 |= 0x40;
-            c->unk_00 |= 0x40;
+            MapGetCell((s16)x, (s16)(y + 1))->flags |= 0x40;
+            MapGetCell((s16)(x - 1), cy)->flags |= 0x40;
+            MapGetCell((s16)(x - 1), (s16)(y + 1))->flags |= 0x40;
+            c->flags |= 0x40;
             p->x = x;
             p->y = y + 1;
             go = 0;
@@ -749,48 +749,48 @@ void func_080E0ED4(UnkStruct_02034F20* p) {
     }
 }
 
-void func_080E0FD8(UnkStruct_02034F20* p) {
+void MapFindPlatformStairs(MapPlatform* p) {
     u16 x;
     u16 y;
     u16 d;
     MapCell* e;
     MapCell* q;
 
-    x = p->unk_00;
+    x = p->left;
 
-    while (x < p->unk_02) {
-        y = gUnk_02034F2C;
+    while (x < p->right) {
+        y = gMapTopRow;
 
-        while (y < gUnk_02034F2E) {
+        while (y < gMapBottomRow) {
             e = MapGetCell((s16)x, (s16)y);
 
-            if (e->unk_02 == 4 || e->unk_02 == 6) {
-                if (e->unk_08 != -0x100000 && p->unk_04 == e->unk_0C) {
-                    d = ((p->unk_04 - e->unk_08) >> 8) / 16;
+            if (e->type == 4 || e->type == 6) {
+                if (e->upperZ != -0x100000 && p->z == e->lowerZ) {
+                    d = ((p->z - e->upperZ) >> 8) / 16;
 
-                    if (func_080E0920((FldPos*)e, 3)) {
+                    if (FldPosHeightExceeds((FldPos*)e, 3)) {
                         q = MapGetCell((s16)x, (s16)(y - d));
 
-                        if ((e->unk_00 & 28) == 0 && (q->unk_00 & 28) == 0) {
-                            if (p->unk_08 == 0 ||
-                                (p->unk_10 <= q->unk_08 &&
-                                 (p->unk_10 < q->unk_08 ||
-                                  p->unk_00 + GetRandom() % (p->unk_02 - p->unk_00 + 1) > x))) {
-                                p->unk_08 = 1;
+                        if ((e->flags & 28) == 0 && (q->flags & 28) == 0) {
+                            if (p->hasStairs == 0 ||
+                                (p->spotUpperZ <= q->upperZ &&
+                                 (p->spotUpperZ < q->upperZ ||
+                                  p->left + GetRandom() % (p->right - p->left + 1) > x))) {
+                                p->hasStairs = 1;
                                 p->x = x;
                                 p->y = y - d;
-                                p->unk_0E = q->unk_02;
-                                p->unk_10 = q->unk_08;
-                                p->unk_14 = q->unk_0C;
+                                p->spotType = q->type;
+                                p->spotUpperZ = q->upperZ;
+                                p->spotLowerZ = q->lowerZ;
                             }
-                        } else if (p->unk_08 == 0 && p->unk_10 <= q->unk_08 &&
-                                   (p->unk_10 < q->unk_08 ||
-                                    p->unk_00 + GetRandom() % (p->unk_02 - p->unk_00 + 1) > x)) {
+                        } else if (p->hasStairs == 0 && p->spotUpperZ <= q->upperZ &&
+                                   (p->spotUpperZ < q->upperZ ||
+                                    p->left + GetRandom() % (p->right - p->left + 1) > x)) {
                             p->x = x;
                             p->y = y - d;
-                            p->unk_0E = q->unk_02;
-                            p->unk_10 = q->unk_08;
-                            p->unk_14 = q->unk_0C;
+                            p->spotType = q->type;
+                            p->spotUpperZ = q->upperZ;
+                            p->spotLowerZ = q->lowerZ;
                         }
                     }
                 }
@@ -801,25 +801,25 @@ void func_080E0FD8(UnkStruct_02034F20* p) {
     }
 }
 
-void func_080E1138(void) {
+void MapPlacePlatformStairs(void) {
     s32 i;
 
     for (i = 11; i >= 0; i--) {
-        UnkStruct_02034F20* e = &gUnk_02034F20[i];
+        MapPlatform* e = &gMapPlatforms[i];
 
-        if (e->unk_04 != 0x100000) {
-            func_080E0FD8(e);
+        if (e->z != 0x100000) {
+            MapFindPlatformStairs(e);
         }
 
-        if (e->unk_08 != 0) {
-            func_080E0C1C(e->x, e->y);
-        } else if (e->unk_14 != 0x100000) {
-            func_080E0ED4(e);
+        if (e->hasStairs != 0) {
+            MapBuildStairs(e->x, e->y);
+        } else if (e->spotLowerZ != 0x100000) {
+            MapMarkJumpSpot(e);
         }
     }
 }
 
-s16 func_080E1194(u8 a, u8 b, s16 c) {
+s16 MapOutlineNextRowLeftToRight(u8 a, u8 b, s16 c) {
     switch (a) {
     case 2:
     case 6:
@@ -847,7 +847,7 @@ s16 func_080E1194(u8 a, u8 b, s16 c) {
     return c;
 }
 
-s16 func_080E1204(u8 a, u8 b, s16 c) {
+s16 MapOutlineNextRowRightToLeft(u8 a, u8 b, s16 c) {
     switch (a) {
     case 2:
     case 4:
@@ -876,7 +876,7 @@ s16 func_080E1204(u8 a, u8 b, s16 c) {
     return c;
 }
 
-void func_080E1274(void) {
+void MapFillOutlineCells(void) {
     s32 i;
     s32 j;
     s32 dir;
@@ -888,7 +888,7 @@ void func_080E1274(void) {
         for (j = 0; j < gMapRows; j++) {
             p = MapGetCell(i, j);
 
-            switch (p->unk_02) {
+            switch (p->type) {
             case 2:
             case 4:
             case 6:
@@ -905,7 +905,7 @@ void func_080E1274(void) {
                 break;
             case 11:
                 if (dir != 10) {
-                    func_080E0900(p, dir, 0);
+                    MapCellSetType(p, dir, 0);
                 }
                 break;
             }
@@ -913,7 +913,7 @@ void func_080E1274(void) {
 
         if (dir == 11) {
             for (j = 0; j < gMapRows; j++) {
-                func_080E0900(MapGetCell(i, j), 7, 0);
+                MapCellSetType(MapGetCell(i, j), 7, 0);
             }
         }
     }
@@ -924,7 +924,7 @@ void func_080E1274(void) {
         for (j = gMapRows - 1; j >= 0; j--) {
             p = MapGetCell(i, j);
 
-            switch (p->unk_02) {
+            switch (p->type) {
             case 4:
                 dir = 8;
                 break;
@@ -936,7 +936,7 @@ void func_080E1274(void) {
                 break;
             case 11:
                 if (dir != 10) {
-                    func_080E0900(p, dir, 0);
+                    MapCellSetType(p, dir, 0);
                 }
                 break;
             }
@@ -945,8 +945,8 @@ void func_080E1274(void) {
 }
 
 void func_080E13B0(void) {
-    u16 y = gUnk_02034F2E;
-    u16 n = y - gUnk_02034F2C + 1;
+    u16 y = gMapBottomRow;
+    u16 n = y - gMapTopRow + 1;
     s32 j;
 
     for (j = 0; j < n; j++) {
@@ -958,17 +958,17 @@ void func_080E13B0(void) {
             s32 ok;
             s32 k;
 
-            switch (c->unk_02) {
+            switch (c->type) {
             case 0:
             case 1:
             case 3:
             case 5:
-                v = c->unk_08;
+                v = c->upperZ;
                 break;
             case 2:
             case 4:
             case 6:
-                v = c->unk_0C;
+                v = c->lowerZ;
                 break;
             default:
                 v = 0x100000;
@@ -982,16 +982,16 @@ void func_080E13B0(void) {
             ok = 1;
 
             for (k = 11; k >= 0; k--) {
-                if (gUnk_02034F20[k].unk_04 != v) {
-                    if (gUnk_02034F20[k].unk_04 != 0x100000) {
+                if (gMapPlatforms[k].z != v) {
+                    if (gMapPlatforms[k].z != 0x100000) {
                         ok = 0;
                     }
                 } else {
                     if (ok == 0) {
                         if (k % 2) {
-                            c->unk_00 |= 2;
+                            c->flags |= 2;
                         } else {
-                            c->unk_00 |= 1;
+                            c->flags |= 1;
                         }
                     }
                     break;
@@ -1003,7 +1003,7 @@ void func_080E13B0(void) {
     }
 }
 
-void func_080E14D0(void) {
+void MapMarkCellEdges(void) {
     s32 x;
     s32 y;
 
@@ -1013,72 +1013,72 @@ void func_080E14D0(void) {
             MapCell* b = MapGetCell(x + 1, y);
             s32 flag = 0;
 
-            switch (a->unk_02) {
+            switch (a->type) {
             case 0:
-                if (b->unk_02 != 0 && b->unk_02 != 3 && b->unk_02 != 4 && b->unk_02 != 5 &&
-                    b->unk_02 != 6) {
+                if (b->type != 0 && b->type != 3 && b->type != 4 && b->type != 5 &&
+                    b->type != 6) {
                     flag = 1;
                 }
                 break;
             case 6:
-                if (b->unk_02 != 9) {
+                if (b->type != 9) {
                     flag = 1;
                 }
                 break;
             case 3:
-                if (b->unk_02 != 8) {
+                if (b->type != 8) {
                     flag = 1;
                 }
                 break;
             case 4:
             case 5:
-                if (b->unk_02 != 0) {
+                if (b->type != 0) {
                     flag = 1;
                 }
                 break;
             case 8:
-                if (b->unk_02 != 8 && b->unk_02 != 4) {
+                if (b->type != 8 && b->type != 4) {
                     flag = 1;
                 }
                 break;
             case 9:
-                if (b->unk_02 != 9 && b->unk_02 != 5) {
+                if (b->type != 9 && b->type != 5) {
                     flag = 1;
                 }
                 break;
             case 1:
             case 2:
             case 7:
-                if (a->unk_02 != b->unk_02) {
+                if (a->type != b->type) {
                     flag = 1;
                 }
                 break;
             }
 
             if (flag != 0) {
-                a->unk_00 |= 8;
-                b->unk_00 |= 4;
+                a->flags |= 8;
+                b->flags |= 4;
             }
 
-            switch (a->unk_02) {
+            switch (a->type) {
             case 4:
-                if (MapGetCell(x + 1, y - 1)->unk_02 == 2) {
-                    a->unk_00 |= 8;
+                if (MapGetCell(x + 1, y - 1)->type == 2) {
+                    a->flags |= 8;
                 }
                 break;
             case 6:
-                if (MapGetCell(x - 1, y - 1)->unk_02 == 2) {
-                    a->unk_00 |= 4;
+                if (MapGetCell(x - 1, y - 1)->type == 2) {
+                    a->flags |= 4;
                 }
                 break;
             case 3:
-                if (MapGetCell(x - 1, y + 1)->unk_02 == 1) {
-                    a->unk_00 |= 4;
+                if (MapGetCell(x - 1, y + 1)->type == 1) {
+                    a->flags |= 4;
                 }
                 break;
             case 5:
-                if (MapGetCell(x + 1, y + 1)->unk_02 == 1) {
-                    a->unk_00 |= 8;
+                if (MapGetCell(x + 1, y + 1)->type == 1) {
+                    a->flags |= 8;
                 }
                 break;
             }
@@ -1086,7 +1086,7 @@ void func_080E14D0(void) {
     }
 }
 
-void func_080E1670(void) {
+void MapAssignCellPieces(void) {
     s32 i;
     s32 j;
     MapCell* e;
@@ -1096,159 +1096,159 @@ void func_080E1670(void) {
         for (j = 0; j < gMapRows; j++) {
             e = MapGetCell(i, j);
 
-            if (e->unk_03 != 7) {
+            if (e->bg3Piece != 7) {
                 continue;
             }
 
-            switch (e->unk_02) {
+            switch (e->type) {
             case 0:
-                func_080E0A38(e);
+                MapCellSetFloorBg3Piece(e);
                 break;
             case 7:
-                func_080E0960(e, 3);
+                MapCellSetBg3Piece(e, 3);
                 func_080E0A70(e, 4);
                 break;
             case 8:
-                func_080E0960(e, 4);
+                MapCellSetBg3Piece(e, 4);
                 func_080E0A70(e, 5);
                 break;
             case 9:
-                func_080E0960(e, 5);
+                MapCellSetBg3Piece(e, 5);
                 func_080E0A70(e, 6);
                 break;
             case 2:
-                v = func_080E0938(10);
+                v = GetRandomPieceVariant(10);
 
-                if (func_080E0920((FldPos*)e, 3)) {
-                    func_080E0A38(e);
-                    func_080E09B4(e, 10, v);
-                    func_080E0960(MapGetCell(i, j - 1), 3);
-                    func_080E09B4(MapGetCell(i, j - 1), 11, v);
+                if (FldPosHeightExceeds((FldPos*)e, 3)) {
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 10, v);
+                    MapCellSetBg3Piece(MapGetCell(i, j - 1), 3);
+                    MapCellSetBg2Piece(MapGetCell(i, j - 1), 11, v);
                 } else {
-                    func_080E0A38(e);
-                    func_080E09B4(e, 12, v);
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 12, v);
                 }
                 break;
             case 1:
-                v = func_080E0938(7);
-                func_080E09B4(MapGetCell(i, j - 1), 48, v);
-                func_080E0A38(e);
+                v = GetRandomPieceVariant(7);
+                MapCellSetBg2Piece(MapGetCell(i, j - 1), 48, v);
+                MapCellSetFloorBg3Piece(e);
 
-                if (func_080E0920((FldPos*)e, 3)) {
-                    func_080E09B4(e, 7, v);
-                    func_080E0960(MapGetCell(i, j + 1), 3);
-                    func_080E09B4(MapGetCell(i, j + 1), 8, v);
+                if (FldPosHeightExceeds((FldPos*)e, 3)) {
+                    MapCellSetBg2Piece(e, 7, v);
+                    MapCellSetBg3Piece(MapGetCell(i, j + 1), 3);
+                    MapCellSetBg2Piece(MapGetCell(i, j + 1), 8, v);
                 } else {
-                    func_080E09B4(e, 9, v);
+                    MapCellSetBg2Piece(e, 9, v);
                 }
                 break;
             case 3:
-                if (e->unk_00 & 16) {
-                    func_080E0A38(e);
+                if (e->flags & 16) {
+                    MapCellSetFloorBg3Piece(e);
                     sub_080E0B00(e, 23);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
                         func_080E0BF4(i, j + 1, 4, 24);
                     } else {
                         func_080E0BF4(i, j + 1, 4, 25);
 
-                        if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
-                            func_080E0A38(MapGetCell(i, j + 2));
-                            func_080E09B4(MapGetCell(i, j + 2), 15, 0);
+                        if ((MapGetCell(i, j + 2)->flags & 16) == 0) {
+                            MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
+                            MapCellSetBg2Piece(MapGetCell(i, j + 2), 15, 0);
                         }
                     }
                 } else {
-                    v = func_080E0938(13);
-                    func_080E0A38(e);
-                    func_080E09B4(e, 13, v);
-                    func_080E09B4(MapGetCell(i, j - 1), 47, v);
+                    v = GetRandomPieceVariant(13);
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 13, v);
+                    MapCellSetBg2Piece(MapGetCell(i, j - 1), 47, v);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(MapGetCell(i, j + 1), 4);
-                        func_080E09B4(MapGetCell(i, j + 1), 14, v);
-                    } else if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
-                        func_080E0960(MapGetCell(i, j + 1), 4);
-                        func_080E09B4(MapGetCell(i, j + 1), 17, v);
-                        func_080E0A38(MapGetCell(i, j + 2));
-                        func_080E09B4(MapGetCell(i, j + 2), 15, v);
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
+                        MapCellSetBg3Piece(MapGetCell(i, j + 1), 4);
+                        MapCellSetBg2Piece(MapGetCell(i, j + 1), 14, v);
+                    } else if ((MapGetCell(i, j + 2)->flags & 16) == 0) {
+                        MapCellSetBg3Piece(MapGetCell(i, j + 1), 4);
+                        MapCellSetBg2Piece(MapGetCell(i, j + 1), 17, v);
+                        MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
+                        MapCellSetBg2Piece(MapGetCell(i, j + 2), 15, v);
                     }
                 }
                 break;
             case 5:
-                if (e->unk_00 & 16) {
-                    func_080E0A38(e);
+                if (e->flags & 16) {
+                    MapCellSetFloorBg3Piece(e);
                     sub_080E0B00(e, 29);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
                         func_080E0BF4(i, j + 1, 5, 30);
                     } else {
                         func_080E0BF4(i, j + 1, 5, 31);
 
-                        if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
-                            func_080E0A38(MapGetCell(i, j + 2));
-                            func_080E09B4(MapGetCell(i, j + 2), 20, 0);
+                        if ((MapGetCell(i, j + 2)->flags & 16) == 0) {
+                            MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
+                            MapCellSetBg2Piece(MapGetCell(i, j + 2), 20, 0);
                         }
                     }
                 } else {
-                    v = func_080E0938(18);
-                    func_080E0A38(e);
-                    func_080E09B4(e, 18, v);
-                    func_080E09B4(MapGetCell(i, j - 1), 49, v);
+                    v = GetRandomPieceVariant(18);
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 18, v);
+                    MapCellSetBg2Piece(MapGetCell(i, j - 1), 49, v);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(MapGetCell(i, j + 1), 5);
-                        func_080E09B4(MapGetCell(i, j + 1), 19, v);
-                    } else if ((MapGetCell(i, j + 2)->unk_00 & 16) == 0) {
-                        func_080E0960(MapGetCell(i, j + 1), 5);
-                        func_080E09B4(MapGetCell(i, j + 1), 22, v);
-                        func_080E0A38(MapGetCell(i, j + 2));
-                        func_080E09B4(MapGetCell(i, j + 2), 20, v);
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
+                        MapCellSetBg3Piece(MapGetCell(i, j + 1), 5);
+                        MapCellSetBg2Piece(MapGetCell(i, j + 1), 19, v);
+                    } else if ((MapGetCell(i, j + 2)->flags & 16) == 0) {
+                        MapCellSetBg3Piece(MapGetCell(i, j + 1), 5);
+                        MapCellSetBg2Piece(MapGetCell(i, j + 1), 22, v);
+                        MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
+                        MapCellSetBg2Piece(MapGetCell(i, j + 2), 20, v);
                     }
                 }
                 break;
             case 4:
-                if (e->unk_00 & 16) {
-                    func_080E0A38(e);
+                if (e->flags & 16) {
+                    MapCellSetFloorBg3Piece(e);
                     sub_080E0B00(e, 26);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
                         func_080E0BF4(i, j - 1, 4, 27);
-                    } else if ((MapGetCell(i, j - 2)->unk_00 & 16) == 0) {
+                    } else if ((MapGetCell(i, j - 2)->flags & 16) == 0) {
                         func_080E0BF4(i, j - 1, 4, 28);
                     } else {
                         func_080E0BF4(i, j - 1, 4, 35);
                     }
                 } else {
-                    v = func_080E0938(15);
-                    func_080E0A38(e);
-                    func_080E09B4(e, 15, v);
+                    v = GetRandomPieceVariant(15);
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 15, v);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(MapGetCell(i, j - 1), 4);
-                        func_080E09B4(MapGetCell(i, j - 1), 16, v);
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
+                        MapCellSetBg3Piece(MapGetCell(i, j - 1), 4);
+                        MapCellSetBg2Piece(MapGetCell(i, j - 1), 16, v);
                     }
                 }
                 break;
             case 6:
-                if (e->unk_00 & 16) {
-                    func_080E0A38(e);
+                if (e->flags & 16) {
+                    MapCellSetFloorBg3Piece(e);
                     sub_080E0B00(e, 32);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
                         func_080E0BF4(i, j - 1, 5, 33);
-                    } else if ((MapGetCell(i, j - 2)->unk_00 & 16) == 0) {
+                    } else if ((MapGetCell(i, j - 2)->flags & 16) == 0) {
                         func_080E0BF4(i, j - 1, 5, 34);
                     } else {
                         func_080E0BF4(i, j - 1, 5, 36);
                     }
                 } else {
-                    v = func_080E0938(20);
-                    func_080E0A38(e);
-                    func_080E09B4(e, 20, v);
+                    v = GetRandomPieceVariant(20);
+                    MapCellSetFloorBg3Piece(e);
+                    MapCellSetBg2Piece(e, 20, v);
 
-                    if (func_080E0920((FldPos*)e, 2)) {
-                        func_080E0960(MapGetCell(i, j - 1), 5);
-                        func_080E09B4(MapGetCell(i, j - 1), 21, v);
+                    if (FldPosHeightExceeds((FldPos*)e, 2)) {
+                        MapCellSetBg3Piece(MapGetCell(i, j - 1), 5);
+                        MapCellSetBg2Piece(MapGetCell(i, j - 1), 21, v);
                     }
                 }
                 break;
@@ -1257,187 +1257,187 @@ void func_080E1670(void) {
     }
 }
 
-void func_080E1C64(s16 x, s16 y, u8 n) {
+void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
     MapCell* p = MapGetCell(x, y);
     if (p != 0) {
-        u16* base = gUnk_02034F34->map;
+        u16* base = gMapRoomDef->map;
         const u8* q = gUnk_0984D3F8[n];
         s32 t = q[1] * 4 + q[2] * 64;
-        p->unk_05 = n;
-        p->unk_1C = base + t;
+        p->bg1Piece = n;
+        p->bg1Map = base + t;
     }
 }
 
-u8 func_080E1CA8(s16 x, s16 y) {
+u8 MapCellIsUnbounded(s16 x, s16 y) {
     MapCell* p = MapGetCell(x, y);
-    if (p == 0 || p->unk_08 == -0x100000 || p->unk_0C == 0x100000) {
+    if (p == 0 || p->upperZ == -0x100000 || p->lowerZ == 0x100000) {
         return 1;
     }
     return 0;
 }
 
-u8 func_080E1CE0(s16 x, s16 y, u8 n) {
+u8 MapCellHasType(s16 x, s16 y, u8 n) {
     MapCell* p = MapGetCell(x, y);
 
-    if (p != 0 && p->unk_02 == n) {
+    if (p != 0 && p->type == n) {
         return 1;
     }
     return 0;
 }
 
-void func_080E1D08(s16 x, s16 y) {
+void MapAssignWallTopPieces(s16 x, s16 y) {
     MapCell* p = MapGetCell(x, y + 7);
 
-    if (p->unk_08 == -0x100000) {
-        switch (p->unk_02) {
+    if (p->upperZ == -0x100000) {
+        switch (p->type) {
         case 4:
-            if (!func_080E1CA8(x + 1, y + 6)) {
-                func_080E1C64(x, y, 18);
-                func_080E1C64(x, y + 1, 19);
-            } else if (!func_080E1CA8(x - 1, y + 7)) {
-                func_080E1C64(x, y, 26);
-                func_080E1C64(x, y + 1, 27);
+            if (!MapCellIsUnbounded(x + 1, y + 6)) {
+                MapCellSetBg1Piece(x, y, 18);
+                MapCellSetBg1Piece(x, y + 1, 19);
+            } else if (!MapCellIsUnbounded(x - 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 26);
+                MapCellSetBg1Piece(x, y + 1, 27);
             } else {
-                func_080E1C64(x, y, 6);
-                func_080E1C64(x, y + 1, 7);
+                MapCellSetBg1Piece(x, y, 6);
+                MapCellSetBg1Piece(x, y + 1, 7);
             }
             break;
         case 6:
-            if (!func_080E1CA8(x - 1, y + 6)) {
-                func_080E1C64(x, y, 20);
-                func_080E1C64(x, y + 1, 21);
-            } else if (!func_080E1CA8(x + 1, y + 7)) {
-                func_080E1C64(x, y, 28);
-                func_080E1C64(x, y + 1, 29);
+            if (!MapCellIsUnbounded(x - 1, y + 6)) {
+                MapCellSetBg1Piece(x, y, 20);
+                MapCellSetBg1Piece(x, y + 1, 21);
+            } else if (!MapCellIsUnbounded(x + 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 28);
+                MapCellSetBg1Piece(x, y + 1, 29);
             } else {
-                func_080E1C64(x, y, 8);
-                func_080E1C64(x, y + 1, 9);
+                MapCellSetBg1Piece(x, y, 8);
+                MapCellSetBg1Piece(x, y + 1, 9);
             }
             break;
         case 2:
-            if (!func_080E1CA8(x + 1, y + 7)) {
-                func_080E1C64(x, y, 2);
-                func_080E1C64(x, y + 1, 34);
-            } else if (!func_080E1CA8(x - 1, y + 7)) {
-                func_080E1C64(x, y, 3);
-                func_080E1C64(x, y + 1, 35);
+            if (!MapCellIsUnbounded(x + 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 2);
+                MapCellSetBg1Piece(x, y + 1, 34);
+            } else if (!MapCellIsUnbounded(x - 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 3);
+                MapCellSetBg1Piece(x, y + 1, 35);
             } else {
-                func_080E1C64(x, y, 1);
-                func_080E1C64(x, y + 1, 4);
+                MapCellSetBg1Piece(x, y, 1);
+                MapCellSetBg1Piece(x, y + 1, 4);
             }
             break;
         case 7:
         case 8:
         case 9:
-            if (func_080E1CE0(x - 1, y + 6, 6)) {
-                func_080E1C64(x, y, 15);
-            } else if (func_080E1CE0(x + 1, y + 6, 4)) {
-                func_080E1C64(x, y, 14);
-            } else if (!func_080E1CA8(x + 1, y + 7)) {
-                func_080E1C64(x, y, 2);
-            } else if (!func_080E1CA8(x - 1, y + 7)) {
-                func_080E1C64(x, y, 3);
+            if (MapCellHasType(x - 1, y + 6, 6)) {
+                MapCellSetBg1Piece(x, y, 15);
+            } else if (MapCellHasType(x + 1, y + 6, 4)) {
+                MapCellSetBg1Piece(x, y, 14);
+            } else if (!MapCellIsUnbounded(x + 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 2);
+            } else if (!MapCellIsUnbounded(x - 1, y + 7)) {
+                MapCellSetBg1Piece(x, y, 3);
             } else {
-                func_080E1C64(x, y, 1);
+                MapCellSetBg1Piece(x, y, 1);
             }
             break;
         }
     }
 }
 
-void func_080E1FA8(s16 x, s16 y) {
+void MapAssignLedgePieces(s16 x, s16 y) {
     MapCell* p = MapGetCell(x, y);
 
-    if (p->unk_0C == 0x100000 && p->unk_05 == 0) {
-        switch (p->unk_02) {
+    if (p->lowerZ == 0x100000 && p->bg1Piece == 0) {
+        switch (p->type) {
         case 3:
-            func_080E1C64(x, y, 12);
-            func_080E1C64(x, y - 1, 13);
+            MapCellSetBg1Piece(x, y, 12);
+            MapCellSetBg1Piece(x, y - 1, 13);
 
-            if (!func_080E1CA8(x - 1, y + 1)) {
-                func_080E1C64(x, y + 1, 1);
-                func_080E1C64(x - 1, y + 1, 24);
-                func_080E1C64(x - 1, y, 25);
+            if (!MapCellIsUnbounded(x - 1, y + 1)) {
+                MapCellSetBg1Piece(x, y + 1, 1);
+                MapCellSetBg1Piece(x - 1, y + 1, 24);
+                MapCellSetBg1Piece(x - 1, y, 25);
             }
 
-            if (!func_080E1CA8(x + 1, y)) {
-                func_080E1C64(x + 1, y - 1, 32);
-                func_080E1C64(x + 1, y - 2, 33);
-                func_080E1C64(x + 1, y, 2);
+            if (!MapCellIsUnbounded(x + 1, y)) {
+                MapCellSetBg1Piece(x + 1, y - 1, 32);
+                MapCellSetBg1Piece(x + 1, y - 2, 33);
+                MapCellSetBg1Piece(x + 1, y, 2);
 
-                if (func_080E1CA8(x + 1, y + 1)) {
-                    func_080E1C64(x + 1, y + 1, 16);
+                if (MapCellIsUnbounded(x + 1, y + 1)) {
+                    MapCellSetBg1Piece(x + 1, y + 1, 16);
                 } else {
-                    func_080E1C64(x + 1, y + 1, 2);
+                    MapCellSetBg1Piece(x + 1, y + 1, 2);
                 }
             }
             break;
         case 5:
-            func_080E1C64(x, y, 10);
-            func_080E1C64(x, y - 1, 11);
+            MapCellSetBg1Piece(x, y, 10);
+            MapCellSetBg1Piece(x, y - 1, 11);
 
-            if (!func_080E1CA8(x + 1, y + 1)) {
-                func_080E1C64(x, y + 1, 1);
-                func_080E1C64(x + 1, y + 1, 22);
-                func_080E1C64(x + 1, y, 23);
+            if (!MapCellIsUnbounded(x + 1, y + 1)) {
+                MapCellSetBg1Piece(x, y + 1, 1);
+                MapCellSetBg1Piece(x + 1, y + 1, 22);
+                MapCellSetBg1Piece(x + 1, y, 23);
             }
 
-            if (!func_080E1CA8(x - 1, y)) {
-                func_080E1C64(x - 1, y - 1, 30);
-                func_080E1C64(x - 1, y - 2, 31);
-                func_080E1C64(x - 1, y, 3);
+            if (!MapCellIsUnbounded(x - 1, y)) {
+                MapCellSetBg1Piece(x - 1, y - 1, 30);
+                MapCellSetBg1Piece(x - 1, y - 2, 31);
+                MapCellSetBg1Piece(x - 1, y, 3);
 
-                if (func_080E1CA8(x - 1, y + 1)) {
-                    func_080E1C64(x - 1, y + 1, 17);
+                if (MapCellIsUnbounded(x - 1, y + 1)) {
+                    MapCellSetBg1Piece(x - 1, y + 1, 17);
                 } else {
-                    func_080E1C64(x - 1, y + 1, 3);
+                    MapCellSetBg1Piece(x - 1, y + 1, 3);
                 }
             }
             break;
         case 1:
-            func_080E1C64(x, y, 1);
-            func_080E1C64(x, y - 1, 5);
+            MapCellSetBg1Piece(x, y, 1);
+            MapCellSetBg1Piece(x, y - 1, 5);
 
-            if (!func_080E1CA8(x - 1, y)) {
-                func_080E1C64(x - 1, y, 3);
-                func_080E1C64(x - 1, y - 1, 37);
+            if (!MapCellIsUnbounded(x - 1, y)) {
+                MapCellSetBg1Piece(x - 1, y, 3);
+                MapCellSetBg1Piece(x - 1, y - 1, 37);
             }
 
-            if (!func_080E1CA8(x + 1, y)) {
-                func_080E1C64(x + 1, y, 2);
-                func_080E1C64(x + 1, y - 1, 36);
+            if (!MapCellIsUnbounded(x + 1, y)) {
+                MapCellSetBg1Piece(x + 1, y, 2);
+                MapCellSetBg1Piece(x + 1, y - 1, 36);
             }
             break;
         case 7:
         case 8:
         case 9:
-            func_080E1C64(x, y, 1);
+            MapCellSetBg1Piece(x, y, 1);
 
-            if (func_080E1CE0(x - 1, y + 1, 3)) {
-                func_080E1C64(x - 1, y, 3);
-                func_080E1C64(x - 1, y + 1, 17);
+            if (MapCellHasType(x - 1, y + 1, 3)) {
+                MapCellSetBg1Piece(x - 1, y, 3);
+                MapCellSetBg1Piece(x - 1, y + 1, 17);
             }
 
-            if (func_080E1CE0(x + 1, y + 1, 5)) {
-                func_080E1C64(x + 1, y, 2);
-                func_080E1C64(x + 1, y + 1, 16);
+            if (MapCellHasType(x + 1, y + 1, 5)) {
+                MapCellSetBg1Piece(x + 1, y, 2);
+                MapCellSetBg1Piece(x + 1, y + 1, 16);
             }
 
-            if (!func_080E1CA8(x - 1, y)) {
-                if (func_080E1CE0(x, y - 1, 3)) {
-                    func_080E1C64(x - 1, y, 24);
-                    func_080E1C64(x - 1, y - 1, 25);
+            if (!MapCellIsUnbounded(x - 1, y)) {
+                if (MapCellHasType(x, y - 1, 3)) {
+                    MapCellSetBg1Piece(x - 1, y, 24);
+                    MapCellSetBg1Piece(x - 1, y - 1, 25);
                 } else {
-                    func_080E1C64(x - 1, y, 3);
+                    MapCellSetBg1Piece(x - 1, y, 3);
                 }
             }
 
-            if (!func_080E1CA8(x + 1, y)) {
-                if (func_080E1CE0(x, y - 1, 5)) {
-                    func_080E1C64(x + 1, y, 22);
-                    func_080E1C64(x + 1, y - 1, 23);
+            if (!MapCellIsUnbounded(x + 1, y)) {
+                if (MapCellHasType(x, y - 1, 5)) {
+                    MapCellSetBg1Piece(x + 1, y, 22);
+                    MapCellSetBg1Piece(x + 1, y - 1, 23);
                 } else {
-                    func_080E1C64(x + 1, y, 2);
+                    MapCellSetBg1Piece(x + 1, y, 2);
                 }
             }
             break;
@@ -1445,13 +1445,13 @@ void func_080E1FA8(s16 x, s16 y) {
     }
 }
 
-void func_080E2318(s16 y) {
-    switch (MapGetCell(0, y)->unk_05) {
+void MapAssignLeftBorderPiece(s16 y) {
+    switch (MapGetCell(0, y)->bg1Piece) {
     case 10:
-        func_080E1C64(0, y, 16);
+        MapCellSetBg1Piece(0, y, 16);
         break;
     case 6:
-        func_080E1C64(0, y, 14);
+        MapCellSetBg1Piece(0, y, 14);
         break;
     case 0:
     case 7:
@@ -1460,21 +1460,21 @@ void func_080E2318(s16 y) {
     case 19:
     case 22:
     case 23:
-        func_080E1C64(0, y, 2);
+        MapCellSetBg1Piece(0, y, 2);
         break;
     }
 }
 
-void func_080E23CC(s16 j) {
+void MapAssignRightBorderPiece(s16 j) {
     s16 x = gMapCols - 1;
     MapCell* q = MapGetCell(x, j);
 
-    switch (q->unk_05) {
+    switch (q->bg1Piece) {
     case 12:
-        func_080E1C64(x, j, 17);
+        MapCellSetBg1Piece(x, j, 17);
         break;
     case 8:
-        func_080E1C64(x, j, 15);
+        MapCellSetBg1Piece(x, j, 15);
         break;
     case 0:
     case 9:
@@ -1483,29 +1483,29 @@ void func_080E23CC(s16 j) {
     case 21:
     case 24:
     case 25:
-        func_080E1C64(x, j, 3);
+        MapCellSetBg1Piece(x, j, 3);
         break;
     }
 }
 
-void func_080E249C(void) {
+void MapAssignBg1Pieces(void) {
     s32 i;
     s32 j;
 
     for (i = 0; i < gMapCols; i++) {
         for (j = 0; j < gMapRows; j++) {
-            func_080E1D08(i, j);
-            func_080E1FA8(i, j);
+            MapAssignWallTopPieces(i, j);
+            MapAssignLedgePieces(i, j);
         }
     }
 
     for (j = 0; j < gMapRows; j++) {
-        func_080E2318(j);
-        func_080E23CC(j);
+        MapAssignLeftBorderPiece(j);
+        MapAssignRightBorderPiece(j);
     }
 }
 
-void func_080E2520(void) {
+void MapComputeCellHeights(void) {
     s16 i;
     s16 j;
     s32 z;
@@ -1517,27 +1517,27 @@ void func_080E2520(void) {
         for (j = gMapRows - 1; j >= 0; j--) {
             p = MapGetCell(i, j);
 
-            switch (p->unk_02) {
+            switch (p->type) {
             case 1:
             case 3:
             case 5:
-                p->unk_0C = z;
-                z = p->unk_08;
+                p->lowerZ = z;
+                z = p->upperZ;
                 break;
             case 0:
-                p->unk_08 = z;
-                p->unk_0C = z;
+                p->upperZ = z;
+                p->lowerZ = z;
                 break;
             case 2:
             case 4:
             case 6:
-                p->unk_0C = p->unk_08;
+                p->lowerZ = p->upperZ;
                 break;
             case 7:
             case 8:
             case 9:
             default:
-                p->unk_0C = z;
+                p->lowerZ = z;
                 break;
             }
         }
@@ -1549,11 +1549,11 @@ void func_080E2520(void) {
         for (j = 0; j < gMapRows; j++) {
             p = MapGetCell(i, j);
 
-            switch (p->unk_02) {
+            switch (p->type) {
             case 1:
             case 3:
             case 5:
-                z = p->unk_08;
+                z = p->upperZ;
                 break;
             case 2:
             case 4:
@@ -1561,137 +1561,137 @@ void func_080E2520(void) {
             case 7:
             case 8:
             case 9:
-                p->unk_08 = z;
+                p->upperZ = z;
                 break;
             }
         }
     }
 }
 
-void func_080E2668(UnkStruct_02034F20* p, s32 a) {
+void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
     u8 d;
     s32 i;
     u16 x;
     u16 y;
     u16 w;
-    UnkStruct_080DFB7C* e;
+    MapDoor* e;
     MapCell* q;
 
     d = a;
-    e = func_080DFB7C(d);
+    e = GetMapDoor(d);
 
-    if (!(e->unk_00 & 1)) {
+    if (!(e->flags & 1)) {
         return;
     }
 
-    w = p->unk_02 - p->unk_00;
+    w = p->right - p->left;
 
     if (d == 0) {
-        x = p->unk_00 + w * 5 / 8 + GetRandom() % (w >> 2);
+        x = p->left + w * 5 / 8 + GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
+            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
-                if (q->unk_02 == 6 && q->unk_0C == p->unk_04 && q->unk_08 == -0x100000 && (q->unk_00 & 0x20) == 0) {
-                    e->unk_02 = x;
-                    e->unk_04 = y;
-                    q->unk_00 |= 0x800;
-                    q->unk_00 |= 0x400;
-                    MapGetCell(x, y + 1)->unk_00 |= 0x800;
-                    MapGetCell(x - 1, y)->unk_00 |= 0x800;
-                    MapGetCell(x - 1, y + 1)->unk_00 |= 0x800;
-                    MapGetCell(x, y - 1)->unk_00 |= 0x400;
-                    MapGetCell(x, y - 2)->unk_00 |= 0x400;
-                    MapGetCell(x, y - 3)->unk_00 |= 0x400;
+                if (q->type == 6 && q->lowerZ == p->z && q->upperZ == -0x100000 && (q->flags & 0x20) == 0) {
+                    e->cellX = x;
+                    e->cellY = y;
+                    q->flags |= 0x800;
+                    q->flags |= 0x400;
+                    MapGetCell(x, y + 1)->flags |= 0x800;
+                    MapGetCell(x - 1, y)->flags |= 0x800;
+                    MapGetCell(x - 1, y + 1)->flags |= 0x800;
+                    MapGetCell(x, y - 1)->flags |= 0x400;
+                    MapGetCell(x, y - 2)->flags |= 0x400;
+                    MapGetCell(x, y - 3)->flags |= 0x400;
                     return;
                 }
             }
 
-            x = x < p->unk_02 - 1 ? x + 1 : p->unk_00;
+            x = x < p->right - 1 ? x + 1 : p->left;
         }
     }
 
     if (d == 2) {
-        x = p->unk_00 + w * 5 / 8 + GetRandom() % (w >> 2);
+        x = p->left + w * 5 / 8 + GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
+            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
-                if (q->unk_02 == 3 && q->unk_08 == p->unk_04 && q->unk_0C == 0x100000 && (q->unk_00 & 0x20) == 0) {
-                    e->unk_02 = x;
-                    e->unk_04 = y;
-                    MapGetCell(x, y)->unk_00 |= 0x800;
-                    MapGetCell(x, y - 1)->unk_00 |= 0x800;
-                    MapGetCell(x - 1, y)->unk_00 |= 0x800;
-                    MapGetCell(x - 1, y - 1)->unk_00 |= 0x800;
+                if (q->type == 3 && q->upperZ == p->z && q->lowerZ == 0x100000 && (q->flags & 0x20) == 0) {
+                    e->cellX = x;
+                    e->cellY = y;
+                    MapGetCell(x, y)->flags |= 0x800;
+                    MapGetCell(x, y - 1)->flags |= 0x800;
+                    MapGetCell(x - 1, y)->flags |= 0x800;
+                    MapGetCell(x - 1, y - 1)->flags |= 0x800;
                     return;
                 }
             }
 
-            x = x < p->unk_02 - 1 ? x + 1 : p->unk_00;
+            x = x < p->right - 1 ? x + 1 : p->left;
         }
     }
 
     if (d == 1) {
-        x = p->unk_00 + w * 3 / 8 - GetRandom() % (w >> 2);
+        x = p->left + w * 3 / 8 - GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
+            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
-                if (q->unk_02 == 5 && q->unk_08 == p->unk_04 && q->unk_0C == 0x100000 && (q->unk_00 & 0x20) == 0) {
-                    e->unk_02 = x;
-                    e->unk_04 = y;
-                    MapGetCell(x, y)->unk_00 |= 0x800;
-                    MapGetCell(x, y - 1)->unk_00 |= 0x800;
-                    MapGetCell(x + 1, y)->unk_00 |= 0x800;
-                    MapGetCell(x + 1, y - 1)->unk_00 |= 0x800;
+                if (q->type == 5 && q->upperZ == p->z && q->lowerZ == 0x100000 && (q->flags & 0x20) == 0) {
+                    e->cellX = x;
+                    e->cellY = y;
+                    MapGetCell(x, y)->flags |= 0x800;
+                    MapGetCell(x, y - 1)->flags |= 0x800;
+                    MapGetCell(x + 1, y)->flags |= 0x800;
+                    MapGetCell(x + 1, y - 1)->flags |= 0x800;
                     return;
                 }
             }
 
-            x = x > p->unk_00 ? x - 1 : p->unk_02 - 1;
+            x = x > p->left ? x - 1 : p->right - 1;
         }
     }
 
     if (d == 3) {
-        x = p->unk_00 + w * 3 / 8 - GetRandom() % (w >> 2);
+        x = p->left + w * 3 / 8 - GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gUnk_02034F2C; y <= gUnk_02034F2E; y++) {
+            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
-                if (q->unk_02 == 4 && q->unk_0C == p->unk_04 && q->unk_08 == -0x100000 && (q->unk_00 & 0x20) == 0) {
-                    e->unk_02 = x;
-                    e->unk_04 = y;
-                    q->unk_00 |= 0x800;
-                    q->unk_00 |= 0x400;
-                    MapGetCell(x, y + 1)->unk_00 |= 0x800;
-                    MapGetCell(x + 1, y)->unk_00 |= 0x800;
-                    MapGetCell(x + 1, y + 1)->unk_00 |= 0x800;
-                    MapGetCell(x, y - 1)->unk_00 |= 0x400;
-                    MapGetCell(x, y - 2)->unk_00 |= 0x400;
-                    MapGetCell(x, y - 3)->unk_00 |= 0x400;
+                if (q->type == 4 && q->lowerZ == p->z && q->upperZ == -0x100000 && (q->flags & 0x20) == 0) {
+                    e->cellX = x;
+                    e->cellY = y;
+                    q->flags |= 0x800;
+                    q->flags |= 0x400;
+                    MapGetCell(x, y + 1)->flags |= 0x800;
+                    MapGetCell(x + 1, y)->flags |= 0x800;
+                    MapGetCell(x + 1, y + 1)->flags |= 0x800;
+                    MapGetCell(x, y - 1)->flags |= 0x400;
+                    MapGetCell(x, y - 2)->flags |= 0x400;
+                    MapGetCell(x, y - 3)->flags |= 0x400;
                     return;
                 }
             }
 
-            x = x > p->unk_00 ? x - 1 : p->unk_02 - 1;
+            x = x > p->left ? x - 1 : p->right - 1;
         }
     }
 }
 
-s32 func_080E2B08(void) {
+s32 MapPlaceLastPlatformDoor(void) {
     s32 r = 5;
-    UnkStruct_02034F20* p = &gUnk_02034F20[11];
+    MapPlatform* p = &gMapPlatforms[11];
 
-    while (p->unk_04 == 0x100000) {
+    while (p->z == 0x100000) {
         p--;
     }
 
-    switch (gUnk_0203C7AC->flags & 0x6000000) {
+    switch (gMapRoomState->flags & 0x6000000) {
     case 0x2000000:
         r = 1;
         break;
@@ -1699,9 +1699,9 @@ s32 func_080E2B08(void) {
         r = 2;
         break;
     case 0x6000000:
-        if (p->unk_02 == gMapCols) {
+        if (p->right == gMapCols) {
             r = 2;
-        } else if (p->unk_00 == 0) {
+        } else if (p->left == 0) {
             r = 1;
         } else {
             s32 v = GetRandom() % 2 ? 2 : 1;
@@ -1712,15 +1712,15 @@ s32 func_080E2B08(void) {
     }
 
     if (r != 5) {
-        func_080E2668(p, r);
+        MapPlaceDoorOnPlatform(p, r);
     }
     return r;
 }
 
-u8 func_080E2BA0(u8 a) {
-    UnkStruct_02034F20* p = gUnk_02034F20;
+u8 MapPlaceFirstPlatformDoor(u8 a) {
+    MapPlatform* p = gMapPlatforms;
 
-    switch (gUnk_0203C7AC->flags & 0x9000000) {
+    switch (gMapRoomState->flags & 0x9000000) {
     case 0x1000000:
         a = 0;
         break;
@@ -1735,110 +1735,110 @@ u8 func_080E2BA0(u8 a) {
     }
 
     if (a != 5) {
-        func_080E2668(p, a);
+        MapPlaceDoorOnPlatform(p, a);
     }
     return a;
 }
 
-void func_080E2BF8(u8 a) {
-    UnkStruct_02034F20* p = gUnk_02034F20;
-    while (p->unk_02 != gMapCols) {
+void MapPlaceRightPlatformDoor(u8 a) {
+    MapPlatform* p = gMapPlatforms;
+    while (p->right != gMapCols) {
         p++;
     }
-    func_080E2668(p, a);
+    MapPlaceDoorOnPlatform(p, a);
 }
 
-void func_080E2C2C(u8 a) {
-    UnkStruct_02034F20* p = gUnk_02034F20;
+void MapPlaceLeftPlatformDoor(u8 a) {
+    MapPlatform* p = gMapPlatforms;
 
-    while (p->unk_00 != 0) {
+    while (p->left != 0) {
         p++;
     }
-    func_080E2668(p, a);
+    MapPlaceDoorOnPlatform(p, a);
 }
 
-void func_080E2C50(void) {
-    UnkStruct_02034F20* p = &gUnk_02034F20[11];
+void MapPlaceDoorsOnLastPlatform(void) {
+    MapPlatform* p = &gMapPlatforms[11];
 
-    while (p->unk_04 == 0x100000) {
+    while (p->z == 0x100000) {
         p--;
     }
 
-    func_080E2668(p, 0);
-    func_080E2668(p, 1);
-    func_080E2668(p, 2);
-    func_080E2668(p, 3);
+    MapPlaceDoorOnPlatform(p, 0);
+    MapPlaceDoorOnPlatform(p, 1);
+    MapPlaceDoorOnPlatform(p, 2);
+    MapPlaceDoorOnPlatform(p, 3);
 }
 
-void func_080E2C98(void) {
+void MapPlaceDoors(void) {
     s32 i;
-    UnkStruct_080DFB7C* e;
+    MapDoor* e;
 
     for (i = 0; i < 4; i++) {
-        e = func_080DFB7C(i);
-        e->unk_07 = func_080DEE28(gUnk_0203C590.unk_06, i);
-        e->unk_06 = i;
-        e->unk_00 = func_080DEE44(gUnk_0203C590.unk_06, i);
+        e = GetMapDoor(i);
+        e->room = GetMapRoomLink(gMapFloorState.room, i);
+        e->side = i;
+        e->flags = GetMapDoorFlags(gMapFloorState.room, i);
 
-        if (e->unk_07 != 0xFF) {
+        if (e->room != 0xFF) {
             switch (i) {
             case 0:
-                gUnk_0203C7AC->flags |= 0x1000000;
+                gMapRoomState->flags |= 0x1000000;
                 break;
             case 1:
-                gUnk_0203C7AC->flags |= 0x2000000;
+                gMapRoomState->flags |= 0x2000000;
                 break;
             case 2:
-                gUnk_0203C7AC->flags |= 0x4000000;
+                gMapRoomState->flags |= 0x4000000;
                 break;
             case 3:
-                gUnk_0203C7AC->flags |= 0x8000000;
+                gMapRoomState->flags |= 0x8000000;
                 break;
             }
         }
     }
 
-    if (gUnk_0203C7AC->unk_0D != 3) {
-        if ((u8)func_080E2B08() != 2) {
-            func_080E2BF8(2);
+    if (gMapRoomState->roomType != 3) {
+        if ((u8)MapPlaceLastPlatformDoor() != 2) {
+            MapPlaceRightPlatformDoor(2);
 
-            if (func_080E2BA0(0) != 3) {
-                func_080E2C2C(3);
+            if (MapPlaceFirstPlatformDoor(0) != 3) {
+                MapPlaceLeftPlatformDoor(3);
             }
         } else {
-            func_080E2C2C(1);
+            MapPlaceLeftPlatformDoor(1);
 
-            if (func_080E2BA0(3) != 0) {
-                func_080E2BF8(0);
+            if (MapPlaceFirstPlatformDoor(3) != 0) {
+                MapPlaceRightPlatformDoor(0);
             }
         }
     } else {
-        func_080E2C50();
+        MapPlaceDoorsOnLastPlatform();
     }
 }
 
-void func_080E2D80(void) {
+void MapComputeRowBounds(void) {
     s32 i;
     s32 j;
 
-    gUnk_02034F2C = gMapRows;
-    gUnk_02034F2E = 0;
+    gMapTopRow = gMapRows;
+    gMapBottomRow = 0;
 
     for (i = 0; i < gMapCols; i++) {
         for (j = 0; j < gMapRows; j++) {
-            switch (MapGetCell(i, j)->unk_02) {
+            switch (MapGetCell(i, j)->type) {
             case 2:
             case 4:
             case 6:
-                if (j < gUnk_02034F2C) {
-                    gUnk_02034F2C = j;
+                if (j < gMapTopRow) {
+                    gMapTopRow = j;
                 }
                 break;
             case 1:
             case 3:
             case 5:
-                if (j > gUnk_02034F2E) {
-                    gUnk_02034F2E = j;
+                if (j > gMapBottomRow) {
+                    gMapBottomRow = j;
                 }
                 break;
             }
@@ -1846,7 +1846,7 @@ void func_080E2D80(void) {
     }
 }
 
-s32 func_080E2E24(s16 a, s16 b, s16 c) {
+s32 PickRandomTopEdgeType(s16 a, s16 b, s16 c) {
     s32 ret;
 
     if (c - a < b - c) {
@@ -1865,7 +1865,7 @@ s32 func_080E2E24(s16 a, s16 b, s16 c) {
     return ret;
 }
 
-s32 func_080E2E9C(s16 a, s16 b, s16 c) {
+s32 PickRandomBottomEdgeType(s16 a, s16 b, s16 c) {
     s32 ret;
 
     if (c - a < b - c) {
@@ -1884,8 +1884,8 @@ s32 func_080E2E9C(s16 a, s16 b, s16 c) {
     return ret;
 }
 
-s32 func_080E2F14(s16 x, s16 y) {
-    switch (MapGetCell(x, y)->unk_02) {
+s32 GetMatchingBottomEdgeType(s16 x, s16 y) {
+    switch (MapGetCell(x, y)->type) {
     case 6:
         return 5;
     case 2:
@@ -1896,7 +1896,7 @@ s32 func_080E2F14(s16 x, s16 y) {
     return 0xB;
 }
 
-s32 func_080E2F48(s16 a, s16 b, s16 c, u8 d) {
+s32 PickEdgeTypeByHalf(s16 a, s16 b, s16 c, u8 d) {
     if (d != 0) {
         if (c - a < b - c) {
             return 4;
@@ -1910,7 +1910,7 @@ s32 func_080E2F48(s16 a, s16 b, s16 c, u8 d) {
     return 3;
 }
 
-s32 func_080E2F98(s16 a, s16 b, s16 c, u8 d) {
+s32 PickEdgeTypeByThird(s16 a, s16 b, s16 c, u8 d) {
     if (d != 0) {
         if (c - a < (b - a) / 3) {
             return 4;
@@ -1932,12 +1932,12 @@ s32 func_080E2F98(s16 a, s16 b, s16 c, u8 d) {
     return 3;
 }
 
-s32 func_080E300C(u8 d, s16 x, s16 y) {
+s32 GetTopEdgeTypeBelowLedge(u8 d, s16 x, s16 y) {
     s32 i;
 
     if (d != 0) {
         for (i = y; i >= 0; i--) {
-            switch (MapGetCell(x, i)->unk_02) {
+            switch (MapGetCell(x, i)->type) {
             case 3:
                 return 4;
             case 5:
@@ -1950,15 +1950,15 @@ s32 func_080E300C(u8 d, s16 x, s16 y) {
     return 0xB;
 }
 
-void func_080E3060(u8 i, u16 a, u16 b, s16 c) {
-    if (gUnk_02034F20[i].unk_04 == 0x100000) {
-        gUnk_02034F20[i].unk_00 = a;
-        gUnk_02034F20[i].unk_02 = b;
-        gUnk_02034F20[i].unk_04 = c << 12;
+void MapSetPlatform(u8 i, u16 a, u16 b, s16 c) {
+    if (gMapPlatforms[i].z == 0x100000) {
+        gMapPlatforms[i].left = a;
+        gMapPlatforms[i].right = b;
+        gMapPlatforms[i].z = c << 12;
     }
 }
 
-void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
+void MapTracePlatformLeftToRight(u8 i, s16 a, s16 b, s16 c, u8 e) {
     s16 x;
     s16 y;
     s16 yn;
@@ -1972,56 +1972,56 @@ void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gUnk_02034F20[i].unk_04;
+    v = gMapPlatforms[i].z;
     buf = EwramAlloc(96);
     y = c;
     k = 4;
     q = MapGetCell(a, y);
-    func_080E0900(q, 4, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 4, v);
+    q->flags |= 0x10;
     w = buf;
     *w++ = y;
 
     for (x = a + 1; x < b - 1; x++) {
-        t = func_080E300C(i, x, y);
+        t = GetTopEdgeTypeBelowLedge(i, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 6;
             } else if (i == 0) {
                 if (e == 2) {
-                    t = func_080E2F48(a, b, x, 1);
+                    t = PickEdgeTypeByHalf(a, b, x, 1);
                 } else if (e == 3) {
-                    t = func_080E2F98(a, b, x, 1);
+                    t = PickEdgeTypeByThird(a, b, x, 1);
                 } else {
-                    t = func_080E2E24(a, b, x);
+                    t = PickRandomTopEdgeType(a, b, x);
                 }
             } else {
-                t = func_080E2E24(a, b, x);
+                t = PickRandomTopEdgeType(a, b, x);
             }
         }
 
-        y = func_080E1194(k, t, y);
+        y = MapOutlineNextRowLeftToRight(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         *w++ = y;
     }
 
-    n = func_080E1194(k, 6, y);
+    n = MapOutlineNextRowLeftToRight(k, 6, y);
     q = MapGetCell(x, n);
-    func_080E0900(q, 6, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 6, v);
+    q->flags |= 0x10;
     yb = n + (b - a);
     y = c + 1;
     q = MapGetCell(a, y);
     k = 5;
-    func_080E0900(q, 5, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 5, v);
+    q->flags |= 0x10;
     w = buf + 1;
 
     for (x = a + 1; x < b - 1; x++) {
-        yn = func_080E1194(k, 1, y);
+        yn = MapOutlineNextRowLeftToRight(k, 1, y);
 
         if (b - x == 2 && yb - yn == 2) {
             t = 5;
@@ -2029,40 +2029,40 @@ void func_080E309C(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = 1;
         } else if (yn >= yb) {
             t = 3;
-        } else if (yn - w[1] < gUnk_0203C7B0.unk_05) {
+        } else if (yn - w[1] < gMapForm.minDepth) {
             t = 5;
-        } else if (yn - w[1] > gUnk_0203C7B0.unk_06) {
+        } else if (yn - w[1] > gMapForm.maxDepth) {
             t = 3;
-        } else if (yn - w[1] == gUnk_0203C7B0.unk_05 || yn - w[1] == gUnk_0203C7B0.unk_06) {
-            t = func_080E2F14(x, w[0]);
+        } else if (yn - w[1] == gMapForm.minDepth || yn - w[1] == gMapForm.maxDepth) {
+            t = GetMatchingBottomEdgeType(x, w[0]);
         } else if (e == 2) {
-            t = func_080E2F48(a, b, x, 0);
+            t = PickEdgeTypeByHalf(a, b, x, 0);
         } else if (e == 3) {
-            t = func_080E2F98(a, b, x, 0);
+            t = PickEdgeTypeByThird(a, b, x, 0);
         } else {
-            t = func_080E2E9C(a, b, x);
+            t = PickRandomBottomEdgeType(a, b, x);
         }
 
         if (yn >= gMapRows - 1 && t == 5) {
             t = 1;
         }
 
-        y = func_080E1194(k, t, y);
+        y = MapOutlineNextRowLeftToRight(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         w++;
         yb--;
     }
 
-    m = func_080E1194(k, 3, y);
+    m = MapOutlineNextRowLeftToRight(k, 3, y);
     q = MapGetCell(x, m);
-    func_080E0900(q, 3, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 3, v);
+    q->flags |= 0x10;
     EwramFree(buf);
 }
 
-void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
+void MapTracePlatformRightToLeft(u8 i, s16 a, s16 b, s16 c, u8 e) {
     s16 x;
     s16 yn;
     s16 n;
@@ -2076,56 +2076,56 @@ void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gUnk_02034F20[i].unk_04;
+    v = gMapPlatforms[i].z;
     buf = EwramAlloc(96);
     y = c;
     k = 6;
     q = MapGetCell(b - 1, y);
-    func_080E0900(q, 6, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 6, v);
+    q->flags |= 0x10;
     w = buf;
     *w++ = y;
 
     for (x = b - 2; x > a; x--) {
-        t = func_080E300C(i, x, y);
+        t = GetTopEdgeTypeBelowLedge(i, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 4;
             } else if (i == 0) {
                 if (e == 2) {
-                    t = func_080E2F48(a, b, x, 1);
+                    t = PickEdgeTypeByHalf(a, b, x, 1);
                 } else if (e == 3) {
-                    t = func_080E2F98(a, b, x, 1);
+                    t = PickEdgeTypeByThird(a, b, x, 1);
                 } else {
-                    t = func_080E2E24(a, b, x);
+                    t = PickRandomTopEdgeType(a, b, x);
                 }
             } else {
-                t = func_080E2E24(a, b, x);
+                t = PickRandomTopEdgeType(a, b, x);
             }
         }
 
-        y = func_080E1204(k, t, y);
+        y = MapOutlineNextRowRightToLeft(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         *w++ = y;
     }
 
-    n = func_080E1204(k, 4, y);
+    n = MapOutlineNextRowRightToLeft(k, 4, y);
     q = MapGetCell(x, n);
-    func_080E0900(q, 4, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 4, v);
+    q->flags |= 0x10;
     yb = n + (b - a);
     y = c + 1;
     q = MapGetCell(b - 1, y);
     k = 3;
-    func_080E0900(q, 3, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 3, v);
+    q->flags |= 0x10;
     w = buf + 1;
 
     for (x = b - 2; x > a; x--) {
-        yn = func_080E1204(k, 1, y);
+        yn = MapOutlineNextRowRightToLeft(k, 1, y);
 
         if (x - a == 1 && yb - yn == 2) {
             t = 3;
@@ -2133,40 +2133,40 @@ void func_080E3400(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = 1;
         } else if (yn >= yb) {
             t = 5;
-        } else if (yn - w[1] < gUnk_0203C7B0.unk_05) {
+        } else if (yn - w[1] < gMapForm.minDepth) {
             t = 3;
-        } else if (yn - w[1] > gUnk_0203C7B0.unk_06) {
+        } else if (yn - w[1] > gMapForm.maxDepth) {
             t = 5;
-        } else if (yn - w[1] == gUnk_0203C7B0.unk_05 || yn - w[1] == gUnk_0203C7B0.unk_06) {
-            t = func_080E2F14(x, w[0]);
+        } else if (yn - w[1] == gMapForm.minDepth || yn - w[1] == gMapForm.maxDepth) {
+            t = GetMatchingBottomEdgeType(x, w[0]);
         } else if (e == 2) {
-            t = func_080E2F48(a, b, x, 0);
+            t = PickEdgeTypeByHalf(a, b, x, 0);
         } else if (e == 3) {
-            t = func_080E2F98(a, b, x, 0);
+            t = PickEdgeTypeByThird(a, b, x, 0);
         } else {
-            t = func_080E2E9C(a, b, x);
+            t = PickRandomBottomEdgeType(a, b, x);
         }
 
         if (yn >= gMapRows - 1 && t == 3) {
             t = 1;
         }
 
-        y = func_080E1204(k, t, y);
+        y = MapOutlineNextRowRightToLeft(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         w++;
         yb--;
     }
 
-    m = func_080E1204(k, 5, y);
+    m = MapOutlineNextRowRightToLeft(k, 5, y);
     q = MapGetCell(x, m);
-    func_080E0900(q, 5, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 5, v);
+    q->flags |= 0x10;
     EwramFree(buf);
 }
 
-void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
+void MapTracePlatformOutward(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
     s16 x;
     s16 yn;
     s16 n;
@@ -2180,93 +2180,93 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gUnk_02034F20[i].unk_04;
+    v = gMapPlatforms[i].z;
     buf = EwramAlloc(96);
     w = buf + c;
     y = d;
-    t = func_080E300C(i, c, y);
+    t = GetTopEdgeTypeBelowLedge(i, c, y);
     k = t;
     q = MapGetCell(c, y);
-    func_080E0900(q, t, v);
+    MapCellSetType(q, t, v);
     *w++ = y;
 
     for (x = c + 1; x < b - 1; x++) {
-        s32 t = (u8)func_080E300C(i, x, y);
+        s32 t = (u8)GetTopEdgeTypeBelowLedge(i, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 6;
             } else if (i == 0) {
                 if (e == 2) {
-                    t = (u8)func_080E2F48(a, b, x, 1);
+                    t = (u8)PickEdgeTypeByHalf(a, b, x, 1);
                 } else if (e == 3) {
-                    t = (u8)func_080E2F98(a, b, x, 1);
+                    t = (u8)PickEdgeTypeByThird(a, b, x, 1);
                 } else {
-                    t = (u8)func_080E2E24(a, b, x);
+                    t = (u8)PickRandomTopEdgeType(a, b, x);
                 }
             } else {
-                t = (u8)func_080E2E24(a, b, x);
+                t = (u8)PickRandomTopEdgeType(a, b, x);
             }
         }
 
-        y = func_080E1194(k, t, y);
+        y = MapOutlineNextRowLeftToRight(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         *w++ = y;
     }
 
-    y = func_080E1194(k, 6, y);
+    y = MapOutlineNextRowLeftToRight(k, 6, y);
     q = MapGetCell(x, y);
-    func_080E0900(q, 6, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 6, v);
+    q->flags |= 0x10;
     *w = y;
     w = buf + c;
     y = d;
-    t = func_080E300C(i, c, y);
+    t = GetTopEdgeTypeBelowLedge(i, c, y);
     k = t;
     w--;
 
     for (x = c - 1; x > a; x--) {
-        s32 t = (u8)func_080E300C(i, x, y);
+        s32 t = (u8)GetTopEdgeTypeBelowLedge(i, x, y);
 
         if (t == 11) {
             if (y <= 3) {
                 t = 4;
             } else if (i == 0) {
                 if (e == 2) {
-                    t = (u8)func_080E2F48(a, b, x, 1);
+                    t = (u8)PickEdgeTypeByHalf(a, b, x, 1);
                 } else if (e == 3) {
-                    t = (u8)func_080E2F98(a, b, x, 1);
+                    t = (u8)PickEdgeTypeByThird(a, b, x, 1);
                 } else {
-                    t = (u8)func_080E2E24(a, b, x);
+                    t = (u8)PickRandomTopEdgeType(a, b, x);
                 }
             } else {
-                t = (u8)func_080E2E24(a, b, x);
+                t = (u8)PickRandomTopEdgeType(a, b, x);
             }
         }
 
-        y = func_080E1204(k, t, y);
+        y = MapOutlineNextRowRightToLeft(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         *w-- = y;
     }
 
-    n = func_080E1204(k, 4, y);
+    n = MapOutlineNextRowRightToLeft(k, 4, y);
     q = MapGetCell(x, n);
-    func_080E0900(q, 4, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 4, v);
+    q->flags |= 0x10;
     yb = *(buf + b - a - 1) + (b - a);
     y = n + 1;
     q = MapGetCell(a, y);
     k = 5;
-    func_080E0900(q, 5, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 5, v);
+    q->flags |= 0x10;
     w = buf + 1;
 
     for (x = a + 1; x < b - 1; x++) {
-        yn = func_080E1194(k, 1, y);
+        yn = MapOutlineNextRowLeftToRight(k, 1, y);
 
         if (b - x == 2 && yb - yn == 2) {
             t = 5;
@@ -2274,40 +2274,40 @@ void func_080E3768(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
             t = 1;
         } else if (yn >= yb) {
             t = 3;
-        } else if (yn - w[1] < gUnk_0203C7B0.unk_05) {
+        } else if (yn - w[1] < gMapForm.minDepth) {
             t = 5;
-        } else if (yn - w[1] > gUnk_0203C7B0.unk_06) {
+        } else if (yn - w[1] > gMapForm.maxDepth) {
             t = 3;
-        } else if (yn - w[1] == gUnk_0203C7B0.unk_05 || yn - w[1] == gUnk_0203C7B0.unk_06) {
-            t = func_080E2F14(x, w[0]);
+        } else if (yn - w[1] == gMapForm.minDepth || yn - w[1] == gMapForm.maxDepth) {
+            t = GetMatchingBottomEdgeType(x, w[0]);
         } else if (e == 2) {
-            t = func_080E2F48(a, b, x, 0);
+            t = PickEdgeTypeByHalf(a, b, x, 0);
         } else if (e == 3) {
-            t = func_080E2F98(a, b, x, 0);
+            t = PickEdgeTypeByThird(a, b, x, 0);
         } else {
-            t = func_080E2E9C(a, b, x);
+            t = PickRandomBottomEdgeType(a, b, x);
         }
 
         if (yn >= gMapRows - 1 && t == 5) {
             t = 1;
         }
 
-        y = func_080E1194(k, t, y);
+        y = MapOutlineNextRowLeftToRight(k, t, y);
         k = t;
         q = MapGetCell(x, y);
-        func_080E0900(q, t, v);
+        MapCellSetType(q, t, v);
         w++;
         yb--;
     }
 
-    m = func_080E1194(k, 3, y);
+    m = MapOutlineNextRowLeftToRight(k, 3, y);
     q = MapGetCell(x, m);
-    func_080E0900(q, 3, v);
-    q->unk_00 |= 0x10;
+    MapCellSetType(q, 3, v);
+    q->flags |= 0x10;
     EwramFree(buf);
 }
 
-void func_080E3C1C(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi) {
+void MapFindLowestEdgeRightward(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi) {
     s32 x = lo + GetRandom() % (hi - lo);
     s32 n;
 
@@ -2317,14 +2317,14 @@ void func_080E3C1C(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi) {
         for (j = gMapRows - 1; j >= 0; j--) {
             MapCell* p = MapGetCell(x, j);
 
-            if (p->unk_02 == a) {
+            if (p->type == a) {
                 *px = x;
                 *py = j;
-                *pz = (p->unk_08 >> 11) / 2;
+                *pz = (p->upperZ >> 11) / 2;
                 return;
             }
 
-            if (p->unk_02 != 11) {
+            if (p->type != 11) {
                 break;
             }
         }
@@ -2336,7 +2336,7 @@ void func_080E3C1C(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi) {
         }
     }
 }
-void func_080E3CD4(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
+void MapFindLowestEdgeLeftward(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
     s32 i;
     s32 j;
     s32 x;
@@ -2350,13 +2350,13 @@ void func_080E3CD4(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
         for (j = gMapRows - 1; j >= 0; j--) {
             q = MapGetCell(x, j);
 
-            if (q->unk_02 == a) {
+            if (q->type == a) {
                 *px = x;
                 *py = j;
-                *pz = (q->unk_08 >> 8) / 16;
+                *pz = (q->upperZ >> 8) / 16;
                 return;
             }
-            if (q->unk_02 != 11) {
+            if (q->type != 11) {
                 break;
             }
         }
@@ -2364,7 +2364,7 @@ void func_080E3CD4(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
     }
 }
 
-u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
+u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
     u16 x1 = 0;
     u16 y1 = 0;
     u16 x2 = 0;
@@ -2380,15 +2380,15 @@ u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
         for (y = gMapRows - 1; y >= 0; y--) {
             p = MapGetCell((s16)x, (s16)y);
 
-            if (p->unk_02 == 3) {
+            if (p->type == 3) {
                 x1 = x;
                 y1 = y;
-                z1 = p->unk_08;
+                z1 = p->upperZ;
                 found = 1;
                 break;
             }
 
-            if (p->unk_02 != 11) {
+            if (p->type != 11) {
                 break;
             }
         }
@@ -2404,15 +2404,15 @@ u8 func_080E3D80(s16* a, s16* b, s16* c, s16* d) {
         for (y = gMapRows - 1; y >= 0; y--) {
             p = MapGetCell((s16)x, (s16)y);
 
-            if (p->unk_02 == 5) {
+            if (p->type == 5) {
                 x2 = x + 1;
                 y2 = y;
-                z2 = p->unk_08;
+                z2 = p->upperZ;
                 found = 1;
                 break;
             }
 
-            if (p->unk_02 != 11) {
+            if (p->type != 11) {
                 break;
             }
         }
@@ -2452,12 +2452,12 @@ void func_080E3EFC(void) {
     b = gMapRows / 4;
     d = gMapCols - d;
     a = gMapCols;
-    func_080E3060(0, d, a, 0);
-    func_080E309C(0, d, a, b, 2);
-    func_080E3CD4(5, &a, &b, &c, 0, gMapCols);
-    v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-    func_080E3060(1, 0, a + 1, v + c);
-    func_080E3400(1, 0, a + 1, v + b, 0);
+    MapSetPlatform(0, d, a, 0);
+    MapTracePlatformLeftToRight(0, d, a, b, 2);
+    MapFindLowestEdgeLeftward(5, &a, &b, &c, 0, gMapCols);
+    v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+    MapSetPlatform(1, 0, a + 1, v + c);
+    MapTracePlatformRightToLeft(1, 0, a + 1, v + b, 0);
 }
 
 void func_080E3FD4(void) {
@@ -2473,27 +2473,27 @@ void func_080E3FD4(void) {
     a = GetRandom() % (gMapCols - t - 3) + 2;
     d = a + t;
     b = gMapRows / 4;
-    func_080E3060(0, a, d, 0);
-    func_080E309C(0, a, d, b, k = 0);
+    MapSetPlatform(0, a, d, 0);
+    MapTracePlatformLeftToRight(0, a, d, b, k = 0);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, k, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, a, gMapCols, v + c);
-        func_080E309C(1, a, gMapCols, v + b, k);
-        func_080E3CD4(5, &d, &b, &c, k, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, 0, d + 1, v + c);
-        func_080E3400(2, 0, d + 1, v + b, k);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, k, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(1, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, k);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(2, 0, d + 1, v + b, k);
     } else {
-        func_080E3CD4(5, &d, &b, &c, k, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, 0, d + 1, v + c);
-        func_080E3400(1, 0, d + 1, v + b, k);
-        func_080E3C1C(3, &a, &b, &c, k, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gMapCols, v + c);
-        func_080E309C(2, a, gMapCols, v + b, k);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(1, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(1, 0, d + 1, v + b, k);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, k, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, k);
     }
 }
 
@@ -2509,27 +2509,27 @@ void func_080E4244(void) {
     a = (gMapCols - t) / 2;
     d = a + t;
     b = gMapRows / 4;
-    func_080E3060(0, a, d, 0);
-    func_080E309C(0, a, d, b, 2);
+    MapSetPlatform(0, a, d, 0);
+    MapTracePlatformLeftToRight(0, a, d, b, 2);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1) + 10;
-        func_080E3060(1, a, gMapCols, v + c);
-        func_080E309C(1, a, gMapCols, v + b, 2);
-        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, 0, d + 1, v + c);
-        func_080E3400(2, 0, d + 1, v + b, 2);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1) + 10;
+        MapSetPlatform(1, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, 2);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(2, 0, d + 1, v + b, 2);
     } else {
-        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1) + 10;
-        func_080E3060(1, 0, d + 1, v + c);
-        func_080E3400(1, 0, d + 1, v + b, 2);
-        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gMapCols, v + c);
-        func_080E309C(2, a, gMapCols, v + b, 2);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1) + 10;
+        MapSetPlatform(1, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(1, 0, d + 1, v + b, 2);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, 2);
     }
 }
 
@@ -2545,27 +2545,27 @@ void func_080E44A8(void) {
     a = (gMapCols - t) / 2;
     d = a + t;
     b = gMapRows / 4;
-    func_080E3060(0, a, d, 0);
-    func_080E309C(0, a, d, b, 3);
+    MapSetPlatform(0, a, d, 0);
+    MapTracePlatformLeftToRight(0, a, d, b, 3);
 
     if (GetRandom() % 100 < 50) {
-        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, a, gMapCols, v + c);
-        func_080E309C(1, a, gMapCols, v + b, 3);
-        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, 0, d + 1, v + c);
-        func_080E3400(2, 0, d + 1, v + b, 3);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(1, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, 3);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(2, 0, d + 1, v + b, 3);
     } else {
-        func_080E3CD4(5, &d, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(1, 0, d + 1, v + c);
-        func_080E3400(1, 0, d + 1, v + b, 3);
-        func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
-        v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-        func_080E3060(2, a, gMapCols, v + c);
-        func_080E309C(2, a, gMapCols, v + b, 3);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(1, 0, d + 1, v + c);
+        MapTracePlatformRightToLeft(1, 0, d + 1, v + b, 3);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+        MapSetPlatform(2, a, gMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, 3);
     }
 }
 
@@ -2582,15 +2582,15 @@ void func_080E470C(void) {
     a = (gMapCols - t) / 2;
     d = a + t;
     b = gMapRows / 4;
-    func_080E3060(0, a, d, 0);
-    func_080E309C(0, a, d, b, k = 3);
-    func_080E3C1C(3, &a, &b, &c, 0, gMapCols);
-    v = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-    func_080E3060(1, 0, gMapCols, v + c);
-    func_080E3768(1, 0, gMapCols, a, v + b, k);
+    MapSetPlatform(0, a, d, 0);
+    MapTracePlatformLeftToRight(0, a, d, b, k = 3);
+    MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+    v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+    MapSetPlatform(1, 0, gMapCols, v + c);
+    MapTracePlatformOutward(1, 0, gMapCols, a, v + b, k);
 }
 
-void func_080E47E8(u8 a, u8 b) {
+void MapAddLowerPlatforms(u8 a, u8 b) {
     s32 i;
 
     for (i = a; i < b; i++) {
@@ -2600,16 +2600,16 @@ void func_080E47E8(u8 a, u8 b) {
         s16 s;
         s16 t;
 
-        switch (func_080E3D80(&p, &q, &r, &s)) {
+        switch (MapFindSpanBelowPlatforms(&p, &q, &r, &s)) {
         case 1:
-            t = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-            func_080E3060(i, p, q, t + s);
-            func_080E309C(i, p, q, t + r, 0);
+            t = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+            MapSetPlatform(i, p, q, t + s);
+            MapTracePlatformLeftToRight(i, p, q, t + r, 0);
             break;
         case 2:
-            t = gUnk_0203C7B0.unk_03 + GetRandom() % (gUnk_0203C7B0.unk_04 - gUnk_0203C7B0.unk_03 + 1);
-            func_080E3060(i, p, q, t + s);
-            func_080E3400(i, p, q, t + r, 0);
+            t = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
+            MapSetPlatform(i, p, q, t + s);
+            MapTracePlatformRightToLeft(i, p, q, t + r, 0);
             break;
         default:
             return;
@@ -2617,11 +2617,11 @@ void func_080E47E8(u8 a, u8 b) {
     }
 }
 
-void func_080E4900(void) {
-    switch (gUnk_0203C7B0.unk_00) {
+void MapGenerateLayout(void) {
+    switch (gMapForm.layout) {
     case 0:
-        func_080E3060(0, 0, gMapCols, 0);
-        func_080E309C(0, 0, gMapCols, gMapRows / 4, 0);
+        MapSetPlatform(0, 0, gMapCols, 0);
+        MapTracePlatformLeftToRight(0, 0, gMapCols, gMapRows / 4, 0);
         break;
     case 1:
         func_080E3EFC();
@@ -2631,95 +2631,95 @@ void func_080E4900(void) {
         break;
     case 4:
         func_080E4244();
-        func_080E47E8(3, 4);
+        MapAddLowerPlatforms(3, 4);
         break;
     case 5:
         func_080E44A8();
-        func_080E47E8(3, 4);
+        MapAddLowerPlatforms(3, 4);
         break;
     case 6:
         func_080E470C();
         break;
     case 7:
-        func_080E3060(0, 0, gMapCols, 0);
-        func_080E309C(0, 0, gMapCols, gMapRows / 4, 3);
-        func_080E47E8(1, 12);
+        MapSetPlatform(0, 0, gMapCols, 0);
+        MapTracePlatformLeftToRight(0, 0, gMapCols, gMapRows / 4, 3);
+        MapAddLowerPlatforms(1, 12);
         break;
     case 3:
     default:
         func_080E3FD4();
-        func_080E47E8(3, 12);
+        MapAddLowerPlatforms(3, 12);
         break;
     }
 }
 
-void func_080E49DC(u16 a, u16 b) {
+void MapGenerateRoom(u16 a, u16 b) {
     s32 i;
     s32 n;
     void** p;
 
-    gUnk_02034F34 = gUnk_09EF70D0[gUnk_0203C590.unk_04];
+    gMapRoomDef = gMapRoomDefs[gMapFloorState.world];
     gMapCols = a;
     gMapRows = b;
-    p = &gUnk_02034F30;
+    p = &gMapBgBuffer;
     *p = EwramAlloc(0x1800);
 
-    if (gGameState.unk_000 == 0) {
+    if (gGameState.fieldResume == 0) {
         gMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
-        gUnk_02034F20 = EwramAlloc(0x120);
-        gUnk_02034F24 = EwramAlloc(sizeof(UnkStruct_080DFB7C) * 4);
+        gMapPlatforms = EwramAlloc(0x120);
+        gMapDoors = EwramAlloc(sizeof(MapDoor) * 4);
         n = gMapCols * gMapRows;
 
         for (i = 0; i < n; i++) {
-            gMapCells[i].unk_00 = 0;
-            gMapCells[i].unk_02 = 11;
-            gMapCells[i].unk_03 = 7;
-            gMapCells[i].unk_04 = 0;
-            gMapCells[i].unk_05 = 0;
-            gMapCells[i].unk_14 = 0;
-            gMapCells[i].unk_18 = 0;
-            gMapCells[i].unk_1C = 0;
+            gMapCells[i].flags = 0;
+            gMapCells[i].type = 11;
+            gMapCells[i].bg3Piece = 7;
+            gMapCells[i].bg2Piece = 0;
+            gMapCells[i].bg1Piece = 0;
+            gMapCells[i].bg3Map = 0;
+            gMapCells[i].bg2Map = 0;
+            gMapCells[i].bg1Map = 0;
         }
 
         for (i = 0; i < 12; i++) {
-            gUnk_02034F20[i].unk_00 = 0;
-            gUnk_02034F20[i].unk_02 = 0;
-            gUnk_02034F20[i].unk_04 = 0x100000;
-            gUnk_02034F20[i].unk_08 = 0;
-            gUnk_02034F20[i].x = 0;
-            gUnk_02034F20[i].y = 0;
-            gUnk_02034F20[i].unk_0E = 11;
-            gUnk_02034F20[i].unk_10 = -0x100000;
-            gUnk_02034F20[i].unk_14 = 0x100000;
+            gMapPlatforms[i].left = 0;
+            gMapPlatforms[i].right = 0;
+            gMapPlatforms[i].z = 0x100000;
+            gMapPlatforms[i].hasStairs = 0;
+            gMapPlatforms[i].x = 0;
+            gMapPlatforms[i].y = 0;
+            gMapPlatforms[i].spotType = 11;
+            gMapPlatforms[i].spotUpperZ = -0x100000;
+            gMapPlatforms[i].spotLowerZ = 0x100000;
         }
 
-        func_080E4900();
-        func_080E1274();
-        func_080E2520();
-        func_080E2D80();
-        func_080E14D0();
+        MapGenerateLayout();
+        MapFillOutlineCells();
+        MapComputeCellHeights();
+        MapComputeRowBounds();
+        MapMarkCellEdges();
         func_080E13B0();
-        func_080E1670();
-        func_080E249C();
-        func_080E1138();
-        func_080E2C98();
+        MapAssignCellPieces();
+        MapAssignBg1Pieces();
+        MapPlacePlatformStairs();
+        MapPlaceDoors();
     }
 
-    gUnk_0203C7AC->unk_08 = gUnk_02034F2C;
-    gUnk_0203C7AC->unk_0A = gUnk_02034F2E;
+    gMapRoomState->topRow = gMapTopRow;
+    gMapRoomState->bottomRow = gMapBottomRow;
 }
 
-void func_080E4B34(void) {
-    EwramFree(gUnk_02034F30);
+void MapFreeRoom(void) {
+    EwramFree(gMapBgBuffer);
 
-    if (gGameState.unk_000 == 0) {
+    if (gGameState.fieldResume == 0) {
         EwramFree(gMapCells);
-        EwramFree(gUnk_02034F20);
-        EwramFree(gUnk_02034F24);
+        EwramFree(gMapPlatforms);
+        EwramFree(gMapDoors);
     }
 }
 
-void func_080E4B78(s16 x, s16 y) {
+void MapDrawBgs(s16 x, s16 y) {
     s16 x0;
     u16* p0;
     u16* p1;
@@ -2727,9 +2727,9 @@ void func_080E4B78(s16 x, s16 y) {
     s16 yy;
     s32 i;
 
-    p0 = gUnk_02034F30;
-    p1 = (u16*)((u8*)gUnk_02034F30 + 0x800);
-    p2 = (u16*)((u8*)gUnk_02034F30 + 0x1000);
+    p0 = gMapBgBuffer;
+    p1 = (u16*)((u8*)gMapBgBuffer + 0x800);
+    p2 = (u16*)((u8*)gMapBgBuffer + 0x1000);
     x0 = x - 1;
     yy = y - 1;
 
@@ -2763,23 +2763,23 @@ void func_080E4B78(s16 x, s16 y) {
             e = MapGetCell(c, v);
 
             if (e != 0) {
-                p0[ya * 32 + xa] = e->unk_14[m * 32 + n];
+                p0[ya * 32 + xa] = e->bg3Map[m * 32 + n];
 
-                if (e->unk_18 != 0) {
-                    p1[ya * 32 + xa] = e->unk_18[m * 32 + n];
+                if (e->bg2Map != 0) {
+                    p1[ya * 32 + xa] = e->bg2Map[m * 32 + n];
                 } else {
                     p1[ya * 32 + xa] = 0;
                 }
 
-                if (e->unk_1C != 0) {
-                    p2[ya * 32 + xa] = e->unk_1C[m * 32 + n];
+                if (e->bg1Map != 0) {
+                    p2[ya * 32 + xa] = e->bg1Map[m * 32 + n];
                 } else {
                     p2[ya * 32 + xa] = 0;
                 }
             } else {
                 p0[ya * 32 + xa] = 0;
-                p1[ya * 32 + xa] = gUnk_02034F34->map2[0x340];
-                p2[ya * 32 + xa] = gUnk_02034F34->map[0x110];
+                p1[ya * 32 + xa] = gMapRoomDef->map2[0x340];
+                p2[ya * 32 + xa] = gMapRoomDef->map[0x110];
             }
 
             xx++;
@@ -2793,13 +2793,13 @@ void func_080E4B78(s16 x, s16 y) {
     RequestDma3Copy(p2, GetBgScreenBase(1), 0x800);
 }
 
-void func_080E4D68(s32 x, s32 y) {
+void MapDrawBg1(s32 x, s32 y) {
     s16 x0;
     u16* dst;
     s16 yy;
     s32 i;
 
-    dst = (u16*)((u8*)gUnk_02034F30 + 0x1000);
+    dst = (u16*)((u8*)gMapBgBuffer + 0x1000);
     x0 = x;
     x0--;
     yy = y;
@@ -2835,13 +2835,13 @@ void func_080E4D68(s32 x, s32 y) {
             e = MapGetCell(c, v);
 
             if (e != 0) {
-                if (e->unk_1C != 0) {
-                    dst[ya * 32 + xa] = e->unk_1C[m * 32 + n];
+                if (e->bg1Map != 0) {
+                    dst[ya * 32 + xa] = e->bg1Map[m * 32 + n];
                 } else {
                     dst[ya * 32 + xa] = 0;
                 }
             } else {
-                dst[ya * 32 + xa] = gUnk_02034F34->map[0x110];
+                dst[ya * 32 + xa] = gMapRoomDef->map[0x110];
             }
 
             xx++;
@@ -2853,7 +2853,7 @@ void func_080E4D68(s32 x, s32 y) {
     RequestDma3Copy(dst, GetBgScreenBase(1), 0x800);
 }
 
-void func_080E4EB0(u16* a, u16* b, u16* c, s16 d, s16 e) {
+void MapBuildBgColumn(u16* a, u16* b, u16* c, s16 d, s16 e) {
     MapCell* cell;
     s16 hx;
     s16 mx;
@@ -2870,39 +2870,39 @@ void func_080E4EB0(u16* a, u16* b, u16* c, s16 d, s16 e) {
         cell = MapGetCell(hx, hy);
 
         if (cell != 0) {
-            a[i] = cell->unk_14[my * 32 + mx];
+            a[i] = cell->bg3Map[my * 32 + mx];
 
-            if (cell->unk_18 != 0) {
-                b[i] = cell->unk_18[my * 32 + mx];
+            if (cell->bg2Map != 0) {
+                b[i] = cell->bg2Map[my * 32 + mx];
             } else {
                 b[i] = 0;
             }
 
-            if (cell->unk_1C != 0) {
-                c[i] = cell->unk_1C[my * 32 + mx];
+            if (cell->bg1Map != 0) {
+                c[i] = cell->bg1Map[my * 32 + mx];
             } else {
                 c[i] = 0;
             }
         } else {
             a[i] = 0;
-            b[i] = gUnk_02034F34->map2[0x340];
-            c[i] = gUnk_02034F34->map[0x110];
+            b[i] = gMapRoomDef->map2[0x340];
+            c[i] = gMapRoomDef->map[0x110];
         }
         e++;
     }
 }
 
-void func_080E4FF0(void* p, s16 a, s16 b) {
+void MapDrawBgColumn(void* p, s16 a, s16 b) {
     void* q = (u8*)p + 0x40;
     void* r = (u8*)p + 0x80;
 
-    func_080E4EB0(p, q, r, a, b);
+    MapBuildBgColumn(p, q, r, a, b);
     RequestTilemapStripCopy(p, GetBgScreenBase(3), a, b, 1);
     RequestTilemapStripCopy(q, GetBgScreenBase(2), a, b, 1);
     RequestTilemapStripCopy(r, GetBgScreenBase(1), a, b, 1);
 }
 
-void func_080E507C(u16* a, u16* b, u16* c, s16 d, s16 e) {
+void MapBuildBgRow(u16* a, u16* b, u16* c, s16 d, s16 e) {
     MapCell* cell;
     s16 hx;
     s16 mx;
@@ -2922,52 +2922,52 @@ void func_080E507C(u16* a, u16* b, u16* c, s16 d, s16 e) {
         cell = MapGetCell(hx, hy);
 
         if (cell != 0) {
-            a[i] = cell->unk_14[my * 32 + mx];
+            a[i] = cell->bg3Map[my * 32 + mx];
 
-            if (cell->unk_18 != 0) {
-                b[i] = cell->unk_18[my * 32 + mx];
+            if (cell->bg2Map != 0) {
+                b[i] = cell->bg2Map[my * 32 + mx];
             } else {
                 b[i] = 0;
             }
 
-            if (cell->unk_1C != 0) {
-                c[i] = cell->unk_1C[my * 32 + mx];
+            if (cell->bg1Map != 0) {
+                c[i] = cell->bg1Map[my * 32 + mx];
             } else {
                 c[i] = 0;
             }
         } else {
             a[i] = 0;
-            b[i] = gUnk_02034F34->map2[0x340];
-            c[i] = gUnk_02034F34->map[0x110];
+            b[i] = gMapRoomDef->map2[0x340];
+            c[i] = gMapRoomDef->map[0x110];
         }
         d++;
     }
 }
 
-void func_080E51C0(void* p, s16 a, s16 b) {
+void MapDrawBgRow(void* p, s16 a, s16 b) {
     void* q = (u8*)p + 0x40;
     void* r = (u8*)p + 0x80;
 
-    func_080E507C(p, q, r, a, b);
+    MapBuildBgRow(p, q, r, a, b);
     RequestTilemapStripCopy(p, GetBgScreenBase(3), a, b, 0);
     RequestTilemapStripCopy(q, GetBgScreenBase(2), a, b, 0);
     RequestTilemapStripCopy(r, GetBgScreenBase(1), a, b, 0);
 }
 
-u8 func_080E524C(FldPos* a, s32* b) {
+u8 MapPickFreeFloorPos(FldPos* a, s32* b) {
     u16 h;
     u16 x;
     u16 y;
     s32 i;
     s32 j;
 
-    h = gUnk_02034F2E - gUnk_02034F2C;
+    h = gMapBottomRow - gMapTopRow;
     x = GetRandom() % gMapCols;
     y = GetRandom() % h;
 
     for (i = 0; i < h; i++) {
         for (j = 0; j < gMapCols; j++) {
-            u16 yy = y + gUnk_02034F2C;
+            u16 yy = y + gMapTopRow;
 
             if ((*(u32*)MapGetCell(x, yy) & 0xFF0340) == 0) {
                 a->x = (x << 13) + 0x1000;
@@ -2984,11 +2984,11 @@ u8 func_080E524C(FldPos* a, s32* b) {
     }
 
     a->x = gFieldState->actor.fieldPosition.x;
-    *b = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.unk_0C;
+    *b = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.ground;
     return 0;
 }
 
-u8 func_080E5354(FldPos* a, s32* b) {
+u8 MapPickFreeFloorPosInView(FldPos* a, s32* b) {
     u16 w = 6;
     u16 h = 8;
     u16 x;
@@ -3030,7 +3030,7 @@ u8 func_080E5354(FldPos* a, s32* b) {
         y %= h;
     }
 
-    func_080E524C(a, b);
+    MapPickFreeFloorPos(a, b);
     return 0;
 }
 
@@ -3038,84 +3038,84 @@ MapCell* MapCellAt(s16 x, s16 y) {
     return MapGetCell(x, y);
 }
 
-UnkStruct_02034F20* func_080E54A0(u8 a) {
-    return &gUnk_02034F20[a];
+MapPlatform* GetMapPlatform(u8 a) {
+    return &gMapPlatforms[a];
 }
 
-u8* func_080E54B8(u8 a) {
+u8* GetMapRoomEvent(u8 a) {
     if (gGameState.flags & 8) {
-        return (u8*)(gUnk_09EF70D0[gUnk_0203C590.unk_04]->unk_34 + a);
+        return (u8*)(gMapRoomDefs[gMapFloorState.world]->rikuEvents + a);
     }
-    return (u8*)(gUnk_09EF70D0[gUnk_0203C590.unk_04]->unk_30 + a);
+    return (u8*)(gMapRoomDefs[gMapFloorState.world]->soraEvents + a);
 }
 
-void* func_080E5504(void) {
-    return gUnk_02034F30;
+void* GetMapBgBuffer(void) {
+    return gMapBgBuffer;
 }
 
-void func_080E5510(u8 a) {
+void LoadMapForm(u8 a) {
     if (a != 0x10) {
-        gUnk_0203C7B0 = gUnk_0984D1F4[a];
+        gMapForm = gUnk_0984D1F4[a];
     } else {
-        gUnk_0203C7B0 = gUnk_0984D1F4[GetRandom() % 15];
+        gMapForm = gUnk_0984D1F4[GetRandom() % 15];
     }
 }
 
-u16 func_080E5564(void) {
-    return gUnk_0203C7B0.unk_01 + GetRandom() % (gUnk_0203C7B0.unk_02 - gUnk_0203C7B0.unk_01 + 1);
+u16 GetRandomMapWidth(void) {
+    return gMapForm.minWidth + GetRandom() % (gMapForm.maxWidth - gMapForm.minWidth + 1);
 }
 
-UnkStruct_080DFB7C* func_080E5590(u8 a) {
-    return &gUnk_02034F24[a];
+MapDoor* MapGetDoor(u8 a) {
+    return &gMapDoors[a];
 }
 
-MapCell* func_080E55A4(s16 x, s16 y) {
-    if (y < 0 || y >= gUnk_0203C7AC->unk_06 || x < 0 || x >= gUnk_0203C7AC->unk_04) {
+MapCell* MapFixGetCell(s16 x, s16 y) {
+    if (y < 0 || y >= gMapRoomState->rows || x < 0 || x >= gMapRoomState->cols) {
         return 0;
     }
-    return &gUnk_02034F38[gUnk_0203C7AC->unk_04 * y + x];
+    return &gMapFixCells[gMapRoomState->cols * y + x];
 }
 
-void func_080E55E4(const u8* src) {
+void MapFixLoadCellTypes(const u8* src) {
     s32 x;
     s32 y;
 
-    for (y = 0; y < gUnk_0203C7AC->unk_06; y++) {
-        for (x = 0; x < gUnk_0203C7AC->unk_04; x++) {
-            MapCell* e = func_080E55A4(x, y);
+    for (y = 0; y < gMapRoomState->rows; y++) {
+        for (x = 0; x < gMapRoomState->cols; x++) {
+            MapCell* e = MapFixGetCell(x, y);
 
-            e->unk_02 = src[gUnk_0203C7AC->unk_04 * y + x];
-            e->unk_10 = func_080E8668(e->unk_02);
+            e->type = src[gMapRoomState->cols * y + x];
+            e->maskTable = GetCellMaskTable(e->type);
 
-            switch (e->unk_02) {
+            switch (e->type) {
             case 0:
-                e->unk_08 = 0;
-                e->unk_0C = 0;
+                e->upperZ = 0;
+                e->lowerZ = 0;
                 break;
             case 1:
             case 3:
             case 5:
-                e->unk_08 = 0;
-                e->unk_0C = 0x100000;
+                e->upperZ = 0;
+                e->lowerZ = 0x100000;
                 break;
             case 2:
             case 4:
             case 6:
-                e->unk_08 = -0x100000;
-                e->unk_0C = 0;
+                e->upperZ = -0x100000;
+                e->lowerZ = 0;
                 break;
             default:
-                e->unk_08 = -0x100000;
-                e->unk_0C = 0x100000;
+                e->upperZ = -0x100000;
+                e->lowerZ = 0x100000;
                 break;
             }
         }
     }
 }
 
-void func_080E56B4(void* a) {
-    UnkStruct_080E56B4* q = a;
-    UnkStruct_0203C7B8* e;
+void MapFixCreateGimmicks(void* a) {
+    MapFixedGmk* q = a;
+    MapGmkPlacement* e;
     FldPos v;
     s32 x;
     s32 n;
@@ -3123,23 +3123,23 @@ void func_080E56B4(void* a) {
     if (q == 0) {
         return;
     }
-    e = gUnk_0203C7B8;
+    e = gMapGmkPlacements;
 
-    while (q->unk_00 != 0xFF) {
-        v.x = q->unk_04;
-        x = q->unk_08;
-        v.y = v.z = v.unk_0C = 0;
+    while (q->defIndex != 0xFF) {
+        v.x = q->x;
+        x = q->y;
+        v.y = v.z = v.ground = 0;
         v.y = x;
-        e->unk_00 = 2;
-        n = q->unk_00;
-        e->unk_14 = &gUnk_09856FB4[n];
-        e->unk_04 = v;
+        e->flags = 2;
+        n = q->defIndex;
+        e->def = &gMapGmkDefs[n];
+        e->pos = v;
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGmk00, e);
         q++;
         e++;
     }
 
-    if (gUnk_0203C590.unk_06 != 0xFE) {
+    if (gMapFloorState.room != 0xFE) {
         return;
     }
 
@@ -3153,15 +3153,15 @@ void func_080E56B4(void* a) {
 
     v.y = x;
     n = 0;
-    v.unk_0C = n;
+    v.ground = n;
     v.z = n;
-    e->unk_00 = n;
-    e->unk_14 = &gUnk_0984C1CC;
-    e->unk_04 = v;
-    TaskCreate(&gFieldState->tasks, gUnk_0984C1CC.desc, e);
+    e->flags = n;
+    e->def = &gMapGmk04Def;
+    e->pos = v;
+    TaskCreate(&gFieldState->tasks, gMapGmk04Def.desc, e);
     e++;
 
-    if (func_080DF750() != 0) {
+    if (GetProgressFloor() != 0) {
         if ((gGameState.flags & 8) || (s8)gGameState.floor != 0) {
             v.x = 0x1F000;
             x = 0x14000;
@@ -3172,16 +3172,16 @@ void func_080E56B4(void* a) {
 
         v.y = x;
         n = 0;
-        v.unk_0C = n;
+        v.ground = n;
         v.z = n;
-        e->unk_00 = n;
-        e->unk_14 = &gUnk_0984C23C;
-        e->unk_04 = v;
-        TaskCreate(&gFieldState->tasks, gUnk_0984C23C.desc, e);
+        e->flags = n;
+        e->def = &gMapGmk06Def;
+        e->pos = v;
+        TaskCreate(&gFieldState->tasks, gMapGmk06Def.desc, e);
     }
 }
 
-void func_080E5800(void) {
+void MapFixSnapCamera(void) {
     u16 sx;
     u16 sy;
 
@@ -3194,30 +3194,30 @@ void func_080E5800(void) {
     RedrawBgMapAt(1, sx, sy);
 }
 
-void func_080E5868(UnkStruct_09EF8370* p) {
+void MapFixInitCells(MapFixedDef* p) {
     s32 i;
     s32 n;
 
-    gUnk_02034F38 = EwramAlloc(sizeof(MapCell) * 0xC00);
-    n = gUnk_0203C7AC->unk_04 * gUnk_0203C7AC->unk_06;
+    gMapFixCells = EwramAlloc(sizeof(MapCell) * 0xC00);
+    n = gMapRoomState->cols * gMapRoomState->rows;
 
     for (i = 0; i < n; i++) {
-        gUnk_02034F38[i].unk_00 = 0;
-        gUnk_02034F38[i].unk_02 = 11;
-        gUnk_02034F38[i].unk_03 = 7;
-        gUnk_02034F38[i].unk_04 = 0;
-        gUnk_02034F38[i].unk_05 = 0;
-        gUnk_02034F38[i].unk_14 = 0;
-        gUnk_02034F38[i].unk_18 = 0;
-        gUnk_02034F38[i].unk_1C = 0;
+        gMapFixCells[i].flags = 0;
+        gMapFixCells[i].type = 11;
+        gMapFixCells[i].bg3Piece = 7;
+        gMapFixCells[i].bg2Piece = 0;
+        gMapFixCells[i].bg1Piece = 0;
+        gMapFixCells[i].bg3Map = 0;
+        gMapFixCells[i].bg2Map = 0;
+        gMapFixCells[i].bg1Map = 0;
     }
-    func_080E55E4(p->unk_28);
+    MapFixLoadCellTypes(p->cellTypes);
 }
 
-void func_080E58E4(void) {
-    EwramFree(gUnk_02034F38);
+void MapFixFreeCells(void) {
+    EwramFree(gMapFixCells);
 }
 
-MapCell* func_080E58F8(s16 a, s16 b) {
-    return func_080E55A4(a, b);
+MapCell* MapFixCellAt(s16 a, s16 b) {
+    return MapFixGetCell(a, b);
 }

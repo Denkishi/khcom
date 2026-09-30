@@ -46,16 +46,16 @@
 #include "poo_api.h"
 #include "btl_api.h"
 
-extern UnkStruct_0203C590 gUnk_0203C590;
+extern MapFloorState gMapFloorState;
 
-extern const UnkStruct_096FE034Entry gUnk_096FE020[5];
-extern const UnkStruct_096FE034 gUnk_096FE034;
-extern const UnkStruct_096FE034 gUnk_096FE04C;
-extern const UnkStruct_096FE034 gUnk_096FE064;
+extern const BosMapanimeFrame gBosBoogieMapanimeFrames[5];
+extern const BosMapanimeDef gUnk_096FE034;
+extern const BosMapanimeDef gUnk_096FE04C;
+extern const BosMapanimeDef gUnk_096FE064;
 
 typedef struct BoogieExplosiondiceWork {
-    u32 unk_000;
-    u16 unk_004;
+    u32 state;
+    u16 timer;
     u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
@@ -63,7 +63,7 @@ typedef struct BoogieExplosiondiceWork {
     AnimState anim;
     TaskPool tasks;
     BtlObj obj;
-    u32 unk_150;
+    u32 vz;
     u32 unk_154;
     u8 unk_158;
     u8 unk_159[0x3];
@@ -80,59 +80,59 @@ typedef struct BoogieDiskWork {
     AnimState anim;
     TaskPool tasks;
     BtlObj obj;
-    s32 unk_150;
-    s32 unk_154;
-    s32 unk_158;
-    u8 unk_15C;
+    s32 vz;
+    s32 vx;
+    s32 vy;
+    u8 angle;
     u8 unk_15D[0x3];
 } BoogieDiskWork;
 
 typedef struct UrsulaWork {
     u32 state;
-    u16 unk_004;
+    u16 timer;
     u8 unk_006[0x2];
     TaskPool tasks;
     Task* tako;
     Task* tako2;
     BtlObj obj;
     const u16** mapBlocks;
-    s32 unk_138;
-    s32 unk_13C;
-    u16 unk_140;
-    u16 unk_142;
+    s32 bobZ;
+    s32 bobTarget;
+    u16 bobTimer;
+    u16 gimmickTimer;
     u8 unk_144[0x4];
-    u32 unk_148;
-    u32 unk_14C;
-    u32 unk_150;
-    u32 unk_154;
-    u16 unk_158;
-    u16 unk_15A;
+    u32 gimmickCameraX;
+    u32 gimmickViewY;
+    u32 sinkZ;
+    u32 gimmickCameraY;
+    u16 sinkSteps;
+    u16 riseSteps;
     u16 unk_15C;
-    u16 unk_15E;
-    u8 unk_160;
+    u16 gimmickDelay;
+    u8 takoRecoverPending;
     u8 unk_161[0x3];
 } UrsulaWork;
 
 typedef struct BoogieMapanimeWork {
-    UnkStruct_080DDDDC unk_000[3];
+    BosMapanimeState anims[3];
 } BoogieMapanimeWork;
 
 typedef struct UrsulaThunderWork {
-    u16 unk_000;
+    u16 strikeStarted;
     u8 unk_002[0x2];
     s32 x;
     s32 y;
     s32 z;
 } UrsulaThunderWork;
 
-void func_080DD69C(s32 a);
+void BosUrsulaStartAttack(s32 a);
 
-u8 func_080DD754(void);
-u8 func_080DD794(void);
+u8 BosUrsulaIsAttacking(void);
+u8 BosUrsulaIsCharging(void);
 
-u16 func_080DBE64(void);
-u8 func_080DA4DC(BoogieExplosiondiceWork* work);
-u8 func_080DDE74(UnkStruct_080DDDDC* p);
+u16 BosUrsulaGetCardInterval(void);
+u8 BosBoogieExplosiondiceIsHeld(BoogieExplosiondiceWork* work);
+u8 BosMapanimeIsAtEnd(BosMapanimeState* p);
 void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work);
 void task_bos_boogie_disk_3(BoogieDiskWork* work);
 void task_bos_ursula_3(UrsulaWork* work);
@@ -140,7 +140,7 @@ void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work);
 void task_bos_ursula_thunder_0(UrsulaThunderWork* work);
 u8 task_bos_ursula_thunder_1(UrsulaThunderWork* work);
 
-extern UnkStruct_0203C7AC* gUnk_0203C7AC;
+extern MapRoomState* gMapRoomState;
 
 typedef struct UrsulaBubbleSingleWork {
     void* tiles;
@@ -152,10 +152,10 @@ typedef struct UrsulaBubbleSingleWork {
     BtlObj obj;
     u16 timer;
     u8 unk_136[0x2];
-    u32 unk_138;
+    u32 state;
     u16 angle;
     u16 targetAngle;
-    s32 unk_140;
+    s32 speed;
     u8 unk_144[0x4];
 } UrsulaBubbleSingleWork;
 
@@ -186,29 +186,29 @@ typedef struct UrsulaTakoWork {
     void* palette;
     void* palette2;
     AnimState anim;
-    u16 unk_024;
+    u16 animBase;
     u8 unk_026[0x2];
     BtlObj obj;
     u32 state;
-    u16 unk_13C;
-    u8 unk_13E;
+    u16 timer;
+    u8 isLeft;
     u8 unk_13F[0x1];
     Collider collider;
     Collider collider2;
-    s32 unk_1F8;
-    s32 unk_1FC;
-    s32 unk_200;
+    s32 collider2OffsetX;
+    s32 offsetX;
+    s32 offsetZ;
 } UrsulaTakoWork;
 
 extern u8 gUnk_0979D0B6[];
-extern const UnkStruct_096FE034Entry gUnk_096FE1EC[6];
-extern const UnkStruct_096FE034Entry gUnk_096FE204[12];
-extern const UnkStruct_096FE034Entry gUnk_096FE234[5];
-extern const UnkStruct_096FE034Entry gUnk_096FE248[5];
-extern const UnkStruct_096FE034Entry gUnk_096FE25C[1];
-extern const UnkStruct_096FE034 gUnk_096FE278;
-extern const UnkStruct_096FE034 gUnk_096FE290;
-extern const UnkStruct_096FE034 gUnk_096FE2A8;
+extern const BosMapanimeFrame gBosUrsulaMapanimeIdleFrames[6];
+extern const BosMapanimeFrame gBosUrsulaMapanimeWindupFrames[12];
+extern const BosMapanimeFrame gBosUrsulaMapanimeBubbleFrames[5];
+extern const BosMapanimeFrame gBosUrsulaMapanimeChargeFrames[5];
+extern const BosMapanimeFrame gBosUrsulaMapanimeRecoverFrames[1];
+extern const BosMapanimeDef gBosUrsulaMapanimeWindup;
+extern const BosMapanimeDef gBosUrsulaMapanimeBubble;
+extern const BosMapanimeDef gBosUrsulaMapanimeCharge;
 extern u8 gUnk_0984B0D8[];
 
 extern EventKeyList gEventKeyLists[];
@@ -222,7 +222,7 @@ typedef struct BoogieMapWork {
 void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg);
 
 extern const EmyKind gBosBoogieKnifereaderEmyKind;
-u8 func_080DABFC(s32* x, s32* y, s16 w, s16 h, s32 z);
+u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z);
 void task_bos_boogie_dice_3(BoogieDiceWork* work);
 
 extern const u8 gUnk_0984D134[][8];
@@ -230,41 +230,41 @@ extern u8 gSakuTiles[];
 extern u8 gBoss02objPalette[];
 extern UrsulaWork* gUrsulaWork;
 
-void func_080DB978(UrsulaWork* work);
+void BosUrsulaUpdateMapBlocks(UrsulaWork* work);
 void task_bos_ursula_2(UrsulaWork* work);
-u16 func_080DD7C4(UrsulaBubbleWork* work);
-u16 func_080DD854(UrsulaBubbleWork* work);
+u16 BosUrsulaSpawnThreeBubbles(UrsulaBubbleWork* work);
+u16 BosUrsulaSpawnSixBubbles(UrsulaBubbleWork* work);
 void task_bos_ursula_bubble_0(UrsulaBubbleWork* work);
-u16 func_080DD8A8(UrsulaBubbleWork* work);
+u16 BosUrsulaSpawnTenBubbles(UrsulaBubbleWork* work);
 u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work);
 
-u8 func_080DBA14(UrsulaWork* work);
-u8 func_080DBC68(UrsulaWork* work);
-void func_080DBC00(UrsulaWork* work);
-s32 func_080DBCC0(UrsulaWork* work);
-s32 func_080DBCEC(UrsulaWork* work);
-s32 func_080DBDC0(UrsulaWork* work);
-void func_080DBDEC(UrsulaWork* work);
-void func_080DBE18(UrsulaWork* work);
+u8 BosUrsulaIsGuarded(UrsulaWork* work);
+u8 BosUrsulaMoveForward(UrsulaWork* work);
+void BosUrsulaUpdateBob(UrsulaWork* work);
+s32 BosUrsulaChooseAttackPhase0(UrsulaWork* work);
+s32 BosUrsulaChooseAttackPhase1(UrsulaWork* work);
+s32 BosUrsulaChooseAttack(UrsulaWork* work);
+void BosUrsulaRecoverPendingTakos(UrsulaWork* work);
+void BosUrsulaUpdateTakoRecovery(UrsulaWork* work);
 void task_bos_ursula_tako_3(UrsulaTakoWork* work);
-u8 func_080DD1FC(UrsulaTakoWork* work);
-void func_080DD210(UrsulaTakoWork* work);
-u8 func_080DD230(UrsulaTakoWork* work);
-void func_080DD9B0(UrsulaBubbleWork* work);
+u8 BosUrsulaTakoIsBusy(UrsulaTakoWork* work);
+void BosUrsulaTakoEndDown(UrsulaTakoWork* work);
+u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work);
+void BosUrsulaPopBubbles(UrsulaBubbleWork* work);
 
 typedef struct UrsulaMapanimeWork {
-    UnkStruct_080DDDDC unk_000;
-    u32 unk_00C;
+    BosMapanimeState anim;
+    u32 attack;
     TaskPool tasks;
     Task* task;
-    u8 unk_028;
+    u8 attackSpawned;
     u8 unk_029[0x3];
 } UrsulaMapanimeWork;
 
 typedef struct UrsulaMapWork {
-    s32 unk_00;
-    s32 unk_04;
-    u16 unk_08;
+    s32 viewYMax;
+    s32 viewYMaxTarget;
+    u16 viewYMaxSteps;
     u8 unk_0A[0x2];
 } UrsulaMapWork;
 
@@ -280,12 +280,12 @@ typedef struct BoogieSakuWork {
     ObjTiles* tiles;
     ObjPalette* palette;
     AnimState anim;
-    u16 unk_020;
+    u16 openTimer;
     u8 unk_022[0x2];
     BoogieWork* boogie;
     TaskPool tasks;
     Task* task;
-    u8 unk_040;
+    u8 closePending;
     u8 unk_041[0x3];
 } BoogieSakuWork;
 
@@ -298,24 +298,24 @@ typedef struct BoogieKnifeWork {
     ObjPalette* palette2;
     AnimState anim;
     BtlObj obj;
-    s32 unk_13C;
-    s32 unk_140;
+    s32 vz;
+    s32 vx;
     u8 unk_144[0x4];
     u32 scaleX;
-    u32 unk_14C;
-    s32 unk_150;
-    s32 unk_154;
+    u32 drawOffsetX;
+    s32 gravity;
+    s32 bounceVz;
 } BoogieKnifeWork;
 
 typedef struct UrsulaBacktakoWork {
     ObjTiles* tiles;
     ObjPalette* palette;
     AnimState anim;
-    u16 unk_020;
-    u8 unk_022;
+    u16 animBase;
+    u8 isLeft;
     u8 unk_023[0x1];
-    u32 unk_024;
-    u32 unk_028;
+    u32 offsetX;
+    u32 offsetZ;
     u32 x;
     u32 y;
     u32 z;
@@ -334,30 +334,30 @@ typedef struct BoogieKaihukuWork {
     AnimState anim;
     u8 unk_02C[0x14];
     BtlObj obj;
-    u32 unk_150;
+    u32 vz;
     BoogieWork* boogie;
 } BoogieKaihukuWork;
 
-u16 func_080DDEA0(UnkStruct_080DDDDC* p);
-u8 func_080DC510(void);
-u8 func_080DC528(void);
-u8 func_080DC544(void);
-u8 func_080DC578(void);
+u16 BosMapanimeGetFrameIndex(BosMapanimeState* p);
+u8 BosUrsulaIsFacingLeft(void);
+u8 BosUrsulaIsGimmickActive(void);
+u8 BosUrsulaObjectsGone(void);
+u8 BosUrsulaIsGimmickStarting(void);
 u8 func_080DC5B0(void);
-u32 func_080DC5E8(void);
-u8 func_080DA73C(void);
-u8 func_080DB428(BoogieKnifeWork* work);
-u8 func_080DC628(void);
-s32 func_080DCA78(u8 a);
+u32 BosUrsulaGetHpPhase(void);
+u8 BosBoogieIsActorPastSaku(void);
+u8 BosBoogieKnifeIsLanded(BoogieKnifeWork* work);
+u8 BosUrsulaIsDefeated(void);
+s32 BosUrsulaGetTakoPlatformRadius(u8 a);
 void task_bos_ursula_border_0(UrsulaBorderWork* work);
 void task_bos_ursula_border_3(UrsulaBorderWork* work);
 u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work);
 void task_bos_ursula_backtako_3(UrsulaBacktakoWork* work);
-void func_080DA954(BoogieSakuWork* work, s32 a, u16 b);
+void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 a, u16 b);
 void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg);
 void task_bos_boogie_saku_3(BoogieSakuWork* work);
 void task_bos_boogie_knife_3(BoogieKnifeWork* work);
-u8 func_080DB438(BoogieKnifereaderWork* work);
+u8 BosBoogieAnyKnifeActive(BoogieKnifereaderWork* work);
 void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work);
 
 void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work);
@@ -369,7 +369,7 @@ void task_bos_ursula_thunder_2(void);
 void task_bos_ursula_thunder_3(void);
 void task_bos_ursula_map_3(void);
 s32 task_bos_ursula_border_1(void);
-void func_080DDD30(UrsulaBubbleSingleWork* work);
+void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work);
 u8 task_bos_ursula_bubble_1(UrsulaBubbleWork* work);
 void task_bos_ursula_bubble_2(UrsulaBubbleWork* work);
 void task_bos_ursula_bubble_3(UrsulaBubbleWork* work);
@@ -386,7 +386,7 @@ extern const EmyKind gBosUrsulaTakoEmyKind;
 u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work);
 void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work);
 
-void func_080DB04C(BoogieKnifeWork* work);
+void BosBoogieKnifeAttack(BoogieKnifeWork* work);
 
 u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work);
 void task_bos_ursula_0(UrsulaWork* work);
@@ -399,12 +399,12 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work);
 void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg);
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work);
 u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d);
-void func_080D9B6C(BoogieDiceWork* work);
+void BosBoogieDiceGrow(BoogieDiceWork* work);
 
 extern u8 gUnk_09796EAA[];
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work);
 
-extern const UnkStruct_096FE034 gUnk_096FE260;
+extern const BosMapanimeDef gBosUrsulaMapanimeIdle;
 
 void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg);
 extern u8 gKnifeTiles[];
@@ -419,13 +419,13 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
 extern u8 gUnk_0979666A[];
 extern u8 gUnk_0984AF98[];
 
-extern const EmyKind gUnk_096FDFC4;
-extern const EmyKind gUnk_096FE0C0;
-extern const EmyKind gUnk_096FDF54;
+extern const EmyKind gBosBoogieExplosiondiceEmyKind;
+extern const EmyKind gBosBoogieKnifeEmyKind;
+extern const EmyKind gBosBoogieDiceEmyKind;
 u8 task_bos_boogie_map_1(void);
 
 void task_bos_boogie_dice_2(BoogieDiceWork* work);
-u8 func_080D9B28(BoogieDiceWork* work);
+u8 BosBoogieDiceIsHeld(BoogieDiceWork* work);
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg);
 extern u8 gUnk_0979E344[];
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg);
@@ -436,7 +436,7 @@ void task_bos_ursula_border_2(UrsulaBorderWork* work);
 extern u8 gUnk_0979D090[];
 extern u8 gUnk_0979D8B8[];
 s32 strcmp(const char* a, const char* b);
-extern const UnkStruct_096FE034 gUnk_096FE2C0;
+extern const BosMapanimeDef gBosUrsulaMapanimeRecover;
 void RollBoogieDice(BoogieDiceWork* work);
 extern void* const gBoogieDiceFaces[6][3];
 extern u8 gUnk_097976DC[];
@@ -452,16 +452,16 @@ extern const EmyKind gBosBoogieKaihukuEmyKind;
 extern u8 gKaifukuTiles[];
 extern u8 gKaifukuPalette[];
 extern u8 gUnk_08F69BC4[];
-void func_080DB468(BoogieKnifereaderWork* work);
+void BosBoogieSpawnKnives(BoogieKnifereaderWork* work);
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
-void func_080DC9DC(s32* a, s32* b, s32* c, UrsulaTakoWork* d);
-extern const u8 gUnk_0984B844[];
-extern const u8 gUnk_0984B851[];
+void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d);
+extern const u8 gSoraWorldExitEvents[];
+extern const u8 gRikuWorldExitEvents[];
 void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work);
-void func_080DD248(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d);
+void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d);
 void task_bos_boogie_disk_2(BoogieDiskWork* work);
 void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work);
 
-s32 func_080DBD44(UrsulaWork* work);
+s32 BosUrsulaChooseAttackPhase2(UrsulaWork* work);
 
 #endif /* GUARD_BOS4_H */

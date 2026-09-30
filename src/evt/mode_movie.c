@@ -29,40 +29,40 @@ extern u8 gUnkEu_0883EE08[];
 extern u8 gUnkEu_0883F218[];
 #endif
 
-vu16 gUnk_02034938;
-s32 gUnk_0203493C;
+vu16 gMovieModeState;
+s32 gMovieId;
 u16 gUnk_02034940;
-volatile s16 gUnk_02034942;
-volatile s16 gUnk_02034944;
-volatile u16 gUnk_02034946;
-MovieSub* volatile gUnk_02034948;
-MovieSub* volatile gUnk_0203494C;
-void* gUnk_02034950;
-volatile s16 gUnk_02034954;
-volatile u16 gUnk_02034956;
-volatile u16 gUnk_02034958;
-volatile u16 gUnk_0203495A;
-volatile s16 gUnk_0203495C;
-volatile u16 gUnk_0203495E;
-volatile u16 gUnk_02034960;
+volatile s16 gMovieFrame;
+volatile s16 gMovieSubIndex;
+volatile u16 gMovieSubCount;
+MovieSub* volatile gMovieSubUpper;
+MovieSub* volatile gMovieSubLower;
+void* gMovieSubs;
+volatile s16 gMovieSubUpperTimer;
+volatile u16 gMovieSubUpperLength;
+volatile u16 gMovieFlags;
+volatile u16 gMovieSubUpperAlpha;
+volatile s16 gMovieSubLowerTimer;
+volatile u16 gMovieSubLowerLength;
+volatile u16 gMovieSubLowerAlpha;
 
 void mode_movie_0(s32 a) {
-    gUnk_02034938 = 0;
-    gUnk_0203493C = a;
+    gMovieModeState = 0;
+    gMovieId = a;
     gUnk_02034940 = 0;
-    gUnk_02034942 = 0;
-    gUnk_02034944 = 0;
-    gUnk_02034946 = 0;
-    gUnk_02034950 = 0;
-    gUnk_02034958 = 0;
-    gUnk_02034954 = 0;
-    gUnk_02034956 = 0;
-    gUnk_0203495A = 0;
-    gUnk_02034948 = 0;
-    gUnk_0203495C = 0;
-    gUnk_0203495E = 0;
-    gUnk_02034960 = 0;
-    gUnk_0203494C = 0;
+    gMovieFrame = 0;
+    gMovieSubIndex = 0;
+    gMovieSubCount = 0;
+    gMovieSubs = 0;
+    gMovieFlags = 0;
+    gMovieSubUpperTimer = 0;
+    gMovieSubUpperLength = 0;
+    gMovieSubUpperAlpha = 0;
+    gMovieSubUpper = 0;
+    gMovieSubLowerTimer = 0;
+    gMovieSubLowerLength = 0;
+    gMovieSubLowerAlpha = 0;
+    gMovieSubLower = 0;
 }
 
 #ifdef VERSION_JP
@@ -73,68 +73,68 @@ void mode_movie_0(s32 a) {
 #define MOVIE_SUB_MAX_CHARS 40
 #endif
 
-s32 func_0805E93C(s32 arg) {
+s32 HandleMovieFrame(s32 arg) {
     s32 i;
     u16 keys;
 
     keys = ~REG_KEYINPUT;
 
     if ((keys & 0xF) == 0xF) {
-        gUnk_02034958 |= 4;
+        gMovieFlags |= 4;
         return 1;
     }
 
-    if (gUnk_02034950 != 0) {
+    if (gMovieSubs != 0) {
         for (i = 0; i < 2; i++) {
-            if (((MovieSub*)gUnk_02034950)[gUnk_02034944].unk_00 == gUnk_02034942) {
-                if (((MovieSub*)gUnk_02034950)[gUnk_02034944].unk_08 == 0) {
+            if (((MovieSub*)gMovieSubs)[gMovieSubIndex].frame == gMovieFrame) {
+                if (((MovieSub*)gMovieSubs)[gMovieSubIndex].line == 0) {
                     MovieSub* e;
 
-                    gUnk_02034948 = e = &((MovieSub*)gUnk_02034950)[gUnk_02034944];
-                    gUnk_02034958 |= 1;
-                    gUnk_02034954 = e->unk_0A;
+                    gMovieSubUpper = e = &((MovieSub*)gMovieSubs)[gMovieSubIndex];
+                    gMovieFlags |= 1;
+                    gMovieSubUpperTimer = e->duration;
 
-                    if (gUnk_02034944 < gUnk_02034946 - 1) {
-                        gUnk_02034944++;
+                    if (gMovieSubIndex < gMovieSubCount - 1) {
+                        gMovieSubIndex++;
                     }
 
-                    gUnk_02034956 = CountNonSpaceChars((TextChar*)gUnk_02034948->unk_04);
+                    gMovieSubUpperLength = CountNonSpaceChars((TextChar*)gMovieSubUpper->text);
 
-                    if (gUnk_02034956 > MOVIE_SUB_MAX_CHARS) {
-                        gUnk_02034956 = MOVIE_SUB_MAX_CHARS;
+                    if (gMovieSubUpperLength > MOVIE_SUB_MAX_CHARS) {
+                        gMovieSubUpperLength = MOVIE_SUB_MAX_CHARS;
                     }
                 } else {
                     MovieSub* e;
 
-                    gUnk_0203494C = e = &((MovieSub*)gUnk_02034950)[gUnk_02034944];
-                    gUnk_02034958 |= 2;
-                    gUnk_0203495C = e->unk_0A;
+                    gMovieSubLower = e = &((MovieSub*)gMovieSubs)[gMovieSubIndex];
+                    gMovieFlags |= 2;
+                    gMovieSubLowerTimer = e->duration;
 
-                    if (gUnk_02034944 < gUnk_02034946 - 1) {
-                        gUnk_02034944++;
+                    if (gMovieSubIndex < gMovieSubCount - 1) {
+                        gMovieSubIndex++;
                     }
 
-                    gUnk_0203495E = CountNonSpaceChars((TextChar*)e->unk_04);
+                    gMovieSubLowerLength = CountNonSpaceChars((TextChar*)e->text);
 
-                    if (gUnk_0203495E > MOVIE_SUB_MAX_CHARS) {
-                        gUnk_0203495E = MOVIE_SUB_MAX_CHARS;
+                    if (gMovieSubLowerLength > MOVIE_SUB_MAX_CHARS) {
+                        gMovieSubLowerLength = MOVIE_SUB_MAX_CHARS;
                     }
                 }
             }
         }
 
-        if (gUnk_02034954 > 0) {
-            gUnk_02034954--;
+        if (gMovieSubUpperTimer > 0) {
+            gMovieSubUpperTimer--;
         }
 
-        if (gUnk_0203495C > 0) {
-            gUnk_0203495C--;
+        if (gMovieSubLowerTimer > 0) {
+            gMovieSubLowerTimer--;
         }
     }
-    gUnk_02034942++;
+    gMovieFrame++;
     return 0;
 }
-void func_0805EA90(void) {
+void MovieVBlankIntr(void) {
     u16* oam;
 #ifndef VERSION_JP
     s16 x;
@@ -144,47 +144,47 @@ void func_0805EA90(void) {
     u32 attr0;
     u32 attr1;
 
-    if (gUnk_02034958 & 8) {
+    if (gMovieFlags & 8) {
         REG_DISPCNT = (DISPCNT_MODE_3 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON);
         MovieUpdate();
-        if (gUnk_02034950 != 0) {
-            if (gUnk_02034958 & 1) {
-                gUnk_02034958 &= ~1;
-                gUnk_0203495A = 0;
+        if (gMovieSubs != 0) {
+            if (gMovieFlags & 1) {
+                gMovieFlags &= ~1;
+                gMovieSubUpperAlpha = 0;
 #ifdef VERSION_JP
-                func_0806C490(gUnk_02034948->unk_04);
+                CopySjisGlyphsToVram(gMovieSubUpper->text);
 #else
-                func_0806CBAC(gUnk_02034948->unk_04, gUnk_02034968, 0);
+                CopyLatinGlyphsToVram(gMovieSubUpper->text, gMovieSubUpperWidths, 0);
 #endif
             }
-            if (gUnk_02034958 & 2) {
-                gUnk_02034958 &= ~2;
-                gUnk_02034960 = 0;
+            if (gMovieFlags & 2) {
+                gMovieFlags &= ~2;
+                gMovieSubLowerAlpha = 0;
 #ifdef VERSION_JP
-                func_0806C81C(gUnk_0203494C->unk_04, 0x100);
+                CopySjisGlyphsToVramAt(gMovieSubLower->text, 0x100);
 #else
-                func_0806CBAC(gUnk_0203494C->unk_04, gUnk_020349B8, 0x100);
+                CopyLatinGlyphsToVram(gMovieSubLower->text, gMovieSubLowerWidths, 0x100);
 #endif
             }
-            if (gUnk_02034954 > 0 || gUnk_0203495A != 0 ||
-                gUnk_0203495C > 0 || gUnk_02034960 != 0) {
+            if (gMovieSubUpperTimer > 0 || gMovieSubUpperAlpha != 0 ||
+                gMovieSubLowerTimer > 0 || gMovieSubLowerAlpha != 0) {
                 REG_DISPCNT |= DISPCNT_OBJ_ON;
                 REG_BLDCNT = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-                if (gUnk_0203495A < 16) {
-                    if (gUnk_0203495A == 0) {
+                if (gMovieSubUpperAlpha < 16) {
+                    if (gMovieSubUpperAlpha == 0) {
                         attr0 = 0x200;
                     } else {
-                        REG_BLDALPHA = ((16 - gUnk_0203495A) << 8) | gUnk_0203495A;
+                        REG_BLDALPHA = ((16 - gMovieSubUpperAlpha) << 8) | gMovieSubUpperAlpha;
                         attr0 = 0x400;
                     }
                 } else {
                     attr0 = 0;
                 }
-                if (gUnk_02034960 < 16) {
-                    if (gUnk_02034960 == 0) {
+                if (gMovieSubLowerAlpha < 16) {
+                    if (gMovieSubLowerAlpha == 0) {
                         attr1 = 0x200;
                     } else {
-                        REG_BLDALPHA = ((16 - gUnk_02034960) << 8) | gUnk_02034960;
+                        REG_BLDALPHA = ((16 - gMovieSubLowerAlpha) << 8) | gMovieSubLowerAlpha;
                         attr1 = 0x400;
                     }
                 } else {
@@ -194,13 +194,13 @@ void func_0805EA90(void) {
 #ifndef VERSION_JP
                 x = 0;
                 y = 0;
-                if (gUnk_02034956 != 0) {
-                    x = gUnk_02034948->unk_02;
-                    x += func_0805E848(gUnk_02034968, gUnk_02034956);
+                if (gMovieSubUpperLength != 0) {
+                    x = gMovieSubUpper->x;
+                    x += GetCenteredTextX(gMovieSubUpperWidths, gMovieSubUpperLength);
                     y = 0x74;
                 }
 #endif
-                for (i = 0; i < gUnk_02034956; i++) {
+                for (i = 0; i < gMovieSubUpperLength; i++) {
                     u16 tile;
                     u16 palette;
 #ifdef VERSION_JP
@@ -210,30 +210,30 @@ void func_0805EA90(void) {
 
                     tile = i * 4;
 #ifdef VERSION_JP
-                    sub = gUnk_02034948;
-                    x = sub->unk_02;
-                    palette = (sub->unk_0C & 15) << 12;
+                    sub = gMovieSubUpper;
+                    x = sub->x;
+                    palette = (sub->palette & 15) << 12;
                     oam[0] = attr0 | 0x74;
                     oam[1] = (x + i * 10) | 0x4000;
 #else
-                    palette = (gUnk_02034948->unk_0C & 15) << 12;
+                    palette = (gMovieSubUpper->palette & 15) << 12;
                     oam[0] = attr0 | y;
                     oam[1] = x | 0x4000;
 #endif
                     oam[2] = palette | (tile + 0x200);
                     oam += 4;
 #ifndef VERSION_JP
-                    x += gUnk_02034968[i];
+                    x += gMovieSubUpperWidths[i];
 #endif
                 }
 #ifndef VERSION_JP
-                if (gUnk_0203495E != 0) {
-                    x = gUnk_0203494C->unk_02;
-                    x += func_0805E848(gUnk_020349B8, gUnk_0203495E);
+                if (gMovieSubLowerLength != 0) {
+                    x = gMovieSubLower->x;
+                    x += GetCenteredTextX(gMovieSubLowerWidths, gMovieSubLowerLength);
                     y = 0x84;
                 }
 #endif
-                for (i = 0; i < gUnk_0203495E; i++) {
+                for (i = 0; i < gMovieSubLowerLength; i++) {
                     u16 tile;
                     u16 palette;
 #ifdef VERSION_JP
@@ -243,23 +243,23 @@ void func_0805EA90(void) {
 
                     tile = i * 4;
 #ifdef VERSION_JP
-                    sub = gUnk_0203494C;
-                    x = sub->unk_02;
-                    palette = (sub->unk_0C & 15) << 12;
+                    sub = gMovieSubLower;
+                    x = sub->x;
+                    palette = (sub->palette & 15) << 12;
                     oam[0] = attr1 | 0x84;
                     oam[1] = (x + i * 10) | 0x4000;
 #else
-                    palette = (gUnk_0203494C->unk_0C & 15) << 12;
+                    palette = (gMovieSubLower->palette & 15) << 12;
                     oam[0] = attr1 | y;
                     oam[1] = x | 0x4000;
 #endif
                     oam[2] = palette | (tile + 0x300);
                     oam += 4;
 #ifndef VERSION_JP
-                    x += gUnk_020349B8[i];
+                    x += gMovieSubLowerWidths[i];
 #endif
                 }
-                for (i = gUnk_02034956 + gUnk_0203495E;
+                for (i = gMovieSubUpperLength + gMovieSubLowerLength;
 #ifdef VERSION_JP
                      i < 48;
 #elif defined(VERSION_EU)
@@ -271,24 +271,24 @@ void func_0805EA90(void) {
                     oam[0] = 0x200;
                     oam += 4;
                 }
-                if (gUnk_02034954 > 0) {
-                    if (gUnk_0203495A < 16) {
-                        gUnk_0203495A += 4;
+                if (gMovieSubUpperTimer > 0) {
+                    if (gMovieSubUpperAlpha < 16) {
+                        gMovieSubUpperAlpha += 4;
                     }
-                } else if (gUnk_0203495A != 0) {
-                    gUnk_0203495A -= 4;
-                    if (gUnk_0203495A == 0) {
-                        gUnk_02034956 = 0;
+                } else if (gMovieSubUpperAlpha != 0) {
+                    gMovieSubUpperAlpha -= 4;
+                    if (gMovieSubUpperAlpha == 0) {
+                        gMovieSubUpperLength = 0;
                     }
                 }
-                if (gUnk_0203495C > 0) {
-                    if (gUnk_02034960 < 16) {
-                        gUnk_02034960 += 4;
+                if (gMovieSubLowerTimer > 0) {
+                    if (gMovieSubLowerAlpha < 16) {
+                        gMovieSubLowerAlpha += 4;
                     }
-                } else if (gUnk_02034960 != 0) {
-                    gUnk_02034960 -= 4;
-                    if (gUnk_02034960 == 0) {
-                        gUnk_0203495E = 0;
+                } else if (gMovieSubLowerAlpha != 0) {
+                    gMovieSubLowerAlpha -= 4;
+                    if (gMovieSubLowerAlpha == 0) {
+                        gMovieSubLowerLength = 0;
                     }
                 }
             } else {
@@ -302,7 +302,7 @@ void func_0805EA90(void) {
 void mode_movie_1(void) {
     void* p;
 
-    switch (gUnk_02034938) {
+    switch (gMovieModeState) {
     case 0: {
         s32 fill;
 
@@ -310,15 +310,15 @@ void mode_movie_1(void) {
         gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
         fill = 0;
         CpuSet(&fill, (void*)0x06000000, 0x05006000);
-        gUnk_02034938++;
+        gMovieModeState++;
         break;
     }
     case 1:
-        gUnk_02034938++;
+        gMovieModeState++;
         break;
     case 2:
         m4aSoundVSyncOff();
-        gVBlankHandlerOverride = func_0805EA90;
+        gVBlankHandlerOverride = MovieVBlankIntr;
         IwramHeapInit(GetIwramHeapStart(), GetIwramHeapSize());
         EwramHeapInit(GetEwramHeapStart(), GetEwramHeapSize());
         SetEwramHeapName(sMovieHeapName);
@@ -327,80 +327,80 @@ void mode_movie_1(void) {
         CpuSet(gUnk_09614718, (void*)0x05000220, 16);
         MovieSetCallbacks(IwramAlloc, EwramAlloc, IwramFree, EwramFree);
 
-        switch (gUnk_0203493C) {
+        switch (gMovieId) {
         case 1:
             p = gUnk_0815C3EC;
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                gUnk_02034950 = gUnkEu_0883E040;
-                gUnk_02034946 = 3;
+                gMovieSubs = gUnkEu_0883E040;
+                gMovieSubCount = 3;
                 break;
             case 1:
-                gUnk_02034950 = gUnkEu_0883E454;
-                gUnk_02034946 = 4;
+                gMovieSubs = gUnkEu_0883E454;
+                gMovieSubCount = 4;
                 break;
             case 2:
-                gUnk_02034950 = gUnkEu_0883E8D4;
-                gUnk_02034946 = 4;
+                gMovieSubs = gUnkEu_0883E8D4;
+                gMovieSubCount = 4;
                 break;
             case 3:
-                gUnk_02034950 = gUnkEu_0883ECE8;
-                gUnk_02034946 = 4;
+                gMovieSubs = gUnkEu_0883ECE8;
+                gMovieSubCount = 4;
                 break;
             case 4:
             default:
-                gUnk_02034950 = gUnkEu_0883F0F8;
-                gUnk_02034946 = 4;
+                gMovieSubs = gUnkEu_0883F0F8;
+                gMovieSubCount = 4;
                 break;
             }
 #else
-            gUnk_02034950 = gUnk_0886AB40;
-            gUnk_02034946 = 3;
+            gMovieSubs = gUnk_0886AB40;
+            gMovieSubCount = 3;
 #endif
             break;
         case 2:
             p = gUnk_084E0F34;
-            gUnk_02034950 = 0;
-            gUnk_02034946 = 0;
+            gMovieSubs = 0;
+            gMovieSubCount = 0;
             break;
         case 3:
             p = gUnk_084F4660;
-            gUnk_02034950 = 0;
-            gUnk_02034946 = 0;
+            gMovieSubs = 0;
+            gMovieSubCount = 0;
             break;
         case 4:
             p = gUnk_0855CCB4;
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                gUnk_02034950 = gUnkEu_0883E070;
-                gUnk_02034946 = 14;
+                gMovieSubs = gUnkEu_0883E070;
+                gMovieSubCount = 14;
                 break;
             case 1:
-                gUnk_02034950 = gUnkEu_0883E494;
-                gUnk_02034946 = 14;
+                gMovieSubs = gUnkEu_0883E494;
+                gMovieSubCount = 14;
                 break;
             case 2:
-                gUnk_02034950 = gUnkEu_0883E914;
-                gUnk_02034946 = 14;
+                gMovieSubs = gUnkEu_0883E914;
+                gMovieSubCount = 14;
                 break;
             case 3:
-                gUnk_02034950 = gUnkEu_0883ED28;
-                gUnk_02034946 = 14;
+                gMovieSubs = gUnkEu_0883ED28;
+                gMovieSubCount = 14;
                 break;
             case 4:
             default:
-                gUnk_02034950 = gUnkEu_0883F138;
-                gUnk_02034946 = 14;
+                gMovieSubs = gUnkEu_0883F138;
+                gMovieSubCount = 14;
                 break;
             }
 #else
-            gUnk_02034950 = gUnk_0886AB90;
+            gMovieSubs = gUnk_0886AB90;
 #ifdef VERSION_JP
-            gUnk_02034946 = 12;
+            gMovieSubCount = 12;
 #else
-            gUnk_02034946 = 14;
+            gMovieSubCount = 14;
 #endif
 #endif
             break;
@@ -412,49 +412,49 @@ void mode_movie_1(void) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                gUnk_02034950 = gUnkEu_0883E150;
-                gUnk_02034946 = 10;
+                gMovieSubs = gUnkEu_0883E150;
+                gMovieSubCount = 10;
                 break;
             case 1:
-                gUnk_02034950 = gUnkEu_0883E574;
-                gUnk_02034946 = 12;
+                gMovieSubs = gUnkEu_0883E574;
+                gMovieSubCount = 12;
                 break;
             case 2:
-                gUnk_02034950 = gUnkEu_0883E9F4;
-                gUnk_02034946 = 11;
+                gMovieSubs = gUnkEu_0883E9F4;
+                gMovieSubCount = 11;
                 break;
             case 3:
-                gUnk_02034950 = gUnkEu_0883EE08;
-                gUnk_02034946 = 10;
+                gMovieSubs = gUnkEu_0883EE08;
+                gMovieSubCount = 10;
                 break;
             case 4:
             default:
-                gUnk_02034950 = gUnkEu_0883F218;
-                gUnk_02034946 = 11;
+                gMovieSubs = gUnkEu_0883F218;
+                gMovieSubCount = 11;
                 break;
             }
 #else
-            gUnk_02034950 = gUnk_0886AC70;
+            gMovieSubs = gUnk_0886AC70;
 #ifdef VERSION_JP
-            gUnk_02034946 = 8;
+            gMovieSubCount = 8;
 #else
-            gUnk_02034946 = 10;
+            gMovieSubCount = 10;
 #endif
 #endif
             break;
 #ifndef VERSION_EU
         default:
             p = gUnk_0855CCB4;
-            gUnk_02034950 = gUnk_0886AB40;
-            gUnk_02034946 = 3;
+            gMovieSubs = gUnk_0886AB40;
+            gMovieSubCount = 3;
             break;
 #endif
         }
 
         if (MovieStart(p)) {
-            gUnk_02034958 |= 8;
-            MoviePlay(func_0805E93C, 0);
-            gUnk_02034958 &= 0xFFF7u;
+            gMovieFlags |= 8;
+            MoviePlay(HandleMovieFrame, 0);
+            gMovieFlags &= 0xFFF7u;
         }
 
         MovieClose();
@@ -475,7 +475,7 @@ void mode_movie_1(void) {
         gVBlankHandlerOverride = 0;
         m4aSoundInit();
         m4aSoundVSyncOn();
-        gUnk_02034938++;
+        gMovieModeState++;
         break;
     case 3: {
         s32 fill;
@@ -483,26 +483,26 @@ void mode_movie_1(void) {
         fill = 0;
         CpuSet(&fill, (void*)0x06000000, 0x05006000);
 
-        if (gUnk_02034958 & 4) {
+        if (gMovieFlags & 4) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else
             SoftReset(0xFF);
 #endif
 #ifdef VERSION_EU
-        } else if (gUnk_03006C10 & 0x8000) {
+        } else if (gDebugFlags & 0x8000) {
             ModeRequest(&gModeMovieDebugEu, 0);
 #endif
         } else {
-            switch (gUnk_0203493C) {
+            switch (gMovieId) {
             case 1:
-                func_0806180C(0);
+                RequestEventMode(0);
                 break;
             case 2:
-                func_0806180C(26);
+                RequestEventMode(26);
                 break;
             case 3:
-                func_0806180C(57);
+                RequestEventMode(57);
                 break;
             case 4:
                 ModeRequest(&gModeStaffRoll, 0);
@@ -515,7 +515,7 @@ void mode_movie_1(void) {
                 break;
             }
         }
-        gUnk_02034938++;
+        gMovieModeState++;
         break;
     }
     }
@@ -526,8 +526,8 @@ void mode_movie_2(void) {
 }
 
 #ifndef VERSION_JP
-u16 gUnk_02034968[MOVIE_SUB_MAX_CHARS] __attribute__((aligned(8)));
-u16 gUnk_020349B8[MOVIE_SUB_MAX_CHARS] __attribute__((aligned(8)));
+u16 gMovieSubUpperWidths[MOVIE_SUB_MAX_CHARS] __attribute__((aligned(8)));
+u16 gMovieSubLowerWidths[MOVIE_SUB_MAX_CHARS] __attribute__((aligned(8)));
 #endif
 
 Mode gModeMovie = {

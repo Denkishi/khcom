@@ -5,14 +5,14 @@
 
 struct TutorialWork;
 
-void func_0805DA64(u16 a);
-void func_0805DA98(u16 a);
-void func_0805DAB4(void);
-void func_0805DACC(struct TutorialWork* p, u16 b, u32 c);
-void func_0805DADC(struct TutorialWork* p, u16 b, u32 c);
-void func_0805DAEC(void);
-void func_0805DAF8(struct TutorialWork* p, u16 b, u32 c);
-void func_0805DB04(struct TutorialWork* p, u16 b, u16 c, u16 d);
-void func_0805DB28(struct TutorialWork* p);
+void TutorialOpenMessage(u16 a);
+void TutorialOpenPersistentMessage(u16 a);
+void TutorialRestoreBgMode(void);
+void TutorialQueueMessage(struct TutorialWork* p, u16 b, u32 c);
+void TutorialQueuePersistentMessage(struct TutorialWork* p, u16 b, u32 c);
+void TutorialCloseMessage(void);
+void TutorialWait(struct TutorialWork* p, u16 b, u32 c);
+void TutorialShowArrow(struct TutorialWork* p, u16 b, u16 c, u16 d);
+void TutorialHideArrow(struct TutorialWork* p);
 
 #endif

@@ -3,7 +3,7 @@ types:
   MapAnmEntry:
     header: map.h
     fields:
-    - name: unk_00
+    - name: script
       type: void*
     - name: unk_04
       type: void*
@@ -58,17 +58,17 @@ types:
       type: u8
     - name: unk_03
       type: u8
-  UnkStruct_080E56B4:
+  MapFixedGmk:
     header: map_room_types.h
     fields:
-    - name: unk_00
+    - name: defIndex
       type: u8
     - name: unk_01
       type: u8
       count: 3
-    - name: unk_04
+    - name: x
       type: s32
-    - name: unk_08
+    - name: y
       type: s32
   UnkStruct_080E87EC:
     header: map.h
@@ -88,36 +88,36 @@ types:
     - name: unk_0A
       type: u8
       count: 2
-  UnkStruct_080E8864:
+  MapDecorRule:
     header: map_room_types.h
     fields:
-    - name: unk_00
+    - name: pattern
       type: const u8*
-    - name: unk_04
+    - name: width
       type: u8
-    - name: unk_05
+    - name: height
       type: u8
-    - name: unk_06
+    - name: chance
       type: u8
     - name: unk_07
       type: u8
-    - name: unk_08
+    - name: pieces
       type: const u8*
-    - name: unk_0C
+    - name: tilemap
       type: u16*
-  UnkStruct_080EC760Entry:
+  MapFixedCollider:
     header: map_room_types.h
     fields:
-    - name: unk_00
+    - name: radius
       type: u16
     - name: unk_02
       type: u8
       count: 2
-    - name: unk_04
+    - name: x
       type: s32
-    - name: unk_08
+    - name: y
       type: s32
-  UnkStruct_09EF70D0:
+  MapRoomDef:
     header: map_room_types.h
     fields:
     - name: palette
@@ -147,19 +147,19 @@ types:
       type: u16*
     - name: map
       type: u16*
-    - name: unk_24
-      type: UnkStruct_080E8864*
-    - name: unk_28
-      type: UnkStruct_080E8864*
-    - name: unk_2C
+    - name: layer1DecorRules
+      type: MapDecorRule*
+    - name: layer2DecorRules
+      type: MapDecorRule*
+    - name: tileAnims
       type: void*
-    - name: unk_30
+    - name: soraEvents
       type: s32*
-    - name: unk_34
+    - name: rikuEvents
       type: s32*
     - name: unk_38
       type: u16
-  UnkStruct_09EF8370:
+  MapFixedDef:
     header: map_room_types.h
     fields:
     - name: palette
@@ -196,28 +196,28 @@ types:
     - name: unk_26
       type: u8
       count: 2
-    - name: unk_28
+    - name: cellTypes
       type: const u8*
-    - name: unk_2C
-      type: struct UnkStruct_080E56B4*
-    - name: unk_30
-      type: struct UnkStruct_080EC760Entry*
+    - name: gimmicks
+      type: struct MapFixedGmk*
+    - name: colliders
+      type: struct MapFixedCollider*
     - name: unk_34
       type: u16
     - name: unk_36
       type: u8
       count: 2
-    - name: unk_38
+    - name: stairX
       type: s32
-    - name: unk_3C
+    - name: stairY
       type: s32
-    - name: unk_40
+    - name: stair2X
       type: s32
-    - name: unk_44
+    - name: stair2Y
       type: s32
-    - name: unk_48
+    - name: spawnX
       type: s32
-    - name: unk_4C
+    - name: spawnY
       type: s32
     - name: unk_50
       type: u8
@@ -288,7 +288,7 @@ entries:
     address: 0x09829CA8
 - name: map_room_00
   symbol: gUnk_0984D2D8
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_0998FF44
     paletteSize: 96
@@ -302,11 +302,11 @@ entries:
     map3: gUnk_09968144
     map2: gUnk_09968944
     map: gUnk_09969944
-    unk_24: 0
-    unk_28: 0
-    unk_2C: 0
-    unk_30: gUnk_0984D2D4
-    unk_34: gUnk_0984D2D4
+    layer1DecorRules: 0
+    layer2DecorRules: 0
+    tileAnims: 0
+    soraEvents: gUnk_0984D2D4
+    rikuEvents: gUnk_0984D2D4
     unk_38: 13
   index: [0, 13]
   us:
@@ -1276,7 +1276,7 @@ entries:
   eu:
     address: 0x0982A6BC
 - name: gUnk_0984DCF0
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom01Unk24Pattern00, 2, 3, 100, 0, gMapRoom01Unk24Pieces00, gUnk_0996A444+0x800]
@@ -1462,7 +1462,7 @@ entries:
   eu:
     address: 0x0982A934
 - name: gUnk_0984DF68
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom01Unk28Check00, 1, 2, 100, 0, gMapRoom01Unk28Pieces00, gUnk_0996BC44+0x300]
@@ -1480,7 +1480,7 @@ entries:
     address: 0x0982A93C
 - name: map_room_01
   symbol: gUnk_0984DFD8
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_0998FFA4
     paletteSize: 352
@@ -1494,11 +1494,11 @@ entries:
     map3: gUnk_09969C44
     map2: gUnk_0996A444
     map: gUnk_0996BC44
-    unk_24: gUnk_0984DCF0
-    unk_28: gUnk_0984DF68
-    unk_2C: 0
-    unk_30: gUnk_0984D494
-    unk_34: gUnk_0984D4A4
+    layer1DecorRules: gUnk_0984DCF0
+    layer2DecorRules: gUnk_0984DF68
+    tileAnims: 0
+    soraEvents: gUnk_0984D494
+    rikuEvents: gUnk_0984D4A4
     unk_38: 31
   index: [1]
   us:
@@ -1970,7 +1970,7 @@ entries:
   eu:
     address: 0x0982AE58
 - name: gUnk_0984E48C
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom02Unk24Pattern00, 1, 4, 50, 0, gMapRoom02Unk24Pieces00, gUnk_0996C944+0x1000]
@@ -2065,7 +2065,7 @@ entries:
   eu:
     address: 0x0982B0D0
 - name: gUnk_0984E704
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom02Unk28Check00, 1, 2, 50, 0, gMapRoom02Unk28Pieces00, gUnk_0996E144+0x300]
@@ -2079,7 +2079,7 @@ entries:
     address: 0x0982B0D8
 - name: map_room_02
   symbol: gUnk_0984E734
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990104
     paletteSize: 352
@@ -2093,11 +2093,11 @@ entries:
     map3: gUnk_0996C144
     map2: gUnk_0996C944
     map: gUnk_0996E144
-    unk_24: gUnk_0984E48C
-    unk_28: gUnk_0984E704
-    unk_2C: gUnk_0984E054
-    unk_30: gUnk_0984E014
-    unk_34: gUnk_0984E024
+    layer1DecorRules: gUnk_0984E48C
+    layer2DecorRules: gUnk_0984E704
+    tileAnims: gUnk_0984E054
+    soraEvents: gUnk_0984E014
+    rikuEvents: gUnk_0984E024
     unk_38: 22
   index: [2]
   us:
@@ -3163,7 +3163,7 @@ entries:
   eu:
     address: 0x0982BCE8
 - name: gUnk_0984F31C
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom12Unk24Pattern00, 2, 4, 70, 0, gMapRoom12Unk24Pieces00, gUnk_09983244+0x1000]
@@ -3358,7 +3358,7 @@ entries:
   eu:
     address: 0x0982BFF0
 - name: gUnk_0984F624
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom12Unk28Check00, 1, 2, 100, 0, gMapRoom12Unk28Pieces00, gUnk_09984A44+0x300]
@@ -3376,7 +3376,7 @@ entries:
     address: 0x0982BFF8
 - name: map_room_12
   symbol: gUnk_0984F694
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990F44
     paletteSize: 384
@@ -3390,11 +3390,11 @@ entries:
     map3: gUnk_09982A44
     map2: gUnk_09983244
     map: gUnk_09984A44
-    unk_24: gUnk_0984F31C
-    unk_28: gUnk_0984F624
-    unk_2C: 0
-    unk_30: gUnk_0984E770
-    unk_34: gUnk_0984E780
+    layer1DecorRules: gUnk_0984F31C
+    layer2DecorRules: gUnk_0984F624
+    tileAnims: 0
+    soraEvents: gUnk_0984E770
+    rikuEvents: gUnk_0984E780
     unk_38: 38
   index: [12]
   us:
@@ -4143,7 +4143,7 @@ entries:
   eu:
     address: 0x0982CC14
 - name: gUnk_09850250
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom03Unk24Pattern00, 2, 3, 50, 0, gMapRoom03Unk24Pieces00, gUnk_0996ED44+0x800]
@@ -4225,7 +4225,7 @@ entries:
   eu:
     address: 0x0982CDC4
 - name: gUnk_098503F8
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom03Unk28Check00, 1, 2, 50, 0, gMapRoom03Unk28Pieces00, gUnk_09970544+0x300]
@@ -4239,7 +4239,7 @@ entries:
     address: 0x0982CDCC
 - name: map_room_03
   symbol: gUnk_09850428
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990264
     paletteSize: 352
@@ -4253,11 +4253,11 @@ entries:
     map3: gUnk_0996E544
     map2: gUnk_0996ED44
     map: gUnk_09970544
-    unk_24: gUnk_09850250
-    unk_28: gUnk_098503F8
-    unk_2C: 0
-    unk_30: gUnk_0984F6D0
-    unk_34: gUnk_0984F6E0
+    layer1DecorRules: gUnk_09850250
+    layer2DecorRules: gUnk_098503F8
+    tileAnims: 0
+    soraEvents: gUnk_0984F6D0
+    rikuEvents: gUnk_0984F6E0
     unk_38: 21
   index: [3]
   us:
@@ -4931,7 +4931,7 @@ entries:
   eu:
     address: 0x0982D5E0
 - name: gUnk_09850C1C
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom09Unk24Pattern00, 3, 6, 100, 0, gMapRoom09Unk24Pieces00, gUnk_0997C544+0x800]
@@ -5013,7 +5013,7 @@ entries:
   eu:
     address: 0x0982D790
 - name: gUnk_09850DC4
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom09Unk28Check00, 1, 2, 50, 0, gMapRoom09Unk28Pieces00, gUnk_0997DD44+0x300]
@@ -5027,7 +5027,7 @@ entries:
     address: 0x0982D798
 - name: map_room_09
   symbol: gUnk_09850DF4
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990B04
     paletteSize: 352
@@ -5041,11 +5041,11 @@ entries:
     map3: gUnk_0997BD44
     map2: gUnk_0997C544
     map: gUnk_0997DD44
-    unk_24: gUnk_09850C1C
-    unk_28: gUnk_09850DC4
-    unk_2C: 0
-    unk_30: gUnk_09850464
-    unk_34: gUnk_09850470
+    layer1DecorRules: gUnk_09850C1C
+    layer2DecorRules: gUnk_09850DC4
+    tileAnims: 0
+    soraEvents: gUnk_09850464
+    rikuEvents: gUnk_09850470
     unk_38: 33
   index: [9]
   us:
@@ -6493,7 +6493,7 @@ entries:
   eu:
     address: 0x0982E820
 - name: gUnk_09851E54
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom06Unk24Pattern00, 2, 4, 100, 0, gMapRoom06Unk24Pieces00, gUnk_09975944+0x800]
@@ -6606,7 +6606,7 @@ entries:
   eu:
     address: 0x0982EBB8
 - name: gUnk_098521EC
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom06Unk28Check00, 1, 2, 50, 0, gMapRoom06Unk28Pieces00, gUnk_09977144+0x300]
@@ -6620,7 +6620,7 @@ entries:
     address: 0x0982EBC0
 - name: map_room_06
   symbol: gUnk_0985221C
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_099906A4
     paletteSize: 352
@@ -6634,11 +6634,11 @@ entries:
     map3: gUnk_09975144
     map2: gUnk_09975944
     map: gUnk_09977144
-    unk_24: gUnk_09851E54
-    unk_28: gUnk_098521EC
-    unk_2C: gUnk_09850E5C
-    unk_30: gUnk_09850E30
-    unk_34: gUnk_09850E40
+    layer1DecorRules: gUnk_09851E54
+    layer2DecorRules: gUnk_098521EC
+    tileAnims: gUnk_09850E5C
+    soraEvents: gUnk_09850E30
+    rikuEvents: gUnk_09850E40
     unk_38: 15
   index: [6]
   us:
@@ -7523,7 +7523,7 @@ entries:
   eu:
     address: 0x0982F634
 - name: gUnk_09852C68
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom08Unk24Pattern00, 2, 8, 100, 0, gMapRoom08Unk24Pieces00, gUnk_0997A144+0x800]
@@ -7708,7 +7708,7 @@ entries:
   eu:
     address: 0x0982F8A8
 - name: gUnk_09852EDC
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom08Unk28Check00, 1, 2, 30, 0, gMapRoom08Unk28Pieces00, gUnk_0997B944+0x300]
@@ -7726,7 +7726,7 @@ entries:
     address: 0x0982F8B0
 - name: map_room_08
   symbol: gUnk_09852F4C
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990984
     paletteSize: 384
@@ -7740,11 +7740,11 @@ entries:
     map3: gUnk_09979944
     map2: gUnk_0997A144
     map: gUnk_0997B944
-    unk_24: gUnk_09852C68
-    unk_28: gUnk_09852EDC
-    unk_2C: 0
-    unk_30: gUnk_09852258
-    unk_34: gUnk_09852268
+    layer1DecorRules: gUnk_09852C68
+    layer2DecorRules: gUnk_09852EDC
+    tileAnims: 0
+    soraEvents: gUnk_09852258
+    rikuEvents: gUnk_09852268
     unk_38: 25
   index: [8]
   us:
@@ -8160,7 +8160,7 @@ entries:
   eu:
     address: 0x0982FD20
 - name: gUnk_09853354
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom05Unk24Pattern00, 2, 5, 100, 0, gMapRoom05Unk24Pieces00, gUnk_09973544+0x1000]
@@ -8251,7 +8251,7 @@ entries:
   eu:
     address: 0x0982FF58
 - name: gUnk_0985358C
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom05Unk28Check00, 1, 2, 50, 0, gMapRoom05Unk28Pieces00, gUnk_09974D44+0x300]
@@ -8265,7 +8265,7 @@ entries:
     address: 0x0982FF60
 - name: map_room_05
   symbol: gUnk_098535BC
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990524
     paletteSize: 384
@@ -8279,11 +8279,11 @@ entries:
     map3: gUnk_09972D44
     map2: gUnk_09973544
     map: gUnk_09974D44
-    unk_24: gUnk_09853354
-    unk_28: gUnk_0985358C
-    unk_2C: gUnk_09852FFC
-    unk_30: gUnk_09852F88
-    unk_34: gUnk_09852F98
+    layer1DecorRules: gUnk_09853354
+    layer2DecorRules: gUnk_0985358C
+    tileAnims: gUnk_09852FFC
+    soraEvents: gUnk_09852F88
+    rikuEvents: gUnk_09852F98
     unk_38: 8
   index: [5]
   us:
@@ -9026,7 +9026,7 @@ entries:
   eu:
     address: 0x09830A4C
 - name: gUnk_09854080
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom07Unk24Pattern00, 2, 4, 100, 0, gMapRoom07Unk24Pieces00, gUnk_09977D44+0x800]
@@ -9108,7 +9108,7 @@ entries:
   eu:
     address: 0x09830BF4
 - name: gUnk_09854228
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom07Unk28Check00, 1, 2, 100, 0, gMapRoom07Unk28Pieces00, gUnk_09979544+0x300]
@@ -9122,7 +9122,7 @@ entries:
     address: 0x09830BFC
 - name: map_room_07
   symbol: gUnk_09854258
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990804
     paletteSize: 384
@@ -9136,11 +9136,11 @@ entries:
     map3: gUnk_09977544
     map2: gUnk_09977D44
     map: gUnk_09979544
-    unk_24: gUnk_09854080
-    unk_28: gUnk_09854228
-    unk_2C: gUnk_09853624
-    unk_30: gUnk_098535F8
-    unk_34: gUnk_09853608
+    layer1DecorRules: gUnk_09854080
+    layer2DecorRules: gUnk_09854228
+    tileAnims: gUnk_09853624
+    soraEvents: gUnk_098535F8
+    rikuEvents: gUnk_09853608
     unk_38: 10
   index: [7]
   us:
@@ -10269,7 +10269,7 @@ entries:
   eu:
     address: 0x0983193C
 - name: gUnk_09854F70
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom11Unk24Pattern00, 2, 2, 50, 0, gMapRoom11Unk24Pieces00, gUnk_09980E44+0x800]
@@ -10464,7 +10464,7 @@ entries:
   eu:
     address: 0x09831C44
 - name: gUnk_09855278
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom11Unk28Check00, 1, 2, 100, 0, gMapRoom11Unk28Pieces00, gUnk_09982644+0x300]
@@ -10482,7 +10482,7 @@ entries:
     address: 0x09831C4C
 - name: map_room_11
   symbol: gUnk_098552E8
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990DC4
     paletteSize: 384
@@ -10496,11 +10496,11 @@ entries:
     map3: gUnk_09980644
     map2: gUnk_09980E44
     map: gUnk_09982644
-    unk_24: gUnk_09854F70
-    unk_28: gUnk_09855278
-    unk_2C: 0
-    unk_30: gUnk_09854294
-    unk_34: gUnk_0985429C
+    layer1DecorRules: gUnk_09854F70
+    layer2DecorRules: gUnk_09855278
+    tileAnims: 0
+    soraEvents: gUnk_09854294
+    rikuEvents: gUnk_0985429C
     unk_38: 36
   index: [11]
   us:
@@ -11390,7 +11390,7 @@ entries:
   eu:
     address: 0x0983265C
 - name: gUnk_09855C90
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom10Unk24Pattern00, 1, 6, 100, 0, gMapRoom10Unk24Pieces00, gUnk_0997E944+0x800]
@@ -11579,7 +11579,7 @@ entries:
   eu:
     address: 0x09832904
 - name: gUnk_09855F38
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom10Unk28Check00, 1, 2, 100, 0, gMapRoom10Unk28Pieces00, gUnk_09980144+0x300]
@@ -11597,7 +11597,7 @@ entries:
     address: 0x0983290C
 - name: map_room_10
   symbol: gUnk_09855FA8
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_09990C64
     paletteSize: 352
@@ -11611,11 +11611,11 @@ entries:
     map3: gUnk_0997E144
     map2: gUnk_0997E944
     map: gUnk_09980144
-    unk_24: gUnk_09855C90
-    unk_28: gUnk_09855F38
-    unk_2C: 0
-    unk_30: gUnk_09855324
-    unk_34: gUnk_09855334
+    layer1DecorRules: gUnk_09855C90
+    layer2DecorRules: gUnk_09855F38
+    tileAnims: 0
+    soraEvents: gUnk_09855324
+    rikuEvents: gUnk_09855334
     unk_38: 13
   index: [10]
   us:
@@ -12004,7 +12004,7 @@ entries:
   eu:
     address: 0x09832DCC
 - name: gUnk_09856400
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom04Unk24Pattern00, 1, 5, 50, 0, gMapRoom04Unk24Pieces00, gUnk_09971144+0x1000]
@@ -12096,7 +12096,7 @@ entries:
   eu:
     address: 0x09833014
 - name: gUnk_09856648
-  record: UnkStruct_080E8864
+  record: MapDecorRule
   declare: false
   elements:
   - [gMapRoom04Unk28Check00, 1, 2, 50, 0, gMapRoom04Unk28Pieces00, gUnk_09972944+0x300]
@@ -12110,7 +12110,7 @@ entries:
     address: 0x0983301C
 - name: map_room_04
   symbol: gUnk_09856678
-  record: UnkStruct_09EF70D0
+  record: MapRoomDef
   fields:
     palette: gUnk_099903C4
     paletteSize: 352
@@ -12124,11 +12124,11 @@ entries:
     map3: gUnk_09970944
     map2: gUnk_09971144
     map: gUnk_09972944
-    unk_24: gUnk_09856400
-    unk_28: gUnk_09856648
-    unk_2C: gUnk_09856010
-    unk_30: gUnk_09855FE4
-    unk_34: gUnk_09855FF4
+    layer1DecorRules: gUnk_09856400
+    layer2DecorRules: gUnk_09856648
+    tileAnims: gUnk_09856010
+    soraEvents: gUnk_09855FE4
+    rikuEvents: gUnk_09855FF4
     unk_38: 2
   index: [4]
   us:
@@ -12678,7 +12678,7 @@ entries:
   eu:
     address: 0x098335B4
 - name: gUnk_09856BE8
-  record: UnkStruct_080E56B4
+  record: MapFixedGmk
   declare: false
   elements:
   - [62, [0, 0, 0], 102400, 94208]
@@ -12696,7 +12696,7 @@ entries:
   eu:
     address: 0x098335BC
 - name: gUnk_09856C48
-  record: UnkStruct_080EC760Entry
+  record: MapFixedCollider
   declare: false
   elements:
   - [40, [0, 0], 53248, 111616]
@@ -12713,7 +12713,7 @@ entries:
     address: 0x0983361C
 - name: map_fixed_0
   symbol: gUnk_09856C90
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09616D58
     paletteSize: 320
@@ -12730,17 +12730,17 @@ entries:
     mapWidth: 4
     mapHeight: 3
     unk_26: [0, 0]
-    unk_28: gUnk_09EF7108
-    unk_2C: gUnk_09856BE8
-    unk_30: gUnk_09856C48
+    cellTypes: gUnk_09EF7108
+    gimmicks: gUnk_09856BE8
+    colliders: gUnk_09856C48
     unk_34: 30
     unk_36: [0, 0]
-    unk_38: 203264
-    unk_3C: 61952
-    unk_40: 0
-    unk_44: 0
-    unk_48: 196608
-    unk_4C: 65536
+    stairX: 203264
+    stairY: 61952
+    stair2X: 0
+    stair2Y: 0
+    spawnX: 196608
+    spawnY: 65536
   index: [0]
   us:
     address: 0x09856C90
@@ -12753,7 +12753,7 @@ entries:
       tilesSize2: 13896
       unk_50: 0
 - name: gUnk_09856CE0
-  record: UnkStruct_080E56B4
+  record: MapFixedGmk
   declare: false
   elements:
   - [63, [0, 0, 0], 69632, 81664]
@@ -12766,7 +12766,7 @@ entries:
   eu:
     address: 0x098336B8
 - name: gUnk_09856D04
-  record: UnkStruct_080EC760Entry
+  record: MapFixedCollider
   declare: false
   elements:
   - [40, [0, 0], 45056, 82944]
@@ -12781,7 +12781,7 @@ entries:
     address: 0x098336DC
 - name: map_fixed_1
   symbol: gUnk_09856D34
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09616E98
     paletteSize: 320
@@ -12798,17 +12798,17 @@ entries:
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    unk_28: gUnk_09EF7708
-    unk_2C: gUnk_09856CE0
-    unk_30: gUnk_09856D04
+    cellTypes: gUnk_09EF7708
+    gimmicks: gUnk_09856CE0
+    colliders: gUnk_09856D04
     unk_34: 30
     unk_36: [0, 0]
-    unk_38: 137728
-    unk_3C: 61952
-    unk_40: 67584
-    unk_44: 97280
-    unk_48: 131072
-    unk_4C: 65536
+    stairX: 137728
+    stairY: 61952
+    stair2X: 67584
+    stair2Y: 97280
+    spawnX: 131072
+    spawnY: 65536
   index: [1]
   us:
     address: 0x09856D34
@@ -12820,7 +12820,7 @@ entries:
       tilesSize: 11092
       unk_50: 0
 - name: gUnk_09856D84
-  record: UnkStruct_080E56B4
+  record: MapFixedGmk
   declare: false
   elements:
   - [63, [0, 0, 0], 69632, 81664]
@@ -12833,7 +12833,7 @@ entries:
   eu:
     address: 0x09833760
 - name: gUnk_09856DA8
-  record: UnkStruct_080EC760Entry
+  record: MapFixedCollider
   declare: false
   elements:
   - [40, [0, 0], 45056, 82944]
@@ -12849,7 +12849,7 @@ entries:
     address: 0x09833784
 - name: map_fixed_2
   symbol: gUnk_09856DE4
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09616FD8
     paletteSize: 320
@@ -12866,17 +12866,17 @@ entries:
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    unk_28: gUnk_09EF7A08
-    unk_2C: gUnk_09856D84
-    unk_30: gUnk_09856DA8
+    cellTypes: gUnk_09EF7A08
+    gimmicks: gUnk_09856D84
+    colliders: gUnk_09856DA8
     unk_34: 30
     unk_36: [0, 0]
-    unk_38: 158208
-    unk_3C: 51968
-    unk_40: 67584
-    unk_44: 97280
-    unk_48: 131072
-    unk_4C: 65536
+    stairX: 158208
+    stairY: 51968
+    stair2X: 67584
+    stair2Y: 97280
+    spawnX: 131072
+    spawnY: 65536
   index: [2]
   us:
     address: 0x09856DE4
@@ -12888,7 +12888,7 @@ entries:
       tilesSize: 6096
       unk_50: 0
 - name: gUnk_09856E34
-  record: UnkStruct_080E56B4
+  record: MapFixedGmk
   declare: false
   elements:
   - [255, [0, 0, 0], 0, 0]
@@ -12899,7 +12899,7 @@ entries:
   eu:
     address: 0x09833814
 - name: gUnk_09856E40
-  record: UnkStruct_080EC760Entry
+  record: MapFixedCollider
   declare: false
   elements:
   - [24, [0, 0], 57344, 77824]
@@ -12916,7 +12916,7 @@ entries:
     address: 0x09833820
 - name: map_fixed_3
   symbol: gUnk_09856E88
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09617438
     paletteSize: 320
@@ -12933,17 +12933,17 @@ entries:
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    unk_28: gUnk_09EF7D08
-    unk_2C: gUnk_09856E34
-    unk_30: gUnk_09856E40
+    cellTypes: gUnk_09EF7D08
+    gimmicks: gUnk_09856E34
+    colliders: gUnk_09856E40
     unk_34: 30
     unk_36: [0, 0]
-    unk_38: 159744
-    unk_3C: 51200
-    unk_40: 71680
-    unk_44: 95232
-    unk_48: 114688
-    unk_4C: 73728
+    stairX: 159744
+    stairY: 51200
+    stair2X: 71680
+    stair2Y: 95232
+    spawnX: 114688
+    spawnY: 73728
   index: [3]
   us:
     address: 0x09856E88
@@ -12955,7 +12955,7 @@ entries:
       tilesSize: 8232
       unk_50: 0
 - name: gUnk_09856ED8
-  record: UnkStruct_080E56B4
+  record: MapFixedGmk
   declare: false
   elements:
   - [57, [0, 0, 0], 19456, 77824]
@@ -12971,7 +12971,7 @@ entries:
     address: 0x098338BC
 - name: map_fixed_4
   symbol: gUnk_09856F14
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09990C64
     paletteSize: 352
@@ -12988,17 +12988,17 @@ entries:
     mapWidth: 2
     mapHeight: 2
     unk_26: [0, 0]
-    unk_28: gUnk_09EF8008
-    unk_2C: gUnk_09856ED8
-    unk_30: 0
+    cellTypes: gUnk_09EF8008
+    gimmicks: gUnk_09856ED8
+    colliders: 0
     unk_34: 28
     unk_36: [0, 0]
-    unk_38: 0
-    unk_3C: 0
-    unk_40: 0
-    unk_44: 0
-    unk_48: 49152
-    unk_4C: 69632
+    stairX: 0
+    stairY: 0
+    stair2X: 0
+    stair2Y: 0
+    spawnX: 49152
+    spawnY: 69632
   index: [4]
   us:
     address: 0x09856F14
@@ -13010,7 +13010,7 @@ entries:
       unk_50: 1
 - name: map_fixed_5
   symbol: gUnk_09856F64
-  record: UnkStruct_09EF8370
+  record: MapFixedDef
   fields:
     palette: gUnk_09616E98
     paletteSize: 320
@@ -13027,17 +13027,17 @@ entries:
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    unk_28: gUnk_09EF7708
-    unk_2C: gUnk_09856CE0
-    unk_30: gUnk_09856D04
+    cellTypes: gUnk_09EF7708
+    gimmicks: gUnk_09856CE0
+    colliders: gUnk_09856D04
     unk_34: 30
     unk_36: [0, 0]
-    unk_38: 137728
-    unk_3C: 61952
-    unk_40: 0
-    unk_44: 0
-    unk_48: 131072
-    unk_4C: 65536
+    stairX: 137728
+    stairY: 61952
+    stair2X: 0
+    stair2Y: 0
+    spawnX: 131072
+    spawnY: 65536
   index: [5]
   us:
     address: 0x09856F64

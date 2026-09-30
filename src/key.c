@@ -5,7 +5,7 @@
 u16 gKeysHeld;
 u16 gKeysPressed;
 u16 gKeysRepeat;
-u16 gUnk_02034006;
+u16 gKeyChordLatch;
 u8 gKeyHoldLeft;
 u8 gKeyHoldRight;
 u8 gKeyHoldUp;
@@ -47,7 +47,7 @@ void ResetKeyState(void) {
     gKeysHeld = 0;
     gKeysPressed = 0;
     gKeysRepeat = 0;
-    gUnk_02034006 = 0;
+    gKeyChordLatch = 0;
     gKeyHoldLeft = 0;
     gKeyHoldRight = 0;
     gKeyHoldUp = 0;
@@ -126,28 +126,28 @@ u16 ReadKeyChord(u16 a, u16 b) {
     u8 vb = GetKeyReleaseTime(b);
 
     if (va == 2) {
-        gUnk_02034006 &= ~a;
+        gKeyChordLatch &= ~a;
     }
 
     if (vb == 2) {
-        gUnk_02034006 &= ~b;
+        gKeyChordLatch &= ~b;
     }
 
     if (((GetKeysPressed() & a) && (GetKeysHeld() & b)) || ((GetKeysPressed() & b) && (GetKeysHeld() & a))) {
-        gUnk_02034006 |= a | b;
+        gKeyChordLatch |= a | b;
         r = a | b;
     }
 
-    if ((gUnk_02034006 & a) == 0) {
+    if ((gKeyChordLatch & a) == 0) {
         if (GetKeyHoldTime(a) == 5 || va == 1) {
-            gUnk_02034006 |= a;
+            gKeyChordLatch |= a;
             r = a;
         }
     }
 
-    if ((gUnk_02034006 & b) == 0) {
+    if ((gKeyChordLatch & b) == 0) {
         if (GetKeyHoldTime(b) == 5 || vb == 1) {
-            gUnk_02034006 |= b;
+            gKeyChordLatch |= b;
             r = b;
         }
     }
@@ -163,65 +163,65 @@ u16 ReadDpadChord(void) {
     u8 right = GetKeyReleaseTime(DPAD_RIGHT);
 
     if (up == 2) {
-        gUnk_02034006 &= ~DPAD_UP;
+        gKeyChordLatch &= ~DPAD_UP;
     }
 
     if (down == 2) {
-        gUnk_02034006 &= ~DPAD_DOWN;
+        gKeyChordLatch &= ~DPAD_DOWN;
     }
 
     if (left == 2) {
-        gUnk_02034006 &= ~DPAD_LEFT;
+        gKeyChordLatch &= ~DPAD_LEFT;
     }
 
     if (right == 2) {
-        gUnk_02034006 &= ~DPAD_RIGHT;
+        gKeyChordLatch &= ~DPAD_RIGHT;
     }
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_UP))) {
-        gUnk_02034006 |= (DPAD_UP | DPAD_LEFT);
+        gKeyChordLatch |= (DPAD_UP | DPAD_LEFT);
         r = (DPAD_UP | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_UP))) {
-        gUnk_02034006 |= (DPAD_UP | DPAD_RIGHT);
+        gKeyChordLatch |= (DPAD_UP | DPAD_RIGHT);
         r = (DPAD_UP | DPAD_RIGHT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_DOWN))) {
-        gUnk_02034006 |= (DPAD_DOWN | DPAD_LEFT);
+        gKeyChordLatch |= (DPAD_DOWN | DPAD_LEFT);
         r = (DPAD_DOWN | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_DOWN))) {
-        gUnk_02034006 |= (DPAD_DOWN | DPAD_RIGHT);
+        gKeyChordLatch |= (DPAD_DOWN | DPAD_RIGHT);
         r = (DPAD_DOWN | DPAD_RIGHT);
     }
 
-    if ((gUnk_02034006 & DPAD_UP) == 0) {
+    if ((gKeyChordLatch & DPAD_UP) == 0) {
         if (GetKeyHoldTime(DPAD_UP) == 10 || up == 1) {
-            gUnk_02034006 |= DPAD_UP;
+            gKeyChordLatch |= DPAD_UP;
             r = DPAD_UP;
         }
     }
 
-    if ((gUnk_02034006 & DPAD_DOWN) == 0) {
+    if ((gKeyChordLatch & DPAD_DOWN) == 0) {
         if (GetKeyHoldTime(DPAD_DOWN) == 10 || down == 1) {
-            gUnk_02034006 |= DPAD_DOWN;
+            gKeyChordLatch |= DPAD_DOWN;
             r = DPAD_DOWN;
         }
     }
 
-    if ((gUnk_02034006 & DPAD_LEFT) == 0) {
+    if ((gKeyChordLatch & DPAD_LEFT) == 0) {
         if (GetKeyHoldTime(DPAD_LEFT) == 10 || left == 1) {
-            gUnk_02034006 |= DPAD_LEFT;
+            gKeyChordLatch |= DPAD_LEFT;
             r = DPAD_LEFT;
         }
     }
 
-    if ((gUnk_02034006 & DPAD_RIGHT) == 0) {
+    if ((gKeyChordLatch & DPAD_RIGHT) == 0) {
         if (GetKeyHoldTime(DPAD_RIGHT) == 10 || right == 1) {
-            gUnk_02034006 |= DPAD_RIGHT;
+            gKeyChordLatch |= DPAD_RIGHT;
             r = DPAD_RIGHT;
         }
     }

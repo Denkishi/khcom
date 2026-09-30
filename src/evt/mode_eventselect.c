@@ -53,19 +53,19 @@ const s16 gRikuEventIds[49] = {
     -1,
 };
 
-const char gUnk_09033ED8[] = "\x81\xa8";
+const char gEventSelectCursorText[] = "\x81\xa8";
 
-const char gUnk_09033EDC[] = "\x81\x40";
+const char gEventSelectBlankText[] = "\x81\x40";
 
-const char gUnk_09033EE0[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60";
+const char gEventSelectSoraLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x72\x82\x6e\x82\x71\x82\x60";
 
-const char gUnk_09033EF8[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74";
+const char gEventSelectRikuLabel[] = "\x82\x64\x82\x75\x82\x64\x82\x6d\x82\x73\x81\x40\x82\x71\x82\x68\x82\x6a\x82\x74";
 
-const char gUnk_09033F10[] = "\x82\x6d\x82\x8f\x81\x40\x81\x81";
+const char gEventSelectNoLabel[] = "\x82\x6d\x82\x8f\x81\x40\x81\x81";
 
 s16 gEventSelectIndex __attribute__((aligned(4)));
 static u8 sEventSelectList;
-UnkStruct_02039DD0* gUnk_02039DD0 EWRAM_COMMON(4);
+EventSoundMix* gEventSoundMix EWRAM_COMMON(4);
 
 s16 GetEventListLength(u8 a) {
     s16 n = 0;
@@ -88,12 +88,12 @@ s16 GetEventListLength(u8 a) {
 void mode_eventselect_0(void) {
     SetBgMode0();
     func_08085FB0();
-    func_08085C3C();
+    InitSoraDecks();
     InitMapCardInventory();
     SetupBg(0, 0, 30, 0);
     EnableBg(0);
-    func_0805FA8C(0, 0x8000, 0x800);
-    func_0805FA60(0, gUnk_08F70990, 0x20, 0);
+    DebugTextInit(0, 0x8000, 0x800);
+    DebugTextLoadPalette(0, gUnk_08F70990, 0x20, 0);
 }
 
 void mode_eventselect_1(void) {
@@ -115,14 +115,14 @@ void mode_eventselect_1(void) {
 
     switch (sEventSelectList) {
     case 0:
-        func_0805FCB0(0, 0, 2, gUnk_09033ED8);
-        func_0805FCB0(0, 10, 2, gUnk_09033EDC);
-        func_0805FCB0(0, 20, 2, gUnk_09033EDC);
+        DebugTextPrint(0, 0, 2, gEventSelectCursorText);
+        DebugTextPrint(0, 10, 2, gEventSelectBlankText);
+        DebugTextPrint(0, 20, 2, gEventSelectBlankText);
         break;
     case 1:
-        func_0805FCB0(0, 0, 2, gUnk_09033EDC);
-        func_0805FCB0(0, 10, 2, gUnk_09033ED8);
-        func_0805FCB0(0, 20, 2, gUnk_09033EDC);
+        DebugTextPrint(0, 0, 2, gEventSelectBlankText);
+        DebugTextPrint(0, 10, 2, gEventSelectCursorText);
+        DebugTextPrint(0, 20, 2, gEventSelectBlankText);
         break;
     }
 
@@ -142,17 +142,17 @@ void mode_eventselect_1(void) {
         gEventSelectIndex = GetEventListLength(sEventSelectList) - 1;
     }
 
-    func_0805FCB0(10, 0, 2, gUnk_09033EE0);
-    func_0805FCB0(10, 10, 2, gUnk_09033EF8);
-    func_0805FCB0(20, 40, 2, gUnk_09033F10);
-    func_0805FC04(100, 40, 2, gEventSelectIndex + 1);
+    DebugTextPrint(10, 0, 2, gEventSelectSoraLabel);
+    DebugTextPrint(10, 10, 2, gEventSelectRikuLabel);
+    DebugTextPrint(20, 40, 2, gEventSelectNoLabel);
+    DebugTextPrintNumber(100, 40, 2, gEventSelectIndex + 1);
 
     switch (sEventSelectList) {
     case 0:
-        func_0805FCB0(20, 80, 2, gEventNames[gSoraEventIds[gEventSelectIndex]]);
+        DebugTextPrint(20, 80, 2, gEventNames[gSoraEventIds[gEventSelectIndex]]);
         break;
     case 1:
-        func_0805FCB0(20, 80, 2, gEventNames[gRikuEventIds[gEventSelectIndex]]);
+        DebugTextPrint(20, 80, 2, gEventNames[gRikuEventIds[gEventSelectIndex]]);
         break;
     }
 
@@ -160,16 +160,16 @@ void mode_eventselect_1(void) {
         switch (sEventSelectList) {
         case 0:
 #ifdef VERSION_EU
-            ModeRequest(&gUnk_09EE273C, gSoraEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gModeEventDebug, gSoraEventIds[gEventSelectIndex] | 0x8000);
 #else
-            func_0806180C(gSoraEventIds[gEventSelectIndex]);
+            RequestEventMode(gSoraEventIds[gEventSelectIndex]);
 #endif
             break;
         case 1:
 #ifdef VERSION_EU
-            ModeRequest(&gUnk_09EE273C, gRikuEventIds[gEventSelectIndex] | 0x8000);
+            ModeRequest(&gModeEventDebug, gRikuEventIds[gEventSelectIndex] | 0x8000);
 #else
-            func_0806180C(gRikuEventIds[gEventSelectIndex]);
+            RequestEventMode(gRikuEventIds[gEventSelectIndex]);
 #endif
             break;
         }
@@ -179,12 +179,12 @@ void mode_eventselect_1(void) {
         ModeRequest(&gModeDebug, 0);
     }
 
-    func_080605A4(0);
-    func_08060598();
+    DebugTextDraw(0);
+    DebugTextClear();
 }
 
 void mode_eventselect_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
 }
 
 void Hanabira_0(EffectWork* w, EventCharaWork* chara) {
@@ -297,8 +297,8 @@ void smoke_0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gUnk_09EEFD78, gUnk_09EEFD60);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 1;
-    w->unk_46 = 0;
+    w->followFlip = 1;
+    w->age = 0;
 }
 
 void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
@@ -312,15 +312,15 @@ void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 
     if (FadeIsActive() == 0) {
-        FadeSetPaletteExcluded(((UnkStruct_080038C8*)w->palette)->index + 16, 1);
+        FadeSetPaletteExcluded(((ObjPaletteHeader*)w->palette)->index + 16, 1);
     }
 
     SetObjTileSource(w->tiles, gFEventTiles);
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
     AnimStart(&w->anim, 0, 0);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 1;
-    w->unk_46 = 0;
+    w->followFlip = 1;
+    w->age = 0;
 }
 
 void balloon_0(EffectWork* w, EventCharaWork* chara) {
@@ -336,14 +336,14 @@ void balloon_0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
     AnimStart(&w->anim, 1, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 0;
-    w->unk_46 = 0;
+    w->followFlip = 0;
+    w->age = 0;
 }
 
-s32 func_08075720(EffectWork* w) {
+s32 EffectUpdateObj(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->actor->unk_1B2 == 0) {
+    if (w->actor->callbackActive == 0) {
         return 0;
     }
 
@@ -351,10 +351,10 @@ s32 func_08075720(EffectWork* w) {
 }
 
 s32 Exclamation_1(EffectWork* w) {
-    w->unk_46++;
+    w->age++;
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->actor->unk_1B2 == 0 || w->unk_46 == 50) {
+    if (w->actor->callbackActive == 0 || w->age == 50) {
         return 0;
     }
 
@@ -365,14 +365,14 @@ void EffectDrawObj(EffectWork* w) {
     u16 pr;
     s32 y;
 
-    pr = w->actor->obj.unk_16;
+    pr = w->actor->obj.drawFlags;
 
-    if (w->unk_48 == 0) {
+    if (w->followFlip == 0) {
         pr &= 0xFFFE;
     }
 
     DrawSprite((w->x >> 8) - (gEventState->x >> 8),
-               (y = (w->y >> 8) + gUnk_0903380C[w->actor->arg.unk_02].spriteYOffset) -
+               (y = (w->y >> 8) + gEventCharaParams[w->actor->arg.chara].spriteYOffset) -
                    (gEventState->y >> 8),
                w->gfx, w->tiles, w->palette, 0, pr, 50);
 }
@@ -395,29 +395,29 @@ void Question_0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
     AnimStart(&w->anim, 5, 0);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 0;
-    w->unk_44 = 0;
-    w->unk_46 = 0;
+    w->followFlip = 0;
+    w->timer = 0;
+    w->age = 0;
 }
 
 s32 Question_1(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
-    w->unk_44++;
+    w->timer++;
 
-    if (w->unk_44 == 12) {
+    if (w->timer == 12) {
         AnimStart(&w->anim, 6, 1);
     }
 
-    if (w->actor->unk_1B2 == 0) {
+    if (w->actor->callbackActive == 0) {
         return 0;
     }
 
-    w->unk_46 = 0;
+    w->age = 0;
 
     return 1;
 }
 
-void func_080758D0(EffectWork* w, EventCharaWork* chara) {
+void TinkerbellParticleInit(EffectWork* w, EventCharaWork* chara) {
     EvtObj* b;
     s32 d1;
     s32 d2;
@@ -438,14 +438,14 @@ void func_080758D0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
     AnimStart(&w->anim, GetRandom() % 3, 0);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 0;
-    w->unk_46 = 0;
-    gEventState->unk_86++;
+    w->followFlip = 0;
+    w->age = 0;
+    gEventState->particleCount++;
 }
 
-s32 func_080759B0(EffectWork* w) {
+s32 TinkerbellParticleUpdate(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
-    w->unk_46++;
+    w->age++;
     w->z2 += 256;
 
     if (w->z2 > 0) {
@@ -455,12 +455,12 @@ s32 func_080759B0(EffectWork* w) {
     return 1;
 }
 
-void func_080759E0(EffectWork* w) {
+void TinkerbellParticleDraw(EffectWork* w) {
     u16 pr;
 
-    pr = w->actor->obj.unk_16;
+    pr = w->actor->obj.drawFlags;
 
-    if (w->unk_48 == 0) {
+    if (w->followFlip == 0) {
         pr &= 0xFFFE;
     }
 
@@ -470,10 +470,10 @@ void func_080759E0(EffectWork* w) {
                (u16)(-0x1004 - (w->y >> 8) * 4));
 }
 
-void func_08075A54(EffectWork* w) {
+void TinkerbellParticleDestroy(EffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gEventState->unk_86--;
+    gEventState->particleCount--;
 }
 
 void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
@@ -489,15 +489,15 @@ void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 1;
-    w->unk_46 = 0;
+    w->followFlip = 1;
+    w->age = 0;
 }
 
 s32 GlowNose_1(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
-    w->unk_46++;
+    w->age++;
 
-    if (w->unk_46 > 44) {
+    if (w->age > 44) {
         return 0;
     }
 
@@ -510,7 +510,7 @@ void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
     w->actor = chara;
     b = &chara->obj;
 
-    switch (chara->arg.unk_02) {
+    switch (chara->arg.chara) {
     case 3:
         w->x = b->x - 6144;
         w->y = b->y + 8192;
@@ -527,15 +527,15 @@ void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
     AnimStart(&w->anim, 1, 1);
     w->gfx = AnimGetGfx(&w->anim);
-    w->unk_48 = 1;
-    w->unk_46 = 0;
+    w->followFlip = 1;
+    w->age = 0;
 }
 
 s32 GlowNose2_1(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
-    w->unk_46++;
+    w->age++;
 
-    if (w->unk_46 > 8) {
+    if (w->age > 8) {
         return 0;
     }
 
@@ -550,7 +550,7 @@ void down_0(EffectWork* w, EventCharaWork* chara) {
     w->actor = chara;
     b = &chara->obj;
 
-    switch (chara->arg.unk_02) {
+    switch (chara->arg.chara) {
     case 0:
         w->x = b->x + 4096;
         w->y = b->y - 6144;
@@ -573,7 +573,7 @@ void down_0(EffectWork* w, EventCharaWork* chara) {
 
     for (i = 0; i < 8; i++) {
         s->angle[i] = i * 32;
-        s->unk_40[i] = 0;
+        s->wobble[i] = 0;
     }
 }
 
@@ -584,19 +584,19 @@ s32 down_1(EffectWork* w) {
     s = w->down;
 
     for (i = 0; i < 8; i++) {
-        s->unk_00[i] = gSineTable[s->angle[i] & 0xFF] * 8 + w->x;
-        s->unk_20[i] = -gSineTable[(s->angle[i] & 0xFF) + 64] * (s->unk_40[i] + 4) +
+        s->x[i] = gSineTable[s->angle[i] & 0xFF] * 8 + w->x;
+        s->y[i] = -gSineTable[(s->angle[i] & 0xFF) + 64] * (s->wobble[i] + 4) +
                        w->y;
         s->angle[i] += 4;
 
-        if (s->unk_40[i] == 0) {
-            s->unk_40[i]++;
+        if (s->wobble[i] == 0) {
+            s->wobble[i]++;
         } else {
-            s->unk_40[i] = 0;
+            s->wobble[i] = 0;
         }
     }
 
-    if (w->actor->unk_1B2 == 0) {
+    if (w->actor->callbackActive == 0) {
         return 0;
     }
 
@@ -608,12 +608,12 @@ s32 down_2(EffectWork* w) {
     u16 pr;
     u8 i;
 
-    pr = w->actor->obj.unk_16;
+    pr = w->actor->obj.drawFlags;
     s = w->down;
 
     for (i = 0; i < 8; i++) {
-        DrawSprite((s->unk_00[i] >> 8) - (gEventState->x >> 8),
-                   (s->unk_20[i] >> 8) - (gEventState->y >> 8), 0,
+        DrawSprite((s->x[i] >> 8) - (gEventState->x >> 8),
+                   (s->y[i] >> 8) - (gEventState->y >> 8), 0,
                    w->tiles, w->palette, 0, pr, 50);
     }
 }
@@ -626,20 +626,20 @@ void down_3(EffectWork* w) {
 
 void Tinkerbell_0(EffectWork* w, EventCharaWork* chara) {
     w->actor = chara;
-    gEventState->unk_86 = 0;
-    w->unk_44 = 0;
+    gEventState->particleCount = 0;
+    w->timer = 0;
     TaskPoolInit(&w->tasks, 8);
 }
 
 s32 Tinkerbell_1(EffectWork* w) {
-    w->unk_44++;
+    w->timer++;
 
-    if (w->unk_44 == 5) {
-        if (gEventState->unk_86 <= 3) {
-            TaskCreate(&w->tasks, &gUnk_09EE484C, w->actor);
+    if (w->timer == 5) {
+        if (gEventState->particleCount <= 3) {
+            TaskCreate(&w->tasks, &gTaskDescTinkerbellParticle, w->actor);
         }
 
-        w->unk_44 = 0;
+        w->timer = 0;
     }
 
     TaskPoolUpdate(&w->tasks);
@@ -694,17 +694,17 @@ void CreateHanabiraTask(EventCharaWork* p) {
 void EV_SOUND_0(EvSoundWork* w, u8* arg) {
     u8 i;
 
-    w->unk_04 = arg[0];
-    w->unk_05 = 0;
+    w->eventId = arg[0];
+    w->cue = 0;
     w->unk_06 = 0;
-    w->unk_07 = 0;
-    w->unk_08 = 256;
-    w->soundCues = gUnk_09EE3FB4[w->unk_04]->soundCues;
-    gUnk_02039DD0 = EwramAlloc(256);
+    w->fadeMode = 0;
+    w->volume = 256;
+    w->soundCues = gEventSequenceDefs[w->eventId]->soundCues;
+    gEventSoundMix = EwramAlloc(256);
 
     for (i = 0; i < 64; i++) {
-        gUnk_02039DD0[i].pan = 0;
-        gUnk_02039DD0[i].volume = 256;
+        gEventSoundMix[i].pan = 0;
+        gEventSoundMix[i].volume = 256;
     }
 }
 
@@ -719,48 +719,48 @@ s32 EV_SOUND_1(EvSoundWork* w) {
         return 0;
     }
 
-    p = &w->soundCues[w->unk_05];
+    p = &w->soundCues[w->cue];
 
-    if (gEventState->unk_6C == p->unk_02) {
-        if (p->unk_00 != 0xFFFF) {
+    if (gEventState->frame == p->frame) {
+        if (p->song != 0xFFFF) {
             if ((p->flags & 4) == 0) {
-                m4aSongNumStartOrContinue(p->unk_00);
-                idx = gSongTable[p->unk_00].ms;
+                m4aSongNumStartOrContinue(p->song);
+                idx = gSongTable[p->song].ms;
                 m4aMPlayImmInit(gMPlayTable[idx].info);
-                gUnk_02039DD0[idx].pan = 0;
-                gUnk_02039DD0[idx].volume = 256;
+                gEventSoundMix[idx].pan = 0;
+                gEventSoundMix[idx].volume = 256;
             } else {
-                m4aSongNumStop(p->unk_00);
+                m4aSongNumStop(p->song);
             }
         } else {
             m4aMPlayAllStop();
         }
 
         if (p->flags & 1) {
-            m4aMPlayFadeOut(gMPlayTable[gSongTable[p->unk_00].ms].info, 5);
-            w->unk_07 = 2;
+            m4aMPlayFadeOut(gMPlayTable[gSongTable[p->song].ms].info, 5);
+            w->fadeMode = 2;
         }
 
         if (p->flags & 2) {
-            n = gSongTable[p->unk_00].ms;
+            n = gSongTable[p->song].ms;
             mp = gMPlayTable[n].info;
-            w->unk_08 = 3;
+            w->volume = 3;
             m4aMPlayVolumeControl(mp, 255, 3);
-            w->unk_07 = 1;
+            w->fadeMode = 1;
         }
 
         if ((p->flags & 0x8000) == 0) {
-            w->unk_05++;
+            w->cue++;
         }
     }
 
-    func_080760D8(w);
+    EvSoundUpdateFadeIn(w);
 
     for (i = 16; i <= 24; i++) {
         m4aMPlayPanpotControl(gMPlayTable[i].info, 255,
-                              gUnk_02039DD0[i].pan);
+                              gEventSoundMix[i].pan);
         m4aMPlayVolumeControl(gMPlayTable[i].info, 255,
-                              gUnk_02039DD0[i].volume);
+                              gEventSoundMix[i].volume);
     }
 
     return 1;
@@ -770,27 +770,27 @@ void EV_SOUND_2(void) {
 }
 
 void EV_SOUND_3(void) {
-    EwramFree(gUnk_02039DD0);
+    EwramFree(gEventSoundMix);
 }
 
-void func_080760D8(EvSoundWork* w) {
+void EvSoundUpdateFadeIn(EvSoundWork* w) {
     MusicPlayerInfo* mp;
 
     mp = gMPlayTable[0].info;
 
-    if (w->unk_07 == 1) {
-        w->unk_08 += 2;
+    if (w->fadeMode == 1) {
+        w->volume += 2;
 
-        if (w->unk_08 > 255) {
-            w->unk_08 = 256;
+        if (w->volume > 255) {
+            w->volume = 256;
         }
 
         m4aMPlayImmInit(mp);
-        m4aMPlayVolumeControl(mp, 255, w->unk_08);
+        m4aMPlayVolumeControl(mp, 255, w->volume);
     }
 }
 
-void func_08076110(u16 song, s16 x, s16 y) {
+void SetEventSoundPosition(u16 song, s16 x, s16 y) {
     u8 idx;
     s32 sx;
     s16 dx;
@@ -802,7 +802,7 @@ void func_08076110(u16 song, s16 x, s16 y) {
 
     v = 0;
 
-    if (gUnk_02039DD0 == 0) {
+    if (gEventSoundMix == 0) {
         return;
     }
 
@@ -810,13 +810,13 @@ void func_08076110(u16 song, s16 x, s16 y) {
     m4aMPlayImmInit(gMPlayTable[idx].info);
 
     if ((u16)x > 240) {
-        gUnk_02039DD0[idx].pan = v;
-        gUnk_02039DD0[idx].volume = v;
+        gEventSoundMix[idx].pan = v;
+        gEventSoundMix[idx].volume = v;
     }
 
     if ((u16)y > 160) {
-        gUnk_02039DD0[idx].pan = v;
-        gUnk_02039DD0[idx].volume = v;
+        gEventSoundMix[idx].pan = v;
+        gEventSoundMix[idx].volume = v;
     }
 
     sx = x;
@@ -832,7 +832,7 @@ void func_08076110(u16 song, s16 x, s16 y) {
         pan = -128;
     }
 
-    gUnk_02039DD0[idx].pan = pan;
+    gEventSoundMix[idx].pan = pan;
 
     if (120 - sx >= 0) {
         t = 120 - sx;
@@ -855,10 +855,10 @@ void func_08076110(u16 song, s16 x, s16 y) {
         v = 256;
     }
 
-    gUnk_02039DD0[idx].volume = 256 - v;
+    gEventSoundMix[idx].volume = 256 - v;
 
-    if (gUnk_02039DD0[idx].volume < 12) {
-        gUnk_02039DD0[idx].volume = 12;
+    if (gEventSoundMix[idx].volume < 12) {
+        gEventSoundMix[idx].volume = 12;
     }
 }
 
@@ -868,7 +868,7 @@ void Event_Debug_0(EventDebugWork* work) {
 }
 
 s32 Event_Debug_1(EventDebugWork* work) {
-    work->digitCount = FormatSmallFontDecimal(gEventState->unk_6C, work->digits);
+    work->digitCount = FormatSmallFontDecimal(gEventState->frame, work->digits);
     return 1;
 }
 
@@ -908,7 +908,7 @@ TaskDesc gTaskDescHanabiraC = {
 TaskDesc gTaskDescSmoke = {
     "smoke",
     (TaskInitFunc)smoke_0,
-    (TaskUpdateFunc)func_08075720,
+    (TaskUpdateFunc)EffectUpdateObj,
     (TaskDrawFunc)EffectDrawObj,
     (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
@@ -926,7 +926,7 @@ TaskDesc gTaskDescExclamation = {
 TaskDesc gTaskDescBalloon = {
     "balloon",
     (TaskInitFunc)balloon_0,
-    (TaskUpdateFunc)func_08075720,
+    (TaskUpdateFunc)EffectUpdateObj,
     (TaskDrawFunc)EffectDrawObj,
     (TaskDestroyFunc)EffectReleaseObj,
     sizeof(EffectWork),
@@ -941,12 +941,12 @@ TaskDesc gTaskDescQuestion = {
     sizeof(EffectWork),
 };
 
-TaskDesc gUnk_09EE484C = {
+TaskDesc gTaskDescTinkerbellParticle = {
     "GlowNose",
-    (TaskInitFunc)func_080758D0,
-    (TaskUpdateFunc)func_080759B0,
-    (TaskDrawFunc)func_080759E0,
-    (TaskDestroyFunc)func_08075A54,
+    (TaskInitFunc)TinkerbellParticleInit,
+    (TaskUpdateFunc)TinkerbellParticleUpdate,
+    (TaskDrawFunc)TinkerbellParticleDraw,
+    (TaskDestroyFunc)TinkerbellParticleDestroy,
     sizeof(EffectWork),
 };
 

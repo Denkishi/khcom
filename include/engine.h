@@ -36,7 +36,7 @@ typedef struct BgEntry {
     u16 y;
     u16 unk_0E;
 #ifdef VERSION_EU
-    void** unkEu_10;
+    void** decompressedMap;
 #endif
 } BgEntry;
 
@@ -76,14 +76,14 @@ typedef struct Dma3Queue {
     void* callbacks[8];
     Dma3Pending pending[4];
 #ifdef VERSION_EU
-    Dma3Request unkEu_10A0[32];
+    Dma3Request lz77Requests[32];
 #endif
     vu16 requestCount;
     vu16 blitCount;
     vu16 fillCount;
     vu16 callbackCount;
     vu16 count;
-    vu16 unk_10AA;
+    vu16 lz77RequestCount;
     u32 transferredBytes;
 } Dma3Queue;
 
@@ -128,9 +128,9 @@ void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 count);
 void SplineEvaluate2D(Spline2D* spline, s32 t, s32* x, s32* y);
 void SplineFreeBuffers(Spline2D* spline);
 
-u8 func_08002060(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
-u8 func_0800216C(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
-u8 func_080022D4(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
+u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
 void ReleaseSharedObjTiles(ObjTiles* p);
 void ReleaseAllocatedObjTiles(ObjTiles* p);
 void ReleaseSpriteFrameTiles(ObjTiles* p);

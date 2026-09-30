@@ -5,7 +5,7 @@
 
 struct Task;
 
-s32 func_0810B350(struct Task* task);
-void func_0810C2C4(struct Task* task);
+s32 BosPcStartEventAnim(struct Task* task);
+void BosLstAdvanceEventStep(struct Task* task);
 
 #endif

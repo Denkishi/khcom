@@ -17,75 +17,75 @@ typedef struct EventKeyList {
     EventKey* keys;
 } EventKeyList;
 
-typedef struct UnkStruct_080DFB7C {
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-    u8 unk_06;
-    u8 unk_07;
-} UnkStruct_080DFB7C;
+typedef struct MapDoor {
+    u16 flags;
+    u16 cellX;
+    u16 cellY;
+    u8 side;
+    u8 room;
+} MapDoor;
 
-typedef struct UnkStruct_0203C7AC {
+typedef struct MapRoomState {
     u32 flags;
-    u16 unk_04;
-    u16 unk_06;
-    u16 unk_08;
-    u16 unk_0A;
-    u8 unk_0C;
-    u8 unk_0D;
-    u8 unk_0E;
-    u8 unk_0F;
-    u8 unk_10;
+    u16 cols;
+    u16 rows;
+    u16 topRow;
+    u16 bottomRow;
+    u8 nameId;
+    u8 roomType;
+    u8 battleId;
+    u8 doorRoom;
+    u8 doorSide;
     u8 unk_11[0x03];
-    FldObj* unk_14;
-    u8 unk_18;
+    FldObj* door;
+    u8 jumpGmkAngle;
     u8 unk_19[0x03];
-    s32 unk_1C;
-    u8 unk_20;
+    s32 jumpGmkHeight;
+    u8 attackActive;
     u8 unk_21[0x03];
-    s32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
+    s32 attackX;
+    s32 attackY;
+    s32 attackZ;
     TaskPool tasks;
-} UnkStruct_0203C7AC;
+} MapRoomState;
 
 typedef struct MapCell {
-    u16 unk_00;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
+    u16 flags;
+    u8 type;
+    u8 bg3Piece;
+    u8 bg2Piece;
+    u8 bg1Piece;
     u8 unk_06[0x02];
-    s32 unk_08;
-    s32 unk_0C;
-    void* unk_10;
-    u16* unk_14;
-    u16* unk_18;
-    u16* unk_1C;
+    s32 upperZ;
+    s32 lowerZ;
+    void* maskTable;
+    u16* bg3Map;
+    u16* bg2Map;
+    u16* bg1Map;
 } MapCell;
 
-typedef struct UnkStruct_080DEDD8 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
+typedef struct MapEventDoor {
+    u8 kind;
+    u8 keyList;
+    u8 room;
+    u8 side;
+    u8 returnRoom;
+    u8 returnSide;
     u8 unk_06[0x02];
-} UnkStruct_080DEDD8;
+} MapEventDoor;
 
-typedef struct UnkStruct_080DEE18 {
-    u16 unk_00;
+typedef struct MapFloorRoom {
+    u16 flags;
     u8 unk_02;
     u8 unk_03;
-    u32 unk_04;
-    u8 unk_08;
-    u8 unk_09;
-    u8 unk_0A;
-    u8 unk_0B;
-    u8 unk_0C;
+    u32 seed;
+    u8 nameId;
+    u8 roomType;
+    u8 cardValue;
+    u8 enemiesLeft;
+    u8 przCardsLeft;
     u8 unk_0D[0x03];
-} UnkStruct_080DEE18;
+} MapFloorRoom;
 
 typedef struct EventKeyProgress {
     u8 paid;
@@ -93,28 +93,28 @@ typedef struct EventKeyProgress {
     u8 unk_02[0x02];
 } EventKeyProgress;
 
-typedef struct UnkStruct_0203C590 {
-    u8 unk_00;
+typedef struct MapFloorState {
+    u8 progress;
     u8 unk_01;
-    u16 unk_02;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
-    u8 unk_07;
+    u16 flags;
+    u8 world;
+    u8 eventStep;
+    u8 room;
+    u8 entrySide;
     EventKeyProgress eventKeyProgress[4];
     u8 unk_18[0x04];
-    UnkStruct_080DEE18 unk_1C[32];
-} UnkStruct_0203C590;
+    MapFloorRoom rooms[32];
+} MapFloorState;
 
-typedef struct UnkStruct_0203C7B0 {
-    u8 unk_00;
-    u8 unk_01;
-    u8 unk_02;
-    u8 unk_03;
-    u8 unk_04;
-    u8 unk_05;
-    u8 unk_06;
+typedef struct MapFormDef {
+    u8 layout;
+    u8 minWidth;
+    u8 maxWidth;
+    u8 minHeight;
+    u8 maxHeight;
+    u8 minDepth;
+    u8 maxDepth;
     u8 unk_07;
-} UnkStruct_0203C7B0;
+} MapFormDef;
 
 #endif

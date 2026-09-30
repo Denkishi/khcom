@@ -32,29 +32,29 @@
 #include "poo_api.h"
 
 
-extern u32 gUnk_02034DAC;
+extern u32 gPoohAction;
 
 extern u8 gPoohPalette[];
 extern u8 gTrap0001Palette[];
 extern u8 gTrap0002Palette[];
 extern u8 gTrap0003Palette[];
-extern const s8 gUnk_096FC01C[8][8];
+extern const s8 gPoohLookOffsets[8][8];
 
-void func_080C75E0(u32 a, u16 b);
-void func_080C7608(u32 a, u16 b, u16 c);
-u8 func_080C7638(void);
-void func_080C7644(u32 a, u16 b, u16 c);
-void func_080C7714(void);
-void func_080C774C(void);
+void BackdropFadeToOriginal(u32 a, u16 b);
+void BackdropFadeToAmount(u32 a, u16 b, u16 c);
+u8 BackdropFadeIsActive(void);
+void BackdropFadeFromAmount(u32 a, u16 b, u16 c);
+void SetPooStartPositions(void);
+void SetPooReentryPositions(void);
 void mode_pooh_0(s32 arg);
 void mode_pooh_1(void);
 void mode_pooh_2(void);
-u16 func_080C7C80(void);
-void func_080C7D60(PoohWork* w);
-void func_080C7DF8(PoohWork* w);
-void func_080C7E98(PoohWork* w);
-void func_080C7F18(PoohWork* w);
-u8 func_080C7F4C(u8 a);
-u8 func_080C7F94(PoohWork* w);
+u16 CountPooPrizes(void);
+void SetPoohDir5Left(PoohWork* w);
+void SetPoohDir8(PoohWork* w);
+void SetPoohDir2(PoohWork* w);
+void SetPoohDir3(PoohWork* w);
+u8 IsAngleFacingRight(u8 a);
+u8 GetPoohLookColumn(PoohWork* w);
 
 #endif /* GUARD_MODE_POOH_H */

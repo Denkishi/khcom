@@ -42,56 +42,56 @@
 #include "card_ids.h"
 
 #ifndef VERSION_EU
-TaskPool gUnk_02034B08;
+TaskPool gModeDeckExchangeTasks;
 
-u8 gUnk_02034B1C;
+u8 gModeDeckExchangeResult;
 
 u8 gUnk_02034B1D[3];
 #endif
 
 void func_080AB22C(u8 a);
-void func_080AB334(u8 a);
+void BuildDebugKingdomKeyDeck(u8 a);
 void func_080AB4AC(u8 a);
-void func_080AB1F8(u8 a, u16 b);
+void AddCardToDeckViaActive(u8 a, u16 b);
 void func_080AB964(void);
 void func_080AB968(void);
-s16 func_08084458(u16 cardId);
+s16 ObtainCard(u16 cardId);
 u8 AddCardToActiveDeck(u16 card);
 void SetActiveDeckIndex(u8 index);
 u8 GetActiveDeckIndex(void);
 #ifndef VERSION_EU
-void func_080AAF78(void) {
-    gUnk_02034B1C = 0;
-    gUnk_0203A9DC = 2048;
-    TaskPoolInit(&gUnk_02034B08, 1);
-    TaskCreate(&gUnk_02034B08, &gTaskDescDeckexchange, &gUnk_02034B1C);
+void Mode_DeckExchange_0(void) {
+    gModeDeckExchangeResult = 0;
+    gSioTradeCardId = 2048;
+    TaskPoolInit(&gModeDeckExchangeTasks, 1);
+    TaskCreate(&gModeDeckExchangeTasks, &gTaskDescDeckexchange, &gModeDeckExchangeResult);
 }
-void func_080AAFB4(void) {
+void Mode_DeckExchange_1(void) {
     if (gSystemFlags & 1) {
-        func_080B31A0();
+        SioChgCardRecvSlotIds();
     } else {
         UpdatePlayTime();
     }
 
-    TaskPoolUpdate(&gUnk_02034B08);
-    TaskPoolDraw(&gUnk_02034B08);
+    TaskPoolUpdate(&gModeDeckExchangeTasks);
+    TaskPoolDraw(&gModeDeckExchangeTasks);
 
-    if (gUnk_02034B1C == 6) {
-        ModeRequest(&gModeSioChgCard, gUnk_0203A9DC);
+    if (gModeDeckExchangeResult == 6) {
+        ModeRequest(&gModeSioChgCard, gSioTradeCardId);
     }
 }
-void func_080AB008(void) {
-    TaskPoolDestroy(&gUnk_02034B08);
+void Mode_DeckExchange_2(void) {
+    TaskPoolDestroy(&gModeDeckExchangeTasks);
 }
 #endif
 void DarkPoint_0(DarkPointWork* w) {
     w->tiles = LoadObjTiles(gUnk_093FB6C4, 576);
     w->slideTimer = 8;
     w->x = -0x2000;
-    func_0806BA0C(gBtlWork->unk_1C8, &w->unk_0B);
+    SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
 }
 s32 DarkPoint_1(DarkPointWork* w) {
-    func_0806BA0C(gBtlWork->unk_1C8, &w->unk_0B);
+    SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
 
     if (w->slideTimer > 0) {
         ApproachValue(&w->x, 0, (u16)w->slideTimer);
@@ -118,7 +118,7 @@ void DarkPoint_3(DarkPointWork* w) {
     ReleaseObjTiles(w->tiles);
 }
 
-void func_080AB1F8(u8 a, u16 b) {
+void AddCardToDeckViaActive(u8 a, u16 b) {
     u8 saved;
 
     saved = GetActiveDeckIndex();
@@ -126,7 +126,7 @@ void func_080AB1F8(u8 a, u16 b) {
     AddCardToActiveDeck(b);
     SetActiveDeckIndex(saved);
 }
-void func_080AB228(void) {
+void FillDebugCardCollection(void) {
 #ifdef VERSION_EU
     u16 i;
     u16 n;
@@ -196,195 +196,195 @@ void func_080AB228(void) {
 #endif
 }
 void func_080AB22C(u8 a) {
-    func_080AB1F8(a, 0);
-    func_080AB1F8(a, 1);
-    func_080AB1F8(a, 2);
-    func_080AB1F8(a, 3);
-    func_080AB1F8(a, 4);
-    func_080AB1F8(a, 5);
-    func_080AB1F8(a, 6);
-    func_080AB1F8(a, 7);
-    func_080AB1F8(a, 8);
-    func_080AB1F8(a, 9);
-    func_080AB1F8(a, 73);
-    func_080AB1F8(a, 74);
-    func_080AB1F8(a, 75);
-    func_080AB1F8(a, 76);
-    func_080AB1F8(a, 77);
-    func_080AB1F8(a, 78);
-    func_080AB1F8(a, 79);
-    func_080AB1F8(a, 80);
-    func_080AB1F8(a, 81);
-    func_080AB1F8(a, 82);
-    func_080AB1F8(a, 83);
-    func_080AB1F8(a, 84);
-    func_080AB1F8(a, 85);
-    func_080AB1F8(a, 86);
-    func_080AB1F8(a, 87);
-    func_080AB1F8(a, 88);
-    func_080AB1F8(a, 89);
-    func_080AB1F8(a, 90);
-    func_080AB1F8(a, 91);
-    func_080AB1F8(a, 92);
-    func_080AB1F8(a, 93);
+    AddCardToDeckViaActive(a, 0);
+    AddCardToDeckViaActive(a, 1);
+    AddCardToDeckViaActive(a, 2);
+    AddCardToDeckViaActive(a, 3);
+    AddCardToDeckViaActive(a, 4);
+    AddCardToDeckViaActive(a, 5);
+    AddCardToDeckViaActive(a, 6);
+    AddCardToDeckViaActive(a, 7);
+    AddCardToDeckViaActive(a, 8);
+    AddCardToDeckViaActive(a, 9);
+    AddCardToDeckViaActive(a, 73);
+    AddCardToDeckViaActive(a, 74);
+    AddCardToDeckViaActive(a, 75);
+    AddCardToDeckViaActive(a, 76);
+    AddCardToDeckViaActive(a, 77);
+    AddCardToDeckViaActive(a, 78);
+    AddCardToDeckViaActive(a, 79);
+    AddCardToDeckViaActive(a, 80);
+    AddCardToDeckViaActive(a, 81);
+    AddCardToDeckViaActive(a, 82);
+    AddCardToDeckViaActive(a, 83);
+    AddCardToDeckViaActive(a, 84);
+    AddCardToDeckViaActive(a, 85);
+    AddCardToDeckViaActive(a, 86);
+    AddCardToDeckViaActive(a, 87);
+    AddCardToDeckViaActive(a, 88);
+    AddCardToDeckViaActive(a, 89);
+    AddCardToDeckViaActive(a, 90);
+    AddCardToDeckViaActive(a, 91);
+    AddCardToDeckViaActive(a, 92);
+    AddCardToDeckViaActive(a, 93);
 }
 
-void func_080AB334(u8 a) {
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 7)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 3)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 6)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 7)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 6)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 3)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_BLIZZARD, 6)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_BLIZZARD, 5)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_CURE, 7)));
-    func_080AB1F8(a, func_08084458(CARD_ID(CARD_CURE, 5)));
+void BuildDebugKingdomKeyDeck(u8 a) {
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 7)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 3)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 6)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 7)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 6)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 3)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_BLIZZARD, 6)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_BLIZZARD, 5)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_CURE, 7)));
+    AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_CURE, 5)));
 }
 
 void func_080AB4AC(u8 a) {
-    func_080AB1F8(a, 0);
-    func_080AB1F8(a, 1);
-    func_080AB1F8(a, 2);
-    func_080AB1F8(a, 3);
-    func_080AB1F8(a, 4);
-    func_080AB1F8(a, 5);
-    func_080AB1F8(a, 6);
-    func_080AB1F8(a, 7);
-    func_080AB1F8(a, 8);
-    func_080AB1F8(a, 9);
-    func_080AB1F8(a, 173);
-    func_080AB1F8(a, 176);
-    func_080AB1F8(a, 178);
-    func_080AB1F8(a, 181);
-    func_080AB1F8(a, 184);
-    func_080AB1F8(a, 189);
-    func_080AB1F8(a, 192);
-    func_080AB1F8(a, 195);
-    func_080AB1F8(a, 197);
-    func_080AB1F8(a, 202);
-    func_080AB1F8(a, 204);
-    func_080AB1F8(a, 207);
-    func_080AB1F8(a, 213);
-    func_080AB1F8(a, 216);
-    func_080AB1F8(a, 219);
-    func_080AB1F8(a, 224);
-    func_080AB1F8(a, 225);
-    func_080AB1F8(a, 228);
-    func_080AB1F8(a, 234);
-    func_080AB1F8(a, 235);
-    func_080AB1F8(a, 238);
-    func_080AB1F8(a, 255);
-    func_080AB1F8(a, 257);
-    func_080AB1F8(a, 258);
-    func_080AB1F8(a, 245);
-    func_080AB1F8(a, 247);
-    func_080AB1F8(a, 248);
-    func_080AB1F8(a, 265);
-    func_080AB1F8(a, 267);
-    func_080AB1F8(a, 268);
-    func_080AB1F8(a, 275);
-    func_080AB1F8(a, 277);
-    func_080AB1F8(a, 278);
-    func_080AB1F8(a, 285);
-    func_080AB1F8(a, 287);
-    func_080AB1F8(a, 288);
-    func_080AB1F8(a, 295);
-    func_080AB1F8(a, 297);
-    func_080AB1F8(a, 298);
-    func_080AB1F8(a, 305);
-    func_080AB1F8(a, 307);
-    func_080AB1F8(a, 308);
-    func_080AB1F8(a, 315);
-    func_080AB1F8(a, 317);
-    func_080AB1F8(a, 318);
-    func_080AB1F8(a, 325);
-    func_080AB1F8(a, 327);
-    func_080AB1F8(a, 328);
-    func_080AB1F8(a, 335);
-    func_080AB1F8(a, 337);
-    func_080AB1F8(a, 338);
-    func_080AB1F8(a, 345);
-    func_080AB1F8(a, 347);
-    func_080AB1F8(a, 348);
-    func_080AB1F8(a, 355);
-    func_080AB1F8(a, 357);
-    func_080AB1F8(a, 358);
-    func_080AB1F8(a, 365);
-    func_080AB1F8(a, 367);
-    func_080AB1F8(a, 368);
-    func_080AB1F8(a, 375);
-    func_080AB1F8(a, 377);
-    func_080AB1F8(a, 378);
-    func_080AB1F8(a, 450);
-    func_080AB1F8(a, 459);
-    func_080AB1F8(a, 462);
-    func_080AB1F8(a, 465);
-    func_080AB1F8(a, 468);
-    func_080AB1F8(a, 492);
-    func_080AB1F8(a, 528);
-    func_080AB1F8(a, 529);
-    func_080AB1F8(a, 453);
-    func_080AB1F8(a, 471);
-    func_080AB1F8(a, 474);
-    func_080AB1F8(a, 477);
-    func_080AB1F8(a, 480);
-    func_080AB1F8(a, 486);
-    func_080AB1F8(a, 489);
-    func_080AB1F8(a, 495);
-    func_080AB1F8(a, 501);
-    func_080AB1F8(a, 504);
-    func_080AB1F8(a, 507);
-    func_080AB1F8(a, 510);
-    func_080AB1F8(a, 513);
-    func_080AB1F8(a, 519);
-    func_080AB1F8(a, 522);
+    AddCardToDeckViaActive(a, 0);
+    AddCardToDeckViaActive(a, 1);
+    AddCardToDeckViaActive(a, 2);
+    AddCardToDeckViaActive(a, 3);
+    AddCardToDeckViaActive(a, 4);
+    AddCardToDeckViaActive(a, 5);
+    AddCardToDeckViaActive(a, 6);
+    AddCardToDeckViaActive(a, 7);
+    AddCardToDeckViaActive(a, 8);
+    AddCardToDeckViaActive(a, 9);
+    AddCardToDeckViaActive(a, 173);
+    AddCardToDeckViaActive(a, 176);
+    AddCardToDeckViaActive(a, 178);
+    AddCardToDeckViaActive(a, 181);
+    AddCardToDeckViaActive(a, 184);
+    AddCardToDeckViaActive(a, 189);
+    AddCardToDeckViaActive(a, 192);
+    AddCardToDeckViaActive(a, 195);
+    AddCardToDeckViaActive(a, 197);
+    AddCardToDeckViaActive(a, 202);
+    AddCardToDeckViaActive(a, 204);
+    AddCardToDeckViaActive(a, 207);
+    AddCardToDeckViaActive(a, 213);
+    AddCardToDeckViaActive(a, 216);
+    AddCardToDeckViaActive(a, 219);
+    AddCardToDeckViaActive(a, 224);
+    AddCardToDeckViaActive(a, 225);
+    AddCardToDeckViaActive(a, 228);
+    AddCardToDeckViaActive(a, 234);
+    AddCardToDeckViaActive(a, 235);
+    AddCardToDeckViaActive(a, 238);
+    AddCardToDeckViaActive(a, 255);
+    AddCardToDeckViaActive(a, 257);
+    AddCardToDeckViaActive(a, 258);
+    AddCardToDeckViaActive(a, 245);
+    AddCardToDeckViaActive(a, 247);
+    AddCardToDeckViaActive(a, 248);
+    AddCardToDeckViaActive(a, 265);
+    AddCardToDeckViaActive(a, 267);
+    AddCardToDeckViaActive(a, 268);
+    AddCardToDeckViaActive(a, 275);
+    AddCardToDeckViaActive(a, 277);
+    AddCardToDeckViaActive(a, 278);
+    AddCardToDeckViaActive(a, 285);
+    AddCardToDeckViaActive(a, 287);
+    AddCardToDeckViaActive(a, 288);
+    AddCardToDeckViaActive(a, 295);
+    AddCardToDeckViaActive(a, 297);
+    AddCardToDeckViaActive(a, 298);
+    AddCardToDeckViaActive(a, 305);
+    AddCardToDeckViaActive(a, 307);
+    AddCardToDeckViaActive(a, 308);
+    AddCardToDeckViaActive(a, 315);
+    AddCardToDeckViaActive(a, 317);
+    AddCardToDeckViaActive(a, 318);
+    AddCardToDeckViaActive(a, 325);
+    AddCardToDeckViaActive(a, 327);
+    AddCardToDeckViaActive(a, 328);
+    AddCardToDeckViaActive(a, 335);
+    AddCardToDeckViaActive(a, 337);
+    AddCardToDeckViaActive(a, 338);
+    AddCardToDeckViaActive(a, 345);
+    AddCardToDeckViaActive(a, 347);
+    AddCardToDeckViaActive(a, 348);
+    AddCardToDeckViaActive(a, 355);
+    AddCardToDeckViaActive(a, 357);
+    AddCardToDeckViaActive(a, 358);
+    AddCardToDeckViaActive(a, 365);
+    AddCardToDeckViaActive(a, 367);
+    AddCardToDeckViaActive(a, 368);
+    AddCardToDeckViaActive(a, 375);
+    AddCardToDeckViaActive(a, 377);
+    AddCardToDeckViaActive(a, 378);
+    AddCardToDeckViaActive(a, 450);
+    AddCardToDeckViaActive(a, 459);
+    AddCardToDeckViaActive(a, 462);
+    AddCardToDeckViaActive(a, 465);
+    AddCardToDeckViaActive(a, 468);
+    AddCardToDeckViaActive(a, 492);
+    AddCardToDeckViaActive(a, 528);
+    AddCardToDeckViaActive(a, 529);
+    AddCardToDeckViaActive(a, 453);
+    AddCardToDeckViaActive(a, 471);
+    AddCardToDeckViaActive(a, 474);
+    AddCardToDeckViaActive(a, 477);
+    AddCardToDeckViaActive(a, 480);
+    AddCardToDeckViaActive(a, 486);
+    AddCardToDeckViaActive(a, 489);
+    AddCardToDeckViaActive(a, 495);
+    AddCardToDeckViaActive(a, 501);
+    AddCardToDeckViaActive(a, 504);
+    AddCardToDeckViaActive(a, 507);
+    AddCardToDeckViaActive(a, 510);
+    AddCardToDeckViaActive(a, 513);
+    AddCardToDeckViaActive(a, 519);
+    AddCardToDeckViaActive(a, 522);
 }
 
-void func_080AB880(void) {
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 7));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 6));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 5));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 3));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 4));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 3));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 2));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 2));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 1));
-    func_08084458(CARD_ID(CARD_KINGDOM_KEY, 0));
-    func_08084458(CARD_ID(CARD_BLIZZARD, 5));
-    func_08084458(CARD_ID(CARD_POTION, 6));
-    func_08084458(CARD_ID(CARD_CURE, 7));
+void ObtainStarterCards(void) {
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 7));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 6));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 3));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 4));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 3));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 2));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 2));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 1));
+    ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 0));
+    ObtainCard(CARD_ID(CARD_BLIZZARD, 5));
+    ObtainCard(CARD_ID(CARD_POTION, 6));
+    ObtainCard(CARD_ID(CARD_CURE, 7));
 }
 
-void func_080AB8E4(void) {
-    func_080AB1F8(0, 0);
-    func_080AB1F8(0, 1);
-    func_080AB1F8(0, 2);
-    func_080AB1F8(0, 3);
-    func_080AB1F8(0, 4);
-    func_080AB1F8(0, 5);
-    func_080AB1F8(0, 6);
-    func_080AB1F8(0, 7);
-    func_080AB1F8(0, 8);
-    func_080AB1F8(0, 9);
-    func_080AB1F8(0, 10);
-    func_080AB1F8(0, 11);
-    func_080AB1F8(0, 12);
-    func_080AB1F8(0, 13);
-    func_080AB1F8(0, 14);
+void FillStarterDeck(void) {
+    AddCardToDeckViaActive(0, 0);
+    AddCardToDeckViaActive(0, 1);
+    AddCardToDeckViaActive(0, 2);
+    AddCardToDeckViaActive(0, 3);
+    AddCardToDeckViaActive(0, 4);
+    AddCardToDeckViaActive(0, 5);
+    AddCardToDeckViaActive(0, 6);
+    AddCardToDeckViaActive(0, 7);
+    AddCardToDeckViaActive(0, 8);
+    AddCardToDeckViaActive(0, 9);
+    AddCardToDeckViaActive(0, 10);
+    AddCardToDeckViaActive(0, 11);
+    AddCardToDeckViaActive(0, 12);
+    AddCardToDeckViaActive(0, 13);
+    AddCardToDeckViaActive(0, 14);
 }
 
 void func_080AB964(void) {
@@ -394,11 +394,11 @@ void func_080AB968(void) {
 }
 
 #ifndef VERSION_EU
-Mode gUnk_09EE8F20 = {
+Mode gModeDeckExchange = {
     "Mode_Deck",
-    (ModeInitFunc)func_080AAF78,
-    func_080AAFB4,
-    func_080AB008,
+    (ModeInitFunc)Mode_DeckExchange_0,
+    Mode_DeckExchange_1,
+    Mode_DeckExchange_2,
 };
 #endif
 
@@ -411,7 +411,7 @@ TaskDesc gTaskDescDarkPoint = {
     sizeof(DarkPointWork),
 };
 
-CardDescriptionText* gUnk_09EE8F48[98] = {
+CardDescriptionText* gCardKindDescriptions[98] = {
 #if defined(VERSION_EU)
     &gUnkEu_09F5EA0C,
 #elif defined(VERSION_JP)
@@ -1100,7 +1100,7 @@ CardDescriptionText* gUnk_09EE8F48[98] = {
 #endif
 };
 
-CardDescriptionText* gUnk_09EE90D0[26] = {
+CardDescriptionText* gMapCardDescriptions[26] = {
 #if defined(VERSION_EU)
     &gUnkEu_09F5F18C,
 #elif defined(VERSION_JP)
@@ -1285,7 +1285,7 @@ CardDescriptionText* gUnk_09EE90D0[26] = {
 #endif
 };
 
-CardDescriptionText* gUnk_09EE9138[14] = {
+CardDescriptionText* gWorldDescriptions[14] = {
 #if defined(VERSION_EU)
     &gUnkEu_09F5F394,
 #elif defined(VERSION_JP)

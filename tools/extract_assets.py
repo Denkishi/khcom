@@ -22,7 +22,7 @@ def load_yaml(text):
 ROOT = baserom.ROOT
 ROM_BASE = 0x08000000
 ROM_LIMIT = 0x0A000000
-COMMON = {"assets/common/movie_codec.bin": ("gUnk_081196B4", 15100)}
+COMMON = {"assets/common/movie_codec.bin": ("MovieVideoCodecStart", 15100)}
 LEGACY_COMMON = {"asm/movie_codec.bin": "assets/common/movie_codec.bin"}
 KEEP = {"manifest.yaml", ".stamp", ".gitkeep"}
 

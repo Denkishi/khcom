@@ -11,15 +11,15 @@ TaskDesc gTaskDescBosLstEdg = {
     sizeof(LstEdgWork),
 };
 
-s32 func_08110658(s32 x) {
+s32 BosLstEdgSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08110660(s32 x) {
+s32 BosLstEdgSquare2(s32 x) {
     return x * x;
 }
 
-u8 func_08110668(Task* task) {
+u8 BosLstEdgIsActive(Task* task) {
     LstEdgWork* s;
 
     s = task->work;
@@ -30,13 +30,13 @@ void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
     work->state = 0;
     work->unk_002 = 0;
     work->timer = 0;
-    work->unk_006 = arg->unk_00;
+    work->delay = arg->delay;
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
-    work->unk_014 = arg->x;
-    work->unk_018 = arg->y;
-    work->unk_01C = arg->z;
+    work->homeX = arg->x;
+    work->homeY = arg->y;
+    work->homeZ = arg->z;
     work->tiles = AllocObjTiles(0x80, gUnk_09C5C4E2);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
     AnimInit(&work->anim, gUnk_09EFAF1C, gUnk_09EFAEF8);
@@ -48,50 +48,50 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
     switch (work->state) {
     case 0:
-        work->unk_006--;
-        if (work->unk_006 <= 0) {
+        work->delay--;
+        if (work->delay <= 0) {
             work->state = 1;
             work->unk_002 = 0;
             work->timer = 0;
-            work->unk_006 = 0;
+            work->delay = 0;
             p = gBtlWork->actor;
-            work->unk_020 = p->x;
-            work->unk_024 = p->y;
-            work->unk_028 = -0x1000;
+            work->targetX = p->x;
+            work->targetY = p->y;
+            work->targetZ = -0x1000;
         }
         break;
     case 1:
-        work->unk_020 = gBtlWork->actor->x;
-        ApproachValueHalfSteps(&work->x, work->unk_020, 30);
-        ApproachValueHalfSteps(&work->y, work->unk_024, 30);
-        ApproachValueHalfSteps(&work->z, work->unk_028, 30);
+        work->targetX = gBtlWork->actor->x;
+        ApproachValueHalfSteps(&work->x, work->targetX, 30);
+        ApproachValueHalfSteps(&work->y, work->targetY, 30);
+        ApproachValueHalfSteps(&work->z, work->targetZ, 30);
         work->timer++;
         if (work->timer > 49) {
             work->state = 2;
             work->unk_002 = 0;
             work->timer = 0;
-            work->unk_006 = 0;
+            work->delay = 0;
         }
-        func_08011F78(0x10C, work->x, work->y, work->z, 8, 8, 1);
+        ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
     case 2:
-        ApproachValueHalfSteps(&work->x, work->unk_014, 30);
-        ApproachValueHalfSteps(&work->y, work->unk_018, 30);
-        ApproachValueHalfSteps(&work->z, work->unk_01C, 30);
+        ApproachValueHalfSteps(&work->x, work->homeX, 30);
+        ApproachValueHalfSteps(&work->y, work->homeY, 30);
+        ApproachValueHalfSteps(&work->z, work->homeZ, 30);
         work->timer++;
         if (work->timer > 49) {
             work->state = 3;
             work->unk_002 = 0;
             work->timer = 0;
-            work->unk_006 = 0;
+            work->delay = 0;
         }
-        func_08011F78(0x10C, work->x, work->y, work->z, 8, 8, 1);
+        ApplyAttackBox(0x10C, work->x, work->y, work->z, 8, 8, 1);
         break;
     case 3:
         work->state = 4;
         work->unk_002 = 0;
         work->timer = 0;
-        work->unk_006 = 0;
+        work->delay = 0;
         break;
     case 4:
         AnimStart(&work->anim, 1, 1);

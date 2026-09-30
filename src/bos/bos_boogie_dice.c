@@ -8,22 +8,22 @@
 void task_bos_boogie_saku_2(BoogieSakuWork* work);
 u8 task_bos_ursula_1(UrsulaWork* work);
 
-u16 gUnk_0203C554 EWRAM_COMMON(4);
-u8 gUnk_0203C558 EWRAM_COMMON(4);
-struct BtlObj* gUnk_0203C55C EWRAM_COMMON(4);
-u16 gUnk_0203C560 EWRAM_COMMON(4);
-u8 gUnk_0203C564 EWRAM_COMMON(4);
-u8 gUnk_0203C568 EWRAM_COMMON(4);
-u8 gUnk_0203C56C EWRAM_COMMON(4);
-u8 gUnk_0203C570 EWRAM_COMMON(4);
-u8 gUnk_0203C574 EWRAM_COMMON(4);
-u8 gUnk_0203C578 EWRAM_COMMON(4);
-u8 gUnk_0203C57C EWRAM_COMMON(4);
-s32 gUnk_0203C580 EWRAM_COMMON(4);
-u8 gUnk_0203C584 EWRAM_COMMON(4);
-UnkStruct_0203C590 gUnk_0203C590 EWRAM_COMMON(16);
+u16 gBosBoogieSakuOpenTime EWRAM_COMMON(4);
+u8 gBosBoogieDiceFace EWRAM_COMMON(4);
+struct BtlObj* gBosBoogieActor EWRAM_COMMON(4);
+u16 gBosBoogieDiceBreakCount EWRAM_COMMON(4);
+u8 gBosBoogieDiceFaceReady EWRAM_COMMON(4);
+u8 gBosBoogieGimmickCardDropped EWRAM_COMMON(4);
+u8 gBosBoogieAttackHit EWRAM_COMMON(4);
+u8 gBosBoogieTaskKnockedDown EWRAM_COMMON(4);
+u8 gBosBoogieKnivesRetract EWRAM_COMMON(4);
+u8 gBosBoogieKnivesMoveRight EWRAM_COMMON(4);
+u8 gBosUrsulaActive EWRAM_COMMON(4);
+s32 gBosUrsulaBaseZ EWRAM_COMMON(4);
+u8 gMapChkUseParams EWRAM_COMMON(4);
+MapFloorState gMapFloorState EWRAM_COMMON(16);
 
-const EmyKind gUnk_096FDF54 = { 39, 0, 16, 16, 0, 0, 1 };
+const EmyKind gBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, 1 };
 
 TaskDesc gTaskDescBosBoogieDice = {
     "task_bos_boogie_dice",
@@ -59,7 +59,7 @@ void* const gBoogieDiceFaces[6][3] = {
 #endif
 };
 
-const EmyKind gUnk_096FDFC4 = { 39, 0, 16, 16, 0, 0, 0 };
+const EmyKind gBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieExplosiondice = {
     "task_bos_boogie_explosiondice",
@@ -88,13 +88,13 @@ TaskDesc gTaskDescBosBoogieMap = {
     sizeof(BoogieMapWork),
 };
 
-const UnkStruct_096FE034Entry gUnk_096FE020[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
+const BosMapanimeFrame gBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-const UnkStruct_096FE034 gUnk_096FE034 = { gUnk_096FE020, 5, 0, gUnk_097ED478, 0X7C00, 0X0100, 0X0300, 0, 0 };
+const BosMapanimeDef gUnk_096FE034 = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0X7C00, 0X0100, 0X0300, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE04C = { gUnk_096FE020, 5, 0, gUnk_097ED578, 0X7D00, 0X0100, 0X0300, 0, 0 };
+const BosMapanimeDef gUnk_096FE04C = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0X7D00, 0X0100, 0X0300, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE064 = { gUnk_096FE020, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
+const BosMapanimeDef gUnk_096FE064 = { gBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
@@ -116,7 +116,7 @@ TaskDesc gTaskDescBosBoogieDisk = {
     sizeof(BoogieDiskWork),
 };
 
-const EmyKind gUnk_096FE0C0 = { 39, 0, 192, 16, 0, 0, 0 };
+const EmyKind gBosBoogieKnifeEmyKind = { 39, 0, 192, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKnife = {
     "task_bos_boogie_knife",
@@ -155,7 +155,7 @@ const BattleBackgroundDef gBosUrsulaBattleBackgroundDef = {
     gUnk_097EE378, 0x7000, { 0, 0 }, gUnk_0984AFF8, 0xe0, { 0, 0 }, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
 };
 
-const u16* gUnk_09EF5100[12] = {
+const u16* gBosUrsulaMapBlocksLeft[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -198,7 +198,7 @@ const u16* gUnk_09EF5100[12] = {
 #endif
 };
 
-const u16* gUnk_09EF5130[12] = {
+const u16* gBosUrsulaMapBlocksHurtLeft[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -241,7 +241,7 @@ const u16* gUnk_09EF5130[12] = {
 #endif
 };
 
-const u16* gUnk_09EF5160[12] = {
+const u16* gBosUrsulaMapBlocksRight[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -284,7 +284,7 @@ const u16* gUnk_09EF5160[12] = {
 #endif
 };
 
-const u16* gUnk_09EF5190[12] = {
+const u16* gBosUrsulaMapBlocksHurtRight[12] = {
 #if defined(VERSION_US)
     gBossMapBlockUs_08125E24,
     gBossMapBlockUs_08125E24,
@@ -374,25 +374,25 @@ TaskDesc gTaskDescBosUrsulaBacktako = {
     sizeof(UrsulaBacktakoWork),
 };
 
-const UnkStruct_096FE034Entry gUnk_096FE1EC[6] = { { 60, 0 }, { 4, 1 }, { 6, 2 }, { 20, 0 }, { 4, 1 }, { 6, 2 } };
+const BosMapanimeFrame gBosUrsulaMapanimeIdleFrames[6] = { { 60, 0 }, { 4, 1 }, { 6, 2 }, { 20, 0 }, { 4, 1 }, { 6, 2 } };
 
-const UnkStruct_096FE034Entry gUnk_096FE204[12] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 } };
+const BosMapanimeFrame gBosUrsulaMapanimeWindupFrames[12] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 2 }, { 5, 1 }, { 5, 2 }, { 5, 3 } };
 
-const UnkStruct_096FE034Entry gUnk_096FE234[5] = { { 10, 0 }, { 10, 1 }, { 10, 2 }, { 10, 3 }, { 10, 4 } };
+const BosMapanimeFrame gBosUrsulaMapanimeBubbleFrames[5] = { { 10, 0 }, { 10, 1 }, { 10, 2 }, { 10, 3 }, { 10, 4 } };
 
-const UnkStruct_096FE034Entry gUnk_096FE248[5] = { { 10, 0 }, { 10, 1 }, { 120, 2 }, { 10, 3 }, { 10, 4 } };
+const BosMapanimeFrame gBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, { 10, 1 }, { 120, 2 }, { 10, 3 }, { 10, 4 } };
 
-const UnkStruct_096FE034Entry gUnk_096FE25C[1] = { { 0, 0 } };
+const BosMapanimeFrame gBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
 
-const UnkStruct_096FE034 gUnk_096FE260 = { gUnk_096FE1EC, 6, 0, gUnk_097F5378, 0X0C00, 0X0300, 0X0400, 0, 0 };
+const BosMapanimeDef gBosUrsulaMapanimeIdle = { gBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0X0C00, 0X0300, 0X0400, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE278 = { gUnk_096FE204, 12, 0, gUnk_097F5E78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+const BosMapanimeDef gBosUrsulaMapanimeWindup = { gBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE290 = { gUnk_096FE234, 5, 0, gUnk_097F8AD8, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+const BosMapanimeDef gBosUrsulaMapanimeBubble = { gBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE2A8 = { gUnk_096FE248, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+const BosMapanimeDef gBosUrsulaMapanimeCharge = { gBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
-const UnkStruct_096FE034 gUnk_096FE2C0 = { gUnk_096FE25C, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+const BosMapanimeDef gBosUrsulaMapanimeRecover = { gBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
 
 TaskDesc gTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",
@@ -434,9 +434,9 @@ u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d) {
     return r;
 }
 
-u8 func_080D9B28(BoogieDiceWork* work) {
+u8 BosBoogieDiceIsHeld(BoogieDiceWork* work) {
     if (work->state == 3) {
-        if (work->parent->unk_000 == 9) {
+        if (work->parent->state == 9) {
             if (AnimGetFrame(&work->parent->anim) <= 2) {
                 if (!AnimIsFinished(&work->parent->anim)) {
                     return 1;
@@ -447,13 +447,13 @@ u8 func_080D9B28(BoogieDiceWork* work) {
     return 0;
 }
 
-void func_080D9B6C(BoogieDiceWork* work) {
-    if (work->unk_160 <= 255) {
-        work->unk_160 += 8;
+void BosBoogieDiceGrow(BoogieDiceWork* work) {
+    if (work->scaleY <= 255) {
+        work->scaleY += 8;
     }
 
-    if (work->unk_15C <= 255) {
-        work->unk_15C += 8;
+    if (work->scaleX <= 255) {
+        work->scaleX += 8;
     }
 }
 
@@ -464,23 +464,23 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     s32 e;
     u16 r;
 
-    work->unk_170 = arg->unk_175;
+    work->follower = arg->diceFollower;
     work->parent = arg;
     work->state = 10;
     work->timer = 0;
-    work->unk_150 = -0x4CC;
-    work->unk_154 = GetRandom() % 437 + 0x4C;
+    work->vz = -0x4CC;
+    work->speed = GetRandom() % 437 + 0x4C;
     work->angle = GetRandom() % 0x78 + 0x44;
-    work->unk_160 = 0x33;
-    work->unk_15C = 0x33;
+    work->scaleY = 0x33;
+    work->scaleX = 0x33;
     work->y = 0;
-    work->unk_168 = 0;
-    gUnk_0203C564 = 0;
+    work->counted = 0;
+    gBosBoogieDiceFaceReady = 0;
     c = p->x;
     d = 0x24000;
     e = p->z - 0x3800;
-    func_0801B37C(&work->obj, &gUnk_096FDF54, c, d, e);
-    ColliderInit(&work->obj.collider, 3, gUnk_096FDF54.unk_08, gUnk_096FDF54.unk_06);
+    InitEnemyBtlObj(&work->obj, &gBosBoogieDiceEmyKind, c, d, e);
+    ColliderInit(&work->obj.collider, 3, gBosBoogieDiceEmyKind.radius, gBosBoogieDiceEmyKind.height);
     work->obj.flags |= 0x400;
 #ifdef VERSION_EU
     work->obj.flags |= 0x100;
@@ -497,15 +497,15 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
 
-    if (work->unk_170 == 0) {
-        func_0801BCD4(&work->obj);
+    if (work->follower == 0) {
+        RequestEnemyCardUse(&work->obj);
     }
 }
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
     BtlObj* p = &work->obj;
 
-    if (work->unk_170 == 0) {
-        switch (func_0801ADAC(p)) {
+    if (work->follower == 0) {
+        switch (UpdateBtlObjReaction(p)) {
         case 5:
             work->state = 3;
             work->timer = 0;
@@ -513,12 +513,12 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         case 4:
             work->state = 0;
             work->timer = 0;
-            gUnk_0203C554 += 180;
+            gBosBoogieSakuOpenTime += 180;
             break;
         case 2:
         default:
-            if (func_0801C1C0(0) != 0) {
-                func_080D9A58();
+            if (ConsumeGimmickFlag(0) != 0) {
+                BosBoogieApplyGimmick();
 
                 if (work->state == 3) {
                     work->state = 0;
@@ -561,7 +561,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             break;
         }
 
-        switch ((u32)func_0801ADAC(p)) {
+        switch ((u32)UpdateBtlObjReaction(p)) {
         case 1:
         case 3:
         case 6:
@@ -575,7 +575,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
     switch (work->state) {
     case 3:
-        if (func_080D9B28(work) != 0) {
+        if (BosBoogieDiceIsHeld(work) != 0) {
             return 1;
         }
 
@@ -584,16 +584,16 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 #else
         p->flags &= ~0x80;
 #endif
-        func_080D9B6C(work);
-        work->unk_150 += 51;
-        p->z += work->unk_150;
-        p->x += gSineTable[work->angle] * work->unk_154 >> 8;
-        p->y += -gSineTable[work->angle + 0x40] * work->unk_154 >> 8;
+        BosBoogieDiceGrow(work);
+        work->vz += 51;
+        p->z += work->vz;
+        p->x += gSineTable[work->angle] * work->speed >> 8;
+        p->y += -gSineTable[work->angle + 0x40] * work->speed >> 8;
 
-        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
-            work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += p->collider.unk_38;
-            p->y += p->collider.unk_3C;
+        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+            work->speed = work->speed * 230 >> 8;
+            p->x += p->collider.pushX;
+            p->y += p->collider.pushY;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -603,16 +603,16 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         if (p->z > 0) {
             p->z = 0;
-            work->unk_150 = -(work->unk_150 * 179 >> 8);
-            work->unk_154 = work->unk_154 * 212 >> 8;
+            work->vz = -(work->vz * 179 >> 8);
+            work->speed = work->speed * 212 >> 8;
 
-            if (work->unk_150 >= -25) {
+            if (work->vz >= -25) {
                 RollBoogieDice(work);
                 work->state = 4;
                 p->flags |= 0x100;
 
-                if (work->unk_170 == 0) {
-                    func_0801AF08(p);
+                if (work->follower == 0) {
+                    ClearBtlObjActionFlags(p);
                 }
             }
         }
@@ -625,28 +625,28 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->flags &= ~0x80;
 #endif
 
-        if ((s16)work->timer == 0 && work->unk_170 == 0) {
-            func_0801AF08(p);
-            gUnk_0203C560++;
-            work->unk_168 = 1;
+        if ((s16)work->timer == 0 && work->follower == 0) {
+            ClearBtlObjActionFlags(p);
+            gBosBoogieDiceBreakCount++;
+            work->counted = 1;
         }
 
         work->timer++;
-        func_080D9B6C(work);
+        BosBoogieDiceGrow(work);
 
-        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
-            work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += p->collider.unk_38;
-            p->y += p->collider.unk_3C;
+        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+            work->speed = work->speed * 230 >> 8;
+            p->x += p->collider.pushX;
+            p->y += p->collider.pushY;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
-        work->unk_150 += 51;
-        p->z += work->unk_150;
+        work->vz += 51;
+        p->z += work->vz;
 
         if (p->z > 0) {
             p->z = 0;
-            work->unk_150 = -(work->unk_150 * 128 >> 8);
+            work->vz = -(work->vz * 128 >> 8);
             work->timer = 0;
             work->state = 1;
         }
@@ -659,14 +659,14 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         }
 
         work->timer++;
-        work->unk_150 += 51;
-        p->x += gSineTable[work->angle] * work->unk_154 >> 8;
-        p->y += -gSineTable[work->angle + 0x40] * work->unk_154 >> 8;
+        work->vz += 51;
+        p->x += gSineTable[work->angle] * work->speed >> 8;
+        p->y += -gSineTable[work->angle + 0x40] * work->speed >> 8;
 
-        if (p->collider.unk_2C != 0 && work->unk_160 > 255 && work->unk_15C > 255) {
-            work->unk_154 = work->unk_154 * 230 >> 8;
-            p->x += p->collider.unk_38;
-            p->y += p->collider.unk_3C;
+        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+            work->speed = work->speed * 230 >> 8;
+            p->x += p->collider.pushX;
+            p->y += p->collider.pushY;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -676,17 +676,17 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         if (p->z > 0) {
             p->z = 0;
-            work->unk_150 = -(work->unk_150 * 179 >> 8);
+            work->vz = -(work->vz * 179 >> 8);
         }
 
         break;
     case 2:
-        if (work->unk_170 == 0 && gUnk_0203C568 == 0 && GetRandom() % 16 <= 7) {
-            gUnk_0203C568 = 1;
+        if (work->follower == 0 && gBosBoogieGimmickCardDropped == 0 && GetRandom() % 16 <= 7) {
+            gBosBoogieGimmickCardDropped = 1;
             _0801C1F8(0, p->x, p->y, p->z);
         }
 
-        func_0801C2DC(p, 1);
+        SetBtlObjUnhittable(p, 1);
 
         return 0;
     case 4:
@@ -705,13 +705,13 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         work->timer++;
         break;
     case 6:
-        func_0801C2DC(p, 1);
-        work->unk_160 -= 12;
+        SetBtlObjUnhittable(p, 1);
+        work->scaleY -= 12;
         work->y += 96;
 
-        if (work->unk_160 <= 127) {
+        if (work->scaleY <= 127) {
             work->state = 7;
-            work->unk_150 = -0x4CC;
+            work->vz = -0x4CC;
             work->timer = 0;
         }
 
@@ -726,22 +726,22 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         work->timer++;
         break;
     case 8:
-        work->unk_150 += 51;
-        p->z += work->unk_150;
-        work->unk_160 += 25;
+        work->vz += 51;
+        p->z += work->vz;
+        work->scaleY += 25;
         work->y -= 200;
 
-        if (work->unk_160 > 255) {
+        if (work->scaleY > 255) {
             work->state = 9;
             work->timer = 0;
-        } else if (work->unk_160 <= 178) {
+        } else if (work->scaleY <= 178) {
             break;
         }
     case 9:
-        work->unk_15C -= 38;
+        work->scaleX -= 38;
 
-        if (work->unk_15C <= 24) {
-            func_08013F5C(p->x, p->y + p->z, 0x100, 8, 16);
+        if (work->scaleX <= 24) {
+            BgFxStartDarkDeathBlend(p->x, p->y + p->z, 0x100, 8, 16);
 
             return 0;
         }
@@ -778,25 +778,25 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
     s32 a;
     s32 b;
 
-    if (func_080D9B28(work) != 0) {
+    if (BosBoogieDiceIsHeld(work) != 0) {
         return;
     }
 
     c = GetBattleSpritePriorityFlags(p->y);
 
-    if (func_0801CA00(p) != 0) {
+    if (StepHitFlash(p) != 0) {
         pal = work->palette2;
     } else {
         pal = work->palette;
     }
 
-    a = work->unk_15C;
+    a = work->scaleX;
 
     if (a > 0x100) {
         a = 0x100;
     }
 
-    b = work->unk_160;
+    b = work->scaleY;
 
     if (b > 0x100) {
         b = 0x100;
@@ -810,12 +810,12 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
 }
 
 void task_bos_boogie_dice_3(BoogieDiceWork* work) {
-    if (work->unk_168 == 0 && gUnk_0203C560 != 3 && work->unk_170 == 0 && work->state != 10) {
-        gUnk_0203C564 = 1;
+    if (work->counted == 0 && gBosBoogieDiceBreakCount != 3 && work->follower == 0 && work->state != 10) {
+        gBosBoogieDiceFaceReady = 1;
     }
 
     ColliderUnregister(&work->obj.collider);
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
@@ -853,15 +853,15 @@ void RollBoogieDice(BoogieDiceWork* work) {
         break;
     }
 
-    if (work->unk_170 == 0) {
-        gUnk_0203C558 = n;
+    if (work->follower == 0) {
+        gBosBoogieDiceFace = n;
     }
 
     AnimChangeWithTables(&work->anim, 0, 0, tbl[n][0], tbl[n][1]);
     SetObjTileSource(work->tiles, tbl[n][2]);
 }
 
-u8 func_080DA4DC(BoogieExplosiondiceWork* work) {
+u8 BosBoogieExplosiondiceIsHeld(BoogieExplosiondiceWork* work) {
     BoogieWork* boogie = work->boogie;
 
     if (boogie->animationIndex == 3 && AnimGetFrame(&boogie->anim) <= 2) {
@@ -875,16 +875,16 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     BtlObj* p;
 
     work->boogie = arg;
-    work->unk_000 = 0;
-    work->unk_004 = 0;
-    work->unk_150 = 0;
+    work->state = 0;
+    work->timer = 0;
+    work->vz = 0;
     work->unk_154 = GetRandom() % 437 + 76;
     work->unk_158 = GetRandom() % 128 + 0x40;
     p = gBtlWork->actor;
     work->obj.x = p->x;
     work->obj.y = p->y;
     work->obj.z = -0xA000;
-    ColliderInit(&work->obj.collider, 8, gUnk_096FDFC4.unk_08, gUnk_096FDFC4.unk_06);
+    ColliderInit(&work->obj.collider, 8, gBosBoogieExplosiondiceEmyKind.radius, gBosBoogieExplosiondiceEmyKind.height);
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6774, 4), gUnk_0979666A);
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
@@ -897,23 +897,23 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
 u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
     BtlObj* p = &work->obj;
 
-    if (func_080DA4DC(work) != 0) {
+    if (BosBoogieExplosiondiceIsHeld(work) != 0) {
         return 1;
     }
 
-    switch (work->unk_000) {
+    switch (work->state) {
     case 0:
-        work->unk_150 += 51;
-        p->z += work->unk_150;
+        work->vz += 51;
+        p->z += work->vz;
 
         if (p->z > -0x2000) {
-            func_08014020(p->x, p->y + p->z, 0);
+            BgFxStartExplosion(p->x, p->y + p->z, 0);
             return 0;
         }
 
         break;
     case 2:
-        if (func_080128EC() == 0) {
+        if (BgFxIsActive() == 0) {
             return 0;
         }
 
@@ -929,13 +929,13 @@ u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
 
 void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
     BtlObj* p = &work->obj;
-    u8 f = func_080DA4DC(work);
+    u8 f = BosBoogieExplosiondiceIsHeld(work);
     s16 x;
     s16 y;
     u16 c;
     void* pal;
 
-    if (f != 0 || work->unk_000 == 1) {
+    if (f != 0 || work->state == 1) {
         return;
     }
 
@@ -955,7 +955,7 @@ void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 func_080DA73C(void) {
+u8 BosBoogieIsActorPastSaku(void) {
     if (gBtlWork->actor->y <= 0x23EFF) {
         return 1;
     }
@@ -969,57 +969,57 @@ void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
     work->palette = LoadObjPalette(gBoss02objPalette, 32);
     AnimInit(&work->anim, gSakuAnims, gSakuFrames);
     AnimStart(&work->anim, 0, 0);
-    work->unk_020 = 0;
+    work->openTimer = 0;
     TaskPoolInit(&work->tasks, 1);
     work->task = 0;
-    work->unk_040 = 0;
+    work->closePending = 0;
 }
 
 u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
     u8 f;
 
-    if (gUnk_0203C560 > 2 && AnimIsFinished(&work->anim) != 0) {
-        if (work->unk_020 < gUnk_0203C554) {
-            if (work->unk_020 == 0) {
-                func_0802F1E8();
+    if (gBosBoogieDiceBreakCount > 2 && AnimIsFinished(&work->anim) != 0) {
+        if (work->openTimer < gBosBoogieSakuOpenTime) {
+            if (work->openTimer == 0) {
+                BtlMapStartShake();
             }
 
-            work->unk_020++;
+            work->openTimer++;
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
 
-            if (func_080DA73C() != 0) {
-                func_0801C2DC(&work->boogie->actor, 0);
+            if (BosBoogieIsActorPastSaku() != 0) {
+                SetBtlObjUnhittable(&work->boogie->actor, 0);
             } else {
-                func_0801C2DC(&work->boogie->actor, 1);
+                SetBtlObjUnhittable(&work->boogie->actor, 1);
             }
-        } else if (work->boogie->unk_000 != 4) {
-            work->unk_040 = 1;
-            gUnk_0203C560 = 0;
-            work->unk_020 = 0;
-            gUnk_0203C554 = 0;
-            func_0801C2DC(&work->boogie->actor, 1);
+        } else if (work->boogie->state != 4) {
+            work->closePending = 1;
+            gBosBoogieDiceBreakCount = 0;
+            work->openTimer = 0;
+            gBosBoogieSakuOpenTime = 0;
+            SetBtlObjUnhittable(&work->boogie->actor, 1);
 
-            if (func_080DA73C() != 0) {
+            if (BosBoogieIsActorPastSaku() != 0) {
                 work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieExplosiondice, work->boogie);
             }
         }
     }
 
-    if (gUnk_0203C560 <= 2 && IsTaskActive(work->task) == 0) {
+    if (gBosBoogieDiceBreakCount <= 2 && IsTaskActive(work->task) == 0) {
         SetBattleBounds(0x80, 0x170, 0x240, 0x278);
 
-        if (gUnk_0203C560 != 0) {
-            AnimChange(&work->anim, gUnk_0203C560, 0);
-        } else if (work->unk_040 != 0) {
+        if (gBosBoogieDiceBreakCount != 0) {
+            AnimChange(&work->anim, gBosBoogieDiceBreakCount, 0);
+        } else if (work->closePending != 0) {
             AnimChange(&work->anim, 3, 0);
-            work->unk_040 = 0;
+            work->closePending = 0;
         }
     }
 
     f = AnimIsFinished(&work->anim);
 
-    if (gUnk_0203C560 > 2
-            || (gUnk_0203C560 == 0 && AnimGetId(&work->anim) == 3
+    if (gBosBoogieDiceBreakCount > 2
+            || (gBosBoogieDiceBreakCount == 0 && AnimGetId(&work->anim) == 3
                 && IsTaskActive(work->task) == 0)) {
         AnimUpdate(&work->anim);
     }
@@ -1037,7 +1037,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
     return 1;
 }
 
-void func_080DA954(BoogieSakuWork* work, s32 a, u16 b) {
+void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 a, u16 b) {
     s16 x;
     s16 y;
 
@@ -1049,9 +1049,9 @@ void func_080DA954(BoogieSakuWork* work, s32 a, u16 b) {
 void task_bos_boogie_saku_2(BoogieSakuWork* work) {
     u16 v = GetBattleSpritePriorityFlags(0x23F00);
 
-    func_080DA954(work, 0xA800, v);
-    func_080DA954(work, 0xF800, v);
-    func_080DA954(work, 0x14800, v);
+    BosBoogieSakuDrawAt(work, 0xA800, v);
+    BosBoogieSakuDrawAt(work, 0xF800, v);
+    BosBoogieSakuDrawAt(work, 0x14800, v);
 }
 
 void task_bos_boogie_saku_3(BoogieSakuWork* work) {
@@ -1065,26 +1065,26 @@ void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg) {
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 2);
     gBtlWork->scale = 0x100;
-    gBtlWork->unk_028 = 0x100;
+    gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0xF800;
     gBtlWork->y = 0x21000;
-    gBtlWork->unk_000 = 0xF800;
-    gBtlWork->unk_004 = 0x21000;
+    gBtlWork->viewX = 0xF800;
+    gBtlWork->viewY = 0x21000;
     gBtlWork->x2 = 0xF800;
     gBtlWork->y2 = 0x21000;
-    gBtlWork->unk_01C = 0xF800;
-    gBtlWork->unk_020 = 0x21000;
-    gBtlWork->unk_01A = 15;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
-    ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
+    gBtlWork->zoomX = 0xF800;
+    gBtlWork->zoomY = 0x21000;
+    gBtlWork->zoomSteps = 15;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
+    ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 
 u8 task_bos_boogie_map_1(void) {
     s32 a;
     s32 b;
 
-    func_0802F208();
+    BtlMapUpdateShake();
     a = (gBtlWork->x2 - gBtlWork->x) >> 3;
     b = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
@@ -1096,39 +1096,39 @@ u8 task_bos_boogie_map_1(void) {
 
     gBtlWork->x += a;
     gBtlWork->y += b;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->unk_000 - 0x7800 < gBtlWork->unk_0DA * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 0x78) << 8;
-    } else if (gBtlWork->unk_000 + 0x7800 > gBtlWork->unk_0DC * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 0x78) << 8;
+    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
+    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
     }
 
-    if (gBtlWork->unk_004 - 0x5000 < 0x18C00) {
-        gBtlWork->unk_004 = 0x1DC00;
-    } else if (gBtlWork->unk_004 + 0x5000 > 0x27800) {
-        gBtlWork->unk_004 = 0x22800;
+    if (gBtlWork->viewY - 0x5000 < 0x18C00) {
+        gBtlWork->viewY = 0x1DC00;
+    } else if (gBtlWork->viewY + 0x5000 > 0x27800) {
+        gBtlWork->viewY = 0x22800;
     }
 
-    gBtlWork->unk_004 += func_0802F268();
-    ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (gBtlWork->unk_004 >> 8) - 0x108);
+    gBtlWork->viewY += BtlMapGetShake();
+    ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (gBtlWork->viewY >> 8) - 0x108);
 
     return 1;
 }
 
 void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work) {
-    func_080DDDDC(&work->unk_000[0], &gUnk_096FE034);
-    func_080DDDDC(&work->unk_000[1], &gUnk_096FE04C);
-    func_080DDDDC(&work->unk_000[2], &gUnk_096FE064);
+    BosMapanimeInit(&work->anims[0], &gUnk_096FE034);
+    BosMapanimeInit(&work->anims[1], &gUnk_096FE04C);
+    BosMapanimeInit(&work->anims[2], &gUnk_096FE064);
 }
 
 u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {
     u32 i;
     u8 r = 0;
 
-    for (i = gUnk_0203C560; i <= 2; i++) {
-        r = func_080DDDEC(&work->unk_000[i], work->unk_000[i].unk_08, r);
+    for (i = gBosBoogieDiceBreakCount; i <= 2; i++) {
+        r = BosMapanimeUpdate(&work->anims[i], work->anims[i].def, r);
     }
 
     return 1;
@@ -1140,7 +1140,7 @@ void task_bos_boogie_mapanime_2(void) {
 void task_bos_boogie_mapanime_3(void) {
 }
 
-u8 func_080DABFC(s32* x, s32* y, s16 w, s16 h, s32 z) {
+u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z) {
     u8 r = 0;
 
     if (*x < (0x80 - w) << 8) {
@@ -1174,31 +1174,31 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
 
     work->state = 2;
     work->timer = 0;
-    work->unk_15C = 0;
-    work->unk_150 = -0x200;
+    work->angle = 0;
+    work->vz = -0x200;
 
     if (gBtlWork->actor->x < 0xF800) {
         x = gBtlWork->actor->x + 0xF000;
-        work->unk_154 = -0x266;
+        work->vx = -0x266;
     } else {
         x = gBtlWork->actor->x - 0xF000;
-        work->unk_154 = 0x266;
+        work->vx = 0x266;
     }
 
-    work->unk_158 = 0x133;
-    v = arg->unk_02E;
+    work->vy = 0x133;
+    v = arg->maxHp;
 
-    if (arg->unk_02C < (s16)(v / 3)) {
-        work->unk_154 *= 3;
-        work->unk_158 *= 3;
-    } else if (arg->unk_02C < v * 2 / 3) {
-        work->unk_154 *= 2;
-        work->unk_158 *= 2;
+    if (arg->hp < (s16)(v / 3)) {
+        work->vx *= 3;
+        work->vy *= 3;
+    } else if (arg->hp < v * 2 / 3) {
+        work->vx *= 2;
+        work->vy *= 2;
     }
 
     d = gBtlWork->actor->y;
     e = -0x1000;
-    func_0801B37C(&work->obj, &gBosBoogieDiskEmyKind, x, d, e);
+    InitEnemyBtlObj(&work->obj, &gBosBoogieDiskEmyKind, x, d, e);
     work->obj.flags |= 0x400;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gNokogiriFrames, 8), gNokogiriTiles);
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
@@ -1207,24 +1207,24 @@ void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg) {
     AnimStart(&work->anim, 0, 1);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
-    func_0801BCD4(&work->obj);
+    RequestEnemyCardUse(&work->obj);
     m4aSongNumStart(SONG_BTL_BU_KAITEN);
 }
 u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
     BtlObj* p = &work->obj;
 
-    switch (func_0801ADAC(p)) {
+    switch (UpdateBtlObjReaction(p)) {
     case 5:
         work->state = 0;
         work->timer = 0;
         break;
     case 2:
     default:
-        if (func_0801C1C0(0) == 0) {
+        if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
-        func_080D9A58();
+        BosBoogieApplyGimmick();
     case 1:
     case 3:
     case 4:
@@ -1241,40 +1241,40 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
 
     switch (work->state) {
     case 0:
-        p->y += work->unk_158;
+        p->y += work->vy;
 
-        if (func_080DABFC(&p->x, &p->y, 0x20, -0x10, p->z) != 0) {
-            work->unk_158 = -work->unk_158;
+        if (ClampBoogieDiskPosition(&p->x, &p->y, 0x20, -0x10, p->z) != 0) {
+            work->vy = -work->vy;
         }
 
-        p->x += work->unk_154;
+        p->x += work->vx;
 
-        if ((work->unk_154 > 0 && p->x > 0x19000)
-                || (work->unk_154 <= 0 && p->x < 0x6000)) {
-            func_0801AF08(p);
+        if ((work->vx > 0 && p->x > 0x19000)
+                || (work->vx <= 0 && p->x < 0x6000)) {
+            ClearBtlObjActionFlags(p);
 
             return 0;
         }
 
-        if (func_08011F78(0x105, p->x, p->y, p->z, 0x20, 0x10, 1) == 1) {
-            gUnk_0203C56C = 1;
+        if (ApplyAttackBox(0x105, p->x, p->y, p->z, 0x20, 0x10, 1) == 1) {
+            gBosBoogieAttackHit = 1;
             m4aSongNumStart(SONG_BTL_MON_SWORD01);
         }
 
         break;
     case 1:
         if (p->z >= 0) {
-            gUnk_0203C570 = 1;
-            func_0801AF08(p);
+            gBosBoogieTaskKnockedDown = 1;
+            ClearBtlObjActionFlags(p);
 
             return 0;
         }
 
         work->timer++;
-        p->x -= work->unk_154;
-        work->unk_15C += 0x19;
-        p->z += work->unk_150;
-        work->unk_150 += 0x42;
+        p->x -= work->vx;
+        work->angle += 0x19;
+        p->z += work->vz;
+        work->vz += 0x42;
 
         if (p->z > 0) {
             p->z = 0;
@@ -1302,7 +1302,7 @@ void task_bos_boogie_disk_2(BoogieDiskWork* work) {
     s16 y;
     u16 c = GetBattleSpritePriorityFlags(p->y);
     void* pal = work->palette;
-    ObjAffine* obj = AllocObjAffineAngle(work->unk_15C, 1);
+    ObjAffine* obj = AllocObjAffineAngle(work->angle, 1);
 
     WorldToScreen(&x, &y, p->x, p->y, p->z);
     DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, obj, c,
@@ -1311,29 +1311,29 @@ void task_bos_boogie_disk_2(BoogieDiskWork* work) {
 }
 
 void task_bos_boogie_disk_3(BoogieDiskWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_080DB04C(BoogieKnifeWork* work) {
+void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
     s32 dy;
 
-    if (gUnk_0203C578 != 0) {
+    if (gBosBoogieKnivesMoveRight != 0) {
         work->scaleX = 0x100;
-        work->unk_14C = 0;
+        work->drawOffsetX = 0;
         dy = 0x2000;
     } else {
         work->scaleX = -0x100;
-        work->unk_14C = 0;
+        work->drawOffsetX = 0;
         dy = -0x2000;
     }
 
-    if (func_08011F78(0x106, p->x - dy, p->y, p->z - 0x1000, 4, 0x1C, 0x10) == 1) {
-        gUnk_0203C56C = 1;
+    if (ApplyAttackBox(0x106, p->x - dy, p->y, p->z - 0x1000, 4, 0x1C, 0x10) == 1) {
+        gBosBoogieAttackHit = 1;
         m4aSongNumStart(SONG_EF_KU_ATT04);
     }
 }
@@ -1344,30 +1344,30 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->state = 0;
     work->timer = 0;
 
-    if (gUnk_0203C578 != 0) {
-        work->unk_140 = 0x133;
+    if (gBosBoogieKnivesMoveRight != 0) {
+        work->vx = 0x133;
     } else {
-        work->unk_140 = -0x133;
+        work->vx = -0x133;
     }
 
-    work->unk_13C = 0;
-    work->unk_150 = 0x42;
-    work->unk_154 = -0x500;
-    p = gUnk_0203C55C;
-    v = p->unk_02E;
+    work->vz = 0;
+    work->gravity = 0x42;
+    work->bounceVz = -0x500;
+    p = gBosBoogieActor;
+    v = p->maxHp;
 
-    if (p->unk_02C < (s16)(v / 3)) {
-        work->unk_150 = (work->unk_150 * 0x300) >> 8;
-        work->unk_154 = -0xA00;
-    } else if (p->unk_02C < v * 2 / 3) {
-        work->unk_150 = (work->unk_150 * 0x200) >> 8;
-        work->unk_154 = -0x780;
+    if (p->hp < (s16)(v / 3)) {
+        work->gravity = (work->gravity * 0x300) >> 8;
+        work->bounceVz = -0xA00;
+    } else if (p->hp < v * 2 / 3) {
+        work->gravity = (work->gravity * 0x200) >> 8;
+        work->bounceVz = -0x780;
     }
 
     work->obj.y = 0x25C00;
     work->obj.z = -0xC000;
     work->obj.x = *arg;
-    ColliderInit(&work->obj.collider, 8, gUnk_096FE0C0.unk_08, gUnk_096FE0C0.unk_06);
+    ColliderInit(&work->obj.collider, 8, gBosBoogieKnifeEmyKind.radius, gBosBoogieKnifeEmyKind.height);
     work->tiles = LoadObjTiles(gKnifeTiles, 0xC40);
     work->palette = LoadObjPalette(gKnifePalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
@@ -1377,40 +1377,40 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
 u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
 
-    if (gUnk_0203C574 != 0) {
+    if (gBosBoogieKnivesRetract != 0) {
         work->state = 2;
     }
 
     switch (work->state) {
     case 0:
-        p->z += work->unk_13C;
-        work->unk_13C += work->unk_150;
+        p->z += work->vz;
+        work->vz += work->gravity;
 
         if (p->z < 0) {
-            func_080DB04C(work);
+            BosBoogieKnifeAttack(work);
         } else {
             p->z = 0;
             work->state = 1;
-            work->unk_13C = work->unk_154;
+            work->vz = work->bounceVz;
         }
 
         break;
     case 1:
-        p->x += work->unk_140;
-        p->z += work->unk_13C;
-        work->unk_13C += work->unk_150;
+        p->x += work->vx;
+        p->z += work->vz;
+        work->vz += work->gravity;
         work->timer++;
 
         if (p->z < 0) {
-            func_080DB04C(work);
+            BosBoogieKnifeAttack(work);
         } else {
             p->z = 0;
-            work->unk_13C = work->unk_154;
+            work->vz = work->bounceVz;
 
             if ((s16)work->timer > 199.99999f) {
                 work->state = 2;
             } else {
-                func_080DB04C(work);
+                BosBoogieKnifeAttack(work);
             }
         }
 
@@ -1438,7 +1438,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
     void* pal;
     ObjAffine* aff;
 
-    WorldToScreen(&x, &y, p->x + work->unk_14C, p->y - 0x2400, p->z);
+    WorldToScreen(&x, &y, p->x + work->drawOffsetX, p->y - 0x2400, p->z);
 
     if ((u16)(x + 0x20) > 0x130) {
         return;
@@ -1446,7 +1446,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
 
     c = GetBattleSpritePriorityFlags(p->y);
 
-    if (gUnk_0203C574 != 0 && (gFrameCounter & 1) != 0 && gBtlWork->unk_070 == 0) {
+    if (gBosBoogieKnivesRetract != 0 && (gFrameCounter & 1) != 0 && gBtlWork->paused == 0) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -1464,7 +1464,7 @@ void task_bos_boogie_knife_3(BoogieKnifeWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-u8 func_080DB428(BoogieKnifeWork* work) {
+u8 BosBoogieKnifeIsLanded(BoogieKnifeWork* work) {
     if (work->obj.z >= 0) {
         return 1;
     }
@@ -1472,7 +1472,7 @@ u8 func_080DB428(BoogieKnifeWork* work) {
     return 0;
 }
 
-u8 func_080DB438(BoogieKnifereaderWork* work) {
+u8 BosBoogieAnyKnifeActive(BoogieKnifereaderWork* work) {
     s32 i;
 
     for (i = 0; i <= 4; i++) {
@@ -1484,12 +1484,12 @@ u8 func_080DB438(BoogieKnifereaderWork* work) {
     return 0;
 }
 
-void func_080DB468(BoogieKnifereaderWork* work) {
+void BosBoogieSpawnKnives(BoogieKnifereaderWork* work) {
     s32 i;
     s32 v;
 
     if (GetRandom() % 16 > 7) {
-        gUnk_0203C578 = 1;
+        gBosBoogieKnivesMoveRight = 1;
         v = -0x4000;
 
         for (i = 0; i <= 4; i++) {
@@ -1497,7 +1497,7 @@ void func_080DB468(BoogieKnifereaderWork* work) {
             v += 0x6800;
         }
     } else {
-        gUnk_0203C578 = 0;
+        gBosBoogieKnivesMoveRight = 0;
         v = 0x23000;
 
         for (i = 0; i <= 4; i++) {
@@ -1512,16 +1512,16 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
 
     work->state = 2;
     work->timer = 0;
-    gUnk_0203C574 = 0;
+    gBosBoogieKnivesRetract = 0;
     TaskPoolInit(&work->tasks, 5);
 
     for (i = 0; i < 5; i++) {
         work->knives[i] = 0;
     }
 
-    func_0801B37C(&work->obj, &gBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
-    func_0801C2DC(&work->obj, 1);
-    func_0801BCD4(&work->obj);
+    InitEnemyBtlObj(&work->obj, &gBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
+    SetBtlObjUnhittable(&work->obj, 1);
+    RequestEnemyCardUse(&work->obj);
 }
 
 u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
@@ -1530,18 +1530,18 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
     void* pool;
     s32 checkKnives;
 
-    switch (func_0801ADAC(e)) {
+    switch (UpdateBtlObjReaction(e)) {
     case 5:
         work->state = 0;
         work->timer = 0;
         break;
     case 2:
     default:
-        if (func_0801C1C0(0) == 0) {
+        if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
-        func_080D9A58();
+        BosBoogieApplyGimmick();
     case 1:
     case 3:
     case 4:
@@ -1566,13 +1566,13 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         checkKnives = 0;
         break;
     case 1:
-        gUnk_0203C574 = 1;
+        gBosBoogieKnivesRetract = 1;
         checkKnives = 1;
         break;
     case 0:
         if ((s16)work->timer == 0) {
             work->timer++;
-            func_080DB468(work);
+            BosBoogieSpawnKnives(work);
             checkKnives = 0;
             break;
         }
@@ -1587,8 +1587,8 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         return 1;
     }
 
-    if (func_080DB438(work) == 0) {
-        func_0801AF08(e);
+    if (BosBoogieAnyKnifeActive(work) == 0) {
+        ClearBtlObjActionFlags(e);
 
         return 0;
     }
@@ -1597,7 +1597,7 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         pool = &work->tasks;
 
         if (IsTaskActive(work->knives[i]) != 0) {
-            if (func_080DB428(work->knives[i]->work) != 0) {
+            if (BosBoogieKnifeIsLanded(work->knives[i]->work) != 0) {
                 m4aSongNumStart(SONG_BTL_BU_TRAP);
             }
 
@@ -1615,7 +1615,7 @@ void task_bos_boogie_knifereader_2(BoogieKnifereaderWork* work) {
 }
 
 void task_bos_boogie_knifereader_3(BoogieKnifereaderWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     TaskPoolDestroy(&work->tasks);
 }
 
@@ -1627,36 +1627,36 @@ void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg) {
     work->state = 2;
     work->timer = 0;
     work->boogie = arg;
-    work->unk_150 = 0;
+    work->vz = 0;
     c = arg->actor.x;
     d = arg->actor.y + 0x100;
     e = arg->actor.z - 0x7C00;
-    func_0801B37C(&work->obj, &gBosBoogieKaihukuEmyKind, c, d, e);
+    InitEnemyBtlObj(&work->obj, &gBosBoogieKaihukuEmyKind, c, d, e);
     work->obj.flags |= 0x400;
     work->tiles = LoadObjTiles(gKaifukuTiles, 0x400);
     work->palette = LoadObjPalette(gKaifukuPalette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gKaifukuAnims, gKaifukuFrames);
     AnimStart(&work->anim, 0, 1);
-    func_0801BCD4(&work->obj);
+    RequestEnemyCardUse(&work->obj);
 }
 u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
     BtlObj* p = &work->obj;
     BoogieWork* arg = work->boogie;
     BtlObj* q = &arg->actor;
 
-    switch (func_0801ADAC(p)) {
+    switch (UpdateBtlObjReaction(p)) {
     case 5:
         work->state = 0;
         work->timer = 0;
         break;
     case 2:
     default:
-        if (func_0801C1C0(0) == 0) {
+        if (ConsumeGimmickFlag(0) == 0) {
             break;
         }
 
-        func_080D9A58();
+        BosBoogieApplyGimmick();
     case 1:
     case 3:
     case 4:
@@ -1673,40 +1673,40 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
 
     switch (work->state) {
     case 0:
-        func_0802F274(p->x, p->y + p->z);
+        BtlMapSetCameraTarget(p->x, p->y + p->z);
 
         if ((s16)work->timer == 0) {
-            func_08015228(p->x, p->y, p->z + 0x2800, 0x199);
+            BgFxStartBoogieKaihuku(p->x, p->y, p->z + 0x2800, 0x199);
             m4aSongNumStart(SONG_BTL_BU_KAIFUKU);
             work->timer++;
             break;
         }
 
-        if (func_080128EC() != 0) {
+        if (BgFxIsActive() != 0) {
             break;
         }
 
-        func_08019190(q, 10);
+        CreateBtlPopTask(q, 10);
         arg = work->boogie;
-        arg->actor.unk_02C += arg->actor.unk_02E / 16;
+        arg->actor.hp += arg->actor.maxHp / 16;
         arg = work->boogie;
 
-        if (arg->actor.unk_02C > arg->actor.unk_02E) {
-            arg->actor.unk_02C = arg->actor.unk_02E;
+        if (arg->actor.hp > arg->actor.maxHp) {
+            arg->actor.hp = arg->actor.maxHp;
         }
 
         return 0;
     case 1:
         if (p->z >= 0) {
-            gUnk_0203C570 = 1;
-            func_0801AF08(p);
+            gBosBoogieTaskKnockedDown = 1;
+            ClearBtlObjActionFlags(p);
 
             return 0;
         }
 
         work->timer++;
-        p->z += work->unk_150;
-        work->unk_150 += 0x42;
+        p->z += work->vz;
+        work->vz += 0x42;
 
         if (p->z < -0x2000) {
             p->z = 0;
@@ -1744,44 +1744,44 @@ void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work) {
 }
 
 void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
 }
 
-void func_080DB978(UrsulaWork* work) {
+void BosUrsulaUpdateMapBlocks(UrsulaWork* work) {
     if (work->state >= 3 && work->state <= 4) {
         if (work->obj.x > gBtlWork->actor->x) {
-            if (work->mapBlocks != gUnk_09EF5130) {
-                work->mapBlocks = gUnk_09EF5130;
-                SetBgMapBlocks(0, gUnk_09EF5130, 4, 3);
+            if (work->mapBlocks != gBosUrsulaMapBlocksHurtLeft) {
+                work->mapBlocks = gBosUrsulaMapBlocksHurtLeft;
+                SetBgMapBlocks(0, gBosUrsulaMapBlocksHurtLeft, 4, 3);
             } else {
-                func_080DD69C(0);
+                BosUrsulaStartAttack(0);
             }
         } else {
-            if (work->mapBlocks != gUnk_09EF5190) {
-                work->mapBlocks = gUnk_09EF5190;
-                SetBgMapBlocks(0, gUnk_09EF5190, 4, 3);
+            if (work->mapBlocks != gBosUrsulaMapBlocksHurtRight) {
+                work->mapBlocks = gBosUrsulaMapBlocksHurtRight;
+                SetBgMapBlocks(0, gBosUrsulaMapBlocksHurtRight, 4, 3);
             } else {
-                func_080DD69C(0);
+                BosUrsulaStartAttack(0);
             }
         }
-    } else if (func_080DC510() != 0) {
-        if (work->mapBlocks != gUnk_09EF5100) {
-            work->mapBlocks = gUnk_09EF5100;
-            SetBgMapBlocks(0, gUnk_09EF5100, 4, 3);
+    } else if (BosUrsulaIsFacingLeft() != 0) {
+        if (work->mapBlocks != gBosUrsulaMapBlocksLeft) {
+            work->mapBlocks = gBosUrsulaMapBlocksLeft;
+            SetBgMapBlocks(0, gBosUrsulaMapBlocksLeft, 4, 3);
         }
     } else {
-        if (work->mapBlocks != gUnk_09EF5160) {
-            work->mapBlocks = gUnk_09EF5160;
-            SetBgMapBlocks(0, gUnk_09EF5160, 4, 3);
+        if (work->mapBlocks != gBosUrsulaMapBlocksRight) {
+            work->mapBlocks = gBosUrsulaMapBlocksRight;
+            SetBgMapBlocks(0, gBosUrsulaMapBlocksRight, 4, 3);
         }
     }
 }
 
-u8 func_080DBA14(UrsulaWork* work) {
-    if (work->unk_142 == 0 && func_080DD1FC(work->tako->work) == 0 && func_080DD1FC(work->tako2->work) == 0) {
+u8 BosUrsulaIsGuarded(UrsulaWork* work) {
+    if (work->gimmickTimer == 0 && BosUrsulaTakoIsBusy(work->tako->work) == 0 && BosUrsulaTakoIsBusy(work->tako2->work) == 0) {
         return 1;
     }
 
@@ -1792,33 +1792,33 @@ void task_bos_ursula_0(UrsulaWork* work) {
     u8 v;
 
     gUrsulaWork = work;
-    gUnk_0203C57C = 1;
+    gBosUrsulaActive = 1;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosUrsulaMap, (void*)&gBosUrsulaBattleBackgroundDef);
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsulaBorder, 0);
     work->state = 0;
-    work->unk_004 = 0;
+    work->timer = 0;
     work->mapBlocks = 0;
-    work->unk_160 = 0;
-    work->unk_140 = 0;
-    work->unk_13C = 0;
-    work->unk_138 = 0;
-    work->unk_142 = 0;
+    work->takoRecoverPending = 0;
+    work->bobTimer = 0;
+    work->bobTarget = 0;
+    work->bobZ = 0;
+    work->gimmickTimer = 0;
     SetBattleBounds(0, 0x200, 0x1A8, 0x1E0);
     SetBattleActorPosition(0x10000, 0x1A800, 0);
-    gBtlWork->unk_0D8 = 0xFF00;
-    gUnk_0203C580 = -0x5000;
-    func_0801B37C(&work->obj, &gBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
-    work->obj.unk_010 = 0;
+    gBtlWork->bossPriorityOffset = 0xFF00;
+    gBosUrsulaBaseZ = -0x5000;
+    InitEnemyBtlObj(&work->obj, &gBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
+    work->obj.groundZ = 0;
     work->obj.flags |= 4;
-    func_0801C2DC(&work->obj, 1);
-    func_080DB978(work);
-    RedrawBgMapAt(0, (gBtlWork->unk_000 - (work->obj.x - 0x12000)) >> 8,
-        (gBtlWork->unk_004 - (work->obj.y + work->obj.z - 0x12000)) >> 8);
-    func_0801C298(0, 1);
-    func_0801C298(1, 1);
-    gBtlWork->unk_0CC = work->obj.x;
-    gBtlWork->unk_0D0 = work->obj.y;
-    gBtlWork->unk_0D4 = work->obj.z;
+    SetBtlObjUnhittable(&work->obj, 1);
+    BosUrsulaUpdateMapBlocks(work);
+    RedrawBgMapAt(0, (gBtlWork->viewX - (work->obj.x - 0x12000)) >> 8,
+        (gBtlWork->viewY - (work->obj.y + work->obj.z - 0x12000)) >> 8);
+    SetBtlPaletteFadeExcluded(0, 1);
+    SetBtlPaletteFadeExcluded(1, 1);
+    gBtlWork->bossX = work->obj.x;
+    gBtlWork->bossY = work->obj.y;
+    gBtlWork->bossZ = work->obj.z;
     TaskPoolInit(&work->tasks, 5);
     v = 1;
     work->tako = TaskCreate(&work->tasks, &gTaskDescBosUrsulaTako, &v);
@@ -1827,33 +1827,33 @@ void task_bos_ursula_0(UrsulaWork* work) {
     TaskCreate(&work->tasks, &gTaskDescBosUrsulaMapanime, 0);
     v = 1;
     TaskCreate(&work->tasks, &gTaskDescBosUrsulaBacktako, &v);
-    work->unk_15E = 0;
+    work->gimmickDelay = 0;
 }
 
-void func_080DBC00(UrsulaWork* work) {
+void BosUrsulaUpdateBob(UrsulaWork* work) {
     BtlObj* p = &work->obj;
 
-    if ((s16)work->unk_140 == 0) {
-        work->unk_140 = 32;
+    if ((s16)work->bobTimer == 0) {
+        work->bobTimer = 32;
 
-        if (work->unk_13C == 0) {
-            work->unk_13C = -0x400;
+        if (work->bobTarget == 0) {
+            work->bobTarget = -0x400;
         } else {
-            work->unk_13C = 0;
+            work->bobTarget = 0;
         }
     }
 
-    ApproachValue(&work->unk_138, work->unk_13C, work->unk_140);
-    p->z = gUnk_0203C580 + work->unk_138;
-    work->unk_140--;
+    ApproachValue(&work->bobZ, work->bobTarget, work->bobTimer);
+    p->z = gBosUrsulaBaseZ + work->bobZ;
+    work->bobTimer--;
 }
 
-u8 func_080DBC68(UrsulaWork* work) {
+u8 BosUrsulaMoveForward(UrsulaWork* work) {
     BtlObj* p = &work->obj;
 
-    func_080DBC00(work);
+    BosUrsulaUpdateBob(work);
 
-    if (func_080DC510() != 0) {
+    if (BosUrsulaIsFacingLeft() != 0) {
         p->x -= 0x100;
 
         if (p->x <= -0x9800) {
@@ -1872,7 +1872,7 @@ u8 func_080DBC68(UrsulaWork* work) {
     return 1;
 }
 
-s32 func_080DBCC0(UrsulaWork* work) {
+s32 BosUrsulaChooseAttackPhase0(UrsulaWork* work) {
     BtlObj* p = gBtlWork->actor;
 
     if (p->x < work->obj.x - 0x5000 || work->obj.x + 0x5000 < p->x) {
@@ -1882,7 +1882,7 @@ s32 func_080DBCC0(UrsulaWork* work) {
     return 3;
 }
 
-s32 func_080DBCEC(UrsulaWork* work) {
+s32 BosUrsulaChooseAttackPhase1(UrsulaWork* work) {
     if (work->obj.x - 0x3800 < gBtlWork->actor->x && gBtlWork->actor->x < work->obj.x + 0x3800) {
         return 3;
     }
@@ -1894,7 +1894,7 @@ s32 func_080DBCEC(UrsulaWork* work) {
     return 1;
 }
 
-s32 func_080DBD44(UrsulaWork* work) {
+s32 BosUrsulaChooseAttackPhase2(UrsulaWork* work) {
     if (gBtlWork->actor->z <= -0x5000) {
         return 3;
     } else {
@@ -1911,37 +1911,37 @@ s32 func_080DBD44(UrsulaWork* work) {
     return 1;
 }
 
-s32 func_080DBDC0(UrsulaWork* work) {
-    switch (func_080DC5E8()) {
+s32 BosUrsulaChooseAttack(UrsulaWork* work) {
+    switch (BosUrsulaGetHpPhase()) {
     case 0:
-        return func_080DBCC0(work);
+        return BosUrsulaChooseAttackPhase0(work);
     case 1:
-        return func_080DBCEC(work);
+        return BosUrsulaChooseAttackPhase1(work);
     case 2:
     default:
-        return func_080DBD44(work);
+        return BosUrsulaChooseAttackPhase2(work);
     }
 }
 
-void func_080DBDEC(UrsulaWork* work) {
-    if (work->unk_160 != 0) {
-        func_080DD210(work->tako->work);
-        func_080DD210(work->tako2->work);
-        work->unk_160 = 0;
+void BosUrsulaRecoverPendingTakos(UrsulaWork* work) {
+    if (work->takoRecoverPending != 0) {
+        BosUrsulaTakoEndDown(work->tako->work);
+        BosUrsulaTakoEndDown(work->tako2->work);
+        work->takoRecoverPending = 0;
     }
 }
 
-void func_080DBE18(UrsulaWork* work) {
-    if (work->unk_142 == 0 && func_080DD230(work->tako->work) == 0 && func_080DD230(work->tako2->work) == 0) {
-        func_080DBDEC(work);
-        work->unk_160 = 1;
+void BosUrsulaUpdateTakoRecovery(UrsulaWork* work) {
+    if (work->gimmickTimer == 0 && BosUrsulaTakoIsStoodOn(work->tako->work) == 0 && BosUrsulaTakoIsStoodOn(work->tako2->work) == 0) {
+        BosUrsulaRecoverPendingTakos(work);
+        work->takoRecoverPending = 1;
     } else {
-        work->unk_160 = 0;
+        work->takoRecoverPending = 0;
     }
 }
 
-u16 func_080DBE64(void) {
-    switch (func_080DC5E8()) {
+u16 BosUrsulaGetCardInterval(void) {
+    switch (BosUrsulaGetHpPhase()) {
     case 0:
         return 150;
     case 1:
@@ -1958,140 +1958,140 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     s32 x;
     u16 chance;
 
-    switch (func_0801ADAC(p)) {
+    switch (UpdateBtlObjReaction(p)) {
     case 5:
         work->state = 1;
-        work->unk_004 = 0;
+        work->timer = 0;
         break;
     case 1:
     case 6:
     case 7:
-        func_080DBE18(work);
+        BosUrsulaUpdateTakoRecovery(work);
         work->state = 3;
-        work->unk_004 = 0;
+        work->timer = 0;
         break;
     case 3:
     case 8:
         work->state = 4;
-        work->unk_004 = 0;
+        work->timer = 0;
         break;
     case 4:
         work->state = 2;
         break;
     }
 
-    if (func_0801C1C0(0)) {
-        if (work->unk_142 == 0) {
-            work->unk_148 = gBtlWork->unk_000;
-            work->unk_14C = gBtlWork->unk_004;
-            work->unk_154 = gBtlWork->unk_004;
-            work->unk_158 = 40;
-            work->unk_15A = 40;
+    if (ConsumeGimmickFlag(0)) {
+        if (work->gimmickTimer == 0) {
+            work->gimmickCameraX = gBtlWork->viewX;
+            work->gimmickViewY = gBtlWork->viewY;
+            work->gimmickCameraY = gBtlWork->viewY;
+            work->sinkSteps = 40;
+            work->riseSteps = 40;
             work->unk_15C = 20;
-            work->unk_150 = 0;
-            work->unk_15E = 9;
+            work->sinkZ = 0;
+            work->gimmickDelay = 9;
         }
-        work->unk_142 = 300;
+        work->gimmickTimer = 300;
         if (work->state == 1) {
             work->state = 2;
         }
     }
 
-    if (work->unk_142 == 0) {
-        gUnk_0203C580 = -0x5000;
-    } else if (work->unk_15E == 0) {
-        if (work->unk_158 != 0) {
-            ApproachValue((s32*)&work->unk_150, 0x3800, work->unk_158);
-            ApproachValue((s32*)&work->unk_154, work->unk_14C + 0x3800, work->unk_158 >> 1);
-            func_0802F274(work->unk_148, work->unk_154);
-            work->unk_158--;
+    if (work->gimmickTimer == 0) {
+        gBosUrsulaBaseZ = -0x5000;
+    } else if (work->gimmickDelay == 0) {
+        if (work->sinkSteps != 0) {
+            ApproachValue((s32*)&work->sinkZ, 0x3800, work->sinkSteps);
+            ApproachValue((s32*)&work->gimmickCameraY, work->gimmickViewY + 0x3800, work->sinkSteps >> 1);
+            BtlMapSetCameraTarget(work->gimmickCameraX, work->gimmickCameraY);
+            work->sinkSteps--;
         } else {
-            if (work->unk_142 == 300) {
-                func_0802F1E8();
+            if (work->gimmickTimer == 300) {
+                BtlMapStartShake();
             }
-            work->unk_142--;
-            if (work->unk_142 == 0 && work->state == 4) {
-                work->unk_142 = 1;
+            work->gimmickTimer--;
+            if (work->gimmickTimer == 0 && work->state == 4) {
+                work->gimmickTimer = 1;
             }
-            if (work->unk_142 > 280) {
-                func_0802F274(work->unk_148, work->unk_154);
+            if (work->gimmickTimer > 280) {
+                BtlMapSetCameraTarget(work->gimmickCameraX, work->gimmickCameraY);
             }
         }
-        if (work->unk_142 == 0 && work->unk_15A != 0) {
-            work->unk_142++;
-            ApproachValue((s32*)&work->unk_150, 0, work->unk_15A);
-            work->unk_15A--;
+        if (work->gimmickTimer == 0 && work->riseSteps != 0) {
+            work->gimmickTimer++;
+            ApproachValue((s32*)&work->sinkZ, 0, work->riseSteps);
+            work->riseSteps--;
         }
-        gUnk_0203C580 = work->unk_150 - 0x5000;
+        gBosUrsulaBaseZ = work->sinkZ - 0x5000;
     } else {
-        work->unk_15E--;
+        work->gimmickDelay--;
     }
 
-    if (func_080DBA14(work)) {
-        func_0801C2DC(&work->obj, 1);
+    if (BosUrsulaIsGuarded(work)) {
+        SetBtlObjUnhittable(&work->obj, 1);
     } else {
-        func_0801C2DC(&work->obj, 0);
+        SetBtlObjUnhittable(&work->obj, 0);
     }
 
     switch (work->state) {
     case 1:
-        if ((s16)work->unk_004 == 0) {
-            func_080DD69C(func_080DBDC0(work));
-            work->unk_004 = 1;
+        if ((s16)work->timer == 0) {
+            BosUrsulaStartAttack(BosUrsulaChooseAttack(work));
+            work->timer = 1;
         } else {
-            if (func_080DD794()) {
-                func_080DBC68(work);
+            if (BosUrsulaIsCharging()) {
+                BosUrsulaMoveForward(work);
             }
-            if (!func_080DD754()) {
-                func_0801AF08(p);
+            if (!BosUrsulaIsAttacking()) {
+                ClearBtlObjActionFlags(p);
                 work->state = 0;
             }
         }
         break;
     case 2:
-        func_0801AF08(p);
+        ClearBtlObjActionFlags(p);
         work->state = 0;
-        func_080DD69C(0);
+        BosUrsulaStartAttack(0);
         break;
     case 3:
-        if ((s16)work->unk_004 > 20) {
-            func_0801AF08(p);
-            if (func_080DC5E8() == 1 && !func_080DC528()) {
+        if ((s16)work->timer > 20) {
+            ClearBtlObjActionFlags(p);
+            if (BosUrsulaGetHpPhase() == 1 && !BosUrsulaIsGimmickActive()) {
                 work->state = 5;
             } else {
                 work->state = 0;
             }
-            work->unk_004 = 0;
+            work->timer = 0;
         } else {
-            work->unk_004++;
+            work->timer++;
         }
         break;
     case 4:
-        if ((s16)work->unk_004 == 0) {
-            func_0801AF4C(p);
-            func_080DB978(work);
-            work->unk_004++;
-        } else if ((s16)work->unk_004 == 1) {
-            work->unk_004++;
-        } else if ((s16)work->unk_004 == 2) {
-            if (func_080DC510()) {
+        if ((s16)work->timer == 0) {
+            BeginBossDefeat(p);
+            BosUrsulaUpdateMapBlocks(work);
+            work->timer++;
+        } else if ((s16)work->timer == 1) {
+            work->timer++;
+        } else if ((s16)work->timer == 2) {
+            if (BosUrsulaIsFacingLeft()) {
                 x = p->x + 0x1400;
             } else {
                 x = p->x - 0x1C00;
             }
-            func_08014AAC(x, p->y + p->z + 0x1C00);
+            BgFxStartBossDeath(x, p->y + p->z + 0x1C00);
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
-            work->unk_004++;
-        } else if ((s16)work->unk_004 == 3) {
+            work->timer++;
+        } else if ((s16)work->timer == 3) {
             if (!FadeIsActive()) {
-                work->unk_004++;
+                work->timer++;
             }
-        } else if ((s16)work->unk_004 < 124) {
-            work->unk_004++;
-            if ((s16)work->unk_004 == 124) {
-                func_0801536C();
+        } else if ((s16)work->timer < 124) {
+            work->timer++;
+            if ((s16)work->timer == 124) {
+                BgFxStartBossDeathFlash();
             }
-        } else if (!func_080128EC()) {
+        } else if (!BgFxIsActive()) {
             pos.x = p->x;
             if (pos.x < 0x2000) {
                 pos.x = 0x2000;
@@ -2102,10 +2102,10 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             pos.y = 0x1A800;
             pos.z = p->z;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &pos);
-            func_0801B008();
-            func_0801B918(p);
+            EndBossDefeat();
+            DropBossPrizes(p);
             DisableBg(0);
-            gUnk_0203C57C = 0;
+            gBosUrsulaActive = 0;
             return 0;
         }
         break;
@@ -2115,34 +2115,34 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         } else {
             p->flags &= ~4ULL;
         }
-        if (!func_080DC528()) {
-            if (func_080DBA14(work)) {
-                chance = func_080DBE64();
+        if (!BosUrsulaIsGimmickActive()) {
+            if (BosUrsulaIsGuarded(work)) {
+                chance = BosUrsulaGetCardInterval();
                 if ((u16)(GetRandom() % chance) == 0) {
-                    func_0801BCD4(&work->obj);
+                    RequestEnemyCardUse(&work->obj);
                 }
             }
             if ((u32)p->x > 0x20000) {
                 work->state = 5;
             }
-            if (func_080DC5E8() == 2) {
+            if (BosUrsulaGetHpPhase() == 2) {
                 if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) > 0x6800) {
                     work->state = 5;
                 }
             }
         }
-        func_080DBC00(work);
+        BosUrsulaUpdateBob(work);
         break;
     case 5:
-        if (func_080DC528()) {
-            func_080DBC00(work);
+        if (BosUrsulaIsGimmickActive()) {
+            BosUrsulaUpdateBob(work);
         } else {
-            if (!func_080DBC68(work)) {
+            if (!BosUrsulaMoveForward(work)) {
                 p->flags ^= 4;
             }
-            if (func_080DC5E8() == 2 && p->x > 0x6800 && p->x < 0x19800) {
-                if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && func_080DBA14(work)) {
-                    func_0801BCD4(&work->obj);
+            if (BosUrsulaGetHpPhase() == 2 && p->x > 0x6800 && p->x < 0x19800) {
+                if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && BosUrsulaIsGuarded(work)) {
+                    RequestEnemyCardUse(&work->obj);
                     work->state = 0;
                 }
             }
@@ -2154,16 +2154,16 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
     }
 
     if (work->state != 4) {
-        func_080DB978(work);
+        BosUrsulaUpdateMapBlocks(work);
     }
-    if (func_080DBA14(work)) {
+    if (BosUrsulaIsGuarded(work)) {
         ColliderSetPosition(&p->collider, p->x, p->y, p->z);
     } else {
         ColliderSetPosition(&p->collider, p->x, p->y + 0x1000, p->z - 0x1000);
     }
-    gBtlWork->unk_0CC = p->x;
-    gBtlWork->unk_0D0 = p->y;
-    gBtlWork->unk_0D4 = p->z;
+    gBtlWork->bossX = p->x;
+    gBtlWork->bossY = p->y;
+    gBtlWork->bossZ = p->z;
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
@@ -2171,41 +2171,41 @@ void task_bos_ursula_2(UrsulaWork* work) {
     BtlObj* p = &work->obj;
     s32 d = 0;
 
-    if (func_080DC510() != 0 && work->mapBlocks == gUnk_09EF5190) {
+    if (BosUrsulaIsFacingLeft() != 0 && work->mapBlocks == gBosUrsulaMapBlocksHurtRight) {
         d = -0x1000;
-    } else if (func_080DC510() == 0 && work->mapBlocks == gUnk_09EF5130) {
+    } else if (BosUrsulaIsFacingLeft() == 0 && work->mapBlocks == gBosUrsulaMapBlocksHurtLeft) {
         d = 0x1000;
     }
 
-    ScrollBgMapTo(0, (gBtlWork->unk_000 - (p->x - 0x12000) + d) >> 8,
-        (gBtlWork->unk_004 - (p->y + p->z - 0x12000)) >> 8);
+    ScrollBgMapTo(0, (gBtlWork->viewX - (p->x - 0x12000) + d) >> 8,
+        (gBtlWork->viewY - (p->y + p->z - 0x12000)) >> 8);
     TaskPoolDraw(&work->tasks);
 }
 
 void task_bos_ursula_3(UrsulaWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     TaskPoolDestroy(&work->tasks);
     gDispCnt &= ~DISPCNT_WIN0_ON;
 }
 
-u8 func_080DC510(void) {
+u8 BosUrsulaIsFacingLeft(void) {
     return gUrsulaWork->obj.flags & 4;
 }
 
-u8 func_080DC528(void) {
-    if (gUrsulaWork->unk_142 == 0) {
+u8 BosUrsulaIsGimmickActive(void) {
+    if (gUrsulaWork->gimmickTimer == 0) {
         return 0;
     }
 
     return 1;
 }
 
-u8 func_080DC544(void) {
+u8 BosUrsulaObjectsGone(void) {
     BtlObj* p;
     u8 r = 1;
 
     for (p = ListPoolFirst(&gBtlWork->pool); p != 0; p = ListPoolNext(&p->node)) {
-        if (p->unk_000 == 0x23) {
+        if (p->kind == 0x23) {
             r = 0;
             break;
         }
@@ -2214,8 +2214,8 @@ u8 func_080DC544(void) {
     return r;
 }
 
-u8 func_080DC578(void) {
-    if (func_080DC544() != 0 || func_080DC528() == 0 || gUrsulaWork->unk_15E == 0) {
+u8 BosUrsulaIsGimmickStarting(void) {
+    if (BosUrsulaObjectsGone() != 0 || BosUrsulaIsGimmickActive() == 0 || gUrsulaWork->gimmickDelay == 0) {
         return 0;
     }
 
@@ -2223,28 +2223,28 @@ u8 func_080DC578(void) {
 }
 
 u8 func_080DC5B0(void) {
-    if (func_080DC528() != 0 && (*(u32*)&gUrsulaWork->unk_158 != 0 || gUrsulaWork->unk_15C != 0)) {
+    if (BosUrsulaIsGimmickActive() != 0 && (*(u32*)&gUrsulaWork->sinkSteps != 0 || gUrsulaWork->unk_15C != 0)) {
         return 1;
     }
 
     return 0;
 }
 
-u32 func_080DC5E8(void) {
+u32 BosUrsulaGetHpPhase(void) {
     UrsulaWork* work = gUrsulaWork;
 
-    if (work->obj.unk_02C > (s16)(work->obj.unk_02E / 3) * 2) {
+    if (work->obj.hp > (s16)(work->obj.maxHp / 3) * 2) {
         return 0;
     }
 
-    if (work->obj.unk_02C > (s16)(work->obj.unk_02E / 3)) {
+    if (work->obj.hp > (s16)(work->obj.maxHp / 3)) {
         return 1;
     }
 
     return 2;
 }
 
-u8 func_080DC628(void) {
+u8 BosUrsulaIsDefeated(void) {
     if (gUrsulaWork->state == 4) {
         return 1;
     }
@@ -2261,38 +2261,38 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     LoadBgPalette(1, arg->palette, arg->paletteSize);
     SetBgMapBlocks(1, arg->map, 2, 2);
     gBtlWork->scale = 0x100;
-    gBtlWork->unk_028 = 0x100;
+    gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0x10000;
     gBtlWork->y = 0x17100;
-    gBtlWork->unk_000 = 0x10000;
-    gBtlWork->unk_004 = 0x17100;
+    gBtlWork->viewX = 0x10000;
+    gBtlWork->viewY = 0x17100;
     gBtlWork->x2 = 0x10000;
     gBtlWork->y2 = 0x17100;
-    gBtlWork->unk_01C = 0x10000;
-    gBtlWork->unk_020 = 0x17100;
-    gBtlWork->unk_01A = 0x0F;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
-    ScrollBgMapTo(1, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
+    gBtlWork->zoomX = 0x10000;
+    gBtlWork->zoomY = 0x17100;
+    gBtlWork->zoomSteps = 0x0F;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
+    ScrollBgMapTo(1, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
     gDispCnt |= DISPCNT_WIN0_ON;
     gWin0H = 0xF0;
     gWin0V = 0x50A0;
     gWinIn = (WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     gWinOut = (WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-    work->unk_00 = 0x1E000;
-    work->unk_04 = 0x1E000;
-    work->unk_08 = 0;
+    work->viewYMax = 0x1E000;
+    work->viewYMaxTarget = 0x1E000;
+    work->viewYMaxSteps = 0;
 }
 u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     s32 a;
     s32 b;
     u8 v;
 
-    if (func_080DC578() != 0) {
+    if (BosUrsulaIsGimmickStarting() != 0) {
         return 1;
     }
 
-    func_0802F208();
+    BtlMapUpdateShake();
     a = (gBtlWork->x2 - gBtlWork->x) >> 3;
     b = (gBtlWork->y2 - gBtlWork->y) >> 3;
 
@@ -2310,39 +2310,39 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
 
     gBtlWork->x += a;
     gBtlWork->y += b;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->unk_000 - 0x7800 < gBtlWork->unk_0DA * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 0x78) << 8;
-    } else if (gBtlWork->unk_000 + 0x7800 > gBtlWork->unk_0DC * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 0x78) << 8;
+    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
+    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
     }
 
-    if (func_080DC5B0() != 0 && work->unk_04 == 0x1E000) {
-        work->unk_04 = 0x22000;
-        work->unk_08 = 20;
-    } else if (func_080DC5B0() == 0 && work->unk_04 == 0x22000) {
-        work->unk_04 = 0x1E000;
-        work->unk_08 = 20;
+    if (func_080DC5B0() != 0 && work->viewYMaxTarget == 0x1E000) {
+        work->viewYMaxTarget = 0x22000;
+        work->viewYMaxSteps = 20;
+    } else if (func_080DC5B0() == 0 && work->viewYMaxTarget == 0x22000) {
+        work->viewYMaxTarget = 0x1E000;
+        work->viewYMaxSteps = 20;
     }
 
-    if (work->unk_08 != 0) {
-        ApproachValue(&work->unk_00, work->unk_04, work->unk_08);
-        work->unk_08--;
+    if (work->viewYMaxSteps != 0) {
+        ApproachValue(&work->viewYMax, work->viewYMaxTarget, work->viewYMaxSteps);
+        work->viewYMaxSteps--;
     }
 
-    if (gBtlWork->unk_004 - 0x5000 < 0x8800) {
-        gBtlWork->unk_004 = 0xD800;
-    } else if (gBtlWork->unk_004 + 0x5000 > work->unk_00) {
-        gBtlWork->unk_004 = work->unk_00 - 0x5000;
+    if (gBtlWork->viewY - 0x5000 < 0x8800) {
+        gBtlWork->viewY = 0xD800;
+    } else if (gBtlWork->viewY + 0x5000 > work->viewYMax) {
+        gBtlWork->viewY = work->viewYMax - 0x5000;
     }
 
-    gBtlWork->unk_004 += func_0802F268();
-    ScrollBgMapTo(1, (gBtlWork->unk_000 >> 8) - 0x78, (gBtlWork->unk_004 >> 8) - 0x50);
-    v = -0x18 - (gBtlWork->unk_004 >> 8);
+    gBtlWork->viewY += BtlMapGetShake();
+    ScrollBgMapTo(1, (gBtlWork->viewX >> 8) - 0x78, (gBtlWork->viewY >> 8) - 0x50);
+    v = -0x18 - (gBtlWork->viewY >> 8);
 
-    if (v > 0xA0 || gUnk_0203C57C == 0) {
+    if (v > 0xA0 || gBosUrsulaActive == 0) {
         gDispCnt &= ~DISPCNT_WIN0_ON;
     } else {
         gDispCnt |= DISPCNT_WIN0_ON;
@@ -2358,7 +2358,7 @@ void task_bos_ursula_map_3(void) {
 void task_bos_ursula_border_0(UrsulaBorderWork* work) {
     work->tiles = LoadObjTiles(gUnk_0979D0B6, 0x800);
     work->palette = LoadObjPalette(gUnk_0984B0D8, 0x20);
-    func_0801C298(work->palette->index + 16, 0);
+    SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
 }
 
 s32 task_bos_ursula_border_1(void) {
@@ -2383,34 +2383,34 @@ void task_bos_ursula_border_3(UrsulaBorderWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void func_080DC9DC(s32* a, s32* b, s32* c, UrsulaTakoWork* d) {
+void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->unk_0CC + d->unk_1FC;
+    *a = gBtlWork->bossX + d->offsetX;
 
-    if (d->unk_13E != 0) {
-        if (func_080DC510() != 0) {
+    if (d->isLeft != 0) {
+        if (BosUrsulaIsFacingLeft() != 0) {
             *a += -0x2200;
         } else {
             *a += -0x3600;
         }
     } else {
-        if (func_080DC510() != 0) {
+        if (BosUrsulaIsFacingLeft() != 0) {
             *a += 0x3600;
         } else {
             *a += 0x2200;
         }
     }
 
-    *b = gBtlWork->unk_0D0;
-    p = &gBtlWork->unk_0D4;
-    t = d->unk_200 + 0x5000;
+    *b = gBtlWork->bossY;
+    p = &gBtlWork->bossZ;
+    t = d->offsetZ + 0x5000;
     *c = *p + t;
 }
 
-s32 func_080DCA78(u8 a) {
-    if (a == func_080DC510()) {
+s32 BosUrsulaGetTakoPlatformRadius(u8 a) {
+    if (a == BosUrsulaIsFacingLeft()) {
         return 12;
     }
 
@@ -2422,31 +2422,31 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     s32 y;
     s32 z;
 
-    work->unk_13E = *arg;
-    work->unk_1FC = 0;
-    work->unk_200 = 0;
-    func_080DC9DC(&x, &y, &z, work);
-    func_0801B37C(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+    work->isLeft = *arg;
+    work->offsetX = 0;
+    work->offsetZ = 0;
+    BosUrsulaTakoGetPosition(&x, &y, &z, work);
+    InitEnemyBtlObj(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
     ColliderInit(&work->collider2, 7, 0x28, 0x20);
 
-    if (work->unk_13E != 0) {
-        work->unk_024 = 0xFFFC;
+    if (work->isLeft != 0) {
+        work->animBase = 0xFFFC;
         work->obj.flags |= 4;
-        work->unk_1F8 = -0x2800;
+        work->collider2OffsetX = -0x2800;
     } else {
-        work->unk_024 = 0;
-        work->unk_1F8 = 0x2800;
+        work->animBase = 0;
+        work->collider2OffsetX = 0x2800;
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 6), gUnk_0979E344);
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
+    AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
     work->state = 0;
-    ColliderInit(&work->collider, 7, (u16)func_080DCA78(work->unk_13E), 1);
+    ColliderInit(&work->collider, 7, (u16)BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
-    func_0801C7FC(&work->obj, 35, 51);
+    SetEnemyHpFromStats(&work->obj, 35, 51);
 }
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     BtlObj* p = &work->obj;
@@ -2456,152 +2456,152 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     s32 dx;
     s32 dz;
 
-    if (func_080DC528()) {
-        func_0801C2DC(p, 1);
+    if (BosUrsulaIsGimmickActive()) {
+        SetBtlObjUnhittable(p, 1);
     } else if (work->state <= 1) {
-        func_0801C2DC(p, 0);
+        SetBtlObjUnhittable(p, 0);
     }
 
-    if (func_080DC628()) {
+    if (BosUrsulaIsDefeated()) {
         return 1;
     }
 
-    switch (func_0801ADAC(p)) {
+    switch (UpdateBtlObjReaction(p)) {
     case 5:
         work->state = 7;
-        work->unk_13C = 0;
-        func_08083914();
+        work->timer = 0;
+        RequestBossCardRandom();
         break;
     case 1:
     case 6:
     case 7:
         work->state = 1;
-        work->unk_13C = 0;
+        work->timer = 0;
         break;
     case 3:
     case 8:
         work->state = 2;
-        work->unk_13C = 0;
+        work->timer = 0;
         break;
     case 4:
-        func_0801AF08(p);
+        ClearBtlObjActionFlags(p);
         work->state = 0;
-        func_08083914();
+        RequestBossCardRandom();
         break;
     }
 
     switch (work->state) {
     case 0:
-        AnimChange(&work->anim, (u16)(work->unk_024 + 4), 1);
+        AnimChange(&work->anim, (u16)(work->animBase + 4), 1);
         break;
     case 1:
-        if (work->unk_13C == 0) {
-            AnimChange(&work->anim, (u16)(work->unk_024 + 7), 0);
+        if (work->timer == 0) {
+            AnimChange(&work->anim, (u16)(work->animBase + 7), 0);
         }
-        work->unk_13C++;
+        work->timer++;
         if (AnimIsFinished(&work->anim)) {
-            func_0801AF08(p);
+            ClearBtlObjActionFlags(p);
             work->state = 0;
-            work->unk_13C = 0;
+            work->timer = 0;
         }
         break;
     case 2:
-        if (AnimGetId(&work->anim) == (s16)work->unk_024 + 4) {
+        if (AnimGetId(&work->anim) == (s16)work->animBase + 4) {
             if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
-                AnimStart(&work->anim, (u16)(work->unk_024 + 5), 1);
-                func_0801C2DC(p, 1);
+                AnimStart(&work->anim, (u16)(work->animBase + 5), 1);
+                SetBtlObjUnhittable(p, 1);
                 if ((u16)(GetRandom() % 100) <= 19) {
                     _0801C1F8(0, p->x, p->y, p->z);
                 }
             }
-        } else if (AnimGetId(&work->anim) == (s16)work->unk_024 + 5) {
+        } else if (AnimGetId(&work->anim) == (s16)work->animBase + 5) {
             if (AnimIsFinished(&work->anim)) {
-                func_0801AF08(p);
+                ClearBtlObjActionFlags(p);
                 work->state = 3;
-                work->unk_13C = 0;
+                work->timer = 0;
             }
         } else {
-            AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
+            AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
         }
         break;
     case 3:
-        if (work->unk_13C > 180) {
+        if (work->timer > 180) {
             work->state = 4;
-            work->unk_13C = 0;
+            work->timer = 0;
         } else {
-            work->unk_13C++;
+            work->timer++;
         }
         break;
     case 4:
-        if (work->unk_13C > 180) {
-            AnimStart(&work->anim, (u16)(work->unk_024 + 6), 0);
+        if (work->timer > 180) {
+            AnimStart(&work->anim, (u16)(work->animBase + 6), 0);
             work->state = 5;
-            work->unk_200 = 0x800;
-            if (work->unk_13E) {
-                work->unk_1FC = -0x2AA;
+            work->offsetZ = 0x800;
+            if (work->isLeft) {
+                work->offsetX = -0x2AA;
             } else {
-                work->unk_1FC = 0x2AA;
+                work->offsetX = 0x2AA;
             }
-            work->unk_13C = 30;
+            work->timer = 30;
         } else {
-            work->unk_13C++;
+            work->timer++;
         }
         break;
     case 5:
         AnimReset(&work->anim);
-        if (work->unk_13C == 5) {
-            func_0801B7D8(&work->obj);
-            func_080DC9DC(&x, &y, &z, work);
-            func_0801B37C(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
+        if (work->timer == 5) {
+            ReleaseEnemyBtlObj(&work->obj);
+            BosUrsulaTakoGetPosition(&x, &y, &z, work);
+            InitEnemyBtlObj(&work->obj, &gBosUrsulaTakoEmyKind, x, y, z);
             work->obj.flags |= 0x400;
-            func_0801C7FC(&work->obj, 35, 25);
+            SetEnemyHpFromStats(&work->obj, 35, 25);
         }
-        if (work->unk_13C == 0) {
-            if (!func_080DC528()) {
-                func_0801BCD4(&work->obj);
+        if (work->timer == 0) {
+            if (!BosUrsulaIsGimmickActive()) {
+                RequestEnemyCardUse(&work->obj);
             }
             work->state = 6;
-            work->unk_13C = 0;
+            work->timer = 0;
         } else {
-            ApproachValue(&work->unk_200, 0, work->unk_13C);
-            ApproachValue(&work->unk_1FC, 0, work->unk_13C);
-            work->unk_13C--;
+            ApproachValue(&work->offsetZ, 0, work->timer);
+            ApproachValue(&work->offsetX, 0, work->timer);
+            work->timer--;
         }
         break;
     case 6:
-        if (work->unk_13C > 30) {
+        if (work->timer > 30) {
             work->state = 0;
         } else {
-            work->unk_13C++;
+            work->timer++;
         }
         break;
     case 7:
-        AnimChange(&work->anim, (u16)(work->unk_024 + 6), 0);
-        if (AnimIsFinished(&work->anim) || func_080DC528()) {
+        AnimChange(&work->anim, (u16)(work->animBase + 6), 0);
+        if (AnimIsFinished(&work->anim) || BosUrsulaIsGimmickActive()) {
             work->state = 0;
-            AnimStart(&work->anim, (u16)(work->unk_024 + 4), 1);
-            func_0801AF08(p);
+            AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
+            ClearBtlObjActionFlags(p);
         } else {
             if (AnimGetFrame(&work->anim) == 1) {
                 dx = 0x800;
-                if (work->unk_13E) {
+                if (work->isLeft) {
                     dx = -0x800;
                 }
                 dz = -0x6000;
             } else if (AnimGetFrame(&work->anim) == 0) {
                 dx = -0x1800;
-                if (work->unk_13E) {
+                if (work->isLeft) {
                     dx = 0x1800;
                 }
                 dz = -0x3800;
             } else {
                 dx = 0x1800;
-                if (work->unk_13E) {
+                if (work->isLeft) {
                     dx = -0x1800;
                 }
                 dz = -0x3800;
             }
-            if (func_08011F78(241, p->x + dx, p->y + 0x1000, p->z + dz, 24, 16, 8) == 1) {
+            if (ApplyAttackBox(241, p->x + dx, p->y + 0x1000, p->z + dz, 24, 16, 8) == 1) {
                 m4aSongNumStart(SONG_BTL_HANE_HIT);
             }
         }
@@ -2609,8 +2609,8 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     }
 
     AnimUpdate(&work->anim);
-    func_080DC9DC(&p->x, &p->y, &p->z, work);
-    if (work->state - 3 <= 4 && gBtlWork->actor->z < -0x5000 && !func_080DC528()) {
+    BosUrsulaTakoGetPosition(&p->x, &p->y, &p->z, work);
+    if (work->state - 3 <= 4 && gBtlWork->actor->z < -0x5000 && !BosUrsulaIsGimmickActive()) {
         ColliderSetDisabled(&work->collider, 0);
         ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x5000);
     } else {
@@ -2618,7 +2618,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     }
     if (work->state == 3 && gBtlWork->actor->z <= -0x2000 && gBtlWork->actor->z > -0x3000) {
         ColliderSetDisabled(&work->collider2, 0);
-        ColliderSetPosition(&work->collider2, work->obj.x + work->unk_1F8, work->obj.y + 0x1000, 0);
+        ColliderSetPosition(&work->collider2, work->obj.x + work->collider2OffsetX, work->obj.y + 0x1000, 0);
     } else {
         ColliderSetDisabled(&work->collider2, 1);
     }
@@ -2631,15 +2631,15 @@ void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
     s16 x;
     s16 y;
 
-    if (work->state != 4 && func_080DC528() == 0) {
-        pal = func_0801CA00(p) != 0 ? work->palette2 : work->palette;
+    if (work->state != 4 && BosUrsulaIsGimmickActive() == 0) {
+        pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
         DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, 0x800, 0xFC00);
     }
 }
 
 void task_bos_ursula_tako_3(UrsulaTakoWork* work) {
-    func_0801B7D8(&work->obj);
+    ReleaseEnemyBtlObj(&work->obj);
     ColliderUnregister(&work->collider2);
     ColliderUnregister(&work->collider);
     ReleaseObjTiles(work->tiles);
@@ -2647,7 +2647,7 @@ void task_bos_ursula_tako_3(UrsulaTakoWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-u8 func_080DD1FC(UrsulaTakoWork* work) {
+u8 BosUrsulaTakoIsBusy(UrsulaTakoWork* work) {
     if (work->state <= 1) {
         return 0;
     }
@@ -2655,73 +2655,73 @@ u8 func_080DD1FC(UrsulaTakoWork* work) {
     return 1;
 }
 
-void func_080DD210(UrsulaTakoWork* work) {
+void BosUrsulaTakoEndDown(UrsulaTakoWork* work) {
     if (work->state >= 3 && work->state <= 4) {
         work->state = 4;
-        work->unk_13C = 180;
+        work->timer = 180;
     }
 }
 
-u8 func_080DD230(UrsulaTakoWork* work) {
-    if (work->collider.unk_2E & 2) {
+u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work) {
+    if (work->collider.standFlags & 2) {
         return 1;
     }
 
     return 0;
 }
 
-void func_080DD248(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d) {
+void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->unk_0CC + d->unk_024;
+    *a = gBtlWork->bossX + d->offsetX;
 
-    if (d->unk_022 != 0) {
-        if (func_080DC510() != 0) {
+    if (d->isLeft != 0) {
+        if (BosUrsulaIsFacingLeft() != 0) {
             *a += -0x4A00;
         } else {
             *a += -0x5E00;
         }
     } else {
-        if (func_080DC510() != 0) {
+        if (BosUrsulaIsFacingLeft() != 0) {
             *a += 0x5E00;
         } else {
             *a += 0x4A00;
         }
     }
 
-    *b = gBtlWork->unk_0D0 + 0x800;
-    p = &gBtlWork->unk_0D4;
-    t = d->unk_028 + 0x5000;
+    *b = gBtlWork->bossY + 0x800;
+    p = &gBtlWork->bossZ;
+    t = d->offsetZ + 0x5000;
     *c = *p + t;
 }
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
-    work->unk_022 = *arg;
-    work->unk_024 = 0;
-    work->unk_028 = 0;
-    func_080DD248(&work->x, &work->y, &work->z, work);
-    work->unk_022 = work->unk_022 == 0 ? 1 : 0;
-    func_080DD248(&work->x2, &work->y2, &work->z2, work);
-    work->unk_022 = work->unk_022 == 0 ? 1 : 0;
-    if (work->unk_022 != 0) {
-        work->unk_020 = 0xFFFC;
+    work->isLeft = *arg;
+    work->offsetX = 0;
+    work->offsetZ = 0;
+    BosUrsulaBacktakoGetPosition(&work->x, &work->y, &work->z, work);
+    work->isLeft = work->isLeft == 0 ? 1 : 0;
+    BosUrsulaBacktakoGetPosition(&work->x2, &work->y2, &work->z2, work);
+    work->isLeft = work->isLeft == 0 ? 1 : 0;
+    if (work->isLeft != 0) {
+        work->animBase = 0xFFFC;
     } else {
-        work->unk_020 = 0;
+        work->animBase = 0;
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 8), gUnk_0979E344);
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->unk_020 + 4), 1);
+    AnimStart(&work->anim, (u16)(work->animBase + 4), 1);
     AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);
 }
 
 u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work) {
-    if (func_080DC628() == 0) {
-        func_080DD248(&work->x, &work->y, &work->z, work);
-        work->unk_022 = work->unk_022 == 0 ? 1 : 0;
-        func_080DD248(&work->x2, &work->y2, &work->z2, work);
-        work->unk_022 = work->unk_022 == 0 ? 1 : 0;
+    if (BosUrsulaIsDefeated() == 0) {
+        BosUrsulaBacktakoGetPosition(&work->x, &work->y, &work->z, work);
+        work->isLeft = work->isLeft == 0 ? 1 : 0;
+        BosUrsulaBacktakoGetPosition(&work->x2, &work->y2, &work->z2, work);
+        work->isLeft = work->isLeft == 0 ? 1 : 0;
         AnimUpdate(&work->anim);
     }
 
@@ -2731,7 +2731,7 @@ u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work) {
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     s16 x;
     s16 y;
-    u8 f = func_080DC528();
+    u8 f = BosUrsulaIsGimmickActive();
 
     if (f != 0) {
         return;
@@ -2754,51 +2754,51 @@ void task_bos_ursula_mapanime_0(UrsulaMapanimeWork* work) {
     gUrsulaMapanimeWork = work;
     TaskPoolInit(&work->tasks, 1);
     work->task = 0;
-    work->unk_00C = 4;
-    func_080DD69C(0);
+    work->attack = 4;
+    BosUrsulaStartAttack(0);
 }
 
 u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
     s32 d;
 
-    func_080DDDEC(&work->unk_000, work->unk_000.unk_08, 0);
+    BosMapanimeUpdate(&work->anim, work->anim.def, 0);
 
-    if (func_080DDE74(&work->unk_000) != 0) {
-        if (work->unk_000.unk_08 == &gUnk_096FE278) {
-            if (work->unk_00C == 1) {
-                func_080DDDDC(&work->unk_000, &gUnk_096FE290);
-                work->unk_00C = 4;
-            } else if (work->unk_00C == 2) {
-                func_080DDDDC(&work->unk_000, &gUnk_096FE2A8);
-                work->unk_00C = 4;
+    if (BosMapanimeIsAtEnd(&work->anim) != 0) {
+        if (work->anim.def == &gBosUrsulaMapanimeWindup) {
+            if (work->attack == 1) {
+                BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeBubble);
+                work->attack = 4;
+            } else if (work->attack == 2) {
+                BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeCharge);
+                work->attack = 4;
             }
-        } else if (work->unk_000.unk_08 == &gUnk_096FE290
-                || work->unk_000.unk_08 == &gUnk_096FE2A8) {
-            func_080DDDDC(&work->unk_000, &gUnk_096FE2C0);
-            work->unk_00C = 4;
-        } else if (work->unk_000.unk_08 == &gUnk_096FE2C0) {
-            func_080DDDDC(&work->unk_000, &gUnk_096FE260);
-            work->unk_00C = 0;
+        } else if (work->anim.def == &gBosUrsulaMapanimeBubble
+                || work->anim.def == &gBosUrsulaMapanimeCharge) {
+            BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeRecover);
+            work->attack = 4;
+        } else if (work->anim.def == &gBosUrsulaMapanimeRecover) {
+            BosMapanimeInit(&work->anim, &gBosUrsulaMapanimeIdle);
+            work->attack = 0;
         }
     }
 
-    if (work->unk_000.unk_08 == &gUnk_096FE2A8 && func_080DDEA0(&work->unk_000) == 2) {
-        if (work->unk_028 == 0) {
-            work->unk_028 = 1;
-            func_080168B8(gBtlWork->unk_0CC, gBtlWork->unk_0D0 + 0xC00,
-                gBtlWork->unk_0D4, func_080DC510(), 0x266, 0x78);
+    if (work->anim.def == &gBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&work->anim) == 2) {
+        if (work->attackSpawned == 0) {
+            work->attackSpawned = 1;
+            BgFxStartUrsulaBeam(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
+                gBtlWork->bossZ, BosUrsulaIsFacingLeft(), 0x266, 0x78);
         } else {
-            BgFxSetPosition(gBtlWork->unk_0CC, gBtlWork->unk_0D0 + 0xC00,
-                gBtlWork->unk_0D4);
+            BgFxSetPosition(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
+                gBtlWork->bossZ);
         }
 
-        d = func_080DC510() != 0 ? -0x5000 : 0x5000;
-        func_08011F78(0xF3, gBtlWork->unk_0CC + d, 0x1C400, 0, 0x18, 0x38, 0x50);
+        d = BosUrsulaIsFacingLeft() != 0 ? -0x5000 : 0x5000;
+        ApplyAttackBox(0xF3, gBtlWork->bossX + d, 0x1C400, 0, 0x18, 0x38, 0x50);
     }
 
-    if (work->unk_000.unk_08 == &gUnk_096FE290 && func_080DDEA0(&work->unk_000) == 2
-            && work->unk_028 == 0) {
-        work->unk_028 = 1;
+    if (work->anim.def == &gBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2
+            && work->attackSpawned == 0) {
+        work->attackSpawned = 1;
         work->task = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubble, 0);
     }
 
@@ -2815,41 +2815,41 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_080DD69C(s32 a) {
+void BosUrsulaStartAttack(s32 a) {
     if (IsTaskActive(gUrsulaMapanimeWork->task) != 0) {
         if (strcmp(GetTaskName(gUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
-            func_080DD9B0(gUrsulaMapanimeWork->task->work);
+            BosUrsulaPopBubbles(gUrsulaMapanimeWork->task->work);
         } else {
-            func_08000DE8(&gUrsulaMapanimeWork->tasks, gUrsulaMapanimeWork->task);
+            TaskKill(&gUrsulaMapanimeWork->tasks, gUrsulaMapanimeWork->task);
         }
     }
 
     if (a == 3) {
         gUrsulaMapanimeWork->task = TaskCreate(&gUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, 0);
-    } else if (gUrsulaMapanimeWork->unk_00C != a) {
-        gUrsulaMapanimeWork->unk_00C = a;
+    } else if (gUrsulaMapanimeWork->attack != a) {
+        gUrsulaMapanimeWork->attack = a;
 
         if (a == 0) {
-            func_080DDDDC(&gUrsulaMapanimeWork->unk_000, &gUnk_096FE2C0);
-            gUrsulaMapanimeWork->unk_028 = 1;
+            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &gBosUrsulaMapanimeRecover);
+            gUrsulaMapanimeWork->attackSpawned = 1;
         } else {
-            func_080DDDDC(&gUrsulaMapanimeWork->unk_000, &gUnk_096FE278);
-            gUrsulaMapanimeWork->unk_028 = 0;
+            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &gBosUrsulaMapanimeWindup);
+            gUrsulaMapanimeWork->attackSpawned = 0;
             m4aSongNumStart(SONG_VO_UR_ATTACK00);
         }
     }
 }
 
-u8 func_080DD754(void) {
-    if (gUrsulaMapanimeWork->unk_000.unk_08 == &gUnk_096FE290 || gUrsulaMapanimeWork->unk_000.unk_08 == &gUnk_096FE2A8 || gUrsulaMapanimeWork->unk_000.unk_08 == &gUnk_096FE278) {
+u8 BosUrsulaIsAttacking(void) {
+    if (gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeBubble || gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeCharge || gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeWindup) {
         return 1;
     }
 
     return IsTaskActive(gUrsulaMapanimeWork->task);
 }
 
-u8 func_080DD794(void) {
-    if (gUrsulaMapanimeWork->unk_000.unk_08 == &gUnk_096FE2A8 && func_080DDEA0(&gUrsulaMapanimeWork->unk_000) == 2) {
+u8 BosUrsulaIsCharging(void) {
+    if (gUrsulaMapanimeWork->anim.def == &gBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&gUrsulaMapanimeWork->anim) == 2) {
         return 1;
     }
 

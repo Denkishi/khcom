@@ -10,12 +10,12 @@ typedef struct FieldState {
     s32 y;
     s32 x2;
     s32 y2;
-    u16 unk_10;
-    u16 unk_12;
+    u16 tileCols;
+    u16 tileRows;
     u8 unk_14[0x04];
     FldActor actor;
-    void* unk_68;
-    s16 unk_6C;
+    void* lockonTarget;
+    s16 lockonDelay;
     u16 unk_6E;
     u32 flags;
     u16 unk_74;
@@ -25,9 +25,9 @@ typedef struct FieldState {
     TaskPool tasks3;
     TaskPool tasks4;
     TaskPool tasks5;
-    s32 unk_DC;
-    s32 unk_E0;
-    u8 unk_E4;
+    s32 spawnX;
+    s32 spawnY;
+    u8 spawnAngle;
     u8 unk_E5[0x03];
 } FieldState;
 

@@ -8,42 +8,42 @@ void HumInit(HumWork* work, const HumDef* def) {
     s32 b = 0x18100;
     s32 z = 0;
 
-    func_0801B37C(actor, &def->kind, a, b, z);
-    actor->unk_0CE = 0;
-    actor->unk_0D0 = 0;
-    actor->unk_0D2 = 0;
-    actor->unk_0B2 = 1;
+    InitEnemyBtlObj(actor, &def->kind, a, b, z);
+    actor->attackOffset = 0;
+    actor->attackRangeX = 0;
+    actor->attackRangeY = 0;
+    actor->cardInterval = 1;
     actor->flags |= 0x40000000000000;
 
     if (gBtlWork->actor->x < actor->x) {
         actor->flags |= 4;
     }
 
-    work->unk_000 = def;
+    work->def = def;
     work->tiles = AllocObjTiles(def->tileCount * 32, 0);
     work->palette = LoadObjPalette(def->palette, 32);
-    work->unk_178 = def->palette;
-    work->unk_150 = 0;
-    work->unk_152 = 0;
+    work->paletteData = def->palette;
+    work->stateTimer = 0;
+    work->steps = 0;
     work->flags = 0;
-    work->unk_158 = 0;
+    work->vz = 0;
     actor->vx = 0;
     actor->vy = 0;
     work->targetX = 0;
     work->targetY = 0;
     work->targetZ = 0;
-    work->unk_174 = 0xFFF0;
+    work->boundsMargin = 0xFFF0;
     work->unk_17C = 1;
     AnimInit(&work->anim, 0, 0);
     TaskPoolInit(&work->tasks, 3);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, actor);
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
-    work->unk_170 = 12;
-    work->unk_168 = 0x100;
-    work->unk_16C = 0x100;
+    work->state = 12;
+    work->scaleX = 0x100;
+    work->scaleY = 0x100;
     work->sub = 0;
     work->sub2 = 0;
-    work->unk_184 = 0;
+    work->stockMoves = 0;
     gRikuBtlWork->actor = actor;
     gBtlWork->actor3 = actor;
     actor->btl = gRikuBtlWork;
@@ -81,78 +81,78 @@ void HumReleaseResources(HumWork* work) {
     HumSubReleaseGraphics(work->sub);
     HumSubReleaseGraphics(work->sub2);
     gBtlWork->actor3 = 0;
-    func_0801B7D8(&work->actor);
+    ReleaseEnemyBtlObj(&work->actor);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
 }
 
-void func_0800E3D0(HumWork* work) {
-    work->unk_158 = -work->actor.unk_0AC * 3;
-    work->actor.vx = ((gSineTable[work->actor.angle] << 1) * work->actor.unk_0A8) >> 8;
-    work->actor.vy = ((-gSineTable[work->actor.angle + 0x40] << 1) * work->actor.unk_0A8) >> 8;
+void HumStartKnockback(HumWork* work) {
+    work->vz = -work->actor.knockbackLift * 3;
+    work->actor.vx = ((gSineTable[work->actor.angle] << 1) * work->actor.knockbackSpeed) >> 8;
+    work->actor.vy = ((-gSineTable[work->actor.angle + 0x40] << 1) * work->actor.knockbackSpeed) >> 8;
 }
 
 s32 _0800E434(HumWork* work) {
     BtlObj* actor = &work->actor;
     s32 r;
 
-    actor->unk_0FC = actor->x;
-    actor->unk_100 = actor->y;
-    r = func_0801ADAC(actor);
+    actor->prevX = actor->x;
+    actor->prevY = actor->y;
+    r = UpdateBtlObjReaction(actor);
 
     switch (r) {
     case 5:
         work->flags |= 4;
         gRikuBtlWork->flags &= ~0x40000000;
-        work->unk_17E = 0;
-        work->unk_150 = 0;
+        work->itemIndex = 0;
+        work->stateTimer = 0;
         AnimReset(&work->anim);
         break;
     case 11:
         FadeStartIn(2, 20);
-        gBtlWork->unk_072 = 15;
+        gBtlWork->hitStop = 15;
 
-        if (actor->unk_0E8 != 1) {
-            actor->unk_0E8 = 1;
-            actor->unk_0EC = 0x168;
+        if (actor->badStatus != 1) {
+            actor->badStatus = 1;
+            actor->badStatusTimer = 0x168;
         }
 
-        work->unk_170 = 11;
-        work->unk_150 = 0;
+        work->state = 11;
+        work->stateTimer = 0;
         break;
     case 6:
-        func_0800E3D0(work);
-        work->unk_170 = 11;
-        work->unk_150 = 0;
+        HumStartKnockback(work);
+        work->state = 11;
+        work->stateTimer = 0;
         break;
     case 7:
     case 8:
-        work->unk_170 = 14;
-        work->unk_150 = 0;
+        work->state = 14;
+        work->stateTimer = 0;
         break;
     case 1:
-        func_0800E3D0(work);
-        work->unk_170 = 1;
-        work->unk_150 = 0;
+        HumStartKnockback(work);
+        work->state = 1;
+        work->stateTimer = 0;
         break;
     case 3:
         work->flags |= 4;
-        work->unk_170 = 3;
-        work->unk_150 = 0;
+        work->state = 3;
+        work->stateTimer = 0;
         break;
     case 2:
-        work->unk_170 = 10;
-        work->unk_150 = 0;
+        work->state = 10;
+        work->stateTimer = 0;
         break;
     case 4:
-        work->unk_170 = 9;
-        work->unk_150 = 0;
+        work->state = 9;
+        work->stateTimer = 0;
         break;
     case 10:
-        if (work->unk_170 != 13) {
-            work->unk_170 = 13;
-            work->unk_150 = 0;
+        if (work->state != 13) {
+            work->state = 13;
+            work->stateTimer = 0;
             actor->vx = actor->vy = 0;
         }
         break;
@@ -170,29 +170,29 @@ void HumSubUpdateAnimation(HumSub* sub) {
 }
 
 
-s32 func_0800E5F0(HumWork* work) {
+s32 HumUpdate(HumWork* work) {
     BtlObj* actor = &work->actor;
     s32 x;
 
-    func_0801C700(actor, &x, 0, 0);
+    GetEnemyTargetPosition(actor, &x, 0, 0);
 
-    switch (work->unk_170) {
+    switch (work->state) {
     case 12:
-        if (work->unk_150 > 100) {
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+        if (work->stateTimer > 100) {
+            work->state = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 1:
-        if (work->unk_150 == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
         }
-        if (work->unk_150 > 10) {
-            func_0801AF08(actor);
-            work->unk_170 = 2;
-            work->unk_150 = 0;
+        if (work->stateTimer > 10) {
+            ClearBtlObjActionFlags(actor);
+            work->state = 2;
+            work->stateTimer = 0;
 
             if (actor->x < x) {
                 if (actor->flags & 4) {
@@ -207,278 +207,278 @@ s32 func_0800E5F0(HumWork* work) {
                     }
                 }
             }
-            func_0800F5A4(work, 3, 64, 64, 32);
+            HumChooseCardAction(work, 3, 64, 64, 32);
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 2:
         if (AnimIsFinished(&work->anim)) {
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+            work->state = 0;
+            work->stateTimer = 0;
         }
         break;
     case 14:
-        if (work->unk_150 == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             ColliderSetDisabled(&actor->collider, 1);
             actor->flags |= 0x100;
             work->anim.frame = 0;
             work->anim.timer = 0;
-            work->unk_158 = 0x400;
+            work->vz = 0x400;
             actor->vx = 0;
             actor->vy = 0;
-            work->unk_152 = 10;
+            work->steps = 10;
         }
-        ApproachValue(&work->unk_16C, 64, work->unk_152--);
+        ApproachValue(&work->scaleY, 64, work->steps--);
 
-        if (work->unk_152 > 0) {
-            work->unk_150++;
+        if (work->steps > 0) {
+            work->stateTimer++;
         } else {
-            work->unk_150 = 0;
-            work->unk_170 = 15;
+            work->stateTimer = 0;
+            work->state = 15;
         }
         break;
     case 15:
-        if (work->unk_150 > 44) {
-            if (actor->unk_02C <= 0) {
-                work->unk_170 = 3;
+        if (work->stateTimer > 44) {
+            if (actor->hp <= 0) {
+                work->state = 3;
             } else {
-                work->unk_170 = 16;
+                work->state = 16;
             }
-            work->unk_150 = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 16:
-        if (work->unk_150 == 0) {
+        if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 0);
-            work->unk_152 = 10;
+            work->steps = 10;
         }
-        ApproachValueHalfSteps(&work->unk_16C, 0x100, work->unk_152--);
+        ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
 
-        if (work->unk_152 <= 0) {
+        if (work->steps <= 0) {
             actor->flags &= ~0x100;
-            func_0801AF08(actor);
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+            ClearBtlObjActionFlags(actor);
+            work->state = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 11:
-        if (work->unk_150 == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
-            work->unk_150++;
+            work->stateTimer++;
         }
         if (AnimIsFinished(&work->anim)) {
             actor->flags &= ~0x80;
             actor->flags &= ~0x2000;
         }
         if (GetRandom() % 3 == 0) {
-            actor->unk_0EC -= 6;
+            actor->badStatusTimer -= 6;
         }
-        if (actor->unk_0E8 != 1) {
-            func_0801AF08(actor);
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+        if (actor->badStatus != 1) {
+            ClearBtlObjActionFlags(actor);
+            work->state = 0;
+            work->stateTimer = 0;
         }
         break;
     case 9:
-        if (AnimIsFinished(&work->anim) && work->unk_150 > 60) {
-            func_0801AF08(actor);
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+        if (AnimIsFinished(&work->anim) && work->stateTimer > 60) {
+            ClearBtlObjActionFlags(actor);
+            work->state = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 10:
-        if (work->unk_150 == 0) {
-            work->unk_168 = 0x100;
-            work->unk_16C = 0x100;
+        if (work->stateTimer == 0) {
+            work->scaleX = 0x100;
+            work->scaleY = 0x100;
             actor->vx = 0;
             actor->vy = 0;
         }
-        work->unk_158 = 0;
+        work->vz = 0;
 
-        if (work->unk_150 == 40) {
-            func_08019190(actor, 10);
-            actor->unk_02C -= actor->unk_020;
-            if (actor->unk_02C > actor->unk_02E) {
-                actor->unk_02C = actor->unk_02E;
+        if (work->stateTimer == 40) {
+            CreateBtlPopTask(actor, 10);
+            actor->hp -= actor->damage;
+            if (actor->hp > actor->maxHp) {
+                actor->hp = actor->maxHp;
             }
-            func_0801AF08(actor);
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+            ClearBtlObjActionFlags(actor);
+            work->state = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 18:
-        if (work->unk_150 == 23) {
-            func_08013A68(actor->x, actor->y, actor->z - ((actor->unk_09C - 48) << 8));
+        if (work->stateTimer == 23) {
+            BgFxStartPotion(actor->x, actor->y, actor->z - ((actor->height - 48) << 8));
         }
-        if (work->unk_150 > 23 && func_080128EC() == 0) {
-            switch (work->unk_17E) {
+        if (work->stateTimer > 23 && BgFxIsActive() == 0) {
+            switch (work->itemIndex) {
             case 0:
-                func_0807E1A0();
+                RequestRikuPotion();
                 break;
             case 1:
-                func_0807E1AC();
+                RequestRikuHiPotion();
                 break;
             case 2:
-                func_0807E1B8();
+                RequestRikuMegaPotion();
                 break;
             case 3:
-                func_0807E1C4();
+                RequestRikuEther();
                 break;
             case 4:
-                func_0807E1D0();
+                RequestRikuMegaEther();
                 break;
             case 5:
-                func_0807E1DC();
+                RequestRikuElixir();
                 break;
             default:
-                func_0807E1E8();
+                RequestRikuMegalixir();
                 break;
             }
-            func_0801AF08(actor);
-            work->unk_170 = 0;
-            work->unk_150 = 0;
+            ClearBtlObjActionFlags(actor);
+            work->state = 0;
+            work->stateTimer = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 13:
-        if (actor->unk_0E8 != 2) {
-            work->unk_170 = 0;
-            func_0801AF08(actor);
+        if (actor->badStatus != 2) {
+            work->state = 0;
+            ClearBtlObjActionFlags(actor);
         }
         break;
     case 3:
-        if (work->unk_150 == 0) {
-            func_0801AF4C(actor);
+        if (work->stateTimer == 0) {
+            BeginBossDefeat(actor);
 
             if (!(work->flags & 0x40)) {
                 m4aSongNumStart(SONG_BTL_GF_LOOP);
             }
-            func_08019050(1, 0x100, gBtlWork->x2, gBtlWork->y2);
+            SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
         }
         if (FadeIsActive() == 0) {
-            work->unk_150 = 0;
+            work->stateTimer = 0;
 
             if (work->flags & 0x40) {
-                work->unk_170 = 6;
+                work->state = 6;
             } else {
-                work->unk_170 = 4;
+                work->state = 4;
             }
         } else {
-            func_0802F284(actor->x, actor->y, actor->z);
-            work->unk_150++;
+            BtlMapFollowPosition(actor->x, actor->y, actor->z);
+            work->stateTimer++;
         }
         break;
     case 4:
-        if (work->unk_150 == 0) {
-            func_08014A34(actor->x, actor->y + actor->z - ((s16)actor->unk_0A2 << 8));
+        if (work->stateTimer == 0) {
+            BgFxStartHumDefeat(actor->x, actor->y + actor->z - ((s16)actor->centerHeight << 8));
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
-        func_0802F284(actor->x, actor->y, actor->z);
-        work->unk_158 = 0;
+        BtlMapFollowPosition(actor->x, actor->y, actor->z);
+        work->vz = 0;
 
-        if (work->unk_150 > 150) {
-            work->unk_150 = 0;
-            work->unk_170 = 5;
+        if (work->stateTimer > 150) {
+            work->stateTimer = 0;
+            work->state = 5;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 5:
-        if (work->unk_150 == 0) {
+        if (work->stateTimer == 0) {
             PrizeCardArg arg;
 
             FadeStartIn(2, 60);
             FadeLock();
             m4aSongNumStart(SONG_BTL_KU_JUMP);
             gBtlWork->flags |= 0x400000;
-            func_0801B008();
-            func_0801B918(actor);
+            EndBossDefeat();
+            DropBossPrizes(actor);
             arg.x = actor->x;
             arg.y = actor->y;
             arg.z = -0x4600;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg);
             return 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 6:
-        if (work->unk_150 == 0) {
-            func_08014AAC(actor->x, actor->y + actor->z - ((s16)actor->unk_0A2 << 8));
+        if (work->stateTimer == 0) {
+            BgFxStartBossDeath(actor->x, actor->y + actor->z - ((s16)actor->centerHeight << 8));
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         }
-        func_0802F284(actor->x, actor->y, actor->z);
-        work->unk_158 = 0;
+        BtlMapFollowPosition(actor->x, actor->y, actor->z);
+        work->vz = 0;
 
-        if (work->unk_150 > 150) {
-            work->unk_150 = 0;
-            work->unk_170 = 7;
-            func_0801536C();
+        if (work->stateTimer > 150) {
+            work->stateTimer = 0;
+            work->state = 7;
+            BgFxStartBossDeathFlash();
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     case 7:
-        func_0802F284(actor->x, actor->y, actor->z);
+        BtlMapFollowPosition(actor->x, actor->y, actor->z);
 
-        if (func_080128EC() == 0) {
+        if (BgFxIsActive() == 0) {
             PrizeCardArg arg2;
 
-            func_0801B008();
+            EndBossDefeat();
 #ifdef VERSION_EU
-            ClampBattlePosition(&actor->x, &actor->y, (s16)(work->unk_174 - 8), -16);
+            ClampBattlePosition(&actor->x, &actor->y, (s16)(work->boundsMargin - 8), -16);
 #endif
-            func_0801B918(actor);
+            DropBossPrizes(actor);
             arg2.x = actor->x;
             arg2.y = actor->y;
             arg2.z = -0x4600;
             CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &arg2);
             return 0;
         }
-        work->unk_150++;
+        work->stateTimer++;
         break;
     case 0:
         work->flags &= ~4;
 
-        if (func_0807E29C()) {
-            work->unk_150 = 0;
-            work->unk_170 = 17;
+        if (IsRikuReloadCardSelected()) {
+            work->stateTimer = 0;
+            work->state = 17;
         }
         break;
     case 17:
-        func_0807E2F4();
+        SetRikuReloadCharging();
 
-        if (func_0807E29C() == 0) {
-            work->unk_150 = 0;
-            work->unk_170 = 0;
+        if (IsRikuReloadCardSelected() == 0) {
+            work->stateTimer = 0;
+            work->state = 0;
         } else {
-            work->unk_150++;
+            work->stateTimer++;
         }
         break;
     }
 
-    if (actor->unk_0E8 != 2) {
-        actor->z += work->unk_158;
-        work->unk_158 += gBtlWork->unk_12C;
+    if (actor->badStatus != 2) {
+        actor->z += work->vz;
+        work->vz += gBtlWork->gravity;
 
         if (actor->z > 0) {
             actor->z = 0;
-            work->unk_158 = 0;
+            work->vz = 0;
         }
-        if (actor->collider.unk_2C != 0 && !(work->flags & 4) && !(actor->collider.other->unk_30 & 2)) {
-            actor->x += actor->collider.unk_38 >> 1;
-            actor->y += actor->collider.unk_3C >> 1;
+        if (actor->collider.colliding != 0 && !(work->flags & 4) && !(actor->collider.other->flags & 2)) {
+            actor->x += actor->collider.pushX >> 1;
+            actor->y += actor->collider.pushY >> 1;
         }
     }
 
@@ -511,7 +511,7 @@ s32 func_0800E5F0(HumWork* work) {
     }
 
     if (!(work->flags & 8)) {
-        switch (ClampBattlePosition(&actor->x, &actor->y, work->unk_174, 0)) {
+        switch (ClampBattlePosition(&actor->x, &actor->y, work->boundsMargin, 0)) {
         case 1:
         case 2:
             actor->vx = -(actor->vx >> 1);
@@ -528,15 +528,15 @@ s32 func_0800E5F0(HumWork* work) {
         }
     }
 
-    if (actor->unk_0E8 != 2) {
+    if (actor->badStatus != 2) {
         work->gfx = AnimUpdate(&work->anim);
         HumSubUpdateAnimation(work->sub);
         HumSubUpdateAnimation(work->sub2);
     }
 
-    if (actor->unk_0E8 == 5) {
-        actor->x = actor->unk_0FC;
-        actor->y = actor->unk_100;
+    if (actor->badStatus == 5) {
+        actor->x = actor->prevX;
+        actor->y = actor->prevY;
     }
 
     TaskPoolUpdate(&work->tasks);

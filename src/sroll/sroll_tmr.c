@@ -5,20 +5,20 @@
 #include "sprites_staff_roll.h"
 
 DmaStream gDmaStream __attribute__((aligned(8)));
-u8 gUnk_02036048;
+u8 gBlockAudioPlaying;
 u32 gUnk_0203604C;
-s32 gUnk_02036050[0x810];
-u32* gUnk_02038090;
-s32 gUnk_02038094;
-s32 gUnk_02038098;
+s32 gDecodedAudioBuffer[0x810];
+u32* gAudioBlockNext;
+s32 gDecodedAudioWritePosition;
+s32 gDecodedAudioReadPosition;
 
 static s32 Square(s32 x) {
     return x * x;
 }
 
 void task_sroll_tmr_0(SrollTmrWork* w, void* arg) {
-    w->unk_00 = 0;
-    w->unk_04 = 0;
+    w->visible = 0;
+    w->frameCount = 0;
     w->tiles = LoadObjTiles(gUnk_09C904B4, 352);
     w->palette = LoadObjPalette(gUnk_09D6D114, 32);
 }
@@ -29,14 +29,14 @@ u8 task_sroll_tmr_1(SrollTmrWork* w) {
     r = 1;
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        if (w->unk_00 == 1) {
-            w->unk_00 = 0;
+        if (w->visible == 1) {
+            w->visible = 0;
         } else {
-            w->unk_00 = r;
+            w->visible = r;
         }
     }
     FadeSetPaletteExcluded((w->palette->index & 15) + 16, 1);
-    w->unk_04++;
+    w->frameCount++;
     return r;
 }
 
@@ -47,11 +47,11 @@ void task_sroll_tmr_2(SrollTmrWork* w) {
     u16 s;
     u16 z;
 
-    if (w->unk_00 == 0) {
+    if (w->visible == 0) {
         return;
     }
 
-    t = w->unk_04;
+    t = w->frameCount;
     h = t / 3600;
     m = t / 60 % 60;
     s = t % 60;
@@ -84,8 +84,8 @@ void func_081154A0(u32* dst, u8* src, u32* pal, s32 x) {
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
         v = pal[(c >> 31) & 1];
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -101,8 +101,8 @@ void func_081154EC(u32* dst, u8* src, u32* pal, s32 x) {
         c = src[i] << 24;
         v = pal[(c >> 31) & 1];
         v |= pal[(c >> 30) & 1] << 4;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -119,8 +119,8 @@ void func_08115548(u32* dst, u8* src, u32* pal, s32 x) {
         v = pal[(c >> 31) & 1];
         v |= pal[(c >> 30) & 1] << 4;
         v |= pal[(c >> 29) & 1] << 8;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -138,8 +138,8 @@ void func_081155B0(u32* dst, u8* src, u32* pal, s32 x) {
         v |= pal[(c >> 30) & 1] << 4;
         v |= pal[(c >> 29) & 1] << 8;
         v |= pal[(c >> 28) & 1] << 12;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -158,8 +158,8 @@ void func_08115628(u32* dst, u8* src, u32* pal, s32 x) {
         v |= pal[(c >> 29) & 1] << 8;
         v |= pal[(c >> 28) & 1] << 12;
         v |= pal[(c >> 27) & 1] << 16;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -179,8 +179,8 @@ void func_081156AC(u32* dst, u8* src, u32* pal, s32 x) {
         v |= pal[(c >> 28) & 1] << 12;
         v |= pal[(c >> 27) & 1] << 16;
         v |= pal[(c >> 26) & 1] << 20;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -201,8 +201,8 @@ void func_08115740(u32* dst, u8* src, u32* pal, s32 x) {
         v |= pal[(c >> 27) & 1] << 16;
         v |= pal[(c >> 26) & 1] << 20;
         v |= pal[(c >> 25) & 1] << 24;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -222,11 +222,11 @@ void func_081157E0(u32* dst, u8* src, u32* pal, s32 x) {
         v |= pal[(src[i] >> 2) & 1] << 20;
         v |= pal[(src[i] >> 1) & 1] << 24;
         v |= pal[src[i] & 1] << 28;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
-u32 func_0811589C(SrollBlit* w) {
+u32 SrollTextBlit1bpp(SrollBlit* w) {
     SrollMask* m;
     u32* d;
     u32* p;
@@ -234,11 +234,11 @@ u32 func_0811589C(SrollBlit* w) {
     s32 e;
     u32 r;
 
-    e = w->unk_00 + w->unk_04;
-    p = w->unk_14;
-    d = w->unk_0C;
-    m = &gUnk_09A54918[w->unk_04][w->unk_00];
-    k = m->unk_00 | m->unk_08;
+    e = w->x + w->width;
+    p = w->buf;
+    d = w->dst;
+    m = &gUnk_09A54918[w->width][w->x];
+    k = m->keepLeft | m->keepRight;
     p[0] = d[0] & k;
     p[1] = d[1] & k;
     p[2] = d[2] & k;
@@ -249,7 +249,7 @@ u32 func_0811589C(SrollBlit* w) {
     p[7] = d[7] & k;
 
     if (e > 8) {
-        k = m->unk_04;
+        k = m->keepNext;
         p[8] = d[8] & k;
         p[9] = d[9] & k;
         p[10] = d[10] & k;
@@ -259,7 +259,7 @@ u32 func_0811589C(SrollBlit* w) {
         p[14] = d[14] & k;
         p[15] = d[15] & k;
     }
-    gUnk_09A54CB8[w->unk_04](p, w->unk_08, w->unk_10, w->unk_00);
+    gUnk_09A54CB8[w->width](p, w->src, w->colors, w->x);
     d[0] = p[0];
     d[1] = p[1];
     d[2] = p[2];
@@ -305,8 +305,8 @@ void func_081159B0(u32* dst, u16* src, u32* pal, s32 x) {
     for (i = 0; i <= 7; i++) {
         c = *s << 16;
         v = pal[(c >> 22) & 3];
-        d[0] |= v << t->unk_00;
-        d[8] |= v >> t->unk_04;
+        d[0] |= v << t->shift;
+        d[8] |= v >> t->spillShift;
         d++;
         s++;
     }
@@ -324,8 +324,8 @@ void func_081159FC(u32* dst, u16* src, u32* pal, s32 x) {
         c = src[i] << 16;
         v = pal[(c >> 22) & 3];
         v |= pal[(c >> 20) & 3] << 4;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -342,8 +342,8 @@ void func_08115A5C(u32* dst, u16* src, u32* pal, s32 x) {
         v = pal[(c >> 22) & 3];
         v |= pal[(c >> 20) & 3] << 4;
         v |= pal[(c >> 18) & 3] << 8;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 
@@ -359,8 +359,8 @@ void func_08115AD4(u32* dst, u16* src, u32* pal, s32 x) {
         v |= pal[(src[i] >> 4) & 3] << 4;
         v |= pal[(src[i] >> 2) & 3] << 8;
         v |= pal[src[i] & 3] << 12;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 void func_08115B6C(u32* dst, u16* src, u32* pal, s32 x) {
@@ -376,8 +376,8 @@ void func_08115B6C(u32* dst, u16* src, u32* pal, s32 x) {
         v |= pal[(src[i] >> 2) & 3] << 8;
         v |= pal[src[i] & 3] << 12;
         v |= pal[(src[i] >> 14) & 3] << 16;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 void func_08115C04(u32* dst, u16* src, u32* pal, s32 x) {
@@ -394,8 +394,8 @@ void func_08115C04(u32* dst, u16* src, u32* pal, s32 x) {
         v |= pal[src[i] & 3] << 12;
         v |= pal[(src[i] >> 14) & 3] << 16;
         v |= pal[(src[i] >> 12) & 3] << 20;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 void func_08115CAC(u32* dst, u16* src, u32* pal, s32 x) {
@@ -413,8 +413,8 @@ void func_08115CAC(u32* dst, u16* src, u32* pal, s32 x) {
         v |= pal[(src[i] >> 14) & 3] << 16;
         v |= pal[(src[i] >> 12) & 3] << 20;
         v |= pal[(src[i] >> 10) & 3] << 24;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
 void func_08115D60(u32* dst, u16* src, u32* pal, s32 x) {
@@ -433,11 +433,11 @@ void func_08115D60(u32* dst, u16* src, u32* pal, s32 x) {
         v |= pal[(src[i] >> 12) & 3] << 20;
         v |= pal[(src[i] >> 10) & 3] << 24;
         v |= pal[(src[i] >> 8) & 3] << 28;
-        dst[i] |= v << t->unk_00;
-        dst[i + 8] |= v >> t->unk_04;
+        dst[i] |= v << t->shift;
+        dst[i + 8] |= v >> t->spillShift;
     }
 }
-u32 func_08115E24(SrollBlit* w) {
+u32 SrollTextBlit2bpp(SrollBlit* w) {
     SrollMask* m;
     u32* d;
     u32* p;
@@ -445,11 +445,11 @@ u32 func_08115E24(SrollBlit* w) {
     s32 e;
     u32 r;
 
-    e = w->unk_00 + w->unk_04;
-    p = w->unk_14;
-    d = w->unk_0C;
-    m = &gUnk_09A54918[w->unk_04][w->unk_00];
-    k = m->unk_00 | m->unk_08;
+    e = w->x + w->width;
+    p = w->buf;
+    d = w->dst;
+    m = &gUnk_09A54918[w->width][w->x];
+    k = m->keepLeft | m->keepRight;
     p[0] = d[0] & k;
     p[1] = d[1] & k;
     p[2] = d[2] & k;
@@ -460,7 +460,7 @@ u32 func_08115E24(SrollBlit* w) {
     p[7] = d[7] & k;
 
     if (e > 8) {
-        k = m->unk_04;
+        k = m->keepNext;
         p[8] = d[8] & k;
         p[9] = d[9] & k;
         p[10] = d[10] & k;
@@ -470,7 +470,7 @@ u32 func_08115E24(SrollBlit* w) {
         p[14] = d[14] & k;
         p[15] = d[15] & k;
     }
-    gUnk_09A54CDC[w->unk_04](p, w->unk_08, w->unk_10, w->unk_00);
+    gUnk_09A54CDC[w->width](p, w->src, w->colors, w->x);
     d[0] = p[0];
     d[1] = p[1];
     d[2] = p[2];
@@ -557,7 +557,7 @@ s32 SrollTextMeasureWidth(SrollWork* w, u8* s) {
             c = SrollTextMapSingleByteChar(s[0]);
             s += 1;
         }
-        total += SrollTextGetGlyphWidth(c, w->unk_34, w->unk_3C, w->unk_40);
+        total += SrollTextGetGlyphWidth(c, w->fontPages, w->fontWidths, w->fontGlyphCount);
     }
     return total;
 }
@@ -577,38 +577,38 @@ u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
     u16 n;
 
     r = 0;
-    pal[0] = c = w->unk_06;
-    pal[1] = w->unk_02;
-    pal[2] = w->unk_04;
-    pal[3] = w->unk_08;
+    pal[0] = c = w->bgColor;
+    pal[1] = w->fgColor;
+    pal[2] = w->shadowColor;
+    pal[3] = w->edgeColor;
     bg = (c << 4) | c;
     bg |= bg << 8;
     bg |= bg << 16;
-    b.unk_00 = w->x & 7;
-    b.unk_04 = width;
-    b.unk_08 = src;
-    b.unk_0C = dst;
-    b.unk_10 = pal;
-    n = w->unk_24;
+    b.x = w->x & 7;
+    b.width = width;
+    b.src = src;
+    b.dst = dst;
+    b.colors = pal;
+    n = w->glyphHeight;
 
     if (n-- != 0) {
         q = &fill;
         do {
-            if (b.unk_00 == 0) {
+            if (b.x == 0) {
                 *q = bg;
-                CpuFastSet(q, b.unk_0C, CPU_SET_SRC_FIXED | 8);
+                CpuFastSet(q, b.dst, CPU_SET_SRC_FIXED | 8);
             }
 
-            switch (w->unk_26) {
+            switch (w->glyphBpp) {
             case 1:
-                r = func_0811589C(&b);
+                r = SrollTextBlit1bpp(&b);
                 break;
             case 2:
-                r = func_08115E24(&b);
+                r = SrollTextBlit2bpp(&b);
                 break;
             }
-            b.unk_08 += w->unk_26 * 8;
-            b.unk_0C += w->unk_1C * 8;
+            b.src += w->glyphBpp * 8;
+            b.dst += w->textWidth * 8;
         } while (n-- != 0);
     }
     return r;
@@ -618,39 +618,39 @@ void SrollTextSelectFont(SrollWork* w, u32 mode) {
     if (mode > 1) {
         mode = 0;
     }
-    w->unk_26 = gUnk_09A5B440[mode].unk_00;
-    w->unk_24 = gUnk_09A5B440[mode].unk_02;
-    w->unk_34 = gUnk_09A5B440[mode].unk_04;
-    w->unk_38 = gUnk_09A5B440[mode].unk_08;
-    w->unk_3C = gUnk_09A5B440[mode].unk_0C;
-    w->unk_40 = gUnk_09A5B440[mode].unk_10;
+    w->glyphBpp = gUnk_09A5B440[mode].bpp;
+    w->glyphHeight = gUnk_09A5B440[mode].height;
+    w->fontPages = gUnk_09A5B440[mode].pages;
+    w->fontGlyphs = gUnk_09A5B440[mode].glyphs;
+    w->fontWidths = gUnk_09A5B440[mode].widths;
+    w->fontGlyphCount = gUnk_09A5B440[mode].glyphCount;
     w->unk_44 = gUnk_09A5B440[mode].unk_14;
     SrollTextSetCursorTile(w, w->x, w->y);
 }
 
 void SrollTextInit(SrollWork* w, SrollInit* a) {
-    SrollTextSelectFont(w, a->unk_04);
-    SrollTextSetColors(w, a->unk_20, a->unk_22, a->unk_24, a->unk_26);
-    w->unk_0A = 32;
-    w->unk_00 = 0;
-    w->unk_0C = a->unk_28;
-    w->unk_10 = a->unk_2C;
-    w->unk_12 = a->unk_2E;
-    w->unk_14 = a->unk_30;
-    w->unk_16 = a->unk_32;
-    w->unk_18 = a->unk_34;
-    w->unk_1A = a->unk_36;
-    w->unk_1C = a->unk_38;
-    w->unk_1E = a->unk_3A;
-    w->unk_2C = a->unk_08;
-    w->unk_2E = a->unk_0A;
-    w->unk_30 = a->unk_0C;
+    SrollTextSelectFont(w, a->font);
+    SrollTextSetColors(w, a->fgColor, a->shadowColor, a->bgColor, a->edgeColor);
+    w->mapWidth = 32;
+    w->flags = 0;
+    w->frameStyle = a->frameStyle;
+    w->windowX = a->windowX;
+    w->windowY = a->windowY;
+    w->windowWidth = a->windowWidth;
+    w->windowHeight = a->windowHeight;
+    w->textX = a->textX;
+    w->textY = a->textY;
+    w->textWidth = a->textWidth;
+    w->textHeight = a->textHeight;
+    w->clearTile = a->clearTile;
+    w->frameTileBase = a->frameTileBase;
+    w->textTileBase = a->textTileBase;
     w->unk_48 = a->unk_10;
-    w->unk_4C = a->unk_14;
-    w->unk_50 = a->unk_18;
-    w->unk_54 = a->unk_1C;
+    w->tilemapBuffer = a->tilemapBuffer;
+    w->tileData = a->tileData;
+    w->tilemap = a->tilemap;
     SrollTextClearQueue(w);
-    func_08116698(w, 1);
+    SrollTextResetWindow(w, 1);
 }
 
 void SrollTextClearWindowImmediate(SrollWork* w) {
@@ -690,11 +690,11 @@ u16 SrollTextDequeueChar(SrollWork* w) {
 }
 
 void SrollTextSetCursorTile(SrollWork* w, u16 x, u16 y) {
-    if (x >= w->unk_1C) {
+    if (x >= w->textWidth) {
         x = 0;
     }
 
-    if (y + w->unk_24 > w->unk_1E) {
+    if (y + w->glyphHeight > w->textHeight) {
         y = 0;
     }
     w->x = x * 8;
@@ -702,17 +702,17 @@ void SrollTextSetCursorTile(SrollWork* w, u16 x, u16 y) {
 }
 
 void SrollTextSetCursorPixelX(SrollWork* w, u16 x) {
-    if (x >= w->unk_1C * 8) {
+    if (x >= w->textWidth * 8) {
         x = 0;
     }
     w->x = x;
 }
 
 void SrollTextSetColors(SrollWork* w, u16 a, u16 b, u16 c, u16 d) {
-    w->unk_02 = a;
-    w->unk_04 = b;
-    w->unk_06 = c;
-    w->unk_08 = d;
+    w->fgColor = a;
+    w->shadowColor = b;
+    w->bgColor = c;
+    w->edgeColor = d;
 }
 
 void SrollTextClearWindow(SrollWork* w, u8 flush) {
@@ -720,12 +720,12 @@ void SrollTextClearWindow(SrollWork* w, u8 flush) {
     u16* p;
     u16 i;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
+    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
 
-    for (i = 0; i < w->unk_16; i++) {
-        fill[0] = w->unk_2C;
-        CpuSet(fill, p, w->unk_14 | CPU_SET_SRC_FIXED);
-        p += w->unk_0A;
+    for (i = 0; i < w->windowHeight; i++) {
+        fill[0] = w->clearTile;
+        CpuSet(fill, p, w->windowWidth | CPU_SET_SRC_FIXED);
+        p += w->mapWidth;
     }
 
     if (flush == 1) {
@@ -733,7 +733,7 @@ void SrollTextClearWindow(SrollWork* w, u8 flush) {
     }
 }
 
-void func_081162E8(SrollWork* w) {
+void SrollTextDrawFrame(SrollWork* w) {
     u16 a;
     u16 b;
     u16 c;
@@ -742,28 +742,28 @@ void func_081162E8(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
-    t = w->unk_2E + 1;
+    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
+    t = w->frameTileBase + 1;
     q = &a;
     a = t + 2;
-    CpuSet(q, p + 1, (((u32)(w->unk_14 - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuSet(q, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
     p[0] = t + 1;
-    p[w->unk_14 - 1] = t + 3;
-    p += w->unk_0A;
+    p[w->windowWidth - 1] = t + 3;
+    p += w->mapWidth;
 
-    for (i = 1; i < w->unk_16 - 1; i++) {
+    for (i = 1; i < w->windowHeight - 1; i++) {
         b = t;
-        CpuSet(&b, p + 1, (((u32)(w->unk_14 - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuSet(&b, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
         p[0] = t + 4;
-        p[w->unk_14 - 1] = t + 5;
-        p += w->unk_0A;
+        p[w->windowWidth - 1] = t + 5;
+        p += w->mapWidth;
     }
     c = t + 7;
-    CpuSet(&c, p + 1, (((u32)(w->unk_14 - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuSet(&c, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
     p[0] = t + 6;
-    p[w->unk_14 - 1] = t + 8;
+    p[w->windowWidth - 1] = t + 8;
 }
-void func_081163CC(SrollWork* w) {
+void SrollTextDrawFrameTailLeft(SrollWork* w) {
     u16 a;
     u16 b;
     u16 c;
@@ -773,37 +773,37 @@ void func_081163CC(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
-    t = w->unk_2E + 1;
+    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
+    t = w->frameTileBase + 1;
     q = &a;
     a = t + 2;
-    CpuSet(q, p + 2, (((u32)(w->unk_14 - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuSet(q, p + 2, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
     p[1] = t + 1;
-    p[w->unk_14 - 1] = t + 3;
-    p += w->unk_0A;
+    p[w->windowWidth - 1] = t + 3;
+    p += w->mapWidth;
 
-    for (i = 1; i < w->unk_16 - 2; i++) {
+    for (i = 1; i < w->windowHeight - 2; i++) {
         b = t;
-        CpuSet(&b, p + 2, (((u32)(w->unk_14 - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuSet(&b, p + 2, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
         p[1] = t + 4;
-        p[w->unk_14 - 1] = t + 5;
-        p += w->unk_0A;
+        p[w->windowWidth - 1] = t + 5;
+        p += w->mapWidth;
     }
 
     c = t;
-    CpuSet(&c, p + 2, ((((u32)(w->unk_14 - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuSet(&c, p + 2, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
     p[0] = t + 10;
     p[1] = t + 11;
-    p[w->unk_14 - 1] = t + 5;
-    p += w->unk_0A;
+    p[w->windowWidth - 1] = t + 5;
+    p += w->mapWidth;
 
     d = t + 7;
-    CpuSet(&d, p + 2, ((((u32)(w->unk_14 - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuSet(&d, p + 2, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
     p[1] = t + 6;
-    p[w->unk_14 - 1] = t + 8;
+    p[w->windowWidth - 1] = t + 8;
 }
 
-void func_08116500(SrollWork* w) {
+void SrollTextDrawFrameTailRight(SrollWork* w) {
     u16 a;
     u16 b;
     u16 c;
@@ -813,34 +813,34 @@ void func_08116500(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->unk_12 * w->unk_0A * 2 + w->unk_10 * 2);
-    t = w->unk_2E + 1;
+    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
+    t = w->frameTileBase + 1;
     q = &a;
     a = t + 2;
-    CpuSet(q, p + 1, (((u32)(w->unk_14 - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuSet(q, p + 1, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
     p[0] = t + 1;
-    p[w->unk_14 - 2] = t + 3;
-    p += w->unk_0A;
+    p[w->windowWidth - 2] = t + 3;
+    p += w->mapWidth;
 
-    for (i = 1; i < w->unk_16 - 2; i++) {
+    for (i = 1; i < w->windowHeight - 2; i++) {
         b = t;
-        CpuSet(&b, p + 1, (((u32)(w->unk_14 - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuSet(&b, p + 1, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
         p[0] = t + 4;
-        p[w->unk_14 - 2] = t + 5;
-        p += w->unk_0A;
+        p[w->windowWidth - 2] = t + 5;
+        p += w->mapWidth;
     }
 
     c = t;
-    CpuSet(&c, p + 1, ((((u32)(w->unk_14 - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuSet(&c, p + 1, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
     p[0] = t + 4;
-    p[w->unk_14 - 2] = (t | 0x400) + 11;
-    p[w->unk_14 - 1] = (t | 0x400) + 10;
-    p += w->unk_0A;
+    p[w->windowWidth - 2] = (t | 0x400) + 11;
+    p[w->windowWidth - 1] = (t | 0x400) + 10;
+    p += w->mapWidth;
 
     d = t + 7;
-    CpuSet(&d, p + 1, ((((u32)(w->unk_14 - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuSet(&d, p + 1, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
     p[0] = t + 6;
-    p[w->unk_14 - 2] = t + 8;
+    p[w->windowWidth - 2] = t + 8;
 }
 void SrollTextClearTextArea(SrollWork* w) {
     u16 fill;
@@ -848,27 +848,27 @@ void SrollTextClearTextArea(SrollWork* w) {
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->unk_1A * w->unk_0A * 2 + w->unk_18 * 2);
-    t = w->unk_2E + 1;
+    p = (u16*)(SrollTextGetTilemap(w) + w->textY * w->mapWidth * 2 + w->textX * 2);
+    t = w->frameTileBase + 1;
 
-    for (i = 0; i < w->unk_1E; i++) {
+    for (i = 0; i < w->textHeight; i++) {
         fill = t;
-        CpuSet(&fill, p, w->unk_1C | CPU_SET_SRC_FIXED);
-        p += w->unk_0A;
+        CpuSet(&fill, p, w->textWidth | CPU_SET_SRC_FIXED);
+        p += w->mapWidth;
     }
 }
-void func_08116698(SrollWork* w, u8 flush) {
+void SrollTextResetWindow(SrollWork* w, u8 flush) {
     u16 t;
 
-    switch (w->unk_0C) {
+    switch (w->frameStyle) {
     case 1:
-        func_081162E8(w);
+        SrollTextDrawFrame(w);
         break;
     case 2:
-        func_081163CC(w);
+        SrollTextDrawFrameTailLeft(w);
         break;
     case 3:
-        func_08116500(w);
+        SrollTextDrawFrameTailRight(w);
         break;
     default:
         SrollTextClearTextArea(w);
@@ -879,8 +879,8 @@ void func_08116698(SrollWork* w, u8 flush) {
     if (flush == 1) {
         SrollTextFlushTilemap(w);
     } else {
-        t = w->unk_00 | 1;
-        w->unk_00 = t;
+        t = w->flags | 1;
+        w->flags = t;
     }
 }
 void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
@@ -890,38 +890,38 @@ void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
     u16 t;
     u16 v;
 
-    if (x >= w->unk_1C) {
+    if (x >= w->textWidth) {
         return;
     }
 
-    if (y >= w->unk_1E) {
+    if (y >= w->textHeight) {
         return;
     }
 
-    if (x + cw > w->unk_1C) {
-        cw = w->unk_1C - x;
+    if (x + cw > w->textWidth) {
+        cw = w->textWidth - x;
     }
 
-    if (y + ch > w->unk_1E) {
-        ch = w->unk_1E - y;
+    if (y + ch > w->textHeight) {
+        ch = w->textHeight - y;
     }
 
-    p = (u16*)(SrollTextGetTilemap(w) + (w->unk_1A + y) * w->unk_0A * 2 + (w->unk_18 + x) * 2);
-    v = w->unk_2E + 1;
+    p = (u16*)(SrollTextGetTilemap(w) + (w->textY + y) * w->mapWidth * 2 + (w->textX + x) * 2);
+    v = w->frameTileBase + 1;
     i = 0;
 
     while (i < ch) {
         fill = v;
         CpuSet(&fill, p, (((u32)(cw * 2) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
-        p += w->unk_0A;
+        p += w->mapWidth;
         i++;
     }
 
     if (flush == 1) {
         SrollTextFlushTilemap(w);
     } else {
-        t = w->unk_00 | 1;
-        w->unk_00 = t;
+        t = w->flags | 1;
+        w->flags = t;
     }
 }
 
@@ -969,31 +969,31 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
 
     r = 0;
 
-    if (w->x >= w->unk_1C * 8) {
+    if (w->x >= w->textWidth * 8) {
         w->x = 0;
     }
     c = SrollTextDequeueChar(w);
     if (c & 0xFF00) {
-        off = (w->y * w->unk_1C + (w->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(c, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
-        wd = SrollTextGetGlyphWidth(c, w->unk_34, w->unk_3C, w->unk_40);
-        n = SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, wd);
-        t = w->y * w->unk_1C + (w->x >> 3) + w->unk_30;
+        off = (w->y * w->textWidth + (w->x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(c, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
+        wd = SrollTextGetGlyphWidth(c, w->fontPages, w->fontWidths, w->fontGlyphCount);
+        n = SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, wd);
+        t = w->y * w->textWidth + (w->x >> 3) + w->textTileBase;
         p = (u16*)(SrollTextGetTilemap(w) +
-                   ((w->unk_1A + w->y) * w->unk_0A + ((w->x >> 3) + w->unk_18)) * 2);
+                   ((w->textY + w->y) * w->mapWidth + ((w->x >> 3) + w->textX)) * 2);
 
-        for (i = 0; i < w->unk_24; i++) {
+        for (i = 0; i < w->glyphHeight; i++) {
             if (n == 1) {
                 p[0] = t;
             } else {
                 p[0] = t;
                 p[1] = t + 1;
             }
-            p += w->unk_0A;
-            t += w->unk_1C;
+            p += w->mapWidth;
+            t += w->textWidth;
         }
         w->x += wd;
-        w->unk_00 |= 1;
+        w->flags |= 1;
         r = 1;
     } else {
         switch (c) {
@@ -1006,16 +1006,16 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
                 SrollTextSelectFont(w, ParseLowercaseHexDigit(v[1]));
                 break;
             case 'f':
-                w->unk_02 = ParseLowercaseHexDigit(v[1]);
+                w->fgColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 's':
-                w->unk_04 = ParseLowercaseHexDigit(v[1]);
+                w->shadowColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 'b':
-                w->unk_06 = ParseLowercaseHexDigit(v[1]);
+                w->bgColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 'e':
-                w->unk_08 = ParseLowercaseHexDigit(v[1]);
+                w->edgeColor = ParseLowercaseHexDigit(v[1]);
                 break;
             }
             break;
@@ -1023,9 +1023,9 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
             break;
         case '\n':
             w->x = 0;
-            w->y += w->unk_24;
+            w->y += w->glyphHeight;
 
-            if (w->y + w->unk_24 > w->unk_1E) {
+            if (w->y + w->glyphHeight > w->textHeight) {
                 w->y = 0;
             }
             break;
@@ -1041,7 +1041,7 @@ void SrollTextDrawNextGlyph(SrollWork* w, u8 flush) {
         r = SrollTextProcessNextChar(w);
     }
 
-    if (flush == 1 && (w->unk_00 & 1)) {
+    if (flush == 1 && (w->flags & 1)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1051,7 +1051,7 @@ void SrollTextDrawQueued(SrollWork* w, u8 flush) {
         SrollTextProcessNextChar(w);
     }
 
-    if (flush == 1 && (w->unk_00 & 1)) {
+    if (flush == 1 && (w->flags & 1)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1059,9 +1059,9 @@ void SrollTextDrawQueued(SrollWork* w, u8 flush) {
 u8* SrollTextGetTilemap(SrollWork* w) {
     u8* v;
 
-    v = w->unk_4C;
+    v = w->tilemapBuffer;
     if (v == 0) {
-        v = w->unk_54;
+        v = w->tilemap;
     }
     return v;
 }
@@ -1069,11 +1069,11 @@ u8* SrollTextGetTilemap(SrollWork* w) {
 void SrollTextFlushTilemap(SrollWork* w) {
     u32 off;
 
-    if (w->unk_4C != 0) {
-        off = w->unk_12 * w->unk_0A * 2;
-        RequestDma3Copy(w->unk_4C + off, w->unk_54 + off, w->unk_16 * w->unk_0A * 2);
+    if (w->tilemapBuffer != 0) {
+        off = w->windowY * w->mapWidth * 2;
+        RequestDma3Copy(w->tilemapBuffer + off, w->tilemap + off, w->windowHeight * w->mapWidth * 2);
     }
-    w->unk_00 &= 0xFFFE;
+    w->flags &= 0xFFFE;
 }
 
 void SrollTextDrawString(SrollWork* w, u8* s, u8 flush) {
@@ -1081,7 +1081,7 @@ void SrollTextDrawString(SrollWork* w, u8* s, u8 flush) {
     SrollTextEnqueueString(w, s);
     SrollTextDrawQueued(w, 0);
 
-    if (flush == 1 && (w->unk_00 & 1)) {
+    if (flush == 1 && (w->flags & 1)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1092,7 +1092,7 @@ void SrollTextDrawStringAtTile(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     SrollTextEnqueueString(w, s);
     SrollTextDrawQueued(w, 0);
 
-    if (flush == 1 && (w->unk_00 & 1)) {
+    if (flush == 1 && (w->flags & 1)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1106,21 +1106,21 @@ void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
     SrollTextSetCursorTile(w, x >> 3, y);
     n = x & 7;
     if (n != 0) {
-        off = (w->y * w->unk_1C + (x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
-        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, n);
+        off = (w->y * w->textWidth + (x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(0x8140, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
+        SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, n);
     }
     SrollTextSetCursorPixelX(w, x);
     SrollTextEnqueueString(w, s);
     SrollTextDrawQueued(w, 0);
 
     if ((w->x & 7) != 0) {
-        off = (w->y * w->unk_1C + (w->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, w->unk_34, w->unk_38, w->unk_26, w->unk_24);
-        SrollTextBlitGlyph(w, (u32*)(w->unk_50 + off), g, 8 - (w->x & 7));
+        off = (w->y * w->textWidth + (w->x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(0x8140, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
+        SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, 8 - (w->x & 7));
     }
 
-    if (flush == 1 && (w->unk_00 & 1)) {
+    if (flush == 1 && (w->flags & 1)) {
         SrollTextFlushTilemap(w);
     }
 }
@@ -1136,11 +1136,11 @@ void ScanlineDmaReset(void) {
     dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
     dma[5] &= ~DMA_ENABLE;
     dma[5];
-    gDmaStream.unk_00 = 0;
-    gDmaStream.unk_01 = 0;
+    gDmaStream.enabled = 0;
+    gDmaStream.swapPending = 0;
     gDmaStream.update = 0;
     gDmaStream.dst = 0;
-    gDmaStream.unk_0C = 0;
+    gDmaStream.srcIdx = 0;
     gDmaStream.src[0] = 0;
     gDmaStream.src[1] = 0;
     gDmaStream.cnt = 0;
@@ -1156,26 +1156,26 @@ void ScanlineDmaUpdate(void) {
     dma[5] &= ~DMA_ENABLE;
     dma[5];
 
-    if (gDmaStream.unk_00 != 0) {
-        if (gDmaStream.unk_01 != 0) {
-            gDmaStream.unk_0C ^= 1;
-            src = gDmaStream.src[gDmaStream.unk_0C];
-            gDmaStream.unk_18 = src;
+    if (gDmaStream.enabled != 0) {
+        if (gDmaStream.swapPending != 0) {
+            gDmaStream.srcIdx ^= 1;
+            src = gDmaStream.src[gDmaStream.srcIdx];
+            gDmaStream.dmaSrc = src;
 
             if (!(gDmaStream.cnt & CPU_SET_SRC_FIXED)) {
                 if (gDmaStream.cnt & CPU_SET_32BIT) {
-                    gDmaStream.unk_18 = src + 4;
+                    gDmaStream.dmaSrc = src + 4;
                 } else {
-                    gDmaStream.unk_18 = src + 2;
+                    gDmaStream.dmaSrc = src + 2;
                 }
             }
-            gDmaStream.unk_01 = 0;
+            gDmaStream.swapPending = 0;
         }
 
-        if (gDmaStream.src[gDmaStream.unk_0C] != 0 && gDmaStream.dst != 0 &&
+        if (gDmaStream.src[gDmaStream.srcIdx] != 0 && gDmaStream.dst != 0 &&
             gDmaStream.cnt != 0) {
             dma32 = (vu32*)REG_ADDR_DMA0;
-            dma32[0] = (u32)gDmaStream.unk_18;
+            dma32[0] = (u32)gDmaStream.dmaSrc;
             dma32[1] = (u32)gDmaStream.dst;
             dma32[2] = gDmaStream.cnt;
             dma32[2];
@@ -1188,30 +1188,30 @@ void ScanlineDmaUpdate(void) {
 }
 
 void ScanlineDmaPrime32Bit(void) {
-    *gDmaStream.dst = *(u32*)gDmaStream.src[gDmaStream.unk_0C];
+    *gDmaStream.dst = *(u32*)gDmaStream.src[gDmaStream.srcIdx];
 }
 
 void ScanlineDmaPrime16Bit(void) {
-    *gDmaStream.dst = *(u16*)gDmaStream.src[gDmaStream.unk_0C];
+    *gDmaStream.dst = *(u16*)gDmaStream.src[gDmaStream.srcIdx];
 }
 
 void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt) {
     ScanlineDmaReset();
     gDmaStream.src[0] = src;
     gDmaStream.src[1] = src;
-    gDmaStream.unk_18 = src;
+    gDmaStream.dmaSrc = src;
 
     if (cnt & CPU_SET_32BIT) {
         gDmaStream.update = ScanlineDmaPrime32Bit;
 
         if (!(cnt & CPU_SET_SRC_FIXED)) {
-            gDmaStream.unk_18 = src + 4;
+            gDmaStream.dmaSrc = src + 4;
         }
     } else {
         gDmaStream.update = ScanlineDmaPrime16Bit;
 
         if (!(cnt & CPU_SET_SRC_FIXED)) {
-            gDmaStream.unk_18 = src + 2;
+            gDmaStream.dmaSrc = src + 2;
         }
     }
     gDmaStream.dst = dst;
@@ -1219,20 +1219,20 @@ void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt) {
 }
 
 void ScanlineDmaQueueBuffer(u8* src) {
-    gDmaStream.src[gDmaStream.unk_0C ^ 1] = src;
-    gDmaStream.unk_01 = 1;
+    gDmaStream.src[gDmaStream.srcIdx ^ 1] = src;
+    gDmaStream.swapPending = 1;
 }
 
 void ScanlineDmaEnable(void) {
-    gDmaStream.unk_00 = 1;
+    gDmaStream.enabled = 1;
 }
 
 void ScanlineDmaDisable(void) {
-    gDmaStream.unk_00 = 0;
+    gDmaStream.enabled = 0;
 }
 
 void BlockAudioStart(void) {
-    gUnk_02036048 = 1;
+    gBlockAudioPlaying = 1;
     AudioBlockStreamInit(GetBlockAudioData());
     PcmPlaybackInit(GetBlockAudioSampleRate());
     SetVBlankCallback(VBlankIntrBlockAudio);
@@ -1240,16 +1240,16 @@ void BlockAudioStart(void) {
 }
 
 void BlockAudioUpdate(void) {
-    if (gUnk_02036048 == 1) {
-        gUnk_02036048 = AudioBlockStreamUpdate();
-        if (gUnk_02036048 == 0) {
+    if (gBlockAudioPlaying == 1) {
+        gBlockAudioPlaying = AudioBlockStreamUpdate();
+        if (gBlockAudioPlaying == 0) {
             BlockAudioStop();
         }
     }
 }
 
 void BlockAudioVBlank(void) {
-    if (gUnk_02036048 == 1) {
+    if (gBlockAudioPlaying == 1) {
         PcmPlaybackUpdate();
     }
 }
@@ -1266,7 +1266,7 @@ u16 GetBlockAudioSampleRate(void) {
 }
 
 u32* GetBlockAudioData(void) {
-    return gUnk_09A5B674;
+    return gBlockAudioData;
 }
 
 u8* ReadNextAudioBlock(u32** p) {
@@ -1290,49 +1290,49 @@ s32 AudioBlockStreamInit(u32* src) {
     s32* p;
     u8* q;
 
-    for (p = gUnk_02036050; p < gUnk_02036050 + 0x810;) {
+    for (p = gDecodedAudioBuffer; p < gDecodedAudioBuffer + 0x810;) {
         *p++ = 0;
     }
-    gUnk_02038090 = src;
+    gAudioBlockNext = src;
 
-    for (gUnk_02038094 = 0; gUnk_02038094 <= 0x7FF; gUnk_02038094 += 0x200) {
-        if (gUnk_02038090 != 0) {
-            q = ReadNextAudioBlock(&gUnk_02038090);
+    for (gDecodedAudioWritePosition = 0; gDecodedAudioWritePosition <= 0x7FF; gDecodedAudioWritePosition += 0x200) {
+        if (gAudioBlockNext != 0) {
+            q = ReadNextAudioBlock(&gAudioBlockNext);
             if (q != 0) {
-                DecodeAudioBlock(q, gUnk_02036050, gUnk_02038094);
+                DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
             }
         }
     }
-    gUnk_02038094 &= 0x7FF;
-    gUnk_02038098 = 0;
-    return gUnk_02038090 != 0;
+    gDecodedAudioWritePosition &= 0x7FF;
+    gDecodedAudioReadPosition = 0;
+    return gAudioBlockNext != 0;
 }
 
 s32 AudioBlockStreamUpdate(void) {
     u8* q;
 
-    if (gUnk_02038098 > gUnk_02038094 + 0x200 || gUnk_02038098 < gUnk_02038094) {
-        if (gUnk_02038090 != 0) {
-            q = ReadNextAudioBlock(&gUnk_02038090);
+    if (gDecodedAudioReadPosition > gDecodedAudioWritePosition + 0x200 || gDecodedAudioReadPosition < gDecodedAudioWritePosition) {
+        if (gAudioBlockNext != 0) {
+            q = ReadNextAudioBlock(&gAudioBlockNext);
             if (q != 0) {
-                DecodeAudioBlock(q, gUnk_02036050, gUnk_02038094);
+                DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
             }
-            gUnk_02038094 = (gUnk_02038094 + 0x200) & 0x7FF;
+            gDecodedAudioWritePosition = (gDecodedAudioWritePosition + 0x200) & 0x7FF;
         }
     }
-    return gUnk_02038090 != 0;
+    return gAudioBlockNext != 0;
 }
 
 s32* GetDecodedAudioBuffer(void) {
-    return gUnk_02036050;
+    return gDecodedAudioBuffer;
 }
 
 s32 GetDecodedAudioReadPosition(void) {
-    return gUnk_02038098;
+    return gDecodedAudioReadPosition;
 }
 
 void SetDecodedAudioReadPosition(s32 pos) {
-    gUnk_02038098 = pos;
+    gDecodedAudioReadPosition = pos;
 }
 
 TaskDesc gTaskDescSrollTmr = {

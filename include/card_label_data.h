@@ -3,20 +3,20 @@
 
 #include "card_ui_types.h"
 
-typedef struct UnkStruct_08F7CBA8 {
+typedef struct HcEffectDef {
 #ifdef VERSION_EU
-    void** unk_00;
-    void*** unk_08;
+    void** tiles;
+    void*** sprites;
 #else
-    void* unk_00;
+    void* tiles;
     u32 unk_04;
-    void** unk_08;
+    void** sprites;
 #endif
-    u16 unk_0C;
-    u16 unk_0E;
-} UnkStruct_08F7CBA8;
+    u16 spriteIndex;
+    u16 count;
+} HcEffectDef;
 
-extern const UnkStruct_08F7CBA8 gUnk_08F7CBA8[];
-extern const SpriteFrameResourceDef gUnk_08F7CF18[];
+extern const HcEffectDef gHcEffectDefs[];
+extern const SpriteFrameResourceDef gStockNameSprites[];
 
 #endif

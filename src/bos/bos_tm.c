@@ -7,12 +7,12 @@
 #include "chara_api.h"
 #include "acgtrans.h"
 
-s16 gUnk_0203AB3C EWRAM_COMMON(4);
+s16 gBosTmActorZ EWRAM_COMMON(4);
 s16 gUnk_0203AB40 EWRAM_COMMON(4);
-s16 gUnk_0203AB44 EWRAM_COMMON(4);
+s16 gBosTmActorY EWRAM_COMMON(4);
 s16 gUnk_0203AB48 EWRAM_COMMON(4);
 
-const BattleBackgroundDef gUnk_09619C68 = {
+const BattleBackgroundDef gBosTmBattleBackgroundDef = {
     gUnk_0964AE84, 0x8000, { 0, 0 }, gUnk_096FB164, 0x140, { 0, 0 }, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
 };
 
@@ -31,21 +31,21 @@ static Task* gBosTmFootTask;
 static Task* gBosTmTblTask;
 static TaskPool gBosTmTaskPool;
 
-void func_080B7E68(TmWork* w) {
+void BosTmSetArmPositions(TmWork* w) {
     if (w->flags & 0x20) {
-        w->arm.unk_00 = w->x2 + 0x1000;
-        w->arm.unk_0C = w->x2 - 0x700;
-        w->arm.unk_04 = w->y2 + 0x700;
-        w->arm.unk_10 = w->y2 - 0x400;
-        w->arm.unk_08 = w->z2 - 0x2200;
-        w->arm.unk_14 = w->z2 - 0x1C00;
+        w->arm.x = w->x2 + 0x1000;
+        w->arm.x2 = w->x2 - 0x700;
+        w->arm.y = w->y2 + 0x700;
+        w->arm.y2 = w->y2 - 0x400;
+        w->arm.z = w->z2 - 0x2200;
+        w->arm.z2 = w->z2 - 0x1C00;
     } else {
-        w->arm.unk_00 = w->x2 + 0x700;
-        w->arm.unk_0C = w->x2 - 0xE00;
-        w->arm.unk_04 = w->y2 - 0x400;
-        w->arm.unk_10 = w->y2 + 0x700;
-        w->arm.unk_08 = w->z2 - 0x1C00;
-        w->arm.unk_14 = w->z2 - 0x2200;
+        w->arm.x = w->x2 + 0x700;
+        w->arm.x2 = w->x2 - 0xE00;
+        w->arm.y = w->y2 - 0x400;
+        w->arm.y2 = w->y2 + 0x700;
+        w->arm.z = w->z2 - 0x1C00;
+        w->arm.z2 = w->z2 - 0x2200;
     }
 }
 
@@ -65,46 +65,46 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
         w->x = 0x15D;
         w->y = 0x16C;
         w->z = -0x3C;
-        gBtlWork->unk_0CC = w->x << 8;
-        gBtlWork->unk_0D0 = 0x156 << 8;
-        gBtlWork->unk_0D4 = (s16)w->z << 8;
+        gBtlWork->bossX = w->x << 8;
+        gBtlWork->bossY = 0x156 << 8;
+        gBtlWork->bossZ = (s16)w->z << 8;
     }
-    w->unk_08 = (s16)w->x << 8;
-    w->unk_0C = (s16)w->y << 8;
-    w->unk_10 = (s16)w->z << 8;
-    w->x2 = w->unk_08;
-    w->y2 = w->unk_0C;
-    w->z2 = w->unk_10;
-    w->unk_20 = 0;
-    w->unk_24 = 0;
-    w->unk_34 = 0;
-    w->unk_36 = 0;
-    w->unk_30 = 0;
-    w->unk_32 = 55;
-    w->unk_38 = 0;
-    w->unk_3A = 0;
+    w->baseX = (s16)w->x << 8;
+    w->baseY = (s16)w->y << 8;
+    w->baseZ = (s16)w->z << 8;
+    w->x2 = w->baseX;
+    w->y2 = w->baseY;
+    w->z2 = w->baseZ;
+    w->vx = 0;
+    w->vy = 0;
+    w->step = 0;
+    w->stepTimer = 0;
+    w->hitCount = 0;
+    w->hurtTimer = 55;
+    w->stateTimer = 0;
+    w->tableState = 0;
     w->flags |= 0x30;
     w->unk_3B = 0;
-    w->unk_3C = 16;
-    w->unk_40 = 0;
-    w->unk_42 = 0;
-    w->unk_44 = 0;
+    w->resumeState = 16;
+    w->tileIndex = 0;
+    w->tileCount = 0;
+    w->paletteIndex = 0;
     w->arm.tm = w;
-    func_080B7E68(w);
+    BosTmSetArmPositions(w);
 
     if (w->flags & 8) {
-        w->unk_2C = 15;
+        w->state = 15;
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
         gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
     } else {
-        w->unk_2C = 0;
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&gUnk_09619C68);
+        w->state = 0;
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&gBosTmBattleBackgroundDef);
         gBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
         gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
-        gBtlWork->unk_0D8 = 10;
+        gBtlWork->bossPriorityOffset = 10;
     }
 }
 
@@ -112,97 +112,97 @@ u8 task_bos_tm_1(TmWork* w) {
     CharaObjParam2 param;
     u16 t;
 
-    switch (w->unk_2C) {
+    switch (w->state) {
     case 0:
     case 15:
-        w->unk_36++;
+        w->stepTimer++;
 
-        if ((s16)w->unk_36 > 8) {
-            w->unk_36 = 0;
-            w->unk_34++;
+        if ((s16)w->stepTimer > 8) {
+            w->stepTimer = 0;
+            w->step++;
 
-            if ((s16)w->unk_34 > 7) {
-                w->unk_34 = 0;
+            if ((s16)w->step > 7) {
+                w->step = 0;
             }
         }
         break;
     case 12:
-        w->unk_34++;
-        t = w->unk_30;
+        w->step++;
+        t = w->hitCount;
 
         if ((s16)t == 1) {
-            w->unk_30 = t + 1;
+            w->hitCount = t + 1;
         }
         break;
     case 4:
     case 5:
     case 6:
     case 7:
-        w->unk_36++;
+        w->stepTimer++;
 
-        if ((s16)w->unk_36 > 6) {
-            w->unk_36 = 0;
-            w->unk_34++;
+        if ((s16)w->stepTimer > 6) {
+            w->stepTimer = 0;
+            w->step++;
 
-            if ((s16)w->unk_34 > 9) {
-                w->unk_34 = 0;
+            if ((s16)w->step > 9) {
+                w->step = 0;
             }
         }
         break;
     case 13:
-        if ((s16)w->unk_34 != 0) {
-            if (!func_080C64A4()) {
-                func_0801B008();
+        if ((s16)w->step != 0) {
+            if (!CharaObjUpdateDefeat2()) {
+                EndBossDefeat();
                 return 0;
             }
         } else {
-            param.unk_00 = 0x06010000 + (w->unk_40 << 5);
-            param.unk_04 = w->unk_42;
-            param.unk_08 = 0x05000200 + (w->unk_44 << 5);
-            param.unk_0C = 0x60;
-            param.unk_10 = w->x2;
-            param.unk_14 = w->y2;
-            param.unk_18 = w->z2;
-            param.unk_1C = func_080B82D4;
-            gUnk_0203AB50.x = w->x2;
-            gUnk_0203AB50.y = w->y2;
-            gUnk_0203AB50.z = w->z2;
-            param.unk_20 = &gUnk_0203AB50;
-            func_080C640C(&param);
+            param.tilesAddr = 0x06010000 + (w->tileIndex << 5);
+            param.tileCount = w->tileCount;
+            param.paletteAddr = 0x05000200 + (w->paletteIndex << 5);
+            param.paletteSize = 0x60;
+            param.x = w->x2;
+            param.y = w->y2;
+            param.z = w->z2;
+            param.callback = BosTmDestroyParts;
+            gBosTmBodyObjCopy.x = w->x2;
+            gBosTmBodyObjCopy.y = w->y2;
+            gBosTmBodyObjCopy.z = w->z2;
+            param.prizeObj = &gBosTmBodyObjCopy;
+            CharaObjInitDefeat2(&param);
             w->flags &= ~1;
-            w->unk_34++;
+            w->step++;
         }
         break;
     case 2:
     case 3:
     case 9:
     case 11:
-        w->unk_34++;
+        w->step++;
         break;
     case 17:
         break;
     }
-    gUnk_0203AB44 = gBtlWork->actor->y >> 8;
-    gUnk_0203AB40 = gBtlWork->actor->unk_01C >> 8;
-    gUnk_0203AB3C = gBtlWork->actor->z >> 8;
-    gUnk_0203AB48 = gBtlWork->unk_0D0 >> 8;
+    gBosTmActorY = gBtlWork->actor->y >> 8;
+    gUnk_0203AB40 = gBtlWork->actor->originZ >> 8;
+    gBosTmActorZ = gBtlWork->actor->z >> 8;
+    gUnk_0203AB48 = gBtlWork->bossY >> 8;
 
-    if ((gBtlWork->flags & 0x20000000) && w->unk_2C != 13) {
-        if (gBtlWork->actor->unk_01C <= -0x2D00) {
-            gBtlWork->unk_0D8 = -10;
+    if ((gBtlWork->flags & 0x20000000) && w->state != 13) {
+        if (gBtlWork->actor->originZ <= -0x2D00) {
+            gBtlWork->bossPriorityOffset = -10;
         } else {
-            gBtlWork->unk_0D8 = 10;
+            gBtlWork->bossPriorityOffset = 10;
         }
     } else {
         if (gBtlWork->actor->z <= -0x2D00) {
-            gBtlWork->unk_0D8 = -10;
+            gBtlWork->bossPriorityOffset = -10;
         } else {
-            gBtlWork->unk_0D8 = 10;
+            gBtlWork->bossPriorityOffset = 10;
         }
     }
     TaskPoolUpdate(&gBosTmTaskPool);
-    func_080B7E68(w);
-    w->unk_38++;
+    BosTmSetArmPositions(w);
+    w->stateTimer++;
     return 1;
 }
 
@@ -214,9 +214,9 @@ void task_bos_tm_3(TmWork* w) {
     TaskPoolDestroy(&gBosTmTaskPool);
 }
 
-void func_080B82D4(void) {
-    func_08000DE8(&gBtlWork->taskPools[1], gBosTmTblTask);
-    func_08000DE8(&gBosTmTaskPool, gBosTmBodyTask);
-    func_08000DE8(&gBosTmTaskPool, gBosTmFootTask);
-    func_08000DE8(&gBosTmTaskPool, gBosTmArmTask);
+void BosTmDestroyParts(void) {
+    TaskKill(&gBtlWork->taskPools[1], gBosTmTblTask);
+    TaskKill(&gBosTmTaskPool, gBosTmBodyTask);
+    TaskKill(&gBosTmTaskPool, gBosTmFootTask);
+    TaskKill(&gBosTmTaskPool, gBosTmArmTask);
 }

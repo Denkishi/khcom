@@ -3,35 +3,35 @@ types:
   SrollFont:
     header: sroll.h
     fields:
-    - name: unk_00
+    - name: bpp
       type: u16
-    - name: unk_02
+    - name: height
       type: u16
-    - name: unk_04
+    - name: pages
       type: u8*
-    - name: unk_08
+    - name: glyphs
       type: u8*
-    - name: unk_0C
+    - name: widths
       type: u8*
-    - name: unk_10
+    - name: glyphCount
       type: u32
     - name: unk_14
       type: u8
   SrollMask:
     header: sroll.h
     fields:
-    - name: unk_00
+    - name: keepLeft
       type: u32
-    - name: unk_04
+    - name: keepNext
       type: u32
-    - name: unk_08
+    - name: keepRight
       type: u32
   SrollShift:
     header: sroll.h
     fields:
-    - name: unk_00
+    - name: shift
       type: u32
-    - name: unk_04
+    - name: spillShift
       type: u32
   StaffRollBlitTable:
     kind: table

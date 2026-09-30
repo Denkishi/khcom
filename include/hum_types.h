@@ -36,7 +36,7 @@ typedef struct HumSubDef {
 } HumSubDef;
 
 typedef struct HumWork {
-    const void* unk_000;
+    const void* def;
     ObjTiles* tiles;
     ObjPalette* palette;
     HumSub* sub;
@@ -44,23 +44,23 @@ typedef struct HumWork {
     AnimState anim;
     TaskPool tasks;
     BtlObj actor;
-    s16 unk_150;
-    s16 unk_152;
+    s16 stateTimer;
+    s16 steps;
     u32 flags;
-    u32 unk_158;
+    u32 vz;
     u32 targetX;
     u32 targetY;
     s32 targetZ;
-    s32 unk_168;
-    s32 unk_16C;
-    u32 unk_170;
-    s16 unk_174;
+    s32 scaleX;
+    s32 scaleY;
+    u32 state;
+    s16 boundsMargin;
     u16 unk_176;
-    void* unk_178;
+    void* paletteData;
     u16 unk_17C;
-    u16 unk_17E;
+    u16 itemIndex;
     void* gfx;
-    const u32* unk_184;
+    const u32* stockMoves;
 } HumWork;
 
 #endif

@@ -3,12 +3,12 @@
 
 #include "types.h"
 
-void func_0801D288(void);
-void func_0802F1C8(void);
-void func_0802F1E8(void);
-void func_0802F208(void);
-s32 func_0802F268(void);
-void func_0802F274(s32 a, s32 b);
-void func_0802F284(s32 a, s32 b, s32 c);
+void SelectLockonTarget(void);
+void BtlMapResetShake(void);
+void BtlMapStartShake(void);
+void BtlMapUpdateShake(void);
+s32 BtlMapGetShake(void);
+void BtlMapSetCameraTarget(s32 a, s32 b);
+void BtlMapFollowPosition(s32 a, s32 b, s32 c);
 
 #endif

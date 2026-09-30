@@ -8,8 +8,8 @@
 #include "sprites_title.h"
 
 #ifdef VERSION_EU
-extern void** gUnkEu_09F80200[5];
-extern void** gUnkEu_09F80214[5];
+extern void** gTitleLumiSpritesEu[5];
+extern void** gTitleLumiSpritesAltEu[5];
 #endif
 
 #ifdef VERSION_EU
@@ -66,10 +66,10 @@ TaskDesc gTaskDescTitleObj = {
     sizeof(TitleObjWork),
 };
 
-const s32 gUnk_096FDCC8[4] = {4, 5, 1, 2};
+const s32 gTitleMenuChoiceOrder[4] = {4, 5, 1, 2};
 
 #ifdef VERSION_EU
-void** gUnkEu_09F801D4[5] = {
+void** gTitleMenuEntrySpritesEu[5] = {
     gUnkEu_09F81B78,
     gUnkEu_09F81B94,
     gUnkEu_09F81BE8,
@@ -87,22 +87,22 @@ TaskDesc gTaskDescTitleMenu = {
     sizeof(TitleMenuWork),
 };
 
-const s16 gUnk_096FDCE8[3] = {-7, 0, 3};
+const s16 gTitleLumiLevels[3] = {-7, 0, 3};
 
-u8 gUnk_02034ED0 __attribute__((aligned(4)));
+u8 gTitleObjSlideDone __attribute__((aligned(4)));
 
 void task_title_logo_0(TitleLogoWork* work) {
-    func_080D62A8(work);
+    TitleLogoLoadSprites(work);
 }
 
 u8 task_title_logo_1(TitleLogoWork* work) {
-    if (func_080D6280() && gUnk_02034ECC == 0) {
+    if (IsTitleLogoShown() && gTitleLogoScaleDone == 0) {
         work->unk_48 -= 76;
         work->scale += 6;
         if (work->scale > 255) {
             work->scale = 0x100;
             work->unk_48 = 0;
-            gUnk_02034ECC = 1;
+            gTitleLogoScaleDone = 1;
         }
     }
     return 1;
@@ -169,8 +169,8 @@ void func_080D6548(u8* src, u16* dst, u16 size) {
     }
 }
 
-u8 func_080D6574(void) {
-    return gUnk_02034ECC;
+u8 IsTitleLogoScaleDone(void) {
+    return gTitleLogoScaleDone;
 }
 
 void task_title_obj_0(TitleObjWork* work) {
@@ -293,21 +293,21 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[2].x = 0x15800;
     work->sprites[2].targetX = 0xB800;
     work->sprites[2].y = 0x91;
-    work->unk_60 = 30;
-    gUnk_02034ED0 = 0;
-    work->unk_62 = 0;
+    work->slideTimer = 30;
+    gTitleObjSlideDone = 0;
+    work->slideDelay = 0;
 }
 
 u8 task_title_obj_1(TitleObjWork* work) {
-    if (func_080D6294()) {
-        if (work->unk_62 != 0) {
-            work->unk_62--;
-        } else if (work->unk_60 != 0) {
-            ApproachValue(&work->sprites[1].x, work->sprites[1].targetX, work->unk_60);
-            ApproachValue(&work->sprites[2].x, work->sprites[2].targetX, work->unk_60);
-            work->unk_60--;
-            if (work->unk_60 == 0) {
-                gUnk_02034ED0 = 1;
+    if (IsTitleIntroDone()) {
+        if (work->slideDelay != 0) {
+            work->slideDelay--;
+        } else if (work->slideTimer != 0) {
+            ApproachValue(&work->sprites[1].x, work->sprites[1].targetX, work->slideTimer);
+            ApproachValue(&work->sprites[2].x, work->sprites[2].targetX, work->slideTimer);
+            work->slideTimer--;
+            if (work->slideTimer == 0) {
+                gTitleObjSlideDone = 1;
             }
         }
     }
@@ -340,8 +340,8 @@ void task_title_obj_3(TitleObjWork* work) {
     }
 }
 
-u8 func_080D6790(void) {
-    return gUnk_02034ED0;
+u8 IsTitleObjSlideDone(void) {
+    return gTitleObjSlideDone;
 }
 
 void task_title_menu_0(TitleMenuWork* work, s16* arg) {
@@ -350,21 +350,21 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     u8* pal2;
 
     t = (gGameState.flags & 0x200) ? 0x20 : 0;
-    work->unk_44 = arg;
+    work->choice = arg;
 
     if (arg[0] == 0) {
         if (gGameState.flags & 0x20) {
-            work->unk_5C = 4;
+            work->layout = 4;
             arg[0] = 4;
         } else {
-            work->unk_5C = 1;
+            work->layout = 1;
         }
     } else if (arg[0] == 3) {
-        work->unk_5C = 2;
+        work->layout = 2;
     } else if (gGameState.flags & 0x20) {
-        work->unk_5C = 3;
+        work->layout = 3;
     } else {
-        work->unk_5C = 0;
+        work->layout = 0;
     }
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -395,7 +395,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #endif
 #endif
     work->palette = LoadObjPalette(gUnk_0984A7F8, 0x20);
-    func_080D5978(work->palette->index + 16, gUnk_0984A7F8, 0x20);
+    TitleCopyToPaletteBuffer(work->palette->index + 16, gUnk_0984A7F8, 0x20);
 #ifdef VERSION_EU
     work->tiles2[0] = LoadObjTiles(gUnkEu_0973F058, 0x280);
     switch (gLanguage) {
@@ -433,8 +433,8 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     work->palette2[1] = LoadObjPalette(pal, 0x20);
     pal2 = &gUnk_0984A7B8[t];
     work->palette2[2] = LoadObjPalette(pal2, 0x20);
-    func_080D5978(work->palette2[0]->index + 16, pal, 0x20);
-    func_080D5978(work->palette2[2]->index + 16, pal2, 0x20);
+    TitleCopyToPaletteBuffer(work->palette2[0]->index + 16, pal, 0x20);
+    TitleCopyToPaletteBuffer(work->palette2[2]->index + 16, pal2, 0x20);
 #ifdef VERSION_EU
     AnimInit(&work->anim, gUnkEu_09F81A04, gUnk_09EF65E8);
 #else
@@ -445,38 +445,38 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        work->gfx[1] = gUnkEu_09F81A80[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
         break;
     case 1:
-        work->gfx[1] = gUnkEu_09F81A9C[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
         break;
     case 2:
-        work->gfx[1] = gUnkEu_09F81AF0[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AF0[work->choice[0]];
         break;
     case 3:
-        work->gfx[1] = gUnkEu_09F81AD4[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AD4[work->choice[0]];
         break;
     case 4:
-        work->gfx[1] = gUnkEu_09F81AB8[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AB8[work->choice[0]];
         break;
     case 5:
     case 6:
         break;
     }
-    work->gfx[2] = gUnkEu_09F81B0C[work->unk_44[0]];
+    work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
 #else
-    work->gfx[1] = gUnk_09EF6620[work->unk_44[0]];
-    work->gfx[2] = gUnk_09EF663C[work->unk_44[0]];
+    work->gfx[1] = gUnk_09EF6620[work->choice[0]];
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescTitleLumichange, 0);
 }
 
-s16 func_080D6908(s16 a) {
+s16 TitleMenuChoiceRow(s16 a) {
     s16 i;
 
     for (i = 0; i <= 3; i++) {
-        if (a == gUnk_096FDCC8[i]) {
+        if (a == gTitleMenuChoiceOrder[i]) {
             break;
         }
     }
@@ -487,7 +487,7 @@ s16 func_080D6908(s16 a) {
     return i;
 }
 
-void func_080D6944(s16* p) {
+void TitleMenuMoveBasic(s16* p) {
     s16 max;
     u16 keys;
 
@@ -509,19 +509,19 @@ void func_080D6944(s16* p) {
     }
 }
 
-void func_080D69AC(s16* p, s16 count) {
+void TitleMenuMoveOrdered(s16* p, s16 count) {
     s16 i;
 
     if (GetKeysPressed() & DPAD_UP) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        i = func_080D6908(*p);
+        i = TitleMenuChoiceRow(*p);
         i--;
         if (i < 0) {
             i = count;
         }
     } else if (GetKeysPressed() & DPAD_DOWN) {
         m4aSongNumStart(SONG_SYS_CLICK);
-        i = func_080D6908(*p);
+        i = TitleMenuChoiceRow(*p);
         i++;
         if (i > count) {
             i = 0;
@@ -529,22 +529,22 @@ void func_080D69AC(s16* p, s16 count) {
     } else {
         return;
     }
-    *p = gUnk_096FDCC8[i];
+    *p = gTitleMenuChoiceOrder[i];
 }
 
 u8 task_title_menu_1(TitleMenuWork* work) {
-    if (work->unk_5C == 0) {
-        func_080D6944(work->unk_44);
-    } else if (work->unk_5C == 3) {
-        func_080D69AC(work->unk_44, 3);
-    } else if (work->unk_5C == 4) {
-        func_080D69AC(work->unk_44, 1);
+    if (work->layout == 0) {
+        TitleMenuMoveBasic(work->choice);
+    } else if (work->layout == 3) {
+        TitleMenuMoveOrdered(work->choice, 3);
+    } else if (work->layout == 4) {
+        TitleMenuMoveOrdered(work->choice, 1);
     }
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void func_080D6A64(TitleMenuWork* work) {
+void TitleMenuDrawBasic(TitleMenuWork* work) {
     s32 i;
     s32 t;
     s16 y;
@@ -561,7 +561,7 @@ void func_080D6A64(TitleMenuWork* work) {
 
     for (i = 0; i < count; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)gUnkEu_09F801D4[gLanguage];
+        void** spr = (void**)gTitleMenuEntrySpritesEu[gLanguage];
 
         DrawSprite(work->x, y, spr[i], work->tiles, work->palette, 0, 0x400, i + 100);
 #else
@@ -571,9 +571,9 @@ void func_080D6A64(TitleMenuWork* work) {
     }
 
     if (gGameState.flags & 0x20) {
-        y = work->unk_44[0] * 24 + 32;
+        y = work->choice[0] * 24 + 32;
     } else {
-        y = work->unk_44[0] * 24 + 48;
+        y = work->choice[0] * 24 + 48;
     }
 
     for (i = 0; i < 3; i++) {
@@ -581,7 +581,7 @@ void func_080D6A64(TitleMenuWork* work) {
     }
 }
 
-void func_080D6B7C(TitleMenuWork* work) {
+void TitleMenuDrawFull(TitleMenuWork* work) {
     s32 i;
     s16 y;
 
@@ -589,22 +589,22 @@ void func_080D6B7C(TitleMenuWork* work) {
 
     for (i = 0; i < 4; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)gUnkEu_09F801D4[gLanguage];
+        void** spr = (void**)gTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[gUnk_096FDCC8[i]], work->tiles, work->palette, 0, 0x400, i + 100);
+        DrawSprite(work->x, y, spr[gTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, 0x400, i + 100);
 #else
-        DrawSprite(work->x, y, gUnk_09EF6668[gUnk_096FDCC8[i]], work->tiles, work->palette, 0, 0x400, i + 100);
+        DrawSprite(work->x, y, gUnk_09EF6668[gTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, 0x400, i + 100);
 #endif
         y += 24;
     }
-    y = func_080D6908(work->unk_44[0]) * 24 + 16;
+    y = TitleMenuChoiceRow(work->choice[0]) * 24 + 16;
 
     for (i = 0; i < 3; i++) {
         DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
     }
 }
 
-void func_080D6C54(TitleMenuWork* work) {
+void TitleMenuDrawNewGame(TitleMenuWork* work) {
     s32 i;
     s16 y;
 
@@ -612,34 +612,34 @@ void func_080D6C54(TitleMenuWork* work) {
 
     for (i = 0; i < 2; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)gUnkEu_09F801D4[gLanguage];
+        void** spr = (void**)gTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[gUnk_096FDCC8[i]], work->tiles, work->palette, 0, 0x400, i + 100);
+        DrawSprite(work->x, y, spr[gTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, 0x400, i + 100);
 #else
-        DrawSprite(work->x, y, gUnk_09EF6668[gUnk_096FDCC8[i]], work->tiles, work->palette, 0, 0x400, i + 100);
+        DrawSprite(work->x, y, gUnk_09EF6668[gTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, 0x400, i + 100);
 #endif
         y += 24;
     }
-    y = func_080D6908(work->unk_44[0]) * 24 + 48;
+    y = TitleMenuChoiceRow(work->choice[0]) * 24 + 48;
 
     for (i = 0; i < 3; i++) {
         DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
     }
 }
 
-void func_080D6D2C(TitleMenuWork* work) {
+void TitleMenuDrawSingle(TitleMenuWork* work) {
     s32 i;
     s16 y;
 
     y = 56;
 #ifdef VERSION_EU
     {
-        void** spr = (void**)gUnkEu_09F801D4[gLanguage];
+        void** spr = (void**)gTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[work->unk_44[0]], work->tiles, work->palette, 0, 0x400, 100);
+        DrawSprite(work->x, y, spr[work->choice[0]], work->tiles, work->palette, 0, 0x400, 100);
     }
 #else
-    DrawSprite(work->x, y, gUnk_09EF6668[work->unk_44[0]], work->tiles, work->palette, 0, 0x400, 100);
+    DrawSprite(work->x, y, gUnk_09EF6668[work->choice[0]], work->tiles, work->palette, 0, 0x400, 100);
 #endif
 
     for (i = 0; i < 3; i++) {
@@ -652,28 +652,28 @@ void task_title_menu_2(TitleMenuWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        work->gfx[1] = gUnkEu_09F81A80[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
         break;
     case 1:
-        work->gfx[1] = gUnkEu_09F81A9C[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
         break;
     case 2:
-        work->gfx[1] = gUnkEu_09F81AF0[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AF0[work->choice[0]];
         break;
     case 3:
-        work->gfx[1] = gUnkEu_09F81AD4[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AD4[work->choice[0]];
         break;
     case 4:
-        work->gfx[1] = gUnkEu_09F81AB8[work->unk_44[0]];
+        work->gfx[1] = gUnkEu_09F81AB8[work->choice[0]];
         break;
     case 5:
     case 6:
         break;
     }
-    work->gfx[2] = gUnkEu_09F81B0C[work->unk_44[0]];
+    work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
 #else
-    work->gfx[1] = gUnk_09EF6620[work->unk_44[0]];
-    work->gfx[2] = gUnk_09EF663C[work->unk_44[0]];
+    work->gfx[1] = gUnk_09EF6620[work->choice[0]];
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
 
     if (gGameState.flags & 0x200) {
@@ -682,14 +682,14 @@ void task_title_menu_2(TitleMenuWork* work) {
         work->x = 0;
     }
 
-    if (work->unk_5C == 0) {
-        func_080D6A64(work);
-    } else if (work->unk_5C == 3) {
-        func_080D6B7C(work);
-    } else if (work->unk_5C == 4) {
-        func_080D6C54(work);
+    if (work->layout == 0) {
+        TitleMenuDrawBasic(work);
+    } else if (work->layout == 3) {
+        TitleMenuDrawFull(work);
+    } else if (work->layout == 4) {
+        TitleMenuDrawNewGame(work);
     } else {
-        func_080D6D2C(work);
+        TitleMenuDrawSingle(work);
     }
     TaskPoolDraw(&work->tasks);
 }
@@ -770,7 +770,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
     s32 j;
 
     v = GetPaletteEffect();
-    memcpy(tbl, gUnk_096FDCE8, sizeof(tbl));
+    memcpy(tbl, gTitleLumiLevels, sizeof(tbl));
 
     switch (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
     case R_BUTTON:
@@ -795,7 +795,7 @@ u8 task_title_lumichange_1(TitleLumiChangeWork* work) {
 
     if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
         SetPaletteEffect(v);
-        func_080D5998();
+        TitleLoadPaletteBuffer();
     }
     return 1;
 }
@@ -808,8 +808,8 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
     v = GetPaletteEffect();
 #ifdef VERSION_EU
     {
-        void** a = (void**)gUnkEu_09F80200[gLanguage];
-        void** b = (void**)gUnkEu_09F80214[gLanguage];
+        void** a = (void**)gTitleLumiSpritesEu[gLanguage];
+        void** b = (void**)gTitleLumiSpritesAltEu[gLanguage];
 
         tbl = (gGameState.flags & 0x200) ? b : a;
     }
@@ -834,7 +834,7 @@ void task_title_lumichange_3(TitleLumiChangeWork* work) {
 }
 
 #ifdef VERSION_EU
-void** gUnkEu_09F80200[5] = {
+void** gTitleLumiSpritesEu[5] = {
     gUnkEu_09F81B28,
     gUnkEu_09F81B38,
     gUnkEu_09F81B68,
@@ -842,7 +842,7 @@ void** gUnkEu_09F80200[5] = {
     gUnkEu_09F81B48,
 };
 
-void** gUnkEu_09F80214[5] = {
+void** gTitleLumiSpritesAltEu[5] = {
     gUnkEu_09F81C04,
     gUnkEu_09F81C14,
     gUnkEu_09F81C44,

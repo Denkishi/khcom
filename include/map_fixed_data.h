@@ -10,8 +10,8 @@ extern u8 gUnk_09EF7A08[768];
 extern u8 gUnk_09EF7D08[768];
 extern u8 gUnk_09EF8008[512];
 
-struct UnkStruct_09EF8370;
-struct UnkStruct_080E8E74;
+struct MapFixedDef;
+struct PrzCardChance;
 struct UnkStruct_080E8E24;
 
 extern const void* gUnk_09EF8208[12];
@@ -27,8 +27,8 @@ extern const void* gUnk_09EF8328[4];
 extern const void* gUnk_09EF8338[4];
 extern const void* gUnk_09EF8348[4];
 extern const void* gUnk_09EF8358[6];
-extern struct UnkStruct_09EF8370* gUnk_09EF8370[6];
-extern struct UnkStruct_080E8E74* gUnk_09EF8388[14];
-extern struct UnkStruct_080E8E24* gUnk_09EF83C0[14];
+extern struct MapFixedDef* gMapFixedDefs[6];
+extern struct PrzCardChance* gWorldPrzCardChances[14];
+extern struct UnkStruct_080E8E24* gWorldPrizeLists[14];
 
 #endif

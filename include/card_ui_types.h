@@ -51,9 +51,9 @@ typedef struct MapCardDef {
     u16 tilesSize2;
     u8 backIndex;
     u8 unk_1F;
-    u16 unk_20;
-    u16 unk_22;
-    u16 unk_24;
+    u16 kind;
+    u16 value;
+    u16 color;
     u16 unk_26;
 } MapCardDef;
 

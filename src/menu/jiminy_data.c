@@ -1535,11 +1535,11 @@ JiminyTextChar* gUnk_09EDDEC0[3] = {
     gUnk_0815524A, gUnk_0815527A, gUnk_0815529E,
 };
 
-JiminyTextChar* gUnk_09EDDECC[3] = {
+JiminyTextChar* gJiminyRootNames[3] = {
     gUnk_0815A002, gUnk_0815A00E, gUnk_0815A024,
 };
 
-JiminyTextChar* gUnk_09EDDED8[17] = {
+JiminyTextChar* gJiminyEntry01Names[17] = {
     gUnk_0815B502, gUnk_0815B51E, gUnk_0815B53C, gUnk_0815B55C,
     gUnk_0815A518, gUnk_0815A534, gUnk_0815A54A, gUnk_0815A56C,
     gUnk_0815A57C, gUnk_0815A59A, gUnk_0815A5AA, gUnk_0815A5BE,
@@ -1547,7 +1547,7 @@ JiminyTextChar* gUnk_09EDDED8[17] = {
     gUnk_0815A64A,
 };
 
-JiminyTextChar* gUnk_09EDDF1C[7] = {
+JiminyTextChar* gJiminyEntry02Names[7] = {
     gUnk_0815B452, gUnk_0815B46C, gUnk_0815B484, gUnk_0815B49A,
     gUnk_0815B4B4, gUnk_0815B5E2, gUnk_0815C0F2,
 };
@@ -1556,7 +1556,7 @@ JiminyTextChar* gUnk_09EDDF38[3] = {
     gUnk_0815B4CC, gUnk_0815B4E6, gUnk_0815B418,
 };
 
-JiminyTextChar* gUnk_09EDDF44[17] = {
+JiminyTextChar* gJiminyEntry04Names[17] = {
     gUnk_0815A66A, gUnk_0815A682, gUnk_0815A69C, gUnk_0815A6AE,
     gUnk_0815A6C6, gUnk_0815A6DC, gUnk_0815A6F6, gUnk_0815A70E,
     gUnk_0815A72A, gUnk_0815A73A, gUnk_0815A74E, gUnk_0815A762,
@@ -1564,24 +1564,24 @@ JiminyTextChar* gUnk_09EDDF44[17] = {
     gUnk_0815A7A2,
 };
 
-JiminyTextChar* gUnk_09EDDF88[14] = {
+JiminyTextChar* gJiminyEntry05Names[14] = {
     gUnk_0815A7FA, gUnk_0815A804, gUnk_0815A816, gUnk_0815A826,
     gUnk_0815A830, gUnk_0815A840, gUnk_0815A84A, gUnk_0815A854,
     gUnk_0815A878, gUnk_0815A86C, gUnk_0815A89C, gUnk_0815A860,
     gUnk_0815A884, gUnk_0815A8A8,
 };
 
-JiminyTextChar* gUnk_09EDDFC0[7] = {
+JiminyTextChar* gJiminyEntry06Names[7] = {
     gUnk_0815A8B4, gUnk_0815A8C2, gUnk_0815A8D6, gUnk_0815A8EE,
     gUnk_0815A8FA, gUnk_0815A910, gUnk_0815A91E,
 };
 
-JiminyTextChar* gUnk_09EDDFDC[7] = {
+JiminyTextChar* gJiminyEntry07Names[7] = {
     gUnk_0815A932, gUnk_0815A94A, gUnk_0815A956, gUnk_0815A972,
     gUnk_0815A966, gUnk_0815A97C, gUnk_0815A990,
 };
 
-JiminyTextChar* gUnk_09EDDFF8[49] = {
+JiminyTextChar* gJiminyEntry08Names[49] = {
     gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
     gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
     gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
@@ -1597,7 +1597,7 @@ JiminyTextChar* gUnk_09EDDFF8[49] = {
     gUnk_0815ADAA,
 };
 
-JiminyTextChar* gUnk_09EDE0BC[26] = {
+JiminyTextChar* gJiminyEntry09Names[26] = {
     gUnk_0815ADF4, gUnk_0815ADD2, gUnk_0815AE9E, gUnk_0815AEBE,
     gUnk_0815AE56, gUnk_0815AE34, gUnk_0815AF8E, gUnk_0815AFA8,
     gUnk_0815AFBE, gUnk_0815B02E, gUnk_0815AFEC, gUnk_0815B00E,
@@ -1607,11 +1607,11 @@ JiminyTextChar* gUnk_09EDE0BC[26] = {
     gUnk_0815B0B0, gUnk_0815B0CA,
 };
 
-JiminyTextChar* gUnk_09EDE124[1] = {
+JiminyTextChar* gJiminyEntry10Names[1] = {
     gUnk_0815C10E,
 };
 
-JiminyTextChar* gUnk_09EDE128[25] = {
+JiminyTextChar* gJiminyEntry11Names[25] = {
     gUnk_0815B0E8, gUnk_0815A932, gUnk_0815A94A, gUnk_0815B434,
     gUnk_0815B0F2, gUnk_0815B0FC, gUnk_0815A854, gUnk_0815A878,
     gUnk_0815A86C, gUnk_0815A89C, gUnk_0815B190, gUnk_0815B14E,
@@ -1621,7 +1621,7 @@ JiminyTextChar* gUnk_09EDE128[25] = {
     gUnk_0815AD4C,
 };
 
-JiminyTextChar* gUnk_09EDE18C[40] = {
+JiminyTextChar* gJiminyEntry12Names[40] = {
     gUnk_0815B296, gUnk_0815B2A2, gUnk_0815B2CA, gUnk_0815AD5E,
     gUnk_0815AD7C, gUnk_0815B2EC, gUnk_0815B26C, gUnk_0815B27E,
     gUnk_0815AC58, gUnk_0815A956, gUnk_0815A860, gUnk_0815B1E4,
@@ -1634,7 +1634,7 @@ JiminyTextChar* gUnk_09EDE18C[40] = {
     gUnk_0815B3A2, gUnk_0815B3AA, gUnk_0815B3B8, gUnk_0815B3C6,
 };
 
-JiminyTextChar* gUnk_09EDE22C[35] = {
+JiminyTextChar* gJiminyEntry13Names[35] = {
     gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
     gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
     gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
@@ -1646,24 +1646,24 @@ JiminyTextChar* gUnk_09EDE22C[35] = {
     gUnk_0815ACB0, gUnk_0815AC64, gUnk_0815ACFA,
 };
 
-JiminyTextChar* gUnk_09EDE2B8[6] = {
+JiminyTextChar* gJiminyEntry15Names[6] = {
     gUnk_0815C01E, gUnk_0815C03A, gUnk_0815C058, gUnk_0815C078,
     gUnk_0815C096, gUnk_0815C0B2,
 };
 
-JiminyTextChar* gUnk_09EDE2D0[14] = {
+JiminyTextChar* gJiminyEntry18Names[14] = {
     gUnk_0815B0F2, gUnk_0815C360, gUnk_0815B0E8, gUnk_0815B0FC,
     gUnk_0815B108, gUnk_0815C0D0, gUnk_0815ADAA, gUnk_0815AD40,
     gUnk_0815AD9A, gUnk_0815C010, gUnk_0815AD0C, gUnk_0815AD4C,
     gUnk_0815AD16, gUnk_0815C0EA,
 };
 
-JiminyTextChar* gUnk_09EDE308[6] = {
+JiminyTextChar* gJiminyEntry19Names[6] = {
     gUnk_0815B356, gUnk_0815B1FE, gUnk_0815AC88, gUnk_0815AC58,
     gUnk_0815AC96, gUnk_0815B340,
 };
 
-JiminyTextChar* gUnk_09EDE320[33] = {
+JiminyTextChar* gJiminyEntry20Names[33] = {
     gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
     gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
     gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
@@ -1675,7 +1675,7 @@ JiminyTextChar* gUnk_09EDE320[33] = {
     gUnk_0815ACFA,
 };
 
-JiminyTextChar* gUnk_09EDE3A4[22] = {
+JiminyTextChar* gJiminyEntry16Names[22] = {
     gUnk_0815C372, gUnk_0815C360, gUnk_0815A9A4, gUnk_0815A9EC,
     gUnk_0815A9C2, gUnk_0815AA02, gUnk_0815AB36, gUnk_0815AA18,
     gUnk_0815AAF4, gUnk_0815AA38, gUnk_0815AB98, gUnk_0815AC40,
@@ -1684,7 +1684,7 @@ JiminyTextChar* gUnk_09EDE3A4[22] = {
     gUnk_0815ACD6, gUnk_0815AD9A,
 };
 
-JiminyTextChar* gUnk_09EDE3FC[13] = {
+JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnk_08159D14, gUnk_08159D18, gUnk_08159D1E, gUnk_08159D26,
     gUnk_08159D30, gUnk_08159D3C, gUnk_08159D4A, gUnk_08159D5A,
     gUnk_08159D6C, gUnk_08159D80, gUnk_08159D96, gUnk_08159DAE,
@@ -3101,11 +3101,11 @@ JiminyTextChar* gUnk_09EDCC8C[5] = {
     gUnkJp_081499AC,
 };
 
-JiminyTextChar* gUnk_09EDDECC[3] = {
+JiminyTextChar* gJiminyRootNames[3] = {
     gUnkJp_0814F2AC, gUnkJp_0814F2C0, gUnkJp_0814F2CC,
 };
 
-JiminyTextChar* gUnk_09EDDED8[17] = {
+JiminyTextChar* gJiminyEntry01Names[17] = {
     gUnkJp_0814F25C, gUnkJp_0814F270, gUnkJp_0814F284, gUnkJp_0814F298,
     gUnkJp_0814E57C, gUnkJp_0814E59C, gUnkJp_0814E5CC, gUnkJp_0814E590,
     gUnkJp_0814E5B8, gUnkJp_0814E5AC, gUnkJp_0814E5E4, gUnkJp_0814E5F4,
@@ -3113,7 +3113,7 @@ JiminyTextChar* gUnk_09EDDED8[17] = {
     gUnkJp_0814E658,
 };
 
-JiminyTextChar* gUnk_09EDDF1C[7] = {
+JiminyTextChar* gJiminyEntry02Names[7] = {
     gUnkJp_0814F1CC, gUnkJp_0814F1DC, gUnkJp_0814F1EC, gUnkJp_0814F1FC,
     gUnkJp_0814F20C, gUnkJp_0814F21C, gUnkJp_0814FAA8,
 };
@@ -3122,7 +3122,7 @@ JiminyTextChar* gUnk_09EDDF38[3] = {
     gUnkJp_0814F23C, gUnkJp_0814F24C, gUnkJp_0814E9E0,
 };
 
-JiminyTextChar* gUnk_09EDDF44[17] = {
+JiminyTextChar* gJiminyEntry04Names[17] = {
     gUnkJp_0814E664, gUnkJp_0814E678, gUnkJp_0814E68C, gUnkJp_0814E6A0,
     gUnkJp_0814E6B4, gUnkJp_0814E6C8, gUnkJp_0814E6DC, gUnkJp_0814E6F0,
     gUnkJp_0814E700, gUnkJp_0814E714, gUnkJp_0814E724, gUnkJp_0814E734,
@@ -3130,24 +3130,24 @@ JiminyTextChar* gUnk_09EDDF44[17] = {
     gUnkJp_0814E76C,
 };
 
-JiminyTextChar* gUnk_09EDDF88[14] = {
+JiminyTextChar* gJiminyEntry05Names[14] = {
     gUnkJp_0814E7A0, gUnkJp_0814E7AC, gUnkJp_0814E7B8, gUnkJp_0814E7C4,
     gUnkJp_0814E7CC, gUnkJp_0814E7D8, gUnkJp_0814E7E4, gUnkJp_0814E7EC,
     gUnkJp_0814E814, gUnkJp_0814E80C, gUnkJp_0814E828, gUnkJp_0814E7F4,
     gUnkJp_0814E81C, gUnkJp_0814E834,
 };
 
-JiminyTextChar* gUnk_09EDDFC0[7] = {
+JiminyTextChar* gJiminyEntry06Names[7] = {
     gUnkJp_0814E840, gUnkJp_0814E84C, gUnkJp_0814E85C, gUnkJp_0814E86C,
     gUnkJp_0814E878, gUnkJp_0814E888, gUnkJp_0814E894,
 };
 
-JiminyTextChar* gUnk_09EDDFDC[7] = {
+JiminyTextChar* gJiminyEntry07Names[7] = {
     gUnkJp_0814E8A8, gUnkJp_0814E8B8, gUnkJp_0814E8DC, gUnkJp_0814E8F4,
     gUnkJp_0814E8E8, gUnkJp_0814E900, gUnkJp_0814E910,
 };
 
-JiminyTextChar* gUnk_09EDDFF8[49] = {
+JiminyTextChar* gJiminyEntry08Names[49] = {
     gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
     gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
     gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
@@ -3163,7 +3163,7 @@ JiminyTextChar* gUnk_09EDDFF8[49] = {
     gUnkJp_0814EE94,
 };
 
-JiminyTextChar* gUnk_09EDE0BC[26] = {
+JiminyTextChar* gJiminyEntry09Names[26] = {
     gUnkJp_0814F364, gUnkJp_0814F358, gUnkJp_0814F3A8, gUnkJp_0814F3B8,
     gUnkJp_0814F390, gUnkJp_0814F380, gUnkJp_0814F484, gUnkJp_0814F494,
     gUnkJp_0814F4A4, gUnkJp_0814F408, gUnkJp_0814F3F8, gUnkJp_0814F418,
@@ -3173,11 +3173,11 @@ JiminyTextChar* gUnk_09EDE0BC[26] = {
     gUnkJp_0814F4E4, gUnkJp_0814F4F8,
 };
 
-JiminyTextChar* gUnk_09EDE124[1] = {
+JiminyTextChar* gJiminyEntry10Names[1] = {
     gUnkJp_0814FAB8,
 };
 
-JiminyTextChar* gUnk_09EDE128[25] = {
+JiminyTextChar* gJiminyEntry11Names[25] = {
     gUnkJp_0814E91C, gUnkJp_0814E8A8, gUnkJp_0814E8B8, gUnkJp_0814E8C4,
     gUnkJp_0814E924, gUnkJp_0814E92C, gUnkJp_0814E7EC, gUnkJp_0814E814,
     gUnkJp_0814E80C, gUnkJp_0814E828, gUnkJp_0814E998, gUnkJp_0814E964,
@@ -3187,7 +3187,7 @@ JiminyTextChar* gUnk_09EDE128[25] = {
     gUnkJp_0814E9D0,
 };
 
-JiminyTextChar* gUnk_09EDE18C[40] = {
+JiminyTextChar* gJiminyEntry12Names[40] = {
     gUnkJp_0814ED50, gUnkJp_0814ED58, gUnkJp_0814ED68, gUnkJp_0814ED8C,
     gUnkJp_0814ED74, gUnkJp_0814EDA0, gUnkJp_0814ED3C, gUnkJp_0814ED48,
     gUnkJp_0814EC00, gUnkJp_0814E8DC, gUnkJp_0814E7F4, gUnkJp_0814ECDC,
@@ -3200,7 +3200,7 @@ JiminyTextChar* gUnk_09EDE18C[40] = {
     gUnkJp_0814EE1C, gUnkJp_0814EE24, gUnkJp_0814EE30, gUnkJp_0814EE3C,
 };
 
-JiminyTextChar* gUnk_09EDE22C[35] = {
+JiminyTextChar* gJiminyEntry13Names[35] = {
     gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
     gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
     gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
@@ -3212,24 +3212,24 @@ JiminyTextChar* gUnk_09EDE22C[35] = {
     gUnkJp_0814EC3C, gUnkJp_0814EC08, gUnkJp_0814EC70,
 };
 
-JiminyTextChar* gUnk_09EDE2B8[6] = {
+JiminyTextChar* gJiminyEntry15Names[6] = {
     gUnkJp_0814FA18, gUnkJp_0814FA2C, gUnkJp_0814FA40, gUnkJp_0814FA54,
     gUnkJp_0814FA68, gUnkJp_0814FA7C,
 };
 
-JiminyTextChar* gUnk_09EDE2D0[14] = {
+JiminyTextChar* gJiminyEntry18Names[14] = {
     gUnkJp_0814E924, gUnkJp_0814EEA0, gUnkJp_0814E91C, gUnkJp_0814E92C,
     gUnkJp_0814E934, gUnkJp_0814FA90, gUnkJp_0814EE94, gUnkJp_0814E9C4,
     gUnkJp_0814EE88, gUnkJp_0814FA0C, gUnkJp_0814E9B8, gUnkJp_0814E9D0,
     gUnkJp_0814E9AC, gUnkJp_0814FAA0,
 };
 
-JiminyTextChar* gUnk_09EDE308[6] = {
+JiminyTextChar* gJiminyEntry19Names[6] = {
     gUnkJp_0814EDF0, gUnkJp_0814ECF4, gUnkJp_0814EC28, gUnkJp_0814EC00,
     gUnkJp_0814EC34, gUnkJp_0814EDE0,
 };
 
-JiminyTextChar* gUnk_09EDE320[33] = {
+JiminyTextChar* gJiminyEntry20Names[33] = {
     gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
     gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
     gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
@@ -3241,7 +3241,7 @@ JiminyTextChar* gUnk_09EDE320[33] = {
     gUnkJp_0814EC70,
 };
 
-JiminyTextChar* gUnk_09EDE3A4[22] = {
+JiminyTextChar* gJiminyEntry16Names[22] = {
     gUnkJp_0814EEA8, gUnkJp_0814EEA0, gUnkJp_0814E9EC, gUnkJp_0814EA28,
     gUnkJp_0814EA04, gUnkJp_0814EA38, gUnkJp_0814EB20, gUnkJp_0814EA50,
     gUnkJp_0814EAF4, gUnkJp_0814EA6C, gUnkJp_0814EB70, gUnkJp_0814EBF0,
@@ -3250,7 +3250,7 @@ JiminyTextChar* gUnk_09EDE3A4[22] = {
     gUnkJp_0814EC58, gUnkJp_0814EE88,
 };
 
-JiminyTextChar* gUnk_09EDE3FC[13] = {
+JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnkJp_0814E56C, gUnkJp_0814E564, gUnkJp_0814E55C, gUnkJp_0814E550,
     gUnkJp_0814E544, gUnkJp_0814E534, gUnkJp_0814E524, gUnkJp_0814E510,
     gUnkJp_0814E4FC, gUnkJp_0814E4E4, gUnkJp_0814E4CC, gUnkJp_0814E4B0,
@@ -11206,11 +11206,11 @@ JiminyTextChar* gUnk_09EDCC8CEs[10] = {
     gUnkEu_0887AD26, gUnkEu_0887AD33,
 };
 
-JiminyLocalizedName* gUnk_09EDDECC[3] = {
+JiminyLocalizedName* gJiminyRootNames[3] = {
     &gUnkEu_088925D8, &gUnkEu_08892620, &gUnkEu_0889266C,
 };
 
-JiminyLocalizedName* gUnk_09EDDED8[17] = {
+JiminyLocalizedName* gJiminyEntry01Names[17] = {
     &gUnkEu_08892450, &gUnkEu_088924BC, &gUnkEu_0889252C, &gUnkEu_08892598,
     &gUnkEu_0888E364, &gUnkEu_08895F4C, &gUnkEu_0888E530, &gUnkEu_0888E3A0,
     &gUnkEu_0888E4C0, &gUnkEu_0888E450, &gUnkEu_0888E578, &gUnkEu_0888E5DC,
@@ -11218,7 +11218,7 @@ JiminyLocalizedName* gUnk_09EDDED8[17] = {
     &gUnkEu_08896038,
 };
 
-JiminyLocalizedName* gUnk_09EDDF1C[7] = {
+JiminyLocalizedName* gJiminyEntry02Names[7] = {
     &gUnkEu_0889211C, &gUnkEu_08892170, &gUnkEu_088921C4, &gUnkEu_08892220,
     &gUnkEu_08892278, &gUnkEu_088922C8, &gUnkEu_088957DC,
 };
@@ -11227,7 +11227,7 @@ JiminyLocalizedName* gUnk_09EDDF38[3] = {
     &gUnkEu_0889238C, &gUnkEu_088923E8, &gUnkEu_0888F840,
 };
 
-JiminyLocalizedName* gUnk_09EDDF44[17] = {
+JiminyLocalizedName* gJiminyEntry04Names[17] = {
     &gUnkEu_0888E860, &gUnkEu_0888E8B4, &gUnkEu_0888E904, &gUnkEu_0888E964,
     &gUnkEu_0888E9B8, &gUnkEu_0888EA14, &gUnkEu_0888EA64, &gUnkEu_0888EAC0,
     &gUnkEu_0888EB00, &gUnkEu_0888EB4C, &gUnkEu_0888EBA4, &gUnkEu_0888EBF0,
@@ -11235,24 +11235,24 @@ JiminyLocalizedName* gUnk_09EDDF44[17] = {
     &gUnkEu_0888ECE8,
 };
 
-JiminyLocalizedName* gUnk_09EDDF88[14] = {
+JiminyLocalizedName* gJiminyEntry05Names[14] = {
     &gUnkEu_0888EDE0, &gUnkEu_0888EE18, &gUnkEu_0888EE50, &gUnkEu_0888EE80,
     &gUnkEu_0888EEC0, &gUnkEu_0888EEF0, &gUnkEu_0888EF20, &gUnkEu_0888EF54,
     &gUnkEu_0888EFF4, &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888EF8C,
     &gUnkEu_0888F03C, &gUnkEu_0888F0A4,
 };
 
-JiminyLocalizedName* gUnk_09EDDFC0[7] = {
+JiminyLocalizedName* gJiminyEntry06Names[7] = {
     &gUnkEu_0888F0DC, &gUnkEu_0888F128, &gUnkEu_0888F178, &gUnkEu_0888F1AC,
     &gUnkEu_0888F1F4, &gUnkEu_0888F22C, &gUnkEu_0888F278,
 };
 
-JiminyLocalizedName* gUnk_09EDDFDC[7] = {
+JiminyLocalizedName* gJiminyEntry07Names[7] = {
     &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F394, &gUnkEu_0888F3F8,
     &gUnkEu_0888F3C8, &gUnkEu_0888F440, &gUnkEu_0888F484,
 };
 
-JiminyLocalizedName* gUnk_09EDDFF8[49] = {
+JiminyLocalizedName* gJiminyEntry08Names[49] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11268,7 +11268,7 @@ JiminyLocalizedName* gUnk_09EDDFF8[49] = {
     &gUnkEu_08890FB0,
 };
 
-JiminyLocalizedName* gUnk_09EDE0BC[26] = {
+JiminyLocalizedName* gJiminyEntry09Names[26] = {
     &gUnkEu_088929B0, &gUnkEu_088960A0, &gUnkEu_08892BB0, &gUnkEu_08896168,
     &gUnkEu_08892AE0, &gUnkEu_08896100, &gUnkEu_088930B0, &gUnkEu_08893108,
     &gUnkEu_0889315C, &gUnkEu_08892DEC, &gUnkEu_08892D88, &gUnkEu_088961D0,
@@ -11278,11 +11278,11 @@ JiminyLocalizedName* gUnk_09EDE0BC[26] = {
     &gUnkEu_08896440, &gUnkEu_088964AC,
 };
 
-JiminyLocalizedName* gUnk_09EDE124[1] = {
+JiminyLocalizedName* gJiminyEntry10Names[1] = {
     &gUnkEu_08895850,
 };
 
-JiminyLocalizedName* gUnk_09EDE128[25] = {
+JiminyLocalizedName* gJiminyEntry11Names[25] = {
     &gUnkEu_0888F4FC, &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F358,
     &gUnkEu_0888F52C, &gUnkEu_0888F560, &gUnkEu_0888EF54, &gUnkEu_0888EFF4,
     &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888F4CC, &gUnkEu_0888F66C,
@@ -11292,7 +11292,7 @@ JiminyLocalizedName* gUnk_09EDE128[25] = {
     &gUnkEu_0888F7E8,
 };
 
-JiminyLocalizedName* gUnk_09EDE18C[40] = {
+JiminyLocalizedName* gJiminyEntry12Names[40] = {
     &gUnkEu_088908E4, &gUnkEu_08890950, &gUnkEu_088909B4, &gUnkEu_08890A80,
     &gUnkEu_08890A18, &gUnkEu_08890AE0, &gUnkEu_08890864, &gUnkEu_088908B0,
     &gUnkEu_08890230, &gUnkEu_0888F394, &gUnkEu_0888EF8C, &gUnkEu_08890678,
@@ -11305,7 +11305,7 @@ JiminyLocalizedName* gUnk_09EDE18C[40] = {
     &gUnkEu_08890D48, &gUnkEu_08890D80, &gUnkEu_08890DB8, &gUnkEu_08890DF4,
 };
 
-JiminyLocalizedName* gUnk_09EDE22C[35] = {
+JiminyLocalizedName* gJiminyEntry13Names[35] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11317,24 +11317,24 @@ JiminyLocalizedName* gUnk_09EDE22C[35] = {
     &gUnkEu_088903AC, &gUnkEu_08890290, &gUnkEu_08890484,
 };
 
-JiminyLocalizedName* gUnk_09EDE2B8[6] = {
+JiminyLocalizedName* gJiminyEntry15Names[6] = {
     &gUnkEu_088954F4, &gUnkEu_08895560, &gUnkEu_088955D0, &gUnkEu_0889563C,
     &gUnkEu_088956A4, &gUnkEu_08895710,
 };
 
-JiminyLocalizedName* gUnk_09EDE2D0[14] = {
+JiminyLocalizedName* gJiminyEntry18Names[14] = {
     &gUnkEu_0888F52C, &gUnkEu_08890FEC, &gUnkEu_0888F4FC, &gUnkEu_0888F560,
     &gUnkEu_0888F598, &gUnkEu_0889575C, &gUnkEu_08890FB0, &gUnkEu_0888F7A4,
     &gUnkEu_08890F7C, &gUnkEu_0889548C, &gUnkEu_0888F770, &gUnkEu_0888F7E8,
     &gUnkEu_0888F740, &gUnkEu_08895784,
 };
 
-JiminyLocalizedName* gUnk_09EDE308[6] = {
+JiminyLocalizedName* gJiminyEntry19Names[6] = {
     &gUnkEu_08890C48, &gUnkEu_08890700, &gUnkEu_08890300, &gUnkEu_08890230,
     &gUnkEu_08890354, &gUnkEu_08890BD0,
 };
 
-JiminyLocalizedName* gUnk_09EDE320[33] = {
+JiminyLocalizedName* gJiminyEntry20Names[33] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11346,7 +11346,7 @@ JiminyLocalizedName* gUnk_09EDE320[33] = {
     &gUnkEu_08890484,
 };
 
-JiminyLocalizedName* gUnk_09EDE3A4[22] = {
+JiminyLocalizedName* gJiminyEntry16Names[22] = {
     &gUnkEu_0889103C, &gUnkEu_08890FEC, &gUnkEu_0888F880, &gUnkEu_0888F9AC,
     &gUnkEu_0888F910, &gUnkEu_0888FA00, &gUnkEu_0888FE74, &gUnkEu_0888FA4C,
     &gUnkEu_0888FD80, &gUnkEu_0888FACC, &gUnkEu_0888FFCC, &gUnkEu_08890200,
@@ -11355,7 +11355,7 @@ JiminyLocalizedName* gUnk_09EDE3A4[22] = {
     &gUnkEu_0889043C, &gUnkEu_08890F7C,
 };
 
-JiminyTextChar* gUnk_09EDE3FC[13] = {
+JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnkEu_0887F2CC, gUnkEu_0887F2CE, gUnkEu_0887F2D1, gUnkEu_0887F2D5,
     gUnkEu_0887F2DA, gUnkEu_0887F2E0, gUnkEu_0887F2E7, gUnkEu_0887F2EF,
     gUnkEu_0887F2F8, gUnkEu_0887F302, gUnkEu_0887F30D, gUnkEu_0887F319,

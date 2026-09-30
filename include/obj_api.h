@@ -29,7 +29,7 @@ void InitObjTilesAtSlot(struct ObjTiles* t, u16 slot, void* src, u16 size);
 void InitObjPaletteAtSlot(struct ObjPalette* palette, u16 slot, void* src, u16 size);
 void UpdateAllocatedObjPalette(struct ObjPalette* palette, void* src);
 u8 CanAllocObjPalette(u16 n);
-void func_08002F50(void);
+void UpdateSpriteOam(void);
 u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d);
 void SetObjPaletteRange(u16 a, u16 b);
 u16 GetObjTileCount(u16 a, u16 b);

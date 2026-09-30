@@ -6,7 +6,7 @@
 void task_romcri_eff_0(RomcriEffWork* work, s32 arg) {
     SetupBg(1, 0, 23, 12);
     work->angle = arg;
-    work->unk_00 = 0;
+    work->timer = 0;
     DisableBg(1);
     PushPaletteEffect(0);
     LoadBgPalette(1, gUnk_08F6D9E4, 0x20);
@@ -41,7 +41,7 @@ void task_romcri_eff_0(RomcriEffWork* work, s32 arg) {
 u8 task_romcri_eff_1(RomcriEffWork* work) {
     switch (work->angle) {
     case 0xAD:
-        switch (work->unk_00) {
+        switch (work->timer) {
         case 0:
             LoadBgMap(1, gUnk_08F4C384, 0x800);
             break;
@@ -72,7 +72,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
         break;
     case 0x53:
-        switch (work->unk_00) {
+        switch (work->timer) {
         case 0:
             LoadBgMap(1, gUnk_08F4E384, 0x800);
             break;
@@ -103,7 +103,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
         break;
     case 0x2D:
-        switch (work->unk_00) {
+        switch (work->timer) {
         case 0:
             LoadBgMap(1, gUnk_08F54384, 0x800);
             break;
@@ -133,7 +133,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         }
         break;
     case 0xD3:
-        switch (work->unk_00) {
+        switch (work->timer) {
         case 0:
             LoadBgMap(1, gUnk_08F58384, 0x800);
             break;
@@ -164,7 +164,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
         break;
     }
 
-    work->unk_00++;
+    work->timer++;
     return 1;
 }
 
@@ -174,8 +174,8 @@ void task_romcri_eff_3(void) {
 
 void task_romcri_eff2_0(RomcriEff2Work* work, s32 arg) {
     SetupBg(1, 0, 23, 12);
-    work->unk_00 = 0;
-    work->unk_03 = 0;
+    work->timer = 0;
+    work->frame = 0;
     work->angle = arg;
     DisableBg(1);
     PushPaletteEffect(0);
@@ -219,8 +219,8 @@ void task_romcri_eff2_0(RomcriEff2Work* work, s32 arg) {
 }
 
 u8 task_romcri_eff2_1(RomcriEff2Work* work) {
-    if (work->unk_00 % 4 == 0) {
-        switch (work->unk_03) {
+    if (work->timer % 4 == 0) {
+        switch (work->frame) {
         case 0:
             LoadBgMap(1, gUnk_08F5C384, 0x800);
             break;
@@ -242,18 +242,18 @@ u8 task_romcri_eff2_1(RomcriEff2Work* work) {
             break;
         }
 
-        work->unk_03++;
+        work->frame++;
 
-        if (work->unk_03 > 5) {
-            work->unk_03 = 0;
+        if (work->frame > 5) {
+            work->frame = 0;
         }
     }
 
-    if (work->unk_00 > 30 && work->unk_03 == 0) {
+    if (work->timer > 30 && work->frame == 0) {
         return 0;
     }
 
-    work->unk_00++;
+    work->timer++;
     return 1;
 }
 
@@ -261,14 +261,14 @@ void task_romcri_eff2_3(void) {
     DisableBg(1);
 }
 
-u16 func_0803FDC8(const BtlFormEntry* list) {
+u16 GetBtlFormEntryTileCount(const BtlFormEntry* list) {
     u16 total;
     s32 i;
 
     total = 0;
 
     for (i = 0; i < list->count; i++) {
-        total += gUnk_09EDA4EC[list->steps[i].id];
+        total += gEnemyTileCounts[list->steps[i].id];
     }
 
     return total;

@@ -2,9 +2,9 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 
-const EmyKind gUnk_09A4FE98 = { 0, 1, 8, 8, 0, 128, 0 };
+const EmyKind gBosLstCtrEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 
-const u32 gUnk_09A4FEA8[6][5] = {
+const u32 gBosLstCtrAngles[6][5] = {
     { 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0 },
     { 0, 128, 0, 0, 0 },
@@ -22,22 +22,22 @@ TaskDesc gTaskDescBosLstCtr = {
     sizeof(LstCtrWork),
 };
 
-s32 func_08111F3C(s32 x) {
+s32 BosLstCtrSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08111F44(s32 x) {
+s32 BosLstCtrSquare2(s32 x) {
     return x * x;
 }
 
-u8 func_08111F4C(Task* task) {
+u8 BosLstCtrIsActive(Task* task) {
     LstCtrWork* s;
 
     s = task->work;
     return s->state != 4;
 }
 
-s32 func_08111F60(s32 n) {
+s32 BosLstCtrSqrt(s32 n) {
     s32 x;
     s32 g;
 
@@ -62,18 +62,18 @@ s32 func_08111F60(s32 n) {
 
 void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->unk_000 = arg->unk_00;
-    work->unk_004 = arg->unk_04;
-    work->unk_006 = arg->unk_06;
+    work->count = arg->count;
+    work->index = arg->index;
     work->state = 0;
     work->unk_00A = 0;
-    work->unk_00C = 0;
-    work->unk_00E = arg->unk_08;
-    work->unk_020 = 0;
-    work->unk_024 = 0;
-    work->unk_028 = 0;
-    work->unk_014 = arg->x;
-    work->unk_018 = arg->y;
-    work->unk_01C = arg->z;
+    work->timer = 0;
+    work->delay = arg->delay;
+    work->offsetX = 0;
+    work->offsetY = 0;
+    work->offsetZ = 0;
+    work->curX = arg->x;
+    work->curY = arg->y;
+    work->curZ = arg->z;
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
@@ -91,60 +91,60 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
     BtlObj* p;
     s32 c;
 
-    work->unk_020 /= 2;
-    work->unk_024 /= 2;
-    work->unk_028 /= 2;
+    work->offsetX /= 2;
+    work->offsetY /= 2;
+    work->offsetZ /= 2;
 
     switch (work->state) {
     case 0:
-        c = (u16)work->unk_00C + 1;
-        work->unk_00C = c;
-        work->unk_00E--;
-        if (work->unk_00E <= 0) {
+        c = (u16)work->timer + 1;
+        work->timer = c;
+        work->delay--;
+        if (work->delay <= 0) {
             p = gBtlWork->actor;
-            work->x2 = work->unk_014 - (work->unk_014 - p->x) / 4;
+            work->x2 = work->curX - (work->curX - p->x) / 4;
             work->y2 = p->y;
             work->z2 = -0x1000;
             work->state = 1;
             work->unk_00A = 0;
-            work->unk_00C = 0;
-            work->unk_00E = 0;
+            work->timer = 0;
+            work->delay = 0;
             WorldToScreen(&x1, &y1, work->x, work->y, work->z);
             WorldToScreen(&x2, &y2, work->x2, work->y2, work->z2);
             work->unk_010 = 0;
-            work->unk_012 = (s16)func_08111F60((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 9;
+            work->duration = (s16)BosLstCtrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 9;
         } else {
-            work->unk_020 =
-                (-gSineTable[((gUnk_09A4FEA8[work->unk_004][work->unk_006] + c) & 0xFF) + 0x40] * 5 >> 6) << 8;
-            work->unk_028 =
-                ((gSineTable[(gUnk_09A4FEA8[work->unk_004][work->unk_006] + c) & 0xFF] * 3 >> 5) - 4) << 8;
+            work->offsetX =
+                (-gSineTable[((gBosLstCtrAngles[work->count][work->index] + c) & 0xFF) + 0x40] * 5 >> 6) << 8;
+            work->offsetZ =
+                ((gSineTable[(gBosLstCtrAngles[work->count][work->index] + c) & 0xFF] * 3 >> 5) - 4) << 8;
         }
         break;
     case 1:
-        work->unk_014 = work->x - (work->x - work->x2) * work->unk_00C / work->unk_012;
-        work->unk_018 = work->y + (work->y2 - work->y) * work->unk_00C / work->unk_012;
-        work->unk_01C = work->z + (work->z2 - work->z) * work->unk_00C / work->unk_012;
-        work->unk_00C++;
-        if (work->unk_00C >= work->unk_012) {
+        work->curX = work->x - (work->x - work->x2) * work->timer / work->duration;
+        work->curY = work->y + (work->y2 - work->y) * work->timer / work->duration;
+        work->curZ = work->z + (work->z2 - work->z) * work->timer / work->duration;
+        work->timer++;
+        if (work->timer >= work->duration) {
             work->state = 2;
             work->unk_00A = 0;
-            work->unk_00C = 0;
-            work->unk_00E = 0;
+            work->timer = 0;
+            work->delay = 0;
         }
-        if (func_08011F78(0x10F, work->unk_014, work->unk_018, work->unk_01C, 8, 1, 4) != 0) {
+        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 1, 4) != 0) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
         break;
     case 2:
-        work->unk_00C++;
-        if (work->unk_00C > 2) {
+        work->timer++;
+        if (work->timer > 2) {
             work->state = 3;
             work->unk_00A = 0;
-            work->unk_00C = 0;
-            work->unk_00E = 0;
-            work->unk_014 = work->x2;
-            work->unk_018 = work->y2;
-            work->unk_01C = work->z2;
+            work->timer = 0;
+            work->delay = 0;
+            work->curX = work->x2;
+            work->curY = work->y2;
+            work->curZ = work->z2;
             AnimStart(&work->anim, 1, 0);
             m4aSongNumStart(SONG_SND_710);
         }
@@ -152,28 +152,28 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
     case 3:
         if (work->x > work->x2) {
             work->unk_010 = 0;
-            work->unk_014 = work->unk_014 - 0x600;
-            if (work->unk_014 < 0x6000) {
+            work->curX = work->curX - 0x600;
+            if (work->curX < 0x6000) {
                 work->state = 4;
                 work->unk_00A = 0;
-                work->unk_00C = 0;
-                work->unk_00E = 0;
+                work->timer = 0;
+                work->delay = 0;
             }
         } else {
             work->unk_010 = 0x80;
-            work->unk_014 = work->unk_014 + 0x600;
-            if (work->unk_014 > 0x19000) {
+            work->curX = work->curX + 0x600;
+            if (work->curX > 0x19000) {
                 work->state = 4;
                 work->unk_00A = 0;
-                work->unk_00C = 0;
-                work->unk_00E = 0;
+                work->timer = 0;
+                work->delay = 0;
             }
         }
-        work->unk_01C = work->z2 - ((work->unk_00C >> 2) << 8);
-        if (func_08011F78(0x10F, work->unk_014, work->unk_018, work->unk_01C, 8, 4, 4) != 0) {
+        work->curZ = work->z2 - ((work->timer >> 2) << 8);
+        if (ApplyAttackBox(0x10F, work->curX, work->curY, work->curZ, 8, 4, 4) != 0) {
             m4aSongNumStart(SONG_EF_DS_ANKOKUPUNCH);
         }
-        work->unk_00C++;
+        work->timer++;
         break;
     case 4:
         AnimStart(&work->anim, 2, 1);
@@ -194,15 +194,15 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
     void* gfx;
     s32 d;
 
-    WorldToScreen(&x, &y, work->unk_014 + work->unk_020, work->unk_018 + work->unk_024,
-                  work->unk_01C + work->unk_028);
+    WorldToScreen(&x, &y, work->curX + work->offsetX, work->curY + work->offsetY,
+                  work->curZ + work->offsetZ);
     affine = 0;
-    prio = GetBattleSpritePriorityFlags(work->unk_018 + work->unk_024) | 4;
-    z = -0x1004 - ((work->unk_018 + work->unk_024) >> 8) * 4;
+    prio = GetBattleSpritePriorityFlags(work->curY + work->offsetY) | 4;
+    z = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
 
     switch (work->state) {
     case 0:
-        d = work->unk_00C - work->unk_006 * 8;
+        d = work->timer - work->index * 8;
         if (d <= 0) {
             return;
         }
@@ -211,14 +211,14 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
         }
         break;
     case 1:
-        affine = AllocObjAffine(0, 0x100 - work->unk_00C * 4, 0x100 - work->unk_00C * 4, 1);
+        affine = AllocObjAffine(0, 0x100 - work->timer * 4, 0x100 - work->timer * 4, 1);
         break;
     case 2:
-        affine = AllocObjAffine(0, 0x100 - (work->unk_012 - work->unk_00C) * 4,
-                                0x100 - work->unk_012 * 4, 1);
+        affine = AllocObjAffine(0, 0x100 - (work->duration - work->timer) * 4,
+                                0x100 - work->duration * 4, 1);
         break;
     default:
-        if (work->unk_014 + work->unk_020 > work->x2) {
+        if (work->curX + work->offsetX > work->x2) {
             prio |= 1;
         }
         break;

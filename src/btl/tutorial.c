@@ -9,10 +9,10 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     SetupBg(0, 2, 28, 14);
     SetBgScroll(0, 0, 0);
     work->flags = 0;
-    work->unk_00C = 0;
-    work->unk_004 = 0;
+    work->timer = 0;
+    work->state = 0;
     work->unk_00E = 120;
-    work->unk_008 = arg1 == 0 ? 5 : 0x2B;
+    work->nextState = arg1 == 0 ? 5 : 0x2B;
     gBtlWork->flags |= 0x1000000000ULL;
     gBtlWork->flags |= 0x100000000000ULL;
     gBtlWork->flags |= 0x200000000000ULL;
@@ -29,179 +29,179 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
 }
 
 s32 task_tutorial_1(TutorialWork* work) {
-    switch (work->unk_004) {
+    switch (work->state) {
     case 0:
-        if (work->unk_00C > work->unk_00E) {
-            work->unk_004 = work->unk_008;
-            work->unk_00C = 0;
+        if (work->timer > work->unk_00E) {
+            work->state = work->nextState;
+            work->timer = 0;
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 1:
-        gBtlWork->unk_072 = 8;
+        gBtlWork->hitStop = 8;
 
-        if (work->unk_00C > 20) {
-            work->unk_004 = 2;
-            work->unk_00C = 0;
+        if (work->timer > 20) {
+            work->state = 2;
+            work->timer = 0;
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 2:
-        gBtlWork->unk_072 = 8;
+        gBtlWork->hitStop = 8;
 
-        if (work->unk_00C == 0) {
-            if (func_080128EC() != 0) {
+        if (work->timer == 0) {
+            if (BgFxIsActive() != 0) {
                 break;
             }
-            func_0805DA64(work->unk_002);
-            work->unk_00C++;
+            TutorialOpenMessage(work->message);
+            work->timer++;
             break;
         }
 
-        if (func_080A42C8() != 0) {
+        if (IsMessageWindowOpen() != 0) {
             break;
         }
-        func_0805DAB4();
-        work->unk_004 = work->unk_008;
-        work->unk_00C = 0;
+        TutorialRestoreBgMode();
+        work->state = work->nextState;
+        work->timer = 0;
         break;
     case 3:
-        gBtlWork->unk_072 = 8;
+        gBtlWork->hitStop = 8;
 
-        if (work->unk_00C > 20) {
-            work->unk_004 = 4;
-            work->unk_00C = 0;
+        if (work->timer > 20) {
+            work->state = 4;
+            work->timer = 0;
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 4:
-        gBtlWork->unk_072 = 8;
+        gBtlWork->hitStop = 8;
 
-        if (func_080128EC() != 0) {
+        if (BgFxIsActive() != 0) {
             break;
         }
-        func_0805DA98(work->unk_002);
-        work->unk_004 = work->unk_008;
-        work->unk_00C = 0;
+        TutorialOpenPersistentMessage(work->message);
+        work->state = work->nextState;
+        work->timer = 0;
         break;
     case 5:
-        func_0805DACC(work, 0x48, 6);
+        TutorialQueueMessage(work, 0x48, 6);
         break;
     case 6:
-        if (work->unk_00C == 0) {
-            func_0809B644(&gBtlWork->taskPools[0], 320, 0x181, 0, 1);
+        if (work->timer == 0) {
+            CreateFriendCardTask(&gBtlWork->taskPools[0], 320, 0x181, 0, 1);
         }
 
-        if (work->unk_00C > 120) {
-            work->unk_004 = 7;
-            work->unk_00C = 0;
+        if (work->timer > 120) {
+            work->state = 7;
+            work->timer = 0;
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 7:
-        func_0805DACC(work, 0x49, 9);
+        TutorialQueueMessage(work, 0x49, 9);
         break;
     case 9:
-        func_0805DADC(work, 0x4A, 10);
+        TutorialQueuePersistentMessage(work, 0x4A, 10);
         break;
     case 10:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             gBtlWork->flags &= ~0x1000000000ULL;
         }
 
         if (!(gBtlWork->flags & 0x20000000000ULL)) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        func_0805DAEC();
+        TutorialCloseMessage();
         gBtlWork->flags &= ~0x20000000000ULL;
-        work->unk_004 = 11;
-        work->unk_00C = 0;
+        work->state = 11;
+        work->timer = 0;
         break;
     case 11:
-        if (work->unk_00C > 20) {
-            func_08076324();
-            func_0805DAF8(work, 30, 12);
+        if (work->timer > 20) {
+            RequestSoraPrevCard();
+            TutorialWait(work, 30, 12);
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 12:
-        func_0805DACC(work, 0x4B, 13);
+        TutorialQueueMessage(work, 0x4B, 13);
         break;
     case 13:
-        func_0805DADC(work, 0x4C, 14);
+        TutorialQueuePersistentMessage(work, 0x4C, 14);
         break;
     case 14:
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x2000000000ULL;
         }
 
         if (!(gBtlWork->flags & 0x20000000)) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        func_0805DAEC();
+        TutorialCloseMessage();
         gBtlWork->flags |= 0x2000000000ULL;
-        work->unk_004 = 15;
-        work->unk_00C = 0;
+        work->state = 15;
+        work->timer = 0;
         break;
     case 15:
         if (gBtlWork->flags & 0x20000000) {
             break;
         }
-        func_0805DACC(work, 0x4D, 16);
+        TutorialQueueMessage(work, 0x4D, 16);
         break;
     case 16:
-        func_0805DACC(work, 0x4E, 17);
+        TutorialQueueMessage(work, 0x4E, 17);
         break;
     case 17:
-        func_0805DADC(work, 0x4F, 18);
+        TutorialQueuePersistentMessage(work, 0x4F, 18);
         break;
     case 18:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             gBtlWork->flags &= ~0x200000000000ULL;
             gBtlWork->flags &= ~0x100000000000ULL;
         }
 
         if (!(gBtlWork->flags & 0x40000000000ULL)) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
 
         if (!(gBtlWork->flags & 0x80000000000ULL)) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        func_0805DAEC();
+        TutorialCloseMessage();
         gBtlWork->flags &= ~0x40000000000ULL;
         gBtlWork->flags &= ~0x80000000000ULL;
-        func_0805DAF8(work, 15, 19);
+        TutorialWait(work, 15, 19);
         break;
     case 19:
-        func_0805DACC(work, 0x50, 20);
+        TutorialQueueMessage(work, 0x50, 20);
         break;
     case 20:
-        func_0805DADC(work, 0x51, 21);
+        TutorialQueuePersistentMessage(work, 0x51, 21);
         break;
     case 21:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             work->unk_00E = 0;
             work->flags &= ~2;
         }
 
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x2000000000ULL;
         }
 
         if (work->flags & 2) {
             if (!(gBtlWork->flags & 0x20000000)) {
                 if (work->unk_00E == 0) {
-                    func_0805DAEC();
+                    TutorialCloseMessage();
                 }
                 work->flags &= ~2;
                 work->unk_00E++;
@@ -211,117 +211,117 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         if (work->unk_00E <= 2) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
         gBtlWork->flags |= 0x2000000000ULL;
-        func_0805DAF8(work, 30, 22);
+        TutorialWait(work, 30, 22);
         break;
     case 22:
-        func_0805DACC(work, 0x52, 23);
+        TutorialQueueMessage(work, 0x52, 23);
         break;
     case 23:
-        func_0805DACC(work, 0x53, 25);
+        TutorialQueueMessage(work, 0x53, 25);
         break;
     case 25:
-        func_0805DB04(work, 14, 90, 0);
-        func_0805DACC(work, 0x54, 26);
+        TutorialShowArrow(work, 14, 90, 0);
+        TutorialQueueMessage(work, 0x54, 26);
         break;
     case 26:
-        if (work->unk_00C == 0) {
-            func_0805DB28(work);
+        if (work->timer == 0) {
+            TutorialHideArrow(work);
         }
 
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x2000000000ULL;
         }
 
         if (gBtlWork->flags & 0x20000000) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
 
-        if (func_080763D0() == 0) {
-            work->unk_00C++;
+        if (IsSoraReloadCardSelected() == 0) {
+            work->timer++;
             break;
         }
         gBtlWork->flags |= 0x2000000000ULL;
-        func_0805DAF8(work, 60, 27);
+        TutorialWait(work, 60, 27);
         break;
     case 27:
-        func_0805DB04(work, 14, 90, 0);
-        func_0805DACC(work, 0x55, 29);
+        TutorialShowArrow(work, 14, 90, 0);
+        TutorialQueueMessage(work, 0x55, 29);
         break;
     case 29:
-        func_0805DACC(work, 0x56, 30);
+        TutorialQueueMessage(work, 0x56, 30);
         break;
     case 30:
-        func_0805DB28(work);
-        func_0805DADC(work, 0x57, 31);
+        TutorialHideArrow(work);
+        TutorialQueuePersistentMessage(work, 0x57, 31);
         break;
     case 31:
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x2000000000ULL;
         }
 
         if (gBtlWork->flags & 0x80000000) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
 
-        if (func_080763D0() != 0) {
-            work->unk_00C++;
+        if (IsSoraReloadCardSelected() != 0) {
+            work->timer++;
             break;
         }
-        func_0805DAEC();
+        TutorialCloseMessage();
         gBtlWork->flags |= 0x2000000000ULL;
-        func_0805DAF8(work, 30, 32);
+        TutorialWait(work, 30, 32);
         break;
     case 32:
-        func_0805DACC(work, 0x58, 33);
+        TutorialQueueMessage(work, 0x58, 33);
         break;
     case 33:
-        func_0805DACC(work, 0x59, 34);
+        TutorialQueueMessage(work, 0x59, 34);
         break;
     case 34:
-        func_0805DADC(work, 0x5A, 35);
+        TutorialQueuePersistentMessage(work, 0x5A, 35);
         break;
     case 35:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             work->unk_00E = 0;
-            work->unk_010 = 0;
+            work->inputCooldown = 0;
             gBtlWork->flags &= ~0x4000000000ULL;
         }
 
-        if (work->unk_010 <= 0) {
+        if (work->inputCooldown <= 0) {
             if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
-                work->unk_010 = 10;
+                work->inputCooldown = 10;
                 work->unk_00E++;
             }
         } else {
-            work->unk_010--;
+            work->inputCooldown--;
         }
 
         if (work->unk_00E <= 6) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        work->unk_00C = 0;
-        work->unk_004 = 36;
+        work->timer = 0;
+        work->state = 36;
         gBtlWork->flags |= 0x4000000000ULL;
-        func_0805DAEC();
+        TutorialCloseMessage();
         break;
     case 36:
-        func_0805DACC(work, 0x5B, 37);
+        TutorialQueueMessage(work, 0x5B, 37);
         break;
     case 37:
-        func_0805DACC(work, 0x5C, 38);
+        TutorialQueueMessage(work, 0x5C, 38);
         break;
     case 38:
-        func_0805DADC(work, 0x5D, 39);
+        TutorialQueuePersistentMessage(work, 0x5D, 39);
         break;
     case 39:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             work->unk_00E = 0;
             gBtlWork->flags &= ~0x10000000000ULL;
         }
@@ -331,31 +331,31 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         if (work->unk_00E <= 1) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        func_0805DAEC();
-        work->unk_00C = 0;
-        work->unk_004 = 40;
+        TutorialCloseMessage();
+        work->timer = 0;
+        work->state = 40;
         gBtlWork->flags |= 0x10000000000ULL;
         gBtlWork->flags |= 0x4000000000ULL;
         break;
     case 40:
-        func_0805DACC(work, 0x5E, 41);
+        TutorialQueueMessage(work, 0x5E, 41);
         break;
     case 41:
-        func_0805DAF8(work, 0x50, 42);
+        TutorialWait(work, 0x50, 42);
         break;
     case 43:
-        func_0805DAF8(work, 30, 44);
+        TutorialWait(work, 30, 44);
         break;
     case 44:
-        func_0805DB04(work, 48, 144, 1);
-        func_0805DACC(work, 0x72, 45);
+        TutorialShowArrow(work, 48, 144, 1);
+        TutorialQueueMessage(work, 0x72, 45);
         break;
     case 45:
-        if (work->unk_00C == 0) {
-            func_0805DB28(work);
+        if (work->timer == 0) {
+            TutorialHideArrow(work);
             work->flags &= ~2;
             work->unk_00E = 0;
             gBtlWork->flags &= ~0x1000000000ULL;
@@ -365,7 +365,7 @@ s32 task_tutorial_1(TutorialWork* work) {
             gBtlWork->flags |= 0x20000000000ULL;
         }
 
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x2000000000ULL;
         }
 
@@ -379,21 +379,21 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         if (work->unk_00E <= 6) {
-            work->unk_00C++;
+            work->timer++;
             break;
         }
-        work->unk_00C = 0;
-        work->unk_004 = 46;
+        work->timer = 0;
+        work->state = 46;
         gBtlWork->flags |= 0x2000000000ULL;
         gBtlWork->flags &= ~0x100000ULL;
         gBtlWork->flags &= ~0x20000000000ULL;
         break;
     case 46:
-        if (work->unk_00C > 30) {
-            work->unk_00C = 0;
-            work->unk_004 = 47;
+        if (work->timer > 30) {
+            work->timer = 0;
+            work->state = 47;
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 47:
@@ -404,71 +404,71 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (gBtlWork->flags & 0x40) {
             break;
         }
-        func_0805DACC(work, 0x73, 48);
+        TutorialQueueMessage(work, 0x73, 48);
         break;
     case 48:
-        func_0805DACC(work, 0x74, 49);
+        TutorialQueueMessage(work, 0x74, 49);
         break;
     case 49:
-        func_0805DACC(work, 0x75, 50);
+        TutorialQueueMessage(work, 0x75, 50);
         break;
     case 50:
-        func_0805DACC(work, 0x76, 51);
+        TutorialQueueMessage(work, 0x76, 51);
         break;
     case 51:
-        func_0805DACC(work, 0x77, 52);
+        TutorialQueueMessage(work, 0x77, 52);
         break;
     case 52:
-        func_0805DACC(work, 0x78, 53);
+        TutorialQueueMessage(work, 0x78, 53);
         break;
     case 53:
-        func_0805DACC(work, 0x79, 54);
+        TutorialQueueMessage(work, 0x79, 54);
         break;
     case 54:
-        func_0805DACC(work, 0x7A, 55);
+        TutorialQueueMessage(work, 0x7A, 55);
         break;
     case 55:
-        func_0805DACC(work, 0x7B, 56);
+        TutorialQueueMessage(work, 0x7B, 56);
         break;
     case 56:
-        func_0805DADC(work, 0x7C, 57);
+        TutorialQueuePersistentMessage(work, 0x7C, 57);
         break;
     case 57:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             work->unk_00E = 0;
         }
 
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x8000000000ULL;
         }
 
-        if (work->unk_00E == 0 && func_0807B3E0() != 0) {
-            func_0805DAEC();
+        if (work->unk_00E == 0 && GetSoraStockCount() != 0) {
+            TutorialCloseMessage();
             work->unk_00E++;
         }
 
-        if (func_0807B3E0() <= 2) {
-            work->unk_00C++;
+        if (GetSoraStockCount() <= 2) {
+            work->timer++;
             break;
         }
         gBtlWork->flags |= 0x8000000000ULL;
-        work->unk_00C = 0;
-        work->unk_004 = 58;
+        work->timer = 0;
+        work->state = 58;
         break;
     case 58:
-        func_0805DACC(work, 0x7D, 59);
+        TutorialQueueMessage(work, 0x7D, 59);
         break;
     case 59:
-        func_0805DADC(work, 0x7E, 60);
+        TutorialQueuePersistentMessage(work, 0x7E, 60);
         break;
     case 60:
-        if (work->unk_00C == 0) {
+        if (work->timer == 0) {
             gBtlWork->flags |= 0x20000000000ULL;
             work->flags &= ~2;
             work->unk_00E = 0;
         }
 
-        if (work->unk_00C == 10) {
+        if (work->timer == 10) {
             gBtlWork->flags &= ~0x4000000000000ULL;
         }
 
@@ -481,26 +481,26 @@ s32 task_tutorial_1(TutorialWork* work) {
             work->flags |= 2;
 
             if (work->unk_00E == 0) {
-                func_0805DAEC();
+                TutorialCloseMessage();
             }
         }
 
         if (work->unk_00E > 0) {
             gBtlWork->flags |= 0x4000000000000ULL;
             gBtlWork->flags &= ~0x20000000000ULL;
-            func_0805DAF8(work, 30, 61);
+            TutorialWait(work, 30, 61);
         } else {
-            work->unk_00C++;
+            work->timer++;
         }
         break;
     case 61:
-        func_0805DACC(work, 0x7F, 62);
+        TutorialQueueMessage(work, 0x7F, 62);
         break;
     case 62:
-        func_0805DACC(work, 0x80, 63);
+        TutorialQueueMessage(work, 0x80, 63);
         break;
     case 63:
-        func_0805DAF8(work, 0x50, 64);
+        TutorialWait(work, 0x50, 64);
         break;
     case 42:
     case 64:
@@ -520,13 +520,13 @@ void task_tutorial_2(TutorialWork* work) {
         spr = AnimUpdate(&work->anim);
 
         if (work->anim.animId == 0) {
-            x = work->unk_012;
+            x = work->arrowX;
             s = gSineTable[(gFrameCounter << 3) & 0xFF];
-            y = (s >> 7) + work->unk_014;
+            y = (s >> 7) + work->arrowY;
         } else {
             s = gSineTable[(gFrameCounter << 3) & 0xFF];
-            x = (s >> 7) + work->unk_012;
-            y = work->unk_014;
+            x = (s >> 7) + work->arrowX;
+            y = work->arrowY;
         }
         DrawSprite(x, y, spr, work->tiles, work->palette, 0, 0x10, 0);
     }

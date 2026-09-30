@@ -4,11 +4,11 @@
 #include "continue_types.h"
 #include "taskpool.h"
 
-extern TaskDesc gUnk_09EE2834;
-extern TaskDesc gUnk_09EE284C;
+extern TaskDesc gTaskDescContinueSora;
+extern TaskDesc gTaskDescContinueRiku;
 
-void func_0806CD30(s32 a);
-void func_0806CD60(ContinueWork* p);
-void func_0806CF04(ContinueWork* p);
+void LoadContinueCursorPalette(s32 a);
+void ContinueSora_0(ContinueWork* p);
+void ContinueRiku_0(ContinueWork* p);
 
 #endif

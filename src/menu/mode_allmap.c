@@ -6,12 +6,12 @@
 #include "system_state.h"
 
 #ifdef VERSION_EU
-extern u8* gUnkEu_09F800A4[5];
-extern u8* gUnkEu_09F800B8[5];
+extern u8* gAllmapFloorTilesByLanguage[5];
+extern u8* gAllmapRikuFloorTilesByLanguage[5];
 #endif
 
 #if defined(VERSION_US)
-const PooBgSet gUnk_096FDA8C[15] = {
+const PooBgSet gAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnk_0984A218 + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnk_0984A218 + 0x120 },
@@ -29,7 +29,7 @@ const PooBgSet gUnk_096FDA8C[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x60 },
 };
 #elif defined(VERSION_JP)
-const PooBgSet gUnk_096FDA8C[15] = {
+const PooBgSet gAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnkJp_097FEEEC + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnkJp_097FEEEC + 0x120 },
@@ -47,7 +47,7 @@ const PooBgSet gUnk_096FDA8C[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x60 },
 };
 #elif defined(VERSION_EU)
-const PooBgSet gUnk_096FDA8C[15] = {
+const PooBgSet gAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnkEu_0979E8A0 + 0x1040, gUnkEu_0981E8C0 + 0x60 },
     { gUnk_0983BC18 + 0xC80, gUnkEu_0979E8A0 + 0x54C0, gUnkEu_0981E8C0 + 0xE0 },
     { gUnk_0983BC18 + 0x1280, gUnkEu_0979E8A0 + 0x72C0, gUnkEu_0981E8C0 + 0x120 },
@@ -66,7 +66,7 @@ const PooBgSet gUnk_096FDA8C[15] = {
 };
 #endif
 
-const PooPalStep gUnk_096FDB40[9] = {
+const PooPalStep gAllmapPalSteps[9] = {
     { 0, 40 },
     { 1, 8 },
     { 2, 8 },
@@ -91,46 +91,46 @@ const AllmapRoomOrder gAllmapRoomOrder = {{
 
 const AllmapRoomDirs gAllmapRoomDirs = {{1, 2, 3, 0}};
 
-u16* gUnk_0203C4C0[8] EWRAM_COMMON(16);
-u32 gUnk_0203C4E0 EWRAM_COMMON(4);
+u16* gAllmapBg0MapBlocks[8] EWRAM_COMMON(16);
+u32 gAllmapModeState EWRAM_COMMON(4);
 TaskPool gAllmapTaskPool EWRAM_COMMON(16);
-u16* gUnk_0203C504 EWRAM_COMMON(4);
-u16 gUnk_0203C508 EWRAM_COMMON(4);
-u16* gUnk_0203C510[8] EWRAM_COMMON(16);
-u16* gUnk_0203C530 EWRAM_COMMON(4);
-u16 gUnk_0203C534 EWRAM_COMMON(4);
+u16* gAllmapBg1Map EWRAM_COMMON(4);
+u16 gAllmapCursorDropTimer EWRAM_COMMON(4);
+u16* gAllmapBg1MapBlocks[8] EWRAM_COMMON(16);
+u16* gAllmapBg0Map EWRAM_COMMON(4);
+u16 gAllmapScrollInTimer EWRAM_COMMON(4);
 
-u16 gUnk_02034E38;
-u16 gUnk_02034E3A;
-s16 gUnk_02034E3C;
+u16 gAllmapPalTimer;
+u16 gAllmapPalStep;
+s16 gAllmapBlendTimer;
 s16 gUnk_02034E3E;
 u8 gUnk_02034E40[0x40];
-u8 gUnk_02034E80;
-u8 gUnk_02034E81;
+u8 gAllmapReturnToMenu;
+u8 gAllmapLowerBgm;
 
-void func_080D3050(void) {
+void AllmapCyclePalette(void) {
     PooPalStep t[9];
 
-    memcpy(t, gUnk_096FDB40, sizeof(t));
-    gUnk_02034E38++;
-    if (gUnk_02034E38 < t[gUnk_02034E3A].unk_02) {
+    memcpy(t, gAllmapPalSteps, sizeof(t));
+    gAllmapPalTimer++;
+    if (gAllmapPalTimer < t[gAllmapPalStep].duration) {
         return;
     }
-    gUnk_02034E38 = 0;
-    gUnk_02034E3A++;
-    if (t[gUnk_02034E3A].unk_00 == 0xFF) {
-        gUnk_02034E3A = 0;
+    gAllmapPalTimer = 0;
+    gAllmapPalStep++;
+    if (t[gAllmapPalStep].palette == 0xFF) {
+        gAllmapPalStep = 0;
     }
-    LoadPalette(&gUnk_0984A138[t[gUnk_02034E3A].unk_00 * 0x20], (void*)0x05000040, 0x20);
+    LoadPalette(&gUnk_0984A138[t[gAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
 }
 
-void func_080D30C8(void) {
-    RequestDma3Copy(gUnk_096FDA8C[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
-    RequestDma3Copy(gUnk_096FDA8C[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
-    LoadPalette(gUnk_096FDA8C[gGameState.world].palette, (void*)0x05000140, 0x20);
+void AllmapLoadWorldBg(void) {
+    RequestDma3Copy(gAllmapWorldBgs[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
+    RequestDma3Copy(gAllmapWorldBgs[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
+    LoadPalette(gAllmapWorldBgs[gGameState.world].palette, (void*)0x05000140, 0x20);
 }
 
-void func_080D313C(void) {
+void AllmapLoadFloorTiles(void) {
     u8* src;
     void* dst;
 
@@ -138,13 +138,13 @@ void func_080D313C(void) {
 
     if ((gGameState.flags & 8) != 0) {
 #ifdef VERSION_EU
-        src = gUnkEu_09F800B8[gLanguage] + gGameState.floor * 0x140;
+        src = gAllmapRikuFloorTilesByLanguage[gLanguage] + gGameState.floor * 0x140;
 #else
         src = &gUnk_097B8258[gGameState.floor * 0x140];
 #endif
     } else {
 #ifdef VERSION_EU
-        src = gUnkEu_09F800A4[gLanguage] + gGameState.floor * 0x140;
+        src = gAllmapFloorTilesByLanguage[gLanguage] + gGameState.floor * 0x140;
 #else
         src = &gUnk_097B7218[gGameState.floor * 0x140];
 #endif
@@ -159,10 +159,10 @@ void func_080D313C(void) {
 }
 
 void mode_allmap_0(s32 a) {
-    gUnk_02034E81 = 0;
+    gAllmapLowerBgm = 0;
 
     if (a == 1) {
-        gUnk_02034E81 = a;
+        gAllmapLowerBgm = a;
     }
     SetObjPaletteRange(0, 14);
     ClearStockMesDispWork();
@@ -179,36 +179,36 @@ void mode_allmap_0(s32 a) {
     SetupBg(2, 1, 29, 8);
     SetBgPriority(2, 0);
     LoadBgMap(2, gUnk_08125E24, 0x200);
-    func_080D30C8();
-    func_080D313C();
+    AllmapLoadWorldBg();
+    AllmapLoadFloorTiles();
     SetupBg(0, 0, 26, 0);
     SetBgPriority(0, 2);
     LoadBgTiles(0, gUnk_0976B340, 0x2400);
     LoadBgPalette(0, gUnk_0984A0F8, 0xE0);
-    func_080D2F64();
-    SetBgMapBlocks(0, gUnk_0203C4C0, 2, 4);
+    AllmapAllocBgMaps();
+    SetBgMapBlocks(0, gAllmapBg0MapBlocks, 2, 4);
     SetupBg(1, 0, 27, 0);
     SetBgPriority(1, 2);
-    SetBgMapBlocks(1, gUnk_0203C510, 2, 4);
+    SetBgMapBlocks(1, gAllmapBg1MapBlocks, 2, 4);
     TaskPoolInit(&gAllmapTaskPool, 1);
     TaskCreate(&gAllmapTaskPool, &gTaskDescAllmapBar, 0);
-    gUnk_0203C4E0 = 0;
-    func_080D4EBC();
+    gAllmapModeState = 0;
+    InitAllmap();
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_DISPSTAT &= 0xFF;
     REG_DISPSTAT |= 0x5020;
-    SetVCountCallback(func_080D2F20);
+    SetVCountCallback(AllmapVCountCallback);
     REG_IME = 1;
     FadeStartIn(0, 16);
 
-    if (gUnk_02034E81 != 0) {
+    if (gAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
-    gUnk_0203C534 = 30;
-    gUnk_0203C508 = 30;
-    gUnk_02034E38 = 0;
-    gUnk_02034E3A = 0;
+    gAllmapScrollInTimer = 30;
+    gAllmapCursorDropTimer = 30;
+    gAllmapPalTimer = 0;
+    gAllmapPalStep = 0;
 }
 
 void func_080D3370(void) {
@@ -222,46 +222,46 @@ void mode_allmap_1(void) {
     TaskPoolUpdate(&gAllmapTaskPool);
     TaskPoolDraw(&gAllmapTaskPool);
 
-    if (gUnk_0203C4E0 == 0 && !FadeIsActive()) {
-        if (gUnk_0203C534 != 0 && gUnk_0203C508 != 0) {
-            gUnk_0203C4E0 = 1;
-            gUnk_02034E3C = 16;
+    if (gAllmapModeState == 0 && !FadeIsActive()) {
+        if (gAllmapScrollInTimer != 0 && gAllmapCursorDropTimer != 0) {
+            gAllmapModeState = 1;
+            gAllmapBlendTimer = 16;
         } else {
-            func_080E052C(gUnk_02034E80);
+            ReturnToMap(gAllmapReturnToMenu);
         }
     }
 
-    if (gUnk_0203C4E0 == 2) {
-        if (gUnk_0203C534 != 0) {
-            gUnk_0203C534--;
+    if (gAllmapModeState == 2) {
+        if (gAllmapScrollInTimer != 0) {
+            gAllmapScrollInTimer--;
         }
 
-        if (gUnk_0203C508 != 0) {
-            gUnk_0203C508--;
+        if (gAllmapCursorDropTimer != 0) {
+            gAllmapCursorDropTimer--;
         }
 
-        if (gUnk_02034E3C > 0) {
-            if (gUnk_02034E3C == 16) {
-                func_080D3008();
+        if (gAllmapBlendTimer > 0) {
+            if (gAllmapBlendTimer == 16) {
+                AllmapDimPalette10();
             }
-            gUnk_02034E3C--;
-            func_080D3034(gUnk_02034E3C);
+            gAllmapBlendTimer--;
+            AllmapSetBlend(gAllmapBlendTimer);
 
-            if (gUnk_02034E3C == 0) {
+            if (gAllmapBlendTimer == 0) {
                 func_080D3370();
             }
         }
 
-        if (gUnk_0203C534 == 0 && gUnk_0203C508 == 0) {
-            gUnk_0203C4E0 = 3;
+        if (gAllmapScrollInTimer == 0 && gAllmapCursorDropTimer == 0) {
+            gAllmapModeState = 3;
         }
     }
-    func_080D3050();
+    AllmapCyclePalette();
 
-    if (gUnk_0203C4E0 == 2 || gUnk_0203C4E0 == 3) {
+    if (gAllmapModeState == 2 || gAllmapModeState == 3) {
         EnableBg(0);
         EnableBg(1);
-        func_080D51D8();
+        UpdateAllmap();
     } else {
         DisableBg(0);
         DisableBg(1);
@@ -269,7 +269,7 @@ void mode_allmap_1(void) {
 }
 
 void mode_allmap_2(void) {
-    func_080D53A8();
+    DestroyAllmap();
     TaskPoolDestroy(&gAllmapTaskPool);
     REG_IME = 0;
     REG_IE &= ~INTR_FLAG_VCOUNT;
@@ -277,19 +277,19 @@ void mode_allmap_2(void) {
     REG_IME = 1;
     ResetVCountCallback();
 
-    if (gUnk_02034E81 != 0) {
+    if (gAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     }
-    EwramFree(gUnk_0203C530);
-    EwramFree(gUnk_0203C504);
+    EwramFree(gAllmapBg0Map);
+    EwramFree(gAllmapBg1Map);
 }
 
-void func_080D352C(u8 a) {
-    gUnk_02034E80 = a;
+void SetAllmapReturnToMenu(u8 a) {
+    gAllmapReturnToMenu = a;
 }
 
 u8 func_080D3538(u8 a, u8 b) {
-    u8* p = func_080DED98(a);
+    u8* p = GetMapRoomLinks(a);
     if ((u8)(p[b] + 3) <= 1) {
         return 1;
     }
@@ -297,7 +297,7 @@ u8 func_080D3538(u8 a, u8 b) {
 }
 
 u8 func_080D3564(u8 a, u8 b) {
-    u16 v = func_080DEE44(a, b);
+    u16 v = GetMapDoorFlags(a, b);
     if (v == 0 || (v & 8) != 0) {
         return 0;
     }
@@ -305,14 +305,14 @@ u8 func_080D3564(u8 a, u8 b) {
 }
 
 u8 func_080D358C(u8 a, u8 b) {
-    u16 v = func_080DEE44(a, b);
+    u16 v = GetMapDoorFlags(a, b);
     if ((v & 2) != 0) {
         return 1;
     }
     return 0;
 }
 
-s32 func_080D35B0(AllmapRoomWork* work) {
+s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     AllmapRoomOrder order = gAllmapRoomOrder;
     AllmapRoomDirs dirs = gAllmapRoomDirs;
     u32 mask;
@@ -323,55 +323,55 @@ s32 func_080D35B0(AllmapRoomWork* work) {
         work->tiles2[i] = 0;
     }
 
-    if (func_080DF51C(work->unk_098) == 1 || func_080DF51C(work->unk_098) == 4) {
-        if (func_080D5944(work->unk_098, 8) != 0) {
+    if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
+        if (TestAllmapRoomFlag(work->room, 8) != 0) {
             return 17;
         }
 
-        if (func_080D5944(work->unk_098, 2) == 0) {
+        if (TestAllmapRoomFlag(work->room, 2) == 0) {
             return 1;
         }
-    } else if (func_080D5944(work->unk_098, 2) == 0) {
+    } else if (TestAllmapRoomFlag(work->room, 2) == 0) {
         return 0;
     }
 
     mask = 0;
 
     for (i = 0; i < 4; i++) {
-        if (func_080D3564(work->unk_098, i) == 0) {
+        if (func_080D3564(work->room, i) == 0) {
             continue;
         }
         mask += 1 << i;
 
-        if (func_080D3538(work->unk_098, i) != 0) {
+        if (func_080D3538(work->room, i) != 0) {
             AnimInit(&work->anim[i], gUnk_09EF653C, gUnk_09EF64FC);
-            AnimStart(&work->anim[i], dirs.unk_00[i], 1);
+            AnimStart(&work->anim[i], dirs.animIds[i], 1);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
-            if (work->unk_09C == 0) {
+            if (work->asSprite == 0) {
                 work->tiles2[i] = LoadObjTiles(gUnk_0976DEDC, 0x500);
             } else {
                 work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF64FC, 16), gUnk_0976DEDC);
             }
-        } else if (func_080D358C(work->unk_098, i) == 0) {
+        } else if (func_080D358C(work->room, i) == 0) {
             AnimInit(&work->anim[i], gUnk_09EF658C, gUnk_09EF654C);
-            AnimStart(&work->anim[i], dirs.unk_00[i], 1);
+            AnimStart(&work->anim[i], dirs.animIds[i], 1);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
-            if (work->unk_09C == 0) {
+            if (work->asSprite == 0) {
                 work->tiles2[i] = LoadObjTiles(gUnk_0976E4D4, 0x500);
             } else {
                 work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF654C, 16), gUnk_0976E4D4);
             }
         }
     }
-    return order.unk_00[mask] + 1;
+    return order.shapes[mask] + 1;
 }
 
-s32 func_080D37BC(u8 a) {
+s32 GetAllmapRoomPaletteOffset(u8 a) {
     u8 r = 0;
 
-    if (func_080DF51C(a) == 1 || func_080DF51C(a) == 4) {
+    if (GetEventRoomKind(a) == 1 || GetEventRoomKind(a) == 4) {
         r = 1;
     }
     return r << 5;

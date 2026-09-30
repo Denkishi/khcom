@@ -8,17 +8,17 @@
 #include "mode_test_api.h"
 #include "sprites_msg.h"
 
-static TaskPool gUnk_02034A30;
-static u8 gUnk_02034A44;
+static TaskPool sModeDeckTasks;
+static u8 sModeDeckResult;
 
-void func_08060A74(void) {
-    gUnk_02034A44 = 0;
-    TaskPoolInit(&gUnk_02034A30, 1);
+void Mode_Deck_0(void) {
+    sModeDeckResult = 0;
+    TaskPoolInit(&sModeDeckTasks, 1);
 
     if ((gGameState.flags & 8) == 0) {
-        TaskCreate(&gUnk_02034A30, &gUnk_09EE4AF4, &gUnk_02034A44);
+        TaskCreate(&sModeDeckTasks, &gTaskDescDeckmenu2, &sModeDeckResult);
     } else {
-        TaskCreate(&gUnk_02034A30, &gUnk_09EE8EF0, &gUnk_02034A44);
+        TaskCreate(&sModeDeckTasks, &gTaskDescDeckmenu2Riku, &sModeDeckResult);
     }
 
     if (gSystemFlags & 1) {
@@ -26,39 +26,39 @@ void func_08060A74(void) {
     }
 }
 
-void func_08060AD8(void) {
+void Mode_Deck_1(void) {
     if (gSystemFlags & 1) {
-        func_080B0754();
+        SioBtlOptionRecvSettings();
     } else {
         UpdatePlayTime();
     }
 
-    TaskPoolUpdate(&gUnk_02034A30);
-    TaskPoolDraw(&gUnk_02034A30);
+    TaskPoolUpdate(&sModeDeckTasks);
+    TaskPoolDraw(&sModeDeckTasks);
 
-    if (gUnk_02034A44 == 7) {
-        if (gUnk_03006C10 & 1) {
+    if (sModeDeckResult == 7) {
+        if (gDebugFlags & 1) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & 1) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
-            func_080E052C(0);
+            ReturnToMap(0);
         }
     }
 
-    if (gUnk_02034A44 == 8) {
-        if (gUnk_03006C10 & 1) {
+    if (sModeDeckResult == 8) {
+        if (gDebugFlags & 1) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & 1) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
-            func_080E052C(1);
+            ReturnToMap(1);
         }
     }
 }
 
-void func_08060BAC(void) {
-    TaskPoolDestroy(&gUnk_02034A30);
+void Mode_Deck_2(void) {
+    TaskPoolDestroy(&sModeDeckTasks);
 }
 void menu_0(MenuWork* w) {
     gFieldState->flags |= 0x1000;
@@ -66,59 +66,59 @@ void menu_0(MenuWork* w) {
     gFieldState->flags |= 0x2000;
     w->x = 0xF000;
     w->y = 0x4800;
-    w->unk_11 = 0;
-    w->unk_10 = 0;
+    w->cursor = 0;
+    w->state = 0;
     w->tiles = LoadObjTiles(gUnk_090D4DD0, 0x2E80);
     w->palette = LoadObjPalette(gUnk_096148B8, 0x20);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
 
 u8 menu_1(MenuWork* w) {
-    switch (w->unk_10) {
+    switch (w->state) {
     case 0:
         w->x += (0xBC00 - w->x) >> 1;
 
         if ((w->x >> 8) == 0xBC) {
-            w->unk_10 = 1;
+            w->state = 1;
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->unk_10 = 4;
+            w->state = 4;
         }
 
         break;
     case 1:
         if (GetKeysRepeat() & DPAD_UP) {
-            if (w->unk_11 != 0) {
-                w->unk_11--;
+            if (w->cursor != 0) {
+                w->cursor--;
             } else {
-                w->unk_11 = 5;
+                w->cursor = 5;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysRepeat() & DPAD_DOWN) {
-            if (w->unk_11 <= 4) {
-                w->unk_11++;
+            if (w->cursor <= 4) {
+                w->cursor++;
             } else {
-                w->unk_11 = 0;
+                w->cursor = 0;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            switch (w->unk_11) {
+            switch (w->cursor) {
             case 0:
-                w->unk_10 = 2;
-                w->unk_11 = 6;
+                w->state = 2;
+                w->cursor = 6;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             case 2:
-                func_0801CB0C();
+                RequestFieldResume();
                 FadeStartOut(0, 32);
-                w->unk_10 = 4;
+                w->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 1:
@@ -133,59 +133,59 @@ u8 menu_1(MenuWork* w) {
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->unk_10 = 5;
+            w->state = 5;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         break;
     case 2:
         if (GetKeysRepeat() & DPAD_UP) {
-            if (w->unk_11 > 6) {
-                w->unk_11--;
+            if (w->cursor > 6) {
+                w->cursor--;
             } else {
-                w->unk_11 = 9;
+                w->cursor = 9;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysRepeat() & DPAD_DOWN) {
-            if (w->unk_11 <= 8) {
-                w->unk_11++;
+            if (w->cursor <= 8) {
+                w->cursor++;
             } else {
-                w->unk_11 = 6;
+                w->cursor = 6;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->unk_10 = 1;
-            w->unk_11 = 0;
+            w->state = 1;
+            w->cursor = 0;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            switch (w->unk_11) {
+            switch (w->cursor) {
             case 6:
-                w->unk_11 = 0;
-                w->unk_10 = 1;
+                w->cursor = 0;
+                w->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 7:
-                w->unk_11 = 0;
-                w->unk_10 = 1;
+                w->cursor = 0;
+                w->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 8:
-                w->unk_11 = 0;
-                w->unk_10 = 1;
+                w->cursor = 0;
+                w->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 9:
-                func_0801CB0C();
+                RequestFieldResume();
                 FadeStartOut(0, 32);
-                w->unk_10 = 4;
+                w->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             }
@@ -197,15 +197,15 @@ u8 menu_1(MenuWork* w) {
 
         if ((w->x >> 8) > 274) {
             if (FadeIsActive() == 0) {
-                if (w->unk_11 != 2) {
-                    if (w->unk_11 == 9) {
-                        ModeRequest(&gUnk_09EE2704, 0);
+                if (w->cursor != 2) {
+                    if (w->cursor == 9) {
+                        ModeRequest(&gModeDeck, 0);
                     }
                 } else {
                     ModeRequest(&gModeAllmap, 0);
                 }
 
-                w->unk_10 = 5;
+                w->state = 5;
             }
         }
 
@@ -227,7 +227,7 @@ u8 menu_1(MenuWork* w) {
 }
 
 void menu_2(MenuWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEC600[w->unk_11], w->tiles, w->palette, 0, 0, 80);
+    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEC600[w->cursor], w->tiles, w->palette, 0, 0, 80);
 }
 
 void menu_3(MenuWork* w) {
@@ -238,7 +238,7 @@ void menu_3(MenuWork* w) {
     gFieldState->flags &= ~0x2000;
 }
 
-Mode gUnk_09EE2704 = { "Mode_Deck", (ModeInitFunc)func_08060A74, func_08060AD8, func_08060BAC };
+Mode gModeDeck = { "Mode_Deck", (ModeInitFunc)Mode_Deck_0, Mode_Deck_1, Mode_Deck_2 };
 
 TaskDesc gTaskDescMenu = {
     "menu",

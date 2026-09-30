@@ -7,32 +7,32 @@
 #include "system_state.h"
 #include "acgtrans.h"
 
-extern u8 gUnk_09EF1D58[11];
-extern s16 gUnk_09EF1D64[8];
-extern s16 gUnk_09EF1D74[10];
-extern WlogoTtEffStep gUnk_09EF1D88[3];
+extern u8 gBosTmBodyAngles[11];
+extern s16 gBosTmBodyIdleZ[8];
+extern s16 gBosTmBodyWalkZ[10];
+extern TmBodyStep gUnk_09EF1D88[3];
 extern s16 gUnk_09EF1E08[3];
-extern WlogoTtEffStep gUnk_09EF1E14[16];
-extern WlogoTtEffStep gUnk_09EF2034[9];
-extern s8 gUnk_09EF2194[4];
+extern TmBodyStep gBosTmBodyThrowSteps[16];
+extern TmBodyStep gUnk_09EF2034[9];
+extern s8 gBosTmActionChoices[4];
 
-BtlObj gUnk_0203AB50 EWRAM_COMMON(16);
+BtlObj gBosTmBodyObjCopy EWRAM_COMMON(16);
 
-const EmyKind gUnk_09619C94 = { 34, 1300, 28, 14, 20, 40, 1 };
+const EmyKind gBosTmEmyKind = { 34, 1300, 28, 14, 20, 40, 1 };
 
-u8 gUnk_09EF1D58[11] = { 0, 2, 5, 15, 18, 20, 20, 18, 15, 5, 2 };
+u8 gBosTmBodyAngles[11] = { 0, 2, 5, 15, 18, 20, 20, 18, 15, 5, 2 };
 
-s16 gUnk_09EF1D64[8] = { 8, -8, -12, 12, 8, -8, -12, 12 };
+s16 gBosTmBodyIdleZ[8] = { 8, -8, -12, 12, 8, -8, -12, 12 };
 
-s16 gUnk_09EF1D74[10] = { -11, -8, -10, 10, 19, -11, -8, -10, 10, 19 };
+s16 gBosTmBodyWalkZ[10] = { -11, -8, -10, 10, 19, -11, -8, -10, 10, 19 };
 
-WlogoTtEffStep gUnk_09EF1D88[3] = {
+TmBodyStep gUnk_09EF1D88[3] = {
     { -8, 0, 246, { 0, 0, 0 }, -3, 2, 246, { 0, 0, 0 }, -6, 2, { 0, 0 }, 0, -6, 2, { 0, 0 }, 0 },
     { -6, 8, 246, { 0, 0, 0 }, -2, 7, 246, { 0, 0, 0 }, -6, 6, { 0, 0 }, 0, -6, 6, { 0, 0 }, 0 },
     { -4, 0, 246, { 0, 0, 0 }, 0, 0, 246, { 0, 0, 0 }, -3, 0, { 0, 0 }, 0, -3, 0, { 0, 0 }, 0 },
 };
 
-WlogoTtEffStep gUnk_09EF1DE8 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
+TmBodyStep gUnk_09EF1DE8 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
 s16 gUnk_09EF1E08[3] = { 15, 6, 0 };
 
@@ -42,7 +42,7 @@ s16 gUnk_09EF1E10 = -20;
 
 s16 gUnk_09EF1E12 = -28;
 
-WlogoTtEffStep gUnk_09EF1E14[16] = {
+TmBodyStep gBosTmBodyThrowSteps[16] = {
     { 2, -11, 15, { 0, 0, 0 }, 0, -11, 5, { 0, 0, 0 }, 0, -7, { 0, 0 }, 0, 0, -7, { 0, 0 }, 0 },
     { 7, -12, 15, { 0, 0, 0 }, 5, -12, 5, { 0, 0, 0 }, 4, -8, { 0, 0 }, 1, 4, -8, { 0, 0 }, 1 },
     { 1, -6, 15, { 0, 0, 0 }, -2, -6, 5, { 0, 0, 0 }, 5, -5, { 0, 0 }, 2, 5, -7, { 0, 0 }, 2 },
@@ -61,9 +61,9 @@ WlogoTtEffStep gUnk_09EF1E14[16] = {
     { -4, -8, 9, { 0, 0, 0 }, 4, -9, 10, { 0, 0, 0 }, 5, -7, { 0, 0 }, 0, 5, -7, { 0, 0 }, 0 },
 };
 
-WlogoTtEffStep gUnk_09EF2014 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
+TmBodyStep gUnk_09EF2014 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-WlogoTtEffStep gUnk_09EF2034[9] = {
+TmBodyStep gUnk_09EF2034[9] = {
     { 0, 2, 0, { 0, 0, 0 }, 0, 2, 0, { 0, 0, 0 }, 0, 2, { 0, 0 }, 0, 0, 2, { 0, 0 }, 0 },
     { -8, 6, 246, { 0, 0, 0 }, -3, 7, 246, { 0, 0, 0 }, -6, 7, { 0, 0 }, 0, -6, 7, { 0, 0 }, 0 },
     { -6, 8, 246, { 0, 0, 0 }, -2, 9, 246, { 0, 0, 0 }, -6, 9, { 0, 0 }, 0, -6, 9, { 0, 0 }, 0 },
@@ -75,11 +75,11 @@ WlogoTtEffStep gUnk_09EF2034[9] = {
     { 7, -12, 15, { 0, 0, 0 }, 5, -12, 5, { 0, 0, 0 }, 4, -8, { 0, 0 }, 2, 4, -8, { 0, 0 }, 2 },
 };
 
-WlogoTtEffStep gUnk_09EF2154 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
+TmBodyStep gUnk_09EF2154 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-WlogoTtEffStep gUnk_09EF2174 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
+TmBodyStep gUnk_09EF2174 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-s8 gUnk_09EF2194[4] = { 1, 3, 9, 4 };
+s8 gBosTmActionChoices[4] = { 1, 3, 9, 4 };
 
 TaskDesc gTaskDescBosTmBody = {
     "task_bos_tm_body",
@@ -90,47 +90,47 @@ TaskDesc gTaskDescBosTmBody = {
     sizeof(TmBodyWork),
 };
 
-void func_080B8324(TmBodyWork* p) {
-    p->tm->unk_36 = 0;
-    p->tm->unk_34 = 0;
-    p->tm->unk_38 = 0;
+void BosTmBodyResetTimers(TmBodyWork* p) {
+    p->tm->stepTimer = 0;
+    p->tm->step = 0;
+    p->tm->stateTimer = 0;
 }
 
-void func_080B8334(BtlObj* p, s16 a, s16 b, s16 c) {
+void BosTmBodyInitEnemy(BtlObj* p, s16 a, s16 b, s16 c) {
     p->x = a << 8;
     p->y = b << 8;
     p->z = (c << 8) + 0x1900;
-    func_0801B37C(p, &gUnk_09619C94, p->x, p->y, p->z);
-    p->unk_09E = 14;
-    p->unk_0A0 = 40;
-    p->unk_09C = 28;
+    InitEnemyBtlObj(p, &gBosTmEmyKind, p->x, p->y, p->z);
+    p->radiusX = 14;
+    p->radiusY = 40;
+    p->height = 28;
     p->flags |= 0x400;
     p->flags |= 4;
 }
 
-void func_080B83A4(BtlObj* p, s16 a, s16 b, s16 c) {
+void BosTmBodySetObjPos(BtlObj* p, s16 a, s16 b, s16 c) {
     p->x = a << 8;
     p->y = b << 8;
     p->z = c << 8;
 }
 
-void func_080B83B8(BtlObj* a) {
-    func_0801B7D8(a);
+void BosTmBodyReleaseEnemy(BtlObj* a) {
+    ReleaseEnemyBtlObj(a);
 }
 
-void func_080B83C4(TmBodyWork* p) {
-    p->unk_484++;
-    if (p->unk_484 > 5) {
-        p->unk_484 = 0;
-        p->unk_482++;
-        if (p->unk_482 > 10) {
-            p->unk_482 = 0;
+void BosTmBodyUpdateAngle(TmBodyWork* p) {
+    p->angleTimer++;
+    if (p->angleTimer > 5) {
+        p->angleTimer = 0;
+        p->angleStep++;
+        if (p->angleStep > 10) {
+            p->angleStep = 0;
         }
-        p->unk_128 = gUnk_09EF1D58[p->unk_482];
+        p->angle = gBosTmBodyAngles[p->angleStep];
     }
 }
 
-void func_080B8418(TmBodyWork* p) {
+void BosTmBodyPlaceParts(TmBodyWork* p) {
     if (p->tm->flags & 0x20) {
         p->body.x = p->tm->x2 + 0x400;
         p->body2.x = p->tm->x2;
@@ -152,41 +152,41 @@ void func_080B8418(TmBodyWork* p) {
     p->body4.z = p->tm->z2 - 0x1E00;
 }
 
-void func_080B8508(TmBodyWork* p) {
-    p->unk_128 = 0;
-    p->unk_244 = 0;
+void BosTmBodyResetPose(TmBodyWork* p) {
+    p->angle = 0;
+    p->angle2 = 0;
     p->gfx3 = gUnk_09EF397C[0];
     p->gfx4 = gUnk_09EF3960[0];
-    p->tm->x2 = p->tm->unk_08;
-    p->tm->y2 = p->tm->unk_0C;
-    p->tm->z2 = p->tm->unk_10;
-    func_080B8418(p);
+    p->tm->x2 = p->tm->baseX;
+    p->tm->y2 = p->tm->baseY;
+    p->tm->z2 = p->tm->baseZ;
+    BosTmBodyPlaceParts(p);
 }
 
-void func_080B8554(TmBodyWork* p) {
+void BosTmBodySetDefeatPose(TmBodyWork* p) {
     TmWork* src;
     s32 dz;
 
-    p->unk_128 = 226;
-    p->unk_244 = 226;
+    p->angle = 226;
+    p->angle2 = 226;
     p->gfx3 = gUnk_09EF397C[0];
     p->gfx4 = gUnk_09EF3960[0];
     dz = 0xF00;
     src = p->tm;
 
     if (src->flags & 0x20) {
-        p->tm->x2 = p->tm->unk_08 - 0xA00;
-        p->tm->y2 = p->tm->unk_0C;
-        p->tm->z2 = p->tm->unk_10 + dz;
-        p->body.x = p->tm->unk_08 - 0xF00;
+        p->tm->x2 = p->tm->baseX - 0xA00;
+        p->tm->y2 = p->tm->baseY;
+        p->tm->z2 = p->tm->baseZ + dz;
+        p->body.x = p->tm->baseX - 0xF00;
         p->body2.x = p->tm->x2 + 0x500;
         p->body3.x = p->tm->x2 + 0x400;
         p->body4.x = p->tm->x2 - 0x900;
     } else {
-        p->tm->x2 = p->tm->unk_08 + 0xA00;
-        p->tm->y2 = p->tm->unk_0C;
-        p->tm->z2 = p->tm->unk_10 + 0xF00;
-        p->body.x = p->tm->unk_08 + 0xF00;
+        p->tm->x2 = p->tm->baseX + 0xA00;
+        p->tm->y2 = p->tm->baseY;
+        p->tm->z2 = p->tm->baseZ + 0xF00;
+        p->body.x = p->tm->baseX + 0xF00;
         p->body2.x = p->tm->x2 - 0x500;
         p->body3.x = p->tm->x2 - 0x400;
         p->body4.x = p->tm->x2 + 0x900;
@@ -197,25 +197,25 @@ void func_080B8554(TmBodyWork* p) {
     p->body4.z = p->tm->z2 - 0x1C00;
 }
 
-void func_080B8688(TmBodyWork* p) {
-    p->unk_128 = 30;
-    p->unk_244 = 10;
+void BosTmBodySetBreakPose(TmBodyWork* p) {
+    p->angle = 30;
+    p->angle2 = 10;
     p->gfx3 = gUnk_09EF397C[0];
     p->gfx4 = gUnk_09EF3960[0];
 
     if (p->tm->flags & 0x20) {
-        p->tm->x2 = p->tm->unk_08 + 0xA00;
-        p->tm->y2 = p->tm->unk_0C;
-        p->tm->z2 = p->tm->unk_10 + 0xF00;
-        p->body.x = p->tm->unk_08 + 0xB00;
+        p->tm->x2 = p->tm->baseX + 0xA00;
+        p->tm->y2 = p->tm->baseY;
+        p->tm->z2 = p->tm->baseZ + 0xF00;
+        p->body.x = p->tm->baseX + 0xB00;
         p->body2.x = p->tm->x2 - 0x500;
         p->body3.x = p->tm->x2 + 0x900;
         p->body4.x = p->tm->x2 - 0x400;
     } else {
-        p->tm->x2 = p->tm->unk_08 - 0xA00;
-        p->tm->y2 = p->tm->unk_0C;
-        p->tm->z2 = p->tm->unk_10 + 0xF00;
-        p->body.x = p->tm->unk_08 - 0xB00;
+        p->tm->x2 = p->tm->baseX - 0xA00;
+        p->tm->y2 = p->tm->baseY;
+        p->tm->z2 = p->tm->baseZ + 0xF00;
+        p->body.x = p->tm->baseX - 0xB00;
         p->body2.x = p->tm->x2 + 0x500;
         p->body3.x = p->tm->x2 - 0x900;
         p->body4.x = p->tm->x2 + 0x400;
@@ -226,165 +226,165 @@ void func_080B8688(TmBodyWork* p) {
     p->body4.z = p->tm->z2 - 0x1C00;
 }
 
-void func_080B87C0(TmBodyWork* p, s16 a) {
+void BosTmBodyApplyThrowStep(TmBodyWork* p, s16 a) {
     if (p->tm->flags & 0x20) {
-        p->unk_128 += gUnk_09EF1E14[a].unk_04;
-        p->unk_244 += gUnk_09EF1E14[a].unk_0C;
-        p->body.x += gUnk_09EF1E14[a].unk_00 << 8;
-        p->body2.x += gUnk_09EF1E14[a].unk_08 << 8;
-        p->body3.x += gUnk_09EF1E14[a].unk_10 << 8;
-        p->body4.x += gUnk_09EF1E14[a].unk_18 << 8;
-        p->tm->x2 += gUnk_09EF1E14[a].unk_10 << 8;
+        p->angle += gBosTmBodyThrowSteps[a].dAngle;
+        p->angle2 += gBosTmBodyThrowSteps[a].dAngle2;
+        p->body.x += gBosTmBodyThrowSteps[a].dx << 8;
+        p->body2.x += gBosTmBodyThrowSteps[a].dx2 << 8;
+        p->body3.x += gBosTmBodyThrowSteps[a].dx3 << 8;
+        p->body4.x += gBosTmBodyThrowSteps[a].dx4 << 8;
+        p->tm->x2 += gBosTmBodyThrowSteps[a].dx3 << 8;
     } else {
-        p->unk_128 += gUnk_09EF1E14[a].unk_04;
-        p->unk_244 += gUnk_09EF1E14[a].unk_0C;
-        p->body.x -= gUnk_09EF1E14[a].unk_00 << 8;
-        p->body2.x -= gUnk_09EF1E14[a].unk_08 << 8;
-        p->body3.x -= gUnk_09EF1E14[a].unk_10 << 8;
-        p->body4.x -= gUnk_09EF1E14[a].unk_18 << 8;
-        p->tm->x2 -= gUnk_09EF1E14[a].unk_10 << 8;
+        p->angle += gBosTmBodyThrowSteps[a].dAngle;
+        p->angle2 += gBosTmBodyThrowSteps[a].dAngle2;
+        p->body.x -= gBosTmBodyThrowSteps[a].dx << 8;
+        p->body2.x -= gBosTmBodyThrowSteps[a].dx2 << 8;
+        p->body3.x -= gBosTmBodyThrowSteps[a].dx3 << 8;
+        p->body4.x -= gBosTmBodyThrowSteps[a].dx4 << 8;
+        p->tm->x2 -= gBosTmBodyThrowSteps[a].dx3 << 8;
     }
-    p->body.z += gUnk_09EF1E14[a].unk_02 << 8;
-    p->body2.z += gUnk_09EF1E14[a].unk_0A << 8;
-    p->body3.z += gUnk_09EF1E14[a].unk_12 << 8;
-    p->body4.z += gUnk_09EF1E14[a].unk_1A << 8;
-    p->tm->z2 += gUnk_09EF1E14[a].unk_0A << 8;
-    p->gfx3 = gUnk_09EF397C[gUnk_09EF1E14[a].unk_16];
-    p->gfx4 = gUnk_09EF3960[gUnk_09EF1E14[a].unk_1E];
+    p->body.z += gBosTmBodyThrowSteps[a].dz << 8;
+    p->body2.z += gBosTmBodyThrowSteps[a].dz2 << 8;
+    p->body3.z += gBosTmBodyThrowSteps[a].dz3 << 8;
+    p->body4.z += gBosTmBodyThrowSteps[a].dz4 << 8;
+    p->tm->z2 += gBosTmBodyThrowSteps[a].dz2 << 8;
+    p->gfx3 = gUnk_09EF397C[gBosTmBodyThrowSteps[a].gfx3Index];
+    p->gfx4 = gUnk_09EF3960[gBosTmBodyThrowSteps[a].gfx4Index];
 }
 
-void func_080B895C(TmBodyWork* p) {
-    p->unk_128 = 0;
-    p->unk_244 = 0;
+void BosTmBodySetWalkPose(TmBodyWork* p) {
+    p->angle = 0;
+    p->angle2 = 0;
     p->gfx3 = gUnk_09EF397C[0];
     p->gfx4 = gUnk_09EF3960[0];
-    p->tm->x2 = p->tm->unk_08;
-    p->tm->y2 = p->tm->unk_0C;
-    p->tm->z2 = p->tm->unk_10 - 0x1500;
-    func_080B8418(p);
+    p->tm->x2 = p->tm->baseX;
+    p->tm->y2 = p->tm->baseY;
+    p->tm->z2 = p->tm->baseZ - 0x1500;
+    BosTmBodyPlaceParts(p);
 }
 
-void func_080B89B0(TmBodyWork* p) {
-    if ((s16)p->tm->unk_36 == 0) {
-        p->tm->unk_08 += p->tm->unk_20;
-        p->tm->unk_0C += p->tm->unk_24;
-        p->tm->x2 = p->tm->unk_08;
-        p->tm->y2 = p->tm->unk_0C;
-        p->tm->z2 += gUnk_09EF1D74[(s16)p->tm->unk_34] << 8;
-        func_080B8418(p);
+void BosTmBodyWalk(TmBodyWork* p) {
+    if ((s16)p->tm->stepTimer == 0) {
+        p->tm->baseX += p->tm->vx;
+        p->tm->baseY += p->tm->vy;
+        p->tm->x2 = p->tm->baseX;
+        p->tm->y2 = p->tm->baseY;
+        p->tm->z2 += gBosTmBodyWalkZ[(s16)p->tm->step] << 8;
+        BosTmBodyPlaceParts(p);
     }
-    func_080B83C4(p);
+    BosTmBodyUpdateAngle(p);
 }
 
 void func_080B8A00(TmBodyWork* p) {
     s16 i;
     s16 j;
 
-    if ((s16)p->tm->unk_30 == 1) {
-        p->tm->unk_34 = 0;
-        p->tm->unk_36 = 0;
+    if ((s16)p->tm->hitCount == 1) {
+        p->tm->step = 0;
+        p->tm->stepTimer = 0;
         if (p->tm->flags & 0x20) {
-            p->unk_128 = gUnk_09EF1D88[(s16)p->tm->unk_34].unk_04;
-            p->unk_244 = gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0C;
-            p->body.x = p->tm->unk_08 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_00 + 4) << 8);
-            p->body2.x = p->tm->unk_08 + (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_08 << 8);
-            p->body3.x = p->tm->unk_08 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 + 12) << 8);
-            p->body4.x = p->tm->unk_08 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_18 - 1) << 8);
-            p->tm->x2 = p->tm->unk_08 + (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8);
+            p->angle = gUnk_09EF1D88[(s16)p->tm->step].dAngle;
+            p->angle2 = gUnk_09EF1D88[(s16)p->tm->step].dAngle2;
+            p->body.x = p->tm->baseX + ((gUnk_09EF1D88[(s16)p->tm->step].dx + 4) << 8);
+            p->body2.x = p->tm->baseX + (gUnk_09EF1D88[(s16)p->tm->step].dx2 << 8);
+            p->body3.x = p->tm->baseX + ((gUnk_09EF1D88[(s16)p->tm->step].dx3 + 12) << 8);
+            p->body4.x = p->tm->baseX + ((gUnk_09EF1D88[(s16)p->tm->step].dx4 - 1) << 8);
+            p->tm->x2 = p->tm->baseX + (gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8);
         } else {
-            p->unk_128 = gUnk_09EF1D88[(s16)p->tm->unk_34].unk_04;
-            p->unk_244 = gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0C;
-            p->body.x = p->tm->unk_08 + ((-4 - gUnk_09EF1D88[(s16)p->tm->unk_34].unk_00) << 8);
-            p->body2.x = p->tm->unk_08 - (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_08 << 8);
-            p->body3.x = p->tm->unk_08 + ((-12 - gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10) << 8);
-            p->body4.x = p->tm->unk_08 + ((1 - gUnk_09EF1D88[(s16)p->tm->unk_34].unk_18) << 8);
-            p->tm->x2 = p->tm->unk_08 - (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8);
+            p->angle = gUnk_09EF1D88[(s16)p->tm->step].dAngle;
+            p->angle2 = gUnk_09EF1D88[(s16)p->tm->step].dAngle2;
+            p->body.x = p->tm->baseX + ((-4 - gUnk_09EF1D88[(s16)p->tm->step].dx) << 8);
+            p->body2.x = p->tm->baseX - (gUnk_09EF1D88[(s16)p->tm->step].dx2 << 8);
+            p->body3.x = p->tm->baseX + ((-12 - gUnk_09EF1D88[(s16)p->tm->step].dx3) << 8);
+            p->body4.x = p->tm->baseX + ((1 - gUnk_09EF1D88[(s16)p->tm->step].dx4) << 8);
+            p->tm->x2 = p->tm->baseX - (gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8);
         }
-        p->body.z = p->tm->unk_10 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_02 - 34 + gUnk_09EF1E08[2]) << 8);
-        p->body2.z = p->tm->unk_10 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0A + 9 + gUnk_09EF1E08[2]) << 8);
-        p->body3.z = p->tm->unk_10 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_12 - 33 + gUnk_09EF1E08[2]) << 8);
-        p->body4.z = p->tm->unk_10 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_1A - 30 + gUnk_09EF1E08[2]) << 8);
-        p->tm->z2 = p->tm->unk_10 + ((gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0A + 0 + gUnk_09EF1E08[2]) << 8);
+        p->body.z = p->tm->baseZ + ((gUnk_09EF1D88[(s16)p->tm->step].dz - 34 + gUnk_09EF1E08[2]) << 8);
+        p->body2.z = p->tm->baseZ + ((gUnk_09EF1D88[(s16)p->tm->step].dz2 + 9 + gUnk_09EF1E08[2]) << 8);
+        p->body3.z = p->tm->baseZ + ((gUnk_09EF1D88[(s16)p->tm->step].dz3 - 33 + gUnk_09EF1E08[2]) << 8);
+        p->body4.z = p->tm->baseZ + ((gUnk_09EF1D88[(s16)p->tm->step].dz4 - 30 + gUnk_09EF1E08[2]) << 8);
+        p->tm->z2 = p->tm->baseZ + ((gUnk_09EF1D88[(s16)p->tm->step].dz2 + 0 + gUnk_09EF1E08[2]) << 8);
     } else {
-        if ((s16)p->tm->unk_34 < 3) {
+        if ((s16)p->tm->step < 3) {
             if (p->tm->flags & 0x20) {
-                p->unk_128 += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_04;
-                p->unk_244 += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0C;
-                p->body.x += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_00 << 8;
-                p->body2.x += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_08 << 8;
-                p->body3.x += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8;
-                p->body4.x += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_18 << 8;
-                p->tm->x2 += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8;
+                p->angle += gUnk_09EF1D88[(s16)p->tm->step].dAngle;
+                p->angle2 += gUnk_09EF1D88[(s16)p->tm->step].dAngle2;
+                p->body.x += gUnk_09EF1D88[(s16)p->tm->step].dx << 8;
+                p->body2.x += gUnk_09EF1D88[(s16)p->tm->step].dx2 << 8;
+                p->body3.x += gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8;
+                p->body4.x += gUnk_09EF1D88[(s16)p->tm->step].dx4 << 8;
+                p->tm->x2 += gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8;
             } else {
-                p->unk_128 += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_04;
-                p->unk_244 += gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0C;
-                p->body.x -= gUnk_09EF1D88[(s16)p->tm->unk_34].unk_00 << 8;
-                p->body2.x -= gUnk_09EF1D88[(s16)p->tm->unk_34].unk_08 << 8;
-                p->body3.x -= gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8;
-                p->body4.x -= gUnk_09EF1D88[(s16)p->tm->unk_34].unk_18 << 8;
-                p->tm->x2 -= gUnk_09EF1D88[(s16)p->tm->unk_34].unk_10 << 8;
+                p->angle += gUnk_09EF1D88[(s16)p->tm->step].dAngle;
+                p->angle2 += gUnk_09EF1D88[(s16)p->tm->step].dAngle2;
+                p->body.x -= gUnk_09EF1D88[(s16)p->tm->step].dx << 8;
+                p->body2.x -= gUnk_09EF1D88[(s16)p->tm->step].dx2 << 8;
+                p->body3.x -= gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8;
+                p->body4.x -= gUnk_09EF1D88[(s16)p->tm->step].dx4 << 8;
+                p->tm->x2 -= gUnk_09EF1D88[(s16)p->tm->step].dx3 << 8;
             }
-            j = 2 - p->tm->unk_34;
-            p->body.z += (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_02 + gUnk_09EF1E08[j]) << 8;
-            p->body2.z += (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0A + gUnk_09EF1E08[j]) << 8;
-            p->body3.z += (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_12 + gUnk_09EF1E08[j]) << 8;
-            p->body4.z += (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_1A + gUnk_09EF1E08[j]) << 8;
-            p->tm->z2 += (gUnk_09EF1D88[(s16)p->tm->unk_34].unk_0A + gUnk_09EF1E08[j]) << 8;
+            j = 2 - p->tm->step;
+            p->body.z += (gUnk_09EF1D88[(s16)p->tm->step].dz + gUnk_09EF1E08[j]) << 8;
+            p->body2.z += (gUnk_09EF1D88[(s16)p->tm->step].dz2 + gUnk_09EF1E08[j]) << 8;
+            p->body3.z += (gUnk_09EF1D88[(s16)p->tm->step].dz3 + gUnk_09EF1E08[j]) << 8;
+            p->body4.z += (gUnk_09EF1D88[(s16)p->tm->step].dz4 + gUnk_09EF1E08[j]) << 8;
+            p->tm->z2 += (gUnk_09EF1D88[(s16)p->tm->step].dz2 + gUnk_09EF1E08[j]) << 8;
         }
-        if ((s16)p->tm->unk_32 < 3) {
-            i = p->tm->unk_32;
+        if ((s16)p->tm->hurtTimer < 3) {
+            i = p->tm->hurtTimer;
             if (p->tm->flags & 0x20) {
-                p->unk_128 -= gUnk_09EF1D88[i].unk_04;
-                p->unk_244 -= gUnk_09EF1D88[i].unk_0C;
-                p->body.x -= gUnk_09EF1D88[i].unk_00 << 8;
-                p->body2.x -= gUnk_09EF1D88[i].unk_08 << 8;
-                p->body3.x -= gUnk_09EF1D88[i].unk_10 << 8;
-                p->body4.x -= gUnk_09EF1D88[i].unk_18 << 8;
-                p->tm->x2 -= gUnk_09EF1D88[i].unk_10 << 8;
+                p->angle -= gUnk_09EF1D88[i].dAngle;
+                p->angle2 -= gUnk_09EF1D88[i].dAngle2;
+                p->body.x -= gUnk_09EF1D88[i].dx << 8;
+                p->body2.x -= gUnk_09EF1D88[i].dx2 << 8;
+                p->body3.x -= gUnk_09EF1D88[i].dx3 << 8;
+                p->body4.x -= gUnk_09EF1D88[i].dx4 << 8;
+                p->tm->x2 -= gUnk_09EF1D88[i].dx3 << 8;
             } else {
-                p->unk_128 -= gUnk_09EF1D88[i].unk_04;
-                p->unk_244 -= gUnk_09EF1D88[i].unk_0C;
-                p->body.x += gUnk_09EF1D88[i].unk_00 << 8;
-                p->body2.x += gUnk_09EF1D88[i].unk_08 << 8;
-                p->body3.x += gUnk_09EF1D88[i].unk_10 << 8;
-                p->body4.x += gUnk_09EF1D88[i].unk_18 << 8;
-                p->tm->x2 += gUnk_09EF1D88[i].unk_10 << 8;
+                p->angle -= gUnk_09EF1D88[i].dAngle;
+                p->angle2 -= gUnk_09EF1D88[i].dAngle2;
+                p->body.x += gUnk_09EF1D88[i].dx << 8;
+                p->body2.x += gUnk_09EF1D88[i].dx2 << 8;
+                p->body3.x += gUnk_09EF1D88[i].dx3 << 8;
+                p->body4.x += gUnk_09EF1D88[i].dx4 << 8;
+                p->tm->x2 += gUnk_09EF1D88[i].dx3 << 8;
             }
             j = 2 - i;
-            p->body.z -= (gUnk_09EF1D88[i].unk_02 + gUnk_09EF1E08[j]) << 8;
-            p->body2.z -= (gUnk_09EF1D88[i].unk_0A + gUnk_09EF1E08[j]) << 8;
-            p->body3.z -= (gUnk_09EF1D88[i].unk_12 + gUnk_09EF1E08[j]) << 8;
-            p->body4.z -= (gUnk_09EF1D88[i].unk_1A + gUnk_09EF1E08[j]) << 8;
-            p->tm->z2 -= (gUnk_09EF1D88[i].unk_0A + gUnk_09EF1E08[j]) << 8;
+            p->body.z -= (gUnk_09EF1D88[i].dz + gUnk_09EF1E08[j]) << 8;
+            p->body2.z -= (gUnk_09EF1D88[i].dz2 + gUnk_09EF1E08[j]) << 8;
+            p->body3.z -= (gUnk_09EF1D88[i].dz3 + gUnk_09EF1E08[j]) << 8;
+            p->body4.z -= (gUnk_09EF1D88[i].dz4 + gUnk_09EF1E08[j]) << 8;
+            p->tm->z2 -= (gUnk_09EF1D88[i].dz2 + gUnk_09EF1E08[j]) << 8;
         }
     }
 }
 
 void func_080B8FF4(TmBodyWork* p, s16 a) {
     if (p->tm->flags & 0x20) {
-        p->unk_128 += gUnk_09EF2034[a].unk_04;
-        p->unk_244 += gUnk_09EF2034[a].unk_0C;
-        p->body.x += gUnk_09EF2034[a].unk_00 << 8;
-        p->body2.x += gUnk_09EF2034[a].unk_08 << 8;
-        p->body3.x += gUnk_09EF2034[a].unk_10 << 8;
-        p->body4.x += gUnk_09EF2034[a].unk_18 << 8;
-        p->tm->x2 += gUnk_09EF2034[a].unk_10 << 8;
+        p->angle += gUnk_09EF2034[a].dAngle;
+        p->angle2 += gUnk_09EF2034[a].dAngle2;
+        p->body.x += gUnk_09EF2034[a].dx << 8;
+        p->body2.x += gUnk_09EF2034[a].dx2 << 8;
+        p->body3.x += gUnk_09EF2034[a].dx3 << 8;
+        p->body4.x += gUnk_09EF2034[a].dx4 << 8;
+        p->tm->x2 += gUnk_09EF2034[a].dx3 << 8;
     } else {
-        p->unk_128 += gUnk_09EF2034[a].unk_04;
-        p->unk_244 += gUnk_09EF2034[a].unk_0C;
-        p->body.x -= gUnk_09EF2034[a].unk_00 << 8;
-        p->body2.x -= gUnk_09EF2034[a].unk_08 << 8;
-        p->body3.x -= gUnk_09EF2034[a].unk_10 << 8;
-        p->body4.x -= gUnk_09EF2034[a].unk_18 << 8;
-        p->tm->x2 -= gUnk_09EF2034[a].unk_10 << 8;
+        p->angle += gUnk_09EF2034[a].dAngle;
+        p->angle2 += gUnk_09EF2034[a].dAngle2;
+        p->body.x -= gUnk_09EF2034[a].dx << 8;
+        p->body2.x -= gUnk_09EF2034[a].dx2 << 8;
+        p->body3.x -= gUnk_09EF2034[a].dx3 << 8;
+        p->body4.x -= gUnk_09EF2034[a].dx4 << 8;
+        p->tm->x2 -= gUnk_09EF2034[a].dx3 << 8;
     }
-    p->body.z += gUnk_09EF2034[a].unk_02 << 8;
-    p->body2.z += gUnk_09EF2034[a].unk_0A << 8;
-    p->body3.z += gUnk_09EF2034[a].unk_12 << 8;
-    p->body4.z += gUnk_09EF2034[a].unk_1A << 8;
-    p->tm->z2 += gUnk_09EF2034[a].unk_0A << 8;
-    p->gfx3 = gUnk_09EF397C[gUnk_09EF2034[a].unk_16];
-    p->gfx4 = gUnk_09EF3960[gUnk_09EF2034[a].unk_1E];
+    p->body.z += gUnk_09EF2034[a].dz << 8;
+    p->body2.z += gUnk_09EF2034[a].dz2 << 8;
+    p->body3.z += gUnk_09EF2034[a].dz3 << 8;
+    p->body4.z += gUnk_09EF2034[a].dz4 << 8;
+    p->tm->z2 += gUnk_09EF2034[a].dz2 << 8;
+    p->gfx3 = gUnk_09EF397C[gUnk_09EF2034[a].gfx3Index];
+    p->gfx4 = gUnk_09EF3960[gUnk_09EF2034[a].gfx4Index];
 }
 s32 GetAbsoluteDifference(s32 a, s32 b) {
     if (a > b) {
@@ -395,73 +395,73 @@ s32 GetAbsoluteDifference(s32 a, s32 b) {
     }
     return 0;
 }
-void func_080B91A4(TmBodyWork* p) {
+void BosTmBodyChooseAction(TmBodyWork* p) {
     s32 st;
     s32 next;
     u16 rnd;
 
     if (p->tm->flags & 0x40) {
-        p->tm->unk_2C = p->tm->unk_3C;
+        p->tm->state = p->tm->resumeState;
         return;
     }
 
-    if (p->body2.unk_02C < p->body2.unk_02E / 2) {
-        st = p->tm->unk_3A;
+    if (p->body2.hp < p->body2.maxHp / 2) {
+        st = p->tm->tableState;
 
         if (st == 2) {
             if (p->tm->flags & 0x10) {
-                p->tm->unk_2C = 1;
+                p->tm->state = 1;
                 p->tm->flags = p->tm->flags & ~0x10;
-            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->unk_08) <= 0x1DFF) {
+            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    p->tm->unk_2C = 9;
+                    p->tm->state = 9;
                 } else {
-                    p->tm->unk_2C = 1;
+                    p->tm->state = 1;
                 }
             } else {
-                p->tm->unk_2C = gUnk_09EF2194[GetRandom() % 4];
+                p->tm->state = gBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->unk_2C == 3) {
-                    p->tm->unk_2C = st;
+                if (p->tm->state == 3) {
+                    p->tm->state = st;
                 }
 
-                if (p->tm->unk_2C == 4) {
-                    p->tm->unk_2C = 1;
+                if (p->tm->state == 4) {
+                    p->tm->state = 1;
                 }
             }
         } else if (st == 0) {
-            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->unk_08) <= 0x1DFF) {
+            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    p->tm->unk_2C = 9;
+                    p->tm->state = 9;
                 } else {
-                    p->tm->unk_2C = 1;
+                    p->tm->state = 1;
                 }
             } else {
-                p->tm->unk_2C = gUnk_09EF2194[GetRandom() % 4];
+                p->tm->state = gBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->unk_2C == 4) {
+                if (p->tm->state == 4) {
                     if (p->tm->flags & 0x20) {
                         p->tm->flags |= 0x40;
-                        p->tm->unk_2C = 4;
-                        p->tm->unk_3C = 4;
+                        p->tm->state = 4;
+                        p->tm->resumeState = 4;
                     } else {
                         p->tm->flags |= 0x40;
-                        p->tm->unk_2C = 6;
-                        p->tm->unk_3C = 6;
+                        p->tm->state = 6;
+                        p->tm->resumeState = 6;
                     }
-                    next = p->tm->unk_2C;
+                    next = p->tm->state;
 
                     if (next == 3) {
                         rnd = GetRandom() % 100;
 
                         if (rnd <= 49) {
-                            p->tm->unk_2C = 11;
+                            p->tm->state = 11;
                         } else {
-                            p->tm->unk_2C = next;
+                            p->tm->state = next;
                         }
                     }
                 }
@@ -470,74 +470,74 @@ void func_080B91A4(TmBodyWork* p) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
-                p->tm->unk_2C = 9;
+                p->tm->state = 9;
             } else {
-                p->tm->unk_2C = 10;
+                p->tm->state = 10;
             }
         }
-        st = p->tm->unk_2C;
+        st = p->tm->state;
 
         if (st == 1) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
-                p->tm->unk_2C = st;
+                p->tm->state = st;
             } else {
-                p->tm->unk_2C = 10;
+                p->tm->state = 10;
             }
         }
     } else {
-        st = p->tm->unk_3A;
+        st = p->tm->tableState;
 
         if (st == 2) {
             if (p->tm->flags & 0x10) {
-                p->tm->unk_2C = 1;
+                p->tm->state = 1;
                 p->tm->flags = p->tm->flags & ~0x10;
-            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->unk_08) <= 0x1DFF) {
+            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    p->tm->unk_2C = 9;
+                    p->tm->state = 9;
                 } else {
-                    p->tm->unk_2C = 1;
+                    p->tm->state = 1;
                 }
             } else {
-                p->tm->unk_2C = gUnk_09EF2194[GetRandom() % 4];
+                p->tm->state = gBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->unk_2C == 3) {
-                    p->tm->unk_2C = st;
+                if (p->tm->state == 3) {
+                    p->tm->state = st;
                 }
 
-                if (p->tm->unk_2C == 4) {
-                    p->tm->unk_2C = 1;
+                if (p->tm->state == 4) {
+                    p->tm->state = 1;
                 }
             }
         } else if (st == 0) {
-            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->unk_08) <= 0x1DFF) {
+            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    p->tm->unk_2C = 9;
+                    p->tm->state = 9;
                 } else {
-                    p->tm->unk_2C = 1;
+                    p->tm->state = 1;
                 }
             } else {
-                p->tm->unk_2C = gUnk_09EF2194[GetRandom() % 4];
+                p->tm->state = gBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->unk_2C == 4) {
+                if (p->tm->state == 4) {
                     if (p->tm->flags & 0x20) {
                         p->tm->flags |= 0x40;
-                        p->tm->unk_2C = 4;
-                        p->tm->unk_3C = 4;
+                        p->tm->state = 4;
+                        p->tm->resumeState = 4;
                     } else {
                         p->tm->flags |= 0x40;
-                        p->tm->unk_2C = 6;
-                        p->tm->unk_3C = 6;
+                        p->tm->state = 6;
+                        p->tm->resumeState = 6;
                     }
                 }
             }
         } else {
-            p->tm->unk_2C = 9;
+            p->tm->state = 9;
         }
     }
 }
@@ -545,76 +545,76 @@ void func_080B91A4(TmBodyWork* p) {
 void _080B949C(BtlObj* a, TmBodyWork* b) {
     u16 t;
 
-    if (a->unk_02C <= 0) {
+    if (a->hp <= 0) {
         return;
     }
 
-    if (b->tm->unk_08 < 0x8E00 || b->tm->unk_08 > 0x16F00) {
+    if (b->tm->baseX < 0x8E00 || b->tm->baseX > 0x16F00) {
         a->flags |= 0x100;
     } else {
         a->flags &= ~0x100;
     }
 
-    switch (func_0801ADAC(a)) {
+    switch (UpdateBtlObjReaction(a)) {
     case 5:
-        func_080B8324(b);
-        func_080B9FC4(b);
-        func_080B91A4(b);
+        BosTmBodyResetTimers(b);
+        BosTmBodyRollBossCard(b);
+        BosTmBodyChooseAction(b);
         b->tm->flags &= ~1;
         break;
     case 4:
-        b->tm->unk_38 = 0;
-        b->tm->unk_2C = 14;
+        b->tm->stateTimer = 0;
+        b->tm->state = 14;
         break;
     case 1:
     case 6:
     case 7:
-        b->unk_48A = a->unk_02C;
+        b->hp = a->hp;
         b->tm->flags |= 1;
-        b->tm->unk_30++;
+        b->tm->hitCount++;
 
-        if (b->unk_48C - b->unk_48A >= 9999) {
-            b->tm->unk_32 = 55;
-            b->tm->unk_2C = 12;
+        if (b->prevHp - b->hp >= 9999) {
+            b->tm->hurtTimer = 55;
+            b->tm->state = 12;
             b->tm->flags &= ~4;
-        } else if (b->tm->unk_2C != 12) {
-            b->tm->unk_32 = 20;
+        } else if (b->tm->state != 12) {
+            b->tm->hurtTimer = 20;
             b->tm->flags |= 4;
         }
         break;
     case 3:
     case 8:
-        func_0801AF4C(a);
-        b->tm->unk_34 = 0;
-        b->tm->unk_2C = 13;
+        BeginBossDefeat(a);
+        b->tm->step = 0;
+        b->tm->state = 13;
         break;
     }
 
     if (b->tm->flags & 1) {
-        b->tm->unk_32--;
+        b->tm->hurtTimer--;
 
-        if ((s16)b->tm->unk_32 <= 0) {
-            b->tm->unk_30 = 0;
+        if ((s16)b->tm->hurtTimer <= 0) {
+            b->tm->hitCount = 0;
             b->tm->flags &= ~1;
-            func_0801AF08(a);
+            ClearBtlObjActionFlags(a);
 
             if (b->tm->flags & 4) {
                 b->tm->flags &= ~4;
             } else {
-                func_080B8324(b);
+                BosTmBodyResetTimers(b);
                 t = b->tm->flags & 0x40;
 
                 if (t) {
-                    func_080B895C(b);
-                    b->tm->unk_2C = 8;
+                    BosTmBodySetWalkPose(b);
+                    b->tm->state = 8;
                 } else {
-                    func_080B8508(b);
-                    b->tm->unk_2C = 0;
+                    BosTmBodyResetPose(b);
+                    b->tm->state = 0;
                 }
             }
         }
     }
-    b->unk_48C = a->unk_02C;
+    b->prevHp = a->hp;
 }
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
@@ -626,43 +626,43 @@ void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
     work->gfx3 = gUnk_09EF397C[0];
     work->gfx4 = gUnk_09EF3960[0];
     work->tm = arg;
-    work->tm->unk_40 = work->tiles->index;
-    work->tm->unk_42 += work->tiles->count;
-    work->tm->unk_44 = work->palette->index;
+    work->tm->tileIndex = work->tiles->index;
+    work->tm->tileCount += work->tiles->count;
+    work->tm->paletteIndex = work->palette->index;
     work->unk_480 = 0;
-    work->unk_482 = 0;
-    work->unk_484 = 0;
+    work->angleStep = 0;
+    work->angleTimer = 0;
     work->unk_486 = 0;
-    work->unk_128 = 0;
-    work->unk_244 = 0;
-    work->unk_360 = 0;
-    work->unk_47C = 0;
+    work->angle = 0;
+    work->angle2 = 0;
+    work->angle3 = 0;
+    work->angle4 = 0;
     work->unk_488 = 0;
-    work->unk_48A = 1300;
-    work->unk_48C = 1300;
+    work->hp = 1300;
+    work->prevHp = 1300;
     work->unk_48E = 0;
     work->unk_490 = 10;
     work->unk_492 = 0;
 
     if (work->tm->flags & 8) {
-        func_080B83A4(&work->body, work->tm->x + 4, work->tm->y,
+        BosTmBodySetObjPos(&work->body, work->tm->x + 4, work->tm->y,
                       work->tm->z - 34);
-        func_080B83A4(&work->body2, work->tm->x, work->tm->y,
+        BosTmBodySetObjPos(&work->body2, work->tm->x, work->tm->y,
                       work->tm->z + 9);
-        func_080B83A4(&work->body3, work->tm->x + 12, work->tm->y + 1,
+        BosTmBodySetObjPos(&work->body3, work->tm->x + 12, work->tm->y + 1,
                       work->tm->z - 33);
-        func_080B83A4(&work->body4, work->tm->x - 1, work->tm->y - 4,
+        BosTmBodySetObjPos(&work->body4, work->tm->x - 1, work->tm->y - 4,
                       work->tm->z - 30);
     } else {
-        func_080B83A4(&work->body, work->tm->x + 4, work->tm->y,
+        BosTmBodySetObjPos(&work->body, work->tm->x + 4, work->tm->y,
                       work->tm->z - 34);
-        func_080B8334(&work->body2, work->tm->x, work->tm->y,
+        BosTmBodyInitEnemy(&work->body2, work->tm->x, work->tm->y,
                       work->tm->z - 16);
-        func_080B83A4(&work->body3, work->tm->x + 12, work->tm->y + 1,
+        BosTmBodySetObjPos(&work->body3, work->tm->x + 12, work->tm->y + 1,
                       work->tm->z - 33);
-        func_080B83A4(&work->body4, work->tm->x - 1, work->tm->y - 4,
+        BosTmBodySetObjPos(&work->body4, work->tm->x - 1, work->tm->y - 4,
                       work->tm->z - 30);
-        gUnk_0203AB50 = work->body2;
+        gBosTmBodyObjCopy = work->body2;
     }
 }
 u8 task_bos_tm_body_1(TmBodyWork* work) {
@@ -673,169 +673,169 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     if (!(work->tm->flags & 8)) {
         _080B949C(&work->body2, work);
     }
-    switch (work->tm->unk_2C) {
+    switch (work->tm->state) {
     case 0:
     case 15:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8508(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodyResetPose(work);
         } else {
-            if (gBtlWork->unk_0A0 && (u16)(GetRandom() % 80) == 0) {
-                func_0801BCD4(&work->body2);
+            if (gBtlWork->phase && (u16)(GetRandom() % 80) == 0) {
+                RequestEnemyCardUse(&work->body2);
             }
-            if ((s16)work->tm->unk_36 == 0) {
-                table = gUnk_09EF1D64;
-                work->tm->z2 += table[(s16)work->tm->unk_34] << 8;
+            if ((s16)work->tm->stepTimer == 0) {
+                table = gBosTmBodyIdleZ;
+                work->tm->z2 += table[(s16)work->tm->step] << 8;
                 work->body.z = work->tm->z2 - 0x2200;
                 work->body2.z = work->tm->z2 + 0x900;
                 work->body3.z = work->tm->z2 - 0x2100;
                 work->body4.z = work->tm->z2 - 0x1E00;
             }
-            func_080B83C4(work);
+            BosTmBodyUpdateAngle(work);
         }
         break;
     case 4:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B895C(work);
-            work->tm->unk_20 = -0x900;
-            work->tm->unk_24 = 0;
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodySetWalkPose(work);
+            work->tm->vx = -0x900;
+            work->tm->vy = 0;
         } else {
-            func_080B89B0(work);
-            if (work->tm->unk_08 <= 0x8E00) {
+            BosTmBodyWalk(work);
+            if (work->tm->baseX <= 0x8E00) {
                 work->tm->flags &= ~0x20;
                 work->body2.flags &= ~4;
-                work->tm->unk_2C = 5;
-                work->tm->unk_3C = 5;
-                func_080B8324(work);
-                func_080B895C(work);
-                work->tm->unk_20 = 0x900;
-                work->tm->unk_24 = 0;
+                work->tm->state = 5;
+                work->tm->resumeState = 5;
+                BosTmBodyResetTimers(work);
+                BosTmBodySetWalkPose(work);
+                work->tm->vx = 0x900;
+                work->tm->vy = 0;
             }
         }
         break;
     case 5:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B895C(work);
-            work->tm->unk_20 = 0x900;
-            work->tm->unk_24 = 0;
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodySetWalkPose(work);
+            work->tm->vx = 0x900;
+            work->tm->vy = 0;
         } else {
-            func_080B89B0(work);
-            if (work->tm->unk_08 > 0x9FFF) {
-                func_0801AF08(&work->body2);
+            BosTmBodyWalk(work);
+            if (work->tm->baseX > 0x9FFF) {
+                ClearBtlObjActionFlags(&work->body2);
                 work->tm->flags &= ~0x40;
-                work->tm->unk_2C = 0;
-                work->tm->unk_3C = 16;
-                func_080B8324(work);
-                func_080B8508(work);
+                work->tm->state = 0;
+                work->tm->resumeState = 16;
+                BosTmBodyResetTimers(work);
+                BosTmBodyResetPose(work);
             }
         }
         break;
     case 6:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B895C(work);
-            work->tm->unk_20 = 0x900;
-            work->tm->unk_24 = 0;
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodySetWalkPose(work);
+            work->tm->vx = 0x900;
+            work->tm->vy = 0;
         } else {
-            func_080B89B0(work);
-            if (work->tm->unk_08 > 0x16EFF) {
+            BosTmBodyWalk(work);
+            if (work->tm->baseX > 0x16EFF) {
                 work->tm->flags |= 0x20;
                 work->body2.flags |= 4;
-                work->tm->unk_2C = 7;
-                work->tm->unk_3C = 7;
-                func_080B8324(work);
-                func_080B895C(work);
-                work->tm->unk_20 = -0x900;
-                work->tm->unk_24 = 0;
+                work->tm->state = 7;
+                work->tm->resumeState = 7;
+                BosTmBodyResetTimers(work);
+                BosTmBodySetWalkPose(work);
+                work->tm->vx = -0x900;
+                work->tm->vy = 0;
             }
         }
         break;
     case 7:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B895C(work);
-            work->tm->unk_20 = -0x900;
-            work->tm->unk_24 = 0;
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodySetWalkPose(work);
+            work->tm->vx = -0x900;
+            work->tm->vy = 0;
         } else {
-            func_080B89B0(work);
-            if (work->tm->unk_08 <= 0x15D00) {
-                func_0801AF08(&work->body2);
+            BosTmBodyWalk(work);
+            if (work->tm->baseX <= 0x15D00) {
+                ClearBtlObjActionFlags(&work->body2);
                 work->tm->flags &= ~0x40;
-                work->tm->unk_2C = 0;
-                work->tm->unk_3C = 16;
-                func_080B8324(work);
-                func_080B8508(work);
+                work->tm->state = 0;
+                work->tm->resumeState = 16;
+                BosTmBodyResetTimers(work);
+                BosTmBodyResetPose(work);
             }
         }
         break;
     case 1:
     case 10:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8508(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodyResetPose(work);
         } else if (work->tm->flags & 2) {
             work->tm->flags &= ~2;
-            func_0801AF08(&work->body2);
-            work->tm->unk_2C = 0;
-            func_080B8324(work);
+            ClearBtlObjActionFlags(&work->body2);
+            work->tm->state = 0;
+            BosTmBodyResetTimers(work);
             work->tm->z2 = (s16)work->tm->z << 8;
         }
         break;
     case 2:
     case 3:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8508(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodyResetPose(work);
         } else {
-            n = work->tm->unk_34;
-            if ((s16)work->tm->unk_34 <= 3) {
-                func_080B87C0(work, (s16)work->tm->unk_34);
+            n = work->tm->step;
+            if ((s16)work->tm->step <= 3) {
+                BosTmBodyApplyThrowStep(work, (s16)work->tm->step);
             } else if (n >= 66 && n <= 74) {
-                func_080B87C0(work, n - 62);
+                BosTmBodyApplyThrowStep(work, n - 62);
             } else if (n >= 98 && n <= 100) {
-                func_080B87C0(work, n - 85);
+                BosTmBodyApplyThrowStep(work, n - 85);
             }
             if (work->tm->flags & 2) {
                 work->tm->flags &= ~2;
-                func_0801AF08(&work->body2);
-                work->tm->unk_2C = 0;
-                func_080B8324(work);
-                func_080B8508(work);
+                ClearBtlObjActionFlags(&work->body2);
+                work->tm->state = 0;
+                BosTmBodyResetTimers(work);
+                BosTmBodyResetPose(work);
             }
         }
         break;
     case 11:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8508(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodyResetPose(work);
         } else {
-            n = work->tm->unk_34;
-            if ((s16)work->tm->unk_34 <= 3) {
-                func_080B87C0(work, (s16)work->tm->unk_34);
+            n = work->tm->step;
+            if ((s16)work->tm->step <= 3) {
+                BosTmBodyApplyThrowStep(work, (s16)work->tm->step);
             } else if (n >= 96 && n <= 104) {
-                func_080B87C0(work, n - 92);
+                BosTmBodyApplyThrowStep(work, n - 92);
             } else if (n >= 128 && n <= 130) {
-                func_080B87C0(work, n - 115);
+                BosTmBodyApplyThrowStep(work, n - 115);
             }
             if (work->tm->flags & 2) {
                 work->tm->flags &= ~2;
-                func_0801AF08(&work->body2);
-                work->tm->unk_2C = 0;
-                func_080B8324(work);
-                func_080B8508(work);
+                ClearBtlObjActionFlags(&work->body2);
+                work->tm->state = 0;
+                BosTmBodyResetTimers(work);
+                BosTmBodyResetPose(work);
             }
         }
         break;
     case 9:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8508(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodyResetPose(work);
         } else {
-            n = work->tm->unk_34;
-            if ((s16)work->tm->unk_34 <= 2) {
-                func_080B8FF4(work, (s16)work->tm->unk_34);
+            n = work->tm->step;
+            if ((s16)work->tm->step <= 2) {
+                func_080B8FF4(work, (s16)work->tm->step);
             } else if (n >= 41 && n <= 46) {
                 func_080B8FF4(work, n - 38);
             }
             if (work->tm->flags & 2) {
                 work->tm->flags &= ~2;
-                func_0801AF08(&work->body2);
-                work->tm->unk_2C = 0;
-                func_080B8324(work);
-                func_080B8508(work);
+                ClearBtlObjActionFlags(&work->body2);
+                work->tm->state = 0;
+                BosTmBodyResetTimers(work);
+                BosTmBodyResetPose(work);
             }
         }
         break;
@@ -843,27 +843,27 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         func_080B8A00(work);
         break;
     case 14:
-        if ((s16)work->tm->unk_38 == 0) {
-            func_080B8688(work);
+        if ((s16)work->tm->stateTimer == 0) {
+            BosTmBodySetBreakPose(work);
             if (work->tm->flags & 0x40) {
-                func_08083900(9);
+                RequestBossCardValue(9);
             }
-        } else if ((s16)work->tm->unk_38 > 59) {
-            func_080B8324(work);
+        } else if ((s16)work->tm->stateTimer > 59) {
+            BosTmBodyResetTimers(work);
             work->tm->flags &= ~0x80;
             flags = work->tm->flags & 0x40;
             if (flags) {
-                func_0801AF08(&work->body2);
-                func_080B8688(work);
-                work->tm->unk_2C = 8;
+                ClearBtlObjActionFlags(&work->body2);
+                BosTmBodySetBreakPose(work);
+                work->tm->state = 8;
             } else {
-                func_0801AF08(&work->body2);
-                func_080B8508(work);
-                work->tm->unk_2C = 0;
+                ClearBtlObjActionFlags(&work->body2);
+                BosTmBodyResetPose(work);
+                work->tm->state = 0;
             }
-        } else if (!(work->tm->flags & 0x80) && work->tm->unk_3A == 0 && (work->tm->flags & 1)) {
+        } else if (!(work->tm->flags & 0x80) && work->tm->tableState == 0 && (work->tm->flags & 1)) {
             if ((u16)(GetRandom() % 100) <= 30) {
-                _0801C1F8(0, work->tm->unk_08, work->tm->unk_0C, work->tm->unk_10);
+                _0801C1F8(0, work->tm->baseX, work->tm->baseY, work->tm->baseZ);
                 work->tm->flags |= 0x80;
             } else {
                 work->tm->flags |= 0x80;
@@ -871,11 +871,11 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         }
         break;
     case 8:
-        func_0801BCD4(&work->body2);
+        RequestEnemyCardUse(&work->body2);
         break;
     case 13:
-        if ((s16)work->tm->unk_34 == 0) {
-            func_080B8554(work);
+        if ((s16)work->tm->step == 0) {
+            BosTmBodySetDefeatPose(work);
         }
         break;
     case 16:
@@ -897,16 +897,16 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     s16 y;
 
     if (work->tm->flags & 0x20) {
-        a1 = AllocObjAffine(work->unk_128, 0x100, 0x100, 1);
-        a2 = AllocObjAffine(work->unk_244, 0x100, 0x100, 1);
+        a1 = AllocObjAffine(work->angle, 0x100, 0x100, 1);
+        a2 = AllocObjAffine(work->angle2, 0x100, 0x100, 1);
         mode = 0x800;
     } else {
-        a1 = AllocObjAffine(work->unk_128, -0x100, 0x100, 1);
-        a2 = AllocObjAffine(work->unk_244, -0x100, 0x100, 1);
+        a1 = AllocObjAffine(work->angle, -0x100, 0x100, 1);
+        a2 = AllocObjAffine(work->angle2, -0x100, 0x100, 1);
         mode = 0x801;
     }
 
-    if (gBtlWork->unk_070 != 0) {
+    if (gBtlWork->paused != 0) {
         pal = work->palette;
     } else if (work->tm->flags & 1) {
         if (gFrameCounter & 1) {
@@ -938,25 +938,25 @@ void task_bos_tm_body_2(TmBodyWork* work) {
 
 void task_bos_tm_body_3(TmBodyWork* work) {
     if ((work->tm->flags & 8) == 0) {
-        func_080B83B8(&work->body2);
+        BosTmBodyReleaseEnemy(&work->body2);
     }
 
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
 }
-void func_080B9FC4(TmBodyWork* work) {
-    if (work->body2.unk_02C < work->body2.unk_02E / 2) {
+void BosTmBodyRollBossCard(TmBodyWork* work) {
+    if (work->body2.hp < work->body2.maxHp / 2) {
         if (GetRandom() % 100 <= 9) {
-            func_08083900(1);
+            RequestBossCardValue(1);
         } else if (GetRandom() % 90 <= 19) {
-            func_08083900(GetRandom() % 2 + 7);
+            RequestBossCardValue(GetRandom() % 2 + 7);
         } else {
-            func_08083900(GetRandom() % 4 + 3);
+            RequestBossCardValue(GetRandom() % 4 + 3);
         }
     } else if (GetRandom() % 100 <= 29) {
-        func_08083900(GetRandom() % 3 + 6);
+        RequestBossCardValue(GetRandom() % 3 + 6);
     } else {
-        func_08083900(GetRandom() % 6 + 1);
+        RequestBossCardValue(GetRandom() % 6 + 1);
     }
 }

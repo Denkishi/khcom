@@ -2,23 +2,23 @@
 #include "gba/syscall.h"
 #include "movie.h"
 
-extern u8 gUnk_0811CE44[];
-extern u8 gUnk_0811CE48[];
-extern u8 gUnk_0811D10C[];
+extern u8 MovieAudioCodecStart[];
+extern u8 MovieAudioCodecAdpcmSteps[];
+extern u8 MovieAudioCodecAdpcm[];
 extern u8 gUnk_0811D184[];
 extern u8 gUnk_0811D1A4[];
-extern u8 gUnk_0811D1B0[];
+extern u8 MovieAudioCodecEnd[];
 
-extern u8 gUnk_081196B4[];
+extern u8 MovieVideoCodecStart[];
 extern u8 MovieVideoCodecEnd[];
 extern u8 MovieVideoCodecConstants[];
-extern u8 gUnk_08119714[];
-extern u8 gUnk_08119DB8[];
-extern u8 gUnk_08119E70[];
-extern u8 gUnk_0811C9E4[];
-extern u8 gUnk_0811CDE4[];
+extern u8 MovieVideoCodecKeyFrame[];
+extern u8 MovieVideoCodecPostProcess[];
+extern u8 MovieDeltaCodecStart[];
+extern u8 MovieDeltaCodecOffsets[];
+extern u8 MovieDeltaCodecDecode[];
 
-const u8 gUnk_09D6D184[96] = {
+const u8 gMovieVideoCodecConstantsSrc[96] = {
     0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5,
     5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10, 10,
     11, 11, 11, 12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15, 16,
@@ -38,7 +38,7 @@ const u16 gUnk_09D6D1E4[89] = {
     22358, 24633, 27086, 29794, 32767,
 };
 
-const s32 gUnk_09D6D298[16] = {
+const s32 gMovieArmRotateMasks[16] = {
     0x000000FF, 0xC000003F, 0xF000000F, 0xFC000003,
     0xFF000000, 0x3FC00000, 0x0FF00000, 0x03FC0000,
     0x00FF0000, 0x003FC000, 0x000FF000, 0x0003FC00,
@@ -55,19 +55,19 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
     u32* pos;
     u32 instruction;
 
-    size1 = MovieVideoCodecEnd - gUnk_081196B4;
-    size2 = gUnk_0811CE44 - gUnk_08119E70;
-    p->unk_00 = gMovieHeap.iwramAlloc(size1);
-    memcpy(p->unk_00, gUnk_081196B4, size1);
-    *(void**)a = (u8*)p->unk_00 - (gUnk_081196B4 - gUnk_08119714);
-    *(void**)b = (u8*)p->unk_00 - (gUnk_081196B4 - gUnk_08119DB8);
-    memcpy((u8*)p->unk_00 - (gUnk_081196B4 - MovieVideoCodecConstants), gUnk_09D6D184, 96);
-    p->unk_04 = gMovieHeap.iwramAlloc(size2);
-    memcpy(p->unk_04, gUnk_08119E70, size2);
-    *(void**)c = (u8*)p->unk_04 - (gUnk_08119E70 - gUnk_0811CDE4);
-    table = (s32*)((u8*)p->unk_04 - (gUnk_08119E70 - gUnk_0811C9E4));
+    size1 = MovieVideoCodecEnd - MovieVideoCodecStart;
+    size2 = MovieAudioCodecStart - MovieDeltaCodecStart;
+    p->videoCodecCode = gMovieHeap.iwramAlloc(size1);
+    memcpy(p->videoCodecCode, MovieVideoCodecStart, size1);
+    *(void**)a = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecKeyFrame);
+    *(void**)b = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecPostProcess);
+    memcpy((u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecConstants), gMovieVideoCodecConstantsSrc, 96);
+    p->deltaCodecCode = gMovieHeap.iwramAlloc(size2);
+    memcpy(p->deltaCodecCode, MovieDeltaCodecStart, size2);
+    *(void**)c = (u8*)p->deltaCodecCode - (MovieDeltaCodecStart - MovieDeltaCodecDecode);
+    table = (s32*)((u8*)p->deltaCodecCode - (MovieDeltaCodecStart - MovieDeltaCodecOffsets));
 
-    for (pos = p->unk_04; (u8*)pos < (u8*)p->unk_04 + size2; pos++) {
+    for (pos = p->deltaCodecCode; (u8*)pos < (u8*)p->deltaCodecCode + size2; pos++) {
         instruction = *pos;
         if ((instruction & 0xEF000000) == 0xEF000000) {
             u8 kind;
@@ -104,7 +104,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 encoded |= ((instruction & 0x0000F000) >> 12) << 16;
                 value = (w << 1) * ((instruction & 0xF0) >> 4) + offsets[instruction & 15];
                 for (shift = 0; shift < 16; shift++) {
-                    if ((value & gUnk_09D6D298[shift]) == value) {
+                    if ((value & gMovieArmRotateMasks[shift]) == value) {
                         j = 32 - shift * 2;
                         rotated = ((value & ((1U << j) - 1)) << (32 - j)) + (value >> j);
                         immediate = rotated & 0xFF;
@@ -121,7 +121,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 if ((instruction & 15) == 0) {
                     value = (w << 1) >> 4;
                     for (j = 0; j < 16; j++) {
-                        if ((value & gUnk_09D6D298[j]) == value) {
+                        if ((value & gMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
                             encoded = ((value & ((1U << shift) - 1)) << (32 - shift)) + (value >> shift);
                             rotate = encoded & 0xFF;
@@ -132,7 +132,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
                 } else {
                     value = (h << 1) >> 4;
                     for (j = 0; j < 16; j++) {
-                        if ((value & gUnk_09D6D298[j]) == value) {
+                        if ((value & gMovieArmRotateMasks[j]) == value) {
                             shift = 32 - j * 2;
                             encoded = ((value & ((1U << shift) - 1)) << (32 - shift)) + (value >> shift);
                             rotate = encoded & 0xFF;
@@ -166,19 +166,19 @@ void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
     s16* dest;
     u32 pad;
 
-    size = gUnk_0811D1B0 - gUnk_0811CE44;
-    p->unk_08 = gMovieHeap.iwramAlloc(size);
-    memcpy(p->unk_08, gUnk_0811CE44, size);
+    size = MovieAudioCodecEnd - MovieAudioCodecStart;
+    p->audioCodecCode = gMovieHeap.iwramAlloc(size);
+    memcpy(p->audioCodecCode, MovieAudioCodecStart, size);
     switch (b) {
     case 0:
-        *(void**)a = (u8*)p->unk_08 - (gUnk_0811CE44 - gUnk_0811D184);
+        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - gUnk_0811D184);
         break;
     case 1:
-        *(void**)a = (u8*)p->unk_08 - (gUnk_0811CE44 - gUnk_0811D1A4);
+        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - gUnk_0811D1A4);
         break;
     case 2:
-        *(void**)a = (u8*)p->unk_08 - (gUnk_0811CE44 - gUnk_0811D10C);
-        dest = (s16*)((u8*)p->unk_08 - (gUnk_0811CE44 - gUnk_0811CE48));
+        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecAdpcm);
+        dest = (s16*)((u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecAdpcmSteps));
         for (i = 0; i <= 0x58; i++) {
             v = gUnk_09D6D1E4[i];
             for (j = 0; j <= 3; j++) {
@@ -204,7 +204,7 @@ MoviePlayer* MovieOpen(void* a) {
     p = gMovieHeap.iwramAlloc(sizeof(MoviePlayer));
     p->data = a;
     p->videoDone = 0;
-    p->unk_8D = 2;
+    p->audioDone = 2;
     q = a;
     p->width = *q;
     q++;
@@ -242,15 +242,15 @@ MoviePlayer* MovieOpen(void* a) {
         gMovieHeap.iwramFree(p);
         return 0;
     }
-    MovieSetupVideoCodec(p, &p->unk_7C, &p->unk_80, &p->unk_84, p->width, p->height);
+    MovieSetupVideoCodec(p, &p->decodeKeyFrame, &p->postProcessFrame, &p->decodeDeltaFrame, p->width, p->height);
     p->frameBuf = gMovieHeap.ewramAlloc(p->width * p->height * 2);
     p->workBuf = gMovieHeap.ewramAlloc(p->width * p->height * 2);
 
     if (p->channels != 0) {
-        p->unk_8D = 0;
+        p->audioDone = 0;
         len = *q;
         q++;
-        p->unk_54 = (u8*)q;
+        p->audioBlockTypes = (u8*)q;
         q = (u32*)((u8*)q + len);
         len = *q;
         q++;
@@ -263,7 +263,7 @@ MoviePlayer* MovieOpen(void* a) {
         p->audioPos = (u8*)q;
         q = (u32*)((u8*)q + n);
         p->audioBuf = gMovieHeap.ewramAlloc(0x2000);
-        MovieSetupAudioCodec(p, &p->unk_88, p->audioCodecId);
+        MovieSetupAudioCodec(p, &p->decodeAudio, p->audioCodecId);
     }
     p->decodeBuf = gMovieHeap.iwramAlloc(v1 > v2 ? v1 : v2);
     p->frameIndex = 0;
@@ -276,9 +276,9 @@ MoviePlayer* MovieOpen(void* a) {
 void MovieFree(MoviePlayer* a) {
     MoviePlayer* p = a;
 
-    gMovieHeap.iwramFree(p->unk_00);
-    gMovieHeap.iwramFree(p->unk_04);
-    gMovieHeap.iwramFree(p->unk_08);
+    gMovieHeap.iwramFree(p->videoCodecCode);
+    gMovieHeap.iwramFree(p->deltaCodecCode);
+    gMovieHeap.iwramFree(p->audioCodecCode);
     gMovieHeap.ewramFree(p->frameBuf);
     gMovieHeap.ewramFree(p->workBuf);
 
@@ -295,14 +295,14 @@ void MovieDecodeFrame(MoviePlayer* a) {
 
     switch (p->frameTypes[p->frameIndex]) {
     case 0:
-        p->unk_7C(p->workBuf, p->width, p->height, p->decodeBuf);
+        p->decodeKeyFrame(p->workBuf, p->width, p->height, p->decodeBuf);
         break;
     case 1:
-        p->unk_84(p->frameBuf, p->workBuf, p->decodeBuf);
+        p->decodeDeltaFrame(p->frameBuf, p->workBuf, p->decodeBuf);
         break;
     case 2:
-        p->unk_84(p->frameBuf, p->workBuf, p->decodeBuf);
-        p->unk_80(p->workBuf, p->width, p->height);
+        p->decodeDeltaFrame(p->frameBuf, p->workBuf, p->decodeBuf);
+        p->postProcessFrame(p->workBuf, p->width, p->height);
         break;
     }
     p->frameDecoded = 1;
@@ -397,7 +397,7 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
     void* q;
     MoviePlayer* p = a;
 
-    if (p->unk_8D != 0) {
+    if (p->audioDone != 0) {
         return;
     }
     CpuFastSet(p->audioPos, p->decodeBuf, (*(p->audioBlockSizes + p->audioBlockIndex) >> 2) & 0xFFFF);
@@ -405,7 +405,7 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
 
     if (p->channels == 1) {
         q = (u8*)p->decodeBuf + 4;
-        p->unk_88(q, p->audioBuf, n);
+        p->decodeAudio(q, p->audioBuf, n);
         CpuFastSet(p->audioBuf, dstA1, (lenA1 / 4) & 0x1FFFFF);
 
         if (lenA2 != 0) {
@@ -414,14 +414,14 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
     } else {
         n >>= 1;
         q = (u8*)p->decodeBuf + 4;
-        p->unk_88(q, p->audioBuf, n);
+        p->decodeAudio(q, p->audioBuf, n);
         q = (u8*)q + ((*(p->audioBlockSizes + p->audioBlockIndex) - 4) >> 1);
         CpuFastSet(p->audioBuf, dstA1, (lenA1 / 4) & 0x1FFFFF);
 
         if (lenA2 != 0) {
             CpuFastSet((u8*)p->audioBuf + lenA1, dstA2, (lenA2 / 4) & 0x1FFFFF);
         }
-        p->unk_88(q, p->audioBuf, n);
+        p->decodeAudio(q, p->audioBuf, n);
         CpuFastSet(p->audioBuf, dstB1, (lenB1 / 4) & 0x1FFFFF);
 
         if (lenB2 != 0) {
@@ -434,9 +434,9 @@ s32 MovieAdvanceAudioBlock(MoviePlayer* a) {
     MoviePlayer* p = a;
 
     p->audioBlockIndex++;
-    if (p->unk_8D != 0 || p->audioBlockIndex == p->audioBlockCount) {
-        if (p->unk_8D != 2) {
-            p->unk_8D = 1;
+    if (p->audioDone != 0 || p->audioBlockIndex == p->audioBlockCount) {
+        if (p->audioDone != 2) {
+            p->audioDone = 1;
         }
         return 0;
     }
@@ -453,11 +453,11 @@ s32 MovieSyncFrame(MoviePlayer* a) {
     float target;
     MoviePlayer* p = a;
 
-    if (p->videoDone != 0 && p->unk_8D != 0) {
+    if (p->videoDone != 0 && p->audioDone != 0) {
         p->videoDone = 0;
 
-        if (p->unk_8D != 2) {
-            p->unk_8D = 0;
+        if (p->audioDone != 2) {
+            p->audioDone = 0;
         }
         p->audioBlockIndex = 0;
         p->audioPos = p->audioData;

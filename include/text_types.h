@@ -15,8 +15,8 @@ typedef struct LocalizedText {
 
 typedef struct TextSlot {
     void* tiles;
-    u8 unk_04;
-    s8 unk_05;
+    u8 useAlternatePalette;
+    s8 advance;
     u8 unk_06;
     u8 unk_07;
 } TextSlot;

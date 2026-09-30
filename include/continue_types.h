@@ -19,13 +19,13 @@ typedef struct ContinueWork {
     s32 y;
     s32 unk_58;
     s32 unk_5C;
-    s32 unk_60;
+    s32 cursor;
     u8 unk_64;
     u8 unk_65;
-    u16 unk_66;
+    u16 blendAlpha;
     u8 unk_68[2];
-    u8 unk_6A;
-    s8 unk_6B;
+    u8 state;
+    s8 steps;
 } ContinueWork;
 
 #endif

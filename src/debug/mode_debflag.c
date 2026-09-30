@@ -4,17 +4,17 @@
 #include "mode_debflag.h"
 #include "gba/keys.h"
 
-static s8 gUnk_020348C0;
-static s8 gUnk_020348C1;
-static const DebugFlag* gUnk_020348C4;
+static s8 sDebflagCursor;
+static s8 sDebflagCount;
+static const DebugFlag* sDebflagList;
 #ifdef VERSION_EU
 static u32 gUnkEu_020348D4;
 #endif
 
 
-u8 gUnk_02039B94 EWRAM_COMMON(4);
+u8 gDebflagReturnToMap EWRAM_COMMON(4);
 
-const DebugFlag gUnk_08130BE8[14] = {
+const DebugFlag gDebugFlagList[14] = {
     { "\x82\x6c\x82\x74\x82\x73\x82\x64\x82\x6a\x82\x68\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x46", 0x2 },
     { "\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78\x82\x6c\x82\x74\x82\x73\x82\x64\x82\x6a\x82\x68\x81\x46", 0x40 },
     { "\x82\x66\x82\x64\x82\x6d\x82\x73\x82\x6b\x82\x64\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78\x81\x46", 0x200 },
@@ -31,7 +31,7 @@ const DebugFlag gUnk_08130BE8[14] = {
     { "\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78\x82\x62\x82\x60\x82\x71\x82\x63\x81\x40\x81\x40\x81\x46", 0x4000 },
 };
 
-const DebugFlag gUnk_08130DE0[7] = {
+const DebugFlag gDebugFlagListMap[7] = {
     { "\x82\x6c\x82\x74\x82\x73\x82\x64\x82\x6a\x82\x68\x81\x40\x81\x40\x81\x40\x81\x40\x81\x40\x81\x46", 0x2 },
     { "\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78\x82\x6c\x82\x74\x82\x73\x82\x64\x82\x6a\x82\x68\x81\x46", 0x40 },
     { "\x82\x66\x82\x64\x82\x6d\x82\x73\x82\x6b\x82\x64\x82\x64\x82\x6d\x82\x64\x82\x6c\x82\x78\x81\x46", 0x200 },
@@ -47,28 +47,28 @@ void mode_debflag_0(s32 arg) {
     SetBgMode0();
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
-    func_0805FA8C(0, 0x5400, 0x500);
-    func_0805FA60(0, gWhitePalette, 0x20, 0x0F);
-    gUnk_020348C0 = 0;
-    func_0805FCB0(0, 0, 2, "\x81\x84");
+    DebugTextInit(0, 0x5400, 0x500);
+    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    sDebflagCursor = 0;
+    DebugTextPrint(0, 0, 2, "\x81\x84");
 
     if (arg != 0) {
-        gUnk_020348C1 = 7;
-        gUnk_020348C4 = gUnk_08130DE0;
-        gUnk_02039B94 = 1;
+        sDebflagCount = 7;
+        sDebflagList = gDebugFlagListMap;
+        gDebflagReturnToMap = 1;
     } else {
-        gUnk_020348C1 = 14;
-        gUnk_020348C4 = gUnk_08130BE8;
-        gUnk_02039B94 = 0;
+        sDebflagCount = 14;
+        sDebflagList = gDebugFlagList;
+        gDebflagReturnToMap = 0;
     }
 
-    for (i = 0; i < gUnk_020348C1; i++) {
-        func_0805FCB0(0x0C, i * 9, 2, gUnk_020348C4[i].name);
+    for (i = 0; i < sDebflagCount; i++) {
+        DebugTextPrint(0x0C, i * 9, 2, sDebflagList[i].name);
 
-        if (gUnk_03006C10 & gUnk_020348C4[i].mask) {
-            func_0805FCB0(0x78, i * 9, 2, "\x82\x6e\x82\x6d\x81\x40");
+        if (gDebugFlags & sDebflagList[i].mask) {
+            DebugTextPrint(0x78, i * 9, 2, "\x82\x6e\x82\x6d\x81\x40");
         } else {
-            func_0805FCB0(0x78, i * 9, 2, "\x82\x6e\x82\x65\x82\x65");
+            DebugTextPrint(0x78, i * 9, 2, "\x82\x6e\x82\x65\x82\x65");
         }
     }
 }
@@ -77,52 +77,52 @@ void mode_debflag_1(void) {
     u8 prev;
     const DebugFlag* entry;
 
-    prev = gUnk_020348C0;
+    prev = sDebflagCursor;
 
     if (GetKeysRepeat() & DPAD_UP) {
-        gUnk_020348C0--;
+        sDebflagCursor--;
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        gUnk_020348C0++;
+        sDebflagCursor++;
     }
 
-    if (prev != gUnk_020348C0) {
-        if (gUnk_020348C0 < 0) {
-            gUnk_020348C0 = gUnk_020348C1 - 1;
-        } else if (gUnk_020348C0 >= gUnk_020348C1) {
-            gUnk_020348C0 = 0;
+    if (prev != sDebflagCursor) {
+        if (sDebflagCursor < 0) {
+            sDebflagCursor = sDebflagCount - 1;
+        } else if (sDebflagCursor >= sDebflagCount) {
+            sDebflagCursor = 0;
         }
 
-        func_0805FCB0(0, prev * 9, 2, "\x81\x40");
-        func_0805FCB0(0, gUnk_020348C0 * 9, 2, "\x81\x84");
+        DebugTextPrint(0, prev * 9, 2, "\x81\x40");
+        DebugTextPrint(0, sDebflagCursor * 9, 2, "\x81\x84");
     }
 
     if (GetKeysPressed() & (DPAD_RIGHT | DPAD_LEFT)) {
-        entry = &gUnk_020348C4[gUnk_020348C0];
-        gUnk_03006C10 ^= entry->mask;
+        entry = &sDebflagList[sDebflagCursor];
+        gDebugFlags ^= entry->mask;
 
-        if (gUnk_03006C10 & entry->mask) {
-            func_0805FCB0(0x78, gUnk_020348C0 * 9, 2, "\x82\x6e\x82\x6d\x81\x40");
+        if (gDebugFlags & entry->mask) {
+            DebugTextPrint(0x78, sDebflagCursor * 9, 2, "\x82\x6e\x82\x6d\x81\x40");
         } else {
-            func_0805FCB0(0x78, gUnk_020348C0 * 9, 2, "\x82\x6e\x82\x65\x82\x65");
+            DebugTextPrint(0x78, sDebflagCursor * 9, 2, "\x82\x6e\x82\x65\x82\x65");
         }
     }
 
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON)) {
-        if (gUnk_02039B94 != 0) {
-            func_080E04EC();
+        if (gDebflagReturnToMap != 0) {
+            RequestMapMode();
         } else {
             ModeRequest(&gModeDebug, 0);
         }
     } else {
-        func_080605A4(0);
-        func_08060598();
+        DebugTextDraw(0);
+        DebugTextClear();
     }
 }
 
 void mode_debflag_2(void) {
-    func_080609A0();
+    DebugTextDestroy();
 }
 
 Mode gModeDebflag = { "mode_debflag", mode_debflag_0, mode_debflag_1, mode_debflag_2 };

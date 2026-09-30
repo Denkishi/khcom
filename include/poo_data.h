@@ -5,14 +5,14 @@
 #include "anim.h"
 
 typedef struct PooPoint {
-    s32 unk_00;
-    s32 unk_04;
+    s32 x;
+    s32 y;
 } PooPoint;
 
 typedef struct PooSpot {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
+    s32 x;
+    s32 y;
+    s32 z;
 } PooSpot;
 
 typedef struct PooMapBgDesc {
@@ -28,10 +28,10 @@ typedef struct PooMapBgDesc {
     u8 mapHeight;
 } PooMapBgDesc;
 
-extern const PooSpot gUnk_096FC05C[];
-extern const PooSpot gUnk_096FC2F0[];
-extern const PooPoint gUnk_096FC6B0[];
+extern const PooSpot gPooh04FrameOffsets[];
+extern const PooSpot gPooh04aFrameOffsets[];
+extern const PooPoint gPoohStumpCircle[];
 extern const PooMapBgDesc gPooMapBgDesc;
-extern const PooSpot gUnk_096FD778[];
+extern const PooSpot gPooCabbageStackOffsets[];
 
 #endif

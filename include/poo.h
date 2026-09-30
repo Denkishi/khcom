@@ -39,21 +39,21 @@
 #include "btl_api.h"
 #include "gba/io_reg.h"
 typedef struct PooHit {
-    Collider* unk_00;
-    u16 unk_04;
-    u8 unk_06;
+    Collider* collider;
+    u16 message;
+    u8 enabled;
     u8 unk_07;
 } PooHit;
 
 typedef struct PoohInteractionRegistry {
-    PooHit unk_00[6];
-    u16 unk_30;
-    u8 unk_32;
+    PooHit entries[6];
+    u16 count;
+    u8 rabbitTalkBlocked;
 } PoohInteractionRegistry;
 
 typedef struct PooMapWork {
-    u8 unk_00;
-    u8 unk_01;
+    u8 mapWidth;
+    u8 mapHeight;
     u8 unk_02[0x02];
     TaskPool tasks;
 } PooMapWork;
@@ -72,23 +72,23 @@ typedef struct PooShadowWork {
 typedef struct PooShadowArgs {
     PooPos* pos;
     PooShadowInfo* shadowInfo;
-    s32 unk_08;
+    s32 scale;
 } PooShadowArgs;
 
 typedef struct PooTileDesc {
-    s32 unk_00;
-    s32 unk_04;
-    u32 unk_08;
+    s32 x;
+    s32 y;
+    u32 kind;
 } PooTileDesc;
 
 typedef struct PooGaugeWork {
     void* tiles;
     ObjPalette* palette;
     void* gfx;
-    void* unk_0C;
-    u8 unk_10;
+    void* paletteSrc;
+    u8 warning;
     u8 unk_11;
-    u16 unk_12;
+    u16 blinkTimer;
 } PooGaugeWork;
 
 typedef struct PooMapBornWork {
@@ -102,8 +102,8 @@ typedef struct PooMapBornWork {
     u8 unk_7D[0x03];
     TaskPool tasks;
     Task* task;
-    u8 unk_98;
-    u8 unk_99;
+    u8 colliderActive;
+    u8 armed;
     u8 unk_9A[0x02];
 } PooMapBornWork;
 
@@ -114,7 +114,7 @@ typedef struct PooScaleWork {
     void* palette;
     PooPos* pos;
     AnimState anim;
-    s32 unk_2C;
+    s32 scale;
     void* gfx;
 } PooScaleWork;
 
@@ -127,33 +127,33 @@ typedef struct PooBalloonObjWork {
 } PooBalloonObjWork;
 
 typedef struct PooNode {
-    u16 unk_00;
-    u16 unk_02;
+    u16 weight;
+    u16 baseWeight;
     u16 unk_04;
     u16 unk_06;
-    void* unk_08;
+    void* pos;
     ListNode node;
 } PooNode;
 
 typedef char PooNode_size[(sizeof(PooNode) == 0x20) ? 1 : -1];
 
 typedef struct PooFrame {
-    u16 unk_00;
+    u16 duration;
     u16 unk_02;
 } PooFrame;
 
 typedef struct PooAnimData {
     u8 unk_00[0x04];
-    u16 unk_04;
+    u16 frameCount;
     u16 unk_06;
-    PooFrame unk_08[1];
+    PooFrame frames[1];
 } PooAnimData;
 
 typedef struct PooAnimDesc {
     void* unk_00;
     void* unk_04;
-    void* unk_08;
-    u16 unk_0C;
+    void* tiles;
+    u16 animId;
     u16 unk_0E;
 } PooAnimDesc;
 
@@ -161,7 +161,7 @@ typedef struct PooHoneyWork {
     void* tiles;
     void* palette;
     AnimState anim;
-    u16 unk_20;
+    u16 tileBytes;
     u16 unk_22;
     PooPos pos;
     PooPos pos2;
@@ -180,7 +180,7 @@ typedef struct PooPileArgs {
     s32 x;
     s32 y;
     u8 unk_08[0x08];
-    s32 unk_10;
+    s32 stage;
 } PooPileArgs;
 
 typedef struct PooPileWork {
@@ -194,11 +194,11 @@ typedef struct PooPileWork {
     u8 unk_30[0x04];
     Collider collider;
     PooNode node;
-    u16 unk_B0;
+    u16 stage;
     u16 unk_B2;
     TaskPool tasks;
     Task* task;
-    u8 unk_CC;
+    u8 colliderActive;
     u8 unk_CD[0x03];
 } PooPileWork;
 
@@ -207,9 +207,9 @@ typedef struct PooPigletWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    u8 unk_24;
+    u8 flipped;
     u8 unk_25;
-    u16 unk_26;
+    u16 animIndex;
     s32 x;
     s32 y;
     s32 z;
@@ -219,8 +219,8 @@ typedef struct PooPigletWork {
     u32 state;
     u16 timer;
     u16 unk_AE;
-    s32 unk_B0;
-    u16 unk_B4;
+    s32 speed;
+    u16 interactionId;
     u16 unk_B6;
 } PooPigletWork;
 
@@ -235,12 +235,12 @@ typedef struct PooEeyoreWork {
     s32 unk_30;
     Collider collider;
     TaskPool tasks;
-    s32 unk_A4;
-    u16 unk_A8;
-    u16 unk_AA;
-    u8 unk_AC;
+    s32 animId;
+    u16 tileBytes;
+    u16 moveTimer;
+    u8 colliderActive;
     u8 unk_AD;
-    u16 unk_AE;
+    u16 interactionId;
 } PooEeyoreWork;
 
 typedef struct PooRabbitWork {
@@ -248,7 +248,7 @@ typedef struct PooRabbitWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    u8 unk_24;
+    u8 flipped;
     u8 unk_25[0x03];
     s32 x;
     s32 y;
@@ -256,16 +256,16 @@ typedef struct PooRabbitWork {
     s32 unk_34;
     TaskPool tasks;
     Collider collider;
-    s32 unk_A8;
-    u16 unk_AC;
-    u16 unk_AE;
-    u16 unk_B0;
+    s32 animIndex;
+    u16 timer;
+    u16 interactionId;
+    u16 waitTimer;
     u16 unk_B2;
 } PooRabbitWork;
 
 typedef struct PooGfxDesc {
-    void* unk_00;
-    u16 unk_04;
+    void* gfxTable;
+    u16 gfxCount;
     u16 unk_06;
 } PooGfxDesc;
 
@@ -274,30 +274,30 @@ typedef struct PooTiggerWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    u8 unk_24;
+    u8 flipped;
     u8 unk_25;
-    u16 unk_26;
+    u16 animIndex;
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_34;
+    s32 ground;
     Collider collider;
     TaskPool tasks;
-    s32 unk_A8;
-    s32 unk_AC;
-    s32 unk_B0;
+    s32 targetX;
+    s32 targetY;
+    s32 targetZ;
     u8 unk_B4[0x04];
-    u8 unk_B8;
+    u8 heading;
     u8 unk_B9;
-    s16 unk_BA;
-    u16 unk_BC;
-    u16 unk_BE;
-    s32 unk_C0;
+    s16 hopTimer;
+    u16 stepTimer;
+    u16 step;
+    s32 mode;
     u8 unk_C4[0x04];
     PooShadowInfo shadowInfo;
-    u8 unk_D0;
-    u8 unk_D1;
-    u16 unk_D2;
+    u8 onCollider;
+    u8 isTigger;
+    u16 tileBytes;
 } PooTiggerWork;
 
 typedef struct PooBalloonWork {
@@ -310,8 +310,8 @@ typedef struct PooBalloonWork {
     PooNode node;
     TaskPool tasks;
     Task* task;
-    Task* unk_C8;
-    u16 unk_CC;
+    Task* freeBalloonTask;
+    u16 tileBytes;
     u16 angle;
 } PooBalloonWork;
 
@@ -325,7 +325,7 @@ typedef struct PooOwlBalloonWork {
     PooNode node;
     TaskPool tasks;
     Task* task;
-    u16 unk_C8;
+    u16 tileBytes;
     u16 unk_CA;
 } PooOwlBalloonWork;
 
@@ -333,37 +333,37 @@ typedef struct PooPrizeWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_0C;
+    s32 ground;
     Collider collider;
     void* tiles;
     void* palette;
     void* gfx;
     void* gfx2;
     void (*update)(struct PooPrizeWork* w);
-    u16 unk_80;
-    u16 unk_82;
+    u16 kind;
+    u16 timer;
     s32 vz;
-    s32 unk_88;
+    s32 speed;
     u8 angle;
-    u8 unk_8D;
+    u8 spin;
     u16 unk_8E;
-    s32 unk_90;
-    u16 unk_94;
-    u8 unk_96;
-    u8 unk_97;
+    s32 scale;
+    u16 amount;
+    u8 visible;
+    u8 collected;
 } PooPrizeWork;
 
 typedef struct PooEeyoreTailWork {
     void* tiles;
     void* palette;
     void* gfx;
-    u32 unk_0C;
-    u32 unk_10;
-    s32 unk_14;
+    u32 x;
+    u32 y;
+    s32 z;
     s32 unk_18;
-    u16 unk_1C;
+    u16 tileBytes;
     u16 unk_1E;
-    u32 unk_20;
+    u32 height;
     TaskPool tasks;
 } PooEeyoreTailWork;
 
@@ -384,29 +384,29 @@ typedef struct PooFreeBalloonWork {
     PooPos pos5;
     s16 x2;
     s16 y2;
-    u16 unk_90;
+    u16 timer;
     u16 unk_92;
     PooPos* pos;
 } PooFreeBalloonWork;
 
 typedef struct PooMapObjHitDesc {
-    void* unk_00;
-    u16 unk_04;
+    void* tiles;
+    u16 gfxCount;
     u16 unk_06;
-    void* unk_08;
-    void* unk_0C;
-    void* unk_10;
+    void* anims;
+    void* gfxTable;
+    void* palette;
 } PooMapObjHitDesc;
 
 typedef struct PooSpawn {
-    s32 unk_00;
-    s32 unk_04;
+    s32 x;
+    s32 y;
     TaskDesc* desc;
 } PooSpawn;
 
 typedef struct PooSpawnArgs {
     PooPos pos;
-    u16 unk_10;
+    u16 prizeId;
     u16 unk_12;
 } PooSpawnArgs;
 
@@ -415,8 +415,8 @@ typedef struct PooMapObjHitArgs {
     s32 y;
     u8 unk_08[0x08];
     const PooMapObjHitDesc* desc;
-    s32 unk_14;
-    u16 unk_18;
+    s32 kind;
+    u16 prizeId;
     u16 unk_1A;
 } PooMapObjHitArgs;
 
@@ -430,12 +430,12 @@ typedef struct PooMapObjHitWork {
     s32 z;
     u8 unk_30[0x04];
     const PooMapObjHitDesc* desc;
-    u8 unk_38;
+    u8 playing;
     u8 unk_39;
-    u16 unk_3A;
+    u16 tileBytes;
     Collider collider;
-    s32 unk_98;
-    u16 unk_9C;
+    s32 kind;
+    u16 prizeId;
     u16 unk_9E;
 } PooMapObjHitWork;
 
@@ -449,10 +449,10 @@ typedef struct PooLeafWork {
     s32 z;
     u8 unk_30[0x04];
     Collider collider;
-    u8 unk_90;
+    u8 playing;
     u8 unk_91;
-    u16 unk_92;
-    u16 unk_94;
+    u16 tileBytes;
+    u16 prizeId;
     u16 unk_96;
 } PooLeafWork;
 
@@ -463,10 +463,10 @@ typedef struct PooOwlWork {
     AnimState anim;
     PooPos pos;
     TaskPool tasks;
-    u8 unk_48;
-    u8 unk_49;
-    u16 unk_4A;
-    u16 unk_4C;
+    u8 flying;
+    u8 descending;
+    u16 flyTimer;
+    u16 tileBytes;
     u16 unk_4E;
 } PooOwlWork;
 
@@ -486,8 +486,8 @@ typedef struct PooFootmarkWork {
     void* tiles;
     void* palette;
     void* gfx;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 x;
+    s32 y;
     s32 unk_14;
     u8 unk_18[0x04];
     PooNode node;
@@ -513,7 +513,7 @@ typedef struct PooVegetableWork {
     s32 y;
     s32 z;
     s32 unk_30;
-    u16 unk_34;
+    u16 tileBytes;
     u16 unk_36;
     Collider collider;
 } PooVegetableWork;
@@ -531,11 +531,11 @@ typedef struct PooTanpopoWork {
     s32 z;
     u8 unk_50[0x04];
     Collider collider;
-    u8 unk_B0;
+    u8 playing;
     u8 unk_B1;
-    u16 unk_B2;
-    u16 unk_B4;
-    u16 unk_B6;
+    u16 tileBytes;
+    u16 tileBytes2;
+    u16 prizeId;
 } PooTanpopoWork;
 
 typedef struct PooHoneycombWork {
@@ -545,25 +545,25 @@ typedef struct PooHoneycombWork {
     AnimState anim;
     s32 x;
     s32 y;
-    s32 unk_2C;
+    s32 z;
     s32 unk_30;
-    u16 unk_34;
+    u16 tileBytes;
     u16 unk_36;
     Collider collider;
-    u16 unk_94;
+    u16 shakeTimer;
     u16 angle;
-    s32 unk_98;
-    u8 unk_9C;
+    s32 shakeX;
+    u8 colliderActive;
     u8 unk_9D[0x03];
 } PooHoneycombWork;
 
 typedef struct PooBeeSub {
-    s32 unk_00;
-    s32 unk_04;
-    s32 unk_08;
+    s32 x;
+    s32 y;
+    s32 z;
     u8 unk_0C[0x04];
-    s32 unk_10;
-    s32 unk_14;
+    s32 targetX;
+    s32 targetY;
     u8 unk_18[0x08];
 } PooBeeSub;
 
@@ -573,19 +573,19 @@ typedef struct PooBeeWork {
     void* gfx;
     AnimState anim;
     PooBeeSub sub[4];
-    s32 unk_A4;
-    s32 unk_A8;
-    s32 unk_AC;
+    s32 x;
+    s32 y;
+    s32 z;
     s32 unk_B0;
-    s32 unk_B4;
-    s32 unk_B8;
+    s32 dx;
+    s32 dy;
     u8 unk_BC[0x0A];
-    u16 unk_C6;
-    u8 unk_C8;
+    u16 releaseTimer;
+    u8 setupPending;
     u8 unk_C9[0x03];
 } PooBeeWork;
 
-typedef struct PooCamera {
+typedef struct PooWagonWork {
     void* tiles;
     void* palette;
     void* gfx;
@@ -595,26 +595,26 @@ typedef struct PooCamera {
     void* gfx3;
     PooPos pos;
     PooPos pos2;
-    u8 unk_3C;
+    u8 poohAboard;
     u8 unk_3D;
     u16 timer;
     u16 angle;
     u16 unk_42;
-} PooCamera;
+} PooWagonWork;
 
 typedef struct PooWheelWork {
     void* tiles;
     void* palette;
     void* gfx;
     AnimState anim;
-    s32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
+    s32 x;
+    s32 y;
+    s32 z;
     s32 unk_30;
-    u16 unk_34;
-    u16 unk_36;
-    s32 unk_38;
-    s32 unk_3C;
+    u16 tileBytes;
+    u16 animId;
+    s32 speed;
+    s32 startX;
     u8 unk_40;
     u8 unk_41[0x03];
 } PooWheelWork;
@@ -628,28 +628,28 @@ typedef struct PooCabbageWork {
     s32 y;
     s32 z;
     s32 unk_30;
-    s32 unk_34;
-    s32 unk_38;
-    s32 unk_3C;
+    s32 targetX;
+    s32 targetY;
+    s32 targetZ;
     s32 unk_40;
     Collider collider;
-    s32 unk_A0;
+    s32 hopHeight;
     u16 state;
     u16 unk_A6;
     TaskPool tasks;
     Task* task;
-    s32 unk_C0;
+    s32 speed;
     s32 vz;
     u8 angle;
     u8 unk_C9;
-    u16 unk_CA;
-    u16 unk_CC;
-    u16 unk_CE;
-    u8 unk_D0;
-    u8 unk_D1;
-    u8 unk_D2;
+    u16 moveTimer;
+    u16 zTimer;
+    u16 age;
+    u8 colliderActive;
+    u8 wasOnScreen;
+    u8 animating;
     u8 unk_D3;
-    u16 unk_D4;
+    u16 stackIndex;
     u16 unk_D6;
 } PooCabbageWork;
 
@@ -664,11 +664,11 @@ typedef struct PooMapButterflyWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    s32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
+    s32 x;
+    s32 y;
+    s32 z;
     u8 unk_30[0x04];
-    u8 unk_34;
+    u8 onScreen;
     u8 unk_35[0x03];
 } PooMapButterflyWork;
 
@@ -676,22 +676,22 @@ typedef struct PooBflyPart {
     void* tiles;
     void* gfx;
     AnimState anim;
-    s32 unk_20;
-    s32 unk_24;
-    s32 unk_28;
+    s32 x;
+    s32 y;
+    s32 z;
     s32 unk_2C;
-    s32 unk_30;
-    s32 unk_34;
-    s32 unk_38;
-    s32 unk_3C;
-    s32 unk_40;
-    s32 unk_44;
-    u8 unk_48;
+    s32 pointAX;
+    s32 pointAY;
+    s32 pointBX;
+    s32 pointBY;
+    s32 targetX;
+    s32 targetY;
+    u8 angle;
     u8 unk_49[0x03];
-    s32 unk_4C;
-    u8 unk_50;
+    s32 dirIndex;
+    u8 flipped;
     u8 unk_51;
-    u16 unk_52;
+    u16 timer;
     u8 unk_54[0x14];
 } PooBflyPart;
 
@@ -700,11 +700,11 @@ typedef struct PooMapBeeWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    s32 unk_24;
-    s32 unk_28;
-    s32 unk_2C;
+    s32 x;
+    s32 y;
+    s32 z;
     u8 unk_30[0x04];
-    u8 unk_34;
+    u8 onScreen;
     u8 unk_35;
     u16 state;
 } PooMapBeeWork;
@@ -714,25 +714,25 @@ typedef struct PooZzzWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    void* unk_24;
+    void* pos;
 } PooZzzWork;
 
-typedef struct PooStumpDesc {
+typedef struct PooPileDesc {
     s32 x;
     s32 y;
-    u16 unk_08;
+    u16 kind;
     u16 unk_0A;
-} PooStumpDesc;
+} PooPileDesc;
 
 typedef struct PooCabbageAfterEventWork {
     void* tiles;
     void* palette;
     void* gfx;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 x;
+    s32 y;
     s32 unk_14;
     s32 unk_18;
-    u16 unk_1C;
+    u16 tileBytes;
     u16 unk_1E;
 } PooCabbageAfterEventWork;
 
@@ -747,8 +747,8 @@ typedef struct PooRabbitAfterEventWork {
     s32 unk_30;
     TaskPool tasks;
     Collider collider;
-    u16 unk_A4;
-    u16 unk_A6;
+    u16 tileBytes;
+    u16 interactionId;
 } PooRabbitAfterEventWork;
 
 typedef struct PooBeeAfterEventWork {
@@ -759,14 +759,14 @@ typedef struct PooBeeAfterEventWork {
     void* gfx2;
     AnimState anim;
     AnimState anim2;
-    s32 unk_44;
-    s32 unk_48;
-    s32 unk_4C;
+    s32 x;
+    s32 y;
+    s32 z;
     u32 unk_50;
 } PooBeeAfterEventWork;
 
 typedef struct PooMapAnimeWork {
-    UnkStruct_080DDDDC unk_00[2];
+    BosMapanimeState anims[2];
 } PooMapAnimeWork;
 
 typedef struct PooSparkWork {
@@ -778,11 +778,11 @@ typedef struct PooSparkWork {
 } PooSparkWork;
 
 typedef struct PooButterflyWork {
-    PooBflyPart unk_00[2];
+    PooBflyPart parts[2];
     void* palette;
-    s32 unk_D4;
-    s32 unk_D8;
-    s32 unk_DC;
+    s32 x;
+    s32 y;
+    s32 z;
     s32 unk_E0;
 } PooButterflyWork;
 
@@ -793,15 +793,15 @@ typedef struct PooSoraWork {
     void* gfx;
     TaskPool tasks;
     Collider collider;
-    u32 unk_94;
+    u32 state;
     s16 timer;
     s16 unk_9A;
-    s32 unk_9C;
+    s32 vz;
     u16 flags;
     u16 unk_A2;
-    s32 unk_A4;
+    s32 animAction;
     const u16* sounds;
-    u8 unk_AC;
+    u8 onCollider;
     u8 unk_AD[0x03];
     PooNode node;
 } PooSoraWork;
@@ -816,7 +816,7 @@ typedef struct PooTrapWork {
     u8 unk_18[0x04];
     Collider collider;
     TaskPool tasks;
-    u8 unk_8C;
+    u8 colliderActive;
     u8 unk_8D[0x03];
     PooNode node;
 } PooTrapWork;
@@ -826,16 +826,16 @@ typedef struct PooRooWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    u8 unk_24;
+    u8 flipped;
     u8 unk_25[0x03];
     PooPos pos;
     PooPos* srcPos;
     Collider collider;
     TaskPool tasks;
-    s32 unk_AC;
-    s32 unk_B0;
+    s32 vz;
+    s32 lastZ;
     u32 state;
-    u16 unk_B8;
+    u16 interactionId;
     u16 unk_BA;
 } PooRooWork;
 
@@ -846,25 +846,25 @@ typedef struct PooBgSet {
 } PooBgSet;
 
 typedef struct PooPalStep {
-    u16 unk_00;
-    u16 unk_02;
+    u16 palette;
+    u16 duration;
 } PooPalStep;
 
 extern const s32 gUnk_096FDA74[];
 extern u8 gUnk_0984A138[];
-extern const PooBgSet gUnk_096FDA8C[];
-extern const PooPalStep gUnk_096FDB40[];
+extern const PooBgSet gAllmapWorldBgs[];
+extern const PooPalStep gAllmapPalSteps[];
 
-extern const UnkStruct_096FE034Entry gUnk_096FD3C8[4];
-extern const UnkStruct_096FE034Entry gUnk_096FD3D8[4];
-extern const UnkStruct_096FE034 gUnk_096FD3E8;
-extern const s32 gUnk_096FD43C[];
+extern const BosMapanimeFrame gPooMapanimeFrames0[4];
+extern const BosMapanimeFrame gPooMapanimeFrames1[4];
+extern const BosMapanimeDef gPooMapanimeDef0;
+extern const s32 gPooPileKindStages[];
 extern u8 gUnk_097561D4[];
 extern u8 gUnk_09755F34[];
-extern const PooAnimDesc gUnk_096FD47C[];
-extern const PooAnimDesc gUnk_096FCF54[11][5];
-extern const u16 gUnk_096FD2C4[8];
-extern const PooAnimDesc gUnk_096FD59C[];
+extern const PooAnimDesc gPooPigletAnimDescs[];
+extern const PooAnimDesc gPooSoraAnimDescs[11][5];
+extern const u16 gPooSoraSounds[8];
+extern const PooAnimDesc gPooTiggerAnimDescs[];
 extern u8 gUnk_097565FC[];
 extern u8 gUnk_097565E8[];
 extern u8 gUnk_09849D58[];
@@ -904,9 +904,9 @@ extern u8 gRaVegetablesFrame9[];
 extern u8 gRaVegetablesFrame1[];
 extern u8 gRaVegetablesFrame10[];
 extern u8 gRaVegetablesFrame11[];
-extern const u16 gUnk_096FD850[];
+extern const u16 gPooCabbageRemoveCounts[];
 extern const PooMapObjHitDesc gPooMapObjHitDescs[];
-extern const PooStumpDesc gPooStumpDescs[];
+extern const PooPileDesc gPooPileDescs[];
 extern const PooAnimDesc gPooRabbitAnimDescs[];
 extern u8 gRoFootmarkTiles[];
 extern u8 gRoFootmarkFrame0[];
@@ -937,8 +937,8 @@ extern u8 gUnk_09849EF8[];
 extern u8 gUnk_09849F18[];
 extern u8 gUnk_09849F38[];
 extern u8 gUnk_09849F58[];
-extern const s32 gUnk_096FD61C[];
-extern const s32 gUnk_096FD5FC[8];
+extern const s32 gPooTiggerHopHeights[];
+extern const s32 gPooTiggerHopCorners[8];
 extern const PooGfxDesc gPooTiggerGfxDescs[];
 extern const PooGfxDesc gPooRabbitGfxDescs[];
 extern const PooGfxDesc gPooPigletGfxDescs[];
@@ -965,11 +965,11 @@ extern u8 gPoohPalette[];
 extern u8 gUnk_097606E8[];
 extern u8 gUnk_09849E38[];
 extern u8 gUnk_09849BB8[];
-extern const UnkStruct_096FE034 gUnk_096FD400;
+extern const BosMapanimeDef gPooMapanimeDef1;
 
 void task_poo_mapbee_0(PooMapBeeWork* w, PooPos* p);
 void task_poo_zzz_2(PooZzzWork* w);
-s32 func_080D0210(s32 a, s32 b);
+s32 GetPooWagonSide(s32 a, s32 b);
 u8 task_poo_wagonwheel_1(PooWheelWork* w);
 u8 task_poo_gauge_1(PooGaugeWork* w);
 void task_poo_roo_0(PooRooWork* w, PooPos* p);
@@ -985,32 +985,32 @@ void task_poo_butterflyLeft_2(PooButterflyWork* w);
 u8 task_poo_mapbeeborn_1(PooMapBornWork* w);
 u8 task_poo_mapbutterflyborn_1(PooMapBornWork* w);
 u8 task_poo_leaf_1(PooLeafWork* w);
-u8 func_080CA4E8(s16 x, s16 y, s16 h, s16 vy, s16 w, s16 vx, s32* ox, s32* oy);
-void func_080CE710(PooTiggerWork* w, u16 b);
+u8 GetPooScreenOverflow(s16 x, s16 y, s16 h, s16 vy, s16 w, s16 vx, s32* ox, s32* oy);
+void SetPooTiggerrooAnimation(PooTiggerWork* w, u16 b);
 u8 task_poo_tiggerroo_1(PooTiggerWork* w);
 void task_poo_tiggerroo_2(PooTiggerWork* w);
-s32 func_080CFEA0(PooPos* p);
+s32 IsInPooWagonAreaForPooh(PooPos* p);
 u8 task_poo_eeyoretail_1(PooEeyoreTailWork* w);
-void func_080C8B60(PoohWork* w, s32 b, u8 c);
+void MovePooh(PoohWork* w, s32 b, u8 c);
 void task_poo_shadowscale_2(PooScaleWork* w);
-void task_poo_wagon_0(PooCamera* w);
-u8 task_poo_wagon_1(PooCamera* w);
+void task_poo_wagon_0(PooWagonWork* w);
+u8 task_poo_wagon_1(PooWagonWork* w);
 void task_poo_zzz_0(PooZzzWork* w, u8* arg);
-u8 func_080C9D84(void);
-void func_080D2190(PooBflyPart* p);
+u8 IsPoohBeeChaseOver(void);
+void PooBflyPartUpdate(PooBflyPart* p);
 u8 task_poo_owlballoon_1(PooOwlBalloonWork* w);
-s32 func_080C8A50(PoohWork* w);
-PooNode* func_080CCC98(void);
-void func_080CE818(PooTiggerWork* w);
-void func_080CFF58(u32* a, u32* b, u16 c);
-void func_080D1078(PooSpot* p);
+s32 GetPoohStumpIndex(PoohWork* w);
+PooNode* FindPoohTargetNode(void);
+void StartPooTiggerHopStep(PooTiggerWork* w);
+void SnapToPooWagonLine(u32* a, u32* b, u16 c);
+void GetPooCabbageStackSpot(PooSpot* p);
 void task_poo_eeyoretail_0(PooEeyoreTailWork* w);
 void task_poo_honeycomb_0(PooHoneycombWork* w);
 void task_poo_spark_2(PooSparkWork* w);
-s32 func_080CCBF8(PooNode* n);
-u16 func_080C9EAC(void* pool, u16 b);
-u8 func_080CA3A0(PooPos* p);
-u8 func_080CA3FC(PooActor* p, s32 x, s32 y, s32* ox, s32* oy);
+s32 GetPooNodeScore(PooNode* n);
+u16 CreatePooMapobjhitTasks(void* pool, u16 b);
+u8 IsPooPosBlocked(PooPos* p);
+u8 GetPooWallSlide(PooActor* p, s32 x, s32 y, s32* ox, s32* oy);
 void task_poo_gauge_0(PooGaugeWork* w);
 void task_poo_mapbeeborn_0(PooMapBornWork* w, PooPos* p);
 void task_poo_mapbutterflyborn_0(PooMapBornWork* w, PooPos* p);
@@ -1023,19 +1023,19 @@ void task_poo_shadowscale_0(PooScaleWork* w, PooShadowArgs* a);
 void CreatePooMapobjhitTask(void* pool, u32 a, s32 x, s32 y, u16 e);
 void task_poo_zzz_3(PooZzzWork* w);
 void SetPooRabbitAnimation(PooRabbitWork* w, s32 b, u16 c);
-void func_080D206C(PooBflyPart* p);
+void PooBflyPartInit(PooBflyPart* p);
 void task_poo_roo_footmark_0(PooFootmarkWork* w);
 void task_poo_spark_0(PooSparkWork* w, PooPos* p);
 void task_poo_trap_0(PooTrapWork* w, PooPos* p);
-u8 func_080D1650(void);
-void func_080C98B8(PoohWork* w);
-void func_080C8C40(PoohWork* w, PooNode* n);
+u8 CanSpawnPooCabbage(void);
+void UpdatePoohGauge(PoohWork* w);
+void UpdatePoohAction(PoohWork* w, PooNode* n);
 u8 task_poo_pooh_1(PoohWork* w);
 u8 task_poo_mapbee_1(PooMapBeeWork* w);
 void task_poo_roo_3(PooRooWork* w);
-u8 func_080CF114(void);
-u8 func_080CF12C(void);
-u8 func_080C9910(void);
+u8 IsPooRooAnimFrameEnding(void);
+u8 IsPooRooAnimFinished(void);
+u8 IsPoohOffScreen(void);
 void task_poo_tanpopo_3(PooTanpopoWork* w);
 void task_poo_ti_board_0(PooBoardWork* w, PooPos* p);
 u8 task_poo_ti_board_1(PooBoardWork* w);
@@ -1044,75 +1044,75 @@ void task_poo_bee_0(PooBeeWork* w);
 u8 task_poo_bee_1(PooBeeWork* w);
 void task_poo_vegetable_0(PooVegetableWork* w);
 u8 task_poo_vegetable_1(PooVegetableWork* w);
-u8 func_080CFF30(void);
+u8 IsPooSoraOverWagon(void);
 void func_080CFFC0(s32* a, s32* b);
 void func_080CFFF0(s32* a, s32* b);
 void func_080D001C(s32* a, s32* b);
-void task_poo_wagon_2(PooCamera* w);
-void task_poo_wagon_3(PooCamera* w);
+void task_poo_wagon_2(PooWagonWork* w);
+void task_poo_wagon_3(PooWagonWork* w);
 void task_poo_wagonwheel_3(PooWheelWork* w);
 void task_poo_spark_3(PooSparkWork* w);
-u8 func_080D1050(void);
+u8 IsPooBeeAfterEventVisible(void);
 void task_poo_cabbage_3(PooCabbageWork* w);
 void task_poo_cabbageborn_0(PooCabbageBornWork* w);
 u8 task_poo_cabbageborn_1(PooCabbageBornWork* w);
-void func_080D2034(PooBflyPart* p);
+void PooBflyPartSetAnimation(PooBflyPart* p);
 u8 task_poo_butterfly_1(PooButterflyWork* w);
 void task_poo_mapbee_3(PooMapBeeWork* w);
 u8 task_poo_mapbutterfly_1(PooMapButterflyWork* w);
-void func_080C9E84(void* pool);
-void func_080D1FB8(PooBflyPart* p);
+void CreatePooPileTasks(void* pool);
+void PooBflyPartSetDir(PooBflyPart* p);
 
-void func_080CCB90(PooNode* n, u16 v, void* p);
+void AddPooNode(PooNode* n, u16 v, void* p);
 void task_poo_honey_3(PooHoneyWork* w);
 u8 task_poo_mapanime_1(PooMapAnimeWork* w);
-s32 func_080CD198(void);
+s32 GetRandomPooPileStage(void);
 void task_poo_pile_3(PooPileWork* w);
 void CreatePooPileTask(void* pool, u16 b, s32 x, s32 y);
 void task_poo_tigerstump_0(PooStumpWork* w, PooPos* p);
 u8 task_poo_tigerstump_1(PooStumpWork* w);
 void task_poo_poohstump_0(PooStumpWork* w, PooPos* p);
 u8 task_poo_poohstump_1(PooStumpWork* w);
-void func_080CD854(PooPigletWork* w, s32 b, u16 c);
+void SetPooPigletAnimation(PooPigletWork* w, s32 b, u16 c);
 u8 task_poo_piglet_1(PooPigletWork* w);
 void task_poo_piglet_3(PooPigletWork* w);
 void task_poo_eeyore_3(PooEeyoreWork* w);
 u8 task_poo_rabbit_1(PooRabbitWork* w);
 void task_poo_rabbit_3(PooRabbitWork* w);
-u16 func_080CE880(PooTiggerWork* w);
+u16 GetPooTiggerAnimDuration(PooTiggerWork* w);
 void task_poo_tiggerroo_3(PooTiggerWork* w);
 void task_poo_trapballoon_3(PooBalloonWork* w);
 void task_poo_owlballoon_3(PooOwlBalloonWork* w);
-s32 func_080C8B38(Collider* w, PooPos* p, u8* c);
+s32 GetPooGroundZ(Collider* w, PooPos* p, u8* c);
 u8 task_poo_map_1(PooMapWork* w);
-u16 func_080CA36C(u16 x, u16 y);
-u8 func_080CA648(PooPos* p);
-void func_080CA9DC(PooActor* p);
-void func_080CAA50(PooSoraWork* w, s32 b, u16 c);
-void func_080CAB24(PooActor* p);
-s32 func_080CAA14(PooSoraWork* w);
+u16 GetPooMapTile(u16 x, u16 y);
+u8 IsPooExitTile(PooPos* p);
+void UpdatePooActorAngle(PooActor* p);
+void SetPooSoraAnimation(PooSoraWork* w, s32 b, u16 c);
+void SetPooSoraAttackPoint(PooActor* p);
+s32 GetPooSoraGroundZ(PooSoraWork* w);
 void task_poo_sora_3(PooSoraWork* w);
 u8 task_poo_sora_1(PooSoraWork* w, Task* t);
-u8 func_080CB5A8(PooSoraWork* w, Task* t);
-u8 func_080CAD08(PooSoraWork* w, Task* t);
-u8 func_080CB1BC(PooSoraWork* w, Task* t);
+u8 PooSoraUpdateCall(PooSoraWork* w, Task* t);
+u8 PooSoraUpdateJump(PooSoraWork* w, Task* t);
+u8 PooSoraUpdateAttack(PooSoraWork* w, Task* t);
 void task_poo_trapballoon_2(PooBalloonWork* w);
-u8 func_080CA560(PooActor* a, s32 x, s32 y);
-u8 func_080CBA4C(void);
-u8 func_080CBA74(void);
+u8 ConstrainPooActorMove(PooActor* a, s32 x, s32 y);
+u8 IsPooSoraCallStarting(void);
+u8 IsPooSoraCalling(void);
 u8 task_poo_trap_1(PooTrapWork* w);
 void task_poo_shadow_0(TaskPool* w, void* arg);
-u8 func_080CC284(s16 x, s16 y);
-s32 func_080CC488(u16 a);
+u8 IsPooNearScreen(s16 x, s16 y);
+s32 GetPooGaugeFrame(u16 a);
 void task_poo_gauge_2(PooGaugeWork* w);
-void func_080C9FBC(void);
-void func_080CA270(PooMapWork* w);
-void func_080CA724(PooActor* p);
+void UpdatePooCameraCenter(void);
+void ScrollPooCamera(PooMapWork* w);
+void SetPooActorAngleFromDpad(PooActor* p);
 void task_poo_butterfly_2(PooButterflyWork* w);
 u8 task_poo_prize_1(PooPrizeWork* w);
 void task_poo_prize_3(PooPrizeWork* w);
-u8 func_080CBA8C(void);
-u8 func_080CFF0C(void);
+u8 AreAllPooEventsDone(void);
+u8 IsPooSoraOnWagon(void);
 void task_poo_eeyoretail_3(PooEeyoreTailWork* w);
 void task_poo_freeballoon_3(PooFreeBalloonWork* w);
 void task_poo_leaf_3(PooLeafWork* w);
@@ -1125,25 +1125,25 @@ u8 task_poo_spark_1(PooSparkWork* w);
 void task_poo_ti_board_3(PooBoardWork* w);
 void task_poo_tigerstump_3(PooStumpWork* w);
 void task_poo_vegetable_3(PooVegetableWork* w);
-u8 func_080D220C(PooBflyPart* p, void* pal);
+u8 PooBflyPartDraw(PooBflyPart* p, void* pal);
 void task_poo_mapobjhit_3(PooMapObjHitWork* w);
-void func_080D1B94(PooPrizeWork* w);
-u16 func_080C9EFC(void* pool, u16 b);
+void PooPrizeUpdateCollect(PooPrizeWork* w);
+u16 CreatePooSpawnTasks(void* pool, u16 b);
 u8 task_poo_honeycomb_1(PooHoneycombWork* w);
 u8 task_poo_eeyore_1(PooEeyoreWork* w);
 void task_poo_mapobjhit_2(PooMapObjHitWork* w);
 void task_poo_ti_board_2(PooBoardWork* w);
 void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w);
-void func_080CE8B4(PooTiggerWork* w);
+void StartPooTiggerHop(PooTiggerWork* w);
 void task_poo_tigger_0(PooTiggerWork* w);
 void task_poo_tiggerroo_0(PooTiggerWork* w);
 void task_poo_trap_2(PooTrapWork* w);
-void func_080CE77C(PooTiggerWork* w, u16 b);
+void SetPooTiggerAnimation(PooTiggerWork* w, u16 b);
 void task_poo_wagonwheel_0(PooWheelWork* w);
 void task_poo_trapballoon_0(PooBalloonWork* w, PooPos* p);
 void task_poo_owlballoon_0(PooOwlBalloonWork* w, PooPos* p);
-u8 func_080CA8D4(PooSoraWork* w, PooPos* p);
-u8 func_080CA960(PooPos* p);
+u8 ApplyPooSoraPushOut(PooSoraWork* w, PooPos* p);
+u8 GetPooAngleToPooh(PooPos* p);
 void task_poo_owl_0(PooOwlWork* w);
 u8 task_poo_owl_1(PooOwlWork* w);
 void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* w);
@@ -1159,25 +1159,25 @@ void task_poo_beeAfterEvent_0(PooBeeAfterEventWork* w);
 u8 task_poo_tanpopo_1(PooTanpopoWork* w);
 void task_poo_pile_0(PooPileWork* w, PooPileArgs* a);
 u8 task_poo_cabbageAfterEvent_1(PooCabbageAfterEventWork* w);
-void func_080CE960(s32 x, s32 y, s32 z, u8 c);
-u8 func_080C8BD4(void);
-void func_080C8AB8(PoohWork* w);
+void PlayPooTiggerHopSound(s32 x, s32 y, s32 z, u8 c);
+u8 IsPoohNearScreenEdge(void);
+void ResetPoohStumpCount(PoohWork* w);
 void task_poo_pitAndButterfly_0(PooTrapWork* w, PooPos* p);
-u8 func_080C887C(PoohWork* w, PooNode* n);
-void func_080C88C4(PoohWork* w, PooNode* n);
+u8 CheckPoohInterrupts(PoohWork* w, PooNode* n);
+void ChoosePoohTarget(PoohWork* w, PooNode* n);
 void task_poo_sora_0(PooSoraWork* w);
 u8 task_poo_pile_1(PooPileWork* w);
 u8 task_poo_freeballoon_1(PooFreeBalloonWork* w);
 void task_poo_prize_0(PooPrizeWork* w, PoohPrizeArgs* a);
-void func_080D19C4(PooPrizeWork* w);
-void func_080D0084(u32* a, u32* b, u16 c);
+void PooPrizeUpdateBounce(PooPrizeWork* w);
+void ClampToPooWagonArea(u32* a, u32* b, u16 c);
 void task_poo_bee_2(PooBeeWork* w);
 void task_poo_map_0(PooMapWork* w);
 u8 task_poo_trapballoon_1(PooBalloonWork* w);
 u8 task_poo_cabbage_1(PooCabbageWork* w);
 void task_poo_cabbage_2(PooCabbageWork* w);
 void task_poo_pooh_0(PoohWork* w);
-extern const u16 gUnk_096FD86E[];
+extern const u16 gPooCabbageStackPriorities[];
 extern u8 gUnk_098A5C90[];
 extern u8 gUnk_098A5C9A[];
 extern u8 gUnk_098A5CA4[];
@@ -1185,9 +1185,9 @@ extern u8 gUnk_098A5CAE[];
 extern u8 gUnk_098A5CB8[];
 extern u8 gUnk_098A5CF4[];
 extern u8 gSoraPalette[];
-void func_080C8AE0(PoohWork* w);
+void UpdatePoohStumpCircle(PoohWork* w);
 s32 func_080D01BC(s32 x, s32 y);
-u8 func_080C871C(PoohWork* w);
+u8 HandlePoohRequest(PoohWork* w);
 
 void task_poo_mapbutterflyborn_3(PooMapBornWork* w);
 void task_poo_trap_3(PooTrapWork* w);
@@ -1199,85 +1199,85 @@ void task_poo_rabbitAfterEvent_3(PooRabbitAfterEventWork* w);
 void func_080D0050(s32* a, s32* b);
 u8 func_080D1738(void);
 void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* w);
-u16 func_080D172C(void);
-u32 func_080C8AD4(u32 a);
+u16 GetPooCabbageLandedCount(void);
+u32 NextPoohStumpIndex(u32 a);
 void task_poo_bee_3(PooBeeWork* w);
 void task_poo_cabbageAfterEvent_3(PooCabbageAfterEventWork* w);
-u8 func_080D0E3C(void);
-void func_080C8A28(PoohWork* w);
+u8 AreAllPooBeesOut(void);
+void ApplyPooh04FrameOffset(PoohWork* w);
 u8 task_poo_beeAfterEvent_1(PooBeeAfterEventWork* w);
 void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* w);
 
-s32 func_080CFE34(PooPos* p);
+s32 IsInPooWagonArea(PooPos* p);
 void task_poo_map_2(PooMapWork* w);
 void task_poo_map_3(PooMapWork* w);
-void func_080CA0A8(void);
-void func_080CA0B4(void);
-u16 func_080CBB7C(void);
-void func_080D171C(void);
+void UnfreezePooCamera(void);
+void StartPooCameraFollowPooh(void);
+u16 GetPooSoraPriority(void);
+void IncPooCabbageLandedCount(void);
 u8 task_poo_shadowdodai_1(PooShadowWork* w);
 u8 task_poo_shadowscale_1(PooScaleWork* w);
-void func_080C8A3C(PoohWork* w);
-void func_080C9FA8(s32 a, s32 b);
-void func_080CCBD4(PooNode* p);
-u8 func_080CFA70(void);
-u8 func_080CFCC0(void);
-void func_080D16FC(void);
+void ApplyPooh04aFrameOffset(PoohWork* w);
+void SetPooCameraFocus(s32 a, s32 b);
+void RemovePooNode(PooNode* p);
+u8 IsPooEeyoreTailLanded(void);
+u8 IsPooHoneycombShaken(void);
+void IncPooCabbageCount(void);
 void task_poo_balloon_3(PooBalloonObjWork* w);
 void task_poo_gauge_3(PooGaugeWork* w);
 void task_poo_mapbutterfly_3(PooMapButterflyWork* w);
 void task_poo_shadowdodai_3(PooShadowWork* w);
 void task_poo_shadowscale_3(PooScaleWork* w);
 void CreatePooShadowscaleTask(void* pool, void* a, s32 b);
-s32 func_080CD1DC(u32 a);
-s32 func_080CD1F8(u32 a);
-void func_080C89B4(PoohWork* w, const PooSpot* b, u16 c);
-u16 func_080CCB80(PooNode* n);
-void func_080CCB84(PooNode* n, u16 v);
-u16 func_080CCB88(PooNode* n);
-void func_080CCB8C(PooNode* n, u16 v);
+s32 NextPooPileStage(u32 a);
+s32 GetPooPileHeight(u32 a);
+void ApplyPoohFrameOffset(PoohWork* w, const PooSpot* b, u16 c);
+u16 GetPooNodeWeight(PooNode* n);
+void SetPooNodeWeight(PooNode* n, u16 v);
+u16 GetPooNodeBaseWeight(PooNode* n);
+void SetPooNodeBaseWeight(PooNode* n, u16 v);
 u8 task_poo_balloon_1(void* w);
 void task_poo_mapanime_2(void* w);
 void task_poo_mapanime_3(void* w);
 u8 task_poo_roo_footmark_1(void* w);
 u8 task_poo_zzz_1(void* w);
-void func_080CA09C(void);
-void func_080CA0C0(void);
-u16 func_080D06BC(void);
-u16 func_080D06C8(void);
-u16 func_080D1710(void);
+void FreezePooCamera(void);
+void StopPooCameraFollowPooh(void);
+u16 GetPooWagonPriority2(void);
+u16 GetPooWagonPriority(void);
+u16 GetPooCabbageCount(void);
 void task_poo_cabbageborn_2(PooCabbageBornWork* w);
 void task_poo_cabbageborn_3(PooCabbageBornWork* w);
 u8 task_poo_shadow_1(TaskPool* w);
 void task_poo_shadow_2(TaskPool* w);
 void task_poo_shadow_3(TaskPool* w);
-u8 func_080C9D48(void);
-u8 func_080C9D5C(void);
-u8 func_080C9D70(void);
-u8 func_080C9D98(void);
-u8 func_080C9E28(void);
-u16 func_080C9E4C(void);
+u8 IsPoohDescendingWithOwl(void);
+u8 IsPoohOnOwlBalloon(void);
+u8 IsPoohWalkingToTarget(void);
+u8 IsPoohWaitingOnWagon(void);
+u8 IsPoohAtLowerExit(void);
+u16 GetPoohHoneyAnim(void);
 u8 task_poo_honey_1(PooHoneyWork* w);
-u8 func_080C9E70(void);
-void func_080D2BF8(u16 a);
-u8 func_080D2C1C(u16 a);
-void func_080D2C48(void);
-void func_080D2CA8(PooPos* p, s32* b);
-void func_080D2CC4(u16 a, u16 b);
-void func_080D2CD0(u16* a, u16* b);
-void func_080D2CE0(s16 a, s16 b);
-void func_080D2CF4(u16* a, u16* b);
+u8 IsPoohLookingAtHoneycomb(void);
+void SetPooPrizeDropped(u16 a);
+u8 IsPooPrizeDropped(u16 a);
+void ResetPooProgress(void);
+void GetPooStatePooh(PooPos* p, s32* b);
+void SetPooStateGauge(u16 a, u16 b);
+void GetPooStateGauge(u16* a, u16* b);
+void SetPooStateWheelPos(s16 a, s16 b);
+void GetPooStateWheelPos(u16* a, u16* b);
 void GetPooStatePos2(PooPos* p);
-void func_080D2D3C(s32 a);
-void func_080D2D80(s32 a);
-u16 func_080D2E28(Collider* a, u16 b);
-void func_080D2E70(u16 a, u8 b);
-u16 func_080D2EB8(void);
-void func_080D2F10(u8 a);
+void SetPooEventDone(s32 a);
+void ClearPooFlag(s32 a);
+u16 AddPoohInteraction(Collider* a, u16 b);
+void SetPoohInteractionEnabled(u16 a, u8 b);
+u16 FindPoohInteractionMessage(void);
+void SetPooRabbitTalkBlocked(u8 a);
 
-u16 func_080CA67C(PooPos* p);
-u16 func_080CBAB0(PooPos* p);
+u16 GetPooExitAt(PooPos* p);
+u16 CheckPooSoraExit(PooPos* p);
 
-u8 func_080C9DAC(void);
+u8 IsPoohOnWagon(void);
 
 #endif /* GUARD_POO_H */

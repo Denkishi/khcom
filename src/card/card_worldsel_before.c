@@ -49,15 +49,15 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     w->palette = LoadObjPalette(gUnk_09619378, 32);
     w->tiles2 = LoadObjTiles(gUnk_093FB1AC, 0x4A0);
     w->palette2 = AllocObjPalette(32);
-    w->unk_A2 = 6;
-    w->unk_1C = 0;
-    w->unk_1D = 0;
-    w->unk_A3 = 0;
-    UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->unk_1C].unk_00 << 5]);
+    w->spriteCount = 6;
+    w->animStep = 0;
+    w->animTimer = 0;
+    w->risenCount = 0;
+    UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 5]);
     FadeSetPaletteExcluded(w->palette->index + 16, 1);
     FadeSetPaletteExcluded(w->palette2->index + 16, 1);
 
-    for (i = 0; i < w->unk_A2; i++) {
+    for (i = 0; i < w->spriteCount; i++) {
         w->angle[i] = 0x80;
         w->z2[i] = 0;
         w->x2[i] = gSineTable[w->angle[i]] * 24 + w->x;
@@ -69,27 +69,27 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
 s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
     u8 i;
 
-    if (w->unk_A3 < w->unk_A2) {
-        w->z2[w->unk_A3] -= (s32)(24.0f / (256.0f / (float)w->unk_A2 * 0.25f) * 256.0f);
+    if (w->risenCount < w->spriteCount) {
+        w->z2[w->risenCount] -= (s32)(24.0f / (256.0f / (float)w->spriteCount * 0.25f) * 256.0f);
 
-        if (w->z2[w->unk_A3] <= -6144) {
-            w->unk_A3++;
+        if (w->z2[w->risenCount] <= -6144) {
+            w->risenCount++;
         }
     }
 
-    for (i = 0; i < w->unk_A3; i++) {
+    for (i = 0; i < w->risenCount; i++) {
         w->x2[i] = gSineTable[w->angle[i]] * 24 + w->x;
         w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->y;
         w->angle[i] += 4;
     }
 
-    if (++w->unk_1D == gWorldSelAnims[w->unk_1C].unk_01) {
+    if (++w->animTimer == gWorldSelAnims[w->animStep].duration) {
         do {
-            w->unk_1C = w->unk_1C > 28 ? 0 : w->unk_1C + 1;
+            w->animStep = w->animStep > 28 ? 0 : w->animStep + 1;
         } while (0);
 
-        w->unk_1D = 0;
-        UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->unk_1C].unk_00 << 5]);
+        w->animTimer = 0;
+        UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 5]);
     }
 
     return 1;
@@ -97,7 +97,7 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
 void WorldSel_Before_2(WorldSelBeforeWork* w) {
     u8 i;
 
-    for (i = 0; i < w->unk_A2; i++) {
+    for (i = 0; i < w->spriteCount; i++) {
         DrawSprite((w->x2[i] >> 8) - (gFieldState->x >> 8),
                    (w->y2[i] >> 8) + ((w->z + w->z2[i]) >> 8) - (gFieldState->y >> 8),
                    (&gUnk_09EF1278[4])[0], w->tiles, w->palette, 0, 0x800,
@@ -123,9 +123,9 @@ void func_080A581C(u8* work) {
 void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z) {
     WorldSelBeforeArgs args;
 
-    args.unk_00 = x;
-    args.unk_04 = y;
-    args.unk_08 = z;
+    args.x = x;
+    args.y = y;
+    args.z = z;
     TaskCreate(a, &gTaskDescWorldSelBefore, &args);
 }
 

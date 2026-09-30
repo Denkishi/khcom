@@ -39,7 +39,7 @@ typedef struct FldShadowWork {
 
 typedef char FldShadowWork_size[(sizeof(FldShadowWork) == 0x2C) ? 1 : -1];
 
-void func_0803473C(FldWork* work, s32 index, u16 flags);
+void FldRikuSetAnim(FldWork* work, s32 index, u16 flags);
 
 void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z);
 
@@ -47,28 +47,28 @@ extern u8 gSoraPalette[];
 extern u8 gRikuPalette[];
 extern u8 gUnk_08F69BE4[];
 
-u8 func_08034518(FldPos* p);
-s32 func_0803459C(FldPos* p);
-u8 func_080345EC(FldPos* p, FldWork* work);
-u8 func_08034668(FldActor* act);
-s32 func_080346C0(FldWork* work);
-void func_08034368(FldActor* act);
-void func_08034704(FldActor* act);
-u8 func_08032268(FldWork* work, void* task);
-u8 func_0803234C(FldWork* work, void* task);
-u8 func_080324DC(FldWork* work, void* task);
-u8 func_08032C3C(FldWork* work, void* task);
-u8 func_08033054(FldWork* work, void* task);
-u8 func_08033150(FldWork* work, void* task);
-u8 func_08033334(FldWork* work, void* task);
-u8 func_0803366C(FldWork* work, void* task);
-u8 func_08034AF0(FldWork* work, void* task);
-u8 func_08034C88(FldWork* work, void* task);
-u8 func_080353DC(FldWork* work, void* task);
-u8 func_080357F4(FldWork* work, void* task);
-u8 func_080358F0(FldWork* work, void* task);
-u8 func_08035AD4(FldWork* work, void* task);
-u8 func_08035DFC(FldWork* work, void* task);
-u8 func_08034A0C(FldWork* work, void* task);
+u8 FldRikuCheckBlocked(FldPos* p);
+s32 FldRikuProbeGround(FldPos* p);
+u8 FldRikuCheckClimb(FldPos* p, FldWork* work);
+u8 FldRikuCheckDoorAhead(FldActor* act);
+s32 FldRikuGetGround(FldWork* work);
+void FldRikuSetAngleFromDpad(FldActor* act);
+void FldRikuTurn(FldActor* act);
+u8 FldSoraWaitRoomCreate(FldWork* work, void* task);
+u8 FldSoraGmkJump(FldWork* work, void* task);
+u8 FldSoraJump(FldWork* work, void* task);
+u8 FldSoraClimb(FldWork* work, void* task);
+u8 FldSoraLedgeInput(FldWork* work, void* task);
+u8 FldSoraHangLedge(FldWork* work, void* task);
+u8 FldSoraWalkOut(FldWork* work, void* task);
+u8 FldSoraAttack(FldWork* work, void* task);
+u8 FldRikuGmkJump(FldWork* work, void* task);
+u8 FldRikuJump(FldWork* work, void* task);
+u8 FldRikuClimb(FldWork* work, void* task);
+u8 FldRikuLedgeInput(FldWork* work, void* task);
+u8 FldRikuHangLedge(FldWork* work, void* task);
+u8 FldRikuWalkOut(FldWork* work, void* task);
+u8 FldRikuAttack(FldWork* work, void* task);
+u8 FldRikuWaitRoomCreate(FldWork* work, void* task);
 
 #endif /* GUARD_FLD_H */

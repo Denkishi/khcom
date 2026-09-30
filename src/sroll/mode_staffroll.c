@@ -11,7 +11,7 @@
 #include "staff_roll_text_assets.h"
 #include "staff_roll_scene_data.h"
 
-const s32 gUnk_09A516C8[46] = {
+const s32 gStaffRollSoraScript0[46] = {
     6, 6, 0, 0, 0, 6,
     4, 6, 0, 0, 208, 85,
     9, 5, 0, 0, 30,
@@ -23,7 +23,7 @@ const s32 gUnk_09A516C8[46] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51780[61] = {
+const s32 gStaffRollSoraScript1[61] = {
     6, 6, 0, 0, 1, 117,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 70,
@@ -38,7 +38,7 @@ const s32 gUnk_09A51780[61] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51874[63] = {
+const s32 gStaffRollSoraScript2[63] = {
     6, 6, 0, 0, 2, 149,
     4, 6, 0, 0, 218, 85,
     9, 5, 0, 0, 30,
@@ -53,7 +53,7 @@ const s32 gUnk_09A51874[63] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51970[80] = {
+const s32 gStaffRollSoraScript3[80] = {
     6, 6, 0, 0, 9, 245,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 85,
@@ -72,7 +72,7 @@ const s32 gUnk_09A51970[80] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51AB0[93] = {
+const s32 gStaffRollSoraScript4[93] = {
     6, 6, 0, 0, 12, 270,
     4, 6, 0, 0, 208, 130,
     9, 5, 0, 0, 30,
@@ -93,7 +93,7 @@ const s32 gUnk_09A51AB0[93] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51C24[79] = {
+const s32 gStaffRollSoraScript5[79] = {
     6, 6, 0, 1, 7, 222,
     4, 6, 0, 1, 208, 120,
     9, 5, 0, 0, 30,
@@ -112,7 +112,7 @@ const s32 gUnk_09A51C24[79] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51D60[141] = {
+const s32 gStaffRollSoraScript6[141] = {
     6, 6, 0, 0, 55, 631,
     4, 6, 0, 0, 223, 65,
     9, 5, 0, 0, 30,
@@ -143,7 +143,7 @@ const s32 gUnk_09A51D60[141] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A51F94[60] = {
+const s32 gStaffRollSoraScript7[60] = {
     6, 6, 0, 0, 14, 299,
     4, 6, 0, 0, 24, 100,
     3, 5, 0, 0, 1,
@@ -158,7 +158,7 @@ const s32 gUnk_09A51F94[60] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52084[113] = {
+const s32 gStaffRollSoraScript8[113] = {
     6, 6, 0, 0, 15, 318,
     4, 6, 0, 0, 211, 75,
     9, 5, 0, 0, 30,
@@ -183,7 +183,7 @@ const s32 gUnk_09A52084[113] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52248[61] = {
+const s32 gStaffRollSoraScript9[61] = {
     6, 6, 0, 0, 13, 290,
     4, 6, 0, 0, 32, 100,
     3, 5, 0, 0, 1,
@@ -198,7 +198,7 @@ const s32 gUnk_09A52248[61] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A5233C[70] = {
+const s32 gStaffRollSoraScript10[70] = {
     6, 6, 0, 0, 24, 387,
     4, 6, 0, 0, 208, 108,
     6, 6, 0, 1, 23, 381,
@@ -215,7 +215,7 @@ const s32 gUnk_09A5233C[70] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52454[44] = {
+const s32 gStaffRollSoraScript11[44] = {
     6, 6, 0, 0, 16, 328,
     4, 6, 0, 0, 48, 108,
     3, 5, 0, 0, 1,
@@ -227,7 +227,7 @@ const s32 gUnk_09A52454[44] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52504[65] = {
+const s32 gStaffRollSoraScript12[65] = {
     6, 6, 0, 0, 10, 260,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 20, 100,
@@ -243,7 +243,7 @@ const s32 gUnk_09A52504[65] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52608[101] = {
+const s32 gStaffRollSoraScript13[101] = {
     6, 6, 0, 0, 76, 827,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 24, 100,
@@ -266,7 +266,7 @@ const s32 gUnk_09A52608[101] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A5279C[51] = {
+const s32 gStaffRollSoraScript14[51] = {
     6, 6, 0, 0, 19, 344,
     4, 6, 0, 0, 204, 110,
     9, 5, 0, 0, 30,
@@ -279,7 +279,7 @@ const s32 gUnk_09A5279C[51] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52868[61] = {
+const s32 gStaffRollSoraScript15[61] = {
     6, 6, 0, 0, 57, 638,
     4, 6, 0, 0, 24, 90,
     3, 5, 0, 0, 1,
@@ -294,7 +294,7 @@ const s32 gUnk_09A52868[61] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A5295C[88] = {
+const s32 gStaffRollSoraScript16[88] = {
     6, 6, 0, 0, 35, 424,
     4, 6, 0, 0, 120, 100,
     9, 5, 0, 0, 80,
@@ -314,7 +314,7 @@ const s32 gUnk_09A5295C[88] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52ABC[51] = {
+const s32 gStaffRollRikuScript0[51] = {
     6, 6, 0, 0, 44, 516,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 17, 95,
@@ -327,7 +327,7 @@ const s32 gUnk_09A52ABC[51] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52B88[51] = {
+const s32 gStaffRollRikuScript1[51] = {
     6, 6, 0, 0, 69, 747,
     4, 6, 0, 0, 223, 85,
     9, 5, 0, 0, 30,
@@ -340,7 +340,7 @@ const s32 gUnk_09A52B88[51] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52C54[44] = {
+const s32 gStaffRollRikuScript2[44] = {
     6, 6, 0, 0, 43, 485,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 32, 110,
@@ -352,7 +352,7 @@ const s32 gUnk_09A52C54[44] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52D04[39] = {
+const s32 gStaffRollRikuScript3[39] = {
     6, 6, 0, 0, 81, 856,
     4, 6, 0, 0, 200, 110,
     9, 5, 0, 0, 30,
@@ -363,7 +363,7 @@ const s32 gUnk_09A52D04[39] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52DA0[39] = {
+const s32 gStaffRollRikuScript4[39] = {
     6, 6, 0, 0, 67, 721,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 28, 110,
@@ -374,7 +374,7 @@ const s32 gUnk_09A52DA0[39] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52E3C[34] = {
+const s32 gStaffRollRikuScript5[34] = {
     6, 6, 0, 0, 83, 889,
     4, 6, 0, 0, 216, 110,
     9, 5, 0, 0, 30,
@@ -384,7 +384,7 @@ const s32 gUnk_09A52E3C[34] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52EC4[44] = {
+const s32 gStaffRollRikuScript6[44] = {
     6, 6, 0, 0, 82, 887,
     3, 5, 0, 0, 1,
     4, 6, 0, 0, 32, 110,
@@ -396,7 +396,7 @@ const s32 gUnk_09A52EC4[44] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A52F74[93] = {
+const s32 gStaffRollRikuScript7[93] = {
     6, 6, 0, 0, 79, 841,
     4, 6, 0, 0, 184, 110,
     9, 5, 0, 0, 30,
@@ -417,7 +417,7 @@ const s32 gUnk_09A52F74[93] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A530E8[49] = {
+const s32 gStaffRollRikuScript8[49] = {
     6, 6, 0, 0, 30, 410,
     4, 6, 0, 0, 48, 110,
     3, 5, 0, 0, 1,
@@ -430,7 +430,7 @@ const s32 gUnk_09A530E8[49] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A531AC[46] = {
+const s32 gStaffRollRikuScript9[46] = {
     6, 6, 0, 0, 21, 364,
     4, 6, 0, 0, 212, 110,
     9, 5, 0, 0, 30,
@@ -442,7 +442,7 @@ const s32 gUnk_09A531AC[46] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A53264[110] = {
+const s32 gStaffRollRikuScript10[110] = {
     6, 6, 0, 0, 25, 397,
     4, 6, 0, 0, 25, 105,
     3, 5, 0, 0, 1,
@@ -466,7 +466,7 @@ const s32 gUnk_09A53264[110] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A5341C[54] = {
+const s32 gStaffRollRikuScript11[54] = {
     6, 6, 0, 0, 47, 582,
     4, 6, 0, 0, 200, 110,
     9, 5, 0, 0, 30,
@@ -480,7 +480,7 @@ const s32 gUnk_09A5341C[54] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A534F4[44] = {
+const s32 gStaffRollRikuScript12[44] = {
     6, 6, 0, 0, 20, 353,
     4, 6, 0, 0, 52, 110,
     3, 5, 0, 0, 1,
@@ -492,7 +492,7 @@ const s32 gUnk_09A534F4[44] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A535A4[34] = {
+const s32 gStaffRollRikuScript13[34] = {
     6, 6, 0, 0, 64, 688,
     4, 6, 0, 0, 208, 110,
     9, 5, 0, 0, 30,
@@ -502,7 +502,7 @@ const s32 gUnk_09A535A4[34] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A5362C[39] = {
+const s32 gStaffRollRikuScript14[39] = {
     6, 6, 0, 0, 84, 907,
     4, 6, 0, 0, 32, 110,
     3, 5, 0, 0, 1,
@@ -513,7 +513,7 @@ const s32 gUnk_09A5362C[39] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A536C8[44] = {
+const s32 gStaffRollRikuScript15[44] = {
     6, 6, 0, 0, 65, 695,
     4, 6, 0, 0, 216, 100,
     9, 5, 0, 0, 30,
@@ -525,7 +525,7 @@ const s32 gUnk_09A536C8[44] = {
     0, 0, -1,
 };
 
-const s32 gUnk_09A53778[88] = {
+const s32 gStaffRollRikuScript16[88] = {
     6, 6, 0, 1, 34, 420,
     4, 6, 0, 1, 128, 100,
     3, 5, 0, 1, 1,
@@ -547,7 +547,7 @@ const s32 gUnk_09A53778[88] = {
 
 #ifdef VERSION_US
 
-u8* gUnk_09EF9F54[632] = {
+u8* gStaffRollLines[632] = {
     gUnkUs_09A516BC,
     gUnkUs_09A516B8,
     gUnkUs_09A516A0,
@@ -1182,55 +1182,55 @@ u8* gUnk_09EF9F54[632] = {
     0,
 };
 
-const s32* gUnk_09EFA934[17] = {
-    gUnk_09A516C8,
-    gUnk_09A51780,
-    gUnk_09A51874,
-    gUnk_09A51970,
-    gUnk_09A51AB0,
-    gUnk_09A51C24,
-    gUnk_09A51D60,
-    gUnk_09A51F94,
-    gUnk_09A52084,
-    gUnk_09A52248,
-    gUnk_09A5233C,
-    gUnk_09A52454,
-    gUnk_09A52504,
-    gUnk_09A52608,
-    gUnk_09A5279C,
-    gUnk_09A52868,
-    gUnk_09A5295C,
+const s32* gStaffRollSoraScripts[17] = {
+    gStaffRollSoraScript0,
+    gStaffRollSoraScript1,
+    gStaffRollSoraScript2,
+    gStaffRollSoraScript3,
+    gStaffRollSoraScript4,
+    gStaffRollSoraScript5,
+    gStaffRollSoraScript6,
+    gStaffRollSoraScript7,
+    gStaffRollSoraScript8,
+    gStaffRollSoraScript9,
+    gStaffRollSoraScript10,
+    gStaffRollSoraScript11,
+    gStaffRollSoraScript12,
+    gStaffRollSoraScript13,
+    gStaffRollSoraScript14,
+    gStaffRollSoraScript15,
+    gStaffRollSoraScript16,
 };
 
-const s32* gUnk_09EFA978[17] = {
-    gUnk_09A52ABC,
-    gUnk_09A52B88,
-    gUnk_09A52C54,
-    gUnk_09A52D04,
-    gUnk_09A52DA0,
-    gUnk_09A52E3C,
-    gUnk_09A52EC4,
-    gUnk_09A52F74,
-    gUnk_09A530E8,
-    gUnk_09A531AC,
-    gUnk_09A53264,
-    gUnk_09A5341C,
-    gUnk_09A534F4,
-    gUnk_09A535A4,
-    gUnk_09A5362C,
-    gUnk_09A536C8,
-    gUnk_09A53778,
+const s32* gStaffRollRikuScripts[17] = {
+    gStaffRollRikuScript0,
+    gStaffRollRikuScript1,
+    gStaffRollRikuScript2,
+    gStaffRollRikuScript3,
+    gStaffRollRikuScript4,
+    gStaffRollRikuScript5,
+    gStaffRollRikuScript6,
+    gStaffRollRikuScript7,
+    gStaffRollRikuScript8,
+    gStaffRollRikuScript9,
+    gStaffRollRikuScript10,
+    gStaffRollRikuScript11,
+    gStaffRollRikuScript12,
+    gStaffRollRikuScript13,
+    gStaffRollRikuScript14,
+    gStaffRollRikuScript15,
+    gStaffRollRikuScript16,
 };
 
-u8* gUnk_09EFA9BC = gUnkUs_09A516B8;
+u8* gStaffRollSpaceText = gUnkUs_09A516B8;
 
-u8* gUnk_09EFA9C0 = gUnkUs_09A54204;
+u8* gStaffRollTildeText = gStaffRollTildeUs;
 
 #endif
 
 #ifdef VERSION_JP
 
-u8* gUnk_09EF9F54[704] = {
+u8* gStaffRollLines[704] = {
     gUnkJp_09A0654C,
     gUnkJp_09A06548,
     gUnkJp_09A06530,
@@ -1937,55 +1937,55 @@ u8* gUnk_09EF9F54[704] = {
     0,
 };
 
-const s32* gUnk_09EFA934[17] = {
-    gUnk_09A516C8,
-    gUnk_09A51780,
-    gUnk_09A51874,
-    gUnk_09A51970,
-    gUnk_09A51AB0,
-    gUnk_09A51C24,
-    gUnk_09A51D60,
-    gUnk_09A51F94,
-    gUnk_09A52084,
-    gUnk_09A52248,
-    gUnk_09A5233C,
-    gUnk_09A52454,
-    gUnk_09A52504,
-    gUnk_09A52608,
-    gUnk_09A5279C,
-    gUnk_09A52868,
-    gUnk_09A5295C,
+const s32* gStaffRollSoraScripts[17] = {
+    gStaffRollSoraScript0,
+    gStaffRollSoraScript1,
+    gStaffRollSoraScript2,
+    gStaffRollSoraScript3,
+    gStaffRollSoraScript4,
+    gStaffRollSoraScript5,
+    gStaffRollSoraScript6,
+    gStaffRollSoraScript7,
+    gStaffRollSoraScript8,
+    gStaffRollSoraScript9,
+    gStaffRollSoraScript10,
+    gStaffRollSoraScript11,
+    gStaffRollSoraScript12,
+    gStaffRollSoraScript13,
+    gStaffRollSoraScript14,
+    gStaffRollSoraScript15,
+    gStaffRollSoraScript16,
 };
 
-const s32* gUnk_09EFA978[17] = {
-    gUnk_09A52ABC,
-    gUnk_09A52B88,
-    gUnk_09A52C54,
-    gUnk_09A52D04,
-    gUnk_09A52DA0,
-    gUnk_09A52E3C,
-    gUnk_09A52EC4,
-    gUnk_09A52F74,
-    gUnk_09A530E8,
-    gUnk_09A531AC,
-    gUnk_09A53264,
-    gUnk_09A5341C,
-    gUnk_09A534F4,
-    gUnk_09A535A4,
-    gUnk_09A5362C,
-    gUnk_09A536C8,
-    gUnk_09A53778,
+const s32* gStaffRollRikuScripts[17] = {
+    gStaffRollRikuScript0,
+    gStaffRollRikuScript1,
+    gStaffRollRikuScript2,
+    gStaffRollRikuScript3,
+    gStaffRollRikuScript4,
+    gStaffRollRikuScript5,
+    gStaffRollRikuScript6,
+    gStaffRollRikuScript7,
+    gStaffRollRikuScript8,
+    gStaffRollRikuScript9,
+    gStaffRollRikuScript10,
+    gStaffRollRikuScript11,
+    gStaffRollRikuScript12,
+    gStaffRollRikuScript13,
+    gStaffRollRikuScript14,
+    gStaffRollRikuScript15,
+    gStaffRollRikuScript16,
 };
 
-u8* gUnk_09EFA9BC = gUnkJp_09A06548;
+u8* gStaffRollSpaceText = gUnkJp_09A06548;
 
-u8* gUnk_09EFA9C0 = gUnkJp_09A09094;
+u8* gStaffRollTildeText = gStaffRollTildeJp;
 
 #endif
 
 #ifdef VERSION_EU
 
-u8* gUnk_09EF9F54[688] = {
+u8* gStaffRollLines[688] = {
     gUnkEu_09AAF3F4,
     gUnkEu_09AAF3F0,
     gUnkEu_09AAF3D8,
@@ -2676,55 +2676,55 @@ u8* gUnk_09EF9F54[688] = {
     0,
 };
 
-const s32* gUnk_09EFA934[17] = {
-    gUnk_09A516C8,
-    gUnk_09A51780,
-    gUnk_09A51874,
-    gUnk_09A51970,
-    gUnk_09A51AB0,
-    gUnk_09A51C24,
-    gUnk_09A51D60,
-    gUnk_09A51F94,
-    gUnk_09A52084,
-    gUnk_09A52248,
-    gUnk_09A5233C,
-    gUnk_09A52454,
-    gUnk_09A52504,
-    gUnk_09A52608,
-    gUnk_09A5279C,
-    gUnk_09A52868,
-    gUnk_09A5295C,
+const s32* gStaffRollSoraScripts[17] = {
+    gStaffRollSoraScript0,
+    gStaffRollSoraScript1,
+    gStaffRollSoraScript2,
+    gStaffRollSoraScript3,
+    gStaffRollSoraScript4,
+    gStaffRollSoraScript5,
+    gStaffRollSoraScript6,
+    gStaffRollSoraScript7,
+    gStaffRollSoraScript8,
+    gStaffRollSoraScript9,
+    gStaffRollSoraScript10,
+    gStaffRollSoraScript11,
+    gStaffRollSoraScript12,
+    gStaffRollSoraScript13,
+    gStaffRollSoraScript14,
+    gStaffRollSoraScript15,
+    gStaffRollSoraScript16,
 };
 
-const s32* gUnk_09EFA978[17] = {
-    gUnk_09A52ABC,
-    gUnk_09A52B88,
-    gUnk_09A52C54,
-    gUnk_09A52D04,
-    gUnk_09A52DA0,
-    gUnk_09A52E3C,
-    gUnk_09A52EC4,
-    gUnk_09A52F74,
-    gUnk_09A530E8,
-    gUnk_09A531AC,
-    gUnk_09A53264,
-    gUnk_09A5341C,
-    gUnk_09A534F4,
-    gUnk_09A535A4,
-    gUnk_09A5362C,
-    gUnk_09A536C8,
-    gUnk_09A53778,
+const s32* gStaffRollRikuScripts[17] = {
+    gStaffRollRikuScript0,
+    gStaffRollRikuScript1,
+    gStaffRollRikuScript2,
+    gStaffRollRikuScript3,
+    gStaffRollRikuScript4,
+    gStaffRollRikuScript5,
+    gStaffRollRikuScript6,
+    gStaffRollRikuScript7,
+    gStaffRollRikuScript8,
+    gStaffRollRikuScript9,
+    gStaffRollRikuScript10,
+    gStaffRollRikuScript11,
+    gStaffRollRikuScript12,
+    gStaffRollRikuScript13,
+    gStaffRollRikuScript14,
+    gStaffRollRikuScript15,
+    gStaffRollRikuScript16,
 };
 
-u8* gUnk_09EFA9BC = gUnkEu_09AAF3F0;
+u8* gStaffRollSpaceText = gUnkEu_09AAF3F0;
 
-u8* gUnk_09EFA9C0 = gUnkEu_09AB1F3C;
+u8* gStaffRollTildeText = gStaffRollTildeEu;
 
 #endif
 
 #ifdef VERSION_JP
 
-const StaffRollScene gUnk_09A538D8[22] = {
+const StaffRollScene gStaffRollSoraScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CD2B74, 11200, 0, gUnk_09D5A274, 2048, 0, gUnk_09D69614, 512, 0, 30720, 31744, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, 0, gUnk_09D5AA74, 2048, 0, gUnk_09D69814, 512, 0, 30720, 31744, 0, 2 },
@@ -2749,7 +2749,7 @@ const StaffRollScene gUnk_09A538D8[22] = {
     { 1, 0, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, 0, gUnk_09D5FA74, 2048, 0, gUnk_09D6A814, 512, 0, 30720, 9216, 0, 19 },
 };
 
-const StaffRollScene gUnk_09A53D50[22] = {
+const StaffRollScene gStaffRollRikuScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CEE0F4, 11200, 0, gUnk_09D60274, 2048, 0, gUnk_09D6AA14, 512, 0, 30720, 31744, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, 0, gUnk_09D60A74, 2048, 0, gUnk_09D6AC14, 512, 0, 30720, 31744, 0, 2 },
@@ -2776,7 +2776,7 @@ const StaffRollScene gUnk_09A53D50[22] = {
 
 #else
 
-const StaffRollScene gUnk_09A538D8[22] = {
+const StaffRollScene gStaffRollSoraScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CD2B74, 11200, 0, gUnk_09D5A274, 2048, 0, gUnk_09D69614, 512, 0, 30720, 32768, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, 0, gUnk_09D5AA74, 2048, 0, gUnk_09D69814, 512, 0, 30720, 32768, 0, 2 },
@@ -2801,7 +2801,7 @@ const StaffRollScene gUnk_09A538D8[22] = {
     { 1, 0, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, 0, gUnk_09D5FA74, 2048, 0, gUnk_09D6A814, 512, 0, 30720, 10240, 0, 19 },
 };
 
-const StaffRollScene gUnk_09A53D50[22] = {
+const StaffRollScene gStaffRollRikuScenes[22] = {
     { 0, 1, 1, 0, 120, 0, -2048, gUnk_09CD1774, 5120, 0, gUnk_09D59A74, 2048, 0, gUnk_09D695F4, 32, 0, 30720, 51200, 0, 0 },
     { 1, 1, 1, 0, 300, -1024, -1024, gUnk_09CEE0F4, 11200, 0, gUnk_09D60274, 2048, 0, gUnk_09D6AA14, 512, 0, 30720, 32768, 0, 1 },
     { 1, 1, 0, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, 0, gUnk_09D60A74, 2048, 0, gUnk_09D6AC14, 512, 0, 30720, 32768, 0, 2 },
@@ -2828,7 +2828,7 @@ const StaffRollScene gUnk_09A53D50[22] = {
 
 #endif
 
-const u8 gUnk_09A541C8[60] = {
+const u8 gStaffRollTextInit[60] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x08, 0x00, 0x06, 0x00, 0xE0, 0x00, 0x06, 0x0F, 0x00, 0x0D, 0x00,
@@ -2837,11 +2837,11 @@ const u8 gUnk_09A541C8[60] = {
 };
 
 #if defined(VERSION_US)
-const u8 gUnkUs_09A54204[2] = "~";
+const u8 gStaffRollTildeUs[2] = "~";
 #elif defined(VERSION_JP)
-const u8 gUnkJp_09A09094[2] = "~";
+const u8 gStaffRollTildeJp[2] = "~";
 #else
-const u8 gUnkEu_09AB1F3C[2] = "~";
+const u8 gStaffRollTildeEu[2] = "~";
 #endif
 
 StaffRollWork* gStaffRollWork;
@@ -2850,19 +2850,19 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void func_081125BC(StaffRollWork* w) {
-    w->unk_078 = 0;
-    w->unk_07C = 0;
-    w->unk_080 = 0;
+void StaffRollBlendReset(StaffRollWork* w) {
+    w->blendMode = 0;
+    w->blendDuration = 0;
+    w->blendTimer = 0;
     gBldCnt = 0;
     gBldY = 0;
 }
 
-u8 func_081125D8(StaffRollWork* w) {
+u8 StaffRollBlendIsActive(StaffRollWork* w) {
     u8 result;
 
     result = 1;
-    if (w->unk_080 >= w->unk_07C) {
+    if (w->blendTimer >= w->blendDuration) {
         gBldCnt &= ~BLDCNT_EFFECT_MASK;
         result = 0;
     }
@@ -2870,12 +2870,12 @@ u8 func_081125D8(StaffRollWork* w) {
     return result;
 }
 
-void func_08112600(StaffRollWork* w) {
+void StaffRollBlendUpdate(StaffRollWork* w) {
     u16 v;
 
-    if (w->unk_080 < w->unk_07C) {
-        v = ((w->unk_080 << 12) / w->unk_07C) << 8 >> 16;
-        w->unk_080 = w->unk_080 + 1;
+    if (w->blendTimer < w->blendDuration) {
+        v = ((w->blendTimer << 12) / w->blendDuration) << 8 >> 16;
+        w->blendTimer = w->blendTimer + 1;
     } else {
         v = 16;
         gBldCnt &= ~BLDCNT_EFFECT_MASK;
@@ -2883,7 +2883,7 @@ void func_08112600(StaffRollWork* w) {
         gBldY = 0;
     }
 
-    switch (w->unk_078) {
+    switch (w->blendMode) {
     case 0:
     case 2:
         gBldY = 16 - v;
@@ -2901,172 +2901,172 @@ void func_08112600(StaffRollWork* w) {
     }
 }
 
-void func_081126A8(StaffRollWork* w, u16 flags, s32 dur) {
-    w->unk_078 = 0;
-    w->unk_07C = dur;
-    w->unk_080 = 0;
+void StaffRollBlendFadeIn(StaffRollWork* w, u16 flags, s32 dur) {
+    w->blendMode = 0;
+    w->blendDuration = dur;
+    w->blendTimer = 0;
     gBldCnt = flags | 0xE0;
     gBldY = 16;
 }
 
-void func_081126D0(StaffRollWork* w, u16 flags, s32 dur) {
-    w->unk_078 = 1;
-    w->unk_07C = dur;
-    w->unk_080 = 0;
+void StaffRollBlendFadeOut(StaffRollWork* w, u16 flags, s32 dur) {
+    w->blendMode = 1;
+    w->blendDuration = dur;
+    w->blendTimer = 0;
     gBldCnt = flags | 0xE0;
     gBldY = 0;
 }
 
-void func_081126F8(StaffRollWork* w, u16 flags, s32 dur) {
-    w->unk_078 = 4;
-    w->unk_07C = dur;
-    w->unk_080 = 0;
+void StaffRollBlendAlphaIn(StaffRollWork* w, u16 flags, s32 dur) {
+    w->blendMode = 4;
+    w->blendDuration = dur;
+    w->blendTimer = 0;
     gBldCnt = flags | 0x40;
     gBldAlpha = 0;
 }
 
-void func_08112720(StaffRollWork* w, u16 flags, s32 dur) {
-    w->unk_078 = 5;
-    w->unk_07C = dur;
-    w->unk_080 = 0;
+void StaffRollBlendAlphaOut(StaffRollWork* w, u16 flags, s32 dur) {
+    w->blendMode = 5;
+    w->blendDuration = dur;
+    w->blendTimer = 0;
     gBldCnt = flags | 0x40;
     gBldAlpha = 16;
 }
 
-EvtObj* func_08112748(StaffRollWork* w) {
-    return &w->objs[w->unk_0CC[w->unk_0D0 + 3]];
+EvtObj* StaffRollGetScriptObj(StaffRollWork* w) {
+    return &w->objs[w->script[w->scriptPos + 3]];
 }
 
-void func_08112768(StaffRollWork* w) {
+void StaffRollRunScript(StaffRollWork* w) {
     StaffRollLabelArg arg;
     EvtObj* e;
     s32 run;
     s32 x;
     s32 y;
 
-    if (w->unk_0CC == 0) {
+    if (w->script == 0) {
         return;
     }
 
     run = 1;
 
     while (run != 0) {
-        if (w->unk_0D4 != w->unk_0CC[w->unk_0D0 + 2]) {
-            switch (w->unk_0D8) {
+        if (w->scriptFrame != w->script[w->scriptPos + 2]) {
+            switch (w->activeOp) {
             case 5:
-                if (w->unk_0F4 > w->unk_0E0) {
-                    x = w->unk_0E4 + (w->unk_0EC - w->unk_0E4) * w->unk_0E0 / w->unk_0F4;
-                    y = w->unk_0E0;
-                    y = w->unk_0E8 + (w->unk_0F0 - w->unk_0E8) * y / w->unk_0F4;
+                if (w->opDuration > w->opTimer) {
+                    x = w->moveStartX + (w->moveEndX - w->moveStartX) * w->opTimer / w->opDuration;
+                    y = w->opTimer;
+                    y = w->moveStartY + (w->moveEndY - w->moveStartY) * y / w->opDuration;
                 } else {
-                    x = w->unk_0EC;
-                    y = w->unk_0F0;
-                    w->unk_0D8 = -1;
-                    w->unk_0E0 = 0;
+                    x = w->moveEndX;
+                    y = w->moveEndY;
+                    w->activeOp = -1;
+                    w->opTimer = 0;
                 }
-                e = &w->objs[w->unk_0DC];
+                e = &w->objs[w->moveObj];
                 EvtObjSetPos(e, x, y, 0);
-                w->unk_0E0++;
+                w->opTimer++;
                 break;
             case 8:
-                if (w->unk_0F4 <= w->unk_0E0) {
-                    w->unk_0D8 = -1;
-                    w->unk_0E0 = 0;
+                if (w->opDuration <= w->opTimer) {
+                    w->activeOp = -1;
+                    w->opTimer = 0;
                 }
-                w->unk_0E0++;
+                w->opTimer++;
                 break;
             }
             break;
         }
 
-        w->unk_0D8 = -1;
-        w->unk_0E0 = 0;
+        w->activeOp = -1;
+        w->opTimer = 0;
 
-        switch (w->unk_0CC[w->unk_0D0]) {
+        switch (w->script[w->scriptPos]) {
         case 0:
             run = 0;
             continue;
         case 1:
-            w->unk_0D0 = 0;
-            w->unk_0D4 = 0;
+            w->scriptPos = 0;
+            w->scriptFrame = 0;
             continue;
         case 2:
-            e = func_08112748(w);
-            EvtObjSetAnim(e, w->unk_0CC[w->unk_0D0 + 4]);
+            e = StaffRollGetScriptObj(w);
+            EvtObjSetAnim(e, w->script[w->scriptPos + 4]);
             break;
         case 3:
-            e = func_08112748(w);
-            func_0801CE00(e, w->unk_0CC[w->unk_0D0 + 4] | 0x400);
+            e = StaffRollGetScriptObj(w);
+            EvtObjSetDrawFlags(e, w->script[w->scriptPos + 4] | 0x400);
             break;
         case 4:
-            e = func_08112748(w);
-            EvtObjSetPos(e, w->unk_0CC[w->unk_0D0 + 4] << 8, w->unk_0CC[w->unk_0D0 + 5] << 8, 0);
+            e = StaffRollGetScriptObj(w);
+            EvtObjSetPos(e, w->script[w->scriptPos + 4] << 8, w->script[w->scriptPos + 5] << 8, 0);
             break;
         case 5:
-            e = func_08112748(w);
-            w->unk_0D8 = 5;
-            w->unk_0DC = w->unk_0CC[w->unk_0D0 + 3];
-            w->unk_0E4 = e->x;
-            w->unk_0E8 = e->y;
-            w->unk_0EC = w->unk_0CC[w->unk_0D0 + 4] << 8;
-            w->unk_0F0 = w->unk_0CC[w->unk_0D0 + 5] << 8;
-            w->unk_0F4 = w->unk_0CC[w->unk_0D0 + 6];
+            e = StaffRollGetScriptObj(w);
+            w->activeOp = 5;
+            w->moveObj = w->script[w->scriptPos + 3];
+            w->moveStartX = e->x;
+            w->moveStartY = e->y;
+            w->moveEndX = w->script[w->scriptPos + 4] << 8;
+            w->moveEndY = w->script[w->scriptPos + 5] << 8;
+            w->opDuration = w->script[w->scriptPos + 6];
             break;
         case 6:
-            w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3] =
-                func_0801CE04(&w->tasks2, &gTaskDescSrollBChar, func_08112748(w), w->unk_0CC[w->unk_0D0 + 4],
-                              w->unk_0CC[w->unk_0D0 + 5], 0x2800, 0xF000, 0);
+            w->subTasks[w->script[w->scriptPos + 3] + 3] =
+                CreateEvtObjTaskWithDesc(&w->tasks2, &gTaskDescSrollBChar, StaffRollGetScriptObj(w), w->script[w->scriptPos + 4],
+                              w->script[w->scriptPos + 5], 0x2800, 0xF000, 0);
             break;
         case 7:
-            func_08000DE8(&w->tasks2, w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3]);
+            TaskKill(&w->tasks2, w->subTasks[w->script[w->scriptPos + 3] + 3]);
             break;
         case 8:
-            w->unk_0D8 = 5;
-            w->unk_0F4 = w->unk_0CC[w->unk_0D0 + 4];
+            w->activeOp = 5;
+            w->opDuration = w->script[w->scriptPos + 4];
             break;
         case 9:
-            FadeStartIn(0, (u16)w->unk_0CC[w->unk_0D0 + 4]);
+            FadeStartIn(0, (u16)w->script[w->scriptPos + 4]);
             break;
         case 10:
-            FadeStartOut(0, (u16)w->unk_0CC[w->unk_0D0 + 4]);
+            FadeStartOut(0, (u16)w->script[w->scriptPos + 4]);
             break;
         case 11:
-            e = func_08112748(w);
-            e->unk_16 |= 4;
-            func_081126F8(w, 0x2000, w->unk_0CC[w->unk_0D0 + 4]);
+            e = StaffRollGetScriptObj(w);
+            e->drawFlags |= 4;
+            StaffRollBlendAlphaIn(w, 0x2000, w->script[w->scriptPos + 4]);
             break;
         case 12:
-            e = func_08112748(w);
-            e->unk_16 |= 4;
-            func_08112720(w, 0x2000, w->unk_0CC[w->unk_0D0 + 4]);
+            e = StaffRollGetScriptObj(w);
+            e->drawFlags |= 4;
+            StaffRollBlendAlphaOut(w, 0x2000, w->script[w->scriptPos + 4]);
             break;
         case 13:
-            e = func_08112748(w);
-            e->unk_16 |= 4;
+            e = StaffRollGetScriptObj(w);
+            e->drawFlags |= 4;
             break;
         case 14:
-            e = func_08112748(w);
-            e->unk_16 &= 0xFFFB;
+            e = StaffRollGetScriptObj(w);
+            e->drawFlags &= 0xFFFB;
             break;
         case 15:
-            e = func_08112748(w);
-            arg.unk_00 = w->unk_0CC[w->unk_0D0 + 4];
+            e = StaffRollGetScriptObj(w);
+            arg.kind = w->script[w->scriptPos + 4];
             arg.x = e->x;
             arg.y = e->y;
             TaskCreate(&w->tasks2, &gTaskDescSrollBCrtn, &arg);
             break;
         case 16:
-            func_081149B0(w->unk_124[w->unk_0CC[w->unk_0D0 + 3] + 3],
-                          w->unk_0CC[w->unk_0D0 + 4]);
+            SrollBCharSetMotion(w->subTasks[w->script[w->scriptPos + 3] + 3],
+                          w->script[w->scriptPos + 4]);
             break;
         default:
             continue;
         }
 
-        w->unk_0D0 += w->unk_0CC[w->unk_0D0 + 1];
+        w->scriptPos += w->script[w->scriptPos + 1];
     }
 
-    w->unk_0D4++;
+    w->scriptFrame++;
 }
 
 void mode_StaffRoll_0(void) {
@@ -3081,55 +3081,55 @@ void mode_StaffRoll_0(void) {
     w->palette = LoadObjPalette(gUnk_09D6BE74, 0x100);
     w->unk_000 = 1;
     w->unk_001 = 1;
-    w->unk_008 = 0;
-    w->unk_00C = 0;
-    w->unk_010 = 0;
-    w->unk_014 = 0;
-    func_081125BC(w);
-    w->unk_084 = 0;
-    w->unk_08C = 0;
-    w->unk_088 = 0;
-    w->unk_090 = -1;
-    w->unk_094 = 0;
-    w->unk_098 = 0;
-    w->unk_0A4 = 0;
-    w->unk_0A0 = 0;
-    w->unk_0A8 = 0;
+    w->phase = 0;
+    w->phaseTimer = 0;
+    w->musicFrames = 0;
+    w->secnCount = 0;
+    StaffRollBlendReset(w);
+    w->sceneState = 0;
+    w->sceneStep = 0;
+    w->sceneTimer = 0;
+    w->sceneIndex = -1;
+    w->nextScene = 0;
+    w->sceneScroll = 0;
+    w->creditsState = 0;
+    w->creditsEnded = 0;
+    w->creditsTimer = 0;
     w->unk_0AC = 0;
-    w->unk_0B0 = -1;
-    w->unk_0B8 = 0;
-    w->unk_0BC = 0;
-    w->unk_0C0 = 0;
-    w->unk_0C4 = 0;
-    w->unk_0C8 = 0;
-    w->unk_0CC = 0;
-    w->unk_0D0 = 0;
-    w->unk_0D4 = 0;
-    w->unk_0D8 = -1;
-    w->unk_0E0 = 0;
+    w->lastRow = -1;
+    w->scrollY = 0;
+    w->imageState = 0;
+    w->imageTimer = 0;
+    w->endState = 0;
+    w->endTimer = 0;
+    w->script = 0;
+    w->scriptPos = 0;
+    w->scriptFrame = 0;
+    w->activeOp = -1;
+    w->opTimer = 0;
     TaskPoolInit(&w->tasks, 32);
     TaskPoolInit(&w->tasks2, 32);
-    w->unk_124[0] = 0;
-    w->unk_124[1] = 0;
-    w->unk_124[2] = 0;
-    w->unk_124[4] = 0;
-    w->unk_124[5] = 0;
+    w->subTasks[0] = 0;
+    w->subTasks[1] = 0;
+    w->subTasks[2] = 0;
+    w->subTasks[4] = 0;
+    w->subTasks[5] = 0;
     w->objs[0].animEntry = 0;
 }
 
-u8 func_08112C24(StaffRollWork* w) {
+u8 StaffRollWaitStart(StaffRollWork* w) {
     u8 result;
 
     result = 1;
-    if (w->unk_00C > 74) {
+    if (w->phaseTimer > 74) {
         result = 0;
     }
-    w->unk_00C++;
+    w->phaseTimer++;
 
     return result;
 }
 
-u8 func_08112C38(StaffRollWork* w) {
+u8 StaffRollRunScenes(StaffRollWork* w) {
     StaffRollTaskArg arg;
     u8 result;
     s32 z;
@@ -3137,12 +3137,12 @@ u8 func_08112C38(StaffRollWork* w) {
     result = 1;
 
     if ((gGameState.flags & 8) != 0) {
-        w->scene = gUnk_09A53D50;
+        w->scene = gStaffRollRikuScenes;
     } else {
-        w->scene = gUnk_09A538D8;
+        w->scene = gStaffRollSoraScenes;
     }
 
-    switch (w->unk_084) {
+    switch (w->sceneState) {
     case 0:
         SetBgMode1();
         SetupBg(0, 0, 28, 0);
@@ -3167,161 +3167,161 @@ u8 func_08112C38(StaffRollWork* w) {
         DisableBg(3);
         SetBgColorMode(0, 0x80);
 
-        if (w->unk_090 != w->unk_094) {
-            w->unk_090 = w->unk_094;
+        if (w->sceneIndex != w->nextScene) {
+            w->sceneIndex = w->nextScene;
 
-            if (w->scene[w->unk_090].unk_00 == 1) {
+            if (w->scene[w->sceneIndex].color256 == 1) {
                 SetBgColorMode(0, 0x80);
             } else {
                 SetBgColorMode(0, 0);
             }
 
             EnableBg(0);
-            LoadBgTiles(0, w->scene[w->unk_090].tiles, w->scene[w->unk_090].tilesSize);
-            LoadBgMap(0, w->scene[w->unk_090].map, w->scene[w->unk_090].mapSize);
-            LoadBgPalette(0, w->scene[w->unk_090].palette, w->scene[w->unk_090].paletteSize);
-            SetBgScroll(0, (u16) - (w->scene[w->unk_090].x >> 8),
-                        (u16) - (w->scene[w->unk_090].y >> 8));
+            LoadBgTiles(0, w->scene[w->sceneIndex].tiles, w->scene[w->sceneIndex].tilesSize);
+            LoadBgMap(0, w->scene[w->sceneIndex].map, w->scene[w->sceneIndex].mapSize);
+            LoadBgPalette(0, w->scene[w->sceneIndex].palette, w->scene[w->sceneIndex].paletteSize);
+            SetBgScroll(0, (u16) - (w->scene[w->sceneIndex].x >> 8),
+                        (u16) - (w->scene[w->sceneIndex].y >> 8));
         }
 
-        w->unk_084 = 1;
-        w->unk_08C = 0;
+        w->sceneState = 1;
+        w->sceneStep = 0;
     case 1:
     {
         u8 t;
 
-            if (w->unk_08C == 0) {
-                if (w->scene[w->unk_090].unk_01 == 1) {
-                    func_081126A8(w, 17, 30);
+            if (w->sceneStep == 0) {
+                if (w->scene[w->sceneIndex].fadeInBg == 1) {
+                    StaffRollBlendFadeIn(w, 17, 30);
                 } else {
-                    func_081126A8(w, 16, 30);
+                    StaffRollBlendFadeIn(w, 16, 30);
                 }
-                w->unk_08C++;
+                w->sceneStep++;
             }
 
-            func_08112600(w);
-            t = func_081125D8(w);
+            StaffRollBlendUpdate(w);
+            t = StaffRollBlendIsActive(w);
             if (t != 0) {
                 break;
             }
 
-            arg.unk_00 = t;
-            arg.unk_02 = w->scene[w->unk_090].unk_30;
-            arg.unk_04 = t;
+            arg.kind = t;
+            arg.unk_02 = w->scene[w->sceneIndex].unk_30;
+            arg.nameIndex = t;
             arg.x = 0x14000;
-            arg.y = w->scene[w->unk_090].targetY;
-            arg.targetX = w->scene[w->unk_090].targetX;
-            arg.targetY = w->scene[w->unk_090].targetY;
-            w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
-            arg.unk_00 = 1;
+            arg.y = w->scene[w->sceneIndex].targetY;
+            arg.targetX = w->scene[w->sceneIndex].targetX;
+            arg.targetY = w->scene[w->sceneIndex].targetY;
+            w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
+            arg.kind = 1;
             arg.unk_02 = 1;
-            arg.unk_04 = w->scene[w->unk_090].unk_32;
+            arg.nameIndex = w->scene[w->sceneIndex].nameIndex;
             arg.x = -0x5000;
             z = 0x7800;
             arg.targetX = z;
-            w->unk_124[1] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
-            arg.unk_00 = 2;
-            arg.unk_02 = w->scene[w->unk_090].unk_30;
-            arg.unk_04 = w->scene[w->unk_090].unk_32;
+            w->subTasks[1] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
+            arg.kind = 2;
+            arg.unk_02 = w->scene[w->sceneIndex].unk_30;
+            arg.nameIndex = w->scene[w->sceneIndex].nameIndex;
             arg.x = z;
-            w->unk_124[2] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
-            w->unk_084 = 2;
-            w->unk_08C = t;
+            w->subTasks[2] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
+            w->sceneState = 2;
+            w->sceneStep = t;
             break;
     }
     case 2:
-        w->unk_088++;
-        if (w->unk_088 >= w->scene[w->unk_090].unk_04) {
-            w->unk_084 = 3;
-            w->unk_08C = 0;
-            w->unk_088 = 0;
+        w->sceneTimer++;
+        if (w->sceneTimer >= w->scene[w->sceneIndex].duration) {
+            w->sceneState = 3;
+            w->sceneStep = 0;
+            w->sceneTimer = 0;
             break;
         }
         if ((w->flags & 1) != 0 || (w->unk_004 & 0x100) != 0) {
-            w->unk_084 = 3;
-            w->unk_08C = 0;
-            w->unk_088 = 0;
+            w->sceneState = 3;
+            w->sceneStep = 0;
+            w->sceneTimer = 0;
             break;
         }
         if ((w->flags & 2) == 0) {
             break;
         }
-        func_08000DE8(&w->tasks, w->unk_124[0]);
-        func_08000DE8(&w->tasks, w->unk_124[1]);
-        func_08000DE8(&w->tasks, w->unk_124[2]);
-        w->unk_010 = 0x1518;
-        w->unk_084 = 4;
-        w->unk_08C = 0;
-        w->unk_088 = 0;
+        TaskKill(&w->tasks, w->subTasks[0]);
+        TaskKill(&w->tasks, w->subTasks[1]);
+        TaskKill(&w->tasks, w->subTasks[2]);
+        w->musicFrames = 0x1518;
+        w->sceneState = 4;
+        w->sceneStep = 0;
+        w->sceneTimer = 0;
         break;
     case 3:
     {
         u8 t;
 
-            if (w->unk_08C == 0) {
-                if (w->scene[w->unk_090].unk_02 == 1) {
-                    func_081126D0(w, 17, 30);
+            if (w->sceneStep == 0) {
+                if (w->scene[w->sceneIndex].fadeOutBg == 1) {
+                    StaffRollBlendFadeOut(w, 17, 30);
                 } else {
-                    func_081126D0(w, 16, 30);
+                    StaffRollBlendFadeOut(w, 16, 30);
                 }
-                w->unk_08C++;
+                w->sceneStep++;
             }
 
-            func_08112600(w);
-            t = func_081125D8(w);
+            StaffRollBlendUpdate(w);
+            t = StaffRollBlendIsActive(w);
             if (t != 0) {
                 break;
             }
 
-            if (w->scene[w->unk_090].unk_02 == 1) {
+            if (w->scene[w->sceneIndex].fadeOutBg == 1) {
                 DisableBg(0);
             }
 
-            func_08000DE8(&w->tasks, w->unk_124[0]);
-            func_08000DE8(&w->tasks, w->unk_124[1]);
-            func_08000DE8(&w->tasks, w->unk_124[2]);
-            w->unk_094 = w->unk_090 + 1;
+            TaskKill(&w->tasks, w->subTasks[0]);
+            TaskKill(&w->tasks, w->subTasks[1]);
+            TaskKill(&w->tasks, w->subTasks[2]);
+            w->nextScene = w->sceneIndex + 1;
 
-            if (w->unk_094 > 21) {
-                w->unk_084 = 4;
+            if (w->nextScene > 21) {
+                w->sceneState = 4;
             } else {
-                w->unk_084 = t;
+                w->sceneState = t;
             }
 
-            w->unk_08C = 0;
-            w->unk_088 = 0;
+            w->sceneStep = 0;
+            w->sceneTimer = 0;
             break;
     }
     case 4:
     {
         s32 v;
 
-        v = w->unk_098 + 64;
-        w->unk_098 = v;
+        v = w->sceneScroll + 64;
+        w->sceneScroll = v;
 
         if (v > 0x1BFF) {
-            SetBgScroll(0, (u16) - (w->scene[w->unk_090].x >> 8),
-                        (u16)(-(w->scene[w->unk_090].y >> 8) + 28));
-            if (w->unk_098 > 0x4000) {
-                w->unk_084 = 6;
-                w->unk_08C = 0;
-                w->unk_088 = 0;
+            SetBgScroll(0, (u16) - (w->scene[w->sceneIndex].x >> 8),
+                        (u16)(-(w->scene[w->sceneIndex].y >> 8) + 28));
+            if (w->sceneScroll > 0x4000) {
+                w->sceneState = 6;
+                w->sceneStep = 0;
+                w->sceneTimer = 0;
             }
         } else {
-            SetBgScroll(0, (u16) - (w->scene[w->unk_090].x >> 8),
-                        (u16)(-(w->scene[w->unk_090].y >> 8) + (v >> 8)));
+            SetBgScroll(0, (u16) - (w->scene[w->sceneIndex].x >> 8),
+                        (u16)(-(w->scene[w->sceneIndex].y >> 8) + (v >> 8)));
         }
         break;
     }
     case 5:
         break;
     case 6:
-        if (w->unk_08C == 0) {
-            func_081126D0(w, 17, 120);
-            w->unk_08C++;
+        if (w->sceneStep == 0) {
+            StaffRollBlendFadeOut(w, 17, 120);
+            w->sceneStep++;
         }
-        func_08112600(w);
-        if (func_081125D8(w) == 0) {
+        StaffRollBlendUpdate(w);
+        if (StaffRollBlendIsActive(w) == 0) {
             result = 0;
         }
         break;
@@ -3346,7 +3346,7 @@ u8 func_08112C38(StaffRollWork* w) {
 #endif
 #endif
 
-u8 func_08113180(StaffRollWork* w) {
+u8 StaffRollRunCredits(StaffRollWork* w) {
     u8 buf[80];
     StaffRollLogoArg logo;
     StaffRollSecnArg secn;
@@ -3369,9 +3369,9 @@ u8 func_08113180(StaffRollWork* w) {
 
     result = 1;
 
-    switch (w->unk_0A4) {
+    switch (w->creditsState) {
     case 0:
-        func_081125BC(w);
+        StaffRollBlendReset(w);
         SetBgMode1();
         SetupBg(0, 0, 28, 0);
         SetupBg(1, 0, 29, 0);
@@ -3398,38 +3398,38 @@ u8 func_08113180(StaffRollWork* w) {
             FadeSetPaletteExcluded(i, 1);
         }
 
-        SrollTextInit(&w->text, gUnk_09A541C8);
+        SrollTextInit(&w->text, gStaffRollTextInit);
         LoadBgPalette(0, gUnk_09D6BE14, 32);
         (*(volatile u16*)&gDispCnt) |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
         gWinOut = (WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         gWin0H = 0x10E0;
         gWin0V = 0x898;
-        w->unk_0A4 = 1;
-        w->unk_0A8 = 0;
+        w->creditsState = 1;
+        w->creditsTimer = 0;
     case 1:
-        w->unk_0B4 = STAFFROLL_SCROLL_SPEED / ((STAFFROLL_SCROLL_FRAMES - w->unk_010) << 8);
-        w->unk_0A4 = 2;
-        w->unk_0A8 = 0;
+        w->scrollSpeed = STAFFROLL_SCROLL_SPEED / ((STAFFROLL_SCROLL_FRAMES - w->musicFrames) << 8);
+        w->creditsState = 2;
+        w->creditsTimer = 0;
         break;
     case 2:
-        w->unk_0B8 += w->unk_0B4;
-        sub = w->unk_0B8 >> 8;
-        row = w->unk_0B8 >> 11;
+        w->scrollY += w->scrollSpeed;
+        sub = w->scrollY >> 8;
+        row = w->scrollY >> 11;
 
-        if (sub % 8 == 0 && w->unk_0B0 != row) {
-            s = gUnk_09EF9F54[row];
+        if (sub % 8 == 0 && w->lastRow != row) {
+            s = gStaffRollLines[row];
 
-            if (w->unk_0A0 == 0 && s == 0) {
-                w->unk_0B4 = 0;
-                w->unk_0A0 = 1;
+            if (w->creditsEnded == 0 && s == 0) {
+                w->scrollSpeed = 0;
+                w->creditsEnded = 1;
             }
 
             if (*s != '!') {
                 SrollTextClearRect(&w->text, 0, (row + 20) & 31, 30, 2, 1);
             }
 
-            if (w->unk_0A0 == 0) {
+            if (w->creditsEnded == 0) {
                 SrollTextSetColors(&w->text, 15, 13, 0, 14);
                 loop = 1;
 
@@ -3441,38 +3441,38 @@ u8 func_08113180(StaffRollWork* w) {
                     case '*':
                         switch (s[1]) {
                         case 'D':
-                            logo.unk_10 = 0;
+                            logo.animId = 0;
                             break;
                         case 'S':
-                            logo.unk_10 = 1;
+                            logo.animId = 1;
                             break;
                         case 'J':
-                            logo.unk_10 = 2;
+                            logo.animId = 2;
                             break;
                         }
-                        logo.unk_00 = 0x7800;
-                        logo.unk_04 = ((w->unk_0B8 >> 8) + 168) << 8;
-                        logo.unk_08 = &w->unk_0B8;
-                        logo.unk_0C = &w->unk_0B4;
+                        logo.x = 0x7800;
+                        logo.y = ((w->scrollY >> 8) + 168) << 8;
+                        logo.scrollY = &w->scrollY;
+                        logo.scrollSpeed = &w->scrollSpeed;
                         TaskCreate(&w->tasks2, &gTaskDescSrollBLogo, &logo);
                         loop = 0;
                         break;
                     case '<':
-                        secn.unk_00 = w->unk_014;
-                        secn.unk_04 = 0x17800;
-                        secn.unk_08 = ((w->unk_0B8 >> 8) + 168) << 8;
-                        secn.unk_0C = &w->unk_0B8;
-                        secn.unk_10 = &w->unk_0B4;
+                        secn.index = w->secnCount;
+                        secn.x = 0x17800;
+                        secn.y = ((w->scrollY >> 8) + 168) << 8;
+                        secn.scrollY = &w->scrollY;
+                        secn.scrollSpeed = &w->scrollSpeed;
                         TaskCreate(&w->tasks2, &gTaskDescSrollBSecn, &secn);
-                        w->unk_014++;
+                        w->secnCount++;
                         loop = 0;
                         break;
                     case '[':
-                        secn.unk_00 = -1;
-                        secn.unk_04 = 0x7800;
-                        secn.unk_08 = ((w->unk_0B8 >> 8) + 168) << 8;
-                        secn.unk_0C = &w->unk_0B8;
-                        secn.unk_10 = &w->unk_0B4;
+                        secn.index = -1;
+                        secn.x = 0x7800;
+                        secn.y = ((w->scrollY >> 8) + 168) << 8;
+                        secn.scrollY = &w->scrollY;
+                        secn.scrollSpeed = &w->scrollSpeed;
                         TaskCreate(&w->tasks2, &gTaskDescSrollBSecn, &secn);
                         loop = 0;
                         break;
@@ -3487,8 +3487,8 @@ u8 func_08113180(StaffRollWork* w) {
                     case '~':
                         s++;
                         wa = SrollTextMeasureWidth(&w->text, s);
-                        wb = SrollTextMeasureWidth(&w->text, gUnk_09EFA9C0);
-                        wc = SrollTextMeasureWidth(&w->text, gUnk_09EFA9BC);
+                        wb = SrollTextMeasureWidth(&w->text, gStaffRollTildeText);
+                        wc = SrollTextMeasureWidth(&w->text, gStaffRollSpaceText);
                         w1 = wa - wb + wc * 3;
                         x = (240 - w1) >> 1;
                         SrollTextSetColors(&w->text, 7, 5, 0, 6);
@@ -3535,40 +3535,40 @@ u8 func_08113180(StaffRollWork* w) {
             }
         }
 
-        w->unk_0B0 = row;
-        t = w->unk_0A8;
+        w->lastRow = row;
+        t = w->creditsTimer;
 
         if (t % STAFFROLL_SCRIPT_PERIOD == 60) {
-            w->unk_0CC = 0;
+            w->script = 0;
             idx = t / STAFFROLL_SCRIPT_PERIOD;
 
             if (idx <= 16) {
                 if ((gGameState.flags & 8) != 0) {
-                    w->unk_0CC = gUnk_09EFA978[idx];
+                    w->script = gStaffRollRikuScripts[idx];
                 } else {
-                    w->unk_0CC = gUnk_09EFA934[idx];
+                    w->script = gStaffRollSoraScripts[idx];
                 }
             }
 
-            w->unk_0D0 = 0;
-            w->unk_0D4 = 0;
-            w->unk_0D8 = -1;
-            w->unk_0E0 = 0;
+            w->scriptPos = 0;
+            w->scriptFrame = 0;
+            w->activeOp = -1;
+            w->opTimer = 0;
         }
 
-        w->unk_0A8++;
-        SetBgScroll(0, 0, (u16)(w->unk_0B8 >> 8));
+        w->creditsTimer++;
+        SetBgScroll(0, 0, (u16)(w->scrollY >> 8));
 
-        if (w->unk_010 >= STAFFROLL_SCROLL_FRAMES || (w->flags & 2) != 0) {
-            w->unk_0A4 = 4;
-            w->unk_0A8 = 0;
+        if (w->musicFrames >= STAFFROLL_SCROLL_FRAMES || (w->flags & 2) != 0) {
+            w->creditsState = 4;
+            w->creditsTimer = 0;
         }
         break;
     case 4:
-        w->unk_0A8++;
-        if (w->unk_0A8 > 120) {
-            w->unk_0A4 = 3;
-            w->unk_0A8 = 0;
+        w->creditsTimer++;
+        if (w->creditsTimer > 120) {
+            w->creditsState = 3;
+            w->creditsTimer = 0;
         }
         break;
     case 3:
@@ -3585,21 +3585,21 @@ u8 func_08113180(StaffRollWork* w) {
         break;
     }
 
-    func_08112768(w);
+    StaffRollRunScript(w);
     TaskPoolUpdate(&w->tasks2);
     TaskPoolDraw(&w->tasks2);
-    func_08112600(w);
+    StaffRollBlendUpdate(w);
 
     return result;
 }
 
-u8 func_0811394C(StaffRollWork* w) {
+u8 StaffRollShowTitleBg(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0A4) {
+    switch (w->creditsState) {
     case 0:
         TaskPoolDestroy(&w->tasks2);
         DisableBg(0);
@@ -3610,41 +3610,41 @@ u8 func_0811394C(StaffRollWork* w) {
         LoadBgMap(2, gUnk_0983FB98, 0x400);
         LoadBgPalette(2, gUnk_0984A618, 0xA0);
         SetBgAffine(2, 0, 0x100, 0x100, 0x7800, 0x5C00);
-        w->unk_0A4 = 1;
-        w->unk_0A8 = 0;
+        w->creditsState = 1;
+        w->creditsTimer = 0;
         break;
     case 1:
-        if (w->unk_0A8 == 0) {
+        if (w->creditsTimer == 0) {
             FadeStartIn(0, 1);
-            w->unk_0A8++;
+            w->creditsTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0A4 = 2;
-            w->unk_0A8 = 0;
+            w->creditsState = 2;
+            w->creditsTimer = 0;
         }
         break;
     case 2:
-        w->unk_0A8++;
-        if (w->unk_0A8 > 179) {
-            w->unk_0A4 = 3;
-            w->unk_0A8 = 0;
+        w->creditsTimer++;
+        if (w->creditsTimer > 179) {
+            w->creditsState = 3;
+            w->creditsTimer = 0;
         }
         break;
     case 3:
-        if (w->unk_0A8 == 0) {
+        if (w->creditsTimer == 0) {
             FadeStartOut(0, 120);
-            w->unk_0A8++;
+            w->creditsTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0A4 = 4;
-            w->unk_0A8 = 0;
+            w->creditsState = 4;
+            w->creditsTimer = 0;
         }
         break;
     case 4:
-        w->unk_0A8++;
-        if (w->unk_0A8 > 119) {
+        w->creditsTimer++;
+        if (w->creditsTimer > 119) {
             BlockAudioStop();
             result = 0;
         }
@@ -3660,53 +3660,53 @@ u8 func_0811394C(StaffRollWork* w) {
 #define STAFFROLL_HOLD_FRAMES 900
 #endif
 
-u8 func_08113A94(StaffRollWork* w) {
+u8 StaffRollShowCharacter(StaffRollWork* w) {
     u8 result;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
         break;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(0, 60);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             if ((gGameState.flags & 8) != 0) {
-                w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
+                w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
             } else {
-                w->unk_124[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)0);
+                w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)0);
             }
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        w->unk_0C0++;
+        w->imageTimer++;
         if ((gGameState.flags & 8) != 0) {
-            if (w->unk_0C0 >= STAFFROLL_HOLD_FRAMES) {
-                w->unk_0BC = 3;
-                w->unk_0C0 = 0;
+            if (w->imageTimer >= STAFFROLL_HOLD_FRAMES) {
+                w->imageState = 3;
+                w->imageTimer = 0;
             }
         } else {
-            if (w->unk_0C0 >= 900) {
-                w->unk_0BC = 3;
-                w->unk_0C0 = 0;
+            if (w->imageTimer >= 900) {
+                w->imageState = 3;
+                w->imageTimer = 0;
             }
         }
         break;
     case 3:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartOut(0, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             result = 0;
@@ -3717,16 +3717,16 @@ u8 func_08113A94(StaffRollWork* w) {
     return result;
 }
 
-u8 func_08113BB4(StaffRollWork* w) {
+u8 StaffRollShowSoraImage1(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
-        if (w->unk_0C0 <= 119) {
-            w->unk_0C0++;
+        if (w->imageTimer <= 119) {
+            w->imageTimer++;
             break;
         }
         SetBgMode0();
@@ -3754,41 +3754,41 @@ u8 func_08113BB4(StaffRollWork* w) {
         LoadBgMap(0, gUnk_09D65274, 0x1000);
         LoadBgPalette(0, gUnk_09D6BF74, 0x200);
         SetBgScroll(0, 0, 160);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(0, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        SetBgScroll(0, 0, (u16)(160 - (w->unk_0C0 >> 1)));
-        if (w->unk_0C0 <= 255) {
-            w->unk_0C0++;
+        SetBgScroll(0, 0, (u16)(160 - (w->imageTimer >> 1)));
+        if (w->imageTimer <= 255) {
+            w->imageTimer++;
         }
-        if (w->unk_0C0 > 255) {
-            w->unk_0BC = 3;
-            w->unk_0C0 = 0;
+        if (w->imageTimer > 255) {
+            w->imageState = 3;
+            w->imageTimer = 0;
         }
         break;
     case 3:
-        w->unk_0C0++;
-        if (w->unk_0C0 > 179) {
-            w->unk_0BC = 4;
-            w->unk_0C0 = 0;
+        w->imageTimer++;
+        if (w->imageTimer > 179) {
+            w->imageState = 4;
+            w->imageTimer = 0;
         }
         break;
     case 4:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             SetBackdropColor(31, 31, 31);
             FadeStartOut(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             SetBgScroll(0, 0, 0);
@@ -3800,42 +3800,42 @@ u8 func_08113BB4(StaffRollWork* w) {
     return result;
 }
 
-u8 func_08113DB8(StaffRollWork* w) {
+u8 StaffRollShowSoraImage2(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
         LoadBgTiles(0, gUnk_09D10874, 0x53C0);
         LoadBgMap(0, gUnk_09D66274, 0x800);
         LoadBgPalette(0, gUnk_09D6C174, 0x200);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
             SetBackdropColor(0, 0, 0);
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        w->unk_0C0++;
-        if (w->unk_0C0 > 179) {
-            w->unk_0BC = 3;
-            w->unk_0C0 = 0;
+        w->imageTimer++;
+        if (w->imageTimer > 179) {
+            w->imageState = 3;
+            w->imageTimer = 0;
         }
         break;
     case 3:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartOut(0, 60);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             result = 0;
@@ -3846,16 +3846,16 @@ u8 func_08113DB8(StaffRollWork* w) {
     return result;
 }
 
-u8 func_08113E94(StaffRollWork* w) {
+u8 StaffRollShowRikuImage1(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
-        if (w->unk_0C0 <= 119) {
-            w->unk_0C0++;
+        if (w->imageTimer <= 119) {
+            w->imageTimer++;
             break;
         }
         SetBgMode0();
@@ -3882,31 +3882,31 @@ u8 func_08113E94(StaffRollWork* w) {
         LoadBgTiles(0, gUnk_09D15C34, 0x53C0);
         LoadBgMap(0, gUnk_09D66A74, 0x800);
         LoadBgPalette(0, gUnk_09D6C374, 0x200);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(0, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        w->unk_0C0++;
-        if (w->unk_0C0 > 179) {
-            w->unk_0BC = 3;
-            w->unk_0C0 = 0;
+        w->imageTimer++;
+        if (w->imageTimer > 179) {
+            w->imageState = 3;
+            w->imageTimer = 0;
         }
         break;
     case 3:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             SetBackdropColor(31, 31, 31);
             FadeStartOut(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             result = 0;
@@ -3917,41 +3917,41 @@ u8 func_08113E94(StaffRollWork* w) {
     return result;
 }
 
-u8 func_08114048(StaffRollWork* w) {
+u8 StaffRollShowRikuImage2(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
         LoadBgTiles(0, gUnk_09D1AFF4, 0x53C0);
         LoadBgMap(0, gUnk_09D67274, 0x800);
         LoadBgPalette(0, gUnk_09D6C574, 0x200);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        w->unk_0C0++;
-        if (w->unk_0C0 > 179) {
-            w->unk_0BC = 3;
-            w->unk_0C0 = 0;
+        w->imageTimer++;
+        if (w->imageTimer > 179) {
+            w->imageState = 3;
+            w->imageTimer = 0;
         }
         break;
     case 3:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartOut(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             result = 0;
@@ -3962,42 +3962,42 @@ u8 func_08114048(StaffRollWork* w) {
     return result;
 }
 
-u8 func_0811411C(StaffRollWork* w) {
+u8 StaffRollShowRikuImage3(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0BC) {
+    switch (w->imageState) {
     case 0:
         LoadBgTiles(0, gUnk_09D203B4, 0x53C0);
         LoadBgMap(0, gUnk_09D67A74, 0x800);
         LoadBgPalette(0, gUnk_09D6C774, 0x200);
-        w->unk_0BC = 1;
-        w->unk_0C0 = 0;
+        w->imageState = 1;
+        w->imageTimer = 0;
     case 1:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartIn(1, 120);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
             SetBackdropColor(0, 0, 0);
-            w->unk_0BC = 2;
-            w->unk_0C0 = 0;
+            w->imageState = 2;
+            w->imageTimer = 0;
         }
         break;
     case 2:
-        w->unk_0C0++;
-        if (w->unk_0C0 > 179) {
-            w->unk_0BC = 3;
-            w->unk_0C0 = 0;
+        w->imageTimer++;
+        if (w->imageTimer > 179) {
+            w->imageState = 3;
+            w->imageTimer = 0;
         }
         break;
     case 3:
-        if (w->unk_0C0 == 0) {
+        if (w->imageTimer == 0) {
             FadeStartOut(0, 60);
-            w->unk_0C0++;
+            w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
             result = 0;
@@ -4008,13 +4008,13 @@ u8 func_0811411C(StaffRollWork* w) {
     return result;
 }
 
-u8 func_081141F8(StaffRollWork* w) {
+u8 StaffRollShowEndScreen(StaffRollWork* w) {
     u8 result;
     u8 t;
 
     result = 1;
 
-    switch (w->unk_0C4) {
+    switch (w->endState) {
     case 0:
         DisableBg(0);
         EnableBg(1);
@@ -4080,25 +4080,25 @@ u8 func_081141F8(StaffRollWork* w) {
         }
 
         m4aSongNumStart(SONG_BGM_TITLE);
-        w->unk_0C4 = 1;
-        w->unk_0C8 = 0;
+        w->endState = 1;
+        w->endTimer = 0;
         break;
     case 1:
-        w->unk_0C8++;
-        if (w->unk_0C8 > 59) {
-            w->unk_0C4 = 2;
-            w->unk_0C8 = 0;
+        w->endTimer++;
+        if (w->endTimer > 59) {
+            w->endState = 2;
+            w->endTimer = 0;
         }
         break;
     case 2:
-        if (w->unk_0C8 == 0) {
+        if (w->endTimer == 0) {
             FadeStartIn(0, 120);
-            w->unk_0C8++;
+            w->endTimer++;
         }
         t = FadeIsActive();
         if (t == 0) {
-            w->unk_0C4 = 3;
-            w->unk_0C8 = 0;
+            w->endState = 3;
+            w->endTimer = 0;
         }
         break;
     default:
@@ -4119,24 +4119,24 @@ void mode_StaffRoll_1(void) {
     w->unk_004 = 0;
     w->flags = 0;
 
-    switch (w->unk_008) {
+    switch (w->phase) {
     case 0:
-        if (func_08112C24(w) != 0) {
+        if (StaffRollWaitStart(w) != 0) {
             break;
         }
-        w->unk_008 = 1;
-        w->unk_00C = 0;
-        w->unk_010 = 0;
+        w->phase = 1;
+        w->phaseTimer = 0;
+        w->musicFrames = 0;
         BlockAudioStart();
     case 1:
     {
         vu32* dma;
 
-        if (func_08112C38(w) != 0) {
+        if (StaffRollRunScenes(w) != 0) {
             break;
         }
-        w->unk_008 = 2;
-        w->unk_00C = 0;
+        w->phase = 2;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4162,19 +4162,19 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0A4 = 0;
-        w->unk_0A8 = 0;
+        w->creditsState = 0;
+        w->creditsTimer = 0;
         break;
     }
     case 2:
     {
         vu32* dma;
 
-        if (func_08113180(w) != 0) {
+        if (StaffRollRunCredits(w) != 0) {
             break;
         }
-        w->unk_008 = 3;
-        w->unk_00C = 0;
+        w->phase = 3;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4200,15 +4200,15 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0A4 = 0;
-        w->unk_0A8 = 0;
+        w->creditsState = 0;
+        w->creditsTimer = 0;
         break;
     }
     case 3:
     {
         vu32* dma;
 
-        if (func_0811394C(w) != 0) {
+        if (StaffRollShowTitleBg(w) != 0) {
             break;
         }
         tmp = 0;
@@ -4237,25 +4237,25 @@ void mode_StaffRoll_1(void) {
         DisableBg(2);
         DisableBg(3);
         if ((gGameState.flags & 8) != 0) {
-            w->unk_008 = 7;
-            w->unk_0BC = 0;
+            w->phase = 7;
+            w->imageState = 0;
         } else {
-            w->unk_008 = 5;
-            w->unk_0BC = 0;
+            w->phase = 5;
+            w->imageState = 0;
         }
-        w->unk_00C = 0;
-        w->unk_0C0 = 0;
+        w->phaseTimer = 0;
+        w->imageTimer = 0;
         break;
     }
     case 4:
     {
         vu32* dma;
 
-        if (func_08113A94(w) != 0) {
+        if (StaffRollShowCharacter(w) != 0) {
             break;
         }
-        w->unk_008 = 10;
-        w->unk_00C = 0;
+        w->phase = 10;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4277,19 +4277,19 @@ void mode_StaffRoll_1(void) {
         dma[1] = 0x0600C000;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
         dma[2];
-        w->unk_0C4 = 0;
-        w->unk_0C8 = 0;
+        w->endState = 0;
+        w->endTimer = 0;
         break;
     }
     case 5:
     {
         vu32* dma;
 
-        if (func_08113BB4(w) != 0) {
+        if (StaffRollShowSoraImage1(w) != 0) {
             break;
         }
-        w->unk_008 = 6;
-        w->unk_00C = 0;
+        w->phase = 6;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4315,19 +4315,19 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 0;
-        w->unk_0C0 = 0;
+        w->imageState = 0;
+        w->imageTimer = 0;
         break;
     }
     case 6:
     {
         vu32* dma;
 
-        if (func_08113DB8(w) != 0) {
+        if (StaffRollShowSoraImage2(w) != 0) {
             break;
         }
-        w->unk_008 = 4;
-        w->unk_00C = 0;
+        w->phase = 4;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4353,19 +4353,19 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 0;
-        w->unk_0C0 = 0;
+        w->imageState = 0;
+        w->imageTimer = 0;
         break;
     }
     case 7:
     {
         vu32* dma;
 
-        if (func_08113E94(w) != 0) {
+        if (StaffRollShowRikuImage1(w) != 0) {
             break;
         }
-        w->unk_008 = 8;
-        w->unk_00C = 0;
+        w->phase = 8;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4391,19 +4391,19 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 0;
-        w->unk_0C0 = 0;
+        w->imageState = 0;
+        w->imageTimer = 0;
         break;
     }
     case 8:
     {
         vu32* dma;
 
-        if (func_08114048(w) != 0) {
+        if (StaffRollShowRikuImage2(w) != 0) {
             break;
         }
-        w->unk_008 = 9;
-        w->unk_00C = 0;
+        w->phase = 9;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4429,19 +4429,19 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 0;
-        w->unk_0C0 = 0;
+        w->imageState = 0;
+        w->imageTimer = 0;
         break;
     }
     case 9:
     {
         vu32* dma;
 
-        if (func_0811411C(w) != 0) {
+        if (StaffRollShowRikuImage3(w) != 0) {
             break;
         }
-        w->unk_008 = 4;
-        w->unk_00C = 0;
+        w->phase = 4;
+        w->phaseTimer = 0;
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
@@ -4467,23 +4467,23 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        w->unk_0BC = 0;
-        w->unk_0C0 = 0;
+        w->imageState = 0;
+        w->imageTimer = 0;
         break;
     }
     case 10:
-        if (func_081141F8(w) != 0) {
+        if (StaffRollShowEndScreen(w) != 0) {
             break;
         }
-        w->unk_008 = 11;
-        w->unk_00C = 0;
+        w->phase = 11;
+        w->phaseTimer = 0;
         break;
     case 11:
-        if (w->unk_00C == 0) {
+        if (w->phaseTimer == 0) {
             FadeStartOut(0, 120);
         }
-        w->unk_00C++;
-        if (w->unk_00C > 120) {
+        w->phaseTimer++;
+        if (w->phaseTimer > 120) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else
@@ -4496,7 +4496,7 @@ void mode_StaffRoll_1(void) {
     TaskPoolUpdate(&w->tasks);
     TaskPoolDraw(&w->tasks);
     BlockAudioUpdate();
-    w->unk_010++;
+    w->musicFrames++;
 }
 
 void mode_StaffRoll_2(void) {

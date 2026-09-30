@@ -42,13 +42,13 @@ extern u8 gCard00Palette[];
 extern u8 gTalk0600Palette[];
 extern u8 gTalk2700Palette[];
 
-void func_0805A484(void);
-u8 func_0805AA9C(void);
-void func_0805A8D0(void);
-void func_0805A95C(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
+void JiminyFreeRows(void);
+u8 JiminyHandleListInput(void);
+void JiminyReloadPlainRows(void);
+void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
 
-void func_0805BAE4(void);
-void func_0805B9D0(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
+void JiminyDetailUpdate(void);
+void JiminyOpenPlainList(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
 #ifdef VERSION_EU

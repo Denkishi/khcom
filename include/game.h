@@ -13,7 +13,7 @@
 #include "anim.h"
 #include "btl_api.h"
 
-extern u8 gUnk_0203C590[];
+extern u8 gMapFloorState[];
 
 extern u16 gUnk_0203C3BC;
 extern u16 gUnk_0203C3C0;

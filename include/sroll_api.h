@@ -7,7 +7,7 @@ struct SrollInit;
 struct Task;
 struct SrollWork;
 
-void func_081149B0(struct Task* task, s32 v);
+void SrollBCharSetMotion(struct Task* task, s32 v);
 s32 SrollTextMeasureWidth(struct SrollWork* w, u8* s);
 void SrollTextSelectFont(struct SrollWork* w, u32 mode);
 void SrollTextInit(struct SrollWork* w, struct SrollInit* a);

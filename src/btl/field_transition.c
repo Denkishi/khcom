@@ -6,11 +6,11 @@
 #include "sprites_riku.h"
 #include "sprites_sora.h"
 
-void func_080100A0(void);
+void FieldTransitionUpdate(void);
 
 FieldTransitionWork* gFieldTransitionWork;
 
-void func_0801007C(void) {
+void FieldTransitionInit(void) {
     FieldTransitionWork* p;
     FieldTransitionWork** pp = &gFieldTransitionWork;
     p = EwramAlloc(sizeof(FieldTransitionWork));
@@ -21,13 +21,13 @@ void func_0801007C(void) {
     p->flipped = 0;
 }
 
-void func_080100A0(void) {
+void FieldTransitionUpdate(void) {
     void* gfx;
     if (IsModeStarted()) {
         ReleaseObjTiles(gFieldTransitionWork->tiles);
         ReleaseObjPalette(gFieldTransitionWork->palette);
         EwramFree(gFieldTransitionWork);
-        func_08001080();
+        ModeClearTransitionCallback();
         return;
     }
     REG_DISPCNT |= DISPCNT_OBJ_ON;
@@ -37,7 +37,7 @@ void func_080100A0(void) {
         if (gGameState.flags & 8) {
             gFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
             AnimInit(&gFieldTransitionWork->anim, 0, 0);
-            switch (gGameState.unk_024) {
+            switch (gGameState.fieldAngle) {
             case 0:
                 AnimChangeWithTables(&gFieldTransitionWork->anim, 0, 1, gUnk_09EDF514, gUnk_09EDF4F4);
                 SetObjTileSource(gFieldTransitionWork->tiles, gUnk_08935BC2);
@@ -77,7 +77,7 @@ void func_080100A0(void) {
         } else {
             gFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
             AnimInit(&gFieldTransitionWork->anim, 0, 0);
-            switch (gGameState.unk_024) {
+            switch (gGameState.fieldAngle) {
             case 0:
                 AnimChangeWithTables(&gFieldTransitionWork->anim, 0, 1, gSor1bb01Anims, gSor1bb01Frames);
                 SetObjTileSource(gFieldTransitionWork->tiles, gSor1bb01Tiles);
@@ -124,13 +124,13 @@ void func_080100A0(void) {
         DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 0, 0);
     }
     gSystemFlags &= ~8;
-    func_08002F50();
+    UpdateSpriteOam();
 }
-void func_080104F4(void) {
-    func_08001058(func_0801007C, func_080100A0);
+void StartFieldTransition(void) {
+    ModeSetTransitionCallback(FieldTransitionInit, FieldTransitionUpdate);
 }
 
-u8 func_0801050C(s32* a, s32* b, s32* c, s32* d) {
+u8 ClampBosBoogieBounds(s32* a, s32* b, s32* c, s32* d) {
     if (*b < 0x24000) {
         if (*c > -0x2000) {
             *d = 0;

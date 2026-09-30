@@ -12,12 +12,12 @@
 
 typedef struct PcAcdDmgWork {
     s16 timer;
-    s16 unk_02;
+    s16 groundFrames;
     BtlObj* actor;
-    u8 unk_08;
+    u8 grounded;
     u8 unk_09[0x3];
 } PcAcdDmgWork;
 
-void func_08049E70(CloudWork* work, s16 a, s32 b);
+void CloudJumpOffset(CloudWork* work, s16 a, s32 b);
 
 #endif /* GUARD_PC_H */

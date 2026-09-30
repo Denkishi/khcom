@@ -18,14 +18,14 @@
 
 typedef struct TutorialWork {
     u16 flags;
-    u16 unk_002;
-    u32 unk_004;
-    u32 unk_008;
-    s16 unk_00C;
+    u16 message;
+    u32 state;
+    u32 nextState;
+    s16 timer;
     s16 unk_00E;
-    s16 unk_010;
-    u16 unk_012;
-    u16 unk_014;
+    s16 inputCooldown;
+    u16 arrowX;
+    u16 arrowY;
     u8 unk_016[0x2];
     void* tiles;
     void* palette;

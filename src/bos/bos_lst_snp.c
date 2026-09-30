@@ -11,20 +11,20 @@ TaskDesc gTaskDescBosLstSnp = {
     sizeof(LstSnpWork),
 };
 
-s32 func_08112410(s32 x) {
+s32 BosLstSnpSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08112418(s32 x) {
+s32 BosLstSnpSquare2(s32 x) {
     return x * x;
 }
 
 void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg) {
-    work->unk_000 = 0;
+    work->angle = 0;
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
-    work->vx = (GetRandom() % 0x181 + 0x80) * arg->unk_0C;
+    work->vx = (GetRandom() % 0x181 + 0x80) * arg->facing;
     work->vz = -(GetRandom() % 0x201 + 0x400);
     work->tiles = LoadObjTiles(gUnk_09CD0E34, 0x240);
     work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
@@ -39,7 +39,7 @@ u8 task_bos_lst_snp_1(LstSnpWork* work) {
     u8 result;
 
     result = 1;
-    work->unk_000 += 8;
+    work->angle += 8;
     work->x += work->vx;
     work->z += work->vz;
     work->vz += 64;
@@ -62,7 +62,7 @@ void task_bos_lst_snp_2(LstSnpWork* work) {
     u16 prio;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    oam = AllocObjAffineAngle(work->unk_000, 1);
+    oam = AllocObjAffineAngle(work->angle, 1);
     gfx = AnimGetGfx(&work->anim);
     prio = GetBattleSpritePriorityFlags(work->y) | 4;
     DrawSprite(x, y, gfx, work->tiles, work->palette, oam, prio,

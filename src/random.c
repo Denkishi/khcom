@@ -6,22 +6,22 @@ u32 gRandSeed;
 u8 gUnk_0203402C[4];
 u32 gRandomState[4];
 BgAnimationDef* gBgAnimCurrent;
-u16 gUnk_02034044;
-u16 gUnk_02034046;
-s32 gUnk_02034048;
-u16 gUnk_0203404C;
-u16 gUnk_0203404E;
-s16 gUnk_02034050;
-s16 gUnk_02034052;
-u8 gUnk_02034054;
-u16 gUnk_02034056;
-u8 gUnk_02034058;
-u32 gUnk_0203405C;
-u32 gUnk_02034060;
-u8 gUnk_02034064;
-s16 gUnk_02034066;
-s16 gUnk_02034068;
-u16 gUnk_0203406A;
+u16 gBgAnimFrameTimer;
+u16 gBgAnimFrame;
+s32 gBgAnimBg;
+u16 gBgAnimFrameBytes;
+u16 gBgAnimFramesPerChunk;
+s16 gBgAnimScrollX;
+s16 gBgAnimScrollY;
+u8 gBgAnimStopped;
+u16 gBgAnimMapSize;
+u8 gBgAnimAffine;
+u32 gBgAnimScaleX;
+u32 gBgAnimScaleY;
+u8 gBgAnimRotation;
+s16 gBgAnimLoopStartFrame;
+s16 gBgAnimStopFrame;
+u16 gBgAnimFrameDuration;
 
 void SeedRand(u32 seed) {
     gRandSeed = seed;
@@ -69,44 +69,44 @@ u16 GetRandom(void) {
 }
 
 void BgAnimInit(s32 bg, u16 b, u16 c) {
-    gUnk_02034048 = bg;
+    gBgAnimBg = bg;
     gBgAnimCurrent = 0;
-    gUnk_02034050 = 0;
-    gUnk_02034052 = 0;
-    gUnk_02034054 = 1;
+    gBgAnimScrollX = 0;
+    gBgAnimScrollY = 0;
+    gBgAnimStopped = 1;
 
     if (c == 0) {
-        gUnk_02034058 = 0;
+        gBgAnimAffine = 0;
 
         switch (b) {
         case 0x4000:
         case 0x8000:
-            gUnk_02034056 = 0x1000;
+            gBgAnimMapSize = 0x1000;
             break;
         case 0xC000:
-            gUnk_02034056 = 0x2000;
+            gBgAnimMapSize = 0x2000;
             break;
         case 0:
         default:
-            gUnk_02034056 = 0x800;
+            gBgAnimMapSize = 0x800;
             break;
         }
     } else {
-        gUnk_02034058 = 1;
+        gBgAnimAffine = 1;
 
         switch (b) {
         case 0x4000:
-            gUnk_02034056 = 0x400;
+            gBgAnimMapSize = 0x400;
             break;
         case 0x8000:
-            gUnk_02034056 = 0x1000;
+            gBgAnimMapSize = 0x1000;
             break;
         case 0xC000:
-            gUnk_02034056 = 0x4000;
+            gBgAnimMapSize = 0x4000;
             break;
         case 0:
         default:
-            gUnk_02034056 = 0x100;
+            gBgAnimMapSize = 0x100;
             break;
         }
     }
@@ -114,54 +114,54 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
     DisableBg(bg);
 }
 void BgAnimSetPosition(s16 x, s16 y) {
-    if (gUnk_02034058 != 0) {
-        gUnk_02034050 = -x;
-        gUnk_02034052 = -y;
+    if (gBgAnimAffine != 0) {
+        gBgAnimScrollX = -x;
+        gBgAnimScrollY = -y;
     } else {
-        gUnk_02034050 = (gBgAnimCurrent->unk_10 << 2) - x;
-        gUnk_02034052 = (gBgAnimCurrent->unk_12 << 2) - y;
+        gBgAnimScrollX = (gBgAnimCurrent->originX << 2) - x;
+        gBgAnimScrollY = (gBgAnimCurrent->originY << 2) - y;
     }
 }
 
 void BgAnimSetTransform(u8 a, s32 b, s32 c) {
-    gUnk_02034064 = a;
-    gUnk_0203405C = b;
-    gUnk_02034060 = c;
+    gBgAnimRotation = a;
+    gBgAnimScaleX = b;
+    gBgAnimScaleY = c;
 }
 
 void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     gBgAnimCurrent = a;
     BgAnimSetPosition((s16)x, (s16)y);
 
-    if (gUnk_02034058 != 0) {
-        gUnk_0203404C = a->tilesPerFrame << 6;
+    if (gBgAnimAffine != 0) {
+        gBgAnimFrameBytes = a->tilesPerFrame << 6;
     } else {
-        gUnk_0203404C = a->tilesPerFrame << 5;
+        gBgAnimFrameBytes = a->tilesPerFrame << 5;
     }
-    gUnk_0203404E = 0x8000 / gUnk_0203404C;
-    gUnk_02034066 = -1;
-    gUnk_02034068 = -1;
-    gUnk_02034044 = 0;
-    gUnk_02034046 = 0;
-    gUnk_02034054 = 0;
-    gUnk_0203406A = a->frameDuration;
+    gBgAnimFramesPerChunk = 0x8000 / gBgAnimFrameBytes;
+    gBgAnimLoopStartFrame = -1;
+    gBgAnimStopFrame = -1;
+    gBgAnimFrameTimer = 0;
+    gBgAnimFrame = 0;
+    gBgAnimStopped = 0;
+    gBgAnimFrameDuration = a->frameDuration;
 
-    if (gUnk_02034058 != 0) {
-        gUnk_0203405C = 0x100;
-        gUnk_02034060 = 0x100;
-        gUnk_02034064 = 0;
+    if (gBgAnimAffine != 0) {
+        gBgAnimScaleX = 0x100;
+        gBgAnimScaleY = 0x100;
+        gBgAnimRotation = 0;
     }
     PushPaletteEffect(0);
-    LoadBgPalette(gUnk_02034048, a->palette, a->paletteSize);
+    LoadBgPalette(gBgAnimBg, a->palette, a->paletteSize);
     PopPaletteEffect();
-    LoadBgMap(gUnk_02034048, a->tilemap, gUnk_02034056);
+    LoadBgMap(gBgAnimBg, a->tilemap, gBgAnimMapSize);
 }
 void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) {
     BgAffineSrcData src;
     BgAffineDstData dst;
 
-    src.texX = gBgAnimCurrent->unk_10 << 10;
-    src.texY = gBgAnimCurrent->unk_12 << 10;
+    src.texX = gBgAnimCurrent->originX << 10;
+    src.texY = gBgAnimCurrent->originY << 10;
     src.scrX = -cx;
     src.scrY = -cy;
     src.sx = 0x10000 / sx;
@@ -200,22 +200,22 @@ void BgAnimUpdate(void) {
         return;
     }
 
-    if (gUnk_02034046 >= gBgAnimCurrent->frameCount) {
-        if (gUnk_02034066 >= 0) {
-            gUnk_02034046 = gUnk_02034066;
-            gUnk_02034044 = 0;
+    if (gBgAnimFrame >= gBgAnimCurrent->frameCount) {
+        if (gBgAnimLoopStartFrame >= 0) {
+            gBgAnimFrame = gBgAnimLoopStartFrame;
+            gBgAnimFrameTimer = 0;
         } else {
             BgAnimStop();
         }
         return;
     }
 
-    if (gUnk_02034058 != 0) {
-        BgAnimApplyAffineTransform(gUnk_02034048, gUnk_02034064, gUnk_0203405C, gUnk_02034060, gUnk_02034050, gUnk_02034052);
+    if (gBgAnimAffine != 0) {
+        BgAnimApplyAffineTransform(gBgAnimBg, gBgAnimRotation, gBgAnimScaleX, gBgAnimScaleY, gBgAnimScrollX, gBgAnimScrollY);
         vis = 1;
     } else {
-        SetBgScroll(gUnk_02034048, (u16)gUnk_02034050, (u16)gUnk_02034052);
-        if (gUnk_02034050 > -256 && gUnk_02034050 < 128 && gUnk_02034052 < 128 && gUnk_02034052 > -256) {
+        SetBgScroll(gBgAnimBg, (u16)gBgAnimScrollX, (u16)gBgAnimScrollY);
+        if (gBgAnimScrollX > -256 && gBgAnimScrollX < 128 && gBgAnimScrollY < 128 && gBgAnimScrollY > -256) {
             vis = 1;
         } else {
             vis = 0;
@@ -223,65 +223,65 @@ void BgAnimUpdate(void) {
     }
 
     if (vis != 0) {
-        EnableBg(gUnk_02034048);
+        EnableBg(gBgAnimBg);
 
-        if (gUnk_02034044 == 0) {
-            q = gUnk_02034046 / gUnk_0203404E;
-            off = gUnk_02034046 % gUnk_0203404E * gUnk_0203404C;
+        if (gBgAnimFrameTimer == 0) {
+            q = gBgAnimFrame / gBgAnimFramesPerChunk;
+            off = gBgAnimFrame % gBgAnimFramesPerChunk * gBgAnimFrameBytes;
             src = (u8*)gBgAnimCurrent->chunks[q].data + off;
-            over = off + gUnk_0203404C - gBgAnimCurrent->chunks[q].size;
+            over = off + gBgAnimFrameBytes - gBgAnimCurrent->chunks[q].size;
 
             if (over > 0) {
-                len = gUnk_0203404C - over;
-                RequestDma3Copy(src, GetBgCharBase(gUnk_02034048), len);
-                RequestDma3Clear((u8*)GetBgCharBase(gUnk_02034048) + len, over);
+                len = gBgAnimFrameBytes - over;
+                RequestDma3Copy(src, GetBgCharBase(gBgAnimBg), len);
+                RequestDma3Clear((u8*)GetBgCharBase(gBgAnimBg) + len, over);
             } else {
-                RequestDma3Copy(src, GetBgCharBase(gUnk_02034048), gUnk_0203404C);
+                RequestDma3Copy(src, GetBgCharBase(gBgAnimBg), gBgAnimFrameBytes);
             }
         }
     } else {
-        DisableBg(gUnk_02034048);
+        DisableBg(gBgAnimBg);
     }
-    gUnk_02034044++;
+    gBgAnimFrameTimer++;
 
-    if (gUnk_02034044 >= gUnk_0203406A) {
-        gUnk_02034044 = 0;
+    if (gBgAnimFrameTimer >= gBgAnimFrameDuration) {
+        gBgAnimFrameTimer = 0;
 
-        if (gUnk_02034046 != gUnk_02034068) {
-            gUnk_02034046++;
+        if (gBgAnimFrame != gBgAnimStopFrame) {
+            gBgAnimFrame++;
         }
     }
 }
 
 void BgAnimSetFrameDuration(u16 a) {
-    gUnk_0203406A = a;
+    gBgAnimFrameDuration = a;
 }
 
 void BgAnimSetLoopStartFrame(u16 a) {
-    gUnk_02034066 = a;
+    gBgAnimLoopStartFrame = a;
 }
 
 void BgAnimSetStopFrame(u16 a) {
-    gUnk_02034068 = a;
+    gBgAnimStopFrame = a;
 }
 
 void BgAnimStop(void) {
     gBgAnimCurrent = 0;
-    gUnk_02034054 = 1;
-    DisableBg(gUnk_02034048);
+    gBgAnimStopped = 1;
+    DisableBg(gBgAnimBg);
 }
 
 u8 BgAnimIsStopped(void) {
-    return gUnk_02034054;
+    return gBgAnimStopped;
 }
 
 void BgAnimGetFrameState(u16* a, u16* b) {
     if (a != 0) {
-        *a = gUnk_02034046;
+        *a = gBgAnimFrame;
     }
 
     if (b != 0) {
-        *b = gUnk_02034044;
+        *b = gBgAnimFrameTimer;
     }
 }
 

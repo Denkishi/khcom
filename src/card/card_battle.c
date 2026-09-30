@@ -24,35 +24,35 @@
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 
-u16 func_080787B8(CardBattleWork* w, u8 n);
-s32 func_08077F44(CardBattleWork* w, Task* task);
+u16 CountAvailableCards(CardBattleWork* w, u8 n);
+s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task);
 s32 func_08076F4C(CardBattleWork* w);
 static void cardbattle_2(CardBattleWork* w);
 static void cardbattle_3(CardBattleWork* w);
 u8 func_080762A8(void);
 void func_08076354(void);
-void func_08076388(void);
+void RequestCycleSoraCardList(void);
 void func_080763A0(void);
 void func_080763AC(void);
 void func_080763B8(void);
-void func_080763C4(void);
+void ClearSoraCardRequest(void);
 void func_08076438(void);
 void CreateCardBattleState(void);
 
 CardDisplayWork* gSoraSelectedCard;
-u32 gUnk_02034A9C;
-u32 gUnk_02034AA0;
+u32 gSoraCardRequest;
+u32 gSoraCardReloadRequest;
 CardBattleState* gCardBattleState EWRAM_COMMON(4);
 
-const s32 gUnk_09033FA8[4] = {
+const s32 gSoraCardRingAngles[4] = {
     -0x2000, 0, 0x1000, 0x8000,
 };
 
-const s32 gUnk_09033FB8[4] = {
+const s32 gSoraCardSwingAngles[4] = {
     0x2000, 0xE000, 0xA000, 0x6000,
 };
 
-const u16 gUnk_09033FC8[4] = {
+const u16 gSoraStockValueX[4] = {
     40, 52, 64, 0,
 };
 
@@ -61,138 +61,138 @@ const UnkStruct_080ABA80 gUnk_09033FD0 = {
 };
 
 void func_08076284(void) {
-    gUnk_02034AA0 = 14;
+    gSoraCardReloadRequest = 14;
 }
 
 void func_08076290(void) {
-    gUnk_02034AA0 = 15;
+    gSoraCardReloadRequest = 15;
 }
 
 void func_0807629C(void) {
-    gUnk_02034AA0 = 16;
+    gSoraCardReloadRequest = 16;
 }
 
 u8 func_080762A8(void) {
-    return gCardBattleState->unk_0D2;
+    return gCardBattleState->soraListIndex;
 }
 
-void func_080762B8(void) {
-    gUnk_02034AA0 = 17;
+void RequestSoraPotion(void) {
+    gSoraCardReloadRequest = 17;
 }
 
-void func_080762C4(void) {
-    gUnk_02034AA0 = 18;
+void RequestSoraHiPotion(void) {
+    gSoraCardReloadRequest = 18;
 }
 
-void func_080762D0(void) {
-    gUnk_02034AA0 = 19;
+void RequestSoraMegaPotion(void) {
+    gSoraCardReloadRequest = 19;
 }
 
-void func_080762DC(void) {
-    gUnk_02034AA0 = 21;
+void RequestSoraEther(void) {
+    gSoraCardReloadRequest = 21;
 }
 
-void func_080762E8(void) {
-    gUnk_02034AA0 = 22;
+void RequestSoraMegaEther(void) {
+    gSoraCardReloadRequest = 22;
 }
 
-void func_080762F4(void) {
-    gUnk_02034AA0 = 23;
+void RequestSoraElixir(void) {
+    gSoraCardReloadRequest = 23;
 }
 
-void func_08076300(void) {
-    gUnk_02034AA0 = 24;
+void RequestSoraMegalixir(void) {
+    gSoraCardReloadRequest = 24;
 }
 
 void func_0807630C(void) {
-    gUnk_02034AA0 = 20;
+    gSoraCardReloadRequest = 20;
 }
 
-void func_08076318(void) {
-    gUnk_02034A9C = 1;
+void RequestSoraNextCard(void) {
+    gSoraCardRequest = 1;
 }
 
-void func_08076324(void) {
-    gUnk_02034A9C = 2;
+void RequestSoraPrevCard(void) {
+    gSoraCardRequest = 2;
 }
 
-void func_08076330(void) {
-    gUnk_02034A9C = 3;
+void RequestSoraCardUse(void) {
+    gSoraCardRequest = 3;
 }
 
-void func_0807633C(void) {
-    gUnk_02034A9C = 4;
+void RequestSoraCardStock(void) {
+    gSoraCardRequest = 4;
 }
 
-void func_08076348(void) {
-    gUnk_02034A9C = 5;
+void RequestSoraStockUse(void) {
+    gSoraCardRequest = 5;
 }
 
 void func_08076354(void) {
-    gUnk_02034A9C = 8;
+    gSoraCardRequest = 8;
 }
 
-void func_08076360(void) {
-    gUnk_02034A9C = 6;
-    func_0807E23C();
+void RequestOpenCards(void) {
+    gSoraCardRequest = 6;
+    RequestOpenRikuCards();
 }
 
-void func_08076374(void) {
-    gUnk_02034A9C = 7;
-    func_0807E248();
+void RequestCloseCards(void) {
+    gSoraCardRequest = 7;
+    RequestCloseRikuCards();
 }
 
-void func_08076388(void) {
-    gUnk_02034A9C = 9;
+void RequestCycleSoraCardList(void) {
+    gSoraCardRequest = 9;
 }
 
-void func_08076394(void) {
-    gUnk_02034A9C = 10;
+void RequestSwitchSoraCardList(void) {
+    gSoraCardRequest = 10;
 }
 
 void func_080763A0(void) {
-    gUnk_02034A9C = 11;
+    gSoraCardRequest = 11;
 }
 
 void func_080763AC(void) {
-    gUnk_02034A9C = 12;
+    gSoraCardRequest = 12;
 }
 
 void func_080763B8(void) {
-    gUnk_02034A9C = 13;
+    gSoraCardRequest = 13;
 }
 
-void func_080763C4(void) {
-    gUnk_02034A9C = 0;
+void ClearSoraCardRequest(void) {
+    gSoraCardRequest = 0;
 }
 
-u8 func_080763D0(void) {
-    if (gSoraSelectedCard != 0 && (gSoraSelectedCard->unk_78 & 0x100000)) {
+u8 IsSoraReloadCardSelected(void) {
+    if (gSoraSelectedCard != 0 && (gSoraSelectedCard->flags & 0x100000)) {
         return 1;
     }
 
     return 0;
 }
 
-void func_080763F0(void) {
+void SetSoraReloadCharging(void) {
     // @bug Called before the card battle state exists (NULL write).
     if (gSoraSelectedCard != 0) {
-        if ((gSoraSelectedCard->unk_78 & 0x01000044) == 0x01000044) {
-            gCardBattleState->unk_0E7 = 1;
+        if ((gSoraSelectedCard->flags & 0x01000044) == 0x01000044) {
+            gCardBattleState->soraReloadCharging = 1;
         } else {
-            gCardBattleState->unk_0E7 = 0;
+            gCardBattleState->soraReloadCharging = 0;
         }
     } else {
-        gCardBattleState->unk_0E7 = 0;
+        gCardBattleState->soraReloadCharging = 0;
     }
 }
 
 void func_08076438(void) {
 }
 
-u8 func_0807643C(void) {
+u8 IsSoraSelectionEmpty(void) {
     if (gSoraSelectedCard != 0) {
-        return gSoraSelectedCard->unk_78 & 2;
+        return gSoraSelectedCard->flags & 2;
     }
 
     return 0;
@@ -204,79 +204,79 @@ void CreateCardBattleState(void) {
     gCardBattleState = EwramAlloc(sizeof(CardBattleState));
     zero = 0;
     CpuSet(&zero, gCardBattleState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleState) / 4);
-    gCardBattleState->unk_000[0] = 0;
-    gCardBattleState->unk_000[1] = 0;
-    gCardBattleState->unk_000[2] = 0;
-    gCardBattleState->unk_000[3] = 0;
-    gCardBattleState->unk_000[4] = 0;
-    gCardBattleState->unk_000[5] = 0;
+    gCardBattleState->activeCards[0] = 0;
+    gCardBattleState->activeCards[1] = 0;
+    gCardBattleState->activeCards[2] = 0;
+    gCardBattleState->activeCards[3] = 0;
+    gCardBattleState->activeCards[4] = 0;
+    gCardBattleState->activeCards[5] = 0;
     gCardBattleState->unk_0B0 = 145;
     gCardBattleState->unk_0B4 = 145;
-    gCardBattleState->unk_0B8 = 950;
-    gCardBattleState->unk_0BC = 950;
+    gCardBattleState->pickedFriendCardId = 950;
+    gCardBattleState->pickedGimmickCardId = 950;
     gCardBattleState->unk_0C0 = 0;
-    gCardBattleState->unk_0C2 = 0;
-    gCardBattleState->unk_0C4 = 106;
-    gCardBattleState->unk_0C6 = 106;
+    gCardBattleState->activeValue = 0;
+    gCardBattleState->soraStockName = 106;
+    gCardBattleState->rikuStockName = 106;
     gCardBattleState->unk_0C8 = 256;
     gCardBattleState->unk_0CA = 256;
-    gCardBattleState->unk_0CC = 0;
-    gCardBattleState->unk_0CE = 0;
-    gCardBattleState->unk_0D0 = 0;
+    gCardBattleState->soraHcEffect = 0;
+    gCardBattleState->rikuHcEffect = 0;
+    gCardBattleState->activeCardCount = 0;
     gCardBattleState->unk_0D1 = 0;
-    gCardBattleState->unk_0D2 = 0;
-    gCardBattleState->unk_0D3 = 0;
-    gCardBattleState->unk_0D4 = 0;
-    gCardBattleState->unk_0D5 = 0;
-    gCardBattleState->unk_0D6 = 0;
-    gCardBattleState->unk_0D7 = 0;
+    gCardBattleState->soraListIndex = 0;
+    gCardBattleState->soraStockCount = 0;
+    gCardBattleState->rikuListIndex = 0;
+    gCardBattleState->rikuStockCount = 0;
+    gCardBattleState->friendCardCount = 0;
+    gCardBattleState->nextEnemyCardIndex = 0;
     gCardBattleState->unk_0D8 = 0;
     gCardBattleState->unk_0D9 = 0;
-    gCardBattleState->unk_0DC = 0;
-    gCardBattleState->unk_0E0 = 0;
-    gCardBattleState->unk_0E1 = 0;
-    gCardBattleState->unk_0E2 = 0;
-    gCardBattleState->unk_0E0 = 0;
-    gCardBattleState->unk_0E3 = 0;
-    gCardBattleState->unk_0E4 = 0;
+    gCardBattleState->gimmickCardCount = 0;
+    gCardBattleState->enemyCardUsed = 0;
+    gCardBattleState->soraStockActive = 0;
+    gCardBattleState->rikuStockActive = 0;
+    gCardBattleState->enemyCardUsed = 0;
+    gCardBattleState->soraStockNameShown = 0;
+    gCardBattleState->rikuStockNameShown = 0;
     gCardBattleState->unk_0E5 = 0;
     gCardBattleState->unk_0E6 = 0;
     gCardBattleState->unk_0E9 = 0;
-    gCardBattleState->unk_0DA[0] = 0;
-    gCardBattleState->unk_0DA[1] = 0;
-    gCardBattleState->unk_0EA = 0;
-    gCardBattleState->unk_0EB = 0;
-    gCardBattleState->unk_0EC = 0;
+    gCardBattleState->addedFriendCards[0] = 0;
+    gCardBattleState->addedFriendCards[1] = 0;
+    gCardBattleState->cardsOpen = 0;
+    gCardBattleState->soraHcEffectReplaced = 0;
+    gCardBattleState->rikuHcEffectReplaced = 0;
     gCardBattleState->unk_0ED = 0;
     gCardBattleState->unk_0DE = 0;
     gCardBattleState->unk_0DF = 0;
     gCardBattleState->unk_0EE = 0;
-    gCardBattleState->unk_0F0 = 0;
-    gCardBattleState->unk_0F4 = 0;
-    gCardBattleState->unk_0F8 = 0;
-    gCardBattleState->unk_0FC = 0;
-    gCardBattleState->unk_0FE = 0;
-    gCardBattleState->unk_100 = 4;
-    gCardBattleState->unk_102 = 4;
-    gCardBattleState->unk_104 = 2;
-    gCardBattleState->unk_106 = 2;
-    gCardBattleState->unk_108[0] = 0;
-    gCardBattleState->unk_108[1] = 0;
+    gCardBattleState->rikuCardsLeft = 0;
+    gCardBattleState->soraReloadGauge = 0;
+    gCardBattleState->rikuReloadGauge = 0;
+    gCardBattleState->soraReloadCounter = 0;
+    gCardBattleState->rikuReloadCounter = 0;
+    gCardBattleState->soraGaugeFullFrame = 4;
+    gCardBattleState->rikuGaugeFullFrame = 4;
+    gCardBattleState->soraGaugeAnim = 2;
+    gCardBattleState->rikuGaugeAnim = 2;
+    gCardBattleState->reloadGaugeFull[0] = 0;
+    gCardBattleState->reloadGaugeFull[1] = 0;
     TaskPoolInit(&gCardBattleState->tasks, 6);
-    gCardBattleState->tiles[0] = LoadObjTiles(gUnk_08F709B0[0].tiles, 640);
-    gCardBattleState->tiles[1] = LoadObjTiles(gUnk_08F709B0[1].tiles, 640);
-    gCardBattleState->tiles[2] = LoadObjTiles(gUnk_08F709B0[2].tiles, 640);
-    gCardBattleState->tiles[3] = LoadObjTiles(gUnk_08F709B0[3].tiles, 640);
+    gCardBattleState->tiles[0] = LoadObjTiles(gCardBacks[0].tiles, 640);
+    gCardBattleState->tiles[1] = LoadObjTiles(gCardBacks[1].tiles, 640);
+    gCardBattleState->tiles[2] = LoadObjTiles(gCardBacks[2].tiles, 640);
+    gCardBattleState->tiles[3] = LoadObjTiles(gCardBacks[3].tiles, 640);
     gCardBattleState->tiles5 = LoadObjTiles(gUnk_0905EAE8, 320);
     gCardBattleState->tiles6 = LoadObjTiles(gUnk_0905ED36, 320);
     gCardBattleState->tiles7 = LoadObjTiles(gUnk_0905EEE6, 320);
     gCardBattleState->palette = LoadObjPalette(gCard00Palette, 32);
     gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, 32);
-    FadeSetPaletteExcluded(((UnkStruct_080038C8*)gCardBattleState->palette)->index + 16, 1);
-    func_0807B668(gCardBattleState);
+    FadeSetPaletteExcluded(((ObjPaletteHeader*)gCardBattleState->palette)->index + 16, 1);
+    LoadPremiumCardGfx(gCardBattleState);
 }
 
-CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
+CardSlot* FindNextAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     CardSlot* e;
     s16 i;
     u16 cur;
@@ -284,8 +284,8 @@ CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
 
     i = *n;
 
-    if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].unk_07 == 0) {
-        if (w->slots[slot][i].unk_08 == 0 && w->slots[slot][i].unk_0A == 0) {
+    if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
+        if (w->slots[slot][i].used == 0 && w->slots[slot][i].removed == 0) {
             return &w->slots[slot][(s16)*n];
         }
     }
@@ -293,15 +293,15 @@ CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
     cur = *n;
     next = cur + 1;
 
-    if ((s16)next >= w->unk_A8[slot]) {
+    if ((s16)next >= w->slotCounts[slot]) {
         next = 0;
     }
 
     while ((s16)next != (s16)cur) {
         i = next;
 
-        if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].unk_07 == 0) {
-            if (w->slots[slot][i].unk_08 == 0 && w->slots[slot][i].unk_0A == 0) {
+        if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
+            if (w->slots[slot][i].used == 0 && w->slots[slot][i].removed == 0) {
                 e = &w->slots[slot][i];
                 *n = next;
                 return e;
@@ -310,7 +310,7 @@ CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
 
         next = i + 1;
 
-        if ((s16)next >= w->unk_A8[slot]) {
+        if ((s16)next >= w->slotCounts[slot]) {
             next = 0;
         }
     }
@@ -318,7 +318,7 @@ CardSlot* func_08076674(CardBattleWork* w, u8 slot, u16* n) {
     return 0;
 }
 
-CardSlot* func_08076750(CardBattleWork* w, u8 slot, u16* n) {
+CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     CardSlot* e;
     s16 i;
     u16 cur;
@@ -326,8 +326,8 @@ CardSlot* func_08076750(CardBattleWork* w, u8 slot, u16* n) {
 
     i = *n;
 
-    if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].unk_07 == 0) {
-        if (w->slots[slot][i].unk_08 == 0 && w->slots[slot][i].unk_0A == 0) {
+    if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
+        if (w->slots[slot][i].used == 0 && w->slots[slot][i].removed == 0) {
             return &w->slots[slot][(s16)*n];
         }
     }
@@ -336,14 +336,14 @@ CardSlot* func_08076750(CardBattleWork* w, u8 slot, u16* n) {
     next = cur - 1;
 
     if ((s16)next < 0) {
-        next = w->unk_A8[slot] - 1;
+        next = w->slotCounts[slot] - 1;
     }
 
     while ((s16)next != (s16)cur) {
         i = next;
 
-        if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].unk_07 == 0) {
-            if (w->slots[slot][i].unk_08 == 0 && w->slots[slot][i].unk_0A == 0) {
+        if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
+            if (w->slots[slot][i].used == 0 && w->slots[slot][i].removed == 0) {
                 e = &w->slots[slot][i];
                 *n = next;
                 return e;
@@ -353,13 +353,13 @@ CardSlot* func_08076750(CardBattleWork* w, u8 slot, u16* n) {
         next = i - 1;
 
         if ((s16)next < 0) {
-            next = w->unk_A8[slot] - 1;
+            next = w->slotCounts[slot] - 1;
         }
     }
 
     return 0;
 }
-void func_0807682C(CardBattleWork* w, u8 slot) {
+void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
     CardDisplayArgs arg;
     u16 n;
     s16 count = 0;
@@ -367,61 +367,61 @@ void func_0807682C(CardBattleWork* w, u8 slot) {
     CardSlot* c;
     CardDisplayWork* e;
     CardDisplayWork* p;
-    if (w->unk_94[slot] != 0xFFFF) {
-        u32 index = w->unk_94[slot];
+    if (w->cursors[slot] != 0xFFFF) {
+        u32 index = w->cursors[slot];
         n = index;
         old = index;
-        c = func_08076674(w, slot, &n);
+        c = FindNextAvailableSlot(w, slot, &n);
         if (c != 0) {
-            arg.pool = &w->unk_54[slot];
+            arg.pool = &w->cardDisplays[slot];
             arg.index = n;
-            arg.unk_0E = slot;
+            arg.listIndex = slot;
             arg.slot = c;
-            arg.unk_0F = w->unk_9C[slot];
+            arg.reloadCount = w->reloadCounts[slot];
             if (c->cardId == 0xFFFE) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
-                TaskCreate(&w->tasks, &gUnk_09EE496C, &arg);
+                TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
             }
             c->unk_06 = 1;
             old = n;
             n = old + 1;
             count++;
         }
-        if ((s16)n >= (s16)w->unk_A8[slot]) {
+        if ((s16)n >= (s16)w->slotCounts[slot]) {
             n = 0;
         }
-        c = func_08076674(w, slot, &n);
-        if (c != 0 && (s16)n != w->unk_94[slot]) {
-            arg.pool = &w->unk_54[slot];
+        c = FindNextAvailableSlot(w, slot, &n);
+        if (c != 0 && (s16)n != w->cursors[slot]) {
+            arg.pool = &w->cardDisplays[slot];
             arg.index = n;
-            arg.unk_0E = slot;
+            arg.listIndex = slot;
             arg.slot = c;
-            arg.unk_0F = w->unk_9C[slot];
+            arg.reloadCount = w->reloadCounts[slot];
             if (c->cardId == 0xFFFE) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
-                TaskCreate(&w->tasks, &gUnk_09EE496C, &arg);
+                TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
             }
             c->unk_06 = 1;
             old = n;
             count++;
         }
-        n = w->unk_94[slot] - 1;
+        n = w->cursors[slot] - 1;
         if ((s16)n < 0) {
-            n = w->unk_A8[slot] - 1;
+            n = w->slotCounts[slot] - 1;
         }
-        c = func_08076750(w, slot, &n);
-        if (c != 0 && (s16)n != w->unk_94[slot] && (s16)n != (s16)old) {
-            arg.pool = &w->unk_54[slot];
+        c = FindPrevAvailableSlot(w, slot, &n);
+        if (c != 0 && (s16)n != w->cursors[slot] && (s16)n != (s16)old) {
+            arg.pool = &w->cardDisplays[slot];
             arg.index = n;
-            arg.unk_0E = slot;
+            arg.listIndex = slot;
             arg.slot = c;
-            arg.unk_0F = w->unk_9C[slot];
+            arg.reloadCount = w->reloadCounts[slot];
             if (c->cardId == 0xFFFE) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
-                TaskCreate(&w->tasks, &gUnk_09EE496C, &arg);
+                TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
             }
             c->unk_06 = 1;
             count++;
@@ -429,79 +429,79 @@ void func_0807682C(CardBattleWork* w, u8 slot) {
     }
     switch (count) {
         case 0:
-            arg.pool = &w->unk_54[slot];
+            arg.pool = &w->cardDisplays[slot];
             arg.index = 0xFFFF;
             arg.slot = w->slots[slot];
-            arg.unk_0E = slot;
+            arg.listIndex = slot;
             TaskCreate(&w->tasks, &gTaskDescCardNotHave, &arg);
-            e = ListPoolFirst(&w->unk_54[slot]);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A4 = 1;
-            e->unk_A0 = 50;
-            e->unk_78 |= 0x802;
+            e = ListPoolFirst(&w->cardDisplays[slot]);
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->ringIndex = 1;
+            e->priority = 50;
+            e->flags |= 0x802;
             break;
         case 1:
-            e = ListPoolFirst(&w->unk_54[slot]);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A4 = 1;
-            e->unk_A0 = 50;
-            e->unk_78 |= 0x800;
+            e = ListPoolFirst(&w->cardDisplays[slot]);
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->ringIndex = 1;
+            e->priority = 50;
+            e->flags |= 0x800;
             break;
         case 2:
-            e = ListPoolFirst(&w->unk_54[slot]);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A0 = 50;
-            e->unk_A4 = 1;
-            e->unk_78 |= 0x800;
+            e = ListPoolFirst(&w->cardDisplays[slot]);
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->priority = 50;
+            e->ringIndex = 1;
+            e->flags |= 0x800;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[0];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A0 = 60;
-            e->unk_A4 = 0;
-            e->unk_78 |= 0x800;
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[0];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->priority = 60;
+            e->ringIndex = 0;
+            e->flags |= 0x800;
             break;
         case 3:
-            e = ListPoolFirst(&w->unk_54[slot]);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A0 = 50;
-            e->unk_A4 = 1;
-            e->unk_78 |= 0x800;
+            e = ListPoolFirst(&w->cardDisplays[slot]);
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->priority = 50;
+            e->ringIndex = 1;
+            e->flags |= 0x800;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[2];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A0 = 60;
-            e->unk_A4 = 2;
-            e->unk_78 |= 0x800;
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[2];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->priority = 60;
+            e->ringIndex = 2;
+            e->flags |= 0x800;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gUnk_09033FA8[0];
-            e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-            e->unk_A0 = 60;
-            e->unk_A4 = 0;
-            e->unk_78 |= 0x800;
+            e->unk_80 = e->unk_7C = gSoraCardRingAngles[0];
+            e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+            e->priority = 60;
+            e->ringIndex = 0;
+            e->flags |= 0x800;
             break;
     }
-    p = (CardDisplayWork*)ListPoolFirst(&w->unk_54[slot]);
+    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[slot]);
     while (p != 0) {
         // @bug A "not have" display has no slot (NULL write).
         p->args.slot->unk_06 = 0;
         p = (CardDisplayWork*)ListPoolNext(&p->node);
     }
-    w->unk_34[slot] = ListPoolFirst(&w->unk_54[slot]);
+    w->selectedCards[slot] = ListPoolFirst(&w->cardDisplays[slot]);
     {
         CardDisplayWork** active = &gSoraSelectedCard;
-        *active = ListPoolFirst(&w->unk_54[slot]);
+        *active = ListPoolFirst(&w->cardDisplays[slot]);
     }
-    gSoraSelectedCard->unk_78 |= 0x804;
+    gSoraSelectedCard->flags |= 0x804;
 }
 
-void func_08091B28(void);
+void ResetBossCardValue(void);
 void func_080782EC(void);
-void func_080784BC(CardBattleWork* w, s32 mode);
-void func_080785B8(CardBattleWork* w, s32 mode);
+void InitSoraTutorialCardList(CardBattleWork* w, s32 mode);
+void InitSoraCardList(CardBattleWork* w, s32 mode);
 
 static void cardbattle_0(CardBattleWork* w) {
     u32 zero = 0;
@@ -509,65 +509,65 @@ static void cardbattle_0(CardBattleWork* w) {
 
     CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
     // @bug gCardBattleState is only allocated further down (NULL write).
-    gCardBattleState->unk_05C = w;
-    gBtlWork->unk_0F4 = 0;
-    func_08091B28();
+    gCardBattleState->soraWork = w;
+    gBtlWork->hcEffect = 0;
+    ResetBossCardValue();
     func_080782EC();
     w->tiles = AllocSpriteFrameTiles(128);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8);
     TaskPoolInit(&w->tasks, 30);
-    w->unk_B9 = 0;
-    w->unk_B8 = 0;
-    w->unk_C0[0] = 0;
-    w->unk_C0[1] = 0;
-    w->unk_C0[2] = 0;
-    w->unk_C0[3] = 0;
-    w->unk_BC[0] = 1;
-    w->unk_BC[1] = 0;
-    w->unk_BC[2] = 0;
-    w->unk_BC[3] = 0;
-    w->unk_BA = 0;
+    w->stockCount = 0;
+    w->listIndex = 0;
+    w->reloadPending[0] = 0;
+    w->reloadPending[1] = 0;
+    w->reloadPending[2] = 0;
+    w->reloadPending[3] = 0;
+    w->revCountShown[0] = 1;
+    w->revCountShown[1] = 0;
+    w->revCountShown[2] = 0;
+    w->revCountShown[3] = 0;
+    w->stockValue = 0;
     w->unk_C4[3] = 0;
-    w->x = gUnk_09033FC8[0];
-    w->unk_C9 = 0;
+    w->x = gSoraStockValueX[0];
+    w->cardsClosed = 0;
     for (i = 0; i < 3; i++) {
-        w->unk_1C[i] = 0;
-        w->unk_28[i] = 0;
+        w->playedCards[i] = 0;
+        w->stock[i] = 0;
     }
     for (i = 0; i < 4; i++) {
-        w->unk_34[i] = 0;
+        w->selectedCards[i] = 0;
         w->slots[i] = 0;
     }
     w->unk_C4[1] = 0;
     if (gBtlWork->flags & 0x800000000LL) {
-        w->unk_A8[0] = gUnk_09041FA0.unk_DC + 15;
-        w->unk_B0[0] = gUnk_09041FA0.unk_DC + 1;
-        w->unk_A8[3] = w->unk_B0[3] = 0;
-        w->unk_A8[2] = w->unk_B0[2] = 0;
-        w->unk_A8[1] = w->unk_B0[1] = 0;
-        func_080784BC(w, 0);
-        func_080784BC(w, 1);
+        w->slotCounts[0] = gUnk_09041FA0.cardCount + 15;
+        w->cardsLeft[0] = gUnk_09041FA0.cardCount + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = 0;
+        w->slotCounts[2] = w->cardsLeft[2] = 0;
+        w->slotCounts[1] = w->cardsLeft[1] = 0;
+        InitSoraTutorialCardList(w, 0);
+        InitSoraTutorialCardList(w, 1);
     } else {
-        w->unk_A8[0] = func_080858B8(0) + 15;
-        w->unk_B0[0] = func_080858B8(0) + 1;
-        w->unk_A8[3] = w->unk_B0[3] = func_080858B8(1);
-        w->unk_A8[2] = w->unk_B0[2] = 0;
-        w->unk_A8[1] = w->unk_B0[1] = 0;
-        func_080785B8(w, 0);
-        func_080785B8(w, 1);
+        w->slotCounts[0] = CountActiveDeckCards(0) + 15;
+        w->cardsLeft[0] = CountActiveDeckCards(0) + 1;
+        w->slotCounts[3] = w->cardsLeft[3] = CountActiveDeckCards(1);
+        w->slotCounts[2] = w->cardsLeft[2] = 0;
+        w->slotCounts[1] = w->cardsLeft[1] = 0;
+        InitSoraCardList(w, 0);
+        InitSoraCardList(w, 1);
     }
-    w->unk_9C[2] = w->unk_9C[1] = w->unk_9C[0] = 0;
+    w->reloadCounts[2] = w->reloadCounts[1] = w->reloadCounts[0] = 0;
     CreateCardBattleState();
-    CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
-    ListPoolInit(&w->unk_54[0]);
-    ListPoolInit(&w->unk_54[1]);
-    ListPoolInit(&w->unk_54[2]);
-    ListPoolInit(&w->unk_54[3]);
-    func_0807682C(w, w->unk_B8);
-    gUnk_02034A9C = 0;
-    gUnk_02034AA0 = 0;
-    func_0807B410(&w->tasks);
+    CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
+    ListPoolInit(&w->cardDisplays[0]);
+    ListPoolInit(&w->cardDisplays[1]);
+    ListPoolInit(&w->cardDisplays[2]);
+    ListPoolInit(&w->cardDisplays[3]);
+    CreateSoraCardRing(w, w->listIndex);
+    gSoraCardRequest = 0;
+    gSoraCardReloadRequest = 0;
+    CreateBosscardTask(&w->tasks);
     w->unk_C4[4] = 0;
     if (gGameState.flags & 0x100) {
         return;
@@ -578,37 +578,37 @@ static void cardbattle_0(CardBattleWork* w) {
 }
 
 s32 func_08076F4C(CardBattleWork* w) {
-    if (func_080787B8(w, 0) == 0 && w->unk_B0[0] <= 1 && w->unk_B9 != 0) {
+    if (CountAvailableCards(w, 0) == 0 && w->cardsLeft[0] <= 1 && w->stockCount != 0) {
         return 1;
     }
 
     return 0;
 }
 
-void func_0807A620(CardBattleWork* w);
-void func_0807B378(CardBattleWork* w);
-void func_080788CC(CardBattleWork* w, u8 slot);
-void func_08078FFC(CardBattleWork* w, u8 slot);
-s32 func_08079600(CardBattleWork* w);
-s32 func_08079B3C(CardBattleWork* w);
-s32 func_08079ECC(CardBattleWork* w);
-s32 func_0807A188(CardBattleWork* w);
-void func_0807ABC8(CardBattleWork* w);
-void func_0807B16C(CardBattleWork* w);
-void func_0807AF40(CardBattleWork* w);
-void func_0807B728(CardBattleWork* w);
-void func_0807B7A4(CardBattleWork* w);
-void func_0807B81C(CardBattleWork* w);
-void func_0807B894(CardBattleWork* w);
-void func_0807B910(CardBattleWork* w);
-void func_0807B98C(CardBattleWork* w);
-void func_0807B9EC(CardBattleWork* w);
-void func_0807B6F4(CardBattleWork* w);
-void func_080789E4(CardBattleWork* w);
-void func_08078BB4(CardBattleWork* w);
-u8 func_080782AC(CardDisplayWork** cards, u8 count);
+void RemoveSoraCardDisplays(CardBattleWork* w);
+void IncrementReloadCount(CardBattleWork* w);
+void ClearUsedCardSlots(CardBattleWork* w, u8 slot);
+void SelectNextSoraCard(CardBattleWork* w, u8 slot);
+s32 UseSoraCard(CardBattleWork* w);
+s32 UseSoraHeartlessCard(CardBattleWork* w);
+s32 UseSoraGimmickCard(CardBattleWork* w);
+s32 StockSoraCard(CardBattleWork* w);
+void UseSoraStock(CardBattleWork* w);
+void CycleSoraCardList(CardBattleWork* w);
+void SwitchSoraCardList(CardBattleWork* w);
+void RestoreCardsForPotion(CardBattleWork* w);
+void RestoreCardsForHiPotion(CardBattleWork* w);
+void RestoreCardsForMegaPotion(CardBattleWork* w);
+void RestoreCardsForEther(CardBattleWork* w);
+void RestoreCardsForMegaEther(CardBattleWork* w);
+void RestoreCardsForElixir(CardBattleWork* w);
+void RemoveItemCards(CardBattleWork* w);
+void ResetSoraReloadGauge(CardBattleWork* w);
+void BeginSoraReloadDeal(CardBattleWork* w);
+void AddPickedCardToSoraDeck(CardBattleWork* w);
+u8 AreCardsSettled(CardDisplayWork** cards, u8 count);
 
-s32 func_08076F80(CardBattleWork* w, Task* task) {
+s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
     UnkStruct_080ABA80 data;
     u8 flag[4];
     UnkStruct_080ABA80 cards;
@@ -621,7 +621,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
     ReloadArgs args;
     BtlObj* actor;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         if (gBtlWork->flags & 0x1000000) {
             gBtlWork->flags &= ~0x1000000;
         }
@@ -629,223 +629,223 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
     }
     if (w->unk_C4[3] != 0) {
         position = w->x * 256;
-        ApproachValue(&position, (s16)gUnk_09033FC8[w->unk_B9 - 1] * 256, w->unk_C4[3]);
+        ApproachValue(&position, (s16)gSoraStockValueX[w->stockCount - 1] * 256, w->unk_C4[3]);
         w->x = position >> 8;
         w->unk_C4[3]--;
     }
-    if (w->unk_C9 == 0) {
-        if (gSoraSelectedCard->unk_78 & 0x1000000) {
-            if (gSoraSelectedCard->unk_78 & 0x4000000) {
-            if (gBtlWork->unk_0F4 == 9) {
-                func_0807A620(w);
+    if (w->cardsClosed == 0) {
+        if (gSoraSelectedCard->flags & 0x1000000) {
+            if (gSoraSelectedCard->flags & 0x4000000) {
+            if (gBtlWork->hcEffect == 9) {
+                RemoveSoraCardDisplays(w);
                 TaskPoolUpdate(&w->tasks);
-                if (gBtlWork->unk_0F4 != 25) {
-                    func_0807B378(w);
-                    if (gBtlWork->unk_0F4 == 10) {
-                        w->unk_9C[w->unk_B8] -= 2;
-                        if ((s16)w->unk_9C[w->unk_B8] < 0) {
-                            w->unk_9C[w->unk_B8] = 0;
+                if (gBtlWork->hcEffect != 25) {
+                    IncrementReloadCount(w);
+                    if (gBtlWork->hcEffect == 10) {
+                        w->reloadCounts[w->listIndex] -= 2;
+                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                            w->reloadCounts[w->listIndex] = 0;
                         }
                     }
                 }
-                gCardBattleState->unk_0FC = w->unk_9C[w->unk_B8];
-                gCardBattleState->unk_0F4 = 0;
-                gCardBattleState->unk_100 = 4;
-                func_08078914(w, 0);
-                w->unk_B0[0] = func_08078754(w, 0);
-                w->unk_94[0] = 0;
-                func_0807682C(w, 0);
-                func_0807BB04();
+                gCardBattleState->soraReloadCounter = w->reloadCounts[w->listIndex];
+                gCardBattleState->soraReloadGauge = 0;
+                gCardBattleState->soraGaugeFullFrame = 4;
+                ResetCardSlotsForReload(w, 0);
+                w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+                w->cursors[0] = 0;
+                CreateSoraCardRing(w, 0);
+                TickSoraHcEffectOnReload();
             } else {
                 gBtlWork->flags |= 0x80000000LL;
-                func_0807A620(w);
-                if (gBtlWork->unk_0F4 != 25) {
-                    func_0807B378(w);
-                    if (gBtlWork->unk_0F4 == 10) {
-                        w->unk_9C[w->unk_B8] -= 2;
-                        if ((s16)w->unk_9C[w->unk_B8] < 0) {
-                            w->unk_9C[w->unk_B8] = 0;
+                RemoveSoraCardDisplays(w);
+                if (gBtlWork->hcEffect != 25) {
+                    IncrementReloadCount(w);
+                    if (gBtlWork->hcEffect == 10) {
+                        w->reloadCounts[w->listIndex] -= 2;
+                        if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                            w->reloadCounts[w->listIndex] = 0;
                         }
                     }
                 }
-                gCardBattleState->unk_0FC = w->unk_9C[w->unk_B8];
-                gCardBattleState->unk_0F4 = 0;
-                gCardBattleState->unk_100 = 4;
-                func_080788CC(w, 0);
-                w->unk_94[w->unk_B8] = 0;
-                w->unk_B0[w->unk_B8] = 0;
-                w->unk_C0[w->unk_B8] = 1;
+                gCardBattleState->soraReloadCounter = w->reloadCounts[w->listIndex];
+                gCardBattleState->soraReloadGauge = 0;
+                gCardBattleState->soraGaugeFullFrame = 4;
+                ClearUsedCardSlots(w, 0);
+                w->cursors[w->listIndex] = 0;
+                w->cardsLeft[w->listIndex] = 0;
+                w->reloadPending[w->listIndex] = 1;
                 gSoraSelectedCard = 0;
-                gUnk_02034A9C = 0;
+                gSoraCardRequest = 0;
             }
             }
         }
-        switch (gUnk_02034A9C) {
+        switch (gSoraCardRequest) {
         case 0:
             break;
         case 1:
-            gUnk_02034A9C = 0;
-            if (w->unk_B0[w->unk_B8] > 2) {
-                if (gSoraSelectedCard->unk_78 & 0x40) {
-                    func_08078FFC(w, w->unk_B8);
+            gSoraCardRequest = 0;
+            if (w->cardsLeft[w->listIndex] > 2) {
+                if (gSoraSelectedCard->flags & 0x40) {
+                    SelectNextSoraCard(w, w->listIndex);
                 }
-            } else if (w->unk_B0[w->unk_B8] > 1 && (gSoraSelectedCard->unk_78 & 0x40)) {
-                func_08078D98(w, w->unk_B8, 4);
+            } else if (w->cardsLeft[w->listIndex] > 1 && (gSoraSelectedCard->flags & 0x40)) {
+                SelectOtherSoraCard(w, w->listIndex, 4);
             }
             break;
         case 2:
-            gUnk_02034A9C = 0;
-            if (w->unk_B0[w->unk_B8] > 2) {
-                if (gSoraSelectedCard->unk_78 & 0x40) {
-                    func_08078E34(w, w->unk_B8, 4);
+            gSoraCardRequest = 0;
+            if (w->cardsLeft[w->listIndex] > 2) {
+                if (gSoraSelectedCard->flags & 0x40) {
+                    SelectPrevSoraCard(w, w->listIndex, 4);
                 }
-            } else if (w->unk_B0[w->unk_B8] > 1 && (gSoraSelectedCard->unk_78 & 0x40)) {
-                func_08078D98(w, w->unk_B8, 4);
+            } else if (w->cardsLeft[w->listIndex] > 1 && (gSoraSelectedCard->flags & 0x40)) {
+                SelectOtherSoraCard(w, w->listIndex, 4);
             }
             break;
         case 4:
-            gUnk_02034A9C = 0;
-            if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
-                if (w->unk_B9 == 3) {
-                    func_0807ABC8(w);
-                } else if (gSoraSelectedCard->cardDef->unk_2A == 3) {
+            gSoraCardRequest = 0;
+            if (!(gSoraSelectedCard->flags & 0x100000)) {
+                if (w->stockCount == 3) {
+                    UseSoraStock(w);
+                } else if (gSoraSelectedCard->cardDef->category == 3) {
                     m4aSongNumStart(SONG_SYS_BEEP);
-                } else if (w->unk_C0[w->unk_B8] == 0) {
-                    if (!(gSoraSelectedCard->unk_78 & 2)) {
-                        if (func_0807B60C() != 0) {
-                            if (w->unk_B0[w->unk_B8] > 0 && w->unk_B9 <= 2 && gCardBattleState->unk_0E1 == 0) {
-                                func_0807A188(w);
+                } else if (w->reloadPending[w->listIndex] == 0) {
+                    if (!(gSoraSelectedCard->flags & 2)) {
+                        if (CanUseSoraSelectedCard() != 0) {
+                            if (w->cardsLeft[w->listIndex] > 0 && w->stockCount <= 2 && gCardBattleState->soraStockActive == 0) {
+                                StockSoraCard(w);
                             }
-                        } else if (gSoraSelectedCard->unk_78 & 0x20) {
+                        } else if (gSoraSelectedCard->flags & 0x20) {
                             m4aSongNumStart(SONG_SYS_BEEP);
                         }
-                    } else if (gSoraSelectedCard->unk_78 & 0x20) {
+                    } else if (gSoraSelectedCard->flags & 0x20) {
                         m4aSongNumStart(SONG_SYS_BEEP);
                     }
                 }
-            } else if (w->unk_B9 != 0) {
-                func_0807ABC8(w);
+            } else if (w->stockCount != 0) {
+                UseSoraStock(w);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
             w->unk_C4[4] = 1;
             break;
         case 3:
-            gUnk_02034A9C = 0;
-            if (gSoraSelectedCard->cardDef->unk_2A != 3) {
-                if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
-                    if (w->unk_C0[w->unk_B8] == 0) {
+            gSoraCardRequest = 0;
+            if (gSoraSelectedCard->cardDef->category != 3) {
+                if (!(gSoraSelectedCard->flags & 0x100000)) {
+                    if (w->reloadPending[w->listIndex] == 0) {
                         if (gSoraSelectedCard->cardDef->flags & 0x10) {
-                            func_08079ECC(w);
-                        } else if (!(gSoraSelectedCard->unk_78 & 2)) {
-                            if (func_0807B60C() != 0) {
-                                func_08079600(w);
-                            } else if (gSoraSelectedCard->unk_78 & 0x20) {
+                            UseSoraGimmickCard(w);
+                        } else if (!(gSoraSelectedCard->flags & 2)) {
+                            if (CanUseSoraSelectedCard() != 0) {
+                                UseSoraCard(w);
+                            } else if (gSoraSelectedCard->flags & 0x20) {
                                 m4aSongNumStart(SONG_SYS_BEEP);
                             }
-                        } else if (gSoraSelectedCard->unk_78 & 0x20) {
+                        } else if (gSoraSelectedCard->flags & 0x20) {
                             m4aSongNumStart(SONG_SYS_BEEP);
                         }
                     }
                 } else {
                     goto locked;
                 }
-            } else if (!(gSoraSelectedCard->unk_78 & 0x100000)) {
-                func_08079B3C(w);
+            } else if (!(gSoraSelectedCard->flags & 0x100000)) {
+                UseSoraHeartlessCard(w);
             } else {
             locked:
                 if (gGameState.flags & 8) {
-                    func_0807A620(w);
+                    RemoveSoraCardDisplays(w);
                     gSoraSelectedCard = 0;
                     gBtlWork->flags |= 0x80000000LL;
-                    w->unk_B0[w->unk_B8] = 0;
-                    w->unk_C0[w->unk_B8] = 1;
+                    w->cardsLeft[w->listIndex] = 0;
+                    w->reloadPending[w->listIndex] = 1;
                 }
             }
             w->unk_C4[4] = 1;
             break;
         case 5:
-            gUnk_02034A9C = 0;
-            if (w->unk_B9 != 0) {
-                func_0807ABC8(w);
+            gSoraCardRequest = 0;
+            if (w->stockCount != 0) {
+                UseSoraStock(w);
             } else if (!(gBtlWork->flags & 0x80)) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
             w->unk_C4[4] = 1;
             break;
         case 6:
-            gUnk_02034A9C = 0;
-            func_0807A6C8(w);
+            gSoraCardRequest = 0;
+            OpenSoraCards(w);
             break;
         case 7:
-            w->unk_BC[w->unk_B8] = 0;
+            w->revCountShown[w->listIndex] = 0;
             w->unk_C4[0] = 0;
-            func_0807A75C(w);
+            CloseSoraCards(w);
             break;
         case 8:
-            gUnk_02034A9C = 0;
+            gSoraCardRequest = 0;
             break;
         case 9:
-            gUnk_02034A9C = 0;
-            func_0807B16C(w);
+            gSoraCardRequest = 0;
+            CycleSoraCardList(w);
             w->unk_C4[4] = 1;
             break;
         case 10:
-            gUnk_02034A9C = 0;
-            func_0807AF40(w);
+            gSoraCardRequest = 0;
+            SwitchSoraCardList(w);
             w->unk_C4[4] = 1;
             break;
         case 11:
-            w->unk_A6 = 60;
-            gUnk_02034A9C = 0;
+            w->timer = 60;
+            gSoraCardRequest = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
             break;
         case 12:
-            w->unk_A6 = 180;
-            gUnk_02034A9C = 0;
+            w->timer = 180;
+            gSoraCardRequest = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
             break;
         case 13:
-            w->unk_A6 = 300;
-            gUnk_02034A9C = 0;
+            w->timer = 300;
+            gSoraCardRequest = 0;
             SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
             break;
         default:
-            gUnk_02034A9C = 0;
+            gSoraCardRequest = 0;
             break;
         }
-        switch (gUnk_02034AA0) {
+        switch (gSoraCardReloadRequest) {
         case 14:
-            gUnk_02034AA0 = 0;
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
                 gSoraSelectedCard = 0;
             }
             gBtlWork->flags |= 0x80000000LL;
-            w->unk_B0[0] = 0;
-            w->unk_C0[0] = 1;
+            w->cardsLeft[0] = 0;
+            w->reloadPending[0] = 1;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
             if (FadeGetAmount() == 0) {
                 FadeFromAmount(2, 16, 20);
             }
             break;
         case 15:
-            gUnk_02034AA0 = 0;
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
                 gSoraSelectedCard = 0;
             }
@@ -854,19 +854,19 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 FadeFromAmount(2, 16, 20);
             }
             gBtlWork->flags |= 0x80000000LL;
-            w->unk_B0[0] = 0;
-            w->unk_C0[0] = 1;
+            w->cardsLeft[0] = 0;
+            w->reloadPending[0] = 1;
             break;
         case 16:
-            gUnk_02034AA0 = 0;
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
                 gSoraSelectedCard = 0;
             }
@@ -875,195 +875,195 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 FadeFromAmount(2, 16, 20);
             }
             gBtlWork->flags |= 0x80000000LL;
-            w->unk_B0[0] = 0;
-            w->unk_C0[0] = 1;
+            w->cardsLeft[0] = 0;
+            w->reloadPending[0] = 1;
             break;
         case 17:
-            gUnk_02034AA0 = 0;
-            func_0807B728(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForPotion(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_B0[0] = func_08078754(w, 0);
-            w->unk_94[0] = 0;
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            w->cursors[0] = 0;
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 18:
-            gUnk_02034AA0 = 0;
-            func_0807B7A4(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForHiPotion(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_B0[0] = func_08078754(w, 0);
-            w->unk_94[0] = 0;
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            w->cursors[0] = 0;
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 19:
-            gUnk_02034AA0 = 0;
-            func_0807B81C(w);
-            w->unk_9C[0] = 0;
-            func_0807B6F4(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForMegaPotion(w);
+            w->reloadCounts[0] = 0;
+            ResetSoraReloadGauge(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_94[0] = 0;
-            w->unk_B0[0] = func_08078754(w, 0);
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cursors[0] = 0;
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 21:
-            gUnk_02034AA0 = 0;
-            func_0807B894(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForEther(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_B0[0] = func_08078754(w, 0);
-            w->unk_94[0] = 0;
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            w->cursors[0] = 0;
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 22:
-            gUnk_02034AA0 = 0;
-            func_0807B910(w);
-            w->unk_9C[0] = 0;
-            func_0807B6F4(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForMegaEther(w);
+            w->reloadCounts[0] = 0;
+            ResetSoraReloadGauge(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_94[0] = 0;
-            w->unk_B0[0] = func_08078754(w, 0);
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cursors[0] = 0;
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 23:
-            gUnk_02034AA0 = 0;
-            func_0807B98C(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForElixir(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_94[0] = 0;
-            w->unk_B0[0] = func_08078754(w, 0);
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cursors[0] = 0;
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 24:
-            gUnk_02034AA0 = 0;
-            func_0807B98C(w);
-            w->unk_9C[0] = 0;
-            func_0807B6F4(w);
-            if (w->unk_B8 == 0) {
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RestoreCardsForElixir(w);
+            w->reloadCounts[0] = 0;
+            ResetSoraReloadGauge(w);
+            if (w->listIndex == 0) {
+                RemoveSoraCardDisplays(w);
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
             }
             TaskPoolUpdate(&w->tasks);
-            func_080788CC(w, 0);
-            w->unk_94[0] = 0;
-            w->unk_B0[0] = func_08078754(w, 0);
-            func_0807682C(w, 0);
+            ClearUsedCardSlots(w, 0);
+            w->cursors[0] = 0;
+            w->cardsLeft[0] = CountAvailableCardSlots(w, 0);
+            CreateSoraCardRing(w, 0);
 #ifdef VERSION_EU
-            if (w->unk_BC[w->unk_B8] == 0) {
-                CreateREVCOUNTTask(&w->tasks, (u8*)&w->unk_B8, &w->unk_B0[w->unk_B8], &w->unk_BC[w->unk_B8], 1);
+            if (w->revCountShown[w->listIndex] == 0) {
+                CreateREVCOUNTTask(&w->tasks, (u8*)&w->listIndex, &w->cardsLeft[w->listIndex], &w->revCountShown[w->listIndex], 1);
             }
 #endif
-            func_0807BB04();
+            TickSoraHcEffectOnReload();
             break;
         case 20:
-            gUnk_02034AA0 = 0;
-            func_0807B9EC(w);
-            if (w->unk_B8 == 0) {
-                w->unk_9C[0] = 0;
-                func_0807A620(w);
+            gSoraCardReloadRequest = 0;
+            RemoveItemCards(w);
+            if (w->listIndex == 0) {
+                w->reloadCounts[0] = 0;
+                RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
             } else {
-                func_0807A620(w);
-                w->unk_B8 = 0;
+                RemoveSoraCardDisplays(w);
+                w->listIndex = 0;
 #ifdef VERSION_EU
-                gCardBattleState->unk_0D2 = 0;
+                gCardBattleState->soraListIndex = 0;
 #endif
                 gSoraSelectedCard = 0;
             }
@@ -1072,97 +1072,97 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                 FadeFromAmount(2, 16, 20);
             }
             gBtlWork->flags |= 0x80000000LL;
-            w->unk_B0[0] = 0;
-            w->unk_C0[0] = 1;
+            w->cardsLeft[0] = 0;
+            w->reloadPending[0] = 1;
             break;
         default:
-            gUnk_02034AA0 = 0;
+            gSoraCardReloadRequest = 0;
             break;
         }
-        if (gCardBattleState->unk_0B8 != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
+        if (gCardBattleState->pickedFriendCardId != 950 && w->unk_C4[4] == 0 && w->reloadPending[w->listIndex] == 0) {
             gBtlWork->flags |= 0x20000000000LL;
-            func_08078BB4(w);
+            AddPickedCardToSoraDeck(w);
         }
-        if (gCardBattleState->unk_0BC != 950 && w->unk_C4[4] == 0 && w->unk_C0[w->unk_B8] == 0) {
-            func_08078BB4(w);
+        if (gCardBattleState->pickedGimmickCardId != 950 && w->unk_C4[4] == 0 && w->reloadPending[w->listIndex] == 0) {
+            AddPickedCardToSoraDeck(w);
         }
-        if (w->unk_C0[w->unk_B8] != 0) {
+        if (w->reloadPending[w->listIndex] != 0) {
             if (gSoraSelectedCard != 0) {
-                if (gSoraSelectedCard->unk_78 & 0x4000000) {
-                    gSoraSelectedCard->unk_78 |= 0x4000;
-                    func_080789E4(w);
-                    w->unk_C0[w->unk_B8] = 0;
+                if (gSoraSelectedCard->flags & 0x4000000) {
+                    gSoraSelectedCard->flags |= 0x4000;
+                    BeginSoraReloadDeal(w);
+                    w->reloadPending[w->listIndex] = 0;
                     w->unk_C4[0] = 1;
-                    SetTaskUpdate(task, (TaskUpdateFunc)func_08077F44);
+                    SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraReloadDeal);
                     TaskPoolUpdate(&w->tasks);
                     TaskPoolUpdate(&gCardBattleState->tasks);
-                    args.slot = w->unk_B8;
+                    args.slot = w->listIndex;
                     args.state = &w->unk_C4[0];
                     args.mode = 1;
                     TaskCreate(&w->tasks, &gTaskDescRELOAD, &args);
                     return 1;
                 }
             } else {
-                func_080789E4(w);
-                w->unk_C0[w->unk_B8] = 0;
-                SetTaskUpdate(task, (TaskUpdateFunc)func_08077F44);
+                BeginSoraReloadDeal(w);
+                w->reloadPending[w->listIndex] = 0;
+                SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraReloadDeal);
                 TaskPoolUpdate(&w->tasks);
                 TaskPoolUpdate(&gCardBattleState->tasks);
                 return 1;
             }
-        } else if (gSoraSelectedCard != 0 && (gSoraSelectedCard->unk_78 & 0x42) == 0x42 && func_080787B8(w, w->unk_B8) != 0) {
-            w->unk_C0[w->unk_B8] = 1;
-            gSoraSelectedCard->unk_A1 = 7;
+        } else if (gSoraSelectedCard != 0 && (gSoraSelectedCard->flags & 0x42) == 0x42 && CountAvailableCards(w, w->listIndex) != 0) {
+            w->reloadPending[w->listIndex] = 1;
+            gSoraSelectedCard->command = 7;
             actor = gBtlWork->actor;
-            if (actor->unk_02C > 3) {
-                actor->unk_02C -= 2;
+            if (actor->hp > 3) {
+                actor->hp -= 2;
             }
             gBtlWork->flags |= 0x80000000LL;
-            if (gBtlWork->unk_0F4 != 25) {
-                func_0807B378(w);
-                if (gBtlWork->unk_0F4 == 10) {
-                    w->unk_9C[w->unk_B8] -= 2;
-                    if ((s16)w->unk_9C[w->unk_B8] < 0) {
-                        w->unk_9C[w->unk_B8] = 0;
+            if (gBtlWork->hcEffect != 25) {
+                IncrementReloadCount(w);
+                if (gBtlWork->hcEffect == 10) {
+                    w->reloadCounts[w->listIndex] -= 2;
+                    if ((s16)w->reloadCounts[w->listIndex] < 0) {
+                        w->reloadCounts[w->listIndex] = 0;
                     }
                 }
             }
         }
-        if (w->unk_C4[1] == 0 && func_080782AC(w->unk_28, w->unk_B9) != 0) {
+        if (w->unk_C4[1] == 0 && AreCardsSettled(w->stock, w->stockCount) != 0) {
             data = gUnk_09033FD0;
             if (!(gBtlWork->flags & 0x4000)) {
-                result = func_080AC5E8(w->unk_28, w->unk_B9, w->unk_BA, &data, flag);
+                result = LookupStockName(w->stock, w->stockCount, w->stockValue, &data, flag);
             } else {
-                result = func_080AD144(w->unk_28, w->unk_B9, w->unk_BA, &data, flag, 0);
+                result = LookupLinkStockName(w->stock, w->stockCount, w->stockValue, &data, flag, 0);
             }
             if (result != 108) {
-                gCardBattleState->unk_0C4 = result;
+                gCardBattleState->soraStockName = result;
                 if (result <= 105) {
                     if (result != 107) {
-                        for (i = 0; i < w->unk_B9; i++) {
-                            w->unk_28[i]->unk_78 |= 0x10000000;
+                        for (i = 0; i < w->stockCount; i++) {
+                            w->stock[i]->flags |= 0x10000000;
                         }
-                        if (gCardBattleState->unk_0E3 == 0) {
-                            TaskCreate(&w->tasks, &gUnk_09EE77D4, 0);
-                            gCardBattleState->unk_0E3 = 1;
+                        if (gCardBattleState->soraStockNameShown == 0) {
+                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, 0);
+                            gCardBattleState->soraStockNameShown = 1;
                         }
                     } else {
-                        for (i = 0; i < w->unk_B9; i++) {
-                            w->unk_28[i]->unk_78 |= 0x10000000;
+                        for (i = 0; i < w->stockCount; i++) {
+                            w->stock[i]->flags |= 0x10000000;
                         }
-                        if (gCardBattleState->unk_0E3 == 0) {
-                            TaskCreate(&w->tasks, &gUnk_09EE77D4, &data);
-                            gCardBattleState->unk_0E3 = 1;
+                        if (gCardBattleState->soraStockNameShown == 0) {
+                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, &data);
+                            gCardBattleState->soraStockNameShown = 1;
                         }
                     }
-                } else if (w->unk_B9 == 3) {
+                } else if (w->stockCount == 3) {
                     cards = gUnk_09033FD0;
                     memset(output, 0, sizeof(output));
                     found = 0;
-                    for (i = 0; i < w->unk_B9; i++) {
-                        cards.unk_00[i] = w->unk_28[i]->cardDef->unk_28;
+                    for (i = 0; i < w->stockCount; i++) {
+                        cards.unk_00[i] = w->stock[i]->cardDef->unk_28;
                     }
-                    kind = func_080AE28C(&cards, output, w->unk_B9);
+                    kind = LookupStockPairName(&cards, output, w->stockCount);
                     switch (kind) {
                     case 0:
                     case 1:
@@ -1186,24 +1186,24 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
                     case 41:
                     case 43:
                     case 44:
-                        gCardBattleState->unk_0C4 = kind;
+                        gCardBattleState->soraStockName = kind;
                         found = 1;
                         break;
                     }
                     if (found == 0) {
-                        for (i = 0; i < w->unk_B9; i++) {
-                            w->unk_28[i]->unk_78 &= ~0x10000000;
+                        for (i = 0; i < w->stockCount; i++) {
+                            w->stock[i]->flags &= ~0x10000000;
                         }
-                        if (gCardBattleState->unk_0E3 != 0) {
-                            gCardBattleState->unk_0E3 = 0;
+                        if (gCardBattleState->soraStockNameShown != 0) {
+                            gCardBattleState->soraStockNameShown = 0;
                         }
                     } else {
-                        for (i = 0; i < w->unk_B9; i++) {
-                            w->unk_28[i]->unk_78 |= 0x10000000;
+                        for (i = 0; i < w->stockCount; i++) {
+                            w->stock[i]->flags |= 0x10000000;
                         }
-                        if (gCardBattleState->unk_0E3 == 0) {
-                            TaskCreate(&w->tasks, &gUnk_09EE77D4, 0);
-                            gCardBattleState->unk_0E3 = 1;
+                        if (gCardBattleState->soraStockNameShown == 0) {
+                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, 0);
+                            gCardBattleState->soraStockNameShown = 1;
                         }
                     }
                 }
@@ -1213,7 +1213,7 @@ s32 func_08076F80(CardBattleWork* w, Task* task) {
     }
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&gCardBattleState->tasks);
-    gCardBattleState->unk_0D3 = w->unk_B9;
+    gCardBattleState->soraStockCount = w->stockCount;
     w->unk_C4[4] = 0;
     if (gBtlWork->flags & 0x80000000000000LL) {
         gBtlWork->flags &= ~0x80000000000000LL;
@@ -1226,7 +1226,7 @@ static void cardbattle_2(CardBattleWork* w) {
     gCardBattleState->gfx = AnimUpdate(&gCardBattleState->anim);
     gCardBattleState->gfx2 = AnimUpdate(&gCardBattleState->anim2);
 
-    if (gCardBattleState->unk_0EA != 0 && w->unk_B9 != 0 && w->unk_BA != 0) {
+    if (gCardBattleState->cardsOpen != 0 && w->stockCount != 0 && w->stockValue != 0) {
         DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, 16,
                    12);
     }
@@ -1252,8 +1252,8 @@ static void cardbattle_3(CardBattleWork* w) {
     ReleaseObjTiles(gCardBattleState->tiles5);
     ReleaseObjPalette(gCardBattleState->palette);
     ReleaseObjPalette(gCardBattleState->palette2);
-    ReleaseObjTiles(gCardBattleState->unk_040);
-    ReleaseObjTiles(gCardBattleState->unk_050);
+    ReleaseObjTiles(gCardBattleState->premiumTiles);
+    ReleaseObjTiles(gCardBattleState->premiumTiles2);
     ReleaseObjTiles(gCardBattleState->tiles[0]);
     ReleaseObjTiles(gCardBattleState->tiles[1]);
     ReleaseObjTiles(gCardBattleState->tiles[2]);
@@ -1264,7 +1264,7 @@ static void cardbattle_3(CardBattleWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-s32 func_08077F44(CardBattleWork* w, Task* task) {
+s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
     CardDisplayArgs arg;
     CardDisplayWork* e;
     CardSlot* c;
@@ -1276,7 +1276,7 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
     a = 255;
     b = 255;
 
-    if (gBtlWork->unk_0A0 == 4) {
+    if (gBtlWork->phase == 4) {
         if (gRikuBtlWork->flags & 0x1000000) {
             gRikuBtlWork->flags &= ~0x1000000;
         }
@@ -1286,50 +1286,50 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
         return 0;
     }
 
-    if (*(s16*)&gSoraSelectedCard->unk_9C == 0) {
-        if (func_08078754(w, w->unk_B8) > w->unk_C4[2]) {
-            gSoraSelectedCard->unk_78 &= ~4;
-            e = ListPoolFirst(&w->unk_54[w->unk_B8]);
+    if (*(s16*)&gSoraSelectedCard->timer == 0) {
+        if (CountAvailableCardSlots(w, w->listIndex) > w->unk_C4[2]) {
+            gSoraSelectedCard->flags &= ~4;
+            e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
             while (e != 0) {
-                e->unk_A4++;
-                e->unk_80 = gUnk_09033FA8[e->unk_A4];
-                e->unk_9C = 4;
-                e->unk_A0 += 4;
+                e->ringIndex++;
+                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->timer = 4;
+                e->priority += 4;
                 e = ListPoolNext(&e->node);
             }
 
             n = gSoraSelectedCard->args.index - 1;
-            c = func_08076750(w, w->unk_B8, &n);
+            c = FindPrevAvailableSlot(w, w->listIndex, &n);
 
             if (c != 0) {
-                arg.pool = &w->unk_54[w->unk_B8];
+                arg.pool = &w->cardDisplays[w->listIndex];
                 arg.index = n;
-                arg.unk_0E = w->unk_B8;
+                arg.listIndex = w->listIndex;
                 arg.slot = c;
-                arg.unk_0F = w->unk_9C[w->unk_B8];
+                arg.reloadCount = w->reloadCounts[w->listIndex];
 
                 if (c->cardId == 0xFFFE) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardReload, &arg)->work;
                 } else {
-                    e = TaskCreate(&w->tasks, &gUnk_09EE496C, &arg)->work;
+                    e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;
                 }
 
-                e->unk_80 = e->unk_7C = gUnk_09033FA8[1];
-                e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-                e->unk_A4 = 1;
-                e->unk_9C = 8;
-                e->unk_A0 = 50;
-                e->unk_78 |= 0x814;
+                e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+                e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+                e->ringIndex = 1;
+                e->timer = 8;
+                e->priority = 50;
+                e->flags |= 0x814;
                 gSoraSelectedCard = e;
                 w->unk_C4[2]++;
-                w->unk_B0[w->unk_B8]++;
+                w->cardsLeft[w->listIndex]++;
             }
         } else {
-            e = ListPoolFirst(&w->unk_54[w->unk_B8]);
+            e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
             while (e != 0) {
-                k = e->unk_A4;
+                k = e->ringIndex;
 
                 if (k == 1) {
                     a = e->args.index;
@@ -1342,43 +1342,43 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
                 e = ListPoolNext(&e->node);
             }
 
-            n = w->unk_A8[w->unk_B8] - 1;
-            c = func_08076750(w, w->unk_B8, &n);
+            n = w->slotCounts[w->listIndex] - 1;
+            c = FindPrevAvailableSlot(w, w->listIndex, &n);
 
             if (c != 0 && (s16)n != a && (s16)n != b) {
-                arg.pool = &w->unk_54[w->unk_B8];
+                arg.pool = &w->cardDisplays[w->listIndex];
                 arg.index = n;
-                arg.unk_0E = w->unk_B8;
+                arg.listIndex = w->listIndex;
                 arg.slot = c;
-                arg.unk_0F = w->unk_9C[w->unk_B8];
+                arg.reloadCount = w->reloadCounts[w->listIndex];
 
                 if (c->cardId == 0xFFFE) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardReload, &arg)->work;
                 } else {
-                    e = TaskCreate(&w->tasks, &gUnk_09EE496C, &arg)->work;
+                    e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;
                 }
 
-                e->unk_7C = gUnk_09033FA8[3];
-                e->unk_98 = e->unk_94 = gUnk_09033FB8[0];
-                e->unk_A4 = 0;
-                e->unk_80 = gUnk_09033FA8[0];
-                e->unk_A0 = 60;
-                e->unk_78 |= 0x800;
+                e->unk_7C = gSoraCardRingAngles[3];
+                e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
+                e->ringIndex = 0;
+                e->unk_80 = gSoraCardRingAngles[0];
+                e->priority = 60;
+                e->flags |= 0x800;
             }
 
             gBtlWork->flags &= ~0x80000000LL;
             gBtlWork->flags &= ~0x100;
             w->unk_C4[0] = 0;
             m4aSongNumStop(SONG_SYS_RELOAD);
-            gUnk_02034A9C = 0;
-            SetTaskUpdate(task, (TaskUpdateFunc)func_08076F80);
+            gSoraCardRequest = 0;
+            SetTaskUpdate(task, (TaskUpdateFunc)cardbattleSora_1);
         }
     }
 
-    if (gUnk_02034A9C == 7) {
-        w->unk_BC[w->unk_B8] = 0;
+    if (gSoraCardRequest == 7) {
+        w->revCountShown[w->listIndex] = 0;
         w->unk_C4[0] = 0;
-        func_0807A75C(w);
+        CloseSoraCards(w);
         m4aSongNumStop(SONG_SYS_RELOAD);
     }
 
@@ -1388,14 +1388,14 @@ s32 func_08077F44(CardBattleWork* w, Task* task) {
     return 1;
 }
 
-u16 gUnk_09EE48F4[47] = {
+u16 gRandomHcEffects[47] = {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 29, 30, 31, 34, 35, 36, 38, 39, 40, 41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 53,
 };
 
 TaskDesc gTaskDescCardBattleSora = {
     "cardbattle",
     (TaskInitFunc)cardbattle_0,
-    (TaskUpdateFunc)func_08076F80,
+    (TaskUpdateFunc)cardbattleSora_1,
     (TaskDrawFunc)cardbattle_2,
     (TaskDestroyFunc)cardbattle_3,
     sizeof(CardBattleWork),

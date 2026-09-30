@@ -2,10 +2,10 @@
 #include "sprites_bos6.h"
 #include "sprites_staff_roll.h"
 
-static u8 gUnk_02036008;
-static s16 gUnk_0203600A;
-static s16 gUnk_0203600C;
-static s32 gUnk_02036010;
+static u8 sBosPcFldShakeActive;
+static s16 sBosPcFldShakePattern;
+static s16 sBosPcFldShakeStep;
+static s32 sBosPcFldShakeOffset;
 
 const s8 gUnk_09A4CA94[33] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1, 0,
@@ -15,15 +15,15 @@ const s8 gUnk_09A4CAB5[9] = {
     1, 2, 2, 1, -1, -2, -2, -1, 0,
 };
 
-const u16 gUnk_09A4CABE[3] = {
+const u16 gBosPcFldPaletteCycleNext[3] = {
     1, 2, 0,
 };
 
-const s16 gUnk_09A4CAC4[3] = {
+const s16 gBosPcFldPaletteCycleFrames[3] = {
     6, 6, 6,
 };
 
-const s8* gUnk_09EF9E04[2] = { gUnk_09A4CA94, gUnk_09A4CAB5 };
+const s8* gBosPcFldShakePatterns[2] = { gUnk_09A4CA94, gUnk_09A4CAB5 };
 
 TaskDesc gTaskDescBosPcFld = {
     "task_bos_pc_fld",
@@ -38,13 +38,13 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void func_0810B370(Task* task, u8 v) {
+void BosPcFldSetPaletteCycle(Task* task, u8 v) {
     PcFldWork* work = task->work;
 
-    work->unk_000 = v;
+    work->paletteCycle = v;
 }
 
-void func_0810B378(Task* task, u8 a) {
+void BosPcFldEnableObject(Task* task, u8 a) {
     PcFldWork* work;
     ObjPalette* pal;
 
@@ -67,70 +67,70 @@ void func_0810B378(Task* task, u8 a) {
     }
 }
 
-void func_0810B3E4(void) {
-    gUnk_02036008 = 0;
-    gUnk_0203600A = 0;
-    gUnk_0203600C = 0;
-    gUnk_02036010 = 0;
+void BosPcFldResetShake(void) {
+    sBosPcFldShakeActive = 0;
+    sBosPcFldShakePattern = 0;
+    sBosPcFldShakeStep = 0;
+    sBosPcFldShakeOffset = 0;
 }
 
-void func_0810B40C(s16 a) {
-    gUnk_02036008 = 1;
-    gUnk_0203600A = a;
-    gUnk_0203600C = 0;
-    gUnk_02036010 = 0;
+void BosPcFldStartShake(s16 a) {
+    sBosPcFldShakeActive = 1;
+    sBosPcFldShakePattern = a;
+    sBosPcFldShakeStep = 0;
+    sBosPcFldShakeOffset = 0;
 }
 
-void func_0810B434(void) {
+void BosPcFldUpdateShake(void) {
     const s8* p;
 
-    if (gUnk_02036008 != 0) {
-        p = gUnk_09EF9E04[gUnk_0203600A];
-        gUnk_02036010 += ((p[gUnk_0203600C] << 12) - gUnk_02036010) >> 3;
-        gUnk_0203600C += 1;
-        if (p[gUnk_0203600C] == 0) {
-            gUnk_02036008 = 0;
-            gUnk_02036010 = 0;
+    if (sBosPcFldShakeActive != 0) {
+        p = gBosPcFldShakePatterns[sBosPcFldShakePattern];
+        sBosPcFldShakeOffset += ((p[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
+        sBosPcFldShakeStep += 1;
+        if (p[sBosPcFldShakeStep] == 0) {
+            sBosPcFldShakeActive = 0;
+            sBosPcFldShakeOffset = 0;
         }
     }
 }
 
-s32 func_0810B49C(void) {
-    return gUnk_02036010;
+s32 BosPcFldGetShake(void) {
+    return sBosPcFldShakeOffset;
 }
 
-void func_0810B4A8(PcFldWork* work) {
+void BosPcFldResetPaletteCycle(PcFldWork* work) {
     u16 zero;
 
     zero = 0;
-    work->unk_000 = zero;
-    work->unk_002 = zero;
-    work->unk_004 = zero;
+    work->paletteCycle = zero;
+    work->paletteIndex = zero;
+    work->paletteTimer = zero;
 }
 
-void func_0810B4B4(PcFldWork* work) {
+void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
     u16 t;
     u16 zero;
 
-    if (work->unk_000 != 0) {
-        if (work->unk_004 > gUnk_09A4CAC4[work->unk_002]) {
-            t = gUnk_09A4CABE[work->unk_002];
+    if (work->paletteCycle != 0) {
+        if (work->paletteTimer > gBosPcFldPaletteCycleFrames[work->paletteIndex]) {
+            t = gBosPcFldPaletteCycleNext[work->paletteIndex];
             zero = 0;
-            work->unk_002 = t;
-            work->unk_004 = zero;
+            work->paletteIndex = t;
+            work->paletteTimer = zero;
         }
-        work->unk_004 += 1;
+        work->paletteTimer += 1;
     }
 }
 
-void func_0810B4F4(PcFldWork* work) {
-    if (work->unk_000 != 0) {
-        LoadPalette(gUnk_09D69374 + work->unk_002 * 32, gUnk_05000080, 32);
+void BosPcFldLoadPaletteCycle(PcFldWork* work) {
+    if (work->paletteCycle != 0) {
+        LoadPalette(gUnk_09D69374 + work->paletteIndex * 32, gUnk_05000080, 32);
     }
 }
 
-void func_0810B51C(PcFldWork* work) {
-    work->unk_000 = 0;
+void BosPcFldStopPaletteCycle(PcFldWork* work) {
+    work->paletteCycle = 0;
 }
 
 void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
@@ -140,22 +140,22 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     LoadBgPalette(0, arg->palette, arg->paletteSize);
     SetBgMapBlocks(0, &arg->map, 2, 3);
     gBtlWork->scale = 0x100;
-    gBtlWork->unk_028 = 0x100;
+    gBtlWork->zoomScale = 0x100;
     gBtlWork->x = 0x11400;
     gBtlWork->y = 0x15300;
-    gBtlWork->unk_000 = 0x11400;
-    gBtlWork->unk_004 = 0x15300;
+    gBtlWork->viewX = 0x11400;
+    gBtlWork->viewY = 0x15300;
     gBtlWork->x2 = 0x11400;
     gBtlWork->y2 = 0x15300;
-    gBtlWork->unk_01C = 0x11400;
-    gBtlWork->unk_020 = 0x15300;
-    gBtlWork->unk_01A = 15;
-    gBtlWork->unk_018 = 0;
-    func_0802F1C8();
-    func_0810B3E4();
-    ScrollBgMapTo(0, gBtlWork->unk_000 >> 8, gBtlWork->unk_004 >> 8);
-    func_0810B4A8(work);
-    func_0810B4B4(work);
+    gBtlWork->zoomX = 0x11400;
+    gBtlWork->zoomY = 0x15300;
+    gBtlWork->zoomSteps = 15;
+    gBtlWork->rotation = 0;
+    BtlMapResetShake();
+    BosPcFldResetShake();
+    ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
+    BosPcFldResetPaletteCycle(work);
+    BosPcFldUpdatePaletteCycle(work);
     work->tiles = 0;
     work->palette = 0;
     p = &work->collider;
@@ -171,10 +171,10 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     s32 dy;
     BtlObj* pos;
 
-    func_0802F208();
-    func_0810B434();
+    BtlMapUpdateShake();
+    BosPcFldUpdateShake();
     pos = gBtlWork->actor;
-    u = gBtlWork->unk_000 - 0x7800;
+    u = gBtlWork->viewX - 0x7800;
     t = pos->x - u;
     if (t < 0) {
         t = 0;
@@ -189,22 +189,22 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     }
     gBtlWork->x += dx;
     gBtlWork->y += dy;
-    gBtlWork->unk_000 = gBtlWork->x;
-    gBtlWork->unk_004 = gBtlWork->y;
-    if (gBtlWork->unk_000 - 0x7800 < gBtlWork->unk_0DA * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DA + 120) * 256;
-    } else if (gBtlWork->unk_000 + 0x7800 > gBtlWork->unk_0DC * 256) {
-        gBtlWork->unk_000 = (gBtlWork->unk_0DC - 120) * 256;
+    gBtlWork->viewX = gBtlWork->x;
+    gBtlWork->viewY = gBtlWork->y;
+    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + 120) * 256;
+    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - 120) * 256;
     }
-    if (gBtlWork->unk_004 + 0x3000 < gBtlWork->unk_0DE * 256) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0DE - 48) * 256;
-    } else if (gBtlWork->unk_004 + 0x5000 > gBtlWork->unk_0E0 * 256) {
-        gBtlWork->unk_004 = (gBtlWork->unk_0E0 - 80) * 256;
+    if (gBtlWork->viewY + 0x3000 < gBtlWork->yMin * 256) {
+        gBtlWork->viewY = (gBtlWork->yMin - 48) * 256;
+    } else if (gBtlWork->viewY + 0x5000 > gBtlWork->yMax * 256) {
+        gBtlWork->viewY = (gBtlWork->yMax - 80) * 256;
     }
-    gBtlWork->unk_004 += func_0802F268();
-    gBtlWork->unk_004 += func_0810B49C();
-    ScrollBgMapTo(0, (gBtlWork->unk_000 >> 8) + 8, (gBtlWork->unk_004 >> 8) + 40);
-    func_0810B4B4(work);
+    gBtlWork->viewY += BtlMapGetShake();
+    gBtlWork->viewY += BosPcFldGetShake();
+    ScrollBgMapTo(0, (gBtlWork->viewX >> 8) + 8, (gBtlWork->viewY >> 8) + 40);
+    BosPcFldUpdatePaletteCycle(work);
     return 1;
 }
 
@@ -216,7 +216,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
     u32 y;
     s32 z;
 
-    func_0810B4F4(work);
+    BosPcFldLoadPaletteCycle(work);
     pos = gBtlWork->actor;
     if (pos->z >= -0x100) {
         if ((pos->flags & 0x80) == 0) {
@@ -236,7 +236,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
 }
 
 void task_bos_pc_fld_3(PcFldWork* work) {
-    func_0810B51C(work);
+    BosPcFldStopPaletteCycle(work);
     ColliderUnregister(&work->collider);
 
     if (work->tiles != 0) {

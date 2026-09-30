@@ -131,10 +131,10 @@ static const AnimDef sBtlSoraDirAnimDefs[6][5] = {
 };
 
 static const u16 sBtlSoraGroundSongs[4][4] = {
-    { 532, 533, 534, 535 },
-    { 536, 537, 538, 539 },
-    { 540, 541, 542, 543 },
-    { 122, 123, 124, 125 },
+    { SONG_BTL_SR_FOOTL, SONG_BTL_SR_FOOTR, SONG_BTL_SR_JUMP, SONG_BTL_SR_LAND },
+    { SONG_BTL_SR_STONEL, SONG_BTL_SR_STONER, SONG_BTL_SR_STONEJP, SONG_BTL_SR_STONELD },
+    { SONG_BTL_SR_MUDL, SONG_BTL_SR_MUDR, SONG_BTL_SR_MUDJP, SONG_BTL_SR_MUDLD },
+    { SONG_SYS_SR_STONEL, SONG_SYS_SR_STONER, SONG_SYS_SR_STONEJP, SONG_SYS_SR_STONELD },
 };
 
 static const s32 sUnk_0813C0FC[18] = {
@@ -149,21 +149,21 @@ static const s32 sUnk_0813C18C[18] = {
     14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65,
 };
 
-static const SoraAttackDef sUnk_0813C1D4 = { 2, sUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C1D4 = { 2, sUnk_0813C0FC, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C1EC = { 7, sUnk_0813C144, 153, 501, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C1EC = { 7, sUnk_0813C144, SONG_VO_SR_ATTACK03, SONG_BTL_SR_ATT01, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C204 = { 12, sUnk_0813C0FC, 151, 500, 0, 0, 0, NULL };
+static const SoraAttackDef sUnk_0813C204 = { 12, sUnk_0813C0FC, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, 155, 502, 0, 2, 0, NULL };
+static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, 2, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, 152, 501, -640, 1, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, -640, 1, 0, &sUnk_0813C1D4 };
 
-static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, 150, 500, 0, 1, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, SONG_VO_SR_ATTACK00, SONG_BTL_SR_ATT00, 0, 1, 0, &sUnk_0813C1D4 };
 
-static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, 152, 501, 0, 1, 0, &sUnk_0813C1EC };
+static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, 0, 1, 0, &sUnk_0813C1EC };
 
-static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, 155, 502, 0, 3, 0, &sUnk_0813C21C };
+static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, 3, 0, &sUnk_0813C21C };
 
 static const u8 sBtlSoraSwingHitFrames[5] = {
     10, 12, 15, 18, 20,
@@ -226,31 +226,31 @@ static const AnimDef sBtlRikuDirAnimDefs[6][5] = {
 };
 
 static const u16 sBtlRikuGroundSongs[4][4] = {
-    { 532, 533, 534, 535 },
-    { 536, 537, 538, 539 },
-    { 540, 541, 542, 543 },
-    { 122, 123, 124, 125 },
+    { SONG_BTL_SR_FOOTL, SONG_BTL_SR_FOOTR, SONG_BTL_SR_JUMP, SONG_BTL_SR_LAND },
+    { SONG_BTL_SR_STONEL, SONG_BTL_SR_STONER, SONG_BTL_SR_STONEJP, SONG_BTL_SR_STONELD },
+    { SONG_BTL_SR_MUDL, SONG_BTL_SR_MUDR, SONG_BTL_SR_MUDJP, SONG_BTL_SR_MUDLD },
+    { SONG_SYS_SR_STONEL, SONG_SYS_SR_STONER, SONG_SYS_SR_STONEJP, SONG_SYS_SR_STONELD },
 };
 
 static const s32 sBtlRikuAttackIds[3] = {
     0, 1, 2,
 };
 
-static const RikuAttackDef sUnk_0813C6E8 = { 1, 15, 0, sBtlRikuAttackIds, 255, 655, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C6E8 = { 1, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C704 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, 656, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C704 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C720 = { 3, 15, 0, sBtlRikuAttackIds, 256, 655, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C720 = { 3, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C73C = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, 657, 0, 0, 0, NULL };
+static const RikuAttackDef sUnk_0813C73C = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, 656, -640, 1, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, 1, 0, &sUnk_0813C6E8 };
 
-static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, 655, 0, 1, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, 1, 0, &sUnk_0813C6E8 };
 
-static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, 656, 0, 1, 0, &sUnk_0813C704 };
+static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, 1, 0, &sUnk_0813C704 };
 
-static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, 657, 0, 1, 0, &sUnk_0813C73C };
+static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, 1, 0, &sUnk_0813C73C };
 
 void task_btl_lockon_0(BtlLockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);

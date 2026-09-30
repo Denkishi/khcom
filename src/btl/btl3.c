@@ -280,7 +280,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->vx = 0x800;
     work->hitHalfSize = 10;
     work->flags = 2;
-    work->song = 568;
+    work->song = SONG_EF_LT2_HIT;
 
     switch (work->variant) {
     case 0:
@@ -294,14 +294,14 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxStartFlame(x, y, z, 332);
         work->hitHalfSize = 16;
-        work->song = 505;
+        work->song = SONG_EF_FIRE01;
         break;
     case 3:
         work->attack = 102;
         BtlRaidGetEffectPosition(work, &x, &y, &z);
         BgFxStartFrost(x, y, z, 332);
         work->hitHalfSize = 16;
-        work->song = 509;
+        work->song = SONG_EF_BURIZA01;
         break;
     case 4:
         work->attack = 103;

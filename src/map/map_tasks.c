@@ -4524,7 +4524,7 @@ void Task_MapTalk_3(MapTalkWork* w) {
 
 const MapGmkDef gMapGmk01Def = {
     gUnk_099912C4, gUnk_09858320, 0x200, 0, 0, gUnk_09EF8414, gUnk_09EF841C,
-    1, 13, 0, 0, 0, 16, 16, 208, 0, &gTaskDescMapGmk01,
+    1, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, 0, &gTaskDescMapGmk01,
 };
 
 TaskDesc gTaskDescMapGmk01 = {
@@ -4538,7 +4538,7 @@ TaskDesc gTaskDescMapGmk01 = {
 
 const MapGmkDef gMapGmkBarrelDef = {
     gUnk_099912E4, gUnk_09858B3C, 0x400, 0, 0, gUnk_09EF8424, gUnk_09EF8460,
-    1, 0, 0, 0, 0, 12, 24, 144, 0, &gTaskDescMapGmkBarrel,
+    1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, 0, &gTaskDescMapGmkBarrel,
 };
 
 TaskDesc gTaskDescMapGmkBarrel = {
@@ -4552,7 +4552,7 @@ TaskDesc gTaskDescMapGmkBarrel = {
 
 const MapGmkDef gMapGmk04Def = {
     gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, &gUnk_09EF8494, &gUnk_09EF84A4,
-    1, 13, 0, 0, 0, 24, 62, 102, 0, &gTaskDescMapGmk04,
+    1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk04,
 };
 
 TaskDesc gTaskDescMapGmk04 = {
@@ -4566,7 +4566,7 @@ TaskDesc gTaskDescMapGmk04 = {
 
 const MapGmkDef gMapGmk05Def = {
     gMoguPalette, gMoguFl00Tiles, 0x100, 0, 0, gMoguFl00Frames, gMoguFl00Anims,
-    1, 13, 0, 0, 0, 16, 24, 207, 0, &gTaskDescMapGmk05,
+    1, 13, 0, 0, 0, 16, 24, SONG_SYS_MOUGURI, 0, &gTaskDescMapGmk05,
 };
 
 TaskDesc gTaskDescMapGmk05 = {
@@ -4580,7 +4580,7 @@ TaskDesc gTaskDescMapGmk05 = {
 
 const MapGmkDef gMapGmk06Def = {
     gUnk_09991344, gUnk_0985BDEA, 0x400, 0, 0, &gUnk_09EF84A8, &gUnk_09EF84B8,
-    1, 13, 0, 0, 0, 24, 54, 102, 0, &gTaskDescMapGmk06,
+    1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk06,
 };
 
 TaskDesc gTaskDescMapGmk06 = {

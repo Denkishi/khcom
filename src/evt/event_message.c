@@ -3709,8 +3709,8 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
         p->unk_1A8--;
         if (p->unk_1A8 == 0) {
             if (p->arg.chara == 10) {
-                m4aSongNumStart(0x144);
-                SetEventSoundPosition(0x144, x, y);
+                m4aSongNumStart(SONG_SND_324);
+                SetEventSoundPosition(SONG_SND_324, x, y);
             }
         }
     }
@@ -5009,11 +5009,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 2) {
                     m4aSongNumStart(SONG_SND_958);
-                    SetEventSoundPosition(0x3BE, x, y);
+                    SetEventSoundPosition(SONG_SND_958, x, y);
                 }
                 if (p->obj.anim->frame == 6) {
                     m4aSongNumStart(SONG_SND_959);
-                    SetEventSoundPosition(0x3BF, x, y);
+                    SetEventSoundPosition(SONG_SND_959, x, y);
                 }
             }
         }
@@ -5022,11 +5022,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
-                SetEventSoundPosition(0x3AC, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
-                SetEventSoundPosition(0x3AD, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
         break;
@@ -5034,11 +5034,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5046,7 +5046,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_373);
-                SetEventSoundPosition(0x175, x, y);
+                SetEventSoundPosition(SONG_SND_373, x, y);
             }
         }
         break;
@@ -5054,7 +5054,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_374);
-                SetEventSoundPosition(0x176, x, y);
+                SetEventSoundPosition(SONG_SND_374, x, y);
             }
         }
         break;
@@ -5069,11 +5069,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
-                SetEventSoundPosition(0x3AC, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
-                SetEventSoundPosition(0x3AD, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
         break;
@@ -5082,11 +5082,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
-                SetEventSoundPosition(0x3AC, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
-                SetEventSoundPosition(0x3AD, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
         break;
@@ -5095,11 +5095,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5107,11 +5107,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5128,19 +5128,19 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
             if (p->obj.anim->frame == 3) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
-                    SetEventSoundPosition(0x384, x, y);
+                    SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
-                    SetEventSoundPosition(0x3B2, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
             if (p->obj.anim->frame == 7) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
-                    SetEventSoundPosition(0x385, x, y);
+                    SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLER);
-                    SetEventSoundPosition(0x3B3, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
                 }
             }
         }
@@ -5151,19 +5151,19 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
             if (p->obj.anim->frame == 2) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
-                    SetEventSoundPosition(0x384, x, y);
+                    SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
-                    SetEventSoundPosition(0x3B2, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
             if (p->obj.anim->frame == 5) {
                 if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
-                    SetEventSoundPosition(0x385, x, y);
+                    SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLER);
-                    SetEventSoundPosition(0x3B3, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
                 }
             }
         }
@@ -5173,11 +5173,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5186,11 +5186,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5198,11 +5198,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5210,11 +5210,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5222,11 +5222,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5238,11 +5238,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5251,11 +5251,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
-                SetEventSoundPosition(0x3AE, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
-                SetEventSoundPosition(0x3AF, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
         }
         break;
@@ -5263,11 +5263,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
-                SetEventSoundPosition(0x3AE, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
-                SetEventSoundPosition(0x3AF, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
         }
         break;
@@ -5275,11 +5275,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTL);
-                SetEventSoundPosition(0x3AA, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_DIRTL, x, y);
             }
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTR);
-                SetEventSoundPosition(0x3AB, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_DIRTR, x, y);
             }
         }
         break;
@@ -5287,11 +5287,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
-                SetEventSoundPosition(0x3A0, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
-                SetEventSoundPosition(0x3A1, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
         }
         break;
@@ -5299,11 +5299,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5311,11 +5311,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLEL);
-                SetEventSoundPosition(0x3A8, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_MARBLEL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLER);
-                SetEventSoundPosition(0x3A9, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_MARBLER, x, y);
             }
         }
         break;
@@ -5323,11 +5323,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5336,11 +5336,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5349,11 +5349,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5362,11 +5362,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTL);
-                SetEventSoundPosition(0x3B6, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN2_DIRTL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTR);
-                SetEventSoundPosition(0x3B7, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN2_DIRTR, x, y);
             }
         }
         break;
@@ -5374,11 +5374,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_MAN_WOODL);
-                SetEventSoundPosition(0x3A6, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_WOODL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_WOODR);
-                SetEventSoundPosition(0x3A7, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_WOODR, x, y);
             }
         }
         break;
@@ -5386,11 +5386,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
-                SetEventSoundPosition(0x3B2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLER);
-                SetEventSoundPosition(0x3B3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
             }
         }
         break;
@@ -5399,11 +5399,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
-                SetEventSoundPosition(0x3A0, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
-                SetEventSoundPosition(0x3A1, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
         }
         break;
@@ -5414,11 +5414,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5430,19 +5430,19 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
             if (p->obj.anim->frame == 1) {
                 if (p->arg.eventId == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
-                    SetEventSoundPosition(0x3AE, x, y);
+                    SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
-                    SetEventSoundPosition(0x3B2, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
                 }
             }
             if (p->obj.anim->frame == 5) {
                 if (p->arg.eventId == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
-                    SetEventSoundPosition(0x3AF, x, y);
+                    SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
                 } else {
                     m4aSongNumStart(SONG_EV_MAN_RMARBLER);
-                    SetEventSoundPosition(0x3B3, x, y);
+                    SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
                 }
             }
         }
@@ -5452,11 +5452,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5465,11 +5465,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_954);
-                SetEventSoundPosition(0x3BA, x, y);
+                SetEventSoundPosition(SONG_SND_954, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_955);
-                SetEventSoundPosition(0x3BB, x, y);
+                SetEventSoundPosition(SONG_SND_955, x, y);
             }
         }
         break;
@@ -5478,11 +5478,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_956);
-                SetEventSoundPosition(0x3BC, x, y);
+                SetEventSoundPosition(SONG_SND_956, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_957);
-                SetEventSoundPosition(0x3BD, x, y);
+                SetEventSoundPosition(SONG_SND_957, x, y);
             }
         }
         break;
@@ -5491,11 +5491,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5504,7 +5504,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_EV01_03);
-                SetEventSoundPosition(0x130, x, y);
+                SetEventSoundPosition(SONG_EV_EV01_03, x, y);
             }
         }
         break;
@@ -5514,7 +5514,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_EV01_01);
-                SetEventSoundPosition(0x12E, x, y);
+                SetEventSoundPosition(SONG_EV_EV01_01, x, y);
             }
         }
         break;
@@ -5603,11 +5603,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5615,7 +5615,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_EV34_00);
-                SetEventSoundPosition(0x140, x, y);
+                SetEventSoundPosition(SONG_EV_EV34_00, x, y);
             }
         }
         break;
@@ -5623,7 +5623,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
-                SetEventSoundPosition(0x14E, x, y);
+                SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
         }
         break;
@@ -5631,8 +5631,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xEA:
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
-                m4aSongNumStart(0x144);
-                SetEventSoundPosition(0x144, x, y);
+                m4aSongNumStart(SONG_SND_324);
+                SetEventSoundPosition(SONG_SND_324, x, y);
             }
         }
         break;
@@ -5645,11 +5645,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
-                SetEventSoundPosition(0x39D, x, y);
+                SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
-                SetEventSoundPosition(0x39C, x, y);
+                SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
         }
         break;
@@ -5662,11 +5662,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
-                SetEventSoundPosition(0x39C, x, y);
+                SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
-                SetEventSoundPosition(0x39D, x, y);
+                SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
         }
         break;
@@ -5675,11 +5675,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5688,11 +5688,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5708,11 +5708,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
-                SetEventSoundPosition(0x3B0, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
-                SetEventSoundPosition(0x3B1, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
         }
         break;
@@ -5720,7 +5720,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
-                SetEventSoundPosition(0x14E, x, y);
+                SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
         }
         break;
@@ -5729,11 +5729,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5741,11 +5741,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
-                SetEventSoundPosition(0x3A2, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
-                SetEventSoundPosition(0x3A3, x, y);
+                SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
         }
         break;
@@ -5754,7 +5754,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_GE_ENTRY);
-                SetEventSoundPosition(0x155, x, y);
+                SetEventSoundPosition(SONG_EV_GE_ENTRY, x, y);
             }
         }
         break;
@@ -5763,11 +5763,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
-                SetEventSoundPosition(0x3AC, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
-                SetEventSoundPosition(0x3AD, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
         break;
@@ -5776,11 +5776,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
-                SetEventSoundPosition(0x3AC, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
-                SetEventSoundPosition(0x3AD, x, y);
+                SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
         }
         break;
@@ -5789,11 +5789,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
-                SetEventSoundPosition(0x3B4, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
-                SetEventSoundPosition(0x3B5, x, y);
+                SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
         }
         break;
@@ -5802,11 +5802,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5815,11 +5815,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
-                SetEventSoundPosition(0x39E, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
             if (p->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
-                SetEventSoundPosition(0x39F, x, y);
+                SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
         }
         break;
@@ -5827,7 +5827,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_AL_LAND);
-                SetEventSoundPosition(0x156, x, y);
+                SetEventSoundPosition(SONG_EV_AL_LAND, x, y);
             }
         }
         break;
@@ -5835,7 +5835,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 0) {
             if (p->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_VO_GE_ATTACK02);
-                SetEventSoundPosition(0xC5, x, y);
+                SetEventSoundPosition(SONG_VO_GE_ATTACK02, x, y);
             }
         }
         break;
@@ -5850,7 +5850,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         if (p->obj.anim->timer == 1) {
             if (p->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
-                SetEventSoundPosition(0x227, x, y);
+                SetEventSoundPosition(SONG_BTL_DARKDEAD, x, y);
             }
         }
         break;
@@ -5868,55 +5868,55 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     case 0:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_SR_DIRTL);
-            SetEventSoundPosition(0x384, x, y);
+            SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
         } else {
             m4aSongNumStart(SONG_EV_SR_DIRTR);
-            SetEventSoundPosition(0x385, x, y);
+            SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
         }
         break;
     case 1:
         if (flag == 0) {
             m4aSongNumStart(SONG_EV_SR_STONER);
-            SetEventSoundPosition(0x389, x, y);
+            SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
         } else {
             m4aSongNumStart(SONG_EV_SR_STONEL);
-            SetEventSoundPosition(0x388, x, y);
+            SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
         }
         break;
     case 2:
         if ((p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (p->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
-                SetEventSoundPosition(0x388, x, y);
+                SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_SR_STONER);
-                SetEventSoundPosition(0x389, x, y);
+                SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
             }
 
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
-                SetEventSoundPosition(0x388, x, y);
+                SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_SR_STONER);
-                SetEventSoundPosition(0x389, x, y);
+                SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
             }
         } else {
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_SR_MUDL);
-                SetEventSoundPosition(0x38C, x, y);
+                SetEventSoundPosition(SONG_EV_SR_MUDL, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_SR_MUDR);
-                SetEventSoundPosition(0x38D, x, y);
+                SetEventSoundPosition(SONG_EV_SR_MUDR, x, y);
             }
         }
         break;
     case 3:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_SR_STONEL);
-            SetEventSoundPosition(0x388, x, y);
+            SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
         } else {
             m4aSongNumStart(SONG_EV_SR_STONER);
-            SetEventSoundPosition(0x389, x, y);
+            SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
         }
         break;
     }
@@ -5933,47 +5933,47 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     case 0:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_DL_DIRTL);
-            SetEventSoundPosition(0x394, x, y);
+            SetEventSoundPosition(SONG_EV_DL_DIRTL, x, y);
         } else {
             m4aSongNumStart(SONG_EV_DL_DIRTR);
-            SetEventSoundPosition(0x395, x, y);
+            SetEventSoundPosition(SONG_EV_DL_DIRTR, x, y);
         }
         break;
     case 1:
         if (flag == 0) {
             m4aSongNumStart(SONG_EV_DL_STONE_R);
-            SetEventSoundPosition(0x391, x, y);
+            SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
         } else {
             m4aSongNumStart(SONG_EV_DL_STONE_L);
-            SetEventSoundPosition(0x390, x, y);
+            SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
         }
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
             if (flag == 0) {
                 m4aSongNumStart(SONG_EV_DL_STONE_R);
-                SetEventSoundPosition(0x391, x, y);
+                SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_DL_STONE_L);
-                SetEventSoundPosition(0x390, x, y);
+                SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
             }
         } else {
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_DL_MUDL);
-                SetEventSoundPosition(0x398, x, y);
+                SetEventSoundPosition(SONG_EV_DL_MUDL, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_DL_MUDR);
-                SetEventSoundPosition(0x399, x, y);
+                SetEventSoundPosition(SONG_EV_DL_MUDR, x, y);
             }
         }
         break;
     case 3:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_DL_STONE_L);
-            SetEventSoundPosition(0x390, x, y);
+            SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
         } else {
             m4aSongNumStart(SONG_EV_DL_STONE_R);
-            SetEventSoundPosition(0x391, x, y);
+            SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
         }
         break;
     }
@@ -5990,47 +5990,47 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     case 0:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_GF_DIRTL);
-            SetEventSoundPosition(0x396, x, y);
+            SetEventSoundPosition(SONG_EV_GF_DIRTL, x, y);
         } else {
             m4aSongNumStart(SONG_EV_GF_DIRTR);
-            SetEventSoundPosition(0x397, x, y);
+            SetEventSoundPosition(SONG_EV_GF_DIRTR, x, y);
         }
         break;
     case 1:
         if (flag == 0) {
             m4aSongNumStart(SONG_EV_GF_STONE_R);
-            SetEventSoundPosition(0x393, x, y);
+            SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
         } else {
             m4aSongNumStart(SONG_EV_GF_STONE_L);
-            SetEventSoundPosition(0x392, x, y);
+            SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
         }
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
             if (flag == 0) {
                 m4aSongNumStart(SONG_EV_GF_STONE_R);
-                SetEventSoundPosition(0x393, x, y);
+                SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_GF_STONE_L);
-                SetEventSoundPosition(0x392, x, y);
+                SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
             }
         } else {
             if (flag != 0) {
                 m4aSongNumStart(SONG_EV_GF_MUDL);
-                SetEventSoundPosition(0x39A, x, y);
+                SetEventSoundPosition(SONG_EV_GF_MUDL, x, y);
             } else {
                 m4aSongNumStart(SONG_EV_GF_MUDR);
-                SetEventSoundPosition(0x39B, x, y);
+                SetEventSoundPosition(SONG_EV_GF_MUDR, x, y);
             }
         }
         break;
     case 3:
         if (flag != 0) {
             m4aSongNumStart(SONG_EV_GF_STONE_L);
-            SetEventSoundPosition(0x392, x, y);
+            SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
         } else {
             m4aSongNumStart(SONG_EV_GF_STONE_R);
-            SetEventSoundPosition(0x393, x, y);
+            SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
         }
         break;
     }

@@ -192,7 +192,7 @@ void mode_title_0(void) {
     gTitleObjTask = 0;
     FadeStartIn(0, 0x4C);
     gTitleState = 0;
-    m4aSongNumStart(0);
+    m4aSongNumStart(SONG_SND_0);
     gTitleTimer = 0x1E;
 }
 

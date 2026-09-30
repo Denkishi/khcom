@@ -242,7 +242,7 @@ void SetPoohAction(PoohWork* w, u32 b) {
     }
 
     if (b >= 36 && b <= 37) {
-        m4aSongNumStart(0x149);
+        m4aSongNumStart(SONG_SND_329);
     } else if (b == 16) {
         m4aSongNumStart(SONG_SYS_PO_FALL);
     } else if (b == 39 || b == 22 || (b >= 32 && b <= 35)) {
@@ -7538,7 +7538,7 @@ const PooAnimDesc gPooSoraAnimDescs[11][5] = {
     },
 };
 
-const u16 gPooSoraSounds[8] = { 109, 110, 111, 112, 133, 133, 134, 0 };
+const u16 gPooSoraSounds[8] = { SONG_SYS_SR_FOOTL, SONG_SYS_SR_FOOTR, SONG_SYS_SR_JUMP, SONG_SYS_SR_LAND, SONG_SYS_SR_GRASSUP, SONG_SYS_SR_GRASSUP, SONG_SYS_SR_GRASSJP, 0 };
 
 const u16* gUnk_09EF4208[144] = {
     gUnk_09806D98,

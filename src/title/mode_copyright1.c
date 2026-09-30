@@ -2,6 +2,7 @@
 #include "mode_copyright1.h"
 #include "copyright_screens.h"
 #include "fade.h"
+#include "songs.h"
 
 #ifndef VERSION_JP
 u8 gCopyrightExtraScreen __attribute__((aligned(4)));
@@ -57,7 +58,7 @@ void mode_copyright1_0(s32 arg) {
         SaveClearSystem();
     }
 
-    m4aSongNumStart(0);
+    m4aSongNumStart(SONG_SND_0);
     SetBgMode0();
     SetupBg(0, 0, 0x1F, 0);
     SetBgPriority(0, 3);

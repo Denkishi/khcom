@@ -6,6 +6,7 @@
 #include "card_message_text.h"
 #include "event_text.h"
 #include "msg_localized_data.h"
+#include "songs.h"
 
 #ifdef VERSION_US
 #include "event_000_text.inc"
@@ -152,11 +153,11 @@ static const MessageScriptEntry sEvent000Script[42] = {
 
 static const EvSoundCue sEvent000SoundCues[6] = {
     { 65535, 0, 0, 0 },
-    { 304, 1235, 0, 0 },
-    { 30, 1650, 2, 0 },
-    { 333, 2810, 0, 0 },
-    { 334, 3339, 0, 0 },
-    { 30, 3590, 32769, 0 },
+    { SONG_EV_EV01_03, 1235, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 1650, 2, 0 },
+    { SONG_EV_WHOOSH, 2810, 0, 0 },
+    { SONG_EV_CARDTHR, 3339, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 3590, 32769, 0 },
 };
 
 static const EventCameraKeyframe sEvent000Camera[11] = {
@@ -537,9 +538,9 @@ static const MessageScriptEntry sEvent001Script[3] = {
 #endif
 
 static const EvSoundCue sEvent001SoundCues[3] = {
-    { 30, 0, 0, 0 },
-    { 30, 718, 1, 0 },
-    { 345, 720, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 718, 1, 0 },
+    { SONG_EV_WHITEOUT, 720, 32768, 0 },
 };
 
 static const EventCameraKeyframe sEvent001Camera[4] = {
@@ -683,7 +684,7 @@ static const EventCameraKeyframe sEvent002Camera[9] = {
 
 static const EvSoundCue sEvent002SoundCues[2] = {
     { 65535, 0, 0, 0 },
-    { 28, 285, 32770, 0 },
+    { SONG_BGM_EVENT_UNREST, 285, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent002Track0[43] = {
@@ -893,8 +894,8 @@ static const EventCameraKeyframe sEvent003Camera[4] = {
 };
 
 static const EvSoundCue sEvent003SoundCues[2] = {
-    { 28, 0, 0, 0 },
-    { 28, 1685, 32769, 0 },
+    { SONG_BGM_EVENT_UNREST, 0, 0, 0 },
+    { SONG_BGM_EVENT_UNREST, 1685, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent003Track0[41] = {
@@ -1179,14 +1180,14 @@ static const EventCameraKeyframe sEvent004Camera[11] = {
 };
 
 static const EvSoundCue sEvent004SoundCues[8] = {
-    { 13, 0, 0, 0 },
-    { 337, 262, 0, 0 },
-    { 336, 500, 0, 0 },
-    { 13, 1145, 1, 0 },
-    { 5, 1249, 2, 0 },
-    { 5, 2475, 1, 0 },
-    { 7, 2509, 2, 0 },
-    { 7, 2950, 32769, 0 },
+    { SONG_BGM_TOWN_FIELD, 0, 0, 0 },
+    { SONG_EV_CARDFALL, 262, 0, 0 },
+    { SONG_EV_FLASH02, 500, 0, 0 },
+    { SONG_BGM_TOWN_FIELD, 1145, 1, 0 },
+    { SONG_BGM_EVENT1, 1249, 2, 0 },
+    { SONG_BGM_EVENT1, 2475, 1, 0 },
+    { SONG_BGM_EVENT3, 2509, 2, 0 },
+    { SONG_BGM_EVENT3, 2950, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent004Track0[37] = {
@@ -1418,9 +1419,9 @@ static const EventCameraKeyframe sEvent005Camera[2] = {
 };
 
 static const EvSoundCue sEvent005SoundCues[3] = {
-    { 5, 0, 0, 0 },
-    { 334, 203, 0, 0 },
-    { 5, 520, 32769, 0 },
+    { SONG_BGM_EVENT1, 0, 0, 0 },
+    { SONG_EV_CARDTHR, 203, 0, 0 },
+    { SONG_BGM_EVENT1, 520, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent005Track0[8] = {
@@ -1608,8 +1609,8 @@ static const EventCameraKeyframe sEvent006Camera[2] = {
 
 static const EvSoundCue sEvent006SoundCues[3] = {
     { 65535, 0, 0, 0 },
-    { 5, 655, 2, 0 },
-    { 5, 2295, 32769, 0 },
+    { SONG_BGM_EVENT1, 655, 2, 0 },
+    { SONG_BGM_EVENT1, 2295, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent006Track0[23] = {
@@ -1822,14 +1823,14 @@ static const EventCameraKeyframe sEvent007Camera[9] = {
 };
 
 static const EvSoundCue sEvent007SoundCues[8] = {
-    { 13, 0, 0, 0 },
-    { 13, 1151, 1, 0 },
-    { 338, 1190, 0, 0 },
-    { 339, 1270, 0, 0 },
-    { 4, 1305, 0, 0 },
-    { 336, 1420, 0, 0 },
-    { 339, 1425, 1, 0 },
-    { 338, 1428, 32769, 0 },
+    { SONG_BGM_TOWN_FIELD, 0, 0, 0 },
+    { SONG_BGM_TOWN_FIELD, 1151, 1, 0 },
+    { SONG_EV_TW_BELL, 1190, 0, 0 },
+    { SONG_EV_RUMBLE, 1270, 0, 0 },
+    { SONG_BGM_EVENT2, 1305, 0, 0 },
+    { SONG_EV_FLASH02, 1420, 0, 0 },
+    { SONG_EV_RUMBLE, 1425, 1, 0 },
+    { SONG_EV_TW_BELL, 1428, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent007Track0[16] = {
@@ -1956,13 +1957,13 @@ static const EventCameraKeyframe sEvent008Camera[9] = {
 };
 
 static const EvSoundCue sEvent008SoundCues[7] = {
-    { 4, 0, 0, 0 },
-    { 389, 220, 0, 0 },
-    { 339, 225, 0, 0 },
-    { 339, 245, 1, 0 },
-    { 389, 335, 0, 0 },
-    { 339, 345, 0, 0 },
-    { 339, 355, 32769, 0 },
+    { SONG_BGM_EVENT2, 0, 0, 0 },
+    { SONG_SND_389, 220, 0, 0 },
+    { SONG_EV_RUMBLE, 225, 0, 0 },
+    { SONG_EV_RUMBLE, 245, 1, 0 },
+    { SONG_SND_389, 335, 0, 0 },
+    { SONG_EV_RUMBLE, 345, 0, 0 },
+    { SONG_EV_RUMBLE, 355, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent008Track0[5] = {
@@ -2147,10 +2148,10 @@ static const EventCameraKeyframe sEvent009Camera[5] = {
 };
 
 static const EvSoundCue sEvent009SoundCues[4] = {
-    { 13, 0, 0, 0 },
-    { 13, 580, 1, 0 },
-    { 27, 1265, 2, 0 },
-    { 27, 1855, 32769, 0 },
+    { SONG_BGM_TOWN_FIELD, 0, 0, 0 },
+    { SONG_BGM_TOWN_FIELD, 580, 1, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1265, 2, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1855, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent009Track0[64] = {
@@ -2393,13 +2394,13 @@ static const MessageScriptEntry sEvent010Script[14] = {
 #endif
 
 static const EvSoundCue sEvent010SoundCues[7] = {
-    { 30, 0, 0, 0 },
-    { 331, 560, 0, 0 },
-    { 18, 580, 0, 0 },
-    { 334, 846, 0, 0 },
-    { 322, 1220, 0, 0 },
-    { 323, 1309, 0, 0 },
-    { 4, 1340, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_EV_WARPOUT, 560, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 580, 0, 0 },
+    { SONG_EV_CARDTHR, 846, 0, 0 },
+    { SONG_EV_EV34_02, 1220, 0, 0 },
+    { SONG_EV_EV34_03, 1309, 0, 0 },
+    { SONG_BGM_EVENT2, 1340, 32768, 0 },
 };
 
 static const EventCameraKeyframe sEvent010Camera[7] = {
@@ -2658,13 +2659,13 @@ static const EventCameraKeyframe sEvent011Camera[4] = {
 };
 
 static const EvSoundCue sEvent011SoundCues[7] = {
-    { 30, 0, 0, 0 },
-    { 106, 1, 0, 0 },
-    { 30, 201, 1, 0 },
-    { 331, 230, 0, 0 },
-    { 18, 265, 0, 0 },
-    { 330, 1480, 0, 0 },
-    { 18, 1625, 32769, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_SYS_ITEMGET, 1, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 201, 1, 0 },
+    { SONG_EV_WARPOUT, 230, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 265, 0, 0 },
+    { SONG_EV_WARPIN, 1480, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 1625, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent011Track0[26] = {
@@ -2881,7 +2882,7 @@ static const EventCameraKeyframe sEvent012Camera[1] = {
 };
 
 static const EvSoundCue sEvent012SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent012Track0[13] = {
@@ -3054,8 +3055,8 @@ static const EventCameraKeyframe sEvent013Camera[1] = {
 };
 
 static const EvSoundCue sEvent013SoundCues[2] = {
-    { 30, 0, 0, 0 },
-    { 340, 1730, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_EV_DL_JUMP, 1730, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent013Track0[20] = {
@@ -3197,8 +3198,8 @@ static const EventCameraKeyframe sEvent014Camera[1] = {
 };
 
 static const EvSoundCue sEvent014SoundCues[2] = {
-    { 19, 0, 0, 0 },
-    { 19, 395, 32769, 0 },
+    { SONG_BGM_EVENT_NAMINE, 0, 0, 0 },
+    { SONG_BGM_EVENT_NAMINE, 395, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent014Track0[7] = {
@@ -3347,11 +3348,11 @@ static const EventCameraKeyframe sEvent015Camera[3] = {
 };
 
 static const EvSoundCue sEvent015SoundCues[5] = {
-    { 30, 0, 2, 0 },
-    { 30, 895, 1, 0 },
-    { 340, 1450, 0, 0 },
-    { 7, 1455, 2, 0 },
-    { 340, 1610, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 2, 0 },
+    { SONG_BGM_T13THFLOOR, 895, 1, 0 },
+    { SONG_EV_DL_JUMP, 1450, 0, 0 },
+    { SONG_BGM_EVENT3, 1455, 2, 0 },
+    { SONG_EV_DL_JUMP, 1610, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent015Track0[33] = {
@@ -3550,7 +3551,7 @@ static const EventCameraKeyframe sEvent016Camera[1] = {
 };
 
 static const EvSoundCue sEvent016SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent016Track0[10] = {
@@ -3682,8 +3683,8 @@ static const EventCameraKeyframe sEvent017Camera[1] = {
 };
 
 static const EvSoundCue sEvent017SoundCues[2] = {
-    { 18, 0, 0, 0 },
-    { 18, 595, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 595, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent017Track0[7] = {
@@ -3807,10 +3808,10 @@ static const EventCameraKeyframe sEvent018Camera[3] = {
 };
 
 static const EvSoundCue sEvent018SoundCues[4] = {
-    { 30, 0, 0, 0 },
-    { 30, 415, 1, 0 },
-    { 369, 820, 0, 0 },
-    { 370, 1260, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 415, 1, 0 },
+    { SONG_SND_369, 820, 0, 0 },
+    { SONG_SND_370, 1260, 32768, 0 },
 };
 
 static const EventBgEffectEntry sEvent018BgEffects[3] = {
@@ -4004,7 +4005,7 @@ static const EventCameraKeyframe sEvent019Camera[3] = {
 };
 
 static const EvSoundCue sEvent019SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent019Track0[11] = {
@@ -4100,8 +4101,8 @@ static const EventCameraKeyframe sEvent020Camera[1] = {
 };
 
 static const EvSoundCue sEvent020SoundCues[2] = {
-    { 19, 0, 0, 0 },
-    { 19, 395, 32769, 0 },
+    { SONG_BGM_EVENT_NAMINE, 0, 0, 0 },
+    { SONG_BGM_EVENT_NAMINE, 395, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent020Track0[7] = {
@@ -4222,7 +4223,7 @@ static const EventCameraKeyframe sEvent021Camera[2] = {
 };
 
 static const EvSoundCue sEvent021SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent021Track0[27] = {
@@ -4445,9 +4446,9 @@ static const EventCameraKeyframe sEvent022Camera[1] = {
 };
 
 static const EvSoundCue sEvent022SoundCues[3] = {
-    { 30, 0, 0, 0 },
-    { 30, 305, 1, 0 },
-    { 19, 475, 32770, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 305, 1, 0 },
+    { SONG_BGM_EVENT_NAMINE, 475, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent022Track0[16] = {
@@ -4604,10 +4605,10 @@ static const EventCameraKeyframe sEvent023Camera[2] = {
 };
 
 static const EvSoundCue sEvent023SoundCues[4] = {
-    { 18, 0, 0, 0 },
-    { 334, 382, 0, 0 },
-    { 330, 720, 0, 0 },
-    { 18, 1075, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_CARDTHR, 382, 0, 0 },
+    { SONG_EV_WARPIN, 720, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 1075, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent023Track0[8] = {
@@ -4715,7 +4716,7 @@ static const EventCameraKeyframe sEvent024Camera[1] = {
 };
 
 static const EvSoundCue sEvent024SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent024Track0[5] = {
@@ -4840,7 +4841,7 @@ static const EventCameraKeyframe sEvent025Camera[6] = {
 
 static const EvSoundCue sEvent025SoundCues[2] = {
     { 65535, 0, 0, 0 },
-    { 18, 375, 32770, 0 },
+    { SONG_BGM_EVENT_XIII, 375, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent025Track0[26] = {
@@ -5056,10 +5057,10 @@ static const EventCameraKeyframe sEvent026Camera[11] = {
 
 static const EvSoundCue sEvent026SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 18, 80, 2, 0 },
-    { 335, 525, 0, 0 },
-    { 330, 795, 0, 0 },
-    { 331, 856, 32768, 0 },
+    { SONG_BGM_EVENT_XIII, 80, 2, 0 },
+    { SONG_EV_FLASH01, 525, 0, 0 },
+    { SONG_EV_WARPIN, 795, 0, 0 },
+    { SONG_EV_WARPOUT, 856, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent026Track0[15] = {
@@ -5227,10 +5228,10 @@ static const EventCameraKeyframe sEvent027Camera[3] = {
 };
 
 static const EvSoundCue sEvent027SoundCues[4] = {
-    { 18, 0, 0, 0 },
-    { 334, 241, 0, 0 },
-    { 330, 260, 0, 0 },
-    { 18, 315, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_CARDTHR, 241, 0, 0 },
+    { SONG_EV_WARPIN, 260, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 315, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent027Track0[20] = {
@@ -5422,9 +5423,9 @@ static const EventCameraKeyframe sEvent028Camera[3] = {
 };
 
 static const EvSoundCue sEvent028SoundCues[3] = {
-    { 18, 0, 0, 0 },
-    { 334, 904, 0, 0 },
-    { 18, 1015, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_CARDTHR, 904, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 1015, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent028Track0[9] = {
@@ -5556,7 +5557,7 @@ static const EventCameraKeyframe sEvent029Camera[2] = {
 };
 
 static const EvSoundCue sEvent029SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent029Track0[15] = {
@@ -5742,10 +5743,10 @@ static const EventCameraKeyframe sEvent030Camera[7] = {
 
 static const EvSoundCue sEvent030SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 28, 635, 2, 0 },
-    { 28, 1085, 1, 0 },
-    { 359, 1110, 0, 0 },
-    { 4, 1160, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 635, 2, 0 },
+    { SONG_BGM_EVENT_UNREST, 1085, 1, 0 },
+    { SONG_SND_359, 1110, 0, 0 },
+    { SONG_BGM_EVENT2, 1160, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent030Track0[16] = {
@@ -5863,8 +5864,8 @@ static const EventCameraKeyframe sEvent031Camera[1] = {
 };
 
 static const EvSoundCue sEvent031SoundCues[2] = {
-    { 18, 0, 0, 0 },
-    { 18, 470, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 470, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent031Track0[8] = {
@@ -6044,9 +6045,9 @@ static const EventCameraKeyframe sEvent032Camera[2] = {
 };
 
 static const EvSoundCue sEvent032SoundCues[3] = {
-    { 30, 0, 0, 0 },
-    { 30, 1825, 1, 0 },
-    { 7, 2115, 32770, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 1825, 1, 0 },
+    { SONG_BGM_EVENT3, 2115, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent032Track0[39] = {
@@ -6269,10 +6270,10 @@ static const EventCameraKeyframe sEvent033Camera[4] = {
 
 static const EvSoundCue sEvent033SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 28, 210, 2, 0 },
-    { 28, 1870, 1, 0 },
-    { 4, 1955, 0, 0 },
-    { 359, 2015, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 210, 2, 0 },
+    { SONG_BGM_EVENT_UNREST, 1870, 1, 0 },
+    { SONG_BGM_EVENT2, 1955, 0, 0 },
+    { SONG_SND_359, 2015, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent033Track0[32] = {
@@ -6440,7 +6441,7 @@ static const EventCameraKeyframe sEvent034Camera[2] = {
 };
 
 static const EvSoundCue sEvent034SoundCues[1] = {
-    { 28, 0, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent034Track0[9] = {
@@ -6540,8 +6541,8 @@ static const EventCameraKeyframe sEvent035Camera[1] = {
 };
 
 static const EvSoundCue sEvent035SoundCues[2] = {
-    { 18, 0, 0, 0 },
-    { 18, 735, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 735, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent035Track0[3] = {
@@ -6660,7 +6661,7 @@ static const EventCameraKeyframe sEvent036Camera[1] = {
 };
 
 static const EvSoundCue sEvent036SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent036Track0[17] = {
@@ -6782,7 +6783,7 @@ static const EventCameraKeyframe sEvent037Camera[1] = {
 };
 
 static const EvSoundCue sEvent037SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent037Track0[16] = {
@@ -6988,10 +6989,10 @@ static const EventCameraKeyframe sEvent038Camera[4] = {
 };
 
 static const EvSoundCue sEvent038SoundCues[4] = {
-    { 18, 0, 0, 0 },
-    { 940, 230, 0, 0 },
-    { 330, 1270, 0, 0 },
-    { 18, 2015, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_MAN2_STONEL, 230, 0, 0 },
+    { SONG_EV_WARPIN, 1270, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 2015, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent038Track0[5] = {
@@ -7148,7 +7149,7 @@ static const EventCameraKeyframe sEvent039Camera[1] = {
 };
 
 static const EvSoundCue sEvent039SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent039Track0[16] = {
@@ -7289,9 +7290,9 @@ static const EventCameraKeyframe sEvent040Camera[2] = {
 
 static const EvSoundCue sEvent040SoundCues[4] = {
     { 65535, 0, 0, 0 },
-    { 18, 360, 2, 0 },
-    { 18, 700, 1, 0 },
-    { 4, 825, 32768, 0 },
+    { SONG_BGM_EVENT_XIII, 360, 2, 0 },
+    { SONG_BGM_EVENT_XIII, 700, 1, 0 },
+    { SONG_BGM_EVENT2, 825, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent040Track0[26] = {
@@ -7436,9 +7437,9 @@ static const EventCameraKeyframe sEvent041Camera[2] = {
 };
 
 static const EvSoundCue sEvent041SoundCues[3] = {
-    { 18, 0, 0, 0 },
-    { 334, 355, 0, 0 },
-    { 330, 370, 32768, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_CARDTHR, 355, 0, 0 },
+    { SONG_EV_WARPIN, 370, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent041Track0[14] = {
@@ -7567,8 +7568,8 @@ static const EventCameraKeyframe sEvent042Camera[1] = {
 };
 
 static const EvSoundCue sEvent042SoundCues[2] = {
-    { 18, 0, 0, 0 },
-    { 18, 625, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 625, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent042Track0[8] = {
@@ -7653,7 +7654,7 @@ static const EventCameraKeyframe sEvent043Camera[1] = {
 };
 
 static const EvSoundCue sEvent043SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent043Track0[7] = {
@@ -7814,8 +7815,8 @@ static const MessageScriptEntry sEvent044Script[22] = {
 #endif
 
 static const EvSoundCue sEvent044SoundCues[2] = {
-    { 36, 0, 0, 0 },
-    { 36, 2615, 32769, 0 },
+    { SONG_BGM_TWILIGHTTOWN, 0, 0, 0 },
+    { SONG_BGM_TWILIGHTTOWN, 2615, 32769, 0 },
 };
 
 static const EventCameraKeyframe sEvent044Camera[7] = {
@@ -8098,10 +8099,10 @@ static const EventCameraKeyframe sEvent045Camera[4] = {
 
 static const EvSoundCue sEvent045SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 5, 720, 2, 0 },
-    { 5, 1045, 1, 0 },
-    { 18, 1055, 2, 0 },
-    { 331, 1200, 32768, 0 },
+    { SONG_BGM_EVENT1, 720, 2, 0 },
+    { SONG_BGM_EVENT1, 1045, 1, 0 },
+    { SONG_BGM_EVENT_XIII, 1055, 2, 0 },
+    { SONG_EV_WARPOUT, 1200, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent045Track0[28] = {
@@ -8300,12 +8301,12 @@ static const EventCameraKeyframe sEvent046Camera[9] = {
 };
 
 static const EvSoundCue sEvent046SoundCues[6] = {
-    { 18, 0, 0, 0 },
-    { 643, 332, 0, 0 },
-    { 664, 850, 0, 0 },
-    { 355, 1018, 0, 0 },
-    { 330, 1200, 0, 0 },
-    { 18, 1295, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EF_STANIMP, 332, 0, 0 },
+    { SONG_EF_SYNC2, 850, 0, 0 },
+    { SONG_SND_355, 1018, 0, 0 },
+    { SONG_EV_WARPIN, 1200, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 1295, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent046Track0[16] = {
@@ -8491,12 +8492,12 @@ static const EventCameraKeyframe sEvent048Camera[5] = {
 };
 
 static const EvSoundCue sEvent048SoundCues[6] = {
-    { 28, 0, 0, 0 },
-    { 359, 355, 0, 0 },
-    { 28, 505, 1, 0 },
-    { 332, 800, 0, 0 },
-    { 4, 1050, 0, 0 },
-    { 359, 1120, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 0, 0, 0 },
+    { SONG_SND_359, 355, 0, 0 },
+    { SONG_BGM_EVENT_UNREST, 505, 1, 0 },
+    { SONG_EV_FLASH00, 800, 0, 0 },
+    { SONG_BGM_EVENT2, 1050, 0, 0 },
+    { SONG_SND_359, 1120, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent048Track0[18] = {
@@ -8639,9 +8640,9 @@ static const EventCameraKeyframe sEvent049Camera[5] = {
 };
 
 static const EvSoundCue sEvent049SoundCues[3] = {
-    { 28, 0, 0, 0 },
-    { 360, 410, 0, 0 },
-    { 335, 935, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 0, 0, 0 },
+    { SONG_SND_360, 410, 0, 0 },
+    { SONG_EV_FLASH01, 935, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent049Track0[11] = {
@@ -8831,7 +8832,7 @@ static const EventCameraKeyframe sEvent050Camera[6] = {
 };
 
 static const EvSoundCue sEvent050SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent050Track0[37] = {
@@ -9006,10 +9007,10 @@ static const EventCameraKeyframe sEvent047Camera[2] = {
 };
 
 static const EvSoundCue sEvent047SoundCues[4] = {
-    { 18, 0, 0, 0 },
-    { 330, 660, 0, 0 },
-    { 330, 730, 0, 0 },
-    { 18, 735, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_WARPIN, 660, 0, 0 },
+    { SONG_EV_WARPIN, 730, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 735, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent047Track0[6] = {
@@ -9146,8 +9147,8 @@ static const EventCameraKeyframe sEvent051Camera[2] = {
 };
 
 static const EvSoundCue sEvent051SoundCues[2] = {
-    { 18, 0, 0, 0 },
-    { 18, 950, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 950, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent051Track0[10] = {
@@ -9241,7 +9242,7 @@ static const EventCameraKeyframe sEvent052Camera[1] = {
 };
 
 static const EvSoundCue sEvent052SoundCues[1] = {
-    { 30, 0, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent052Track0[14] = {
@@ -9408,10 +9409,10 @@ static const EventCameraKeyframe sEvent053Camera[6] = {
 };
 
 static const EvSoundCue sEvent053SoundCues[4] = {
-    { 33, 0, 0, 0 },
-    { 356, 1, 0, 0 },
-    { 356, 2795, 1, 0 },
-    { 33, 2796, 32769, 0 },
+    { SONG_BGM_DESTINY_FIELD, 0, 0, 0 },
+    { SONG_SND_356, 1, 0, 0 },
+    { SONG_SND_356, 2795, 1, 0 },
+    { SONG_BGM_DESTINY_FIELD, 2796, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent053Track0[49] = {
@@ -9635,12 +9636,12 @@ static const EventCameraKeyframe sEvent054Camera[3] = {
 };
 
 static const EvSoundCue sEvent054SoundCues[6] = {
-    { 33, 0, 0, 0 },
-    { 33, 1055, 1, 0 },
-    { 339, 1080, 0, 0 },
-    { 4, 1081, 0, 0 },
-    { 339, 1535, 1, 0 },
-    { 4, 1536, 32769, 0 },
+    { SONG_BGM_DESTINY_FIELD, 0, 0, 0 },
+    { SONG_BGM_DESTINY_FIELD, 1055, 1, 0 },
+    { SONG_EV_RUMBLE, 1080, 0, 0 },
+    { SONG_BGM_EVENT2, 1081, 0, 0 },
+    { SONG_EV_RUMBLE, 1535, 1, 0 },
+    { SONG_BGM_EVENT2, 1536, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent054Track0[38] = {
@@ -9754,9 +9755,9 @@ static const EventCameraKeyframe sEvent055Camera[1] = {
 };
 
 static const EvSoundCue sEvent055SoundCues[3] = {
-    { 4, 0, 0, 0 },
-    { 339, 1, 0, 0 },
-    { 339, 155, 32769, 0 },
+    { SONG_BGM_EVENT2, 0, 0, 0 },
+    { SONG_EV_RUMBLE, 1, 0, 0 },
+    { SONG_EV_RUMBLE, 155, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent055Track0[5] = {
@@ -9926,11 +9927,11 @@ static const EventCameraKeyframe sEvent056Camera[6] = {
 
 static const EvSoundCue sEvent056SoundCues[6] = {
     { 65535, 0, 0, 0 },
-    { 19, 645, 2, 0 },
-    { 19, 1050, 1, 0 },
-    { 357, 1100, 0, 0 },
-    { 27, 1195, 2, 0 },
-    { 27, 2061, 32769, 0 },
+    { SONG_BGM_EVENT_NAMINE, 645, 2, 0 },
+    { SONG_BGM_EVENT_NAMINE, 1050, 1, 0 },
+    { SONG_SND_357, 1100, 0, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1195, 2, 0 },
+    { SONG_BGM_EVENT_SILENCE, 2061, 32769, 0 },
 };
 
 static const EventBgEffectEntry sEvent056BgEffects[5] = {
@@ -10223,9 +10224,9 @@ static const EventCameraKeyframe sEvent058Camera[3] = {
 };
 
 static const EvSoundCue sEvent058SoundCues[3] = {
-    { 30, 0, 0, 0 },
-    { 30, 575, 1, 0 },
-    { 359, 830, 32768, 0 },
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 575, 1, 0 },
+    { SONG_SND_359, 830, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent058Track0[17] = {
@@ -10525,22 +10526,22 @@ static const EventCameraKeyframe sEvent059Camera[16] = {
 
 static const EvSoundCue sEvent059SoundCues[17] = {
     { 65535, 0, 0, 0 },
-    { 332, 160, 0, 0 },
-    { 28, 285, 2, 0 },
-    { 323, 422, 0, 0 },
-    { 363, 650, 0, 0 },
-    { 664, 700, 0, 0 },
-    { 28, 885, 1, 0 },
-    { 355, 888, 0, 0 },
-    { 18, 1095, 2, 0 },
-    { 944, 1500, 0, 0 },
-    { 944, 2310, 0, 0 },
-    { 944, 2590, 0, 0 },
-    { 609, 2620, 0, 0 },
-    { 18, 3165, 1, 0 },
-    { 4, 3220, 0, 0 },
-    { 627, 3222, 0, 0 },
-    { 516, 3310, 32768, 0 },
+    { SONG_EV_FLASH00, 160, 0, 0 },
+    { SONG_BGM_EVENT_UNREST, 285, 2, 0 },
+    { SONG_EV_EV34_03, 422, 0, 0 },
+    { SONG_SND_363, 650, 0, 0 },
+    { SONG_EF_SYNC2, 700, 0, 0 },
+    { SONG_BGM_EVENT_UNREST, 885, 1, 0 },
+    { SONG_SND_355, 888, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 1095, 2, 0 },
+    { SONG_EV_WOMAN_STONEL, 1500, 0, 0 },
+    { SONG_EV_WOMAN_STONEL, 2310, 0, 0 },
+    { SONG_EV_WOMAN_STONEL, 2590, 0, 0 },
+    { SONG_BTL_MON_HIT06, 2620, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 3165, 1, 0 },
+    { SONG_BGM_EVENT2, 3220, 0, 0 },
+    { SONG_EF_TLIMIT01, 3222, 0, 0 },
+    { SONG_EF_CAREL00, 3310, 32768, 0 },
 };
 
 static const EventBgEffectEntry sEvent059BgEffects[5] = {
@@ -10910,8 +10911,8 @@ static const EventCameraKeyframe sEvent060Camera[12] = {
 
 static const EvSoundCue sEvent060SoundCues[3] = {
     { 65535, 0, 0, 0 },
-    { 364, 168, 0, 0 },
-    { 19, 1516, 32770, 0 },
+    { SONG_SND_364, 168, 0, 0 },
+    { SONG_BGM_EVENT_NAMINE, 1516, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent060Track0[57] = {
@@ -11218,11 +11219,11 @@ static const EventCameraKeyframe sEvent061Camera[2] = {
 };
 
 static const EvSoundCue sEvent061SoundCues[5] = {
-    { 38, 0, 0, 0 },
-    { 914, 990, 0, 0 },
-    { 358, 1192, 0, 0 },
-    { 358, 1372, 0, 0 },
-    { 38, 1455, 32769, 0 },
+    { SONG_BGM_F13F_FORGET, 0, 0, 0 },
+    { SONG_EV_GF_STONE_L, 990, 0, 0 },
+    { SONG_SND_358, 1192, 0, 0 },
+    { SONG_SND_358, 1372, 0, 0 },
+    { SONG_BGM_F13F_FORGET, 1455, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent061Track0[19] = {
@@ -11359,9 +11360,9 @@ static const EventCameraKeyframe sEvent062Camera[1] = {
 };
 
 static const EvSoundCue sEvent062SoundCues[3] = {
-    { 18, 0, 0, 0 },
-    { 331, 290, 0, 0 },
-    { 18, 365, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_WARPOUT, 290, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 365, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent062Track0[1] = {
@@ -11481,10 +11482,10 @@ static const EventCameraKeyframe sEvent063Camera[5] = {
 };
 
 static const EvSoundCue sEvent063SoundCues[4] = {
-    { 18, 0, 0, 0 },
-    { 322, 510, 0, 0 },
-    { 323, 599, 0, 0 },
-    { 18, 745, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_EV34_02, 510, 0, 0 },
+    { SONG_EV_EV34_03, 599, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 745, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent063Track0[15] = {
@@ -11621,12 +11622,12 @@ static const EventCameraKeyframe sEvent064Camera[3] = {
 };
 
 static const EvSoundCue sEvent064SoundCues[6] = {
-    { 18, 0, 0, 0 },
-    { 323, 270, 0, 0 },
-    { 18, 450, 1, 0 },
-    { 330, 635, 0, 0 },
-    { 4, 780, 0, 0 },
-    { 323, 790, 32768, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_EV34_03, 270, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 450, 1, 0 },
+    { SONG_EV_WARPIN, 635, 0, 0 },
+    { SONG_BGM_EVENT2, 780, 0, 0 },
+    { SONG_EV_EV34_03, 790, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent064Track0[6] = {
@@ -11751,9 +11752,9 @@ static const EventCameraKeyframe sEvent065Camera[2] = {
 };
 
 static const EvSoundCue sEvent065SoundCues[3] = {
-    { 18, 0, 0, 0 },
-    { 330, 400, 0, 0 },
-    { 18, 865, 32769, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_WARPIN, 400, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 865, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent065Track0[20] = {
@@ -11990,15 +11991,15 @@ static const EventCameraKeyframe sEvent066Camera[7] = {
 };
 
 static const EvSoundCue sEvent066SoundCues[9] = {
-    { 18, 0, 0, 0 },
-    { 18, 470, 1, 0 },
-    { 27, 611, 2, 0 },
-    { 27, 670, 1, 0 },
-    { 4, 910, 2, 0 },
-    { 671, 1089, 0, 0 },
-    { 365, 1155, 0, 0 },
-    { 366, 1493, 0, 0 },
-    { 332, 1532, 32768, 0 },
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 470, 1, 0 },
+    { SONG_BGM_EVENT_SILENCE, 611, 2, 0 },
+    { SONG_BGM_EVENT_SILENCE, 670, 1, 0 },
+    { SONG_BGM_EVENT2, 910, 2, 0 },
+    { SONG_EF_RK_LIMITMOV, 1089, 0, 0 },
+    { SONG_SND_365, 1155, 0, 0 },
+    { SONG_SND_366, 1493, 0, 0 },
+    { SONG_EV_FLASH00, 1532, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent066Track0[22] = {
@@ -12258,10 +12259,10 @@ static const EventCameraKeyframe sEvent067Camera[7] = {
 
 static const EvSoundCue sEvent067SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 18, 345, 2, 0 },
-    { 367, 517, 0, 0 },
-    { 18, 630, 1, 0 },
-    { 28, 945, 32770, 0 },
+    { SONG_BGM_EVENT_XIII, 345, 2, 0 },
+    { SONG_SND_367, 517, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 630, 1, 0 },
+    { SONG_BGM_EVENT_UNREST, 945, 32770, 0 },
 };
 
 static const EventCharaKeyframe sEvent067Track0[18] = {
@@ -12426,7 +12427,7 @@ static const EventCameraKeyframe sEvent068Camera[3] = {
 
 static const EvSoundCue sEvent068SoundCues[2] = {
     { 65535, 0, 0, 0 },
-    { 345, 330, 32768, 0 },
+    { SONG_EV_WHITEOUT, 330, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent068Track0[3] = {
@@ -12518,7 +12519,7 @@ static const EventCameraKeyframe sEvent069Camera[3] = {
 
 static const EvSoundCue sEvent069SoundCues[2] = {
     { 65535, 0, 0, 0 },
-    { 13, 2000, 32768, 0 },
+    { SONG_BGM_TOWN_FIELD, 2000, 32768, 0 },
 };
 
 static const EventCharaKeyframe sEvent069Track0[3] = {
@@ -12612,8 +12613,8 @@ static const EventCameraKeyframe sEvent070Camera[3] = {
 
 static const EvSoundCue sEvent070SoundCues[3] = {
     { 65535, 0, 0, 0 },
-    { 339, 330, 0, 0 },
-    { 339, 595, 32769, 0 },
+    { SONG_EV_RUMBLE, 330, 0, 0 },
+    { SONG_EV_RUMBLE, 595, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent070Track0[7] = {
@@ -12691,9 +12692,9 @@ static const EventCameraKeyframe sEvent071Camera[5] = {
 
 static const EvSoundCue sEvent071SoundCues[4] = {
     { 65535, 0, 0, 0 },
-    { 361, 228, 0, 0 },
-    { 362, 290, 0, 0 },
-    { 345, 396, 32768, 0 },
+    { SONG_SND_361, 228, 0, 0 },
+    { SONG_SND_362, 290, 0, 0 },
+    { SONG_EV_WHITEOUT, 396, 32768, 0 },
 };
 
 static const EventBgEffectEntry sEvent071BgEffects[6] = {
@@ -12931,9 +12932,9 @@ static const EventCameraKeyframe sEvent072Camera[7] = {
 
 static const EvSoundCue sEvent072SoundCues[4] = {
     { 65535, 0, 0, 0 },
-    { 27, 365, 2, 0 },
-    { 357, 1410, 0, 0 },
-    { 27, 1685, 32769, 0 },
+    { SONG_BGM_EVENT_SILENCE, 365, 2, 0 },
+    { SONG_SND_357, 1410, 0, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1685, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent072Track0[33] = {
@@ -13205,10 +13206,10 @@ static const EventCameraKeyframe sEvent073Camera[9] = {
 
 static const EvSoundCue sEvent073SoundCues[5] = {
     { 65535, 0, 0, 0 },
-    { 19, 940, 2, 0 },
-    { 906, 1710, 0, 0 },
-    { 907, 1740, 0, 0 },
-    { 19, 2095, 32769, 0 },
+    { SONG_BGM_EVENT_NAMINE, 940, 2, 0 },
+    { SONG_EV_SR_STONEJP, 1710, 0, 0 },
+    { SONG_EV_SR_STONELD, 1740, 0, 0 },
+    { SONG_BGM_EVENT_NAMINE, 2095, 32769, 0 },
 };
 
 static const EventCharaKeyframe sEvent073Track1[13] = {

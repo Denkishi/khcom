@@ -14,9 +14,6 @@
 #include "malloc.h"
 #include "fade.h"
 
-#ifdef VERSION_EU
-#endif
-
 vu16 gMovieModeState;
 s32 gMovieId;
 u16 gUnk_02034940;

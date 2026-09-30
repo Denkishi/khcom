@@ -22,9 +22,6 @@
 #include "songs.h"
 #include "common_text.h"
 
-#ifdef VERSION_EU
-#endif
-
 static s16 sWorldWarpCursor;
 static s16 sWorldWarpFloorCount;
 static s16 sWorldWarpFloorWorlds[13];
@@ -60,9 +57,6 @@ static s32 sWorldWarpBarY[2];
 static s32 sWorldWarpBarX;
 static s32 sWorldWarpCursorX;
 static s32 sWorldWarpCursorY;
-
-#ifdef VERSION_EU
-#endif
 
 static const WarpRect sWarpRects[4] = {
     {2, 1, 20, 2},

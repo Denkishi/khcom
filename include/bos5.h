@@ -74,7 +74,6 @@ typedef struct MdAnimDef {
     u16 unk_06;
 } MdAnimDef;
 
-
 typedef struct MdAnim {
     u16 animId;
     u16 unk_02;
@@ -193,9 +192,6 @@ typedef struct WorldselectTileSizes {
     u16 sizes[5];
 } WorldselectTileSizes;
 
-#ifdef VERSION_EU
-#endif
-
 typedef struct MdGfx {
     void* tiles;
     void* src;
@@ -238,7 +234,6 @@ extern u8 gUnk_09A3C9BC[];
 
 void BosMdFireHandleReaction(MdFireWork* work);
 u8 BosMdFireUpdateMotion(MdFireWork* work);
-
 
 s32 task_bos_md_hahen_1(MdHahenWork* work);
 void task_bos_md_hahen_2(MdHahenWork* work);

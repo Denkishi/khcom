@@ -233,10 +233,6 @@ typedef struct SrollWork {
 } SrollWork;
 
 extern void* gUnk_09A54218[][2];
-#if defined(VERSION_US)
-#elif defined(VERSION_JP)
-#else
-#endif
 
 extern void* const gSrollSecnSprites[][4];
 extern const s32 gSrollBCharSwayOffsets[16];

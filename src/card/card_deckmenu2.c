@@ -6344,10 +6344,6 @@ void func_jp_0808F240(DeckMenuWork* w) {
     }
 }
 
-#ifdef VERSION_JP
-#else
-#endif
-
 void func_jp_0808F34C(DeckMenuWork* w) {
     switch (w->keyboardPage) {
 #ifdef VERSION_JP

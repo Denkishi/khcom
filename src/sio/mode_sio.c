@@ -97,9 +97,6 @@ extern void* gUnkEu_08891714[];
 extern void* gUnkEu_08891670[];
 #endif
 
-#ifdef VERSION_JP
-#endif
-
 extern SioWorldEntry gSioWorldEntries[];
 extern s8 gSioHandicapMarkerX[];
 extern u16 gSioHandicapAp[];

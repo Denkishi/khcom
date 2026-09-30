@@ -3,15 +3,4 @@
 
 #include "types.h"
 
-
-#ifdef VERSION_US
-#endif
-
-#ifdef VERSION_JP
-#endif
-
-#ifdef VERSION_EU
-#endif
-
-
 #endif

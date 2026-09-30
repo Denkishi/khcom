@@ -5,7 +5,6 @@
 #include "card_localized_data.h"
 #include "registration_data.h"
 
-
 #include "card_api.h"
 
 #include "msg_api.h"
@@ -84,8 +83,6 @@ extern u8 gMaruxhaBtEffPalette[];
 extern u8 gMaruxhaBtEff2Tiles[];
 extern const EventCharaParams gEventCharaParams[];
 extern const char gUnk_08F70990[];
-#ifdef VERSION_EU
-#endif
 
 void mode_eventselect_0(void);
 void mode_eventselect_1(void);

@@ -1184,8 +1184,6 @@ typedef struct PromptChoiceLayout {
     s32 x[2];
 } PromptChoiceLayout;
 
-#ifdef VERSION_EU
-#endif
 extern u8 gUnk_09618C58[];
 extern u8 gUnk_09619098[];
 extern u8 gUnk_090A3E46[];
@@ -1700,7 +1698,6 @@ typedef struct CardMsgWinWork {
 } CardMsgWinWork;
 
 typedef char CardMsgWinWork_size[(sizeof(CardMsgWinWork) == 0x150) ? 1 : -1];
-
 
 typedef struct BossCardWork {
     CardDef* cardDef;
@@ -2405,8 +2402,7 @@ extern TaskDesc gTaskDescBosscard;
 extern const MapTileAnimationDef* gMapTileAnimationDefs[6];
 extern const u16* gRikuDeckCards[12];
 extern const u16* gRikuDeckEnemyCards[12];
-#ifdef VERSION_EU
-#else
+#ifndef VERSION_EU
 extern u16 gUnk_09EE4AC8[7];
 extern u16 gUnk_09EE4AD6[7];
 extern u16 gUnk_09EE4AE4[7];

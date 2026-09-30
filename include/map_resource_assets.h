@@ -551,7 +551,4 @@ extern u8 gUnk_098A6560[];
 extern u8 gUnk_098A656A[];
 extern AnimHeader gUnk_098A6574;
 
-#ifdef VERSION_EU
-#endif
-
 #endif

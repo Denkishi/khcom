@@ -10,9 +10,6 @@
 #include "fade.h"
 #include <string.h>
 
-#ifdef VERSION_EU
-#endif
-
 #if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {
     { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x60 },

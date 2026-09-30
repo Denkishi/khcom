@@ -9,7 +9,6 @@
 #include "ms_charge.h"
 #include "mode_mapinspect.h"
 #include "worldinspect_assets.h"
-#include <stddef.h>
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"

@@ -28,7 +28,6 @@
 #include "card.h"
 #include "card_reload_assets.h"
 #include "card_message_assets.h"
-#include <stddef.h>
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_card.h"

@@ -23,7 +23,6 @@
 #include "gba/syscall.h"
 #include "card.h"
 #include "card_message_assets.h"
-#include <stddef.h>
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_card_pictures.h"

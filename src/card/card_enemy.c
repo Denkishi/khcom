@@ -7,7 +7,6 @@
 #include "card_battle.h"
 #include "m4a_song.h"
 #include "game_state.h"
-#include <string.h>
 #include "text.h"
 #include "monsgage.h"
 #include "btl_collision.h"
@@ -24,7 +23,6 @@
 #include "gba/syscall.h"
 #include "card.h"
 #include "card_message_assets.h"
-#include <stddef.h>
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_card_pictures.h"

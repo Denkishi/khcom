@@ -35,7 +35,6 @@
 #include "bos4_api.h"
 #include "poo_api.h"
 #include "mode_battle_data.h"
-#include <stddef.h>
 
 typedef struct SpriteTextLine {
     s32 x;

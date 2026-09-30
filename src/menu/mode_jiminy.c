@@ -24,6 +24,7 @@
 #include "jiminy_records_assets.h"
 #include "map_card_assets.h"
 #include "actor_localized_data.h"
+#include "jiminy_data.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
     { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, 0, 0 },
@@ -1577,7 +1578,7 @@ void mode_jiminy_0(void) {
 #ifdef VERSION_JP
     gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #elif defined(VERSION_EU)
-    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
+    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
 #else
     gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
@@ -1695,7 +1696,7 @@ void mode_jiminy_1(void) {
         gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #else
 #ifdef VERSION_EU
-        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(gUnkEu_08892334));
+        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
 #else
         gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif

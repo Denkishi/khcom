@@ -16,13 +16,7 @@
 #include "fade.h"
 #include "mode_test_api.h"
 #include "songs.h"
-
-#ifdef VERSION_EU
-extern u8 gUnkEu_08890F40[];
-extern u8 gUnkEu_08895960[];
-extern u8 gUnkEu_08890E1C[];
-extern u8 gUnkEu_08890E44[];
-#endif
+#include "jiminy_data.h"
 
 #ifdef VERSION_EU
 #define LANGSTR(x) (((void**)(x))[gLanguage])
@@ -1216,7 +1210,7 @@ void mode_ms_charge_0(void) {
     InitTextSlots(sMsChargeDescText, 90);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890F40)
+        eu_0805E924(&gUnkEu_08890F40)
 #else
         gUnk_08159F38
 #endif
@@ -1230,14 +1224,14 @@ void mode_ms_charge_0(void) {
     pb = &sMsChargeConfirmTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890F40)
+        eu_0805E924(&gUnkEu_08890F40)
 #else
         gUnk_08159F38
 #endif
     , sMsChargeConfirmText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08895960)
+        eu_0805E924(&gUnkEu_08895960)
 #else
         gUnk_0815C204
 #endif
@@ -1251,14 +1245,14 @@ void mode_ms_charge_0(void) {
     pb = &sMsChargeNoticeTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08895960)
+        eu_0805E924(&gUnkEu_08895960)
 #else
         gUnk_0815C204
 #endif
     , sMsChargeNoticeText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890E1C)
+        eu_0805E924(&gUnkEu_08890E1C)
 #else
         gUnk_08159E10
 #endif
@@ -1272,14 +1266,14 @@ void mode_ms_charge_0(void) {
     pb = &sMsChargeYesTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890E1C)
+        eu_0805E924(&gUnkEu_08890E1C)
 #else
         gUnk_08159E10
 #endif
     , sMsChargeYesText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890E44)
+        eu_0805E924(&gUnkEu_08890E44)
 #else
         gUnk_08159E18
 #endif
@@ -1293,7 +1287,7 @@ void mode_ms_charge_0(void) {
     pb = &sMsChargeNoTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(gUnkEu_08890E44)
+        eu_0805E924(&gUnkEu_08890E44)
 #else
         gUnk_08159E18
 #endif

@@ -34,6 +34,7 @@
 #include "sprites_card.h"
 #include "gba/keys.h"
 #include "songs.h"
+#include "jiminy_data.h"
 
 SysMsgWinWork* gActiveSysmsgwin;
 #ifndef VERSION_EU
@@ -41,8 +42,6 @@ u8 gUnk_02034B04[4];
 #endif
 
 #ifdef VERSION_EU
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
@@ -248,8 +247,8 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
             w->x = 0x5800;
             w->cursorY = gMsgwaitYesnoCursorY[w->choice] - 0x500;
 #ifdef VERSION_EU
-            w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
-            w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots2);
+            w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots);
+            w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots2);
 #else
             w->textSlotCount = LoadTextSlots(gUnk_08159E10, w->textSlots);
             w->textSlotCount2 = LoadTextSlots(gUnk_08159E18, w->textSlots2);
@@ -629,8 +628,8 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
     w->x = 0x8500;
     w->cursorY = 0x5000;
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots2);
+    w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots2);
 #else
     w->textSlotCount = LoadTextSlots(gUnk_08159E10, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_08159E18, w->textSlots2);

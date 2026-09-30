@@ -29,6 +29,7 @@
 #include "bos4_api.h"
 #include "sprites_card.h"
 #include "songs.h"
+#include "jiminy_data.h"
 
 u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a);
 extern u8 gUnk_0815A09A[];
@@ -36,9 +37,6 @@ extern u8 gUnk_0815A198[];
 extern u8 gUnk_0815A0EE[];
 extern u8 gUnk_0815A152[];
 extern u8 gUnk_0815A0A0[];
-#ifdef VERSION_EU
-extern u8 gUnkEu_08895EDC[];
-#endif
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";
@@ -86,7 +84,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
 #ifdef VERSION_EU
     if ((args.flags & 0x8000) && gLanguage == 4) {
-        w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08895EDC), w->textSlots3);
+        w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), w->textSlots3);
     } else {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnk_0815A0A0), w->textSlots3);
     }

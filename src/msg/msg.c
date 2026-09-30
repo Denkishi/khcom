@@ -4,8 +4,6 @@
 #include "fade.h"
 
 #ifdef VERSION_EU
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) (x)

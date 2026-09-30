@@ -89,12 +89,7 @@ extern const SioAnimDef gSioChgCardAnimDefs[3];
 #endif
 
 #ifdef VERSION_EU
-extern void* gUnkEu_08891580[];
 
-extern void* gUnkEu_08891508[];
-extern void* gUnkEu_088920BC[];
-extern void* gUnkEu_08891714[];
-extern void* gUnkEu_08891670[];
 #endif
 
 extern SioWorldEntry gSioWorldEntries[];
@@ -133,7 +128,7 @@ void mode_sio_btl_connect_0(s32 arg) {
     gSioBtlConnectWork->textSlotCount = 0;
     InitTextSlots(gSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
 #ifdef VERSION_EU
-    gSioBtlConnectWork->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08891508), gSioBtlConnectWork->textSlots);
+    gSioBtlConnectWork->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08891508), gSioBtlConnectWork->textSlots);
 #else
     gSioBtlConnectWork->textSlotCount = LoadTextSlots(gUnk_08159E4A, gSioBtlConnectWork->textSlots);
 #endif
@@ -443,7 +438,7 @@ void SioBtlOptionInitObjs(void) {
     gSioBtlOptionWork->messageVisible = 0;
 #ifdef VERSION_EU
     InitTextSlots(gSioBtlOptionWork->textSlots4, 120);
-    gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
+    gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
 #else
     InitTextSlots(gSioBtlOptionWork->textSlots4, 60);
     gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, gSioBtlOptionWork->textSlots4);
@@ -865,7 +860,7 @@ void SioBtlOptionHandleMenu(void) {
             gSioBtlOptionWork->menuOpen = 0;
             gSioBtlOptionWork->messageVisible = 1;
 #ifdef VERSION_EU
-            gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
+            gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
 #else
             gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, gSioBtlOptionWork->textSlots4);
 #endif
@@ -957,7 +952,7 @@ void SioBtlOptionHandleMenu(void) {
                 gSioDebugReady[0] = 1;
                 gSioBtlOptionWork->menuOpen = 0;
                 gSioBtlOptionWork->messageVisible = 1;
-                gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
+                gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), gSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
                 gSioBtlOptionWork->x = 68;
 #else
@@ -1157,7 +1152,7 @@ void SioBtlOptionWaitReady(void) {
     if (gSioBtlOptionWork->player1Ready == 1 && gSioBtlOptionWork->player2Ready == 1) {
         gSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891670), gSioBtlOptionWork->textSlots4);
+        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891670), gSioBtlOptionWork->textSlots4);
 #else
         gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A23C, gSioBtlOptionWork->textSlots4);
 #endif
@@ -1189,7 +1184,7 @@ void SioBtlOptionConfirm(void) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         gSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891714), gSioBtlOptionWork->textSlots4);
+        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891714), gSioBtlOptionWork->textSlots4);
 #else
         gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815B3D4, gSioBtlOptionWork->textSlots4);
 #endif
@@ -1211,7 +1206,7 @@ void SioBtlOptionConfirm(void) {
     } else if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         gSioBtlOptionWork->timer = 0;
-        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08891714), gSioBtlOptionWork->textSlots4);
+        gSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891714), gSioBtlOptionWork->textSlots4);
         gSioBtlOptionWork->x = 72;
         gSioBtlOptionWork->y2 = 124;
         gSioBtlOptionWork->state++;
@@ -3336,7 +3331,7 @@ void mode_sioError_0(s32 arg) {
 #endif
     InitTextSlots(gSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
 #ifdef VERSION_EU
-    gSioErrorWork->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_088920BC), gSioErrorWork->textSlots);
+    gSioErrorWork->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_088920BC), gSioErrorWork->textSlots);
 #elif defined(VERSION_JP)
     gSioErrorWork->textSlotCount = LoadTextSlots(gUnk_0814F180, gSioErrorWork->textSlots);
 #else

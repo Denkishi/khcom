@@ -25,7 +25,6 @@
 #include "m4a.h"
 #include "poo_api.h"
 #ifdef VERSION_EU
-extern u8 gUnkEu_08892334[];
 extern u8 gUnk_09A3CDDC[];
 #endif
 

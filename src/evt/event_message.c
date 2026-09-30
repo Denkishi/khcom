@@ -26,12 +26,11 @@
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
+#include "jiminy_data.h"
 #include <stdlib.h>
 #include <string.h>
 
 #ifdef VERSION_EU
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) ((void*)(x))
@@ -6879,8 +6878,8 @@ void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     InitTextSlots(p->textSlots2, 10);
     p->palette4 = LoadTextPalette(1);
 #ifdef VERSION_EU
-    p->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), p->textSlots);
-    p->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), p->textSlots2);
+    p->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p->textSlots);
+    p->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p->textSlots2);
 #else
     p->textSlotCount = LoadTextSlots(gUnk_08159E10, p->textSlots);
     p->textSlotCount2 = LoadTextSlots(gUnk_08159E18, p->textSlots2);

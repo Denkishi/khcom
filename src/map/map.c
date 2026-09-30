@@ -20,6 +20,7 @@
 #include "allmap_api.h"
 #include "songs.h"
 #include "map_fixed_data.h"
+#include "jiminy_data.h"
 #include <string.h>
 
 extern u8 gSoraWorldBattleBase[];
@@ -29,12 +30,6 @@ extern u8 (*gMapAnmCmds[])(MapAnmSlot*);
 extern u8 gWorldEntryEvents[];
 
 #ifdef VERSION_EU
-extern void* gUnkEu_088927F4[];
-extern void* gUnkEu_088928E4[];
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
-extern void* gUnkEu_08892780[];
-extern void* gUnkEu_08892864[];
 #define LANGSEL(x) eu_0805E924(x)
 #else
 #define LANGSEL(x) (x)
@@ -3716,7 +3711,7 @@ void Mode_MenuNew_0(void) {
     InitTextSlots(gNewGameSlotMenuWork->textSlots2, 54);
     gNewGameSlotMenuWork->palette9 = LoadObjPalette(gUnk_09991BE4, 32);
 #ifdef VERSION_EU
-    gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08892780), gNewGameSlotMenuWork->textSlots2);
+    gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892780), gNewGameSlotMenuWork->textSlots2);
 #else
     gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, gNewGameSlotMenuWork->textSlots2);
 #endif
@@ -4978,9 +4973,9 @@ void MapMenuInitConfirm(MapMenuWork* w) {
     InitTextSlots(p2, 6);
     p3 = w->textSlots4;
     InitTextSlots(p3, 9);
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_088927F4), p1);
-    w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), p2);
-    w->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), p3);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_088927F4), p1);
+    w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p2);
+    w->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p3);
 #else
     p1 = w->textSlots2;
     InitTextSlots(p1, 33);
@@ -6036,9 +6031,9 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
         p3 = w->textSlots4;
         InitTextSlots(p3, 9);
 #ifdef VERSION_EU
-        w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08892864), p1);
-        w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), p2);
-        w->textSlotCount4 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), p3);
+        w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892864), p1);
+        w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p2);
+        w->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p3);
 #else
         w->textSlotCount2 = LoadTextSlots(gUnk_08159DF0, p1);
         w->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
@@ -6097,7 +6092,7 @@ s32 MapSaveInput(MapSaveWork* w) {
         }
 
 #ifdef VERSION_EU
-        w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_088928E4), w->textSlots2);
+        w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_088928E4), w->textSlots2);
 #else
         w->textSlotCount2 = LoadTextSlots(gUnk_0815B5A6, w->textSlots2);
 #endif

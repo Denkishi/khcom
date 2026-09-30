@@ -30,18 +30,7 @@
 #include "sprites_card.h"
 #include "gba/keys.h"
 #include "card_deck.h"
-
-#ifdef VERSION_EU
-extern u8 gUnkEu_08895A00[];
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
-extern void* gUnkEu_08890EC0[];
-extern void* gUnkEu_08895E94[];
-extern void* gUnkEu_08895AF4[];
-extern void* gUnkEu_08895C30[];
-extern void* gUnkEu_08895CF8[];
-extern void* gUnkEu_08895DBC[];
-#endif
+#include "jiminy_data.h"
 
 #include "deck_equip_suffix.inc"
 
@@ -56,7 +45,7 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
 #ifdef VERSION_JP
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x28], w->textSlots2);
 #elif defined(VERSION_EU)
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895A00), w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895A00), w->textSlots2);
 #else
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x58], w->textSlots2);
 #endif
@@ -104,7 +93,7 @@ void DeckErrorCpInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x40], w->textSlots2);
 #elif defined(VERSION_EU)
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895AF4), w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895AF4), w->textSlots2);
 #else
     w->textSlotCount2 = LoadTextSlots(&gUnk_08159F38[0x2A], w->textSlots2);
 #endif
@@ -137,7 +126,7 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x80], w->textSlots2);
 #elif defined(VERSION_EU)
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895C30), w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895C30), w->textSlots2);
 #else
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0xEA], w->textSlots2);
 #endif
@@ -173,7 +162,7 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_0814FBBC, w->textSlots2);
 #elif defined(VERSION_EU)
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895CF8), w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895CF8), w->textSlots2);
 #else
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0xA8], w->textSlots2);
 #endif
@@ -204,7 +193,7 @@ void DeckErrorDeckFullInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = LoadTextSlots(gUnk_0814FBB0, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_0814FBD4, w->textSlots2);
 #elif defined(VERSION_EU)
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08895DBC), w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895DBC), w->textSlots2);
 #else
     w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x6C], w->textSlots2);
 #endif
@@ -266,9 +255,9 @@ void Deck_Yes_No_0(DeckConfirmWork* w, u8* a) {
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08890EC0), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots2);
-    w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots3);
+    w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890EC0), w->textSlots);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots2);
+    w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots3);
 #else
     w->textSlotCount = LoadTextSlots(gUnk_08159FBC, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_08159E10, w->textSlots2);
@@ -302,9 +291,9 @@ void Deck_Clear_0(DeckConfirmWork* w, u8* a) {
     InitTextSlots(w->textSlots2, 0x50);
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(gUnkEu_08895E94), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots2);
-    w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots3);
+    w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08895E94), w->textSlots);
+    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots2);
+    w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots3);
 #else
     w->textSlotCount = LoadTextSlots(gUnk_0815C1C2, w->textSlots);
     w->textSlotCount2 = LoadTextSlots(gUnk_08159E10, w->textSlots2);

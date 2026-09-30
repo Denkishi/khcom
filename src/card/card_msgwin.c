@@ -37,6 +37,7 @@
 #include "songs.h"
 #include "card_message_text.h"
 #include "event_text.h"
+#include "jiminy_data.h"
 
 CardMsgWinWork* gActiveCardMsgwin;
 
@@ -45,8 +46,6 @@ u8 gMessageWindowOpen EWRAM_COMMON(4);
 u8 gMessageWindowAnswerYes EWRAM_COMMON(4);
 
 #ifdef VERSION_EU
-extern void* gUnkEu_08890E1C[];
-extern void* gUnkEu_08890E44[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
@@ -388,8 +387,8 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
             w->cursorX = 0x5800;
             w->cursorY = gMsgwaitYesnoCursorY[w->choice];
 #ifdef VERSION_EU
-            w->textSlotCounts[0] = LoadTextSlots(eu_0805E924(gUnkEu_08890E1C), w->textSlots);
-            w->textSlotCounts[1] = LoadTextSlots(eu_0805E924(gUnkEu_08890E44), w->textSlots2);
+            w->textSlotCounts[0] = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots);
+            w->textSlotCounts[1] = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots2);
 #else
             w->textSlotCounts[0] = LoadTextSlots(gUnk_08159E10, w->textSlots);
             w->textSlotCounts[1] = LoadTextSlots(gUnk_08159E18, w->textSlots2);

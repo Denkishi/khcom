@@ -38,9 +38,6 @@
 #include "map_runtime.h"
 #include "poo_api.h"
 
-extern MapFloorState gMapFloorState;
-
-
 typedef struct BoogieExplosiondiceWork {
     u32 state;
     u16 timer;

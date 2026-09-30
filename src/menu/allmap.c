@@ -131,7 +131,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
         work->gfx2 = gUnk_09EF6424[work->shape];
     }
 
-    if (work->asSprite == 0 && work->room == gMapFloorState[6]) {
+    if (work->asSprite == 0 && work->room == gMapFloorState.room) {
         pal = gUnk_0984A138;
     } else {
         pal = gUnk_0984A0F8 + GetAllmapRoomPaletteOffset(work->room);
@@ -207,7 +207,7 @@ Task* CreateAllmapRoomTask(TaskPool* pool) {
 
     arg.x = 208;
     arg.y = 0;
-    arg.room = gMapFloorState[6];
+    arg.room = gMapFloorState.room;
     arg.asSprite = 1;
     return TaskCreate(pool, &sTaskDescAllmapRoom, &arg);
 }
@@ -905,7 +905,7 @@ void InitAllmap(void) {
     *state = EwramAlloc(sizeof(AllmapState));
     ((AllmapState*)gUnk_0203C4B4)->lastRoom = 0xFF;
     ((AllmapState*)gUnk_0203C4B4)->unk_BC = 0x400;
-    gAllmapCursorRoom = gMapFloorState[6];
+    gAllmapCursorRoom = gMapFloorState.room;
     TaskPoolInit(&((AllmapState*)gUnk_0203C4B4)->tasks, 35);
     ((AllmapState*)gUnk_0203C4B4)->pushaTask = 0;
     ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;

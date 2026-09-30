@@ -931,7 +931,6 @@ extern u8 gUnk_08B1E9A6[];
 extern u8 gUnk_0984C868[];
 extern MapRoomState* gMapRoomState;
 
-extern MapFloorState gMapFloorState;
 extern u8 gRikuPalette[];
 extern u8 gSoraPalette[];
 extern u8 gSor1ff00Tiles[];

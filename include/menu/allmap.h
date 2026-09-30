@@ -200,7 +200,6 @@ void* AllocKeyValueTiles(u8 a);
 void InitEventKeyCard(AllmapDoorEntry* a, void* b);
 void SetLayeredCardSpritePos(s32 a, s32 b, AllmapDoorEntry* c);
 
-extern u8 gMapFloorState[];
 extern u8 gUnk_05000160[];
 extern u8 gUnk_0976D880[];
 extern u8 gUnk_0976DB68[];

@@ -38,6 +38,7 @@ void RestoreMapProgress(struct MapProgress* p);
 struct MapGmkPlacement;
 
 extern MapRoomState* gMapRoomState;
+extern MapFloorState gMapFloorState;
 extern MapFormDef gMapForm;
 extern struct MapGmkPlacement* gMapGmkPlacements;
 

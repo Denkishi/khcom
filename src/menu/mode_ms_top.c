@@ -496,7 +496,7 @@ void mode_ms_top_1(void) {
         }
         break;
     case 4:
-        if (GetMoogleFreePackFlag(gMapFloorState[6]) == 0) {
+        if (GetMoogleFreePackFlag(gMapFloorState.room) == 0) {
             sMsTopPendingMessage = 0x42;
             sMsTopState = 5;
         } else {
@@ -522,7 +522,7 @@ void mode_ms_top_1(void) {
     case 6:
         if (UpdateMooglePackOpening(1) == 0) {
             ReleaseMooglePackOpening();
-            SetMoogleFreePackFlag(gMapFloorState[6]);
+            SetMoogleFreePackFlag(gMapFloorState.room);
             SetupBg(3, 3, 31, 14);
             DisableBg(3);
             LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A123DC, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);

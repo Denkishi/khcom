@@ -312,11 +312,11 @@ void ClearMoogleRoomFlags(void) {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            ClearMooglePackBought(gMapFloorState[6], i, j);
+            ClearMooglePackBought(gMapFloorState.room, i, j);
         }
     }
 
-    ClearMoogleFreePackFlag(gMapFloorState[6]);
+    ClearMoogleFreePackFlag(gMapFloorState.room);
 }
 
 u8 BuildMooglePackList(s16 a) {
@@ -343,7 +343,7 @@ u8 BuildMooglePackList(s16 a) {
         for (k = 0; k < 4; k++) {
             v = sMooglePackTiers[a][i][k];
 
-            if (IsMooglePackBought(gMapFloorState[6], i, k) == 0) {
+            if (IsMooglePackBought(gMapFloorState.room, i, k) == 0) {
                 if (v >= 0) {
                     sMoogleShopPacks[n][m][0] = k;
                     sMoogleShopPacks[n][m][1] = v;
@@ -1205,7 +1205,7 @@ void mode_ms_shop_1(void) {
     case 4:
         if (UpdateMooglePackOpening(0) == 0) {
             ReleaseMooglePackOpening();
-            SetMooglePackBought(gMapFloorState[6], sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
+            SetMooglePackBought(gMapFloorState.room, sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
             sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
 #ifdef VERSION_EU
             LoadBgMap(0, sUnkEu_09F84F5C[gLanguage], 0x500);

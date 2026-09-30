@@ -12,8 +12,6 @@
 #include "taskpool.h"
 #include "anim.h"
 
-extern u8 gMapFloorState[];
-
 extern u16 gUnk_0203C3BC;
 extern u16 gUnk_0203C3C0;
 extern u8 gBStatesPalette[];

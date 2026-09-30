@@ -129,8 +129,6 @@ void InitMooglePackOpening(s16 x, s16 y);
 void RollMooglePackCards(s16 a, s16 b);
 void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst, s16 dx, s16 dy);
 
-extern u8 gMapFloorState[];
-
 extern u8 gSoraPalette[];
 extern u8 gSor1ll00Tiles[];
 extern u8 gBStatesPalette[];

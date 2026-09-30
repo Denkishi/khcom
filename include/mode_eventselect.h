@@ -1,8 +1,9 @@
+#ifndef GUARD_MODE_EVENTSELECT_H
+#define GUARD_MODE_EVENTSELECT_H
+
 #include "event_index_data.h"
 #include "card_localized_data.h"
 #include "registration_data.h"
-#ifndef GUARD_MODE_EVENTSELECT_H
-#define GUARD_MODE_EVENTSELECT_H
 
 
 #include "card_api.h"

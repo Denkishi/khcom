@@ -1,6 +1,7 @@
-#include "card_def_data.h"
 #ifndef GUARD_MS_CHARGE_H
 #define GUARD_MS_CHARGE_H
+
+#include "card_def_data.h"
 
 #include "registration_data.h"
 #include "map_card_data.h"

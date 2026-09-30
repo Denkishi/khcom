@@ -1,7 +1,8 @@
-#include "registration_data.h"
-#include "system_state.h"
 #ifndef GUARD_SROLL_H
 #define GUARD_SROLL_H
+
+#include "registration_data.h"
+#include "system_state.h"
 
 #include "pc_sprite_types.h"
 

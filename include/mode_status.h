@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_STATUS_H
 #define GUARD_MODE_STATUS_H
+
+#include "registration_data.h"
 
 #include "map_api.h"
 #include "mode_status_api.h"

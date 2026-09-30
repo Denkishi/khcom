@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_DUMMY_H
 #define GUARD_MODE_DUMMY_H
+
+#include "registration_data.h"
 
 #include "mode_battle_data.h"
 #include "map_api.h"

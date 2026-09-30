@@ -1,8 +1,9 @@
+#ifndef GUARD_MODE_CHKBTL_H
+#define GUARD_MODE_CHKBTL_H
+
 #include "mode_deck.h"
 #include "task_descriptors.h"
 #include "system_state.h"
-#ifndef GUARD_MODE_CHKBTL_H
-#define GUARD_MODE_CHKBTL_H
 
 #include "card_api.h"
 

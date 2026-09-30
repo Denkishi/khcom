@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_COPYRIGHT2_H
 #define GUARD_MODE_COPYRIGHT2_H
+
+#include "registration_data.h"
 
 #include "fade.h"
 #include "types.h"

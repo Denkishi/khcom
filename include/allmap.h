@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_ALLMAP_H
 #define GUARD_ALLMAP_H
+
+#include "registration_data.h"
 
 #include "poo_api.h"
 

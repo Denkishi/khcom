@@ -1,6 +1,7 @@
-#include "anim.h"
 #ifndef GUARD_EVT_ASSETS_H
 #define GUARD_EVT_ASSETS_H
+
+#include "anim.h"
 
 #include "types.h"
 

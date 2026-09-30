@@ -1,6 +1,7 @@
-#include "boss_background_types.h"
 #ifndef GUARD_BOS_H
 #define GUARD_BOS_H
+
+#include "boss_background_types.h"
 
 #include "bos_tasks.h"
 

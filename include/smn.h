@@ -1,6 +1,7 @@
-#include "task_descriptors.h"
 #ifndef GUARD_SMN_H
 #define GUARD_SMN_H
+
+#include "task_descriptors.h"
 
 #include "registration_data.h"
 

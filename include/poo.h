@@ -1,7 +1,8 @@
-#include "task_descriptors.h"
-#include "registration_data.h"
 #ifndef GUARD_POO_H
 #define GUARD_POO_H
+
+#include "task_descriptors.h"
+#include "registration_data.h"
 
 #include "poo_data.h"
 

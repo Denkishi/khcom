@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_POOH_H
 #define GUARD_MODE_POOH_H
+
+#include "registration_data.h"
 
 
 #include "chara_types.h"

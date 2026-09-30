@@ -1,8 +1,9 @@
+#ifndef GUARD_MODE_SIO_H
+#define GUARD_MODE_SIO_H
+
 #include "mode_deck.h"
 #include "card_def_data.h"
 #include "registration_data.h"
-#ifndef GUARD_MODE_SIO_H
-#define GUARD_MODE_SIO_H
 
 #include "card_description_data.h"
 

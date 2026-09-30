@@ -1,6 +1,7 @@
-#include "battle_localized_data.h"
 #ifndef GUARD_BTL4_H
 #define GUARD_BTL4_H
+
+#include "battle_localized_data.h"
 
 #include "display.h"
 

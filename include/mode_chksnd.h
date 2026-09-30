@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_CHKSND_H
 #define GUARD_MODE_CHKSND_H
+
+#include "registration_data.h"
 
 #include "card_api.h"
 

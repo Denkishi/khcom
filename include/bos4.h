@@ -1,7 +1,8 @@
-#include "registration_data.h"
-#include "battle_actor_types.h"
 #ifndef GUARD_BOS4_H
 #define GUARD_BOS4_H
+
+#include "registration_data.h"
+#include "battle_actor_types.h"
 
 #include "boss_boogie.h"
 

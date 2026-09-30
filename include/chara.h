@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_CHARA_H
 #define GUARD_CHARA_H
+
+#include "registration_data.h"
 
 #include "mode_sio_api.h"
 

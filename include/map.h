@@ -1,10 +1,11 @@
+#ifndef GUARD_MAP_H
+#define GUARD_MAP_H
+
 #include "mode_deck.h"
 #include "task_descriptors.h"
 #include "card_def_data.h"
 #include "map_text_data.h"
 #include "registration_data.h"
-#ifndef GUARD_MAP_H
-#define GUARD_MAP_H
 
 #include "map_room_data.h"
 #include "map_fixed_data.h"

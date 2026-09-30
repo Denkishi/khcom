@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_CHKEFF_H
 #define GUARD_MODE_CHKEFF_H
+
+#include "registration_data.h"
 
 #include "bg_animation_data.h"
 

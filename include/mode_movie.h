@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_MOVIE_H
 #define GUARD_MODE_MOVIE_H
+
+#include "registration_data.h"
 
 #include "movie.h"
 #include "movie_text.h"

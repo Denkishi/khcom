@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_TITLE_H
 #define GUARD_TITLE_H
+
+#include "registration_data.h"
 
 #include "obj.h"
 

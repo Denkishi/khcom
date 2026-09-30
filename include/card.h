@@ -1,3 +1,6 @@
+#ifndef GUARD_CARD_H
+#define GUARD_CARD_H
+
 #include "mode_deck.h"
 #include "boss_card_data.h"
 #include "map_animation_data.h"
@@ -13,8 +16,6 @@
 #include "card_message_data.h"
 #include "registration_data.h"
 #include "system_state.h"
-#ifndef GUARD_CARD_H
-#define GUARD_CARD_H
 
 #include "anim.h"
 

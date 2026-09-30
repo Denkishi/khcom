@@ -1,37 +1,13 @@
-#include "registration_data.h"
-#include "battle_actor_types.h"
 #ifndef GUARD_BOS2_H
 #define GUARD_BOS2_H
 
-extern void* gBosJfMajinFrameMaps[48];
-extern const u16* gUnk_09EF28CC;
-extern void* gBosJfMajinFrameTiles[48];
-extern void* gUnk_09EF2990;
-extern u32 gBosJfMajinBeamScales[27];
-extern u32 gUnk_09EF2A00;
-extern u32 gUnk_09EF2A04;
-extern u32 gUnk_09EF2A08;
-extern u32 gUnk_09EF2A0C;
-extern u32 gUnk_09EF2A10;
-extern u32 gUnk_09EF2A14;
-extern u32 gUnk_09EF2A18;
-extern u32 gUnk_09EF2A1C;
-extern s8 gBosJfRockAnims[9];
-extern s8 gUnk_09EF2A41;
-extern s16 gBosJfRockGfx2Frames[12];
-
-extern void* gBosJfPillarMaps[2][15];
-
+#include "registration_data.h"
+#include "battle_actor_types.h"
 #include "background_actor_assets.h"
-
 #include "boss_jafar_types.h"
-
 #include "prize_types.h"
-
 #include "chara_types.h"
-
 #include "card_api.h"
-
 #include "chara_api.h"
 #include "pallet.h"
 #include "m4a_song.h"
@@ -52,6 +28,25 @@ extern void* gBosJfPillarMaps[2][15];
 #include "btl_api.h"
 #include "acgtrans.h"
 #include "mode_battle_data.h"
+
+extern void* gBosJfMajinFrameMaps[48];
+extern const u16* gUnk_09EF28CC;
+extern void* gBosJfMajinFrameTiles[48];
+extern void* gUnk_09EF2990;
+extern u32 gBosJfMajinBeamScales[27];
+extern u32 gUnk_09EF2A00;
+extern u32 gUnk_09EF2A04;
+extern u32 gUnk_09EF2A08;
+extern u32 gUnk_09EF2A0C;
+extern u32 gUnk_09EF2A10;
+extern u32 gUnk_09EF2A14;
+extern u32 gUnk_09EF2A18;
+extern u32 gUnk_09EF2A1C;
+extern s8 gBosJfRockAnims[9];
+extern s8 gUnk_09EF2A41;
+extern s16 gBosJfRockGfx2Frames[12];
+
+extern void* gBosJfPillarMaps[2][15];
 
 typedef struct DsdWork {
     BtlObj body[3];

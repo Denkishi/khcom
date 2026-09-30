@@ -13,7 +13,9 @@ typedef struct EvtArg {
 extern Mode gModeEventDebug;
 extern Mode gModeEvent;
 extern TaskPool gEventTaskPool;
+extern u8 gEventPaused;
 extern u32 gEventId;
+extern u8 gEventEndStep;
 
 void ShowEventEndMessage(void);
 void func_08061FC8(void);

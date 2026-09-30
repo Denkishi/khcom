@@ -1,7 +1,8 @@
-#include "battle_localized_data.h"
-#include "anim.h"
 #ifndef GUARD_TASK_ANIMATION_ASSETS_H
 #define GUARD_TASK_ANIMATION_ASSETS_H
+
+#include "battle_localized_data.h"
+#include "anim.h"
 
 #include "mode_chkobj_assets.h"
 #include "evt_assets.h"

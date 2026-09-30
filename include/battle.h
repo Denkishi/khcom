@@ -1,8 +1,9 @@
+#ifndef GUARD_BATTLE_H
+#define GUARD_BATTLE_H
+
 #include "task_descriptors.h"
 #include "registration_data.h"
 #include "system_state.h"
-#ifndef GUARD_BATTLE_H
-#define GUARD_BATTLE_H
 
 #include "bg_animation_data.h"
 

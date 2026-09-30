@@ -1,7 +1,8 @@
-#include "room_data.h"
-#include "registration_data.h"
 #ifndef GUARD_BOS5_H
 #define GUARD_BOS5_H
+
+#include "room_data.h"
+#include "registration_data.h"
 
 #include "worldselect_assets.h"
 #include "battle_actor_types.h"

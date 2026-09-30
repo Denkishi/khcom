@@ -1,7 +1,8 @@
-#include "room_data.h"
-#include "map_text_data.h"
 #ifndef GUARD_ROOM_H
 #define GUARD_ROOM_H
+
+#include "room_data.h"
+#include "map_text_data.h"
 
 #include "registration_data.h"
 

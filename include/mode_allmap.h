@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_ALLMAP_H
 #define GUARD_MODE_ALLMAP_H
+
+#include "registration_data.h"
 
 #include "allmap_types.h"
 

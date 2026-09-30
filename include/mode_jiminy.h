@@ -1,10 +1,11 @@
+#ifndef GUARD_MODE_JIMINY_H
+#define GUARD_MODE_JIMINY_H
+
 #include "jiminy_records_data.h"
 #include "jiminy_records_assets.h"
 #include "battle_localized_data.h"
 #include "battle_localized_assets.h"
 #include "system_state.h"
-#ifndef GUARD_MODE_JIMINY_H
-#define GUARD_MODE_JIMINY_H
 
 #include "map_api.h"
 #include "msg_api.h"

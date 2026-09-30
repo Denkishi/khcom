@@ -1,7 +1,8 @@
-#include "task_descriptors.h"
-#include "battle_localized_data.h"
 #ifndef GUARD_BTL_H
 #define GUARD_BTL_H
+
+#include "task_descriptors.h"
+#include "battle_localized_data.h"
 
 #include "card_api.h"
 

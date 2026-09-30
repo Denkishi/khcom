@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_WLOGO_H
 #define GUARD_WLOGO_H
+
+#include "registration_data.h"
 
 #include "animation_resource_assets.h"
 

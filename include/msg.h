@@ -1,10 +1,11 @@
+#ifndef GUARD_MSG_H
+#define GUARD_MSG_H
+
 #include "mode_event.h"
 #include "event_index_data.h"
 #include "msg_portrait_data.h"
 #include "event_background_types.h"
 #include "registration_data.h"
-#ifndef GUARD_MSG_H
-#define GUARD_MSG_H
 
 
 #include "bg_animation_data.h"

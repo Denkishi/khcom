@@ -1,6 +1,7 @@
-#include "registration_data.h"
 #ifndef GUARD_MODE_TITLE_H
 #define GUARD_MODE_TITLE_H
+
+#include "registration_data.h"
 
 #include "anim.h"
 

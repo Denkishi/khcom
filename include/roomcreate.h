@@ -1,7 +1,8 @@
-#include "task_descriptors.h"
-#include "registration_data.h"
 #ifndef GUARD_ROOMCREATE_H
 #define GUARD_ROOMCREATE_H
+
+#include "task_descriptors.h"
+#include "registration_data.h"
 
 #include "field_state.h"
 

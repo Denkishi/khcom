@@ -1,7 +1,8 @@
-#include "card_def_data.h"
-#include "registration_data.h"
 #ifndef GUARD_MODE_MS_H
 #define GUARD_MODE_MS_H
+
+#include "card_def_data.h"
+#include "registration_data.h"
 
 #include "card_description_data.h"
 

@@ -1,6 +1,7 @@
-#include "battle_localized_data.h"
 #ifndef GUARD_BTL2_H
 #define GUARD_BTL2_H
+
+#include "battle_localized_data.h"
 
 
 #include "bg_animation_data.h"

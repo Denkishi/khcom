@@ -1,7 +1,8 @@
-#include "task_descriptors.h"
-#include "jiminy_records_data.h"
 #ifndef GUARD_HUM_H
 #define GUARD_HUM_H
+
+#include "task_descriptors.h"
+#include "jiminy_records_data.h"
 
 #include "hum_types.h"
 

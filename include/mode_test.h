@@ -1,11 +1,12 @@
+#ifndef GUARD_MODE_TEST_H
+#define GUARD_MODE_TEST_H
+
 #include "event_index_data.h"
 #include "mode.h"
 #include "taskpool.h"
 #include "card_def_data.h"
 #include "registration_data.h"
 #include "system_state.h"
-#ifndef GUARD_MODE_TEST_H
-#define GUARD_MODE_TEST_H
 
 #include "msg_types.h"
 
@@ -38,9 +39,7 @@
 #include "game_state.h"
 #include "key.h"
 #include "anim.h"
-#include "mode.h"
 #include "mode_battle_data.h"
-#include "taskpool.h"
 #include "gba/syscall.h"
 #include "m4a.h"
 #include "bos4_api.h"

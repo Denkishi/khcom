@@ -1,7 +1,8 @@
-#include "card_def_data.h"
-#include "registration_data.h"
 #ifndef GUARD_STATUS_H
 #define GUARD_STATUS_H
+
+#include "card_def_data.h"
+#include "registration_data.h"
 
 #include "card_label_data.h"
 

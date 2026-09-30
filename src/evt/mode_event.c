@@ -1,13 +1,12 @@
 #include "mode_test.h"
+#include "msg.h"
+#include "card_ids.h"
 
 
 TaskPool gEventTaskPool;
 u8 gEventPaused;
 u32 gEventId;
 u8 gEventEndStep;
-
-#include "msg.h"
-#include "card_ids.h"
 
 void Event_0(s32 arg) {
     EvtArg cfg;

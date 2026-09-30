@@ -1,6 +1,7 @@
-#include "battle_localized_data.h"
 #ifndef GUARD_TUTORIAL_H
 #define GUARD_TUTORIAL_H
+
+#include "battle_localized_data.h"
 
 #include "card_api.h"
 

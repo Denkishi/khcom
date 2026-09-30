@@ -1,6 +1,7 @@
-#include "task_descriptors.h"
 #ifndef GUARD_FLD_H
 #define GUARD_FLD_H
+
+#include "task_descriptors.h"
 
 #include "field_state.h"
 

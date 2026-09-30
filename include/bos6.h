@@ -1,13 +1,36 @@
-#include "task_descriptors.h"
-#include "registration_data.h"
 #ifndef GUARD_BOS6_H
 #define GUARD_BOS6_H
+
+#include "task_descriptors.h"
+#include "registration_data.h"
 
 #include "pc_sprite_types.h"
 
 #include "battle_actor_types.h"
 
 #include "prize_types.h"
+#include "battle_bg_types.h"
+#include "evt_types.h"
+#include "obj_resource_types.h"
+#include "card_api.h"
+#include "gba/syscall.h"
+#include "m4a_song.h"
+#include <stdlib.h>
+#include "fade.h"
+#include "btl_effect.h"
+#include "btl_collision.h"
+#include "obj_api.h"
+#include "battle_actor.h"
+#include "display.h"
+#include "types.h"
+#include "engine_math.h"
+#include "battle_work.h"
+#include "game_state.h"
+#include "taskpool.h"
+#include "anim.h"
+#include "bos6_api.h"
+#include "bos7_api.h"
+#include "btl_api.h"
 
 typedef struct PcAnimStep {
     u16 op;
@@ -180,34 +203,6 @@ extern const s8 gUnk_09A4CAB5[];
 
 extern const u16 gBosPcFldPaletteCycleNext[];
 extern const s16 gBosPcFldPaletteCycleFrames[];
-
-#include "battle_bg_types.h"
-
-#include "evt_types.h"
-
-#include "obj_resource_types.h"
-
-#include "card_api.h"
-
-#include "gba/syscall.h"
-
-#include "m4a_song.h"
-#include <stdlib.h>
-#include "fade.h"
-#include "btl_effect.h"
-#include "btl_collision.h"
-#include "obj_api.h"
-#include "battle_actor.h"
-#include "display.h"
-#include "types.h"
-#include "engine_math.h"
-#include "battle_work.h"
-#include "game_state.h"
-#include "taskpool.h"
-#include "anim.h"
-#include "bos6_api.h"
-#include "bos7_api.h"
-#include "btl_api.h"
 
 typedef struct PcShared {
     s16 hpRatio;

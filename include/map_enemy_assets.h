@@ -1,6 +1,7 @@
-#include "types.h"
 #ifndef GUARD_MAP_ENEMY_ASSETS_H
 #define GUARD_MAP_ENEMY_ASSETS_H
+
+#include "types.h"
 
 #include "anim.h"
 #include "taskpool.h"

@@ -1370,7 +1370,7 @@ void ClearMapCardInventory(void) {
 void InitMapCardInventory(void) {
     ClearMapCardInventory();
 
-    if (gDebugFlags & 8) {
+    if (gDebugFlags & DEBUG_FLAG_ALL_MAP_CARD) {
 #ifdef VERSION_EU
         s32 i;
 

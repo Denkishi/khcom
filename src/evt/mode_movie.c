@@ -476,7 +476,7 @@ void mode_movie_1(void) {
             SoftReset(0xFF);
 #endif
 #ifdef VERSION_EU
-        } else if (gDebugFlags & 0x8000) {
+        } else if (gDebugFlags & DEBUG_FLAG_DEBUG_MENU) {
             ModeRequest(&gModeMovieDebugEu, 0);
 #endif
         } else {

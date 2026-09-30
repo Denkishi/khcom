@@ -782,7 +782,7 @@ void InitSoraDecks(void) {
     InitCardCollection();
     InitDecks();
 
-    if (gDebugFlags & 0x10) {
+    if (gDebugFlags & DEBUG_FLAG_ALL_BTL_CARD) {
         FillDebugCardCollection();
         func_080AB22C(2);
         BuildDebugKingdomKeyDeck(1);

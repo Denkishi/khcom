@@ -266,11 +266,11 @@ void mode_chkbtl_0(void) {
     DebugTextPrintNumber(62, 56, 2, gChkBtlWork->floor + 1);
     DebugTextPrintNumber(62, 68, 2, gChkBtlWork->hp);
 
-    if (!(gDebugFlags & 1)) {
+    if (!(gDebugFlags & DEBUG_FLAG_CHKBTL)) {
         func_08085FB0();
         InitDebugDecks();
         gGameState.progression.cp = 9999;
-        gDebugFlags |= 1;
+        gDebugFlags |= DEBUG_FLAG_CHKBTL;
         gGameState.progression.friendFlags = 0xFFFF;
     }
 }
@@ -448,7 +448,7 @@ void ChkBtlReset(void) {
     gChkBtlWork->enemy = 0;
     gChkBtlWork->floor = 0;
     gChkBtlWork->hp = gGameState.progression.maxHp;
-    gDebugFlags &= ~1;
+    gDebugFlags &= ~DEBUG_FLAG_CHKBTL;
     gVsBattleHalfWidth = 0x98;
     gVsBattleMinY = 0x160;
     gVsBattleMaxY = 0x1A2;

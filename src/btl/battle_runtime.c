@@ -740,7 +740,7 @@ void _08019CB4(void) {
                 case 184:
                     break;
                 default:
-                    if (gDebugFlags & 1) {
+                    if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
                     } else if (gGameState.progression.unk_82 & 0x20) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
@@ -863,7 +863,7 @@ void _08019CB4(void) {
             gBtlWork->hitStop = 100;
         } else if (gBtlWork->phaseStep > 140 && !FadeIsActive()) {
             m4aMPlayAllStop();
-            if (gDebugFlags & 1) {
+            if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
                 ModeRequest(&gModeChkbtl, 0);
             } else {
                 GameState* state = &gGameState;
@@ -2057,7 +2057,7 @@ void SetBtlObjUnhittable(BtlObj* p, u8 f) {
 
 void ExitBattle(void) {
     m4aMPlayAllStop();
-    if (gDebugFlags & 1) {
+    if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
         ModeRequest(&gModeChkbtl, 0);
         return;
     }
@@ -2457,7 +2457,7 @@ void InitGameState(void) {
     s32 zero = 0;
     CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
 
-    if (gDebugFlags & 0x800) {
+    if (gDebugFlags & DEBUG_FLAG_RIKU) {
         gGameState.flags |= GAME_FLAG_RIKU;
         gGameState.flags |= GAME_FLAG_SORA_CLEAR;
     }
@@ -2495,6 +2495,6 @@ void ResetGameState(void) {
     ChkBtlReset();
     gUnk_02039DC0 = 0;
 #ifdef VERSION_EU
-    gDebugFlags &= 0xFFFF7FFF;
+    gDebugFlags &= ~DEBUG_FLAG_DEBUG_MENU;
 #endif
 }

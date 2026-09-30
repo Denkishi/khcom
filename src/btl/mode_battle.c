@@ -495,7 +495,7 @@ void mode_battle_0(u32 mode) {
 
         if (mode <= 0x92) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlForm, (void*)gBtlFormListByBattleId[mode]);
-        } else if (gDebugFlags & 1) {
+        } else if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ChkBtlSpawnEnemy();
         }
 

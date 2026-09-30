@@ -31,7 +31,7 @@ void mode_debug_0(void) {
     FadeStartIn(1, 16);
     ResetGameState();
 #ifdef VERSION_EU
-    gDebugFlags |= 0x8000;
+    gDebugFlags |= DEBUG_FLAG_DEBUG_MENU;
 #endif
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
@@ -114,7 +114,7 @@ void mode_debug_1(void) {
     case 0:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
 #ifdef VERSION_EU
-            gDebugFlags &= ~0x8000;
+            gDebugFlags &= ~DEBUG_FLAG_DEBUG_MENU;
 #endif
             ModeRequest(&gModeCopyright1, 0);
             return;
@@ -129,7 +129,7 @@ void mode_debug_1(void) {
     case 2:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
 #ifdef VERSION_EU
-            gDebugFlags &= ~0x8000;
+            gDebugFlags &= ~DEBUG_FLAG_DEBUG_MENU;
 #endif
             ModeRequest(&gModeMapChk, 0);
             return;

@@ -39,7 +39,7 @@ void Mode_Deck_1(void) {
     TaskPoolDraw(&sModeDeckTasks);
 
     if (sModeDeckResult == 7) {
-        if (gDebugFlags & 1) {
+        if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & 1) {
             ModeRequest(&gModeSioBtlOption, 1);
@@ -49,7 +49,7 @@ void Mode_Deck_1(void) {
     }
 
     if (sModeDeckResult == 8) {
-        if (gDebugFlags & 1) {
+        if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
         } else if (gSystemFlags & 1) {
             ModeRequest(&gModeSioBtlOption, 1);

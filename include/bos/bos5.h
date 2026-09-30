@@ -202,6 +202,10 @@ typedef struct MdGfx {
     u16 unk_12;
 } MdGfx;
 
+enum MdFlag {
+    MD_FLAG_STATE_REQUESTED = 0x1
+};
+
 typedef struct MdWork {
     u32 state;
     u32 nextState;

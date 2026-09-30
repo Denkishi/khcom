@@ -16,7 +16,7 @@ void BosJfMajinSetBgFrame(u8 a, u16 b, JfMajinWork* work) {
     BosJfMajinCopyBgMap(a, work);
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     LoadBgTiles(1, gBosJfMajinFrameTiles[a], b * 32);
-    work->jf->flags &= ~0x10;
+    work->jf->flags &= ~JF_FLAG_NEEDS_BG_CLIP;
 }
 void BosJfMajinCopyBgMap(u8 a, JfMajinWork* work) {
     s16 n;
@@ -118,7 +118,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
 u8 task_bos_jf_majin_1(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
-    jf->flags |= 0x10;
+    jf->flags |= JF_FLAG_NEEDS_BG_CLIP;
 
     switch (work->jf->state) {
     case 0:
@@ -162,7 +162,7 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
     ColliderSetPosition(&jf->body.collider, jf->body.x, jf->body.y, jf->body.z);
     TaskPoolUpdate(&work->tasks);
 
-    if (work->jf->flags & 0x10) {
+    if (work->jf->flags & JF_FLAG_NEEDS_BG_CLIP) {
         if (work->jf->state != 6) {
             BosJfMajinUpdateBgClip(work->jf->bgFrame, work);
         }
@@ -179,7 +179,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     s16 y;
 
     if (gBtlWork->paused == 0) {
-        if (jf->flags & 1) {
+        if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
                 LoadPaletteWithEffect(gUnk_08F69BC4, (void*)0x05000000, 32);
                 gfx = work->palette2;
@@ -1125,7 +1125,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
         break;
     default:
         EndBossDefeat();
-        work->jf->flags |= 2;
+        work->jf->flags |= JF_FLAG_DEFEAT_DONE;
         break;
     }
 }
@@ -1184,8 +1184,8 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
         work->idleStep = 0;
         work->spriteVisible = 1;
 
-        if (work->jf->flags & 4) {
-            work->jf->flags &= ~4;
+        if (work->jf->flags & JF_FLAG_GIMMICK_PENDING) {
+            work->jf->flags &= ~JF_FLAG_GIMMICK_PENDING;
             work->jf->pillarPhase = 2;
             m = 14;
         } else if (s->hp < s->maxHp / 2) {
@@ -1931,12 +1931,12 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->flags = 0;
 
     if (arg != NULL) {
-        work->flags = 16;
+        work->flags = DSD_FLAG_IN_EVENT;
     }
 
     TaskPoolInit(&work->tasks, 4);
 
-    if (work->flags & 16) {
+    if (work->flags & DSD_FLAG_IN_EVENT) {
         TaskCreate(&work->tasks, &gTaskDescBosDsdMap, 0);
     } else {
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosDsdMap, work);
@@ -1945,7 +1945,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->unk_390 = 0;
     work->unk_392 = 0;
 
-    if (work->flags & 16) {
+    if (work->flags & DSD_FLAG_IN_EVENT) {
         work->state = 9;
     } else {
         work->state = 1;
@@ -1962,7 +1962,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->bgFrameTimer = 0;
     work->hpPhase = 0;
     work->driftX = -51;
-    v = (s16)(work->flags & 16);
+    v = (s16)(work->flags & DSD_FLAG_IN_EVENT);
 
     if (v != 0) {
         work->bodyX = 0xDC00;
@@ -2018,7 +2018,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
     BtlObj* a = work->body;
     BtlObj* b = &work->body[1];
 
-    if (work->flags & 0x10) {
+    if (work->flags & DSD_FLAG_IN_EVENT) {
         TaskPoolUpdate(&work->tasks);
         return 1;
     }
@@ -2032,7 +2032,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        work->flags |= 1;
+        work->flags |= DSD_FLAG_HURT;
         work->timer = 20;
         break;
     case BTL_REACTION_DEFEATED:
@@ -2046,12 +2046,12 @@ u8 task_bos_dsd_1(DsdWork* work) {
         break;
     }
 
-    if (work->flags & 1) {
+    if (work->flags & DSD_FLAG_HURT) {
         work->timer--;
 
         if ((s16)work->timer <= 0) {
             work->unk_34C = 0;
-            work->flags &= ~1;
+            work->flags &= ~DSD_FLAG_HURT;
             LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
             ClearBtlObjActionFlags(b);
 
@@ -2073,7 +2073,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
     }
 
     if (ConsumeGimmickFlag(0)) {
-        work->flags |= 8;
+        work->flags |= DSD_FLAG_PLATFORM_ACTIVE;
         TaskCreate(&work->tasks, &gTaskDescBosDsdIta, work);
     }
 
@@ -2093,7 +2093,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
     q->bossY = a->y;
     q->bossZ = a->z;
 
-    if (work->flags & 2) {
+    if (work->flags & DSD_FLAG_DEFEAT_DONE) {
         return 0;
     }
 

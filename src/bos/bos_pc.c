@@ -5255,9 +5255,9 @@ void BosPcDraw(PcWork* work) {
         work->oam[j].count = 0;
     }
 
-    for (j = 0; !(cmds[j].flags & 0x80); j++) {
+    for (j = 0; !(cmds[j].flags & PC_SPRITE_CMD_END); j++) {
         cmd = &cmds[j];
-        if (cmd->flags & 1) {
+        if (cmd->flags & PC_SPRITE_CMD_STANDALONE) {
             DrawSprite(sx + cmd->x, sy + cmd->y, gUnk_09EFAB18[cmd->gfxIndex],
                 work->tiles2[j], gfx, 0,
                 BosPcGetSpritePriority(work, work->y + PcLayerDepth(cmd->layer)),
@@ -5465,14 +5465,14 @@ void BosPcPlaceBodies(PcWork* work) {
     step = BosPcGetSpriteCmds(work);
     x = 0;
     y = 6;
-    if ((step->flags & 0x80) == 0) {
+    if ((step->flags & PC_SPRITE_CMD_END) == 0) {
         do {
             if (step->flags & 0xC) {
                 x += step->x;
                 y += step->y;
             }
             step++;
-        } while ((step->flags & 0x80) == 0);
+        } while ((step->flags & PC_SPRITE_CMD_END) == 0);
     }
     x /= 2;
     y /= 2;

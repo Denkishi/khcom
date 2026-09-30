@@ -44,6 +44,15 @@ extern s16 gBosJfRockGfx2Frames[12];
 
 extern void* gBosJfPillarMaps[2][15];
 
+enum DsdFlag {
+    DSD_FLAG_HURT = 0x1,
+    DSD_FLAG_DEFEAT_DONE = 0x2,
+    DSD_FLAG_PLATFORM_ACTIVE = 0x8,
+    DSD_FLAG_IN_EVENT = 0x10,
+    DSD_FLAG_PLAYER_ON_PLATFORM = 0x20,
+    DSD_FLAG_DRIFT_CHANGED = 0x40
+};
+
 typedef struct DsdWork {
     BtlObj body[3];
     u32 lastState;
@@ -184,6 +193,11 @@ typedef struct DsdMainWork {
     Task* energy1Task3;
 } DsdMainWork;
 
+enum DsdItaFlag {
+    DSD_ITA_FLAG_SINKING = 0x1,
+    DSD_ITA_FLAG_RISING = 0x2
+};
+
 typedef struct DsdItaWork {
     DsdWork* dsd;
     Collider collider;
@@ -204,6 +218,14 @@ typedef struct DsdItaWork {
     void* gfx;
     void* gfx2;
 } DsdItaWork;
+
+enum JfFlag {
+    JF_FLAG_HURT = 0x1,
+    JF_FLAG_DEFEAT_DONE = 0x2,
+    JF_FLAG_GIMMICK_PENDING = 0x4,
+    JF_FLAG_IN_EVENT = 0x8,
+    JF_FLAG_NEEDS_BG_CLIP = 0x10
+};
 
 typedef struct JfWork {
     BtlObj body;

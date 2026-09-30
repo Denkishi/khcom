@@ -122,7 +122,7 @@ void BosTmBodyUpdateAngle(TmBodyWork* p) {
 }
 
 void BosTmBodyPlaceParts(TmBodyWork* p) {
-    if (p->tm->flags & 0x20) {
+    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
         p->body.x = p->tm->x2 + 0x400;
         p->body2.x = p->tm->x2;
         p->body3.x = p->tm->x2 + 0xC00;
@@ -165,7 +165,7 @@ void BosTmBodySetDefeatPose(TmBodyWork* p) {
     dz = 0xF00;
     src = p->tm;
 
-    if (src->flags & 0x20) {
+    if (src->flags & TM_FLAG_FACING_LEFT) {
         p->tm->x2 = p->tm->baseX - 0xA00;
         p->tm->y2 = p->tm->baseY;
         p->tm->z2 = p->tm->baseZ + dz;
@@ -194,7 +194,7 @@ void BosTmBodySetBreakPose(TmBodyWork* p) {
     p->gfx3 = gUnk_09EF397C[0];
     p->gfx4 = gUnk_09EF3960[0];
 
-    if (p->tm->flags & 0x20) {
+    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
         p->tm->x2 = p->tm->baseX + 0xA00;
         p->tm->y2 = p->tm->baseY;
         p->tm->z2 = p->tm->baseZ + 0xF00;
@@ -218,7 +218,7 @@ void BosTmBodySetBreakPose(TmBodyWork* p) {
 }
 
 void BosTmBodyApplyThrowStep(TmBodyWork* p, s16 a) {
-    if (p->tm->flags & 0x20) {
+    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
         p->angle += sBosTmBodyThrowSteps[a].dAngle;
         p->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
         p->body.x += sBosTmBodyThrowSteps[a].dx << 8;
@@ -274,7 +274,7 @@ void func_080B8A00(TmBodyWork* p) {
     if (p->tm->hitCount == 1) {
         p->tm->step = 0;
         p->tm->stepTimer = 0;
-        if (p->tm->flags & 0x20) {
+        if (p->tm->flags & TM_FLAG_FACING_LEFT) {
             p->angle = sUnk_09EF1D88[p->tm->step].dAngle;
             p->angle2 = sUnk_09EF1D88[p->tm->step].dAngle2;
             p->body.x = p->tm->baseX + ((sUnk_09EF1D88[p->tm->step].dx + 4) << 8);
@@ -298,7 +298,7 @@ void func_080B8A00(TmBodyWork* p) {
         p->tm->z2 = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz2 + 0 + sUnk_09EF1E08[2]) << 8);
     } else {
         if (p->tm->step < 3) {
-            if (p->tm->flags & 0x20) {
+            if (p->tm->flags & TM_FLAG_FACING_LEFT) {
                 p->angle += sUnk_09EF1D88[p->tm->step].dAngle;
                 p->angle2 += sUnk_09EF1D88[p->tm->step].dAngle2;
                 p->body.x += sUnk_09EF1D88[p->tm->step].dx << 8;
@@ -324,7 +324,7 @@ void func_080B8A00(TmBodyWork* p) {
         }
         if (p->tm->hurtTimer < 3) {
             i = p->tm->hurtTimer;
-            if (p->tm->flags & 0x20) {
+            if (p->tm->flags & TM_FLAG_FACING_LEFT) {
                 p->angle -= sUnk_09EF1D88[i].dAngle;
                 p->angle2 -= sUnk_09EF1D88[i].dAngle2;
                 p->body.x -= sUnk_09EF1D88[i].dx << 8;
@@ -352,7 +352,7 @@ void func_080B8A00(TmBodyWork* p) {
 }
 
 void func_080B8FF4(TmBodyWork* p, s16 a) {
-    if (p->tm->flags & 0x20) {
+    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
         p->angle += sUnk_09EF2034[a].dAngle;
         p->angle2 += sUnk_09EF2034[a].dAngle2;
         p->body.x += sUnk_09EF2034[a].dx << 8;
@@ -391,7 +391,7 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
     s32 next;
     u16 rnd;
 
-    if (p->tm->flags & 0x40) {
+    if (p->tm->flags & TM_FLAG_SWITCHING_SIDES) {
         p->tm->state = p->tm->resumeState;
         return;
     }
@@ -400,9 +400,9 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
         st = p->tm->tableState;
 
         if (st == 2) {
-            if (p->tm->flags & 0x10) {
+            if (p->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
                 p->tm->state = 1;
-                p->tm->flags = p->tm->flags & ~0x10;
+                p->tm->flags = p->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
             } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
@@ -435,12 +435,12 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
                 p->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
                 if (p->tm->state == 4) {
-                    if (p->tm->flags & 0x20) {
-                        p->tm->flags |= 0x40;
+                    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
+                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
                         p->tm->state = 4;
                         p->tm->resumeState = 4;
                     } else {
-                        p->tm->flags |= 0x40;
+                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
                         p->tm->state = 6;
                         p->tm->resumeState = 6;
                     }
@@ -481,9 +481,9 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
         st = p->tm->tableState;
 
         if (st == 2) {
-            if (p->tm->flags & 0x10) {
+            if (p->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
                 p->tm->state = 1;
-                p->tm->flags = p->tm->flags & ~0x10;
+                p->tm->flags = p->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
             } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
@@ -516,12 +516,12 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
                 p->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
                 if (p->tm->state == 4) {
-                    if (p->tm->flags & 0x20) {
-                        p->tm->flags |= 0x40;
+                    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
+                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
                         p->tm->state = 4;
                         p->tm->resumeState = 4;
                     } else {
-                        p->tm->flags |= 0x40;
+                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
                         p->tm->state = 6;
                         p->tm->resumeState = 6;
                     }
@@ -551,7 +551,7 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
         BosTmBodyResetTimers(b);
         BosTmBodyRollBossCard(b);
         BosTmBodyChooseAction(b);
-        b->tm->flags &= ~1;
+        b->tm->flags &= ~TM_FLAG_HURT;
         break;
     case BTL_REACTION_CARD_BROKEN:
         b->tm->stateTimer = 0;
@@ -561,16 +561,16 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
         b->hp = a->hp;
-        b->tm->flags |= 1;
+        b->tm->flags |= TM_FLAG_HURT;
         b->tm->hitCount++;
 
         if (b->prevHp - b->hp >= 9999) {
             b->tm->hurtTimer = 55;
             b->tm->state = 12;
-            b->tm->flags &= ~4;
+            b->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
         } else if (b->tm->state != 12) {
             b->tm->hurtTimer = 20;
-            b->tm->flags |= 4;
+            b->tm->flags |= TM_FLAG_HURT_NO_RECOIL;
         }
         break;
     case BTL_REACTION_DEFEATED:
@@ -581,19 +581,19 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
         break;
     }
 
-    if (b->tm->flags & 1) {
+    if (b->tm->flags & TM_FLAG_HURT) {
         b->tm->hurtTimer--;
 
         if (b->tm->hurtTimer <= 0) {
             b->tm->hitCount = 0;
-            b->tm->flags &= ~1;
+            b->tm->flags &= ~TM_FLAG_HURT;
             ClearBtlObjActionFlags(a);
 
-            if (b->tm->flags & 4) {
-                b->tm->flags &= ~4;
+            if (b->tm->flags & TM_FLAG_HURT_NO_RECOIL) {
+                b->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
             } else {
                 BosTmBodyResetTimers(b);
-                t = b->tm->flags & 0x40;
+                t = b->tm->flags & TM_FLAG_SWITCHING_SIDES;
 
                 if (t) {
                     BosTmBodySetWalkPose(b);
@@ -635,7 +635,7 @@ void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
     work->unk_490 = 10;
     work->unk_492 = 0;
 
-    if (work->tm->flags & 8) {
+    if (work->tm->flags & TM_FLAG_IN_EVENT) {
         BosTmBodySetObjPos(&work->body, work->tm->x + 4, work->tm->y,
                       work->tm->z - 34);
         BosTmBodySetObjPos(&work->body2, work->tm->x, work->tm->y,
@@ -661,7 +661,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     u16 n;
     u16 flags;
 
-    if (!(work->tm->flags & 8)) {
+    if (!(work->tm->flags & TM_FLAG_IN_EVENT)) {
         _080B949C(&work->body2, work);
     }
     switch (work->tm->state) {
@@ -692,7 +692,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         } else {
             BosTmBodyWalk(work);
             if (work->tm->baseX <= 0x8E00) {
-                work->tm->flags &= ~0x20;
+                work->tm->flags &= ~TM_FLAG_FACING_LEFT;
                 work->body2.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->tm->state = 5;
                 work->tm->resumeState = 5;
@@ -712,7 +712,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             BosTmBodyWalk(work);
             if (work->tm->baseX > 0x9FFF) {
                 ClearBtlObjActionFlags(&work->body2);
-                work->tm->flags &= ~0x40;
+                work->tm->flags &= ~TM_FLAG_SWITCHING_SIDES;
                 work->tm->state = 0;
                 work->tm->resumeState = 16;
                 BosTmBodyResetTimers(work);
@@ -728,7 +728,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
         } else {
             BosTmBodyWalk(work);
             if (work->tm->baseX > 0x16EFF) {
-                work->tm->flags |= 0x20;
+                work->tm->flags |= TM_FLAG_FACING_LEFT;
                 work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->tm->state = 7;
                 work->tm->resumeState = 7;
@@ -748,7 +748,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             BosTmBodyWalk(work);
             if (work->tm->baseX <= 0x15D00) {
                 ClearBtlObjActionFlags(&work->body2);
-                work->tm->flags &= ~0x40;
+                work->tm->flags &= ~TM_FLAG_SWITCHING_SIDES;
                 work->tm->state = 0;
                 work->tm->resumeState = 16;
                 BosTmBodyResetTimers(work);
@@ -760,8 +760,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     case 10:
         if (work->tm->stateTimer == 0) {
             BosTmBodyResetPose(work);
-        } else if (work->tm->flags & 2) {
-            work->tm->flags &= ~2;
+        } else if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
+            work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
             ClearBtlObjActionFlags(&work->body2);
             work->tm->state = 0;
             BosTmBodyResetTimers(work);
@@ -781,8 +781,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             } else if (n >= 98 && n <= 100) {
                 BosTmBodyApplyThrowStep(work, n - 85);
             }
-            if (work->tm->flags & 2) {
-                work->tm->flags &= ~2;
+            if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
+                work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
                 work->tm->state = 0;
                 BosTmBodyResetTimers(work);
@@ -802,8 +802,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             } else if (n >= 128 && n <= 130) {
                 BosTmBodyApplyThrowStep(work, n - 115);
             }
-            if (work->tm->flags & 2) {
-                work->tm->flags &= ~2;
+            if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
+                work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
                 work->tm->state = 0;
                 BosTmBodyResetTimers(work);
@@ -821,8 +821,8 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             } else if (n >= 41 && n <= 46) {
                 func_080B8FF4(work, n - 38);
             }
-            if (work->tm->flags & 2) {
-                work->tm->flags &= ~2;
+            if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
+                work->tm->flags &= ~TM_FLAG_ATTACK_DONE;
                 ClearBtlObjActionFlags(&work->body2);
                 work->tm->state = 0;
                 BosTmBodyResetTimers(work);
@@ -836,13 +836,13 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     case 14:
         if (work->tm->stateTimer == 0) {
             BosTmBodySetBreakPose(work);
-            if (work->tm->flags & 0x40) {
+            if (work->tm->flags & TM_FLAG_SWITCHING_SIDES) {
                 RequestBossCardValue(9);
             }
         } else if (work->tm->stateTimer > 59) {
             BosTmBodyResetTimers(work);
-            work->tm->flags &= ~0x80;
-            flags = work->tm->flags & 0x40;
+            work->tm->flags &= ~TM_FLAG_GIMMICK_DROP_ROLLED;
+            flags = work->tm->flags & TM_FLAG_SWITCHING_SIDES;
             if (flags) {
                 ClearBtlObjActionFlags(&work->body2);
                 BosTmBodySetBreakPose(work);
@@ -852,12 +852,12 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
                 BosTmBodyResetPose(work);
                 work->tm->state = 0;
             }
-        } else if (!(work->tm->flags & 0x80) && work->tm->tableState == 0 && (work->tm->flags & 1)) {
+        } else if (!(work->tm->flags & TM_FLAG_GIMMICK_DROP_ROLLED) && work->tm->tableState == 0 && (work->tm->flags & TM_FLAG_HURT)) {
             if ((u16)(GetRandom() % 100) <= 30) {
                 _0801C1F8(0, work->tm->baseX, work->tm->baseY, work->tm->baseZ);
-                work->tm->flags |= 0x80;
+                work->tm->flags |= TM_FLAG_GIMMICK_DROP_ROLLED;
             } else {
-                work->tm->flags |= 0x80;
+                work->tm->flags |= TM_FLAG_GIMMICK_DROP_ROLLED;
             }
         }
         break;
@@ -887,7 +887,7 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     s16 x;
     s16 y;
 
-    if (work->tm->flags & 0x20) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         a1 = AllocObjAffine(work->angle, 0x100, 0x100, 1);
         a2 = AllocObjAffine(work->angle2, 0x100, 0x100, 1);
         mode = 0x800;
@@ -899,7 +899,7 @@ void task_bos_tm_body_2(TmBodyWork* work) {
 
     if (gBtlWork->paused != 0) {
         pal = work->palette;
-    } else if (work->tm->flags & 1) {
+    } else if (work->tm->flags & TM_FLAG_HURT) {
         if (gFrameCounter & 1) {
             pal = work->palette2;
         } else {
@@ -928,7 +928,7 @@ void task_bos_tm_body_2(TmBodyWork* work) {
 }
 
 void task_bos_tm_body_3(TmBodyWork* work) {
-    if ((work->tm->flags & 8) == 0) {
+    if ((work->tm->flags & TM_FLAG_IN_EVENT) == 0) {
         BosTmBodyReleaseEnemy(&work->body2);
     }
 

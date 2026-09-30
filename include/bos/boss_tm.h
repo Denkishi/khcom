@@ -17,6 +17,17 @@ typedef struct TmArmSrc {
     struct TmWork* tm;
 } TmArmSrc;
 
+enum TmFlag {
+    TM_FLAG_HURT = 0x1,
+    TM_FLAG_ATTACK_DONE = 0x2,
+    TM_FLAG_HURT_NO_RECOIL = 0x4,
+    TM_FLAG_IN_EVENT = 0x8,
+    TM_FLAG_TABLE_JUST_RAISED = 0x10,
+    TM_FLAG_FACING_LEFT = 0x20,
+    TM_FLAG_SWITCHING_SIDES = 0x40,
+    TM_FLAG_GIMMICK_DROP_ROLLED = 0x80
+};
+
 typedef struct TmWork {
     u16 x;
     u16 y;

@@ -36,7 +36,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     work->flags = 0;
 
     if (a != 0) {
-        work->flags = 8;
+        work->flags = JF_FLAG_IN_EVENT;
     }
 
     gBosJfLeftPillarLevel = 7;
@@ -52,7 +52,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     gJfMapArg.maps[3] = gUnk_096C6464;
     TaskPoolInit(&work->tasks, 4);
 
-    if (work->flags & 8) {
+    if (work->flags & JF_FLAG_IN_EVENT) {
         TaskCreate(&work->tasks, &gTaskDescBosJfMap, &gJfMapArg);
     } else {
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosJfMap, &gJfMapArg);
@@ -60,7 +60,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
 
     work->unk_268 = 0;
     work->unk_26A = 0;
-    v1 = work->flags & 8;
+    v1 = work->flags & JF_FLAG_IN_EVENT;
 
     if (v1 != 0) {
         work->state = 10;
@@ -78,7 +78,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     work->bgFrameTimer = 12;
     work->pillarPhase = 0;
     work->gimmickTimer = 0;
-    v2 = work->flags & 8;
+    v2 = work->flags & JF_FLAG_IN_EVENT;
 
     if (v2 != 0) {
         work->bodyX = 0x2A200;
@@ -126,7 +126,7 @@ u8 task_bos_jf_1(JfWork* work) {
     BtlWork* q;
     u16 t;
 
-    if (work->flags & 8) {
+    if (work->flags & JF_FLAG_IN_EVENT) {
         TaskPoolUpdate(&work->tasks);
         return 1;
     }
@@ -139,7 +139,7 @@ u8 task_bos_jf_1(JfWork* work) {
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        work->flags |= 1;
+        work->flags |= JF_FLAG_HURT;
         work->hurtTimer = 20;
         break;
     case BTL_REACTION_DEFEATED:
@@ -161,10 +161,10 @@ u8 task_bos_jf_1(JfWork* work) {
         break;
     }
 
-    if (work->flags & 1) {
+    if (work->flags & JF_FLAG_HURT) {
         if (--work->hurtTimer <= 0) {
             work->unk_240 = 0;
-            work->flags &= ~1;
+            work->flags &= ~JF_FLAG_HURT;
             LoadPaletteWithEffect(gUnk_096FB584, (void*)0x05000000, 32);
             ClearBtlObjActionFlags(sub);
 
@@ -182,7 +182,7 @@ u8 task_bos_jf_1(JfWork* work) {
         if (sub->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
             sub->hitFlags &= ~ATTACK_FLAG_ELEMENT_BLIZZARD;
 
-            if ((work->flags & 1) == 0) {
+            if ((work->flags & JF_FLAG_HURT) == 0) {
                 if (work->gimmickTimer == 0) {
                     _0801C1F8(0, sub->x, sub->y, sub->z);
                 }
@@ -193,7 +193,7 @@ u8 task_bos_jf_1(JfWork* work) {
     if (ConsumeGimmickFlag(0)) {
         work->stateStep = 0;
         work->state = 11;
-        work->flags |= 4;
+        work->flags |= JF_FLAG_GIMMICK_PENDING;
 
         if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
             gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
@@ -212,7 +212,7 @@ u8 task_bos_jf_1(JfWork* work) {
     q->bossY = sub->y;
     q->bossZ = sub->z;
 
-    if (work->flags & 2) {
+    if (work->flags & JF_FLAG_DEFEAT_DONE) {
         return 0;
     }
 
@@ -227,7 +227,7 @@ void task_bos_jf_2(JfWork* work) {
 }
 
 void task_bos_jf_3(JfWork* work) {
-    if ((work->flags & 8) == 0) {
+    if ((work->flags & JF_FLAG_IN_EVENT) == 0) {
         ReleaseEnemyBtlObj(&work->sub);
         ReleaseEnemyBtlObj(&work->body);
     }
@@ -857,7 +857,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
         mode |= 1;
     }
 
-    if (gBtlWork->paused == 0 && (work->jf->flags & 1) && (gFrameCounter & 1)) {
+    if (gBtlWork->paused == 0 && (work->jf->flags & JF_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
     } else {
         pal = work->palette;

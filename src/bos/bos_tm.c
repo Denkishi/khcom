@@ -33,7 +33,7 @@ static Task* gBosTmTblTask;
 static TaskPool gBosTmTaskPool;
 
 void BosTmSetArmPositions(TmWork* w) {
-    if (w->flags & 0x20) {
+    if (w->flags & TM_FLAG_FACING_LEFT) {
         w->arm.x = w->x2 + 0x1000;
         w->arm.x2 = w->x2 - 0x700;
         w->arm.y = w->y2 + 0x700;
@@ -54,11 +54,11 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     w->flags = 0;
 
     if (arg != NULL) {
-        w->flags = 8;
+        w->flags = TM_FLAG_IN_EVENT;
     }
     TaskPoolInit(&gBosTmTaskPool, 4);
 
-    if (w->flags & 8) {
+    if (w->flags & TM_FLAG_IN_EVENT) {
         w->x = arg->x >> 8;
         w->y = arg->y >> 8;
         w->z = arg->z >> 8;
@@ -84,7 +84,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     w->hurtTimer = 55;
     w->stateTimer = 0;
     w->tableState = 0;
-    w->flags |= 0x30;
+    w->flags |= (TM_FLAG_TABLE_JUST_RAISED | TM_FLAG_FACING_LEFT);
     w->unk_3B = 0;
     w->resumeState = 16;
     w->tileIndex = 0;
@@ -93,7 +93,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     w->arm.tm = w;
     BosTmSetArmPositions(w);
 
-    if (w->flags & 8) {
+    if (w->flags & TM_FLAG_IN_EVENT) {
         w->state = 15;
         gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
         gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
@@ -170,7 +170,7 @@ u8 task_bos_tm_1(TmWork* w) {
             gBosTmBodyObjCopy.z = w->z2;
             param.prizeObj = &gBosTmBodyObjCopy;
             CharaObjInitDefeat2(&param);
-            w->flags &= ~1;
+            w->flags &= ~TM_FLAG_HURT;
             w->step++;
         }
         break;

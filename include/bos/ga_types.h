@@ -7,6 +7,18 @@
 #include "obj.h"
 #include "battle_actor_types.h"
 
+enum GaEntryFlag {
+    GA_ENTRY_FLAG_NO_BOB = 0x1,
+    GA_ENTRY_FLAG_HURT = 0x2,
+    GA_ENTRY_FLAG_DESTROYED = 0x4,
+    GA_ENTRY_FLAG_STEPPING = 0x8,
+    GA_ENTRY_FLAG_RELEASED = 0x10
+};
+
+enum GaFlag {
+    GA_FLAG_STATE_REQUESTED = 0x1
+};
+
 typedef struct GaEntryWork {
     BtlObj actor;
     u8 unk_110[0x02];

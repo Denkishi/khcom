@@ -136,7 +136,7 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     if (gBtlWork->paused != 0) {
         LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
         gfx = work->palette;
-    } else if (d->flags & 1) {
+    } else if (d->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
             LoadPaletteWithEffect(gUnk_08F69BC4, (void*)0x05000000, 32);
             gfx = work->palette2;
@@ -187,13 +187,13 @@ void BosDsdMainUpdateDrift(DsdMainWork* work) {
             TaskCreate(&work->tasks, &gTaskDescBosDsdRock, work->dsd);
         }
 
-        if ((work->dsd->flags & 0x20) == 0) {
+        if ((work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) == 0) {
             gBtlWork->actor->x += work->dsd->driftX;
         }
 
         if (work->lastBreakDifference != gBtlWork->breakDifference) {
             if (gBtlWork->breakDifference > 0) {
-                work->dsd->flags |= 0x40;
+                work->dsd->flags |= DSD_FLAG_DRIFT_CHANGED;
 
                 if (gBtlWork->breakDifference > 14) {
                     work->dsd->driftX = 0x180;
@@ -201,13 +201,13 @@ void BosDsdMainUpdateDrift(DsdMainWork* work) {
                     work->dsd->driftX = (gBtlWork->breakDifference << 8) / 10;
                 }
             } else if (gBtlWork->breakDifference < 0) {
-                work->dsd->flags |= 0x40;
+                work->dsd->flags |= DSD_FLAG_DRIFT_CHANGED;
                 work->dsd->driftX = (gBtlWork->breakDifference << 9) / 10;
             } else {
-                work->dsd->flags &= ~0x40;
+                work->dsd->flags &= ~DSD_FLAG_DRIFT_CHANGED;
             }
         } else {
-            work->dsd->flags &= ~0x40;
+            work->dsd->flags &= ~DSD_FLAG_DRIFT_CHANGED;
         }
     }
 }
@@ -691,7 +691,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
             if (work->dsd->bgFrame < work->baseFrame - 6) {
                 work->dsd->bgFrame = work->baseFrame - 6;
 
-                if (gBtlWork->enemyTileCount <= 0 && (work->dsd->flags & 8) == 0) {
+                if (gBtlWork->enemyTileCount <= 0 && (work->dsd->flags & DSD_FLAG_PLATFORM_ACTIVE) == 0) {
                     _0801C1F8(0, d->body[0].x, d->body[0].y, d->body[0].z);
                 }
 
@@ -1014,7 +1014,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         }
         break;
     default:
-        d->flags |= 2;
+        d->flags |= DSD_FLAG_DEFEAT_DONE;
         break;
     }
 }

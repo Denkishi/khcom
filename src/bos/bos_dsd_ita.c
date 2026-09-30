@@ -37,14 +37,14 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
         }
         break;
     case 1:
-        if (work->dsd->flags & 32) {
+        if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
             work->state = 2;
         }
 
         BosDsdItaUpdateLifetime(work);
         break;
     case 2:
-        if (work->dsd->flags & 32) {
+        if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
             BosDsdItaMoveToward(&work->x, a->x - 12800);
             BosDsdItaMoveToward(&work->y, a->y);
             BosDsdItaMoveToward(&work->z, a->z + 0x500);
@@ -64,7 +64,7 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
             work->z = 0;
         }
 
-        if (work->dsd->flags & 32) {
+        if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
             work->offTimer = 0;
             work->state = 2;
         }
@@ -81,7 +81,7 @@ u8 task_bos_dsd_ita_1(DsdItaWork* work) {
         }
         break;
     default:
-        work->dsd->flags &= ~8;
+        work->dsd->flags &= ~DSD_FLAG_PLATFORM_ACTIVE;
         return 0;
     }
 
@@ -99,7 +99,7 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
     s16 x;
     s16 y;
 
-    if (work->dsd->flags & 32) {
+    if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
         pal = 0x800;
         prio = -4100 - ((work->y - 0x4000) >> 8) * 4;
     } else {
@@ -141,35 +141,35 @@ void BosDsdItaUpdateRider(DsdItaWork* work) {
     s16 k;
 
     if (gBtlWork->platform == &work->collider) {
-        v = work->dsd->flags & 32;
+        v = work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM;
 
         if (v == 0) {
-            work->flags |= 1;
-            work->dsd->flags |= 32;
+            work->flags |= DSD_ITA_FLAG_SINKING;
+            work->dsd->flags |= DSD_FLAG_PLAYER_ON_PLATFORM;
             work->dipStep = v;
         }
-    } else if (work->dsd->flags & 32) {
-        work->dsd->flags &= ~32;
-        work->flags |= 2;
+    } else if (work->dsd->flags & DSD_FLAG_PLAYER_ON_PLATFORM) {
+        work->dsd->flags &= ~DSD_FLAG_PLAYER_ON_PLATFORM;
+        work->flags |= DSD_ITA_FLAG_RISING;
         work->dipStep = 0;
     }
 
-    if (work->flags & 2) {
+    if (work->flags & DSD_ITA_FLAG_RISING) {
         k = gBosDsdItaDipSteps[work->dipStep];
         work->dipOffset -= k << 8;
 
         if (k == 0) {
-            work->flags &= 0xFFFD;
+            work->flags &= ~DSD_ITA_FLAG_RISING;
             work->dipOffset = 0;
         } else {
             work->dipStep++;
         }
-    } else if (work->flags & 1) {
+    } else if (work->flags & DSD_ITA_FLAG_SINKING) {
         k = gBosDsdItaDipSteps[work->dipStep];
         work->dipOffset += k << 8;
 
         if (k == 0) {
-            work->flags &= 0xFFFE;
+            work->flags &= ~DSD_ITA_FLAG_SINKING;
         } else {
             work->dipStep++;
         }
@@ -251,7 +251,7 @@ void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {
 }
 
 u8 task_bos_dsd_rock_1(DsdRockWork* work) {
-    if ((work->dsd->flags & 0x40) != 0) {
+    if ((work->dsd->flags & DSD_FLAG_DRIFT_CHANGED) != 0) {
         work->vx = -work->vx;
         work->vz = -work->vz;
     } else {

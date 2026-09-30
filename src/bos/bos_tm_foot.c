@@ -340,7 +340,7 @@ void BosTmFootResetPose(TmFootWork* work) {
     work->gfx = gUnk_09EF39DC[2];
     work->gfx2 = gUnk_09EF39DC[2];
 
-    if (work->tm->flags & 0x20) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->baseX + 0x100;
         work->body2.x = work->tm->baseX - 0x600;
         work->body3.x = work->tm->baseX + 0x600;
@@ -374,7 +374,7 @@ void func_080BA2B0(TmFootWork* work) {
     work->gfx = gUnk_09EF39DC[0];
     work->gfx2 = gUnk_09EF39DC[0];
 
-    if (work->tm->flags & 0x20) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->baseX + 0x100;
         work->body2.x = work->tm->baseX - 0x600;
         work->body3.x = work->tm->baseX + 0x600;
@@ -418,7 +418,7 @@ void BosTmFootSetWalkPose(TmFootWork* work) {
     work->gfx = gUnk_09EF3A1C[6];
     work->gfx2 = gUnk_09EF3A1C[1];
 
-    if (work->tm->flags & 0x20) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->x2 + 0x500;
         work->body2.x = work->tm->x2 - 0x600;
         work->body3.x = work->tm->x2 + 0x600;
@@ -454,7 +454,7 @@ void BosTmFootWalk(TmFootWork* work) {
     work->gfx = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfxIndex];
     work->gfx2 = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfx2Index];
 
-    if (work->tm->flags & 0x20) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body3.x = work->tm->x2 + ((sBosTmFootWalkSteps[work->tm->step].x3 + 6) << 8);
         work->body4.x = work->tm->x2 + ((sBosTmFootWalkSteps[work->tm->step].x4 - 2) << 8);
         work->body.x = work->tm->x2 + 0x100;
@@ -525,7 +525,7 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->unk_248 = 0;
     work->unk_360 = 0;
     work->unk_478 = 0;
-    f = work->tm->flags & 8;
+    f = work->tm->flags & TM_FLAG_IN_EVENT;
 
     if (f != 0) {
         BosTmFootSetPartPos(&work->body, (s16)(work->tm->x + 1),
@@ -689,7 +689,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         if (work->tm->stateTimer == 0) {
             func_080BA2B0(work);
         } else if (work->tm->stateTimer > 59) {
-            if (work->tm->flags & 0x40) {
+            if (work->tm->flags & TM_FLAG_SWITCHING_SIDES) {
                 BosTmFootSetWalkPose(work);
             } else {
                 BosTmFootResetPose(work);
@@ -721,7 +721,7 @@ void task_bos_tm_foot_2(TmFootWork* work) {
     BtlObj* s3;
     u16 mode;
 
-    flag = work->tm->flags & 0x20;
+    flag = work->tm->flags & TM_FLAG_FACING_LEFT;
     mode = 0x801;
     if (flag != 0) {
         mode = 0x800;
@@ -729,7 +729,7 @@ void task_bos_tm_foot_2(TmFootWork* work) {
 
     if (gBtlWork->paused != 0) {
         pal = work->palette;
-    } else if ((work->tm->flags & 1) && (gFrameCounter & 1)) {
+    } else if ((work->tm->flags & TM_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -750,7 +750,7 @@ void task_bos_tm_foot_2(TmFootWork* work) {
 }
 
 void task_bos_tm_foot_3(TmFootWork* work) {
-    if ((work->tm->flags & 8) == 0) {
+    if ((work->tm->flags & TM_FLAG_IN_EVENT) == 0) {
         BosTmFootReleasePart(&work->body3);
         BosTmFootReleasePart(&work->body4);
     }
@@ -1086,7 +1086,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         if (work->timer == 0) {
             work->tips[0].angle = 0x110;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D18, 3, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D90, 3, &work->joints.all[4]);
@@ -1122,7 +1122,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A2CC, 6, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A3BC, 6, &work->joints.all[4]);
@@ -1137,7 +1137,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 90;
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
@@ -1151,7 +1151,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 90;
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
@@ -1162,7 +1162,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         break;
     case 1:
         if (work->timer == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
@@ -1178,7 +1178,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             y = work->src->y2;
             z = work->src->z2 + j->curY - 0x2300;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 x = work->src->x2 + j->curX - 0x3E00;
                 BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 20);
             } else {
@@ -1188,7 +1188,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         } else if (work->timer > 55) {
             if (BgFxIsActive() == 0) {
                 work->tips[0].angle = 0x110;
-                work->src->tm->flags |= 2;
+                work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
             }
         }
 
@@ -1196,7 +1196,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         break;
     case 10:
         if (work->timer == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
@@ -1212,7 +1212,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             y = work->src->y2;
             z = work->src->z2 + j->curY - 0x2300;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 x = work->src->x2 + j->curX - 0x3E00;
                 BgFxStartFireAtPlayer(x, y, z, 1, 0, 168, 18);
             } else {
@@ -1222,7 +1222,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         } else if (work->timer > 70) {
             if (BgFxIsActive() == 0) {
                 work->tips[0].angle = 0x110;
-                work->src->tm->flags |= 2;
+                work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
             }
         } else if (work->timer > 50) {
             v = BgFxIsActive();
@@ -1231,7 +1231,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
                 y2 = work->src->y2;
                 z2 = work->src->z2 + j2->curY - 0x2300;
 
-                if (work->src->tm->flags & 0x20) {
+                if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                     x2 = work->src->x2 + j2->curX - 0x3E00;
                     BgFxStartFireAtPlayer(x2, y2, z2, 1, 0, 168, 18);
                 } else {
@@ -1245,7 +1245,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         break;
     case 2:
         if (work->timer == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
@@ -1259,7 +1259,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x110;
             work->src->tm->tableState = 1;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 r = ApplyAttackBox(237, work->tips[1].x - 0x1000, work->tips[1].y,
                                   work->tips[1].z + 0x1400, 16, 16, 16);
             } else {
@@ -1275,14 +1275,14 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer > 50) {
-            work->src->tm->flags |= 2;
+            work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
         } else {
             work->timer++;
         }
         break;
     case 3:
         if (work->timer == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
@@ -1302,7 +1302,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             gUnk_0203AC60 = gUnk_0203AC64 >> 8;
             gUnk_0203AC6C = gUnk_0203AC78 >> 8;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(0x10D00, 0x15800);
             } else {
                 BgFxStartGroundImpact(0xF000, 0x15800);
@@ -1318,14 +1318,14 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer > 50) {
-            work->src->tm->flags |= 2;
+            work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
         } else {
             work->timer++;
         }
         break;
     case 11:
         if (work->timer == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A0EC, 6, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A1DC, 6, &work->joints.all[4]);
@@ -1345,7 +1345,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             gUnk_0203AC60 = gUnk_0203AC64 >> 8;
             gUnk_0203AC6C = gUnk_0203AC78 >> 8;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(0x10D00, 0x15800);
             } else {
                 BgFxStartGroundImpact(0xF000, 0x15800);
@@ -1361,7 +1361,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer > 65) {
-            work->src->tm->flags |= 2;
+            work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
         } else {
             work->timer++;
         }
@@ -1371,7 +1371,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x10C;
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A4AC, 5, &work->joints.all[4]);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A574, 5, &work->joints.all[4]);
@@ -1386,7 +1386,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer > 33) {
-            work->src->tm->flags |= 2;
+            work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
         } else {
             work->timer++;
         }
@@ -1414,7 +1414,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         if (work->timer2 == 0) {
             work->tips[1].angle = 0x110;
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619CDC, 3, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619D54, 3, work->joints.all);
@@ -1439,7 +1439,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A344, 6, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A434, 6, work->joints.all);
@@ -1454,7 +1454,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 185;
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
@@ -1468,7 +1468,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 185;
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
@@ -1479,7 +1479,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         break;
     case 1:
         if (work->timer2 == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
@@ -1500,7 +1500,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         break;
     case 10:
         if (work->timer2 == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
@@ -1521,7 +1521,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         break;
     case 2:
         if (work->timer2 == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
@@ -1539,7 +1539,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         break;
     case 3:
         if (work->timer2 == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
@@ -1557,7 +1557,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         break;
     case 11:
         if (work->timer2 == 0) {
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A164, 6, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A254, 6, work->joints.all);
@@ -1578,7 +1578,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 0x110;
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
-            if (work->src->tm->flags & 0x20) {
+            if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A510, 5, work->joints.all);
             } else {
                 BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A5D8, 5, work->joints.all);
@@ -1643,7 +1643,7 @@ void task_bos_tm_arm_2(TmArmWork* work) {
 
     if (gBtlWork->paused != 0) {
         pal = work->palette;
-    } else if ((work->src->tm->flags & 1) && (gFrameCounter & 1)) {
+    } else if ((work->src->tm->flags & TM_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -1666,7 +1666,7 @@ void task_bos_tm_arm_2(TmArmWork* work) {
                    (depth -= (work->src->y2 >> 8) * 4, (u16)depth));
     }
 
-    if (work->src->tm->flags & 32) {
+    if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
         mode = 256;
     } else {
         mode = -256;
@@ -1768,7 +1768,7 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
             work->frame = 0;
             work->state = 1;
             work->tm->tableState = 2;
-            t = work->tm->flags | 0x10;
+            t = work->tm->flags | TM_FLAG_TABLE_JUST_RAISED;
             work->tm->flags = t;
         } else {
             ColliderSetHeight(&work->collider, work->height);

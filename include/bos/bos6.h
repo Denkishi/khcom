@@ -59,6 +59,11 @@ extern const PcAnimStep gBosPcDefeatAnim[];
 extern const PcAnimStep gUnk_09A4C818[];
 extern const PcAnimStep gUnk_09A4C860[];
 
+enum PcSpriteCmdFlag {
+    PC_SPRITE_CMD_STANDALONE = 0x1,
+    PC_SPRITE_CMD_END = 0x80
+};
+
 typedef struct PcSpriteCmd {
     u8 flags;
     u8 gfxIndex;

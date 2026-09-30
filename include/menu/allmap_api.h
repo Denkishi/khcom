@@ -3,7 +3,10 @@
 
 #include "types.h"
 
+struct TaskPool;
+
 void ClearStockMesDispWork(void);
 u8 TestAllmapRoomFlag(u8 a, u16 b);
+void* CreateAllmapRoomTask(struct TaskPool* pool);
 
 #endif

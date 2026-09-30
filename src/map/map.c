@@ -17,6 +17,7 @@
 #include "fade.h"
 #include "player_progression.h"
 #include "status_api.h"
+#include "allmap_api.h"
 #include "songs.h"
 #include "map_fixed_data.h"
 #include <string.h>

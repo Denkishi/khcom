@@ -1113,7 +1113,6 @@ s32 IsFldObjTalkTarget(FldObj* obj);
 void CreateMapRndTask(void);
 void UpdateMapField(void);
 void DrawMapField(void);
-void* CreateAllmapRoomTask(void* pool);
 void MenuMsgWaitMessage(MenuMsgWork* w);
 void MenuMsgWaitFade(MenuMsgWork* w);
 void Mode_MenuMsg_0(s32 arg);

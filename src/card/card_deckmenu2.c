@@ -5691,13 +5691,13 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
                 n = (DeckCard2Work*)ListPoolPrev(&q->node);
 
                 if (n != NULL) {
-                    *(u16*)q->args.slot = *(u16*)n->args.slot;
+                    *q->args.slot = *n->args.slot;
                 }
 
                 q = (DeckCard2Work*)ListPoolPrev(&q->node);
             }
 
-            *(u16*)p->args.slot = 0xFFFF;
+            *p->args.slot = 0xFFFF;
             ClearCardGrid(w);
             TaskPoolUpdate(&w->taskpool);
             RecreateDeckGridCards(w, w->categoryFilter);
@@ -5721,13 +5721,13 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
             n = ListPoolNext(&p->node);
 
             if (n != NULL) {
-                *(u16*)p->args.slot = *(u16*)n->args.slot;
+                *p->args.slot = *n->args.slot;
             }
 
             p = ListPoolNext(&p->node);
         }
 
-        *(u16*)last->args.slot = 0xFFFF;
+        *last->args.slot = 0xFFFF;
         ClearCardGrid(w);
         TaskPoolUpdate(&w->taskpool);
         RecreateDeckGridCards(w, w->categoryFilter);

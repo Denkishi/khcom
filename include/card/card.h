@@ -796,14 +796,6 @@ typedef struct RikuDeckMenuWork {
     u8 result;
 } RikuDeckMenuWork;
 
-typedef struct CardSaveSlice {
-    u8 activeDeck;
-    u8 mapCardCounts[0x10E];
-    u16 cards[999];
-    u16 cardCount;
-    Deck decks[3];
-} CardSaveSlice;
-
 typedef struct HcEffectNameWork {
     s16 x;
     u8 unk_02[0x06];

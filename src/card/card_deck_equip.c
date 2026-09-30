@@ -325,7 +325,7 @@ void Deck_Clear_0(DeckConfirmWork* w, u8* a) {
     a[0] = 1;
 }
 
-void WriteCardSaveSlice(CardSaveSlice* p) {
+void WriteCardSaveSlice(SaveLargeSlice* p) {
     s32 i;
 
     for (i = 0; i < 270; i++) {
@@ -344,51 +344,37 @@ void WriteCardSaveSlice(CardSaveSlice* p) {
     p->activeDeck = GetActiveDeckIndex();
 }
 
-void ReadCardSaveSlice(u8* p) {
+void ReadCardSaveSlice(SaveLargeSlice* p) {
     u16 i;
-    u8* src;
-    u8* dst;
-    u8* src2;
-    u16* dst2;
-    Deck* dst3;
-    u8* src3;
-    Deck* d;
 
     for (i = 0; i < 0x10E; i++) {
-        dst = gMapCardCounts;
-        src = &p[1];
-        dst[i] = src[i];
+        gMapCardCounts[i] = p->mapCardCounts[i];
     }
 
     for (i = 0; i < 0x3E7; i++) {
-        dst2 = gCardCollection;
-        src2 = &p[0x110];
-        dst2[i] = *(u16*)(src2 + (i << 1));
+        gCardCollection[i] = p->cards[i];
     }
 
     for (i = 0; i < 3; i++) {
-        dst3 = gDecks;
-        d = &dst3[i];
-        src3 = &p[i * 0xE0];
-        memcpy(d, &src3[0x8E0], 0xE0);
+        gDecks[i] = p->decks[i];
     }
 
-    gCardCount = *(u16*)&p[0x8DE];
-    SetActiveDeckIndex(p[0]);
+    gCardCount = p->cardCount;
+    SetActiveDeckIndex(p->activeDeck);
 }
 
-void CopyMapCardInventory(u8* p) {
+void CopyMapCardInventory(SaveSmallSlice* p) {
     s32 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        p[i] = gMapCardCounts[i];
+        p->unk_000[i] = gMapCardCounts[i];
     }
 }
-void RestoreMapCardInventory(u8* p) {
+void RestoreMapCardInventory(SaveSmallSlice* p) {
     u16 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        gMapCardCounts[i] = p[i];
+        gMapCardCounts[i] = p->unk_000[i];
     }
 }
 

@@ -2350,8 +2350,8 @@ void MapDbgSetUpdateAndRun(ModeFunc a) {
 void MapDbgFreeCameraInput(void) {
     s32 y = 0;
     s32 x = 0;
-    u16 m1 = 0x200;
-    u16 m2 = 0x1000;
+    u16 m1 = DISPCNT_BG1_ON;
+    u16 m2 = DISPCNT_OBJ_ON;
 
     if (GetKeysHeld() & DPAD_LEFT) {
         x = -1024;

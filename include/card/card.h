@@ -1497,14 +1497,18 @@ typedef struct GimmickCardArgs {
     s32 cardId;
 } GimmickCardArgs;
 
+typedef struct WorldSelBeforeArgs {
+    s32 x;
+    s32 y;
+    s32 z;
+} WorldSelBeforeArgs;
+
 typedef struct WorldSelBeforeWork {
     void* tiles;
     ObjPalette* palette;
     void* tiles2;
     ObjPalette* palette2;
-    s32 x;
-    s32 y;
-    s32 z;
+    WorldSelBeforeArgs pos;
     u8 animStep;
     u8 animTimer;
     u8 unk_1E[0x02];
@@ -1516,12 +1520,6 @@ typedef struct WorldSelBeforeWork {
     u8 risenCount;
     u8 unk_A4[0x14];
 } WorldSelBeforeWork;
-
-typedef struct WorldSelBeforeArgs {
-    s32 x;
-    s32 y;
-    s32 z;
-} WorldSelBeforeArgs;
 
 typedef struct EventBgEffectFrame {
     u16 duration;

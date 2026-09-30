@@ -34,7 +34,7 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     u8 i;
 
     FadeToAmount(0, 16, 8);
-    *(WorldSelBeforeArgs*)&w->x = *a;
+    w->pos = *a;
     w->tiles = LoadObjTiles(gUnk_093FB0CC, 0xC0);
     w->palette = LoadObjPalette(gUnk_09619378, 32);
     w->tiles2 = LoadObjTiles(gUnk_093FB1AC, 0x4A0);
@@ -50,8 +50,8 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     for (i = 0; i < w->spriteCount; i++) {
         w->angle[i] = 0x80;
         w->z2[i] = 0;
-        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->x;
-        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->y;
+        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->pos.x;
+        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->pos.y;
     }
 
     m4aSongNumStart(SONG_SND_212);
@@ -68,8 +68,8 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
     }
 
     for (i = 0; i < w->risenCount; i++) {
-        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->x;
-        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->y;
+        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->pos.x;
+        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->pos.y;
         w->angle[i] += 4;
     }
 
@@ -89,15 +89,15 @@ void WorldSel_Before_2(WorldSelBeforeWork* w) {
 
     for (i = 0; i < w->spriteCount; i++) {
         DrawSprite((w->x2[i] >> 8) - (gFieldState->x >> 8),
-                   (w->y2[i] >> 8) + ((w->z + w->z2[i]) >> 8) - (gFieldState->y >> 8),
+                   (w->y2[i] >> 8) + ((w->pos.z + w->z2[i]) >> 8) - (gFieldState->y >> 8),
                    (&gUnk_09EF1278[4])[0], w->tiles, w->palette, 0, 0x800,
                    (u16)(-0x1004 - (w->y2[i] >> 8) * 4));
     }
 
-    DrawSprite((w->x >> 8) - (gFieldState->x >> 8) - 32,
-               (w->y >> 8) + (w->z >> 8) - (gFieldState->y >> 8) - 16,
+    DrawSprite((w->pos.x >> 8) - (gFieldState->x >> 8) - 32,
+               (w->pos.y >> 8) + (w->pos.z >> 8) - (gFieldState->y >> 8) - 16,
                (&gUnk_09EF1278[6])[0], w->tiles2, w->palette2, 0, 0x800,
-               (u16)(-0x1004 - ((w->y - 512) >> 8) * 4));
+               (u16)(-0x1004 - ((w->pos.y - 512) >> 8) * 4));
 }
 
 void WorldSel_Before_3(WorldSelBeforeWork* w) {

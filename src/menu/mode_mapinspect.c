@@ -17,11 +17,7 @@
 #include "songs.h"
 #include "ms_types.h"
 #include "jiminy_data.h"
-
-#ifdef VERSION_JP
-extern u16 gUnk_0814FBB0[];
-extern u16 gUnk_0814FBBC[];
-#endif
+#include "common_text.h"
 
 #ifdef VERSION_EU
 static void* sUnkEu_09F85008[5] = {

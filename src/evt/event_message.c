@@ -27,6 +27,7 @@
 #include "fade.h"
 #include "songs.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 #include <stdlib.h>
 #include <string.h>
 

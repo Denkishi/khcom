@@ -21,6 +21,7 @@
 #include "songs.h"
 #include "map_fixed_data.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 #include <string.h>
 
 extern u8 gSoraWorldBattleBase[];

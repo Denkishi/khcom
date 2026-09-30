@@ -38,6 +38,7 @@
 #include "card_message_text.h"
 #include "event_text.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 
 CardMsgWinWork* gActiveCardMsgwin;
 

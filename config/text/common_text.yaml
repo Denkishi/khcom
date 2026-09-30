@@ -17,16 +17,16 @@ objects:
 entries:
   us:
   - {name: gUnk_08159DF0, declare: false}
-  - {name: gUnk_08159E10, declare: false}
-  - {name: gUnk_08159E18, declare: false}
+  - gUnk_08159E10
+  - gUnk_08159E18
   - {name: gUnk_08159E1E, declare: false}
   - {name: gUnk_08159E4A, declare: false}
   - {name: gUnk_08159EC4, declare: false}
   - {name: common_text_006, declare: false}
   - {name: common_text_007, declare: false}
-  - {name: gUnk_08159F38, declare: false}
-  - {name: common_text_009, declare: false}
-  - {name: gUnk_08159FBC, declare: false}
+  - gUnk_08159F38
+  - common_text_009
+  - gUnk_08159FBC
   - {name: gUnk_08159FE0, declare: false}
   - gUnk_0815A002
   - gUnk_0815A00E
@@ -34,18 +34,18 @@ entries:
   - {name: gUnk_0815A03A, declare: false}
   - {name: gUnk_0815A066, declare: false}
   - {name: gUnk_0815A078, declare: false}
-  - {name: gUnk_0815A09A, declare: false}
-  - {name: gUnk_0815A0A0, declare: false}
+  - gUnk_0815A09A
+  - gUnk_0815A0A0
   - {name: gUnk_0815A0BA, declare: false}
   - {name: gUnk_0815A0CC, declare: false}
-  - {name: gUnk_0815A0EE, declare: false}
+  - gUnk_0815A0EE
   - {name: gUnk_0815A0F4, declare: false}
   - {name: gUnk_0815A116, declare: false}
   - {name: gUnk_0815A130, declare: false}
-  - {name: gUnk_0815A152, declare: false}
+  - gUnk_0815A152
   - {name: gUnk_0815A158, declare: false}
   - {name: gUnk_0815A176, declare: false}
-  - {name: gUnk_0815A198, declare: false}
+  - gUnk_0815A198
   - {name: common_text_030, declare: false}
   - {name: common_text_031, declare: false}
   - {name: gUnk_0815A20C, declare: false}
@@ -58,7 +58,7 @@ entries:
   - {name: gUnk_0815A404, declare: false}
   - {name: gUnk_0815A428, declare: false}
   - {name: common_text_041, declare: false}
-  - {name: gUnk_0815A4B6, declare: false}
+  - gUnk_0815A4B6
   - gUnk_0815A518
   - gUnk_0815A534
   - gUnk_0815A54A
@@ -346,11 +346,11 @@ entries:
   - {name: common_text_327, declare: false}
   - {name: common_text_328, declare: false}
   - {name: gUnk_0815C1C2, declare: false}
-  - {name: gUnk_0815C204, declare: false}
-  - {name: common_text_331, declare: false}
-  - {name: common_text_332, declare: false}
-  - {name: common_text_333, declare: false}
-  - {name: common_text_334, declare: false}
+  - gUnk_0815C204
+  - common_text_331
+  - common_text_332
+  - common_text_333
+  - common_text_334
   - gUnk_0815C360
   - gUnk_0815C372
   jp:
@@ -509,10 +509,10 @@ entries:
   - gUnkJp_0814EE24
   - gUnkJp_0814EE30
   - gUnkJp_0814EE3C
-  - {name: gUnk_08159E10, declare: false}
-  - {name: gUnk_08159E18, declare: false}
-  - {name: gUnk_08159FBC, declare: false}
-  - {name: gUnk_08159F38, declare: false}
+  - gUnk_08159E10
+  - gUnk_08159E18
+  - gUnk_08159FBC
+  - gUnk_08159F38
   - gUnkJp_0814EE88
   - gUnkJp_0814EE94
   - gUnkJp_0814EEA0
@@ -522,11 +522,11 @@ entries:
   - {name: gUnk_0815A0F4, declare: false}
   - {name: gUnk_0815A130, declare: false}
   - {name: gUnk_0815A176, declare: false}
-  - {name: gUnk_0815A0A0, declare: false}
-  - {name: gUnk_0815A09A, declare: false}
-  - {name: gUnk_0815A198, declare: false}
-  - {name: gUnk_0815A0EE, declare: false}
-  - {name: gUnk_0815A152, declare: false}
+  - gUnk_0815A0A0
+  - gUnk_0815A09A
+  - gUnk_0815A198
+  - gUnk_0815A0EE
+  - gUnk_0815A152
   - {name: gUnk_0815B1A8, declare: false}
   - {name: gUnk_08159E4A, declare: false}
   - {name: gUnk_0815A20C, declare: false}
@@ -541,7 +541,7 @@ entries:
   - {name: gUnk_0815A428, declare: false}
   - {name: gUnk_0815B3FA, declare: false}
   - {name: common_text_186, declare: false}
-  - {name: gUnk_0815A4B6, declare: false}
+  - gUnk_0815A4B6
   - {name: gUnk_0814F180, declare: false}
   - gUnkJp_0814F1CC
   - gUnkJp_0814F1DC
@@ -678,14 +678,14 @@ entries:
   - gUnkJp_0814FAA8
   - gUnkJp_0814FAB8
   - {name: common_text_323, declare: false}
-  - {name: gUnk_0815C204, declare: false}
+  - gUnk_0815C204
   - gUnkJp_0814FB0C
-  - {name: common_text_326, declare: false}
+  - common_text_326
   - {name: common_text_327, declare: false}
-  - {name: common_text_328, declare: false}
-  - {name: common_text_329, declare: false}
-  - {name: gUnk_0814FBB0, declare: false}
-  - {name: gUnk_0814FBBC, declare: false}
+  - common_text_328
+  - common_text_329
+  - gUnk_0814FBB0
+  - gUnk_0814FBBC
   - {name: gUnk_0814FBD4, declare: false}
   - {name: common_text_333, declare: false}
   - {name: gUnk_0815C1C2, declare: false}

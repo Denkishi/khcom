@@ -285,7 +285,6 @@ extern u8 gUnk_0815A20C[];
 extern u8 gUnk_0815A3C0[];
 extern u8 gUnk_0815A404[];
 extern u8 gUnk_0815A428[];
-extern u8 gUnk_0815A4B6[];
 extern u8 gUnk_0815B3FA[];
 extern u8 gUnk_0815A23C[];
 extern u8 gUnk_0815B3D4[];

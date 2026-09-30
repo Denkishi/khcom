@@ -962,8 +962,6 @@ extern const u8 gUnk_09964EE4[][320];
 extern const u8 gUnk_099581A4[];
 extern const u8 gUnk_09966064[];
 extern u8 gUnk_050001C0[];
-extern u8 gUnk_08159E10[];
-extern u8 gUnk_08159E18[];
 extern u8 gUnk_0815A03A[];
 extern u8 gUnk_0815B5A6[];
 extern u8 gNamiF00Tiles[];

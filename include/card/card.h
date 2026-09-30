@@ -355,12 +355,7 @@ typedef struct WorldSelAnim {
 extern WorldSelAnim gWorldSelAnims[30];
 extern u8 gUnk_09619378[];
 extern const s32 gSysmsgwinChoiceCursorX[];
-extern u8 gUnk_08159E18[];
-extern u8 gUnk_08159F38[];
-extern u8 gUnk_08159FBC[];
-extern u8 gUnk_0815C204[];
 extern u8 gUnk_0815C1C2[];
-extern u8 gUnk_08159E10[];
 extern u8 gUnk_09614418[];
 extern u8 gUnk_09614438[];
 extern u8 gFEventTiles[];

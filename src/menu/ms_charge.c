@@ -17,6 +17,7 @@
 #include "mode_test_api.h"
 #include "songs.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 
 #ifdef VERSION_EU
 #define LANGSTR(x) (((void**)(x))[gLanguage])

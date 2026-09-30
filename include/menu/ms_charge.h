@@ -53,10 +53,6 @@ s32 MsChargeReadMenuKeys(void);
 s32 MsChargeSelectValueInColumn(MsCard* card, u16 col);
 
 extern u8 gMoguFl00Tiles[];
-extern u16 gUnk_08159E10[];
-extern u16 gUnk_08159E18[];
-extern u16 gUnk_08159F38[];
-extern u16 gUnk_0815C204[];
 extern u8 gCard00Palette[];
 extern u8 gMoguPalette[];
 void mode_ms_charge_1(void);

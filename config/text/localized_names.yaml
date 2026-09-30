@@ -1050,7 +1050,7 @@ fragments:
     - gUnkEu_08891594
     - gUnkEu_088915BD
     - gUnkEu_088915E4
-    - {name: gUnk_0815A4B6, declare: false}
+    - gUnk_0815A4B6
     - gUnkEu_08891640
     - {name: gUnkEu_08891670, record: JiminyLocalizedName, strings: [gUnkEu_08891594, gUnkEu_088915BD, gUnkEu_088915E4, gUnk_0815A4B6, gUnkEu_08891640]}
     - gUnkEu_08891684

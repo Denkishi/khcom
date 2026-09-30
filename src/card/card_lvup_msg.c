@@ -30,13 +30,9 @@
 #include "sprites_card.h"
 #include "songs.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 
 u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a);
-extern u8 gUnk_0815A09A[];
-extern u8 gUnk_0815A198[];
-extern u8 gUnk_0815A0EE[];
-extern u8 gUnk_0815A152[];
-extern u8 gUnk_0815A0A0[];
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";
@@ -58,25 +54,25 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     w->active = a->done;
     if (args.flags & 0x8000) {
 #ifdef VERSION_EU
-        w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A09A), w->textSlots);
+        w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A09A), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A09A, w->textSlots);
 #endif
     } else if (args.flags & 0x4000) {
 #ifdef VERSION_EU
-        w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A198), w->textSlots);
+        w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A198), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A198, w->textSlots);
 #endif
     } else if (!(gGameState.flags & 8)) {
 #ifdef VERSION_EU
-        w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A0EE), w->textSlots);
+        w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A0EE), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A0EE, w->textSlots);
 #endif
     } else {
 #ifdef VERSION_EU
-        w->textSlotCount = LoadTextSlots(eu_0805E924(gUnk_0815A152), w->textSlots);
+        w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A152), w->textSlots);
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A152, w->textSlots);
 #endif
@@ -86,7 +82,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     if ((args.flags & 0x8000) && gLanguage == 4) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), w->textSlots3);
     } else {
-        w->textSlotCount3 = LoadTextSlots(eu_0805E924(gUnk_0815A0A0), w->textSlots3);
+        w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnk_0815A0A0), w->textSlots3);
     }
 #else
     w->textSlotCount3 = LoadTextSlots(gUnk_0815A0A0, w->textSlots3);

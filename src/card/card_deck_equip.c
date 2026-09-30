@@ -31,6 +31,7 @@
 #include "gba/keys.h"
 #include "card_deck.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 
 #include "deck_equip_suffix.inc"
 
@@ -43,11 +44,11 @@ void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     InitTextSlots(w->textSlots3, 80);
     w->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), w->textSlots);
 #ifdef VERSION_JP
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x28], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_326, w->textSlots2);
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895A00), w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x58], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_331, w->textSlots2);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -91,11 +92,11 @@ void DeckErrorCpInit(DeckConfirmWork* w, u8* a) {
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
     w->textSlotCount = 0;
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x40], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_328, w->textSlots2);
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895AF4), w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(&gUnk_08159F38[0x2A], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_009, w->textSlots2);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -124,11 +125,11 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
     InitTextSlots(w->textSlots3, 0x50);
 #ifdef VERSION_JP
     w->textSlotCount = 0;
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x80], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_329, w->textSlots2);
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895C30), w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0xEA], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_334, w->textSlots2);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -148,10 +149,7 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->active = a;
     a[0] = 1;
 }
-#ifdef VERSION_JP
-extern u8 gUnk_0814FBB0[];
-extern u8 gUnk_0814FBBC[];
-#endif
+
 void DeckErrorLastAttackCardInit(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
@@ -164,7 +162,7 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* w, u8* a) {
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895CF8), w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0xA8], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_333, w->textSlots2);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
@@ -195,7 +193,7 @@ void DeckErrorDeckFullInit(DeckConfirmWork* w, u8* a) {
 #elif defined(VERSION_EU)
     w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895DBC), w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(&gUnk_0815C204[0x6C], w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(common_text_332, w->textSlots2);
 #endif
     w->palette = LoadObjPalette(gUnk_09614418, 32);
     w->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);

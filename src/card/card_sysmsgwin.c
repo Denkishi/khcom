@@ -35,6 +35,7 @@
 #include "gba/keys.h"
 #include "songs.h"
 #include "jiminy_data.h"
+#include "common_text.h"
 
 SysMsgWinWork* gActiveSysmsgwin;
 #ifndef VERSION_EU

@@ -32,6 +32,12 @@ u8 gBossCardRequestValue EWRAM_COMMON(4);
 
 u8 gBossCardRequest EWRAM_COMMON(4);
 
+u32 gRikuCardRequest;
+
+u32 gRikuCardReloadRequest;
+
+CardDisplayWork* gRikuSelectedCard;
+
 #include "riku_deck_names.inc"
 static const Deck sRikuDecks[21] = {
     {
@@ -264,6 +270,145 @@ u8 func_08082FF0(CardDisplayWork* p);
 void RefreshRikuCardDisplayGfx(CardDisplayWork* p);
 s32 func_08083ADC(BossCardWork* w);
 void func_08082BF8(CardDisplayWork* p);
+
+void RequestRikuPotion(void) {
+    gRikuCardReloadRequest = 17;
+}
+
+void RequestRikuHiPotion(void) {
+    gRikuCardReloadRequest = 18;
+}
+
+void RequestRikuMegaPotion(void) {
+    gRikuCardReloadRequest = 19;
+}
+
+void RequestRikuEther(void) {
+    gRikuCardReloadRequest = 21;
+}
+
+void RequestRikuMegaEther(void) {
+    gRikuCardReloadRequest = 22;
+}
+
+void RequestRikuElixir(void) {
+    gRikuCardReloadRequest = 23;
+}
+
+void RequestRikuMegalixir(void) {
+    gRikuCardReloadRequest = 24;
+}
+
+void RequestRikuNextCard(void) {
+    gRikuCardRequest = 1;
+}
+
+void RequestRikuPrevCard(void) {
+    gRikuCardRequest = 2;
+}
+
+void RequestRikuCardUse(void) {
+    gRikuCardRequest = 3;
+}
+
+void RequestRikuCardStock(void) {
+    gRikuCardRequest = 4;
+}
+
+void RequestRikuStockUse(void) {
+    gRikuCardRequest = 5;
+}
+
+void func_0807E230(void) {
+    gRikuCardRequest = 8;
+}
+
+void RequestOpenRikuCards(void) {
+    gRikuCardRequest = 6;
+}
+
+void RequestCloseRikuCards(void) {
+    gRikuCardRequest = 7;
+}
+
+void RequestCycleRikuCardList(void) {
+    gRikuCardRequest = 9;
+}
+
+void RequestSwitchRikuCardList(void) {
+    gRikuCardRequest = 10;
+}
+
+void func_0807E26C(void) {
+    gRikuCardRequest = 11;
+}
+
+void func_0807E278(void) {
+    gRikuCardRequest = 12;
+}
+
+void func_0807E284(void) {
+    gRikuCardRequest = 13;
+}
+
+void ClearRikuCardRequest(void) {
+    gRikuCardRequest = 0;
+}
+
+u8 IsRikuReloadCardSelected(void) {
+    if (gRikuSelectedCard != NULL) {
+        if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+s32 GetRikuSelectedMove(void) {
+    CardDef* d;
+
+    if (gRikuSelectedCard != NULL) {
+        if (!(gRikuSelectedCard->flags & (CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE))) {
+            // @bug The opponent's empty slot has no cardDef (NULL read).
+            d = gRikuSelectedCard->cardDef;
+
+            if (d->category == 3) {
+                return d->move + 0xFFFF;
+            }
+
+            return d->move;
+        }
+    }
+
+    return 145;
+}
+
+void SetRikuReloadCharging(void) {
+    // @bug Called before the card battle state exists (NULL write).
+    if (gRikuSelectedCard != NULL) {
+        if ((gRikuSelectedCard->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) {
+            gCardBattleState->rikuReloadCharging = 1;
+        } else {
+            gCardBattleState->rikuReloadCharging = 0;
+        }
+    } else {
+        gCardBattleState->rikuReloadCharging = 0;
+    }
+}
+
+u8 GetRikuCardsLeft(void) {
+    // @bug Polled before the card battle state exists (NULL read).
+    return gCardBattleState->rikuCardsLeft;
+}
+
+u8 IsRikuSelectionEmpty(void) {
+    if (gRikuSelectedCard != NULL) {
+        return gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD;
+    }
+
+    return 0;
+}
 
 void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
     CardDisplayArgs args;

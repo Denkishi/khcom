@@ -46,7 +46,7 @@ s32 task_sroll_b_char_1(SrollBCharWork* w) {
         SrollBCharChangeAnim(w);
     }
 
-    if ((w->obj->drawFlags & 4) == 0) {
+    if ((w->obj->drawFlags & SPRITE_FLAG_BLEND) == 0) {
         FadeSetPaletteExcluded((w->palette->index & 15) + 16, 0);
     } else {
         FadeSetPaletteExcluded((w->palette->index & 15) + 16, 1);

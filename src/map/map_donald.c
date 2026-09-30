@@ -97,7 +97,7 @@ void Task_MapDonald_2(MapDonaldWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);

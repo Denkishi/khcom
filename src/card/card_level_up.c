@@ -1062,8 +1062,8 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, 0x400, 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, 0x400, 51);
+            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
+            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
             break;
         case 1:
             for (; i < 3; i++) {
@@ -1132,8 +1132,8 @@ void Level_Up_2(LevelUpWork* w) {
                        gUnk_09EEA1BC[10],
 #endif
                        w->unk_000[6], w->unk_000[7], 0, 0, 50);
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, 0x400, 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, 0x400, 51);
+            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
+            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
             break;
         }
 #ifdef VERSION_JP
@@ -1194,7 +1194,7 @@ void Level_Up_2(LevelUpWork* w) {
                        w->dpDigits, 3);
         }
     }
-    DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, 0, 0x400, 40);
+    DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, 0, SPRITE_PRIORITY(1), 40);
     TaskPoolDraw(&w->pool);
 }
 

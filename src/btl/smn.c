@@ -1289,7 +1289,7 @@ void task_smn_tinkeff_2(SmnTinkeffWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
     WorldToScreen(&sx, &sy, work->x, work->y, work->z);
-    DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, 0x800,
+    DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2),
                -4100 - ((work->y >> 8) * 4));
 }
 

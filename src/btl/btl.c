@@ -365,7 +365,7 @@ void task_btl_lockon_2(BtlLockonWork* work) {
     if (e != NULL) {
         WorldToScreen(&x, &y, e->x + (e->centerOffsetX << 8), e->y,
                       e->z - (e->centerHeight << 8));
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 16, 16);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 16);
     }
 }
 
@@ -433,7 +433,7 @@ void task_btl_area_2(BtlAreaWork* work) {
     DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3,
                   gBtlWork->z3 + (gBtlWork->areaHalfZ << 8));
-    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 2, 0x101);
+    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, SPRITE_FLAG_VFLIP, 0x101);
 
     if (gBtlWork->soraOwnsPlay != 0) {
         e = ListPoolFirst(&gBtlWork->pool);

@@ -1818,38 +1818,38 @@ void mode_jiminy_1(void) {
                 switch (gLanguage) {
                 case 0:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case 1:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case 4:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case 3:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case 2:
                 default:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                        gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 }
 #else
                 DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0);
+                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
             case 2:
 #ifdef VERSION_EU
                 DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0xFFFE);
+                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
 #else
                 DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, 4, 0);
+                    gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
             }
@@ -2502,27 +2502,27 @@ void JiminyDetailUpdate(void) {
     case 0:
         if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(gJiminyWork->detail->x + 0xC8, gJiminyWork->detail->y + 0x5C,
-                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
+                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, SPRITE_FLAG_BLEND, 1);
         }
         break;
     case 1:
         if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite,
-                gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
+                gJiminyWork->tiles7, gJiminyWork->palette8, 0, SPRITE_FLAG_BLEND, 1);
         }
         if (gJiminyWork->detail->tiles2 != NULL && gJiminyWork->detail->sprite2 != NULL) {
             DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite2,
-                gJiminyWork->tiles8, gJiminyWork->palette9, 0, 4, 0);
+                gJiminyWork->tiles8, gJiminyWork->palette9, 0, SPRITE_FLAG_BLEND, 0);
         }
         break;
     case 2:
         if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(gJiminyWork->detail->x + 0xC4, gJiminyWork->detail->y + 0x74,
-                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
+                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, SPRITE_FLAG_BLEND, 1);
         }
         if (gJiminyWork->detail->tiles2 != NULL) {
             DrawSprite(0x14, 0x25, gJiminyWork->detail->sprite2,
-                gJiminyWork->tiles8, gJiminyWork->palette9, 0, 0x404, 0);
+                gJiminyWork->tiles8, gJiminyWork->palette9, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_BLEND, 0);
         }
         break;
     }

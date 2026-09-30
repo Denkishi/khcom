@@ -113,7 +113,7 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -160,12 +160,12 @@ void Task_MapNamine_0(MapNamineWork* w) {
     case 27:
         w->obj.fieldPosition.x = 0x20D00;
         w->obj.fieldPosition.y = 0xD500;
-        w->spriteFlags = 0x800;
+        w->spriteFlags = SPRITE_PRIORITY(2);
         break;
     case 23:
         w->obj.fieldPosition.x = 0x27C00;
         w->obj.fieldPosition.y = 0xD400;
-        w->spriteFlags = 0x800;
+        w->spriteFlags = SPRITE_PRIORITY(2);
         break;
     case 24:
     case 25:
@@ -173,7 +173,7 @@ void Task_MapNamine_0(MapNamineWork* w) {
     default:
         p->fieldPosition.x = 0x15200;
         p->fieldPosition.y = 0xF800;
-        w->spriteFlags = 0x801;
+        w->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         break;
     }
 
@@ -418,7 +418,7 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -475,7 +475,7 @@ void Task_MapMickey_0(MapMickeyWork* w) {
 
     e->fieldPosition.x = 0x1C800;
     e->fieldPosition.y = 0xE000;
-    w->spriteFlags = 0x801;
+    w->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     e->fieldPosition.z = 0;
     e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
     e->fieldPosition.z = e->fieldPosition.ground;
@@ -919,7 +919,7 @@ void Task_MapStair_2(MapStairWork* w) {
     if (w->visible == 1) {
         x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         y = (w->obj.fieldPosition.y >> 8) + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
-        DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, 0x800, 0x101);
+        DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
     }
 }
 
@@ -949,7 +949,7 @@ void Task_MapFaint_2(MapFaintWork* w) {
 
     x = (e->fieldPosition.x >> 8) - (gFieldState->x >> 8);
     y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - (e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0x800, -0x1005 - (e->fieldPosition.y >> 8) * 4);
+    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1005 - (e->fieldPosition.y >> 8) * 4);
 }
 
 void Task_MapFaint_3(MapFaintWork* w) {
@@ -994,23 +994,23 @@ void Task_MapDmg_2(MapDmgWork* w) {
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E974, w->tiles, w->palette, 0, 0x800, 0x101);
+    DrawSprite(x, y, gUnk_08B1E974, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E97E, w->tiles, w->palette, 0, 0x800, 0x101);
+    DrawSprite(x, y, gUnk_08B1E97E, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E992, w->tiles, w->palette, 0, 0x800, 0x101);
+    DrawSprite(x, y, gUnk_08B1E992, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E988, w->tiles, w->palette, 0, 0x800, 0x101);
+    DrawSprite(x, y, gUnk_08B1E988, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, 0x800, 0x101);
+    DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
 }
 
 void Task_MapDmg_3(MapDmgWork* w) {

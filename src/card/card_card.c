@@ -2743,7 +2743,7 @@ void card_not_have_2(CardDisplayWork* p) {
     }
 
     if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
-        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, 0x410, (u16)(p->priority - 1));
+        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 1));
     }
 }
 
@@ -3814,7 +3814,7 @@ void card_reload_2(CardDisplayWork* p) {
 
         if (!(gGameState.flags & GAME_FLAG_RIKU) && w->gfx3 != NULL) {
             DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
-                       gCardBattleState->palette, 0, 0x410, (u16)(p->priority - 2));
+                       gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 2));
         }
 
         if ((s32)gCardBattleState->soraReloadGauge > 0) {
@@ -3822,13 +3822,13 @@ void card_reload_2(CardDisplayWork* p) {
 
             if (w->gfx != NULL) {
                 DrawSprite(p->x >> 8, y + 17, w->gfx, p->tiles3,
-                           gCardBattleState->palette, affine, 0x400,
+                           gCardBattleState->palette, affine, SPRITE_PRIORITY(1),
                            (u16)(p->priority - 1));
             }
 
             if (gCardBattleState->reloadGaugeFull[0] == 1 && w->gfx2 != NULL) {
                 DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
-                           gCardBattleState->palette, 0, 0x400,
+                           gCardBattleState->palette, 0, SPRITE_PRIORITY(1),
                            (u16)(p->priority - 1));
             }
         }

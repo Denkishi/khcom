@@ -278,7 +278,7 @@ u8 task_wlogo_hwt_obj_1(WlogoHwtObjWork* work) {
 }
 
 void task_wlogo_hwt_obj_2(WlogoHwtObjWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0x400, 0);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 0);
 }
 
 void task_wlogo_hwt_obj_3(WlogoHwtObjWork* work) {
@@ -942,7 +942,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 
 void task_wlogo_dil_2(WlogoDilWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0x400, 0);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 0);
     }
 }
 

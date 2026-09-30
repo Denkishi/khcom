@@ -4812,12 +4812,12 @@ void WorldselectDraw(void) {
 #else
                       gUnk_0999CB90,
 #endif
-                      gWorldselectTitleTiles, gWorldselectOverlayPalette, 0, 0x400,
+                      gWorldselectTitleTiles, gWorldselectOverlayPalette, 0, SPRITE_PRIORITY(1),
                       0x3E8);
         DrawSprite(120, gWorldselectFrameY[0] >> 8, gUnk_0999C394, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
-                      0x400, 0x3E9);
+                      SPRITE_PRIORITY(1), 0x3E9);
         DrawSprite(120, gWorldselectFrameY[1] >> 8, gUnk_0999C3C8, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
-                      0xC00, 0xBBA);
+                      SPRITE_PRIORITY(3), 0xBBA);
     }
 
     for (i = 0; i < gWorldselectSlotCount; i++) {
@@ -4860,12 +4860,12 @@ void WorldselectDraw(void) {
                 anim = gUnk_0999A350;
             }
 
-            DrawSprite(x, y, anim, tiles, pal, sprite, 0x800,
+            DrawSprite(x, y, anim, tiles, pal, sprite, SPRITE_PRIORITY(2),
                           ang > 128 ? (u16)(ang * 2 + 0x6D1) : (u16)((128 - ang) * 2 + 0x7D1));
 
             if ((u8)(t - 65) <= 126) {
                 DrawSprite(x, y, gWorldselectSlots[i].gfx, gWorldselectSlots[i].tiles,
-                              gWorldselectSlots[i].palette, sprite, 0x800,
+                              gWorldselectSlots[i].palette, sprite, SPRITE_PRIORITY(2),
                               ang > 128 ? (u16)(ang * 2 + 0x6D0)
                                         : (u16)((128 - ang) * 2 + 0x7D0));
             }

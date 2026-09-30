@@ -889,7 +889,7 @@ void StockNameSora_2(StockNameWork* w) {
     if (w->visible != 0) {
         DrawSprite(64, 14, 0, w->tiles, w->palette, 0,
 #ifdef VERSION_EU
-                   0x410,
+                   SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC,
 #else
                    0,
 #endif

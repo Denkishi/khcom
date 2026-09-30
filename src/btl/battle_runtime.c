@@ -1181,9 +1181,9 @@ void ClearBtlObjActionFlags(BtlObj* p) {
 
 u16 GetBattleSpritePriorityFlags(s32 a) {
     if (a < gBtlWork->bossY + (gBtlWork->bossPriorityOffset << 8)) {
-        return 0x800;
+        return SPRITE_PRIORITY(2);
     }
-    return 0x400;
+    return SPRITE_PRIORITY(1);
 }
 
 void BeginBossDefeat(BtlObj* actor) {

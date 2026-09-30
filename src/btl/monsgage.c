@@ -178,7 +178,7 @@ void task_monsgage_2(MonsgageWork* work) {
     ObjAffine* affine;
 
     if (gBtlWork->phase != 0) {
-        DrawSprite(172, 12, work->gfx, work->tiles, work->palette, 0, 0x410, 3);
+        DrawSprite(172, 12, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
 
         if (work->visible != 0) {
             if (work->shownValue * 2 > 4) {
@@ -187,7 +187,7 @@ void task_monsgage_2(MonsgageWork* work) {
                 } else {
                     affine = AllocObjAffine(0, work->shownValue * 2, 256, 0);
                 }
-                DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, 0x410, 2);
+                DrawSprite(174, 16, work->gfx2, work->tiles2, work->palette, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
             }
         }
     }

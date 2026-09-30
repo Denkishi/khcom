@@ -119,7 +119,7 @@ void FieldTransitionUpdate(void) {
     }
     gfx = AnimUpdate(&gFieldTransitionWork->anim);
     if (gFieldTransitionWork->flipped != 0) {
-        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 1, 0);
+        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, SPRITE_FLAG_HFLIP, 0);
     } else {
         DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 0, 0);
     }

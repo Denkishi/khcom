@@ -129,7 +129,7 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, 0);
-    DrawSprite(x, y, work->gfx2, work->dsd->tiles2, work->dsd->palette3, affine, 0xC00, 0xFFF0);
+    DrawSprite(x, y, work->gfx2, work->dsd->tiles2, work->dsd->palette3, affine, SPRITE_PRIORITY(3), 0xFFF0);
 }
 
 void task_bos_dsd_ita_3(DsdItaWork* work) {

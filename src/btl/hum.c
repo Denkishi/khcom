@@ -1886,12 +1886,12 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
     y = 208 - (gBtlWork->viewY >> 9);
     s = gSineTable[(u8)work->angle];
     y += s >> 5;
-    DrawSprite(x + 64, y - 28, gUnk_08B5A854, work->tiles, work->palette, 0, 0xC00, 0xFFFF);
-    DrawSprite(x - 144, y, gUnk_08B5A85E, work->tiles, work->palette, 0, 0xC00, 0xFFFE);
-    DrawSprite(x - 88, y, gUnk_08B5A85E, work->tiles, work->palette, 0, 0xC00, 0xFFFE);
-    DrawSprite(x - 32, y, gUnk_08B5A85E, work->tiles, work->palette, 0, 0xC00, 0xFFFE);
-    DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, 0, 0xC00, 0xFFFE);
-    DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, 0, 0xC00, 0xFFFE);
+    DrawSprite(x + 64, y - 28, gUnk_08B5A854, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFF);
+    DrawSprite(x - 144, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 88, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 32, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
     v = FadeGetAmount();
     if (v != 0) {
         switch (FadeGetColor()) {
@@ -5570,7 +5570,7 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
             affine = AllocObjAffine(0, scale, scale, f);
         }
         WorldToScreen(&x, &y, sub->x, sub->y, 0);
-        DrawSprite(x, y, gUnk_08B22BA8, work->tiles, work->palette, affine, 0x800, 0xFFFE);
+        DrawSprite(x, y, gUnk_08B22BA8, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFE);
     }
 }
 
@@ -6388,7 +6388,7 @@ void task_hum_vixen_ice_2(VixenIceWork* work) {
         } else {
             affine = AllocObjAffine(gBtlWork->rotation, s, s, 0);
         }
-        DrawSprite(x, y, gfx, work->tiles, work->palette, affine, 0x800, 0xFFFF);
+        DrawSprite(x, y, gfx, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFF);
     }
 }
 
@@ -7633,7 +7633,7 @@ void task_hum_mahluxia_flw_2(MahluxiaFlwWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, 0x800,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2),
         -0x1004 - (work->y >> 8) * 4);
 }
 

@@ -179,7 +179,7 @@ void task_lockon_2(LockonWork* w) {
         FldObj* obj = w->targets[w->selected];
         s32 projectedY = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, 0, 0x400, (u16)(-0x100E - (((s16)projectedY >> 8) << 2)));
+        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(1), (u16)(-0x100E - (((s16)projectedY >> 8) << 2)));
     }
 #else
     obj = w->targets[w->selected];

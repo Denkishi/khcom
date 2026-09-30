@@ -420,9 +420,9 @@ u8 UpdateRevCountEmpty(RevCountWork* w, void* a) {
 }
 
 #ifdef VERSION_EU
-#define REV_COUNT_SPRITE_FLAGS 0x410
+#define REV_COUNT_SPRITE_FLAGS (SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC)
 #else
-#define REV_COUNT_SPRITE_FLAGS 0x400
+#define REV_COUNT_SPRITE_FLAGS SPRITE_PRIORITY(1)
 #endif
 
 void REV_COUNT_2(RevCountWork* w) {

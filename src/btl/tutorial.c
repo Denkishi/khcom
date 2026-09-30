@@ -529,7 +529,7 @@ void task_tutorial_2(TutorialWork* work) {
             x = (s >> 7) + work->arrowX;
             y = work->arrowY;
         }
-        DrawSprite(x, y, spr, work->tiles, work->palette, 0, 0x10, 0);
+        DrawSprite(x, y, spr, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 0);
     }
 }
 

@@ -225,7 +225,7 @@ void task_btl_pop_cb_2(BtlPopCbWork* work) {
     s16 y;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 16, 5);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 5);
 }
 
 void task_btl_pop_cb_3(BtlPopCbWork* work) {
@@ -492,7 +492,7 @@ void task_btl_exp_2(BtlExpWork* work) {
     if (work->state != 0) {
         y = 40;
         x = 0;
-        DrawSprite(0, y, work->gfx, work->tiles, work->palette, 0, 0x410, x);
+        DrawSprite(0, y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, x);
 
 #ifdef VERSION_JP
         x = 32;
@@ -510,7 +510,7 @@ void task_btl_exp_2(BtlExpWork* work) {
 
         for (i = 0; i <= 5; i++) {
             if (work->gfx2[i] != NULL) {
-                DrawSprite(x, y, work->gfx2[i], work->tiles2[i], work->palette, 0, 0x410, 0);
+                DrawSprite(x, y, work->gfx2[i], work->tiles2[i], work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 0);
                 x += 8;
             }
         }
@@ -835,19 +835,19 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
     s32 scale;
     ObjAffine* affine;
 
-    DrawSprite(236, 2, work->gfx, work->tiles, work->palette, 0, 0x411, 1);
+    DrawSprite(236, 2, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 1);
 
     switch (work->gaugeMode) {
     case 0:
-        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, 0x411, 4);
+        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
         break;
     case 1:
-        DrawSprite(236, 2, gBHpgagFrame27, work->tiles2, work->palette2, 0, 0x411, 4);
-        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, 0x411, 3);
+        DrawSprite(236, 2, gBHpgagFrame27, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
+        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 3);
         break;
     case 2:
-        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, 0x411, 4);
-        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, 0x411, 5);
+        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
+        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 5);
         break;
     }
 
@@ -922,9 +922,9 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
         }
 
         if (work->gaugeMode == 1) {
-            DrawSprite(209, 9, gBHpgagFrame29, work->tiles4, work->palette2, affine, 0x410, 2);
+            DrawSprite(209, 9, gBHpgagFrame29, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         } else {
-            DrawSprite(209, 6, gBHpgagFrame28, work->tiles4, work->palette2, affine, 0x410, 2);
+            DrawSprite(209, 6, gBHpgagFrame28, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         }
     }
 }

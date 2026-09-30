@@ -97,7 +97,7 @@ void task_bos_dsd_circle_2(DsdCircleWork* work) {
     s16 y;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->dsd->tiles, work->dsd->palette, 0, 0xC00, 0xFFFF);
+    DrawSprite(x, y, work->gfx, work->dsd->tiles, work->dsd->palette, 0, SPRITE_PRIORITY(3), 0xFFFF);
 }
 
 void task_bos_dsd_circle_3(void) {
@@ -211,7 +211,7 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
         }
 
         WorldToScreen(&x, &y, work->x, work->y, 0);
-        DrawSprite(x, y, work->gfx, work->dsd->tiles3, work->dsd->palette4, affine, 0xC00, 0xFFF0);
+        DrawSprite(x, y, work->gfx, work->dsd->tiles3, work->dsd->palette4, affine, SPRITE_PRIORITY(3), 0xFFF0);
     }
 }
 
@@ -446,7 +446,7 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
         }
 
         WorldToScreen(&x, &y, work->x + 0x100, work->y, 0);
-        DrawSprite(x, y, work->gfx, work->dsd->tiles3, work->dsd->palette4, affine, 0xC00, 0xFFF0);
+        DrawSprite(x, y, work->gfx, work->dsd->tiles3, work->dsd->palette4, affine, SPRITE_PRIORITY(3), 0xFFF0);
     }
 }
 

@@ -295,13 +295,13 @@ void MsTopDraw(void) {
 
     if (sMsTopBarVisible != 0) {
 #ifdef VERSION_EU
-        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
 #else
-        DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnk_099A2B24, sMsTopBarTiles, sMsTopBarPalette, 0, 0x800, 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnk_099A2B24, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
 #endif
     }
 
@@ -322,7 +322,7 @@ void MsTopDraw(void) {
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, 0, flags, 0x834);
     DrawSprite((gUnk_02035888 >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
-        AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, 0, 0x800, 0x7D0);
+        AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, 0, SPRITE_PRIORITY(2), 0x7D0);
 
     DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, 0,
@@ -333,7 +333,7 @@ void MsTopDraw(void) {
 
     for (i = 0; i <= 1; i++) {
         DrawSprite(sWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8), sWarpDefs[0].gfx[i].y,
-            AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], 0, 0x800, 0x7D0);
+            AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], 0, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     if (sMsTopState == 6) {

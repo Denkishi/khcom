@@ -1180,7 +1180,7 @@ static void cardbattle_2(CardBattleWork* w) {
     gCardBattleState->gfx2 = AnimUpdate(&gCardBattleState->anim2);
 
     if (gCardBattleState->cardsOpen != 0 && w->stockCount != 0 && w->stockValue != 0) {
-        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, 16,
+        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC,
                    12);
     }
 

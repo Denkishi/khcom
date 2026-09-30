@@ -352,7 +352,7 @@ void sysmsgwin_2(SysMsgWinWork* w) {
 
     if (w->tiles4 != NULL) {
         DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx,
-                   w->tiles4, w->palette2, 0, 1, 5);
+                   w->tiles4, w->palette2, 0, SPRITE_FLAG_HFLIP, 5);
     }
 
     if (w->choiceVisible != 0) {
@@ -732,7 +732,7 @@ void sysmsgwinChoice_2(SysMsgWinWork* w) {
     }
 
     if (w->tiles4 != NULL) {
-        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, 0, 1, 10);
+        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, 0, SPRITE_FLAG_HFLIP, 10);
     }
 
     DrawTextSlots(89, 86, w->textSlots, w->textPalette, 0, w->textSlotCount);

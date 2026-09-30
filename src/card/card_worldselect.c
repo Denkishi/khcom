@@ -837,11 +837,11 @@ void MapSelect_2(MapSelectWork* w) {
                    gUnk_09EEB000, w->tiles6, w->palette, 0, 0, 40);
     }
     if (w->isEventDoor == 0 && w->mosaicX != 9 && w->mosaicY != 9) {
-        DrawSprite(120, 56, 0, w->tiles4, w->palette, 0, 8, 60);
-        DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, 0, 8, 60);
+        DrawSprite(120, 56, 0, w->tiles4, w->palette, 0, SPRITE_FLAG_MOSAIC, 60);
+        DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, 0, SPRITE_FLAG_MOSAIC, 60);
     }
-    DrawSprite(128, (s16)(w->y3 >> 8), gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, 0x800, 80);
-    DrawSprite(128, (s16)(w->y4 >> 8), gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, 0x800, 80);
+    DrawSprite(128, (s16)(w->y3 >> 8), gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, (s16)(w->y4 >> 8), gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
     DrawTextSlots(16, (s16)(w->nameY >> 8), w->textSlots, w->palette4, 50, w->textSlotCounts[0]);
     TaskPoolDraw(&w->tasks);
 }
@@ -2530,20 +2530,20 @@ void Reload_Gage_2(CardDisplayWork* p) {
     DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                gfx, p->tiles2,
-               gCardBattleState->palette, 0, 0x400, 50);
+               gCardBattleState->palette, 0, SPRITE_PRIORITY(1), 50);
 
     if (p->scaleY > 0) {
         affine = AllocObjAffine(0, 0x100, p->scaleY, 0);
         DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                    (p->y >> 8) + (t = (gSineTable[p->bobAngle] >> 8) + 17),
                    q->gfx, p->tiles3, gCardBattleState->palette, affine,
-                   0x400, 49);
+                   SPRITE_PRIORITY(1), 49);
 
         if (p->stockIndex == 1) {
             DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                        (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                        q->gfx2, p->tiles4, gCardBattleState->palette, 0,
-                       0x400, 49);
+                       SPRITE_PRIORITY(1), 49);
         }
     }
 
@@ -2551,7 +2551,7 @@ void Reload_Gage_2(CardDisplayWork* p) {
         DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                    (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                    q->gfx3, p->tiles5,
-                   gCardBattleState->palette, 0, 0x400, 48);
+                   gCardBattleState->palette, 0, SPRITE_PRIORITY(1), 48);
     }
 
     TaskPoolDraw(&p->tasks);

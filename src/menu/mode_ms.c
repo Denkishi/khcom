@@ -1101,13 +1101,13 @@ void MoogleShopDraw(void) {
         if (sMoogleShopHasPacks != 0) {
             ApproachValueHalf(&sMoogleShopCursorX, 0x400);
             ApproachValueHalf(&sMoogleShopCursorY, sMoogleShopRowCursor * 6144 + 0x800);
-            DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, 0x400, 0x3E8);
+            DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, SPRITE_PRIORITY(1), 0x3E8);
         }
         break;
     case 3:
         ApproachValueHalf(&sMoogleShopCursorX, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
         ApproachValueHalf(&sMoogleShopCursorY, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorY << 8);
-        DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, 0x400, 0x3E8);
+        DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, SPRITE_PRIORITY(1), 0x3E8);
         break;
     case 4:
         DrawMooglePackOpening();
@@ -1117,7 +1117,7 @@ void MoogleShopDraw(void) {
     for (i = 0; i < 4; i++) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][i][0] >= 0) {
             v = sMoogleShopPacks[sMoogleShopRowCursor][i][1];
-            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], 0, 0x400, 0x3F2);
+            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], 0, SPRITE_PRIORITY(1), 0x3F2);
         }
     }
 }

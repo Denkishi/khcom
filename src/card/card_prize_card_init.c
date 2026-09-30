@@ -1605,15 +1605,15 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                 switch (work->cards[i].color) {
                 case 2:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
+                               gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 3:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
+                               gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 1:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 8, 20);
+                               gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 0:
                 case 4:
@@ -1635,7 +1635,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
         return;
     }
 
-    DrawSprite(120, 42, work->gfx, work->tiles, work->palette, 0, 8, 10);
+    DrawSprite(120, 42, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_MOSAIC, 10);
 }
 void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
     s32 i;

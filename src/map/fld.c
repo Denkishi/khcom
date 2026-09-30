@@ -3502,7 +3502,7 @@ void task_fld_shadow_2(FldShadowWork* work) {
 
     x = (work->x >> 8) - (gFieldState->x >> 8);
     y = (work->y >> 8) + (z >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, spr, work->tiles, work->palette, sprite, 0x800, obj->shadowPriority);
+    DrawSprite(x, y, spr, work->tiles, work->palette, sprite, SPRITE_PRIORITY(2), obj->shadowPriority);
 }
 
 void task_fld_shadow_3(FldShadowWork* work) {

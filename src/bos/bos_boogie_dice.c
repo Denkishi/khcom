@@ -2379,8 +2379,8 @@ void task_bos_ursula_border_2(UrsulaBorderWork* work) {
     GetBattleSpritePriorityFlags(0x19800);
     WorldToScreen(&a, &b, 0x8000, 0x19800, -0x800);
     WorldToScreen(&c, &d, 0x18000, 0x19800, -0x800);
-    DrawSprite(a, b, gUnk_0979D090, work->tiles, work->palette, 0, 0x800, 0xFB00);
-    DrawSprite(c, d, gUnk_0979D8B8, work->tiles, work->palette, 0, 0x800, 0xFB00);
+    DrawSprite(a, b, gUnk_0979D090, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 0xFB00);
+    DrawSprite(c, d, gUnk_0979D8B8, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 0xFB00);
 }
 
 void task_bos_ursula_border_3(UrsulaBorderWork* work) {
@@ -2639,7 +2639,7 @@ void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
     if (work->state != 4 && BosUrsulaIsGimmickActive() == 0) {
         pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, 0x800, 0xFC00);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, SPRITE_PRIORITY(2), 0xFC00);
     }
 }
 
@@ -2743,10 +2743,10 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, 0xC00,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, SPRITE_PRIORITY(3),
         0xFE00);
     WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, 0xC01,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, SPRITE_PRIORITY(3) | SPRITE_FLAG_HFLIP,
         0xFE00);
 }
 

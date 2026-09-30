@@ -4,6 +4,15 @@
 #include "types.h"
 #include "listpool.h"
 
+enum SpriteFlag {
+    SPRITE_FLAG_HFLIP = 0x1,
+    SPRITE_FLAG_VFLIP = 0x2,
+    SPRITE_FLAG_BLEND = 0x4,
+    SPRITE_FLAG_MOSAIC = 0x8,
+    SPRITE_FLAG_NO_MOSAIC = 0x10
+};
+
+#define SPRITE_PRIORITY(n) ((n) << 10)
 
 typedef struct PaletteSlot {
     void* src;

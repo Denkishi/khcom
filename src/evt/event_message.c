@@ -3531,9 +3531,9 @@ void event_chara_2(EventCharaWork* p) {
         h = p->obj.drawFlags;
 
         if (p->unk_1B1 == 0) {
-            h &= 0xFFFE;
+            h &= ~SPRITE_FLAG_HFLIP;
         } else {
-            h |= 1;
+            h |= SPRITE_FLAG_HFLIP;
         }
         x = GetEventCharaScreenX(p);
         y = (p->unk_184 >> 8) + gEventCharaParams[p->arg.chara].spriteYOffset - (gEventState->y >> 8);
@@ -3587,10 +3587,10 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) != 0) {
         gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         v = p->obj.drawFlags;
-        EvtObjSetDrawFlags(&p->obj, v | 4);
+        EvtObjSetDrawFlags(&p->obj, v | SPRITE_FLAG_BLEND);
     } else {
         v = p->obj.drawFlags;
-        EvtObjSetDrawFlags(&p->obj, p->obj.drawFlags & 0xFFFB);
+        EvtObjSetDrawFlags(&p->obj, p->obj.drawFlags & ~SPRITE_FLAG_BLEND);
         p->unk_1B8 = 0;
     }
 
@@ -4271,42 +4271,42 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
 
     if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_HFLIP) {
         if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
-            z |= 0x401;
-            z &= 0xF7FF;
+            z |= SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP;
+            z &= ~SPRITE_PRIORITY(2);
             EvtObjSetDrawFlags(&p->obj, z);
         } else {
-            z |= 0x801;
-            z &= 0xFBFF;
+            z |= SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
+            z &= ~SPRITE_PRIORITY(1);
             EvtObjSetDrawFlags(&p->obj, z);
 
             if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
-                z |= 0x801;
+                z |= SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
                 EvtObjSetDrawFlags(&p->obj, z);
             } else {
-                z |= 1;
-                z &= 0xF7FF;
+                z |= SPRITE_FLAG_HFLIP;
+                z &= ~SPRITE_PRIORITY(2);
                 EvtObjSetDrawFlags(&p->obj, z);
             }
         }
     } else {
         if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
-            z |= 0x400;
-            z &= 0xF7FF;
-            z &= 0xFFFE;
+            z |= SPRITE_PRIORITY(1);
+            z &= ~SPRITE_PRIORITY(2);
+            z &= ~SPRITE_FLAG_HFLIP;
             EvtObjSetDrawFlags(&p->obj, z);
         } else {
-            z |= 0x800;
-            z &= 0xFBFF;
-            z &= 0xFFFE;
+            z |= SPRITE_PRIORITY(2);
+            z &= ~SPRITE_PRIORITY(1);
+            z &= ~SPRITE_FLAG_HFLIP;
             EvtObjSetDrawFlags(&p->obj, z);
 
             if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
-                z |= 0x800;
-                z &= 0xFFFE;
+                z |= SPRITE_PRIORITY(2);
+                z &= ~SPRITE_FLAG_HFLIP;
                 EvtObjSetDrawFlags(&p->obj, z);
             } else {
-                z &= 0xF7FF;
-                z &= 0xFFFE;
+                z &= ~SPRITE_PRIORITY(2);
+                z &= ~SPRITE_FLAG_HFLIP;
                 EvtObjSetDrawFlags(&p->obj, z);
             }
         }
@@ -6644,7 +6644,7 @@ void msgface_2(MsgFaceWork* p) {
         } else {
             v = p->flipX;
             if (v != 0) {
-                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, 1, 50);
+                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, SPRITE_FLAG_HFLIP, 50);
             } else {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, v, 50);
             }
@@ -6966,7 +6966,7 @@ void msgwait_yesno_2(MsgWaitWork* p) {
         break;
     case 1:
         DrawSprite(120, 80, gUnk_09EF126C[1], p->tiles3, p->palette3, 0, 0, 10);
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, 0, 1, 9);
+        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, 0, SPRITE_FLAG_HFLIP, 9);
         DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots, p->textSlotCount)) >> 1, 67, p->textSlots, p->palette4, 0, p->textSlotCount);
         DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots2, p->textSlotCount2)) >> 1, 82, p->textSlots2, p->palette4, 0, p->textSlotCount2);
         break;

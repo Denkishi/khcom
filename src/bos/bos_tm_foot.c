@@ -876,11 +876,11 @@ void task_bos_tm_clb_2(TmClbWork* work) {
 
     p = AllocObjAffineAngle(work->angle, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, 0x800,
+    DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, SPRITE_PRIORITY(2),
                (u16)(-0x1002 - (work->y >> 8) * 4));
     // @bug AllocObjAffineAngle returns NULL at angle 0 (NULL write).
     p->doubleSize = 1;
-    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, 0x800,
+    DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, SPRITE_PRIORITY(2),
                (u16)(-0x1003 - (work->y >> 8) * 4));
 }
 
@@ -1655,14 +1655,14 @@ void task_bos_tm_arm_2(TmArmWork* work) {
         WorldToScreen(&x, &y, work->src->x + j->curX, work->src->y,
                       work->src->z + j->curY);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
+        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                    (depth -= (work->src->y >> 8) * 4, (u16)depth));
         j = &work->joints.all[i];
         affine = AllocObjAffine(j->angle, 256, 256, 0);
         WorldToScreen(&x, &y, work->src->x2 + j->curX, work->src->y2,
                       work->src->z2 + j->curY);
         depth = -4100;
-        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
+        DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                    (depth -= (work->src->y2 >> 8) * 4, (u16)depth));
     }
 
@@ -1676,13 +1676,13 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     affine = AllocObjAffine(j->angle, mode, 256, 0);
     WorldToScreen(&x, &y, work->src->x + j->curX, work->src->y,
                   work->src->z + j->curY);
-    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
+    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                (endDepth = -4100 - (work->src->y >> 8) * 4, (u16)endDepth));
     j = &work->joints.all[3];
     affine = AllocObjAffine(j->angle, mode, 256, 0);
     WorldToScreen(&x, &y, work->src->x2 + j->curX, work->src->y2,
                   work->src->z2 + j->curY);
-    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, 0x800,
+    DrawSprite(x, y, j->gfx, work->tiles, pal, affine, SPRITE_PRIORITY(2),
                (endDepth = -4100 - (work->src->y2 >> 8) * 4, (u16)endDepth));
     TaskPoolDraw(&work->tasks);
 }

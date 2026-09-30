@@ -3793,11 +3793,11 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         }
     }
     if (w->view != 13) {
-        DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4, w->palette, 0, 0x800, 10);
+        DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4, w->palette, 0, SPRITE_PRIORITY(2), 10);
     }
     if (w->tiles6 != NULL) {
-        DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6, w->palette3, 0, 0xC00, 10000);
-        DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6, w->palette3, 0, 0xC00, 10000);
+        DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6, w->palette3, 0, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6, w->palette3, 0, SPRITE_PRIORITY(3), 10000);
     }
     if (w->tiles12 != NULL) {
         DrawSprite(w->x7 >> 8, 0,
@@ -3848,8 +3848,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
             if (w->popupActive == 0) {
                 DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
             }
-            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
@@ -3865,8 +3865,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         if (w->tiles7 != NULL) {
-            DrawSprite(164, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(164, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(164, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(164, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(164, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -3885,8 +3885,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         DrawDeckNames(w, 1);
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -3908,8 +3908,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
     case 9:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -3923,8 +3923,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
     case 11:
         DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -3943,8 +3943,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
     case 12:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -3958,8 +3958,8 @@ static void Deckmenu2_2(DeckMenuWork* w) {
     case 15:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
@@ -4389,13 +4389,13 @@ void SetDeckMenuHandAnim(DeckMenuWork* w) {
     case 11:
     case 13:
         AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
-        w->handFlags &= ~1;
+        w->handFlags &= ~SPRITE_FLAG_HFLIP;
         break;
     case 1:
     case 3:
     case 12:
         AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
-        t = w->handFlags | 1;
+        t = w->handFlags | SPRITE_FLAG_HFLIP;
         w->handFlags = t;
         break;
     }

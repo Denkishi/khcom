@@ -154,22 +154,22 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
 
     if (w->gfxLoaded != 0) {
         affine = AllocObjAffine(0, w->scaleX, w->scaleY, 1);
-        DrawSprite(w->x + w->x2, w->y + w->y2, w->cardDef->gfx, w->tiles, w->palette2, affine, 0x400,
+        DrawSprite(w->x + w->x2, w->y + w->y2, w->cardDef->gfx, w->tiles, w->palette2, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 70);
-        DrawSprite(w->x + w->x2, w->y + w->y2, w->cardBack->gfx, w->tiles2, w->palette3, affine, 0x400,
+        DrawSprite(w->x + w->x2, w->y + w->y2, w->cardBack->gfx, w->tiles2, w->palette3, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 69);
 
         if (w->premium == 0) {
             DrawSprite(w->x + w->x2, w->y + w->y2, gUnk_09EE981C[w->cardDef->value], w->tiles3, w->palette3,
-                       affine, 0x400, sPremireChanceCardPriorities[w->position] + 68);
+                       affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[w->position] + 68);
         } else {
             DrawSprite(w->x + w->x2, w->y + w->y2, gUnk_09EE9894[w->cardDef->value], w->tiles5, w->palette,
-                       affine, 0x400, sPremireChanceCardPriorities[w->position] + 68);
+                       affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[w->position] + 68);
         }
     }
 
     if (w->state == 2 && w->tiles4 != NULL) {
-        DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, 0, 0x400,
+        DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, 0, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 67);
     }
 }

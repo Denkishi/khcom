@@ -3040,21 +3040,21 @@ void StaffRollRunScript(StaffRollWork* w) {
             break;
         case 11:
             e = StaffRollGetScriptObj(w);
-            e->drawFlags |= 4;
+            e->drawFlags |= SPRITE_FLAG_BLEND;
             StaffRollBlendAlphaIn(w, 0x2000, w->script[w->scriptPos + 4]);
             break;
         case 12:
             e = StaffRollGetScriptObj(w);
-            e->drawFlags |= 4;
+            e->drawFlags |= SPRITE_FLAG_BLEND;
             StaffRollBlendAlphaOut(w, 0x2000, w->script[w->scriptPos + 4]);
             break;
         case 13:
             e = StaffRollGetScriptObj(w);
-            e->drawFlags |= 4;
+            e->drawFlags |= SPRITE_FLAG_BLEND;
             break;
         case 14:
             e = StaffRollGetScriptObj(w);
-            e->drawFlags &= 0xFFFB;
+            e->drawFlags &= ~SPRITE_FLAG_BLEND;
             break;
         case 15:
             e = StaffRollGetScriptObj(w);

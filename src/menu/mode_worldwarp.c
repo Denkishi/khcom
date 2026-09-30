@@ -349,33 +349,33 @@ void WorldWarpDraw(void) {
         break;
     }
 
-    DrawSprite(sWorldWarpBarX >> 8, 0, tile0, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB8);
+    DrawSprite(sWorldWarpBarX >> 8, 0, tile0, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB8);
     if (sWorldWarpState != 2) {
-        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, tile1, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
-        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, tile2, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, tile1, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, tile2, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB9);
     }
 #else
     if (sWorldWarpState != 2) {
-        DrawSprite(sWorldWarpBarX >> 8, 0, gUnk_0999F400, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB8);
-        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gUnk_0999F416, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
-        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gUnk_0999F44A, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, 0xC00, 0xBB9);
+        DrawSprite(sWorldWarpBarX >> 8, 0, gUnk_0999F400, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB8);
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gUnk_0999F416, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gUnk_0999F44A, sWorldWarpBarTiles, sWorldWarpBarPalette, 0, SPRITE_PRIORITY(3), 0xBB9);
     }
 #endif
 
     if (sWorldWarpState == 2) {
         DrawSprite((s16)(sWarpIcons[sWorldWarpCursor].x * 8 + 22),
             (s16)(sWarpIcons[sWorldWarpCursor].y * 8 + 12),
-            AnimUpdate(&sWorldWarpHighlightAnim), gUnk_02035518, gUnk_0203551C, 0, 0x800, 0x898);
+            AnimUpdate(&sWorldWarpHighlightAnim), gUnk_02035518, gUnk_0203551C, 0, SPRITE_PRIORITY(2), 0x898);
         ApproachValueHalf(&sWorldWarpCursorX, (sWarpIcons[sWorldWarpCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldWarpCursorY, (sWarpIcons[sWorldWarpCursor].y << 11) + 0xFFFFFA00);
         DrawSprite(sWorldWarpCursorX >> 8, sWorldWarpCursorY >> 8, AnimUpdate(&sWorldWarpCursorAnim),
-            sWorldWarpCursorTiles, sWorldWarpCursorPalette, 0, 0x800, 0x7D0);
+            sWorldWarpCursorTiles, sWorldWarpCursorPalette, 0, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpIconSprites[i] != NULL) {
             DrawSprite((s16)(sWarpIcons[i].x * 8 + 16), (s16)(sWarpIcons[i].y * 8 + 16),
-                sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, 0x800, (u16)(i + 0x834));
+                sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, SPRITE_PRIORITY(2), (u16)(i + 0x834));
         }
     }
 

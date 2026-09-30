@@ -1305,7 +1305,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 
 static void cardbattle_2(CardBattleWork* w) {
     if (gCardBattleState->cardsOpen != 0 && gRikuBtlWork->hcEffect != 28 && w->stockCount != 0 && w->stockValue != 0) {
-        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, 16, 12);
+        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC, 12);
     }
 
     TaskPoolDraw(&w->tasks);
@@ -2831,7 +2831,7 @@ void NO_Card_2(CardDisplayWork* p) {
         if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
             if (p->scaleX != 0) {
                 if (gRikuBtlWork->hcEffect != 7) {
-                    DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, 0x410, (u16)(p->priority - 1));
+                    DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 1));
                 }
             }
         }
@@ -3724,13 +3724,13 @@ void Reload_Card_2(CardDisplayWork* p) {
 
                 if (w->gfx != NULL) {
                     DrawSprite(p->x >> 8, y + 17, w->gfx,
-                               p->tiles3, gCardBattleState->palette, affine2, 0x400,
+                               p->tiles3, gCardBattleState->palette, affine2, SPRITE_PRIORITY(1),
                                (u16)(p->priority - 1));
                 }
 
                 if (gCardBattleState->reloadGaugeFull[1] == 1 && w->gfx2 != NULL) {
                     DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
-                               gCardBattleState->palette, affine, 0x400,
+                               gCardBattleState->palette, affine, SPRITE_PRIORITY(1),
                                (u16)(p->priority - 1));
                 }
             }

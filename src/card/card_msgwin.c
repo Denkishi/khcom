@@ -231,7 +231,7 @@ static void msgwin_2(CardMsgWinWork* w) {
 
     if (w->tiles3 != NULL) {
         if (w->faceFlip != 0) {
-            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, 0, 1, 0);
+            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, 0, SPRITE_FLAG_HFLIP, 0);
         } else {
             DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, 0, 0, 0);
         }
@@ -243,7 +243,7 @@ static void msgwin_2(CardMsgWinWork* w) {
     }
 
     if (w->tiles != NULL) {
-        DrawSprite(w->cursorX >> 8, w->cursorY >> 8, w->gfx3, w->tiles, w->palette3, 0, 1, 9);
+        DrawSprite(w->cursorX >> 8, w->cursorY >> 8, w->gfx3, w->tiles, w->palette3, 0, SPRITE_FLAG_HFLIP, 9);
     }
 
     if (w->tiles2 != NULL) {

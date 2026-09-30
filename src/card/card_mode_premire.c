@@ -371,12 +371,12 @@ void HCEffectName_2(HcEffectNameWork* w) {
     }
 #else
     if (w->visible == 1) {
-        DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, 0x400, 10);
-        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, 0x400, 10);
+        DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
     }
 #endif
 }
@@ -416,7 +416,7 @@ s32 NumberPlus_1(NumberPlusWork* w) {
     return 0;
 }
 void NumberPlus_2(NumberPlusWork* w) {
-    DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, 0, 16, 0);
+    DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC, 0);
 }
 void NumberPlus_3(NumberPlusWork* w) {
     ReleaseObjTiles(w->tiles);

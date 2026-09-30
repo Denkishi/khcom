@@ -510,9 +510,9 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
 
     if (w->tiles6 != NULL) {
         DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6,
-                   w->palette3, 0, 0xC00, 10000);
+                   w->palette3, 0, SPRITE_PRIORITY(3), 10000);
         DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6,
-                   w->palette3, 0, 0xC00, 10000);
+                   w->palette3, 0, SPRITE_PRIORITY(3), 10000);
     }
 
     if (w->handVisible != 0) {
@@ -523,7 +523,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
     }
 
     DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4,
-               w->palette, 0, 0x800, 10);
+               w->palette, 0, SPRITE_PRIORITY(2), 10);
 
     if (w->tiles7 != NULL) {
         DrawSprite(168, 86, w->gfx4, w->tiles7, w->palette5, 0, 0, 20);
@@ -753,12 +753,12 @@ void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* w) {
     case 10:
     case 11:
         AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
-        w->handFlags &= ~1;
+        w->handFlags &= ~SPRITE_FLAG_HFLIP;
         break;
     case 1:
     case 3:
         AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
-        t = w->handFlags | 1;
+        t = w->handFlags | SPRITE_FLAG_HFLIP;
         w->handFlags = t;
         break;
     }

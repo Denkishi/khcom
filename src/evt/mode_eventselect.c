@@ -277,7 +277,7 @@ void Hanabira_c_2(EffectWork* w) {
     x = (w->x >> 8) - (gEventState->x >> 8);
     t = w->y >> 8;
     y = t + (w->z >> 8) - (gEventState->y >> 8);
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, 0x800, (u16)(-0x1004 - t * 4));
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), (u16)(-0x1004 - t * 4));
 }
 
 void Hanabira_c_3(EffectWork* w) {

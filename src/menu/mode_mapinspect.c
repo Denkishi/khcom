@@ -921,21 +921,21 @@ void MapInspectDraw(void) {
 #else
             gUnk_0999D9CA,
 #endif
-            gUnk_02035E50, gUnk_02035E4C, 0, 0xC00, 0xBB8);
+            gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB8);
         DrawSprite(128, gMapInspectBarY[0] >> 8,
 #ifdef VERSION_EU
             sUnkEu_09F85030[gLanguage],
 #else
             gUnk_0999D9E6,
 #endif
-            gUnk_02035E50, gUnk_02035E4C, 0, 0xC00, 0xBB9);
+            gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(128, gMapInspectBarY[1] >> 8,
 #ifdef VERSION_EU
             sUnkEu_09F85044[gLanguage],
 #else
             gUnk_0999DA1A,
 #endif
-            gUnk_02035E50, gUnk_02035E4C, 0, 0xC00, 0xBB9);
+            gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB9);
     }
     n = (GetMapInspectTabCount(gMapInspectTab) + 2) / 3 - 4;
     if (gMapInspectGridScroll <= n) {
@@ -949,27 +949,27 @@ void MapInspectDraw(void) {
 #else
             gUnk_0999D9C0,
 #endif
-            gUnk_02035E50, gUnk_02035E4C, 0, 0x800, 0x898);
+            gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x898);
 
     if (gMapInspectState == 2) {
         switch (gMapInspectMenuState) {
         case 1:
             ApproachValueHalf(&gMapInspectCursorX, sMapCardCategoryDefs[gMapInspectTab].displayIndex * 3584 - 256);
             ApproachValueHalf(&gMapInspectCursorY, 0);
-            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, 0x800, 0x7D0);
+            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
             break;
         case 0:
             ApproachValueHalf(&gMapInspectCursorX, (gMapInspectGridCol * 23 - 2) * 256);
             ApproachValueHalf(&gMapInspectCursorY, (gMapInspectGridRow * 26 + 16) * 256);
-            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, 0x800, 0x7D0);
-            DrawSprite(gMapInspectGridCol * 23 - 3, gMapInspectGridRow * 26 + 28, AnimUpdate(&gMapInspectHighlightAnim), gMapInspectHighlightTiles, gMapInspectCategoryPalette, 0, 0x800, 0x7DA);
+            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
+            DrawSprite(gMapInspectGridCol * 23 - 3, gMapInspectGridRow * 26 + 28, AnimUpdate(&gMapInspectHighlightAnim), gMapInspectHighlightTiles, gMapInspectCategoryPalette, 0, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 2:
             GetMapInspectSelectedEntry();
             ApproachValueHalf(&gMapInspectCursorX, gMapInspectValueCol * 12288 + 0x9200);
             ApproachValueHalf(&gMapInspectCursorY, gMapInspectValueRow * 2048 + 0x1000);
-            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, 0x800, 0x7D0);
-            DrawSprite(gMapInspectValueCol * 48 + 133, gMapInspectValueRow * 8 + 35, AnimUpdate(&gMapInspectHighlightAnim), gMapInspectHighlightTiles, gMapInspectCategoryPalette, 0, 0x800, 0x7DA);
+            DrawSprite(gMapInspectCursorX >> 8, gMapInspectCursorY >> 8, AnimUpdate(&gMapInspectCursorAnim), gUnk_02035E50, gUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
+            DrawSprite(gMapInspectValueCol * 48 + 133, gMapInspectValueRow * 8 + 35, AnimUpdate(&gMapInspectHighlightAnim), gMapInspectHighlightTiles, gMapInspectCategoryPalette, 0, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 3:
             ApproachValueHalf(&gMapInspectCursorX, gMapInspectConfirmCursor == 0 ? 0x3400 : 0x7400);
@@ -1003,10 +1003,10 @@ void MapInspectDraw(void) {
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
             if (gMapInspectGridSprites[i][j] != NULL) {
-                DrawSprite(j * 23 + 13, i * 26 + 47, gMapInspectGridSprites[i][j], gMapInspectGridTiles[i][j], gMapInspectGridPalettes[i][j], 0, 0x800, 0x83E);
+                DrawSprite(j * 23 + 13, i * 26 + 47, gMapInspectGridSprites[i][j], gMapInspectGridTiles[i][j], gMapInspectGridPalettes[i][j], 0, SPRITE_PRIORITY(2), 0x83E);
 
                 if (gUnk_02035F30[i][j] != 0) {
-                    DrawSprite(j * 23 + 13, i * 26 + 47, anim, gUnk_02035F70, gUnk_02035F48, 0, 0x800, 0x834);
+                    DrawSprite(j * 23 + 13, i * 26 + 47, anim, gUnk_02035F70, gUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x834);
                 }
             }
         }
@@ -1014,14 +1014,14 @@ void MapInspectDraw(void) {
 
     if (gMapInspectMenuState != 1) {
         if (gMapInspectCardSprite != NULL) {
-            DrawSprite(112, 56, gMapInspectCardSprite, gMapInspectCardTiles, gMapInspectCardPalette, 0, 0x800, 0x848);
+            DrawSprite(112, 56, gMapInspectCardSprite, gMapInspectCardTiles, gMapInspectCardPalette, 0, SPRITE_PRIORITY(2), 0x848);
         }
 
         if (gUnk_02035F50 != NULL) {
-            DrawSprite(112, 56, gUnk_02035F50, gUnk_02035F4C, gUnk_02035F48, 0, 0x800, 0x83E);
+            DrawSprite(112, 56, gUnk_02035F50, gUnk_02035F4C, gUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x83E);
 
             if (gUnk_02035F90 != 0) {
-                DrawSprite(112, 56, AnimUpdate(&gUnk_02035F58), gUnk_02035F54, gUnk_02035F48, 0, 0x800, 0x834);
+                DrawSprite(112, 56, AnimUpdate(&gUnk_02035F58), gUnk_02035F54, gUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x834);
             }
         }
 

@@ -617,7 +617,7 @@ void WorldInspectDraw(void) {
                       gUnk_0999CF38,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
-                      0xC00, 3000);
+                      SPRITE_PRIORITY(3), 3000);
 #ifdef VERSION_EU
     }
 
@@ -630,7 +630,7 @@ void WorldInspectDraw(void) {
                       gUnk_0999CF54,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
-                      0xC00, 3001);
+                      SPRITE_PRIORITY(3), 3001);
         DrawSprite(112, sWorldInspectBarY[1] >> 8,
 #ifdef VERSION_EU
                       third,
@@ -638,7 +638,7 @@ void WorldInspectDraw(void) {
                       gUnk_0999CF88,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
-                      0xC00, 3001);
+                      SPRITE_PRIORITY(3), 3001);
     }
 
     prio = 0x400;

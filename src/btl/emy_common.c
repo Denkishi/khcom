@@ -639,10 +639,10 @@ s32 _0800CDF0(EmyWork* work) {
 
         if (BgAnimIsStopped()) {
             gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-            work->spriteFlags = 4;
+            work->spriteFlags = SPRITE_FLAG_BLEND;
             SetBlendAlpha(16 - work->steps, work->steps);
         } else {
-            work->spriteFlags &= 0xFFFB;
+            work->spriteFlags &= ~SPRITE_FLAG_BLEND;
         }
         ApproachValue(&work->scaleX, 10, work->steps);
         ApproachValue(&work->scaleY, 0x200, work->steps);

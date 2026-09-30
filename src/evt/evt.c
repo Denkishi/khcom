@@ -42,7 +42,7 @@ void CreateEvtObjTask(void* pool, EvtObj* obj, s32 res, s32 anim, s32 a, s32 b, 
     EvtObjSetPos(obj, a, b, c);
     obj->flags = 0;
     obj->groundZ = 0;
-    obj->drawFlags = 0x800;
+    obj->drawFlags = SPRITE_PRIORITY(2);
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;
@@ -62,7 +62,7 @@ Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32
     EvtObjSetPos(obj, a, b, c);
     obj->flags = 0;
     obj->groundZ = 0;
-    obj->drawFlags = 0x800;
+    obj->drawFlags = SPRITE_PRIORITY(2);
     obj->scaleY = 0x100;
     obj->scaleX = 0x100;
     obj->angle = 0;

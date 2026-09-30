@@ -864,7 +864,7 @@ void deckexchange_2(DeckExchangeWork* w) {
     if (w->popupActive == 0) {
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 3);
     }
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEB000, w->tiles3, w->palette, 0, 0x800, 10);
+    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEB000, w->tiles3, w->palette, 0, SPRITE_PRIORITY(2), 10);
     switch (w->view) {
     case 0:
         if (w->holding != 0) {
@@ -1198,12 +1198,12 @@ void SetDeckExchangeHandAnim(DeckExchangeWork* w) {
     case 10:
     case 11:
         AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-        w->handFlags &= ~1;
+        w->handFlags &= ~SPRITE_FLAG_HFLIP;
         break;
     case 1:
     case 3:
         AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
-        t = w->handFlags | 1;
+        t = w->handFlags | SPRITE_FLAG_HFLIP;
         w->handFlags = t;
         break;
     }

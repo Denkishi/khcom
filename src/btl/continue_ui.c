@@ -275,7 +275,7 @@ static s32 Continue_1(ContinueWork* p) {
     p->unk_64 += 4;
 }
 static void Continue_2(ContinueWork* p) {
-    DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, 4, 100);
+    DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, SPRITE_FLAG_BLEND, 100);
     DrawSprite(120, 120, p->gfx2, p->tiles2, p->palette2, 0, 0, 100);
 }
 static void Continue_3(ContinueWork* p) {

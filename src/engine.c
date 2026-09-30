@@ -705,8 +705,8 @@ void UpdateSpriteOam(void) {
         affine = entry->affine;
         partCount = *parts++;
         tileOffset = 0;
-        if (mosaic != 0 && (entry->flags & 0x10) == 0) {
-            entry->flags |= 8;
+        if (mosaic != 0 && (entry->flags & SPRITE_FLAG_NO_MOSAIC) == 0) {
+            entry->flags |= SPRITE_FLAG_MOSAIC;
         }
         for (j = 0; j < partCount; j++) {
             attr0 = *parts++;
@@ -786,9 +786,9 @@ void UpdateSpriteOam(void) {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
                 oam[2] = ((attr2 & 0xFFF) + tiles->index) | (palette << 12);
             }
-            oam[0] |= (entry->flags & 8) << 9;
-            oam[0] |= (entry->flags & 4) << 8;
-            oam[2] |= entry->flags & 0xC00;
+            oam[0] |= (entry->flags & SPRITE_FLAG_MOSAIC) << 9;
+            oam[0] |= (entry->flags & SPRITE_FLAG_BLEND) << 8;
+            oam[2] |= entry->flags & SPRITE_PRIORITY(3);
             oam += 4;
             emitted++;
         }

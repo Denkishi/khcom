@@ -531,12 +531,12 @@ void task_allmap_bar_2(AllmapBarWork* work) {
     }
 #ifdef VERSION_EU
     DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, 0,
-        0xC00, 1000);
+        SPRITE_PRIORITY(3), 1000);
 #else
-    DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, 0, 0xC00, 1000);
+    DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 1000);
 #endif
-    DrawSprite(128, work->y >> 8, gUnk_0976DB68, work->tiles2, work->palette, 0, 0xC00, 1001);
-    DrawSprite(128, work->y2 >> 8, gUnk_0976DB9C, work->tiles2, work->palette, 0, 0xC00, 1002);
+    DrawSprite(128, work->y >> 8, gUnk_0976DB68, work->tiles2, work->palette, 0, SPRITE_PRIORITY(3), 1001);
+    DrawSprite(128, work->y2 >> 8, gUnk_0976DB9C, work->tiles2, work->palette, 0, SPRITE_PRIORITY(3), 1002);
 }
 
 void task_allmap_bar_3(AllmapBarWork* work) {

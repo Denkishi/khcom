@@ -3516,23 +3516,23 @@ void NewGameSlotMenuDraw(void) {
     s32 u;
 
     DrawSprite(128, gNewGameSlotMenuWork->y >> 8, gUnk_09EF8D68[1], gNewGameSlotMenuWork->tiles2,
-        gNewGameSlotMenuWork->palette2, 0, 0xC00, 90);
+        gNewGameSlotMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
     DrawSprite(128, gNewGameSlotMenuWork->y2 >> 8, gUnk_09EF8D68[2], gNewGameSlotMenuWork->tiles2,
-        gNewGameSlotMenuWork->palette2, 0, 0xC00, 90);
+        gNewGameSlotMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
 
     if (gNewGameSlotMenuWork->isRiku == 0) {
         DrawSprite(56, 112, gSor1ff00Frames[0], gNewGameSlotMenuWork->tiles4,
-            gNewGameSlotMenuWork->palette4, 0, 0x400, 80);
+            gNewGameSlotMenuWork->palette4, 0, SPRITE_PRIORITY(1), 80);
         DrawSprite(72, 96, gDona2Fl00Frames[0], gNewGameSlotMenuWork->tiles5, gNewGameSlotMenuWork->palette5, 0,
-            0x401, 81);
+            SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
         DrawSprite(40, 96, gGoofy2Fl00Frames[0], gNewGameSlotMenuWork->tiles6, gNewGameSlotMenuWork->palette6, 0,
-            0x400, 81);
+            SPRITE_PRIORITY(1), 81);
     } else {
         DrawSprite(56, 112, gRikuFf00Frames[0], gNewGameSlotMenuWork->tiles7, gNewGameSlotMenuWork->palette7, 0,
-            0x400, 81);
+            SPRITE_PRIORITY(1), 81);
     }
 
-    DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, gNewGameSlotMenuWork->tiles3, gNewGameSlotMenuWork->palette3, 0, 0x400, 90);
+    DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, gNewGameSlotMenuWork->tiles3, gNewGameSlotMenuWork->palette3, 0, SPRITE_PRIORITY(1), 90);
     t = 45;
     u = gNewGameSlotMenuWork->selectedSlot * t;
     ApproachValueHalf(&gNewGameSlotMenuWork->y3, (gNewGameSlotMenuWork->slotBaseY + u) << 8);
@@ -3986,65 +3986,65 @@ void LoadGameMenuDraw(void) {
     switch (gLanguage) {
     case 0:
         DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
         break;
     case 1:
         DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843D8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843D8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843D8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
         break;
     case 4:
         DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843E8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843E8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843E8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
         break;
     case 3:
         DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843F8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843F8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843F8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
         break;
     case 2:
     default:
         DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F84408[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F84408[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
         DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F84408[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+            gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
         break;
     }
 #else
     DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+        gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
     DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, 0, 0xC00, 90);
+        gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 90);
     DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, 0, 0xC00, 80);
+        gLoadGameMenuWork->palette2, 0, SPRITE_PRIORITY(3), 80);
 #endif
 
     if (gLoadGameMenuWork->selectedSlot <= 1) {
         DrawSprite(56, 112, gSor1ff00Frames[0], gLoadGameMenuWork->tiles3,
-            gLoadGameMenuWork->palette3, 0, 0x400, 80);
+            gLoadGameMenuWork->palette3, 0, SPRITE_PRIORITY(1), 80);
         DrawSprite(72, 96, gDonaFl00Frames[0], gLoadGameMenuWork->tiles4,
-            gLoadGameMenuWork->palette4, 0, 0x401, 81);
+            gLoadGameMenuWork->palette4, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
         DrawSprite(40, 96, gGoofyFl00Frames[0], gLoadGameMenuWork->tiles5,
-            gLoadGameMenuWork->palette5, 0, 0x400, 81);
+            gLoadGameMenuWork->palette5, 0, SPRITE_PRIORITY(1), 81);
     } else {
         DrawSprite(56, 112, gRikuFf00Frames[0], gLoadGameMenuWork->tiles6, gLoadGameMenuWork->palette6, 0,
-            0x400, 81);
+            SPRITE_PRIORITY(1), 81);
     }
 
     if (gLoadGameMenuWork->showRikuSlots != 0) {
@@ -4056,7 +4056,7 @@ void LoadGameMenuDraw(void) {
     u = t * gLoadGameMenuWork->selectedSlot;
     ApproachValueHalf(&gLoadGameMenuWork->y3, (gLoadGameMenuWork->slotBaseY + u) << 8);
     DrawSprite(76, gLoadGameMenuWork->y3 >> 8, AnimGetGfx(&gLoadGameMenuWork->anim),
-        gLoadGameMenuWork->tiles, gLoadGameMenuWork->palette, 0, 0x400, 70);
+        gLoadGameMenuWork->tiles, gLoadGameMenuWork->palette, 0, SPRITE_PRIORITY(1), 70);
     DrawTextSlots(100, u + (gLoadGameMenuWork->slotBaseY + 22), gLoadGameMenuWork->textSlots,
         gLoadGameMenuWork->palette7, 50, gLoadGameMenuWork->textSlotCount);
 }
@@ -5455,11 +5455,11 @@ void Task_MapMenu_2(MapMenuWork* w) {
     s32 k;
 
 #ifdef VERSION_EU
-    DrawSprite(128, w->y >> 8, gUnkEu_09F84738[0], w->tiles2, w->palette2, 0, 0x400, 90);
-    DrawSprite(128, w->y2 >> 8, gUnkEu_09F84738[1], w->tiles2, w->palette2, 0, 0x400, 90);
+    DrawSprite(128, w->y >> 8, gUnkEu_09F84738[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, w->y2 >> 8, gUnkEu_09F84738[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
 #else
-    DrawSprite(128, w->y >> 8, gUnk_09EF8E74[0], w->tiles2, w->palette2, 0, 0x400, 90);
-    DrawSprite(128, w->y2 >> 8, gUnk_09EF8E74[1], w->tiles2, w->palette2, 0, 0x400, 90);
+    DrawSprite(128, w->y >> 8, gUnk_09EF8E74[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, w->y2 >> 8, gUnk_09EF8E74[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
 #endif
 
     if (
@@ -5469,126 +5469,126 @@ void Task_MapMenu_2(MapMenuWork* w) {
         (gMapRoomState->flags & ROOM_FLAG_HIDE_PLAYER)) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             DrawSprite(w->x8 >> 8, w->y4 >> 8, gRikuFf00Frames[0], w->tiles8, w->palette6,
-                0, 0x400, 80);
+                0, SPRITE_PRIORITY(1), 80);
         } else {
             DrawSprite(w->x8 >> 8, w->y4 >> 8, gSor1ff00Frames[0], w->tiles8,
-                w->palette6, 0, 0x400, 80);
+                w->palette6, 0, SPRITE_PRIORITY(1), 80);
         }
 
         DrawSprite(w->x8 >> 8, w->y4 >> 8, gUnk_09EE1380[0], w->tiles7, w->palette7, 0,
-            0x400, 81);
+            SPRITE_PRIORITY(1), 81);
     }
 
     if (w->panelsVisible != 0) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 4:
-            DrawSprite(w->x >> 8, 0, gUnkEu_09F84720[0], w->tiles3, w->palette2, 0, 0x400, 80);
+            DrawSprite(w->x >> 8, 0, gUnkEu_09F84720[0], w->tiles3, w->palette2, 0, SPRITE_PRIORITY(1), 80);
             break;
         case 0:
         case 1:
         case 3:
-            DrawSprite(w->x >> 8, 0, gUnkEu_09F84718[0], w->tiles3, w->palette2, 0, 0x400, 80);
+            DrawSprite(w->x >> 8, 0, gUnkEu_09F84718[0], w->tiles3, w->palette2, 0, SPRITE_PRIORITY(1), 80);
             break;
         case 2:
         default:
-            DrawSprite(w->x >> 8, 0, gUnkEu_09F84728[0], w->tiles3, w->palette2, 0, 0x400, 80);
+            DrawSprite(w->x >> 8, 0, gUnkEu_09F84728[0], w->tiles3, w->palette2, 0, SPRITE_PRIORITY(1), 80);
             break;
         }
 #else
-        DrawSprite(w->x >> 8, 0, gUnk_09EF8E6C[0], w->tiles3, w->palette2, 0, 0x400, 80);
+        DrawSprite(w->x >> 8, 0, gUnk_09EF8E6C[0], w->tiles3, w->palette2, 0, SPRITE_PRIORITY(1), 80);
 #endif
 #ifdef VERSION_EU
-        DrawSprite(w->x2 >> 8, 14, gUnkEu_09F84730[0], w->tiles4, w->palette2, 0, 0x400, 90);
+        DrawSprite(w->x2 >> 8, 14, gUnkEu_09F84730[0], w->tiles4, w->palette2, 0, SPRITE_PRIORITY(1), 90);
 #else
-        DrawSprite(w->x2 >> 8, 14, gUnk_09EF8E64[0], w->tiles4, w->palette2, 0, 0x400, 90);
+        DrawSprite(w->x2 >> 8, 14, gUnk_09EF8E64[0], w->tiles4, w->palette2, 0, SPRITE_PRIORITY(1), 90);
 #endif
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84560[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84560[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84560[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84560[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84560[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84560[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 1:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84574[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84574[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84574[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84574[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84574[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84574[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 4:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84588[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84588[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84588[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84588[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84588[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84588[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 3:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8459C[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8459C[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F8459C[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8459C[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8459C[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F8459C[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 2:
             default:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F845B0[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F845B0[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F845B0[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F845B0[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F845B0[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F845B0[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E80[0], w->tiles5, w->palette3, 0, 0x400, 80);
-            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E80[1], w->tiles5, w->palette3, 0, 0x400, 81);
-            DrawSprite(w->x4 >> 8, 103, gUnk_09EF8E80[2], w->tiles5, w->palette3, 0, 0x400,
+            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E80[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E80[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+            DrawSprite(w->x4 >> 8, 103, gUnk_09EF8E80[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                 81);
 #endif
 
             if (w->tiles9[0] != NULL) {
                 DrawSprite((w->x4 >> 8) + 18, 124, w->gfx[0], w->tiles9[0],
-                    w->palette9[0], 0, 0x400, 80);
+                    w->palette9[0], 0, SPRITE_PRIORITY(1), 80);
             }
         } else {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F844FC[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F844FC[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F844FC[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F844FC[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F844FC[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F844FC[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 1:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84510[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84510[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84510[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84510[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84510[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84510[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 4:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84524[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84524[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84524[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84524[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84524[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84524[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 3:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84538[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84538[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84538[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84538[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F84538[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F84538[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 2:
             default:
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8454C[0], w->tiles5, w->palette3, 0, 0x400, 80);
-                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8454C[1], w->tiles5, w->palette3, 0, 0x400, 81);
-                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F8454C[2], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8454C[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+                DrawSprite(w->x3 >> 8, 0, gUnkEu_09F8454C[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+                DrawSprite(w->x4 >> 8, 103, gUnkEu_09F8454C[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E0C[0], w->tiles5, w->palette3, 0, 0x400, 80);
-            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E0C[1], w->tiles5, w->palette3, 0, 0x400, 81);
-            DrawSprite(w->x4 >> 8, 103, gUnk_09EF8E0C[2], w->tiles5, w->palette3, 0, 0x400,
+            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E0C[0], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 80);
+            DrawSprite(w->x3 >> 8, 0, gUnk_09EF8E0C[1], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1), 81);
+            DrawSprite(w->x4 >> 8, 103, gUnk_09EF8E0C[2], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                 81);
 #endif
 
@@ -5597,7 +5597,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
 
                 if (w->tiles9[i] != NULL) {
                     DrawSprite((w->x4 >> 8) + k, 124, w->gfx[i], w->tiles9[i],
-                        w->palette9[i], 0, 0x400, 80);
+                        w->palette9[i], 0, SPRITE_PRIORITY(1), 80);
                 }
             }
         }
@@ -5606,29 +5606,29 @@ void Task_MapMenu_2(MapMenuWork* w) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
-                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F844FC[3], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F844FC[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 1:
-                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84510[3], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84510[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 4:
-                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84524[3], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84524[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 3:
-                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84538[3], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F84538[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             case 2:
             default:
-                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F8454C[3], w->tiles5, w->palette3, 0, 0x400,
+                DrawSprite(w->x5 >> 8, 144, gUnkEu_09F8454C[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(w->x5 >> 8, 144, gUnk_09EF8E0C[3], w->tiles5, w->palette3, 0, 0x400,
+            DrawSprite(w->x5 >> 8, 144, gUnk_09EF8E0C[3], w->tiles5, w->palette3, 0, SPRITE_PRIORITY(1),
                 81);
 #endif
             DrawTextSlots((w->x5 >> 8) + 16, 145, w->textSlots, w->palette8, 50,
@@ -5640,44 +5640,44 @@ void Task_MapMenu_2(MapMenuWork* w) {
         case 0:
             if (w->cursorVisible != 0) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[w->cursor], w->tiles6, w->palette5, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84678[w->cursor], w->tiles6, w->palette4, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[7], w->tiles6, w->palette5, 0, 0x400,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845C4[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
             break;
         case 1:
             if (w->cursorVisible != 0) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[w->cursor], w->tiles6, w->palette5, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84698[w->cursor], w->tiles6, w->palette4, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[7], w->tiles6, w->palette5, 0, 0x400,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F845E8[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
             break;
         case 4:
             if (w->cursorVisible != 0) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[w->cursor], w->tiles6, w->palette5, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846B8[w->cursor], w->tiles6, w->palette4, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[7], w->tiles6, w->palette5, 0, 0x400,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F8460C[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
             break;
         case 3:
             if (w->cursorVisible != 0) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[w->cursor], w->tiles6, w->palette5, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846D8[w->cursor], w->tiles6, w->palette4, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[7], w->tiles6, w->palette5, 0, 0x400,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84630[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
             break;
@@ -5685,11 +5685,11 @@ void Task_MapMenu_2(MapMenuWork* w) {
         default:
             if (w->cursorVisible != 0) {
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[w->cursor], w->tiles6, w->palette5, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
                 DrawSprite(w->x6 >> 8, 26, gUnkEu_09F846F8[w->cursor], w->tiles6, w->palette4, 0,
-                    0x400, 81);
+                    SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[7], w->tiles6, w->palette5, 0, 0x400,
+                DrawSprite(w->x6 >> 8, 26, gUnkEu_09F84654[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                     80);
             }
             break;
@@ -5697,11 +5697,11 @@ void Task_MapMenu_2(MapMenuWork* w) {
 #else
         if (w->cursorVisible != 0) {
             DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[w->cursor], w->tiles6, w->palette5, 0,
-                0x400, 81);
+                SPRITE_PRIORITY(1), 81);
             DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E44[w->cursor], w->tiles6, w->palette4, 0,
-                0x400, 81);
+                SPRITE_PRIORITY(1), 81);
         } else {
-            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[7], w->tiles6, w->palette5, 0, 0x400,
+            DrawSprite(w->x6 >> 8, 26, gUnk_09EF8E20[7], w->tiles6, w->palette5, 0, SPRITE_PRIORITY(1),
                 80);
         }
 #endif
@@ -5711,18 +5711,18 @@ void Task_MapMenu_2(MapMenuWork* w) {
             case 1:
                 ApproachValueHalf(&w->x7, 0x4800);
                 DrawSprite(w->x7 >> 8, 80, AnimGetGfx(&w->anim), w->tiles, w->palette, 0,
-                    1, 60);
+                    SPRITE_FLAG_HFLIP, 60);
                 break;
             case 2:
                 ApproachValueHalf(&w->x7, 0x8800);
                 DrawSprite(w->x7 >> 8, 80, AnimGetGfx(&w->anim), w->tiles, w->palette, 0,
-                    1, 60);
+                    SPRITE_FLAG_HFLIP, 60);
                 break;
             case 0:
             default:
                 ApproachValueHalf(&w->y3, (w->cursor * 19 + 16) << 8);
                 DrawSprite(24, w->y3 >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, 0,
-                    0x401, 60);
+                    SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 60);
                 break;
             }
         }
@@ -6212,55 +6212,55 @@ void Task_MapSave_2(MapSaveWork* w) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        DrawSprite(128, w->y >> 8, gUnkEu_09F8447C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8447C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(w->x >> 8, 0, gUnkEu_09F8447C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+        DrawSprite(128, w->y >> 8, gUnkEu_09F8447C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8447C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(w->x >> 8, 0, gUnkEu_09F8447C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
         break;
     case 1:
-        DrawSprite(128, w->y >> 8, gUnk_09EF8D8C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(128, w->y2 >> 8, gUnk_09EF8D8C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(w->x >> 8, 0, gUnk_09EF8D8C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+        DrawSprite(128, w->y >> 8, gUnk_09EF8D8C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, w->y2 >> 8, gUnk_09EF8D8C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(w->x >> 8, 0, gUnk_09EF8D8C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
         break;
     case 4:
-        DrawSprite(128, w->y >> 8, gUnkEu_09F8444C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8444C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(w->x >> 8, 0, gUnkEu_09F8444C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+        DrawSprite(128, w->y >> 8, gUnkEu_09F8444C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8444C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(w->x >> 8, 0, gUnkEu_09F8444C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
         break;
     case 3:
-        DrawSprite(128, w->y >> 8, gUnkEu_09F8445C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8445C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(w->x >> 8, 0, gUnkEu_09F8445C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+        DrawSprite(128, w->y >> 8, gUnkEu_09F8445C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8445C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(w->x >> 8, 0, gUnkEu_09F8445C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
         break;
     case 2:
     default:
-        DrawSprite(128, w->y >> 8, gUnkEu_09F8446C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8446C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-        DrawSprite(w->x >> 8, 0, gUnkEu_09F8446C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+        DrawSprite(128, w->y >> 8, gUnkEu_09F8446C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, w->y2 >> 8, gUnkEu_09F8446C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+        DrawSprite(w->x >> 8, 0, gUnkEu_09F8446C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
         break;
     }
 #else
-    DrawSprite(128, w->y >> 8, gUnk_09EF8D8C[1], w->tiles2, w->palette2, 0, 0x400, 90);
-    DrawSprite(128, w->y2 >> 8, gUnk_09EF8D8C[2], w->tiles2, w->palette2, 0, 0x400, 90);
-    DrawSprite(w->x >> 8, 0, gUnk_09EF8D8C[0], w->tiles2, w->palette2, 0, 0x400, 80);
+    DrawSprite(128, w->y >> 8, gUnk_09EF8D8C[1], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, w->y2 >> 8, gUnk_09EF8D8C[2], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 90);
+    DrawSprite(w->x >> 8, 0, gUnk_09EF8D8C[0], w->tiles2, w->palette2, 0, SPRITE_PRIORITY(1), 80);
 #endif
 
     if (gMapRoomState->flags & ROOM_FLAG_HIDE_PLAYER) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             DrawSprite(w->x3 >> 8, w->y3 >> 8, gRikuFf00Frames[0], w->tiles4, w->palette5,
-                0, 0x400, 80);
+                0, SPRITE_PRIORITY(1), 80);
         } else {
             DrawSprite(w->x3 >> 8, w->y3 >> 8, gSor1ff00Frames[0], w->tiles4,
-                w->palette5, 0, 0x400, 80);
+                w->palette5, 0, SPRITE_PRIORITY(1), 80);
         }
     }
 
     if (w->dialogVisible != 0) {
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-            DrawSprite(72, 96, gDonaFl00Frames[0], w->tiles5, w->palette6, 0, 0x401, 81);
-            DrawSprite(40, 96, gGoofyFl00Frames[0], w->tiles6, w->palette7, 0, 0x400, 81);
+            DrawSprite(72, 96, gDonaFl00Frames[0], w->tiles5, w->palette6, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
+            DrawSprite(40, 96, gGoofyFl00Frames[0], w->tiles6, w->palette7, 0, SPRITE_PRIORITY(1), 81);
         }
 
-        DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, w->tiles3, w->palette3, 0, 0x400, 90);
+        DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, w->tiles3, w->palette3, 0, SPRITE_PRIORITY(1), 90);
         DrawTextSlots(100, 59, w->textSlots, w->palette4, 50, w->textSlotCount);
 
         if (w->confirmCursor != 0) {
@@ -6286,12 +6286,12 @@ void Task_MapSave_2(MapSaveWork* w) {
         switch (w->confirmCursor) {
         case 1:
             ApproachValueHalf(&w->x2, 0x7800);
-            DrawSprite(w->x2 >> 8, 110, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 1,
+            DrawSprite(w->x2 >> 8, 110, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_FLAG_HFLIP,
                 40);
             break;
         case 2:
             ApproachValueHalf(&w->x2, 0xB000);
-            DrawSprite(w->x2 >> 8, 110, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 1,
+            DrawSprite(w->x2 >> 8, 110, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_FLAG_HFLIP,
                 40);
             break;
         }

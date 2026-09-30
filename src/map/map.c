@@ -3761,26 +3761,26 @@ void Mode_MenuNew_2(void) {
 s32 LoadGameMenuLoadFile(u8 a) {
     switch (a) {
     case 0:
-        if (SaveRepairFileLarge(0) == 2) {
+        if (SaveRepairFileLarge(0) == SAVE_OK) {
             SaveLoadFileLarge(0);
             return 1;
         }
         break;
     case 1:
-        if (SaveRepairFileLarge(1) == 2) {
+        if (SaveRepairFileLarge(1) == SAVE_OK) {
             SaveLoadFileLarge(1);
             return 1;
         }
         break;
     case 2:
-        if (SaveRepairFileSmall(0) == 2) {
+        if (SaveRepairFileSmall(0) == SAVE_OK) {
             SaveLoadFileSmall(0);
             InitRikuDeckForWorld(gGameState.world);
             return 1;
         }
         break;
     case 3:
-        if (SaveRepairFileSmall(1) == 2) {
+        if (SaveRepairFileSmall(1) == SAVE_OK) {
             SaveLoadFileSmall(1);
             InitRikuDeckForWorld(gGameState.world);
             return 1;
@@ -5974,13 +5974,13 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 LoadBgMap(0, gUnk_0998C744, 0x800);
 
-                if (SaveRepairFileSmall(1) == 2) {
+                if (SaveRepairFileSmall(1) == SAVE_OK) {
                     MapSaveShowSummary(w, 3);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998BF44, 0x800);
 
-                if (SaveRepairFileSmall(0) == 2) {
+                if (SaveRepairFileSmall(0) == SAVE_OK) {
                     MapSaveShowSummary(w, 2);
                 }
             }
@@ -5988,13 +5988,13 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 LoadBgMap(0, gUnk_0998B744, 0x800);
 
-                if (SaveRepairFileLarge(1) == 2) {
+                if (SaveRepairFileLarge(1) == SAVE_OK) {
                     MapSaveShowSummary(w, 1);
                 }
             } else {
                 LoadBgMap(0, gUnk_0998AF44, 0x800);
 
-                if (SaveRepairFileLarge(0) == 2) {
+                if (SaveRepairFileLarge(0) == SAVE_OK) {
                     MapSaveShowSummary(w, 0);
                 }
             }

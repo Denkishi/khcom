@@ -22,7 +22,7 @@ void mode_copyright1_0(s32 arg) {
 
     gCopyrightSaveCorrupted = 0;
 
-    if (SaveRepairHeader() == 1) {
+    if (SaveRepairHeader() == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearHeader();
         SaveClearSystem();
@@ -32,27 +32,27 @@ void mode_copyright1_0(s32 arg) {
         SaveClearFileSmall(1);
     }
 
-    if (SaveRepairFileLarge(0) == 1) {
+    if (SaveRepairFileLarge(0) == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearFileLarge(0);
     }
 
-    if (SaveRepairFileLarge(1) == 1) {
+    if (SaveRepairFileLarge(1) == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearFileLarge(1);
     }
 
-    if (SaveRepairFileSmall(0) == 1) {
+    if (SaveRepairFileSmall(0) == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearFileSmall(0);
     }
 
-    if (SaveRepairFileSmall(1) == 1) {
+    if (SaveRepairFileSmall(1) == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearFileSmall(1);
     }
 
-    if (SaveRepairSystem() == 1) {
+    if (SaveRepairSystem() == SAVE_BAD_CHECKSUM) {
         gCopyrightSaveCorrupted = 1;
         SaveClearSystem();
     }

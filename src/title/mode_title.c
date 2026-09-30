@@ -288,12 +288,12 @@ void mode_title_1(void) {
         }
         m4aSongNumStart(SONG_SYS_KETTEI);
 
-        if (SaveRepairSystem() == 2) {
+        if (SaveRepairSystem() == SAVE_OK) {
             gTitleMenuChoice = 3;
-        } else if (SaveRepairFileLarge(0) == 2 || SaveRepairFileLarge(1) == 2) {
+        } else if (SaveRepairFileLarge(0) == SAVE_OK || SaveRepairFileLarge(1) == SAVE_OK) {
             gTitleMenuChoice = 1;
         } else if ((gGameState.flags & GAME_FLAG_SORA_CLEAR) &&
-                   (SaveRepairFileSmall(0) == 2 || SaveRepairFileSmall(1) == 2)) {
+                   (SaveRepairFileSmall(0) == SAVE_OK || SaveRepairFileSmall(1) == SAVE_OK)) {
             gTitleMenuChoice = 1;
         } else {
             gTitleMenuChoice = 0;

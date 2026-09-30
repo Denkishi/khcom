@@ -7,6 +7,7 @@
 #include "sprites_evt.h"
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
+#include "sprite_palettes.h"
 #include "battle_backgrounds.h"
 #include "gba/keys.h"
 #include "fade.h"
@@ -582,7 +583,7 @@ void MapTutorialDropBarrel(MapTutorialWork* w) {
         w->obj.height = 24;
         w->obj.speed = 2;
         w->tiles = AllocObjTiles(0x400, gUnk_09858B3C);
-        w->palette = LoadObjPalette(&gUnk_099910C4[0x220], 32);
+        w->palette = LoadObjPalette(gUnk_099912E4, 32);
         a = &w->anim;
         AnimInit(a, gUnk_09EF8460, gUnk_09EF8424);
         AnimStart(a, 0, 1);
@@ -660,7 +661,7 @@ void MapTutorialSpawnEnemy(MapTutorialWork* w) {
         }
         w->flip = v;
         w->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
-        w->palette = LoadObjPalette(&gUnk_08F691E4[0x5C0], 32);
+        w->palette = LoadObjPalette(gEmy00Palette, 32);
         a = &w->anim;
         AnimInit(a, gEmy00L06Anims, gEmy00L06Frames);
         AnimStart(a, 0, 1);

@@ -1049,7 +1049,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
     w->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
-    w->tiles5 = LoadObjTiles(&gRiCardF0RedTiles[0x132C], 0x280);
+    w->tiles5 = LoadObjTiles(gUnk_090A1FB2, 0x280);
 #endif
 #ifdef VERSION_EU
     w->gfx7 = gDeckButtonLabelSprites[gLanguage][0];
@@ -3086,7 +3086,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
     ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
     ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(&gUnk_09614418[32],
+    LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         0x05000200),
                 (u16)(w->palette4->count << 5));
@@ -3389,7 +3389,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* w, void* a) {
     ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
     ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(&gUnk_09614418[32],
+    LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         0x05000200),
                 (u16)(w->palette4->count << 5));
@@ -3679,7 +3679,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a) {
     ApproachValueHalf(&w->x, sDeckTabPointerX[w->cursorCol] << 8);
     ApproachValueHalf(&w->y, sDeckTabPointerY[w->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(&gUnk_09614418[32],
+    LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         0x05000200),
                 (u16)(w->palette4->count << 5));

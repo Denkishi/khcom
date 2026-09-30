@@ -2152,7 +2152,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* w) {
     w->obj.fieldPosition.y -= w->obj.fieldPosition.ground;
     w->obj.angle = 0xAD;
     w->obj.height = 32;
-    w->palette = LoadObjPalette(&gUnk_099910C4[0x140], 32);
+    w->palette = LoadObjPalette(gUnk_09991204, 32);
     w->tiles = AllocSpriteFrameTiles(0x400);
     UpdateSpriteFrameTiles(w->tiles, gMapUiSpriteUs_098A94A0, gUnk_0994BF64);
     ColliderInit(&w->collider, 6, 16, 0);
@@ -2218,7 +2218,7 @@ void Task_MapGmk_Spider_0(MapGmkSpiderWork* w, MapGmkPlacement* arg) {
     w->obj.fieldPosition = arg->pos;
     w->obj.height = 24;
     w->tiles = AllocObjTiles(0x720, gEmy2103Tiles);
-    w->palette = LoadObjPalette(&gUnk_08F691E4[0x6A0], 32);
+    w->palette = LoadObjPalette(gEmy21Palette, 32);
     AnimInit(&w->anim, gEmy2103Anims, gEmy2103Frames);
     AnimStart(&w->anim, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);

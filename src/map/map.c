@@ -3470,9 +3470,9 @@ void NewGameSlotMenuSelectSlot(u8 a) {
         gNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gNewGameSlotMenuWork->textSlots);
 
         if (gNewGameSlotMenuWork->isRiku == 0) {
-            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, &gUnk_099910C4[0xB40]);
+            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, gUnk_09991C04);
         } else {
-            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, &gUnk_099910C4[0xB80]);
+            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, gUnk_09991C44);
         }
     } else {
         NewGameSlotMenuLoadFloorTiles(i, 1, 13);
@@ -3696,11 +3696,7 @@ void Mode_MenuNew_0(void) {
     gNewGameSlotMenuWork->palette3 = LoadObjPalette(gUnk_09991D24, 32);
     gNewGameSlotMenuWork->tiles3 = LoadObjTiles(&gMapUiSpriteUs_098A8F28[0x62], 0x4C0);
     gNewGameSlotMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
-#ifdef VERSION_EU
-    gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, &gUnk_098A8628[0x120E]);
-#else
-    gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, &gUnk_098A8628[0x4BA]);
-#endif
+    gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
     AnimInit(&gNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
     AnimStart(&gNewGameSlotMenuWork->anim, 0, 1);
     gNewGameSlotMenuWork->palette8 = LoadObjPalette(gUnk_09991C04, 32);
@@ -3962,9 +3958,9 @@ void LoadGameMenuSelectSlot(u8 a) {
         gLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gLoadGameMenuWork->textSlots);
 
         if (a <= 1) {
-            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, &gUnk_099910C4[0xB40]);
+            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, gUnk_09991C04);
         } else {
-            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, &gUnk_099910C4[0xB80]);
+            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, gUnk_09991C44);
         }
     } else {
         LoadGameMenuLoadFloorTiles(a, 1, 13);
@@ -4085,10 +4081,10 @@ void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
         switch (w->selectedSlot) {
         case 0:
             if (w->showRikuSlots != 0) {
-                LoadBgMap(1, &gUnk_09985F44[0x3000], 0x800);
+                LoadBgMap(1, gUnk_09988F44, 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
-                LoadBgMap(1, &gUnk_09985F44[0x2000], 0x800);
+                LoadBgMap(1, gUnk_09987F44, 0x800);
                 SetBgScroll(1, 0, (u16)-3);
             }
             break;
@@ -4328,11 +4324,7 @@ void Mode_MenuLoad_0(s32 arg) {
     gLoadGameMenuWork->tiles6 = AllocObjTiles(0x400, gRikuFf00Tiles);
     gLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, 32);
     gLoadGameMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
-#ifdef VERSION_EU
-    gLoadGameMenuWork->tiles = AllocObjTiles(0x120, &gUnk_098A8628[0x120E]);
-#else
     gLoadGameMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
-#endif
     AnimInit(&gLoadGameMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
     AnimStart(&gLoadGameMenuWork->anim, 0, 1);
     gLoadGameMenuWork->palette7 = LoadObjPalette(gUnk_09991C04, 32);

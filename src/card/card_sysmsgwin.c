@@ -174,7 +174,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
             break;
         }
 
-        w->tiles2 = LoadObjTiles(&gUnk_093F8C8E[0xC1E], 0x1800);
+        w->tiles2 = LoadObjTiles(gUnk_093F98AC, 0x1800);
 
         if (w->tiles2 == NULL) {
             w->unk_146[1] = 1;

@@ -117,7 +117,7 @@ void CardName_0(CardNameWork* w) {
     v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
     w->messageX = v;
 #endif
-    w->tiles = LoadObjTiles(&gUnk_093F8C8E[0xC1E], 0x1800);
+    w->tiles = LoadObjTiles(gUnk_093F98AC, 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
     w->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, 1);

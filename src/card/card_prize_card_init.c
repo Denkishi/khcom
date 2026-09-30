@@ -1484,11 +1484,10 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
 #else
 #ifdef VERSION_JP
     work->tiles = AllocObjTiles(0x480, 0);
-    SetObjTileSource(work->tiles, &gUnk_093F47E4[0x22DC]);
 #else
     work->tiles = AllocObjTiles(0x6C0, 0);
-    SetObjTileSource(work->tiles, &gUnk_093F47E4[0x22E8]);
 #endif
+    SetObjTileSource(work->tiles, gUnk_093F6ACC);
     AnimInit(&work->anim, gUnk_09EF1224, gUnk_09EF1220);
 #endif
     AnimStart(&work->anim, 0, 1);

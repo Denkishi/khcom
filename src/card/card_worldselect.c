@@ -401,7 +401,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
         ReleaseObjTiles(w->tiles);
         w->tiles = AllocObjTiles(0x1E0, 0);
-        SetObjTileSource(w->tiles, &gUnk_093F47E4[0xD88]);
+        SetObjTileSource(w->tiles, gUnk_093F556C);
         AnimInit(&w->anim, gUnk_09EF11CC, gUnk_09EF11B8);
         AnimStart(&w->anim, 0, 1);
         w->gfx = AnimGetGfx(&w->anim);
@@ -481,7 +481,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
         LoadBgMap(1, gUnk_096102B8, 0x800);
 #else
         LoadBgTiles(1, gUnk_09508098, 0x2020);
-        LoadBgMap(1, &gUnk_0960F2B8[0x1000], 0x800);
+        LoadBgMap(1, gUnk_096102B8, 0x800);
 #endif
         w->card->flags &= 0xFDFF;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
@@ -548,7 +548,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
                         LoadBgMap(1, gUnk_096102B8, 0x800);
 #else
                         LoadBgTiles(1, gUnk_09508098, 0x2020);
-                        LoadBgMap(1, &gUnk_0960F2B8[0x1000], 0x800);
+                        LoadBgMap(1, gUnk_096102B8, 0x800);
 #endif
                         w->card->flags &= 0xFDFF;
                         RemoveMapSelectCard(w);

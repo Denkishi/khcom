@@ -994,17 +994,20 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
             a = (MapcardWork*)ListPoolNext(&a->node);
         }
 
-counting:
-        if (b != NULL) {
-            if (b->flags & 1) {
-                cnt++;
-                b = (MapcardWork*)ListPoolNext(&b->node);
-                goto counting;
+        for (;;) {
+            if (b != NULL) {
+                if (b->flags & 1) {
+                    cnt++;
+                    b = (MapcardWork*)ListPoolNext(&b->node);
+                    continue;
+                }
+
+                if (cnt == 6) {
+                    found = b;
+                }
             }
 
-            if (cnt == 6) {
-                found = b;
-            }
+            break;
         }
 
         if (found != NULL) {
@@ -1616,14 +1619,13 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0) {
             if ((s8)w->valueColumn > 3) {
                 z = 1;
-                goto up_done;
+                break;
             }
 
             w->valueColumn++;
             z = 0;
         }
 
-    up_done:
         if (z == 1) {
             w->valueColumn = FindLastMapSelectValueInRow(w);
 
@@ -1642,14 +1644,13 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0) {
             if ((s8)w->valueColumn > 3) {
                 z = 1;
-                goto down_done;
+                break;
             }
 
             w->valueColumn++;
             z = 0;
         }
 
-    down_done:
         if (z == 1) {
             w->valueColumn = FindLastMapSelectValueInRow(w);
 

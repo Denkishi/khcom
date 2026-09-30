@@ -74,7 +74,7 @@ void Event_0(s32 arg) {
     }
 
     // @bug? Should mask with 0x7FFF.
-    if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & 0x80) {
+    if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
         FadeStartIn(1, 999);
     }
 

@@ -2706,7 +2706,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
         RequestDma3Clear(GetBgCharBase(1), 0x8000);
 #endif
 
-        if (work->seqDef->keyframes->flags & 0x80) {
+        if (work->seqDef->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             SetBackdropColor(31, 31, 31);
             FadeStartIn(1, 0x40);
         }
@@ -2714,7 +2714,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
         u = gEventBackgroundDefs[work->eventId];
         if (u != NULL) {
             if (u->tiles2 != NULL) {
-                if ((u->flags & 1) != 0) {
+                if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                     SetupBg(0, 3, 31, 14);
                     SetupBg(1, 0, 29, 0);
                     SetupBg(2, 2, 30, 0);
@@ -2749,7 +2749,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
         }
         if ((work->seqDef->keyframes->flags & 0xFF0) == 0) {
             FadeStartIn(0, 64);
-        } else if ((work->seqDef->keyframes->flags & 0xFF0) == 0x80) {
+        } else if ((work->seqDef->keyframes->flags & 0xFF0) == CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             FadeStartIn(1, 120);
         }
         work->timer = 0;
@@ -2804,7 +2804,7 @@ u8 eu_0806C848(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
     if (u != NULL) {
         if (u->tiles2 != NULL) {
-            if ((u->flags & 1) != 0) {
+            if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                 LoadBgTiles(2, u->tiles2, u->tilesSize2);
             } else if (u->compression[0] == 1 || u->compression[0] == 3) {
                 eu_080059D4(1, u->tiles2);
@@ -2813,7 +2813,7 @@ u8 eu_0806C848(EventSeqWork* work) {
             }
         }
         if (u->maps3 != NULL) {
-            if ((u->flags & 2) != 0) {
+            if ((u->flags & EVENT_BG_FLAG_ALPHA_BLEND) != 0) {
                 gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
                 gBldAlpha = 0x050E;
                 SetBgPriority(2, 1);
@@ -2890,7 +2890,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
 
     if (u != NULL) {
         if (u->tiles2 != NULL) {
-            if ((u->flags & 1) != 0) {
+            if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                 SetupBg(0, 3, 31, 14);
                 SetupBg(1, 0, 29, 0);
                 SetupBg(2, 2, 30, 0);
@@ -2915,7 +2915,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             LoadBgPalette(3, u->palette, u->paletteSize);
 
             if (u->tiles2 != NULL) {
-                if ((u->flags & 1) != 0) {
+                if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                     LoadBgTiles(2, u->tiles2, u->tilesSize2);
                 } else {
                     LoadBgTiles(1, u->tiles2, u->tilesSize2);
@@ -2936,7 +2936,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             }
 
             if (u->maps3 != NULL) {
-                if ((u->flags & 2) != 0) {
+                if ((u->flags & EVENT_BG_FLAG_ALPHA_BLEND) != 0) {
                     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
                     gBldAlpha = 0x050E;
                     SetBgPriority(2, 1);
@@ -3024,7 +3024,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
 #ifndef VERSION_EU
     if ((work->seqDef->keyframes->flags & 0xFF0) == 0) {
         FadeStartIn(0, 64);
-    } else if ((work->seqDef->keyframes->flags & 0xFF0) == 0x80) {
+    } else if ((work->seqDef->keyframes->flags & 0xFF0) == CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
         FadeStartIn(1, 120);
     }
 
@@ -3036,7 +3036,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             TaskCreate(&work->tasks, &gTaskDescEvMapObj, &work->eventId);
         }
 
-        if ((u->flags & 1) != 0) {
+        if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
             func_080CA35C();
             TaskCreate(&work->tasks, &gTaskDescPooMapanime, NULL);
         }
@@ -3094,7 +3094,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
     }
 
     if (p->timer == p->seqDef->unk_24) {
-        gEventState->flags |= 2;
+        gEventState->flags |= EVENT_FLAG_STARTED;
     } else {
         s32 t = p->seqDef->keyframes->flags & 0xFF0;
 
@@ -3113,7 +3113,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         gBtlWork->viewY = gEventState->cameraY;
     }
 
-    if ((gEventState->flags & 3) == 2) {
+    if ((gEventState->flags & (EVENT_FLAG_PAUSED | EVENT_FLAG_STARTED)) == EVENT_FLAG_STARTED) {
         gEventState->frame++;
     }
 
@@ -3390,7 +3390,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork->fadeAmount = 5;
         break;
     default:
-        if ((p->keyframes->flags & 0x2000) == 0) {
+        if ((p->keyframes->flags & CHARA_KEYFRAME_FLAG_DEFER_SPAWN) == 0) {
             CreateEvtObjTask(&p->tasks, &p->obj, p->arg.chara, p->keyframes->anim, p->keyframes->x, p->keyframes->y, p->keyframes->z);
             p->hasObj = 1;
         } else {
@@ -3431,15 +3431,15 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         }
     }
 
-    if (p->keyframes[p->keyframe].flags & 0x100) {
-        p->obj.flags |= 4;
+    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_NO_SHADOW) {
+        p->obj.flags |= EVTOBJ_FLAG_NO_SHADOW;
     } else {
-        p->obj.flags &= ~4;
+        p->obj.flags &= ~EVTOBJ_FLAG_NO_SHADOW;
     }
 
-    if (p->keyframes[p->keyframe].flags & 0x200) {
-        gEventState->flags |= 1;
-        gEventState->flags |= 4;
+    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PLAYER_CONTROL) {
+        gEventState->flags |= EVENT_FLAG_PAUSED;
+        gEventState->flags |= EVENT_FLAG_PLAYER_CONTROL;
         p->speed = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
     }
@@ -3490,7 +3490,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         return 0;
     }
 
-    if (p->keyframes[p->keyframe].flags & 0x100000) {
+    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) {
         if (gFrameCounter % 6 == 0) {
             u16 v = GetRandom() % 7 + 4;
 
@@ -3513,9 +3513,9 @@ void event_chara_2(EventCharaWork* p) {
     save = p->obj.z;
     e = &p->keyframes[p->keyframe];
 
-    if (e->flags & 0x80) {
+    if (e->flags & CHARA_KEYFRAME_FLAG_BOB) {
         p->obj.z = gSineTable[p->bobPhase] * 2 + save;
-    } else if (e->flags & 0x40000) {
+    } else if (e->flags & CHARA_KEYFRAME_FLAG_BOB_LARGE) {
         p->obj.z = gSineTable[p->bobPhase] * 3 + save;
     }
 
@@ -3558,7 +3558,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
         return 0;
     }
 
-    if ((p->keyframes[p->keyframe].flags & 0x8000) != 0) {
+    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_END) != 0) {
         return 0;
     }
 
@@ -3566,7 +3566,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     p->steps = p->keyframes[p->keyframe].frame - gEventState->frame;
     p->animId = p->keyframes[p->keyframe].anim;
 
-    if ((p->keyframes[p->keyframe].flags & 0x4000) != 0) {
+    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SPAWN) != 0) {
         CreateEvtObjTask(&p->tasks, &p->obj, p->arg.chara, p->keyframes[p->keyframe].anim,
                       p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y,
                       p->keyframes[p->keyframe].z);
@@ -3574,17 +3574,17 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
         SetupEventCharaShadow(p);
     }
 
-    if ((p->keyframes[p->keyframe].flags & 0x10000) != 0) {
+    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_DESPAWN) != 0) {
         p->finished = 1;
     }
 
-    if ((p->keyframes[p->keyframe].flags & 0x800) != 0) {
+    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
         LoadPalette(&gUnk_096148D8[0x100], (void*)(p->obj.paletteIndex * 32 + 0x05000200), 32);
-    } else if ((p->keyframes[p->keyframe - 1].flags & 0x800) != 0) {
+    } else if ((p->keyframes[p->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
         LoadPalette(gEvtObjResources[p->arg.chara].res.palette, (void*)(p->obj.paletteIndex * 32 + 0x05000200), 32);
     }
 
-    if ((p->keyframes[p->keyframe].flags & 0x100000) != 0) {
+    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) != 0) {
         gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         v = p->obj.drawFlags;
         EvtObjSetDrawFlags(&p->obj, v | 4);
@@ -3595,7 +3595,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     }
 
     if (p->hasObj != 0) {
-        if ((p->keyframes[p->keyframe].flags & 15) == 2) {
+        if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_MOTION_MASK) == CHARA_MOTION_SET_POSITION) {
             EvtObjSetPos(&p->obj, p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y, p->keyframes[p->keyframe].z);
         }
 
@@ -3626,24 +3626,24 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
         }
     }
 
-    switch (e->flags & 15) {
-    case 2:
+    switch (e->flags & CHARA_KEYFRAME_MOTION_MASK) {
+    case CHARA_MOTION_SET_POSITION:
         EvtObjSetPos(&p->obj, p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y, p->keyframes[p->keyframe].z);
         break;
-    case 3:
+    case CHARA_MOTION_MOVE_TO:
         ApproachValue(&p->obj.x, p->keyframes[p->keyframe].x, p->steps);
         ApproachValue(&p->obj.y, p->keyframes[p->keyframe].y, p->steps);
         ApproachValue(&p->obj.z, p->keyframes[p->keyframe].z, p->steps);
         p->steps--;
 
         if (p->steps == 0) {
-            if ((p->keyframes[p->keyframe].flags & 0x1000) == 0) {
+            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_KEEP_ANIM) == 0) {
                 SetEventCharaEndAnim(p);
             }
         }
         break;
-    case 4:
-        if ((e->flags & 32) == 0) {
+    case CHARA_MOTION_WALK:
+        if ((e->flags & CHARA_KEYFRAME_FLAG_FAST) == 0) {
             p->speed = gEventCharaParams[p->arg.chara].slowSpeed;
         } else {
             p->speed = gEventCharaParams[p->arg.chara].fastSpeed;
@@ -3660,15 +3660,15 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
         break;
     }
 
-    if ((e->flags & 0x80) != 0) {
+    if ((e->flags & CHARA_KEYFRAME_FLAG_BOB) != 0) {
         p->bobPhase += 4;
-    } else if ((e->flags & 0x40000) != 0) {
+    } else if ((e->flags & CHARA_KEYFRAME_FLAG_BOB_LARGE) != 0) {
         p->bobPhase += 4;
     } else {
         p->bobPhase = 0;
     }
 
-    if ((e->flags & 0x80000) != 0) {
+    if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) != 0) {
         p->visible ^= 1;
     } else {
         p->visible = 1;
@@ -3918,7 +3918,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
-        if ((e->flags & 0x80000) == 0) {
+        if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
             m4aSongNumStart(SONG_EV_WARPIN);
         }
     }
@@ -3992,7 +3992,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
 
     if (p->arg.chara == 3) {
         e = &p->keyframes[p->keyframe];
-        if ((e->flags & 0x80000) == 0) {
+        if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) == 0) {
             m4aSongNumStart(SONG_EV_WARPOUT);
         }
     }
@@ -4269,8 +4269,8 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
 
     z = p->obj.drawFlags;
 
-    if (p->keyframes[p->keyframe].flags & 0x40) {
-        if (p->keyframes[p->keyframe].flags & 0x10) {
+    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_HFLIP) {
+        if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
             z |= 0x401;
             z &= 0xF7FF;
             EvtObjSetDrawFlags(&p->obj, z);
@@ -4279,7 +4279,7 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
             z &= 0xFBFF;
             EvtObjSetDrawFlags(&p->obj, z);
 
-            if ((p->keyframes[p->keyframe].flags & 0x400) == 0) {
+            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
                 z |= 0x801;
                 EvtObjSetDrawFlags(&p->obj, z);
             } else {
@@ -4289,7 +4289,7 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
             }
         }
     } else {
-        if (p->keyframes[p->keyframe].flags & 0x10) {
+        if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
             z |= 0x400;
             z &= 0xF7FF;
             z &= 0xFFFE;
@@ -4300,7 +4300,7 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
             z &= 0xFFFE;
             EvtObjSetDrawFlags(&p->obj, z);
 
-            if ((p->keyframes[p->keyframe].flags & 0x400) == 0) {
+            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
                 z |= 0x800;
                 z &= 0xFFFE;
                 EvtObjSetDrawFlags(&p->obj, z);
@@ -6044,7 +6044,7 @@ void SetupEventCharaShadow(EventCharaWork* p) {
     case 21:
     case 22:
     case 32:
-        p->obj.flags |= 8;
+        p->obj.flags |= EVTOBJ_FLAG_SHADOW_WIDE;
         break;
     case 37:
         CreateTinkerbellTask(p);
@@ -6058,7 +6058,7 @@ void SetupEventCharaShadow(EventCharaWork* p) {
     case 72:
     case 73:
     case 74:
-        p->obj.flags |= 0x10;
+        p->obj.flags |= EVTOBJ_FLAG_SHADOW_SMALL;
         break;
     case 0:
         break;
@@ -6148,7 +6148,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                     LoadBgMap(p->bg, gUnk_096112B8, 0x800);
                     LoadPalette(gCard00Palette, pal, 32);
 
-                    if ((e->flags & 0x80) != 0) {
+                    if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                         FadeSetPaletteExcluded(15, 1);
                     }
                     gEventState->unk_81 = 1;
@@ -6167,7 +6167,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                     if (p->palette == NULL) {
                         p->palette = LoadObjPalette(gUnk_09614718, 32);
 
-                        if ((e->flags & 0x80) != 0) {
+                        if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                             FadeSetPaletteExcluded(p->palette->index + 16, 1);
                         }
                     }
@@ -6201,7 +6201,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
             LoadBgMap(p->bg, gUnk_096112B8, 0x800);
             LoadPalette(gCard00Palette, pal, 32);
 
-            if ((e->flags & 0x80) != 0) {
+            if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                 FadeSetPaletteExcluded(15, 1);
             }
             gEventState->unk_81 = 1;
@@ -6220,7 +6220,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
             if (p->palette == NULL) {
                 p->palette = LoadObjPalette(gUnk_09614718, 32);
 
-                if ((e->flags & 0x80) != 0) {
+                if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                 FadeSetPaletteExcluded(p->palette->index + 16, 1);
                 }
             }
@@ -6356,7 +6356,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
         } else {
             HideMsgGlyphs();
 
-            if ((e->flags & 0x8000) == 0) {
+            if ((e->flags & MSG_SCRIPT_FLAG_END) == 0) {
                 if (p->script[p->scriptIndex + 1].positionIndex != 4) {
                     p->steps = 8;
                     RequestMsgfaceSlideOut(&p->face);
@@ -6368,7 +6368,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
                     p->textLoaded = 0;
                     p->started = 0;
                     p->scriptIndex++;
-                    gEventState->flags &= ~1;
+                    gEventState->flags &= ~EVENT_FLAG_PAUSED;
                     p->face.unk_08 = 1;
                     SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
                 }
@@ -6401,12 +6401,12 @@ u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
     } else {
         p->steps = 0;
 
-        if ((gEventState->flags & 4) == 0) {
-            gEventState->flags &= ~1;
+        if ((gEventState->flags & EVENT_FLAG_PLAYER_CONTROL) == 0) {
+            gEventState->flags &= ~EVENT_FLAG_PAUSED;
         }
         gEventState->unk_7C = 0;
 
-        if ((e->flags & 0x8000) == 0) {
+        if ((e->flags & MSG_SCRIPT_FLAG_END) == 0) {
             p->started = 0;
             p->textLoaded = 0;
             p->scriptIndex++;
@@ -6427,7 +6427,7 @@ void MsgwinLoadEntry(MsgWinWork* p) {
         p->scrollX = gMsgwinClosedScrollX[n];
     }
 
-    if ((e->flags & 0x20) != 0) {
+    if ((e->flags & MSG_SCRIPT_FLAG_SILHOUETTE) != 0) {
         p->face.unk_03 = 1;
     } else {
         p->face.unk_03 = 0;
@@ -6472,8 +6472,8 @@ void MsgwinTypeStep(MsgWinWork* p) {
             gEventState->talking = 0;
 
             if (p->waitCreated == 0) {
-                if ((p->script[p->scriptIndex].flags & 0x8000) == 0) {
-                    if ((p->script[p->scriptIndex].flags & 0x40) == 0) {
+                if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_END) == 0) {
+                    if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
                         TaskCreate(&p->tasks, &sTaskDescMsgwait, &p->script[p->scriptIndex + 1].positionIndex);
                     } else {
                         TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &p->script[p->scriptIndex + 1].positionIndex);
@@ -6481,7 +6481,7 @@ void MsgwinTypeStep(MsgWinWork* p) {
                 } else {
                     v = 0;
 
-                    if ((p->script[p->scriptIndex].flags & 0x40) == 0) {
+                    if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
                         TaskCreate(&p->tasks, &sTaskDescMsgwait, &v);
                     } else {
                         TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &v);
@@ -6500,11 +6500,11 @@ void MsgwinCheckStart(MsgWinWork* p) {
 
     if (gEventState->frame >= e->frame) {
         if (p->started == 0) {
-            gEventState->flags |= 1;
+            gEventState->flags |= EVENT_FLAG_PAUSED;
             p->started = 1;
             p->steps = 8;
 
-            if ((e->flags & 0x10) != 0) {
+            if ((e->flags & MSG_SCRIPT_FLAG_FOCUS_SPEAKER) != 0) {
                 gEventState->unk_7C = 1;
                 gEventState->speaker = e->portraitId;
                 gEventState->unk_89 = 32;
@@ -7087,7 +7087,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
     if (gEventState->unk_7C == 0) {
         e = &p->keyframes[p->keyframe];
 
-        if (gEventState->frame >= (u16)e->frame && !(e->flags & 0x8000)) {
+        if (gEventState->frame >= (u16)e->frame && !(e->flags & CAMERA_KEYFRAME_FLAG_END)) {
             p->keyframe++;
             e = &p->keyframes[p->keyframe];
             p->unk_15 = 0;
@@ -7096,18 +7096,18 @@ u8 view_1(EventCameraWork* p, Task* task) {
                 ((void (*)(EventCameraWork*))e->callback)(p);
             }
 
-            switch (e->flags & 15) {
-            case 0:
+            switch (e->flags & CAMERA_KEYFRAME_MODE_MASK) {
+            case CAMERA_MODE_FOLLOW:
                 p->approachMode = 0;
                 break;
-            case 1:
+            case CAMERA_MODE_APPROACH:
                 p->approachMode = 1;
                 p->steps = e->duration;
                 break;
             }
         }
 
-        if ((e->flags & 15) != 2) {
+        if ((e->flags & CAMERA_KEYFRAME_MODE_MASK) != CAMERA_MODE_KEEP) {
             if (e->target == 255) {
                 p->targetX = e->x;
                 p->targetY = e->y;
@@ -7119,12 +7119,12 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x10) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FLASH) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(2, e->duration);
 
-                if (!(e->flags & 0x10000)) {
+                if (!(e->flags & CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND)) {
                     m4aSongNumStart(SONG_EV_FLASH01);
                 }
 
@@ -7133,20 +7133,20 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x20) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(1, e->duration);
                 gEventState->unk_7F = 1;
                 p->unk_15 = 1;
 
-                if (e->flags & 0x8000) {
+                if (e->flags & CAMERA_KEYFRAME_FLAG_END) {
                     m4aSongNumStart(SONG_EV_WHITEOUT);
                 }
             }
         }
 
-        if (e->flags & 0x40) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(0, e->duration);
@@ -7155,7 +7155,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x80) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             if (p->unk_15 == 0) {
                 FadeStartIn(1, e->duration);
                 gEventState->unk_7F = 0;
@@ -7163,7 +7163,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x100) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(0, e->duration);
@@ -7172,12 +7172,12 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x200) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_HALF_FLASH) {
             if (p->unk_15 == 0) {
                 ClearEventObjPaletteExclusions();
                 FadeFromAmount(2, 16, e->duration);
 
-                if (!(e->flags & 0x10000)) {
+                if (!(e->flags & CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND)) {
                     m4aSongNumStart(SONG_EV_FLASH00);
                 }
 
@@ -7185,18 +7185,18 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
 
-        if (e->flags & 0x20000) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_WAVE_START) {
             StartBgWave(HBlankIntrEventBgWave);
             p->scanline.enabled = 1;
         }
 
-        if (e->flags & 0x40000) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_WAVE_STOP) {
             p->scanline.enabled = 0;
             ResetHBlankCallback();
             DisableHBlankIntr();
         }
 
-        if (e->flags & 0x4000) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE_LINEAR) {
             if (p->unk_15 == 0) {
                 FadeStartIn(7, e->duration);
             }
@@ -7204,16 +7204,16 @@ u8 view_1(EventCameraWork* p, Task* task) {
             p->unk_15 = 1;
         }
 
-        if (e->flags & 0x2000) {
+        if (e->flags & CAMERA_KEYFRAME_FLAG_SHAKE_SMALL) {
             gEventState->shakeX = GetRandom() % 4;
             gEventState->shakeY = GetRandom() % 4;
-        } else if (e->flags & 0x400) {
+        } else if (e->flags & CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM) {
             gEventState->shakeX = GetRandom() % 8;
             gEventState->shakeY = GetRandom() % 8;
-        } else if (e->flags & 0x800) {
+        } else if (e->flags & CAMERA_KEYFRAME_FLAG_SHAKE_LARGE) {
             gEventState->shakeX = GetRandom() % 16;
             gEventState->shakeY = GetRandom() % 16;
-        } else if (e->flags & 0x1000) {
+        } else if (e->flags & CAMERA_KEYFRAME_FLAG_SWAY) {
             gEventState->shakeX = 0;
             gEventState->shakeY = gSineTable[(p->angle >> 3) & 0xFF] >> 5;
             p->angle += 4;
@@ -7326,11 +7326,11 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
     }
 
-    if (gEventState->flags & 4) {
+    if (gEventState->flags & EVENT_FLAG_PLAYER_CONTROL) {
         SetTaskUpdate(task, (TaskUpdateFunc)_08074EC8);
     }
 
-    if (u != NULL && (u->flags & 1)) {
+    if (u != NULL && (u->flags & EVENT_BG_FLAG_POOH_MAP)) {
         func_080CA368(3, gEventState->cameraX >> 8, gEventState->cameraY >> 8);
     }
 
@@ -7356,7 +7356,7 @@ void EventCameraFollow(EventCameraWork* a) {
     x = gEventState->centerX - 0x7800;
     y = gEventState->centerY - 0x5000;
     e = &a->keyframes[a->keyframe];
-    if (e->flags & 0x2C00) {
+    if (e->flags & (CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_KEYFRAME_FLAG_SHAKE_SMALL)) {
         gEventState->cameraX = x;
         gEventState->cameraY = y;
     } else {

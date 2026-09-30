@@ -5,6 +5,11 @@
 
 struct EventMapObjectDef;
 
+enum EventBackgroundFlag {
+    EVENT_BG_FLAG_POOH_MAP = 0x1,
+    EVENT_BG_FLAG_ALPHA_BLEND = 0x2
+};
+
 typedef struct EventBackgroundDef {
     void* tiles;
     void* tiles2;

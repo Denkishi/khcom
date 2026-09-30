@@ -12,9 +12,9 @@
 static const MessageScriptEntry sEvent074Script[20] = {
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F66C, 0, 300 },
     { 2, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F6DE, 0, 310 },
-    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F748, 32, 340 },
+    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F748, MSG_SCRIPT_FLAG_SILHOUETTE, 340 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F798, 0, 380 },
-    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F7B2, 32, 420 },
+    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F7B2, MSG_SCRIPT_FLAG_SILHOUETTE, 420 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F832, 0, 430 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F862, 0, 460 },
     { 10, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7F8B8, 0, 600 },
@@ -29,16 +29,16 @@ static const MessageScriptEntry sEvent074Script[20] = {
     { 2, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7FBAC, 0, 730 },
     { 10, 7, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7FC08, 0, 740 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7FCA0, 0, 750 },
-    { 10, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7FCEA, 32768, 760 },
+    { 10, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F7FCEA, MSG_SCRIPT_FLAG_END, 760 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent074Script[20] = {
     { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F730F4, 0, 300 },
     { 2, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F730A8, 0, 310 },
-    { 10, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73090, 32, 340 },
+    { 10, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73090, MSG_SCRIPT_FLAG_SILHOUETTE, 340 },
     { 1, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73088, 0, 380 },
-    { 10, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7304C, 32, 420 },
+    { 10, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7304C, MSG_SCRIPT_FLAG_SILHOUETTE, 420 },
     { 6, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73034, 0, 430 },
     { 6, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73008, 0, 460 },
     { 10, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72FB8, 0, 600 },
@@ -53,7 +53,7 @@ static const MessageScriptEntry sEvent074Script[20] = {
     { 2, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72DF4, 0, 730 },
     { 10, 7, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72DB0, 0, 740 },
     { 6, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72D78, 0, 750 },
-    { 10, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72D54, 32768, 760 },
+    { 10, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F72D54, MSG_SCRIPT_FLAG_END, 760 },
 };
 
 #include "event_074_text.inc"
@@ -62,9 +62,9 @@ static const MessageScriptEntry sEvent074Script[20] = {
 static const MessageScriptEntry sEvent074Script[20] = {
     { 0, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67918, 0, 300 },
     { 2, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6792C, 0, 310 },
-    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67940, 32, 340 },
+    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67940, MSG_SCRIPT_FLAG_SILHOUETTE, 340 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67954, 0, 380 },
-    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67968, 32, 420 },
+    { 10, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67968, MSG_SCRIPT_FLAG_SILHOUETTE, 420 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6797C, 0, 430 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67990, 0, 460 },
     { 10, 3, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F679A4, 0, 600 },
@@ -79,20 +79,20 @@ static const MessageScriptEntry sEvent074Script[20] = {
     { 2, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67A58, 0, 730 },
     { 10, 7, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67A6C, 0, 740 },
     { 6, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67A80, 0, 750 },
-    { 10, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67A94, 32768, 760 },
+    { 10, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67A94, MSG_SCRIPT_FLAG_END, 760 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent074Camera[3] = {
-    { -65536, 30720, 20480, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65436, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -65286, 30720, 20480, 0, 255, { 0, 0, 0 }, 32769, 150, { 0, 0 }, 0 },
+    { -65536, 30720, 20480, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65436, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -65286, 30720, 20480, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent074SoundCues[3] = {
     { SONG_BGM_PINOCCHIO_FIELD, 0, 0, 0 },
     { SONG_SND_349, 641, 0, 0 },
-    { SONG_BGM_PINOCCHIO_FIELD, 994, 32769, 0 },
+    { SONG_BGM_PINOCCHIO_FIELD, 994, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent074Track0[20] = {
@@ -247,7 +247,7 @@ static const MessageScriptEntry sEvent075Script[22] = {
     { 17, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8121C, 0, 604 },
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F812D0, 0, 620 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F81334, 0, 660 },
-    { 0, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F813A6, 32768, 662 },
+    { 0, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F813A6, MSG_SCRIPT_FLAG_END, 662 },
 };
 #endif
 #ifdef VERSION_JP
@@ -275,7 +275,7 @@ static const MessageScriptEntry sEvent075Script[24] = {
     { 6, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73FF0, 0, 620 },
     { 6, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73FD8, 0, 625 },
     { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73F98, 0, 660 },
-    { 0, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73F6C, 32768, 662 },
+    { 0, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F73F6C, MSG_SCRIPT_FLAG_END, 662 },
 };
 
 #include "event_075_text.inc"
@@ -303,27 +303,27 @@ static const MessageScriptEntry sEvent075Script[22] = {
     { 17, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C10, 0, 604 },
     { 6, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C24, 0, 620 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C38, 0, 660 },
-    { 0, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C4C, 32768, 662 },
+    { 0, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C4C, MSG_SCRIPT_FLAG_END, 662 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent075Camera[7] = {
     { -65496, 30464, 46592, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65241, 0, 0, 0, 255, { 0, 0, 0 }, 66, 45, { 0, 0 }, 0 },
-    { -65221, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65220, 81408, 76032, 0, 255, { 0, 0, 0 }, 1, 0, { 0, 0 }, 0 },
-    { -65176, 0, 0, 0, 255, { 0, 0, 0 }, 258, 45, { 0, 0 }, 0 },
-    { -65136, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65241, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK | CAMERA_MODE_KEEP, 45, { 0, 0 }, 0 },
+    { -65221, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65220, 81408, 76032, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 0, { 0, 0 }, 0 },
+    { -65176, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK | CAMERA_MODE_KEEP, 45, { 0, 0 }, 0 },
+    { -65136, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent075SoundCues[6] = {
     { SONG_BGM_PINOCCHIO_FIELD, 0, 0, 0 },
-    { SONG_BGM_PINOCCHIO_FIELD, 250, 1, 0 },
-    { SONG_BGM_EVENT4, 430, 2, 0 },
-    { SONG_BGM_EVENT4, 605, 1, 0 },
+    { SONG_BGM_PINOCCHIO_FIELD, 250, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT4, 430, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT4, 605, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_BGM_PINOCCHIO_FIELD, 622, 0, 0 },
-    { SONG_BGM_PINOCCHIO_FIELD, 775, 32769, 0 },
+    { SONG_BGM_PINOCCHIO_FIELD, 775, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent075Track0[23] = {
@@ -473,7 +473,7 @@ static const MessageScriptEntry sEvent076Script[31] = {
     { 6, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F82978, 0, 850 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F829B2, 0, 900 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F829D8, 0, 910 },
-    { 6, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F82A18, 32768, 920 },
+    { 6, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F82A18, MSG_SCRIPT_FLAG_END, 920 },
 };
 #endif
 #ifdef VERSION_JP
@@ -508,7 +508,7 @@ static const MessageScriptEntry sEvent076Script[31] = {
     { 6, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F75200, 0, 850 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F751F4, 0, 900 },
     { 1, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F751E4, 0, 910 },
-    { 6, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F751C8, 32768, 920 },
+    { 6, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F751C8, MSG_SCRIPT_FLAG_END, 920 },
 };
 
 #include "event_076_text.inc"
@@ -545,7 +545,7 @@ static const MessageScriptEntry sEvent076Script[31] = {
     { 6, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68048, 0, 850 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6805C, 0, 900 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68070, 0, 910 },
-    { 6, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68084, 32768, 920 },
+    { 6, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68084, MSG_SCRIPT_FLAG_END, 920 },
 };
 #endif
 
@@ -555,15 +555,15 @@ static const EvSoundCue sEvent076SoundCues[6] = {
     { SONG_BGM_EVENT2, 851, 0, 0 },
     { SONG_EV_RUMBLE, 852, 0, 0 },
     { SONG_EV_FLASH02, 1050, 0, 0 },
-    { SONG_EV_RUMBLE, 1083, 32769, 0 },
+    { SONG_EV_RUMBLE, 1083, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent076Camera[5] = {
     { -65136, 44800, 93696, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65086, 57344, 91136, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64685, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -64456, 0, 0, 0, 255, { 0, 0, 0 }, 33826, 30, { 0, 0 }, 0 },
+    { -65086, 57344, 91136, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64685, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64456, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent076Track0[9] = {
@@ -689,14 +689,14 @@ const EventSequenceDef gEvent076 = {
 static const MessageScriptEntry sEvent077Script[3] = {
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8380C, 0, 100 },
     { 10, 11, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83840, 0, 150 },
-    { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83868, 32768, 170 },
+    { 0, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83868, MSG_SCRIPT_FLAG_END, 170 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent077Script[3] = {
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7626C, 0, 100 },
     { 10, 11, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76248, 0, 150 },
-    { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76238, 32768, 170 },
+    { 0, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76238, MSG_SCRIPT_FLAG_END, 170 },
 };
 
 #include "event_077_text.inc"
@@ -705,16 +705,16 @@ static const MessageScriptEntry sEvent077Script[3] = {
 static const MessageScriptEntry sEvent077Script[3] = {
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C60, 0, 100 },
     { 10, 11, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C74, 0, 150 },
-    { 0, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C88, 32768, 170 },
+    { 0, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67C88, MSG_SCRIPT_FLAG_END, 170 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent077Camera[1] = {
-    { -65485, 104448, 98304, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -65485, 104448, 98304, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent077SoundCues[1] = {
-    { SONG_BGM_EVENT2, 0, 32768, 0 },
+    { SONG_BGM_EVENT2, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent077Track1[6] = {
@@ -769,7 +769,7 @@ static const MessageScriptEntry sEvent078Script[6] = {
     { 10, 11, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83A7A, 0, 120 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83A84, 0, 130 },
     { 10, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AD8, 0, 140 },
-    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AEC, 32768, 142 },
+    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AEC, MSG_SCRIPT_FLAG_END, 142 },
 };
 #endif
 #ifdef VERSION_JP
@@ -779,7 +779,7 @@ static const MessageScriptEntry sEvent078Script[6] = {
     { 10, 11, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F764BC, 0, 120 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76494, 0, 130 },
     { 10, 2, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76488, 0, 140 },
-    { 10, 14, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76474, 32768, 142 },
+    { 10, 14, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76474, MSG_SCRIPT_FLAG_END, 142 },
 };
 
 #include "event_078_text.inc"
@@ -791,31 +791,31 @@ static const MessageScriptEntry sEvent078Script[6] = {
     { 10, 11, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CC4, 0, 120 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CD8, 0, 130 },
     { 10, 2, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CEC, 0, 140 },
-    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67D00, 32768, 142 },
+    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67D00, MSG_SCRIPT_FLAG_END, 142 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent078Camera[8] = {
     { -65376, 104448, 98304, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65366, 0, 0, 0, 255, { 0, 0, 0 }, 8194, 0, { 0, 0 }, 0 },
-    { -65346, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65336, 0, 0, 0, 255, { 0, 0, 0 }, 8194, 0, { 0, 0 }, 0 },
-    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -65186, 0, 0, 0, 255, { 0, 0, 0 }, 1058, 30, { 0, 0 }, 0 },
-    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65366, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65346, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65336, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65186, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
+    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent078SoundCues[9] = {
     { SONG_BGM_EVENT2, 0, 0, 0 },
     { SONG_EV_RUMBLE, 160, 0, 0 },
-    { SONG_EV_RUMBLE, 161, 1, 0 },
+    { SONG_EV_RUMBLE, 161, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_EV_RUMBLE, 190, 0, 0 },
-    { SONG_EV_RUMBLE, 191, 1, 0 },
+    { SONG_EV_RUMBLE, 191, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_EV_RUMBLE, 220, 0, 0 },
-    { SONG_EV_RUMBLE, 225, 1, 0 },
+    { SONG_EV_RUMBLE, 225, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_EV_FLASH02, 250, 0, 0 },
-    { SONG_BGM_EVENT2, 255, 32769, 0 },
+    { SONG_BGM_EVENT2, 255, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent078Track0[1] = {
@@ -865,7 +865,7 @@ static const MessageScriptEntry sEvent079Script[6] = {
     { 10, 11, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83A7A, 0, 340 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83A84, 0, 420 },
     { 10, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AD8, 0, 630 },
-    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AEC, 32768, 635 },
+    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F83AEC, MSG_SCRIPT_FLAG_END, 635 },
 };
 #endif
 #ifdef VERSION_JP
@@ -875,7 +875,7 @@ static const MessageScriptEntry sEvent079Script[6] = {
     { 10, 11, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F764BC, 0, 340 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76798, 0, 420 },
     { 10, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76488, 0, 630 },
-    { 10, 14, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76474, 32768, 635 },
+    { 10, 14, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76474, MSG_SCRIPT_FLAG_END, 635 },
 };
 
 #include "event_079_text.inc"
@@ -887,17 +887,17 @@ static const MessageScriptEntry sEvent079Script[6] = {
     { 10, 11, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CC4, 0, 340 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CD8, 0, 420 },
     { 10, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67CEC, 0, 630 },
-    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67D00, 32768, 635 },
+    { 10, 14, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67D00, MSG_SCRIPT_FLAG_END, 635 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent079Camera[2] = {
     { -65535, 34304, 30720, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -63536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -63536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent079SoundCues[1] = {
-    { 65535, 0, 32768, 0 },
+    { 65535, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent079Track0[21] = {
@@ -970,7 +970,7 @@ static const MessageScriptEntry sEvent080Script[14] = {
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8447A, 0, 300 },
     { 6, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F844B4, 0, 302 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8452E, 0, 310 },
-    { 10, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84552, 32768, 320 },
+    { 10, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84552, MSG_SCRIPT_FLAG_END, 320 },
 };
 #endif
 #ifdef VERSION_JP
@@ -988,7 +988,7 @@ static const MessageScriptEntry sEvent080Script[14] = {
     { 6, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76D18, 0, 300 },
     { 6, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76CCC, 0, 302 },
     { 0, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76CB0, 0, 310 },
-    { 10, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76C84, 32768, 320 },
+    { 10, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F76C84, MSG_SCRIPT_FLAG_END, 320 },
 };
 
 #include "event_080_text.inc"
@@ -1008,19 +1008,19 @@ static const MessageScriptEntry sEvent080Script[14] = {
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67DDC, 0, 300 },
     { 6, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67DF0, 0, 302 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67E04, 0, 310 },
-    { 10, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67E18, 32768, 320 },
+    { 10, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67E18, MSG_SCRIPT_FLAG_END, 320 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent080Camera[2] = {
     { -65436, 45568, 95488, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64986, 40704, 98048, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
+    { -64986, 40704, 98048, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent080SoundCues[3] = {
     { SONG_BGM_PINOCCHIO_FIELD, 0, 0, 0 },
     { SONG_EV_DL_JUMP, 259, 0, 0 },
-    { SONG_BGM_PINOCCHIO_FIELD, 545, 32769, 0 },
+    { SONG_BGM_PINOCCHIO_FIELD, 545, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent080Track0[12] = {
@@ -1124,7 +1124,7 @@ static const MessageScriptEntry sEvent081Script[4] = {
     { 2, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84E24, 0, 300 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84E6C, 0, 310 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84EB4, 0, 320 },
-    { 0, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84F12, 32768, 330 },
+    { 0, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F84F12, MSG_SCRIPT_FLAG_END, 330 },
 };
 #endif
 #ifdef VERSION_JP
@@ -1132,7 +1132,7 @@ static const MessageScriptEntry sEvent081Script[4] = {
     { 2, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F776D4, 0, 300 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F776A4, 0, 310 },
     { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F77670, 0, 320 },
-    { 0, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7763C, 32768, 330 },
+    { 0, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7763C, MSG_SCRIPT_FLAG_END, 330 },
 };
 
 #include "event_081_text.inc"
@@ -1142,16 +1142,16 @@ static const MessageScriptEntry sEvent081Script[4] = {
     { 2, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F682A0, 0, 300 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F682B4, 0, 310 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F682C8, 0, 320 },
-    { 0, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F682DC, 32768, 330 },
+    { 0, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F682DC, MSG_SCRIPT_FLAG_END, 330 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent081Camera[1] = {
-    { -64537, 33792, 32768, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -64537, 33792, 32768, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent081SoundCues[1] = {
-    { SONG_BGM_EVENT1, 0, 32768, 0 },
+    { SONG_BGM_EVENT1, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent081Track0[16] = {
@@ -1294,14 +1294,14 @@ const EventSequenceDef gEvent081 = {
 static const MessageScriptEntry sEvent082Script[3] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85A48, 0, 100 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85A54, 0, 180 },
-    { 6, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85A68, 32768, 200 },
+    { 6, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85A68, MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent082Script[3] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78204, 0, 100 },
     { 2, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781F8, 0, 180 },
-    { 6, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781B4, 32768, 200 },
+    { 6, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781B4, MSG_SCRIPT_FLAG_END, 200 },
 };
 
 #include "event_082_text.inc"
@@ -1310,25 +1310,25 @@ static const MessageScriptEntry sEvent082Script[3] = {
 static const MessageScriptEntry sEvent082Script[3] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6814C, 0, 100 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68160, 0, 180 },
-    { 6, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68174, 32768, 200 },
+    { 6, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68174, MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent082Camera[6] = {
     { -65416, 30720, 32768, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -65206, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -65206, 0, 0, 0, 255, { 0, 0, 0 }, 2050, 0, { 0, 0 }, 0 },
-    { -65186, 0, 0, 0, 255, { 0, 0, 0 }, 2082, 20, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65206, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65206, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65186, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_MODE_KEEP, 20, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent082SoundCues[5] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
     { SONG_EV_RUMBLE, 120, 0, 0 },
-    { SONG_EV_RUMBLE, 300, 1, 0 },
+    { SONG_EV_RUMBLE, 300, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_EV_FLASH02, 330, 0, 0 },
-    { SONG_BGM_EVENT1, 331, 32769, 0 },
+    { SONG_BGM_EVENT1, 331, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent082Track0[6] = {
@@ -1397,7 +1397,7 @@ static const MessageScriptEntry sEvent083Script[5] = {
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85F10, 0, 481 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85F30, 0, 500 },
     { 6, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F85F5E, 0, 540 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8603E, 32832, 580 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8603E, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 580 },
 };
 #endif
 #ifdef VERSION_JP
@@ -1406,7 +1406,7 @@ static const MessageScriptEntry sEvent083Script[5] = {
     { 2, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F786C0, 0, 481 },
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F786B0, 0, 500 },
     { 6, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78658, 0, 540 },
-    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78640, 32832, 580 },
+    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78640, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 580 },
 };
 
 #include "event_083_text.inc"
@@ -1417,18 +1417,18 @@ static const MessageScriptEntry sEvent083Script[5] = {
     { 2, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680AC, 0, 481 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680C0, 0, 500 },
     { 6, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680D4, 0, 540 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680E8, 32832, 580 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680E8, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 580 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent083Camera[2] = {
     { -65416, 33792, 35840, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent083SoundCues[2] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
-    { SONG_BGM_EVENT1, 599, 32769, 0 },
+    { SONG_BGM_EVENT1, 599, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent083Track0[4] = {
@@ -1501,14 +1501,14 @@ const EventSequenceDef gEvent083 = {
 static const MessageScriptEntry sEvent084Script[3] = {
     { 6, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8645C, 0, 100 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F864D2, 0, 180 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F86542, 32832, 200 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F86542, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent084Script[3] = {
     { 6, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78AF0, 0, 100 },
     { 0, 7, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78ABC, 0, 180 },
-    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78640, 32832, 200 },
+    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78640, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
 };
 
 #include "event_084_text.inc"
@@ -1517,18 +1517,18 @@ static const MessageScriptEntry sEvent084Script[3] = {
 static const MessageScriptEntry sEvent084Script[3] = {
     { 6, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F680FC, 0, 100 },
     { 0, 7, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68110, 0, 180 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68124, 32832, 200 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68124, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent084Camera[2] = {
     { -65416, 33792, 35840, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent084SoundCues[2] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
-    { SONG_BGM_EVENT1, 219, 32769, 0 },
+    { SONG_BGM_EVENT1, 219, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent084Track0[2] = {
@@ -1587,28 +1587,28 @@ const EventSequenceDef gEvent084 = {
 #include "event_085_text.inc"
 
 static const MessageScriptEntry sEvent085Script[1] = {
-    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F86778, 32768, 230 },
+    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F86778, MSG_SCRIPT_FLAG_END, 230 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent085Script[1] = {
-    { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78CF0, 32768, 230 },
+    { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F78CF0, MSG_SCRIPT_FLAG_END, 230 },
 };
 
 #include "event_085_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent085Script[1] = {
-    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68138, 32768, 230 },
+    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68138, MSG_SCRIPT_FLAG_END, 230 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent085Camera[1] = {
-    { -64537, 33792, 32768, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -64537, 33792, 32768, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent085SoundCues[1] = {
-    { SONG_BGM_EVENT1, 0, 32768, 0 },
+    { SONG_BGM_EVENT1, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent085Track0[9] = {
@@ -1697,7 +1697,7 @@ static const MessageScriptEntry sEvent086Script[14] = {
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87098, 0, 730 },
     { 0, 4, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F870E6, 0, 732 },
     { 0, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8717A, 0, 734 },
-    { 6, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F871F8, 32768, 750 },
+    { 6, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F871F8, MSG_SCRIPT_FLAG_END, 750 },
 };
 #endif
 #ifdef VERSION_JP
@@ -1715,7 +1715,7 @@ static const MessageScriptEntry sEvent086Script[14] = {
     { 0, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F793A8, 0, 730 },
     { 0, 4, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79358, 0, 732 },
     { 0, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7931C, 0, 734 },
-    { 6, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F792F8, 32768, 750 },
+    { 6, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F792F8, MSG_SCRIPT_FLAG_END, 750 },
 };
 
 #include "event_086_text.inc"
@@ -1735,25 +1735,25 @@ static const MessageScriptEntry sEvent086Script[14] = {
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68250, 0, 730 },
     { 0, 4, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68264, 0, 732 },
     { 0, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68278, 0, 734 },
-    { 6, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6828C, 32768, 750 },
+    { 6, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6828C, MSG_SCRIPT_FLAG_END, 750 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent086Camera[9] = {
-    { -65536, 78592, 68352, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, 130, 150, { 0, 0 }, 0 },
-    { -65281, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65216, 0, 0, 0, 255, { 0, 0, 0 }, 66, 60, { 0, 0 }, 0 },
-    { -65166, 0, 0, 0, 255, { 0, 0, 0 }, 258, 50, { 0, 0 }, 0 },
-    { -65075, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64956, 37888, 43264, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
-    { -64876, 78592, 68352, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65536, 78592, 68352, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 150, { 0, 0 }, 0 },
+    { -65281, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65216, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK | CAMERA_MODE_KEEP, 60, { 0, 0 }, 0 },
+    { -65166, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK | CAMERA_MODE_KEEP, 50, { 0, 0 }, 0 },
+    { -65075, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64956, 37888, 43264, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
+    { -64876, 78592, 68352, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent086SoundCues[2] = {
     { SONG_BGM_EVENT4, 692, 0, 0 },
-    { SONG_BGM_EVENT4, 795, 32769, 0 },
+    { SONG_BGM_EVENT4, 795, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent086Track0[6] = {
@@ -1836,7 +1836,7 @@ static const MessageScriptEntry sEvent087Script[18] = {
     { 1, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F879DE, 0, 282 },
     { 2, 3, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87A4E, 0, 300 },
     { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87A78, 0, 315 },
-    { 11, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87A8C, 32, 330 },
+    { 11, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87A8C, MSG_SCRIPT_FLAG_SILHOUETTE, 330 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87AC2, 0, 650 },
     { 11, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87AE0, 0, 700 },
     { 11, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87B46, 0, 702 },
@@ -1848,7 +1848,7 @@ static const MessageScriptEntry sEvent087Script[18] = {
     { 11, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87D7C, 0, 810 },
     { 0, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87DF6, 0, 820 },
     { 11, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87E22, 0, 830 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87E56, 32768, 880 },
+    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F87E56, MSG_SCRIPT_FLAG_END, 880 },
 };
 #endif
 #ifdef VERSION_JP
@@ -1858,7 +1858,7 @@ static const MessageScriptEntry sEvent087Script[19] = {
     { 1, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F5C, 0, 282 },
     { 2, 3, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F48, 0, 300 },
     { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F3C, 0, 315 },
-    { 11, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F1C, 32, 330 },
+    { 11, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F1C, MSG_SCRIPT_FLAG_SILHOUETTE, 330 },
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79F04, 0, 650 },
     { 11, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79ECC, 0, 700 },
     { 11, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79E98, 0, 702 },
@@ -1871,7 +1871,7 @@ static const MessageScriptEntry sEvent087Script[19] = {
     { 0, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79D4C, 0, 820 },
     { 11, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79D38, 0, 830 },
     { 11, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F79D24, 0, 832 },
-    { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781F8, 32768, 880 },
+    { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781F8, MSG_SCRIPT_FLAG_END, 880 },
 };
 
 #include "event_087_text.inc"
@@ -1883,7 +1883,7 @@ static const MessageScriptEntry sEvent087Script[18] = {
     { 1, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66978, 0, 282 },
     { 2, 3, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6698C, 0, 300 },
     { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669A0, 0, 315 },
-    { 11, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669B4, 32, 330 },
+    { 11, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669B4, MSG_SCRIPT_FLAG_SILHOUETTE, 330 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669C8, 0, 650 },
     { 11, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669DC, 0, 700 },
     { 11, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F669F0, 0, 702 },
@@ -1895,7 +1895,7 @@ static const MessageScriptEntry sEvent087Script[18] = {
     { 11, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66A68, 0, 810 },
     { 0, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66A7C, 0, 820 },
     { 11, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66A90, 0, 830 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66AA4, 32768, 880 },
+    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66AA4, MSG_SCRIPT_FLAG_END, 880 },
 };
 #endif
 
@@ -1904,14 +1904,14 @@ static const EvSoundCue sEvent087SoundCues[6] = {
     { SONG_EV_DL_JUMP, 313, 0, 0 },
     { SONG_SND_347, 490, 0, 0 },
     { SONG_EV_DL_JUMP, 649, 0, 0 },
-    { SONG_BGM_HALLOWEEN_FIELD, 700, 2, 0 },
-    { SONG_BGM_EVENT2, 833, 32768, 0 },
+    { SONG_BGM_HALLOWEEN_FIELD, 700, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT2, 833, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent087Camera[3] = {
-    { -65536, 30720, 20480, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65205, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65536, 30720, 20480, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65205, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent087BgEffects[6] = {
@@ -2116,7 +2116,7 @@ static const MessageScriptEntry sEvent088Script[12] = {
     { 1, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8946C, 0, 560 },
     { 11, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F894F2, 0, 590 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F89534, 0, 650 },
-    { 11, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8953E, 32768, 710 },
+    { 11, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8953E, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 #ifdef VERSION_JP
@@ -2132,7 +2132,7 @@ static const MessageScriptEntry sEvent088Script[12] = {
     { 1, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7B2F0, 0, 560 },
     { 11, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7B2D0, 0, 590 },
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7B2C4, 0, 650 },
-    { 11, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7B290, 32768, 710 },
+    { 11, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7B290, MSG_SCRIPT_FLAG_END, 710 },
 };
 
 #include "event_088_text.inc"
@@ -2150,12 +2150,12 @@ static const MessageScriptEntry sEvent088Script[12] = {
     { 1, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66900, 0, 560 },
     { 11, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66914, 0, 590 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66928, 0, 650 },
-    { 11, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6693C, 32768, 710 },
+    { 11, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6693C, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent088Camera[1] = {
-    { -65485, 30720, 20480, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -65485, 30720, 20480, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent088BgEffects[5] = {
@@ -2170,7 +2170,7 @@ static const EvSoundCue sEvent088SoundCues[4] = {
     { SONG_BGM_HALLOWEEN_FIELD, 0, 0, 0 },
     { SONG_SND_347, 624, 0, 0 },
     { SONG_EV_DL_JUMP, 649, 0, 0 },
-    { SONG_BGM_HALLOWEEN_FIELD, 925, 32769, 0 },
+    { SONG_BGM_HALLOWEEN_FIELD, 925, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent088Track0[3] = {
@@ -2299,7 +2299,7 @@ static const MessageScriptEntry sEvent089Script[26] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8A76E, 0, 680 },
     { 11, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8A790, 0, 690 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8A7A4, 0, 700 },
-    { 11, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8A83E, 32768, 710 },
+    { 11, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8A83E, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 #ifdef VERSION_JP
@@ -2330,7 +2330,7 @@ static const MessageScriptEntry sEvent089Script[27] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7BF84, 0, 680 },
     { 11, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7BF78, 0, 690 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7BF44, 0, 700 },
-    { 11, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7BF18, 32768, 710 },
+    { 11, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7BF18, MSG_SCRIPT_FLAG_END, 710 },
 };
 
 #include "event_089_text.inc"
@@ -2362,20 +2362,20 @@ static const MessageScriptEntry sEvent089Script[26] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66E64, 0, 680 },
     { 11, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66E78, 0, 690 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66E8C, 0, 700 },
-    { 11, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66EA0, 32768, 710 },
+    { 11, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66EA0, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent089Camera[3] = {
     { -65506, 79872, 65280, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65286, 61952, 65280, 0, 255, { 0, 0, 0 }, 1, 70, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65286, 61952, 65280, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 70, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent089SoundCues[3] = {
     { 65535, 0, 0, 0 },
-    { SONG_BGM_EVENT3, 340, 2, 0 },
-    { SONG_BGM_EVENT3, 725, 32769, 0 },
+    { SONG_BGM_EVENT3, 340, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT3, 725, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent089Track0[18] = {
@@ -2511,7 +2511,7 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 18, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B86A, 0, 730 },
     { 0, 7, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B8C2, 0, 745 },
     { 11, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B8E4, 0, 760 },
-    { 12, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B918, 32, 780 },
+    { 12, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B918, MSG_SCRIPT_FLAG_SILHOUETTE, 780 },
     { 18, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B942, 0, 920 },
     { 11, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B96C, 0, 1030 },
     { 12, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8B992, 0, 1040 },
@@ -2521,7 +2521,7 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 12, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8BB58, 0, 1190 },
     { 12, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8BBC2, 0, 1200 },
     { 11, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8BC52, 0, 1340 },
-    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8BCA0, 32768, 1390 },
+    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8BCA0, MSG_SCRIPT_FLAG_END, 1390 },
 };
 #endif
 #ifdef VERSION_JP
@@ -2537,7 +2537,7 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 18, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D37C, 0, 730 },
     { 0, 7, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D35C, 0, 745 },
     { 11, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D34C, 0, 760 },
-    { 12, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D32C, 32, 780 },
+    { 12, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D32C, MSG_SCRIPT_FLAG_SILHOUETTE, 780 },
     { 18, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D318, 0, 920 },
     { 11, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D2FC, 0, 1030 },
     { 12, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D2E4, 0, 1040 },
@@ -2547,7 +2547,7 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 12, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D1D0, 0, 1190 },
     { 12, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D180, 0, 1200 },
     { 11, 2, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D150, 0, 1340 },
-    { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D134, 32768, 1390 },
+    { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7D134, MSG_SCRIPT_FLAG_END, 1390 },
 };
 
 #include "event_090_text.inc"
@@ -2565,7 +2565,7 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 18, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66F54, 0, 730 },
     { 0, 7, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66F68, 0, 745 },
     { 11, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66F7C, 0, 760 },
-    { 12, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66F90, 32, 780 },
+    { 12, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66F90, MSG_SCRIPT_FLAG_SILHOUETTE, 780 },
     { 18, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66FA4, 0, 920 },
     { 11, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66FB8, 0, 1030 },
     { 12, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66FCC, 0, 1040 },
@@ -2575,31 +2575,31 @@ static const MessageScriptEntry sEvent090Script[22] = {
     { 12, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6701C, 0, 1190 },
     { 12, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67030, 0, 1200 },
     { 11, 2, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67044, 0, 1340 },
-    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67058, 32768, 1390 },
+    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67058, MSG_SCRIPT_FLAG_END, 1390 },
 };
 #endif
 
 static const EvSoundCue sEvent090SoundCues[5] = {
     { SONG_BGM_HALLOWEEN_FIELD, 0, 0, 0 },
-    { SONG_BGM_HALLOWEEN_FIELD, 770, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 781, 2, 0 },
+    { SONG_BGM_HALLOWEEN_FIELD, 770, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 781, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BTL_MON_HIT03, 790, 0, 0 },
-    { SONG_BGM_EVENT_UNREST, 1635, 32769, 0 },
+    { SONG_BGM_EVENT_UNREST, 1635, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent090Camera[12] = {
     { -65386, 96000, 24576, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64887, 96000, 61952, 0, 255, { 0, 0, 0 }, 1, 160, { 0, 0 }, 0 },
-    { -64746, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64736, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -64716, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64706, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64615, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64286, 90368, 100352, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64197, 93696, 90880, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -64126, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -63907, 97792, 77312, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -63906, 0, 0, 0, 255, { 0, 0, 0 }, 32834, 30, { 0, 0 }, 0 },
+    { -64887, 96000, 61952, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 160, { 0, 0 }, 0 },
+    { -64746, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64736, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64716, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64706, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64615, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64286, 90368, 100352, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64197, 93696, 90880, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -64126, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -63907, 97792, 77312, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -63906, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent090Track0[21] = {
@@ -2785,7 +2785,7 @@ static const MessageScriptEntry sEvent091Script[11] = {
     { 12, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D1FC, 0, 600 },
     { 12, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D222, 0, 604 },
     { 11, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D29C, 0, 640 },
-    { 12, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D2D0, 32768, 660 },
+    { 12, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D2D0, MSG_SCRIPT_FLAG_END, 660 },
 };
 #endif
 #ifdef VERSION_JP
@@ -2800,7 +2800,7 @@ static const MessageScriptEntry sEvent091Script[11] = {
     { 12, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7E82C, 0, 600 },
     { 12, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7E7DC, 0, 604 },
     { 11, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7E7C4, 0, 640 },
-    { 12, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7E7A0, 32768, 660 },
+    { 12, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7E7A0, MSG_SCRIPT_FLAG_END, 660 },
 };
 
 #include "event_091_text.inc"
@@ -2817,13 +2817,13 @@ static const MessageScriptEntry sEvent091Script[11] = {
     { 12, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6710C, 0, 600 },
     { 12, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67120, 0, 604 },
     { 11, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67134, 0, 640 },
-    { 12, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67148, 32768, 660 },
+    { 12, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67148, MSG_SCRIPT_FLAG_END, 660 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent091Camera[2] = {
     { -65485, 89600, 79872, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65236, 49664, 51200, 0, 255, { 0, 0, 0 }, 32769, 150, { 0, 0 }, 0 },
+    { -65236, 49664, 51200, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent091SoundCues[6] = {
@@ -2831,8 +2831,8 @@ static const EvSoundCue sEvent091SoundCues[6] = {
     { SONG_SND_348, 335, 0, 0 },
     { SONG_SND_348, 359, 0, 0 },
     { SONG_SND_348, 383, 0, 0 },
-    { SONG_BGM_EVENT_UNREST, 440, 1, 0 },
-    { SONG_BGM_EVENT2, 604, 32768, 0 },
+    { SONG_BGM_EVENT_UNREST, 440, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT2, 604, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent091Track0[7] = {
@@ -2919,28 +2919,28 @@ const EventSequenceDef gEvent091 = {
 #include "event_092_text.inc"
 
 static const MessageScriptEntry sEvent092Script[1] = {
-    { 12, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D964, 32768, 100 },
+    { 12, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8D964, MSG_SCRIPT_FLAG_END, 100 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent092Script[1] = {
-    { 12, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7EE7C, 32768, 100 },
+    { 12, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7EE7C, MSG_SCRIPT_FLAG_END, 100 },
 };
 
 #include "event_092_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent092Script[1] = {
-    { 12, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6706C, 32768, 100 },
+    { 12, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6706C, MSG_SCRIPT_FLAG_END, 100 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent092Camera[1] = {
-    { -65485, 94208, 153600, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -65485, 94208, 153600, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent092SoundCues[1] = {
-    { SONG_BGM_EVENT2, 0, 32768, 0 },
+    { SONG_BGM_EVENT2, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent092Track0[1] = {
@@ -3009,7 +3009,7 @@ static const MessageScriptEntry sEvent093Script[25] = {
     { 11, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8E2E8, 0, 960 },
     { 11, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8E354, 0, 962 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8E3F2, 0, 980 },
-    { 11, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8E436, 32768, 1000 },
+    { 11, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8E436, MSG_SCRIPT_FLAG_END, 1000 },
 };
 #endif
 #ifdef VERSION_JP
@@ -3038,7 +3038,7 @@ static const MessageScriptEntry sEvent093Script[25] = {
     { 11, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7F260, 0, 960 },
     { 11, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7F22C, 0, 962 },
     { 0, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7F204, 0, 980 },
-    { 11, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7F1AC, 32768, 1000 },
+    { 11, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F7F1AC, MSG_SCRIPT_FLAG_END, 1000 },
 };
 
 #include "event_093_text.inc"
@@ -3069,17 +3069,17 @@ static const MessageScriptEntry sEvent093Script[25] = {
     { 11, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66C5C, 0, 960 },
     { 11, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66C70, 0, 962 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66C84, 0, 980 },
-    { 11, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66C98, 32768, 1000 },
+    { 11, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F66C98, MSG_SCRIPT_FLAG_END, 1000 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent093Camera[1] = {
-    { -65485, 61440, 74496, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -65485, 61440, 74496, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent093SoundCues[2] = {
     { SONG_BGM_EVENT3, 0, 0, 0 },
-    { SONG_BGM_EVENT3, 1135, 32769, 0 },
+    { SONG_BGM_EVENT3, 1135, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent093Track0[20] = {
@@ -3225,7 +3225,7 @@ static const MessageScriptEntry sEvent094Script[7] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8F3D6, 0, 500 },
     { 8, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8F428, 0, 540 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8F480, 0, 750 },
-    { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8F4A6, 32768, 770 },
+    { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F8F4A6, MSG_SCRIPT_FLAG_END, 770 },
 };
 #endif
 #ifdef VERSION_JP
@@ -3236,7 +3236,7 @@ static const MessageScriptEntry sEvent094Script[7] = {
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F80390, 0, 500 },
     { 8, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F80370, 0, 540 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F80358, 0, 750 },
-    { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8031C, 32768, 770 },
+    { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8031C, MSG_SCRIPT_FLAG_END, 770 },
 };
 
 #include "event_094_text.inc"
@@ -3249,18 +3249,18 @@ static const MessageScriptEntry sEvent094Script[7] = {
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D73C, 0, 500 },
     { 8, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D750, 0, 540 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D764, 0, 750 },
-    { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D778, 32768, 770 },
+    { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D778, MSG_SCRIPT_FLAG_END, 770 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent094Camera[2] = {
-    { -65536, 69120, 81408, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32898, 80, { 0, 0 }, 0 },
+    { -65536, 69120, 81408, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent094SoundCues[2] = {
     { SONG_BGM_ALICE_FIELD, 0, 0, 0 },
-    { SONG_BGM_ALICE_FIELD, 925, 32769, 0 },
+    { SONG_BGM_ALICE_FIELD, 925, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent094Track0[17] = {
@@ -3403,7 +3403,7 @@ static const MessageScriptEntry sEvent095Script[30] = {
     { 4, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F908D0, 0, 1210 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F908F0, 0, 1230 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F90910, 0, 1270 },
-    { 4, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F90976, 32768, 1300 },
+    { 4, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F90976, MSG_SCRIPT_FLAG_END, 1300 },
 };
 #endif
 #ifdef VERSION_JP
@@ -3437,7 +3437,7 @@ static const MessageScriptEntry sEvent095Script[30] = {
     { 4, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F81104, 0, 1210 },
     { 2, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F810F0, 0, 1230 },
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F810C4, 0, 1270 },
-    { 4, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F81098, 32768, 1300 },
+    { 4, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F81098, MSG_SCRIPT_FLAG_END, 1300 },
 };
 
 #include "event_095_text.inc"
@@ -3473,24 +3473,24 @@ static const MessageScriptEntry sEvent095Script[30] = {
     { 4, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DA0C, 0, 1210 },
     { 2, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DA20, 0, 1230 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DA34, 0, 1270 },
-    { 4, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DA48, 32768, 1300 },
+    { 4, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DA48, MSG_SCRIPT_FLAG_END, 1300 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent095Camera[6] = {
     { -65436, 30720, 81920, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64996, 87040, 51200, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
-    { -64876, 48640, 79872, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
+    { -64996, 87040, 51200, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 100, { 0, 0 }, 0 },
+    { -64876, 48640, 79872, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
     { -64776, 0, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64636, 87040, 51200, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64636, 87040, 51200, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent095SoundCues[4] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
-    { SONG_BGM_EVENT1, 1031, 1, 0 },
+    { SONG_BGM_EVENT1, 1031, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_BGM_EVENT2, 1210, 0, 0 },
-    { SONG_EV_EV10_01, 1305, 32768, 0 },
+    { SONG_EV_EV10_01, 1305, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent095Track0[30] = {
@@ -3629,7 +3629,7 @@ static const MessageScriptEntry sEvent096Script[6] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9176A, 0, 380 },
     { 4, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9179A, 0, 400 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F917DA, 0, 670 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F91812, 32768, 710 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F91812, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 #ifdef VERSION_JP
@@ -3639,7 +3639,7 @@ static const MessageScriptEntry sEvent096Script[6] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8212C, 0, 380 },
     { 4, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F82108, 0, 400 },
     { 1, 5, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F820F8, 0, 670 },
-    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F820EC, 32768, 710 },
+    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F820EC, MSG_SCRIPT_FLAG_END, 710 },
 };
 
 #include "event_096_text.inc"
@@ -3651,20 +3651,20 @@ static const MessageScriptEntry sEvent096Script[6] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D7B4, 0, 380 },
     { 4, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D7C8, 0, 400 },
     { 1, 5, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D7DC, 0, 670 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D7F0, 32768, 710 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6D7F0, MSG_SCRIPT_FLAG_END, 710 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent096Camera[3] = {
     { -65126, 55040, 76800, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65056, 89600, 58880, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64936, 55040, 76800, 0, 255, { 0, 0, 0 }, 32769, 70, { 0, 0 }, 0 },
+    { -65056, 89600, 58880, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64936, 55040, 76800, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 70, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent096SoundCues[3] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
     { SONG_EV_EV10_01, 650, 0, 0 },
-    { SONG_BGM_EVENT1, 915, 32769, 0 },
+    { SONG_BGM_EVENT1, 915, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent096Track0[22] = {
@@ -3878,7 +3878,7 @@ static const MessageScriptEntry sEvent097Script[21] = {
     { 9, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F93208, 0, 1190 },
     { 9, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F93300, 0, 1192 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F93378, 0, 1210 },
-    { 9, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F93382, 32768, 1280 },
+    { 9, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F93382, MSG_SCRIPT_FLAG_END, 1280 },
 };
 #endif
 #ifdef VERSION_JP
@@ -3903,7 +3903,7 @@ static const MessageScriptEntry sEvent097Script[21] = {
     { 9, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8357C, 0, 1190 },
     { 9, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F83544, 0, 1192 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F83538, 0, 1210 },
-    { 9, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F83504, 32768, 1280 },
+    { 9, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F83504, MSG_SCRIPT_FLAG_END, 1280 },
 };
 
 #include "event_097_text.inc"
@@ -3930,15 +3930,15 @@ static const MessageScriptEntry sEvent097Script[21] = {
     { 9, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DBB0, 0, 1190 },
     { 9, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DBC4, 0, 1192 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DBD8, 0, 1210 },
-    { 9, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DBEC, 32768, 1280 },
+    { 9, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DBEC, MSG_SCRIPT_FLAG_END, 1280 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent097Camera[4] = {
     { -64876, 57344, 45312, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64696, 61184, 38912, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -64386, 51456, 40960, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -55537, 57344, 45312, 0, 255, { 0, 0, 0 }, 32769, 20, { 0, 0 }, 0 },
+    { -64696, 61184, 38912, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -64386, 51456, 40960, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -55537, 57344, 45312, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent097SoundCues[5] = {
@@ -3946,7 +3946,7 @@ static const EvSoundCue sEvent097SoundCues[5] = {
     { SONG_SND_346, 640, 0, 0 },
     { SONG_SND_346, 821, 0, 0 },
     { SONG_SND_346, 1131, 0, 0 },
-    { SONG_BGM_EVENT3, 1395, 32769, 0 },
+    { SONG_BGM_EVENT3, 1395, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent097Track0[10] = {
@@ -4099,7 +4099,7 @@ static const MessageScriptEntry sEvent098Script[16] = {
     { 4, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9445E, 0, 952 },
     { 0, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9449C, 0, 1070 },
     { 2, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F944CA, 0, 1090 },
-    { 5, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9451A, 32768, 1190 },
+    { 5, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9451A, MSG_SCRIPT_FLAG_END, 1190 },
 };
 #endif
 #ifdef VERSION_JP
@@ -4119,7 +4119,7 @@ static const MessageScriptEntry sEvent098Script[16] = {
     { 4, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F84760, 0, 952 },
     { 0, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8474C, 0, 1070 },
     { 2, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8471C, 0, 1090 },
-    { 5, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F84700, 32768, 1190 },
+    { 5, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F84700, MSG_SCRIPT_FLAG_END, 1190 },
 };
 
 #include "event_098_text.inc"
@@ -4141,7 +4141,7 @@ static const MessageScriptEntry sEvent098Script[16] = {
     { 4, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DF34, 0, 952 },
     { 0, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DF48, 0, 1070 },
     { 2, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DF5C, 0, 1090 },
-    { 5, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DF70, 32768, 1190 },
+    { 5, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DF70, MSG_SCRIPT_FLAG_END, 1190 },
 };
 #endif
 
@@ -4149,26 +4149,26 @@ static const EvSoundCue sEvent098SoundCues[4] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
     { SONG_EV_FLASH02, 600, 0, 0 },
     { SONG_BGM_EVENT2, 1130, 0, 0 },
-    { SONG_EV_FLASH02, 1230, 32768, 0 },
+    { SONG_EV_FLASH02, 1230, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent098Camera[16] = {
     { -65076, 47872, 89088, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64975, 74752, 65792, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
-    { -64956, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64876, 0, 0, 0, 255, { 0, 0, 0 }, 34, 10, { 0, 0 }, 0 },
-    { -64846, 0, 0, 0, 255, { 0, 0, 0 }, 130, 20, { 0, 0 }, 0 },
-    { -64566, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64486, 55040, 79104, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64426, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64396, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64336, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64326, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64306, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64136, 0, 0, 0, 255, { 0, 0, 0 }, 34, 30, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64975, 74752, 65792, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
+    { -64956, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64876, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64846, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 20, { 0, 0 }, 0 },
+    { -64566, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64486, 55040, 79104, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64426, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64396, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64336, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64326, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64306, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64136, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent098Track0[7] = {
@@ -4302,31 +4302,31 @@ const EventSequenceDef gEvent098 = {
 #include "event_099_text.inc"
 
 static const MessageScriptEntry sEvent099Script[1] = {
-    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95258, 32768, 130 },
+    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95258, MSG_SCRIPT_FLAG_END, 130 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent099Script[1] = {
-    { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8544C, 32768, 130 },
+    { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8544C, MSG_SCRIPT_FLAG_END, 130 },
 };
 
 #include "event_099_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent099Script[1] = {
-    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DC00, 32768, 130 },
+    { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DC00, MSG_SCRIPT_FLAG_END, 130 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent099Camera[2] = {
-    { -65536, 30720, 43008, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -64536, 0, 0, 0, 255, { 0, 0, 0 }, 32898, 60, { 0, 0 }, 0 },
+    { -65536, 30720, 43008, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -64536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 60, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent099SoundCues[3] = {
     { SONG_BGM_EVENT2, 1, 0, 0 },
     { SONG_EV_EV10_05, 131, 0, 0 },
-    { SONG_BGM_BOSS1_WORLD, 180, 32768, 0 },
+    { SONG_BGM_BOSS1_WORLD, 180, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent099Track0[2] = {
@@ -4401,7 +4401,7 @@ static const MessageScriptEntry sEvent100Script[28] = {
     { 0, 4, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95C0A, 0, 1022 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95C4E, 0, 1050 },
     { 2, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95CAC, 0, 1052 },
-    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95D2E, 32768, 1070 },
+    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F95D2E, MSG_SCRIPT_FLAG_END, 1070 },
 };
 #endif
 #ifdef VERSION_JP
@@ -4433,7 +4433,7 @@ static const MessageScriptEntry sEvent100Script[28] = {
     { 0, 4, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85900, 0, 1022 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F858D0, 0, 1050 },
     { 2, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85888, 0, 1052 },
-    { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85860, 32768, 1070 },
+    { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F85860, MSG_SCRIPT_FLAG_END, 1070 },
 };
 
 #include "event_100_text.inc"
@@ -4467,7 +4467,7 @@ static const MessageScriptEntry sEvent100Script[28] = {
     { 0, 4, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DDF4, 0, 1022 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DE08, 0, 1050 },
     { 2, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DE1C, 0, 1052 },
-    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DE30, 32768, 1070 },
+    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6DE30, MSG_SCRIPT_FLAG_END, 1070 },
 };
 #endif
 
@@ -4475,16 +4475,16 @@ static const EvSoundCue sEvent100SoundCues[4] = {
     { SONG_BGM_EVENT3, 1, 0, 0 },
     { SONG_EV_EV10_01, 301, 0, 0 },
     { SONG_EV_EV11_00, 506, 0, 0 },
-    { SONG_BGM_EVENT3, 1070, 32769, 0 },
+    { SONG_BGM_EVENT3, 1070, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent100Camera[6] = {
     { -65506, 0, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65286, 67328, 70144, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
-    { -64986, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64736, 55808, 76800, 0, 255, { 0, 0, 0 }, 1, 70, { 0, 0 }, 0 },
-    { -64446, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, 32834, 30, { 0, 0 }, 0 },
+    { -65286, 67328, 70144, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
+    { -64986, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64736, 55808, 76800, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 70, { 0, 0 }, 0 },
+    { -64446, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent100Track0[13] = {
@@ -4644,7 +4644,7 @@ static const MessageScriptEntry sEvent101Script[12] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F96EFE, 0, 850 },
     { 13, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F96F60, 0, 870 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F96FD2, 0, 1130 },
-    { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F97006, 32768, 1150 },
+    { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F97006, MSG_SCRIPT_FLAG_END, 1150 },
 };
 #endif
 #ifdef VERSION_JP
@@ -4660,7 +4660,7 @@ static const MessageScriptEntry sEvent101Script[12] = {
     { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F86B1C, 0, 850 },
     { 13, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F86AF0, 0, 870 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F86ADC, 0, 1130 },
-    { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F86AC0, 32768, 1150 },
+    { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F86AC0, MSG_SCRIPT_FLAG_END, 1150 },
 };
 
 #include "event_101_text.inc"
@@ -4678,25 +4678,25 @@ static const MessageScriptEntry sEvent101Script[12] = {
     { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E304, 0, 850 },
     { 13, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E318, 0, 870 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E32C, 0, 1130 },
-    { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E340, 32768, 1150 },
+    { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E340, MSG_SCRIPT_FLAG_END, 1150 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent101Camera[8] = {
-    { -65536, 73472, 58624, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65134, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -64976, 56320, 44800, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64906, 65792, 54016, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64591, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -60536, 73472, 58624, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65536, 73472, 58624, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65134, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -64976, 56320, 44800, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64936, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64906, 65792, 54016, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64591, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -60536, 73472, 58624, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent101SoundCues[3] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
     { SONG_SND_350, 680, 0, 0 },
-    { SONG_BGM_EVENT1, 1245, 32769, 0 },
+    { SONG_BGM_EVENT1, 1245, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent101Track0[16] = {
@@ -4834,7 +4834,7 @@ static const MessageScriptEntry sEvent102Script[19] = {
     { 23, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98128, 0, 860 },
     { 23, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F981AE, 0, 960 },
     { 0, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98250, 0, 1130 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F982C6, 32768, 1160 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F982C6, MSG_SCRIPT_FLAG_END, 1160 },
 };
 #endif
 #ifdef VERSION_JP
@@ -4857,7 +4857,7 @@ static const MessageScriptEntry sEvent102Script[19] = {
     { 23, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8799C, 0, 860 },
     { 23, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8793C, 0, 960 },
     { 0, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F878F4, 0, 1130 },
-    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F878D8, 32768, 1160 },
+    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F878D8, MSG_SCRIPT_FLAG_END, 1160 },
 };
 
 #include "event_102_text.inc"
@@ -4882,19 +4882,19 @@ static const MessageScriptEntry sEvent102Script[19] = {
     { 23, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E480, 0, 860 },
     { 23, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E494, 0, 960 },
     { 0, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E4A8, 0, 1130 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E4BC, 32768, 1160 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E4BC, MSG_SCRIPT_FLAG_END, 1160 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent102Camera[3] = {
     { -64775, 48128, 38144, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64566, 35840, 29440, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64336, 48128, 38144, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
+    { -64566, 35840, 29440, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64336, 48128, 38144, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent102SoundCues[2] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
-    { SONG_BGM_EVENT1, 1245, 32769, 0 },
+    { SONG_BGM_EVENT1, 1245, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent102Track0[15] = {
@@ -5011,7 +5011,7 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 13, 5, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98E68, 0, 302 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98ECC, 0, 320 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98EF0, 0, 340 },
-    { 14, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98F2C, 32, 380 },
+    { 14, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98F2C, MSG_SCRIPT_FLAG_SILHOUETTE, 380 },
     { 14, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F98F90, 0, 560 },
     { 14, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F99022, 0, 580 },
     { 14, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9908E, 0, 582 },
@@ -5035,7 +5035,7 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9971C, 0, 1600 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9973A, 0, 1700 },
     { 13, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F997C2, 0, 1720 },
-    { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F997FC, 32768, 1740 },
+    { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F997FC, MSG_SCRIPT_FLAG_END, 1740 },
 };
 #endif
 #ifdef VERSION_JP
@@ -5045,7 +5045,7 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 13, 5, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88D58, 0, 302 },
     { 1, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88D3C, 0, 320 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88D1C, 0, 340 },
-    { 14, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88CDC, 32, 380 },
+    { 14, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88CDC, MSG_SCRIPT_FLAG_SILHOUETTE, 380 },
     { 14, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88C94, 0, 560 },
     { 14, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88C58, 0, 580 },
     { 14, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88C08, 0, 582 },
@@ -5069,7 +5069,7 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 0, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F888F0, 0, 1600 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F888A8, 0, 1700 },
     { 13, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F88894, 0, 1720 },
-    { 0, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8885C, 32768, 1740 },
+    { 0, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8885C, MSG_SCRIPT_FLAG_END, 1740 },
 };
 
 #include "event_103_text.inc"
@@ -5081,7 +5081,7 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 13, 5, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E4F8, 0, 302 },
     { 1, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E50C, 0, 320 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E520, 0, 340 },
-    { 14, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E534, 32, 380 },
+    { 14, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E534, MSG_SCRIPT_FLAG_SILHOUETTE, 380 },
     { 14, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E548, 0, 560 },
     { 14, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E55C, 0, 580 },
     { 14, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E570, 0, 582 },
@@ -5105,24 +5105,24 @@ static const MessageScriptEntry sEvent103Script[30] = {
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E6D8, 0, 1600 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E6EC, 0, 1700 },
     { 13, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E700, 0, 1720 },
-    { 0, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E714, 32768, 1740 },
+    { 0, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E714, MSG_SCRIPT_FLAG_END, 1740 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent103Camera[3] = {
     { -65376, 39168, 61952, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64186, 83200, 45824, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -55537, 69632, 47616, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
+    { -64186, 83200, 45824, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -55537, 69632, 47616, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent103SoundCues[7] = {
     { 65535, 0, 0, 0 },
-    { SONG_BGM_EVENT_SILENCE, 300, 2, 0 },
-    { SONG_BGM_EVENT_SILENCE, 370, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 381, 2, 0 },
-    { SONG_BGM_EVENT_UNREST, 1100, 1, 0 },
-    { SONG_BGM_UNDERTHESEA, 1700, 2, 0 },
-    { SONG_BGM_UNDERTHESEA, 1845, 32769, 0 },
+    { SONG_BGM_EVENT_SILENCE, 300, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_SILENCE, 370, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 381, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_UNREST, 1100, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_UNDERTHESEA, 1700, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_UNDERTHESEA, 1845, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent103Track0[21] = {
@@ -5247,7 +5247,7 @@ static const MessageScriptEntry sEvent104Script[16] = {
     { 14, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9A786, 0, 900 },
     { 14, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9A7AA, 0, 902 },
     { 14, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9A810, 0, 904 },
-    { 14, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9A874, 32768, 906 },
+    { 14, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9A874, MSG_SCRIPT_FLAG_END, 906 },
 };
 #endif
 #ifdef VERSION_JP
@@ -5267,7 +5267,7 @@ static const MessageScriptEntry sEvent104Script[16] = {
     { 14, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F89870, 0, 900 },
     { 14, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F89840, 0, 902 },
     { 14, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F89824, 0, 904 },
-    { 14, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F897E8, 32768, 906 },
+    { 14, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F897E8, MSG_SCRIPT_FLAG_END, 906 },
 };
 
 #include "event_104_text.inc"
@@ -5289,14 +5289,14 @@ static const MessageScriptEntry sEvent104Script[16] = {
     { 14, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E9BC, 0, 900 },
     { 14, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E9D0, 0, 902 },
     { 14, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E9E4, 0, 904 },
-    { 14, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E9F8, 32768, 906 },
+    { 14, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E9F8, MSG_SCRIPT_FLAG_END, 906 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent104Camera[3] = {
     { -64626, 45312, 35328, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64556, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, 33826, 20, { 0, 0 }, 0 },
+    { -64556, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 20, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent104SoundCues[7] = {
@@ -5306,7 +5306,7 @@ static const EvSoundCue sEvent104SoundCues[7] = {
     { SONG_BGM_EVENT_UNREST, 902, 0, 0 },
     { SONG_BGM_EVENT2, 904, 0, 0 },
     { SONG_EV_RUMBLE, 910, 0, 0 },
-    { SONG_EV_RUMBLE, 945, 32769, 0 },
+    { SONG_EV_RUMBLE, 945, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent104Track1[6] = {
@@ -5426,28 +5426,28 @@ const EventSequenceDef gEvent104 = {
 #include "event_105_text.inc"
 
 static const MessageScriptEntry sEvent105Script[1] = {
-    { 14, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9B350, 32768, 100 },
+    { 14, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9B350, MSG_SCRIPT_FLAG_END, 100 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent105Script[1] = {
-    { 14, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A3A4, 32768, 100 },
+    { 14, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A3A4, MSG_SCRIPT_FLAG_END, 100 },
 };
 
 #include "event_105_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent105Script[1] = {
-    { 14, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E728, 32768, 100 },
+    { 14, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E728, MSG_SCRIPT_FLAG_END, 100 },
 };
 #endif
 
 static const EvSoundCue sEvent105SoundCues[1] = {
-    { SONG_BGM_EVENT2, 0, 32768, 0 },
+    { SONG_BGM_EVENT2, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent105Camera[1] = {
-    { -64626, 81920, 102400, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -64626, 81920, 102400, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent105Track0[1] = {
@@ -5511,7 +5511,7 @@ static const MessageScriptEntry sEvent106Script[20] = {
     { 13, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9BABC, 0, 642 },
     { 13, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9BB64, 0, 680 },
     { 6, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9BC1A, 0, 870 },
-    { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9BC78, 32768, 910 },
+    { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9BC78, MSG_SCRIPT_FLAG_END, 910 },
 };
 #endif
 #ifdef VERSION_JP
@@ -5535,7 +5535,7 @@ static const MessageScriptEntry sEvent106Script[20] = {
     { 13, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A73C, 0, 642 },
     { 13, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A6E8, 0, 680 },
     { 6, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A6B8, 0, 870 },
-    { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A674, 32768, 910 },
+    { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8A674, MSG_SCRIPT_FLAG_END, 910 },
 };
 
 #include "event_106_text.inc"
@@ -5561,17 +5561,17 @@ static const MessageScriptEntry sEvent106Script[20] = {
     { 13, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E87C, 0, 642 },
     { 13, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E890, 0, 680 },
     { 6, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E8A4, 0, 870 },
-    { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E8B8, 32768, 910 },
+    { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E8B8, MSG_SCRIPT_FLAG_END, 910 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent106Camera[1] = {
-    { -64626, 45056, 38144, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -64626, 45056, 38144, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent106SoundCues[2] = {
     { SONG_BGM_EVENT4, 0, 0, 0 },
-    { SONG_BGM_EVENT4, 965, 32769, 0 },
+    { SONG_BGM_EVENT4, 965, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent106Track0[6] = {
@@ -5665,7 +5665,7 @@ static const MessageScriptEntry sEvent107Script[4] = {
     { 2, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9C3E4, 0, 190 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9C428, 0, 350 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9C45C, 0, 550 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9C4A4, 32768, 570 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9C4A4, MSG_SCRIPT_FLAG_END, 570 },
 };
 #endif
 #ifdef VERSION_JP
@@ -5673,7 +5673,7 @@ static const MessageScriptEntry sEvent107Script[4] = {
     { 2, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8B0E8, 0, 190 },
     { 1, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8B0D4, 0, 350 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8B0C4, 0, 550 },
-    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8B0A0, 32768, 570 },
+    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8B0A0, MSG_SCRIPT_FLAG_END, 570 },
 };
 
 #include "event_107_text.inc"
@@ -5683,19 +5683,19 @@ static const MessageScriptEntry sEvent107Script[4] = {
     { 2, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D968, 0, 190 },
     { 1, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D97C, 0, 350 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D990, 0, 550 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D9A4, 32768, 570 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D9A4, MSG_SCRIPT_FLAG_END, 570 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent107Camera[4] = {
-    { -65536, 33024, 87296, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65455, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -55537, 87040, 60160, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
+    { -65536, 33024, 87296, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65455, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -65286, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -55537, 87040, 60160, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent107SoundCues[1] = {
-    { SONG_BGM_ALADDIN_FIELD, 0, 32768, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent107Track0[1] = {
@@ -5831,7 +5831,7 @@ static const MessageScriptEntry sEvent108Script[16] = {
     { 15, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9D23E, 0, 940 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9D2D4, 0, 970 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9D364, 0, 1000 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9D38C, 32768, 1020 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9D38C, MSG_SCRIPT_FLAG_END, 1020 },
 };
 #endif
 #ifdef VERSION_JP
@@ -5852,7 +5852,7 @@ static const MessageScriptEntry sEvent108Script[17] = {
     { 15, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8BB3C, 0, 940 },
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8BAEC, 0, 970 },
     { 0, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8BAD4, 0, 1000 },
-    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8BAB0, 32768, 1020 },
+    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8BAB0, MSG_SCRIPT_FLAG_END, 1020 },
 };
 
 #include "event_108_text.inc"
@@ -5874,27 +5874,27 @@ static const MessageScriptEntry sEvent108Script[16] = {
     { 15, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D918, 0, 940 },
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D92C, 0, 970 },
     { 0, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D940, 0, 1000 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D954, 32768, 1020 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5D954, MSG_SCRIPT_FLAG_END, 1020 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent108Camera[8] = {
     { -65181, 93184, 56064, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65081, 96000, 40960, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -64996, 96000, 20736, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64796, 91136, 46080, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -64726, 83712, 53504, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64686, 88832, 53504, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -64676, 0, 0, 0, 255, { 0, 0, 0 }, 65554, 10, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65081, 96000, 40960, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -64996, 96000, 20736, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64796, 91136, 46080, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -64726, 83712, 53504, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64686, 88832, 53504, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -64676, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent108SoundCues[5] = {
     { SONG_BGM_ALADDIN_BATTLE, 0, 0, 0 },
-    { SONG_BGM_ALADDIN_BATTLE, 410, 1, 0 },
+    { SONG_BGM_ALADDIN_BATTLE, 410, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_VO_GE_EVENT00, 480, 0, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 750, 2, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 1115, 32769, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 750, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 1115, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventBgEffectEntry sEvent108BgEffects[3] = {
@@ -6123,7 +6123,7 @@ static const MessageScriptEntry sEvent109Script[22] = {
     { 21, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9F27E, 0, 672 },
     { 15, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9F2E8, 0, 690 },
     { 21, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9F334, 0, 710 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9F360, 32768, 740 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08F9F360, MSG_SCRIPT_FLAG_END, 740 },
 };
 #endif
 #ifdef VERSION_JP
@@ -6149,7 +6149,7 @@ static const MessageScriptEntry sEvent109Script[22] = {
     { 21, 3, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8D3D8, 0, 672 },
     { 15, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8D3B4, 0, 690 },
     { 21, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8D398, 0, 710 },
-    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8D35C, 32768, 740 },
+    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8D35C, MSG_SCRIPT_FLAG_END, 740 },
 };
 
 #include "event_109_text.inc"
@@ -6177,17 +6177,17 @@ static const MessageScriptEntry sEvent109Script[22] = {
     { 21, 3, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DB20, 0, 672 },
     { 15, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DB34, 0, 690 },
     { 21, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DB48, 0, 710 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DB5C, 32768, 740 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DB5C, MSG_SCRIPT_FLAG_END, 740 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent109Camera[1] = {
-    { -55537, 32768, 26624, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -55537, 32768, 26624, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent109SoundCues[2] = {
     { SONG_BGM_ALADDIN_FIELD, 0, 0, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 885, 32769, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 885, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent109Track3[12] = {
@@ -6327,7 +6327,7 @@ static const MessageScriptEntry sEvent110Script[13] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA02B8, 0, 940 },
     { 15, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA0306, 0, 1120 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA037C, 0, 1140 },
-    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA03DA, 32768, 1200 },
+    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA03DA, MSG_SCRIPT_FLAG_END, 1200 },
 };
 #endif
 #ifdef VERSION_JP
@@ -6344,7 +6344,7 @@ static const MessageScriptEntry sEvent110Script[13] = {
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8E574, 0, 940 },
     { 15, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8E548, 0, 1120 },
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8E510, 0, 1140 },
-    { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8E4E8, 32768, 1200 },
+    { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8E4E8, MSG_SCRIPT_FLAG_END, 1200 },
 };
 
 #include "event_110_text.inc"
@@ -6363,25 +6363,25 @@ static const MessageScriptEntry sEvent110Script[13] = {
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DE68, 0, 940 },
     { 15, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DE7C, 0, 1120 },
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DE90, 0, 1140 },
-    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DEA4, 32768, 1200 },
+    { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DEA4, MSG_SCRIPT_FLAG_END, 1200 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent110Camera[6] = {
     { -65406, 32256, 29696, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65276, 77824, 90368, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -65056, 32256, 29696, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -64816, 70912, 89600, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -64536, 69632, 92672, 0, 255, { 0, 0, 0 }, 1, 60, { 0, 0 }, 0 },
-    { -62536, 77312, 90112, 0, 255, { 0, 0, 0 }, 32769, 30, { 0, 0 }, 0 },
+    { -65276, 77824, 90368, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -65056, 32256, 29696, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -64816, 70912, 89600, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -64536, 69632, 92672, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
+    { -62536, 77312, 90112, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent110SoundCues[5] = {
     { SONG_BGM_ALADDIN_FIELD, 0, 0, 0 },
     { SONG_EV_DL_JUMP, 70, 0, 0 },
     { SONG_BGM_EVENT2, 190, 0, 0 },
-    { SONG_BGM_EVENT2, 680, 1, 0 },
-    { SONG_BGM_EVENT2, 1000, 32768, 0 },
+    { SONG_BGM_EVENT2, 680, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT2, 1000, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent110Track0[16] = {
@@ -6606,7 +6606,7 @@ static const MessageScriptEntry sEvent111Script[29] = {
     { 15, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA209E, 0, 1500 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA211C, 0, 1520 },
     { 1, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA2150, 0, 1522 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA21B0, 32768, 1700 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA21B0, MSG_SCRIPT_FLAG_END, 1700 },
 };
 #endif
 #ifdef VERSION_JP
@@ -6639,7 +6639,7 @@ static const MessageScriptEntry sEvent111Script[29] = {
     { 15, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8FB54, 0, 1500 },
     { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8FB28, 0, 1520 },
     { 1, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8FB00, 0, 1522 },
-    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8FACC, 32768, 1700 },
+    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F8FACC, MSG_SCRIPT_FLAG_END, 1700 },
 };
 
 #include "event_111_text.inc"
@@ -6674,32 +6674,32 @@ static const MessageScriptEntry sEvent111Script[29] = {
     { 15, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DD64, 0, 1500 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DD78, 0, 1520 },
     { 1, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DD8C, 0, 1522 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DDA0, 32768, 1700 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DDA0, MSG_SCRIPT_FLAG_END, 1700 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent111Camera[12] = {
     { -65336, 70400, 92416, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -65296, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -65276, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -65236, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -65086, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64856, 36352, 28672, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64756, 68352, 92416, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64336, 36352, 28672, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -63826, 72704, 97536, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -63686, 72704, 22528, 0, 255, { 0, 0, 0 }, 32769, 150, { 0, 0 }, 0 },
+    { -65316, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -65296, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -65276, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -65236, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -65086, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64856, 36352, 28672, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64756, 68352, 92416, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64336, 36352, 28672, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -63826, 72704, 97536, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -63686, 72704, 22528, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent111SoundCues[6] = {
     { SONG_BGM_ALADDIN_FIELD, 0, 0, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 200, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 450, 2, 0 },
-    { SONG_BGM_EVENT_UNREST, 1150, 1, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 1500, 2, 0 },
-    { SONG_BGM_ALADDIN_FIELD, 1745, 32769, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 200, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 450, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_UNREST, 1150, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 1500, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_ALADDIN_FIELD, 1745, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent111Track0[11] = {
@@ -6856,7 +6856,7 @@ static const MessageScriptEntry sEvent112Script[15] = {
     { 16, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA3592, 0, 980 },
     { 16, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA35D6, 0, 982 },
     { 16, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA3684, 0, 984 },
-    { 16, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA36F8, 32768, 1010 },
+    { 16, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA36F8, MSG_SCRIPT_FLAG_END, 1010 },
 };
 #endif
 #ifdef VERSION_JP
@@ -6875,7 +6875,7 @@ static const MessageScriptEntry sEvent112Script[15] = {
     { 16, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F91048, 0, 980 },
     { 16, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F90FFC, 0, 982 },
     { 16, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F90FAC, 0, 984 },
-    { 16, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F90F64, 32768, 1010 },
+    { 16, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F90F64, MSG_SCRIPT_FLAG_END, 1010 },
 };
 
 #include "event_112_text.inc"
@@ -6896,26 +6896,26 @@ static const MessageScriptEntry sEvent112Script[15] = {
     { 16, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E214, 0, 980 },
     { 16, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E228, 0, 982 },
     { 16, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E23C, 0, 984 },
-    { 16, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E250, 32768, 1010 },
+    { 16, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E250, MSG_SCRIPT_FLAG_END, 1010 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent112Camera[15] = {
     { -65306, 91392, 43520, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65086, 89600, 33536, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -65076, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -65036, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65016, 0, 0, 0, 255, { 0, 0, 0 }, 2050, 0, { 0, 0 }, 0 },
-    { -65006, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64906, 48896, 20736, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -64856, 91392, 38656, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -64756, 48896, 20736, 0, 255, { 0, 0, 0 }, 1, 20, { 0, 0 }, 0 },
-    { -64516, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64506, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64466, 0, 0, 0, 255, { 0, 0, 0 }, 18, 10, { 0, 0 }, 0 },
-    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 30, { 0, 0 }, 0 },
-    { -64036, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65086, 89600, 33536, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -65076, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65036, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65016, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65006, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64906, 48896, 20736, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -64856, 91392, 38656, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -64756, 48896, 20736, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -64516, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64506, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64486, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64466, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64436, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
+    { -64036, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent112SoundCues[5] = {
@@ -6923,7 +6923,7 @@ static const EvSoundCue sEvent112SoundCues[5] = {
     { SONG_BGM_EVENT_UNREST, 260, 0, 0 },
     { SONG_BGM_EVENT2, 300, 0, 0 },
     { SONG_BTL_AR_PUNCHHIT, 450, 0, 0 },
-    { SONG_BTL_MON_HIT06, 500, 32768, 0 },
+    { SONG_BTL_MON_HIT06, 500, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent112Track0[5] = {
@@ -7042,30 +7042,30 @@ const EventSequenceDef gEvent112 = {
 #include "event_113_text.inc"
 
 static const MessageScriptEntry sEvent113Script[1] = {
-    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA42A8, 32768, 250 },
+    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA42A8, MSG_SCRIPT_FLAG_END, 250 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent113Script[1] = {
-    { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F91C24, 32768, 250 },
+    { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F91C24, MSG_SCRIPT_FLAG_END, 250 },
 };
 
 #include "event_113_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent113Script[1] = {
-    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DEB8, 32768, 250 },
+    { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5DEB8, MSG_SCRIPT_FLAG_END, 250 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent113Camera[3] = {
-    { -65536, 146944, 75776, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65336, 0, 0, 0, 255, { 0, 0, 0 }, 130, 100, { 0, 0 }, 0 },
-    { -55537, 146944, 75776, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -65536, 146944, 75776, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65336, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 100, { 0, 0 }, 0 },
+    { -55537, 146944, 75776, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent113SoundCues[1] = {
-    { SONG_BGM_EVENT2, 0, 32768, 0 },
+    { SONG_BGM_EVENT2, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent113Track0[1] = {
@@ -7140,7 +7140,7 @@ static const MessageScriptEntry sEvent114Script[31] = {
     { 21, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA4D28, 0, 1890 },
     { 21, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA4DDA, 0, 1892 },
     { 0, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA4E3C, 0, 1922 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA4E62, 32768, 1960 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA4E62, MSG_SCRIPT_FLAG_END, 1960 },
 };
 #endif
 #ifdef VERSION_JP
@@ -7175,7 +7175,7 @@ static const MessageScriptEntry sEvent114Script[31] = {
     { 21, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F920A8, 0, 1890 },
     { 21, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F92074, 0, 1892 },
     { 0, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9205C, 0, 1922 },
-    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F92034, 32768, 1960 },
+    { 15, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F92034, MSG_SCRIPT_FLAG_END, 1960 },
 };
 
 #include "event_114_text.inc"
@@ -7212,27 +7212,27 @@ static const MessageScriptEntry sEvent114Script[31] = {
     { 21, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E0E8, 0, 1890 },
     { 21, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E0FC, 0, 1892 },
     { 0, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E110, 0, 1922 },
-    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E124, 32768, 1960 },
+    { 15, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5E124, MSG_SCRIPT_FLAG_END, 1960 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent114Camera[9] = {
     { -64936, 87808, 38912, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64926, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -64916, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -64876, 0, 0, 0, 255, { 0, 0, 0 }, 65554, 20, { 0, 0 }, 0 },
-    { -64811, 0, 0, 0, 255, { 0, 0, 0 }, 34, 60, { 0, 0 }, 0 },
-    { -64751, 0, 0, 0, 255, { 0, 0, 0 }, 130, 60, { 0, 0 }, 0 },
-    { -64536, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -60536, 85760, 41472, 0, 255, { 0, 0, 0 }, 1, 40, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64926, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64916, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64876, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 20, { 0, 0 }, 0 },
+    { -64811, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 60, { 0, 0 }, 0 },
+    { -64751, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 60, { 0, 0 }, 0 },
+    { -64536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -60536, 85760, 41472, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 40, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent114SoundCues[4] = {
     { 65535, 0, 0, 0 },
     { SONG_EV_WHITEOUT, 660, 0, 0 },
-    { SONG_BGM_EVENT4, 855, 2, 0 },
-    { SONG_BGM_EVENT4, 2095, 32769, 0 },
+    { SONG_BGM_EVENT4, 855, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT4, 2095, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent114Track0[14] = {
@@ -7395,7 +7395,7 @@ static const MessageScriptEntry sEvent115Script[8] = {
     { 1, 5, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA603A, 0, 300 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6044, 0, 320 },
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA605E, 0, 560 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA609C, 32768, 630 },
+    { 2, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA609C, MSG_SCRIPT_FLAG_END, 630 },
 };
 #endif
 #ifdef VERSION_JP
@@ -7407,7 +7407,7 @@ static const MessageScriptEntry sEvent115Script[8] = {
     { 1, 5, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F781F8, 0, 300 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F933C4, 0, 320 },
     { 6, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F933A0, 0, 560 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F93384, 32768, 630 },
+    { 2, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F93384, MSG_SCRIPT_FLAG_END, 630 },
 };
 
 #include "event_115_text.inc"
@@ -7421,20 +7421,20 @@ static const MessageScriptEntry sEvent115Script[8] = {
     { 1, 5, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68408, 0, 300 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6841C, 0, 320 },
     { 6, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68430, 0, 560 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68444, 32768, 630 },
+    { 2, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68444, MSG_SCRIPT_FLAG_END, 630 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent115Camera[2] = {
-    { -65536, 32768, 32768, 0, 255, { 0, 0, 0 }, 4224, 0, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 36994, 80, { 0, 0 }, 0 },
+    { -65536, 32768, 32768, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_SWAY, 0, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent115SoundCues[4] = {
     { SONG_BGM_PETERPAN_FIELD, 0, 0, 0 },
     { SONG_SND_387, 251, 0, 0 },
-    { SONG_SND_387, 780, 1, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1015, 32769, 0 },
+    { SONG_SND_387, 780, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1015, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent115Track0[8] = {
@@ -7552,7 +7552,7 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6B12, 0, 280 },
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6B58, 0, 310 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6B7E, 0, 360 },
-    { 29, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6BE0, 32, 400 },
+    { 29, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6BE0, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
     { 29, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6C7C, 0, 540 },
     { 1, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6CF6, 0, 560 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA6D84, 0, 730 },
@@ -7578,7 +7578,7 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA74B6, 0, 1230 },
     { 29, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA7546, 0, 1400 },
     { 29, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA75D2, 0, 1402 },
-    { 1, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA7636, 32768, 1420 },
+    { 1, 4, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA7636, MSG_SCRIPT_FLAG_END, 1420 },
 };
 #endif
 #ifdef VERSION_JP
@@ -7587,7 +7587,7 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94618, 0, 280 },
     { 1, 0, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94600, 0, 310 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F945E4, 0, 360 },
-    { 29, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9459C, 32, 400 },
+    { 29, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9459C, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
     { 29, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94554, 0, 540 },
     { 1, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94520, 0, 560 },
     { 1, 2, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F944EC, 0, 730 },
@@ -7613,7 +7613,7 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F940FC, 0, 1230 },
     { 29, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F940AC, 0, 1400 },
     { 29, 3, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9407C, 0, 1402 },
-    { 1, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94064, 32768, 1420 },
+    { 1, 4, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94064, MSG_SCRIPT_FLAG_END, 1420 },
 };
 
 #include "event_116_text.inc"
@@ -7624,7 +7624,7 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6846C, 0, 280 },
     { 1, 0, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68480, 0, 310 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68494, 0, 360 },
-    { 29, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F684A8, 32, 400 },
+    { 29, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F684A8, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
     { 29, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F684BC, 0, 540 },
     { 1, 4, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F684D0, 0, 560 },
     { 1, 2, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F684E4, 0, 730 },
@@ -7650,21 +7650,21 @@ static const MessageScriptEntry sEvent116Script[31] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68674, 0, 1230 },
     { 29, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68688, 0, 1400 },
     { 29, 3, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6869C, 0, 1402 },
-    { 1, 4, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F686B0, 32768, 1420 },
+    { 1, 4, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F686B0, MSG_SCRIPT_FLAG_END, 1420 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent116Camera[1] = {
-    { -55537, 32768, 32768, 0, 255, { 0, 0, 0 }, 36864, 0, { 0, 0 }, 0 },
+    { -55537, 32768, 32768, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent116SoundCues[6] = {
     { 65535, 0, 0, 0 },
     { SONG_SND_387, 1, 0, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 420, 2, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 420, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_EV_MAN_RMARBLEL, 460, 0, 0 },
-    { SONG_SND_387, 1490, 1, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1515, 32769, 0 },
+    { SONG_SND_387, 1490, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1515, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent116Track0[29] = {
@@ -7846,7 +7846,7 @@ static const MessageScriptEntry sEvent117Script[24] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA8FC4, 0, 1250 },
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA901E, 0, 1400 },
     { 42, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA9090, 0, 1420 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA90B8, 32768, 1440 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FA90B8, MSG_SCRIPT_FLAG_END, 1440 },
 };
 #endif
 #ifdef VERSION_JP
@@ -7874,7 +7874,7 @@ static const MessageScriptEntry sEvent117Script[24] = {
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F958B8, 0, 1250 },
     { 0, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F95860, 0, 1400 },
     { 42, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9584C, 0, 1420 },
-    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F957FC, 32768, 1440 },
+    { 2, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F957FC, MSG_SCRIPT_FLAG_END, 1440 },
 };
 
 #include "event_117_text.inc"
@@ -7904,24 +7904,24 @@ static const MessageScriptEntry sEvent117Script[24] = {
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68854, 0, 1250 },
     { 0, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68868, 0, 1400 },
     { 42, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F6887C, 0, 1420 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68890, 32768, 1440 },
+    { 2, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68890, MSG_SCRIPT_FLAG_END, 1440 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent117Camera[2] = {
-    { -65396, 30720, 27136, 0, 255, { 0, 0, 0 }, 4096, 0, { 0, 0 }, 0 },
-    { -65366, 35072, 27136, 0, 255, { 0, 0, 0 }, 36865, 30, { 0, 0 }, 0 },
+    { -65396, 30720, 27136, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY, 0, { 0, 0 }, 0 },
+    { -65366, 35072, 27136, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent117SoundCues[8] = {
     { SONG_BGM_PETERPAN_FIELD, 0, 0, 0 },
     { SONG_SND_387, 1, 0, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 650, 1, 0 },
-    { SONG_BGM_EVENT_SILENCE, 900, 2, 0 },
-    { SONG_BGM_EVENT_SILENCE, 1139, 1, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1180, 2, 0 },
-    { SONG_SND_387, 1520, 1, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1545, 32769, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 650, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_SILENCE, 900, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1139, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1180, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_SND_387, 1520, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1545, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent117Track0[23] = {
@@ -8084,7 +8084,7 @@ const EventSequenceDef gEvent117 = {
 
 static const MessageScriptEntry sEvent118Script[23] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA2D8, 0, 120 },
-    { 30, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA314, 32, 150 },
+    { 30, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA314, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
     { 30, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA34C, 0, 350 },
     { 30, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA3B8, 0, 352 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA3FC, 0, 390 },
@@ -8105,13 +8105,13 @@ static const MessageScriptEntry sEvent118Script[23] = {
     { 30, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA90E, 0, 1140 },
     { 29, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA984, 0, 1190 },
     { 30, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA992, 0, 1260 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA9C0, 32768, 1500 },
+    { 30, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAA9C0, MSG_SCRIPT_FLAG_END, 1500 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent118Script[23] = {
     { 1, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F97208, 0, 120 },
-    { 30, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F971F0, 32, 150 },
+    { 30, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F971F0, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
     { 30, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F971B4, 0, 350 },
     { 30, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F97194, 0, 352 },
     { 1, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F97180, 0, 390 },
@@ -8132,7 +8132,7 @@ static const MessageScriptEntry sEvent118Script[23] = {
     { 30, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F96E9C, 0, 1140 },
     { 29, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F96E90, 0, 1190 },
     { 30, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F96E68, 0, 1260 },
-    { 30, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F96E14, 32768, 1500 },
+    { 30, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F96E14, MSG_SCRIPT_FLAG_END, 1500 },
 };
 
 #include "event_118_text.inc"
@@ -8140,7 +8140,7 @@ static const MessageScriptEntry sEvent118Script[23] = {
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent118Script[23] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AFC, 0, 120 },
-    { 30, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68B10, 32, 150 },
+    { 30, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68B10, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
     { 30, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68B24, 0, 350 },
     { 30, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68B38, 0, 352 },
     { 1, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68B4C, 0, 390 },
@@ -8161,27 +8161,27 @@ static const MessageScriptEntry sEvent118Script[23] = {
     { 30, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68C78, 0, 1140 },
     { 29, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68C8C, 0, 1190 },
     { 30, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68CA0, 0, 1260 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68CB4, 32768, 1500 },
+    { 30, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68CB4, MSG_SCRIPT_FLAG_END, 1500 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent118Camera[5] = {
-    { -65321, 33024, 71424, 0, 255, { 0, 0, 0 }, 4096, 0, { 0, 0 }, 0 },
-    { -64936, 41728, 63744, 0, 255, { 0, 0, 0 }, 4097, 80, { 0, 0 }, 0 },
-    { -64336, 86784, 69888, 0, 255, { 0, 0, 0 }, 4097, 120, { 0, 0 }, 0 },
-    { -64036, 96256, 69888, 0, 255, { 0, 0, 0 }, 4097, 20, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 36866, 0, { 0, 0 }, 0 },
+    { -65321, 33024, 71424, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY, 0, { 0, 0 }, 0 },
+    { -64936, 41728, 63744, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -64336, 86784, 69888, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_MODE_APPROACH, 120, { 0, 0 }, 0 },
+    { -64036, 96256, 69888, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_MODE_APPROACH, 20, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent118SoundCues[8] = {
     { 65535, 0, 0, 0 },
-    { SONG_BGM_EVENT3, 350, 2, 0 },
-    { SONG_BGM_EVENT3, 600, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 650, 2, 0 },
-    { SONG_BGM_EVENT_UNREST, 1141, 1, 0 },
-    { SONG_BGM_EVENT1, 1190, 2, 0 },
+    { SONG_BGM_EVENT3, 350, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT3, 600, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 650, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_UNREST, 1141, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT1, 1190, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_384, 1191, 0, 0 },
-    { SONG_EV_HUKUROUJUMP, 1205, 32768, 0 },
+    { SONG_EV_HUKUROUJUMP, 1205, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent118Track0[28] = {
@@ -8373,7 +8373,7 @@ static const MessageScriptEntry sEvent119Script[30] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAC7DC, 0, 1720 },
     { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAC83E, 0, 1760 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAC848, 0, 1790 },
-    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAC87A, 32768, 1810 },
+    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAC87A, MSG_SCRIPT_FLAG_END, 1810 },
 };
 #endif
 #ifdef VERSION_JP
@@ -8407,7 +8407,7 @@ static const MessageScriptEntry sEvent119Script[30] = {
     { 1, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9850C, 0, 1720 },
     { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F98500, 0, 1760 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F984D8, 0, 1790 },
-    { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94064, 32768, 1810 },
+    { 1, 4, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F94064, MSG_SCRIPT_FLAG_END, 1810 },
 };
 
 #include "event_119_text.inc"
@@ -8443,29 +8443,29 @@ static const MessageScriptEntry sEvent119Script[30] = {
     { 1, 3, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AAC, 0, 1720 },
     { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AC0, 0, 1760 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AD4, 0, 1790 },
-    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AE8, 32768, 1810 },
+    { 1, 4, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F68AE8, MSG_SCRIPT_FLAG_END, 1810 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent119Camera[2] = {
-    { -64316, 41984, 62464, 0, 255, { 0, 0, 0 }, 4096, 0, { 0, 0 }, 0 },
-    { -64236, 47104, 67584, 0, 255, { 0, 0, 0 }, 36865, 60, { 0, 0 }, 0 },
+    { -64316, 41984, 62464, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY, 0, { 0, 0 }, 0 },
+    { -64236, 47104, 67584, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SWAY | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 60, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent119SoundCues[13] = {
     { 65535, 0, 0, 0 },
     { SONG_SND_387, 1, 0, 0 },
-    { SONG_BGM_EVENT4, 500, 2, 0 },
+    { SONG_BGM_EVENT4, 500, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_EV_HUKUROUJUMP, 850, 0, 0 },
-    { SONG_BGM_EVENT4, 1001, 1, 0 },
-    { SONG_SND_387, 1020, 1, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1100, 2, 0 },
+    { SONG_BGM_EVENT4, 1001, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_SND_387, 1020, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1100, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_387, 1200, 0, 0 },
-    { SONG_SND_387, 1650, 1, 0 },
+    { SONG_SND_387, 1650, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_SYS_PO_FALL, 1731, 0, 0 },
     { SONG_SND_354, 1750, 0, 0 },
     { SONG_SND_324, 1780, 0, 0 },
-    { SONG_BGM_PETERPAN_FIELD, 1895, 32769, 0 },
+    { SONG_BGM_PETERPAN_FIELD, 1895, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent119Track0[13] = {
@@ -8624,12 +8624,12 @@ static const MessageScriptEntry sEvent120Script[24] = {
     { 34, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADCB0, 0, 1730 },
     { 34, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADDA8, 0, 1976 },
     { 34, 3, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADE12, 0, 1978 },
-    { 35, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADEFC, 32, 1985 },
+    { 35, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADEFC, MSG_SCRIPT_FLAG_SILHOUETTE, 1985 },
     { 34, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADF32, 0, 2025 },
     { 34, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FADF78, 0, 2175 },
     { 34, 2, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAE014, 0, 2177 },
     { 35, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAE060, 0, 2207 },
-    { 34, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAE0B8, 32768, 2237 },
+    { 34, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAE0B8, MSG_SCRIPT_FLAG_END, 2237 },
 };
 #endif
 #ifdef VERSION_JP
@@ -8652,12 +8652,12 @@ static const MessageScriptEntry sEvent120Script[24] = {
     { 34, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F999AC, 0, 1730 },
     { 34, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F99980, 0, 1976 },
     { 34, 3, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9992C, 0, 1978 },
-    { 35, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9990C, 32, 1985 },
+    { 35, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9990C, MSG_SCRIPT_FLAG_SILHOUETTE, 1985 },
     { 34, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F998F0, 0, 2025 },
     { 34, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F998A4, 0, 2175 },
     { 34, 2, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F99880, 0, 2177 },
     { 35, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F99850, 0, 2207 },
-    { 34, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F99840, 32768, 2237 },
+    { 34, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F99840, MSG_SCRIPT_FLAG_END, 2237 },
 };
 
 #include "event_120_text.inc"
@@ -8682,27 +8682,27 @@ static const MessageScriptEntry sEvent120Script[24] = {
     { 34, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F5D8, 0, 1730 },
     { 34, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F5EC, 0, 1976 },
     { 34, 3, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F600, 0, 1978 },
-    { 35, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F614, 32, 1985 },
+    { 35, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F614, MSG_SCRIPT_FLAG_SILHOUETTE, 1985 },
     { 34, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F628, 0, 2025 },
     { 34, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F63C, 0, 2175 },
     { 34, 2, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F650, 0, 2177 },
     { 35, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F664, 0, 2207 },
-    { 34, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F678, 32768, 2237 },
+    { 34, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F678, MSG_SCRIPT_FLAG_END, 2237 },
 };
 #endif
 
 static const EvSoundCue sEvent120SoundCues[5] = {
     { SONG_BGM_HERCULES_FIELD, 0, 0, 0 },
-    { SONG_BGM_HERCULES_FIELD, 1300, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 1500, 2, 0 },
+    { SONG_BGM_HERCULES_FIELD, 1300, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 1500, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BTL_HA_IKARI, 1945, 0, 0 },
-    { SONG_BGM_EVENT_UNREST, 2450, 32769, 0 },
+    { SONG_BGM_EVENT_UNREST, 2450, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent120Camera[3] = {
-    { -65536, 31232, 30976, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65276, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -55537, 31232, 21760, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
+    { -65536, 31232, 30976, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65276, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -55537, 31232, 21760, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent120Track0[24] = {
@@ -8919,7 +8919,7 @@ static const MessageScriptEntry sEvent121Script[34] = {
     { 45, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAFF4E, 0, 1664 },
     { 45, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FAFFCC, 0, 1666 },
     { 45, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB0062, 0, 1860 },
-    { 45, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB00DA, 32768, 2060 },
+    { 45, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB00DA, MSG_SCRIPT_FLAG_END, 2060 },
 };
 #endif
 #ifdef VERSION_JP
@@ -8957,7 +8957,7 @@ static const MessageScriptEntry sEvent121Script[34] = {
     { 45, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9B198, 0, 1664 },
     { 45, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9B148, 0, 1666 },
     { 45, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9B130, 0, 1860 },
-    { 45, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9B124, 32768, 2060 },
+    { 45, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9B124, MSG_SCRIPT_FLAG_END, 2060 },
 };
 
 #include "event_121_text.inc"
@@ -8997,19 +8997,19 @@ static const MessageScriptEntry sEvent121Script[34] = {
     { 45, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F8E4, 0, 1664 },
     { 45, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F8F8, 0, 1666 },
     { 45, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F90C, 0, 1860 },
-    { 45, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F920, 32768, 2060 },
+    { 45, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F920, MSG_SCRIPT_FLAG_END, 2060 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent121Camera[3] = {
     { -63836, 49664, 35072, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -63436, 46848, 30720, 0, 255, { 0, 0, 0 }, 1, 70, { 0, 0 }, 0 },
-    { -60536, 65024, 20736, 0, 255, { 0, 0, 0 }, 32769, 200, { 0, 0 }, 0 },
+    { -63436, 46848, 30720, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 70, { 0, 0 }, 0 },
+    { -60536, 65024, 20736, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 200, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent121SoundCues[2] = {
     { SONG_BGM_HERCULES_FIELD, 0, 0, 0 },
-    { SONG_BGM_HERCULES_FIELD, 2095, 32769, 0 },
+    { SONG_BGM_HERCULES_FIELD, 2095, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent121Track0[33] = {
@@ -9207,7 +9207,7 @@ static const MessageScriptEntry sEvent122Script[16] = {
     { 35, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB1B0E, 0, 1220 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB1B52, 0, 1250 },
     { 0, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB1BC4, 0, 1252 },
-    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB1C2E, 32768, 1440 },
+    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB1C2E, MSG_SCRIPT_FLAG_END, 1440 },
 };
 #endif
 #ifdef VERSION_JP
@@ -9227,7 +9227,7 @@ static const MessageScriptEntry sEvent122Script[16] = {
     { 35, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9CB0C, 0, 1220 },
     { 0, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9CADC, 0, 1250 },
     { 0, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9CAA4, 0, 1252 },
-    { 35, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9CA94, 32768, 1440 },
+    { 35, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9CA94, MSG_SCRIPT_FLAG_END, 1440 },
 };
 
 #include "event_122_text.inc"
@@ -9249,20 +9249,20 @@ static const MessageScriptEntry sEvent122Script[16] = {
     { 35, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FA60, 0, 1220 },
     { 0, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FA74, 0, 1250 },
     { 0, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FA88, 0, 1252 },
-    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FA9C, 32768, 1440 },
+    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FA9C, MSG_SCRIPT_FLAG_END, 1440 },
 };
 #endif
 
 static const EvSoundCue sEvent122SoundCues[3] = {
     { SONG_BGM_HERCULES_FIELD, 0, 0, 0 },
-    { SONG_BGM_HERCULES_FIELD, 600, 1, 0 },
-    { SONG_BGM_EVENT1, 880, 32770, 0 },
+    { SONG_BGM_HERCULES_FIELD, 600, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT1, 880, EV_SOUND_FLAG_FADE_IN | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent122Camera[3] = {
     { -65326, 46592, 31232, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64986, 52224, 31232, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -60536, 73216, 38656, 0, 255, { 0, 0, 0 }, 32769, 210, { 0, 0 }, 0 },
+    { -64986, 52224, 31232, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -60536, 73216, 38656, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 210, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent122Track0[21] = {
@@ -9397,14 +9397,14 @@ const EventSequenceDef gEvent122 = {
 static const MessageScriptEntry sEvent123Script[3] = {
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB2A18, 0, 300 },
     { 6, 4, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB2A40, 0, 380 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB2AB4, 32768, 420 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB2AB4, MSG_SCRIPT_FLAG_END, 420 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent123Script[3] = {
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9DA24, 0, 300 },
     { 6, 4, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9D9F4, 0, 380 },
-    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9D9E8, 32768, 420 },
+    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9D9E8, MSG_SCRIPT_FLAG_END, 420 },
 };
 
 #include "event_123_text.inc"
@@ -9413,17 +9413,17 @@ static const MessageScriptEntry sEvent123Script[3] = {
 static const MessageScriptEntry sEvent123Script[3] = {
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F934, 0, 300 },
     { 6, 4, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F948, 0, 380 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F95C, 32768, 420 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5F95C, MSG_SCRIPT_FLAG_END, 420 },
 };
 #endif
 
 static const EvSoundCue sEvent123SoundCues[2] = {
     { SONG_BGM_EVENT1, 0, 0, 0 },
-    { SONG_BGM_EVENT1, 515, 32769, 0 },
+    { SONG_BGM_EVENT1, 515, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent123Camera[1] = {
-    { -60536, 68096, 38656, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -60536, 68096, 38656, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent123Track0[17] = {
@@ -9548,7 +9548,7 @@ static const MessageScriptEntry sEvent124Script[27] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB3A68, 0, 1390 },
     { 46, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB3A8C, 0, 1650 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB3AA0, 0, 1680 },
-    { 34, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB3B28, 32768, 1720 },
+    { 34, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB3B28, MSG_SCRIPT_FLAG_END, 1720 },
 };
 #endif
 #ifdef VERSION_JP
@@ -9579,7 +9579,7 @@ static const MessageScriptEntry sEvent124Script[27] = {
     { 0, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E46C, 0, 1390 },
     { 46, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E458, 0, 1650 },
     { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E418, 0, 1680 },
-    { 34, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E400, 32768, 1720 },
+    { 34, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9E400, MSG_SCRIPT_FLAG_END, 1720 },
 };
 
 #include "event_124_text.inc"
@@ -9612,25 +9612,25 @@ static const MessageScriptEntry sEvent124Script[27] = {
     { 0, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE34, 0, 1390 },
     { 46, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE48, 0, 1650 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE5C, 0, 1680 },
-    { 34, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE70, 32768, 1720 },
+    { 34, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FE70, MSG_SCRIPT_FLAG_END, 1720 },
 };
 #endif
 
 static const EvSoundCue sEvent124SoundCues[5] = {
     { SONG_BGM_EVENT2, 0, 0, 0 },
-    { SONG_BGM_EVENT2, 540, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 571, 2, 0 },
+    { SONG_BGM_EVENT2, 540, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 571, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_BGM_EVENT_UNREST, 1360, 0, 0 },
-    { SONG_BGM_EVENT2, 1390, 32768, 0 },
+    { SONG_BGM_EVENT2, 1390, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent124Camera[6] = {
     { -65535, 32768, 76032, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64831, 65280, 57088, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
-    { -64443, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64406, 0, 0, 0, 255, { 0, 0, 0 }, 1026, 0, { 0, 0 }, 0 },
-    { -64366, 0, 0, 0, 255, { 0, 0, 0 }, 8194, 0, { 0, 0 }, 0 },
-    { -60536, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -64831, 65280, 57088, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 100, { 0, 0 }, 0 },
+    { -64443, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64406, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64366, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -60536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent124BgEffects[4] = {
@@ -9785,28 +9785,28 @@ const EventSequenceDef gEvent124 = {
 #include "event_125_text.inc"
 
 static const MessageScriptEntry sEvent125Script[1] = {
-    { 34, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB4B20, 32768, 200 },
+    { 34, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB4B20, MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent125Script[1] = {
-    { 34, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F510, 32768, 200 },
+    { 34, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F510, MSG_SCRIPT_FLAG_END, 200 },
 };
 
 #include "event_125_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent125Script[1] = {
-    { 34, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FAB0, 32768, 200 },
+    { 34, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FAB0, MSG_SCRIPT_FLAG_END, 200 },
 };
 #endif
 
 static const EvSoundCue sEvent125SoundCues[1] = {
-    { SONG_BGM_EVENT2, 0, 32768, 0 },
+    { SONG_BGM_EVENT2, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent125Camera[1] = {
-    { -55537, 65536, 103168, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -55537, 65536, 103168, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent125Track0[2] = {
@@ -9873,7 +9873,7 @@ static const MessageScriptEntry sEvent126Script[21] = {
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB518A, 0, 1032 },
     { 35, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB51C4, 0, 1360 },
     { 0, 1, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB520E, 0, 1401 },
-    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB5272, 32768, 1480 },
+    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB5272, MSG_SCRIPT_FLAG_END, 1480 },
 };
 #endif
 #ifdef VERSION_JP
@@ -9898,7 +9898,7 @@ static const MessageScriptEntry sEvent126Script[21] = {
     { 0, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F894, 0, 1032 },
     { 35, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F874, 0, 1360 },
     { 0, 1, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F844, 0, 1401 },
-    { 35, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F834, 32768, 1480 },
+    { 35, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08F9F834, MSG_SCRIPT_FLAG_END, 1480 },
 };
 
 #include "event_126_text.inc"
@@ -9925,20 +9925,20 @@ static const MessageScriptEntry sEvent126Script[21] = {
     { 0, 0, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FC18, 0, 1032 },
     { 35, 0, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FC2C, 0, 1360 },
     { 0, 1, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FC40, 0, 1401 },
-    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FC54, 32768, 1480 },
+    { 35, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F5FC54, MSG_SCRIPT_FLAG_END, 1480 },
 };
 #endif
 
 static const EvSoundCue sEvent126SoundCues[3] = {
     { SONG_BGM_HERCULES_FIELD, 0, 0, 0 },
-    { SONG_BGM_HERCULES_FIELD, 881, 1, 0 },
-    { SONG_EV_CARDTHR, 1274, 32768, 0 },
+    { SONG_BGM_HERCULES_FIELD, 881, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_EV_CARDTHR, 1274, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent126Camera[3] = {
     { -64916, 43264, 67072, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -64686, 72192, 48384, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
-    { -55537, 81152, 43520, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
+    { -64686, 72192, 48384, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 100, { 0, 0 }, 0 },
+    { -55537, 81152, 43520, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent126Track0[18] = {
@@ -10079,7 +10079,7 @@ static const MessageScriptEntry sEvent127Script[7] = {
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB608C, 0, 300 },
     { 0, 3, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6040, 0, 330 },
     { 31, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6010, 0, 360 },
-    { 31, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB5FDC, 32768, 360 },
+    { 31, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB5FDC, MSG_SCRIPT_FLAG_END, 360 },
 };
 
 #include "event_127_text.inc"
@@ -10092,18 +10092,18 @@ static const MessageScriptEntry sEvent127Script[7] = {
     { 31, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0720, 0, 300 },
     { 0, 3, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA06D4, 0, 330 },
     { 31, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA06A4, 0, 360 },
-    { 31, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0670, 32768, 360 },
+    { 31, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0670, MSG_SCRIPT_FLAG_END, 360 },
 };
 
 #include "event_127_text.inc"
 #endif
 
 static const EventCameraKeyframe sEvent127Camera[1] = {
-    { -55537, 66304, 66560, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -55537, 66304, 66560, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent127SoundCues[1] = {
-    { SONG_BGM_TOWN_FIELD, 0, 32768, 0 },
+    { SONG_BGM_TOWN_FIELD, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent127Track0[7] = {
@@ -10167,7 +10167,7 @@ static const MessageScriptEntry sEvent128Script[4] = {
     { 32, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6444, 0, 150 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6438, 0, 180 },
     { 32, 0, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB63F8, 0, 210 },
-    { 32, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB63A8, 32768, 240 },
+    { 32, 0, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB63A8, MSG_SCRIPT_FLAG_END, 240 },
 };
 
 #include "event_128_text.inc"
@@ -10177,18 +10177,18 @@ static const MessageScriptEntry sEvent128Script[4] = {
     { 32, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0AD8, 0, 150 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0ACC, 0, 180 },
     { 32, 0, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0A8C, 0, 210 },
-    { 32, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0A3C, 32768, 240 },
+    { 32, 0, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0A3C, MSG_SCRIPT_FLAG_END, 240 },
 };
 
 #include "event_128_text.inc"
 #endif
 
 static const EventCameraKeyframe sEvent128Camera[1] = {
-    { -55537, 80384, 58368, 0, 255, { 0, 0, 0 }, 32768, 0, { 0, 0 }, 0 },
+    { -55537, 80384, 58368, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, 0 },
 };
 
 static const EvSoundCue sEvent128SoundCues[1] = {
-    { SONG_BGM_TOWN_FIELD, 0, 32768, 0 },
+    { SONG_BGM_TOWN_FIELD, 0, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCharaKeyframe sEvent128Track0[1] = {
@@ -10265,7 +10265,7 @@ static const MessageScriptEntry sEvent129Script[12] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB68EA, 0, 1160 },
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6956, 0, 1230 },
     { 43, 4, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB69D2, 0, 1470 },
-    { 2, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6A54, 32768, 1720 },
+    { 2, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB6A54, MSG_SCRIPT_FLAG_END, 1720 },
 };
 #endif
 #ifdef VERSION_JP
@@ -10281,7 +10281,7 @@ static const MessageScriptEntry sEvent129Script[12] = {
     { 0, 7, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0E7C, 0, 1160 },
     { 1, 2, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0E30, 0, 1230 },
     { 43, 4, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0DEC, 0, 1470 },
-    { 2, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0DA4, 32768, 1720 },
+    { 2, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA0DA4, MSG_SCRIPT_FLAG_END, 1720 },
 };
 
 #include "event_129_text.inc"
@@ -10299,25 +10299,25 @@ static const MessageScriptEntry sEvent129Script[12] = {
     { 0, 7, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F671FC, 0, 1160 },
     { 1, 2, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67210, 0, 1230 },
     { 43, 4, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67224, 0, 1470 },
-    { 2, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67238, 32768, 1720 },
+    { 2, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67238, MSG_SCRIPT_FLAG_END, 1720 },
 };
 #endif
 
 static const EvSoundCue sEvent129SoundCues[6] = {
     { 65535, 0, 0, 0 },
     { SONG_EV_WOMAN2_DIRTL, 376, 0, 0 },
-    { SONG_BGM_EVENT_SILENCE, 400, 2, 0 },
+    { SONG_BGM_EVENT_SILENCE, 400, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_351, 639, 0, 0 },
     { SONG_EV_WOMAN2_DIRTR, 946, 0, 0 },
-    { SONG_BGM_EVENT_SILENCE, 1775, 32769, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1775, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent129Camera[5] = {
-    { -65536, 31488, 63744, 0, 255, { 0, 0, 0 }, 128, 0, { 0, 0 }, 0 },
-    { -65306, 0, 0, 0, 255, { 0, 0, 0 }, 130, 80, { 0, 0 }, 0 },
-    { -64536, 81152, 67072, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
-    { -64036, 49408, 76800, 0, 255, { 0, 0, 0 }, 1, 100, { 0, 0 }, 0 },
-    { -55537, 43264, 77568, 0, 255, { 0, 0, 0 }, 32769, 80, { 0, 0 }, 0 },
+    { -65536, 31488, 63744, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, 0 },
+    { -65306, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 80, { 0, 0 }, 0 },
+    { -64536, 81152, 67072, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 100, { 0, 0 }, 0 },
+    { -64036, 49408, 76800, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 100, { 0, 0 }, 0 },
+    { -55537, 43264, 77568, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent129Track0[7] = {
@@ -10469,7 +10469,7 @@ static const MessageScriptEntry sEvent130Script[24] = {
     { 44, 1, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB7D78, 0, 1720 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB7DE8, 0, 2020 },
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB7E0E, 0, 2050 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB7E34, 32768, 2110 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB7E34, MSG_SCRIPT_FLAG_END, 2110 },
 };
 #endif
 #ifdef VERSION_JP
@@ -10497,7 +10497,7 @@ static const MessageScriptEntry sEvent130Script[24] = {
     { 44, 1, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA1DF0, 0, 1720 },
     { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA1DD0, 0, 2020 },
     { 1, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA1DB8, 0, 2050 },
-    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA1D98, 32768, 2110 },
+    { 0, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA1D98, MSG_SCRIPT_FLAG_END, 2110 },
 };
 
 #include "event_130_text.inc"
@@ -10527,24 +10527,24 @@ static const MessageScriptEntry sEvent130Script[24] = {
     { 44, 1, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F673DC, 0, 1720 },
     { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F673F0, 0, 2020 },
     { 1, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67404, 0, 2050 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67418, 32768, 2110 },
+    { 0, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67418, MSG_SCRIPT_FLAG_END, 2110 },
 };
 #endif
 
 static const EvSoundCue sEvent130SoundCues[5] = {
     { SONG_BGM_EVENT_SILENCE, 0, 0, 0 },
-    { SONG_BGM_EVENT_SILENCE, 1100, 1, 0 },
-    { SONG_BGM_EVENT_UNREST, 1140, 2, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1100, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 1140, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_352, 1780, 0, 0 },
-    { SONG_BGM_EVENT_UNREST, 2175, 32769, 0 },
+    { SONG_BGM_EVENT_UNREST, 2175, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent130Camera[5] = {
     { -65535, 72448, 57600, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65116, 57600, 72704, 0, 255, { 0, 0, 0 }, 1, 150, { 0, 0 }, 0 },
-    { -64386, 51712, 69632, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -63606, 65792, 61696, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -55537, 71936, 66048, 0, 255, { 0, 0, 0 }, 32769, 50, { 0, 0 }, 0 },
+    { -65116, 57600, 72704, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
+    { -64386, 51712, 69632, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -63606, 65792, 61696, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -55537, 71936, 66048, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent130BgEffects[4] = {
@@ -10762,7 +10762,7 @@ static const MessageScriptEntry sEvent131Script[38] = {
     { 43, 3, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB9FAE, 0, 2585 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FB9FCC, 0, 2615 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBA03A, 0, 2645 },
-    { 43, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBA07C, 32768, 2670 },
+    { 43, 0, 0, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBA07C, MSG_SCRIPT_FLAG_END, 2670 },
 };
 #endif
 #ifdef VERSION_JP
@@ -10804,7 +10804,7 @@ static const MessageScriptEntry sEvent131Script[38] = {
     { 43, 3, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA382C, 0, 2585 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA37E4, 0, 2615 },
     { 0, 0, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA37C0, 0, 2645 },
-    { 43, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA37AC, 32768, 2670 },
+    { 43, 0, 0, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA37AC, MSG_SCRIPT_FLAG_END, 2670 },
 };
 
 #include "event_131_text.inc"
@@ -10848,39 +10848,39 @@ static const MessageScriptEntry sEvent131Script[38] = {
     { 43, 3, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F676D4, 0, 2585 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F676E8, 0, 2615 },
     { 0, 0, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F676FC, 0, 2645 },
-    { 43, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67710, 32768, 2670 },
+    { 43, 0, 0, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67710, MSG_SCRIPT_FLAG_END, 2670 },
 };
 #endif
 
 static const EvSoundCue sEvent131SoundCues[13] = {
     { SONG_BGM_HOLLOW_FIELD, 0, 0, 0 },
-    { SONG_BGM_HOLLOW_FIELD, 430, 1, 0 },
-    { SONG_BGM_EVENT_SILENCE, 990, 2, 0 },
+    { SONG_BGM_HOLLOW_FIELD, 430, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_SILENCE, 990, EV_SOUND_FLAG_FADE_IN, 0 },
     { SONG_SND_351, 1459, 0, 0 },
-    { SONG_BGM_EVENT_SILENCE, 1515, 1, 0 },
+    { SONG_BGM_EVENT_SILENCE, 1515, EV_SOUND_FLAG_FADE_OUT, 0 },
     { SONG_BGM_EVENT_UNREST, 1560, 0, 0 },
     { SONG_SND_353, 1586, 0, 0 },
-    { SONG_SND_353, 1695, 4, 0 },
+    { SONG_SND_353, 1695, EV_SOUND_FLAG_STOP, 0 },
     { SONG_BTL_GMIC_OK, 1701, 0, 0 },
     { SONG_SND_351, 1804, 0, 0 },
     { SONG_SND_352, 2119, 0, 0 },
     { SONG_SND_351, 2204, 0, 0 },
-    { SONG_BGM_EVENT_UNREST, 2795, 32769, 0 },
+    { SONG_BGM_EVENT_UNREST, 2795, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent131Camera[12] = {
     { -65276, 50176, 79616, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65096, 35840, 68864, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -63972, 62464, 82944, 0, 255, { 0, 0, 0 }, 1, 80, { 0, 0 }, 0 },
-    { -63861, 62464, 73728, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -63836, 62464, 77824, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -63826, 0, 0, 0, 255, { 0, 0, 0 }, 65554, 10, { 0, 0 }, 0 },
-    { -63806, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -63796, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -63776, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -63546, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -63249, 62464, 82944, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, 32770, 0, { 0, 0 }, 0 },
+    { -65096, 35840, 68864, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -63972, 62464, 82944, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 80, { 0, 0 }, 0 },
+    { -63861, 62464, 73728, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -63836, 62464, 77824, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -63826, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -63806, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -63796, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -63776, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -63546, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -63249, 62464, 82944, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -55537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent131BgEffects[5] = {
@@ -11089,7 +11089,7 @@ static const MessageScriptEntry sEvent132Script[14] = {
     { 44, 1, 4, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBBB5E, 0, 622 },
     { 44, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBBC10, 0, 670 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBBCA8, 0, 720 },
-    { 44, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBBCD0, 32768, 750 },
+    { 44, 2, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBBCD0, MSG_SCRIPT_FLAG_END, 750 },
 };
 #endif
 #ifdef VERSION_JP
@@ -11107,7 +11107,7 @@ static const MessageScriptEntry sEvent132Script[14] = {
     { 44, 1, 4, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA53AC, 0, 622 },
     { 44, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5350, 0, 670 },
     { 0, 2, 2, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5340, 0, 720 },
-    { 44, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA530C, 32768, 750 },
+    { 44, 2, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA530C, MSG_SCRIPT_FLAG_END, 750 },
 };
 
 #include "event_132_text.inc"
@@ -11127,7 +11127,7 @@ static const MessageScriptEntry sEvent132Script[14] = {
     { 44, 1, 4, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F678C8, 0, 622 },
     { 44, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F678DC, 0, 670 },
     { 0, 2, 2, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F678F0, 0, 720 },
-    { 44, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67904, 32768, 750 },
+    { 44, 2, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F67904, MSG_SCRIPT_FLAG_END, 750 },
 };
 #endif
 
@@ -11136,15 +11136,15 @@ static const EvSoundCue sEvent132SoundCues[5] = {
     { SONG_EV_WOMAN2_DIRTR, 515, 0, 0 },
     { SONG_SND_351, 529, 0, 0 },
     { SONG_SND_375, 860, 0, 0 },
-    { SONG_EV_FLASH02, 980, 32768, 0 },
+    { SONG_EV_FLASH02, 980, EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent132Camera[5] = {
     { -65535, 32256, 71680, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65256, 56064, 65536, 0, 255, { 0, 0, 0 }, 1, 120, { 0, 0 }, 0 },
-    { -64686, 66816, 58624, 0, 255, { 0, 0, 0 }, 1, 50, { 0, 0 }, 0 },
-    { -64556, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64526, 0, 0, 0, 255, { 0, 0, 0 }, 32802, 30, { 0, 0 }, 0 },
+    { -65256, 56064, 65536, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 120, { 0, 0 }, 0 },
+    { -64686, 66816, 58624, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, 0 },
+    { -64556, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64526, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 30, { 0, 0 }, 0 },
 };
 
 static const EventBgEffectEntry sEvent132BgEffects[4] = {
@@ -11255,7 +11255,7 @@ static const MessageScriptEntry sEvent133Script[11] = {
     { 43, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBC7CA, 0, 1080 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBC7D8, 0, 1280 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBC832, 0, 1310 },
-    { 1, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBC888, 32768, 1340 },
+    { 1, 3, 1, 1, { 0, 0, 0 }, (u32)gEventTextUs_08FBC888, MSG_SCRIPT_FLAG_END, 1340 },
 };
 #endif
 #ifdef VERSION_JP
@@ -11270,7 +11270,7 @@ static const MessageScriptEntry sEvent133Script[11] = {
     { 43, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5EF4, 0, 1080 },
     { 2, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5EBC, 0, 1280 },
     { 0, 1, 3, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5E94, 0, 1310 },
-    { 1, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5E60, 32768, 1340 },
+    { 1, 3, 1, 3, { 0, 0, 0 }, (u32)gEventTextJp_08FA5E60, MSG_SCRIPT_FLAG_END, 1340 },
 };
 
 #include "event_133_text.inc"
@@ -11287,7 +11287,7 @@ static const MessageScriptEntry sEvent133Script[11] = {
     { 43, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F677B0, 0, 1080 },
     { 2, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F677C4, 0, 1280 },
     { 0, 1, 3, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F677D8, 0, 1310 },
-    { 1, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F677EC, 32768, 1340 },
+    { 1, 3, 1, 1, { 0, 0, 0 }, (u32)&gUnkEu_09F677EC, MSG_SCRIPT_FLAG_END, 1340 },
 };
 #endif
 
@@ -11297,24 +11297,24 @@ static const EvSoundCue sEvent133SoundCues[7] = {
     { SONG_EV_WHITEOUT, 580, 0, 0 },
     { SONG_SND_351, 834, 0, 0 },
     { SONG_SND_351, 1019, 0, 0 },
-    { SONG_BGM_EVENT4, 1060, 2, 0 },
-    { SONG_BGM_EVENT4, 1505, 32769, 0 },
+    { SONG_BGM_EVENT4, 1060, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT4, 1505, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
 };
 
 static const EventCameraKeyframe sEvent133Camera[13] = {
     { -65535, 42240, 74752, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0 },
-    { -65385, 0, 0, 0, 255, { 0, 0, 0 }, 130, 100, { 0, 0 }, 0 },
-    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -65036, 76032, 57600, 0, 255, { 0, 0, 0 }, 1, 150, { 0, 0 }, 0 },
-    { -65026, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -64996, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -64956, 0, 0, 0, 255, { 0, 0, 0 }, 514, 10, { 0, 0 }, 0 },
-    { -64856, 0, 0, 0, 255, { 0, 0, 0 }, 34, 90, { 0, 0 }, 0 },
-    { -64756, 0, 0, 0, 255, { 0, 0, 0 }, 130, 100, { 0, 0 }, 0 },
-    { -64586, 0, 0, 0, 255, { 0, 0, 0 }, 2, 0, { 0, 0 }, 0 },
-    { -64436, 78848, 55040, 0, 255, { 0, 0, 0 }, 1, 30, { 0, 0 }, 0 },
-    { -64106, 38144, 81408, 0, 255, { 0, 0, 0 }, 1, 150, { 0, 0 }, 0 },
-    { -60536, 76032, 57600, 0, 255, { 0, 0, 0 }, 32769, 150, { 0, 0 }, 0 },
+    { -65385, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 100, { 0, 0 }, 0 },
+    { -65256, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -65036, 76032, 57600, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
+    { -65026, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64996, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64956, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, 0 },
+    { -64856, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 90, { 0, 0 }, 0 },
+    { -64756, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 100, { 0, 0 }, 0 },
+    { -64586, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, 0 },
+    { -64436, 78848, 55040, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 30, { 0, 0 }, 0 },
+    { -64106, 38144, 81408, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
+    { -60536, 76032, 57600, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 150, { 0, 0 }, 0 },
 };
 
 static const EventCharaKeyframe sEvent133Track0[10] = {

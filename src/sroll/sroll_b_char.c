@@ -18,7 +18,7 @@ void SrollBCharChangeAnim(SrollBCharWork* w) {
     gfx = def->animDef;
     AnimChangeWithTables(&w->anim, def->animId, def->flags, gfx->anims, gfx->gfxTable);
     SetObjTileSource(w->tiles, gfx->tiles);
-    w->obj->flags &= 0xFFFE;
+    w->obj->flags &= ~EVTOBJ_FLAG_ANIM_CHANGED;
 }
 
 void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
@@ -42,7 +42,7 @@ void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
 s32 task_sroll_b_char_1(SrollBCharWork* w) {
     SrollBCrtnArg a;
 
-    if (w->obj->flags & 1) {
+    if (w->obj->flags & EVTOBJ_FLAG_ANIM_CHANGED) {
         SrollBCharChangeAnim(w);
     }
 
@@ -96,7 +96,7 @@ void task_sroll_b_char_2(SrollBCharWork* w) {
 
     obj = w->obj;
 
-    if ((obj->flags & 2) == 0) {
+    if ((obj->flags & EVTOBJ_FLAG_HIDDEN) == 0) {
         x = obj->x >> 8;
         y = (obj->y + obj->z) >> 8;
         gfx = AnimGetGfx(&w->anim);

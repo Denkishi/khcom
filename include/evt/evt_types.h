@@ -35,6 +35,12 @@ typedef char EvtObjResTable_size[(sizeof(EvtObjResTable) == 16) ? 1 : -1];
 struct EvtObj;
 struct Task;
 
+enum EventFlag {
+    EVENT_FLAG_PAUSED = 0x1,
+    EVENT_FLAG_STARTED = 0x2,
+    EVENT_FLAG_PLAYER_CONTROL = 0x4
+};
+
 typedef struct EventState {
     struct EvtObj* charaObjs[16];
     struct Task* bossTask;

@@ -17,7 +17,7 @@ static TaskDesc sTaskDescEvtObj = {
 EventState* gEventState EWRAM_COMMON(4);
 
 void EvtObjSetAnim(EvtObj* obj, s32 anim) {
-    u16 t = obj->flags | 1;
+    u16 t = obj->flags | EVTOBJ_FLAG_ANIM_CHANGED;
 
     obj->flags = t;
     obj->animEntry = &gEvtObjAnims[anim];
@@ -79,7 +79,7 @@ void EvtObjChangeAnim(EvtObjWork* work) {
     def = anim->animDef;
     AnimChangeWithTables(&work->anim, anim->animId, anim->flags, def->anims, def->gfxTable);
     SetObjTileSource(work->tiles, def->tiles);
-    work->obj->flags &= 0xFFFE;
+    work->obj->flags &= ~EVTOBJ_FLAG_ANIM_CHANGED;
 }
 
 void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
@@ -98,7 +98,7 @@ void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
 }
 
 s32 task_evt_obj_1(EvtObjWork* work) {
-    if (work->obj->flags & 1) {
+    if (work->obj->flags & EVTOBJ_FLAG_ANIM_CHANGED) {
         EvtObjChangeAnim(work);
     }
 
@@ -116,7 +116,7 @@ void task_evt_obj_2(EvtObjWork* work) {
 
     obj = work->obj;
 
-    if (obj->flags & 2) {
+    if (obj->flags & EVTOBJ_FLAG_HIDDEN) {
         return;
     }
 
@@ -158,14 +158,14 @@ void task_evt_shadow_2(EvtShadowWork* work) {
 
     obj = work->obj;
 
-    if (obj->flags & 4) {
+    if (obj->flags & EVTOBJ_FLAG_NO_SHADOW) {
         return;
     }
 
-    if (obj->flags & 8) {
+    if (obj->flags & EVTOBJ_FLAG_SHADOW_WIDE) {
         gfx = gUnk_08B22EE4;
         vram = work->tiles2;
-    } else if (obj->flags & 0x10) {
+    } else if (obj->flags & EVTOBJ_FLAG_SHADOW_SMALL) {
         gfx = gUnk_08B22CBC;
         vram = work->tiles3;
     } else {

@@ -724,7 +724,7 @@ s32 EV_SOUND_1(EvSoundWork* w) {
 
     if (gEventState->frame == p->frame) {
         if (p->song != 0xFFFF) {
-            if ((p->flags & 4) == 0) {
+            if ((p->flags & EV_SOUND_FLAG_STOP) == 0) {
                 m4aSongNumStartOrContinue(p->song);
                 idx = gSongTable[p->song].ms;
                 m4aMPlayImmInit(gMPlayTable[idx].info);
@@ -737,12 +737,12 @@ s32 EV_SOUND_1(EvSoundWork* w) {
             m4aMPlayAllStop();
         }
 
-        if (p->flags & 1) {
+        if (p->flags & EV_SOUND_FLAG_FADE_OUT) {
             m4aMPlayFadeOut(gMPlayTable[gSongTable[p->song].ms].info, 5);
             w->fadeMode = 2;
         }
 
-        if (p->flags & 2) {
+        if (p->flags & EV_SOUND_FLAG_FADE_IN) {
             n = gSongTable[p->song].ms;
             mp = gMPlayTable[n].info;
             w->volume = 3;
@@ -750,7 +750,7 @@ s32 EV_SOUND_1(EvSoundWork* w) {
             w->fadeMode = 1;
         }
 
-        if ((p->flags & 0x8000) == 0) {
+        if ((p->flags & EV_SOUND_FLAG_END) == 0) {
             w->cue++;
         }
     }

@@ -120,32 +120,13 @@ typedef struct AllmapState {
     u8 unk_C1[0x03];
 } AllmapState;
 
-typedef struct AllmapDoorEntry {
-    void* tiles;
-    void* tiles2;
-    void* tiles3;
-    ObjPalette* palette;
-    ObjPalette* palette2;
-    ObjPalette* palette3;
-    void* gfx;
-    void* gfx2;
-    void* gfx3;
-    s32 x;
-    s32 y;
-    u16 unk_2C;
-    u16 unk_2E;
-    u16 unk_30;
-    u8 unk_32;
-    u8 unk_33;
-} AllmapDoorEntry;
-
 typedef struct AllmapDoorinfoWork {
     AllmapCursorPos pos;
     u8 room;
     u8 unk_005[0x03];
     void* gfx2[4];
     void* tiles;
-    AllmapDoorEntry doors[4];
+    EventKeyCard doors[4];
     void* palette;
     void* tiles2;
     void* palette2;
@@ -180,7 +161,6 @@ void AllmapUpdateCamera(AllmapState* s);
 void AllmapHandleInput(void);
 void func_080D53F8(void);
 void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d);
-void ReleaseLayeredCardSprite(AllmapDoorEntry* e);
 u8 func_080D3A70(u8 a, u8 b);
 u8 func_080D3AB8(u8 a, u8 b);
 s16 AllmapDrawRoomnameFrame(u16 a);
@@ -196,9 +176,6 @@ void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work);
 u8 IsStockMesDispActive(void);
 s32 GetAllmapRoomAt(AllmapCursorPos a);
 void AllmapAddRoom(u8 a, u16 b, u16 c);
-void* AllocKeyValueTiles(u8 a);
-void InitEventKeyCard(AllmapDoorEntry* a, void* b);
-void SetLayeredCardSpritePos(s32 a, s32 b, AllmapDoorEntry* c);
 
 extern u8 gUnk_05000160[];
 extern u8 gUnk_0976D880[];

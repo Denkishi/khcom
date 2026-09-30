@@ -14,6 +14,7 @@ struct TaskPool;
 struct UnkStruct_080ABA80;
 struct CardDisplayWork;
 struct MapcardWork;
+struct EventKey;
 
 void Mapcard_2(struct MapcardWork* w);
 void Level_Up_3(struct LevelUpWork* w);
@@ -60,6 +61,10 @@ void ResetSelectedMapCard(void);
 void* GetRoomName(u16 a);
 void CreateBossPrizeCardTask(void* a, void* b);
 void DrawLayeredCardSprite(struct LayeredCardSprite* p, u16 a);
+void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* p);
+void ReleaseLayeredCardSprite(LayeredCardSprite* p);
+struct ObjTiles* AllocKeyValueTiles(u8 a);
+void InitEventKeyCard(EventKeyCard* card, struct EventKey* key);
 u8 GetRoomCardBackIndex(u16 n);
 void CreateREVCOUNTTask(void* pool, u8* a, void* b, u8* c, u8 d);
 void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx);

@@ -202,7 +202,7 @@ void task_allmap_room_3(AllmapRoomWork* work) {
     }
 }
 
-Task* CreateAllmapRoomTask(TaskPool* pool) {
+void* CreateAllmapRoomTask(TaskPool* pool) {
     AllmapRoomArg arg;
 
     arg.x = 208;
@@ -590,14 +590,14 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
                 n = 0;
             }
 
-            work->doors[i].tiles = AllocKeyValueTiles(n);
-            work->doors[i].palette = LoadObjPalette(gUnk_09618D38, 32);
-            work->doors[i].gfx = 0;
-            work->doors[i].tiles2 = LoadObjTiles(gUnk_0905E3BA, 0x600);
-            work->doors[i].palette2 = LoadObjPalette(gUnk_09618D38, 32);
-            work->doors[i].gfx2 = gUnk_09EE97F4[0];
-            FadeSetPaletteExcluded(work->doors[i].palette->index + 16, 1);
-            FadeSetPaletteExcluded(work->doors[i].palette2->index + 16, 1);
+            work->doors[i].sprite.tiles = AllocKeyValueTiles(n);
+            work->doors[i].sprite.palette = LoadObjPalette(gUnk_09618D38, 32);
+            work->doors[i].sprite.gfx = 0;
+            work->doors[i].sprite.tiles2 = LoadObjTiles(gUnk_0905E3BA, 0x600);
+            work->doors[i].sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
+            work->doors[i].sprite.gfx2 = gUnk_09EE97F4[0];
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
             work->gfx2[i] = gUnk_09EF64E8[i];
             work->count++;
         } else {
@@ -627,7 +627,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     s32 i;
     AllmapCursorPos pos;
     u8 room;
-    AllmapDoorEntry* e;
+    EventKeyCard* e;
 
     for (i = 0; i < 4; i++) {
         pos.x = work->pos.x + sAllmapDirDeltas[i][0];
@@ -649,18 +649,18 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
     for (i = 0; i < work->count; i++) {
         e = &work->doors[i];
         InitEventKeyCard(e, GetEventKey(i));
-        SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, e);
+        SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, &e->sprite);
 
-        if (work->doors[i].palette != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].palette->index + 16, 1);
+        if (work->doors[i].sprite.palette != NULL) {
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
         }
 
-        if (work->doors[i].palette2 != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].palette2->index + 16, 1);
+        if (work->doors[i].sprite.palette2 != NULL) {
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
         }
 
-        if (work->doors[i].palette3 != NULL) {
-            FadeSetPaletteExcluded(work->doors[i].palette3->index + 16, 1);
+        if (work->doors[i].sprite.palette3 != NULL) {
+            FadeSetPaletteExcluded(work->doors[i].sprite.palette3->index + 16, 1);
         }
     }
 
@@ -738,8 +738,8 @@ void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
             DrawSprite(work->x >> 8, work->y >> 8, work->gfx2[i], work->tiles, work->palette, 0, 0, i + 51);
             sAllmapDoorOffsetX = sAllmapDoorCardOffsets[i][0];
             sAllmapDoorOffsetY = sAllmapDoorCardOffsets[i][1];
-            DrawSprite(sAllmapDoorOffsetX + (work->x >> 8), sAllmapDoorOffsetY + (work->y >> 8), work->doors[i].gfx, work->doors[i].tiles, work->doors[i].palette, 0, 0, i + 40);
-            DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].gfx2, work->doors[i].tiles2, work->doors[i].palette2, 0, 0, i + 30);
+            DrawSprite(sAllmapDoorOffsetX + (work->x >> 8), sAllmapDoorOffsetY + (work->y >> 8), work->doors[i].sprite.gfx, work->doors[i].sprite.tiles, work->doors[i].sprite.palette, 0, 0, i + 40);
+            DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].sprite.gfx2, work->doors[i].sprite.tiles2, work->doors[i].sprite.palette2, 0, 0, i + 30);
         }
     }
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
@@ -750,7 +750,7 @@ void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work) {
 
     if (work->steps == 0) {
         for (i = 0; i < work->count; i++) {
-            DrawLayeredCardSprite(&work->doors[i], 0);
+            DrawLayeredCardSprite(&work->doors[i].sprite, 0);
         }
     }
     DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
@@ -774,7 +774,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4 || GetEventRoomKind(work->room) == 2) {
         for (i = 0; i < work->count; i++) {
-            ReleaseLayeredCardSprite(&work->doors[i]);
+            ReleaseLayeredCardSprite(&work->doors[i].sprite);
         }
     } else {
         ReleaseObjTiles(work->tiles);
@@ -782,10 +782,10 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
 
         for (i = 0; i < 4; i++) {
             if (work->gfx2[i] != NULL) {
-                ReleaseObjTiles(work->doors[i].tiles);
-                ReleaseObjPalette(work->doors[i].palette);
-                ReleaseObjTiles(work->doors[i].tiles2);
-                ReleaseObjPalette(work->doors[i].palette2);
+                ReleaseObjTiles(work->doors[i].sprite.tiles);
+                ReleaseObjPalette(work->doors[i].sprite.palette);
+                ReleaseObjTiles(work->doors[i].sprite.tiles2);
+                ReleaseObjPalette(work->doors[i].sprite.palette2);
             }
         }
     }

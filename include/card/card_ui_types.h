@@ -27,6 +27,31 @@ typedef struct MapCardUiResources {
 typedef char CardUiSpriteState_size[(sizeof(CardUiSpriteState) == 0x24) ? 1 : -1];
 typedef char MapCardUiResources_size[(sizeof(MapCardUiResources) == 0x30) ? 1 : -1];
 
+typedef struct LayeredCardSprite {
+    struct ObjTiles* tiles;
+    struct ObjTiles* tiles2;
+    struct ObjTiles* tiles3;
+    struct ObjPalette* palette;
+    struct ObjPalette* palette2;
+    struct ObjPalette* palette3;
+    void* gfx;
+    void* gfx2;
+    void* gfx3;
+    s32 x;
+    s32 y;
+} LayeredCardSprite;
+
+typedef struct EventKeyCard {
+    LayeredCardSprite sprite;
+    u16 unk_2C;
+    u16 total;
+    u16 drawnTotal;
+    u8 color;
+    u8 unk_33;
+} EventKeyCard;
+
+typedef char EventKeyCard_size[(sizeof(EventKeyCard) == 0x34) ? 1 : -1];
+
 typedef struct SpriteFrameResourceDef {
 #ifdef VERSION_EU
     void** tiles;

@@ -872,20 +872,6 @@ typedef struct ReloadChildWork {
 
 typedef char UnkStruct_08098BE8_sizechk[(sizeof(struct ReloadChildWork) == 0x48) ? 1 : -1];
 
-typedef struct LayeredCardSprite {
-    ObjTiles* tiles;
-    ObjTiles* tiles2;
-    ObjTiles* tiles3;
-    ObjPalette* palette;
-    ObjPalette* palette2;
-    ObjPalette* palette3;
-    void* gfx;
-    void* gfx2;
-    void* gfx3;
-    s32 x;
-    s32 y;
-} LayeredCardSprite;
-
 typedef struct PremiumCardEffectWork {
     void* tiles;
     void* palette;
@@ -1600,17 +1586,6 @@ typedef struct ReloadWork {
     u8 steps;
 } ReloadWork;
 
-typedef struct EventKeyCard {
-    LayeredCardSprite sprite;
-    u16 unk_2C;
-    u16 total;
-    u16 drawnTotal;
-    u8 color;
-    u8 unk_33;
-} EventKeyCard;
-
-typedef char EventKeyCard_size[(sizeof(EventKeyCard) == 0x34) ? 1 : -1];
-
 typedef struct SysMsgWinWork {
     ObjTiles* tiles3;
     ObjPalette* palette;
@@ -1846,10 +1821,7 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* w);
 u8 ScrollDeckExchangeGridUp(DeckExchangeWork* w);
 void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot);
 void Ev_mapObj_2(EventMapObjectWork* w);
-void InitEventKeyCard(EventKeyCard* card, struct EventKey* a);
 void UpdateEventKeyTotal(EventKeyCard* w);
-void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* p);
-void ReleaseLayeredCardSprite(LayeredCardSprite* p);
 u8 card_reload_1(CardDisplayWork* p, void* a);
 void ResetGridScroll(DeckMenuWork* w);
 u8 UpdateMapcardMoveToFront(MapcardWork* w, void* a);

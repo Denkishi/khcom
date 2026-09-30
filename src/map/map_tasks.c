@@ -2120,7 +2120,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* w) {
     void* p = GetSelectedMapCard();
 
     if (p != NULL) {
-        CreateMapRoom(gUnk_0984C868[0], p);
+        CreateMapRoom(gUnk_0984C868[0].entryRoom, p);
         w->update = MapGmkTutorialWaitOpen;
     }
 

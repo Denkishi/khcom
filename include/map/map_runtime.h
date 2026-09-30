@@ -73,6 +73,7 @@ s32 func_080DFE7C(s32 x, s32 y, s32 z);
 extern const LocalizedText gMapWorldNameEu_088926FC;
 #endif
 
+extern MapFloorDef gUnk_0984C868[];
 extern MapFloorDef gUnk_0984CBD0[];
 
 #endif

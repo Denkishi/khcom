@@ -3408,7 +3408,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
 
         SrollTextInit(&w->text, sStaffRollTextInit);
         LoadBgPalette(0, gUnk_09D6BE14, 32);
-        (*(volatile u16*)&gDispCnt) |= 0;
+        gDispCnt |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
         gWinOut = (WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
         gWin0H = 0x10E0;
@@ -3584,7 +3584,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
             FadeSetPaletteExcluded(i, 0);
         }
 
-        (*(volatile u16*)&gDispCnt) &= ~DISPCNT_WIN0_ON;
+        gDispCnt &= ~DISPCNT_WIN0_ON;
         gWinIn = 0;
         gWinOut = 0;
         gWin0H = 0;

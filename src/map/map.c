@@ -2367,10 +2367,10 @@ void MapDbgFreeCameraInput(void) {
     }
     MapMoveCameraTarget(x, y);
     if (GetKeysPressed() & A_BUTTON) {
-        (*(volatile u16*)&gDispCnt) = ((*(volatile u16*)&gDispCnt) & ~DISPCNT_BG1_ON) | (m1 & ~(*(volatile u16*)&gDispCnt));
+        gDispCnt = (gDispCnt & ~DISPCNT_BG1_ON) | (m1 & ~gDispCnt);
     }
     if (GetKeysPressed() & B_BUTTON) {
-        (*(volatile u16*)&gDispCnt) = ((*(volatile u16*)&gDispCnt) & 0xEFFF) | (m2 & ~(*(volatile u16*)&gDispCnt));
+        gDispCnt = (gDispCnt & 0xEFFF) | (m2 & ~gDispCnt);
     }
 }
 
@@ -2818,7 +2818,6 @@ void func_080E9F30(void) {
 
 void Mode_MapFld_0(void) {
     MapRoomDef* p;
-    u16 t;
 
     if ((gMapFloorState.flags & 0x10) && gGameState.fieldResume == 0) {
         switch (gMapFloorState.entrySide) {
@@ -2878,8 +2877,7 @@ void Mode_MapFld_0(void) {
     } else if (gGameState.fieldResume != 0) {
         MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
         if ((s8)gGameState.mapMenuCursor != -1) {
-            t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
-            (*(volatile u16*)&gDispCnt) = t;
+            gDispCnt &= ~DISPCNT_OBJ_ON;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
             MapFldSetUpdate(MapFldWaitMenu);
         } else {
@@ -3260,8 +3258,7 @@ void Mode_MapFix_0(void) {
     if (gGameState.fieldResume != 0) {
         MapSetCameraTarget(gGameState.fieldPosition.x, gGameState.fieldPosition.y + gGameState.fieldPosition.z);
         if ((s8)gGameState.mapMenuCursor != -1) {
-            t = (*(volatile u16*)&gDispCnt) & 0xEFFF;
-            (*(volatile u16*)&gDispCnt) = t;
+            gDispCnt &= ~DISPCNT_OBJ_ON;
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, 0);
             MapFixSetUpdate(MapFixWaitMenu);
         } else {
@@ -5414,7 +5411,7 @@ s32 MapMenuConfirmInput(MapMenuWork* w) {
 }
 
 s32 MapMenuResume(MapMenuWork* w) {
-    (*(volatile u16*)&gDispCnt) |= DISPCNT_OBJ_ON;
+    gDispCnt |= DISPCNT_OBJ_ON;
     w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
     return 1;
 }

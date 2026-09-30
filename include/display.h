@@ -81,7 +81,7 @@ extern u16 gWin1H;
 extern u32 gBg2Y;
 extern u16 gBg2PB;
 extern u16 gBg0VOfs;
-extern u16 gDispCnt;
+extern vu16 gDispCnt;
 extern u16 gBg3PC;
 extern u16 gBg1Cnt;
 extern u16 gBg0Cnt;

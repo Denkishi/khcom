@@ -2689,7 +2689,7 @@ void BgFxApplySyncHp(s16 a) {
         o = ListPoolFirst(&gBtlWork->pool);
 
         while (o != NULL) {
-            if (o->flags & 0x40000000) {
+            if (o->flags & BTLOBJ_FLAG_BOSS) {
                 CreateBtlPopTask(o, 0);
             } else {
                 o->hp = a;
@@ -3390,9 +3390,9 @@ void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
             ny = gBgFx->y + -gSineTable[((b->angle + c) & 0xFF) + 64] * ((s16)t >> 1);
 
             if (b->x < nx) {
-                b->flags &= ~4;
+                b->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                b->flags |= 4;
+                b->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
             b->x += (nx - b->x) >> 3;
             b->y += (ny - b->y) >> 3;
@@ -3421,7 +3421,7 @@ void BgFxTornadoLiftOpponents(u8 a, u8 b) {
         o = ListPoolFirst(&gBtlWork->pool);
 
         while (o != NULL) {
-            if (!(o->flags & 0x40000000) && o->kind != 31) {
+            if (!(o->flags & BTLOBJ_FLAG_BOSS) && o->kind != 31) {
                 BgFxTornadoLiftBtlObj(p, o, a, b);
             }
 
@@ -4003,7 +4003,7 @@ void BgFxUpdateLaxeneBeam(void) {
     ApplyAttackBox(gBgFx->attack, x, y, z, 32, 16, 16);
     o = gBtlWork->actor;
 
-    if (o->flags & 0x2000) {
+    if (o->flags & BTLOBJ_FLAG_HURT) {
         o->x += (x - o->x) >> 2;
         o->y += (y - o->y) >> 2;
         o->z += (z - o->z) >> 1;

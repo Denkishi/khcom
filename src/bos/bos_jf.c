@@ -85,7 +85,7 @@ void task_bos_jf_0(JfWork* work, s32 a) {
         work->bodyY = 0x15E00;
         work->bodyZ = -0x3800;
         InitEnemyBtlObj(&work->body, &gBosJfEmyKind, work->bodyX, work->bodyY, work->bodyZ);
-        work->body.flags |= 4;
+        work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
         TaskCreate(&work->tasks, &gTaskDescBosJfMajin, work);
     } else {
         work->subX = 0x29600;
@@ -94,17 +94,17 @@ void task_bos_jf_0(JfWork* work, s32 a) {
         sub = &work->sub;
         InitEnemyBtlObj(sub, &gBosJfEmyKind, work->subX, work->subY, work->subZ);
         sub->flags |= 0x400;
-        sub->flags |= 0x200000000000;
-        sub->flags &= ~4;
+        sub->flags |= BTLOBJ_FLAG_NO_BREAK_POP;
+        sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         sub->hitFlags = v2;
         work->sub.centerHeight = 4;
         work->bodyX = 0x2A200;
         work->bodyY = 0x15E00;
         work->bodyZ = -0x3800;
         InitEnemyBtlObj(&work->body, &gBosJfEmyKind, work->bodyX, work->bodyY, work->bodyZ);
-        work->body.flags |= 4;
-        work->body.flags |= 0x8000;
-        work->body.flags |= 0x100000000;
+        work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
+        work->body.flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
+        work->body.flags |= BTLOBJ_FLAG_INVULNERABLE;
         work->body.radiusX = 32;
         work->body.radiusY = 40;
         work->body.height = 28;
@@ -246,7 +246,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
     v1 = -((gBosJfLeftPillarLevel + 1) << 11);
     v2 = -((gBosJfMiddlePillarLevel + 1) << 11);
     v3 = -((gBosJfRightPillarLevel + 1) << 11);
-    gBtlWork->actor->flags &= ~0x2000000;
+    gBtlWork->actor->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 
     if (gBosJfLeftPillarLevel > gBosJfMiddlePillarLevel) {
         lo = 0x1F600;
@@ -265,7 +265,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v2) {
                     *out = v2;
                     if (x > hi - 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v3;
                     *p = hi;
@@ -275,7 +275,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v1) {
                     *out = v1;
                     if (x > lo - 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
                     *p = lo;
@@ -291,7 +291,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v1) {
                     *out = v1;
                     if (x > lo - 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
                     *p = lo;
@@ -306,7 +306,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v3) {
                     *out = v3;
                     if (x < hi + 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
                     *p = hi;
@@ -325,7 +325,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (*a <= v1) {
                 *out = v1;
                 if (x > lo - 0x1000)
-                    gBtlWork->actor->flags |= 0x2000000;
+                    gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v2;
                 *p = lo;
@@ -353,7 +353,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (*a <= v2) {
                 *out = v2;
                 if ((x < lo + 0x1000) || (x > hi - 0x1000))
-                    gBtlWork->actor->flags |= 0x2000000;
+                    gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 if (x <= 0x205FF) {
                     *out = v1;
@@ -379,7 +379,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v2) {
                     *out = v2;
                     if (x < lo + 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v1;
                     *p = lo;
@@ -389,7 +389,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
                 if (*a <= v3) {
                     *out = v3;
                     if (x < hi + 0x1000)
-                        gBtlWork->actor->flags |= 0x2000000;
+                        gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
                 } else {
                     *out = v2;
                     *p = hi;
@@ -408,7 +408,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (*a <= v2) {
                 *out = v2;
                 if (x < lo + 0x1000)
-                    gBtlWork->actor->flags |= 0x2000000;
+                    gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v1;
                 *p = lo;
@@ -429,7 +429,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (*a <= v2) {
                 *out = v2;
                 if (x > hi - 0x1000)
-                    gBtlWork->actor->flags |= 0x2000000;
+                    gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v3;
                 *p = hi;
@@ -448,7 +448,7 @@ u8 ClampBosJfBounds(s32* p, s32* b, s32* a, s32* out) {
             if (*a <= v3) {
                 *out = v3;
                 if (x < hi + 0x1000)
-                    gBtlWork->actor->flags |= 0x2000000;
+                    gBtlWork->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
             } else {
                 *out = v2;
                 *p = hi;
@@ -693,9 +693,9 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             d = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
             if (d > 0) {
-                sub->flags &= ~4;
+                sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else if (d < 0) {
-                sub->flags |= 4;
+                sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->moveSteps = 200;
@@ -716,9 +716,9 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
             if (d > 0) {
-                sub->flags &= ~4;
+                sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else if (d < 0) {
-                sub->flags |= 4;
+                sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->stateTimer++;
@@ -734,7 +734,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         break;
     case 2:
         if (work->stateTimer == 0) {
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->targetX = 0x27800;
             } else {
                 work->targetX = 0x19400;
@@ -743,9 +743,9 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             d = (s16)((work->targetX >> 8) - (sub->x >> 8));
 
             if (d > 0) {
-                sub->flags &= ~4;
+                sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else if (d < 0) {
-                sub->flags |= 4;
+                sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->moveSteps = 200;
@@ -767,9 +767,9 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
             d = (s16)((gBtlWork->actor->x >> 8) - (sub->x >> 8));
 
             if (d > 0) {
-                sub->flags &= ~4;
+                sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else if (d < 0) {
-                sub->flags |= 4;
+                sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->stateTimer++;
@@ -786,7 +786,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
     case 4:
         if (work->stateTimer == 0) {
             work->moveSteps = 20;
-            sub->flags |= 4;
+            sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
             work->vx = -204;
             work->stateTimer++;
         } else {
@@ -795,12 +795,12 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
                 work->moveSteps--;
             } else {
                 if (sub->x <= 0x19400) {
-                    sub->flags &= ~4;
+                    sub->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                     work->vx = 204;
                 }
 
                 if (sub->x > 0x277FF) {
-                    sub->flags |= 4;
+                    sub->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     work->vx = -204;
                 }
 
@@ -851,7 +851,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
 
     mode = GetBattleSpritePriorityFlags(sub->y);
 
-    if (sub->flags & 4) {
+    if (sub->flags & BTLOBJ_FLAG_FACING_LEFT) {
         mode &= 0xFFFE;
     } else {
         mode |= 1;
@@ -885,7 +885,7 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
     s16 v;
     s32 r;
 
-    if (work->jf->body.flags & 4) {
+    if (work->jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         switch (gBosJfPillarShape) {
         case 5:
         case 6:

@@ -267,7 +267,7 @@ void BosDsdMainBeginTransition(DsdMainWork* work, s32 x, s32 y, s32 z) {
     FadeToAmount(0, 0x14, 8);
     func_08018B04(x - 0x1400, y, z - 0xA00, 0x100);
     m4aSongNumStart(SONG_SND_721);
-    q->flags |= 0x01000000;
+    q->flags |= BTLOBJ_FLAG_UNHITTABLE;
 }
 
 void BosDsdMainEndTransition(DsdMainWork* work) {
@@ -276,7 +276,7 @@ void BosDsdMainEndTransition(DsdMainWork* work) {
     FadeToOriginal(0, 8);
     FadeSetPaletteExcluded(0, 1);
     FadeSetPaletteExcluded(19, 1);
-    q->flags &= ~0x1000000;
+    q->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
 }
 
 void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
@@ -349,7 +349,7 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
             break;
         }
 
-        q->flags &= ~0x1000000;
+        q->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         break;
     }
 }
@@ -552,7 +552,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         b->x = 0x7600;
         b->y = 0x16800;
         b->z = 0;
-        b->flags &= ~0x1000000;
+        b->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         BtlMapStartShake();
         m4aSongNumStart(SONG_EF_AIRO);
         BgFxStartLexceusGround(0x7800, 0x16800, 0, 0x100);
@@ -601,7 +601,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
         break;
     case 5:
         BosDsdSetBgFrame(8, 0x80);
-        b->flags |= 0x1000000;
+        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
         work->dsd->stateStep++;
         break;
@@ -653,7 +653,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         b->x = 0x9000;
         b->y = 0x16800;
         b->z = 0;
-        b->flags &= ~0x1000000;
+        b->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
     case 3:
@@ -679,7 +679,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         work->baseFrame = 27;
         work->dsd->bgFrameTimer = 0;
         work->stepTimer = 0;
-        b->flags |= 0x1000000;
+        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->dsd->stateStep++;
         break;
     case 5:
@@ -708,7 +708,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
 
         while (e != NULL) {
             if (e->kind == 0) {
-                e->flags |= 0x40;
+                e->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }
 
@@ -894,13 +894,13 @@ void BosDsdMainUpdateBreak(DsdMainWork* work) {
 
     if (d->lastState == 2 || d->lastState == 3) {
         ClearBtlObjActionFlags(a);
-        b->flags |= 0x1000000;
+        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
         work->dsd->stateStep = 0;
         work->dsd->state = 0;
     } else if (d->stateStep > 60) {
         ClearBtlObjActionFlags(a);
-        b->flags |= 0x1000000;
+        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         ColliderSetDisabled(&b->collider, 1);
         work->dsd->stateStep = 0;
         work->dsd->state = 0;
@@ -923,7 +923,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
 
         while (e != NULL) {
             if (e->kind == 0) {
-                e->flags |= 0x40;
+                e->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }
 

@@ -19,7 +19,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
 
             if (work->timer <= 0) {
                 if (work->groundFrames % 60 == 0) {
-                    obj->flags |= 0x20000000;
+                    obj->flags |= BTLOBJ_FLAG_HAZARD_PENDING;
                 }
                 work->groundFrames++;
             } else {
@@ -44,7 +44,7 @@ void CloudJumpOffset(CloudWork* work, s16 a, s32 b) {
     CloudWork* w = work;
     BtlObj* obj = &work->base.actor;
 
-    if (obj->flags & 4) {
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->base.targetX = obj->x - (a << 8);
     } else {
         work->base.targetX = obj->x + (a << 8);
@@ -87,7 +87,7 @@ s32 CloudTryJumpAway(CloudWork* work) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 CloudJumpOffset(work, -0x63, 0x280);
             } else if (GetRandom() & 1) {
-                if (obj->flags & 4) {
+                if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     CloudJumpTo(work, x + 0x2800, y);
                 } else {
                     CloudJumpTo(work, x - 0x2800, y);

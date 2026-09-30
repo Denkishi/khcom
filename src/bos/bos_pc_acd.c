@@ -85,7 +85,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
 
     gp = &gBtlWork;
     pos = (*gp)->actor;
-    pos->flags &= ~0x2000000;
+    pos->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
     ox = 0;
     oy = 0;
     shared = work->shared;
@@ -100,7 +100,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
         tbl = gUnk_09EFAB68;
         ofs = AnimGetGfxIndex(&work->anim) + 5;
         gfx = tbl[ofs];
-        if ((*gp)->actor->flags & 4) {
+        if ((*gp)->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
             WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
         } else {
             WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
@@ -113,14 +113,14 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
         }
         anim = &work->anim;
         if (AnimGetId(anim) == 1) {
-            (*gp)->actor->flags |= 0x2000000;
-            if ((*gp)->actor->flags & 0x80) {
+            (*gp)->actor->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
+            if ((*gp)->actor->flags & BTLOBJ_FLAG_HIT_LOCKED) {
                 return;
             }
             tbl = gUnk_09EFAB68;
             ofs = AnimGetGfxIndex(anim) + 5;
             gfx = tbl[ofs];
-            if ((*gp)->actor->flags & 4) {
+            if ((*gp)->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x600, work->y - oy, 0);
             } else {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);

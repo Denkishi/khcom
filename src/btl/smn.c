@@ -157,8 +157,8 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     body->z = obj->originZ;
     body->groundZ = obj->originZ;
 
-    if (obj->flags & 4) {
-        body->flags = 4;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->flags = 0;
     }
@@ -258,12 +258,12 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 body->y = target->y;
                 body->z = target->groundZ;
                 body->groundZ = target->groundZ;
-                if (target->flags & 4) {
+                if (target->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     body->x = target->x + 0x2000;
-                    body->flags |= 4;
+                    body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     body->x = target->x - 0x2000;
-                    body->flags &= ~4ULL;
+                    body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
         }
@@ -294,10 +294,10 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
                     break;
                 case 6:
-                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
-                        if (body->flags & 4) {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
@@ -315,10 +315,10 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     MakeOpponentsHittable();
-                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
-                        if (body->flags & 4) {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
@@ -333,10 +333,10 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     break;
                 case 5:
                     MakeOpponentsHittable();
-                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(2, 50);
-                        if (body->flags & 4) {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 512, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 512, body->x + 0x2000, body->y - 0x1800 + body->z);
@@ -369,10 +369,10 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
                     break;
                 case 6:
-                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
-                        if (body->flags & 4) {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
@@ -390,10 +390,10 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 0:
                     MakeOpponentsHittable();
-                    if (body->flags & 4 ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(151, body->x - 0x2800, body->y, body->z, 24, 24, 48) : ApplyAttackBox(151, body->x + 0x2800, body->y, body->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
-                        if (body->flags & 4) {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, body->x - 0x2000, body->y - 0x1800 + body->z);
                         } else {
                             SetBattleZoom(6, 0x133, body->x + 0x2000, body->y - 0x1800 + body->z);
@@ -413,7 +413,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->speed = 0;
         }
-        if (body->flags & 4) pixelX = gBtlWork->xMin + 50;
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) pixelX = gBtlWork->xMin + 50;
         else pixelX = gBtlWork->xMax - 50;
         x = pixelX * 256;
         targetZ = -0xC800;
@@ -457,8 +457,8 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
                 AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 5, 0, work->tiles);
                 break;
             }
-            if (body->x < work->targetX) body->flags &= ~4ULL;
-            else body->flags |= 4;
+            if (body->x < work->targetX) body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            else body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
         body->x += (work->targetX - body->x) >> 3;
         body->y += (work->targetY - body->y) >> 3;
@@ -467,7 +467,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             switch ((s16)work->attackCount) {
             case 0:
                 if (AnimGetFrame(&work->anim) == 4) {
-                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
                     }
@@ -476,7 +476,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             case 1:
                 if (AnimGetFrame(&work->anim) == 3) {
                     MakeOpponentsHittable();
-                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
                     }
@@ -486,7 +486,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             default:
                 if (AnimGetFrame(&work->anim) == 3) {
                     MakeOpponentsHittable();
-                    if (body->flags & 4 ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT ? ApplyAttackBox(152, body->x - 0x1800, body->y, body->z, 40, 24, 48) : ApplyAttackBox(152, body->x + 0x1800, body->y, body->z, 40, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(2, 20);
                     }
@@ -526,7 +526,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (work->scaleX == 256 && work->scaleY == work->scaleX) {
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sclY = gBtlWork->scale;
             sclX = sclY;
         } else if (gBtlWork->scale == work->scaleY) {
@@ -537,7 +537,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
             sclY = gBtlWork->scale;
             sclX = -sclY;
         }
-    } else if (body->flags & 4) {
+    } else if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclX = gBtlWork->scale * work->scaleX >> 8;
         sclY = gBtlWork->scale * work->scaleY >> 8;
     } else {
@@ -574,9 +574,9 @@ void SmnBambiPickHopTarget(SmnBambiWork* work) {
     work->angle += GetRandom() % 0x21 + 0x20;
 
     if (work->targetX - work->body.x > 0) {
-        work->body.flags |= 4;
+        work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
-        work->body.flags &= 0xFFFFFFFFFFFFFFFB;
+        work->body.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
 }
 
@@ -605,11 +605,11 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     body->z = obj->originZ;
     body->groundZ = obj->originZ;
 
-    if (obj->flags & 4) {
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->flags = 0;
         work->angle = 0xC0;
     } else {
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
         work->angle = 0x40;
     }
 
@@ -674,7 +674,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     p = ListPoolFirst(&gBtlWork->pool);
 
     while (p != NULL) {
-        if (!(p->flags & 0x01000000)) {
+        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
             if (count > 9) {
@@ -786,9 +786,9 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->stateTimer = 0;
         } else {
             if (body->x < work->target->x) {
-                body->flags |= 4;
+                body->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                body->flags &= 0xFFFFFFFFFFFFFFFB;
+                body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
 
             body->x += (work->target->x - body->x) >> 4;
@@ -874,7 +874,7 @@ void task_smn_bambi_2(SmnBambiWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -940,10 +940,10 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     body->groundZ = obj->originZ;
 #endif
 
-    if (obj->flags & 4) {
-        body->flags = 0x80004;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_SMALL_SHADOW);
     } else {
-        body->flags = 0x80000;
+        body->flags = BTLOBJ_FLAG_SMALL_SHADOW;
     }
 
     work->variant = args->variant;
@@ -1078,9 +1078,9 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         }
 
         if (work->actor->x < body->x) {
-            body->flags |= 4;
+            body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            body->flags &= 0xFFFFFFFFFFFFFFFB;
+            body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (work->steps-- <= 0) {
@@ -1103,9 +1103,9 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         z = (p->z - 0x1E00) + gSineTable[(u16)work->stateTimer * 2 & 0xFF] * 16;
 
         if (x < body->x) {
-            body->flags |= 4;
+            body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            body->flags &= 0xFFFFFFFFFFFFFFFB;
+            body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
         d = (x - body->x) >> 3;
@@ -1155,7 +1155,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 2, 0, work->tiles);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->flyAngle = 0xC0;
             } else {
                 work->flyAngle = 0x40;
@@ -1165,7 +1165,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         body->x += gSineTable[(u8)work->flyAngle] * work->speed >> 8;
         body->z += -gSineTable[(u8)work->flyAngle + 0x40] * work->speed >> 8;
 
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->flyAngle += 7;
         } else {
             work->flyAngle -= 7;
@@ -1206,7 +1206,7 @@ void task_smn_tink_2(SmnTinkWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -1321,10 +1321,10 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     body->z = obj->originZ;
     body->groundZ = obj->originZ;
 
-    if (obj->flags & 4) {
-        body->flags = 0x20004;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
     } else {
-        body->flags = 0x20000;
+        body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
     }
 
     work->variant = args->variant;
@@ -1394,7 +1394,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     case 1:
         switch (work->stateTimer) {
         case 0:
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 SetBattleZoom(30, 0x133, body->x - 0x1400,
                               body->y + body->z - 0x1400);
             } else {
@@ -1420,7 +1420,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             FadeFromAmount(5, 8, 20);
             SetBattleZoom(30, 0xCC, 0x10000, 0x15E00);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartShockwave(body->x - 0x1400, body->y + body->z - 0x1400, 1);
             } else {
                 BgFxStartShockwave(body->x + 0x1400, body->y + body->z - 0x1400, 0);
@@ -1428,7 +1428,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
 
             switch (work->variant) {
             case 0:
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x99, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
@@ -1437,7 +1437,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 }
                 break;
             case 1:
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x9A, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
@@ -1447,7 +1447,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
                 break;
             case 2:
             default:
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0x9B, body->x - 0x8000, body->y, body->z,
                                   0x80, 0x100, 0x100);
                 } else {
@@ -1497,7 +1497,7 @@ void task_smn_simba_2(SmnSimbaWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -1558,8 +1558,8 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     body->z = obj->z - 0x2200;
     body->groundZ = obj->groundZ;
 
-    if (obj->flags & 4) {
-        body->flags = 4;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->flags = 0;
     }
@@ -1612,10 +1612,10 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     body->y = work->actor->y;
     body->z = work->actor->z - 0x2200;
 
-    if (work->actor->flags & 4) {
-        body->flags |= 4;
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
-        body->flags &= 0xFFFFFFFFFFFFFFFB;
+        body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
 
     switch (work->state) {
@@ -1680,7 +1680,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         }
 
         if (AnimGetGfxIndex(&work->anim) == 5 && work->anim.timer == 0) {
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 x = body->x - 0xC800;
             } else {
                 x = body->x + 0xC800;
@@ -1705,7 +1705,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             MakeOpponentsHittable();
             m4aSongNumStart(SONG_EF_MU_FIRE);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(0, body->x - 0x3800, body->y, body->z - 0x800,
                               x, y, z, 1, n);
             } else {
@@ -1751,7 +1751,7 @@ void task_smn_mushu_2(SmnMushuWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -1811,10 +1811,10 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
     body->z = obj->originZ;
     body->groundZ = obj->originZ;
 
-    if (obj->flags & 4) {
-        body->flags = 0x20004;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
     } else {
-        body->flags = 0x20000;
+        body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
     }
 
     work->variant = args->variant;
@@ -1895,7 +1895,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartDumboSplash(work->variant, body->x - 0x1C00, body->y,
                               body->z - 0x1B00, 0, 0x9C);
             } else {
@@ -1955,7 +1955,7 @@ void task_smn_dumbo_2(SmnDumboWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -2012,11 +2012,11 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
         work->tiles = gRikuBtlWork->tiles;
     }
 
-    if (obj->flags & 4) {
-        body->flags = 0x20004;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
         body->x = obj->originX + 0x3700;
     } else {
-        body->flags = 0x20000;
+        body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
         body->x = obj->originX - 0x3700;
     }
 
@@ -2076,7 +2076,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     p = ListPoolFirst(&gBtlWork->pool);
 
     while (p != NULL) {
-        if (!(p->flags & 0x01000000)) {
+        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
             if (count > 9) {
@@ -2112,9 +2112,9 @@ void SmnGenieFollowTarget(SmnGenieWork* work) {
     }
 
     if (obj->x < body->x) {
-        body->flags |= 4;
+        body->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
-        body->flags &= 0xFFFFFFFFFFFFFFFB;
+        body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
 
     if (obj->x > 0x10000) {
@@ -2258,7 +2258,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = work->target->y;
                     z = 0;
                 } else {
-                    if (body->flags & 4) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         x = body->x - 0x5000;
                     } else {
                         x = body->x + 0x5000;
@@ -2266,7 +2266,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = body->y;
                     z = 0;
                 }
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartThunder(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 } else {
                     BgFxStartThunder(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
@@ -2296,7 +2296,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = work->target->y;
                     z = 0;
                 } else {
-                    if (body->flags & 4) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         x = body->x - 0x5000;
                     } else {
                         x = body->x + 0x5000;
@@ -2304,7 +2304,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = body->y;
                     z = 0;
                 }
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartGravity(1, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
                 } else {
                     BgFxStartGravity(1, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
@@ -2336,7 +2336,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     y = work->target->y;
                     z = work->target->z - work->target->centerHeight * 256;
                 } else {
-                    if (body->flags & 4) {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         x = body->x - 0x5000;
                     } else {
                         x = body->x + 0x5000;
@@ -2378,7 +2378,7 @@ void task_smn_genie_2(SmnGenieWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -2442,7 +2442,7 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     body->y = obj->originY;
     body->z = obj->originZ - 0x4000;
     body->groundZ = 0;
-    body->flags = obj->flags & 4;
+    body->flags = obj->flags & BTLOBJ_FLAG_FACING_LEFT;
     work->variant = args->variant;
     work->palette = LoadObjPalette(gMickeyPalette, 32);
     work->vz = 0;
@@ -2588,7 +2588,7 @@ void task_smn_king_2(SmnKingWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256 && work->scale == gBtlWork->scale) {
@@ -2657,7 +2657,7 @@ void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
     z = body->z - (c * 256);
     w = 0x180;
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         x = body->x + (b * 256);
         t = -0x180;
     } else {

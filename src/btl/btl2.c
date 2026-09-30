@@ -15,10 +15,10 @@
 void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
     work->actor = actor;
 
-    if (actor->flags & 0x80000) {
+    if (actor->flags & BTLOBJ_FLAG_SMALL_SHADOW) {
         work->tiles = LoadObjTiles(gUnk_08B22CE4, 0x200);
         work->gfx = gUnk_08B22CBC;
-    } else if (actor->flags & 0x20000) {
+    } else if (actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
         work->tiles = LoadObjTiles(gUnk_08B22EFE, 0x140);
         work->gfx = gUnk_08B22EE4;
     } else {
@@ -1259,7 +1259,7 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     }
 
     actor = gBtlWork->actor;
-    if (actor->flags & 4) {
+    if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         WorldToScreen(&x, &y, actor->x - 768, actor->y, actor->z - 10240);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 2);
     } else {

@@ -792,9 +792,9 @@ void BosGaEntryResetHome(GaWork* work, s32 i) {
     e = &work->entries[i];
 
     if (work->flipped == 0) {
-        e->actor.flags |= 4;
+        e->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
-        e->actor.flags &= ~4;
+        e->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     }
     e->offsetX = BosGaEntryOffsetX(work, i);
     e->offsetY = BosGaEntryOffsetY(work, i);
@@ -863,9 +863,9 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     if (i == 0) {
         e->actor.flags |= 0x400;
     } else {
-        e->actor.flags |= 0x1000;
+        e->actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     }
-    e->actor.flags |= 4;
+    e->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
 
     switch (i) {
     case 4:
@@ -3762,10 +3762,10 @@ void task_bos_md_0(MdWork* work, void* arg) {
         if (i == 0) {
             work->sub[i].flags |= 0x400;
         } else {
-            work->sub[i].flags |= 0x1000;
+            work->sub[i].flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
         }
 
-        work->sub[i].flags |= 4;
+        work->sub[i].flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
     BosMdSetFrame(work, 0);
@@ -4091,7 +4091,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
                 work->contactCooldown--;
             } else if (ColliderIsTouchingType(&work->sub.collider, 1) != 0) {
                 m4aSongNumStart(SONG_SND_714);
-                gBtlWork->actor->flags |= 0x20000000;
+                gBtlWork->actor->flags |= BTLOBJ_FLAG_HAZARD_PENDING;
                 work->contactCooldown = 60;
             }
             break;
@@ -4171,7 +4171,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     ColliderInit(&work->sub.collider, 3, 16, 16);
     ColliderSetPosition(&work->sub.collider, work->sub.x, work->sub.y,
                   work->sub.z);
-    work->sub.flags |= 0x1000;
+    work->sub.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     work->sub.hp = 20;
     work->sub.maxHp = 20;
     SetBtlObjUnhittable(&work->sub, 1);

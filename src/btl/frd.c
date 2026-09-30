@@ -138,10 +138,10 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     work->steps = 0;
     work->vz = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->unk_158 = work->actor->x - 0x3000;
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         work->unk_158 = work->actor->x + 0x3000;
         body->x = (gBtlWork->xMin - 0x30) << 8;
@@ -295,7 +295,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
     case 3:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
-            if (!(body->flags & 4)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
+            if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
             else work->unk_158 = (gBtlWork->xMax + 64) * 256;
             work->vz = -0x500;
             work->steps = 30;
@@ -312,15 +312,15 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         break;
     case 8:
         if (work->stateTimer == 0) {
-            if (body->flags & 4) angle = GetRandom() % 2 ? 0xAD : 0xD3;
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) angle = GetRandom() % 2 ? 0xAD : 0xD3;
             else angle = GetRandom() % 2 ? 0x53 : 0x2D;
             work->unk_158 = gSineTable[angle] * 3;
             work->unk_15C = -gSineTable[angle + 64] * 3;
         }
         if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
         else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
-        if (work->unk_158 < 0) body->flags |= 4;
-        else body->flags &= ~4ULL;
+        if (work->unk_158 < 0) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         body->x += work->unk_158;
         body->y += work->unk_15C;
         FrdDonaldApplyGravity(work);
@@ -347,8 +347,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != NULL) {
-                    if (target->x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
             if (work->stateTimer == 40) {
@@ -356,26 +356,26 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
-                    if (x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    if (body->flags & 4) x = body->x - 0xC800;
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0xC800;
                     else x = body->x + 0xC800;
                     y = body->y;
                     z = body->z - 0x800;
                 }
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
                     else BgFxStartFire(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
                     break;
                 case 1:
-                    if (body->flags & 4) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
                     else BgFxStartFire(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
                     else BgFxStartFire(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
                     break;
                 }
@@ -398,8 +398,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != NULL) {
-                    if (target->x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
             if (work->stateTimer == 40) {
@@ -407,26 +407,26 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
-                    if (x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    if (body->flags & 4) x = body->x - 0x6400;
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x6400;
                     else x = body->x + 0x6400;
                     y = body->y;
                     z = body->z - 0x800;
                 }
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
                     else BgFxStartBlizzard(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
                     break;
                 case 1:
-                    if (body->flags & 4) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
                     else BgFxStartBlizzard(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
                     else BgFxStartBlizzard(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
                     break;
                 }
@@ -447,8 +447,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != NULL) {
-                if (target->x < body->x) body->flags |= 4;
-                else body->flags &= ~4ULL;
+                if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         if (work->stateTimer == 40) {
@@ -461,7 +461,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                         y=target->y;
                         z=target->groundZ;
                     } else {
-                        if (body->flags & 4) x=body->x-0x5000;
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x=body->x-0x5000;
                         else x=body->x+0x5000;
                         y=body->y;
                         z=0;
@@ -491,8 +491,8 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
                 AnimReset(&work->anim);
-                if (ally->x < body->x) body->flags |= 4;
-                else body->flags &= ~4ULL;
+                if (ally->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
             if (work->stateTimer == 40) {
                 switch (work->variant) {
@@ -570,7 +570,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {
@@ -656,10 +656,10 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     work->steps = 0;
     work->vz = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->targetX = work->actor->x - 0x3000;
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         work->targetX = work->actor->x + 0x3000;
         body->x = (gBtlWork->xMin - 0x30) << 8;
@@ -741,7 +741,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->targetX = (gBtlWork->xMin - 0x40) << 8;
             } else {
                 work->targetX = (gBtlWork->xMax + 0x40) << 8;
@@ -765,7 +765,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 2, 0, work->tiles);
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->targetX = body->x - 0x8500;
             } else {
                 work->targetX = body->x + 0x8500;
@@ -780,7 +780,7 @@ u8 task_frd_goofy_1(FrdGoofyWork* work) {
             body->x += (work->targetX - body->x) >> 4;
             body->y += (work->targetY - body->y) >> 4;
 
-            if (body->flags & 4
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT
                     ? ApplyAttackBox(work->variant + 120, body->x - 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)
                     : ApplyAttackBox(work->variant + 120, body->x + 0xF00, body->y, body->z, 0x1E, 0x0C, 0x30)) {
                 m4aSongNumStart(SONG_EF_GFHIT);
@@ -859,7 +859,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {
@@ -918,9 +918,9 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     work->state = 0;
     work->stateTimer = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = 0;
@@ -974,7 +974,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
 
     switch (work->state) {
     case 0:
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             t = gBtlWork->xMax - 0x30;
         } else {
             t = gBtlWork->xMin + 0x30;
@@ -1008,7 +1008,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
                 work->steps--;
             }
 
-            if (body->flags & 4) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 body->x -= work->speed;
             } else {
                 body->x += work->speed;
@@ -1026,13 +1026,13 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
     case 2:
         AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
 
-        if (body->flags & 4
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT
                 ? ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)
                 : ApplyAttackBox(0x77, body->x, body->y, body->z, 0x10, 0x10, 0x10)) {
             m4aSongNumStart(SONG_BTL_AR_PUNCHHIT);
         }
 
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             body->x -= work->passSpeed;
 
             if (body->x < (gBtlWork->xMin - 0x30) << 8) {
@@ -1041,7 +1041,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
                 }
 
                 work->passesLeft--;
-                body->flags &= 0xFFFFFFFFFFFFFFFB;
+                body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->stateTimer = 0;
                 body->y = work->actor->y;
                 MakeOpponentsHittable();
@@ -1055,7 +1055,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
                 }
 
                 work->passesLeft--;
-                body->flags |= 4;
+                body->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->stateTimer = 0;
                 body->y = work->actor->y;
                 MakeOpponentsHittable();
@@ -1092,7 +1092,7 @@ void task_frd_ariel_2(FrdArielWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {
@@ -1170,10 +1170,10 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     work->steps = 0;
     work->vz = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->targetX = work->actor->x - 0x3000;
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         work->targetX = work->actor->x + 0x3000;
         body->x = (gBtlWork->xMin - 0x30) << 8;
@@ -1272,7 +1272,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
     case 3:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 3, 0, work->tiles);
-            if (!(body->flags & 4)) work->targetX = (gBtlWork->xMin - 64) * 256;
+            if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) work->targetX = (gBtlWork->xMin - 64) * 256;
             else work->targetX = (gBtlWork->xMax + 64) * 256;
             work->vz = -0x500;
             work->steps = 30;
@@ -1294,19 +1294,19 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         break;
     case 9:
         if (work->stateTimer == 0) {
-            if (work->actor->flags & 4) work->targetX = work->actor->x - 0x2D00;
+            if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) work->targetX = work->actor->x - 0x2D00;
             else work->targetX = work->actor->x + 0x2D00;
             work->targetY = work->actor->y;
             work->vz = -0x500;
             work->steps = 45;
             if (work->targetX > body->x) {
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->rotationTarget = 256;
                 } else {
                     work->rotationTarget = -256;
                 }
             } else {
-                if (body->flags & 4) {
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->rotationTarget = -256;
                 } else {
                     work->rotationTarget = 256;
@@ -1360,8 +1360,8 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != NULL) {
-                    if (target->x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
             if (work->stateTimer == 44) {
@@ -1369,26 +1369,26 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
-                    if (x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    if (body->flags & 4) x = body->x - 0xC800;
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0xC800;
                     else x = body->x + 0xC800;
                     y = body->y;
                     z = body->z - 0x1800;
                 }
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) BgFxStartFire(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
                     else BgFxStartFire(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 133);
                     break;
                 case 1:
-                    if (body->flags & 4) BgFxStartFire(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
                     else BgFxStartFire(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 134);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) BgFxStartFire(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
                     else BgFxStartFire(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 135);
                     break;
                 }
@@ -1411,8 +1411,8 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != NULL) {
-                    if (target->x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
                 FadeToAmount(2, 13, 60);
             }
@@ -1421,26 +1421,26 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     x = target->x;
                     y = target->y;
                     z = target->groundZ;
-                    if (x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    if (body->flags & 4) x = body->x - 0x4000;
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x4000;
                     else x = body->x + 0x4000;
                     y = body->y;
                     z = body->groundZ;
                 }
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) BgFxStartGravity(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
                     else BgFxStartGravity(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 142);
                     break;
                 case 1:
-                    if (body->flags & 4) BgFxStartGravity(1, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(1, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
                     else BgFxStartGravity(1, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 143);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) BgFxStartGravity(2, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(2, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
                     else BgFxStartGravity(2, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 144);
                     break;
                 }
@@ -1459,8 +1459,8 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
                 if (target != NULL) {
-                    if (target->x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
             if (work->stateTimer == 44) {
@@ -1468,26 +1468,26 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
-                    if (x < body->x) body->flags |= 4;
-                    else body->flags &= ~4ULL;
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    if (body->flags & 4) x = body->x - 0x6400;
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x6400;
                     else x = body->x + 0x6400;
                     y = body->y;
                     z = body->z - 0x1800;
                 }
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & 4) BgFxStartBlizzard(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
                     else BgFxStartBlizzard(0, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 136);
                     break;
                 case 1:
-                    if (body->flags & 4) BgFxStartBlizzard(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
                     else BgFxStartBlizzard(1, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 137);
                     break;
                 case 2:
                 default:
-                    if (body->flags & 4) BgFxStartBlizzard(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
                     else BgFxStartBlizzard(2, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 138);
                     break;
                 }
@@ -1508,8 +1508,8 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
             if (target != NULL) {
-                if (target->x < body->x) body->flags |= 4;
-                else body->flags &= ~4ULL;
+                if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         if (work->stateTimer == 44) {
@@ -1522,22 +1522,22 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                         y = target->y;
                         z = target->groundZ;
                     } else {
-                        if (body->flags & 4) x = body->x - 0x5000;
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x5000;
                         else x = body->x + 0x5000;
                         y = body->y;
                         z = 0;
                     }
-                    if (body->flags & 4) BgFxStartThunder(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartThunder(0, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
                     else BgFxStartThunder(0, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 139);
                     break;
                 }
             case 1:
-                if (body->flags & 4) BgFxStartWideThunder(1, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(1, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
                 else BgFxStartWideThunder(1, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 140);
                 break;
             case 2:
             default:
-                if (body->flags & 4) BgFxStartWideThunder(2, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
+                if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartWideThunder(2, body->x - 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
                 else BgFxStartWideThunder(2, body->x + 0x2800, body->y, body->z - 0x1800, body->groundZ, 141);
                 break;
             }
@@ -1571,7 +1571,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     flags = GetBattleSpritePriorityFlags(body->y);
     angle = work->rotation;
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (angle == 0 && gBtlWork->scale == 256) {
@@ -1595,7 +1595,7 @@ void task_frd_jack_2(FrdJackWork* work) {
         affine = AllocObjAffine(0, sclX, sclY, 1);
     }
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sx = sx + (gSineTable[(u16)(angle + 128) & 0xFF] * 5 >> 5);
     } else {
         sx = sx - (gSineTable[(u16)(angle + 128) & 0xFF] * 5 >> 5);
@@ -1640,14 +1640,14 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     work->steps = 0;
     work->unk_158 = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 0x20004;
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
         work->vx = -0x800;
         work->flyLeft = 0;
     } else {
         body->x = (gBtlWork->xMin - 0x30) << 8;
-        body->flags = 0x20000;
+        body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
         work->vx = 0x800;
         work->flyLeft = 1;
     }
@@ -1694,7 +1694,7 @@ void FrdPanSpawnSparkle(FrdPanWork* work) {
         case 4:
             sub.z -= 0x1800;
 
-            if (work->body.flags & 4) {
+            if (work->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub.x += 0x2000;
             } else {
                 sub.x -= 0x2000;
@@ -1704,7 +1704,7 @@ void FrdPanSpawnSparkle(FrdPanWork* work) {
         default:
             sub.z -= 0x1000;
 
-            if (work->body.flags & 4) {
+            if (work->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub.x += 0x1000;
             } else {
                 sub.x -= 0x1000;
@@ -1777,7 +1777,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     case 2:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
-            if (!(body->flags & 4)) {
+            if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) {
                 work->targetX = (gBtlWork->xMin - 64) * 256;
             } else {
                 work->targetX = (gBtlWork->xMax + 64) * 256;
@@ -1838,11 +1838,11 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             work->flyLeft = !work->flyLeft;
         }
         if (work->vx < 0) {
-            body->flags |= 4;
+            body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            body->flags &= ~4ULL;
+            body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (ApplyAttackBox(150, body->x - 0x1C00, body->y, body->z - 0x1400, 20, 20, 20)) {
                 m4aSongNumStart(SONG_BTL_PP_SWORDHIT);
             }
@@ -1892,7 +1892,7 @@ void task_frd_pan_2(FrdPanWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {
@@ -1975,10 +1975,10 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     work->steps = 0;
     work->vz = 0;
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->targetX = work->actor->x - 0x3000;
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         work->targetX = work->actor->x + 0x3000;
         body->x = (gBtlWork->xMin - 0x30) << 8;
@@ -2047,7 +2047,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
     case 2:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
-            if (!(body->flags & 4)) {
+            if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) {
                 work->targetX = (gBtlWork->xMin - 64) << 8;
             } else {
                 work->targetX = (gBtlWork->xMax + 64) << 8;
@@ -2068,11 +2068,11 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
             AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         }
         SelectLockonTarget();
-        if (work->actor->flags & 4) {
-            body->flags |= 4;
+        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
+            body->flags |= BTLOBJ_FLAG_FACING_LEFT;
             x = work->actor->x - 0x2800;
         } else {
-            body->flags &= ~4ULL;
+            body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             x = work->actor->x + 0x2800;
         }
         y = work->actor->y;
@@ -2096,7 +2096,7 @@ u8 task_frd_aladdin_1(FrdAladdinWork* work) {
             case 1:
             case 5:
             case 6:
-                if ((body->flags & 4) ? ApplyAttackBox(0x95, body->x - 0x1E00, body->y, body->z, 20, 20, 50) : ApplyAttackBox(0x95, body->x + 0x1E00, body->y, body->z, 20, 20, 50)) {
+                if ((body->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(0x95, body->x - 0x1E00, body->y, body->z, 20, 20, 50) : ApplyAttackBox(0x95, body->x + 0x1E00, body->y, body->z, 20, 20, 50)) {
                     m4aSongNumStart(SONG_BTL_AD_SWORDHIT);
                 }
                 break;
@@ -2131,7 +2131,7 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {
@@ -2226,12 +2226,12 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
         work->targetY = work->actor->y;
     }
 
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 0x30) << 8;
-        body->flags = 0x20004;
+        body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
     } else {
         body->x = (gBtlWork->xMin - 0x30) << 8;
-        body->flags = 0x20000;
+        body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
     }
 
     body->y = work->targetY;
@@ -2320,7 +2320,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
             }
         }
 
-        if (body->flags & 4) {
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
             body->x -= 0x380;
 
             if (body->x < (gBtlWork->xMin - 0x28) << 8) {
@@ -2362,7 +2362,7 @@ void task_frd_beast_2(FrdBeastWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {

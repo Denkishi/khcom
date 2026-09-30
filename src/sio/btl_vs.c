@@ -190,7 +190,7 @@ void HandleVsRikuCardInput(void) {
     }
     o = w->actor;
 
-    if (o->flags & 0x200) {
+    if (o->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -206,7 +206,7 @@ void HandleVsRikuCardInput(void) {
         return;
     }
 
-    if (o->flags & 2) {
+    if (o->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
@@ -319,7 +319,7 @@ void HandleVsSoraCardInput(void) {
 
     o = w->actor;
 
-    if (o->flags & 0x200) {
+    if (o->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -335,7 +335,7 @@ void HandleVsSoraCardInput(void) {
         return;
     }
 
-    if (o->flags & 2) {
+    if (o->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
@@ -400,11 +400,11 @@ void VsBattleUpdate(void) {
         gBtlWork->phase = 1;
         if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
-            other->flags |= 0x10000;
+            other->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             FadeFromAmount(2, 10, 4);
         } else {
             gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
-            player->flags |= 0x10000;
+            player->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             FadeFromAmount(3, 10, 4);
         }
         MosaicStartIn(16, 15);
@@ -416,10 +416,10 @@ void VsBattleUpdate(void) {
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
         if (gBtlWork->soraOwnsPlay != 0) {
             gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_ACTION;
-            player->flags |= 1;
+            player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
         } else {
             gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_ACTION;
-            other->flags |= 1;
+            other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
         }
         gBtlWork->phase = 2;
         gBtlWork->phaseStep = 0;
@@ -492,18 +492,18 @@ void VsBattleUpdate(void) {
     case 2:
         if (entered) return;
         busy = 0;
-        if (player->flags & 0x10) busy = 1;
-        if (other->flags & 0x10) busy = 1;
+        if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
+        if (other->flags & BTLOBJ_FLAG_IN_CARD_ACTION) busy = 1;
         if (busy) return;
         rank = GetStockMoveCount();
         gBtlWork->phaseStep = 0;
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             if (gBtlWork->stockMove >= (s8)rank) gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
-            if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) player->flags |= 1;
+            if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();
         } else {
             if (gRikuBtlWork->stockMove >= (s8)rank) gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
-            if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) other->flags |= 1;
+            if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();
         }
         break;

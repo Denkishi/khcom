@@ -875,7 +875,7 @@ u8 task_emy_00_1(EmyWork* work) {
         if (AnimIsFinished(&w->anim)) {
             w->state = 20;
             ColliderSetDisabled(&act->collider, 1);
-            act->flags |= 0x100;
+            act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
         break;
@@ -889,7 +889,7 @@ u8 task_emy_00_1(EmyWork* work) {
             if (w->stateTimer > 100) {
                 w->state = 21;
                 ColliderSetDisabled(&act->collider, 0);
-                act->flags &= ~0x100;
+                act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 16;
                 w->stateTimer = 0;
             } else {
@@ -897,9 +897,9 @@ u8 task_emy_00_1(EmyWork* work) {
             }
 
             if (act->x > pos) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         break;
@@ -907,7 +907,7 @@ u8 task_emy_00_1(EmyWork* work) {
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 3, 0, work->tiles);
 
         if (w->stateTimer == 20) {
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
 
             if (gGameState.flags & GAME_FLAG_FIRST_STRIKE) {
                 EmyFinishSpawn(w);
@@ -926,11 +926,11 @@ u8 task_emy_00_1(EmyWork* work) {
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 2, 0, work->tiles);
 
         if (w->stateTimer == 30) {
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
         }
 
         if (AnimIsFinished(&w->anim)) {
-            act->flags &= ~0x300;
+            act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             w->state = 18;
 
 #ifdef VERSION_EU
@@ -943,7 +943,7 @@ u8 task_emy_00_1(EmyWork* work) {
     case 18:
         if (w->stateTimer == 0) {
             ColliderSetDisabled(&act->collider, 0);
-            act->flags &= ~0x300;
+            act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
                 work->tiles);
         }
@@ -966,7 +966,7 @@ u8 task_emy_00_1(EmyWork* work) {
             }
         } else if (GetRandom() % 200 == 0) {
             w->state = 19;
-            act->flags |= 0x200;
+            act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             w->angle = GetRandom();
             w->stateTimer = 0;
             break;
@@ -976,9 +976,9 @@ u8 task_emy_00_1(EmyWork* work) {
             GetEnemyTargetPosition(act, &pos2, 0, 0);
 
             if (act->x > pos2) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
 
@@ -1012,7 +1012,7 @@ void task_emy_00_2(EmyWork* work) {
         zoom = work->scaleY;
 
         if (zoom == 0x100) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 scale = gBtlWork->scale;
                 rot = scale;
             } else if (gBtlWork->scale == zoom) {
@@ -1024,7 +1024,7 @@ void task_emy_00_2(EmyWork* work) {
                 scale = gBtlWork->scale;
             }
         } else {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 rot = gBtlWork->scale * work->scaleX >> 8;
                 scale = gBtlWork->scale;
             } else {
@@ -1098,7 +1098,7 @@ u8 task_emy_01_1(EmyWork* work) {
             if (work->stateTimer == 0x16) {
                 z = act->y;
 
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0x6400;
                     BgFxStartFire(0, act->x - 0x2600, z, act->z - 0xC00, x, z, 0, 1,
                         0xA7);
@@ -1126,7 +1126,7 @@ u8 task_emy_01_1(EmyWork* work) {
             if (work->stateTimer == 0x16) {
                 z = act->y;
 
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0x6400;
                     BgFxStartFire(1, act->x - 0x2600, z, act->z - 0xC00, x, z, 0, 1,
                         0xA8);
@@ -1196,7 +1196,7 @@ u8 task_emy_02_1(EmyWork* work) {
         } else if (work->stateTimer == 22) {
             y = act->y;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p = act->x - 0x3C00;
                 BgFxStartBlizzard(0, act->x - 0x2800, y, act->z - 0x800, p, y, 0, 1,
                     0xA9);
@@ -1224,7 +1224,7 @@ u8 task_emy_02_1(EmyWork* work) {
         } else if (work->stateTimer == 3) {
             y = act->y;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p = act->x - 0x3C00;
                 BgFxStartBlizzard(1, act->x - 0x2800, y, act->z - 0x800, p, y, 0, 1,
                     0xAA);
@@ -1364,7 +1364,7 @@ u8 task_emy_04_1(Emy04Work* work) {
 
             for (p = ListPoolFirst(&gBtlWork->pool); p != NULL;
                     p = ListPoolNext(&p->node)) {
-                if (!(p->flags & 0x100)) {
+                if (!(p->flags & BTLOBJ_FLAG_INTANGIBLE)) {
                     if (bestv < p->maxHp - p->hp) {
                         bestv = p->maxHp - p->hp;
                         best = p;
@@ -1382,7 +1382,7 @@ u8 task_emy_04_1(Emy04Work* work) {
                 break;
             }
 
-            best->flags |= 0x20;
+            best->flags |= BTLOBJ_FLAG_HEAL_PENDING;
             best->damage = -0x1E;
             BgFxStartCure(0, best->x, best->y, best->z);
             w->healCount++;
@@ -1486,7 +1486,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         s = AnimGetFrame(&work->base.anim);
 
         if (s >= 6 && s <= 16) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 v = act->x;
                 v += 0x7800;
             } else {
@@ -1535,7 +1535,7 @@ void task_emy_07_0(Emy07Work* work, void* obj) {
     work->successCount = 0;
     work->unk_186 = 0;
     work->base.idleState = 0x12;
-    work->base.actor.flags |= 0x1000;
+    work->base.actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     work->rewarded = 0;
 }
 
@@ -1609,9 +1609,9 @@ u8 task_emy_07_1(Emy07Work* work) {
         GetEnemyTargetPosition(act, &pos, 0, 0);
 
         if (act->x < pos) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (GetRandom() % 60 == 0) {
@@ -1673,7 +1673,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_BTL_WM_OK);
             work->base.stateTimer = 1;
-            act->flags |= 0x100;
+            act->flags |= BTLOBJ_FLAG_INTANGIBLE;
         }
 
         if (w->successCount == 2 && gFrameCounter % 10 == 0) {
@@ -1697,7 +1697,7 @@ u8 task_emy_07_1(Emy07Work* work) {
             } else {
                 work->base.stateTimer = 0;
                 work->base.state = 18;
-                act->flags &= ~0x100;
+                act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             }
         }
         break;
@@ -1710,14 +1710,14 @@ u8 task_emy_07_1(Emy07Work* work) {
         GetEnemyTargetPosition(act, &pos2, 0, 0);
 
         if (act->x < pos2) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
-            act->flags |= 0x100;
+            act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->base.stateTimer = 0;
             work->base.state = 19;
         } else {
@@ -1728,7 +1728,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0) {
-            act->flags |= 0x100;
+            act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->base.stateTimer = 1;
         }
 
@@ -1808,7 +1808,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 4, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 6) {
-            act->flags |= 0x180000000;
+            act->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_INVULNERABLE);
             w->flags |= 2;
         }
 
@@ -1821,7 +1821,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         AnimChangeWithDef(sEmy08AnimDefs, &w->base.anim, 5, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 4) {
-            act->flags &= ~0x180000000;
+            act->flags &= ~(BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_INVULNERABLE);
             w->flags &= ~2;
         }
 
@@ -1835,7 +1835,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             EmyReturnToIdle(&work->base);
-            act->flags |= 0x200;
+            act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
 
             if (w->flags & 1) {
                 work->base.state = 20;
@@ -1872,7 +1872,7 @@ u8 task_emy_08_1(Emy08Work* work) {
             case 7:
                 dx = 2;
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0xB1, act->x - 0x1400, act->y, act->z,
                             4, 4, 0x20)
                         : ApplyAttackBox(0xB1, act->x + 0x1400, act->y, act->z,
@@ -1885,7 +1885,7 @@ u8 task_emy_08_1(Emy08Work* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= dx << 8;
             } else {
                 act->x += dx << 8;
@@ -1900,7 +1900,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = work->base.idleState;
-            act->flags &= ~0x200;
+            act->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         } else {
             work->base.stateTimer++;
         }
@@ -1911,7 +1911,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = work->base.idleState;
-            act->flags &= ~0x200;
+            act->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         } else {
             work->base.stateTimer++;
         }
@@ -1921,7 +1921,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
         if (work->base.anim.timer == 0
                 && AnimGetFrame(&work->base.anim) == 7) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartGas(act->x, act->y, act->z - 0xA00, 1);
             } else {
                 BgFxStartGas(act->x, act->y, act->z - 0xA00, 0);
@@ -1929,7 +1929,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         }
 
         if (work->base.stateTimer == 60) {
-            (act->flags & 4)
+            (act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0xB2, act->x, act->y, act->z, 0x20, 0x20, 0x20)
                 : ApplyAttackBox(0xB2, act->x, act->y, act->z, 0x20, 0x20, 0x20);
         }
@@ -2039,7 +2039,7 @@ u8 task_emy_15_1(EmyWork* work) {
     case 0x13:
         AnimChangeWithDef(sEmy15AnimDefs, &w->anim, 1, 0, w->tiles);
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             ApproachValueHalfSteps(&act->x, act->originX - 0x5000, work->stateTimer);
         } else {
             ApproachValueHalfSteps(&act->x, act->originX + 0x5000, work->stateTimer);
@@ -2047,7 +2047,7 @@ u8 task_emy_15_1(EmyWork* work) {
 
         work->stateTimer--;
 
-        if ((act->flags & 4)
+        if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0xB5, act->x - 0x1400, act->y, act->z, 5, 5, 4)
                 : ApplyAttackBox(0xB5, act->x + 0x1400, act->y, act->z, 5, 5, 4)) {
             m4aSongNumStart(SONG_BTL_HANE_HIT);
@@ -2135,7 +2135,7 @@ u8 task_emy_16_1(Emy16Work* work) {
         AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 3 && work->base.anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 spawn.x = act->x - 0x1000;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x1000;
@@ -2161,7 +2161,7 @@ u8 task_emy_16_1(Emy16Work* work) {
         AnimChangeWithDef(sEmy16AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
 
         if (AnimGetFrame(&work->base.anim) == 0x0A && work->base.anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 spawn.x = act->x - 0xC00;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x200;
@@ -2470,9 +2470,9 @@ u8 task_emy_18_1(Emy18Work* work) {
 
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->base.x) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->base.angle = GetAngle(act->x, act->y, work->base.x,
@@ -2603,7 +2603,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             w->dashSpeed = 0x500;
         }
 
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -2615,7 +2615,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         break;
     case 0x14:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
         if (act->z >= act->groundZ) {
@@ -2637,7 +2637,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         break;
     case 0x15:
         AnimChangeWithDef(sEmy19AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 248 >> 8;
 
         if (act->z >= act->groundZ) {
@@ -2666,7 +2666,7 @@ u8 task_emy_19_1(Emy19Work* work) {
                 w->dashSpeed = 0;
             }
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xBC, act->x - 0x1000, act->y, act->z, 16, 16, 32) != 0
                     : ApplyAttackBox(0xBC, act->x + 0x1000, act->y, act->z, 16, 16, 32) != 0) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD02);
@@ -2674,7 +2674,7 @@ u8 task_emy_19_1(Emy19Work* work) {
             break;
         }
 
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed = w->dashSpeed * 240 >> 8;
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -2740,7 +2740,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         t = work->base.stateTimer;
 
         if (t >= 12 && t <= 39) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 ApplyAttackBox(0xBD, act->x, act->y, act->z, 30, 30, 32);
             } else {
                 ApplyAttackBox(0xBD, act->x, act->y, act->z, 30, 30, 32);
@@ -2775,10 +2775,10 @@ u8 task_emy_21_1(Emy21Work* work) {
             w->dashSpeed = 0;
         }
 
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed += 43;
 
-        if ((act->flags & 4)
+        if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
             ? ApplyAttackBox(0xBE, act->x, act->y, act->z, 20, 32, 32)
             : ApplyAttackBox(0xBE, act->x, act->y, act->z, 20, 32, 32)) {
             work->base.stateTimer = 0;
@@ -2832,7 +2832,7 @@ u8 task_emy_21_1(Emy21Work* work) {
             }
         }
 
-        act->x = act->flags & 4 ? act->x - w->dashSpeed : act->x + w->dashSpeed;
+        act->x = act->flags & BTLOBJ_FLAG_FACING_LEFT ? act->x - w->dashSpeed : act->x + w->dashSpeed;
         w->dashSpeed -= 46;
 
         if (w->dashSpeed < 0) {
@@ -2895,7 +2895,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
-            act->flags |= 0x300;
+            act->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->base.steps = 20;
             work->base.stateTimer = 1;
         }
@@ -2920,9 +2920,9 @@ u8 task_emy_22_1(Emy22Work* work) {
                 w->base.tiles);
 
             if (act->x > pos) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
 
             act->x = (gBtlWork->xMin
@@ -2948,7 +2948,7 @@ u8 task_emy_22_1(Emy22Work* work) {
             }
         }
 
-        act->flags &= ~0x300;
+        act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
         work->base.state = work->base.idleState;
         work->base.stateTimer = 0;
         break;
@@ -2957,9 +2957,9 @@ u8 task_emy_22_1(Emy22Work* work) {
             GetEnemyTargetPosition(act, &pos2, 0, 0);
 
             if (act->x > pos2) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
 
@@ -2967,7 +2967,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         AnimChangeWithDef(sEmy22AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         EmyLungeAttack(&work->base, 27, 14, 40, 191, 24, SONG_BTL_MON_HIT00, 24, 0, 24);
 
-        if (gBtlWork->actor->flags & 2) {
+        if (gBtlWork->actor->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
             act->hp += act->maxHp >> 3;
 
             if (act->hp > act->maxHp) {
@@ -2982,9 +2982,9 @@ u8 task_emy_22_1(Emy22Work* work) {
             GetEnemyTargetPosition(act, &pos3, 0, 0);
 
             if (act->x > pos3) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
 
@@ -3072,7 +3072,7 @@ u8 task_emy_23_1(Emy23Work* work) {
         act->z += -act->z >> 2;
 
         if (AnimGetFrame(&work->base.anim) == 3) {
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xC2, act->x - 0x1E00, act->y, act->z,
                         0x10, 0x10, 4)
                     : ApplyAttackBox(0xC2, act->x + 0x1E00, act->y, act->z,
@@ -3146,7 +3146,7 @@ u8 task_emy_25_1(EmyWork* work) {
                 dx = 5;
                 dy = -2;
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0xC3, act->x - 0x2800, act->y, act->z,
                             0x10, 0x10, 0x20)
                         : ApplyAttackBox(0xC3, act->x + 0x2800, act->y, act->z,
@@ -3172,7 +3172,7 @@ u8 task_emy_25_1(EmyWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= dx << 8;
             } else {
                 act->x += dx << 8;
@@ -3222,7 +3222,7 @@ u8 task_emy_25_1(EmyWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= (s16)e << 8;
             } else {
                 act->x += (s16)e << 8;
@@ -3231,7 +3231,7 @@ u8 task_emy_25_1(EmyWork* work) {
             act->y -= (s16)f << 8;
 
             if (work->anim.frame >= 8 && work->anim.frame <= 22) {
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0xC4, act->x, act->y, act->z, 0x30, 0x30,
                             0x20)
                         : ApplyAttackBox(0xC4, act->x, act->y, act->z, 0x30, 0x30,
@@ -3319,7 +3319,7 @@ u8 task_emy_26_1(EmyWork* work) {
             if (AnimIsFinished(&work->anim)) {
                 z = act->y;
 
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0x6400;
                     BgFxStartFire(1, act->x - 0x2600, z, act->z - 0x2000, x, z, 0, 1,
                         0xC6);
@@ -3395,7 +3395,7 @@ u8 task_emy_27_1(EmyWork* work) {
         if (AnimGetFrame(&work->anim) == 1 && work->anim.timer == 0) {
             m4aSongNumStart(SONG_BTL_SWORDFLASH);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFlash(act->x - 0xC00, act->y, act->z - 0x2200);
             } else {
                 BgFxStartFlash(act->x + 0xC00, act->y, act->z - 0x2200);
@@ -3416,15 +3416,15 @@ u8 task_emy_27_1(EmyWork* work) {
         act->y -= gSineTable[work->angle + 0x40];
 
         if (act->x > tx) {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
         s = AnimGetFrame(&work->anim);
 
         if (s == 2 || s == 5) {
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xC7, act->x - 0x1000, act->y, act->z, 0x14,
                         0x14, 0x20)
                     : ApplyAttackBox(0xC7, act->x + 0x1000, act->y, act->z, 0x14,
@@ -3512,9 +3512,9 @@ u8 task_emy_28_1(Emy28Work* work) {
 
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->base.x) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->base.angle = GetAngle(act->x, act->y, work->base.x,
@@ -3586,7 +3586,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         }
 
         if (work->base.anim.timer == 0 && AnimGetFrame(&work->base.anim) == 1) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFlash(act->x + 0x1000, act->y, act->z - 0x3200);
             } else {
                 BgFxStartFlash(act->x - 0x1000, act->y, act->z - 0x3200);
@@ -3714,7 +3714,7 @@ u8 task_emy_29_1(Emy29Work* work) {
             break;
         }
 
-        if ((act->flags & 4)
+        if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0xCC, act->x, act->y, act->z, 0x0C, 0x0C, 0x0C)
                 : ApplyAttackBox(0xCC, act->x, act->y, act->z, 0x0C, 0x0C, 0x0C)) {
             m4aSongNumStart(SONG_BTL_MON_HIT01);
@@ -3792,9 +3792,9 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             if (act->x > work->x) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
 
             work->angle = GetAngle(act->x, act->y, work->x, work->y);
@@ -3845,10 +3845,10 @@ u8 task_emy_30_1(EmyWork* work) {
         targetX = x;
 
         if (currentX < targetX) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             d = currentX + 0x1400;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             d = currentX - 0x1400;
         }
 
@@ -3872,10 +3872,10 @@ u8 task_emy_30_1(EmyWork* work) {
         targetX = x;
 
         if (currentX < targetX) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             d = currentX + 0x1400;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             d = currentX - 0x1400;
         }
 
@@ -3917,10 +3917,10 @@ u8 task_emy_30_1(EmyWork* work) {
             AnimChangeWithDef(sEmy30AnimDefs, &w->anim, 5, 0, w->tiles);
 
             if (act->x > 0x10000) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->x = gBtlWork->xMax * 256;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->x = gBtlWork->xMin * 256;
             }
         }
@@ -3944,7 +3944,7 @@ u8 task_emy_30_1(EmyWork* work) {
         act->y += (y - act->y) >> 4;
         act->z += (-0x800 - act->z) >> 4;
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (ApplyAttackBox(0xCE, act->x - 0x1400, act->y, act->z, 12, 12, 12)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT03);
             }
@@ -3977,7 +3977,7 @@ u8 task_emy_30_1(EmyWork* work) {
             work->speed = 0;
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= work->speed;
         } else {
             act->x += work->speed;
@@ -4053,7 +4053,7 @@ u8 task_emy_31_1(Emy31Work* work) {
                 AnimStart(&work->base.anim, 1, 0);
 
                 y = act->y;
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0xC800;
                     BgFxStartFire(1, act->x - 0x4000, y, act->z,
                         x, y, 0, 1, 0xCF);
@@ -4115,7 +4115,7 @@ u8 task_emy_31_1(Emy31Work* work) {
                 AnimStart(&work->base.anim, 1, ANIM_FLAG_LOOP);
 
                 y = act->y;
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     x = act->x - 0x6400;
                     BgFxStartBlizzard(1, act->x - 0x4600, y, act->z,
                         x, y, 0, 1, 0xD0);
@@ -4179,7 +4179,7 @@ u8 task_emy_31_1(Emy31Work* work) {
 
             if (AnimIsFinished(&work->base.anim)) {
                 if (work->base.steps == 0) {
-                    if (act->flags & 4) {
+                    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         BgFxStartThunder(1, act->x - 0x1600, act->y,
                             act->z - 0x3C00, w->targetX, w->targetY,
                             w->targetZ, 0xD1);
@@ -4245,7 +4245,7 @@ u8 task_emy_37_1(Emy37Work* work) {
     if (_0800CBDC(&work->base)) {
         if (work->base.state == 20) {
             work->rotation = 0;
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             work->base.state = 25;
             work->base.actor.centerHeight = 20;
         } else {
@@ -4331,7 +4331,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 10, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             EmyFinishSpawn(&work->base);
         } else {
             work->base.stateTimer++;
@@ -4343,7 +4343,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = 20;
             ColliderSetDisabled(&act->collider, 1);
-            act->flags |= 0x100;
+            act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
         break;
@@ -4384,12 +4384,12 @@ u8 task_emy_37_1(Emy37Work* work) {
             act->y += dy;
 
             if (work->base.stateTimer == 0) {
-                act->flags &= ~0x200;
+                act->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             }
 
             TryEnemyCardUse(act);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.angle -= 2;
                 w->rotation = work->base.angle;
             } else {
@@ -4401,9 +4401,9 @@ u8 task_emy_37_1(Emy37Work* work) {
                 w->rotation = 0;
                 work->base.state = 21;
                 ColliderSetDisabled(&act->collider, 0);
-                act->flags &= ~0x100;
+                act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 20;
-                act->flags |= 0x200;
+                act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
                 work->base.stateTimer = 0;
             } else {
                 work->base.stateTimer++;
@@ -4414,11 +4414,11 @@ u8 task_emy_37_1(Emy37Work* work) {
         AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (work->base.stateTimer == 30) {
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            act->flags &= ~0x300;
+            act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->base.state = 26;
             work->base.stateTimer = 0;
         } else {
@@ -4454,7 +4454,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         if (work->base.stateTimer == 0) {
             act->centerHeight = 20;
             ColliderSetDisabled(&act->collider, 0);
-            act->flags &= ~0x300;
+            act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         }
 
@@ -4473,7 +4473,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             break;
         } else if ((u16)(GetRandom() % 100U) == 0) {
             work->base.state = 19;
-            act->flags |= 0x200;
+            act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->base.angle = GetRandom();
             work->base.stateTimer = 0;
             break;
@@ -4485,9 +4485,9 @@ u8 task_emy_37_1(Emy37Work* work) {
             GetEnemyTargetPosition(act, &x, 0, 0);
 
             if (act->x > x) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
 
@@ -4519,7 +4519,7 @@ void task_emy_37_2(Emy37Work* work) {
         zoom = work->base.scaleY;
 
         if (zoom == 0x100) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 scale = gBtlWork->scale;
                 rot = scale;
             } else if (work->rotation == 0 && gBtlWork->scale == zoom) {
@@ -4531,7 +4531,7 @@ void task_emy_37_2(Emy37Work* work) {
                 scale = gBtlWork->scale;
             }
         } else {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 rot = gBtlWork->scale * work->base.scaleX >> 8;
                 scale = gBtlWork->scale;
             } else {
@@ -4625,12 +4625,12 @@ u8 task_emy_38_1(EmyWork* work) {
 
     ret = _0800CDF0(work);
 
-    if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & 4)) ||
+    if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
-                !(work->actor.flags & 4))) {
-        work->actor.flags |= 0x8000;
+                !(work->actor.flags & BTLOBJ_FLAG_FACING_LEFT))) {
+        work->actor.flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
     } else {
-        work->actor.flags &= ~0x8000;
+        work->actor.flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
 
     return ret;
@@ -4682,7 +4682,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         if (work->base.stateTimer == 0x30) {
             z = act->y;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 x = act->x - 0x6400;
                 BgFxStartFire(0, act->x - 0x4000, z, act->z - 0x2000, x, z, 0, 1,
                     0xD6);
@@ -4751,7 +4751,7 @@ u8 task_emy_39_1(Emy39Work* work) {
             break;
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= w->dashSpeed;
         } else {
             act->x += w->dashSpeed;
@@ -4778,12 +4778,12 @@ u8 task_emy_39_1(Emy39Work* work) {
     ret = _0800CDF0(&work->base);
 
     if ((gBtlWork->actor->x < work->base.actor.x
-                && (work->base.actor.flags & 4))
+                && (work->base.actor.flags & BTLOBJ_FLAG_FACING_LEFT))
             || (gBtlWork->actor->x > work->base.actor.x
-                && !(work->base.actor.flags & 4))) {
-        work->base.actor.flags |= 0x8000;
+                && !(work->base.actor.flags & BTLOBJ_FLAG_FACING_LEFT))) {
+        work->base.actor.flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
     } else {
-        work->base.actor.flags &= ~0x8000;
+        work->base.actor.flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
 
     return ret;
@@ -4842,7 +4842,7 @@ u8 task_emy_41_1(Emy41Work* work) {
         }
 
         if (AnimGetFrame(&work->base.anim) == 4 && work->base.anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartThunder(1, act->x - 0x2C00, act->y, act->z, w->targetX,
                     w->targetY, w->targetZ, 0xD9);
             } else {
@@ -4904,7 +4904,7 @@ u8 task_emy_44_1(EmyWork* work) {
         case 2:
         case 3:
         case 4:
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xDA, act->x - 0x2000, act->y, act->z, 0x20,
                         0x10, 0x28)
                     : ApplyAttackBox(0xDA, act->x + 0x2000, act->y, act->z, 0x20,
@@ -4922,7 +4922,7 @@ u8 task_emy_44_1(EmyWork* work) {
         AnimChangeWithDef(sEmy44AnimDefs, &w->anim, 1, 0, w->tiles);
 
         if (AnimGetFrame(&work->anim) == 7 && work->anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(1, act->x - 0x4000, act->y, act->z - 0x400,
                     act->x - 0xB400, act->y, act->z - 0x400, 1, 0xDB);
             } else {
@@ -4939,12 +4939,12 @@ u8 task_emy_44_1(EmyWork* work) {
 
     ret = _0800CDF0(work);
 
-    if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & 4)) ||
+    if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
-                !(work->actor.flags & 4))) {
-        work->actor.flags |= 0x0C008000;
+                !(work->actor.flags & BTLOBJ_FLAG_FACING_LEFT))) {
+        work->actor.flags |= (BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_IMMUNE_BLIZZARD);
     } else {
-        work->actor.flags &= ~0x0C008000;
+        work->actor.flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_IMMUNE_BLIZZARD);
     }
 
     return ret;
@@ -4963,7 +4963,7 @@ void task_emy_81_0(EmyWork* work, void* obj) {
 }
 
 static inline s32 EmyFacingX(BtlObj* actor, s32 offset) {
-    return actor->flags & 4 ? actor->x - offset : actor->x + offset;
+    return actor->flags & BTLOBJ_FLAG_FACING_LEFT ? actor->x - offset : actor->x + offset;
 }
 
 u8 task_emy_81_1(Emy81Work* work) {
@@ -5107,7 +5107,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             s32 targetX;
             s32 adjustedX;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = 0x3000;
                 currentX = act->x;
                 adjustedX = currentX + targetX;
@@ -5161,7 +5161,7 @@ u8 task_emy_81_1(Emy81Work* work) {
             s32 targetX;
             s32 adjustedX;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = 0x4600;
                 currentX = act->x;
                 adjustedX = currentX + targetX;
@@ -5183,7 +5183,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         if (frame == 4) {
             s32 centerX = EmyFacingX(act, 0);
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xDD, centerX - 0x1800, act->y, act->z,
                         0x10, 0x10, 10)
                     : ApplyAttackBox(0xDD, centerX + 0x1800, act->y, act->z,
@@ -5291,9 +5291,9 @@ u8 task_emy_82_1(Emy82Work* work) {
                 s32 x;
                 GetEnemyTargetPosition(act, &x, 0, 0);
                 if (act->x > x) {
-                    act->flags |= 4;
+                    act->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    act->flags &= ~4;
+                    act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
         } else {
@@ -5319,9 +5319,9 @@ u8 task_emy_82_1(Emy82Work* work) {
             s32 x;
             GetEnemyTargetPosition(act, &x, 0, 0);
             if (act->x > x) {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         switch (AnimGetGfxIndex(&work->base.anim)) {
@@ -5350,7 +5350,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                 AnimChangeWithDef(sEmy82AnimDefs, &w->base.anim, 3, 0, w->base.tiles);
                 work->base.vz = -0x400;
             }
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = 0x3000;
                 currentX = act->x;
                 d = currentX + targetX;
@@ -5369,7 +5369,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                 work->base.vz = 0;
             }
             if (frame == 4) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     hitX = act->x - 0x1400;
                 } else {
                     hitX = act->x + 0x1400;
@@ -5378,7 +5378,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                     m4aSongNumStart(SONG_BTL_MON_HIT00);
                 }
             } else if (frame == 5) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     hitX = act->x - 0x1800;
                 } else {
                     hitX = act->x + 0x1800;
@@ -5417,7 +5417,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                         s16 missing = 0;
                         for (actor = ListPoolFirst(&gBtlWork->pool); actor;
                              actor = ListPoolNext(&actor->node)) {
-                            if (actor != act && !(actor->flags & 0x100)) {
+                            if (actor != act && !(actor->flags & BTLOBJ_FLAG_INTANGIBLE)) {
                                 if (missing <= actor->maxHp - actor->hp) {
                                     missing = actor->maxHp - actor->hp;
                                     best = actor;
@@ -5426,7 +5426,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                         }
                         if (best) {
                             m4aSongNumStart(SONG_EF_CAREL00);
-                            best->flags |= 0x20;
+                            best->flags |= BTLOBJ_FLAG_HEAL_PENDING;
                             best->damage = 0xFFEC;
                         } else {
                             CreateBtlPopTask(act, 2);
@@ -5464,7 +5464,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                         u32 spawnFailure = 0;
                         s32 x;
                         s32 offset;
-                        if (act->flags & 4) {
+                        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             x = act->x;
                             offset = 0x2000;
                         } else {
@@ -5570,9 +5570,9 @@ u8 task_emy_83_1(Emy83Work* work) {
         GetEnemyTargetPosition(act, &pos, 0, 0);
 
         if (act->x < pos) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
         break;
     case 0x12:
@@ -5608,7 +5608,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         AnimChangeWithDef(sEmy83AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
 
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 spawn.x = act->x - 0x1000;
                 spawn.unk_12 = 1;
             } else {
@@ -5928,7 +5928,7 @@ void task_emy_test_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmyTestDef, obj);
     work->actor.maxHp = 0xBB8;
     work->actor.hp = 0xBB8;
-    work->actor.flags |= 0x1000;
+    work->actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
 }
 
 u8 task_emy_test_1(EmyWork* work) {

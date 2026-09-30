@@ -3622,7 +3622,7 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
         t = ListPoolFirst(&gBtlWork->pool);
 
         if (t != NULL) {
-            t->flags |= 2;
+            t->flags |= BTLOBJ_FLAG_DAMAGE_PENDING;
         }
     }
 

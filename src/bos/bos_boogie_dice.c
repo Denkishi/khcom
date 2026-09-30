@@ -488,9 +488,9 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     ColliderInit(&work->obj.collider, 3, sBosBoogieDiceEmyKind.radius, sBosBoogieDiceEmyKind.height);
     work->obj.flags |= 0x400;
 #ifdef VERSION_EU
-    work->obj.flags |= 0x100;
+    work->obj.flags |= BTLOBJ_FLAG_INTANGIBLE;
 #else
-    work->obj.flags |= 0x80;
+    work->obj.flags |= BTLOBJ_FLAG_HIT_LOCKED;
 #endif
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6788, 4), gUnk_09796EAA);
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
@@ -585,9 +585,9 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         }
 
 #ifdef VERSION_EU
-        p->flags &= ~0x100;
+        p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
 #else
-        p->flags &= ~0x80;
+        p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 #endif
         BosBoogieDiceGrow(work);
         work->vz += 51;
@@ -614,7 +614,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             if (work->vz >= -25) {
                 RollBoogieDice(work);
                 work->state = 4;
-                p->flags |= 0x100;
+                p->flags |= BTLOBJ_FLAG_INTANGIBLE;
 
                 if (work->follower == 0) {
                     ClearBtlObjActionFlags(p);
@@ -625,9 +625,9 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         break;
     case 0:
 #ifdef VERSION_EU
-        p->flags &= ~0x100;
+        p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
 #else
-        p->flags &= ~0x80;
+        p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 #endif
 
         if ((s16)work->timer == 0 && work->follower == 0) {
@@ -1814,7 +1814,7 @@ void task_bos_ursula_0(UrsulaWork* work) {
     gBosUrsulaBaseZ = -0x5000;
     InitEnemyBtlObj(&work->obj, &sBosUrsulaEmyKind, 0x10000, 0x19800, -0x5000);
     work->obj.groundZ = 0;
-    work->obj.flags |= 4;
+    work->obj.flags |= BTLOBJ_FLAG_FACING_LEFT;
     SetBtlObjUnhittable(&work->obj, 1);
     BosUrsulaUpdateMapBlocks(work);
     RedrawBgMapAt(0, (gBtlWork->viewX - (work->obj.x - 0x12000)) >> 8,
@@ -2116,9 +2116,9 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         break;
     case 0:
         if (work->obj.x > gBtlWork->actor->x) {
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            p->flags &= ~4ULL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
         if (!BosUrsulaIsGimmickActive()) {
             if (BosUrsulaIsGuarded(work)) {
@@ -2143,7 +2143,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             BosUrsulaUpdateBob(work);
         } else {
             if (!BosUrsulaMoveForward(work)) {
-                p->flags ^= 4;
+                p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             }
             if (BosUrsulaGetHpPhase() == 2 && p->x > 0x6800 && p->x < 0x19800) {
                 if (((p->x - gBtlWork->actor->x) >= 0 ? p->x - gBtlWork->actor->x : -(p->x - gBtlWork->actor->x)) < 0x6800 && BosUrsulaIsGuarded(work)) {
@@ -2151,7 +2151,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
                     work->state = 0;
                 }
             }
-            if ((!(p->flags & 4) && p->x == 0x6800) || ((p->flags & 4) && p->x == 0x19800)) {
+            if ((!(p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x6800) || ((p->flags & BTLOBJ_FLAG_FACING_LEFT) && p->x == 0x19800)) {
                 work->state = 0;
             }
         }
@@ -2194,7 +2194,7 @@ void task_bos_ursula_3(UrsulaWork* work) {
 }
 
 u8 BosUrsulaIsFacingLeft(void) {
-    return gUrsulaWork->obj.flags & 4;
+    return gUrsulaWork->obj.flags & BTLOBJ_FLAG_FACING_LEFT;
 }
 
 u8 BosUrsulaIsGimmickActive(void) {
@@ -2436,7 +2436,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
 
     if (work->isLeft != 0) {
         work->animBase = 0xFFFC;
-        work->obj.flags |= 4;
+        work->obj.flags |= BTLOBJ_FLAG_FACING_LEFT;
         work->collider2OffsetX = -0x2800;
     } else {
         work->animBase = 0;

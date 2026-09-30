@@ -105,7 +105,7 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     work->card = args->card;
     work->counter = 0;
     work->velocity = 0;
-    if (work->actor->flags & 4) {
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 48) * 256;
         body->flags = 4;
     } else {
@@ -208,7 +208,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     case 2:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 6, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
-            if (work->actor->flags & 4) body->flags |= 4;
+            if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
             else body->flags &= ~4ULL;
             if ((u16)(GetRandom() % 200u) == 0) work->state = 5;
         }
@@ -220,7 +220,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     case 5:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 9, 0, work->tiles);
-        if (work->actor->flags & 4) body->flags |= 4;
+        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x = work->actor->x;
         body->y = work->actor->y + 0x800;
@@ -235,7 +235,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     case 6: {
         s32 frame;
-        if (work->actor->flags & 4) body->flags |= 4;
+        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
         else body->flags &= ~4ULL;
         body->x = work->actor->x;
         body->y = work->actor->y + 0x800;

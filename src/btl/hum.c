@@ -747,7 +747,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             MakeOpponentsHittable();
         }
         if (AnimGetFrame(&work->base.anim) == 6) {
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x11A, act->x - 9216, act->y, act->z, 24, 16, 50)
                 : ApplyAttackBox(0x11A, act->x + 9216, act->y, act->z, 24, 16, 50)) {
                 m4aSongNumStart(SONG_EF_KU_ATT00);
@@ -768,7 +768,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             MakeOpponentsHittable();
         }
         if (AnimGetFrame(&work->base.anim) == 6) {
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x11A, act->x - 8192, act->y, act->z, 22, 16, 50)
                 : ApplyAttackBox(0x11A, act->x + 8192, act->y, act->z, 22, 16, 50)) {
                 m4aSongNumStart(SONG_EF_KU_ATT01);
@@ -883,9 +883,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
             act->z += (v - act->z) >> 3;
             }
             if (act->x < (s32)work->base.targetX) {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
             work->base.stateTimer++;
         }
@@ -944,7 +944,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
         }
-        if ((act->flags & 4)
+        if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
             ? ApplyAttackBox(0x11A, act->x - 0x2000, act->y, act->z, 22, 16, 30)
             : ApplyAttackBox(0x11A, act->x + 0x2000, act->y, act->z, 22, 16, 30)) {
             m4aSongNumStart(SONG_EF_KU_ATT02);
@@ -991,12 +991,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
                     m4aSongNumStart(SONG_VO_MKU_ATTACK00);
                     break;
                 case 6:
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11B, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
                         FadeStartIn(2, 20);
-                        if (act->flags & 4) {
+                        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
@@ -1014,12 +1014,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 switch (AnimGetFrame(&work->base.anim)) {
                 case 0:
                     MakeOpponentsHittable();
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11B, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11B, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
                         FadeStartIn(2, 20);
-                        if (act->flags & 4) {
+                        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x133, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x133, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
@@ -1034,12 +1034,12 @@ u8 task_hum_cloud_1(CloudWork* work) {
                     break;
                 case 5:
                     MakeOpponentsHittable();
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11C, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11C, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
                         FadeStartIn(2, 50);
-                        if (act->flags & 4) {
+                        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 0x200, act->x - 0x2000, (d = act->z - 0x1800, act->y + d));
                         } else {
                             SetBattleZoom(6, 0x200, act->x + 0x2000, (d = act->z - 0x1800, act->y + d));
@@ -1082,7 +1082,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             w->unk_188 = 0;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.targetX = (gBtlWork->xMin + 50) << 8;
             } else {
                 work->base.targetX = (gBtlWork->xMax - 50) << 8;
@@ -1135,9 +1135,9 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 break;
             }
             if (act->x < (s32)work->base.targetX) {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         work->base.vz = 0;
@@ -1148,7 +1148,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             switch ((s16)w->state) {
             case 0:
                 if (AnimGetFrame(&work->base.anim) == 4) {
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT00);
@@ -1159,7 +1159,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             case 1:
                 if (AnimGetFrame(&work->base.anim) == 3) {
                     MakeOpponentsHittable();
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT01);
@@ -1171,7 +1171,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             default:
                 if (AnimGetFrame(&work->base.anim) == 3) {
                     MakeOpponentsHittable();
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x11D, act->x - 0x2800, act->y, act->z, 24, 24, 48)
                         : ApplyAttackBox(0x11D, act->x + 0x2800, act->y, act->z, 24, 24, 48)) {
                         m4aSongNumStart(SONG_EF_KU_ATT02);
@@ -1211,7 +1211,7 @@ void HookJumpOffset(CloudWork* work, s16 a, s32 b) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->base.targetX = act->x - (a << 8);
     } else {
         work->base.targetX = act->x + (a << 8);
@@ -1243,7 +1243,7 @@ u8 HookTryJumpAway(CloudWork* work) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             HookJumpOffset(work, -99, 0x280);
         } else if (GetRandom() & 1) {
-            if (c->flags & 4) {
+            if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 HookJumpTo(work, x + 0x2800, y);
             } else {
                 HookJumpTo(work, x - 0x2800, y);
@@ -1259,7 +1259,7 @@ u8 HookTryJumpAway(CloudWork* work) {
 void task_hum_hook_0(HookWork* work, void* arg) {
     TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumHookMoon, 0);
     HumInit(&work->base, &sHumHookDef);
-    work->base.actor.flags |= 0x10000000;
+    work->base.actor.flags |= BTLOBJ_FLAG_IMMUNE_THUNDER;
 
     if (GetRandom() % 2) {
         work->base.stockMoves = sHumHookStockMovesA;
@@ -1438,7 +1438,7 @@ u8 task_hum_hook_1(HookWork* work) {
         BtlMapFollowPosition(act->x, act->y, act->z);
         HumFaceTarget(&work->base, 1);
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 d = act->x - 0x1000;
             act->x += (x - d) >> 4;
         } else {
@@ -1454,7 +1454,7 @@ u8 task_hum_hook_1(HookWork* work) {
             case 7:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(280, act->x - 0x1400, act->y, act->z, 20, 20, 50)
                     : ApplyAttackBox(280, act->x + 0x1400, act->y, act->z, 20, 20, 50)) {
                     m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -1478,7 +1478,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
         HumFaceTarget(&work->base, 1);
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 d = act->x - 0x1000;
             act->x += (x - d) >> 4;
         } else {
@@ -1490,7 +1490,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if (work->base.anim.timer == 0 && AnimGetFrame(&work->base.anim) == 3) {
             MakeOpponentsHittable();
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x119, act->x - 0x1400, act->y, act->z, 20, 20, 50)
                 : ApplyAttackBox(0x119, act->x + 0x1400, act->y, act->z, 20, 20, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -1518,7 +1518,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if ((w->flags & 1) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
@@ -1568,7 +1568,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if ((w->flags & 1) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
@@ -1616,7 +1616,7 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if ((w->flags & 1) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
@@ -1658,7 +1658,7 @@ u8 task_hum_hook_1(HookWork* work) {
         f = AnimGetFrame(&work->base.anim);
 
         if (f > 1) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 d = act->x + 0x1400;
                 act->x += (act->originX - d) >> 3;
             } else {
@@ -1668,7 +1668,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (f == 2) {
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x115, act->x - 0x2000, act->y, act->z, 16, 16, 50)
                 : ApplyAttackBox(0x115, act->x + 0x2000, act->y, act->z, 16, 16, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -1689,7 +1689,7 @@ u8 task_hum_hook_1(HookWork* work) {
         f = AnimGetFrame(&work->base.anim);
 
         if (f >= 3 && f <= 5) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 d = act->x + 0x4000;
                 act->x += (act->originX - d) >> 3;
             } else {
@@ -1701,7 +1701,7 @@ u8 task_hum_hook_1(HookWork* work) {
         switch (f) {
         case 4:
         case 5:
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x115, act->x - 0x4400, act->y, act->z, 20, 16, 50)
                 : ApplyAttackBox(0x115, act->x + 0x4400, act->y, act->z, 20, 16, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -1741,7 +1741,7 @@ u8 task_hum_hook_1(HookWork* work) {
             act->x += ((s32)work->base.targetX - act->x) >> 3;
             act->y += ((s32)work->base.targetY - act->y) >> 3;
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(278, act->x - 0x1000, act->y, act->z, 32, 24, 70)
                 : ApplyAttackBox(278, act->x + 0x1000, act->y, act->z, 32, 24, 70)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD01);
@@ -1830,7 +1830,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (c->z >= c->groundZ && c->hp > 0 && c->badStatus != 2 &&
-            !(c->flags & 16)) {
+            !(c->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
             w->playerSlide += ((GetAngleDiff(0, gBtlWork->rotation) << 6) - w->playerSlide) >> 4;
             c->x -= w->playerSlide;
         } else {
@@ -1838,7 +1838,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if (act->z >= act->groundZ && act->hp > 0 && act->badStatus != 2 &&
-            !(act->flags & 16)) {
+            !(act->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
             w->slide += ((GetAngleDiff(0, gBtlWork->rotation) << 6) - w->slide) >> 4;
             act->x -= w->slide;
         } else {
@@ -2100,7 +2100,7 @@ void AnsemHover(HumWork* work, s32 a) {
 void AnsemPlaceSub(AnsemWork* work) {
     BtlObj* act = &work->base.actor;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->subOffsetX += (0x1800 - work->subOffsetX) >> 3;
     } else {
         work->subOffsetX += (-0x1800 - work->subOffsetX) >> 3;
@@ -2137,7 +2137,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     switch (_0800E434(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
-        act->flags &= ~0x100008000;
+        act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
         MakeOpponentsHittable();
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -2160,7 +2160,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
         break;
     case 4:
-        act->flags &= ~0x100008000;
+        act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
         work->sub.flags &= ~5;
         break;
     }
@@ -2277,7 +2277,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             m4aSongNumStart(SONG_VO_AN_ATTACK00);
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 d = act->x - 0x2800;
             act->x = act->x + ((x - d) >> 4);
         } else {
@@ -2291,7 +2291,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         case 1:
         case 2:
         case 3:
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= 0x100;
             } else {
                 act->x += 0x100;
@@ -2300,7 +2300,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         case 4:
             w->sub.flags |= 1;
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x140, act->x - 0x2000, act->y, act->z, 20, 12, 24)
                 : ApplyAttackBox(0x140, act->x + 0x2000, act->y, act->z, 20, 12, 24)) {
                 m4aSongNumStart(SONG_BTL_MON_HIT06);
@@ -2442,7 +2442,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             w->steps = 30;
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             ApproachValueHalfSteps(&w->sub.x, act->x + 0x1800, w->steps);
         } else {
             ApproachValueHalfSteps(&w->sub.x, act->x - 0x1800, w->steps);
@@ -2466,14 +2466,14 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 7, 0, w->base.sub->tiles);
             w->sub.flags |= 1;
             act->originX = act->x;
-            act->flags |= 0x200;
+            act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
         HumFaceTarget(&work->base, 1);
 
         if (AnimGetFrame(&w->sub.anim) != 0) {
-            act->flags |= 0x100008000;
+            act->flags |= (BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 d = act->x - 0x1000;
                 act->x = act->x + ((act->originX - d) >> 2);
             } else {
@@ -2488,12 +2488,12 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (work->base.stateTimer == 25) {
-            act->flags &= ~0x200;
+            act->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
         if (work->base.stateTimer > 50) {
             w->sub.flags &= ~1;
-            act->flags &= ~0x100008000;
+            act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
             work->base.stateTimer = 0;
             work->base.state = 0;
             break;
@@ -2519,10 +2519,10 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (work->base.stateTimer == 0) {
             if (act->x <= 0xFFFF) {
                 work->base.targetX = (gBtlWork->xMax - 48) << 8;
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 work->base.targetX = (gBtlWork->xMin + 48) << 8;
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
             work->base.targetY = y;
             AnimReset(&work->base.anim);
@@ -2532,7 +2532,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             w->hoverZ = -0xC00;
             w->steps = 40;
             func_080169A0(w->sub.x, w->sub.y,
-                w->sub.z - 0x2100, act->flags & 4);
+                w->sub.z - 0x2100, act->flags & BTLOBJ_FLAG_FACING_LEFT);
         }
         a = w->sub.x;
         b = w->sub.y;
@@ -2547,7 +2547,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (work->base.stateTimer > 5) {
             w->sub.flags |= 1;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->subOffsetX += (-0x2200 - w->subOffsetX) >> 3;
             } else {
                 w->subOffsetX += (0x2200 - w->subOffsetX) >> 3;
@@ -2603,7 +2603,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (work->base.stateTimer == 20) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartAnsemWave(act->x, act->y, 0, 1, 0x142);
             } else {
                 BgFxStartAnsemWave(act->x, act->y, 0, 0, 0x142);
@@ -2653,7 +2653,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
         AnsemHover(&work->base, w->hoverZ);
     }
 
@@ -2708,7 +2708,7 @@ void HadesEndAttack(HadesWork* work) {
 void task_hum_hades_0(HadesWork* work) {
     HumInit(&work->base, &sHumHadesDef);
     HumSubInit(&work->base, &work->sub, &sHumHadesSubDef);
-    work->base.actor.flags |= 0x100000;
+    work->base.actor.flags |= BTLOBJ_FLAG_ABSORB_FIRE;
     work->base.flags |= 0x40;
     work->flags = 0;
     work->hoverZ = -0xA00;
@@ -2808,7 +2808,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         HumFaceTarget(&work->base, 5);
 
         if (AnimIsFinished(&work->base.anim)) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 if ((s32)work->base.targetX < act->x) {
                     AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
                 } else {
@@ -2888,7 +2888,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 3, ANIM_FLAG_LOOP, w->base.sub->tiles);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub.x -= 0xA00;
             } else {
                 w->sub.x += 0xA00;
@@ -2898,7 +2898,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             m4aSongNumStart(SONG_BTL_HA_BALLSHOT);
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             w->sub.x -= 0x700;
         } else {
             w->sub.x += 0x700;
@@ -2949,7 +2949,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             work->base.steps = 8;
             w->flags = (w->flags & 0xFFFB) | 2;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub2[0].x = w->sub2[0].x2 = w->sub2[0].x3 = act->x - 0x2800;
                 w->sub2[0].y = w->sub2[0].y2 = w->sub2[0].y3 = act->y;
                 w->sub2[0].z = w->sub2[0].z2 = w->sub2[0].z3 = act->z - 0x3600;
@@ -3040,7 +3040,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub2[0].x += (act->x - (p << 8) - w->sub2[0].x) >> 1;
                 w->sub2[1].x += (act->x - (r << 8) - w->sub2[1].x) >> 1;
             } else {
@@ -3059,7 +3059,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 s = s + (v * 12 >> 8);
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub2[0].x2 += (act->x - (p << 8) - w->sub2[0].x2) >> 3;
                 w->sub2[1].x2 += (act->x - (r << 8) - w->sub2[1].x2) >> 3;
             } else {
@@ -3078,7 +3078,7 @@ u8 task_hum_hades_1(HadesWork* work) {
                 s = s + (v * 20 >> 8);
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub2[0].x3 += (act->x - (p << 8) - w->sub2[0].x3) >> 4;
                 w->sub2[1].x3 += (act->x - (r << 8) - w->sub2[1].x3) >> 4;
             } else {
@@ -3159,7 +3159,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             }
 #endif
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x11F, act->x - 0x1E00, act->y, act->z, 30, 16, 60)
                 : ApplyAttackBox(0x11F, act->x + 0x1E00, act->y, act->z, 30, 16, 60)) {
                 m4aSongNumStart(SONG_EF_FIRE01);
@@ -3209,7 +3209,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             }
 #endif
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 ApplyAttackBox(0x11E, act->x - 0x2000, act->y, act->z, 24, 16, 60);
             } else {
                 ApplyAttackBox(0x11E, act->x + 0x2000, act->y, act->z, 24, 16, 60);
@@ -3231,7 +3231,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
         HadesHover(&work->base, w->hoverZ);
     }
 
@@ -3267,12 +3267,12 @@ void task_hum_hades_2(HadesWork* work) {
         attr = GetBattleSpritePriorityFlags(e->groundY);
 
         if (work->scale == 0x100) {
-            if ((act->flags & 4) == 0) {
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
                 attr |= 1;
             }
             sx = work->scale;
         } else {
-            if ((act->flags & 4) == 0) {
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
                 sx = work->scale;
             } else {
                 sx = -work->scale;
@@ -3309,7 +3309,7 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
 
     GetEnemyTargetPosition(act, &v, 0, 0);
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         w->targetX = act->x - (a << 8);
     } else {
         w->targetX = act->x + (a << 8);
@@ -3344,7 +3344,7 @@ u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
             MahluxiaJumpOffset(work, -128);
         } else if (GetRandom() & 1) {
-            if (c->flags & 4) {
+            if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 MahluxiaSwingTo(work, v + 0x2800, 48);
             } else {
                 MahluxiaSwingTo(work, v - 0x2800, 48);
@@ -3364,7 +3364,7 @@ void MahluxiaSaveAfterimage(MahluxiaWork* work, RikuSpawn* dst) {
     dst->y = act->y;
     dst->z = act->z;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         dst->flags |= 1;
     } else {
         dst->flags &= 0xFFFE;
@@ -3714,7 +3714,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         case 2:
             if (work->base.anim.timer == 0) {
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x13B, act->x - 0x2800, act->y, act->z, 40, 12, 64)
                     : ApplyAttackBox(0x13B, act->x + 0x2800, act->y, act->z, 40, 12, 64)) {
                     m4aSongNumStart(SONG_EF_KU_ATT02);
@@ -3740,7 +3740,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
         w->flags |= 2;
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x = act->x - 0x105;
         } else {
             act->x = act->x + 0x105;
@@ -3762,7 +3762,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             gBtlWork->hitStop = 20;
             w->flags |= 2;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= 0x5000;
                 ApplyAttackBox(0x13F, act->x + 0x2800, act->y, 0, 40, 16, 40);
             } else {
@@ -3834,7 +3834,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             if (work->base.anim.timer == 0) {
                 m4aSongNumStart(SONG_BTL_MARL_STAMP);
 
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartMahluxiaGround(act->x + 0x1700, act->y, 0, 0x13D);
                 } else {
                     BgFxStartMahluxiaGround(act->x - 0x1700, act->y, 0, 0x13D);
@@ -3863,7 +3863,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             w->flags &= ~4;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub.x = act->x - 0x4600;
             } else {
                 w->sub.x = act->x + 0x4600;
@@ -3890,7 +3890,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 w->sub.flags &= ~2;
                 m4aSongNumStart(SONG_EF_KU_ATT03);
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x13B, act->x - 0x2800, act->y, act->z, 40, 12, 64)
                     : ApplyAttackBox(0x13B, act->x + 0x2800, act->y, act->z, 40, 12, 64)) {
                     m4aSongNumStart(SONG_EF_KU_ATT02);
@@ -3907,7 +3907,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (w->flags & 4) {
             w->subSpeed += 25;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub.x = w->sub.x - w->subSpeed;
             } else {
                 w->sub.x = w->sub.x + w->subSpeed;
@@ -3943,7 +3943,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000)) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT)) {
         if (act->badStatus != 2) {
             MahluxiaHover(&work->base, w->hoverZ);
         }
@@ -4013,7 +4013,7 @@ void CreateHumLaxeneKnfTask(LaxeneWork* work, s16 a, s16 b) {
     BtlObj* act = &work->base.actor;
     VixenNdlArgs args;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         args.x = act->x + (a << 8);
         args.unk_12 = 1;
     } else {
@@ -4030,7 +4030,7 @@ void task_hum_laxene_0(LaxeneWork* work) {
     work->flags = 0;
     work->hoverZ = -0x3000;
     work->scaleSteps = 0;
-    work->base.actor.flags |= 0x80000000000;
+    work->base.actor.flags |= BTLOBJ_FLAG_IMMUNE_BIND;
     work->base.stockMoves = sHumLaxeneStockMoves[0];
     TaskPoolInit(&work->tasks, 12);
 }
@@ -4148,9 +4148,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         work->base.vz = 0;
 
         if (act->x < (s32)work->base.targetX) {
-            act->flags &= ~4;
+            act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            act->flags |= 4;
+            act->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
         work->base.stateTimer++;
         break;
@@ -4179,7 +4179,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartThunder(0, act->x + 0x400, act->y, act->z - 0x5000, act->x,
                     act->y, act->z - 0x5000, 0x135);
             } else {
@@ -4213,7 +4213,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 10, ANIM_FLAG_LOOP, w->base.tiles);
             m4aSongNumStart(SONG_EF_RAC_BEEM);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartLaxeneBeam(act->x - 0x1000, act->y, act->z - 0x3000, 1, 310);
             } else {
                 BgFxStartLaxeneBeam(act->x + 0x1000, act->y, act->z - 0x3000, 0, 310);
@@ -4262,7 +4262,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 7, ANIM_FLAG_LOOP, w->base.tiles);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartThunder(1, act->x + 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
             } else {
                 BgFxStartThunder(1, act->x - 0x400, act->y, act->z - 0x5000, x, y, 0, 0x135);
@@ -4367,14 +4367,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 v = act->x - 0x1000;
             act->x += (x - v) >> 4;
         } else {
@@ -4387,7 +4387,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 2:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4397,7 +4397,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 8:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4461,14 +4461,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 v = act->x - 0x1000;
             act->x += (x - v) >> 3;
         } else {
@@ -4481,7 +4481,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 2:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4496,7 +4496,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 8:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4532,9 +4532,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     case 32:
         if (work->base.stateTimer == 0) {
-            act->flags ^= 4;
+            act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = ((GetRandom() % 57) << 8) + 0x1800;
                 act->x = x + t;
             } else {
@@ -4585,14 +4585,14 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 break;
             }
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 v = act->x - 0x1000;
             act->x += (x - v) >> 3;
         } else {
@@ -4605,7 +4605,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 2:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4615,7 +4615,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             case 8:
                 MakeOpponentsHittable();
 
-                if ((act->flags & 4)
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
@@ -4646,9 +4646,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     case 33:
         if (work->base.stateTimer == 0) {
             m4aSongNumStart(SONG_SND_285);
-            act->flags ^= 4;
+            act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = ((GetRandom() % 41) << 8) + 0x5000;
                 act->x = x + t;
             } else {
@@ -4702,7 +4702,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
         LaxeneHover(&work->base, w->hoverZ);
     }
     TaskPoolUpdate(&w->tasks);
@@ -4867,7 +4867,7 @@ void task_hum_axcel_0(AxcelWork* work) {
     HumInit(&work->base, &sHumAxcelDef);
     HumSubInit(&work->base, &work->sub, &sHumAxcelSubDef);
     HumSubInit(&work->base, &work->sub2, &sHumAxcelSubDef);
-    work->base.actor.flags |= 0x04000000;
+    work->base.actor.flags |= BTLOBJ_FLAG_IMMUNE_FIRE;
     work->base.stockMoves = sHumAxcelStockMoves[0];
     work->flags = 0;
     work->hoverZ = -0x300;
@@ -4918,7 +4918,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 4:
         work->base.flags &= ~32;
 #ifdef VERSION_EU
-        act->flags &= ~0x2000000ULL;
+        act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
         sub->flags |= 2;
         sub2->flags |= 2;
@@ -5041,7 +5041,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub->flags |= 4;
             sub->flags &= ~2;
             m4aSongNumStart(SONG_BTL_AKL_WTHR);
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x2000;
             } else {
                 sub->x = act->x + 0x2000;
@@ -5064,7 +5064,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if ((s16)w->steps == 11) {
             act->x = work->base.targetX;
             act->y = work->base.targetY;
-            act->flags ^= 4;
+            act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             AxcelScaleTo(w, 0x100, 0x100, 8);
         }
         if ((s16)w->steps <= 4) {
@@ -5134,7 +5134,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             }
             break;
         case 6:
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 {
                 s32 t = act->x - 0x800;
                 act->x += (act->originX - t) >> 3;
@@ -5179,7 +5179,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
             } else {
@@ -5192,7 +5192,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             sub2->z = act->z - 0x1400;
             w->hoverZ = act->z;
         }
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 d = (work->base.stateTimer << 9) + 0x5A00;
             t = act->x - d;
         } else {
@@ -5244,7 +5244,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
             } else {
@@ -5291,7 +5291,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if (work->base.stateTimer == 0) {
             w->steps = 20;
         }
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             ApproachValue(&sub->x, (gBtlWork->xMin - 32) << 8, w->steps);
             ApproachValue(&sub2->x, (gBtlWork->xMin - 32) << 8, w->steps);
         } else {
@@ -5318,7 +5318,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
             sub->flags |= 4;
             sub2->flags |= 4;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
             } else {
@@ -5387,7 +5387,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         case 1:
         case 2:
         case 3:
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x3000;
                 act->x += (act->originX - t) >> 3;
             } else {
@@ -5398,7 +5398,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
         if (AnimGetFrame(&work->base.anim) == 2 && work->base.anim.timer == 0) {
             MakeOpponentsHittable();
-            if (act->flags & 4 ?
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                 ApplyAttackBox(300, act->x - 0x2000, act->y, act->z, 20, 24, 50) :
                 ApplyAttackBox(300, act->x + 0x2000, act->y, act->z, 20, 24, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -5423,7 +5423,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->flags &= ~1;
         }
         if (AnimGetFrame(&work->base.anim) == 1) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x2800;
                 act->x += (act->originX - t) >> 3;
             } else {
@@ -5433,7 +5433,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         }
         if (AnimGetFrame(&work->base.anim) == 2 && work->base.anim.timer == 0) {
             MakeOpponentsHittable();
-            if (act->flags & 4 ?
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                 ApplyAttackBox(301, act->x - 0x2000, act->y, act->z, 24, 24, 50) :
                 ApplyAttackBox(301, act->x + 0x2000, act->y, act->z, 24, 24, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
@@ -5471,18 +5471,18 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if (work->base.stateTimer == 0) {
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartAxcelFireWall(act->x, 1, 303);
             } else {
                 BgFxStartAxcelFireWall(act->x, 0, 303);
             }
             work->base.flags |= 32;
 #ifdef VERSION_EU
-            act->flags |= 0x2000000ULL;
+            act->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
             m4aSongNumStart(SONG_EF_AKL_FIREWALL);
         }
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             BgFxAddPosition(-76, 0, 0);
         } else {
             BgFxAddPosition(76, 0, 0);
@@ -5507,7 +5507,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.flags &= ~32;
 #ifdef VERSION_EU
-            act->flags &= ~0x2000000ULL;
+            act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -5679,7 +5679,7 @@ void VixenHover(HumWork* work, s32 a) {
 void task_hum_vixen_0(VixenWork* work) {
     HumInit(&work->base, &sHumVixenDef);
     work->hoverZ = 0;
-    work->base.actor.flags |= 0x08000000;
+    work->base.actor.flags |= BTLOBJ_FLAG_IMMUNE_BLIZZARD;
     work->flags = 0;
     TaskPoolInit(&work->tasks, 15);
     VixenCreateIceTasks(work);
@@ -5819,10 +5819,10 @@ u8 task_hum_vixen_1(VixenWork* work) {
             work->hoverZ = -0xF00;
 
             if (act->x <= 0xFFFF) {
-                act->flags &= ~4;
+                act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 w->base.targetX = (gBtlWork->xMax - 48) << 8;
             } else {
-                act->flags |= 4;
+                act->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 w->base.targetX = (gBtlWork->xMin + 48) << 8;
             }
             work->slideSpeed = 0;
@@ -5833,7 +5833,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             work->slideSpeed = 0x199;
         }
 
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= work->slideSpeed;
         } else {
             act->x += work->slideSpeed;
@@ -5871,7 +5871,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (AnimGetFrame(&w->base.anim) == 3) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 d = act->x + 0x3200;
                 act->x += (act->originX - d) >> 2;
             } else {
@@ -5879,7 +5879,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 act->x += (act->originX - d) >> 2;
             }
 
-            if ((act->flags & 4)
+            if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(312, act->x - 0x2000, act->y, act->z, 12, 12, 48)
                 : ApplyAttackBox(312, act->x + 0x2000, act->y, act->z, 12, 12, 48)) {
                 m4aSongNumStart(SONG_BTL_VIC_SWORDHIT);
@@ -5905,7 +5905,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             act->btl->hcEffectCount--;
             v = 0;
             act->hp = act->maxHp / 4;
-            act->flags &= ~0x100;
+            act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(act);
             CreateBtlPopTask(act, 10);
             w->base.state = v;
@@ -5921,7 +5921,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (AnimGetFrame(&w->base.anim) == 3 && w->base.anim.timer == 0) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartBlizzard(1, act->x - 0x3700, act->y, act->z - 0x4000,
                     act->x - 0x6E00, act->y, -0x1400, 1, 0x139);
             } else {
@@ -5980,7 +5980,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->needleX = act->x - 0x2000;
                 work->angle = 192;
             } else {
@@ -6013,7 +6013,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             }
         }
 
-        if (w->base.stateTimer > 360 || (gBtlWork->actor->flags & 0x2000)) {
+        if (w->base.stateTimer > 360 || (gBtlWork->actor->flags & BTLOBJ_FLAG_HURT)) {
             w->base.state = 27;
             w->base.stateTimer = 0;
         } else {
@@ -6179,17 +6179,17 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000) && act->badStatus != 2) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT) && act->badStatus != 2) {
         VixenHover(&w->base, work->hoverZ);
     }
     r = HumUpdate(&w->base);
     cx = gBtlWork->actor->x;
     ax = act->x;
 
-    if ((cx < ax && (act->flags & 4)) || (cx > ax && !(act->flags & 4))) {
-        act->flags |= 0x8000;
+    if ((cx < ax && (act->flags & BTLOBJ_FLAG_FACING_LEFT)) || (cx > ax && !(act->flags & BTLOBJ_FLAG_FACING_LEFT))) {
+        act->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
     } else {
-        act->flags &= ~0x8000;
+        act->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
     TaskPoolUpdate(&work->tasks);
     return r;
@@ -6247,7 +6247,7 @@ u8 task_hum_vixen_ndl_1(VixenNdlWork* work) {
         break;
     }
 
-    if (gBtlWork->actor->flags & 0x2000) {
+    if (gBtlWork->actor->flags & BTLOBJ_FLAG_HURT) {
         work->hitDone = 1;
     }
     AnimUpdate(&work->anim);
@@ -6415,7 +6415,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
 
-    if (gBtlWork->actor->flags & 4) {
+    if (gBtlWork->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->flipped = 0;
     } else {
         work->flipped = 1;
@@ -6523,7 +6523,7 @@ u8 task_hum_vixen_frz_1(VixenFrzWork* work) {
             gBtlWork->actor->x = work->x;
             gBtlWork->actor->y = work->y;
             gBtlWork->actor->z = work->z;
-            gBtlWork->actor->flags |= 0x100000000200;
+            gBtlWork->actor->flags |= (BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_FREEZE_PENDING);
             work->state = 1;
             gBtlWork->flags &= ~0x100000;
             work->timer = 0;
@@ -6828,7 +6828,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             break;
         case 3:
             if (work->base.anim.timer == 0) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a1.x = act->x - 0x2000;
                     a1.unk_12 = 1;
                 } else {
@@ -6877,7 +6877,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimGetFrame(&work->base.anim) == 3) {
             if (work->base.anim.timer == 2) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a1.x = act->x - 0x1800;
                     a1.unk_12 = 1;
                 } else {
@@ -6907,7 +6907,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
 
         if (AnimGetFrame(&work->base.anim) == 2) {
             if (work->base.anim.timer == 10) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a2.x = act->x - 0x700;
                     a2.unk_12 = 1;
                 } else {
@@ -6966,7 +6966,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             }
 
             if (!AnimIsFinished(&work->base.anim)) {
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     act->x = act->x - (dx << 8);
                 } else {
                     act->x = act->x + (dx << 8);
@@ -6978,7 +6978,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 if (AnimGetGfxIndex(&work->base.anim) == 5) {
                     MakeOpponentsHittable();
 
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x144, act->x - 0x3C00, act->y, act->z, 24, 20, 30)
                         : ApplyAttackBox(0x144, act->x + 0x3C00, act->y, act->z, 24, 20, 30)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
@@ -7026,14 +7026,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 MakeOpponentsHittable();
 
                 if (act->btl->hcEffect == 49) {
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x149, act->x - 0x2800, act->y, act->z, 24, 20, 55)
                         : ApplyAttackBox(0x149, act->x + 0x2800, act->y, act->z, 24, 20, 55)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
                         w->flags |= 1;
                     }
                 } else {
-                    if ((act->flags & 4)
+                    if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x145, act->x - 0x2800, act->y, act->z, 24, 20, 55)
                         : ApplyAttackBox(0x145, act->x + 0x2800, act->y, act->z, 24, 20, 55)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
@@ -7044,7 +7044,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x = act->x - 0x1900;
             } else {
                 act->x = act->x + 0x1900;
@@ -7082,14 +7082,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (work->base.anim.timer == 0) {
                 m4aSongNumStart(SONG_EF_AIRO);
 
-                if ((act->flags & 4) == 0) {
+                if ((act->flags & BTLOBJ_FLAG_FACING_LEFT) == 0) {
                     w->targetTilt = -0x800;
                 } else {
                     w->targetTilt = 0x800;
                 }
                 w->tiltSteps = 10;
 
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartLexceusGround(act->x - 0x3000, act->y + 0xE00, 0, 0x147);
                 } else {
                     BgFxStartLexceusGround(act->x + 0x3000, act->y + 0xE00, 0, 0x147);
@@ -7137,7 +7137,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         break;
     }
 
-    if (!(act->flags & 0x2000)) {
+    if (!(act->flags & BTLOBJ_FLAG_HURT)) {
         if (act->badStatus != 2) {
             LexceusHover(&work->base, w->hoverZ);
         }
@@ -7149,7 +7149,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     }
     gBtlWork->rotation = w->tilt >> 8;
 
-    if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != 2 && !(p->flags & 16)) {
+    if (p->z >= p->groundZ && p->hp > 0 && p->badStatus != 2 && !(p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         w->tiltSlide += (GetAngleDiff(0, gBtlWork->rotation) * 64 - w->tiltSlide) >> 4;
         p->x -= w->tiltSlide;
     } else {
@@ -7646,7 +7646,7 @@ void RikuJumpOffset(RikuWork* work, s16 a, s32 b) {
     HumWork* w = &work->base;
     BtlObj* act = &w->actor;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->base.targetX = act->x - (a << 8);
     } else {
         work->base.targetX = act->x + (a << 8);
@@ -7681,7 +7681,7 @@ u8 RikuTryJumpAway(RikuWork* work) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_AIRBORNE) {
                 RikuJumpOffset(work, -99, 0x280);
             } else if (GetRandom() & 1) {
-                if (c->flags & 4) {
+                if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     RikuJumpTo(work, v + 0x2800, w);
                 } else {
                     RikuJumpTo(work, v - 0x2800, w);
@@ -7702,7 +7702,7 @@ void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst) {
     dst->y = act->y;
     dst->z = act->z;
 
-    if (act->flags & 4) {
+    if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         dst->flags |= 1;
     } else {
         dst->flags &= 0xFFFE;
@@ -7963,7 +7963,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             break;
         }
         w->flags |= 4;
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t = act->x - 0x3000;
             act->x += (act->originX - t) >> 3;
         } else {
@@ -7985,7 +7985,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
         work->base.vz = 0;
         w->flags |= 4;
-        if (act->flags & 4) {
+        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= 0xC00;
         } else {
             act->x += 0xC00;
@@ -8001,11 +8001,11 @@ u8 task_hum_riku_1(RikuWork* work) {
         break;
     case 33:
         if (work->base.stateTimer == 0) {
-            act->flags ^= 4;
+            act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             switch ((u16)(GetRandom() % 3)) {
             case 0:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 17, ANIM_FLAG_LOOP, w->base.tiles);
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 184;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 56;
@@ -8014,7 +8014,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 1:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 18, ANIM_FLAG_LOOP, w->base.tiles);
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 203;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 37;
@@ -8023,7 +8023,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 2:
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 19, ANIM_FLAG_LOOP, w->base.tiles);
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 165;
                 } else {
                     w->unk_1C4 = (u16)(GetRandom() % 17) + 75;
@@ -8032,7 +8032,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             }
             act->z = -0x1000;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x = x + 0x6300;
                 BgFxStartRikuLimit(act->x, act->y, act->z, 192);
             } else {
@@ -8114,7 +8114,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 break;
             case 4:
                 work->base.vz = 0x1000;
-                if (act->flags & 4 ?
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(293, act->x - 0x2000, act->y, act->z, 28, 16, 16) :
                     ApplyAttackBox(293, act->x + 0x2000, act->y, act->z, 28, 16, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
@@ -8127,7 +8127,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         case 2:
         case 3: {
 
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x3200;
                 act->x += (act->originX - t) >> 3;
             } else {
@@ -8156,7 +8156,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             BtlObj* p = gBtlWork->actor;
             if (p != NULL) {
                 s32 follow = 0;
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (p->x < act->x - 0x2000) {
                         follow = 1;
                     }
@@ -8191,14 +8191,14 @@ u8 task_hum_riku_1(RikuWork* work) {
                 spawn = 1;
                 break;
             }
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
             if (spawn) {
                 w->flags |= 2;
-                if (act->flags & 4) {
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFire(3, act->x - 0x4A00, act->y, act->z - 0x1800,
                         act->originX - 0xC800, act->originY, act->z - 0x1800, 1, 296);
                 } else {
@@ -8252,14 +8252,14 @@ u8 task_hum_riku_1(RikuWork* work) {
                 d = 2;
                 break;
             }
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
             if (hit) {
                 MakeOpponentsHittable();
-                if (act->flags & 4 ?
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(292, act->x - 0x1400, act->y, act->z, 30, 16, 16) :
                     ApplyAttackBox(292, act->x + 0x1400, act->y, act->z, 30, 16, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
@@ -8274,7 +8274,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         case 6:
         case 7:
         case 8:
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= 256;
             } else {
                 act->x += 256;
@@ -8297,7 +8297,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (AnimGetGfxIndex(&work->base.anim) == 6) {
 
             w->flags |= 4;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x5800;
                 act->x += (act->originX - t) >> 2;
             } else {
@@ -8339,20 +8339,20 @@ u8 task_hum_riku_1(RikuWork* work) {
                 d = 1;
                 break;
             }
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= d << 8;
             } else {
                 act->x += d << 8;
             }
             if (hit) {
                 MakeOpponentsHittable();
-                if (act->flags & 4 ?
+                if (act->flags & BTLOBJ_FLAG_FACING_LEFT ?
                     ApplyAttackBox(attack, act->x - 0x1400, act->y, act->z, 20, 8, 16) :
                     ApplyAttackBox(attack, act->x + 0x1400, act->y, act->z, 20, 8, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
                     if (attack == 291) {
                         FadeStartIn(2, 45);
-                        if (act->flags & 4) {
+                        if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 332, act->x - 0x2000, (act->y - 0x1800) + act->z);
                         } else {
                             SetBattleZoom(6, 332, act->x + 0x2000, (act->y - 0x1800) + act->z);
@@ -8428,7 +8428,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             work->base.vz = -0x400;
-            if (act->flags & 4) {
+            if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.targetX = act->x + 0x3000;
             } else {
                 work->base.targetX = act->x - 0x3000;
@@ -8622,9 +8622,9 @@ u8 task_hum_leon_1(LeonWork* work) {
 
     if ((s16)w->flashTimer > 0) {
         w->flashTimer--;
-        act->flags |= 0x2000;
+        act->flags |= BTLOBJ_FLAG_HURT;
     } else {
-        act->flags &= ~0x2000;
+        act->flags &= ~BTLOBJ_FLAG_HURT;
     }
     x = act->x;
     y = act->y;

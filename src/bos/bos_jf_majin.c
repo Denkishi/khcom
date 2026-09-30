@@ -199,7 +199,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
                   ((gBtlWork->viewY - (jf->body.y + jf->body.z)) >> 8) + 294);
 
     if (work->spriteVisible == 1) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             pal = GetBattleSpritePriorityFlags(jf->body.y);
         } else {
             pal = GetBattleSpritePriorityFlags(jf->body.y);
@@ -237,7 +237,7 @@ s32 BosJfGetActorPillar(void) {
 s32 BosJfMajinGetActorPillarDistance(JfMajinWork* work) {
     s32 v;
 
-    if (work->jf->body.flags & 4) {
+    if (work->jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         v = gBtlWork->actor->x;
 
         if (v < 0x1EA00) {
@@ -268,7 +268,7 @@ void BosJfMajinUpdateIdle(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 8;
             work->baseFrame = 8;
         } else {
@@ -312,7 +312,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
     JfWork* jf = work->jf;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 0;
         } else {
             jf->bgFrame = 7;
@@ -330,7 +330,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
                 jf->bgFrameTimer = 0;
 
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->jf->bgFrame++;
 
                     if (work->jf->bgFrame > 7) {
@@ -357,7 +357,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             }
 
             if (work->stepTimer == 21) {
-                jf->body.flags |= 0x1000000;
+                jf->body.flags |= BTLOBJ_FLAG_UNHITTABLE;
             }
             break;
         case 1:
@@ -367,12 +367,12 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
                 work->stepTimer = 0;
                 work->jf->bgFrameTimer = 0;
 
-                if (jf->body.flags & 4) {
-                    jf->body.flags &= ~4;
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
+                    jf->body.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                     jf->body.x = 0x16A00;
                     work->jf->bgFrame = 3;
                 } else {
-                    jf->body.flags |= 4;
+                    jf->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
                     jf->body.x = 0x2A200;
                     work->jf->bgFrame = 3;
                 }
@@ -386,7 +386,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             if (jf->bgFrameTimer >= gBosJfMajinFrameDurations[jf->bgFrame]) {
                 jf->bgFrameTimer = 0;
 
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->jf->bgFrame++;
 
                     if (work->jf->bgFrame > 7) {
@@ -413,7 +413,7 @@ void BosJfMajinUpdateSwitchSide(JfMajinWork* work) {
             }
 
             if (work->stepTimer == 22) {
-                jf->body.flags &= ~0x1000000;
+                jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
             }
             break;
         default:
@@ -428,7 +428,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 0;
             work->baseFrame = 14;
         } else {
@@ -448,7 +448,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             if (work->jf->bgFrameTimer >= gBosJfMajinFrameDurations[work->jf->bgFrame]) {
                 work->jf->bgFrameTimer = 0;
 
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->jf->bgFrame++;
 
                     if (work->jf->bgFrame > 7) {
@@ -475,11 +475,11 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             }
 
             if (work->stepTimer == 23) {
-                jf->body.flags |= 0x1000000;
+                jf->body.flags |= BTLOBJ_FLAG_UNHITTABLE;
             }
             break;
         case 1:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->jf->bgFrame = 14;
                 work->z = -0x2000 - ((gBosJfRightPillarLevel + 1) << 11);
             } else {
@@ -499,7 +499,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
                 work->moveSteps--;
 
                 if (work->moveSteps == 30) {
-                    jf->body.flags &= ~0x1000000;
+                    jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
                 }
             } else {
                 work->step++;
@@ -511,7 +511,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
                 work->jf->bgFrame++;
 
                 if (work->jf->bgFrame > work->baseFrame + 4) {
-                    if (jf->body.flags & 4) {
+                    if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                         work->jf->bgFrame = 8;
                     } else {
                         work->jf->bgFrame = 28;
@@ -554,7 +554,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 19;
             work->jf->bgFrameTimer = 0;
             work->baseFrame = 19;
@@ -625,7 +625,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             work->jf->bgFrameTimer++;
             break;
         case 3:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(jf->body.x - 0x3000, jf->body.y + jf->body.z + 0x1800);
                 ApplyAttackBox(0xE8, jf->body.x - 0x3000, jf->body.y, jf->body.z + 0x1800, 30, 30, 30);
             } else {
@@ -647,7 +647,7 @@ void BosJfMajinUpdateSlam(JfMajinWork* work) {
             if (work->stepTimer > 20) {
                 work->stepTimer = 0;
 
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->x = 0x2A200;
                 } else {
                     work->x = 0x16A00;
@@ -682,7 +682,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 25;
             work->jf->bgFrameTimer = 0;
             work->baseFrame = 25;
@@ -713,7 +713,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             }
             break;
         case 1:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 jf->body.x += 0x100;
             } else {
                 jf->body.x -= 0x100;
@@ -739,7 +739,7 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
             }
             break;
         case 3:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 160, 45);
             } else {
                 BgFxStartJfMajinBeam(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x133, 96, 45);
@@ -753,14 +753,14 @@ void BosJfMajinUpdateBeam(JfMajinWork* work) {
         case 4:
             jf->body.x = (work->x - 0x100) + (work->moveSteps++ % 2) * 0x200;
 
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxSetPosition(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100);
             } else {
                 BgFxSetPosition(jf->body.x + 0x1A00, jf->body.y, jf->body.z - 0x3100);
             }
 
             if (work->stepTimer > 10 && work->stepTimer % 10 == 9) {
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0xE9, jf->body.x - 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
                 } else {
                     ApplyAttackBox(0xE9, jf->body.x + 0x6400, jf->body.y + 0xA00, jf->body.z + 0x2000, 20, 20, 20);
@@ -800,7 +800,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 25;
             work->jf->bgFrameTimer = 0;
             work->baseFrame = 25;
@@ -836,7 +836,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
             break;
         case 1:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 jf->body.x += 0x100;
             } else {
                 jf->body.x -= 0x100;
@@ -862,7 +862,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
             break;
         case 3:
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->beamAngle = 148;
                 work->beamScale = 0x100;
                 BgFxStartJfMajinBeam(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100, 0x100, work->beamAngle, 45);
@@ -883,7 +883,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
         case 4:
             work->moveSteps++;
 
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 jf->body.x = (work->x - 0x100) + (work->moveSteps % 2) * 0x200;
                 BgFxSetPosition(jf->body.x - 0x1A00, jf->body.y, jf->body.z - 0x3100);
 
@@ -908,7 +908,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
             }
 
             if (work->stepTimer >= 11 && work->stepTimer <= 50) {
-                if (jf->body.flags & 4) {
+                if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(0xEA, jf->body.x - 0x3200 - work->beamLength * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
                 } else {
                     ApplyAttackBox(0xEA, jf->body.x + 0x3200 + work->beamLength * 3 * 512, jf->body.y + 0xA00, jf->body.z + 0x2C00, 20, 20, 20);
@@ -953,7 +953,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->body.x = 0x2A200;
             jf->bgFrame = 8;
         } else {
@@ -968,14 +968,14 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
         work->idleStep = 0;
         work->spriteVisible = 1;
         work->extraClipRows = 0;
-        jf->body.flags &= ~0x1000000;
+        jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         CreateBtlPopTask(&jf->body, 9);
         work->jf->stateStep++;
     } else if (jf->stateStep > 60) {
         ClearBtlObjActionFlags(q);
         work->jf->stateStep = 0;
 
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->jf->bgFrame = 8;
         } else {
             work->jf->bgFrame = 28;
@@ -993,7 +993,7 @@ void BosJfMajinUpdateGimmick(JfMajinWork* work) {
     BtlObj* q = &jf->sub;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->body.x = 0x2A200;
             jf->bgFrame = 8;
         } else {
@@ -1008,13 +1008,13 @@ void BosJfMajinUpdateGimmick(JfMajinWork* work) {
         work->idleStep = 0;
         work->spriteVisible = 1;
         work->extraClipRows = 0;
-        jf->body.flags &= ~0x1000000;
+        jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
         work->jf->stateStep++;
     } else {
         ClearBtlObjActionFlags(q);
         work->jf->stateStep = 0;
 
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->jf->bgFrame = 8;
         } else {
             work->jf->bgFrame = 28;
@@ -1032,7 +1032,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     s32 v;
 
     if (jf->stateStep == 0) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 8;
             v = 0x2A200;
         } else {
@@ -1072,7 +1072,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
             break;
         }
 
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             BgFxStartBossDeath(jf->body.x - 0x800, jf->body.y + jf->body.z - 0x800);
         } else {
             BgFxStartBossDeath(jf->body.x + 0x800, jf->body.y + jf->body.z - 0x800);
@@ -1171,7 +1171,7 @@ void BosJfMajinUpdatePillars(JfMajinWork* work) {
 
     switch (jf->stateStep) {
     case 0:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             jf->bgFrame = 8;
             work->baseFrame = 8;
         } else {
@@ -1420,7 +1420,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->body.z = arg->body.z - 0x4800;
     work->body.groundZ = 0;
     work->body.shadowPriority = 0xFE00;
-    work->body.flags = 0x20000;
+    work->body.flags = BTLOBJ_FLAG_LARGE_SHADOW;
     work->targetX = 0;
     work->targetY = 0;
     work->targetZ = 0;
@@ -1432,7 +1432,7 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->paletteTimer = 0;
     work->shadowVisible = 0;
 
-    if (arg->body.flags & 4) {
+    if (arg->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
         work->x2 = arg->body.x + 0x2000;
         work->y2 = arg->body.y + 0xA00;
         work->z2 = arg->body.z - 0x1900;
@@ -1562,7 +1562,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         if (work->throwTimer > 3) {
             work->throwTimer = 0;
 
-            if (jf->body.flags & 4) {
+            if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->x2 = jf->body.x + 0x1000;
                 work->y2 = jf->body.y + 0xA00;
                 work->z2 = jf->body.z - 0x1000;
@@ -1678,7 +1678,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
     s16 y;
 
     if (work->visible == 1) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             if (work->body.x <= 0x259FF) {
                 pal = GetBattleSpritePriorityFlags(work->body.y);
                 prio = 0xFD00;
@@ -1699,7 +1699,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
     }
 
     if (work->visible2 == 1) {
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             pal = 0x400;
         } else {
             pal = 0x400;
@@ -1878,14 +1878,14 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
     case 9:
     case 10:
     case 11:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0x500;
         } else {
             work->offsetX = 0x500;
         }
         break;
     case 3:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0x100;
         } else {
             work->offsetX = 0x100;
@@ -1893,7 +1893,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         break;
     case 4:
     case 5:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = 0x1000;
         } else {
             work->offsetX = -0x1000;
@@ -1901,7 +1901,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         break;
     case 1:
     case 2:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0xA00;
         } else {
             work->offsetX = 0xA00;
@@ -1910,7 +1910,7 @@ void BosJfBorderlineUpdateLayout(JfBorderlineWork* work) {
         work->wide = 1;
         return;
     default:
-        if (jf->body.flags & 4) {
+        if (jf->body.flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->offsetX = -0x500;
         } else {
             work->offsetX = 0x500;
@@ -1981,11 +1981,11 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         work->bodyZ = -0x6400;
         w = work;
         InitEnemyBtlObj(&w->body[0], &gBosDsdEmyKind, work->bodyX, work->bodyY, work->bodyZ);
-        w->body[0].flags |= 0x1000000;
-        w->body[0].flags |= 4;
+        w->body[0].flags |= BTLOBJ_FLAG_UNHITTABLE;
+        w->body[0].flags |= BTLOBJ_FLAG_FACING_LEFT;
         p1 = &w->body[1];
         InitEnemyBtlObj(p1, &gBosDsdEmyKind, 0xDC00, 0x16800, -0x8C00);
-        p1->flags |= 4;
+        p1->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p1->flags |= 0x400;
         p1->centerHeight = v;
         p1->radiusX = 16;
@@ -1993,7 +1993,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
         p1->height = 16;
         p2 = &w->body[2];
         InitEnemyBtlObj(p2, &gBosDsdEmyKind, 0x9000, 0x16800, v);
-        p2->flags |= 0x003C000001000004ULL;
+        p2->flags |= (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_UNHITTABLE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
         p2->centerHeight = v;
         p2->radiusX = 16;
         p2->radiusY = 16;
@@ -2026,7 +2026,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
     switch (UpdateBtlObjReaction(b)) {
     case 5:
         work->state = 2;
-        b->flags |= 0x1000000;
+        b->flags |= BTLOBJ_FLAG_UNHITTABLE;
         work->stateStep = 0;
         break;
     case 1:

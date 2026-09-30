@@ -96,7 +96,7 @@ void BosTmBodyInitEnemy(BtlObj* p, s16 a, s16 b, s16 c) {
     p->radiusY = 40;
     p->height = 28;
     p->flags |= 0x400;
-    p->flags |= 4;
+    p->flags |= BTLOBJ_FLAG_FACING_LEFT;
 }
 
 void BosTmBodySetObjPos(BtlObj* p, s16 a, s16 b, s16 c) {
@@ -541,9 +541,9 @@ void _080B949C(BtlObj* a, TmBodyWork* b) {
     }
 
     if (b->tm->baseX < 0x8E00 || b->tm->baseX > 0x16F00) {
-        a->flags |= 0x100;
+        a->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
-        a->flags &= ~0x100;
+        a->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
     }
 
     switch (UpdateBtlObjReaction(a)) {
@@ -693,7 +693,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             BosTmBodyWalk(work);
             if (work->tm->baseX <= 0x8E00) {
                 work->tm->flags &= ~0x20;
-                work->body2.flags &= ~4;
+                work->body2.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->tm->state = 5;
                 work->tm->resumeState = 5;
                 BosTmBodyResetTimers(work);
@@ -729,7 +729,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             BosTmBodyWalk(work);
             if (work->tm->baseX > 0x16EFF) {
                 work->tm->flags |= 0x20;
-                work->body2.flags |= 4;
+                work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->tm->state = 7;
                 work->tm->resumeState = 7;
                 BosTmBodyResetTimers(work);

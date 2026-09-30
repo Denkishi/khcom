@@ -26,10 +26,10 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     actor->cardInterval = def->cardInterval;
 
     if (gBtlWork->actor->x < actor->x) {
-        actor->flags |= 4;
+        actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
-    actor->flags |= 0x300;
+    actor->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
     t = gEnemyTileCounts[actor->kind];
     work->def = def;
     work->tiles = AllocObjTiles(t * 32, 0);
@@ -48,7 +48,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     actor->vy = 0;
     work->spriteFlags = 0;
 
-    if (actor->flags & 0x20000) {
+    if (actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
         work->fxScale = 281;
     } else {
         work->fxScale = 0x100;
@@ -97,7 +97,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
             steps = (a + b) - work->stateTimer;
             target = actor->originY;
 
-            if (work->actor.flags & 4) {
+            if (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT) {
                 v = actor->originX - (e << 8);
             } else {
                 v = actor->originX + (e << 8);
@@ -109,7 +109,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
             }
 
             if (!(work->flags & 4)) {
-                if (actor->flags & 4) {
+                if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (ApplyAttackBox(d, actor->x - (g << 8), actor->y, actor->z + (h << 8), (s16)i, i / 2, (s16)i) != 0) {
                         m4aSongNumStart(f);
                         work->flags |= 4;
@@ -225,7 +225,7 @@ void EmyFinishSpawn(EmyWork* work) {
     BtlObj* actor = &work->actor;
 
     if (gGameState.flags & GAME_FLAG_FIRST_STRIKE) {
-        actor->flags |= 0x4002;
+        actor->flags |= (BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_STUN_PENDING);
 
         if (gGameState.roomEffect == 3) {
             actor->damage = (actor->maxHp * 204) >> 8;
@@ -241,7 +241,7 @@ void EmyFinishSpawn(EmyWork* work) {
 
     work->state = work->idleState;
     work->stateTimer = 0;
-    actor->flags &= ~0x300;
+    actor->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
 }
 
 s32 _0800CDF0(EmyWork* work) {
@@ -279,9 +279,9 @@ s32 _0800CDF0(EmyWork* work) {
 
         if (GetRandom() % work->def->turnInterval == 0) {
             if (actor->x > x) {
-                actor->flags |= 4;
+                actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                actor->flags &= ~4;
+                actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
@@ -322,9 +322,9 @@ s32 _0800CDF0(EmyWork* work) {
 
         if (GetRandom() % work->def->turnInterval == 0) {
             if (actor->x > x) {
-                actor->flags |= 4;
+                actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                actor->flags &= ~4;
+                actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         if (GetRandom() % work->def->moveInterval == 0) {
@@ -403,9 +403,9 @@ s32 _0800CDF0(EmyWork* work) {
             actor->y += ((-gSineTable[work->angle + 64] << 1) * work->def->speed) >> 8;
 
             if ((s8)work->angle >= 0) {
-                actor->flags &= ~4;
+                actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                actor->flags |= 4;
+                actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
             if (actor->badStatus != 4) {
                 work->state = work->idleState;
@@ -455,9 +455,9 @@ s32 _0800CDF0(EmyWork* work) {
             }
             if (GetRandom() % work->def->turnInterval == 0) {
                 if (actor->x > x) {
-                    actor->flags |= 4;
+                    actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    actor->flags &= ~4;
+                    actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
         }
@@ -481,9 +481,9 @@ s32 _0800CDF0(EmyWork* work) {
         }
         if (GetRandom() % work->def->turnInterval == 0) {
             if (actor->x > x) {
-                actor->flags |= 4;
+                actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
-                actor->flags &= ~4;
+                actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         break;
@@ -500,8 +500,8 @@ s32 _0800CDF0(EmyWork* work) {
             work->stateTimer++;
         }
         if (AnimIsFinished(&work->anim)) {
-            actor->flags &= ~0x80;
-            actor->flags &= ~0x2000;
+            actor->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
+            actor->flags &= ~BTLOBJ_FLAG_HURT;
         }
         if (GetRandom() % 10 == 0) {
             actor->badStatusTimer--;
@@ -525,20 +525,20 @@ s32 _0800CDF0(EmyWork* work) {
             work->stateTimer = 0;
 
             if (actor->x < x) {
-                if (actor->flags & 4) {
+                if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 5 == 0) {
-                        actor->flags &= ~4;
+                        actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                         ok = 1;
                     }
                 } else {
                     ok = 1;
                 }
             } else {
-                if (actor->flags & 4) {
+                if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ok = 1;
                 } else {
                     if (GetRandom() % 5 == 0) {
-                        actor->flags |= 4;
+                        actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
                         ok = 1;
                     }
                 }
@@ -562,7 +562,7 @@ s32 _0800CDF0(EmyWork* work) {
     case 15:
         if (work->stateTimer == 0) {
             ColliderSetDisabled(&actor->collider, 1);
-            actor->flags |= 0x100;
+            actor->flags |= BTLOBJ_FLAG_INTANGIBLE;
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
             work->anim.frame = 0;
             work->anim.timer = 0;
@@ -600,7 +600,7 @@ s32 _0800CDF0(EmyWork* work) {
         ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
 
         if (work->steps <= 0) {
-            actor->flags &= ~0x100;
+            actor->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(actor);
             work->state = work->idleState;
             work->stateTimer = 0;
@@ -666,7 +666,7 @@ s32 _0800CDF0(EmyWork* work) {
 
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
 
-            if (actor->flags & 0x800000000) {
+            if (actor->flags & BTLOBJ_FLAG_NO_DEATH_FX) {
                 work->stateTimer++;
                 break;
             }
@@ -733,7 +733,7 @@ s32 _0800CDF0(EmyWork* work) {
             actor->z = 0;
             work->vz = 0;
         }
-        if (actor->collider.colliding != 0 && !(actor->flags & 0x10) && !(actor->collider.other->flags & 2)) {
+        if (actor->collider.colliding != 0 && !(actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) && !(actor->collider.other->flags & 2)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }
@@ -783,7 +783,7 @@ s32 _0800CDF0(EmyWork* work) {
         break;
     }
 
-    if (actor->flags & 0x10) {
+    if (actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
         work->gfx = AnimUpdate(&work->anim);
     } else if (actor->badStatus != 2) {
         if (gBtlWork->flags & BTL_FLAG_ENEMY_FRAME_CHANGED) {
@@ -823,7 +823,7 @@ void EmyDraw(EmyWork* work) {
         WorldToScreen(&x, &y, actor->x, actor->y, actor->z);
 
         if (work->scaleX == 0x100 && work->scaleY == 0x100) {
-            if (actor->flags & 4) {
+            if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sy = gBtlWork->scale;
                 sx = sy;
             } else if (gBtlWork->scale == 0x100) {
@@ -835,7 +835,7 @@ void EmyDraw(EmyWork* work) {
                 sx = -sy;
             }
         } else {
-            if (actor->flags & 4) {
+            if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sx = (gBtlWork->scale * work->scaleX) >> 8;
                 sy = gBtlWork->scale;
                 sy = (sy * work->scaleY) >> 8;

@@ -272,14 +272,14 @@ void SelectLockonTarget(void) {
     gBtlWork->actor2 = 0;
     e = ListPoolFirst(&gBtlWork->pool);
 
-    if (p->flags & 4) {
+    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
         for (; e != NULL; e = ListPoolNext(&e->node)) {
             if (p->x < e->x || p->x - e->x > 0x9600 ||
                 (p->y - e->y >= 0 ? p->y - e->y > 0x1800
                                               : e->y - p->y > 0x1800) ||
                 (p->z - e->z >= 0 ? p->z - e->z > 0x6400
                                               : e->z - p->z > 0x6400) ||
-                (e->flags & 0x1000000) || p->x - e->x >= min) {
+                (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
                 continue;
             }
             gBtlWork->actor2 = e;
@@ -296,7 +296,7 @@ void SelectLockonTarget(void) {
                                                   : e->y - p->y > 0x1800) ||
                     (p->z - e->z >= 0 ? p->z - e->z > 0x6400
                                                   : e->z - p->z > 0x6400) ||
-                    (e->flags & 0x1000000) || e->x - p->x >= min) {
+                    (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
                     continue;
                 }
                 gBtlWork->actor2 = e;
@@ -310,7 +310,7 @@ void SelectLockonTarget(void) {
                                               : e->y - p->y > 0x1800) ||
                 (p->z - e->z >= 0 ? p->z - e->z > 0x6400
                                               : e->z - p->z > 0x6400) ||
-                (e->flags & 0x1000000) || e->x - p->x >= min) {
+                (e->flags & BTLOBJ_FLAG_UNHITTABLE) || e->x - p->x >= min) {
                 continue;
             }
             gBtlWork->actor2 = e;
@@ -327,7 +327,7 @@ void SelectLockonTarget(void) {
                                                   : e->y - p->y > 0x1800) ||
                     (p->z - e->z >= 0 ? p->z - e->z > 0x6400
                                                   : e->z - p->z > 0x6400) ||
-                    (e->flags & 0x1000000) || p->x - e->x >= min) {
+                    (e->flags & BTLOBJ_FLAG_UNHITTABLE) || p->x - e->x >= min) {
                     continue;
                 }
                 gBtlWork->actor2 = e;
@@ -345,7 +345,7 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
     if (gBtlWork->actor2 != NULL) {
         work->gfx = AnimUpdate(&work->anim);
 
-        if (gBtlWork->actor2->flags & 0x1000000) {
+        if (gBtlWork->actor2->flags & BTLOBJ_FLAG_UNHITTABLE) {
             gBtlWork->actor2 = 0;
         }
     }
@@ -644,26 +644,26 @@ void UpdateBtlSoraWalk(BtlSoraWork* work, u16 a) {
 
     if ((a & 0x10) && (a & 0x40)) {
         work->angle = 0x20;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x10) && (a & 0x80)) {
         work->angle = 0x60;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x20) && (a & 0x80)) {
         work->angle = 0xA0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x20) && (a & 0x40)) {
         work->angle = 0xE0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else if (a & 0x40) {
         work->angle = 0;
     } else if (a & 0x10) {
         work->angle = 0x40;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if (a & 0x80) {
         work->angle = 0x80;
     } else if (a & 0x20) {
         work->angle = 0xC0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
     if (a & 0xF0) {
@@ -716,7 +716,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
             work->sioKeysA = 1;
         } else {
             e->x = 0x14000;
-            e->flags = 4;
+            e->flags = BTLOBJ_FLAG_FACING_LEFT;
             work->sioKeysA = 0;
         }
 
@@ -754,9 +754,9 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
         }
     }
 
-    e->flags |= 0x4000000000LL;
-    e->flags |= 0x400000000000000LL;
-    e->flags |= 0x300;
+    e->flags |= BTLOBJ_FLAG_IMMUNE_TERROR;
+    e->flags |= BTLOBJ_FLAG_PLAYER;
+    e->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
 
     if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
         e->y = 0x16000;
@@ -1038,7 +1038,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     p = &work->actor;
 
-    if (gBtlWork->phase == 4 && (p->flags & 0x10)) {
+    if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
         case 23:
         case 24:
@@ -1083,55 +1083,55 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
     if (work->flags & BTL_SORA_FLAG_HC_STATUS) {
         work->flags &= ~BTL_SORA_FLAG_HC_STATUS;
-        p->flags &= 0xFC403FFFE38F7FFFLL;
+        p->flags &= ~BTLOBJ_FLAGS_ELEMENT_AFFINITY;
     }
 
     switch (p->btl->hcEffect) {
     case 26:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x0010400000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 8:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x0004800000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_FIRE);
         break;
     case 18:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x0000800004000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD);
         break;
     case 50:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x0080000010000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
     case 27:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x0000400008000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE);
         break;
     case 47:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x011E000000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 49:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x00A0000008000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_RESIST_PHYSICAL | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
     case 15:
     case 28:
         work->flags |= BTL_SORA_FLAG_HC_STATUS;
-        p->flags |= 0x001C000000000000LL;
+        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     }
 
-    p->flags &= ~0x8000;
+    p->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
 
     switch ((u32)p->btl->hcEffect) {
     case 51:
         e = GetBtlSoraActiveOpponent(work);
 
         if (e != NULL) {
-            if ((e->x < p->x && (p->flags & 4)) ||
-                (e->x > p->x && !(p->flags & 4))) {
-                p->flags |= 0x8000;
+            if ((e->x < p->x && (p->flags & BTLOBJ_FLAG_FACING_LEFT)) ||
+                (e->x > p->x && !(p->flags & BTLOBJ_FLAG_FACING_LEFT))) {
+                p->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
             }
         }
         break;
@@ -1253,11 +1253,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (work->state != 15 && (p->btl->flags & BTL_FLAG_ESCAPED)) {
-        p->flags |= 0x800000;
+        p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
         work->state = 15;
         work->steps = 0;
         work->stateTimer = 0;
-        p->flags |= 0x100;
+        p->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
         p->btl->flags &= ~BTL_FLAG_CAN_CHARGE_RELOAD;
     }
@@ -1291,11 +1291,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->stateTimer = 0;
         break;
     case 2:
-        p->flags &= ~0x2000;
+        p->flags &= ~BTLOBJ_FLAG_HURT;
         work->state = 1;
         work->steps = 0;
         work->stateTimer = 0;
-        p->flags &= ~1;
+        p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
         break;
     case 5:
         p->btl->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
@@ -2133,13 +2133,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         e3 = p->btl->actor2;
 
         if (e3 != NULL) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 if (p->x < e3->x) {
-                    p->flags &= ~4;
+                    p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
             } else {
                 if (p->x > e3->x) {
-                    p->flags |= 4;
+                    p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 }
             }
         }
@@ -2194,7 +2194,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 #ifndef VERSION_EU
             p->btl->flags &= ~BTL_FLAG_PLAYER_OFFSCREEN;
 #endif
-            p->flags &= ~0x0000200000000000LL;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             CreateBtlPopTask(p, 9);
             break;
         case 67:
@@ -2263,8 +2263,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->state = 35;
         work->steps = 0;
         work->stateTimer = 0;
-    } else if (p->flags & 0x0000100000000000LL) {
-        p->flags &= ~0x0000100000000000LL;
+    } else if (p->flags & BTLOBJ_FLAG_FREEZE_PENDING) {
+        p->flags &= ~BTLOBJ_FLAG_FREEZE_PENDING;
         work->state = 83;
         work->steps = 0;
         work->stateTimer = 0;
@@ -2295,8 +2295,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        p->flags &= ~0x100;
-        p->flags &= ~0x200;
+        p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
+        p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         work->state = 1;
         work->steps = 0;
         work->stateTimer = 0;
@@ -2343,7 +2343,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((u16)(pressed & DPAD_LEFT) != 0) {
             if (work->tapTimers[0] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
                 if (t2 == 18) {
@@ -2359,7 +2359,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags &= ~4;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
                 if (t2 == 18) {
@@ -2407,7 +2407,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraDirAnimation(work, 1, 1);
 
             if (!(held & DPAD_ANY)) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->angle = 192;
                 } else {
                     work->angle = 64;
@@ -2468,28 +2468,28 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= ~4;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_RIGHT | DPAD_DOWN)) == (DPAD_RIGHT | DPAD_DOWN)) {
             if (work->angle != 96) {
                 work->angle = 96;
                 work->speed = 0;
             }
 
-            p->flags &= ~4;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_DOWN)) == (DPAD_LEFT | DPAD_DOWN)) {
             if (work->angle != 160) {
                 work->angle = 160;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_UP)) == (DPAD_LEFT | DPAD_UP)) {
             if (work->angle != 224) {
                 work->angle = 224;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_UP) {
             if (work->angle != 0) {
                 work->angle = 0;
@@ -2501,7 +2501,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= ~4;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_DOWN) {
             if (work->angle != 128) {
                 work->angle = 128;
@@ -2513,7 +2513,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (held & DPAD_ANY) {
@@ -2562,7 +2562,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if ((u16)(pressed & DPAD_LEFT) != 0) {
             if (work->tapTimers[0] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
                 if (work->state == 21) {
@@ -2578,7 +2578,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags &= ~4;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
 
                 if (work->state == 21) {
@@ -2616,7 +2616,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         SetBtlSoraDirAnimation(work, 0, 1);
         work->speed = 0;
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->angle = 192;
             p->x -= 614;
         } else {
@@ -2671,7 +2671,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 32;
 
             if (work->state != 22) {
-                p->flags |= 0x200;
+                p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             }
         }
 
@@ -2679,13 +2679,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             EnableBtlSoraPassThrough(work);
 
             if (work->state != 22) {
-                p->flags |= 0x80;
+                p->flags |= BTLOBJ_FLAG_HIT_LOCKED;
             }
 
             work->vz = -460;
             m4aSongNumStart(SONG_VO_SR_ATTACK09);
         } else if ((s16)work->stateTimer > 4 && (s16)work->steps != 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= work->unk_194;
             } else {
                 p->x += work->unk_194;
@@ -2714,7 +2714,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 DisableBtlSoraPassThrough(work);
 
                 if (work->state != 22) {
-                    p->flags &= ~0x80;
+                    p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
                 }
             }
         }
@@ -2728,7 +2728,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->state = 1;
                 work->steps = 0;
                 work->stateTimer = 0;
-                p->flags &= ~0x200;
+                p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             }
 
             gBtlWork->flags |= BTL_FLAG_DODGE_ROLL_DONE;
@@ -2858,7 +2858,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 t2 = e->y;
                 t3 = e->z - (e->centerHeight << 8);
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     t = p->x - 12800;
                 } else {
                     t = p->x + 12800;
@@ -3027,7 +3027,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (p->btl->hcEffect == 34) {
                 switch (a->animId) {
                 case 22:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 5120, p->y,
                                           p->z - 7168, 40, 16, 44);
                     } else {
@@ -3036,7 +3036,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                     break;
                 case 12:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 8192, p->y,
                                           p->z, 28, 20, 32);
                     } else {
@@ -3045,7 +3045,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                     break;
                 default:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 9216, p->y,
                                           p->z, 32, 12, 32);
                     } else {
@@ -3068,21 +3068,21 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 switch (a->animId) {
                 case 22:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 5120, p->y, p->z - 7168, 28, 16, 44);
                     } else {
                         d = ApplyAttackBox(t, p->x + 5120, p->y, p->z - 7168, 28, 16, 44);
                     }
                     break;
                 case 12:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 8192, p->y, p->z, 16, 20, 32);
                     } else {
                         d = ApplyAttackBox(t, p->x + 8192, p->y, p->z, 16, 20, 32);
                     }
                     break;
                 default:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 9216, p->y, p->z, 20, 12, 32);
                     } else {
                         d = ApplyAttackBox(t, p->x + 9216, p->y, p->z, 20, 12, 32);
@@ -3095,7 +3095,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 m4aSongNumStart(a->hitSound);
 
                 if (a->flags & 2) {
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(8, 384, p->x - 5120, (p->y - 5120) + p->z);
                     } else {
                         SetBattleZoom(8, 384, p->x + 5120, (p->y - 5120) + p->z);
@@ -3113,7 +3113,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (work->comboCount <= 1) {
                 if (work->flags & BTL_SORA_FLAG_SWING_HIT) {
-                    p->flags &= ~16;
+                    p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
                 }
             }
         }
@@ -3121,7 +3121,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (d == 2) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             SetBtlSoraState(work, 33);
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
         }
 
@@ -3140,7 +3140,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     t = e->x - p->x;
                     t2 = e->y - p->y;
 
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         s32 target;
                         s32 origin;
 
@@ -3177,7 +3177,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                 }
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     s32 t4 = p->originX - 10240;
                     p->x += (t4 - p->x) >> 3;
                 } else {
@@ -3305,10 +3305,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 if (e2 != NULL) {
                     FadeFromAmount(4, 15, 32);
 
-                    if (e2->flags & 0x0000008000000000LL) {
+                    if (e2->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
                         CreateBtlPopTask(e2, 0);
                     } else {
-                        e2->flags |= 0x40;
+                        e2->flags |= BTLOBJ_FLAG_WARP_PENDING;
                         e2->hitFlags = 0;
                         m4aSongNumStart(SONG_EF_TELEP);
                     }
@@ -3418,7 +3418,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 y = e->y;
                 z = e->groundZ;
             } else {
-                x = p->flags & 4 ? p->x - 6144 : p->x + 6144;
+                x = p->flags & BTLOBJ_FLAG_FACING_LEFT ? p->x - 6144 : p->x + 6144;
                 y = p->y;
                 z = p->groundZ;
             }
@@ -3446,7 +3446,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 27) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartTornado(p->x, p->y, 0, 113, 1);
             } else {
                 BgFxStartTornado(p->x, p->y, 0, 113, 0);
@@ -3601,10 +3601,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 if (e->x > p->x) {
                     p->x = e->x + 8192;
-                    p->flags |= 4;
+                    p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
                     p->x = e->x - 8192;
-                    p->flags &= ~4;
+                    p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
 
                 ApplyAttackBox(109, e->x, e->y, e->z, 4, 4, 4);
@@ -3635,7 +3635,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 27) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartSync(p->x + 768, p->y, p->z - 16384);
             } else {
                 BgFxStartSync(p->x - 768, p->y, p->z - 16384);
@@ -3672,7 +3672,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     t = e->x;
                     t2 = e->y;
                 } else {
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         t = p->x - 20480;
                     } else {
                         t = p->x + 20480;
@@ -3724,7 +3724,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             e = p->btl->actor2;
 
             if (e != NULL) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartGravity(work->variant[0], p->x - 8192, p->y, p->z - 3584,
                                   e->x, e->y, 0, 1, work->variant[0] + 75);
                 } else {
@@ -3732,7 +3732,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                                   e->x, e->y, 0, 0, work->variant[0] + 75);
                 }
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartGravity(work->variant[0], p->x - 8192, p->y, p->z - 3584,
                                   p->originX - 15360, p->originY, p->z, 1,
                                   work->variant[0] + 75);
@@ -3775,7 +3775,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 27) {
             t4 = 70;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 t = p->x - 23040;
             } else {
                 t = p->x + 23040;
@@ -3784,7 +3784,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             t2 = p->y;
             t3 = p->z - 4096;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartBlizzard(1, p->x - 18432, t2, t3, t, t2, t3, 1, t4);
             } else {
                 BgFxStartBlizzard(1, p->x + 18432, t2, t3, t, t2, t3, 0, t4);
@@ -3797,7 +3797,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 d = 0;
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (e->x < p->x - 8192) {
                         d = 1;
                     }
@@ -3848,7 +3848,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 27) {
             t4 = 67;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 t = p->x - 51200;
             } else {
                 t = p->x + 51200;
@@ -3857,7 +3857,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             t2 = p->y;
             t3 = p->z - 3584;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(1, p->x - 18432, t2, t3, t, t2, t3, 1, t4);
             } else {
                 BgFxStartFire(1, p->x + 18432, t2, t3, t, t2, t3, 0, t4);
@@ -3870,7 +3870,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 d = 0;
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (e->x < p->x - 8192) {
                         d = 1;
                     }
@@ -3935,7 +3935,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 t4 = p->z - 3584;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(work->variant[0], p->x - 18432, p->y, p->z - 3584,
                               p->originX - 51200, p->originY, t4, 1, t3);
             } else {
@@ -3971,7 +3971,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 27) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFireBurst(p->x - 18432, p->y, p->z - 3584,
                               p->originX - 51200, p->originY,
                               p->z - 3584, 1, 96);
@@ -4025,7 +4025,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             t = p->z - 4096;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartBlizzard(work->variant[0], p->x - 18432, p->y, t,
                               p->originX - 23040, p->originY,
                               t, 1, t2);
@@ -4069,14 +4069,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (work->comboCount > 5) {
                 m4aSongNumStart(SONG_VO_SR_ATTACK07);
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     SetBattleZoom(8, 384, p->x - 5120, (p->y - 5120) + p->z);
                 } else {
                     SetBattleZoom(8, 384, p->x + 5120, (p->y - 5120) + p->z);
                 }
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartLimit(p->x + 3072, p->y, p->z - 4096, 1);
             } else {
                 BgFxStartLimit(p->x - 3072, p->y, p->z - 4096, 0);
@@ -4085,20 +4085,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_LIMIMOV);
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
         } else if ((u16)(uv - 22) <= 42) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= 1280;
             } else {
                 p->x += 1280;
             }
 
             if (work->comboCount > 5) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     d = ApplyAttackBox(85, p->x - 8192, p->y, p->z, 16, 16, 32);
                 } else {
                     d = ApplyAttackBox(85, p->x + 8192, p->y, p->z, 16, 16, 32);
                 }
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     d = ApplyAttackBox(84, p->x - 8192, p->y, p->z, 16, 16, 32);
                 } else {
                     d = ApplyAttackBox(84, p->x + 8192, p->y, p->z, 16, 16, 32);
@@ -4121,7 +4121,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 func_080137C8(p->x - 15360, p->y, p->z, 0);
             } else {
                 func_080137C8(p->x + 15360, p->y, p->z, 1);
@@ -4131,13 +4131,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (d == 2) {
             FadeToOriginal(0, 8);
             SetBtlSoraState(work, 33);
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             DisableBtlSoraPassThrough(work);
             break;
         }
 
         if ((s16)work->stateTimer > 38 && (pressed & A_BUTTON) && work->comboCount <= 5) {
-            p->flags ^= 4;
+            p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             work->comboCount++;
             MakeOpponentsHittable();
             SelectLockonTarget();
@@ -4217,7 +4217,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->btl->actor2 = 0;
             SetBtlSoraDirAnimation(work, 1, 0);
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
@@ -4240,8 +4240,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 0) {
             work->steps = 20;
             ColliderSetDisabled(&p->collider, 1);
-            p->flags |= 0x800000;
-            p->flags |= 0x0000200000000000LL;
+            p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags |= BTLOBJ_FLAG_NO_BREAK_POP;
             p->originZ = p->z;
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
         }
@@ -4321,8 +4321,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         case 18:
             ColliderSetDisabled(&p->collider, 0);
-            p->flags &= ~0x800000LL;
-            p->flags &= ~0x200000000000LL;
+            p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             break;
         }
 
@@ -4347,8 +4347,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (st == 0) {
             ColliderSetDisabled(&p->collider, 0);
-            p->flags &= ~0x800000LL;
-            p->flags &= ~0x200000000000LL;
+            p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             SetBtlSoraDirAnimation(work, 5, 0);
         }
 
@@ -4372,7 +4372,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeFromAmount(3, 4, 10);
             AnimReset(&work->anim);
             SetBtlSoraAnimation(work, 38, 0);
-            p->flags |= 0x2000;
+            p->flags |= BTLOBJ_FLAG_HURT;
             work->speed = 0;
             uv = p->hp;
 
@@ -4397,7 +4397,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 24) {
-            p->flags &= ~0x2000;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -4441,7 +4441,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer >= (s16)work->steps) {
-            p->flags &= ~0x200;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
@@ -4474,12 +4474,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeFromAmount(3, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
-            p->flags &= ~0x2000;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
 
             if (p->vx > 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else if (p->vx < 0) {
-                p->flags &= ~4;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         } else {
             if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
@@ -4496,7 +4496,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
             p->hp = p->maxHp / 4;
-            p->flags &= ~0x100;
+            p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(p);
             CreateBtlPopTask(p, 10);
 
@@ -4544,7 +4544,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (st == 0) {
             AnimReset(&work->anim);
             ColliderSetDisabled(&p->collider, 1);
-            p->flags |= 0x100;
+            p->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->anim.frame = 0;
             work->anim.timer = 0;
             work->vz = 1024;
@@ -4588,7 +4588,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->steps > 0) {
             work->stateTimer++;
         } else {
-            p->flags &= ~0x100;
+            p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->stateTimer = 0;
@@ -4615,12 +4615,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             work->stateTimer++;
             gBtlWork->hitStop = 30;
-            p->flags &= ~0x2000;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
 
             if (p->vx > 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else if (p->vx < 0) {
-                p->flags &= ~4;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
             break;
         }
@@ -4669,13 +4669,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             e = p->btl->actor2;
 
             if (e != NULL) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (p->x < e->x) {
-                        p->flags &= ~4;
+                        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                     }
                 } else {
                     if (p->x > e->x) {
-                        p->flags |= 4;
+                        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     }
                 }
             }
@@ -4695,7 +4695,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (e != NULL) {
                 p->x += (e->x - p->x) >> 3;
                 p->y += (e->y - p->y) >> 3;
-            } else if (p->flags & 4) {
+            } else if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = p->x + 8192;
                 p->x += (p->originX - t) >> 3;
             } else {
@@ -4708,13 +4708,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             MakeOpponentsHittable();
 
             if (work->comboCount == 1) {
-                if ((p->flags & 4)
+                if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(89, p->x - 5120, p->y, p->z, 16, 16, 48) != 0
                     : ApplyAttackBox(89, p->x + 5120, p->y, p->z, 16, 16, 48) != 0) {
                     m4aSongNumStart(SONG_BTL_SR_ATT01);
                 }
             } else {
-                if ((p->flags & 4)
+                if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(88, p->x - 5120, p->y, p->z, 16, 16, 48) != 0
                     : ApplyAttackBox(88, p->x + 5120, p->y, p->z, 16, 16, 48) != 0) {
                     m4aSongNumStart(SONG_BTL_SR_ATT00);
@@ -4762,7 +4762,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_VO_SR_ATTACK08);
             break;
         case 15:
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartShockwave(p->x - 5120, p->y + p->z - 4096, 1);
             } else {
                 BgFxStartShockwave(p->x + 5120, p->y + p->z - 4096, 0);
@@ -4771,7 +4771,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_SHOCFLOR);
             break;
         case 20:
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 ApplyAttackBox(107, p->x - 32768, p->y, p->z, 160, 256, 256);
             } else {
                 ApplyAttackBox(107, p->x + 32768, p->y, p->z, 160, 256, 256);
@@ -4801,7 +4801,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     e = ListPoolNext(&e->node);
                 }
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(108, p->x - 32768, p->y, p->z, 160, 256, 256);
                 } else {
                     ApplyAttackBox(108, p->x + 32768, p->y, p->z, 160, 256, 256);
@@ -4836,21 +4836,21 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (work->anim.timer == 0) {
             switch (AnimGetFrame(&work->anim)) {
             case 4:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x -= 2560;
                 } else {
                     p->x += 2560;
                 }
                 break;
             case 5:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x += 1024;
                 } else {
                     p->x -= 1024;
                 }
                 break;
             case 6:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x += 1024;
                 } else {
                     p->x -= 1024;
@@ -4862,13 +4862,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (AnimGetFrame(&work->anim) > 4) {
             work->unk_194 += 128;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= work->unk_194;
             } else {
                 p->x += work->unk_194;
             }
 
-            if ((p->flags & 4)
+            if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(94, p->x - 6400, p->y, p->z, 10, 12, 32) != 0
                 : ApplyAttackBox(94, p->x + 6400, p->y, p->z, 10, 12, 32) != 0) {
                 m4aSongNumStart(SONG_BTL_LT_HIT00);
@@ -4876,7 +4876,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= 2048;
             } else {
                 p->x += 2048;
@@ -4899,7 +4899,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             EnableBtlSoraPassThrough(work);
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             p->x -= work->unk_194;
         } else {
             p->x += work->unk_194;
@@ -4911,7 +4911,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->y += 384;
         }
 
-        if ((p->flags & 4)
+        if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
             ? ApplyAttackBox(94, p->x - 6400, p->y, p->z, 10, 12, 12) != 0
             : ApplyAttackBox(94, p->x + 6400, p->y, p->z, 10, 12, 12) != 0) {
             m4aSongNumStart(SONG_BTL_LT_HIT00);
@@ -4933,7 +4933,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlSoraAnimation(work, 73, 0);
-            p->flags &= ~0x10;
+            p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
         }
 
         work->unk_194 -= 128;
@@ -4942,14 +4942,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_194 = 0;
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             p->x -= work->unk_194;
         } else {
             p->x += work->unk_194;
         }
 
         if (AnimGetFrame(&work->anim) == 1) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x += 128;
             } else {
                 p->x -= 128;
@@ -4979,7 +4979,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         switch (AnimGetFrame(&work->anim)) {
         case 0:
             if (work->anim.timer == 0) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x += 768;
                 } else {
                     p->x -= 768;
@@ -4989,7 +4989,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         case 2:
         case 3:
             if (work->anim.timer == 0) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x += 512;
                 } else {
                     p->x -= 512;
@@ -4997,7 +4997,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
             break;
         case 4:
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = p->x + 16384;
                 p->x += (p->originX - t) >> 4;
             } else {
@@ -5022,7 +5022,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 5;
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t2 = p->x + 16384;
             p->x += (p->originX - t2) >> 4;
         } else {
@@ -5033,7 +5033,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         st = --work->steps;
 
         if (st <= 1) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartZantetsuken(p->x - 5120, p->y, p->z - 7680, 0);
             } else {
                 BgFxStartZantetsuken(p->x + 5120, p->y, p->z - 7680, 1);
@@ -5041,7 +5041,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             FadeStartIn(3, 10);
 
-            if ((p->flags & 4)
+            if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(95, p->x - 6400, p->y, p->z, 10, 12, 12) != 0
                 : ApplyAttackBox(95, p->x + 6400, p->y, p->z, 10, 12, 12) != 0) {
                 m4aSongNumStart(SONG_EF_ZANTETSU);
@@ -5130,17 +5130,17 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->unk_198 = p->y;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
             }
 
             if (p->x > work->unk_194) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->unk_194 += 5120;
             } else {
-                p->flags &= ~4;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->unk_194 -= 5120;
             }
             break;
@@ -5156,7 +5156,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 MakeOpponentsHittable();
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 if (ApplyAttackBox(93, p->x - 8192, p->y, p->z - 8192, 20, 25, 32) != 0) {
                     if (work->comboCount == 0) {
                         m4aSongNumStart(SONG_BTL_LT_HIT00);
@@ -5226,7 +5226,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if (e != NULL) {
                 p->x += (e->x - p->x) >> 3;
                 p->y += (e->y - p->y) >> 3;
-            } else if (p->flags & 4) {
+            } else if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t2 = p->x + 12288;
                 p->x += (p->originX - t2) >> 3;
             } else {
@@ -5237,12 +5237,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if ((s16)work->stateTimer == 38) {
                 MakeOpponentsHittable();
 
-                if ((p->flags & 4)
+                if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(90, p->x - 1024, p->y, p->z, 32, 24, 32) != 0
                     : ApplyAttackBox(90, p->x + 1024, p->y, p->z, 32, 24, 32) != 0) {
                     m4aSongNumStart(SONG_BTL_SR_ATT02);
 
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(8, 384, p->x - 2048, p->y + p->z);
                     } else {
                         SetBattleZoom(8, 384, p->x + 2048, p->y + p->z);
@@ -5296,7 +5296,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCamera(work);
 
         if ((s16)work->stateTimer == 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
@@ -5350,7 +5350,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             FadeToAmount(0, gBtlWork->fadeAmount, 8);
             SetBtlSoraAnimation(work, 66, 0);
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartRagnarokCharge(p->x - 10240, p->y, p->z - 6144);
             } else {
                 BgFxStartRagnarokCharge(p->x + 10240, p->y, p->z - 6144);
@@ -5359,7 +5359,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 120;
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             BgFxSetPosition(p->x - 10240, p->y, p->z - 6144);
         } else {
             BgFxSetPosition(p->x + 10240, p->y, p->z - 6144);
@@ -5388,7 +5388,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         st = work->stateTimer;
 
         if ((st > 9 && (pressed & A_BUTTON)) || st > 120) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartRagnarokShot(p->x - 10240, p->y, p->z - 6144, 1);
             } else {
                 BgFxStartRagnarokShot(p->x + 10240, p->y, p->z - 6144, 0);
@@ -5415,7 +5415,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t = p->x - 8192;
             p->x += (p->originX - t) >> 3;
         } else {
@@ -5450,7 +5450,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCamera(work);
 
         if ((s16)work->stateTimer == 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
@@ -5507,7 +5507,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, 66, 0);
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartDumboSplash(1, p->x - 9728, p->y, p->z - 6656, 0, 99);
             } else {
                 BgFxStartDumboSplash(1, p->x + 9728, p->y, p->z - 6656, 1, 99);
@@ -5515,7 +5515,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
 #ifdef VERSION_EU
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             BgFxSetPosition(p->x - 9728, p->y, p->z - 6656);
         } else {
             BgFxSetPosition(p->x + 9728, p->y, p->z - 6656);
@@ -5572,7 +5572,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (work->anim.timer == 0) {
             switch (AnimGetFrame(&work->anim)) {
             case 3:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFireExplosion(p->x - 12288, p->y, p->z - 4096);
                 } else {
                     BgFxStartFireExplosion(p->x + 12288, p->y, p->z - 4096);
@@ -5581,7 +5581,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 m4aSongNumStart(SONG_EF_FIRE03);
                 break;
             case 5:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(97, p->x - 12288, p->y, p->z, 40, 40, 50);
                 } else {
                     ApplyAttackBox(97, p->x + 12288, p->y, p->z, 40, 40, 50);
@@ -5621,7 +5621,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 m4aSongNumStart(SONG_EF_STANIMP);
                 break;
             case 6:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     ApplyAttackBox(92, p->x, p->y, p->z, 64, 64, 100);
                 } else {
                     ApplyAttackBox(92, p->x, p->y, p->z, 64, 64, 100);
@@ -5678,8 +5678,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         st = work->stateTimer;
 
         if (st == 0) {
-            p->flags |= 0x100;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_INTANGIBLE;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
             work->flags |= BTL_SORA_FLAG_HIDDEN;
         }
@@ -5712,8 +5712,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         uv = work->stateTimer;
 
         if ((s16)uv > 300) {
-            p->flags &= ~0x100;
-            p->flags &= ~0x200;
+            p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->flags &= ~BTL_SORA_FLAG_HIDDEN;
             work->state = 1;
             work->steps = 0;
@@ -5873,7 +5873,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         case 0:
             SetBtlSoraAnimation(work, 54, 0);
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartLimit(p->x + 3072, p->y, p->z - 4096, 1);
             } else {
                 BgFxStartLimit(p->x - 3072, p->y, p->z - 4096, 0);
@@ -5891,7 +5891,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             args.y = p->y;
             args.z = p->z - 6144;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 args.facingLeft = 1;
                 args.x = p->x - 6144;
             } else {
@@ -5947,12 +5947,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             AnimReset(&work->anim);
             SetBtlSoraAnimation(work, 40, 0);
             work->stateTimer++;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            p->flags &= ~0x80;
+            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
         if (pressed & (A_BUTTON | B_BUTTON | DPAD_ANY)) {
@@ -5974,7 +5974,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_BTL_SR_SLIP);
             p->vx = 0;
             p->vy = 0;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             SetBtlSoraAnimation(work, 58, 0);
             work->speed = 256;
         } else {
@@ -6005,7 +6005,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->speed = 256;
         }
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             p->x -= work->speed;
         } else {
             p->x += work->speed;
@@ -6018,7 +6018,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            p->flags &= ~0x200;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
             work->state = 1;
             work->steps = 0;
@@ -6028,7 +6028,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
         break;
     case 35:
-        p->flags &= ~0x2000;
+        p->flags &= ~BTLOBJ_FLAG_HURT;
         p->vx = p->vy = 0;
         work->speed = 0;
         break;
@@ -6175,7 +6175,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
     }
 
-    if ((p->flags & 0x800000) == 0) {
+    if ((p->flags & BTLOBJ_FLAG_IGNORE_BOUNDS) == 0) {
         switch (ClampBattlePosition(&p->x, &p->y, -16, 0)) {
         case 3:
         case 4:
@@ -6273,7 +6273,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
     attr = GetBattleSpritePriorityFlags(p->y);
 
     if (work->scaleX == 0x100 && work->scaleY == 0x100) {
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
@@ -6287,7 +6287,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
             }
         }
     } else {
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sx = gBtlWork->scale * work->scaleX >> 8;
             sy = gBtlWork->scale * work->scaleY >> 8;
         } else {
@@ -6453,7 +6453,7 @@ void SaveBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     out->y = a->y;
     out->z = a->z;
 
-    if (a->flags & 4) {
+    if (a->flags & BTLOBJ_FLAG_FACING_LEFT) {
         out->flags |= 1;
     } else {
         out->flags &= 0xFFFE;
@@ -6576,22 +6576,22 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
 
     if ((a & 0x10) && (a & 0x40)) {
         work->angle = 0x20;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
         p->vy -= 12;
     } else if ((a & 0x10) && (a & 0x80)) {
         work->angle = 0x60;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
         p->vy += 12;
     } else if ((a & 0x20) && (a & 0x80)) {
         work->angle = 0xA0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
         p->vy += 12;
     } else if ((a & 0x20) && (a & 0x40)) {
         work->angle = 0xE0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
         p->vy -= 12;
     } else if (a & 0x40) {
@@ -6599,14 +6599,14 @@ void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
         p->vy -= 12;
     } else if (a & 0x10) {
         work->angle = 0x40;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         p->vx += 25;
     } else if (a & 0x80) {
         work->angle = 0x80;
         p->vy += 12;
     } else if (a & 0x20) {
         work->angle = 0xC0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         p->vx -= 25;
     }
 
@@ -6669,26 +6669,26 @@ void UpdateBtlRikuDarkWalk(BtlRikuWork* work, u16 a) {
 
     if ((a & 0x10) && (a & 0x40)) {
         work->angle = 0x20;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x10) && (a & 0x80)) {
         work->angle = 0x60;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x20) && (a & 0x80)) {
         work->angle = 0xA0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else if ((a & 0x20) && (a & 0x40)) {
         work->angle = 0xE0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else if (a & 0x40) {
         work->angle = 0;
     } else if (a & 0x10) {
         work->angle = 0x40;
-        p->flags &= ~4;
+        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
     } else if (a & 0x80) {
         work->angle = 0x80;
     } else if (a & 0x20) {
         work->angle = 0xC0;
-        p->flags |= 4;
+        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
     if (a & 0xF0) {
@@ -6741,7 +6741,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
             work->sioKeysA = 1;
         } else {
             e->x = 0x14000;
-            e->flags = 4;
+            e->flags = BTLOBJ_FLAG_FACING_LEFT;
             work->sioKeysA = 0;
         }
 
@@ -6777,9 +6777,9 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         }
     }
 
-    e->flags |= 0x8200000000LL;
-    e->flags |= 0x400000000000000LL;
-    e->flags |= 0x300;
+    e->flags |= (BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_WARP);
+    e->flags |= BTLOBJ_FLAG_PLAYER;
+    e->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
 
     if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
         e->y = 0x16000;
@@ -6985,7 +6985,7 @@ BtlObj* FindHighestEnemy(BtlRikuWork* work) {
     best = 0;
     e = ListPoolFirst(&gBtlWork->pool);
     while (e != NULL) {
-        if (!(e->flags & 0x1000000)) {
+        if (!(e->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             d = e->z - (e->centerHeight << 8);
             if (min > d) {
                 best = e;
@@ -7114,7 +7114,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     p = &work->actor;
 
-    if (gBtlWork->phase == 4 && (p->flags & 0x10)) {
+    if (gBtlWork->phase == 4 && (p->flags & BTLOBJ_FLAG_IN_CARD_ACTION)) {
         switch (work->state) {
         case 24:
         case 25:
@@ -7124,7 +7124,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->y = p->originY;
             p->z = p->originZ;
 #ifndef VERSION_EU
-            p->flags &= 0xFFFFDFFFFFFFFFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             CreateBtlPopTask(p, 9);
 #endif
 
@@ -7163,58 +7163,58 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
     if (work->flags & BTL_RIKU_FLAG_HC_STATUS) {
         work->flags &= ~BTL_RIKU_FLAG_HC_STATUS;
-        p->flags &= 0xFC403FFFE38F7FFFLL;
+        p->flags &= ~BTLOBJ_FLAGS_ELEMENT_AFFINITY;
     }
 
     switch (p->btl->hcEffect) {
     case 26:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x0010400000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 8:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x0004800000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_FIRE);
         break;
     case 15:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x001C000000000000LL;
+        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 18:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x0000800004000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD);
         break;
     case 50:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x0080000010000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
     case 27:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x0000400008000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE);
         break;
     case 47:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x011E000000000000LL;
+        p->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 49:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x00A0000008000000LL;
+        p->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_RESIST_PHYSICAL | BTLOBJ_FLAG_WEAK_NEUTRAL);
         break;
     case 28:
         work->flags |= BTL_RIKU_FLAG_HC_STATUS;
-        p->flags |= 0x001C000000000000LL;
+        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     }
 
-    p->flags &= 0xFFFFFFFFFFFF7FFFLL;
+    p->flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
 
     switch ((u32)p->btl->hcEffect) {
     case 51:
         e = GetBtlRikuActiveOpponent(work);
 
         if (e != NULL) {
-            if ((e->x < p->x && (p->flags & 4)) ||
-                (e->x > p->x && !(p->flags & 4))) {
-                p->flags |= 0x8000;
+            if ((e->x < p->x && (p->flags & BTLOBJ_FLAG_FACING_LEFT)) ||
+                (e->x > p->x && !(p->flags & BTLOBJ_FLAG_FACING_LEFT))) {
+                p->flags |= BTLOBJ_FLAG_GUARD_PHYSICAL;
             }
         }
         break;
@@ -7301,11 +7301,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     if (work->state != 8 && (p->btl->flags & BTL_FLAG_ESCAPED)) {
-        p->flags |= 0x800000;
+        p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
         work->state = 8;
         work->steps = 0;
         work->stateTimer = 0;
-        p->flags |= 0x100;
+        p->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
         switch (UpdateBtlObjReaction(p)) {
         case 1:
@@ -7340,11 +7340,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
             break;
         case 2:
-            p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
-            p->flags &= 0xFFFFFFFFFFFFFFFELL;
+            p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
             break;
         case 5: {
             BtlObj* e;
@@ -7495,13 +7495,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             e = p->btl->actor2;
 
             if (e != NULL) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (p->x < e->x) {
-                        p->flags &= ~4LL;
+                        p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                     }
                 } else {
                     if (p->x > e->x) {
-                        p->flags |= 4;
+                        p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     }
                 }
             }
@@ -7544,7 +7544,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->y = p->originY;
                 p->z = p->originZ;
 #ifdef VERSION_EU
-                p->flags &= 0xFFFFDFFFFFFFFFFFLL;
+                p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
                 CreateBtlPopTask(p, 9);
 #endif
                 break;
@@ -7610,8 +7610,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
         }
-    } else if (p->flags & 0x100000000000LL) {
-        p->flags &= 0xFFFFEFFFFFFFFFFFLL;
+    } else if (p->flags & BTLOBJ_FLAG_FREEZE_PENDING) {
+        p->flags &= ~BTLOBJ_FLAG_FREEZE_PENDING;
         work->state = 30;
         work->steps = 0;
         work->stateTimer = 0;
@@ -7657,7 +7657,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t;
 
             t = p->x - 12288;
@@ -7681,13 +7681,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 28, 0);
-            p->flags |= 0x800000;
+            p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
         }
 
         work->vz = 0;
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             p->x -= 3072;
         } else {
             p->x += 3072;
@@ -7722,13 +7722,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 tz = -4096;
             }
 
-            p->flags ^= 4;
+            p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
 
             switch (GetRandom() % 3) {
             case 0:
                 SetBtlRikuAnimation(work, 29, 1);
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->unk_194 = GetRandom() % 17 + 184;
                 } else {
                     work->unk_194 = GetRandom() % 17 + 56;
@@ -7739,7 +7739,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             case 1:
                 SetBtlRikuAnimation(work, 30, 1);
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->unk_194 = GetRandom() % 17 + 203;
                 } else {
                     work->unk_194 = GetRandom() % 17 + 37;
@@ -7750,7 +7750,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             case 2:
                 SetBtlRikuAnimation(work, 31, 1);
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->unk_194 = GetRandom() % 17 + 165;
                 } else {
                     work->unk_194 = GetRandom() % 17 + 75;
@@ -7762,7 +7762,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             p->z = tz;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x = tx + 25344;
                 BgFxStartRikuLimit(p->x, p->y, tz, 192);
             } else {
@@ -7840,7 +7840,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (BgFxIsActive() == 0 && (s16)work->steps <= 0 && AnimIsFinished(&work->anim) != 0) {
-            p->flags &= 0xFFFFFFFFFF7FFFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(p);
             work->state = 35;
             FadeStartIn(9, 30);
@@ -7879,7 +7879,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 MakeOpponentsHittable();
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 if (ApplyAttackBox(7, p->x - 8192, p->y, p->z - 8192, 20, 25, 32) != 0) {
                     m4aSongNumStart(SONG_BTL_RK_HIT00);
                 }
@@ -7908,7 +7908,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             e = p->btl->actor2;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 if (e != NULL) {
                     tx = e->x + 4096;
                     ty = e->y;
@@ -7957,7 +7957,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (e != NULL) {
                 flag = 0;
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (e->x < p->x - 8192) {
                         flag = 1;
                     }
@@ -7999,7 +7999,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= dx << 8;
             } else {
                 p->x += dx << 8;
@@ -8008,7 +8008,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (flag != 0) {
                 work->flags |= BTL_RIKU_FLAG_FIRE_LAUNCHED;
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFire(3, p->x - 18944, p->y, p->z - 6144, p->originX - 51200, p->originY, p->z - 6144, 1, 10);
                 } else {
                     BgFxStartFire(3, p->x + 18944, p->y, p->z - 6144, p->originX + 51200, p->originY, p->z - 6144, 0, 10);
@@ -8077,7 +8077,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= dy << 8;
             } else {
                 p->x += dy << 8;
@@ -8091,7 +8091,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             case 6:
             case 7:
             case 8:
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     p->x -= 256;
                 } else {
                     p->x += 256;
@@ -8119,7 +8119,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         } else if (fr == 10) {
             if (work->comboCount <= 1) {
                 if (work->flags & BTL_RIKU_FLAG_SWING_HIT) {
-                    p->flags &= 0xFFFFFFFFFFFFFFEFLL;
+                    p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
                 }
             }
         }
@@ -8144,7 +8144,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (AnimGetGfxIndex(&work->anim) == 6) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t;
 
                 t = p->x + 22528;
@@ -8197,7 +8197,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= dz << 8;
             } else {
                 p->x += dz << 8;
@@ -8206,14 +8206,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (flag != 0) {
                 MakeOpponentsHittable();
 
-                if ((p->flags & 4) ? ApplyAttackBox(mode, p->x - 5120, p->y, p->z, 20, 8, 16)
+                if ((p->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(mode, p->x - 5120, p->y, p->z, 20, 8, 16)
                                    : ApplyAttackBox(mode, p->x + 5120, p->y, p->z, 20, 8, 16)) {
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
 
                     if (mode == 5) {
                         FadeStartIn(2, 45);
 
-                        if (p->flags & 4) {
+                        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                             SetBattleZoom(6, 332, p->x - 8192, p->y - 6144 + p->z);
                         } else {
                             SetBattleZoom(6, 332, p->x + 8192, p->y - 6144 + p->z);
@@ -8257,7 +8257,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (work->flags & BTL_RIKU_FLAG_SWING_HIT) {
-            p->flags &= 0xFFFFFFFFFFFFFFEFLL;
+            p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
         }
 
         if (work->anim.timer == 0) {
@@ -8298,7 +8298,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= dz << 8;
             } else {
                 p->x += dz << 8;
@@ -8306,13 +8306,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             if (flag != 0) {
                 if (p->btl->hcEffect == 34) {
-                    if ((p->flags & 4) ? ApplyAttackBox(mode, p->x - 8960, p->y, p->z, 35, 25, 40)
+                    if ((p->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(mode, p->x - 8960, p->y, p->z, 35, 25, 40)
                                        : ApplyAttackBox(mode, p->x + 8960, p->y, p->z, 35, 25, 40)) {
                         work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                         m4aSongNumStart(SONG_BTL_RK_HIT01);
                     }
                 } else {
-                    if ((p->flags & 4) ? ApplyAttackBox(mode, p->x - 5120, p->y, p->z, 20, 18, 40)
+                    if ((p->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(mode, p->x - 5120, p->y, p->z, 20, 18, 40)
                                        : ApplyAttackBox(mode, p->x + 5120, p->y, p->z, 20, 18, 40)) {
                         work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                         m4aSongNumStart(SONG_BTL_RK_HIT01);
@@ -8332,7 +8332,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 ex = e->x - p->x;
                 ey = e->y - p->y;
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     s32 target;
                     s32 origin;
 
@@ -8398,14 +8398,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((work->flags & BTL_RIKU_FLAG_SWING_HIT) && work->anim.timer == 2 && AnimGetGfxIndex(&work->anim) == 6) {
-            p->flags &= 0xFFFFFFFFFFFFFFEFLL;
+            p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
         }
 
         if (AnimGetGfxIndex(&work->anim) == 6) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t;
 
                 t = p->x + 22528;
@@ -8452,7 +8452,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= dz << 8;
             } else {
                 p->x += dz << 8;
@@ -8473,13 +8473,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     od = 32;
                 }
 
-                if ((p->flags & 4)
+                if ((p->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(mode2, p->x - (oa << 8), p->y, p->z, ob, oc, od)
                     : ApplyAttackBox(mode2, p->x + (oa << 8), p->y, p->z, ob, oc, od)) {
                     work->flags |= BTL_RIKU_FLAG_SWING_HIT;
                     m4aSongNumStart(SONG_BTL_RK_HIT01);
 
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(6, 307, p->x - 8192, p->y - 6144 + p->z);
                     } else {
                         SetBattleZoom(6, 307, p->x + 8192, p->y - 6144 + p->z);
@@ -8630,7 +8630,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 24, 0);
             work->vz = -1536;
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->targetX = p->x + 12288;
             } else {
                 work->targetX = p->x - 12288;
@@ -8657,7 +8657,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 15, 0);
 
             if ((held & DPAD_ANY) == 0) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->angle = 192;
                 } else {
                     work->angle = 64;
@@ -8719,28 +8719,28 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_RIGHT | DPAD_DOWN)) == (DPAD_RIGHT | DPAD_DOWN)) {
             if (work->angle != 96) {
                 work->angle = 96;
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_DOWN)) == (DPAD_LEFT | DPAD_DOWN)) {
             if (work->angle != 160) {
                 work->angle = 160;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_UP)) == (DPAD_LEFT | DPAD_UP)) {
             if (work->angle != 224) {
                 work->angle = 224;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_UP) {
             if (work->angle != 0) {
                 work->angle = 0;
@@ -8752,7 +8752,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_DOWN) {
             if (work->angle != 128) {
                 work->angle = 128;
@@ -8764,7 +8764,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (held & DPAD_ANY) {
@@ -8798,7 +8798,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->stateTimer = 0;
         } else if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->state = 57;
                 work->steps = 0;
                 work->stateTimer = 0;
@@ -8806,7 +8806,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->state = 57;
                 work->steps = 0;
                 work->stateTimer = 0;
@@ -8873,7 +8873,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->stateTimer >= (s16)work->steps && gBtlWork->darkPoints > 0) {
-            p->flags &= 0xFFFFFFFFFFFFFDFFLL;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
@@ -8888,7 +8888,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             }
 
-            p->flags |= 0x300;
+            p->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->state = 33;
             work->steps = 0;
             work->stateTimer = 0;
@@ -8902,7 +8902,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         DisableBtlRikuPassThrough(work);
 
         if (gBtlWork->darkPoints <= 0) {
-            p->flags |= 0x300;
+            p->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->state = 33;
             work->steps = 0;
             work->stateTimer = 0;
@@ -8911,7 +8911,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 work->state = 57;
                 work->steps = 0;
                 work->stateTimer = 0;
@@ -8919,7 +8919,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 work->state = 57;
                 work->steps = 0;
                 work->stateTimer = 0;
@@ -9096,7 +9096,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->steps <= 0) {
-            p->flags &= 0xFFFFFFFFFFFFFCFFLL;
+            p->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -9129,8 +9129,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        p->flags &= 0xFFFFFFFFFFFFFDFFLL;
-        p->flags &= 0xFFFFFFFFFFFFFEFFLL;
+        p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
+        p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
         work->state = 1;
         work->steps = 0;
         work->stateTimer = 0;
@@ -9148,7 +9148,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
                 work->state = 22;
                 work->steps = 0;
@@ -9157,7 +9157,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
                 work->state = 22;
                 work->steps = 0;
@@ -9184,7 +9184,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuDirAnimation(work, 1, 1);
 
             if ((held & DPAD_ANY) == 0) {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->angle = 192;
                 } else {
                     work->angle = 64;
@@ -9210,8 +9210,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         break;
     case 30:
         if ((s16)work->stateTimer == 0) {
-            p->flags |= 0x100;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_INTANGIBLE;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
             work->flags |= BTL_RIKU_FLAG_HIDDEN;
         }
@@ -9244,8 +9244,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         uv = work->stateTimer;
 
         if ((s16)work->stateTimer > 300) {
-            p->flags &= 0xFFFFFFFFFFFFFEFFLL;
-            p->flags &= 0xFFFFFFFFFFFFFDFFLL;
+            p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->flags &= ~BTL_RIKU_FLAG_HIDDEN;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -9288,28 +9288,28 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_RIGHT | DPAD_DOWN)) == (DPAD_RIGHT | DPAD_DOWN)) {
             if (work->angle != 96) {
                 work->angle = 96;
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_DOWN)) == (DPAD_LEFT | DPAD_DOWN)) {
             if (work->angle != 160) {
                 work->angle = 160;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (((s16)held & (DPAD_LEFT | DPAD_UP)) == (DPAD_LEFT | DPAD_UP)) {
             if (work->angle != 224) {
                 work->angle = 224;
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_UP) {
             if (work->angle != 0) {
                 work->angle = 0;
@@ -9321,7 +9321,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+            p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else if (held & DPAD_DOWN) {
             if (work->angle != 128) {
                 work->angle = 128;
@@ -9333,7 +9333,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->speed = 0;
             }
 
-            p->flags |= 4;
+            p->flags |= BTLOBJ_FLAG_FACING_LEFT;
         }
 
         if (held & DPAD_ANY) {
@@ -9367,7 +9367,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->stateTimer = 0;
         } else if (pressed & DPAD_LEFT) {
             if (work->tapTimers[0] != 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
                 work->state = 22;
                 work->steps = 0;
@@ -9376,7 +9376,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         } else if (pressed & DPAD_RIGHT) {
             if (work->tapTimers[1] != 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 p->originX = p->x;
                 work->state = 22;
                 work->steps = 0;
@@ -9400,7 +9400,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         SetBtlRikuDirAnimation(work, 0, 1);
         work->speed = 0;
 
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             work->angle = 192;
             p->x -= 512;
         } else {
@@ -9477,12 +9477,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             if (e != NULL) {
                 if (p->x < e->x) {
-                    p->flags |= 4;
+                    p->flags |= BTLOBJ_FLAG_FACING_LEFT;
                 } else {
-                    p->flags &= ~4;
+                    p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                 }
 
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->targetX = e->x + 0x2D00;
                 } else {
                     work->targetX = e->x - 0x2D00;
@@ -9490,13 +9490,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 work->targetY = e->y;
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     work->targetX = p->x;
                 } else {
                     work->targetX = p->x;
                 }
 
-                p->flags ^= 4;
+                p->flags ^= BTLOBJ_FLAG_FACING_LEFT;
                 work->targetY = p->y;
             }
             work->vz = -1152;
@@ -9525,7 +9525,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
             work->unk_194 = 0x880;
             work->steps = 20;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->vz = -819;
 
             if (GetRandom() % 2) {
@@ -9534,7 +9534,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 m4aSongNumStart(SONG_VO_RK_ATTACK03);
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
@@ -9555,11 +9555,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 4) {
             EnableBtlRikuPassThrough(work);
-            p->flags |= 0x80;
+            p->flags |= BTLOBJ_FLAG_HIT_LOCKED;
         }
 
         if ((s16)work->steps != 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x += work->unk_194;
             } else {
                 p->x -= work->unk_194;
@@ -9578,7 +9578,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->steps == 0 && p->z >= p->groundZ) {
-            p->flags &= ~0x80;
+            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
             DisableBtlRikuPassThrough(work);
             work->state = 23;
             work->steps = 0;
@@ -9602,7 +9602,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->state = 1;
         work->steps = 0;
         work->stateTimer = 0;
-        p->flags &= ~0x200;
+        p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         break;
     case 57:
         FocusBtlRikuCameraOnTarget(work);
@@ -9634,7 +9634,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
         if ((s16)work->steps != 0) {
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x += work->unk_194;
             } else {
                 p->x -= work->unk_194;
@@ -9892,21 +9892,21 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (p->btl->hcEffect == 34) {
                 switch (a->animId) {
                 case 5:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[0], p->x - 5120, p->y, p->z - 7168, 40, 24, 44);
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 5120, p->y, p->z - 7168, 40, 24, 44);
                     }
                     break;
                 case 3:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[0], p->x - 8192, p->y, p->z, 32, 35, 32);
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 8192, p->y, p->z, 32, 35, 32);
                     }
                     break;
                 default:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(a->attackIds[0], p->x - 9216, p->y, p->z, 32, 20, 32);
                     } else {
                         d = ApplyAttackBox(a->attackIds[0], p->x + 9216, p->y, p->z, 32, 20, 32);
@@ -9927,21 +9927,21 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 switch (a->animId) {
                 case 5:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 5120, p->y, p->z - 7168, 28, 20, 44);
                     } else {
                         d = ApplyAttackBox(t, p->x + 5120, p->y, p->z - 7168, 28, 20, 44);
                     }
                     break;
                 case 3:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 8192, p->y, p->z, 20, 26, 32);
                     } else {
                         d = ApplyAttackBox(t, p->x + 8192, p->y, p->z, 20, 26, 32);
                     }
                     break;
                 default:
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         d = ApplyAttackBox(t, p->x - 9216, p->y, p->z, 20, 16, 32);
                     } else {
                         d = ApplyAttackBox(t, p->x + 9216, p->y, p->z, 20, 16, 32);
@@ -9956,7 +9956,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 m4aSongNumStart(a->song);
 
                 if (a->flags & 2) {
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         SetBattleZoom(8, 384, p->x - 5120, (p->y - 5120) + p->z);
                     } else {
                         SetBattleZoom(8, 384, p->x + 5120, (p->y - 5120) + p->z);
@@ -9974,7 +9974,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             if (work->comboCount <= 1) {
                 if (work->flags & BTL_RIKU_FLAG_SWING_HIT) {
-                    p->flags &= ~16;
+                    p->flags &= ~BTLOBJ_FLAG_IN_CARD_ACTION;
                     MakeOpponentsHittable();
                 }
             }
@@ -9983,7 +9983,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (d == 2) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             SetBtlRikuState(work, 12);
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             break;
         }
 
@@ -10002,7 +10002,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     t = e->x - p->x;
                     t2 = e->y - p->y;
 
-                    if (p->flags & 4) {
+                    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                         s32 target;
                         s32 origin;
 
@@ -10039,7 +10039,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     }
                 }
             } else {
-                if (p->flags & 4) {
+                if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     t4 = p->originX - 4096;
                     p->x += (t4 - p->x) >> 3;
                 } else {
@@ -10069,7 +10069,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 SetBtlRikuDirAnimation(work, 1, 0);
             }
 
-            if (p->flags & 4) {
+            if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->angle = 192;
             } else {
                 work->angle = 64;
@@ -10091,8 +10091,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if ((s16)work->stateTimer == 0) {
             work->steps = 20;
             ColliderSetDisabled(&p->collider, 1);
-            p->flags |= 0x800000;
-            p->flags |= 0x200000000000LL;
+            p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags |= BTLOBJ_FLAG_NO_BREAK_POP;
             p->originZ = p->z;
         }
 
@@ -10193,8 +10193,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         case 18:
             ColliderSetDisabled(&p->collider, 0);
-            p->flags &= 0xFFFFFFFFFF7FFFFFLL;
-            p->flags &= 0xFFFFDFFFFFFFFFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             break;
         }
 
@@ -10215,8 +10215,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 28:
         if ((s16)work->stateTimer == 0) {
             ColliderSetDisabled(&p->collider, 0);
-            p->flags &= 0xFFFFFFFFFF7FFFFFLL;
-            p->flags &= 0xFFFFDFFFFFFFFFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
+            p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 SetBtlRikuAnimation(work, 19, 0);
@@ -10246,7 +10246,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if ((s16)work->stateTimer == 0) {
             FadeFromAmount(3, 4, 10);
             SetBtlRikuAnimation(work, 7, 0);
-            p->flags |= 0x2000;
+            p->flags |= BTLOBJ_FLAG_HURT;
             work->speed = 0;
             uv = p->hp;
 
@@ -10271,7 +10271,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         uv = work->stateTimer;
 
         if ((s16)work->stateTimer > 24) {
-            p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -10288,7 +10288,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if ((s16)work->stateTimer == 0) {
             FadeFromAmount(3, 4, 10);
             SetBtlRikuAnimation(work, 14, 0);
-            p->flags |= 0x2000;
+            p->flags |= BTLOBJ_FLAG_HURT;
             work->speed = 0;
             uv = p->hp;
 
@@ -10313,7 +10313,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         uv = work->stateTimer;
 
         if ((s16)work->stateTimer > 24) {
-            p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 35;
             work->steps = 0;
             work->stateTimer = 0;
@@ -10355,7 +10355,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if ((s16)work->stateTimer >= (s16)work->steps) {
-            p->flags &= 0xFFFFFFFFFFFFFDFFLL;
+            p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
@@ -10395,12 +10395,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             FadeFromAmount(3, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
-            p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
 
             if (p->vx > 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else if (p->vx < 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         } else {
             gBtlWork->hitStop = 3;
@@ -10415,7 +10415,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
             p->hp = p->maxHp / 4;
-            p->flags &= 0xFFFFFFFFFFFFFEFFLL;
+            p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(p);
             CreateBtlPopTask(p, 10);
 
@@ -10463,12 +10463,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             FadeFromAmount(3, 16, 60);
             work->stateTimer++;
             gBtlWork->hitStop = 30;
-            p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+            p->flags &= ~BTLOBJ_FLAG_HURT;
 
             if (p->vx > 0) {
-                p->flags |= 4;
+                p->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else if (p->vx < 0) {
-                p->flags &= 0xFFFFFFFFFFFFFFFBLL;
+                p->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         } else {
             gBtlWork->hitStop = 3;
@@ -10499,13 +10499,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 7, 0);
             work->stateTimer++;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             StartBtlRikuKnockback(work);
             work->speed = 0;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            p->flags &= ~0x80;
+            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
         if ((A_BUTTON | B_BUTTON | DPAD_ANY) & pressed) {
@@ -10526,13 +10526,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 14, 0);
             work->stateTimer++;
-            p->flags |= 0x200;
+            p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             StartBtlRikuKnockback(work);
             work->speed = 0;
         }
 
         if (AnimIsFinished(&work->anim) != 0) {
-            p->flags &= ~0x80;
+            p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
         if ((A_BUTTON | B_BUTTON | DPAD_ANY) & pressed) {
@@ -10547,7 +10547,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
         break;
     case 14:
-        p->flags &= 0xFFFFFFFFFFFFDFFFLL;
+        p->flags &= ~BTLOBJ_FLAG_HURT;
 #ifdef VERSION_EU
         p->vx = p->vy = 0;
         work->speed = 0;
@@ -10599,7 +10599,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
     }
 
-    if (!(p->flags & 0x800000)) {
+    if (!(p->flags & BTLOBJ_FLAG_IGNORE_BOUNDS)) {
         ApplyBattleBounds(&p->x, &p->y, &p->z, &p->floorZ);
     }
 
@@ -10702,7 +10702,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
     }
 
-    if (!(p->flags & 0x800000)) {
+    if (!(p->flags & BTLOBJ_FLAG_IGNORE_BOUNDS)) {
         switch (ClampBattlePosition(&p->x, &p->y, -16, 0)) {
         case 1:
             p->vx = 0;
@@ -10800,7 +10800,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
     attr = GetBattleSpritePriorityFlags(p->y);
 
     if (work->scaleX == 0x100 && work->scaleY == 0x100) {
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
@@ -10814,7 +10814,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
             }
         }
     } else {
-        if (p->flags & 4) {
+        if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sx = gBtlWork->scale * work->scaleX >> 8;
             sy = gBtlWork->scale * work->scaleY >> 8;
         } else {

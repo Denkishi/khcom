@@ -17,10 +17,10 @@ void HumInit(HumWork* work, const HumDef* def) {
     actor->attackRangeX = 0;
     actor->attackRangeY = 0;
     actor->cardInterval = 1;
-    actor->flags |= 0x40000000000000;
+    actor->flags |= BTLOBJ_FLAG_HUM_BOSS;
 
     if (gBtlWork->actor->x < actor->x) {
-        actor->flags |= 4;
+        actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
     }
 
     work->def = def;
@@ -51,7 +51,7 @@ void HumInit(HumWork* work, const HumDef* def) {
     gRikuBtlWork->actor = actor;
     gBtlWork->actor3 = actor;
     actor->btl = gRikuBtlWork;
-    actor->flags |= 0x24000000000;
+    actor->flags |= (BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_CONFUSE);
 }
 
 void HumSubInit(HumWork* work, HumSub* sub, const HumSubDef* def) {
@@ -199,15 +199,15 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer = 0;
 
             if (actor->x < x) {
-                if (actor->flags & 4) {
+                if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 3 == 0) {
-                        actor->flags &= ~4;
+                        actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
                     }
                 }
             } else {
-                if (!(actor->flags & 4)) {
+                if (!(actor->flags & BTLOBJ_FLAG_FACING_LEFT)) {
                     if (GetRandom() % 3 == 0) {
-                        actor->flags |= 4;
+                        actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
                     }
                 }
             }
@@ -226,7 +226,7 @@ s32 HumUpdate(HumWork* work) {
         if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             ColliderSetDisabled(&actor->collider, 1);
-            actor->flags |= 0x100;
+            actor->flags |= BTLOBJ_FLAG_INTANGIBLE;
             work->anim.frame = 0;
             work->anim.timer = 0;
             work->vz = 0x400;
@@ -263,7 +263,7 @@ s32 HumUpdate(HumWork* work) {
         ApproachValueHalfSteps(&work->scaleY, 0x100, work->steps--);
 
         if (work->steps <= 0) {
-            actor->flags &= ~0x100;
+            actor->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(actor);
             work->state = 0;
             work->stateTimer = 0;
@@ -277,8 +277,8 @@ s32 HumUpdate(HumWork* work) {
             work->stateTimer++;
         }
         if (AnimIsFinished(&work->anim)) {
-            actor->flags &= ~0x80;
-            actor->flags &= ~0x2000;
+            actor->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
+            actor->flags &= ~BTLOBJ_FLAG_HURT;
         }
         if (GetRandom() % 3 == 0) {
             actor->badStatusTimer -= 6;

@@ -29,7 +29,7 @@ void HumDrawSub(HumWork* p, HumSub* s) {
     c = &p->actor;
     attr = GetBattleSpritePriorityFlags(s->y);
 
-    if (c->flags & 4) {
+    if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sy = gBtlWork->scale;
         sx = sy;
     } else {
@@ -81,7 +81,7 @@ void HumDraw(HumWork* work) {
     WorldToScreen(&x, &y, c->x, c->y, c->z);
 
     if (work->scaleX == 0x100 && work->scaleY == 0x100) {
-        if (c->flags & 4) {
+        if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sy = gBtlWork->scale;
             sx = sy;
         } else {
@@ -95,7 +95,7 @@ void HumDraw(HumWork* work) {
             }
         }
     } else {
-        if (c->flags & 4) {
+        if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
             sx = (gBtlWork->scale * work->scaleX >> 8);
             g = gBtlWork->scale;
             sy = g * work->scaleY >> 8;
@@ -169,7 +169,7 @@ void HandleRikuAiCardInput(void) {
         RequestSwitchRikuCardList();
     }
 
-    if (c->flags & 0x200) {
+    if (c->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
 
@@ -185,7 +185,7 @@ void HandleRikuAiCardInput(void) {
         return;
     }
 
-    if (c->flags & 2) {
+    if (c->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
 
@@ -213,7 +213,7 @@ void eu_08013190(void) {
 
     keys = gBtlWork->rikuKeys;
     gBtlWork->rikuKeys = 0;
-    if (c->flags & 0x200) {
+    if (c->flags & BTLOBJ_FLAG_CARD_USE_BLOCKED) {
         return;
     }
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
@@ -225,7 +225,7 @@ void eu_08013190(void) {
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
         return;
     }
-    if (c->flags & 2) {
+    if (c->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
     if (keys & 0x20) {
@@ -240,9 +240,9 @@ void HumFaceTarget(HumWork* p, u16 n) {
 
     if (GetRandom() % n == 0) {
         if (p->actor.x > v) {
-            p->actor.flags |= 4;
+            p->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            p->actor.flags &= ~4;
+            p->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
     }
 }
@@ -280,7 +280,7 @@ u8 HumIsTargetInReach(HumWork* p, s16 a, u16 b, u16 r) {
         return 0;
     }
 
-    if (c->flags & 4) {
+    if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
         t = c->x - (a << 8);
         bb = b << 8;
 
@@ -335,7 +335,7 @@ u8 HumIsInPlayerReach(HumWork* p, s16 a, u16 b, u16 r) {
         return 0;
     }
 
-    if (o->flags & 4) {
+    if (o->flags & BTLOBJ_FLAG_FACING_LEFT) {
         t = v0 - (a << 8);
         bb = b << 8;
 

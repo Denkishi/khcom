@@ -197,7 +197,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     SetBattleBounds(128, 368, 576, 632);
     InitEnemyBtlObj(&work->actor, &sBosBoogieEmyKind, 0x15000, 0x22800, -0x2000);
     work->actor.groundZ = -0x2000;
-    work->actor.flags |= 4;
+    work->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
     SetBtlObjUnhittable(&work->actor, 1);
     work->vx = 0;
     work->vy = 0;
@@ -389,17 +389,17 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         if ((random & 255) == 0 && work->cardRequested == 0) {
             work->state = 0;
             work->timer = 0;
-        } else if (a->flags & 4) {
+        } else if (a->flags & BTLOBJ_FLAG_FACING_LEFT) {
             a->x -= 256;
             if (a->x <= 0xA000) {
                 a->x = 0xA000;
-                a->flags &= ~4ULL;
+                a->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             }
         } else {
             a->x += 256;
             if (a->x >= 0x15000) {
                 a->x = 0x15000;
-                a->flags |= 4;
+                a->flags |= BTLOBJ_FLAG_FACING_LEFT;
             }
         }
         break;
@@ -515,7 +515,7 @@ void task_bos_boogie_2(BoogieWork* work) {
     a = &work->actor;
     f = GetBattleSpritePriorityFlags(a->y);
 
-    if (!(a->flags & 4)) {
+    if (!(a->flags & BTLOBJ_FLAG_FACING_LEFT)) {
         f |= 1;
     }
 
@@ -543,7 +543,7 @@ void BosBoogieRemoveOtherEnemies(void) {
     t = ListPoolFirst(&gBtlWork->pool);
     while (t != NULL) {
         if (t->kind != 39) {
-            t->flags |= 0x40;
+            t->flags |= BTLOBJ_FLAG_WARP_PENDING;
             t->hitFlags = 0;
         }
         t = ListPoolNext(&t->node);

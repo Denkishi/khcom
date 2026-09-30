@@ -5408,10 +5408,10 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     p = &work->body;
     InitEnemyBtlObj(p, &sBosPcEmyKind, work->x, work->y, work->z);
     work->body.flags |= 0x400;
-    work->body.flags |= 4;
+    work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
     q = &work->body2;
     InitEnemyBtlObj(q, &sBosPcEmyKind, work->x, work->y, work->z - 0x1000);
-    work->body2.flags |= 4;
+    work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
     SetBtlObjParent(q, p);
     ColliderInit(&work->collider, 8, 32, 56);
     LoadBgMap(1, gUnk_09D34A74, 0x1000);
@@ -5817,7 +5817,7 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
         gBtlWork->flags &= ~0x100000;
     }
     pos = gBtlWork->actor;
-    if ((pos->flags & 0x800000) == 0) {
+    if ((pos->flags & BTLOBJ_FLAG_IGNORE_BOUNDS) == 0) {
         if (pos->x > work->actorMaxX) {
             pos->x = work->actorMaxX;
         }

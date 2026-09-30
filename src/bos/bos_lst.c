@@ -206,13 +206,13 @@ void BosLstSetFacing(BosLstWork* work, s16 a) {
             f = 0;
         }
         if (f == 1) {
-            work->body.flags |= 4;
-            work->sub[0].body.flags |= 4;
-            work->sub[1].body.flags |= 4;
+            work->body.flags |= BTLOBJ_FLAG_FACING_LEFT;
+            work->sub[0].body.flags |= BTLOBJ_FLAG_FACING_LEFT;
+            work->sub[1].body.flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            work->body.flags &= ~4;
-            work->sub[0].body.flags &= ~4;
-            work->sub[1].body.flags &= ~4;
+            work->body.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            work->sub[0].body.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            work->sub[1].body.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
     }
 }
@@ -2055,7 +2055,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
     work->hpRatio = (work->body.hp * 255) / work->body.maxHp;
     gp = &gBtlWork;
     pos = (*gp)->actor;
-    pos->flags |= 0x2000000;
+    pos->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
     (*gp)->bossPriorityOffset = -16;
     if (work->playerOnPlatform == 1) {
         y = BosLstGetPlatformY(work);

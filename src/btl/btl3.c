@@ -117,7 +117,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
                 work->y = obj->y;
                 work->z = 0;
 
-                if (obj->flags & 4) {
+                if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 5 != 0) {
                         work->flags |= 1;
                     } else {
@@ -406,7 +406,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             if (ApplyAttackBox(work->attack, work->x, work->y, work->z, 8, 8, 8) != 0) {
                 m4aSongNumStart(work->song);
 
-                if (obj->flags & 2) {
+                if (obj->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
                     work->steps = 20;
                 }
             }
@@ -726,7 +726,7 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     p = ListPoolFirst(&gBtlWork->pool);
 
     while (p != NULL) {
-        if (!(p->flags & 0x01000000)) {
+        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             list[count] = p;
             count++;
             if (count > 9) {
@@ -769,7 +769,7 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     p = ListPoolFirst(&gBtlWork->pool);
 
     while (p != NULL) {
-        if (!(p->flags & 0x01000000)) {
+        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
             d = work->body.z - p->z;
             if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {
                 list[count] = p;

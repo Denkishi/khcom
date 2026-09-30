@@ -220,7 +220,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
     BosPcFldLoadPaletteCycle(work);
     pos = gBtlWork->actor;
     if (pos->z >= -0x100) {
-        if ((pos->flags & 0x80) == 0) {
+        if ((pos->flags & BTLOBJ_FLAG_HIT_LOCKED) == 0) {
             if (work->tiles != NULL) {
                 if (work->palette != NULL) {
                     x = 0x17000;

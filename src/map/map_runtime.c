@@ -60,7 +60,7 @@ void MarkEventRoomDone(MapEventDoor* p) {
 }
 
 void SetHallDefaultSpawn(void) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gGameState.floor) {
         case 1:
         case 5:
@@ -83,12 +83,12 @@ void UpdateWorldFriendFlags(void) {
 
     if (gGameState.floor != GetProgressFloor() || gMapFloorState.room == 0xFE
             || gMapFloorState.room == 0xFD) {
-        if ((gGameState.flags & 0x80) == 0) {
-            gGameState.flags |= 0x80;
+        if ((gGameState.flags & GAME_FLAG_FRIENDS_SAVED) == 0) {
+            gGameState.flags |= GAME_FLAG_FRIENDS_SAVED;
             gGameState.progression.savedFriendFlags = gGameState.progression.friendFlags & 0x7C;
         }
 
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             return;
         }
 
@@ -127,18 +127,18 @@ void UpdateWorldFriendFlags(void) {
             break;
         }
     } else {
-        if ((gGameState.flags & 0x80) == 0) {
+        if ((gGameState.flags & GAME_FLAG_FRIENDS_SAVED) == 0) {
             return;
         }
 
-        gGameState.flags &= ~0x80;
+        gGameState.flags &= ~GAME_FLAG_FRIENDS_SAVED;
         t = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
         gGameState.progression.friendFlags = t;
     }
 }
 
 MapFloorDef* GetMapFloorDef(u8 a) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return &gUnk_0984CBD0[a];
     }
 
@@ -146,7 +146,7 @@ MapFloorDef* GetMapFloorDef(u8 a) {
 }
 
 u8* GetMapRoomLinks(u8 a) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return gUnk_0984CBD0[gGameState.floor].links + a * 4;
     }
 
@@ -154,7 +154,7 @@ u8* GetMapRoomLinks(u8 a) {
 }
 
 MapEventDoor* GetMapEventDoor(u8 a) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return gUnk_0984CBD0[gGameState.floor].eventDoors + a;
     }
 
@@ -249,10 +249,10 @@ void UpdateGameWorld(void) {
         break;
     }
 
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         InitRikuDeckForWorld(gGameState.world);
 
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             t = gGameState.progression.friendFlags & 0xFF80;
             gGameState.progression.friendFlags = t;
             return;
@@ -292,7 +292,7 @@ void UpdateGameWorld(void) {
     }
 }
 void SetWorldJiminyFlags(void) {
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
             SetJiminyFlag(57);
@@ -395,7 +395,7 @@ void SetWorldJiminyFlags(void) {
     }
 }
 void SetFloorJiminyFlags(void) {
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.floor) {
         case 0:
             SetJiminyFlag(1);
@@ -460,7 +460,7 @@ void AdvanceFloorStory(void) {
         t = gMapFloorState.flags | 2;
         gMapFloorState.flags = t;
 
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             if (gGameState.floor == 0x0A) {
                 gMapFloorState.progress++;
             }
@@ -604,7 +604,7 @@ void SetCardlessRoomType(u8 a) {
 }
 
 u8 GetRandomRoomType(void) {
-    if ((gGameState.flags & 8) == 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         return GetRandom() % 21 + 1;
     }
 
@@ -669,7 +669,7 @@ void SetCurrentMapRoom(u8 a, u8 b) {
 }
 
 u8 GetProgressFloor(void) {
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         if (gMapFloorState.progress > 0x16) {
             return 11;
         }
@@ -788,7 +788,7 @@ void EnterExitHall(void) {
     if ((gMapFloorState.flags & 4) != 0) {
         v = 0xFF;
     } else {
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             v = sRikuWorldExitEvents[gGameState.floor];
         } else {
             v = sSoraWorldExitEvents[gGameState.floor];
@@ -800,7 +800,7 @@ void EnterExitHall(void) {
         gGameState.battleStage = 12;
         gGameState.roomEffect = 0;
 
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             InitRikuDeckForWorld(0);
         }
 
@@ -939,7 +939,7 @@ void ResetMapFloors(void) {
 
     gMapFloorState.progress = 0;
 
-    if ((gGameState.flags & 8) == 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         InitSoraDecks();
     }
 
@@ -982,7 +982,7 @@ u8 GetMapWalkOutMode(void) {
             return 2;
         }
 
-        if ((gGameState.flags & 8) == 0 && gGameState.floor == 12) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0 && gGameState.floor == 12) {
             SetFloorWorld(12);
             return 2;
         }

@@ -1539,7 +1539,7 @@ void mode_jiminy_0(void) {
     gJiminyWork->cursor = 0;
     gJiminyWork->cursorRow = 0;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
         gJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, 0x20);
         AnimInit(&gJiminyWork->anim, gTalk2700Anims, gTalk2700Frames);
@@ -1588,7 +1588,7 @@ void mode_jiminy_0(void) {
         gJiminyWork->pairs[j].cursorRow = 0;
     }
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         gJiminyWork->entry = 14;
         e = sJiminyEntries;
         e += 14;
@@ -1707,7 +1707,7 @@ void mode_jiminy_1(void) {
         gJiminyWork->cursorRow = p->cursorRow;
 
         if (gJiminyWork->entry == 0 || gJiminyWork->entry == 14) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 LoadBgMap(1, gUnk_08F62B84, 0x800);
             } else {
                 LoadBgMap(1, e->map, 0x800);
@@ -1860,7 +1860,7 @@ void mode_jiminy_1(void) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C76, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
             } else {
@@ -1874,7 +1874,7 @@ void mode_jiminy_1(void) {
                 gJiminyWork->palette, 0, 0, 1);
             break;
         case 1:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A538, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
             } else {
@@ -1888,7 +1888,7 @@ void mode_jiminy_1(void) {
                 gJiminyWork->palette, 0, 0, 1);
             break;
         case 4:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A564, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
             } else {
@@ -1902,7 +1902,7 @@ void mode_jiminy_1(void) {
                 gJiminyWork->palette, 0, 0, 1);
             break;
         case 3:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A590, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
             } else {
@@ -1917,7 +1917,7 @@ void mode_jiminy_1(void) {
             break;
         case 2:
         default:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5C2, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
             } else {
@@ -1932,7 +1932,7 @@ void mode_jiminy_1(void) {
             break;
         }
 #else
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C76, gJiminyWork->tiles,
                 gJiminyWork->palette, 0, 0, 0);
         } else {

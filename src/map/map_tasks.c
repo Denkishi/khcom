@@ -3425,7 +3425,7 @@ void Task_MapGmk01_3(MapGmk01Work* w) {
 void MapGmkBarrelDropPrizes(FldPos* p) {
     u16 r;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         r = GetRandom() % 10000;
         if (r < 6000) {
             CreateMapPrizeTasks(0, 5, p->x, p->y, p->z);
@@ -4440,7 +4440,7 @@ void Task_MapSpark_0(MapSparkWork* w, FldObj* obj) {
     a = &w->anim;
     AnimInit(a, gUnk_09EF8CC0, gUnk_09EF8CA0);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         AnimStart(a, 1, 1);
     } else {
         AnimStart(a, 0, 1);

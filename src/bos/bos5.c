@@ -5145,7 +5145,7 @@ void mode_worldselect_1(void) {
         if (gWorldselectTimer <= 0) {
             a = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].world;
 
-            if ((gGameState.flags & 8) == 0) {
+            if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].eventId;
             } else {
                 b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].rikuEventId;
@@ -5158,7 +5158,7 @@ void mode_worldselect_1(void) {
             if (b >= 0) {
                 RequestEventMode(b);
             } else {
-                if (gGameState.flags & 8) {
+                if (gGameState.flags & GAME_FLAG_RIKU) {
                     AddMapCard(221);
                 }
 

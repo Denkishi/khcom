@@ -112,7 +112,7 @@ void Level_Up_0(LevelUpWork* w) {
     FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[7])->index + 16, 1);
     w->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
     TaskPoolInit(&w->pool, 10);
-    if (!(gGameState.flags & 8)) {
+    if (!(gGameState.flags & GAME_FLAG_RIKU)) {
         w->tiles4 = AllocObjTiles(0x500, 0);
         w->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(w->palette5, gSoraPalette);
@@ -319,7 +319,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     break;
                 }
 #endif
-                if (!(gGameState.flags & 8)) {
+                if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                     LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                 } else {
                     LoadLevelUpRikuBgTiles();
@@ -353,7 +353,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         break;
                     }
 #endif
-                    if (!(gGameState.flags & 8)) {
+                    if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
@@ -385,7 +385,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         break;
                     }
 #endif
-                    if (!(gGameState.flags & 8)) {
+                    if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
@@ -408,7 +408,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
     if (w->loaded[0] == 0) {
         w->timer++;
         if (w->timer > 7) {
-            if (!(gGameState.flags & 8)) {
+            if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
@@ -551,7 +551,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         LoadBgMap(1, gUnk_095112B8, mapSize);
                     }
                     w->state = 1;
-                    if (!(gGameState.flags & 8)) {
+                    if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -782,7 +782,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
         w->cursorSteps = 16;
         w->x3 = 136;
 
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             SetObjTileSource(w->tiles4, gSor1ff00Tiles);
             AnimInit(&w->anim2, gSor1ff00Anims, gSor1ff00Frames);
             AnimStart(&w->anim2, 1, 0);
@@ -870,7 +870,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                 break;
             }
             case 1:
-                if (!(gGameState.flags & 8)) {
+                if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                     s32 amount = LevelUpCp();
                     StatIncreaseDisplayArgs args;
                     w->messageActive = 1;
@@ -890,7 +890,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                 }
                 break;
             case 2:
-                if (!(gGameState.flags & 8)) {
+                if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                     w->messageActive = 1;
                     TaskCreate(&w->pool, &gTaskDescStockInfo, &w->messageActive);
                 } else {
@@ -1141,7 +1141,7 @@ void Level_Up_2(LevelUpWork* w) {
             DrawSprite(192, 82, gUnk_09EEA19C[0], w->tiles3, w->palette4, 0, 0, 10);
         }
 #endif
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             DrawLevelUpStatDigits(w->statsOffsetX + 214, 17, w->unk_000[6], w->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
@@ -1373,7 +1373,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             w->tiles5[1] = AllocSpriteFrameTiles(0x500);
             w->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-            if (!(gGameState.flags & 8)) {
+            if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
@@ -1486,7 +1486,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             LoadBgMap(1, gUnk_095112B8, mapSize);
         }
         w->state = 1;
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
@@ -1728,7 +1728,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
             w->x3 = 132;
             w->y3 = sLevelUpCursorY[0];
 
-            if ((gGameState.flags & 8) == 0) {
+            if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 SetObjTileSource(w->tiles4, gSor1ll51Tiles);
                 AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
                 AnimStart(&w->anim2, 0, 1);

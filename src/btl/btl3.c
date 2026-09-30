@@ -98,7 +98,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
             work->flags |= 2;
 
             if (gGameState.roomEffect != 4) {
-                gGameState.flags &= ~4;
+                gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
             }
 
             if (work->entryIndex >= work->list->count) {

@@ -7067,7 +7067,7 @@ void EndRikuDarkMode(BtlRikuWork* work) {
 }
 
 void AddDarkPoints(s16 a) {
-    if (gGameState.flags & 0x100) {
+    if (gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) {
         return;
     }
     gBtlWork->darkPoints += a;

@@ -408,7 +408,7 @@ void ClearUsedCardSlots(CardBattleWork* w, u8 b) {
 void ResetCardSlotsForReload(CardBattleWork* w, u8 n) {
     u8 i;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         for (i = 0; i < w->slotCounts[n]; i++) {
             if (w->slots[n][i].stocked == 0) {
                 w->slots[n][i].used = 0;
@@ -900,7 +900,7 @@ void TrySoraCardBreak(CardBattleWork* w) {
         gCardBattleState->activeValue = gSoraSelectedCard->value;
         gBtlWork->soraOwnsPlay = 1;
 
-        if (!(gGameState.flags & 0x100) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & 0x800000000000)) {
+        if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & 0x800000000000)) {
             gCardBattleState->unk_0EE = 1;
         }
     } else {
@@ -1673,7 +1673,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
             }
         }
 
-        if (!(gGameState.flags & 0x100) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & 0x800000000000)) {
+        if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & 0x800000000000)) {
             gCardBattleState->unk_0EE = 1;
         }
 
@@ -2459,7 +2459,7 @@ void RemoveItemCards(CardBattleWork* w) {
 }
 
 u8 AddBreakDarkPoints(void) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (!(gBtlWork->flags & 0x800000000000)) {
             gBtlWork->darkPoints += gBtlWork->breakDifference;
         } else if (gBtlWork->breakDifference < 0) {
@@ -3812,7 +3812,7 @@ void card_reload_2(CardDisplayWork* p) {
         DrawSprite(p->x >> 8, y, gCardBacks[3].gfx2, p->tiles2,
                    gCardBattleState->palette, 0, attr, p->priority);
 
-        if (!(gGameState.flags & 8) && w->gfx3 != NULL) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU) && w->gfx3 != NULL) {
             DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
                        gCardBattleState->palette, 0, 0x410, (u16)(p->priority - 2));
         }

@@ -967,7 +967,7 @@ s16 ObtainCard(u16 cardId) {
 }
 
 void SetRikuCardKindObtained(u16 a) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (a) {
         case 0x51:
             SetCardKindObtained(44);

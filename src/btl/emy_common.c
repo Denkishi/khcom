@@ -224,7 +224,7 @@ u8 _0800CBDC(EmyWork* work) {
 void EmyFinishSpawn(EmyWork* work) {
     BtlObj* actor = &work->actor;
 
-    if (gGameState.flags & 4) {
+    if (gGameState.flags & GAME_FLAG_FIRST_STRIKE) {
         actor->flags |= 0x4002;
 
         if (gGameState.roomEffect == 3) {

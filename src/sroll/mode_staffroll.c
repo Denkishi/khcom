@@ -3144,7 +3144,7 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
 
     result = 1;
 
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         w->scene = sStaffRollRikuScenes;
     } else {
         w->scene = sStaffRollSoraScenes;
@@ -3551,7 +3551,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
             idx = t / STAFFROLL_SCRIPT_PERIOD;
 
             if (idx <= 16) {
-                if ((gGameState.flags & 8) != 0) {
+                if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
                     w->script = sStaffRollRikuScripts[idx];
                 } else {
                     w->script = sStaffRollSoraScripts[idx];
@@ -3688,7 +3688,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
             w->imageTimer++;
         }
         if (FadeIsActive() == 0) {
-            if ((gGameState.flags & 8) != 0) {
+            if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
                 w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
             } else {
                 w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)0);
@@ -3699,7 +3699,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
         break;
     case 2:
         w->imageTimer++;
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             if (w->imageTimer >= STAFFROLL_HOLD_FRAMES) {
                 w->imageState = 3;
                 w->imageTimer = 0;
@@ -4031,7 +4031,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
         SetBgScroll(1, 0, 0);
         SetBgColorMode(1, 0x80);
 
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
@@ -4244,7 +4244,7 @@ void mode_StaffRoll_1(void) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        if ((gGameState.flags & 8) != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
             w->phase = 7;
             w->imageState = 0;
         } else {

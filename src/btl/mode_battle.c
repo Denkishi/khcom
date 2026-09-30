@@ -179,7 +179,7 @@ void mode_battle_0(u32 mode) {
     BtlWorkInit();
     AllocBattleTiles();
     gBtlWork->battleId = mode;
-    gGameState.flags &= ~0x40;
+    gGameState.flags &= ~GAME_FLAG_ESCAPED;
 
     switch (mode) {
     case 0x94 ... 0x9C:
@@ -358,7 +358,7 @@ void mode_battle_0(u32 mode) {
     BgFxInit(0x80, gBtlWork->bg);
     ColliderPoolsInit();
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlRiku, 0);
     } else {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, 0);
@@ -555,7 +555,7 @@ void mode_battle_1(void) {
 }
 
 void mode_battle_2(void) {
-    gGameState.flags &= ~4;
+    gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
     BgFxFree();
     TaskPoolDestroy(&gBtlWork->taskPools[2]);
     TaskPoolDestroy(&gBtlWork->taskPools[1]);

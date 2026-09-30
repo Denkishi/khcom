@@ -87,7 +87,7 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
     a.x = p->x;
     a.y = p->y;
     a.z = p->z - ((p->height / 2) << 8);
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (b == 9) {
             a.kind = abs(gBtlWork->breakDifference);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &a);
@@ -169,7 +169,7 @@ void HandleSoraCardInput(void) {
     }
 
     if (gBtlWork->flags & 0x10000000000000) {
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             if (GetKeysHeld() & A_BUTTON) {
                 if (!(GetKeysHeld() & (L_BUTTON | R_BUTTON))) {
                     SetSoraReloadCharging();
@@ -368,7 +368,7 @@ void HandleTutorialCardInput(void) {
 
     if (!(gBtlWork->flags & 0x2000000000)) {
         if (gBtlWork->flags & 0x10000000000000) {
-            if (!(gGameState.flags & 8)) {
+            if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 if (GetKeysHeld() & A_BUTTON) {
                     if (!(GetKeysHeld() & (L_BUTTON | R_BUTTON))) {
                         SetSoraReloadCharging();
@@ -502,7 +502,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
         return;
     }
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (flags & 0x80) {
             SetJiminyFlag(244);
             CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
@@ -1433,7 +1433,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
             }
             break;
         case EMY_ID_37:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 p->maxHp = 300;
                 p->attack = 4;
                 p->exp = 150;
@@ -1673,7 +1673,7 @@ void DropEnemyPrizes(BtlObj* p) {
             }
         }
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             flag = 0;
         }
 
@@ -1713,7 +1713,7 @@ void DropEnemyPrizes(BtlObj* p) {
 void TryDropPremireCard(BtlObj* p) {
     BtlPrizeSrc a;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return;
     }
     if (IsActiveDeckAllPremium()) {
@@ -1957,7 +1957,7 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
 }
 
 void AllocBattleTiles(void) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         gBtlWork->tiles = AllocObjTiles(0x840, 0);
     } else {
         gBtlWork->tiles = AllocObjTiles(0xC80, 0);
@@ -1972,7 +1972,7 @@ void AllocBattleTiles(void) {
 
 void ReleaseBattleTiles(void) {
     if (gBtlWork->flags & 0x1000000000000) {
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             ReleaseObjTiles(gBtlWork->tiles);
         } else {
             ReleaseObjTiles(gBtlWork->tiles);
@@ -2061,7 +2061,7 @@ void ExitBattle(void) {
         ModeRequest(&gModeChkbtl, 0);
         return;
     }
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gBtlWork->battleId) {
         case 166:
 #ifdef VERSION_EU
@@ -2106,7 +2106,7 @@ void ExitBattle(void) {
 #endif
             return;
         case 177:
-            gGameState.flags |= 0x800;
+            gGameState.flags |= GAME_FLAG_RIKU_CLEAR;
             SaveWriteHeader(-1);
 #ifdef VERSION_EU
             RequestEventMode(192);
@@ -2178,7 +2178,7 @@ void ExitBattle(void) {
             RequestEventMode(93);
             return;
         case 156:
-            gGameState.flags |= 0x20;
+            gGameState.flags |= GAME_FLAG_SORA_CLEAR;
             SaveWriteHeader(-1);
             RequestEventMode(71);
             return;
@@ -2458,8 +2458,8 @@ void InitGameState(void) {
     CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
 
     if (gDebugFlags & 0x800) {
-        gGameState.flags |= 8;
-        gGameState.flags |= 0x20;
+        gGameState.flags |= GAME_FLAG_RIKU;
+        gGameState.flags |= GAME_FLAG_SORA_CLEAR;
     }
     gGameState.world = WORLD_WONDERLAND;
     gGameState.battleStage = 1;

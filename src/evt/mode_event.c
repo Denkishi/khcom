@@ -683,7 +683,7 @@ void func_08061FC8(void) {
         gGameState.progression.friendFlags = 128;
         break;
     case MSG_CODE(156):
-        gGameState.flags &= ~0x100;
+        gGameState.flags &= ~GAME_FLAG_DARK_POINTS_LOCKED;
         LearnStock(66);
         LearnStock(67);
         LearnStock(68);
@@ -897,7 +897,7 @@ void SaveAfterEvent(void) {
     case MSG_SAVE_ID_LO + 3:
     case MSG_SAVE_ID_LO + 4:
     case MSG_SAVE_ID_LO + 5:
-        if (gGameState.flags & 0x10) {
+        if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
             SaveWriteFileLarge(1);
         } else {
             SaveWriteFileLarge(0);

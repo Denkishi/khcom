@@ -77,7 +77,7 @@ void TitleExitToChoice(void) {
 }
 
 void TitleShowLogo(u16 a) {
-    if ((gGameState.flags & 0x200) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU_TITLE) != 0) {
         LoadBgPalette(1, gUnk_0984A818, 0x200);
         TitleCopyToPaletteBuffer(0, gUnk_0984A818, 0x200);
     } else {
@@ -140,7 +140,7 @@ void mode_title_0(void) {
     SetupBg(0, 0, 0x1D, 0);
     SetBgPriority(0, 3);
 
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
         eu_080059F4(0, gUnk_09840798);
 #else
@@ -157,7 +157,7 @@ void mode_title_0(void) {
     SetupBg(1, 0, 0x1E, 0);
     SetBgPriority(1, 3);
 
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
         eu_080059D4(1, gUnk_097D3658);
         eu_080059F4(1, gUnk_09840F98);
@@ -213,7 +213,7 @@ void mode_title_1(void) {
         gTitleTimer = 100;
         break;
     case 1:
-        if (gGameState.flags & 0x200) {
+        if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
             ApproachValue(&gTitleBgX, 0x3F3F, gTitleTimer);
         } else {
             ApproachValue(&gTitleBgX, 0xB0C1, gTitleTimer);
@@ -292,7 +292,7 @@ void mode_title_1(void) {
             gTitleMenuChoice = 3;
         } else if (SaveRepairFileLarge(0) == 2 || SaveRepairFileLarge(1) == 2) {
             gTitleMenuChoice = 1;
-        } else if ((gGameState.flags & 0x20) &&
+        } else if ((gGameState.flags & GAME_FLAG_SORA_CLEAR) &&
                    (SaveRepairFileSmall(0) == 2 || SaveRepairFileSmall(1) == 2)) {
             gTitleMenuChoice = 1;
         } else {
@@ -411,7 +411,7 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->sprites[0].tiles = LoadObjTiles(gUnk_0976E9F4, 0x240);
     work->sprites[0].gfx = gUnk_09EF659C;
 
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
         work->sprites[1].tiles = LoadObjTiles(gUnk_09776076, 0x43C0);
         work->sprites[1].gfx = gUnk_09EF669C;
         work->sprites[1].palette = LoadObjPalette(gUnk_0984AA18, 0x20);

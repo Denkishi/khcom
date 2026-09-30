@@ -73,8 +73,8 @@ void SetupRikuNewGame(void) {
     gGameState.progression.unk_82 = 0xE7FF;
     gGameState.progression.friendFlags = 0x80;
     InitRikuDeckForWorld(0);
-    gGameState.flags |= 8;
-    gGameState.flags |= 0x100;
+    gGameState.flags |= GAME_FLAG_RIKU;
+    gGameState.flags |= GAME_FLAG_DARK_POINTS_LOCKED;
     SetJiminyFlag(0);
     SetJiminyFlag(0x15);
     SetJiminyFlag(0xED);
@@ -87,7 +87,7 @@ void SetupRikuNewGame(void) {
 void SetupSoraNewGame(void) {
     gGameState.progression.friendFlags = 3;
     InitSoraDecks();
-    gGameState.flags &= ~8;
+    gGameState.flags &= ~GAME_FLAG_RIKU;
     SetJiminyFlag(0x11);
     SetJiminyFlag(0x12);
     SetJiminyFlag(0x13);

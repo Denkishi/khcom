@@ -144,7 +144,7 @@ void MapChkSetParamToggle(u8* p, u8 a) {
 }
 
 void MapChkSetFloorProgress(u8 a, u8 b) {
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         if (b != 0) {
             switch (a) {
             case 0:
@@ -563,7 +563,7 @@ void Mode_MapChk_1(void) {
     if ((GetKeysPressed() & (A_BUTTON | START_BUTTON)) != 0) {
         func_08085FB0();
 
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             InitSoraDecks();
         }
 

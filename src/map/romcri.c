@@ -186,7 +186,7 @@ void task_romcri_eff2_0(RomcriEff2Work* work, s32 arg) {
     SetBgBlend(1, 16, 16);
     LoadBgTiles(1, gUnk_08EE3064, 0xA20);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (work->angle) {
         case 0x2D:
             SetBgScroll(1, (u16)-100, 4);

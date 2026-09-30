@@ -17,7 +17,7 @@ void Mode_Deck_0(void) {
     sModeDeckResult = 0;
     TaskPoolInit(&sModeDeckTasks, 1);
 
-    if ((gGameState.flags & 8) == 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         TaskCreate(&sModeDeckTasks, &gTaskDescDeckmenu2, &sModeDeckResult);
     } else {
         TaskCreate(&sModeDeckTasks, &gTaskDescDeckmenu2Riku, &sModeDeckResult);

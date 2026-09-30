@@ -314,20 +314,20 @@ u8 GetRandomBattleId(void) {
     const u8* q = gUnk_0984D134[gMapRoomState->roomType];
     u8 v = q[3] + GetRandom() % (q[4] - q[3] + 1);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return v + gRikuWorldBattleBase[gMapFloorState.world];
     }
     return v + gSoraWorldBattleBase[gMapFloorState.world];
 }
 
 void MapEnmStartBattle(MapEnmWork* p) {
-    gGameState.flags |= 2;
+    gGameState.flags |= GAME_FLAG_MAP_ENEMY_BATTLE;
     ColliderSetDisabled(&p->collider, 1);
     gMapRoomState->flags |= 2;
     gFieldState->flags |= 0x80;
     p->flags |= 4;
     if (p->flags & 0x40) {
-        gGameState.flags |= 4;
+        gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
     }
     if (p->flags & 0x100) {
         gMapRoomState->battleId = GetRandom() % 3 + 128;
@@ -358,7 +358,7 @@ s32 MapEnmCheckAttacked(MapEnmWork* p) {
         gMapRoomState->flags |= 4;
         TaskCreate(&p->tasks, &gTaskDescMapSpark, &p->obj);
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             m4aSongNumStart(SONG_SND_228);
         } else {
             m4aSongNumStart(SONG_SYS_FIELD_ATT00);
@@ -451,9 +451,9 @@ void MapEnmInitRoom(void) {
             TaskCreate(&gFieldState->tasks4, d->desc, &w);
             q = ListPoolNext(&q->node);
         }
-        if (gGameState.flags & 2) {
-            gGameState.flags &= ~2;
-            if ((gGameState.flags & 0x40) == 0) {
+        if (gGameState.flags & GAME_FLAG_MAP_ENEMY_BATTLE) {
+            gGameState.flags &= ~GAME_FLAG_MAP_ENEMY_BATTLE;
+            if ((gGameState.flags & GAME_FLAG_ESCAPED) == 0) {
                 e = GetMapFloorRoom(gMapFloorState.room);
                 if (e->enemiesLeft != 0) {
                     e->enemiesLeft--;
@@ -1580,7 +1580,7 @@ u16 MapGmkGetFreeTiles(void) {
 void CreateRandomMapPrizes(s32 a, s32 b, s32 c) {
     u16 r;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         r = GetRandom() % 10000;
         if (r < 2500) {
             CreateMapPrizeTasks(0, 2, a, b, c);
@@ -2139,7 +2139,7 @@ s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
 u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
     UnkStruct_080E8E24* q;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return 0;
     }
 
@@ -2245,7 +2245,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
         }
     }
 
-    if ((gGameState.flags & 0x800) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(16) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU_CLEAR) && gGameState.world == WORLD_CASTLE_OBLIVION && IsCardKindObtained(16) != 0) {
         e = &gPrzCardKinds[14];
 
         if (IsCardKindObtained(e->unk_00[0]) != 1) {
@@ -2752,7 +2752,7 @@ void MapFldStartBattle(void) {
     DrawMapField();
     if (FadeIsActive() == 0) {
         RequestFieldResume();
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.progression.unk_82 & 0x1000) {
                 ModeRequest(&gModeBattle, gMapRoomState->battleId);
             } else {
@@ -2919,7 +2919,7 @@ void MapFixSetUpdateAndRun(ModeFunc a) {
 }
 
 MapFixedDef* GetMapFixedDef(void) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (gMapFloorState.room == 0xFD) {
             return gMapFixedDefs[2];
         }
@@ -2949,7 +2949,7 @@ void MapFixCreateCharaTasks(void) {
     if (gMapFloorState.room == 0xFC) {
         return;
     }
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.progress) {
         case 20:
         case 22:
@@ -2997,7 +2997,7 @@ u8 GetWorldEntryEventId(void) {
     if (gMapFloorState.flags & 2) {
         return 0xFF;
     }
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.world) {
         case 8:
 #ifdef VERSION_EU
@@ -3033,7 +3033,7 @@ u8 GetFloorEventId(void) {
     if (gMapFloorState.flags & 1) {
         return 0xFF;
     }
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return gRikuFloorEvents[gGameState.floor];
     }
     return gSoraFloorEvents[gGameState.floor];
@@ -3090,7 +3090,7 @@ void func_080EA5CC(void) {
     }
     if (gMapRoomState->flags & 0x200) {
         if (gGameState.floor == GetProgressFloor()) {
-            gGameState.flags &= ~0x80;
+            gGameState.flags &= ~GAME_FLAG_FRIENDS_SAVED;
             gGameState.progression.friendFlags = (gGameState.progression.friendFlags & 0xFF83) | gGameState.progression.savedFriendFlags;
         }
         if (gMapFloorState.world == 0) {
@@ -3235,7 +3235,7 @@ void Mode_MapFix_0(void) {
     TaskCreate(&gFieldState->tasks, &gTaskDescMapFix, p);
     MapFixCreateGimmicks(p->gimmicks);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, 0);
     } else {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldSora, 0);
@@ -3304,13 +3304,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     switch (gLanguage) {
     case 0:
         if (b != 0) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnk_09963D64[c];
             } else {
                 src = gUnkEu_09955250[c];
             }
         } else {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnk_09964EE4[c];
             } else {
                 src = gUnk_09962BE4[c];
@@ -3319,13 +3319,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         break;
     case 1:
         if (b != 0) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_0995BB50[c];
             } else {
                 src = gUnkEu_09959850[c];
             }
         } else {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_0995CCD0[c];
             } else {
                 src = gUnkEu_0995A9D0[c];
@@ -3334,13 +3334,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         break;
     case 4:
         if (b != 0) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_09960150[c];
             } else {
                 src = gUnkEu_0995DE50[c];
             }
         } else {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_099612D0[c];
             } else {
                 src = gUnkEu_0995EFD0[c];
@@ -3349,13 +3349,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         break;
     case 3:
         if (b != 0) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_09964750[c];
             } else {
                 src = gUnkEu_09962450[c];
             }
         } else {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_099658D0[c];
             } else {
                 src = gUnkEu_099635D0[c];
@@ -3365,13 +3365,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case 2:
     default:
         if (b != 0) {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_09968D50[c];
             } else {
                 src = gUnkEu_09966A50[c];
             }
         } else {
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gUnkEu_09969ED0[c];
             } else {
                 src = gUnkEu_09967BD0[c];
@@ -3381,13 +3381,13 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     }
 #else
     if (b != 0) {
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnk_09963D64[c];
         } else {
             src = gUnk_09961A64[c];
         }
     } else {
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnk_09964EE4[c];
         } else {
             src = gUnk_09962BE4[c];
@@ -3586,10 +3586,10 @@ void NewGameSlotMenuInput(NewGameSlotMenuWork* w) {
 
         switch (w->selectedSlot) {
         case 0:
-            gGameState.flags &= ~0x10;
+            gGameState.flags &= ~GAME_FLAG_SECOND_FILE;
             break;
         case 1:
-            gGameState.flags |= 0x10;
+            gGameState.flags |= GAME_FLAG_SECOND_FILE;
             break;
         }
         m4aSongNumStart(SONG_SYS_SAVELOAD);
@@ -4140,20 +4140,20 @@ void LoadGameMenuInput(LoadGameMenuWork* work) {
         if ((u8)LoadGameMenuLoadFile(work->selectedSlot) != 0) {
             switch (work->selectedSlot) {
             case 0:
-                gGameState.flags &= ~8;
-                gGameState.flags &= ~0x10;
+                gGameState.flags &= ~GAME_FLAG_RIKU;
+                gGameState.flags &= ~GAME_FLAG_SECOND_FILE;
                 break;
             case 1:
-                gGameState.flags &= ~8;
-                gGameState.flags |= 0x10;
+                gGameState.flags &= ~GAME_FLAG_RIKU;
+                gGameState.flags |= GAME_FLAG_SECOND_FILE;
                 break;
             case 2:
-                gGameState.flags |= 8;
-                gGameState.flags &= ~0x10;
+                gGameState.flags |= GAME_FLAG_RIKU;
+                gGameState.flags &= ~GAME_FLAG_SECOND_FILE;
                 break;
             case 3:
-                gGameState.flags |= 8;
-                gGameState.flags |= 0x10;
+                gGameState.flags |= GAME_FLAG_RIKU;
+                gGameState.flags |= GAME_FLAG_SECOND_FILE;
                 break;
             }
             m4aSongNumStart(SONG_SYS_SAVELOAD);
@@ -4999,7 +4999,7 @@ s32 MapMenuOpen(MapMenuWork* w) {
     w->y = -0x800;
     w->y2 = 0xA000;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         w->tiles8 = AllocObjTiles(0x400, gRikuFf00Tiles);
     } else {
         w->tiles8 = AllocObjTiles(0x340, gSor1ff00Tiles);
@@ -5065,7 +5065,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
         MapMenuWriteDigits3(w->tiles5, 6, gGameState.progression.maxHp);
         MapMenuWriteDigits3(w->tiles5, 3, gGameState.hp);
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             MapMenuWriteDigits3(w->tiles5, 9, gGameState.progression.dp);
         } else {
             MapMenuWriteDigits5(w->tiles5, 9, gGameState.progression.mooglePoints);
@@ -5077,28 +5077,28 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 w->tiles6 = LoadObjTiles(gUnk_099582E4, 0x1500);
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993D4B0, 0x1500);
             }
             break;
         case 1:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 w->tiles6 = LoadObjTiles(gUnkEu_099452B0, 0x1500);
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993E9B0, 0x1500);
             }
             break;
         case 4:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 w->tiles6 = LoadObjTiles(gUnkEu_099467B0, 0x1500);
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_0993FEB0, 0x1500);
             }
             break;
         case 3:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 w->tiles6 = LoadObjTiles(gUnkEu_09947CB0, 0x1500);
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_099413B0, 0x1500);
@@ -5106,7 +5106,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             break;
         case 2:
         default:
-            if (gGameState.flags & 8) {
+            if (gGameState.flags & GAME_FLAG_RIKU) {
                 w->tiles6 = LoadObjTiles(gUnkEu_099491B0, 0x1500);
             } else {
                 w->tiles6 = LoadObjTiles(gUnkEu_099428B0, 0x1500);
@@ -5114,7 +5114,7 @@ s32 MapMenuSlideInY(MapMenuWork* w) {
             break;
         }
 #else
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             w->tiles6 = LoadObjTiles(gUnk_099582E4, 0x1500);
         } else {
             w->tiles6 = LoadObjTiles(gUnk_09956724, 0x1500);
@@ -5193,7 +5193,7 @@ s32 MapMenuSlideInX(MapMenuWork* w) {
             FadeToAmount(0, 16, 1);
             w->update = MapMenuResume;
         } else {
-            w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
+            w->update = (gGameState.flags & GAME_FLAG_RIKU) ? MapMenuRikuInput : MapMenuSoraInput;
         }
     }
 
@@ -5306,7 +5306,7 @@ s32 MapMenuOpenSubMode(MapMenuWork* w) {
 
     switch (w->cursor) {
     case 0:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.progression.unk_82 & 0x800) {
                 ModeRequest(&gModeDeck, 0);
             } else {
@@ -5392,7 +5392,7 @@ s32 MapMenuConfirmInput(MapMenuWork* w) {
         w->confirmCursor = 0;
         MapMenuFreeConfirm(w);
         w->y3 = (w->cursor * 19 + 16) << 8;
-        w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
+        w->update = (gGameState.flags & GAME_FLAG_RIKU) ? MapMenuRikuInput : MapMenuSoraInput;
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
         SaveWriteSystem();
@@ -5404,7 +5404,7 @@ s32 MapMenuConfirmInput(MapMenuWork* w) {
 
 s32 MapMenuResume(MapMenuWork* w) {
     gDispCnt |= DISPCNT_OBJ_ON;
-    w->update = (gGameState.flags & 8) ? MapMenuRikuInput : MapMenuSoraInput;
+    w->update = (gGameState.flags & GAME_FLAG_RIKU) ? MapMenuRikuInput : MapMenuSoraInput;
     return 1;
 }
 
@@ -5415,7 +5415,7 @@ void Task_MapMenu_0(MapMenuWork* w) {
     gFieldState->flags |= 0x80;
     gFieldState->flags |= 0x2000;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         w->palette6 = LoadObjPalette(gRikuPalette, 32);
     } else {
         w->palette6 = LoadObjPalette(gSoraPalette, 32);
@@ -5467,7 +5467,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
         w->confirmCursor == 0 &&
 #endif
         (gMapRoomState->flags & 0x1000)) {
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             DrawSprite(w->x8 >> 8, w->y4 >> 8, gRikuFf00Frames[0], w->tiles8, w->palette6,
                 0, 0x400, 80);
         } else {
@@ -5504,7 +5504,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
         DrawSprite(w->x2 >> 8, 14, gUnk_09EF8E64[0], w->tiles4, w->palette2, 0, 0x400, 90);
 #endif
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
@@ -5602,7 +5602,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
             }
         }
 
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case 0:
@@ -5802,28 +5802,28 @@ void MapSaveLoadFloorTiles(u8 a) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case 0:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnk_09963D64[a];
         } else {
             src = gUnkEu_09955250[a];
         }
         break;
     case 1:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnkEu_0995BB50[a];
         } else {
             src = gUnkEu_09959850[a];
         }
         break;
     case 4:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnkEu_09960150[a];
         } else {
             src = gUnkEu_0995DE50[a];
         }
         break;
     case 3:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnkEu_09964750[a];
         } else {
             src = gUnkEu_09962450[a];
@@ -5831,7 +5831,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         break;
     case 2:
     default:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gUnkEu_09968D50[a];
         } else {
             src = gUnkEu_09966A50[a];
@@ -5839,7 +5839,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         break;
     }
 #else
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         src = gUnk_09963D64[a];
     } else {
         src = gUnk_09961A64[a];
@@ -5931,7 +5931,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
     if (w->steps != 0) {
         ApproachValue(&w->x, 0, w->steps);
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             ApproachValue(&w->x3, 0x3800, w->steps);
             ApproachValue(&w->y3, 0x7000, w->steps);
         } else {
@@ -5940,7 +5940,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
         }
         w->steps -= 1;
     } else {
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             w->palette4 = LoadObjPalette(gUnk_09991C04, 32);
         } else {
             w->palette4 = LoadObjPalette(gUnk_09991C44, 32);
@@ -5970,8 +5970,8 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
         }
 #endif
 
-        if (gGameState.flags & 8) {
-            if (gGameState.flags & 0x10) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
+            if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 LoadBgMap(0, gUnk_0998C744, 0x800);
 
                 if (SaveRepairFileSmall(1) == 2) {
@@ -5985,7 +5985,7 @@ s32 MapSaveSlideInX(MapSaveWork* w) {
                 }
             }
         } else {
-            if (gGameState.flags & 0x10) {
+            if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 LoadBgMap(0, gUnk_0998B744, 0x800);
 
                 if (SaveRepairFileLarge(1) == 2) {
@@ -6063,8 +6063,8 @@ s32 MapSaveInput(MapSaveWork* w) {
     } else if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_SAVELOAD);
 
-        if (gGameState.flags & 8) {
-            if (gGameState.flags & 0x10) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
+            if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 SaveWriteFileSmall(1);
                 MapSaveShowSummary(w, 3);
             } else {
@@ -6072,7 +6072,7 @@ s32 MapSaveInput(MapSaveWork* w) {
                 MapSaveShowSummary(w, 2);
             }
         } else {
-            if (gGameState.flags & 0x10) {
+            if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 SaveWriteFileLarge(1);
                 MapSaveShowSummary(w, 1);
             } else {
@@ -6168,7 +6168,7 @@ void Task_MapSave_0(MapSaveWork* w) {
     w->y2 = 0xA000;
     w->x = -0x8000;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         w->tiles4 = AllocObjTiles(0x400, gRikuFf00Tiles);
         w->palette5 = LoadObjPalette(gRikuPalette, 32);
     } else {
@@ -6245,7 +6245,7 @@ void Task_MapSave_2(MapSaveWork* w) {
 #endif
 
     if (gMapRoomState->flags & 0x1000) {
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             DrawSprite(w->x3 >> 8, w->y3 >> 8, gRikuFf00Frames[0], w->tiles4, w->palette5,
                 0, 0x400, 80);
         } else {
@@ -6255,7 +6255,7 @@ void Task_MapSave_2(MapSaveWork* w) {
     }
 
     if (w->dialogVisible != 0) {
-        if (!(gGameState.flags & 8)) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             DrawSprite(72, 96, gDonaFl00Frames[0], w->tiles5, w->palette6, 0, 0x401, 81);
             DrawSprite(40, 96, gGoofyFl00Frames[0], w->tiles6, w->palette7, 0, 0x400, 81);
         }

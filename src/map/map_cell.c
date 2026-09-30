@@ -424,7 +424,7 @@ void SpawnMapPlayer(void) {
         gFieldState->spawnAngle = 0x80;
     }
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, 0);
     } else {
         TaskCreate(&gFieldState->tasks2, &gTaskDescFldSora, 0);
@@ -3048,7 +3048,7 @@ MapPlatform* GetMapPlatform(u8 a) {
 }
 
 u8* GetMapRoomEvent(u8 a) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return (u8*)(gMapRoomDefs[gMapFloorState.world]->rikuEvents + a);
     }
     return (u8*)(gMapRoomDefs[gMapFloorState.world]->soraEvents + a);
@@ -3148,7 +3148,7 @@ void MapFixCreateGimmicks(void* a) {
         return;
     }
 
-    if ((gGameState.flags & 8) || gGameState.floor != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) || gGameState.floor != 0) {
         v.x = 0x18000;
         x = 0x11000;
     } else {
@@ -3167,7 +3167,7 @@ void MapFixCreateGimmicks(void* a) {
     e++;
 
     if (GetProgressFloor() != 0) {
-        if ((gGameState.flags & 8) || gGameState.floor != 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) || gGameState.floor != 0) {
             v.x = 0x1F000;
             x = 0x14000;
         } else {

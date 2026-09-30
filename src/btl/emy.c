@@ -909,7 +909,7 @@ u8 task_emy_00_1(EmyWork* work) {
         if (w->stateTimer == 20) {
             act->flags &= ~0x100;
 
-            if (gGameState.flags & 4) {
+            if (gGameState.flags & GAME_FLAG_FIRST_STRIKE) {
                 EmyFinishSpawn(w);
                 break;
             }

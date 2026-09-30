@@ -725,7 +725,7 @@ void MapTutorialEnemyHit(MapTutorialWork* w) {
 
     if (AnimIsFinished(a)) {
         ColliderSetDisabled(&w->collider, 1);
-        gGameState.flags |= 4;
+        gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
         MapTutorialStartBattle();
     } else {
         w->gfx = AnimUpdate(a);
@@ -1020,12 +1020,12 @@ void Task_MapDmg_3(MapDmgWork* w) {
 
 void* GetFloorName(void) {
 #ifdef VERSION_EU
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return eu_0805E924(gBasementFloorNames[(s8)gGameState.floor]);
     }
     return eu_0805E924(gFloorNames[(s8)gGameState.floor]);
 #else
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return gBasementFloorNames[(s8)gGameState.floor];
     }
     return gFloorNames[(s8)gGameState.floor];

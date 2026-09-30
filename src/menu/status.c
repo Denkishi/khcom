@@ -206,7 +206,7 @@ void task_status_0(StatusWork* work) {
     TaskCreate(&work->pool, &sTaskDescStatusFriend, 0);
     TaskCreate(&work->pool, &sTaskDescStatusSora, 0);
 
-    if (!(gGameState.flags & 8)) {
+    if (!(gGameState.flags & GAME_FLAG_RIKU)) {
         TaskCreate(&work->pool, &sTaskDescStatusTab, &work->tab);
         TaskCreate(&work->pool, &sTaskDescStatusDeckname, &sStatusMesWindowOpen);
     }
@@ -236,7 +236,7 @@ void StatusHandleInput(StatusWork* work) {
             StatusStocklistScrollUp();
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         } else if (work->cursor == 0) {
-            if (!(gGameState.flags & 8)) {
+            if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                 work->cursor = ~work->tab;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
                 sStatusMesWindowOpen = 0;
@@ -258,7 +258,7 @@ void StatusHandleInput(StatusWork* work) {
             StatusStocklistScrollDown();
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
-    } else if ((GetKeysRepeat() & DPAD_LEFT) && !(gGameState.flags & 8)) {
+    } else if ((GetKeysRepeat() & DPAD_LEFT) && !(gGameState.flags & GAME_FLAG_RIKU)) {
         if (work->tab != 0) {
             work->tab--;
 
@@ -272,7 +272,7 @@ void StatusHandleInput(StatusWork* work) {
             StatusStocklistLoadRows(0);
             m4aSongNumStart(SONG_SYS_CLICK);
         }
-    } else if ((GetKeysRepeat() & DPAD_RIGHT) && !(gGameState.flags & 8)) {
+    } else if ((GetKeysRepeat() & DPAD_RIGHT) && !(gGameState.flags & GAME_FLAG_RIKU)) {
         if (work->tab <= 2) {
             work->tab++;
 
@@ -512,7 +512,7 @@ void task_status_tab_3(StatusTabWork* work) {
 }
 
 void task_status_sora_0(StatusSoraWork* work) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         work->tiles = AllocObjTiles(0x800, 0);
         work->palette = LoadObjPalette(gRikuPalette, 0x20);
         SetObjTileSource(work->tiles, gRikuBt00Tiles);
@@ -536,7 +536,7 @@ void task_status_sora_2(StatusSoraWork* work) {
     s16 x;
     s16 y;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         x = 160;
         y = 65;
     } else {
@@ -626,7 +626,7 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
 
 void task_status_cursor_2(StatusCursorWork* work) {
     if (FadeIsActive() == 0) {
-        if (!(gGameState.flags & 8) || StatusTabHasItems()) {
+        if (!(gGameState.flags & GAME_FLAG_RIKU) || StatusTabHasItems()) {
             DrawSprite(work->x >> 8, (work->y >> 8) - 16, work->gfx[1], work->tiles2, work->palette2, 0, 0, 0);
 
             if (work->lastCursor >= 0) {
@@ -656,7 +656,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
         e++;
     }
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         for (i = 66; i <= 69; i++) {
             if (IsStockLearned(i)) {
                 StatusEntryAppend(work->entries, i);
@@ -1101,7 +1101,7 @@ void task_status_friend_2(StatusFriendWork* work) {
     s32 i;
     s16 x;
 
-    x = (gGameState.flags & 8) ? 216 : 186;
+    x = (gGameState.flags & GAME_FLAG_RIKU) ? 216 : 186;
 
     for (i = 0; i < work->count; i++) {
         DrawSprite(x, 45, work->gfx[i], work->tiles[i], work->palette[i], 0, 0x800, i + 7);

@@ -148,7 +148,7 @@ u8 task_bos_jf_1(JfWork* work) {
         work->stateStep = 0;
         break;
     case 4:
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             if (work->gimmickTimer == 0) {
                 if (GetRandom() % 100 <= 19) {
                     _0801C1F8(0, sub->x, sub->y, sub->z);
@@ -178,7 +178,7 @@ u8 task_bos_jf_1(JfWork* work) {
         }
     }
 
-    if ((gGameState.flags & 8) == 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         if (sub->hitFlags & 0x20000000) {
             sub->hitFlags &= ~0x20000000;
 

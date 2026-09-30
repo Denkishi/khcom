@@ -64,7 +64,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 #else
         w->textSlotCount = LoadTextSlots(gUnk_0815A198, w->textSlots);
 #endif
-    } else if (!(gGameState.flags & 8)) {
+    } else if (!(gGameState.flags & GAME_FLAG_RIKU)) {
 #ifdef VERSION_EU
         w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A0EE), w->textSlots);
 #else

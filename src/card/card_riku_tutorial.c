@@ -150,7 +150,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 #endif
         gCardBattleState->stockMoveCount = 1;
 
-        if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay == 1 && !(gBtlWork->flags & 0x800000000000)) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay == 1 && !(gBtlWork->flags & 0x800000000000)) {
             if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
                 gCardBattleState->unk_0EE = 0;
                 return 46;
@@ -313,7 +313,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
 #endif
         gCardBattleState->stockMoveCount = 1;
 
-        if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
             if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
                 gCardBattleState->unk_0EE = 0;
                 return 46;
@@ -771,7 +771,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
         v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
-    if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
         if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;
@@ -1137,7 +1137,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
         v[i] = (*(i + cards))->cardDef->unk_28;
     }
 
-    if ((gGameState.flags & 8) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & 0x800000000000)) {
         if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
             gCardBattleState->unk_0EE = 0;
             return 108;

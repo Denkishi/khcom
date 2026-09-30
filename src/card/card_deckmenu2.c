@@ -304,7 +304,7 @@ void RemoveUnequippedCardById(u16 id) {
 u8 CollectionHasCard(u16 id) {
     s32 i;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         return 0;
     }
 
@@ -1300,7 +1300,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
         w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
         } else {
             w->tiles12 = LoadObjTiles(gUnk_090A3E46, 0x320);
@@ -3703,7 +3703,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
     w->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
     } else {
         w->tiles12 = LoadObjTiles(gUnk_090A3E46, 0x320);

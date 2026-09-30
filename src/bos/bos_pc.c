@@ -5720,7 +5720,7 @@ u8 BosPcUpdateBreak(PcWork* work, Task* task) {
 
     p = &work->body;
     work->shared.fltStopTimer = 240;
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (work->shared.gimmickTimer <= 0) {
             if (GetRandom() % 0xA01 > 0x800) {
                 _0801C1F8(0, work->x, work->y, work->z);

@@ -14,7 +14,7 @@ Task* gContinueTask;
 static void Continue_0(void) {
     TaskPoolInit(&gContinueTaskPool, 2);
 
-    if ((gGameState.flags & 8) == 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueSora, 0);
     } else {
         gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueRiku, 0);

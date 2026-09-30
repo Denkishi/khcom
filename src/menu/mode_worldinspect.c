@@ -302,7 +302,7 @@ u8 WorldInspectLoadDesc(s16 id) {
     if (id != 0) {
         tbl = gWorldDescriptions;
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             i = sWorldinspectMsgs[id].descId2;
         } else {
             i = sWorldinspectMsgs[id].descId;
@@ -330,7 +330,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
     switch (gLanguage) {
     case 0:
 #endif
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnk_09A020FC;
         } else {
             src = gUnk_09A02EFC;
@@ -338,21 +338,21 @@ void WorldInspectLoadFloorTiles(s16 index) {
 #ifdef VERSION_EU
         break;
     case 1:
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A30C00;
         } else {
             src = gUnkEu_09A34400;
         }
         break;
     case 4:
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A31A00;
         } else {
             src = gUnkEu_09A35200;
         }
         break;
     case 3:
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A32800;
         } else {
             src = gUnkEu_09A38C00;
@@ -360,7 +360,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
         break;
     case 2:
     default:
-        if ((gGameState.flags & 8) == 0) {
+        if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A33600;
         } else {
             src = gUnkEu_09A39A00;
@@ -773,7 +773,7 @@ void mode_worldinspect_0(void) {
 
     LoadBgTiles(0, gUnk_099FB53C, 0x6BC0);
 #ifdef VERSION_EU
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
         case 1:
             RequestDma3Copy(gUnkEu_09A2D440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
@@ -829,7 +829,7 @@ void mode_worldinspect_0(void) {
 
     for (i = 0; i < sWorldInspectFloorCount; i++) {
         if (sWorldInspectWorlds[i] != 0) {
-            if ((gGameState.flags & 8) == 0) {
+            if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 if (i <= 8) {
                     WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, i * 3, 9, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 } else {

@@ -65,7 +65,7 @@ void task_btl_shadow_3(BtlShadowWork* work) {
 }
 
 void task_btl_hpply_0(BtlHpplyWork* work) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         work->palette = LoadObjPalette(gRikuPalette, 0x20);
         work->tiles = AllocObjTiles(0x280, gUnk_08B21438);
         work->gfx = gUnk_08B213F0;
@@ -1234,7 +1234,7 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
             work->progressRatio = (work->progress << 8) / work->progressMax;
 
             if (work->progress >= work->progressMax) {
-                gGameState.flags |= 0x40;
+                gGameState.flags |= GAME_FLAG_ESCAPED;
                 gBtlWork->flags |= 0x10;
                 gBtlWork->flags |= 0x0000000200000000;
                 work->visible = 0;

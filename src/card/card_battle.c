@@ -552,10 +552,10 @@ static void cardbattle_0(CardBattleWork* w) {
     gSoraCardReloadRequest = 0;
     CreateBosscardTask(&w->tasks);
     w->unk_C4[4] = 0;
-    if (gGameState.flags & 0x100) {
+    if (gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) {
         return;
     }
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         TaskCreate(&w->tasks, &gTaskDescDarkPoint, 0);
     }
 }
@@ -708,7 +708,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 }
             } else if (gSoraSelectedCard->cardDef->category == 3 && !(gSoraSelectedCard->flags & 0x100000)) {
                 UseSoraHeartlessCard(w);
-            } else if (gGameState.flags & 8) {
+            } else if (gGameState.flags & GAME_FLAG_RIKU) {
                 RemoveSoraCardDisplays(w);
                 gSoraSelectedCard = 0;
                 gBtlWork->flags |= 0x80000000LL;

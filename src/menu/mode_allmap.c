@@ -136,7 +136,7 @@ void AllmapLoadFloorTiles(void) {
 
     dst = (u8*)GetBgCharBase(2) + 0x20;
 
-    if ((gGameState.flags & 8) != 0) {
+    if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
 #ifdef VERSION_EU
         src = gAllmapRikuFloorTilesByLanguage[gLanguage] + gGameState.floor * 0x140;
 #else

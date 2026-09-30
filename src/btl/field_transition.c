@@ -34,7 +34,7 @@ void FieldTransitionUpdate(void) {
     gSystemFlags |= 8;
     if (gFieldTransitionWork->initialized == 0) {
         gFieldTransitionWork->tiles = AllocObjTiles(0xA00, 0);
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             gFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
             AnimInit(&gFieldTransitionWork->anim, 0, 0);
             switch (gGameState.fieldAngle) {

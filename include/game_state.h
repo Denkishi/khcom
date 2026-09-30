@@ -7,6 +7,21 @@
 #include "fld_types.h"
 #include "player_progression_types.h"
 
+enum GameFlag {
+    GAME_FLAG_MAP_ENEMY_BATTLE = 0x2,
+    GAME_FLAG_FIRST_STRIKE = 0x4,
+    GAME_FLAG_RIKU = 0x8,
+    GAME_FLAG_SECOND_FILE = 0x10,
+    GAME_FLAG_SORA_CLEAR = 0x20,
+    GAME_FLAG_ESCAPED = 0x40,
+    GAME_FLAG_FRIENDS_SAVED = 0x80,
+    GAME_FLAG_DARK_POINTS_LOCKED = 0x100,
+    GAME_FLAG_RIKU_TITLE = 0x200,
+    GAME_FLAG_RIKU_CLEAR = 0x800
+};
+
+#define GAME_FLAGS_HEADER (GAME_FLAG_SORA_CLEAR | GAME_FLAG_RIKU_TITLE | GAME_FLAG_RIKU_CLEAR)
+
 typedef struct GameFloor {
     u16 flags;
     u8 world;

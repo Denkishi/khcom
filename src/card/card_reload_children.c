@@ -597,7 +597,7 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
         w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         ObtainCard(w->cardId);
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             InitRikuDeckForWorld(gGameState.world);
         }
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeFlight);

@@ -704,7 +704,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
             v = gBtlWork->battleId;
 
             if (v >= 125 && v <= 127) {
-                if ((gGameState.flags & 8) == 0) {
+                if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (GetRandom() % 100 < 20) {
                         *(PrizeCardArgs*)args = w->args;
 #ifdef VERSION_EU
@@ -751,7 +751,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
             } else {
                 *(PrizeCardArgs*)args = w->args;
 
-                if ((gGameState.flags & 8) == 0) {
+                if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (HasMapCard(0xFB) == 0) {
                         if (AreWorldPrizesCollected() == 0) {
                             if (sUnk_0903612C[gGameState.world] != 0) {
@@ -950,7 +950,7 @@ u16 PickPrizeMapCardKindForWorld(u16 a, s32 b) {
     const PrizeMapCardGroup* tiles;
     u16 n;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         tiles = sRikuPrizeMapCardGroups[a].data;
         n = sRikuPrizeMapCardGroups[a].size;
     } else {
@@ -968,7 +968,7 @@ u16 PickPrizeMapCardForWorld(u16 a, s32 b) {
 
     off = 0;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         tiles = sRikuPrizeMapCardGroups[a].data;
         base = PickPrizeMapCardKind(tiles, sRikuPrizeMapCardGroups[a].size);
     } else {

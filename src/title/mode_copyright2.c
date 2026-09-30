@@ -79,7 +79,7 @@ void LoadStatusNumberTiles(void) {
     p = CopyNumberTiles(p, gGameState.hp, 3);
     p = CopyNumberTiles(p, gGameState.progression.maxHp, 3);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         p += 0x80;
     } else {
         p = CopyNumberTiles(p, gGameState.progression.cp, 4);
@@ -88,7 +88,7 @@ void LoadStatusNumberTiles(void) {
     p = CopyNumberTiles(p, gGameState.progression.exp, 6);
     p = CopyNumberTiles(p, gGameState.progression.nextExp, 6);
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         p += 0xC0;
         p = CopyNumberTiles(p, gGameState.progression.ap, 2);
         CopyNumberTiles(p, gGameState.progression.dp, 3);

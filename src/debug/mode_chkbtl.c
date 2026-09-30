@@ -336,7 +336,7 @@ void mode_chkbtl_1(void) {
             gChkBtlWork->floor = 0;
         }
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gChkBtlWork->floor > 11) {
                 gChkBtlWork->floor = 11;
             }
@@ -405,12 +405,12 @@ void mode_chkbtl_1(void) {
         gGameState.world = sChkBtlEntries[gChkBtlWork->enemy].world;
 
         if (GetKeysHeld() & L_BUTTON) {
-            gGameState.flags |= 4;
+            gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
         } else {
-            gGameState.flags &= ~4;
+            gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
         }
 
-        if (gGameState.flags & 8) {
+        if (gGameState.flags & GAME_FLAG_RIKU) {
             InitRikuDeckForWorld(gChkBtlWork->floor);
         }
 

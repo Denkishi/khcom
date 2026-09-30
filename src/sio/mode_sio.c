@@ -2692,7 +2692,7 @@ void SioChgCardSave(void) {
 
     if (SioHasError() == 0) {
         if (gSioDebugMode == 0) {
-            if (gGameState.flags & 0x10) {
+            if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
                 SaveWriteFileLarge(1);
             } else {
                 SaveWriteFileLarge(0);

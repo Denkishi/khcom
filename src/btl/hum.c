@@ -5685,7 +5685,7 @@ void task_hum_vixen_0(VixenWork* work) {
     VixenCreateIceTasks(work);
     work->base.stockMoves = sHumVixenStockMovesA;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         gBtlWork->tiles2 = AllocObjTiles(0x840, 0);
     }
 }
@@ -6201,7 +6201,7 @@ void task_hum_vixen_2(VixenWork* work) {
 }
 
 void task_hum_vixen_3(VixenWork* work) {
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         ReleaseObjTiles(gBtlWork->tiles2);
     }
     HumReleaseResources(&work->base);
@@ -6402,7 +6402,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
     work->palette = LoadObjPalette(gVixEPalette, 0x20);
     work->tiles = gBtlWork->tiles2;
 
-    if (gGameState.flags & 8) {
+    if (gGameState.flags & GAME_FLAG_RIKU) {
         if (gBtlWork->flags & 0x800000000000) {
             work->variant = 2;
         } else {
@@ -8696,20 +8696,20 @@ void MakeSaveHeaderData(SaveHeaderData* data, s16 file) {
 
     data->flags = 0;
 
-    if (gGameState.flags & 0x20) {
-        data->flags = 1;
+    if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
+        data->flags = SAVE_HEADER_SORA_CLEAR;
     }
 
-    if (gGameState.flags & 0x800) {
-        data->flags |= 4;
+    if (gGameState.flags & GAME_FLAG_RIKU_CLEAR) {
+        data->flags |= SAVE_HEADER_RIKU_CLEAR;
 
-        if (gGameState.flags & 8) {
-            data->flags |= 2;
+        if (gGameState.flags & GAME_FLAG_RIKU) {
+            data->flags |= SAVE_HEADER_RIKU_TITLE;
         } else {
-            data->flags &= ~2;
+            data->flags &= ~SAVE_HEADER_RIKU_TITLE;
         }
-    } else if (gGameState.flags & 0x20) {
-        data->flags |= 2;
+    } else if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
+        data->flags |= SAVE_HEADER_RIKU_TITLE;
     }
 
 #ifdef VERSION_EU
@@ -8760,7 +8760,7 @@ void MakeSaveFileLarge(SaveFileLarge* save) {
     SavePooState(save->pooState);
     SaveMoogleShopFlags(&save->moogleShop);
 
-    if (gGameState.flags & 0x10) {
+    if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
         gGameState.fileSummaries[1].floor = gGameState.floor;
         gGameState.fileSummaries[1].world = gGameState.world;
         gGameState.fileSummaries[1].level = gGameState.progression.level;
@@ -8784,7 +8784,7 @@ void MakeSaveFileSmall(SaveFileSmall* save) {
     CopyMapProgress(&save->shared);
     CopyMapCardInventory(&save->small);
 
-    if (gGameState.flags & 0x10) {
+    if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
         gGameState.fileSummaries[3].floor = gGameState.floor;
         gGameState.fileSummaries[3].world = gGameState.world;
         gGameState.fileSummaries[3].level = gGameState.progression.level;
@@ -8799,16 +8799,16 @@ void MakeSaveFileSmall(SaveFileSmall* save) {
 
 void ApplySaveHeaderData(SaveHeaderData* data) {
     if (SaveRepairHeader() == SAVE_OK) {
-        if (data->flags & 1) {
-            gGameState.flags |= 0x20;
+        if (data->flags & SAVE_HEADER_SORA_CLEAR) {
+            gGameState.flags |= GAME_FLAG_SORA_CLEAR;
         }
 
-        if (data->flags & 4) {
-            gGameState.flags |= 0x800;
+        if (data->flags & SAVE_HEADER_RIKU_CLEAR) {
+            gGameState.flags |= GAME_FLAG_RIKU_CLEAR;
         }
 
-        if (data->flags & 2) {
-            gGameState.flags |= 0x200;
+        if (data->flags & SAVE_HEADER_RIKU_TITLE) {
+            gGameState.flags |= GAME_FLAG_RIKU_TITLE;
         }
 
 #ifdef VERSION_EU
@@ -8868,8 +8868,8 @@ void ApplySaveHeaderData(SaveHeaderData* data) {
 void ApplySaveSystem(SaveFileLarge* save) {
     u32 t;
 
-    t = gGameState.flags & 0xA20;
-    save->common.flags &= 0xFFFFF5DF;
+    t = gGameState.flags & GAME_FLAGS_HEADER;
+    save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | t;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
@@ -8887,8 +8887,8 @@ void ApplySaveSystem(SaveFileLarge* save) {
 void ApplySaveFileLarge(SaveFileLarge* save) {
     u32 t;
 
-    t = gGameState.flags & 0xA20;
-    save->common.flags &= 0xFFFFF5DF;
+    t = gGameState.flags & GAME_FLAGS_HEADER;
+    save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | t;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
@@ -8901,14 +8901,14 @@ void ApplySaveFileLarge(SaveFileLarge* save) {
     func_080C7024(&save->unk_E6C);
     LoadPooState(save->pooState);
     LoadMoogleShopFlags(&save->moogleShop);
-    gGameState.flags &= ~8;
+    gGameState.flags &= ~GAME_FLAG_RIKU;
 }
 
 void ApplySaveFileSmall(SaveFileSmall* save) {
     u32 t;
 
-    t = gGameState.flags & 0xA20;
-    save->common.flags &= 0xFFFFF5DF;
+    t = gGameState.flags & GAME_FLAGS_HEADER;
+    save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | t;
     gGameState.hp = save->common.hp;
     memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
@@ -8918,7 +8918,7 @@ void ApplySaveFileSmall(SaveFileSmall* save) {
     gGameState.playTime = save->common.playTime;
     RestoreMapProgress(&save->shared);
     RestoreMapCardInventory(&save->small);
-    gGameState.flags |= 8;
+    gGameState.flags |= GAME_FLAG_RIKU;
 }
 
 TaskDesc gTaskDescHumRobe = {

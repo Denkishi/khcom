@@ -12,6 +12,12 @@
 #define SAVE_BAD_CHECKSUM 1
 #define SAVE_OK 2
 
+enum SaveHeaderFlag {
+    SAVE_HEADER_SORA_CLEAR = 0x1,
+    SAVE_HEADER_RIKU_TITLE = 0x2,
+    SAVE_HEADER_RIKU_CLEAR = 0x4
+};
+
 typedef struct SaveCommon {
     u32 flags;
     u8 progression[0x88];

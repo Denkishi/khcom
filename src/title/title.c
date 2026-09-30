@@ -82,12 +82,12 @@ void task_title_logo_2(TitleLogoWork* work) {
 
     for (i = 0; i < 6; i++) {
 #ifndef VERSION_JP
-        if (i == 1 && !(gGameState.flags & 0x200)) {
+        if (i == 1 && !(gGameState.flags & GAME_FLAG_RIKU_TITLE)) {
             continue;
         }
 #endif
 
-        if (gGameState.flags & 0x200) {
+        if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
             x = 0xA4;
         } else {
             x = 0x50;
@@ -104,7 +104,7 @@ void task_title_logo_2(TitleLogoWork* work) {
             }
             affine = AllocObjAffine(0, 0x100, work->scale, 0);
 
-            if (gGameState.flags & 0x200) {
+            if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
                 y = 86;
                 x--;
             } else {
@@ -142,7 +142,7 @@ u8 IsTitleLogoScaleDone(void) {
 void task_title_obj_0(TitleObjWork* work) {
     s32 t;
 
-    t = (gGameState.flags & 0x200) ? 0x20 : 0;
+    t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
 #ifdef VERSION_EU
     work->sprites[0].palette = LoadObjPalette(gUnk_0984A718, 0x20);
     switch (gLanguage) {
@@ -176,7 +176,7 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[0].gfx = gUnk_09EF65E0[0];
 #endif
 
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
         if (gLanguage == 4 || gLanguage == 2) {
             work->sprites[0].x = 0xB500;
@@ -315,11 +315,11 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     u8* pal;
     u8* pal2;
 
-    t = (gGameState.flags & 0x200) ? 0x20 : 0;
+    t = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 0x20 : 0;
     work->choice = arg;
 
     if (arg[0] == 0) {
-        if (gGameState.flags & 0x20) {
+        if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
             work->layout = 4;
             arg[0] = 4;
         } else {
@@ -327,7 +327,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
         }
     } else if (arg[0] == 3) {
         work->layout = 2;
-    } else if (gGameState.flags & 0x20) {
+    } else if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
         work->layout = 3;
     } else {
         work->layout = 0;
@@ -457,7 +457,7 @@ void TitleMenuMoveBasic(s16* p) {
     s16 max;
     u16 keys;
 
-    max = (gGameState.flags & 0x20) ? 2 : 1;
+    max = (gGameState.flags & GAME_FLAG_SORA_CLEAR) ? 2 : 1;
     keys = GetKeysPressed() & DPAD_UP;
     if (keys != 0) {
         m4aSongNumStart(SONG_SYS_CLICK);
@@ -517,7 +517,7 @@ void TitleMenuDrawBasic(TitleMenuWork* work) {
     s16 count;
 
     y = 32;
-    t = gGameState.flags & 0x20;
+    t = gGameState.flags & GAME_FLAG_SORA_CLEAR;
     count = 3;
 
     if (t == 0) {
@@ -536,7 +536,7 @@ void TitleMenuDrawBasic(TitleMenuWork* work) {
         y += 24;
     }
 
-    if (gGameState.flags & 0x20) {
+    if (gGameState.flags & GAME_FLAG_SORA_CLEAR) {
         y = work->choice[0] * 24 + 32;
     } else {
         y = work->choice[0] * 24 + 48;
@@ -642,7 +642,7 @@ void task_title_menu_2(TitleMenuWork* work) {
     work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
 
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
         work->x = 120;
     } else {
         work->x = 0;
@@ -674,7 +674,7 @@ void task_title_menu_3(TitleMenuWork* work) {
 }
 
 void task_title_lumichange_0(TitleLumiChangeWork* work) {
-    if (gGameState.flags & 0x200) {
+    if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
@@ -777,10 +777,10 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
         void** a = (void**)gTitleLumiSpritesEu[gLanguage];
         void** b = (void**)gTitleLumiSpritesAltEu[gLanguage];
 
-        tbl = (gGameState.flags & 0x200) ? b : a;
+        tbl = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? b : a;
     }
 #else
-    tbl = (gGameState.flags & 0x200) ? gUnk_09EF6684 : gUnk_09EF6658;
+    tbl = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? gUnk_09EF6684 : gUnk_09EF6658;
 #endif
 
     if (v < 0) {
@@ -790,7 +790,7 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
     } else if (v > 0) {
         work->gfx = tbl[2];
     }
-    x = (gGameState.flags & 0x200) ? 240 : 0;
+    x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 240 : 0;
     DrawSprite(x, 0x8F, work->gfx, work->tiles, work->palette, 0, 0x400, 100);
 }
 

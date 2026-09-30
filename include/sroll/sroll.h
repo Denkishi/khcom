@@ -232,9 +232,21 @@ typedef struct SrollWork {
     u16 charQueue[0x100];
 } SrollWork;
 
-extern void* gUnk_09A54218[][2];
+typedef struct StaffRollTileBlock {
+    void* tiles;
+    u32 size;
+} StaffRollTileBlock;
 
-extern void* const gSrollSecnSprites[][4];
+typedef struct SrollSecnSprite {
+    void* tiles;
+    u32 tileSize;
+    void* anims;
+    void* gfxTable;
+} SrollSecnSprite;
+
+extern const StaffRollTileBlock gUnk_09A54218[];
+
+extern const SrollSecnSprite gSrollSecnSprites[];
 extern const s32 gSrollBCharSwayOffsets[16];
 extern const s32 gSrollBCharHopOffsets[16];
 extern SrollShift gUnk_09A54C78[];

@@ -33,13 +33,13 @@ void task_sroll_a_name_0(SrollANameWork* w, SrollANameArg* a) {
         AnimStart(anim, a->unk_02, 0);
         break;
     case 1:
-        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex][0], *(u16*)&gUnk_09A54218[a->nameIndex][1]);
+        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
         anim = &w->anim;
         AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
         AnimStart(anim, a->unk_02, 0);
         break;
     case 2:
-        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex][0], *(u16*)&gUnk_09A54218[a->nameIndex][1]);
+        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
 
         if (a->unk_02 == 1) {
             anim = &w->anim;

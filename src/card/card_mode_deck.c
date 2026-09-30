@@ -49,7 +49,7 @@ void Mode_DeckExchange_0(void) {
     TaskCreate(&gModeDeckExchangeTasks, &gTaskDescDeckexchange, &gModeDeckExchangeResult);
 }
 void Mode_DeckExchange_1(void) {
-    if (gSystemFlags & 1) {
+    if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioChgCardRecvSlotIds();
     } else {
         UpdatePlayTime();

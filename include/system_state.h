@@ -23,6 +23,20 @@ enum DebugFlagBit {
     DEBUG_FLAG_DEBUG_MENU = 0x8000
 };
 
+enum SystemFlag {
+    SYSTEM_FLAG_LINK_ACTIVE = 0x1,
+    SYSTEM_FLAG_DMA3_IMMEDIATE = 0x8,
+    SYSTEM_FLAG_DMA3_FLUSH_CPU = 0x10,
+    SYSTEM_FLAG_NO_SOFT_RESET = 0x20
+};
+
+enum FrameSyncFlag {
+    FRAME_SYNC_SOUND_BUSY = 0x1,
+    FRAME_SYNC_IN_VBLANK = 0x2,
+    FRAME_SYNC_FRAME_READY = 0x4,
+    FRAME_SYNC_VBLANK_OVERRUN = 0x8
+};
+
 extern vu16 gFrameSyncFlags;
 extern u16 gVBlankEndVCount;
 extern u32 gUnk_03006C04[3];

@@ -1500,7 +1500,7 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
         return 0;
     }
 
-    if ((gSystemFlags & 8) == 0) {
+    if ((gSystemFlags & SYSTEM_FLAG_DMA3_IMMEDIATE) == 0) {
         q->requests[q->requestCount].src = src;
         q->requests[q->requestCount].dst = dst;
         q->requests[q->requestCount].size = size;
@@ -1523,7 +1523,7 @@ u8 eu_080044C0(void* src, void* dst) {
     if (q->lz77RequestCount > 31) {
         return 0;
     }
-    flags = gSystemFlags & 8;
+    flags = gSystemFlags & SYSTEM_FLAG_DMA3_IMMEDIATE;
     if (flags == 0) {
         q->lz77Requests[q->lz77RequestCount].src = src;
         q->lz77Requests[q->lz77RequestCount].dst = dst;

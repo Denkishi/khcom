@@ -235,7 +235,7 @@ void ModeStart(Mode* mode, s32 arg) {
     }
 
     gCurrentModeUpdate = gCurrentMode->update;
-    gModeFlags |= 8;
+    gModeFlags |= MODE_FLAG_STARTED;
 }
 
 #ifdef VERSION_EU
@@ -243,7 +243,7 @@ void ModeInit(u8 a) {
 #else
 void ModeInit(void) {
 #endif
-    gModeFlags = 3;
+    gModeFlags = (MODE_FLAG_BLANK_PENDING | MODE_FLAG_DISPLAY_HELD);
     gModeBlankColor = 0;
     gDebugModeIndex = 0;
 #ifdef VERSION_EU
@@ -266,11 +266,11 @@ void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
     }
 
     gModeTransitionCallback = b;
-    gModeFlags |= 4;
+    gModeFlags |= MODE_FLAG_TRANSITION_ACTIVE;
 }
 
 void ModeClearTransitionCallback(void) {
-    gModeFlags &= ~4;
+    gModeFlags &= ~MODE_FLAG_TRANSITION_ACTIVE;
     gModeTransitionCallback = 0;
 }
 
@@ -283,7 +283,7 @@ void ModeClearVBlankCallback(void) {
 }
 
 u8 IsModeStarted(void) {
-    if (gModeFlags & 8) {
+    if (gModeFlags & MODE_FLAG_STARTED) {
         return 1;
     }
 
@@ -298,7 +298,7 @@ void ModeRequest(Mode* mode, s32 arg) {
 void ModeRequestHeapReset(Mode* mode, s32 arg) {
     gPendingMode = mode;
     gPendingModeArg = arg;
-    gModeFlags |= 0x10;
+    gModeFlags |= MODE_FLAG_HEAP_RESET;
 }
 
 #ifdef VERSION_EU
@@ -315,7 +315,7 @@ void ModeUpdate(void) {
              (GetKeysHeld() & B_BUTTON)) ||
             ((GetKeysHeld() & START_BUTTON) && (GetKeysPressed() & SELECT_BUTTON) && (GetKeysHeld() & A_BUTTON) &&
                 (GetKeysHeld() & B_BUTTON))) &&
-        !(gSystemFlags & 0x20)) {
+        !(gSystemFlags & SYSTEM_FLAG_NO_SOFT_RESET)) {
         if (SioIsConnected()) {
             SioLinkClose();
         }
@@ -329,31 +329,31 @@ void ModeUpdate(void) {
         ScanlineDmaReset();
 #endif
     } else {
-        if (gModeFlags & 4) {
+        if (gModeFlags & MODE_FLAG_TRANSITION_ACTIVE) {
             return;
         }
 
-        v = gModeFlags & 2;
+        v = gModeFlags & MODE_FLAG_DISPLAY_HELD;
 
         if (v != 0) {
-            if (gModeFlags & 1) {
+            if (gModeFlags & MODE_FLAG_BLANK_PENDING) {
                 return;
             }
 
             FadeUpdate();
             FlushDma3QueueWithCpu();
-            gModeFlags &= ~2;
+            gModeFlags &= ~MODE_FLAG_DISPLAY_HELD;
         } else if (gPendingMode != NULL) {
             if (gCurrentMode->exit != NULL) {
                 gCurrentMode->exit();
             }
 
-            if (gModeFlags & 0x10) {
-                gModeFlags &= ~0x10;
+            if (gModeFlags & MODE_FLAG_HEAP_RESET) {
+                gModeFlags &= ~MODE_FLAG_HEAP_RESET;
                 EwramHeapInit(GetEwramHeapStart(), GetEwramHeapSize());
             }
 
-            gModeFlags = 3;
+            gModeFlags = (MODE_FLAG_BLANK_PENDING | MODE_FLAG_DISPLAY_HELD);
             ModeStart(gPendingMode, gPendingModeArg);
             gPendingMode = 0;
         } else {
@@ -372,13 +372,13 @@ void SetModeUpdate(void (*fn)(void)) {
 }
 
 void ModeFlushDisplay(void) {
-    if (gModeFlags & 1) {
+    if (gModeFlags & MODE_FLAG_BLANK_PENDING) {
         ModeBlankDisplay();
-        gModeFlags &= ~1;
+        gModeFlags &= ~MODE_FLAG_BLANK_PENDING;
     }
 
-    if (!(gModeFlags & 2)) {
-        if (gSystemFlags & 0x10) {
+    if (!(gModeFlags & MODE_FLAG_DISPLAY_HELD)) {
+        if (gSystemFlags & SYSTEM_FLAG_DMA3_FLUSH_CPU) {
             FlushDma3QueueWithCpu();
         } else {
             FlushDma3Queue();
@@ -390,7 +390,7 @@ void ModeFlushDisplay(void) {
 }
 
 void ModeRunVBlankCallbacks(void) {
-    if ((gModeFlags & 2) && gModeTransitionCallback != NULL) {
+    if ((gModeFlags & MODE_FLAG_DISPLAY_HELD) && gModeTransitionCallback != NULL) {
         gModeTransitionCallback();
     }
 

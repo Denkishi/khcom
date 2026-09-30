@@ -163,8 +163,8 @@ void mode_sio_btl_connect_1(void) {
         if (gSioBtlConnectWork->timer > 4) {
             SioSetLinkCallbacks(SioExchangeSend, SioExchangeRecv);
             SioPrepareCharaLinkExchange();
-            gSystemFlags |= 1;
-            gSystemFlags |= 0x10;
+            gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
+            gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
             gSioBtlConnectWork->state++;
         }
         break;
@@ -1253,7 +1253,7 @@ void SioBtlOptionWaitDeckExchange(void) {
         gSioBtlOptionWork->timer++;
         if (gSioBtlOptionWork->timer > 59) {
             gSioBtlOptionWork->timer = 0;
-            gSystemFlags |= 1;
+            gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
             SioSetLinkCallbacks(eu_080C273C, eu_080C2740);
             SioApplyBattleSettings();
             gRandomPartnerDpadTimer = 180;
@@ -1295,7 +1295,7 @@ void SioBtlOptionSyncStart(void) {
 
         if (gSioCommandRecv[1][0] == 0x7CD2 && gSioCommandRecv[1][1] == 0x7CD2) {
             gSioBtlOptionWork->timer = 0;
-            gSystemFlags &= 0xFFEF;
+            gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
             gSioBtlOptionWork->state++;
         }
     }
@@ -1843,10 +1843,10 @@ void SioBtlOptionPlayWorldBgm(void) {
 void mode_sio_btl_cardget_0(s32 arg) {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
-        gSystemFlags |= 0x10;
+        gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
     }
 #else
-    gSystemFlags |= 0x10;
+    gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
 #endif
 
     if (gLinkDecksAllocated == 1) {
@@ -2258,8 +2258,8 @@ void mode_sio_chg_connect_1(void) {
         if (gSioChgConnectWork->timer > 4) {
             SioSetLinkCallbacks(SioCommandSend, SioCommandRecv);
             SioCommandReset();
-            gSystemFlags |= 1;
-            gSystemFlags |= 0x10;
+            gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
+            gSystemFlags |= SYSTEM_FLAG_DMA3_FLUSH_CPU;
             SioChgConnectStartTrade();
             return;
         }
@@ -2699,7 +2699,7 @@ void SioChgCardSave(void) {
             }
         }
     } else {
-        gSystemFlags &= 0xFFFE;
+        gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
         ModeRequest(&gModeSioError, 0);
     }
     gSioChgCardWork->timer = 0;
@@ -3290,7 +3290,7 @@ void func_080B3DF8(void) {
 #endif
 
 void mode_sioError_0(s32 arg) {
-    gSystemFlags |= 0x20;
+    gSystemFlags |= SYSTEM_FLAG_NO_SOFT_RESET;
     gSioErrorWork = EwramAlloc(sizeof(SioErrorWork));
     m4aMPlayAllStop();
     FadeStartIn(0, 16);

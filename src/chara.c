@@ -328,7 +328,7 @@ u8 SioConnectUpdate(void) {
         }
 
         if (gSioLinkResult == 1) {
-            gSystemFlags &= 0xFFFE;
+            gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
             gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
             return gSioLinkResult;
@@ -374,7 +374,7 @@ u8 SioLinkUpdate(void) {
             if (gSioConnected == 1) {
                 gSioErrorFrameCount++;
                 if (gSioErrorFrameCount > 180) {
-                    gSystemFlags &= 0xFFFE;
+                    gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
                     gSioErrorStatus = gSioStatus;
                     ModeRequest(&gModeSioError, 0);
                     gSioLinkResult = 1;
@@ -412,7 +412,7 @@ u8 SioConnectUpdateAuto(void) {
         }
 
         if (gSioLinkResult == 1) {
-            gSystemFlags &= 0xFFFE;
+            gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
             gSioErrorStatus = gSioStatus;
             ModeRequest(&gModeSioError, 0);
             return gSioLinkResult;
@@ -427,13 +427,13 @@ void FreeLinkDecks(void) {
 }
 
 void SioLinkClose(void) {
-    if (gSystemFlags & 1) {
+    if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioShutdown();
-        gSystemFlags &= 0xFFFE;
+        gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
     }
 
-    if (gSystemFlags & 0x10) {
-        gSystemFlags &= 0xFFEF;
+    if (gSystemFlags & SYSTEM_FLAG_DMA3_FLUSH_CPU) {
+        gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
     }
 
     if (gLinkDecksAllocated == 1) {
@@ -508,8 +508,8 @@ u8 SioAutoConnectUpdate(void) {
         if (gSioAutoConnectTimer > 4) {
             gSioAutoConnectTimer = 0;
             SioSetLinkCallbacks(SioKeySyncSend, SioKeySyncRecv);
-            gSystemFlags |= 1;
-            gSystemFlags &= 0xFFEF;
+            gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
+            gSystemFlags &= ~SYSTEM_FLAG_DMA3_FLUSH_CPU;
             gSioAutoConnectState++;
         }
         break;

@@ -190,18 +190,18 @@ void AgbMain(void) {
     EnableVBlankIntr();
     for (;;) {
         UpdateKeyState();
-        if (gSystemFlags & 1) {
+        if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             SioLinkUpdate();
             if (!(gSioStatus & 0x100)) {
-                if (!(gFrameSyncFlags & 4)) {
+                if (!(gFrameSyncFlags & FRAME_SYNC_FRAME_READY)) {
                     ModeUpdate();
-                    gFrameSyncFlags |= 4;
+                    gFrameSyncFlags |= FRAME_SYNC_FRAME_READY;
                 }
             }
         } else {
-            if (!(gFrameSyncFlags & 4)) {
+            if (!(gFrameSyncFlags & FRAME_SYNC_FRAME_READY)) {
                 ModeUpdate();
-                gFrameSyncFlags |= 4;
+                gFrameSyncFlags |= FRAME_SYNC_FRAME_READY;
             }
         }
         ApplyIntrCallbacks();
@@ -216,29 +216,29 @@ void VBlankIntr(void) {
         return;
     }
 
-    if (gFrameSyncFlags & 2) {
-        gFrameSyncFlags |= 8;
+    if (gFrameSyncFlags & FRAME_SYNC_IN_VBLANK) {
+        gFrameSyncFlags |= FRAME_SYNC_VBLANK_OVERRUN;
         return;
     }
-    gFrameSyncFlags |= 2;
-    if (!(gFrameSyncFlags & 1)) {
+    gFrameSyncFlags |= FRAME_SYNC_IN_VBLANK;
+    if (!(gFrameSyncFlags & FRAME_SYNC_SOUND_BUSY)) {
         m4aSoundVSync();
     }
     gIntrCheck |= 1;
 
-    if (gFrameSyncFlags & 4) {
+    if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();
     }
     ModeRunVBlankCallbacks();
     ScanlineDmaUpdate();
     gVBlankEndVCount = REG_VCOUNT;
-    gFrameSyncFlags &= 0xFFFB;
-    if (!(gFrameSyncFlags & 1)) {
-        gFrameSyncFlags |= 1;
+    gFrameSyncFlags &= ~FRAME_SYNC_FRAME_READY;
+    if (!(gFrameSyncFlags & FRAME_SYNC_SOUND_BUSY)) {
+        gFrameSyncFlags |= FRAME_SYNC_SOUND_BUSY;
         m4aSoundMain();
-        gFrameSyncFlags &= 0xFFFE;
+        gFrameSyncFlags &= ~FRAME_SYNC_SOUND_BUSY;
     }
-    gFrameSyncFlags &= 0xFFFD;
+    gFrameSyncFlags &= ~FRAME_SYNC_IN_VBLANK;
     gVBlankCounter++;
 }
 
@@ -281,51 +281,51 @@ void ApplyIntrCallbacks(void) {
 }
 
 void VBlankIntrSio(void) {
-    if (gFrameSyncFlags & 2) {
-        gFrameSyncFlags |= 8;
+    if (gFrameSyncFlags & FRAME_SYNC_IN_VBLANK) {
+        gFrameSyncFlags |= FRAME_SYNC_VBLANK_OVERRUN;
         return;
     }
-    gFrameSyncFlags |= 2;
+    gFrameSyncFlags |= FRAME_SYNC_IN_VBLANK;
     SioVBlankUpdate();
 
-    if (!(gFrameSyncFlags & 1)) {
+    if (!(gFrameSyncFlags & FRAME_SYNC_SOUND_BUSY)) {
         m4aSoundVSync();
     }
     gIntrCheck |= 1;
 
-    if (gFrameSyncFlags & 4) {
+    if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();
     }
     ModeRunVBlankCallbacks();
     gVBlankEndVCount = REG_VCOUNT;
-    gFrameSyncFlags &= 0xFFFB;
-    if (!(gFrameSyncFlags & 1)) {
-        gFrameSyncFlags |= 1;
+    gFrameSyncFlags &= ~FRAME_SYNC_FRAME_READY;
+    if (!(gFrameSyncFlags & FRAME_SYNC_SOUND_BUSY)) {
+        gFrameSyncFlags |= FRAME_SYNC_SOUND_BUSY;
         m4aSoundMain();
-        gFrameSyncFlags &= 0xFFFE;
+        gFrameSyncFlags &= ~FRAME_SYNC_SOUND_BUSY;
     }
-    gFrameSyncFlags &= 0xFFFD;
+    gFrameSyncFlags &= ~FRAME_SYNC_IN_VBLANK;
     gVBlankCounter++;
 }
 
 void VBlankIntrBlockAudio(void) {
-    if (gFrameSyncFlags & 2) {
-        gFrameSyncFlags |= 8;
+    if (gFrameSyncFlags & FRAME_SYNC_IN_VBLANK) {
+        gFrameSyncFlags |= FRAME_SYNC_VBLANK_OVERRUN;
         return;
     }
-    gFrameSyncFlags |= 2;
+    gFrameSyncFlags |= FRAME_SYNC_IN_VBLANK;
     REG_IME = 0;
     BlockAudioVBlank();
     REG_IME = 1;
     gIntrCheck |= 1;
 
-    if (gFrameSyncFlags & 4) {
+    if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();
     }
     ModeRunVBlankCallbacks();
     ScanlineDmaUpdate();
     gVBlankEndVCount = REG_VCOUNT;
-    gFrameSyncFlags &= 0xFFFB;
-    gFrameSyncFlags &= 0xFFFD;
+    gFrameSyncFlags &= ~FRAME_SYNC_FRAME_READY;
+    gFrameSyncFlags &= ~FRAME_SYNC_IN_VBLANK;
     gVBlankCounter++;
 }

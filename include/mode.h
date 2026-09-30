@@ -3,6 +3,14 @@
 
 #include "types.h"
 
+enum ModeFlag {
+    MODE_FLAG_BLANK_PENDING = 0x1,
+    MODE_FLAG_DISPLAY_HELD = 0x2,
+    MODE_FLAG_TRANSITION_ACTIVE = 0x4,
+    MODE_FLAG_STARTED = 0x8,
+    MODE_FLAG_HEAP_RESET = 0x10
+};
+
 typedef void (*ModeInitFunc)(s32 arg);
 typedef void (*ModeFunc)(void);
 

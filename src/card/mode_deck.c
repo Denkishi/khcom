@@ -23,13 +23,13 @@ void Mode_Deck_0(void) {
         TaskCreate(&sModeDeckTasks, &gTaskDescDeckmenu2Riku, &sModeDeckResult);
     }
 
-    if (gSystemFlags & 1) {
+    if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         m4aMPlayAllStop();
     }
 }
 
 void Mode_Deck_1(void) {
-    if (gSystemFlags & 1) {
+    if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioBtlOptionRecvSettings();
     } else {
         UpdatePlayTime();
@@ -41,7 +41,7 @@ void Mode_Deck_1(void) {
     if (sModeDeckResult == 7) {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
-        } else if (gSystemFlags & 1) {
+        } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
             ReturnToMap(0);
@@ -51,7 +51,7 @@ void Mode_Deck_1(void) {
     if (sModeDeckResult == 8) {
         if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
             ModeRequest(&gModeChkbtl, 0);
-        } else if (gSystemFlags & 1) {
+        } else if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
             ModeRequest(&gModeSioBtlOption, 1);
         } else {
             ReturnToMap(1);

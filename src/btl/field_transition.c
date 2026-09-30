@@ -31,7 +31,7 @@ void FieldTransitionUpdate(void) {
         return;
     }
     REG_DISPCNT |= DISPCNT_OBJ_ON;
-    gSystemFlags |= 8;
+    gSystemFlags |= SYSTEM_FLAG_DMA3_IMMEDIATE;
     if (gFieldTransitionWork->initialized == 0) {
         gFieldTransitionWork->tiles = AllocObjTiles(0xA00, 0);
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -123,7 +123,7 @@ void FieldTransitionUpdate(void) {
     } else {
         DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 0, 0);
     }
-    gSystemFlags &= ~8;
+    gSystemFlags &= ~SYSTEM_FLAG_DMA3_IMMEDIATE;
     UpdateSpriteOam();
 }
 void StartFieldTransition(void) {

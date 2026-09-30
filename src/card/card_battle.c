@@ -366,7 +366,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             arg.listIndex = slot;
             arg.slot = c;
             arg.reloadCount = w->reloadCounts[slot];
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
                 TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
@@ -386,7 +386,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             arg.listIndex = slot;
             arg.slot = c;
             arg.reloadCount = w->reloadCounts[slot];
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
                 TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
@@ -406,7 +406,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             arg.listIndex = slot;
             arg.slot = c;
             arg.reloadCount = w->reloadCounts[slot];
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 TaskCreate(&w->tasks, &gTaskDescCardReload, &arg);
             } else {
                 TaskCreate(&w->tasks, &gTaskDescCardSora, &arg);
@@ -1262,7 +1262,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
                 arg.slot = c;
                 arg.reloadCount = w->reloadCounts[w->listIndex];
 
-                if (c->cardId == 0xFFFE) {
+                if (c->cardId == CARD_ID_RELOAD) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardReload, &arg)->work;
                 } else {
                     e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;
@@ -1305,7 +1305,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
                 arg.slot = c;
                 arg.reloadCount = w->reloadCounts[w->listIndex];
 
-                if (c->cardId == 0xFFFE) {
+                if (c->cardId == CARD_ID_RELOAD) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardReload, &arg)->work;
                 } else {
                     e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;

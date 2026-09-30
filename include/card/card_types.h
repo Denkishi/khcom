@@ -6,6 +6,11 @@
 #define DECK_SIZE 99
 #define CARD_ID_MASK 0xFFF
 
+enum CardIdSentinel {
+    CARD_ID_RELOAD = 0xFFFE,
+    CARD_ID_NONE = 0xFFFF
+};
+
 typedef struct Deck {
     u16 cards[DECK_SIZE];
     u8 name[0x14];

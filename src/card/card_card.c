@@ -143,7 +143,7 @@ void LoadActiveDeckCardSlots(CardSlot* slots, s32 deckIndex) {
         slots[n].unk_06 = 0;
         slots[n].stocked = 0;
         slots[n].removed = 0;
-        slots[n].cardId = 0xFFFE;
+        slots[n].cardId = CARD_ID_RELOAD;
         slots[n].index = n;
         slots[n].restoreOnReload = 0;
     }
@@ -169,7 +169,7 @@ void LoadTutorialDeckCardSlots(CardSlot* slots) {
     slots[n].unk_06 = 0;
     slots[n].stocked = 0;
     slots[n].removed = 0;
-    slots[n].cardId = 0xFFFE;
+    slots[n].cardId = CARD_ID_RELOAD;
     slots[n].index = n;
     slots[n].restoreOnReload = 0;
 }
@@ -262,7 +262,7 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
 
             for (i = 0; i < n + 1; i++) {
                 w->slots[0][i].unk_06 = 0;
-                w->slots[0][i].cardId = 0xFFFF;
+                w->slots[0][i].cardId = CARD_ID_NONE;
                 w->slots[0][i].stocked = 0;
                 w->slots[0][i].removed = 0;
                 w->slots[0][i].used = 0;
@@ -270,7 +270,7 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
 
             for (i = n + 1; i < n + 15; i++) {
                 w->slots[0][i].unk_06 = 1;
-                w->slots[0][i].cardId = 0xFFFF;
+                w->slots[0][i].cardId = CARD_ID_NONE;
                 w->slots[0][i].stocked = 1;
                 w->slots[0][i].removed = 1;
                 w->slots[0][i].used = 1;
@@ -304,7 +304,7 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
 
             for (i = 0; i < n; i++) {
                 w->slots[3][i].unk_06 = 0;
-                w->slots[3][i].cardId = 0xFFFF;
+                w->slots[3][i].cardId = CARD_ID_NONE;
                 w->slots[3][i].stocked = 0;
                 w->slots[3][i].removed = 0;
                 w->slots[3][i].used = 0;
@@ -357,7 +357,7 @@ u16 CountAvailableCards(CardBattleWork* w, u8 n) {
     count = 0;
 
     for (i = 0; i < max; i++) {
-        if (w->slots[n][i].unk_06 == 0 && w->slots[n][i].stocked == 0 && w->slots[n][i].used == 0 && w->slots[n][i].removed == 0 && w->slots[n][i].cardId != 0xFFFE) {
+        if (w->slots[n][i].unk_06 == 0 && w->slots[n][i].stocked == 0 && w->slots[n][i].used == 0 && w->slots[n][i].removed == 0 && w->slots[n][i].cardId != CARD_ID_RELOAD) {
             count++;
         }
     }
@@ -384,7 +384,7 @@ u16 CountRemainingAttackCards(CardBattleWork* w, u8 b) {
         c = w->slots[b];
 
         if (c[i].removed == 0) {
-            if (c[i].cardId != 0xFFFE) {
+            if (c[i].cardId != CARD_ID_RELOAD) {
                 if (gCardDefs[c[i].cardId & CARD_ID_MASK].category == 0) {
                     count++;
                 }
@@ -454,7 +454,7 @@ void BeginSoraReloadDeal(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 p = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 p = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -620,7 +620,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
             args.slot = slot;
             args.reloadCount = w->reloadCounts[b];
 
-            if (slot->cardId == 0xFFFE) {
+            if (slot->cardId == CARD_ID_RELOAD) {
                 q = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 q = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -695,7 +695,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[b];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 q = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 q = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -1068,7 +1068,7 @@ s32 UseSoraCard(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -1212,7 +1212,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -1314,7 +1314,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -1470,7 +1470,7 @@ s32 StockSoraCard(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardReload, &args)->work;
             } else {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
@@ -2426,8 +2426,8 @@ void RestoreCardsForElixir(CardBattleWork* w) {
     c = w->slots[0];
 
     for (i = 0; i < w->slotCounts[0]; i++) {
-        if (c[i].cardId != 0xFFFF) {
-            if (c[i].cardId != 0xFFFE) {
+        if (c[i].cardId != CARD_ID_NONE) {
+            if (c[i].cardId != CARD_ID_RELOAD) {
                 if (gCardDefs[c[i].cardId & CARD_ID_MASK].category != 2) {
                     c[i].unk_06 = 0;
                     c[i].removed = 0;
@@ -2444,8 +2444,8 @@ void RemoveItemCards(CardBattleWork* w) {
     c = w->slots[0];
 
     for (i = 0; i < w->slotCounts[0]; i++) {
-        if (c[i].cardId != 0xFFFF) {
-            if (c[i].cardId != 0xFFFE) {
+        if (c[i].cardId != CARD_ID_NONE) {
+            if (c[i].cardId != CARD_ID_RELOAD) {
                 if (gCardDefs[c[i].cardId & CARD_ID_MASK].flags & CARD_DEF_FLAG_ITEM) {
                     if (c[i].removed == 0) {
                         c[i].restoreOnReload = 1;
@@ -2544,7 +2544,7 @@ void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     if ((s16)v != -1) {
         LookupSoraCardDef(&p->args, &p->cardDef, (u8)v);
 
-        if (p->args.slot->cardId == 0xFFFE) {
+        if (p->args.slot->cardId == CARD_ID_RELOAD) {
             p->flags |= CARD_DISP_FLAG_RELOAD_CARD;
         }
     } else {
@@ -3425,8 +3425,8 @@ void LookupSoraCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
     u32* q;
 
     if (a->slot != NULL) {
-        if (a->slot->cardId != 0xFFFF) {
-            if (a->slot->cardId != 0xFFFE) {
+        if (a->slot->cardId != CARD_ID_NONE) {
+            if (a->slot->cardId != CARD_ID_RELOAD) {
                 *out = &gCardDefs[a->slot->cardId & CARD_ID_MASK];
             } else {
                 *out = 0;

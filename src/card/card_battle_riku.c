@@ -291,7 +291,7 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
             args.listIndex = slot;
             args.slot = card;
             args.reloadCount = w->reloadCounts[slot];
-            if (card->cardId == 0xFFFE) {
+            if (card->cardId == CARD_ID_RELOAD) {
                 gRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
             } else {
                 gRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -427,7 +427,7 @@ void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n) {
         slots[count].unk_06 = 0;
         slots[count].stocked = 0;
         slots[count].removed = 0;
-        slots[count].cardId = 0xFFFE;
+        slots[count].cardId = CARD_ID_RELOAD;
         slots[count].index = count;
     }
 }
@@ -482,7 +482,7 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
-                w->slots[idx][i].cardId = 0xFFFF;
+                w->slots[idx][i].cardId = CARD_ID_NONE;
                 w->slots[idx][i].stocked = 0;
                 w->slots[idx][i].removed = 0;
                 w->slots[idx][i].used = 0;
@@ -491,7 +491,7 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
 
             for (i = n; i < n + 15; i++) {
                 w->slots[idx][i].unk_06 = 1;
-                w->slots[idx][i].cardId = 0xFFFF;
+                w->slots[idx][i].cardId = CARD_ID_NONE;
                 w->slots[idx][i].stocked = 1;
                 w->slots[idx][i].removed = 1;
                 w->slots[idx][i].used = 1;
@@ -509,7 +509,7 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
-                w->slots[idx][i].cardId = 0xFFFF;
+                w->slots[idx][i].cardId = CARD_ID_NONE;
                 w->slots[idx][i].stocked = 0;
                 w->slots[idx][i].removed = 0;
                 w->slots[idx][i].used = 0;
@@ -1442,7 +1442,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
                 args.slot = c;
                 args.reloadCount = w->reloadCounts[n];
 
-                if (c->cardId == 0xFFFE) {
+                if (c->cardId == CARD_ID_RELOAD) {
                     p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
                 } else {
                     p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -1487,7 +1487,7 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
                 args.slot = c;
                 args.reloadCount = w->reloadCounts[n];
 
-                if (c->cardId == 0xFFFE) {
+                if (c->cardId == CARD_ID_RELOAD) {
                     p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
                 } else {
                     p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -1891,7 +1891,7 @@ u8 UseRikuCard(CardBattleWork* w) {
         args.slot = c;
         args.reloadCount = w->reloadCounts[w->listIndex];
 
-        if (c->cardId == 0xFFFE) {
+        if (c->cardId == CARD_ID_RELOAD) {
             p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
         } else {
             p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -1947,7 +1947,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
             } else {
                 p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -2085,7 +2085,7 @@ u8 StockRikuCard(CardBattleWork* w) {
         args.slot = c;
         args.reloadCount = w->reloadCounts[w->listIndex];
 
-        if (c->cardId == 0xFFFE) {
+        if (c->cardId == CARD_ID_RELOAD) {
             p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
         } else {
             p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -2413,7 +2413,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             args.slot = c;
             args.reloadCount = w->reloadCounts[w->listIndex];
 
-            if (c->cardId == 0xFFFE) {
+            if (c->cardId == CARD_ID_RELOAD) {
                 p = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
             } else {
                 p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
@@ -2634,7 +2634,7 @@ void RikuCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     if ((s16)v != -1) {
         LookupRikuCardDef(&p->args, &p->cardDef, (u8)v);
 
-        if (p->args.slot->cardId == 0xFFFE) {
+        if (p->args.slot->cardId == CARD_ID_RELOAD) {
             p->flags |= CARD_DISP_FLAG_RELOAD_CARD;
         }
     } else {
@@ -3353,8 +3353,8 @@ void LookupRikuCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
     u32* q;
 
     if (a->slot != NULL) {
-        if (a->slot->cardId != 0xFFFF) {
-            if (a->slot->cardId != 0xFFFE) {
+        if (a->slot->cardId != CARD_ID_NONE) {
+            if (a->slot->cardId != CARD_ID_RELOAD) {
                 *out = &gCardDefs[a->slot->cardId & CARD_ID_MASK];
             } else {
                 *out = 0;

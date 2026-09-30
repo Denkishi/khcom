@@ -100,29 +100,29 @@ void UpdateWorldFriendFlags(void) {
         }
 
         switch (gMapFloorState.world) {
-        case 1:
+        case WORLD_AGRABAH:
             t = 4 | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
-        case 2:
+        case WORLD_ATLANTICA:
             t = 8 | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
-        case 6:
+        case WORLD_HALLOWEEN_TOWN:
             t = 0x10 | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
-        case 7:
+        case WORLD_NEVER_LAND:
             t = 0x20 | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
-        case 8:
+        case WORLD_HOLLOW_BASTION:
             t = 0x40 | gGameState.progression.friendFlags;
             gGameState.progression.friendFlags = t;
             break;
-        case 3:
-        case 4:
-        case 5:
+        case WORLD_OLYMPUS_COLISEUM:
+        case WORLD_WONDERLAND:
+        case WORLD_MONSTRO:
         default:
             break;
         }
@@ -983,7 +983,7 @@ u8 GetMapWalkOutMode(void) {
         }
 
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0 && gGameState.floor == 12) {
-            SetFloorWorld(12);
+            SetFloorWorld(WORLD_CASTLE_OBLIVION);
             return 2;
         }
 

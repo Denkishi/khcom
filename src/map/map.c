@@ -416,7 +416,7 @@ void MapEnmSpawnRoomSet(void) {
         break;
     case 5:
         for (i = 0; i < 3; i++) {
-            if (gMapFloorState.world == 2) {
+            if (gMapFloorState.world == WORLD_ATLANTICA) {
                 MapEnmSpawnFixed(&w, 4, 0);
             } else if (GetRandom() % 2) {
                 MapEnmSpawnFixed(&w, 0, 0);
@@ -505,7 +505,7 @@ void MapEnmUpdateSpawner(void) {
         d = gMapEnmDefs[6];
         break;
     default:
-        if (gMapFloorState.world == 2) {
+        if (gMapFloorState.world == WORLD_ATLANTICA) {
             d = gMapEnmDefs[4];
         } else if (GetRandom() % 3) {
             d = gMapEnmDefs[0];
@@ -626,37 +626,37 @@ u8 GetRandomMapGmkIndex(u8 a) {
     u8 r;
 
     switch (gMapFloorState.world) {
-    case 1:
+    case WORLD_AGRABAH:
         r = GetRandom() % 12 + 2;
         break;
-    case 2:
+    case WORLD_ATLANTICA:
         r = GetRandom() % 2;
         break;
-    case 4:
+    case WORLD_WONDERLAND:
         r = GetRandom() % 3 + 14;
         break;
-    case 5:
+    case WORLD_MONSTRO:
         r = GetRandom() % 5 + 17;
         break;
-    case 3:
+    case WORLD_OLYMPUS_COLISEUM:
         r = GetRandom() % 5 + 35;
         break;
-    case 8:
+    case WORLD_HOLLOW_BASTION:
         r = GetRandom() % 5 + 40;
         break;
-    case 7:
+    case WORLD_NEVER_LAND:
         r = GetRandom() % 7 + 45;
         break;
-    case 9:
+    case WORLD_DESTINY_ISLANDS:
         r = GetRandom() % 5 + 52;
         break;
-    case 10:
+    case WORLD_TRAVERSE_TOWN:
         r = GetRandom() % 2 + 57;
         break;
-    case 12:
+    case WORLD_CASTLE_OBLIVION:
         r = GetRandom() % 2 + 63;
         break;
-    case 6:
+    case WORLD_HALLOWEEN_TOWN:
         if (a <= 7) {
             switch (GetRandom() % 5) {
             case 2:
@@ -1472,22 +1472,22 @@ void MapGmkPlaceWorldGimmicks(void) {
 
     for (i = gMapGmkCount; i <= 15; i++) {
         switch (gMapFloorState.world) {
-        case 10:
+        case WORLD_TRAVERSE_TOWN:
             t = &gWorldMapGmkDefs[0];
             break;
-        case 4:
+        case WORLD_WONDERLAND:
             t = &gWorldMapGmkDefs[1];
             break;
-        case 2:
+        case WORLD_ATLANTICA:
             t = &gWorldMapGmkDefs[2];
             break;
-        case 6:
+        case WORLD_HALLOWEEN_TOWN:
             t = &gWorldMapGmkDefs[3];
             break;
-        case 8:
+        case WORLD_HOLLOW_BASTION:
             t = GetRandom() % 2 ? &gWorldMapGmkDefs[4] : &gWorldMapGmkDefs[5];
             break;
-        case 12:
+        case WORLD_CASTLE_OBLIVION:
             t = &gWorldMapGmkDefs[6];
             break;
         default:
@@ -2555,37 +2555,37 @@ void MapFldSetUpdateAndRun(ModeFunc a) {
 
 void MapFldCreateWorldLogo(void) {
     switch (gMapFloorState.world) {
-    case 2:
+    case WORLD_ATLANTICA:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)2);
         break;
-    case 6:
+    case WORLD_HALLOWEEN_TOWN:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)6);
         break;
-    case 5:
+    case WORLD_MONSTRO:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)5);
         break;
-    case 7:
+    case WORLD_NEVER_LAND:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)7);
         break;
-    case 3:
+    case WORLD_OLYMPUS_COLISEUM:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)3);
         break;
-    case 8:
+    case WORLD_HOLLOW_BASTION:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)8);
         break;
-    case 9:
+    case WORLD_DESTINY_ISLANDS:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)9);
         break;
-    case 1:
+    case WORLD_AGRABAH:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)1);
         break;
-    case 10:
+    case WORLD_TRAVERSE_TOWN:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)10);
         break;
-    case 11:
+    case WORLD_TWILIGHT_TOWN:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)11);
         break;
-    case 12:
+    case WORLD_CASTLE_OBLIVION:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)12);
         break;
     default:
@@ -2999,25 +2999,25 @@ u8 GetWorldEntryEventId(void) {
     }
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gMapFloorState.world) {
-        case 8:
+        case WORLD_HOLLOW_BASTION:
 #ifdef VERSION_EU
             return 0x95;
 #else
             return 0x97;
 #endif
-        case 9:
+        case WORLD_DESTINY_ISLANDS:
 #ifdef VERSION_EU
             return 0xAF;
 #else
             return 0xB1;
 #endif
-        case 11:
+        case WORLD_TWILIGHT_TOWN:
 #ifdef VERSION_EU
             return 0xB8;
 #else
             return 0xBA;
 #endif
-        case 12:
+        case WORLD_CASTLE_OBLIVION:
 #ifdef VERSION_EU
             return 0xBE;
 #else
@@ -3096,7 +3096,7 @@ void func_080EA5CC(void) {
         if (gMapFloorState.world == 0) {
             gMapFloorState.entrySide = 0;
             ModeRequest(&gModeWorldselect, 0);
-        } else if (gMapFloorState.world == 13) {
+        } else if (gMapFloorState.world == WORLD_100_ACRE_WOOD) {
 #ifdef VERSION_EU
             RequestEventMode(0x85);
 #else
@@ -3125,7 +3125,7 @@ void func_080EA694(void) {
         return;
     }
     if (gMapRoomState->flags & 0x200) {
-        if (gMapFloorState.world != 13) {
+        if (gMapFloorState.world != WORLD_100_ACRE_WOOD) {
             EnterFloorWorld();
             ModeRequest(&gModeMapFld, 0);
         } else {
@@ -4206,7 +4206,7 @@ void LoadGameMenuExit(LoadGameMenuWork* work) {
 #ifdef VERSION_EU
         if (e->world != WORLD_100_ACRE_WOOD) {
 #else
-        if (gMapFloorState.world != 13) {
+        if (gMapFloorState.world != WORLD_100_ACRE_WOOD) {
 #endif
             RequestMapMode();
         } else {

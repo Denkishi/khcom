@@ -603,7 +603,7 @@ void Mode_MapChk_1(void) {
         case 4:
             gGameState.floors[0].world = WORLD_TRAVERSE_TOWN;
             GoToFloor(0);
-            SetFloorWorld(10);
+            SetFloorWorld(WORLD_TRAVERSE_TOWN);
             gMapFloorState.room = 0xFC;
             gMapFloorState.entrySide = 5;
             RequestMapMode();

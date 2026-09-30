@@ -5,6 +5,7 @@
 #include "engine_math.h"
 #include <stdlib.h>
 #include "map_fixed_data.h"
+#include "world_types.h"
 
 MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);
@@ -337,7 +338,7 @@ void RequestMapMode(void) {
         ModeRequest(&gModeMapFix, 0);
         break;
     default:
-        if (gMapFloorState.world != 13) {
+        if (gMapFloorState.world != WORLD_100_ACRE_WOOD) {
             ModeRequest(&gModeMapFld, 0);
         } else {
             ModeRequest(&gModePooh, 1);

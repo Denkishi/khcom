@@ -17,6 +17,7 @@
 #include "mode_test_api.h"
 #include "songs.h"
 #include <stdlib.h>
+#include "world_types.h"
 
 #ifdef VERSION_EU
 #define LANGSEL(x) eu_0805E924(x)
@@ -1801,7 +1802,7 @@ void MapDbgEditWorld(MapDbgWork* w) {
     MapFloorRoom* d = GetMapFloorRoom(gMapFloorState.room);
 
     if ((GetKeysRepeat() & DPAD_UP) && w->codeCursor == 0) {
-        gMapFloorState.world = gMapFloorState.world < 12 ? gMapFloorState.world + 1 : 0;
+        gMapFloorState.world = gMapFloorState.world < WORLD_CASTLE_OBLIVION ? gMapFloorState.world + 1 : 0;
     }
 
     if ((GetKeysRepeat() & DPAD_DOWN) && w->codeCursor == 0) {
@@ -2005,7 +2006,7 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* w, FldPos* arg) {
     w->obj.fieldPosition.z -= 0x1000;
     w->obj.height = 16;
 
-    if (gMapFloorState.world != 2) {
+    if (gMapFloorState.world != WORLD_ATLANTICA) {
         w->tiles = AllocObjTiles(0x220, gEmy01L00Tiles);
         w->palette = LoadObjPalette(gEmy01Palette, 32);
         an = &w->anim;

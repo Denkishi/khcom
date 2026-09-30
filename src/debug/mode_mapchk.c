@@ -588,7 +588,7 @@ void Mode_MapChk_1(void) {
             gGameState.floors[e->floor].world = 0;
             MapChkSetFloorProgress(gMapChkWork->floor, 0);
             GoToFloor(gMapChkWork->floor);
-            gMapFloorState.room = 0xFE;
+            gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
             gMapFloorState.entrySide = 5;
             RequestMapMode();
             break;
@@ -596,7 +596,7 @@ void Mode_MapChk_1(void) {
             gGameState.floors[gMapChkWork->floor].world = gUnk_0984B458[gMapChkWork->world][0];
             MapChkSetFloorProgress(gMapChkWork->floor, 1);
             GoToFloor(gMapChkWork->floor);
-            gMapFloorState.room = 0xFD;
+            gMapFloorState.room = MAP_ROOM_EXIT_HALL;
             gMapFloorState.entrySide = 5;
             RequestMapMode();
             break;
@@ -604,7 +604,7 @@ void Mode_MapChk_1(void) {
             gGameState.floors[0].world = WORLD_TRAVERSE_TOWN;
             GoToFloor(0);
             SetFloorWorld(WORLD_TRAVERSE_TOWN);
-            gMapFloorState.room = 0xFC;
+            gMapFloorState.room = MAP_ROOM_TUTORIAL;
             gMapFloorState.entrySide = 5;
             RequestMapMode();
             break;

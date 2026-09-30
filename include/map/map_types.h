@@ -17,6 +17,13 @@ typedef struct EventKeyList {
     EventKey* keys;
 } EventKeyList;
 
+enum MapRoomId {
+    MAP_ROOM_TUTORIAL = 0xFC,
+    MAP_ROOM_EXIT_HALL = 0xFD,
+    MAP_ROOM_ENTRANCE_HALL = 0xFE,
+    MAP_ROOM_NONE = 0xFF
+};
+
 enum DoorFlag {
     DOOR_FLAG_PRESENT = 0x1,
     DOOR_FLAG_OPEN = 0x2,

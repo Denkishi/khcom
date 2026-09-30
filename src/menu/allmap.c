@@ -583,7 +583,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
         pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != 0xFF && func_080D3A70(room, sAllmapReverseDoors[i])) {
+        if (room != MAP_ROOM_NONE && func_080D3A70(room, sAllmapReverseDoors[i])) {
             n = GetMapRoomCardValue(room) + 1;
 
             if (n == 10) {
@@ -634,7 +634,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != 0xFF && func_080D3AB8(room, sAllmapReverseDoors[i])) {
+        if (room != MAP_ROOM_NONE && func_080D3AB8(room, sAllmapReverseDoors[i])) {
             break;
         }
     }
@@ -903,7 +903,7 @@ void InitAllmap(void) {
     void** state = &gUnk_0203C4B4;
 
     *state = EwramAlloc(sizeof(AllmapState));
-    ((AllmapState*)gUnk_0203C4B4)->lastRoom = 0xFF;
+    ((AllmapState*)gUnk_0203C4B4)->lastRoom = MAP_ROOM_NONE;
     ((AllmapState*)gUnk_0203C4B4)->unk_BC = 0x400;
     gAllmapCursorRoom = gMapFloorState.room;
     TaskPoolInit(&((AllmapState*)gUnk_0203C4B4)->tasks, 35);
@@ -1064,7 +1064,7 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
             }
         }
     }
-    return 255;
+    return MAP_ROOM_NONE;
 }
 
 void AllmapCenterOnRoom(void) {

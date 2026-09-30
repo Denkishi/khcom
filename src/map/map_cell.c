@@ -332,9 +332,9 @@ FldObj* GetMapRoomDoor(void) {
 
 void RequestMapMode(void) {
     switch (gMapFloorState.room) {
-    case 0xFC:
-    case 0xFD:
-    case 0xFE:
+    case MAP_ROOM_TUTORIAL:
+    case MAP_ROOM_EXIT_HALL:
+    case MAP_ROOM_ENTRANCE_HALL:
         ModeRequest(&gModeMapFix, 0);
         break;
     default:
@@ -1786,7 +1786,7 @@ void MapPlaceDoors(void) {
         e->side = i;
         e->flags = GetMapDoorFlags(gMapFloorState.room, i);
 
-        if (e->room != 0xFF) {
+        if (e->room != MAP_ROOM_NONE) {
             switch (i) {
             case 0:
                 gMapRoomState->flags |= ROOM_FLAG_DOOR(0);
@@ -3145,7 +3145,7 @@ void MapFixCreateGimmicks(void* a) {
         e++;
     }
 
-    if (gMapFloorState.room != 0xFE) {
+    if (gMapFloorState.room != MAP_ROOM_ENTRANCE_HALL) {
         return;
     }
 

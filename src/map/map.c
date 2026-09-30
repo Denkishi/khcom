@@ -2420,7 +2420,7 @@ void MapDbgExitRoom(void) {
     DrawMapField();
     if (FadeIsActive() == 0) {
         SetCurrentMapRoom(gMapRoomState->doorRoom, gMapRoomState->doorSide);
-        if (gMapRoomState->doorRoom != 0xFD && gMapRoomState->doorRoom != 0xFE) {
+        if (gMapRoomState->doorRoom != MAP_ROOM_EXIT_HALL && gMapRoomState->doorRoom != MAP_ROOM_ENTRANCE_HALL) {
             ModeRequest(&gModeMapDbg, 0);
         } else {
             RequestMapMode();
@@ -2704,11 +2704,11 @@ void MapFldExitRoom(void) {
     if (r != 0) {
         return;
     }
-    if (gMapRoomState->doorRoom == 0xFE) {
+    if (gMapRoomState->doorRoom == MAP_ROOM_ENTRANCE_HALL) {
         EnterEntranceHall();
         return;
     }
-    if (gMapRoomState->doorRoom == 0xFD) {
+    if (gMapRoomState->doorRoom == MAP_ROOM_EXIT_HALL) {
         EnterExitHall();
         return;
     }
@@ -2920,23 +2920,23 @@ void MapFixSetUpdateAndRun(ModeFunc a) {
 
 MapFixedDef* GetMapFixedDef(void) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        if (gMapFloorState.room == 0xFD) {
+        if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             return gMapFixedDefs[2];
         }
-        if (gMapFloorState.room == 0xFE) {
+        if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
             if (gGameState.floor != 0) {
                 return gMapFixedDefs[1];
             }
             return gMapFixedDefs[5];
         }
     }
-    if (gMapFloorState.room == 0xFD) {
+    if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
         if (gGameState.floor != 12) {
             return gMapFixedDefs[2];
         }
         return gMapFixedDefs[3];
     }
-    if (gMapFloorState.room == 0xFE) {
+    if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
         if (gGameState.floor != 0) {
             return gMapFixedDefs[1];
         }
@@ -2946,7 +2946,7 @@ MapFixedDef* GetMapFixedDef(void) {
 }
 
 void MapFixCreateCharaTasks(void) {
-    if (gMapFloorState.room == 0xFC) {
+    if (gMapFloorState.room == MAP_ROOM_TUTORIAL) {
         return;
     }
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -2966,7 +2966,7 @@ void MapFixCreateCharaTasks(void) {
     if (gGameState.progression.friendFlags & FRIEND_FLAG_GOOFY) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGoofy, 0);
     }
-    if (gMapFloorState.room != 0xFD) {
+    if (gMapFloorState.room != MAP_ROOM_EXIT_HALL) {
         return;
     }
     switch (gMapFloorState.progress) {
@@ -3046,11 +3046,11 @@ void MapFixMain(void) {
     }
     if (gMapRoomState->flags & (ROOM_FLAG_ENTER_WORLD | ROOM_FLAG_EXIT_NEXT_FLOOR | ROOM_FLAG_EXIT_PREV_FLOOR)) {
         FadeStartOut(FADE_MODE_BLACK, 16);
-        if (gMapFloorState.room == 0xFE) {
+        if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
             MapFixSetUpdateAndRun(func_080EA5CC);
             return;
         }
-        if (gMapFloorState.room == 0xFD) {
+        if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             MapFixSetUpdateAndRun(func_080EA694);
             return;
         }
@@ -3208,7 +3208,7 @@ void Mode_MapFix_0(void) {
     UpdateGameWorld();
     SetBgMode0();
 
-    if (gMapFloorState.room == 0xFE) {
+    if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
         SetupBg(3, 0, 28, 0);
         SetupBg(2, 0, 29, 0);
         SetupBg(1, 0, 30, 0);
@@ -3249,7 +3249,7 @@ void Mode_MapFix_0(void) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapFloor, 0);
     }
 
-    if (gMapFloorState.room == 0xFC) {
+    if (gMapFloorState.room == MAP_ROOM_TUTORIAL) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkTutorial, 0);
     }
 

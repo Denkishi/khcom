@@ -81,8 +81,8 @@ void SetHallDefaultSpawn(void) {
 void UpdateWorldFriendFlags(void) {
     u16 t;
 
-    if (gGameState.floor != GetProgressFloor() || gMapFloorState.room == 0xFE
-            || gMapFloorState.room == 0xFD) {
+    if (gGameState.floor != GetProgressFloor() || gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL
+            || gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
         if ((gGameState.flags & GAME_FLAG_FRIENDS_SAVED) == 0) {
             gGameState.flags |= GAME_FLAG_FRIENDS_SAVED;
             gGameState.progression.savedFriendFlags = gGameState.progression.friendFlags & FRIEND_FLAGS_WORLD;
@@ -95,7 +95,7 @@ void UpdateWorldFriendFlags(void) {
         t = gGameState.progression.friendFlags & ~FRIEND_FLAGS_WORLD;
         gGameState.progression.friendFlags = t;
 
-        if (gMapFloorState.room >= 0xFD && gMapFloorState.room <= 0xFE) {
+        if (gMapFloorState.room >= MAP_ROOM_EXIT_HALL && gMapFloorState.room <= MAP_ROOM_ENTRANCE_HALL) {
             return;
         }
 
@@ -178,11 +178,11 @@ u16 GetMapDoorFlags(u8 a, u8 b) {
 
     c = GetMapRoomLink(a, b);
 
-    if (c == 0xFF) {
+    if (c == MAP_ROOM_NONE) {
         return 0;
     }
 
-    if (c >= 0xFD && c <= 0xFE) {
+    if (c >= MAP_ROOM_EXIT_HALL && c <= MAP_ROOM_ENTRANCE_HALL) {
         return DOOR_FLAG_PRESENT | DOOR_FLAG_OPEN;
     }
 
@@ -234,12 +234,12 @@ void UpdateGameWorld(void) {
     u16 t;
 
     switch (gMapFloorState.room) {
-    case 0xFD:
-    case 0xFE:
+    case MAP_ROOM_EXIT_HALL:
+    case MAP_ROOM_ENTRANCE_HALL:
         gGameState.world = 0;
         gGameState.battleStage = BATTLE_STAGE_CASTLE_OBLIVION;
         break;
-    case 0xFC:
+    case MAP_ROOM_TUTORIAL:
         gGameState.world = WORLD_TRAVERSE_TOWN;
         gGameState.battleStage = BATTLE_STAGE_TRAVERSE_TOWN;
         break;
@@ -456,7 +456,7 @@ void AdvanceFloorStory(void) {
     u16 u;
     u16 v;
 
-    if (gMapFloorState.room == 0xFE) {
+    if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
         t = gMapFloorState.flags | FLOOR_FLAG_ENTRY_EVENT_DONE;
         gMapFloorState.flags = t;
 
@@ -466,7 +466,7 @@ void AdvanceFloorStory(void) {
             }
         } else {
             if (gGameState.floor == 0) {
-                gMapFloorState.room = 0xFC;
+                gMapFloorState.room = MAP_ROOM_TUTORIAL;
                 gMapFloorState.entrySide = 5;
                 return;
             }
@@ -477,7 +477,7 @@ void AdvanceFloorStory(void) {
         }
 
         EnterFloorWorld();
-    } else if (gMapFloorState.room == 0xFD) {
+    } else if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
         u = gMapFloorState.flags | FLOOR_FLAG_CLEARED;
         gMapFloorState.flags = u;
         SetFloorJiminyFlags();
@@ -489,7 +489,7 @@ void AdvanceFloorStory(void) {
         v = gMapFloorState.flags | FLOOR_FLAG_EXIT_EVENT_DONE;
         gMapFloorState.flags = v;
         gMapFloorState.progress++;
-        SetCurrentMapRoom(0xFD, 5);
+        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
     } else {
         t = gMapFloorState.flags & ~FLOOR_FLAG_EVENT_ROOM_OPEN;
         gMapFloorState.flags = t;
@@ -511,7 +511,7 @@ void AdvanceFloorStory(void) {
 
 void AdvanceToExitHall(void) {
     gMapFloorState.progress++;
-    SetCurrentMapRoom(0xFD, 5);
+    SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
 }
 
 u8 func_080DF49C(void) {
@@ -777,7 +777,7 @@ void* GetMapWorldName(u8 index) {
 }
 
 void EnterEntranceHall(void) {
-    SetCurrentMapRoom(0xFE, 1);
+    SetCurrentMapRoom(MAP_ROOM_ENTRANCE_HALL, 1);
     RequestMapMode();
 }
 
@@ -812,7 +812,7 @@ void EnterExitHall(void) {
             gMapFloorState.progress++;
         }
 
-        SetCurrentMapRoom(0xFD, 0);
+        SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 0);
         RequestMapMode();
     }
 }
@@ -874,7 +874,7 @@ void WarpToFloor(u8 a) {
     ClearFieldResume();
     StoreMapFloorState();
     GoToFloor(a);
-    gMapFloorState.room = 0xFE;
+    gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
     gMapFloorState.entrySide = 5;
     t = gMapFloorState.flags | FLOOR_FLAG_WARP_IN;
     gMapFloorState.flags = t;
@@ -895,7 +895,7 @@ void EnterFloorWorld(void) {
         gGameState.floor = 0;
     }
 
-    if (gMapFloorState.room == 0xFD) {
+    if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
         SetCurrentMapRoom(e->exitRoom, 1);
     } else {
         SetCurrentMapRoom(e->entryRoom, 0);

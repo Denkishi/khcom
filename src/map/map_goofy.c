@@ -22,7 +22,7 @@ void MapGoofyCheckTalk(MapGoofyWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
-        if (gGameState.floor == 12 && gMapFloorState.room == 0xFD) {
+        if (gGameState.floor == 12 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             CreateCardMessageTask(&w->tasks, 0, 49);
         } else {
             CreateCardMessageTask(&w->tasks, 0, gGoofyTalkMessages[gMapFloorState.progress]);
@@ -42,7 +42,7 @@ void MapGoofyWaitMessage(MapGoofyWork* w) {
 void Task_MapGoofy_0(MapGoofyWork* w) {
     FldObj* e = &w->obj;
 
-    if (gMapFloorState.room != 0xFE) {
+    if (gMapFloorState.room != MAP_ROOM_ENTRANCE_HALL) {
         if (gGameState.floor == 12) {
             w->obj.fieldPosition.x = 0x25000;
             w->obj.fieldPosition.y = 0x10A00;
@@ -832,7 +832,7 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
 void func_080F74E8(MapStairWork* w) {
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800) != 0) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
-            if (gMapFloorState.room == 0xFE) {
+            if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= ROOM_FLAG_WALK_OUT;
             } else {
                 gMapRoomState->flags |= ROOM_FLAG_EXIT_NEXT_FLOOR;
@@ -846,7 +846,7 @@ void func_080F753C(MapStairWork* w) {
 
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k) != 0) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
-            if (gMapFloorState.room == 0xFE) {
+            if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= k;
             } else {
                 gMapRoomState->flags |= ROOM_FLAG_ENTER_WORLD;
@@ -888,7 +888,7 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
 
     switch (w->obj.angle) {
     case 0x2D:
-        if ((gGameState.progression.unk_82 & 0x400) == 0 && gMapFloorState.room == 0xFD) {
+        if ((gGameState.progression.unk_82 & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             w->update = MapStairWaitApproach;
         } else {
             w->update = func_080F74E8;

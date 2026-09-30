@@ -692,35 +692,28 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             break;
         case 3:
             gSoraCardRequest = 0;
-            if (gSoraSelectedCard->cardDef->category != 3) {
-                if (!(gSoraSelectedCard->flags & 0x100000)) {
-                    if (w->reloadPending[w->listIndex] == 0) {
-                        if (gSoraSelectedCard->cardDef->flags & 0x10) {
-                            UseSoraGimmickCard(w);
-                        } else if (!(gSoraSelectedCard->flags & 2)) {
-                            if (CanUseSoraSelectedCard() != 0) {
-                                UseSoraCard(w);
-                            } else if (gSoraSelectedCard->flags & 0x20) {
-                                m4aSongNumStart(SONG_SYS_BEEP);
-                            }
+            if (gSoraSelectedCard->cardDef->category != 3 && !(gSoraSelectedCard->flags & 0x100000)) {
+                if (w->reloadPending[w->listIndex] == 0) {
+                    if (gSoraSelectedCard->cardDef->flags & 0x10) {
+                        UseSoraGimmickCard(w);
+                    } else if (!(gSoraSelectedCard->flags & 2)) {
+                        if (CanUseSoraSelectedCard() != 0) {
+                            UseSoraCard(w);
                         } else if (gSoraSelectedCard->flags & 0x20) {
                             m4aSongNumStart(SONG_SYS_BEEP);
                         }
+                    } else if (gSoraSelectedCard->flags & 0x20) {
+                        m4aSongNumStart(SONG_SYS_BEEP);
                     }
-                } else {
-                    goto locked;
                 }
-            } else if (!(gSoraSelectedCard->flags & 0x100000)) {
+            } else if (gSoraSelectedCard->cardDef->category == 3 && !(gSoraSelectedCard->flags & 0x100000)) {
                 UseSoraHeartlessCard(w);
-            } else {
-            locked:
-                if (gGameState.flags & 8) {
-                    RemoveSoraCardDisplays(w);
-                    gSoraSelectedCard = 0;
-                    gBtlWork->flags |= 0x80000000LL;
-                    w->cardsLeft[w->listIndex] = 0;
-                    w->reloadPending[w->listIndex] = 1;
-                }
+            } else if (gGameState.flags & 8) {
+                RemoveSoraCardDisplays(w);
+                gSoraSelectedCard = 0;
+                gBtlWork->flags |= 0x80000000LL;
+                w->cardsLeft[w->listIndex] = 0;
+                w->reloadPending[w->listIndex] = 1;
             }
             w->unk_C4[4] = 1;
             break;

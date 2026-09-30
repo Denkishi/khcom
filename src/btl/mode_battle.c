@@ -2,6 +2,10 @@
 #include "mode_battle_data.h"
 #include "mode_battle.h"
 #include "sprites_language_select.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include "gba/keys.h"
 
 #ifdef VERSION_EU
 LangWork* gLangWork;

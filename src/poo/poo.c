@@ -7,6 +7,18 @@
 #include "sprites_map.h"
 #include "sprites_pooh.h"
 #include "sprites_sora.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "btl_api.h"
+#include "malloc.h"
+#include "mode_pooh_api.h"
+#include "fade.h"
+#include "songs.h"
+#include "player_progression.h"
+#include <stdlib.h>
+#include "mode_allmap_api.h"
+#include "poo_background_data.h"
+#include <string.h>
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);

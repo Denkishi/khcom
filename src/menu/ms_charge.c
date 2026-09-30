@@ -10,6 +10,12 @@
 #include "sprites_evt.h"
 #include "sprites_moogle_shop.h"
 #include "sprites_card_pictures.h"
+#include "gba/io_reg.h"
+#include "mode_ms_top_api.h"
+#include "malloc.h"
+#include "fade.h"
+#include "mode_test_api.h"
+#include "songs.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_099AEE98[];

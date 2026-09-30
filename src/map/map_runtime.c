@@ -3,7 +3,6 @@
 #include "registration_data.h"
 #include "map_api.h"
 #include "msg_api.h"
-#include "status_api.h"
 #include "m4a_song.h"
 #include "monsgage.h"
 #include "bos4.h"
@@ -12,6 +11,10 @@
 #include "map_text_data.h"
 #include "world_types.h"
 #include "system_state.h"
+#include "player_progression.h"
+#include "common_text.h"
+#include "jiminy_inline_text_data.h"
+#include "jiminy_data.h"
 
 extern MapFloorDef gUnk_0984C868[];
 extern MapFloorDef gUnk_0984CBD0[];

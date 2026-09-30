@@ -6,6 +6,7 @@
 #include "types.h"
 #include "engine.h"
 #include "system_state.h"
+#include "gba/io_reg.h"
 
 const s32 gBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,

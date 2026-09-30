@@ -10,7 +10,6 @@
 #include "listpool.h"
 #include "card.h"
 #include "game.h"
-#include "mode_test_api.h"
 #include "text.h"
 #include "display.h"
 #include "obj_api.h"
@@ -23,6 +22,8 @@
 #include "gba/keys.h"
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
+#include "obj_resource_types.h"
+#include "songs.h"
 
 u16 CountAvailableCards(CardBattleWork* w, u8 n);
 s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task);

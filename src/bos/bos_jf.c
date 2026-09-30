@@ -2,6 +2,9 @@
 #include "bos2.h"
 #include "sprites_bos2.h"
 #include "system_state.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
 
 s16 gBosJfActorX EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);

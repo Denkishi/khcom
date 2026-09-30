@@ -1,6 +1,11 @@
 #include "mode_test.h"
 #include "msg.h"
 #include "card_ids.h"
+#include "gba/keys.h"
+#include "malloc.h"
+#include "fade.h"
+#include "player_progression.h"
+#include "songs.h"
 
 
 TaskPool gEventTaskPool;

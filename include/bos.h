@@ -1,10 +1,6 @@
 #ifndef GUARD_BOS_H
 #define GUARD_BOS_H
 
-#include "boss_background_types.h"
-
-#include "bos_tasks.h"
-
 #include "types.h"
 #include "game.h"
 

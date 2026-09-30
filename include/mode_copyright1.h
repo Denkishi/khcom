@@ -5,7 +5,6 @@
 
 #include "save_api.h"
 
-#include "fade.h"
 #include "display.h"
 #include "types.h"
 #include "save.h"

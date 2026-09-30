@@ -4,22 +4,14 @@
 #include "task_descriptors.h"
 #include "registration_data.h"
 
-#include "mode_sio_api.h"
-
-#include "sio_api.h"
-
-
 #include "hum_types.h"
 
 #include "enemy_types.h"
 
 #include "chara_types.h"
 
-#include "prize_types.h"
-
 #include "card_api.h"
 
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -31,12 +23,7 @@
 #include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "malloc.h"
 #include "m4a.h"
-#include "enemy_common.h"
-#include "hum_common.h"
-#include "btl_api.h"
-#include "enemy_tile_counts.h"
 
 typedef struct VsTaskArg {
     s32 side;

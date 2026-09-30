@@ -10,8 +10,6 @@
 
 #include "field_state.h"
 
-#include "chara_types.h"
-
 #include "chara_api.h"
 #include "m4a_song.h"
 #include "text.h"
@@ -24,7 +22,6 @@
 #include "anim.h"
 #include "text_types.h"
 #include "taskpool.h"
-#include "btl_api.h"
 
 typedef struct RoomNameWork {
     void* tiles;

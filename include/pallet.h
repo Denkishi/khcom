@@ -3,7 +3,6 @@
 
 #include "types.h"
 #include "engine_math.h"
-#include "gba/io_reg.h"
 
 typedef struct PaletteBuffer {
     u16 colors[512];

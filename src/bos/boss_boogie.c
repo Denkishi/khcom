@@ -18,6 +18,7 @@
 #include "copyright_screens.h"
 #include "sprites_evt.h"
 #include "sprites_title.h"
+#include "songs.h"
 
 extern u8 gBoss02objPalette[];
 extern u8 gUnk_08F69BC4[];

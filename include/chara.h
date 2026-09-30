@@ -3,27 +3,15 @@
 
 #include "registration_data.h"
 
-#include "mode_sio_api.h"
-
-
-
-
-
-
-
-
 #include "chara_types.h"
 
 #include "card_api.h"
-#include "card_deck.h"
 
 #include "chara_api.h"
-#include "mode_test_api.h"
 
 #include "sio_api.h"
 #include "util.h"
 #include "m4a_song.h"
-#include "fade.h"
 #include "btl_effect.h"
 #include "display.h"
 #include "battle_actor.h"
@@ -33,7 +21,6 @@
 #include "taskpool.h"
 #include "gba/syscall.h"
 #include "key.h"
-#include "malloc.h"
 #include "game.h"
 #include "mode.h"
 #include "pallet.h"

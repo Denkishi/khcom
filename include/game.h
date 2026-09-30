@@ -11,7 +11,6 @@
 #include "battle_work.h"
 #include "taskpool.h"
 #include "anim.h"
-#include "btl_api.h"
 
 extern u8 gMapFloorState[];
 

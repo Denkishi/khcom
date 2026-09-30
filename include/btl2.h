@@ -9,10 +9,7 @@
 #include "field_state.h"
 
 #include "map_api.h"
-#include "btl2_tasks.h"
 
-#include <stdlib.h>
-#include "fade.h"
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "display.h"

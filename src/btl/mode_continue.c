@@ -3,7 +3,6 @@
 #include "registration_data.h"
 #include "map_api.h"
 #include "mode.h"
-#include "m4a_song.h"
 #include "mode_test.h"
 #include "gba/keys.h"
 #include "mode_test_api.h"

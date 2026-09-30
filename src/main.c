@@ -14,6 +14,8 @@
 #include "mode.h"
 #include "system_state.h"
 #include "gba/io_reg.h"
+#include "sroll_api.h"
+#include "sio_api.h"
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
 

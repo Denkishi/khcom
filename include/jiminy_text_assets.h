@@ -4,7 +4,6 @@
 #include "jiminy_types.h"
 #include "jiminy_inline_text_data.h"
 #include "jiminy_text.h"
-#include "common_text.h"
 #include "localized_names.h"
 
 #ifdef VERSION_EU

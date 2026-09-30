@@ -7,6 +7,8 @@
 #include "gba/keys.h"
 #include "mode_test_api.h"
 #include "sprites_msg.h"
+#include "fade.h"
+#include "songs.h"
 
 static TaskPool sModeDeckTasks;
 static u8 sModeDeckResult;

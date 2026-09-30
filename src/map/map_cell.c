@@ -1,5 +1,10 @@
 #include "macros.h"
 #include "map.h"
+#include "malloc.h"
+#include "map_runtime.h"
+#include "engine_math.h"
+#include <stdlib.h>
+#include "map_fixed_data.h"
 
 MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);

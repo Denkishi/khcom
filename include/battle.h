@@ -22,15 +22,8 @@
 
 #include "save_api.h"
 
-#include "player_progression.h"
-
-#include "card_deck.h"
-
 #include "display.h"
 #include "anim.h"
-#include <string.h>
-#include <stdlib.h>
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -42,7 +35,6 @@
 #include "game_state.h"
 #include "m4a.h"
 #include "gba/syscall.h"
-#include "malloc.h"
 #include "taskpool.h"
 #include "obj.h"
 #include "engine.h"
@@ -51,7 +43,6 @@
 #include "mode.h"
 #include "bos3.h"
 #include "bos4_api.h"
-#include "enemy_tile_counts.h"
 struct BtlObj;
 
 typedef struct BgFx {

@@ -3,6 +3,7 @@
 #include "evt.h"
 #include "evt_api.h"
 #include "sprites_btl.h"
+#include "evt_tasks.h"
 
 TaskDesc gTaskDescEvtObj = {
     "task_evt_obj",

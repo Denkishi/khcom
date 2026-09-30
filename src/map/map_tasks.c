@@ -10,6 +10,13 @@
 #include "battle_backgrounds.h"
 #include "sprites_card_pictures.h"
 #include "system_state.h"
+#include "gba/keys.h"
+#include "engine_math.h"
+#include "map_runtime.h"
+#include "fade.h"
+#include "mode_test_api.h"
+#include "songs.h"
+#include <stdlib.h>
 
 extern u8 gMapDbgCursorString[2];
 

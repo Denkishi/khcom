@@ -13,6 +13,7 @@
 #include "sprite.h"
 #include "types.h"
 #include "system_state.h"
+#include "gba/io_reg.h"
 
 u16 gLastBackdropColor IWRAM_DATA(4);
 u8 gBgPaletteBank[4] IWRAM_DATA(4);

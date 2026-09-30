@@ -3,6 +3,8 @@
 #include "mode_chkbtl.h"
 #include "gba/keys.h"
 #include "world_types.h"
+#include "mode_test_api.h"
+#include "fade.h"
 
 static ChkBtlWork sChkBtlWork;
 

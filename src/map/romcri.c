@@ -2,6 +2,7 @@
 #include "pallet.h"
 #include "romcri.h"
 #include "romcri_backgrounds.h"
+#include "enemy_tile_counts.h"
 
 void task_romcri_eff_0(RomcriEffWork* work, s32 arg) {
     SetupBg(1, 0, 23, 12);

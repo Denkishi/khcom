@@ -4,6 +4,7 @@
 #include "map_index_assets.h"
 #include "map_text_data.h"
 #include "map_text_assets.h"
+#include "localized_names.h"
 
 #ifdef VERSION_EU
 

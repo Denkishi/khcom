@@ -8,6 +8,12 @@
 #include "sprites_cloud.h"
 #include "sprites_evt.h"
 #include "sprites_smn.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
+#include "btl3_api.h"
+#include <stdlib.h>
+#include "smn_tasks.h"
 
 const AnimDef gSmnCloudAnimDefs[8] = {
     { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0, { 0, 0, 0 } },

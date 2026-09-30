@@ -6,22 +6,11 @@
 
 #include "poo_data.h"
 
-#include "poo_background_data.h"
-
-#include "mode_allmap_api.h"
-
 #include "pooh_actor_types.h"
 
 #include "prize_types.h"
 
-#include "mode_pooh_api.h"
-
-#include "player_progression.h"
-
 #include "m4a_song.h"
-#include <string.h>
-#include <stdlib.h>
-#include "fade.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "display.h"
@@ -37,8 +26,6 @@
 #include "obj.h"
 #include "bos4_api.h"
 #include "poo_api.h"
-#include "btl_api.h"
-#include "gba/io_reg.h"
 typedef struct PooHit {
     Collider* collider;
     u16 message;

@@ -8,11 +8,8 @@
 #include "map_types.h"
 
 #include "map_api.h"
-#include "fld_tasks.h"
 
 #include "m4a_song.h"
-#include <stdlib.h>
-#include "fade.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "types.h"

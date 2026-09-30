@@ -2,6 +2,8 @@
 #include "map_api.h"
 #include "m4a_song.h"
 #include "roomcreate.h"
+#include "fade.h"
+#include "songs.h"
 
 void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;

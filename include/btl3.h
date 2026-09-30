@@ -2,8 +2,6 @@
 #define GUARD_BTL3_H
 
 
-#include "btl3_tasks.h"
-
 #include "display.h"
 #include "util.h"
 #include "m4a_song.h"
@@ -18,8 +16,6 @@
 #include "game_state.h"
 #include "taskpool.h"
 #include "anim.h"
-#include "btl_api.h"
-#include "btl3_api.h"
 #include "romcri.h"
 #include "formation_types.h"
 

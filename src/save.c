@@ -5,6 +5,7 @@
 #include "gba/io_reg.h"
 #include "gba/keys.h"
 #include "sram_error_screen.h"
+#include "malloc.h"
 
 static u16 gRawKeys;
 static u16 gRawKeysPrev;

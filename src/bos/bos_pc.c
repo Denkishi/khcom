@@ -3,6 +3,9 @@
 #include "sprites_bos7.h"
 #include "sprites_staff_roll.h"
 #include "event_backgrounds.h"
+#include "pc_sprite_types.h"
+#include "prize_types.h"
+#include "songs.h"
 
 void task_bos_pc_3(PcWork* work);
 

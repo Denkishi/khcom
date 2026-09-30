@@ -4,9 +4,9 @@
 #include "intr.h"
 #include "pallet.h"
 #include "wlogo.h"
-#include "boss_tm_assets.h"
 #include "sprites_boss_tm.h"
 #include "sprites_wlogo.h"
+#include "gba/io_reg.h"
 
 extern const WlogoHwtObjA gWlogoHwtObjStarts[6];
 extern const WlogoHwtObjB gWlogoHwtObjSteps[6][6];

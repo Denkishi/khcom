@@ -5,13 +5,11 @@
 #include "system_state.h"
 #include "map_api.h"
 #include "msg_api.h"
-#include "mode_sio_api.h"
 #include "card_battle.h"
 #include "mode_test_api.h"
 #include "player_progression.h"
 #include "m4a_song.h"
 #include "game_state.h"
-#include <string.h>
 #include "text.h"
 #include "monsgage.h"
 #include "fade.h"
@@ -29,16 +27,13 @@
 #include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
-#include "card_reload_assets.h"
-#include "map_card_assets.h"
-#include "card_localized_assets.h"
-#include "card_help_assets.h"
 #include "card_message_assets.h"
-#include "card_description_assets.h"
 #include <stddef.h>
 #include "game.h"
 #include "bos4_api.h"
 #include "sprites_deck_menu.h"
+#include "gba/keys.h"
+#include "songs.h"
 
 #ifndef VERSION_EU
 u16 gSioTradeCardId EWRAM_COMMON(4);

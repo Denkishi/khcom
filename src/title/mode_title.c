@@ -6,6 +6,15 @@
 #include "system_state.h"
 #include "mode_title.h"
 #include "sprites_title.h"
+#include "game_state.h"
+#include "title_types.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "mode_pooh_api.h"
+#include "card_api.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
 
 s32 gTitleBgScale EWRAM_COMMON(4);
 s32 gTitleBgX EWRAM_COMMON(4);

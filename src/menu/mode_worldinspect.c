@@ -22,6 +22,10 @@
 #include "worldinspect_assets.h"
 #include "sprites_bos5.h"
 #include "sprites_worldinspect.h"
+#include "gba/io_reg.h"
+#include "songs.h"
+#include "common_text.h"
+#include "jiminy_records_assets.h"
 #ifdef VERSION_EU
 extern u8 gUnkEu_099A4CDA[];
 extern u8 gUnkEu_099A51AA[];

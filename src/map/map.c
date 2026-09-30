@@ -7,6 +7,19 @@
 #include "sprites_map.h"
 #include "sprites_sora.h"
 #include "world_types.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "engine_math.h"
+#include "mode_pooh_api.h"
+#include "card_deck.h"
+#include "map_runtime.h"
+#include "malloc.h"
+#include "fade.h"
+#include "player_progression.h"
+#include "status_api.h"
+#include "songs.h"
+#include "map_fixed_data.h"
+#include <string.h>
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];

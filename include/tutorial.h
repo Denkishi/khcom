@@ -15,7 +15,6 @@
 #include "engine_math.h"
 #include "anim.h"
 #include "game.h"
-#include "btl4_api.h"
 
 typedef struct TutorialWork {
     u16 flags;

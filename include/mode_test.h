@@ -23,16 +23,13 @@
 #include "card_api.h"
 
 #include "map_api.h"
-#include "mode_test_api.h"
 
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "display.h"
 #include "types.h"
-#include "malloc.h"
 #include "engine_math.h"
 #include "listpool.h"
 #include "battle_work.h"
@@ -43,7 +40,6 @@
 #include "gba/syscall.h"
 #include "m4a.h"
 #include "bos4_api.h"
-#include "btl_api.h"
 
 typedef struct DebugTextLine {
     u16 glyphs[61];

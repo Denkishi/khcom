@@ -10,6 +10,9 @@
 #include "pallet.h"
 #include "mode_movie.h"
 #include "sprite_palettes.h"
+#include "gba/io_reg.h"
+#include "malloc.h"
+#include "fade.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_0883E040[];

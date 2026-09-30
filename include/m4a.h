@@ -4,7 +4,6 @@
 #include "m4a_song.h"
 #include "types.h"
 #include "gba/syscall.h"
-#include "gba/io_reg.h"
 
 #define ID_NUMBER 0x68736D53
 

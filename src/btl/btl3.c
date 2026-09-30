@@ -8,6 +8,9 @@
 #include "task_animation_assets.h"
 #include "sprites_btl.h"
 #include "sprites_fld.h"
+#include "btl_api.h"
+#include "songs.h"
+#include "btl3_tasks.h"
 
 TaskDesc gTaskDescBtlForm = {
     "task_btl_form",

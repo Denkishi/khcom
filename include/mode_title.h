@@ -8,17 +8,14 @@
 #include "card_api.h"
 
 #include "title_api.h"
-#include "mode_pooh_api.h"
 
 #include "save_api.h"
 
 #include "display.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "types.h"
 #include "game_state.h"
 #include "taskpool.h"
-#include "title_types.h"
 #include "intr.h"
 #include "main.h"
 #include "engine.h"

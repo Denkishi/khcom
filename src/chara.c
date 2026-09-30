@@ -8,6 +8,13 @@
 #include "chara.h"
 #include "gba/keys.h"
 #include "system_state.h"
+#include "chara_types.h"
+#include "card_deck.h"
+#include "malloc.h"
+#include "fade.h"
+#include "mode_test_api.h"
+#include "songs.h"
+#include "mode_sio_api.h"
 
 u32 gDebugLogC[100] EWRAM_COMMON(16);
 u32 gVBlankTimerElapsed EWRAM_COMMON(4);

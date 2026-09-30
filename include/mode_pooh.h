@@ -4,19 +4,10 @@
 #include "registration_data.h"
 
 
-#include "chara_types.h"
-
-#include "prize_types.h"
-
 #include "card_api.h"
 #include "msg_api.h"
-#include "mode_pooh_api.h"
-
-#include "mode_test_api.h"
 
 #include "anim.h"
-#include <string.h>
-#include "fade.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "display.h"

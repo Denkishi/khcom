@@ -2,13 +2,11 @@
 #define GUARD_SIO_H
 
 #include "display.h"
-#include "sio_api.h"
 #include "types.h"
 #include "sio_types.h"
 #include "gba/syscall.h"
 #include "intr.h"
 #include "engine.h"
-#include "gba/io_reg.h"
 
 u16 IsVBlankIntrLive(void);
 void SioInit(void);

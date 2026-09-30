@@ -18,6 +18,14 @@
 #include "sprites_room.h"
 #include "chara_types.h"
 #include "chara_api.h"
+#include "prize_types.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "btl_api.h"
+#include "malloc.h"
+#include "songs.h"
+#include "worldselect_assets.h"
+#include "jiminy_records_assets.h"
 
 const EmyKind gBosGaEmyKind =
 {32, 100, 16, 16, 0, 100, 1}

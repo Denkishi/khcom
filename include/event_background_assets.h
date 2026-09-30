@@ -3,7 +3,6 @@
 
 #include "types.h"
 #include "mode_battle_data.h"
-#include "poo_background_data.h"
 
 extern u8 gUnk_09755F34[];
 extern u8 gRaVegetablesFrame9[];

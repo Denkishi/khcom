@@ -3,6 +3,10 @@
 #include "btl_effect.h"
 #include "bg_animation_data.h"
 #include "battle_bg_animations.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include <stdlib.h>
 
 const BgAnimationChunk gBgAnimationChunks[108] = {
     { gUnk_08CEFCE4, 29696, 0 },

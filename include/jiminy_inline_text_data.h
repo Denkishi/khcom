@@ -2,8 +2,6 @@
 #define GUARD_JIMINY_INLINE_TEXT_DATA_H
 
 #include "jiminy_types.h"
-#include "localized_names.h"
-#include "jiminy_text.h"
 
 #ifdef VERSION_EU
 

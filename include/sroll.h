@@ -4,22 +4,17 @@
 #include "registration_data.h"
 #include "system_state.h"
 
-#include "pc_sprite_types.h"
-
 #include "evt_object_types.h"
 
 #include "obj.h"
 
 #include "anim.h"
-#include <stdlib.h>
-#include "fade.h"
 #include "obj_api.h"
 #include "engine.h"
 #include "gba/syscall.h"
 #include "main.h"
 #include "types.h"
 #include "taskpool.h"
-#include "sroll_api.h"
 
 struct EvtObjParam;
 

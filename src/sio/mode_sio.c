@@ -7,7 +7,6 @@
 #include "map_api.h"
 #include "msg_api.h"
 #include "mode_sio_api.h"
-#include "mode_pooh_api.h"
 #include "m4a_song.h"
 #include "pallet.h"
 #include "sio_api.h"
@@ -32,6 +31,12 @@
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 #include "card_ids.h"
+#include "malloc.h"
+#include "fade.h"
+#include "card_deck.h"
+#include "mode_test_api.h"
+#include "songs.h"
+#include "common_text.h"
 
 u16 gSioWinCount EWRAM_COMMON(4);
 u16 gSioLoseCount EWRAM_COMMON(4);

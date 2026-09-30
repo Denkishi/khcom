@@ -5,10 +5,7 @@
 
 #include "enemy_types.h"
 
-#include "emy_tasks.h"
-
 #include "display.h"
-#include "player_progression.h"
 
 #include "m4a_song.h"
 #include "obj_api.h"
@@ -22,8 +19,6 @@
 #include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "enemy_common.h"
-#include "btl_api.h"
 
 typedef struct EmySpawn {
     s32 x;

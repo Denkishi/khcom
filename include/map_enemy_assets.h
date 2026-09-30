@@ -5,7 +5,6 @@
 
 #include "anim.h"
 #include "taskpool.h"
-#include "evt_assets.h"
 #include "map.h"
 #include "mode_chkobj_assets.h"
 #include "registration_data.h"

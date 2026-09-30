@@ -1,6 +1,7 @@
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
+#include <stdlib.h>
 
 TaskDesc gTaskDescBosLstLsr = {
     "task_bos_lst_lsr",

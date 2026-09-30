@@ -15,7 +15,6 @@
 #include "msg_types.h"
 
 #include "evt_types.h"
-#include "evt_object_types.h"
 #include "event_chara_types.h"
 #include "evt_data.h"
 
@@ -23,20 +22,13 @@
 
 #include "map_api.h"
 #include "msg_api.h"
-#include "eventselect_api.h"
 
-#include "intr.h"
 #include "pallet.h"
 #include "save_api.h"
 
-#include "player_progression.h"
-
 #include "m4a_song.h"
 #include "battle_actor.h"
-#include <string.h>
-#include <stdlib.h>
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
@@ -48,12 +40,9 @@
 #include "mode.h"
 #include "key.h"
 #include "text_types.h"
-#include "malloc.h"
 #include "taskpool.h"
 #include "bos4_api.h"
-#include "bos6_api.h"
 #include "poo_api.h"
-#include "evt_api.h"
 #include "mode_battle_data.h"
 #include <stddef.h>
 

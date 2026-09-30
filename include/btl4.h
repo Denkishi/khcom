@@ -13,7 +13,6 @@
 #include "battle_work.h"
 #include "game_state.h"
 #include "anim.h"
-#include "btl4_api.h"
 typedef struct BtlPopSrc {
     s32 x;
     s32 y;

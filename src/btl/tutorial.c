@@ -3,6 +3,7 @@
 #include "gba/keys.h"
 #include "sprites_btl_hud.h"
 #include "system_state.h"
+#include "btl4_api.h"
 
 void task_tutorial_0(TutorialWork* work, s32 arg1) {
     gBg0Cnt = 0;

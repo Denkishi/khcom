@@ -8,13 +8,7 @@
 
 #include "card_battle.h"
 
-#include "btl_tasks.h"
-
-#include "player_progression.h"
-
 #include "m4a_song.h"
-#include <string.h>
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -29,7 +23,6 @@
 #include "taskpool.h"
 #include "obj.h"
 #include "fld_types.h"
-#include "btl_api.h"
 
 typedef struct BtlSpawnArgs {
     u32 variant : 16;

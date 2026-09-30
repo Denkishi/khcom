@@ -1,6 +1,10 @@
 #include "task_descriptors.h"
 #include "bos.h"
 #include "sprites_btl.h"
+#include "boss_background_types.h"
+#include <stddef.h>
+#include "btl_api.h"
+#include "bos_tasks.h"
 
 void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);

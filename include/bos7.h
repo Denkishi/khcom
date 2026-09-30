@@ -4,25 +4,14 @@
 #include "registration_data.h"
 #include "battle_actor_types.h"
 
-#include "boss_lst_data.h"
-
-#include "staff_roll_script_data.h"
-
-#include "staff_roll_scene_data.h"
-
-#include "evt_object_types.h"
-
 #include "gba/syscall.h"
 
 #include "m4a_song.h"
-#include <stdlib.h>
-#include "fade.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "display.h"
 #include "types.h"
-#include "malloc.h"
 #include "engine_math.h"
 #include "battle_work.h"
 #include "game_state.h"
@@ -30,9 +19,6 @@
 #include "taskpool.h"
 #include "anim.h"
 #include "bos7_api.h"
-#include "sroll_api.h"
-#include "btl_api.h"
-#include "evt_api.h"
 
 typedef struct LstState {
     s16 animSet;

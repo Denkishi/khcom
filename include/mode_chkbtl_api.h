@@ -1,8 +1,6 @@
 #ifndef GUARD_MODE_CHKBTL_API_H
 #define GUARD_MODE_CHKBTL_API_H
 
-#include "types.h"
-
 void ChkBtlReset(void);
 void ChkBtlSpawnEnemy(void);
 void mode_chkbtl_0(void);

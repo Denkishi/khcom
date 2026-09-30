@@ -17,6 +17,12 @@
 #include "sprites_evt.h"
 #include "sprites_moogle_shop.h"
 #include "sprites_sora.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "mode_ms_api.h"
+#include "fade.h"
+#include "songs.h"
+#include "player_progression.h"
 
 extern u8 gUnk_08B22BA8[];
 

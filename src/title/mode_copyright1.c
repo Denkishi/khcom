@@ -1,6 +1,7 @@
 #include "registration_data.h"
 #include "mode_copyright1.h"
 #include "copyright_screens.h"
+#include "fade.h"
 
 #ifndef VERSION_JP
 u8 gCopyrightExtraScreen __attribute__((aligned(4)));

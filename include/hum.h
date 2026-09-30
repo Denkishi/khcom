@@ -10,18 +10,12 @@
 
 #include "map_api.h"
 #include "ms_api.h"
-#include "hum_tasks.h"
 
 #include "pallet.h"
 #include "save_api.h"
 
-#include "player_progression.h"
-
 #include "m4a_song.h"
-#include <string.h>
-#include <stdlib.h>
 #include "text.h"
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -38,11 +32,9 @@
 #include "anim.h"
 #include "taskpool.h"
 #include "obj.h"
-#include "hum_common.h"
 #include "bos3.h"
 #include "bos4_api.h"
 #include "btl_api.h"
-#include "pc_api.h"
 
 typedef struct VixenSub {
     u8 pending;

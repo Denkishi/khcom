@@ -1,6 +1,10 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "gba/io_reg.h"
+#include "bos7_api.h"
+#include "fade.h"
+#include "songs.h"
+#include <stdlib.h>
 
 #ifdef VERSION_EU
 extern u8 eu_0810BA1C(BosLstWork* work, s32 idx);

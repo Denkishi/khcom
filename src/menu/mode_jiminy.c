@@ -11,6 +11,19 @@
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 #include "hum.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "player_progression.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include <stdlib.h>
+#include "jiminy_records_index_data.h"
+#include "evt_assets.h"
+#include "common_text.h"
+#include "jiminy_records_assets.h"
+#include "map_card_assets.h"
+#include "actor_localized_data.h"
 
 const JiminyEntry gJiminyEntries[21] = {
     { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, 0, 0 },

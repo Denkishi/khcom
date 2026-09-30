@@ -4,8 +4,6 @@
 #include "mode_deck.h"
 #include "boss_card_data.h"
 #include "map_animation_data.h"
-#include "card_deck_data.h"
-#include "card_selection_data.h"
 #include "event_index_data.h"
 #include "card_def_data.h"
 #include "battle_localized_data.h"
@@ -33,11 +31,7 @@
 
 #include "card_ui_types.h"
 
-#include "obj_resource_types.h"
-
 #include "card_api.h"
-
-#include "card_deck.h"
 
 #include "types.h"
 #include "engine_math.h"

@@ -10,21 +10,11 @@
 
 #include "card_types.h"
 
-#include "ms_types.h"
-
 #include "card_api.h"
 
 #include "map_api.h"
-#include "mode_ms_top_api.h"
-
-#include "mode_ms_api.h"
-
-#include "mode_test_api.h"
-
-#include "player_progression.h"
 
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
@@ -36,7 +26,6 @@
 #include "fld_types.h"
 #include "anim.h"
 #include "mode.h"
-#include "malloc.h"
 #include "m4a.h"
 
 typedef struct MooglePackCardDef {

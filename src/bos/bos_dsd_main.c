@@ -3,6 +3,10 @@
 #include "sprites_bos2.h"
 #include "sprites_btl.h"
 #include "system_state.h"
+#include "chara_types.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
 
 extern const u16* gBosDsdFrameMaps[46][4];
 extern void* gBosDsdFrameTiles[37];

@@ -9,6 +9,9 @@
 #include "system_state.h"
 #include "acgtrans.h"
 #include "sprites_wlogo.h"
+#include <stddef.h>
+#include "btl_api.h"
+#include "songs.h"
 
 extern u8 gBosTmFootIdleFrames[8];
 extern s16 gBosTmFootIdleZ[5];

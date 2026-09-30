@@ -4,6 +4,8 @@
 #include "gba/keys.h"
 #include "sprites_mode_debug.h"
 #include "system_state.h"
+#include "malloc.h"
+#include "fade.h"
 
 extern BgAnimationDef* gChkEffBgAnimations[83];
 

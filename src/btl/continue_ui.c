@@ -12,6 +12,9 @@
 #include "key.h"
 #include "m4a_song.h"
 #include "sprites_continue.h"
+#include "gba/keys.h"
+#include "gba/io_reg.h"
+#include "songs.h"
 
 extern u8 gSoraPalette[];
 extern u8 gUnk_090A6B26[];

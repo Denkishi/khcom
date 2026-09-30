@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "btl_collision.h"
 #include "btl_effect.h"
+#include "songs.h"
 
 const BattleAttackDef gBattleAttackDefs[330] = {
     { 256, 204, 0, 3, BgFxStartRikuHit, 0x80002000 },

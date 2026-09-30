@@ -1,6 +1,7 @@
 #include "util.h"
 #include "malloc.h"
 #include "m4a.h"
+#include "gba/keys.h"
 
 const u8 sSioKeyHeapName[8] = "SIOKEY";
 

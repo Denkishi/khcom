@@ -12,6 +12,8 @@
 #include "gba/keys.h"
 #include "battle_backgrounds.h"
 #include "link_menus.h"
+#include "fade.h"
+#include "common_text.h"
 
 void WLogoInitWorldSelect(void);
 void WLogoStartLogo(u8 a);

@@ -2,6 +2,8 @@
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
 #include "gba/io_reg.h"
+#include "btl_api.h"
+#include "sroll_api.h"
 
 const u16 gBosLstFldVofsTable[832] = {
     0, 0, 3, 6, 6, 12, 9, 18, 12, 25, 15, 31, 18, 37, 21, 43,

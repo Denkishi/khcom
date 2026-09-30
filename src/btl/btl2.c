@@ -8,6 +8,9 @@
 #include "gba/keys.h"
 #include "sprites_btl.h"
 #include "sprites_btl_hud.h"
+#include "fade.h"
+#include "songs.h"
+#include <stdlib.h>
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_08B4A680[];

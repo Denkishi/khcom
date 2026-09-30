@@ -1,8 +1,6 @@
 #ifndef GUARD_PC_H
 #define GUARD_PC_H
 
-#include "pc_tasks.h"
-
 #include "types.h"
 #include "battle_actor.h"
 #include "engine_math.h"

@@ -5,11 +5,8 @@
 
 #include "card_api.h"
 
-#include "mode_test_api.h"
-
 #include "display.h"
 #include "anim.h"
-#include <stdlib.h>
 #include "obj_api.h"
 #include "types.h"
 #include "engine_math.h"

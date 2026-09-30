@@ -1,5 +1,11 @@
 #include "macros.h"
 #include "mode_vsbattle.h"
+#include "chara_types.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include "mode_sio_api.h"
+#include "sio_api.h"
 
 u8 gUnk_02039B98 EWRAM_COMMON(4);
 

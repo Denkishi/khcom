@@ -7,12 +7,8 @@
 
 #include "card_battle.h"
 
-#include "smn_tasks.h"
-
 #include "display.h"
 #include "m4a_song.h"
-#include <stdlib.h>
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -23,9 +19,6 @@
 #include "battle_work.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "smn_api.h"
-#include "btl_api.h"
-#include "btl3_api.h"
 typedef struct SmnArgs {
     u16 variant;
     u8 mainSide;

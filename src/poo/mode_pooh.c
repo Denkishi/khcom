@@ -1,6 +1,11 @@
 #include "mode_pooh.h"
 #include "sprites_pooh.h"
 #include "world_types.h"
+#include "prize_types.h"
+#include "mode_pooh_api.h"
+#include "fade.h"
+#include "songs.h"
+#include <string.h>
 
 Mode gModePooh = {
     "mode_pooh",

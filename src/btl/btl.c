@@ -17,6 +17,11 @@
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include "player_progression.h"
+#include "fade.h"
+#include "songs.h"
+#include <string.h>
+#include "btl_tasks.h"
 
 TaskDesc gTaskDescBtlLockon = {
     "task_btl_lockon",

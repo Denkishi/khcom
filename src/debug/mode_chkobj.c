@@ -20,6 +20,10 @@
 #include "sprites_riku.h"
 #include "sprites_smn.h"
 #include "sprites_sora.h"
+#include "gba/keys.h"
+#include "mode_test_api.h"
+#include "malloc.h"
+#include <stdlib.h>
 
 ChkObjWork* gChkObjWork;
 

@@ -12,28 +12,20 @@
 
 #include "map_types.h"
 
-#include "prize_types.h"
-
 #include "card_api.h"
 
 #include "map_api.h"
 #include "msg_api.h"
-#include "mode_test_api.h"
 
 #include "save_api.h"
 
-#include "player_progression.h"
-
 #include "m4a_song.h"
-#include <string.h>
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
 #include "battle_actor.h"
 #include "display.h"
 #include "types.h"
-#include "malloc.h"
 #include "engine_math.h"
 #include "listpool.h"
 #include "battle_work.h"
@@ -45,7 +37,6 @@
 #include "bos4_api.h"
 #include "map_runtime.h"
 #include "poo_api.h"
-#include "btl_api.h"
 
 extern MapFloorState gMapFloorState;
 

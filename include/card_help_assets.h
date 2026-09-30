@@ -3,6 +3,5 @@
 
 #include "card_help_data.h"
 #include "msg_localized_data.h"
-#include "card_help_text.h"
 
 #endif

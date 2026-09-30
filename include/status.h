@@ -14,18 +14,10 @@
 
 #include "card_api.h"
 
-#include "status_api.h"
-#include "mode_status_api.h"
-
-#include "player_progression.h"
-
 #include "engine_math.h"
-
-#include "card_deck.h"
 
 #include "anim.h"
 #include "text.h"
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"

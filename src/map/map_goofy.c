@@ -8,6 +8,11 @@
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
 #include "battle_backgrounds.h"
+#include "gba/keys.h"
+#include "fade.h"
+#include "songs.h"
+#include "engine_math.h"
+#include "common_text.h"
 
 extern MapNameText* gFloorNames[13];
 extern MapNameText* gBasementFloorNames[12];

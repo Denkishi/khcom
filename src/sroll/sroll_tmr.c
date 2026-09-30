@@ -3,6 +3,10 @@
 #include "m4a.h"
 #include "sroll.h"
 #include "sprites_staff_roll.h"
+#include "gba/io_reg.h"
+#include "gba/keys.h"
+#include "sroll_api.h"
+#include "fade.h"
 
 DmaStream gDmaStream __attribute__((aligned(8)));
 u8 gBlockAudioPlaying;

@@ -3,6 +3,7 @@
 #include "macros.h"
 #define M4A_CATALOG_NO_PLAYER_EXTERNS
 #include "m4a_catalog_data.h"
+#include "gba/io_reg.h"
 
 char SoundMainRAM_Buffer[0x400];
 

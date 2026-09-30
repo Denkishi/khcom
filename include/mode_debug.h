@@ -5,20 +5,12 @@
 
 #include "card_api.h"
 
-#include "mode_debug_api.h"
-
-#include "mode_test_api.h"
-
 #include "pallet.h"
 #include "save_api.h"
 
-#include "player_progression.h"
-
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
-#include "chkobj.h"
 #include "main.h"
 #include "anim.h"
 #include "mode.h"

@@ -1,8 +1,9 @@
 #include "events_074_133.h"
-#include "event_chara_assets.h"
-#include "event_sequence_assets.h"
 #include "msg.h"
 #include "card_message_assets.h"
+#include "eventselect_api.h"
+#include "event_text.h"
+#include "msg_localized_data.h"
 
 #ifdef VERSION_US
 #include "event_074_text.inc"

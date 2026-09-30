@@ -4,7 +4,6 @@
 #include "room_data.h"
 #include "registration_data.h"
 
-#include "worldselect_assets.h"
 #include "battle_actor_types.h"
 
 #include "bg_animation_data.h"
@@ -12,8 +11,6 @@
 #include "obj.h"
 
 #include "ga_types.h"
-
-#include "prize_types.h"
 
 #include "card_api.h"
 
@@ -28,7 +25,6 @@
 #include "battle_actor.h"
 #include "display.h"
 #include "types.h"
-#include "malloc.h"
 #include "engine_math.h"
 #include "battle_work.h"
 #include "game_state.h"
@@ -38,7 +34,6 @@
 #include "anim.h"
 #include "bos4_api.h"
 #include "poo_api.h"
-#include "btl_api.h"
 
 typedef struct MdFrameSprite {
     u16 x;

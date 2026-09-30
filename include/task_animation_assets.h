@@ -5,7 +5,6 @@
 #include "anim.h"
 
 #include "mode_chkobj_assets.h"
-#include "evt_assets.h"
 
 extern u8 gUnk_08933A34[];
 extern u8 gUnk_08933D94[];

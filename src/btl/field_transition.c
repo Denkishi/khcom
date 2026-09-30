@@ -5,6 +5,8 @@
 #include "sprites_fld.h"
 #include "sprites_riku.h"
 #include "sprites_sora.h"
+#include "gba/io_reg.h"
+#include "malloc.h"
 
 void FieldTransitionUpdate(void);
 

@@ -10,6 +10,14 @@
 #include "staff_roll_script_data.h"
 #include "staff_roll_text_assets.h"
 #include "staff_roll_scene_data.h"
+#include "staff_roll_types.h"
+#include "gba/keys.h"
+#include "sroll_api.h"
+#include "evt_api.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include "staff_roll_script_text.h"
 
 const s32 gStaffRollSoraScript0[46] = {
     6, 6, 0, 0, 0, 6,

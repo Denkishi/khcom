@@ -3,7 +3,6 @@
 
 #include "registration_data.h"
 
-#include "fade.h"
 #include "types.h"
 #include "game_state.h"
 #include "mode.h"

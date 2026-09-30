@@ -10,6 +10,12 @@
 #include "sprites_worldinspect.h"
 #include "sprites_map.h"
 #include "sprites_card_pictures.h"
+#include "gba/io_reg.h"
+#include "malloc.h"
+#include "fade.h"
+#include "mode_ms_top_api.h"
+#include "songs.h"
+#include "ms_types.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_08890EC0[];

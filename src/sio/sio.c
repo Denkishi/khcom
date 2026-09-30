@@ -3,6 +3,7 @@
 #include "intr.h"
 #include "sio_api.h"
 #include "sio.h"
+#include "gba/io_reg.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);

@@ -3,6 +3,8 @@
 #include "enemy_common.h"
 #include "enemy_tile_counts.h"
 #include "system_state.h"
+#include "gba/io_reg.h"
+#include "fade.h"
 
 u16 gEnemyTileCounts[54] = {
     32, 32, 32, 32, 32, 34, 28, 24, 32,

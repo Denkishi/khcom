@@ -1,5 +1,6 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
+#include "fade.h"
 
 TaskDesc gTaskDescBosPcAcd = {
     "task_bos_pc_acd",

@@ -13,6 +13,7 @@
 #include "key.h"
 #include "malloc.h"
 #include "world_types.h"
+#include "gba/keys.h"
 
 extern MapFloorState gMapFloorState;
 

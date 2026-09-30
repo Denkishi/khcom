@@ -15,6 +15,12 @@
 #include "map_api.h"
 #include "mode_worldwarp.h"
 #include "sprites_worldinspect.h"
+#include "world_types.h"
+#include "gba/io_reg.h"
+#include "malloc.h"
+#include "fade.h"
+#include "songs.h"
+#include "common_text.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_09A4FBC0[];

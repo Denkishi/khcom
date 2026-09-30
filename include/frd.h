@@ -4,11 +4,8 @@
 #include "task_descriptors.h"
 #include "registration_data.h"
 
-#include "frd_tasks.h"
-
 #include "display.h"
 #include "m4a_song.h"
-#include "fade.h"
 #include "btl_effect.h"
 #include "btl_collision.h"
 #include "obj_api.h"
@@ -19,8 +16,6 @@
 #include "game_state.h"
 #include "anim.h"
 #include "taskpool.h"
-#include "smn_api.h"
-#include "btl_api.h"
 
 typedef struct FrdArgs {
     u16 variant;

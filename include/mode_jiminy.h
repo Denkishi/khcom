@@ -2,7 +2,6 @@
 #define GUARD_MODE_JIMINY_H
 
 #include "jiminy_records_data.h"
-#include "jiminy_records_assets.h"
 #include "battle_localized_data.h"
 #include "battle_localized_assets.h"
 #include "system_state.h"
@@ -11,12 +10,8 @@
 #include "msg_api.h"
 #include "mode.h"
 
-#include "player_progression.h"
-
-#include <stdlib.h>
 #include "text.h"
 #include "monsgage.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"

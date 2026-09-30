@@ -9,9 +9,6 @@
 
 #include "mode_chkbtl_api.h"
 
-#include "mode_test_api.h"
-
-#include "fade.h"
 #include "types.h"
 #include "battle_work.h"
 #include "game_state.h"

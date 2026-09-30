@@ -9,6 +9,11 @@
 #include "sprites_fld.h"
 #include "sprites_status.h"
 #include "card_ids.h"
+#include "player_progression.h"
+#include "fade.h"
+#include "card_deck.h"
+#include "songs.h"
+#include "mode_status_api.h"
 
 #ifdef VERSION_EU
 extern void* gStatusBarTiles[5];

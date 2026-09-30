@@ -1,7 +1,6 @@
 #ifndef GUARD_WORLDINSPECT_ASSETS_H
 #define GUARD_WORLDINSPECT_ASSETS_H
 
-#include "worldinspect_data.h"
 #include "jiminy_data.h"
 #include "jiminy_text_assets.h"
 

@@ -11,6 +11,15 @@
 #include "sprites_cloud.h"
 #include "sprites_evt.h"
 #include "sprites_hum.h"
+#include "gba/io_reg.h"
+#include "btl_api.h"
+#include "pc_api.h"
+#include "hum_common.h"
+#include "songs.h"
+#include <stdlib.h>
+#include "actor_localized_data.h"
+#include <string.h>
+#include "hum_tasks.h"
 
 const u32 gHumCloudStockMoves[2][3] = {
     { 37, 37, 37 },

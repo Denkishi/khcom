@@ -4,6 +4,11 @@
 #include "poo.h"
 #include "sprites_pooh.h"
 #include "system_state.h"
+#include "gba/io_reg.h"
+#include "allmap_api.h"
+#include "malloc.h"
+#include "fade.h"
+#include <string.h>
 
 #ifdef VERSION_EU
 extern u8* gAllmapFloorTilesByLanguage[5];

@@ -1,5 +1,7 @@
 #include "msg.h"
 #include "sprites_msg.h"
+#include "malloc.h"
+#include "fade.h"
 
 #ifdef VERSION_EU
 extern void* gUnkEu_08890E1C[];

@@ -1,5 +1,6 @@
 #include "sroll.h"
 #include "sprites_staff_roll.h"
+#include "fade.h"
 
 static s32 Square(s32 x) {
     return x * x;

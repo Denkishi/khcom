@@ -1,6 +1,7 @@
 #include "pcm_audio.h"
 #include "sroll_api.h"
 #include "m4a.h"
+#include "gba/io_reg.h"
 
 SoundEntry gPcmPlaybackConfigs[13] = {
     {5734, 96, 62610},

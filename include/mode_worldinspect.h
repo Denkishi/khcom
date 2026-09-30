@@ -1,8 +1,6 @@
 #ifndef GUARD_MODE_WORLDINSPECT_H
 #define GUARD_MODE_WORLDINSPECT_H
 
-#include "world_types.h"
-
 #include "map_api.h"
 #include "game_state.h"
 #include "text.h"

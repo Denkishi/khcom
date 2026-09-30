@@ -8,7 +8,6 @@
 #include "title_api.h"
 #include "pallet.h"
 #include "m4a_song.h"
-#include <string.h>
 #include "obj_api.h"
 #include "types.h"
 #include "engine_math.h"

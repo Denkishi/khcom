@@ -10,7 +10,6 @@
 #include "card_api.h"
 #include "map_api.h"
 #include "game_state.h"
-#include "malloc.h"
 #include "anim.h"
 #include "mode.h"
 
@@ -18,19 +17,12 @@
 
 #include "card_types.h"
 
-#include "ms_types.h"
-
 #include "ms_charge_api.h"
-#include "mode_ms_top_api.h"
-
-#include "mode_test_api.h"
 
 #include "display.h"
 #include "engine_math.h"
 
-#include <string.h>
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "types.h"
 #include "text_types.h"

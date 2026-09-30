@@ -2,8 +2,6 @@
 #include "registration_data.h"
 #include "msg_api.h"
 #include "card_api.h"
-#include <string.h>
-#include "eventselect_api.h"
 #include "m4a_song.h"
 #include "fade.h"
 #include "engine_math.h"
@@ -15,6 +13,9 @@
 #include "sprites_hum.h"
 #include "sprites_level_up.h"
 #include "sprites_smn.h"
+#include "obj_resource_types.h"
+#include "mode_test_api.h"
+#include "malloc.h"
 
 const s16 gSoraEventIds[147] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,

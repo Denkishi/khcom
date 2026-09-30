@@ -1,6 +1,8 @@
 #include "display.h"
 #include "m4a_song.h"
 #include "battle.h"
+#include "gba/keys.h"
+#include "fade.h"
 
 u16 gVsKeyHoldL[2];
 u16 gVsKeyHoldR[2];

@@ -1,5 +1,6 @@
 #include "map_tasks.h"
 #include "sprites_evt.h"
+#include "gba/keys.h"
 
 void MapDonaldCheckTalk(MapDonaldWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {

@@ -7,25 +7,17 @@
 
 #include "card_description_data.h"
 
-#include "chara_types.h"
-
 #include "chara_api.h"
 #include "map_api.h"
-#include "mode_sio_api.h"
-
-#include "mode_test_api.h"
 
 #include "pallet.h"
-#include "sio_api.h"
 #include "save_api.h"
 
 #include "engine_math.h"
 
-#include "card_deck.h"
 #include "card_api.h"
 
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
@@ -33,7 +25,6 @@
 #include "card_types.h"
 #include "text_types.h"
 #include "key.h"
-#include "malloc.h"
 #include "anim.h"
 #include "mode.h"
 #include "taskpool.h"

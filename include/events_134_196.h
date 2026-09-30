@@ -2,7 +2,6 @@
 #define GUARD_EVENTS_134_196_H
 
 #include "msg_types.h"
-#include "event_text.h"
 
 extern const EventCharaTrack gEvent134Tracks[3];
 extern const EventSequenceDef gEvent134;

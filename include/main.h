@@ -4,7 +4,6 @@
 #include "types.h"
 #include "listpool.h"
 #include "key.h"
-#include "malloc.h"
 #include "taskpool.h"
 
 struct Task;

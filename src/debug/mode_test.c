@@ -1,9 +1,9 @@
 #include "registration_data.h"
 #include "mode_test.h"
-#include "mode_test_assets.h"
 #include "gba/keys.h"
 #include "sprites_mode_test.h"
 #include "sprites_pooh.h"
+#include "btl_api.h"
 
 #ifndef VERSION_EU
 static struct ObjTiles* sTestTiles;

@@ -6,6 +6,8 @@
 #include "title.h"
 #include "gba/keys.h"
 #include "sprites_title.h"
+#include "songs.h"
+#include <string.h>
 
 #ifdef VERSION_EU
 extern void** gTitleLumiSpritesEu[5];

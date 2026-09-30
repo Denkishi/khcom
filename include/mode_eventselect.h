@@ -9,7 +9,6 @@
 #include "card_api.h"
 
 #include "msg_api.h"
-#include "mode_test_api.h"
 
 #include "eventselect_api.h"
 
@@ -23,7 +22,6 @@
 #include "key.h"
 #include "taskpool.h"
 #include "gba/syscall.h"
-#include "malloc.h"
 #include "m4a.h"
 #include "evt_types.h"
 #include "event_chara_types.h"

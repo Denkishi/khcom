@@ -1,6 +1,7 @@
 #include "m4a_song.h"
 #include "mode_chksnd.h"
 #include "gba/keys.h"
+#include "songs.h"
 
 TaskPool gChkSndPool;
 s16 gChkSndIndex;

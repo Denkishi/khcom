@@ -6,6 +6,11 @@
 #include "sprites_evt.h"
 #include "sprites_frd.h"
 #include "world_types.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "smn_api.h"
+#include "songs.h"
+#include "frd_tasks.h"
 
 const AnimDef gFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0, { 0, 0, 0 } },

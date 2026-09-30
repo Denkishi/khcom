@@ -10,7 +10,6 @@
 #include "mode_mapinspect.h"
 #include "mode_worldwarp.h"
 #include "ms_charge.h"
-#include "remaining_resource_assets.h"
 #include "bos5.h"
 #include "worldinspect_assets.h"
 #include "status.h"

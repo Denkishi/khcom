@@ -4,8 +4,6 @@
 #include "task_descriptors.h"
 #include "evt_object_types.h"
 
-#include "evt_tasks.h"
-
 #include "obj.h"
 #include "obj_api.h"
 #include "types.h"
@@ -14,7 +12,6 @@
 #include "evt_types.h"
 #include "evt_data.h"
 #include "game.h"
-#include "evt_api.h"
 
 typedef struct EvtObjParam {
     EvtObjRes* res;

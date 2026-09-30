@@ -2,7 +2,6 @@
 #define GUARD_UTIL_H
 
 #include "types.h"
-#include "gba/keys.h"
 
 typedef struct KeyState {
     u16 held;

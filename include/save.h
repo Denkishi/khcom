@@ -5,7 +5,6 @@
 
 #include "types.h"
 #include "save_types.h"
-#include "malloc.h"
 #include "card.h"
 
 extern u8 gSramFileLarge[];

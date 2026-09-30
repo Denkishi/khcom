@@ -2,7 +2,6 @@
 #define GUARD_JIMINY_RECORDS_DATA_H
 
 #include "jiminy_types.h"
-#include "jiminy_records_index_data.h"
 
 extern const JiminyEntry gJiminyEntries[21];
 extern const JiminyDetail gJiminyEntry01Details[17];

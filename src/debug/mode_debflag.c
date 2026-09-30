@@ -3,6 +3,7 @@
 #include "mode_chkbtl.h"
 #include "mode_debflag.h"
 #include "gba/keys.h"
+#include "mode_test_api.h"
 
 static s8 sDebflagCursor;
 static s8 sDebflagCount;

@@ -1,5 +1,9 @@
 #include "mode_vsbattle.h"
 #include "hum_common.h"
+#include "prize_types.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
 
 void HumInit(HumWork* work, const HumDef* def) {
     BtlObj* actor = &work->actor;

@@ -1,10 +1,12 @@
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"
-#include "mode_status_api.h"
 #include "display.h"
 #include "mode_status.h"
 #include "sprites_status.h"
+#include "game_state.h"
+#include "fade.h"
+#include "mode_copyright2.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_097D8300[];

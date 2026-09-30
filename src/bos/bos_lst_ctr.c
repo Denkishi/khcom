@@ -1,6 +1,7 @@
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"
+#include "songs.h"
 
 const EmyKind gBosLstCtrEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 

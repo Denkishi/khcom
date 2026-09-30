@@ -10,7 +10,6 @@
 #include "mode_battle_api.h"
 
 #include "display.h"
-#include "fade.h"
 #include "battle_actor.h"
 #include "btl_collision.h"
 #include "types.h"

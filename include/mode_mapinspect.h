@@ -6,9 +6,7 @@
 #include "map_card_data.h"
 #include "card_ui_types.h"
 #include "card_api.h"
-#include "mode_ms_top_api.h"
 #include "key.h"
-#include "malloc.h"
 #include "mode.h"
 #include "m4a.h"
 
@@ -18,7 +16,6 @@
 
 #include "game_state.h"
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"

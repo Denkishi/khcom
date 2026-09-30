@@ -1,6 +1,9 @@
 #include "bos2.h"
 #include "sprites_bos2.h"
 #include "sprites_btl.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
 
 void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
     work->dsd = arg;

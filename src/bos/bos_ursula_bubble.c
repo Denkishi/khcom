@@ -1,5 +1,6 @@
 #include "bos4.h"
 #include "sprites_bos4.h"
+#include "songs.h"
 
 #ifdef VERSION_EU
 extern u16 eu_080DA830(void);

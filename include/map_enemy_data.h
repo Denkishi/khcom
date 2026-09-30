@@ -1,8 +1,6 @@
 #ifndef GUARD_MAP_ENEMY_DATA_H
 #define GUARD_MAP_ENEMY_DATA_H
 
-#include "anim.h"
-
 struct MapEnmDef;
 
 extern const struct MapEnmDef* gMapEnmDefs[7];

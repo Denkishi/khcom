@@ -2,7 +2,6 @@
 #define GUARD_M4A_SONG_H
 
 #include "types.h"
-#include "songs.h"
 
 void m4aSongNumStart(u16 song);
 void m4aSongNumStartOrChange(u16 song);

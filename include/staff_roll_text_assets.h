@@ -2,7 +2,6 @@
 #define GUARD_STAFF_ROLL_TEXT_ASSETS_H
 
 #include "types.h"
-#include "staff_roll_script_text.h"
 
 #ifdef VERSION_US
 extern const u8 gStaffRollTildeUs[2];

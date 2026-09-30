@@ -10,6 +10,14 @@
 #include "allmap_api.h"
 #include "sprites_allmap.h"
 #include "sprites_card_pictures.h"
+#include "engine_math.h"
+#include "card_api.h"
+#include "malloc.h"
+#include "fade.h"
+#include "mode_allmap_api.h"
+#include "map_runtime.h"
+#include "songs.h"
+#include <string.h>
 
 u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);

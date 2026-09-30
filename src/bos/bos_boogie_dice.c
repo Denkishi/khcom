@@ -4,6 +4,11 @@
 #include "sprites_bos4.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include "prize_types.h"
+#include "btl_api.h"
+#include "fade.h"
+#include "songs.h"
+#include <string.h>
 
 void task_bos_boogie_saku_2(BoogieSakuWork* work);
 u8 task_bos_ursula_1(UrsulaWork* work);

@@ -15,16 +15,10 @@
 
 #include "map_api.h"
 #include "task.h"
-#include "mode_pooh_api.h"
-
-#include "mode_allmap_api.h"
 
 #include "save_api.h"
 
-#include <string.h>
-#include <stdlib.h>
 #include "text.h"
-#include "fade.h"
 #include "obj_api.h"
 #include "display.h"
 #include "types.h"
@@ -38,7 +32,6 @@
 #include "mode.h"
 #include "key.h"
 #include "bos4_api.h"
-#include "allmap_api.h"
 #include "mode_battle_data.h"
 
 #ifdef VERSION_EU

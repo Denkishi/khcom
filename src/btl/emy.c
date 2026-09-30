@@ -5,6 +5,12 @@
 #include "sprites_emy.h"
 #include "sprites_evt.h"
 #include "system_state.h"
+#include "btl_api.h"
+#include "enemy_common.h"
+#include "songs.h"
+#include "player_progression.h"
+#include "actor_localized_data.h"
+#include "emy_tasks.h"
 
 const AnimDef gEmy00CommonAnimDefs[3] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },

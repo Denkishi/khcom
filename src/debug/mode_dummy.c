@@ -4,6 +4,9 @@
 #include "display.h"
 #include "mode_dummy.h"
 #include "sprites_mode_debug.h"
+#include "gba/keys.h"
+#include "mode_test_api.h"
+#include "fade.h"
 
 u16 gDummyEntryIndex;
 

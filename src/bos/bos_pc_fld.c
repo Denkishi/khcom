@@ -1,6 +1,7 @@
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "sprites_staff_roll.h"
+#include "btl_api.h"
 
 static u8 sBosPcFldShakeActive;
 static s16 sBosPcFldShakePattern;

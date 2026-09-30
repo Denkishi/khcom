@@ -9,9 +9,7 @@
 #include "card_api.h"
 
 #include "map_api.h"
-#include "roomcreate_tasks.h"
 
-#include "fade.h"
 #include "types.h"
 #include "engine_math.h"
 #include "m4a.h"

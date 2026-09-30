@@ -176,10 +176,7 @@ typedef struct PooPileWork {
     void* palette;
     void* gfx;
     AnimState anim;
-    s32 x;
-    s32 y;
-    s32 z;
-    u8 unk_30[0x04];
+    PooPos pos;
     Collider collider;
     PooNode node;
     u16 stage;

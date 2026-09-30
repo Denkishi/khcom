@@ -3494,9 +3494,9 @@ s32 GetPooPileHeight(u32 a) {
 }
 
 void task_poo_pile_0(PooPileWork* w, PooPileArgs* a) {
-    w->x = a->x;
-    w->y = a->y;
-    w->z = 0;
+    w->pos.x = a->x;
+    w->pos.y = a->y;
+    w->pos.z = 0;
     w->palette = 0;
     AnimInit(&w->anim, gUnk_09EF5C8C, gUnk_09EF5C6C);
 
@@ -3507,7 +3507,7 @@ void task_poo_pile_0(PooPileWork* w, PooPileArgs* a) {
     }
     AnimStart(&w->anim, w->stage, 0);
     w->gfx = AnimGetGfx(&w->anim);
-    ColliderSetPosition(&w->collider, w->x, w->y, w->z);
+    ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
     w->colliderActive = 0;
     TaskPoolInit(&w->tasks, 1);
     w->task = 0;
@@ -3539,7 +3539,7 @@ u8 task_poo_pile_1(PooPileWork* w) {
     if (AnimIsFinished(&w->anim) == 0) {
         return 1;
     }
-    t = *(PooPos*)&w->x;
+    t = w->pos;
     t.z -= (u16)GetPooPileHeight(w->stage) * 256;
 
     if (IsTaskActive(w->task) != 0) {
@@ -3565,8 +3565,8 @@ void task_poo_pile_2(PooPileWork* w) {
     s16 x;
     s16 y;
 
-    x = (w->x >> 8) - gPooScrollX;
-    y = (w->y >> 8) - gPooScrollY;
+    x = (w->pos.x >> 8) - gPooScrollX;
+    y = (w->pos.y >> 8) - gPooScrollY;
     if (x < -16 || x > 256 || y < -36 || y > 196) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
@@ -3590,11 +3590,11 @@ void task_poo_pile_2(PooPileWork* w) {
         }
 
         if (w->stage != 7) {
-            z = -0x1004 - (w->y >> 8) * 4;
+            z = -0x1004 - (w->pos.y >> 8) * 4;
 
             if (w->colliderActive == 0) {
                 ColliderInit(&w->collider, 7, 4, (u16)GetPooPileHeight(w->stage));
-                AddPooNode(&w->node, 0x240, &w->x);
+                AddPooNode(&w->node, 0x240, &w->pos);
                 w->colliderActive = 1;
             }
         } else {

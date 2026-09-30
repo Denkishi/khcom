@@ -27,6 +27,7 @@ typedef struct DebugWork {
 } DebugWork;
 
 extern const char gUnk_08F68604[];
+extern const char gVersionString[];
 extern Mode gModeChkbtl;
 extern Mode gModeChksnd;
 

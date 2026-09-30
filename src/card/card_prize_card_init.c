@@ -6,6 +6,7 @@
 #include "msg_api.h"
 #include "card_battle.h"
 #include "mode_test_api.h"
+#include "mode_debug.h"
 #include "player_progression.h"
 #include "m4a_song.h"
 #include "game_state.h"

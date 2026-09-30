@@ -166,7 +166,6 @@ typedef struct CardListWork {
 
 typedef char CardListWork_size[(sizeof(CardListWork) == 0x2C) ? 1 : -1];
 
-extern u8 gVersionString[];
 extern u8 gUnk_09614118[];
 extern u8 gUnk_096142F8[];
 extern u8 gUnk_05000160[];

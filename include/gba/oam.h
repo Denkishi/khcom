@@ -6,6 +6,7 @@
 #define OAM_AFFINE           0x0100
 #define OAM_DOUBLE_SIZE      0x0200
 #define OAM_DISABLE          0x0200
+#define OAM_BLEND            0x0400
 
 #define OAM_SHAPE_SQUARE     0x0000
 #define OAM_SHAPE_HORIZONTAL 0x4000

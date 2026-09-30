@@ -15,6 +15,7 @@
 #include "fade.h"
 #include <stddef.h>
 #include "gba/keys.h"
+#include "gba/oam.h"
 
 vu16 gMovieModeState;
 s32 gMovieId;
@@ -159,20 +160,20 @@ void MovieVBlankIntr(void) {
                 REG_BLDCNT = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
                 if (gMovieSubUpperAlpha < 16) {
                     if (gMovieSubUpperAlpha == 0) {
-                        attr0 = 0x200;
+                        attr0 = OAM_DISABLE;
                     } else {
                         REG_BLDALPHA = ((16 - gMovieSubUpperAlpha) << 8) | gMovieSubUpperAlpha;
-                        attr0 = 0x400;
+                        attr0 = OAM_BLEND;
                     }
                 } else {
                     attr0 = 0;
                 }
                 if (gMovieSubLowerAlpha < 16) {
                     if (gMovieSubLowerAlpha == 0) {
-                        attr1 = 0x200;
+                        attr1 = OAM_DISABLE;
                     } else {
                         REG_BLDALPHA = ((16 - gMovieSubLowerAlpha) << 8) | gMovieSubLowerAlpha;
-                        attr1 = 0x400;
+                        attr1 = OAM_BLEND;
                     }
                 } else {
                     attr1 = 0;
@@ -255,7 +256,7 @@ void MovieVBlankIntr(void) {
                      i < 80;
 #endif
                      i++) {
-                    oam[0] = 0x200;
+                    oam[0] = OAM_DISABLE;
                     oam += 4;
                 }
                 if (gMovieSubUpperTimer > 0) {

@@ -868,7 +868,7 @@ void _08019CB4(void) {
             } else {
                 GameState* state = &gGameState;
                 memcpy(&state->progression.maxHp, gBtlWork->savedProgression, 0x88);
-                state->flags |= 0x40;
+                state->flags |= GAME_FLAG_BATTLE_NOT_WON;
                 switch ((u32)gBtlWork->battleId) {
                 case 166:
                     state->progression.friendFlags = 0;

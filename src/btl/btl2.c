@@ -1234,7 +1234,7 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
             work->progressRatio = (work->progress << 8) / work->progressMax;
 
             if (work->progress >= work->progressMax) {
-                gGameState.flags |= GAME_FLAG_ESCAPED;
+                gGameState.flags |= GAME_FLAG_BATTLE_NOT_WON;
                 gBtlWork->flags |= 0x10;
                 gBtlWork->flags |= 0x0000000200000000;
                 work->visible = 0;

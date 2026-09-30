@@ -453,7 +453,7 @@ void MapEnmInitRoom(void) {
         }
         if (gGameState.flags & GAME_FLAG_MAP_ENEMY_BATTLE) {
             gGameState.flags &= ~GAME_FLAG_MAP_ENEMY_BATTLE;
-            if ((gGameState.flags & GAME_FLAG_ESCAPED) == 0) {
+            if ((gGameState.flags & GAME_FLAG_BATTLE_NOT_WON) == 0) {
                 e = GetMapFloorRoom(gMapFloorState.room);
                 if (e->enemiesLeft != 0) {
                     e->enemiesLeft--;
@@ -2732,7 +2732,7 @@ void MapFldExitRoom(void) {
     switch (d->kind) {
     case 1:
     case 3:
-        if (e[1] == 0x51 && (gGameState.flags & 0x400)) {
+        if (e[1] == 0x51 && (gGameState.flags & GAME_FLAG_MONSGAGE_BATTLE)) {
             RequestEventMode(0x55);
         } else {
             RequestEventMode(e[1]);

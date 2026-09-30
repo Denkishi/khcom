@@ -179,7 +179,7 @@ void mode_battle_0(u32 mode) {
     BtlWorkInit();
     AllocBattleTiles();
     gBtlWork->battleId = mode;
-    gGameState.flags &= ~GAME_FLAG_ESCAPED;
+    gGameState.flags &= ~GAME_FLAG_BATTLE_NOT_WON;
 
     switch (mode) {
     case 0x94 ... 0x9C:
@@ -503,7 +503,7 @@ void mode_battle_0(u32 mode) {
 
         if (mode == 0x79) {
             gBtlWork->flags |= 0x400000000;
-            gGameState.flags |= 0x400;
+            gGameState.flags |= GAME_FLAG_MONSGAGE_BATTLE;
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescMonsgage, 0);
         }
     }

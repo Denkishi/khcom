@@ -1131,7 +1131,7 @@ u16 LoadFriendCardSprites(void** a, void** b, void** c) {
     table = *(const StatusFriendTable*)source;
 
     data = &gGameState;
-    if (((const GameState*)data)->flags & 8) {
+    if (((const GameState*)data)->flags & GAME_FLAG_RIKU) {
         limit = 1;
     } else {
         limit = 3;

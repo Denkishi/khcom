@@ -1041,7 +1041,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->y = sDeckTabPointerY[0] << 8;
     w->handFlags = 0;
 #ifdef VERSION_EU
-    w->tiles4 = LoadObjTiles((u8*)&gUnk_090A44BA + 10, 32);
+    w->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
 #else
     w->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
 #endif
@@ -1200,16 +1200,16 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a) {
             RequestDma3Copy(gUnkEu_094E04E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case 1:
-            RequestDma3Copy(&gUnkEu_094E04E4[0x1C00], (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gUnkEu_094E20E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case 2:
-            RequestDma3Copy(&gUnkEu_094E04E4[0x7000], (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gUnkEu_094E74E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case 3:
-            RequestDma3Copy(&gUnkEu_094E04E4[0x5400], (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gUnkEu_094E58E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case 4:
-            RequestDma3Copy(&gUnkEu_094E04E4[0x3800], (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gUnkEu_094E3CE4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         }
 #else

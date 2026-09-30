@@ -3650,7 +3650,7 @@ void Mode_MenuNew_0(void) {
     SetBgPriority(1, 0);
     SetBgPriority(0, 0);
 #ifdef VERSION_EU
-    LoadBgTiles(0, &gUnk_09966064[0x140], 0x1FA0);
+    LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
     switch (gLanguage) {
     case 1:
         RequestDma3Copy((void*)gUnkEu_0996D130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
@@ -3671,12 +3671,12 @@ void Mode_MenuNew_0(void) {
     LoadBgPalette(0, gUnk_09991D44, 0x200);
     LoadBgMap(0, gUnk_0998F744, 0x800);
 #else
-    LoadBgTiles(3, &gUnk_09966064[0x140], 0x1FA0);
+    LoadBgTiles(3, gUnk_099661A4, 0x1FA0);
     LoadBgPalette(3, gUnk_09991D44, 0x200);
     LoadBgMap(3, gUnk_0998CF44, 0x800);
-    LoadBgTiles(1, &gUnk_09966064[0x140], 0x1FA0);
+    LoadBgTiles(1, gUnk_099661A4, 0x1FA0);
     LoadBgPalette(1, gUnk_09991D44, 0x200);
-    LoadBgTiles(0, &gUnk_09966064[0x140], 0x1FA0);
+    LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
     LoadBgPalette(0, gUnk_09991D44, 0x200);
     LoadBgMap(0, gUnk_0998F744, 0x800);
 #endif
@@ -3694,7 +3694,7 @@ void Mode_MenuNew_0(void) {
     gNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
     gNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, 32);
     gNewGameSlotMenuWork->palette3 = LoadObjPalette(gUnk_09991D24, 32);
-    gNewGameSlotMenuWork->tiles3 = LoadObjTiles(&gMapUiSpriteUs_098A8F28[0x62], 0x4C0);
+    gNewGameSlotMenuWork->tiles3 = LoadObjTiles(gUnk_098A8F8A, 0x4C0);
     gNewGameSlotMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
     gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
     AnimInit(&gNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);

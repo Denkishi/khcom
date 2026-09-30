@@ -17,7 +17,7 @@ void SpriteInit(void) {
     SetIwramHeapName(sSpriteHeapName);
     gSpriteWork = IwramAlloc(sizeof(SpriteWork));
     zero = 0;
-    CpuSet(&zero, gSpriteWork, 0x05000000 | (sizeof(SpriteWork) / 4));
+    CpuSet(&zero, gSpriteWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(SpriteWork) / 4));
 }
 
 void SpriteFree(void) {

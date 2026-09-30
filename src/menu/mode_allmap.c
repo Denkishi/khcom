@@ -197,7 +197,7 @@ void mode_allmap_0(s32 a) {
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VCOUNT;
     REG_DISPSTAT &= 0xFF;
-    REG_DISPSTAT |= 0x5020;
+    REG_DISPSTAT |= DISPSTAT_VCOUNT_SETTING(80) | DISPSTAT_VCOUNT_INTR;
     SetVCountCallback(AllmapVCountCallback);
     REG_IME = 1;
     FadeStartIn(0, 16);

@@ -241,14 +241,14 @@ void MPlayExtender(CgbChannel* cgbChans) {
 
     REG_SOUNDCNT_X = (SOUND_1_ON | SOUND_2_ON | SOUND_3_ON | SOUND_4_ON | SOUND_MASTER_ENABLE);
     REG_SOUNDCNT_L = 0;
-    REG_NR12 = 0x8;
-    REG_NR22 = 0x8;
-    REG_NR42 = 0x8;
-    REG_NR14 = 0x80;
-    REG_NR24 = 0x80;
-    REG_NR44 = 0x80;
+    REG_NR12 = SOUND_CGB_ENV_INCREASE;
+    REG_NR22 = SOUND_CGB_ENV_INCREASE;
+    REG_NR42 = SOUND_CGB_ENV_INCREASE;
+    REG_NR14 = SOUND_CGB_RESTART;
+    REG_NR24 = SOUND_CGB_RESTART;
+    REG_NR44 = SOUND_CGB_RESTART;
     REG_NR30 = 0;
-    REG_NR50 = 0x77;
+    REG_NR50 = SOUND_CGB_MASTER_VOLUME(7, 7);
 
     soundInfo = gSoundInfoPtr;
 
@@ -775,19 +775,19 @@ u32 MidiKeyToCgbFreq(u8 chanNum, u8 key, u8 fineAdjust) {
 void CgbOscOff(u8 chanNum) {
     switch (chanNum) {
     case 1:
-        REG_NR12 = 8;
-        REG_NR14 = 0x80;
+        REG_NR12 = SOUND_CGB_ENV_INCREASE;
+        REG_NR14 = SOUND_CGB_RESTART;
         break;
     case 2:
-        REG_NR22 = 8;
-        REG_NR24 = 0x80;
+        REG_NR22 = SOUND_CGB_ENV_INCREASE;
+        REG_NR24 = SOUND_CGB_RESTART;
         break;
     case 3:
         REG_NR30 = 0;
         break;
     default:
-        REG_NR42 = 8;
-        REG_NR44 = 0x80;
+        REG_NR42 = SOUND_CGB_ENV_INCREASE;
+        REG_NR44 = SOUND_CGB_RESTART;
     }
 }
 

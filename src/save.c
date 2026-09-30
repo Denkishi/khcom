@@ -28,7 +28,7 @@ void ZeroFill(void* dst, s16 size) {
     dma = (vu32*)REG_ADDR_DMA3;
     dma[0] = (u32)p;
     dma[1] = (u32)dst;
-    dma[2] = 0x81000000 | (size / 2);
+    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | (size / 2);
     dma[2];
 }
 

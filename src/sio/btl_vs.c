@@ -80,9 +80,9 @@ void VsBtlWorkInit(void) {
     s32 b;
 
     a = 0;
-    CpuSet(&a, gBtlWork, 0x05000074);
+    CpuSet(&a, gBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
     b = 0;
-    CpuSet(&b, gRikuBtlWork, 0x05000074);
+    CpuSet(&b, gRikuBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
     gBtlWork->phase = 0;
     gBtlWork->fadeExcludedPalettes = -0x10000;
     gBtlWork->gravity = 66;

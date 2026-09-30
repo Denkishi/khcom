@@ -1053,7 +1053,7 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     mask = total = count = 0;
     present = EwramAlloc(0x23C);
     zero = 0;
-    CpuSet(&zero, present, 0x0500008F);
+    CpuSet(&zero, present, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x8F);
 
     if (mode == 1) {
         switch (deck) {

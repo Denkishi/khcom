@@ -113,7 +113,7 @@ void BtlWorkInit(void) {
     s32 zero = 0;
     u8* d;
     u8* p;
-    CpuSet(&zero, gBtlWork, 0x05000074);
+    CpuSet(&zero, gBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
     gBtlWork->phase = 0;
     gBtlWork->fadeExcludedPalettes = 0xFFFF0000;
     gBtlWork->gravity = 0x42;

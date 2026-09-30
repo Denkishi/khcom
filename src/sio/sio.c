@@ -125,7 +125,7 @@ void SioInit(void) {
     REG_SIOMLT_SEND = 0;
     *(u64*)REG_ADDR_SIOMULTI0 = 0;
     zero = 0;
-    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | 0x05000000);
+    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
     gSioIdleVBlanks = 0;
     gSioSendEmpty = 0;
     gSioPrevPlayerCount = 0;
@@ -166,7 +166,7 @@ void SioStop(void) {
     REG_TM3CNT_H = 0;
     REG_IF = (INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
     zero = 0;
-    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | 0x05000000);
+    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
 }
 
 u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {

@@ -304,7 +304,7 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 #ifdef VERSION_EU
 void eu_0800115C(void) {
     gSoftResetMarker[0] = 0xFEDCBA98;
-    SoftReset(0xFD);
+    SoftReset(RESET_ALL & ~RESET_IWRAM);
 }
 #endif
 
@@ -325,7 +325,7 @@ void ModeUpdate(void) {
         ScanlineDmaReset();
         eu_0800115C();
 #else
-        SoftReset(0xFF);
+        SoftReset(RESET_ALL);
         ScanlineDmaReset();
 #endif
     } else {

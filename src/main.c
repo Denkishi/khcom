@@ -97,14 +97,14 @@ void ClearSystemMemory(void) {
     u32 b;
     u32 c;
 
-    RegisterRamReset(0xFF);
+    RegisterRamReset(RESET_ALL);
     REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
     a = 0;
-    CpuSet(&a, (void*)0x02000000, 0x05010000);
+    CpuSet(&a, (void*)0x02000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x10000);
     b = 0;
-    CpuSet(&b, (void*)0x03000000, 0x05001F80);
+    CpuSet(&b, (void*)0x03000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x1F80);
     c = 0;
-    CpuSet(&c, (void*)0x06000000, 0x05006000);
+    CpuSet(&c, (void*)0x06000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
 }
 #endif
 
@@ -123,7 +123,7 @@ void InitSystem(void) {
 #else
     u32 zero;
 
-    RegisterRamReset(0xFF);
+    RegisterRamReset(RESET_ALL);
     REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
     zero = 0;
     dma = (vu32*)REG_ADDR_DMA3;

@@ -306,9 +306,9 @@ void DebugTextClearBg(void) {
     void* screenBase = GetBgScreenBase(0);
 
     a = 0;
-    CpuFastSet(&a, charBase, 0x01001500);
+    CpuFastSet(&a, charBase, CPU_FAST_SET_SRC_FIXED | 0x1500);
     b = 0;
-    CpuFastSet(&b, screenBase, 0x01000140);
+    CpuFastSet(&b, screenBase, CPU_FAST_SET_SRC_FIXED | 0x140);
 }
 
 void func_0805F7B0(s32 a) {

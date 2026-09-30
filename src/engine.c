@@ -1467,7 +1467,7 @@ void VTransInit(void) {
     SetIwramHeapName(sVTransHeapName);
     gDma3Requests = IwramAlloc(sizeof(Dma3Queue));
     zero = 0;
-    CpuSet(&zero, gDma3Requests, 0x05000000 | (sizeof(Dma3Queue) / 4));
+    CpuSet(&zero, gDma3Requests, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(Dma3Queue) / 4));
 }
 
 void VTransFree(void) {
@@ -1509,7 +1509,7 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (u32)src;
         dma[1] = (u32)dst;
-        dma[2] = 0x80000000 | (size / 2);
+        dma[2] = (DMA_ENABLE << 16) | (size / 2);
         dma[2];
     }
     return 1;
@@ -1817,7 +1817,7 @@ void FlushDma3QueueWithCpu(void) {
         i = n;
         do {
             *zeroPtr = 0;
-            CpuSet((void*)&zero, current->dst, (current->size >> 1) | 0x01000000);
+            CpuSet((void*)&zero, current->dst, (current->size >> 1) | CPU_SET_SRC_FIXED);
             gDma3Requests->transferredBytes += current->size;
             current++;
         } while (--i);
@@ -1833,7 +1833,7 @@ void BgInit(void) {
     p = &gBgWork;
     *p = IwramAlloc(sizeof(BgWork));
     zero = 0;
-    CpuSet(&zero, *p, 0x05000000 | (sizeof(BgWork) / 4));
+    CpuSet(&zero, *p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
 }
 
 void BgFree(void) {
@@ -1892,7 +1892,7 @@ void BgReset(void) {
     u32 zero;
 
     zero = 0;
-    CpuSet(&zero, gBgWork, 0x05000000 | (sizeof(BgWork) / 4));
+    CpuSet(&zero, gBgWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
 #endif
     gBackdropColor = 0;
     DisableBg(0);
@@ -2649,7 +2649,7 @@ void FadeInit(void) {
     SetIwramHeapName(sFadeHeapName);
     gFadeWork = IwramAlloc(sizeof(FadeWork));
     zero = 0;
-    CpuSet(&zero, gFadeWork, 0x05000000 | (sizeof(FadeWork) / 4));
+    CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
 }
 
 void FadeFree(void) {
@@ -2659,7 +2659,7 @@ void FadeFree(void) {
 void FadeReset(void) {
     u32 zero = 0;
 
-    CpuSet(&zero, gFadeWork, 0x05000000 | (sizeof(FadeWork) / 4));
+    CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
 }
 
 void LoadPalette(void* src, void* dst, u16 size) {

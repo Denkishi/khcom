@@ -430,8 +430,10 @@
 #define DISPSTAT_VBLANK_INTR 0x0008
 #define DISPSTAT_HBLANK_INTR 0x0010
 #define DISPSTAT_VCOUNT_INTR 0x0020
+#define DISPSTAT_VCOUNT_SETTING(n) ((n) << 8)
 
 #define BGCNT_PRIORITY(n)   (n)
+#define BGCNT_PRIORITY_MASK 0x0003
 #define BGCNT_CHARBASE(n)   ((n) << 2)
 #define BGCNT_MOSAIC        0x0040
 #define BGCNT_16COLOR       0x0000
@@ -558,6 +560,10 @@
 #define SOUND_4_ON 0x0008
 
 #define SOUND_MASTER_ENABLE   0x0080
+
+#define SOUND_CGB_ENV_INCREASE 0x08
+#define SOUND_CGB_RESTART      0x80
+#define SOUND_CGB_MASTER_VOLUME(left, right) (((left) << 4) | (right))
 #define SOUND_BIAS_RESOLUTION 0x4000
 
 #define INTR_FLAG_VBLANK  (1 << 0)

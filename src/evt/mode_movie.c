@@ -279,7 +279,7 @@ void MovieVBlankIntr(void) {
                     }
                 }
             } else {
-                REG_DISPCNT &= ~0x1000;
+                REG_DISPCNT &= ~DISPCNT_OBJ_ON;
             }
         }
     }
@@ -296,7 +296,7 @@ void mode_movie_1(void) {
         InitDisplayRegs();
         gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
         fill = 0;
-        CpuSet(&fill, (void*)0x06000000, 0x05006000);
+        CpuSet(&fill, (void*)0x06000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
         gMovieModeState++;
         break;
     }
@@ -468,13 +468,13 @@ void mode_movie_1(void) {
         s32 fill;
 
         fill = 0;
-        CpuSet(&fill, (void*)0x06000000, 0x05006000);
+        CpuSet(&fill, (void*)0x06000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
 
         if (gMovieFlags & MOVIE_FLAG_SOFT_RESET) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else
-            SoftReset(0xFF);
+            SoftReset(RESET_ALL);
 #endif
 #ifdef VERSION_EU
         } else if (gDebugFlags & DEBUG_FLAG_DEBUG_MENU) {

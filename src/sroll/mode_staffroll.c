@@ -4495,7 +4495,7 @@ void mode_StaffRoll_1(void) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else
-            SoftReset(0xFF);
+            SoftReset(RESET_ALL);
 #endif
         }
         break;

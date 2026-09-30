@@ -37,7 +37,7 @@ void ContinueModeUpdate(void) {
 #ifdef VERSION_EU
             eu_0800115C();
 #else
-            SoftReset(255);
+            SoftReset(RESET_ALL);
 #endif
             break;
         }

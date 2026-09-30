@@ -233,7 +233,7 @@ void PalletInit(void) {
     SetIwramHeapName(sPalletHeapName);
     gPaletteBuffer = IwramAlloc(0x440);
     zero = 0;
-    CpuSet(&zero, gPaletteBuffer, 0x05000110);
+    CpuSet(&zero, gPaletteBuffer, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x110);
     PalletClear();
 }
 

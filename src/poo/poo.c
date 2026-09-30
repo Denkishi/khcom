@@ -7210,8 +7210,8 @@ void SetPooRabbitTalkBlocked(u8 a) {
 void AllmapVCountCallback(void) {
     while ((REG_DISPSTAT & DISPSTAT_HBLANK) == 0) {
     }
-    REG_BG2CNT &= 0xFFFC;
-    REG_BG2CNT |= 2;
+    REG_BG2CNT &= ~BGCNT_PRIORITY_MASK;
+    REG_BG2CNT |= BGCNT_PRIORITY(2);
     REG_BG2HOFS = 0;
 }
 

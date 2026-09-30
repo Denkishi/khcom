@@ -180,9 +180,6 @@ void InitSystem(void) {
 }
 
 void AgbMain(void) {
-    s32 bit;
-    register s32 set asm("r5");
-
     gFrameCounter = 0;
     gVBlankCounter = 0;
     gSystemFlags = 0;
@@ -191,25 +188,20 @@ void AgbMain(void) {
     gSioStatus = 0;
     InitSystem();
     EnableVBlankIntr();
-    bit = 4;
     for (;;) {
         UpdateKeyState();
         if (gSystemFlags & 1) {
             SioLinkUpdate();
             if (!(gSioStatus & 0x100)) {
-                u16 flags = gFrameSyncFlags;
-                set = 4;
-                if ((flags & bit) == 0) {
+                if (!(gFrameSyncFlags & 4)) {
                     ModeUpdate();
-                    gFrameSyncFlags |= set;
+                    gFrameSyncFlags |= 4;
                 }
             }
         } else {
-            u16 flags = gFrameSyncFlags;
-            set = 4;
-            if ((flags & bit) == 0) {
+            if (!(gFrameSyncFlags & 4)) {
                 ModeUpdate();
-                gFrameSyncFlags |= set;
+                gFrameSyncFlags |= 4;
             }
         }
         ApplyIntrCallbacks();

@@ -485,7 +485,6 @@ extern u8 gPBakudanTiles[];
 extern JiminyWork* gJiminyWork;
 
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);
-void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, s32 f, s32 w);
 void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p);
 void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst);
 void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w);
@@ -500,7 +499,6 @@ void JiminyInitCursor(s16 a, s16 b, s16 c);
 void JiminyReloadRows(void);
 void JiminyUpdateCursor(s16 a, s16 b, s16 c);
 void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h);
-u8 IsJiminyFlagNew(u16 a);
 
 s32 GetJiminyEntryState(s32 idx);
 

@@ -2076,7 +2076,7 @@ void IncrementReloadCount(CardBattleWork* w) {
     }
 }
 
-void func_0807B3C4(void) {
+void func_0807B3C4(s32 a) {
 }
 
 u8 GetSoraCardListIndex(void) {

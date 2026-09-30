@@ -307,7 +307,7 @@ s16 AddCardToCollection(u16 cardId) {
     return i;
 }
 
-s32 IsCardCollectionFull(void) {
+u8 IsCardCollectionFull(void) {
     s32 count;
     s32 i;
 

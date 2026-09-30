@@ -252,8 +252,6 @@ static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, 6
 
 static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, 657, 0, 1, 0, &sUnk_0813C73C };
 
-void func_0807B3C4(s32 a);
-
 void task_btl_lockon_0(BtlLockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);

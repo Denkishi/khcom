@@ -2709,7 +2709,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
     }
 }
 
-void DrawTextSlotsUnsorted(s16 x, s32 y, TextSlot* p, void* d, s32 e, u8 n) {
+void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* p, void* d, s32 e, u8 n) {
     s16 x0 = x;
     s16 cy = y;
     u8 i;

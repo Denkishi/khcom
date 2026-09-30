@@ -517,7 +517,7 @@ void ConvertActiveDeckCardToPremium(u16 index) {
     RecalculateInactiveDeckCpCosts();
 }
 
-s32 HasNonPremiumCardsInActiveDeck(void) {
+u8 HasNonPremiumCardsInActiveDeck(void) {
     Deck* deck;
     s32 count;
     s32 i;
@@ -738,7 +738,7 @@ u8 GetCollectionCardCategory(u16 index) {
     return gCardDefs[gCardCollection[index] & CARD_ID_MASK].category;
 }
 
-s32 IsActiveDeckAllPremium(void) {
+u8 IsActiveDeckAllPremium(void) {
     Deck* deck;
     s32 a;
     s32 b;

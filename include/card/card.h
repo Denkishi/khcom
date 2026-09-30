@@ -1731,7 +1731,6 @@ u16 GetCollectionCardKind(u16 index);
 void SetActiveDeckIndex(u8 index);
 u16 GetDeckCpCost(u8 index);
 
-void DrawTextSlotsUnsorted(s16 a, s16 b, void* c, void* d, s32 e, u8 f);
 void CreateBosscardTask(TaskPool* pool);
 void ListOwnedMapCardKinds(MapSelectKindEntry* p);
 u8 CanUseSoraSelectedCard(void);

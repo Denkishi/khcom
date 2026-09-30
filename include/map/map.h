@@ -1063,7 +1063,6 @@ u8 MapDoorWaitHit(MapDoorWork* p);
 u8 MapDoorWaitCard(MapDoorWork* p);
 u8 MapDoorWaitOpen(MapDoorWork* p);
 void CreateWorldPrize(s32 x, s32 y, s32 z);
-u8 IsCardCollectionFull(void);
 MapCell* MapGetCell(s16 x, s16 y);
 void MapComputeRowBounds(void);
 void MapCellSetBg3Piece(MapCell* p, s32 n);

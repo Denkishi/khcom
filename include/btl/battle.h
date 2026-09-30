@@ -266,8 +266,6 @@ void SeedGameRandom(void);
 
 u8 ColliderIsColliding(Collider* p);
 s32 ApplyBtlObjHit(BtlObj* p);
-u8 IsActiveDeckAllPremium(void);
-u8 HasNonPremiumCardsInActiveDeck(void);
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d);
 
 typedef struct BtlPrizeArgs {

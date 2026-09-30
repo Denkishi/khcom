@@ -176,7 +176,7 @@ u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u1
     return 0;
 }
 
-void DrawSpriteUnsorted(u16 a, u16 b, void* c, void* d, void* e, u16 f) {
+void DrawSpriteUnsorted(s16 a, s16 b, void* c, void* d, void* e, u16 f) {
     SpriteWork* p;
     u32 z;
 

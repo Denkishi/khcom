@@ -15,6 +15,7 @@ struct ObjPalette* LoadObjPalette(void* src, u16 size);
 struct ObjPalette* AllocObjPalette(u16 size);
 void ReleaseObjPalette(struct ObjPalette* palette);
 u8 DrawSprite(s16 x, s16 y, void* sprite, void* tiles, void* palette, ObjAffine* affine, u16 flags, u16 priority);
+void DrawSpriteUnsorted(s16 x, s16 y, void* sprite, void* tiles, void* palette, u16 flags);
 ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 flags);
 ObjAffine* AllocObjAffineAngle(u8 angle, u8 flags);
 u8 CanAllocObjTiles(u16 size);

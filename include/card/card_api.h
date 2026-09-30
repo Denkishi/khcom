@@ -23,6 +23,7 @@ void mode_sio_battle_2(void);
 
 void InitRikuDeckForWorld(u8 a);
 void SelectPrevSoraCard(struct CardBattleWork* w, u8 b, u8 c);
+void func_0807B3C4(s32 a);
 u8 GetSoraCardListIndex(void);
 u8 GetSoraStockCount(void);
 void LoadPremiumCardGfx(struct CardBattleState* p);

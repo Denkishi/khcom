@@ -72,6 +72,7 @@ void BgFxStartMahluxiaGround(s32 x, s32 y, s32 z, s32 w);
 void BgFxStartLexceusGround(s32 x, s32 y, s32 z, s32 w);
 void BgFxStartHanabira(s32 x, s32 y, s32 z, s32 w);
 void BgFxStartKama(s32 x, s32 y, s32 z, s32 w, s32 v);
+void BgFxStartLaxeneBeam(s32 x, s32 y, s32 z, u8 f, s32 v);
 void BgFxStartRikuLimit(s32 x, s32 y, s32 z, u8 f);
 void BgFxStartDragonFire(s32 x, s32 y, s32 z, s32 s);
 void BgFxStartAero(u16 a, s32 x, s32 y, s32 z, s32 w);

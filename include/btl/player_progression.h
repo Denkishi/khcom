@@ -14,6 +14,7 @@ u8 IsLinkPartnerStockLearned(u32 a);
 u8 IsStockNew(u32 a);
 void LearnStock(u32 a);
 u8 IsJiminyFlagSet(u32 a);
+u8 IsJiminyFlagNew(u32 a);
 void ClearJiminyFlagNew(u32 a);
 u8 LevelUp(void);
 void ClearStockNew(u32 a);

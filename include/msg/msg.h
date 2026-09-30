@@ -228,7 +228,6 @@ void view_2(void);
 void view_3(void);
 s32 LoadLatinTextSlots(u16* a, TextSlot* b);
 s32 LoadJapaneseTextSlots(u16* a, TextSlot* b);
-void DrawSpriteUnsorted(s16 x, s16 y, void* a, void* b, void* c, u16 d);
 void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f);
 void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a);
 void DrawBgTextLines(void);

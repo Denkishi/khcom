@@ -24,8 +24,6 @@
 #include "songs.h"
 #include "player_progression.h"
 
-extern u8 gUnk_08B22BA8[];
-
 static s16 sMsTopCursor;
 static void* sMsTopNextMode;
 static struct ObjTiles* sMsTopBarTiles;

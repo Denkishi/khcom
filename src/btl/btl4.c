@@ -8,64 +8,6 @@
 #include "sprites_btl_hud.h"
 #include "gba/io_reg.h"
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_08B55C58[];
-extern u8 gUnkEu_08B55CFE[];
-extern u8 gUnkEu_08B55D08[];
-extern u8 gUnkEu_08B55D18[];
-extern u8 gUnkEu_08B55D22[];
-extern u8 gUnkEu_08B55D32[];
-extern u8 gUnkEu_08B55D3C[];
-extern u8 gUnkEu_08B55D4C[];
-extern u8 gUnkEu_08B55D66[];
-extern u8 gUnkEu_08B55D70[];
-extern u8 gUnkEu_08B55D80[];
-extern u8 gUnkEu_08B4AB9C[];
-extern u8 gUnkEu_08B4ABAC[];
-extern u8 gUnkEu_08B4ABBC[];
-extern u8 gUnkEu_08B4ABCC[];
-extern u8 gUnkEu_08B4ABDC[];
-extern u8 gUnkEu_08B4ABEC[];
-extern u8 gUnkEu_08B4ABFC[];
-extern u8 gUnkEu_08B4AC0C[];
-extern u8 gUnkEu_08B4AC1C[];
-extern u8 gUnkEu_08B4AC2C[];
-extern u8 gUnkEu_08B4AC46[];
-extern u8 gUnkEu_08B526D8[];
-extern u8 gUnkEu_08B526E8[];
-extern u8 gUnkEu_08B526F8[];
-extern u8 gUnkEu_08B52708[];
-extern u8 gUnkEu_08B52718[];
-extern u8 gUnkEu_08B52728[];
-extern u8 gUnkEu_08B52738[];
-extern u8 gUnkEu_08B52748[];
-extern u8 gUnkEu_08B52758[];
-extern u8 gUnkEu_08B52768[];
-extern u8 gUnkEu_08B52782[];
-extern u8 gUnkEu_08B53314[];
-extern u8 gUnkEu_08B53324[];
-extern u8 gUnkEu_08B53334[];
-extern u8 gUnkEu_08B53344[];
-extern u8 gUnkEu_08B53354[];
-extern u8 gUnkEu_08B53364[];
-extern u8 gUnkEu_08B53374[];
-extern u8 gUnkEu_08B53384[];
-extern u8 gUnkEu_08B53394[];
-extern u8 gUnkEu_08B533A4[];
-extern u8 gUnkEu_08B533BE[];
-extern u8 gUnkEu_08B53F50[];
-extern u8 gUnkEu_08B53F60[];
-extern u8 gUnkEu_08B53F70[];
-extern u8 gUnkEu_08B53F80[];
-extern u8 gUnkEu_08B53F90[];
-extern u8 gUnkEu_08B53FA0[];
-extern u8 gUnkEu_08B53FB0[];
-extern u8 gUnkEu_08B53FC0[];
-extern u8 gUnkEu_08B53FD0[];
-extern u8 gUnkEu_08B53FE0[];
-extern u8 gUnkEu_08B53FFA[];
-#endif
-
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
 #ifdef VERSION_EU
     work->palette = LoadObjPalette(gBStatesPalette, 32);

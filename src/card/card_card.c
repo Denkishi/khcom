@@ -82,13 +82,10 @@ void RefreshSoraCardDisplayGfx(CardDisplayWork* p);
 void func_0807B458(CardBattleWork* w, u16 value);
 void func_0807B45C(CardBattleWork* w);
 void ApplySoraHcEffect(CardBattleWork* w);
-u8 func_0807C5D8(CardDisplayWork* w, void* a);
 void UpdateSoraCardRingPosition(CardDisplayWork* p);
 u8 DispatchSoraCardCommand(CardDisplayWork* p, void* a);
 u8 func_0807D584(CardDisplayWork* p, void* a);
-void UpdateCardDisplayFlip(CardDisplayWork* p);
 u8 func_0807D7B0(CardDisplayWork* p);
-u8 func_0807CF4C(CardDisplayWork* p, void* a);
 void UpdateSoraReloadGauge(CardDisplayWork* p);
 void TickSoraHcEffectOnAttackEnd(void);
 u8 func_0807CE04(CardDisplayWork* p);
@@ -4147,8 +4144,6 @@ u8 IsRikuSelectionEmpty(void) {
 
     return 0;
 }
-
-static void card_2(CardDisplayWork* p);
 
 TaskDesc gTaskDescCardSora = {
     "card",

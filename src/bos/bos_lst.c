@@ -6,10 +6,6 @@
 #include "songs.h"
 #include <stdlib.h>
 
-#ifdef VERSION_EU
-extern u8 eu_0810BA1C(BosLstWork* work, s32 idx);
-#endif
-
 const EmyKind gBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 
 const BattleBackgroundDef gBosLstBattleBackgroundDef = {

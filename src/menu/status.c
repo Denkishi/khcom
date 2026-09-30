@@ -15,15 +15,6 @@
 #include "songs.h"
 #include "mode_status_api.h"
 
-#ifdef VERSION_EU
-extern void* gStatusBarTiles[5];
-extern void** gStatusBarSprites[5];
-extern void* gStatusTabTiles[5];
-extern void** gStatusTabSprites[5];
-extern void* gStatusNewMarkTiles[5];
-extern void* gStatusNewMarkSprites[5];
-#endif
-
 TaskDesc gTaskDescStatus = {
     "task_status",
     (TaskInitFunc)task_status_0,

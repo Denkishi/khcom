@@ -3,13 +3,6 @@
 #include "songs.h"
 
 #ifdef VERSION_EU
-extern u16 eu_080DA830(void);
-extern void eu_080DA80C(u16 a, u16 b);
-extern u8 eu_080DA848(void);
-extern void* eu_080DA860(void);
-#endif
-
-#ifdef VERSION_EU
 UrsulaBubbleWork* gUrsulaBubbleWork;
 #endif
 

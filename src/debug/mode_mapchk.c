@@ -14,8 +14,7 @@
 #include "malloc.h"
 #include "world_types.h"
 #include "gba/keys.h"
-
-extern MapFloorState gMapFloorState;
+#include "bos4.h"
 
 const char gDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
 

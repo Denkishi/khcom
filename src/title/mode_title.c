@@ -34,10 +34,6 @@ u8 gTitleCancelled;
 u8 gUnk_02034ECB;
 u8 gTitleLogoScaleDone;
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_09814E40[];
-#endif
-
 void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
     RequestDma3Copy(b, gTitlePaletteBuffer + a * 32, c);
 }

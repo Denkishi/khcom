@@ -23,11 +23,6 @@ u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);
 s16 gAllmapCameraX EWRAM_COMMON(4);
 
-#ifdef VERSION_EU
-extern void* gAllmapBarSprites[5];
-extern void* gUnkEu_09F80138[5];
-#endif
-
 TaskDesc gTaskDescAllmapRoom = {
     "task_allmap_room",
     (TaskInitFunc)task_allmap_room_0,

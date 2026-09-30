@@ -37,33 +37,18 @@
 #include "gba/io_reg.h"
 #include "gba/keys.h"
 #include "songs.h"
+#include "battle.h"
 
 u8 gLvupLogoActive;
 
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09613E98[];
-#ifdef VERSION_EU
-extern void** gLvupEffectSpritesByLanguage[];
-extern u8 gUnkEu_0916F992[];
-extern u8 gUnkEu_0917063A[];
-extern u8 gUnkEu_09170202[];
-extern u8 gUnkEu_0916FDCA[];
-extern void* gLevelUpBgTilesByLanguage[];
-#endif
 u8 UpdateLevelUpWaitFade(void);
 s32 IsLevelUpApUnlocked(void);
 u8 IsLevelUpStockUnlocked(void);
 struct LevelUpWork;
 u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
-u8 UpdateLevelUpNextSlideIn(struct LevelUpWork* w, void* a);
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);
-extern u8 gUnk_0908CAEC[];
-extern u8 gUnk_0908D05E[];
-extern u8 gSoraPalette[];
-extern u8 gRikuPalette[];
-#ifdef VERSION_EU
-extern void* gUnkEu_09F72D1C[];
-#endif
 
 #ifdef VERSION_EU
 const u16 gUnkEu_090D1328[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
@@ -287,11 +272,8 @@ void LoadLevelUpRikuBgTiles(void) {
 #endif
     }
 }
-extern u8 gUnk_090950F4[];
-extern u8 gUnk_09091D36[];
 extern u16* gLevelUpSoraTexts[];
 extern u16* gLevelUpRikuTexts[];
-extern void* gLevelUpOptionBgMaps[];
 extern u8 gUnk_09613EB8[];
 extern u8 gUnk_09613ED8[];
 extern u8 gUnk_09613F18[];
@@ -300,21 +282,9 @@ extern u8 gUnk_09613F98[];
 extern u8 gUnk_09613FB8[];
 extern u8 gUnk_09613FD8[];
 extern u8 gUnk_09613FF8[];
-#ifdef VERSION_EU
-extern u8 gUnkEu_09172200[];
-extern u8 gUnkEu_091759BA[];
-#endif
 u8 UpdateLevelUpSelect(LevelUpWork* w, void* a);
-extern const void* gLevelUpBgMapBlocks[];
 extern u8 gUnk_09614018[];
 extern u8 gUnk_09614098[];
-#ifdef VERSION_EU
-extern u8 gUnkEu_094D53C4[];
-extern u8 gUnkEu_094D6BC4[];
-extern u8 gUnkEu_094D63C4[];
-extern u8 gUnkEu_094D5BC4[];
-#endif
-void LoadLevelUpRikuBgTiles(void);
 
 u8 Level_Up_1(LevelUpWork* w, void* a) {
     s32 x[3];
@@ -844,7 +814,6 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
     return 1;
 }
 
-extern const void* gLevelUpBgMapBlocks[];
 u8 UpdateLevelUpClose(LevelUpWork* w, void* a);
 
 u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {

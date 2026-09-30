@@ -32,7 +32,6 @@
 #include "evt.h"
 
 u8 UpdateEventBgEffectAnim(EventBgEffectWork* w, void* a);
-void ClearEventBgEffect(EventBgEffectWork* w);
 
 const EventBgEffectDef gUnk_0903803C = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x20, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,

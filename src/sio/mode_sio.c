@@ -89,15 +89,6 @@ extern const SioAnimDef gSioChgCardAnimDefs[3];
 #endif
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_0967CB6C[];
-extern u8 gUnkEu_095F18BE[];
-extern u8 gUnkEu_095F3D12[];
-extern u8 gUnkEu_095F24DA[];
-extern u8 gUnkEu_095F30F6[];
-extern u8 gUnkEu_095F492E[];
-extern u8 gUnkEu_095EC758[];
-extern u8 gUnkEu_095EC898[];
-extern u8 gUnkEu_095ECB38[];
 extern void* gUnkEu_08891580[];
 extern void eu_080C24D8(void);
 extern s32 eu_080C273C(void);
@@ -105,31 +96,8 @@ extern s32 eu_080C2740(void);
 
 extern void* gUnkEu_08891508[];
 extern void* gUnkEu_088920BC[];
-extern u8 gUnkEu_096C798C[];
 extern void* gUnkEu_08891714[];
 extern void* gUnkEu_08891670[];
-extern u8 gUnkEu_095ECDD8[];
-extern u8 gUnkEu_095ED472[];
-extern u8 gUnkEu_095F5550[];
-extern u8 gUnkEu_095F5BB0[];
-extern u8 gUnkEu_095F6150[];
-extern u8 gUnkEu_095F67B0[];
-extern u8 gUnkEu_095F6D50[];
-extern u8 gUnkEu_095F73AA[];
-extern u8 gUnkEu_095F79D2[];
-extern u8 gUnkEu_095F7FAE[];
-extern u8 gUnkEu_096C298C[];
-extern u8 gUnkEu_096C498C[];
-extern u8 gUnkEu_096C198C[];
-extern u8 gUnkEu_096C398C[];
-extern u8 gUnkEu_096C218C[];
-extern u8 gUnkEu_096C418C[];
-extern u8 gUnkEu_096C318C[];
-extern u8 gUnkEu_096C518C[];
-extern u8 gUnkEu_096C698C[];
-extern u8 gUnkEu_096C598C[];
-extern u8 gUnkEu_096C618C[];
-extern u8 gUnkEu_096C718C[];
 #endif
 
 #ifdef VERSION_JP

@@ -23,35 +23,7 @@
 #include "common_text.h"
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_09A4FBC0[];
-extern u8 gUnkEu_09A50BC0[];
-extern u8 gUnkEu_09A51BC0[];
-extern u8 gUnkEu_09A52BC0[];
-extern u8 gUnkEu_09A4F3C0[];
-extern u8 gUnkEu_09A503C0[];
-extern u8 gUnkEu_09A513C0[];
-extern u8 gUnkEu_09A523C0[];
-extern u8 gUnkEu_09A56780[];
-extern u8 gUnk_09A53380[];
-extern u8 gUnkEu_09A5CF80[];
-extern u8 gUnk_09A59B80[];
-extern u8 gUnkEu_09A57480[];
-extern u8 gUnk_09A54080[];
-extern u8 gUnkEu_09A5DC80[];
-extern u8 gUnk_09A5A880[];
-extern u8 gUnkEu_09A58180[];
-extern u8 gUnk_09A54D80[];
-extern u8 gUnkEu_09A5E980[];
-extern u8 gUnk_09A5B580[];
-extern u8 gUnkEu_09A58E80[];
-extern u8 gUnk_09A55A80[];
-extern u8 gUnkEu_09A5F680[];
-extern u8 gUnk_09A5C280[];
 extern u8 gUnkEu_099AAC2C[];
-extern u8 gUnkEu_099ABA18[];
-extern u8 gUnkEu_099ABFA0[];
-extern u8 gUnkEu_099AC468[];
-extern u8 gUnkEu_099AC9F0[];
 #endif
 
 static s16 sWorldWarpCursor;
@@ -90,33 +62,10 @@ static s32 sWorldWarpBarX;
 static s32 sWorldWarpCursorX;
 static s32 sWorldWarpCursorY;
 
-extern u8 gUnk_0999F400[];
-extern u8 gUnk_0999F416[];
-extern u8 gUnk_0999F44A[];
 #ifdef VERSION_EU
 extern u8 gUnkEu_099AABA4[];
 extern u8 gUnkEu_099AABBA[];
 extern u8 gUnkEu_099AABEE[];
-extern u8 gUnkEu_099AB990[];
-extern u8 gUnkEu_099AB9A6[];
-extern u8 gUnkEu_099AB9DA[];
-extern u8 gUnkEu_099ABF18[];
-extern u8 gUnkEu_099ABF2E[];
-extern u8 gUnkEu_099ABF62[];
-extern u8 gUnkEu_099AC3E0[];
-extern u8 gUnkEu_099AC3F6[];
-extern u8 gUnkEu_099AC42A[];
-extern u8 gUnkEu_099AC968[];
-extern u8 gUnkEu_099AC97E[];
-extern u8 gUnkEu_099AC9B2[];
-extern u8 gUnk_09A53380[];
-extern u8 gUnk_09A59B80[];
-extern u8 gUnk_09A54080[];
-extern u8 gUnk_09A5A880[];
-extern u8 gUnk_09A54D80[];
-extern u8 gUnk_09A5B580[];
-extern u8 gUnk_09A55A80[];
-extern u8 gUnk_09A5C280[];
 #endif
 
 const WarpRect gWarpRects[4] = {

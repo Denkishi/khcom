@@ -13,13 +13,6 @@
 #include "btl_api.h"
 #include "songs.h"
 
-extern u8 gBosTmFootIdleFrames[8];
-extern s16 gBosTmFootIdleZ[5];
-extern TmFootStep gBosTmFootSteps[3];
-extern TmFootStep gBosTmFootThrowSteps[16];
-extern TmFootStep gBosTmFootWalkSteps[10];
-extern TmFootStep gUnk_09EF25A4[9];
-
 s16 gUnk_0203AC60 EWRAM_COMMON(4);
 s32 gUnk_0203AC64 EWRAM_COMMON(4);
 s16 gUnk_0203AC68 EWRAM_COMMON(4);

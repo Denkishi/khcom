@@ -50,10 +50,6 @@ CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* w, void* a);
 #ifdef VERSION_EU
 extern AnimHeader gUnk_090A44BA;
-extern void* gDeckButtonLabelTiles[];
-extern void** gDeckButtonLabelSprites[];
-extern void* gDeckCommandMenuTiles[];
-extern void* gDeckTitleBannerTiles[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
@@ -61,8 +57,6 @@ extern void* gDeckTitleBannerTiles[];
 #endif
 void ReleaseCardPreview(DeckMenuWork* w);
 void HighlightDeckTab(DeckMenuWork* w, u8 b);
-u16 CountActiveDeckCardsOfCategory(u8 slot);
-void SetDeckName(u8 index, const void* src);
 void func_080AB22C(u8 a);
 void BuildDebugKingdomKeyDeck(u8 a);
 void func_080AB4AC(u8 a);
@@ -70,8 +64,6 @@ void DrawCpCost(u8 a);
 s32 GetCardIdForKindEntry(s32 a);
 void func_080AB964(void);
 void func_080AB968(void);
-u8 ToggleDeckSlotGap(DeckMenuWork* w);
-void RecreateDeckGridCards(DeckMenuWork* w, u8 mode);
 u8 UpdateDeckMenuBuildAddList(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuCommands(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuCloseCommands(DeckMenuWork* w, void* a);
@@ -83,7 +75,6 @@ void ReleaseCommandMenuGfx(DeckMenuWork* w);
 u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a);
-u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a);
 void BuildRikuDeck(u8 a);
 u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuSlideOut(DeckMenuWork* w, void* a);
@@ -101,24 +92,17 @@ extern u8 gUnk_09614318[];
 void SetGridRowCount(DeckMenuWork* w, s16 n);
 void UpdateGridScrollBar(DeckMenuWork* w);
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a);
-#ifdef VERSION_EU
-extern u8* gDeckEquipMarkerTiles[];
-#endif
 void DrawCollectionCategoryCount(u16 a, u8 b);
 void DeckCard2ReleaseGfx(DeckCard2Work* node);
 u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuFadeOut(DeckMenuWork* w);
 u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a);
-u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a);
-u16 CountCollectionCardsOfCategory(u8 slot);
 u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a);
 void FreeCollectionEntries(DeckMenuWork* w);
 void DrawValueCount(u8 a, u16 b);
 void DrawDeckCategoryCount(u8 a, u8 b);
-void ConvertActiveDeckCardToPremium(u16 index);
 void InitCardCollection(void);
-s16 ObtainCard(u16 cardId);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
 void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode);
@@ -6371,10 +6355,7 @@ void func_jp_0808F240(DeckMenuWork* w) {
 }
 
 #ifdef VERSION_JP
-extern u8 gUnkJp_094D4594[];
-extern u8 gUnkJp_094D4D94[];
 #else
-extern u8 gUnkEu_0953C324[];
 #endif
 
 void func_jp_0808F34C(DeckMenuWork* w) {
@@ -6402,20 +6383,7 @@ void func_jp_0808F34C(DeckMenuWork* w) {
 }
 #endif
 extern u8 gUnk_096145B8[];
-extern u8 gUnk_090A5F1E[];
 extern u8 gUnk_09614518[];
-#ifdef VERSION_JP
-extern u8 gUnkJp_093D1694[];
-#endif
-#ifdef VERSION_EU
-extern void* gDeckKeyboardCursorTiles[];
-extern void* gDeckKeyboardCursorAnims[];
-extern void** gDeckKeyboardCursorSprites[];
-extern u8 gUnkEu_094F03A4[];
-extern u8 gUnkEu_094F1BA4[];
-extern u8 gUnkEu_094F13A4[];
-extern u8 gUnkEu_094F0BA4[];
-#endif
 u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
     FadeStartIn(0, 16);
 #ifdef VERSION_EU
@@ -6958,8 +6926,6 @@ void BuildCollectionEntries(DeckMenuWork* w) {
         }
     }
 }
-
-static void Deckmenu2_0(DeckMenuWork* w, void* a);
 
 const u16* gRikuDeckCards[12] = {
     gUnk_090354E8,

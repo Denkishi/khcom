@@ -67,14 +67,6 @@ Mode* gDebugModes[] = {
     &gModeMapinspect,
 };
 
-void ModeBlankDisplay(void);
-void ModeStart(Mode* mode, s32 arg);
-void ModeSetVBlankCallback(void (*fn)(void));
-void ModeClearVBlankCallback(void);
-void ModeCallExit(void);
-const char* GetModeName(void);
-void UpdateDebugModeSelect(void);
-
 void FlushDma3QueueWithCpu(void);
 void FlushDma3Queue(void);
 void CommitDisplayRegs(void);
@@ -316,8 +308,6 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 
 #ifdef VERSION_EU
 void eu_0800115C(void) {
-    extern u32 gSoftResetMarker[2];
-
     gSoftResetMarker[0] = 0xFEDCBA98;
     SoftReset(0xFD);
 }

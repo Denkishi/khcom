@@ -29,6 +29,7 @@
 #include "bos4_api.h"
 #include "sprites_card.h"
 #include "gba/keys.h"
+#include "card_deck.h"
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_08895A00[];
@@ -41,9 +42,6 @@ extern void* gUnkEu_08895C30[];
 extern void* gUnkEu_08895CF8[];
 extern void* gUnkEu_08895DBC[];
 #endif
-u8* GetDeckName(u8 index);
-void SetActiveDeckIndex(u8 index);
-u8 GetActiveDeckIndex(void);
 
 #include "deck_equip_suffix.inc"
 

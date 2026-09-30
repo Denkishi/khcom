@@ -26,12 +26,6 @@
 #include "songs.h"
 #include "common_text.h"
 #include "jiminy_records_assets.h"
-#ifdef VERSION_EU
-extern u8 gUnkEu_099A4CDA[];
-extern u8 gUnkEu_099A51AA[];
-extern u8 gUnkEu_099A563A[];
-extern u8 gUnkEu_099A5ACA[];
-#endif
 
 static s16 sWorldInspectCursor;
 static s16 sWorldInspectFloorCount;
@@ -41,25 +35,10 @@ static s16 sWorldInspectWorlds[12];
 extern u8 gUnkEu_099A421C[];
 extern u8 gUnkEu_099A4238[];
 extern u8 gUnkEu_099A426C[];
-extern u8 gUnkEu_099A4C4C[];
-extern u8 gUnkEu_099A4C68[];
-extern u8 gUnkEu_099A4C9C[];
-extern u8 gUnkEu_099A511C[];
-extern u8 gUnkEu_099A5138[];
-extern u8 gUnkEu_099A516C[];
-extern u8 gUnkEu_099A55AC[];
-extern u8 gUnkEu_099A55C8[];
-extern u8 gUnkEu_099A55FC[];
-extern u8 gUnkEu_099A5A3C[];
-extern u8 gUnkEu_099A5A58[];
-extern u8 gUnkEu_099A5A8C[];
 #endif
 
 extern u8 gUnk_09A3CE7C[];
 extern u8 gUnk_09A3D07C[];
-extern u8 gUnk_0999CFC6[];
-extern u8 gUnk_0999D41A[];
-extern u8 gUnk_0999D8A8[];
 
 const WorldinspectConn gWorldinspectConns[3] = {
     { 2, 1, 20, 2 },

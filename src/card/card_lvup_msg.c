@@ -31,7 +31,6 @@
 #include "songs.h"
 
 u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a);
-void Lvup_msg_3(LvupMsgWork* w);
 extern u8 gUnk_0815A09A[];
 extern u8 gUnk_0815A198[];
 extern u8 gUnk_0815A0EE[];

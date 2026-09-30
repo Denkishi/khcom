@@ -8,8 +8,6 @@
 #include "gba/io_reg.h"
 #include "malloc.h"
 
-void FieldTransitionUpdate(void);
-
 FieldTransitionWork* gFieldTransitionWork;
 
 void FieldTransitionInit(void) {

@@ -14,42 +14,6 @@ extern void** gTitleLumiSpritesEu[5];
 extern void** gTitleLumiSpritesAltEu[5];
 #endif
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_0974E3CC[];
-extern u8 gUnkEu_0974EC7C[];
-extern u8 gUnkEu_0975038C[];
-extern u8 gUnkEu_0974FBDC[];
-extern u8 gUnkEu_0974F42C[];
-extern u8 gUnkEu_097462F2[];
-extern u8 gUnkEu_09746CA4[];
-extern u8 gUnkEu_097483B4[];
-extern u8 gUnkEu_09747C04[];
-extern u8 gUnkEu_09747454[];
-extern u8 gUnkEu_09748BA6[];
-extern u8 gUnkEu_0974A284[];
-extern u8 gUnkEu_0974D47A[];
-extern u8 gUnkEu_0974C504[];
-extern u8 gUnkEu_0974B306[];
-extern u8 gUnkEu_0973F058[];
-extern u8 gUnkEu_09741E9A[];
-extern u8 gUnkEu_09742A74[];
-extern u8 gUnkEu_0974507E[];
-extern u8 gUnkEu_097445AC[];
-extern u8 gUnkEu_09743812[];
-extern u8 gUnkEu_09745B92[];
-extern u8 gUnkEu_09750AF8[];
-extern u8 gUnkEu_09750EE4[];
-extern u8 gUnkEu_09751ADE[];
-extern u8 gUnkEu_097516F8[];
-extern u8 gUnkEu_097512CA[];
-extern u8 gUnkEu_0973F402[];
-extern u8 gUnkEu_0973FC6A[];
-extern u8 gUnkEu_097415E8[];
-extern u8 gUnkEu_09740D62[];
-extern u8 gUnkEu_09740536[];
-extern u8 gUnkEu_0973EEFE[];
-#endif
-
 TaskDesc gTaskDescTitleLogo = {
     "task_title_logo",
     (TaskInitFunc)task_title_logo_0,

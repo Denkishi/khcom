@@ -52,7 +52,6 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a);
 s32 UpdateSysmsgwinClose(SysMsgWinWork* w);
 u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a);
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a);
-s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* w);
 
 const s32 gSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 

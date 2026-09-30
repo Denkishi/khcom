@@ -55,29 +55,15 @@ MapCardUiResources gMapCardUiResources EWRAM_COMMON(16);
 
 u8 gMapCardCounts[270] EWRAM_COMMON(16);
 
-extern void* gReloadCounterTiles[];
-extern AnimHeader** gReloadCounterAnims[];
-extern void** gReloadCounterFrames[];
-extern void* gReloadCardTiles[];
-extern void** gReloadGaugeFrames[];
-extern AnimHeader** gReloadGaugeAnims[];
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09618D18[];
 u16 CountMapCardsOfKind(u16 a);
-u8 Reload_Gage_1(CardDisplayWork* w, void* a);
 u8 UpdateReloadGageIdle(CardDisplayWork* w, void* a);
 u8 UpdateMapSelectSetup(MapSelectWork* w, void* a);
 void LoadMapSelectKindPalette(u16 a, MapSelectWork* w);
 s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* w);
 u8 UpdateMapSelectSlideIn(MapSelectWork* w, void* a);
 u8 UpdateMapSelectKindInput(MapSelectWork* w, void* a);
-u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a);
-#ifdef VERSION_EU
-extern u8 gUnkEu_094C6C22[];
-extern u8 gUnkEu_094C789A[];
-extern u8 gUnkEu_094C7472[];
-extern u8 gUnkEu_094C704A[];
-#endif
 void AimMapcardAtDoor(MapcardWork* w);
 u8 UpdateMapcardFlyToDoor(MapcardWork* w, void* a);
 s32 RemoveMapCard(u16 a);

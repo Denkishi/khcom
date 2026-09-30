@@ -18,8 +18,6 @@
 #include "songs.h"
 #include <stdlib.h>
 
-extern u8 gMapDbgCursorString[2];
-
 #ifdef VERSION_EU
 #define LANGSEL(x) eu_0805E924(x)
 #else

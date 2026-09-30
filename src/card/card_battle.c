@@ -27,18 +27,6 @@
 
 u16 CountAvailableCards(CardBattleWork* w, u8 n);
 s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task);
-s32 func_08076F4C(CardBattleWork* w);
-static void cardbattle_2(CardBattleWork* w);
-static void cardbattle_3(CardBattleWork* w);
-u8 func_080762A8(void);
-void func_08076354(void);
-void RequestCycleSoraCardList(void);
-void func_080763A0(void);
-void func_080763AC(void);
-void func_080763B8(void);
-void ClearSoraCardRequest(void);
-void func_08076438(void);
-void CreateCardBattleState(void);
 
 CardDisplayWork* gSoraSelectedCard;
 u32 gSoraCardRequest;

@@ -63,8 +63,6 @@ s32 func_080AE168(CardDisplayWork** p, u8 b);
 s32 func_080AE1A8(CardDisplayWork** p, u8 b);
 s32 func_080AE1E8(CardDisplayWork** p, u8 b);
 u8 IsLinkSideStockLearned(s32 a, s32 b);
-void CreateSysmsgwinTask(void* pool, u16 b);
-u8 IsMessageWindowOpen(void);
 
 void RikuTutorialModeInit(s32 a) {
     FadeStartIn(0, 16);
@@ -2017,8 +2015,6 @@ s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
     return 106;
 }
 
-void CreateCardMessageTask(void* pool, u32 a, u16 b);
-u8 IsMessageWindowOpen(void);
 #ifdef VERSION_EU
 void eu_080AB9FC(void) {
     gTextCheckMessageId = 0;

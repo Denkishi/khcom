@@ -39,27 +39,14 @@
 #include "card_ids.h"
 #include "songs.h"
 
-extern PrizeMapCardBackAnimStep gPrizeMapCardBackAnim[7];
-#ifdef VERSION_EU
-extern void* gSelmapEventKeyTitleAnimsByLanguage[5];
-extern void* gSelmapEventKeyTitleFramesByLanguage[5];
-extern void* gSelmapEventKeyTitleTilesByLanguage[5];
-#endif
 u16 CountMapCardsOfKind(u16 a);
-u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n);
-u16 PickPrizeMapCardValue(void);
-void CreateCardNameDisplay(void* a, void* b);
 u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
 u16 PickPrizeMapCardForWorld(u16 a, s32 b);
 void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
 s32 UpdateSpotLightFadeOut(SpotlightWork* w);
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
 u8 CollectionHasCard(u16 id);
-s32 AddMapCard(u16 a);
-u16 CountMapCardsOfKind(u16 a);
-u16 CountRegularMapCards(void);
 u16 CountZeroValueMapCards(void);
-void* GetRoomName(u16 a);
 u8 HasMapCard(u16 a);
 
 const u16 gPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };

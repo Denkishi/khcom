@@ -15,27 +15,18 @@
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "songs.h"
+#include "battle.h"
 
-extern u8 gSoraPalette[];
-extern u8 gUnk_090A6B26[];
-extern u8 gUnk_090A7D9A[];
-extern u8 gSoraContinueTiles[];
-extern u8 gRikuContinueTiles[];
 extern u8 gUnk_096145D8[];
 extern u8 gUnk_09614618[];
 extern u8 gUnk_09614658[];
 extern u8 gUnk_096146F8[];
-extern u8 gRikuPalette[];
 
 const s32 gContinueCursorY[2] = {
     0x4000, 0x5600,
 };
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_0954C7B4[];
-extern u8 gUnkEu_0954D7A0[];
-extern u8 gUnkEu_0954D238[];
-extern u8 gUnkEu_0954CD1C[];
 
 void* gContinueLanguageBgTiles[5] = {
     gUnk_0941A418,

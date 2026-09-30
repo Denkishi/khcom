@@ -33,18 +33,9 @@
 #include "sprites_card.h"
 #include "songs.h"
 
-extern void* gReloadChildTiles[];
-extern void* gRevCountTileSources[];
-extern void** gRevCountSprites[];
-extern void* gReloadTiles[];
-extern AnimHeader** gReloadAnims[];
-extern void** gReloadFrames[];
 void CreateCardNameDisplay(void* a, void* b);
 s32 UpdateReloadChildAbsorb(ReloadChildWork* w);
 u8 UpdateReloadSlideOut(ReloadWork* w);
-s16 ObtainCard(u16 cardId);
-void InitRikuDeckForWorld(u8 a);
-void CreateCardNameDisplay(void* a, void* b);
 
 const s16 gSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 

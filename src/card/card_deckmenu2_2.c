@@ -35,18 +35,13 @@
 #include "songs.h"
 
 #ifdef VERSION_EU
-extern void* gRikuDeckTitleBannerTiles[];
-extern u8* gRikuDeckEquipMarkerTiles[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) (x)
 #endif
 u16 CountActiveDeckCardsOfCategory(u8 slot);
-void ReleaseRikuCardPreview(RikuDeckMenuWork* w);
 void DrawRikuCpCost(u8 a);
-void LoadRikuCardNameText(RikuDeckMenuWork* w, s32 id);
-void LoadRikuCardDescriptionText(RikuDeckMenuWork* w, u16 card);
 void DeckCard2ReleaseGfx(DeckCard2Work* node);
 void ShowRikuDeckCardPreview(RikuDeckMenuWork* w);
 u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a);
@@ -62,13 +57,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind);
 void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode);
 u16 CountCollectionCards(void);
 u16 CountCardsInDecks(void);
-Deck* GetDeck(u8 index);
-u16 GetDeckCpCost(u8 index);
-u8* GetDeckName(u8 index);
-u16 CountActiveDeckCardsOfCategory(u8 slot);
-u16 GetDeckCardCount(u8 index);
 u8 GetActiveDeckIndex(void);
-void DeckCard2ReleaseGfx(DeckCard2Work* node);
 
 #ifdef VERSION_EU
 const u16 gRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
@@ -1064,8 +1053,6 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* w, s16 x, s16 y, u16 dir) {
 
     return 0;
 }
-
-static void Deckmenu2_0(RikuDeckMenuWork* w, void* a);
 
 #ifdef VERSION_EU
 void* gRikuDeckTitleBannerTiles[5] = { gUnk_090A418E, gUnkEu_091926B2, gUnkEu_0919308A, gUnkEu_09192D42, gUnkEu_091929FA };

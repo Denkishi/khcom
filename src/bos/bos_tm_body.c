@@ -7,15 +7,6 @@
 #include "system_state.h"
 #include "acgtrans.h"
 
-extern u8 gBosTmBodyAngles[11];
-extern s16 gBosTmBodyIdleZ[8];
-extern s16 gBosTmBodyWalkZ[10];
-extern TmBodyStep gUnk_09EF1D88[3];
-extern s16 gUnk_09EF1E08[3];
-extern TmBodyStep gBosTmBodyThrowSteps[16];
-extern TmBodyStep gUnk_09EF2034[9];
-extern s8 gBosTmActionChoices[4];
-
 BtlObj gBosTmBodyObjCopy EWRAM_COMMON(16);
 
 const EmyKind gBosTmEmyKind = { 34, 1300, 28, 14, 20, 40, 1 };

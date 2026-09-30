@@ -8,13 +8,6 @@
 #include "fade.h"
 #include "mode_copyright2.h"
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_097D8300[];
-extern u8 gUnkEu_097D8F00[];
-extern u8 gUnkEu_097D9B00[];
-extern u8 gUnkEu_097DA700[];
-#endif
-
 TaskPool gStatusTaskPool __attribute__((aligned(8)));
 Task* gStatusBarTask;
 u8 gStatusReturnToMenu;

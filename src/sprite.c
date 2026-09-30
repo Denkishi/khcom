@@ -10,10 +10,6 @@ const u8 sSpriteHeapName[8] = "SPRITE";
 
 SpriteWork* gSpriteWork;
 
-void EnableObj(void);
-void DisableObj(void);
-void SetObjTileRange(u16 a, u16 b);
-
 void SpriteInit(void) {
     u32 zero;
 

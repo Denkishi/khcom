@@ -4,6 +4,7 @@
 #include "sio_api.h"
 #include "sio.h"
 #include "gba/io_reg.h"
+#include "system_state.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);
@@ -22,15 +23,6 @@ SioWork gSioWork EWRAM_COMMON(16);
 u16 gSioCommandSend[4] EWRAM_COMMON(8);
 u8 gSioLinkResult EWRAM_COMMON(4);
 u16 gSioSendFrame[4] EWRAM_COMMON(8);
-
-extern IntrFunc* gIntrTableSerial;
-extern IntrFunc* gIntrTableVCount;
-extern IntrFunc* gIntrTableVBlank;
-extern IntrFunc* gIntrTableTimer3;
-extern IntrFunc gHBlankCallback;
-extern IntrFunc gVCountCallback;
-extern IntrFunc gVBlankCallback;
-extern IntrFunc* gIntrTableHBlank;
 
 u8 gSioChecksumReady;
 u16 gSioSavedIme;

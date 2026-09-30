@@ -37,19 +37,14 @@ u8 gUnk_02034AF4[4];
 #endif
 
 #ifdef VERSION_EU
-extern void** gHcEffectCountUnitSpritesByLanguage[];
-extern void* gHcEffectCountUnitTilesByLanguage[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) (x)
 #endif
-u8 HCEffectName_1(HcEffectNameWork* w, void* a);
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a);
 u16 GetNextRandomHcEffect(u16* p);
-void InitSoraDecks(void);
-void func_08085FB0(void);
 
 void Mode_Premire_0(void) {
     func_08085FB0();

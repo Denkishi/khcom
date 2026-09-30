@@ -30,14 +30,8 @@
 #include "sprites_level_up.h"
 #include "evt_types.h"
 #include "songs.h"
+#include "bos6.h"
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_0916F992[];
-extern u8 gUnkEu_0917063A[];
-extern u8 gUnkEu_09170202[];
-extern u8 gUnkEu_0916FDCA[];
-#endif
-extern EventState* gEventState;
 void TrackLevelUpEffectTarget(LevelUpEffectWork* w);
 
 void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {

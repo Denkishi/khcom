@@ -31,6 +31,7 @@
 #include "sprites_card.h"
 #include "card_ids.h"
 #include "card_description_text.h"
+#include "card_deck.h"
 
 #ifndef VERSION_EU
 TaskPool gModeDeckExchangeTasks;
@@ -40,16 +41,6 @@ u8 gModeDeckExchangeResult;
 u8 gUnk_02034B1D[3];
 #endif
 
-void func_080AB22C(u8 a);
-void BuildDebugKingdomKeyDeck(u8 a);
-void func_080AB4AC(u8 a);
-void AddCardToDeckViaActive(u8 a, u16 b);
-void func_080AB964(void);
-void func_080AB968(void);
-s16 ObtainCard(u16 cardId);
-u8 AddCardToActiveDeck(u16 card);
-void SetActiveDeckIndex(u8 index);
-u8 GetActiveDeckIndex(void);
 #ifndef VERSION_EU
 void Mode_DeckExchange_0(void) {
     gModeDeckExchangeResult = 0;

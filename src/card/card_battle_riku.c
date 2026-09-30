@@ -249,16 +249,13 @@ const UnkStruct_080ABA80 gUnk_090352FC = {
 u8 IsCardDisplayOffScreen(CardDisplayWork* p);
 void ReleaseCardDisplayGfx(CardDisplayWork* p);
 void LoadCardDisplayGfx(CardDisplayWork* p);
-static u8 cardbattle_1(CardBattleWork* w, void* a);
 u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a);
 void SelectNextRikuCard(CardBattleWork* w, u8 n);
 void SelectPrevRikuCard(CardBattleWork* w, u8 n);
-void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n);
 u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind);
 Deck* GetLinkPartnerDeck(void);
 void func_08081740(CardBattleWork* w, u16 n);
 void func_08081744(CardBattleWork* w);
-void func_08080228(CardBattleWork* w);
 void SwitchRikuCardList(CardBattleWork* w);
 void CycleRikuCardList(CardBattleWork* w);
 u8 UseRikuCard(CardBattleWork* w);
@@ -281,10 +278,8 @@ s32 func_08083ADC(BossCardWork* w);
 void func_08082BF8(CardDisplayWork* p);
 u8 AreCardsSettled(CardDisplayWork** p, u8 n);
 void ShuffleCardSlots(CardSlot* slots, u8 n);
-u16 CountAvailableCardSlots(CardBattleWork* w, u8 n);
 u16 CountRemainingAttackCards(CardBattleWork* w, u8 b);
 void ClearUsedCardSlots(CardBattleWork* w, u8 b);
-void ResetCardSlotsForReload(CardBattleWork* w, u8 n);
 u16 GetRandomHcEffect(void);
 void ClearStockedCardSlots(CardBattleWork* w);
 void IncrementReloadCount(CardBattleWork* w);
@@ -294,11 +289,7 @@ void RestoreCardsForMegaPotion(CardBattleWork* w);
 void RestoreCardsForEther(CardBattleWork* w);
 void RestoreCardsForMegaEther(CardBattleWork* w);
 void RestoreCardsForElixir(CardBattleWork* w);
-u8 AddBreakDarkPoints(void);
 void SyncCardDisplayGfx(CardDisplayWork* p);
-void LoadCardDisplayGfx(CardDisplayWork* p);
-void ReleaseCardDisplayGfx(CardDisplayWork* p);
-u8 IsCardDisplayOffScreen(CardDisplayWork* p);
 
 void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
     CardDisplayArgs args;
@@ -3978,8 +3969,6 @@ u8 FlipBossCard(BossCardWork* w, u8 b) {
 
     return 0;
 }
-
-static void card_2(CardDisplayWork* p);
 
 TaskDesc gTaskDescCardBattleRiku = {
     "cardbattle",

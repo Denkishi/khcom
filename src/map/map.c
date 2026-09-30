@@ -37,12 +37,6 @@ extern void* gUnkEu_08892864[];
 extern const u8 gUnkEu_09953BF0[];
 extern const u8 gUnkEu_099543F0[];
 extern const u8 gUnkEu_09954BF0[];
-extern u8 gUnkEu_099452B0[];
-extern u8 gUnkEu_099467B0[];
-extern u8 gUnkEu_09947CB0[];
-extern u8 gUnkEu_099491B0[];
-extern u8 gUnkEu_0994A8B0[];
-extern u8 gUnkEu_0994AAB0[];
 extern const u8 gUnkEu_0996D130[];
 extern const u8 gUnkEu_0996D930[];
 extern const u8 gUnkEu_0996E130[];
@@ -64,10 +58,6 @@ extern const u8 gUnkEu_099635D0[][320];
 extern const u8 gUnkEu_099658D0[][320];
 extern const u8 gUnkEu_09967BD0[][320];
 extern const u8 gUnkEu_09969ED0[][320];
-extern u8 gUnkEu_098863B2[];
-extern u8 gUnkEu_0988683C[];
-extern u8 gUnkEu_09886C7E[];
-extern u8 gUnkEu_09886FC8[];
 #define LANGSEL(x) eu_0805E924(x)
 #else
 #define LANGSEL(x) (x)

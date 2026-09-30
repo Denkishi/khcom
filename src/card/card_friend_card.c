@@ -42,32 +42,18 @@
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 
-#ifdef VERSION_EU
-extern void** gPremireChanceTitles[5];
-#endif
 extern u8 gUnk_09618CD8[];
-extern u8 gUnk_0908BB80[];
 extern u8 gUnk_09613E98[];
-extern u8 gUnk_0908BFB2[];
 extern u8 gUnk_09618D18[];
 #ifdef VERSION_EU
-extern u8 gUnkEu_0916292A[];
-extern u8 gUnkEu_091633A4[];
-extern u8 gUnkEu_09162FB8[];
-extern u8 gUnkEu_09162C8C[];
 
 #define LANGSTR(x) (((void**)(x))[gLanguage])
 #else
 #define LANGSTR(x) (x)
 #endif
 void CreateCardNameDisplay(void* a, void* b);
-u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a);
 void CreatePremireChanceCardTasks(PremireChanceWork* w);
 void ConvertActiveDeckCardToPremium(u16 index);
-s16 ObtainCard(u16 cardId);
-void ConvertActiveDeckCardToPremium(u16 index);
-Deck* GetActiveDeck(void);
-void CreateCardNameDisplay(void* a, void* b);
 
 const u32 gFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),
@@ -1426,9 +1412,6 @@ u8 UpdatePremireChanceClose(PremireChanceWork* w, void* a) {
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
-
-struct PremireChanceWork;
-void Premire_Chance_0(struct PremireChanceWork* w);
 
 TaskDesc gTaskDescFriendCard = {
     "Friend card",

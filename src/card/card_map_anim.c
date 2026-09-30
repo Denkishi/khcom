@@ -45,8 +45,6 @@ void* gLinkSendDeck EWRAM_COMMON(4);
 
 u16 gCardCount EWRAM_COMMON(4);
 
-Deck* GetLinkPartnerDeck(void);
-
 void map_anim_0(MapTileAnimationWork* p) {
     u8 i;
 

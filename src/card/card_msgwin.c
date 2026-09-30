@@ -52,7 +52,6 @@ extern void* gUnkEu_08890E44[];
 #else
 #define LANGSTR(x) (x)
 #endif
-s32 ReplaceCardMsgwinMessage(CardMessageArgs* src);
 u8 UpdateCardMsgwinLoadText(CardMsgWinWork* w, void* a);
 u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a);
 u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* w, void* a);

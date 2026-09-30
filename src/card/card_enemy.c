@@ -45,14 +45,6 @@ u8 func_0807CF4C(CardDisplayWork* p, void* a);
 u8 func_0809075C(CardDisplayWork* p, void* a);
 u8 func_08090808(CardDisplayWork* p, void* a);
 u8 func_08090940(CardDisplayWork* p);
-u8 EnemyUsecard_1(CardDisplayWork* p, void* a);
-u8 AddBreakDarkPoints(void);
-void LoadCardDisplayGfx(CardDisplayWork* p);
-void ReleaseCardDisplayGfx(CardDisplayWork* p);
-void UpdateCardDisplayFlip(CardDisplayWork* p);
-u8 IsCardDisplayOffScreen(CardDisplayWork* p);
-u8 func_0807CF4C(CardDisplayWork* p, void* a);
-u8 func_0807CFA8(CardDisplayWork* p, void* a);
 
 const s32 gEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,

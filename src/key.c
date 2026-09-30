@@ -27,10 +27,6 @@ u8 gKeyReleaseR;
 u8 gKeyReleaseStart;
 u8 gKeyReleaseSelect;
 
-
-u8 GetKeyHoldTime(u16 key);
-
-
 u16 GetKeysHeld(void) {
     return gKeysHeld;
 }

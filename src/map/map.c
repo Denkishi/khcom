@@ -2370,7 +2370,7 @@ void MapDbgFreeCameraInput(void) {
         gDispCnt = (gDispCnt & ~DISPCNT_BG1_ON) | (m1 & ~gDispCnt);
     }
     if (GetKeysPressed() & B_BUTTON) {
-        gDispCnt = (gDispCnt & 0xEFFF) | (m2 & ~gDispCnt);
+        gDispCnt = (gDispCnt & ~DISPCNT_OBJ_ON) | (m2 & ~gDispCnt);
     }
 }
 

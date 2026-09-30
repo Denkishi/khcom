@@ -23,7 +23,7 @@ void HumDrawSub(HumWork* p, HumSub* s) {
         return;
     }
 
-    if (s->flags & 2) {
+    if (s->flags & HUM_SUB_FLAG_HIDDEN) {
         return;
     }
     c = &p->actor;
@@ -51,9 +51,9 @@ void HumDrawSub(HumWork* p, HumSub* s) {
         affine = AllocObjAffine(0, sx, sy, 1);
     }
 
-    if (s->flags & 4) {
+    if (s->flags & HUM_SUB_FLAG_OWN_DEPTH) {
         prio = (-0x1004 - (s->y >> 8) * 4) | 3;
-    } else if (s->flags & 1) {
+    } else if (s->flags & HUM_SUB_FLAG_IN_FRONT) {
         prio = ((-0x1004 - (c->y >> 8) * 4) | 3) - 1;
     } else {
         prio = ((-0x1004 - (c->y >> 8) * 4) | 3) + 1;
@@ -73,7 +73,7 @@ void HumDraw(HumWork* work) {
     s32 g;
     s16 idx;
 
-    if (work->flags & 0x20) {
+    if (work->flags & HUM_FLAG_BEHIND_BG_FX) {
         attr = 0x800;
     } else {
         attr = GetBattleSpritePriorityFlags(c->y);
@@ -118,17 +118,17 @@ void HumDraw(HumWork* work) {
         idx = (work->stateTimer >> 2) % 8;
 
         if (work->stateTimer & 1) {
-            work->flags |= 2;
+            work->flags |= HUM_FLAG_FLASH_PALETTE;
             LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 32 + sHumReloadPaletteCycle[idx] * 32);
         } else {
-            work->flags &= ~2;
+            work->flags &= ~HUM_FLAG_FLASH_PALETTE;
             LoadObjPaletteBank(work->palette->index, work->paletteData);
         }
     } else if (StepHitFlash(c)) {
-        work->flags |= 2;
+        work->flags |= HUM_FLAG_FLASH_PALETTE;
         LoadObjPaletteBank(work->palette->index, gUnk_08F69BC4);
-    } else if (work->flags & 2) {
-        work->flags &= ~2;
+    } else if (work->flags & HUM_FLAG_FLASH_PALETTE) {
+        work->flags &= ~HUM_FLAG_FLASH_PALETTE;
         LoadObjPaletteBank(work->palette->index, work->paletteData);
     }
     DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, attr, (-0x1004 - (c->y >> 8) * 4) | 3);
@@ -157,15 +157,15 @@ void HandleRikuAiCardInput(void) {
     keys = gBtlWork->rikuKeys;
     gBtlWork->rikuKeys = 0;
 
-    if (keys & 1) {
+    if (keys & RIKU_KEY_NEXT_CARD) {
         RequestRikuNextCard();
     }
 
-    if (keys & 2) {
+    if (keys & RIKU_KEY_PREV_CARD) {
         RequestRikuPrevCard();
     }
 
-    if (keys & 4) {
+    if (keys & RIKU_KEY_SWITCH_LIST) {
         RequestSwitchRikuCardList();
     }
 
@@ -189,7 +189,7 @@ void HandleRikuAiCardInput(void) {
         return;
     }
 
-    if (keys & 0x10) {
+    if (keys & RIKU_KEY_STOCK) {
         if (GetRikuStockCount() > 2) {
             RequestRikuStockUse();
         } else {
@@ -197,7 +197,7 @@ void HandleRikuAiCardInput(void) {
         }
     }
 
-    if (keys & 0x20) {
+    if (keys & RIKU_KEY_USE_CARD) {
         RequestRikuCardUse();
 
         if (GetRikuCardListIndex() == 3 && !IsRikuSelectionEmpty()) {
@@ -228,7 +228,7 @@ void eu_08013190(void) {
     if (c->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
         return;
     }
-    if (keys & 0x20) {
+    if (keys & RIKU_KEY_USE_CARD) {
         RequestRikuCardUse();
     }
 }
@@ -394,67 +394,67 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
             n = 1;
         }
         if (GetRandom() % n == 0) {
-            gBtlWork->rikuKeys |= 0x20;
+            gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
         } else {
-            gBtlWork->rikuKeys |= 1;
+            gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
         return 0;
     }
     if (IsRikuReloadCardSelected()) {
         if (count > 1 && (u16)(GetRandom() % 20U) == 0) {
-            gBtlWork->rikuKeys |= 1;
+            gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
         return 0;
     }
     if (GetRikuCardListIndex() == 3) {
         if ((GetRandom() & 3) == 0) {
             if (count <= 0) {
-                work->flags |= 0x10;
-                gBtlWork->rikuKeys |= 4;
+                work->flags |= HUM_FLAG_ENEMY_CARDS_SPENT;
+                gBtlWork->rikuKeys |= RIKU_KEY_SWITCH_LIST;
             } else {
-                gBtlWork->rikuKeys |= 0x20;
+                gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
                 if (count == 1) {
-                    work->flags |= 0x10;
+                    work->flags |= HUM_FLAG_ENEMY_CARDS_SPENT;
                 }
             }
         } else if (count > 1) {
-            gBtlWork->rikuKeys |= 1;
+            gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         }
         return 0;
     }
-    if (!(work->flags & 0x10) && gRikuBtlWork->hcEffect == 0
+    if (!(work->flags & HUM_FLAG_ENEMY_CARDS_SPENT) && gRikuBtlWork->hcEffect == 0
         && (u16)(GetRandom() % 60U) == 0) {
-        gBtlWork->rikuKeys |= 4;
+        gBtlWork->rikuKeys |= RIKU_KEY_SWITCH_LIST;
         return 0;
     }
     if (cards > 2) {
         if ((u16)(GetRandom() % 6U) == 0) {
-            gBtlWork->rikuKeys |= 0x10;
+            gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
             return 1;
         }
     } else if (GetRandom() % 2 == 0) {
         if (count <= 1 && cards != 0) {
-            gBtlWork->rikuKeys |= 0x10;
+            gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
             return 1;
         }
         // @bug unk_184 is NULL for humanoid bosses without a card table (NULL read).
         if (value == 0 || work->stockMoves[cards] != id) {
-            gBtlWork->rikuKeys |= 1;
+            gBtlWork->rikuKeys |= RIKU_KEY_NEXT_CARD;
         } else {
-            gBtlWork->rikuKeys |= 0x10;
+            gBtlWork->rikuKeys |= RIKU_KEY_STOCK;
         }
         return 0;
     }
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
             if (GetActiveCardValue() <= value || value == 0) {
-                gBtlWork->rikuKeys |= 0x20;
+                gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
             }
         } else if (GetActiveCardValue() == value) {
-            gBtlWork->rikuKeys |= 0x20;
+            gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
         }
     } else if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
-        gBtlWork->rikuKeys |= 0x20;
+        gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
     }
     return 0;
 }

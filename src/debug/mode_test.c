@@ -107,7 +107,7 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     work->velocity = 0;
     if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 48) * 256;
-        body->flags = 4;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
     } else {
         body->x = (gBtlWork->xMin - 48) * 256;
         body->flags = 0;
@@ -174,8 +174,8 @@ u8 eu_08060DF8(FrdPoohWork* work) {
             flip = 0;
             break;
         }
-        if (flip) body->flags |= 4;
-        else body->flags &= ~4ULL;
+        if (flip) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         body->x += gSineTable[angle] * 128 >> 8;
         body->y += -gSineTable[angle + 64] * 128 >> 8;
         ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
@@ -193,8 +193,8 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         work->targetY = work->actor->y;
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
         angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
-        if (work->targetX < body->x) body->flags |= 4;
-        else body->flags &= ~4ULL;
+        if (work->targetX < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         body->x += gSineTable[angle] * 0x133 >> 8;
         body->y += -gSineTable[angle + 64] * 0x133 >> 8;
         ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
@@ -208,11 +208,11 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     case 2:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 6, 0, work->tiles);
         if (AnimIsFinished(&work->anim)) {
-            if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
-            else body->flags &= ~4ULL;
+            if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+            else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             if ((u16)(GetRandom() % 200u) == 0) work->state = 5;
         }
-        if (body->flags & 4) body->x = work->actor->x + 0xA00;
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) body->x = work->actor->x + 0xA00;
         else body->x = work->actor->x - 0xA00;
         body->y = work->actor->y + 0x800;
         body->z = work->actor->z + work->bob;
@@ -220,8 +220,8 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     case 5:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 9, 0, work->tiles);
-        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
-        else body->flags &= ~4ULL;
+        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         body->x = work->actor->x;
         body->y = work->actor->y + 0x800;
         body->z = work->actor->z + work->bob - 0xC00;
@@ -235,8 +235,8 @@ u8 eu_08060DF8(FrdPoohWork* work) {
         break;
     case 6: {
         s32 frame;
-        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= 4;
-        else body->flags &= ~4ULL;
+        if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         body->x = work->actor->x;
         body->y = work->actor->y + 0x800;
         body->z = work->actor->z + work->bob - 0xC00;
@@ -257,7 +257,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     }
     case 3:
         AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 7, 0, work->tiles);
-        if (body->flags & 4) body->x -= work->speed;
+        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) body->x -= work->speed;
         else body->x += work->speed;
         work->speed -= 0x33;
         if (work->speed <= 0) {
@@ -298,7 +298,7 @@ void eu_08061588(FrdPoohWork* work) {
     gfx = AnimGetGfx(&work->anim);
     flags = GetBattleSpritePriorityFlags(body->y);
 
-    if (body->flags & 4) {
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
         sclY = gBtlWork->scale;
         sclX = sclY;
     } else if (gBtlWork->scale == 256) {

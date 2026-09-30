@@ -16,6 +16,11 @@
 #include "anim.h"
 #include "game.h"
 
+enum TutorialFlag {
+    TUTORIAL_FLAG_CARD_ACTION_ACTIVE = 0x2,
+    TUTORIAL_FLAG_SHOW_ARROW = 0x4
+};
+
 typedef struct TutorialWork {
     u16 flags;
     u16 message;

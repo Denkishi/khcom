@@ -977,14 +977,14 @@ void TutorialWait(TutorialWork* p, u16 b, u32 c) {
 }
 
 void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d) {
-    p->flags |= 4;
+    p->flags |= TUTORIAL_FLAG_SHOW_ARROW;
     p->arrowX = b;
     p->arrowY = c;
     AnimStart(&p->anim, d, ANIM_FLAG_LOOP);
 }
 
 void TutorialHideArrow(TutorialWork* p) {
-    p->flags &= ~4;
+    p->flags &= ~TUTORIAL_FLAG_SHOW_ARROW;
 }
 
 TaskDesc gTaskDescBtlPopCb = {

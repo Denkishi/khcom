@@ -53,6 +53,11 @@ typedef struct CloudWork {
     u8 unk_192[0x02];
 } CloudWork;
 
+enum HookFlag {
+    HOOK_FLAG_BOMB_THROWN = 0x1,
+    HOOK_FLAG_POST_THROW_ANIM = 0x2
+};
+
 typedef struct HookWork {
     HumWork base;
     u32 unk_188;
@@ -193,6 +198,12 @@ typedef struct MahluxiaFlwWork {
     s32 z;
 } MahluxiaFlwWork;
 
+enum MahluxiaFlag {
+    MAHLUXIA_FLAG_SWING_DOWN = 0x1,
+    MAHLUXIA_FLAG_AFTERIMAGE = 0x2,
+    MAHLUXIA_FLAG_EFFECT_LAUNCHED = 0x4
+};
+
 typedef struct MahluxiaWork {
     HumWork base;
     HumSub sub;
@@ -227,6 +238,10 @@ typedef struct LaxeneKnfWork {
     s32 vx;
 } LaxeneKnfWork;
 
+enum LaxeneFlag {
+    LAXENE_FLAG_ATTACK_HIT = 0x1
+};
+
 typedef struct LaxeneWork {
     HumWork base;
     s32 hoverZ;
@@ -236,6 +251,10 @@ typedef struct LaxeneWork {
     u16 unk_192;
     TaskPool tasks;
 } LaxeneWork;
+
+enum VixenFlag {
+    VIXEN_FLAG_SLIDE_DOWN = 0x1
+};
 
 typedef struct VixenWork {
     HumWork base;
@@ -253,6 +272,12 @@ typedef struct VixenWork {
     VixenSub sub[3];
     ObjTiles needleTiles;
 } VixenWork;
+
+enum LexceusFlag {
+    LEXCEUS_FLAG_ATTACK_HIT = 0x1,
+    LEXCEUS_FLAG_COMBO_FOLLOWUP = 0x2,
+    LEXCEUS_FLAG_WEAPON_THROWN = 0x4
+};
 
 typedef struct LexceusWork {
     HumWork base;
@@ -287,6 +312,12 @@ typedef struct HadesSub {
     s32 y3;
     s32 z3;
 } HadesSub;
+
+enum HadesFlag {
+    HADES_FLAG_ANGRY = 0x1,
+    HADES_FLAG_FLAMES_ACTIVE = 0x2,
+    HADES_FLAG_FLAMES_ENDING = 0x4
+};
 
 typedef struct HadesWork {
     HumWork base;
@@ -360,6 +391,12 @@ typedef struct VixenFrgWork {
     u8 unk_21D[0x03];
 } VixenFrgWork;
 
+enum RikuFlag {
+    RIKU_FLAG_DIVE_HIT = 0x1,
+    RIKU_FLAG_FIRE_LAUNCHED = 0x2,
+    RIKU_FLAG_AFTERIMAGE = 0x4
+};
+
 typedef struct RikuWork {
     HumWork base;
     HumSub sub;
@@ -427,6 +464,10 @@ typedef struct LexRockWork {
     u8 blinking;
     u8 unk_2C1[0x03];
 } LexRockWork;
+
+enum AxcelFlag {
+    AXCEL_FLAG_ATTACK_HIT = 0x1
+};
 
 typedef struct AxcelWork {
     HumWork base;

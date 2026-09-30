@@ -64,6 +64,14 @@ enum BtlFlag {
 #define BTL_FLAG_STOP_SPAWNING           0x100000000000000
 #define BTL_FLAG_BGFX_PAUSED             0x200000000000000
 
+enum RikuKey {
+    RIKU_KEY_NEXT_CARD = 0x1,
+    RIKU_KEY_PREV_CARD = 0x2,
+    RIKU_KEY_SWITCH_LIST = 0x4,
+    RIKU_KEY_STOCK = 0x10,
+    RIKU_KEY_USE_CARD = 0x20
+};
+
 typedef struct BtlWork {
     s32 viewX;
     s32 viewY;

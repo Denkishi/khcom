@@ -43,6 +43,10 @@ typedef struct BtlTaskArgs {
     u8 unk_1E[0x2];
 } BtlTaskArgs;
 
+enum BtlDrawInfoFlag {
+    BTL_DRAW_INFO_FLAG_FACING_LEFT = 0x1
+};
+
 typedef struct BtlDrawInfo {
     s32 x;
     s32 y;

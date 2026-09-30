@@ -1795,7 +1795,7 @@ u8 task_emy_08_1(Emy08Work* work) {
     switch (work->base.state) {
     case 0:
         if (GetRandom() % 100 == 0) {
-            if (w->flags & 2) {
+            if (w->flags & EMY08_FLAG_HARDENED) {
                 work->base.state = 23;
             } else {
                 work->base.state = 22;
@@ -1809,7 +1809,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
         if (AnimGetFrame(&work->base.anim) == 6) {
             act->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_INVULNERABLE);
-            w->flags |= 2;
+            w->flags |= EMY08_FLAG_HARDENED;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -1822,7 +1822,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 
         if (AnimGetFrame(&work->base.anim) == 4) {
             act->flags &= ~(BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_INVULNERABLE);
-            w->flags &= ~2;
+            w->flags &= ~EMY08_FLAG_HARDENED;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
@@ -1837,7 +1837,7 @@ u8 task_emy_08_1(Emy08Work* work) {
             EmyReturnToIdle(&work->base);
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
 
-            if (w->flags & 1) {
+            if (w->flags & EMY08_FLAG_ATTACK_HIT) {
                 work->base.state = 20;
             } else {
                 work->base.state = 21;
@@ -1878,9 +1878,9 @@ u8 task_emy_08_1(Emy08Work* work) {
                         : ApplyAttackBox(0xB1, act->x + 0x1400, act->y, act->z,
                             4, 4, 0x20)) {
                     m4aSongNumStart(SONG_BTL_HANE_HIT);
-                    w->flags |= 1;
+                    w->flags |= EMY08_FLAG_ATTACK_HIT;
                 } else {
-                    w->flags &= ~1;
+                    w->flags &= ~EMY08_FLAG_ATTACK_HIT;
                 }
                 break;
             }
@@ -1946,7 +1946,7 @@ u8 task_emy_08_1(Emy08Work* work) {
 }
 
 void task_emy_08_2(Emy08Work* work) {
-    work->base.palette = (work->flags & 2) ? work->palette : work->basePalette;
+    work->base.palette = (work->flags & EMY08_FLAG_HARDENED) ? work->palette : work->basePalette;
     EmyDraw(&work->base);
     work->base.palette = work->basePalette;
 }

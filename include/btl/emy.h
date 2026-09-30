@@ -56,6 +56,11 @@ typedef struct Emy07Work {
     u8 rewarded;
 } Emy07Work;
 
+enum Emy08Flag {
+    EMY08_FLAG_ATTACK_HIT = 0x1,
+    EMY08_FLAG_HARDENED = 0x2
+};
+
 typedef struct Emy08Work {
     EmyWork base;
     void* palette;

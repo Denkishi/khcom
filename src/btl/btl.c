@@ -6454,9 +6454,9 @@ void SaveBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     out->z = a->z;
 
     if (a->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        out->flags |= 1;
+        out->flags |= BTL_DRAW_INFO_FLAG_FACING_LEFT;
     } else {
-        out->flags &= 0xFFFE;
+        out->flags &= ~BTL_DRAW_INFO_FLAG_FACING_LEFT;
     }
     out->anim = work->anim;
     out->tileSrc = work->tiles2->src;
@@ -6486,7 +6486,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
         flags = GetBattleSpritePriorityFlags(a->y);
     }
 
-    if (out->flags & 1) {
+    if (out->flags & BTL_DRAW_INFO_FLAG_FACING_LEFT) {
         p = out->scale;
         q = p;
     } else {

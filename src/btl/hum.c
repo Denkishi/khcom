@@ -1266,7 +1266,7 @@ void task_hum_hook_0(HookWork* work, void* arg) {
     } else {
         work->base.stockMoves = sHumHookStockMovesB;
     }
-    work->base.flags |= 0x40;
+    work->base.flags |= HUM_FLAG_BOSS_DEATH;
     work->unk_188 = 0;
     work->playerSlide = 0;
     work->slide = 0;
@@ -1512,11 +1512,11 @@ u8 task_hum_hook_1(HookWork* work) {
             w->bombTask = 0;
             w->bombTask2 = 0;
             w->bombTask3 = 0;
-            w->flags &= 0xFFFC;
+            w->flags &= ~(HOOK_FLAG_BOMB_THROWN | HOOK_FLAG_POST_THROW_ANIM);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
 
-        if ((w->flags & 1) == 0) {
+        if ((w->flags & HOOK_FLAG_BOMB_THROWN) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
@@ -1534,20 +1534,20 @@ u8 task_hum_hook_1(HookWork* work) {
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->bombTask2 = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
                 w->bombTask3 = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
-                w->flags |= 1;
+                w->flags |= HOOK_FLAG_BOMB_THROWN;
             }
-        } else if (w->flags & 2) {
+        } else if (w->flags & HOOK_FLAG_POST_THROW_ANIM) {
             if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, ANIM_FLAG_LOOP, w->base.tiles);
             }
         } else {
             if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
-                w->flags |= 2;
+                w->flags |= HOOK_FLAG_POST_THROW_ANIM;
             }
         }
 
-        if ((w->flags & 1) &&
+        if ((w->flags & HOOK_FLAG_BOMB_THROWN) &&
             IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) == 0 &&
             IsTaskActiveNamed(w->bombTask2, sTaskDescHumHookBomb.name) == 0 &&
             IsTaskActiveNamed(w->bombTask3, sTaskDescHumHookBomb.name) == 0) {
@@ -1562,11 +1562,11 @@ u8 task_hum_hook_1(HookWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             w->bombTask = 0;
-            w->flags &= 0xFFFC;
+            w->flags &= ~(HOOK_FLAG_BOMB_THROWN | HOOK_FLAG_POST_THROW_ANIM);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
 
-        if ((w->flags & 1) == 0) {
+        if ((w->flags & HOOK_FLAG_BOMB_THROWN) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
@@ -1582,20 +1582,20 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.unk_14 = 0;
                 }
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
-                w->flags |= 1;
+                w->flags |= HOOK_FLAG_BOMB_THROWN;
             }
-        } else if (w->flags & 2) {
+        } else if (w->flags & HOOK_FLAG_POST_THROW_ANIM) {
             if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 14, ANIM_FLAG_LOOP, w->base.tiles);
             }
         } else {
             if (AnimIsFinished(&work->base.anim)) {
                 AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
-                w->flags |= 2;
+                w->flags |= HOOK_FLAG_POST_THROW_ANIM;
             }
         }
 
-        if ((w->flags & 1) &&
+        if ((w->flags & HOOK_FLAG_BOMB_THROWN) &&
             IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) == 0) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -1609,12 +1609,12 @@ u8 task_hum_hook_1(HookWork* work) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
             w->bombTask = 0;
-            w->flags &= 0xFFFE;
+            w->flags &= ~HOOK_FLAG_BOMB_THROWN;
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
         HumFaceTarget(&work->base, 1);
 
-        if ((w->flags & 1) == 0) {
+        if ((w->flags & HOOK_FLAG_BOMB_THROWN) == 0) {
             if (AnimGetFrame(&work->base.anim) == 6 && work->base.anim.timer == 0) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     args.x = act->x - 0x3200;
@@ -1630,11 +1630,11 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.unk_14 = 2;
                 }
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
-                w->flags |= 1;
+                w->flags |= HOOK_FLAG_BOMB_THROWN;
             }
         }
 
-        if (w->flags & 1) {
+        if (w->flags & HOOK_FLAG_BOMB_THROWN) {
             if (work->base.steps <= 4) {
                 work->base.stateTimer = 0;
                 work->base.steps++;
@@ -2161,7 +2161,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     case 4:
         act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
-        work->sub.flags &= ~5;
+        work->sub.flags &= ~(HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_OWN_DEPTH);
         break;
     }
 
@@ -2298,7 +2298,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             }
             break;
         case 4:
-            w->sub.flags |= 1;
+            w->sub.flags |= HUM_SUB_FLAG_IN_FRONT;
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(0x140, act->x - 0x2000, act->y, act->z, 20, 12, 24)
@@ -2309,7 +2309,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (AnimIsFinished(&w->sub.anim)) {
-            w->sub.flags &= ~1;
+            w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -2374,7 +2374,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             w->sub.x = x + (d = ((u16)(GetRandom() % 65) << 8) - 0x2000);
             w->sub.y = y;
             w->sub.z = 0;
-            w->sub.flags |= 4;
+            w->sub.flags |= HUM_SUB_FLAG_OWN_DEPTH;
             m4aSongNumStart(SONG_EF_AN_STANDUP);
         }
 
@@ -2423,7 +2423,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (w->sub.z < -0x12C00) {
-            w->sub.flags &= ~4;
+            w->sub.flags &= ~HUM_SUB_FLAG_OWN_DEPTH;
             work->base.stateTimer = 0;
 
             if (w->repeatCount > 6) {
@@ -2464,7 +2464,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         if (work->base.stateTimer == 0) {
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 7, 0, w->base.sub->tiles);
-            w->sub.flags |= 1;
+            w->sub.flags |= HUM_SUB_FLAG_IN_FRONT;
             act->originX = act->x;
             act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
@@ -2492,7 +2492,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (work->base.stateTimer > 50) {
-            w->sub.flags &= ~1;
+            w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;
             act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
             work->base.stateTimer = 0;
             work->base.state = 0;
@@ -2545,7 +2545,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         w->steps--;
 
         if (work->base.stateTimer > 5) {
-            w->sub.flags |= 1;
+            w->sub.flags |= HUM_SUB_FLAG_IN_FRONT;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->subOffsetX += (-0x2200 - w->subOffsetX) >> 3;
@@ -2567,7 +2567,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         BgFxAddPosition(w->sub.x - a, w->sub.y - b, w->sub.z - c);
 
         if (w->steps <= 0) {
-            w->sub.flags &= ~1;
+            w->sub.flags &= ~HUM_SUB_FLAG_IN_FRONT;
             work->base.stateTimer = 0;
 
             if (w->repeatCount > 3) {
@@ -2697,7 +2697,7 @@ void HadesEndAttack(HadesWork* work) {
     if (work->angryAttacks > 2) {
         LoadObjPaletteBank(work->base.palette->index, gHadesPalette);
         work->base.paletteData = gHadesPalette;
-        work->flags &= 0xFFFE;
+        work->flags &= ~HADES_FLAG_ANGRY;
         work->base.stockMoves = sHumHadesStockMoves;
     } else {
         work->angryAttacks++;
@@ -2709,10 +2709,10 @@ void task_hum_hades_0(HadesWork* work) {
     HumInit(&work->base, &sHumHadesDef);
     HumSubInit(&work->base, &work->sub, &sHumHadesSubDef);
     work->base.actor.flags |= BTLOBJ_FLAG_ABSORB_FIRE;
-    work->base.flags |= 0x40;
+    work->base.flags |= HUM_FLAG_BOSS_DEATH;
     work->flags = 0;
     work->hoverZ = -0xA00;
-    work->sub.flags |= 3;
+    work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
     work->tiles = AllocObjTiles(0x80, gHadesFramespreadHiTiles);
     work->tiles2 = AllocObjTiles(0x280, gHadesFramespreadHiTiles);
     work->tiles3 = AllocObjTiles(0x3A0, gHadesFramespreadHiTiles);
@@ -2751,7 +2751,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         switch ((u32)HumResolveCardMove(&work->base)) {
         case 36:
         case 38:
-            if (w->flags & 1) {
+            if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = 21;
             } else {
                 work->base.state = 20;
@@ -2759,7 +2759,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             break;
         case 37:
         case 39:
-            if (w->flags & 1) {
+            if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = 24;
             } else {
                 work->base.state = 20;
@@ -2767,7 +2767,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             break;
         case 0xEE5B96E5:
         case 0xEEFB96EF:
-            if (w->flags & 1) {
+            if (w->flags & HADES_FLAG_ANGRY) {
                 work->base.state = 22;
             } else {
                 work->base.state = 19;
@@ -2776,12 +2776,12 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
         break;
     case 4:
-        work->sub.flags |= 2;
-        work->flags &= 0xFFFD;
+        work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
+        work->flags &= ~HADES_FLAG_FLAMES_ACTIVE;
         break;
     }
 
-    if (w->flags & 1) {
+    if (w->flags & HADES_FLAG_ANGRY) {
         HumChooseCardAction(&work->base, 3, 40, 40, 24);
     } else {
         HumChooseCardAction(&work->base, 15, 40, 40, 24);
@@ -2800,7 +2800,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         work->base.targetX = x + gSineTable[t] * 90;
         work->base.targetY = y + (-gSineTable[t + 64]) * 45;
 
-        if (w->flags & 1) {
+        if (w->flags & HADES_FLAG_ANGRY) {
             HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x333);
         } else {
             HumMoveToward(&work->base, work->base.targetX, work->base.targetY, 0x140);
@@ -2837,7 +2837,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 0, 0, w->base.sub->tiles);
-            w->sub.flags &= 0xFFFD;
+            w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
         }
         w->sub.x = act->x;
         w->sub.y = act->y;
@@ -2850,13 +2850,13 @@ u8 task_hum_hades_1(HadesWork* work) {
         if (AnimGetFrame(&work->base.anim) == 5 && work->base.anim.timer == 0) {
             LoadObjPaletteBank(work->base.palette->index, gHadesAngryPalette);
             work->base.paletteData = gHadesAngryPalette;
-            w->flags |= 1;
+            w->flags |= HADES_FLAG_ANGRY;
             work->base.stockMoves = sHumHadesAngryStockMoves;
             w->angryAttacks = 0;
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            w->sub.flags |= 2;
+            w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -2869,7 +2869,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 2, 0, w->base.sub->tiles);
-            w->sub.flags &= 0xFFFD;
+            w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
             m4aSongNumStart(SONG_VO_HA_ATTACK00);
             m4aSongNumStart(SONG_BTL_HA_FIREENTRY);
         }
@@ -2917,7 +2917,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (w->sub.x < (gBtlWork->xMin - 32) << 8 || w->sub.x > (gBtlWork->xMax + 32) << 8) {
-            w->sub.flags |= 2;
+            w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             HadesEndAttack(w);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -2947,7 +2947,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 8, ANIM_FLAG_LOOP, w->base.tiles);
             w->scale = 10;
             work->base.steps = 8;
-            w->flags = (w->flags & 0xFFFB) | 2;
+            w->flags = (w->flags & ~HADES_FLAG_FLAMES_ENDING) | HADES_FLAG_FLAMES_ACTIVE;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub2[0].x = w->sub2[0].x2 = w->sub2[0].x3 = act->x - 0x2800;
@@ -2969,7 +2969,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         w->hoverZ = 0;
 
         if (work->base.steps > 0) {
-            if (w->flags & 4) {
+            if (w->flags & HADES_FLAG_FLAMES_ENDING) {
                 ApproachValue(&w->scale, 10, (u16)work->base.steps);
             } else {
                 ApproachValue(&w->scale, 0x100, (u16)work->base.steps);
@@ -2978,7 +2978,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (work->base.stateTimer == 180) {
-            w->flags |= 4;
+            w->flags |= HADES_FLAG_FLAMES_ENDING;
             work->base.steps = 8;
         }
         HumFaceTarget(&work->base, 8);
@@ -2987,7 +2987,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         w->sub2[0].groundY = act->y;
         w->sub2[1].groundY = act->y;
 
-        if (w->flags & 2) {
+        if (w->flags & HADES_FLAG_FLAMES_ACTIVE) {
             switch (AnimGetGfxIndex(&work->base.anim)) {
             case 2:
                 p = 44;
@@ -3110,8 +3110,8 @@ u8 task_hum_hades_1(HadesWork* work) {
         gBtlWork->damageScale = 0;
 #endif
 
-        if ((w->flags & 4) && work->base.steps <= 0) {
-            w->flags &= 0xFFFD;
+        if ((w->flags & HADES_FLAG_FLAMES_ENDING) && work->base.steps <= 0) {
+            w->flags &= ~HADES_FLAG_FLAMES_ACTIVE;
             work->base.state = 26;
             work->base.stateTimer = 0;
         } else {
@@ -3136,7 +3136,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 1, 0, w->base.sub->tiles);
-            w->sub.flags &= 0xFFFD;
+            w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 8) {
                 act->btl->hcEffectCount--;
@@ -3171,7 +3171,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            w->sub.flags |= 2;
+            w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -3184,7 +3184,7 @@ u8 task_hum_hades_1(HadesWork* work) {
             AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             AnimReset(&w->sub.anim);
             AnimChangeWithDef(sHumHadesEffectAnimDefs, &w->base.sub->anim, 4, 0, w->base.sub->tiles);
-            w->sub.flags &= 0xFFFD;
+            w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
             w->sub.x = act->x;
             w->sub.y = act->y;
             w->sub.z = act->z;
@@ -3221,7 +3221,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         }
 
         if (AnimIsFinished(&work->base.anim)) {
-            w->sub.flags |= 2;
+            w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -3235,7 +3235,7 @@ u8 task_hum_hades_1(HadesWork* work) {
         HadesHover(&work->base, w->hoverZ);
     }
 
-    if (w->flags & 2) {
+    if (w->flags & HADES_FLAG_FLAMES_ACTIVE) {
         AnimUpdate(&w->anim);
         AnimUpdate(&w->anim2);
         AnimUpdate(&w->anim3);
@@ -3257,7 +3257,7 @@ void task_hum_hades_2(HadesWork* work) {
 
     HumDraw(&work->base);
 
-    if ((work->flags & 2) == 0) {
+    if ((work->flags & HADES_FLAG_FLAMES_ACTIVE) == 0) {
         return;
     }
     act = &work->base.actor;
@@ -3440,7 +3440,7 @@ void task_hum_mahluxia_0(MahluxiaWork* work) {
     HumSubInit(&work->base, &work->sub, &sHumMahluxiaSubDef);
     work->flags = 0;
     work->hoverZ = -0x300;
-    work->sub.flags |= 3;
+    work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
     work->unk_1D8 = 0;
     AnimChangeWithDef(sHumMahluxiaAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
     MahluxiaSaveAfterimage(work, &work->spawns[0]);
@@ -3485,7 +3485,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     w = work;
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
-    work->flags &= ~2;
+    work->flags &= ~MAHLUXIA_FLAG_AFTERIMAGE;
 
     switch (_0800E434(&work->base)) {
     case 5:
@@ -3512,7 +3512,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
         break;
     case 4:
-        w->sub.flags |= 2;
+        w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
         break;
     }
 
@@ -3609,7 +3609,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         act->x += ((s32)work->base.targetX - act->x) >> 4;
         act->y += ((s32)work->base.targetY - act->y) >> 4;
 
-        if ((work->base.flags & 1)
+        if ((work->base.flags & HUM_FLAG_AT_FIELD_EDGE)
                 || ((s32)work->base.targetX - act->x >= 0
                     ? (s32)work->base.targetX - act->x <= 0x7FF
                     : act->x - (s32)work->base.targetX <= 0x7FF)) {
@@ -3619,7 +3619,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
         HumFaceTarget(&work->base, 1);
         MahluxiaSpawnFlower(w);
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
         work->base.stateTimer++;
         break;
     case 19:
@@ -3629,9 +3629,9 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             w->swingBaseY = act->y;
 
             if (((gBtlWork->yMin + gBtlWork->yMax) << 7) < act->y) {
-                w->flags &= ~1;
+                w->flags &= ~MAHLUXIA_FLAG_SWING_DOWN;
             } else {
-                w->flags |= 1;
+                w->flags |= MAHLUXIA_FLAG_SWING_DOWN;
             }
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
         }
@@ -3640,7 +3640,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             ApproachValueHalfSteps(&act->x, work->base.targetX, w->steps);
             ApproachValueHalfSteps(&w->angle, 128, w->steps);
 
-            if (w->flags & 1) {
+            if (w->flags & MAHLUXIA_FLAG_SWING_DOWN) {
                 act->y = w->swingBaseY + gSineTable[(u8)w->angle] * w->swingAmplitude;
             } else {
                 act->y = w->swingBaseY - gSineTable[(u8)w->angle] * w->swingAmplitude;
@@ -3655,14 +3655,14 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
         HumFaceTarget(&work->base, 3);
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
         work->base.stateTimer++;
         break;
     case 22:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (!AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer++;
@@ -3689,7 +3689,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (!AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer++;
@@ -3703,7 +3703,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK00);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
@@ -3738,7 +3738,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 10, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x = act->x - 0x105;
@@ -3760,7 +3760,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             m4aSongNumStart(SONG_SND_706);
             FadeLock();
             gBtlWork->hitStop = 20;
-            w->flags |= 2;
+            w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 act->x -= 0x5000;
@@ -3783,7 +3783,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
@@ -3796,19 +3796,19 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     case 26:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 8, 0, w->base.tiles);
-            w->flags &= ~4;
+            w->flags &= ~MAHLUXIA_FLAG_EFFECT_LAUNCHED;
             m4aSongNumStart(SONG_VO_MARL_ATTACK01);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         if (AnimGetFrame(&work->base.anim) == 4) {
             if (work->base.anim.timer == 0) {
                 BgFxStartHanabira(act->x, act->y, act->z - 0x4D00, 318);
-                w->flags |= 4;
+                w->flags |= MAHLUXIA_FLAG_EFFECT_LAUNCHED;
             }
         }
 
-        if (w->flags & 4) {
+        if (w->flags & MAHLUXIA_FLAG_EFFECT_LAUNCHED) {
             MahluxiaSpawnFlower(w);
         }
 
@@ -3827,7 +3827,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 9, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_MARL_ATTACK03);
         }
-        w->flags |= 2;
+        w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
 
         switch (AnimGetFrame(&work->base.anim)) {
         case 4:
@@ -3861,7 +3861,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     case 21:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
-            w->flags &= ~4;
+            w->flags &= ~MAHLUXIA_FLAG_EFFECT_LAUNCHED;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 w->sub.x = act->x - 0x4600;
@@ -3878,7 +3878,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         case 1:
         case 2:
         case 3:
-            w->flags |= 2;
+            w->flags |= MAHLUXIA_FLAG_AFTERIMAGE;
             act->y += (y - act->y) >> 2;
             w->sub.y = act->y;
             break;
@@ -3886,8 +3886,8 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             if (work->base.anim.timer == 0) {
                 AnimReset(&w->sub.anim);
                 AnimChangeWithDef(&sHumMahluxiaEffAnimDef, &w->base.sub->anim, 0, 0, w->base.sub->tiles);
-                w->flags |= 4;
-                w->sub.flags &= ~2;
+                w->flags |= MAHLUXIA_FLAG_EFFECT_LAUNCHED;
+                w->sub.flags &= ~HUM_SUB_FLAG_HIDDEN;
                 m4aSongNumStart(SONG_EF_KU_ATT03);
 
                 if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
@@ -3904,7 +3904,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             break;
         }
 
-        if (w->flags & 4) {
+        if (w->flags & MAHLUXIA_FLAG_EFFECT_LAUNCHED) {
             w->subSpeed += 25;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -3935,7 +3935,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
                 ClearBtlObjActionFlags(act);
                 work->base.state = 0;
                 work->base.stateTimer = 0;
-                w->sub.flags |= 2;
+                w->sub.flags |= HUM_SUB_FLAG_HIDDEN;
                 break;
             }
         }
@@ -3955,7 +3955,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
 void task_hum_mahluxia_2(MahluxiaWork* work) {
     HumDraw(&work->base);
 
-    if ((work->flags & 2) && (work->sub.flags & 2)) {
+    if ((work->flags & MAHLUXIA_FLAG_AFTERIMAGE) && (work->sub.flags & HUM_SUB_FLAG_HIDDEN)) {
         switch (work->unk_1D8 % 12) {
         case 0:
         case 2:
@@ -4339,7 +4339,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             }
             w->hoverZ = 0;
-            w->flags &= ~1;
+            w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
         }
 
         if (work->base.anim.timer == 0) {
@@ -4391,7 +4391,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
                 break;
             case 8:
@@ -4401,7 +4401,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
                 break;
             }
@@ -4410,7 +4410,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
 
-            if (work->base.steps <= 0 && (w->flags & 1)) {
+            if (work->base.steps <= 0 && (w->flags & LAXENE_FLAG_ATTACK_HIT)) {
                 work->base.state = 21;
                 work->base.steps++;
             } else {
@@ -4431,7 +4431,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             }
             w->hoverZ = 0;
-            w->flags &= ~1;
+            w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
             act->originX = act->x;
             work->base.vz = 0x400;
         }
@@ -4485,7 +4485,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
 
                     if (work->base.steps == 4) {
                         MakeOpponentsHittable();
@@ -4500,7 +4500,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
 
                     if (work->base.steps == 4) {
                         MakeOpponentsHittable();
@@ -4514,7 +4514,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
 
-            if (w->flags & 1) {
+            if (w->flags & LAXENE_FLAG_ATTACK_HIT) {
                 if (work->base.steps > 3) {
                     ClearBtlObjActionFlags(act);
                     work->base.state = 0;
@@ -4554,7 +4554,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                 AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
             }
             w->hoverZ = 0;
-            w->flags &= ~1;
+            w->flags &= ~LAXENE_FLAG_ATTACK_HIT;
             w->scaleSteps = 8;
             work->base.scaleX = 5;
             work->base.scaleY = 384;
@@ -4609,7 +4609,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x131, act->x - 0x1800, act->y, act->z, 8, 24, 50)
                     : ApplyAttackBox(0x131, act->x + 0x1800, act->y, act->z, 8, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
                 break;
             case 8:
@@ -4619,7 +4619,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
                     ? ApplyAttackBox(0x132, act->x - 0x1000, act->y, act->z, 16, 24, 50)
                     : ApplyAttackBox(0x132, act->x + 0x1000, act->y, act->z, 16, 24, 50)) {
                     m4aSongNumStart(SONG_BTL_RAC_HIT);
-                    w->flags |= 1;
+                    w->flags |= LAXENE_FLAG_ATTACK_HIT;
                 }
                 break;
             }
@@ -4872,8 +4872,8 @@ void task_hum_axcel_0(AxcelWork* work) {
     work->flags = 0;
     work->hoverZ = -0x300;
     work->scaleSteps = 0;
-    work->sub.flags |= 2;
-    work->sub2.flags |= 2;
+    work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
+    work->sub2.flags |= HUM_SUB_FLAG_HIDDEN;
     work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     TaskPoolInit(&work->tasks, 16);
@@ -4916,12 +4916,12 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         w->targetScaleY = work->base.scaleY = 0x100;
         break;
     case 4:
-        work->base.flags &= ~32;
+        work->base.flags &= ~HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
         act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
-        sub->flags |= 2;
-        sub2->flags |= 2;
+        sub->flags |= HUM_SUB_FLAG_HIDDEN;
+        sub2->flags |= HUM_SUB_FLAG_HIDDEN;
         work->targetScaleX = work->base.scaleX = 0x100;
         work->targetScaleY = work->base.scaleY = 0x100;
         m4aSongNumStop(SONG_EF_AKL_FIREWALL);
@@ -5038,8 +5038,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 6, 0, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 0, ANIM_FLAG_LOOP, w->base.sub->tiles);
             sub->palette2 = work->base.palette;
-            sub->flags |= 4;
-            sub->flags &= ~2;
+            sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+            sub->flags &= ~HUM_SUB_FLAG_HIDDEN;
             m4aSongNumStart(SONG_BTL_AKL_WTHR);
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x2000;
@@ -5077,8 +5077,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     case 25:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 7, 0, w->base.tiles);
-            sub->flags |= 2;
-            sub->flags &= ~4;
+            sub->flags |= HUM_SUB_FLAG_HIDDEN;
+            sub->flags &= ~HUM_SUB_FLAG_OWN_DEPTH;
         }
         BtlMapFollowPosition(act->x, act->y, act->z);
         if (AnimIsFinished(&work->base.anim)) {
@@ -5097,10 +5097,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 6, 0, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 2, 0, w->base.sub2->tiles);
             sub->palette2 = sub->palette;
-            sub->flags &= ~6;
-            sub2->flags &= ~6;
-            sub->flags |= 1;
-            sub2->flags &= ~1;
+            sub->flags &= ~(HUM_SUB_FLAG_HIDDEN | HUM_SUB_FLAG_OWN_DEPTH);
+            sub2->flags &= ~(HUM_SUB_FLAG_HIDDEN | HUM_SUB_FLAG_OWN_DEPTH);
+            sub->flags |= HUM_SUB_FLAG_IN_FRONT;
+            sub2->flags &= ~HUM_SUB_FLAG_IN_FRONT;
             w->hoverZ = 0;
         }
         HumFaceTarget(&work->base, 1);
@@ -5177,8 +5177,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
-            sub->flags |= 4;
-            sub2->flags |= 4;
+            sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+            sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5224,8 +5224,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         AxcelSpawnParticle(w, sub2);
         if (sub->x > ((gBtlWork->xMax + 32) << 8) ||
             sub->x < ((gBtlWork->xMin - 32) << 8)) {
-            sub->flags |= 2;
-            sub2->flags |= 2;
+            sub->flags |= HUM_SUB_FLAG_HIDDEN;
+            sub2->flags |= HUM_SUB_FLAG_HIDDEN;
             work->base.stateTimer = 0;
             work->base.state = 28;
         } else {
@@ -5242,8 +5242,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
-            sub->flags |= 4;
-            sub2->flags |= 4;
+            sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+            sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5302,8 +5302,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         ApproachValue(&sub2->z, -0x5A00, w->steps);
         w->steps--;
         if ((s16)w->steps <= 0) {
-            sub->flags |= 2;
-            sub2->flags |= 2;
+            sub->flags |= HUM_SUB_FLAG_HIDDEN;
+            sub2->flags |= HUM_SUB_FLAG_HIDDEN;
             work->base.stateTimer = 0;
             work->base.state = 28;
         } else {
@@ -5316,8 +5316,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 9, ANIM_FLAG_LOOP, w->base.tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub->anim, 1, ANIM_FLAG_LOOP, w->base.sub->tiles);
             AnimChangeWithDef(sHumAxcelWeaponAnimDefs, &w->base.sub2->anim, 1, ANIM_FLAG_LOOP, w->base.sub2->tiles);
-            sub->flags |= 4;
-            sub2->flags |= 4;
+            sub->flags |= HUM_SUB_FLAG_OWN_DEPTH;
+            sub2->flags |= HUM_SUB_FLAG_OWN_DEPTH;
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 sub->x = act->x - 0x3700;
                 sub2->x = act->x - 0x5700;
@@ -5381,7 +5381,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             m4aSongNumStart(SONG_SND_291);
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
             w->hoverZ = 0;
-            w->flags &= ~1;
+            w->flags &= ~AXCEL_FLAG_ATTACK_HIT;
         }
         switch (AnimGetFrame(&work->base.anim)) {
         case 1:
@@ -5402,10 +5402,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 ApplyAttackBox(300, act->x - 0x2000, act->y, act->z, 20, 24, 50) :
                 ApplyAttackBox(300, act->x + 0x2000, act->y, act->z, 20, 24, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
-                w->flags |= 1;
+                w->flags |= AXCEL_FLAG_ATTACK_HIT;
             }
         }
-        if (w->flags & 1) {
+        if (w->flags & AXCEL_FLAG_ATTACK_HIT) {
             work->base.state = 21;
             work->base.stateTimer = 0;
         } else if (AnimIsFinished(&work->base.anim)) {
@@ -5420,7 +5420,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumAxcelAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             w->hoverZ = 0;
-            w->flags &= ~1;
+            w->flags &= ~AXCEL_FLAG_ATTACK_HIT;
         }
         if (AnimGetFrame(&work->base.anim) == 1) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -5437,10 +5437,10 @@ u8 task_hum_axcel_1(AxcelWork* work) {
                 ApplyAttackBox(301, act->x - 0x2000, act->y, act->z, 24, 24, 50) :
                 ApplyAttackBox(301, act->x + 0x2000, act->y, act->z, 24, 24, 50)) {
                 m4aSongNumStart(SONG_BTL_MON_SWORD00);
-                w->flags |= 1;
+                w->flags |= AXCEL_FLAG_ATTACK_HIT;
             }
         }
-        if (work->base.steps <= 1 && (w->flags & 1) && AnimGetFrame(&work->base.anim) > 2) {
+        if (work->base.steps <= 1 && (w->flags & AXCEL_FLAG_ATTACK_HIT) && AnimGetFrame(&work->base.anim) > 2) {
             work->base.state = 20;
             work->base.stateTimer = 0;
             work->base.steps++;
@@ -5476,7 +5476,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             } else {
                 BgFxStartAxcelFireWall(act->x, 0, 303);
             }
-            work->base.flags |= 32;
+            work->base.flags |= HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
             act->flags |= BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
@@ -5505,7 +5505,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             w->hoverZ = 0;
         }
         if (AnimIsFinished(&work->base.anim)) {
-            work->base.flags &= ~32;
+            work->base.flags &= ~HUM_FLAG_BEHIND_BG_FX;
 #ifdef VERSION_EU
             act->flags &= ~BTLOBJ_FLAG_HIDE_SHADOW;
 #endif
@@ -5554,7 +5554,7 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
     s32 scale;
     s32 f;
 
-    if ((sub->flags & 2) == 0) {
+    if ((sub->flags & HUM_SUB_FLAG_HIDDEN) == 0) {
         if (sub->z >= 0) {
             affine = 0;
         } else {
@@ -5839,11 +5839,11 @@ u8 task_hum_vixen_1(VixenWork* work) {
             act->x += work->slideSpeed;
         }
 
-        if (w->base.flags & 1) {
-            work->flags ^= 1;
+        if (w->base.flags & HUM_FLAG_AT_FIELD_EDGE) {
+            work->flags ^= VIXEN_FLAG_SLIDE_DOWN;
         }
 
-        if (work->flags & 1) {
+        if (work->flags & VIXEN_FLAG_SLIDE_DOWN) {
             act->y += work->slideSpeed;
         } else {
             act->y -= work->slideSpeed;
@@ -5901,7 +5901,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (AnimIsFinished(&w->base.anim)) {
-            w->base.flags &= ~4;
+            w->base.flags &= ~HUM_FLAG_PASS_THROUGH;
             act->btl->hcEffectCount--;
             v = 0;
             act->hp = act->maxHp / 4;
@@ -6870,7 +6870,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         if (work->base.stateTimer == 0) {
             w->hoverZ = 0;
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
-            w->flags &= ~4;
+            w->flags &= ~LEXCEUS_FLAG_WEAPON_THROWN;
             w->task = 0;
             m4aSongNumStart(SONG_SND_287);
         }
@@ -6886,12 +6886,12 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                 }
                 a1.y = act->y;
                 a1.z = act->z - 0x6000;
-                w->flags |= 4;
+                w->flags |= LEXCEUS_FLAG_WEAPON_THROWN;
                 w->task = TaskCreate(&w->tasks, &sTaskDescHumLexTmh, &a1);
             }
         }
 
-        if (w->flags & 4) {
+        if (w->flags & LEXCEUS_FLAG_WEAPON_THROWN) {
             if (IsTaskActiveNamed(w->task, sTaskDescHumLexTmh.name) == 0) {
                 work->base.stateTimer = 0;
                 work->base.state = 24;
@@ -6933,7 +6933,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             w->hoverZ = 0;
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 3, 0, w->base.tiles);
-            w->flags &= ~3;
+            w->flags &= ~(LEXCEUS_FLAG_ATTACK_HIT | LEXCEUS_FLAG_COMBO_FOLLOWUP);
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 49) {
                 act->btl->hcEffectCount--;
@@ -6982,21 +6982,21 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                         ? ApplyAttackBox(0x144, act->x - 0x3C00, act->y, act->z, 24, 20, 30)
                         : ApplyAttackBox(0x144, act->x + 0x3C00, act->y, act->z, 24, 20, 30)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
-                        w->flags |= 1;
+                        w->flags |= LEXCEUS_FLAG_ATTACK_HIT;
                     }
                 }
             }
         }
 
-        if (w->flags & 1) {
+        if (w->flags & LEXCEUS_FLAG_ATTACK_HIT) {
             if (AnimGetFrame(&work->base.anim) == 6) {
                 if (work->base.anim.timer == 19) {
-                    w->flags |= 2;
+                    w->flags |= LEXCEUS_FLAG_COMBO_FOLLOWUP;
                 }
             }
         }
 
-        if (w->flags & 2) {
+        if (w->flags & LEXCEUS_FLAG_COMBO_FOLLOWUP) {
             work->base.stateTimer = 0;
             work->base.state = 22;
             work->base.steps++;
@@ -7013,7 +7013,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             w->hoverZ = 0;
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
-            w->flags &= ~1;
+            w->flags &= ~LEXCEUS_FLAG_ATTACK_HIT;
 #ifdef VERSION_EU
             if (act->btl->hcEffect == 49) {
                 act->btl->hcEffectCount--;
@@ -7030,14 +7030,14 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
                         ? ApplyAttackBox(0x149, act->x - 0x2800, act->y, act->z, 24, 20, 55)
                         : ApplyAttackBox(0x149, act->x + 0x2800, act->y, act->z, 24, 20, 55)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
-                        w->flags |= 1;
+                        w->flags |= LEXCEUS_FLAG_ATTACK_HIT;
                     }
                 } else {
                     if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                         ? ApplyAttackBox(0x145, act->x - 0x2800, act->y, act->z, 24, 20, 55)
                         : ApplyAttackBox(0x145, act->x + 0x2800, act->y, act->z, 24, 20, 55)) {
                         m4aSongNumStart(SONG_BTL_LEC_HIT);
-                        w->flags |= 1;
+                        w->flags |= LEXCEUS_FLAG_ATTACK_HIT;
                     }
                 }
             }
@@ -7766,7 +7766,7 @@ void task_hum_riku_0(RikuWork* work) {
     HumSubInit(&work->base, &work->sub, &sHumRikuSubDef);
     work->unk_1C4 = 0;
     work->flags = 0;
-    work->sub.flags |= 3;
+    work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
     work->unk_1CC = 0;
 
     if (gBtlWork->battleId != 0xA1) {
@@ -7793,7 +7793,7 @@ u8 task_hum_riku_1(RikuWork* work) {
     w = work;
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
-    work->flags &= ~4;
+    work->flags &= ~RIKU_FLAG_AFTERIMAGE;
     switch (_0800E434(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
@@ -7819,7 +7819,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
         break;
     case 4:
-        work->base.flags &= ~8;
+        work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
         work->base.scaleX = 256;
         break;
     }
@@ -7962,7 +7962,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             work->base.vz -= 179;
             break;
         }
-        w->flags |= 4;
+        w->flags |= RIKU_FLAG_AFTERIMAGE;
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             s32 t = act->x - 0x3000;
             act->x += (act->originX - t) >> 3;
@@ -7981,10 +7981,10 @@ u8 task_hum_riku_1(RikuWork* work) {
     case 32:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 16, 0, w->base.tiles);
-            work->base.flags |= 8;
+            work->base.flags |= HUM_FLAG_IGNORE_BOUNDS;
         }
         work->base.vz = 0;
-        w->flags |= 4;
+        w->flags |= RIKU_FLAG_AFTERIMAGE;
         if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
             act->x -= 0xC00;
         } else {
@@ -8059,7 +8059,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             m4aSongNumStart(SONG_EF_RK_LIMITMOV);
             MakeOpponentsHittable();
         }
-        w->flags |= 4;
+        w->flags |= RIKU_FLAG_AFTERIMAGE;
         act->x += gSineTable[(u8)w->unk_1C4] * 12;
         act->y += -gSineTable[(u8)w->unk_1C4 + 64] * 12;
         if (ApplyAttackBox(295, act->x, act->y, act->z, 24, 16, 24)) {
@@ -8093,7 +8093,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             }
         }
         if (!BgFxIsActive() && work->base.steps <= 0 && AnimIsFinished(&work->base.anim)) {
-            work->base.flags &= ~8;
+            work->base.flags &= ~HUM_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             FadeStartIn(FADE_MODE_DARK_MAGENTA, 30);
@@ -8149,10 +8149,10 @@ u8 task_hum_riku_1(RikuWork* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 13, 0, w->base.tiles);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
-            w->flags &= ~2;
+            w->flags &= ~RIKU_FLAG_FIRE_LAUNCHED;
             HumFaceTarget(&work->base, 1);
         }
-        if (w->flags & 2) {
+        if (w->flags & RIKU_FLAG_FIRE_LAUNCHED) {
             BtlObj* p = gBtlWork->actor;
             if (p != NULL) {
                 s32 follow = 0;
@@ -8170,7 +8170,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 }
             }
         }
-        if (!(w->flags & 2) && work->base.anim.timer == 0) {
+        if (!(w->flags & RIKU_FLAG_FIRE_LAUNCHED) && work->base.anim.timer == 0) {
             s16 d = 0;
             s32 spawn = 0;
             switch (AnimGetFrame(&work->base.anim)) {
@@ -8197,7 +8197,7 @@ u8 task_hum_riku_1(RikuWork* work) {
                 act->x += d << 8;
             }
             if (spawn) {
-                w->flags |= 2;
+                w->flags |= RIKU_FLAG_FIRE_LAUNCHED;
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     BgFxStartFire(3, act->x - 0x4A00, act->y, act->z - 0x1800,
                         act->originX - 0xC800, act->originY, act->z - 0x1800, 1, 296);
@@ -8296,7 +8296,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
         if (AnimGetGfxIndex(&work->base.anim) == 6) {
 
-            w->flags |= 4;
+            w->flags |= RIKU_FLAG_AFTERIMAGE;
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 s32 t = act->x + 0x5800;
                 act->x += (act->originX - t) >> 2;
@@ -8407,17 +8407,17 @@ u8 task_hum_riku_1(RikuWork* work) {
     case 27:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 11, 0, w->base.tiles);
-            w->flags &= ~1;
+            w->flags &= ~RIKU_FLAG_DIVE_HIT;
         }
         act->x += (x - act->x) >> 4;
         act->y += (y - act->y) >> 4;
         if (AnimGetFrame(&work->base.anim) > 1) {
             if (ApplyAttackBox(294, act->x, act->y, act->z, 10, 10, 4)) {
                 m4aSongNumStart(SONG_BTL_RK_HIT02);
-                w->flags |= 1;
+                w->flags |= RIKU_FLAG_DIVE_HIT;
             }
         }
-        if ((w->flags & 1) || act->z >= act->groundZ) {
+        if ((w->flags & RIKU_FLAG_DIVE_HIT) || act->z >= act->groundZ) {
             work->base.stateTimer = 0;
             work->base.state = 28;
         } else {
@@ -8495,7 +8495,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 void task_hum_riku_2(RikuWork* work) {
     HumDraw(&work->base);
 
-    if ((work->flags & 4) && (work->sub.flags & 2)) {
+    if ((work->flags & RIKU_FLAG_AFTERIMAGE) && (work->sub.flags & HUM_SUB_FLAG_HIDDEN)) {
         switch (work->unk_1CC % 2) {
         case 0:
             RikuDrawAfterimage(work, &work->spawns[2]);
@@ -8598,7 +8598,7 @@ u8 task_hum_leon_1(LeonWork* work) {
         break;
     case 20:
         if (work->base.stateTimer > 10) {
-            gBtlWork->rikuKeys |= 32;
+            gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
             work->base.state = 0;
             work->base.stateTimer = 0;
         } else {

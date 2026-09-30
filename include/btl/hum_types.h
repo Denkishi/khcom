@@ -7,6 +7,12 @@
 #include "obj.h"
 #include "battle_actor_types.h"
 
+enum HumSubFlag {
+    HUM_SUB_FLAG_IN_FRONT = 0x1,
+    HUM_SUB_FLAG_HIDDEN = 0x2,
+    HUM_SUB_FLAG_OWN_DEPTH = 0x4
+};
+
 typedef struct HumSub {
     void* unk_00;
     void* tiles;
@@ -34,6 +40,16 @@ typedef struct HumSubDef {
     u16 tileCount;
     u16 unk_06;
 } HumSubDef;
+
+enum HumFlag {
+    HUM_FLAG_AT_FIELD_EDGE = 0x1,
+    HUM_FLAG_FLASH_PALETTE = 0x2,
+    HUM_FLAG_PASS_THROUGH = 0x4,
+    HUM_FLAG_IGNORE_BOUNDS = 0x8,
+    HUM_FLAG_ENEMY_CARDS_SPENT = 0x10,
+    HUM_FLAG_BEHIND_BG_FX = 0x20,
+    HUM_FLAG_BOSS_DEATH = 0x40
+};
 
 typedef struct HumWork {
     const void* def;

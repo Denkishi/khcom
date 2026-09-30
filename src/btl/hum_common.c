@@ -107,7 +107,7 @@ s32 _0800E434(HumWork* work) {
 
     switch (r) {
     case BTL_REACTION_CARD_ACTION:
-        work->flags |= 4;
+        work->flags |= HUM_FLAG_PASS_THROUGH;
         gRikuBtlWork->flags &= ~BTL_FLAG_DISMISS_SUMMONS;
         work->itemIndex = 0;
         work->stateTimer = 0;
@@ -141,7 +141,7 @@ s32 _0800E434(HumWork* work) {
         work->stateTimer = 0;
         break;
     case BTL_REACTION_DEFEATED:
-        work->flags |= 4;
+        work->flags |= HUM_FLAG_PASS_THROUGH;
         work->state = 3;
         work->stateTimer = 0;
         break;
@@ -167,7 +167,7 @@ s32 _0800E434(HumWork* work) {
 
 void HumSubUpdateAnimation(HumSub* sub) {
     if (sub != NULL) {
-        if (!(sub->flags & 2)) {
+        if (!(sub->flags & HUM_SUB_FLAG_HIDDEN)) {
             sub->gfx = AnimUpdate(&sub->anim);
         }
     }
@@ -365,7 +365,7 @@ s32 HumUpdate(HumWork* work) {
         if (work->stateTimer == 0) {
             BeginBossDefeat(actor);
 
-            if (!(work->flags & 0x40)) {
+            if (!(work->flags & HUM_FLAG_BOSS_DEATH)) {
                 m4aSongNumStart(SONG_BTL_GF_LOOP);
             }
             SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
@@ -373,7 +373,7 @@ s32 HumUpdate(HumWork* work) {
         if (FadeIsActive() == 0) {
             work->stateTimer = 0;
 
-            if (work->flags & 0x40) {
+            if (work->flags & HUM_FLAG_BOSS_DEATH) {
                 work->state = 6;
             } else {
                 work->state = 4;
@@ -453,7 +453,7 @@ s32 HumUpdate(HumWork* work) {
         work->stateTimer++;
         break;
     case 0:
-        work->flags &= ~4;
+        work->flags &= ~HUM_FLAG_PASS_THROUGH;
 
         if (IsRikuReloadCardSelected()) {
             work->stateTimer = 0;
@@ -480,7 +480,7 @@ s32 HumUpdate(HumWork* work) {
             actor->z = 0;
             work->vz = 0;
         }
-        if (actor->collider.colliding != 0 && !(work->flags & 4) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
+        if (actor->collider.colliding != 0 && !(work->flags & HUM_FLAG_PASS_THROUGH) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }
@@ -514,20 +514,20 @@ s32 HumUpdate(HumWork* work) {
         }
     }
 
-    if (!(work->flags & 8)) {
+    if (!(work->flags & HUM_FLAG_IGNORE_BOUNDS)) {
         switch (ClampBattlePosition(&actor->x, &actor->y, work->boundsMargin, 0)) {
         case 1:
         case 2:
             actor->vx = -(actor->vx >> 1);
-            work->flags |= 1;
+            work->flags |= HUM_FLAG_AT_FIELD_EDGE;
             break;
         case 3:
         case 4:
             actor->vy = -(actor->vy >> 1);
-            work->flags |= 1;
+            work->flags |= HUM_FLAG_AT_FIELD_EDGE;
             break;
         default:
-            work->flags &= ~1;
+            work->flags &= ~HUM_FLAG_AT_FIELD_EDGE;
             break;
         }
     }

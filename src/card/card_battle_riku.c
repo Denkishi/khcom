@@ -593,6 +593,7 @@ static void cardbattle_0(CardBattleWork* w) {
     w->revCountShown[3] = 0;
     w->stockValue = 0;
     w->unk_C4[3] = 0;
+    // @bug? Reads past the end of the array.
     w->x = *(u16*)&gRikuCardSwingAngles[4];
 
     for (i = 0; i <= 2; i++) {

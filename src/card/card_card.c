@@ -1873,6 +1873,7 @@ void ClearStockedCardSlots(CardBattleWork* w) {
     for (i = 0; i < 4; i++) {
         c = w->slots[i];
 
+        // @bug? Should be slotCounts[i].
         for (j = 0; j < w->slotCounts[j]; j++) {
             c[j].stocked = 0;
         }

@@ -944,6 +944,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
     i = 0;
     j = 0;
 
+    // @bug? Only 10 lines are allocated.
     if (e > 23) {
         return;
     }

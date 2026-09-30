@@ -69,6 +69,7 @@ void Event_0(s32 arg) {
         cfg.unk_08 = 1;
     }
 
+    // @bug? Should mask with 0x7FFF.
     if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & 0x80) {
         FadeStartIn(1, 999);
     }

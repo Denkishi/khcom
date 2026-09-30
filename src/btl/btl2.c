@@ -571,17 +571,17 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     case 3:
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             gfx = gBHpgagEFrame12Eu;
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             gfx = gBHpgagEFrame22Eu;
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             gfx = gBHpgagEFrame31Eu;
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             gfx = gBHpgagEFrame40Eu;
             break;
@@ -595,17 +595,17 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     case 2:
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             gfx = gBHpgagEFrame11Eu;
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             gfx = gBHpgagEFrame21Eu;
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             gfx = gBHpgagEFrame30Eu;
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             gfx = gBHpgagEFrame39Eu;
             break;
@@ -619,17 +619,17 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     case 1:
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             gfx = gBHpgagEFrame10Eu;
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             gfx = gBHpgagEFrame20Eu;
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             gfx = gBHpgagEFrame29Eu;
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             gfx = gBHpgagEFrame38Eu;
             break;
@@ -644,8 +644,8 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     default:
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -669,7 +669,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 break;
             }
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -693,7 +693,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 break;
             }
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -717,7 +717,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
                 break;
             }
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             switch (work->gaugeSize) {
             case 0:
@@ -835,7 +835,7 @@ void task_btl_pause_0(BtlPauseWork* work) {
 
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 
-    if (gLanguage <= 2) {
+    if (gLanguage <= LANGUAGE_GERMAN) {
         work->tiles = LoadObjTiles(gUnk_08B1E7F4, 0x180);
         p = gUnk_09EE115C;
     } else {
@@ -953,7 +953,7 @@ void task_btl_pause_3(BtlPauseWork* work) {
 void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B4A794, 0x100);
@@ -977,7 +977,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             break;
         }
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B51368, 0x100);
@@ -1001,7 +1001,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             break;
         }
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B516A4, 0x100);
@@ -1025,7 +1025,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             break;
         }
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         switch (src->kind) {
         case 0:
             work->tiles = LoadObjTiles(gUnkEu_08B51590, 0x100);
@@ -1049,7 +1049,7 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             break;
         }
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
     default:
         switch (src->kind) {
         case 0:
@@ -1178,23 +1178,23 @@ void task_btl_escape_0(BtlEscapeWork* work) {
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->tiles = LoadObjTiles(gUnk_08B1EB1C, 0x240);
         p = gUnk_09EE11A4;
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->tiles = LoadObjTiles(gUnkEu_08B51D50, 0x240);
         p = gUnkEu_09F5C20C;
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->tiles = LoadObjTiles(gUnkEu_08B51FB8, 0x240);
         p = gUnkEu_09F5C21C;
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->tiles = LoadObjTiles(gUnkEu_08B52220, 0x240);
         p = gUnkEu_09F5C22C;
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         work->tiles = LoadObjTiles(gUnkEu_08B52488, 0x240);
         p = gUnkEu_09F5C23C;

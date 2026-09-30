@@ -319,23 +319,23 @@ void mode_movie_1(void) {
             p = gUnk_0815C3EC;
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 gMovieSubs = gUnkEu_0883E040;
                 gMovieSubCount = 3;
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 gMovieSubs = gUnkEu_0883E454;
                 gMovieSubCount = 4;
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
                 gMovieSubs = gUnkEu_0883E8D4;
                 gMovieSubCount = 4;
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 gMovieSubs = gUnkEu_0883ECE8;
                 gMovieSubCount = 4;
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
             default:
                 gMovieSubs = gUnkEu_0883F0F8;
                 gMovieSubCount = 4;
@@ -360,23 +360,23 @@ void mode_movie_1(void) {
             p = gUnk_0855CCB4;
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 gMovieSubs = gUnkEu_0883E070;
                 gMovieSubCount = 14;
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 gMovieSubs = gUnkEu_0883E494;
                 gMovieSubCount = 14;
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
                 gMovieSubs = gUnkEu_0883E914;
                 gMovieSubCount = 14;
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 gMovieSubs = gUnkEu_0883ED28;
                 gMovieSubCount = 14;
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
             default:
                 gMovieSubs = gUnkEu_0883F138;
                 gMovieSubCount = 14;
@@ -398,23 +398,23 @@ void mode_movie_1(void) {
             p = gUnk_086FBA14;
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 gMovieSubs = gUnkEu_0883E150;
                 gMovieSubCount = 10;
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 gMovieSubs = gUnkEu_0883E574;
                 gMovieSubCount = 12;
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
                 gMovieSubs = gUnkEu_0883E9F4;
                 gMovieSubCount = 11;
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 gMovieSubs = gUnkEu_0883EE08;
                 gMovieSubCount = 10;
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
             default:
                 gMovieSubs = gUnkEu_0883F218;
                 gMovieSubCount = 11;

@@ -1102,21 +1102,21 @@ void mode_mapinspect_0(void) {
     LoadBgTiles(0, gUnk_09A03CFC, 0x2C00);
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         RequestDma3Copy(gUnkEu_09A3D400, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
         RequestDma3Copy(gUnkEu_09A3D400 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         RequestDma3Copy(gUnkEu_09A41000, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
         RequestDma3Copy(gUnkEu_09A41000 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         RequestDma3Copy(gUnkEu_09A3FC00, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
         RequestDma3Copy(gUnkEu_09A3FC00 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         RequestDma3Copy(gUnkEu_09A3E800, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
         RequestDma3Copy(gUnkEu_09A3E800 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;

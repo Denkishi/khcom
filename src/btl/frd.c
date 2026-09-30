@@ -159,7 +159,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     case 0:
         work->repeatsLeft = 1;
 #ifdef VERSION_EU
-        if (gLanguage == 3) {
+        if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
         } else {
             m4aSongNumStart(SONG_VO_SR_SUMMON04);
@@ -171,7 +171,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     case 1:
         work->repeatsLeft = 1;
 #ifdef VERSION_EU
-        if (gLanguage == 3) {
+        if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
         } else {
             m4aSongNumStart(SONG_VO_SR_SUMMON04);
@@ -183,7 +183,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     case 2:
         work->repeatsLeft = 1;
 #ifdef VERSION_EU
-        if (gLanguage == 3) {
+        if (gLanguage == LANGUAGE_ITALIAN) {
             m4aSongNumStart(SONG_VO_SR_SUMMON00);
         } else {
             m4aSongNumStart(SONG_VO_SR_SUMMON04);
@@ -629,7 +629,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
 
     body = &work->body;
 #ifdef VERSION_EU
-    if (gLanguage == 1 || gLanguage == 3) {
+    if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_ITALIAN) {
         m4aSongNumStart(SONG_VO_SR_SUMMON00);
     } else {
         m4aSongNumStart(SONG_VO_SR_SUMMON03);
@@ -2191,7 +2191,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
 
     body = &work->body;
 #ifdef VERSION_EU
-    if (gLanguage == 0) {
+    if (gLanguage == LANGUAGE_ENGLISH) {
         m4aSongNumStart(SONG_VO_SR_SUMMON09);
     } else {
         m4aSongNumStart(SONG_VO_SR_SUMMON00);

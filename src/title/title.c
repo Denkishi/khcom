@@ -146,23 +146,23 @@ void task_title_obj_0(TitleObjWork* work) {
 #ifdef VERSION_EU
     work->sprites[0].palette = LoadObjPalette(gUnk_0984A718, 0x20);
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_09750AF8, 0x3C0);
         work->sprites[0].gfx = gUnkEu_09F81C54[0];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_09750EE4, 0x3C0);
         work->sprites[0].gfx = gUnkEu_09F81C5C[0];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_09751ADE, 0x400);
         work->sprites[0].gfx = gUnkEu_09F81C74[0];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_097516F8, 0x3C0);
         work->sprites[0].gfx = gUnkEu_09F81C6C[0];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_097512CA, 0x400);
         work->sprites[0].gfx = gUnkEu_09F81C64[0];
         break;
@@ -178,7 +178,7 @@ void task_title_obj_0(TitleObjWork* work) {
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
-        if (gLanguage == 4 || gLanguage == 2) {
+        if (gLanguage == LANGUAGE_SPANISH || gLanguage == LANGUAGE_GERMAN) {
             work->sprites[0].x = 0xB500;
         } else {
             work->sprites[0].x = 0xBA00;
@@ -193,19 +193,19 @@ void task_title_obj_0(TitleObjWork* work) {
     }
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_0973F402, 0x700);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_0973FC6A, 0x7A0);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_097415E8, 0x800);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_09740D62, 0x700);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_09740536, 0x700);
         break;
     case 5:
@@ -221,19 +221,19 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[1].y = 0xA0;
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         AnimInit(&work->anim, gUnkEu_09F81A1C, gUnkEu_09F81A08);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         AnimInit(&work->anim, gUnkEu_09F81A34, gUnkEu_09F81A20);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         AnimInit(&work->anim, gUnkEu_09F81A7C, gUnkEu_09F81A68);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         AnimInit(&work->anim, gUnkEu_09F81A64, gUnkEu_09F81A50);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         AnimInit(&work->anim, gUnkEu_09F81A4C, gUnkEu_09F81A38);
         break;
     case 5:
@@ -334,19 +334,19 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     }
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->tiles = LoadObjTiles(gUnkEu_09748BA6, 0x1600);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->tiles = LoadObjTiles(gUnkEu_0974A284, 0xFA0);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->tiles = LoadObjTiles(gUnkEu_0974D47A, 0xEE0);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->tiles = LoadObjTiles(gUnkEu_0974C504, 0xEA0);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->tiles = LoadObjTiles(gUnkEu_0974B306, 0x1120);
         break;
     case 5:
@@ -365,19 +365,19 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #ifdef VERSION_EU
     work->tiles2[0] = LoadObjTiles(gUnkEu_0973F058, 0x280);
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->tiles2[1] = LoadObjTiles(gUnkEu_09741E9A, 0xB20);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->tiles2[1] = LoadObjTiles(gUnkEu_09742A74, 0xCE0);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->tiles2[1] = LoadObjTiles(gUnkEu_0974507E, 0xA60);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->tiles2[1] = LoadObjTiles(gUnkEu_097445AC, 0xA20);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->tiles2[1] = LoadObjTiles(gUnkEu_09743812, 0xCE0);
         break;
     case 5:
@@ -410,19 +410,19 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     work->gfx[0] = AnimGetGfx(&work->anim);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->gfx[1] = gUnkEu_09F81AF0[work->choice[0]];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->gfx[1] = gUnkEu_09F81AD4[work->choice[0]];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->gfx[1] = gUnkEu_09F81AB8[work->choice[0]];
         break;
     case 5:
@@ -617,19 +617,19 @@ void task_title_menu_2(TitleMenuWork* work) {
     work->gfx[0] = AnimUpdate(&work->anim);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         work->gfx[1] = gUnkEu_09F81AF0[work->choice[0]];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->gfx[1] = gUnkEu_09F81AD4[work->choice[0]];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->gfx[1] = gUnkEu_09F81AB8[work->choice[0]];
         break;
     case 5:
@@ -677,19 +677,19 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             work->tiles = LoadObjTiles(gUnkEu_0974E3CC, 0x840);
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             work->tiles = LoadObjTiles(gUnkEu_0974EC7C, 0x740);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             work->tiles = LoadObjTiles(gUnkEu_0975038C, 0x740);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             work->tiles = LoadObjTiles(gUnkEu_0974FBDC, 0x740);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             work->tiles = LoadObjTiles(gUnkEu_0974F42C, 0x740);
             break;
         case 5:
@@ -703,19 +703,19 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             work->tiles = LoadObjTiles(gUnkEu_097462F2, 0x940);
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             work->tiles = LoadObjTiles(gUnkEu_09746CA4, 0x740);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             work->tiles = LoadObjTiles(gUnkEu_097483B4, 0x740);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             work->tiles = LoadObjTiles(gUnkEu_09747C04, 0x740);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             work->tiles = LoadObjTiles(gUnkEu_09747454, 0x740);
             break;
         case 5:

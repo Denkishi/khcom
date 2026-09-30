@@ -29,23 +29,23 @@ void eu_08009CD0(s32 arg) {
     SaveLoadHeader();
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         gLangWork->cursor = 0;
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         gLangWork->cursor = 1;
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         gLangWork->cursor = 2;
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         gLangWork->cursor = 3;
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         gLangWork->cursor = 4;
         break;
     default:
-        gLanguage = 0;
+        gLanguage = LANGUAGE_ENGLISH;
         gLangWork->cursor = 0;
         break;
     }
@@ -91,22 +91,22 @@ void eu_08009E10(void) {
         if (gLangWork->timer == 0) {
             switch (gLangWork->cursor) {
             case 0:
-                gLanguage = 0;
+                gLanguage = LANGUAGE_ENGLISH;
                 break;
             case 1:
-                gLanguage = 3;
+                gLanguage = LANGUAGE_ITALIAN;
                 break;
             case 2:
-                gLanguage = 1;
+                gLanguage = LANGUAGE_FRENCH;
                 break;
             case 3:
-                gLanguage = 4;
+                gLanguage = LANGUAGE_SPANISH;
                 break;
             case 4:
-                gLanguage = 2;
+                gLanguage = LANGUAGE_GERMAN;
                 break;
             default:
-                gLanguage = 0;
+                gLanguage = LANGUAGE_ENGLISH;
                 break;
             }
 

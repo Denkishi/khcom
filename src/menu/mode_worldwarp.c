@@ -264,35 +264,35 @@ void WorldWarpHandleInput(void) {
     if (sWorldWarpCursor != prev) {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
             } else {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
             } else {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
             } else {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
             } else {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
             }
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
@@ -321,27 +321,27 @@ void WorldWarpDraw(void) {
     u8* tile2;
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         tile0 = gUnkEu_099AABA4;
         tile1 = gUnkEu_099AABBA;
         tile2 = gUnkEu_099AABEE;
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         tile0 = gUnkEu_099AB990;
         tile1 = gUnkEu_099AB9A6;
         tile2 = gUnkEu_099AB9DA;
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         tile0 = gUnkEu_099ABF18;
         tile1 = gUnkEu_099ABF2E;
         tile2 = gUnkEu_099ABF62;
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         tile0 = gUnkEu_099AC3E0;
         tile1 = gUnkEu_099AC3F6;
         tile2 = gUnkEu_099AC42A;
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         tile0 = gUnkEu_099AC968;
         tile1 = gUnkEu_099AC97E;
@@ -473,31 +473,31 @@ void mode_worldwarp_0(void) {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_09A4FBC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_09A50BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_09A51BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_09A52BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }
     } else {
         switch (gLanguage) {
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_09A4F3C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_09A503C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_09A513C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_09A523C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         }
@@ -558,7 +558,7 @@ void mode_worldwarp_0(void) {
 
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
@@ -567,7 +567,7 @@ void mode_worldwarp_0(void) {
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A56780, (u8*)GetBgCharBase(0) + 0x120);
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
@@ -576,7 +576,7 @@ void mode_worldwarp_0(void) {
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A57480, (u8*)GetBgCharBase(0) + 0x120);
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
@@ -585,7 +585,7 @@ void mode_worldwarp_0(void) {
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58180, (u8*)GetBgCharBase(0) + 0x120);
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
@@ -594,7 +594,7 @@ void mode_worldwarp_0(void) {
             WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
         }
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58E80, (u8*)GetBgCharBase(0) + 0x120);
@@ -617,19 +617,19 @@ void mode_worldwarp_0(void) {
     sWorldWarpBarPalette = LoadObjPalette(gUnk_09A3D57C, 32);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AAC2C, 0x500);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABA18, 0x500);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABFA0, 0x440);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC468, 0x500);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC9F0, 0x500);
         break;

@@ -299,21 +299,21 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                 LoadBgTiles(1, gUnk_093FF8F8, bgSize);
 #ifdef VERSION_EU
                 switch (gLanguage) {
-                case 0:
+                case LANGUAGE_ENGLISH:
                     break;
-                case 1:
+                case LANGUAGE_FRENCH:
                     RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                     break;
-                case 2:
+                case LANGUAGE_GERMAN:
                     RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                     break;
-                case 3:
+                case LANGUAGE_ITALIAN:
                     RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                     break;
-                case 4:
+                case LANGUAGE_SPANISH:
                     RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                     break;
@@ -333,21 +333,21 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     LoadBgTiles(0, gUnk_093FF8F8, bgSize);
 #ifdef VERSION_EU
                     switch (gLanguage) {
-                    case 0:
+                    case LANGUAGE_ENGLISH:
                         break;
-                    case 1:
+                    case LANGUAGE_FRENCH:
                         RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
                         break;
-                    case 2:
+                    case LANGUAGE_GERMAN:
                         RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
                         break;
-                    case 3:
+                    case LANGUAGE_ITALIAN:
                         RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
                         break;
-                    case 4:
+                    case LANGUAGE_SPANISH:
                         RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
                         break;
@@ -365,21 +365,21 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     LoadBgTiles(1, gUnk_093FF8F8, bgSize);
 #ifdef VERSION_EU
                     switch (gLanguage) {
-                    case 0:
+                    case LANGUAGE_ENGLISH:
                         break;
-                    case 1:
+                    case LANGUAGE_FRENCH:
                         RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                         break;
-                    case 2:
+                    case LANGUAGE_GERMAN:
                         RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                         break;
-                    case 3:
+                    case LANGUAGE_ITALIAN:
                         RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                         break;
-                    case 4:
+                    case LANGUAGE_SPANISH:
                         RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
                         break;
@@ -413,7 +413,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
                     UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
@@ -432,7 +432,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
                     UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
@@ -449,19 +449,19 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             }
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 w->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
                 w->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 w->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
                 w->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
                 break;
             default:
@@ -1031,7 +1031,7 @@ void Level_Up_2(LevelUpWork* w) {
                        w->unk_000[6], w->unk_000[7], 0, 0, 50);
             if (w->unk_000[0] != NULL) {
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     DrawSprite(w->x4[0], w->y4[0], gUnk_09EEA2BC[0], w->unk_000[0], w->unk_000[4], 0, 0, 50);
 #ifdef VERSION_EU
@@ -1042,7 +1042,7 @@ void Level_Up_2(LevelUpWork* w) {
             }
             if (w->unk_000[1] != NULL) {
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     DrawSprite(w->x4[1], w->y4[1], gUnk_09EEA2BC[1], w->unk_000[1], w->unk_000[4], 0, 0, 50);
 #ifdef VERSION_EU
@@ -1053,7 +1053,7 @@ void Level_Up_2(LevelUpWork* w) {
             }
             if (w->unk_000[2] != NULL) {
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     DrawSprite(w->x4[2], w->y4[2], gUnk_09EEA2BC[2], w->unk_000[2], w->unk_000[4], 0, 0, 50);
 #ifdef VERSION_EU
@@ -1104,7 +1104,7 @@ void Level_Up_2(LevelUpWork* w) {
                         DrawTextSlots(w->x5[i] + 2, w->y5[i] + 15, w->textSlots[i + 3], w->palette2, 40, w->textSlotCounts[i + 3]);
 #endif
 #ifdef VERSION_EU
-                        if (gLanguage != 3) {
+                        if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                             DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2BC[i], w->unk_000[i], w->unk_000[4], 0, 0, 50);
 #ifdef VERSION_EU
@@ -1378,7 +1378,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
                     UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
@@ -1397,7 +1397,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
                 w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 #ifdef VERSION_EU
-                if (gLanguage != 3) {
+                if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
                     UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
                     UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
@@ -1414,19 +1414,19 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             }
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 w->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
                 w->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 w->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
                 w->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
                 break;
             default:
@@ -1788,19 +1788,19 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     TrackLevelUpEffectTarget(w);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         w->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         w->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         w->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
         break;
     default:

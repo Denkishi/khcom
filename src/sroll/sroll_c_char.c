@@ -11,7 +11,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
 
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
 #endif
     if (kind == 0) {
 #ifdef VERSION_JP
@@ -42,7 +42,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
     }
 #ifdef VERSION_EU
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         if (kind == 0) {
             w->tiles = LoadObjTiles(gUnkEu_09CEF9E8, 168 * 32);
             w->palette = LoadObjPalette(gUnk_09D6CF54, 224);
@@ -63,7 +63,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
             }
         }
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         if (kind == 0) {
             w->tiles = LoadObjTiles(gUnkEu_09CF3FEE, 167 * 32);
             w->palette = LoadObjPalette(gUnk_09D6CF54, 224);
@@ -84,7 +84,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
             }
         }
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         if (kind == 0) {
             w->tiles = LoadObjTiles(gUnkEu_09CF86A2, 142 * 32);
             w->palette = LoadObjPalette(gUnk_09D6CF54, 224);
@@ -105,7 +105,7 @@ void task_sroll_c_char_0(SrollCCharWork* w, s32 kind) {
             }
         }
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         if (kind == 0) {
             w->tiles = LoadObjTiles(gUnkEu_09CFCB38, 188 * 32);

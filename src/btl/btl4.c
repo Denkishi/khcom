@@ -13,8 +13,8 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 
     switch (gLanguage) {
-    case 0:
-    case 1:
+    case LANGUAGE_ENGLISH:
+    case LANGUAGE_FRENCH:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B4AC46);
 
         switch (src->number) {
@@ -51,7 +51,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             break;
         }
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B52782);
 
         switch (src->number) {
@@ -88,7 +88,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             break;
         }
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B533BE);
 
         switch (src->number) {
@@ -125,7 +125,7 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
             break;
         }
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         work->tiles = AllocObjTiles(0x200, gUnkEu_08B53FFA);
 
@@ -338,19 +338,19 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         BtlExpSetNumber(work, gGameState.progression.level);
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             work->gfx = gUnkEu_08B55C58;
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             work->gfx = gUnkEu_08B55CFE;
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             work->gfx = gUnkEu_08B55D18;
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             work->gfx = gUnkEu_08B55D32;
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             work->gfx = gUnkEu_08B55D66;
             break;
@@ -370,19 +370,19 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             BtlExpSetNumber(work, work->gainedExp);
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 work->gfx = gUnk_08B25E54;
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 work->gfx = gUnk_08B25E54;
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
                 work->gfx = gUnk_08B25E54;
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 work->gfx = gUnkEu_08B55D4C;
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
             default:
                 work->gfx = gUnkEu_08B55D80;
                 break;
@@ -408,19 +408,19 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 #ifdef VERSION_EU
                 switch (gLanguage) {
-                case 0:
+                case LANGUAGE_ENGLISH:
                     work->gfx = gUnk_08B25E5E;
                     break;
-                case 1:
+                case LANGUAGE_FRENCH:
                     work->gfx = gUnkEu_08B55D08;
                     break;
-                case 4:
+                case LANGUAGE_SPANISH:
                     work->gfx = gUnkEu_08B55D22;
                     break;
-                case 3:
+                case LANGUAGE_ITALIAN:
                     work->gfx = gUnkEu_08B55D3C;
                     break;
-                case 2:
+                case LANGUAGE_GERMAN:
                 default:
                     work->gfx = gUnkEu_08B55D70;
                     break;
@@ -444,19 +444,19 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 #ifdef VERSION_EU
                 switch (gLanguage) {
-                case 0:
+                case LANGUAGE_ENGLISH:
                     work->gfx = gUnk_08B25E5E;
                     break;
-                case 1:
+                case LANGUAGE_FRENCH:
                     work->gfx = gUnkEu_08B55D08;
                     break;
-                case 4:
+                case LANGUAGE_SPANISH:
                     work->gfx = gUnkEu_08B55D22;
                     break;
-                case 3:
+                case LANGUAGE_ITALIAN:
                     work->gfx = gUnkEu_08B55D3C;
                     break;
-                case 2:
+                case LANGUAGE_GERMAN:
                 default:
                     work->gfx = gUnkEu_08B55D70;
                     break;

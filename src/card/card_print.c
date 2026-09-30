@@ -84,23 +84,23 @@ void mode_sio_battle_0(s32 a) {
     sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EDAAA, 0x600);
         sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EE0E2, 0x600);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
         sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
         sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
         sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
         sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
@@ -141,23 +141,23 @@ void mode_sio_battle_0(s32 a) {
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
 
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
@@ -176,23 +176,23 @@ void mode_sio_battle_0(s32 a) {
         w->cursor = 0;
 
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
@@ -213,23 +213,23 @@ void mode_sio_battle_0(s32 a) {
         gSioBattleFileLoaded = 1;
 
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
@@ -313,23 +313,23 @@ void mode_sio_battle_1(void) {
 
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB38[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB44[sSioBattleWork->cursor];
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
             sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];

@@ -203,16 +203,16 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* w, void* a) {
     LoadBgTiles(3, gUnk_09402F78, 0x5400);
 
     switch (gLanguage) {
-    case 1:
+    case LANGUAGE_FRENCH:
         RequestDma3Copy(gUnkEu_094E20E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         RequestDma3Copy(gUnkEu_094E74E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         RequestDma3Copy(gUnkEu_094E58E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         RequestDma3Copy(gUnkEu_094E3CE4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
     }

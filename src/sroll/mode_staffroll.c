@@ -4034,19 +4034,19 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
         if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 LoadBgMap(1, gUnkEu_09DD69A0, 0x800);
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 LoadBgMap(1, gUnkEu_09DD71A0, 0x800);
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
                 LoadBgMap(1, gUnkEu_09DD79A0, 0x800);
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 LoadBgMap(1, gUnkEu_09DD81A0, 0x800);
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
             default:
                 LoadBgMap(1, gUnkEu_09DD89A0, 0x800);
                 break;
@@ -4061,19 +4061,19 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
         } else {
 #ifdef VERSION_EU
             switch (gLanguage) {
-            case 0:
+            case LANGUAGE_ENGLISH:
                 LoadBgMap(1, gUnk_09D68274, 0x800);
                 break;
-            case 1:
+            case LANGUAGE_FRENCH:
                 LoadBgMap(1, gUnk_09D68A74, 0x800);
                 break;
-            case 4:
+            case LANGUAGE_SPANISH:
                 LoadBgMap(1, gUnkEu_09DD51A0, 0x800);
                 break;
-            case 3:
+            case LANGUAGE_ITALIAN:
                 LoadBgMap(1, gUnkEu_09DD59A0, 0x800);
                 break;
-            case 2:
+            case LANGUAGE_GERMAN:
             default:
                 LoadBgMap(1, gUnkEu_09DD61A0, 0x800);
                 break;

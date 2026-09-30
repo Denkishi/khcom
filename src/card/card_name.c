@@ -77,9 +77,9 @@ void CardName_0(CardNameWork* w) {
 #endif
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
-    case 2:
-    case 3:
+    case LANGUAGE_ENGLISH:
+    case LANGUAGE_GERMAN:
+    case LANGUAGE_ITALIAN:
         w->textSlotCount3 = 0;
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
         w->nameX = v;
@@ -88,7 +88,7 @@ void CardName_0(CardNameWork* w) {
         v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
         w->messageX = v;
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, w->textSlots3);
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
         w->nameX = v;
@@ -97,7 +97,7 @@ void CardName_0(CardNameWork* w) {
         v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
         w->messageX = v;
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF64D, w->textSlots3);
         v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
         w->nameX = v;

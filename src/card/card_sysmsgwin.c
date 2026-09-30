@@ -508,17 +508,17 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
     if (w->nextText != NULL) {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         default:
@@ -531,17 +531,17 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
-        case 1:
+        case LANGUAGE_ENGLISH:
+        case LANGUAGE_FRENCH:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
             break;
         default:

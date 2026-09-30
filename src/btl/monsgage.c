@@ -11,15 +11,15 @@ void* eu_0805E924(const void* strings) {
     void* const* s = strings;
 
     switch (gLanguage) {
-    case 3:
+    case LANGUAGE_ITALIAN:
         return s[3];
-    case 1:
+    case LANGUAGE_FRENCH:
         return s[1];
-    case 4:
+    case LANGUAGE_SPANISH:
         return s[4];
-    case 2:
+    case LANGUAGE_GERMAN:
         return s[2];
-    case 0:
+    case LANGUAGE_ENGLISH:
     default:
         return s[0];
     }
@@ -29,15 +29,15 @@ void* eu_0805E968(void* text) {
     void** s = text;
 
     switch (gLanguage) {
-    case 3:
+    case LANGUAGE_ITALIAN:
         return s[3];
-    case 1:
+    case LANGUAGE_FRENCH:
         return s[1];
-    case 4:
+    case LANGUAGE_SPANISH:
         return s[4];
-    case 2:
+    case LANGUAGE_GERMAN:
         return s[2];
-    case 0:
+    case LANGUAGE_ENGLISH:
     default:
         return s[0];
     }
@@ -47,15 +47,15 @@ s32 eu_0805E9AC(void* text) {
     u16* s = text;
 
     switch (gLanguage) {
-    case 3:
+    case LANGUAGE_ITALIAN:
         return s[13];
-    case 1:
+    case LANGUAGE_FRENCH:
         return s[11];
-    case 4:
+    case LANGUAGE_SPANISH:
         return s[14];
-    case 2:
+    case LANGUAGE_GERMAN:
         return s[12];
-    case 0:
+    case LANGUAGE_ENGLISH:
     default:
         return s[10];
     }

@@ -220,7 +220,7 @@ void mode_sio_btl_connect_1(void) {
         ModeRequest(&gModeSioBtlOption, 0);
     }
     width = eu_0806629C(gSioBtlConnectWork->textSlots, gSioBtlConnectWork->textSlotCount);
-    if (gLanguage == 1) {
+    if (gLanguage == LANGUAGE_FRENCH) {
         x = 120 - (width >> 1);
         DrawTextSlots(x, 68, gSioBtlConnectWork->textSlots, gSioBtlConnectWork->palette, 20, gSioBtlConnectWork->textSlotCount);
     } else {
@@ -322,23 +322,23 @@ void SioBtlOptionLoadBg(void) {
     RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(0) + 0x2000, 0x800);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         LoadBgMap(0, gUnk_096F6C64, 0x800);
         LoadBgMap(1, gUnk_096F7464, 0x800);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         LoadBgMap(0, gUnkEu_096C298C, 0x800);
         LoadBgMap(1, gUnkEu_096C498C, 0x800);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         LoadBgMap(0, gUnkEu_096C198C, 0x800);
         LoadBgMap(1, gUnkEu_096C398C, 0x800);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         LoadBgMap(0, gUnkEu_096C218C, 0x800);
         LoadBgMap(1, gUnkEu_096C418C, 0x800);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         LoadBgMap(0, gUnkEu_096C318C, 0x800);
         LoadBgMap(1, gUnkEu_096C518C, 0x800);
@@ -399,23 +399,23 @@ void SioBtlOptionInitObjs(void) {
 #ifdef VERSION_EU
     gSioBtlOptionWork->palette = LoadObjPalette(gUnk_096FBD24, 32);
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F18BE, 0xC00);
         gSioBtlOptionWork->gfx = gUnkEu_09F7EBB0[0];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F3D12, 0xC00);
         gSioBtlOptionWork->gfx = gUnkEu_09F7EBC8[0];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F24DA, 0xC00);
         gSioBtlOptionWork->gfx = gUnkEu_09F7EBB8[0];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F30F6, 0xC00);
         gSioBtlOptionWork->gfx = gUnkEu_09F7EBC0[0];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         gSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F492E, 0xC00);
         gSioBtlOptionWork->gfx = gUnkEu_09F7EBD0[0];
@@ -1882,19 +1882,19 @@ void SioBtlCardgetLoadBg(void) {
     LoadBgPalette(1, gUnk_096FBAC4, 0x200);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         LoadBgMap(1, gUnk_096F7C64, 0x800);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         LoadBgMap(1, gUnkEu_096C698C, 0x800);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         LoadBgMap(1, gUnkEu_096C598C, 0x800);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         LoadBgMap(1, gUnkEu_096C618C, 0x800);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         LoadBgMap(1, gUnkEu_096C718C, 0x800);
         break;
@@ -2109,31 +2109,31 @@ void SioBtlCardgetLoad1PWin(void) {
     gSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBDE4, 32);
     gSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBE04, 32);
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095ECDD8, 0x680);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EB28[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095ED472, 0x600);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EB30[0];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F5550, 0x640);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBD8[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F5BB0, 0x580);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBE0[0];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F6150, 0x640);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBE8[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F67B0, 0x580);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBF0[0];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F6D50, 0x640);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBF8[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F73AA, 0x600);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EC00[0];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F79D2, 0x5C0);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC08[0];
@@ -2169,31 +2169,31 @@ void SioBtlCardgetLoad2PWin(void) {
     gSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBE04, 32);
     gSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBDE4, 32);
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095ED472, 0x600);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EB30[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095ECDD8, 0x680);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EB28[0];
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F5BB0, 0x580);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBE0[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F5550, 0x640);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBD8[0];
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F67B0, 0x580);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBF0[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F6150, 0x640);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBE8[0];
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F73AA, 0x600);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC00[0];
         gSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F6D50, 0x640);
         gSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBF8[0];
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         gSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F7FAE, 0x600);
         gSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC10[0];
@@ -3312,7 +3312,7 @@ void mode_sioError_0(s32 arg) {
 #ifdef VERSION_EU
     LoadBgPalette(0, gCard00Palette, 32);
     LoadBgTiles(0, gUnk_0950E2F8, 0x140);
-    if (gLanguage == 1 || gLanguage == 4) {
+    if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_SPANISH) {
         LoadBgMap(0, gUnkEu_096C798C, 0x800);
         SetBgScroll(0, 0xFFE9, 0xFFCD);
     } else {

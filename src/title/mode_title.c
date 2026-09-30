@@ -101,17 +101,17 @@ void TitleShowLogo(u16 a) {
 void TitleFinishIntro(void) {
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
-    case 1:
-    case 3:
-    case 4:
+    case LANGUAGE_ENGLISH:
+    case LANGUAGE_FRENCH:
+    case LANGUAGE_ITALIAN:
+    case LANGUAGE_SPANISH:
     case 5:
     case 6:
 #endif
         LoadBgMap(0, gUnk_0983F398, 0x800);
 #ifdef VERSION_EU
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         LoadBgMap(0, gUnkEu_09814E40, 0x800);
         break;
     }

@@ -329,7 +329,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
 
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
 #endif
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnk_09A020FC;
@@ -338,28 +338,28 @@ void WorldInspectLoadFloorTiles(s16 index) {
         }
 #ifdef VERSION_EU
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A30C00;
         } else {
             src = gUnkEu_09A34400;
         }
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A31A00;
         } else {
             src = gUnkEu_09A35200;
         }
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A32800;
         } else {
             src = gUnkEu_09A38C00;
         }
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             src = gUnkEu_09A33600;
@@ -575,27 +575,27 @@ void WorldInspectDraw(void) {
     void* third;
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         first = gUnkEu_099A421C;
         second = gUnkEu_099A4238;
         third = gUnkEu_099A426C;
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         first = gUnkEu_099A4C4C;
         second = gUnkEu_099A4C68;
         third = gUnkEu_099A4C9C;
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         first = gUnkEu_099A511C;
         second = gUnkEu_099A5138;
         third = gUnkEu_099A516C;
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         first = gUnkEu_099A55AC;
         second = gUnkEu_099A55C8;
         third = gUnkEu_099A55FC;
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         first = gUnkEu_099A5A3C;
         second = gUnkEu_099A5A58;
@@ -776,31 +776,31 @@ void mode_worldinspect_0(void) {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_09A2D440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_09A2E440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_09A2F440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_09A30440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }
     } else {
         switch (gLanguage) {
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_09A2CC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_09A2DC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_09A2EC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_09A2FC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         }
@@ -880,19 +880,19 @@ void mode_worldinspect_0(void) {
     sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 0x20);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         sWorldInspectBarTiles = LoadObjTiles(gUnk_0999CFC6, 0x400);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A4CDA, 0x440);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A51AA, 0x400);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A563A, 0x400);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
     default:
         sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A5ACA, 0x440);
         break;

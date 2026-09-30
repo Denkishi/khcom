@@ -141,7 +141,7 @@ void InitSystem(void) {
     gFrameSyncFlags = 0;
     gVBlankHandlerOverride = 0;
 #ifdef VERSION_EU
-    gLanguage = 0;
+    gLanguage = LANGUAGE_ENGLISH;
 #endif
     REG_IME = 0;
 #ifdef VERSION_EU

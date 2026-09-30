@@ -1031,19 +1031,19 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->gfx = AnimGetGfx(&w->anim);
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 1:
+    case LANGUAGE_FRENCH:
         w->tiles = LoadObjTiles(gUnkEu_0916292A, 0x340);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         w->tiles = LoadObjTiles(gUnkEu_091633A4, 0x3C0);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         w->tiles = LoadObjTiles(gUnkEu_09162FB8, 0x3C0);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->tiles = LoadObjTiles(gUnkEu_09162C8C, 0x300);
         break;
-    case 0:
+    case LANGUAGE_ENGLISH:
         w->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
         break;
     default:

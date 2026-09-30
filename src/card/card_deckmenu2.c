@@ -1196,19 +1196,19 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a) {
     case 3:
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             RequestDma3Copy(gUnkEu_094E04E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_094E20E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_094E74E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_094E58E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_094E3CE4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         }
@@ -2660,19 +2660,19 @@ u8 UpdateDeckMenuCommands(DeckMenuWork* w, void* a) {
     }
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         ApproachValueHalf(&w->x, 0x6600);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         ApproachValueHalf(&w->x, 0x6200);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         ApproachValueHalf(&w->x, 0x5E00);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         ApproachValueHalf(&w->x, 0x6200);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         ApproachValueHalf(&w->x, 0x5E00);
         break;
     default:
@@ -6438,18 +6438,18 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
         RequestDma3Copy(gUnkJp_093D1694, (u8*)GetBgCharBase(3) + 0x6000, 0x1000);
 #elif defined(VERSION_EU)
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_094F03A4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_094F1BA4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_094F13A4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_094F0BA4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         }
@@ -6529,9 +6529,9 @@ u8 func_jp_0808F638(DeckMenuWork* w, void* a) {
 #ifdef VERSION_EU
     if (w->keyCursorSteps != 0) {
         if (w->onEndKey == 1) {
-            if (gLanguage == 2) {
+            if (gLanguage == LANGUAGE_GERMAN) {
                 w->x9 = 0xC800;
-            } else if (gLanguage == 3) {
+            } else if (gLanguage == LANGUAGE_ITALIAN) {
                 w->x9 = 0xD100;
             } else {
                 w->x9 = 0xD300;
@@ -6733,9 +6733,9 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
         w->cursor.parts.x = 14;
 #ifdef VERSION_EU
         w->cursor.parts.y = bottom;
-        if (gLanguage == 2) {
+        if (gLanguage == LANGUAGE_GERMAN) {
             w->x9 = 0xC800;
-        } else if (gLanguage == 3) {
+        } else if (gLanguage == LANGUAGE_ITALIAN) {
             w->x9 = 0xD100;
         } else {
             w->x9 = 0xD300;
@@ -6791,9 +6791,9 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
     if (w->keyCursorSteps != 0) {
 #ifdef VERSION_EU
         if (w->cursor.parts.x == 14 &&w->cursor.parts.y == bottom) {
-            if (gLanguage == 2) {
+            if (gLanguage == LANGUAGE_GERMAN) {
                 ApproachValue(&w->x9, 0xC800, w->keyCursorSteps);
-            } else if (gLanguage == 3) {
+            } else if (gLanguage == LANGUAGE_ITALIAN) {
                 ApproachValue(&w->x9, 0xD100, w->keyCursorSteps);
             } else {
                 ApproachValue(&w->x9, 0xD300, w->keyCursorSteps);

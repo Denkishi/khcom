@@ -40,19 +40,19 @@ void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->target = a->target;
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         w->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         w->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         w->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
         break;
     default:

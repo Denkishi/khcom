@@ -79,7 +79,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     }
     w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
 #ifdef VERSION_EU
-    if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == 4) {
+    if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == LANGUAGE_SPANISH) {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), w->textSlots3);
     } else {
         w->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnk_0815A0A0), w->textSlots3);
@@ -143,29 +143,29 @@ void Lvup_msg_2(LvupMsgWork* w) {
     w->x3 = w->x2 + w->textSlotCount2 * 0xA00;
 #elif defined(VERSION_EU)
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
                       w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
                       w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         w->x2 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x3 = w->x2 + ((GetTextSlotsWidth(w->textSlots2, w->textSlotCount2) + 3) << 8);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,
                       w->textSlots4, w->textPalette, 40, w->textSlotCount4);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->x3 = w->x + ((GetTextSlotsWidth(w->textSlots, w->textSlotCount) + 3) << 8);
         w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
         DrawTextSlots((w->x2 >> 8) + GetTextSlotsWidth(w->textSlots2, w->textSlotCount2), w->y3 >> 8,

@@ -251,22 +251,22 @@ u8 MapSelect_1(MapSelectWork* w, void* a) {
     LoadBgTiles(1, gUnk_09508098, 0x2020);
 
     switch (gLanguage) {
-    case 0:
+    case LANGUAGE_ENGLISH:
         w->tiles3 = LoadObjTiles(gUnk_093F7172, 0x400);
         break;
-    case 1:
+    case LANGUAGE_FRENCH:
         w->tiles3 = LoadObjTiles(gUnkEu_094C6C22, 0x400);
         RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         w->tiles3 = LoadObjTiles(gUnkEu_094C789A, 0x400);
         RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         w->tiles3 = LoadObjTiles(gUnkEu_094C7472, 0x400);
         RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         w->tiles3 = LoadObjTiles(gUnkEu_094C704A, 0x400);
         RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
@@ -379,18 +379,18 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a) {
         LoadBgTiles(1, &gUnk_09508098[0x2020], 0x23C0);
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
         }
@@ -462,18 +462,18 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
         LoadBgTiles(1, gUnk_09508098, 0x2020);
 
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
             RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         }
@@ -529,18 +529,18 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
                         LoadBgTiles(1, gUnk_09508098, 0x2020);
 
                         switch (gLanguage) {
-                        case 0:
+                        case LANGUAGE_ENGLISH:
                             break;
-                        case 1:
+                        case LANGUAGE_FRENCH:
                             RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
-                        case 2:
+                        case LANGUAGE_GERMAN:
                             RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
-                        case 3:
+                        case LANGUAGE_ITALIAN:
                             RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
-                        case 4:
+                        case LANGUAGE_SPANISH:
                             RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         }

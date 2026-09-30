@@ -1489,16 +1489,16 @@ void mode_jiminy_0(void) {
 #elif defined(VERSION_EU)
     LoadBgTiles(1, gUnk_08EE4A64, 0x2F60);
     switch (gLanguage) {
-    case 1:
+    case LANGUAGE_FRENCH:
         RequestDma3Copy(gUnkEu_08EF3EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         RequestDma3Copy(gUnkEu_08EF4EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         RequestDma3Copy(gUnkEu_08EF5EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         RequestDma3Copy(gUnkEu_08EF6EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     }
@@ -1509,7 +1509,7 @@ void mode_jiminy_0(void) {
     LoadBgMap(1, gUnk_08F61B84, 0x800);
     LoadBgMap(2, gUnk_08F60B84, 0x800);
 #ifdef VERSION_EU
-    if (gLanguage == 0) {
+    if (gLanguage == LANGUAGE_ENGLISH) {
         gJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
     } else {
         gJiminyWork->tiles = LoadObjTiles(gUnkEu_08C9A5E2, 0x1780);
@@ -1816,23 +1816,23 @@ void mode_jiminy_1(void) {
             case 1:
 #ifdef VERSION_EU
                 switch (gLanguage) {
-                case 0:
+                case LANGUAGE_ENGLISH:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
-                case 1:
+                case LANGUAGE_FRENCH:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
-                case 4:
+                case LANGUAGE_SPANISH:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
-                case 3:
+                case LANGUAGE_ITALIAN:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
-                case 2:
+                case LANGUAGE_GERMAN:
                 default:
                     DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
                         gJiminyWork->tiles6, gJiminyWork->palette7, 0, SPRITE_FLAG_BLEND, 0xFFFE);
@@ -1859,7 +1859,7 @@ void mode_jiminy_1(void) {
     if (gJiminyWork->flags & JIMINY_FLAG_SHOW_TITLE) {
 #ifdef VERSION_EU
         switch (gLanguage) {
-        case 0:
+        case LANGUAGE_ENGLISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C76, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
@@ -1873,7 +1873,7 @@ void mode_jiminy_1(void) {
             DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnk_08C69C54, gJiminyWork->tiles,
                 gJiminyWork->palette, 0, 0, 1);
             break;
-        case 1:
+        case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A538, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
@@ -1887,7 +1887,7 @@ void mode_jiminy_1(void) {
             DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
                 gJiminyWork->palette, 0, 0, 1);
             break;
-        case 4:
+        case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A564, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
@@ -1901,7 +1901,7 @@ void mode_jiminy_1(void) {
             DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
                 gJiminyWork->palette, 0, 0, 1);
             break;
-        case 3:
+        case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A590, gJiminyWork->tiles,
                     gJiminyWork->palette, 0, 0, 0);
@@ -1915,7 +1915,7 @@ void mode_jiminy_1(void) {
             DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
                 gJiminyWork->palette, 0, 0, 1);
             break;
-        case 2:
+        case LANGUAGE_GERMAN:
         default:
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5C2, gJiminyWork->tiles,

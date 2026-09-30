@@ -25,19 +25,19 @@ void mode_status_0(void) {
     LoadBgTiles(3, gUnk_097FFB98, 0x2060);
 
     switch (gLanguage) {
-    case 1:
+    case LANGUAGE_FRENCH:
         RequestDma3Copy(gUnkEu_097D8300, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
-    case 2:
+    case LANGUAGE_GERMAN:
         RequestDma3Copy(gUnkEu_097DA700, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
-    case 3:
+    case LANGUAGE_ITALIAN:
         RequestDma3Copy(gUnkEu_097D9B00, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
-    case 4:
+    case LANGUAGE_SPANISH:
         RequestDma3Copy(gUnkEu_097D8F00, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
-    case 0:
+    case LANGUAGE_ENGLISH:
     default:
         break;
     }

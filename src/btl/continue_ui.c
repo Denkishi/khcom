@@ -96,15 +96,15 @@ void ContinueSora_0(ContinueWork* p) {
     p->steps = 16;
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
-    case 1:
-    case 4:
+    case LANGUAGE_ENGLISH:
+    case LANGUAGE_FRENCH:
+    case LANGUAGE_SPANISH:
     case 5:
     case 6:
         p->x = 0xBC00;
         break;
-    case 2:
-    case 3:
+    case LANGUAGE_GERMAN:
+    case LANGUAGE_ITALIAN:
         p->x = 0xC000;
         break;
     }
@@ -163,15 +163,15 @@ void ContinueRiku_0(ContinueWork* p) {
     p->steps = 16;
 #ifdef VERSION_EU
     switch (gLanguage) {
-    case 0:
-    case 1:
-    case 4:
+    case LANGUAGE_ENGLISH:
+    case LANGUAGE_FRENCH:
+    case LANGUAGE_SPANISH:
     case 5:
     case 6:
         p->x = 0xBC00;
         break;
-    case 2:
-    case 3:
+    case LANGUAGE_GERMAN:
+    case LANGUAGE_ITALIAN:
         p->x = 0xC000;
         break;
     }

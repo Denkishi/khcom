@@ -3225,11 +3225,14 @@ void UpdateCardDisplayFlip(CardDisplayWork* p) {
 
 u8 func_0807CE04(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
-    *(u16*)&p->timer =
-        *(s16*)&p->timer > 0 ? p->timer - 1 : 0;
+    if ((s16)p->timer > 0) {
+        p->timer--;
+    } else {
+        p->timer = 0;
+    }
 
-    if (*(s16*)&p->timer == 0) {
-        *(u16*)&p->timer = 0;
+    if ((s16)p->timer == 0) {
+        p->timer = 0;
         p->angle += p->unk_9E;
         p->unk_9E++;
 

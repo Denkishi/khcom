@@ -3244,11 +3244,14 @@ u8 func_08082A64(CardDisplayWork* p, void* a) {
 
 u8 func_08082AE4(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
-    *(u16*)&p->timer =
-        *(s16*)&p->timer > 0 ? p->timer - 1 : 0;
+    if ((s16)p->timer > 0) {
+        p->timer--;
+    } else {
+        p->timer = 0;
+    }
 
-    if (*(s16*)&p->timer == 0) {
-        *(u16*)&p->timer = 0;
+    if ((s16)p->timer == 0) {
+        p->timer = 0;
         p->angle += p->unk_9E;
         p->unk_9E++;
 

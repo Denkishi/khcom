@@ -55,7 +55,7 @@ void HumInit(HumWork* work, const HumDef* def) {
 }
 
 void HumSubInit(HumWork* work, HumSub* sub, const HumSubDef* def) {
-    if (work->sub == 0) {
+    if (work->sub == NULL) {
         work->sub = sub;
     } else {
         work->sub2 = sub;
@@ -71,7 +71,7 @@ void HumSubInit(HumWork* work, HumSub* sub, const HumSubDef* def) {
 }
 
 void HumSubReleaseGraphics(HumSub* sub) {
-    if (sub != 0) {
+    if (sub != NULL) {
         ReleaseObjTiles(sub->tiles);
         ReleaseObjPalette(sub->palette);
     }
@@ -166,7 +166,7 @@ s32 _0800E434(HumWork* work) {
 }
 
 void HumSubUpdateAnimation(HumSub* sub) {
-    if (sub != 0) {
+    if (sub != NULL) {
         if (!(sub->flags & 2)) {
             sub->gfx = AnimUpdate(&sub->anim);
         }

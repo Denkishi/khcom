@@ -617,7 +617,7 @@ void CreateMapRoom(u8 a, UnkStruct_080DF640* p) {
     const u8* row;
     const u8* anim;
 
-    if (p == 0 && (e->flags & 1) != 0) {
+    if (p == NULL && (e->flags & 1) != 0) {
         return;
     }
 
@@ -626,7 +626,7 @@ void CreateMapRoom(u8 a, UnkStruct_080DF640* p) {
     e->flags |= 1;
     e->seed = gFrameCounter * gFrameCounter;
 
-    if (p != 0) {
+    if (p != NULL) {
         row = gUnk_0984D0CC[p->kind];
         e->cardValue = p->value;
         e->nameId = row[0];
@@ -966,7 +966,7 @@ u8 IsFldPosBlocked(FldPos* p) {
     s32 y = p->y + p->ground;
     MapCell* q = FieldCellAt(p->x, y);
 
-    if (q == 0) {
+    if (q == NULL) {
         return 1;
     }
 
@@ -1114,7 +1114,7 @@ s32 func_080DFE7C(s32 x, s32 y, s32 z) {
     y += z;
     p = FieldCellAt(x, y);
 
-    if (p == 0) {
+    if (p == NULL) {
         return 0;
     }
 

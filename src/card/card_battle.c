@@ -155,7 +155,7 @@ void ClearSoraCardRequest(void) {
 }
 
 u8 IsSoraReloadCardSelected(void) {
-    if (gSoraSelectedCard != 0 && (gSoraSelectedCard->flags & 0x100000)) {
+    if (gSoraSelectedCard != NULL && (gSoraSelectedCard->flags & 0x100000)) {
         return 1;
     }
 
@@ -164,7 +164,7 @@ u8 IsSoraReloadCardSelected(void) {
 
 void SetSoraReloadCharging(void) {
     // @bug Called before the card battle state exists (NULL write).
-    if (gSoraSelectedCard != 0) {
+    if (gSoraSelectedCard != NULL) {
         if ((gSoraSelectedCard->flags & 0x01000044) == 0x01000044) {
             gCardBattleState->soraReloadCharging = 1;
         } else {
@@ -179,7 +179,7 @@ void func_08076438(void) {
 }
 
 u8 IsSoraSelectionEmpty(void) {
-    if (gSoraSelectedCard != 0) {
+    if (gSoraSelectedCard != NULL) {
         return gSoraSelectedCard->flags & 2;
     }
 
@@ -360,7 +360,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
         n = index;
         old = index;
         c = FindNextAvailableSlot(w, slot, &n);
-        if (c != 0) {
+        if (c != NULL) {
             arg.pool = &w->cardDisplays[slot];
             arg.index = n;
             arg.listIndex = slot;
@@ -380,7 +380,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             n = 0;
         }
         c = FindNextAvailableSlot(w, slot, &n);
-        if (c != 0 && (s16)n != w->cursors[slot]) {
+        if (c != NULL && (s16)n != w->cursors[slot]) {
             arg.pool = &w->cardDisplays[slot];
             arg.index = n;
             arg.listIndex = slot;
@@ -400,7 +400,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             n = w->slotCounts[slot] - 1;
         }
         c = FindPrevAvailableSlot(w, slot, &n);
-        if (c != 0 && (s16)n != w->cursors[slot] && (s16)n != (s16)old) {
+        if (c != NULL && (s16)n != w->cursors[slot] && (s16)n != (s16)old) {
             arg.pool = &w->cardDisplays[slot];
             arg.index = n;
             arg.listIndex = slot;
@@ -473,7 +473,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             break;
     }
     p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[slot]);
-    while (p != 0) {
+    while (p != NULL) {
         // @bug A "not have" display has no slot (NULL write).
         p->args.slot->unk_06 = 0;
         p = (CardDisplayWork*)ListPoolNext(&p->node);
@@ -1047,7 +1047,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             AddPickedCardToSoraDeck(w);
         }
         if (w->reloadPending[w->listIndex] != 0) {
-            if (gSoraSelectedCard != 0) {
+            if (gSoraSelectedCard != NULL) {
                 if (gSoraSelectedCard->flags & 0x4000000) {
                     gSoraSelectedCard->flags |= 0x4000;
                     BeginSoraReloadDeal(w);
@@ -1070,7 +1070,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 TaskPoolUpdate(&gCardBattleState->tasks);
                 return 1;
             }
-        } else if (gSoraSelectedCard != 0 && (gSoraSelectedCard->flags & 0x42) == 0x42 && CountAvailableCards(w, w->listIndex) != 0) {
+        } else if (gSoraSelectedCard != NULL && (gSoraSelectedCard->flags & 0x42) == 0x42 && CountAvailableCards(w, w->listIndex) != 0) {
             w->reloadPending[w->listIndex] = 1;
             gSoraSelectedCard->command = 7;
             actor = gBtlWork->actor;
@@ -1202,7 +1202,7 @@ static void cardbattle_3(CardBattleWork* w) {
     TaskPoolDestroy(&gCardBattleState->tasks);
 
     for (i = 0; i < 4; i++) {
-        if (w->slots[i] != 0) {
+        if (w->slots[i] != NULL) {
             EwramFree(w->slots[i]);
         }
     }
@@ -1251,7 +1251,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
             gSoraSelectedCard->flags &= ~4;
             e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
-            while (e != 0) {
+            while (e != NULL) {
                 e->ringIndex++;
                 e->unk_80 = gSoraCardRingAngles[e->ringIndex];
                 e->timer = 4;
@@ -1262,7 +1262,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
             n = gSoraSelectedCard->args.index - 1;
             c = FindPrevAvailableSlot(w, w->listIndex, &n);
 
-            if (c != 0) {
+            if (c != NULL) {
                 arg.pool = &w->cardDisplays[w->listIndex];
                 arg.index = n;
                 arg.listIndex = w->listIndex;
@@ -1288,7 +1288,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
         } else {
             e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
-            while (e != 0) {
+            while (e != NULL) {
                 k = e->ringIndex;
 
                 if (k == 1) {
@@ -1305,7 +1305,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
             n = w->slotCounts[w->listIndex] - 1;
             c = FindPrevAvailableSlot(w, w->listIndex, &n);
 
-            if (c != 0 && (s16)n != a && (s16)n != b) {
+            if (c != NULL && (s16)n != a && (s16)n != b) {
                 arg.pool = &w->cardDisplays[w->listIndex];
                 arg.index = n;
                 arg.listIndex = w->listIndex;

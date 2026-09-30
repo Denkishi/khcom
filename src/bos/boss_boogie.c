@@ -541,7 +541,7 @@ void BosBoogieRemoveOtherEnemies(void) {
     BtlObj* t;
 
     t = ListPoolFirst(&gBtlWork->pool);
-    while (t != 0) {
+    while (t != NULL) {
         if (t->kind != 39) {
             t->flags |= 0x40;
             t->hitFlags = 0;

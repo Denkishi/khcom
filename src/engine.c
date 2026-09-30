@@ -107,7 +107,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
     u16 cnt;
     u16 base;
 
-    if (e == 0 || c == 0) {
+    if (e == NULL || c == NULL) {
         return 0;
     }
     p = gSpriteWork;
@@ -144,7 +144,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
 u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
-    if (e == 0 || ((ObjTiles*)obj)->src == 0) {
+    if (e == NULL || ((ObjTiles*)obj)->src == NULL) {
         return 0;
     }
     {
@@ -163,7 +163,7 @@ u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u
     return 1;
 }
 u8 DrawSprite(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
-    if (gSpriteWork->entryCount <= 127 && obj != 0) {
+    if (gSpriteWork->entryCount <= 127 && obj != NULL) {
         switch (((ObjTiles*)obj)->type) {
         case 0:
             return DrawSpriteSharedTiles((s16)x, (s16)y, c, obj, e, f, g, h);
@@ -231,11 +231,11 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
         return 0;
     }
 
-    if (src == 0) {
+    if (src == NULL) {
         return 0;
     }
     cur = ListPoolFirst(&gSpriteWork->tilePool);
-    while (cur != 0) {
+    while (cur != NULL) {
         if (cur->src == src && cur->allocated == 0) {
             cur->refCount++;
             return cur;
@@ -243,7 +243,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
         cur = ListPoolNext(&cur->node);
     }
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
-    if (node == 0) {
+    if (node == NULL) {
         return 0;
     }
     node->type = 0;
@@ -254,7 +254,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     node->allocated = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         node->index = gSpriteWork->tilePool.rangeStart;
         RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
         ListPoolActivate(&node->node, &gSpriteWork->tilePool);
@@ -269,7 +269,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -278,7 +278,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - node->index;
         } else {
             end = gSpriteWork->tilePool.rangeEnd - node->index;
@@ -314,7 +314,7 @@ void ReleaseObjTiles(void* a) {
     ObjTiles* p = a;
     ObjTiles* q;
 
-    if (p == 0) {
+    if (p == NULL) {
         return;
     }
     q = p->self;
@@ -345,7 +345,7 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
         return 0;
     }
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
-    if (node == 0) {
+    if (node == NULL) {
         return 0;
     }
     node->type = 1;
@@ -356,7 +356,7 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     node->allocated = 1;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         node->index = gSpriteWork->tilePool.rangeStart;
         ListPoolActivate(&node->node, &gSpriteWork->tilePool);
         return node;
@@ -369,7 +369,7 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -378,7 +378,7 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - node->index;
         } else {
             end = gSpriteWork->tilePool.rangeEnd - node->index;
@@ -408,18 +408,18 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
         return 0;
     }
 
-    if (src == 0) {
+    if (src == NULL) {
         return 0;
     }
 
-    for (cur = ListPoolFirst(&gSpriteWork->palettePool); cur != 0; cur = ListPoolNext(&cur->node)) {
+    for (cur = ListPoolFirst(&gSpriteWork->palettePool); cur != NULL; cur = ListPoolNext(&cur->node)) {
         if (cur->src == src) {
             cur->refCount++;
             return cur;
         }
     }
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
-    if (node == 0) {
+    if (node == NULL) {
         return 0;
     }
     node->type = 0;
@@ -428,7 +428,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     node->refCount = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->palettePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         node->index = gSpriteWork->palettePool.rangeStart;
         LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
         ListPoolActivate(&node->node, &gSpriteWork->palettePool);
@@ -443,7 +443,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -452,7 +452,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - node->index;
         } else {
             end = gSpriteWork->palettePool.rangeEnd - node->index;
@@ -482,7 +482,7 @@ void ReleaseObjPaletteRef(ObjPalette* p) {
     }
 }
 void ReleaseObjPalette(ObjPalette* p) {
-    if (p != 0 && p->self == p) {
+    if (p != NULL && p->self == p) {
         ReleaseObjPaletteRef(p);
     }
 }
@@ -723,7 +723,7 @@ void UpdateSpriteOam(void) {
                 x = 0xFFFF ^ x;
             }
             EngineObjSize(attr0, attr1, &width, &height);
-            if (affine != 0) {
+            if (affine != NULL) {
                 x += (s16)width >> 1;
                 y += (s16)height >> 1;
                 if (affine->angle != 0) {
@@ -1019,7 +1019,7 @@ void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
 ObjTiles* AllocSpriteFrameTiles(u16 a) {
     ObjTiles* t = AllocObjTiles(a, 0);
 
-    if (t != 0) {
+    if (t != NULL) {
         t->type = 2;
     }
     return t;
@@ -1031,7 +1031,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
     u16 acc;
     u16 n;
 
-    if (b != 0 && c != 0 && a->type == 2) {
+    if (b != NULL && c != NULL && a->type == 2) {
         if (a->sprite != b || a->src != c) {
             a->src = c;
             a->sprite = b;
@@ -1063,7 +1063,7 @@ ObjPalette* AllocObjPalette(u16 size) {
     s16 end;
 
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
-    if (node == 0) {
+    if (node == NULL) {
         return 0;
     }
     node->type = 2;
@@ -1072,7 +1072,7 @@ ObjPalette* AllocObjPalette(u16 size) {
     node->refCount = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->palettePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         node->index = gSpriteWork->palettePool.rangeStart;
         ListPoolActivate(&node->node, &gSpriteWork->palettePool);
         return node;
@@ -1085,7 +1085,7 @@ ObjPalette* AllocObjPalette(u16 size) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -1094,7 +1094,7 @@ ObjPalette* AllocObjPalette(u16 size) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - node->index;
         } else {
             end = gSpriteWork->palettePool.rangeEnd - node->index;
@@ -1122,7 +1122,7 @@ u8 CanAllocObjTiles(u16 n) {
     s16 end;
 
     cur = ListPoolFirst(&gSpriteWork->tilePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         return 1;
     }
     pos = gSpriteWork->tilePool.rangeStart;
@@ -1131,7 +1131,7 @@ u8 CanAllocObjTiles(u16 n) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -1140,7 +1140,7 @@ u8 CanAllocObjTiles(u16 n) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - pos;
         } else {
             end = gSpriteWork->tilePool.rangeEnd - pos;
@@ -1160,7 +1160,7 @@ u8 CanAllocObjPalette(u16 n) {
     s16 end;
 
     cur = ListPoolFirst(&gSpriteWork->palettePool);
-    if (cur == 0) {
+    if (cur == NULL) {
         return 1;
     }
     pos = gSpriteWork->palettePool.rangeStart;
@@ -1169,7 +1169,7 @@ u8 CanAllocObjPalette(u16 n) {
     }
 
     for (;;) {
-        if (cur == 0) {
+        if (cur == NULL) {
             break;
         }
         next = ListPoolNext(&cur->node);
@@ -1178,7 +1178,7 @@ u8 CanAllocObjPalette(u16 n) {
             break;
         }
 
-        if (next != 0) {
+        if (next != NULL) {
             end = next->index - pos;
         } else {
             end = gSpriteWork->palettePool.rangeEnd - pos;
@@ -2049,7 +2049,7 @@ void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
 void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
     BgEntry* e = &gBgWork->entries[bg];
 
-    if (e->map == 0) {
+    if (e->map == NULL) {
         return;
     }
     e->x = x;
@@ -2071,7 +2071,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
     void* dst;
 
     e = &gBgWork->entries[bg];
-    if (e->map == 0) {
+    if (e->map == NULL) {
         return;
     }
 
@@ -2135,7 +2135,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
 u16 GetBgMapX(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
 
-    if (e->map == 0) {
+    if (e->map == NULL) {
         return 0;
     }
     return e->x;
@@ -2144,7 +2144,7 @@ u16 GetBgMapX(s32 bg) {
 u16 GetBgMapY(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
 
-    if (e->map == 0) {
+    if (e->map == NULL) {
         return 0;
     }
     return e->y;
@@ -2359,17 +2359,17 @@ u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
         return 0;
     }
     e = &gBgWork->entries[bg];
-    if (e->decompressedMap != 0) {
+    if (e->decompressedMap != NULL) {
         return 0;
     }
     count = w * h;
     e->decompressedMap = EwramAlloc(count * sizeof(void*));
-    if (e->decompressedMap == 0) {
+    if (e->decompressedMap == NULL) {
         return 0;
     }
     for (i = 0; i < count; i++) {
         e->decompressedMap[i] = EwramAlloc(eu_08005A14(((u32**)src)[i]));
-        if (e->decompressedMap[i] == 0) {
+        if (e->decompressedMap[i] == NULL) {
             return 0;
         }
         LZ77UnCompWram(((u32**)src)[i], e->decompressedMap[i]);
@@ -2388,7 +2388,7 @@ void eu_08005ADC(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
     s32 count;
     s32 i;
-    if (e->decompressedMap != 0) {
+    if (e->decompressedMap != NULL) {
         count = e->width * e->height;
         for (i = 0; i < count; i++) {
             EwramFree(e->decompressedMap[i]);
@@ -2556,7 +2556,7 @@ void* AnimUpdate(AnimState* a) {
     AnimFrame* frames = a->frames;
     u16 index;
 
-    if (frames == 0) {
+    if (frames == NULL) {
         return 0;
     }
     a->timer++;
@@ -2580,7 +2580,7 @@ void* AnimUpdate(AnimState* a) {
 }
 
 u8 AnimIsFrameEnding(AnimState* a) {
-    if (a->frames == 0) {
+    if (a->frames == NULL) {
         return 0;
     }
 
@@ -2600,7 +2600,7 @@ u8 AnimIsFrameEnding(AnimState* a) {
 void* AnimGetGfx(AnimState* a) {
     void* result;
 
-    if (a->frames != 0) {
+    if (a->frames != NULL) {
         result = a->gfxTable[a->frames[a->frame].gfxIndex];
     } else {
         result = 0;
@@ -2710,7 +2710,7 @@ void FadeUpdate(void) {
         for (i = 0; i < 32; i++) {
             slot = &gFadeWork->slots[i];
             src = slot->src;
-            if (src == 0) {
+            if (src == NULL) {
                 continue;
             }
             if (slot->excluded != 0 && (gFadeWork->flags & 2) == 0) {

@@ -5108,13 +5108,13 @@ static s32 Square(s32 x) {
 }
 
 PcAnimStep* BosPcGetAnimStep(PcWork* work) {
-    return work->animSteps != 0 ? &work->animSteps[work->animFrame] : gBosPcIdleAnim;
+    return work->animSteps != NULL ? &work->animSteps[work->animFrame] : gBosPcIdleAnim;
 }
 
 PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
     PcAnimStep* step;
 
-    if (work->animSteps == 0) {
+    if (work->animSteps == NULL) {
         return gUnk_09A3DF34;
     }
     step = &work->animSteps[work->animFrame];
@@ -5213,7 +5213,7 @@ void BosPcDraw(PcWork* work) {
     s32 layer;
     u16* attributes;
 
-    if (work->animSteps == 0) {
+    if (work->animSteps == NULL) {
         return;
     }
     step = &work->animSteps[work->animFrame];
@@ -5312,7 +5312,7 @@ void BosPcDraw(PcWork* work) {
 u8 BosPcIsAnimDone(PcWork* work) {
     PcAnimStep* step;
 
-    if (work->animSteps != 0) {
+    if (work->animSteps != NULL) {
         step = &work->animSteps[work->animIndex];
         if (step->op != 2) {
             return 0;
@@ -5426,7 +5426,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->flt[2] = 0;
     work->flt[3] = 0;
     zero = 0;
-    if (pool == 0) {
+    if (pool == NULL) {
         work->shared.inEvent = 0;
     } else {
         work->state = 7;
@@ -5761,7 +5761,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     case 1:
         n = 0;
         for (i = 0; i <= 3; i++) {
-            if (work->flt[i] == 0) {
+            if (work->flt[i] == NULL) {
                 n++;
             } else if (BosPcFltIsSubmerged(work->flt[i]) == 1) {
                 TaskKill(&gBtlWork->taskPools[0], work->flt[i]);
@@ -5899,7 +5899,7 @@ void task_bos_pc_3(PcWork* work) {
     ReleaseObjTiles(work->tiles2[0]);
     ReleaseObjTiles(work->tiles2[1]);
     ReleaseObjPalette(work->palette);
-    if (work->palette2 != 0) {
+    if (work->palette2 != NULL) {
         ReleaseObjPalette(work->palette2);
     }
     BosPcStopPaletteCycle(work);

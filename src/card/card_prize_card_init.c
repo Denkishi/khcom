@@ -1393,7 +1393,7 @@ void CreatePrizeMapCardTask(TaskPool* pool, s32* args) {
 }
 
 void SpotLight_0(SpotlightWork* w, u8* src) {
-    if (src != 0) {
+    if (src != NULL) {
         w->endFlag = src;
     } else {
         w->endFlag = &w->ownEndFlag;
@@ -1463,15 +1463,15 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     for (i = 0; i < work->keyCount; i++) {
         InitEventKeyCard(&work->cards[i], GetEventKey((u8)i));
 
-        if (work->cards[i].sprite.palette != 0) {
+        if (work->cards[i].sprite.palette != NULL) {
             FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, 1);
         }
 
-        if (work->cards[i].sprite.palette2 != 0) {
+        if (work->cards[i].sprite.palette2 != NULL) {
             FadeSetPaletteExcluded(work->cards[i].sprite.palette2->index + 16, 1);
         }
 
-        if (work->cards[i].sprite.palette3 != 0) {
+        if (work->cards[i].sprite.palette3 != NULL) {
             FadeSetPaletteExcluded(work->cards[i].sprite.palette3->index + 16, 1);
         }
     }
@@ -1794,7 +1794,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     work->sprite.gfx = 0;
     work->sprite.palette3 = LoadObjPalette(gUnk_09618D38, 32);
 
-    if (work->sprite.tiles2 == 0) {
+    if (work->sprite.tiles2 == NULL) {
         cb = &gCardBacks[4];
         work->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
         work->sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
@@ -1831,29 +1831,29 @@ void DrawLayeredCardSpriteScaled(LayeredCardSprite* w, u16 b, s16 c, s16 d) {
 
     aff = AllocObjAffine(0, d, d, 1);
 
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         DrawSprite(w->x >> 8, c + (w->y >> 8), w->gfx, w->tiles, w->palette, aff, b, 10);
     }
 
-    if (w->tiles2 != 0) {
+    if (w->tiles2 != NULL) {
         DrawSprite(w->x >> 8, c + (w->y >> 8), w->gfx2, w->tiles2, w->palette2, aff, b, 9);
     }
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         DrawSprite(w->x >> 8, c + (w->y >> 8), w->gfx3, w->tiles3, w->palette3, aff, b, 8);
     }
 }
 
 void DrawLayeredCardSprite(LayeredCardSprite* p, u16 a) {
-    if (p->tiles != 0) {
+    if (p->tiles != NULL) {
         DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, a, 10);
     }
 
-    if (p->tiles2 != 0) {
+    if (p->tiles2 != NULL) {
         DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, 0, a, 9);
     }
 
-    if (p->tiles3 != 0) {
+    if (p->tiles3 != NULL) {
         DrawSprite(p->x >> 8, p->y >> 8, p->gfx3, p->tiles3, p->palette3, 0, a, 8);
     }
 }
@@ -1875,27 +1875,27 @@ ObjTiles* AllocKeyValueTiles(u8 a) {
 }
 
 void ReleaseLayeredCardSprite(LayeredCardSprite* p) {
-    if (p->tiles != 0) {
+    if (p->tiles != NULL) {
         ReleaseObjTiles(p->tiles);
     }
 
-    if (p->tiles2 != 0) {
+    if (p->tiles2 != NULL) {
         ReleaseObjTiles(p->tiles2);
     }
 
-    if (p->tiles3 != 0) {
+    if (p->tiles3 != NULL) {
         ReleaseObjTiles(p->tiles3);
     }
 
-    if (p->palette != 0) {
+    if (p->palette != NULL) {
         ReleaseObjPalette(p->palette);
     }
 
-    if (p->palette2 != 0) {
+    if (p->palette2 != NULL) {
         ReleaseObjPalette(p->palette2);
     }
 
-    if (p->palette3 != 0) {
+    if (p->palette3 != NULL) {
         ReleaseObjPalette(p->palette3);
     }
 }

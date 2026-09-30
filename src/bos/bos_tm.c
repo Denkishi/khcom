@@ -6,6 +6,7 @@
 #include "chara_types.h"
 #include "chara_api.h"
 #include "acgtrans.h"
+#include <stddef.h>
 
 s16 gBosTmActorZ EWRAM_COMMON(4);
 s16 gUnk_0203AB40 EWRAM_COMMON(4);
@@ -52,7 +53,7 @@ void BosTmSetArmPositions(TmWork* w) {
 void task_bos_tm_0(TmWork* w, BtlObj* arg) {
     w->flags = 0;
 
-    if (arg != 0) {
+    if (arg != NULL) {
         w->flags = 8;
     }
     TaskPoolInit(&gBosTmTaskPool, 4);

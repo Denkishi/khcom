@@ -1943,7 +1943,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode) {
     w->entryCount -= 1;
     w->gridEntryCount -= 1;
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == w->savedCol && node->args.row == w->savedRow) {
             break;
         }
@@ -1953,7 +1953,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode) {
 
     p = ListPoolNext(&node->node);
 
-    while (p != 0) {
+    while (p != NULL) {
         p->args.col--;
 
         if (p->args.col < 0) {
@@ -3796,11 +3796,11 @@ static void Deckmenu2_2(DeckMenuWork* w) {
     if (w->view != 13) {
         DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4, w->palette, 0, 0x800, 10);
     }
-    if (w->tiles6 != 0) {
+    if (w->tiles6 != NULL) {
         DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6, w->palette3, 0, 0xC00, 10000);
         DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6, w->palette3, 0, 0xC00, 10000);
     }
-    if (w->tiles12 != 0) {
+    if (w->tiles12 != NULL) {
         DrawSprite(w->x7 >> 8, 0,
 #ifdef VERSION_EU
                    gDeckTitleBannerSprites[gLanguage][0],
@@ -3821,7 +3821,7 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 3:
 #ifdef VERSION_EU
-        if (w->tiles3 != 0) {
+        if (w->tiles3 != NULL) {
             DrawSprite(120, 80, gDeckCommandMenuSprites[gLanguage][0], w->tiles3, w->palette2, 0, 0, 8);
         }
 #else
@@ -3845,14 +3845,14 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         DrawDeckNames(w, 1);
         DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             if (w->popupActive == 0) {
                 DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
             }
             DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3865,14 +3865,14 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         DrawDeckNames(w, 1);
         DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(164, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(164, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(164, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
-            if (w->tiles9 != 0) {
+            if (w->tiles9 != NULL) {
                 DrawSprite(164, 82, w->gfx6, w->tiles9, w->palette5, 0, 0, 19);
             }
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -3885,10 +3885,10 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
         DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         DrawDeckNames(w, 1);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3908,10 +3908,10 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 9:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3923,10 +3923,10 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 11:
         DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3943,10 +3943,10 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 12:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3958,10 +3958,10 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 15:
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
-        if (w->tiles7 != 0) {
+        if (w->tiles7 != NULL) {
             DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, 0x400, 100);
             DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, 0x400, 101);
-            if (w->tiles10 != 0) {
+            if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
                 DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
             }
@@ -3979,15 +3979,15 @@ void DeckMenuDestroy(DeckMenuWork* w) {
     ReleaseObjTiles(w->tiles4);
     ReleaseObjPalette(w->palette);
 
-    if (w->tiles12 != 0) {
+    if (w->tiles12 != NULL) {
         ReleaseObjTiles(w->tiles12);
     }
 
-    if (w->tiles6 != 0) {
+    if (w->tiles6 != NULL) {
         ReleaseObjTiles(w->tiles6);
     }
 
-    if (w->palette3 != 0) {
+    if (w->palette3 != NULL) {
         ReleaseObjPalette(w->palette3);
     }
 
@@ -4199,7 +4199,7 @@ void ClearCardGrid(DeckMenuWork* w) {
 
     t = ListPoolFirst(&w->pool);
 
-    while (t != 0) {
+    while (t != NULL) {
         t->done = 1;
         t = ListPoolNext(&t->node);
     }
@@ -4236,7 +4236,7 @@ void ScrollGridDown(DeckMenuWork* w) {
     node = ListPoolFirst(&w->pool);
 
     if (w->scrollRowEnd != w->rowCount) {
-        while (node != 0) {
+        while (node != NULL) {
             node->args.row--;
 
             if (node->args.row < 0) {
@@ -4275,7 +4275,7 @@ u8 ScrollGridUp(DeckMenuWork* w, u8 a) {
         return 0;
     }
 
-    if (n == 0) {
+    if (n == NULL) {
         w->y2 -= 0x300;
 
         t = w->scrollRowEnd;
@@ -4306,7 +4306,7 @@ u8 ScrollGridUp(DeckMenuWork* w, u8 a) {
             }
 
             n = ListPoolNext(&n->node);
-        } while (n != 0);
+        } while (n != NULL);
 
         w->scrollRowEnd--;
         w->y2 -= 0x300;
@@ -4325,7 +4325,7 @@ DeckCard2Work* GetCardAtCursor(DeckMenuWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (w->cursorCol == node->args.col &&
             w->cursorRow == node->args.row) {
             return node;
@@ -4780,7 +4780,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
     id = 0xFFFF;
     t = ListPoolFirst(&w->pool);
 
-    while (t != 0) {
+    while (t != NULL) {
         if (t->args.row == w->cursorRow &&
             t->args.col == w->cursorCol) {
             id = t->args.cardId;
@@ -4883,18 +4883,18 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
 }
 
 void ReleaseCardPreview(DeckMenuWork* w) {
-    if (w->tiles10 != 0) {
+    if (w->tiles10 != NULL) {
         ReleaseObjTiles(w->tiles10);
         w->tiles10 = 0;
     }
 
-    if (w->tiles7 != 0) {
+    if (w->tiles7 != NULL) {
         ReleaseObjTiles(w->tiles7);
         ReleaseObjPalette(w->palette5);
         ReleaseObjTiles(w->tiles8);
         ReleaseObjPalette(w->palette6);
 
-        if (w->tiles9 != 0) {
+        if (w->tiles9 != NULL) {
             ReleaseObjTiles(w->tiles9);
             w->tiles9 = 0;
         }
@@ -4915,7 +4915,7 @@ void ShowDeckCardPreview(DeckMenuWork* w) {
     id = 0xFFFF;
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.row == w->cursorRow && node->args.col == w->cursorCol) {
             id = node->args.cardId;
             break;
@@ -5270,7 +5270,7 @@ s32 AddSelectedValueCardToDeck(DeckMenuWork* w) {
 void FreeCollectionEntries(DeckMenuWork* w) {
     u16 i;
 
-    if (w->entries != 0) {
+    if (w->entries != NULL) {
         for (i = 0; i < w->entryCount; i++) {
             EwramFree(w->entries[i].indices);
         }
@@ -5281,7 +5281,7 @@ void FreeCollectionEntries(DeckMenuWork* w) {
 }
 
 void ReleaseCommandMenuGfx(DeckMenuWork* w) {
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
         ReleaseObjPalette(w->palette2);
         w->tiles3 = 0;
@@ -5311,7 +5311,7 @@ void RemoveCursorCardFromDeck(DeckMenuWork* w) {
 
     n = ListPoolFirst(&w->pool);
 
-    while (n != 0) {
+    while (n != NULL) {
         if (n->args.row == w->cursorRow && n->args.col == w->cursorCol) {
             if (n->args.cardId != 0xFFFF) {
                 RemoveCardFromDeck(n->args.slot, w->deckIndex);
@@ -5501,7 +5501,7 @@ void ResetGridScroll(DeckMenuWork* w) {
     x = 0;
     y = 0;
 
-    while (node != 0) {
+    while (node != NULL) {
         node->args.col = x;
         node->args.row = y;
         x++;
@@ -5535,7 +5535,7 @@ s32 IsCardAtCursor(DeckMenuWork* w) {
 
     t = ListPoolFirst(&w->pool);
 
-    while (t != 0) {
+    while (t != NULL) {
         if (t->args.col == w->cursorCol) {
             if (t->args.row == w->cursorRow) {
                 return 1;
@@ -5553,7 +5553,7 @@ u8 IsCardAt(DeckMenuWork* w, s16 a, s16 b) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == a && node->args.row == b) {
             return 1;
         }
@@ -5569,7 +5569,7 @@ u8 FindCardInDirection(DeckMenuWork* w, s16 x, s16 y, u16 dir) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
             return 1;
         }
@@ -5669,7 +5669,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
     last = ListPoolLast(&w->pool);
     q = 0;
 
-    while (p != 0) {
+    while (p != NULL) {
         if (w->cursorCol == p->args.col && w->cursorRow == p->args.row) {
             q = p;
             break;
@@ -5679,7 +5679,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
     }
 
     if (p->args.cardId != 0xFFFF) {
-        while (q != 0) {
+        while (q != NULL) {
             if (q->args.cardId == 0xFFFF) {
                 break;
             }
@@ -5687,11 +5687,11 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
             q = ListPoolNext(&q->node);
         }
 
-        if (q != 0) {
+        if (q != NULL) {
             while (p != q) {
                 n = (DeckCard2Work*)ListPoolPrev(&q->node);
 
-                if (n != 0) {
+                if (n != NULL) {
                     *(u16*)q->args.slot = *(u16*)n->args.slot;
                 }
 
@@ -5718,10 +5718,10 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
             return 1;
         }
     } else {
-        while (p != 0) {
+        while (p != NULL) {
             n = ListPoolNext(&p->node);
 
-            if (n != 0) {
+            if (n != NULL) {
                 *(u16*)p->args.slot = *(u16*)n->args.slot;
             }
 
@@ -5758,7 +5758,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
         return ToggleDeckSlotGap(w);
     }
 
-    while (p != 0) {
+    while (p != NULL) {
         if (w->cursorCol == p->args.col && w->cursorRow == p->args.row) {
             break;
         }
@@ -5766,11 +5766,11 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
         p = ListPoolNext(&p->node);
     }
 
-    if (p == 0) {
+    if (p == NULL) {
         return 0;
     }
 
-    while (q != 0) {
+    while (q != NULL) {
         if (w->heldCol == q->args.col &&w->heldRow == q->args.row) {
             break;
         }
@@ -5797,7 +5797,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
         ListPoolRemove(&p->node, &w->pool);
         ListPoolInsertBefore(&p->node, &w->pool, &q->node);
 
-        for (n = ListPoolFirst(&w->pool); n != 0; n = ListPoolNext(&n->node)) {
+        for (n = ListPoolFirst(&w->pool); n != NULL; n = ListPoolNext(&n->node)) {
             if (n == ListPoolNext(&n->node)) {
                 break;
             }
@@ -5806,7 +5806,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
         ListPoolRemove(&p->node, &w->pool);
         ListPoolInsertAfter(&p->node, &w->pool, &q->node);
 
-        for (n = ListPoolFirst(&w->pool); n != 0; n = ListPoolNext(&n->node)) {
+        for (n = ListPoolFirst(&w->pool); n != NULL; n = ListPoolNext(&n->node)) {
             if (n == ListPoolNext(&n->node)) {
                 break;
             }
@@ -5816,7 +5816,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
         ListPoolInsertBefore(&p->node, &w->pool, &q->node);
         ListPoolRemove(&q->node, &w->pool);
 
-        if (prev == 0) {
+        if (prev == NULL) {
             ListPoolAppend(&q->node, &w->pool);
         } else {
             ListPoolInsertBefore(&q->node, &w->pool, &prev->node);

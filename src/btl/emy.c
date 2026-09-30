@@ -1362,7 +1362,7 @@ u8 task_emy_04_1(Emy04Work* work) {
             best = 0;
             bestv = 0;
 
-            for (p = ListPoolFirst(&gBtlWork->pool); p != 0;
+            for (p = ListPoolFirst(&gBtlWork->pool); p != NULL;
                     p = ListPoolNext(&p->node)) {
                 if (!(p->flags & 0x100)) {
                     if (bestv < p->maxHp - p->hp) {
@@ -1372,7 +1372,7 @@ u8 task_emy_04_1(Emy04Work* work) {
                 }
             }
 
-            if (best == 0) {
+            if (best == NULL) {
                 best = act;
             }
 

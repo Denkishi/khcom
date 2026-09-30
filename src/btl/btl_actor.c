@@ -19,7 +19,7 @@ void HumDrawSub(HumWork* p, HumSub* s) {
     s32 sx;
     s32 sy;
 
-    if (s == 0) {
+    if (s == NULL) {
         return;
     }
 

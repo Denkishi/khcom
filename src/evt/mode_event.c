@@ -24,7 +24,7 @@ void Event_0(s32 arg) {
     gEventId = arg;
     gEventPaused = 0;
 
-    if (e != 0) {
+    if (e != NULL) {
         if (e->isAffine != 0) {
             SetBgMode1();
             SetupBg(0, 3, 31, 14);
@@ -84,7 +84,7 @@ void Event_0(s32 arg) {
     gEventEndStep = 0;
 }
 void EventDebugUpdate(void) {
-    if (gEventState == 0) {
+    if (gEventState == NULL) {
         ModeRequest(&gModeEventselect, 0);
     }
 

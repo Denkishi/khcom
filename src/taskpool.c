@@ -17,6 +17,7 @@
 #include "sroll_api.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include <stddef.h>
 
 Mode* gCurrentMode;
 void (*gCurrentModeUpdate)(void);
@@ -68,7 +69,7 @@ static Mode* sDebugModes[] = {
 };
 
 Task* TaskDestroy(TaskPool* a, Task* t) {
-    if (t->desc->destroy != 0) {
+    if (t->desc->destroy != NULL) {
         t->desc->destroy(t->work);
     }
 
@@ -78,7 +79,7 @@ Task* TaskDestroy(TaskPool* a, Task* t) {
 }
 
 void TaskKill(TaskPool* a, Task* t) {
-    if (t->desc->destroy != 0) {
+    if (t->desc->destroy != NULL) {
         t->desc->destroy(t->work);
     }
 
@@ -92,14 +93,14 @@ Task* TaskCreate(TaskPool* a, TaskDesc* desc, void* arg) {
 
     task = ListPoolFirstFree(a);
 
-    if (task == 0) {
+    if (task == NULL) {
         return 0;
     }
 
     if (desc->workSize > 0) {
         task->work = EwramAlloc(desc->workSize);
 
-        if (task->work == 0) {
+        if (task->work == NULL) {
             return 0;
         }
     } else {
@@ -110,7 +111,7 @@ Task* TaskCreate(TaskPool* a, TaskDesc* desc, void* arg) {
     task->update = desc->update;
     ListPoolActivate(&task->node, a);
 
-    if (desc->init != 0) {
+    if (desc->init != NULL) {
         desc->init(task->work, arg);
     }
 
@@ -123,7 +124,7 @@ void TaskPoolInit(TaskPool* a, s32 count) {
 
     a->tasks = EwramAlloc(count * sizeof(Task));
 
-    if (a->tasks == 0) {
+    if (a->tasks == NULL) {
         return;
     }
 
@@ -140,8 +141,8 @@ void TaskPoolUpdate(TaskPool* a) {
 
     t = ListPoolFirst(&a->head);
 
-    while (t != 0) {
-        if (t->update != 0 && t->update(t->work, t) == 0) {
+    while (t != NULL) {
+        if (t->update != NULL && t->update(t->work, t) == 0) {
             t = TaskDestroy(a, t);
         } else {
             t = ListPoolNext(&t->node);
@@ -154,8 +155,8 @@ void TaskPoolDraw(TaskPool* a) {
 
     t = ListPoolFirst(&a->head);
 
-    while (t != 0) {
-        if (t->desc->draw != 0) {
+    while (t != NULL) {
+        if (t->desc->draw != NULL) {
             t->desc->draw(t->work);
         }
 
@@ -168,7 +169,7 @@ void TaskPoolDestroy(TaskPool* a) {
 
     t = ListPoolFirst(&a->head);
 
-    while (t != 0) {
+    while (t != NULL) {
         t = TaskDestroy(a, t);
     }
 
@@ -180,15 +181,15 @@ void func_08000F30(TaskPool* a) {
 
     t = ListPoolFirst(&a->head);
 
-    if (t != 0) {
+    if (t != NULL) {
         do {
             t = ListPoolNext(&t->node);
-        } while (t != 0);
+        } while (t != NULL);
     }
 }
 
 u8 IsTaskActive(Task* t) {
-    if (t == 0 || (t->node.flags & 1) == 0) {
+    if (t == NULL || (t->node.flags & 1) == 0) {
         return 0;
     }
 
@@ -196,7 +197,7 @@ u8 IsTaskActive(Task* t) {
 }
 
 u8 IsTaskActiveNamed(Task* t, const char* name) {
-    if (t == 0 || name == 0 || t->desc->name != name || (t->node.flags & 1) == 0) {
+    if (t == NULL || name == NULL || t->desc->name != name || (t->node.flags & 1) == 0) {
         return 0;
     }
 
@@ -229,7 +230,7 @@ void ModeStart(Mode* mode, s32 arg) {
     MosaicReset();
     gCurrentMode = mode;
 
-    if (mode->init != 0) {
+    if (mode->init != NULL) {
         mode->init(arg);
     }
 
@@ -260,7 +261,7 @@ void ModeInit(void) {
     gModeVBlankCallback = 0;
 }
 void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
-    if (a != 0) {
+    if (a != NULL) {
         a();
     }
 
@@ -342,8 +343,8 @@ void ModeUpdate(void) {
             FadeUpdate();
             FlushDma3QueueWithCpu();
             gModeFlags &= ~2;
-        } else if (gPendingMode != 0) {
-            if (gCurrentMode->exit != 0) {
+        } else if (gPendingMode != NULL) {
+            if (gCurrentMode->exit != NULL) {
                 gCurrentMode->exit();
             }
 
@@ -356,7 +357,7 @@ void ModeUpdate(void) {
             ModeStart(gPendingMode, gPendingModeArg);
             gPendingMode = 0;
         } else {
-            if (gCurrentModeUpdate != 0) {
+            if (gCurrentModeUpdate != NULL) {
                 gCurrentModeUpdate();
             }
 
@@ -389,17 +390,17 @@ void ModeFlushDisplay(void) {
 }
 
 void ModeRunVBlankCallbacks(void) {
-    if ((gModeFlags & 2) && gModeTransitionCallback != 0) {
+    if ((gModeFlags & 2) && gModeTransitionCallback != NULL) {
         gModeTransitionCallback();
     }
 
-    if (gModeVBlankCallback != 0) {
+    if (gModeVBlankCallback != NULL) {
         gModeVBlankCallback();
     }
 }
 
 void ModeCallExit(void) {
-    if (gCurrentMode->exit != 0) {
+    if (gCurrentMode->exit != NULL) {
         gCurrentMode->exit();
     }
 }

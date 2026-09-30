@@ -203,7 +203,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     s32 flag;
 
     actor = gBtlWork->actor;
-    if (actor == 0) {
+    if (actor == NULL) {
         return 0;
     }
 
@@ -478,7 +478,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         actor = gRikuBtlWork->actor;
         work->visible = 1;
     } else {
-        if (gBtlWork->actor2 == 0) {
+        if (gBtlWork->actor2 == NULL) {
             if (work->visible != 0) {
                 work->visible = 0;
             }
@@ -488,7 +488,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         actor = gBtlWork->actor2;
     }
 
-    if (actor->parent != 0) {
+    if (actor->parent != NULL) {
         actor = actor->parent;
     }
 
@@ -1292,7 +1292,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     work->z = src->z;
     work->groundZ = 0;
 
-    if (gBtlWork->boundsCallback != 0) {
+    if (gBtlWork->boundsCallback != NULL) {
         gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
     }
 
@@ -1414,7 +1414,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
 
     if (work->collected == 0) {
         if (!(work->flags & 4)) {
-            if (gBtlWork->boundsCallback != 0) {
+            if (gBtlWork->boundsCallback != NULL) {
                 gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
 
@@ -1626,7 +1626,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
     work->z = src->z;
     work->groundZ = 0;
 
-    if (gBtlWork->boundsCallback != 0) {
+    if (gBtlWork->boundsCallback != NULL) {
         gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
     }
 
@@ -1670,7 +1670,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
 
     if (work->collected == 0) {
         if (!(work->flags & 4)) {
-            if (gBtlWork->boundsCallback != 0) {
+            if (gBtlWork->boundsCallback != NULL) {
                 gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
             }
 

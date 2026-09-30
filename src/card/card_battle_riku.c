@@ -285,7 +285,7 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
     if (w->cursors[slot] != 0xFFFF && (s16)w->slotCounts[slot] > 0) {
         id = w->cursors[slot];
         card = FindNextAvailableSlot(w, slot, &id);
-        if (card != 0) {
+        if (card != NULL) {
             args.pool = &w->cardDisplays[slot];
             args.index = id;
             args.listIndex = slot;
@@ -1141,7 +1141,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
     }
 
     if (w->reloadPending[w->listIndex] != 0) {
-        if (gRikuSelectedCard != 0) {
+        if (gRikuSelectedCard != NULL) {
             if (gRikuSelectedCard->flags & 0x4000000) {
                 gRikuSelectedCard->flags |= 0x4000;
                 BeginRikuReloadDeal(w);
@@ -1173,7 +1173,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 #endif
             return 1;
         }
-    } else if (gRikuSelectedCard != 0 && (gRikuSelectedCard->flags & 0x42) == 0x42 &&
+    } else if (gRikuSelectedCard != NULL && (gRikuSelectedCard->flags & 0x42) == 0x42 &&
                CountAvailableCardSlots(w, w->listIndex) != 0) {
         w->reloadPending[w->listIndex] = 1;
         w->cardsLeft[0] = 0;
@@ -1318,7 +1318,7 @@ static void cardbattle_3(CardBattleWork* w) {
     TaskPoolDestroy(&w->tasks);
 
     for (i = 0; i <= 3; i++) {
-        if (w->slots[i] != 0) {
+        if (w->slots[i] != NULL) {
             EwramFree(w->slots[i]);
         }
     }
@@ -1334,7 +1334,7 @@ void CloseRikuCards(CardBattleWork* w) {
         w->stock[i]->flags &= ~0x20;
     }
 
-    if (gRikuSelectedCard != 0) {
+    if (gRikuSelectedCard != NULL) {
         gRikuSelectedCard->flags &= ~0x20;
     }
 
@@ -1352,7 +1352,7 @@ void OpenRikuCards(CardBattleWork* w) {
         w->stock[i]->flags |= 0x20;
     }
 
-    if (gRikuSelectedCard != 0) {
+    if (gRikuSelectedCard != NULL) {
         gRikuSelectedCard->flags |= 0x20;
     }
 
@@ -1382,7 +1382,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a) {
             v = gRikuSelectedCard->args.index - 1;
             c = FindPrevAvailableSlot(w, w->listIndex, &v);
 
-            if (c != 0) {
+            if (c != NULL) {
                 args.pool = &w->cardDisplays[w->listIndex];
                 args.index = v;
                 args.listIndex = w->listIndex;
@@ -1436,7 +1436,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
 
             c = FindNextAvailableSlot(w, n, &v);
 
-            if (c != 0) {
+            if (c != NULL) {
                 args.pool = &w->cardDisplays[n];
                 args.index = v;
                 args.listIndex = n;
@@ -1481,7 +1481,7 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
 
             c = FindPrevAvailableSlot(w, n, &v);
 
-            if (c != 0) {
+            if (c != NULL) {
                 args.pool = &w->cardDisplays[n];
                 args.index = v;
                 args.listIndex = n;
@@ -1885,7 +1885,7 @@ u8 UseRikuCard(CardBattleWork* w) {
     gRikuSelectedCard = 0;
     c = FindNextAvailableSlot(w, w->listIndex, &v);
 
-    if (c != 0) {
+    if (c != NULL) {
         args.pool = &w->cardDisplays[w->listIndex];
         args.index = v;
         args.listIndex = w->listIndex;
@@ -1941,7 +1941,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
         v = w->slotCounts[w->listIndex] - 1;
         c = FindPrevAvailableSlot(w, w->listIndex, &v);
 
-        if (c != 0) {
+        if (c != NULL) {
             args.pool = &w->cardDisplays[w->listIndex];
             args.index = v;
             args.listIndex = w->listIndex;
@@ -2079,7 +2079,7 @@ u8 StockRikuCard(CardBattleWork* w) {
 
     c = FindNextAvailableSlot(w, w->listIndex, &v);
 
-    if (c != 0) {
+    if (c != NULL) {
         args.pool = &w->cardDisplays[w->listIndex];
         args.index = v;
         args.listIndex = w->listIndex;
@@ -2407,7 +2407,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
         w->cardsLeft[w->listIndex]--;
         c = FindNextAvailableSlot(w, w->listIndex, &v);
 
-        if (c != 0) {
+        if (c != NULL) {
             args.pool = &w->cardDisplays[w->listIndex];
             args.index = v;
             args.listIndex = w->listIndex;
@@ -2442,7 +2442,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             gRikuSelectedCard = p;
         }
 
-        if (*pp == 0) {
+        if (*pp == NULL) {
             w->reloadPending[w->listIndex] = 1;
         }
     }
@@ -2520,7 +2520,7 @@ u8 GetActiveCardValue(void) {
 }
 
 s32 func_08081858(void) {
-    if (gRikuSelectedCard != 0) {
+    if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->cardDef->move;
     }
 
@@ -2528,7 +2528,7 @@ s32 func_08081858(void) {
 }
 
 u8 GetRikuSelectedCardValue(void) {
-    if (gRikuSelectedCard != 0) {
+    if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->value;
     }
 
@@ -2668,7 +2668,7 @@ void RikuCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     p->x = gRikuCardLayout[4][0];
     p->y = gRikuCardLayout[4][1];
 
-    if (p->cardDef != 0) {
+    if (p->cardDef != NULL) {
         p->value = p->cardDef->value;
     } else {
         p->value = 0;
@@ -2842,7 +2842,7 @@ void NO_Card_2(CardDisplayWork* p) {
 void RikuCardDestroy(CardDisplayWork* p) {
     ReleaseCardDisplayGfx(p);
 
-    if (p->reloadGauge != 0) {
+    if (p->reloadGauge != NULL) {
         EwramFree(p->reloadGauge);
     }
 }
@@ -3350,7 +3350,7 @@ u8 DispatchRikuCardCommand(CardDisplayWork* p, void* a) {
 void LookupRikuCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
     u32* q;
 
-    if (a->slot != 0) {
+    if (a->slot != NULL) {
         if (a->slot->cardId != 0xFFFF) {
             if (a->slot->cardId != 0xFFFE) {
                 *out = &gCardDefs[a->slot->cardId & CARD_ID_MASK];
@@ -3421,11 +3421,11 @@ void LoadRikuCardDisplayGfx2(CardDisplayWork* p) {
 }
 
 void RefreshRikuCardDisplayGfx(CardDisplayWork* p) {
-    if (p->tiles != 0) {
+    if (p->tiles != NULL) {
         ReleaseObjTiles(p->tiles);
     }
 
-    if (p->palette != 0) {
+    if (p->palette != NULL) {
         ReleaseObjPalette(p->palette);
     }
 
@@ -3564,7 +3564,7 @@ u8 Reload_Card_1(CardDisplayWork* p, void* a) {
 void Reload_Card_3(CardDisplayWork* p) {
     ReleaseCardDisplayGfx(p);
 
-    if (p->reloadGauge != 0) {
+    if (p->reloadGauge != NULL) {
         EwramFree(p->reloadGauge);
     }
 
@@ -3711,7 +3711,7 @@ void Reload_Card_2(CardDisplayWork* p) {
             DrawSprite(p->x >> 8, y, gCardBacks[3].gfx2, p->tiles2,
                        gCardBattleState->palette, affine, attr, p->priority);
 
-            if (w->gfx3 != 0) {
+            if (w->gfx3 != NULL) {
                 DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
                            gCardBattleState->palette, affine, attr,
                            (u16)(p->priority - 2));
@@ -3720,13 +3720,13 @@ void Reload_Card_2(CardDisplayWork* p) {
             if ((s32)gCardBattleState->rikuReloadGauge > 0) {
                 affine2 = AllocObjAffine(0, p->scaleX, gCardBattleState->rikuReloadGauge, 0);
 
-                if (w->gfx != 0) {
+                if (w->gfx != NULL) {
                     DrawSprite(p->x >> 8, y + 17, w->gfx,
                                p->tiles3, gCardBattleState->palette, affine2, 0x400,
                                (u16)(p->priority - 1));
                 }
 
-                if (gCardBattleState->reloadGaugeFull[1] == 1 && w->gfx2 != 0) {
+                if (gCardBattleState->reloadGaugeFull[1] == 1 && w->gfx2 != NULL) {
                     DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
                                gCardBattleState->palette, affine, 0x400,
                                (u16)(p->priority - 1));

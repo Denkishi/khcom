@@ -28,7 +28,7 @@ s32 FieldGroundAt(s32 x, s32 y, s32 z) {
     MapCell* p = FieldCellAt(x, y);
     s32 r;
 
-    if (p == 0) {
+    if (p == NULL) {
         return 0;
     }
     if (p->upperZ < z) {
@@ -487,7 +487,7 @@ MapCell* MapGetCell(s16 x, s16 y) {
 }
 
 void MapCellSetType(MapCell* p, s32 a, s32 b) {
-    if (p != 0) {
+    if (p != NULL) {
         p->type = a;
         p->maskTable = GetCellMaskTable(a);
         p->upperZ = b;
@@ -506,7 +506,7 @@ u8 GetRandomPieceVariant(u8 a) {
 }
 
 void MapCellSetBg3Piece(MapCell* p, s32 n) {
-    if (p != 0) {
+    if (p != NULL) {
         u16* base = gMapRoomDef->map3;
         const u8* q = gUnk_0984D314[n];
         u8 m = GetRandom() % q[3];
@@ -518,7 +518,7 @@ void MapCellSetBg3Piece(MapCell* p, s32 n) {
 }
 
 void MapCellSetBg2Piece(MapCell* p, u8 n, u8 v) {
-    if (p != 0) {
+    if (p != NULL) {
         const u8* q = gUnk_0984D32C[n];
         u16* base;
         u16 t;
@@ -563,7 +563,7 @@ void func_080E0A70(MapCell* p, s32 n) {
     u16 off;
     u16 step;
 
-    if (p == 0) {
+    if (p == NULL) {
         return;
     }
     if ((p->flags & 0x0C) == 0) {
@@ -592,7 +592,7 @@ void sub_080E0B00(MapCell* p, s32 n) {
     u16* base;
     u16 off;
 
-    if (p == 0) {
+    if (p == NULL) {
         return;
     }
     t = gUnk_0984D32C[n];
@@ -626,7 +626,7 @@ void sub_080E0B00(MapCell* p, s32 n) {
 }
 
 void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v) {
-    if (p != 0) {
+    if (p != NULL) {
         u16* base = gMapRoomDef->map2;
         const u8* q = gUnk_0984D32C[n];
         s32 t;
@@ -1264,7 +1264,7 @@ void MapAssignCellPieces(void) {
 
 void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
     MapCell* p = MapGetCell(x, y);
-    if (p != 0) {
+    if (p != NULL) {
         u16* base = gMapRoomDef->map;
         const u8* q = gUnk_0984D3F8[n];
         s32 t = q[1] * 4 + q[2] * 64;
@@ -1275,7 +1275,7 @@ void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
 
 u8 MapCellIsUnbounded(s16 x, s16 y) {
     MapCell* p = MapGetCell(x, y);
-    if (p == 0 || p->upperZ == -0x100000 || p->lowerZ == 0x100000) {
+    if (p == NULL || p->upperZ == -0x100000 || p->lowerZ == 0x100000) {
         return 1;
     }
     return 0;
@@ -1284,7 +1284,7 @@ u8 MapCellIsUnbounded(s16 x, s16 y) {
 u8 MapCellHasType(s16 x, s16 y, u8 n) {
     MapCell* p = MapGetCell(x, y);
 
-    if (p != 0 && p->type == n) {
+    if (p != NULL && p->type == n) {
         return 1;
     }
     return 0;
@@ -2767,16 +2767,16 @@ void MapDrawBgs(s16 x, s16 y) {
             xa = xx & 31;
             e = MapGetCell(c, v);
 
-            if (e != 0) {
+            if (e != NULL) {
                 p0[ya * 32 + xa] = e->bg3Map[m * 32 + n];
 
-                if (e->bg2Map != 0) {
+                if (e->bg2Map != NULL) {
                     p1[ya * 32 + xa] = e->bg2Map[m * 32 + n];
                 } else {
                     p1[ya * 32 + xa] = 0;
                 }
 
-                if (e->bg1Map != 0) {
+                if (e->bg1Map != NULL) {
                     p2[ya * 32 + xa] = e->bg1Map[m * 32 + n];
                 } else {
                     p2[ya * 32 + xa] = 0;
@@ -2839,8 +2839,8 @@ void MapDrawBg1(s32 x, s32 y) {
             xa = xx & 31;
             e = MapGetCell(c, v);
 
-            if (e != 0) {
-                if (e->bg1Map != 0) {
+            if (e != NULL) {
+                if (e->bg1Map != NULL) {
                     dst[ya * 32 + xa] = e->bg1Map[m * 32 + n];
                 } else {
                     dst[ya * 32 + xa] = 0;
@@ -2874,16 +2874,16 @@ void MapBuildBgColumn(u16* a, u16* b, u16* c, s16 d, s16 e) {
         my = e % 2;
         cell = MapGetCell(hx, hy);
 
-        if (cell != 0) {
+        if (cell != NULL) {
             a[i] = cell->bg3Map[my * 32 + mx];
 
-            if (cell->bg2Map != 0) {
+            if (cell->bg2Map != NULL) {
                 b[i] = cell->bg2Map[my * 32 + mx];
             } else {
                 b[i] = 0;
             }
 
-            if (cell->bg1Map != 0) {
+            if (cell->bg1Map != NULL) {
                 c[i] = cell->bg1Map[my * 32 + mx];
             } else {
                 c[i] = 0;
@@ -2926,16 +2926,16 @@ void MapBuildBgRow(u16* a, u16* b, u16* c, s16 d, s16 e) {
         mx = d % 4;
         cell = MapGetCell(hx, hy);
 
-        if (cell != 0) {
+        if (cell != NULL) {
             a[i] = cell->bg3Map[my * 32 + mx];
 
-            if (cell->bg2Map != 0) {
+            if (cell->bg2Map != NULL) {
                 b[i] = cell->bg2Map[my * 32 + mx];
             } else {
                 b[i] = 0;
             }
 
-            if (cell->bg1Map != 0) {
+            if (cell->bg1Map != NULL) {
                 c[i] = cell->bg1Map[my * 32 + mx];
             } else {
                 c[i] = 0;
@@ -3021,7 +3021,7 @@ u8 MapPickFreeFloorPosInView(FldPos* a, s32* b) {
 
             e = MapGetCell(xx, yy);
 
-            if (e != 0 && (*(u32*)e & 0xFF0340) == 0) {
+            if (e != NULL && (*(u32*)e & 0xFF0340) == 0) {
                 a->x = (xx << 13) + 0x1000;
                 *b = (yy << 12) + 0x800;
                 return 1;
@@ -3125,7 +3125,7 @@ void MapFixCreateGimmicks(void* a) {
     s32 x;
     s32 n;
 
-    if (q == 0) {
+    if (q == NULL) {
         return;
     }
     e = gMapGmkPlacements;

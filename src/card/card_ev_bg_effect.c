@@ -149,7 +149,7 @@ void LoadEventBgEffect(EventBgEffectWork* w) {
     LoadBgMap(0, d->maps[0], 0x800);
     SetBgScroll(0, (u16)((gEventState->x >> 8) - (e->x >> 8)), (u16)((gEventState->y >> 8) - (e->y >> 8)));
 
-    if (d->frames != 0) {
+    if (d->frames != NULL) {
         w->animating = 1;
     }
 
@@ -225,7 +225,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
 
     e = w->entries;
 
-    if (e == 0) {
+    if (e == NULL) {
         return 0;
     }
 

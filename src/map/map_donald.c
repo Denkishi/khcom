@@ -77,7 +77,7 @@ s32 Task_MapDonald_1(MapDonaldWork* w) {
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             w->update(w);
         }
     }

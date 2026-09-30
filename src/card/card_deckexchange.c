@@ -879,7 +879,7 @@ void deckexchange_2(DeckExchangeWork* w) {
     case 4:
         DrawDeckExchangeDeckNames(w, 1);
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             if (w->popupActive == 0) {
                 DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
             }
@@ -891,10 +891,10 @@ void deckexchange_2(DeckExchangeWork* w) {
     case 7:
         DrawDeckExchangeDeckNames(w, 1);
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
-            if (w->tiles6 != 0) {
+            if (w->tiles6 != NULL) {
                 DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, 0, 0, 19);
             }
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -903,7 +903,7 @@ void deckexchange_2(DeckExchangeWork* w) {
     case 5:
         DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         DrawDeckExchangeDeckNames(w, 1);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -911,7 +911,7 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 6:
         DrawDeckExchangeDeckNames(w, 1);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -919,10 +919,10 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 8:
         DrawDeckExchangeDeckNames(w, 1);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
-            if (w->tiles6 != 0) {
+            if (w->tiles6 != NULL) {
                 DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, 0, 0, 19);
             }
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -931,7 +931,7 @@ void deckexchange_2(DeckExchangeWork* w) {
     case 9:
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         DrawDeckExchangeCardDescription(w);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -940,7 +940,7 @@ void deckexchange_2(DeckExchangeWork* w) {
     case 11:
         DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
         DrawDeckExchangeCardDescription(w);
-        if (w->tiles4 != 0) {
+        if (w->tiles4 != NULL) {
             DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
             DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -953,29 +953,29 @@ void deckexchange_2(DeckExchangeWork* w) {
 void deckexchange_3(DeckExchangeWork* w) {
     ObjPalette** p;
 
-    if (w->tiles8 != 0) {
+    if (w->tiles8 != NULL) {
         ReleaseObjTiles(w->tiles8);
     }
 
-    if (w->palette5 != 0) {
+    if (w->palette5 != NULL) {
         ReleaseObjPalette(w->palette5);
     }
 
-    if (w->tiles9 != 0) {
+    if (w->tiles9 != NULL) {
         ReleaseObjTiles(w->tiles9);
     }
 
-    if (w->palette6 != 0) {
+    if (w->palette6 != NULL) {
         ReleaseObjPalette(w->palette6);
     }
 
-    if (w->palette7 != 0) {
+    if (w->palette7 != NULL) {
         ReleaseObjPalette(w->palette7);
     }
 
     p = &w->palette4;
 
-    if (*p != 0) {
+    if (*p != NULL) {
         ReleaseObjPalette(*p);
     }
 
@@ -1100,7 +1100,7 @@ void ClearDeckExchangeCardGrid(DeckExchangeWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         node->done = 1;
         node = ListPoolNext(&node->node);
     }
@@ -1117,7 +1117,7 @@ void ScrollDeckExchangeGridDown(DeckExchangeWork* w) {
         return;
     }
 
-    while (node != 0) {
+    while (node != NULL) {
         node->args.row--;
 
         if (node->args.row < 0) {
@@ -1146,7 +1146,7 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    if (node == 0) {
+    if (node == NULL) {
         w->y -= 0x300;
 
         if (w->y < 0x2800) {
@@ -1170,7 +1170,7 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* w) {
         }
 
         node = ListPoolNext(&node->node);
-    } while (node != 0);
+    } while (node != NULL);
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     w->scrollRowEnd--;
@@ -1472,7 +1472,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* w) {
     id = 0xFFFF;
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.row == w->cursorRow && node->args.col == w->cursorCol) {
             id = node->args.cardId;
             break;
@@ -1526,18 +1526,18 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* w) {
 }
 
 void ReleaseDeckExchangeCardPreview(DeckExchangeWork* w) {
-    if (w->tiles7 != 0) {
+    if (w->tiles7 != NULL) {
         ReleaseObjTiles(w->tiles7);
         w->tiles7 = 0;
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         ReleaseObjTiles(w->tiles4);
         ReleaseObjPalette(w->palette2);
         ReleaseObjTiles(w->tiles5);
         ReleaseObjPalette(w->palette3);
 
-        if (w->tiles6 != 0) {
+        if (w->tiles6 != NULL) {
             ReleaseObjTiles(w->tiles6);
             w->tiles6 = 0;
         }
@@ -1781,7 +1781,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* w, u16 key) {
 void FreeDeckExchangeCollectionEntries(DeckExchangeWork* w) {
     u16 i;
 
-    if (w->entries != 0) {
+    if (w->entries != NULL) {
         for (i = 0; i < w->entryCount; i++) {
             EwramFree(w->entries[i].indices);
         }
@@ -1886,7 +1886,7 @@ void ResetDeckExchangeGridScroll(DeckExchangeWork* w) {
     x = 0;
     y = 0;
 
-    while (node != 0) {
+    while (node != NULL) {
         node->args.col = x;
         node->args.row = y;
         x++;
@@ -1908,7 +1908,7 @@ u8 IsDeckExchangeCardAtCursor(DeckExchangeWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == w->cursorCol &&
             node->args.row == w->cursorRow) {
             return 1;
@@ -1925,7 +1925,7 @@ u8 IsDeckExchangeCardAt(DeckExchangeWork* w, s16 x, s16 y) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
             return 1;
         }
@@ -1939,7 +1939,7 @@ u8 IsDeckExchangeCardAt(DeckExchangeWork* w, s16 x, s16 y) {
 u8 FindDeckExchangeCardInDirection(DeckExchangeWork* w, s16 x, s16 y, u16 dir) {
     DeckCard2Work* n;
 
-    for (n = ListPoolFirst(&w->pool); n != 0; n = ListPoolNext(&n->node)) {
+    for (n = ListPoolFirst(&w->pool); n != NULL; n = ListPoolNext(&n->node)) {
         if (n->args.col == x && n->args.row == y) {
             return 1;
         }

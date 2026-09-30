@@ -3915,7 +3915,7 @@ void task_bos_md_3(MdWork* work) {
     t = &work->tasks3;
 
     for (i = 0; i < 2; i++) {
-        if (work->gfx[i].tiles != 0) {
+        if (work->gfx[i].tiles != NULL) {
             ReleaseObjTiles(work->gfx[i].tiles);
         }
     }
@@ -4183,7 +4183,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     a.pattern = arg->pattern;
     a.flags = arg->flags;
 
-    if (arg->pool != 0) {
+    if (arg->pool != NULL) {
         if (work->pattern <= 2) {
             n = sMdFireDefs[work->pattern].count;
         } else {

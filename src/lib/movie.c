@@ -2,6 +2,7 @@
 #include "snd_stream.h"
 #include "movie.h"
 #include "gba/io_reg.h"
+#include <stddef.h>
 
 #define MOVIE_TICKS_PER_FRAME 228
 #define MOVIE_SECONDS_PER_TICK 0.000073433f
@@ -28,7 +29,7 @@ s32 MovieStart(void* a) {
     u32 channels;
 
     gMoviePlayer = MovieOpen(a);
-    if (gMoviePlayer == 0) {
+    if (gMoviePlayer == NULL) {
         return 0;
     }
     channels = MovieGetChannels(gMoviePlayer);
@@ -114,7 +115,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
             }
         }
 
-        if (a != 0 && a(b) != 0) {
+        if (a != NULL && a(b) != 0) {
             break;
         }
     }

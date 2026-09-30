@@ -4,6 +4,7 @@
 #define M4A_CATALOG_NO_PLAYER_EXTERNS
 #include "m4a_catalog_data.h"
 #include "gba/io_reg.h"
+#include <stddef.h>
 
 char SoundMainRAM_Buffer[0x400];
 
@@ -541,7 +542,7 @@ void MPlayOpen(MusicPlayerInfo* mplayInfo, MusicPlayerTrack* tracks, u8 trackCou
         tracks++;
     }
 
-    if (soundInfo->MPlayMainHead != 0) {
+    if (soundInfo->MPlayMainHead != NULL) {
         mplayInfo->MPlayMainNext = soundInfo->MPlayMainHead;
         mplayInfo->musicPlayerNext = soundInfo->musicPlayerHead;
         soundInfo->MPlayMainHead = 0;

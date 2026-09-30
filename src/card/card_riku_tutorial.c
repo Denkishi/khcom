@@ -137,7 +137,7 @@ s32 ResolveActiveCardsMove(s32* out) {
         out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
 
-        if (out != 0) {
+        if (out != NULL) {
             out[i] = gCardBattleState->activeCards[i]->cardDef->move;
         }
 #endif
@@ -200,7 +200,7 @@ s32 ResolveActiveCardsMove(s32* out) {
             }
         case 106:
 #ifndef VERSION_EU
-            if (out != 0) {
+            if (out != NULL) {
 #endif
                 FindStockPairsInCombo(arr.unk_00, buf);
 
@@ -292,7 +292,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
         out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
 
-        if (out != 0) {
+        if (out != NULL) {
             out[i] = gCardBattleState->activeCards[i]->cardDef->move;
         }
 #endif
@@ -372,7 +372,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
             }
         case 106:
 #ifndef VERSION_EU
-            if (out != 0) {
+            if (out != NULL) {
 #endif
                 FindStockPairsInCombo(arr.unk_00, buf);
 

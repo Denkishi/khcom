@@ -404,7 +404,7 @@ void task_bos_pc_flt_2(PcFltWork* work) {
         id = AnimGetGfxIndex(&work->anim);
         WorldToScreen(&sx, &sy, work->x,
             work->y + (sBosPcFltFrameDefs[id].drawY << 8), work->z);
-        if (gBtlWork->platform != 0) {
+        if (gBtlWork->platform != NULL) {
             g = GetBattleSpritePriorityFlags(work->y + (sBosPcFltFrameDefs[id].drawY << 8));
             h = (-0x1004 - ((work->y >> 8) << 2)) | 3;
         } else {

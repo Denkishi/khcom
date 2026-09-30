@@ -498,7 +498,7 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* w, void* a) {
 }
 
 static void Deckmenu2_2(RikuDeckMenuWork* w) {
-    if (w->tiles12 != 0) {
+    if (w->tiles12 != NULL) {
 #ifdef VERSION_EU
         DrawSprite(w->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], w->tiles12, w->palette3, 0, 0, 10);
 #elif defined(VERSION_JP)
@@ -508,7 +508,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
 #endif
     }
 
-    if (w->tiles6 != 0) {
+    if (w->tiles6 != NULL) {
         DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6,
                    w->palette3, 0, 0xC00, 10000);
         DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6,
@@ -525,15 +525,15 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
     DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4,
                w->palette, 0, 0x800, 10);
 
-    if (w->tiles7 != 0) {
+    if (w->tiles7 != NULL) {
         DrawSprite(168, 86, w->gfx4, w->tiles7, w->palette5, 0, 0, 20);
     }
 
-    if (w->tiles8 != 0) {
+    if (w->tiles8 != NULL) {
         DrawSprite(168, 86, w->gfx5, w->tiles8, w->palette6, 0, 0, 21);
     }
 
-    if (w->tiles9 != 0) {
+    if (w->tiles9 != NULL) {
         DrawSprite(168, 86, w->gfx6, w->tiles9, w->palette5, 0, 0, 19);
     }
 
@@ -557,15 +557,15 @@ static void Deckmenu2_3(RikuDeckMenuWork* w) {
     ReleaseObjPalette(w->palette);
     ReleaseRikuCommandMenuGfx(w);
 
-    if (w->tiles12 != 0) {
+    if (w->tiles12 != NULL) {
         ReleaseObjTiles(w->tiles12);
     }
 
-    if (w->tiles6 != 0) {
+    if (w->tiles6 != NULL) {
         ReleaseObjTiles(w->tiles6);
     }
 
-    if (w->palette3 != 0) {
+    if (w->palette3 != NULL) {
         ReleaseObjPalette(w->palette3);
     }
 
@@ -627,7 +627,7 @@ void ClearRikuCardGrid(RikuDeckMenuWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         node->done = 1;
         node = ListPoolNext(&node->node);
     }
@@ -644,7 +644,7 @@ void ScrollRikuGridDown(RikuDeckMenuWork* w) {
         return;
     }
 
-    while (node != 0) {
+    while (node != NULL) {
         node->args.row--;
 
         if (node->args.row < 0) {
@@ -673,7 +673,7 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    if (node == 0) {
+    if (node == NULL) {
         w->y2 -= 0x300;
 
         if (w->y2 < 0x2800) {
@@ -697,7 +697,7 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* w) {
         }
 
         node = ListPoolNext(&node->node);
-    } while (node != 0);
+    } while (node != NULL);
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     w->scrollRowEnd--;
@@ -715,7 +715,7 @@ DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* w) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (w->cursorCol == node->args.col &&
             w->cursorRow == node->args.row) {
             return node;
@@ -874,18 +874,18 @@ void LoadRikuCardNameText(RikuDeckMenuWork* w, s32 id) {
 }
 
 void ReleaseRikuCardPreview(RikuDeckMenuWork* w) {
-    if (w->tiles10 != 0) {
+    if (w->tiles10 != NULL) {
         ReleaseObjTiles(w->tiles10);
         w->tiles10 = 0;
     }
 
-    if (w->tiles7 != 0) {
+    if (w->tiles7 != NULL) {
         ReleaseObjTiles(w->tiles7);
         ReleaseObjPalette(w->palette5);
         ReleaseObjTiles(w->tiles8);
         ReleaseObjPalette(w->palette6);
 
-        if (w->tiles9 != 0) {
+        if (w->tiles9 != NULL) {
             ReleaseObjTiles(w->tiles9);
             w->tiles9 = 0;
         }
@@ -907,7 +907,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
     id = 0xFFFF;
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.row == w->cursorRow && node->args.col == w->cursorCol) {
             id = node->args.cardId;
             break;
@@ -973,7 +973,7 @@ void FreeRikuCollectionEntries(RikuDeckMenuWork* w) {
     CardKindEntry** p;
     u16 i;
 
-    if (w->entries != 0) {
+    if (w->entries != NULL) {
         for (i = 0; i < w->entryCount; i++) {
             EwramFree(w->entries[i].indices);
         }
@@ -984,7 +984,7 @@ void FreeRikuCollectionEntries(RikuDeckMenuWork* w) {
     }
 }
 void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w) {
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
         ReleaseObjPalette(w->palette2);
         w->tiles3 = 0;
@@ -1030,7 +1030,7 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* w, s16 x, s16 y, u16 dir) {
 
     node = ListPoolFirst(&w->pool);
 
-    while (node != 0) {
+    while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
             return 1;
         }

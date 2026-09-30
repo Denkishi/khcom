@@ -373,13 +373,13 @@ void WorldWarpDraw(void) {
     }
 
     for (i = 0; i <= 12; i++) {
-        if (sWorldWarpIconSprites[i] != 0) {
+        if (sWorldWarpIconSprites[i] != NULL) {
             DrawSprite((s16)(sWarpIcons[i].x * 8 + 16), (s16)(sWarpIcons[i].y * 8 + 16),
                 sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, 0x800, (u16)(i + 0x834));
         }
     }
 
-    if (sWorldWarpIconSprites[gGameState.floor] != 0) {
+    if (sWorldWarpIconSprites[gGameState.floor] != NULL) {
 #ifdef VERSION_EU
         DrawSprite(0x66, 0x10, sWorldWarpIconSprites[gGameState.floor], sWorldWarpIconTiles[gGameState.floor],
             sWorldWarpIconPalettes[gGameState.floor], 0, 0, 2);
@@ -399,7 +399,7 @@ void WorldWarpDraw(void) {
 
     DrawSprite(0xB0, 0x1A, AnimUpdate(&gUnk_02035538), gUnk_02035518, gUnk_0203551C, 0, 0, 2);
 
-    if (sWorldWarpIconSprites[sWorldWarpCursor] != 0) {
+    if (sWorldWarpIconSprites[sWorldWarpCursor] != NULL) {
 #ifdef VERSION_EU
         DrawSprite(0x66, 0x30, sWorldWarpIconSprites[sWorldWarpCursor], sWorldWarpIconTiles[sWorldWarpCursor],
             sWorldWarpIconPalettes[sWorldWarpCursor], 0, 0, 2);
@@ -728,11 +728,11 @@ void mode_worldwarp_2(void) {
     ReleaseObjTiles(sWorldWarpCursorTiles);
 
     for (i = 0; i <= 12; i++) {
-        if (sWorldWarpIconPalettes[i] != 0) {
+        if (sWorldWarpIconPalettes[i] != NULL) {
             ReleaseObjPalette(sWorldWarpIconPalettes[i]);
         }
 
-        if (sWorldWarpIconTiles[i] != 0) {
+        if (sWorldWarpIconTiles[i] != NULL) {
             ReleaseObjTiles(sWorldWarpIconTiles[i]);
         }
     }

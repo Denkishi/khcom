@@ -189,7 +189,7 @@ void RELOAD_CHILDREN_3(ReloadChildWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 
-    if (w->tiles2 != 0) {
+    if (w->tiles2 != NULL) {
         ReleaseObjTiles(w->tiles2);
     }
 }
@@ -928,12 +928,12 @@ void scrollbar_2(void) {
 void scrollbar_3(void) {
 }
 void ScrollbarRequestClose(ScrollBarWork* w) {
-    if (w != 0) {
+    if (w != NULL) {
         w->active = 0;
     }
 }
 void ScrollbarAdvance(ScrollBarWork* w) {
-    if (w != 0) {
+    if (w != NULL) {
         if (w->remaining != 0) {
             w->position++;
             w->remaining--;
@@ -944,7 +944,7 @@ void ScrollbarAdvance(ScrollBarWork* w) {
     }
 }
 void ScrollbarRetreat(ScrollBarWork* w) {
-    if (w != 0) {
+    if (w != NULL) {
         if (w->position != 0) {
             w->position--;
             w->remaining++;
@@ -955,17 +955,17 @@ void ScrollbarRetreat(ScrollBarWork* w) {
     }
 }
 void ScrollbarDecrementCount(ScrollBarWork* w) {
-    if (w != 0) {
+    if (w != NULL) {
         w->count--;
     }
 }
 void ScrollbarIncrementCount(ScrollBarWork* w) {
-    if (w != 0) {
+    if (w != NULL) {
         w->count++;
     }
 }
 void func_08099FE8(ScrollBarWork* w, u16 b, u8 c) {
-    if (w != 0) {
+    if (w != NULL) {
         w->unk_0E = b;
         w->unk_17 = c;
     }

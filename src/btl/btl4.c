@@ -272,13 +272,13 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     d0 = GetExpDigitGfx(value / 10000, 0);
     work->gfx2[0] = d0;
     value %= 10000;
-    flag = d0 != 0;
+    flag = d0 != NULL;
 
     d1 = GetExpDigitGfx(value / 1000, flag);
     work->gfx2[1] = d1;
     value %= 1000;
 
-    if (d1 != 0) {
+    if (d1 != NULL) {
         flag = 1;
     }
 
@@ -286,7 +286,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     work->gfx2[2] = d2;
     value %= 100;
 
-    if (d2 != 0) {
+    if (d2 != NULL) {
         flag = 1;
     }
 
@@ -294,7 +294,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     work->gfx2[3] = d3;
     value %= 10;
 
-    if (d3 != 0) {
+    if (d3 != NULL) {
         flag = 1;
     }
 
@@ -509,7 +509,7 @@ void task_btl_exp_2(BtlExpWork* work) {
 #endif
 
         for (i = 0; i <= 5; i++) {
-            if (work->gfx2[i] != 0) {
+            if (work->gfx2[i] != NULL) {
                 DrawSprite(x, y, work->gfx2[i], work->tiles2[i], work->palette, 0, 0x410, 0);
                 x += 8;
             }
@@ -561,7 +561,7 @@ void task_btl_vslockon_2(BtlVslockonWork* work) {
     BtlObj* p;
 
     p = gBtlWork->actor2;
-    if (p != 0) {
+    if (p != NULL) {
         WorldToScreen(&x, &y, p->x, p->y, p->z - (p->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 0x100);
     }
@@ -701,7 +701,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     u32 state;
 
     actor = gRikuBtlWork->actor;
-    if (actor == 0) {
+    if (actor == NULL) {
         return 0;
     }
 

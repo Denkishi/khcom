@@ -346,13 +346,13 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
-                if (target != 0) {
+                if (target != NULL) {
                     if (target->x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 }
             }
             if (work->stateTimer == 40) {
-                if (target != 0) {
+                if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
@@ -386,7 +386,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
             work->stateTimer++;
             break;
@@ -397,13 +397,13 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
-                if (target != 0) {
+                if (target != NULL) {
                     if (target->x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 }
             }
             if (work->stateTimer == 40) {
-                if (target != 0) {
+                if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
@@ -437,7 +437,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
                     work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
             work->stateTimer++;
             break;
@@ -446,7 +446,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
             AnimReset(&work->anim);
-            if (target != 0) {
+            if (target != NULL) {
                 if (target->x < body->x) body->flags |= 4;
                 else body->flags &= ~4ULL;
             }
@@ -456,7 +456,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             case 0:
                 {
                     s32 x,y,z;
-                    if (target != 0) {
+                    if (target != NULL) {
                         x=target->x;
                         y=target->y;
                         z=target->groundZ;
@@ -1359,13 +1359,13 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
-                if (target != 0) {
+                if (target != NULL) {
                     if (target->x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 }
             }
             if (work->stateTimer == 44) {
-                if (target != 0) {
+                if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
@@ -1399,7 +1399,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
             work->stateTimer++;
             break;
@@ -1410,14 +1410,14 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
-                if (target != 0) {
+                if (target != NULL) {
                     if (target->x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 }
                 FadeToAmount(2, 13, 60);
             }
             if (work->stateTimer == 44) {
-                if (target != 0) {
+                if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->groundZ;
@@ -1458,13 +1458,13 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             if (work->stateTimer == 0) {
                 AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
                 AnimReset(&work->anim);
-                if (target != 0) {
+                if (target != NULL) {
                     if (target->x < body->x) body->flags |= 4;
                     else body->flags &= ~4ULL;
                 }
             }
             if (work->stateTimer == 44) {
-                if (target != 0) {
+                if (target != NULL) {
                     x = target->x;
                     y = target->y;
                     z = target->z - target->centerHeight * 256;
@@ -1498,7 +1498,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
                     work->stateTimer = 0;
                     break;
                 }
-                if (target != 0) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
             }
             work->stateTimer++;
             break;
@@ -1507,7 +1507,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
             AnimReset(&work->anim);
-            if (target != 0) {
+            if (target != NULL) {
                 if (target->x < body->x) body->flags |= 4;
                 else body->flags &= ~4ULL;
             }
@@ -1517,7 +1517,7 @@ u8 task_frd_jack_1(FrdJackWork* work) {
             case 0:
                 {
                     s32 x, y, z;
-                    if (target != 0) {
+                    if (target != NULL) {
                         x = target->x;
                         y = target->y;
                         z = target->groundZ;
@@ -1738,7 +1738,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
     if (owner->flags & 0x40000000) {
         return 0;
     }
-    if (gBtlWork->boundsCallback != 0) {
+    if (gBtlWork->boundsCallback != NULL) {
         ground = body->groundZ;
         gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &ground);
         if (ground != body->groundZ) {
@@ -1817,7 +1817,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
             BtlObj* other = work->mainSide != 0 ? gRikuBtlWork->actor : gBtlWork->actor;
             y = other->y;
             z = other->z;
-        } else if (target != 0) {
+        } else if (target != NULL) {
             y = target->y;
             z = target->z;
         } else {
@@ -2218,7 +2218,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     work->stateTimer = 0;
     work->vz = 0;
 
-    if (obj != 0) {
+    if (obj != NULL) {
         work->targetX = obj->x;
         work->targetY = obj->y;
     } else {

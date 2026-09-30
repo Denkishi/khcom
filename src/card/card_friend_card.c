@@ -260,7 +260,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         w->priority = 10;
 #endif
 
-        if (gCardBattleState != 0) {
+        if (gCardBattleState != NULL) {
             WorldToScreen(&sx, &sy, w->posX, w->posY,
                           w->posZ);
             w->posX = sx << 8;
@@ -366,7 +366,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         w->priority = 10;
 #endif
 
-        if (gCardBattleState != 0) {
+        if (gCardBattleState != NULL) {
             WorldToScreen(&sx, &sy, w->posX, w->posY,
                           w->posZ);
             w->posX = sx << 8;
@@ -757,7 +757,7 @@ void Heartless_card_3(PickupCardWork* w) {
 void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
     s32 args[4];
 
-    if (gCardBattleState != 0) {
+    if (gCardBattleState != NULL) {
         if (gCardBattleState->addedFriendCards[0] <= 4) {
             if (gCardBattleState->friendCardCount == 0) {
                 args[0] = (s16)x << 8;
@@ -786,7 +786,7 @@ void CreateHeartlessCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     s32 args[4];
 
-    if (gCardBattleState != 0 && gCardBattleState->gimmickCardCount == 0) {
+    if (gCardBattleState != NULL && gCardBattleState->gimmickCardCount == 0) {
         gCardBattleState->gimmickCardCount++;
         args[0] = (s16)a << 8;
         args[1] = (s16)b << 8;
@@ -804,7 +804,7 @@ void StockNameSora_0(StockNameWork* w, const s32* src) {
     s32 z;
     ObjTiles* obj;
 
-    if (src != 0) {
+    if (src != NULL) {
         s = src;
 
         for (i = 0; i < 6; i++) {
@@ -905,7 +905,7 @@ void StockNameRiku_0(StockNameWork* w, const s32* src) {
     s32 z;
     ObjTiles* obj;
 
-    if (src != 0) {
+    if (src != NULL) {
         s = src;
 
         for (i = 0; i < 6; i++) {
@@ -1155,7 +1155,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
             n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
-            while (n != 0) {
+            while (n != NULL) {
                 n->state |= 0xFF;
                 w->resultPending = 0;
                 n = (PremireChanceCardWork*)ListPoolNext(&n->node);
@@ -1173,7 +1173,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
     n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
     if (w->stopped == 0) {
-        while (n != 0) {
+        while (n != NULL) {
             t = n->steps;
 
             if (t == 0) {
@@ -1224,7 +1224,7 @@ u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
 
     n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
 
-    if (n != 0 && n->state == 1) {
+    if (n != NULL && n->state == 1) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
@@ -1311,7 +1311,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     w->inputEnabled = 0;
 
     if (w->resultPending != 0) {
-        while (n != 0) {
+        while (n != NULL) {
             if (n->steps == 0) {
                 if (n->position == 3) {
                     n->state = 2;

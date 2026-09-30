@@ -374,7 +374,7 @@ s32 MapEnmCheckAttacked(MapEnmWork* p) {
 void MapEnmSaveToCache(MapEnmWork* p) {
     MapEnmCache* q = ListPoolFirstFree(&gGameState.enemyCachePool);
 
-    if (q != 0) {
+    if (q != NULL) {
         q->def = p->def;
         q->update = p->update;
         q->pos = p->obj.fieldPosition;
@@ -391,7 +391,7 @@ void MapEnmRestoreFromCache(void) {
     s32 i;
 
     q = ListPoolFirst(&gGameState.enemyCachePool);
-    while (q != 0) {
+    while (q != NULL) {
         d = q->def;
         w.def = d;
         w.update = q->update;
@@ -444,7 +444,7 @@ void MapEnmInitRoom(void) {
 
     if (gGameState.fieldResume != 0) {
         q = ListPoolFirst(&gGameState.enemyCachePool);
-        while (q != 0) {
+        while (q != NULL) {
             d = q->def;
             w.def = d;
             w.update = q->update;
@@ -579,7 +579,7 @@ void MapEnmDraw(MapEnmWork* p) {
     s32 z;
     s32 t;
 
-    if (p->gfx == 0) {
+    if (p->gfx == NULL) {
         return;
     }
 
@@ -608,7 +608,7 @@ void MapEnmDestroy(MapEnmWork* p) {
     if (gGameState.fieldResume != 0 && (p->flags & 4) == 0 &&
         ((gMapRoomState->flags & 2) == 0 || (p->flags & 2))) {
         q = ListPoolFirstFree(&gGameState.enemyCachePool);
-        if (q != 0) {
+        if (q != NULL) {
             q->def = p->def;
             q->update = p->update;
             q->pos = p->obj.fieldPosition;
@@ -715,7 +715,7 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
 u8 MapCellIsFreeOfType(s16 x, s16 y, u8 n) {
     MapCell* p = MapCellAt(x, y);
 
-    if (p != 0 && p->lowerZ != 0x100000 && p->type == n && (p->flags & 0x960) == 0) {
+    if (p != NULL && p->lowerZ != 0x100000 && p->type == n && (p->flags & 0x960) == 0) {
         return 1;
     }
     return 0;
@@ -1710,7 +1710,7 @@ u8 MapCellMaskBitAt(MapCell* p, s32 x, s32 y) {
     u8 by;
     u8* t;
 
-    if (p == 0) {
+    if (p == NULL) {
         return 1;
     }
     cx = (x >> 8) % 32;
@@ -1808,8 +1808,8 @@ void MapApplyLayer1DecorRule(MapDecorRule* p) {
 }
 
 void MapApplyLayer1DecorRules(MapDecorRule* p) {
-    if (p != 0) {
-        while (p->pattern != 0) {
+    if (p != NULL) {
+        while (p->pattern != NULL) {
             MapApplyLayer1DecorRule(p);
             p++;
         }
@@ -1868,8 +1868,8 @@ void MapApplyLayer2DecorRule(MapDecorRule* p) {
 }
 
 void MapApplyLayer2DecorRules(MapDecorRule* p) {
-    if (p != 0) {
-        while (p->pattern != 0) {
+    if (p != NULL) {
+        while (p->pattern != NULL) {
             MapApplyLayer2DecorRule(p);
             p++;
         }
@@ -1898,7 +1898,7 @@ void MapAnmStepScript(MapAnmSlot* p) {
     s16* q;
     u8 (*f)(MapAnmSlot*);
 
-    if (p->script == 0) {
+    if (p->script == NULL) {
         return;
     }
 
@@ -1914,7 +1914,7 @@ void MapAnmStepScript(MapAnmSlot* p) {
 }
 
 void MapAnmFlushSlot(MapAnmSlot* p) {
-    if (p->pending != 0) {
+    if (p->pending != NULL) {
         RequestDma3Copy(p->pending, p->dest, p->frameSize);
         p->pending = 0;
     }
@@ -2162,7 +2162,7 @@ u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
         return 0;
     }
     q = PickRandomPrzCard(a);
-    if (q == 0) {
+    if (q == NULL) {
         return 0;
     }
     return CreateMapPrzCardTask(q, 0, b, c, d);
@@ -2276,7 +2276,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
 
     e = PickRandomPrzCard(1);
 
-    if (e != 0) {
+    if (e != NULL) {
         CreateMapPrzCardTask(e, 1, x, y, z);
     }
 }
@@ -2598,7 +2598,7 @@ void MapFldCreateWorldLogo(void) {
 }
 
 void MapFldDestroyAllmapRoom(void) {
-    if (gMapFldAllmapRoomTask != 0) {
+    if (gMapFldAllmapRoomTask != NULL) {
         TaskKill(&gFieldState->tasks, gMapFldAllmapRoomTask);
         gMapFldAllmapRoomTask = 0;
     }
@@ -3740,7 +3740,7 @@ void Mode_MenuNew_0(void) {
 }
 
 void Mode_MenuNew_1(void) {
-    if (gNewGameSlotMenuWork->update != 0) {
+    if (gNewGameSlotMenuWork->update != NULL) {
         gNewGameSlotMenuWork->update(gNewGameSlotMenuWork);
     }
     NewGameSlotMenuDraw();
@@ -4354,7 +4354,7 @@ void Mode_MenuLoad_0(s32 arg) {
 }
 
 void Mode_MenuLoad_1(void) {
-    if (gLoadGameMenuWork->update != 0) {
+    if (gLoadGameMenuWork->update != NULL) {
         gLoadGameMenuWork->update(gLoadGameMenuWork);
     }
     LoadGameMenuDraw();
@@ -4489,7 +4489,7 @@ void MapFixInitColliders(MapFixWork* p, MapFixedCollider* q) {
 
     p->colliderCount = 0;
 
-    if (q != 0) {
+    if (q != NULL) {
         i = 0;
 
         do {
@@ -4548,7 +4548,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     SetBgMapBlocks(3, p->map3, p->mapWidth, p->mapHeight);
 #endif
 
-    if (p->map2 != 0) {
+    if (p->map2 != NULL) {
 #ifdef VERSION_EU
         if (p->unk_50 == 0) {
             eu_080059D4(2, p->tiles);
@@ -4569,7 +4569,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
         DisableBg(2);
     }
 
-    if (p->map != 0) {
+    if (p->map != NULL) {
 #ifdef VERSION_EU
         if (p->unk_50 == 0) {
             eu_080059D4(1, p->tiles2);
@@ -4713,7 +4713,7 @@ u8 MapDoorWaitCard(MapDoorWork* p) {
     MapDoor* flags = p->door;
     void* t = GetSelectedMapCard();
 
-    if (t != 0) {
+    if (t != NULL) {
         if (flags->flags & 0x10) {
             CreateMapRoom(flags->room, 0);
         } else {
@@ -4841,7 +4841,7 @@ s32 Task_MapDoor_1(MapDoorWork* w) {
         w->visible = 1;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         if (w->update(w) == 0) {
             return 0;
         }
@@ -4916,7 +4916,7 @@ void MapMenuSetPanelPalettesExcluded(MapMenuWork* p, u8 a) {
     FadeSetPaletteExcluded(p->palette->index + 0x10, a);
 
     for (i = 0; i < 3; i++) {
-        if (p->palette9[i] != 0) {
+        if (p->palette9[i] != NULL) {
             FadeSetPaletteExcluded(p->palette9[i]->index + 0x10, a);
         }
     }
@@ -5458,7 +5458,7 @@ s32 Task_MapMenu_1(MapMenuWork* w) {
         AnimUpdate(&w->anim);
     }
 
-    if (w->update != 0 && (u8)w->update(w) == 0) {
+    if (w->update != NULL && (u8)w->update(w) == 0) {
         return 0;
     }
     return 1;
@@ -5560,7 +5560,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
                 81);
 #endif
 
-            if (w->tiles9[0] != 0) {
+            if (w->tiles9[0] != NULL) {
                 DrawSprite((w->x4 >> 8) + 18, 124, w->gfx[0], w->tiles9[0],
                     w->palette9[0], 0, 0x400, 80);
             }
@@ -5609,7 +5609,7 @@ void Task_MapMenu_2(MapMenuWork* w) {
             for (i = 0; i < 3; i++) {
                 k = i * 20 + 14;
 
-                if (w->tiles9[i] != 0) {
+                if (w->tiles9[i] != NULL) {
                     DrawSprite((w->x4 >> 8) + k, 124, w->gfx[i], w->tiles9[i],
                         w->palette9[i], 0, 0x400, 80);
                 }
@@ -5778,7 +5778,7 @@ void Task_MapMenu_3(MapMenuWork* w) {
     ReleaseObjTiles(w->tiles7);
 
     for (i = 0; i < 3; i++) {
-        if (w->tiles9[i] != 0) {
+        if (w->tiles9[i] != NULL) {
             ReleaseObjTiles(w->tiles9[i]);
             ReleaseObjPalette(w->palette9[i]);
         }
@@ -6213,7 +6213,7 @@ s32 Task_MapSave_1(MapSaveWork* w) {
         AnimUpdate(&w->anim);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         if ((u8)w->update(w) == 0) {
             return 0;
         }
@@ -6357,15 +6357,15 @@ void Task_MapAnm_0(MapAnmWork* work, MapAnmEntry* list) {
         e++;
     }
 
-    if (list != 0) {
-        if (list->script != 0) {
+    if (list != NULL) {
+        if (list->script != NULL) {
             e = work->slots;
 
             do {
                 MapAnmSetupSlot(e, (const MapGmkDef*)list);
                 e++;
                 list++;
-            } while (list->script != 0);
+            } while (list->script != NULL);
         }
     }
 }
@@ -6374,7 +6374,7 @@ s32 Task_MapAnm_1(MapAnmWork* w) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        if (w->slots[i].script != 0) {
+        if (w->slots[i].script != NULL) {
             MapAnmUpdateSlot(&w->slots[i]);
         }
     }

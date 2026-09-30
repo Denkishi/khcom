@@ -1171,7 +1171,7 @@ void JiminyFreeRows(void) {
         FreeTextSlots(gJiminyWork->lines[i].textSlots, 48);
 
         for (j = 0; j < 48; j++) {
-            if (gJiminyWork->lines[i].textSlots[j].tiles != 0) {
+            if (gJiminyWork->lines[i].textSlots[j].tiles != NULL) {
                 gJiminyWork->lines[i].textSlots[j].tiles = 0;
             }
         }
@@ -1227,7 +1227,7 @@ s32 GetJiminyEntryState(s32 idx) {
     s32 i;
 
     e = &sJiminyEntries[idx];
-    if (e->flags != 0) {
+    if (e->flags != NULL) {
         a = 1;
         b = 1;
 
@@ -1253,7 +1253,7 @@ s32 GetJiminyEntryState(s32 idx) {
         return 0;
     }
 
-    if (e->children == 0) {
+    if (e->children == NULL) {
         return 3;
     }
     c = 1;
@@ -1307,9 +1307,9 @@ void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s1
 
     n = a > b ? b : a;
 
-    if (c == 0) {
+    if (c == NULL) {
         for (i = 0; i < n; i++) {
-            if (e != 0) {
+            if (e != NULL) {
                 gJiminyWork->rowStates[i] = GetJiminyEntryState(e[i]);
                 if (gJiminyWork->rowStates[i] == 3) {
                     JiminyLoadHiddenRow(i, d);
@@ -1344,7 +1344,7 @@ void JiminyReloadRows(void) {
     t = gJiminyWork->cursor - gJiminyWork->cursorRow;
     JiminyFreeRows();
 
-    if (gJiminyWork->itemFlags != 0) {
+    if (gJiminyWork->itemFlags != NULL) {
         JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
             gJiminyWork->itemTexts + t, gJiminyWork->itemFlags + t, 0,
             gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
@@ -1755,7 +1755,7 @@ void mode_jiminy_1(void) {
 
             ok = 1;
 
-            if (e2->flags != 0) {
+            if (e2->flags != NULL) {
                 ok = IsJiminyFlagSet(e2->flags[gJiminyWork->cursor]) != 0;
             } else {
                 if (gJiminyWork->rowStates[gJiminyWork->cursorRow] == 3) {
@@ -1766,7 +1766,7 @@ void mode_jiminy_1(void) {
             if (ok != 0) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
 
-                if (e2->children != 0) {
+                if (e2->children != NULL) {
                     gJiminyWork->state = 6;
                     gJiminyWork->entry = e2->children[gJiminyWork->cursor];
                     gJiminyWork->stateTimer = 0;
@@ -1803,7 +1803,7 @@ void mode_jiminy_1(void) {
         DisableBg(2);
     }
 
-    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0; i++) {
+    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != NULL; i++) {
         if (i >= gJiminyWork->visibleRows) {
             break;
         }
@@ -2114,7 +2114,7 @@ void JiminyDetailUpdate(void) {
             gJiminyWork->detailIndex = 0;
         }
         gJiminyWork->detail = &entries[gJiminyWork->detailIndex];
-        if (gJiminyWork->itemFlags != 0) {
+        if (gJiminyWork->itemFlags != NULL) {
             ClearJiminyFlagNew(gJiminyWork->itemFlags[gJiminyWork->detailIndex]);
             unlocked = 0;
             selected = 0;
@@ -2244,7 +2244,7 @@ void JiminyDetailUpdate(void) {
         }
         LoadBgMap(0, map0, 0x800);
         LoadBgMap(1, map1, 0x800);
-        if (gJiminyWork->detail->tiles != 0) {
+        if (gJiminyWork->detail->tiles != NULL) {
 #ifdef VERSION_EU
             if (gJiminyWork->detail->palette == gUnk_09A3CDBC && func_080D2DD8()) {
                 LoadObjPaletteBank(gJiminyWork->palette8->index, gUnk_09A3CDDC);
@@ -2257,7 +2257,7 @@ void JiminyDetailUpdate(void) {
                 SetObjTileSource(gJiminyWork->tiles7, gJiminyWork->detail->tiles);
             }
         }
-        if (gJiminyWork->detail->tiles2 != 0) {
+        if (gJiminyWork->detail->tiles2 != NULL) {
             LoadObjPaletteBank(gJiminyWork->palette9->index, gJiminyWork->detail->palette2);
             SetObjTileSource(gJiminyWork->tiles8, gJiminyWork->detail->tiles2);
         }
@@ -2382,7 +2382,7 @@ void JiminyDetailUpdate(void) {
         RequestDma3Copy(source + digits[2] * 0x20, dest, 0x20);
         gJiminyWork->state = 9;
         DisableBg(2);
-        if (gJiminyWork->detail->bgTiles != 0) {
+        if (gJiminyWork->detail->bgTiles != NULL) {
             EnableBg(3);
             RequestDma3Copy(gJiminyWork->detail->bgTiles,
                 (u8*)GetBgCharBase(3) + 0x4000, gJiminyWork->detail->tileSize);
@@ -2479,7 +2479,7 @@ void JiminyDetailUpdate(void) {
         break;
     }
     DrawMsgGlyphs(gJiminyWork->charCount);
-    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != 0 && i < gJiminyWork->visibleRows; i++) {
+    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != NULL && i < gJiminyWork->visibleRows; i++) {
         DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
             gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
     }
@@ -2499,27 +2499,27 @@ void JiminyDetailUpdate(void) {
     }
     switch (gJiminyWork->unk_D30) {
     case 0:
-        if (gJiminyWork->detail->tiles != 0) {
+        if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(gJiminyWork->detail->x + 0xC8, gJiminyWork->detail->y + 0x5C,
                 gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
         }
         break;
     case 1:
-        if (gJiminyWork->detail->tiles != 0) {
+        if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite,
                 gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
         }
-        if (gJiminyWork->detail->tiles2 != 0 && gJiminyWork->detail->sprite2 != 0) {
+        if (gJiminyWork->detail->tiles2 != NULL && gJiminyWork->detail->sprite2 != NULL) {
             DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite2,
                 gJiminyWork->tiles8, gJiminyWork->palette9, 0, 4, 0);
         }
         break;
     case 2:
-        if (gJiminyWork->detail->tiles != 0) {
+        if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(gJiminyWork->detail->x + 0xC4, gJiminyWork->detail->y + 0x74,
                 gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, 0, 4, 1);
         }
-        if (gJiminyWork->detail->tiles2 != 0) {
+        if (gJiminyWork->detail->tiles2 != NULL) {
             DrawSprite(0x14, 0x25, gJiminyWork->detail->sprite2,
                 gJiminyWork->tiles8, gJiminyWork->palette9, 0, 0x404, 0);
         }

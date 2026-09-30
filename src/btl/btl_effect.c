@@ -381,7 +381,7 @@ void BgFxUpdate(void) {
         SetBgBlend(gBgFx->bg, 16, 16);
     }
 
-    if (gBgFx->update != 0) {
+    if (gBgFx->update != NULL) {
         gBgFx->update();
 
         if (!(gBtlWork->flags & 4)) {
@@ -2655,7 +2655,7 @@ BtlObj* BgFxGetSyncTarget(void) {
         return gRikuBtlWork->actor;
     }
 
-    if (gBtlWork->actor2 != 0) {
+    if (gBtlWork->actor2 != NULL) {
         return gBtlWork->actor2;
     }
     return ListPoolFirst(&gBtlWork->pool);
@@ -2688,7 +2688,7 @@ void BgFxApplySyncHp(s16 a) {
     } else {
         o = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != 0) {
+        while (o != NULL) {
             if (o->flags & 0x40000000) {
                 CreateBtlPopTask(o, 0);
             } else {
@@ -2730,14 +2730,14 @@ void BgFxUpdateSync(void) {
         gBgFx->scaleX = (gSineTable[((u16)gBgFx->unk_08 * 4) & 0xFF] >> 3) + 89;
         o = BgFxGetSyncTarget();
 
-        if (o != 0) {
+        if (o != NULL) {
             ApproachValueHalfSteps(&gBgFx->x, o->x, gBgFx->unk_0A);
             ApproachValueHalfSteps(&gBgFx->y, o->y, gBgFx->unk_0A);
             ApproachValueHalfSteps(&gBgFx->z, o->z - (o->centerHeight << 8), gBgFx->unk_0A);
         }
         gBgFx->unk_0A--;
 
-        if (o != 0) {
+        if (o != NULL) {
             if (gBgFx->unk_0A > 0) {
                 break;
             }
@@ -3420,7 +3420,7 @@ void BgFxTornadoLiftOpponents(u8 a, u8 b) {
         p = gBtlWork->actor;
         o = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != 0) {
+        while (o != NULL) {
             if (!(o->flags & 0x40000000) && o->kind != 31) {
                 BgFxTornadoLiftBtlObj(p, o, a, b);
             }

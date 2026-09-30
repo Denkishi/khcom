@@ -8154,7 +8154,7 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
         if (w->flags & 2) {
             BtlObj* p = gBtlWork->actor;
-            if (p != 0) {
+            if (p != NULL) {
                 s32 follow = 0;
                 if (act->flags & 4) {
                     if (p->x < act->x - 0x2000) {

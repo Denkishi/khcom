@@ -2952,7 +2952,7 @@ void StaffRollRunScript(StaffRollWork* w) {
     s32 x;
     s32 y;
 
-    if (w->script == 0) {
+    if (w->script == NULL) {
         return;
     }
 
@@ -3428,7 +3428,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
         if (sub % 8 == 0 && w->lastRow != row) {
             s = sStaffRollLines[row];
 
-            if (w->creditsEnded == 0 && s == 0) {
+            if (w->creditsEnded == 0 && s == NULL) {
                 w->scrollSpeed = 0;
                 w->creditsEnded = 1;
             }
@@ -4514,7 +4514,7 @@ void mode_StaffRoll_2(void) {
     ReleaseObjPalette(w->palette);
     TaskPoolDestroy(&w->tasks);
 
-    if (gStaffRollWork != 0) {
+    if (gStaffRollWork != NULL) {
         EwramFree(w);
         gStaffRollWork = 0;
     }

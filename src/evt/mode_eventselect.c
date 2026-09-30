@@ -716,7 +716,7 @@ s32 EV_SOUND_1(EvSoundWork* w) {
     u8 n;
     u8 i;
 
-    if (w->soundCues == 0) {
+    if (w->soundCues == NULL) {
         return 0;
     }
 
@@ -803,7 +803,7 @@ void SetEventSoundPosition(u16 song, s16 x, s16 y) {
 
     v = 0;
 
-    if (gEventSoundMix == 0) {
+    if (gEventSoundMix == NULL) {
         return;
     }
 

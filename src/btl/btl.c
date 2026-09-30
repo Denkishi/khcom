@@ -275,7 +275,7 @@ void SelectLockonTarget(void) {
     e = ListPoolFirst(&gBtlWork->pool);
 
     if (p->flags & 4) {
-        for (; e != 0; e = ListPoolNext(&e->node)) {
+        for (; e != NULL; e = ListPoolNext(&e->node)) {
             if (p->x < e->x || p->x - e->x > 0x9600 ||
                 (p->y - e->y >= 0 ? p->y - e->y > 0x1800
                                               : e->y - p->y > 0x1800) ||
@@ -288,11 +288,11 @@ void SelectLockonTarget(void) {
             min = p->x - e->x;
         }
 
-        if (gBtlWork->actor2 == 0) {
+        if (gBtlWork->actor2 == NULL) {
             min = 0x40000;
             e = ListPoolFirst(&gBtlWork->pool);
 
-            for (; e != 0; e = ListPoolNext(&e->node)) {
+            for (; e != NULL; e = ListPoolNext(&e->node)) {
                 if (p->x > e->x || e->x - p->x > 0x5A00 ||
                     (p->y - e->y >= 0 ? p->y - e->y > 0x1800
                                                   : e->y - p->y > 0x1800) ||
@@ -306,7 +306,7 @@ void SelectLockonTarget(void) {
             }
         }
     } else {
-        for (; e != 0; e = ListPoolNext(&e->node)) {
+        for (; e != NULL; e = ListPoolNext(&e->node)) {
             if (p->x > e->x || e->x - p->x > 0x9600 ||
                 (p->y - e->y >= 0 ? p->y - e->y > 0x1800
                                               : e->y - p->y > 0x1800) ||
@@ -319,11 +319,11 @@ void SelectLockonTarget(void) {
             min = e->x - p->x;
         }
 
-        if (gBtlWork->actor2 == 0) {
+        if (gBtlWork->actor2 == NULL) {
             min = 0x40000;
             e = ListPoolFirst(&gBtlWork->pool);
 
-            for (; e != 0; e = ListPoolNext(&e->node)) {
+            for (; e != NULL; e = ListPoolNext(&e->node)) {
                 if (p->x < e->x || p->x - e->x > 0x5A00 ||
                     (p->y - e->y >= 0 ? p->y - e->y > 0x1800
                                                   : e->y - p->y > 0x1800) ||
@@ -344,7 +344,7 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
         SelectLockonTarget();
     }
 
-    if (gBtlWork->actor2 != 0) {
+    if (gBtlWork->actor2 != NULL) {
         work->gfx = AnimUpdate(&work->anim);
 
         if (gBtlWork->actor2->flags & 0x1000000) {
@@ -364,7 +364,7 @@ void task_btl_lockon_2(BtlLockonWork* work) {
     s16 y;
 
     e = gBtlWork->actor2;
-    if (e != 0) {
+    if (e != NULL) {
         WorldToScreen(&x, &y, e->x + (e->centerOffsetX << 8), e->y,
                       e->z - (e->centerHeight << 8));
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 16, 16);
@@ -440,7 +440,7 @@ void task_btl_area_2(BtlAreaWork* work) {
     if ((u8)gBtlWork->soraOwnsPlay != 0) {
         e = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != 0) {
+        while (e != NULL) {
             WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                           e->y - (e->radiusY << 8), e->z);
             DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, 0, 0, 0x101);
@@ -517,7 +517,7 @@ u16 GetBtlSoraComboType(BtlSoraWork* work) {
         return 3;
     }
 
-    if (b == 0) {
+    if (b == NULL) {
         return 0;
     }
 
@@ -545,7 +545,7 @@ void FocusBtlSoraCameraOnTarget(BtlSoraWork* work) {
         return;
     }
     c = work->actor.btl->actor2;
-    if (c != 0) {
+    if (c != NULL) {
         if (gBtlWork->flags & 0x4000) {
             x = (work->actor.x + c->x) >> 1;
             x = (work->actor.x + x) >> 1;
@@ -632,7 +632,7 @@ void LoadBtlSoraPalette(BtlSoraWork* work) {
 }
 
 void ReleaseBtlSoraPalette(BtlSoraWork* work) {
-    if (work->palette != 0) {
+    if (work->palette != NULL) {
         ReleaseObjPalette(work->palette);
     }
     work->tiles = 0;
@@ -711,7 +711,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     e = &work->actor;
     work->flags = 0;
 
-    if (arg != 0) {
+    if (arg != NULL) {
         if (arg->side == 0) {
             e->x = 0xC000;
             e->flags = 0;
@@ -943,7 +943,7 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     BtlObj* e;
     s16 n;
 
-    if (work->actor.btl->actor2 != 0) {
+    if (work->actor.btl->actor2 != NULL) {
         return work->actor.btl->actor2;
     }
 
@@ -961,12 +961,12 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     }
     n = 0;
     e = ListPoolFirst(&gBtlWork->pool);
-    if (e != 0) {
+    if (e != NULL) {
         list[0] = e;
         n = 1;
         do {
             e = ListPoolNext(&e->node);
-            if (e == 0) {
+            if (e == NULL) {
                 break;
             }
             list[n] = e;
@@ -1130,7 +1130,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     case 51:
         e = GetBtlSoraActiveOpponent(work);
 
-        if (e != 0) {
+        if (e != NULL) {
             if ((e->x < p->x && (p->flags & 4)) ||
                 (e->x > p->x && !(p->flags & 4))) {
                 p->flags |= 0x8000;
@@ -1186,7 +1186,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 e = ListPoolFirst(&gBtlWork->pool);
 
-                while (e != 0) {
+                while (e != NULL) {
                     hp = e->hp;
 
                     if ((s16)hp > 1 && e->badStatus != 2) {
@@ -2134,7 +2134,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         e3 = p->btl->actor2;
 
-        if (e3 != 0) {
+        if (e3 != NULL) {
             if (p->flags & 4) {
                 if (p->x < e3->x) {
                     p->flags &= ~4;
@@ -2854,7 +2854,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_VO_SR_STOP00);
             FadeStartOut(6, 8);
         } else if ((s16)work->stateTimer == 25) {
-            if (p->btl->actor2 != 0) {
+            if (p->btl->actor2 != NULL) {
                 e = p->btl->actor2;
                 t = e->x;
                 t2 = e->y;
@@ -3135,7 +3135,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if (AnimGetFrame(&work->anim) <= 2) {
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (AnimGetFrame(&work->anim) > 1) {
                     s32 t;
 
@@ -3233,8 +3233,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 e = ListPoolFirst(&gBtlWork->pool);
 
-                while (e != 0) {
-                    if (e->badStatus != 2 && e->parent == 0) {
+                while (e != NULL) {
+                    if (e->badStatus != 2 && e->parent == NULL) {
                         CreateBtlPopTask(e, 10);
                         e->hp += 50;
 
@@ -3287,7 +3287,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 e2 = 0;
                 e = ListPoolFirst(&gBtlWork->pool);
 
-                while (e != 0) {
+                while (e != NULL) {
                     s32 t;
                     s32 t2;
                     s32 d;
@@ -3304,7 +3304,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     e = ListPoolNext(&e->node);
                 }
 
-                if (e2 != 0) {
+                if (e2 != NULL) {
                     FadeFromAmount(4, 15, 32);
 
                     if (e2->flags & 0x0000008000000000LL) {
@@ -3415,7 +3415,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 x = e->x;
                 y = e->y;
                 z = e->groundZ;
@@ -3596,7 +3596,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             e = PickBtlSoraTarget(work);
             work->steps = 16;
 
-            if (e != 0) {
+            if (e != NULL) {
                 p->y = e->y;
                 p->z = e->groundZ;
                 p->groundZ = e->groundZ;
@@ -3670,7 +3670,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             case 0:
                 e = p->btl->actor2;
 
-                if (e != 0) {
+                if (e != NULL) {
                     t = e->x;
                     t2 = e->y;
                 } else {
@@ -3725,7 +3725,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 27) {
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (p->flags & 4) {
                     BgFxStartGravity(work->variant[0], p->x - 8192, p->y, p->z - 3584,
                                   e->x, e->y, 0, 1, work->variant[0] + 75);
@@ -3794,7 +3794,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27) {
             e = work->target;
 
-            if (e != 0) {
+            if (e != NULL) {
                 s32 d;
 
                 d = 0;
@@ -3867,7 +3867,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27) {
             e = work->target;
 
-            if (e != 0) {
+            if (e != NULL) {
                 s32 d;
 
                 d = 0;
@@ -3931,7 +3931,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 t4 = e->z - (e->centerHeight << 8);
             } else {
                 t4 = p->z - 3584;
@@ -4670,7 +4670,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (p->flags & 4) {
                     if (p->x < e->x) {
                         p->flags &= ~4;
@@ -4694,7 +4694,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 work->vz = -1152;
             }
 
-            if (e != 0) {
+            if (e != NULL) {
                 p->x += (e->x - p->x) >> 3;
                 p->y += (e->y - p->y) >> 3;
             } else if (p->flags & 4) {
@@ -4795,7 +4795,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 e = ListPoolFirst(&gBtlWork->pool);
 
-                while (e != 0) {
+                while (e != NULL) {
                     if (e->vx != 0 || e->vy != 0) {
                         ApplyAttackToBtlObj(108, e);
                     }
@@ -5124,7 +5124,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             e = PickBtlSoraTarget(work);
 
-            if (e != 0) {
+            if (e != NULL) {
                 work->unk_194 = e->x;
                 work->unk_198 = e->y;
             } else {
@@ -5225,7 +5225,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 m4aSongNumStart(SONG_VO_SR_ATTACK07);
             }
 
-            if (e != 0) {
+            if (e != NULL) {
                 p->x += (e->x - p->x) >> 3;
                 p->y += (e->y - p->y) >> 3;
             } else if (p->flags & 4) {
@@ -6403,7 +6403,7 @@ u16 GetBtlRikuComboType(BtlRikuWork* work) {
         return 3;
     }
 
-    if (b == 0) {
+    if (b == NULL) {
         return 0;
     }
 
@@ -6428,7 +6428,7 @@ void FocusBtlRikuCameraOnTarget(BtlRikuWork* work) {
         return;
     }
     c = work->actor.btl->actor2;
-    if (c != 0) {
+    if (c != NULL) {
         BtlMapFollowPosition((work->actor.x + c->x) >> 1, (work->actor.y + c->y) >> 1,
                       (work->actor.z + c->z) >> 1);
     } else {
@@ -6736,7 +6736,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     e = &work->actor;
     work->flags = 0;
 
-    if (arg != 0) {
+    if (arg != NULL) {
         if (arg->side == 0) {
             e->x = 0xC000;
             e->flags = 0;
@@ -6986,7 +6986,7 @@ BtlObj* FindHighestEnemy(BtlRikuWork* work) {
     min = 0x10000;
     best = 0;
     e = ListPoolFirst(&gBtlWork->pool);
-    while (e != 0) {
+    while (e != NULL) {
         if (!(e->flags & 0x1000000)) {
             d = e->z - (e->centerHeight << 8);
             if (min > d) {
@@ -7004,7 +7004,7 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     BtlObj* e;
     s16 n;
 
-    if (work->actor.btl->actor2 != 0) {
+    if (work->actor.btl->actor2 != NULL) {
         return work->actor.btl->actor2;
     }
 
@@ -7022,12 +7022,12 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     }
     n = 0;
     e = ListPoolFirst(&gBtlWork->pool);
-    if (e != 0) {
+    if (e != NULL) {
         list[0] = e;
         n = 1;
         do {
             e = ListPoolNext(&e->node);
-            if (e == 0) {
+            if (e == NULL) {
                 break;
             }
             list[n] = e;
@@ -7213,7 +7213,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 51:
         e = GetBtlRikuActiveOpponent(work);
 
-        if (e != 0) {
+        if (e != NULL) {
             if ((e->x < p->x && (p->flags & 4)) ||
                 (e->x > p->x && !(p->flags & 4))) {
                 p->flags |= 0x8000;
@@ -7268,7 +7268,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 e = ListPoolFirst(&gBtlWork->pool);
 
-                while (e != 0) {
+                while (e != NULL) {
                     uv = e->hp;
 
                     if ((s16)e->hp > 1) {
@@ -7496,7 +7496,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (p->flags & 4) {
                     if (p->x < e->x) {
                         p->flags &= ~4LL;
@@ -7714,7 +7714,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if ((s16)work->stateTimer == 0) {
             e = PickBtlRikuTarget(work);
 
-            if (e != 0) {
+            if (e != NULL) {
                 tx = e->x;
                 ty = e->y;
                 tz = e->z - 4096;
@@ -7911,7 +7911,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             e = p->btl->actor2;
 
             if (p->flags & 4) {
-                if (e != 0) {
+                if (e != NULL) {
                     tx = e->x + 4096;
                     ty = e->y;
                 } else {
@@ -7919,7 +7919,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     ty = p->y;
                 }
             } else {
-                if (e != 0) {
+                if (e != NULL) {
                     tx = e->x - 4096;
                     ty = e->y;
                 } else {
@@ -7956,7 +7956,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             FocusBtlRikuCameraOnBgFx(work);
             e = work->target;
 
-            if (e != 0) {
+            if (e != NULL) {
                 flag = 0;
 
                 if (p->flags & 4) {
@@ -8330,7 +8330,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         case 2:
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 ex = e->x - p->x;
                 ey = e->y - p->y;
 
@@ -8535,7 +8535,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         e = work->target;
 
-        if (e != 0) {
+        if (e != NULL) {
             p->x += (e->x - p->x) >> 3;
             p->y += (e->y - p->y) >> 3;
         }
@@ -8568,7 +8568,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->flags |= 0x800;
 
-        if (work->target != 0) {
+        if (work->target != NULL) {
             BtlMapFollowPosition(p->x, p->y,
                           work->target->z - (work->target->centerHeight << 8));
             p->x += (work->target->x - p->x) >> 3;
@@ -8611,7 +8611,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->flags |= 0x800;
         e = work->target;
 
-        if (e != 0) {
+        if (e != NULL) {
             p->x += (e->x - p->x) >> 3;
             p->y += (e->y - p->y) >> 3;
         }
@@ -9477,7 +9477,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             EnableBtlRikuPassThrough(work);
             e = work->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (p->x < e->x) {
                     p->flags |= 4;
                 } else {
@@ -10001,7 +10001,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (AnimGetFrame(&work->anim) <= 2) {
             e = p->btl->actor2;
 
-            if (e != 0) {
+            if (e != NULL) {
                 if (AnimGetFrame(&work->anim) > 1) {
                     s32 t;
 

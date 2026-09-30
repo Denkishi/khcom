@@ -641,7 +641,7 @@ void MapEnm00Stand(MapEnmWork* p) {
 void Task_MapEnm00_0(MapEnmWork* p, MapEnmArgs* q) {
     MapEnmInit(p, q);
 
-    if (p->update == 0) {
+    if (p->update == NULL) {
         if (p->flags & 0x20) {
             p->update = MapEnm00Stand;
             MapEnmSetAnim(p, 1, 0);
@@ -671,10 +671,10 @@ s32 Task_MapEnm00_1(MapEnmWork* p) {
         return 1;
     }
 
-    if (p->update != 0) {
+    if (p->update != NULL) {
         p->update(p);
 
-        if (p->update != 0) {
+        if (p->update != NULL) {
             ColliderSetPosition(&p->collider, q->x, q->y, q->z);
             return 1;
         }
@@ -936,10 +936,10 @@ s32 Task_MapEnm01_1(MapEnmWork* p) {
         return 1;
     }
 
-    if (p->update != 0) {
+    if (p->update != NULL) {
         ((void (*)(MapEnmWork*))p->update)(q);
 
-        if (p->update != 0) {
+        if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
             return 1;
         }
@@ -987,10 +987,10 @@ s32 Task_MapEnm02_1(MapEnmWork* p) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         ((void (*)(MapEnmWork*))w->update)(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             ColliderSetPosition(&w->collider, q->x, q->y, q->z);
             return 1;
         }
@@ -1210,10 +1210,10 @@ s32 Task_MapEnm03_1(MapEnmWork* p) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         ((void (*)(MapEnmWork*))w->update)(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             ColliderSetPosition(&w->collider, q->x, q->y, q->z);
             return 1;
         }
@@ -1476,10 +1476,10 @@ s32 Task_MapEnm04_1(MapEnmWork* p) {
         return 1;
     }
 
-    if (p->update != 0) {
+    if (p->update != NULL) {
         ((void (*)(MapEnmWork*))p->update)(q);
 
-        if (p->update != 0) {
+        if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
             return 1;
         }
@@ -1570,7 +1570,7 @@ void MapEnm05Hit(MapEnmWork* p) {
 void Task_MapEnm05_0(MapEnmWork* p, MapEnmArgs* q) {
     MapEnmInit(p, q);
 
-    if (p->update == 0) {
+    if (p->update == NULL) {
         p->update = MapEnm05Appear;
         MapEnmSetAnim(p, 0, 0);
         p->gfx = AnimGetGfx(&p->anim);
@@ -1594,10 +1594,10 @@ s32 Task_MapEnm05_1(MapEnmWork* p) {
         return 1;
     }
 
-    if (p->update != 0) {
+    if (p->update != NULL) {
         ((void (*)(MapEnmWork*))p->update)(q);
 
-        if (p->update != 0) {
+        if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
             return 1;
         }
@@ -1688,7 +1688,7 @@ void MapEnm06Hit(MapEnmWork* p) {
 void Task_MapEnm06_0(MapEnmWork* p, MapEnmArgs* q) {
     MapEnmInit(p, q);
 
-    if (p->update == 0) {
+    if (p->update == NULL) {
         p->update = MapEnm06Appear;
         MapEnmSetAnim(p, 0, 0);
         p->gfx = AnimGetGfx(&p->anim);
@@ -1712,10 +1712,10 @@ s32 Task_MapEnm06_1(MapEnmWork* p) {
         return 1;
     }
 
-    if (p->update != 0) {
+    if (p->update != NULL) {
         ((void (*)(MapEnmWork*))p->update)(q);
 
-        if (p->update != 0) {
+        if (p->update != NULL) {
             ColliderSetPosition(&p->collider, pos->x, pos->y, pos->z);
             return 1;
         }
@@ -1959,7 +1959,7 @@ s32 Task_MapGmk_Jump_1(MapGmkJumpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
     }
     return 1;
@@ -2046,7 +2046,7 @@ u8 Task_MapGmk_Enm_1(MapGmkEnmWork* w) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2091,7 +2091,7 @@ void Task_MapGmk_Dmy_2(MapGmkDmyWork* w) {
 }
 
 void Task_MapGmk_Dmy_3(MapGmkDmyWork* w) {
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
     }
 }
@@ -2119,7 +2119,7 @@ u8 MapGmkTutorialWaitHit(MapGmkTutorialWork* w) {
 u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* w) {
     void* p = GetSelectedMapCard();
 
-    if (p != 0) {
+    if (p != NULL) {
         CreateMapRoom(gUnk_0984C868[0], p);
         w->update = MapGmkTutorialWaitOpen;
     }
@@ -2169,7 +2169,7 @@ s32 Task_MapGmk_Tutorial_1(MapGmkTutorialWork* w) {
         gMapRoomState->flags |= 0x200;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         if (w->update(w) == 0) {
             return 0;
         }
@@ -2239,7 +2239,7 @@ u8 Task_MapGmk_Spider_1(MapGmkSpiderWork* w) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2334,7 +2334,7 @@ u8 Task_MapGmk_GP00_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2426,7 +2426,7 @@ u8 Task_MapGmk_GP01_1(MapGmkGp1Work* w) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2523,7 +2523,7 @@ u8 Task_MapGmk_GP02_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2627,7 +2627,7 @@ u8 Task_MapGmk_GP03_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2722,7 +2722,7 @@ u8 Task_MapGmk_GP04_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2815,7 +2815,7 @@ u8 Task_MapGmk_GP05_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -2922,7 +2922,7 @@ u8 Task_MapGmk_GP06_1(MapGmkGpWork* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3021,7 +3021,7 @@ u8 Task_MapGmk_GP07_1(MapGmkGp07Work* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3115,7 +3115,7 @@ u8 Task_MapGmk_GP08_1(MapGmkGp08Work* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3214,7 +3214,7 @@ u8 Task_MapGmk_GP09_1(MapGmkGp09Work* w) {
         ColliderSetDisabled(&w->collider, 0);
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3403,7 +3403,7 @@ u8 Task_MapGmk01_1(MapGmk01Work* w) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3538,7 +3538,7 @@ u8 Task_MapGmk_Barrel_1(MapGmkBarrelWork* w) {
         return 0;
     }
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         return w->update(w);
     }
     return 1;
@@ -3640,10 +3640,10 @@ s32 Task_MapGmk04_1(MapGmk04Work* w) {
 
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }
@@ -3735,10 +3735,10 @@ s32 Task_MapGmk05_1(MapGmk05Work* w) {
     w->gfx = AnimUpdate(&w->anim);
     w->targeted = IsFldObjTalkTarget(&w->obj);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }
@@ -3837,10 +3837,10 @@ s32 Task_MapGmk06_1(MapGmk06Work* w) {
 
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }
@@ -4012,12 +4012,12 @@ s32 Task_MapPrize_1(MapPrizeWork* w) {
         return 0;
     }
 
-    if (w->update == 0) {
+    if (w->update == NULL) {
         return 0;
     }
     w->update(w);
 
-    if (w->update == 0) {
+    if (w->update == NULL) {
         return 0;
     }
     return 1;
@@ -4286,12 +4286,12 @@ s32 Task_MapPrzCard_1(MapPrzCardWork* w) {
         return 0;
     }
 
-    if (w->update == 0) {
+    if (w->update == NULL) {
         return 0;
     }
     w->update(w);
 
-    if (w->update == 0) {
+    if (w->update == NULL) {
         return 0;
     }
     return 1;
@@ -4377,10 +4377,10 @@ void Task_MapPrzStock_0(MapPrzStockWork* w, u16* a) {
 s32 Task_MapPrzStock_1(MapPrzStockWork* w) {
     TaskPoolUpdate(&w->tasks);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }

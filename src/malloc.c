@@ -1,5 +1,6 @@
 #include "listpool.h"
 #include "malloc.h"
+#include <stddef.h>
 
 static const u8 sEwramHeapName[12] = "HEAP_SYSTEM";
 
@@ -14,7 +15,7 @@ void HeapUnlinkFreeBlock(HeapBlock* b) {
 }
 
 u8 HeapContains(void* p, Heap* heap) {
-    if (p != 0 && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
+    if (p != NULL && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
         return 1;
     }
     
@@ -25,7 +26,7 @@ HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap) {
     HeapBlock* b;
 
     b = heap->start->nextFree;
-    while (b != 0 && b != heap->end) {
+    while (b != NULL && b != heap->end) {
         if (b->size >= size) {
             return b;
         }
@@ -99,7 +100,7 @@ void* HeapAlloc(u32 size, Heap* heap) {
     size = (size + 63) & ~31;
     b = HeapFindFreeBlock(size, heap);
 
-    if (b == 0) {
+    if (b == NULL) {
         return 0;
     }
 
@@ -147,7 +148,7 @@ void HeapFree(void* p, Heap* heap) {
     HeapBlock* head;
     s32 size;
 
-    if (p == 0) {
+    if (p == NULL) {
         return;
     }
 
@@ -236,7 +237,7 @@ s32 HeapGetFreeTotal(Heap* heap) {
     b = heap->start->nextFree;
     total = 0;
 
-    while (b != 0 && b->size > 0) {
+    while (b != NULL && b->size > 0) {
         total += b->size;
         b = b->nextFree;
     }
@@ -254,7 +255,7 @@ s32 IwramGetFreeTotal(void) {
 void func_08000A60(Heap* heap) {
     HeapBlock* b;
 
-    for (b = heap->start; b != 0; b = b->next) {
+    for (b = heap->start; b != NULL; b = b->next) {
         *(volatile s32*)&b->size;
     }
 }
@@ -278,7 +279,7 @@ void SetIwramHeapAllocFlag(u8 v) {
 void func_08000AA8(Heap* heap) {
     HeapBlock* b;
 
-    for (b = heap->start; b != 0; b = b->next) {
+    for (b = heap->start; b != NULL; b = b->next) {
         *(volatile s32*)&b->size;
     }
 }
@@ -308,13 +309,13 @@ const void* GetIwramHeapName(void) {
 }
 
 void ListAppend(ListNode* node, ListNode** head, ListNode** tail) {
-    if (*head == 0) {
+    if (*head == NULL) {
         *head = node;
     }
 
     node->prev = *tail;
 
-    if (*tail != 0) {
+    if (*tail != NULL) {
         (*tail)->next = node;
     }
 
@@ -325,13 +326,13 @@ void ListAppend(ListNode* node, ListNode** head, ListNode** tail) {
 void ListInsertAfter(ListNode* node, ListNode** head, ListNode** tail, ListNode* after) {
     ListNode* next;
 
-    if (after != 0) {
+    if (after != NULL) {
         node->prev = after;
         next = after->next;
         node->next = next;
         after->next = node;
 
-        if (next != 0) {
+        if (next != NULL) {
             next->prev = node;
         } else {
             *tail = node;
@@ -344,13 +345,13 @@ void ListInsertAfter(ListNode* node, ListNode** head, ListNode** tail, ListNode*
 void ListInsertBefore(ListNode* node, ListNode** head, ListNode** tail, ListNode* before) {
     ListNode* prev;
 
-    if (before != 0) {
+    if (before != NULL) {
         node->next = before;
         prev = before->prev;
         node->prev = prev;
         before->prev = node;
 
-        if (prev != 0) {
+        if (prev != NULL) {
             prev->next = node;
         } else {
             *head = node;
@@ -361,8 +362,8 @@ void ListInsertBefore(ListNode* node, ListNode** head, ListNode** tail, ListNode
 }
 
 void ListRemove(ListNode* node, ListNode** head, ListNode** tail) {
-    if (node->prev == 0) {
-        if (node->next == 0) {
+    if (node->prev == NULL) {
+        if (node->next == NULL) {
             *head = 0;
             *tail = 0;
         } else {
@@ -370,7 +371,7 @@ void ListRemove(ListNode* node, ListNode** head, ListNode** tail) {
             *head = node->next;
         }
     } else {
-        if (node->next == 0) {
+        if (node->next == NULL) {
             *tail = node->prev;
             node->prev->next = node->next;
         } else {
@@ -442,7 +443,7 @@ void* ListPoolRelease(void* p, void* pool) {
     ListAppend(node, &list->freeHead, &list->freeTail);
     node->flags &= 0xFFFE;
 
-    if (next != 0) {
+    if (next != NULL) {
         return next->owner;
     }
 
@@ -456,7 +457,7 @@ void* ListPoolFirst(void* pool) {
 
     n = list->activeHead;
 
-    if (n != 0) {
+    if (n != NULL) {
         if (n->flags & 2) {
             return ListPoolNext(n);
         }
@@ -476,7 +477,7 @@ void* ListPoolLast(void* pool) {
 
     n = list->activeTail;
 
-    if (n != 0) {
+    if (n != NULL) {
         if (n->flags & 2) {
             return ListPoolPrev(n);
         }
@@ -496,7 +497,7 @@ void* ListPoolNext(void* p) {
 
     n = node->next;
 
-    if (n != 0) {
+    if (n != NULL) {
         if (n->flags & 2) {
             return ListPoolNext(n);
         }
@@ -516,7 +517,7 @@ void* ListPoolPrev(void* p) {
 
     n = node->prev;
 
-    if (n != 0) {
+    if (n != NULL) {
         if (n->flags & 2) {
             return ListPoolPrev(n);
         }
@@ -535,7 +536,7 @@ void* ListPoolFirstFree(void* pool) {
 
     n = list->freeHead;
 
-    if (n != 0) {
+    if (n != NULL) {
         return n->owner;
     }
 
@@ -590,7 +591,7 @@ void* ListPoolRemove(void* p, void* pool) {
     ListRemove(node, &list->activeHead, &list->activeTail);
     node->flags &= 0xFFFE;
 
-    if (next != 0) {
+    if (next != NULL) {
         return next->owner;
     }
 

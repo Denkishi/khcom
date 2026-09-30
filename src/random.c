@@ -1,6 +1,7 @@
 #include "pallet.h"
 #include "gba/syscall.h"
 #include "sprite.h"
+#include <stddef.h>
 
 u32 gRandSeed;
 u8 gUnk_0203402C[4];
@@ -196,7 +197,7 @@ void BgAnimUpdate(void) {
     s16 over;
     s32 vis;
 
-    if (gBgAnimCurrent == 0) {
+    if (gBgAnimCurrent == NULL) {
         return;
     }
 
@@ -276,11 +277,11 @@ u8 BgAnimIsStopped(void) {
 }
 
 void BgAnimGetFrameState(u16* a, u16* b) {
-    if (a != 0) {
+    if (a != NULL) {
         *a = gBgAnimFrame;
     }
 
-    if (b != 0) {
+    if (b != NULL) {
         *b = gBgAnimFrameTimer;
     }
 }

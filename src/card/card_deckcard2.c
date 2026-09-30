@@ -127,7 +127,7 @@ void DeckCard2_2(DeckCard2Work* n) {
         return;
     }
 
-    if (n->tiles != 0 && n->palette != 0) {
+    if (n->tiles != NULL && n->palette != NULL) {
         DrawSprite(n->x >> 8, n->y >> 8, n->cardDef->gfx2, n->tiles, n->palette, 0, 0, 0x33);
 
         if (n->premium != 0) {
@@ -159,7 +159,7 @@ void DeckCard2LoadGfx(DeckCard2Work* n) {
     n->palette = LoadObjPalette(n->cardDef->palette2, 32);
     n->tiles2 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
 
-    if (n->tiles != 0 && n->palette != 0) {
+    if (n->tiles != NULL && n->palette != NULL) {
         n->flags |= 1;
     }
 }

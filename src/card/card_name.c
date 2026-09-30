@@ -297,7 +297,7 @@ u8 GetStringLength(u8* p) {
 
     n = 0;
 
-    if (p == 0) {
+    if (p == NULL) {
         return 0;
     }
 

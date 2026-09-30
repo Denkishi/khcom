@@ -706,7 +706,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         BosDsdSetBgFrame(8, 0x80);
         e = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != 0) {
+        while (e != NULL) {
             if (e->kind == 0) {
                 e->flags |= 0x40;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
@@ -921,7 +921,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
     case 0:
         e = ListPoolFirst(&gBtlWork->pool);
 
-        while (e != 0) {
+        while (e != NULL) {
             if (e->kind == 0) {
                 e->flags |= 0x40;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);

@@ -254,7 +254,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         if (work->stateTimer == 0) {
             target = SmnCloudPickTeleportTarget(work);
             work->steps = 8;
-            if (target != 0) {
+            if (target != NULL) {
                 body->y = target->y;
                 body->z = target->groundZ;
                 body->groundZ = target->groundZ;
@@ -433,7 +433,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         if (work->stateTimer == 0) {
             target = SmnCloudNextTarget(work);
             work->target = target;
-            if (target == 0) {
+            if (target == NULL) {
                 work->state = 5;
                 work->stateTimer = 0;
                 break;
@@ -673,7 +673,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     count = 0;
     p = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != 0) {
+    while (p != NULL) {
         if (!(p->flags & 0x01000000)) {
             list[count] = p;
             count++;
@@ -781,7 +781,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             work->steps++;
         }
 
-        if ((work->vz > 0 && work->steps > 7) || work->target == 0) {
+        if ((work->vz > 0 && work->steps > 7) || work->target == NULL) {
             work->state = 3;
             work->stateTimer = 0;
         } else {
@@ -2075,7 +2075,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     count = 0;
     p = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != 0) {
+    while (p != NULL) {
         if (!(p->flags & 0x01000000)) {
             list[count] = p;
             count++;
@@ -2107,7 +2107,7 @@ void SmnGenieFollowTarget(SmnGenieWork* work) {
     obj = work->target;
     body = &work->body;
 
-    if (obj == 0) {
+    if (obj == NULL) {
         return;
     }
 
@@ -2165,7 +2165,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         return 0;
     }
     BtlMapFollowPosition(body->x, body->y, body->z);
-    if (gBtlWork->boundsCallback != 0) {
+    if (gBtlWork->boundsCallback != NULL) {
         gBtlWork->boundsCallback(&body->x, &body->y, &body->z, &body->groundZ);
         if (body->z > body->groundZ) {
             body->z = body->groundZ;
@@ -2211,7 +2211,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         body->z += (body->groundZ - height - body->z) >> 3;
         if ((s16)work->stateTimer > 10) {
             work->target = SmnGenieNextTarget(work);
-            if (work->target == 0 || (s16)work->attacksLeft-- <= 0) {
+            if (work->target == NULL || (s16)work->attacksLeft-- <= 0) {
                 work->state = 1;
                 work->stateTimer = 0;
             } else {
@@ -2253,7 +2253,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
-                if (work->target != 0) {
+                if (work->target != NULL) {
                     x = work->target->x;
                     y = work->target->y;
                     z = 0;
@@ -2291,7 +2291,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
-                if (work->target != 0) {
+                if (work->target != NULL) {
                     x = work->target->x;
                     y = work->target->y;
                     z = 0;
@@ -2331,7 +2331,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         if (work->fired == 0) {
             SmnGenieFollowTarget(work);
             if (AnimIsFinished(&work->anim)) {
-                if (work->target != 0) {
+                if (work->target != NULL) {
                     x = work->target->x;
                     y = work->target->y;
                     z = work->target->z - work->target->centerHeight * 256;

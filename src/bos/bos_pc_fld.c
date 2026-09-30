@@ -57,10 +57,10 @@ void BosPcFldEnableObject(Task* task, u8 a) {
     }
     ColliderSetDisabled(&work->collider, a);
     if (a == 0) {
-        if (work->tiles == 0) {
+        if (work->tiles == NULL) {
             work->tiles = LoadObjTiles(gUnk_09CC4E54, 0x200);
         }
-        if (work->palette == 0) {
+        if (work->palette == NULL) {
             pal = LoadObjPalette(gUnk_09D693D4, 0x60);
             work->palette = pal;
             LoadPalette(gUnk_09D69434, gUnk_05000220 + pal->index * 32, 32);
@@ -221,8 +221,8 @@ void task_bos_pc_fld_2(PcFldWork* work) {
     pos = gBtlWork->actor;
     if (pos->z >= -0x100) {
         if ((pos->flags & 0x80) == 0) {
-            if (work->tiles != 0) {
-                if (work->palette != 0) {
+            if (work->tiles != NULL) {
+                if (work->palette != NULL) {
                     x = 0x17000;
                     y = 0x14800;
                     z = -0x800;
@@ -240,11 +240,11 @@ void task_bos_pc_fld_3(PcFldWork* work) {
     BosPcFldStopPaletteCycle(work);
     ColliderUnregister(&work->collider);
 
-    if (work->tiles != 0) {
+    if (work->tiles != NULL) {
         ReleaseObjTiles(work->tiles);
     }
 
-    if (work->palette != 0) {
+    if (work->palette != NULL) {
         ReleaseObjPalette(work->palette);
     }
 }

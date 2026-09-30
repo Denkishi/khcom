@@ -57,7 +57,7 @@ void LookupEnemyCardDef(CardDisplayArgs* a, CardDef** b, u8 c) {
         ((CardDisplayWork*)((u8*)b - offsetof(CardDisplayWork, cardDef)))->enemyKind = v;
     }
 
-    if (t != 0) {
+    if (t != NULL) {
         id = t[c].cardId;
 
         if (id != 0xFFFF) {
@@ -160,11 +160,11 @@ void EnemyCardDraw(CardDisplayWork* p) {
     }
 }
 void EnemyCardDestroy(CardDisplayWork* p) {
-    if (p->tiles != 0) {
+    if (p->tiles != NULL) {
         ReleaseCardDisplayGfx(p);
     }
 
-    if (p->palette2 != 0) {
+    if (p->palette2 != NULL) {
         ReleaseObjPalette(p->palette2);
     }
 }

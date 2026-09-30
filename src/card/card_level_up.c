@@ -91,7 +91,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->optionEnabled[0] = 1;
     w->optionEnabled[1] = 1;
     w->optionEnabled[2] = 1;
-    if (gCardBattleState != 0) {
+    if (gCardBattleState != NULL) {
         gCardBattleState->unk_0E9 = 1;
     }
 #ifndef VERSION_EU
@@ -852,7 +852,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
     }
     if (w->optionSteps[0] == 0) {
         for (i = 0; i < 3; i++) {
-            if (i != w->cursor && w->unk_000[i] != 0) {
+            if (i != w->cursor && w->unk_000[i] != NULL) {
                 ReleaseObjTiles(w->unk_000[i]);
                 w->unk_000[i] = 0;
             }
@@ -1029,7 +1029,7 @@ void Level_Up_2(LevelUpWork* w) {
                        gUnk_09EEA1BC[10],
 #endif
                        w->unk_000[6], w->unk_000[7], 0, 0, 50);
-            if (w->unk_000[0] != 0) {
+            if (w->unk_000[0] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != 3) {
 #endif
@@ -1040,7 +1040,7 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
-            if (w->unk_000[1] != 0) {
+            if (w->unk_000[1] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != 3) {
 #endif
@@ -1051,7 +1051,7 @@ void Level_Up_2(LevelUpWork* w) {
                 }
 #endif
             }
-            if (w->unk_000[2] != 0) {
+            if (w->unk_000[2] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != 3) {
 #endif
@@ -1096,7 +1096,7 @@ void Level_Up_2(LevelUpWork* w) {
 #endif
                     DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2D8[i], w->unk_000[i], w->unk_000[5], 0, 0, 50);
                 } else {
-                    if (w->unk_000[i] != 0) {
+                    if (w->unk_000[i] != NULL) {
 #ifdef VERSION_EU
                         DrawSprite(w->x5[i] + 2, w->y5[i] - 1, 0, w->tiles5[i], w->palette2, 0, 0, 40);
 #else
@@ -1200,15 +1200,15 @@ void Level_Up_2(LevelUpWork* w) {
 
 void Level_Up_3(LevelUpWork* w) {
 #ifdef VERSION_EU
-    if (w->tiles5[0] != 0) {
+    if (w->tiles5[0] != NULL) {
         ReleaseObjTiles(w->tiles5[0]);
     }
 
-    if (w->tiles5[1] != 0) {
+    if (w->tiles5[1] != NULL) {
         ReleaseObjTiles(w->tiles5[1]);
     }
 
-    if (w->tiles5[2] != 0) {
+    if (w->tiles5[2] != NULL) {
         ReleaseObjTiles(w->tiles5[2]);
     }
 #else
@@ -1220,67 +1220,67 @@ void Level_Up_3(LevelUpWork* w) {
     FreeTextSlots(w->textSlots[5], 36);
 #endif
 
-    if (w->unk_000[6] != 0) {
+    if (w->unk_000[6] != NULL) {
         ReleaseObjTiles(w->unk_000[6]);
     }
 
-    if (w->unk_000[7] != 0) {
+    if (w->unk_000[7] != NULL) {
         ReleaseObjPalette(w->unk_000[7]);
     }
 
-    if (w->unk_000[0] != 0) {
+    if (w->unk_000[0] != NULL) {
         ReleaseObjTiles(w->unk_000[0]);
     }
 
-    if (w->unk_000[1] != 0) {
+    if (w->unk_000[1] != NULL) {
         ReleaseObjTiles(w->unk_000[1]);
     }
 
-    if (w->unk_000[2] != 0) {
+    if (w->unk_000[2] != NULL) {
         ReleaseObjTiles(w->unk_000[2]);
     }
 
-    if (w->unk_000[4] != 0) {
+    if (w->unk_000[4] != NULL) {
         ReleaseObjPalette(w->unk_000[4]);
     }
 
-    if (w->unk_000[5] != 0) {
+    if (w->unk_000[5] != NULL) {
         ReleaseObjPalette(w->unk_000[5]);
     }
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
     }
 
-    if (w->palette2 != 0) {
+    if (w->palette2 != NULL) {
         ReleaseObjPalette(w->palette2);
     }
 
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
     }
 
-    if (w->palette3 != 0) {
+    if (w->palette3 != NULL) {
         ReleaseObjPalette(w->palette3);
     }
 
-    if (w->tiles2 != 0) {
+    if (w->tiles2 != NULL) {
         ReleaseObjTiles(w->tiles2);
     }
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
     }
 
-    if (w->palette4 != 0) {
+    if (w->palette4 != NULL) {
         ReleaseObjPalette(w->palette4);
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         ReleaseObjTiles(w->tiles4);
     }
 
-    if (w->palette5 != 0) {
+    if (w->palette5 != NULL) {
         ReleaseObjPalette(w->palette5);
     }
 
@@ -1650,61 +1650,61 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
             ApproachValue(&w->y2, 0x9800, w->barSteps);
             w->barSteps--;
         } else {
-            if (w->unk_000[0] != 0) {
+            if (w->unk_000[0] != NULL) {
                 ReleaseObjTiles(w->unk_000[0]);
             }
 
-            if (w->unk_000[1] != 0) {
+            if (w->unk_000[1] != NULL) {
                 ReleaseObjTiles(w->unk_000[1]);
             }
 
-            if (w->unk_000[2] != 0) {
+            if (w->unk_000[2] != NULL) {
                 ReleaseObjTiles(w->unk_000[2]);
             }
 #ifdef VERSION_EU
 
-            if (w->tiles5[0] != 0) {
+            if (w->tiles5[0] != NULL) {
                 ReleaseObjTiles(w->tiles5[0]);
             }
 
-            if (w->tiles5[1] != 0) {
+            if (w->tiles5[1] != NULL) {
                 ReleaseObjTiles(w->tiles5[1]);
             }
 
-            if (w->tiles5[2] != 0) {
+            if (w->tiles5[2] != NULL) {
                 ReleaseObjTiles(w->tiles5[2]);
             }
 #endif
 
-            if (w->unk_000[4] != 0) {
+            if (w->unk_000[4] != NULL) {
                 ReleaseObjPalette(w->unk_000[4]);
             }
 
-            if (w->unk_000[5] != 0) {
+            if (w->unk_000[5] != NULL) {
                 ReleaseObjPalette(w->unk_000[5]);
             }
 
-            if (w->palette != 0) {
+            if (w->palette != NULL) {
                 ReleaseObjPalette(w->palette);
             }
 
-            if (w->palette2 != 0) {
+            if (w->palette2 != NULL) {
                 ReleaseObjPalette(w->palette2);
             }
 
-            if (w->tiles != 0) {
+            if (w->tiles != NULL) {
                 ReleaseObjTiles(w->tiles);
             }
 
-            if (w->palette3 != 0) {
+            if (w->palette3 != NULL) {
                 ReleaseObjPalette(w->palette3);
             }
 
-            if (w->tiles3 != 0) {
+            if (w->tiles3 != NULL) {
                 ReleaseObjTiles(w->tiles3);
             }
 
-            if (w->palette4 != 0) {
+            if (w->palette4 != NULL) {
                 ReleaseObjPalette(w->palette4);
             }
 
@@ -1770,7 +1770,7 @@ void TrackLevelUpEffectTarget(LevelUpEffectWork* w) {
 
     t = w->target;
 
-    if (t != 0) {
+    if (t != NULL) {
         WorldToScreen(&x, &y, t->x, t->y, t->z);
         w->targetX = x;
         w->targetY = y - 16;
@@ -1826,7 +1826,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->gatherSteps = 24;
     TaskPoolInit(&w->tasks, 4);
 
-    if (w->target != 0 && gLvupLogoActive == 0) {
+    if (w->target != NULL && gLvupLogoActive == 0) {
         args.x = w->x[0];
         args.y = w->y[0];
         args.target = w->target;

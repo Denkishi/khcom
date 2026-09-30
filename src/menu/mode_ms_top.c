@@ -200,11 +200,11 @@ void UpdateMsTopWarpGfx(void) {
             flag = 1;
         }
 
-        if (sMsTopWarpPalettes[i] != 0) {
+        if (sMsTopWarpPalettes[i] != NULL) {
             ReleaseObjPalette(sMsTopWarpPalettes[i]);
         }
 
-        if (sMsTopWarpTiles[i] != 0) {
+        if (sMsTopWarpTiles[i] != NULL) {
             ReleaseObjTiles(sMsTopWarpTiles[i]);
         }
         sMsTopWarpPalettes[i] = LoadObjPalette(sWarpDefs[flag].gfx[i].palette, sWarpDefs[flag].gfx[i].paletteSize);
@@ -559,7 +559,7 @@ void mode_ms_top_1(void) {
         break;
     case 11:
         if (FadeIsActive() == 0) {
-            if (sMsTopNextMode != 0) {
+            if (sMsTopNextMode != NULL) {
                 ModeRequest(sMsTopNextMode, 0);
             } else {
                 RequestMapMode();

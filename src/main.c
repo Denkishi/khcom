@@ -17,6 +17,7 @@
 #include "sroll_api.h"
 #include "sio_api.h"
 #include "save_api.h"
+#include <stddef.h>
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
 
@@ -218,7 +219,7 @@ void AgbMain(void) {
 }
 
 void VBlankIntr(void) {
-    if (gVBlankHandlerOverride != 0) {
+    if (gVBlankHandlerOverride != NULL) {
         gVBlankHandlerOverride();
         return;
     }

@@ -97,7 +97,7 @@ void BosLstDestroyTasks(BosLstWork* work) {
     u32 i;
 
     for (i = 0; i < 0x20; i++) {
-        if (work->lstTasks[i] != 0) {
+        if (work->lstTasks[i] != NULL) {
             TaskKill(&gBtlWork->taskPools[1], work->lstTasks[i]);
         }
         work->lstTasks[i] = 0;
@@ -308,7 +308,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     BtlWork* g;
     u32 i;
 
-    if (pool == 0) {
+    if (pool == NULL) {
         work->inEvent = 0;
         work->eventStep = 0;
         work->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosLstFld, (void*)&sBosLstBattleBackgroundDef);

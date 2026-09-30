@@ -126,7 +126,7 @@ void LoadEventMapObjectGfx(EventMapObjectWork* w, EventBackgroundDef* t) {
     }
 
     for (i = 0; i < q->placementCount; i++) {
-        if (w->tiles[entries[i].spriteIndex] == 0) {
+        if (w->tiles[entries[i].spriteIndex] == NULL) {
             w->tiles[entries[i].spriteIndex] = LoadObjTiles(q->tileResources[entries[i].spriteIndex].data, q->tileResources[entries[i].spriteIndex].size);
             w->palettes[entries[i].spriteIndex] = LoadObjPalette(q->paletteResources[entries[i].spriteIndex].data, q->paletteResources[entries[i].spriteIndex].size);
         }
@@ -137,7 +137,7 @@ void ReleaseEventMapObjectGfx(EventMapObjectWork* w) {
     u8 i;
 
     for (i = 0; i <= 9; i++) {
-        if (w->tiles[i] != 0) {
+        if (w->tiles[i] != NULL) {
             ReleaseObjTiles(w->tiles[i]);
             ReleaseObjPalette(w->palettes[i]);
         }
@@ -149,7 +149,7 @@ void Ev_mapObj_0(EventMapObjectWork* w, u8* a) {
     w->background = a[0];
     t = gEventBackgroundDefs[w->background];
 
-    if (t->mapObjects != 0) {
+    if (t->mapObjects != NULL) {
         LoadEventMapObjectGfx(w, t);
         w->definition = t->mapObjects;
     }

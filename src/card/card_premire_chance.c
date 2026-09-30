@@ -168,7 +168,7 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
         }
     }
 
-    if (w->state == 2 && w->tiles4 != 0) {
+    if (w->state == 2 && w->tiles4 != NULL) {
         DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, 0, 0x400,
                    sPremireChanceCardPriorities[w->position] + 67);
     }
@@ -176,7 +176,7 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
 void PremireChanceCard_3(PremireChanceCardWork* w) {
     ReleasePremireChanceCardGfx(w);
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         ReleaseObjTiles(w->tiles4);
     }
 }

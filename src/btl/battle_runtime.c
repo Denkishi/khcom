@@ -73,7 +73,7 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
     s16* t;
 
     if (b != 9) {
-        if (p->parent != 0) {
+        if (p->parent != NULL) {
             t = &p->parent->popCooldown;
         } else {
             t = &p->popCooldown;
@@ -139,7 +139,7 @@ void UpdateEnemyCardUse(void) {
         return;
     }
     p = gBtlWork->actor4;
-    if (p == 0) {
+    if (p == NULL) {
         return;
     }
     if (p->flags & 0x7202) {
@@ -481,7 +481,7 @@ void MakeOpponentsHittable(void) {
     } else if (w->flags & 0x20000000) {
         p = ListPoolFirst(&w->pool);
 
-        while (p != 0) {
+        while (p != NULL) {
             p->flags &= ~0x80;
             p->invincibleTimer = 0;
             p = ListPoolNext(&p->node);
@@ -634,7 +634,7 @@ void _08019CB4(void) {
             BtlObj* obj;
             gBtlWork->flags &= ~0x40ULL;
             obj = gBtlWork->actor3;
-            if (obj != 0) {
+            if (obj != NULL) {
                 obj->flags |= 0x10000ULL;
             }
             FadeFromAmount(2, 10, 4);
@@ -657,7 +657,7 @@ void _08019CB4(void) {
             BtlObj* obj;
             gBtlWork->flags |= 0x40;
             obj = gBtlWork->actor3;
-            if (obj != 0) {
+            if (obj != NULL) {
                 obj->flags |= 1;
             }
         }
@@ -901,7 +901,7 @@ void _08019CB4(void) {
             break;
         }
         obj = ListPoolFirst(&gBtlWork->pool);
-        while (obj != 0) {
+        while (obj != NULL) {
             if (obj->flags & 0x10) {
                 busy = 1;
                 break;
@@ -1198,7 +1198,7 @@ void BeginBossDefeat(BtlObj* actor) {
     FadeLock();
     p = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != 0) {
+    while (p != NULL) {
         p->node.flags |= 2;
         p = ListPoolNext(&p->node);
     }
@@ -1333,7 +1333,7 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
 
     e = GetEnemyBaseStats(d->id);
 
-    if (e != 0) {
+    if (e != NULL) {
         v = d->id;
 
         switch (v) {
@@ -2251,7 +2251,7 @@ void ExitBattle(void) {
 
 
 u8 ApplyBattleBounds(s32* a, s32* b, s32* c, s32* d) {
-    if (gBtlWork->boundsCallback != 0) {
+    if (gBtlWork->boundsCallback != NULL) {
         return gBtlWork->boundsCallback(a, b, c, d);
     }
     return 0;
@@ -2261,36 +2261,36 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
     u16 n;
 
     if (a->badStatus == 3) {
-        if (b != 0) {
+        if (b != NULL) {
             *b = a->unk_0F0;
         }
-        if (c != 0) {
+        if (c != NULL) {
             *c = a->unk_0F4;
         }
-        if (d != 0) {
+        if (d != NULL) {
             *d = a->unk_0F8;
         }
         n = GetRandom() % 6;
 
         if (n == 0) {
-            if (b != 0) {
+            if (b != NULL) {
                 *b = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
             }
-            if (c != 0) {
+            if (c != NULL) {
                 *c = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
             }
-            if (d != 0) {
+            if (d != NULL) {
                 *d = n;
             }
         }
     } else {
-        if (b != 0) {
+        if (b != NULL) {
             *b = gBtlWork->targetX;
         }
-        if (c != 0) {
+        if (c != NULL) {
             *c = gBtlWork->targetY;
         }
-        if (d != 0) {
+        if (d != NULL) {
             *d = gBtlWork->targetZ;
         }
     }
@@ -2299,7 +2299,7 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
 void SetEnemyHpFromStats(BtlObj* a, s32 id, s32 c) {
     u16 b = id;
     const EnemyBaseStats* e = GetEnemyBaseStats(b);
-    if (e != 0) {
+    if (e != NULL) {
         a->maxHp = (e->hp * c) >> 8;
         if (a->maxHp <= 0) {
             a->maxHp = 1;

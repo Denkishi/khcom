@@ -177,12 +177,12 @@ void task_allmap_room_2(AllmapRoomWork* work) {
         return;
     }
 
-    if (work->gfx2 != 0) {
+    if (work->gfx2 != NULL) {
         DrawSprite(x, y, work->gfx2, work->tiles, work->palette, 0, g, h);
     }
 
     for (i = 0; i < 4; i++) {
-        if (work->gfx[i] != 0) {
+        if (work->gfx[i] != NULL) {
             work->gfx[i] = AnimUpdate(&work->anim[i]);
             DrawSprite(x, y, work->gfx[i], work->tiles2[i], work->palette, 0, g, i - 4 + h);
         }
@@ -196,7 +196,7 @@ void task_allmap_room_3(AllmapRoomWork* work) {
     ReleaseObjPalette(work->palette);
 
     for (i = 0; i < 4; i++) {
-        if (work->tiles2[i] != 0) {
+        if (work->tiles2[i] != NULL) {
             ReleaseObjTiles(work->tiles2[i]);
         }
     }
@@ -651,15 +651,15 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         InitEventKeyCard(e, GetEventKey(i));
         SetLayeredCardSpritePos(GetAllmapKeyCardX(work->count, i), 0x6800, e);
 
-        if (work->doors[i].palette != 0) {
+        if (work->doors[i].palette != NULL) {
             FadeSetPaletteExcluded(work->doors[i].palette->index + 16, 1);
         }
 
-        if (work->doors[i].palette2 != 0) {
+        if (work->doors[i].palette2 != NULL) {
             FadeSetPaletteExcluded(work->doors[i].palette2->index + 16, 1);
         }
 
-        if (work->doors[i].palette3 != 0) {
+        if (work->doors[i].palette3 != NULL) {
             FadeSetPaletteExcluded(work->doors[i].palette3->index + 16, 1);
         }
     }
@@ -734,7 +734,7 @@ void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
     }
 
     for (i = 0; i < 4; i++) {
-        if (work->gfx2[i] != 0 && work->steps == 0) {
+        if (work->gfx2[i] != NULL && work->steps == 0) {
             DrawSprite(work->x >> 8, work->y >> 8, work->gfx2[i], work->tiles, work->palette, 0, 0, i + 51);
             sAllmapDoorOffsetX = sAllmapDoorCardOffsets[i][0];
             sAllmapDoorOffsetY = sAllmapDoorCardOffsets[i][1];
@@ -781,7 +781,7 @@ void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
         ReleaseObjPalette(work->palette);
 
         for (i = 0; i < 4; i++) {
-            if (work->gfx2[i] != 0) {
+            if (work->gfx2[i] != NULL) {
                 ReleaseObjTiles(work->doors[i].tiles);
                 ReleaseObjPalette(work->doors[i].palette);
                 ReleaseObjTiles(work->doors[i].tiles2);
@@ -839,7 +839,7 @@ void task_allmap_pusha_3(AllmapPushaWork* work) {
 }
 
 u8 IsStockMesDispActive(void) {
-    if (gStockMesDispWork == 0 || IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task) == 0) {
+    if (gStockMesDispWork == NULL || IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task) == 0) {
         return 0;
     }
     return 1;

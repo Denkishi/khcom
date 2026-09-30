@@ -637,7 +637,7 @@ void SioBtlOptionDraw(void) {
         width = eu_0806629C(gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->textSlotCount4);
         multiline = 0;
         for (i = 0; i < gSioBtlOptionWork->textSlotCount4; i++) {
-            if (gSioBtlOptionWork->textSlots4[i].tiles == 0) {
+            if (gSioBtlOptionWork->textSlots4[i].tiles == NULL) {
                 multiline = 1;
                 break;
             }

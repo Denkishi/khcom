@@ -1930,7 +1930,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
 
     work->flags = 0;
 
-    if (arg != 0) {
+    if (arg != NULL) {
         work->flags = 16;
     }
 

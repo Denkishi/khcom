@@ -2209,7 +2209,7 @@ u8 BosUrsulaObjectsGone(void) {
     BtlObj* p;
     u8 r = 1;
 
-    for (p = ListPoolFirst(&gBtlWork->pool); p != 0; p = ListPoolNext(&p->node)) {
+    for (p = ListPoolFirst(&gBtlWork->pool); p != NULL; p = ListPoolNext(&p->node)) {
         if (p->kind == 0x23) {
             r = 0;
             break;

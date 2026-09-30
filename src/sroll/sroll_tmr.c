@@ -7,6 +7,7 @@
 #include "gba/keys.h"
 #include "sroll_api.h"
 #include "fade.h"
+#include <stddef.h>
 
 DmaStream gDmaStream __attribute__((aligned(8)));
 u8 gBlockAudioPlaying;
@@ -532,7 +533,7 @@ u8 SrollTextGetGlyphWidth(u16 c, u8* font, u8* widths, u32 count) {
 
     w = 0;
 
-    if (widths != 0) {
+    if (widths != NULL) {
         u16 idx = SrollTextGetGlyphIndex(c, font);
         if (idx < count) {
             w = widths[idx];
@@ -1064,7 +1065,7 @@ u8* SrollTextGetTilemap(SrollWork* w) {
     u8* v;
 
     v = w->tilemapBuffer;
-    if (v == 0) {
+    if (v == NULL) {
         v = w->tilemap;
     }
     return v;
@@ -1073,7 +1074,7 @@ u8* SrollTextGetTilemap(SrollWork* w) {
 void SrollTextFlushTilemap(SrollWork* w) {
     u32 off;
 
-    if (w->tilemapBuffer != 0) {
+    if (w->tilemapBuffer != NULL) {
         off = w->windowY * w->mapWidth * 2;
         RequestDma3Copy(w->tilemapBuffer + off, w->tilemap + off, w->windowHeight * w->mapWidth * 2);
     }
@@ -1176,7 +1177,7 @@ void ScanlineDmaUpdate(void) {
             gDmaStream.swapPending = 0;
         }
 
-        if (gDmaStream.src[gDmaStream.srcIdx] != 0 && gDmaStream.dst != 0 &&
+        if (gDmaStream.src[gDmaStream.srcIdx] != NULL && gDmaStream.dst != NULL &&
             gDmaStream.cnt != 0) {
             dma32 = (vu32*)REG_ADDR_DMA0;
             dma32[0] = (u32)gDmaStream.dmaSrc;
@@ -1185,7 +1186,7 @@ void ScanlineDmaUpdate(void) {
             dma32[2];
         }
 
-        if (gDmaStream.update != 0) {
+        if (gDmaStream.update != NULL) {
             gDmaStream.update();
         }
     }
@@ -1300,31 +1301,31 @@ s32 AudioBlockStreamInit(u32* src) {
     gAudioBlockNext = src;
 
     for (gDecodedAudioWritePosition = 0; gDecodedAudioWritePosition <= 0x7FF; gDecodedAudioWritePosition += 0x200) {
-        if (gAudioBlockNext != 0) {
+        if (gAudioBlockNext != NULL) {
             q = ReadNextAudioBlock(&gAudioBlockNext);
-            if (q != 0) {
+            if (q != NULL) {
                 DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
             }
         }
     }
     gDecodedAudioWritePosition &= 0x7FF;
     gDecodedAudioReadPosition = 0;
-    return gAudioBlockNext != 0;
+    return gAudioBlockNext != NULL;
 }
 
 s32 AudioBlockStreamUpdate(void) {
     u8* q;
 
     if (gDecodedAudioReadPosition > gDecodedAudioWritePosition + 0x200 || gDecodedAudioReadPosition < gDecodedAudioWritePosition) {
-        if (gAudioBlockNext != 0) {
+        if (gAudioBlockNext != NULL) {
             q = ReadNextAudioBlock(&gAudioBlockNext);
-            if (q != 0) {
+            if (q != NULL) {
                 DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
             }
             gDecodedAudioWritePosition = (gDecodedAudioWritePosition + 0x200) & 0x7FF;
         }
     }
-    return gAudioBlockNext != 0;
+    return gAudioBlockNext != NULL;
 }
 
 s32* GetDecodedAudioBuffer(void) {

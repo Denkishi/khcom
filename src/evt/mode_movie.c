@@ -13,6 +13,7 @@
 #include "gba/io_reg.h"
 #include "malloc.h"
 #include "fade.h"
+#include <stddef.h>
 
 vu16 gMovieModeState;
 s32 gMovieId;
@@ -69,7 +70,7 @@ s32 HandleMovieFrame(s32 arg) {
         return 1;
     }
 
-    if (gMovieSubs != 0) {
+    if (gMovieSubs != NULL) {
         for (i = 0; i < 2; i++) {
             if (((MovieSub*)gMovieSubs)[gMovieSubIndex].frame == gMovieFrame) {
                 if (((MovieSub*)gMovieSubs)[gMovieSubIndex].line == 0) {
@@ -132,7 +133,7 @@ void MovieVBlankIntr(void) {
     if (gMovieFlags & 8) {
         REG_DISPCNT = (DISPCNT_MODE_3 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON);
         MovieUpdate();
-        if (gMovieSubs != 0) {
+        if (gMovieSubs != NULL) {
             if (gMovieFlags & 1) {
                 gMovieFlags &= ~1;
                 gMovieSubUpperAlpha = 0;

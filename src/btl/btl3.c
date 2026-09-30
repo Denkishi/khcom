@@ -361,7 +361,7 @@ BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
         return obj;
     }
 
-    if (gBtlWork->actor2 == 0) {
+    if (gBtlWork->actor2 == NULL) {
         return ListPoolFirst(&gBtlWork->pool);
     }
 
@@ -391,7 +391,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         obj = BtlRaidGetTarget(work);
 
-        if (obj != 0) {
+        if (obj != NULL) {
             if (work->steps <= 0) {
                 ApproachAngle(&work->angle,
                               (u8)GetAngle(work->x, work->z, obj->x,
@@ -412,7 +412,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             }
         }
 
-        if (obj == 0 || work->timer > 180) {
+        if (obj == NULL || work->timer > 180) {
             work->state = 5;
             work->timer = 0;
         } else {
@@ -725,7 +725,7 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     count = 0;
     p = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != 0) {
+    while (p != NULL) {
         if (!(p->flags & 0x01000000)) {
             list[count] = p;
             count++;
@@ -768,7 +768,7 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     count = 0;
     p = ListPoolFirst(&gBtlWork->pool);
 
-    while (p != 0) {
+    while (p != NULL) {
         if (!(p->flags & 0x01000000)) {
             d = work->body.z - p->z;
             if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {

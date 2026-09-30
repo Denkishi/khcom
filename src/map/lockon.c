@@ -72,7 +72,7 @@ u8 task_lockon_1(LockonWork* w) {
     count = 0;
 
     if ((gFieldState->flags & 2) == 0) {
-        while (o != 0) {
+        while (o != NULL) {
             ox = o->fieldPosition.x;
             oy = o->fieldPosition.y;
             dx = px - ox;
@@ -166,7 +166,7 @@ void task_lockon_2(LockonWork* w) {
         w->timer = 0;
     }
 
-    if (gFieldState->lockonTarget == 0) {
+    if (gFieldState->lockonTarget == NULL) {
         return;
     }
 
@@ -227,7 +227,7 @@ s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     for (i = 0; i < n; i++) {
         o = w->targets[list[i]];
 
-        if (o != 0) {
+        if (o != NULL) {
             dx = o->fieldPosition.x;
             dy = o->fieldPosition.y;
             dist = VectorLength2D(dx - a, dy - b);
@@ -267,7 +267,7 @@ u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
     s32 cs;
     s32 dot;
 
-    if (d != 0) {
+    if (d != NULL) {
         x = d->fieldPosition.x - b;
         y = d->fieldPosition.y - c;
         sn = gSineTable[a & 0xFF];
@@ -290,7 +290,7 @@ u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
 }
 
 void func_0805F728(s32* x, s32* y) {
-    if (gLockonDoorPosition != 0) {
+    if (gLockonDoorPosition != NULL) {
         *x = (gLockonDoorPosition[0] >> 8) - (gFieldState->x >> 8);
         *y = (gLockonDoorPosition[1] >> 8) + (gLockonDoorPosition[2] >> 8) - (gFieldState->y >> 8) - 24;
     } else {
@@ -420,7 +420,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
 }
 
 void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d) {
-    if (b != 0) {
+    if (b != NULL) {
         LoadPalette(b, (void*)(d * 32 + 0x05000000), 32);
     }
 

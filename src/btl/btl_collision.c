@@ -348,7 +348,7 @@ u8 CanAttackBoxHitBtlObj(BtlObj* p, s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     BtlObj* q = p->parent;
     u64 f;
 
-    if (q != 0) {
+    if (q != NULL) {
         f = q->flags | p->flags;
     } else {
         f = p->flags;
@@ -393,7 +393,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     s32 scale = gBtlWork->damageScale;
     BtlObj* target;
     BtlObj* source;
-    if (hit->parent != 0) {
+    if (hit->parent != NULL) {
         target = hit->parent;
     } else {
         target = hit;
@@ -420,7 +420,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (gBtlWork->flags & 0x20000000) source = gBtlWork->actor;
         else source = gBtlWork->actor3;
     }
-    if (source->btl != 0) {
+    if (source->btl != NULL) {
         switch (source->btl->hcEffect) {
         case 35:
             if ((attack->flags & 0x01002000) != 0x2000) break;
@@ -491,7 +491,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             break;
         }
     }
-    if (target->btl != 0) {
+    if (target->btl != NULL) {
         switch (target->btl->hcEffect) {
         case 14:
             if (attack->flags & 0x80000000) {
@@ -680,7 +680,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         else target->damage = (((source->attack * attack->power) >> 8) * scale) >> 8;
         if (target->damage == 0 && attack->power > 0) target->damage = 1;
     }
-    if (target->btl != 0 && target->btl->hcEffect == 26) {
+    if (target->btl != NULL && target->btl->hcEffect == 26) {
         if (target->hp > 1 && target->hp - target->damage <= 0) {
             target->damage = target->hp - 1;
             target->invincibleTimer = 60;
@@ -725,7 +725,7 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     } else if (gBtlWork->flags & 0x20000000) {
         o = ListPoolFirst(&gBtlWork->pool);
 
-        while (o != 0) {
+        while (o != NULL) {
             if (CanAttackBoxHitBtlObj(o, x, y, z, a, b, c)) {
                 return 1;
             }
@@ -778,7 +778,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
             res = ResolveAttackHit(o, a);
 
             if (res == 1) {
-                if (t->hitEffect != 0) {
+                if (t->hitEffect != NULL) {
                     t->hitEffect(o->x, o->y, o->z);
                 }
             }
@@ -790,7 +790,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
         sy = 0;
         sx = 0;
 
-        while (o != 0) {
+        while (o != NULL) {
             if (!CanAttackBoxHitBtlObj(o, x, y, z, p, q, r)) {
                 o = ListPoolNext(&o->node);
                 continue;
@@ -820,7 +820,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
         n = cnt;
 
         if (n > 0) {
-            if (t->hitEffect != 0) {
+            if (t->hitEffect != NULL) {
                 sx /= n;
                 sy /= n;
                 sz /= n;
@@ -834,7 +834,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
             res = ResolveAttackHit(o, a);
 
             if (res == 1) {
-                if (t->hitEffect != 0) {
+                if (t->hitEffect != NULL) {
                     t->hitEffect(o->x, o->y, o->z);
                 }
             }
@@ -934,7 +934,7 @@ void ColliderSetPosition(Collider* p, s32 a, s32 b, s32 c) {
 
 void ColliderClearPoolContacts(ListPool* pool) {
     Collider* p = ListPoolFirst(pool);
-    while (p != 0) {
+    while (p != NULL) {
         p->colliding = 0;
         p->touchedTypes = 0;
         p->standFlags = 0;
@@ -955,10 +955,10 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
 
     p = ListPoolFirst(a);
 
-    while (p != 0) {
+    while (p != NULL) {
         q = ListPoolLast(b);
 
-        while (q != 0 && p != q) {
+        while (q != NULL && p != q) {
             sum = p->radius + q->radius;
             dx = p->x - q->x;
 

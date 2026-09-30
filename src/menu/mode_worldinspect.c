@@ -404,14 +404,14 @@ void WorldInspectHandleInput(void) {
 
             if (sWorldInspectCursor <= 9) {
                 for (i = 10; i < 12; i++) {
-                    if (sWorldInspectIconPalettes[i] != 0) {
+                    if (sWorldInspectIconPalettes[i] != NULL) {
                         ReleaseObjPalette(sWorldInspectIconPalettes[i]);
                         sWorldInspectIconPalettes[i] = 0;
                     }
                 }
             } else {
                 for (i = 4; i < 6; i++) {
-                    if (sWorldInspectIconPalettes[i] != 0) {
+                    if (sWorldInspectIconPalettes[i] != NULL) {
                         ReleaseObjPalette(sWorldInspectIconPalettes[i]);
                         sWorldInspectIconPalettes[i] = 0;
                     }
@@ -605,7 +605,7 @@ void WorldInspectDraw(void) {
 #endif
 
 #ifdef VERSION_EU
-    if (sWorldInspectBarPalette != 0) {
+    if (sWorldInspectBarPalette != NULL) {
 #else
     if (sWorldInspectState != 2) {
 #endif
@@ -659,14 +659,14 @@ void WorldInspectDraw(void) {
     }
 
     for (i = 0; i < 12; i++) {
-        if (sWorldInspectIconSprites[i] != 0 && sWorldInspectIconPalettes[i] != 0) {
+        if (sWorldInspectIconSprites[i] != NULL && sWorldInspectIconPalettes[i] != NULL) {
             DrawSprite((s16)(sWorldinspectNavs[i].x * 8 + 16), (s16)(sWorldinspectNavs[i].y * 8 + 16),
                           sWorldInspectIconSprites[i], sWorldInspectIconTiles[i], sWorldInspectIconPalettes[i], 0, prio,
                           (u16)(i + 2001));
         }
     }
 
-    if (sWorldInspectIconSprites[sWorldInspectCursor] != 0) {
+    if (sWorldInspectIconSprites[sWorldInspectCursor] != NULL) {
         DrawSprite(
 #ifdef VERSION_EU
                       102,

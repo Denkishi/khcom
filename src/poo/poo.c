@@ -365,7 +365,7 @@ u8 CheckPoohInterrupts(PoohWork* w, PooNode* n) {
 }
 
 void ChoosePoohTarget(PoohWork* w, PooNode* n) {
-    if (n != 0) {
+    if (n != NULL) {
         if (IsPooSoraCallStarting() != 0) {
             if (w->callTimer != 0 || w->targetNode == gPooSoraNode) {
                 w->callCount++;
@@ -645,7 +645,7 @@ void UpdatePoohAction(PoohWork* w, PooNode* n) {
             break;
         }
 
-        if (w->targetNode == 0) {
+        if (w->targetNode == NULL) {
             break;
         }
         c = GetPooNodeWeight(w->targetNode);
@@ -2935,18 +2935,18 @@ u8 task_poo_freeballoon_1(PooFreeBalloonWork* w) {
         w->gfx = 0;
     }
 
-    if (w->gfx == 0 && w->gfx2 == 0) {
+    if (w->gfx == NULL && w->gfx2 == NULL) {
         return 0;
     }
     return 1;
 }
 
 void task_poo_freeballoon_2(PooFreeBalloonWork* w) {
-    if (w->gfx2 != 0) {
+    if (w->gfx2 != NULL) {
         DrawSprite(w->x2, w->y2, w->gfx2, w->tiles2, w->palette2, 0, 0x800, -0x1004 - (w->pos4.y >> 8) * 4);
     }
 
-    if (w->gfx != 0) {
+    if (w->gfx != NULL) {
         DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, 0, 0x800, -0x1004 - (w->pos2.y >> 8) * 4);
     }
 }
@@ -3040,7 +3040,7 @@ void task_poo_trapballoon_0(PooBalloonWork* w, PooPos* p) {
 u8 task_poo_trapballoon_1(PooBalloonWork* w) {
     PooPos t;
 
-    if (w->palette == 0) {
+    if (w->palette == NULL) {
         return 1;
     }
 
@@ -3103,7 +3103,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
         y = ((w->pos.y + d) >> 8) + (w->pos.z >> 8) - gPooScrollY;
 
         if (IsRectOutsideScreen(x, y, 64, 8, 24, 24) != 0) {
-            if (w->palette != 0) {
+            if (w->palette != NULL) {
                 ReleaseObjTiles(w->tiles);
                 ReleaseObjPalette(w->palette);
                 w->palette = 0;
@@ -3111,7 +3111,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
                 RemovePooNode(&w->node);
             }
         } else {
-            if (w->palette == 0) {
+            if (w->palette == NULL) {
                 w->tiles = AllocObjTiles(w->tileBytes, gTrap0006Tiles);
                 w->palette = LoadObjPalette(gUnk_09849B78, 0x20);
                 ColliderInit(&w->collider, 10, 8, 16);
@@ -3125,7 +3125,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
 }
 
 void task_poo_trapballoon_3(PooBalloonWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -3150,7 +3150,7 @@ void task_poo_owlballoon_0(PooOwlBalloonWork* w, PooPos* p) {
 }
 
 u8 task_poo_owlballoon_1(PooOwlBalloonWork* w) {
-    if (w->palette != 0 && ColliderIsTouchingType(&w->collider, 9) != 0 && IsPoohWalkingToTarget() != 0) {
+    if (w->palette != NULL && ColliderIsTouchingType(&w->collider, 9) != 0 && IsPoohWalkingToTarget() != 0) {
         gPoohRequestX = w->pos.x;
         gPoohRequestY = w->pos.y;
         gPoohRequest = 7;
@@ -3169,14 +3169,14 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* w) {
     x = ((w->pos.x - 0x800) >> 8) - gPooScrollX;
     y = ((w->pos.y + 0x1000) >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 64, 8, 24, 24) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gUnk_0974B4D8);
             w->palette = LoadObjPalette(gUnk_09849C98, 0x20);
             ColliderInit(&w->collider, 10, 8, 16);
@@ -3188,7 +3188,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* w) {
 }
 
 void task_poo_owlballoon_3(PooOwlBalloonWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -3267,7 +3267,7 @@ PooNode* FindPoohTargetNode(void) {
     n = best;
     gPooBestNodeScore = 0;
 
-    while (n != 0) {
+    while (n != NULL) {
         gPooNodeScore = GetPooNodeScore(n);
         if (gPooNodeScore > gPooBestNodeScore) {
             gPooBestNodeScore = gPooNodeScore;
@@ -3398,7 +3398,7 @@ void task_poo_honey_2(PooHoneyWork* w) {
     x = (w->pos.x >> 8) - gPooScrollX;
     y = (w->pos.y >> 8) + (w->pos.z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 24, 8, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
@@ -3406,7 +3406,7 @@ void task_poo_honey_2(PooHoneyWork* w) {
             RemovePooNode(&w->node);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gPoohHoneyTiles);
             w->palette = LoadObjPalette(gPoohGaugePalette, 0x20);
             ColliderInit(&w->collider, 10, 8, 16);
@@ -3419,7 +3419,7 @@ void task_poo_honey_2(PooHoneyWork* w) {
 }
 
 void task_poo_honey_3(PooHoneyWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -3568,7 +3568,7 @@ void task_poo_pile_2(PooPileWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (x < -16 || x > 256 || y < -36 || y > 196) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
@@ -3584,7 +3584,7 @@ void task_poo_pile_2(PooPileWork* w) {
     } else {
         w->gfx = AnimUpdate(&w->anim);
 
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = LoadObjTiles(gUnk_09742CC2, 0x300);
             w->palette = LoadObjPalette(gUnk_09849BF8, 0x20);
         }
@@ -3607,7 +3607,7 @@ void task_poo_pile_2(PooPileWork* w) {
 }
 
 void task_poo_pile_3(PooPileWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -3640,7 +3640,7 @@ void task_poo_tigerstump_0(PooStumpWork* w, PooPos* p) {
 }
 
 u8 task_poo_tigerstump_1(PooStumpWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
             gPoohRequest = 5;
         }
@@ -3655,14 +3655,14 @@ void task_poo_tigerstump_2(PooStumpWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = ((w->y - 0x800) >> 8) - gPooScrollY;
     if (x < -96 || x > 336 || y < -64 || y > 224) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = LoadObjTiles(gUnk_097561E8, 0x400);
             w->palette = LoadObjPalette(gUnk_09849D38, 0x20);
             ColliderInit(&w->collider, 7, 15, 24);
@@ -3672,7 +3672,7 @@ void task_poo_tigerstump_2(PooStumpWork* w) {
 }
 
 void task_poo_tigerstump_3(PooStumpWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -3689,7 +3689,7 @@ void task_poo_poohstump_0(PooStumpWork* w, PooPos* p) {
 }
 
 u8 task_poo_poohstump_1(PooStumpWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
             gPoohRequestX = w->x;
             gPoohRequestY = w->y;
@@ -3706,14 +3706,14 @@ void task_poo_poohstump_2(PooStumpWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (x < -80 || x > 320 || y < -24 || y > 184) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = LoadObjTiles(gUnk_09755F54, 0x280);
             w->palette = LoadObjPalette(gUnk_09849D38, 0x20);
             ColliderInit(&w->collider, 7, 7, 14);
@@ -3723,7 +3723,7 @@ void task_poo_poohstump_2(PooStumpWork* w) {
 }
 
 void task_poo_poohstump_3(PooStumpWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -3774,7 +3774,7 @@ void task_poo_piglet_0(PooPigletWork* w) {
 }
 
 u8 task_poo_piglet_1(PooPigletWork* w) {
-    if (w->palette != 0 && w->collider.colliding != 0) {
+    if (w->palette != NULL && w->collider.colliding != 0) {
         if (ColliderIsTouchingType(&w->collider, 9) == 0) {
             return 1;
         }
@@ -3899,7 +3899,7 @@ void task_poo_piglet_2(PooPigletWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 24, 8, 8, 8) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
             SetPoohInteractionEnabled(w->interactionId, 0);
@@ -3907,7 +3907,7 @@ void task_poo_piglet_2(PooPigletWork* w) {
         }
     } else {
         TaskPoolUpdate(&w->tasks);
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gUnk_09849C18, 0x20);
             if (IsPooEventDone(0) != 0) {
                 ColliderInit(&w->collider, 10, 4, 16);
@@ -3926,7 +3926,7 @@ void task_poo_piglet_2(PooPigletWork* w) {
 void task_poo_piglet_3(PooPigletWork* w) {
     ReleaseObjTiles(w->tiles);
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
     }
@@ -4006,7 +4006,7 @@ void task_poo_eeyore_2(PooEeyoreWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 24, 10, 24, 24) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ReleaseObjTiles(w->tiles);
@@ -4026,7 +4026,7 @@ void task_poo_eeyore_2(PooEeyoreWork* w) {
         }
         ColliderSetPosition(&w->collider, w->x, w->y, w->z);
         w->gfx = AnimUpdate(&w->anim);
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gEeyorePalette, 0x20);
             w->tiles = AllocObjTiles(w->tileBytes, gEeyoreFl00Tiles);
         }
@@ -4037,7 +4037,7 @@ void task_poo_eeyore_2(PooEeyoreWork* w) {
 }
 
 void task_poo_eeyore_3(PooEeyoreWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -4118,13 +4118,13 @@ void task_poo_owl_2(PooOwlWork* w) {
     x = (w->pos.x >> 8) - gPooScrollX;
     y = (w->pos.y >> 8) + (w->pos.z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 24, 8, 8, 8) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gOwlFl00Tiles);
             w->palette = LoadObjPalette(gOwlPalette, 0x20);
         }
@@ -4133,7 +4133,7 @@ void task_poo_owl_2(PooOwlWork* w) {
 }
 
 void task_poo_owl_3(PooOwlWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -4197,7 +4197,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* w) {
         }
         break;
     case 4:
-        if (w->palette != 0 && w->collider.colliding != 0 && ColliderIsTouchingType(&w->collider, 9) != 0) {
+        if (w->palette != NULL && w->collider.colliding != 0 && ColliderIsTouchingType(&w->collider, 9) != 0) {
             SetPooRabbitAnimation(w, 6, 0);
             w->waitTimer = 20;
         } else {
@@ -4219,7 +4219,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* w) {
         }
         break;
     case 2:
-        if (w->palette != 0 && w->collider.colliding != 0 && ColliderIsTouchingType(&w->collider, 9) != 0) {
+        if (w->palette != NULL && w->collider.colliding != 0 && ColliderIsTouchingType(&w->collider, 9) != 0) {
             w->waitTimer = 20;
             SetPooRabbitAnimation(w, 0, 0);
         } else {
@@ -4236,7 +4236,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* w) {
         break;
     case 6:
         if (w->waitTimer == 0) {
-            if (w->palette != 0 && ColliderIsTouchingType(&w->collider, 9) == 0) {
+            if (w->palette != NULL && ColliderIsTouchingType(&w->collider, 9) == 0) {
                 SetPooRabbitAnimation(w, 4, 1);
             }
         } else {
@@ -4246,7 +4246,7 @@ u8 task_poo_rabbit_1(PooRabbitWork* w) {
     case 0:
         if (w->waitTimer != 0) {
             w->waitTimer--;
-        } else if (w->palette != 0 && ColliderIsTouchingType(&w->collider, 9) == 0) {
+        } else if (w->palette != NULL && ColliderIsTouchingType(&w->collider, 9) == 0) {
             SetPooRabbitAnimation(w, 2, 1);
         }
         break;
@@ -4266,7 +4266,7 @@ void task_poo_rabbit_2(PooRabbitWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 48, 8, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
             SetPoohInteractionEnabled(w->interactionId, 0);
@@ -4275,7 +4275,7 @@ void task_poo_rabbit_2(PooRabbitWork* w) {
     } else {
         pool = &w->tasks;
         TaskPoolUpdate(pool);
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gRabbitPalette, 0x40);
             ColliderInit(&w->collider, 10, 4, 48);
             SetPoohInteractionEnabled(w->interactionId, 1);
@@ -4288,7 +4288,7 @@ void task_poo_rabbit_2(PooRabbitWork* w) {
 }
 
 void task_poo_rabbit_3(PooRabbitWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -4525,20 +4525,20 @@ void task_poo_tiggerroo_2(PooTiggerWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 56, 8, 24, 24) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
 
             if (w->isTigger == 0) {
-                if (w->tiles != 0) {
+                if (w->tiles != NULL) {
                     ReleaseObjTiles(w->tiles);
                     w->tiles = 0;
                 }
             }
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             if (w->isTigger != 0) {
                 w->palette = LoadObjPalette(gTiggerPalette, 0x20);
                 ColliderInit(&w->collider, 4, 8, 8);
@@ -4584,11 +4584,11 @@ void task_poo_tiggerroo_2(PooTiggerWork* w) {
 }
 
 void task_poo_tiggerroo_3(PooTiggerWork* w) {
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
     }
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
     }
@@ -4764,13 +4764,13 @@ void task_poo_roo_footmark_2(PooFootmarkWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 0, 48, 0, 48) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             RemovePooNode(&w->node);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gRoFootmarkPalette, 0x20);
             n = &w->node;
             AddPooNode(n, 0x240, &w->x);
@@ -4785,7 +4785,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* w) {
 void task_poo_roo_footmark_3(PooFootmarkWork* w) {
     ReleaseObjTiles(w->tiles);
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         RemovePooNode(&w->node);
     }
@@ -4806,7 +4806,7 @@ void task_poo_leaf_0(PooLeafWork* w, PooSpawnArgs* a) {
 }
 
 u8 task_poo_leaf_1(PooLeafWork* w) {
-    if (w->palette != 0 && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
+    if (w->palette != NULL && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
         w->playing = 1;
         AnimReset(&w->anim);
         m4aSongNumStart(SONG_SND_224);
@@ -4828,7 +4828,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 0, 32, 0, 56) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
@@ -4836,7 +4836,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
             w->playing = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gUnk_0975C3E2);
             w->palette = LoadObjPalette(gUnk_09849DF8, 0x20);
             ColliderInit(&w->collider, 6, 28, 0);
@@ -4855,7 +4855,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
 }
 
 void task_poo_leaf_3(PooLeafWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -4881,7 +4881,7 @@ void task_poo_tanpopo_0(PooTanpopoWork* w, PooSpawnArgs* a) {
 }
 
 u8 task_poo_tanpopo_1(PooTanpopoWork* w) {
-    if (w->palette != 0 && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
+    if (w->palette != NULL && (w->collider.standFlags & 2) != 0 && w->playing == 0) {
         w->playing = 1;
         AnimReset(&w->anim);
         AnimReset(&w->anim2);
@@ -4903,7 +4903,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 0, 32, 0, 48) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjTiles(w->tiles2);
             ReleaseObjPalette(w->palette);
@@ -4912,7 +4912,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
             w->playing = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = LoadObjTiles(gUnk_0975E40E, 0x800);
             w->tiles2 = LoadObjTiles(gUnk_0975EC8E, 0x1800);
             w->palette = LoadObjPalette(gUnk_09849E18, 0x20);
@@ -4934,7 +4934,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
 }
 
 void task_poo_tanpopo_3(PooTanpopoWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         ReleaseObjTiles(w->tiles);
         ReleaseObjTiles(w->tiles2);
@@ -4953,7 +4953,7 @@ void task_poo_ti_board_0(PooBoardWork* w, PooPos* p) {
 }
 
 u8 task_poo_ti_board_1(PooBoardWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
             gPoohRequest = 5;
         }
@@ -4968,13 +4968,13 @@ void task_poo_ti_board_2(PooBoardWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 16, 1, 8, 8) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gUnk_09849D58, 0x20);
             ColliderInit(&w->collider, 7, 8, 16);
         }
@@ -4985,7 +4985,7 @@ void task_poo_ti_board_2(PooBoardWork* w) {
 void task_poo_ti_board_3(PooBoardWork* w) {
     ReleaseObjTiles(w->tiles);
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
     }
@@ -5029,13 +5029,13 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* w) {
     x = ((s32)w->x >> 8) - gPooScrollX;
     y = ((s32)w->y >> 8) + (w->z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 8, 8, 8, 8) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gEeyoreFl00Tiles);
             w->palette = LoadObjPalette(gEeyorePalette, 0x20);
         }
@@ -5054,7 +5054,7 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* w) {
 }
 
 void task_poo_eeyoretail_3(PooEeyoreTailWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -5128,7 +5128,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* w) {
     x = ((w->x + w->shakeX) >> 8) - gPooScrollX;
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 16, 16, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
             w->palette = 0;
@@ -5139,7 +5139,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* w) {
             *p = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gEeHoneycombPalette, 0x20);
             w->tiles = AllocObjTiles(w->tileBytes, gEeHoneycombTiles);
         }
@@ -5153,7 +5153,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* w) {
 }
 
 void task_poo_honeycomb_3(PooHoneycombWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -5182,7 +5182,7 @@ void task_poo_vegetable_0(PooVegetableWork* w) {
 }
 
 u8 task_poo_vegetable_1(PooVegetableWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
             gPoohRequest = 5;
         }
@@ -5197,14 +5197,14 @@ void task_poo_vegetable_2(PooVegetableWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 32, 40, 48, 48) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
             ColliderUnregister(&w->collider);
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gRaVegetablesTiles);
             w->palette = LoadObjPalette(gRaVegetablesPalette, 0x20);
             ColliderInit(&w->collider, 7, 0x26, 12);
@@ -5214,7 +5214,7 @@ void task_poo_vegetable_2(PooVegetableWork* w) {
 }
 
 void task_poo_vegetable_3(PooVegetableWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -5540,7 +5540,7 @@ void task_poo_wagon_2(PooWagonWork* w) {
     y = (w->pos.y >> 8) + (w->pos.z >> 8) - gPooScrollY;
 
     if (IsRectOutsideScreen(x, y, 32, 40, 48, 48) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjTiles(w->tiles2);
             ReleaseObjTiles(w->tiles3);
@@ -5550,7 +5550,7 @@ void task_poo_wagon_2(PooWagonWork* w) {
         return;
     }
 
-    if (w->palette == 0) {
+    if (w->palette == NULL) {
         w->tiles = AllocObjTiles(0x560, gRaWagonTiles);
         w->tiles2 = AllocObjTiles(0x4C0, gRaWagonTiles);
         w->tiles3 = AllocObjTiles(160, gRaWagonTiles);
@@ -5595,7 +5595,7 @@ void task_poo_wagon_2(PooWagonWork* w) {
 }
 
 void task_poo_wagon_3(PooWagonWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjTiles(w->tiles2);
         ReleaseObjTiles(w->tiles3);
@@ -5657,7 +5657,7 @@ u8 task_poo_wagonwheel_1(PooWheelWork* w) {
         }
     }
 
-    if (w->unk_40 != 0 && w->palette == 0) {
+    if (w->unk_40 != 0 && w->palette == NULL) {
         return 0;
     }
     return 1;
@@ -5671,7 +5671,7 @@ void task_poo_wagonwheel_2(PooWheelWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 32, 0, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
@@ -5682,7 +5682,7 @@ void task_poo_wagonwheel_2(PooWheelWork* w) {
             }
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, gRaWagonTiles);
             w->palette = LoadObjPalette(gRaWagonPalette, 0x20);
         }
@@ -5702,7 +5702,7 @@ void task_poo_wagonwheel_3(PooWheelWork* w) {
         SetPooStateWheelPos(w->x >> 8, w->y >> 8);
     }
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -5833,7 +5833,7 @@ void task_poo_bee_2(PooBeeWork* w) {
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
 
     if (IsRectOutsideScreen(x, y, 19, 17, 46, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
             w->palette = 0;
@@ -5841,7 +5841,7 @@ void task_poo_bee_2(PooBeeWork* w) {
         return;
     }
 
-    if (w->palette == 0) {
+    if (w->palette == NULL) {
         w->palette = LoadObjPalette(gEeBeePalette, 32);
         w->tiles = LoadObjTiles(gEeBeeTiles, 0x180);
     }
@@ -5854,7 +5854,7 @@ void task_poo_bee_2(PooBeeWork* w) {
 }
 
 void task_poo_bee_3(PooBeeWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -5895,7 +5895,7 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 19, 17, 46, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
             ReleaseObjTiles(w->tiles2);
@@ -5906,7 +5906,7 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* w) {
             }
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gEeBeePalette, 0x20);
             w->tiles = LoadObjTiles(gEeBeeTiles, 0x180);
             w->tiles2 = LoadObjTiles(gEeBeeTiles, 0x180);
@@ -5918,7 +5918,7 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* w) {
 }
 
 void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjTiles(w->tiles2);
         ReleaseObjPalette(w->palette);
@@ -5927,7 +5927,7 @@ void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* w) {
 
 u8 IsPooBeeAfterEventVisible(void) {
     if (IsPooEventDone(2) != 0) {
-        if (gPooBeeAfterEventWork->palette != 0) {
+        if (gPooBeeAfterEventWork->palette != NULL) {
             return 1;
         }
     }
@@ -6097,13 +6097,13 @@ void task_poo_cabbage_2(PooCabbageWork* w) {
     y = (w->y >> 8) + (w->z >> 8) - gPooScrollY;
 
     if (x < -16 || x > 256 || y < -36 || y > 196) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = LoadObjTiles(gRaVegetablesTiles, 0x1D20);
             w->palette = LoadObjPalette(gRaVegetablesPalette, 32);
         }
@@ -6132,7 +6132,7 @@ void task_poo_cabbage_2(PooCabbageWork* w) {
 }
 
 void task_poo_cabbage_3(PooCabbageWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -6268,13 +6268,13 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (w->playing == 0 || IsRectOutsideScreen(x, y, 0, 24, 0, 32) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->tiles = AllocObjTiles(w->tileBytes, w->desc->tiles);
             w->palette = LoadObjPalette(w->desc->palette, 0x20);
         }
@@ -6285,7 +6285,7 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* w) {
 }
 
 void task_poo_mapobjhit_3(PooMapObjHitWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
         ReleaseObjTiles(w->tiles);
     }
@@ -6447,10 +6447,10 @@ void task_poo_prize_0(PooPrizeWork* w, PoohPrizeArgs* a) {
 }
 
 u8 task_poo_prize_1(PooPrizeWork* w) {
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }
@@ -6925,7 +6925,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* w) {
 }
 
 u8 task_poo_rabbitAfterEvent_1(PooRabbitAfterEventWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         if (ColliderIsTouchingType(&w->collider, 9) != 0) {
             gPoohRequest = 5;
         }
@@ -6940,7 +6940,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 48, 8, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
@@ -6951,7 +6951,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* w) {
         w->gfx = AnimUpdate(&w->anim);
         TaskPoolUpdate(&w->tasks);
 
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gRabbitPalette, 0x40);
             w->tiles = AllocObjTiles(w->tileBytes, gRabbitBl00Tiles);
             ColliderInit(&w->collider, 10, 4, 48);
@@ -6963,7 +6963,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* w) {
 }
 
 void task_poo_rabbitAfterEvent_3(PooRabbitAfterEventWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
         ColliderUnregister(&w->collider);
@@ -6993,13 +6993,13 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w) {
     x = (w->x >> 8) - gPooScrollX;
     y = (w->y >> 8) - gPooScrollY;
     if (IsRectOutsideScreen(x, y, 48, 8, 16, 16) != 0) {
-        if (w->palette != 0) {
+        if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
             w->palette = 0;
         }
     } else {
-        if (w->palette == 0) {
+        if (w->palette == NULL) {
             w->palette = LoadObjPalette(gRaVegetablesPalette, 0x20);
             w->tiles = AllocObjTiles(w->tileBytes, gRaVegetablesTiles);
         }
@@ -7008,7 +7008,7 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w) {
 }
 
 void task_poo_cabbageAfterEvent_3(PooCabbageAfterEventWork* w) {
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }

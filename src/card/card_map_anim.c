@@ -50,7 +50,7 @@ void map_anim_0(MapTileAnimationWork* p) {
 
     p->definition = gMapTileAnimationDefs[gEventState->mapAnim];
 
-    if (p->definition != 0) {
+    if (p->definition != NULL) {
         for (i = 0; i < p->definition->trackCount; i++) {
             p->frameTimers[i] = 0;
             p->frameIndices[i] = 0;
@@ -70,7 +70,7 @@ u8 map_anim_1(MapTileAnimationWork* w) {
 
     a = w->definition;
 
-    if (a == 0) {
+    if (a == NULL) {
         return 1;
     }
 

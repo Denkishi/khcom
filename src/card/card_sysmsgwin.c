@@ -94,7 +94,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
     w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
                                    (TextChar*)w->messageDef->text, &w->nextText);
 #else
-    if (w->nextText != 0) {
+    if (w->nextText != NULL) {
         w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
                                        (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
     } else {
@@ -176,7 +176,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
 
         w->tiles2 = LoadObjTiles(&gUnk_093F8C8E[0xC1E], 0x1800);
 
-        if (w->tiles2 == 0) {
+        if (w->tiles2 == NULL) {
             w->unk_146[1] = 1;
             w->tiles2 = LoadObjTiles(&gUnk_0950E2F8[0x140], 0x680);
         } else {
@@ -205,13 +205,13 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
 u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
     u8* pal;
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
     }
 
     if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_KETTEI);
-        if (w->nextText != 0) {
+        if (w->nextText != NULL) {
 #ifdef VERSION_JP
             w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
                                            w->nextText, &w->nextText);
@@ -269,7 +269,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
     return 1;
 }
 s32 UpdateSysmsgwinClose(SysMsgWinWork* w) {
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
     }
 
@@ -331,7 +331,7 @@ void sysmsgwin_2(SysMsgWinWork* w) {
     switch (w->args.mode) {
     case 2:
     case 3:
-        if (w->tiles2 != 0) {
+        if (w->tiles2 != NULL) {
             if (w->unk_146[1] != 0) {
                 DrawSprite(w->frameX >> 8, w->frameY >> 8, (&gUnk_09EF12E8[2])[0],
                            w->tiles2, w->palette4, 0, 0, 10);
@@ -343,14 +343,14 @@ void sysmsgwin_2(SysMsgWinWork* w) {
         break;
     }
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         if (w->waitIconVisible != 0) {
             DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4,
                        w->tiles3, w->palette, 0, 0, 5);
         }
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx,
                    w->tiles4, w->palette2, 0, 1, 5);
     }
@@ -371,39 +371,39 @@ void sysmsgwin_3(SysMsgWinWork* w) {
 
     FreeCardMsgGlyphSprites();
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
     }
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         ReleaseObjTiles(w->tiles4);
     }
 
-    if (w->palette2 != 0) {
+    if (w->palette2 != NULL) {
         ReleaseObjPalette(w->palette2);
     }
 
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
     }
 
-    if (w->tiles2 != 0) {
+    if (w->tiles2 != NULL) {
         ReleaseObjTiles(w->tiles2);
     }
 
-    if (w->palette4 != 0) {
+    if (w->palette4 != NULL) {
         ReleaseObjPalette(w->palette4);
     }
 
-    if (w->palette3 != 0) {
+    if (w->palette3 != NULL) {
         ReleaseObjPalette(w->palette3);
     }
 
-    if (w->textPalette != 0) {
+    if (w->textPalette != NULL) {
         ReleaseObjPalette(w->textPalette);
     }
 
@@ -433,7 +433,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
 #else
         p = &w->nextText;
 
-        if (*p != 0) {
+        if (*p != NULL) {
             w->unk_138[3] = LayoutCardMsgGlyphsPage(
                 0x2E00,
                 sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
@@ -453,7 +453,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
     return 1;
 }
 s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
-    if (gActiveSysmsgwin != 0) {
+    if (gActiveSysmsgwin != NULL) {
         gActiveSysmsgwin->args = *src;
         gActiveSysmsgwin->messagePending = 1;
 
@@ -464,7 +464,7 @@ s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
 }
 
 s32 CloseSysmsgwin(void) {
-    if (gActiveSysmsgwin != 0) {
+    if (gActiveSysmsgwin != NULL) {
         gActiveSysmsgwin->unk_146[0] = 0;
         return 1;
     }
@@ -505,7 +505,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
 #ifdef VERSION_JP
     w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)w->messageDef->text, &w->nextText);
 #else
-    if (w->nextText != 0) {
+    if (w->nextText != NULL) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case 0:
@@ -648,7 +648,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
     return 1;
 }
 s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* w) {
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
     }
 
@@ -721,17 +721,17 @@ void sysmsgwinChoice_2(SysMsgWinWork* w) {
     switch (w->args.mode) {
     case 2:
     case 3:
-        if (w->tiles2 != 0) {
+        if (w->tiles2 != NULL) {
             DrawSprite(w->frameX >> 8, w->frameY >> 8, gUnk_09EF1278[0], w->tiles2, w->palette4, 0, 0, 20);
         }
         break;
     }
 
-    if (w->tiles3 != 0 && w->waitIconVisible != 0) {
+    if (w->tiles3 != NULL && w->waitIconVisible != 0) {
         DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4, w->tiles3, w->palette, 0, 0, 10);
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, 0, 1, 10);
     }
 
@@ -746,39 +746,39 @@ void sysmsgwinChoice_3(SysMsgWinWork* w) {
 
     FreeCardMsgGlyphSprites();
 
-    if (w->tiles3 != 0) {
+    if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
     }
 
-    if (w->palette != 0) {
+    if (w->palette != NULL) {
         ReleaseObjPalette(w->palette);
     }
 
-    if (w->tiles4 != 0) {
+    if (w->tiles4 != NULL) {
         ReleaseObjTiles(w->tiles4);
     }
 
-    if (w->palette2 != 0) {
+    if (w->palette2 != NULL) {
         ReleaseObjPalette(w->palette2);
     }
 
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
     }
 
-    if (w->tiles2 != 0) {
+    if (w->tiles2 != NULL) {
         ReleaseObjTiles(w->tiles2);
     }
 
-    if (w->palette4 != 0) {
+    if (w->palette4 != NULL) {
         ReleaseObjPalette(w->palette4);
     }
 
-    if (w->palette3 != 0) {
+    if (w->palette3 != NULL) {
         ReleaseObjPalette(w->palette3);
     }
 
-    if (w->textPalette != 0) {
+    if (w->textPalette != NULL) {
         ReleaseObjPalette(w->textPalette);
     }
 

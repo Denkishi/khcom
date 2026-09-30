@@ -254,11 +254,11 @@ void MapInspectLoadGrid(void) {
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
-            if (gMapInspectGridPalettes[i][j] != 0) {
+            if (gMapInspectGridPalettes[i][j] != NULL) {
                 ReleaseObjPalette(gMapInspectGridPalettes[i][j]);
             }
 
-            if (gMapInspectGridTiles[i][j] != 0) {
+            if (gMapInspectGridTiles[i][j] != NULL) {
                 ReleaseObjTiles(gMapInspectGridTiles[i][j]);
             }
 
@@ -287,23 +287,23 @@ void MapInspectLoadSelectedCard(void) {
 
     p = GetMapInspectSelectedEntry();
 
-    if (gMapInspectCardPalette != 0) {
+    if (gMapInspectCardPalette != NULL) {
         ReleaseObjPalette(gMapInspectCardPalette);
     }
 
-    if (gMapInspectCardTiles != 0) {
+    if (gMapInspectCardTiles != NULL) {
         ReleaseObjTiles(gMapInspectCardTiles);
     }
 
-    if (gUnk_02035F48 != 0) {
+    if (gUnk_02035F48 != NULL) {
         ReleaseObjPalette(gUnk_02035F48);
     }
 
-    if (gUnk_02035F4C != 0) {
+    if (gUnk_02035F4C != NULL) {
         ReleaseObjTiles(gUnk_02035F4C);
     }
 
-    if (gMapInspectCategoryPalette != 0) {
+    if (gMapInspectCategoryPalette != NULL) {
         ReleaseObjPalette(gMapInspectCategoryPalette);
     }
 
@@ -1012,7 +1012,7 @@ void MapInspectDraw(void) {
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
-            if (gMapInspectGridSprites[i][j] != 0) {
+            if (gMapInspectGridSprites[i][j] != NULL) {
                 DrawSprite(j * 23 + 13, i * 26 + 47, gMapInspectGridSprites[i][j], gMapInspectGridTiles[i][j], gMapInspectGridPalettes[i][j], 0, 0x800, 0x83E);
 
                 if (gUnk_02035F30[i][j] != 0) {
@@ -1023,11 +1023,11 @@ void MapInspectDraw(void) {
     }
 
     if (gMapInspectMenuState != 1) {
-        if (gMapInspectCardSprite != 0) {
+        if (gMapInspectCardSprite != NULL) {
             DrawSprite(112, 56, gMapInspectCardSprite, gMapInspectCardTiles, gMapInspectCardPalette, 0, 0x800, 0x848);
         }
 
-        if (gUnk_02035F50 != 0) {
+        if (gUnk_02035F50 != NULL) {
             DrawSprite(112, 56, gUnk_02035F50, gUnk_02035F4C, gUnk_02035F48, 0, 0x800, 0x83E);
 
             if (gUnk_02035F90 != 0) {
@@ -1333,33 +1333,33 @@ void mode_mapinspect_2(void) {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 3; j++) {
-            if (gMapInspectGridPalettes[i][j] != 0) {
+            if (gMapInspectGridPalettes[i][j] != NULL) {
                 ReleaseObjPalette(gMapInspectGridPalettes[i][j]);
             }
 
-            if (gMapInspectGridTiles[i][j] != 0) {
+            if (gMapInspectGridTiles[i][j] != NULL) {
                 ReleaseObjTiles(gMapInspectGridTiles[i][j]);
             }
         }
     }
 
-    if (gMapInspectCardPalette != 0) {
+    if (gMapInspectCardPalette != NULL) {
         ReleaseObjPalette(gMapInspectCardPalette);
     }
 
-    if (gMapInspectCardTiles != 0) {
+    if (gMapInspectCardTiles != NULL) {
         ReleaseObjTiles(gMapInspectCardTiles);
     }
 
-    if (gUnk_02035F48 != 0) {
+    if (gUnk_02035F48 != NULL) {
         ReleaseObjPalette(gUnk_02035F48);
     }
 
-    if (gUnk_02035F4C != 0) {
+    if (gUnk_02035F4C != NULL) {
         ReleaseObjTiles(gUnk_02035F4C);
     }
 
-    if (gMapInspectCategoryPalette != 0) {
+    if (gMapInspectCategoryPalette != NULL) {
         ReleaseObjPalette(gMapInspectCategoryPalette);
     }
 

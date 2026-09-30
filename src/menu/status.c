@@ -707,7 +707,7 @@ void task_status_stocklist_2(StatusStocklistWork* work) {
     y = 36;
 
     for (i = 0; i < 8; i++) {
-        if (work->tiles2[i] != 0) {
+        if (work->tiles2[i] != NULL) {
             if (work->blink != 0) {
                 if (IsStockNew(GetStatusListItem(GetStatusScroll() + i))) {
                     DrawSprite(0, y, work->gfx, work->tiles, work->palette2, 0, 0x800, i + 13);
@@ -723,7 +723,7 @@ void task_status_stocklist_3(StatusStocklistWork* work) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        if (work->tiles2[i] != 0) {
+        if (work->tiles2[i] != NULL) {
             ReleaseObjTiles(work->tiles2[i]);
         }
     }
@@ -782,7 +782,7 @@ void StatusStocklistLoadRows(u16 a) {
     s32 i;
 
     for (i = 0; i <= 7; i++) {
-        if (gStatusStocklistWork->tiles2[i] != 0) {
+        if (gStatusStocklistWork->tiles2[i] != NULL) {
             ReleaseObjTiles(gStatusStocklistWork->tiles2[i]);
             gStatusStocklistWork->tiles2[i] = 0;
         }
@@ -1034,7 +1034,7 @@ u8 task_status_meswindow_1(StatusMeswindowWork* work) {
             if (work->item != v) {
                 work->item = v;
 
-                if (work->task != 0) {
+                if (work->task != NULL) {
                     work->textIndex = GetStockMesDispTextIndex(work->task);
                     TaskKill(&work->pool, work->task);
                 }

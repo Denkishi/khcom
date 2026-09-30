@@ -92,7 +92,7 @@ s32 Task_MapGoofy_1(MapGoofyWork* w) {
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             w->update(w);
         }
     }
@@ -213,7 +213,7 @@ s32 Task_MapNamine_1(MapNamineWork* w) {
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             w->update(w);
         }
     }
@@ -397,7 +397,7 @@ s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             w->update(w);
         }
     }
@@ -508,7 +508,7 @@ s32 Task_MapMickey_1(MapMickeyWork* w) {
         TaskPoolUpdate(&w->tasks2);
         AnimUpdate(&w->anim);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             w->update(w);
         }
     }
@@ -558,7 +558,7 @@ void MapTutorialStartBattle(void) {
 void MapTutorialWaitStart(MapTutorialWork* w) {
     u32 flags;
 
-    if (gFieldState->lockonTarget == 0) {
+    if (gFieldState->lockonTarget == NULL) {
         flags = gFieldState->flags;
 
         if (!(flags & 0x2000) && !(gMapRoomState->flags & 0x2000) && (gGameState.progression.unk_82 & 0x10)) {
@@ -759,10 +759,10 @@ s32 Task_MapTutorial_1(MapTutorialWork* w) {
     TaskPoolUpdate(&w->tasks);
     TaskPoolUpdate(&w->tasks2);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
 
-        if (w->update != 0) {
+        if (w->update != NULL) {
             return 1;
         }
     }
@@ -801,7 +801,7 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
 }
 
 void Task_MapTutorial_3(MapTutorialWork* w) {
-    if (w->tiles != 0) {
+    if (w->tiles != NULL) {
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette);
     }
@@ -903,7 +903,7 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
 s32 Task_MapStair_1(MapStairWork* w) {
     TaskPoolUpdate(&w->tasks);
 
-    if (w->update != 0) {
+    if (w->update != NULL) {
         w->update(w);
     }
     return 1;

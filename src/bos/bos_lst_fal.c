@@ -122,10 +122,10 @@ void task_bos_lst_fal_2(LstFalWork* work) {
 }
 
 void task_bos_lst_fal_3(LstFalWork* work) {
-    if (work->tiles != 0) {
+    if (work->tiles != NULL) {
         ReleaseObjTiles(work->tiles);
     }
-    if (work->palette != 0) {
+    if (work->palette != NULL) {
         ReleaseObjPalette(work->palette);
     }
     (*work->falCount)--;

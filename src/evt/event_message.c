@@ -3032,7 +3032,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
 #endif
 
     if (u != NULL) {
-        if (u->mapObjects != 0) {
+        if (u->mapObjects != NULL) {
             TaskCreate(&work->tasks, &gTaskDescEvMapObj, &work->eventId);
         }
 
@@ -5523,7 +5523,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x7:
     case 0x8:
     case 0x9:
-        if (gEventBackgroundDefs[p->arg.eventId] != 0) {
+        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 1) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
@@ -5538,7 +5538,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x77:
     case 0x288:
     case 0x28C:
-        if (gEventBackgroundDefs[p->arg.eventId] != 0) {
+        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 2) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
@@ -5553,7 +5553,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x79:
     case 0x289:
     case 0x28D:
-        if (gEventBackgroundDefs[p->arg.eventId] != 0) {
+        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 3) {
                     PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
@@ -5571,7 +5571,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x265:
     case 0x266:
     case 0x267:
-        if (gEventBackgroundDefs[p->arg.eventId] != 0) {
+        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 3) {
                     PlayGoofyFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
@@ -5587,7 +5587,7 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xC:
     case 0xD:
     case 0xE:
-        if (gEventBackgroundDefs[p->arg.eventId] != 0) {
+        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
             if (p->obj.anim->timer == 0) {
                 if (p->obj.anim->frame == 3) {
                     PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
@@ -6639,7 +6639,7 @@ void msgface_2(MsgFaceWork* p) {
 
     if (p->visible != 0) {
         t = AllocObjAffine(0, p->scaleX, 256, 0);
-        if (t != 0) {
+        if (t != NULL) {
             DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, 0, 50);
         } else {
             v = p->flipX;

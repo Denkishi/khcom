@@ -2288,7 +2288,7 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
             a += 2;
 #endif
 
-            if (b->tiles != 0) {
+            if (b->tiles != NULL) {
                 ReleaseObjTiles(b->tiles);
             }
 
@@ -2432,7 +2432,7 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
                 GetSjisGlyph(v, &w, &t);
             }
 
-            if (b->tiles != 0) {
+            if (b->tiles != NULL) {
                 ReleaseObjTiles(b->tiles);
                 b->tiles = 0;
             }
@@ -2488,7 +2488,7 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
         if (*c == 0x6E6E) {
             a += 2;
 
-            if (*p != 0) {
+            if (*p != NULL) {
                 ReleaseObjTiles(*p);
             }
 
@@ -2627,7 +2627,7 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
                 GetSjisGlyph(v, &w, &t);
             }
 
-            if (*p != 0) {
+            if (*p != NULL) {
                 ReleaseObjTiles(*p);
                 *p = 0;
             }

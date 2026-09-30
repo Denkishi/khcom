@@ -343,7 +343,7 @@ u8 SioConnectUpdate(void) {
             if (gSioCancelTimer == 0) {
                 SioShutdown();
 
-                if (gSioCancelCallback != 0) {
+                if (gSioCancelCallback != NULL) {
                     gSioCancelCallback();
                 }
             }
@@ -362,11 +362,11 @@ u8 SioLinkUpdate(void) {
     gUnk_02039824 = (gSioStatus & 0xE00) >> 9;
 
     if ((gSioStatus & 0x40) && gSioPlayerId <= 1) {
-        if (gSioLinkRecvCallback != 0) {
+        if (gSioLinkRecvCallback != NULL) {
             gSioLinkResult = gSioLinkRecvCallback();
         }
 
-        if (gSioLinkSendCallback != 0) {
+        if (gSioLinkSendCallback != NULL) {
             gSioLinkSendCallback();
         }
 
@@ -604,7 +604,7 @@ s32 SioConnectRecv(void) {
                     SioShutdown();
                     v = gSioPlayerId == 0 ? gSioRecvFrame[0][0] : gSioRecvFrame[0][1];
                     if (v == c) {
-                        if (gSioCancelCallback != 0) {
+                        if (gSioCancelCallback != NULL) {
                             gSioCancelCallback();
                         }
                     }
@@ -613,7 +613,7 @@ s32 SioConnectRecv(void) {
         } else if (gSioRecvFrame[0][0] == 0xECEC) {
             gSioConnected = 1;
 
-            if (gSioConnectCallback != 0) {
+            if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
             }
         } else {
@@ -652,7 +652,7 @@ s32 SioConnectRecvAuto(void) {
         } else if (gSioRecvFrame[0][0] == 0xECEC) {
             gSioConnected = 1;
 
-            if (gSioConnectCallback != 0) {
+            if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
             }
         } else {
@@ -965,7 +965,7 @@ s32 SioSyncRecv(void) {
                 gSioHandshakeConfirm = 1;
             }
         } else {
-            if (gSioConnectCallback != 0) {
+            if (gSioConnectCallback != NULL) {
                 gSioConnectCallback();
             }
             gSioHandshakeDone = 1;
@@ -1162,7 +1162,7 @@ u8 CharaObjUpdateDefeat2(void) {
         break;
     case 10:
         gCharaObj->fadeTick = 0;
-        if (gCharaObj->callback != 0) {
+        if (gCharaObj->callback != NULL) {
             gCharaObj->callback();
         }
         gCharaObj->state++;
@@ -1404,7 +1404,7 @@ u8 CharaObjUpdateDefeat(void) {
         break;
     case 11:
         gCharaObj->fadeTick = 0;
-        if (gCharaObj->callback != 0) {
+        if (gCharaObj->callback != NULL) {
             gCharaObj->callback();
         }
         gCharaObj->fadeLevel = 32;

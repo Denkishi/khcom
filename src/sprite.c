@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "gba/io_reg.h"
+#include <stddef.h>
 
 static const u8 sSpriteHeapName[8] = "SPRITE";
 
@@ -142,7 +143,7 @@ void SpriteReset(void) {
 u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
 
-    if (e != 0 && c != 0) {
+    if (e != NULL && c != NULL) {
         p = gSpriteWork;
         p->entries[p->entryCount].x = x;
         p->entries[p->entryCount].y = y;

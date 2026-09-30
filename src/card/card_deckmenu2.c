@@ -1008,7 +1008,6 @@ static const PromptChoiceLayout sDeckPromptChoiceLayout = { { 102, 148 } };
 #endif
 
 static void Deckmenu2_0(DeckMenuWork* w, void* a) {
-    u16 unk;
     w->resultOut = a;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
@@ -1108,9 +1107,9 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->holding = 0;
     w->handVisible = 0;
     w->removeLabelX = 95;
-    *(u16*)&w->removeLabelY = unk = 0xFFFE;
+    w->removeLabelY = -2;
     w->addLabelX = 135;
-    w->addLabelY = unk;
+    w->addLabelY = -2;
     w->inputDelay = 0;
     w->textSlotCount = 0;
     w->textSlotCount2 = 0;
@@ -5316,7 +5315,7 @@ void RemoveCursorCardFromDeck(DeckMenuWork* w) {
             if (n->args.cardId != 0xFFFF) {
                 RemoveCardFromDeck(n->args.slot, w->deckIndex);
                 n->done = 1;
-                n->args.row = *(u16*)&n->args.row | 0xFFFF;
+                n->args.row = (u16)n->args.row | 0xFFFF;
                 m4aSongNumStart(SONG_SYS_KETTEI);
             } else {
                 m4aSongNumStart(SONG_SYS_BEEP);
@@ -5748,13 +5747,10 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
     s16 y;
     u16 u;
     u16 v;
-    s32 pos;
 
     p = ListPoolFirst(&w->pool);
     q = ListPoolFirst(&w->pool);
-    pos = *(s32*)&w->cursorCol;
-
-    if (pos == *(s32*)&w->heldCol) {
+    if (w->cursorCol == w->heldCol && w->cursorRow == w->heldRow) {
         return ToggleDeckSlotGap(w);
     }
 

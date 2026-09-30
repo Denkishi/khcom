@@ -99,7 +99,7 @@ extern u8 gBossCardRequest;
 extern Deck gDecks[3];
 extern u16 gCardCollection[999];
 extern Deck* gLinkPartnerDeck;
-extern void* gLinkSendDeck;
+extern Deck* gLinkSendDeck;
 extern u16 gCardCount;
 extern CardUiSpriteState gCardUiSpriteState;
 extern MapCardUiResources gMapCardUiResources;

@@ -41,7 +41,7 @@ u16 gCardCollection[999] EWRAM_COMMON(16);
 
 Deck* gLinkPartnerDeck EWRAM_COMMON(4);
 
-void* gLinkSendDeck EWRAM_COMMON(4);
+Deck* gLinkSendDeck EWRAM_COMMON(4);
 
 u16 gCardCount EWRAM_COMMON(4);
 
@@ -103,31 +103,29 @@ void map_anim_3(void) {
 
 Deck* CreateLinkSendDeck(void) {
     Deck* active;
-    void** p;
     s32 i;
 
     active = GetActiveDeck();
-    p = &gLinkSendDeck;
-    *p = EwramAlloc(sizeof(Deck));
+    gLinkSendDeck = EwramAlloc(sizeof(Deck));
 
     for (i = 0; i < 99; i++) {
-        ((Deck*)gLinkSendDeck)->cards[i] |= 0xFFFF;
+        gLinkSendDeck->cards[i] |= 0xFFFF;
     }
 
     for (i = 0; i < 99; i++) {
         if (active->cards[i] != 0xFFFF) {
-            ((Deck*)gLinkSendDeck)->cards[i] = gCardCollection[active->cards[i]];
+            gLinkSendDeck->cards[i] = gCardCollection[active->cards[i]];
         } else {
-            ((Deck*)gLinkSendDeck)->cards[i] |= 0xFFFF;
+            gLinkSendDeck->cards[i] |= 0xFFFF;
         }
     }
 
     for (i = 0; i < 20; i++) {
-        ((Deck*)gLinkSendDeck)->name[i] = gDecks[GetActiveDeckIndex()].name[i];
+        gLinkSendDeck->name[i] = gDecks[GetActiveDeckIndex()].name[i];
     }
 
-    ((Deck*)gLinkSendDeck)->cpCost = GetDeckCpCost(GetActiveDeckIndex());
-    ((Deck*)gLinkSendDeck)->cardCount = GetDeckCardCount(GetActiveDeckIndex());
+    gLinkSendDeck->cpCost = GetDeckCpCost(GetActiveDeckIndex());
+    gLinkSendDeck->cardCount = GetDeckCardCount(GetActiveDeckIndex());
     return gLinkSendDeck;
 }
 

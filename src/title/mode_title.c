@@ -259,7 +259,7 @@ void mode_title_1(void) {
         gTitleState = 4;
         gTitleBlendStep = 0;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_OBJ);
-        gBldAlpha = 0x10;
+        gBldAlpha = BLDALPHA_BLEND(16, 0);
         gTitleTimer = 4;
         EnableBg(1);
         break;

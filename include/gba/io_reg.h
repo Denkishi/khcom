@@ -475,6 +475,8 @@
 #define WINOUT_WINOBJ_OBJ  0x1000
 #define WINOUT_WINOBJ_CLR  0x2000
 
+#define WIN_RANGE(a, b) (((a) << 8) | (b))
+
 #define BLDCNT_TGT1_BG0       0x0001
 #define BLDCNT_TGT1_BG1       0x0002
 #define BLDCNT_TGT1_BG2       0x0004
@@ -492,6 +494,8 @@
 #define BLDCNT_TGT2_BG3       0x0800
 #define BLDCNT_TGT2_OBJ       0x1000
 #define BLDCNT_TGT2_BD        0x2000
+
+#define BLDALPHA_BLEND(target1, target2) (((target2) << 8) | (target1))
 
 #define DMA_DEST_INC      0x0000
 #define DMA_DEST_DEC      0x0020

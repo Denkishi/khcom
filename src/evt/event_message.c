@@ -2815,10 +2815,10 @@ u8 eu_0806C848(EventSeqWork* work) {
         if (u->maps3 != NULL) {
             if ((u->flags & EVENT_BG_FLAG_ALPHA_BLEND) != 0) {
                 gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
-                gBldAlpha = 0x050E;
+                gBldAlpha = BLDALPHA_BLEND(14, 5);
                 SetBgPriority(2, 1);
-                gEventState->bldCnt = 0x1D42;
-                gEventState->bldAlpha = 0x050E;
+                gEventState->bldCnt = (BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
+                gEventState->bldAlpha = BLDALPHA_BLEND(14, 5);
             } else {
                 gEventState->bldCnt = 0;
                 gEventState->bldAlpha = 0;
@@ -2938,10 +2938,10 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             if (u->maps3 != NULL) {
                 if ((u->flags & EVENT_BG_FLAG_ALPHA_BLEND) != 0) {
                     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
-                    gBldAlpha = 0x050E;
+                    gBldAlpha = BLDALPHA_BLEND(14, 5);
                     SetBgPriority(2, 1);
-                    gEventState->bldCnt = 0x1D42;
-                    gEventState->bldAlpha = 0x050E;
+                    gEventState->bldCnt = (BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
+                    gEventState->bldAlpha = BLDALPHA_BLEND(14, 5);
                 } else {
                     gEventState->bldCnt = 0;
                     gEventState->bldAlpha = 0;

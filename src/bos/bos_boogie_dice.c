@@ -2280,8 +2280,8 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     BtlMapResetShake();
     ScrollBgMapTo(1, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
     gDispCnt |= DISPCNT_WIN0_ON;
-    gWin0H = 0xF0;
-    gWin0V = 0x50A0;
+    gWin0H = WIN_RANGE(0, 240);
+    gWin0V = WIN_RANGE(80, 160);
     gWinIn = (WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     gWinOut = (WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
     work->viewYMax = 0x1E000;

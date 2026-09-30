@@ -1339,7 +1339,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
         w->bgAnimDuration = BgAnimGetDuration(&gBgAnimDefPremireChance);
         w->resultTimer = z;
         gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
-        gBldAlpha = 0x1010;
+        gBldAlpha = BLDALPHA_BLEND(16, 16);
         BgAnimUpdate();
         FadeSetPaletteExcluded(10, 1);
         FadeSetPaletteExcluded(11, 1);

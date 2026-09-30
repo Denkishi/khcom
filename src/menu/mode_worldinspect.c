@@ -435,7 +435,7 @@ void WorldInspectHandleInput(void) {
 
             sWorldInspectDescTextCount = WorldInspectLoadDesc(sWorldInspectWorlds[sWorldInspectCursor]);
             gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2);
-            gBldAlpha = 0x808;
+            gBldAlpha = BLDALPHA_BLEND(8, 8);
             EnableBg(2);
             EnableBg(3);
             m4aSongNumStart(SONG_SYS_KETTEI);

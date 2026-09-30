@@ -351,7 +351,7 @@ void mode_ms_top_0(u32 a) {
     FadeStartIn(0, 16);
     SetBgMode0();
     gBldCnt = (BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0);
-    gBldAlpha = 0x1010;
+    gBldAlpha = BLDALPHA_BLEND(16, 16);
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
     SetupBg(2, 0, 30, 0);

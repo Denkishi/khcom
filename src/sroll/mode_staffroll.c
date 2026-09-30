@@ -3411,8 +3411,8 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
         gDispCnt |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
         gWinOut = (WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
-        gWin0H = 0x10E0;
-        gWin0V = 0x898;
+        gWin0H = WIN_RANGE(16, 224);
+        gWin0V = WIN_RANGE(8, 152);
         w->creditsState = 1;
         w->creditsTimer = 0;
     case 1:

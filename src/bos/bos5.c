@@ -4918,7 +4918,7 @@ void WorldselectSetBgMode1(void) {
     SetBgPriority(1, 0);
     SetBgPriority(2, 2);
     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1);
-    gBldAlpha = 0x1010;
+    gBldAlpha = BLDALPHA_BLEND(16, 16);
 }
 void WorldselectCyclePalette(void) {
     gWorldselectPaletteTimer++;

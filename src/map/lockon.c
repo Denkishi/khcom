@@ -3,7 +3,6 @@
 #include "mode.h"
 #include "m4a_song.h"
 #include "mode_test.h"
-#include "gba/keys.h"
 #include "mode_test_api.h"
 #include "sprites_mode_test.h"
 #include "debug_font.h"

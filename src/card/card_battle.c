@@ -19,7 +19,6 @@
 #include "m4a.h"
 #include "mode.h"
 #include "anim.h"
-#include "gba/keys.h"
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 #include "obj_resource_types.h"

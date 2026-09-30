@@ -4,7 +4,6 @@
 #include "map_api.h"
 #include "mode.h"
 #include "mode_test.h"
-#include "gba/keys.h"
 #include "mode_test_api.h"
 
 TaskPool gContinueTaskPool;

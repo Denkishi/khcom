@@ -21,7 +21,6 @@
 #include "text_types.h"
 #include "taskpool.h"
 #include "key.h"
-#include "gba/syscall.h"
 #include "card.h"
 #include "card_message_assets.h"
 #include "card_description_assets.h"

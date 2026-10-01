@@ -501,6 +501,10 @@ extern u8 gHadesFramespreadHiTiles[];
 extern u16 gPBakudanPalette[];
 extern u8 gPBakudanTiles[];
 
+void CloudJumpOffset(CloudWork* work, s16 a, s32 b);
+void CloudJumpTo(CloudWork* work, s32 a, s32 b);
+void CloudLeapTo(CloudWork* work, s32 a, s32 b);
+s32 CloudTryJumpAway(CloudWork* work);
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);
 void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p);
 void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst);

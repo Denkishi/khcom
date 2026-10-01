@@ -39,7 +39,7 @@ u8 IsModeStarted();
 void ModeClearTransitionCallback();
 void SetModeUpdate(void (*fn)());
 #ifdef VERSION_EU
-void eu_0800115C();
+void DoSoftReset();
 #endif
 void ModeSetTransitionCallback(void (*a)(), void (*b)());
 void ModeFlushDisplay();

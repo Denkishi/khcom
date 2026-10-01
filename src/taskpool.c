@@ -306,7 +306,7 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 }
 
 #ifdef VERSION_EU
-void eu_0800115C() {
+void DoSoftReset() {
     gSoftResetMarker[0] = SOFT_RESET_MAGIC;
     SoftReset(RESET_ALL & ~RESET_IWRAM);
 }
@@ -327,7 +327,7 @@ void ModeUpdate() {
         m4aMPlayAllStop();
 #ifdef VERSION_EU
         ScanlineDmaReset();
-        eu_0800115C();
+        DoSoftReset();
 #else
         SoftReset(RESET_ALL);
         ScanlineDmaReset();

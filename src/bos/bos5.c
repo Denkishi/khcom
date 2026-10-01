@@ -3198,7 +3198,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
     case BTL_REACTION_CARD_BROKEN:
         if (work->state != 10 && work->nextState != 10) {
             if (GetRandom() % 100 < 30) {
-                _0801C1F8(0, e->baseX, e->baseY, e->baseZ);
+                DropGimmickCard(0, e->baseX, e->baseY, e->baseZ);
             }
 
             BosGaRequestState(work, 1);
@@ -4321,7 +4321,7 @@ void BosMdFireHandleReaction(MdFireWork* work) {
     case BTL_REACTION_GRAVITY_DEFEATED:
         if (GetRandom() % 100 <= 49) {
             if ((gBtlWork->flags & 0x100000) == 0) {
-                _0801C1F8(0, e->x, e->y, e->z);
+                DropGimmickCard(0, e->x, e->y, e->z);
             }
         }
 

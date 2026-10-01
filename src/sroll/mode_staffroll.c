@@ -4420,7 +4420,7 @@ void mode_StaffRoll_1() {
 
         if (w->phaseTimer > 120) {
 #ifdef VERSION_EU
-            eu_0800115C();
+            DoSoftReset();
 #else
             SoftReset(RESET_ALL);
 #endif

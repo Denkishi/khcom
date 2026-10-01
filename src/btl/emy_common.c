@@ -161,7 +161,7 @@ void EmyStartKnockback(EmyWork* work) {
     work->actor.vy = ((-gSineTable[work->actor.angle + 0x40] << 1) * work->actor.knockbackSpeed) >> 8;
 }
 
-u8 _0800CBDC(EmyWork* work) {
+u8 EmyUpdateReaction(EmyWork* work) {
     BtlObj* actor = &work->actor;
 
     actor->prevX = actor->x;
@@ -261,7 +261,7 @@ void EmyFinishSpawn(EmyWork* work) {
     actor->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
 }
 
-s32 _0800CDF0(EmyWork* work) {
+s32 EmyUpdateCommonStates(EmyWork* work) {
     BtlObj* actor = &work->actor;
     s32 x;
     s32 y;

@@ -25,8 +25,8 @@ void task_monsgage_3(MonsgageWork* work);
 
 #ifdef VERSION_EU
 void* eu_0805E924(const void* strings);
-void* eu_0805E968(const void* text);
-s32 eu_0805E9AC(const void* text);
+void* GetLocalizedLines(const void* text);
+s32 GetLocalizedLineCount(const void* text);
 
 #define LANGSEL(x) eu_0805E924(x)
 #else

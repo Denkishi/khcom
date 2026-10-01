@@ -2746,7 +2746,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
 
             if (u->isAffine != 0) {
                 if (u->compression[0] == 1 || u->compression[0] == 3) {
-                    eu_080059D4(2, u->tiles);
+                    LoadBgTilesLz77(2, u->tiles);
                 } else {
                     LoadBgTiles(2, u->tiles, u->tilesSize);
                 }
@@ -2756,7 +2756,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
                 SetBgSize(2, 0x8000);
 
                 if (u->compression[0] == 2 || u->compression[0] == 3) {
-                    eu_080059F4(2, (void*)*u->maps);
+                    LoadBgMapLz77(2, (void*)*u->maps);
                 } else {
                     LoadBgMap(2, (void*)*u->maps, 0x1000);
                 }
@@ -2787,7 +2787,7 @@ u8 LoadEventBg3(EventSeqWork* work) {
 
     if (u != NULL) {
         if (u->compression[0] == 1 || u->compression[0] == 3) {
-            eu_080059D4(3, u->tiles);
+            LoadBgTilesLz77(3, u->tiles);
         } else {
             LoadBgTiles(3, u->tiles, u->tilesSize);
         }
@@ -2797,7 +2797,7 @@ u8 LoadEventBg3(EventSeqWork* work) {
         if (u->maps != NULL) {
             if (u->compression[0] == 2 || u->compression[0] == 3) {
                 work->bg3MapUnpacked = 1;
-                eu_08005A1C(3, u->maps, u->mapWidth, u->mapHeight);
+                SetBgMapBlocksLz77(3, u->maps, u->mapWidth, u->mapHeight);
             } else {
                 work->bg3MapUnpacked = 0;
                 SetBgMapBlocks(3, u->maps, u->mapWidth, u->mapHeight);
@@ -2817,7 +2817,7 @@ u8 LoadEventBg2Map(EventSeqWork* work) {
         if (u->maps2 != NULL) {
             if (u->compression[0] == 2 || u->compression[0] == 3) {
                 work->bg2MapUnpacked = 1;
-                eu_08005A1C(2, u->maps2, u->mapWidth, u->mapHeight);
+                SetBgMapBlocksLz77(2, u->maps2, u->mapWidth, u->mapHeight);
             } else {
                 work->bg2MapUnpacked = 0;
                 SetBgMapBlocks(2, u->maps2, u->mapWidth, u->mapHeight);
@@ -2841,7 +2841,7 @@ u8 LoadEventBg1(EventSeqWork* work) {
             if ((u->flags & EVENT_BG_FLAG_POOH_MAP) != 0) {
                 LoadBgTiles(2, u->tiles2, u->tilesSize2);
             } else if (u->compression[0] == 1 || u->compression[0] == 3) {
-                eu_080059D4(1, u->tiles2);
+                LoadBgTilesLz77(1, u->tiles2);
             } else {
                 LoadBgTiles(1, u->tiles2, u->tilesSize2);
             }
@@ -2861,7 +2861,7 @@ u8 LoadEventBg1(EventSeqWork* work) {
 
             if (u->compression[0] == 2 || u->compression[0] == 3) {
                 work->bg1MapUnpacked = 1;
-                eu_08005A1C(1, u->maps3, u->mapWidth, u->mapHeight);
+                SetBgMapBlocksLz77(1, u->maps3, u->mapWidth, u->mapHeight);
             } else {
                 work->bg1MapUnpacked = 0;
                 SetBgMapBlocks(1, u->maps3, u->mapWidth, u->mapHeight);
@@ -3210,15 +3210,15 @@ void event_seq_3(EventSeqWork* p) {
 
 #ifdef VERSION_EU
     if (p->bg3MapUnpacked != 0) {
-        eu_08005ADC(3);
+        FreeBgDecompressedMap(3);
     }
 
     if (p->bg2MapUnpacked != 0) {
-        eu_08005ADC(2);
+        FreeBgDecompressedMap(2);
     }
 
     if (p->bg1MapUnpacked != 0) {
-        eu_08005ADC(1);
+        FreeBgDecompressedMap(1);
     }
 #endif
 }

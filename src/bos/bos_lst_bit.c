@@ -114,7 +114,7 @@ u8 BosLstBitHasShots(Task* task) {
 }
 
 #ifdef VERSION_EU
-u8 eu_0810F08C(Task* task) {
+u8 BosLstBitIsScaling(Task* task) {
     LstState* s;
     u8 result;
     s = task->work;

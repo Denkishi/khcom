@@ -282,7 +282,7 @@ void BosTmBodyWalk(TmBodyWork* p) {
     BosTmBodyUpdateAngle(p);
 }
 
-void func_080B8A00(TmBodyWork* p) {
+void BosTmBodyUpdateRecoil(TmBodyWork* p) {
     s16 i;
     s16 j;
 
@@ -372,7 +372,7 @@ void func_080B8A00(TmBodyWork* p) {
     }
 }
 
-void func_080B8FF4(TmBodyWork* p, s16 a) {
+void BosTmBodyApplySpinStep(TmBodyWork* p, s16 a) {
     if (p->tm->flags & TM_FLAG_FACING_LEFT) {
         p->angle += sUnk_09EF2034[a].dAngle;
         p->angle2 += sUnk_09EF2034[a].dAngle2;
@@ -561,7 +561,7 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
     }
 }
 
-void _080B949C(BtlObj* a, TmBodyWork* b) {
+void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* b) {
     u16 t;
 
     if (a->hp <= 0) {
@@ -693,7 +693,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
     u16 flags;
 
     if (!(work->tm->flags & TM_FLAG_IN_EVENT)) {
-        _080B949C(&work->body2, work);
+        BosTmBodyUpdateReaction(&work->body2, work);
     }
 
     switch (work->tm->state) {
@@ -868,9 +868,9 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             n = work->tm->step;
 
             if (work->tm->step <= 2) {
-                func_080B8FF4(work, work->tm->step);
+                BosTmBodyApplySpinStep(work, work->tm->step);
             } else if (n >= 41 && n <= 46) {
-                func_080B8FF4(work, n - 38);
+                BosTmBodyApplySpinStep(work, n - 38);
             }
 
             if (work->tm->flags & TM_FLAG_ATTACK_DONE) {
@@ -884,7 +884,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
 
         break;
     case 12:
-        func_080B8A00(work);
+        BosTmBodyUpdateRecoil(work);
         break;
     case 14:
         if (work->tm->stateTimer == 0) {
@@ -909,7 +909,7 @@ u8 task_bos_tm_body_1(TmBodyWork* work) {
             }
         } else if (!(work->tm->flags & TM_FLAG_GIMMICK_DROP_ROLLED) && work->tm->tableState == 0 && (work->tm->flags & TM_FLAG_HURT)) {
             if ((u16)(GetRandom() % 100) <= 30) {
-                _0801C1F8(0, work->tm->baseX, work->tm->baseY, work->tm->baseZ);
+                DropGimmickCard(0, work->tm->baseX, work->tm->baseY, work->tm->baseZ);
                 work->tm->flags |= TM_FLAG_GIMMICK_DROP_ROLLED;
             } else {
                 work->tm->flags |= TM_FLAG_GIMMICK_DROP_ROLLED;

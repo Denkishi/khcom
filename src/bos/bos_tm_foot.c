@@ -377,7 +377,7 @@ void BosTmFootResetPose(TmFootWork* work) {
     }
 }
 
-void func_080BA2B0(TmFootWork* work) {
+void BosTmFootSetBreakPose(TmFootWork* work) {
     SetObjTileSource(work->tiles2, gUnk_09654C04);
     SetObjTileSource(work->tiles3, gUnk_09654C04);
     work->gfx = gUnk_09EF39DC[0];
@@ -505,7 +505,7 @@ void BosTmFootWalk(TmFootWork* work) {
     }
 }
 
-void func_080BA8C8(TmFootWork* work, s16 a) {
+void BosTmFootApplySpinStep(TmFootWork* work, s16 a) {
     work->gfx = gUnk_09EF39DC[sUnk_09EF25A4[a].gfxIndex];
     work->gfx2 = gUnk_09EF39DC[sUnk_09EF25A4[a].gfx2Index];
     work->body.z += sUnk_09EF25A4[a].dz << 8;
@@ -657,10 +657,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
             n = work->tm->step;
 
             if (work->tm->step <= 2) {
-                func_080BA8C8(work, work->tm->step);
+                BosTmFootApplySpinStep(work, work->tm->step);
             } else if (n >= 41 && n <= 46) {
                 n -= 38;
-                func_080BA8C8(work, n);
+                BosTmFootApplySpinStep(work, n);
             } else {
                 break;
             }
@@ -702,7 +702,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         break;
     case 14:
         if (work->tm->stateTimer == 0) {
-            func_080BA2B0(work);
+            BosTmFootSetBreakPose(work);
         } else if (work->tm->stateTimer > 59) {
             if (work->tm->flags & TM_FLAG_SWITCHING_SIDES) {
                 BosTmFootSetWalkPose(work);
@@ -714,7 +714,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         break;
     case 13:
         if (work->tm->step == 0) {
-            func_080BA2B0(work);
+            BosTmFootSetBreakPose(work);
         }
 
         break;

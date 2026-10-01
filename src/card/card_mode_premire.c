@@ -38,7 +38,7 @@ void Mode_Premire_0() {
 #ifdef VERSION_EU
     LoadBgTiles(3, gUnk_08C8C824, 0x4000);
     LoadBgPalette(3, gUnk_08F68A84, 0x100);
-    eu_080059F4(3, gUnk_08EF4384);
+    LoadBgMapLz77(3, gUnk_08EF4384);
 #else
     LoadBgTiles(3, gUnk_08C8C824, 0x4000);
     LoadBgPalette(3, gUnk_08F68A84, 0x100);

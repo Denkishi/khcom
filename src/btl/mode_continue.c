@@ -34,7 +34,7 @@ void ContinueModeUpdate() {
             break;
         case 1:
 #ifdef VERSION_EU
-            eu_0800115C();
+            DoSoftReset();
 #else
             SoftReset(RESET_ALL);
 #endif

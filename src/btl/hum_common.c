@@ -111,7 +111,7 @@ void HumStartKnockback(HumWork* work) {
     work->actor.vy = ((-gSineTable[work->actor.angle + 0x40] << 1) * work->actor.knockbackSpeed) >> 8;
 }
 
-s32 _0800E434(HumWork* work) {
+s32 HumUpdateReaction(HumWork* work) {
     BtlObj* actor = &work->actor;
     s32 r;
 

@@ -184,19 +184,19 @@ void BosUrsulaPopBubbles(UrsulaBubbleWork* work) {
 }
 
 #ifdef VERSION_EU
-void eu_080DA80C(u16 a, u16 b) {
+void BosUrsulaBubbleAnimChange(u16 a, u16 b) {
     AnimChange(&gUrsulaBubbleWork->anim, a, b);
 }
 
-u16 eu_080DA830() {
+u16 BosUrsulaBubbleAnimGetId() {
     return AnimGetId(&gUrsulaBubbleWork->anim);
 }
 
-u8 eu_080DA848() {
+u8 BosUrsulaBubbleAnimIsFinished() {
     return AnimIsFinished(&gUrsulaBubbleWork->anim);
 }
 
-void* eu_080DA860() {
+void* BosUrsulaBubbleAnimGetGfx() {
     return AnimGetGfx(&gUrsulaBubbleWork->anim);
 }
 #endif
@@ -215,7 +215,7 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
 #ifdef VERSION_EU
-    eu_080DA80C(0, 1);
+    BosUrsulaBubbleAnimChange(0, 1);
 #else
     AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -268,7 +268,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
 
         if (work->timer == 0) {
 #ifdef VERSION_EU
-            eu_080DA80C(1, 0);
+            BosUrsulaBubbleAnimChange(1, 0);
 #else
             AnimStart(&work->anim, 1, 0);
 #endif
@@ -277,7 +277,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
 #ifdef VERSION_EU
-    if (eu_080DA830() == 0
+    if (BosUrsulaBubbleAnimGetId() == 0
 #else
     if (AnimGetId(&work->anim) == 0
 #endif
@@ -288,7 +288,7 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
 #ifdef VERSION_EU
-    if (eu_080DA830() == 1 && eu_080DA848() != 0) {
+    if (BosUrsulaBubbleAnimGetId() == 1 && BosUrsulaBubbleAnimIsFinished() != 0) {
         return 0;
     }
 
@@ -315,7 +315,7 @@ void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
     pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 #ifdef VERSION_EU
-    DrawSprite(x, y, eu_080DA860(), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, BosUrsulaBubbleAnimGetGfx(), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
 #else
     DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
 #endif
@@ -332,13 +332,13 @@ void task_bos_ursula_bubble_single_3(UrsulaBubbleSingleWork* work) {
 
 void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work) {
 #ifdef VERSION_EU
-    if (eu_080DA830() == 0) {
+    if (BosUrsulaBubbleAnimGetId() == 0) {
 #else
     if (AnimGetId(&work->anim) == 0) {
 #endif
         work->timer = 0;
 #ifdef VERSION_EU
-        eu_080DA80C(1, 0);
+        BosUrsulaBubbleAnimChange(1, 0);
 #else
         AnimStart(&work->anim, 1, 0);
 #endif

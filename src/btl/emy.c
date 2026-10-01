@@ -858,7 +858,7 @@ u8 task_emy_00_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -1004,7 +1004,7 @@ u8 task_emy_00_1(EmyWork* work) {
         break;
     }
 
-    ret = _0800CDF0(w);
+    ret = EmyUpdateCommonStates(w);
 
     if (w->state == 14) {
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
@@ -1093,7 +1093,7 @@ u8 task_emy_01_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -1167,7 +1167,7 @@ u8 task_emy_01_1(EmyWork* work) {
     }
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_01_2(EmyWork* work) {
@@ -1192,7 +1192,7 @@ u8 task_emy_02_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -1266,7 +1266,7 @@ u8 task_emy_02_1(EmyWork* work) {
     }
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_02_2(EmyWork* work) {
@@ -1290,7 +1290,7 @@ u8 task_emy_03_1(Emy03Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -1339,7 +1339,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_03_2(EmyWork* work) {
@@ -1367,7 +1367,7 @@ u8 task_emy_04_1(Emy04Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         work->base.state = 0x12;
     }
 
@@ -1423,7 +1423,7 @@ u8 task_emy_04_1(Emy04Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_04_2(EmyWork* work) {
@@ -1456,7 +1456,7 @@ u8 task_emy_06_1(Emy06Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         GetEnemyTargetPosition(act, NULL, &pos, NULL);
         d = act->y - pos;
 
@@ -1546,7 +1546,7 @@ u8 task_emy_06_1(Emy06Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_06_2(EmyWork* work) {
@@ -1582,7 +1582,7 @@ u8 task_emy_07_1(Emy07Work* work) {
     act->hp = 0x7FFF;
 #endif
 
-    _0800CBDC(&work->base);
+    EmyUpdateReaction(&work->base);
 
 #ifdef VERSION_EU
     act->hp = act->maxHp;
@@ -1789,7 +1789,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_07_2(EmyWork* work) {
@@ -1817,7 +1817,7 @@ u8 task_emy_08_1(Emy08Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -1988,7 +1988,7 @@ u8 task_emy_08_1(Emy08Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_08_2(Emy08Work* work) {
@@ -2015,7 +2015,7 @@ u8 task_emy_14_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
@@ -2037,7 +2037,7 @@ u8 task_emy_14_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_14_2(EmyWork* work) {
@@ -2060,7 +2060,7 @@ u8 task_emy_15_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -2134,7 +2134,7 @@ u8 task_emy_15_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_15_2(EmyWork* work) {
@@ -2161,7 +2161,7 @@ u8 task_emy_16_1(Emy16Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         if (IsTaskActiveNamed(work->bTask, sTaskDescEmy16B.name)) {
             work->base.state = 0x12;
         } else {
@@ -2235,7 +2235,7 @@ u8 task_emy_16_1(Emy16Work* work) {
     }
 
     TaskPoolUpdate(&w->tasks);
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_16_2(Emy16Work* work) {
@@ -2479,7 +2479,7 @@ u8 task_emy_18_1(Emy18Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -2610,7 +2610,7 @@ u8 task_emy_18_1(Emy18Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_18_2(EmyWork* work) {
@@ -2634,7 +2634,7 @@ u8 task_emy_19_1(Emy19Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
@@ -2751,7 +2751,7 @@ u8 task_emy_19_1(Emy19Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_19_2(EmyWork* work) {
@@ -2776,7 +2776,7 @@ u8 task_emy_21_1(Emy21Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = pos - act->x;
 
@@ -2914,7 +2914,7 @@ u8 task_emy_21_1(Emy21Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_21_2(EmyWork* work) {
@@ -2941,7 +2941,7 @@ u8 task_emy_22_1(Emy22Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         if (act->hp < act->maxHp) {
             work->base.state = 20;
         } else {
@@ -3068,7 +3068,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_22_2(EmyWork* work) {
@@ -3094,7 +3094,7 @@ u8 task_emy_23_1(Emy23Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
@@ -3164,7 +3164,7 @@ u8 task_emy_23_1(Emy23Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_23_2(EmyWork* work) {
@@ -3191,7 +3191,7 @@ u8 task_emy_25_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -3323,7 +3323,7 @@ u8 task_emy_25_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_25_2(EmyWork* work) {
@@ -3352,7 +3352,7 @@ u8 task_emy_26_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -3435,7 +3435,7 @@ u8 task_emy_26_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_26_2(EmyWork* work) {
@@ -3462,7 +3462,7 @@ u8 task_emy_27_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         GetEnemyTargetPosition(act, NULL, &y, NULL);
         d = act->y - y;
 
@@ -3527,7 +3527,7 @@ u8 task_emy_27_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_27_2(EmyWork* work) {
@@ -3552,7 +3552,7 @@ u8 task_emy_28_1(Emy28Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -3693,7 +3693,7 @@ u8 task_emy_28_1(Emy28Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_28_2(EmyWork* work) {
@@ -3738,7 +3738,7 @@ u8 task_emy_29_1(Emy29Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
@@ -3815,7 +3815,7 @@ u8 task_emy_29_1(Emy29Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_29_2(EmyWork* work) {
@@ -3844,7 +3844,7 @@ u8 task_emy_30_1(EmyWork* work) {
     act = &work->actor;
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -4092,7 +4092,7 @@ u8 task_emy_30_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_30_2(EmyWork* work) {
@@ -4115,7 +4115,7 @@ u8 task_emy_31_1(Emy31Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         switch ((u16)(GetRandom() % 3)) {
         case 0:
             work->base.state = 18;
@@ -4333,7 +4333,7 @@ u8 task_emy_31_1(Emy31Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_31_2(EmyWork* work) {
@@ -4359,7 +4359,7 @@ u8 task_emy_37_1(Emy37Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         if (work->base.state == 20) {
             work->rotation = 0;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
@@ -4622,7 +4622,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_37_2(Emy37Work* work) {
@@ -4711,7 +4711,7 @@ u8 task_emy_38_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -4752,7 +4752,7 @@ u8 task_emy_38_1(EmyWork* work) {
         break;
     }
 
-    ret = _0800CDF0(work);
+    ret = EmyUpdateCommonStates(work);
 
     if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
@@ -4791,7 +4791,7 @@ u8 task_emy_39_1(Emy39Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -4908,7 +4908,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         break;
     }
 
-    ret = _0800CDF0(&work->base);
+    ret = EmyUpdateCommonStates(&work->base);
 
     if ((gBtlWork->actor->x < work->base.actor.x
                 && (work->base.actor.flags & BTLOBJ_FLAG_FACING_LEFT))
@@ -4945,7 +4945,7 @@ u8 task_emy_41_1(Emy41Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -4993,7 +4993,7 @@ u8 task_emy_41_1(Emy41Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_41_2(EmyWork* work) {
@@ -5018,7 +5018,7 @@ u8 task_emy_44_1(EmyWork* work) {
     w = work;
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
@@ -5074,7 +5074,7 @@ u8 task_emy_44_1(EmyWork* work) {
         break;
     }
 
-    ret = _0800CDF0(work);
+    ret = EmyUpdateCommonStates(work);
 
     if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
@@ -5118,7 +5118,7 @@ u8 task_emy_81_1(Emy81Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -5346,7 +5346,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_81_2(EmyWork* work) {
@@ -5405,7 +5405,7 @@ u8 task_emy_82_1(Emy82Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         switch ((u16)(GetRandom() % 3U)) {
         case 0:
             work->base.state = 18;
@@ -5713,7 +5713,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         break;
     }
 
-    return _0800CDF0(&work->base);
+    return EmyUpdateCommonStates(&work->base);
 }
 
 void task_emy_82_2(EmyWork* work) {
@@ -5746,7 +5746,7 @@ u8 task_emy_83_1(Emy83Work* work) {
     w = work;
     act = &work->base.actor;
 
-    if (_0800CBDC(&work->base)) {
+    if (EmyUpdateReaction(&work->base)) {
         r = GetRandom();
 
         switch (r & 1) {
@@ -5852,7 +5852,7 @@ u8 task_emy_83_1(Emy83Work* work) {
     x = act->x;
     y = act->y;
     z = act->z;
-    ret = _0800CDF0(&work->base);
+    ret = EmyUpdateCommonStates(&work->base);
 
     if (work->base.state != 0x0B) {
         act->x = x;
@@ -6032,7 +6032,7 @@ u8 task_emy_trump_h_1(EmyWork* work) {
 
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         work->state = 0x13;
     }
 
@@ -6063,7 +6063,7 @@ u8 task_emy_trump_h_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_trump_h_2(EmyWork* work) {
@@ -6083,7 +6083,7 @@ u8 task_emy_trump_s_1(EmyWork* work) {
 
     act = &work->actor;
 
-    if (_0800CBDC(work)) {
+    if (EmyUpdateReaction(work)) {
         work->state = 0x13;
     }
 
@@ -6119,7 +6119,7 @@ u8 task_emy_trump_s_1(EmyWork* work) {
         break;
     }
 
-    return _0800CDF0(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_trump_s_2(EmyWork* work) {
@@ -6138,8 +6138,8 @@ void task_emy_test_0(EmyWork* work, void* obj) {
 }
 
 u8 task_emy_test_1(EmyWork* work) {
-    _0800CBDC(work);
-    return _0800CDF0(work);
+    EmyUpdateReaction(work);
+    return EmyUpdateCommonStates(work);
 }
 
 void task_emy_test_2(EmyWork* work) {

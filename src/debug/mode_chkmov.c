@@ -27,7 +27,7 @@ void eu_0800C76C(s32 arg) {
     TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, NULL);
 }
 
-void eu_0800C7A0() {
+void mode_chkmov_1() {
     u16 cancel = GetKeysPressed() & B_BUTTON;
 
     if (cancel) {
@@ -64,7 +64,7 @@ void eu_0800C7A0() {
     TaskPoolDraw(&gMovieDebugWorkEu->pool);
 }
 
-void eu_0800C898() {
+void mode_chkmov_2() {
     TaskPoolDestroy(&gMovieDebugWorkEu->pool);
     EwramFree(gMovieDebugWorkEu);
 }
@@ -84,8 +84,8 @@ const char gMovieDebugTextEu_0812F6F4[] = ": ";
 Mode gModeMovieDebugEu = {
     "mode_chkmov",
     eu_0800C76C,
-    eu_0800C7A0,
-    eu_0800C898,
+    mode_chkmov_1,
+    mode_chkmov_2,
 };
 
 #endif

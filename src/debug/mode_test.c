@@ -102,7 +102,7 @@ u8 eu_08060C44(FrdPoohWork* work) {
     return 0;
 }
 
-void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
+void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     FrdPoohBody* body;
     body = &work->body;
 
@@ -144,7 +144,7 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
 
-u8 eu_08060DF8(FrdPoohWork* work) {
+u8 task_frd_pooh_1(FrdPoohWork* work) {
     FrdPoohBody* body;
     BtlWork* battle;
     body = &work->body;
@@ -335,7 +335,7 @@ u8 eu_08060DF8(FrdPoohWork* work) {
     return 1;
 }
 
-void eu_08061588(FrdPoohWork* work) {
+void task_frd_pooh_2(FrdPoohWork* work) {
     FrdPoohBody* body;
     void* gfx;
     u16 flags;
@@ -376,7 +376,7 @@ void eu_08061588(FrdPoohWork* work) {
     TaskPoolDraw(&work->tasks);
 }
 
-void eu_08061698(FrdPoohWork* work) {
+void task_frd_pooh_3(FrdPoohWork* work) {
     BtlWork* battle;
     ColliderUnregister(work->body.particles);
     battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
@@ -392,10 +392,10 @@ Mode gModeTest = { "mode_test", (ModeInitFunc)mode_test_0, mode_test_1, mode_tes
 #ifdef VERSION_EU
 TaskDesc gTaskDescFrdPoohEu = {
     "task_frd_pooh",
-    (TaskInitFunc)eu_08060C8C,
-    (TaskUpdateFunc)eu_08060DF8,
-    (TaskDrawFunc)eu_08061588,
-    (TaskDestroyFunc)eu_08061698,
+    (TaskInitFunc)task_frd_pooh_0,
+    (TaskUpdateFunc)task_frd_pooh_1,
+    (TaskDrawFunc)task_frd_pooh_2,
+    (TaskDestroyFunc)task_frd_pooh_3,
     sizeof(FrdPoohWork),
 };
 #endif

@@ -1651,7 +1651,7 @@ u8 RequestDma3Copy(const void* src, void* dst, u16 size) {
 }
 
 #ifdef VERSION_EU
-u8 eu_080044C0(void* src, void* dst) {
+u8 RequestLz77UnCompVram(void* src, void* dst) {
     Dma3Queue* q = gDma3Requests;
     u16 flags;
 
@@ -2491,21 +2491,21 @@ void SetBlendAlpha(u16 a, u16 b) {
 }
 
 #ifdef VERSION_EU
-void eu_080059D4(s32 bg, void* src) {
+void LoadBgTilesLz77(s32 bg, void* src) {
     EnableBg(bg);
-    eu_080044C0(src, GetBgCharBase(bg));
+    RequestLz77UnCompVram(src, GetBgCharBase(bg));
 }
 
-void eu_080059F4(s32 bg, void* src) {
+void LoadBgMapLz77(s32 bg, void* src) {
     EnableBg(bg);
-    eu_080044C0(src, GetBgScreenBase(bg));
+    RequestLz77UnCompVram(src, GetBgScreenBase(bg));
 }
 
-u32 eu_08005A14(u32* src) {
+u32 Lz77GetUncompSize(u32* src) {
     return *src >> 8;
 }
 
-u8 eu_08005A1C(s32 bg, const void* src, u8 w, u8 h) {
+u8 SetBgMapBlocksLz77(s32 bg, const void* src, u8 w, u8 h) {
     BgEntry* e;
     s32 count;
     s32 i;
@@ -2528,7 +2528,7 @@ u8 eu_08005A1C(s32 bg, const void* src, u8 w, u8 h) {
     }
 
     for (i = 0; i < count; i++) {
-        e->decompressedMap[i] = EwramAlloc(eu_08005A14(((u32**)src)[i]));
+        e->decompressedMap[i] = EwramAlloc(Lz77GetUncompSize(((u32**)src)[i]));
 
         if (e->decompressedMap[i] == NULL) {
             return 0;
@@ -2547,7 +2547,7 @@ u8 eu_08005A1C(s32 bg, const void* src, u8 w, u8 h) {
     return 1;
 }
 
-void eu_08005ADC(s32 bg) {
+void FreeBgDecompressedMap(s32 bg) {
     BgEntry* e = &gBgWork->entries[bg];
     s32 count;
     s32 i;

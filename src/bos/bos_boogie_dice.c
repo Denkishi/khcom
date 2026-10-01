@@ -713,7 +713,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
     case 2:
         if (work->follower == 0 && gBosBoogieGimmickCardDropped == 0 && GetRandom() % 16 <= 7) {
             gBosBoogieGimmickCardDropped = 1;
-            _0801C1F8(0, p->x, p->y, p->z);
+            DropGimmickCard(0, p->x, p->y, p->z);
         }
 
         SetBtlObjUnhittable(p, 1);
@@ -2586,7 +2586,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
                 SetBtlObjUnhittable(p, 1);
 
                 if ((u16)(GetRandom() % 100) <= 19) {
-                    _0801C1F8(0, p->x, p->y, p->z);
+                    DropGimmickCard(0, p->x, p->y, p->z);
                 }
             }
         } else if (AnimGetId(&work->anim) == (s16)work->animBase + 5) {

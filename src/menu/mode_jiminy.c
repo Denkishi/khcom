@@ -2263,7 +2263,7 @@ void JiminyDetailUpdate() {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
             JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
@@ -2286,7 +2286,7 @@ void JiminyDetailUpdate() {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
             JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
@@ -2310,7 +2310,7 @@ void JiminyDetailUpdate() {
                 0x1600, gJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, eu_0805E9AC(gJiminyWork->detail->text), eu_0805E968(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
 #else
             JiminyOpenPlainList(
 #ifdef VERSION_JP

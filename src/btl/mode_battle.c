@@ -38,9 +38,9 @@ void eu_08009CD0(s32 arg) {
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
     LoadBgPalette(0, gUnkEu_08F6A6FC, 0x40);
-    eu_080059D4(0, gUnkEu_08F77180);
-    eu_080059F4(0, gUnkEu_08F7EFB0);
-    eu_080059F4(1, gUnkEu_08F7EBF8);
+    LoadBgTilesLz77(0, gUnkEu_08F77180);
+    LoadBgMapLz77(0, gUnkEu_08F7EFB0);
+    LoadBgMapLz77(1, gUnkEu_08F7EBF8);
     gLangWork->tiles = LoadObjTiles(gUnkEu_08C9CA58, 0x1A0);
     gLangWork->palette = LoadObjPalette(gUnkEu_08F6A6DC, 32);
     gLangWork->timer = 0;
@@ -74,7 +74,7 @@ void eu_08009CD0(s32 arg) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
-void eu_08009E10() {
+void mode_lang_1() {
     switch (gLangWork->state) {
     case 0:
         if (!FadeIsActive()) {
@@ -187,7 +187,7 @@ void eu_08009E10() {
     }
 }
 
-void eu_0800A0DC() {
+void mode_lang_2() {
     ReleaseObjTiles(gLangWork->tiles);
     ReleaseObjPalette(gLangWork->palette);
     EwramFree(gLangWork);
@@ -549,7 +549,7 @@ void mode_battle_1() {
         gBtlWork->freezeTimer--;
     } else {
         if (gBtlWork->paused == 0) {
-            _08019CB4();
+            UpdateBattlePhase();
 
             if (gBtlWork->hitStop <= 0) {
                 TaskPoolUpdate(&gBtlWork->taskPools[0]);
@@ -593,6 +593,6 @@ void mode_battle_2() {
 }
 
 #ifdef VERSION_EU
-Mode gModeLang = { "mode_lang", eu_08009CD0, eu_08009E10, eu_0800A0DC };
+Mode gModeLang = { "mode_lang", eu_08009CD0, mode_lang_1, mode_lang_2 };
 #endif
 Mode gModeBattle = { "mode_battle", (ModeInitFunc)mode_battle_0, mode_battle_1, mode_battle_2 };

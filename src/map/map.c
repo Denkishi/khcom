@@ -4774,7 +4774,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     w->bg3MapLoaded = 0;
 
     if (p->unk_50 == 0) {
-        eu_080059D4(3, p->tiles);
+        LoadBgTilesLz77(3, p->tiles);
     } else {
         LoadBgTiles(3, p->tiles, p->tilesSize);
     }
@@ -4783,7 +4783,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
 #endif
     LoadBgPalette(3, p->palette, p->paletteSize);
 #ifdef VERSION_EU
-    eu_08005A1C(3, p->map3, p->mapWidth, p->mapHeight);
+    SetBgMapBlocksLz77(3, p->map3, p->mapWidth, p->mapHeight);
     w->bg3MapLoaded = 1;
 #else
     SetBgMapBlocks(3, p->map3, p->mapWidth, p->mapHeight);
@@ -4792,7 +4792,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     if (p->map2 != NULL) {
 #ifdef VERSION_EU
         if (p->unk_50 == 0) {
-            eu_080059D4(2, p->tiles);
+            LoadBgTilesLz77(2, p->tiles);
         } else {
             LoadBgTiles(2, p->tiles, p->tilesSize);
         }
@@ -4801,7 +4801,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
 #endif
         LoadBgPalette(2, p->palette, p->paletteSize);
 #ifdef VERSION_EU
-        eu_08005A1C(2, p->map2, p->mapWidth, p->mapHeight);
+        SetBgMapBlocksLz77(2, p->map2, p->mapWidth, p->mapHeight);
         w->bg2MapLoaded = 1;
 #else
         SetBgMapBlocks(2, p->map2, p->mapWidth, p->mapHeight);
@@ -4813,7 +4813,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     if (p->map != NULL) {
 #ifdef VERSION_EU
         if (p->unk_50 == 0) {
-            eu_080059D4(1, p->tiles2);
+            LoadBgTilesLz77(1, p->tiles2);
         } else {
             LoadBgTiles(1, p->tiles2, p->tilesSize2);
         }
@@ -4822,7 +4822,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
 #endif
         LoadBgPalette(1, p->palette, p->paletteSize);
 #ifdef VERSION_EU
-        eu_08005A1C(1, p->map, p->mapWidth, p->mapHeight);
+        SetBgMapBlocksLz77(1, p->map, p->mapWidth, p->mapHeight);
         w->bg1MapLoaded = 1;
 #else
         SetBgMapBlocks(1, p->map, p->mapWidth, p->mapHeight);
@@ -4899,15 +4899,15 @@ void Task_MapFix_3(MapFixWork* w) {
 
 #ifdef VERSION_EU
     if (w->bg3MapLoaded != 0) {
-        eu_08005ADC(3);
+        FreeBgDecompressedMap(3);
     }
 
     if (w->bg2MapLoaded != 0) {
-        eu_08005ADC(2);
+        FreeBgDecompressedMap(2);
     }
 
     if (w->bg1MapLoaded != 0) {
-        eu_08005ADC(1);
+        FreeBgDecompressedMap(1);
     }
 #endif
 

@@ -734,7 +734,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
                 work->dsd->bgFrame = work->baseFrame - 6;
 
                 if (gBtlWork->enemyTileCount <= 0 && (work->dsd->flags & DSD_FLAG_PLATFORM_ACTIVE) == 0) {
-                    _0801C1F8(0, d->body[0].x, d->body[0].y, d->body[0].z);
+                    DropGimmickCard(0, d->body[0].x, d->body[0].y, d->body[0].z);
                 }
 
                 work->dsd->stateStep++;

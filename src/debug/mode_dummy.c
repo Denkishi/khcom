@@ -42,8 +42,8 @@ void mode_dummy_0(u32 arg) {
     DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
     SetupBg(1, 1, 0x0C, 8);
 #ifdef VERSION_EU
-    eu_080059D4(1, gUnk_08C6B0C4);
-    eu_080059F4(1, gUnk_08EEE384);
+    LoadBgTilesLz77(1, gUnk_08C6B0C4);
+    LoadBgMapLz77(1, gUnk_08EEE384);
     LoadBgPalette(1, gUnk_08F683C4, 0x20);
 #else
     LoadBgTiles(1, gUnk_08C6B0C4, 0x7C20);

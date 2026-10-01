@@ -45,7 +45,7 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z);
 void AllocBattleTiles();
 void ReleaseBattleTiles();
 void SetGimmickFlag(u8 a);
-void _0801C1F8(u8 a, s32 x, s32 y, s32 z);
+void DropGimmickCard(u8 a, s32 x, s32 y, s32 z);
 void SetGimmickTarget(s32 a, s32 b, s32 c);
 void SetEnemyHpFromStats(BtlObj* a, s32 b, s32 c);
 void SetEnemyJiminyFlag(BtlObj* p);

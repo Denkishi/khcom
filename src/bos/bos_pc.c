@@ -5799,7 +5799,7 @@ u8 BosPcUpdateBreak(PcWork* work, Task* task) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (work->shared.gimmickTimer <= 0) {
             if (GetRandom() % 0xA01 > 0x800) {
-                _0801C1F8(0, work->x, work->y, work->z);
+                DropGimmickCard(0, work->x, work->y, work->z);
             }
         }
     }
@@ -5924,7 +5924,7 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
 
             if (work->shared.gimmickTimer <= 0) {
                 if (GetRandom() & 0x300) {
-                    _0801C1F8(0, work->x, work->y, work->z);
+                    DropGimmickCard(0, work->x, work->y, work->z);
                 }
             }
         } else {

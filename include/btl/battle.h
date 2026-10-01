@@ -155,7 +155,7 @@ u8 GetActiveCardValue();
 void func_080838E8();
 void RequestBossCardClose();
 #ifdef VERSION_EU
-void eu_08013190();
+void HandleRikuTutorialCardInput();
 #endif
 extern Mode gModeChkbtl;
 

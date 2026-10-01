@@ -55,8 +55,8 @@ void mode_debug_0() {
     SetBgSize(1, 0);
 #ifdef VERSION_EU
     LoadBgPalette(1, gUnk_08F683E4, 0x200);
-    eu_080059D4(1, gUnk_08C72CE4);
-    eu_080059F4(1, gUnk_08EEEB84);
+    LoadBgTilesLz77(1, gUnk_08C72CE4);
+    LoadBgMapLz77(1, gUnk_08EEEB84);
 #else
     LoadBgTiles(1, gUnk_08C72CE4, 0x5B40);
     LoadBgPalette(1, gUnk_08F683E4, 0x200);

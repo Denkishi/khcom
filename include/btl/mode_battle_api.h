@@ -7,8 +7,8 @@ void mode_battle_2();
 
 #ifdef VERSION_EU
 void eu_08009CD0(s32 arg);
-void eu_08009E10();
-void eu_0800A0DC();
+void mode_lang_1();
+void mode_lang_2();
 #endif
 
 #endif

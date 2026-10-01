@@ -69,8 +69,8 @@ void ContinueSora_0(ContinueWork* p) {
     SetBgPriority(0, 1);
     SetBgPriority(1, 2);
 #ifdef VERSION_EU
-    eu_080059D4(0, sContinueLanguageBgTiles[gLanguage]);
-    eu_080059F4(0, gUnk_0951CAB8);
+    LoadBgTilesLz77(0, sContinueLanguageBgTiles[gLanguage]);
+    LoadBgMapLz77(0, gUnk_0951CAB8);
 #else
     LoadBgTiles(0, gUnk_0941A418, MSG_CONT_BG_TILES);
     LoadBgMap(0, gUnk_0951CAB8, 0x800);
@@ -139,8 +139,8 @@ void ContinueRiku_0(ContinueWork* p) {
     SetBgPriority(0, 1);
     SetBgPriority(1, 2);
 #ifdef VERSION_EU
-    eu_080059D4(0, sContinueLanguageBgTiles[gLanguage]);
-    eu_080059F4(0, gUnk_0951CAB8);
+    LoadBgTilesLz77(0, sContinueLanguageBgTiles[gLanguage]);
+    LoadBgMapLz77(0, gUnk_0951CAB8);
 #else
     LoadBgTiles(0, gUnk_0941A418, MSG_CONT_BG_TILES);
     LoadBgMap(0, gUnk_0951CAB8, 0x800);

@@ -324,15 +324,15 @@ entries:
   record: StaffRollBlitTable
   declare: false
   items:
-  - func_0811549C
-  - func_081154A0
-  - func_081154EC
-  - func_08115548
-  - func_081155B0
-  - func_08115628
-  - func_081156AC
-  - func_08115740
-  - func_081157E0
+  - SrollBlit1bppWidth0
+  - SrollBlit1bppWidth1
+  - SrollBlit1bppWidth2
+  - SrollBlit1bppWidth3
+  - SrollBlit1bppWidth4
+  - SrollBlit1bppWidth5
+  - SrollBlit1bppWidth6
+  - SrollBlit1bppWidth7
+  - SrollBlit1bppWidth8
   us:
     address: 0x09A54CB8
   jp:
@@ -343,15 +343,15 @@ entries:
   record: StaffRollBlitTable
   declare: false
   items:
-  - func_081159AC
-  - func_081159B0
-  - func_081159FC
-  - func_08115A5C
-  - func_08115AD4
-  - func_08115B6C
-  - func_08115C04
-  - func_08115CAC
-  - func_08115D60
+  - SrollBlit2bppWidth0
+  - SrollBlit2bppWidth1
+  - SrollBlit2bppWidth2
+  - SrollBlit2bppWidth3
+  - SrollBlit2bppWidth4
+  - SrollBlit2bppWidth5
+  - SrollBlit2bppWidth6
+  - SrollBlit2bppWidth7
+  - SrollBlit2bppWidth8
   us:
     address: 0x09A54CDC
   jp:

@@ -28,7 +28,7 @@ void* eu_0805E924(const void* strings) {
     }
 }
 
-void* eu_0805E968(const void* text) {
+void* GetLocalizedLines(const void* text) {
     void* const* s = text;
 
     switch (gLanguage) {
@@ -46,7 +46,7 @@ void* eu_0805E968(const void* text) {
     }
 }
 
-s32 eu_0805E9AC(const void* text) {
+s32 GetLocalizedLineCount(const void* text) {
     const u16* s = text;
 
     switch (gLanguage) {

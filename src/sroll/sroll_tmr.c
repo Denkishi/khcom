@@ -85,10 +85,10 @@ void task_sroll_tmr_3(SrollTmrWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void func_0811549C() {
+void SrollBlit1bppWidth0() {
 }
 
-void func_081154A0(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth1(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -104,7 +104,7 @@ void func_081154A0(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_081154EC(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth2(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -121,7 +121,7 @@ void func_081154EC(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115548(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth3(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -139,7 +139,7 @@ void func_08115548(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_081155B0(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth4(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -158,7 +158,7 @@ void func_081155B0(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115628(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth5(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -178,7 +178,7 @@ void func_08115628(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_081156AC(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth6(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -199,7 +199,7 @@ void func_081156AC(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115740(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth7(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -221,7 +221,7 @@ void func_08115740(u32* dst, u8* src, u32* pal, s32 x) {
     }
 }
 
-void func_081157E0(u32* dst, u8* src, u32* pal, s32 x) {
+void SrollBlit1bppWidth8(u32* dst, u8* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -306,10 +306,10 @@ u32 SrollTextBlit1bpp(SrollBlit* w) {
     return r;
 }
 
-void func_081159AC() {
+void SrollBlit2bppWidth0() {
 }
 
-void func_081159B0(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth1(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     u32* d;
     u16* s;
@@ -331,7 +331,7 @@ void func_081159B0(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_081159FC(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth2(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -348,7 +348,7 @@ void func_081159FC(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115A5C(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth3(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -366,7 +366,7 @@ void func_08115A5C(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115AD4(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth4(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -383,7 +383,7 @@ void func_08115AD4(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115B6C(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth5(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -401,7 +401,7 @@ void func_08115B6C(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115C04(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth6(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -420,7 +420,7 @@ void func_08115C04(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115CAC(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth7(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;
@@ -440,7 +440,7 @@ void func_08115CAC(u32* dst, u16* src, u32* pal, s32 x) {
     }
 }
 
-void func_08115D60(u32* dst, u16* src, u32* pal, s32 x) {
+void SrollBlit2bppWidth8(u32* dst, u16* src, u32* pal, s32 x) {
     SrollShift* t;
     s32 i;
     u32 v;

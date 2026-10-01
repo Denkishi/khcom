@@ -277,10 +277,10 @@ void BosTmBodySetBreakPose(TmBodyWork* p);
 void BosTmBodyApplyThrowStep(TmBodyWork* p, s16 a);
 void BosTmBodySetWalkPose(TmBodyWork* p);
 void BosTmBodyWalk(TmBodyWork* p);
-void func_080B8A00(TmBodyWork* p);
-void func_080B8FF4(TmBodyWork* p, s16 a);
+void BosTmBodyUpdateRecoil(TmBodyWork* p);
+void BosTmBodyApplySpinStep(TmBodyWork* p, s16 a);
 void BosTmBodyChooseAction(TmBodyWork* p);
-void _080B949C(BtlObj* a, TmBodyWork* b);
+void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* b);
 void BosTmBodyRollBossCard(TmBodyWork* p);
 
 s32 GetAbsoluteDifference(s32 a, s32 b);
@@ -315,7 +315,7 @@ void BosTmArmUpdateArm0Tip(TmArmWork* work);
 void BosTmFootSyncCollider(BtlObj* sub, TmFootWork* work);
 void BosTmFootApplyThrowStep(TmFootWork* work, s16 a);
 void BosTmFootWalk(TmFootWork* work);
-void func_080BA8C8(TmFootWork* work, s16 a);
+void BosTmFootApplySpinStep(TmFootWork* work, s16 a);
 void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a);
 void BosTmArmStepJointAnim(TmArmJoint* joints, TmAnim* a);
 

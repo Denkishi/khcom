@@ -936,7 +936,7 @@ s32 SioExchangeRecv() {
 }
 
 #ifdef VERSION_EU
-void eu_080C24D8() {
+void SioExchangeLoopback() {
     s32 i;
     s16 count;
     count = 112;
@@ -1031,11 +1031,11 @@ s32 SioSyncRecv() {
 }
 
 #ifdef VERSION_EU
-s32 eu_080C273C() {
+s32 SioRandomPartnerSend() {
     return 0;
 }
 
-s32 eu_080C2740() {
+s32 SioRandomPartnerRecv() {
     u16 held;
     u16 keys;
     u16 r;

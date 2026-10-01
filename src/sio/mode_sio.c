@@ -909,7 +909,7 @@ void SioBtlOptionLoadWorld() {
     RequestDma3Copy(gSioWorldEntries[i].tiles, GetBgCharBase(2), 0x2000);
     LoadBgPalette(2, gSioWorldEntries[i].palette, gSioWorldEntries[i].paletteSize);
 #ifdef VERSION_EU
-    eu_080059F4(2, gSioWorldEntries[i].map);
+    LoadBgMapLz77(2, gSioWorldEntries[i].map);
     gSioBtlOptionWork->textSlotCount = LoadTextSlots(eu_0805E924(gSioWorldEntries[i].text), gSioBtlOptionWork->textSlots);
 #else
     LoadBgMap(2, gSioWorldEntries[i].map, gSioWorldEntries[i].mapSize);
@@ -985,7 +985,7 @@ void mode_sio_btl_option_1() {
         SioBtlOptionDraw();
         break;
     case 14:
-        func_080B041C();
+        SioBtlOptionWaitBeforeSync();
         SioBtlOptionDraw();
         break;
     case 15:
@@ -1531,7 +1531,7 @@ void SioBtlOptionChangeWorld() {
     case 1:
         FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, 32);
 #ifdef VERSION_EU
-        eu_080059F4(2, gSioWorldEntries[b].map);
+        LoadBgMapLz77(2, gSioWorldEntries[b].map);
 #else
         LoadBgMap(2, gSioWorldEntries[b].map, gSioWorldEntries[b].mapSize);
 #endif
@@ -1677,7 +1677,7 @@ void SioBtlOptionStartDeckExchange() {
 
         if (gSioBtlOptionWork->timer > 9) {
             SioPrepareDeckExchange();
-            eu_080C24D8();
+            SioExchangeLoopback();
             gSioBtlOptionWork->timer = 0;
             gSioBtlOptionWork->state++;
         }
@@ -1706,7 +1706,7 @@ void SioBtlOptionWaitDeckExchange() {
         if (gSioBtlOptionWork->timer > 59) {
             gSioBtlOptionWork->timer = 0;
             gSystemFlags |= SYSTEM_FLAG_LINK_ACTIVE;
-            SioSetLinkCallbacks(eu_080C273C, eu_080C2740);
+            SioSetLinkCallbacks(SioRandomPartnerSend, SioRandomPartnerRecv);
             SioApplyBattleSettings();
             gRandomPartnerDpadTimer = 180;
             gRandomPartnerDpad = 0;
@@ -1733,7 +1733,7 @@ void SioBtlOptionResumeCommands() {
     }
 }
 
-void func_080B041C() {
+void SioBtlOptionWaitBeforeSync() {
     gSioBtlOptionWork->timer++;
 
     if (gSioBtlOptionWork->timer > 30) {
@@ -3012,11 +3012,11 @@ void mode_sio_chg_card_1() {
         SioChgCardDraw();
         break;
     case 11:
-        func_080B2AE8();
+        SioChgCardShowSecondMessage();
         SioChgCardDraw();
         break;
     case 12:
-        func_080B2B48();
+        SioChgCardHideMessage();
         SioChgCardDraw();
         break;
     case 13:
@@ -3248,7 +3248,7 @@ void SioChgCardWaitMove() {
     }
 }
 
-void func_080B2AE8() {
+void SioChgCardShowSecondMessage() {
     gSioChgCardWork->timer++;
 
     if (gSioChgCardWork->timer > 119) {
@@ -3260,7 +3260,7 @@ void func_080B2AE8() {
     }
 }
 
-void func_080B2B48() {
+void SioChgCardHideMessage() {
     gSioChgCardWork->timer++;
 
     if (gSioChgCardWork->timer > 119) {

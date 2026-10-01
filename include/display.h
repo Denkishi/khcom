@@ -34,8 +34,8 @@ void SetBgOverflow(s32 bg, u8 on);
 void SetObjMosaicSize(u8 x, u8 y);
 
 #ifdef VERSION_EU
-void eu_080059D4(s32 bg, void* src);
-void eu_080059F4(s32 bg, void* src);
+void LoadBgTilesLz77(s32 bg, void* src);
+void LoadBgMapLz77(s32 bg, void* src);
 #endif
 
 struct BgAnimationDef;
@@ -61,8 +61,8 @@ void BgAnimStart(struct BgAnimationDef* a, s32 x, s32 y);
 u8 RequestDma3Clear(void* a, u16 b);
 
 #ifdef VERSION_EU
-u8 eu_08005A1C(s32 bg, const void* src, u8 w, u8 h);
-void eu_08005ADC(s32 bg);
+u8 SetBgMapBlocksLz77(s32 bg, const void* src, u8 w, u8 h);
+void FreeBgDecompressedMap(s32 bg);
 #endif
 
 struct BgWork;

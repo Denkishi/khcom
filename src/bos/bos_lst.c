@@ -823,20 +823,20 @@ u8 BosLstAnyBitFiring(BosLstWork* work, s32 idx) {
 }
 
 #ifdef VERSION_EU
-u8 eu_0810BA1C(BosLstWork* work, s32 idx) {
+u8 BosLstAnyBitScaling(BosLstWork* work, s32 idx) {
     s32 i;
     u8 r;
     r = 0;
 
     if (idx < 0) {
         for (i = 0; i < work->lstTaskCount; i++) {
-            if (eu_0810F08C(work->lstTasks[i]) == 1) {
+            if (BosLstBitIsScaling(work->lstTasks[i]) == 1) {
                 r = 1;
                 break;
             }
         }
     } else if (idx < work->lstTaskCount) {
-        if (eu_0810F08C(work->lstTasks[idx]) == 1) {
+        if (BosLstBitIsScaling(work->lstTasks[idx]) == 1) {
             r = 1;
         }
     }
@@ -991,7 +991,7 @@ void BosLstMoveBits(BosLstWork* work) {
                 work->cardDelay = 0x400;
 
 #ifdef VERSION_EU
-                if (eu_0810BA1C(work, -1) != 0) {
+                if (BosLstAnyBitScaling(work, -1) != 0) {
                     break;
                 }
 #endif

@@ -644,7 +644,7 @@ void EndCardPlay() {
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
 
-void _08019CB4() {
+void UpdateBattlePhase() {
     BtlObj* player;
     s32 i;
     s32 changed;
@@ -680,7 +680,7 @@ void _08019CB4() {
         if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
             HandleTutorialCardInput();
 #ifdef VERSION_EU
-            eu_08013190();
+            HandleRikuTutorialCardInput();
 #else
             HandleRikuAiCardInput();
 #endif
@@ -2200,7 +2200,7 @@ u8 ConsumeGimmickFlag(u8 a) {
     return 0;
 }
 
-void _0801C1F8(u8 a, s32 x, s32 y, s32 z) {
+void DropGimmickCard(u8 a, s32 x, s32 y, s32 z) {
     u16 id;
 
     switch (a) {

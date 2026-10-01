@@ -637,7 +637,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
 
@@ -1408,7 +1408,7 @@ u8 task_hum_hook_1(HookWork* work) {
     c = gBtlWork->actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    if (_0800E434(&work->base) == 5) {
+    if (HumUpdateReaction(&work->base) == 5) {
         work->base.stateTimer = 0;
 
         switch ((u32)HumResolveCardMove(&work->base)) {
@@ -2303,7 +2303,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
         act->flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_INVULNERABLE);
@@ -2950,7 +2950,7 @@ u8 task_hum_hades_1(HadesWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
 
@@ -3738,7 +3738,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
     work->flags &= ~MAHLUXIA_FLAG_AFTERIMAGE;
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
         w->hoverZ = 0;
@@ -4339,7 +4339,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
         work->base.steps = 0;
@@ -5229,7 +5229,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
 
@@ -6158,7 +6158,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    switch ((u32)_0800E434(&work->base)) {
+    switch ((u32)HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
 
@@ -7233,7 +7233,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
     p = gBtlWork->actor;
     GetEnemyTargetPosition(act, &x, &y, &z);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
         work->base.steps = 0;
@@ -8373,7 +8373,7 @@ u8 task_hum_riku_1(RikuWork* work) {
     GetEnemyTargetPosition(act, &x, &y, &z);
     work->flags &= ~RIKU_FLAG_AFTERIMAGE;
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 5:
         work->base.stateTimer = 0;
 
@@ -9237,7 +9237,7 @@ u8 task_hum_leon_1(LeonWork* work) {
     act = &work->base.actor;
     GetEnemyTargetPosition(act, &a, &b, &c);
 
-    switch (_0800E434(&work->base)) {
+    switch (HumUpdateReaction(&work->base)) {
     case 4:
         break;
     case 5:
@@ -9360,7 +9360,7 @@ u8 task_hum_robe_1(RobeWork* work) {
     s32 z;
     u8 r;
 
-    if (_0800E434(&work->base) == 1) {
+    if (HumUpdateReaction(&work->base) == 1) {
         work->base.stateTimer = 1;
     }
 

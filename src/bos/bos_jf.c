@@ -171,7 +171,7 @@ u8 task_bos_jf_1(JfWork* work) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (work->gimmickTimer == 0) {
                 if (GetRandom() % 100 <= 19) {
-                    _0801C1F8(0, sub->x, sub->y, sub->z);
+                    DropGimmickCard(0, sub->x, sub->y, sub->z);
                 }
             }
         }
@@ -204,7 +204,7 @@ u8 task_bos_jf_1(JfWork* work) {
 
             if ((work->flags & JF_FLAG_HURT) == 0) {
                 if (work->gimmickTimer == 0) {
-                    _0801C1F8(0, sub->x, sub->y, sub->z);
+                    DropGimmickCard(0, sub->x, sub->y, sub->z);
                 }
             }
         }

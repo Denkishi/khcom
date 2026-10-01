@@ -806,7 +806,7 @@ void mode_movie_1() {
 
         if (sMovieFlags & MOVIE_FLAG_SOFT_RESET) {
 #ifdef VERSION_EU
-            eu_0800115C();
+            DoSoftReset();
 #else
             SoftReset(RESET_ALL);
 #endif

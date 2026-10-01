@@ -155,13 +155,13 @@ void mode_title_0() {
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
-        eu_080059F4(0, gUnk_09840798);
+        LoadBgMapLz77(0, gUnk_09840798);
 #else
         LoadBgMap(0, gUnk_09840798, 0x800);
 #endif
     } else {
 #ifdef VERSION_EU
-        eu_080059F4(0, gUnk_0983E398);
+        LoadBgMapLz77(0, gUnk_0983E398);
 #else
         LoadBgMap(0, gUnk_0983E398, 0x800);
 #endif
@@ -173,16 +173,16 @@ void mode_title_0() {
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
-        eu_080059D4(1, gUnk_097D3658);
-        eu_080059F4(1, gUnk_09840F98);
+        LoadBgTilesLz77(1, gUnk_097D3658);
+        LoadBgMapLz77(1, gUnk_09840F98);
 #else
         LoadBgTiles(1, gUnk_097D3658, 0x7FA0);
         LoadBgMap(1, gUnk_09840F98, 0x800);
 #endif
     } else {
 #ifdef VERSION_EU
-        eu_080059D4(1, gUnk_097C77B8);
-        eu_080059F4(1, gUnk_0983EB98);
+        LoadBgTilesLz77(1, gUnk_097C77B8);
+        LoadBgMapLz77(1, gUnk_0983EB98);
 #else
         LoadBgTiles(1, gUnk_097C77B8, 0x7FA0);
         LoadBgMap(1, gUnk_0983EB98, 0x800);

@@ -226,7 +226,7 @@ void HandleRikuAiCardInput() {
 }
 
 #ifdef VERSION_EU
-void eu_08013190() {
+void HandleRikuTutorialCardInput() {
     BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
     keys = gBtlWork->rikuKeys;

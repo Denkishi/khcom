@@ -804,15 +804,15 @@ void UpdateSpriteOam(void) {
 
                 if (affine->angle != 0) {
                     s32 term;
-                    term = (s32)((u32)gSineTable[cosIndex = (s16)((sinIndex = -affine->angle) + 64) & 255] * x);
+                    term = gSineTable[cosIndex = (s16)((sinIndex = -affine->angle) + 64) & 255] * x;
                     sinIndex &= 255;
-                    xx = (u32)term + (u32)gSineTable[sinIndex] * y;
-                    yy = (s32)((u32)gSineTable[cosIndex + 64] * x + (u32)gSineTable[sinIndex + 64] * y);
-                    xx = (s32)((u32)affine->sx * xx) >> 8;
-                    yy = (s32)((u32)affine->sy * yy) >> 8;
+                    xx = term + gSineTable[sinIndex] * y;
+                    yy = gSineTable[cosIndex + 64] * x + gSineTable[sinIndex + 64] * y;
+                    xx = (affine->sx * xx) >> 8;
+                    yy = (affine->sy * yy) >> 8;
                 } else {
-                    xx = (s32)((u32)affine->sx * x);
-                    yy = (s32)((u32)affine->sy * y);
+                    xx = affine->sx * x;
+                    yy = affine->sy * y;
                 }
 
                 x = xx >> 8;

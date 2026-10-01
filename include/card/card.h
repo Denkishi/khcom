@@ -2070,7 +2070,7 @@ typedef struct LevelUpWork {
     u8 loaded[2];
     u8 messageActive;
     u8 effectShown;
-    u8 unk_7C6;
+    u8 bossBattle;
     u8 applied;
     u8 optionEnabled[3];
 } LevelUpWork;

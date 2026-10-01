@@ -232,7 +232,7 @@ void CreateCardBattleState() {
     gCardBattleState->rikuStockNameShown = 0;
     gCardBattleState->unk_0E5 = 0;
     gCardBattleState->unk_0E6 = 0;
-    gCardBattleState->unk_0E9 = 0;
+    gCardBattleState->levelUpShown = 0;
     gCardBattleState->addedFriendCards[0] = 0;
     gCardBattleState->addedFriendCards[1] = 0;
     gCardBattleState->cardsOpen = 0;

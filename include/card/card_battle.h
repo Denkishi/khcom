@@ -64,7 +64,7 @@ typedef struct CardBattleState {
     u8 unk_0E6;
     u8 soraReloadCharging;
     u8 rikuReloadCharging;
-    u8 unk_0E9;
+    u8 levelUpShown;
     u8 cardsOpen;
     u8 soraHcEffectReplaced;
     u8 rikuHcEffectReplaced;

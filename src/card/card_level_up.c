@@ -85,7 +85,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->optionEnabled[2] = 1;
 
     if (gCardBattleState != NULL) {
-        gCardBattleState->unk_0E9 = 1;
+        gCardBattleState->levelUpShown = 1;
     }
 
 #ifndef VERSION_EU
@@ -142,7 +142,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->gfx = AnimGetGfx(&w->anim2);
 
     if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
-        w->unk_7C6 = 0;
+        w->bossBattle = 0;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
         gBg1Cnt &= ~BGCNT_256COLOR;
         SetBgSize(1, 0);
@@ -162,7 +162,7 @@ void Level_Up_0(LevelUpWork* w) {
         gBg2X = gBg3X;
         gBg2Y = gBg3Y;
     } else {
-        w->unk_7C6 = 1;
+        w->bossBattle = 1;
 
         switch (gBtlWork->battleId) {
         case 151:
@@ -298,7 +298,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
         w->timer++;
 
         if (w->timer > 7) {
-            if (w->unk_7C6 == 0) {
+            if (w->bossBattle == 0) {
                 LoadBgTiles(1, gUnk_093FF8F8, bgSize);
 
 #ifdef VERSION_EU

@@ -32,12 +32,6 @@
 
 static SysMsgWinWork* sActiveSysmsgwin;
 
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a);
 s32 UpdateSysmsgwinClose(SysMsgWinWork* w);
 u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a);

@@ -38,12 +38,6 @@
 #include <stddef.h>
 
 #ifdef VERSION_EU
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
-
-#ifdef VERSION_EU
 static void* sUnkEu_09F84FA8[5] = {
     gUnkEu_09A94E20,
     gUnkEu_09A95320,

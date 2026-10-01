@@ -27,6 +27,10 @@ void task_monsgage_3(MonsgageWork* work);
 void* eu_0805E924(const void* strings);
 void* eu_0805E968(void* text);
 s32 eu_0805E9AC(void* text);
+
+#define LANGSEL(x) eu_0805E924(x)
+#else
+#define LANGSEL(x) (x)
 #endif
 
 #endif /* GUARD_MONSGAGE_H */

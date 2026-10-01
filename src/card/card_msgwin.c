@@ -39,12 +39,6 @@ u8 gMessageWindowOpen EWRAM_COMMON(4);
 
 u8 gMessageWindowAnswerYes EWRAM_COMMON(4);
 
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 u8 UpdateCardMsgwinLoadText(CardMsgWinWork* w, void* a);
 u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a);
 u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* w, void* a);

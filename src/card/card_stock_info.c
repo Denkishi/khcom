@@ -17,12 +17,6 @@
 #include <stddef.h>
 #include "types.h"
 
-#ifdef VERSION_EU
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
-
 #if defined(VERSION_US)
 static const CardHelpDef sUnk_0903BD0C = {
     gUnk_09EE7A38,

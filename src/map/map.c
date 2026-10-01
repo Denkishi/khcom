@@ -66,12 +66,6 @@ extern u8 (*gMapGmkSpotFuncs[])(FldPos*);
 extern u8 (*gMapAnmCmds[])(MapAnmSlot*);
 extern u8 gWorldEntryEvents[];
 
-#ifdef VERSION_EU
-#define LANGSEL(x) eu_0805E924(x)
-#else
-#define LANGSEL(x) (x)
-#endif
-
 u8 gMapEnmCount;
 u8 gMapEnmTileCount;
 u8 gMapEnmSpawnTimer;

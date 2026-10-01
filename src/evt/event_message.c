@@ -51,12 +51,6 @@
 #include "types.h"
 #include <stddef.h>
 
-#ifdef VERSION_EU
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) ((void*)(x))
-#endif
-
 static void msgwin_0(MsgWinWork* p, u8* arg);
 static u8 msgwin_1(MsgWinWork* p, void* a);
 static void msgwin_2(MsgWinWork* p);

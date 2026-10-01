@@ -25,12 +25,6 @@ TaskPool gModePremireTasks;
 u8 gUnk_02034AF4[4];
 #endif
 
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a);
 

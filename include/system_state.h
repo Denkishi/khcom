@@ -69,6 +69,10 @@ enum Language {
 };
 
 extern u32 gLanguage;
+
+#define LANGSTR(x) (((void**)(x))[gLanguage])
+#else
+#define LANGSTR(x) ((void*)(x))
 #endif
 extern IntrFunc gVBlankHandlerOverride;
 

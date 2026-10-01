@@ -357,12 +357,6 @@ u8 gUnk_02034AB1[3];
 CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 
 u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* w, void* a);
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 void ReleaseCardPreview(DeckMenuWork* w);
 void HighlightDeckTab(DeckMenuWork* w, u8 b);
 void DrawCpCost(u8 a);

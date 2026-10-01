@@ -47,12 +47,6 @@
 #include "types.h"
 #include <stddef.h>
 
-#ifdef VERSION_EU
-#define LANGSEL(x) eu_0805E924(x)
-#else
-#define LANGSEL(x) (x)
-#endif
-
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },

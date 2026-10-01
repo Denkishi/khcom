@@ -47,12 +47,6 @@ struct CardListWork* gCardListWork EWRAM_COMMON(4);
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09613E98[];
 extern u8 gUnk_09618D18[];
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 void CreatePremireChanceCardTasks(PremireChanceWork* w);
 
 static const u32 sFriendCardIds[8] = {

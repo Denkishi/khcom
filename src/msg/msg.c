@@ -16,12 +16,6 @@
 #include <stddef.h>
 #include "system_state.h"
 
-#ifdef VERSION_EU
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
-
 static SpriteTextLine* gSpriteTextLines;
 static TextGlyphSprite* sMsgGlyphSprites;
 static TextGlyphSprite* sCardMsgGlyphSprites;

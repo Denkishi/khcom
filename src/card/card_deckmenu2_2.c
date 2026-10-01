@@ -29,12 +29,6 @@
 #include "types.h"
 #include <stddef.h>
 
-#ifdef VERSION_EU
-
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#else
-#define LANGSTR(x) (x)
-#endif
 void DrawRikuCpCost(u8 a);
 void ShowRikuDeckCardPreview(RikuDeckMenuWork* w);
 u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a);

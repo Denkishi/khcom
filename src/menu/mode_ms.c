@@ -39,14 +39,6 @@
 #include "types.h"
 
 #ifdef VERSION_EU
-#define LANGSTR(x) (((void**)(x))[gLanguage])
-#define LANGSEL(x) eu_0805E924(x)
-#else
-#define LANGSTR(x) (x)
-#define LANGSEL(x) (x)
-#endif
-
-#ifdef VERSION_EU
 static void* sUnkEu_09F84F5C[5] = {
     gUnkEu_09A8DAA0,
     gUnk_09A3B25C,

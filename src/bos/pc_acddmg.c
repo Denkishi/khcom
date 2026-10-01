@@ -1,4 +1,4 @@
-#include "pc.h"
+#include "pc_acddmg.h"
 #include "battle_actor_types.h"
 #include "battle_work.h"
 #include "taskpool.h"

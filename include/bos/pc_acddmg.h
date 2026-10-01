@@ -1,5 +1,5 @@
-#ifndef GUARD_PC_H
-#define GUARD_PC_H
+#ifndef GUARD_PC_ACDDMG_H
+#define GUARD_PC_ACDDMG_H
 
 #include "types.h"
 #include "battle_actor_types.h"
@@ -12,4 +12,4 @@ typedef struct PcAcdDmgWork {
     u8 unk_09[0x3];
 } PcAcdDmgWork;
 
-#endif /* GUARD_PC_H */
+#endif /* GUARD_PC_ACDDMG_H */

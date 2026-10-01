@@ -48,7 +48,7 @@ romcri.c
 btl3.c
 smn.c
 frd.c
-pc.c
+pc_acddmg.c
 hum.c
 save_data.c
 jiminy_data.c

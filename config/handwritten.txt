@@ -31,7 +31,13 @@ ply_endtie
 clear_modM
 ply_lfos
 ply_mod
-func_081196B4
+MovieVideoCodecKeyFrame
+MovieVideoCodecPostProcess
+MovieDeltaCodecStart
+MovieDeltaCodecDecode
+MovieAudioCodecAdpcm
+MovieAudioCodecPcm16
+MovieAudioCodecNull
 BgAffineSet
 CpuFastSet
 CpuSet

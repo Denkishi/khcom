@@ -22,13 +22,10 @@ def load_yaml(text):
 ROOT = baserom.ROOT
 ROM_BASE = 0x08000000
 ROM_LIMIT = 0x0A000000
-COMMON = {"assets/common/movie_codec.bin": ("MovieVideoCodecStart", 15100)}
-LEGACY_COMMON = {"asm/movie_codec.bin": "assets/common/movie_codec.bin"}
 KEEP = {"manifest.yaml", ".stamp", ".gitkeep"}
 
 DIRECTIVE_RE = re.compile(r'^[^@\n]*?\.(include|incbin)\s+"([^"]+)"([^@\n]*)', re.M)
 ROM_INCBIN_RE = re.compile(r'^(\s*)\.incbin\s+"roms/([A-Z0-9]{4})\.gba"\s*,\s*([^,\s]+)\s*,\s*([^,\s]+)\s*$')
-LEGACY_COMMON_RE = re.compile(r'(\.incbin\s+)"(' + "|".join(re.escape(k) for k in LEGACY_COMMON) + r')"')
 RANGE_RE = re.compile(r'assets/([a-z]+)/([0-9A-F]{8})-([0-9A-F]{8})\.bin')
 
 
@@ -51,7 +48,7 @@ def migrate_line(line, codes):
         start = ROM_BASE + int(offset, 0)
         end = start + int(size, 0)
         return f'{indent}.incbin "{asset_path(codes[code], start, end)}"{ending}'
-    return LEGACY_COMMON_RE.sub(lambda c: f'{c.group(1)}"{LEGACY_COMMON[c.group(2)]}"', line)
+    return line
 
 
 def migrate_text(text, codes):
@@ -124,14 +121,6 @@ def reachable(root, version):
     return order
 
 
-def symbol_address(root, version, name):
-    for line in (root / "config" / version / "symbols.txt").read_text().splitlines():
-        left, _sep, right = line.split("#", 1)[0].partition("=")
-        if left.strip() == name:
-            return int(right.strip(), 16)
-    raise AssetError(f"{name} is missing from config/{version}/symbols.txt")
-
-
 def plan(root, version):
     root = Path(root)
     known = baserom.versions(root)
@@ -155,12 +144,6 @@ def plan(root, version):
                 if ref in sites:
                     raise AssetError(f"{ref} is incbinned by both {sites[ref]} and {where}")
                 start, end = int(m.group(2), 16), int(m.group(3), 16)
-            elif ref in COMMON:
-                if ref in ranges:
-                    continue
-                name, size = COMMON[ref]
-                start = symbol_address(root, version, name)
-                end = start + size
             else:
                 raise AssetError(f"{where} incbins unknown asset {ref}")
             if not ROM_BASE <= start < end <= ROM_LIMIT:

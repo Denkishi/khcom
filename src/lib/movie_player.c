@@ -167,10 +167,10 @@ void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b) {
 
     switch (b) {
     case 0:
-        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - gUnk_0811D184);
+        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecPcm16);
         break;
     case 1:
-        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - gUnk_0811D1A4);
+        *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecNull);
         break;
     case 2:
         *(void**)a = (u8*)p->audioCodecCode - (MovieAudioCodecStart - MovieAudioCodecAdpcm);

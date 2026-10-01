@@ -2,12 +2,10 @@
 #define GUARD_MODE_TEST_H
 
 #include "mode.h"
-#include "taskpool.h"
 #include "fld_types.h"
 #include "evt_types.h"
 #include "types.h"
 #include "anim.h"
-#include "battle_actor_types.h"
 
 typedef struct DebugTextLine {
     u16 glyphs[61];
@@ -22,53 +20,6 @@ typedef struct DebugTextLine {
 typedef struct CharTile {
     u32 rows[8];
 } CharTile;
-
-#ifdef VERSION_EU
-typedef struct FrdPoohBody {
-    s32 unk_00;
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 ground;
-    u8 unk_14[0x20];
-    u64 flags;
-    u8 unk_3C[4];
-    Collider collider;
-    u8 unk_9C[0x30];
-    u16 depth;
-    u8 unk_CE[0x42];
-} FrdPoohBody;
-
-typedef struct FrdPoohWork {
-    TaskPool tasks;
-    BtlObj* actor;
-    void* tiles;
-    void* palette;
-    FrdPoohBody body;
-    AnimState anim;
-    s32 state;
-    u8 side;
-    u8 card;
-    s16 counter;
-    s32 targetX;
-    s32 targetY;
-    s32 velocity;
-    s32 speed;
-    u8 bounce;
-    u8 unk_161[3];
-    s32 bob;
-    s32 animcounter;
-    s32 scale;
-} FrdPoohWork;
-
-typedef struct FrdPoohArgs {
-    u16 card;
-    u8 side;
-    u8 unk_03;
-} FrdPoohArgs;
-
-extern u16 gPoohPalette[];
-#endif
 
 typedef struct LockonWork {
     void* tiles;

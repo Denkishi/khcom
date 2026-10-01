@@ -66,6 +66,7 @@ monsgage.c
 btl4.c
 tutorial.c
 mode_test.c
+frd_pooh.c
 sprites_frd_frames.s
 sprites_cloud_frames.s
 sprites_smn_frames.s

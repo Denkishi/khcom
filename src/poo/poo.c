@@ -279,11 +279,9 @@ void SetPoohAction(PoohWork* w, u32 b) {
     }
 
     if (b > 35) {
-        do {
-            w->angle = 0x53;
-            w->lookAngle = 0x53;
-            w->lookColumn = w->angle;
-        } while (0);
+        w->angle = 0x53;
+        w->lookAngle = 0x53;
+        w->lookColumn = w->angle;
     }
 
     SetPoohPalette(w, b);

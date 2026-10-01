@@ -4798,7 +4798,7 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
     void* src;
     s32 size;
 
-    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
         src = gUnk_09A3CDDC;
         size = 0x40;
     } else {
@@ -4812,7 +4812,7 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
 void WorldselectLoadSlotTiles(s16 model, s16 slot) {
     void* src;
 
-    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
         src = gUnk_099EDE7C;
     } else {
         src = sWorldselectWorldDefs[model].tiles;
@@ -4822,7 +4822,7 @@ void WorldselectLoadSlotTiles(s16 model, s16 slot) {
 }
 
 s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
-    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && func_080D2DD8()) {
+    if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
         gWorldselectSlots[slot].gfx = gUnk_099A8914;
     } else {
         gWorldselectSlots[slot].gfx = sWorldselectWorldDefs[model].gfx;

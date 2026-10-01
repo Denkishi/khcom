@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-extern const u16* gUnk_09EF4208[144];
-extern const u16* gUnk_09EF4448[144];
-extern const u16* gUnk_09EF4688[144];
+extern const u16* gPooBg3MapBlocks[144];
+extern const u16* gPooBg1MapBlocks[144];
+extern const u16* gPooBg2MapBlocks[144];
 
 #endif

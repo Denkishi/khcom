@@ -33,7 +33,7 @@
 #include "types.h"
 #include <stddef.h>
 
-#define sAllmapState ((AllmapState*)gUnk_0203C4B4)
+#define sAllmapState ((AllmapState*)gSharedModeWork)
 
 u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);
@@ -953,7 +953,7 @@ void InitAllmap() {
     AllmapCursorPos arg;
     AllmapRoomWork* w;
     AllmapRoomWork* c;
-    void** state = &gUnk_0203C4B4;
+    void** state = &gSharedModeWork;
 
     *state = EwramAlloc(sizeof(AllmapState));
     sAllmapState->lastRoom = MAP_ROOM_NONE;
@@ -1077,7 +1077,7 @@ void UpdateAllmap() {
 
 void DestroyAllmap() {
     TaskPoolDestroy(&sAllmapState->tasks);
-    EwramFree(gUnk_0203C4B4);
+    EwramFree(gSharedModeWork);
 }
 
 u16 GetAllmapMoveSpeed() {

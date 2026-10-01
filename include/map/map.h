@@ -389,9 +389,9 @@ typedef struct MapSaveWork {
 
 typedef struct MapAnmEntry {
     void* script;
-    void* unk_04;
-    u16 unk_08;
-    u8 unk_0A;
+    void* tiles;
+    u16 frameSize;
+    u8 tileOffset;
     u8 unk_0B;
 } MapAnmEntry;
 

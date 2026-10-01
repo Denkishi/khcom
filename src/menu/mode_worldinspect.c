@@ -440,7 +440,7 @@ void WorldInspectHandleInput() {
                 }
             }
 
-            if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && func_080D2DD8()) {
+            if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
                 sWorldInspectDetailPalettes[1] = LoadObjPalette(gUnk_09A3CDDC, 64);
                 sWorldInspectDetailTiles[1] = LoadObjTiles(gUnk_099EDE7C, 0x1000);
                 sWorldInspectDetailSprites[1] = gUnk_099A8914;

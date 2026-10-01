@@ -3264,12 +3264,12 @@ IsInPooWagonAreaForPooh	0x080cfea0	108	0x080cc690	global
 IsPooSoraOnWagon	0x080cff0c	36	0x080cc6fc	global
 IsPooSoraOverWagon	0x080cff30	40	0x080cc720	global
 SnapToPooWagonLine	0x080cff58	104	0x080cc748	global
-func_080CFFC0	0x080cffc0	48	0x080cc7b0	global
-func_080CFFF0	0x080cfff0	44	0x080cc7e0	global
-func_080D001C	0x080d001c	52	0x080cc80c	global
-func_080D0050	0x080d0050	52	0x080cc840	global
+ProjectToPooWagonEdgeUL	0x080cffc0	48	0x080cc7b0	global
+ProjectToPooWagonEdgeLR	0x080cfff0	44	0x080cc7e0	global
+ProjectToPooWagonEdgeUR	0x080d001c	52	0x080cc80c	global
+ProjectToPooWagonEdgeLL	0x080d0050	52	0x080cc840	global
 ClampToPooWagonArea	0x080d0084	312	0x080cc874	global
-func_080D01BC	0x080d01bc	84	0x080cc9ac	global
+GetPooWagonNearestSide	0x080d01bc	84	0x080cc9ac	global
 GetPooWagonSide	0x080d0210	128	0x080cca00	global
 task_poo_wagon_0	0x080d0290	116	0x080cca80	named
 task_poo_wagon_1	0x080d0304	276	0x080ccaf4	named
@@ -3382,7 +3382,7 @@ ClearPooFlag	0x080d2d80	20	0x080cf58c	body
 IsPooFlagSet	0x080d2d94	28	0x080cf5a0	global
 GetPooState	0x080d2db0	20	0x080cf5bc	body
 SetPooState	0x080d2dc4	20	0x080cf5d0	body
-func_080D2DD8	0x080d2dd8	80	0x080cf5e4	global
+IsPooAltImageActive	0x080d2dd8	80	0x080cf5e4	global
 AddPoohInteraction	0x080d2e28	72	0x080cf634	global
 SetPoohInteractionEnabled	0x080d2e70	20	0x080cf67c	body
 FreePoohInteractions	0x080d2e84	20	0x080cf690	body

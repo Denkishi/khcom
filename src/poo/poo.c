@@ -63,9 +63,9 @@ void* gPooSoraCollider EWRAM_COMMON(4);
 PooActor gPooActor EWRAM_COMMON(16);
 void* gStockMesDispWork EWRAM_COMMON(4);
 PooState gPooState EWRAM_COMMON(16);
-void* gUnk_0203C4B4 EWRAM_COMMON(4);
+void* gSharedModeWork EWRAM_COMMON(4);
 
-#define sPoohInteractions ((PoohInteractionRegistry*)gUnk_0203C4B4)
+#define sPoohInteractions ((PoohInteractionRegistry*)gSharedModeWork)
 
 extern AnimDef gTrap01AnimDefs[5];
 
@@ -1576,12 +1576,12 @@ void task_poo_map_0(PooMapWork* w) {
     LoadBgTiles(3, gPooMapBgDesc.tiles, gPooMapBgDesc.tilesSize);
     LoadBgTiles(2, gPooMapBgDesc.tiles2, gPooMapBgDesc.tilesSize2);
     LoadBgPalette(3, gPooMapBgDesc.palette, gPooMapBgDesc.paletteSize);
-    SetBgMapBlocks(3, gUnk_09EF4208, w->mapWidth, w->mapHeight);
+    SetBgMapBlocks(3, gPooBg3MapBlocks, w->mapWidth, w->mapHeight);
     RedrawBgMapAt(3, gPooScrollX, gPooScrollY);
     func_080CA35C();
-    SetBgMapBlocks(1, gUnk_09EF4448, w->mapWidth, w->mapHeight);
+    SetBgMapBlocks(1, gPooBg1MapBlocks, w->mapWidth, w->mapHeight);
     RedrawBgMapAt(1, gPooScrollX, gPooScrollY);
-    SetBgMapBlocks(2, gUnk_09EF4688, w->mapWidth, w->mapHeight);
+    SetBgMapBlocks(2, gPooBg2MapBlocks, w->mapWidth, w->mapHeight);
     RedrawBgMapAt(2, gPooScrollX, gPooScrollY);
     BtlMapResetShake();
 }
@@ -1668,7 +1668,7 @@ u16 GetPooMapTile(u16 x, u16 y) {
     u32 tx;
     u32 ty;
 
-    t = gUnk_09EF4208;
+    t = gPooBg3MapBlocks;
     bx = x >> 8;
     by = y >> 8;
     tx = (x >> 3) & 0x1F;
@@ -5651,7 +5651,7 @@ void SnapToPooWagonLine(u32* a, u32* b, u16 c) {
     ApproachValue(b, e + sPooWagon->pos.y, c);
 }
 
-void func_080CFFC0(s32* a, s32* b) {
+void ProjectToPooWagonEdgeUL(s32* a, s32* b) {
     s32 t;
     s32 y;
 
@@ -5662,7 +5662,7 @@ void func_080CFFC0(s32* a, s32* b) {
     *b = -0x2300 - *a * 2;
 }
 
-void func_080CFFF0(s32* a, s32* b) {
+void ProjectToPooWagonEdgeLR(s32* a, s32* b) {
     s32 t;
     s32 y;
 
@@ -5673,7 +5673,7 @@ void func_080CFFF0(s32* a, s32* b) {
     *b = 0x2800 - *a * 2;
 }
 
-void func_080D001C(s32* a, s32* b) {
+void ProjectToPooWagonEdgeUR(s32* a, s32* b) {
     s32 t;
     s32 y;
 
@@ -5683,7 +5683,7 @@ void func_080D001C(s32* a, s32* b) {
     *b = *a / 2 - 0x800;
 }
 
-void func_080D0050(s32* a, s32* b) {
+void ProjectToPooWagonEdgeLL(s32* a, s32* b) {
     s32 x;
     s32 y;
 
@@ -5701,36 +5701,36 @@ void ClampToPooWagonArea(u32* a, u32* b, u16 c) {
     y = *b - sPooWagon->pos.y;
 
     if (x < -0xB00 && y < -0xD00) {
-        func_080CFFC0(&x, &y);
+        ProjectToPooWagonEdgeUL(&x, &y);
 
         if (y < -0xD00) {
-            func_080D001C(&x, &y);
+            ProjectToPooWagonEdgeUR(&x, &y);
         } else if (y > -0xD00) {
-            func_080D0050(&x, &y);
+            ProjectToPooWagonEdgeLL(&x, &y);
         }
     } else if (x > 0xF00 && y > 0x600) {
-        func_080CFFF0(&x, &y);
+        ProjectToPooWagonEdgeLR(&x, &y);
 
         if (y < 0x600) {
-            func_080D001C(&x, &y);
+            ProjectToPooWagonEdgeUR(&x, &y);
         } else if (y > 0xA00) {
-            func_080D0050(&x, &y);
+            ProjectToPooWagonEdgeLL(&x, &y);
         }
     } else if (-x / 2 + y > 0) {
-        func_080D0050(&x, &y);
+        ProjectToPooWagonEdgeLL(&x, &y);
 
         if (x < -0x1700) {
-            func_080CFFC0(&x, &y);
+            ProjectToPooWagonEdgeUL(&x, &y);
         } else if (x > 0xF00) {
-            func_080CFFF0(&x, &y);
+            ProjectToPooWagonEdgeLR(&x, &y);
         }
     } else {
-        func_080D001C(&x, &y);
+        ProjectToPooWagonEdgeUR(&x, &y);
 
         if (x < -0xB00) {
-            func_080CFFC0(&x, &y);
+            ProjectToPooWagonEdgeUL(&x, &y);
         } else if (x > 0x1800) {
-            func_080CFFF0(&x, &y);
+            ProjectToPooWagonEdgeLR(&x, &y);
         }
     }
 
@@ -5738,7 +5738,7 @@ void ClampToPooWagonArea(u32* a, u32* b, u16 c) {
     ApproachValue(b, y + sPooWagon->pos.y, c);
 }
 
-s32 func_080D01BC(s32 x, s32 y) {
+s32 GetPooWagonNearestSide(s32 x, s32 y) {
     s32 dx;
     s32 dy;
 
@@ -7556,12 +7556,12 @@ void SetPooState(const void* p) {
     memcpy(&gPooState, p, sizeof(gPooState));
 }
 
-u8 func_080D2DD8() {
+u8 IsPooAltImageActive() {
     s32 v[6];
     u32 i;
     s32 n;
 
-    memcpy(v, gUnk_096FDA74, sizeof(v));
+    memcpy(v, gPooMainEventIds, sizeof(v));
 
     if (IsPooFlagSet(1) != 0) {
         return 1;
@@ -7598,11 +7598,11 @@ void SetPoohInteractionEnabled(u16 a, u8 b) {
 }
 
 void FreePoohInteractions() {
-    EwramFree(gUnk_0203C4B4);
+    EwramFree(gSharedModeWork);
 }
 
 void InitPoohInteractions() {
-    void** state = &gUnk_0203C4B4;
+    void** state = &gSharedModeWork;
 
     *state = EwramAlloc(sizeof(PoohInteractionRegistry));
     ((PoohInteractionRegistry*)*state)->count = 0;
@@ -7974,7 +7974,7 @@ const PooAnimDesc gPooSoraAnimDescs[11][5] = {
 
 const u16 gPooSoraSounds[8] = { SONG_SYS_SR_FOOTL, SONG_SYS_SR_FOOTR, SONG_SYS_SR_JUMP, SONG_SYS_SR_LAND, SONG_SYS_SR_GRASSUP, SONG_SYS_SR_GRASSUP, SONG_SYS_SR_GRASSJP, 0 };
 
-const u16* gUnk_09EF4208[144] = {
+const u16* gPooBg3MapBlocks[144] = {
     gUnk_09806D98,
     gUnk_09807598,
     gUnk_09808D98,
@@ -8121,7 +8121,7 @@ const u16* gUnk_09EF4208[144] = {
     gUnk_08125E24,
 };
 
-const u16* gUnk_09EF4448[144] = {
+const u16* gPooBg1MapBlocks[144] = {
     gUnk_0981A598,
     gUnk_0981AD98,
     gUnk_0981CD98,
@@ -8268,7 +8268,7 @@ const u16* gUnk_09EF4448[144] = {
     gUnk_08125E24,
 };
 
-const u16* gUnk_09EF4688[144] = {
+const u16* gPooBg2MapBlocks[144] = {
     gUnk_08125E24,
     gUnk_0982ED98,
     gUnk_0982F598,
@@ -8985,7 +8985,7 @@ TaskDesc gTaskDescPooCabbageAfterEvent = {
     sizeof(PooCabbageAfterEventWork),
 };
 
-const s32 gUnk_096FDA74[6] = { 0, 1, 2, 3, 4, 5 };
+const s32 gPooMainEventIds[6] = { 0, 1, 2, 3, 4, 5 };
 
 #ifdef VERSION_EU
 u8* gAllmapFloorTilesByLanguage[5] = {

@@ -1153,9 +1153,9 @@ entries:
     tiles: gUnk_097A2ED8
     tiles2: gUnk_097AAED8
     palette: gUnk_09849898
-    maps: gUnk_09EF4208
-    maps2: gUnk_09EF4688
-    maps3: gUnk_09EF4448
+    maps: gPooBg3MapBlocks
+    maps2: gPooBg2MapBlocks
+    maps3: gPooBg1MapBlocks
     tilesSize: 32768
     tilesSize2: 16032
     paletteSize: 512
@@ -1182,9 +1182,9 @@ entries:
     tiles: gUnk_097A2ED8
     tiles2: gUnk_097AAED8
     palette: gUnk_09849898
-    maps: gUnk_09EF4208
-    maps2: gUnk_09EF4688
-    maps3: gUnk_09EF4448
+    maps: gPooBg3MapBlocks
+    maps2: gPooBg2MapBlocks
+    maps3: gPooBg1MapBlocks
     tilesSize: 32768
     tilesSize2: 16032
     paletteSize: 512
@@ -1211,9 +1211,9 @@ entries:
     tiles: gUnk_097A2ED8
     tiles2: gUnk_097AAED8
     palette: gUnk_09849898
-    maps: gUnk_09EF4208
-    maps2: gUnk_09EF4688
-    maps3: gUnk_09EF4448
+    maps: gPooBg3MapBlocks
+    maps2: gPooBg2MapBlocks
+    maps3: gPooBg1MapBlocks
     tilesSize: 32768
     tilesSize2: 16032
     paletteSize: 512

@@ -824,7 +824,7 @@ typedef struct PooPalStep {
     u16 duration;
 } PooPalStep;
 
-extern const s32 gUnk_096FDA74[];
+extern const s32 gPooMainEventIds[];
 extern u8 gUnk_0984A138[];
 
 extern const BosMapanimeDef gPooMapanimeDef0;
@@ -1015,9 +1015,9 @@ u8 task_poo_bee_1(PooBeeWork* w);
 void task_poo_vegetable_0(PooVegetableWork* w);
 u8 task_poo_vegetable_1(PooVegetableWork* w);
 u8 IsPooSoraOverWagon();
-void func_080CFFC0(s32* a, s32* b);
-void func_080CFFF0(s32* a, s32* b);
-void func_080D001C(s32* a, s32* b);
+void ProjectToPooWagonEdgeUL(s32* a, s32* b);
+void ProjectToPooWagonEdgeLR(s32* a, s32* b);
+void ProjectToPooWagonEdgeUR(s32* a, s32* b);
 void task_poo_wagon_2(PooWagonWork* w);
 void task_poo_wagon_3(PooWagonWork* w);
 void task_poo_wagonwheel_3(PooWheelWork* w);
@@ -1156,7 +1156,7 @@ extern u8 gUnk_098A5CB8[];
 extern u8 gUnk_098A5CF4[];
 extern u8 gSoraPalette[];
 void UpdatePoohStumpCircle(PoohWork* w);
-s32 func_080D01BC(s32 x, s32 y);
+s32 GetPooWagonNearestSide(s32 x, s32 y);
 u8 HandlePoohRequest(PoohWork* w);
 
 void task_poo_mapbutterflyborn_3(PooMapBornWork* w);
@@ -1166,7 +1166,7 @@ void task_poo_pitAndButterfly_2(PooTrapWork* w);
 void task_poo_pitAndButterfly_3(PooTrapWork* w);
 u8 task_poo_rabbitAfterEvent_1(PooRabbitAfterEventWork* w);
 void task_poo_rabbitAfterEvent_3(PooRabbitAfterEventWork* w);
-void func_080D0050(s32* a, s32* b);
+void ProjectToPooWagonEdgeLL(s32* a, s32* b);
 u8 func_080D1738();
 void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* w);
 u16 GetPooCabbageLandedCount();

@@ -22,7 +22,7 @@ void SetPooFlag(s32 a);
 u8 IsPooFlagSet(s32 a);
 void GetPooState(void* p);
 void SetPooState(const void* p);
-u8 func_080D2DD8();
+u8 IsPooAltImageActive();
 void FreePoohInteractions();
 void InitPoohInteractions();
 void AllmapVCountCallback();
@@ -54,6 +54,6 @@ extern void* gPooSoraCollider;
 extern PooActor gPooActor;
 extern void* gStockMesDispWork;
 extern PooState gPooState;
-extern void* gUnk_0203C4B4;
+extern void* gSharedModeWork;
 
 #endif

@@ -2328,7 +2328,7 @@ void JiminyDetailUpdate() {
 
         if (gJiminyWork->detail->tiles != NULL) {
 #ifdef VERSION_EU
-            if (gJiminyWork->detail->palette == gUnk_09A3CDBC && func_080D2DD8()) {
+            if (gJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
                 LoadObjPaletteBank(gJiminyWork->palette8->index, gUnk_09A3CDDC);
                 LoadObjPaletteBank(gJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x20);
                 SetObjTileSource(gJiminyWork->tiles7, gUnk_099EDE7C);

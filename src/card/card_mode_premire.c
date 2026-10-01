@@ -20,9 +20,9 @@
 #include <stddef.h>
 #include "types.h"
 
-TaskPool gModePremireTasks;
+static TaskPool sModePremireTasks;
 #ifndef VERSION_EU
-u8 gUnk_02034AF4[4];
+static u8 sUnk_02034AF4[4];
 #endif
 
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
@@ -45,17 +45,17 @@ void Mode_Premire_0() {
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
-    TaskPoolInit(&gModePremireTasks, 1);
-    TaskCreate(&gModePremireTasks, &gTaskDescLevelUp, NULL);
+    TaskPoolInit(&sModePremireTasks, 1);
+    TaskCreate(&sModePremireTasks, &gTaskDescLevelUp, NULL);
 }
 
 void Mode_Premire_1() {
-    TaskPoolUpdate(&gModePremireTasks);
-    TaskPoolDraw(&gModePremireTasks);
+    TaskPoolUpdate(&sModePremireTasks);
+    TaskPoolDraw(&sModePremireTasks);
 }
 
 void Mode_Premire_2() {
-    TaskPoolDestroy(&gModePremireTasks);
+    TaskPoolDestroy(&sModePremireTasks);
 }
 
 u8 GetHcEffectCountUnit(HcEffectNameWork* w, u16 n) {

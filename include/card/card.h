@@ -2298,10 +2298,7 @@ extern void* gSelectedMapCard;
 extern PrintLine* gPrintLines;
 extern u8 gPrintLineCount;
 extern u8 gPrintBg;
-extern u8 gUnk_02034ADA[6];
-extern TaskPool gModePremireTasks;
 #ifndef VERSION_EU
-extern u8 gUnk_02034AF4[4];
 #endif
 extern u8 gLvupLogoActive;
 extern CardMsgWinWork* gActiveCardMsgwin;

@@ -26,7 +26,6 @@ u8 gPrintLineCount;
 
 u8 gPrintBg;
 
-u8 gUnk_02034ADA[6];
 
 void PremireEffectSetOrbitPos(PremiumCardEffectWork* w);
 void PremireEffectMoveToCenter(PremiumCardEffectWork* w);

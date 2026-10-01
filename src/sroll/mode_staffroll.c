@@ -1195,7 +1195,7 @@ static u8* sStaffRollLines[632] = {
     gUnkUs_09A51674,
     gUnkUs_09A516B8,
     gUnkUs_09A51674,
-    0,
+    NULL,
 };
 
 static const s32* sStaffRollSoraScripts[17] = {
@@ -1946,7 +1946,7 @@ static u8* sStaffRollLines[704] = {
     gUnkJp_09A06504,
     gUnkJp_09A06548,
     gUnkJp_09A06504,
-    0,
+    NULL,
 };
 
 static const s32* sStaffRollSoraScripts[17] = {
@@ -2682,7 +2682,7 @@ static u8* sStaffRollLines[688] = {
     gUnkEu_09AAF3AC,
     gUnkEu_09AAF3F0,
     gUnkEu_09AAF3AC,
-    0,
+    NULL,
 };
 
 static const s32* sStaffRollSoraScripts[17] = {

@@ -102,8 +102,8 @@ static WorldinspectNav sWorldinspectNavs[12] = {
 
 static WorldinspectMsg sWorldinspectMsgs[14] = {
     {
-        0, 0, 0, 0, { 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, { 0, 0 }, 0,
-        0,
+        0, 0, NULL, 0, { 0, 0 }, NULL, 0, { 0, 0 }, NULL, NULL, 0, { 0, 0 }, NULL, 0, { 0, 0 }, NULL,
+        NULL,
         0, 0,
     },
     {

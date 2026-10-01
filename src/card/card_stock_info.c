@@ -2105,7 +2105,7 @@ const CardHelpDef* gCardHelpDefs[] = {
 #if defined(VERSION_US) || defined(VERSION_JP)
     &sUnk_0903BED4,
 #elif defined(VERSION_EU)
-    0,
+    NULL,
 #endif
     &sUnk_0903BEDC,
     &sUnk_0903BEE4,
@@ -2120,7 +2120,7 @@ const CardHelpDef* gCardHelpDefs[] = {
 #if defined(VERSION_US) || defined(VERSION_JP)
     &sUnk_0903BF2C,
 #elif defined(VERSION_EU)
-    0,
+    NULL,
 #endif
     &sUnk_0903BF34,
     &sUnk_0903BF3C,

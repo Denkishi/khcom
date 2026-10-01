@@ -1054,11 +1054,11 @@ CardDescriptionText* gCardKindDescriptions[98] = {
     gCardDescriptionTextUs_09044282,
 #endif
 #if defined(VERSION_EU)
-    0,
+    NULL,
 #elif defined(VERSION_JP)
-    0,
+    NULL,
 #elif defined(VERSION_US)
-    0,
+    NULL,
 #endif
 #if defined(VERSION_EU)
     &gUnkEu_09F5F164,

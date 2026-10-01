@@ -5,6 +5,7 @@
 #include "event_background_types.h"
 #include "event_backgrounds.h"
 #include "msg_types.h"
+#include <stddef.h>
 #include "types.h"
 
 #ifdef VERSION_US
@@ -20,7 +21,7 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7F408,
     &gUnk_08F7F438,
     &gUnk_08F7F468,
-    0,
+    NULL,
     &gUnk_08F7F468,
     &gUnk_08F7EECC,
     &gUnk_08F7EECC,
@@ -82,15 +83,15 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7F038,
     &gUnk_08F7F038,
     &gUnk_08F7F068,
-    0,
+    NULL,
     &gUnk_08F7F068,
     &gUnk_08F7F098,
     &gUnk_08F7F0C8,
     &gUnk_08F7E358,
     &gUnk_08F7DBA0,
     &gUnk_08F7DC90,
-    0,
-    0,
+    NULL,
+    NULL,
     &gUnk_08F7EECC,
     &gUnk_08F7DC90,
     &gUnk_08F7E3C0,
@@ -104,7 +105,7 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7DFD8,
     &gUnk_08F7DDB0,
     &gUnk_08F7DDE0,
-    0,
+    NULL,
     &gUnk_08F7DFD8,
     &gUnk_08F7E4A4,
     &gUnk_08F7DB70,
@@ -117,7 +118,7 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7E240,
     &gUnk_08F7E270,
     &gUnk_08F7E210,
-    0,
+    NULL,
     &gUnk_08F7E210,
     &gUnk_08F7E764,
     &gUnk_08F7E764,
@@ -125,7 +126,7 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7E620,
     &gUnk_08F7E620,
     &gUnk_08F7E688,
-    0,
+    NULL,
     &gUnk_08F7E688,
     &gUnk_08F7E7FC,
     &gUnk_08F7E84C,
@@ -194,7 +195,7 @@ const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7F26C,
     &gUnk_08F7F2D4,
     &gUnk_08F7F324,
-    0,
+    NULL,
     &gUnk_08F7F324,
     &gUnk_08F7F5C8,
     &gUnk_08F7F324,

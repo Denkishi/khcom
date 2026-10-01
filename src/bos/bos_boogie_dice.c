@@ -117,11 +117,11 @@ TaskDesc gTaskDescBosBoogieMap = {
 
 static const BosMapanimeFrame sBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-static const BosMapanimeDef sUnk_096FE034 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0X7C00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE034 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0x7C00, 0x0100, 0x0300, 0, 0 };
 
-static const BosMapanimeDef sUnk_096FE04C = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0X7D00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE04C = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0x7D00, 0x0100, 0x0300, 0, 0 };
 
-static const BosMapanimeDef sUnk_096FE064 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0X7E00, 0X0100, 0X0300, 0, 0 };
+static const BosMapanimeDef sUnk_096FE064 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0x7E00, 0x0100, 0x0300, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
@@ -411,15 +411,15 @@ static const BosMapanimeFrame sBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, {
 
 static const BosMapanimeFrame sBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
 
-static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0X0C00, 0X0300, 0X0400, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0x0C00, 0x0300, 0x0400, 0, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0x0C00, 0x0860, 0x0C00, 0, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0x0C00, 0x0860, 0x0C00, 0, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0x0C00, 0x0860, 0x0C00, 0, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0X0C00, 0X0860, 0X0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0x0C00, 0x0860, 0x0C00, 0, 0 };
 
 static TaskDesc sTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",

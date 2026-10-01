@@ -8527,9 +8527,9 @@ static const BosMapanimeFrame sPooMapanimeFrames0[4] = { { 18, 0 }, { 18, 1 }, {
 
 static const BosMapanimeFrame sPooMapanimeFrames1[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
 
-const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, 0, gUnk_097B4578, 0X2080, 0X0240, 0X0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, 0, gUnk_097B4578, 0x2080, 0x0240, 0x0400, 0, 3 };
 
-const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, 0, gUnk_097B5418, 0X3880, 0X0240, 0X0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, 0, gUnk_097B5418, 0x3880, 0x0240, 0x0400, 0, 3 };
 
 TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",

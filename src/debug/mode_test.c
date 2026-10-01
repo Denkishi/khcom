@@ -139,7 +139,7 @@ void task_frd_pooh_0(FrdPoohWork* work, FrdPoohArgs* args) {
     work->palette = LoadObjPalette(gPoohPalette, 32);
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, 0, work->tiles);
-    ColliderInit(body->particles, 3, 10, 32);
+    ColliderInit(&body->collider, 3, 10, 32);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -227,9 +227,9 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
         body->y += -gSineTable[angle + 64] * 0x133 >> 8;
         ApplyAttackBox(110, body->x, body->y, body->z, 20, 10, 64);
 
-        if (ColliderIsTouchingType(body->particles, 1)) {
+        if (ColliderIsTouchingType(&body->collider, 1)) {
             work->state = 2;
-            ColliderSetDisabled(body->particles, 1);
+            ColliderSetDisabled(&body->collider, 1);
             work->bob = 0;
         }
 
@@ -310,7 +310,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
             if (AnimIsFinished(&work->anim)) {
                 work->state = 4;
-                ColliderSetDisabled(body->particles, 0);
+                ColliderSetDisabled(&body->collider, 0);
             }
         }
 
@@ -331,7 +331,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
     AnimUpdate(&work->anim);
     TaskPoolUpdate(&work->tasks);
-    ColliderSetPosition(body->particles, body->x, body->y, body->z);
+    ColliderSetPosition(&body->collider, body->x, body->y, body->z);
     return 1;
 }
 
@@ -378,7 +378,7 @@ void task_frd_pooh_2(FrdPoohWork* work) {
 
 void task_frd_pooh_3(FrdPoohWork* work) {
     BtlWork* battle;
-    ColliderUnregister(work->body.particles);
+    ColliderUnregister(&work->body.collider);
     battle = work->side != 0 ? gBtlWork : gRikuBtlWork;
     battle->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);

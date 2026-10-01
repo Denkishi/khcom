@@ -33,7 +33,8 @@ typedef struct FrdPoohBody {
     u8 unk_14[0x20];
     u64 flags;
     u8 unk_3C[4];
-    u8 particles[0x8C];
+    Collider collider;
+    u8 unk_9C[0x30];
     u16 depth;
     u8 unk_CE[0x42];
 } FrdPoohBody;

@@ -658,7 +658,7 @@ void SrollTextSelectFont(SrollWork* w, u32 mode) {
     SrollTextSetCursorTile(w, w->x, w->y);
 }
 
-void SrollTextInit(SrollWork* w, SrollInit* a) {
+void SrollTextInit(SrollWork* w, const SrollInit* a) {
     SrollTextSelectFont(w, a->font);
     SrollTextSetColors(w, a->fgColor, a->shadowColor, a->bgColor, a->edgeColor);
     w->mapWidth = 32;

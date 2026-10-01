@@ -116,7 +116,7 @@ typedef struct JiminyWork {
     s16 listX;
     s16 listY;
     s16 rowHeight;
-    const u16** itemTexts;
+    const u16* const* itemTexts;
     const u16* itemFlags;
     const u16* itemChildren;
     s16 moveDelay;
@@ -138,7 +138,7 @@ typedef struct JiminyWork {
     u16 unk_D3C;
     u16 frame;
 #ifdef VERSION_EU
-    u16* resolvedTexts[100];
+    const u16* resolvedTexts[100];
 #endif
 } JiminyWork;
 

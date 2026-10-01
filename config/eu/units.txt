@@ -366,6 +366,14 @@ map.c
 map_tasks.c
 map_donald.c
 map_goofy.c
+map_namine.c
+map_niseriku.c
+map_mickey.c
+map_tutorial.c
+map_stair.c
+map_faint.c
+map_dmg.c
+map_floor.c
 room.c
 map_room_tables.s
 map_rooms.s

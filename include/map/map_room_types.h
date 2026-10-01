@@ -76,7 +76,7 @@ typedef struct MapFixedDef {
     s32 spawnX;
     s32 spawnY;
 #ifdef VERSION_EU
-    u8 unk_50;
+    u8 rawTiles;
 #endif
 } MapFixedDef;
 

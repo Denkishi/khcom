@@ -894,7 +894,7 @@ u8 MapGmkFindFloor2x2(FldPos* p) {
     return 0;
 }
 
-u8 func_080E6C2C(FldPos* p) {
+u8 MapGmkFindLeftWallBase2x3(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -940,7 +940,7 @@ u8 func_080E6C2C(FldPos* p) {
     return 0;
 }
 
-u8 func_080E6DB0(FldPos* p) {
+u8 MapGmkFindLeftWallBase1x4(FldPos* p) {
     s16 x;
     s16 y;
     s16 cy;
@@ -984,7 +984,7 @@ u8 func_080E6DB0(FldPos* p) {
     return 0;
 }
 
-u8 func_080E6F04(FldPos* p) {
+u8 MapGmkFindRightWallBase2x3(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -1030,7 +1030,7 @@ u8 func_080E6F04(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7088(FldPos* p) {
+u8 MapGmkFindLeftWallFace3x3(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -1076,7 +1076,7 @@ u8 func_080E7088(FldPos* p) {
     return 0;
 }
 
-u8 func_080E71F0(FldPos* p) {
+u8 MapGmkFindRightWallFace3x3(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -1122,7 +1122,7 @@ u8 func_080E71F0(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7358(FldPos* p) {
+u8 MapGmkFindLeftWallTop2x2(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -1166,7 +1166,7 @@ u8 func_080E7358(FldPos* p) {
     return 0;
 }
 
-u8 func_080E74D8(FldPos* p) {
+u8 MapGmkFindBackWallTop1x2(FldPos* p) {
     s16 x;
     s16 y;
     s16 cy;
@@ -1210,7 +1210,7 @@ u8 func_080E74D8(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7620(FldPos* p) {
+u8 MapGmkFindRightWallTop2x2(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -1256,7 +1256,7 @@ u8 func_080E7620(FldPos* p) {
     return 0;
 }
 
-u8 func_080E77A4(FldPos* p) {
+u8 MapGmkFindBackWallBase2x3(FldPos* p) {
     s16 ry;
     s16 rx;
     s16 sy;
@@ -4773,7 +4773,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
     w->bg2MapLoaded = 0;
     w->bg3MapLoaded = 0;
 
-    if (p->unk_50 == 0) {
+    if (p->rawTiles == 0) {
         LoadBgTilesLz77(3, p->tiles);
     } else {
         LoadBgTiles(3, p->tiles, p->tilesSize);
@@ -4791,7 +4791,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
 
     if (p->map2 != NULL) {
 #ifdef VERSION_EU
-        if (p->unk_50 == 0) {
+        if (p->rawTiles == 0) {
             LoadBgTilesLz77(2, p->tiles);
         } else {
             LoadBgTiles(2, p->tiles, p->tilesSize);
@@ -4812,7 +4812,7 @@ void Task_MapFix_0(MapFixWork* w, MapFixedDef* p) {
 
     if (p->map != NULL) {
 #ifdef VERSION_EU
-        if (p->unk_50 == 0) {
+        if (p->rawTiles == 0) {
             LoadBgTilesLz77(1, p->tiles2);
         } else {
             LoadBgTiles(1, p->tiles2, p->tilesSize2);
@@ -6749,16 +6749,16 @@ u8 gRikuWorldBattleBase[14] = {
 
 u8 (*gMapGmkSpotFuncs[14])(FldPos*) = {
     MapGmkFindFloor2x2,
-    func_080E6C2C,
-    func_080E6F04,
-    func_080E77A4,
-    func_080E7088,
-    func_080E71F0,
-    func_080E7358,
-    func_080E74D8,
-    func_080E7620,
+    MapGmkFindLeftWallBase2x3,
+    MapGmkFindRightWallBase2x3,
+    MapGmkFindBackWallBase2x3,
+    MapGmkFindLeftWallFace3x3,
+    MapGmkFindRightWallFace3x3,
+    MapGmkFindLeftWallTop2x2,
+    MapGmkFindBackWallTop1x2,
+    MapGmkFindRightWallTop2x2,
     MapGmkFindFloor3x3,
-    func_080E6DB0,
+    MapGmkFindLeftWallBase1x4,
     MapGmkFindFloor4x4,
     MapGmkFindFloor5x5,
     MapGmkFindBaseFloor2x2,

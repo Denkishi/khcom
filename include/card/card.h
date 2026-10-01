@@ -2288,13 +2288,6 @@ extern CardDisplayWork* gRikuSelectedCard;
 extern u8 gActiveDeck;
 extern u8 gUnk_02034AB1[3];
 extern s16 gBossCardValue;
-extern u8 gUnk_02034AB6[2];
-#ifdef VERSION_EU
-extern u8 gUnkEu_02034AD4[4];
-#endif
-extern TaskPool gModeWorldselectTasks;
-extern u8 gMapCardDelivered;
-extern void* gSelectedMapCard;
 extern PrintLine* gPrintLines;
 extern u8 gPrintLineCount;
 extern u8 gPrintBg;

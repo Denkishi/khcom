@@ -52,11 +52,11 @@
 #include "sprite_palettes.h"
 #include <stddef.h>
 
-TaskPool gModeWorldselectTasks;
+static TaskPool sModeWorldselectTasks;
 
-u8 gMapCardDelivered;
+static u8 sMapCardDelivered;
 
-void* gSelectedMapCard;
+static void* sSelectedMapCard;
 
 MapCardUiResources gMapCardUiResources EWRAM_COMMON(16);
 
@@ -111,17 +111,17 @@ void WORLDSELECT_0() {
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
-    TaskPoolInit(&gModeWorldselectTasks, 1);
-    TaskCreate(&gModeWorldselectTasks, &gTaskDescPremireChance, NULL);
+    TaskPoolInit(&sModeWorldselectTasks, 1);
+    TaskCreate(&sModeWorldselectTasks, &gTaskDescPremireChance, NULL);
 }
 
 void WORLDSELECT_1() {
-    TaskPoolUpdate(&gModeWorldselectTasks);
-    TaskPoolDraw(&gModeWorldselectTasks);
+    TaskPoolUpdate(&sModeWorldselectTasks);
+    TaskPoolDraw(&sModeWorldselectTasks);
 }
 
 void WORLDSELECT_2() {
-    TaskPoolDestroy(&gModeWorldselectTasks);
+    TaskPoolDestroy(&sModeWorldselectTasks);
 }
 
 void CreateMapSelectCards(MapSelectWork* w);
@@ -137,7 +137,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->cancelled = 0;
     w->pageScroll = 0;
     w->card2 = NULL;
-    gMapCardDelivered = 0;
+    sMapCardDelivered = 0;
     w->valueColumn = 0;
     w->valueRow = 0;
     w->scrollBarVisible = 0;
@@ -219,7 +219,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->card = ListPoolFirst(&w->cards);
     w->prevCard = NULL;
     m4aSongNumStart(SONG_SYS_CLICKI02);
-    gSelectedMapCard = NULL;
+    sSelectedMapCard = NULL;
     w->x2 = 0x1600;
     w->y2 = 0x16400;
     w->unk_28D[0] = 0;
@@ -768,7 +768,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* w, void* a) {
             w->barSteps = 16;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
             m4aSongNumStart(SONG_SYS_CANSEL);
-            gSelectedMapCard = NULL;
+            sSelectedMapCard = NULL;
             w->lastPage = 0;
             w->page = 0;
             w->eventKeyArgs.closeMode = 2;
@@ -1468,24 +1468,24 @@ void InitMapCardInventory() {
 }
 
 u8 IsMapCardDelivered() {
-    return gMapCardDelivered;
+    return sMapCardDelivered;
 }
 
 void SetMapCardDelivered() {
-    gMapCardDelivered = 1;
+    sMapCardDelivered = 1;
 }
 
 void SetSelectedMapCard(void* a) {
-    gSelectedMapCard = a;
+    sSelectedMapCard = a;
 }
 
 void* GetSelectedMapCard() {
-    return gSelectedMapCard;
+    return sSelectedMapCard;
 }
 
 void ResetSelectedMapCard() {
-    gSelectedMapCard = NULL;
-    gMapCardDelivered = 0;
+    sSelectedMapCard = NULL;
+    sMapCardDelivered = 0;
 }
 
 const void* GetRoomName(u16 a) {

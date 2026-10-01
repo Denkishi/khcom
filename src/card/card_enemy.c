@@ -19,10 +19,6 @@
 
 s16 gBossCardValue;
 
-u8 gUnk_02034AB6[2];
-#ifdef VERSION_EU
-u8 gUnkEu_02034AD4[4];
-#endif
 
 u8 EnemyCardDeal(CardDisplayWork* p, void* a);
 u8 EnemyCardClosed(CardDisplayWork* p, void* a);

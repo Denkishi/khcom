@@ -477,6 +477,8 @@ typedef struct RobeWork {
     u8 unk_18A[0x02];
 } RobeWork;
 
+extern TaskDesc gTaskDescHumMahluxiaFlw;
+
 extern u8 gMaruxhaBtEff2Tiles[];
 extern u8 gVixenE2Tiles[];
 extern u16 gMaruxhaBtEffPalette[];

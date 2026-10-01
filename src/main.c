@@ -20,6 +20,7 @@
 #include <stddef.h>
 #include "engine_math.h"
 #include "gba/defines.h"
+#include "gba/macro.h"
 #include "types.h"
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
@@ -96,22 +97,15 @@ void DisableHBlankIntr() {
 
 #ifdef VERSION_EU
 void ClearSystemMemory() {
-    u32 a;
-    u32 b;
-    u32 c;
     RegisterRamReset(RESET_ALL);
     REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
-    a = 0;
-    CpuSet(&a, (void*)0x02000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x10000);
-    b = 0;
-    CpuSet(&b, (void*)0x03000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x1F80);
-    c = 0;
-    CpuSet(&c, (void*)VRAM, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
+    CpuFill32(0, (void*)EWRAM_START, EWRAM_SIZE);
+    CpuFill32(0, (void*)IWRAM_START, IWRAM_SIZE - 0x200);
+    CpuFill32(0, (void*)VRAM, VRAM_SIZE);
 }
 #endif
 
 void InitSystem() {
-    vu32* dma;
 #ifdef VERSION_EU
     u32 flag;
 
@@ -123,21 +117,10 @@ void InitSystem() {
         flag = 0;
     }
 #else
-    u32 zero;
-
     RegisterRamReset(RESET_ALL);
     REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
-    zero = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (vu32)&zero;
-    dma[1] = 0x02000000;
-    dma[2] = ((DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16) | 0x10000;
-    dma[2];
-    zero = 0;
-    dma[0] = (vu32)&zero;
-    dma[1] = 0x03000000;
-    dma[2] = ((DMA_ENABLE | DMA_32BIT | DMA_SRC_FIXED) << 16) | 0x1F80;
-    dma[2];
+    DmaFill32(3, 0, EWRAM_START, EWRAM_SIZE);
+    DmaFill32(3, 0, IWRAM_START, IWRAM_SIZE - 0x200);
 #endif
     gVBlankEndVCount = 0;
     gFrameSyncFlags = 0;
@@ -146,13 +129,7 @@ void InitSystem() {
     gLanguage = LANGUAGE_ENGLISH;
 #endif
     REG_IME = 0;
-#ifdef VERSION_EU
-    dma = (vu32*)REG_ADDR_DMA3;
-#endif
-    dma[0] = (vu32)IrqHandler;
-    dma[1] = (vu32)gIntrHandler;
-    dma[2] = ((DMA_ENABLE | DMA_32BIT) << 16) | 0x200;
-    dma[2];
+    DmaCopy32(3, IrqHandler, gIntrHandler, sizeof(gIntrHandler));
     INTR_VECTOR = gIntrHandler;
     REG_IE = INTR_FLAG_GAMEPAK;
     REG_IF = INTR_FLAG_GAMEPAK;

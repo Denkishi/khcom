@@ -2,6 +2,7 @@
 #include "macros.h"
 #include "gba/io_reg.h"
 #include <stddef.h>
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "types.h"
 

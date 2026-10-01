@@ -2,7 +2,6 @@
 #define GUARD_M4A_H
 
 #include "types.h"
-#include "gba/syscall.h"
 
 #define ID_NUMBER 0x68736D53
 
@@ -59,13 +58,6 @@
 
 #define NUM_MUSIC_PLAYERS ((u16)gNumMusicPlayers)
 #define MAX_LINES ((u32)gMaxLines)
-
-#define CpuCopy32(src, dest, size) CpuSet(src, dest, ((size) / 4) | CPU_SET_32BIT)
-#define CpuFill32(value, dest, size)                                              \
-{                                                                                 \
-    vu32 tmp = (vu32)(value);                                                     \
-    CpuSet((void*)&tmp, dest, CPU_SET_32BIT | CPU_SET_SRC_FIXED | ((size) / 4));  \
-}
 
 typedef struct WaveData {
     u16 type;

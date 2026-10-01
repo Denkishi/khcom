@@ -27,14 +27,6 @@ typedef struct MapPlatform {
     s32 spotLowerZ;
 } MapPlatform;
 
-typedef struct MapProgress {
-    u8 world;
-    u8 floor;
-    u8 unk_02[0x02];
-    u8 floorState[0x21C];
-    GameFloor floors[13];
-} MapProgress;
-
 enum MapEnmDefFlag {
     MAP_ENM_DEF_FLAG_NO_SHADOW = 0x1,
     MAP_ENM_DEF_FLAG_AIRBORNE = 0x2,

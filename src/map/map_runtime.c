@@ -19,6 +19,7 @@
 #include "map_types.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "save_types.h"
 #include <stddef.h>
 
 extern u8 gWorldBattleStages[];

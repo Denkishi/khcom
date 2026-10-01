@@ -38,24 +38,6 @@ enum BattleStage {
     BATTLE_STAGE_TWILIGHT_TOWN = 13
 };
 
-enum FloorFlag {
-    FLOOR_FLAG_CLEARED = 0x1,
-    FLOOR_FLAG_ENTRY_EVENT_DONE = 0x2,
-    FLOOR_FLAG_EXIT_EVENT_DONE = 0x4,
-    FLOOR_FLAG_EVENT_ROOM_OPEN = 0x8,
-    FLOOR_FLAG_LOGO_SHOWN = 0x10,
-    FLOOR_FLAG_EXIT_UNLOCKED = 0x20,
-    FLOOR_FLAG_CHAMBER_PRIZE_TAKEN = 0x40,
-    FLOOR_FLAG_WARP_IN = 0x80,
-    FLOOR_FLAG_SHOW_FLOOR_NAME = 0x100
-};
-
-typedef struct GameFloor {
-    u16 flags;
-    u8 world;
-    u8 eventStep;
-} GameFloor;
-
 struct MapEnmDef;
 struct MapEnmWork;
 
@@ -116,7 +98,6 @@ typedef struct GameState {
 
 typedef char GameState_size[(sizeof(GameState) == 0x210) ? 1 : -1];
 typedef char GameState_progression_offset[(offsetof(GameState, progression) == 0xF8) ? 1 : -1];
-typedef char GameFloor_size[(sizeof(GameFloor) == 4) ? 1 : -1];
 typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
 
 extern GameState gGameState;

@@ -43,13 +43,33 @@ typedef struct SaveHeaderData {
     SaveFileSummary files[SAVE_FILES];
 } SaveHeaderData;
 
-typedef struct SaveSharedSlice {
-    u8 unk_000;
-    u8 unk_001;
-    u8 unk_002[2];
-    u8 unk_004[0x21C];
-    u32 unk_220[13];
-} SaveSharedSlice;
+enum FloorFlag {
+    FLOOR_FLAG_CLEARED = 0x1,
+    FLOOR_FLAG_ENTRY_EVENT_DONE = 0x2,
+    FLOOR_FLAG_EXIT_EVENT_DONE = 0x4,
+    FLOOR_FLAG_EVENT_ROOM_OPEN = 0x8,
+    FLOOR_FLAG_LOGO_SHOWN = 0x10,
+    FLOOR_FLAG_EXIT_UNLOCKED = 0x20,
+    FLOOR_FLAG_CHAMBER_PRIZE_TAKEN = 0x40,
+    FLOOR_FLAG_WARP_IN = 0x80,
+    FLOOR_FLAG_SHOW_FLOOR_NAME = 0x100
+};
+
+typedef struct GameFloor {
+    u16 flags;
+    u8 world;
+    u8 eventStep;
+} GameFloor;
+
+typedef char GameFloor_size[(sizeof(GameFloor) == 4) ? 1 : -1];
+
+typedef struct MapProgress {
+    u8 world;
+    u8 floor;
+    u8 unk_02[0x02];
+    u8 floorState[0x21C];
+    GameFloor floors[13];
+} MapProgress;
 
 typedef struct SaveLargeSlice {
     u8 activeDeck;
@@ -77,7 +97,7 @@ typedef struct SaveSliceEB4 {
 
 typedef struct SaveFileLarge {
     SaveCommon common;
-    SaveSharedSlice shared;
+    MapProgress shared;
     SaveLargeSlice large;
     SaveSliceE6C unk_E6C;
     u8 pooState[0x044];
@@ -86,7 +106,7 @@ typedef struct SaveFileLarge {
 
 typedef struct SaveFileSmall {
     SaveCommon common;
-    SaveSharedSlice shared;
+    MapProgress shared;
     SaveSmallSlice small;
 } SaveFileSmall;
 

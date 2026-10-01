@@ -177,38 +177,33 @@ Mode gModeWorldselect = {
     mode_worldselect_2,
 };
 
-u32 gUnk_02034FEC;
-s16 gWorldselectCursor;
-u32 gUnk_02034FF4;
-WorldselectSlot gWorldselectSlots[5];
-s16 gWorldselectWorlds[14];
-u32 gWorldselectRotation;
-s16 gWorldselectSlotCount;
-s16 gWorldselectWorldCount;
-u32 gUnk_02035094;
-void* gWorldselectCardTiles[2];
-void* gWorldselectCardPalettes[2];
-struct ObjTiles* gWorldselectTitleTiles;
-struct ObjPalette* gWorldselectOverlayPalette;
-struct ObjTiles* gWorldselectFrameTiles;
-u8 gWorldselectBobPhase;
-s16 gWorldselectNameMode;
-s16 gWorldselectNameWidth;
-s16 gWorldselectNameWorld;
-void* gWorldselectNameBuffer;
-s16 gWorldselectStep;
-s16 gWorldselectTimer;
-u32 gUnk_020350C4;
-s32 gWorldselectFrameY[2];
-s32 gWorldselectTitleX;
-u32 gUnk_020350D4;
-TaskPool gWorldselectTaskPool;
-s16 gWorldselectTutorialStep;
-u8 gWorldselectFirstVisit;
-u8 gWorldselectBgAnimActive;
-u8 gWorldselectCancelled;
-s16 gWorldselectPaletteTimer;
-u16 gWorldselectPaletteFrame;
+static s16 sWorldselectCursor;
+static WorldselectSlot sWorldselectSlots[5];
+static s16 sWorldselectWorlds[14];
+static u32 sWorldselectRotation;
+static s16 sWorldselectSlotCount;
+static s16 sWorldselectWorldCount;
+static void* sWorldselectCardTiles[2];
+static void* sWorldselectCardPalettes[2];
+static struct ObjTiles* sWorldselectTitleTiles;
+static struct ObjPalette* sWorldselectOverlayPalette;
+static struct ObjTiles* sWorldselectFrameTiles;
+static u8 sWorldselectBobPhase;
+static s16 sWorldselectNameMode;
+static s16 sWorldselectNameWidth;
+static s16 sWorldselectNameWorld;
+static void* sWorldselectNameBuffer;
+static s16 sWorldselectStep;
+static s16 sWorldselectTimer;
+static s32 sWorldselectFrameY[2];
+static s32 sWorldselectTitleX;
+static TaskPool sWorldselectTaskPool;
+static s16 sWorldselectTutorialStep;
+static u8 sWorldselectFirstVisit;
+static u8 sWorldselectBgAnimActive;
+static u8 sWorldselectCancelled;
+static s16 sWorldselectPaletteTimer;
+static u16 sWorldselectPaletteFrame;
 
 void WorldselectLoadSlotPalette(s16 model, s16 slot) {
     void* src;
@@ -222,7 +217,7 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
         size = 0x20;
     }
 
-    gWorldselectSlots[slot].palette = LoadObjPalette(src, size);
+    sWorldselectSlots[slot].palette = LoadObjPalette(src, size);
 }
 
 void WorldselectLoadSlotTiles(s16 model, s16 slot) {
@@ -234,14 +229,14 @@ void WorldselectLoadSlotTiles(s16 model, s16 slot) {
         src = sWorldselectWorldDefs[model].tiles;
     }
 
-    gWorldselectSlots[slot].tiles = LoadObjTiles(src, 0x1000);
+    sWorldselectSlots[slot].tiles = LoadObjTiles(src, 0x1000);
 }
 
 s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
     if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
-        gWorldselectSlots[slot].gfx = gUnk_099A8914;
+        sWorldselectSlots[slot].gfx = gUnk_099A8914;
     } else {
-        gWorldselectSlots[slot].gfx = sWorldselectWorldDefs[model].gfx;
+        sWorldselectSlots[slot].gfx = sWorldselectWorldDefs[model].gfx;
     }
 }
 
@@ -249,7 +244,7 @@ void WorldselectDrawName(s16 model, s16 n) {
     u8* src;
     u8* src2;
 
-    DmaFill16(3, 0, gWorldselectNameBuffer, 0x6C0);
+    DmaFill16(3, 0, sWorldselectNameBuffer, 0x6C0);
 
     if (n > 0) {
 #ifdef VERSION_EU
@@ -258,16 +253,16 @@ void WorldselectDrawName(s16 model, s16 n) {
 #else
         src = sWorldselectWorldDefs[model].nameTiles;
 #endif
-        DmaCopy16(3, src, (u8*)gWorldselectNameBuffer + (9 - n) * 32, n * 32);
+        DmaCopy16(3, src, (u8*)sWorldselectNameBuffer + (9 - n) * 32, n * 32);
         src2 = src + (18 - n) * 32;
-        DmaCopy16(3, src2, (u8*)gWorldselectNameBuffer + 288, n * 32);
-        DmaCopy16(3, src + 576, (u8*)gWorldselectNameBuffer + (9 - n) * 32 + 576, n * 32);
-        DmaCopy16(3, src2 + 576, (u8*)gWorldselectNameBuffer + 864, n * 32);
-        DmaCopy16(3, src + 1152, (u8*)gWorldselectNameBuffer + (9 - n) * 32 + 1152, n * 32);
-        DmaCopy16(3, src2 + 1152, (u8*)gWorldselectNameBuffer + 1440, n * 32);
+        DmaCopy16(3, src2, (u8*)sWorldselectNameBuffer + 288, n * 32);
+        DmaCopy16(3, src + 576, (u8*)sWorldselectNameBuffer + (9 - n) * 32 + 576, n * 32);
+        DmaCopy16(3, src2 + 576, (u8*)sWorldselectNameBuffer + 864, n * 32);
+        DmaCopy16(3, src + 1152, (u8*)sWorldselectNameBuffer + (9 - n) * 32 + 1152, n * 32);
+        DmaCopy16(3, src2 + 1152, (u8*)sWorldselectNameBuffer + 1440, n * 32);
     }
 
-    RequestDma3Copy(gWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
+    RequestDma3Copy(sWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
 }
 
 void WorldselectHandleInput() {
@@ -276,156 +271,156 @@ void WorldselectHandleInput() {
     s16 k;
     u8 step;
 
-    switch (gWorldselectRotation) {
+    switch (sWorldselectRotation) {
     case 0:
         if (GetKeysPressed() & A_BUTTON) {
             BgAnimInit(2, 0x8000, 128);
             BgAnimStart(&gBgAnimDefWorldStart, 112, 126);
             SetBgPriority(2, 1);
             gBldCnt |= BLDCNT_TGT2_OBJ;
-            gWorldselectBgAnimActive = 1;
+            sWorldselectBgAnimActive = 1;
             m4aSongNumStart(SONG_SYS_WORLDSTART);
-            gWorldselectCancelled = 0;
-            gWorldselectStep = 4;
-        } else if ((GetKeysPressed() & B_BUTTON) && gWorldselectFirstVisit == 0) {
+            sWorldselectCancelled = 0;
+            sWorldselectStep = 4;
+        } else if ((GetKeysPressed() & B_BUTTON) && sWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             LoadBgMap(0, gUnk_09A310DC, 0x500);
             LoadBgMap(1, gUnk_09A31ADC, 0x500);
-            gWorldselectCancelled = 1;
-            gWorldselectTimer = 16;
-            gWorldselectStep = 5;
-        } else if (gWorldselectSlotCount > 1) {
+            sWorldselectCancelled = 1;
+            sWorldselectTimer = 16;
+            sWorldselectStep = 5;
+        } else if (sWorldselectSlotCount > 1) {
             if (GetKeysHeld() & DPAD_LEFT) {
-                j = gWorldselectCursor - gWorldselectSlotCount / 2;
+                j = sWorldselectCursor - sWorldselectSlotCount / 2;
 
                 while (j < 0) {
-                    j += gWorldselectSlotCount;
+                    j += sWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(gWorldselectSlots[j].palette);
-                ReleaseObjTiles(gWorldselectSlots[j].tiles);
-                k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
+                ReleaseObjPalette(sWorldselectSlots[j].palette);
+                ReleaseObjTiles(sWorldselectSlots[j].tiles);
+                k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
                 while (k < 0) {
-                    k += gWorldselectWorldCount;
+                    k += sWorldselectWorldCount;
                 }
 
-                gWorldselectSlots[j].listIndex = k;
-                WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-                WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-                WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-                gWorldselectCursor--;
+                sWorldselectSlots[j].listIndex = k;
+                WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+                WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+                WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                sWorldselectCursor--;
 
-                if (gWorldselectCursor < 0) {
-                    gWorldselectCursor = gWorldselectSlotCount - 1;
+                if (sWorldselectCursor < 0) {
+                    sWorldselectCursor = sWorldselectSlotCount - 1;
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                gWorldselectNameMode = 2;
-                gWorldselectRotation = 2;
+                sWorldselectNameMode = 2;
+                sWorldselectRotation = 2;
             } else if (GetKeysHeld() & DPAD_RIGHT) {
-                j = gWorldselectCursor + gWorldselectSlotCount / 2;
+                j = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-                while (j >= gWorldselectSlotCount) {
-                    j -= gWorldselectSlotCount;
+                while (j >= sWorldselectSlotCount) {
+                    j -= sWorldselectSlotCount;
                 }
 
-                ReleaseObjPalette(gWorldselectSlots[j].palette);
-                ReleaseObjTiles(gWorldselectSlots[j].tiles);
-                k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
+                ReleaseObjPalette(sWorldselectSlots[j].palette);
+                ReleaseObjTiles(sWorldselectSlots[j].tiles);
+                k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-                while (k >= gWorldselectWorldCount) {
-                    k -= gWorldselectWorldCount;
+                while (k >= sWorldselectWorldCount) {
+                    k -= sWorldselectWorldCount;
                 }
 
-                gWorldselectSlots[j].listIndex = k;
-                WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-                WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-                WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-                gWorldselectCursor++;
+                sWorldselectSlots[j].listIndex = k;
+                WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+                WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+                WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                sWorldselectCursor++;
 
-                if (gWorldselectCursor >= gWorldselectSlotCount) {
-                    gWorldselectCursor = 0;
+                if (sWorldselectCursor >= sWorldselectSlotCount) {
+                    sWorldselectCursor = 0;
                 }
 
                 m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                gWorldselectNameMode = 2;
-                gWorldselectRotation = 1;
+                sWorldselectNameMode = 2;
+                sWorldselectRotation = 1;
             }
         }
 
         break;
     case 1:
         if (GetKeysHeld() & DPAD_LEFT) {
-            j = gWorldselectCursor - gWorldselectSlotCount / 2;
+            j = sWorldselectCursor - sWorldselectSlotCount / 2;
 
             while (j < 0) {
-                j += gWorldselectSlotCount;
+                j += sWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(gWorldselectSlots[j].palette);
-            ReleaseObjTiles(gWorldselectSlots[j].tiles);
-            k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
+            ReleaseObjPalette(sWorldselectSlots[j].palette);
+            ReleaseObjTiles(sWorldselectSlots[j].tiles);
+            k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
             while (k < 0) {
-                k += gWorldselectWorldCount;
+                k += sWorldselectWorldCount;
             }
 
-            gWorldselectSlots[j].listIndex = k;
-            WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-            WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-            WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-            gWorldselectCursor--;
+            sWorldselectSlots[j].listIndex = k;
+            WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+            WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+            WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+            sWorldselectCursor--;
 
-            if (gWorldselectCursor < 0) {
-                gWorldselectCursor = gWorldselectSlotCount - 1;
+            if (sWorldselectCursor < 0) {
+                sWorldselectCursor = sWorldselectSlotCount - 1;
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            gWorldselectRotation = 2;
+            sWorldselectRotation = 2;
         } else {
-            for (i = 0; i < gWorldselectSlotCount; i++) {
-                gWorldselectSlots[i].angle -= 2;
+            for (i = 0; i < sWorldselectSlotCount; i++) {
+                sWorldselectSlots[i].angle -= 2;
             }
 
-            if (gWorldselectSlots[gWorldselectCursor].angle <= 128) {
+            if (sWorldselectSlots[sWorldselectCursor].angle <= 128) {
                 if (GetKeysHeld() & DPAD_RIGHT) {
-                    j = gWorldselectCursor + gWorldselectSlotCount / 2;
+                    j = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-                    while (j >= gWorldselectSlotCount) {
-                        j -= gWorldselectSlotCount;
+                    while (j >= sWorldselectSlotCount) {
+                        j -= sWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(gWorldselectSlots[j].palette);
-                    ReleaseObjTiles(gWorldselectSlots[j].tiles);
-                    k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
+                    ReleaseObjPalette(sWorldselectSlots[j].palette);
+                    ReleaseObjTiles(sWorldselectSlots[j].tiles);
+                    k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-                    while (k >= gWorldselectWorldCount) {
-                        k -= gWorldselectWorldCount;
+                    while (k >= sWorldselectWorldCount) {
+                        k -= sWorldselectWorldCount;
                     }
 
-                    gWorldselectSlots[j].listIndex = k;
-                    WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-                    WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-                    WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-                    gWorldselectCursor++;
+                    sWorldselectSlots[j].listIndex = k;
+                    WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+                    WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+                    WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                    sWorldselectCursor++;
 
-                    if (gWorldselectCursor >= gWorldselectSlotCount) {
-                        gWorldselectCursor = 0;
+                    if (sWorldselectCursor >= sWorldselectSlotCount) {
+                        sWorldselectCursor = 0;
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    gWorldselectRotation = 1;
+                    sWorldselectRotation = 1;
                 } else {
-                    step = 128 - gWorldselectSlots[gWorldselectCursor].angle;
+                    step = 128 - sWorldselectSlots[sWorldselectCursor].angle;
 
-                    for (i = 0; i < gWorldselectSlotCount; i++) {
-                        gWorldselectSlots[i].angle += step;
+                    for (i = 0; i < sWorldselectSlotCount; i++) {
+                        sWorldselectSlots[i].angle += step;
                     }
 
-                    gWorldselectNameMode = 1;
-                    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
-                    gWorldselectRotation = 0;
+                    sWorldselectNameMode = 1;
+                    sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
+                    sWorldselectRotation = 0;
                 }
             }
         }
@@ -433,75 +428,75 @@ void WorldselectHandleInput() {
         break;
     case 2:
         if (GetKeysHeld() & DPAD_RIGHT) {
-            j = gWorldselectCursor + gWorldselectSlotCount / 2;
+            j = sWorldselectCursor + sWorldselectSlotCount / 2;
 
-            while (j >= gWorldselectSlotCount) {
-                j -= gWorldselectSlotCount;
+            while (j >= sWorldselectSlotCount) {
+                j -= sWorldselectSlotCount;
             }
 
-            ReleaseObjPalette(gWorldselectSlots[j].palette);
-            ReleaseObjTiles(gWorldselectSlots[j].tiles);
-            k = gWorldselectSlots[gWorldselectCursor].listIndex + gWorldselectSlotCount / 2;
+            ReleaseObjPalette(sWorldselectSlots[j].palette);
+            ReleaseObjTiles(sWorldselectSlots[j].tiles);
+            k = sWorldselectSlots[sWorldselectCursor].listIndex + sWorldselectSlotCount / 2;
 
-            while (k >= gWorldselectWorldCount) {
-                k -= gWorldselectWorldCount;
+            while (k >= sWorldselectWorldCount) {
+                k -= sWorldselectWorldCount;
             }
 
-            gWorldselectSlots[j].listIndex = k;
-            WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-            WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-            WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-            gWorldselectCursor++;
+            sWorldselectSlots[j].listIndex = k;
+            WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+            WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+            WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+            sWorldselectCursor++;
 
-            if (gWorldselectCursor >= gWorldselectSlotCount) {
-                gWorldselectCursor = 0;
+            if (sWorldselectCursor >= sWorldselectSlotCount) {
+                sWorldselectCursor = 0;
             }
 
             m4aSongNumStart(SONG_SYS_WORLDSELECT);
-            gWorldselectRotation = 1;
+            sWorldselectRotation = 1;
         } else {
-            for (i = 0; i < gWorldselectSlotCount; i++) {
-                gWorldselectSlots[i].angle += 2;
+            for (i = 0; i < sWorldselectSlotCount; i++) {
+                sWorldselectSlots[i].angle += 2;
             }
 
-            if ((s8)gWorldselectSlots[gWorldselectCursor].angle < 0) {
+            if ((s8)sWorldselectSlots[sWorldselectCursor].angle < 0) {
                 if (GetKeysHeld() & DPAD_LEFT) {
-                    j = gWorldselectCursor - gWorldselectSlotCount / 2;
+                    j = sWorldselectCursor - sWorldselectSlotCount / 2;
 
                     while (j < 0) {
-                        j += gWorldselectSlotCount;
+                        j += sWorldselectSlotCount;
                     }
 
-                    ReleaseObjPalette(gWorldselectSlots[j].palette);
-                    ReleaseObjTiles(gWorldselectSlots[j].tiles);
-                    k = gWorldselectSlots[gWorldselectCursor].listIndex - gWorldselectSlotCount / 2;
+                    ReleaseObjPalette(sWorldselectSlots[j].palette);
+                    ReleaseObjTiles(sWorldselectSlots[j].tiles);
+                    k = sWorldselectSlots[sWorldselectCursor].listIndex - sWorldselectSlotCount / 2;
 
                     while (k < 0) {
-                        k += gWorldselectWorldCount;
+                        k += sWorldselectWorldCount;
                     }
 
-                    gWorldselectSlots[j].listIndex = k;
-                    WorldselectLoadSlotPalette(gWorldselectWorlds[k], j);
-                    WorldselectLoadSlotTiles(gWorldselectWorlds[k], j);
-                    WorldselectSetSlotGfx(gWorldselectWorlds[k], j);
-                    gWorldselectCursor--;
+                    sWorldselectSlots[j].listIndex = k;
+                    WorldselectLoadSlotPalette(sWorldselectWorlds[k], j);
+                    WorldselectLoadSlotTiles(sWorldselectWorlds[k], j);
+                    WorldselectSetSlotGfx(sWorldselectWorlds[k], j);
+                    sWorldselectCursor--;
 
-                    if (gWorldselectCursor < 0) {
-                        gWorldselectCursor = gWorldselectSlotCount - 1;
+                    if (sWorldselectCursor < 0) {
+                        sWorldselectCursor = sWorldselectSlotCount - 1;
                     }
 
                     m4aSongNumStart(SONG_SYS_WORLDSELECT);
-                    gWorldselectRotation = 2;
+                    sWorldselectRotation = 2;
                 } else {
-                    step = gWorldselectSlots[gWorldselectCursor].angle + 128;
+                    step = sWorldselectSlots[sWorldselectCursor].angle + 128;
 
-                    for (i = 0; i < gWorldselectSlotCount; i++) {
-                        gWorldselectSlots[i].angle -= step;
+                    for (i = 0; i < sWorldselectSlotCount; i++) {
+                        sWorldselectSlots[i].angle -= step;
                     }
 
-                    gWorldselectNameMode = 1;
-                    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
-                    gWorldselectRotation = 0;
+                    sWorldselectNameMode = 1;
+                    sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
+                    sWorldselectRotation = 0;
                 }
             }
         }
@@ -527,24 +522,24 @@ void WorldselectDraw() {
     void* tiles;
     void* pal;
 
-    if (gWorldselectStep < 2 || gWorldselectStep > 4) {
-        DrawSprite(gWorldselectTitleX >> 8, 0,
+    if (sWorldselectStep < 2 || sWorldselectStep > 4) {
+        DrawSprite(sWorldselectTitleX >> 8, 0,
 #ifdef VERSION_EU
                       sWorldselectTitleGfx[gLanguage],
 #else
                       gUnk_0999CB90,
 #endif
-                      gWorldselectTitleTiles, gWorldselectOverlayPalette, NULL, SPRITE_PRIORITY(1),
+                      sWorldselectTitleTiles, sWorldselectOverlayPalette, NULL, SPRITE_PRIORITY(1),
                       0x3E8);
-        DrawSprite(120, gWorldselectFrameY[0] >> 8, gUnk_0999C394, gWorldselectFrameTiles, gWorldselectOverlayPalette, NULL,
+        DrawSprite(120, sWorldselectFrameY[0] >> 8, gUnk_0999C394, sWorldselectFrameTiles, sWorldselectOverlayPalette, NULL,
                       SPRITE_PRIORITY(1), 0x3E9);
-        DrawSprite(120, gWorldselectFrameY[1] >> 8, gUnk_0999C3C8, gWorldselectFrameTiles, gWorldselectOverlayPalette, NULL,
+        DrawSprite(120, sWorldselectFrameY[1] >> 8, gUnk_0999C3C8, sWorldselectFrameTiles, sWorldselectOverlayPalette, NULL,
                       SPRITE_PRIORITY(3), 0xBBA);
     }
 
-    for (i = 0; i < gWorldselectSlotCount; i++) {
-        ang = gWorldselectSlots[i].angle;
-        s = -gSineTable[((256 / gWorldselectSlotCount * i + gWorldselectBobPhase) & 0xFF) + 64];
+    for (i = 0; i < sWorldselectSlotCount; i++) {
+        ang = sWorldselectSlots[i].angle;
+        s = -gSineTable[((256 / sWorldselectSlotCount * i + sWorldselectBobPhase) & 0xFF) + 64];
         t = (s * 3 >> 7) + ang;
 
         if ((u8)(t - 62) > 2 && (u8)(t + 64) > 2) {
@@ -558,27 +553,27 @@ void WorldselectDraw() {
 
             if ((u8)(t - 121) <= 14) {
                 sprite = NULL;
-                tiles = gWorldselectCardTiles[0];
-                pal = gWorldselectCardPalettes[0];
+                tiles = sWorldselectCardTiles[0];
+                pal = sWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
 
-                if (gWorldselectStep > 3 && gWorldselectCancelled == 0) {
+                if (sWorldselectStep > 3 && sWorldselectCancelled == 0) {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
             } else if (t <= 61) {
                 sprite = NULL;
-                tiles = gWorldselectCardTiles[1];
-                pal = gWorldselectCardPalettes[1];
+                tiles = sWorldselectCardTiles[1];
+                pal = sWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(62 - t) / 13];
             } else if (t > 194) {
                 sprite = NULL;
-                tiles = gWorldselectCardTiles[1];
-                pal = gWorldselectCardPalettes[1];
+                tiles = sWorldselectCardTiles[1];
+                pal = sWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(t - 194) / 13];
             } else {
                 sprite = AllocObjAffine(0, w, d, 0);
-                tiles = gWorldselectCardTiles[0];
-                pal = gWorldselectCardPalettes[0];
+                tiles = sWorldselectCardTiles[0];
+                pal = sWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
             }
 
@@ -586,42 +581,42 @@ void WorldselectDraw() {
                           ang > 128 ? (u16)(ang * 2 + 0x6D1) : (u16)((128 - ang) * 2 + 0x7D1));
 
             if ((u8)(t - 65) <= 126) {
-                DrawSprite(x, y, gWorldselectSlots[i].gfx, gWorldselectSlots[i].tiles,
-                              gWorldselectSlots[i].palette, sprite, SPRITE_PRIORITY(2),
+                DrawSprite(x, y, sWorldselectSlots[i].gfx, sWorldselectSlots[i].tiles,
+                              sWorldselectSlots[i].palette, sprite, SPRITE_PRIORITY(2),
                               ang > 128 ? (u16)(ang * 2 + 0x6D0)
                                         : (u16)((128 - ang) * 2 + 0x7D0));
             }
         }
     }
 
-    switch (gWorldselectNameMode) {
+    switch (sWorldselectNameMode) {
     case 1:
-        WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
+        WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
 
-        if (gWorldselectNameWidth <= 8) {
-            gWorldselectNameWidth++;
+        if (sWorldselectNameWidth <= 8) {
+            sWorldselectNameWidth++;
         } else {
-            gWorldselectNameMode = 0;
+            sWorldselectNameMode = 0;
         }
 
         break;
     case 2:
-        WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
+        WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
 
-        if (gWorldselectNameWidth > 0) {
-            gWorldselectNameWidth--;
+        if (sWorldselectNameWidth > 0) {
+            sWorldselectNameWidth--;
         } else {
-            gWorldselectNameMode = 0;
+            sWorldselectNameMode = 0;
         }
 
         break;
     }
 
-    if (gWorldselectBgAnimActive != 0) {
+    if (sWorldselectBgAnimActive != 0) {
         BgAnimUpdate();
     }
 
-    TaskPoolDraw(&gWorldselectTaskPool);
+    TaskPoolDraw(&sWorldselectTaskPool);
 }
 
 void WorldselectSetBgMode0() {
@@ -647,17 +642,17 @@ void WorldselectSetBgMode1() {
 }
 
 void WorldselectCyclePalette() {
-    gWorldselectPaletteTimer++;
+    sWorldselectPaletteTimer++;
 
-    if (gWorldselectPaletteTimer > 6) {
-        gWorldselectPaletteTimer = 0;
-        gWorldselectPaletteFrame++;
+    if (sWorldselectPaletteTimer > 6) {
+        sWorldselectPaletteTimer = 0;
+        sWorldselectPaletteFrame++;
 
-        if (gWorldselectPaletteFrame > 29) {
-            gWorldselectPaletteFrame = 0;
+        if (sWorldselectPaletteFrame > 29) {
+            sWorldselectPaletteFrame = 0;
         }
 
-        LoadPalette(sWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 32);
+        LoadPalette(sWorldselectPaletteCycle[(s16)sWorldselectPaletteFrame], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 32);
     }
 }
 
@@ -667,94 +662,94 @@ void mode_worldselect_0() {
     void** p;
 
     SpriteReset();
-    gWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
-    gWorldselectBgAnimActive = 0;
-    gWorldselectCancelled = 0;
+    sWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
+    sWorldselectBgAnimActive = 0;
+    sWorldselectCancelled = 0;
     FadeStartIn(FADE_MODE_ADD_WHITE, 16);
 
-    if (gWorldselectFirstVisit != 0) {
+    if (sWorldselectFirstVisit != 0) {
         WorldselectSetBgMode0();
     } else {
         WorldselectSetBgMode1();
     }
 
-    gWorldselectCursor = 0;
-    gWorldselectRotation = 0;
+    sWorldselectCursor = 0;
+    sWorldselectRotation = 0;
     j = 0;
 
     for (i = 0; i <= 12; i++) {
         if (gGameState.availableWorlds & sWorldselectWorldDefs[i].worldBit) {
-            gWorldselectWorlds[j] = i;
+            sWorldselectWorlds[j] = i;
             j++;
         }
     }
 
-    gWorldselectWorldCount = j;
-    gWorldselectSlotCount = j > 5 ? 5 : j;
+    sWorldselectWorldCount = j;
+    sWorldselectSlotCount = j > 5 ? 5 : j;
     j = 0;
 
-    for (i = 0; i < gWorldselectSlotCount; i++, j++) {
-        if (j >= gWorldselectWorldCount) {
+    for (i = 0; i < sWorldselectSlotCount; i++, j++) {
+        if (j >= sWorldselectWorldCount) {
             j = 0;
         }
 
-        if (i == gWorldselectSlotCount - 1 && gWorldselectSlotCount > 2) {
-            j = gWorldselectWorldCount - 1;
+        if (i == sWorldselectSlotCount - 1 && sWorldselectSlotCount > 2) {
+            j = sWorldselectWorldCount - 1;
         }
 
-        gWorldselectSlots[i].listIndex = j;
-        gWorldselectSlots[i].angle = 256 / gWorldselectSlotCount * i - 128;
-        WorldselectLoadSlotPalette(gWorldselectWorlds[j], i);
-        WorldselectLoadSlotTiles(gWorldselectWorlds[j], i);
-        WorldselectSetSlotGfx(gWorldselectWorlds[j], i);
+        sWorldselectSlots[i].listIndex = j;
+        sWorldselectSlots[i].angle = 256 / sWorldselectSlotCount * i - 128;
+        WorldselectLoadSlotPalette(sWorldselectWorlds[j], i);
+        WorldselectLoadSlotTiles(sWorldselectWorlds[j], i);
+        WorldselectSetSlotGfx(sWorldselectWorlds[j], i);
     }
 
-    gWorldselectBobPhase = 0;
-    gWorldselectNameMode = 1;
-    gWorldselectNameWidth = 0;
-    gWorldselectNameWorld = gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex];
-    p = &gWorldselectNameBuffer;
+    sWorldselectBobPhase = 0;
+    sWorldselectNameMode = 1;
+    sWorldselectNameWidth = 0;
+    sWorldselectNameWorld = sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex];
+    p = &sWorldselectNameBuffer;
     *p = EwramAlloc(0x6C0);
-    gWorldselectPaletteTimer = 0;
-    gWorldselectPaletteFrame = 0;
-    gWorldselectStep = 0;
-    gWorldselectTimer = 16;
-    gWorldselectFrameY[0] = -2048;
-    gWorldselectFrameY[1] = 0xA800;
-    gWorldselectTitleX = -32768;
+    sWorldselectPaletteTimer = 0;
+    sWorldselectPaletteFrame = 0;
+    sWorldselectStep = 0;
+    sWorldselectTimer = 16;
+    sWorldselectFrameY[0] = -2048;
+    sWorldselectFrameY[1] = 0xA800;
+    sWorldselectTitleX = -32768;
     LoadBgPalette(0, gUnk_09A3C9DC, 96);
 #ifdef VERSION_EU
     LoadBgTiles(0, gUnk_099F1E7C, 16000);
 #else
     LoadBgTiles(0, gUnk_099F1E7C, 11968);
 #endif
-    WorldselectDrawName(gWorldselectNameWorld, gWorldselectNameWidth);
+    WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
     LoadBgMap(0, gUnk_09A310DC, 0x500);
     LoadBgMap(1, gUnk_09A31ADC, 0x500);
 
-    if (gWorldselectFirstVisit == 0) {
+    if (sWorldselectFirstVisit == 0) {
         BgAnimInit(2, 0x8000, 128);
         BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
         BgAnimSetLoopStartFrame(0);
-        gWorldselectBgAnimActive = 1;
+        sWorldselectBgAnimActive = 1;
     }
 
-    gWorldselectCardPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
-    gWorldselectCardTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
-    gWorldselectCardPalettes[1] = LoadObjPalette(gUnk_09A3CC5C, 32);
-    gWorldselectCardTiles[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
-    gWorldselectOverlayPalette = LoadObjPalette(gUnk_09A3CC7C, 32);
+    sWorldselectCardPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
+    sWorldselectCardTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
+    sWorldselectCardPalettes[1] = LoadObjPalette(gUnk_09A3CC5C, 32);
+    sWorldselectCardTiles[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
+    sWorldselectOverlayPalette = LoadObjPalette(gUnk_09A3CC7C, 32);
 #ifdef VERSION_EU
-    gWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
+    sWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
 #else
-    gWorldselectTitleTiles = LoadObjTiles(gUnk_0999CBB6, 0x380);
+    sWorldselectTitleTiles = LoadObjTiles(gUnk_0999CBB6, 0x380);
 #endif
-    gWorldselectFrameTiles = LoadObjTiles(gUnk_0999C410, 0x780);
-    TaskPoolInit(&gWorldselectTaskPool, 1);
+    sWorldselectFrameTiles = LoadObjTiles(gUnk_0999C410, 0x780);
+    TaskPoolInit(&sWorldselectTaskPool, 1);
     EnableBg(0);
     EnableBg(1);
 
-    if (gWorldselectFirstVisit != 0) {
+    if (sWorldselectFirstVisit != 0) {
         DisableBg(2);
     } else {
         EnableBg(2);
@@ -766,31 +761,31 @@ void mode_worldselect_1() {
     s16 b;
 
     UpdatePlayTime();
-    gWorldselectBobPhase += 2;
+    sWorldselectBobPhase += 2;
 
-    switch (gWorldselectStep) {
+    switch (sWorldselectStep) {
     case 0:
-        ApproachValue(&gWorldselectFrameY[0], 0, gWorldselectTimer);
-        ApproachValue(&gWorldselectFrameY[1], 0x9800, gWorldselectTimer);
-        gWorldselectTimer--;
+        ApproachValue(&sWorldselectFrameY[0], 0, sWorldselectTimer);
+        ApproachValue(&sWorldselectFrameY[1], 0x9800, sWorldselectTimer);
+        sWorldselectTimer--;
 
-        if (gWorldselectTimer <= 0) {
-            gWorldselectTimer = 16;
-            gWorldselectStep = 1;
+        if (sWorldselectTimer <= 0) {
+            sWorldselectTimer = 16;
+            sWorldselectStep = 1;
         }
 
         break;
     case 1:
-        ApproachValue(&gWorldselectTitleX, 0, gWorldselectTimer);
-        gWorldselectTimer--;
+        ApproachValue(&sWorldselectTitleX, 0, sWorldselectTimer);
+        sWorldselectTimer--;
 
-        if (gWorldselectTimer <= 0) {
-            if (gWorldselectFirstVisit != 0) {
-                gWorldselectTutorialStep = 0;
-                CreateCardMessageTask(&gWorldselectTaskPool, 2, 70);
-                gWorldselectStep = 2;
+        if (sWorldselectTimer <= 0) {
+            if (sWorldselectFirstVisit != 0) {
+                sWorldselectTutorialStep = 0;
+                CreateCardMessageTask(&sWorldselectTaskPool, 2, 70);
+                sWorldselectStep = 2;
             } else {
-                gWorldselectStep = 3;
+                sWorldselectStep = 3;
             }
 
             LoadBgMap(0, gUnk_09A315DC, 0x500);
@@ -804,17 +799,17 @@ void mode_worldselect_1() {
         break;
     case 2:
         if (IsMessageWindowOpen() == 0) {
-            if (gWorldselectTutorialStep == 0) {
-                CreateCardMessageTask(&gWorldselectTaskPool, 2, 71);
-                gWorldselectTutorialStep++;
+            if (sWorldselectTutorialStep == 0) {
+                CreateCardMessageTask(&sWorldselectTaskPool, 2, 71);
+                sWorldselectTutorialStep++;
             } else {
                 gGameState.progression.tutorialFlags |= 1;
                 WorldselectSetBgMode1();
                 BgAnimInit(2, 0x8000, 128);
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);
                 BgAnimSetLoopStartFrame(0);
-                gWorldselectBgAnimActive = 1;
-                gWorldselectStep = 3;
+                sWorldselectBgAnimActive = 1;
+                sWorldselectStep = 3;
             }
         }
 
@@ -826,67 +821,67 @@ void mode_worldselect_1() {
         if (BgAnimIsStopped() != 0) {
             LoadBgMap(0, gUnk_09A310DC, 0x500);
             LoadBgMap(1, gUnk_09A31ADC, 0x500);
-            gWorldselectTimer = 16;
-            gWorldselectStep = 5;
+            sWorldselectTimer = 16;
+            sWorldselectStep = 5;
         }
 
         break;
     case 5:
-        ApproachValue(&gWorldselectTitleX, -32768, gWorldselectTimer);
-        gWorldselectTimer--;
+        ApproachValue(&sWorldselectTitleX, -32768, sWorldselectTimer);
+        sWorldselectTimer--;
 
-        if (gWorldselectTimer <= 0) {
-            gWorldselectTimer = 16;
-            gWorldselectStep = 6;
+        if (sWorldselectTimer <= 0) {
+            sWorldselectTimer = 16;
+            sWorldselectStep = 6;
         }
 
         break;
     case 6:
-        ApproachValue(&gWorldselectFrameY[0], -2048, gWorldselectTimer);
-        ApproachValue(&gWorldselectFrameY[1], 0xA800, gWorldselectTimer);
-        gWorldselectTimer--;
+        ApproachValue(&sWorldselectFrameY[0], -2048, sWorldselectTimer);
+        ApproachValue(&sWorldselectFrameY[1], 0xA800, sWorldselectTimer);
+        sWorldselectTimer--;
 
-        if (gWorldselectTimer <= 0) {
-            gWorldselectStep = 7;
+        if (sWorldselectTimer <= 0) {
+            sWorldselectStep = 7;
         }
 
         break;
     case 7:
         FadeLock();
 
-        if (gWorldselectCancelled != 0) {
+        if (sWorldselectCancelled != 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
         } else {
             FadeStartOut(FADE_MODE_ADD_WHITE, 16);
         }
 
-        gWorldselectStep = 8;
+        sWorldselectStep = 8;
         break;
     case 8:
         if (FadeIsActive() == 0) {
-            if (gWorldselectCancelled != 0) {
+            if (sWorldselectCancelled != 0) {
                 RequestMapMode();
             } else {
-                gWorldselectTimer = 60;
-                gWorldselectStep = 9;
+                sWorldselectTimer = 60;
+                sWorldselectStep = 9;
             }
         }
 
         break;
     case 9:
-        gWorldselectTimer--;
+        sWorldselectTimer--;
 
-        if (gWorldselectTimer <= 0) {
-            a = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].world;
+        if (sWorldselectTimer <= 0) {
+            a = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].world;
 
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].eventId;
+                b = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].eventId;
             } else {
-                b = sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].rikuEventId;
+                b = sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].rikuEventId;
             }
 
             gGameState.availableWorlds &=
-                ~sWorldselectWorldDefs[gWorldselectWorlds[gWorldselectSlots[gWorldselectCursor].listIndex]].worldBit;
+                ~sWorldselectWorldDefs[sWorldselectWorlds[sWorldselectSlots[sWorldselectCursor].listIndex]].worldBit;
             SetFloorWorld(a);
 
             if (b >= 0) {
@@ -910,27 +905,27 @@ void mode_worldselect_1() {
         FadeGetAmount();
     }
 
-    TaskPoolUpdate(&gWorldselectTaskPool);
+    TaskPoolUpdate(&sWorldselectTaskPool);
     WorldselectDraw();
 }
 
 void mode_worldselect_2() {
     s16 i;
 
-    EwramFree(gWorldselectNameBuffer);
+    EwramFree(sWorldselectNameBuffer);
 
-    for (i = 0; i < gWorldselectSlotCount; i++) {
-        ReleaseObjPalette(gWorldselectSlots[i].palette);
-        ReleaseObjTiles(gWorldselectSlots[i].tiles);
+    for (i = 0; i < sWorldselectSlotCount; i++) {
+        ReleaseObjPalette(sWorldselectSlots[i].palette);
+        ReleaseObjTiles(sWorldselectSlots[i].tiles);
     }
 
     for (i = 0; i < 2; i++) {
-        ReleaseObjPalette(gWorldselectCardPalettes[i]);
-        ReleaseObjTiles(gWorldselectCardTiles[i]);
+        ReleaseObjPalette(sWorldselectCardPalettes[i]);
+        ReleaseObjTiles(sWorldselectCardTiles[i]);
     }
 
-    ReleaseObjPalette(gWorldselectOverlayPalette);
-    ReleaseObjTiles(gWorldselectTitleTiles);
-    ReleaseObjTiles(gWorldselectFrameTiles);
-    TaskPoolDestroy(&gWorldselectTaskPool);
+    ReleaseObjPalette(sWorldselectOverlayPalette);
+    ReleaseObjTiles(sWorldselectTitleTiles);
+    ReleaseObjTiles(sWorldselectFrameTiles);
+    TaskPoolDestroy(&sWorldselectTaskPool);
 }

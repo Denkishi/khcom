@@ -47,6 +47,8 @@ task.c
 evt.c
 acgtrans.c
 btl.c
+btl_sora.c
+btl_riku.c
 btl_map.c
 btl2.c
 fld_sora.c

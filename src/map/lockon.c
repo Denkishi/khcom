@@ -353,7 +353,7 @@ void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
     gDebugTextLineCount++;
 }
 
-u8 func_0805F8F0(u8 a) {
+u8 DebugTextGetPixelShift(u8 a) {
     return a * 4 % 32;
 }
 
@@ -466,7 +466,7 @@ void DebugTextSetMergeFirstGlyph(s32 a) {
     gDebugTextMergeFirstGlyph = a;
 }
 
-void DebugTextPrintTimes(u8 x, u8 y, u32 c, u8 v) {
+void DebugTextPrintXNumber(u8 x, u8 y, u32 c, u8 v) {
     u8 buf[8];
 
     buf[3] = v / 10;

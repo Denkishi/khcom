@@ -1361,13 +1361,13 @@ func_0805F7B0	0x0805f7b0	12	0x0805f698	body
 func_0805F7BC	0x0805f7bc	12	0x0805f6a4	body
 func_0805F7C8	0x0805f7c8	32	0x0805f6b0	global
 DebugTextPrintFont2	0x0805f7e8	264	0x0805f6d0	global
-func_0805F8F0	0x0805f8f0	20	0x0805f7d8	body
+DebugTextGetPixelShift	0x0805f8f0	20	0x0805f7d8	body
 DebugTextClearLines	0x0805f904	56	0x0805f7ec	global
 func_0805F93C	0x0805f93c	292	0x0805f824	global
 DebugTextLoadPalette	0x0805fa60	44	0x0805f948	global
 DebugTextInit	0x0805fa8c	236	0x0805f974	global
 DebugTextSetMergeFirstGlyph	0x0805fb78	12	0x0805fa60	body
-DebugTextPrintTimes	0x0805fb84	128	0x0805fa6c	global
+DebugTextPrintXNumber	0x0805fb84	128	0x0805fa6c	global
 DebugTextPrintNumber	0x0805fc04	172	0x0805faec	global
 DebugTextPrint	0x0805fcb0	1984	0x0805fb98	global
 DebugTextDrawAligned	0x08060470	296	0x08060358	global

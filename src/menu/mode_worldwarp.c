@@ -465,7 +465,7 @@ void mode_worldwarp_0() {
         if (i < sWorldWarpFloorCount) {
             sWorldWarpFloorWorlds[i] = gGameState.floors[i].world;
         } else {
-            sWorldWarpFloorWorlds[i] |= 0xFFFFu;
+            sWorldWarpFloorWorlds[i] = -1;
         }
     }
 

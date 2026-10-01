@@ -339,10 +339,10 @@ u8 BuildMooglePackList(s16 a) {
     s32 r;
 
     for (i = 0; i < 4; i++) {
-        sMoogleShopRowCategory[i] |= 0xFFFFu;
+        sMoogleShopRowCategory[i] = -1;
 
         for (k = 0; k < 4; k++) {
-            sMoogleShopPacks[i][k][0] |= 0xFFFFu;
+            sMoogleShopPacks[i][k][0] = -1;
         }
     }
 

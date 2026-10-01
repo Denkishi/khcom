@@ -41,7 +41,9 @@ acgtrans.c
 btl.c
 btl_map.c
 btl2.c
-fld.c
+fld_sora.c
+fld_riku.c
+fld_shadow.c
 emy_00.c
 emy_01.c
 emy_02.c

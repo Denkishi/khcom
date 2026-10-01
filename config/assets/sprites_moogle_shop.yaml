@@ -1525,6 +1525,7 @@ entries:
     symbol: gMoogleAssetEu_09A8EEA0
 - name: gMoogleAssetUs_09A39BDC
   format: tilemap
+  ctype: u16
   us:
     address: 0x09A39BDC
     size: 2048
@@ -1538,6 +1539,7 @@ entries:
     symbol: gMoogleAssetEu_09A8F3A0
 - name: gMoogleAssetUs_09A3A3DC
   format: tilemap
+  ctype: u16
   us:
     address: 0x09A3A3DC
     size: 2048
@@ -1899,31 +1901,37 @@ entries:
     size: 1280
 - name: gMoogleAssetEu_09A91E20
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A91E20
     size: 2048
 - name: gMoogleAssetEu_09A92620
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A92620
     size: 2048
 - name: gMoogleAssetEu_09A92E20
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A92E20
     size: 2048
 - name: gMoogleAssetEu_09A93620
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A93620
     size: 2048
 - name: gMoogleAssetEu_09A93E20
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A93E20
     size: 2048
 - name: gMoogleAssetEu_09A94620
   format: tilemap
+  ctype: u16
   eu:
     address: 0x09A94620
     size: 2048

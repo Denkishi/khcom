@@ -48,33 +48,33 @@ static void* sUnkEu_09F84F5C[5] = {
 };
 
 static u16* sUnkEu_09F84F70[5] = {
-    (u16*)gMoogleAssetEu_09A8F3A0,
-    (u16*)gMoogleAssetEu_09A8F3A0,
-    (u16*)gMoogleAssetEu_09A92E20,
-    (u16*)gMoogleAssetEu_09A92620,
-    (u16*)gMoogleAssetEu_09A91E20,
+    gMoogleAssetEu_09A8F3A0,
+    gMoogleAssetEu_09A8F3A0,
+    gMoogleAssetEu_09A92E20,
+    gMoogleAssetEu_09A92620,
+    gMoogleAssetEu_09A91E20,
 };
 
 static u16* sUnkEu_09F84F84[5] = {
-    (u16*)gMoogleAssetEu_09A8FBA0,
-    (u16*)gMoogleAssetEu_09A8FBA0,
-    (u16*)gMoogleAssetEu_09A94620,
-    (u16*)gMoogleAssetEu_09A93E20,
-    (u16*)gMoogleAssetEu_09A93620,
+    gMoogleAssetEu_09A8FBA0,
+    gMoogleAssetEu_09A8FBA0,
+    gMoogleAssetEu_09A94620,
+    gMoogleAssetEu_09A93E20,
+    gMoogleAssetEu_09A93620,
 };
 #endif
 
 static const MooglePackMenuEntry sMooglePackMenuEntries[4] = {
 #if defined(VERSION_US)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetUs_09A387DC, 1280, 5, 3, 40, 24, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 0, 0}, {(u16*)gMoogleAssetUs_09A39BDC, 0, 16}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 0}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetUs_09A38CDC, 1280, 17, 3, 136, 24, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 12, 0}, {(u16*)gMoogleAssetUs_09A39BDC, 12, 16}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 0}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetUs_09A391DC, 1280, 5, 11, 40, 88, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 0, 8}, {(u16*)gMoogleAssetUs_09A39BDC, 0, 24}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 8}, {(u16*)gMoogleAssetUs_09A3A3DC, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetUs_09A396DC, 1280, 17, 11, 136, 88, 0, {{(u16*)gMoogleAssetUs_09A39BDC, 12, 8}, {(u16*)gMoogleAssetUs_09A39BDC, 12, 24}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 8}, {(u16*)gMoogleAssetUs_09A3A3DC, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetUs_09A387DC, 1280, 5, 3, 40, 24, 0, {{gMoogleAssetUs_09A39BDC, 0, 0}, {gMoogleAssetUs_09A39BDC, 0, 16}, {gMoogleAssetUs_09A3A3DC, 0, 0}, {gMoogleAssetUs_09A3A3DC, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetUs_09A38CDC, 1280, 17, 3, 136, 24, 0, {{gMoogleAssetUs_09A39BDC, 12, 0}, {gMoogleAssetUs_09A39BDC, 12, 16}, {gMoogleAssetUs_09A3A3DC, 12, 0}, {gMoogleAssetUs_09A3A3DC, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetUs_09A391DC, 1280, 5, 11, 40, 88, 0, {{gMoogleAssetUs_09A39BDC, 0, 8}, {gMoogleAssetUs_09A39BDC, 0, 24}, {gMoogleAssetUs_09A3A3DC, 0, 8}, {gMoogleAssetUs_09A3A3DC, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetUs_09A396DC, 1280, 17, 11, 136, 88, 0, {{gMoogleAssetUs_09A39BDC, 12, 8}, {gMoogleAssetUs_09A39BDC, 12, 24}, {gMoogleAssetUs_09A3A3DC, 12, 8}, {gMoogleAssetUs_09A3A3DC, 12, 24}}},
 #elif defined(VERSION_JP)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetJp_099ED264, 1280, 5, 3, 40, 24, 0, {{(u16*)gMoogleAssetJp_099EE664, 0, 0}, {(u16*)gMoogleAssetJp_099EE664, 0, 16}, {(u16*)gMoogleAssetJp_099EEE64, 0, 0}, {(u16*)gMoogleAssetJp_099EEE64, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetJp_099ED764, 1280, 17, 3, 136, 24, 0, {{(u16*)gMoogleAssetJp_099EE664, 12, 0}, {(u16*)gMoogleAssetJp_099EE664, 12, 16}, {(u16*)gMoogleAssetJp_099EEE64, 12, 0}, {(u16*)gMoogleAssetJp_099EEE64, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetJp_099EDC64, 1280, 5, 11, 40, 88, 0, {{(u16*)gMoogleAssetJp_099EE664, 0, 8}, {(u16*)gMoogleAssetJp_099EE664, 0, 24}, {(u16*)gMoogleAssetJp_099EEE64, 0, 8}, {(u16*)gMoogleAssetJp_099EEE64, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetJp_099EE164, 1280, 17, 11, 136, 88, 0, {{(u16*)gMoogleAssetJp_099EE664, 12, 8}, {(u16*)gMoogleAssetJp_099EE664, 12, 24}, {(u16*)gMoogleAssetJp_099EEE64, 12, 8}, {(u16*)gMoogleAssetJp_099EEE64, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetJp_099ED264, 1280, 5, 3, 40, 24, 0, {{gMoogleAssetJp_099EE664, 0, 0}, {gMoogleAssetJp_099EE664, 0, 16}, {gMoogleAssetJp_099EEE64, 0, 0}, {gMoogleAssetJp_099EEE64, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetJp_099ED764, 1280, 17, 3, 136, 24, 0, {{gMoogleAssetJp_099EE664, 12, 0}, {gMoogleAssetJp_099EE664, 12, 16}, {gMoogleAssetJp_099EEE64, 12, 0}, {gMoogleAssetJp_099EEE64, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetJp_099EDC64, 1280, 5, 11, 40, 88, 0, {{gMoogleAssetJp_099EE664, 0, 8}, {gMoogleAssetJp_099EE664, 0, 24}, {gMoogleAssetJp_099EEE64, 0, 8}, {gMoogleAssetJp_099EEE64, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetJp_099EE164, 1280, 17, 11, 136, 88, 0, {{gMoogleAssetJp_099EE664, 12, 8}, {gMoogleAssetJp_099EE664, 12, 24}, {gMoogleAssetJp_099EEE64, 12, 8}, {gMoogleAssetJp_099EEE64, 12, 24}}},
 #elif defined(VERSION_EU)
     {-1, 2, 5, 1, 67, 16, gMoogleAssetEu_09A8DFA0, 1280, 5, 3, 40, 24, 0, {{sUnkEu_09F84F70, 0, 0}, {sUnkEu_09F84F70, 0, 16}, {sUnkEu_09F84F84, 0, 0}, {sUnkEu_09F84F84, 0, 16}}},
     {-1, 3, 0, -1, 163, 16, gMoogleAssetEu_09A8E4A0, 1280, 17, 3, 136, 24, 0, {{sUnkEu_09F84F70, 12, 0}, {sUnkEu_09F84F70, 12, 16}, {sUnkEu_09F84F84, 12, 0}, {sUnkEu_09F84F84, 12, 16}}},

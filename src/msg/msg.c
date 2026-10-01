@@ -14,7 +14,6 @@
 #include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
-#include "system_state.h"
 
 static SpriteTextLine* gSpriteTextLines;
 static TextGlyphSprite* sMsgGlyphSprites;

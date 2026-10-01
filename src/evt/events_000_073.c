@@ -6,7 +6,6 @@
 #include "songs.h"
 #include "msg_types.h"
 #include <stddef.h>
-#include "types.h"
 
 #ifdef VERSION_US
 #include "event_000_text.inc"

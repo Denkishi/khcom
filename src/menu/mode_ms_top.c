@@ -36,7 +36,7 @@ static struct ObjTiles* sMsTopBarTiles;
 static struct ObjPalette* sMsTopBarPalette;
 static struct ObjTiles* sMsTopWorldwarpTiles;
 static struct ObjPalette* sMsTopWorldwarpPalette;
-static AnimState gWorldwarpAnim;
+static AnimState sWorldwarpAnim;
 static struct ObjTiles* sMsTopSoraTiles;
 static struct ObjPalette* sMsTopSoraPalette;
 static AnimState sMsTopSoraAnim;
@@ -60,7 +60,7 @@ static s16 sMsTopSteps;
 static s32 sMsTopBarY[2];
 static s32 sMsTopBarX;
 static u8 sMsTopBarVisible;
-static TaskPool gMsTopTaskPool;
+static TaskPool sMsTopTaskPool;
 static s16 sMsTopPendingMessage;
 static s16 sMsTopPendingOptionMessage;
 static u8 sMsTopMessageStarted;
@@ -228,7 +228,7 @@ void UpdateMsTopWarpGfx() {
 }
 
 void SetMsTopWarpAnim(s16 a) {
-    AnimStart(&gWorldwarpAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
+    AnimStart(&sWorldwarpAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
 }
 
 void QueueMsTopIntroMessage() {
@@ -340,7 +340,7 @@ void MsTopDraw() {
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, NULL, flags, 0x834);
     DrawSprite((sMsTopObjScrollX >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
-        AnimUpdate(&gWorldwarpAnim), sMsTopWorldwarpTiles, sMsTopWorldwarpPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        AnimUpdate(&sWorldwarpAnim), sMsTopWorldwarpTiles, sMsTopWorldwarpPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
 
     DrawSprite(sWarpDefs[0].x2 + (sMsTopObjScrollX >> 8), sWarpDefs[0].y2,
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, NULL,
@@ -358,7 +358,7 @@ void MsTopDraw() {
         DrawMooglePackOpening();
     }
 
-    TaskPoolDraw(&gMsTopTaskPool);
+    TaskPoolDraw(&sMsTopTaskPool);
     SetBgScroll(0, (u16)(sMsTopBg0ScrollX >> 8), 0);
     SetBgScroll(1, (u16)(sMsTopBg1ScrollX >> 8), 0);
 }
@@ -449,7 +449,7 @@ void mode_ms_top_0(u32 a) {
     sMsTopBarTiles = LoadObjTiles(gUnk_099A2B62, 0x400);
     sMsTopWorldwarpPalette = LoadObjPalette(gUnk_09A3D85C, 0x20);
     sMsTopWorldwarpTiles = LoadObjTiles(gUnk_099A36F8, 0x500);
-    AnimInit(&gWorldwarpAnim, gUnk_09EF99D0, gUnk_09EF99A8);
+    AnimInit(&sWorldwarpAnim, gUnk_09EF99D0, gUnk_09EF99A8);
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, 0x20);
     sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
@@ -463,7 +463,7 @@ void mode_ms_top_0(u32 a) {
     SetMsTopWarpAnim(sMsTopCursor);
     UpdateMsTopWarpGfx();
     UpdateMsTopMooglePalette();
-    TaskPoolInit(&gMsTopTaskPool, 1);
+    TaskPoolInit(&sMsTopTaskPool, 1);
     EnableBg(0);
     EnableBg(1);
     EnableBg(2);
@@ -651,11 +651,11 @@ void mode_ms_top_1() {
     if (sMsTopPendingOptionMessage >= 0) {
         if (sMsTopMessageStarted != 0) {
             if (IsMessageWindowOpen() == 0) {
-                ShowPersistentCardMessage(&gMsTopTaskPool, 3, sMsTopPendingOptionMessage);
+                ShowPersistentCardMessage(&sMsTopTaskPool, 3, sMsTopPendingOptionMessage);
                 sMsTopPendingOptionMessage = -1;
             }
         } else {
-            ShowPersistentCardMessage(&gMsTopTaskPool, 3, sMsTopPendingOptionMessage);
+            ShowPersistentCardMessage(&sMsTopTaskPool, 3, sMsTopPendingOptionMessage);
             sMsTopPendingOptionMessage = -1;
             sMsTopMessageStarted = 1;
         }
@@ -664,17 +664,17 @@ void mode_ms_top_1() {
     if (sMsTopPendingMessage >= 0) {
         if (sMsTopMessageStarted != 0) {
             if (IsMessageWindowOpen() == 0) {
-                CreateCardMessageTask(&gMsTopTaskPool, 3, sMsTopPendingMessage);
+                CreateCardMessageTask(&sMsTopTaskPool, 3, sMsTopPendingMessage);
                 sMsTopPendingMessage = -1;
             }
         } else {
-            CreateCardMessageTask(&gMsTopTaskPool, 3, sMsTopPendingMessage);
+            CreateCardMessageTask(&sMsTopTaskPool, 3, sMsTopPendingMessage);
             sMsTopPendingMessage = -1;
             sMsTopMessageStarted = 1;
         }
     }
 
-    TaskPoolUpdate(&gMsTopTaskPool);
+    TaskPoolUpdate(&sMsTopTaskPool);
     MsTopDraw();
 }
 
@@ -697,5 +697,5 @@ void mode_ms_top_2() {
 
     ReleaseObjPalette(sMsTopMooglePalette);
     ReleaseObjTiles(sMsTopMoogleTiles);
-    TaskPoolDestroy(&gMsTopTaskPool);
+    TaskPoolDestroy(&sMsTopTaskPool);
 }

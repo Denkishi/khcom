@@ -71,7 +71,7 @@ static void* sUnkEu_09F84FE4[5] = {
 };
 #endif
 
-static MsCard* gMsCards;
+static MsCard* sMsCards;
 static s16 sMsChargeState;
 static s16 sMsChargeMenuState;
 static s16 sMsChargeTab;
@@ -84,7 +84,7 @@ static u16 sMsChargeCollectionCount;
 static struct ObjTiles* sMsChargeScrollbarTiles;
 static struct ObjPalette* sMsChargeCategoryPalette;
 static struct ObjTiles* sMsChargeHighlightTiles;
-static AnimState gUnk_02035C50;
+static AnimState sUnk_02035C50;
 static AnimState sMsChargeHighlightAnim;
 static struct ObjPalette* sMsChargeMooglePalette;
 static struct ObjTiles* sMsChargeMoogleTiles;
@@ -172,7 +172,7 @@ s16 GetMsChargeSelectedIndex() {
 }
 
 MsCard* GetMsChargeSelectedCard() {
-    return gMsCards + GetMsChargeSelectedIndex();
+    return sMsCards + GetMsChargeSelectedIndex();
 }
 
 void MsChargeSelectFirstValue() {
@@ -219,11 +219,11 @@ void MsChargeLoadGrid() {
             }
 
             if (idx < limit) {
-                defIdx = gMsCards[a + idx].cardId;
+                defIdx = sMsCards[a + idx].cardId;
                 sMsChargeGridPalettes[i][k] = LoadObjPalette(gCardDefs[defIdx].palette2, 0x20);
                 sMsChargeGridTiles[i][k] = LoadObjTiles(gCardDefs[defIdx].tiles2, 0x100);
                 sMsChargeGridSprites[i][k] = gCardDefs[defIdx].gfx2;
-                sMsChargeGridPremium[i][k] = gMsCards[a + idx].premium;
+                sMsChargeGridPremium[i][k] = sMsCards[a + idx].premium;
             } else {
                 sMsChargeGridPalettes[i][k] = NULL;
                 sMsChargeGridTiles[i][k] = NULL;
@@ -297,7 +297,7 @@ u16 GetMsChargeCardPoints(u16 index) {
     MsCard* card;
     u16 id;
 
-    card = &gMsCards[index];
+    card = &sMsCards[index];
 
     if (card->kind != 0x8F) {
         id = card->values[GetMsChargeSelectedValue()][1];
@@ -497,8 +497,8 @@ void MsChargeRemoveCard(MsCard* card) {
 
     slot = gCardDefs[card->cardId].category;
     DmaCopy16(3, card + 1, card, (285 - GetMsChargeSelectedIndex()) * 52);
-    DmaFill16(3, 0, &gMsCards[285], 0x34);
-    gMsCards[285].kind = 0x8F;
+    DmaFill16(3, 0, &sMsCards[285], 0x34);
+    sMsCards[285].kind = 0x8F;
 
     for (j = slot + 1; j <= 3; j++) {
         sMsChargeCategoryStart[j]--;
@@ -533,7 +533,7 @@ s32 FindMsCard(u16 id, u8 flag, s16 count) {
     s16 i;
 
     for (i = 0; i < count; i++) {
-        if (gMsCards[i].kind == id && gMsCards[i].premium == flag) {
+        if (sMsCards[i].kind == id && sMsCards[i].premium == flag) {
             return i;
         }
     }
@@ -556,12 +556,12 @@ void MsChargeBuildCardList() {
     s16 j;
     s16 idx;
 
-    DmaFill16(3, 0, gMsCards, 0x3A18);
+    DmaFill16(3, 0, sMsCards, 0x3A18);
 
     for (n = 0; n <= 285; n++) {
-        gMsCards[n].kind = 0x8F;
-        gMsCards[n].cardId = 0x3B6;
-        gMsCards[n].premium = 0;
+        sMsCards[n].kind = 0x8F;
+        sMsCards[n].cardId = 0x3B6;
+        sMsCards[n].premium = 0;
     }
 
     a = CountCollectionCards();
@@ -591,23 +591,23 @@ void MsChargeBuildCardList() {
             sMsChargeCardTotal++;
 
             if ((idx = FindMsCard(kind, prem, n)) >= 0) {
-                gMsCards[idx].values[raw = gCardDefs[id].value][0]++;
-                gMsCards[idx].values[raw][1] = id;
+                sMsCards[idx].values[raw = gCardDefs[id].value][0]++;
+                sMsCards[idx].values[raw][1] = id;
             } else {
-                gMsCards[n].kind = kind;
-                gMsCards[n].cardId = gCardDefs[id].catalogNumber;
-                gMsCards[n].category = j;
+                sMsCards[n].kind = kind;
+                sMsCards[n].cardId = gCardDefs[id].catalogNumber;
+                sMsCards[n].category = j;
                 raw = gCardDefs[id].value;
-                gMsCards[n].values[raw][0]++;
-                gMsCards[n].values[raw][1] = id;
-                gMsCards[n].premium = prem;
+                sMsCards[n].values[raw][0]++;
+                sMsCards[n].values[raw][1] = id;
+                sMsCards[n].premium = prem;
                 sortKey = 0x01000000;
 
                 if (prem != 0) {
                     sortKey = 0x03000000;
                 }
 
-                gMsCards[n].sortKey = (sortKey << (gMsCards[n].category * 2)) | gMsCards[n].cardId;
+                sMsCards[n].sortKey = (sortKey << (sMsCards[n].category * 2)) | sMsCards[n].cardId;
                 sMsChargeCategoryEntryCount[j]++;
                 n++;
             }
@@ -619,17 +619,17 @@ void MsChargeBuildCardList() {
     }
 
     for (i = 1; i < n; i++) {
-        tmp = gMsCards[i];
+        tmp = sMsCards[i];
 
         for (j = i - 1; j >= 0; j--) {
-            if (gMsCards[j].sortKey > tmp.sortKey) {
-                gMsCards[j + 1] = gMsCards[j];
+            if (sMsCards[j].sortKey > tmp.sortKey) {
+                sMsCards[j + 1] = sMsCards[j];
             } else {
                 break;
             }
         }
 
-        gMsCards[j + 1] = tmp;
+        sMsCards[j + 1] = tmp;
     }
 }
 
@@ -988,7 +988,7 @@ void MsChargeDraw() {
     s32 j;
 
     if (sMsChargeMenuState != 1) {
-        DrawSprite(16, 60, AnimUpdate(&gUnk_02035C50), sMsChargeHighlightTiles, sMsChargeCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(16, 60, AnimUpdate(&sUnk_02035C50), sMsChargeHighlightTiles, sMsChargeCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
@@ -1101,7 +1101,7 @@ void mode_ms_charge_0() {
     u16 length;
 
     {
-        MsCard** dst = &gMsCards;
+        MsCard** dst = &sMsCards;
         *dst = EwramAlloc(286 * sizeof(MsCard));
     }
 
@@ -1207,8 +1207,8 @@ void mode_ms_charge_0() {
     sMsChargeScrollbarTiles = LoadObjTiles(gUnk_099A7C78, 32);
     sMsChargeCategoryPalette = LoadObjPalette(gUnk_09A3DE7C, 32);
     sMsChargeHighlightTiles = LoadObjTiles(gUnk_099A6C82, 0xFE0);
-    AnimInit(&gUnk_02035C50, gUnk_09EF9AA4, gUnk_09EF9A68);
-    AnimStart(&gUnk_02035C50, 1, ANIM_FLAG_LOOP);
+    AnimInit(&sUnk_02035C50, gUnk_09EF9AA4, gUnk_09EF9A68);
+    AnimStart(&sUnk_02035C50, 1, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeHighlightAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
@@ -1475,7 +1475,7 @@ void mode_ms_charge_2() {
     EwramFree(sMsChargeYesText);
     FreeTextSlots(sMsChargeNoText, sMsChargeNoTextLength);
     EwramFree(sMsChargeNoText);
-    EwramFree(gMsCards);
+    EwramFree(sMsCards);
 }
 
 Mode gModeMsCharge = {

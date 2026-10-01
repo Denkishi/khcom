@@ -14,7 +14,7 @@ static s8 sDebflagCursor;
 static s8 sDebflagCount;
 static const DebugFlag* sDebflagList;
 #ifdef VERSION_EU
-static u32 gUnkEu_020348D4;
+static u32 sUnkEu_020348D4;
 #endif
 
 u8 gDebflagReturnToMap EWRAM_COMMON(4);

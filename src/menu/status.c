@@ -207,15 +207,15 @@ static const StatusFriendTable sStatusFriendTable = {{
     {128, CARD_ID(CARD_THE_KING, 0)},
 }};
 
-static StatusWork* gStatusWork;
+static StatusWork* sStatusWork;
 static u8 sStatusMesWindowOpen;
 static s16 sStatusSelectedIndex;
-static StatusStocklistWork* gStatusStocklistWork;
+static StatusStocklistWork* sStatusStocklistWork;
 
 s32 gStatusBarState EWRAM_COMMON(4);
 
 void task_status_0(StatusWork* work) {
-    gStatusWork = work;
+    sStatusWork = work;
     work->tab = 0;
     sStatusMesWindowOpen = 0;
     work->cursor = 0;
@@ -357,7 +357,7 @@ s16 GetStatusSelectedIndex() {
 }
 
 s16 GetStatusScroll() {
-    return gStatusWork->scroll;
+    return sStatusWork->scroll;
 }
 
 void StatusBarStartClose(StatusBarWork* work) {
@@ -691,7 +691,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     s32 i;
     StatusEntry* e;
 
-    gStatusStocklistWork = work;
+    sStatusStocklistWork = work;
     work->tab = arg;
     e = work->entries;
 
@@ -783,15 +783,15 @@ void task_status_stocklist_3(StatusStocklistWork* work) {
 }
 
 u16 GetStatusVisibleRowCount() {
-    if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count <= 7) {
-        return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count;
+    if (sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count <= 7) {
+        return sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count;
     }
 
     return 8;
 }
 
 u16 GetStatusMaxScroll() {
-    s16 v = gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - 8;
+    s16 v = sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - 8;
 
     if (v <= 0) {
         return 0;
@@ -801,7 +801,7 @@ u16 GetStatusMaxScroll() {
 }
 
 u8 StatusTabHasItems() {
-    if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count == 0) {
+    if (sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count == 0) {
         return 0;
     }
 
@@ -811,48 +811,48 @@ u8 StatusTabHasItems() {
 void StatusStocklistScrollDown() {
     s32 i;
 
-    ReleaseObjTiles(gStatusStocklistWork->tiles2[0]);
+    ReleaseObjTiles(sStatusStocklistWork->tiles2[0]);
 
     for (i = 0; i < 7; i++) {
-        gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i + 1];
+        sStatusStocklistWork->tiles2[i] = sStatusStocklistWork->tiles2[i + 1];
     }
 
-    gStatusStocklistWork->scroll++;
-    gStatusStocklistWork->tiles2[7] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll + 7]));
+    sStatusStocklistWork->scroll++;
+    sStatusStocklistWork->tiles2[7] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[sStatusStocklistWork->scroll + 7]));
 }
 
 void StatusStocklistScrollUp() {
     s32 i;
 
-    ReleaseObjTiles(gStatusStocklistWork->tiles2[7]);
+    ReleaseObjTiles(sStatusStocklistWork->tiles2[7]);
 
     for (i = 7; i > 0; i--) {
-        gStatusStocklistWork->tiles2[i] = gStatusStocklistWork->tiles2[i - 1];
+        sStatusStocklistWork->tiles2[i] = sStatusStocklistWork->tiles2[i - 1];
     }
 
-    gStatusStocklistWork->scroll--;
-    gStatusStocklistWork->tiles2[0] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll]));
+    sStatusStocklistWork->scroll--;
+    sStatusStocklistWork->tiles2[0] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[sStatusStocklistWork->scroll]));
 }
 
 void StatusStocklistLoadRows(u16 a) {
     s32 i;
 
     for (i = 0; i <= 7; i++) {
-        if (gStatusStocklistWork->tiles2[i] != NULL) {
-            ReleaseObjTiles(gStatusStocklistWork->tiles2[i]);
-            gStatusStocklistWork->tiles2[i] = NULL;
+        if (sStatusStocklistWork->tiles2[i] != NULL) {
+            ReleaseObjTiles(sStatusStocklistWork->tiles2[i]);
+            sStatusStocklistWork->tiles2[i] = NULL;
         }
     }
 
-    gStatusStocklistWork->scroll = a;
+    sStatusStocklistWork->scroll = a;
 
-    for (i = 0; i < gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - a && i <= 7; i++) {
-        gStatusStocklistWork->tiles2[i] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[a + i]));
+    for (i = 0; i < sStatusStocklistWork->entries[*sStatusStocklistWork->tab].count - a && i <= 7; i++) {
+        sStatusStocklistWork->tiles2[i] = LoadStockNameTiles(GetStatusItemStockIndex(sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[a + i]));
     }
 }
 
 s32 GetStatusListItem(s16 a) {
-    return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[a];
+    return sStatusStocklistWork->entries[*sStatusStocklistWork->tab].items[a];
 }
 
 void StatusEntryClear(StatusEntry* e) {

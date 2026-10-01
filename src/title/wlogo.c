@@ -35,11 +35,11 @@ extern s16 gWlogoBksObjHoldTimes[];
 extern u16 gWlogoBksObjPriorities[];
 extern u8 gWlogoPooObjAnimIds[];
 
-static TaskPool gWlogoHwtTaskPool;
-static TaskPool gWlogoNvlTaskPool;
-static TaskPool gWlogoNvlMovTaskPool;
-static TaskPool gWlogoAgrTaskPool;
-static TaskPool gWlogoPooTaskPool;
+static TaskPool sWlogoHwtTaskPool;
+static TaskPool sWlogoNvlTaskPool;
+static TaskPool sWlogoNvlMovTaskPool;
+static TaskPool sWlogoAgrTaskPool;
+static TaskPool sWlogoPooTaskPool;
 s32 gWlogoTtSkew EWRAM_COMMON(4);
 
 void task_wlogo_mons_0(WlogoMonsWork* work) {
@@ -178,7 +178,7 @@ void task_wlogo_hwt_0(WlogoHwtWork* work) {
     work->state = 0;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
-    TaskPoolInit(&gWlogoHwtTaskPool, 4);
+    TaskPoolInit(&sWlogoHwtTaskPool, 4);
 }
 
 u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
@@ -187,17 +187,17 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         work->timer++;
 
         if (work->timer == 20) {
-            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, NULL);
-            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)1);
+            TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, NULL);
+            TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)1);
         }
 
         if (work->timer == 100) {
-            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)2);
+            TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)2);
         }
 
         if (work->timer == 140) {
             work->timer = 0;
-            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)3);
+            TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)3);
             work->state++;
         }
 
@@ -246,11 +246,11 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
 
         if (work->timer == 0) {
             if (work->blend == 15) {
-                TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)4);
+                TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)4);
             }
 
             if (work->blend == 12) {
-                TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)5);
+                TaskCreate(&sWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)5);
             }
         }
 
@@ -266,8 +266,8 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         break;
     }
 
-    TaskPoolUpdate(&gWlogoHwtTaskPool);
-    TaskPoolDraw(&gWlogoHwtTaskPool);
+    TaskPoolUpdate(&sWlogoHwtTaskPool);
+    TaskPoolDraw(&sWlogoHwtTaskPool);
     return 1;
 }
 
@@ -275,7 +275,7 @@ void task_wlogo_hwt_2(WlogoHwtWork* work) {
 }
 
 void task_wlogo_hwt_3(WlogoHwtWork* work) {
-    TaskPoolDestroy(&gWlogoHwtTaskPool);
+    TaskPoolDestroy(&sWlogoHwtTaskPool);
 }
 
 void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 arg) {
@@ -576,7 +576,7 @@ void task_wlogo_nvl_0(WlogoNvlWork* work) {
     work->tileFrameTimer = 0;
     work->frameCount = 0;
     SetBgBlend(0, 16, 0);
-    TaskPoolInit(&gWlogoNvlTaskPool, 4);
+    TaskPoolInit(&sWlogoNvlTaskPool, 4);
 }
 
 u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
@@ -615,7 +615,7 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
         }
 
         if (work->timer == 1) {
-            TaskCreate(&gWlogoNvlTaskPool, &gTaskDescWlogoNvlMov, NULL);
+            TaskCreate(&sWlogoNvlTaskPool, &gTaskDescWlogoNvlMov, NULL);
         }
 
         break;
@@ -668,8 +668,8 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
     }
 
     work->frameCount++;
-    TaskPoolUpdate(&gWlogoNvlTaskPool);
-    TaskPoolDraw(&gWlogoNvlTaskPool);
+    TaskPoolUpdate(&sWlogoNvlTaskPool);
+    TaskPoolDraw(&sWlogoNvlTaskPool);
     return 1;
 }
 
@@ -677,7 +677,7 @@ void task_wlogo_nvl_2(WlogoNvlWork* work) {
 }
 
 void task_wlogo_nvl_3(WlogoNvlWork* work) {
-    TaskPoolDestroy(&gWlogoNvlTaskPool);
+    TaskPoolDestroy(&sWlogoNvlTaskPool);
 }
 
 void task_wlogo_nvl_mov_0(WlogoNvlMovWork* work) {
@@ -699,7 +699,7 @@ void task_wlogo_nvl_mov_0(WlogoNvlMovWork* work) {
     AnimInit(&work->anim, gUnk_09EF35A4, gUnk_09EF3574);
     AnimStart(&work->anim, work->animId, 0);
     work->gfx = AnimGetGfx(&work->anim);
-    TaskPoolInit(&gWlogoNvlMovTaskPool, 10);
+    TaskPoolInit(&sWlogoNvlMovTaskPool, 10);
 }
 
 u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
@@ -730,7 +730,7 @@ u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
             arg.x = work->x;
             arg.y = work->y;
             arg.animId = work->trailAnimId;
-            TaskCreate(&gWlogoNvlMovTaskPool, &gTaskDescWlogoNvlObj, &arg);
+            TaskCreate(&sWlogoNvlMovTaskPool, &gTaskDescWlogoNvlObj, &arg);
             work->trailAnimId = 1 - work->trailAnimId;
         }
 
@@ -757,8 +757,8 @@ u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
         }
     }
 
-    TaskPoolUpdate(&gWlogoNvlMovTaskPool);
-    TaskPoolDraw(&gWlogoNvlMovTaskPool);
+    TaskPoolUpdate(&sWlogoNvlMovTaskPool);
+    TaskPoolDraw(&sWlogoNvlMovTaskPool);
     return 1;
 }
 
@@ -769,7 +769,7 @@ void task_wlogo_nvl_mov_2(WlogoNvlMovWork* work) {
 }
 
 void task_wlogo_nvl_mov_3(WlogoNvlMovWork* work) {
-    TaskPoolDestroy(&gWlogoNvlMovTaskPool);
+    TaskPoolDestroy(&sWlogoNvlMovTaskPool);
 }
 
 void task_wlogo_nvl_obj_0(WlogoNvlObjWork* work, WlogoNvlObjArg* arg) {
@@ -1113,7 +1113,7 @@ void task_wlogo_agr_0(WlogoAgrWork* work, s32 arg) {
     work->entryIndex = 0;
     work->blend = 0;
     SetBgBlend(0, 16, 0);
-    TaskPoolInit(&gWlogoAgrTaskPool, 50);
+    TaskPoolInit(&sWlogoAgrTaskPool, 50);
 }
 
 u8 task_wlogo_agr_1(WlogoAgrWork* work) {
@@ -1127,7 +1127,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         if (work->timer > 29) {
             work->timer = 0;
             work->state++;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash0, NULL);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash0, NULL);
         }
 
         break;
@@ -1160,15 +1160,15 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
             a.smokeY = gWlogoAgrEntries[work->entryIndex].smokeY;
             a.smokeAnimId = gWlogoAgrEntries[work->entryIndex].smokeAnimId;
             a.unk_07 = gWlogoAgrEntries[work->entryIndex].unk_07;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrSmoke, &a);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrSmoke, &a);
             b.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
             b.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
             b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             b.flashX = gWlogoAgrEntries[work->entryIndex].flashX + 20;
             b.flashY = gWlogoAgrEntries[work->entryIndex].flashY + 20;
             b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId + 1;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             work->entryIndex++;
 
             if (work->entryIndex > 18) {
@@ -1199,7 +1199,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
                 b.flashX = gWlogoAgrEntries[work->entryIndex].flashX;
                 b.flashY = gWlogoAgrEntries[work->entryIndex].flashY;
                 b.flashAnimId = gWlogoAgrEntries[work->entryIndex].flashAnimId;
-                TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+                TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             }
 
             work->entryIndex++;
@@ -1213,33 +1213,33 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
             b.flashX = 115;
             b.flashY = 80;
             b.flashAnimId = 6;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             b.flashX = 110;
             b.flashY = 60;
             b.flashAnimId = 8;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
         }
 
         if (work->timer == 70) {
             b.flashX = 95;
             b.flashY = 65;
             b.flashAnimId = 7;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             b.flashX = 100;
             b.flashY = 80;
             b.flashAnimId = 6;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
         }
 
         if (work->timer == 80) {
             b.flashX = 134;
             b.flashY = 42;
             b.flashAnimId = 8;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
             b.flashX = 126;
             b.flashY = 50;
             b.flashAnimId = 7;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
+            TaskCreate(&sWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash1, &b);
         }
 
         work->timer++;
@@ -1270,8 +1270,8 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         break;
     }
 
-    TaskPoolUpdate(&gWlogoAgrTaskPool);
-    TaskPoolDraw(&gWlogoAgrTaskPool);
+    TaskPoolUpdate(&sWlogoAgrTaskPool);
+    TaskPoolDraw(&sWlogoAgrTaskPool);
     return 1;
 }
 
@@ -1284,7 +1284,7 @@ void task_wlogo_agr_2(WlogoAgrWork* work) {
 void task_wlogo_agr_3(WlogoAgrWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
-    TaskPoolDestroy(&gWlogoAgrTaskPool);
+    TaskPoolDestroy(&sWlogoAgrTaskPool);
 }
 
 void task_wlogo_agr_smoke_0(WlogoAgrSmokeWork* work, WlogoAgrEntry* arg) {
@@ -1522,7 +1522,7 @@ void task_wlogo_poo_0(WlogoPooWork* work) {
     work->unk_004 = 0;
     work->unk_006 = 0;
     SetBgBlend(0, 16, 0);
-    TaskPoolInit(&gWlogoPooTaskPool, 4);
+    TaskPoolInit(&sWlogoPooTaskPool, 4);
 }
 
 u8 task_wlogo_poo_1(WlogoPooWork* work) {
@@ -1545,10 +1545,10 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
 
             if (work->blend > 15) {
                 work->blend = 16;
-                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, NULL);
-                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)1);
-                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)2);
-                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)3);
+                TaskCreate(&sWlogoPooTaskPool, &gTaskDescWlogoPooObj, NULL);
+                TaskCreate(&sWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)1);
+                TaskCreate(&sWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)2);
+                TaskCreate(&sWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)3);
                 work->state++;
             }
 
@@ -1585,8 +1585,8 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
         break;
     }
 
-    TaskPoolUpdate(&gWlogoPooTaskPool);
-    TaskPoolDraw(&gWlogoPooTaskPool);
+    TaskPoolUpdate(&sWlogoPooTaskPool);
+    TaskPoolDraw(&sWlogoPooTaskPool);
     return 1;
 }
 
@@ -1594,7 +1594,7 @@ void task_wlogo_poo_2(WlogoPooWork* work) {
 }
 
 void task_wlogo_poo_3(WlogoPooWork* work) {
-    TaskPoolDestroy(&gWlogoPooTaskPool);
+    TaskPoolDestroy(&sWlogoPooTaskPool);
 }
 
 void task_wlogo_poo_obj_0(WlogoPooObjWork* work, s32 arg) {

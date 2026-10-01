@@ -202,7 +202,7 @@ static u32 sModePoohExitEvent;
 static u16 sModePoohMessage;
 static Task* sPooPrizeTasks[12];
 static TaskPool sModePoohWLogoTasks;
-static Task* gWLogoTask;
+static Task* sWLogoTask;
 static u8 sPooMapBeeVisible;
 static s32 sPooAttackX;
 static s32 sPooAttackY;
@@ -539,9 +539,9 @@ void mode_pooh_0(s32 arg) {
     TaskPoolInit(&sModePoohWLogoTasks, 1);
 
     if (IsPooFlagSet(2)) {
-        gWLogoTask = NULL;
+        sWLogoTask = NULL;
     } else {
-        gWLogoTask = TaskCreate(&sModePoohWLogoTasks, &gTaskDescWLogo, NULL);
+        sWLogoTask = TaskCreate(&sModePoohWLogoTasks, &gTaskDescWLogo, NULL);
         SetPooFlag(2);
     }
 
@@ -579,7 +579,7 @@ void mode_pooh_1() {
     if (FadeIsActive() == 0) {
         gPooAttackActive = 0;
 
-        if (IsTaskActive(gWLogoTask)) {
+        if (IsTaskActive(sWLogoTask)) {
             TaskPoolUpdate(&sModePoohWLogoTasks);
         } else if (IsMessageWindowOpen() == 0) {
             if (sModePoohMessage == 0xFFFE) {

@@ -28,7 +28,7 @@
 #include "btl.h"
 #include <stddef.h>
 
-static BoogieWork* gBoogieWork;
+static BoogieWork* sBoogieWork;
 
 #if defined(VERSION_US)
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
@@ -190,7 +190,7 @@ void task_bos_boogie_0(BoogieWork* work) {
     u16 sz;
     u16 t;
 
-    gBoogieWork = work;
+    sBoogieWork = work;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosBoogieMap, (void*)&sBosBoogieBattleBackgroundDef);
     work->state = 0;
     work->timer = 0;
@@ -621,8 +621,8 @@ void BosBoogieApplyGimmick() {
 }
 
 u32 GetBoogieDiceState() {
-    if (IsTaskActive(gBoogieWork->dice) != 0) {
-        return ((BoogieDiceWork*)gBoogieWork->dice->work)->state;
+    if (IsTaskActive(sBoogieWork->dice) != 0) {
+        return ((BoogieDiceWork*)sBoogieWork->dice->work)->state;
     }
 
     return 11;

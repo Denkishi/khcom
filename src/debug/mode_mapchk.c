@@ -88,7 +88,7 @@ static const char sMapChkCursorBlankText[] = "\201@";
 
 static const char sMapChkCursorText[] = "\201\204";
 
-static MapChkWork* gMapChkWork;
+static MapChkWork* sMapChkWork;
 static MapFormDef* sMapChkForm;
 
 static const char* sMapChkModeNames[] = {
@@ -517,17 +517,17 @@ void Mode_MapChk_0() {
     const u8* t;
     s32 n;
 
-    gMapChkWork = EwramAlloc(8);
+    sMapChkWork = EwramAlloc(8);
     SaveLoadHeader();
     gMapChkUseParams = 0;
-    gMapChkWork->cursor = 0;
-    gMapChkWork->mode = 0;
-    gMapChkWork->world = 0;
-    gMapChkWork->floor = 1;
-    gMapChkWork->form = 0;
-    gMapChkWork->useParams = 0;
+    sMapChkWork->cursor = 0;
+    sMapChkWork->mode = 0;
+    sMapChkWork->world = 0;
+    sMapChkWork->floor = 1;
+    sMapChkWork->form = 0;
+    sMapChkWork->useParams = 0;
     gGameState.roomEffect = 0;
-    LoadMapForm(gMapChkWork->form);
+    LoadMapForm(sMapChkWork->form);
     sMapChkForm = &gMapForm;
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
@@ -544,13 +544,13 @@ void Mode_MapChk_0() {
     DebugTextPrint(24, 104, 2, sMapChkHighLabel);
     DebugTextPrint(24, 128, 2, sMapChkDeepLabel);
     DebugTextPrint(80, 68, 2, sMapChkOffText);
-    DebugTextPrint(80, 32, 2, sMapChkModeNames[gMapChkWork->mode]);
+    DebugTextPrint(80, 32, 2, sMapChkModeNames[sMapChkWork->mode]);
     t = gUnk_0984B458[0];
-    n = gMapChkWork->world * 8;
+    n = sMapChkWork->world * 8;
     t += 4;
     DebugTextPrint(80, 44, 2, *(const char**)(t + n));
-    DebugTextPrintNumber(80, 56, 2, gMapChkWork->floor + 1);
-    DebugTextPrint(80, 80, 2, sMapChkFormNames[gMapChkWork->form]);
+    DebugTextPrintNumber(80, 56, 2, sMapChkWork->floor + 1);
+    DebugTextPrint(80, 80, 2, sMapChkFormNames[sMapChkWork->form]);
     DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
     DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
     DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
@@ -563,18 +563,18 @@ void Mode_MapChk_0() {
 void Mode_MapChk_1() {
     MapChkWork* e;
 
-    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, sMapChkCursorBlankText);
+    DebugTextPrint(12, sMapChkWork->cursor * 12 + 32, 2, sMapChkCursorBlankText);
 
     if ((GetKeysRepeat() & DPAD_UP) != 0) {
-        gMapChkWork->cursor = gMapChkWork->cursor == 0 ? 9 : gMapChkWork->cursor - 1;
+        sMapChkWork->cursor = sMapChkWork->cursor == 0 ? 9 : sMapChkWork->cursor - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_DOWN) != 0) {
-        gMapChkWork->cursor = gMapChkWork->cursor > 8 ? 0 : gMapChkWork->cursor + 1;
+        sMapChkWork->cursor = sMapChkWork->cursor > 8 ? 0 : sMapChkWork->cursor + 1;
     }
 
-    DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, sMapChkCursorText);
-    sMapChkRowHandlers[gMapChkWork->cursor](gMapChkWork);
+    DebugTextPrint(12, sMapChkWork->cursor * 12 + 32, 2, sMapChkCursorText);
+    sMapChkRowHandlers[sMapChkWork->cursor](sMapChkWork);
 
     if ((GetKeysPressed() & (A_BUTTON | START_BUTTON)) != 0) {
         func_08085FB0();
@@ -584,34 +584,34 @@ void Mode_MapChk_1() {
         }
 
         InitMapCardInventory();
-        gMapChkUseParams = gMapChkWork->useParams;
+        gMapChkUseParams = sMapChkWork->useParams;
         gGameState.progression.friendFlags |= FRIEND_FLAG_DONALD_DUCK;
         gGameState.progression.friendFlags |= FRIEND_FLAG_GOOFY;
         gGameState.progression.tutorialFlags |= 0x778;
-        e = gMapChkWork;
+        e = sMapChkWork;
 
         switch (e->mode) {
         case 1:
             gGameState.floors[e->floor].world = gUnk_0984B458[e->world][0];
-            MapChkSetFloorProgress(gMapChkWork->floor, 0);
-            GoToFloor(gMapChkWork->floor);
-            SetFloorWorld(gUnk_0984B458[gMapChkWork->world][0]);
+            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            GoToFloor(sMapChkWork->floor);
+            SetFloorWorld(gUnk_0984B458[sMapChkWork->world][0]);
             gMapFloorState.flags |= FLOOR_FLAG_LOGO_SHOWN;
             EnterFloorWorld();
             RequestMapMode();
             break;
         case 2:
             gGameState.floors[e->floor].world = 0;
-            MapChkSetFloorProgress(gMapChkWork->floor, 0);
-            GoToFloor(gMapChkWork->floor);
+            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_ENTRANCE_HALL;
             gMapFloorState.entrySide = 5;
             RequestMapMode();
             break;
         case 3:
-            gGameState.floors[gMapChkWork->floor].world = gUnk_0984B458[gMapChkWork->world][0];
-            MapChkSetFloorProgress(gMapChkWork->floor, 1);
-            GoToFloor(gMapChkWork->floor);
+            gGameState.floors[sMapChkWork->floor].world = gUnk_0984B458[sMapChkWork->world][0];
+            MapChkSetFloorProgress(sMapChkWork->floor, 1);
+            GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_EXIT_HALL;
             gMapFloorState.entrySide = 5;
             RequestMapMode();
@@ -625,11 +625,11 @@ void Mode_MapChk_1() {
             RequestMapMode();
             break;
         default:
-            gGameState.floors[gMapChkWork->floor].world =
-                gUnk_0984B458[gMapChkWork->world][0];
-            MapChkSetFloorProgress(gMapChkWork->floor, 0);
-            GoToFloor(gMapChkWork->floor);
-            SetFloorWorld(gUnk_0984B458[gMapChkWork->world][0]);
+            gGameState.floors[sMapChkWork->floor].world =
+                gUnk_0984B458[sMapChkWork->world][0];
+            MapChkSetFloorProgress(sMapChkWork->floor, 0);
+            GoToFloor(sMapChkWork->floor);
+            SetFloorWorld(gUnk_0984B458[sMapChkWork->world][0]);
             EnterFloorWorld();
             ModeRequest(&gModeMapDbg, 0);
             break;
@@ -644,5 +644,5 @@ void Mode_MapChk_1() {
 
 void Mode_MapChk_2() {
     DebugTextDestroy();
-    EwramFree(gMapChkWork);
+    EwramFree(sMapChkWork);
 }

@@ -19,9 +19,9 @@ static const s32 sBrightenSteps[32] = {
 
 static const u8 sPalletHeapName[8] = "PALLET";
 
-static PaletteBuffer* gPaletteBuffer;
-static s16 gPaletteEffect;
-static s16 gPaletteEffectSaved;
+static PaletteBuffer* sPaletteBuffer;
+static s16 sPaletteEffect;
+static s16 sPaletteEffectSaved;
 
 PaletteWave gBgWaves[5] EWRAM_COMMON(16);
 
@@ -59,16 +59,16 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
             r[0] = r[1];
         }
 
-        gPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
+        sPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
     }
 
     if (base == 0) {
-        RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
+        RequestDma3Copy(&sPaletteBuffer->colors[1], dst + 1, size - 2);
     } else {
-        RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
+        RequestDma3Copy(&sPaletteBuffer->colors[base], dst, size);
     }
 
-    return &gPaletteBuffer->colors[base];
+    return &sPaletteBuffer->colors[base];
 }
 
 u16* FadePaletteToGray(const u16* src, u16* dst, u16 size, u16 amount) {
@@ -86,16 +86,16 @@ u16* FadePaletteToGray(const u16* src, u16* dst, u16 size, u16 amount) {
         r = (gray + r * inv) >> 5;
         g = (gray + g * inv) >> 5;
         b = (gray + b * inv) >> 5;
-        gPaletteBuffer->colors[i + base] = (b << 10) | (g << 5) | r;
+        sPaletteBuffer->colors[i + base] = (b << 10) | (g << 5) | r;
     }
 
     if (base == 0) {
-        RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
+        RequestDma3Copy(&sPaletteBuffer->colors[1], dst + 1, size - 2);
     } else {
-        RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
+        RequestDma3Copy(&sPaletteBuffer->colors[base], dst, size);
     }
 
-    return &gPaletteBuffer->colors[base];
+    return &sPaletteBuffer->colors[base];
 }
 
 u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
@@ -132,16 +132,16 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
             r[0] = r[0] - ((r[0] - r[1]) * amount >> 5);
         }
 
-        gPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
+        sPaletteBuffer->colors[i + base] = (b[0] << 10) | (g[0] << 5) | r[0];
     }
 
     if (base == 0) {
-        RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
+        RequestDma3Copy(&sPaletteBuffer->colors[1], dst + 1, size - 2);
     } else {
-        RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
+        RequestDma3Copy(&sPaletteBuffer->colors[base], dst, size);
     }
 
-    return &gPaletteBuffer->colors[base];
+    return &sPaletteBuffer->colors[base];
 }
 
 u16* BrightenPalette(const u16* src, u16* dst, u16 size, u16 amount) {
@@ -176,95 +176,95 @@ u16* BrightenPalette(const u16* src, u16* dst, u16 size, u16 amount) {
         r = rv >> 8;
         g = gv >> 8;
         b = bv >> 8;
-        gPaletteBuffer->colors[i + base] = (b << 10) | (g << 5) | r;
+        sPaletteBuffer->colors[i + base] = (b << 10) | (g << 5) | r;
     }
 
     if (base == 0) {
-        RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
+        RequestDma3Copy(&sPaletteBuffer->colors[1], dst + 1, size - 2);
     } else {
-        RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
+        RequestDma3Copy(&sPaletteBuffer->colors[base], dst, size);
     }
 
-    return &gPaletteBuffer->colors[base];
+    return &sPaletteBuffer->colors[base];
 }
 
 u16* LoadPaletteBuffered(const void* src, u16* dst, u16 size) {
     s32 base = ((s32)dst - PLTT) >> 1;
 
-    CpuCopy16(src, &gPaletteBuffer->colors[base], size);
+    CpuCopy16(src, &sPaletteBuffer->colors[base], size);
 
     if (base == 0) {
-        RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
+        RequestDma3Copy(&sPaletteBuffer->colors[1], dst + 1, size - 2);
     } else {
-        RequestDma3Copy(&gPaletteBuffer->colors[base], dst, size);
+        RequestDma3Copy(&sPaletteBuffer->colors[base], dst, size);
     }
 
-    return &gPaletteBuffer->colors[base];
+    return &sPaletteBuffer->colors[base];
 }
 
 u16* GetPaletteBufferBank(u8 bank) {
-    return &gPaletteBuffer->colors[bank * 32];
+    return &sPaletteBuffer->colors[bank * 32];
 }
 
 void ResetPaletteEffect() {
-    gPaletteEffect = 0;
-    gPaletteEffectSaved = 0;
+    sPaletteEffect = 0;
+    sPaletteEffectSaved = 0;
 }
 
 u16* LoadPaletteWithEffect(const void* src, u16* dst, u16 size) {
-    if (gPaletteEffect == 0) {
+    if (sPaletteEffect == 0) {
         return LoadPaletteBuffered(src, dst, size);
     }
 
-    if (gPaletteEffect < 0) {
-        return FadePaletteToGray(src, dst, size, -gPaletteEffect);
+    if (sPaletteEffect < 0) {
+        return FadePaletteToGray(src, dst, size, -sPaletteEffect);
     }
 
-    return BrightenPalette(src, dst, size, gPaletteEffect);
+    return BrightenPalette(src, dst, size, sPaletteEffect);
 }
 
 s16 GetPaletteEffect() {
-    return gPaletteEffect;
+    return sPaletteEffect;
 }
 
 void SetPaletteEffect(s16 a) {
-    gPaletteEffect = a;
+    sPaletteEffect = a;
 }
 
 void PushPaletteEffect(s32 a) {
-    gPaletteEffectSaved = gPaletteEffect;
-    gPaletteEffect = a;
+    sPaletteEffectSaved = sPaletteEffect;
+    sPaletteEffect = a;
 }
 
 void PopPaletteEffect() {
-    gPaletteEffect = gPaletteEffectSaved;
+    sPaletteEffect = sPaletteEffectSaved;
 }
 
 void PalletInit() {
     SetIwramHeapName(sPalletHeapName);
-    gPaletteBuffer = IwramAlloc(0x440);
-    CpuFill32(0, gPaletteBuffer, 0x440);
+    sPaletteBuffer = IwramAlloc(0x440);
+    CpuFill32(0, sPaletteBuffer, 0x440);
     PalletClear();
 }
 
 void PalletFree() {
-    IwramFree(gPaletteBuffer);
+    IwramFree(sPaletteBuffer);
 }
 
 void PalletClear() {
     s32 i;
 
     for (i = 0; i < 512; i++) {
-        gPaletteBuffer->colors[i] = 0;
+        sPaletteBuffer->colors[i] = 0;
     }
 
     for (i = 0; i < 32; i++) {
-        gPaletteBuffer->banks[i] = 0;
+        sPaletteBuffer->banks[i] = 0;
     }
 }
 
 void SetPaletteBankFadeEnabled(u16 bank, u8 a) {
-    gPaletteBuffer->banks[bank] = a;
+    sPaletteBuffer->banks[bank] = a;
 }
 
 u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
@@ -276,7 +276,7 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
     u16 r[2];
 
     for (bank = 0; bank <= 31; bank++) {
-        if (gPaletteBuffer->banks[bank] == 1) {
+        if (sPaletteBuffer->banks[bank] == 1) {
             for (j = 0; j <= 15; j++) {
                 u16 idx = bank * 16 + j;
 
@@ -305,13 +305,13 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
                     r[0] = r[1];
                 }
 
-                gPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
+                sPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
             }
         }
     }
 
-    RequestDma3Copy(&gPaletteBuffer->colors[1], pal + 1, 0x3FE);
-    return gPaletteBuffer->colors;
+    RequestDma3Copy(&sPaletteBuffer->colors[1], pal + 1, 0x3FE);
+    return sPaletteBuffer->colors;
 }
 
 u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
@@ -323,7 +323,7 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
     u16 r[2];
 
     for (bank = 0; bank <= 31; bank++) {
-        if (gPaletteBuffer->banks[bank] == 1) {
+        if (sPaletteBuffer->banks[bank] == 1) {
             for (j = 0; j <= 15; j++) {
                 u16 idx = bank * 16 + j;
 
@@ -352,13 +352,13 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
                     r[0] = r[0] - ((r[0] - r[1]) * amount >> 5);
                 }
 
-                gPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
+                sPaletteBuffer->colors[idx] = (b[0] << 10) | (g[0] << 5) | r[0];
             }
         }
     }
 
-    RequestDma3Copy(&gPaletteBuffer->colors[1], pal + 1, 0x3FE);
-    return gPaletteBuffer->colors;
+    RequestDma3Copy(&sPaletteBuffer->colors[1], pal + 1, 0x3FE);
+    return sPaletteBuffer->colors;
 }
 
 void StartBgWave(void (*callback)()) {

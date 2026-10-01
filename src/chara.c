@@ -166,8 +166,8 @@ static u8 sMaskFadeTileMasks[1440] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-static CharaObj* gCharaObj;
-static TaskPool gCharaTaskPool;
+static CharaObj* sCharaObj;
+static TaskPool sCharaTaskPool;
 
 void task_chara_mask_fade_0(MaskFadeWork* work, MaskFadeArgs* args) {
     s32 i;
@@ -1101,200 +1101,200 @@ s32 SioRandomPartnerRecv() {
 void CharaObjInitDefeat2(CharaObjParam2* param) {
     s32 i;
 
-    gCharaObj = EwramAlloc(sizeof(CharaObj));
-    gCharaObj->tilesAddr = param->tilesAddr;
-    gCharaObj->tileCount = param->tileCount;
-    gCharaObj->paletteAddr = param->paletteAddr;
-    gCharaObj->paletteSize = param->paletteSize;
-    gCharaObj->x = param->x;
-    gCharaObj->y = param->y;
-    gCharaObj->z = param->z;
-    gCharaObj->fadeLevel = 0;
-    gCharaObj->bgFxVz = -76;
-    gCharaObj->fadeTick = 0;
-    gCharaObj->timer = 0;
-    gCharaObj->state = 0;
-    gCharaObj->callback = param->callback;
-    gCharaObj->tilesAddr4 = 0;
-    gCharaObj->tileCount4 = 0;
-    gCharaObj->paletteAddr2 = 0;
-    gCharaObj->paletteSize2 = 0;
-    gCharaObj->prizeObj = param->prizeObj;
+    sCharaObj = EwramAlloc(sizeof(CharaObj));
+    sCharaObj->tilesAddr = param->tilesAddr;
+    sCharaObj->tileCount = param->tileCount;
+    sCharaObj->paletteAddr = param->paletteAddr;
+    sCharaObj->paletteSize = param->paletteSize;
+    sCharaObj->x = param->x;
+    sCharaObj->y = param->y;
+    sCharaObj->z = param->z;
+    sCharaObj->fadeLevel = 0;
+    sCharaObj->bgFxVz = -76;
+    sCharaObj->fadeTick = 0;
+    sCharaObj->timer = 0;
+    sCharaObj->state = 0;
+    sCharaObj->callback = param->callback;
+    sCharaObj->tilesAddr4 = 0;
+    sCharaObj->tileCount4 = 0;
+    sCharaObj->paletteAddr2 = 0;
+    sCharaObj->paletteSize2 = 0;
+    sCharaObj->prizeObj = param->prizeObj;
 
     for (i = 0; i < 32; i++) {
-        gCharaObj->bankFadeEnabled[i] = 0;
+        sCharaObj->bankFadeEnabled[i] = 0;
     }
 
-    TaskPoolInit(&gCharaTaskPool, 2);
+    TaskPoolInit(&sCharaTaskPool, 2);
 }
 
 u8 CharaObjUpdateDefeat2() {
     CharaPrizeArgs prize;
     MaskFadeArgs fade;
 
-    switch (gCharaObj->state) {
+    switch (sCharaObj->state) {
     case 0:
         if (!BgFxIsActive()) {
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
     case 1:
-        if (++gCharaObj->timer > 59) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 59) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 2:
-        CpuCopy16((void*)PLTT, gCharaObj->savedPalette, 0x400);
-        BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+        CpuCopy16((void*)PLTT, sCharaObj->savedPalette, 0x400);
+        BgFxStartCharaDefeat(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
-        gCharaObj->state++;
+        sCharaObj->state++;
         break;
     case 3:
-        gCharaObj->fadeLevel++;
-        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)PLTT, 320, gCharaObj->fadeLevel);
+        sCharaObj->fadeLevel++;
+        FadePaletteToBlack(sCharaObj->savedPalette, (u16*)PLTT, 320, sCharaObj->fadeLevel);
 
-        if (++gCharaObj->timer > 9) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 9) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 4:
-        gCharaObj->fadeLevel = 0;
-        CpuCopy16((void*)PLTT, gCharaObj->fadedPalette, 0x400);
-        gCharaObj->state++;
+        sCharaObj->fadeLevel = 0;
+        CpuCopy16((void*)PLTT, sCharaObj->fadedPalette, 0x400);
+        sCharaObj->state++;
         break;
     case 5:
-        if (++gCharaObj->timer > 89) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 89) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 6:
-        if (gCharaObj->fadeTick > 1) {
-            gCharaObj->fadeTick = 0;
-            gCharaObj->fadeLevel++;
+        if (sCharaObj->fadeTick > 1) {
+            sCharaObj->fadeTick = 0;
+            sCharaObj->fadeLevel++;
         }
 
-        gCharaObj->fadeTick++;
+        sCharaObj->fadeTick++;
 
-        if (gCharaObj->paletteSize != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
+        if (sCharaObj->paletteSize != 0) {
+            FadePaletteToWhite((u16*)sCharaObj->paletteAddr, (u16*)sCharaObj->paletteAddr, sCharaObj->paletteSize, sCharaObj->fadeLevel);
         }
 
-        if (gCharaObj->timer == 20) {
+        if (sCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
-            fade.tiles = (u8*)gCharaObj->tilesAddr;
-            fade.tileCount = gCharaObj->tileCount;
+            fade.tiles = (u8*)sCharaObj->tilesAddr;
+            fade.tileCount = sCharaObj->tileCount;
             fade.stepDelay = 1;
-            TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade);
+            TaskCreate(&sCharaTaskPool, &gTaskDescCharaMaskFade, &fade);
         }
 
-        if (++gCharaObj->timer > 39) {
-            gCharaObj->timer = 0;
+        if (++sCharaObj->timer > 39) {
+            sCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
     case 7:
-        gCharaObj->fadeLevel = 0;
-        gCharaObj->fadeTick = 0;
+        sCharaObj->fadeLevel = 0;
+        sCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
         FadeStartOut(FADE_MODE_ADD_WHITE, 20);
         FadeLock();
-        gCharaObj->state++;
+        sCharaObj->state++;
         break;
     case 8:
-        if (gCharaObj->fadeTick > 1) {
-            gCharaObj->fadeTick = 0;
-            gCharaObj->fadeLevel++;
+        if (sCharaObj->fadeTick > 1) {
+            sCharaObj->fadeTick = 0;
+            sCharaObj->fadeLevel++;
         }
 
-        gCharaObj->fadeTick++;
+        sCharaObj->fadeTick++;
 
-        if (++gCharaObj->timer > 37) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 37) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 9:
-        if (++gCharaObj->timer > 20) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 20) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 10:
-        gCharaObj->fadeTick = 0;
+        sCharaObj->fadeTick = 0;
 
-        if (gCharaObj->callback != NULL) {
-            gCharaObj->callback();
+        if (sCharaObj->callback != NULL) {
+            sCharaObj->callback();
         }
 
-        gCharaObj->state++;
+        sCharaObj->state++;
         break;
     case 11:
-        gCharaObj->fadeLevel -= 2;
-        FadePaletteToWhite(gCharaObj->fadedPalette, (u16*)PLTT, 1024, gCharaObj->fadeLevel);
+        sCharaObj->fadeLevel -= 2;
+        FadePaletteToWhite(sCharaObj->fadedPalette, (u16*)PLTT, 1024, sCharaObj->fadeLevel);
 
-        if (++gCharaObj->timer > 8) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 8) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 12:
-        BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
-        prize.x = gCharaObj->x;
-        prize.y = gCharaObj->y;
-        prize.z = gCharaObj->z;
+        BgFxStartCharaDefeatEnd(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
+        prize.x = sCharaObj->x;
+        prize.y = sCharaObj->y;
+        prize.z = sCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        DropBossPrizes(gCharaObj->prizeObj);
-        gCharaObj->state++;
+        DropBossPrizes(sCharaObj->prizeObj);
+        sCharaObj->state++;
         break;
     case 13:
-        BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+        BgFxAddPosition(76, 0, sCharaObj->bgFxVz);
 
-        if (++gCharaObj->timer > 79) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 79) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 14:
-        gCharaObj->bgFxVz = 0;
-        gCharaObj->state++;
+        sCharaObj->bgFxVz = 0;
+        sCharaObj->state++;
         break;
     case 15:
-        BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
-        gCharaObj->bgFxVz -= 25;
+        BgFxAddPosition(0, 0, sCharaObj->bgFxVz);
+        sCharaObj->bgFxVz -= 25;
 
-        if (++gCharaObj->timer > 39) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 39) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 16:
         BgAnimStop();
-        gCharaObj->fadeLevel = 11;
-        gCharaObj->state++;
+        sCharaObj->fadeLevel = 11;
+        sCharaObj->state++;
         break;
     case 17:
-        gCharaObj->fadeLevel--;
-        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)PLTT, 320, gCharaObj->fadeLevel);
+        sCharaObj->fadeLevel--;
+        FadePaletteToBlack(sCharaObj->savedPalette, (u16*)PLTT, 320, sCharaObj->fadeLevel);
 
-        if (++gCharaObj->timer > 10) {
-            gCharaObj->timer = 0;
+        if (++sCharaObj->timer > 10) {
+            sCharaObj->timer = 0;
             CharaObjFree();
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
@@ -1302,66 +1302,66 @@ u8 CharaObjUpdateDefeat2() {
         return 0;
     }
 
-    TaskPoolUpdate(&gCharaTaskPool);
-    TaskPoolDraw(&gCharaTaskPool);
+    TaskPoolUpdate(&sCharaTaskPool);
+    TaskPoolDraw(&sCharaTaskPool);
     return 1;
 }
 
 void CharaObjFree() {
-    EwramFree(gCharaObj);
-    TaskPoolDestroy(&gCharaTaskPool);
+    EwramFree(sCharaObj);
+    TaskPoolDestroy(&sCharaTaskPool);
 }
 
 void CharaObjInitDefeat(CharaObjParam* param) {
     s32 i;
     u16 idx;
 
-    gCharaObj = EwramAlloc(sizeof(CharaObj));
-    gCharaObj->flags = 0;
-    gCharaObj->tilesAddr = param->tilesAddr;
-    gCharaObj->tileCount = param->tileCount;
-    gCharaObj->tilesAddr2 = param->tilesAddr2;
-    gCharaObj->tileCount2 = param->tileCount2;
-    gCharaObj->tilesAddr3 = param->tilesAddr3;
-    gCharaObj->tileCount3 = param->tileCount3;
-    gCharaObj->paletteAddr = param->paletteAddr;
-    gCharaObj->paletteSize = param->paletteSize;
-    gCharaObj->tilesAddr4 = param->tilesAddr4;
-    gCharaObj->tileCount4 = param->tileCount4;
-    gCharaObj->paletteAddr2 = param->paletteAddr2;
-    gCharaObj->paletteSize2 = param->paletteSize2;
-    gCharaObj->x = param->x;
-    gCharaObj->y = param->y;
-    gCharaObj->z = param->z;
-    gCharaObj->fadeLevel = 0;
-    gCharaObj->bgFxVz = -76;
-    gCharaObj->fadeTick = 0;
-    gCharaObj->timer = 0;
-    gCharaObj->state = 0;
-    gCharaObj->callback = param->callback;
-    gCharaObj->prizeObj = param->prizeObj;
-    gCharaObj->flags = param->flags;
+    sCharaObj = EwramAlloc(sizeof(CharaObj));
+    sCharaObj->flags = 0;
+    sCharaObj->tilesAddr = param->tilesAddr;
+    sCharaObj->tileCount = param->tileCount;
+    sCharaObj->tilesAddr2 = param->tilesAddr2;
+    sCharaObj->tileCount2 = param->tileCount2;
+    sCharaObj->tilesAddr3 = param->tilesAddr3;
+    sCharaObj->tileCount3 = param->tileCount3;
+    sCharaObj->paletteAddr = param->paletteAddr;
+    sCharaObj->paletteSize = param->paletteSize;
+    sCharaObj->tilesAddr4 = param->tilesAddr4;
+    sCharaObj->tileCount4 = param->tileCount4;
+    sCharaObj->paletteAddr2 = param->paletteAddr2;
+    sCharaObj->paletteSize2 = param->paletteSize2;
+    sCharaObj->x = param->x;
+    sCharaObj->y = param->y;
+    sCharaObj->z = param->z;
+    sCharaObj->fadeLevel = 0;
+    sCharaObj->bgFxVz = -76;
+    sCharaObj->fadeTick = 0;
+    sCharaObj->timer = 0;
+    sCharaObj->state = 0;
+    sCharaObj->callback = param->callback;
+    sCharaObj->prizeObj = param->prizeObj;
+    sCharaObj->flags = param->flags;
 
     for (i = 0; i < 10; i++) {
-        gCharaObj->bankFadeEnabled[i] = 1;
+        sCharaObj->bankFadeEnabled[i] = 1;
     }
 
     for (i = 10; i < 32; i++) {
-        gCharaObj->bankFadeEnabled[i] = 0;
+        sCharaObj->bankFadeEnabled[i] = 0;
     }
 
-    idx = gCharaObj->paletteAddr >> 5;
+    idx = sCharaObj->paletteAddr >> 5;
 
-    if (gCharaObj->paletteSize == 32) {
-        gCharaObj->bankFadeEnabled[(s16)idx] = 1;
+    if (sCharaObj->paletteSize == 32) {
+        sCharaObj->bankFadeEnabled[(s16)idx] = 1;
     }
 
-    TaskPoolInit(&gCharaTaskPool, 4);
+    TaskPoolInit(&sCharaTaskPool, 4);
 }
 
 void CharaObjSetBankFadeEnabled(u16 a, u8 b) {
     if (a <= 31) {
-        gCharaObj->bankFadeEnabled[a] = b;
+        sCharaObj->bankFadeEnabled[a] = b;
     }
 }
 
@@ -1373,228 +1373,228 @@ u8 CharaObjUpdateDefeat() {
     MaskFadeArgs fade2;
     MaskFadeArgs fade3;
 
-    switch (gCharaObj->state) {
+    switch (sCharaObj->state) {
     case 0:
         if (!BgFxIsActive()) {
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
     case 1:
-        if (++gCharaObj->timer > 59) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 59) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 2:
-        BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
+        BgFxStartCharaDefeat(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
 
         for (i = 0; i < 32; i++) {
-            SetPaletteBankFadeEnabled(i, gCharaObj->bankFadeEnabled[i]);
+            SetPaletteBankFadeEnabled(i, sCharaObj->bankFadeEnabled[i]);
         }
 
-        gCharaObj->state++;
+        sCharaObj->state++;
         break;
     case 3:
-        CpuCopy16((void*)PLTT, gCharaObj->savedPalette, 0x400);
-        gCharaObj->state++;
+        CpuCopy16((void*)PLTT, sCharaObj->savedPalette, 0x400);
+        sCharaObj->state++;
         break;
     case 4:
-        gCharaObj->fadeLevel++;
-        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        sCharaObj->fadeLevel++;
+        FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
-        if (++gCharaObj->timer > 9) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 9) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 5:
-        gCharaObj->fadeLevel = 0;
-        gCharaObj->state++;
+        sCharaObj->fadeLevel = 0;
+        sCharaObj->state++;
         break;
     case 6:
-        if (++gCharaObj->timer > 89) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 89) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 7:
-        if (gCharaObj->fadeTick > 1) {
-            gCharaObj->fadeTick = 0;
-            gCharaObj->fadeLevel++;
+        if (sCharaObj->fadeTick > 1) {
+            sCharaObj->fadeTick = 0;
+            sCharaObj->fadeLevel++;
         }
 
-        gCharaObj->fadeTick++;
+        sCharaObj->fadeTick++;
 
-        if (gCharaObj->timer == 20) {
+        if (sCharaObj->timer == 20) {
             BgAnimStop();
             m4aSongNumStart(SONG_EF_BOSS_DEAD2);
-            fade0.tiles = (u8*)gCharaObj->tilesAddr;
-            fade0.tileCount = gCharaObj->tileCount;
+            fade0.tiles = (u8*)sCharaObj->tilesAddr;
+            fade0.tileCount = sCharaObj->tileCount;
             fade0.stepDelay = 1;
 
             if (fade0.tileCount != 0) {
-                TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade0);
+                TaskCreate(&sCharaTaskPool, &gTaskDescCharaMaskFade, &fade0);
             }
 
-            fade1.tiles = (u8*)gCharaObj->tilesAddr2;
-            fade1.tileCount = gCharaObj->tileCount2;
+            fade1.tiles = (u8*)sCharaObj->tilesAddr2;
+            fade1.tileCount = sCharaObj->tileCount2;
             fade1.stepDelay = 1;
 
             if (fade1.tileCount != 0) {
-                TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade1);
+                TaskCreate(&sCharaTaskPool, &gTaskDescCharaMaskFade, &fade1);
             }
 
-            fade2.tiles = (u8*)gCharaObj->tilesAddr3;
-            fade2.tileCount = gCharaObj->tileCount3;
+            fade2.tiles = (u8*)sCharaObj->tilesAddr3;
+            fade2.tileCount = sCharaObj->tileCount3;
             fade2.stepDelay = 1;
 
             if (fade2.tileCount != 0) {
-                TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade2);
+                TaskCreate(&sCharaTaskPool, &gTaskDescCharaMaskFade, &fade2);
             }
 
-            fade3.tiles = (u8*)gCharaObj->tilesAddr4;
-            fade3.tileCount = gCharaObj->tileCount4;
+            fade3.tiles = (u8*)sCharaObj->tilesAddr4;
+            fade3.tileCount = sCharaObj->tileCount4;
             fade3.stepDelay = 1;
 
             if (fade3.tileCount != 0) {
-                TaskCreate(&gCharaTaskPool, &gTaskDescCharaMaskFade, &fade3);
+                TaskCreate(&sCharaTaskPool, &gTaskDescCharaMaskFade, &fade3);
             }
         }
 
-        if (gCharaObj->paletteSize != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->paletteAddr, (u16*)gCharaObj->paletteAddr, gCharaObj->paletteSize, gCharaObj->fadeLevel);
+        if (sCharaObj->paletteSize != 0) {
+            FadePaletteToWhite((u16*)sCharaObj->paletteAddr, (u16*)sCharaObj->paletteAddr, sCharaObj->paletteSize, sCharaObj->fadeLevel);
         }
 
-        if (gCharaObj->paletteSize2 != 0) {
-            FadePaletteToWhite((u16*)gCharaObj->paletteAddr2, (u16*)gCharaObj->paletteAddr2, gCharaObj->paletteSize2, gCharaObj->fadeLevel);
+        if (sCharaObj->paletteSize2 != 0) {
+            FadePaletteToWhite((u16*)sCharaObj->paletteAddr2, (u16*)sCharaObj->paletteAddr2, sCharaObj->paletteSize2, sCharaObj->fadeLevel);
         }
 
-        if (++gCharaObj->timer > 39) {
-            gCharaObj->timer = 0;
+        if (++sCharaObj->timer > 39) {
+            sCharaObj->timer = 0;
             m4aSongNumStop(SONG_EF_BOSS_DEAD2);
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
     case 8:
-        gCharaObj->fadeLevel = 0;
-        gCharaObj->fadeTick = 0;
+        sCharaObj->fadeLevel = 0;
+        sCharaObj->fadeTick = 0;
         m4aSongNumStart(SONG_EF_BOSS_DEAD3);
         FadeStartOut(FADE_MODE_ADD_WHITE, 20);
         FadeLock();
-        gCharaObj->state++;
+        sCharaObj->state++;
         break;
     case 9:
-        if (gCharaObj->fadeTick > 1) {
-            gCharaObj->fadeTick = 0;
-            gCharaObj->fadeLevel++;
+        if (sCharaObj->fadeTick > 1) {
+            sCharaObj->fadeTick = 0;
+            sCharaObj->fadeLevel++;
         }
 
-        gCharaObj->fadeTick++;
+        sCharaObj->fadeTick++;
 
-        if (++gCharaObj->timer > 37) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 37) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 10:
-        if (++gCharaObj->timer > 20) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 20) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 11:
-        gCharaObj->fadeTick = 0;
+        sCharaObj->fadeTick = 0;
 
-        if (gCharaObj->callback != NULL) {
-            gCharaObj->callback();
+        if (sCharaObj->callback != NULL) {
+            sCharaObj->callback();
         }
 
-        gCharaObj->fadeLevel = 32;
-        gCharaObj->state++;
+        sCharaObj->fadeLevel = 32;
+        sCharaObj->state++;
         break;
     case 12:
-        FadeAllPalettesToWhite(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        FadeAllPalettesToWhite(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
-        if ((gCharaObj->fadeLevel -= 2) <= 0) {
-            gCharaObj->fadeLevel = 0;
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if ((sCharaObj->fadeLevel -= 2) <= 0) {
+            sCharaObj->fadeLevel = 0;
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 13:
-        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
-        if ((gCharaObj->fadeLevel += 2) > 11) {
-            gCharaObj->fadeLevel = 12;
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if ((sCharaObj->fadeLevel += 2) > 11) {
+            sCharaObj->fadeLevel = 12;
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 14:
-        prize.x = gCharaObj->x;
-        prize.y = gCharaObj->y;
-        prize.z = gCharaObj->z;
+        prize.x = sCharaObj->x;
+        prize.y = sCharaObj->y;
+        prize.z = sCharaObj->z;
         CreateBossPrizeCardTask(&gBtlWork->taskPools[0], &prize);
-        DropBossPrizes(gCharaObj->prizeObj);
+        DropBossPrizes(sCharaObj->prizeObj);
 
-        if ((gCharaObj->flags & 1) == 0) {
-            BgFxStartCharaDefeatEnd(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if ((sCharaObj->flags & 1) == 0) {
+            BgFxStartCharaDefeatEnd(sCharaObj->x, sCharaObj->y + sCharaObj->z - 0x1000);
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         } else {
-            gCharaObj->fadeLevel = 12;
-            gCharaObj->timer = 0;
-            gCharaObj->state = 19;
+            sCharaObj->fadeLevel = 12;
+            sCharaObj->timer = 0;
+            sCharaObj->state = 19;
         }
 
         break;
     case 15:
-        BgFxAddPosition(76, 0, gCharaObj->bgFxVz);
+        BgFxAddPosition(76, 0, sCharaObj->bgFxVz);
 
-        if (++gCharaObj->timer > 79) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 79) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 16:
-        gCharaObj->bgFxVz = 0;
-        gCharaObj->state++;
+        sCharaObj->bgFxVz = 0;
+        sCharaObj->state++;
         break;
     case 17:
-        BgFxAddPosition(0, 0, gCharaObj->bgFxVz);
-        gCharaObj->bgFxVz -= 25;
+        BgFxAddPosition(0, 0, sCharaObj->bgFxVz);
+        sCharaObj->bgFxVz -= 25;
 
-        if (++gCharaObj->timer > 39) {
-            gCharaObj->timer = 0;
-            gCharaObj->state++;
+        if (++sCharaObj->timer > 39) {
+            sCharaObj->timer = 0;
+            sCharaObj->state++;
         }
 
         break;
     case 18:
         BgAnimStop();
-        gCharaObj->fadeLevel = 12;
-        gCharaObj->state++;
+        sCharaObj->fadeLevel = 12;
+        sCharaObj->state++;
         break;
     case 19:
-        gCharaObj->fadeLevel--;
-        FadeAllPalettesToBlack(gCharaObj->savedPalette, gCharaObj->fadeLevel);
+        sCharaObj->fadeLevel--;
+        FadeAllPalettesToBlack(sCharaObj->savedPalette, sCharaObj->fadeLevel);
 
-        if (gCharaObj->fadeLevel <= 0) {
-            gCharaObj->fadeLevel = 0;
-            gCharaObj->timer = 0;
+        if (sCharaObj->fadeLevel <= 0) {
+            sCharaObj->fadeLevel = 0;
+            sCharaObj->timer = 0;
             CharaObjFree();
-            gCharaObj->state++;
+            sCharaObj->state++;
         }
 
         break;
@@ -1602,8 +1602,8 @@ u8 CharaObjUpdateDefeat() {
         return 0;
     }
 
-    TaskPoolUpdate(&gCharaTaskPool);
-    TaskPoolDraw(&gCharaTaskPool);
+    TaskPoolUpdate(&sCharaTaskPool);
+    TaskPoolDraw(&sCharaTaskPool);
     return 1;
 }
 

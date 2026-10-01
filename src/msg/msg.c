@@ -15,11 +15,11 @@
 #include "gba/macro.h"
 #include <stddef.h>
 
-static SpriteTextLine* gSpriteTextLines;
+static SpriteTextLine* sSpriteTextLines;
 static TextGlyphSprite* sMsgGlyphSprites;
 static TextGlyphSprite* sCardMsgGlyphSprites;
 #ifndef VERSION_EU
-static BgTextLine* gBgTextLines;
+static BgTextLine* sBgTextLines;
 #endif
 static u8 sTextEntryCount;
 static u8 sBgTextDrawQueued;
@@ -55,17 +55,17 @@ void InitSpriteTextLines() {
     u8 i;
     u8 j;
 
-    gSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 45);
+    sSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 45);
     sTextEntryCount = 0;
 
     for (i = 0; i < 45; i++) {
-        gSpriteTextLines[i].x = 0;
-        gSpriteTextLines[i].y = 0;
-        gSpriteTextLines[i].palette = NULL;
-        gSpriteTextLines[i].length = 0;
+        sSpriteTextLines[i].x = 0;
+        sSpriteTextLines[i].y = 0;
+        sSpriteTextLines[i].palette = NULL;
+        sSpriteTextLines[i].length = 0;
 
         for (j = 0; j < 16; j++) {
-            gSpriteTextLines[i].glyphTiles[j] = NULL;
+            sSpriteTextLines[i].glyphTiles[j] = NULL;
         }
     }
 }
@@ -81,25 +81,25 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
         return;
     }
 
-    if (gSpriteTextLines == NULL) {
+    if (sSpriteTextLines == NULL) {
         return;
     }
 
-    gSpriteTextLines[sTextEntryCount].x = x;
-    gSpriteTextLines[sTextEntryCount].y = y;
-    gSpriteTextLines[sTextEntryCount].font = 0;
+    sSpriteTextLines[sTextEntryCount].x = x;
+    sSpriteTextLines[sTextEntryCount].y = y;
+    sSpriteTextLines[sTextEntryCount].font = 0;
     len = GetStringLength(s);
 
     if (len > 15) {
         len = 16;
     }
 
-    gSpriteTextLines[sTextEntryCount].length = len;
+    sSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0; i < len; i++) {
         s16 c;
 
-        gSpriteTextLines[sTextEntryCount].glyphTiles[i] = AllocSpriteFrameTiles(32);
+        sSpriteTextLines[sTextEntryCount].glyphTiles[i] = AllocSpriteFrameTiles(32);
         c = s[i];
 
         if ((u8)(c - 48) <= 9) {
@@ -146,10 +146,10 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
             idx = 44;
         }
 
-        UpdateSpriteFrameTiles(gSpriteTextLines[sTextEntryCount].glyphTiles[i], gUnk_09EEC538[idx], gUnk_090D4180);
+        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[i], gUnk_09EEC538[idx], gUnk_090D4180);
     }
 
-    gSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gUnk_08F69BE4, 32);
     sTextEntryCount++;
 }
 
@@ -165,20 +165,20 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
         return;
     }
 
-    if (gSpriteTextLines == NULL) {
+    if (sSpriteTextLines == NULL) {
         return;
     }
 
-    gSpriteTextLines[sTextEntryCount].x = x;
-    gSpriteTextLines[sTextEntryCount].y = y;
-    gSpriteTextLines[sTextEntryCount].font = 1;
+    sSpriteTextLines[sTextEntryCount].x = x;
+    sSpriteTextLines[sTextEntryCount].y = y;
+    sSpriteTextLines[sTextEntryCount].font = 1;
     len = GetStringLength(s);
 
     if (len > 15) {
         len = 16;
     }
 
-    gSpriteTextLines[sTextEntryCount].length = len;
+    sSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0, k = 0; i < len; i++) {
         s32 c = s[i];
@@ -191,12 +191,12 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
             idx = c - 52;
         }
 
-        gSpriteTextLines[sTextEntryCount].glyphTiles[k] = AllocSpriteFrameTiles(128);
-        UpdateSpriteFrameTiles(gSpriteTextLines[sTextEntryCount].glyphTiles[k], gUnk_09EEB204[idx], gUnk_090AB5B2);
+        sSpriteTextLines[sTextEntryCount].glyphTiles[k] = AllocSpriteFrameTiles(128);
+        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[k], gUnk_09EEB204[idx], gUnk_090AB5B2);
         k++;
     }
 
-    gSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(&gUnk_096147B8[0x40], 32);
+    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(&gUnk_096147B8[0x40], 32);
     sTextEntryCount++;
 }
 #endif
@@ -273,7 +273,7 @@ void DrawSpriteTextLines() {
     step = 8;
 
     for (i = 0; i < sTextEntryCount; i++) {
-        switch (gSpriteTextLines[i].font) {
+        switch (sSpriteTextLines[i].font) {
         case 0:
             step = 8;
             break;
@@ -282,15 +282,15 @@ void DrawSpriteTextLines() {
             break;
         }
 
-        x = gSpriteTextLines[i].x;
-        y = gSpriteTextLines[i].y;
+        x = sSpriteTextLines[i].x;
+        y = sSpriteTextLines[i].y;
 
-        for (j = 0; j < gSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + j * step, y >> 8, NULL, gSpriteTextLines[i].glyphTiles[j], gSpriteTextLines[i].palette, NULL, 0, 50);
-            ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
+        for (j = 0; j < sSpriteTextLines[i].length; j++) {
+            DrawSprite((x >> 8) + j * step, y >> 8, NULL, sSpriteTextLines[i].glyphTiles[j], sSpriteTextLines[i].palette, NULL, 0, 50);
+            ReleaseObjTiles(sSpriteTextLines[i].glyphTiles[j]);
         }
 
-        ReleaseObjPalette(gSpriteTextLines[i].palette);
+        ReleaseObjPalette(sSpriteTextLines[i].palette);
     }
 
     sTextEntryCount = 0;
@@ -301,12 +301,12 @@ void ClearSpriteTextLines() {
     u8 j;
 
     for (i = 0; i < sTextEntryCount; i++) {
-        gSpriteTextLines[i].x = 0;
-        gSpriteTextLines[i].y = 0;
-        ReleaseObjPalette(gSpriteTextLines[i].palette);
+        sSpriteTextLines[i].x = 0;
+        sSpriteTextLines[i].y = 0;
+        ReleaseObjPalette(sSpriteTextLines[i].palette);
 
-        for (j = 0; j < gSpriteTextLines[i].length; j++) {
-            ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
+        for (j = 0; j < sSpriteTextLines[i].length; j++) {
+            ReleaseObjTiles(sSpriteTextLines[i].glyphTiles[j]);
         }
     }
 
@@ -316,46 +316,46 @@ void ClearSpriteTextLines() {
 void FreeSpriteTextLines() {
     ClearSpriteTextLines();
 
-    if (gSpriteTextLines != NULL) {
-        EwramFree(gSpriteTextLines);
+    if (sSpriteTextLines != NULL) {
+        EwramFree(sSpriteTextLines);
     }
 
-    gSpriteTextLines = NULL;
+    sSpriteTextLines = NULL;
 }
 
 #ifndef VERSION_EU
 void* InitSpriteTextSlots(s32 a) {
     u8 i;
     u8 j;
-    gSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 24);
+    sSpriteTextLines = EwramAlloc(sizeof(SpriteTextLine) * 24);
     sTextEntryCount = 0;
 
     for (i = 0; i < 24; i++) {
-        gSpriteTextLines[i].x = 0;
-        gSpriteTextLines[i].y = 0;
-        gSpriteTextLines[i].palette = NULL;
-        gSpriteTextLines[i].length = 0;
-        gSpriteTextLines[i].visible = 0;
-        gSpriteTextLines[i].unk_53 = 0;
+        sSpriteTextLines[i].x = 0;
+        sSpriteTextLines[i].y = 0;
+        sSpriteTextLines[i].palette = NULL;
+        sSpriteTextLines[i].length = 0;
+        sSpriteTextLines[i].visible = 0;
+        sSpriteTextLines[i].unk_53 = 0;
 
         for (j = 0; j < 16; j++) {
-            gSpriteTextLines[i].glyphTiles[j] = NULL;
+            sSpriteTextLines[i].glyphTiles[j] = NULL;
         }
 
         switch (a) {
         case 0:
-            gSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614718, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614718, 32);
             break;
         case 1:
-            gSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614738, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614738, 32);
             break;
         case 2:
-            gSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614758, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614758, 32);
             break;
         }
     }
 
-    return gSpriteTextLines->palette;
+    return sSpriteTextLines->palette;
 }
 #endif
 
@@ -374,16 +374,16 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
         return;
     }
 
-    if (gSpriteTextLines == NULL) {
+    if (sSpriteTextLines == NULL) {
         return;
     }
 
-    gSpriteTextLines[slot].x = x;
-    gSpriteTextLines[slot].y = y;
-    gSpriteTextLines[slot].font = 1;
-    gSpriteTextLines[slot].visible = 1;
-    gSpriteTextLines[slot].unk_53 = i;
-    gSpriteTextLines[slot].useAlternatePalette = a;
+    sSpriteTextLines[slot].x = x;
+    sSpriteTextLines[slot].y = y;
+    sSpriteTextLines[slot].font = 1;
+    sSpriteTextLines[slot].visible = 1;
+    sSpriteTextLines[slot].unk_53 = i;
+    sSpriteTextLines[slot].useAlternatePalette = a;
 
     while (*s != 0) {
         u16 v;
@@ -761,18 +761,18 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             break;
         }
 
-        if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
-            ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
+        if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
+            ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
         g = ((u16*)gUnk_09EEB204[g])[3];
 
         switch (kind) {
         case 0:
-            gSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[g * 32], 128);
+            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[g * 32], 128);
             break;
         case 1:
-            gSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090B3FBE[g * 32], 128);
+            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090B3FBE[g * 32], 128);
             break;
         }
 
@@ -781,13 +781,13 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
     }
 
     for (j = i; j < 16; j++) {
-        if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
-            ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
-            gSpriteTextLines[slot].glyphTiles[j] = NULL;
+        if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
+            ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
+            sSpriteTextLines[slot].glyphTiles[j] = NULL;
         }
     }
 
-    gSpriteTextLines[slot].length = i;
+    sSpriteTextLines[slot].length = i;
 }
 #endif
 
@@ -817,15 +817,15 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
         return;
     }
 
-    if (gSpriteTextLines == NULL) {
+    if (sSpriteTextLines == NULL) {
         return;
     }
 
-    gSpriteTextLines[slot].x = x;
-    gSpriteTextLines[slot].y = y;
-    gSpriteTextLines[slot].font = 2;
-    gSpriteTextLines[slot].visible = 1;
-    gSpriteTextLines[slot].useAlternatePalette = a;
+    sSpriteTextLines[slot].x = x;
+    sSpriteTextLines[slot].y = y;
+    sSpriteTextLines[slot].font = 2;
+    sSpriteTextLines[slot].visible = 1;
+    sSpriteTextLines[slot].useAlternatePalette = a;
     len = GetStringLength(s);
 
     if (len > 15) {
@@ -849,25 +849,25 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
             idx = (u8)(s[i] + 196);
         }
 
-        if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
-            ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
+        if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
+            ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
         idx = ((u8*)gUnk_09EEB204[idx])[6];
-        gSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[idx * 32], 128);
+        sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[idx * 32], 128);
         j++;
     }
 
     len = count;
 
     for (j = len; j < 16; j++) {
-        if (gSpriteTextLines[slot].glyphTiles[j] != NULL) {
-            ReleaseObjTiles(gSpriteTextLines[slot].glyphTiles[j]);
-            gSpriteTextLines[slot].glyphTiles[j] = NULL;
+        if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
+            ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
+            sSpriteTextLines[slot].glyphTiles[j] = NULL;
         }
     }
 
-    gSpriteTextLines[slot].length = len;
+    sSpriteTextLines[slot].length = len;
 }
 #endif
 
@@ -881,26 +881,26 @@ void DrawSpriteTextSlots() {
     u8 dx;
 
     for (i = 0; i < 24; i++) {
-        if (gSpriteTextLines[i].visible != 1) {
+        if (sSpriteTextLines[i].visible != 1) {
             continue;
         }
 
-        if (gSpriteTextLines[i].useAlternatePalette == 0) {
-            g = gSpriteTextLines[i].palette;
+        if (sSpriteTextLines[i].useAlternatePalette == 0) {
+            g = sSpriteTextLines[i].palette;
         } else {
-            g = gSpriteTextLines[i].alternatePalette;
+            g = sSpriteTextLines[i].alternatePalette;
         }
 
-        x = gSpriteTextLines[i].x;
-        y = gSpriteTextLines[i].y;
+        x = sSpriteTextLines[i].x;
+        y = sSpriteTextLines[i].y;
         dx = 0;
 
-        for (j = 0; j < gSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + dx, y >> 8, gUnk_09EEB204[0], gSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
+        for (j = 0; j < sSpriteTextLines[i].length; j++) {
+            DrawSprite((x >> 8) + dx, y >> 8, gUnk_09EEB204[0], sSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
 
-            if (gSpriteTextLines[i].font == 1) {
+            if (sSpriteTextLines[i].font == 1) {
                 dx += 10;
-            } else if (gSpriteTextLines[i].font == 2) {
+            } else if (sSpriteTextLines[i].font == 2) {
                 dx += 10;
             }
         }
@@ -910,18 +910,18 @@ void DrawSpriteTextSlots() {
 
 #ifndef VERSION_EU
 void HideSpriteTextSlot(u8 i) {
-    gSpriteTextLines[i].visible = 0;
+    sSpriteTextLines[i].visible = 0;
 }
 
 void ShowSpriteTextSlot(u8 i) {
-    if (gSpriteTextLines[i].length != 0) {
-        gSpriteTextLines[i].visible = 1;
+    if (sSpriteTextLines[i].length != 0) {
+        sSpriteTextLines[i].visible = 1;
     }
 }
 
 void SetSpriteTextSlotPosition(s32 x, s32 y, u8 i) {
-    gSpriteTextLines[i].x = x;
-    gSpriteTextLines[i].y = y;
+    sSpriteTextLines[i].x = x;
+    sSpriteTextLines[i].y = y;
 }
 #endif
 
@@ -932,17 +932,17 @@ void FreeSpriteTextSlots() {
 
     for (i = 0; i < 24; i++) {
         for (j = 0; j < 16; j++) {
-            if (gSpriteTextLines[i].glyphTiles[j] != NULL) {
-                ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
+            if (sSpriteTextLines[i].glyphTiles[j] != NULL) {
+                ReleaseObjTiles(sSpriteTextLines[i].glyphTiles[j]);
             }
         }
 
-        FadeSetPaletteExcluded(gSpriteTextLines[i].palette->index, 0);
-        ReleaseObjPalette(gSpriteTextLines[i].palette);
+        FadeSetPaletteExcluded(sSpriteTextLines[i].palette->index, 0);
+        ReleaseObjPalette(sSpriteTextLines[i].palette);
     }
 
-    EwramFree(gSpriteTextLines);
-    gSpriteTextLines = NULL;
+    EwramFree(sSpriteTextLines);
+    sSpriteTextLines = NULL;
 }
 #endif
 
@@ -952,18 +952,18 @@ void InitBgTextLines(u8 bg) {
     u8 j;
     GetBgCharBase(bg);
     GetBgScreenBase(bg);
-    gBgTextLines = EwramAlloc(sizeof(BgTextLine) * 10);
+    sBgTextLines = EwramAlloc(sizeof(BgTextLine) * 10);
 
     for (i = 0; i < 10; i++) {
-        gBgTextLines[i].x = 0;
-        gBgTextLines[i].y = 0;
-        gBgTextLines[i].length = 0;
-        gBgTextLines[i].bg = bg;
-        gBgTextLines[i].glyphHeight = 16;
-        gBgTextLines[i].dirty = 0;
+        sBgTextLines[i].x = 0;
+        sBgTextLines[i].y = 0;
+        sBgTextLines[i].length = 0;
+        sBgTextLines[i].bg = bg;
+        sBgTextLines[i].glyphHeight = 16;
+        sBgTextLines[i].dirty = 0;
 
         for (j = 0; j < 16; j++) {
-            gBgTextLines[i].glyphs[j] = 0;
+            sBgTextLines[i].glyphs[j] = 0;
         }
     }
 
@@ -1002,15 +1002,15 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
         return;
     }
 
-    if (gBgTextLines == NULL) {
+    if (sBgTextLines == NULL) {
         return;
     }
 
-    gBgTextLines[e].x = a;
-    gBgTextLines[e].y = b;
-    gBgTextLines[e].glyphHeight = c;
-    gBgTextLines[e].dirty = 1;
-    gBgTextLines[e].paletteIndex = f;
+    sBgTextLines[e].x = a;
+    sBgTextLines[e].y = b;
+    sBgTextLines[e].glyphHeight = c;
+    sBgTextLines[e].dirty = 1;
+    sBgTextLines[e].paletteIndex = f;
 
     while (*s != 0) {
         w = *(u16*)s;
@@ -1091,12 +1091,12 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
             }
         }
 
-        gBgTextLines[e].glyphs[j] = glyph;
+        sBgTextLines[e].glyphs[j] = glyph;
         j++;
         i++;
     }
 
-    gBgTextLines[e].length = i;
+    sBgTextLines[e].length = i;
 
     if (sBgTextDrawQueued == 0) {
         QueueVTransCallback(DrawBgTextLines);
@@ -1127,24 +1127,24 @@ void DrawBgTextLines() {
     u16 tile;
 
     for (n = 0; n < 10; n++) {
-        if (gBgTextLines[n].dirty != 1) {
+        if (sBgTextLines[n].dirty != 1) {
             continue;
         }
 
-        gBgTextLines[n].dirty = 0;
+        sBgTextLines[n].dirty = 0;
 
-        for (k = 0; k < gBgTextLines[n].length; k++) {
-            glyph = gBgTextLines[n].glyphs[k];
-            pal = gBgTextLines[n].paletteIndex;
-            h = gBgTextLines[n].glyphHeight;
+        for (k = 0; k < sBgTextLines[n].length; k++) {
+            glyph = sBgTextLines[n].glyphs[k];
+            pal = sBgTextLines[n].paletteIndex;
+            h = sBgTextLines[n].glyphHeight;
 
             if (h > 8) {
-                tx = (k * 12 + gBgTextLines[n].x) >> 3;
-                ty = gBgTextLines[n].y >> 3;
-                sx = k * 12 + gBgTextLines[n].x - tx * 8;
-                sy = gBgTextLines[n].y - ty * 8;
-                dst = (u8*)GetBgCharBase(gBgTextLines[n].bg) + (tx + 1) * 32 + ty * 1024;
-                screen = GetBgScreenBase(gBgTextLines[n].bg);
+                tx = (k * 12 + sBgTextLines[n].x) >> 3;
+                ty = sBgTextLines[n].y >> 3;
+                sx = k * 12 + sBgTextLines[n].x - tx * 8;
+                sy = sBgTextLines[n].y - ty * 8;
+                dst = (u8*)GetBgCharBase(sBgTextLines[n].bg) + (tx + 1) * 32 + ty * 1024;
+                screen = GetBgScreenBase(sBgTextLines[n].bg);
                 tile = ((u16*)gUnk_09EEB204[glyph])[3];
                 src = (u16*)&gUnk_090AB5B2[tile * 32];
                 p = dst;
@@ -1258,12 +1258,12 @@ void DrawBgTextLines() {
                     }
                 }
             } else {
-                tx = (k * 8 + gBgTextLines[n].x) >> 3;
-                ty = gBgTextLines[n].y >> 3;
-                sx = k * 8 + gBgTextLines[n].x - tx * 8;
-                sy = gBgTextLines[n].y - ty * 8;
-                dst = (u8*)GetBgCharBase(gBgTextLines[n].bg) + (tx + 1) * 32 + ty * 1024;
-                screen = GetBgScreenBase(gBgTextLines[n].bg);
+                tx = (k * 8 + sBgTextLines[n].x) >> 3;
+                ty = sBgTextLines[n].y >> 3;
+                sx = k * 8 + sBgTextLines[n].x - tx * 8;
+                sy = sBgTextLines[n].y - ty * 8;
+                dst = (u8*)GetBgCharBase(sBgTextLines[n].bg) + (tx + 1) * 32 + ty * 1024;
+                screen = GetBgScreenBase(sBgTextLines[n].bg);
                 tile = ((u16*)gUnk_09EEB188[glyph])[3];
                 src = (u16*)&gUnk_090AA506[tile * 32];
                 p = dst;
@@ -1324,8 +1324,8 @@ void DrawBgTextLines() {
 
 #ifndef VERSION_EU
 void FreeBgTextLines() {
-    EwramFree(gBgTextLines);
-    gBgTextLines = NULL;
+    EwramFree(sBgTextLines);
+    sBgTextLines = NULL;
 }
 #endif
 

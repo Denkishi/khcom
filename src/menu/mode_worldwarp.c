@@ -38,7 +38,7 @@ static struct ObjPalette* sWorldWarpBarPalette;
 static struct ObjTiles* sWorldWarpHighlightTiles;
 static struct ObjPalette* sWorldWarpHighlightPalette;
 static AnimState sWorldWarpHighlightAnim;
-static AnimState gUnk_02035538;
+static AnimState sUnk_02035538;
 static struct ObjTiles* sWorldWarpCursorTiles;
 static struct ObjPalette* sWorldWarpCursorPalette;
 static AnimState sWorldWarpCursorAnim;
@@ -419,7 +419,7 @@ void WorldWarpDraw() {
 #endif
     }
 
-    DrawSprite(0xB0, 0x1A, AnimUpdate(&gUnk_02035538), sWorldWarpHighlightTiles, sWorldWarpHighlightPalette, NULL, 0, 2);
+    DrawSprite(0xB0, 0x1A, AnimUpdate(&sUnk_02035538), sWorldWarpHighlightTiles, sWorldWarpHighlightPalette, NULL, 0, 2);
 
     if (sWorldWarpIconSprites[sWorldWarpCursor] != NULL) {
 #ifdef VERSION_EU
@@ -666,8 +666,8 @@ void mode_worldwarp_0() {
     sWorldWarpHighlightTiles = LoadObjTiles(gUnk_0999FA20, 0x680);
     AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
     AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
-    AnimInit(&gUnk_02035538, gUnk_09EF9898, gUnk_09EF9870);
-    AnimStart(&gUnk_02035538, 1, ANIM_FLAG_LOOP);
+    AnimInit(&sUnk_02035538, gUnk_09EF9898, gUnk_09EF9870);
+    AnimStart(&sUnk_02035538, 1, ANIM_FLAG_LOOP);
     sWorldWarpCursorPalette = LoadObjPalette(gUnk_09A3D5BC, 32);
     sWorldWarpCursorTiles = LoadObjTiles(gUnk_099A012C, 192);
     AnimInit(&sWorldWarpCursorAnim, gUnk_09EF98B0, gUnk_09EF98A0);

@@ -217,8 +217,8 @@ static s16 sMoogleShopPackCursor;
 static s16 sMoogleShopPacks[4][4][2];
 static u16 sMooglePackCardIds[5];
 static s16 sMooglePackCardCursor;
-static u16 gMooglePackBoughtFlags[32];
-static u16 gMoogleFreePackFlags[2];
+static u16 sMooglePackBoughtFlags[32];
+static u16 sMoogleFreePackFlags[2];
 static struct ObjTiles* sMoogleShopCursorTiles;
 static struct ObjPalette* sMoogleShopCursorPalette;
 static AnimState sMoogleShopCursorAnim;
@@ -234,11 +234,11 @@ void MoogleShopClearFlags() {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        gMooglePackBoughtFlags[i] = 0;
+        sMooglePackBoughtFlags[i] = 0;
     }
 
     for (i = 0; i < 2; i++) {
-        gMoogleFreePackFlags[i] = 0;
+        sMoogleFreePackFlags[i] = 0;
     }
 }
 
@@ -247,11 +247,11 @@ void MoogleShopSaveFlags(void* a) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        p[i] = gMooglePackBoughtFlags[i];
+        p[i] = sMooglePackBoughtFlags[i];
     }
 
     for (i = 0; i < 2; i++) {
-        p[i + 32] = gMoogleFreePackFlags[i];
+        p[i + 32] = sMoogleFreePackFlags[i];
     }
 }
 
@@ -260,11 +260,11 @@ void MoogleShopLoadFlags(void* a) {
     s32 i;
 
     for (i = 0; i < 32; i++) {
-        gMooglePackBoughtFlags[i] = p[i];
+        sMooglePackBoughtFlags[i] = p[i];
     }
 
     for (i = 0; i < 2; i++) {
-        gMoogleFreePackFlags[i] = p[i + 32];
+        sMoogleFreePackFlags[i] = p[i + 32];
     }
 }
 
@@ -273,7 +273,7 @@ void SetMooglePackBought(u16 a, u16 b, u16 c) {
     v = a * 16 + b * 4 + c;
 
     if (v <= 0x1FF) {
-        gMooglePackBoughtFlags[v >> 4] |= 1 << (v & 15);
+        sMooglePackBoughtFlags[v >> 4] |= 1 << (v & 15);
     }
 }
 
@@ -282,7 +282,7 @@ void ClearMooglePackBought(u16 a, u16 b, u16 c) {
     v = a * 16 + b * 4 + c;
 
     if (v <= 0x1FF) {
-        gMooglePackBoughtFlags[v >> 4] &= ~(1 << (v & 15));
+        sMooglePackBoughtFlags[v >> 4] &= ~(1 << (v & 15));
     }
 }
 
@@ -291,7 +291,7 @@ u8 IsMooglePackBought(u16 a, u16 b, u16 c) {
     v = a * 16 + b * 4 + c;
 
     if (v <= 0x1FF) {
-        return gMooglePackBoughtFlags[v >> 4] >> (v & 15) & 1;
+        return sMooglePackBoughtFlags[v >> 4] >> (v & 15) & 1;
     }
 
     return 0;
@@ -299,19 +299,19 @@ u8 IsMooglePackBought(u16 a, u16 b, u16 c) {
 
 void SetMoogleFreePackFlag(u16 a) {
     if (a <= 31) {
-        gMoogleFreePackFlags[a >> 4] |= 1 << (a & 15);
+        sMoogleFreePackFlags[a >> 4] |= 1 << (a & 15);
     }
 }
 
 void ClearMoogleFreePackFlag(u16 a) {
     if (a <= 31) {
-        gMoogleFreePackFlags[a >> 4] &= ~(1 << (a & 15));
+        sMoogleFreePackFlags[a >> 4] &= ~(1 << (a & 15));
     }
 }
 
 u8 GetMoogleFreePackFlag(u16 a) {
     if (a <= 31) {
-        return gMoogleFreePackFlags[a >> 4] >> (a & 15) & 1;
+        return sMoogleFreePackFlags[a >> 4] >> (a & 15) & 1;
     }
 
     return 0;

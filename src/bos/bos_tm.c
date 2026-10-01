@@ -32,11 +32,11 @@ TaskDesc gTaskDescBosTm = {
     sizeof(TmWork),
 };
 
-static Task* gBosTmBodyTask;
-static Task* gBosTmArmTask;
-static Task* gBosTmFootTask;
-static Task* gBosTmTblTask;
-static TaskPool gBosTmTaskPool;
+static Task* sBosTmBodyTask;
+static Task* sBosTmArmTask;
+static Task* sBosTmFootTask;
+static Task* sBosTmTblTask;
+static TaskPool sBosTmTaskPool;
 
 void BosTmSetArmPositions(TmWork* w) {
     if (w->flags & TM_FLAG_FACING_LEFT) {
@@ -63,7 +63,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
         w->flags = TM_FLAG_IN_EVENT;
     }
 
-    TaskPoolInit(&gBosTmTaskPool, 4);
+    TaskPoolInit(&sBosTmTaskPool, 4);
 
     if (w->flags & TM_FLAG_IN_EVENT) {
         w->x = arg->x >> 8;
@@ -103,16 +103,16 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg) {
 
     if (w->flags & TM_FLAG_IN_EVENT) {
         w->state = 15;
-        gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
-        gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
+        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, w);
+        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, w);
+        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
     } else {
         w->state = 0;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&sBosTmBattleBackgroundDef);
-        gBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
-        gBosTmBodyTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmBody, w);
-        gBosTmFootTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        gBosTmArmTask = TaskCreate(&gBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
+        sBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
+        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, w);
+        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, w);
+        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
         gBtlWork->bossPriorityOffset = 10;
     }
 }
@@ -215,23 +215,23 @@ u8 task_bos_tm_1(TmWork* w) {
         }
     }
 
-    TaskPoolUpdate(&gBosTmTaskPool);
+    TaskPoolUpdate(&sBosTmTaskPool);
     BosTmSetArmPositions(w);
     w->stateTimer++;
     return 1;
 }
 
 void task_bos_tm_2(TmWork* w) {
-    TaskPoolDraw(&gBosTmTaskPool);
+    TaskPoolDraw(&sBosTmTaskPool);
 }
 
 void task_bos_tm_3(TmWork* w) {
-    TaskPoolDestroy(&gBosTmTaskPool);
+    TaskPoolDestroy(&sBosTmTaskPool);
 }
 
 void BosTmDestroyParts() {
-    TaskKill(&gBtlWork->taskPools[1], gBosTmTblTask);
-    TaskKill(&gBosTmTaskPool, gBosTmBodyTask);
-    TaskKill(&gBosTmTaskPool, gBosTmFootTask);
-    TaskKill(&gBosTmTaskPool, gBosTmArmTask);
+    TaskKill(&gBtlWork->taskPools[1], sBosTmTblTask);
+    TaskKill(&sBosTmTaskPool, sBosTmBodyTask);
+    TaskKill(&sBosTmTaskPool, sBosTmFootTask);
+    TaskKill(&sBosTmTaskPool, sBosTmArmTask);
 }

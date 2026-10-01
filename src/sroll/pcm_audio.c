@@ -19,10 +19,10 @@ static SoundEntry sPcmPlaybackConfigs[13] = {
     {0, 0, 0},
 };
 
-static s32 gPcmActiveBufferIndex;
-static s32 gPcmSamplesPerBuffer;
-static s8 gPcmOutputBufferA[0x2C0];
-static s8 gPcmOutputBufferB[0x2C0];
+static s32 sPcmActiveBufferIndex;
+static s32 sPcmSamplesPerBuffer;
+static s8 sPcmOutputBufferA[0x2C0];
+static s8 sPcmOutputBufferB[0x2C0];
 
 #define DMA_SOUND_FIFO                                                        \
     ((DMA_START_SPECIAL | DMA_32BIT | DMA_REPEAT | DMA_DEST_FIXED) << 16)
@@ -46,7 +46,7 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     u16 timerReload;
     s32 i;
 
-    if (!LookupPcmPlaybackConfig(sampleRate, &timerReload, (u32*)&gPcmSamplesPerBuffer)) {
+    if (!LookupPcmPlaybackConfig(sampleRate, &timerReload, (u32*)&sPcmSamplesPerBuffer)) {
         return 0;
     }
 
@@ -56,12 +56,12 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     REG_TM0CNT_L = timerReload;
     REG_DMA1CNT = DMA_SOUND_FIFO;
 
-    for (i = 0; i < gPcmSamplesPerBuffer; i++) {
-        gPcmOutputBufferA[i] = gPcmOutputBufferB[i] = 0;
+    for (i = 0; i < sPcmSamplesPerBuffer; i++) {
+        sPcmOutputBufferA[i] = sPcmOutputBufferB[i] = 0;
     }
 
-    gPcmActiveBufferIndex = 1;
-    REG_DMA1SAD = (s32)gPcmOutputBufferA;
+    sPcmActiveBufferIndex = 1;
+    REG_DMA1SAD = (s32)sPcmOutputBufferA;
     return 1;
 }
 
@@ -85,13 +85,13 @@ void PcmPlaybackUpdate() {
     src = GetDecodedAudioBuffer();
     pos = GetDecodedAudioReadPosition();
     REG_DMA1CNT ^= DMA_ENABLE << 16;
-    REG_DMA1SAD = (s32)(gPcmActiveBufferIndex == 1 ? gPcmOutputBufferB : gPcmOutputBufferA);
+    REG_DMA1SAD = (s32)(sPcmActiveBufferIndex == 1 ? sPcmOutputBufferB : sPcmOutputBufferA);
     REG_DMA1CNT ^= DMA_ENABLE << 16;
-    gPcmActiveBufferIndex = gPcmActiveBufferIndex == 1 ? 2 : 1;
-    dst = gPcmActiveBufferIndex == 1 ? gPcmOutputBufferB : gPcmOutputBufferA;
+    sPcmActiveBufferIndex = sPcmActiveBufferIndex == 1 ? 2 : 1;
+    dst = sPcmActiveBufferIndex == 1 ? sPcmOutputBufferB : sPcmOutputBufferA;
 
-    if (pos + gPcmSamplesPerBuffer <= 0x7FF) {
-        for (i = 0; i < gPcmSamplesPerBuffer; i++) {
+    if (pos + sPcmSamplesPerBuffer <= 0x7FF) {
+        for (i = 0; i < sPcmSamplesPerBuffer; i++) {
             dst[i] = src[pos] >> 8;
             pos++;
         }
@@ -102,10 +102,10 @@ void PcmPlaybackUpdate() {
             dst[i] = src[pos + i] >> 8;
         }
 
-        for (; i < gPcmSamplesPerBuffer; i++) {
+        for (; i < sPcmSamplesPerBuffer; i++) {
             dst[i] = src[pos + i - 0x800] >> 8;
         }
 
-        SetDecodedAudioReadPosition(pos + gPcmSamplesPerBuffer - 0x800);
+        SetDecodedAudioReadPosition(pos + sPcmSamplesPerBuffer - 0x800);
     }
 }

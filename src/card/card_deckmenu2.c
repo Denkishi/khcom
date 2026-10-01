@@ -2146,7 +2146,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* w, void* a) {
 }
 
 u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
-    u8 n;
+    s8 n;
     s16 v;
 
     if (w->popupActive != 0) {
@@ -2217,7 +2217,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
         w->timer = 1;
         MoveValueCursor(w, 64);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -2235,7 +2235,7 @@ u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* w, void* a) {
         w->timer = 1;
         MoveValueCursor(w, 128);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -2349,7 +2349,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode) {
 }
 
 u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
-    u8 n;
+    s8 n;
 
     if (w->popupActive != 0) {
         TaskPoolUpdate(&w->taskpool);
@@ -2418,7 +2418,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
         w->timer = 1;
         MoveValueCursor(w, 64);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -2436,7 +2436,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
         w->timer = 1;
         MoveValueCursor(w, 128);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -2448,9 +2448,9 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
     case B_BUTTON:
         SetDeckMenuFrameCursor(w, 0);
         n = w->savedCol;
-        w->cursorCol = (s8)n;
+        w->cursorCol = n;
         n = w->savedRow;
-        w->cursorRow = (s8)n;
+        w->cursorRow = n;
         w->x = gCollectionGridColumnX[w->cursorCol] << 8;
         w->y = gCollectionGridRowY[w->cursorRow] << 8;
         ShowCollectionCardPreview(w);

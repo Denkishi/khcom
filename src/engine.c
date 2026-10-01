@@ -729,8 +729,8 @@ void UpdateSpriteOam() {
     u16 attr0;
     u16 attr1;
     u16 attr2;
-    u16 width;
-    u16 height;
+    s16 width;
+    s16 height;
     s16 x;
     s16 y;
     s32 xx;
@@ -800,8 +800,8 @@ void UpdateSpriteOam() {
             EngineObjSize(attr0, attr1, &width, &height);
 
             if (affine != NULL) {
-                x += (s16)width >> 1;
-                y += (s16)height >> 1;
+                x += width >> 1;
+                y += height >> 1;
 
                 if (affine->angle != 0) {
                     s32 term;
@@ -818,12 +818,12 @@ void UpdateSpriteOam() {
 
                 x = xx >> 8;
                 y = yy >> 8;
-                x -= (s16)width >> 1;
-                y -= (s16)height >> 1;
+                x -= width >> 1;
+                y -= height >> 1;
 
                 if (affine->doubleSize != 0) {
-                    x -= (s16)width >> 1;
-                    y -= (s16)height >> 1;
+                    x -= width >> 1;
+                    y -= height >> 1;
                     width <<= 1;
                     height <<= 1;
                 }
@@ -855,7 +855,7 @@ void UpdateSpriteOam() {
             x += (s16)entry->x;
             y += (s16)entry->y;
 
-            if (x > 239 || x <= -(s16)width || y > 159 || y <= -(s16)height) {
+            if (x > 239 || x <= -width || y > 159 || y <= -height) {
                 if (((ObjTiles*)entry->tiles)->allocated != 0) {
                     tileOffset += GetObjTileCount(attr0, attr1);
                 }

@@ -342,7 +342,7 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* w, void* a) {
 }
 
 u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
-    u8 n;
+    s8 n;
     s32 m;
 
     if (w->popupActive != 0) {
@@ -405,7 +405,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
         w->timer = 4;
         MoveDeckExchangeValueCursor(w, 64);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -421,7 +421,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
         w->timer = 4;
         MoveDeckExchangeValueCursor(w, 128);
 
-        if ((s8)n != w->cursorRow) {
+        if (n != w->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 

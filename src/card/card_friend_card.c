@@ -642,7 +642,7 @@ s32 Heartless_card_1(PickupCardWork* w, void* a) {
 
 void PickupCardDraw(PickupCardWork* w) {
     s16 x;
-    s16 y;
+    u16 y;
     ObjAffine* affine;
     s16 v;
     u8 kind;
@@ -660,16 +660,16 @@ void PickupCardDraw(PickupCardWork* w) {
 
         affine = AllocObjAffine(w->angle, w->scaleX,
                                 w->scaleY, 0);
-        DrawSprite(x, (u16)y - 8,
+        DrawSprite(x, y - 8,
                    gCardBacks[w->cardDef->category].gfx,
                    gCardBattleState->tiles[w->cardDef->category],
                    w->palette, affine,
                    w->spriteFlags, w->priority);
-        DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
+        DrawSprite(x, y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
                    w->spriteFlags, w->priority + 1);
         kind = w->cardDef->value;
-        DrawSprite(x, (u16)y - 8, gUnk_09EE981C[kind],
+        DrawSprite(x, y - 8, gUnk_09EE981C[kind],
                    w->tiles3, w->palette, affine,
                    w->spriteFlags, w->priority - 2);
         v = 204 - ((w->floor - w->posZ) >> 7);
@@ -694,7 +694,7 @@ void PickupCardDraw(PickupCardWork* w) {
 
 void Heartless_card_2(PickupCardWork* w) {
     s16 x;
-    s16 y;
+    u16 y;
     ObjAffine* affine;
     s16 v;
 
@@ -711,11 +711,11 @@ void Heartless_card_2(PickupCardWork* w) {
 
         affine = AllocObjAffine(w->angle, w->scaleX,
                                 w->scaleY, 0);
-        DrawSprite(x, (u16)y - 8,
+        DrawSprite(x, y - 8,
                    gCardBacks[w->cardDef->category].gfx,
                    w->tiles, w->palette, affine,
                    w->spriteFlags, w->priority);
-        DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
+        DrawSprite(x, y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
                    w->spriteFlags, w->priority + 1);
         v = 204 - ((w->floor - w->posZ) >> 7);

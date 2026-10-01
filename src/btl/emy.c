@@ -3185,7 +3185,7 @@ u8 task_emy_25_1(EmyWork* work) {
     u16 r;
     s32 dx;
     u16 dy;
-    u16 e;
+    s16 e;
     u16 f;
 
     w = work;
@@ -3302,9 +3302,9 @@ u8 task_emy_25_1(EmyWork* work) {
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= (s16)e << 8;
+                act->x -= e << 8;
             } else {
-                act->x += (s16)e << 8;
+                act->x += e << 8;
             }
 
             act->y -= (s16)f << 8;

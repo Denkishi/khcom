@@ -2743,12 +2743,12 @@ void StepReloadGageSine(ReloadGauge* p) {
 }
 
 void InitReloadGageCounterAnim(ReloadGauge* p, void* a, u8 b, s32 count) {
-    u8 c = count;
+    s8 c = count;
 
     AnimInit(&p->anim, gReloadCounterAnims[b], gReloadCounterFrames[b]);
 
-    if ((s8)c >= 0) {
-        AnimStart(&p->anim, (s8)c, 0);
+    if (c >= 0) {
+        AnimStart(&p->anim, c, 0);
     } else {
         AnimStart(&p->anim, 0, 0);
     }

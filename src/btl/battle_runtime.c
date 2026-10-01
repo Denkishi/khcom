@@ -649,7 +649,7 @@ void _08019CB4() {
     s32 i;
     s32 changed;
     s32 busy;
-    u8 count;
+    s8 count;
     BtlPrizeArgs pos;
 
     player = gBtlWork->actor;
@@ -1048,7 +1048,7 @@ void _08019CB4() {
 
         if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                if (gBtlWork->stockMove >= (s8)count) {
+                if (gBtlWork->stockMove >= count) {
                     gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
                 }
 
@@ -1058,7 +1058,7 @@ void _08019CB4() {
                     EndCardPlay();
                 }
             } else {
-                if (gRikuBtlWork->stockMove >= (s8)count) {
+                if (gRikuBtlWork->stockMove >= count) {
                     gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
                 }
 
@@ -1069,7 +1069,7 @@ void _08019CB4() {
                 }
             }
         } else {
-            if (gBtlWork->stockMove >= (s8)count) {
+            if (gBtlWork->stockMove >= count) {
                 gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
             }
 
@@ -1086,27 +1086,27 @@ void _08019CB4() {
 }
 
 u32 ClampBattlePosition(s32* px, s32* py, s32 radiusX, s32 radiusY) {
-    u16 rx = radiusX;
-    u16 ry = radiusY;
+    s16 rx = radiusX;
+    s16 ry = radiusY;
     u8 r = 0;
 
-    if (*py < (gBtlWork->yMin - (s16)ry) << 8) {
-        *py = (gBtlWork->yMin - (s16)ry) << 8;
+    if (*py < (gBtlWork->yMin - ry) << 8) {
+        *py = (gBtlWork->yMin - ry) << 8;
         r = 3;
     }
 
-    if (*py > (gBtlWork->yMax + (s16)ry) << 8) {
-        *py = (gBtlWork->yMax + (s16)ry) << 8;
+    if (*py > (gBtlWork->yMax + ry) << 8) {
+        *py = (gBtlWork->yMax + ry) << 8;
         r = 4;
     }
 
-    if (*px < (gBtlWork->xMin - (s16)rx) << 8) {
-        *px = (gBtlWork->xMin - (s16)rx) << 8;
+    if (*px < (gBtlWork->xMin - rx) << 8) {
+        *px = (gBtlWork->xMin - rx) << 8;
         r = 1;
     }
 
-    if (*px > (gBtlWork->xMax + (s16)rx) << 8) {
-        *px = (gBtlWork->xMax + (s16)rx) << 8;
+    if (*px > (gBtlWork->xMax + rx) << 8) {
+        *px = (gBtlWork->xMax + rx) << 8;
         r = 2;
     }
 

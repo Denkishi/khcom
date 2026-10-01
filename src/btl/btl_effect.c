@@ -2608,10 +2608,10 @@ void BgFxStartTrinityLimitCharge(s32 x, s32 y, s32 z) {
 void BgFxUpdateTrinityLimitBlast() {
     switch (gBgFx->unk_26) {
     case 0: {
-        u16 t = gBgFx->unk_08;
+        s16 t = gBgFx->unk_08;
 
-        if ((s16)t <= 64) {
-            SetBlendAlpha(16, (s16)t >> 2);
+        if (t <= 64) {
+            SetBlendAlpha(16, t >> 2);
             gBgFx->unk_08++;
         } else {
             gBgFx->unk_08 = 0;

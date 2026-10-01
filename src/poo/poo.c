@@ -3434,8 +3434,8 @@ void InitPooNodes() {
 s32 GetPooNodeScore(PooNode* n) {
     PooPos* q;
     PooPos* p;
-    u16 dx;
-    u16 dy;
+    s16 dx;
+    s16 dy;
     u16 r;
     s32 d;
 
@@ -3445,11 +3445,11 @@ s32 GetPooNodeScore(PooNode* n) {
     dy = (q->y - p->y) >> 8;
     r = GetPooNodeWeight(n);
 
-    if ((s16)dx * (s16)dx > 0x3840 && (s16)dy * (s16)dy > 0x1900) {
+    if (dx * dx > 0x3840 && dy * dy > 0x1900) {
         return 0;
     }
 
-    d = (s16)dx * (s16)dx + (s16)dy * (s16)dy;
+    d = dx * dx + dy * dy;
 
     if (d == 0) {
         return r << 8;
@@ -3459,7 +3459,7 @@ s32 GetPooNodeScore(PooNode* n) {
         return 1;
     }
 
-    return (r << 8) / (((s16)dx * (s16)dx + (s16)dy * (s16)dy) << 8);
+    return (r << 8) / ((dx * dx + dy * dy) << 8);
 }
 
 PooNode* FindPoohTargetNode() {

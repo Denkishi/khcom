@@ -1186,14 +1186,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         break;
     case 23: {
         u16 hp;
-        u16 max;
+        s16 max;
         s32 t;
         hp = p->hp;
 
         if ((s16)hp > 0) {
             max = p->maxHp;
 
-            if ((s16)hp < (s16)max && work->frameCount % 120 == 0) {
+            if ((s16)hp < max && work->frameCount % 120 == 0) {
                 n = (p->maxHp - p->hp) << 13 >> 16;
 
                 if (n <= 0) {
@@ -1205,7 +1205,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     p->hp = t;
                 }
 
-                if (p->hp > (s16)max) {
+                if (p->hp > max) {
                     p->hp = max;
                 }
 

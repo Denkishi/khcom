@@ -271,7 +271,7 @@ CardSlot* FindNextAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     CardSlot* e;
     s16 i;
     u16 cur;
-    u16 next;
+    s16 next;
 
     i = *n;
 
@@ -284,11 +284,11 @@ CardSlot* FindNextAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     cur = *n;
     next = cur + 1;
 
-    if ((s16)next >= w->slotCounts[slot]) {
+    if (next >= w->slotCounts[slot]) {
         next = 0;
     }
 
-    while ((s16)next != (s16)cur) {
+    while (next != (s16)cur) {
         i = next;
 
         if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
@@ -301,7 +301,7 @@ CardSlot* FindNextAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
 
         next = i + 1;
 
-        if ((s16)next >= w->slotCounts[slot]) {
+        if (next >= w->slotCounts[slot]) {
             next = 0;
         }
     }
@@ -313,7 +313,7 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     CardSlot* e;
     s16 i;
     u16 cur;
-    u16 next;
+    s16 next;
 
     i = *n;
 
@@ -326,11 +326,11 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
     cur = *n;
     next = cur - 1;
 
-    if ((s16)next < 0) {
+    if (next < 0) {
         next = w->slotCounts[slot] - 1;
     }
 
-    while ((s16)next != (s16)cur) {
+    while (next != (s16)cur) {
         i = next;
 
         if (w->slots[slot][i].unk_06 == 0 && w->slots[slot][i].stocked == 0) {
@@ -343,7 +343,7 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
 
         next = i - 1;
 
-        if ((s16)next < 0) {
+        if (next < 0) {
             next = w->slotCounts[slot] - 1;
         }
     }
@@ -353,7 +353,7 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
 
 void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
     CardDisplayArgs arg;
-    u16 n;
+    s16 n;
     s16 count = 0;
     u16 old;
     CardSlot* c;
@@ -385,13 +385,13 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             count++;
         }
 
-        if ((s16)n >= w->slotCounts[slot]) {
+        if (n >= w->slotCounts[slot]) {
             n = 0;
         }
 
         c = FindNextAvailableSlot(w, slot, &n);
 
-        if (c != NULL && (s16)n != w->cursors[slot]) {
+        if (c != NULL && n != w->cursors[slot]) {
             arg.pool = &w->cardDisplays[slot];
             arg.index = n;
             arg.listIndex = slot;
@@ -411,13 +411,13 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
 
         n = w->cursors[slot] - 1;
 
-        if ((s16)n < 0) {
+        if (n < 0) {
             n = w->slotCounts[slot] - 1;
         }
 
         c = FindPrevAvailableSlot(w, slot, &n);
 
-        if (c != NULL && (s16)n != w->cursors[slot] && (s16)n != (s16)old) {
+        if (c != NULL && n != w->cursors[slot] && n != (s16)old) {
             arg.pool = &w->cardDisplays[slot];
             arg.index = n;
             arg.listIndex = slot;
@@ -1343,7 +1343,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
     CardDisplayArgs arg;
     CardDisplayWork* e;
     CardSlot* c;
-    u16 n;
+    s16 n;
     s16 a;
     s16 b;
     s8 k;
@@ -1420,7 +1420,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
             n = w->slotCounts[w->listIndex] - 1;
             c = FindPrevAvailableSlot(w, w->listIndex, &n);
 
-            if (c != NULL && (s16)n != a && (s16)n != b) {
+            if (c != NULL && n != a && n != b) {
                 arg.pool = &w->cardDisplays[w->listIndex];
                 arg.index = n;
                 arg.listIndex = w->listIndex;
@@ -2010,7 +2010,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
     s16 prev;
     s32 v;
     s32 cur;
-    u16 n;
+    s16 n;
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
@@ -2030,14 +2030,14 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
     cur = (s16)gSoraSelectedCard->args.index;
     n = cur - 1;
 
-    if ((s16)n < 0) {
+    if (n < 0) {
         n = w->slotCounts[b] - 1;
     }
 
     slot = FindPrevAvailableSlot(w, b, &n);
 
     if (slot != NULL) {
-        v = (s16)n;
+        v = n;
 
         if (v != cur && v != prev) {
             args.pool = &w->cardDisplays[b];
@@ -2086,7 +2086,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
     s16 prev;
     s32 v;
     s32 cur;
-    u16 n;
+    s16 n;
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
@@ -2106,14 +2106,14 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
     cur = (s16)gSoraSelectedCard->args.index;
     n = cur + 1;
 
-    if ((s16)n >= w->slotCounts[b]) {
+    if (n >= w->slotCounts[b]) {
         n = 0;
     }
 
     c = FindNextAvailableSlot(w, b, &n);
 
     if (c != NULL) {
-        v = (s16)n;
+        v = n;
 
         if (v != cur && v != prev) {
             args.pool = &w->cardDisplays[w->listIndex];

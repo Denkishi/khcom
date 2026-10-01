@@ -250,7 +250,7 @@ void BosDsdEnergy1UpdateArc(DsdEnergy1Work* work) {
 }
 
 void BosDsdEnergy1UpdateHoming(DsdEnergy1Work* work) {
-    u16 d;
+    s16 d;
 
     if (work->retargetTimer > 0) {
         work->retargetTimer = 0;
@@ -259,13 +259,13 @@ void BosDsdEnergy1UpdateHoming(DsdEnergy1Work* work) {
         if (work->targetAngle >= work->angle) {
             d = work->targetAngle - work->angle;
 
-            if ((s16)d > 10) {
+            if (d > 10) {
                 d = 10;
             }
         } else {
             d = work->targetAngle - work->angle;
 
-            if ((s16)d < -10) {
+            if (d < -10) {
                 d = -10;
             }
         }

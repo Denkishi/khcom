@@ -393,7 +393,7 @@ void VsBattleUpdate() {
     s32 entered;
     s32 i;
     s32 busy;
-    u8 rank;
+    s8 rank;
 
     if (gBtlWork->hcEffect == 53 || gRikuBtlWork->hcEffect == 53) {
         gBtlWork->gravity = 38;
@@ -547,12 +547,12 @@ void VsBattleUpdate() {
         gBtlWork->phaseStep = 0;
 
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            if (gBtlWork->stockMove >= (s8)rank) gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
+            if (gBtlWork->stockMove >= rank) gBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
 
             if (gBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();
         } else {
-            if (gRikuBtlWork->stockMove >= (s8)rank) gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
+            if (gRikuBtlWork->stockMove >= rank) gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
 
             if (gRikuBtlWork->flags & BTL_FLAG_STOCK_SEQUENCE) other->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
             else VsEndCardPlay();

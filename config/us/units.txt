@@ -94,7 +94,14 @@ btl_form.c
 btl_born.c
 btl_raid.c
 btl_badstatus.c
-smn.c
+smn_cloud.c
+smn_bambi.c
+smn_tink.c
+smn_simba.c
+smn_mushu.c
+smn_dumbo.c
+smn_genie.c
+smn_king.c
 frd.c
 pc_acddmg.c
 hum_cloud.c

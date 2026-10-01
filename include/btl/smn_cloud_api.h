@@ -1,5 +1,5 @@
-#ifndef GUARD_BTL3_API_H
-#define GUARD_BTL3_API_H
+#ifndef GUARD_SMN_CLOUD_API_H
+#define GUARD_SMN_CLOUD_API_H
 
 struct SmnCloudWork;
 struct BtlObj;

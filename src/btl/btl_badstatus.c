@@ -1,14 +1,11 @@
 #include "obj_api.h"
 #include "btl3.h"
-#include "smn.h"
 #include "sprites_btl.h"
 #include "btl3_tasks.h"
 #include "anim.h"
 #include "battle_actor.h"
 #include "battle_actor_types.h"
 #include "battle_work.h"
-#include "engine_math.h"
-#include "listpool.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
@@ -110,98 +107,6 @@ void task_btl_badstatus_3(BtlBadStatusWork* work) {
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
-}
-
-BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
-    BtlObj* list[10];
-    BtlObj* p;
-    s16 count;
-
-    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
-        } else {
-            p = gBtlWork->actor;
-        }
-
-        if (p->hp <= 0) {
-            return NULL;
-        }
-
-        return p;
-    }
-
-    count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
-
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            list[count] = p;
-            count++;
-
-            if (count > 9) {
-                break;
-            }
-        }
-
-        p = ListPoolNext(&p->node);
-    }
-
-    if (count == 0) {
-        return NULL;
-    }
-
-    p = list[work->targetIndex % count];
-    work->targetIndex++;
-    return p;
-}
-
-BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
-    BtlObj* list[10];
-    BtlObj* p;
-    s16 count;
-    s32 d;
-
-    if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
-            p = gRikuBtlWork->actor;
-        } else {
-            p = gBtlWork->actor;
-        }
-
-        if (p->hp <= 0) {
-            return NULL;
-        }
-
-        return p;
-    }
-
-    count = 0;
-    p = ListPoolFirst(&gBtlWork->pool);
-
-    while (p != NULL) {
-        if (!(p->flags & BTLOBJ_FLAG_UNHITTABLE)) {
-            d = work->body.z - p->z;
-
-            if (d >= 0 ? d <= 0x3000 : p->z - work->body.z <= 0x3000) {
-                list[count] = p;
-                count++;
-
-                if (count > 9) {
-                    break;
-                }
-            }
-        }
-
-        p = ListPoolNext(&p->node);
-    }
-
-    if (count == 0) {
-        return NULL;
-    }
-
-    p = list[GetRandom() % count];
-    return p;
 }
 
 TaskDesc gTaskDescBtlBadstatus = {

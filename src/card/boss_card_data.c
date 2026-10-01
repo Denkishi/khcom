@@ -39,7 +39,7 @@ static const s32 sWizardCardIds[3] = {
 
 const s32 gRedNocturneCardId = 459;
 
-static const s32 sBos00CardIds[10] = {
+static const s32 sDarksideCardIds[10] = {
     565, 566, 567, 568, 569, 570, 571, 572, 573, 574,
 };
 
@@ -95,11 +95,11 @@ static const s32 sDefenderCardIds[3] = {
     CARD_DEFENDER_5, CARD_DEFENDER_1, CARD_DEFENDER_9,
 };
 
-static const s32 sBos01CardIds[10] = {
+static const s32 sGuardArmorCardIds[10] = {
     575, 576, 577, 578, 579, 580, 581, 582, 583, 584,
 };
 
-static const s32 sUnk_08F7D794[10] = {
+static const s32 sTrickmasterCardIds[10] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603, 604,
 };
 
@@ -149,71 +149,71 @@ static const s32 sCreeperPlantCardIds[3] = {
     CARD_CREEPER_PLANT_2, CARD_CREEPER_PLANT_4, CARD_CREEPER_PLANT_6,
 };
 
-static const s32 sBos05CardIds[10] = {
+static const s32 sJafarCardIds[10] = {
     615, 616, 617, 618, 619, 620, 621, 622, 623, 624,
 };
 
-static const s32 sBos06CardIds[10] = {
+static const s32 sUrsulaCardIds[10] = {
     625, 626, 627, 628, 629, 630, 631, 632, 633, 634,
 };
 
-static const s32 sBos04CardIds[10] = {
+static const s32 sParasiteCageCardIds[10] = {
     605, 606, 607, 608, 609, 610, 611, 612, 613, 614,
 };
 
-static const s32 sBos07CardIds[10] = {
+static const s32 sDragonMaleficentCardIds[10] = {
     635, 636, 637, 638, 639, 640, 641, 642, 643, 644,
 };
 
-static const s32 sBos02CardIds[10] = {
+static const s32 sOogieBoogieCardIds[10] = {
     585, 586, 587, 588, 589, 590, 591, 592, 593, 594,
 };
 
-static const s32 sBos08CardIds[10] = {
+static const s32 sMarluxiaCardIds[10] = {
     645, 646, 647, 648, 649, 650, 651, 652, 653, 654,
 };
 
-static const s32 sUnk_08F7D934[10] = {
+static const s32 sEnemyKind41CardIds[10] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603, 604,
 };
 
-static const s32 sUnk_08F7D95C[9] = {
+static const s32 sEnemyKind42CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7D980[9] = {
+static const s32 sEnemyKind43CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7D9A4[9] = {
+static const s32 sEnemyKind44CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7D9C8[9] = {
+static const s32 sEnemyKind45CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7D9EC[9] = {
+static const s32 sEnemyKind48CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7DA10[9] = {
+static const s32 sEnemyKind49CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7DA34[9] = {
+static const s32 sEnemyKind50CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7DA58[9] = {
+static const s32 sEnemyKind51CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7DA7C[9] = {
+static const s32 sEnemyKind52CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
-static const s32 sUnk_08F7DAA0[9] = {
+static const s32 sEnemyKind53CardIds[9] = {
     595, 596, 597, 598, 599, 600, 601, 602, 603,
 };
 
@@ -250,28 +250,28 @@ const s32* gEnemyCardIds[54] = {
     sTornadoStepCardIds,
     sCrescendoCardIds,
     sCreeperPlantCardIds,
-    sBos01CardIds,
-    sBos05CardIds,
-    sUnk_08F7D794,
-    sBos06CardIds,
-    sBos04CardIds,
-    sBos07CardIds,
-    sBos00CardIds,
-    sBos02CardIds,
-    sBos08CardIds,
-    sUnk_08F7D934,
-    sUnk_08F7D95C,
-    sUnk_08F7D980,
-    sUnk_08F7D9A4,
-    sUnk_08F7D9C8,
+    sGuardArmorCardIds,
+    sJafarCardIds,
+    sTrickmasterCardIds,
+    sUrsulaCardIds,
+    sParasiteCageCardIds,
+    sDragonMaleficentCardIds,
+    sDarksideCardIds,
+    sOogieBoogieCardIds,
+    sMarluxiaCardIds,
+    sEnemyKind41CardIds,
+    sEnemyKind42CardIds,
+    sEnemyKind43CardIds,
+    sEnemyKind44CardIds,
+    sEnemyKind45CardIds,
     sCardSoldierSpadeCardIds,
     sCardSoldierHeartCardIds,
-    sUnk_08F7D9EC,
-    sUnk_08F7DA10,
-    sUnk_08F7DA34,
-    sUnk_08F7DA58,
-    sUnk_08F7DA7C,
-    sUnk_08F7DAA0,
+    sEnemyKind48CardIds,
+    sEnemyKind49CardIds,
+    sEnemyKind50CardIds,
+    sEnemyKind51CardIds,
+    sEnemyKind52CardIds,
+    sEnemyKind53CardIds,
 };
 
 const u8 gEnemyCardCounts[54] = {

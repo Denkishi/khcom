@@ -2282,8 +2282,6 @@ extern Mode gModeTextCheck;
 extern Mode gModeDeckExchange;
 #endif
 
-extern u8 gActiveDeck;
-extern u8 gUnk_02034AB1[3];
 #ifndef VERSION_EU
 #endif
 #ifdef VERSION_EU

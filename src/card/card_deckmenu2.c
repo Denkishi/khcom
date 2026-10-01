@@ -351,9 +351,8 @@ const u16 gRikuDeckEnemyCardCounts[12] = {
 
 const u16 gUnk_090356EA = 0;
 
-u8 gActiveDeck;
-
-u8 gUnk_02034AB1[3];
+static u8 sActiveDeck;
+static u16 sUnk_02034AB2;
 
 CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
 
@@ -687,7 +686,7 @@ u8 AddCardToActiveDeck(u16 card) {
 
     cards[i] = card;
 
-    switch (gActiveDeck) {
+    switch (sActiveDeck) {
     case 0:
         gCardCollection[card] |= 0x1000;
         break;
@@ -700,8 +699,8 @@ u8 AddCardToActiveDeck(u16 card) {
     }
 
     v = GetCardCpCost(gCardCollection[card]);
-    gDecks[gActiveDeck].cpCost += v;
-    gDecks[gActiveDeck].cardCount++;
+    gDecks[sActiveDeck].cpCost += v;
+    gDecks[sActiveDeck].cardCount++;
     return 1;
 }
 
@@ -746,7 +745,7 @@ void RemoveCardFromActiveDeck(u16 slot) {
     cards = GetActiveDeck()->cards;
 
     if (cards[slot] != 0) {
-        switch (gActiveDeck) {
+        switch (sActiveDeck) {
         case 0:
             gCardCollection[cards[slot]] &= ~0x1000;
             break;
@@ -760,8 +759,8 @@ void RemoveCardFromActiveDeck(u16 slot) {
     }
 
     v = GetCardCpCost(gCardCollection[cards[slot]]);
-    gDecks[gActiveDeck].cpCost -= v;
-    gDecks[gActiveDeck].cardCount--;
+    gDecks[sActiveDeck].cpCost -= v;
+    gDecks[sActiveDeck].cardCount--;
     cards[slot] = 0xFFFF;
 }
 
@@ -793,7 +792,7 @@ void RecalculateInactiveDeckCpCosts() {
     Deck* deck;
 
     for (i = 0; i < 3; i++) {
-        if (i == gActiveDeck) {
+        if (i == sActiveDeck) {
             continue;
         }
 
@@ -815,10 +814,10 @@ void ConvertActiveDeckCardToPremium(u16 index) {
     u16 v;
 
     cards = GetActiveDeck()->cards;
-    gDecks[gActiveDeck].cpCost -= GetCardCpCost(gCardCollection[cards[index]]);
+    gDecks[sActiveDeck].cpCost -= GetCardCpCost(gCardCollection[cards[index]]);
     gCardCollection[cards[index]] |= 0x8000;
-    v = GetCardCpCost(gCardCollection[cards[index]]) + gDecks[gActiveDeck].cpCost;
-    gDecks[gActiveDeck].cpCost = v;
+    v = GetCardCpCost(gCardCollection[cards[index]]) + gDecks[sActiveDeck].cpCost;
+    gDecks[sActiveDeck].cpCost = v;
     RecalculateInactiveDeckCpCosts();
 }
 
@@ -838,7 +837,7 @@ u8 HasNonPremiumCardsInActiveDeck() {
         }
     }
 
-    if (gDecks[gActiveDeck].cardCount == count) {
+    if (gDecks[sActiveDeck].cardCount == count) {
         return 0;
     }
 
@@ -846,7 +845,7 @@ u8 HasNonPremiumCardsInActiveDeck() {
 }
 
 Deck* GetActiveDeck() {
-    return &gDecks[gActiveDeck];
+    return &gDecks[sActiveDeck];
 }
 
 Deck* GetDeck(u8 index) {
@@ -1038,7 +1037,7 @@ u16 GetDeckCardCount(u8 index) {
 }
 
 void SetActiveDeckIndex(u8 index) {
-    gActiveDeck = index;
+    sActiveDeck = index;
 }
 
 u16 GetCollectionCardKind(u16 index) {
@@ -1088,7 +1087,7 @@ u8 IsActiveDeckAllPremium() {
 #include "deck_names_shift_jis.inc"
 #endif
 void InitSoraDecks() {
-    gActiveDeck = 0;
+    sActiveDeck = 0;
     InitCardCollection();
     InitDecks();
 
@@ -1120,7 +1119,7 @@ void InitSoraDecks() {
 }
 
 void InitDebugDecks() {
-    gActiveDeck = 0;
+    sActiveDeck = 0;
     InitCardCollection();
     InitDecks();
     FillDebugCardCollection();
@@ -1280,7 +1279,7 @@ void BuildRikuDeck(u8 a) {
 }
 
 u8 GetActiveDeckIndex() {
-    return gActiveDeck;
+    return sActiveDeck;
 }
 
 void func_08085FB0() {

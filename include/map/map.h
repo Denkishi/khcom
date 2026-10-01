@@ -1199,8 +1199,6 @@ u8 MapDecorCheckFits(s16 x, s16 y, const u8* p);
 void MapApplyLayer2DecorRules(MapDecorRule* p);
 void MapApplyRoomDecor();
 u8 IsEventDoor(u8 a, u8 b);
-u8 DoorAcceptsMapCard(MapCardAttributes* p);
-s32 PayEventKey(UnkStruct_080E8E24* p);
 u8 RollCardValue();
 s32 CreateMapPrzCardTask(const UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e);
 u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d);
